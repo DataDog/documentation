@@ -42,6 +42,33 @@ Depending on your incident management strategy, you may want to involve multiple
 
 To enable the alerting monitor to renotify, click the toggle left of `If this monitor stays in alert status renotify every` and select a time option from the dropdown menu.
 
+## Enrich your notification message with Synthetic test attributes
+
+You can include Synthetic test attributes in your notification message. Combined with [monitor conditional variables][9], you can route notification messages to specific teams based on status code, test type, or step name.
+
+The following attribute objects are available:
+
+| Attribute      | What it contains                                           |
+|----------------------------|--------------------------------------------------------------------|
+| `{{synthetics.attributes}}`            | Information relating to the test configuration, including location and test type. For example `{ "checkType": "browser", "result": { "result": { ... }}, "v": 0, "location": "aws:eu-central-1", "type": "result"}`                                              |
+| `{{synthetics.run}}`            | Information relating to the alerting test run, including overall result, errors, and and failing step details. For example `{ "runType": 0, "timeToInteractive": 373, "eventType": "finished", "error": "Element's content should contain given value.", "stepDetails": [ { "duration": 957, "allowFailure": false, "vitalsMetrics": [], "browserErrors": [],"stepId": 3211623, "description": "First step", "isCritical": true, "type": "click", "publicId": "dcr-md7-z8y", "url": "https://example.com/", "skipped": false }], "browserType": "firefox", "duration": 63297, "mainDC": "us1.staging", "startUrl": "https://example.com", "subtype": null, "failure": { "code": "ASSERTION_FAILURE", "message": "Element's content should contain given value." }, "browserVersion": "106.0.3", "passed": false, "device": { "browser": "firefox", "name": "Laptop Large", "width": 1440, "userAgent": "Mozilla/5.0 (X11; Linux x86_64) Gecko/20100101 Firefox/106.0.3 DatadogSynthetics", "id": "firefox.laptop_large", "isMobile": false, "height": 1100 }`                                        |
+
+For example, if you wanted to notify different teams based on location or environment, you could achieve that through a combination of conditional variables and test attributes:
+
+```
+{{#is_match "synthetics.attributes.startURL" "https://shopist.io"}}
+@slack-prod Production is down
+{{/is_match}}
+
+{{#is_match "synthetics.attributes.startURL" "https://staging.shopist.io"}}
+@slack-staging Staging is down
+{{/is_match}}
+
+{{#is_match "synthetics.attributes.location" "aws:eu-central-1"}}
+@slack-de-team Frankfurt is experiencing problems
+{{/is_match}}
+```
+
 ## Integrate your Synthetic test monitor with Statuspage
 
 If you use [Atlassian Statuspage][6] for visibility into your applications' and services' uptime, you can update the status of your systems with Synthetic test monitor notifications.
@@ -68,3 +95,4 @@ For more information, see [Integrating Monitors with Statuspage][8].
 [6]: https://support.atlassian.com/statuspage/
 [7]: https://support.atlassian.com/statuspage/docs/get-started-with-email-automation/
 [8]: /monitors/guide/integrate-monitors-with-statuspage/
+[9]: /monitors/notify/variables
