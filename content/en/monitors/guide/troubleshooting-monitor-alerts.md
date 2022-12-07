@@ -89,7 +89,7 @@ Due to an [Opsgenie feature][19], Opsgenie will discard what is seen as a duplic
 [3]: /monitors/guide/monitor-arithmetic-and-sparse-metrics/
 [4]: /monitors/create/configuration/?tabs=thresholdalert#auto-resolve
 [5]: /monitors/create/configuration/?tabs=thresholdalert#set-alert-conditions
-[6]: /monitors/create/#monitor-types
+[6]: /monitors/types
 [7]: /monitors/guide/as-count-in-monitor-evaluations/
 [8]: /monitors/guide/recovery-thresholds/#behavior
 [9]: /monitors/guide/why-did-my-monitor-settings-change-not-take-effect
