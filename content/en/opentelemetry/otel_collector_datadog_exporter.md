@@ -77,7 +77,7 @@ processors:
 exporters:
   datadog:
     api:
-      site: {{< region-param key="dd_site" code="true" >}}
+      site: <DD_SITE>
       key: ${DD_API_KEY}
 
 service:
@@ -91,6 +91,8 @@ service:
       processors: [batch]
       exporters: [datadog]
 {{< /code-block >}}
+
+Where `<DD_SITE>` is your site, {{< region-param key="dd_site" code="true" >}}.
 
 The above configuration enables the receiving of OTLP data from OpenTelemetry instrumentation libraries over HTTP and gRPC, and sets up a [batch processor][5], which is mandatory for any non-development environment.
 
@@ -332,14 +334,14 @@ To deploy the OpenTelemetry Collector and Datadog Exporter in a Kubernetes Gatew
 
    For more information about the `passthrough` option, read [its documentation][13].
 
-8. Make sure that the Gateway Collector's configuration uses the same Datadog Exporter settings that have been replaced by the OTLP exporter in the agents. For example:
+8. Make sure that the Gateway Collector's configuration uses the same Datadog Exporter settings that have been replaced by the OTLP exporter in the agents. For example (where `<DD_SITE>` is your site, {{< region-param key="dd_site" code="true" >}}):
 
    ```yaml
    # ...
    exporters:
      datadog:
        api:
-         site: {{< region-param key="dd_site" code="true" >}}
+         site: <DD_SITE>
          key: ${DD_API_KEY}
    # ...
    ```
