@@ -41,7 +41,8 @@ Supported .NET runtimes (64-bit applications)
 : .NET Framework 4.6.1+<br/>
 .NET Core 2.1, 3.1<br/>
 .NET 5<br/>
-.NET 6
+.NET 6<br/>
+.NET 7
 
 Supported languages
 : Any language that targets the .NET runtime, such as C#, F#, and Visual Basic.
