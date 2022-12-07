@@ -19,47 +19,67 @@ Strengthen your security posture and achieve continuous compliance by detecting,
 
 Assess the configuration of your cloud resources, such as security groups, storage buckets, load balancers, and databases against configuration rules. Use the Datadog Agent to review local configuration information from servers, containers, and Kubernetes clusters against Datadog's OOTB Posture Management [Cloud][1] and [Infrastructure][2] detection rules.
 
-placeholder for screenshot
+**SCREENSHOT**
 
-## Manage out-of-the-box and custom configuration rules
-
-Use [out-of-the-box detection rules][7] to flag attacker techniques and potential misconfigurations so you can immediately take steps to remediate. [Customize how each rule scans your environment][6] and [create custom configuration rules][8] (GCP only).
-
-placeholder for screenshot
-## Maintain compliance with industry frameworks and benchmarks
+### Maintain compliance with industry frameworks and benchmarks
 
 Each detection rule maps to one or more controls and requirements within a compliance standard or industry benchmark, such as the popular CIS compliance benchmarks for Docker and Kubernetes.
-
- Datadog OOTB rules currently map to controls and requirements for the following frameworks and benchmarks:
 
 Continuously monitor your compliance posture.
 
 Datadog CSPM maps configuration rules to several industry benchmarks and regulatory standards, computing individual scores for each framework. This allows users to understand whether their cloud infrastructure is in compliance with aspects of PCI, GDPR, HIPAA, and more.
 
-Our agent allows Datadog to continuously assess the state of your hosts and containers.
+These detection rules work with out-of-the-box integration configurations and map to controls within a compliance framework or industry benchmark. When new default configuration detection rules are added, they are automatically imported into your account.
 
-Datadog Cloud Security Posture Management (CSPM) uses the following rule types to validate the configuration of your cloud infrastructure:
+CSPM's detection rules map to one or more controls and requirements within a compliance standard or industry benchmark, such as the popular CIS compliance benchmarks for Docker and Kubernetes. This enables you to understand whether your cloud infrastructure is in compliance with certain aspects of PCI, GDPR, HIPAA, and more.
 
-Cloud configuration: These detection rules analyze the configuration of resources within your cloud environment. For example, the rule Cloudfront distribution is encrypted evaluates an AWS Cloudfront distribution’s configuration for encrypted status. Customization of a cloud configuration query directly is not supported at this time, but you can customize how you environment is scanned for each rule.
-
-Infrastructure configuration: These detection rules analyze your containers and Kubernetes clusters to find configuration issues, as defined in the popular CIS compliance benchmarks for Docker and Kubernetes. For example, the rule /etc/default/docker file permissions are set to 644 or more restrictively evaluates Docker file permissions running on a host.
+When new default configuration detection rules are added, they are automatically imported into your account.
 
 These detection rules work with out-of-the-box integration configurations and map to controls within a compliance framework or industry benchmark. When new default configuration detection rules are added, they are automatically imported into your account.
 
-placeholder for screenshot
+## Manage out-of-the-box and custom configuration rules
+
+Use [out-of-the-box detection rules][7] to flag attacker techniques and potential misconfigurations so you can immediately take steps to remediate. Customize the rules by defining [how each rule scans your environment][6], [create custom configuration rules][8] (GCP only), and [set up real-time notifications for failed findings](#set-up-real-time-notifications).
+
+**SCREENSHOT**
+
+### Set up real-time notifications
+
+Send real-time notifications to your teams when a failed finding is generated for a detection rule, so that they can take action to mitigate the risk. Notifications can be sent to Slack, email, PagerDuty, webhooks, and more.
+
+Use message template variables and Markdown to to customize the notifications sent when a failed finding is generated.
+
+Customize the notification message using Markdown and message template variables.
+
+Create, edit, clone, enable, disable, delete, or view Notification Rules created by users in your organization.
+
+define the logic for when the notification rule is sent
+
+based on severity, rule type, 
+
+so that your team is alerted when...
+
+Use [notification variables][1] and Markdown to customize the notifications sent when a signal is generated. You can reference the tags associated with the signal and the event attributes in the notification. The list of available attributes is in the JSON section of the Overview tab in the signal panel.
 
 ## Review and remediate findings
 
-text
+Use the **Summary** page to view 
 
-placeholder for screenshot
+Use the CSPM homepage to view.... 
 
-## Set up notifications
+Drill down deeper into details using the Security Findings Explorer.
 
-Add notification targets to...
+to review details on the configuration of a resource, the rules applied to the resource by CSPM, tags t
+
+Review the detailed configuration of a resource
+Review the detection rules applied to your resources by CSPM
+Review tags for more context about who owns the resource and where it resides in your environment
+Read descriptions and guidelines based on industry resources for remediating a misconfigured resource
+Use the “time selector” to explore your security configuration posture at any point in the past.
+
+**SCREENSHOT**
 
 ## Glossary
-
 
 Security posture score
 : Percentage of your environment that satisfies all of your active Datadog OOTB [Cloud][1] and [Infrastructure][2] detection rules. Formula: `(# of evaluation:pass findings) / (total # of findings)`. Datadog then weighs this formula by severity: low severity detection rules have a weighting of "1" and critical severity detection rules have a weighting of "5". This means critical severity detection rules impact scores five times more than low severity detection rules to put greater emphasis on the detection rules that pose greater security risk. The score is also normalized to treat all all resource types and resource volumes the same (for example, 500 failing containers are weighted the same as three failing S3 buckets in the computed score). This normalization factor allows scores to be comparable across your cloud accounts, without the risk that they are heavily skewed if one account has more containers, or another has fewer storage buckets.
