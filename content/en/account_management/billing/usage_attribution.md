@@ -23,16 +23,20 @@ Administrators can access the Usage Attribution tab from the Plan & Usage sectio
 - Summarizes usage at the end of each month.
 - Surfaces the data both in the UI and as a TSV download.
 
-The following usage types are not supported in this tool:
+A number of usage types are not supported in this tool, including:
 
 - Analyzed Logs (Security)
 - Incident Management
+- Network Flows
+- CI Spans
+
+Datadog offers Estimated Usage Attribution values for the following products: 
+
 - Indexed Log Events
 - Ingested Logs
 - Indexed Spans
 - Ingested Spans
-- Network Flows
-- Real User Monitoring
+- Total Real User Monitoring Sessions
 
 ## Getting started
 

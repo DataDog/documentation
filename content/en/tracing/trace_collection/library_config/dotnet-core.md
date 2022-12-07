@@ -282,14 +282,14 @@ You can configure injection and extraction styles for distributed headers.
 The .NET Tracer supports the following styles:
 
 - Datadog: `Datadog`
-- B3: `B3`
-- W3C: `W3C`
-- B3 Single Header: `B3SingleHeader` or `B3 single header`
+- B3 Multi Header: `b3multi` (`B3` is deprecated)
+- W3C (TraceParent): `tracecontext` (`W3C` is deprecated)
+- B3 Single Header: `B3 single header` (`B3SingleHeader` is deprecated)
 
 You can use the following environment variables to configure injection and extraction styles:
 
-- `DD_PROPAGATION_STYLE_INJECT=Datadog, B3, W3C`
-- `DD_PROPAGATION_STYLE_EXTRACT=Datadog, B3, W3C`
+- `DD_TRACE_PROPAGATION_STYLE_INJECT=Datadog, b3multi, tracecontext`
+- `DD_TRACE_PROPAGATION_STYLE_EXTRACT=Datadog, b3multi, tracecontext`
 
 The environment variable values are comma-separated lists of header styles enabled for injection or extraction. By default, only the `Datadog` injection style is enabled.
 

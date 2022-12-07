@@ -7319,12 +7319,61 @@ components:
           description: The container usage by tag(s).
           format: double
           type: number
+        cspm_containers_percentage:
+          description: The percentage of CSPM container usage by tag(s).
+          format: double
+          type: number
+        cspm_containers_usage:
+          description: The CSPM container usage by tag(s).
+          format: double
+          type: number
+        cspm_hosts_percentage:
+          description: The percentage of CSPM host usage by by tag(s).
+          format: double
+          type: number
+        cspm_hosts_usage:
+          description: The CSPM host usage by tag(s).
+          format: double
+          type: number
         custom_timeseries_percentage:
           description: The percentage of custom metrics usage by tag(s).
           format: double
           type: number
         custom_timeseries_usage:
           description: The custom metrics usage by tag(s).
+          format: double
+          type: number
+        cws_containers_percentage:
+          description: The percentage of Cloud Workload Security container usage by
+            tag(s).
+          format: double
+          type: number
+        cws_containers_usage:
+          description: The Cloud Workload Security container usage by tag(s).
+          format: double
+          type: number
+        cws_hosts_percentage:
+          description: The percentage of Cloud Workload Security host usage by tag(s).
+          format: double
+          type: number
+        cws_hosts_usage:
+          description: The Cloud Workload Security host usage by tag(s).
+          format: double
+          type: number
+        dbm_hosts_percentage:
+          description: The percentage of Database Monitoring host usage by tag(s).
+          format: double
+          type: number
+        dbm_hosts_usage:
+          description: The Database Monitoring host usage by tag(s).
+          format: double
+          type: number
+        dbm_queries_percentage:
+          description: The percentage of Database Monitoring queries usage by tag(s).
+          format: double
+          type: number
+        dbm_queries_usage:
+          description: The Database Monitoring queries usage by tag(s).
           format: double
           type: number
         estimated_indexed_logs_percentage:
@@ -15509,7 +15558,11 @@ components:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         apm_trace_search_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
+        application_security_fargate_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
         application_security_host_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        application_security_host_top99:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         ci_pipeline_indexed_spans_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
@@ -15522,6 +15575,10 @@ components:
         ci_testing_maximum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         ci_testing_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        cloud_cost_management_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        cloud_cost_management_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         cspm_container_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
@@ -15585,6 +15642,8 @@ components:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         lambda_function_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
+        logs_forwarding_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
         logs_indexed_15day_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         logs_indexed_180day_sum:
@@ -15639,6 +15698,12 @@ components:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         sensitive_data_scanner_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
+        serverless_apm_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        serverless_infra_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        serverless_infra_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
         serverless_invocation_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         siem_sum:
@@ -15646,6 +15711,8 @@ components:
         standard_timeseries_average:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         synthetics_api_tests_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        synthetics_app_testing_maximum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         synthetics_browser_checks_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
@@ -19783,7 +19850,7 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
-      x-menu-order: 4
+      x-menu-order: 6
       x-undo:
         type: idempotent
     get:
@@ -19834,7 +19901,7 @@ paths:
       summary: Get all dashboards
       tags:
       - Dashboards
-      x-menu-order: 2
+      x-menu-order: 3
       x-undo:
         type: safe
     patch:
@@ -19888,7 +19955,7 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
-      x-menu-order: 5
+      x-menu-order: 7
       x-undo:
         type: idempotent
     post:
@@ -20235,7 +20302,7 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
-      x-menu-order: 1
+      x-menu-order: 8
       x-undo:
         operationId: DeletePublicDashboard
         parameters:
@@ -20283,7 +20350,7 @@ paths:
       summary: Revoke a shared dashboard URL
       tags:
       - Dashboards
-      x-menu-order: 4
+      x-menu-order: 13
       x-undo:
         type: idempotent
     get:
@@ -20327,7 +20394,7 @@ paths:
       summary: Get a shared dashboard
       tags:
       - Dashboards
-      x-menu-order: 2
+      x-menu-order: 9
       x-undo:
         type: safe
     put:
@@ -20399,7 +20466,7 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
-      x-menu-order: 3
+      x-menu-order: 10
       x-undo:
         type: idempotent
   /api/v1/dashboard/public/{token}/invitation:
@@ -20454,7 +20521,7 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
-      x-menu-order: 7
+      x-menu-order: 14
       x-undo:
         type: idempotent
     get:
@@ -20511,7 +20578,7 @@ paths:
       summary: Get all invitations for a shared dashboard
       tags:
       - Dashboards
-      x-menu-order: 5
+      x-menu-order: 12
       x-undo:
         type: safe
     post:
@@ -20576,7 +20643,7 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
-      x-menu-order: 6
+      x-menu-order: 11
       x-undo:
         operationId: DeletePublicDashboardInvitation
         parameters:
@@ -20629,7 +20696,7 @@ paths:
           - name: dashboard_id
             source: dashboard.id
           step: the "dashboard" was deleted
-      x-menu-order: 3
+      x-menu-order: 5
       x-undo:
         type: idempotent
     get:
@@ -20671,7 +20738,7 @@ paths:
       summary: Get a dashboard
       tags:
       - Dashboards
-      x-menu-order: 7
+      x-menu-order: 2
       x-undo:
         type: safe
     put:
@@ -20727,7 +20794,7 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
-      x-menu-order: 6
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v1/distribution_points:
