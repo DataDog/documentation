@@ -149,7 +149,7 @@ To check that you've set things up correctly, compare your Dockerfile file with 
 
 ## Add the Agent container
 
-Add the Datadog Agent in the services section of your `docker-compose.yaml` file:
+Add the Datadog Agent in the services section of the `docker/containers/exercise/docker-compose.yaml` file:
 
 1. Add the Agent configuration, and specify your own [Datadog API key][3] and [site][6]:
    ```yaml
