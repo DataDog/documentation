@@ -39,7 +39,7 @@ Use frontend data from RUM, as well as backend, infrastructure, and log informat
 -   Your HTTP servers are using [a library that supports distributed tracing](#supported-libraries).
 -   You have the following set up based on your SDK:
     - With the **Browser SDK**, you have added the XMLHttpRequest (XHR) or Fetch resources on the RUM Explorer to your `allowedTracingOrigins`.
-    - With the **Mobile SDK**, you have the Native or XMLHttpRequest (XHR) to your `firstPartyHosts`.
+    - With the **Mobile SDK**, you have added the Native or XMLHttpRequest (XHR) to your `firstPartyHosts`.
 -   You have a corresponding trace for requests to `allowedTracingOrigins` or `firstPartyHosts`.
 
 ### Setup RUM
