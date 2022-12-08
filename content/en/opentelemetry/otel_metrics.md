@@ -1,8 +1,10 @@
 ---
 title: Send Metrics from OpenTelemetry to Datadog
 kind: documentation
+aliases:
+- /metrics/open_telemetry/
 further_reading:
-    - link: 'tracing/trace_collection/open_standards/'
+    - link: '/opentelemetry/'
       tag: 'Documentation'
       text: 'Learn more about OpenTelemetry'
     - link: 'https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/'
@@ -137,14 +139,7 @@ Datadog provides out-of-the-box dashboards that you can copy and customize. To u
 
 The **Host Metrics** dashboard is for data collected from the [host metrics receiver][12]. The **Collector Metrics** dashboard is for any other types of metrics collected, depending on which [metrics receiver][13] you choose to enable.
 
-## Deployment-based limitations
 
-The OpenTelemetry Collector has [two primary deployment methods][14]: Agent and Gateway. Depending on your deployment method, some components are not available.
-
-| Deployment mode | Host metrics | Kubernetes orchestration metrics | Traces | Logs auto-ingestion |
-| --- | --- | --- | --- | --- |
-| as Gateway | | {{< X >}} | {{< X >}} | |
-| as Agent | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 
 
 ## Further reading
@@ -155,8 +150,8 @@ The OpenTelemetry Collector has [two primary deployment methods][14]: Agent and 
 [2]: https://www.cncf.io/
 [3]: https://www.datadoghq.com/pricing/?product=infrastructure#infrastructure
 [4]: https://opentelemetry.io/docs/instrumentation/
-[5]: /tracing/trace_collection/open_standards/otlp_ingest_in_the_agent/?tab=host#enabling-otlp-ingestion-on-the-datadog-agent
-[6]: /tracing/trace_collection/open_standards/otlp_ingest_in_the_agent/?tab=host#sending-otlp-traces-from-the-application-to-datadog-agent
+[5]: /opentelemetry/otlp_ingest_in_the_agent/?tab=host#enabling-otlp-ingestion-on-the-datadog-agent
+[6]: /opentelemetry/otlp_ingest_in_the_agent/?tab=host#sending-otlp-traces-from-the-application-to-datadog-agent
 [7]: https://opentelemetry.io/docs/collector/getting-started/#deployment
 [8]: https://opentelemetry.io/docs/collector/configuration/
 [9]: https://app.datadoghq.com/organization-settings/api-keys
@@ -164,4 +159,4 @@ The OpenTelemetry Collector has [two primary deployment methods][14]: Agent and 
 [11]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter/examples
 [12]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver
 [13]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver
-[14]: https://opentelemetry.io/docs/collector/deployment/
+
