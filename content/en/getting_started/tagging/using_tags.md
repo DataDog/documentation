@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-After [assigning tags][1], start using them to filter and group your data in your Datadog platform. Tags can be used to include or exclude data. 
+After [assigning tags][1], start using them to filter and group your data in your Datadog platform. Tags can be used to include or exclude data.
 
 When including or excluding multiple tags:
 
@@ -135,7 +135,7 @@ Here are the filter and group by text boxes on the Live Processes page:
 {{< tabs >}}
 {{% tab "Manage Monitors" %}}
 
-To filter monitors by [assigned tags][1], use the search bar or facet checkboxes. The search bar format is `tag:<KEY>:<VALUE>`, for example: `tag:service:coffee-house`. To exclude monitors with a specific tag from your search, use `-`, for example: `tag:-service:coffee-house`. 
+To filter monitors by [assigned tags][1], use the search bar or facet checkboxes. The search bar format is `tag:<KEY>:<VALUE>`, for example: `tag:service:coffee-house`. To exclude monitors with a specific tag from your search, use `-`, for example: `tag:-service:coffee-house`.
 
 {{< img src="tagging/using_tags/managemonitorstags.png" alt="Manage Monitors Tags" style="width:80%;">}}
 
@@ -152,9 +152,9 @@ When creating a [monitor][1], use metric tags in the:
 
 * **excluding** text box to remove the corresponding metrics from the monitor scope.
 
-* **avg by** text box to transform the monitor into a multi-alert monitor on each tag value.
+* **avg by** text box to transform the monitor into a multi alert monitor on each tag value.
 
-[1]: /monitors/create/#monitor-types
+[1]: /monitors/types
 {{% /tab %}}
 {{% tab "Manage Downtime" %}}
 
@@ -304,7 +304,7 @@ Additionally, tags are used to filter a logs [Pipeline][14]. In the example belo
 
 ## RUM & Session Replay
 
-The [RUM Explorer][15] visualizes events from your environment over a specified time period. 
+The [RUM Explorer][15] visualizes events from your environment over a specified time period.
 
 To filter RUM event data by tags, use the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`, for example: `service:shopist`. For advanced search, see [Search RUM Events][16].
 
@@ -315,7 +315,7 @@ To filter RUM event data by tags, use the search bar or facet checkboxes. The se
 {{< tabs >}}
 {{% tab "Synthetic Tests" %}}
 
-The [Synthetic Tests][1] page lists your Synthetic tests. 
+The [Synthetic Tests][1] page lists your Synthetic tests.
 
 To filter tests by tags, use the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`. For example: `tag:mini-website`. For advanced search, see [Search and Manage Synthetic Tests][2].
 
@@ -327,7 +327,7 @@ To filter tests by tags, use the search bar or facet checkboxes. The search bar 
 {{% /tab %}}
 {{% tab "CI Results Explorer" %}}
 
-The [CI Results Explorer][1] displays your browser test results running in a [CI pipeline][2]. 
+The [CI Results Explorer][1] displays your browser test results running in a [CI pipeline][2].
 
 To filter test runs by tags, use the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`. For example: `@ci.provider.name:github`. For advanced search, see [Search and Manage Synthetic Tests][3].
 
@@ -345,7 +345,7 @@ To filter test runs by tags, use the search bar or facet checkboxes. The search 
 {{< tabs >}}
 {{% tab "Manage SLOs" %}}
 
-To filter SLOs by [assigned tags][1], use the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`, for example: `journey:add_item`. To exclude SLOs with a specific tag from your search, use `-`, for example: `-journey:add_item`. 
+To filter SLOs by [assigned tags][1], use the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`, for example: `journey:add_item`. To exclude SLOs with a specific tag from your search, use `-`, for example: `-journey:add_item`.
 
 {{< img src="tagging/using_tags/manage_slo_tags.png" alt="SLO Tags" style="width:80%;">}}
 
@@ -378,7 +378,7 @@ When creating a [monitor-based SLO][1] using a single [grouped monitor][2], use 
 
 ## Developers
 
-Tags can be used in various ways with the [API][17]. 
+Tags can be used in various ways with the [API][17].
 
 See this list for links to respective sections:
 

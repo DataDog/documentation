@@ -4,7 +4,7 @@ kind: guide
 aliases:
   - /monitors/faq/how-can-i-configure-a-metric-monitor-to-alert-on-no-change-in-value
 further_reading:
-- link: "/monitors/create/"
+- link: "/monitors/"
   tag: "Documentation"
   text: "Learn how to create a monitor"
 - link: "/monitors/notify/"

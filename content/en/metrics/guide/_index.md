@@ -14,5 +14,5 @@ disable_toc: true
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Custom metrics guides:" >}}
-    {{< nextlink href="integrations/observability_pipelines/guide/custom-metrics-governance-drop-metrics-missing-specific-tags" >}}Custom Metrics Governance - Drop Metrics Missing Specific Tags{{< /nextlink >}}
+    {{< nextlink href="/observability_pipelines/guide/custom-metrics-governance" >}}Custom Metrics Governance{{< /nextlink >}}
 {{< /whatsnext >}}
