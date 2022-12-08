@@ -1,5 +1,5 @@
 ---
-title: Integrate Vector with Datadog
+title: Configure Observability Pipelines with Datadog
 kind: documentation
 aliases:
   - /agent/vector_aggregation/
@@ -11,15 +11,12 @@ further_reading:
 - link: "/agent/proxy/"
   tag: "Documentation"
   text: "Configure the Agent to use a proxy"
-- link: "https://vector.dev/docs/"
-  tag: "Documentation"
-  text: "Vector documentation"
 - link: "/observability_pipelines/configurations/"
   tag: "Documentation"
-  text: "Learn more about Vector configurations"
+  text: "Learn more about Observability Pipelines configurations"
 - link: "/observability_pipelines/working_with_data/"
   tag: "Documentation"
-  text: "Working with data using Vector"
+  text: "Working with data using Observability Pipelines"
 ---
 
 ## Overview
