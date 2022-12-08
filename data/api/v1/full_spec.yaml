@@ -12283,6 +12283,8 @@ components:
           description: Scope to use when performing the authentication.
           example: scope
           type: string
+        tokenApiAuthentication:
+          $ref: '#/components/schemas/SyntheticsBasicAuthOauthTokenApiAuthentication'
         type:
           $ref: '#/components/schemas/SyntheticsBasicAuthOauthROPType'
         username:
@@ -12292,6 +12294,7 @@ components:
       required:
       - accessTokenUrl
       - password
+      - tokenApiAuthentication
       - username
       type: object
     SyntheticsBasicAuthOauthROPType:
