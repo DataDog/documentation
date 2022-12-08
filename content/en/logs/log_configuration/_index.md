@@ -1,86 +1,52 @@
 ---
-title: Log Management
+title: Log Configuration
 kind: Documentation
-description: "Configure your Datadog Agent to gather logs from your host, containers & services."
-disable_sidebar: true
+description: "Process, enrich, control, and manage your logs from the Logs Configuration page"
 aliases:
-  - /guides/logs/
-  - /logs/logging_without_limits
+  - /logs/processing
 further_reading:
-  - link: "https://app.datadoghq.com/release-notes?category=Log%20Management"
-    tag: "Release Notes"
-    text: "Check out the latest Datadog Log Management releases (App login required)"
-  - link: "/logs/log_collection/"
-    tag: "Documentation"
-    text: "Starting collecting your logs"
-  - link: "https://learn.datadoghq.com"
-    tag: "Learning Center"
-    text: "Learn more about Datadog Log Management"
-  - link: "https://www.datadoghq.com/blog/accelerate-incident-investigations-with-log-anomaly-detection/"
-    tag: "Blog"
-    text: "Accelerate Incident Investigations with Log Anomaly Detection"
-  - link: "https://www.datadoghq.com/blog/monitor-iot-devices-at-scale-with-log-management/"
-    tag: "Blog"
-    text: "Monitor your IoT devices at scale with Datadog Log Management"
+- link: "https://www.datadoghq.com/blog/logging-without-limits/"
+  tag: "Blog"
+  text: Learn more about Logging without Limits*
+- link: "/logs/guide/"
+  tag: "Guide"
+  text: Additional guides about logging with Datadog
 ---
 
 ## Overview
 
-Logging the important parts of your system's operations is crucial for maintaining infrastructure health. Modern infrastructure has the capability to generate thousands of log events per minute. In this situation, you need to choose which logs to send to a log management solution, and which logs to archive. Filtering your logs before sending them, however, may lead to gaps in coverage or the accidental removal of valuable data.
+Datadog Logging without Limits* decouples log ingestion and indexing. Choose which logs to index and retain, or archive, and manage settings and controls at a top-level from the [log configuration section][1].
 
-Datadog Log Management, also referred to as Datadog logs or logging, removes these limitations by decoupling log ingestion from indexing. This enables you to cost-effectively collect, process, archive, explore, and monitor all of your logs without limitations, also known as Logging without Limits\*.
+{{< img src="logs/log_configuration_overview.mp4" alt="The log configuration section in the Datadog app" video=true >}}
 
-Logging without Limits\* enables a streamlined troubleshooting experience in the [Log Explorer][1], which empowers you and your teams to quickly assess and fix your infrastructure issues. It provides intuitive archiving to support your security and IT teams during audits and assessments. Logging without Limits* also powers [Datadog Cloud SIEM][2], which detects security threats in your environment, without requiring you to index logs.
+## Configuration options
 
-{{< vimeo 293195142 >}}
+- Control how your logs are processed with [pipelines][2] and [processors][3].
+- Set [attributes and aliasing][4] to unify your logs environment.
+- [Generate metrics from ingested logs][5] as cost-efficient way to summarize log data from an entire ingested stream.
+- Institute fine-grained control over your log management budget with [log indexes][6].
+- Forward ingested logs to your own cloud-hosted storage bucket to keep as an [archive][7] for future troubleshooting or compliance audits.
+- [Rehydrate an archive][8] to analyze or investigate log events that are older or excluded from indexing.
+- Restrict [logs data access][9] with restriction queries.
 
-</br>
+## Log Explorer
 
-## Collect
-
-Begin [ingesting logs][3] from your hosts, containers, cloud providers, and other sources to get started with Datadog Log Management.
-
-## Configure
-
-{{< img src="/logs/configure.png" alt="Configure your logs all in one place" style="width:80%;">}}
-
-Once your logs are ingested, process and enrich all your logs with pipelines and processors, provide control of your log management budget with indexes, generate metrics from ingested logs, or manage your logs within storage-optimized archives with [Log Configuration options][4].
-
-## Connect
-
-{{< img src="/logs/connect.png" alt="Correlate logs with metrics or traces" style="width:80%;">}}
-
-Leverage the pillars of observability by connecting your logs to metrics and traces:
-
-- [Connect your logs and traces][5] to gain observability into your applications.
-- [Correlate logs and metrics][6] to gain context of an issue and map it throughout your service.
-
-## Explore
-
-Start exploring your ingested logs in the [Log Explorer][1].
-
-{{< img src="/logs/explore.jpg" alt="Explore your ingested logs" style="width:80%;">}}
-
-- [Search][7]: Search through all of your logs.
-- [Live Tail][8]: See your ingested logs in real time across all your environments.
-- [Analytics][9]: Perform Log Analytics over your indexed logs.
-- [Patterns][10]: Spot log patterns by clustering your indexed logs together.
-- [Saved Views][11]: Use saved views to automatically configure your Log Explorer.
+Once you've completed configuration, start investigating and troubleshooting logs in the [Log Explorer][10].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-<br>
-\*Logging without Limits is a trademark of Datadog, Inc.
 
-[1]: /logs/explorer/
-[2]: /security_platform/cloud_siem/
-[3]: /logs/log_collection/
-[4]: /logs/log_configuration/
-[5]: /tracing/other_telemetry/connect_logs_and_traces/
-[6]: /logs/guide/correlate-logs-with-metrics/
-[7]: /logs/explorer/search_syntax/
-[8]: /logs/live_tail/
-[9]: /logs/explorer/analytics/
-[10]: /logs/explorer/patterns/
-[11]: /logs/explorer/saved_views/
+<br>
+*Logging without Limits is a trademark of Datadog, Inc.
+
+[1]: https://app.datadoghq.com/logs/pipelines
+[2]: /logs/log_configuration/pipelines
+[3]: /logs/log_configuration/processors
+[4]: /logs/log_configuration/attributes_naming_convention/
+[5]: /logs/log_configuration/logs_to_metrics/
+[6]: /logs/log_configuration/indexes
+[7]: /logs/log_configuration/archives/
+[8]: /logs/log_configuration/rehydrating
+[9]: /logs/guide/logs-rbac/
+[10]: /logs/explorer/
