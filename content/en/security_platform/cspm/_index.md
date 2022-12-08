@@ -17,9 +17,9 @@ Strengthen your security posture and achieve continuous compliance by detecting,
 
 ## Detect misconfigurations across your cloud accounts and workloads
 
-Assess the configuration of your cloud resources, such as security groups, storage buckets, load balancers, and databases against configuration rules. Use the Datadog Agent to review local configuration information from servers, containers, and Kubernetes clusters against Datadog's OOTB Posture Management [Cloud][1] and [Infrastructure][2] detection rules.
+Assess the configuration and compliance posture of your cloud resources, such as security groups, storage buckets, load balancers, and databases against CSPM's out-of-the-box [Cloud][1] and [Infrastructure][2] detection rules.
 
-Continuously monitor your compliance posture.
+Assess the configuration and compliance posture of your cloud resources, such as security groups, storage buckets, load balancers, and databases against detection rules. Use the Datadog Agent to review local configuration information from servers, containers, and Kubernetes clusters against CSPM's out-of-the-box [Cloud][1] and [Infrastructure][2] detection rules.
 
 These detection rules work with out-of-the-box integration configurations and map to controls within a compliance framework or industry benchmark. When new default configuration detection rules are added, they are automatically imported into your account.
 
@@ -54,6 +54,8 @@ Use the **Summary** page to view
 Use the CSPM homepage to view.... 
 
 Drill down deeper into details using the Security Findings Explorer.
+
+Use the **Security Findings Explorer** to explore resource configuraitons, 
 
 to review details on the configuration of a resource, the rules applied to the resource by CSPM, tags t
 
