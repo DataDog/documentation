@@ -18,7 +18,13 @@ aliases:
     {{< nextlink href="tracing/guide/instrument_custom_method" >}}6. Instrument a custom method to get deep visibility into your business logic.{{< /nextlink >}}
 {{< /whatsnext >}}
 <br>
-
+<a id="enabling-tracing-tutorials">
+{{< whatsnext desc="Tutorials: Enabling Tracing" >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-python-host" >}}Enabling Tracing on a Python Application on the Same Host as Datadog Agent{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-python-containers" >}}Enabling Tracing on a Python Application and Datadog Agent in Containers{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-python-container-agent-host" >}}Enabling Tracing for a Python Application in a Container and an Agent on a Host{{< /nextlink >}}
+{{< /whatsnext >}}
+<br>
 {{< whatsnext desc="APM Integrations in action" >}}
     {{< nextlink href="/tracing/guide/monitor-kafka-queues/" >}}Tracing Kafka Queues{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/trace-php-cli-scripts/" >}}Tracing PHP CLI Scripts{{< /nextlink >}}
