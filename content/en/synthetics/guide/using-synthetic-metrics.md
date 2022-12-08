@@ -1,9 +1,9 @@
 ---
-title: Using Synthetic Metrics
+title: Using Synthetic Metrics in Monitors
 kind: guide
 description: Learn how to use general Synthetic metrics in monitors. 
 further_reading:
-- link: "/monitors/metrics/"
+- link: "/monitors/types/metric/"
   tag: "Documentation"
   text: "Learn about metrics monitors"
 - link: "/monitors/manage/"
