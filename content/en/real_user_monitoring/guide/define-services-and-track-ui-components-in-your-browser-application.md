@@ -12,7 +12,7 @@ further_reading:
 
 RUM lets you capture all events in your browser applications and explore them to troubleshoot slow pages and code errors, or to analyze application usage. All events are available in [RUM Explorer][1] for querying, dashboarding, and alerting.
 
-If your browser application is large, it's likely been built thanks to multiple web development teams. Each team has an area of ownership that they focus on when troubleshooting errors, slowness, or analyzing usage.
+If your browser application is large, it's likely been built by multiple web development teams. Each team has an area of ownership that they focus on when troubleshooting errors, slowness, or analyzing usage.
 
 This guide describes how to define an application in RUM. In addition, it covers common use cases in large applications where web development teams may require visibility into the health and usage of their area of ownership.
 
