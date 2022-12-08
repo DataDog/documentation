@@ -30,7 +30,7 @@ Datadog's tracing libraries (`dd-trace`) are known to be not compatible with bun
     };
     ```
 
-4. If you are using the `serverless-webpack` and have the option `includeModules` set to any value other than `false`, serverless-webpack automatically [packs external moduels under node_modules][5]. Therefore we need to force exclude `datadog-lambda-js` and `dd-trace` from your `serverless.yml`. Skip this step if you don't use `serverless-webpack` or you don't see the option `includeModules` in your serverless.yml.
+4. If you are using the `serverless-webpack` and have the option `includeModules` set to any value other than `false`, serverless-webpack automatically [packs external moduels under node_modules][5]. Therefore we need to force exclude `datadog-lambda-js` and `dd-trace`. Skip this step if you don't use `serverless-webpack` or you don't see the option `includeModules` in your serverless.yml.
 
     **serverless.yml**
 
@@ -45,6 +45,7 @@ Datadog's tracing libraries (`dd-trace`) are known to be not compatible with bun
             - datadog-lambda-js
         packagerOptions:
           scripts:
+            # optional, only needed when they are included as transitive dependencies 
             - rm -rf node_modules/datadog-lambda-js node_modules/dd-trace
     ```
 
