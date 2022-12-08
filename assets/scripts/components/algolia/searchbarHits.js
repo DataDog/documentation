@@ -94,17 +94,15 @@ const renderHits = (renderOptions, isFirstRender) => {
 
     const { widgetParams, hits } = renderOptions;
     const { container } = widgetParams;
-    const docsHitsArray = hits.filter(
-        (hit) =>
-            hit.tags[0] === 'docs' ||
-            hit.tags[0] === 'default_rules' ||
-            hit.tags[0] === 'rbac_permissions' ||
-            hit.tags[0] === null
+
+    const docsHitsArray = hits.filter((hit) => hit.category === 'Documentation' || hit.category === null);
+    const guidesHitsArray = hits.filter((hit) => hit.category === 'Guide' || hit.category === 'ガイド');
+    const gettingStartedHitsArray = hits.filter((hit) => hit.category === 'Getting Started');
+    const integrationsHitsArray = hits.filter(
+        (hit) => hit.category === 'Integrations' || hit.category === 'Intégrations'
     );
-    const guidesHitsArray = hits.filter((hit) => hit.tags[0] === 'guide');
-    const gettingStartedHitsArray = hits.filter((hit) => hit.tags[0] === 'getting_started');
-    const integrationsHitsArray = hits.filter((hit) => hit.tags[0] === 'integrations');
-    const apiHitsArray = hits.filter((hit) => hit.tags[0] === 'api_latest');
+    const apiHitsArray = hits.filter((hit) => hit.category === 'API');
+
     const documentationJoinedListItemsHTML = generateJoinedHits(docsHitsArray, 'Documentation');
     const guideJoinedListItemsHTML = generateJoinedHits(guidesHitsArray, 'Guides');
     const gettingStartedJoinedListItemsHTML = generateJoinedHits(gettingStartedHitsArray, 'Getting Started');

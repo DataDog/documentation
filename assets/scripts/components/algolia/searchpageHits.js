@@ -33,29 +33,7 @@ const renderHits = (renderOptions, isFirstRender) => {
                 const subcategory = item.subcategory ? item.subcategory : title;
                 const sectionHeader = item.section_header ? item.section_header : null;
                 const content = hitData.content.value;
-                const tag = item.tags ? item.tags[0] : 'docs';
-                let category = 'Documentation';
-
-                switch (tag) {
-                    case 'guide':
-                        category = 'Guides';
-                        break;
-
-                    case 'getting_started':
-                        category = 'Getting Started';
-                        break;
-
-                    case 'integrations':
-                        category = 'Integrations';
-                        break;
-
-                    case 'api_latest':
-                        category = 'API';
-                        break;
-
-                    default:
-                        break;
-                }
+                let category = item.category ? item.category : 'Documentation';
 
                 const displayTitle = sectionHeader ? sectionHeader : title;
                 const displayContent = truncateContent(content, 100);
