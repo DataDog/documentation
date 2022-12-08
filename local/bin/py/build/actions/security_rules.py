@@ -108,7 +108,6 @@ def security_rules(content, content_dir):
             if p.exists():
                 logger.info(f"removing file {p.name}")
                 global_aliases.append(f"/security_monitoring/default_rules/{p.stem}")
-                global_aliases.append(f"/security/default_rules/{p.stem}")
                 p.unlink()
             else:
                 logger.info(f"skipping file {p.name}")
