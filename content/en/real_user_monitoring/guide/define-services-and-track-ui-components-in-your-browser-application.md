@@ -33,9 +33,9 @@ If, for example, automatically capturing page views by route change does not pro
 
 ## Track timings during the rendering lifecycle of your pages
 
-The Browser SDK automatically tracks a set of latencies, or timings, that are industry standard. These include the Core Web Vitals, page loading times, [and more][4].
+The Browser SDK automatically tracks a set of latencies, or timings, that are industry standards. These include the Core Web Vitals, page loading times, [and more][4].
 
-In addition, you can track the time it takes for a specific item on the page to render, such as an image or a component. You can track more timings by capturing them in code, then pasting the values in your view events, as [documented here][5].
+In addition, you can track the time it takes for a specific item on the page to render, such as an image or a component. You can track more timings by capturing them in code, then pasting the values in your view events. For details on how to do this, see the documentation on [adding your own performance timing][5].
 
 Once timings are captured, they are available like any auto-collected timing. You can use timings to do the following:
 
@@ -44,9 +44,9 @@ Once timings are captured, they are available like any auto-collected timing. Yo
 
 ## Track components in web pages
 
-If your browser application leverages UI components that are used across multiple pages in one application and/or across multiple applications, you can track the usage of components across pages, as well as the time they take to render, through custom instrumentation.
+If your browser application uses UI components that are present across multiple pages in one application and/or across multiple applications, you can use custom instrumentation to track the usage and rendering time of these components across pages.
 
-[Generate a custom action][7] to track the lifecycle of components across pages. Let's imagine the `/myorders` page and the `/search` page both leverage the search box component below.
+[Generate a custom action][7] to track the lifecycle of components across pages. Let's imagine the `/myorders` page and the `/search` page both use the search box component below.
 
 {{< img src="real_user_monitoring/guide/define-applications-services-components-rum/rum-guide-autofill.jpg" alt="Generate a custom action to track the lifecycle of components across pages" style="width:30%;">}}
 
@@ -80,7 +80,7 @@ From the RUM Explorer, you can then analyze:
 
 - The page where a component is used the most
 - The browser application where a component is used the most 
-- The P75 percentile for the time to full render
+- The P75 percentile for the time for the component to fully render
 
 ## Track team ownership
 
@@ -93,12 +93,12 @@ Imagine a web development team owns a set of pages like the example below.
 Inside your RUM application, create services for each set of pages owned by a team by doing the following:
 
 1. Turn on manual view tracking by setting the configuration option `trackViewsManually` to `true`.
-2. For each page of your website, assign a view name and a service following [these instructions][8].
+2. For each page of your website, assign a view name and a service following [the instructions for overriding default RUM view names][8].
    - `"purchase"` service for the pages available at `/checkout`, `/payment`, `/confirmOrder`.
    - `"catalog"` service for the pages available at `/beds`, `/chairs/123`, `/search`.
-3. [Upload a sourcemap for each service][9] to view unminified stack traces in Error Tracking. 
+3. [Upload a source map for each service][9] to view unminified stack traces in Error Tracking. 
 
-Get insights into the performance or the adoption of a given team's scope by using the service attribute in RUM:
+Get insights into the performance or the adoption of a given team's scope by using the `service` attribute in RUM:
 
 1. From the RUM Application Overview page, narrow down all graphs by `service` to get a holistic view for a team's scope
 2. Any query done in the RUM Explorer can use the `service` attribute to filter: 
