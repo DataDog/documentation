@@ -10,7 +10,6 @@
 
 {{/* Hugo page-level variables */}}
 {{ $type := $page.Type }}
-{{ $tags := $page.Params.algolia.tags }}
 {{ $rank := $page.Params.algolia.rank }}
 {{ $permalink := $page.Permalink }}
 {{ $relpermalink := $page.RelPermalink }}
@@ -48,7 +47,8 @@
         "relpermalink" $relpermalink
         "full_url" $full_url
         "language" $lang
-        "tags" $tags
         "rank" $rank
+        "category" "API"
+        "subcategory" $title
     )
 }}
