@@ -3,7 +3,8 @@ title: Cloud Security Management Guides
 kind: guide
 disable_toc: true
 aliases:
-- /security_platform/cloud_workload_security/guide/
+  - /security_platform/cloud_workload_security/guide/
+  - /security_platform/cloud_security_management/guide/
 ---
 
 {{< whatsnext desc="Cloud Workload Security Guides" >}}

@@ -3,6 +3,8 @@ title: Datadog Resource Catalog
 kind: documentation
 is_beta: true
 private: true
+aliases:
+  - /security_platform/cspm/resource_catalog
 further_reading:
 - link: "/security/cspm/custom_rules/schema/"
   tag: "Documentation"

@@ -1,6 +1,8 @@
 ---
 title: Setup and Configure
 kind: documentation
+aliases:
+  - /security_platform/application_security/setup_and_configure
 further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"

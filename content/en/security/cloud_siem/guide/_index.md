@@ -4,6 +4,7 @@ kind: guide
 aliases:
   - /security_monitoring/guide/
   - /security_platform/guide/
+  - /security_platform/cloud_siem/guide/
 private: true
 disable_toc: true
 ---

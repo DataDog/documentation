@@ -1,6 +1,8 @@
 ---
 title: gcp_storage_bucket
 kind: documentation
+aliases:
+  - /security_platform/cspm/custom_rules/gcp_storage_bucket
 ---
 
 ## `acl`

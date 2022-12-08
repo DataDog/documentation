@@ -3,6 +3,7 @@ title: Security Findings Explorer
 kind: documentation
 aliases:
   - /security_platform/findings
+  - /security_platform/cspm/findings
 further_reading:
 - link: "security/default_rules"
   tag: "Documentation"

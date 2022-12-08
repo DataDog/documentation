@@ -1,6 +1,8 @@
 ---
 title: OOTB Rules
 kind: documentation
+aliases:
+  - /security_platform/cspm/configuration_rules
 ---
 
 {{< site-region region="gov" >}}

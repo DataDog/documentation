@@ -22,6 +22,7 @@ further_reading:
   text: "See how to explore your logs"
 aliases:
   - /security_platform/guide/aws-config-guide-for-cloud-siem
+  - /security_platform/cloud_siem/guide/aws-config-guide-for-cloud-siem
 ---
 
 ## Overview

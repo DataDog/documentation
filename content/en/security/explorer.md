@@ -5,6 +5,7 @@ description: "Search through all of your security signals and perform Security A
 aliases:
   - /security_monitoring/explorer/
   - /cloud_siem/explorer/
+  - /security_platform/explorer
 further_reading:
   - link: "https://www.datadoghq.com/blog/announcing-security-monitoring/"
     tag: "Blog"

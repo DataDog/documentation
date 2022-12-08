@@ -1,6 +1,8 @@
 ---
 title: Tracking User Activity
 kind: documentation
+aliases:
+  - /security_platform/application_security/add-user-info
 further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"

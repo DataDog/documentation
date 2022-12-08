@@ -2,6 +2,8 @@
 title: Getting Started
 kind: documentation
 type: multi-code-lang
+aliases:
+  - /security_platform/application_security/getting_started/
 further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"

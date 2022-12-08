@@ -5,6 +5,7 @@ description: "Create notification rules to automatically notify your team and in
 aliases:
   - /security_platform/notification_profiles/
   - /security_platform/notification_rules/
+  - /security_platform/notifications/rules/
 further_reading:
 - link: "/security/detection_rules/"
   tag: "Documentation"

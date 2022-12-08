@@ -1,6 +1,8 @@
 ---
 title: Security Signal Management
 kind: documentation
+aliases:
+  - /security_platform/security_signal_management
 ---
 ## Overview
 

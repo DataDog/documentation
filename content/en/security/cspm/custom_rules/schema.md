@@ -2,6 +2,8 @@
 title: Cloud Resources Schema Reference
 kind: documentation
 disable_toc: true
+aliases:
+  - /security_platform/cspm/custom_rules/schema
 ---
 When you [write custom rules for CSPM][1], you specify the resource types that are referenced by the rules. 
 

@@ -1,6 +1,8 @@
 ---
 title: Variables
 kind: documentation
+aliases:
+  - /security_platform/notifications/variables
 further_reading:
 - link: "/security/detection_rules/"
   tag: "Documentation"

@@ -7,6 +7,7 @@ further_reading:
   text: "Start investigating signals in the Signals Explorer"
 aliases:
   - /security_platform/guide/automate-the-remediation-of-detected-threats/
+  - /security_platform/cloud_siem/guide/automate-the-remediation-of-detected-threats/
 ---
 
 ## Overview

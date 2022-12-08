@@ -1,6 +1,8 @@
 ---
 title: Cloud Security Management
 kind: documentation
+aliases:
+  - /security_platform/cloud_security_management/
 further_reading:
   - link: "https://app.datadoghq.com/release-notes?category=Security%20%26%20Compliance"
     tag: "Release Notes"

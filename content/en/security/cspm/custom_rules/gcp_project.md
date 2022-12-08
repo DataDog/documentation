@@ -1,6 +1,8 @@
 ---
 title: gcp_project
 kind: documentation
+aliases:
+  - /security_platform/cspm/custom_rules/gcp_project
 ---
 
 ## `ancestors`

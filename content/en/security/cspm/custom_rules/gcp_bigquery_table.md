@@ -1,6 +1,8 @@
 ---
 title: gcp_bigquery_table
 kind: documentation
+aliases:
+  - /security_platform/cspm/custom_rules/gcp_bigquery_table
 ---
 
 ## `ancestors`

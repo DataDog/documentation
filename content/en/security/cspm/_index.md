@@ -1,6 +1,8 @@
 ---
 title: Cloud Security Posture Management
 kind: documentation
+aliases:
+  - /security_platform/cspm/
 ---
 
 {{< site-region region="gov" >}}

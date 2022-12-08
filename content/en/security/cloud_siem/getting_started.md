@@ -8,6 +8,7 @@ aliases:
   - /security_platform/security_monitoring/
   - /security_platform/security_monitoring/getting_started
   - /security_platform/getting_started/
+  - /security_platform/cloud_siem/getting_started
 further_reading:
 - link: "/security/default_rules"
   tag: "Documentation"

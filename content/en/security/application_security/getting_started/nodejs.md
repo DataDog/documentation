@@ -4,6 +4,8 @@ kind: documentation
 code_lang: nodejs
 type: multi-code-lang
 code_lang_weight: 50
+aliases:
+  - /security_platform/application_security/getting_started/nodejs
 further_reading:
     - link: "/security/application_security/add-user-info/"
       tag: "Documentation"

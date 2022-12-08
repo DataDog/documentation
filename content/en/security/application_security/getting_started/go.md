@@ -4,6 +4,8 @@ kind: documentation
 code_lang: go
 type: multi-code-lang
 code_lang_weight: 20
+aliases:
+  - /security_platform/application_security/getting_started/go
 further_reading:
     - link: "/security/application_security/add-user-info/"
       tag: "Documentation"

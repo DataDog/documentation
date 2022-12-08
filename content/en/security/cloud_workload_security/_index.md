@@ -1,6 +1,8 @@
 ---
 title: Cloud Workload Security
 kind: documentation
+aliases:
+  - /security_platform/cloud_workload_security/
 ---
 
 ## Overview

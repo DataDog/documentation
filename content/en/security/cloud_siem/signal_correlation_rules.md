@@ -1,6 +1,8 @@
 ---
 title: Signal Correlation Rules
 type: documentation
+aliases:
+ - security_platform/cloud_siem/signal_correlation_rules
 further_reading:
 - link: "/cloud_siem/explorer/"
   tag: "Documentation"

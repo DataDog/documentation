@@ -6,6 +6,7 @@ description: "Datadog Security detection rules"
 aliases:
   - /security_monitoring/default_rules/
   - /cloud_siem/default_rules/
+  - /security_platform/default_rules/
 disable_sidebar: true
 ---
 

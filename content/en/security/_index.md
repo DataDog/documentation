@@ -4,6 +4,7 @@ kind: documentation
 aliases:
   - compliance_monitoring
   - cloud_siem
+  - security_platform
 further_reading:
   - link: "https://app.datadoghq.com/release-notes?category=Security%20%26%20Compliance"
     tag: "Release Notes"

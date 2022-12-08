@@ -4,6 +4,7 @@ kind: documentation
 aliases:
   - /security_monitoring/detection_rules/
   - /cloud_siem/detection_rules/
+  - /security_platform/detection_rules/
 further_reading:
 - link: "/cloud_siem/default_rules"
   tag: "Documentation"

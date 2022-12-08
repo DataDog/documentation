@@ -1,6 +1,8 @@
 ---
 title: Findings Reports
 kind: documentation
+aliases:
+  - /security_platform/cspm/frameworks_and_benchmarks
 further_reading:
 - link: "security/default_rules"
   tag: "Documentation"

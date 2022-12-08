@@ -1,6 +1,8 @@
 ---
 title: Getting Started with CSPM
 kind: documentation
+aliases:
+  - /security_platform/cspm/getting_started
 further_reading:
 - link: "security/default_rules"
   tag: "Documentation"
