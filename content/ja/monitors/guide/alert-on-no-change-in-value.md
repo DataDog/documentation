@@ -2,7 +2,7 @@
 aliases:
 - /ja/monitors/faq/how-can-i-configure-a-metric-monitor-to-alert-on-no-change-in-value
 further_reading:
-- link: /monitors/create/
+- link: /monitors/
   tag: Documentation
   text: モニターの作成方法
 - link: /monitors/notify/

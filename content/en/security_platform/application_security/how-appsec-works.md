@@ -27,13 +27,22 @@ Datadog ASM identifies bad actors by collecting client IP addresses and manually
 
 ## Identify services exposed to application attacks
 
-Datadog ASM uses the information APM is already collecting, and flags traces containing attack attempts. Services exposed to application attacks are highlighted directly in the security views embedded in APM ([Service Catalog][14], [Service Page][15], [Traces][16]).
+Datadog ASM uses the information APM is already collecting, and flags traces containing attack attempts. Services exposed to application attacks are highlighted directly in the security views embedded in APM ([Service Catalog][1], [Service Page][2], [Traces][3]).
 
 Because APM collects a sample of your application traffic, enabling ASM in the tracing library is necessary to effectively monitor and protect your services.
 
 ## Compatibility
 
-For Datadog ASM to be compatible with your Datadog configuration, you must have APM enabled, and [send traces to Datadog][1]. ASM uses the same libraries used by APM, so you don't need to deploy and maintain another library. Steps to enable Datadog ASM are specific to runtime language. Check to see if your language is supported in the [ASM prerequisites][2].
+For Datadog ASM to be compatible with your Datadog configuration, you must have APM enabled, and [send traces to Datadog][4]. ASM uses the same libraries used by APM, so you don't need to deploy and maintain another library. Steps to enable Datadog ASM are specific to runtime language. Check to see if your language is supported in the [ASM prerequisites][5].
+
+### Serverless monitoring
+
+<div class="alert alert-info">Serverless threat monitoring is in private beta. Request to join the early preview with <a href="https://docs.google.com/forms/d/e/1FAIpQLScB3uSccf9lSAh7GcA8NZ8SsmUGQ5mi09DnDgZmqXcbiYfMzA/viewform">this form</a>.</div>
+ 
+Datadog ASM supports functions deployed on AWS Lambda. Detection is done by using the [Lambda extension][6]. 
+
+Full threat monitoring capabilities are available for Lambda functions. You can detect attackers targeting your functions, trace their attack path with deep code-level insights, and then remediate the threat.
+
 
 ## Performance
 
@@ -43,20 +52,22 @@ Datadog ASM uses processes already contained in the Agent and APM, so there are 
 
 ## Data Sampling and Retention
 
-In the tracing library, Datadog ASM collects all traces that include security data. A default [retention filter][13] ensures the retention of all security-related traces in the Datadog platform.
+In the tracing library, Datadog ASM collects all traces that include security data. A default [retention filter][7] ensures the retention of all security-related traces in the Datadog platform.
+
+Data for suspicious requests is kept for 90 days. The underlying trace data is kept for 15 days.
 
 ## Data privacy
 
-There are multiple methods used to avoid your sensitive information being indexed. To take further action, you can set up [custom and static scrubbers][3], and use [exclusion filters][4].
+There are multiple methods used to avoid your sensitive information being indexed. To take further action, you can set up [custom and static scrubbers][8], and use [exclusion filters][9].
 
 
-**Note:** Datadog ASM does not automatically obfuscate sensitive information or PII. To keep this sensitive data from being sent to Datadog, [configure the Datadog Agent or Tracer for data security][3].
+**Note:** Datadog ASM does not automatically obfuscate sensitive information or PII. To keep this sensitive data from being sent to Datadog, [configure the Datadog Agent or Tracer for data security][8].
 
 Contact Support to delete sensitive data that may have been indexed.
 
 ## Threat detection methods
 
-Datadog uses multiple pattern sources, including the [OWASP ModSecurity Core Rule Set][5] to detect known threats and vulnerabilities in HTTP requests. When an HTTP request matches one of [the OOTB detection rules][6], a security signal is generated in Datadog.
+Datadog uses multiple pattern sources, including the [OWASP ModSecurity Core Rule Set][10] to detect known threats and vulnerabilities in HTTP requests. When an HTTP request matches one of [the OOTB detection rules][11], a security signal is generated in Datadog.
 
 Security Signals are automatically created when Datadog detects meaningful attacks targeting your production services. It provides you with visibility on the attackers and the targeted services. You can set custom detection rules with thresholds to determine which attacks you want to be notified about.
 
@@ -71,7 +82,7 @@ IP blocks are saved in the Datadog platform, automatically and securely fetched 
 
 You can block attackers' IPs that are flagged in ASM Security Signals temporarily or permanently with a single click in the Datadog UI.
 
-From there, all services already protected by ASM block incoming requests performed by the blocked IP, for the specified duration. All blocked traces are tagged with `security_response.block_ip` and displayed in the [Traces Explorer][10]. Services where ASM is disabled aren't protected.
+From there, all services already protected by ASM block incoming requests performed by the blocked IP, for the specified duration. All blocked traces are tagged with `security_response.block_ip` and displayed in the [Trace Explorer][14]. Services where ASM is disabled aren't protected.
 
 
 {{< img src="/security_platform/application_security/asm-blocking-ui.png" alt="A security signal panel in Datadog ASM, allowing to block the attackers' IPs" width="75%">}}
@@ -84,7 +95,7 @@ Datadog ASM categorizes attack attempts into different threat types:
 * **Contextualized attacks** correlate the attack attempts performed on the service with a matching business-logic. For example, SQL injection patterns on a service performing SQL statements.
 * A **Vulnerability is triggered** when an attack attempt gives evidence that a vulnerability has been successfully exploited, after matching known attack patterns.
 
-Datadog ASM includes over 100 attack patterns that help protect against [many different kinds of attacks][7], including the following vulnerabilities:
+Datadog ASM includes over 100 attack patterns that help protect against [many different kinds of attacks][15], including the following vulnerabilities:
 
 * SQL injections
 * Code injections
@@ -95,25 +106,25 @@ Datadog ASM includes over 100 attack patterns that help protect against [many di
 
 ## How Datadog ASM protects against Log4Shell
 
- Datadog ASM identifies Log4j Log4Shell attack payloads and provides visibility into vulnerable apps that attempt to remotely load malicious code. When used in tandem with the rest of [Datadog's Cloud SIEM][8], you can investigate to identify common post-exploitation activity, and proactively remediate potentially vulnerable Java web services acting as an attack vector.
+ Datadog ASM identifies Log4j Log4Shell attack payloads and provides visibility into vulnerable apps that attempt to remotely load malicious code. When used in tandem with the rest of [Datadog's Cloud SIEM][16], you can investigate to identify common post-exploitation activity, and proactively remediate potentially vulnerable Java web services acting as an attack vector.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_collection/
-[2]: /security_platform/application_security/getting_started/#prerequisites
-[3]: /tracing/configure_data_security/?tab=http
-[4]: /security_platform/cloud_siem/guide/how-to-setup-security-filters-using-cloud-siem-api/
-[5]: https://owasp.org/www-project-modsecurity-core-rule-set/
-[6]: /security_platform/default_rules/#cat-application-security
-[7]: https://app.datadoghq.com/security/appsec/event-rules
-[8]: /security_platform/cloud_siem/
-[9]: /tracing/
-[10]: https://app.datadoghq.com/security/appsec/traces?query=%40appsec.blocked%3Atrue
-[11]: /security_platform/application_security/add-user-info/?tab=set_user
-[12]: /agent/
-[13]: /tracing/trace_pipeline/trace_retention/
-[14]: /tracing/service_catalog/#security-view
-[15]: /tracing/services/service_page/#security
-[16]: /tracing/trace_explorer/trace_view/?tab=security#more-information
+[1]: /tracing/service_catalog/#security-view
+[2]: /tracing/services/service_page/#security
+[3]: /tracing/trace_explorer/trace_view/?tab=security#more-information
+[4]: /tracing/trace_collection/
+[5]: /security_platform/application_security/getting_started/#prerequisites
+[6]: /serverless/installation/java/?tab=serverlessframework
+[7]: /tracing/trace_pipeline/trace_retention/
+[8]: /tracing/configure_data_security/?tab=http
+[9]: /security_platform/cloud_siem/guide/how-to-setup-security-filters-using-cloud-siem-api/
+[10]: https://owasp.org/www-project-modsecurity-core-rule-set/
+[11]: /security_platform/default_rules/#cat-application-security
+[12]: /tracing/
+[13]: /agent/
+[14]: https://app.datadoghq.com/security/appsec/traces?query=%40appsec.blocked%3Atrue
+[15]: https://app.datadoghq.com/security/appsec/event-rules
+[16]: /security_platform/cloud_siem/
