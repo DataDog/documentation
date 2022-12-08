@@ -28,6 +28,10 @@ nav_sections:
         link: integrations/
         icon: integrations
         desc: Gather data about your applications, services, and systems
+      - title: OpenTelemetry
+        link: opentelemetry/
+        icon: open-telemetry
+        desc: Pipe your OpenTelemetry metrics, logs, and traces into Datadog
       - title: Dashboards
         link: dashboards/
         icon: dashboard

@@ -808,6 +808,11 @@
     },
     {
       "group": "synthetics",
+      "suffix": "_960766374",
+      "description": "Create an API HTTP with oauth-rop test returns \"OK - Returns the created test details.\" response"
+    },
+    {
+      "group": "synthetics",
       "suffix": "_1072503741",
       "description": "Create an API SSL test returns \"OK - Returns the created test details.\" response"
     },

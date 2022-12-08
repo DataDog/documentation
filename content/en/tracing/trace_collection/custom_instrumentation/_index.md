@@ -20,8 +20,6 @@ further_reading:
       text: 'Instrument a custom method to get deep visibility into your business logic'
     - link: 'tracing/connect_logs_and_traces'
       text: 'Connect your Logs and Traces together'
-    - link: 'tracing/opentracing'
-      text: 'Implement OpenTracing across your applications'
     - link: 'tracing/visualization/'
       text: 'Explore your services, resources, and traces'
     - link: 'https://www.datadoghq.com/blog/opentelemetry-instrumentation/'
@@ -46,4 +44,4 @@ If you’re already using OpenTracing or OpenTelemetry, see [OpenTracing and Ope
 
 [1]: /tracing/guide/add_span_md_and_graph_it/
 [2]: /tracing/glossary
-[3]: /tracing/trace_collection/open_standards/
+[3]: /opentelemetry/otel_tracing/

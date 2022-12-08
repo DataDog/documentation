@@ -1,0 +1,103 @@
+{
+  "config": {
+    "assertions": [
+      {
+        "operator": "is",
+        "property": "{{ PROPERTY }}",
+        "target": "text/html",
+        "type": "header"
+      },
+      {
+        "operator": "lessThan",
+        "target": 2000,
+        "type": "responseTime"
+      },
+      {
+        "operator": "validatesJSONPath",
+        "target": {
+          "jsonPath": "topKey",
+          "operator": "isNot",
+          "targetValue": "0"
+        },
+        "type": "body"
+      },
+      {
+        "operator": "validatesXPath",
+        "target": {
+          "xPath": "target-xpath",
+          "targetValue": "0",
+          "operator": "contains"
+        },
+        "type": "body"
+      }
+    ],
+    "configVariables": [
+      {
+        "example": "content-type",
+        "name": "PROPERTY",
+        "pattern": "content-type",
+        "type": "text"
+      }
+    ],
+    "request": {
+      "certificate": {
+        "cert": {
+          "content": "cert-content",
+          "filename": "cert-filename",
+          "updatedAt": "2020-10-16T09:23:24.857Z"
+        },
+        "key": {
+          "content": "key-content",
+          "filename": "key-filename",
+          "updatedAt": "2020-10-16T09:23:24.857Z"
+        }
+      },
+      "headers": {
+        "unique": "examplecreateanapihttpwithoauthroptestreturnsokreturnsthecreatedtestdetailsresponse"
+      },
+      "method": "GET",
+      "timeout": 10,
+      "url": "https://datadoghq.com",
+      "proxy": {
+        "url": "https://datadoghq.com",
+        "headers": {}
+      },
+      "basicAuth": {
+        "accessTokenUrl": "https://datadog-token.com",
+        "audience": "audience",
+        "clientId": "client-id",
+        "clientSecret": "client-secret",
+        "resource": "resource",
+        "scope": "yoyo",
+        "tokenApiAuthentication": "body",
+        "type": "oauth-rop",
+        "username": "oauth-usermame",
+        "password": "oauth-password"
+      }
+    }
+  },
+  "locations": [
+    "aws:us-east-2"
+  ],
+  "message": "BDD test payload: synthetics_api_http_test_payload.json",
+  "name": "Example-Create_an_API_HTTP_with_oauth_rop_test_returns_OK_Returns_the_created_test_details_response",
+  "options": {
+    "accept_self_signed": false,
+    "allow_insecure": true,
+    "follow_redirects": true,
+    "min_failure_duration": 10,
+    "min_location_failed": 1,
+    "monitor_name": "Example-Create_an_API_HTTP_with_oauth_rop_test_returns_OK_Returns_the_created_test_details_response",
+    "monitor_priority": 5,
+    "retry": {
+      "count": 3,
+      "interval": 10
+    },
+    "tick_every": 60
+  },
+  "subtype": "http",
+  "tags": [
+    "testing:api"
+  ],
+  "type": "api"
+}

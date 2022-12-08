@@ -49,7 +49,7 @@ if ((span instanceof MutableSpan)) {
 ```
 
 
-[1]: /tracing/trace_collection/open_standards/java/#setup
+[1]: /tracing/trace_collection/compatibility/java/#setup
 {{< /programming-lang >}}
 
 {{< programming-lang lang="dotnet" >}}

@@ -8,7 +8,7 @@ code_lang_weight: 80
 aliases:
   - /tracing/connect_logs_and_traces/opentelemetry
 further_reading:
-- link: "/tracing/trace_collection/open_standards/"
+- link: "/opentelemetry/otel_tracing/"
   tag: "Documentation"
   text: "Send OpenTelemetry Traces to Datadog"
 - link: "https://opentelemetry.io/docs/collector/"
