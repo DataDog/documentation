@@ -260,7 +260,7 @@ Wildcard support `[*]` added in version 2.7.0.
 : Alters the behavior of the Kafka consumer span<br>
 **Default**: `true`<br>
 When set to `true`, the consumer span is created when a message is consumed and closed before consuming the next message. The span duration is representative of the computation between one message consumption and the next. Use this setting when message consumption is performed in a loop. <br>
-When set to `false`, the consumer span is created when a message is consumed and immediately closed. Use this setting when a message is not processed completely before consuming the next one, or when multiple messages are consumed at once.
+When set to `false`, the consumer span is created when a message is consumed and immediately closed. Use this setting when a message is not processed completely before consuming the next one, or when multiple messages are consumed at once. When you set this parameter to `false`, consumer spans are closed right away. If you have child spans to trace, you must extract the context manually. Read [Headers extraction and injection][12] for more details.
 
 #### Automatic instrumentation integration configuration
 
@@ -301,14 +301,14 @@ You can configure injection and extraction styles for distributed headers.
 The .NET Tracer supports the following styles:
 
 - Datadog: `Datadog`
-- B3: `B3`
-- W3C: `W3C`
-- B3 Single Header: `B3SingleHeader` or `B3 single header`
+- B3 Multi Header: `b3multi` (`B3` is deprecated)
+- W3C (TraceParent): `tracecontext` (`W3C` is deprecated)
+- B3 Single Header: `B3 single header` (`B3SingleHeader` is deprecated)
 
 You can use the following environment variables to configure injection and extraction styles:
 
-- `DD_PROPAGATION_STYLE_INJECT=Datadog, B3, W3C`
-- `DD_PROPAGATION_STYLE_EXTRACT=Datadog, B3, W3C`
+- `DD_TRACE_PROPAGATION_STYLE_INJECT=Datadog, b3multi, tracecontext`
+- `DD_TRACE_PROPAGATION_STYLE_EXTRACT=Datadog, b3multi, tracecontext`
 
 The environment variable values are comma-separated lists of header styles enabled for injection or extraction. By default, only the `Datadog` injection style is enabled.
 
@@ -327,3 +327,4 @@ If multiple extraction styles are enabled, the extraction attempt is completed i
 [8]: /tracing/trace_collection/custom_instrumentation/dotnet/
 [9]: https://github.com/openzipkin/b3-propagation
 [10]: https://www.w3.org/TR/trace-context/#traceparent-header
+[12]: /tracing/trace_collection/custom_instrumentation/dotnet/#headers-extraction-and-injection

@@ -5,12 +5,12 @@ further_reading:
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml"
   tag: "Terraform"
   text: "Create and manage service definitions with Terraform"
-- link: "/tracing/service_catalog/service_definition_api/"
+- link: "/api/latest/service-definition/"
   tag: "Documentation"
-  text: "Service Definition API"
-- link: "/integrations/github_apps"
+  text: "Learn about the Service Definition API"
+- link: "/integrations/github"
   tag: "Documentation"
-  text: "GitHub Apps Integration"
+  text: "Learn about the GitHub Integration"
 ---
 
 ## Overview
@@ -46,9 +46,9 @@ To discover other services through existing Datadog telemetry such as infrastruc
 
 ## Store and edit service definitions in GitHub
 
-Configure the [GitHub Apps integration][6] to directly link from where you view the service's definition in the Service Catalog to where it's stored and editable in GitHub.
+Configure the [GitHub integration][6] to directly link from where you view the service's definition in the Service Catalog to where it's stored and editable in GitHub.
 
-To install the GitHub Apps integration, navigate to the [integration tile][7] and click **Link GitHub Account** in the **Repo Configuration** tab. 
+To install the GitHub integration, navigate to the [integration tile][7] and click **Link GitHub Account** in the **Repo Configuration** tab. 
 
 ### Service definition YAML files
 
@@ -56,13 +56,13 @@ Datadog scans for the `service.datadog.yaml` file at the root of each repository
 
 ### Modify service definition
 
-When the GitHub Apps integration is set up for your service definitions, an **Edit in Github** button appears in the service's **Definition** tab and links you to GitHub to commit changes.
+When the GitHub integration is set up for your service definitions, an **Edit in Github** button appears in the service's **Definition** tab and links you to GitHub to commit changes.
 
 {{< img src="tracing/service_catalog/svc_cat_contextual_link.png" alt="An Edit in Github button appears in the Definition tab of a service in the Service Catalog" style="width:90%;" >}}
 
 After you update the YAML files for your repositories, your changes propagate to the Service Catalog. 
 
-To prevent accidental overwriting, create and modify your service definition files with either the GitHub Apps integration or the [Service Definition API endpoints][1]. Updating the same service using both the GitHub and the API could result in unintended overwriting.  
+To prevent accidental overwriting, create and modify your service definition files with either the GitHub integration or the [Service Definition API endpoints][1]. Updating the same service using both the GitHub and the API may result in unintended overwriting.  
 
 ## Automate service definition updates with Terraform
 
@@ -79,7 +79,7 @@ For more information, see the [Datadog Provider documentation][9].
 [3]: https://app.datadoghq.com/services/setup
 [4]: https://github.com/DataDog/schema/blob/main/service-catalog/v2/schema.json
 [5]: /getting_started/tagging/unified_service_tagging
-[6]: /integrations/github_apps/
-[7]: https://app.datadoghq.com/integrations/github-apps
+[6]: /integrations/github/
+[7]: https://app.datadoghq.com/integrations/github
 [8]: https://registry.terraform.io/providers/DataDog/datadog/latest/
 [9]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs
