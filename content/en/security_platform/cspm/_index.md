@@ -23,6 +23,10 @@ Assess the configuration and compliance posture of your cloud resources, such as
 
 These detection rules work with out-of-the-box integration configurations and map to controls within a compliance framework or industry benchmark. When new default configuration detection rules are added, they are automatically imported into your account.
 
+---
+
+Use the Datadog Agent to evaluate the security posture of your hosts and containers. 
+
 **SCREENSHOT**
 
 ### Maintain compliance with industry frameworks and benchmarks
