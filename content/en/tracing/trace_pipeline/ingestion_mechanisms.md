@@ -444,7 +444,7 @@ Manually keep a trace:
 ```cs
 using Datadog.Trace;
 
-using(var scope = Tracer.Instance.StartActive(operationName))
+using(var scope = Tracer.Instance.StartActive("my-operation"))
 {
     var span = scope.Span;
 
@@ -459,7 +459,7 @@ Manually drop a trace:
 ```cs
 using Datadog.Trace;
 
-using(var scope = Tracer.Instance.StartActive(operationName))
+using(var scope = Tracer.Instance.StartActive("my-operation"))
 {
     var span = scope.Span;
 
@@ -477,13 +477,12 @@ Manually keep a trace:
 
 ```php
 <?php
-  $tracer = \OpenTracing\GlobalTracer::get();
+  $tracer = \DDTrace\GlobalTracer::get();
   $span = $tracer->getActiveSpan();
 
   if (null !== $span) {
     // Always keep this trace
     $span->setTag(\DDTrace\Tag::MANUAL_KEEP, true);
-    //method impl follows
   }
 ?>
 ```
@@ -492,13 +491,12 @@ Manually drop a trace:
 
 ```php
 <?php
-  $tracer = \OpenTracing\GlobalTracer::get();
+  $tracer = \DDTrace\GlobalTracer::get();
   $span = $tracer->getActiveSpan();
 
   if (null !== $span) {
     // Always drop this trace
     $span->setTag(\DDTrace\Tag::MANUAL_DROP, true);
-    //method impl follows
   }
 ?>
 ```
