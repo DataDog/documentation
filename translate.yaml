@@ -1,11 +1,11 @@
 ---
 # New params
-receive_enabled: true
-sync_enabled: true
+receive_enabled: false
+sync_enabled: false
 
 # if true, no github or transifex api writes will happen.
 # instead logs will be created to simulate results.
-sync_dry_run_enabled: false
+sync_dry_run_enabled: true
 
 # These files will be ignored or deleted when syncing with Transifex.
 ignores:
