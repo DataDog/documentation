@@ -27,13 +27,22 @@ Datadog ASM は、すべてのリクエストでクライアントの IP アド�
 
 ## アプリケーション攻撃にさらされるサービスを特定する
 
-Datadog ASM は、APM が既に収集している情報を使用し、攻撃の試みを含むトレースにフラグを付けます。アプリケーションの攻撃にさらされたサービスは、APM に組み込まれたセキュリティビュー ([サービスカタログ][14]、[サービス詳細画面][15]、[トレース][16]) で直接ハイライト表示されます。
+Datadog ASM は、APM が既に収集している情報を使用し、攻撃の試みを含むトレースにフラグを付けます。アプリケーションの攻撃にさらされたサービスは、APM に組み込まれたセキュリティビュー ([サービスカタログ][1]、[サービス詳細画面][2]、[トレース][3]) で直接ハイライト表示されます。
 
 APM はアプリケーションのトラフィックのサンプルを収集するため、サービスを効果的に監視し保護するためには、トレーシングライブラリで ASM を有効にすることが必要です。
 
 ## 互換性
 
-Datadog ASM を Datadog の構成と互換性を持たせるためには、APM を有効にし、[Datadog にトレースを送信する][1]必要があります。ASM は APM が使用する同じライブラリを使用するため、別のライブラリをデプロイして維持する必要はありません。Datadog ASM を有効にするための手順は、ランタイム言語によって異なります。[ASM の前提条件][2]で、お使いの言語がサポートされているかどうかを確認してください。
+Datadog ASM を Datadog の構成と互換性を持たせるためには、APM を有効にし、[Datadog にトレースを送信する][4]必要があります。ASM は APM が使用する同じライブラリを使用するため、別のライブラリをデプロイして維持する必要はありません。Datadog ASM を有効にするための手順は、ランタイム言語によって異なります。[ASM の前提条件][5]で、お使いの言語がサポートされているかどうかを確認してください。
+
+### サーバーレスモニタリング
+
+<div class="alert alert-info">サーバーレス脅威モニタリングは非公開ベータ版です。早期プレビューへの参加は<a href="https://docs.google.com/forms/d/e/1FAIpQLScB3uSccf9lSAh7GcA8NZ8SsmUGQ5mi09DnDgZmqXcbiYfMzA/viewform">こちらのフォーム</a>からリクエストしてください。</div>
+
+Datadog ASM は、AWS Lambda 上にデプロイされた関数をサポートしています。検出は [Lambda 拡張機能][6]を利用することで行います。
+
+Lambda 関数に対して、完全な脅威モニタリング機能が利用可能です。関数を狙う攻撃者を検出し、コードレベルの深い洞察で攻撃経路を追跡し、脅威を修正することができます。
+
 
 ## パフォーマンス
 
@@ -43,20 +52,22 @@ Datadog ASM は、Agent と APM にすでに含まれているプロセスを使
 
 ## データのサンプリングと保持
 
-トレーシングライブラリでは、Datadog ASM は、セキュリティデータを含むすべてのトレースを収集します。デフォルトの[保持フィルター][13]は、Datadog プラットフォームにおける全てのセキュリティ関連トレースの保持を保証するものです。
+トレーシングライブラリでは、Datadog ASM は、セキュリティデータを含むすべてのトレースを収集します。デフォルトの[保持フィルター][7]は、Datadog プラットフォームにおける全てのセキュリティ関連トレースの保持を保証するものです。
+
+疑わしいリクエストのデータは、90 日間保存されます。基礎となるトレースデータは 15 日間保存されます。
 
 ## データプライバシー
 
-機密情報がインデックス化されるのを回避するために、複数の方法が使用されています。さらに対策を講じるには、[カスタムおよび静的スクラバー][3]を設定し、[除外フィルター][4]を使用することができます。
+機密情報がインデックス化されるのを回避するために、複数の方法が使用されています。さらに対策を講じるには、[カスタムおよび静的スクラバー][8]を設定し、[除外フィルター][9]を使用することができます。
 
 
-**注:** Datadog ASM は、機密情報や PII を自動的に難読化することはありません。この機密データを Datadog に送信しないようにするには、[Datadog Agent または Tracer をデータセキュリティ用に構成します][3]。
+**注:** Datadog ASM は、機密情報や PII を自動的に難読化することはありません。この機密データを Datadog に送信しないようにするには、[Datadog Agent または Tracer をデータセキュリティ用に構成します][8]。
 
 インデックス化された可能性のある機密データを削除する場合は、サポートにお問い合わせください。
 
 ## 脅威の検出方法
 
-Datadog は、[OWASP ModSecurity Core Rule Set][5] を含む複数のパターンソースを使用して、HTTP リクエストにおける既知の脅威と脆弱性を検出します。HTTP リクエストが [OOTB 検出ルール][6]のいずれかにマッチすると、Datadog にセキュリティシグナルが生成されます。
+Datadog は、[OWASP ModSecurity Core Rule Set][10] を含む複数のパターンソースを使用して、HTTP リクエストにおける既知の脅威と脆弱性を検出します。HTTP リクエストが [OOTB 検出ルール][11]のいずれかにマッチすると、Datadog にセキュリティシグナルが生成されます。
 
 セキュリティシグナルは、Datadog が本番サービスを標的とした意味のある攻撃を検出すると、自動的に作成されます。これにより、攻撃者と標的となったサービスに関する可視性を得ることができます。しきい値付きのカスタム検出ルールを設定して、通知を受けたい攻撃を決定することができます。
 
@@ -67,11 +78,11 @@ Datadog は、[OWASP ModSecurity Core Rule Set][5] を含む複数のパター�
 Datadog ASM は、攻撃や攻撃者を減速させるための保護機能を内蔵しています。
 
 IP ブロッキングアクションは、[トレーシングライブラリ][9]を介して実装され、スタックに新たな依存性を導入することはありません。
-IP ブロッキングアクションは、Datadog プラットフォームとインフラストラクチャー間の安全なチャンネルである Remote Configuration プロトコルを使用して、[Datadog Agent][12] からリモートで送信されます。
+IP ブロックは Datadog プラットフォームに保存され、[Datadog Agent][12] によって自動的かつ安全にフェッチされ、インフラストラクチャーにデプロイされ、アプリケーションに適用されます。
 
 ASM セキュリティシグナルにフラグが立った攻撃者の IP を、Datadog UI でワンクリックで一時的または恒久的にブロックすることができます。
 
-そこから、ASM によってすでに保護されているすべてのサービスは、指定された期間、ブロックされた IP によって実行される着信リクエストをブロックします。ブロックされたすべてのトレースには `security_response.block_ip` というタグが付けられ、[トレースエクスプローラー][10]に表示されます。ASM が無効になっているサービスは保護されません。
+そこから、ASM によってすでに保護されているすべてのサービスは、指定された期間、ブロックされた IP によって実行される着信リクエストをブロックします。ブロックされたすべてのトレースには `security_response.block_ip` というタグが付けられ、[トレースエクスプローラー][14]に表示されます。ASM が無効になっているサービスは保護されません。
 
 
 {{< img src="/security_platform/application_security/asm-blocking-ui.png" alt="Datadog ASM のセキュリティシグナルパネルで、攻撃者の IP をブロックすることができます" width="75%">}}
@@ -84,7 +95,7 @@ Datadog ASM は、攻撃の試みをさまざまな脅威の種類に分類し�
 * **Contextualized attacks** (コンテキストに応じた攻撃) は、サービス上で実行された攻撃の試みを、一致するビジネスロジックに関連付けます。例えば、SQL ステートメントを実行するサービスに対する SQL インジェクションパターンなどです。
 * 脆弱性とは、既知の攻撃パターンに合致した後、脆弱性の悪用に成功した証拠を示す攻撃試行が行われた場合、**Vulnerability is triggered** (脆弱性がトリガー) されます。
 
-Datadog ASM には、以下の脆弱性を含む[さまざまな種類の攻撃][7]から保護するのに役立つ 100 以上の攻撃パターンが含まれています。
+Datadog ASM には、以下の脆弱性を含む[さまざまな種類の攻撃][15]から保護するのに役立つ 100 以上の攻撃パターンが含まれています。
 
 * SQL インジェクション
 * コードインジェクション
@@ -95,25 +106,25 @@ Datadog ASM には、以下の脆弱性を含む[さまざまな種類の攻撃]
 
 ## Datadog ASM による Log4Shell の保護方法
 
-Datadog ASM は、Log4j Log4Shell 攻撃ペイロードを識別し、悪意のあるコードをリモートでロードしようとする脆弱なアプリを視覚化します。[Datadog の Cloud SIEM][8] の他の機能と組み合わせて使用すると、一般的なエクスプロイト後のアクティビティを特定して調査し、攻撃ベクトルとして機能する潜在的に脆弱な Java Web サービスをプロアクティブに修正することができます。
+Datadog ASM は、Log4j Log4Shell 攻撃ペイロードを識別し、悪意のあるコードをリモートでロードしようとする脆弱なアプリを視覚化します。[Datadog の Cloud SIEM][16] の他の機能と組み合わせて使用すると、一般的なエクスプロイト後のアクティビティを特定して調査し、攻撃ベクトルとして機能する潜在的に脆弱な Java Web サービスをプロアクティブに修正することができます。
 
 ## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/trace_collection/
-[2]: /ja/security_platform/application_security/getting_started/#prerequisites
-[3]: /ja/tracing/configure_data_security/?tab=http
-[4]: /ja/security_platform/cloud_siem/guide/how-to-setup-security-filters-using-cloud-siem-api/
-[5]: https://owasp.org/www-project-modsecurity-core-rule-set/
-[6]: /ja/security_platform/default_rules/#cat-application-security
-[7]: https://app.datadoghq.com/security/appsec/event-rules
-[8]: /ja/security_platform/cloud_siem/
-[9]: /ja/tracing/
-[10]: https://app.datadoghq.com/security/appsec/traces?query=%40appsec.blocked%3Atrue
-[11]: /ja/security_platform/application_security/add-user-info/?tab=set_user
-[12]: /ja/agent/
-[13]: /ja/tracing/trace_pipeline/trace_retention/
-[14]: /ja/tracing/service_catalog/#security-view
-[15]: /ja/tracing/services/service_page/#security
-[16]: /ja/tracing/trace_explorer/trace_view/?tab=security#more-information
+[1]: /ja/tracing/service_catalog/#security-view
+[2]: /ja/tracing/services/service_page/#security
+[3]: /ja/tracing/trace_explorer/trace_view/?tab=security#more-information
+[4]: /ja/tracing/trace_collection/
+[5]: /ja/security_platform/application_security/getting_started/#prerequisites
+[6]: /ja/serverless/installation/java/?tab=serverlessframework
+[7]: /ja/tracing/trace_pipeline/trace_retention/
+[8]: /ja/tracing/configure_data_security/?tab=http
+[9]: /ja/security_platform/cloud_siem/guide/how-to-setup-security-filters-using-cloud-siem-api/
+[10]: https://owasp.org/www-project-modsecurity-core-rule-set/
+[11]: /ja/security_platform/default_rules/#cat-application-security
+[12]: /ja/tracing/
+[13]: /ja/agent/
+[14]: https://app.datadoghq.com/security/appsec/traces?query=%40appsec.blocked%3Atrue
+[15]: https://app.datadoghq.com/security/appsec/event-rules
+[16]: /ja/security_platform/cloud_siem/

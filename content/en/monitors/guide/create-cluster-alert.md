@@ -2,7 +2,7 @@
 title: Create cluster alerts to notify when a percentage of groups are in critical state
 kind: guide
 further_reading:
-- link: "/monitors/create/"
+- link: "/monitors/"
   tag: "Documentation"
   text: "Learn how to create a monitor"
 - link: "/monitors/notify/"

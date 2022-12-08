@@ -90,10 +90,9 @@ CMD ["dotnet", "helloworld.dll"] (adapt this line to your needs)
 
 ```
 
-See [Tracing .NET Applications][1] for detailed instructions. [Sample code for a simple .NET application][2].
+See [Tracing .NET Applications][1] for detailed instructions.
 
 [1]: /tracing/trace_collection/dd_libraries/dotnet-core?tab=containers
-[2]: https://github.com/DataDog/crpb/tree/main/dotnet
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 ```
