@@ -73,7 +73,7 @@ To request access to the private Marketplace repository, email <a href="mailto:m
 
 To get started with creating an offering on the Datadog Marketplace, see [Develop a Marketplace Offering][13].
 
-To get started with creating an out-of-the-box integration, see [Create an Agent Integration][14] or [Create an API Integration][15].
+To get started with creating an out-of-the-box integration, see [Create an Agent Integration][4] or [Create an API Integration][14].
 
 ## Further Reading
 
@@ -92,5 +92,4 @@ To get started with creating an out-of-the-box integration, see [Create an Agent
 [11]: /developers/authorization/
 [12]: https://github.com/DataDog/marketplace/pull/107
 [13]: /developers/marketplace/offering
-[14]: /developers/integrations/new_check_howto/?tab=configurationtemplate
-[15]: /developers/integrations/api_integration/
+[14]: /developers/integrations/api_integration/
