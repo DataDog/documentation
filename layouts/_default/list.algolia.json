@@ -19,7 +19,7 @@
             {{ partial "algolia/page-sections.json" (dict "context" $hugo_context "page" $page "title" $title "category" $category "subcategory" $subcategory "rank" $rank) }}
 
             {{- /* Full page record */ -}}
-            {{- $.Scratch.Add "algoliaindex" (
+            {{ $record := (
                 dict "objectID" $object_id 
                 "title" $title
                 "content" $content
@@ -27,11 +27,17 @@
                 "relpermalink" $page.RelPermalink
                 "full_url" $page.Permalink
                 "language" $page.Language.Lang
-                "tags" $tags
                 "category" $category
                 "subcategory" $subcategory
                 "rank" $rank
-            ) -}}
+            ) }}
+
+            {{ if $tags }}
+                {{ $tags_dict := (dict "tags" $tags) }}
+                {{ $record = merge $record $tags_dict }}
+            {{ end }}
+
+            {{- $.Scratch.Add "algoliaindex" $record }}
         {{ end }}
     {{ end }}
 
