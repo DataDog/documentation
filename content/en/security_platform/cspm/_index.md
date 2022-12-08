@@ -19,47 +19,37 @@ Strengthen your security posture and achieve continuous compliance by detecting,
 
 Assess the configuration of your cloud resources, such as security groups, storage buckets, load balancers, and databases against configuration rules. Use the Datadog Agent to review local configuration information from servers, containers, and Kubernetes clusters against Datadog's OOTB Posture Management [Cloud][1] and [Infrastructure][2] detection rules.
 
+Continuously monitor your compliance posture.
+
+These detection rules work with out-of-the-box integration configurations and map to controls within a compliance framework or industry benchmark. When new default configuration detection rules are added, they are automatically imported into your account.
+
 **SCREENSHOT**
 
 ### Maintain compliance with industry frameworks and benchmarks
 
-Each detection rule maps to one or more controls and requirements within a compliance standard or industry benchmark, such as the popular CIS compliance benchmarks for Docker and Kubernetes.
+Every detection rule maps to one or more controls and requirements within a compliance standard or industry benchmark, such as the popular CIS compliance benchmarks for Docker and Kubernetes.
 
-Continuously monitor your compliance posture.
+CSPM computes individual scores for each framework. This enables you to understand whether your cloud infrastructure is in compliance with aspects of PCI, GDPR, HIPAA, and more.
 
-Datadog CSPM maps configuration rules to several industry benchmarks and regulatory standards, computing individual scores for each framework. This allows users to understand whether their cloud infrastructure is in compliance with aspects of PCI, GDPR, HIPAA, and more.
+For each framework, CSPM computes individual scores that...
 
-These detection rules work with out-of-the-box integration configurations and map to controls within a compliance framework or industry benchmark. When new default configuration detection rules are added, they are automatically imported into your account.
-
-CSPM's detection rules map to one or more controls and requirements within a compliance standard or industry benchmark, such as the popular CIS compliance benchmarks for Docker and Kubernetes. This enables you to understand whether your cloud infrastructure is in compliance with certain aspects of PCI, GDPR, HIPAA, and more.
-
-When new default configuration detection rules are added, they are automatically imported into your account.
-
-These detection rules work with out-of-the-box integration configurations and map to controls within a compliance framework or industry benchmark. When new default configuration detection rules are added, they are automatically imported into your account.
+View compliance reports
 
 ## Manage out-of-the-box and custom configuration rules
 
 Use [out-of-the-box detection rules][7] to flag attacker techniques and potential misconfigurations so you can immediately take steps to remediate. Customize the rules by defining [how each rule scans your environment][6], [create custom configuration rules][8] (GCP only), and [set up real-time notifications for failed findings](#set-up-real-time-notifications).
 
+When new default configuration detection rules are added, they are automatically imported into your account.
+
 **SCREENSHOT**
 
 ### Set up real-time notifications
 
-Send real-time notifications to your teams when a failed finding is generated for a detection rule, so that they can take action to mitigate the risk. Notifications can be sent to Slack, email, PagerDuty, webhooks, and more.
+Send real-time notifications when a failed finding is generated for a detection rule, so that your teams can take action to mitigate the risk. Notifications can be sent to Slack, email, PagerDuty, webhooks, and more.
 
-Use message template variables and Markdown to to customize the notifications sent when a failed finding is generated.
+Use template variables and Markdown to customize the notification messages. Edit, disable, and delete existing notification rules, or create new rules based on severity and rule type.
 
-Customize the notification message using Markdown and message template variables.
-
-Create, edit, clone, enable, disable, delete, or view Notification Rules created by users in your organization.
-
-define the logic for when the notification rule is sent
-
-based on severity, rule type, 
-
-so that your team is alerted when...
-
-Use [notification variables][1] and Markdown to customize the notifications sent when a signal is generated. You can reference the tags associated with the signal and the event attributes in the notification. The list of available attributes is in the JSON section of the Overview tab in the signal panel.
+Use template variables and Markdown to customize the notification messages. Edit, disable, and delete existing notification rules, or create new rules and define the logic for when the notification is triggered based on severity and rule type.
 
 ## Review and remediate findings
 
@@ -72,10 +62,13 @@ Drill down deeper into details using the Security Findings Explorer.
 to review details on the configuration of a resource, the rules applied to the resource by CSPM, tags t
 
 Review the detailed configuration of a resource
+
 Review the detection rules applied to your resources by CSPM
+
 Review tags for more context about who owns the resource and where it resides in your environment
+
 Read descriptions and guidelines based on industry resources for remediating a misconfigured resource
-Use the “time selector” to explore your security configuration posture at any point in the past.
+Use the "time selector" to explore your security configuration posture at any point in the past.
 
 **SCREENSHOT**
 
