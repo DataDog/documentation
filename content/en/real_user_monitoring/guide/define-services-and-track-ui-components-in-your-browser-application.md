@@ -31,7 +31,7 @@ Whether your browser application is a single page application or is one that use
 - A view has a **URL** available at `@view.url`, such as `https://www.yourwebsite.com/about`.
 - A view has a **path** available at `@view.url_path`, such as `/about`.
 
-If, for example, automatically capturing page views by route change does not provide enough visibility, you can specify a different name for your pages. To do this, you can [track views manually][3] and assign them a name available at `@view.name`, such as "About Us".
+If, for example, automatically capturing page views by route change does not provide enough visibility, you can specify a different name for your pages. To do this, you can [track views manually][3] and assign them each a name available at `@view.name`, such as "About Us".
 
 ## Track timings during the rendering lifecycle of your pages
 
