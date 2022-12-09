@@ -914,6 +914,11 @@
   "CreateSecurityMonitoringRule": [
     {
       "group": "security_monitoring",
+      "suffix": "_923210813",
+      "description": "Create a cloud configuration rule returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
       "suffix": "",
       "description": "Create a detection rule returns \"OK\" response"
     },

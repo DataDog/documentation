@@ -1,0 +1,28 @@
+{
+  "name": "Example-Create_a_cloud_configuration_rule_returns_OK_response",
+  "filters": [],
+  "cases": [
+    {
+      "status": "info",
+      "notifications": []
+    }
+  ],
+  "options": {
+    "complianceRuleOptions": {
+      "regoRule": {
+        "policy": "package datadog",
+        "resourceTypes": [
+          "gcp_compute_disk"
+        ]
+      }
+    }
+  },
+  "complianceSignalOptions": {
+    "userActivationStatus": false,
+    "userGroupByFields": []
+  },
+  "message": "Test rule",
+  "tags": [],
+  "isEnabled": true,
+  "type": "cloud_configuration"
+}
