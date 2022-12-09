@@ -1,5 +1,7 @@
-import 'jquery';
-import 'bootstrap';
+// import 'jquery';
+// import 'bootstrap';
+
+import Modal from 'bootstrap/js/dist/modal';
 
 import './datadog-docs';
 import './utms';
@@ -16,12 +18,14 @@ import './components/bootstrap-dropdown-custom';
 import './components/navbar'; // should move this to websites-modules
 import './components/mobile-nav'; // should move this to websites-modules
 
-/* temporary - just for header get started */
 // Event handlers
-$('.main-nav .sign-up-trigger').on('click', function (event) {
-    event.preventDefault();
-    $('#signupModal').modal('show');
-});
+document.querySelectorAll('.sign-up-trigger').forEach(item => {
+    item.addEventListener('click', (event) => {
+        event.preventDefault();
+        const signupModal = new Modal(document.getElementById('signupModal'))
+        signupModal.show(item)
+    })
+})
 
 // TODO: split up code from datadog-docs.js into modules after webpack migration
 // import './components/sidenav';
