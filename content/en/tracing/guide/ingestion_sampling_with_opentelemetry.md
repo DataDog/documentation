@@ -49,9 +49,9 @@ At the SDK level, you can implement _head-based sampling_, which is when the sam
 
 [TraceIdRatioBased][5] and [ParentBased][6] are the SDK's built-in samplers that allow you to implement deterministic head-based sampling based on the `trace_id` at the SDK level.
 
-With head-based sampling, the APM metrics are computed **on the reduced traffic**, since only the sampled traffic is sent to the OpenTelemetry Collector or Datadog Agent, which is where the metrics calculation is done.
+With head-based sampling, the APM metrics are computed **on the sampled traffic**, since only the sampled traffic is sent to the OpenTelemetry Collector or Datadog Agent, which is where the metrics calculation is done.
 
-To get accurate stats, you can upscale the metrics by using [formulas and functions][7] in Datadog dashboards and monitors, provided you know the configured sampling rate in the SDK.
+To get accurate stats, you can upscale the metrics by using [formulas and functions][7] in Datadog dashboards and monitors, provided that you know the configured sampling rate in the SDK.
 
 Use the [ingestion volume control guide][8] to read more about the implications of setting up trace sampling on trace analytics monitors and metrics from spans.
 
@@ -63,7 +63,7 @@ The [Tail Sampling Processor][9] and [Probabilistic Sampling Processor][10] allo
 
 **Note**: Tail sampling's main limitation is that all spans for a given trace must be received by the same collector instance for effective sampling decisions. If the trace is distributed across multiple collector instances, there’s a risk that some parts of a trace are dropped whereas some other parts of the same trace are sent to Datadog.
 
-With collector-level tail-based sampling, the APM metrics are computed on the all traffic that arrives at the collector. Use the [ingestion volume control guide][11] to read more about the implications of setting up trace sampling on trace analytics monitors and metrics from spans.
+With collector-level tail-based sampling, the APM metrics are computed on the sampled traffic that the Datadog Exporter sees. Use the [ingestion volume control guide][11] to read more about the implications of setting up trace sampling on trace analytics monitors and metrics from spans.
 
 ## Monitor ingested volumes from Datadog UI
 
