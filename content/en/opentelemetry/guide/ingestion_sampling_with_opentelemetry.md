@@ -22,7 +22,7 @@ If your applications and services are instrumented with OpenTelemetry libraries,
 
 In the first and second scenario, [APM RED metrics][4] (request/errors counts and latency distributions by service, operation and resource) are computed in the Datadog Exporter. In the third case, the Datadog Agent computes these metrics.
 
-{{< img src="/tracing/guide/ingestion_otel/otel_apm_metrics_computation.png" alt="Otel APM Metrics computation" style="width:100%;" >}}
+{{< img src="/opentelemetry/guide/ingestion_otel/otel_apm_metrics_computation.png" alt="Otel APM Metrics computation" style="width:100%;" >}}
 
 Both APM metrics and distributed traces are useful for you to monitor your application performance. Metrics are useful to spot increases in latency or error rates for specific resources while distributed traces allow you to drill down to the individual request level.
 
@@ -41,7 +41,7 @@ With OpenTelemetry, you can configure sampling both in the OpenTelemetry librari
 - **Head-based Sampling** in the OpenTelemetry SDKs
 - **Tail-based Sampling** in the OpenTelemetry Collector
 
-{{< img src="/tracing/guide/ingestion_otel/otel_head_tail_based_sampling.png" alt="Otel APM Metrics computation" style="width:100%;" >}}
+{{< img src="/opentelemetry/guide/ingestion_otel/otel_head_tail_based_sampling.png" alt="Otel APM Metrics computation" style="width:100%;" >}}
 
 ### SDK-level sampling
 
