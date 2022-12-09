@@ -65,7 +65,7 @@ To begin profiling applications:
 Set the environment variables before calling PHP, for example:
 
 ```
-export DD_PROFILING_ENABLED=true
+export DD_PROFILING_ENABLED=true # Not required for v0.82.0+
 export DD_SERVICE=app-name
 export DD_ENV=prod
 export DD_VERSION=1.3.2
@@ -79,7 +79,7 @@ php hello.php
 Use the `env` directive in the php-fpm’s `www.conf` file, for example:
 
 ```
-env[DD_PROFILING_ENABLED] = true
+env[DD_PROFILING_ENABLED] = true # Not required for v0.82.0+
 env[DD_SERVICE] = app-name
 env[DD_ENV] = prod
 env[DD_VERSION] = 1.3.2
@@ -91,7 +91,7 @@ env[DD_VERSION] = 1.3.2
 Use `SetEnv` from the server config, virtual host, directory, or `.htaccess` file:
 
 ```
-SetEnv DD_PROFILING_ENABLED true
+SetEnv DD_PROFILING_ENABLED true # Not required for v0.82.0+
 SetEnv DD_SERVICE app-name
 SetEnv DD_ENV prod
 SetEnv DD_VERSION 1.3.2
