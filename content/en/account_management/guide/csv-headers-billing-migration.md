@@ -1,0 +1,32 @@
+---
+title: Migrating from old to new csv headers as of 12/12/2022
+kind: guide
+further_reading:
+- link: "/account_management/plan_and_usage/"
+  tag: "Documentation"
+  text: "Plan and Usage Settings"
+---
+The Revenue Engineering team is planning to update the headers for a subset of the Plan & Usage CSV files on December 12, 2022. The updates will allow for more consistent naming across the in-App experience and CSV files.
+
+If you have automation set up that relies on the CSV headers in the file you download from Billing and Usage, these headers are changing and automation needs to be updated.  Below are the two sections where the changes are taking place and a mapping of old CSV headers to new to help you make updates and migrate to the new setup.
+
+## Individual Organizations Summary
+
+1. [Header Mapping][1]
+2. Where the change is taking place:
+
+{{< img src="account_management/individual-orgs-summary-csv.jpg" alt="Download CSV in Individual Orgs Summary" >}}
+
+
+
+
+## Usage Trends
+
+1. [Header Mapping][2]
+2. Where the change is taking place:
+
+{{< img src="account_management/usage-trends-csv.jpeg" alt="Download CSV in Usage Trends" >}}
+
+
+[1]: /account_management/guide/csv_headers/individual-orgs-summary/
+[2]: /account_management/guide/csv_headers/usage-trends/
