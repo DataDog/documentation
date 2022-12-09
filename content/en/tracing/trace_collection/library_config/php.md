@@ -105,19 +105,24 @@ Whether to enable distributed tracing.
 Set an application’s environment, for example: `prod`, `pre-prod`, `stage`. Added in version `0.47.0`.
 
 `DD_PROFILING_ENABLED`
-: **INI**: Not available<br>
-**Default**: `0`<br>
-Enable the Datadog profiler. Added in version `0.69.0`. See [Enabling the PHP Profiler][4].
+: **INI**: `datadog.profiling.enabled`. INI available since `0.82.0`.<br>
+**Default**: `1`<br>
+Enable the Datadog profiler. Added in version `0.69.0`. See [Enabling the PHP Profiler][4]. For version `0.81.0` and below it defaulted to `0`.
+
+`DD_PROFILING_ENDPOINT_COLLECTION_ENABLED`
+: **INI**: `datadog.profiling.endpoint_collection_enabled`. INI available since `0.82.0`.<br>
+**Default**: `1`<br>
+Whether to enable the endpoint data collection in profiles. Added in version `0.79.0`.
 
 `DD_PROFILING_EXPERIMENTAL_CPU_TIME_ENABLED`
-: **INI**: Not available<br>
+: **INI**: `datadog.profiling.experimental_cpu_time_enabled`. INI available since `0.82.0`.<br>
 **Default**: `1`<br>
 Enable the experimental CPU profile type. Added in version `0.69.0`. For version `0.76` and below it defaulted to `0`.
 
 `DD_PROFILING_LOG_LEVEL`
-: **INI**: Not available<br>
+: **INI**: `datadog.profiling.log_level`. INI available since `0.82.0`.<br>
 **Default**: `off`<br>
-Set the profiler's log level. Acceptable values are `off`, `error`, `warn`, `info`, and `debug`. The profiler's logs are written to the standard error stream of the process. Added in version `0.69.0`.
+Set the profiler's log level. Acceptable values are `off`, `error`, `warn`, `info`, `debug`, and `trace`. The profiler's logs are written to the standard error stream of the process. Added in version `0.69.0`.
 
 `DD_PRIORITY_SAMPLING`
 : **INI**: `datadog.priority_sampling`<br>
