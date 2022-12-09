@@ -6,9 +6,9 @@ further_reading:
   tag: "Documentation"
   text: "Plan and Usage Settings"
 ---
-The headers for a subset of the Plan & Usage CSV files have been updated as of December 12, 2022. The updates allow for more consistent naming across the in-App experience and CSV files.
+The headers for a subset of the Plan & Usage CSV files have been updated as of December 12, 2022. The updates allow for more consistent naming across the in-app experience and CSV files.
 
-If you have automation set up that relies on the CSV headers in the file you download from Billing and Usage, these headers are changing and automation needs to be updated. Below are the two sections where the changes are taking place and a mapping of old CSV headers to new to help you make updates and migrate to the new setup.
+If you have automation that relies on the CSV headers in the file you download from Billing and Usage, these headers are changing and your automation needs to be updated. Below are the two sections where the changes are taking place and a mapping of old CSV headers to new to help you make updates and migrate to the new setup.
 
 ## Individual Organizations Summary
 
