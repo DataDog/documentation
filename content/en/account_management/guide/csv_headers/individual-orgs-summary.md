@@ -3,7 +3,7 @@ title: New CSV headers for Individual Organizations Summary
 kind: guide
 ---
 
-Please use this table to update CSV headers your automation depends on:
+Use this table to update CSV headers your automation depends on:
 
 |Old | New (as of 2022-12-12)|
 |----| ----------------------|
