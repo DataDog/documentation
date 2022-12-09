@@ -36,6 +36,16 @@ To instrument an application written in a language that does not yet have offici
 
 After you set up tracing, you are [one step from accessing profiling data by enabling Continuous Profiler][3]. Profiler is available for Java, Python, Go, Ruby, Node.js, (beta) PHP, (beta) .NET, and (beta) Linux.
 
+## APM Setup Tutorials
+
+The following tutorials provide a walk-through of setting up distributed tracing on a sample Python application on various infrastructure scenarios, with both automatic and custom instrumentation:
+
+{{< whatsnext desc="Tutorials: Enabling Tracing" >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-python-host" >}}Enabling Tracing on a Python Application on the Same Host as Datadog Agent{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-python-containers" >}}Enabling Tracing on a Python Application and Datadog Agent in Containers{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-python-container-agent-host" >}}Enabling Tracing for a Python Application in a Container and an Agent on a Host{{< /nextlink >}}
+{{< /whatsnext >}}
+
 [1]: /tracing/glossary/#trace
 [2]: /developers/community/libraries/#apm-tracing-client-libraries
 [3]: /profiler/enabling/

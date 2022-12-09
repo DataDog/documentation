@@ -1,0 +1,43 @@
+{{ $dot := . }}
+<div class="ci-cd-integrations">
+  <div class="container cards-dd col-num-4">
+    <div class="card-deck">
+      <a class="card" href="/continuous_testing/cicd_integrations/github_actions/">
+        <div class="card-body text-center py-2 px-1">
+          {{ partial "img.html" (dict "root" . "src" "integrations_logos/github.png" "class" "img-fluid" "alt" "github actions" "width" "200") }}
+        </div>
+      </a>
+      <a class="card" href="/continuous_testing/cicd_integrations/gitlab/">
+        <div class="card-body text-center py-2 px-1">
+          {{ partial "img.html" (dict "root" . "src" "integrations_logos/gitlab.png" "class" "img-fluid" "alt" "gitlab" "width" "200") }}
+        </div>
+      </a>
+      <a class="card" href="/continuous_testing/cicd_integrations/jenkins/">
+        <div class="card-body text-center py-2 px-1">
+          {{ partial "img.html" (dict "root" . "src" "integrations_logos/jenkins.png" "class" "img-fluid" "alt" "jenkins" "width" "200") }}
+        </div>
+      </a>
+      <a class="card" href="/continuous_testing/cicd_integrations/circleci_orb/">
+        <div class="card-body text-center py-2 px-1">
+          {{ partial "img.html" (dict "root" . "src" "integrations_logos/circleci.png" "class" "img-fluid" "alt" "circleci orb" "width" "200") }}
+        </div>
+      </a>
+      <br>
+      <a class="card" href="/continuous_testing/cicd_integrations/azure_devops_extension/">
+        <div class="card-body text-center py-2 px-1">
+          {{ partial "img.html" (dict "root" . "src" "integrations_logos/azure_devops.png" "class" "img-fluid" "alt" "azure devops extension" "width" "200") }}
+        </div>
+      </a>
+      <a class="card" href="/integrations/slack/">
+        <div class="card-body text-center py-2 px-1">
+          {{ partial "img.html" (dict "root" . "src" "integrations_logos/slack.png" "class" "img-fluid" "alt" "slack" "width" "200") }}
+        </div>
+      </a>
+      <a class="card" href="/integrations/jira/">
+        <div class="card-body text-center py-2 px-1">
+          {{ partial "img.html" (dict "root" . "src" "integrations_logos/jira.png" "class" "img-fluid" "alt" "jira" "width" "200") }}
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
