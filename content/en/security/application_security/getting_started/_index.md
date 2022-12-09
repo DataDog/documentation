@@ -2,23 +2,25 @@
 title: Getting Started
 kind: documentation
 type: multi-code-lang
+aliases:
+  - /security_platform/application_security/getting_started/
 further_reading:
-- link: "/security_platform/application_security/"
+- link: "/security/application_security/"
   tag: "Documentation"
   text: "Protect against Threats with Datadog Application Security Management"
-- link: "/security_platform/application_security/setup_and_configure/#compatibility"
+- link: "/security/application_security/setup_and_configure/#compatibility"
   tag: "Documentation"
   text: "Programming Language and Framework Compatibility"
-- link: "/security_platform/application_security/add-user-info/"
+- link: "/security/application_security/add-user-info/"
   tag: "Documentation"
   text: "Tracking user activity"
-- link: "/security_platform/default_rules/#cat-application-security"
+- link: "/security/default_rules/#cat-application-security"
   tag: "Documentation"
   text: "OOTB Application Security Management Rules"
-- link: "/security_platform/application_security/troubleshooting"
+- link: "/security/application_security/troubleshooting"
   tag: "Documentation"
   text: "Troubleshooting Application Security Management"
-- link: "/security_platform/application_security/how-appsec-works/"
+- link: "/security/application_security/how-appsec-works/"
   tag: "Documentation"
   text: "How Application Security Management Works in Datadog"
 ---
@@ -37,4 +39,4 @@ Select your application language for details on how to do these steps for your l
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security_platform/application_security/
+[1]: /security/application_security/

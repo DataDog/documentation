@@ -4,17 +4,19 @@ kind: documentation
 code_lang: ruby
 type: multi-code-lang
 code_lang_weight: 30
+aliases:
+  - /security_platform/application_security/getting_started/ruby
 further_reading:
-    - link: "/security_platform/application_security/add-user-info/"
+    - link: "/security/application_security/add-user-info/"
       tag: "Documentation"
       text: "Adding user information to traces"
     - link: 'https://github.com/DataDog/dd-trace-rb'
       tag: 'GitHub'
       text: 'Ruby Datadog Library source code'
-    - link: "/security_platform/default_rules/#cat-application-security"
+    - link: "/security/default_rules/#cat-application-security"
       tag: "Documentation"
       text: "OOTB Application Security Management Rules"
-    - link: "/security_platform/application_security/troubleshooting"
+    - link: "/security/application_security/troubleshooting"
       tag: "Documentation"
       text: "Troubleshooting Application Security Management"
 ---
@@ -206,12 +208,12 @@ env DD_APPSEC_ENABLED=true rails server
 
 {{% appsec-getstarted-2-canary %}}
 
-{{< img src="/security_platform/application_security/application-security-signal.png" alt="Security Signal details page showing tags, metrics, suggested next steps, and attacker IP addresses associated with a threat." style="width:100%;" >}}
+{{< img src="/security/application_security/application-security-signal.png" alt="Security Signal details page showing tags, metrics, suggested next steps, and attacker IP addresses associated with a threat." style="width:100%;" >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security_platform/application_security/setup_and_configure/?code-lang=ruby#compatibility
+[1]: /security/application_security/setup_and_configure/?code-lang=ruby#compatibility
 [2]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/UpgradeGuide.md#from-0x-to-10
 [3]: /tracing/trace_collection/dd_libraries/ruby/

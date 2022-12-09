@@ -1,6 +1,8 @@
 ---
 title: gcp_iam_service_account
 kind: documentation
+aliases:
+  - /security_platform/cspm/custom_rules/gcp_iam_service_account
 ---
 
 ## `ancestors`

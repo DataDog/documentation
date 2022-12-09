@@ -1,6 +1,8 @@
 ---
 title: gcp_compute_instance
 kind: documentation
+aliases:
+  - /security_platform/cspm/custom_rules/gcp_compute_instance
 ---
 
 ## `advanced_machine_features`

@@ -2,11 +2,12 @@
 title: Automate the Remediation of Detected Threats with Webhooks
 kind: guide
 further_reading:
-- link: "/security_platform/explorer/"
+- link: "/security/explorer/"
   tag: "Documentation"
   text: "Start investigating signals in the Signals Explorer"
 aliases:
   - /security_platform/guide/automate-the-remediation-of-detected-threats/
+  - /security_platform/cloud_siem/guide/automate-the-remediation-of-detected-threats/
 ---
 
 ## Overview
@@ -19,7 +20,7 @@ Choose a security scenario below to begin automating remediation.
 
 In a cloud environment, it’s important to delete a misconfigured resource as soon as it is created. In this scenario, you can configure a [webhook integration][2] to send a [webhook][2] to your cloud provider’s API management service.
 
-{{< img src="security_platform/security_monitoring/guide/automate-the-remediation-of-detected-threats/automation-diagram.png" alt="A diagram for a webhook sent to a cloud provider's API" >}}
+{{< img src="security/security_monitoring/guide/automate-the-remediation-of-detected-threats/automation-diagram.png" alt="A diagram for a webhook sent to a cloud provider's API" >}}
 
 Once configured, if an AWS user creates a poorly configured resource (for example, an overly permissive security group, or user role) within your AWS environment, Datadog Log Management ingests the related log, which triggers a security group–based Detection Rule. This process automatically sends the webhook’s JSON payload to the designated AWS API Gateway URL, which in turn activates an AWS Lambda function that automatically deletes the offending resource.
 
@@ -33,7 +34,7 @@ First, set up a [new Detection Rule][5] using the New Value detection method.
 
 Then, set up a [webhook][2] that sends a payload to your cloud’s identity and access management (IAM) service to ban the unknown IP when this rule is triggered.
 
-{{< img src="security_platform/security_monitoring/guide/automate-the-remediation-of-detected-threats/webhook-ip.png" alt="A new webhook that bans an unknown IP address" >}}
+{{< img src="security/security_monitoring/guide/automate-the-remediation-of-detected-threats/webhook-ip.png" alt="A new webhook that bans an unknown IP address" >}}
 
 The following example illustrates what the relevant webhook payload could look like when a security signal is produced by Datadog:
 
@@ -88,10 +89,10 @@ Datadog generates the Security Signal, which details the offense as well as the 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security_platform/cloud_siem/
+[1]: /security/cloud_siem/
 [2]: https://app.datadoghq.com/account/settings#integrations/webhooks
-[3]: /security_platform/detection_rules/
+[3]: /security/detection_rules/
 [4]: https://www.datadoghq.com/blog/new-term-detection-method-datadog/
-[5]: /security_platform/cloud_siem/log_detection_rules/?tab=threshold#new-term
+[5]: /security/cloud_siem/log_detection_rules/?tab=threshold#new-term
 [6]: https://www.datadoghq.com/blog/detect-abuse-of-functionality-with-datadog/
-[7]: /security_platform/cloud_siem/log_detection_rules/?tab=threshold#define-a-search-query
+[7]: /security/cloud_siem/log_detection_rules/?tab=threshold#define-a-search-query

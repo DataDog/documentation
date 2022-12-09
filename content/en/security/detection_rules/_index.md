@@ -4,11 +4,12 @@ kind: documentation
 aliases:
   - /security_monitoring/detection_rules/
   - /cloud_siem/detection_rules/
+  - /security_platform/detection_rules/
 further_reading:
 - link: "/cloud_siem/default_rules"
   tag: "Documentation"
   text: "Explore default detection rules"
-- link: "/security_platform/notifications/"
+- link: "/security/notifications/"
   tag: "Documentation"
   text: "Learn more about Security notifications"
 - link: "https://www.datadoghq.com/blog/detect-abuse-of-functionality-with-datadog/"
@@ -45,7 +46,7 @@ The free text search filters Detection Rules by text in the rule name or query. 
 
 Use facets in the left panel to scope a search query by value. For example, if you have several rule types, such as `log detection` or `cloud configuration`, filter by `only` to see rules by rule type.
 
-{{< img src="security_platform/security_monitoring/detection_rules/rule_type_filter.png" alt="Filtering by rule type, such as a log detection or cloud configuration, in Datadog" style="width:80%;" >}}
+{{< img src="security/security_monitoring/detection_rules/rule_type_filter.png" alt="Filtering by rule type, such as a log detection or cloud configuration, in Datadog" style="width:80%;" >}}
 
 You can also filter by facets such as `source` and `severity` to help when investigating and triaging incoming issues. To include all facets within a category in search again, hover your mouse over a value in the panel and click **all**.
 
@@ -93,13 +94,12 @@ To restore general access to a rule with restricted access, follow the steps bel
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-
-[1]: /security_platform/default_rules/
-[2]: /security_platform/cloud_siem/
-[3]: /security_platform/cloud_siem/log_detection_rules/
-[4]: /security_platform/cspm/
-[5]: /security_platform/cloud_workload_security/
-[6]: /security_platform/application_security/
+[1]: /security/default_rules/
+[2]: /security/cloud_siem/
+[3]: /security/cloud_siem/log_detection_rules/
+[4]: /security/cspm/
+[5]: /security/cloud_workload_security/
+[6]: /security/application_security/
 [7]: /tracing/
 [8]: /agent/
 [9]: https://app.datadoghq.com/security/configuration/rules

@@ -3,8 +3,10 @@ title: Datadog Resource Catalog
 kind: documentation
 is_beta: true
 private: true
+aliases:
+  - /security_platform/cspm/resource_catalog
 further_reading:
-- link: "/security_platform/cspm/custom_rules/schema/"
+- link: "/security/cspm/custom_rules/schema/"
   tag: "Documentation"
   text: "Cloud Resource Schema"
 ---
@@ -13,7 +15,7 @@ further_reading:
   Resource Catalog is in private beta. Fill out this form if you would like to access it.
 {{< /beta-callout >}}
 
-{{< img src="security_platform/cspm/resource_catalog/resource_catalog.png" alt="Resource Catalog map view displaying host and cloud resources grouped by category and region." style="width:100%;" >}}
+{{< img src="security/cspm/resource_catalog/resource_catalog.png" alt="Resource Catalog map view displaying host and cloud resources grouped by category and region." style="width:100%;" >}}
 
 ## Overview
 
@@ -71,6 +73,6 @@ Click the **Share** button and select **Share Findings** to share a link to the 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security_platform/cloud_security_management
+[1]: /security/cloud_security_management
 [2]: https://app.datadoghq.com/infrastructure/catalog
 [3]: /integrations/#cat-notification

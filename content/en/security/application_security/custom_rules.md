@@ -1,17 +1,19 @@
 ---
 title: Custom Detection Rules
 kind: documentation
+aliases:
+  - /security_platform/application_security/custom_rules
 further_reading:
-- link: "/security_platform/application_security/"
+- link: "/security/application_security/"
   tag: "Documentation"
   text: "Protect against threats with Datadog Application Security Management"
-- link: "/security_platform/application_security/event_rules/"
+- link: "/security/application_security/event_rules/"
   tag: "Documentation"
   text: "Creating event rules"
-- link: "/security_platform/application_security/troubleshooting"
+- link: "/security/application_security/troubleshooting"
   tag: "Documentation"
   text: "Troubleshoot common Datadog Application Security Management issues"
-- link: "/security_platform/notifications/variables/"
+- link: "/security/notifications/variables/"
   tag: "Documentation"
   text: "Learn more about Security notification variables"
 - link: "/tracing/trace_explorer/query_syntax/"
@@ -174,9 +176,9 @@ Use the Tag Resulting Signals dropdown to tag your signals with different tags. 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security_platform/default_rules/#cat-application-security
+[1]: /security/default_rules/#cat-application-security
 [2]: https://app.datadoghq.com/security/appsec/signals-rules
 [3]: /tracing/trace_explorer/query_syntax/
 [4]: /monitors/notify/?tab=is_alert#integrations
-[5]: /security_platform/notifications/variables/
-[6]: /security_platform/notifications/variables/#template-variables
+[5]: /security/notifications/variables/
+[6]: /security/notifications/variables/#template-variables

@@ -1,14 +1,16 @@
 ---
 title: Getting Started with CSPM
 kind: documentation
+aliases:
+  - /security_platform/cspm/getting_started
 further_reading:
-- link: "security_platform/default_rules"
+- link: "security/default_rules"
   tag: "Documentation"
   text: "Explore default cloud configuration detection rules"
-- link: "security_platform/cspm/findings"
+- link: "security/cspm/findings"
   tag: "Documentation"
   text: "Search and explore CSPM findings"
-- link: "security_platform/cspm/frameworks_and_benchmarks"
+- link: "security/cspm/frameworks_and_benchmarks"
   tag: "Documentation"
   text: "Learn about frameworks and industry benchmarks"
 ---
@@ -23,7 +25,7 @@ Cloud Security Posture Management is not currently available in this site.
 
 Navigate to the [Getting Started page][1] to configure your environment for scanning.
 
-{{< img src="security_platform/cspm/getting_started/posture-management-setup.png" alt="Setup page for CSPM" style="width:100%;">}}
+{{< img src="security/cspm/getting_started/posture-management-setup.png" alt="Setup page for CSPM" style="width:100%;">}}
 
 ## Setup
 
@@ -44,5 +46,5 @@ Evaluate the security posture of your hosts and containers. This section guides 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/security/configuration?config_k9_configuration=true&detect-threats=apache&secure-cloud-environment=amazon-web-services&secure-hosts-and-containers=kubernetes&selected-products=compliance_monitoring
-[2]: /security_platform/default_rules#cat-posture-management-cloud
-[3]: /security_platform/default_rules/#cat-posture-management-infra
+[2]: /security/default_rules#cat-posture-management-cloud
+[3]: /security/default_rules/#cat-posture-management-infra

@@ -8,14 +8,15 @@ aliases:
   - /security_platform/security_monitoring/
   - /security_platform/security_monitoring/getting_started
   - /security_platform/getting_started/
+  - /security_platform/cloud_siem/getting_started
 further_reading:
-- link: "/security_platform/default_rules"
+- link: "/security/default_rules"
   tag: "Documentation"
   text: "Explore default detection rules"
-- link: "/security_platform/explorer"
+- link: "/security/explorer"
   tag: "Documentation"
   text: "Learn about the Security Signals Explorer"
-- link: "/security_platform/cloud_siem/guide/aws-config-guide-for-cloud-siem/"
+- link: "/security/cloud_siem/guide/aws-config-guide-for-cloud-siem/"
   tag: "Documentation"
   text: "AWS Configuration Guide for Cloud SIEM"
 ---
@@ -35,7 +36,7 @@ If you already have a logging source, follow the [in-app onboarding][2] to begin
 
 Datadog’s [Log Collection documentation][3] provides detailed information on collecting logs from many different sources into Datadog. All ingested logs are first parsed and enriched. In real time, Detection Rules apply to all processed logs to maximize detection coverage without any of the traditionally associated performance or cost concerns of indexing all of your log data. [Read more about Datadog’s Logging without Limits™][4].
 
-{{< img src="security_platform/security_monitoring/getting_started/ingest_logs_overview.png" alt="Ingest Logs" >}}
+{{< img src="security/security_monitoring/getting_started/ingest_logs_overview.png" alt="Ingest Logs" >}}
 
 ## Review Detection Rules
 
@@ -49,11 +50,11 @@ When a threat is detected with a Detection Rule, a Security Signal is generated.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security_platform/cloud_siem/guide/aws-config-guide-for-cloud-siem
+[1]: /security/cloud_siem/guide/aws-config-guide-for-cloud-siem
 [2]: https://app.datadoghq.com/security/onboarding
 [3]: /logs/log_collection/
 [4]: https://www.datadoghq.com/blog/logging-without-limits/
-[5]: /security_platform/default_rules/#cat-cloud-siem
+[5]: /security/default_rules/#cat-cloud-siem
 [6]: /security_monitoring/detection_rules/
 [7]: https://app.datadoghq.com/security
 [8]: /security_monitoring/explorer/

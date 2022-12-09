@@ -1,14 +1,16 @@
 ---
 title: Notifications
 kind: documentation
+aliases:
+  - /security_platform/notifications/
 further_reading:
-- link: "/security_platform/notifications/rules/"
+- link: "/security/notifications/rules/"
   tag: "Documentation"
   text: "Set up and configure notification rules"
-- link: "/security_platform/notifications/variables/"
+- link: "/security/notifications/variables/"
   tag: "Documentation"
   text: "Learn more about notification variables to customize notifications"
-- link: "/security_platform/detection_rules/"
+- link: "/security/detection_rules/"
   tag: "Documentation"
   text: "Explore security detection rules"
 ---
@@ -63,6 +65,6 @@ Notification rules allow you to set general alerting preferences so that you don
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security_platform/notifications/variables/
-[2]: /security_platform/detection_rules/#creating-and-managing-detection-rules
-[3]: /security_platform/notifications/rules/
+[1]: /security/notifications/variables/
+[2]: /security/detection_rules/#creating-and-managing-detection-rules
+[3]: /security/notifications/rules/

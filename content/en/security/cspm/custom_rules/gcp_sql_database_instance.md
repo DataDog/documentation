@@ -1,6 +1,8 @@
 ---
 title: gcp_sql_database_instance
 kind: documentation
+aliases:
+  - /security_platform/cspm/custom_rules/gcp_sql_database_instance
 ---
 
 ## `ancestors`

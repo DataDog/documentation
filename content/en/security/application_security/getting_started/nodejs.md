@@ -4,17 +4,19 @@ kind: documentation
 code_lang: nodejs
 type: multi-code-lang
 code_lang_weight: 50
+aliases:
+  - /security_platform/application_security/getting_started/nodejs
 further_reading:
-    - link: "/security_platform/application_security/add-user-info/"
+    - link: "/security/application_security/add-user-info/"
       tag: "Documentation"
       text: "Adding user information to traces"
     - link: 'https://github.com/DataDog/dd-trace-js'
       tag: 'GitHub'
       text: 'NodeJS Datadog Library source code'
-    - link: "/security_platform/default_rules/#cat-application-security"
+    - link: "/security/default_rules/#cat-application-security"
       tag: "Documentation"
       text: "OOTB Application Security Management Rules"
-    - link: "/security_platform/application_security/troubleshooting"
+    - link: "/security/application_security/troubleshooting"
       tag: "Documentation"
       text: "Troubleshooting Application Security Management"
 ---
@@ -143,11 +145,11 @@ DD_APPSEC_ENABLED=true node app.js
 
 {{% appsec-getstarted-2-canary %}}
 
-{{< img src="/security_platform/application_security/application-security-signal.png" alt="Security Signal details page showing tags, metrics, suggested next steps, and attacker IP addresses associated with a threat." style="width:100%;" >}}
+{{< img src="/security/application_security/application-security-signal.png" alt="Security Signal details page showing tags, metrics, suggested next steps, and attacker IP addresses associated with a threat." style="width:100%;" >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
-[2]: /security_platform/application_security/setup_and_configure/?code-lang=nodejs#compatibility
+[2]: /security/application_security/setup_and_configure/?code-lang=nodejs#compatibility

@@ -1,11 +1,13 @@
 ---
 title: Signal Correlation Rules
 type: documentation
+aliases:
+ - security_platform/cloud_siem/signal_correlation_rules
 further_reading:
 - link: "/cloud_siem/explorer/"
   tag: "Documentation"
   text: "Learn about the Security Signals Explorer"
-- link: "/security_platform/notifications/variables/"
+- link: "/security/notifications/variables/"
   tag: "Documentation"
   text: "Learn more about Security notification variables"
 ---
@@ -37,7 +39,7 @@ Navigate to [Detection Rules][1] and click **+ New Rule**. In the *Select a rule
 
 #### Trigger
 
-{{< img src="security_platform/security_monitoring/detection_rules/define_rule_case.png" alt="The set rule cases section showing the trigger, severity, and notification fields" >}}
+{{< img src="security/security_monitoring/detection_rules/define_rule_case.png" alt="The set rule cases section showing the trigger, severity, and notification fields" >}}
 
 Rule cases are evaluated as case statements. Thus, the first case to match generates the signal. An example of a rule case is`a > 3`, where `a` is the rule name. Click and drag your rule cases to manipulate their ordering.
 

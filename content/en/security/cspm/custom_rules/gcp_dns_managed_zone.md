@@ -1,6 +1,8 @@
 ---
 title: gcp_dns_managed_zone
 kind: documentation
+aliases:
+  - /security_platform/cspm/custom_rules/gcp_dns_managed_zone
 ---
 
 ## `ancestors`

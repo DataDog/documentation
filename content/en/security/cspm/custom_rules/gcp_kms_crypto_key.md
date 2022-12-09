@@ -1,6 +1,8 @@
 ---
 title: gcp_kms_crypto_key
 kind: documentation
+aliases:
+  - /security_platform/cspm/custom_rules/gcp_kms_crypto_key
 ---
 
 ## `ancestors`

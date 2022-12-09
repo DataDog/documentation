@@ -1,17 +1,19 @@
 ---
 title: Troubleshooting Application Security Management
 kind: documentation
+aliases:
+  - /security_platform/application_security/troubleshooting
 further_reading:
-- link: "/security_platform/application_security/"
+- link: "/security/application_security/"
   tag: "Documentation"
   text: "Monitoring Threats with Datadog Application Security Management"
-- link: "/security_platform/application_security/getting_started/"
+- link: "/security/application_security/getting_started/"
   tag: "Documentation"
   text: "Get Started Using Application Security Management to Detect Threats"
-- link: "/security_platform/application_security/setup_and_configure/#compatibility"
+- link: "/security/application_security/setup_and_configure/#compatibility"
   tag: "Documentation"
   text: "Programming Language and Framework Compatibility"
-- link: "/security_platform/application_security/how-appsec-works/"
+- link: "/security/application_security/how-appsec-works/"
   tag: "Documentation"
   text: "How Application Security Management Works in Datadog"
 ---
@@ -175,7 +177,7 @@ For [Java][1], if you are using any of the following technologies, the respectiv
 - spring-web
 - tomcat
 
-[1]: /security_platform/application_security/setup_and_configure/
+[1]: /security/application_security/setup_and_configure/
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
 
@@ -183,15 +185,14 @@ For [.NET][1], the ASP.NET integration is required.
 
 **Note:** If ASP.NET Core is disabled, ASM should still work with this framework.
 
-
-[1]: /security_platform/application_security/setup_and_configure/
+[1]: /security/application_security/setup_and_configure/
 {{< /programming-lang >}}
 {{< programming-lang lang="PHP" >}}
 
 There are no required integrations for [PHP][1].
 <p></p>
 
-[1]: /security_platform/application_security/setup_and_configure/
+[1]: /security/application_security/setup_and_configure/
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
@@ -205,7 +206,7 @@ The following [Go][1] frameworks should be instrumented using the out-of-the-box
 
 If your framework is not supported, [create a new issue][7] in the Go repository.
 
-[1]: /security_platform/application_security/setup_and_configure/
+[1]: /security/application_security/setup_and_configure/
 [2]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc#example-package-Server
 [3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http#example-package
 [4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux#example-package
@@ -218,7 +219,7 @@ If your framework is not supported, [create a new issue][7] in the Go repository
 For [NodeJS][1], the HTTP integration is required.
 <p></p>
 
-[1]: /security_platform/application_security/setup_and_configure/
+[1]: /security/application_security/setup_and_configure/
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
@@ -226,8 +227,7 @@ For [Ruby][1], the [Rack][2] integration is required. Ruby tracer version `1.0.0
 
 **Note:** Rack can be manually added or automatically added with the [Rails][4] or [Sinatra][5] integration. If manually added, the tracer middleware must appear before the security middleware in the Rack stack.
 
-
-[1]: /security_platform/application_security/setup_and_configure/
+[1]: /security/application_security/setup_and_configure/
 [2]: /tracing/trace_collection/dd_libraries/ruby/#rack
 [3]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/UpgradeGuide.md#from-0x-to-10
 [4]: /tracing/trace_collection/dd_libraries/ruby/#rails
@@ -240,7 +240,7 @@ For [Python][1], the WSGI integration is required along with the integration for
 framework you're using, such as the Django or Flask integration.
 <p></p>
 
-[1]: /security_platform/application_security/setup_and_configure/
+[1]: /security/application_security/setup_and_configure/
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -408,7 +408,7 @@ If you don’t see ASM threat information in the [Trace and Signals Explorer][2]
 [1]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
 [2]: https://app.datadoghq.com/security/appsec/
 [3]: /tracing/troubleshooting/tracer_startup_logs/
-[4]: /security_platform/application_security/getting_started/nodejs/?tab=dockercli
+[4]: /security/application_security/getting_started/nodejs/?tab=dockercli
 [5]: /tracing/troubleshooting/
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
@@ -555,7 +555,7 @@ If you continue to have issues with ASM, contact [Datadog support][1] with the f
 [4]: /tracing/troubleshooting/
 [5]: /tracing/troubleshooting/#confirm-apm-setup-and-agent-status
 [6]: /tracing/troubleshooting/connection_errors/
-[7]: /security_platform/default_rules/security-scan-detected/
+[7]: /security/default_rules/security-scan-detected/
 [8]: /tracing/troubleshooting/tracer_startup_logs/
 [9]: /tracing/glossary/#spans
 [10]: /tracing/troubleshooting/#tracer-debug-logs

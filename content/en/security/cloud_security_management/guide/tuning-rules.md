@@ -2,7 +2,8 @@
 title: Fine-tuning CWS security signals
 kind: guide
 aliases:
-- /security_platform/cloud_workload_security/guide/tuning-rules/
+  - /security_platform/cloud_workload_security/guide/tuning-rules/
+  - /security_platform/cloud_security_management/guide/tuning-rules/
 ---
 
 ## Overview	
@@ -145,7 +146,7 @@ In some cases, CWS rules might also detect expected activity, for example from y
 
 Open the signal details side panel and navigate from one tab to the other to gain context, including key process metadata like command-line arguments and environment variable keys. For containerized workloads, the information includes the relevant image, pod, Kubernetes cluster, and more.
 
-{{< img src="/security_platform/cws/guide/cws-tuning-rules.png" alt="A signal side-panel showing events, logs, and other data related to a signal." width="75%">}}
+{{< img src="/security/cws/guide/cws-tuning-rules.png" alt="A signal side-panel showing events, logs, and other data related to a signal." width="75%">}}
 
 To define suppression criteria, click on any attribute value and select **Never trigger signals for**.
 

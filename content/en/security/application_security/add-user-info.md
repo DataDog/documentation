@@ -1,11 +1,13 @@
 ---
 title: Tracking User Activity
 kind: documentation
+aliases:
+  - /security_platform/application_security/add-user-info
 further_reading:
-- link: "/security_platform/application_security/"
+- link: "/security/application_security/"
   tag: "Documentation"
   text: "Protect against threats with Datadog Application Security Management"
-- link: "/security_platform/application_security/setup_and_configure/"
+- link: "/security/application_security/setup_and_configure/"
   tag: "Documentation"
   text: "Other setup considerations and configuration options"
 ---

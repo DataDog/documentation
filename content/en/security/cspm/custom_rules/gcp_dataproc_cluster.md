@@ -1,6 +1,8 @@
 ---
 title: gcp_dataproc_cluster
 kind: documentation
+aliases:
+  - /security_platform/cspm/custom_rules/gcp_dataproc_cluster
 ---
 
 ## `ancestors`

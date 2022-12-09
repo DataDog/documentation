@@ -1,6 +1,8 @@
 ---
 title: gcp_compute_firewall
 kind: documentation
+aliases:
+  - /security_platform/cspm/custom_rules/gcp_compute_firewall
 ---
 
 ## `allowed`

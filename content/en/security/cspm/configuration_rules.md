@@ -1,6 +1,8 @@
 ---
 title: OOTB Rules
 kind: documentation
+aliases:
+  - /security_platform/cspm/configuration_rules
 ---
 
 {{< site-region region="gov" >}}
@@ -13,7 +15,7 @@ Cloud Security Posture Management is not currently available in this site.
 
 Datadog provides [out-of-the-box (OOTB) detection rules][1] to flag potential misconfigurations and help improve your security posture. OOTB detection rules follow the same [conditional logic][2] as all Datadog Security detection rules.
 
-{{< img src="security_platform/cspm/configuration_rules/configuration_rule.png" alt="A configuration rule in Datadog" width="65%">}}
+{{< img src="security/cspm/configuration_rules/configuration_rule.png" alt="A configuration rule in Datadog" width="65%">}}
 
 Datadog Cloud Security Posture Management (CSPM) uses the following rule types to validate the configuration of your cloud infrastructure:
 
@@ -24,14 +26,13 @@ Datadog Cloud Security Posture Management (CSPM) uses the following rule types t
 These detection rules work with out-of-the-box integration configurations and map to controls within a [compliance framework or industry benchmark][4]. When new default configuration detection rules are added, they are automatically imported into your account.
 
 {{< whatsnext desc="To get started, choose a type of rule based on your environment:">}}
-  {{< nextlink href="/security_platform/default_rules/#cat-posture-management-cloud">}}<u>Cloud Configuration</u>{{< /nextlink >}}
-  {{< nextlink href="/security_platform/default_rules/#cat-posture-management-infra">}}<u>Infrastructure Configuration</u>{{< /nextlink >}}
+  {{< nextlink href="/security/default_rules/#cat-posture-management-cloud">}}<u>Cloud Configuration</u>{{< /nextlink >}}
+  {{< nextlink href="/security/default_rules/#cat-posture-management-infra">}}<u>Infrastructure Configuration</u>{{< /nextlink >}}
 {{< /whatsnext >}}
 
-
-[1]: /security_platform/default_rules/#cat-posture-management-cloud
-[2]: /security_platform/detection_rules/
+[1]: /security/default_rules/#cat-posture-management-cloud
+[2]: /security/detection_rules/
 [3]: https://docs.datadoghq.com/security_monitoring/default_rules/aws-cloudfront-distributions-encrypted/
-[4]: /security_platform/cspm/frameworks_and_benchmarks
-[5]: /security_platform/default_rules/#cat-posture-management-infra
+[4]: /security/cspm/frameworks_and_benchmarks
+[5]: /security/default_rules/#cat-posture-management-infra
 [6]: https://docs.datadoghq.com/security_monitoring/default_rules/cis-docker-1.2.0-3.22/

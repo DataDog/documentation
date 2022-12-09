@@ -3,14 +3,15 @@ title: How Application Security Management Works in Datadog
 kind: documentation
 aliases:
   - /security_platform/guide/how-appsec-works/
+  - /security_platform/application_security/how-appsec-works/
 further_reading:
-- link: "/security_platform/application_security/setup_and_configure/#compatibility"
+- link: "/security/application_security/setup_and_configure/#compatibility"
   tag: "Documentation"
   text: "Learn more about language and framework compatibility"
 - link: "https://www.datadoghq.com/blog/datadog-application-security/"
   tag: "Blog"
   text: "Introducing Datadog Application Security"
-- link: "/security_platform/application_security/getting_started/"
+- link: "/security/application_security/getting_started/"
   tag: "Documentation"
   text: "Get started with Application Security Management"
 ---
@@ -48,7 +49,7 @@ Full threat monitoring capabilities are available for Lambda functions. You can 
 
 Datadog ASM uses processes already contained in the Agent and APM, so there are negligible performance implications when using it. When APM is enabled, the Datadog Library generates distributed traces. Datadog ASM flags security activity in traces by using known attack patterns. Correlation between the attack patterns and the execution context provided by the distributed trace triggers security signals based on detection rules.
 
-{{< img src="security_platform/application_security/How_Application_Security_Works_d1.png" alt="A diagram illustrates that the Datadog tracer library operates at the application service level and sends traces to the Datadog backend. The Datadog backend flags actionable security signals and sends a notification to the relevant application, such as PagerDuty, Jira or Slack." >}}
+{{< img src="security/application_security/How_Application_Security_Works_d1.png" alt="A diagram illustrates that the Datadog tracer library operates at the application service level and sends traces to the Datadog backend. The Datadog backend flags actionable security signals and sends a notification to the relevant application, such as PagerDuty, Jira or Slack." >}}
 
 ## Data Sampling and Retention
 
@@ -85,7 +86,7 @@ You can block attackers' IPs that are flagged in ASM Security Signals temporaril
 From there, all services already protected by ASM block incoming requests performed by the blocked IP, for the specified duration. All blocked traces are tagged with `security_response.block_ip` and displayed in the [Trace Explorer][14]. Services where ASM is disabled aren't protected.
 
 
-{{< img src="/security_platform/application_security/asm-blocking-ui.png" alt="A security signal panel in Datadog ASM, allowing to block the attackers' IPs" width="75%">}}
+{{< img src="/security/application_security/asm-blocking-ui.png" alt="A security signal panel in Datadog ASM, allowing to block the attackers' IPs" width="75%">}}
 
 ## Coverage
 
@@ -116,15 +117,15 @@ Datadog ASM includes over 100 attack patterns that help protect against [many di
 [2]: /tracing/services/service_page/#security
 [3]: /tracing/trace_explorer/trace_view/?tab=security#more-information
 [4]: /tracing/trace_collection/
-[5]: /security_platform/application_security/getting_started/#prerequisites
+[5]: /security/application_security/getting_started/#prerequisites
 [6]: /serverless/installation/java/?tab=serverlessframework
 [7]: /tracing/trace_pipeline/trace_retention/
 [8]: /tracing/configure_data_security/?tab=http
-[9]: /security_platform/cloud_siem/guide/how-to-setup-security-filters-using-cloud-siem-api/
+[9]: /security/cloud_siem/guide/how-to-setup-security-filters-using-cloud-siem-api/
 [10]: https://owasp.org/www-project-modsecurity-core-rule-set/
-[11]: /security_platform/default_rules/#cat-application-security
+[11]: /security/default_rules/#cat-application-security
 [12]: /tracing/
 [13]: /agent/
 [14]: https://app.datadoghq.com/security/appsec/traces?query=%40appsec.blocked%3Atrue
 [15]: https://app.datadoghq.com/security/appsec/event-rules
-[16]: /security_platform/cloud_siem/
+[16]: /security/cloud_siem/

@@ -1,11 +1,13 @@
 ---
 title: Variables
 kind: documentation
+aliases:
+  - /security_platform/notifications/variables
 further_reading:
-- link: "/security_platform/detection_rules/"
+- link: "/security/detection_rules/"
   tag: "Documentation"
   text: "Explore security detection rules"
-- link: "/security_platform/notifications/"
+- link: "/security/notifications/"
   tag: "Documentation"
   text: "Learn more about Security notifications"
 ---
@@ -262,6 +264,6 @@ If `host.name` matches `<HOST_NAME>`, the template outputs:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security_platform/detection_rules/#creating-and-managing-detection-rules
+[1]: /security/detection_rules/#creating-and-managing-detection-rules
 [2]: /monitors/guide/template-variable-evaluation/
 [3]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
