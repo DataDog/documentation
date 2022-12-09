@@ -5,7 +5,7 @@ kind: guide
 
 CSV header changes are in effect as of December 12, 2022. Use this table to update CSV headers your automation depends on:
 
-|Old | New (as of 2022-12-12)|
+| Old | New (as of December 12, 2022) |
 |----| ----------------------|
 |Ingested Logs (Sum) | Ingested Logs (live & rehydrated) (Sum)|
 |Indexed Logs (Sum) | Indexed Logs (live & rehydrated) (Sum)|

@@ -1,5 +1,5 @@
 ---
-title: Migrating from Old to Plan & Usage CSV Headers as of December 12, 2022
+title: Migrating to new Plan & Usage CSV Headers as of December 12, 2022
 kind: guide
 further_reading:
 - link: "/account_management/plan_and_usage/"
@@ -13,14 +13,14 @@ If you have automation set up that relies on the CSV headers in the file you dow
 ## Individual Organizations Summary
 
 1. [Header Mapping][1]
-2. Where the change is taking place:
+2. Where to download the CSV:
 
 {{< img src="account_management/individual-orgs-summary-csv.jpg" alt="Download CSV in Individual Orgs Summary" >}}
 
 ## Usage Trends
 
 1. [Header Mapping][2]
-2. Where the change is taking place:
+2. Where to download the CSV:
 
 {{< img src="account_management/usage-trends-csv.jpeg" alt="Download CSV in Usage Trends" >}}
 
