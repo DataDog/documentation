@@ -51,7 +51,7 @@ Datadog で[監査証跡モニター][1]を作成するには、メインナビ�
 
 また、アラートが変更されたときにサービスやチームに通知するかどうかを、`Do Not Notify` ドロップダウンオプションで選択することができます。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
