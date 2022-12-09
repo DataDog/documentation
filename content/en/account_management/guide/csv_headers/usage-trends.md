@@ -3,7 +3,7 @@ title: New CSV headers for Usage Trends
 kind: guide
 ---
 
-Use this table to update CSV headers your automation depends on:
+CSV header changes are in effect as of December 12, 2022. Use this table to update CSV headers your automation depends on:
 
 | Old | New (as of 2022-12-12) |
 |-----|------------------------|
