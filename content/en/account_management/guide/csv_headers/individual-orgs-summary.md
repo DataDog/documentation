@@ -4,6 +4,7 @@ kind: guide
 ---
 
 Please use this table to update CSV headers your automation depends on:
+
 |Old | New (as of 2022-12-12)|
 |----| ----------------------|
 |Ingested Logs (Sum) | Ingested Logs (live & rehydrated) (Sum)|
