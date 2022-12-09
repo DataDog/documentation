@@ -14,63 +14,65 @@ further_reading:
 
 ## Overview
 
-To collect traces from your ECS containers, update your Agent's and your application container's Task Definitions with the instructions below.
+To collect traces from your ECS containers, update the Task Definitions for both your Agent and your application container as described below.
 
-This can be done by modifying the previously used [Task Definition file][4] and [registering your updated Task Definition][5]. Alternatively you can edit the Task Definition directly from the Amazon Web UI.
+One option for doing this is to modify the previously used [Task Definition file][4] and [register your updated Task Definition][5]. Alternatively, you can edit the Task Definition directly from the Amazon Web UI.
 
 Once enabled, the Datadog Agent container collects the traces emitted from the other application containers on the same host as itself.
 
 ## Configure the Datadog Agent to accept traces
-To collect all logs from your running ECS containers, update your Agent's Task Definition from the [original ECS Setup][6] with the configuration below.
+1. To collect all traces from your running ECS containers, update your Agent's Task Definition from the [original ECS Setup][6] with the configuration below.
 
-Use [datadog-agent-ecs-apm.json][3] as a reference point for the required base configuration. In the Task Definition for Datadog Agent container, set the `portMappings` for a host to container port on `8126` with the protocol `tcp`.
+    Use [datadog-agent-ecs-apm.json][3] as a reference point for the required base configuration. In the Task Definition for Datadog Agent container, set the `portMappings` for a host to container port on `8126` with the protocol `tcp`.
 
-```json
-{
-  "containerDefinitions": [
+    ```json
     {
-      "name": "datadog-agent",
-      "image": "public.ecr.aws/datadog/agent:latest",
-      "cpu": 100,
-      "memory": 256,
-      "essential": true,
-      "portMappings": [
+      "containerDefinitions": [
         {
-          "hostPort": 8126,
-          "protocol": "tcp",
-          "containerPort": 8126
+          "name": "datadog-agent",
+          "image": "public.ecr.aws/datadog/agent:latest",
+          "cpu": 100,
+          "memory": 256,
+          "essential": true,
+          "portMappings": [
+            {
+              "hostPort": 8126,
+              "protocol": "tcp",
+              "containerPort": 8126
+            }
+          ],
+          (...)
         }
-      ],
-      (...)
+      ]
     }
-  ]
-}
-```
+    ```
 
-For **Agent v7.17 or lower**, add the following environment variables:
-```json
-"environment": [
-  (...)
-  {
-    "name": "DD_APM_ENABLED",
-    "value": "true"
-  },
-  {
-    "name": "DD_APM_NON_LOCAL_TRAFFIC",
-    "value": "true"
-  }
-]
-```
+2. For **Agent v7.17 or lower**, add the following environment variables:
+    ```json
+    "environment": [
+      (...)
+      {
+        "name": "DD_APM_ENABLED",
+        "value": "true"
+      },
+      {
+        "name": "DD_APM_NON_LOCAL_TRAFFIC",
+        "value": "true"
+      }
+    ]
+    ```
 
-If you have a local file for your Agent's Task Definition you can repeat the steps to [register your updated Task Definition][5]. This creates a new revision for you. You can then reference this updated revision in the Daemon Service for the Datadog Agent.
+3. If you are updating a local file for your Agent's Task Definition, [register your updated Task Definition][5]. This creates a new revision. You can then reference this updated revision in the daemon service for the Datadog Agent.
 
 ## Configure your application container to submit traces to Datadog Agent
 
-First consult the [setup instructions for installing the Datadog Tracer][2] per language. For ECS install the Datadog Tracer into your application's container image.
+### Install the tracing library
+Follow the [setup instructions for installing the Datadog tracing library][2] for your application's language. For ECS install the tracer into your application's container image.
 
-After this, provide the Tracer with the private IP address of the underlying EC2 instance that the application container is running on. This address is the hostname of the Tracer endpoint. The Datadog Agent container on the same host (with the host port enabled) receives these traces.
+### Provide the private IP address for the EC2 instance
+Provide the tracer with the private IP address of the underlying EC2 instance that the application container is running on. This address is the hostname of the tracer endpoint. The Datadog Agent container on the same host (with the host port enabled) receives these traces.
 
-### Get the private IP address
+Use one of the following methods to dynamically get the private IP address:
 
 {{< tabs >}}
 {{% tab "EC2 metadata endpoint" %}}
@@ -103,20 +105,20 @@ cat $ECS_CONTAINER_METADATA_FILE | jq -r .HostPrivateIPv4Address
 {{% /tab %}}
 {{< /tabs >}}
 
-Provide the result of this request to the Tracer through the environment variable `DD_AGENT_HOST` for each application container sending APM traces.
+Provide the result of this request to the tracer by setting the `DD_AGENT_HOST` environment variable for each application container that sends traces.
 
 ### Configure the trace agent endpoint
 
-In cases where variables on your ECS application are set at launch time (Java, .NET, and PHP), you **must** set the hostname of the tracer endpoint as an environment variable with `DD_AGENT_HOST` using one of the above methods. The examples below use the IMDSv1 metadata endpoint, but the configuration can be interchanged if needed. If you have a startup script as your entrypoint this can be included in there, otherwise this can be added to the ECS Task Definition's `entryPoint`.
+In cases where variables on your ECS application are set at launch time (Java, .NET, and PHP), you **must** set the hostname of the tracer endpoint as an environment variable with `DD_AGENT_HOST` using one of the above methods. The examples below use the IMDSv1 metadata endpoint, but the configuration can be interchanged if needed. If you have a startup script as your entry point, include this call as part of the script, otherwise add it to the ECS Task Definition's `entryPoint`.
 
-For the other languages (Python, Javascript, Ruby, and Go) you can alternatively set the hostname in your application's source code.
+For other supported languages (Python, JavaScript, Ruby, and Go) you can alternatively set the hostname in your application's source code.
 
 {{< programming-lang-wrapper langs="python,nodeJS,ruby,go,java,.NET,PHP" >}}
 
 {{< programming-lang lang="python" >}}
 
 #### Launch time variable
-Update the Task Definition's `entryPoint` with the following, substitute with your `<Python Startup Command>`:
+Update the Task Definition's `entryPoint` with the following, substituting your `<Python Startup Command>`:
 
 ```json
 "entryPoint": [
@@ -125,10 +127,10 @@ Update the Task Definition's `entryPoint` with the following, substitute with yo
   "export DD_AGENT_HOST=$(curl http://169.254.169.254/latest/meta-data/local-ipv4); <Python Startup Command>"
 ]
 ```
-For Python the startup command is generally `ddtrace-run python my_app.py` but may vary depending on the framework used. Such as if using [uWSGI][1] or instrumenting your [code manually with `patch_all`][2].
+For Python the startup command is generally `ddtrace-run python my_app.py` but may vary depending on the framework used, for example, using [uWSGI][1] or instrumenting your [code manually with `patch_all`][2].
 
 #### Code
-You can alternatively update your code to have the tracer set the hostname explicitly.
+You can alternatively update your code to have the tracer set the hostname explicitly:
 
 ```python
 import requests
@@ -149,7 +151,7 @@ tracer.configure(hostname=get_aws_ip())
 {{< programming-lang lang="nodeJS" >}}
 
 #### Launch time variable
-Update the Task Definition's `entryPoint` with the following, substitute with your `<NodeJS Startup Command>`:
+Update the Task Definition's `entryPoint` with the following, substituting your `<NodeJS Startup Command>`:
 ```json
 "entryPoint": [
   "sh",
@@ -159,7 +161,7 @@ Update the Task Definition's `entryPoint` with the following, substitute with yo
 ```
 
 #### Code
-You can alternatively update your code to have the tracer set the hostname explicitly.
+You can alternatively update your code to have the tracer set the hostname explicitly:
 
 ```javascript
 const tracer = require('dd-trace').init();
@@ -176,7 +178,7 @@ const axios = require('axios');
 {{< programming-lang lang="ruby" >}}
 
 #### Launch time variable
-Update the Task Definition's `entryPoint` with the following, substitute with your `<Ruby Startup Command>`:
+Update the Task Definition's `entryPoint` with the following, substituting your `<Ruby Startup Command>`:
 ```json
 "entryPoint": [
   "sh",
@@ -186,7 +188,7 @@ Update the Task Definition's `entryPoint` with the following, substitute with yo
 ```
 
 #### Code
-You can alternatively update your code to have the tracer set the hostname explicitly.
+You can alternatively update your code to have the tracer set the hostname explicitly:
 
 ```ruby
 require 'ddtrace'
@@ -202,7 +204,7 @@ end
 {{< programming-lang lang="go" >}}
 
 #### Launch time variable
-Update the Task Definition's `entryPoint` with the following, substitute with your `<Go Startup Command>`:
+Update the Task Definition's `entryPoint` with the following, substituting your `<Go Startup Command>`:
 
 ```json
 "entryPoint": [
@@ -213,7 +215,7 @@ Update the Task Definition's `entryPoint` with the following, substitute with yo
 ```
 
 #### Code
-You can alternatively update your code to have the tracer set the hostname explicitly.
+You can alternatively update your code to have the tracer set the hostname explicitly:
 
 ```go
 package main
@@ -244,7 +246,7 @@ func main() {
 {{< programming-lang lang="java" >}}
 
 #### Launch time variable
-Update the Task Definition's `entryPoint` with the following, substitute with your `<Java Startup Command>`:
+Update the Task Definition's `entryPoint` with the following, substituting your `<Java Startup Command>`:
 
 ```java
 "entryPoint": [
@@ -261,7 +263,7 @@ The Java startup command should include your `-javaagent:/path/to/dd-java-agent.
 {{< programming-lang lang=".NET" >}}
 
 #### Launch time variable
-Update the Task Definition's `entryPoint` with the following. Substitute with your `APP_PATH` if not set:
+Update the Task Definition's `entryPoint` with the following. Substituting your `APP_PATH` if not set:
 
 ```json
 "entryPoint": [
@@ -276,7 +278,7 @@ Update the Task Definition's `entryPoint` with the following. Substitute with yo
 {{< programming-lang lang="PHP" >}}
 
 #### Launch time variable
-Update the Task Definition's `entryPoint` with the following.
+Update the Task Definition's `entryPoint` with the following:
 
 ```json
 "entryPoint": [
@@ -313,8 +315,8 @@ env[DD_VERSION] = $DD_VERSION
 
 {{< /programming-lang-wrapper >}}
 
-##### IMDSv2
-When using IMDSv2 the equivalent `entryPoint` configuration would look like the following. Substitute `<Startup Command>` with the appropriate command based on your language like the examples above.
+#### IMDSv2
+When using IMDSv2, the equivalent `entryPoint` configuration looks like the following. Substitute `<Startup Command>` with the appropriate command based on your language, as in the examples above.
 
 ```json
 "entryPoint": [
