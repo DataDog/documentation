@@ -16,17 +16,20 @@ further_reading:
 
 ## Overview
 
-You can use [metrics][1] generated from your Synthetic tests to create [metric monitors][2] in addition to the [monitor created with your test][3].
+You can use [metrics][1] generated from your Synthetic tests to create [metric monitors][2] in addition to the [Synthetic monitor created with your test][3].
 
 {{< img src="synthetics/guide/using-synthetic-metrics/metric-monitor.png" alt="Example metric monitor that alerts when too many tests are failing in CI" style="width:95%;" >}}
 
-With metric monitors, you can monitor the total response time, scope on specific HTTP timings such as DNS, the DNS resolution, and TCP connection, and access tags added to metrics coming from Synthetic tests. 
+With metric monitors, you can accomplish the following:
+
+- Monitor the total response time
+- Scope on specific HTTP timings such as DNS, the DNS resolution, and TCP connection
+- Access tags added to metrics coming from Synthetic tests 
 
 This guide demonstrates how to set up a metric monitor using a general metric such as `synthetics.test_runs`. 
 
 ## Create a metric monitor
 
-You can create monitors to monitor total response time, scope HTTP timings such as DNS resolution, monitor a TCP connection, and more.
 
 {{< img src="synthetics/guide/using-synthetic-metrics/metric-monitor-setup.png" alt="Example metric monitor that alerts when too many tests are failing in CI" style="width:95%;" >}}
 
