@@ -119,8 +119,7 @@ To use Pattern Inspector:
 
 1. Go to [Log Explorer][16].
 2. Click **Patterns** in the **Group into** section. In the list of patterns, the aggregate values in the message section are highlighted in yellow. Hover over an aggregate value to get a preview of the visual distribution of its values. 
-3. Click on an aggregate value to open the log pattern's side panel. 
-4. On the **Pattern Inspector** tab, click on a value and select **View logs** to see the related logs in the side panel. Click **Search for** to see the related logs in the Log Explorer.
+3. Click on an aggregate value to open the log pattern's side panel and see more details in the **Pattern Inspector** tab. 
 
 {{< img src="logs/explorer/group/pattern_inspector_panel.png" alt="The pattern panel showing the Pattern Inspector tab" style="width:50%;" >}}
 
