@@ -11,39 +11,28 @@ Cloud Security Posture Management is not currently available in this site.
 
 Datadog Cloud Security Posture Management (CSPM) makes it easier to assess and visualize the current and historic security posture of your cloud resources, automate audit evidence collection, and catch misconfigurations that leave your organization vulnerable to attacks.
 
-Strengthen your security posture and achieve continuous compliance by detecting, prioritizing, and remediating misconfigurations across all your cloud resources. By continuously surfacing security weaknesses resulting from misconfigurations, teams can easily mitigate risks while ensuring compliance with industry standards.
-
 {{< img src="security_platform/cspm/landing_page.png" alt="Cloud Security Posture Management" width="100%">}}
 
 ## Detect misconfigurations across your cloud accounts and workloads
 
-Assess the configuration and compliance posture of your cloud resources, such as security groups, storage buckets, load balancers, and databases against CSPM's out-of-the-box [Cloud][1] and [Infrastructure][2] detection rules.
+Strengthen your security posture and achieve continuous compliance by detecting, prioritizing, and remediating misconfigurations across all your cloud resources using Datadog's [out-of-the-box detection rules](#manage-out-of-the-box-and-custom-detection-rules). 
 
-Assess the configuration and compliance posture of your cloud resources, such as security groups, storage buckets, load balancers, and databases against detection rules. Use the Datadog Agent to review local configuration information from servers, containers, and Kubernetes clusters against CSPM's out-of-the-box [Cloud][1] and [Infrastructure][2] detection rules.
+View a high-level overview of your security posture on the [Summary page][3]. Examine the details of findings and analyze historical configurations with the [Security Findings Explorer][9]. 
 
-These detection rules work with out-of-the-box integration configurations and map to controls within a compliance framework or industry benchmark. When new default configuration detection rules are added, they are automatically imported into your account.
+By continuously surfacing security weaknesses resulting from misconfigurations, teams can easily mitigate risks while ensuring compliance with industry standards.
 
----
-
-Use the Datadog Agent to evaluate the security posture of your hosts and containers. 
-
-**SCREENSHOT**
+**PLACEHOLDER FOR SCREENSHOT**
 
 ### Maintain compliance with industry frameworks and benchmarks
 
-Each detection rule maps to one or more controls and requirements within a compliance standard or industry benchmark, such as the popular CIS compliance benchmarks for Docker and Kubernetes.
+CSPM detection rules work with Datatog's out-of-the-box integration configurations. Each rule maps to one or more controls and requirements within a compliance standard or industry benchmark, such as the popular CIS compliance benchmarks for Docker and Kubernetes.
 
-CSPM computes individual scores for each framework. This enables you to understand whether your cloud infrastructure is in compliance with aspects of PCI, GDPR, HIPAA, and more.
-
-For each framework, CSPM computes individual scores that...
-
-View compliance reports
-
+View compliance reports for each framework that include details such as resources with the most failed findings, a comprehensive breakdown of the number of resources with pass/fail findings, and the top three high-severity rule failures. This information enables you to understand whether your cloud infrastructure is in compliance with aspects of PCI, GDPR, HIPAA, and more.
 ## Manage out-of-the-box and custom detection rules
 
 Use [out-of-the-box detection rules][7] to flag attacker techniques and potential misconfigurations so you can immediately take steps to remediate. Datadog continuously develops new default rules, which are automatically imported into your account. Customize the rules by defining [how each rule scans your environment][6], [create custom rules][8] (GCP only), and [set up real-time notifications for failed findings](#set-up-real-time-notifications).
 
-**SCREENSHOT**
+**PLACEHOLDER FOR SCREENSHOT**
 
 ### Set up real-time notifications
 
@@ -53,26 +42,9 @@ Use template variables and Markdown to customize notification messages. Edit, di
 
 ## Review and remediate findings
 
-Use the **Summary** page to view 
+Drill down deeper into details using the Security Findings Explorer. View detailed information about a resource, such as configuration, detection rules applied to the resource, and tags that provide additional context about who owns the resources and its location within your environment.
 
-Use the CSPM homepage to view.... 
-
-Drill down deeper into details using the Security Findings Explorer.
-
-Use the **Security Findings Explorer** to explore resource configuraitons, 
-
-to review details on the configuration of a resource, the rules applied to the resource by CSPM, tags t
-
-Review the detailed configuration of a resource
-
-Review the detection rules applied to your resources by CSPM
-
-Review tags for more context about who owns the resource and where it resides in your environment
-
-Read descriptions and guidelines based on industry resources for remediating a misconfigured resource
-Use the "time selector" to explore your security configuration posture at any point in the past.
-
-**SCREENSHOT**
+**PLACEHOLDER FOR SCREENSHOT**
 
 ## Glossary
 
@@ -121,3 +93,4 @@ Framework
 [6]: /security_platform/cspm/frameworks_and_benchmarks#customize-how-your-environment-is-scanned-by-each-rule
 [7]: /security_platform/default_rules/#cat-posture-management-cloud
 [8]: /security_platform/cspm/custom_rules
+[9]: https://app.datadoghq.com/security/compliance
