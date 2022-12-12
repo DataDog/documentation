@@ -4,7 +4,6 @@ kind: documentation
 description: "Datadog Agent Security measures"
 aliases:
     - /agent/security/
-    - /security/agent/
 further_reading:
 - link: "/data_security/"
   tag: "Documentation"

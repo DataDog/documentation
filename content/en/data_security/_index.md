@@ -1,9 +1,6 @@
 ---
 title: Reducing Data Related Risks
 kind: documentation
-aliases:
-  - /security/
-  - /security/other/
 further_reading:
 - link: "/data_security/logs/"
   tag: "Documentation"
