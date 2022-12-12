@@ -239,24 +239,30 @@
     {{ $items := . }}
     {{ $s := newScratch }}
     {{ range $k, $lang := $context.Site.Params.code_languages }}
+      {{ $newItems := slice }}
       {{ $file_extension := $k }}
       {{ $count := 0 }}
       {{ range $i, $item := $items }}
         {{ $fileStr := (printf "%s%s.%s" $operationid $item.suffix $file_extension) }}
         {{ with $resourcePage.Resources.Match $fileStr }}
-          {{ $count = add $count 1 }}
+          {{ with . }}
+            {{ $newItems = $newItems | append $item }}
+            {{ $count = add $count 1 }}
+          {{ end }}
         {{ end }}
       {{ end }}
       {{ $s.SetInMap "itemCounts" $lang.name $count }}
+      {{ $s.SetInMap "items" $lang.name $newItems }}
     {{ end }}
 
     {{ range $k, $lang := $context.Site.Params.code_languages }}
       {{ $file_extension := $k }}
       {{ $numOfCodeExamples := (index ($s.Get "itemCounts") $lang.name) }}
+      {{ $myItems := (index ($s.Get "items") $lang.name) }}
       {{ if gt $numOfCodeExamples 0 }}
       <div class="code-snippet-wrapper js-code-block" data-code-lang-block="{{ $lang.name }}">
         {{ if gt $numOfCodeExamples 1 }}<div class="example-accordion" id="accordion-{{ $operationid | lower }}-{{ $version }}-{{ $lang.name }}">{{ end }}
-          {{ range $i, $item := $items | first 3 }}
+          {{ range $i, $item := $myItems | first 3 }}
               {{ $fileStr := (printf "%s%s.%s" $operationid $item.suffix $file_extension) }}
               {{ with $resourcePage.Resources.Match $fileStr }}
                   {{ range . }}
