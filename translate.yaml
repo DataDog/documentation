@@ -1,17 +1,16 @@
 ---
 # New params
-receive_enabled: true
-sync_enabled: true
+receive_enabled: false
+sync_enabled: false
 
 # if true, no github or transifex api writes will happen.
 # instead logs will be created to simulate results.
-sync_dry_run_enabled: false
+sync_dry_run_enabled: true
 
 # These files will be ignored or deleted when syncing with Transifex.
 ignores:
   - "content/en/**/faq/!(agent_v6_changes|certificate_verify_failed-error).md"
-  - "content/en/security_platform/default_rules/*.md"
-  - "content/en/security_monitoring/default_rules/*.md"
+  - "content/en/security/default_rules/*.md"
   - "content/en/integrations/rapdev_services.md"
   - "content/en/workflows/actions_catalog/*.md"
   - "content/en/api/v1/**/*.md"

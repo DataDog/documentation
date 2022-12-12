@@ -3,7 +3,6 @@ title: Synthetic Monitoring Data Security
 kind: documentation
 aliases:
     - /synthetics/security/
-    - /security/synthetics/
 further_reading:
 - link: "/data_security/"
   tag: "Documentation"
