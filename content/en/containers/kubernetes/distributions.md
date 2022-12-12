@@ -157,6 +157,14 @@ spec:
     - name: DD_KUBELET_TLS_VERIFY
       value: "false"
   ```
+- Admission Controller functionality on AKS requires configuring the add selectors to prevent an error on reconciling the webhook: 
+
+```yaml
+clusterAgent:
+  env:
+    - name: "DD_ADMISSION_CONTROLLER_ADD_AKS_SELECTORS"
+      value: "true"
+```
 
 ## Google Kubernetes Engine (GKE) {#GKE}
 
