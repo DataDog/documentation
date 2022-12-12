@@ -201,6 +201,8 @@ CSPM evaluates resources in increments between 15 minutes and four hours (depend
 
 To view the findings for your cloud resources, go to the [CSPM homepage][1].
 
+{{< img src="security_platform/cspm/summary_page.png" alt="Cloud Security Posture Management summary page" width="100%">}}
+
 ## Explore default detection rules
 
 CSPM comes with a set of [out-of-the-box detection rules][2] that evaluate the configuration of your cloud resources and identifies potential misconfigurations so you can immediately take steps to remediate. When new configuration detection rules are added, they are automatically imported into your account.
