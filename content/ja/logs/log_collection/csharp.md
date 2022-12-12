@@ -314,6 +314,11 @@ APM が有効になっているアプリケーションの場合は、[APM .NET 
 
 アプリケーションのコードを修正したり、アプリケーションに依存するものを追加でインストールする必要はありません。
 
+<div class="alert alert-warning">
+  <strong>注:</strong> log4net または NLog を使用する場合、エージェントレスロギングを有効にするには、アペンダー (log4net) またはロガー (NLog) が構成されている必要があります。これらの場合、これらの追加の依存関係を追加するか、代わりに <a href="/logs/log_collection/csharp/?tab=log4net#agentless-logging-with-serilog-sink">Serilog シンクを使用してエージェントレスロギング</a>を使用することができます。
+</div>
+
+
 ### APM ライブラリの構成
 
 エージェントレスロギングは、APM を自動インスツルメンテーションで使用する場合にのみ利用できます。まず、以下のドキュメントで説明されているように、アプリケーションをインスツルメントしてください。
@@ -364,7 +369,7 @@ Tracer バージョン 2.7.0 からエージェントレスロギングを使用
 
 `DD_LOGS_DIRECT_SUBMISSION_TAGS`
 : 指定された場合、生成されたすべてのスパンに指定されたすべてのタグを追加します。指定されない場合は、代わりに `DD_TAGS` を使用します。<br>
-**例**: `layer:api, team:intake` 
+**例**: `layer:api, team:intake`
 デリミタはコンマと空白: `, ` であることに注意してください。
 
 以下の構成値は、基本的に変更すべきではありませんが、必要であれば設定しても構いません。
@@ -424,6 +429,20 @@ Tracer バージョン 2.7.0 からエージェントレスロギングを使用
 `DD_LOGS_DIRECT_SUBMISSION_BATCH_PERIOD_SECONDS`
 : 送信する新しいログを確認するまでの待ち時間を設定します (秒)。<br>
 **デフォルト**: `1`
+
+`Microsoft.Extensions.Logging` のインテグレーションを使用している場合、`ILogger` に組み込まれた標準機能を使用して Datadog に送信されるログをフィルタリングすることができます。直接送信するプロバイダを特定するために `"Datadog"` というキーを使用し、各ネームスペースに最小限のログレベルを設定します。例えば、`appSettings.json` に以下を追加すると、`Warning` 以下のレベルのログを Datadog に送信しないようにすることができます。.NET トレーサーライブラリ v2.20.0 で導入されました。
+
+```json
+{
+  "Logging": {
+    "Datadog": {
+      "LogLevel": {
+        "Microsoft.AspNetCore": "Warning"
+      },
+    }
+  }
+}
+```
 
 ## Serilog シンクによるエージェントレスロギング
 
@@ -580,7 +599,7 @@ using (var log = new LoggerConfiguration()
 }
 ```
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

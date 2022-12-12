@@ -3,6 +3,10 @@ title: Custom Metrics Billing
 kind: documentation
 aliases:
     - /integrations/faq/what-standard-integrations-emit-custom-metrics/
+further_reading:
+  - link: "/observability_pipelines/guide/custom-metrics-governance"
+    tag: "Documentation"
+    text: "Use Observability Pipelines to govern custom metrics"
 ---
 
 If a metric is not submitted from one of the [more than {{< translate key="integration_count" >}} Datadog integrations][1] it's considered a [custom metric][2]<sup>[(1)](#standard-integrations)</sup>.
@@ -315,6 +319,9 @@ For technical questions, contact [Datadog support][24].
 
 For billing questions, contact your [Customer Success][10] Manager.
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/
 [2]: /metrics/custom_metrics/

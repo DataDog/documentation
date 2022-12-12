@@ -3,7 +3,7 @@ title: Data Streams Monitoring
 kind: documentation
 ---
 
-{{< img src="data_streams/data_streams_hero.png" alt="Datadog Data Streams Monitoring"  style="width:100%;" >}}
+{{< img src="data_streams/data_streams_hero.png" alt="Datadog Data Streams Monitoring" style="width:100%;" >}}
 
 ## Overview
 
@@ -74,7 +74,7 @@ environment:
 
 ### Prerequisites
 
-To start with Data Streams Monitoring, you will require recent versions of the Datadog Agent and Data Streams Monitoring libraries:
+To start with Data Streams Monitoring, you need recent versions of the Datadog Agent and Data Streams Monitoring libraries:
 * [Datadog Agent v7.34.0+][1]
 * [Data Streams Library v0.2+][2]
 
