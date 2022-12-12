@@ -180,7 +180,10 @@ const client = new pg.Client({
 	database: 'postgres'
 })
 
-client.connect(err => done(err))
+client.connect(err => {
+	console.error(err);
+	process.exit(1);
+});
 
 client.query('SELECT $1::text as message', ['Hello world!'], (err, result) => {
 	if (err) return done(err)
