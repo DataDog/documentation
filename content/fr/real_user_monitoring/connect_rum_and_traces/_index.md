@@ -151,7 +151,7 @@ Datadog utilise un protocole de tracing distribué et configure les en-têtes HT
 
 ## Cela a-t-il une incidence sur les quotas de l'APM ?
 
-L'en-tête `x-datadog-origin: rum` indique au backend APM que les traces sont générées depuis la fonctionnalité RUM. Les traces générées n'ont par conséquent aucun impact sur le calcul de vos spans indexées.
+Relier RUM aux traces peut considérablement augmenter le volume de traces ingérées par l'APM. L'en-tête `x-datadog-origin: rum` indique au backend APM que les traces sont générées depuis la fonctionnalité RUM. Les traces générées n'ont par conséquent aucun impact sur le calcul de vos spans indexées, uniquement sur vos spans ingérés.
 
 ## Combien de temps les traces sont-elles conservées ?
 
