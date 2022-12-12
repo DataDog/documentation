@@ -286,7 +286,7 @@ components:
         format: int64
         type: integer
     PageSize:
-      description: Size for a given page.
+      description: Size for a given page. The maximum allowed value is 5000.
       in: query
       name: page[size]
       required: false
