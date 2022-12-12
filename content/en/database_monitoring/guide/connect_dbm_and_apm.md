@@ -170,6 +170,7 @@ Enable the database monitoring propagation feature using one of the following me
 
 Full example:
 ```javascript
+const pg = require('pg')
 const tracer = require('dd-trace').init()
 
 tracer.use('pg', { dbmPropagationMode: 'full', service: 'my-db-service' })
