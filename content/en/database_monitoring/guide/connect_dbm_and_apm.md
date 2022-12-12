@@ -150,7 +150,7 @@ client.query("SELECT 1;")
 Install or udpate [dd-trace-js][1] to version greater than `3.9.0` (or `2.22.0` if using end-of-life Node.js version 12):
 
 ```
-npm install dd-trace@3.9.0
+npm install dd-trace@^3.9.0
 ```
 
 Update your code to import and initialize the tracer:
