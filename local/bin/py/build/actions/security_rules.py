@@ -90,127 +90,133 @@ def security_rules(content, content_dir):
                 except:
                     logger.warn(f"Error parsing {file_name}")
 
-        if data:
-            p = Path(f.name)
+        if not data:
+            continue
+
+        p = Path(f.name)
+        message_file_name = p.with_suffix('.docs.md')
+        if not message_file_name.exists():
             message_file_name = p.with_suffix('.md')
+            if not message_file_name.exists():
+                continue
 
-            if message_file_name.exists():
-                # delete file or skip if staged
-                # any() will return True when at least one of the elements is Truthy
-                # TODO: remove isStaged check after upstream removal
-                if len(data.get('restrictedToOrgs', [])) > 0 or data.get('isStaged', False) or data.get('isShadowDeployed', False) \
-                    or data.get('isDeleted', False) or not data.get('isEnabled', True) or data.get('isDeprecated', False):
-                    if p.exists():
-                        logger.info(f"removing file {p.name}")
-                        global_aliases.append(f"/security_monitoring/default_rules/{p.stem}")
-                        global_aliases.append(f"/security_platform/default_rules/{p.stem}")
-                        p.unlink()
-                    else:
-                        logger.info(f"skipping file {p.name}")
+        # delete file or skip if staged
+        # any() will return True when at least one of the elements is Truthy
+        # TODO: remove isStaged check after upstream removal
+        if len(data.get('restrictedToOrgs', [])) > 0 or data.get('isStaged', False) or data.get('isShadowDeployed', False) \
+            or data.get('isDeleted', False) or not data.get('isEnabled', True) or data.get('isDeprecated', False):
+            if p.exists():
+                logger.info(f"removing file {p.name}")
+                global_aliases.append(f"/security_monitoring/default_rules/{p.stem}")
+                global_aliases.append(f"/security_platform/default_rules/{p.stem}")
+                p.unlink()
+            else:
+                logger.info(f"skipping file {p.name}")
+            continue
+
+        # The message of a detection rule is located in a Markdown file next to the rule definition
+        with open(str(message_file_name), mode="r+") as message_file:
+            message = message_file.read()
+
+            # strip out [text] e.g "[CIS Docker] Ensure that.." becomes "Ensure that..."
+            parsed_title = re.sub(r"\[.+\]\s?(.*)", "\\1", data.get('name', ''), 0, re.MULTILINE)
+            page_data = {
+                "title": parsed_title,
+                "kind": "documentation",
+                "type": "security_rules",
+                "disable_edit": True,
+                "aliases": [
+                    f"{data.get('defaultRuleId', '').strip()}",
+                    f"/security_monitoring/default_rules/{data.get('defaultRuleId', '').strip()}",
+                    f"/security_monitoring/default_rules/{p.stem}"
+                ],
+                "rule_category": [],
+                "integration_id": ""
+            }
+
+            # we need to get the path relative to the repo root for comparisons
+            extract_dir, relative_path = str(p.parent).split(f"/{content['repo_name']}/")
+            # lets build up this categorization for filtering purposes
+
+            # previous categorization
+            if relative_path.startswith('configuration'):
+                page_data['rule_category'].append('Posture Management (Cloud)')
+                page_data['rule_category'].append('Cloud Security Management')
+            elif relative_path.startswith('runtime'):
+                if 'compliance' in relative_path:
+                    page_data['rule_category'].append('Posture Management (Infra)')
+                    page_data['rule_category'].append('Cloud Security Management')
                 else:
-                    # The message of a detection rule is located in a Markdown file next to the rule definition
-                    with open(str(message_file_name), mode="r+") as message_file:
-                        message = message_file.read()
+                    page_data['rule_category'].append('Workload Security')
+                    page_data['rule_category'].append('Cloud Security Management')
 
-                        # strip out [text] e.g "[CIS Docker] Ensure that.." becomes "Ensure that..."
-                        parsed_title = re.sub(r"\[.+\]\s?(.*)", "\\1", data.get('name', ''), 0, re.MULTILINE)
-                        page_data = {
-                            "title": parsed_title,
-                            "kind": "documentation",
-                            "type": "security_rules",
-                            "disable_edit": True,
-                            "aliases": [
-                                f"{data.get('defaultRuleId', '').strip()}",
-                                f"/security_monitoring/default_rules/{data.get('defaultRuleId', '').strip()}",
-                                f"/security_monitoring/default_rules/{p.stem}"
-                            ],
-                            "rule_category": [],
-                            "integration_id": ""
-                        }
+            # new categorization
+            if any(sub_path in relative_path for sub_path in ['security-monitoring', 'cloud-siem']):
+                if 'signal-correlation/production' in relative_path:
+                    page_data['rule_category'].append('Cloud SIEM (Signal Correlation)')
+                else:
+                    page_data['rule_category'].append('Cloud SIEM (Log Detection)')
 
-                        # we need to get the path relative to the repo root for comparisons
-                        extract_dir, relative_path = str(p.parent).split(f"/{content['repo_name']}/")
-                        # lets build up this categorization for filtering purposes
+            if 'posture-management' in relative_path:
+                if 'cloud-configuration' in relative_path:
+                    page_data['rule_category'].append('Posture Management (Cloud)')
+                    page_data['rule_category'].append('Cloud Security Management')
+                if 'infrastructure-configuration' in relative_path:
+                    page_data['rule_category'].append('Posture Management (Infra)')
+                    page_data['rule_category'].append('Cloud Security Management')
 
-                        # previous categorization
-                        if relative_path.startswith('configuration'):
-                            page_data['rule_category'].append('Posture Management (Cloud)')
-                            page_data['rule_category'].append('Cloud Security Management')
-                        elif relative_path.startswith('runtime'):
-                            if 'compliance' in relative_path:
-                                page_data['rule_category'].append('Posture Management (Infra)')
-                                page_data['rule_category'].append('Cloud Security Management')
-                            else:
-                                page_data['rule_category'].append('Workload Security')
-                                page_data['rule_category'].append('Cloud Security Management')
+            if 'workload-security' in relative_path:
+                page_data['rule_category'].append('Workload Security')
+                page_data['rule_category'].append('Cloud Security Management')
 
-                        # new categorization
-                        if any(sub_path in relative_path for sub_path in ['security-monitoring', 'cloud-siem']):
-                            if 'signal-correlation/production' in relative_path:
-                                page_data['rule_category'].append('Cloud SIEM (Signal Correlation)')
-                            else:
-                                page_data['rule_category'].append('Cloud SIEM (Log Detection)')
+            if 'application-security' in relative_path:
+                page_data['rule_category'].append('Application Security')
 
-                        if 'posture-management' in relative_path:
-                            if 'cloud-configuration' in relative_path:
-                                page_data['rule_category'].append('Posture Management (Cloud)')
-                                page_data['rule_category'].append('Cloud Security Management')
-                            if 'infrastructure-configuration' in relative_path:
-                                page_data['rule_category'].append('Posture Management (Infra)')
-                                page_data['rule_category'].append('Cloud Security Management')
+            tags = data.get('tags', [])
+            if tags:
+                for tag in tags:
+                    if ':' in tag:
+                        key, value = tag.split(':')
+                        page_data[key] = value
+                if data.get('source', ''):
+                    page_data["source"] = data.get('source', '')
+            else:
+                # try build up manually
+                source = data.get('source', None)
+                tech = data.get('framework', {}).get('name', '').replace('cis-', '')
+                page_data["source"] = source or tech
+                page_data["security"] = "compliance"
+                page_data["framework"] = data.get('framework', {}).get('name', '')
+                page_data["control"] = data.get('control', '')
+                page_data["scope"] = tech
 
-                        if 'workload-security' in relative_path:
-                            page_data['rule_category'].append('Workload Security')
-                            page_data['rule_category'].append('Cloud Security Management')
+            # Hardcoded rules in cloud siem which can span several different log sources do not include a source tag
+            if any(sub_path in relative_path for sub_path in ['security-monitoring', 'cloud-siem']):
+                is_hardcoded = not page_data.get("source", None)
+                if is_hardcoded:
+                    page_data["source"] = "multi Log Sources"
 
-                        if 'application-security' in relative_path:
-                            page_data['rule_category'].append('Application Security')
+            # lowercase them
+            if page_data.get("source", None):
+                page_data["source"] = page_data["source"].lower()
+            if page_data.get("scope", None):
+                page_data["scope"] = page_data["scope"].lower()
 
-                        tags = data.get('tags', [])
-                        if tags:
-                            for tag in tags:
-                                if ':' in tag:
-                                    key, value = tag.split(':')
-                                    page_data[key] = value
-                            if data.get('source', ''):
-                                page_data["source"] = data.get('source', '')
-                        else:
-                            # try build up manually
-                            source = data.get('source', None)
-                            tech = data.get('framework', {}).get('name', '').replace('cis-', '')
-                            page_data["source"] = source or tech
-                            page_data["security"] = "compliance"
-                            page_data["framework"] = data.get('framework', {}).get('name', '')
-                            page_data["control"] = data.get('control', '')
-                            page_data["scope"] = tech
+            # integration id
+            page_data["integration_id"] = page_data.get("scope", None) or page_data.get("source", "")
+            cloud = page_data.get("cloud", None)
+            if cloud and cloud == 'aws':
+                page_data["integration_id"] = "amazon-{}".format(page_data["integration_id"])
 
-                        # Hardcoded rules in cloud siem which can span several different log sources do not include a source tag
-                        if any(sub_path in relative_path for sub_path in ['security-monitoring', 'cloud-siem']):
-                            is_hardcoded = not page_data.get("source", None)
-                            if is_hardcoded:
-                                page_data["source"] = "multi Log Sources"
+            front_matter = yaml.dump(page_data, default_flow_style=False).strip()
+            output_content = TEMPLATE.format(front_matter=front_matter, content=message.strip())
 
-                        # lowercase them
-                        if page_data.get("source", None):
-                            page_data["source"] = page_data["source"].lower()
-                        if page_data.get("scope", None):
-                            page_data["scope"] = page_data["scope"].lower()
-
-                        # integration id
-                        page_data["integration_id"] = page_data.get("scope", None) or page_data.get("source", "")
-                        cloud = page_data.get("cloud", None)
-                        if cloud and cloud == 'aws':
-                            page_data["integration_id"] = "amazon-{}".format(page_data["integration_id"])
-
-                        front_matter = yaml.dump(page_data, default_flow_style=False).strip()
-                        output_content = TEMPLATE.format(front_matter=front_matter, content=message.strip())
-
-                        dest_dir = Path(f"{content_dir}{content['options']['dest_path']}")
-                        dest_dir.mkdir(exist_ok=True)
-                        dest_file = dest_dir.joinpath(p.name).with_suffix('.md')
-                        logger.info(dest_file)
-                        with open(dest_file, mode='w', encoding='utf-8') as out_file:
-                            out_file.write(output_content)
+            dest_dir = Path(f"{content_dir}{content['options']['dest_path']}")
+            dest_dir.mkdir(exist_ok=True)
+            dest_file = dest_dir.joinpath(p.name).with_suffix('.md')
+            logger.info(dest_file)
+            with open(dest_file, mode='w', encoding='utf-8') as out_file:
+                out_file.write(output_content)
 
     # add global aliases from deleted files to _index.md
     if os.environ.get('CI_ENVIRONMENT_NAME', '') in ('live', 'preview'):

@@ -75,18 +75,20 @@ RUM のデフォルト属性に加えて、`addTiming` API を使用して、ア
 
 [アクションを自動追跡する][5]ほかに、`RumMonitor#addUserAction` で特定のカスタムユーザーアクション（タップ、クリック、スクロールなど）を追跡することも可能です。継続的なアクションの追跡（リストをスクロールするユーザーの追跡）には、`RumMonitor#startUserAction` および `RumMonitor#stopUserAction` を使用します。
 
+アクションタイプは、"カスタム"、"クリック"、"タップ"、"スクロール"、"スワイプ"、"戻る" のいずれかを指定する必要があることに注意してください。
+
 {{< tabs >}}
 {{% tab "Kotlin" %}}
    ```kotlin
        fun onUserInteraction() { 
-            GlobalRum.get().addUserAction(resourceKey, method, url, resourceAttributes)
+            GlobalRum.get().addUserAction(actionType, name, actionAttributes)
        }
    ```
 {{% /tab %}}
 {{% tab "Java" %}}
    ```java
        public void onUserInteraction() {
-            GlobalRum.get().addUserAction(resourceKey, method, url, resourceAttributes);
+            GlobalRum.get().addUserAction(actionType, name, actionAttributes);
        }
    ```
 {{% /tab %}}
