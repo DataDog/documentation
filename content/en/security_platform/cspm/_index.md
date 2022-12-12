@@ -36,7 +36,7 @@ Use [out-of-the-box detection rules][7] to flag attacker techniques and potentia
 
 ## Set up real-time notifications
 
-[Send real-time notifications][11] when a failed finding is generated for a detection rule, so that your teams can take action to mitigate the risk. Notifications can be sent to Slack, email, PagerDuty, webhooks, and more.
+[Send real-time notifications][11] when a failed finding is generated for a detection rule, so that your teams can take action to mitigate the risk. Notifications can be sent to [Slack, email, PagerDuty, webhooks, and more][12].
 
 Use template variables and Markdown to customize notification messages. Edit, disable, and delete existing notification rules, or create new rules and define custom logic for when a notification is triggered based on severity and rule type.
 
@@ -44,7 +44,7 @@ Use template variables and Markdown to customize notification messages. Edit, di
 
 ## Review and remediate findings
 
-Drill down deeper into details using the Security Findings Explorer. View detailed information about a resource, such as configuration, detection rules applied to the resource, and tags that provide additional context about who owns the resources and its location within your environment.
+Drill down deeper into details using the [Security Findings Explorer][9]. View detailed information about a resource, such as configuration, detection rules applied to the resource, and tags that provide additional context about who owns the resources and its location within your environment.
 
 {{< img src="security_platform/cspm/security_findings_explorer.png" alt="Cloud Security Posture Management security findings explorer" width="100%">}}
 
@@ -98,3 +98,4 @@ Framework
 [9]: https://app.datadoghq.com/security/compliance
 [10]: /security_platform/cspm/frameworks_and_benchmarks
 [11]: /security_platform/cspm/frameworks_and_benchmarks#set-notification-targets-for-detection-rules
+[12]: /security_platform/notifications/
