@@ -578,6 +578,11 @@ main:
     identifier: otel_ingest_agent
     parent: opentelemetry_top_level
     weight: 2
+  - name: Guides
+    url: opentelemetry/guide/
+    identifier: otel_guides
+    parent: opentelemetry_top_level
+    weight: 3
   - name: Watchdog
     url: watchdog/
     identifier: watchdog_top_level
