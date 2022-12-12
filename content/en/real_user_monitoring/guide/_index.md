@@ -23,6 +23,7 @@ disable_toc: true
     {{< nextlink href="real_user_monitoring/guide/enrich-and-control-rum-data" >}}Enrich and control your browser RUM data{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/browser-sdk-upgrade" >}}Upgrade the RUM Browser SDK{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/proxy-rum-data" >}}Proxy your browser RUM data {{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/devtools-tips" >}}Tips when using browser's developers tools{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/define-services-and-track-ui-components-in-your-browser-application/" >}}Define services and track UI components in your browser application {{< /nextlink >}}
 {{< /whatsnext >}}
 
