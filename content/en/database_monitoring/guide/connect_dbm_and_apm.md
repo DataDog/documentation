@@ -165,7 +165,7 @@ Enable the database monitoring propagation feature using one of the following me
 
 2. Option `dbmPropagationMode` (default: `ENV['DD_DBM_PROPAGATION_MODE']`):
    ```javascript
-	tracer.use('pg', { dbmPropagationMode: 'full', service: 'my-db-service' })
+   tracer.use('pg', { dbmPropagationMode: 'full', service: 'my-db-service' })
    ```
 
 Full example:
