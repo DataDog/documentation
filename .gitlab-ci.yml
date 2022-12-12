@@ -156,29 +156,46 @@ algolia_sync_preview:
   allow_failure: true
   interruptible: true
   script:
-    - yarn add atomic-algolia@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/brian.deutsch/atomic-algolia/atomic-algolia-v0.3.23.tgz
-    - ALGOLIA_APP_ID=$(get_secret 'algolia_preview_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_preview_api_key') yarn run algolia:sync
+    - yarn add atomic-algolia@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/brian.deutsch/atomic-algolia/atomic-algolia-v0.3.24.tgz
+    - ALGOLIA_APP_ID=$(get_secret 'algolia_preview_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_preview_api_key') DATADOG_API_KEY=$(get_secret 'dd-api-key') yarn run algolia:sync
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
       when: never
     - if: '$CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_TAG =~ "/^$/"' 
       when: on_success
 
-replica_algolia_preview:
-  <<: *base_template
-  stage: post-deploy
-  cache:
-    - *yarn_cache
-  environment: "preview"
-  script:
-    - yarn install --immutable
-    - ALGOLIA_APP_ID=$(get_secret 'algolia_preview_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_preview_api_key') yarn run algolia:config
-  dependencies:
-    - build_preview
-  when: manual
-  only:
-    - /.+?\/[a-zA-Z0-9_-]+/
-  interruptible: true
+# algolia_sync_live:
+#   image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:master
+#   tags:
+#     - "runner:main"
+#   stage: post-deploy
+#   environment: "live"
+#   allow_failure: true
+#   interruptible: true
+#   script:
+#     - yarn add atomic-algolia@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/brian.deutsch/atomic-algolia/atomic-algolia-v0.3.23.tgz
+#     - ALGOLIA_APP_ID=$(get_secret 'algolia_preview_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_preview_api_key') yarn run algolia:sync
+#   rules:
+#     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+#       when: on_success
+#     - if: '$CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_TAG =~ "/^$/"' 
+#       when: never
+
+# replica_algolia_preview:
+#   <<: *base_template
+#   stage: post-deploy
+#   cache:
+#     - *yarn_cache
+#   environment: "preview"
+#   script:
+#     - yarn install --immutable
+#     - ALGOLIA_APP_ID=$(get_secret 'algolia_preview_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_preview_api_key') yarn run algolia:config
+#   dependencies:
+#     - build_preview
+#   when: manual
+#   only:
+#     - /.+?\/[a-zA-Z0-9_-]+/
+#   interruptible: true
 
 sourcemaps_preview:
   <<: *base_template
