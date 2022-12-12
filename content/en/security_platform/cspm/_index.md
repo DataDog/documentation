@@ -11,40 +11,42 @@ Cloud Security Posture Management is not currently available in this site.
 
 Datadog Cloud Security Posture Management (CSPM) makes it easier to assess and visualize the current and historic security posture of your cloud resources, automate audit evidence collection, and catch misconfigurations that leave your organization vulnerable to attacks.
 
-{{< img src="security_platform/cspm/landing_page.png" alt="Cloud Security Posture Management" width="100%">}}
+By continuously surfacing security weaknesses resulting from misconfigurations, teams can easily mitigate risks while ensuring compliance with industry standards.
 
-## Detect misconfigurations across your cloud accounts and workloads
+## Detect misconfigurations across your cloud resources
 
 Strengthen your security posture and achieve continuous compliance by detecting, prioritizing, and remediating misconfigurations across all your cloud resources using Datadog's [out-of-the-box detection rules](#manage-out-of-the-box-and-custom-detection-rules). 
 
-View a high-level overview of your security posture on the [Summary page][3]. Examine the details of findings and analyze historical configurations with the [Security Findings Explorer][9]. 
+View a high-level overview of your security posture on the [Summary page][3]. Examine the details of findings and analyze historical configurations with the [Security Findings Explorer][9].
 
-By continuously surfacing security weaknesses resulting from misconfigurations, teams can easily mitigate risks while ensuring compliance with industry standards.
+{{< img src="security_platform/cspm/summary_page.png" alt="Cloud Security Posture Management summary page" width="100%">}}
 
-**PLACEHOLDER FOR SCREENSHOT**
-
-### Maintain compliance with industry frameworks and benchmarks
+## Maintain compliance with industry frameworks and benchmarks
 
 CSPM detection rules work with Datatog's out-of-the-box integration configurations. Each rule maps to one or more controls and requirements within a compliance standard or industry benchmark, such as the popular CIS compliance benchmarks for Docker and Kubernetes.
 
-View compliance reports for each framework that include details such as resources with the most failed findings, a comprehensive breakdown of the number of resources with pass/fail findings, and the top three high-severity rule failures. This information enables you to understand whether your cloud infrastructure is in compliance with aspects of PCI, GDPR, HIPAA, and more.
+[View compliance reports][10] for each framework that include details such as resources with the most failed findings, a comprehensive breakdown of the number of resources with pass/fail findings, and the top three high-severity rule failures. With this information, you can better understand whether your cloud infrastructure is in compliance with aspects of PCI, GDPR, HIPAA, and more.
+
+{{< img src="security_platform/cspm/compliance_frameworks.png" alt="Cloud Security Posture Management compliance framewords" width="100%">}}
 ## Manage out-of-the-box and custom detection rules
 
 Use [out-of-the-box detection rules][7] to flag attacker techniques and potential misconfigurations so you can immediately take steps to remediate. Datadog continuously develops new default rules, which are automatically imported into your account. Customize the rules by defining [how each rule scans your environment][6], [create custom rules][8] (GCP only), and [set up real-time notifications for failed findings](#set-up-real-time-notifications).
 
-**PLACEHOLDER FOR SCREENSHOT**
+{{< img src="security_platform/cspm/detection_rules.png" alt="Cloud Security Posture Management detection rules" width="100%">}}
 
-### Set up real-time notifications
+## Set up real-time notifications
 
-Send real-time notifications when a failed finding is generated for a detection rule, so that your teams can take action to mitigate the risk. Notifications can be sent to Slack, email, PagerDuty, webhooks, and more.
+[Send real-time notifications][11] when a failed finding is generated for a detection rule, so that your teams can take action to mitigate the risk. Notifications can be sent to Slack, email, PagerDuty, webhooks, and more.
 
 Use template variables and Markdown to customize notification messages. Edit, disable, and delete existing notification rules, or create new rules and define custom logic for when a notification is triggered based on severity and rule type.
+
+{{< img src="security_platform/cspm/rule_notification_setup.png" alt="Cloud Security Posture Management rule notification setup page" width="100%">}}
 
 ## Review and remediate findings
 
 Drill down deeper into details using the Security Findings Explorer. View detailed information about a resource, such as configuration, detection rules applied to the resource, and tags that provide additional context about who owns the resources and its location within your environment.
 
-**PLACEHOLDER FOR SCREENSHOT**
+{{< img src="security_platform/cspm/security_findings_explorer.png" alt="Cloud Security Posture Management security findings explorer" width="100%">}}
 
 ## Glossary
 
@@ -94,3 +96,5 @@ Framework
 [7]: /security_platform/default_rules/#cat-posture-management-cloud
 [8]: /security_platform/cspm/custom_rules
 [9]: https://app.datadoghq.com/security/compliance
+[10]: /security_platform/cspm/frameworks_and_benchmarks
+[11]: /security_platform/cspm/frameworks_and_benchmarks#set-notification-targets-for-detection-rules
