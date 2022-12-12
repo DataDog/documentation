@@ -7,7 +7,7 @@ aliases:
     - /agent/network
     - /agent/faq/network
 further_reading:
-    - link: 'logs/'
+    - link: '/logs/'
       tag: 'Documentation'
       text: 'Collect your logs'
     - link: '/infrastructure/process'
@@ -78,7 +78,7 @@ Other: See [logs endpoints][3]
 `http-encrypted-intake.logs.datadoghq.com`
 
 [1]: /logs/
-[2]: /security/logs/#hipaa-enabled-customers
+[2]: /data_security/logs/#hipaa-enabled-customers
 [3]: /logs/log_collection/#logging-endpoints
 
 {{< /site-region >}}
@@ -97,7 +97,7 @@ Other: See [logs endpoints][3]
 `http-encrypted-intake.logs.datadoghq.eu`
 
 [1]: /logs/
-[2]: /security/logs/#hipaa-enabled-customers
+[2]: /data_security/logs/#hipaa-enabled-customers
 [3]: /logs/log_collection/#logging-endpoints
 
 {{< /site-region >}}
@@ -114,7 +114,7 @@ Other: See [logs endpoints][3]
 `http-encrypted-intake.logs.us3.datadoghq.com`
 
 [1]: /logs/
-[2]: /security/logs/#hipaa-enabled-customers
+[2]: /data_security/logs/#hipaa-enabled-customers
 [3]: /logs/log_collection/#logging-endpoints
 
 {{< /site-region >}}
@@ -131,7 +131,7 @@ Other: See [logs endpoints][3]
 `http-encrypted-intake.logs.us5.datadoghq.com`
 
 [1]: /logs/
-[2]: /security/logs/#hipaa-enabled-customers
+[2]: /data_security/logs/#hipaa-enabled-customers
 [3]: /logs/log_collection/#logging-endpoints
 
 {{< /site-region >}}
@@ -148,7 +148,7 @@ Other: See [logs endpoints][3]
 `http-encrypted-intake.logs.ddog-gov.com`
 
 [1]: /logs/
-[2]: /security/logs/#hipaa-enabled-customers
+[2]: /data_security/logs/#hipaa-enabled-customers
 [3]: /logs/log_collection/#logging-endpoints
 
 {{< /site-region >}}
