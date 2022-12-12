@@ -186,11 +186,7 @@ client.connect(err => {
 });
 
 client.query('SELECT $1::text as message', ['Hello world!'], (err, result) => {
-	if (err) return done(err)
-
-	client.end((err) => {
-		if (err) return done(err)
-	})
+	// handle result
 })
 ```
 
