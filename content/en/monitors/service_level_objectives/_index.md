@@ -51,7 +51,7 @@ You can use Datadog’s [Service Level Objectives status page][1] to create new 
 
 1. On the [SLO status page][1], select **New SLO +**.
 2. Define the source for your SLO. You can create an SLO from [metrics][3] or [monitors][4].
-3. Set a target and a rolling time window (past 7, 30, or 90 days) for the SLO. It is recommended that you make the target stricter than your stipulated SLAs. If you configure more than one time window, select one to be the primary time window. This time window will be displayed on SLO lists. By default, the shortest time window will be selected. 
+3. Set a target and a rolling time window (past 7, 30, or 90 days) for the SLO. Datadog recommends you make the target stricter than your stipulated SLAs. If you configure more than one time window, select one to be the primary time window. This time window is displayed on SLO lists. By default, the shortest time window is selected. 
 4. Finally, give the SLO a title, describe it in more detail or add links in the description, add tags, and save it.
 
 After you set up the SLO, select it from the [Service Level Objectives list view][1] to open the details side panel. The side panel displays the overall status percentage and remaining error budget for each of the SLO's targets, as well as status bars (monitor-based SLOs) or bar graphs (metric-based SLOs) of the SLI's history. If you created a grouped monitor-based SLO using one [multi alert monitor][5] or a grouped metric-based SLO using the [`sum by` clause][6], the status percentage and remaining error budget for each individual group is displayed in addition to the overall status percentage and remaining error budget.
