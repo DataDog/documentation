@@ -165,6 +165,22 @@ The following out-of-the-box tags are also available for filtering and grouping 
 | `is_aws_ec2_spot_instance`   | Whether the usage is associated with a Spot Instance.|
 | `is_aws_ec2_savings_plan`    | Whether the usage is associated with a Savings Plan.|
 
+## Tag Pipelines (Beta)
+
+You can leverage tag pipelines to create tag rules in order to 1) help fix missing or incorrect tags on your AWS bill or 2) to create new, inferred tags that align with business logic.
+
+There are 2 types of rules supported 1) Create new tag, and 2) Alias existing tag keys. You can keep your rules organized, by leveraging rules-sets, which act as folders for your rules. The rules are executed in order (from top to bottom), to keep the execution order deterministic. You can move rules and rulesets to ensure the order of execution matches your business logic. 
+
+### Rule Types
+
+**Create new tag** - This allows you to create a new tag (key + value) based on the presence of existing tags. For example, yu can create a rule to tag all resources that are part of team A, B or C, and also run application 1, with a new cost-center:bits tag.
+
+**Alias existing tag keys** - This allows you to use values from an existing tag, to map to a more standardized tag key. For example, if you’re looking to standardize across your organization to use the application tag key, but several teams have a variation of that tag (like app or web-app or apps), you can alias apps to application. Each alias tag rule allows you to alias a maximum of 25 tag keys to a new tag.   
+
+The rule stops executing for each resource, once a first match is found. For example, if a resource already has a web-app tag, then the rule will no longer attempt to identify an apps or service tag. 
+
+Note: A maximum of 100 rules can be created. 
+
 ## Cloud costs in dashboards
 
 Visualizing infrastructure spend alongside related utilization metrics can help you spot potential inefficiencies and savings opportunities. You can add cloud costs to widgets in Datadog dashboards by selecting the *Cloud Cost* data source.
