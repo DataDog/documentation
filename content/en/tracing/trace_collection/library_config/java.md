@@ -110,7 +110,7 @@ Available since version 0.96.0.
 Accepts a map of case-insensitive header keys to tag names and automatically applies matching response header values as tags on traces. Also accepts entries without a specified tag name that are automatically mapped to tags of the form `http.response.headers.<header-name>`.<br>
 Available since version 0.96.0.
 
-`trace.header.baggage`
+`dd.trace.header.baggage`
 : **Environment Variable**: `DD_TRACE_HEADER_BAGGAGE`<br>
 **Default**: `null`<br>
 **Example**: `CASE-insensitive-Header:my-baggage-name,User-ID:userId,My-Header-And-Baggage-Name`<br>
