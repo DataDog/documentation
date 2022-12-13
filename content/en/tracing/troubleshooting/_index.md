@@ -56,6 +56,7 @@ Datadog truncates the following strings if they exceed the indicated number of c
 | [resource][7]   |  5000      |
 | [tag key][8]    |  200       |
 | [tag value][8]  |  5000      |
+| [second primary tag][16]  |  30      |
 
 Additionally, the number of [span tags][8] present on any span cannot exceed 256.
 
@@ -143,3 +144,4 @@ kubectl exec -it <agent-pod-name> -c trace-agent -- agent flare <case-id> --loca
 [13]: /agent/troubleshooting/debug_mode/?tab=agentv6v7
 [14]: /tracing/custom_instrumentation/
 [15]: /tracing/compatibility_requirements/
+[16]: /tracing/guide/setting_primary_tags_to_scope/?tab=helm#add-a-second-primary-tag-in-datadog
