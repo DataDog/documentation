@@ -228,7 +228,7 @@ The sample project includes a second application called `calendar_app` that retu
 1. Start the calendar application by running:
 
    {{< code-block lang="bash" >}}
-DD_SERVICE=calendar DD_ENV=dev DD_VERSION=0.1.0 \ 
+DD_SERVICE=calendar DD_ENV=dev DD_VERSION=0.1.0 \
 ddtrace-run python -m calendar_app.app
    {{< /code-block >}}
 

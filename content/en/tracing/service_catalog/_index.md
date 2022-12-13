@@ -6,7 +6,7 @@ aliases:
 further_reading:
 - link: "/tracing/service_catalog/service_definition_api/"
   tag: "Documentation"
-  text: "Service Definition API"
+  text: "Registering Services with the Service Definition API"
 - link: "/tracing/service_catalog/guides/understanding-service-configuration"
   tag: "Guide"
   text: "Understanding Your Service Configuration"
@@ -197,4 +197,4 @@ The permission is enabled by default in the **Datadog Admin Role** and **Datadog
 [8]: /tracing/service_catalog/setup/
 [9]: /account_management/rbac/
 [10]: /account_management/rbac/permissions/
-[11]: /security_platform/application_security/how-appsec-works/
+[11]: /security/application_security/how-appsec-works/
