@@ -353,7 +353,7 @@ where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the gro
 [15]: /agent/kubernetes/apm/
 [16]: /infrastructure/process/?tab=kubernetes#installation
 [17]: /network_monitoring/performance/setup/
-[18]: /security/agent/
+[18]: /data_security/agent/
 [19]: https://app.datadoghq.com/organization-settings/api-keys
 [20]: /getting_started/site/
 [21]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard

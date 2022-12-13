@@ -89,6 +89,6 @@ An extra `status` tag is available on the `datadog.estimated_usage.logs.ingested
 [7]: /logs/explorer/facets/#quantitative-facets-measures
 [8]: /getting_started/tagging/
 [9]: /metrics/custom_metrics/
-[10]: /security/logs/#hipaa-enabled-customers
+[10]: /data_security/logs/#hipaa-enabled-customers
 [11]: /account_management/billing/custom_metrics/?tab=countrategauge
 [12]: /metrics/custom_metrics/#naming-custom-metrics
