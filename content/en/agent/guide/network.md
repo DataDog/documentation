@@ -255,6 +255,12 @@ See [default NTP targets][2].
 : Port for log collection over TCP.<br>
 See [logs endpoints][3] for other connection types.
 
+6062/tcp
+: Port for the debug endpoints for the Process Agent.
+
+6162/tcp
+: Port for configuring runtime settings for the Process Agent.
+
 10255/tcp
 : Port for the [Kubernetes HTTP Kubelet][4]
 
@@ -276,6 +282,12 @@ See [logs endpoints][3] for other connection types.
 123/udp
 : Port for NTP ([more details on the importance of NTP][1]).<br>
 See [default NTP targets][2].
+
+6062/tcp
+: Port for the debug endpoints for the Process Agent.
+
+6162/tcp
+: Port for configuring runtime settings for the Process Agent.
 
 10255/tcp
 : Port for the [Kubernetes HTTP Kubelet][4]
@@ -323,6 +335,13 @@ Used for Agent services communicating with each other locally within the host on
 123/udp
 : Port for NTP ([more details on the importance of NTP][1]).<br>
 See [default NTP targets][2].
+
+6062/tcp
+: Port for the debug endpoints for the Process Agent.
+
+6162/tcp
+: Port for configuring runtime settings for the Process Agent.
+
 #### Inbound
 
 8125/udp
