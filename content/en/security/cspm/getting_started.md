@@ -226,7 +226,7 @@ After you explore the default detection rules, you can review and take action on
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/security/compliance/homepage
-[2]: /security_platform/default_rules/#cat-posture-management-cloud
+[2]: /security/default_rules/#cat-posture-management-cloud
 [3]: https://app.datadoghq.com/security/compliance?time=now
-[4]: /security_platform/cspm/frameworks_and_benchmarks#customize-how-your-environment-is-scanned-by-each-rule
-[5]: /security_platform/cspm/frameworks_and_benchmarks#set-notification-targets-for-detection-rules
+[4]: /security/cspm/frameworks_and_benchmarks#customize-how-your-environment-is-scanned-by-each-rule
+[5]: /security/cspm/frameworks_and_benchmarks#set-notification-targets-for-detection-rules
