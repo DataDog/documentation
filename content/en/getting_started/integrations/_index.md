@@ -4,12 +4,12 @@ kind: documentation
 aliases:
     - '/getting_started/integrations'
 further_reading:
-    - link: 'https://learn.datadoghq.com/courses/intro-to-integrations'
-      tag: 'Learning Center'
-      text: 'Introduction to Integrations'
-    - link: '/integrations/'
-      tag: 'Integrations'
-      text: 'See Datadog's full list of integrations'
+  - link: 'https://learn.datadoghq.com/courses/intro-to-integrations'
+    tag: 'Learning Center'
+    text: 'Introduction to Integrations'
+  - link: '/integrations/'
+    tag: 'Documentation'
+    text: 'See a list of Datadog integrations'
 ---
 
 This is a guide for using integrations, if you are looking for information about building a new integration, see the [Create a new integration][1] page.

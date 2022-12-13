@@ -15,8 +15,8 @@ further_reading:
       tag: 'Learning Center'
       text: 'Introduction to Application Performance Monitoring'
     - link: 'https://www.datadoghq.com/blog/engineering/how-we-optimized-our-akka-application-using-datadogs-continuous-profiler/'
-      tags: 'Blog'
-      text: 'How we optimized our Akka application using Datadog’s Continuous Profiler'
+      tag: 'Blog'
+      text: 'How we optimized our Akka application using Datadog's Continuous Profiler'
 ---
 
 Profiling can make your services faster, cheaper, and more reliable, but if you haven't used a profiler, it can be confusing.
