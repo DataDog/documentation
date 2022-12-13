@@ -18611,6 +18611,8 @@ components:
           type: string
         limit:
           $ref: '#/components/schemas/WidgetFormulaLimit'
+        style:
+          $ref: '#/components/schemas/WidgetFormulaStyle'
       required:
       - formula
       type: object
@@ -18623,6 +18625,20 @@ components:
           type: integer
         order:
           $ref: '#/components/schemas/QuerySortOrder'
+      type: object
+    WidgetFormulaStyle:
+      description: Styling options for widget formulas.
+      properties:
+        palette:
+          description: The color palette used to display the formula. A guide to the
+            available color palettes can be found at https://docs.datadoghq.com/dashboards/guide/widget_colors
+          example: classic
+          type: string
+        palette_index:
+          description: Index specifying which color to use within the palette.
+          example: 1
+          format: int64
+          type: integer
       type: object
     WidgetGrouping:
       description: The kind of grouping to use.
