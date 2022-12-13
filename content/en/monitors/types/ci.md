@@ -143,7 +143,7 @@ For detailed instructions on the advanced alert options (such as evaluation dela
 
 For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][4] page.
 
-#### Samples and breaching values toplist
+#### Samples and breaching values top list
 
 When a CI Test or Pipeline monitor is triggered, samples or values can be added to the notification message.
 
