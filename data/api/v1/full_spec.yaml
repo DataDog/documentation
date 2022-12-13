@@ -3279,26 +3279,6 @@ components:
       required:
       - message
       type: object
-    HTTPMethod:
-      description: The HTTP method.
-      enum:
-      - GET
-      - POST
-      - PATCH
-      - PUT
-      - DELETE
-      - HEAD
-      - OPTIONS
-      example: GET
-      type: string
-      x-enum-varnames:
-      - GET
-      - POST
-      - PATCH
-      - PUT
-      - DELETE
-      - HEAD
-      - OPTIONS
     HeatMapWidgetDefinition:
       description: The heat map visualization shows metrics aggregated across many
         tags, such as hosts. The more hosts that have a particular value, the darker
@@ -3824,6 +3804,7 @@ components:
       - api_usage
       - apm_fargate_usage
       - apm_host_usage
+      - appsec_fargate_usage
       - appsec_usage
       - browser_usage
       - container_usage
@@ -3852,6 +3833,7 @@ components:
       - API_USAGE
       - APM_FARGATE_USAGE
       - APM_HOST_USAGE
+      - APPSEC_FARGATE_USAGE
       - APPSEC_USAGE
       - BROWSER_USAGE
       - CONTAINER_USAGE
@@ -5002,6 +4984,7 @@ components:
         daily_limit:
           description: The number of log events you can send in this index per day
             before you are rate-limited.
+          example: 300000000
           format: int64
           type: integer
         disable_daily_limit:
@@ -5012,6 +4995,7 @@ components:
             omitted, the index''s current
 
             `daily_limit` is maintained.'
+          example: false
           type: boolean
         exclusion_filters:
           description: 'An array of exclusion objects. The logs are tested against
@@ -5037,6 +5021,7 @@ components:
             for all logs
 
             already in this index. It may also affect billing.'
+          example: 15
           format: int64
           type: integer
       required:
@@ -5170,7 +5155,9 @@ components:
             associated target attribute values,
 
             formatted as `["source_key1,target_value1", "source_key2,target_value2"]`'
-          example: []
+          example:
+          - source_key1,target_value1
+          - source_key2,target_value2
           items:
             description: Mapping between a source and a value, it should follow the
               format `"<SOURCE>,<VALUE>"`.
@@ -5181,14 +5168,14 @@ components:
           type: string
         source:
           description: Source attribute used to perform the lookup.
-          example: ''
+          example: service_id
           type: string
         target:
           description: 'Name of the attribute that contains the corresponding value
             in the mapping list
 
             or the `default_lookup` if not found in the mapping list.'
-          example: ''
+          example: service
           type: string
         type:
           $ref: '#/components/schemas/LogsLookupProcessorType'
@@ -5375,6 +5362,7 @@ components:
       - $ref: '#/components/schemas/LogsPipelineProcessor'
       - $ref: '#/components/schemas/LogsGeoIPParser'
       - $ref: '#/components/schemas/LogsLookupProcessor'
+      - $ref: '#/components/schemas/ReferenceTableLogsLookupProcessor'
       - $ref: '#/components/schemas/LogsTraceRemapper'
       type: object
     LogsQueryCompute:
@@ -6503,6 +6491,8 @@ components:
             to `false` for sparse metrics,\notherwise some evaluations are skipped.
             Default is false."
           type: boolean
+        scheduling_options:
+          $ref: '#/components/schemas/MonitorOptionsSchedulingOptions'
         silenced:
           additionalProperties:
             description: UTC epoch timestamp in seconds when the downtime for the
@@ -6553,6 +6543,39 @@ components:
           example: count
           type: string
       readOnly: true
+      type: object
+    MonitorOptionsSchedulingOptions:
+      description: Configuration options for scheduling.
+      properties:
+        evaluation_window:
+          $ref: '#/components/schemas/MonitorOptionsSchedulingOptionsEvaluationWindow'
+      type: object
+    MonitorOptionsSchedulingOptionsEvaluationWindow:
+      description: Configuration options for the evaluation window. If `hour_starts`
+        is set, no other fields may be set. Otherwise, `day_starts` and `month_starts`
+        must be set together.
+      properties:
+        day_starts:
+          description: The time of the day at which a one day cumulative evaluation
+            window starts. Must be defined in UTC time in `HH:mm` format.
+          example: 04:00
+          type: string
+        hour_starts:
+          description: The minute of the hour at which a one hour cumulative evaluation
+            window starts.
+          example: 0
+          format: int32
+          maximum: 59
+          minimum: 0
+          type: integer
+        month_starts:
+          description: The day of the month at which a one month cumulative evaluation
+            window starts.
+          example: 1
+          format: int32
+          maximum: 1
+          minimum: 1
+          type: integer
       type: object
     MonitorOverallStates:
       description: The different states your monitor can be in.
@@ -7106,6 +7129,8 @@ components:
       - api_percentage
       - apm_fargate_usage
       - apm_fargate_percentage
+      - appsec_fargate_usage
+      - appsec_fargate_percentage
       - apm_host_usage
       - apm_host_percentage
       - appsec_usage
@@ -7161,6 +7186,8 @@ components:
       - API_PERCENTAGE
       - APM_FARGATE_USAGE
       - APM_FARGATE_PERCENTAGE
+      - APPSEC_FARGATE_USAGE
+      - APPSEC_FARGATE_PERCENTAGE
       - APM_HOST_USAGE
       - APM_HOST_PERCENTAGE
       - APPSEC_USAGE
@@ -7237,6 +7264,16 @@ components:
           description: The APM host usage by tag(s).
           format: double
           type: number
+        appsec_fargate_percentage:
+          description: The percentage of Application Security Monitoring ECS Fargate
+            task usage by tag(s).
+          format: double
+          type: number
+        appsec_fargate_usage:
+          description: The Application Security Monitoring ECS Fargate task usage
+            by tag(s).
+          format: double
+          type: number
         appsec_percentage:
           description: The percentage of Application Security Monitoring host usage
             by tag(s).
@@ -7262,12 +7299,61 @@ components:
           description: The container usage by tag(s).
           format: double
           type: number
+        cspm_containers_percentage:
+          description: The percentage of CSPM container usage by tag(s).
+          format: double
+          type: number
+        cspm_containers_usage:
+          description: The CSPM container usage by tag(s).
+          format: double
+          type: number
+        cspm_hosts_percentage:
+          description: The percentage of CSPM host usage by by tag(s).
+          format: double
+          type: number
+        cspm_hosts_usage:
+          description: The CSPM host usage by tag(s).
+          format: double
+          type: number
         custom_timeseries_percentage:
           description: The percentage of custom metrics usage by tag(s).
           format: double
           type: number
         custom_timeseries_usage:
           description: The custom metrics usage by tag(s).
+          format: double
+          type: number
+        cws_containers_percentage:
+          description: The percentage of Cloud Workload Security container usage by
+            tag(s).
+          format: double
+          type: number
+        cws_containers_usage:
+          description: The Cloud Workload Security container usage by tag(s).
+          format: double
+          type: number
+        cws_hosts_percentage:
+          description: The percentage of Cloud Workload Security host usage by tag(s).
+          format: double
+          type: number
+        cws_hosts_usage:
+          description: The Cloud Workload Security host usage by tag(s).
+          format: double
+          type: number
+        dbm_hosts_percentage:
+          description: The percentage of Database Monitoring host usage by tag(s).
+          format: double
+          type: number
+        dbm_hosts_usage:
+          description: The Database Monitoring host usage by tag(s).
+          format: double
+          type: number
+        dbm_queries_percentage:
+          description: The percentage of Database Monitoring queries usage by tag(s).
+          format: double
+          type: number
+        dbm_queries_usage:
+          description: The Database Monitoring queries usage by tag(s).
           format: double
           type: number
         estimated_indexed_logs_percentage:
@@ -8623,6 +8709,51 @@ components:
           $ref: '#/components/schemas/LogQueryDefinition'
         security_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+      type: object
+    ReferenceTableLogsLookupProcessor:
+      description: '**Note**: Reference Tables are in public beta.
+
+        Use the Lookup Processor to define a mapping between a log attribute
+
+        and a human readable value saved in a Reference Table.
+
+        For example, you can use the Lookup Processor to map an internal service ID
+
+        into a human readable service name. Alternatively, you could also use it to
+        check
+
+        if the MAC address that just attempted to connect to the production
+
+        environment belongs to your list of stolen machines.'
+      properties:
+        is_enabled:
+          default: false
+          description: Whether or not the processor is enabled.
+          type: boolean
+        lookup_enrichment_table:
+          description: Name of the Reference Table for the source attribute and their
+            associated target attribute values.
+          example: service_id_to_service_name_table
+          type: string
+        name:
+          description: Name of the processor.
+          type: string
+        source:
+          description: Source attribute used to perform the lookup.
+          example: service_id
+          type: string
+        target:
+          description: Name of the attribute that contains the corresponding value
+            in the mapping list.
+          example: service
+          type: string
+        type:
+          $ref: '#/components/schemas/LogsLookupProcessorType'
+      required:
+      - source
+      - target
+      - lookup_enrichment_table
+      - type
       type: object
     ResponseMetaAttributes:
       description: Object describing meta attributes of response.
@@ -11815,6 +11946,7 @@ components:
       oneOf:
       - $ref: '#/components/schemas/SyntheticsAssertionTarget'
       - $ref: '#/components/schemas/SyntheticsAssertionJSONPathTarget'
+      - $ref: '#/components/schemas/SyntheticsAssertionXPathTarget'
       type: object
     SyntheticsAssertionJSONPathOperator:
       description: Assertion operator to apply.
@@ -11944,6 +12076,42 @@ components:
       - RECEIVED_MESSAGE
       - GRPC_HEALTHCHECK_STATUS
       - CONNECTION
+    SyntheticsAssertionXPathOperator:
+      description: Assertion operator to apply.
+      enum:
+      - validatesXPath
+      example: validatesXPath
+      type: string
+      x-enum-varnames:
+      - VALIDATES_X_PATH
+    SyntheticsAssertionXPathTarget:
+      description: An assertion for the `validatesXPath` operator.
+      properties:
+        operator:
+          $ref: '#/components/schemas/SyntheticsAssertionXPathOperator'
+        property:
+          description: The associated assertion property.
+          type: string
+        target:
+          $ref: '#/components/schemas/SyntheticsAssertionXPathTargetTarget'
+        type:
+          $ref: '#/components/schemas/SyntheticsAssertionType'
+      required:
+      - type
+      - operator
+      type: object
+    SyntheticsAssertionXPathTargetTarget:
+      description: Composed target for `validatesXPath` operator.
+      properties:
+        operator:
+          description: The specific operator to use on the path.
+          type: string
+        targetValue:
+          description: The path target value to compare to.
+        xPath:
+          description: The X path to assert.
+          type: string
+      type: object
     SyntheticsBasicAuth:
       description: Object to handle basic authentication when performing the test.
       oneOf:
@@ -11951,6 +12119,8 @@ components:
       - $ref: '#/components/schemas/SyntheticsBasicAuthSigv4'
       - $ref: '#/components/schemas/SyntheticsBasicAuthNTLM'
       - $ref: '#/components/schemas/SyntheticsBasicAuthDigest'
+      - $ref: '#/components/schemas/SyntheticsBasicAuthOauthClient'
+      - $ref: '#/components/schemas/SyntheticsBasicAuthOauthROP'
       type: object
     SyntheticsBasicAuthDigest:
       description: Object to handle digest authentication when performing the test.
@@ -12014,6 +12184,118 @@ components:
       type: string
       x-enum-varnames:
       - NTLM
+    SyntheticsBasicAuthOauthClient:
+      description: Object to handle `oauth client` authentication when performing
+        the test.
+      properties:
+        accessTokenUrl:
+          description: Access token URL to use when performing the authentication.
+          example: https://example.com
+          type: string
+        audience:
+          description: Audience to use when performing the authentication.
+          example: audience
+          type: string
+        clientId:
+          description: Client ID to use when performing the authentication.
+          example: oauth-username
+          type: string
+        clientSecret:
+          description: Client secret to use when performing the authentication.
+          example: oauth-password
+          type: string
+        resource:
+          description: Resource to use when performing the authentication.
+          example: resource
+          type: string
+        scope:
+          description: Scope to use when performing the authentication.
+          example: scope
+          type: string
+        tokenApiAuthentication:
+          $ref: '#/components/schemas/SyntheticsBasicAuthOauthTokenApiAuthentication'
+        type:
+          $ref: '#/components/schemas/SyntheticsBasicAuthOauthClientType'
+      required:
+      - accessTokenUrl
+      - tokenApiAuthentication
+      - clientId
+      - clientSecret
+      type: object
+    SyntheticsBasicAuthOauthClientType:
+      default: oauth-client
+      description: The type of basic authentication to use when performing the test.
+      enum:
+      - oauth-client
+      example: oauth-client
+      type: string
+      x-enum-varnames:
+      - OAUTH_CLIENT
+    SyntheticsBasicAuthOauthROP:
+      description: Object to handle `oauth rop` authentication when performing the
+        test.
+      properties:
+        accessTokenUrl:
+          description: Access token URL to use when performing the authentication.
+          example: https://example.com
+          type: string
+        audience:
+          description: Audience to use when performing the authentication.
+          example: audience
+          type: string
+        clientId:
+          description: Client ID to use when performing the authentication.
+          example: client-id
+          type: string
+        clientSecret:
+          description: Client secret to use when performing the authentication.
+          example: client-secret
+          type: string
+        password:
+          description: Password to use when performing the authentication.
+          example: password
+          type: string
+        resource:
+          description: Resource to use when performing the authentication.
+          example: resource
+          type: string
+        scope:
+          description: Scope to use when performing the authentication.
+          example: scope
+          type: string
+        tokenApiAuthentication:
+          $ref: '#/components/schemas/SyntheticsBasicAuthOauthTokenApiAuthentication'
+        type:
+          $ref: '#/components/schemas/SyntheticsBasicAuthOauthROPType'
+        username:
+          description: Username to use when performing the authentication.
+          example: username
+          type: string
+      required:
+      - accessTokenUrl
+      - password
+      - tokenApiAuthentication
+      - username
+      type: object
+    SyntheticsBasicAuthOauthROPType:
+      default: oauth-rop
+      description: The type of basic authentication to use when performing the test.
+      enum:
+      - oauth-rop
+      example: oauth-rop
+      type: string
+      x-enum-varnames:
+      - OAUTH_ROP
+    SyntheticsBasicAuthOauthTokenApiAuthentication:
+      description: Type of token to use when performing the authentication.
+      enum:
+      - header
+      - body
+      example: header
+      type: string
+      x-enum-varnames:
+      - HEADER
+      - BODY
     SyntheticsBasicAuthSigv4:
       description: Object to handle `SIGV4` authentication when performing the test.
       properties:
@@ -13261,6 +13543,9 @@ components:
         name:
           description: The name of the step.
           type: string
+        noScreenshot:
+          description: A boolean set to not take a screenshot for the step.
+          type: boolean
         params:
           description: The parameters of the step.
           type: object
@@ -13404,6 +13689,16 @@ components:
       - TYPE_TEXT
       - UPLOAD_FILES
       - WAIT
+    SyntheticsTestCallType:
+      description: The type of gRPC call to perform.
+      enum:
+      - healthcheck
+      - unary
+      example: unary
+      type: string
+      x-enum-varnames:
+      - HEALTHCHECK
+      - UNARY
     SyntheticsTestCiOptions:
       description: CI/CD options for a Synthetic test.
       properties:
@@ -13569,7 +13864,8 @@ components:
             certificates.'
           type: boolean
         allow_insecure:
-          description: Allows loading insecure content for an HTTP request.
+          description: Allows loading insecure content for an HTTP request in an API
+            test.
           type: boolean
         checkCertificateRevocation:
           description: For SSL test, whether or not the test should fail on revoked
@@ -13593,7 +13889,7 @@ components:
           description: For API HTTP test, whether or not the test should follow redirects.
           type: boolean
         ignoreServerCertificateError:
-          description: Ignore server certificate error.
+          description: Ignore server certificate error for browser tests.
           type: boolean
         initialNavigationTimeout:
           description: Timeout before declaring the initial step as failed (in seconds)
@@ -13708,6 +14004,10 @@ components:
         body:
           description: Body to include in the test.
           type: string
+        bodyType:
+          $ref: '#/components/schemas/SyntheticsTestRequestBodyType'
+        callType:
+          $ref: '#/components/schemas/SyntheticsTestCallType'
         certificate:
           $ref: '#/components/schemas/SyntheticsTestRequestCertificate'
         certificateDomains:
@@ -13743,7 +14043,10 @@ components:
         metadata:
           $ref: '#/components/schemas/SyntheticsTestMetadata'
         method:
-          $ref: '#/components/schemas/HTTPMethod'
+          description: Either the HTTP method/verb to use or a gRPC method available
+            on the service set in the `service` field. Required if `subtype` is `HTTP`
+            or if `subtype` is `grpc` and `callType` is `unary`.
+          type: string
         noSavingResponseBody:
           description: Determines whether or not to save the response body.
           type: boolean
@@ -13771,7 +14074,8 @@ components:
             the same IP address and TCP port number.'
           type: string
         service:
-          description: gRPC service on which you want to perform the healthcheck.
+          description: The gRPC service on which you want to perform the gRPC call.
+          example: Greeter
           type: string
         shouldTrackHops:
           description: Turns on a traceroute probe to discover all gateways along
@@ -13786,6 +14090,24 @@ components:
           example: https://example.com
           type: string
       type: object
+    SyntheticsTestRequestBodyType:
+      description: Type of the request body.
+      enum:
+      - text/plain
+      - application/json
+      - text/xml
+      - text/html
+      - application/x-www-form-urlencoded
+      - graphql
+      example: text/plain
+      type: string
+      x-enum-varnames:
+      - TEXT_PLAIN
+      - APPLICATION_JSON
+      - TEXT_XML
+      - TEXT_HTML
+      - APPLICATION_X_WWW_FORM_URLENCODED
+      - GRAPHQL
     SyntheticsTestRequestCertificate:
       description: Client certificate to use when performing the test request.
       properties:
@@ -14743,6 +15065,8 @@ components:
       - estimated_ingested_spans_percentage
       - apm_fargate_usage
       - apm_fargate_percentage
+      - appsec_fargate_usage
+      - appsec_fargate_percentage
       type: string
       x-enum-varnames:
       - API_PERCENTAGE
@@ -14777,6 +15101,8 @@ components:
       - ESTIMATED_INGESTED_SPANS_PERCENTAGE
       - APM_FARGATE_USAGE
       - APM_FARGATE_PERCENTAGE
+      - APPSEC_FARGATE_USAGE
+      - APPSEC_FARGATE_PERCENTAGE
     UsageAttributionSupportedMetrics:
       description: Supported fields for usage attribution requests (valid requests
         contain one or more metrics, or `*` for all).
@@ -14823,6 +15149,8 @@ components:
       - estimated_ingested_spans_percentage
       - apm_fargate_usage
       - apm_fargate_percentage
+      - appsec_fargate_usage
+      - appsec_fargate_percentage
       - '*'
       type: string
       x-enum-varnames:
@@ -14868,6 +15196,8 @@ components:
       - ESTIMATED_INGESTED_SPANS_PERCENTAGE
       - APM_FARGATE_USAGE
       - APM_FARGATE_PERCENTAGE
+      - APPSEC_FARGATE_USAGE
+      - APPSEC_FARGATE_PERCENTAGE
       - ALL
     UsageAttributionTagNames:
       additionalProperties:
@@ -14922,6 +15252,16 @@ components:
           type: number
         apm_host_usage:
           description: The APM host usage by tag(s).
+          format: double
+          type: number
+        appsec_fargate_percentage:
+          description: The percentage of Application Security Monitoring ECS Fargate
+            task usage by tag(s).
+          format: double
+          type: number
+        appsec_fargate_usage:
+          description: The Application Security Monitoring ECS Fargate task usage
+            by tag(s).
           format: double
           type: number
         appsec_percentage:
@@ -15217,7 +15557,11 @@ components:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         apm_trace_search_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
+        application_security_fargate_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
         application_security_host_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        application_security_host_top99:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         ci_pipeline_indexed_spans_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
@@ -15230,6 +15574,10 @@ components:
         ci_testing_maximum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         ci_testing_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        cloud_cost_management_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        cloud_cost_management_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         cspm_container_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
@@ -15293,6 +15641,8 @@ components:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         lambda_function_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
+        logs_forwarding_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
         logs_indexed_15day_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         logs_indexed_180day_sum:
@@ -15347,6 +15697,12 @@ components:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         sensitive_data_scanner_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
+        serverless_apm_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        serverless_infra_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        serverless_infra_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
         serverless_invocation_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         siem_sum:
@@ -15354,6 +15710,8 @@ components:
         standard_timeseries_average:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         synthetics_api_tests_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        synthetics_app_testing_maximum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         synthetics_browser_checks_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
@@ -15476,6 +15834,12 @@ components:
         container_count:
           description: The total number of Cloud Security Posture Management containers
             during a given hour.
+          format: double
+          nullable: true
+          type: number
+        gcp_host_count:
+          description: The number of Cloud Security Posture Management GCP hosts during
+            a given hour.
           format: double
           nullable: true
           type: number
@@ -15609,6 +15973,11 @@ components:
             hour.
           format: int64
           type: integer
+        appsec_fargate_count:
+          description: The Application Security Monitoring ECS Fargate tasks during
+            the given hour.
+          format: int64
+          type: integer
         avg_profiled_fargate_tasks:
           description: The average profiled task count for Fargate Profiling.
           format: int64
@@ -15713,6 +16082,11 @@ components:
             Azure App Services integration
 
             (and were NOT running the Datadog Agent).'
+          format: int64
+          type: integer
+        opentelemetry_apm_host_count:
+          description: Contains the total number of hosts using APM reported by Datadog
+            exporter for the OpenTelemetry Collector.
           format: int64
           type: integer
         opentelemetry_host_count:
@@ -16440,6 +16814,11 @@ components:
             hours in the current date for all organizations.
           format: int64
           type: integer
+        appsec_fargate_count_avg:
+          description: Shows the average of all Application Security Monitoring ECS
+            Fargate tasks over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         audit_logs_lines_indexed_sum:
           description: Shows the sum of audit logs lines indexed over all hours in
             the current date for all organizations.
@@ -16542,6 +16921,11 @@ components:
         cspm_container_hwm:
           description: Shows the high-water mark of Cloud Security Posture Management
             containers over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        cspm_gcp_host_top99p:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            GCP hosts over all hours in the current date for all organizations.
           format: int64
           type: integer
         cspm_host_top99p:
@@ -16678,6 +17062,12 @@ components:
             date for all organizations.
           format: int64
           type: integer
+        opentelemetry_apm_host_top99p:
+          description: Shows the 99th percentile of APM hosts reported by the Datadog
+            exporter for the OpenTelemetry Collector over all hours in the current
+            date for all organizations.
+          format: int64
+          type: integer
         opentelemetry_host_top99p:
           description: Shows the 99th percentile of all hosts reported by the Datadog
             exporter for the OpenTelemetry Collector over all hours in the current
@@ -16790,6 +17180,11 @@ components:
             hours in the current date for the given org.
           format: int64
           type: integer
+        appsec_fargate_count_avg:
+          description: Shows the average of all Application Security Monitoring ECS
+            Fargate tasks over all hours in the current months for the given org.
+          format: int64
+          type: integer
         audit_logs_lines_indexed_sum:
           description: Shows the sum of all audit logs lines indexed over all hours
             in the current date for the given org.
@@ -16893,6 +17288,11 @@ components:
         cspm_container_hwm:
           description: Shows the high-water mark of Cloud Security Posture Management
             containers over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        cspm_gcp_host_top99p:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            GCP hosts over all hours in the current date for the given org.
           format: int64
           type: integer
         cspm_host_top99p:
@@ -17030,6 +17430,12 @@ components:
             date for the given org.
           format: int64
           type: integer
+        opentelemetry_apm_host_top99p:
+          description: Shows the 99th percentile of APM hosts reported by the Datadog
+            exporter for the OpenTelemetry Collector over all hours in the current
+            date for the given org.
+          format: int64
+          type: integer
         opentelemetry_host_top99p:
           description: Shows the 99th percentile of all hosts reported by the Datadog
             exporter for the OpenTelemetry Collector over all hours in the current
@@ -17143,6 +17549,11 @@ components:
             hours in the current months for all organizations.
           format: int64
           type: integer
+        appsec_fargate_count_avg_sum:
+          description: Shows the average of all Application Security Monitoring ECS
+            Fargate tasks over all hours in the current months for all organizations.
+          format: int64
+          type: integer
         audit_logs_lines_indexed_agg_sum:
           description: Shows the sum of all audit logs lines indexed over all hours
             in the current months for all organizations.
@@ -17253,6 +17664,11 @@ components:
           description: Shows the sum of the the high-water marks of Cloud Security
             Posture Management containers over all hours in the current months for
             all organizations.
+          format: int64
+          type: integer
+        cspm_gcp_host_top99p_sum:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            GCP hosts over all hours in the current months for all organizations.
           format: int64
           type: integer
         cspm_host_top99p_sum:
@@ -17406,6 +17822,12 @@ components:
           type: integer
         online_archive_events_count_agg_sum:
           description: Sum of all online archived events over all hours in the current
+            months for all organizations.
+          format: int64
+          type: integer
+        opentelemetry_apm_host_top99p_sum:
+          description: Shows the 99th percentile of APM hosts reported by the Datadog
+            exporter for the OpenTelemetry Collector over all hours in the current
             months for all organizations.
           format: int64
           type: integer
@@ -19427,7 +19849,7 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
-      x-menu-order: 4
+      x-menu-order: 6
       x-undo:
         type: idempotent
     get:
@@ -19478,7 +19900,7 @@ paths:
       summary: Get all dashboards
       tags:
       - Dashboards
-      x-menu-order: 2
+      x-menu-order: 3
       x-undo:
         type: safe
     patch:
@@ -19532,7 +19954,7 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
-      x-menu-order: 5
+      x-menu-order: 7
       x-undo:
         type: idempotent
     post:
@@ -19879,7 +20301,7 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
-      x-menu-order: 1
+      x-menu-order: 8
       x-undo:
         operationId: DeletePublicDashboard
         parameters:
@@ -19927,7 +20349,7 @@ paths:
       summary: Revoke a shared dashboard URL
       tags:
       - Dashboards
-      x-menu-order: 4
+      x-menu-order: 13
       x-undo:
         type: idempotent
     get:
@@ -19971,7 +20393,7 @@ paths:
       summary: Get a shared dashboard
       tags:
       - Dashboards
-      x-menu-order: 2
+      x-menu-order: 9
       x-undo:
         type: safe
     put:
@@ -20043,7 +20465,7 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
-      x-menu-order: 3
+      x-menu-order: 10
       x-undo:
         type: idempotent
   /api/v1/dashboard/public/{token}/invitation:
@@ -20098,7 +20520,7 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
-      x-menu-order: 7
+      x-menu-order: 14
       x-undo:
         type: idempotent
     get:
@@ -20155,7 +20577,7 @@ paths:
       summary: Get all invitations for a shared dashboard
       tags:
       - Dashboards
-      x-menu-order: 5
+      x-menu-order: 12
       x-undo:
         type: safe
     post:
@@ -20220,7 +20642,7 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
-      x-menu-order: 6
+      x-menu-order: 11
       x-undo:
         operationId: DeletePublicDashboardInvitation
         parameters:
@@ -20273,7 +20695,7 @@ paths:
           - name: dashboard_id
             source: dashboard.id
           step: the "dashboard" was deleted
-      x-menu-order: 3
+      x-menu-order: 5
       x-undo:
         type: idempotent
     get:
@@ -20315,7 +20737,7 @@ paths:
       summary: Get a dashboard
       tags:
       - Dashboards
-      x-menu-order: 7
+      x-menu-order: 2
       x-undo:
         type: safe
     put:
@@ -20371,7 +20793,7 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
-      x-menu-order: 6
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v1/distribution_points:
@@ -23617,7 +24039,7 @@ paths:
       tags:
       - Logs Indexes
       x-codegen-request-body-name: body
-      x-menu-order: 2
+      x-menu-order: 3
       x-undo:
         operationId: TODO
         parameters: []
@@ -23658,7 +24080,7 @@ paths:
       summary: Get an index
       tags:
       - Logs Indexes
-      x-menu-order: 3
+      x-menu-order: 2
       x-undo:
         type: safe
     put:
@@ -26889,6 +27311,22 @@ paths:
     get:
       description: Get all Service Level Objective corrections.
       operationId: ListSLOCorrection
+      parameters:
+      - description: The specific offset to use as the beginning of the returned response.
+        in: query
+        name: offset
+        required: false
+        schema:
+          format: int64
+          type: integer
+      - description: The number of SLO corrections to return in the response. Default
+          is 25.
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: int64
+          type: integer
       responses:
         '200':
           content:

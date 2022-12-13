@@ -33,9 +33,13 @@ If you can see test results data in the **Test Runs** tab, but not the **Tests**
 2. Next, tracers fetch Git metadata using the local `.git` folder, if present, by executing `git` commands. This populates all Git metadata fields, including commit message, author, and committer information. Ensure the `.git` folder is present and the `git` binary is installed and in `$PATH`. This information is used to populate attributes not detected in the previous step.
 3. You can also provide Git information manually using environment variables, which override information detected by any of the previous steps. The supported environment variables for providing Git information are the following:
 
-   `DD_GIT_REPOSITORY_URL`
+   `DD_GIT_REPOSITORY_URL` **(required)**
    : URL of the repository where the code is stored. Both HTTP and SSH URLs are supported.<br/>
    **Example**: `git@github.com:MyCompany/MyApp.git`, `https://github.com/MyCompany/MyApp.git`
+
+   `DD_GIT_COMMIT_SHA` **(required)**
+   : Full (40-character long SHA1) commit hash.<br/>
+   **Example**: `a18ebf361cc831f5535e58ec4fae04ffd98d8152`
 
    `DD_GIT_BRANCH`
    : Git branch being tested. Leave empty if providing tag information instead.<br/>
@@ -44,10 +48,6 @@ If you can see test results data in the **Test Runs** tab, but not the **Tests**
    `DD_GIT_TAG`
    : Git tag being tested (if applicable). Leave empty if providing branch information instead.<br/>
    **Example**: `1.0.1`
-
-   `DD_GIT_COMMIT_SHA`
-   : Full commit hash.<br/>
-   **Example**: `a18ebf361cc831f5535e58ec4fae04ffd98d8152`
 
    `DD_GIT_COMMIT_MESSAGE`
    : Commit message.<br/>
@@ -154,11 +154,14 @@ If you have admin access, you can update it from the [Repository Settings Page][
 [Intelligent Test Runner][12] works by analyzing your commit history along with code coverage information about past test runs to determine which tests need to be run and which ones can be safely skipped. A minimum amount of information needs to exist in order for the Intelligent Test Runner to work correctly:
 
 - Your repository needs to have a commit history of at least two commits in the past month.
-- You need to have collected test code coverage in past commits.
+- You need to have collected test code coverage in past commits, which happens on test runs where Intelligent Test Runner was enabled.
+- You git clone must contain commit and tree history. Shallow git clones (`git clone --depth=0`) are not supported.
 
 Due to these restrictions, the first time you enable Intelligent Test Runner, you cannot see any tests skipped and the test execution time may be slower than usual because the code coverage is collected automatically.
 
 Intelligent Test Runner only takes into account the commit history and test code coverage information for the past month. Additionally, it does not take into account code coverage information that is generated more than one week after a commit was made.
+
+If your CI job is using shallow git clones, you can change it to use partial git clones by using the following command: `git clone --filter=blob:none`.
 
 ### Intelligent Test Runner incorrectly skipped a test
 
@@ -169,7 +172,7 @@ Intelligent Test Runner performs test impact analysis based on code coverage to 
 - Changes in external services.
 - Changes to data files in data-driven tests.
 
-If you are authoring a commit that includes any of those cases, you can force-disable test skipping in Intelligent Test Runner by adding `ITR:NoSkip` (case insensitive) anywhere in your commit message.
+If you are authoring a commit that includes any of those cases, you can force-disable test skipping in Intelligent Test Runner by adding `ITR:NoSkip` (case insensitive) anywhere in your Git commit message.
 
 ### Need further help?
 

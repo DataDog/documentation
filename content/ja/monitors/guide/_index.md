@@ -29,7 +29,6 @@ cascade:
     {{< nextlink href="monitors/guide/set-up-an-alert-for-when-a-specific-tag-stops-reporting" >}}特定のタグのレポートが停止した場合のアラート設定{{< /nextlink >}}
     {{< nextlink href="monitors/guide/monitor-ephemeral-servers-for-reboots" >}}エフェメラルサーバーの再起動を監視する{{< /nextlink >}}
     {{< nextlink href="monitors/guide/how-to-update-anomaly-monitor-timezone" >}}ローカルタイムゾーンを考慮して異常検知モニターを更新する方法{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/schedule-downtime-on-a-subset-of-hosts" >}}一部のホストにダウンタイムを設定する{{< /nextlink >}}
     {{< nextlink href="monitors/guide/recovery-thresholds" >}}回復しきい値{{< /nextlink >}}
     {{< nextlink href="monitors/guide/adjusting-no-data-alerts-for-metric-monitors" >}}メトリクスモニターの "No Data” アラートを調整する{{< /nextlink >}}
     {{< nextlink href="monitors/guide/prevent-alerts-from-monitors-that-were-in-downtime" >}}ダウンタイムになったモニターからのアラートを防止する{{< /nextlink >}}

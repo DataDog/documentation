@@ -23,16 +23,20 @@ Usage Attribution は、Enterprise プランに含まれる高度な機能です
 - 毎月月末に使用方法を要約します。
 - UI および TSV ダウンロードとしてデータを表示します。
 
-以下の使用タイプはこのツールではサポートされません。
+このツールでは、以下のような多くの使用タイプがサポートされていません。
 
 - Analyzed Logs (Security)
 - インシデント管理
+- Network Flows
+- CI Spans
+
+Datadog は、以下の製品の Estimated Usage Attribution 値を提供しています。
+
 - インデックス化されたログイベント
 - 収集されたログ
 - Indexed Span
 - Ingested Span
-- Network Flows
-- リアルユーザーモニタリング (RUM)
+- リアルユーザーモニタリングの総セッション数
 
 ## はじめに
 
@@ -77,6 +81,8 @@ Usage Attribution は、Enterprise プランに含まれる高度な機能です
 
 {{< site-region region="us,eu" >}}
 ### 日次使用属性
+
+<div class="alert alert-warning">Datadog は、2023 年 2 月 1 日に日次使用量属性レポートを非推奨とすることを計画しています。代替案として、<a href="/api/latest/usage-metering/#get-hourly-usage-attribution">1 時間ごとの使用量属性 API エンドポイント</a>を使用してください。
 
 このセクションでは、日次レポートを時間の粒度で表示し時間枠を丁寧に調べます。また指定した月のすべてのレポートを連結することもできます。
 
@@ -126,7 +132,7 @@ Usage Attribution は、Enterprise プランに含まれる高度な機能です
 
 {{< img src="account_management/billing/usage_attribution/histogram-graph-tag.png" alt="インフラホストグラフのピラーの内訳" style="width:100%;" >}}
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

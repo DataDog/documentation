@@ -134,20 +134,6 @@ You can restrict access to a global variable based on the roles in your organiza
 
 ## Default settings
 
-{{< img src="synthetics/settings/default_settings.png" alt="Default Settings page" style="width:100%;">}}
-
-### Enforced tags
-
-<div class="alert alert-warning">
-Tag enforcement is an advanced feature included in the Enterprise plan. For all other plans, contact your account representative or <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> to request this feature.
-</div>
-
-Allow selected tags on your Synthetics tests to be enforced by clicking **Enforce tags for usage attributions on all tests**. 
-
-You can break down cost and usage attributes by services, applications, or teams. Usage attribution tags can take up to fifteen minutes to propagate. For more information, see [Usage Attribution][13].
-
-When you are done enforcing tags, click **Save Enforced Tags**.
-
 ### Default locations
 
 Choose the default locations for your [API test][4], [multistep API test][5], or [browser test][6] details. 
@@ -163,6 +149,12 @@ Choose the default browser and device types for your [browser test][6] details.
 Your options for browsers include Google Chrome, Firefox, and Microsoft Edge. Your options for devices include a large laptop, a tablet, and a small mobile device.
 
 When you are done selecting browsers and devices, click **Save Default Browsers & Devices**.
+
+### Default tags
+
+Choose or add the default tags for your [API test][4], [multistep API test][5], or [browser test][6] details.
+
+When you are done selecting related tags, click **Save Default Tags**.
 
 ### Permissions
 

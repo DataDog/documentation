@@ -62,7 +62,7 @@ Datadog では、自動的にインスツルメントされたすべてのサー
 [2]: /ja/tracing/app_analytics/#automatic-configuration
 [3]: /ja/tracing/app_analytics/#custom-instrumentation
 [4]: /ja/tracing/send_traces/
-[5]: https://app.datadoghq.com/apm/docs/trace-search
+[5]: https://app.datadoghq.com/apm/settings
 [6]: /ja/tracing/visualization/#services
 [7]: /ja/tracing/visualization/#resources
 [8]: /ja/tracing/app_analytics/search/#analysed-span

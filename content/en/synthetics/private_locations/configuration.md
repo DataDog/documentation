@@ -109,7 +109,12 @@ Maximum test execution duration for API tests (in milliseconds).
 `statusProbesPort`
 : **Type**: Number <br>
 **Default**: `8080`<br>
-Overrides the port for the private location status probes. 
+Overrides the port for the private location status probes.
+
+`maxNbRedirects`
+: **Type**: Number <br>
+**Default**: `20`<br>
+Maximum number of redirections for HTTP and WebSocket tests. 
 
 ## Private root certificates
 

@@ -3,8 +3,6 @@ title: Security Guides
 kind: guide
 private: true
 disable_toc: true
-aliases:
-    - /security/guide/
 cascade:
     algolia:
         rank: 20

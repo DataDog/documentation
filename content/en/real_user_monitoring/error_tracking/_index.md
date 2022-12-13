@@ -15,6 +15,9 @@ further_reading:
 - link: "/real_user_monitoring/error_tracking/explorer"
   tag: "Documentation"
   text: "Learn about the Error Tracking Explorer"
+- link: "https://www.datadoghq.com/blog/error-tracking-logs/"
+  tag: "Blog"
+  text: "Track and triage errors in your logs with Datadog Error Tracking"
 ---
 
 ## Overview
@@ -51,4 +54,4 @@ Click on an issue to view debugging information, such as the stack trace, user s
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/apm/error-tracking
+[1]: https://app.datadoghq.com/rum/error-tracking

@@ -267,7 +267,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
       "name": "<YOUR_INSTANCE_NAME>"
     }
   }]' \
-  datadog/agent:${DD_AGENT_VERSION}
+  gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
 ```
 
 For Postgres 9.6, add the following settings to the instance config where host and port are specified:
@@ -433,7 +433,8 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 ### Validate
 
 [Run the Agent's status subcommand][8] and look for `postgres` under the Checks section. Or visit the [Databases][9] page to get started!
-
+## Example Agent Configurations
+{{% dbm-postgres-agent-config-examples %}}
 ## Install the Azure PostgreSQL Integration
 
 To collect more comprehensive database metrics from Azure, install the [Azure PostgreSQL integration][10] (optional).

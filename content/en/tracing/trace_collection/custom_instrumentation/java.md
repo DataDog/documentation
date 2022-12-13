@@ -128,6 +128,10 @@ import io.opentracing.util.Tracer;
 
 Tracer tracer = GlobalTracer.get();
 final Span span = tracer.buildSpan("<OPERATION_NAME>").start();
+// Note: The scope in the try with resource block below
+// will be automatically closed at the end of the code block.
+// If you do not use a try with resource statement, you need
+// to call scope.close().
 try (final Scope scope = tracer.activateSpan(span)) {
     // exception thrown here
 } catch (final Exception e) {
@@ -227,6 +231,10 @@ class SomeClass {
             .withTag(DDTags.SERVICE_NAME, "<SERVICE_NAME>")
             .withTag(DDTags.RESOURCE_NAME, "<RESOURCE_NAME>")
             .start();
+        // Note: The scope in the try with resource block below
+        // will be automatically closed at the end of the code block.
+        // If you do not use a try with resource statement, you need
+        // to call scope.close().
         try (Scope scope = tracer.activateSpan(span)) {
             // Alternatively, set tags after creation
             span.setTag("my.tag", "value");

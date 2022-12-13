@@ -2448,6 +2448,7 @@ __metadata:
   languageName: node
   linkType: hard
 
+<<<<<<< HEAD
 "algoliasearch-helper@npm:^3.11.1":
   version: 3.11.1
   resolution: "algoliasearch-helper@npm:3.11.1"
@@ -2456,6 +2457,27 @@ __metadata:
   peerDependencies:
     algoliasearch: ">= 3.1 < 6"
   checksum: 207616ca4549e2d06a278357ce478951a37c606f40f5b39b8e2d13bba143023a10814f065cd89629e5f2c121935d61a97d96bfb687ae7a98ef25b63da37fcf70
+=======
+"algoliasearch@npm:4.14.2":
+  version: 4.14.2
+  resolution: "algoliasearch@npm:4.14.2"
+  dependencies:
+    "@algolia/cache-browser-local-storage": 4.14.2
+    "@algolia/cache-common": 4.14.2
+    "@algolia/cache-in-memory": 4.14.2
+    "@algolia/client-account": 4.14.2
+    "@algolia/client-analytics": 4.14.2
+    "@algolia/client-common": 4.14.2
+    "@algolia/client-personalization": 4.14.2
+    "@algolia/client-search": 4.14.2
+    "@algolia/logger-common": 4.14.2
+    "@algolia/logger-console": 4.14.2
+    "@algolia/requester-browser-xhr": 4.14.2
+    "@algolia/requester-common": 4.14.2
+    "@algolia/requester-node-http": 4.14.2
+    "@algolia/transporter": 4.14.2
+  checksum: 4365a0d0f066f3ad6798e4dd0d7487cba1cf4546dac27e66cb84865f91955d6537dc5bad4e71d4bf22a68c0b721b1e6f20109203566ca1a252fe2713d713c0fd
+>>>>>>> master
   languageName: node
   linkType: hard
 
@@ -4435,7 +4457,11 @@ __metadata:
     "@datadog/datadog-ci": ^1.2.0
     a11y: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/a11y-v1.0.1.tgz"
     acorn: ^7.1.1
+<<<<<<< HEAD
     algoliasearch: ^4.14.2
+=======
+    algoliasearch: 4.14.2
+>>>>>>> master
     bootstrap: 4.3.1
     cross-env: ^5.2.0
     del: 4.1.1

@@ -49,7 +49,7 @@ further_reading:
 
 ### Supported .NET Core runtimes
 
-The .NET Tracer supports instrumentation on .NET Core 2.1, 3.1, .NET 5, and .NET 6.
+The .NET Tracer supports instrumentation on .NET Core 2.1, 3.1, .NET 5, .NET 6, and .NET 7.
 
 For a full list of Datadog’s .NET Core library and processor architecture support (including legacy and maintenance versions), see [Compatibility Requirements][1].
 
@@ -57,7 +57,7 @@ For a full list of Datadog’s .NET Core library and processor architecture supp
 
 <div class="alert alert-info">
   <div class="alert-info">
-    <div><strong>Datadog recommends you follow the <a href="https://app.datadoghq.com/apm/docs">Quickstart instructions</a></strong> in the Datadog app for the best experience, including:</div>
+    <div><strong>Datadog recommends you follow the <a href="https://app.datadoghq.com/apm/service-setup">Quickstart instructions</a></strong> in the Datadog app for the best experience, including:</div>
     <div>- Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).</div>
     <div>- Dynamically set <code>service</code>, <code>env</code>, and <code>version</code> tags.</div>
     <div>- Enable ingesting 100% of traces and Trace ID injection into logs during setup.</div><br/>
@@ -198,6 +198,10 @@ For information about the different methods for setting environment variables, s
 #### Internet Information Services (IIS)
 
 1. The .NET Tracer MSI installer adds all required environment variables. There are no environment variables you need to configure.
+
+   <div class="alert alert-warning">
+     <strong>Note:</strong> You must set the <strong>.NET CLR version</strong> for the application pool to <strong>No Managed Code</strong> as recommended by <a href='https://learn.microsoft.com/aspnet/core/host-and-deploy/iis/advanced#create-the-iis-site'> Microsoft</a>.
+   </div>
 
 2. To automatically instrument applications hosted in IIS, completely stop and start IIS by running the following commands as an administrator:
 

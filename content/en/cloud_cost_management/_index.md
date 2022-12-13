@@ -24,7 +24,7 @@ To setup Cloud Cost Management in Datadog, you need to generate a Cost and Usage
 Follow AWS instructions for [Creating Cost and Usage Reports][1], and select the following content options for use with Datadog Cloud Cost Management:
 
 * **Include resource IDs**
-* **Automatically refresh your Cost & Usage Report**
+* **Check the box for "Automatically refresh your Cost & Usage Report when charges are detected for previous months with closed bills."**
 
 Select the following Delivery options:
 
@@ -37,11 +37,13 @@ Select the following Delivery options:
 
 Select your AWS management account from the dropdown menu, allowing Datadog to display tags associated with this account. If you have multiple similarly-named management accounts, view the tags associated with a selected account to ensure you have selected the specific account you want.
 
-**Note**: Datadog recommends sending a Cost and Usage Report from an [AWS **management account**][2] for cost visibility into related **member accounts**. If you decide to send a Cost and Usage report from an AWS **member account**, ensure that you have selected the following options in your **management account's** [preferences][3] to allow Datadog to have full visibility into the member account:
+**Note**: Datadog recommends sending a Cost and Usage Report from an [AWS **management account**][2] for cost visibility into related **member accounts**. If you send a Cost and Usage report from an AWS **member account**, ensure that you have selected the following options in your **management account's** [preferences][3]:
 
 * **Linked Account Access**
 * **Linked Account Refunds and Credits**
 * **Linked Account Discounts**
+
+This ensures complete cost accuracy by allowing periodic cost calculations against the AWS Cost Explorer.
 
 ### Locate the Cost and Usage Report
 

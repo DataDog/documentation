@@ -78,7 +78,7 @@ Before getting started, ensure you have the following prerequisites:
 
 ## Setup
 
-2. Go to the the [AWS integration configuration page][8] in Datadog and click **Add AWS Account**.
+2. Go to the [AWS integration configuration page][8] in Datadog and click **Add AWS Account**.
 
 3. Configure the integration's settings under the **Automatically using CloudFormation** option.  
     a. Select the AWS regions to integrate with.  
@@ -223,7 +223,7 @@ If you encounter any issues, be sure to check out the [Troubleshooting][57] sect
 [36]: /dashboards/#overview
 [37]: /dashboards/functions/
 [38]: /dashboards/correlations/
-[39]: /monitors/create/#monitor-types
+[39]: /monitors/types
 [40]: /monitors/notify/
 [41]: /integrations/#cat-notification
 [42]: /serverless
@@ -234,13 +234,13 @@ If you encounter any issues, be sure to check out the [Troubleshooting][57] sect
 [47]: /tracing/trace_collection/
 [48]: /tracing/#explore-datadog-apm
 [49]: /watchdog/
-[50]: /security_platform/cloud_siem/getting_started/
-[51]: /security_platform/default_rules/#cat-log-detection
-[52]: /security_platform/explorer/
-[53]: /security_platform/notifications/rules/
-[54]: /security_platform/cspm/getting_started/
-[55]: /security_platform/default_rules/#cat-posture-management-cloud
-[56]: /security_platform/default_rules/#cat-posture-management-infra
+[50]: /security/cloud_siem/getting_started/
+[51]: /security/default_rules/#cat-log-detection
+[52]: /security/explorer/
+[53]: /security/notifications/rules/
+[54]: /security/cspm/getting_started/
+[55]: /security/default_rules/#cat-posture-management-cloud
+[56]: /security/default_rules/#cat-posture-management-infra
 [57]: /integrations/amazon_web_services/?tab=roledelegation#troubleshooting
 [58]: https://app.datadoghq.com/organization-settings/api-keys
 [59]: /integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/??tab=cloudformation

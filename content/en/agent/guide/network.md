@@ -7,7 +7,7 @@ aliases:
     - /agent/network
     - /agent/faq/network
 further_reading:
-    - link: 'logs/'
+    - link: '/logs/'
       tag: 'Documentation'
       text: 'Collect your logs'
     - link: '/infrastructure/process'
@@ -36,7 +36,8 @@ All Agent traffic is sent over SSL. The destination is dependent on the Datadog 
 
 [Network Device Monitoring][10]
 : `ndm-intake.`{{< region-param key="dd_site" code="true" >}}
-: `snmp-traps-intake.`{{< region-param key="dd_site" code="true" >}}
+`snmp-traps-intake.`{{< region-param key="dd_site" code="true" >}}
+`ndmflow-intake.`{{< region-param key="dd_site" code="true" >}}
 
 
 [Orchestrator][5]
@@ -77,7 +78,7 @@ Other: See [logs endpoints][3]
 `http-encrypted-intake.logs.datadoghq.com`
 
 [1]: /logs/
-[2]: /security/logs/#hipaa-enabled-customers
+[2]: /data_security/logs/#hipaa-enabled-customers
 [3]: /logs/log_collection/#logging-endpoints
 
 {{< /site-region >}}
@@ -96,7 +97,7 @@ Other: See [logs endpoints][3]
 `http-encrypted-intake.logs.datadoghq.eu`
 
 [1]: /logs/
-[2]: /security/logs/#hipaa-enabled-customers
+[2]: /data_security/logs/#hipaa-enabled-customers
 [3]: /logs/log_collection/#logging-endpoints
 
 {{< /site-region >}}
@@ -113,7 +114,7 @@ Other: See [logs endpoints][3]
 `http-encrypted-intake.logs.us3.datadoghq.com`
 
 [1]: /logs/
-[2]: /security/logs/#hipaa-enabled-customers
+[2]: /data_security/logs/#hipaa-enabled-customers
 [3]: /logs/log_collection/#logging-endpoints
 
 {{< /site-region >}}
@@ -130,7 +131,7 @@ Other: See [logs endpoints][3]
 `http-encrypted-intake.logs.us5.datadoghq.com`
 
 [1]: /logs/
-[2]: /security/logs/#hipaa-enabled-customers
+[2]: /data_security/logs/#hipaa-enabled-customers
 [3]: /logs/log_collection/#logging-endpoints
 
 {{< /site-region >}}
@@ -147,7 +148,7 @@ Other: See [logs endpoints][3]
 `http-encrypted-intake.logs.ddog-gov.com`
 
 [1]: /logs/
-[2]: /security/logs/#hipaa-enabled-customers
+[2]: /data_security/logs/#hipaa-enabled-customers
 [3]: /logs/log_collection/#logging-endpoints
 
 {{< /site-region >}}
@@ -341,6 +342,56 @@ See [default NTP targets][2].
 [3]: /tracing/
 {{% /tab %}}
 {{< /tabs >}}
+
+## Configure ports
+
+If you need to change an inbound port because the default port is already in use by an existing service on your network, edit the `datadog.yaml` configuration file. You can find most of the ports in the **Advanced Configuration** section of the file:
+
+{{< code-block lang="yaml" filename="datadog.yaml" disable_copy="true" collapsible="true" >}}
+## @param expvar_port - integer - optional - default: 5000
+## @env DD_EXPVAR_PORT - integer - optional - default: 5000
+## The port for the go_expvar server.
+#
+# expvar_port: 5000
+
+## @param cmd_port - integer - optional - default: 5001
+## @env DD_CMD_PORT - integer - optional - default: 5001
+## The port on which the IPC api listens.
+#
+# cmd_port: 5001
+
+## @param GUI_port - integer - optional
+## @env DD_GUI_PORT - integer - optional
+## The port for the browser GUI to be served.
+## Setting 'GUI_port: -1' turns off the GUI completely
+## Default is:
+##  * Windows & macOS : `5002`
+##  * Linux: `-1`
+##
+#
+# GUI_port: <GUI_PORT>
+
+{{< /code-block >}}
+
+The APM receiver and the DogStatsD ports are located in the **Trace Collection Configuration** and **DogStatsD Configuration** sections of the `datadog.yaml` configuration file, respectively:
+
+{{< code-block lang="yaml" filename="datadog.yaml" disable_copy="true" collapsible="true" >}}
+## @param dogstatsd_port - integer - optional - default: 8125
+## @env DD_DOGSTATSD_PORT - integer - optional - default: 8125
+## Override the Agent DogStatsD port.
+## Note: Make sure your client is sending to the same UDP port.
+#
+# dogstatsd_port: 8125
+
+[...]
+
+## @param receiver_port - integer - optional - default: 8126
+## @env DD_APM_RECEIVER_PORT - integer - optional - default: 8126
+## The port that the trace receiver should listen on.
+## Set to 0 to disable the HTTP receiver.
+#
+# receiver_port: 8126
+{{< /code-block >}}
 
 ## Using proxies
 

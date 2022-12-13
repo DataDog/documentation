@@ -11,7 +11,7 @@ Purchase Serverless function invocations on [Datadog Pro and Enterprise plans][1
 
 ## Serverless invocations
 
-Datadog charges by calculating the sum of the your AWS Lambda function invocations at the end of the month.
+Datadog charges by calculating the sum of your AWS Lambda function invocations at the end of the month.
 
 For Serverless pricing information, see the [Datadog pricing page][1].
 
