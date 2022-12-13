@@ -11,4 +11,4 @@ In general, setting up Application Security Management (ASM) involves:
 - Datadog APM is configured for your application or service, and traces are being received by Datadog. 
 
 [101]: https://app.datadoghq.com/account/settings#agent
-[102]: /security_platform/application_security/how-appsec-works/#identify-services-exposed-to-application-attacks
+[102]: /security/application_security/how-appsec-works/#identify-services-exposed-to-application-attacks

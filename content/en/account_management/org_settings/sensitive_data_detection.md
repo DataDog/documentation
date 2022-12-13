@@ -4,7 +4,7 @@ kind: documentation
 aliases:
     - /logs/log_configuration/sensitive_data_detection
 further_reading:
-    - link: "/security/logs/"
+    - link: "/data_security/logs/"
       tag: "Documentation"
       text: "Security"
     - link: "/logs/explorer/"
