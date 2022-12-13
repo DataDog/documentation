@@ -322,7 +322,7 @@ Once logs are collected and ingested, they are available in **Log Explorer**. Lo
 [3]: /integrations/nxlog/
 [4]: /integrations/fluentd/#log-collection
 [5]: /integrations/logstash/#log-collection
-[6]: /security/logs/#information-security
+[6]: /data_security/logs/#information-security
 [7]: /agent/logs/#send-logs-over-https
 [8]: /api/v1/logs/#send-logs
 [9]: /logs/explorer/facets/

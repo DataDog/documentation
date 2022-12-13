@@ -60,7 +60,7 @@ before_script:
 
 # ================== templates ================== #
 .base_template: &base_template
-  image: public.ecr.aws/x2b9z2t7/webops/site-build:latest
+  image: public.ecr.aws/x2b9z2t7/webops/site-build:v2.3.0
   tags:
     - "runner:main"
   except:

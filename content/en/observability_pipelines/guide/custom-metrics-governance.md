@@ -18,7 +18,7 @@ Custom metrics provide visibility into all facets of your business, from applica
 This guide walks you through how to use Observability Pipelines to govern and control your custom metrics before they are ingested. More specifically, how to do the following: 
 - [Drop custom metrics missing specific tags or the metric's namespace](#drop-metrics-missing-specific-tags-or-the-metrics-namespace)
 - [Remove custom metric tags](#remove-custom-metric-tags)
-- [Set up rules to prevent cardinality spikes](#prevent-tag-cardinality-spikes)
+- [Set up rules to prevent tag cardinality spikes](#prevent-tag-cardinality-spikes)
 
 ## Prerequisites
 
