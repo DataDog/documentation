@@ -2,7 +2,7 @@
 title: Introduction to Integrations
 kind: documentation
 aliases:
-    - '/getting_started/integrations'
+    - /getting_started/integrations
 further_reading:
   - link: 'https://learn.datadoghq.com/courses/intro-to-integrations'
     tag: 'Learning Center'
@@ -11,6 +11,8 @@ further_reading:
     tag: 'Documentation'
     text: 'See a list of Datadog integrations'
 ---
+
+## Overview
 
 This is a guide for using integrations, if you are looking for information about building a new integration, see the [Create a new integration][1] page.
 
