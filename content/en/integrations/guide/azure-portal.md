@@ -88,7 +88,7 @@ Select **Change Plan** on the overview page to change your Datadog billing plan.
 
 {{< img src="integrations/guide/azure_portal/change-plan1.png" alt="The Datadog resource page within the Azure portal, with Overview selected along the left nav bar and the Change Plan tab highlighted" responsive="true" style="width:100%;">}}
 
-The portal retrieves all the available Datadog plans for your tenant, this includes any private offers. Select the appropriate plan and click **Change Plan**.
+The portal retrieves all the available Datadog plans for your tenant, including any private offers. Select the appropriate plan and click **Change Plan**.
 
 ## Datadog org configurations
 ### Metrics and logs
