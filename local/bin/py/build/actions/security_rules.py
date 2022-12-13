@@ -107,8 +107,7 @@ def security_rules(content, content_dir):
             or data.get('isDeleted', False) or not data.get('isEnabled', True) or data.get('isDeprecated', False):
             if p.exists():
                 logger.info(f"removing file {p.name}")
-                global_aliases.append(f"/security_monitoring/default_rules/{p.stem}")
-                global_aliases.append(f"/security_platform/default_rules/{p.stem}")
+                global_aliases.append(f"/security/default_rules/{p.stem}")
                 p.unlink()
             else:
                 logger.info(f"skipping file {p.name}")
