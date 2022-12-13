@@ -16,7 +16,7 @@ title: Frameworks et benchmarks de l'industrie
 
 {{< /site-region >}}
 
-{{< img src="security_platform/cspm/frameworks_and_benchmarks/report.png" alt="Choisir un intervalle de recherche à l'aide du menu déroulant" style="width:80%;">}}
+{{< img src="security/cspm/frameworks_and_benchmarks/report.png" alt="Choisir un intervalle de recherche à l'aide du menu déroulant" style="width:80%;">}}
 
 ## Présentation
 
@@ -43,7 +43,7 @@ Depuis la page des [règles][10], passez votre curseur sur une règle et cliquez
 
 Par exemple, vous avez la possibilité de retirer toutes les ressources associées au tag `env:staging` via l'option **Never trigger a signal when**. Vous pouvez également limiter une règle aux ressources qui possèdent le tag `compliance:pci` via l'option **Only trigger a signal when**.
 
-{{< img src="security_platform/cspm/frameworks_and_benchmarks/never-trigger-a-signal.png" alt="Dans l'application Datadog, sélectionnez Advanced pour choisir de ne pas déclencher de signal dans certaines conditions, puis ajoutez une requête." >}}
+{{< img src="security/cspm/frameworks_and_benchmarks/never-trigger-a-signal.png" alt="Dans l'application Datadog, sélectionnez Advanced pour choisir de ne pas déclencher de signal dans certaines conditions, puis ajoutez une requête." >}}
 
 ## Définir des cibles de notification pour les règles de détection
 
@@ -59,7 +59,7 @@ La page des [règles][10] vous offre la possibilité d'ajouter des cibles de not
 
 Définissez la gravité des signaux Security Posture en sélectionnant le niveau approprié dans la liste déroulante, parmi les valeurs suivantes : INFO, LOW, MEDIUM, HIGH ou CRITICAL. Vous pouvez définir dans la section Notify une ou plusieurs [cibles de notification][7] pour chaque scénario de règle.
 
-{{< img src="security_platform/cspm/frameworks_and_benchmarks/notification.png" alt="Sélectionner une sévérité et une cible de notification" >}}
+{{< img src="security/cspm/frameworks_and_benchmarks/notification.png" alt="Sélectionner une sévérité et une cible de notification" >}}
 
 ## Pour aller plus loin
 

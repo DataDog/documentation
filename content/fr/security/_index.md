@@ -52,19 +52,19 @@ La plateforme de sécurité Datadog comprend les solutions [Application Security
 
 [Cloud SIEM][4] (Security Information and Event Management) détecte en temps réel les menaces envers votre application et votre infrastructure. Il peut par exemple s'agir d'une attaque ciblée, d'une adresse IP communiquant avec vos systèmes alors qu'elle fait partie d'une liste noire, ou d'une configuration non sécurisée. Cloud SIEM fonctionne conjointement avec la solution [Log Management de Datadog][5]. Cette association vous permet d'[automatiser la remédiation des menaces détectées par Cloud SIEM][6], afin d'accélérer vos processus de gestion des menaces.
 
-{{< img src="security_platform/security_monitoring_overview.png" alt="Vue des sources Cloud SIEM analysées dans Datadog" width="100%">}}
+{{< img src="security/security_monitoring_overview.png" alt="Vue des sources Cloud SIEM analysées dans Datadog" width="100%">}}
 
 ## Cloud Security Posture Management
 
 [Cloud Security Posture Management (CSPM)][7] surveille l'état de la sécurité et le niveau de conformité de votre environnement de production. Cette solution vous permet d'automatiser la collecte de preuves d'audit et de détecter les problèmes de configuration qui rendent votre organisation vulnérable aux attaques. Consultez vos scores de posture de sécurité pour l'ensemble de votre infrastructure et comparez-les aux exigences du benchmark ou framework pertinent.
 
-{{< img src="security_platform/cspm_overview.png" alt="Notes Cloud Security Posture Management dans Datadog" width="100%">}}
+{{< img src="security/cspm_overview.png" alt="Notes Cloud Security Posture Management dans Datadog" width="100%">}}
 
 ## Cloud Workload Security
 
 [Cloud Workload Security (CWS)][8] surveille les activités liées aux fichiers et processus dans votre environnement afin de détecter les menaces envers votre infrastructure, comme les instances AWS EC2, et envers les workloads, comme les clusters Kubernetes, en temps réel au niveau du kernel. Puisque cette solution tire profit de l'Agent Datadog unifié, vous n'avez pas besoin de provisionner des ressources supplémentaires si vous surveillez déjà votre environnement avec Datadog.
 
-{{< img src="security_platform/cws_overview.png" alt="Vues de la couverture Cloud Workload Security dans Datadog" width="100%">}}
+{{< img src="security/cws_overview.png" alt="Vues de la couverture Cloud Workload Security dans Datadog" width="100%">}}
 
 Pour commencer à utiliser la plateforme de sécurité Datadog, accédez à la section [Setup & Configuration][9] de l'application Datadog. Celle-ci comporte des informations détaillées sur les configurations uniques ou multiples. Vous pouvez également consulter les guides ci-dessous pour approfondir vos connaissances sur chaque composante de la plateforme.
 

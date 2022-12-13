@@ -32,7 +32,7 @@ Grâce à cette vue, vous pouvez :
 
 Les signaux de sécurité renvoyés par votre recherche s'affichent dans un tableau dédié.
 
-{{< img src="security_platform/security_monitoring/explorer/signals_table.png" alt="Le tableau des signaux de sécurité affichant deux signaux de piratage de compte" >}}
+{{< img src="security/security_monitoring/explorer/signals_table.png" alt="Le tableau des signaux de sécurité affichant deux signaux de piratage de compte" >}}
 
 Filtrez son contenu en choisissant parmi la liste des facettes disponibles. Vous pouvez personnaliser le contenu de ce tableau en fonction de vos besoins et de vos préférences. Pour ce faire, cliquez sur le bouton **Options** en haut à droite de la page.
 
@@ -40,7 +40,7 @@ Filtrez son contenu en choisissant parmi la liste des facettes disponibles. Vous
 
 Cliquez sur un signal de sécurité pour afficher plus de détails dans un volet dédié.
 
-{{< img src="security_platform/security_monitoring/explorer/signal_panel.png" alt="Le volet Security Signal affichant un signal critique concernant la suppression d'un blocage de l'accès public pour AWS S3" style="width:80%;" >}}
+{{< img src="security/security_monitoring/explorer/signal_panel.png" alt="Le volet Security Signal affichant un signal critique concernant la suppression d'un blocage de l'accès public pour AWS S3" style="width:80%;" >}}
 
 Les détails et les actions les plus importants concernant votre problème figurent en haut du volet. Ils vous permettent de déterminer la gravité du signal et sa date de création, mais également d'accéder aux réglages de la règle, de modifier l'état du signal et de partager en quelques secondes ce signal à un collègue ou de le lui attribuer.
 
@@ -65,7 +65,7 @@ Sous l'en-tête des signaux Cloud Security Posture Management se trouvent plusie
 
 La solution Cloud SIEM de Datadog fournit des flux de renseignements sur les menaces minutieusement sélectionnés par des experts en la question. Ces flux sont constamment mis à jour de façon à inclure des données sur les activités suspicieuses connues (par exemple, des indicateurs de compromissions), afin que vous puissiez identifier rapidement les menaces potentielles que vous devez éliminer.
 
-{{< img src="security_platform/security_monitoring/explorer/threat_intel.png" alt="Renseignement sur les menaces dans le Security Signals Explorer" style="width:85%;" >}}
+{{< img src="security/security_monitoring/explorer/threat_intel.png" alt="Renseignement sur les menaces dans le Security Signals Explorer" style="width:85%;" >}}
 
 Datadog propose automatiquement des renseignements sur les menaces en analysant l'ensemble des logs ingérés possédant des attributs pertinents. Lorsqu'un log contient un indicateur de compromission, comme une IP anonymisée liée à un VPN, un proxy ou un nœud de sortie Tor, un attribut `threat_intel` est ajouté à l'événement de log, afin de fournir des insights supplémentaires basés sur les renseignements disponibles.
 
@@ -80,19 +80,19 @@ Pour afficher tous les renseignements sur les menaces dans le Security Signals E
 
 Lorsque la solution Cloud SIEM de Datadog détecte des activités malveillantes à partir de vos logs, elle recherche l'adresse IP du réseau de la personne à l'origine de ces activités afin de déterminer si celle-ci a interagi avec vos systèmes. Utilisez la requête suivante pour effectuer une recherche en fonction d'attributs d'IP dans le Log Explorer : `@network.ip.list:<ADRESSE_IP>`. Cette requête recherche des adresses IP dans l'ensemble des logs, y compris dans les champs de tag, d'attribut, d'erreur et de message.
 
-{{< img src="security_platform/security_monitoring/explorer/network_ip_list.png" alt="Le Log Explorer affichant le résultat d'une recherche avec l'attribut network.ip.list" style="width:80%;" >}}
+{{< img src="security/security_monitoring/explorer/network_ip_list.png" alt="Le Log Explorer affichant le résultat d'une recherche avec l'attribut network.ip.list" style="width:80%;" >}}
 
 ### Détection des anomalies
 
 Si le signal de sécurité que vous étudiez a été généré suite à la détection d'une anomalie, un graphique représente l'anomalie. Sur la partie droite du graphique, un cadre indique la date à laquelle l'anomalie a été détectée.
 
-  {{< img src="security_platform/security_monitoring/explorer/anomaly-detection.png" alt="Graphique de détection d'anomalies" >}}
+  {{< img src="security/security_monitoring/explorer/anomaly-detection.png" alt="Graphique de détection d'anomalies" >}}
 
 ## Analyser visuellement vos signaux de sécurité
 
 Pour passer du mode Tableau au mode Analyse des signaux de sécurité, cliquez sur le bouton _Signal Mode_ dans le coin supérieur gauche de la page :
 
-{{< img src="security_platform/security_monitoring/explorer/analytics.png" alt="La page du Signals Explorer affichant des signaux dans un graphique à barres avec un regroupement par technique" style="width:85%;" >}}
+{{< img src="security/security_monitoring/explorer/analytics.png" alt="La page du Signals Explorer affichant des signaux dans un graphique à barres avec un regroupement par technique" style="width:85%;" >}}
 
 Une fois vos signaux de sécurité générés par le moteur des règles de sécurité, vous pouvez les représenter graphiquement et afficher les valeurs maximales ou minimales, les centiles, le nombre de valeurs uniques, et plus encore.
 

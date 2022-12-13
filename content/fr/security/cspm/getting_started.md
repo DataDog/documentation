@@ -23,7 +23,7 @@ title: Débuter avec CSPM
 
 Accédez à la [page de configuration initiale][1] pour activer l'analyse de votre environnement.
 
-{{< img src="security_platform/cspm/getting_started/posture-management-setup.png" alt="Page de configuration du CSPM" style="width:100%;">}}
+{{< img src="security/cspm/getting_started/posture-management-setup.png" alt="Page de configuration du CSPM" style="width:100%;">}}
 
 ## Configuration
 

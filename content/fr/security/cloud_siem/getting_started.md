@@ -36,7 +36,7 @@ Si vous disposez déjà d'une source de journalisation, suivez les [instructions
 
 La [documentation relative à la collecte de logs][3] de Datadog décrit en détail comment recueillir des logs à partir de nombreuses sources différentes pour les envoyer à Datadog. Dans un premier temps, tous les logs ingérés sont parsés et enrichis. Les règles de détection sont appliquées en temps réel à tous les logs traités, ceci afin d'optimiser la couverture de détection tout en éliminant les problèmes de performance ou de coût habituels liés à l'indexation de l'intégralité des données de log. [En savoir plus sur la fonctionnalité Logging without Limits™ de Datadog][4].
 
-{{< img src="security_platform/security_monitoring/getting_started/ingest_logs_overview.png" alt="Ingérer des logs" >}}
+{{< img src="security/security_monitoring/getting_started/ingest_logs_overview.png" alt="Ingérer des logs" >}}
 
 ## Examiner les règles de détection
 

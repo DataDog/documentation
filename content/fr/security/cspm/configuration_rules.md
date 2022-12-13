@@ -13,7 +13,7 @@ title: Règles prêtes à l'emploi
 
 Datadog propose des [règles de détection prêtes à l'emploi][1] permettant d'identifier les problèmes de configuration potentiels et de renforcer votre sécurité. Les règles de détection suivent la même [logique conditionnelle][2] que toutes les autres règles de détection de la plateforme de sécurité Datadog.
 
-{{< img src="security_platform/cspm/configuration_rules/configuration_rule.png" alt="Unr règle de configuration dans Datadog" width="65%">}}
+{{< img src="security/cspm/configuration_rules/configuration_rule.png" alt="Unr règle de configuration dans Datadog" width="65%">}}
 
 La solution Cloud Security Posture Management (CSPM) de Datadog utilise les types de règles suivants pour valider la configuration de votre infrastructure cloud :
 

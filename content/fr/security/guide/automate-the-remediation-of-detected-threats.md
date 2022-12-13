@@ -16,7 +16,7 @@ Choisissez un scénario de sécurité ci-dessous pour commencer à automatiser l
 
 Il est important de supprimer le plut tôt possible une ressource mal configurée dans un environnement cloud. Dans ce scénario, vous pouvez configurer une [intégration Webhook][2] pour envoyer un [webhook][2] au service de gestion des API de votre fournisseur de cloud.
 
-{{< img src="security_platform/security_monitoring/guide/automate-the-remediation-of-detected-threats/automation-diagram.png" alt="Diagramme illustrant un webhook envoyé à l'API d'un fournisseur de cloud" >}}
+{{< img src="security/security_monitoring/guide/automate-the-remediation-of-detected-threats/automation-diagram.png" alt="Diagramme illustrant un webhook envoyé à l'API d'un fournisseur de cloud" >}}
 
 Une fois l'intégration configurée, si un utilisateur AWS crée une ressource avec une mauvaise configuration (par exemple, un groupe de sécurité ou un rôle utilisateur trop permissif) dans votre environnement AWS, la solution Log Management Datadog ingère le log associé, ce qui déclenche une règle de détection basée sur les groupes de sécurité. Ce processus envoie automatiquement la charge utile JSON du webhook à l'URL AWS API Gateway désignée, qui active à son tour une fonction AWS Lambda supprimant automatiquement la ressource dangereuse.
 
@@ -28,11 +28,11 @@ Pour vous défendre contre ce type d'attaque, vous pouvez utiliser la [nouvelle 
 
 Commencez par définir une [nouvelle règle de détection basée sur les termes][5].
 
-{{< img src="security_platform/security_monitoring/guide/automate-the-remediation-of-detected-threats/new-term-rule.png" alt="Nouvelle règle de détection basée sur les termes" >}}
+{{< img src="security/security_monitoring/guide/automate-the-remediation-of-detected-threats/new-term-rule.png" alt="Nouvelle règle de détection basée sur les termes" >}}
 
 Configurez ensuite un [webhook][2] qui envoie une charge utile au service de gestion des accès et des identités (IAM) de votre cloud afin de bannir l'IP inconnue lors du déclenchement de cette règle.
 
-{{< img src="security_platform/security_monitoring/guide/automate-the-remediation-of-detected-threats/webhook-ip.png" alt="Nouveau webhook qui bannit une adresse IP inconnue" >}}
+{{< img src="security/security_monitoring/guide/automate-the-remediation-of-detected-threats/webhook-ip.png" alt="Nouveau webhook qui bannit une adresse IP inconnue" >}}
 
 Voici un exemple de charge utile transmise par un webhook pertinent lorsqu'un signal de sécurité est généré par Datadog :
 

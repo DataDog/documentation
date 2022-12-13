@@ -13,7 +13,7 @@ title: Cloud Security Posture Management
 
 Grâce à la solution Cloud Security Posture Management (CSPM) de Datadog, vous pouvez évaluer et visualiser facilement la posture de sécurité actuelle et historique de votre environnement cloud, automatiser la collecte de preuves pour l'audit et détecter les problèmes de configurations susceptibles de rendre votre organisation vulnérable face à d'éventuelles attaques.
 
-{{< img src="security_platform/cspm/landing_page.png" alt="Cloud Security Posture Management" width="100%">}}
+{{< img src="security/cspm/landing_page.png" alt="Cloud Security Posture Management" width="100%">}}
 
 Évaluez la configuration de vos ressources cloud, notamment les groupes de sécurité, compartiments de stockage, équilibreurs de charge et bases de données sur la base de règles de configuration. L'Agent Datadog peut analyser les données des configurations locales provenant de serveurs, conteneurs et clusters Kubernetes en leur appliquant les règles de détection Datadog prêtes à l'emploi relatives au [cloud][1] et à l'[infrastructure][2] de Posture Management.
 
@@ -34,12 +34,12 @@ Contrôle
 Ressource
 : Entité configurable devant être analysée en continu afin de confirmer qu'elle passe un ou plusieurs contrôles. Exemples de ressource d'instance AWS : hosts, conteneurs, groupes de sécurité, utilisateurs et stratégies IAM gérées par le client.
 
-  {{< img src="security_platform/cspm/getting_started/resource.png" alt="Information sur les ressources de gestion de la posture dans l'application Datadog" style="width:65%;">}}
+  {{< img src="security/cspm/getting_started/resource.png" alt="Information sur les ressources de gestion de la posture dans l'application Datadog" style="width:65%;">}}
 
 Règle
 : Une règle évalue la configuration d'une ressource afin de vérifier un certain élément lié à un ou plusieurs contrôles. Une règle peut être associée à plusieurs contrôles, conditions et frameworks.
 
-  {{< img src="security_platform/cspm/getting_started/rules.png" alt="Liste des règles de détection Cloud Security Posture Management" style="width:65%;">}}
+  {{< img src="security/cspm/getting_started/rules.png" alt="Liste des règles de détection Cloud Security Posture Management" style="width:65%;">}}
 
 Findings
 : Un finding constitue la base de l'évaluation d'une ressource en fonction d'une règle. Chaque fois qu'une règle est appliquée à une ressource, un finding est généré, avec le statut Pass ou Fail.
@@ -47,7 +47,7 @@ Findings
 Framework
 : Ensemble de conditions associées à une norme réglementaire ou un benchmark d'une industrie.
 
-  {{< img src="security_platform/cspm/getting_started/frameworks.png" alt="Vue d'ensemble des frameworks sur la page d'accueil de Cloud Security Posture Management" style="width:100%;">}}
+  {{< img src="security/cspm/getting_started/frameworks.png" alt="Vue d'ensemble des frameworks sur la page d'accueil de Cloud Security Posture Management" style="width:100%;">}}
 
 ## Prise en main
 

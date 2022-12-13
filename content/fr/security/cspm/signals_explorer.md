@@ -26,37 +26,37 @@ Les signaux sont des alertes de sécurité qui sont générées par Datadog et q
 
 Les règles dont le niveau de gravité est défini sur High ou Critical génèrent des signaux par défaut. Pour les règles de détection ayant un niveau de gravité moins élevé, vous devez activer l'option *Trigger a security signal* pour qu'elles commencent à générer des signaux. Cette même option peut également être utilisée pour empêcher une règle de détection de générer des signaux à tout moment.
 
-{{< img src="security_platform/cspm/signals_explorer/Notifications.png" style="width:100%;">}}
+{{< img src="security/cspm/signals_explorer/Notifications.png" style="width:100%;">}}
 
 Afin d'analyser les résultats par groupes logiques et d'éviter les alertes superflues, vous êtes libre de modifier les paramètres de déclenchement des signaux pour chaque ressource comme bon vous semble : vous pouvez par exemple recevoir un signal à chaque fois qu'une règle échoue pour une ressource dans un nouveau compte cloud ou à chaque fois qu'une ressource est mal configurée dans un service. Les signaux peuvent également se déclencher en fonction d'une facette Datadog. Quels que soient les paramètres de regroupement logique que vous choisissez, il suffit d'ouvrir un signal pour afficher la liste des derniers résultats ayant échoué pour la règle correspondante.
 
-{{< img src="security_platform/cspm/signals_explorer/Signals.png" style="width:100%;">}}
+{{< img src="security/cspm/signals_explorer/Signals.png" style="width:100%;">}}
 
 Cliquez sur un signal de sécurité pour ouvrir un volet latéral détaillé :
 
-{{< img src="security_platform/cspm/signals_explorer/Sidepanel.png" style="width:100%;">}}
+{{< img src="security/cspm/signals_explorer/Sidepanel.png" style="width:100%;">}}
 
 La partie supérieure du volet latéral affiche des informations clés sur l'origine du problème de configuration : une ressource spécifique, un service ou un compte cloud entier.
 
-{{< img src="security_platform/cspm/signals_explorer/Top.png" style="width:100%;">}}
+{{< img src="security/cspm/signals_explorer/Top.png" style="width:100%;">}}
 
 La capture d'écran ci-dessous affiche le message de la règle, ainsi qu'une description du problème de configuration et des instructions pour corriger le problème.
 
-{{< img src="security_platform/cspm/signals_explorer/Message.png" style="width:100%;">}}
+{{< img src="security/cspm/signals_explorer/Message.png" style="width:100%;">}}
 
 L'onglet suivant dans la section inférieure du volet latéral affiche tous les résultats qui déclenchent ce signal. Cette liste reflète toujours l'état actuel de votre infrastructure, ce qui signifie que si vous avez corrigé 3 des 10 groupes de sécurité mal configurés depuis l'arrivée du premier signal, Datadog affichera les 7 groupes de sécurité restants tandis que ceux qui sont désormais conformes disparaîtront.
 
-{{< img src="security_platform/cspm/signals_explorer/Findings.png" style="width:100%;">}}
+{{< img src="security/cspm/signals_explorer/Findings.png" style="width:100%;">}}
 
 **Remarque** : si vous utilisez autre chose qu'un ID de ressource pour regrouper les alertes, un signal se déclenche la première fois qu'un résultat correspond aux critères de regroupement, mais pas à chaque fois qu'une nouvelle ressource avec le même regroupement (par exemple, le même service ou compte) échoue. Ce comportement est volontaire : il permet d'éviter le déclenchement d'un nouveau signal à chaque fois qu'une nouvelle ressource cloud échoue. Si vous souhaitez recevoir une alerte à chaque fois qu'une ressource cloud échoue pour une règle, définissez l'option *group by* de la règle concernée sur `@resource_type`.
 
 L'onglet Related issues affiche les autres règles de détection qui ont déclenché des signaux avec la même logique de regroupement (même ressource, service ou compte cloud) et le même type de ressource (par exemple, groupe de sécurité).
 
-{{< img src="security_platform/cspm/signals_explorer/Related.png" style="width:100%;">}}
+{{< img src="security/cspm/signals_explorer/Related.png" style="width:100%;">}}
 
 En haut du volet latéral, vous pouvez configurer la règle de façon à ce qu'une notification soit envoyées à vos collègues via e-mail, Slack, Microsoft Teams, PagerDuty, ServiceNow, Jira, Webhooks, et plus encore.
 
-{{< img src="security_platform/cspm/signals_explorer/Final.png" style="width:100%;">}}
+{{< img src="security/cspm/signals_explorer/Final.png" style="width:100%;">}}
 
 ## Pour aller plus loin
 

@@ -46,7 +46,7 @@ La recherche en texte libre filtre les règles de détection en fonction du text
 
 Utilisez les facettes dans le volet de gauche pour restreindre une requête de recherche en fonction de sa valeur. Par exemple, si vous utilisez plusieurs types de règles, comme `log detection` ou `cloud configuration`, filtrez votre requête sur `only` pour afficher uniquement ces types de règles.
 
-{{< img src="security_platform/security_monitoring/detection_rules/rule_type_filter.png" alt="Filtrage par type de règle, par exemple pour la détection de logs ou la configuration cloud, dans Datadog" style="width:80%;" >}}
+{{< img src="security/security_monitoring/detection_rules/rule_type_filter.png" alt="Filtrage par type de règle, par exemple pour la détection de logs ou la configuration cloud, dans Datadog" style="width:80%;" >}}
 
 Pour simplifier les processus d'enquête et de triage liés aux problèmes en cours, vous pouvez également appliquer un filtre basé sur des facettes, comme `source` et `severity`. Si vous souhaitez inclure toutes les facette d'une catégorie dans votre recherche, passez votre curseur sur une valeur dans le volet, puis cliquez sur **all**.
 
