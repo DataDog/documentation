@@ -3,7 +3,6 @@ title: Configure the Datadog Agent or Tracer for Data Security
 kind: documentation
 description: "Configure the Datadog Tracer or Agent to modify or discard spans for security or fine-tuning purposes."
 aliases:
-    - /security/tracing
     - /tracing/security
     - /tracing/guide/security
     - /tracing/guide/agent_obfuscation

@@ -10,7 +10,7 @@ further_reading:
 - link: "dashboards"
   tag: "Documentation"
   text: "Find out more about setting up a dashboard"
-- link: "security_platform/explorer"
+- link: "security/explorer"
   tag: "Documentation"
   text: "Find out more about Security Signals"
 - link: "monitors"

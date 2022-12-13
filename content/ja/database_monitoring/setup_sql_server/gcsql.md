@@ -20,8 +20,6 @@ title: Google Cloud SQL マネージド SQL Server のデータベースモニ�
 2. [Agent をインストールする](#install-the-agent)
 3. [Cloud SQL インテグレーションをインストールする](#install-the-cloud-sql-integration)
 
-**AlwaysOn ユーザーの場合**、Agent は別のサーバーにインストールし、リスナーエンドポイントを介してクラスターに接続する必要があります。これは、Availability Group (AG) のセカンダリレプリカに関する情報がプライマリレプリカから収集されるからです。さらに、この方法で Agent をインストールすると、フェイルオーバー時に Agent を稼働させ続けることができます。
-
 ## はじめに
 
 サポートされている SQL Server バージョン
@@ -146,7 +144,6 @@ instances:
     tags:  # オプション
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
-
     # プロジェクトとインスタンスを追加した後、CPU、メモリなどの追加のクラウドデータをプルするために Datadog GCP インテグレーションを構成します。
     gcp:
       project_id: '<PROJECT_ID>'
@@ -249,6 +246,9 @@ instances:
     password: '<PASSWORD>'
     connector: 'odbc'
     driver: 'FreeTDS'
+    tags:  # オプション
+      - 'service:<CUSTOM_SERVICE>'
+      - 'env:<CUSTOM_ENV>'
     gcp:
       project_id: '<PROJECT_ID>'
       instance_id: '<INSTANCE_ID>' \
@@ -270,6 +270,9 @@ instances:
     password: '<PASSWORD>'
     connector: "odbc"
     driver: "FreeTDS"
+    tags:  # オプション
+      - 'service:<CUSTOM_SERVICE>'
+      - 'env:<CUSTOM_ENV>'
     # プロジェクトとインスタンスを追加した後、CPU、メモリなどの追加のクラウドデータをプルするために Datadog GCP インテグレーションを構成します。
     gcp:
       project_id: '<PROJECT_ID>'
@@ -299,6 +302,7 @@ metadata:
           "password": "<PASSWORD>",
           "connector": "odbc",
           "driver": "FreeTDS",
+          "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"],  # オプション
           "gcp": {
             "project_id": "<PROJECT_ID>",
             "instance_id": "<INSTANCE_ID>"
@@ -326,6 +330,9 @@ Cluster Agent は自動的にこのコンフィギュレーションを登録し
 [5]: /ja/agent/guide/secrets-management
 {{% /tab %}}
 {{< /tabs >}}
+
+## Agent の構成例
+{{% dbm-sqlserver-agent-config-examples %}}
 
 ## Google Cloud SQL インテグレーションをインストールする
 
