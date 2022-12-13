@@ -213,6 +213,24 @@ This command starts a Docker container and makes your private location ready to 
 
 {{% /tab %}}
 
+{{% tab "Podman" %}}
+
+The Podman configuration is very similar to Docker, however, you must set `NET_RAW` as an additional capability to support ICMP tests. 
+
+1. Run `sysctl -w net.ipv4.ping_group_range = 0 2147483647` from the host where the container runs.
+2. Run this command to boot your private location worker by mounting your configuration file to the container. Ensure that your `<MY_WORKER_CONFIG_FILE_NAME>.json` file is accessible to mount to the container:
+   
+   ```shell
+   podman run --cap-add=NET_RAW --rm -it -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetics-check-runner.json gcr.io/datadoghq/synthetics-private-location-worker:latest
+   ```
+
+   If you have configured blocked reserved IP addresses, add the `NET_ADMIN` Linux capabilities to your private location container.
+
+This command starts a Podman container and makes your private location ready to run tests. Datadog recommends running the container in detached mode with proper restart policy.
+
+
+{{% /tab %}}
+
 {{% tab "Kubernetes Deployment" %}}
 
 To deploy the private locations worker in a secure manner, set up and mount a Kubernetes Secret resource in the container under `/etc/datadog/synthetics-check-runner.json`.
