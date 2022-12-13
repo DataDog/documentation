@@ -158,8 +158,8 @@ algolia_sync_preview:
   allow_failure: true
   interruptible: true
   script:
-    - yarn add atomic-algolia@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/brian.deutsch/atomic-algolia/atomic-algolia-v0.3.26.tgz
-    - ALGOLIA_APP_ID=$(get_secret 'algolia_preview_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_preview_api_key') DATADOG_API_KEY=$(get_secret 'dd-api-key') yarn run algolia:sync
+    - yarn add atomic-algolia@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/brian.deutsch/atomic-algolia/atomic-algolia-v0.3.27.tgz
+    - ALGOLIA_APP_ID=$(get_secret 'algolia_preview_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_preview_api_key') yarn run algolia:sync
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
       when: never

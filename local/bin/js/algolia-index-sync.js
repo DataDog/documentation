@@ -123,6 +123,7 @@ const updateIndex = (indexName) => {
             throw error;
         }
 
+        console.log('Result...')
         console.log(result);
     };
 
