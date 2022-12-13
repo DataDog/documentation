@@ -117,17 +117,16 @@ const updateReplicas = (client, indexName) => {
 const updateIndex = (indexName) => {
     const localAlogliaSearchIndex = require('../../../public/algolia.json');
 
-    const cb = (error, result) => {
-        if (error) {
-            console.error(error);
-            throw error;
-        }
+    // const cb = (error, result) => {
+    //     if (error) {
+    //         console.error(error);
+    //         throw error;
+    //     }
 
-        console.log('Result...')
-        console.log(result);
-    };
+    //     console.log(result);
+    // };
 
-    atomicalgolia(indexName, localAlogliaSearchIndex, { verbose: true }, cb);
+    atomicalgolia(indexName, localAlogliaSearchIndex, { verbose: true });
 };
 
 const sync = () => {
