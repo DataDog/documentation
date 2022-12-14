@@ -914,6 +914,11 @@
   "CreateSecurityMonitoringRule": [
     {
       "group": "security_monitoring",
+      "suffix": "_1092490364",
+      "description": "Create a cloud_configuration rule returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
       "suffix": "",
       "description": "Create a detection rule returns \"OK\" response"
     },
@@ -954,6 +959,18 @@
       "description": "Delete an existing rule returns \"OK\" response"
     }
   ],
+  "GetSecurityMonitoringRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "_3370522281",
+      "description": "Get a cloud configuration rule's details returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Get a rule's details returns \"OK\" response"
+    }
+  ],
   "SearchSecurityMonitoringSignals": [
     {
       "group": "security_monitoring",
@@ -966,13 +983,6 @@
       "group": "security_monitoring",
       "suffix": "_3960412991",
       "description": "Get a quick list of security signals returns \"OK\" response with pagination"
-    }
-  ],
-  "GetSecurityMonitoringRule": [
-    {
-      "group": "security_monitoring",
-      "suffix": "",
-      "description": "Get a rule's details returns \"OK\" response"
     }
   ],
   "GetSecurityFilter": [
@@ -1010,18 +1020,23 @@
       "description": "Modify the triage assignee of a security signal returns \"OK\" response"
     }
   ],
+  "UpdateSecurityMonitoringRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "_428087276",
+      "description": "Update a cloud configuration rule's details returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Update an existing rule returns \"OK\" response"
+    }
+  ],
   "UpdateSecurityFilter": [
     {
       "group": "security_monitoring",
       "suffix": "",
       "description": "Update a security filter returns \"OK\" response"
-    }
-  ],
-  "UpdateSecurityMonitoringRule": [
-    {
-      "group": "security_monitoring",
-      "suffix": "",
-      "description": "Update an existing rule returns \"OK\" response"
     }
   ],
   "CreateServiceAccountApplicationKey": [

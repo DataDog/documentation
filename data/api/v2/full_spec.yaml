@@ -1782,6 +1782,148 @@ components:
           example: infra_host
           type: string
       type: object
+    CloudConfigurationComplianceRuleOptions:
+      description: Options for cloud_configuration rules.
+      properties:
+        complexRule:
+          description: 'Whether the rule is a complex one.
+
+            Must be set to true if `regoRule.resourceTypes` contains more than one
+            item. Defaults to false.
+
+            '
+          type: boolean
+        regoRule:
+          $ref: '#/components/schemas/CloudConfigurationRegoRule'
+      required:
+      - regoRule
+      type: object
+    CloudConfigurationRegoRule:
+      description: Rule details.
+      properties:
+        policy:
+          description: 'The policy written in `rego`, see: https://www.openpolicyagent.org/docs/latest/policy-language/'
+          example: "package datadog\n\nimport data.datadog.output as dd_output\nimport
+            future.keywords.contains\nimport future.keywords.if\nimport future.keywords.in\n\neval(resource)
+            = \"skip\" if {\n  # Logic that evaluates to true if the resource should
+            be skipped\n  true\n} else = \"pass\" {\n  # Logic that evaluates to true
+            if the resource is compliant\n  true\n} else = \"fail\" {\n  # Logic that
+            evaluates to true if the resource is not compliant\n  true\n}\n\n# This
+            part remains unchanged for all rules\nresults contains result if {\n  some
+            resource in input.resources[input.main_resource_type]\n  result := dd_output.format(resource,
+            eval(resource))\n}\n"
+          type: string
+        resourceTypes:
+          description: List of resource types that will be evaluated upon. Must have
+            at least one element.
+          example:
+          - gcp_iam_service_account
+          - gcp_iam_policy
+          items:
+            type: string
+          type: array
+      required:
+      - policy
+      - resourceTypes
+      type: object
+    CloudConfigurationRuleCaseCreate:
+      description: Description of signals.
+      properties:
+        notifications:
+          description: Notification targets for each rule case.
+          items:
+            description: Notification.
+            type: string
+          type: array
+        status:
+          $ref: '#/components/schemas/SecurityMonitoringRuleSeverity'
+      required:
+      - status
+      type: object
+    CloudConfigurationRuleComplianceSignalOptions:
+      description: How to generate compliance signals. Useful for cloud_configuration
+        rules only.
+      properties:
+        userActivationStatus:
+          description: Whether signals will be sent.
+          type: boolean
+        userGroupByFields:
+          description: Fields to use to group findings by when sending signals.
+          items:
+            type: string
+          type: array
+      type: object
+    CloudConfigurationRuleCreatePayload:
+      description: Create a new cloud configuration rule.
+      properties:
+        cases:
+          description: 'Description of generated findings and signals (severity and
+            channels to be notified in case of a signal). Must contain exactly one
+            item.
+
+            '
+          items:
+            $ref: '#/components/schemas/CloudConfigurationRuleCaseCreate'
+          type: array
+        complianceSignalOptions:
+          $ref: '#/components/schemas/CloudConfigurationRuleComplianceSignalOptions'
+        isEnabled:
+          description: Whether the rule is enabled.
+          example: true
+          type: boolean
+        message:
+          description: Message in markdown format for generated findings and signals.
+          example: '#Description
+
+            Explanation of the rule.
+
+
+            #Remediation
+
+            How to fix the security issue.
+
+            '
+          type: string
+        name:
+          description: The name of the rule.
+          example: My security monitoring rule.
+          type: string
+        options:
+          $ref: '#/components/schemas/CloudConfigurationRuleOptions'
+        tags:
+          description: Tags for generated findings and signals.
+          example:
+          - env:prod
+          - team:security
+          items:
+            description: Tag.
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/CloudConfigurationRuleType'
+      required:
+      - name
+      - isEnabled
+      - options
+      - complianceSignalOptions
+      - cases
+      - message
+      type: object
+    CloudConfigurationRuleOptions:
+      description: Options on cloud configuration rules.
+      properties:
+        complianceRuleOptions:
+          $ref: '#/components/schemas/CloudConfigurationComplianceRuleOptions'
+      required:
+      - complianceRuleOptions
+      type: object
+    CloudConfigurationRuleType:
+      description: The rule type.
+      enum:
+      - cloud_configuration
+      type: string
+      x-enum-varnames:
+      - CLOUD_CONFIGURATION
     CloudWorkloadSecurityAgentRuleAttributes:
       description: A Cloud Workload Security Agent rule returned by the API.
       properties:
@@ -8550,6 +8692,7 @@ components:
       oneOf:
       - $ref: '#/components/schemas/SecurityMonitoringStandardRuleCreatePayload'
       - $ref: '#/components/schemas/SecurityMonitoringSignalRuleCreatePayload'
+      - $ref: '#/components/schemas/CloudConfigurationRuleCreatePayload'
       type: object
     SecurityMonitoringRuleDecreaseCriticalityBasedOnEnv:
       description: 'If true, signals in non-production environments have a lower severity
@@ -8755,6 +8898,8 @@ components:
     SecurityMonitoringRuleOptions:
       description: Options on rules.
       properties:
+        complianceRuleOptions:
+          $ref: '#/components/schemas/CloudConfigurationComplianceRuleOptions'
         decreaseCriticalityBasedOnEnv:
           $ref: '#/components/schemas/SecurityMonitoringRuleDecreaseCriticalityBasedOnEnv'
         detectionMethod:
@@ -8849,6 +8994,8 @@ components:
           items:
             $ref: '#/components/schemas/SecurityMonitoringRuleCase'
           type: array
+        complianceSignalOptions:
+          $ref: '#/components/schemas/CloudConfigurationRuleComplianceSignalOptions'
         filters:
           description: Additional queries to filter matched events before they are
             processed.
@@ -9529,6 +9676,8 @@ components:
           items:
             $ref: '#/components/schemas/SecurityMonitoringRuleCase'
           type: array
+        complianceSignalOptions:
+          $ref: '#/components/schemas/CloudConfigurationRuleComplianceSignalOptions'
         createdAt:
           description: When the rule was created, timestamp in milliseconds.
           format: int64
@@ -16579,6 +16728,19 @@ paths:
       - Security Monitoring
       x-codegen-request-body-name: body
       x-given:
+        cloud_configuration_rule:
+          parameters:
+          - name: body
+            value: "{\n  \"name\": \"{{ unique }}_cloud\",\n  \"tags\": [\"a:tag\"],\n
+              \ \"type\": \"cloud_configuration\",\n  \"isEnabled\": false,\n  \"message\":
+              \"Cloud configuration rule\",\n  \"options\": {\n    \"complianceRuleOptions\":
+              {\n      \"regoRule\": {\n        \"policy\": \"package datadog\\n\",\n
+              \       \"resourceTypes\": [\n          \"gcp_compute_disk\"\n        ]\n
+              \     },\n      \"complexRule\": false\n    }\n  },\n  \"complianceSignalOptions\":
+              {\n    \"userActivationStatus\": true,\n    \"userGroupByFields\": [\"@account_id\"]\n
+              \ },\n  \"cases\": [\n    {\n      \"status\": \"info\",\n      \"notifications\":
+              [\"channel\"]\n    }\n  ]\n}"
+          step: there is a valid "cloud_configuration_rule" in the system
         security_rule:
           parameters:
           - name: body
