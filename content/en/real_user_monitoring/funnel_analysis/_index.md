@@ -20,7 +20,7 @@ Funnel analysis helps you track conversion rates across key workflows to identif
 
 To build a funnel, select your starting view or action and click on the plus icon to proceed in building additional steps. You can also use drag and drop functionality to move steps around. 
 
-[ ADD VIDEO TK ]
+{{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-building-a-funnel.mp4" alt="Build a funnel" video="true" style="width:90%;">}}
 
 ### Suggested next steps
 
@@ -30,7 +30,7 @@ When you have a starting point in mind, but aren't sure what your users did next
 
 ### Filtering
 
-When constructing your funnel, you can add [default attributes][1] (core, device, operating system, geo-location, and user) and [session-specific][2] attributes to drill down the data further.
+When constructing your funnel, you can add all [default attributes][1] (core, device, operating system, geo-location, and user) and [session-specific][2] attributes to analyze the data further.
 
 {{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-filtering.jpg" alt="Use filters to drill down information when constructing your funnel" style="width:50%;" >}}
 
@@ -55,8 +55,16 @@ Funnels can be shared with your teams on dashboards to analyze conversion alongs
 Note that you have a few options when it comes to sharing:
 
 - Share the entire visualization 
-- Share specific widgets [ ADD VIDEO EXAMPLE TK]
+
+  [ ADD IMAGE TK ]
+
+- Share specific widgets
+
+  {{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-share-specific-widgets.mp4" alt="Share specific widgets" video="true" style="width:90%;">}}
+
 - Add your funnel as a saved view
+
+  [ ADD IMAGE TK ]
 
 ## Alerting on conversion
 
