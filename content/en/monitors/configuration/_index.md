@@ -23,12 +23,16 @@ To learn how to construct the search query, see the individual [monitor types][1
 
 ### Alert grouping
 
-Alerts are grouped automatically based on your selection of the `group by` step when defining your query. If no group is specified, grouping defaults to `Simple Alert`. If the query is grouped by any dimension, grouping defaults to `Multi Alert`.
+Alerts are grouped automatically based on your selection of the `group by` step when defining your query. Grouping defaults to `Simple Alert`. If the query is grouped by any dimension, grouping changes to `Multi Alert`.
 
+#### Simple alert
 `Simple Alert` mode aggregates over all reporting sources. You receive **one alert** when the aggregated value meets the set conditions.
 
-`Multi Alert` mode applies the alert to each source according to your group parameters. You receive **an alert for each group** that meets the set conditions. For example, you could group a query looking at a capacity metric by `host` and `device` to receive a separate alert for each host device that is running out of space.
-Note that if your metric is only reporting by `host` with no `device` tag, it would not be detected by a monitor group by both `host` and `device`. [Tag Variables][2] are available for every group evaluated in the multi alert to dynamically fill in notifications with useful context.
+#### Multi alert
+`Multi Alert` mode applies the alert to each source according to your group parameters. You receive an alert for **each group** that meets the set conditions. For example, you could group a query looking at a capacity metric by `host` and `device` to receive a separate alert for each host device that is running out of space.  
+**Note**: If your metric is only reporting by `host` with no `device` tag, it is not detected by the monitor. Metrics with both `host` and `device` tags are detected by the monitor. 
+
+If you configure tags or dimensions, these values are available for every group evaluated in the multi alert to dynamically fill in notifications with useful context. See [Tag Variables][2] to learn how to reference tag values in the notification message.
 
 | Group by                       | Simple alert mode | Multi alert mode |
 |-------------------------------------|------------------------|-----------------------|
@@ -151,6 +155,8 @@ See the documentation for [process check][1], [integration check][2], and [custo
 Notifications for missing data are useful if you expect a metric to always be reporting data under normal circumstances. For example, if a host with the Agent must be up continuously, you can expect the  `system.cpu.idle` metric to always report data.
 
 In this case, you should enable notifications for missing data. The sections below explain how to accomplish this with each option.
+
+**Note**: The monitor must be able to evaluate data before alerting on missing data. For example, if you create a monitor for `service:abc` and data from that `service` is not reporting, the monitor does not send alerts.
 
 There are two ways to deal with missing data:
 - Metric-based monitors using the limited `Notify no data` option

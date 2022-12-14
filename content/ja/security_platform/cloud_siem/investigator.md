@@ -10,10 +10,6 @@ kind: documentation
 title: Investigator
 ---
 
-{{< beta-callout url="#" btn_hidden="true">}}
-  Cloud SIEM Investigator はベータ版です。
-{{< /beta-callout >}} 
-
 ## 概要
 
 <div class="alert alert-warning">Cloud SIEM Investigator は現在、AWS CloudTrail のログにのみ対応しています。</div>

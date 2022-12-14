@@ -15,6 +15,9 @@ further_reading:
 - link: "/monitors/manage/status/"
   tag: "Documentation"
   text: "Check your monitor status"
+- link: "https://www.datadoghq.com/blog/configure-pipeline-alerts-with-ci-monitors/"
+  tag: "Blog"
+  text: "Configure pipeline alerts with Datadog CI monitors"
 ---
 
 {{< site-region region="gov" >}}
@@ -139,6 +142,31 @@ For detailed instructions on the advanced alert options (such as evaluation dela
 ### Notifications
 
 For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][4] page.
+
+#### Samples and breaching values top list
+
+When a CI Test or Pipeline monitor is triggered, samples or values can be added to the notification message.
+
+| Monitor Setup                    | Can be added to notification message |
+|----------------------------------|--------------------------------------|
+| Ungrouped Simple-Alert count     | Up to 10 samples.                    |
+| Grouped Simple-Alert count       | Up to 10 facet or measure values.    |
+| Grouped Multi-Alert count        | Up to 10 samples.                    |
+| Ungrouped Simple-Alert measure   | Up to 10 samples.                    |
+| Grouped Simple-Alert measure     | Up to 10 facet or measure values.    |
+| Grouped Multi-Alert count        | Up to 10 facet or measure values.    |
+
+These are available for notifications sent to Slack, Jira, webhooks, Microsoft Teams, Pagerduty, and email. **Note**: Samples are not displayed for recovery notifications.
+
+To disable samples, uncheck the box at the bottom of the **Say what's happening** section. The text next to the box is based on your monitor's grouping (as stated above).
+
+#### Sample examples
+
+Include a table of CI Test 10 samples in the alert notification:
+{{< img src="monitors/monitor_types/ci_tests/10_ci_tests_samples.png" alt="Top 10 CI Test samples"  style="width:60%;" >}}
+
+Include a table of CI Pipeline 10 samples in the alert notification:
+{{< img src="monitors/monitor_types/ci_pipelines/10_ci_pipelines_samples.png" alt="Top 10 CI Test samples"  style="width:60%;" >}}
 
 #### Notifications behavior when there is no data
 
