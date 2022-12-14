@@ -115,7 +115,7 @@ Available since version 0.96.0.
 **Default**: `null`<br>
 **Example**: `CASE-insensitive-Header:my-baggage-name,User-ID:userId,My-Header-And-Baggage-Name`<br>
 Accepts a map of case-insensitive header keys to baggage keys and automatically applies matching request header values as baggage on traces. On propagation the reverse mapping is applied: Baggage is mapped to headers.<br>
-Available since version TODO: XX.XX.XX.
+Available since version 1.3.0.
 
 `dd.trace.annotations`
 : **Environment Variable**: `DD_TRACE_ANNOTATIONS`<br>
