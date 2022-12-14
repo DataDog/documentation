@@ -241,7 +241,7 @@ Wildcard support `[*]` added in version 2.7.0.
 : Alters the behavior of the Kafka consumer span<br>
 **Default**: `true`<br>
 When set to `true`, the consumer span is created when a message is consumed and closed before consuming the next message. The span duration is representative of the computation between one message consumption and the next. Use this setting when message consumption is performed in a loop.<br>
-When set to `false`, the consumer span is created when a message is consumed and immediately closed. Use this setting when a message is not processed completely before consuming the next one, or when multiple messages are consumed at once.
+When set to `false`, the consumer span is created when a message is consumed and immediately closed. Use this setting when a message is not processed completely before consuming the next one, or when multiple messages are consumed at once. When you set this parameter to `false`, consumer spans are closed right away. If you have child spans to trace, you must extract the context manually. Read [Headers extraction and injection][12] for more details.
 
 #### Automatic instrumentation integration configuration
 
@@ -308,3 +308,4 @@ If multiple extraction styles are enabled, the extraction attempt is completed i
 [9]: https://github.com/openzipkin/b3-propagation
 [10]: https://www.w3.org/TR/trace-context/#traceparent-header
 [11]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=net#pagetitle
+[12]: /tracing/trace_collection/custom_instrumentation/dotnet/#headers-extraction-and-injection

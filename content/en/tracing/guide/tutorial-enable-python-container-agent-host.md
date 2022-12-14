@@ -209,7 +209,7 @@ Verify that the Agent is running and sending data to Datadog by going to [**Even
 {{< img src="tracing/guide/tutorials/tutorial-python-host-agent-verify.png" alt="Event Explorer showing a message from Datadog indicating the Agent was installed on a host." style="width:70%;" >}}
 
 <div class="alert alert-info">If after a few minutes you don't see your host in Datadog (under <strong>Infrastructure > Host map</strong>), ensure you used the correct API key for your organization, available at <a href="https://app.datadoghq.com/organization-settings/api-keys"><strong>Organization Settings > API Keys</strong></a>.</div>
- 
+
 
 ## Launch the containers to see automatic tracing
 
@@ -286,7 +286,7 @@ docker-compose -f docker/host-and-containers/exercise/docker-compose.yaml up db 
 5. On the Trace Explorer, click into one of the new `GET` requests, and see a flame graph like this:
 
    {{< img src="tracing/guide/tutorials/tutorial-python-container-custom-flame.png" alt="A flame graph for a GET trace with custom instrumentation." style="width:100%;" >}}
-   
+
    Note the higher level of detail in the stack trace now that the `get_notes` function has custom tracing.
 
 For more information, read [Custom Instrumentation][12].

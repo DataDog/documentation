@@ -1105,7 +1105,7 @@
         - "application-security/*.json"
         - "application-security/*.md"
       options:
-        dest_path: '/security_platform/default_rules/'
+        dest_path: '/security/default_rules/'
 
   - repo_name: apps
     contents:
@@ -1134,7 +1134,7 @@
       - 'docs/cloud-workload-security/agent_expressions.md'
       - 'docs/cloud-workload-security/backend.md'
       options:
-        dest_dir: '/security_platform/cloud_workload_security/'
+        dest_dir: '/security/cloud_workload_security/'
         path_to_remove: 'docs/cloud-workload-security/'
 
   - repo_name: dd-source

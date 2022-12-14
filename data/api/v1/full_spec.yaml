@@ -3279,26 +3279,6 @@ components:
       required:
       - message
       type: object
-    HTTPMethod:
-      description: The HTTP method.
-      enum:
-      - GET
-      - POST
-      - PATCH
-      - PUT
-      - DELETE
-      - HEAD
-      - OPTIONS
-      example: GET
-      type: string
-      x-enum-varnames:
-      - GET
-      - POST
-      - PATCH
-      - PUT
-      - DELETE
-      - HEAD
-      - OPTIONS
     HeatMapWidgetDefinition:
       description: The heat map visualization shows metrics aggregated across many
         tags, such as hosts. The more hosts that have a particular value, the darker
@@ -6337,6 +6317,10 @@ components:
           type: array
         enable_logs_sample:
           description: Whether or not to send a log sample when the log monitor triggers.
+          type: boolean
+        enable_samples:
+          description: Whether or not to send a list of samples when the monitor triggers.
+            This is only used by CI Test and Pipeline monitors.
           type: boolean
         escalation_message:
           default: none
@@ -12283,6 +12267,8 @@ components:
           description: Scope to use when performing the authentication.
           example: scope
           type: string
+        tokenApiAuthentication:
+          $ref: '#/components/schemas/SyntheticsBasicAuthOauthTokenApiAuthentication'
         type:
           $ref: '#/components/schemas/SyntheticsBasicAuthOauthROPType'
         username:
@@ -12292,6 +12278,7 @@ components:
       required:
       - accessTokenUrl
       - password
+      - tokenApiAuthentication
       - username
       type: object
     SyntheticsBasicAuthOauthROPType:
@@ -13706,6 +13693,16 @@ components:
       - TYPE_TEXT
       - UPLOAD_FILES
       - WAIT
+    SyntheticsTestCallType:
+      description: The type of gRPC call to perform.
+      enum:
+      - healthcheck
+      - unary
+      example: unary
+      type: string
+      x-enum-varnames:
+      - HEALTHCHECK
+      - UNARY
     SyntheticsTestCiOptions:
       description: CI/CD options for a Synthetic test.
       properties:
@@ -14013,6 +14010,8 @@ components:
           type: string
         bodyType:
           $ref: '#/components/schemas/SyntheticsTestRequestBodyType'
+        callType:
+          $ref: '#/components/schemas/SyntheticsTestCallType'
         certificate:
           $ref: '#/components/schemas/SyntheticsTestRequestCertificate'
         certificateDomains:
@@ -14048,7 +14047,10 @@ components:
         metadata:
           $ref: '#/components/schemas/SyntheticsTestMetadata'
         method:
-          $ref: '#/components/schemas/HTTPMethod'
+          description: Either the HTTP method/verb to use or a gRPC method available
+            on the service set in the `service` field. Required if `subtype` is `HTTP`
+            or if `subtype` is `grpc` and `callType` is `unary`.
+          type: string
         noSavingResponseBody:
           description: Determines whether or not to save the response body.
           type: boolean
@@ -14076,7 +14078,8 @@ components:
             the same IP address and TCP port number.'
           type: string
         service:
-          description: gRPC service on which you want to perform the healthcheck.
+          description: The gRPC service on which you want to perform the gRPC call.
+          example: Greeter
           type: string
         shouldTrackHops:
           description: Turns on a traceroute probe to discover all gateways along
@@ -18612,6 +18615,8 @@ components:
           type: string
         limit:
           $ref: '#/components/schemas/WidgetFormulaLimit'
+        style:
+          $ref: '#/components/schemas/WidgetFormulaStyle'
       required:
       - formula
       type: object
@@ -18624,6 +18629,20 @@ components:
           type: integer
         order:
           $ref: '#/components/schemas/QuerySortOrder'
+      type: object
+    WidgetFormulaStyle:
+      description: Styling options for widget formulas.
+      properties:
+        palette:
+          description: The color palette used to display the formula. A guide to the
+            available color palettes can be found at https://docs.datadoghq.com/dashboards/guide/widget_colors
+          example: classic
+          type: string
+        palette_index:
+          description: Index specifying which color to use within the palette.
+          example: 1
+          format: int64
+          type: integer
       type: object
     WidgetGrouping:
       description: The kind of grouping to use.

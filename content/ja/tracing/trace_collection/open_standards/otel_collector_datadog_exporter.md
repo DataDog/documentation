@@ -6,11 +6,16 @@ further_reading:
 - link: tracing/glossary/
   tag: OpenTelemetry
   text: Collectorドキュメント
+- link: https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/
+  tag: GitHub
+  text: OpenTelemetry コレクターから Datadog エクスポーター経由で Datadog にメトリクスとトレースを送信する
 kind: documentation
 title: OpenTelemetry コレクター Datadog エクスポーター
 ---
 
 OpenTelemetry Collector は、あらゆるベンダーに対応するエージェントプロセスで、さまざまなプロセスにより送信されたテレメトリデータを収集、エクスポートします。Datadog には、OpenTelemetry Collector で使える [Exporter][1] があり、OpenTelemetry SDK から Datadog にトレースやメトリクスデータを転送することができます (Datadog Agent は不要です)。すべての対応言語で動作するほか、[これらの OpenTelemetry トレースデータをアプリケーションログに接続する][2]ことができます。
+
+{{< img src="metrics/otel/datadog_exporter.png" alt="アプリケーションインスツルメンテーションライブラリ、クラウドインテグレーション、その他のモニタリングソリューション (Prometheus など) -> OTel コレクター内の Datadog エクスポーター -> Datadog" style="width:100%;">}}
 
 ## コレクターの実行
 
@@ -123,18 +128,13 @@ OpenTelemetry シグナルがタグ付けされるホスト名は、以下のソ
 
 Opentelemetry Collector コンテナを実行し、[ローカルホスト](#receive-traces-from-localhost)、または[その他のコンテナ](#receive-traces-from-other-containers)からトレースを受信します。
 
-<div class="alert alert-info">
-OpenTelemetry Collector Contrib ディストリビューションの最新タグは、<a href="https://github.com/open-telemetry/opentelemetry-collector-releases/issues/73">リリースごとに更新されるわけではありません</a>。
-Collector を最新版にピン留めして、最新の変更点をピックアップしてください。
-</div>
-
 ### ローカルホストからトレースを受信する
 
 OpenTelemetry Collector を Docker イメージとして実行し、同じホストからトレースを受信するには
 
 1. `collector.yaml` ファイルを作成します。[上のテンプレート例](#configuring-the-datadog-exporter)を参考にするとよいでしょう。
 
-2. [`otel/opentelemetry-collector-contrib:<VERSION>`][10] などの公開された Docker イメージを選択します。
+2. [`otel/opentelemetry-collector-contrib`][10] などの公開された Docker イメージを選択します。
 
 3. OpenTelemetry のトレースを OpenTelemetry Collector に送信するために、コンテナ上でどのポートをオープンするかを決定します。デフォルトでは、トレースはポート 4317 の gRPC で送信されます。gRPC を使用しない場合は、ポート 4138 を使用します。
 
@@ -145,7 +145,7 @@ OpenTelemetry Collector を Docker イメージとして実行し、同じホス
        -p 4317:4317 \
        --hostname $(hostname) \
        -v $(pwd)/otel_collector_config.yaml:/etc/otelcol-contrib/config.yaml \
-       otel/opentelemetry-collector-contrib:<VERSION>
+       otel/opentelemetry-collector-contrib
    ```
 
 5. [統合サービスタグ付け](#unified-service-tagging)に適切なリソース属性がアプリケーションに構成されていることを確認してください。
@@ -172,7 +172,7 @@ OpenTelemetry Collector を Docker イメージとして実行し、その他の
        --network <NETWORK_NAME> \
        --hostname $(hostname) \
        -v $(pwd)/otel_collector_config.yaml:/etc/otelcol-contrib/config.yaml \
-       otel/opentelemetry-collector-contrib:<VERSION>
+       otel/opentelemetry-collector-contrib
    ```
 
    アプリケーションコンテナの実行中は、環境変数 `OTEL_EXPORTER_OTLP_ENDPOINT` が OpenTelemetry Collector 向けの適切なホスト名を使用して構成されていることをご確認ください。以下の例では `opentelemetry-collector` を使用しています。
@@ -310,7 +310,7 @@ OpenTelemetry Operator を使用するには
    spec:
      mode: daemonset
      hostNetwork: true
-     image: otel/opentelemetry-collector-contrib:0.59.0
+     image: otel/opentelemetry-collector-contrib
      env:
        - name: DD_API_KEY
          valueFrom:
@@ -320,21 +320,50 @@ OpenTelemetry Operator を使用するには
 
      config: |
        receivers:
-           otlp:
-             protocols:
-               grpc:
-               http:
+         otlp:
+           protocols:
+             grpc:
+             http:
+       hostmetrics:
+         collection_interval: 10s
+         scrapers:
+           paging:
+             metrics:
+               system.paging.utilization:
+                 enabled: true
+           cpu:
+             metrics:
+               system.cpu.utilization:
+                 enabled: true
+           disk:
+           filesystem:
+             metrics:
+               system.filesystem.utilization:
+                 enabled: true
+           load:
+           memory:
+           network:
+       processors:
+         k8sattributes:
+         batch:
+           # Datadog APM Intake limit is 3.2MB. Let's make sure the batches do not
+           # go over that.
+           send_batch_max_size: 1000
+           send_batch_size: 100
+           timeout: 10s
        exporters:
-           datadog:
-               api:
-                 key: ${DD_API_KEY}
+         datadog:
+           api:
+             key: ${DD_API_KEY}
        service:
          pipelines:
            metrics:
-             receivers: [otlp]
+             receivers: [hostmetrics, otlp]
+             processors: [k8sattributes, batch]
              exporters: [datadog]
            traces:
              receivers: [otlp]
+             processors: [k8sattributes, batch]
              exporters: [datadog]
    ```
 

@@ -266,6 +266,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_41622531",
+      "description": "Create a new dashboard with timeseries widget and formula style attributes"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_3982498788",
       "description": "Create a new dashboard with timeseries widget containing style attributes"
     },
@@ -805,6 +810,11 @@
       "group": "synthetics",
       "suffix": "_1487281163",
       "description": "Create an API HTTP test returns \"OK - Returns the created test details.\" response"
+    },
+    {
+      "group": "synthetics",
+      "suffix": "_960766374",
+      "description": "Create an API HTTP with oauth-rop test returns \"OK - Returns the created test details.\" response"
     },
     {
       "group": "synthetics",
