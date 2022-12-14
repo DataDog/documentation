@@ -74,7 +74,7 @@ Setting up alerts on conversion/dropoff rates allows you to be notified when con
 - From the Funnel Insights panel: This allows you to take individual queries and alert on them. While this could be the overall workflow, you also have the option to alert on individual steps' dropoff and conversion.
   - For example, if you want to alert on the dropoff rate between steps 3 and 4, you can do that from the Funnel Insights panel as shown below:
 
-
+    [ ADD VIDEO TK ]
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
