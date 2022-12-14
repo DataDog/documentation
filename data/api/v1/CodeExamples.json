@@ -266,6 +266,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_41622531",
+      "description": "Create a new dashboard with timeseries widget and formula style attributes"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_3982498788",
       "description": "Create a new dashboard with timeseries widget containing style attributes"
     },

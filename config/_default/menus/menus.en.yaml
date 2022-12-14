@@ -2855,58 +2855,58 @@ main:
     url: synthetics/search/
     parent: synthetics
     weight: 5
+  - name: Test Coverage
+    url: synthetics/test_coverage
+    parent: synthetics
+    identifier: synthetics_test_coverage
+    weight: 6
   - name: Dashboards
     url: synthetics/dashboards
     parent: synthetics
     identifier: synthetics_dashboards
-    weight: 6
+    weight: 7
   - name: API Test
     url: synthetics/dashboards/api_test
     parent: synthetics_dashboards
     identifier: synthetics_dashboards_api_test
-    weight: 601
+    weight: 701
   - name: Browser Test
     url: synthetics/dashboards/browser_test
     parent: synthetics_dashboards
     identifier: synthetics_dashboards_browser_test
-    weight: 602
-  - name: Testing Coverage
-    url: synthetics/dashboards/testing_coverage
-    parent: synthetics_dashboards
-    identifier: synthetics_dashboards_testing_coverage
-    weight: 603
+    weight: 702
   - name: Test Summary
     url: synthetics/dashboards/test_summary
     parent: synthetics_dashboards
     identifier: synthetics_dashboards_test_summary
-    weight: 604
+    weight: 703
   - name: APM Integration
     url: synthetics/apm/
     parent: synthetics
     identifier: synthetics_apm
-    weight: 7
+    weight: 8
   - name: Settings
     url: synthetics/settings/
     parent: synthetics
-    weight: 8
+    weight: 9
   - name: Metrics
     url: synthetics/metrics/
     parent: synthetics
-    weight: 9
+    weight: 10
   - name: Data Security
     url: data_security/synthetics/
     parent: synthetics
-    weight: 10
+    weight: 11
   - name: Guides
     url: synthetics/guide/
     parent: synthetics
     identifier: synthetics_guides
-    weight: 11
+    weight: 12
   - name: Troubleshooting
     url: synthetics/troubleshooting/
     parent: synthetics
     identifier: synthetics_troubleshooting
-    weight: 12
+    weight: 13
   - name: Continuous Testing
     url: continuous_testing/
     pre: continuous-testing
