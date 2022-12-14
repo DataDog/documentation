@@ -22,7 +22,7 @@ Cloud Security Posture Management is not available in this site.
 
 
 {{< beta-callout url="#" btn_hidden="true">}}
-Creating and using custom CSPM rules is a beta feature, available for select Amazon Web Services (AWS), Microsoft Azure, and Google Cloud Platform (GCP) cloud resources. Reference our [cloud resource schema documentation][8] to review what we currently support. Note that new cloud resources will be added throughout the beta period.
+Creating and using custom CSPM rules is a beta feature, available for select Amazon Web Services (AWS), Microsoft Azure, and Google Cloud Platform (GCP) cloud resources. See our [cloud resource schema documentation][8] for more information. New cloud resources will be added throughout the beta period.
 
 For cloud resource requests, e-mail support@datadoghq.com.
 {{< /beta-callout >}} 
