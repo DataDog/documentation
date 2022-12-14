@@ -54,6 +54,66 @@ For more information and additional settings, see the [plugin documentation][1].
 [3]: https://docs.datadoghq.com/getting_started/site/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
+{{% tab "Container image" %}}
+
+1. Install the Datadog Lambda Extension
+
+    ```dockerfile
+    COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/. /opt/
+    ```
+
+    Replace `<TAG>` with either a specific version number (for example, `{{< latest-lambda-layer-version layer="extension" >}}`) or with `latest`. You can see a complete list of possible tags in the [Amazon ECR repository][1].
+
+2. Install the Datadog Lambda library
+
+    ```
+    go get github.com/DataDog/datadog-lambda-go
+    ```
+
+3. Update your Lambda function code
+
+    ```go
+    package main
+
+    import (
+      "github.com/aws/aws-lambda-go/lambda"
+      "github.com/DataDog/datadog-lambda-go"
+      "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+      httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
+    )
+
+    func main() {
+      // Wrap your lambda handler
+      lambda.Start(ddlambda.WrapFunction(myHandler, nil))
+    }
+
+    func myHandler(ctx context.Context, event MyEvent) (string, error) {
+      // Trace an HTTP request
+      req, _ := http.NewRequestWithContext(ctx, "GET", "https://www.datadoghq.com", nil)
+      client := http.Client{}
+      client = *httptrace.WrapClient(&client)
+      client.Do(req)
+
+      // Submit a custom metric
+      ddlambda.Metric(
+        "coffee_house.order_value", // Metric name
+        12.45, // Metric value
+        "product:latte", "order:online" // Associated tags
+      )
+
+      // Create a custom span
+      s, _ := tracer.StartSpanFromContext(ctx, "child.span")
+      time.Sleep(100 * time.Millisecond)
+      s.Finish()
+    }
+    ```
+
+4. Set the required environment variables
+
+    - Set `DD_SITE` to {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
+    - Set `DD_API_KEY_SECRET_ARN` to the ARN of the AWS secret where your [Datadog API key][2] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
+    - Optionally set `DD_UNIVERSAL_INSTRUMENTATION: true` to take advantage of [advanced configurations][3] such as capturing the Lambda request and response payloads and inferring APM spans from incoming Lambda events.
+{{% /tab %}}
 {{% tab "Custom" %}}
 ### Install the Datadog Lambda Extension
 
