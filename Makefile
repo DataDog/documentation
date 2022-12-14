@@ -79,7 +79,7 @@ start-docker: clean  ## Build and run docs including external content via docker
 	@export REPO_PATH=$(PWD) && \
 	export GITHUB_TOKEN=$(GITHUB_TOKEN) && \
 	export FULL_BUILD=$(FULL_BUILD) && \
-	docker-compose -f ./docker-compose-docs.yml pull && docker-compose -p docs-local -f ./docker-compose-docs.yml up
+	docker-compose -f ./docker-compose-docs.yml pull --ignore-pull-failures && docker-compose -p docs-local -f ./docker-compose-docs.yml up
 
 stop-docker: ## Stop the running docker container.
 	@docker-compose -f ./docker-compose-docs.yml down

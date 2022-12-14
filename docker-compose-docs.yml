@@ -1,7 +1,12 @@
 version: '3'
 services:
   docs:
-    image: public.ecr.aws/x2b9z2t7/webops/site-build:latest
+    image: webtest:latest
+    environment:
+      DD_ENV: local
+      DD_SERVICE: hugo
+      #DD_AGENT_HOST: docker.for.mac.localhost
+      DD_AGENT_HOST: host.docker.internal
     command: "./startup.sh ${GITHUB_TOKEN} ${FULL_BUILD}"
     volumes:
       - "${REPO_PATH}:/src:delegated"
