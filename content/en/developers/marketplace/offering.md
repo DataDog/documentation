@@ -248,7 +248,7 @@ For more information, see [Integrations Assets Reference][22].
 
 ## Open a pull request
 
-Push up your feature branch and open a pull request that contains your integration tile's asset files (including images) in the [`marketplace` repository][18]. The `datadog/marketplace` repository does not allow forks. For instructions on creating a clone of the repo, see the [Set up section](#set-up-a-directory-and-clone-the-marketplace-repository). After you've created your pull request, automatic checks run in Azure DevOps pipelines to verify that your pull request is in good shape and contains all the required content to be updated.
+Push up your feature branch and open a pull request that contains your integration tile's asset files (including images) in the [`marketplace` repository][18]. The Marketplace repository does not allow forks. For instructions on creating a clone of the repo, see the [Set up section](#set-up-a-directory-and-clone-the-marketplace-repository). After you've created your pull request, automatic checks run in Azure DevOps pipelines to verify that your pull request is in good shape and contains all the required content to be updated.
 
 To request access to the Azure DevOps pipeline, leave a comment in the pull request requesting access.
 
