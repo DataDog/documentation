@@ -28,6 +28,14 @@ aliases:
     {{< nextlink href="tracing/guide/tutorial-enable-java-container-agent-host" >}}Enabling Tracing for a Java Application in a Container and an Agent on a Host{{< /nextlink >}}
 {{< /whatsnext >}}
 <br>
+
+| App and Agent on a Host    | App and Agent in Containers | App in Containers, Agent on Host |
+| ---- | ----------- | ----------- |
+|{{< img src="integrations_logos/python.png">}}|{{< img src="integrations_logos/python.png" >}} |{{< img src="integrations_logos/python.png"  >}} |
+| {{< img src="integrations_logos/java.png" >}} | {{< img src="integrations_logos/java.png" >}} | {{< img src="integrations_logos/java.png" >}} |
+
+
+
 {{< whatsnext desc="APM Integrations in action" >}}
     {{< nextlink href="/tracing/guide/monitor-kafka-queues/" >}}Tracing Kafka Queues{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/trace-php-cli-scripts/" >}}Tracing PHP CLI Scripts{{< /nextlink >}}
