@@ -187,7 +187,7 @@ The `duration` metric can be used to identify pipeline and test performance regr
 ### Track new flaky tests
 Test monitors have the `New Flaky Test`, `Test Failures`, and `Test Performance` common monitor types for simple monitor setup. This monitor sends alerts when new flaky tests are added to your codebase. The query is grouped by `Test Full Name` so you don't get alerted on the same new flaky test more than once.
 
-A test run is marked as `flaky` if it exhibits flakiness within the same commit after some retries. If it exhibits flakiness multiple times (because multiple retries were executed), the `is_flaky` tag is only be added to the first test run that is detected as flaky.
+A test run is marked as `flaky` if it exhibits flakiness within the same commit after some retries. If it exhibits flakiness multiple times (because multiple retries were executed), the `is_flaky` tag is added to the first test run that is detected as flaky.
 
 A test run is marked as `new flaky` if that particular test has not been detected to be flaky within the same branch or default branch. Only the first test run that is detected as new flaky is marked with the `is_new_flaky` tag (regardless of the number of retries).
 
