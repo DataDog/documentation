@@ -13,6 +13,10 @@ variables:
   # datadog-ci
   DATADOG_SITE: 'datadoghq.com'
   DATADOG_SUBDOMAIN: 'dd-corpsite'
+  # apm / profiling
+  DD_ENV: "${CI_ENVIRONMENT_NAME}"
+  DD_SERVICE: hugo
+  DD_AGENT_HOST: "${BUILDENV_HOST_IP}"
   FORCE_COLOR: '1'
   GIT_DEPTH: 50
   # gitlab checkout
@@ -60,7 +64,7 @@ before_script:
 
 # ================== templates ================== #
 .base_template: &base_template
-  image: public.ecr.aws/x2b9z2t7/webops/site-build:latest
+  image: public.ecr.aws/x2b9z2t7/webops/site-build:hugo_monitoring
   tags:
     - "runner:main"
   except:
