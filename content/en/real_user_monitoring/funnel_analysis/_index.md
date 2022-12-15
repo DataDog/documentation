@@ -26,7 +26,7 @@ To build a funnel, select your starting view or action and click on the plus ico
 
 When you have a starting point in mind, but aren't sure what your users did next, suggested next steps helps remove the guesswork. After inputting steps, the suggested next steps panel shows you the top five most common views that users typically have next, as well as the top five most common actions that users typically take next. This allows you to build funnels quicker knowing the paths your users are taking in sequence.
 
-{{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-suggested-next-steps.jpg" alt="Add a next step to your funnel using suggested next steps" style="width:90%;" >}}
+{{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-suggested-next-steps.jpg" alt="Build a funnel" style="width:90%;" >}}
 
 ### Filtering
 
@@ -60,7 +60,7 @@ Note that you have a few options when it comes to sharing:
 
 - Share specific widgets
 
-{{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-share-specific-widgets-1.mp4" alt="Filtering network map with search" video="true" >}}
+{{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-share-specific-widgets-1.mp4" alt=alt="Share specific widgets" video="true" >}}
 
 - Add your funnel as a saved view
 
