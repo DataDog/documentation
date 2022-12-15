@@ -107,7 +107,7 @@ Click **View in ASM** to investigate further using [Datadog Application Security
 
 {{< img src="tracing/visualization/trace/trace_security.png" alt="Trace Attack Attempts" style="width:90%;">}}
 
-[1]: /security_platform/application_security/how-appsec-works/
+[1]: /security/application_security/how-appsec-works/
 {{% /tab %}}
 {{< /tabs >}}
 

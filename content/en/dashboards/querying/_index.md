@@ -5,7 +5,7 @@ aliases:
   - /graphing/using_graphs/
 description: Query your data to gain insight
 further_reading:
-- link: "https://learn.datadoghq.com/course/view.php?id=8"
+- link: "https://learn.datadoghq.com/courses/building-better-dashboards"
   tag: "Learning Center"
   text: "Building Better Dashboards"
 ---

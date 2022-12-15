@@ -143,6 +143,31 @@ For detailed instructions on the advanced alert options (such as evaluation dela
 
 For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][4] page.
 
+#### Samples and breaching values top list
+
+When a CI Test or Pipeline monitor is triggered, samples or values can be added to the notification message.
+
+| Monitor Setup                    | Can be added to notification message |
+|----------------------------------|--------------------------------------|
+| Ungrouped Simple-Alert count     | Up to 10 samples.                    |
+| Grouped Simple-Alert count       | Up to 10 facet or measure values.    |
+| Grouped Multi-Alert count        | Up to 10 samples.                    |
+| Ungrouped Simple-Alert measure   | Up to 10 samples.                    |
+| Grouped Simple-Alert measure     | Up to 10 facet or measure values.    |
+| Grouped Multi-Alert count        | Up to 10 facet or measure values.    |
+
+These are available for notifications sent to Slack, Jira, webhooks, Microsoft Teams, Pagerduty, and email. **Note**: Samples are not displayed for recovery notifications.
+
+To disable samples, uncheck the box at the bottom of the **Say what's happening** section. The text next to the box is based on your monitor's grouping (as stated above).
+
+#### Sample examples
+
+Include a table of CI Test 10 samples in the alert notification:
+{{< img src="monitors/monitor_types/ci_tests/10_ci_tests_samples.png" alt="Top 10 CI Test samples"  style="width:60%;" >}}
+
+Include a table of CI Pipeline 10 samples in the alert notification:
+{{< img src="monitors/monitor_types/ci_pipelines/10_ci_pipelines_samples.png" alt="Top 10 CI Test samples"  style="width:60%;" >}}
+
 #### Notifications behavior when there is no data
 
 A monitor that uses an event count for its evaluation query will resolve after the specified evaluation period with no data, triggering a notification. For example, a monitor configured to alert on the number of pipeline errors with an evaluation window of five minutes will automatically resolve after five minutes without any pipeline executions.
@@ -162,6 +187,12 @@ The `duration` metric can be used to identify pipeline and test performance regr
 ### Track new flaky tests
 Test monitors have the `New Flaky Test`, `Test Failures`, and `Test Performance` common monitor types for simple monitor setup. This monitor sends alerts when new flaky tests are added to your codebase. The query is grouped by `Test Full Name` so you don't get alerted on the same new flaky test more than once.
 
+A test run is marked as `flaky` if it exhibits flakiness within the same commit after some retries. If it exhibits flakiness multiple times (because multiple retries were executed), the `is_flaky` tag is added to the first test run that is detected as flaky.
+
+A test run is marked as `new flaky` if that particular test has not been detected to be flaky within the same branch or default branch. Only the first test run that is detected as new flaky is marked with the `is_new_flaky` tag (regardless of the number of retries).
+
+For more information on flaky tests, see the [flaky test management guide][6]. 
+
 {{< img src="ci/flaky_test_monitor.png" alt="CI flaky test monitor" style="width:100%;">}}
 
 ### Maintain code coverage percentage
@@ -180,3 +211,4 @@ Test monitors have the `New Flaky Test`, `Test Failures`, and `Test Performance`
 [3]: /monitors/create/configuration/#advanced-alert-conditions
 [4]: /monitors/notify/
 [5]: https://docs.datadoghq.com/continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
+[6]: https://docs.datadoghq.com/continuous_integration/guides/flaky_test_management/

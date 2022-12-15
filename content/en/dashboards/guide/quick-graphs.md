@@ -73,11 +73,11 @@ Click **Export** to save your work to a Dashboard or Notebook. You can always co
 [5]: /logs/explorer/
 [6]: /tracing/trace_explorer/
 [7]: /real_user_monitoring/explorer/search/
-[8]: /security_platform/explorer/
+[8]: /security/explorer/
 [9]: /events/
 [10]: /continuous_integration/pipelines/
 [11]: /continuous_integration/tests/
-[12]: /security_platform/cspm/findings/
+[12]: /security/cspm/findings/
 [13]: /dashboards/widgets/timeseries/
 [14]: /dashboards/widgets/top_list/
 [15]: /dashboards/widgets/query_value/
