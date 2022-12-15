@@ -25,7 +25,7 @@ further_reading:
 - [Organization management](#organization-management-events)
 
 #### Product-Specific Events
-- [Application Security Management](#application-security-management)
+- [Application Security Management (ASM)](#application-security-management)
 - [Audit Trail](#audit-trail-events)
 - [Cloud Security Platform](#cloud-security-platform-events)
 - [Log Management](#log-management-events)
@@ -64,7 +64,7 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 ### Application Security Management
 | Name | Description of audit event                                          | Query in audit explorer                           |
 | ---- | ------------------------------------------------------------------- | --------------------------------------------------|
-| [Denylist][78] | A user blocked, unblocked or extended the blocking duration of an IP address. | `@evt.name:“Application Security” @asset.type:ip_denylist` |
+| [Denylist][78] | A user blocked, unblocked, or extended the blocking duration of an IP address. | `@evt.name:“Application Security” @asset.type:ip_denylist` |
 | [Event Rules][79] | A user enabled or disabled an ASM event rule. | `@evt.name:"Application Security" @asset.type:event_rules` |
 | [One-click Activation][80] | A user activated or de-activated ASM on a service. | `@evt.name:"Application Security" @asset.type:compatible_services` |
 
