@@ -58,9 +58,9 @@ Note that you have a few options when it comes to sharing:
 
   [ ADD IMAGE TK ]
 
-- Share specific widgets
+- Share individual widgets
 
-{{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-share-specific-widgets-1.mp4" alt=alt="Share specific widgets" video="true" >}}
+{{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-share-individual-widgets-1.mp4" alt=alt="Share individual widgets" video="true" >}}
 
 - Add your funnel as a saved view
 
