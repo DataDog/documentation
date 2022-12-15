@@ -1039,6 +1039,69 @@
       "description": "Update a security filter returns \"OK\" response"
     }
   ],
+  "CreateScanningGroup": [
+    {
+      "group": "sensitive_data_scanner",
+      "suffix": "",
+      "description": "Create Scanning Group returns \"OK\" response"
+    }
+  ],
+  "CreateScanningRule": [
+    {
+      "group": "sensitive_data_scanner",
+      "suffix": "",
+      "description": "Create Scanning Rule returns \"OK\" response"
+    }
+  ],
+  "DeleteScanningGroup": [
+    {
+      "group": "sensitive_data_scanner",
+      "suffix": "",
+      "description": "Delete Scanning Group returns \"OK\" response"
+    }
+  ],
+  "DeleteScanningRule": [
+    {
+      "group": "sensitive_data_scanner",
+      "suffix": "",
+      "description": "Delete Scanning Rule returns \"OK\" response"
+    }
+  ],
+  "ListScanningGroups": [
+    {
+      "group": "sensitive_data_scanner",
+      "suffix": "",
+      "description": "List Scanning Groups returns \"OK\" response"
+    }
+  ],
+  "ListStandardPatterns": [
+    {
+      "group": "sensitive_data_scanner",
+      "suffix": "",
+      "description": "List standard patterns returns \"OK\" response"
+    }
+  ],
+  "ReorderScanningGroups": [
+    {
+      "group": "sensitive_data_scanner",
+      "suffix": "",
+      "description": "Reorder Groups returns \"OK\" response"
+    }
+  ],
+  "UpdateScanningGroup": [
+    {
+      "group": "sensitive_data_scanner",
+      "suffix": "",
+      "description": "Update Scanning Group returns \"OK\" response"
+    }
+  ],
+  "UpdateScanningRule": [
+    {
+      "group": "sensitive_data_scanner",
+      "suffix": "",
+      "description": "Update Scanning Rule returns \"OK\" response"
+    }
+  ],
   "CreateServiceAccountApplicationKey": [
     {
       "group": "service_accounts",
