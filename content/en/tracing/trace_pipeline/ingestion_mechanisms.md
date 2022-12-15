@@ -156,7 +156,7 @@ tracer.init({
 
 Configure a rate limit by setting the environment variable `DD_TRACE_RATE_LIMIT` to a number of traces per second per service instance. If no `DD_TRACE_RATE_LIMIT` value is set, a limit of 100 traces per second is applied.
 
-Read more about sampling controls in the [NodeJS tracing library documentation][1].
+Read more about sampling controls in the [Node.js tracing library documentation][1].
 
 [1]: /tracing/trace_collection/dd_libraries/nodejs
 {{% /tab %}}

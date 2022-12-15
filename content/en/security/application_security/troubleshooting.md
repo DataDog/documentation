@@ -216,7 +216,7 @@ If your framework is not supported, [create a new issue][7] in the Go repository
 {{< /programming-lang >}}
 {{< programming-lang lang="NodeJS" >}}
 
-For [NodeJS][1], the HTTP integration is required.
+For [Node.js][1], the HTTP integration is required.
 <p></p>
 
 [1]: /security/application_security/setup_and_configure/
@@ -374,9 +374,9 @@ Enable debug logs with the environment variable `DD_TRACE_DEBUG=1`. The ASM libr
 {{< /programming-lang >}}
 {{< programming-lang lang="NodeJS" >}}
 
-Use this [migration guide][1] to assess any breaking changes if you upgraded your NodeJS library from 1.x to 2.x.
+Use this [migration guide][1] to assess any breaking changes if you upgraded your Node.js library from 1.x to 2.x.
 
-If you don’t see ASM threat information in the [Trace and Signals Explorer][2] for your NodeJS application, follow these steps to troubleshoot the issue:
+If you don’t see ASM threat information in the [Trace and Signals Explorer][2] for your Node.js application, follow these steps to troubleshoot the issue:
 
 1. Confirm the latest version of ASM is running by checking that `appsec_enabled` is `true` in the [startup logs][3]
 
