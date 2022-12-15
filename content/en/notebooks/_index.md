@@ -17,35 +17,51 @@ further_reading:
 
 ## Overview
 
+{{< img src="notebooks/overview.png" alt="notebook list previewing the cell types" style="width:100%;">}}
+
 Notebooks combine graphs and text in a linear, cell-based format. They help you explore and share stories with your data by creating postmortems, investigations, runbooks, documentation, and more.
 
-{{< img src="notebooks/demo_notebook.png" alt="demo notebook" style="width:90%;">}}
+## Getting Started
+1. Build a new Notebook, Navigate to **Notebooks > New Notebook**.
+2. Click the Save Notebook button. **Note**: A new notebook is not saved by default.
+3. Add new cells to your notebook with [supported graph and text content](). 
+4. Configure cells. [Link to cell configuration]
 
 ## Live collaboration
 
 Notebooks support real-time collaboration. Presence indicators show who is viewing your notebook at any time; indicators also appear beside any cell that another user is currently editing.
 
-{{< img src="notebooks/live_editing.png" alt="live collaboration in notebooks" style="width:90%;">}}
+<!-- {{< img src="notebooks/live_editing.png" alt="live collaboration in notebooks" style="width:90%;">}} -->
+[INSERT UPDATED IMAGES OF COLLABORATION]
 
 Changes made to a notebook appear automatically, without the need to refresh.
 
 Everyone on your team can open or edit any notebook, but a notebook can only be deleted by the creator or by an administrator.
 
-## Commenting
+### Commenting
 
 To add a comment, select some text or hover over a graph. The **Add comment** button is displayed to the right of the cell.
 
-{{< img src="notebooks/add_comment.png" alt="add a comment to text" style="width:90%;">}}
+{{< img src="notebooks/comment.png" alt="add a comment to text" style="width:100%;">}}
 
 To edit or delete a comment you wrote, click the menu on the top-right of your comment.
-
-{{< img src="notebooks/edit_comments.png" alt="edit comment in notebook" style="width:90%;">}}
+<!-- 
+{{< img src="notebooks/edit_comments.png" alt="edit comment in notebook" style="width:90%;">}} -->
 
 View or re-open resolved comments in the Comment History, available in the Notebook cog menu.
-
-{{< img src="notebooks/check_comment_history.png" alt="edit comment in notebook" style="width:90%;">}}
+<!-- 
+{{< img src="notebooks/check_comment_history.png" alt="edit comment in notebook" style="width:90%;">}} -->
 
 Notebook authors receive email notifications for new comments on their notebooks, and commenters are notified for replies to their comments. Manage your notification settings through `Notifications` in the notebook cog menu.
+
+### Read Mode
+From the Notebook List [link to app Notebook list?], click on the eye icon to open a notebook in View Mode, which allows you to explore the information without edits. You can switch between modes from within the Notebook by selecting the dropdown at the top right of your notebook.
+
+- **Editing**: make changes to the notebook
+
+- **Viewing**: contents are Read Only, preventing users from making unwanted edits to existing configurations
+
+- **Presenting**: share the contents of the Notebook in a display format where each cell appears as a slide. Presentation mode supports graph interactions such as tooltips and legend
 
 
 ## Notebook List
