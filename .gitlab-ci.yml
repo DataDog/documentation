@@ -14,11 +14,11 @@ variables:
   DATADOG_SITE: 'datadoghq.com'
   DATADOG_SUBDOMAIN: 'dd-corpsite'
   # apm/profiler
-#  DD_AGENT_HOST: "$BUILDENV_HOST_IP"
-#  DD_TRACE_AGENT_URL: "$TRACE_AGENT_URL"
-#  DD_SERVICE: "hugo-${CI_PROJECT_NAME}"
-#  DD_VERSION: "0.105.0"
-#  DD_ENV: "ci"
+  DD_AGENT_HOST: "$BUILDENV_HOST_IP"
+  DD_TRACE_AGENT_URL: "http://$BUILDENV_HOST_IP:8126"
+  DD_SERVICE: "hugo-${CI_PROJECT_NAME}"
+  DD_VERSION: "0.105.0"
+  DD_ENV: "ci"
 #  DD_TRACING_ENABLED: "true"
 #  DD_CIVISIBILITY_ENABLED: "true"
 #  DD_INSIDE_CI: "true"
@@ -102,10 +102,8 @@ build_preview:
     CONFIGURATION_FILE: "./local/bin/py/build/configurations/pull_config_preview.yaml"
     LOCAL: "False"
   script:
-    - echo $BUILDENV_HOST_IP
-    - echo $HOST_IP
-    - echo $TRACE_AGENT_URL
-    - exit
+    - echo $DD_AGENT_HOST
+    - echo $DD_TRACE_AGENT_URL
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
     - touch Makefile.config
     - make dependencies
