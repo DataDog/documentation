@@ -20,7 +20,7 @@ Funnel analysis helps you track conversion rates across key workflows to identif
 
 To build a funnel, select your starting view or action and click on the plus icon to proceed in building additional steps. You can also use drag and drop functionality to move steps around. 
 
-{{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-building-a-funnel.mp4" alt="Build a funnel" video="true" style="width:100%;">}}
+{{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-building-a-funnel-1.mp4" alt="Build a funnel" video="true" style="width:100%;">}}
 
 ### Suggested next steps
 
@@ -60,7 +60,7 @@ Note that you have a few options when it comes to sharing:
 
 - Share specific widgets
 
-  {{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-share-specific-widgets.mp4" alt="Share specific widgets" video="true" style="width:100%;">}}
+  {{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-share-specific-widgets-1.mp4" alt="Share specific widgets" video="true" style="width:100%;">}}
 
 - Add your funnel as a saved view
 
