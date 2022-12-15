@@ -22,7 +22,7 @@ further_reading:
 Notebooks combine graphs and text in a linear, cell-based format. They help you explore and share stories with your data by creating postmortems, investigations, runbooks, documentation, and more.
 
 ## Getting Started
-1. Build a new Notebook, Navigate to **Notebooks > New Notebook**.
+1. Build a [new notebook][2], from the main navigation **Notebooks > New Notebook**.
 2. Click the Save Notebook button. **Note**: A new notebook is not saved by default.
 3. Add new cells to your notebook with [supported graph and text content](). 
 4. Configure cells. [Link to cell configuration]
@@ -54,15 +54,35 @@ View or re-open resolved comments in the Comment History, available in the Noteb
 
 Notebook authors receive email notifications for new comments on their notebooks, and commenters are notified for replies to their comments. Manage your notification settings through `Notifications` in the notebook cog menu.
 
-### Read Mode
-From the Notebook List [link to app Notebook list?], click on the eye icon to open a notebook in View Mode, which allows you to explore the information without edits. You can switch between modes from within the Notebook by selecting the dropdown at the top right of your notebook.
+### Read mode
 
-- **Editing**: make changes to the notebook
+From the Notebook List, click on the eye icon to open a notebook in View Mode. This allows you to explore the information without edits. You can switch between modes from within the Notebook by selecting the dropdown at the top right of your notebook.
 
-- **Viewing**: contents are Read Only, preventing users from making unwanted edits to existing configurations
+- **Editing**: make changes to the notebook.
 
-- **Presenting**: share the contents of the Notebook in a display format where each cell appears as a slide. Presentation mode supports graph interactions such as tooltips and legend
+- **Viewing**: contents are Read Only, preventing users from making unwanted edits to existing configurations and information.
 
+- **Presenting**: share the contents of the Notebook in a display format where each cell appears as a slide. Presentation mode supports graph interactions such as tooltips and legend.
+
+## Share notebooks
+
+Use the **Share** menu in the upper right of a notebook to see sharing options. Notebooks can be exported to PDF, Markdown, or any document editor.
+
+{{< img src="notebooks/notebook-export.png" alt="Notebook sharing menu" style="width:50%;">}}
+
+To copy a notebook into a document editor, click **Copy formatted contents**. Paste into a document editor like Google Docs or Microsoft Word to see notebook contents, including graphs, with original formatting (example below).
+
+{{< img src="notebooks/export-to-gdocs.jpeg" alt="Example exported Notebook in Google Docs" style="width:80%;">}}
+
+### Import or export notebook JSON
+
+Use **Export Notebook JSON** to download a JSON file containing the definition of your notebook. **Import Notebook JSON** overwrites all content on the notebook with the content of the uploaded JSON.
+
+### Link to individual cells
+
+Copy the URL for a specific cell by clicking the chain-link icon on the right side of the cell. Direct linking is available for both visualization and Markdown cells.
+
+When a user visits the URL for a specific cell, the notebook is opened to show the cell at the top of the viewport. Links are absolute. A cell's URL remains the same even if it is moved to a new position within the notebook.
 
 ## Notebook List
 
@@ -70,16 +90,19 @@ The [Notebook List][1] allows you to view and search previously created notebook
 
 * **My Notebooks**: Notebooks created by you.
 * **Other Notebooks**: Notebooks created by other members of your team.
+* **Notebook Type**: Group notebooks by type
 
-The Notebook List also displays preset templates and tutorials. Edit these templates directly, and click **Clone** to save your changes.
+Hover over the Preview icon for any Notebook to see a preview of the contents, including widget types and Markdown. To open the Notebook in [View Mode](#read-mode), click the eye icon.
 
-{{< img src="notebooks/templates.png" alt="templates on the notebook list page" style="width:80%;">}}
+<!-- {{< img src="notebooks/templates.png" alt="templates on the notebook list page" style="width:80%;">}} -->
 
-## New Notebook
+<!-- ## New Notebook
 
 Create a [new notebook][2] from the main navigation: *Notebooks > New Notebook*.
 
-A new notebook is not saved by default. You must click the **Save** button.
+A new notebook is not saved by default. You must click the **Save** button. -->
+## Template Gallery
+From the Template Gallery [link to the application page] see ready to use templates including an Incident Response postmortem and an Incident Report which you can create new notebooks from. You can also create a new custom template to build reusable notebook structures.
 
 ### Types of content
 
@@ -128,11 +151,11 @@ The following layout options are available by clicking the grid icon on the righ
 
 **Note**: Changing any of these settings only affects the targeted cell.
 
-### Link to individual cells
+<!-- ### Link to individual cells
 
 Copy the URL for a specific cell by clicking the chain-link icon on the right side of the cell. Direct linking is available for both visualization and Markdown cells.
 
-When a user visits the URL for a specific cell, the notebook is opened to show the cell at the top of the viewport. Links are absolute. A cell's URL remains the same even if it is moved to a new position within the notebook.
+When a user visits the URL for a specific cell, the notebook is opened to show the cell at the top of the viewport. Links are absolute. A cell's URL remains the same even if it is moved to a new position within the notebook. -->
 
 ## Notebook settings
 
@@ -173,19 +196,9 @@ To share a version of your notebook with snapshots, click **View graph snapshots
 
 Notebooks support template variables. Dynamically scope visualizations by adding and selecting template variable values. For more information, see [Template Variables][11].
 
-## Share notebooks
+<!-- ### Import or export notebook JSON
 
-Use the **Share** menu in the upper right of a notebook to see sharing options. Notebooks can be exported to PDF, Markdown, or any document editor.
-
-{{< img src="notebooks/notebook-export.png" alt="Notebook sharing menu" style="width:50%;">}}
-
-To copy a notebook into a document editor, click **Copy formatted contents**. Paste into a document editor like Google Docs or Microsoft Word to see notebook contents, including graphs, with original formatting (example below).
-
-{{< img src="notebooks/export-to-gdocs.jpeg" alt="Example exported Notebook in Google Docs" style="width:80%;">}}
-
-### Import or export notebook JSON
-
-Use **Export Notebook JSON** to download a JSON file containing the definition of your notebook. **Import Notebook JSON** overwrites all content on the notebook with the content of the uploaded JSON.
+Use **Export Notebook JSON** to download a JSON file containing the definition of your notebook. **Import Notebook JSON** overwrites all content on the notebook with the content of the uploaded JSON. -->
 
 ## Further Reading
 
