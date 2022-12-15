@@ -40,7 +40,7 @@ Runtime self test: OK
 
 これで、`runtime-security-agent` から来るイベントをログエクスプローラーで見ることができるようになりました。
 
-{{< img src="security_platform/cws/self_test_logs.png" alt="ログエクスプローラーに表示されるセルフテストのイベント" style="width:90%;">}}
+{{< img src="security/cws/self_test_logs.png" alt="ログエクスプローラーに表示されるセルフテストのイベント" style="width:90%;">}}
 
 ## カスタム Kubernetes ネットワークプラグインとの互換性
 

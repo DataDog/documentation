@@ -45,7 +45,7 @@ title: 検出ルール
 
 左側のパネルにあるファセットを使用して、検索クエリを値によってスコープします。例えば、`log detection` や `cloud configuration` など、いくつかのルールタイプがある場合、`only` でフィルタリングすると、ルールタイプ別にルールが表示されます。
 
-{{< img src="security_platform/security_monitoring/detection_rules/rule_type_filter.png" alt="Datadog のログ検出やクラウド構成など、ルールタイプ別のフィルタリング" style="width:80%;" >}}
+{{< img src="security/security_monitoring/detection_rules/rule_type_filter.png" alt="Datadog のログ検出やクラウド構成など、ルールタイプ別のフィルタリング" style="width:80%;" >}}
 
 また、`source` や `severity` などのファセットでフィルタリングすることもでき、受信した問題の調査やトリアージに役立てることができます。カテゴリー内のすべてのファセットを検索に含めるには、パネル内の値の上にマウスカーソルを置き、**all** をクリックします。
 

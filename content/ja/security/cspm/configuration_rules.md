@@ -13,7 +13,7 @@ title: OOTB ルール
 
 Datadog は、潜在的な誤構成にフラグを立て、セキュリティポスチャを改善するために、[すぐに使える (OOTB) 検出ルール][1]を提供します。OOTB 検出ルールは、Datadog Security Platform の全ての検出ルールと同じ[条件付きロジック][2]に従っています。
 
-{{< img src="security_platform/cspm/configuration_rules/configuration_rule.png" alt="Datadog でのコンフィギュレーションルール" width="65%">}}
+{{< img src="security/cspm/configuration_rules/configuration_rule.png" alt="Datadog でのコンフィギュレーションルール" width="65%">}}
 
 Datadog の Cloud Security Posture Management (CSPM) は以下のルールタイプを使用して、お客様のクラウドインフラストラクチャーのコンフィギュレーションを検証しています:
 

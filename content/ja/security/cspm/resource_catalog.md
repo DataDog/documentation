@@ -13,7 +13,7 @@ title: Datadog Resource Catalog
   Resource Catalog は、非公開ベータ版です。アクセスしたい場合は、このフォームに記入してください。
 {{< /beta-callout >}}
 
-{{< img src="security_platform/cspm/resource_catalog/resource_catalog.png" alt="ホストとクラウドのリソースをカテゴリー別、地域別に分類して表示する Resource Catalog のマップビュー。" style="width:100%;" >}}
+{{< img src="security/cspm/resource_catalog/resource_catalog.png" alt="ホストとクラウドのリソースをカテゴリー別、地域別に分類して表示する Resource Catalog のマップビュー。" style="width:100%;" >}}
 
 ## 概要
 

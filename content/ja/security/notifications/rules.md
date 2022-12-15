@@ -19,7 +19,7 @@ title: ルール
 
 **Notification Rules** ページで、作成されたすべての通知ルールを閲覧、検索することができます。組織内のユーザーが作成した通知ルールを作成、編集、クローン、有効化、無効化、削除、または表示することができます。
 
-{{< img src="security_platform/notification-profiles-overview.png" alt="通知ルール" style="width:100%;" >}}
+{{< img src="security/notification-profiles-overview.png" alt="通知ルール" style="width:100%;" >}}
 
 ## 通知ルールの作成
 
@@ -38,7 +38,7 @@ title: ルール
 6. 通知ルールに一致するルールのプレビューパネルが右側に表示され、通知ルールが具体的すぎるか広範すぎるかを示すのに役立ちます。
 7. **Save and Activate** をクリックすると、通知ルールが保存されます。これで通知ルールが自動的にアクティブになり、メインの **Notification Rules** ページに戻ります。
 
-{{< img src="security_platform/notification-profiles-setup.png" alt="通知ルールの設定" style="width:100%;" >}}
+{{< img src="security/notification-profiles-setup.png" alt="通知ルールの設定" style="width:100%;" >}}
 
 通知ルールがセキュリティ検出ルールと関連付けられている場合、ルールの “Set severity and notifications” (重大度と通知の設定) セクションでルールのトリガー条件を確認することができます。
 

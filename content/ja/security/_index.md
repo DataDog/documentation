@@ -50,19 +50,19 @@ Datadog セキュリティプラットフォームは、[アプリケーショ�
 
 [Cloud SIEM][4] (Security Information and Event Management) は、標的型攻撃、脅威情報リストに一致する IP 通信、安全でない構成など、アプリケーションやインフラストラクチャーに対する脅威をリアルタイムに検出します。Cloud SIEM は、[Datadog ログ管理][5]を利用しています。これらを組み合わせることで、[Datadog Cloud SIEM で検出した脅威の対処を自動化][6]し、脅威対応のワークフローを加速させることができます。
 
-{{< img src="security_platform/security_monitoring/cloud_siem_homepage.png" alt="Cloud SIEM のホームページには、重要なシグナル、疑わしいアクター、影響を受けるリソース、脅威インテル、シグナルの傾向などのウィジェットを備えた Security Overview セクションが表示されています" width="100%">}}
+{{< img src="security/security_monitoring/cloud_siem_homepage.png" alt="Cloud SIEM のホームページには、重要なシグナル、疑わしいアクター、影響を受けるリソース、脅威インテル、シグナルの傾向などのウィジェットを備えた Security Overview セクションが表示されています" width="100%">}}
 
 ## クラウドセキュリティポスチャ管理
 
 [Cloud Security Posture Management (CSPM)][7] は、本番環境のセキュリティ衛生とコンプライアンス状況を追跡し、監査証拠の収集を自動化し、組織が攻撃に対して脆弱な状態にある構成ミスを検出することができます。インフラストラクチャー全体のセキュリティポスチャーのスコアを確認し、各スコアを該当するベンチマークまたはフレームワークの基準にまで遡ることができます。
 
-{{< img src="security_platform/cspm_overview.png" alt="Datadog の Cloud Security Posture Management スコア" width="100%">}}
+{{< img src="security/cspm_overview.png" alt="Datadog の Cloud Security Posture Management スコア" width="100%">}}
 
 ## クラウドワークロードセキュリティ
 
 [Cloud Workload Security (CWS)][8] は、環境全体のファイルやプロセスの活動を監視し、AWS EC2 インスタンスなどのインフラストラクチャーや Kubernetes クラスターなどのワークロードに対する脅威を、カーネルレベルでリアルタイムに検出します。Cloud Workload Security は、統合された Datadog Agent を使用するため、すでに Datadog を使用して環境を監視している場合、追加のリソースをプロビジョニングする必要はありません。
 
-{{< img src="security_platform/cws_overview.png" alt="Datadog における Cloud Workload Security のカバレッジビュー" width="100%">}}
+{{< img src="security/cws_overview.png" alt="Datadog における Cloud Workload Security のカバレッジビュー" width="100%">}}
 
 Datadog Security Platform を使い始めるには、Datadog アプリの [Setup & Configuration][9] セクションに移動し、単一構成または複数構成の詳細情報を参照するか、以下のスタートアップセクションに従って、プラットフォームの各エリアの詳細について学びます。
 

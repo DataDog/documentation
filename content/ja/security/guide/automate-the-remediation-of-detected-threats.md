@@ -17,7 +17,7 @@ title: Webhooks で検出された脅威の修復を自動化する
 
 クラウド環境では、誤って構成されたリソースが作成されたらすぐに削除することが重要です。このシナリオでは [Webhook インテグレーション][2]を構成し、クラウドプロバイダーの API 管理サービスに [Webhook][2] を送信するよう設定します。
 
-{{< img src="security_platform/security_monitoring/guide/automate-the-remediation-of-detected-threats/automation-diagram.png" alt="クラウドプロバイダーの API に送信される Webhook の図" >}}
+{{< img src="security/security_monitoring/guide/automate-the-remediation-of-detected-threats/automation-diagram.png" alt="クラウドプロバイダーの API に送信される Webhook の図" >}}
 
 一度構成すると、AWS ユーザーが AWS 環境内で不適切にリソースを構成した場合 (例: 過度に許可が設定されたセキュリティグループやユーザーロールなど)、Datadog ログ管理が関連するログを取り込み、セキュリティグループベースの検知ルールをトリガーします。このプロセスでは、Webhook の JSON ペイロードが指定された AWS API ゲートウェイの URL に自動的に送信され、問題のあるリソースを自動的に削除する AWS Lambda 関数が起動されます。
 
@@ -31,7 +31,7 @@ title: Webhooks で検出された脅威の修復を自動化する
 
 そして、このルールがトリガーされたときに未知の IP を禁止するために、クラウドの Identity and Access Management (IAM) サービスにペイロードを送信する [Webhook][2] を設定します。
 
-{{< img src="security_platform/security_monitoring/guide/automate-the-remediation-of-detected-threats/webhook-ip.png" alt="未知の IP アドレスを禁止する新しい Webhook" >}}
+{{< img src="security/security_monitoring/guide/automate-the-remediation-of-detected-threats/webhook-ip.png" alt="未知の IP アドレスを禁止する新しい Webhook" >}}
 
 次の例は、Datadog によってセキュリティシグナルが生成されたときに、関連する Webhook ペイロードがどのように見えるかを示しています。
 

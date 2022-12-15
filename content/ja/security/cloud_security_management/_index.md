@@ -28,20 +28,20 @@ Datadog Cloud Security Management は、クラウドインフラクチャー全�
 
 Cloud Security Management には、[Cloud Security Posture Management (CSPM)](#cloud-security-posture-management)、および[クラウドワークロードセキュリティ (CWS)](#cloud-workload-security) を含んでいます。
 
-{{< img src="security_platform/csm_overview.png" alt="Datadog の Cloud Security Management" width="100%">}}
+{{< img src="security/csm_overview.png" alt="Datadog の Cloud Security Management" width="100%">}}
 
 
 ## クラウドセキュリティポスチャ管理
 
 [Cloud Security Posture Management (CSPM)][1] は、本番環境のセキュリティ衛生とコンプライアンス状況を追跡し、監査証拠の収集を自動化し、組織が攻撃に対して脆弱な状態にある構成ミスを検出することができます。インフラストラクチャー全体のセキュリティポスチャーのスコアを確認し、各スコアを該当するベンチマークまたはフレームワークの基準にまで遡ることができます。
 
-{{< img src="security_platform/cspm_overview.png" alt="Datadog の Cloud Security Posture Management スコア" width="100%">}}
+{{< img src="security/cspm_overview.png" alt="Datadog の Cloud Security Posture Management スコア" width="100%">}}
 
 ## クラウドワークロードセキュリティ
 
 [Cloud Workload Security (CWS)][2] は、環境全体のファイルやプロセスの活動を監視し、AWS EC2 インスタンスなどのインフラストラクチャーや Kubernetes クラスターなどのワークロードに対する脅威を、カーネルレベルでリアルタイムに検出します。Cloud Workload Security は、統合された Datadog Agent を使用するため、すでに Datadog を使用して環境を監視している場合、追加のリソースをプロビジョニングする必要はありません。
 
-{{< img src="security_platform/cws_overview.png" alt="Datadog における Cloud Workload Security のカバレッジビュー" width="100%">}}
+{{< img src="security/cws_overview.png" alt="Datadog における Cloud Workload Security のカバレッジビュー" width="100%">}}
 
 Datadog Security を使い始めるには、Datadog の [Setup & Configuration][3] セクションに移動し、単一構成または複数構成の詳細情報を参照するか、スタートアップセクションに従って、プラットフォームの各エリアの詳細について学びます。
 

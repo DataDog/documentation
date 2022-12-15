@@ -13,7 +13,7 @@ title: クラウドセキュリティポスチャ管理
 
 Datadog クラウドセキュリティポスチャ管理 (CSPM) は、お使いのクラウド環境における現在および過去のセキュリティポスチャ (セキュリティ体制) のスムーズな評価と視覚化、監査エビデンス収集の自動化、攻撃に対するオーガニゼーションの脆弱性の原因となるコンフィギュレーションミスの検知などをサポートします。
 
-{{< img src="security_platform/cspm/landing_page.png" alt="クラウドセキュリティポスチャ管理" width="100%">}}
+{{< img src="security/cspm/landing_page.png" alt="クラウドセキュリティポスチャ管理" width="100%">}}
 
 セキュリティグループ、ストレージバケット、ロードバランサー、データベースといったクラウドリソースのコンフィギュレーションをコンフィギュレーションルールに基づき評価します。また、Datadog Agent を使用してサーバー、コンテナ、および Kubernetes クラスターからローカルのコンフィギュレーション情報を取得し、Datadog の OOTB ポスチャ管理[クラウド][1]および[インフラストラクチャー][2]検出ルールに照らしてレビューを行います。
 
@@ -34,12 +34,12 @@ Datadog クラウドセキュリティポスチャ管理 (CSPM) は、お使い�
 リソース
 : 構成可能なエンティティ。継続的にスキャンして、1 つ以上のコントロールが適用されていることを確認する必要があります。たとえば、AWS インスタンスのリソースには、ホスト、コンテナ、セキュリティグループ、ユーザー、および顧客が管理する IAM ポリシーなどがあります。
 
-  {{< img src="security_platform/cspm/getting_started/resource.png" alt="Datadog アプリのポスチャ管理リソース情報" style="width:65%;">}}
+  {{< img src="security/cspm/getting_started/resource.png" alt="Datadog アプリのポスチャ管理リソース情報" style="width:65%;">}}
 
 ルール
 : ルールはリソースのコンフィギュレーションを評価し、1 つ以上のコントロールに関連する要素を検証します。ルールは複数のコントロール、要件、フレームワークにマップすることができます。
 
-  {{< img src="security_platform/cspm/getting_started/rules.png" alt="クラウドセキュリティポスチャ管理の検出ルール一覧" style="width:65%;">}}
+  {{< img src="security/cspm/getting_started/rules.png" alt="クラウドセキュリティポスチャ管理の検出ルール一覧" style="width:65%;">}}
 
 診断結果
 : 診断結果は、リソースに対するルール評価の主要なプリミティブです。リソースがルールに対して評価されるたびに、合格または不合格のステータスで結果が生成されます。
@@ -47,7 +47,7 @@ Datadog クラウドセキュリティポスチャ管理 (CSPM) は、お使い�
 フレームワーク
 : 業界のベンチマークや規制標準にマップされる要件のコレクション。
 
-  {{< img src="security_platform/cspm/getting_started/frameworks.png" alt="クラウドセキュリティポスチャ管理ランディングページのフレームワークの概要" style="width:100%;">}}
+  {{< img src="security/cspm/getting_started/frameworks.png" alt="クラウドセキュリティポスチャ管理ランディングページのフレームワークの概要" style="width:100%;">}}
 
 ## はじめましょう
 

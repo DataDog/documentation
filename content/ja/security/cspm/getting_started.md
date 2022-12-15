@@ -23,7 +23,7 @@ title: CSPM の概要
 
 [はじめにのページ][1]に移動し、スキャンするための環境を構成します。
 
-{{< img src="security_platform/cspm/getting_started/posture-management-setup.png" alt="CSPMのセットアップページ" style="width:100%;">}}
+{{< img src="security/cspm/getting_started/posture-management-setup.png" alt="CSPMのセットアップページ" style="width:100%;">}}
 
 ## セットアップ
 

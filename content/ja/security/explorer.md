@@ -22,7 +22,7 @@ title: セキュリティシグナルエクスプローラー
 
 セキュリティシグナルの検索結果が、セキュリティシグナルテーブルに表示されます。
 
-{{< img src="security_platform/security_monitoring/explorer/signals_table.png" alt="2 つのアカウント乗っ取りシグナルを示す Security Signals テーブル" >}}
+{{< img src="security/security_monitoring/explorer/signals_table.png" alt="2 つのアカウント乗っ取りシグナルを示す Security Signals テーブル" >}}
 
 テーブルのコンテンツを、使用可能なファセットのリストで絞り込むことができます。右上に表示される **Options** ボタンを使用して、セキュリティシグナルテーブルのコンテンツを要件や好みに応じて構成できます。
 
@@ -30,7 +30,7 @@ title: セキュリティシグナルエクスプローラー
 
 セキュリティシグナルをクリックすると、セキュリティシグナルパネルが開いて詳細が表示されます。
 
-{{< img src="security_platform/security_monitoring/explorer/signal_panel.png" alt="AWS S3 Public アクセスブロック削除のクリティカルシグナルを示す Security Signal パネル" style="width:80%;" >}}
+{{< img src="security/security_monitoring/explorer/signal_panel.png" alt="AWS S3 Public アクセスブロック削除のクリティカルシグナルを示す Security Signal パネル" style="width:80%;" >}}
 
 問題を選別する際に最初に必要になる情報とアクションが、セキュリティシグナルパネルの最上部に表示されます。これらの情報から、シグナルの重要度や生成日時を判断したり、規則の設定にアクセスしたり、シグナルの状態を変更したり、シグナルをチームメイトとすばやく共有したり割り当てたりできます。
 
@@ -55,7 +55,7 @@ Cloud Security Posture Management シグナルのヘッダーの下には、シ�
 
 Datadog Cloud SIEM では、脅威インテリジェンスパートナーがキュレーションした脅威情報フィードを提供しています。これらのフィードは、既知の不審なアクティビティ (例: IOC (Indicator Of Compromise) など) に関するデータを含むよう常に更新されているため、どの潜在的な脅威に対処すべきかを迅速に特定することができます。
 
-{{< img src="security_platform/security_monitoring/explorer/threat_intel.png" alt="セキュリティシグナルエクスプローラーの脅威インテリジェンス" style="width:85%;" >}}
+{{< img src="security/security_monitoring/explorer/threat_intel.png" alt="セキュリティシグナルエクスプローラーの脅威インテリジェンス" style="width:85%;" >}}
 
 Datadog は、関連する属性を持つすべての取り込みログを分析することで、脅威インテリジェンスを自動的に実装します。ログに危険な兆候 (VPN、プロキシ、または Tor の出口ノードに匿名化された IP が関連付けられているなど) が含まれている場合、`threat_intel` 属性がログイベントに追加され、利用可能なインテリジェンスに基づいて追加のインサイトを提供します。
 
@@ -70,20 +70,20 @@ Datadog は、関連する属性を持つすべての取り込みログを分析
 
 Datadog Cloud SIEM がログから疑わしい活動を検出した場合、そのネットワーク IP を検索することで、疑わしいアクターがシステムと相互作用したかどうかを判断します。ログエクスプローラーで IP 属性で検索するには、クエリ `@network.ip.list:<IP address>` を使用します。このクエリは、タグ、属性、エラー、およびメッセージフィールドを含むログ内の任意の場所で IP を検索します。
 
-{{< img src="security_platform/security_monitoring/explorer/network_ip_list.png" alt="network.ip.list 属性で検索した結果を表示したログエクスプローラー" style="width:80%;" >}}
+{{< img src="security/security_monitoring/explorer/network_ip_list.png" alt="network.ip.list 属性で検索した結果を表示したログエクスプローラー" style="width:80%;" >}}
 
 ### 異常検知
 
 レビューしているセキュリティシグナルが異常検知メソッドにより生成されている場合、異常はグラフで可視化されます。グラフ右側の境界ボックスには、異常が検知された場所が表示されます。
 
-  {{< img src="security_platform/security_monitoring/explorer/anomaly-detection.png" alt="異常検知のグラフ" >}}
+  {{< img src="security/security_monitoring/explorer/anomaly-detection.png" alt="異常検知のグラフ" >}}
 
 
 ### CWS シグナルでアネストリーツリーを処理する
 
 Datadog クラウドワークロードセキュリティシグナルには、システム内の悪意のあるアクティビティを検出するためのプロセスアネストリーツリーが搭載されています。疑わしいプロセスを特定し、攻撃の程度を判断することで、より適切な調査や対処を行うことができます。
 
-  {{< img src="security_platform/cws/ProcessTree.png" alt="プロセスツリーウォーターフォールグラフ" >}}
+  {{< img src="security/cws/ProcessTree.png" alt="プロセスツリーウォーターフォールグラフ" >}}
 
 ウォーターフォール構造では、コンテキスト情報に関連する子プロセスの連続実行が表示されます。各プロセスのメタデータは、システムの活動をより可視化し、セキュリティ侵害を発見するのに役立ちます。
 主な情報の種類:
@@ -96,7 +96,7 @@ Datadog クラウドワークロードセキュリティシグナルには、シ
 
 ページの左上隅にある _Signal Mode_ ボタンをクリックすると、セキュリティシグナルテーブルとセキュリティシグナル分析の間でモードが切り替わります。
 
-{{< img src="security_platform/security_monitoring/explorer/analytics.png" alt="シグナルを技法ごとに棒グラフで示したシグナルエクスプローラーのページ" style="width:85%;" >}}
+{{< img src="security/security_monitoring/explorer/analytics.png" alt="シグナルを技法ごとに棒グラフで示したシグナルエクスプローラーのページ" style="width:85%;" >}}
 
 セキュリティ規則エンジンによってセキュリティシグナルが生成されたら、セキュリティシグナルのクエリをグラフ化して、最大値、最小値、パーセンタイル、ユニーク数などを確認できます。
 
