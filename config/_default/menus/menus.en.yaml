@@ -1471,39 +1471,44 @@ main:
     parent: serverless
     identifier: serverless_installation
     weight: 3301
+  - name: Installation
+    url: serverless/installation
+    parent: serverless_installation
+    identifier: serverless_installation_page
+    weight: 3302
   - name: Advanced Configurations
     url: serverless/configuration
     parent: serverless_installation
     identifier: serverless_configuration
-    weight: 3302
+    weight: 3303
   - name: Enhanced Lambda Metrics
     url: serverless/enhanced_lambda_metrics
     parent: serverless_installation
-    weight: 3303
+    weight: 3304
   - name: Distributed Tracing
     url: serverless/distributed_tracing
     identifier: serverless_distributed_tracing
     parent: serverless_installation
-    weight: 3304
+    weight: 3305
   - name: Custom Metrics
     url: serverless/custom_metrics
     parent: serverless_installation
     identifier: custom_metrics
-    weight: 3305
+    weight: 3306
   - name: Deployment Tracking
     url: serverless/deployment_tracking
     parent: serverless_installation
-    weight: 3306
+    weight: 3307
   - name: Troubleshooting
     url: serverless/troubleshooting
     parent: serverless_installation
     identifier: serverless_troubleshooting
-    weight: 3307
+    weight: 3308
   - name: Libraries & Integrations
     url: serverless/libraries_integrations
     parent: serverless_installation
     identifier: libraries_integrations
-    weight: 3308
+    weight: 3309
   - name: Azure App Service
     url: serverless/azure_app_services
     parent: serverless
