@@ -1112,6 +1112,26 @@ main:
     parent: incidents
     identifier: incidents_clipboard
     weight: 2711
+  - name: Incident Details
+    url: monitors/incident_management/incident_details
+    parent: incidents
+    identifier: incident_details
+    weight: 2712
+  - name: Incident Settings
+    url: monitors/incident_management/incident_settings
+    parent: incidents
+    identifier: incidents_settings
+    weight: 2713
+  - name: Incident Analytics
+    url: monitors/incident_management/analytics
+    parent: incidents
+    identifier: analytics
+    weight: 2714
+  - name: Datadog Clipboard
+    url: monitors/incident_management/datadog_clipboard
+    parent: incidents
+    identifier: incidents_clipboard
+    weight: 2715
   - name: Incident Management
     url: monitors/incident_management
     parent: alerting
@@ -1137,6 +1157,26 @@ main:
     parent: incidents
     identifier: incidents_clipboard
     weight: 2712
+  - name: Incident Details
+    url: monitors/incident_management/incident_details
+    parent: incidents
+    identifier: incident_details
+    weight: 2713
+  - name: Incident Settings
+    url: monitors/incident_management/incident_settings
+    parent: incidents
+    identifier: incidents_settings
+    weight: 2714
+  - name: Incident Analytics
+    url: monitors/incident_management/analytics
+    parent: incidents
+    identifier: analytics
+    weight: 2715
+  - name: Datadog Clipboard
+    url: monitors/incident_management/datadog_clipboard
+    parent: incidents
+    identifier: incidents_clipboard
+    weight: 2716
   - name: Guides
     url: monitors/guide/
     weight: 2709
@@ -1445,6 +1485,25 @@ main:
     identifier: serverless_distributed_tracing
     parent: serverless_installation
     weight: 3304
+  - name: Custom Metrics
+    url: serverless/custom_metrics
+    parent: serverless_installation
+    identifier: custom_metrics
+    weight: 3305
+  - name: Deployment Tracking
+    url: serverless/deployment_tracking
+    parent: serverless_installation
+    weight: 3306
+  - name: Troubleshooting
+    url: serverless/troubleshooting
+    parent: serverless_installation
+    identifier: serverless_troubleshooting
+    weight: 3307
+  - name: Libraries & Integrations
+    url: serverless/libraries_integrations
+    parent: serverless_installation
+    identifier: libraries_integrations
+    weight: 3308
   - name: Azure App Service
     url: serverless/azure_app_services
     parent: serverless
@@ -1460,55 +1519,16 @@ main:
     parent: serverless
     identifier: serverless_gcr
     weight: 3304
-  - name: Custom Metrics
-    url: serverless/custom_metrics
-    parent: serverless
-    identifier: custom_metrics
-    weight: 3305
-  - name: Libraries & Integrations
-    url: serverless/libraries_integrations
-    parent: serverless
-    identifier: libraries_integrations
-    weight: 3306
-  - name: Datadog Lambda Extension
-    url: serverless/libraries_integrations/extension/
-    parent: libraries_integrations
-    weight: 3307
-  - name: Datadog Serverless Plugin
-    url: serverless/libraries_integrations/plugin/
-    parent: libraries_integrations
-    weight: 3308
-  - name: Datadog Serverless Macro
-    url: serverless/libraries_integrations/macro/
-    parent: libraries_integrations
-    weight: 3309
-  - name: Datadog Serverless CLI
-    url: serverless/libraries_integrations/cli/
-    parent: libraries_integrations
-    weight: 3310
-  - name: Datadog CDK Construct
-    url: serverless/libraries_integrations/cdk/
-    parent: libraries_integrations
-    weight: 3311
-  - name: Deployment Tracking
-    url: serverless/deployment_tracking
-    parent: serverless
-    weight: 3307
-  - name: Troubleshooting
-    url: serverless/troubleshooting
-    parent: serverless
-    identifier: serverless_troubleshooting
-    weight: 3308
   - name: Glossary
     url: serverless/glossary
     parent: serverless
     identifier: serverless_glossary
-    weight: 3309
+    weight: 3305
   - name: Guides
     url: serverless/guide/
     identifier: serverless_guides
     parent: serverless
-    weight: 3310
+    weight: 3306
   - name: Cloud Cost
     url: cloud_cost_management/
     pre: cloud-cost-management
