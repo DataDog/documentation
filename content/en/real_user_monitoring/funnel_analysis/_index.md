@@ -60,7 +60,7 @@ Note that you have a few options when it comes to sharing:
 
 - Share individual widgets
 
-{{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-share-individual-widgets-1.mp4" alt=alt="Share individual widgets" video="true" >}}
+{{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-share-individual-widgets-1.mp4" >}}
 
 - Add your funnel as a saved view
 
@@ -74,7 +74,7 @@ Setting up alerts on conversion/dropoff rates allows you to be notified when con
 - From the Funnel Insights panel: This allows you to take individual queries and alert on them. While this could be the overall workflow, you also have the option to alert on individual steps' dropoff and conversion.
   - For example, if you want to alert on the dropoff rate between steps 3 and 4, you can do that from the Funnel Insights panel as shown below:
 
-    [ ADD VIDEO TK ]
+    {{< img src="real_user_monitoring/funnel_analysis/funnel-insights-panel.mp4" >}}
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
