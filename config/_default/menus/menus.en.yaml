@@ -1467,46 +1467,46 @@ main:
     parent: infrastructure_heading
     weight: 3300
   - name: AWS Lambda
-    url: serverless/installation
+    url: serverless/aws_lambda
     parent: serverless
-    identifier: serverless_installation
+    identifier: serverless_aws_lambda
     weight: 3301
   - name: Installation
     url: serverless/installation
-    parent: serverless_installation
-    identifier: serverless_installation_page
+    parent: serverless_aws_lambda
+    identifier: serverless_aws_lambda_page
     weight: 3302
   - name: Advanced Configurations
     url: serverless/configuration
-    parent: serverless_installation
+    parent: serverless_aws_lambda
     identifier: serverless_configuration
     weight: 3303
   - name: Enhanced Lambda Metrics
     url: serverless/enhanced_lambda_metrics
-    parent: serverless_installation
+    parent: serverless_aws_lambda
     weight: 3304
   - name: Distributed Tracing
     url: serverless/distributed_tracing
     identifier: serverless_distributed_tracing
-    parent: serverless_installation
+    parent: serverless_aws_lambda
     weight: 3305
   - name: Custom Metrics
     url: serverless/custom_metrics
-    parent: serverless_installation
+    parent: serverless_aws_lambda
     identifier: custom_metrics
     weight: 3306
   - name: Deployment Tracking
     url: serverless/deployment_tracking
-    parent: serverless_installation
+    parent: serverless_aws_lambda
     weight: 3307
   - name: Troubleshooting
     url: serverless/troubleshooting
-    parent: serverless_installation
+    parent: serverless_aws_lambda
     identifier: serverless_troubleshooting
     weight: 3308
   - name: Libraries & Integrations
     url: serverless/libraries_integrations
-    parent: serverless_installation
+    parent: serverless_aws_lambda
     identifier: libraries_integrations
     weight: 3309
   - name: Azure App Service
