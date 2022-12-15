@@ -1,5 +1,5 @@
 ---
-title: Database Monitoring
+title: Database Monitoring (currently not support in US1-FED/GovCloud)
 kind: documentation
 description: Learn about Database Monitoring and get started
 further_reading:
