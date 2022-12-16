@@ -52,7 +52,7 @@ $RefParser.dereference(fileData)
           };
           table = null;
           try {
-            table = schemaTable("request", Sox, true);
+            table = schemaTable("request", value.allOf[0], true);
           } catch (e) {
             console.log(`Couldn't created schematable for ${key} from file ${input}`);
           }
@@ -92,7 +92,7 @@ $RefParser.dereference(fileData)
           };
           table = null;
           try {
-            table = schemaTable("request", Tx, true);
+            table = schemaTable("request", value.allOf[0], true);
           } catch (e) {
             console.log(`Couldn't created schematable for ${key} from file ${input}`);
           }
@@ -119,9 +119,9 @@ $RefParser.dereference(fileData)
           table = null;
           try {
 
-            table = schemaTable("request", Sx, true);
+            table = schemaTable("request", value.allOf[0], true);
           } catch (e) {
-            console.log(`Couldn't created schematable for ${key} from file ${input}`);
+            console.log(`Couldn't created schematable for ${key} from file ${input} - ${e}`);
           }
           entryData["html"] = table;
           allData["sinks"].push(entryData)

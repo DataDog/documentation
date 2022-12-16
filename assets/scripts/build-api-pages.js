@@ -797,7 +797,14 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
               })
               .reduce((obj, item) => ({...obj, ...item}), {});
           }
-        }
+        } /*else if (typeof value === 'object' && "allOf" in value) {
+           // we need to combine
+           childData = value.allOf
+              .map((obj, indx) => {
+                return {[`Option ${indx + 1}`]: value.allOf[indx]}
+              })
+              .reduce((obj, item) => ({...obj, ...item}), {});
+        }*/
         // for widgets
         /*
         if(key === "definition" && value.discriminator) {
@@ -885,12 +892,7 @@ const schemaTable = (tableType, data, skipAnyKeys = false) => {
       })
       .reduce((obj, item) => ({...obj, ...item}), {});
   } else if(data.allOf && data.allOf.length > 0) {
-    // combine
-    initialData = data.allOf
-      .map((obj, indx) => {
-        return {[`Option ${indx + 1}`]: data.allOf[indx]}
-      })
-      .reduce((obj, item) => ({...obj, ...item}), {});
+
   } else {
     initialData = data.properties;
   }
@@ -903,7 +905,33 @@ const schemaTable = (tableType, data, skipAnyKeys = false) => {
         </div>
       </div>
     </div>`.trim();
-  return `<div class="${extraClasses}">${(initialData) ? rowRecursive(tableType, initialData, false, data.required || [], 0, '', skipAnyKeys) : emptyRow}</div>`;
+  if(data.allOf && data.allOf.length > 0) {
+    const tables = data.allOf.map((obj, indx) => {
+        let x = data.allOf[indx];
+        if("properties" in data.allOf[indx]) {
+          x = data.allOf[indx].properties;
+        } else if("allOf" in data.allOf[indx]) {
+          x = data.allOf[indx].allOf;
+        }
+        //console.log(x);
+        if(x instanceof Array) {
+          return x.map((ite) => {
+            if(typeof ite === 'object' && "properties" in ite) {
+              return rowRecursive(tableType, ite.properties, false, data.required || [], 0, '', skipAnyKeys);
+            } else {
+              return '';
+            }
+          }).reduce((acc, currentValue) => (acc + currentValue), "");
+        } else if(typeof x === "object") {
+          return rowRecursive(tableType, x, false, data.required || [], 0, '', skipAnyKeys);
+        } else {
+          return '';
+        }
+    }).reduce((acc, currentValue) => (acc + currentValue), "");
+    return `<div class="${extraClasses}">${tables}</div>`;
+  } else {
+    return `<div class="${extraClasses}">${(initialData) ? rowRecursive(tableType, initialData, false, data.required || [], 0, '', skipAnyKeys) : emptyRow}</div>`;
+  }
 };
 
 /**
