@@ -337,6 +337,20 @@ components:
       required: true
       schema:
         type: string
+    SensitiveDataScannerGroupID:
+      description: The ID of a group of rules.
+      in: path
+      name: group_id
+      required: true
+      schema:
+        type: string
+    SensitiveDataScannerRuleID:
+      description: The ID of the rule.
+      in: path
+      name: rule_id
+      required: true
+      schema:
+        type: string
     ServiceAccountID:
       description: The ID of the service account.
       in: path
@@ -9757,6 +9771,593 @@ components:
       required:
       - uuid
       type: object
+    SensitiveDataScannerConfigRequest:
+      description: Group reorder request.
+      properties:
+        data:
+          $ref: '#/components/schemas/SensitiveDataScannerReorderConfig'
+        meta:
+          $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
+      required:
+      - data
+      - meta
+      type: object
+    SensitiveDataScannerConfiguration:
+      description: A Sensitive Data Scanner configuration.
+      properties:
+        id:
+          description: ID of the configuration.
+          type: string
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerConfigurationType'
+      type: object
+    SensitiveDataScannerConfigurationData:
+      description: A Sensitive Data Scanner configuration data.
+      properties:
+        data:
+          $ref: '#/components/schemas/SensitiveDataScannerConfiguration'
+      type: object
+    SensitiveDataScannerConfigurationRelationships:
+      description: Relationships of the configuration.
+      properties:
+        groups:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupList'
+      type: object
+    SensitiveDataScannerConfigurationType:
+      default: sensitive_data_scanner_configuration
+      description: Sensitive Data Scanner configuration type.
+      enum:
+      - sensitive_data_scanner_configuration
+      example: sensitive_data_scanner_configuration
+      type: string
+      x-enum-varnames:
+      - SENSITIVE_DATA_SCANNER_CONFIGURATIONS
+    SensitiveDataScannerCreateGroupResponse:
+      description: Create group response.
+      properties:
+        data:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupResponse'
+        meta:
+          $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
+      type: object
+    SensitiveDataScannerCreateRuleResponse:
+      description: Create rule response.
+      properties:
+        data:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleResponse'
+        meta:
+          $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
+      type: object
+    SensitiveDataScannerFilter:
+      description: Filter for the Scanning Group.
+      properties:
+        query:
+          description: Query to filter the events.
+          type: string
+      type: object
+    SensitiveDataScannerGetConfigIncludedArray:
+      description: Included objects from relationships.
+      items:
+        $ref: '#/components/schemas/SensitiveDataScannerGetConfigIncludedItem'
+      type: array
+    SensitiveDataScannerGetConfigIncludedItem:
+      description: An object related to the configuration.
+      oneOf:
+      - $ref: '#/components/schemas/SensitiveDataScannerRuleIncludedItem'
+      - $ref: '#/components/schemas/SensitiveDataScannerGroupIncludedItem'
+      type: object
+    SensitiveDataScannerGetConfigResponse:
+      description: Get all groups response.
+      properties:
+        data:
+          $ref: '#/components/schemas/SensitiveDataScannerGetConfigResponseData'
+        included:
+          $ref: '#/components/schemas/SensitiveDataScannerGetConfigIncludedArray'
+        meta:
+          $ref: '#/components/schemas/SensitiveDataScannerMeta'
+      type: object
+    SensitiveDataScannerGetConfigResponseData:
+      description: Response data related to the scanning groups.
+      properties:
+        id:
+          description: ID of the configuration.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/SensitiveDataScannerConfigurationRelationships'
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerConfigurationType'
+      type: object
+    SensitiveDataScannerGroup:
+      description: A scanning group.
+      properties:
+        id:
+          description: ID of the group.
+          type: string
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupType'
+      type: object
+    SensitiveDataScannerGroupAttributes:
+      description: Attributes of the Sensitive Data Scanner group.
+      properties:
+        description:
+          description: Description of the group.
+          type: string
+        filter:
+          $ref: '#/components/schemas/SensitiveDataScannerFilter'
+        is_enabled:
+          description: Whether or not the group is enabled.
+          type: boolean
+        name:
+          description: Name of the group.
+          type: string
+        product_list:
+          description: List of products the scanning group applies.
+          items:
+            $ref: '#/components/schemas/SensitiveDataScannerProduct'
+          type: array
+      type: object
+    SensitiveDataScannerGroupCreate:
+      description: Data related to the creation of a group.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupAttributes'
+        relationships:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupRelationships'
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupType'
+      required:
+      - type
+      - attributes
+      type: object
+    SensitiveDataScannerGroupCreateRequest:
+      description: Create group request.
+      properties:
+        data:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupCreate'
+        meta:
+          $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
+      type: object
+    SensitiveDataScannerGroupData:
+      description: A scanning group data.
+      properties:
+        data:
+          $ref: '#/components/schemas/SensitiveDataScannerGroup'
+      type: object
+    SensitiveDataScannerGroupDeleteRequest:
+      description: Delete group request.
+      properties:
+        meta:
+          $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
+      required:
+      - meta
+      type: object
+    SensitiveDataScannerGroupDeleteResponse:
+      description: Delete group response.
+      properties:
+        meta:
+          $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
+      type: object
+    SensitiveDataScannerGroupIncludedItem:
+      description: A Scanning Group included item.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupAttributes'
+        id:
+          description: ID of the group.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupRelationships'
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupType'
+      type: object
+    SensitiveDataScannerGroupItem:
+      description: Data related to a Sensitive Data Scanner Group.
+      properties:
+        id:
+          description: ID of the group.
+          type: string
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupType'
+      type: object
+    SensitiveDataScannerGroupList:
+      description: List of groups, ordered.
+      properties:
+        data:
+          description: List of groups. The order is important.
+          items:
+            $ref: '#/components/schemas/SensitiveDataScannerGroupItem'
+          type: array
+      type: object
+    SensitiveDataScannerGroupRelationships:
+      description: Relationships of the group.
+      properties:
+        configuration:
+          $ref: '#/components/schemas/SensitiveDataScannerConfigurationData'
+        rules:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleData'
+      type: object
+    SensitiveDataScannerGroupResponse:
+      description: Response data related to the creation of a group.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupAttributes'
+        id:
+          description: ID of the group.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupRelationships'
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupType'
+      type: object
+    SensitiveDataScannerGroupType:
+      default: sensitive_data_scanner_group
+      description: Sensitive Data Scanner group type.
+      enum:
+      - sensitive_data_scanner_group
+      example: sensitive_data_scanner_group
+      type: string
+      x-enum-varnames:
+      - SENSITIVE_DATA_SCANNER_GROUP
+    SensitiveDataScannerGroupUpdate:
+      description: Data related to the update of a group.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupAttributes'
+        id:
+          description: ID of the group.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupRelationships'
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupType'
+      type: object
+    SensitiveDataScannerGroupUpdateRequest:
+      description: Update group request.
+      properties:
+        data:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupUpdate'
+        meta:
+          $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
+      required:
+      - data
+      - meta
+      type: object
+    SensitiveDataScannerGroupUpdateResponse:
+      description: Update group response.
+      properties:
+        meta:
+          $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
+      type: object
+    SensitiveDataScannerMeta:
+      description: Meta response containing information about the API.
+      properties:
+        count_limit:
+          description: Maximum number of scanning rules allowed for the org.
+          format: int64
+          type: integer
+        group_count_limit:
+          description: Maximum number of scanning groups allowed for the org.
+          format: int64
+          type: integer
+        has_highlight_enabled:
+          description: Whether or not scanned events are highlighted in Logs or RUM
+            for the org.
+          type: boolean
+        is_pci_compliant:
+          description: Whether or not the org is compliant to the payment card industry
+            standard.
+          type: boolean
+        version:
+          description: Version of the API.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+      type: object
+    SensitiveDataScannerMetaVersionOnly:
+      description: Meta payload containing information about the API.
+      properties:
+        version:
+          description: Version of the API (optional).
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+      type: object
+    SensitiveDataScannerProduct:
+      default: logs
+      description: Datadog product onto which Sensitive Data Scanner can be activated.
+      enum:
+      - logs
+      - rum
+      - events
+      - apm
+      type: string
+      x-enum-varnames:
+      - LOGS
+      - RUM
+      - EVENTS
+      - APM
+    SensitiveDataScannerReorderConfig:
+      description: Data related to the reordering of scanning groups.
+      properties:
+        id:
+          description: ID of the configuration.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/SensitiveDataScannerConfigurationRelationships'
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerConfigurationType'
+      type: object
+    SensitiveDataScannerReorderGroupsResponse:
+      description: Group reorder response.
+      properties:
+        meta:
+          $ref: '#/components/schemas/SensitiveDataScannerMeta'
+      type: object
+    SensitiveDataScannerRule:
+      description: Rule item included in the group.
+      properties:
+        id:
+          description: ID of the rule.
+          type: string
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleType'
+      type: object
+    SensitiveDataScannerRuleAttributes:
+      description: Attributes of the Sensitive Data Scanner rule.
+      properties:
+        description:
+          description: Description of the rule.
+          type: string
+        excluded_attributes:
+          description: Attributes excluded from the scan.
+          example:
+          - username
+          items:
+            type: string
+          type: array
+        is_enabled:
+          description: Whether or not the rule is enabled.
+          type: boolean
+        name:
+          description: Name of the rule.
+          type: string
+        pattern:
+          description: Not included if there is a relationship to a standard pattern.
+          type: string
+        tags:
+          description: List of tags.
+          items:
+            type: string
+          type: array
+        text_replacement:
+          $ref: '#/components/schemas/SensitiveDataScannerTextReplacement'
+      type: object
+    SensitiveDataScannerRuleCreate:
+      description: Data related to the creation of a rule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleAttributes'
+        relationships:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleRelationships'
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleType'
+      required:
+      - type
+      - attributes
+      - relationships
+      type: object
+    SensitiveDataScannerRuleCreateRequest:
+      description: Create rule request.
+      properties:
+        data:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleCreate'
+        meta:
+          $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
+      required:
+      - data
+      - meta
+      type: object
+    SensitiveDataScannerRuleData:
+      description: Rules included in the group.
+      properties:
+        data:
+          description: Rules included in the group. The order is important.
+          items:
+            $ref: '#/components/schemas/SensitiveDataScannerRule'
+          type: array
+      type: object
+    SensitiveDataScannerRuleDeleteRequest:
+      description: Delete rule request.
+      properties:
+        meta:
+          $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
+      required:
+      - meta
+      type: object
+    SensitiveDataScannerRuleDeleteResponse:
+      description: Delete rule response.
+      properties:
+        meta:
+          $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
+      type: object
+    SensitiveDataScannerRuleIncludedItem:
+      description: A Scanning Rule included item.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleAttributes'
+        id:
+          description: ID of the rule.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleRelationships'
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleType'
+      type: object
+    SensitiveDataScannerRuleRelationships:
+      description: Relationships of a scanning rule.
+      properties:
+        group:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupData'
+        standard_pattern:
+          $ref: '#/components/schemas/SensitiveDataScannerStandardPatternData'
+      type: object
+    SensitiveDataScannerRuleResponse:
+      description: Response data related to the creation of a rule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleAttributes'
+        id:
+          description: ID of the rule.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleRelationships'
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleType'
+      type: object
+    SensitiveDataScannerRuleType:
+      default: sensitive_data_scanner_rule
+      description: Sensitive Data Scanner rule type.
+      enum:
+      - sensitive_data_scanner_rule
+      example: sensitive_data_scanner_rule
+      type: string
+      x-enum-varnames:
+      - SENSITIVE_DATA_SCANNER_RULE
+    SensitiveDataScannerRuleUpdate:
+      description: Data related to the update of a rule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleAttributes'
+        id:
+          description: ID of the rule.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleRelationships'
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleType'
+      type: object
+    SensitiveDataScannerRuleUpdateRequest:
+      description: Update rule request.
+      properties:
+        data:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleUpdate'
+        meta:
+          $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
+      required:
+      - data
+      - meta
+      type: object
+    SensitiveDataScannerRuleUpdateResponse:
+      description: Update rule response.
+      properties:
+        meta:
+          $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
+      type: object
+    SensitiveDataScannerStandardPattern:
+      description: Data containing the standard pattern id.
+      properties:
+        id:
+          description: ID of the standard pattern.
+          type: string
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerStandardPatternType'
+      type: object
+    SensitiveDataScannerStandardPatternAttributes:
+      description: Attributes of the Sensitive Data Scanner standard pattern.
+      properties:
+        name:
+          description: Name of the standard pattern.
+          type: string
+        pattern:
+          description: Regex to match.
+          type: string
+        tags:
+          description: List of tags.
+          items:
+            type: string
+          type: array
+      type: object
+    SensitiveDataScannerStandardPatternData:
+      description: A standard pattern.
+      properties:
+        data:
+          $ref: '#/components/schemas/SensitiveDataScannerStandardPattern'
+      type: object
+    SensitiveDataScannerStandardPatternType:
+      default: sensitive_data_scanner_standard_pattern
+      description: Sensitive Data Scanner standard pattern type.
+      enum:
+      - sensitive_data_scanner_standard_pattern
+      example: sensitive_data_scanner_standard_pattern
+      type: string
+      x-enum-varnames:
+      - SENSITIVE_DATA_SCANNER_STANDARD_PATTERN
+    SensitiveDataScannerStandardPatternsResponse:
+      description: List Standard patterns response.
+      items:
+        $ref: '#/components/schemas/SensitiveDataScannerStandardPatternsResponseItem'
+      type: array
+    SensitiveDataScannerStandardPatternsResponseData:
+      description: List Standard patterns response data.
+      properties:
+        data:
+          $ref: '#/components/schemas/SensitiveDataScannerStandardPatternsResponse'
+      type: object
+    SensitiveDataScannerStandardPatternsResponseItem:
+      description: Standard pattern item.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SensitiveDataScannerStandardPatternAttributes'
+        id:
+          description: ID of the standard pattern.
+          type: string
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerStandardPatternType'
+      type: object
+    SensitiveDataScannerTextReplacement:
+      description: Object describing how the scanned event will be replaced.
+      properties:
+        number_of_chars:
+          description: 'Required if type == ''partial_replacement_from_beginning''
+
+            or ''partial_replacement_from_end''. It must be > 0.'
+          format: int64
+          minimum: 0
+          type: integer
+        replacement_string:
+          description: Required if type == 'replacement_string'.
+          type: string
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerTextReplacementType'
+      type: object
+    SensitiveDataScannerTextReplacementType:
+      default: none
+      description: 'Type of the replacement text. None means no replacement.
+
+        hash means the data will be stubbed. replacement_string means that
+
+        one can chose a text to replace the data. partial_replacement_from_beginning
+
+        allows a user to partially replace the data from the beginning, and
+
+        partial_replacement_from_end on the other hand, allows to replace data from
+
+        the end.'
+      enum:
+      - none
+      - hash
+      - replacement_string
+      - partial_replacement_from_beginning
+      - partial_replacement_from_end
+      type: string
+      x-enum-varnames:
+      - NONE
+      - HASH
+      - REPLACEMENT_STRING
+      - PARTIAL_REPLACEMENT_FROM_BEGINNING
+      - PARTIAL_REPLACEMENT_FROM_END
     ServiceAccountCreateAttributes:
       description: Attributes of the created user.
       properties:
@@ -17170,6 +17771,414 @@ paths:
       x-menu-order: 10
       x-undo:
         type: idempotent
+  /api/v2/sensitive-data-scanner/config:
+    get:
+      description: List all the Scanning groups in your organization.
+      operationId: ListScanningGroups
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensitiveDataScannerGetConfigResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List Scanning Groups
+      tags:
+      - Sensitive Data Scanner
+      x-given:
+        configuration:
+          step: a valid "configuration" in the system
+      x-menu-order: 1
+      x-undo:
+        type: safe
+    patch:
+      description: Reorder the list of groups.
+      operationId: ReorderScanningGroups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SensitiveDataScannerConfigRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensitiveDataScannerReorderGroupsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Reorder Groups
+      tags:
+      - Sensitive Data Scanner
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      x-undo:
+        type: idempotent
+  /api/v2/sensitive-data-scanner/config/groups:
+    post:
+      description: 'Create a scanning group.
+
+        The request MAY include a configuration relationship.
+
+        A rules relationship can be omitted entirely, but if it is included it MUST
+        be
+
+        null or an empty array (rules cannot be created at the same time).
+
+        The new group will be ordered last within the configuration.'
+      operationId: CreateScanningGroup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SensitiveDataScannerGroupCreateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensitiveDataScannerCreateGroupResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create Scanning Group
+      tags:
+      - Sensitive Data Scanner
+      x-codegen-request-body-name: body
+      x-given:
+        group:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"sensitive_data_scanner_group\",\n
+              \   \"attributes\": {\n      \"name\": \"my-test-group\",\n      \"is_enabled\":
+              false,\n      \"product_list\": [\n          \"logs\"\n      ],\n      \"filter\":
+              {\n          \"query\": \"*\"\n      }\n    },\n    \"relationships\":
+              {\n      \"configuration\": {\n        \"data\": {\n          \"id\":
+              \"{{ configuration.data.id }}\",\n          \"type\": \"{{ configuration.data.type
+              }}\"\n        }\n      },\n      \"rules\": {\n          \"data\": []\n
+              \     }\n    }\n  },\n  \"meta\": {}\n}"
+          step: there is a valid "scanning_group" in the system
+      x-menu-order: 4
+      x-undo:
+        operationId: DeleteScanningGroup
+        parameters:
+        - name: group_id
+          source: data.id
+        - name: body
+          template: "{\n  \"meta\": {}\n}"
+        type: unsafe
+  /api/v2/sensitive-data-scanner/config/groups/{group_id}:
+    delete:
+      description: Delete a given group.
+      operationId: DeleteScanningGroup
+      parameters:
+      - $ref: '#/components/parameters/SensitiveDataScannerGroupID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SensitiveDataScannerGroupDeleteRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensitiveDataScannerGroupDeleteResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete Scanning Group
+      tags:
+      - Sensitive Data Scanner
+      x-codegen-request-body-name: body
+      x-menu-order: 6
+      x-undo:
+        type: idempotent
+    patch:
+      description: 'Update a group, including the order of the rules.
+
+        Rules within the group are reordered by including a rules relationship. If
+        the rules
+
+        relationship is present, its data section MUST contain linkages for all of
+        the rules
+
+        currently in the group, and MUST NOT contain any others.'
+      operationId: UpdateScanningGroup
+      parameters:
+      - $ref: '#/components/parameters/SensitiveDataScannerGroupID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SensitiveDataScannerGroupUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensitiveDataScannerGroupUpdateResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update Scanning Group
+      tags:
+      - Sensitive Data Scanner
+      x-codegen-request-body-name: body
+      x-menu-order: 5
+      x-undo:
+        type: idempotent
+  /api/v2/sensitive-data-scanner/config/rules:
+    post:
+      description: 'Create a scanning rule in a sensitive data scanner group, ordered
+        last.
+
+        The posted rule MUST include a group relationship.
+
+        It MUST include either a standard_pattern relationship or a regex attribute,
+        but not both.
+
+        If included_attributes is empty or missing, we will scan all attributes except
+
+        excluded_attributes. If both are missing, we will scan the whole event.'
+      operationId: CreateScanningRule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SensitiveDataScannerRuleCreateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensitiveDataScannerCreateRuleResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create Scanning Rule
+      tags:
+      - Sensitive Data Scanner
+      x-codegen-request-body-name: body
+      x-given:
+        rule:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"sensitive_data_scanner_rule\",\n
+              \   \"attributes\": {\n      \"name\": \"{{ unique }}\",\n      \"pattern\":
+              \"pattern\",\n      \"text_replacement\": {\n        \"type\": \"none\"\n
+              \     },\n      \"tags\":[\n        \"sensitive_data:true\"\n      ],\n
+              \     \"is_enabled\":true\n    },\n    \"relationships\": {\n      \"group\":
+              {\n        \"data\": {\n          \"id\": \"{{ group.data.id }}\",\n
+              \         \"type\": \"{{ group.data.type }}\"\n        }\n      }\n
+              \   }\n  },\n  \"meta\": {}\n}"
+          step: the "scanning_group" has a "scanning_rule"
+      x-menu-order: 7
+      x-undo:
+        operationId: DeleteScanningRule
+        parameters:
+        - name: rule_id
+          source: data.id
+        - name: body
+          template: "{\n  \"meta\": {}\n}"
+        type: unsafe
+  /api/v2/sensitive-data-scanner/config/rules/{rule_id}:
+    delete:
+      description: Delete a given rule.
+      operationId: DeleteScanningRule
+      parameters:
+      - $ref: '#/components/parameters/SensitiveDataScannerRuleID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SensitiveDataScannerRuleDeleteRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensitiveDataScannerRuleDeleteResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete Scanning Rule
+      tags:
+      - Sensitive Data Scanner
+      x-codegen-request-body-name: body
+      x-menu-order: 9
+      x-undo:
+        type: idempotent
+    patch:
+      description: 'Update a scanning rule.
+
+        The request body MUST NOT include a standard_pattern relationship, as that
+        relationship
+
+        is non-editable. Trying to edit the regex attribute of a rule with a standard_pattern
+
+        relationship will also result in an error.'
+      operationId: UpdateScanningRule
+      parameters:
+      - $ref: '#/components/parameters/SensitiveDataScannerRuleID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SensitiveDataScannerRuleUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensitiveDataScannerRuleUpdateResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update Scanning Rule
+      tags:
+      - Sensitive Data Scanner
+      x-codegen-request-body-name: body
+      x-menu-order: 8
+      x-undo:
+        type: idempotent
+  /api/v2/sensitive-data-scanner/config/standard-patterns:
+    get:
+      description: Returns all standard patterns.
+      operationId: ListStandardPatterns
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensitiveDataScannerStandardPatternsResponseData'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List standard patterns
+      tags:
+      - Sensitive Data Scanner
+      x-menu-order: 3
+      x-undo:
+        type: safe
   /api/v2/series:
     post:
       description: "The metrics end-point allows you to post time-series data that
@@ -18377,7 +19386,8 @@ paths:
           `online_archive`, `profiling`, `rum`, `rum_browser_sessions`, `rum_mobile_sessions`,
           `sds`, `snmp`,
 
-          `synthetics_api`, `synthetics_browser`, and `timeseries`.'
+          `synthetics_api`, `synthetics_browser`, `synthetics_parallel_testing`, and
+          `timeseries`.'
         in: query
         name: filter[product_families]
         required: true
@@ -19196,6 +20206,9 @@ tags:
 
     signals.'
   name: Security Monitoring
+- description: Create, update, delete, and retrieve sensitive data scanner groups
+    and rules.
+  name: Sensitive Data Scanner
 - description: Create, edit, and disable service accounts.
   name: Service Accounts
 - description: API to create, update, retrieve and delete service definitions.
