@@ -572,7 +572,11 @@ The example above matches `/var/log/myapp/log/myfile.log` and excludes `/var/log
 
 The default behavior for the Datadog Agent to prioritize which file to tail first in the defined directory path is based on the file name, specifically in reverse lexicographical order. To have Agent tailing files based on the file modification time, you can set the configuration option `logs_config.file_wildcard_selection_mode` to be `by_modification_time`. 
 
-This will be especially helpful when the number of total log file match detected exceeds `logs_config.open_files_limit`. In this case, this option will ensure that the most recent updated files will be tailed first in the defined directory path. To change it back to the default behavor, you can set the configuration option `logs_config.file_wildcard_selection_mode` to be `by_name`. Please note that this feature will only be available for use for Agent version on 7.40.0 or above.
+This option is helpful when the number of total log file matches exceeds `logs_config.open_files_limit`. Using `by_modification_time` ensures that the most recently updated files are tailed first in the defined directory path.
+
+To restore default behavior, set the configuration option `logs_config.file_wildcard_selection_mode` to the value`by_name`.
+
+This feature requires Agent version 7.40.0 or above.
 
 ## Log file encodings
 
