@@ -568,7 +568,7 @@ The example above matches `/var/log/myapp/log/myfile.log` and excludes `/var/log
 
 **Note**: The Agent requires read and execute permissions on a directory to list all the available files in it.
 
-**Public Beta Feature: Prioritize taling matched log files based on the last modification time**
+**Public Beta Feature: Prioritize tailing matched log files based on the last modification time**
 
 The default behavior for the Datadog Agent to prioritize which file to tail first in the defined directory path is based on the file name, specifically in reverse lexicographical order. To have Agent tailing files based on the file modification time, you can set the configuration option `logs_config.file_wildcard_selection_mode` to be `by_modification_time`. 
 
