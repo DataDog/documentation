@@ -17144,6 +17144,11 @@ components:
             the current date for all organizations.
           format: int64
           type: integer
+        synthetics_parallel_testing_max_slots_hwm:
+          description: Shows the high-water mark of used synthetics parallel testing
+            slots over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         trace_search_indexed_events_count_sum:
           description: Shows the sum of all Indexed Spans indexed over all hours in
             the current date for all organizations.
@@ -17511,6 +17516,11 @@ components:
         synthetics_check_calls_count_sum:
           description: Shows the sum of all Synthetic API tests over all hours in
             the current date for the given org.
+          format: int64
+          type: integer
+        synthetics_parallel_testing_max_slots_hwm:
+          description: Shows the high-water mark of used synthetics parallel testing
+            slots over all hours in the current date for the given org.
           format: int64
           type: integer
         trace_search_indexed_events_count_sum:
@@ -17922,6 +17932,11 @@ components:
         synthetics_check_calls_count_agg_sum:
           description: Shows the sum of all Synthetic API tests over all hours in
             the current months for all organizations.
+          format: int64
+          type: integer
+        synthetics_parallel_testing_max_slots_hwm_sum:
+          description: Shows the sum of the high-water marks of used synthetics parallel
+            testing slots over all hours in the current month for all organizations.
           format: int64
           type: integer
         trace_search_indexed_events_count_agg_sum:
