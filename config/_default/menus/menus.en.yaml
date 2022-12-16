@@ -8651,6 +8651,118 @@ api:
         - ListPermissions
       unstable: []
       order: 1
+  - name: Sensitive Data Scanner
+    url: /api/latest/sensitive-data-scanner/
+    identifier: sensitive-data-scanner
+    generated: true
+  - name: List standard patterns
+    url: '#list-standard-patterns'
+    identifier: sensitive-data-scanner-list-standard-patterns
+    parent: sensitive-data-scanner
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListStandardPatterns
+      unstable: []
+      order: 3
+  - name: Update Scanning Rule
+    url: '#update-scanning-rule'
+    identifier: sensitive-data-scanner-update-scanning-rule
+    parent: sensitive-data-scanner
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateScanningRule
+      unstable: []
+      order: 8
+  - name: Delete Scanning Rule
+    url: '#delete-scanning-rule'
+    identifier: sensitive-data-scanner-delete-scanning-rule
+    parent: sensitive-data-scanner
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteScanningRule
+      unstable: []
+      order: 9
+  - name: Create Scanning Rule
+    url: '#create-scanning-rule'
+    identifier: sensitive-data-scanner-create-scanning-rule
+    parent: sensitive-data-scanner
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateScanningRule
+      unstable: []
+      order: 7
+  - name: Update Scanning Group
+    url: '#update-scanning-group'
+    identifier: sensitive-data-scanner-update-scanning-group
+    parent: sensitive-data-scanner
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateScanningGroup
+      unstable: []
+      order: 5
+  - name: Delete Scanning Group
+    url: '#delete-scanning-group'
+    identifier: sensitive-data-scanner-delete-scanning-group
+    parent: sensitive-data-scanner
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteScanningGroup
+      unstable: []
+      order: 6
+  - name: Create Scanning Group
+    url: '#create-scanning-group'
+    identifier: sensitive-data-scanner-create-scanning-group
+    parent: sensitive-data-scanner
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateScanningGroup
+      unstable: []
+      order: 4
+  - name: Reorder Groups
+    url: '#reorder-groups'
+    identifier: sensitive-data-scanner-reorder-groups
+    parent: sensitive-data-scanner
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ReorderScanningGroups
+      unstable: []
+      order: 2
+  - name: List Scanning Groups
+    url: '#list-scanning-groups'
+    identifier: sensitive-data-scanner-list-scanning-groups
+    parent: sensitive-data-scanner
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListScanningGroups
+      unstable: []
+      order: 1
   - name: Service Accounts
     url: /api/latest/service-accounts/
     identifier: service-accounts

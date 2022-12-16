@@ -91,6 +91,10 @@
     "name": "Security Monitoring",
     "description": "Detection rules for generating signals and listing of generated\nsignals."
   },
+  "sensitive-data-scanner": {
+    "name": "Sensitive Data Scanner",
+    "description": "Create, update, delete, and retrieve sensitive data scanner groups and rules."
+  },
   "service-accounts": {
     "name": "Service Accounts",
     "description": "Create, edit, and disable service accounts."
