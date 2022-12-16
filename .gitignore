@@ -1,5 +1,6 @@
 # Hugo
-public/
+public/*
+!public/.gitkeep
 data/service_checks/
 data/npm
 integrations_data
