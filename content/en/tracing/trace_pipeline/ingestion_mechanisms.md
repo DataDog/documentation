@@ -136,7 +136,7 @@ Read more about sampling controls in the [Go tracing library documentation][1].
 
 [1]: /tracing/trace_collection/dd_libraries/go
 {{% /tab %}}
-{{% tab "NodeJS" %}}
+{{% tab "Node.js" %}}
 For Node.js applications, set a global sampling rate in the library using the `DD_TRACE_SAMPLE_RATE` environment variable.
 
 You can also set by-service sampling rates. For instance, to send 50% of the traces for the service named `my-service` and 10% for the rest of the traces:
@@ -599,7 +599,7 @@ Read more about sampling controls in the [Go tracing library documentation][2].
 [1]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.41.0
 [2]: /tracing/trace_collection/dd_libraries/go
 {{% /tab %}}
-{{% tab "NodeJS" %}}
+{{% tab "Node.js" %}}
 For Node.js applications, set by-service and by-operation name **span** sampling rules with the `DD_SPAN_SAMPLING_RULES` environment variable.
 
 For example, to collect `100%` of the spans from the service named `my-service`, for the operation `http.request`, up to `50` spans per second:
