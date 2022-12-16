@@ -884,6 +884,13 @@ const schemaTable = (tableType, data, skipAnyKeys = false) => {
         return {[`Option ${indx + 1}`]: data.oneOf[indx]}
       })
       .reduce((obj, item) => ({...obj, ...item}), {});
+  } else if(data.allOf && data.allOf.length > 0) {
+    // combine
+    initialData = data.allOf
+      .map((obj, indx) => {
+        return {[`Option ${indx + 1}`]: data.allOf[indx]}
+      })
+      .reduce((obj, item) => ({...obj, ...item}), {});
   } else {
     initialData = data.properties;
   }

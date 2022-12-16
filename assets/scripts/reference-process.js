@@ -7,7 +7,7 @@ const input = (myArgs.length > 0) ? myArgs[0] : './data/reference/schema.json';
 const output = (myArgs.length > 1) ? myArgs[1] : './data/reference/schema.deref.json';
 const schemaTable = require('./build-api-pages').schemaTable;
 const filterExampleJson = require('./build-api-pages').filterExampleJson;
-const tomlify = require('tomlify-j0.4');
+const yaml = require('js-yaml');
 
 if(!input || !output) {
   console.log("Missing input/outputs")
@@ -36,19 +36,23 @@ $RefParser.dereference(fileData)
       const entryLen = entries.length;
       let i = 0;
       entries.forEach(([key, value]) => {
+
+          const Sox = ("allOf" in value.allOf[0]) ? value.allOf[0].allOf[0] : value.allOf[0];
+          const Sox2 = ("allOf" in value.allOf[0]) ? value.allOf[0].allOf[1] : value.allOf[0];
+
           let entryData = {
             //"simple": value.allOf[1],
             "description1": value.description || "",
             "description2": value.allOf[0].description || "",
             "title": value.allOf[0].title || "",
             "metadata": value._metadata || {},
-            "simple": exampleToml(value.allOf[1]),
-            "advanced": exampleToml(value.allOf[1], value.allOf[0]),
+            "simple": simpleExampleYaml(Sox),
+            "advanced": exampleYaml(Sox2, Sox),
             "html": {}
           };
           table = null;
           try {
-            table = schemaTable("request", value.allOf[0], true);
+            table = schemaTable("request", Sox, true);
           } catch (e) {
             console.log(`Couldn't created schematable for ${key} from file ${input}`);
           }
@@ -74,18 +78,21 @@ $RefParser.dereference(fileData)
       const transformEntries = Object.entries(deref['definitions']["vector::transforms::Transforms"]["oneOf"]);
       //const entryLen = transformEntries.length;
       transformEntries.forEach(([key, value]) => {
+          const Tx = ("allOf" in value.allOf[0]) ? value.allOf[0].allOf[0] : value.allOf[0];
+          const Tx2 = ("allOf" in value.allOf[0]) ? value.allOf[0].allOf[1] : value.allOf[0];
+
           let entryData = {
             "description1": value.description || "",
             "description2": value.allOf[0].description || "",
             "title": value.allOf[0].title || "",
             "metadata": value._metadata || {},
-            "simple": exampleToml(value.allOf[1]),
-            "advanced": exampleToml(value.allOf[1], value.allOf[0]),
+            "simple": simpleExampleYaml(Tx),
+            "advanced": exampleYaml(Tx2, Tx),
             "html": {}
           };
           table = null;
           try {
-            table = schemaTable("request", value.allOf[0], true);
+            table = schemaTable("request", Tx, true);
           } catch (e) {
             console.log(`Couldn't created schematable for ${key} from file ${input}`);
           }
@@ -96,18 +103,23 @@ $RefParser.dereference(fileData)
       const sinkEntries = Object.entries(deref['definitions']["vector::sinks::Sinks"]["oneOf"]);
       //const entryLen = sinkEntries.length;
       sinkEntries.forEach(([key, value]) => {
+
+          const Sx = ("allOf" in value.allOf[0]) ? value.allOf[0].allOf[0] : value.allOf[0];
+          const Sx2 = ("allOf" in value.allOf[0]) ? value.allOf[0].allOf[1] : value.allOf[0];
+
           let entryData = {
             "description1": value.description || "",
             "description2": value.allOf[0].description || "",
             "title": value.allOf[0].title || "",
             "metadata": value._metadata || {},
-            "simple": exampleToml(value.allOf[1]),
-            "advanced": exampleToml(value.allOf[1], value.allOf[0]),
+            "simple": simpleExampleYaml(Sx),
+            "advanced": exampleYaml(Sx2, Sx),
             "html": {}
           };
           table = null;
           try {
-            table = schemaTable("request", value.allOf[0], true);
+
+            table = schemaTable("request", Sx, true);
           } catch (e) {
             console.log(`Couldn't created schematable for ${key} from file ${input}`);
           }
@@ -120,8 +132,27 @@ $RefParser.dereference(fileData)
     });
 
 
+function simpleExampleYaml(data1) {
+  const outData = {};
+  if(data1 && data1.hasOwnProperty('properties')) {
+    Object.entries(data1.properties).forEach(([key, value]) => {
+      outData[key] = value.default || value.type || value.const || "";
+    });
+  }
+  return yaml.dump(outData, {lineWidth: -1, sortKeys:false});
+}
 
-function exampleToml(data1, data2) {
+function advancedExampleYaml(data1) {
+  const outData = {};
+  if(data1 && data1.hasOwnProperty('properties')) {
+    Object.entries(data1.properties).forEach(([key, value]) => {
+      outData[key] = value.default || value.type || value.const || "";
+    });
+  }
+  return yaml.dump(outData, {lineWidth: -1, sortKeys:false});
+}
+
+function exampleYaml(data1, data2) {
   const outData = {};
   if(data1 && data1.hasOwnProperty('properties')) {
     Object.entries(data1.properties).forEach(([key, value]) => {
@@ -133,5 +164,5 @@ function exampleToml(data1, data2) {
       outData[key] = value.default || value.type || value.const || "";
     });
   }
-  return tomlify.toToml(outData, {space:2});
+  return yaml.dump(outData, {lineWidth: -1, sortKeys:false});
 }
