@@ -60,7 +60,7 @@ Note that you have a few options when it comes to sharing:
 
 - Share individual widgets
 
-{{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-share-individual-widgets-1.mp4" >}}
+{{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-share-individual-widgets-1.mp4" video="true" >}}
 
 - Add your funnel as a saved view
 
