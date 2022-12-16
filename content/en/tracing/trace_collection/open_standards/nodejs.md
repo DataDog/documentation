@@ -3,7 +3,7 @@ title: Node.js Open Standards
 kind: documentation
 aliases:
 - /tracing/setup_overview/open_standards/nodejs
-description: 'Open Standards for Node.js
+description: 'Open Standards for Node.js'
 code_lang: nodejs
 type: multi-code-lang
 code_lang_weight: 40
