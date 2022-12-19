@@ -118,7 +118,7 @@ Maximum number of redirections for HTTP and WebSocket tests.
 
 `variableOverride`
 : **Type**: String <br>
-Overrides the variables used in tests running on the Private Location. Format: `SECRET_VAR=value`.
+Overrides the variables used in tests running on the Private Location. Format: `VARIABLE=value`.
 All variables imported this way will be obfuscated.
 
 `environmentVariableOverride`
