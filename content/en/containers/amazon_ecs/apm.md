@@ -151,12 +151,12 @@ tracer.configure(hostname=get_aws_ip())
 {{< programming-lang lang="nodeJS" >}}
 
 #### Launch time variable
-Update the Task Definition's `entryPoint` with the following, substituting your `<NodeJS Startup Command>`:
+Update the Task Definition's `entryPoint` with the following, substituting your `<Node.js Startup Command>`:
 ```json
 "entryPoint": [
   "sh",
   "-c",
-  "export DD_AGENT_HOST=$(curl http://169.254.169.254/latest/meta-data/local-ipv4); <NodeJS Startup Command>"
+  "export DD_AGENT_HOST=$(curl http://169.254.169.254/latest/meta-data/local-ipv4); <Node.js Startup Command>"
 ]
 ```
 
