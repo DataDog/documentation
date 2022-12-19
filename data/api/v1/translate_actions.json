@@ -840,7 +840,7 @@
   },
   "ListTests": {
     "description": "Get the list of all Synthetic tests.",
-    "summary": "Get the list of all tests"
+    "summary": "Get the list of all Synthetic tests"
   },
   "CreateTest": {
     "description": "This endpoint is deprecated. To create a test, use [Create an API test](https://docs.datadoghq.com/api/latest/synthetics/#create-an-api-test), or [Create a browser test](https://docs.datadoghq.com/api/latest/synthetics/#create-a-browser-test).",
