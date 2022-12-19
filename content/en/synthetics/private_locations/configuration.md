@@ -124,7 +124,7 @@ All variables imported this way will be obfuscated.
 `environmentVariableOverride`
 : **Type** String <br>
 Allows the usage of environment variables in the Private Location. It requires the environment variables to be imported in the containerized environment.
-Example for Docker: `docker run --env SECRET=value gcr.io/datadoghq/synthetics-private-location-worker --environmentVariableOverride SECRET`.
+Example for Docker: `docker run --env VARIABLE gcr.io/datadoghq/synthetics-private-location-worker --environmentVariableOverride VARIABLE`.
 All variables imported this way will be obfuscated. 
 
 ## Private root certificates
