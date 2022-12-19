@@ -215,7 +215,7 @@ tagging
 [27]: /getting_started/tagging/unified_service_tagging/
 [28]: /agent/guide/agent-commands/#agent-status-and-information
 [29]: /infrastructure/process/
-[30]: /security/
+[30]: /data_security/
 [31]: /metrics/explorer/
 [32]: /dashboards/
 [33]: /monitors/
