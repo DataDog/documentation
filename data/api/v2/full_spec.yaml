@@ -1809,7 +1809,15 @@ components:
           type: boolean
         regoRule:
           $ref: '#/components/schemas/CloudConfigurationRegoRule'
+        resourceType:
+          description: 'Main resource type to be checked by the rule. It should be
+            specified again in `regoRule.resourceTypes`.
+
+            '
+          example: aws_acm
+          type: string
       required:
+      - resourceType
       - regoRule
       type: object
     CloudConfigurationRegoRule:
@@ -17335,12 +17343,13 @@ paths:
             value: "{\n  \"name\": \"{{ unique }}_cloud\",\n  \"tags\": [\"a:tag\"],\n
               \ \"type\": \"cloud_configuration\",\n  \"isEnabled\": false,\n  \"message\":
               \"Cloud configuration rule\",\n  \"options\": {\n    \"complianceRuleOptions\":
-              {\n      \"regoRule\": {\n        \"policy\": \"package datadog\\n\",\n
-              \       \"resourceTypes\": [\n          \"gcp_compute_disk\"\n        ]\n
-              \     },\n      \"complexRule\": false\n    }\n  },\n  \"complianceSignalOptions\":
-              {\n    \"userActivationStatus\": true,\n    \"userGroupByFields\": [\"@account_id\"]\n
-              \ },\n  \"cases\": [\n    {\n      \"status\": \"info\",\n      \"notifications\":
-              [\"channel\"]\n    }\n  ]\n}"
+              {\n      \"resourceType\": \"gcp_compute_disk\",\n      \"regoRule\":
+              {\n        \"policy\": \"package datadog\\n\",\n        \"resourceTypes\":
+              [\n          \"gcp_compute_disk\"\n        ]\n      },\n      \"complexRule\":
+              false\n    }\n  },\n  \"complianceSignalOptions\": {\n    \"userActivationStatus\":
+              true,\n    \"userGroupByFields\": [\"@account_id\"]\n  },\n  \"cases\":
+              [\n    {\n      \"status\": \"info\",\n      \"notifications\": [\"channel\"]\n
+              \   }\n  ]\n}"
           step: there is a valid "cloud_configuration_rule" in the system
         security_rule:
           parameters:
