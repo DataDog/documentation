@@ -1,9 +1,9 @@
 ---
-title: NodeJS Open Standards
+title: Node.js Open Standards
 kind: documentation
 aliases:
 - /tracing/setup_overview/open_standards/nodejs
-description: 'Open Standards for NodeJS'
+description: 'Open Standards for Node.js'
 code_lang: nodejs
 type: multi-code-lang
 code_lang_weight: 40
@@ -28,7 +28,7 @@ The following tags are available to override Datadog specific options:
 * `resource.name`: The resource name to be used for the span. The operation name will be used if this is not provided.
 * `span.type`: The span type to be used for the span. Will fallback to `custom` if not provided.
 
-See [opentracing.io][1] for OpenTracing NodeJS usage.
+See [opentracing.io][1] for OpenTracing Node.js usage.
 
 
 

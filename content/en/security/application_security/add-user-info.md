@@ -230,7 +230,7 @@ function handle () {
 }
 ```
 
-For information and options, read [the NodeJS tracer documentation][1].
+For information and options, read [the Node.js tracer documentation][1].
 
 
 

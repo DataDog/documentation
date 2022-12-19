@@ -36,7 +36,7 @@ npm install -g @datadog/datadog-ci
 
 <div class="alert alert-warning"><strong>Note</strong>: The standalone binaries are in <strong>beta</strong> and their stability is not guaranteed.</div>
 
-If installing NodeJS in the CI is an issue, standalone binaries are provided with [Datadog CI releases][4]. Only _linux-x64_, _darwin-x64_ (MacOS) and _win-x64_ (Windows) are supported. To install, run the following from your terminal:
+If installing Node.js in the CI is an issue, standalone binaries are provided with [Datadog CI releases][4]. Only _linux-x64_, _darwin-x64_ (MacOS) and _win-x64_ (Windows) are supported. To install, run the following from your terminal:
 
 {{< tabs >}}
 {{% tab "Linux" %}}
