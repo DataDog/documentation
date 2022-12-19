@@ -3582,6 +3582,7 @@ components:
           items:
             description: The version name.
             example: FreeBSD
+            nullable: true
             type: string
           type: array
         gohai:
@@ -3597,6 +3598,7 @@ components:
           items:
             description: Version name.
             example: Mac
+            nullable: true
             type: string
           type: array
         machine:
@@ -3608,6 +3610,7 @@ components:
           items:
             description: Version name.
             example: Ubuntu
+            nullable: true
             type: string
           type: array
         platform:
@@ -3635,6 +3638,7 @@ components:
           items:
             description: Version name.
             example: Windows
+            nullable: true
             type: string
           type: array
       type: object
