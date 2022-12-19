@@ -229,6 +229,7 @@
           - /tracing/setup_overview/ruby/
           - /agent/apm/ruby/
           - /tracing/setup_overview/setup/ruby
+          - /tracing/trace_collection/ruby
 
   - repo_name: datadog-serverless-functions
     contents:
