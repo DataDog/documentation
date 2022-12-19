@@ -69,6 +69,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Skykit Digital Signage
+  uninstallation: README.md#Uninstallation
 ---
 
 ## 概要
