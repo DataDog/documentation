@@ -24,18 +24,18 @@ Notebooks combine graphs and text in a linear, cell-based format. They help you 
 ## Getting Started
 1. Build a [new notebook][2], from the main navigation **Notebooks > New Notebook**.
 
-2. Click the Save Notebook button. </br>
+2. Click the **Save Notebook** button. </br>
   **Note**: A new notebook is not saved by default.
 
 3. Add new cells to your notebook with [supported graph and text content](#types-of-content). 
 
 4. [Configure cells](#cell-configuration).
 
-## Live collaboration
+## Collaboration
 <!-- {{< img src="notebooks/live_editing.png" alt="live collaboration in notebooks" style="width:90%;">}} -->
 [INSERT UPDATED IMAGES OF COLLABORATION]
 
-Notebooks support real-time collaboration. Presence indicators show who is viewing your notebook at any time and show real-time edits.
+Notebooks support real-time collaboration. Presence indicators show who is viewing your notebook at any time and show real-time edits and comments. 
 
 Changes made to a notebook appear automatically, without the need to refresh.
 
@@ -89,14 +89,12 @@ The [Notebook List][1] allows you to view and search previously created notebook
 
 * **My Notebooks**: Notebooks created by you.
 * **Other Notebooks**: Notebooks created by other members of your team.
-* **Notebook Type**: Group notebooks by type
+* **[Notebook Type](#notebook-types)**: Group notebooks by type.
 
 Hover over the Preview icon for any Notebook to see a preview of the contents, including widget types and Markdown. To open the Notebook in [View Mode](#read-mode), click the eye icon.
 
 ## Template gallery
-From the Template Gallery [link to the application page] see ready to use templates including an Incident Response postmortem and an Incident Report which you can create new notebooks from. You can also create a new custom template to build reusable notebook structures.
-
-## Notebook Types
+From the [Template Gallery][14], see ready to use templates including an Incident Response postmortem and an Incident Report which you can create new notebooks from. You can also create a new custom template to build reusable notebook structures.
 
 ## Notebook configuration
 
@@ -110,7 +108,7 @@ To view a different time frame, select an option in the global time picker, or s
 
 {{< img src="notebooks/global_time.png" alt="Notebook Time Selector" style="width:90%;">}}
 
-To save this time as the notebook’s default, click **Set Default Time**. The reset button discards your changes to time.
+To save this time as the notebook's default, click **Set Default Time**. The reset button discards your changes to time.
 
 Individual cells can be unlinked from the global time and set to an independent time frame.
 
@@ -118,13 +116,19 @@ Individual cells can be unlinked from the global time and set to an independent 
 
 To view a different time frame on a single cell, edit the cell and use the toggle to unlink it from Global Time. Change the time frame using the time picker or by scrubbing on the graph. Changes made in edit mode are saved automatically when you click **Done**. To discard your changes, click **Cancel** instead of **Done**.
 
+### Notebook types
+
+{{< img src="notebooks/add_type.png" alt="Add Type button highlighted in a Notebook" style="width:100%;">}}
+
+Notebooks can be grouped into types, this gives you quick access to relevant information. Notebooks built from other products like Incident Management or Monitors may automatically assign a type. Hover over the notebook title to display the option to add or edit the type. Click **+ Add Type** or to edit the type, click on the pencil icon.
+
 ### Graph snapshots
 
-Use the cog menu to view snapshots or turn off automatic snapshotting. Turn off automatic snapshotting to remove access to existing snapshots.
+Use the cog menu to view snapshots or turn off automatic snapshots. Turn off automatic snapshots to remove access to existing snapshots.
 
 {{< img src="notebooks/view-snapshots.png" alt="Cog menu option to view snapshots" style="width:50%;">}}
 
- Notebooks with snapshotting enabled automatically capture a static image of any graphs with a fixed time range (for example, `Aug 18, 12:00 am – Aug 19, 11:59 pm`). These snapshots update when the graph is updated, as long as the new graph also has a fixed time range. Changing the graph to a global time range (like `Past 1 Hour`) removes the snapshot.
+ Notebooks with snapshots enabled automatically capture a static image of any graphs with a fixed time range (for example, `Aug 18, 12:00 am – Aug 19, 11:59 pm`). These snapshots update when the graph is updated, as long as the new graph also has a fixed time range. Changing the graph to a global time range (like `Past 1 Hour`) removes the snapshot.
 
  You can preview the existing snapshot on any fixed-time graph by hovering over the camera icon while in edit mode.
 
@@ -207,3 +211,4 @@ The following layout options are available by clicking the grid icon on the righ
 [11]: /dashboards/template_variables/
 [12]: /dashboards/widgets/table/
 [13]: /dashboards/widgets/funnel
+[14]: https://app.datadoghq.com/notebook/template-gallery
