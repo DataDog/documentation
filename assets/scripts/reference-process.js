@@ -62,11 +62,11 @@ function buildSection(specStr, deref, allData) {
         "html": {}
       };
       table = null;
-      //try {
+      try {
         table = schemaTable("request", value.allOf[0], true);
-      //} catch (e) {
-      //  console.log(`Couldn't created schematable for ${key} from file ${input} - ${e}`);
-      //}
+      } catch (e) {
+        console.log(`Couldn't created schematable for ${key} from file ${input} - ${e.message}, ${e.stack}`);
+      }
       entryData["html"] = table;
       allData[name].push(entryData)
   });
