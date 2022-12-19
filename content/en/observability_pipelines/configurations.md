@@ -8,7 +8,7 @@ further_reading:
   - link: /observability_pipelines/working_with_data/
     tag: Documentation
     text: Working with data using Observability Pipelines
-  - link: /observability_pipelines/integrations/integrate_vector_with_datadog/
+  - link: /observability_pipelines/guide/configure_observability_pipelines_with_datadog/
     tag: Documentation
     text: Configure Datadog Agents to send data to Observability Pipelines
 ---

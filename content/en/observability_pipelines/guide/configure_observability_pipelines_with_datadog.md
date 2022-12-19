@@ -4,6 +4,7 @@ kind: documentation
 aliases:
   - /agent/vector_aggregation/
   - /integrations/observability_pipelines/integrate_vector_with_datadog/
+  - /observability_pipelines/integrate_vector_with_datadog/
 further_reading:
 - link: "/logs/"
   tag: "Documentation"
@@ -420,9 +421,9 @@ compression = "gzip"
       ],
       "default_api_key": "${DATADOG_API_KEY_ENV_VAR}",
     compression: gzip,
-    “buffer”: {
-         “type”: “disk”
-         “max_size”: 309237645312
+    "buffer": {
+         "type": "disk"
+         "max_size": 309237645312
      }
    }
   }
@@ -465,7 +466,7 @@ observability_pipelines_worker:
 {{% /tab %}}
 {{% tab "GKE" %}}
 
-```json
+```
 observability_pipelines_worker:
   persistence:
     enabled: true

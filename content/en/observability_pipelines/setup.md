@@ -12,7 +12,7 @@ further_reading:
     text: Take Observability Pipelines to production with capacity planning
     tag: Documentation
     text: Datadog Agent as a source for Observability Pipelines
-  - link: /observability_pipelines/integrations/integrate_vector_with_datadog/
+  - link: /observability_pipelines/guide/configure_observability_pipelines_with_datadog/
     tag: Documentation
     text: Configure Datadog Agents to send data to Observability Pipelines
 ---

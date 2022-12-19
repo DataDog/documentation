@@ -16,7 +16,7 @@ further_reading:
   - link: https://vector.dev/docs/setup/going-to-prod/
     tag: Documentation
     text: Take Observability Pipelines to production with capacity planning
-  - link: /observability_pipelines/integrations/integrate_vector_with_datadog/ 
+  - link: /observability_pipelines/guide/configure_observability_pipelines_with_datadog/
     tag: Documentation
     text: Configure Datadog Agents to send data to Observability Pipelines
 ---
