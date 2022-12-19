@@ -688,6 +688,56 @@
     "request_description": "Attributes describing the signal update.",
     "request_schema_description": "Request body for changing the state of a given security monitoring signal."
   },
+  "ListScanningGroups": {
+    "description": "List all the Scanning groups in your organization.",
+    "summary": "List Scanning Groups"
+  },
+  "ReorderScanningGroups": {
+    "description": "Reorder the list of groups.",
+    "summary": "Reorder Groups",
+    "request_description": "",
+    "request_schema_description": "Group reorder request."
+  },
+  "CreateScanningGroup": {
+    "description": "Create a scanning group.\nThe request MAY include a configuration relationship.\nA rules relationship can be omitted entirely, but if it is included it MUST be\nnull or an empty array (rules cannot be created at the same time).\nThe new group will be ordered last within the configuration.",
+    "summary": "Create Scanning Group",
+    "request_description": "",
+    "request_schema_description": "Create group request."
+  },
+  "DeleteScanningGroup": {
+    "description": "Delete a given group.",
+    "summary": "Delete Scanning Group",
+    "request_description": "",
+    "request_schema_description": "Delete group request."
+  },
+  "UpdateScanningGroup": {
+    "description": "Update a group, including the order of the rules.\nRules within the group are reordered by including a rules relationship. If the rules\nrelationship is present, its data section MUST contain linkages for all of the rules\ncurrently in the group, and MUST NOT contain any others.",
+    "summary": "Update Scanning Group",
+    "request_description": "",
+    "request_schema_description": "Update group request."
+  },
+  "CreateScanningRule": {
+    "description": "Create a scanning rule in a sensitive data scanner group, ordered last.\nThe posted rule MUST include a group relationship.\nIt MUST include either a standard_pattern relationship or a regex attribute, but not both.\nIf included_attributes is empty or missing, we will scan all attributes except\nexcluded_attributes. If both are missing, we will scan the whole event.",
+    "summary": "Create Scanning Rule",
+    "request_description": "",
+    "request_schema_description": "Create rule request."
+  },
+  "DeleteScanningRule": {
+    "description": "Delete a given rule.",
+    "summary": "Delete Scanning Rule",
+    "request_description": "",
+    "request_schema_description": "Delete rule request."
+  },
+  "UpdateScanningRule": {
+    "description": "Update a scanning rule.\nThe request body MUST NOT include a standard_pattern relationship, as that relationship\nis non-editable. Trying to edit the regex attribute of a rule with a standard_pattern\nrelationship will also result in an error.",
+    "summary": "Update Scanning Rule",
+    "request_description": "",
+    "request_schema_description": "Update rule request."
+  },
+  "ListStandardPatterns": {
+    "description": "Returns all standard patterns.",
+    "summary": "List standard patterns"
+  },
   "SubmitMetrics": {
     "description": "The metrics end-point allows you to post time-series data that can be graphed on Datadog’s dashboards.\nThe maximum payload size is 500 kilobytes (512000 bytes). Compressed payloads must have a decompressed size of less than 5 megabytes (5242880 bytes).\n\nIf you’re submitting metrics directly to the Datadog API without using DogStatsD, expect:\n\n- 64 bits for the timestamp\n- 64 bits for the value\n- 20 bytes for the metric names\n- 50 bytes for the timeseries\n- The full payload is approximately 100 bytes.\n\nHost name is one of the resources in the Resources field.",
     "summary": "Submit metrics",

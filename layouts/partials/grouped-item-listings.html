@@ -14,14 +14,14 @@
 {{ end }}
 
 <div class="form-group clearfix">
-  <input type="input" data-ref="search" class="form-control grouped-item-search mb-3" id="keywords" placeholder="Search here" aria-label="keywords"/>
+  <input type="input" data-ref="search" class="form-control grouped-item-search mb-3 position-relative" id="keywords" placeholder="Search here" aria-label="keywords"/>
 </div>
 
-<div class="list-group">
+<div>
   <div class="js-empty-results d-none font-semibold"></div>
   {{ range $i, $v := $listGroups }}
-  <div class="js-group js-group-{{ $i }}">
-    <div class="js-group-header mb-1 d-flex align-items-center active">
+  <div class="js-group js-group-{{ $i }}" id="{{ $v.Key | anchorize }}">
+    <div class="js-group-header mb-1 d-flex align-items-center active" id="">
       <div class="js-group-header__icon d-inline font-semibold h-100 text-uppercase px-2">
         {{ range last 1 $v.Pages }}
           {{ $basename := .Params.integration_id | default .Params.source }}

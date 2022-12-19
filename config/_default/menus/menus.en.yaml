@@ -562,6 +562,27 @@ main:
     identifier: integration_guides
     parent: integrations_top_level
     weight: 2
+  - name: OpenTelemetry
+    url: opentelemetry/
+    identifier: opentelemetry_top_level
+    pre: open-telemetry
+    parent: essentials_heading
+    weight: 46000
+  - name: OpenTelemetry Collector Datadog Exporter
+    url: opentelemetry/otel_collector_datadog_exporter/
+    identifier: otel_dd_exporter
+    parent: opentelemetry_top_level
+    weight: 1
+  - name: OTLP Ingestion by the Datadog Agent
+    url: opentelemetry/otlp_ingest_in_the_agent/
+    identifier: otel_ingest_agent
+    parent: opentelemetry_top_level
+    weight: 2
+  - name: Guides
+    url: opentelemetry/guide/
+    identifier: otel_guides
+    parent: opentelemetry_top_level
+    weight: 3
   - name: Watchdog
     url: watchdog/
     identifier: watchdog_top_level
@@ -1080,7 +1101,7 @@ main:
     identifier: dev_tools_metrics_api
     weight: 705
   - name: Send OpenTelemetry Metrics to Datadog
-    url: metrics/open_telemetry
+    url: opentelemetry/otel_metrics/
     parent: metrics_top_level
     identifier: metrics_otel
     weight: 8
@@ -1564,7 +1585,7 @@ main:
     identifier: tracing_custom_inst_dotnet
     weight: 108
   - name: Instrumenting with OpenStandards
-    url: tracing/trace_collection/open_standards/
+    url: opentelemetry/otel_tracing/
     parent: tracing_trace_collection
     identifier: tracing_open_standards
     weight: 105
@@ -2330,7 +2351,7 @@ main:
     identifier: log_collection_ruby
     weight: 111
   - name: OpenTelemetry
-    url: logs/log_collection/opentelemetry/
+    url: opentelemetry/otel_logs/
     parent: log_collection
     identifier: log_collection_opentelemetry
     weight: 112
@@ -2503,245 +2524,245 @@ main:
     identifier: observability_pipelines_guides
     weight: 5
   - name: Security Overview
-    url: security_platform/
+    url: security/
     pre: security-platform
     identifier: security_platform
     parent: security_platform_heading
     weight: 180000
   - name: Detection Rules
-    url: security_platform/detection_rules/
+    url: security/detection_rules/
     parent: security_platform
     identifier: security_rules
     weight: 5
   - name: OOTB Rules
-    url: security_platform/default_rules/#all
+    url: security/default_rules/#all
     parent: security_rules
     identifier: ootb_rules
     weight: 501
   - name: Notifications
-    url: security_platform/notifications/
+    url: security/notifications/
     parent: security_platform
     identifier: security_notifications
     weight: 6
   - name: Rules
-    url: security_platform/notifications/rules/
+    url: security/notifications/rules/
     parent: security_notifications
     identifier: security_notification_rules
     weight: 601
   - name: Variables
-    url: security_platform/notifications/variables/
+    url: security/notifications/variables/
     parent: security_notifications
     identifier: security_notification_variables
     weight: 602
   - name: Signals Explorer
-    url: security_platform/explorer
+    url: security/explorer
     parent: security_platform
     identifier: signals_explorer
     weight: 7
   - name: Security Signal Management
-    url: security_platform/security_signal_management
+    url: security/security_signal_management
     parent: security_platform
     identifier: security_signal_management
     weight: 8
   - name: Cloud SIEM
-    url: security_platform/cloud_siem/
+    url: security/cloud_siem/
     pre: siem
     parent: security_platform_heading
     identifier: cloud_siem
     weight: 181000
   - name: Getting Started
-    url: security_platform/cloud_siem/getting_started
+    url: security/cloud_siem/getting_started
     parent: cloud_siem
     identifier: cloud_siem_getting_started
     weight: 1
   - name: Log Detection Rules
-    url: security_platform/cloud_siem/log_detection_rules
+    url: security/cloud_siem/log_detection_rules
     parent: cloud_siem
     identifier: cloud_siem_log_detection_rules
     weight: 2
   - name: Signal Correlation Rules
-    url: security_platform/cloud_siem/signal_correlation_rules
+    url: security/cloud_siem/signal_correlation_rules
     parent: cloud_siem
     identifier: cloud_siem_signal_correlation_rules
     weight: 3
   - name: OOTB Rules
-    url: /security_platform/default_rules#cat-cloud-siem
+    url: /security/default_rules#cat-cloud-siem
     parent: cloud_siem
     identifier: cloud_siem_default_rules
     weight: 4
   - name: Signals Explorer
-    url: /security_platform/explorer
+    url: /security/explorer
     parent: cloud_siem
     identifier: cloud_siem_signals_explorer
     weight: 5
   - name: Investigator
-    url: security_platform/cloud_siem/investigator
+    url: security/cloud_siem/investigator
     parent: cloud_siem
     identifier: cloud_siem_investigator
     weight: 6
   - name: Guides
-    url: security_platform/cloud_siem/guide/
+    url: security/cloud_siem/guide/
     parent: cloud_siem
     identifier: siem_guides
     weight: 7
   - name: Cloud Security Management
-    url: security_platform/cloud_security_management
+    url: security/cloud_security_management
     parent: security_platform_heading
     pre: cspm
     identifier: csm
     weight: 181500
   - name: Cloud Security Posture Management
-    url: security_platform/cspm/
+    url: security/cspm/
     parent: csm
     identifier: cspm
     weight: 1
   - name: Getting Started
-    url: security_platform/cspm/getting_started
+    url: security/cspm/getting_started
     parent: cspm
     identifier: cspm_getting_started
     weight: 101
   - name: Custom Rules
-    url: security_platform/cspm/custom_rules
+    url: security/cspm/custom_rules
     parent: cspm
     identifier: custom_rules
     weight: 102
   - name: Cloud Resources Schema
-    url: security_platform/cspm/custom_rules/schema/
+    url: security/cspm/custom_rules/schema/
     parent: cspm
     identifier: cspm_schema_gcp_test
     weight: 103
   - name: Findings Reports
-    url: security_platform/cspm/frameworks_and_benchmarks
+    url: security/cspm/frameworks_and_benchmarks
     parent: cspm
     weight: 104
   - name: Security Findings Explorer
-    url: /security_platform/cspm/findings
+    url: /security/cspm/findings
     parent: cspm
     identifier: cspm_findings_explorer
     weight: 105
   - name: Signals Explorer
-    url: /security_platform/cspm/signals_explorer/
+    url: /security/cspm/signals_explorer/
     parent: cspm
     identifier: signals
     weight: 106
   - name: Cloud Workload Security
-    url: security_platform/cloud_workload_security/
+    url: security/cloud_workload_security/
     parent: csm
     identifier: cloud_workload_security
     weight: 2
   - name: Getting Started
-    url: security_platform/cloud_workload_security/getting_started
+    url: security/cloud_workload_security/getting_started
     parent: cloud_workload_security
     identifier: cws_getting_started
     weight: 201
   - name: Managing Detection Rules
-    url: security_platform/cloud_workload_security/workload_security_rules
+    url: security/cloud_workload_security/workload_security_rules
     parent: cloud_workload_security
     identifier: cws_workload_security_rules
     weight: 202
   - name: Creating Custom Agent Rules
-    url: security_platform/cloud_workload_security/agent_expressions
+    url: security/cloud_workload_security/agent_expressions
     parent: cloud_workload_security
     identifier: cws_agent_expressions
     weight: 203
   - name: CWS Events Formats
-    url: security_platform/cloud_workload_security/backend
+    url: security/cloud_workload_security/backend
     parent: cloud_workload_security
     identifier: cws_backend_event_schema_documentation
     weight: 204
   - name: Default Detection Rules
-    url: security_platform/default_rules/#cat-cloud-security-management
+    url: security/default_rules/#cat-cloud-security-management
     parent: csm
     identifier: csm_default_rules
     weight: 4
   - name: Guides
-    url: security_platform/cloud_security_management/guide/
+    url: security/cloud_security_management/guide/
     parent: csm
     identifier: csm_guides
     weight: 6
   - name: Troubleshooting
-    url: security_platform/cloud_security_management/troubleshooting/
+    url: security/cloud_security_management/troubleshooting/
     parent: csm
     identifier: csm_troubleshooting
     weight: 7
   - name: Application Security Management
-    url: security_platform/application_security/
+    url: security/application_security/
     parent: security_platform_heading
     pre: app-sec
     identifier: application_security
     weight: 184000
   - name: Getting Started
-    url: security_platform/application_security/getting_started/
+    url: security/application_security/getting_started/
     parent: application_security
     identifier: appsec_getting_started
     weight: 1
   - name: Java
-    url: security_platform/application_security/getting_started/java/
+    url: security/application_security/getting_started/java/
     parent: appsec_getting_started
     identifier: appsec_java
     weight: 101
   - name: .NET
-    url: security_platform/application_security/getting_started/dotnet/
+    url: security/application_security/getting_started/dotnet/
     parent: appsec_getting_started
     identifier: appsec_dotnet
     weight: 102
   - name: Go
-    url: security_platform/application_security/getting_started/go/
+    url: security/application_security/getting_started/go/
     parent: appsec_getting_started
     identifier: appsec_go
     weight: 103
   - name: Ruby
-    url: security_platform/application_security/getting_started/ruby/
+    url: security/application_security/getting_started/ruby/
     parent: appsec_getting_started
     identifier: appsec_ruby
     weight: 104
   - name: PHP
-    url: security_platform/application_security/getting_started/php/
+    url: security/application_security/getting_started/php/
     parent: appsec_getting_started
     identifier: appsec_php
     weight: 105
   - name: NodeJS
-    url: security_platform/application_security/getting_started/nodejs/
+    url: security/application_security/getting_started/nodejs/
     parent: appsec_getting_started
     identifier: appsec_nodejs
     weight: 106
   - name: Python
-    url: security_platform/application_security/getting_started/python/
+    url: security/application_security/getting_started/python/
     parent: appsec_getting_started
     identifier: appsec_python
     weight: 107
   - name: How It Works
-    url: security_platform/application_security/how-appsec-works/
+    url: security/application_security/how-appsec-works/
     parent: application_security
     identifier: appsec_howitworks
     weight: 2
   - name: OOTB Rules
-    url: security_platform/default_rules/#cat-application-security
+    url: security/default_rules/#cat-application-security
     parent: application_security
     identifier: appsec_default_rules
     weight: 3
   - name: Tracking User Activity
-    url: security_platform/application_security/add-user-info/
+    url: security/application_security/add-user-info/
     parent: application_security
     identifier: appsec_user_info
     weight: 4
   - name: Setup and Configure
-    url: security_platform/application_security/setup_and_configure/
+    url: security/application_security/setup_and_configure/
     parent: application_security
     identifier: appsec_configuration
     weight: 5
   - name: Custom Detection Rules
-    url: security_platform/application_security/custom_rules/
+    url: security/application_security/custom_rules/
     parent: application_security
     identifier: appsec_custom_rules
     weight: 6
   - name: Event Rules
-    url: security_platform/application_security/event_rules/
+    url: security/application_security/event_rules/
     parent: application_security
     identifier: appsec_event_rules
     weight: 7
   - name: Troubleshooting
-    url: security_platform/application_security/troubleshooting
+    url: security/application_security/troubleshooting
     parent: application_security
     identifier: appsec_troubleshooting
     weight: 8
@@ -2834,58 +2855,58 @@ main:
     url: synthetics/search/
     parent: synthetics
     weight: 5
+  - name: Test Coverage
+    url: synthetics/test_coverage
+    parent: synthetics
+    identifier: synthetics_test_coverage
+    weight: 6
   - name: Dashboards
     url: synthetics/dashboards
     parent: synthetics
     identifier: synthetics_dashboards
-    weight: 6
+    weight: 7
   - name: API Test
     url: synthetics/dashboards/api_test
     parent: synthetics_dashboards
     identifier: synthetics_dashboards_api_test
-    weight: 601
+    weight: 701
   - name: Browser Test
     url: synthetics/dashboards/browser_test
     parent: synthetics_dashboards
     identifier: synthetics_dashboards_browser_test
-    weight: 602
-  - name: Testing Coverage
-    url: synthetics/dashboards/testing_coverage
-    parent: synthetics_dashboards
-    identifier: synthetics_dashboards_testing_coverage
-    weight: 603
+    weight: 702
   - name: Test Summary
     url: synthetics/dashboards/test_summary
     parent: synthetics_dashboards
     identifier: synthetics_dashboards_test_summary
-    weight: 604
+    weight: 703
   - name: APM Integration
     url: synthetics/apm/
     parent: synthetics
     identifier: synthetics_apm
-    weight: 7
+    weight: 8
   - name: Settings
     url: synthetics/settings/
     parent: synthetics
-    weight: 8
+    weight: 9
   - name: Metrics
     url: synthetics/metrics/
     parent: synthetics
-    weight: 9
+    weight: 10
   - name: Data Security
     url: data_security/synthetics/
     parent: synthetics
-    weight: 10
+    weight: 11
   - name: Guides
     url: synthetics/guide/
     parent: synthetics
     identifier: synthetics_guides
-    weight: 11
+    weight: 12
   - name: Troubleshooting
     url: synthetics/troubleshooting/
     parent: synthetics
     identifier: synthetics_troubleshooting
-    weight: 12
+    weight: 13
   - name: Continuous Testing
     url: continuous_testing/
     pre: continuous-testing
@@ -3437,26 +3458,30 @@ main:
     url: developers/integrations/new_check_howto/
     parent: dev_tools_integrations
     weight: 401
+  - name: Create an API Integration
+    url: developers/integrations/api_integration/
+    parent: dev_tools_integrations
+    weight: 402
   - name: Integration Assets Reference
     url: developers/integrations/check_references/
     parent: dev_tools_integrations
-    weight: 402
+    weight: 403
   - name: Create an Integration Dashboard
     url: developers/integrations/create-an-integration-dashboard
     parent: dev_tools_integrations
-    weight: 403
+    weight: 404
   - name: OAuth for Integrations
     url: developers/integrations/oauth_for_integrations
     parent: dev_tools_integrations
-    weight: 404
+    weight: 405
   - name: Python
     url: developers/integrations/python/
     parent: dev_tools_integrations
-    weight: 405
+    weight: 406
   - name: Legacy
     url: developers/integrations/legacy/
     parent: dev_tools_integrations
-    weight: 406
+    weight: 407
   - name: Marketplace
     url: developers/marketplace/
     parent: dev_tools
@@ -6434,9 +6459,9 @@ api:
         - CreateTest
       unstable: []
       order: 27
-  - name: Get the list of all tests
-    url: '#get-the-list-of-all-tests'
-    identifier: synthetics-get-the-list-of-all-tests
+  - name: Get the list of all Synthetic tests
+    url: '#get-the-list-of-all-synthetic-tests'
+    identifier: synthetics-get-the-list-of-all-synthetic-tests
     parent: synthetics
     generated: true
     params:
@@ -8624,6 +8649,118 @@ api:
         - v2
       operationids:
         - ListPermissions
+      unstable: []
+      order: 1
+  - name: Sensitive Data Scanner
+    url: /api/latest/sensitive-data-scanner/
+    identifier: sensitive-data-scanner
+    generated: true
+  - name: List standard patterns
+    url: '#list-standard-patterns'
+    identifier: sensitive-data-scanner-list-standard-patterns
+    parent: sensitive-data-scanner
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListStandardPatterns
+      unstable: []
+      order: 3
+  - name: Update Scanning Rule
+    url: '#update-scanning-rule'
+    identifier: sensitive-data-scanner-update-scanning-rule
+    parent: sensitive-data-scanner
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateScanningRule
+      unstable: []
+      order: 8
+  - name: Delete Scanning Rule
+    url: '#delete-scanning-rule'
+    identifier: sensitive-data-scanner-delete-scanning-rule
+    parent: sensitive-data-scanner
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteScanningRule
+      unstable: []
+      order: 9
+  - name: Create Scanning Rule
+    url: '#create-scanning-rule'
+    identifier: sensitive-data-scanner-create-scanning-rule
+    parent: sensitive-data-scanner
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateScanningRule
+      unstable: []
+      order: 7
+  - name: Update Scanning Group
+    url: '#update-scanning-group'
+    identifier: sensitive-data-scanner-update-scanning-group
+    parent: sensitive-data-scanner
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateScanningGroup
+      unstable: []
+      order: 5
+  - name: Delete Scanning Group
+    url: '#delete-scanning-group'
+    identifier: sensitive-data-scanner-delete-scanning-group
+    parent: sensitive-data-scanner
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteScanningGroup
+      unstable: []
+      order: 6
+  - name: Create Scanning Group
+    url: '#create-scanning-group'
+    identifier: sensitive-data-scanner-create-scanning-group
+    parent: sensitive-data-scanner
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateScanningGroup
+      unstable: []
+      order: 4
+  - name: Reorder Groups
+    url: '#reorder-groups'
+    identifier: sensitive-data-scanner-reorder-groups
+    parent: sensitive-data-scanner
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ReorderScanningGroups
+      unstable: []
+      order: 2
+  - name: List Scanning Groups
+    url: '#list-scanning-groups'
+    identifier: sensitive-data-scanner-list-scanning-groups
+    parent: sensitive-data-scanner
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListScanningGroups
       unstable: []
       order: 1
   - name: Service Accounts

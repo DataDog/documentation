@@ -1,5 +1,5 @@
 ---
-title: Configuring the NodeJS Tracing Library
+title: Configuring the Node.js Tracing Library
 kind: documentation
 code_lang: nodejs
 type: multi-code-lang
