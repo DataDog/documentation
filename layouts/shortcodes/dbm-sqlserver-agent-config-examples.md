@@ -137,3 +137,16 @@ instances:
     password: '<PASSWORD>'
     reported_hostname: products-replica-1
 ```
+
+### Using port autodiscovery
+
+Some services like SQL Server Browser Service or Named Instances allow the user to not worry about hardcoded port numbers in the connection string. In order to use the agent with one of these services, the `port` field should be set to `0`.
+
+For example:
+
+```yaml
+init_config:
+instances:
+  - host: <hostname\instance name>
+    port: 0
+```
