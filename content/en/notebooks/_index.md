@@ -17,11 +17,9 @@ further_reading:
 
 ## Overview
 
-{{< img src="notebooks/overview.png" alt="notebook list previewing the cell types" style="width:100%;">}}
-
 Notebooks combine graphs and text in a linear, cell-based format. They help you explore and share stories with your data by creating postmortems, investigations, runbooks, documentation, and more.
 
-## Getting Started
+## Getting started
 1. Build a [new notebook][2], from the main navigation **Notebooks > New Notebook**.
 
 2. Click the **Save Notebook** button. </br>
@@ -32,8 +30,8 @@ Notebooks combine graphs and text in a linear, cell-based format. They help you 
 4. [Configure cells](#cell-configuration).
 
 ## Collaboration
-<!-- {{< img src="notebooks/live_editing.png" alt="live collaboration in notebooks" style="width:90%;">}} -->
-[INSERT UPDATED IMAGES OF COLLABORATION]
+
+<!-- Need an updated image for to see multiple users -->
 
 Notebooks support real-time collaboration. Presence indicators show who is viewing your notebook at any time and show real-time edits and comments. 
 
@@ -85,6 +83,8 @@ When a user visits the URL for a specific cell, the notebook is opened to show t
 
 ## Notebook List
 
+{{< img src="notebooks/overview.png" alt="notebook list previewing the cell types" style="width:100%;">}}
+
 The [Notebook List][1] allows you to view and search previously created notebooks. Each notebook's name, creator, and last modified date are displayed. Notebooks are grouped by:
 
 * **My Notebooks**: Notebooks created by you.
@@ -106,66 +106,59 @@ To view a different time frame, select an option in the global time picker, or s
 
 **Note**: Clicking and dragging to zoom in on a graph does not unlock the cell from the global time. It changes the notebook's global time instead.
 
-{{< img src="notebooks/global_time.png" alt="Notebook Time Selector" style="width:90%;">}}
-
 To save this time as the notebook's default, click **Set Default Time**. The reset button discards your changes to time.
 
 Individual cells can be unlinked from the global time and set to an independent time frame.
 
-{{< img src="notebooks/cell_time.png" alt="Cell Time Selector" style="width:90%;">}}
+{{< img src="notebooks/cell_time.png" alt="Cell Time Selector" style="width:100%;">}}
 
 To view a different time frame on a single cell, edit the cell and use the toggle to unlink it from Global Time. Change the time frame using the time picker or by scrubbing on the graph. Changes made in edit mode are saved automatically when you click **Done**. To discard your changes, click **Cancel** instead of **Done**.
 
 ### Notebook types
 
-{{< img src="notebooks/add_type.png" alt="Add Type button highlighted in a Notebook" style="width:100%;">}}
+{{< img src="notebooks/add_notebook_type.png" alt="Add Type button highlighted in a Notebook" style="width:100%;">}}
 
 Notebooks can be grouped into types, this gives you quick access to relevant information. Notebooks built from other products like Incident Management or Monitors may automatically assign a type. Hover over the notebook title to display the option to add or edit the type. Click **+ Add Type** or to edit the type, click on the pencil icon.
 
 ### Graph snapshots
 
-Use the cog menu to view snapshots or turn off automatic snapshots. Turn off automatic snapshots to remove access to existing snapshots.
+Notebooks can be set to automatically snapshot graphs that might expire. Enable this by clicking **Turn on snapshots** in the cog menu of any notebook. Use the cog menu to view snapshots or turn off automatic snapshots. Turn off automatic snapshots to remove access to existing snapshots.
 
-{{< img src="notebooks/view-snapshots.png" alt="Cog menu option to view snapshots" style="width:50%;">}}
+{{< img src="notebooks/turn_on_snapshot.png" alt="Cog menu option to turn on snapshots" style="width:100%;">}}
 
  Notebooks with snapshots enabled automatically capture a static image of any graphs with a fixed time range (for example, `Aug 18, 12:00 am – Aug 19, 11:59 pm`). These snapshots update when the graph is updated, as long as the new graph also has a fixed time range. Changing the graph to a global time range (like `Past 1 Hour`) removes the snapshot.
 
  You can preview the existing snapshot on any fixed-time graph by hovering over the camera icon while in edit mode.
 
-{{< img src="notebooks/snapshot-preview.png" alt="Preview graph snapshot" style="width:90%;">}}
-
-To share a version of your notebook with snapshots, click **View snapshots** in the notebook header and copy the URL, or append `&view=snapshots` to the URL of any notebook that has snapshots enabled.
+To share a version of your notebook with snapshots, from the cog menu, click **View snapshots**. Copy the URL, or append `&view=snapshots` to the URL of any notebook that has snapshots enabled.
 
 ### Template variables
 
 Notebooks support template variables. Dynamically scope visualizations by adding and selecting template variable values. For more information, see [Template Variables][11].
 
-### Cell Configuration
+### Cell configuration
 
-To add cells, use the **+** button that appears to the left of the cell. Use the action tray that appears above the cell on hover to share, clone, or delete cells. Graph cells can be exported to a dashboard, or downloaded as a PNG or a CSV of graph data. Changes made in edit mode are saved automatically when you click Done. To discard your changes, click Cancel instead of Done.
+To add cells, use the **+** button that appears to the left of the cell. Use the action tray that appears above the cell on hover to share, clone, or delete cells. Graph cells can be exported to a dashboard, or downloaded as a PNG or a CSV of graph data. Changes made in edit mode are saved automatically when you click **Done**. To discard your changes, click **Cancel** instead of **Done**.
 
-<!-- {{< img src="notebooks/export-to-dash.png" alt="Export Notebook graph to Dashboard" style="width:90%;">}} -->
 #### Edit options
-Click on "More options" in the inline editor of a widget to edit widget options. Add details like event overlays, markers, and y-axis controls. 
+Click on **More options** in the inline editor of a widget to edit widget options. Add details like event overlays, markers, and y-axis controls. 
 
 #### Layout options
 
-The following layout options are available by clicking the grid icon on the right side of the cell in edit mode:
+In a Notebook cell, click **Edit** to view the cell configuration in edit mode. You can also see the available layout options which vary based on the cell content type but include the following:
 
 * **Graph size**: Choose between `XS`, `S`, `M` (default), `L`, and `XL`.
 * **Graph legend**: Uncheck the box to hide the legend. Legends are automatically disabled for `XS` and `S` graphs.
 * **Grouping**: Display one graph per tag value to see small multiples of your visualization.
 
-{{< img src="notebooks/layout_options.png" alt="layout options" style="width:50%;">}}
+{{< img src="notebooks/layout_options.png" alt="layout options for graph size, legend, and grouping configuration" style="width:50%;">}}
 
 **Note**: Changing any of these settings only affects the targeted cell.
 
-### Types of content
+#### Types of content
 Notebooks support visualizations and text cells. Text cells are formatted with [Markdown][9], which enables the use of headings, subheadings, links, images, lists, and code blocks.
 
 Graphs in notebooks support all Datadog data sources: metrics, log events, Indexed Spans, live processes, network traffic, RUM events, profiling metrics, and security signals.
-
-{{< img src="notebooks/data_sources.png" alt="live collaboration in notebooks" style="width:50%;">}}
 
 Graphs are created with the Datadog query editor. Notebooks support:
 
@@ -177,22 +170,6 @@ Graphs are created with the Datadog query editor. Notebooks support:
 * [List][7]
 * [Query value][8]
 * [Funnel][13]
-
-### Full screen
-
-Click on the full screen icon on the right side of the cell to edit with the [graphing editor][10]. Under **Graph your data**, add details like event overlays, markers, and y-axis controls. View and edit the graph JSON directly in the **JSON** tab.
-
-### Layout options
-
-The following layout options are available by clicking the grid icon on the right side of the cell in edit mode:
-
-* **Graph size**: Choose between `XS`, `S`, `M` (default), `L`, and `XL`.
-* **Graph legend**: Uncheck the box to hide the legend. Legends are automatically disabled for `XS` and `S` graphs.
-* **Grouping**: Display one graph per tag value to see small multiples of your visualization.
-
-{{< img src="notebooks/layout_options.png" alt="layout options" style="width:50%;">}}
-
-**Note**: Changing any of these settings only affects the targeted cell.
 
 ## Further Reading
 
