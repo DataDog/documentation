@@ -270,7 +270,7 @@ If you've configured the profiler and don't see profiles in the profile search p
 
    2. Open the `DD-DotNet-Profiler-Native-<Application Name>-<pid>` log file in the `/var/log/datadog` folder.
 
-   3. Look for `libddprof error: Failed to send profile.` entries: this message means it can't contact the agent. Ensure the `DD_TRACE_AGENT_URL` is set to the correct Agent URL, please refer to the [Enabling the .NET Profiler-Configuration][5].
+   3. Look for `libddprof error: Failed to send profile.` entries: this message means it can't contact the agent. Ensure the `DD_TRACE_AGENT_URL` is set to the correct Agent URL. See [Enabling the .NET Profiler-Configuration][5] for more information.
 
    4. If the `Failed to send profile` message is not present, look for `The profile was sent. Success?` entries.
 
