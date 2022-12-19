@@ -138,9 +138,9 @@ instances:
     reported_hostname: products-replica-1
 ```
 
-### Using port autodiscovery
+### Discovering ports automatically
 
-Some services like SQL Server Browser Service or Named Instances allow the user to not worry about hardcoded port numbers in the connection string. In order to use the agent with one of these services, the `port` field should be set to `0`.
+SQL Server Browser Service, Named Instances, and other services can automatically detect port numbers. You can use this instead of hardcoding port numbers in connection strings. To use the Agent with one of these services, set the `port` field to `0`.
 
 For example, a Named Instance config:
 
