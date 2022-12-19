@@ -22,65 +22,23 @@ let fileData = JSON.parse(fileString);
 let table = null;
 $RefParser.dereference(fileData)
     .then((deref) => {
-      // write dereference
+
+      // write dereferenced file from schema
       fs.writeFileSync(
             output,
             safeJsonStringify(deref, null, 2),
             'utf8'
         );
 
-      // write schema tables
-      //fs.writeFileSync("./data/reference/schema.tables.json", "{\n", 'utf-8');
+      // init our global data
       const allData = {"sources":[], "transforms":[], "sinks": []};
 
-      /*
-      const entries = Object.entries(deref['definitions']["vector::sources::Sources"]["oneOf"]);
-      const entryLen = entries.length;
-      let i = 0;
-      entries.forEach(([key, value]) => {
-
-          const Sox = ("allOf" in value.allOf[0]) ? value.allOf[0].allOf[0] : value.allOf[0];
-          const Sox2 = ("allOf" in value.allOf[0]) ? value.allOf[0].allOf[1] : value.allOf[0];
-
-          let entryData = {
-            //"simple": value.allOf[1],
-            "description1": value.description || "",
-            "description2": value.allOf[0].description || "",
-            "title": value.allOf[0].title || "",
-            "metadata": value._metadata || {},
-            "simple": simpleExampleYaml(Sox),
-            "advanced": exampleYaml(Sox2, Sox),
-            "html": {}
-          };
-          table = null;
-          try {
-            table = schemaTable("request", value.allOf[0], true);
-          } catch (e) {
-            console.log(`Couldn't created schematable for ${key} from file ${input}`);
-          }
-
-          //entryData["html"] = JSON.stringify(table);
-          entryData["html"] = table;
-          // if(value.hasOwnProperty('oneOf')) {
-          //   entryData["simple"] = value.oneOf[1];
-          // }
-
-          //const trail = (i < entryLen - 1) ? ",\n" : "\n";
-          //fs.appendFileSync("./data/reference/schema.tables.json", `\t"${key}": ${JSON.stringify(entryData)}${trail}`, 'utf-8');
-          //fs.appendFileSync("./data/reference/schema.tables.json", `\t"${JSON.stringify(entryData)}${trail}`, 'utf-8');
-
-          // if(table) {
-          //   const trail = (i < entryLen - 1) ? ",\n" : "\n";
-          //   fs.appendFileSync("./data/reference/schema.tables.json", `\t"${key}": ${JSON.stringify(table)}${trail}`, 'utf-8');
-          // }
-          allData["sources"].push(entryData)
-          i++;
-      });*/
-
+      // add to global data our processed components
       buildSection("vector::sources::Sources", deref, allData);
       buildSection("vector::transforms::Transforms", deref, allData);
       buildSection("vector::sinks::Sinks", deref, allData);
 
+      // write it out to the file
       fs.writeFileSync("./data/reference/schema.tables.json", safeJsonStringify(allData, null, 2), 'utf8');
     });
 
@@ -90,7 +48,7 @@ function buildSection(specStr, deref, allData) {
   const name = specStrSplit[specStrSplit.length - 1].toLowerCase();
   allData[name] = [];
   const dataEntries = Object.entries(deref['definitions'][specStr]["oneOf"]);
-  // const entryLen = sinkEntries.length;
+  // const entryLen = dataEntries.length;
   dataEntries.forEach(([key, value]) => {
       const Sx = ("allOf" in value.allOf[0]) ? value.allOf[0].allOf[0] : value.allOf[0];
       const Sx2 = ("allOf" in value.allOf[0]) ? value.allOf[0].allOf[1] : value.allOf[0];
@@ -104,11 +62,11 @@ function buildSection(specStr, deref, allData) {
         "html": {}
       };
       table = null;
-      try {
+      //try {
         table = schemaTable("request", value.allOf[0], true);
-      } catch (e) {
-        console.log(`Couldn't created schematable for ${key} from file ${input} - ${e}`);
-      }
+      //} catch (e) {
+      //  console.log(`Couldn't created schematable for ${key} from file ${input} - ${e}`);
+      //}
       entryData["html"] = table;
       allData[name].push(entryData)
   });

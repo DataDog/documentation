@@ -726,6 +726,47 @@ const descColumn = (key, value) => {
 };
 
 
+/*const processChild = (childData, key, value, requiredFields, newRequiredFields, tableType, level, newParentKey, skipAnyKeys, parentKey, isNested) => {
+  let html = '';
+  if (skipAnyKeys && childData) {
+    Object.entries(childData).forEach(([ckey, cvalue]) => {
+      if(ckey === "&lt;any-key&gt;") {
+        delete childData[ckey];
+        if(Object.keys(childData).length === 0) {
+          childData = null;
+        }
+      }
+    });
+  }
+
+  const isReadOnly = isReadOnlyRow(value);
+
+  // build up row classes
+  const outerRowClasses = `${(isNested) ? "isNested d-none" : ""} ${(childData) ? "hasChildData" : ""} ${(isReadOnly) ? "isReadOnly" : ""}`;
+  const nestedRowClasses = `first-row ${(childData) ? "js-collapse-trigger collapse-trigger" : ""} ${(isReadOnly) ? "isReadOnly" : ""}`;
+
+  // build markdown
+  const toggleArrow = (childData) ? '<span class="toggle-arrow"><svg width="6" height="9" viewBox="0 0 6 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z" fill="black"/></svg></span> ' : "" ;
+  const required = requiredFields.includes(key) ? '&nbsp;[<em>required</em>]' : "";
+  const readOnlyField = (isReadOnly) ? '' : '';
+
+  // build html
+  html += `
+  <div class="row ${outerRowClasses}">
+    <div class="col-12 first-column">
+      <div class="row ${nestedRowClasses}">
+        ${fieldColumn(key, value, toggleArrow, required, parentKey)}
+        ${typeColumn(key, value, readOnlyField)}
+        ${descColumn(key, value)}
+      </div>
+      ${(childData) ? rowRecursive(tableType, childData, true, (newRequiredFields || []), (level + 1), newParentKey, skipAnyKeys) : ''}
+    </div>
+  </div>
+  `.trim();
+  return html;
+}*/
+
+
 /**
  * Takes a application/json schema for request or response and outputs a table
  * @param {string} tableType - string 'request' or 'response'
@@ -770,7 +811,11 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
             if (value.items.oneOf && value.items.oneOf instanceof Array && value.items.oneOf.length < 20) {
               childData = value.items.oneOf
               .map((obj, indx) => {
-                return {[`Option ${indx + 1}`]: value.items.oneOf[indx]}
+                if("const" in value.items.oneOf[indx]) {
+                  return {[value.items.oneOf[indx].const]: value.items.oneOf[indx]}
+                } else {
+                  return {[`Option ${indx + 1}`]: value.items.oneOf[indx]}
+                }
               })
               .reduce((obj, item) => ({...obj, ...item}), {});
             }
@@ -793,18 +838,21 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
           if(value.oneOf instanceof Array && value.oneOf.length < 20) {
             childData = value.oneOf
               .map((obj, indx) => {
-                return {[`Option ${indx + 1}`]: value.oneOf[indx]}
+                if("const" in value.oneOf[indx]) {
+                  return {[value.oneOf[indx].const]: value.oneOf[indx]}
+                } else {
+                  return {[`Option ${indx + 1}`]: value.oneOf[indx]}
+                }
               })
               .reduce((obj, item) => ({...obj, ...item}), {});
           }
-        } /*else if (typeof value === 'object' && "allOf" in value) {
-           // we need to combine
-           childData = value.allOf
-              .map((obj, indx) => {
-                return {[`Option ${indx + 1}`]: value.allOf[indx]}
-              })
-              .reduce((obj, item) => ({...obj, ...item}), {});
-        }*/
+        } else if (typeof value === 'object' && "allOf" in value) {
+          childData = value.allOf
+             .map((obj, indx) => {
+               return {[`ALLOF_COMBINE ${indx + 1}`]: value.allOf[indx]}
+             })
+             .reduce((obj, item) => ({...obj, ...item}), {});
+        }
         // for widgets
         /*
         if(key === "definition" && value.discriminator) {
@@ -819,7 +867,6 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
         //   console.log(childData)
         //   childData = value["oneOf"];
         // }
-
 
         if (skipAnyKeys && childData) {
           Object.entries(childData).forEach(([ckey, cvalue]) => {
@@ -843,19 +890,24 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
         const required = requiredFields.includes(key) ? '&nbsp;[<em>required</em>]' : "";
         const readOnlyField = (isReadOnly) ? '' : '';
 
-        // build html
-        html += `
-        <div class="row ${outerRowClasses}">
-          <div class="col-12 first-column">
-            <div class="row ${nestedRowClasses}">
-              ${fieldColumn(key, value, toggleArrow, required, parentKey)}
-              ${typeColumn(key, value, readOnlyField)}
-              ${descColumn(key, value)}
-            </div>
-            ${(childData) ? rowRecursive(tableType, childData, true, (newRequiredFields || []), (level + 1), newParentKey, skipAnyKeys) : ''}
-          </div>
-        </div>
+        if(key.startsWith('ALLOF_COMBINE ')) {
+          html += `
+                ${(childData) ? rowRecursive(tableType, childData, true, (newRequiredFields || []), (level + 1), newParentKey, skipAnyKeys) : ''}
         `.trim();
+        } else {
+          html += `
+          <div class="row ${outerRowClasses}">
+              <div class="col-12 first-column">
+                <div class="row ${nestedRowClasses}">
+                  ${fieldColumn(key, value, toggleArrow, required, parentKey)}
+                  ${typeColumn(key, value, readOnlyField)}
+                  ${descColumn(key, value)}
+                </div>
+                ${(childData) ? rowRecursive(tableType, childData, true, (newRequiredFields || []), (level + 1), newParentKey, skipAnyKeys) : ''}
+              </div>
+          </div>
+        `.trim();
+        }
       });
     } else {
       html += `<div class="primitive">${data || ''}</div>`;

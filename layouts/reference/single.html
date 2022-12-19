@@ -58,10 +58,10 @@
         <div class="tab-content">
         <ul class="nav nav-tabs border-none response-toggle">
             <li class="nav-item">
-                <a class="nav-link mr-1 js-model-link active" href="#" data-toggle="tab">{{ i18n "model" }}</a>
+                <a class="nav-link mr-1 js-model-link active" href="#" data-toggle="tab">Options</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link mr-1 js-example-link" href="#" data-toggle="tab">Vector.yaml</a>
+                <a class="nav-link mr-1 js-example-link" href="#" data-toggle="tab">Schema</a>
             </li>
         </ul>
 
@@ -103,7 +103,7 @@
                             <div class="code-button-wrapper position-absolute">
                                 <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
                             </div>
-                            {{ highlight $data.simple "toml" "" }}
+                            {{ highlight $data.simple "yaml" "" }}
 
                         </div>
                       </div>
@@ -121,7 +121,7 @@
                             <div class="code-button-wrapper position-absolute">
                                 <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
                             </div>
-                            {{ highlight $data.advanced "toml" "" }}
+                            {{ highlight $data.advanced "yaml" "" }}
                         </div>
                       </div>
                     </div>
