@@ -142,7 +142,7 @@ instances:
 
 Some services like SQL Server Browser Service or Named Instances allow the user to not worry about hardcoded port numbers in the connection string. In order to use the agent with one of these services, the `port` field should be set to `0`.
 
-For example:
+For example, a Named Instance config:
 
 ```yaml
 init_config:
