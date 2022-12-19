@@ -208,4 +208,4 @@ View common patterns in your service’s logs, and use facets like status in the
 [15]: /profiler/
 [16]: /tracing/trace_explorer/query_syntax/#facets
 [17]: https://www.datadoghq.com/blog/log-patterns/
-[18]: /security_platform/application_security/how-appsec-works/
+[18]: /security/application_security/how-appsec-works/

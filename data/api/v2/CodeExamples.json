@@ -914,6 +914,11 @@
   "CreateSecurityMonitoringRule": [
     {
       "group": "security_monitoring",
+      "suffix": "_1092490364",
+      "description": "Create a cloud_configuration rule returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
       "suffix": "",
       "description": "Create a detection rule returns \"OK\" response"
     },
@@ -954,6 +959,18 @@
       "description": "Delete an existing rule returns \"OK\" response"
     }
   ],
+  "GetSecurityMonitoringRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "_3370522281",
+      "description": "Get a cloud configuration rule's details returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Get a rule's details returns \"OK\" response"
+    }
+  ],
   "SearchSecurityMonitoringSignals": [
     {
       "group": "security_monitoring",
@@ -966,13 +983,6 @@
       "group": "security_monitoring",
       "suffix": "_3960412991",
       "description": "Get a quick list of security signals returns \"OK\" response with pagination"
-    }
-  ],
-  "GetSecurityMonitoringRule": [
-    {
-      "group": "security_monitoring",
-      "suffix": "",
-      "description": "Get a rule's details returns \"OK\" response"
     }
   ],
   "GetSecurityFilter": [
@@ -1010,6 +1020,18 @@
       "description": "Modify the triage assignee of a security signal returns \"OK\" response"
     }
   ],
+  "UpdateSecurityMonitoringRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "_428087276",
+      "description": "Update a cloud configuration rule's details returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Update an existing rule returns \"OK\" response"
+    }
+  ],
   "UpdateSecurityFilter": [
     {
       "group": "security_monitoring",
@@ -1017,11 +1039,67 @@
       "description": "Update a security filter returns \"OK\" response"
     }
   ],
-  "UpdateSecurityMonitoringRule": [
+  "CreateScanningGroup": [
     {
-      "group": "security_monitoring",
+      "group": "sensitive_data_scanner",
       "suffix": "",
-      "description": "Update an existing rule returns \"OK\" response"
+      "description": "Create Scanning Group returns \"OK\" response"
+    }
+  ],
+  "CreateScanningRule": [
+    {
+      "group": "sensitive_data_scanner",
+      "suffix": "",
+      "description": "Create Scanning Rule returns \"OK\" response"
+    }
+  ],
+  "DeleteScanningGroup": [
+    {
+      "group": "sensitive_data_scanner",
+      "suffix": "",
+      "description": "Delete Scanning Group returns \"OK\" response"
+    }
+  ],
+  "DeleteScanningRule": [
+    {
+      "group": "sensitive_data_scanner",
+      "suffix": "",
+      "description": "Delete Scanning Rule returns \"OK\" response"
+    }
+  ],
+  "ListScanningGroups": [
+    {
+      "group": "sensitive_data_scanner",
+      "suffix": "",
+      "description": "List Scanning Groups returns \"OK\" response"
+    }
+  ],
+  "ListStandardPatterns": [
+    {
+      "group": "sensitive_data_scanner",
+      "suffix": "",
+      "description": "List standard patterns returns \"OK\" response"
+    }
+  ],
+  "ReorderScanningGroups": [
+    {
+      "group": "sensitive_data_scanner",
+      "suffix": "",
+      "description": "Reorder Groups returns \"OK\" response"
+    }
+  ],
+  "UpdateScanningGroup": [
+    {
+      "group": "sensitive_data_scanner",
+      "suffix": "",
+      "description": "Update Scanning Group returns \"OK\" response"
+    }
+  ],
+  "UpdateScanningRule": [
+    {
+      "group": "sensitive_data_scanner",
+      "suffix": "",
+      "description": "Update Scanning Rule returns \"OK\" response"
     }
   ],
   "CreateServiceAccountApplicationKey": [

@@ -25,6 +25,8 @@ further_reading:
 - [Organization management](#organization-management-events)
 
 #### Product-Specific Events
+- [Application Security Management (ASM)](#application-security-management)
+- [Audit Trail](#audit-trail-events)
 - [Cloud Security Platform](#cloud-security-platform-events)
 - [Log Management](#log-management-events)
 - [APM](#apm-events)
@@ -58,6 +60,20 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | Name  | Description of audit event                          | Query in audit explorer              |
 |-------------| --------------------------------------------------  | ------------------------------------ |
 | [API Request][9] | An API Request is made across the Datadog platform. | `@evt.name:Request @action:accessed` |
+
+### Application Security Management
+| Name | Description of audit event                                          | Query in audit explorer                           |
+| ---- | ------------------------------------------------------------------- | --------------------------------------------------|
+| [Denylist][78] | A user blocked, unblocked, or extended the blocking duration of an IP address. | `@evt.name:“Application Security” @asset.type:ip_denylist` |
+| [Event Rules][79] | A user enabled or disabled an ASM event rule. | `@evt.name:"Application Security" @asset.type:event_rules` |
+| [One-click Activation][80] | A user activated or de-activated ASM on a service. | `@evt.name:"Application Security" @asset.type:compatible_services` |
+
+
+### Audit Trail events
+
+| Name  | Description of audit event                          | Query in audit explorer              |
+|-------------| --------------------------------------------------  | ------------------------------------ |
+| [Download as CSV][77] | A user exports list of Audit Events as CSV | `@evt.name:Audit Trail @asset.type:audit_events_csv` |
 
 ### Authentication events
 
@@ -108,6 +124,7 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [Processor][35] | A user created, modified, or deleted a processor within a pipeline and the previous and new values for the configuration. | `@evt.name:"Log Management" @asset.type:pipeline_processor` |
 | [Restriction query configuration][36] | A user created, modified, or deleted the configuration of a restriction query in logs and the previous and new values for the configuration. | `@evt.name:"Log Management" @asset.type:restriction_query` |
 | [Standard attribute configuration][37] | A user created, modified, or deleted the configuration of a standard attribute in logs and the previous and new values for the configuration. | `@evt.name:"Log Management" @asset.type:standard_attribute` |
+| [Download as CSV][76] | A user exports list of logs as CSV | `@evt.name:"Log Management" @asset.type:logs_csv` |
 
 ### APM events
 | Name | Description of audit event                                          | Query in audit explorer                           |
@@ -194,6 +211,7 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 |---------------------------------|--------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
 | [Repository Default Branch][73] | A user modified the default branch of a repository, and the previous and new values for the default branch. | `@evt.name:"CI Visibility" @asset.type:ci_app_repository`                                                         |
 
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -272,3 +290,8 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 [73]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Reference%20Tables%22%20%40asset.type%3Areference_table_file%20%40action%3A%28uploaded%20OR%20imported%29
 [74]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22CI+Visibility%22+%40asset.type%3Aci_app_repository
 [75]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Access%20Management%22%20%40asset.type%3Apassword%20%40action%3Amodified
+[76]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Log%20Management%22%20%40asset.type%3Alogs_csv
+[77]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Audit%20Trail%22%20%40asset.type%3Aaudit_events_csv
+[78]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Application%20Security%22%20%40asset.type%3Aip_denylist
+[79]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Application%20Security%22%20%40asset.type%3Aevent_rules
+[80]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A"Application%20Security"%20%40asset.type%3Acompatible_services

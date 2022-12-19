@@ -19,6 +19,8 @@ instances:
 
 To use [Windows Authentication][10], set `connection_string: "Trusted_Connection=yes"` and omit the `username` and `password` fields.
 
+The agent supports [SQL Server Browser Service][11] in versions 7.41+. To enable SSBS, provide a port of `0` in the host string: `<HOSTNAME>,0`.
+
 Use the `service` and `env` tags to link your database telemetry to other telemetry through a common tagging scheme. See [Unified Service Tagging][5] on how these tags are used throughout Datadog.
 
 ### Supported Drivers
@@ -58,3 +60,4 @@ Once all Agent configuration is complete, [restart the Datadog Agent][6].
 [8]: https://app.datadoghq.com/databases
 [9]: https://docs.microsoft.com/en-us/sql/ado/microsoft-activex-data-objects-ado
 [10]: https://docs.microsoft.com/en-us/sql/relational-databases/security/choose-an-authentication-mode
+[11]: https://learn.microsoft.com/en-us/sql/tools/configuration-manager/sql-server-browser-service

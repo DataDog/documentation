@@ -185,7 +185,7 @@ DATADOG TRACER CONFIGURATION - {"date":"2020-07-02T18:51:18.294Z","os_name":"Dar
 
 **Diagnostics:**
 
-The NodeJS Tracer prints a diagnostic line when the Agent cannot be reached.
+The Node.js Tracer prints a diagnostic line when the Agent cannot be reached.
 
 ```text
 DATADOG TRACER DIAGNOSTIC - Agent Error: Network error trying to reach the agent: connect ECONNREFUSED 127.0.0.1:8126

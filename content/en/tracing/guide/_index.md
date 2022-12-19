@@ -14,17 +14,20 @@ aliases:
     {{< nextlink href="tracing/guide/week_over_week_p50_comparison" >}}2. Compare p50 latency week over week for a service{{< /nextlink >}}
     {{< nextlink href="tracing/guide/apm_dashboard" >}}3. Create a Dashboard to track and correlate APM metrics{{< /nextlink >}}
     {{< nextlink href="tracing/guide/slowest_request_daily" >}}4. Debug the slowest trace on the slowest endpoint of a web service{{< /nextlink >}}
+    <a id="enabling-tracing-tutorials">
     {{< nextlink href="tracing/guide/add_span_md_and_graph_it" >}}5. Add span tags and filter and group your application performance{{< /nextlink >}}
     {{< nextlink href="tracing/guide/instrument_custom_method" >}}6. Instrument a custom method to get deep visibility into your business logic.{{< /nextlink >}}
 {{< /whatsnext >}}
+
 <br>
-<a id="enabling-tracing-tutorials">
 {{< whatsnext desc="Tutorials: Enabling Tracing" >}}
     {{< nextlink href="tracing/guide/tutorial-enable-python-host" >}}Enabling Tracing on a Python Application on the Same Host as Datadog Agent{{< /nextlink >}}
     {{< nextlink href="tracing/guide/tutorial-enable-python-containers" >}}Enabling Tracing on a Python Application and Datadog Agent in Containers{{< /nextlink >}}
     {{< nextlink href="tracing/guide/tutorial-enable-python-container-agent-host" >}}Enabling Tracing for a Python Application in a Container and an Agent on a Host{{< /nextlink >}}
 {{< /whatsnext >}}
 <br>
+
+
 {{< whatsnext desc="APM Integrations in action" >}}
     {{< nextlink href="/tracing/guide/monitor-kafka-queues/" >}}Tracing Kafka Queues{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/trace-php-cli-scripts/" >}}Tracing PHP CLI Scripts{{< /nextlink >}}
@@ -44,4 +47,5 @@ aliases:
     {{< nextlink href="tracing/guide/serverless_enable_aws_xray/" >}}Decide When to Use Datadog APM and AWS X-Ray {{< /nextlink >}}
     {{< nextlink href="/tracing/guide/setting_up_apm_with_cpp/" >}}Setting Up APM with C++{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/trace_ingestion_volume_control/" >}}Control span ingestion volume with Ingestion Mechanisms{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/guide/ingestion_sampling_with_opentelemetry/" >}}Ingestion Sampling with OpenTelemetry{{< /nextlink >}}
 {{< /whatsnext >}}
