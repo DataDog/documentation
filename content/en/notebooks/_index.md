@@ -20,7 +20,7 @@ further_reading:
 Notebooks combine graphs and text in a linear, cell-based format. They help you explore and share stories with your data by creating postmortems, investigations, runbooks, documentation, and more.
 
 ## Getting started
-1. Build a [new notebook][2], from the main navigation **Notebooks > New Notebook**.
+1. Build a [new notebook][1], from the main navigation **Notebooks > New Notebook**.
 
 2. Click the **Save Notebook** button. </br>
   **Note**: A new notebook is not saved by default.
@@ -85,7 +85,7 @@ When a user visits the URL for a specific cell, the notebook is opened to show t
 
 {{< img src="notebooks/overview.png" alt="notebook list previewing the cell types" style="width:100%;">}}
 
-The [Notebook List][1] allows you to view and search previously created notebooks. Each notebook's name, creator, and last modified date are displayed. Notebooks are grouped by:
+The [Notebook List][2] allows you to view and search previously created notebooks. Each notebook's name, creator, and last modified date are displayed. Notebooks are grouped by:
 
 * **My Notebooks**: Notebooks created by you.
 * **Other Notebooks**: Notebooks created by other members of your team.
@@ -94,7 +94,7 @@ The [Notebook List][1] allows you to view and search previously created notebook
 Hover over the Preview icon for any Notebook to see a preview of the contents, including widget types and Markdown. To open the Notebook in [View Mode](#read-mode), click the eye icon.
 
 ## Template gallery
-From the [Template Gallery][14], see ready to use templates including an Incident Response postmortem and an Incident Report which you can create new notebooks from. You can also create a new custom template to build reusable notebook structures.
+From the [Template Gallery][3], see ready to use templates including an Incident Response postmortem and an Incident Report which you can create new notebooks from. You can also create a new custom template to build reusable notebook structures.
 
 ## Notebook configuration
 
@@ -134,7 +134,7 @@ To share a version of your notebook with snapshots, from the cog menu, click **V
 
 ### Template variables
 
-Notebooks support template variables. Dynamically scope visualizations by adding and selecting template variable values. For more information, see [Template Variables][11].
+Notebooks support template variables. Dynamically scope visualizations by adding and selecting template variable values. For more information, see [Template Variables][4].
 
 ### Cell configuration
 
@@ -156,36 +156,35 @@ In a Notebook cell, click **Edit** to view the cell configuration in edit mode. 
 **Note**: Changing any of these settings only affects the targeted cell.
 
 #### Types of content
-Notebooks support visualizations and text cells. Text cells are formatted with [Markdown][9], which enables the use of headings, subheadings, links, images, lists, and code blocks.
+Notebooks support visualizations and text cells. Text cells are formatted with [Markdown][5], which enables the use of headings, subheadings, links, images, lists, and code blocks.
 
 Graphs in notebooks support all Datadog data sources: metrics, log events, Indexed Spans, live processes, network traffic, RUM events, profiling metrics, and security signals.
 
 Graphs are created with the Datadog query editor. Notebooks support:
 
-* [Timeseries][3]
-* [Top List][4]
-* [Table][12]
-* [Heatmap][5]
-* [Distribution][6]
-* [List][7]
-* [Query value][8]
+* [Timeseries][6]
+* [Top List][7]
+* [Table][8]
+* [Heatmap][9]
+* [Distribution][10]
+* [List][11]
+* [Query value][12]
 * [Funnel][13]
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/notebook/list
-[2]: https://app.datadoghq.com/notebook
-[3]: /dashboards/widgets/timeseries/
-[4]: /dashboards/widgets/top_list/
-[5]: /dashboards/widgets/heat_map/
-[6]: /dashboards/widgets/distribution/
-[7]: /dashboards/widgets/list/
-[8]: /dashboards/widgets/query_value/
-[9]: https://daringfireball.net/projects/markdown/
-[10]: /dashboards/querying/#graphing-editor
-[11]: /dashboards/template_variables/
-[12]: /dashboards/widgets/table/
+[1]: https://app.datadoghq.com/notebook
+[2]: https://app.datadoghq.com/notebook/list
+[3]: https://app.datadoghq.com/notebook/template-gallery
+[4]: /dashboards/template_variables/
+[5]: https://daringfireball.net/projects/markdown/
+[6]: /dashboards/widgets/timeseries/
+[7]: /dashboards/widgets/top_list/
+[8]: /dashboards/widgets/table/
+[9]: /dashboards/widgets/heat_map/
+[10]: /dashboards/widgets/distribution/
+[11]: /dashboards/widgets/list/
+[12]: /dashboards/widgets/query_value/
 [13]: /dashboards/widgets/funnel
-[14]: https://app.datadoghq.com/notebook/template-gallery
