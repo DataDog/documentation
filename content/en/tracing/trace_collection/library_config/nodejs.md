@@ -33,7 +33,7 @@ Set an application's environment (for example, `prod`, `pre-prod`, and `stage`).
 `DD_SERVICE`
 : **Configuration**: `service`<br>
 **Default**: The `name` field in `package.json`<br>
-The service name used for this program.
+The service name used for this application.
 
 `DD_VERSION`
 : **Configuration**: `version`<br>
