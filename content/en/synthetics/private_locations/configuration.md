@@ -119,13 +119,13 @@ Maximum number of redirections for HTTP and WebSocket tests.
 `variableOverride`
 : **Type**: String <br>
 Overrides the variables used in tests running on the Private Location. Format: `VARIABLE=value`.
-All variables imported this way will be obfuscated.
+All variables imported this way are obfuscated.
 
 `environmentVariableOverride`
 : **Type** String <br>
 Overrides variables used in tests running on the Private Location with environment variables. It requires the environment variables to be imported in the containerized environment.
 Example for Docker: `docker run --env VARIABLE gcr.io/datadoghq/synthetics-private-location-worker --environmentVariableOverride VARIABLE`.
-All variables imported this way will be obfuscated. 
+All variables imported this way are obfuscated. 
 
 ## Private root certificates
 
