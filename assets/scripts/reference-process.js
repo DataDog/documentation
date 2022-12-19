@@ -8,6 +8,7 @@ const output = (myArgs.length > 1) ? myArgs[1] : './data/reference/schema.deref.
 const schemaTable = require('./build-api-pages').schemaTable;
 const filterExampleJson = require('./build-api-pages').filterExampleJson;
 const yaml = require('js-yaml');
+const {split} = require("lodash/string");
 
 if(!input || !output) {
   console.log("Missing input/outputs")
@@ -32,6 +33,7 @@ $RefParser.dereference(fileData)
       //fs.writeFileSync("./data/reference/schema.tables.json", "{\n", 'utf-8');
       const allData = {"sources":[], "transforms":[], "sinks": []};
 
+      /*
       const entries = Object.entries(deref['definitions']["vector::sources::Sources"]["oneOf"]);
       const entryLen = entries.length;
       let i = 0;
@@ -73,64 +75,44 @@ $RefParser.dereference(fileData)
           // }
           allData["sources"].push(entryData)
           i++;
-      });
+      });*/
 
-      const transformEntries = Object.entries(deref['definitions']["vector::transforms::Transforms"]["oneOf"]);
-      //const entryLen = transformEntries.length;
-      transformEntries.forEach(([key, value]) => {
-          const Tx = ("allOf" in value.allOf[0]) ? value.allOf[0].allOf[0] : value.allOf[0];
-          const Tx2 = ("allOf" in value.allOf[0]) ? value.allOf[0].allOf[1] : value.allOf[0];
-
-          let entryData = {
-            "description1": value.description || "",
-            "description2": value.allOf[0].description || "",
-            "title": value.allOf[0].title || "",
-            "metadata": value._metadata || {},
-            "simple": simpleExampleYaml(Tx),
-            "advanced": exampleYaml(Tx2, Tx),
-            "html": {}
-          };
-          table = null;
-          try {
-            table = schemaTable("request", value.allOf[0], true);
-          } catch (e) {
-            console.log(`Couldn't created schematable for ${key} from file ${input}`);
-          }
-          entryData["html"] = table;
-          allData["transforms"].push(entryData)
-      });
-
-      const sinkEntries = Object.entries(deref['definitions']["vector::sinks::Sinks"]["oneOf"]);
-      //const entryLen = sinkEntries.length;
-      sinkEntries.forEach(([key, value]) => {
-
-          const Sx = ("allOf" in value.allOf[0]) ? value.allOf[0].allOf[0] : value.allOf[0];
-          const Sx2 = ("allOf" in value.allOf[0]) ? value.allOf[0].allOf[1] : value.allOf[0];
-
-          let entryData = {
-            "description1": value.description || "",
-            "description2": value.allOf[0].description || "",
-            "title": value.allOf[0].title || "",
-            "metadata": value._metadata || {},
-            "simple": simpleExampleYaml(Sx),
-            "advanced": exampleYaml(Sx2, Sx),
-            "html": {}
-          };
-          table = null;
-          try {
-
-            table = schemaTable("request", value.allOf[0], true);
-          } catch (e) {
-            console.log(`Couldn't created schematable for ${key} from file ${input} - ${e}`);
-          }
-          entryData["html"] = table;
-          allData["sinks"].push(entryData)
-      });
-      //fs.appendFileSync("./data/reference/schema.tables.json", "}\n", 'utf-8');
+      buildSection("vector::sources::Sources", deref, allData);
+      buildSection("vector::transforms::Transforms", deref, allData);
+      buildSection("vector::sinks::Sinks", deref, allData);
 
       fs.writeFileSync("./data/reference/schema.tables.json", safeJsonStringify(allData, null, 2), 'utf8');
     });
 
+
+function buildSection(specStr, deref, allData) {
+  const specStrSplit = specStr.split('::');
+  const name = specStrSplit[specStrSplit.length - 1].toLowerCase();
+  allData[name] = [];
+  const dataEntries = Object.entries(deref['definitions'][specStr]["oneOf"]);
+  // const entryLen = sinkEntries.length;
+  dataEntries.forEach(([key, value]) => {
+      const Sx = ("allOf" in value.allOf[0]) ? value.allOf[0].allOf[0] : value.allOf[0];
+      const Sx2 = ("allOf" in value.allOf[0]) ? value.allOf[0].allOf[1] : value.allOf[0];
+      let entryData = {
+        "description1": value.description || "",
+        "description2": value.allOf[0].description || "",
+        "title": value.allOf[0].title || "",
+        "metadata": value._metadata || {},
+        "simple": simpleExampleYaml(Sx),
+        "advanced": exampleYaml(Sx2, Sx),
+        "html": {}
+      };
+      table = null;
+      try {
+        table = schemaTable("request", value.allOf[0], true);
+      } catch (e) {
+        console.log(`Couldn't created schematable for ${key} from file ${input} - ${e}`);
+      }
+      entryData["html"] = table;
+      allData[name].push(entryData)
+  });
+}
 
 function simpleExampleYaml(data1) {
   const outData = {};
