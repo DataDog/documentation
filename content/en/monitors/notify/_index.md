@@ -116,14 +116,14 @@ Disk space is low @ops-team@company.com
 
 ### Toggle additional content
 
-Providing additional context, monitor notifications can include content such as the monitor's query, the @-mentions used, metric snapshots (for metric monitors), and links back to relevant pages in Datadog. However, you might decide that for some monitors this additional content is not needed. For that, you can decide on each inidividual monitor, which content you would like to strip away from its notifications. The options are:
+Monitor notifications can provide additional context, such as the monitor's query, the @-mentions used, metric snapshots (for metric monitors), and links back to relevant pages in Datadog. You can configure the types of additional context included in each monitor's notifications. The options are:
 
-- **Default**: no content is hidden
-- **Hide Query**: removes the monitor's query from its notification
-- **Hide Handles**: strips away the @-mentions that are used in the notification message
-- **Hide All**: notification does not include query, handles, any snapshot (for metric monitors), and additional links in footers
+- **Default**: No content is hidden.
+- **Hide Query**: Remove the monitor's query from the notification message.
+- **Hide Handles**: Remove the @-mentions that are used in the notification message.
+- **Hide All**: Notification message does not include query, handles, any snapshots (for metric monitors), or additional links in footers.
 
-Note, some content might not be displayed by defauly depending on the integration.
+**Note**: Depending on the integration, some content may not be displayed by default.
 
 ### Modifications
 
