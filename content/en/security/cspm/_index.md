@@ -21,7 +21,7 @@ Strengthen your security posture and achieve continuous compliance by detecting,
 
 View a high-level overview of your security posture on the [Overview page][3]. Examine the details of findings and analyze historical configurations with the [Security Findings Explorer][9].
 
-{{< img src="security/cspm/summary_page.png" alt="Cloud Security Posture Management summary page" width="100%">}}
+{{< img src="security/cspm/overview_page.png" alt="Cloud Security Posture Management overview page" width="100%">}}
 
 ## Maintain compliance with industry frameworks and benchmarks
 
@@ -29,7 +29,7 @@ CSPM comes with a set of 400+ out-of-the-box detection rules that are maintained
 
 [View compliance reports][10] that allow you to see how well you're doing against each control in a compliance framework. The reports include details such as resources with the most failed findings, a comprehensive breakdown of the number of resources with pass/fail findings, and the top three high-severity rule failures.
 
-{{< img src="security/cspm/compliance_frameworks.png" alt="Cloud Security Posture Management compliance framewords" width="100%">}}
+{{< img src="security/cspm/compliance_frameworks.png" alt="Cloud Security Posture Management compliance frameworks" width="100%">}}
 
 ## Manage out-of-the-box and custom detection rules
 
