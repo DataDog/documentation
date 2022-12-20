@@ -25,7 +25,7 @@ View a high-level overview of your security posture on the [Overview page][3]. E
 
 ## Maintain compliance with industry frameworks and benchmarks
 
-CSPM comes with a set of 400+ out-of-the-box detection rules that are maintained by a team of security experts. Each rule maps to one or more controls and requirements within a compliance standard or industry benchmark, such as the popular PCI and SOC2 compliance frameworks.
+CSPM comes with a set of 400+ out-of-the-box detection rules which are maintained by a team of security experts. Each rule maps to one or more controls and requirements within a compliance standard or industry benchmark, such as the popular PCI and SOC2 compliance frameworks.
 
 [View compliance reports][10] that allow you to see how well you're doing against each control in a compliance framework. The reports include details such as resources with the most failed findings, a comprehensive breakdown of the number of resources with pass/fail findings, and the top three high-severity rule failures.
 
@@ -41,13 +41,13 @@ CSPM comes with a set of 400+ out-of-the-box detection rules that are maintained
 
 [Send real-time notifications][11] when a new misconfiguration is detected in your environment, so that your teams can take action to mitigate the risk. Notifications can be sent to [Slack, email, PagerDuty, webhooks, and more][12].
 
-Use template variables and Markdown to customize notification messages. Edit, disable, and delete existing notification rules, or create new rules and define custom logic for when a notification is triggered based on severity and rule type.
+Use template variables and Markdown to [customize notification messages][13]. Edit, disable, and delete existing notification rules, or create new rules and define custom logic for when a notification is triggered based on severity and rule type.
 
 {{< img src="security/cspm/rule_notification_setup.png" alt="Cloud Security Posture Management rule notification setup page" width="100%">}}
 
 ## Review and remediate findings
 
-Drill down deeper into details using the [Security Findings Explorer][4]. View detailed information about a resource, such as configuration, detection rules applied to the resource, and tags that provide additional context about who owns the resources and its location within your environment.
+Drill down deeper into details using the [Security Findings Explorer][4]. View detailed information about a resource, such as configuration, detection rules applied to the resource, and tags that provide additional context about who owns the resource and its location within your environment.
 
 {{< img src="security/cspm/security_findings_explorer.png" alt="Cloud Security Posture Management security findings explorer" width="100%">}}
 
@@ -102,3 +102,4 @@ Framework
 [10]: /security/cspm/frameworks_and_benchmarks
 [11]: /security/cspm/frameworks_and_benchmarks#set-notification-targets-for-detection-rules
 [12]: /security/notifications/
+[13]: /security/notifications/#detection-rule-notifications
