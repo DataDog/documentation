@@ -549,9 +549,9 @@ For example, if you are building [metrics from spans][6] to monitor specific ser
 
 {{< tabs >}}
 {{% tab "Java" %}}
-Starting from version [v1.3.0][1], for Java applications, set by-service and by-operation name **span** sampling rules with the `DD_SPAN_SAMPLING_RULES` environment variable.
+Starting in tracing library version [version 1.3.0][1], for Java applications, set by-service and by-operation name **span** sampling rules with the `DD_SPAN_SAMPLING_RULES` environment variable.
 
-For example, to collect `100%` of the spans from the service named `my-service`, for the operation `http.request`, up to `50` spans per second:
+For example, to collect 100% of the spans from the service named `my-service`, for the operation `http.request`, up to 50 spans per second:
 
 ```
 @env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
