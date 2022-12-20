@@ -360,7 +360,7 @@ compression = "gzip"
         "tag_metrics"
       ],
       "default_api_key": "${DATADOG_API_KEY_ENV_VAR}",
-    compression: gzip
+    "compression": "gzip"
    }
   }
 }
