@@ -127,37 +127,11 @@ Use one of the following methods to enable CSPM for your GCP projects:
 
 ### Enable CSPM for Docker
 
-1. Navigate to **Security** > **Setup and Configuration**.
+1. Navigate to **Security** > **Setup & Configuration**.
 2. Follow the [in-app instructions][1] to activate CSPM for your account.
-3. On the **Setup and Configuration** > **Host and containers** tab, click the **[Docker][2]** tile.
+3. On the **Setup & Configuration** > **Host and containers** tab, click the **[Docker][2]** tile.
 4. Click **Select API key** to choose the API key you want to use with CSPM.
-5. Run the following command to enable CSPM in your Docker environment:
-
-    ```bash
-    DOCKER_CONTENT_TRUST=1 \
-      docker run -d --name dd-agent \
-      --security-opt apparmor:unconfined \
-      --cap-add SYS_ADMIN \
-      --cap-add SYS_RESOURCE \
-      --cap-add SYS_PTRACE \
-      --cap-add NET_ADMIN \
-      --cap-add IPC_LOCK \
-      -v /var/run/docker.sock:/var/run/docker.sock:ro \
-      -v /proc/:/host/proc/:ro \
-      -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-      -v /etc/passwd:/etc/passwd:ro \
-      -v /etc/group:/etc/group:ro \
-      -v /:/host/root:ro \
-      -v /etc/os-release:/host/etc/os-release \
-      -v /sys/kernel/debug:/sys/kernel/debug \
-      -e DD_COMPLIANCE_CONFIG_ENABLED=true \
-      -e DD_RUNTIME_SECURITY_CONFIG_ENABLED=true \
-      -e DD_SYSTEM_PROBE_ENABLED=true \
-      -e HOST_ROOT=/host/root \
-      -e DD_API_KEY=<DATADOG_API_KEY> \
-      -e DD_SITE="datadoghq.com" \
-      datadog/agent:latest
-    ```
+5. Copy the command and run it in your Docker environment to enable CSPM.
 
 **Note**: To disable CSPM, set `DD_COMPLIANCE_CONFIG_ENABLED` to `false`. Your previous findings and homepage will still be available in-app, but you will not incur additional billing costs.
 
