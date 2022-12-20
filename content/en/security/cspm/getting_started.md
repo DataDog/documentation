@@ -131,7 +131,7 @@ Use one of the following methods to enable CSPM for your GCP projects:
 2. Follow the [in-app instructions][1] to activate CSPM for your account.
 3. On the **Setup & Configuration** > **Host and containers** tab, click the **[Docker][2]** tile.
 4. Click **Select API key** to choose the API key you want to use with CSPM.
-5. Copy the command and run it in your Docker environment to enable CSPM.
+5. Copy the automatically generated command and run it in your Docker environment to enable CSPM.
 
 **Note**: To disable CSPM, set `DD_COMPLIANCE_CONFIG_ENABLED` to `false`. Your previous findings and homepage will still be available in-app, but you will not incur additional billing costs.
 
