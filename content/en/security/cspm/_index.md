@@ -25,20 +25,21 @@ View a high-level overview of your security posture on the [Overview page][3]. E
 
 ## Maintain compliance with industry frameworks and benchmarks
 
-CSPM detection rules work with Datatog's out-of-the-box integration configurations. Each rule maps to one or more controls and requirements within a compliance standard or industry benchmark, such as the popular CIS compliance benchmarks for Docker and Kubernetes.
+CSPM comes with a set of 400+ out-of-the-box detection rules that are maintained by a team of security experts. Each rule maps to one or more controls and requirements within a compliance standard or industry benchmark, such as the popular PCI and SOC2 compliance frameworks.
 
-[View compliance reports][10] for each framework that include details such as resources with the most failed findings, a comprehensive breakdown of the number of resources with pass/fail findings, and the top three high-severity rule failures. With this information, you can better understand whether your cloud infrastructure is in compliance with aspects of PCI, GDPR, HIPAA, and more.
+[View compliance reports][10] that allow you to see how well you're doing against each control in a compliance framework. The reports include details such as resources with the most failed findings, a comprehensive breakdown of the number of resources with pass/fail findings, and the top three high-severity rule failures.
 
 {{< img src="security/cspm/compliance_frameworks.png" alt="Cloud Security Posture Management compliance framewords" width="100%">}}
+
 ## Manage out-of-the-box and custom detection rules
 
-Use [out-of-the-box detection rules][7] to flag attacker techniques and potential misconfigurations so you can immediately take steps to remediate. Datadog continuously develops new default rules, which are automatically imported into your account. Customize the rules by defining [how each rule scans your environment][6], [create custom rules][8] (GCP only), and [set up real-time notifications for failed findings](#set-up-real-time-notifications).
+[Out-of-the-box detection rules][7] surface the most important risks so that you can immediately take steps to remediate. Datadog continuously develops new default rules, which are automatically imported into your account. Customize the rules by defining [how each rule scans your environment][6], [create custom rules][8] (GCP only), and [set up real-time notifications for failed findings](#set-up-real-time-notifications).
 
 {{< img src="security/cspm/detection_rules.png" alt="Cloud Security Posture Management detection rules" width="100%">}}
 
 ## Set up real-time notifications
 
-[Send real-time notifications][11] when a failed finding is generated for a detection rule, so that your teams can take action to mitigate the risk. Notifications can be sent to [Slack, email, PagerDuty, webhooks, and more][12].
+[Send real-time notifications][11] when a new misconfiguration is detected in your environment, so that your teams can take action to mitigate the risk. Notifications can be sent to [Slack, email, PagerDuty, webhooks, and more][12].
 
 Use template variables and Markdown to customize notification messages. Edit, disable, and delete existing notification rules, or create new rules and define custom logic for when a notification is triggered based on severity and rule type.
 
