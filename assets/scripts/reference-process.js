@@ -52,6 +52,7 @@ function buildSection(specStr, deref, allData) {
   dataEntries.forEach(([key, value]) => {
       const Sx = ("allOf" in value.allOf[0]) ? value.allOf[0].allOf[0] : value.allOf[0];
       const Sx2 = ("allOf" in value.allOf[0]) ? value.allOf[0].allOf[1] : value.allOf[0];
+      console.log(value.description, value.allOf[0].description)
       let entryData = {
         "description1": value.description || "",
         "description2": value.allOf[0].description || "",

@@ -2446,24 +2446,29 @@ main:
     parent: observability_pipelines
     identifier: observability_pipelines_setup
     weight: 1
-  - name: Vector Configurations
-    url: observability_pipelines/vector_configurations/
+  - name: Reference
+    url: observability_pipelines/reference/
     parent: observability_pipelines
+    identifier: observability_pipelines_reference
+    weight: 3
+  - name: Configuration Reference
+    url: observability_pipelines/vector_configurations/
+    parent: observability_pipelines_reference
     identifier: observability_pipelines_vector_configuration
     weight: 2
   - name: Sources
     url: observability_pipelines/reference/sources/
-    parent: observability_pipelines_vector_configuration
+    parent: observability_pipelines_reference
     identifier: observability_pipelines_reference_sources
     weight: 301
   - name: Transforms
     url: observability_pipelines/reference/transforms/
-    parent: observability_pipelines_vector_configuration
+    parent: observability_pipelines_reference
     identifier: observability_pipelines_reference_transforms
     weight: 302
   - name: Sinks
     url: observability_pipelines/reference/sinks/
-    parent: observability_pipelines_vector_configuration
+    parent: observability_pipelines_reference
     identifier: observability_pipelines_reference_sinks
     weight: 303
   - name: Working with Data
