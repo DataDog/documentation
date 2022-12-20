@@ -162,7 +162,7 @@ These widgets can be exported to dashboards and monitors.
 
 Click on any version row in the **List of Versions** table to open a version comparison page, allowing you to compare two versions of the same service. By default, the selected version is compared to all previous versions. You can change the selection to compare any two versions within the past 30 days.
 
-Similar to the graphs on the Application Overview page, User Sessions, Mobile Vitals, and Errors graphs show an overview of a deployment rollout or spikes in error rates. On this page, the graphs highlight the selected versions for comparison and leave all other versions in gray for additional context.
+Similar to the graphs on the **Application Overview** page, the **User Sessions**, **Mobile Vitals**, and **Errors** graphs show an overview of a deployment rollout or spikes in error rates. On this page, the graphs highlight the selected versions for comparison and display all other versions in gray for additional context.
 
 As you are monitoring your release, this makes it easy for you to compare the performance of code deployments against existing live code to verify that new code is performing properly and that no new errors have surfaced in between versions. 
 
