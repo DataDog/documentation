@@ -79,7 +79,7 @@ Once the reports start to be generated, they are updated daily and aggregated mo
 Monthly data can also be pulled using the tool's public API. For more information, see the [API endpoint documentation][1].
 
 
-{{< site-region region="us,eu" >}}
+{{% site-region region="us,eu" %}}
 ### Daily usage attribution
 
 <div class="alert alert-warning">Datadog plans to deprecate daily usage attribution reports on February 1, 2023. As an alternative, use the <a href="/api/latest/usage-metering/#get-hourly-usage-attribution">hourly usage attribution API endpoint</a>.</div>
@@ -93,8 +93,7 @@ This section provides daily reports at an hourly granularity to dig into time fr
 
 Daily data can also be pulled using the tool's public API. For more information, see the [API endpoint documentation][2].
 
-[2]: https://docs.datadoghq.com/api/v1/usage-metering/#get-hourly-usage-attribution
-{{< /site-region >}}
+{{% /site-region %}}
 
 ### Interpreting the data
 
@@ -137,4 +136,5 @@ Each color block represents a unique tag value for each tag.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/api/v1/usage-metering/#get-monthly-usage-attribution
+[2]: https://docs.datadoghq.com/api/v1/usage-metering/#get-hourly-usage-attribution
 [3]: https://docs.datadoghq.com/getting_started/tagging/#defining-tags
