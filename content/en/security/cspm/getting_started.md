@@ -40,9 +40,9 @@ Use one of the following methods to enable CSPM for your AWS accounts:
 
 #### Security Setup & Configuration
 
-1. Navigate to **Security** > **Setup and Configuration**.
+1. Navigate to **Security** > **Setup & Configuration**.
 2. Follow the [in-app instructions][3] to activate CSPM for your account.
-3. On the **Setup and Configuration** > **Cloud Providers** tab, click the **[AWS][4]** tile.
+3. On the **Setup & Configuration** > **Cloud Providers** tab, click the **[AWS][4]** tile.
 4. To enable CSPM for an AWS account, turn on the **Collect Resources** toggle.
 
 #### AWS integration tile
@@ -72,9 +72,9 @@ Use one of the following methods to enable CSPM for your Azure subscriptions:
 
 #### Security Setup & Configuration
 
-1. Navigate to **Security** > **Setup and Configuration**.
+1. Navigate to **Security** > **Setup & Configuration**.
 2. Follow the [in-app instructions][2] to activate CSPM for your account.
-3. On the **Setup and Configuration** > **Cloud Providers** tab, click the **[Azure][3]** tile.
+3. On the **Setup & Configuration** > **Cloud Providers** tab, click the **[Azure][3]** tile.
 4. Enable CSPM for your Azure subscriptions by turning on the **CSPM Enabled** toggle.
 
 #### Azure integration tile
@@ -103,9 +103,9 @@ Use one of the following methods to enable CSPM for your GCP projects:
 
 ### Security Setup & Configuration
 
-1. Navigate to **Security** > **Setup and Configuration**.
+1. Navigate to **Security** > **Setup & Configuration**.
 2. Follow the [in-app instructions][3] to activate CSPM for your account.
-3. On the **Setup and Configuration** > **Cloud Providers** tab, click the **[GCP][4]** tile.
+3. On the **Setup & Configuration** > **Cloud Providers** tab, click the **[GCP][4]** tile.
 4. Enable CSPM for your GCP projects by turning on the **CSPM Enabled** toggle.
 
 ### GCP integration tile
@@ -171,7 +171,7 @@ Use one of the following methods to enable CSPM for your GCP projects:
 ### Enable CSPM for Kubernetes
 
 1. If you haven't already, install the [Datadog Agent][1] (version 7.27+).
-2. Navigate to **Security** > **Setup and Configuration**.
+2. Navigate to **Security** > **Setup & Configuration**.
 3. Follow the [in-app instructions][2] to activate CSPM for your account.
 4. Add the following to the `datadog` section of the `values.yaml` file:
     ```yaml
