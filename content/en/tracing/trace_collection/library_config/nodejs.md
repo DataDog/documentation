@@ -182,7 +182,7 @@ Whether to report the system's hostname for each trace. When disabled, the hostn
 Experimental Features
 : **Configuration**: `experimental`<br>
 **Default**: `{}`<br>
-Experimental features can be enabled by adding predefined keys with a value of `true`. [Contact Sup[4]: /help/port][4] to learn more about the available experimental features.
+Experimental features can be enabled by adding predefined keys with a value of `true`. [Contact Support][4] to learn more about the available experimental features.
 
 Automatically Instrument External Libraries
 : **Configuration**: `plugins`<br>
