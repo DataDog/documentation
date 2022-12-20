@@ -65,20 +65,14 @@ Control
 Resource
 : A configurable entity that needs to be continuously scanned for adherence with one or more controls. Examples of AWS instance resources include hosts, containers, security groups, users, and customer-managed IAM policies.
 
-  {{< img src="security/cspm/getting_started/resource.png" alt="Posture management resource information in the Datadog app" style="width:65%;">}}
-
 Rule
 : A rule evaluates the configuration of a resource to validate an element related to one or more controls. Rules may map to multiple controls, requirements, and frameworks.
-
-  {{< img src="security/cspm/getting_started/rules.png" alt="A list of Cloud Security Posture Management detection rules" style="width:65%;">}}
 
 Findings
 : A finding is the primary primitive for a rule evaluation against a resource. Every time a resource is evaluated against a rule, a finding is generated with a Pass or Fail status.
 
 Framework
 : A collection of requirements that map to an industry benchmark or regulatory standard.
-
-  {{< img src="security/cspm/getting_started/frameworks.png" alt="The frameworks overview in the Cloud Security Posture Management landing page" style="width:100%;">}}
 
 ## Get started
 
