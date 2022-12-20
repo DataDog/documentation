@@ -11,7 +11,7 @@ Cloud Security Posture Management is not currently available in this site.
 </div>
 {{< /site-region >}}
 
-Datadog Cloud Security Posture Management (CSPM) makes it easier to assess and visualize the current and historic security posture of your cloud resources, automate audit evidence collection, and catch misconfigurations that leave your organization vulnerable to attacks.
+Datadog Cloud Security Posture Management (CSPM) makes it easier to assess and visualize the current and historic security posture of your cloud resources, automate audit evidence collection, and remediate misconfigurations that leave your organization vulnerable to attacks.
 
 By continuously surfacing security weaknesses resulting from misconfigurations, teams can easily mitigate risks while ensuring compliance with industry standards.
 
@@ -19,7 +19,7 @@ By continuously surfacing security weaknesses resulting from misconfigurations, 
 
 Strengthen your security posture and achieve continuous compliance by detecting, prioritizing, and remediating misconfigurations across all your cloud resources using Datadog's [out-of-the-box detection rules](#manage-out-of-the-box-and-custom-detection-rules). 
 
-View a high-level overview of your security posture on the [Summary page][3]. Examine the details of findings and analyze historical configurations with the [Security Findings Explorer][9].
+View a high-level overview of your security posture on the [Overview page][3]. Examine the details of findings and analyze historical configurations with the [Security Findings Explorer][9].
 
 {{< img src="security/cspm/summary_page.png" alt="Cloud Security Posture Management summary page" width="100%">}}
 
