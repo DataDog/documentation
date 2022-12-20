@@ -56,13 +56,14 @@ Datadog truncates the following strings if they exceed the indicated number of c
 | [resource][7]   |  5000      |
 | [tag key][8]    |  200       |
 | [tag value][8]  |  5000      |
+| [second primary tag][16]  |  30      |
 
 Additionally, the number of [span tags][8] present on any span cannot exceed 256.
 
 For a given 40 minute interval, Datadog accepts the following combinations. To accommodate larger volumes, contact [support][1] to discuss your use case.
 
 - 1000 unique environments and service combinations
-- 30 unique host groups per environment
+- 30 unique [second primary tag][16] values per environment
 - 100 unique operation names per environment and service
 - 1000 unique resources per environment, service, and operation name
 - 30 unique versions per environment and service
@@ -143,3 +144,4 @@ kubectl exec -it <agent-pod-name> -c trace-agent -- agent flare <case-id> --loca
 [13]: /agent/troubleshooting/debug_mode/?tab=agentv6v7
 [14]: /tracing/custom_instrumentation/
 [15]: /tracing/compatibility_requirements/
+[16]: /tracing/guide/setting_primary_tags_to_scope/?tab=helm#add-a-second-primary-tag-in-datadog

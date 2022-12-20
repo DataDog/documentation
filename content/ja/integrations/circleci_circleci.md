@@ -77,6 +77,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: CircleCI
+  uninstallation: README.md#Uninstallation
 ---
 
 

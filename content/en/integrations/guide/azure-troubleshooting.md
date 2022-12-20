@@ -56,7 +56,7 @@ Turning on Diagnostics allows ARM deployed VMs to collect logging information wh
 
 If you have Azure resources with the same resource name as one of the default parameters, it can lead to naming conflicts. Azure does not allow resources to share resource names within an individual subscription. Datadog recommends renaming the default parameter with a unique name that does not already exist within your environment.
 
-For example, use the -EventhubName flag to change the default name of the eventhub resource, if you already possess an eventhub named 'datadog-eventhub'. 
+For example, use the -EventhubName flag to change the default name of the Eventhub resource, if you already possess an Eventhub named `datadog-eventhub`. 
 
 {{< code-block lang="powershell" filename="Example" >}}
 

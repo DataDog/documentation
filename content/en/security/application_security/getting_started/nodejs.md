@@ -1,5 +1,5 @@
 ---
-title: NodeJS Getting Started with ASM
+title: Node.js Getting Started with ASM
 kind: documentation
 code_lang: nodejs
 type: multi-code-lang
@@ -12,7 +12,7 @@ further_reading:
       text: "Adding user information to traces"
     - link: 'https://github.com/DataDog/dd-trace-js'
       tag: 'GitHub'
-      text: 'NodeJS Datadog Library source code'
+      text: 'Node.js Datadog Library source code'
     - link: "/security/default_rules/#cat-application-security"
       tag: "Documentation"
       text: "OOTB Application Security Management Rules"
@@ -21,13 +21,13 @@ further_reading:
       text: "Troubleshooting Application Security Management"
 ---
 
-You can monitor application security for NodeJS apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate. 
+You can monitor application security for Node.js apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate. 
 
 {{% appsec-getstarted %}}
 
 ## Get started
 
-1. **Update your Datadog NodeJS library package** to at least version 2.0.0, by running:
+1. **Update your Datadog Node.js library package** to at least version 2.0.0, by running:
    ```shell
    npm install dd-trace
    ```
@@ -39,7 +39,7 @@ You can monitor application security for NodeJS apps running in Docker, Kubernet
 
    For information about which language and framework versions are supported by the library, see [Compatibility][2].
 
-2. **Where you import and initialize the NodeJS library for APM, also enable ASM.** This might be either in your code or with environment variables. If you initialized APM in code, add `{appsec: true}` to your init statement:
+2. **Where you import and initialize the Node.js library for APM, also enable ASM.** This might be either in your code or with environment variables. If you initialized APM in code, add `{appsec: true}` to your init statement:
       {{< tabs >}}
 {{% tab "In JavaScript code" %}}
 

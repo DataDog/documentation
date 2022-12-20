@@ -21,7 +21,9 @@ further_reading:
 
 ## Overview
 
-This tutorial walks you through the steps for enabling tracing on a sample Python application installed in a container. In this scenario, the Datadog Agent is also installed in a container. 
+This tutorial walks you through the steps for enabling tracing on a sample Python application installed in a container. In this scenario, the Datadog Agent is also installed in a container.
+
+{{< img src="tracing/guide/tutorials/tutorial-python-containers-overview.png" alt="Diagram showing installation scenario for this tutorial" style="width:100%;" >}}
 
 For other scenarios, including the application and Agent on a host, the application in a container and Agent on a host, and applications written in other languages, see the other [Enabling Tracing tutorials][1].
 

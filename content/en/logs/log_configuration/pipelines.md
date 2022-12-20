@@ -14,9 +14,9 @@ further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
-- link: "https://learn.datadoghq.com/course/view.php?id=10"
+- link: "https://learn.datadoghq.com/courses/going-deeper-with-logs-processing"
   tag: "Learning Center"
-  text: "Going Deeper with Logs: Parsing"
+  text: "Going Deeper with Logs Processing"
 ---
 
 ## Overview

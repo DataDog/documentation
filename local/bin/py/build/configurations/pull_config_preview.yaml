@@ -102,7 +102,7 @@
       - "*/README.md"
       - "*/datadog_checks/*/__about__.py"
 
-  - repo_name: integrations
+  - repo_name: integrations-internal-core
     contents:
 
     - action: integrations
@@ -229,6 +229,7 @@
           - /tracing/setup_overview/ruby/
           - /agent/apm/ruby/
           - /tracing/setup_overview/setup/ruby
+          - /tracing/trace_collection/ruby
 
   - repo_name: datadog-serverless-functions
     contents:

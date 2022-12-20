@@ -18,6 +18,9 @@ further_reading:
 - link: "https://www.datadoghq.com/product/security-platform/application-security-monitoring/"
   tag: "Product Page"
   text: "Datadog Application Security Management"
+- link: "https://www.datadoghq.com/blog/secure-serverless-applications-with-datadog-asm/"
+  tag: "Blog"
+  text: "Secure serverless applications with Datadog ASM"
 ---
 
 {{< img src="/security/application_security/app-sec-landing-page.png" alt="A security signal panel in Datadog, which displays attack flows and flame graphs" width="75%">}}

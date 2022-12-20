@@ -3582,6 +3582,7 @@ components:
           items:
             description: The version name.
             example: FreeBSD
+            nullable: true
             type: string
           type: array
         gohai:
@@ -3597,6 +3598,7 @@ components:
           items:
             description: Version name.
             example: Mac
+            nullable: true
             type: string
           type: array
         machine:
@@ -3608,6 +3610,7 @@ components:
           items:
             description: Version name.
             example: Ubuntu
+            nullable: true
             type: string
           type: array
         platform:
@@ -3635,6 +3638,7 @@ components:
           items:
             description: Version name.
             example: Windows
+            nullable: true
             type: string
           type: array
       type: object
@@ -6317,6 +6321,10 @@ components:
           type: array
         enable_logs_sample:
           description: Whether or not to send a log sample when the log monitor triggers.
+          type: boolean
+        enable_samples:
+          description: Whether or not to send a list of samples when the monitor triggers.
+            This is only used by CI Test and Pipeline monitors.
           type: boolean
         escalation_message:
           default: none
@@ -17140,6 +17148,11 @@ components:
             the current date for all organizations.
           format: int64
           type: integer
+        synthetics_parallel_testing_max_slots_hwm:
+          description: Shows the high-water mark of used synthetics parallel testing
+            slots over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         trace_search_indexed_events_count_sum:
           description: Shows the sum of all Indexed Spans indexed over all hours in
             the current date for all organizations.
@@ -17507,6 +17520,11 @@ components:
         synthetics_check_calls_count_sum:
           description: Shows the sum of all Synthetic API tests over all hours in
             the current date for the given org.
+          format: int64
+          type: integer
+        synthetics_parallel_testing_max_slots_hwm:
+          description: Shows the high-water mark of used synthetics parallel testing
+            slots over all hours in the current date for the given org.
           format: int64
           type: integer
         trace_search_indexed_events_count_sum:
@@ -17918,6 +17936,11 @@ components:
         synthetics_check_calls_count_agg_sum:
           description: Shows the sum of all Synthetic API tests over all hours in
             the current months for all organizations.
+          format: int64
+          type: integer
+        synthetics_parallel_testing_max_slots_hwm_sum:
+          description: Shows the sum of the high-water marks of used synthetics parallel
+            testing slots over all hours in the current month for all organizations.
           format: int64
           type: integer
         trace_search_indexed_events_count_agg_sum:
@@ -18611,6 +18634,8 @@ components:
           type: string
         limit:
           $ref: '#/components/schemas/WidgetFormulaLimit'
+        style:
+          $ref: '#/components/schemas/WidgetFormulaStyle'
       required:
       - formula
       type: object
@@ -18623,6 +18648,20 @@ components:
           type: integer
         order:
           $ref: '#/components/schemas/QuerySortOrder'
+      type: object
+    WidgetFormulaStyle:
+      description: Styling options for widget formulas.
+      properties:
+        palette:
+          description: The color palette used to display the formula. A guide to the
+            available color palettes can be found at https://docs.datadoghq.com/dashboards/guide/widget_colors
+          example: classic
+          type: string
+        palette_index:
+          description: Index specifying which color to use within the palette.
+          example: 1
+          format: int64
+          type: integer
       type: object
     WidgetGrouping:
       description: The kind of grouping to use.
@@ -21192,7 +21231,7 @@ paths:
         schema:
           type: string
       - description: A comma separated list indicating what tags, if any, should be
-          used to filter the list of monitors by scope.
+          used to filter the list of events.
         example: host:host0
         in: query
         name: tags
@@ -28138,6 +28177,18 @@ paths:
     get:
       description: Get the list of all Synthetic tests.
       operationId: ListTests
+      parameters:
+      - description: Used for pagination. The number of tests returned in the page.
+        in: query
+        name: page_size
+        schema:
+          type: string
+      - description: Used for pagination. Which page you want to retrieve. Starts
+          at zero.
+        in: query
+        name: page_number
+        schema:
+          type: string
       responses:
         '200':
           content:
@@ -28164,7 +28215,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - synthetics_read
-      summary: Get the list of all tests
+      summary: Get the list of all Synthetic tests
       tags:
       - Synthetics
       x-menu-order: 10

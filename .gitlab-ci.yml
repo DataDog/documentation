@@ -60,7 +60,7 @@ before_script:
 
 # ================== templates ================== #
 .base_template: &base_template
-  image: public.ecr.aws/x2b9z2t7/webops/site-build:v2.3.0
+  image: public.ecr.aws/x2b9z2t7/webops/site-build:test
   tags:
     - "runner:main"
   except:
@@ -89,10 +89,11 @@ build_preview:
     - make config
     - ./node_modules/.bin/jest --testPathPattern=assets/scripts/tests/
     - yarn run prebuild
-    - yarn run build:preview
+    - build_site
     # remove service_checks json as we don't need to s3 push that..
     - rm -rf data/service_checks
     - in-isolation deploy_preview > logs/deploy.txt
+    - pass_step "deploy_preview"
     # remove static images so we can skip from artifact passed in gitlab
     - remove_static_from_repo
     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_REF_NAME}> is ready for preview. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}| checks running>." "#31b834"
@@ -228,8 +229,9 @@ build_live:
     - make clean-examples
     - make dependencies
     - yarn run prebuild
-    - yarn run build:live
+    - build_site
     - in-isolation deploy_live
+    - pass_step "deploy_live"
     - create_artifact
     - create_artifact_ignored
     - remove_static_from_repo
