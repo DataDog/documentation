@@ -25,11 +25,11 @@ The [AWS integration resource][9], [Azure integration resource][10], and [Google
 
 ### Monitors
 
-With data flowing into your Datadog account, implement [alerting with Datadog monitors][8] to be notified about any unexpected changes or anomalous behavior. Use the [monitor resource][4]  to create and manage your monitors, or use the [monitor JSON resource][5] to use JSON definitions for your monitors. See the [create a monitor][6] section of the main Terraform documentation for an example `monitor.tf` file that creates a [Live Process monitor][7].
+With data flowing into your Datadog account, implement [alerting with Datadog monitors][8] to be notified about any unexpected changes or anomalous behavior. Use the [monitor resource][4] to create and manage your monitors, or use the [monitor JSON resource][5] to use JSON definitions for your monitors. See the [create a monitor][6] section of the main Terraform documentation for an example `monitor.tf` file that creates a [Live Process monitor][7].
 
 ### Account management
 
-As your team and organization grows, you can use Terraform to scale Datadog to your needs. Create users with the [user][19] resource and assign them customized [permission sets][21] with the [role resource][20] . You can also create and manage your account's [API and Application keys][22] through the [API key resource][23] and [Application key resource][24], as well as adding [child organizations][25] with the [child organization resource][26].
+As your team and organization grow, you can use Terraform to scale Datadog to your needs. Create users with the [user][19] resource and assign them customized [permission sets][21] with the [role resource][20] . You can also create and manage your account's [API and application keys][22] through the [API key resource][23] and [application key resource][24], as well as adding [child organizations][25] with the [child organization resource][26].
 
 ### Dashboards
 
@@ -41,7 +41,7 @@ You can send custom API requests and payloads to your own services in response t
 
 ## Go further with Terraform
 
-Follow the [Terraform Datadog Provider][28] tutorial for a detailed walk-through of implementing and managing Datadog with Terraform, including the deployment of an example Kubernetes application with the Datadog Agent and the creation of synthetic tests.
+Follow the [Terraform Datadog Provider][28] tutorial for a detailed walk-through of implementing and managing Datadog with Terraform, including the deployment of an example Kubernetes application with the Datadog Agent and the creation of [synthetic test][31].
 
 ## Further Reading
 
@@ -77,3 +77,4 @@ Follow the [Terraform Datadog Provider][28] tutorial for a detailed walk-through
 [28]: https://developer.hashicorp.com/terraform/tutorials/use-case/datadog-provider
 [29]: /integrations/webhooks/
 [30]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/webhook
+[31]: /synthetics/
