@@ -163,7 +163,7 @@ If you've configured the profiler and don't see profiles in the profile search p
 - Operating system type and version (for example, Linux Ubuntu 20.04)
 - Runtime type, version, and vendor (for example, Python 3.9.5)
 
-Please refer to the python APM client [troubleshooting documentation][3] for additional guidance.  
+Refer to the python APM client [troubleshooting documentation][3] for additional guidance.  
 
 [1]: /tracing/troubleshooting/#tracer-debug-logs
 [2]: /help/
