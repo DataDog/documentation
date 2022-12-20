@@ -28,6 +28,8 @@ The default sort for spans in the list visualization is by timestamp, with the m
 
 The configuration of the columns is stored alongside other elements of your troubleshooting context in saved views.
 
+You may see spans without data under the "LATENCY BREAKDOWN" column (There are some examples pictured in the GIF above). This can happen if the trace is somehow malformed, for example if there is a loop in the trace or if the root span is missing. Sometimes, the root service may decide to drop the trace but a downstream service thinks it’s interesting to keep (rare resource, or error trace for eg). This means that only the downstream-service spans are ingested, resulting in an incomplete trace. It would be misleading to display a latency breakdown for an incomplete trace, so in these cases, the data is omitted instead. 
+
 ## Timeseries
 
 Use timeseries to visualize the evolution of a [measure][3] (or a count of unique tag values) over a selected time frame, and optionally split the data by up to three tags (grouping).
