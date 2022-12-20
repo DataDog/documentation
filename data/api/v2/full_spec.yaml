@@ -1797,7 +1797,12 @@ components:
           type: string
       type: object
     CloudConfigurationComplianceRuleOptions:
-      description: Options for cloud_configuration rules.
+      description: 'Options for cloud_configuration rules.
+
+        Fields `resourceType` and `regoRule` are mandatory when managing custom `cloud_configuration`
+        rules.
+
+        '
       properties:
         complexRule:
           description: 'Whether the rule is a complex one.
@@ -1816,9 +1821,6 @@ components:
             '
           example: aws_acm
           type: string
-      required:
-      - resourceType
-      - regoRule
       type: object
     CloudConfigurationRegoRule:
       description: Rule details.
