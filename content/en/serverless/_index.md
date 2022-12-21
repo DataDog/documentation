@@ -31,7 +31,7 @@ further_reading:
 
 [Datadog Serverless Monitoring][1] provides full visibility into all of the managed services that power your serverless applications by bringing together real-time metrics, logs and traces from your serverless compute as well as related fully-managed APIs, queues, streams and data stores.
 
-Datadog provides solutions for monitoring [AWS Lambda](#aws-lambda), Azure App Service, Azure Container Apps, and Google Cloud Run.
+Datadog provides solutions for monitoring [AWS Lambda](#aws-lambda), [Azure App Service](#azure-app-service), [Azure Container Apps](#azure-container-apps), and [Google Cloud Run](#google-cloud-run).
 
 ### AWS Lambda
 
