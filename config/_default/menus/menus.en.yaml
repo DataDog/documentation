@@ -6407,9 +6407,9 @@ api:
         - CreateTest
       unstable: []
       order: 27
-  - name: Get the list of all Synthetic tests
-    url: '#get-the-list-of-all-synthetic-tests'
-    identifier: synthetics-get-the-list-of-all-synthetic-tests
+  - name: Get the list of all tests
+    url: '#get-the-list-of-all-tests'
+    identifier: synthetics-get-the-list-of-all-tests
     parent: synthetics
     generated: true
     params:
