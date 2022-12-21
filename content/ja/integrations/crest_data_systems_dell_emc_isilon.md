@@ -99,6 +99,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Dell EMC Isilon
+  uninstallation: README.md#Uninstallation
 ---
 
 ## 概要

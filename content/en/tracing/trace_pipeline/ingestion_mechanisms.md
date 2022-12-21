@@ -68,16 +68,16 @@ The configuration can be set by environment variables or directly in the code:
 
 {{< tabs >}}
 {{% tab "Java" %}}
-For Java applications, set a global sampling rate in the library using the `DD_TRACE_SAMPLE_RATE` environment variable. Set by-service sampling rates with the `DD_TRACE_SAMPLING_SERVICE_RULES` environment variable.
+For Java applications, set a global sampling rate in the library using the `DD_TRACE_SAMPLE_RATE` environment variable. Set by-service sampling rates with the `DD_TRACE_SAMPLING_RULES` environment variable.
 
 For example, to send 20% of the traces for the service named `my-service`:
 
 ```
 # using system property
-java -Ddd.trace.sampling.service.rules=my-service:0.2 -javaagent:dd-java-agent.jar -jar my-app.jar
+java -Ddd.trace.sampling.rules=my-service:0.2 -javaagent:dd-java-agent.jar -jar my-app.jar
 
 # using environment variables
-export DD_TRACE_SAMPLING_SERVICE_RULES=my-service:0.2
+export DD_TRACE_SAMPLING_RULES=[{"service": "my-service", "sample_rate": 0.2}]
 ```
 
 The service name value is case sensitive and must match the case of the actual service name.
@@ -548,6 +548,20 @@ For example, if you are building [metrics from spans][6] to monitor specific ser
 
 
 {{< tabs >}}
+{{% tab "Java" %}}
+Starting in tracing library version [version 1.3.0][1], for Java applications, set by-service and by-operation name **span** sampling rules with the `DD_SPAN_SAMPLING_RULES` environment variable.
+
+For example, to collect 100% of the spans from the service named `my-service`, for the operation `http.request`, up to 50 spans per second:
+
+```
+@env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
+```
+
+Read more about sampling controls in the [Java tracing library documentation][2].
+
+[1]: https://github.com/DataDog/dd-trace-java/releases/tag/v1.3.0
+[2]: /tracing/trace_collection/dd_libraries/java
+{{% /tab %}}
 {{% tab "Python" %}}
 Starting from version [v1.4.0][1], for Python applications, set by-service and by-operation name **span** sampling rules with the `DD_SPAN_SAMPLING_RULES` environment variable.
 
@@ -562,14 +576,6 @@ Read more about sampling controls in the [Python tracing library documentation][
 
 [1]: https://github.com/DataDog/dd-trace-py/releases/tag/v1.4.0
 [2]: /tracing/trace_collection/dd_libraries/python
-{{% /tab %}}
-{{% tab "Java" %}}
-For Java applications, single span sampling rules are not supported. Contact [Datadog Support][1] if you are interested in this potential future feature.
-
-Read more about sampling controls in the [Java tracing library documentation][2].
-
-[1]: https://www.datadoghq.com/support/
-[2]: /tracing/trace_collection/dd_libraries/java
 {{% /tab %}}
 {{% tab "Ruby" %}}
 Starting from version [v1.5.0][1], for Ruby applications, set by-service and by-operation name **span** sampling rules with the `DD_SPAN_SAMPLING_RULES` environment variable.
