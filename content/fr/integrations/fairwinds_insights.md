@@ -26,16 +26,6 @@ categories:
 - containers
 - gestion des coûts
 - security
-classifier_tags:
-- Supported OS::Linux
-- Supported OS::Mac OS
-- Supported OS::Windows
-- Category::Marketplace
-- Category::Containers
-- Category::Cost Management
-- Category::Security
-- Offering::Software License
-- Offering::Integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -67,6 +57,16 @@ supported_os:
 - windows
 tile:
   changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Mac OS
+  - Supported OS::Windows
+  - Category::Marketplace
+  - Category::Containers
+  - Category::Cost Management
+  - Category::Security
+  - Offering::Software License
+  - Offering::Integration
   configuration: README.md#Setup
   description: Protège et optimise vos applications Kubernetes critiques
   media:
@@ -122,6 +122,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Fairwinds Insights
+  uninstallation: README.md#Uninstallation
 ---
 
 
@@ -175,9 +176,6 @@ Téléphone : +1 617-202-3659 E-mail : sales@fairwinds.com
 
 La documentation est disponible [ici](https://insights.docs.fairwinds.com/). Vous découvrirez comment configurer, intégrer et utiliser Fairwinds Insights pour exploiter tout son potentiel.
 
----
-Cette application est disponible sur le Marketplace et développée par un partenaire de Datadog. [Cliquez ici](https://app.datadoghq.com/marketplace/app/fairwinds-insights/pricing) pour l'acheter.
-
 ### Questions fréquentes
 
 **Comment fonctionne Fairwinds Insights ?**
@@ -214,3 +212,6 @@ Fairwinds Insights offre des intégrations pour un large éventail d'outils open
 Politique d'annulation et de remboursement d'Insights :
 
 Fairwinds Insights est proposé sous forme d'abonnement mensuel que vous, le client, pouvez interrompre à tout moment par les moyens mis à votre disposition via votre compte Marketplace Datadog. Si vous choisissez de mettre fin à votre abonnement, seul le reste de la période de facturation mensuelle en cours vous sera facturé. Insights n'émettra aucun remboursement pour les frais déjà payés.
+
+---
+Cette application est disponible sur le Marketplace et développée par un partenaire technologique de Datadog. <a href="https://app.datadoghq.com/marketplace/app/fairwinds-insights" target="_blank">Cliquez ici</a> pour l'acheter.

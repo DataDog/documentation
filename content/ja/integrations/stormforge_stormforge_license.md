@@ -33,10 +33,10 @@ pricing:
   includes_assets: true
   metric: datadog.marketplace.stormforge
   product_id: stormforge-license
-  short_description: 1 コンテナあたり 3 ドル/月
-  tag: container
-  unit_label: Kubernetes コンテナ
-  unit_price: 3
+  short_description: $5 per core per month
+  tag: コア
+  unit_label: Cluster core
+  unit_price: 5
 public_title: StormForge
 short_description: 機械学習を用いた Kubernetes リソースのリアルタイム最適化
 supported_os:

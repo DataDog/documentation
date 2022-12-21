@@ -79,6 +79,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Sedai
+  uninstallation: README.md#Uninstallation
 ---
 
 ## 概要

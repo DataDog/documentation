@@ -8,7 +8,7 @@ assets:
     events:
       creates_events: false
     metrics:
-      check: ''
+      check: []
       metadata_path: metadata.csv
       prefix: federatorai.
     service_checks:
@@ -86,6 +86,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: ProphetStor Federator.ai
+  uninstallation: README.md#Uninstallation
 ---
 
 
@@ -117,7 +118,7 @@ ProphetStor Federator.ai ライセンスを使用すると、AI ベースのソ�
 [6]: https://www.datadoghq.com/
 [7]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
 [8]: https://prophetstor.com/wp-content/uploads/documentation/Federator.ai/Latest%20Version/ProphetStor%20Federator.ai%20User%20Guide.pdf
-[9]: https://app.datadoghq.com/account/settings#integrations/federatorai
+[9]: /ja/integrations/federatorai
 
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/prophetstor-federatorai-license" target="_blank">こちらをクリック</a>してください。
