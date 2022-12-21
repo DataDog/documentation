@@ -112,7 +112,7 @@ By default, Agent v6 uses the instance's hostname provided by GCE. This matches 
 
 If you're upgrading from Agent v5 with `gce_updated_hostname` unset or set to false, and the hostname of the Agent is not hardcoded in `datadog.conf`/`datadog.yaml`, the reported hostname on Datadog changes from the GCE instance `name` to the full GCE instance `hostname` (which includes the GCE project id).
 
-[1]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
+[1]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6v7#other-commands
 [2]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "Agent v5" %}}
