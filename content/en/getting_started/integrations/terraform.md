@@ -41,7 +41,7 @@ You can send custom API requests and payloads to your own services in response t
 
 ## Go further with Terraform
 
-Follow the [Terraform Datadog Provider][28] tutorial for a detailed walk-through of implementing and managing Datadog with Terraform, including the deployment of an example Kubernetes application with the Datadog Agent and the creation of [synthetic test][31].
+Follow the [Terraform Datadog Provider][28] tutorial for a detailed walk-through of implementing and managing Datadog with Terraform, including the deployment of an example Kubernetes application with the Datadog Agent and the creation of [synthetic tests][31].
 
 ## Further Reading
 
