@@ -82,11 +82,11 @@ The Datadog extension for Azure App Service provides tracing capabilities for Az
 
 ### Azure Container Apps
 
-tk
+Azure Container Apps is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Container Apps through the [Azure integration][6]. Datadog also provides a solution, now in beta, for instrumenting your Container Apps applications with a purpose-built Agent to enable tracing, custom metrics, and direct log collection.
 
 ### Google Cloud Functions
 
-Google Cloud Functions is a lightweight, event-based, asynchronous compute solution that allows you to create small, single-purpose functions. To monitor serverless functions running on Google Cloud Platform, enable the [Google Cloud Platform integration][6].
+Google Cloud Functions is a lightweight, event-based, asynchronous compute solution that allows you to create small, single-purpose functions. To monitor serverless functions running on Google Cloud Platform, enable the [Google Cloud Platform integration][7].
 
 ## Further Reading
 
@@ -97,4 +97,5 @@ Google Cloud Functions is a lightweight, event-based, asynchronous compute solut
 [3]: /serverless/#google-cloud-functions
 [4]: https://app.datadoghq.com/functions?cloud=azure&config_serverless-azure-app=true&group=service
 [5]: /infrastructure/serverless/azure_app_services/#overview
-[6]: /integrations/google_cloud_platform/
+[6]: /integrations/azure/#log-collection
+[7]: /integrations/google_cloud_platform/
