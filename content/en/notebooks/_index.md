@@ -31,7 +31,7 @@ Notebooks combine graphs and text in a linear, cell-based format. They help you 
 
 ## Collaboration
 
-<!-- Need an updated image for to see multiple users -->
+{{< img src="notebooks/collaboration.png" alt="Indicators of users viewing the notebook and making live edits" style="width:100%;">}}
 
 Notebooks support real-time collaboration. Presence indicators show who is viewing your notebook at any time and show real-time edits and comments. 
 
@@ -41,9 +41,9 @@ Everyone on your team can open or edit any notebook, but a notebook can only be 
 
 ### Commenting
 
-To add a comment, select some text or hover over a graph. The **Add comment** button is displayed to the right of the cell.
+To add a comment, select some text or hover over a graph. The **Add comment** icon is displayed to the right of the cell.
 
-{{< img src="notebooks/comment.png" alt="add a comment to text" style="width:100%;">}}
+<!-- {{< img src="notebooks/comment.png" alt="add a comment to text" style="width:100%;">}} -->
 
 Click the menu on the top-right of your comment to edit or delete a comment you wrote.
 
@@ -52,6 +52,8 @@ View or re-open resolved comments in the Comment History, available in the Noteb
 Notebook authors receive email notifications for new comments on their notebooks, and commenters are notified for replies to their comments. Manage your notification settings through `Notifications` in the notebook cog menu.
 
 ### Read mode
+
+{{< img src="notebooks/read_mode.png" alt="Read mode drop down menu" style="width:100%;">}}
 
 From the Notebook List, click on the eye icon to open a notebook in View Mode. This allows you to explore the information without edits. You can switch between modes from within the Notebook by selecting the dropdown at the top right of your notebook.
 
@@ -64,8 +66,6 @@ From the Notebook List, click on the eye icon to open a notebook in View Mode. T
 ## Share notebooks
 
 Click on the cog icon in the upper right of a notebook to see sharing options. Notebooks can be exported to PDF, Markdown, or any document editor.
-
-{{< img src="notebooks/notebook_share_menu.png" alt="Notebook sharing menu" style="width:100%;">}}
 
 To copy a notebook into a document editor, click **Copy formatted contents**. Paste into a document editor like Google Docs or Microsoft Word to see notebook contents, including graphs, with original formatting.
 
@@ -124,7 +124,7 @@ Notebooks can be grouped into types, this gives you quick access to relevant inf
 
 Notebooks can be set to automatically snapshot graphs that might expire. Enable this by clicking **Turn on snapshots** in the cog menu of any notebook. Use the cog menu to view snapshots or turn off automatic snapshots. Turn off automatic snapshots to remove access to existing snapshots.
 
-{{< img src="notebooks/turn_on_snapshot.png" alt="Cog menu option to turn on snapshots" style="width:100%;">}}
+{{< img src="notebooks/cog_snapshots.png" alt="Cog menu option to turn on snapshots" style="width:100%;">}}
 
  Notebooks with snapshots enabled automatically capture a static image of any graphs with a fixed time range (for example, `Aug 18, 12:00 am – Aug 19, 11:59 pm`). These snapshots update when the graph is updated, as long as the new graph also has a fixed time range. Changing the graph to a global time range (like `Past 1 Hour`) removes the snapshot.
 
@@ -151,7 +151,7 @@ In a Notebook cell, click **Edit** to view the cell configuration in edit mode. 
 * **Graph legend**: Uncheck the box to hide the legend. Legends are automatically disabled for `XS` and `S` graphs.
 * **Grouping**: Display one graph per tag value to see small multiples of your visualization.
 
-{{< img src="notebooks/layout_options.png" alt="layout options for graph size, legend, and grouping configuration" style="width:50%;">}}
+{{< img src="notebooks/edit_cell_action_menu.png" alt="layout options for graph size, legend, and grouping configuration" style="width:100%;">}}
 
 **Note**: Changing any of these settings only affects the targeted cell.
 
