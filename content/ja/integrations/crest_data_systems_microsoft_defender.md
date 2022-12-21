@@ -103,6 +103,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Microsoft 365 Defender for Endpoint インテグレーション
+  uninstallation: README.md#Uninstallation
 ---
 
 
