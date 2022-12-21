@@ -31,23 +31,23 @@ further_reading:
 
 [Datadog Serverless Monitoring][1] provides full visibility into all of the managed services that power your serverless applications by bringing together real-time metrics, logs and traces from your serverless compute as well as related fully-managed APIs, queues, streams and data stores.
 
-The following section outlines Datadog's solution for monitoring AWS serverless applications and Lambda functions. You can also learn more about support for monitoring [Azure serverless][2] and [Google serverless][3] applications.
-
-Datadog provides solutions for monitoring AWS Lambda, Azure App Service, Azure Container Apps, and Google Cloud Run.
+Datadog provides solutions for monitoring [AWS Lambda](#aws-lambda), Azure App Service, Azure Container Apps, and Google Cloud Run.
 
 ### AWS Lambda
 
-Serverless Monitoring enables you to correlate high-level metrics from AWS resources with those of Lambda functions, so you can quickly spot issues and start your investigation.
+[Serverless Monitoring for AWS Lambda][2] enables you to correlate high-level metrics from AWS resources with those of Lambda functions, so you can quickly spot issues and start your investigation.
 
-Enhanced Lambda metrics, which appear in Datadog with the prefix `aws.lambda.enhanced`, are available at second granularity and in near real time. You can use enhanced Lambda metrics for alerts or SLOs on cold starts, estimated AWS costs, timeouts, out-of-memory errors, and memory usage across all of your Lambda functions.
+[Enhanced Lambda metrics][3], which appear in Datadog with the prefix `aws.lambda.enhanced`, are available at second granularity and in near real time. You can use enhanced Lambda metrics for alerts or SLOs on cold starts, estimated AWS costs, timeouts, out-of-memory errors, and memory usage across all of your Lambda functions.
 
-Deployment tracking helps you to correlate serverless code, configuration, and deployment changes with metrics, traces, and logs from your functions for real-time insight into how these changes may affect the health and performance of your applications.
+With [Distributed Tracing][4], you can connect your serverless traces to metrics for a context-rich picture of your application's performance. The Datadog Python, Node.js, Ruby, Go, Java, and .NET tracing libraries support distributed tracing for AWS Lambda.
+
+[Deployment Tracking][5] helps you to correlate serverless code, configuration, and deployment changes with metrics, traces, and logs from your functions for real-time insight into how these changes may affect the health and performance of your applications.
 
 ### Azure App Service
 
-The Datadog extension for Azure App Service provides tracing capabilities for Azure Web Apps. 
+The [Datadog extension for Azure App Service][6] provides tracing capabilities for Azure Web Apps. 
 
-Use the [Azure App Service view][4] to:
+Use the [Azure App Service view][7] to:
 
 - Quickly identify apps with high latency or errors
 
@@ -57,24 +57,32 @@ Use the [Azure App Service view][4] to:
 
 - Map the apps running on your App Service Plans to identify apps that may be impacting costs or performance
 
-The Datadog extension for Azure App Service provides tracing capabilities for Azure Web Apps. For more information about setting up tracing in Azure, see the [Azure App Service Extension documentation][5].
+The Datadog extension for Azure App Service provides tracing capabilities for Azure Web Apps. For more information about setting up tracing in Azure, see [Azure App Service][6].
 
 ### Azure Container Apps
 
-Azure Container Apps is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Container Apps through the [Azure integration][6]. Datadog also provides a solution, now in beta, for instrumenting your Container Apps applications with a purpose-built Agent to enable tracing, custom metrics, and direct log collection.
+Azure Container Apps is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Container Apps through the [Azure integration][8]. 
 
-### Google Cloud Functions
+Datadog also provides a solution, now in beta, for [instrumenting your Container Apps applications][9] with a purpose-built Agent to enable tracing, custom metrics, and direct log collection.
 
-Google Cloud Functions is a lightweight, event-based, asynchronous compute solution that allows you to create small, single-purpose functions. To monitor serverless functions running on Google Cloud Platform, enable the [Google Cloud Platform integration][7].
+### Google Cloud Run
+
+Google Cloud Run is a lightweight, event-based, asynchronous compute solution that allows you to create small, single-purpose functions. To monitor serverless functions running on Google Cloud Platform, enable the [Google Cloud Platform integration][10].
+
+Datadog also provides a solution, now in public beta, for [instrumenting your Cloud Run applications][11] with a purpose-built Agent to enable tracing, custom metrics, and direct log collection.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: http://app.datadoghq.com/functions
-[2]: /serverless/#azure-app-service
-[3]: /serverless/#google-cloud-functions
-[4]: https://app.datadoghq.com/functions?cloud=azure&config_serverless-azure-app=true&group=service
-[5]: /infrastructure/serverless/azure_app_services/#overview
-[6]: /integrations/azure/#log-collection
-[7]: /integrations/google_cloud_platform/
+[2]: /serverless/aws_lambda
+[3]: /serverless/enhanced_lambda_metrics
+[4]: /serverless/distributed_tracing
+[5]: /serverless/deployment_tracking
+[6]: /infrastructure/serverless/azure_app_services/#overview
+[7]: https://app.datadoghq.com/functions?cloud=azure&config_serverless-azure-app=true&group=service
+[8]: /integrations/azure/#log-collection
+[9]: /serverless/azure_container_apps
+[10]: /integrations/google_cloud_platform/
+[11]: /serverless/google_cloud_run
