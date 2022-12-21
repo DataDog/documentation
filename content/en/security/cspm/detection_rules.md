@@ -16,15 +16,23 @@ Cloud Security Posture Management is not currently available in this site.
 </div>
 {{< /site-region >}}
 
-Datadog provides [out-of-the-box (OOTB) detection rules][1] to flag potential misconfigurations and help improve your security posture. OOTB detection rules follow the same [conditional logic][2] as all Datadog Security detection rules.
+Out-of-the-box detection rules surface the most important risks so that you can immediately take steps to remediate. Datadog continuously develops new default rules, which are automatically imported into your account. Customize the rules by defining how each rule scans your environment, create custom rules (GCP only), and set up real-time notifications for failed findings.
 
-These detection rules work with out-of-the-box integration configurations and map to controls within a [compliance framework or industry benchmark][4]. When new default configuration detection rules are added, they are automatically imported into your account.
+---
+
+Datadog Cloud Security Posture Management (CSPM) comes with a set of [out-of-the-box detection rules][1] that evaluate the configuration of your cloud resources and identifies potential misconfigurations so you can immediately take steps to remediate. When new detection rules are added, they are automatically imported into your account.
+
+The detection rules follow the same [conditional logic][2] as all Datadog Security detection rules. For CSPM, each rule maps to controls within one or more [compliance frameworks or industry benchmarks][4].
 
 Datadog Cloud Security Posture Management (CSPM) uses the following rule types to validate the configuration of your cloud infrastructure:
 
-- [**Cloud configuration**][1]: These detection rules analyze the configuration of resources within your cloud environment. For example, the rule [Cloudfront distribution is encrypted][3] evaluates an AWS Cloudfront distribution's configuration for encrypted status.
+- [**Cloud configuration**][1]: These detection rules analyze the configuration of resources within your cloud environment.
 
-- [**Infrastructure configuration**][5]: These detection rules analyze your containers and Kubernetes clusters to find configuration issues, as defined in the popular CIS compliance benchmarks for Docker and Kubernetes. For example, the rule [/etc/default/docker file permissions are set to 644 or more restrictively][6] evaluates Docker file permissions running on a host.
+- [**Infrastructure configuration**][5]: These detection rules analyze your containers and Kubernetes clusters to find configuration issues, as defined in the popular CIS compliance benchmarks for Docker and Kubernetes.
+
+For example, the rule [/etc/default/docker file permissions are set to 644 or more restrictively][6] evaluates Docker file permissions running on a host.
+
+For example, the rule [Cloudfront distribution is encrypted][3] evaluates an AWS Cloudfront distribution's configuration for encrypted status.
 
 Customization of a cloud configuration query directly is not supported at this time, but you can customize how you environment is [scanned][4] for each rule.
 
