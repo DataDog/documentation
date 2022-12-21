@@ -6,6 +6,7 @@ aliases:
   - /security_platform/cloud_siem/cloud_siem_investigator/
   - /security_platform/cloud_siem/investigator/
   - /security/cloud_siem/cloud_security_investigator/
+  - /security/cloud_siem/cloud_siem_investigator/
 further_reading:
 - link: "/cloud_siem/explorer/"
   tag: "Documentation"
