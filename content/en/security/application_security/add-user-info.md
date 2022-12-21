@@ -234,7 +234,7 @@ For information and options, read [the Node.js tracer documentation][1].
 
 
 
-[1]: https://github.com/DataDog/dd-trace-js/blob/master/docs/API.md#user-identification
+[1]: https://datadoghq.dev/dd-trace-js/#set-user
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python" >}}

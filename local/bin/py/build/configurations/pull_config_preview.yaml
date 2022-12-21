@@ -291,6 +291,33 @@
           aliases:
             - /serverless/datadog_lambda_library/
             - /serverless/serverless_integrations/cli/
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'src/commands/synthetics/README.md'
+      options:
+        dest_path: '/continuous_testing/cicd_integrations/'
+        file_name: 'configuration.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/datadog-ci/blob/master/src/commands/synthetics/README.md"]
+          title: Continuous Testing and CI/CD Configuration
+          kind: documentation
+          description: Configure Continuous Testing to run tests in your CI/CD pipelines.
+          aliases:
+            - /synthetics/cicd_integrations/configuration
+          further_reading:
+          - link: "https://www.datadoghq.com/blog/datadog-github-action-synthetics-ci-visibility/"
+            tag: "Blog"
+            text: "Use Datadog's GitHub Action to add continuous testing to workflows"
+          - link: "/continuous_testing/cicd_integrations"
+            tag: "Documentation"
+            text: "Learn about Continuous Testing and CI/CD"
+          - link: "/continuous_testing/explorer"
+            tag: "Documentation"
+            text: "Learn about the CI Results Explorer"
+          - link: "/continuous_testing/testing_tunnel"
+            tag: "Documentation"
+            text: "Learn about the Testing Tunnel"
 
   - repo_name: datadog-cdk-constructs
     contents:

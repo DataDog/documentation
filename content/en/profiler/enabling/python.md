@@ -35,6 +35,8 @@ The following profiling features are available depending on your Python version:
 | Lock profiling       | Python >= 2.7                      |
 | Memory profiling     | Python >= 3.5                      |
 
+The installation requires pip version 18 or above.
+
 ## Installation
 
 Install `ddtrace`, which provides both tracing and profiling functionalities:
