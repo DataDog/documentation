@@ -917,7 +917,7 @@ main:
     parent: serverless_aws_lambda
     identifier: serverless_aws_lambda_installation
     weight: 101
-  - name: Advanced Configurations (AWS Lambda)
+  - name: Advanced Configuration
     url: serverless/configuration
     parent: serverless_aws_lambda
     identifier: serverless_configuration
