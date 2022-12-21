@@ -43,8 +43,6 @@ Everyone on your team can open or edit any notebook, but a notebook can only be 
 
 To add a comment, select some text or hover over a graph. The **Add comment** icon is displayed to the right of the cell.
 
-<!-- {{< img src="notebooks/comment.png" alt="add a comment to text" style="width:100%;">}} -->
-
 Click the menu on the top-right of your comment to edit or delete a comment you wrote.
 
 View or re-open resolved comments in the Comment History, available in the Notebook cog menu.
