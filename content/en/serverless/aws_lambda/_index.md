@@ -1,6 +1,28 @@
 ---
 title: Serverless Monitoring for AWS Lambda
 kind: documentation
+further_reading:
+- link: '/serverless/configuration/'
+  tag: 'Documentation'
+  text: 'Configure Serverless monitoring'
+- link: "/integrations/amazon_lambda/"
+  tag: "Documentation"
+  text: "AWS Lambda integration"
+- link: "https://www.datadoghq.com/blog/monitoring-lambda-containers/"
+  tag: "Blog"
+  text: "Monitor AWS Lambda functions deployed using container images"
+- link: "https://www.datadoghq.com/blog/manage-serverless-logs-datadog/"
+  tag: "Blog"
+  text: "Best practices for collecting and managing serverless logs"
+- link: "https://www.datadoghq.com/blog/aws-serverless-application-design/"
+  tag: "Blog"
+  text: "Designing production-ready AWS serverless applications"
+- link: "https://www.datadoghq.com/blog/well-architected-serverless-applications-best-practices/"
+  tag: "Blog"
+  text: "Best practices for building serverless applications that follow AWS's Well-Architected Framework"
+- link: "https://www.datadoghq.com/blog/aws-lambda-functions-ephemeral-storage-monitoring/"
+  tag: "Blog"
+  text: "Monitor your AWS Lambda functions' ephemeral storage usage"
 ---
 
 To get started, follow the [installation instructions][1] to collect metrics, traces, and logs from your serverless applications.
