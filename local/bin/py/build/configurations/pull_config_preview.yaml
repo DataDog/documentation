@@ -1135,6 +1135,18 @@
       options:
         dest_path: '/security/default_rules/'
 
+  - repo_name: infrastructure-resources
+    contents:
+    - action: pull-and-push-folder
+      branch: victoria.ding/external-docs
+      globs:
+        - "generated/md/external/*.md"
+      options:
+        dest_dir: '/security/cspm/custom_rules/'
+        path_to_remove: 'generated/md/external/'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/infrastructure-resources/blob/prod/README.md"]
+
   - repo_name: apps
     contents:
     - action: pull-and-push-file
