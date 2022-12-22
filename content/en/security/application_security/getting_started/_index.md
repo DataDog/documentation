@@ -23,6 +23,9 @@ further_reading:
 - link: "/security/application_security/how-appsec-works/"
   tag: "Documentation"
   text: "How Application Security Management Works in Datadog"
+- link: "https://www.datadoghq.com/blog/secure-serverless-applications-with-datadog-asm/"
+  tag: "Blog"
+  text: "Secure serverless applications with Datadog ASM"
 ---
 
 Set up your application to [detect and protect against threats][1] targeting your production systems, using the Datadog library for your application language. You can monitor application security for apps hosted directly on a server, Docker, Kubernetes, AWS ECS, and (for supported languages) AWS Fargate.

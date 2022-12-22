@@ -1,0 +1,25 @@
+{
+  "meta": {},
+  "data": {
+    "type": "sensitive_data_scanner_rule",
+    "attributes": {
+      "name": "Example-Create_Scanning_Rule_returns_OK_response",
+      "pattern": "pattern",
+      "text_replacement": {
+        "type": "none"
+      },
+      "tags": [
+        "sensitive_data:true"
+      ],
+      "is_enabled": true
+    },
+    "relationships": {
+      "group": {
+        "data": {
+          "type": "sensitive_data_scanner_group",
+          "id": "string"
+        }
+      }
+    }
+  }
+}

@@ -69,7 +69,7 @@ To monitor individual devices:
       user: 'user'
       authProtocol: 'SHA256'  # choices: MD5, SHA, SHA224, SHA256, SHA384, SHA512
       authKey: 'fakeKey'  # enclose with single quote
-      privProtocol: 'AES256'  # choices: DES, AES (128 bits), AES192, AES192C, AES256, AES256C
+      privProtocol: 'AES256'  # choices: DES, AES, AES192, AES192C, AES256, AES256C
       privKey: 'fakePrivKey'  # enclose with single quote
       tags:
         - 'key1:val1'
@@ -146,7 +146,7 @@ snmp_listener:
       user: 'user'
       authProtocol: 'SHA256'  # choices: MD5, SHA, SHA224, SHA256, SHA384, SHA512
       authKey: 'fakeKey'  # enclose with single quote
-      privProtocol: 'AES256'  # choices: DES, AES (128 bits), AES192, AES192C, AES256, AES256C
+      privProtocol: 'AES256'  # choices: DES, AES, AES192, AES192C, AES256, AES256C
       privKey: 'fakePrivKey'  # enclose with single quote
       tags:
         - 'key1:val1'

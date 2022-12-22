@@ -7,6 +7,9 @@ further_reading:
   - link: "/continuous_integration/troubleshooting/"
     tag: "Documentation"
     text: "Troubleshooting CI"
+  - link: "https://www.datadoghq.com/blog/configure-pipeline-alerts-with-ci-monitors/"
+    tag: "Blog"
+    text: "Configure pipeline alerts with Datadog CI monitors"
 ---
 
 {{< site-region region="gov" >}}

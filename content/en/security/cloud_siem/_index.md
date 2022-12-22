@@ -5,6 +5,7 @@ aliases:
   - /security_monitoring/
   - /security_platform/cloud_siem/security_home/
   - /security_platform/cloud_siem/
+  - /security/cloud_siem/security_home/
 further_reading:
 - link: "https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/"
   tag: "Blog"
