@@ -733,14 +733,30 @@ const defaultColumn = (key, value, parentDefaults) => {
   let def = '';
   let parentDefault = '';
   if(typeof parentDefaults === 'object') {
-    parentDefault = (key in parentDefaults) ? parentDefaults[key] : '';
+    if (key in parentDefaults) {
+      if(parentDefaults[key] && typeof parentDefaults[key] === 'object' && Object.keys(parentDefaults[key]).length > 0) {
+        parentDefault = parentDefaults[key];
+      } else {
+        parentDefault = `${parentDefaults[key]}`;
+      }
+    }
   }
   let localDefault = '';
   if(typeof value.default === 'object') {
-    localDefault = (value.default && key in value.default) ? value.default[key] : '';
+    localDefault = (value.default && key in value.default) ? ((typeof value.default[key] === 'object') ? value.default[key] : `${value.default[key]}`) : '';
+     if (value.default && key in value.default) {
+      if(value.default[key] && typeof value.default[key] === 'object' && Object.keys(value.default[key]).length > 0) {
+        parentDefault = value.default[key];
+      } else {
+        parentDefault = `${value.default[key]}`;
+      }
+    }
   }
   def = localDefault || parentDefault || '';
-  return (def) ? `<span style="font-size:12px;font-weight:bold;border: 1px solid #632ca6;color: #632ca6;border-radius: 12px;padding: 2px 8px;display:inline-block; white-space:break-spaces; max-width:100%">default: ${(typeof def === 'object') ? JSON.stringify(def) : def}</span>`.trim() : '';
+  if (typeof def === 'object') {
+    def = JSON.stringify(def);
+  }
+  return (def) ? `<span style="font-size:12px;font-weight:bold;border: 1px solid #632ca6;color: #632ca6;border-radius: 12px;padding: 2px 8px;display:inline-block; white-space:break-spaces; max-width:100%">default: ${def}</span>`.trim() : '';
 }
 
 /*const processChild = (childData, key, value, requiredFields, newRequiredFields, tableType, level, newParentKey, skipAnyKeys, parentKey, isNested) => {
