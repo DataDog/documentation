@@ -33,7 +33,7 @@ Notebooks combine graphs and text in a linear, cell-based format. They help you 
 
 {{< img src="notebooks/collaboration.png" alt="Indicators of users viewing the notebook and making live edits" style="width:100%;">}}
 
-Notebooks support real-time collaboration. Presence indicators show who is viewing your notebook at any time and show real-time edits and comments. 
+Notebooks support real-time collaboration. Presence indicators show who is viewing your notebook at any time, as well as real-time edits and comments. 
 
 Changes made to a notebook appear automatically, without the need to refresh.
 
@@ -45,21 +45,21 @@ To add a comment, select some text or hover over a graph. The **Add comment** ic
 
 Click the menu on the top-right of your comment to edit or delete a comment you wrote.
 
-View or re-open resolved comments in the Comment History, available in the Notebook cog menu.
+View or re-open resolved comments in the Comment History side panel, available in the Notebook cog menu.
 
 Notebook authors receive email notifications for new comments on their notebooks, and commenters are notified for replies to their comments. Manage your notification settings through `Notifications` in the notebook cog menu.
 
-### Read mode
+### Display modes
 
 {{< img src="notebooks/read_mode.png" alt="Read mode drop down menu" style="width:100%;">}}
 
-From the Notebook List, click on the eye icon to open a notebook in View Mode. This allows you to explore the information without edits. You can switch between modes from within the Notebook by selecting the dropdown at the top right of your notebook.
+You can switch between modes from within the Notebook by selecting the dropdown at the top right of your notebook.
 
 - **Editing**: make changes to the notebook.
 
 - **Viewing**: contents are Read Only, preventing users from making unwanted edits to existing configurations and information.
 
-- **Presenting**: share the contents of the Notebook in a display format where each cell appears as a slide. Presentation mode supports graph interactions such as tooltips and legend.
+- **Presenting**: share the contents of the Notebook in a display format where each cell appears as a slide. Presentation mode supports graph interactions such as tooltips and legends.
 
 ## Share notebooks
 
@@ -75,24 +75,24 @@ Use **Export Notebook JSON** to download a JSON file containing the definition o
 
 ### Link to individual cells
 
-Copy the URL for a specific cell by clicking the chain-link icon on the right side of the cell. Direct linking is available for both visualization and Markdown cells.
+Copy the URL for a specific cell by clicking **Link directly to cell**. Direct linking is available for both visualization and Markdown cells.
 
 When a user visits the URL for a specific cell, the notebook is opened to show the cell at the top of the viewport. Links are absolute. A cell's URL remains the same even if it is moved to a new position within the notebook.
 
 ## Notebook List
 
-{{< img src="notebooks/overview.png" alt="notebook list previewing the cell types" style="width:100%;">}}
+{{< img src="notebooks/overview.png" alt="notebook list previewing the cell types of a selected notebook" style="width:100%;">}}
 
 The [Notebook List][2] allows you to view and search previously created notebooks. Each notebook's name, creator, and last modified date are displayed. Notebooks are grouped by:
 
-* **My Notebooks**: Notebooks created by you.
-* **Other Notebooks**: Notebooks created by other members of your team.
+* **Your Notebooks**: Notebooks created by you.
+* **All Notebooks**: All Notebooks in your organization.
 * **[Notebook Type](#notebook-types)**: Group notebooks by type.
 
-Hover over the Preview icon for any Notebook to see a preview of the contents, including widget types and Markdown. To open the Notebook in [View Mode](#read-mode), click the eye icon.
+Hover over the Preview icon for any Notebook to see a preview of the contents, including widget types and Markdown. To open the Notebook in [View Mode](#read-mode), hover over the notebook and click **Open notebook in view mode** on the right.
 
 ## Template gallery
-From the [Template Gallery][3], see ready to use templates including an Incident Response postmortem and an Incident Report which you can create new notebooks from. You can also create a new custom template to build reusable notebook structures.
+From the [Template Gallery][3], see ready-to-use templates including an Incident Response postmortem and an Incident Report which you can create new notebooks from. You can also create a new custom template to build reusable notebook structures.
 
 ## Notebook configuration
 
@@ -108,7 +108,7 @@ To save this time as the notebook's default, click **Set Default Time**. The res
 
 Individual cells can be unlinked from the global time and set to an independent time frame.
 
-{{< img src="notebooks/cell_time.png" alt="Cell Time Selector" style="width:100%;">}}
+{{< img src="notebooks/cell_time.png" alt="Cell Time Selector with the cell unlinked from global time" style="width:100%;">}}
 
 To view a different time frame on a single cell, edit the cell and use the toggle to unlink it from Global Time. Change the time frame using the time picker or by scrubbing on the graph. Changes made in edit mode are saved automatically when you click **Done**. To discard your changes, click **Cancel** instead of **Done**.
 
@@ -116,11 +116,11 @@ To view a different time frame on a single cell, edit the cell and use the toggl
 
 {{< img src="notebooks/add_notebook_type.png" alt="Add Type button highlighted in a Notebook" style="width:100%;">}}
 
-Notebooks can be grouped into types, this gives you quick access to relevant information. Notebooks built from other products like Incident Management or Monitors may automatically assign a type. Hover over the notebook title to display the option to add or edit the type. Click **+ Add Type** or to edit the type, click on the pencil icon.
+Notebooks can be grouped into types, this gives you quick access to relevant information. Notebooks built from other products like Incident Management or Monitors may automatically assign a type. Hover over the notebook title to display the option to add or edit the type. Click **+ Add Type**, or to edit the type, click the pencil icon that appears next to it on hover.
 
 ### Graph snapshots
 
-Notebooks can be set to automatically snapshot graphs that might expire. Enable this by clicking **Turn on snapshots** in the cog menu of any notebook. Use the cog menu to view snapshots or turn off automatic snapshots. Turn off automatic snapshots to remove access to existing snapshots.
+Notebooks can be set to automatically take snapshots of graphs that might expire. Enable this by clicking **Turn on snapshots** in the cog menu of any notebook. Use the cog menu to view snapshots or turn off automatic snapshots. Turn off automatic snapshots to remove access to existing snapshots.
 
 {{< img src="notebooks/cog_snapshots.png" alt="Cog menu option to turn on snapshots" style="width:100%;">}}
 
@@ -136,14 +136,14 @@ Notebooks support template variables. Dynamically scope visualizations by adding
 
 ### Cell configuration
 
-To add cells, use the **+** button that appears to the left of the cell. Use the action tray that appears above the cell on hover to share, clone, or delete cells. Graph cells can be exported to a dashboard, or downloaded as a PNG or a CSV of graph data. Changes made in edit mode are saved automatically when you click **Done**. To discard your changes, click **Cancel** instead of **Done**.
+To add cells, use the **+** button that appears to the left of the cell, or select an option from the **Add New Cell** section at the bottom of the notebook. Use the action tray that appears above the cell on hover to share, clone, or delete cells. Graph cells can be exported to a dashboard, or downloaded as a PNG or a CSV of graph data. Changes made in edit mode are saved automatically when you click **Done**. To discard your changes, click **Cancel** instead of **Done**.
 
 #### Edit options
 Click on **More options** in the inline editor of a widget to edit widget options. Add details like event overlays, markers, and y-axis controls. 
 
 #### Layout options
 
-In a Notebook cell, click **Edit** to view the cell configuration in edit mode. You can also see the available layout options which vary based on the cell content type but include the following:
+In a Notebook cell, click **Edit** to view the cell configuration in edit mode. You can also see the available layout options, which vary based on the cell content type, but include the following:
 
 * **Graph size**: Choose between `XS`, `S`, `M` (default), `L`, and `XL`.
 * **Graph legend**: Uncheck the box to hide the legend. Legends are automatically disabled for `XS` and `S` graphs.
