@@ -47,6 +47,9 @@ Supported .NET runtimes (64-bit applications)
 Supported languages
 : Any language that targets the .NET runtime, such as C#, F#, and Visual Basic.
 
+Support for Profile Types in beta
+: Exception, Allocation and Lock profiling is currently in beta and requires .NET5+.
+
 ## Installation
 
 <div class="alert alert-warning">
