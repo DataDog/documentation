@@ -2854,6 +2854,95 @@ components:
       type: string
       x-enum-varnames:
       - EVENT
+    EventsAggregation:
+      default: count
+      description: The type of aggregation that can be performed on events-based queries.
+      enum:
+      - count
+      - cardinality
+      - pc75
+      - pc90
+      - pc95
+      - pc98
+      - pc99
+      - sum
+      - min
+      - max
+      - avg
+      example: count
+      type: string
+      x-enum-varnames:
+      - COUNT
+      - CARDINALITY
+      - PC75
+      - PC90
+      - PC95
+      - PC98
+      - PC99
+      - SUM
+      - MIN
+      - MAX
+      - AVG
+    EventsCompute:
+      description: The instructions for what to compute for this query.
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/EventsAggregation'
+        interval:
+          description: Interval for compute in milliseconds.
+          example: 60000
+          format: int64
+          type: integer
+        metric:
+          description: The "measure" attribute on which to perform the computation.
+          type: string
+      required:
+      - aggregation
+      type: object
+    EventsDataSource:
+      default: logs
+      description: A data source that is powered by the Events Platform.
+      enum:
+      - logs
+      example: logs
+      type: string
+      x-enum-varnames:
+      - LOGS
+    EventsGroupBy:
+      description: A dimension on which to split a query's results.
+      properties:
+        facet:
+          description: The facet by which to split groups.
+          example: '@error.type'
+          type: string
+        limit:
+          description: The maximum number of groups to return.
+          example: 10
+          format: int32
+          maximum: 2147483647
+          type: integer
+        sort:
+          $ref: '#/components/schemas/EventsGroupBySort'
+      required:
+      - facet
+      type: object
+    EventsGroupBySort:
+      description: The dimension by which to sort a query's results.
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/EventsAggregation'
+        metric:
+          description: Metric whose calculated value should be used to define the
+            sort order of a query's results.
+          example: '@duration'
+          type: string
+        order:
+          $ref: '#/components/schemas/QuerySortOrder'
+        type:
+          $ref: '#/components/schemas/EventsSortType'
+      required:
+      - aggregation
+      type: object
     EventsListRequest:
       description: The object sent with the request to retrieve a list of events from
         your organization.
@@ -2913,6 +3002,11 @@ components:
           example: now
           type: string
       type: object
+    EventsQueryGroupBys:
+      description: The list of facets on which to split results.
+      items:
+        $ref: '#/components/schemas/EventsGroupBy'
+      type: array
     EventsQueryOptions:
       description: 'The global query options that are used. Either provide a timezone
         or a time offset but not both,
@@ -2979,6 +3073,39 @@ components:
           example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
           type: string
       type: object
+    EventsScalarQuery:
+      description: An individual scalar events query.
+      properties:
+        compute:
+          $ref: '#/components/schemas/EventsCompute'
+        data_source:
+          $ref: '#/components/schemas/EventsDataSource'
+        group_by:
+          $ref: '#/components/schemas/EventsQueryGroupBys'
+        indexes:
+          description: The indexes in which to search.
+          items:
+            description: The unique index name.
+            example: main
+            type: string
+          type: array
+        name:
+          description: The variable name for use in formulas.
+          type: string
+        search:
+          $ref: '#/components/schemas/EventsSearch'
+      required:
+      - data_source
+      - compute
+      type: object
+    EventsSearch:
+      description: Configuration of the search/filter for an events query.
+      properties:
+        query:
+          description: The search/filter string for an events query.
+          example: status:warn service:foo
+          type: string
+      type: object
     EventsSort:
       description: The sort parameters when querying events.
       enum:
@@ -2988,6 +3115,40 @@ components:
       x-enum-varnames:
       - TIMESTAMP_ASCENDING
       - TIMESTAMP_DESCENDING
+    EventsSortType:
+      description: The type of sort to use on the calculated value.
+      enum:
+      - alphabetical
+      - measure
+      type: string
+      x-enum-varnames:
+      - ALPHABETICAL
+      - MEASURE
+    EventsTimeseriesQuery:
+      description: An individual timeseries events query.
+      properties:
+        compute:
+          $ref: '#/components/schemas/EventsCompute'
+        data_source:
+          $ref: '#/components/schemas/EventsDataSource'
+        group_by:
+          $ref: '#/components/schemas/EventsQueryGroupBys'
+        indexes:
+          description: The indexes in which to search.
+          items:
+            description: The unique index name.
+            example: main
+            type: string
+          type: array
+        name:
+          description: The variable name for use in formulas.
+          type: string
+        search:
+          $ref: '#/components/schemas/EventsSearch'
+      required:
+      - data_source
+      - compute
+      type: object
     EventsWarning:
       description: A warning message indicating something is wrong with the query.
       properties:
@@ -3004,6 +3165,19 @@ components:
           example: One or several indexes are missing or invalid. Results hold data
             from the other indexes.
           type: string
+      type: object
+    FormulaLimit:
+      description: Message for specifying limits to the number of values returned
+        by a query.
+      properties:
+        count:
+          description: The number of results to which to limit.
+          example: 10
+          format: int32
+          maximum: 2147483647
+          type: integer
+        order:
+          $ref: '#/components/schemas/QuerySortOrder'
       type: object
     FullAPIKey:
       description: Datadog API key.
@@ -3101,6 +3275,12 @@ components:
           nullable: true
           type: array
       type: object
+    GroupTags:
+      description: List of tags that apply to a single response value.
+      items:
+        description: A single tag that applies to a single response value.
+        type: string
+      type: array
     HTTPLog:
       description: Structured log message.
       items:
@@ -6395,6 +6575,23 @@ components:
           $ref: '#/components/schemas/MetricVolumes'
       readOnly: true
       type: object
+    MetricsAggregator:
+      default: avg
+      description: The type of aggregation that can be performed on metrics queries.
+      enum:
+      - avg
+      - min
+      - max
+      - sum
+      - last
+      example: avg
+      type: string
+      x-enum-varnames:
+      - AVG
+      - MIN
+      - MAX
+      - SUM
+      - LAST
     MetricsAndMetricTagConfigurations:
       description: Object for a metrics and metric tag configurations.
       oneOf:
@@ -6410,6 +6607,50 @@ components:
             $ref: '#/components/schemas/MetricsAndMetricTagConfigurations'
           type: array
       readOnly: true
+      type: object
+    MetricsDataSource:
+      default: metrics
+      description: A data source that is powered by the Metrics backend.
+      enum:
+      - metrics
+      example: metrics
+      type: string
+      x-enum-varnames:
+      - METRICS
+    MetricsScalarQuery:
+      description: An individual scalar metrics query.
+      properties:
+        aggregator:
+          $ref: '#/components/schemas/MetricsAggregator'
+        data_source:
+          $ref: '#/components/schemas/MetricsDataSource'
+        name:
+          description: The variable name for use in formulas.
+          type: string
+        query:
+          description: A classic metrics query string.
+          example: avg:system.cpu.user{*}
+          type: string
+      required:
+      - data_source
+      - query
+      - aggregator
+      type: object
+    MetricsTimeseriesQuery:
+      description: An individual timeseries metrics query.
+      properties:
+        data_source:
+          $ref: '#/components/schemas/MetricsDataSource'
+        name:
+          description: The variable name for use in formulas.
+          type: string
+        query:
+          description: A classic metrics query string.
+          example: avg:system.cpu.user{*}
+          type: string
+      required:
+      - data_source
+      - query
       type: object
     MonitorType:
       description: Attributes from the monitor that triggered the event.
@@ -6959,6 +7200,19 @@ components:
       type: string
       x-enum-varnames:
       - PROCESS
+    QueryFormula:
+      description: A formula for calculation based on one or more queries.
+      properties:
+        formula:
+          description: Formula string, referencing one or more queries with their
+            name property.
+          example: a+b
+          type: string
+        limit:
+          $ref: '#/components/schemas/FormulaLimit'
+      required:
+      - formula
+      type: object
     QuerySortOrder:
       default: desc
       description: Direction of sort.
@@ -8421,6 +8675,134 @@ components:
       type: string
       x-enum-varnames:
       - SAML_ASSERTION_ATTRIBUTES
+    ScalarColumn:
+      description: A single column in a scalar query response.
+      properties:
+        unit:
+          description: List of units.
+          items:
+            $ref: '#/components/schemas/Unit'
+          type: array
+        values:
+          description: Array of values for each group-by combination that results
+            from one formula or query.
+          items:
+            description: An individual value for a given column and group-by.
+            format: double
+            type: number
+          type: array
+      type: object
+    ScalarFormulaQueryRequest:
+      description: A wrapper request around one scalar query to be executed.
+      properties:
+        data:
+          $ref: '#/components/schemas/ScalarFormulaRequest'
+      required:
+      - data
+      type: object
+    ScalarFormulaQueryResponse:
+      description: A message containing one or more responses to scalar queries.
+      properties:
+        data:
+          $ref: '#/components/schemas/ScalarResponse'
+        errors:
+          description: An error generated when processing a request.
+          type: string
+      type: object
+    ScalarFormulaRequest:
+      description: A single scalar query to be executed.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ScalarFormulaRequestAttributes'
+        type:
+          $ref: '#/components/schemas/ScalarFormulaRequestType'
+      required:
+      - type
+      - attributes
+      type: object
+    ScalarFormulaRequestAttributes:
+      description: The object describing a scalar formula request.
+      properties:
+        formulas:
+          description: List of formulas to be calculated and returned as responses.
+          items:
+            $ref: '#/components/schemas/QueryFormula'
+          type: array
+        from:
+          description: Start date (inclusive) of the query in milliseconds since the
+            Unix epoch.
+          example: 1568899800000
+          format: int64
+          type: integer
+        queries:
+          $ref: '#/components/schemas/ScalarFormulaRequestQueries'
+        to:
+          description: End date (exclusive) of the query in milliseconds since the
+            Unix epoch.
+          example: 1568923200000
+          format: int64
+          type: integer
+      required:
+      - to
+      - from
+      - queries
+      type: object
+    ScalarFormulaRequestQueries:
+      description: List of queries to be run and used as inputs to the formulas.
+      items:
+        $ref: '#/components/schemas/ScalarQuery'
+      type: array
+    ScalarFormulaRequestType:
+      default: scalar_request
+      description: The type of the resource. The value should always be scalar_request.
+      enum:
+      - scalar_request
+      example: scalar_request
+      type: string
+      x-enum-varnames:
+      - SCALAR_REQUEST
+    ScalarFormulaResponseAtrributes:
+      description: The object describing a scalar response.
+      properties:
+        columns:
+          description: List of response columns, each corresponding to an individual
+            formula or query in the request and with values in parallel arrays matching
+            the series list.
+          items:
+            $ref: '#/components/schemas/ScalarColumn'
+          type: array
+        series:
+          $ref: '#/components/schemas/ScalarResponseSeriesList'
+      type: object
+    ScalarFormulaResponseType:
+      default: scalar_response
+      description: The type of the resource. The value should always be scalar_response.
+      enum:
+      - scalar_response
+      example: scalar_response
+      type: string
+      x-enum-varnames:
+      - SCALAR_RESPONSE
+    ScalarQuery:
+      description: An individual scalar query to one of the basic Datadog data sources.
+      oneOf:
+      - $ref: '#/components/schemas/MetricsScalarQuery'
+      - $ref: '#/components/schemas/EventsScalarQuery'
+      type: object
+    ScalarResponse:
+      description: A message containing the response to a scalar query.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ScalarFormulaResponseAtrributes'
+        type:
+          $ref: '#/components/schemas/ScalarFormulaResponseType'
+      type: object
+    ScalarResponseSeriesList:
+      description: List of group-by tags for the response. Parallel array to the values
+        in each scalar column.
+      items:
+        $ref: '#/components/schemas/GroupTags'
+      type: array
     SecurityFilter:
       description: The security filter's properties.
       properties:
@@ -10888,11 +11270,200 @@ components:
         description: Tag associated with your event.
         type: string
       type: array
+    TimeseriesFormulaQueryRequest:
+      description: A request wrapper around a single timeseries query to be executed.
+      properties:
+        data:
+          $ref: '#/components/schemas/TimeseriesFormulaRequest'
+      required:
+      - data
+      type: object
+    TimeseriesFormulaQueryResponse:
+      description: A message containing one response to a timeseries query made with
+        timeseries formula query request.
+      properties:
+        data:
+          $ref: '#/components/schemas/TimeseriesResponse'
+        errors:
+          description: The error generated by the request.
+          type: string
+      type: object
+    TimeseriesFormulaRequest:
+      description: A single timeseries query to be executed.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/TimeseriesFormulaRequestAttributes'
+        type:
+          $ref: '#/components/schemas/TimeseriesFormulaRequestType'
+      required:
+      - type
+      - attributes
+      type: object
+    TimeseriesFormulaRequestAttributes:
+      description: The object describing a timeseries formula request.
+      properties:
+        formulas:
+          description: List of formulas to be calculated and returned as responses.
+          items:
+            $ref: '#/components/schemas/QueryFormula'
+          type: array
+        from:
+          description: Start date (inclusive) of the query in milliseconds since the
+            Unix epoch.
+          example: 1568899800000
+          format: int64
+          type: integer
+        interval:
+          description: 'A time interval in milliseconds.
+
+            May be overridden by a larger interval if the query would result in
+
+            too many points for the specified timeframe.
+
+            Defaults to a reasonable interval for the given timeframe.'
+          example: 5000
+          format: int64
+          type: integer
+        queries:
+          $ref: '#/components/schemas/TimeseriesFormulaRequestQueries'
+        to:
+          description: End date (exclusive) of the query in milliseconds since the
+            Unix epoch.
+          example: 1568923200000
+          format: int64
+          type: integer
+      required:
+      - to
+      - from
+      - queries
+      type: object
+    TimeseriesFormulaRequestQueries:
+      description: List of queries to be run and used as inputs to the formulas.
+      items:
+        $ref: '#/components/schemas/TimeseriesQuery'
+      type: array
+    TimeseriesFormulaRequestType:
+      default: timeseries_request
+      description: The type of the resource. The value should always be timeseries_request.
+      enum:
+      - timeseries_request
+      example: timeseries_request
+      type: string
+      x-enum-varnames:
+      - TIMESERIES_REQUEST
+    TimeseriesFormulaResponseType:
+      default: timeseries_response
+      description: The type of the resource. The value should always be timeseries_response.
+      enum:
+      - timeseries_response
+      example: timeseries_response
+      type: string
+      x-enum-varnames:
+      - TIMESERIES_RESPONSE
+    TimeseriesQuery:
+      description: An individual timeseries query to one of the basic Datadog data
+        sources.
+      oneOf:
+      - $ref: '#/components/schemas/MetricsTimeseriesQuery'
+      - $ref: '#/components/schemas/EventsTimeseriesQuery'
+      type: object
+    TimeseriesResponse:
+      description: A message containing the response to a timeseries query.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/TimeseriesResponseAttributes'
+        type:
+          $ref: '#/components/schemas/TimeseriesFormulaResponseType'
+      type: object
+    TimeseriesResponseAttributes:
+      description: The object describing a timeseries response.
+      properties:
+        series:
+          $ref: '#/components/schemas/TimeseriesResponseSeriesList'
+        times:
+          $ref: '#/components/schemas/TimeseriesResponseTimes'
+        values:
+          $ref: '#/components/schemas/TimeseriesResponseValuesList'
+      type: object
+    TimeseriesResponseSeries:
+      description: ''
+      properties:
+        group_tags:
+          $ref: '#/components/schemas/GroupTags'
+        query_index:
+          description: The index of the query in the "formulas" array (or "queries"
+            array if no "formulas" was specified).
+          example: 0
+          format: int32
+          maximum: 2147483647
+          type: integer
+        unit:
+          description: List of units.
+          items:
+            $ref: '#/components/schemas/Unit'
+          type: array
+      type: object
+    TimeseriesResponseSeriesList:
+      description: Array of response series. The index here corresponds to the index
+        in the `formulas` or `queries` array from the request.
+      items:
+        $ref: '#/components/schemas/TimeseriesResponseSeries'
+      type: array
+    TimeseriesResponseTimes:
+      description: Array of times, 1-1 match with individual values arrays.
+      items:
+        description: Start date (inclusive) of the query in seconds since the Unix
+          epoch.
+        example: 1568899800000
+        format: int64
+        type: integer
+      type: array
+    TimeseriesResponseValues:
+      description: Array of values for an individual formula or query.
+      items:
+        description: An individual value for a given time.
+        format: double
+        type: number
+      type: array
+    TimeseriesResponseValuesList:
+      description: Array of value-arrays. The index here corresponds to the index
+        in the `formulas` or `queries` array from the request.
+      items:
+        $ref: '#/components/schemas/TimeseriesResponseValues'
+      type: array
     TimestampEventAttribute:
       description: Timestamp of your event.
       example: '2019-01-02T09:42:36.320Z'
       format: date-time
       type: string
+    Unit:
+      description: Object containing the metric unit family, scale factor, name, and
+        short name.
+      nullable: true
+      properties:
+        family:
+          description: Unit family, allows for conversion between units of the same
+            family, for scaling.
+          example: time
+          type: string
+        name:
+          description: Unit name
+          example: minute
+          type: string
+        plural:
+          description: Plural form of the unit name.
+          example: minutes
+          type: string
+        scale_factor:
+          description: Factor for scaling between units of the same family.
+          example: 60.0
+          format: double
+          type: number
+        short_name:
+          description: Abbreviation of the unit.
+          example: min
+          type: string
+      type: object
     UsageApplicationSecurityMonitoringResponse:
       description: Application Security Monitoring usage response.
       properties:
@@ -15956,6 +16527,88 @@ paths:
         resultsPath: data
       x-undo:
         type: safe
+  /api/v2/query/scalar:
+    post:
+      description: 'The internal endpoint to query scalar/table data for multiple
+        data sources and
+
+        process the data using formulas and functions.'
+      operationId: QueryScalarData
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScalarFormulaQueryRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScalarFormulaQueryResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Scalar cross product query
+      tags:
+      - Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is GA for the metrics data source. Logs
+        is in beta.
+
+        We are gradually onboarding support for more sources. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/query/timeseries:
+    post:
+      description: 'The internal endpoint to query timeseries data for multiple data
+        sources and
+
+        process the data by applying formulas and functions.'
+      operationId: QueryTimeseriesData
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TimeseriesFormulaQueryRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeseriesFormulaQueryResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Timeseries cross product query
+      tags:
+      - Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 1
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is GA for the metrics data source. Logs
+        is in beta.
+
+        We are gradually onboarding support for more sources. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/roles:
     get:
       description: Returns all roles, including their names and their unique identifiers.
@@ -20183,12 +20836,13 @@ tags:
     with this endpoint."
   name: Logs Restriction Queries
 - description: "The metrics endpoint allows you to:\n\n- Post metrics data so it can
-    be graphed on Datadog\u2019s dashboards\n- Query metrics from any time period\n-
-    Modify tag configurations for metrics\n- View tags and volumes for metrics\n\n**Note**:
-    A graph can only contain a set number of points\nand as the timeframe over which
-    a metric is viewed increases,\naggregation between points occurs to stay below
-    that set number.\n\nThe Post, Patch, and Delete `manage_tags` API methods can
-    only be performed by\na user who has the `Manage Tags for Metrics` permission."
+    be graphed on Datadog\u2019s dashboards\n- Query metrics from any time period
+    (timeseries and scalar)\n- Modify tag configurations for metrics\n- View tags
+    and volumes for metrics\n\n**Note**: A graph can only contain a set number of
+    points\nand as the timeframe over which a metric is viewed increases,\naggregation
+    between points occurs to stay below that set number.\n\nThe Post, Patch, and Delete
+    `manage_tags` API methods can only be performed by\na user who has the `Manage
+    Tags for Metrics` permission."
   name: Metrics
 - description: 'Configure your [Datadog Opsgenie integration](https://docs.datadoghq.com/integrations/opsgenie/)
 
