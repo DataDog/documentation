@@ -20,21 +20,14 @@ aliases:
 <br>
 <a id="enabling-tracing-tutorials">
 {{< whatsnext desc="Tutorials: Enabling Tracing" >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-python-host" >}}Enabling Tracing on a Python Application on the Same Host as Datadog Agent{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-python-containers" >}}Enabling Tracing on a Python Application and Datadog Agent in Containers{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-python-container-agent-host" >}}Enabling Tracing for a Python Application in a Container and an Agent on a Host{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-java-host" >}}Enabling Tracing on a Java Application on the Same Host as Datadog Agent{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-java-containers" >}}Enabling Tracing on a Java Application and Datadog Agent in Containers{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-java-container-agent-host" >}}Enabling Tracing for a Java Application in a Container and an Agent on a Host{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-python-host" >}}<img src="/images/integrations_logos/python-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> Enabling Tracing on a Python Application on the Same Host as Datadog Agent{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-python-containers" >}}<img src="/images/integrations_logos/python-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-container-icon.png" /> Enabling Tracing on a Python Application and Datadog Agent in Containers{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-python-container-agent-host" >}}<img src="/images/integrations_logos/python-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-container-icon.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> Enabling Tracing for a Python Application in a Container and an Agent on a Host{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-host" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> Enabling Tracing on a Java Application on the Same Host as Datadog Agent{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-containers" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-container-icon.png" /> Enabling Tracing on a Java Application and Datadog Agent in Containers{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-container-agent-host" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-container-icon.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> Enabling Tracing for a Java Application in a Container and an Agent on a Host{{< /nextlink >}}
 {{< /whatsnext >}}
 <br>
-
-| App and Agent on a Host    | App and Agent in Containers | App in Containers, Agent on Host |
-| ---- | ----------- | ----------- |
-|{{< img src="integrations_logos/python.png">}}|{{< img src="integrations_logos/python.png" >}} |{{< img src="integrations_logos/python.png"  >}} |
-| {{< img src="integrations_logos/java.png" >}} | {{< img src="integrations_logos/java.png" >}} | {{< img src="integrations_logos/java.png" >}} |
-
-
 
 {{< whatsnext desc="APM Integrations in action" >}}
     {{< nextlink href="/tracing/guide/monitor-kafka-queues/" >}}Tracing Kafka Queues{{< /nextlink >}}
