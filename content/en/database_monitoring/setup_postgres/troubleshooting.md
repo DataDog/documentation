@@ -189,7 +189,7 @@ See the section on [truncated query samples](#query-samples-are-truncated) for i
 
 #### Postgres extended query protocol
 
-If a client is using the Postgres [extended query protocol][9] or prepared statements on Postgres version 12 or newer, enable the following beta feature in the [Postgres integration config](https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example).
+If a client is using the Postgres [extended query protocol][9] or prepared statements on Postgres version 12 or newer, enable the following beta feature in the [Postgres integration config][19].
 ```
 query_samples:
   explain_parameterized_queries: true
