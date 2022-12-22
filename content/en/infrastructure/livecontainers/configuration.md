@@ -100,6 +100,25 @@ In some setups, the Process Agent and Cluster Agent cannot automatically detect 
         - get
         - watch
       - apiGroups:
+        - ""
+        resources:
+        - serviceaccounts
+        verbs:
+        - list
+        - get
+        - watch
+      - apiGroups:
+        - rbac.authorization.k8s.io
+        resources:
+        - roles
+        - rolebindings
+        - clusterroles
+        - clusterrolebindings
+        verbs:
+        - list
+        - get
+        - watch
+      - apiGroups:
        - networking.k8s.io
        resources:
        - ingresses
@@ -144,6 +163,7 @@ The following table presents the list of collected resources and the minimal Age
 | Deployments | 7.27.0 | 1.11.0 | 2.10.0 |
 | Ingresses | 7.27.0 | 1.22.0 | 2.30.7 |
 | Jobs | 7.27.0 | 1.13.1 | 2.15.5 |
+| Namespaces | 7.27.0 | 7.41.0 | 2.30.9 |
 | Nodes | 7.27.0 | 1.11.0 | 2.10.0 |
 | PersistentVolumes | 7.27.0 | 1.18.0 | 2.30.4 |
 | PersistentVolumeClaims | 7.27.0 | 1.18.0 | 2.30.4 |
