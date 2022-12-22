@@ -2458,17 +2458,17 @@ main:
     weight: 2
   - name: Sources
     url: observability_pipelines/reference/sources/
-    parent: observability_pipelines_reference
+    parent: observability_pipelines_vector_configuration
     identifier: observability_pipelines_reference_sources
     weight: 301
   - name: Transforms
     url: observability_pipelines/reference/transforms/
-    parent: observability_pipelines_reference
+    parent: observability_pipelines_vector_configuration
     identifier: observability_pipelines_reference_transforms
     weight: 302
   - name: Sinks
     url: observability_pipelines/reference/sinks/
-    parent: observability_pipelines_reference
+    parent: observability_pipelines_vector_configuration
     identifier: observability_pipelines_reference_sinks
     weight: 303
   - name: Working with Data

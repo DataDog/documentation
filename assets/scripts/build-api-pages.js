@@ -659,7 +659,7 @@ const fieldColumn = (key, value, toggleMarkup, requiredMarkup, parentKey = '') =
     field = (key || '');
   }
   return `
-    <div class="col-4 column">
+    <div class="col-3 column">
       <p class="key">${toggleMarkup}${field}</p>
     </div>
   `.trim();
@@ -708,7 +708,7 @@ const typeColumn = (key, value, readOnlyMarkup) => {
  * @param {object} value - part of a schema object
  * returns html column
  */
-const descColumn = (key, value) => {
+const descColumn = (key, value, defaultMarkup) => {
   let desc = '';
   if(value.description) {
     if (value.enum){
@@ -722,13 +722,26 @@ const descColumn = (key, value) => {
   if(value.deprecated) {
     desc = `**DEPRECATED**: ${desc}`;
   }
-  return `<div class="col-4 column">${marked(desc) ? marked(desc).trim() : ""}</div>`.trim();
+  return `<div class="col-5 column">${marked(desc) ? marked(desc).trim() : ""}${defaultMarkup}</div>`.trim();
 };
 
 const requiredColumn = (requiredField) => {
-  return `<div class="col-2 column">${requiredField ? "required" : "optional"}</div>`.trim();
+  return `<div class="col-2 column"><p>${requiredField ? "required" : "optional"}</p></div>`.trim();
 }
 
+const defaultColumn = (key, value, parentDefaults) => {
+  let def = '';
+  let parentDefault = '';
+  if(typeof parentDefaults === 'object') {
+    parentDefault = (key in parentDefaults) ? parentDefaults[key] : '';
+  }
+  let localDefault = '';
+  if(typeof value.default === 'object') {
+    localDefault = (value.default && key in value.default) ? value.default[key] : '';
+  }
+  def = localDefault || parentDefault || '';
+  return (def) ? `<span style="font-size:12px;font-weight:bold;border: 1px solid #632ca6;color: #632ca6;border-radius: 12px;padding: 2px 8px;display:inline-block; white-space:break-spaces; max-width:100%">default: ${(typeof def === 'object') ? JSON.stringify(def) : def}</span>`.trim() : '';
+}
 
 /*const processChild = (childData, key, value, requiredFields, newRequiredFields, tableType, level, newParentKey, skipAnyKeys, parentKey, isNested) => {
   let html = '';
@@ -782,7 +795,7 @@ const requiredColumn = (requiredField) => {
  * @param {boolean} skipAnyKeys - whether to skip <any-key> rows
  * returns html row with nested rows
  */
-const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, parentKey = '', skipAnyKeys = false) => {
+const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, parentKey = '', skipAnyKeys = false, parentDefaults = {}) => {
   let html = '';
   let newRequiredFields;
 
@@ -896,9 +909,11 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
 
        // console.log(requiredFields, newRequiredFields);
 
+        const defaultMarkup = defaultColumn(key, value, parentDefaults);
+
         if(key.startsWith('ALLOF_COMBINE ')) {
           html += `
-                ${(childData) ? rowRecursive(tableType, childData, true, (newRequiredFields || []), (level + 1), newParentKey, skipAnyKeys) : ''}
+                ${(childData) ? rowRecursive(tableType, childData, true, (newRequiredFields || []), (level + 1), newParentKey, skipAnyKeys, value.default || {}) : ''}
         `.trim();
         } else {
           html += `
@@ -908,9 +923,9 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
                   ${fieldColumn(key, value, toggleArrow, required, parentKey)}
                   ${requiredColumn(requiredFields.includes(key))}
                   ${typeColumn(key, value, readOnlyField)}
-                  ${descColumn(key, value)}
+                  ${descColumn(key, value, defaultMarkup)}
                 </div>
-                ${(childData) ? rowRecursive(tableType, childData, true, (newRequiredFields || []), (level + 1), newParentKey, skipAnyKeys) : ''}
+                ${(childData) ? rowRecursive(tableType, childData, true, (newRequiredFields || []), (level + 1), newParentKey, skipAnyKeys, value.default || {}) : ''}
               </div>
           </div>
         `.trim();

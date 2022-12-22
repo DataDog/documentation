@@ -62,6 +62,10 @@ function buildSection(specStr, deref, allData) {
         "advanced": exampleYaml(Sx2, Sx),
         "html": {}
       };
+      let lastChar = entryData.description1.slice(-1);
+      if (lastChar === '.') {
+        entryData.description1 = entryData.description1.slice(0, -1);
+      }
       table = null;
       try {
         table = schemaTable("request", value.allOf[0], true);
