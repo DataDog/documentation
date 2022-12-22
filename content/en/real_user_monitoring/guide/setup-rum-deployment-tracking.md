@@ -16,7 +16,7 @@ further_reading:
 ---
 
 {{< beta-callout url="#" btn_hidden="true" >}}
-Feature Flag data collection in RUM is in private beta. To request access, contact Support at support@datadoghq.com.
+RUM deployment tracking is in private beta. To request access, contact Datadog support at support@datadoghq.com.
 {{< /beta-callout >}}
 
 ## Overview
