@@ -43,6 +43,9 @@ Supported .NET runtimes (64-bit applications)
 .NET 5<br/>
 .NET 6<br/>
 .NET 7
+<div class="alert alert-warning">
+  <strong>Note:</strong> The beta for lock contention and allocation profiling is only available for .NET 5+.
+</div>
 
 Supported languages
 : Any language that targets the .NET runtime, such as C#, F#, and Visual Basic.

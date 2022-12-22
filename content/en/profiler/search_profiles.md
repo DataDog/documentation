@@ -204,10 +204,10 @@ CPU
 Thrown Exceptions (beta)
 : The number of caught or uncaught exceptions raised by each method, as well as their type and message.
 
-Allocations (beta)
+Allocations (beta for .NET 5+ only)
 : The number and size of allocated objects by each method, as well as their type.
 
-Lock (beta)
+Lock (beta for .NET 5+ only)
 : The number of times threads are waiting for a lock and for how long.
 
 {{< /programming-lang >}}
