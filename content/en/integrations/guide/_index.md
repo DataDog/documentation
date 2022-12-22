@@ -35,6 +35,7 @@ private: true
     {{< nextlink href="integrations/guide/amazon_cloudformation" tag=" AWS" >}}Using Amazon CloudFormation{{< /nextlink >}}
     {{< nextlink href="integrations/guide/events-from-sns-emails" tag=" AWS" >}}Create Datadog events from Amazon SNS emails{{< /nextlink >}}
     {{< nextlink href="integrations/guide/aws-integration-and-cloudwatch-faq" tag=" AWS" >}}AWS integration and CloudWatch FAQ{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/aws-eks-fargate-logs-with-kinesis-data-firehose" tag=" AWS" >}}AWS EKS Fargate logs with Kinesis Data Firehose{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Azure guides:" >}}
