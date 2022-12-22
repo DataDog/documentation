@@ -145,6 +145,9 @@ In some setups, the Process Agent and Cluster Agent cannot automatically detect 
   - name: DD_CLUSTER_NAME
     value: "<YOUR_CLUSTER_NAME>"
   ```
+  
+  [1]: /containers/cluster_agent/
+  [2]: /containers/cluster_agent/setup/?tab=daemonset#pagetitle
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -282,4 +285,5 @@ However, the scrubber does not scrub paths that contain sensitive words. For exa
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: /infrastructure/livecontainers/#overview
 [4]: /infrastructure/livecontainers/legacy
