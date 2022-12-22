@@ -189,7 +189,15 @@ See the section on [truncated query samples](#query-samples-are-truncated) for i
 
 #### Postgres extended query protocol
 
-If a client is using the Postgres [extended query protocol][9] or prepared statements, the Datadog Agent is unable to collect explain plans due to the separation of the parsed query and raw bind parameters. If the client provides an option to force using the simple query protocol, then turning that on enables the Datadog Agent to collect execution plans.
+If a client is using the Postgres [extended query protocol][9] or prepared statements on Postgres version 12 or newer, enable the following beta feature in the [Postgres integration config](https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example).
+```
+query_samples:
+  explain_parameterized_queries: true
+  ...
+```
+This enables the Agent to explain parameterized queries with generic values for the parameters. This may cause inaccuracies when the query references tables with partial indexes, or partition tables with varying indexes across child tables.
+
+For versions older than Postgres 12, this feature is currently not supported and the Datadog Agent is unable to collect explain plans due to the separation of the parsed query and raw bind parameters. If the client provides an option to force using the simple query protocol, then turning that on enables the Datadog Agent to collect execution plans.
 
 | Language | Client | Configuration for simple query protocol|
 |----------|--------|----------------------------------------|
