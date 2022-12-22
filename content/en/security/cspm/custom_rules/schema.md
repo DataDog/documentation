@@ -45,8 +45,7 @@ When you [write custom rules for CSPM][1], you specify the resource types that a
     {{< nextlink href="/security/cspm/custom_rules/aws_ebs_snapshot/" >}}<code>aws_ebs_snapshot</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/aws_ebs_volume/" >}}<code>aws_ebs_snapshot</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/aws_ec2_instance_type/" >}}<code>aws_ec2_instance_type</code>{{< /nextlink >}}
-    {{< nextlink href="/security/cspm/custom_rules/aws_ec2_prefix_list/" >}}<code>gcp_kms_crypto_key</code>{{< /nextlink >}}
-    {{< nextlink href="/security/cspm/custom_rules/aws_ec2_prefix_list/" >}}<code>gcp_kms_crypto_key</code>{{< /nextlink >}}
+    {{< nextlink href="/security/cspm/custom_rules/aws_ec2_prefix_list/" >}}<code>aws_ec2_prefix_list</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/aws_ec2/" >}}<code>aws_ec2</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/aws_ecr_registry/" >}}<code>aws_ecr_registry</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/aws_ecr_repository/" >}}<code>aws_ecr_repository</code>{{< /nextlink >}}
