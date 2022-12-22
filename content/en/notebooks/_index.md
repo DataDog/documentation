@@ -37,21 +37,17 @@ Notebooks support real-time collaboration. Presence indicators show who is viewi
 
 Changes made to a notebook appear automatically, without the need to refresh.
 
-Everyone on your team can open or edit any notebook, but a notebook can only be deleted by the creator or by an administrator.
+Everyone on your team can open any notebook, but a notebook can only be modified or deleted by any Datadog role with the `Notebooks Write` permission.
 
 ### Commenting
 
-To add a comment, select some text or hover over a graph. The **Add comment** icon is displayed to the right of the cell.
-
-Click the menu on the top-right of your comment to edit or delete a comment you wrote.
-
-View or re-open resolved comments in the Comment History side panel, available in the Notebook cog menu.
+To add a comment, select some text or hover over a graph. The **Add comment** icon is displayed to the right of the cell. Click the three vertical dots in the top-right corner of your comment to edit or delete a comment you wrote. View or re-open resolved comments in the Comment History side panel, available in the Notebook cog menu.
 
 Notebook authors receive email notifications for new comments on their notebooks, and commenters are notified for replies to their comments. Manage your notification settings through `Notifications` in the notebook cog menu.
 
-### Display modes
+### View mode
 
-{{< img src="notebooks/read_mode.png" alt="Read mode drop down menu" style="width:100%;">}}
+{{< img src="notebooks/read_mode.png" alt="View mode drop down menu" style="width:100%;">}}
 
 You can switch between modes from within the Notebook by selecting the dropdown at the top right of your notebook.
 
@@ -81,7 +77,7 @@ When a user visits the URL for a specific cell, the notebook is opened to show t
 
 ## Notebook List
 
-{{< img src="notebooks/overview.png" alt="notebook list previewing the cell types of a selected notebook" style="width:100%;">}}
+{{< img src="notebooks/notebook_list.png" alt="notebook list previewing the cell types of a selected notebook" style="width:100%;">}}
 
 The [Notebook List][2] allows you to view and search previously created notebooks. Each notebook's name, creator, and last modified date are displayed. Notebooks are grouped by:
 
@@ -104,7 +100,9 @@ To view a different time frame, select an option in the global time picker, or s
 
 **Note**: Clicking and dragging to zoom in on a graph does not unlock the cell from the global time. It changes the notebook's global time instead.
 
-To save this time as the notebook's default, click **Set Default Time**. The reset button discards your changes to time.
+{{< img src="notebooks/set_default_time.png" alt="Save notebook global time with Set Default Time button" style="width:100%;">}}
+
+To save this time as the notebook's default, click **Set Default Time**. To reset your global time back to the previously saved default global time, click the reset button.
 
 Individual cells can be unlinked from the global time and set to an independent time frame.
 
@@ -124,7 +122,7 @@ Notebooks can be set to automatically take snapshots of graphs that might expire
 
 {{< img src="notebooks/cog_snapshots.png" alt="Cog menu option to turn on snapshots" style="width:100%;">}}
 
- Notebooks with snapshots enabled automatically capture a static image of any graphs with a fixed time range (for example, `Aug 18, 12:00 am – Aug 19, 11:59 pm`). These snapshots update when the graph is updated, as long as the new graph also has a fixed time range. Changing the graph to a global time range (like `Past 1 Hour`) removes the snapshot.
+ Notebooks with snapshots enabled automatically capture a static image of any graphs with a fixed time range (for example, `Aug 18, 12:00 am - Aug 19, 11:59 pm`). These snapshots update when the graph is updated, as long as the new graph also has a fixed time range. Changing the graph to a global time range (like `Past 1 Hour`) removes the snapshot.
 
  You can preview the existing snapshot on any fixed-time graph by hovering over the camera icon while in edit mode.
 
@@ -168,6 +166,7 @@ Graphs are created with the Datadog query editor. Notebooks support:
 * [List][11]
 * [Query value][12]
 * [Funnel][13]
+* [Pie][14]
 
 ## Further Reading
 
@@ -185,4 +184,5 @@ Graphs are created with the Datadog query editor. Notebooks support:
 [10]: /dashboards/widgets/distribution/
 [11]: /dashboards/widgets/list/
 [12]: /dashboards/widgets/query_value/
-[13]: /dashboards/widgets/funnel
+[13]: /dashboards/widgets/funnel/
+[14]: /dashboards/widgets/pie_chart/
