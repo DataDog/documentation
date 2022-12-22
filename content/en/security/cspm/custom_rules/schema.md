@@ -8,7 +8,7 @@ When you [write custom rules for CSPM][1], you specify the resource types that a
 
 ## GCP
 
-{{< whatsnext desc="Review detailed information about resource types in the following pages." >}}
+{{< whatsnext desc="Review detailed information about GCP resource types in the following pages." >}}
     {{< nextlink href="/security/cspm/custom_rules/gcp_sql_database_instance/" >}}<code>gcp_sql_database_instance</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/gcp_compute_instance/" >}}<code>gcp_compute_instance</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/gcp_iam_policy/" >}}<code>gcp_iam_policy</code>{{< /nextlink >}}
@@ -26,7 +26,7 @@ When you [write custom rules for CSPM][1], you specify the resource types that a
 
 ## AWS
 
-{{< whatsnext desc="Review detailed information about resource types in the following pages." >}}
+{{< whatsnext desc="Review detailed information about AWS resource types in the following pages." >}}
     {{< nextlink href="/security/cspm/custom_rules/aws_account_attributes/" >}}<code>aws_account_attributes</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/aws_account/" >}}<code>aws_account</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/aws_acm/" >}}<code>aws_acm</code>{{< /nextlink >}}
