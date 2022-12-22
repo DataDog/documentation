@@ -13,7 +13,7 @@ Cloud Security Posture Management is not currently available in this site.
 
 Datadog Cloud Security Posture Management (CSPM) makes it easier to assess and visualize the current and historic security posture of your cloud resources, automate audit evidence collection, and remediate misconfigurations that leave your organization vulnerable to attacks.
 
-By continuously surfacing security weaknesses resulting from misconfigurations, teams can easily mitigate risks while ensuring compliance with industry standards.
+By continuously surfacing security weaknesses resulting from misconfigurations, teams can mitigate risks while ensuring compliance with industry standards.
 
 ## Detect misconfigurations across your cloud resources
 
@@ -25,15 +25,15 @@ View a high-level overview of your security posture on the [Overview page][3]. E
 
 ## Maintain compliance with industry frameworks and benchmarks
 
-CSPM comes with a set of 400+ out-of-the-box detection rules which are maintained by a team of security experts. Each rule maps to one or more controls and requirements within a compliance standard or industry benchmark, such as the popular PCI and SOC2 compliance frameworks.
+CSPM comes with more than 400 out-of-the-box detection rules that are maintained by a team of security experts. The rules map to controls and requirements within compliance standards and industry benchmarks, such as PCI and SOC2 compliance frameworks.
 
-[View compliance reports][10] that allow you to see how well you're doing against each control in a compliance framework. The reports include details such as resources with the most failed findings, a comprehensive breakdown of the number of resources with pass/fail findings, and the top three high-severity rule failures.
+[View compliance reports][10] to see how well you're doing against each control in a compliance framework. The reports include details such as resources with the most failed findings, a comprehensive breakdown of the number of resources with pass/fail findings, and the top three high-severity rule failures.
 
 {{< img src="security/cspm/compliance_frameworks.png" alt="Cloud Security Posture Management compliance frameworks" width="100%">}}
 
 ## Manage out-of-the-box and custom detection rules
 
-[Out-of-the-box detection rules][7] surface the most important risks so that you can immediately take steps to remediate. Datadog continuously develops new default rules, which are automatically imported into your account. Customize the rules by defining [how each rule scans your environment][6], [create custom rules][8] (GCP only), and [set up real-time notifications for failed findings](#set-up-real-time-notifications).
+[Out-of-the-box detection rules][7] surface the most important risks so that you can immediately take steps to remediate. Datadog continuously develops new default rules, which are automatically imported into your account. [Customize the rules][6] by defining how each rule scans your environment, [create custom rules][8] (GCP only), and [set up real-time notifications for failed findings](#set-up-real-time-notifications).
 
 {{< img src="security/cspm/detection_rules.png" alt="Cloud Security Posture Management detection rules" width="100%">}}
 
@@ -47,7 +47,7 @@ Use template variables and Markdown to [customize notification messages][13]. Ed
 
 ## Review and remediate findings
 
-Drill down deeper into details using the [Security Findings Explorer][4]. View detailed information about a resource, such as configuration, detection rules applied to the resource, and tags that provide additional context about who owns the resource and its location within your environment.
+Investigate details using the [Security Findings Explorer][4]. View detailed information about a resource, such as configuration, detection rules applied to the resource, and tags that provide additional context about who owns the resource and its location within your environment.
 
 {{< img src="security/cspm/security_findings_explorer.png" alt="Cloud Security Posture Management security findings explorer" width="100%">}}
 
