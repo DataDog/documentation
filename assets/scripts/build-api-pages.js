@@ -844,6 +844,8 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
             // for items -> oneOf
             if (value.items.oneOf && value.items.oneOf instanceof Array && value.items.oneOf.length < 20) {
               childData = value.items.oneOf
+              // if one of the entries is just { type: null } we don't want to show it
+              .filter((obj) => !(Object.keys(obj).length === 1))
               .map((obj, indx) => {
                 if("const" in value.items.oneOf[indx]) {
                   return {[value.items.oneOf[indx].const]: value.items.oneOf[indx]}
@@ -873,6 +875,8 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
           // for properties -> oneOf
           if(value.oneOf instanceof Array && value.oneOf.length < 20) {
             childData = value.oneOf
+              // if one of the entries is just { type: null } we don't want to show it
+              .filter((obj) => !(Object.keys(obj).length === 1))
               .map((obj, indx) => {
                 if("const" in value.oneOf[indx]) {
                   return {[value.oneOf[indx].const]: value.oneOf[indx]}
