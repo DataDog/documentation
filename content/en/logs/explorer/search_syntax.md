@@ -32,7 +32,7 @@ There are two types of terms:
 
 * A **sequence** is a group of words surrounded by double quotes, such as `"hello dolly"`.
 
-To combine multiple terms into a complex query, you can use any of the following Boolean operators:
+To combine multiple terms into a complex query, you can use any of the following case sensitive Boolean operators:
 
 |              |                                                                                                        |                              |
 |--------------|--------------------------------------------------------------------------------------------------------|------------------------------|

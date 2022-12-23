@@ -337,6 +337,20 @@ components:
       required: true
       schema:
         type: string
+    SensitiveDataScannerGroupID:
+      description: The ID of a group of rules.
+      in: path
+      name: group_id
+      required: true
+      schema:
+        type: string
+    SensitiveDataScannerRuleID:
+      description: The ID of the rule.
+      in: path
+      name: rule_id
+      required: true
+      schema:
+        type: string
     ServiceAccountID:
       description: The ID of the service account.
       in: path
@@ -1441,7 +1455,11 @@ components:
         by:
           additionalProperties:
             description: The values for each group-by.
-            type: string
+            oneOf:
+            - type: string
+            - format: double
+              type: number
+            - type: boolean
           description: The key-value pairs for each group-by.
           example:
             '@ci.provider.name': gitlab
@@ -1694,7 +1712,11 @@ components:
         by:
           additionalProperties:
             description: The values for each group-by.
-            type: string
+            oneOf:
+            - type: string
+            - format: double
+              type: number
+            - type: boolean
           description: The key-value pairs for each group-by.
           example:
             '@test.service': web-ui-tests
@@ -1783,7 +1805,12 @@ components:
           type: string
       type: object
     CloudConfigurationComplianceRuleOptions:
-      description: Options for cloud_configuration rules.
+      description: 'Options for cloud_configuration rules.
+
+        Fields `resourceType` and `regoRule` are mandatory when managing custom `cloud_configuration`
+        rules.
+
+        '
       properties:
         complexRule:
           description: 'Whether the rule is a complex one.
@@ -1795,8 +1822,13 @@ components:
           type: boolean
         regoRule:
           $ref: '#/components/schemas/CloudConfigurationRegoRule'
-      required:
-      - regoRule
+        resourceType:
+          description: 'Main resource type to be checked by the rule. It should be
+            specified again in `regoRule.resourceTypes`.
+
+            '
+          example: aws_acm
+          type: string
       type: object
     CloudConfigurationRegoRule:
       description: Rule details.
@@ -2822,6 +2854,95 @@ components:
       type: string
       x-enum-varnames:
       - EVENT
+    EventsAggregation:
+      default: count
+      description: The type of aggregation that can be performed on events-based queries.
+      enum:
+      - count
+      - cardinality
+      - pc75
+      - pc90
+      - pc95
+      - pc98
+      - pc99
+      - sum
+      - min
+      - max
+      - avg
+      example: count
+      type: string
+      x-enum-varnames:
+      - COUNT
+      - CARDINALITY
+      - PC75
+      - PC90
+      - PC95
+      - PC98
+      - PC99
+      - SUM
+      - MIN
+      - MAX
+      - AVG
+    EventsCompute:
+      description: The instructions for what to compute for this query.
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/EventsAggregation'
+        interval:
+          description: Interval for compute in milliseconds.
+          example: 60000
+          format: int64
+          type: integer
+        metric:
+          description: The "measure" attribute on which to perform the computation.
+          type: string
+      required:
+      - aggregation
+      type: object
+    EventsDataSource:
+      default: logs
+      description: A data source that is powered by the Events Platform.
+      enum:
+      - logs
+      example: logs
+      type: string
+      x-enum-varnames:
+      - LOGS
+    EventsGroupBy:
+      description: A dimension on which to split a query's results.
+      properties:
+        facet:
+          description: The facet by which to split groups.
+          example: '@error.type'
+          type: string
+        limit:
+          description: The maximum number of groups to return.
+          example: 10
+          format: int32
+          maximum: 2147483647
+          type: integer
+        sort:
+          $ref: '#/components/schemas/EventsGroupBySort'
+      required:
+      - facet
+      type: object
+    EventsGroupBySort:
+      description: The dimension by which to sort a query's results.
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/EventsAggregation'
+        metric:
+          description: Metric whose calculated value should be used to define the
+            sort order of a query's results.
+          example: '@duration'
+          type: string
+        order:
+          $ref: '#/components/schemas/QuerySortOrder'
+        type:
+          $ref: '#/components/schemas/EventsSortType'
+      required:
+      - aggregation
+      type: object
     EventsListRequest:
       description: The object sent with the request to retrieve a list of events from
         your organization.
@@ -2881,6 +3002,11 @@ components:
           example: now
           type: string
       type: object
+    EventsQueryGroupBys:
+      description: The list of facets on which to split results.
+      items:
+        $ref: '#/components/schemas/EventsGroupBy'
+      type: array
     EventsQueryOptions:
       description: 'The global query options that are used. Either provide a timezone
         or a time offset but not both,
@@ -2947,6 +3073,39 @@ components:
           example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
           type: string
       type: object
+    EventsScalarQuery:
+      description: An individual scalar events query.
+      properties:
+        compute:
+          $ref: '#/components/schemas/EventsCompute'
+        data_source:
+          $ref: '#/components/schemas/EventsDataSource'
+        group_by:
+          $ref: '#/components/schemas/EventsQueryGroupBys'
+        indexes:
+          description: The indexes in which to search.
+          items:
+            description: The unique index name.
+            example: main
+            type: string
+          type: array
+        name:
+          description: The variable name for use in formulas.
+          type: string
+        search:
+          $ref: '#/components/schemas/EventsSearch'
+      required:
+      - data_source
+      - compute
+      type: object
+    EventsSearch:
+      description: Configuration of the search/filter for an events query.
+      properties:
+        query:
+          description: The search/filter string for an events query.
+          example: status:warn service:foo
+          type: string
+      type: object
     EventsSort:
       description: The sort parameters when querying events.
       enum:
@@ -2956,6 +3115,40 @@ components:
       x-enum-varnames:
       - TIMESTAMP_ASCENDING
       - TIMESTAMP_DESCENDING
+    EventsSortType:
+      description: The type of sort to use on the calculated value.
+      enum:
+      - alphabetical
+      - measure
+      type: string
+      x-enum-varnames:
+      - ALPHABETICAL
+      - MEASURE
+    EventsTimeseriesQuery:
+      description: An individual timeseries events query.
+      properties:
+        compute:
+          $ref: '#/components/schemas/EventsCompute'
+        data_source:
+          $ref: '#/components/schemas/EventsDataSource'
+        group_by:
+          $ref: '#/components/schemas/EventsQueryGroupBys'
+        indexes:
+          description: The indexes in which to search.
+          items:
+            description: The unique index name.
+            example: main
+            type: string
+          type: array
+        name:
+          description: The variable name for use in formulas.
+          type: string
+        search:
+          $ref: '#/components/schemas/EventsSearch'
+      required:
+      - data_source
+      - compute
+      type: object
     EventsWarning:
       description: A warning message indicating something is wrong with the query.
       properties:
@@ -2972,6 +3165,19 @@ components:
           example: One or several indexes are missing or invalid. Results hold data
             from the other indexes.
           type: string
+      type: object
+    FormulaLimit:
+      description: Message for specifying limits to the number of values returned
+        by a query.
+      properties:
+        count:
+          description: The number of results to which to limit.
+          example: 10
+          format: int32
+          maximum: 2147483647
+          type: integer
+        order:
+          $ref: '#/components/schemas/QuerySortOrder'
       type: object
     FullAPIKey:
       description: Datadog API key.
@@ -3069,6 +3275,12 @@ components:
           nullable: true
           type: array
       type: object
+    GroupTags:
+      description: List of tags that apply to a single response value.
+      items:
+        description: A single tag that applies to a single response value.
+        type: string
+      type: array
     HTTPLog:
       description: Structured log message.
       items:
@@ -6363,6 +6575,23 @@ components:
           $ref: '#/components/schemas/MetricVolumes'
       readOnly: true
       type: object
+    MetricsAggregator:
+      default: avg
+      description: The type of aggregation that can be performed on metrics queries.
+      enum:
+      - avg
+      - min
+      - max
+      - sum
+      - last
+      example: avg
+      type: string
+      x-enum-varnames:
+      - AVG
+      - MIN
+      - MAX
+      - SUM
+      - LAST
     MetricsAndMetricTagConfigurations:
       description: Object for a metrics and metric tag configurations.
       oneOf:
@@ -6378,6 +6607,50 @@ components:
             $ref: '#/components/schemas/MetricsAndMetricTagConfigurations'
           type: array
       readOnly: true
+      type: object
+    MetricsDataSource:
+      default: metrics
+      description: A data source that is powered by the Metrics backend.
+      enum:
+      - metrics
+      example: metrics
+      type: string
+      x-enum-varnames:
+      - METRICS
+    MetricsScalarQuery:
+      description: An individual scalar metrics query.
+      properties:
+        aggregator:
+          $ref: '#/components/schemas/MetricsAggregator'
+        data_source:
+          $ref: '#/components/schemas/MetricsDataSource'
+        name:
+          description: The variable name for use in formulas.
+          type: string
+        query:
+          description: A classic metrics query string.
+          example: avg:system.cpu.user{*}
+          type: string
+      required:
+      - data_source
+      - query
+      - aggregator
+      type: object
+    MetricsTimeseriesQuery:
+      description: An individual timeseries metrics query.
+      properties:
+        data_source:
+          $ref: '#/components/schemas/MetricsDataSource'
+        name:
+          description: The variable name for use in formulas.
+          type: string
+        query:
+          description: A classic metrics query string.
+          example: avg:system.cpu.user{*}
+          type: string
+      required:
+      - data_source
+      - query
       type: object
     MonitorType:
       description: Attributes from the monitor that triggered the event.
@@ -6927,6 +7200,19 @@ components:
       type: string
       x-enum-varnames:
       - PROCESS
+    QueryFormula:
+      description: A formula for calculation based on one or more queries.
+      properties:
+        formula:
+          description: Formula string, referencing one or more queries with their
+            name property.
+          example: a+b
+          type: string
+        limit:
+          $ref: '#/components/schemas/FormulaLimit'
+      required:
+      - formula
+      type: object
     QuerySortOrder:
       default: desc
       description: Direction of sort.
@@ -8389,6 +8675,134 @@ components:
       type: string
       x-enum-varnames:
       - SAML_ASSERTION_ATTRIBUTES
+    ScalarColumn:
+      description: A single column in a scalar query response.
+      properties:
+        unit:
+          description: List of units.
+          items:
+            $ref: '#/components/schemas/Unit'
+          type: array
+        values:
+          description: Array of values for each group-by combination that results
+            from one formula or query.
+          items:
+            description: An individual value for a given column and group-by.
+            format: double
+            type: number
+          type: array
+      type: object
+    ScalarFormulaQueryRequest:
+      description: A wrapper request around one scalar query to be executed.
+      properties:
+        data:
+          $ref: '#/components/schemas/ScalarFormulaRequest'
+      required:
+      - data
+      type: object
+    ScalarFormulaQueryResponse:
+      description: A message containing one or more responses to scalar queries.
+      properties:
+        data:
+          $ref: '#/components/schemas/ScalarResponse'
+        errors:
+          description: An error generated when processing a request.
+          type: string
+      type: object
+    ScalarFormulaRequest:
+      description: A single scalar query to be executed.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ScalarFormulaRequestAttributes'
+        type:
+          $ref: '#/components/schemas/ScalarFormulaRequestType'
+      required:
+      - type
+      - attributes
+      type: object
+    ScalarFormulaRequestAttributes:
+      description: The object describing a scalar formula request.
+      properties:
+        formulas:
+          description: List of formulas to be calculated and returned as responses.
+          items:
+            $ref: '#/components/schemas/QueryFormula'
+          type: array
+        from:
+          description: Start date (inclusive) of the query in milliseconds since the
+            Unix epoch.
+          example: 1568899800000
+          format: int64
+          type: integer
+        queries:
+          $ref: '#/components/schemas/ScalarFormulaRequestQueries'
+        to:
+          description: End date (exclusive) of the query in milliseconds since the
+            Unix epoch.
+          example: 1568923200000
+          format: int64
+          type: integer
+      required:
+      - to
+      - from
+      - queries
+      type: object
+    ScalarFormulaRequestQueries:
+      description: List of queries to be run and used as inputs to the formulas.
+      items:
+        $ref: '#/components/schemas/ScalarQuery'
+      type: array
+    ScalarFormulaRequestType:
+      default: scalar_request
+      description: The type of the resource. The value should always be scalar_request.
+      enum:
+      - scalar_request
+      example: scalar_request
+      type: string
+      x-enum-varnames:
+      - SCALAR_REQUEST
+    ScalarFormulaResponseAtrributes:
+      description: The object describing a scalar response.
+      properties:
+        columns:
+          description: List of response columns, each corresponding to an individual
+            formula or query in the request and with values in parallel arrays matching
+            the series list.
+          items:
+            $ref: '#/components/schemas/ScalarColumn'
+          type: array
+        series:
+          $ref: '#/components/schemas/ScalarResponseSeriesList'
+      type: object
+    ScalarFormulaResponseType:
+      default: scalar_response
+      description: The type of the resource. The value should always be scalar_response.
+      enum:
+      - scalar_response
+      example: scalar_response
+      type: string
+      x-enum-varnames:
+      - SCALAR_RESPONSE
+    ScalarQuery:
+      description: An individual scalar query to one of the basic Datadog data sources.
+      oneOf:
+      - $ref: '#/components/schemas/MetricsScalarQuery'
+      - $ref: '#/components/schemas/EventsScalarQuery'
+      type: object
+    ScalarResponse:
+      description: A message containing the response to a scalar query.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ScalarFormulaResponseAtrributes'
+        type:
+          $ref: '#/components/schemas/ScalarFormulaResponseType'
+      type: object
+    ScalarResponseSeriesList:
+      description: List of group-by tags for the response. Parallel array to the values
+        in each scalar column.
+      items:
+        $ref: '#/components/schemas/GroupTags'
+      type: array
     SecurityFilter:
       description: The security filter's properties.
       properties:
@@ -9757,6 +10171,593 @@ components:
       required:
       - uuid
       type: object
+    SensitiveDataScannerConfigRequest:
+      description: Group reorder request.
+      properties:
+        data:
+          $ref: '#/components/schemas/SensitiveDataScannerReorderConfig'
+        meta:
+          $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
+      required:
+      - data
+      - meta
+      type: object
+    SensitiveDataScannerConfiguration:
+      description: A Sensitive Data Scanner configuration.
+      properties:
+        id:
+          description: ID of the configuration.
+          type: string
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerConfigurationType'
+      type: object
+    SensitiveDataScannerConfigurationData:
+      description: A Sensitive Data Scanner configuration data.
+      properties:
+        data:
+          $ref: '#/components/schemas/SensitiveDataScannerConfiguration'
+      type: object
+    SensitiveDataScannerConfigurationRelationships:
+      description: Relationships of the configuration.
+      properties:
+        groups:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupList'
+      type: object
+    SensitiveDataScannerConfigurationType:
+      default: sensitive_data_scanner_configuration
+      description: Sensitive Data Scanner configuration type.
+      enum:
+      - sensitive_data_scanner_configuration
+      example: sensitive_data_scanner_configuration
+      type: string
+      x-enum-varnames:
+      - SENSITIVE_DATA_SCANNER_CONFIGURATIONS
+    SensitiveDataScannerCreateGroupResponse:
+      description: Create group response.
+      properties:
+        data:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupResponse'
+        meta:
+          $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
+      type: object
+    SensitiveDataScannerCreateRuleResponse:
+      description: Create rule response.
+      properties:
+        data:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleResponse'
+        meta:
+          $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
+      type: object
+    SensitiveDataScannerFilter:
+      description: Filter for the Scanning Group.
+      properties:
+        query:
+          description: Query to filter the events.
+          type: string
+      type: object
+    SensitiveDataScannerGetConfigIncludedArray:
+      description: Included objects from relationships.
+      items:
+        $ref: '#/components/schemas/SensitiveDataScannerGetConfigIncludedItem'
+      type: array
+    SensitiveDataScannerGetConfigIncludedItem:
+      description: An object related to the configuration.
+      oneOf:
+      - $ref: '#/components/schemas/SensitiveDataScannerRuleIncludedItem'
+      - $ref: '#/components/schemas/SensitiveDataScannerGroupIncludedItem'
+      type: object
+    SensitiveDataScannerGetConfigResponse:
+      description: Get all groups response.
+      properties:
+        data:
+          $ref: '#/components/schemas/SensitiveDataScannerGetConfigResponseData'
+        included:
+          $ref: '#/components/schemas/SensitiveDataScannerGetConfigIncludedArray'
+        meta:
+          $ref: '#/components/schemas/SensitiveDataScannerMeta'
+      type: object
+    SensitiveDataScannerGetConfigResponseData:
+      description: Response data related to the scanning groups.
+      properties:
+        id:
+          description: ID of the configuration.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/SensitiveDataScannerConfigurationRelationships'
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerConfigurationType'
+      type: object
+    SensitiveDataScannerGroup:
+      description: A scanning group.
+      properties:
+        id:
+          description: ID of the group.
+          type: string
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupType'
+      type: object
+    SensitiveDataScannerGroupAttributes:
+      description: Attributes of the Sensitive Data Scanner group.
+      properties:
+        description:
+          description: Description of the group.
+          type: string
+        filter:
+          $ref: '#/components/schemas/SensitiveDataScannerFilter'
+        is_enabled:
+          description: Whether or not the group is enabled.
+          type: boolean
+        name:
+          description: Name of the group.
+          type: string
+        product_list:
+          description: List of products the scanning group applies.
+          items:
+            $ref: '#/components/schemas/SensitiveDataScannerProduct'
+          type: array
+      type: object
+    SensitiveDataScannerGroupCreate:
+      description: Data related to the creation of a group.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupAttributes'
+        relationships:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupRelationships'
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupType'
+      required:
+      - type
+      - attributes
+      type: object
+    SensitiveDataScannerGroupCreateRequest:
+      description: Create group request.
+      properties:
+        data:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupCreate'
+        meta:
+          $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
+      type: object
+    SensitiveDataScannerGroupData:
+      description: A scanning group data.
+      properties:
+        data:
+          $ref: '#/components/schemas/SensitiveDataScannerGroup'
+      type: object
+    SensitiveDataScannerGroupDeleteRequest:
+      description: Delete group request.
+      properties:
+        meta:
+          $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
+      required:
+      - meta
+      type: object
+    SensitiveDataScannerGroupDeleteResponse:
+      description: Delete group response.
+      properties:
+        meta:
+          $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
+      type: object
+    SensitiveDataScannerGroupIncludedItem:
+      description: A Scanning Group included item.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupAttributes'
+        id:
+          description: ID of the group.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupRelationships'
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupType'
+      type: object
+    SensitiveDataScannerGroupItem:
+      description: Data related to a Sensitive Data Scanner Group.
+      properties:
+        id:
+          description: ID of the group.
+          type: string
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupType'
+      type: object
+    SensitiveDataScannerGroupList:
+      description: List of groups, ordered.
+      properties:
+        data:
+          description: List of groups. The order is important.
+          items:
+            $ref: '#/components/schemas/SensitiveDataScannerGroupItem'
+          type: array
+      type: object
+    SensitiveDataScannerGroupRelationships:
+      description: Relationships of the group.
+      properties:
+        configuration:
+          $ref: '#/components/schemas/SensitiveDataScannerConfigurationData'
+        rules:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleData'
+      type: object
+    SensitiveDataScannerGroupResponse:
+      description: Response data related to the creation of a group.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupAttributes'
+        id:
+          description: ID of the group.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupRelationships'
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupType'
+      type: object
+    SensitiveDataScannerGroupType:
+      default: sensitive_data_scanner_group
+      description: Sensitive Data Scanner group type.
+      enum:
+      - sensitive_data_scanner_group
+      example: sensitive_data_scanner_group
+      type: string
+      x-enum-varnames:
+      - SENSITIVE_DATA_SCANNER_GROUP
+    SensitiveDataScannerGroupUpdate:
+      description: Data related to the update of a group.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupAttributes'
+        id:
+          description: ID of the group.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupRelationships'
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupType'
+      type: object
+    SensitiveDataScannerGroupUpdateRequest:
+      description: Update group request.
+      properties:
+        data:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupUpdate'
+        meta:
+          $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
+      required:
+      - data
+      - meta
+      type: object
+    SensitiveDataScannerGroupUpdateResponse:
+      description: Update group response.
+      properties:
+        meta:
+          $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
+      type: object
+    SensitiveDataScannerMeta:
+      description: Meta response containing information about the API.
+      properties:
+        count_limit:
+          description: Maximum number of scanning rules allowed for the org.
+          format: int64
+          type: integer
+        group_count_limit:
+          description: Maximum number of scanning groups allowed for the org.
+          format: int64
+          type: integer
+        has_highlight_enabled:
+          description: Whether or not scanned events are highlighted in Logs or RUM
+            for the org.
+          type: boolean
+        is_pci_compliant:
+          description: Whether or not the org is compliant to the payment card industry
+            standard.
+          type: boolean
+        version:
+          description: Version of the API.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+      type: object
+    SensitiveDataScannerMetaVersionOnly:
+      description: Meta payload containing information about the API.
+      properties:
+        version:
+          description: Version of the API (optional).
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+      type: object
+    SensitiveDataScannerProduct:
+      default: logs
+      description: Datadog product onto which Sensitive Data Scanner can be activated.
+      enum:
+      - logs
+      - rum
+      - events
+      - apm
+      type: string
+      x-enum-varnames:
+      - LOGS
+      - RUM
+      - EVENTS
+      - APM
+    SensitiveDataScannerReorderConfig:
+      description: Data related to the reordering of scanning groups.
+      properties:
+        id:
+          description: ID of the configuration.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/SensitiveDataScannerConfigurationRelationships'
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerConfigurationType'
+      type: object
+    SensitiveDataScannerReorderGroupsResponse:
+      description: Group reorder response.
+      properties:
+        meta:
+          $ref: '#/components/schemas/SensitiveDataScannerMeta'
+      type: object
+    SensitiveDataScannerRule:
+      description: Rule item included in the group.
+      properties:
+        id:
+          description: ID of the rule.
+          type: string
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleType'
+      type: object
+    SensitiveDataScannerRuleAttributes:
+      description: Attributes of the Sensitive Data Scanner rule.
+      properties:
+        description:
+          description: Description of the rule.
+          type: string
+        excluded_attributes:
+          description: Attributes excluded from the scan.
+          example:
+          - username
+          items:
+            type: string
+          type: array
+        is_enabled:
+          description: Whether or not the rule is enabled.
+          type: boolean
+        name:
+          description: Name of the rule.
+          type: string
+        pattern:
+          description: Not included if there is a relationship to a standard pattern.
+          type: string
+        tags:
+          description: List of tags.
+          items:
+            type: string
+          type: array
+        text_replacement:
+          $ref: '#/components/schemas/SensitiveDataScannerTextReplacement'
+      type: object
+    SensitiveDataScannerRuleCreate:
+      description: Data related to the creation of a rule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleAttributes'
+        relationships:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleRelationships'
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleType'
+      required:
+      - type
+      - attributes
+      - relationships
+      type: object
+    SensitiveDataScannerRuleCreateRequest:
+      description: Create rule request.
+      properties:
+        data:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleCreate'
+        meta:
+          $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
+      required:
+      - data
+      - meta
+      type: object
+    SensitiveDataScannerRuleData:
+      description: Rules included in the group.
+      properties:
+        data:
+          description: Rules included in the group. The order is important.
+          items:
+            $ref: '#/components/schemas/SensitiveDataScannerRule'
+          type: array
+      type: object
+    SensitiveDataScannerRuleDeleteRequest:
+      description: Delete rule request.
+      properties:
+        meta:
+          $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
+      required:
+      - meta
+      type: object
+    SensitiveDataScannerRuleDeleteResponse:
+      description: Delete rule response.
+      properties:
+        meta:
+          $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
+      type: object
+    SensitiveDataScannerRuleIncludedItem:
+      description: A Scanning Rule included item.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleAttributes'
+        id:
+          description: ID of the rule.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleRelationships'
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleType'
+      type: object
+    SensitiveDataScannerRuleRelationships:
+      description: Relationships of a scanning rule.
+      properties:
+        group:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupData'
+        standard_pattern:
+          $ref: '#/components/schemas/SensitiveDataScannerStandardPatternData'
+      type: object
+    SensitiveDataScannerRuleResponse:
+      description: Response data related to the creation of a rule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleAttributes'
+        id:
+          description: ID of the rule.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleRelationships'
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleType'
+      type: object
+    SensitiveDataScannerRuleType:
+      default: sensitive_data_scanner_rule
+      description: Sensitive Data Scanner rule type.
+      enum:
+      - sensitive_data_scanner_rule
+      example: sensitive_data_scanner_rule
+      type: string
+      x-enum-varnames:
+      - SENSITIVE_DATA_SCANNER_RULE
+    SensitiveDataScannerRuleUpdate:
+      description: Data related to the update of a rule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleAttributes'
+        id:
+          description: ID of the rule.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleRelationships'
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleType'
+      type: object
+    SensitiveDataScannerRuleUpdateRequest:
+      description: Update rule request.
+      properties:
+        data:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleUpdate'
+        meta:
+          $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
+      required:
+      - data
+      - meta
+      type: object
+    SensitiveDataScannerRuleUpdateResponse:
+      description: Update rule response.
+      properties:
+        meta:
+          $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
+      type: object
+    SensitiveDataScannerStandardPattern:
+      description: Data containing the standard pattern id.
+      properties:
+        id:
+          description: ID of the standard pattern.
+          type: string
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerStandardPatternType'
+      type: object
+    SensitiveDataScannerStandardPatternAttributes:
+      description: Attributes of the Sensitive Data Scanner standard pattern.
+      properties:
+        name:
+          description: Name of the standard pattern.
+          type: string
+        pattern:
+          description: Regex to match.
+          type: string
+        tags:
+          description: List of tags.
+          items:
+            type: string
+          type: array
+      type: object
+    SensitiveDataScannerStandardPatternData:
+      description: A standard pattern.
+      properties:
+        data:
+          $ref: '#/components/schemas/SensitiveDataScannerStandardPattern'
+      type: object
+    SensitiveDataScannerStandardPatternType:
+      default: sensitive_data_scanner_standard_pattern
+      description: Sensitive Data Scanner standard pattern type.
+      enum:
+      - sensitive_data_scanner_standard_pattern
+      example: sensitive_data_scanner_standard_pattern
+      type: string
+      x-enum-varnames:
+      - SENSITIVE_DATA_SCANNER_STANDARD_PATTERN
+    SensitiveDataScannerStandardPatternsResponse:
+      description: List Standard patterns response.
+      items:
+        $ref: '#/components/schemas/SensitiveDataScannerStandardPatternsResponseItem'
+      type: array
+    SensitiveDataScannerStandardPatternsResponseData:
+      description: List Standard patterns response data.
+      properties:
+        data:
+          $ref: '#/components/schemas/SensitiveDataScannerStandardPatternsResponse'
+      type: object
+    SensitiveDataScannerStandardPatternsResponseItem:
+      description: Standard pattern item.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SensitiveDataScannerStandardPatternAttributes'
+        id:
+          description: ID of the standard pattern.
+          type: string
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerStandardPatternType'
+      type: object
+    SensitiveDataScannerTextReplacement:
+      description: Object describing how the scanned event will be replaced.
+      properties:
+        number_of_chars:
+          description: 'Required if type == ''partial_replacement_from_beginning''
+
+            or ''partial_replacement_from_end''. It must be > 0.'
+          format: int64
+          minimum: 0
+          type: integer
+        replacement_string:
+          description: Required if type == 'replacement_string'.
+          type: string
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerTextReplacementType'
+      type: object
+    SensitiveDataScannerTextReplacementType:
+      default: none
+      description: 'Type of the replacement text. None means no replacement.
+
+        hash means the data will be stubbed. replacement_string means that
+
+        one can chose a text to replace the data. partial_replacement_from_beginning
+
+        allows a user to partially replace the data from the beginning, and
+
+        partial_replacement_from_end on the other hand, allows to replace data from
+
+        the end.'
+      enum:
+      - none
+      - hash
+      - replacement_string
+      - partial_replacement_from_beginning
+      - partial_replacement_from_end
+      type: string
+      x-enum-varnames:
+      - NONE
+      - HASH
+      - REPLACEMENT_STRING
+      - PARTIAL_REPLACEMENT_FROM_BEGINNING
+      - PARTIAL_REPLACEMENT_FROM_END
     ServiceAccountCreateAttributes:
       description: Attributes of the created user.
       properties:
@@ -10269,11 +11270,200 @@ components:
         description: Tag associated with your event.
         type: string
       type: array
+    TimeseriesFormulaQueryRequest:
+      description: A request wrapper around a single timeseries query to be executed.
+      properties:
+        data:
+          $ref: '#/components/schemas/TimeseriesFormulaRequest'
+      required:
+      - data
+      type: object
+    TimeseriesFormulaQueryResponse:
+      description: A message containing one response to a timeseries query made with
+        timeseries formula query request.
+      properties:
+        data:
+          $ref: '#/components/schemas/TimeseriesResponse'
+        errors:
+          description: The error generated by the request.
+          type: string
+      type: object
+    TimeseriesFormulaRequest:
+      description: A single timeseries query to be executed.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/TimeseriesFormulaRequestAttributes'
+        type:
+          $ref: '#/components/schemas/TimeseriesFormulaRequestType'
+      required:
+      - type
+      - attributes
+      type: object
+    TimeseriesFormulaRequestAttributes:
+      description: The object describing a timeseries formula request.
+      properties:
+        formulas:
+          description: List of formulas to be calculated and returned as responses.
+          items:
+            $ref: '#/components/schemas/QueryFormula'
+          type: array
+        from:
+          description: Start date (inclusive) of the query in milliseconds since the
+            Unix epoch.
+          example: 1568899800000
+          format: int64
+          type: integer
+        interval:
+          description: 'A time interval in milliseconds.
+
+            May be overridden by a larger interval if the query would result in
+
+            too many points for the specified timeframe.
+
+            Defaults to a reasonable interval for the given timeframe.'
+          example: 5000
+          format: int64
+          type: integer
+        queries:
+          $ref: '#/components/schemas/TimeseriesFormulaRequestQueries'
+        to:
+          description: End date (exclusive) of the query in milliseconds since the
+            Unix epoch.
+          example: 1568923200000
+          format: int64
+          type: integer
+      required:
+      - to
+      - from
+      - queries
+      type: object
+    TimeseriesFormulaRequestQueries:
+      description: List of queries to be run and used as inputs to the formulas.
+      items:
+        $ref: '#/components/schemas/TimeseriesQuery'
+      type: array
+    TimeseriesFormulaRequestType:
+      default: timeseries_request
+      description: The type of the resource. The value should always be timeseries_request.
+      enum:
+      - timeseries_request
+      example: timeseries_request
+      type: string
+      x-enum-varnames:
+      - TIMESERIES_REQUEST
+    TimeseriesFormulaResponseType:
+      default: timeseries_response
+      description: The type of the resource. The value should always be timeseries_response.
+      enum:
+      - timeseries_response
+      example: timeseries_response
+      type: string
+      x-enum-varnames:
+      - TIMESERIES_RESPONSE
+    TimeseriesQuery:
+      description: An individual timeseries query to one of the basic Datadog data
+        sources.
+      oneOf:
+      - $ref: '#/components/schemas/MetricsTimeseriesQuery'
+      - $ref: '#/components/schemas/EventsTimeseriesQuery'
+      type: object
+    TimeseriesResponse:
+      description: A message containing the response to a timeseries query.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/TimeseriesResponseAttributes'
+        type:
+          $ref: '#/components/schemas/TimeseriesFormulaResponseType'
+      type: object
+    TimeseriesResponseAttributes:
+      description: The object describing a timeseries response.
+      properties:
+        series:
+          $ref: '#/components/schemas/TimeseriesResponseSeriesList'
+        times:
+          $ref: '#/components/schemas/TimeseriesResponseTimes'
+        values:
+          $ref: '#/components/schemas/TimeseriesResponseValuesList'
+      type: object
+    TimeseriesResponseSeries:
+      description: ''
+      properties:
+        group_tags:
+          $ref: '#/components/schemas/GroupTags'
+        query_index:
+          description: The index of the query in the "formulas" array (or "queries"
+            array if no "formulas" was specified).
+          example: 0
+          format: int32
+          maximum: 2147483647
+          type: integer
+        unit:
+          description: List of units.
+          items:
+            $ref: '#/components/schemas/Unit'
+          type: array
+      type: object
+    TimeseriesResponseSeriesList:
+      description: Array of response series. The index here corresponds to the index
+        in the `formulas` or `queries` array from the request.
+      items:
+        $ref: '#/components/schemas/TimeseriesResponseSeries'
+      type: array
+    TimeseriesResponseTimes:
+      description: Array of times, 1-1 match with individual values arrays.
+      items:
+        description: Start date (inclusive) of the query in seconds since the Unix
+          epoch.
+        example: 1568899800000
+        format: int64
+        type: integer
+      type: array
+    TimeseriesResponseValues:
+      description: Array of values for an individual formula or query.
+      items:
+        description: An individual value for a given time.
+        format: double
+        type: number
+      type: array
+    TimeseriesResponseValuesList:
+      description: Array of value-arrays. The index here corresponds to the index
+        in the `formulas` or `queries` array from the request.
+      items:
+        $ref: '#/components/schemas/TimeseriesResponseValues'
+      type: array
     TimestampEventAttribute:
       description: Timestamp of your event.
       example: '2019-01-02T09:42:36.320Z'
       format: date-time
       type: string
+    Unit:
+      description: Object containing the metric unit family, scale factor, name, and
+        short name.
+      nullable: true
+      properties:
+        family:
+          description: Unit family, allows for conversion between units of the same
+            family, for scaling.
+          example: time
+          type: string
+        name:
+          description: Unit name
+          example: minute
+          type: string
+        plural:
+          description: Plural form of the unit name.
+          example: minutes
+          type: string
+        scale_factor:
+          description: Factor for scaling between units of the same family.
+          example: 60.0
+          format: double
+          type: number
+        short_name:
+          description: Abbreviation of the unit.
+          example: min
+          type: string
+      type: object
     UsageApplicationSecurityMonitoringResponse:
       description: Application Security Monitoring usage response.
       properties:
@@ -15337,6 +16527,88 @@ paths:
         resultsPath: data
       x-undo:
         type: safe
+  /api/v2/query/scalar:
+    post:
+      description: 'The internal endpoint to query scalar/table data for multiple
+        data sources and
+
+        process the data using formulas and functions.'
+      operationId: QueryScalarData
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScalarFormulaQueryRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScalarFormulaQueryResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Scalar cross product query
+      tags:
+      - Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is GA for the metrics data source. Logs
+        is in beta.
+
+        We are gradually onboarding support for more sources. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/query/timeseries:
+    post:
+      description: 'The internal endpoint to query timeseries data for multiple data
+        sources and
+
+        process the data by applying formulas and functions.'
+      operationId: QueryTimeseriesData
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TimeseriesFormulaQueryRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeseriesFormulaQueryResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Timeseries cross product query
+      tags:
+      - Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 1
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is GA for the metrics data source. Logs
+        is in beta.
+
+        We are gradually onboarding support for more sources. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/roles:
     get:
       description: Returns all roles, including their names and their unique identifiers.
@@ -16734,12 +18006,13 @@ paths:
             value: "{\n  \"name\": \"{{ unique }}_cloud\",\n  \"tags\": [\"a:tag\"],\n
               \ \"type\": \"cloud_configuration\",\n  \"isEnabled\": false,\n  \"message\":
               \"Cloud configuration rule\",\n  \"options\": {\n    \"complianceRuleOptions\":
-              {\n      \"regoRule\": {\n        \"policy\": \"package datadog\\n\",\n
-              \       \"resourceTypes\": [\n          \"gcp_compute_disk\"\n        ]\n
-              \     },\n      \"complexRule\": false\n    }\n  },\n  \"complianceSignalOptions\":
-              {\n    \"userActivationStatus\": true,\n    \"userGroupByFields\": [\"@account_id\"]\n
-              \ },\n  \"cases\": [\n    {\n      \"status\": \"info\",\n      \"notifications\":
-              [\"channel\"]\n    }\n  ]\n}"
+              {\n      \"resourceType\": \"gcp_compute_disk\",\n      \"regoRule\":
+              {\n        \"policy\": \"package datadog\\n\",\n        \"resourceTypes\":
+              [\n          \"gcp_compute_disk\"\n        ]\n      },\n      \"complexRule\":
+              false\n    }\n  },\n  \"complianceSignalOptions\": {\n    \"userActivationStatus\":
+              true,\n    \"userGroupByFields\": [\"@account_id\"]\n  },\n  \"cases\":
+              [\n    {\n      \"status\": \"info\",\n      \"notifications\": [\"channel\"]\n
+              \   }\n  ]\n}"
           step: there is a valid "cloud_configuration_rule" in the system
         security_rule:
           parameters:
@@ -17170,6 +18443,414 @@ paths:
       x-menu-order: 10
       x-undo:
         type: idempotent
+  /api/v2/sensitive-data-scanner/config:
+    get:
+      description: List all the Scanning groups in your organization.
+      operationId: ListScanningGroups
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensitiveDataScannerGetConfigResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List Scanning Groups
+      tags:
+      - Sensitive Data Scanner
+      x-given:
+        configuration:
+          step: a valid "configuration" in the system
+      x-menu-order: 1
+      x-undo:
+        type: safe
+    patch:
+      description: Reorder the list of groups.
+      operationId: ReorderScanningGroups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SensitiveDataScannerConfigRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensitiveDataScannerReorderGroupsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Reorder Groups
+      tags:
+      - Sensitive Data Scanner
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      x-undo:
+        type: idempotent
+  /api/v2/sensitive-data-scanner/config/groups:
+    post:
+      description: 'Create a scanning group.
+
+        The request MAY include a configuration relationship.
+
+        A rules relationship can be omitted entirely, but if it is included it MUST
+        be
+
+        null or an empty array (rules cannot be created at the same time).
+
+        The new group will be ordered last within the configuration.'
+      operationId: CreateScanningGroup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SensitiveDataScannerGroupCreateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensitiveDataScannerCreateGroupResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create Scanning Group
+      tags:
+      - Sensitive Data Scanner
+      x-codegen-request-body-name: body
+      x-given:
+        group:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"sensitive_data_scanner_group\",\n
+              \   \"attributes\": {\n      \"name\": \"my-test-group\",\n      \"is_enabled\":
+              false,\n      \"product_list\": [\n          \"logs\"\n      ],\n      \"filter\":
+              {\n          \"query\": \"*\"\n      }\n    },\n    \"relationships\":
+              {\n      \"configuration\": {\n        \"data\": {\n          \"id\":
+              \"{{ configuration.data.id }}\",\n          \"type\": \"{{ configuration.data.type
+              }}\"\n        }\n      },\n      \"rules\": {\n          \"data\": []\n
+              \     }\n    }\n  },\n  \"meta\": {}\n}"
+          step: there is a valid "scanning_group" in the system
+      x-menu-order: 4
+      x-undo:
+        operationId: DeleteScanningGroup
+        parameters:
+        - name: group_id
+          source: data.id
+        - name: body
+          template: "{\n  \"meta\": {}\n}"
+        type: unsafe
+  /api/v2/sensitive-data-scanner/config/groups/{group_id}:
+    delete:
+      description: Delete a given group.
+      operationId: DeleteScanningGroup
+      parameters:
+      - $ref: '#/components/parameters/SensitiveDataScannerGroupID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SensitiveDataScannerGroupDeleteRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensitiveDataScannerGroupDeleteResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete Scanning Group
+      tags:
+      - Sensitive Data Scanner
+      x-codegen-request-body-name: body
+      x-menu-order: 6
+      x-undo:
+        type: idempotent
+    patch:
+      description: 'Update a group, including the order of the rules.
+
+        Rules within the group are reordered by including a rules relationship. If
+        the rules
+
+        relationship is present, its data section MUST contain linkages for all of
+        the rules
+
+        currently in the group, and MUST NOT contain any others.'
+      operationId: UpdateScanningGroup
+      parameters:
+      - $ref: '#/components/parameters/SensitiveDataScannerGroupID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SensitiveDataScannerGroupUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensitiveDataScannerGroupUpdateResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update Scanning Group
+      tags:
+      - Sensitive Data Scanner
+      x-codegen-request-body-name: body
+      x-menu-order: 5
+      x-undo:
+        type: idempotent
+  /api/v2/sensitive-data-scanner/config/rules:
+    post:
+      description: 'Create a scanning rule in a sensitive data scanner group, ordered
+        last.
+
+        The posted rule MUST include a group relationship.
+
+        It MUST include either a standard_pattern relationship or a regex attribute,
+        but not both.
+
+        If included_attributes is empty or missing, we will scan all attributes except
+
+        excluded_attributes. If both are missing, we will scan the whole event.'
+      operationId: CreateScanningRule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SensitiveDataScannerRuleCreateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensitiveDataScannerCreateRuleResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create Scanning Rule
+      tags:
+      - Sensitive Data Scanner
+      x-codegen-request-body-name: body
+      x-given:
+        rule:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"sensitive_data_scanner_rule\",\n
+              \   \"attributes\": {\n      \"name\": \"{{ unique }}\",\n      \"pattern\":
+              \"pattern\",\n      \"text_replacement\": {\n        \"type\": \"none\"\n
+              \     },\n      \"tags\":[\n        \"sensitive_data:true\"\n      ],\n
+              \     \"is_enabled\":true\n    },\n    \"relationships\": {\n      \"group\":
+              {\n        \"data\": {\n          \"id\": \"{{ group.data.id }}\",\n
+              \         \"type\": \"{{ group.data.type }}\"\n        }\n      }\n
+              \   }\n  },\n  \"meta\": {}\n}"
+          step: the "scanning_group" has a "scanning_rule"
+      x-menu-order: 7
+      x-undo:
+        operationId: DeleteScanningRule
+        parameters:
+        - name: rule_id
+          source: data.id
+        - name: body
+          template: "{\n  \"meta\": {}\n}"
+        type: unsafe
+  /api/v2/sensitive-data-scanner/config/rules/{rule_id}:
+    delete:
+      description: Delete a given rule.
+      operationId: DeleteScanningRule
+      parameters:
+      - $ref: '#/components/parameters/SensitiveDataScannerRuleID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SensitiveDataScannerRuleDeleteRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensitiveDataScannerRuleDeleteResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete Scanning Rule
+      tags:
+      - Sensitive Data Scanner
+      x-codegen-request-body-name: body
+      x-menu-order: 9
+      x-undo:
+        type: idempotent
+    patch:
+      description: 'Update a scanning rule.
+
+        The request body MUST NOT include a standard_pattern relationship, as that
+        relationship
+
+        is non-editable. Trying to edit the regex attribute of a rule with a standard_pattern
+
+        relationship will also result in an error.'
+      operationId: UpdateScanningRule
+      parameters:
+      - $ref: '#/components/parameters/SensitiveDataScannerRuleID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SensitiveDataScannerRuleUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensitiveDataScannerRuleUpdateResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update Scanning Rule
+      tags:
+      - Sensitive Data Scanner
+      x-codegen-request-body-name: body
+      x-menu-order: 8
+      x-undo:
+        type: idempotent
+  /api/v2/sensitive-data-scanner/config/standard-patterns:
+    get:
+      description: Returns all standard patterns.
+      operationId: ListStandardPatterns
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensitiveDataScannerStandardPatternsResponseData'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List standard patterns
+      tags:
+      - Sensitive Data Scanner
+      x-menu-order: 3
+      x-undo:
+        type: safe
   /api/v2/series:
     post:
       description: "The metrics end-point allows you to post time-series data that
@@ -18377,7 +20058,8 @@ paths:
           `online_archive`, `profiling`, `rum`, `rum_browser_sessions`, `rum_mobile_sessions`,
           `sds`, `snmp`,
 
-          `synthetics_api`, `synthetics_browser`, and `timeseries`.'
+          `synthetics_api`, `synthetics_browser`, `synthetics_parallel_testing`, and
+          `timeseries`.'
         in: query
         name: filter[product_families]
         required: true
@@ -19154,12 +20836,13 @@ tags:
     with this endpoint."
   name: Logs Restriction Queries
 - description: "The metrics endpoint allows you to:\n\n- Post metrics data so it can
-    be graphed on Datadog\u2019s dashboards\n- Query metrics from any time period\n-
-    Modify tag configurations for metrics\n- View tags and volumes for metrics\n\n**Note**:
-    A graph can only contain a set number of points\nand as the timeframe over which
-    a metric is viewed increases,\naggregation between points occurs to stay below
-    that set number.\n\nThe Post, Patch, and Delete `manage_tags` API methods can
-    only be performed by\na user who has the `Manage Tags for Metrics` permission."
+    be graphed on Datadog\u2019s dashboards\n- Query metrics from any time period
+    (timeseries and scalar)\n- Modify tag configurations for metrics\n- View tags
+    and volumes for metrics\n\n**Note**: A graph can only contain a set number of
+    points\nand as the timeframe over which a metric is viewed increases,\naggregation
+    between points occurs to stay below that set number.\n\nThe Post, Patch, and Delete
+    `manage_tags` API methods can only be performed by\na user who has the `Manage
+    Tags for Metrics` permission."
   name: Metrics
 - description: 'Configure your [Datadog Opsgenie integration](https://docs.datadoghq.com/integrations/opsgenie/)
 
@@ -19196,6 +20879,9 @@ tags:
 
     signals.'
   name: Security Monitoring
+- description: Create, update, delete, and retrieve sensitive data scanner groups
+    and rules.
+  name: Sensitive Data Scanner
 - description: Create, edit, and disable service accounts.
   name: Service Accounts
 - description: API to create, update, retrieve and delete service definitions.

@@ -23,6 +23,8 @@ further_reading:
 
 This tutorial walks you through the steps for enabling tracing on a sample Python application installed on a host. In this scenario, you install a Datadog Agent on the same host as the application. 
 
+{{< img src="tracing/guide/tutorials/tutorial-python-host-overview.png" alt="Diagram showing installation scenario for this tutorial" style="width:100%;" >}}
+
 For other scenarios, including applications in containers, Agent in a container, and applications written in different languages, see the other [Enabling Tracing tutorials][1].
 
 See [Tracing Python Applications][2] for general comprehensive tracing setup documentation for Python.

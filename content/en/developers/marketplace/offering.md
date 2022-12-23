@@ -68,7 +68,7 @@ Integrations send the following types of data to Datadog:
 - [Incidents][10]
 - [Security Events][11]
 
-For more information about Datadog Agent-based integrations, see: 
+For more information about Datadog Agent-based integrations, see:
 
 - [Introduction to Agent-based Integrations][12]
 - [Creating your own solution][13]
@@ -101,7 +101,7 @@ You can explore examples of existing API integrations in the `integrations-extra
 
 ### SaaS license or professional service offerings
 
-To list a SaaS license or professional service offering in the Marketplace, you only need to create an informational tile-only listing.  
+To list a SaaS license or professional service offering in the Marketplace, you only need to create an informational tile-only listing.
 
 ## Set up a directory and clone the Marketplace repository
 
@@ -114,6 +114,7 @@ Once you've decided on an offering, set up a directory:
    The Datadog Development Toolkit command expects you to be working in the `$HOME/dd/` directory. This is not mandatory, but working in a different directory requires additional configuration steps.
 3. Once you have been granted access to the Marketplace repository, create the `dd` directory and clone the `marketplace` repo:
    {{< code-block lang="shell" >}}git clone git@github.com:DataDog/marketplace.git{{< /code-block >}}
+4. Create a feature branch to work in.
 
 ## Install and configure the Datadog development toolkit
 
@@ -247,7 +248,7 @@ For more information, see [Integrations Assets Reference][22].
 
 ## Open a pull request
 
-Open a pull request that contains your integration tile's asset files (including images) in the [`marketplace` repository][18]. Automatic tests run checks in Azure DevOps pipelines to verify that your pull request is in good shape and contains all the required content to be updated.
+Push up your feature branch and open a pull request that contains your integration tile's asset files (including images) in the [`marketplace` repository][18]. The Marketplace repository does not allow forks. For instructions on creating a clone of the repo, see the [Set up section](#set-up-a-directory-and-clone-the-marketplace-repository). After you've created your pull request, automatic checks run in Azure DevOps pipelines to verify that your pull request is in good shape and contains all the required content to be updated.
 
 To request access to the Azure DevOps pipeline, leave a comment in the pull request requesting access.
 

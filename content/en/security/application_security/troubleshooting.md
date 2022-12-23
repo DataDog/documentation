@@ -47,7 +47,7 @@ ASM data is sent with APM traces. See [APM troubleshooting][4] to [confirm APM s
 
  To test your ASM setup, trigger the [Security Scanner Detected][7] rule by running a file that contains the following curl script:
 
-{{< programming-lang-wrapper langs="java,.NET,go,ruby,PHP,NodeJS,python" >}}
+{{< programming-lang-wrapper langs="java,.NET,go,ruby,PHP,Node.js,python" >}}
 {{< programming-lang lang="java" >}}
 
 ```bash
@@ -119,7 +119,7 @@ done
 **Note:** The `dd-test-scanner-log` value is supported in the most recent releases.
 
 {{< /programming-lang >}}
-{{< programming-lang lang="NodeJS" >}}
+{{< programming-lang lang="Node.js" >}}
 
 ```bash
 for ((i=1;i<=200;i++));
@@ -158,7 +158,7 @@ ASM relies on certain tracer integrations. If they are deactivated, ASM won't wo
 
 The required integrations vary by language.
 
-{{< programming-lang-wrapper langs="java,.NET,go,ruby,PHP,NodeJS,python" >}}
+{{< programming-lang-wrapper langs="java,.NET,go,ruby,PHP,Node.js,python" >}}
 {{< programming-lang lang="java" >}}
 
 For [Java][1], if you are using any of the following technologies, the respective integration is required:
@@ -214,9 +214,9 @@ If your framework is not supported, [create a new issue][7] in the Go repository
 [6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi.v5#example-package
 [7]: https://github.com/DataDog/dd-trace-go/issues/new?title=Missing%20appsec%20framework%20support
 {{< /programming-lang >}}
-{{< programming-lang lang="NodeJS" >}}
+{{< programming-lang lang="Node.js" >}}
 
-For [NodeJS][1], the HTTP integration is required.
+For [Node.js][1], the HTTP integration is required.
 <p></p>
 
 [1]: /security/application_security/setup_and_configure/
@@ -270,7 +270,7 @@ If spans are not being transmitted, then the tracer logs will contain logs simil
 
 Below are additional troubleshooting steps for specific languages.
 
-{{< programming-lang-wrapper langs="java,.NET,go,ruby,PHP,NodeJS,python" >}}
+{{< programming-lang-wrapper langs="java,.NET,go,ruby,PHP,Node.js,python" >}}
 {{< programming-lang lang="java" >}}
 The Java library uses [SLF4J][1] for logging. Add the following runtime flags so that the tracer logs to a file:
 
@@ -372,11 +372,11 @@ Enable debug logs with the environment variable `DD_TRACE_DEBUG=1`. The ASM libr
 
 [1]: /tracing/troubleshooting/tracer_startup_logs/
 {{< /programming-lang >}}
-{{< programming-lang lang="NodeJS" >}}
+{{< programming-lang lang="Node.js" >}}
 
-Use this [migration guide][1] to assess any breaking changes if you upgraded your NodeJS library from 1.x to 2.x.
+Use this [migration guide][1] to assess any breaking changes if you upgraded your Node.js library from 1.x to 2.x.
 
-If you don’t see ASM threat information in the [Trace and Signals Explorer][2] for your NodeJS application, follow these steps to troubleshoot the issue:
+If you don’t see ASM threat information in the [Trace and Signals Explorer][2] for your Node.js application, follow these steps to troubleshoot the issue:
 
 1. Confirm the latest version of ASM is running by checking that `appsec_enabled` is `true` in the [startup logs][3]
 

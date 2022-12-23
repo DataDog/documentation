@@ -140,7 +140,7 @@
 			"`clusterChecksRunner.affinity.podAffinity.preferredDuringSchedulingIgnoredDuringExecution`",
 			": Required. A list of node selector terms. The terms are ORed.",
 			"`site`",
-			": Set the site of the Datadog intake for Agent data:  {{< region-param key=\"dd_site\" code=\"true\" >}}. Defaults to `datadoghq.com`."			
+			": Set the site of the Datadog intake for Agent data:  {{< region-param key=\"dd_site\" code=\"true\" >}}. Defaults to `datadoghq.com`."
 		],
 		"description": "Description list"
 	},
@@ -195,7 +195,7 @@
 	"Video": {
 		"prefix": ";;video",
 		"body": [
-			"{{< img src=\"path/to/your/image-name-here.png\" alt=\"Your image description\" video=\"true\" >}}"
+			"{{< img src=\"path/to/your/image-name-here.png\" alt=\"Your image description\" video=true >}}"
 		],
 		"description": "Video short-code"
 	}
