@@ -33,9 +33,7 @@ Notebooks combine graphs and text in a linear, cell-based format. They help you 
 
 {{< img src="notebooks/collaboration.png" alt="Indicators of users viewing the notebook and making live edits" style="width:100%;">}}
 
-Notebooks support real-time collaboration. Presence indicators show who is viewing your notebook at any time, as well as real-time edits and comments. 
-
-Changes made to a notebook appear automatically, without the need to refresh.
+Notebooks support real-time collaboration. Presence indicators show who is viewing your notebook at any time, as well as real-time edits to notebook cells. Changes made to a notebook appear automatically, without the need to refresh.
 
 Everyone on your team can open any notebook, but a notebook can only be modified or deleted by any Datadog role with the `Notebooks Write` permission.
 
