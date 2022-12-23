@@ -33,7 +33,6 @@ See [Tracing Java Applications][2] for general comprehensive tracing setup docum
 - Git 
 - Docker
 - Curl
-- Java 11-compatible JDK (not just a JRE) on the host. In this tutorial, you're building on and deploying to the same machine.
 
 ## Install the sample Dockerized Java application
 
