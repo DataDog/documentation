@@ -367,64 +367,65 @@ For more information, read [Custom Instrumentation][12].
 
 Tracing a single application is a great start, but the real value in tracing is seeing how requests flow through your services. This is called _distributed tracing_. 
 
-The sample project includes a second application called `calendar_app` that returns a random date whenever it is invoked. The `POST` endpoint in the Notes application has a second query parameter named `add_date`. When it is set to `y`, Notes calls the calendar application to get a date to add to the note.
+The sample project includes a second application called `calendar` that returns a random date whenever it is invoked. The `POST` endpoint in the Notes application has a second query parameter named `add_date`. When it is set to `y`, Notes calls the calendar application to get a date to add to the note.
 
-1. Start the calendar application by running:
+1. Navigate to the `/calendar` directory in the sample repo and build and run the calendar app:
+{{< tabs >}}
 
-   {{< code-block lang="bash" >}}
-DD_SERVICE=calendar DD_ENV=dev DD_VERSION=0.1.0 \ 
-ddtrace-run python -m calendar_app.app
-   {{< /code-block >}}
+{{% tab "Maven" %}}
+
+Run:
+
+```sh
+./mvnw clean package
+
+java -javaagent:../dd-java-agent.jar -Ddd.trace.sample.rate=1 -Ddd.service=calendar -Ddd.env=dev -jar -Ddd.version=0.0.1 target/calendar-0.0.1-SNAPSHOT.jar
+```
+
+Or use the script:
+
+```sh
+sh ./scripts/mvn_instrumented_run.sh
+```
+
+{{% /tab %}}
+
+{{% tab "Gradle" %}}
+
+Run: 
+```sh
+./gradlew bootJar
+
+java -javaagent:../dd-java-agent.jar -Ddd.trace.sample.rate=1 -Ddd.service=calendar -Ddd.env=dev -jar -Ddd.version=0.0.1 build/libs/calendar-0.0.1-SNAPSHOT.jar
+```
+
+Or use the script:
+
+```sh
+sh ./scripts/gradle_instrumented_run.sh
+```
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
 
 2. Send a POST request with the `add_date` parameter:
 
 `curl -X POST 'localhost:8080/notes?desc=hello_again&add_date=y'`
-: `(2, hello_again with date 2022-11-06)`
+: `{"id":1,"description":"hello_again with date 2022-11-06"}`
 
 
-3. In the Trace Explorer, click this latest trace to see a distributed trace between the two services:
+3. In the Trace Explorer, click this latest `notes` trace to see a distributed trace between the two services:
 
-   {{< img src="tracing/guide/tutorials/tutorial-python-host-distributed.png" alt="A flame graph for a distributed trace." style="width:100%;" >}}
+   {{< img src="tracing/guide/tutorials/tutorial-java-host-distributed.png" alt="A flame graph for a distributed trace." style="width:100%;" >}}
 
-## Add more custom instrumentation
+Note that you didn't change anything in the `notes` application. Datadog automatically instruments both the `okHttp` library used to make the HTTP call from `notes` to `calendar`, and the Jetty library used to listen for HTTP requests in `notes` and `calendar`. This allows the trace information to be passed from one application to the other, capturing a distributed trace. 
 
-You can add custom instrumentation by using code. Suppose you want to further instrument the calendar service to better see the trace:
 
-1. Open `notes_app/notes_logic.py`. 
-2. Add the following import
+## Troubleshooting
 
-   ```python
-   from ddtrace import tracer
-   ```
-3. Inside the `try` block, at about line 28, add the following `with` statement:
-
-   ```python
-   with tracer.trace(name="notes_helper", service="notes_helper", resource="another_process") as span:
-   ```
-   Resulting in this:
-   {{< code-block lang="python" >}}
-def create_note(self, desc, add_date=None):
-        if (add_date):
-            if (add_date.lower() == "y"):
-                try:
-                    with tracer.trace(name="notes_helper", service="notes_helper", resource="another_process") as span:
-                        self.nh.another_process()
-                    note_date = requests.get(f"http://localhost:9090/calendar")
-                    note_date = note_date.text
-                    desc = desc + " with date " + note_date
-                    print(desc)
-                except Exception as e:
-                    print(e)
-                    raise IOError("Cannot reach calendar service.")
-        note = Note(description=desc, id=None)
-        note.id = self.db.create_note(note){{< /code-block >}}
-
-4. Send more HTTP requests, specifically `POST` requests, with the `add_date` argument.
-5. In the Trace Explorer, click into one of these new `POST` traces to see a custom trace across multiple services:
-   {{< img src="tracing/guide/tutorials/tutorial-python-host-cust-dist.png" alt="A flame graph for a distributed trace with custom instrumentation." style="width:100%;" >}}
-   Note the new span labeled `notes_helper.another_process`.
-
-If you're not receiving traces as expected, set up debug mode in the `ddtrace` Python package. Read [Enable debug mode][13] to find out more.
+If you're not receiving traces as expected, set up debug mode for the Java tracer. Read [Enable debug mode][13] to find out more.
 
 
 ## Further reading
