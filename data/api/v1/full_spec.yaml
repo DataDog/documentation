@@ -10650,7 +10650,8 @@ components:
       - host_name
       type: object
     ServiceCheckStatus:
-      description: The status of a service check.
+      description: The status of a service check. Set to `0` for OK, `1` for warning,
+        `2` for critical, and `3` for unknown.
       enum:
       - 0
       - 1
