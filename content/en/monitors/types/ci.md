@@ -18,6 +18,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/configure-pipeline-alerts-with-ci-monitors/"
   tag: "Blog"
   text: "Configure pipeline alerts with Datadog CI monitors"
+- link: "https://www.datadoghq.com/blog/configure-pipeline-alerts-with-ci-monitors/"
+  tag: "Blog"
+  text: "Configure pipeline alerts with Datadog CI monitors"
 ---
 
 {{< site-region region="gov" >}}
@@ -187,10 +190,16 @@ The `duration` metric can be used to identify pipeline and test performance regr
 ### Track new flaky tests
 Test monitors have the `New Flaky Test`, `Test Failures`, and `Test Performance` common monitor types for simple monitor setup. This monitor sends alerts when new flaky tests are added to your codebase. The query is grouped by `Test Full Name` so you don't get alerted on the same new flaky test more than once.
 
+A test run is marked as `flaky` if it exhibits flakiness within the same commit after some retries. If it exhibits flakiness multiple times (because multiple retries were executed), the `is_flaky` tag is added to the first test run that is detected as flaky.
+
+A test run is marked as `new flaky` if that particular test has not been detected to be flaky within the same branch or default branch. Only the first test run that is detected as new flaky is marked with the `is_new_flaky` tag (regardless of the number of retries).
+
+For more information on flaky tests, see the [flaky test management guide][6].
+
 {{< img src="ci/flaky_test_monitor.png" alt="CI flaky test monitor" style="width:100%;">}}
 
 ### Maintain code coverage percentage
-[Custom metrics][5], such as code coverage percentage, can be created and used within monitors. The monitor below sends alerts when code coverage dips below a certain percentage, which can help with maintaining test performance over time. 
+[Custom metrics][5], such as code coverage percentage, can be created and used within monitors. The monitor below sends alerts when code coverage dips below a certain percentage, which can help with maintaining test performance over time.
 
 {{< img src="ci/codecoveragepct_monitor_light.png" alt="CI flaky test monitor" style="width:100%;">}}
 
@@ -205,3 +214,4 @@ Test monitors have the `New Flaky Test`, `Test Failures`, and `Test Performance`
 [3]: /monitors/create/configuration/#advanced-alert-conditions
 [4]: /monitors/notify/
 [5]: https://docs.datadoghq.com/continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
+[6]: https://docs.datadoghq.com/continuous_integration/guides/flaky_test_management/

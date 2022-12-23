@@ -568,6 +568,17 @@ The example above matches `/var/log/myapp/log/myfile.log` and excludes `/var/log
 
 **Note**: The Agent requires read and execute permissions on a directory to list all the available files in it.
 
+## Tail most recently modified files first
+**Note:** This feature is in public beta.
+
+When prioritizing files to tail, the Datadog Agent sorts the filenames in the directory path by reverse lexicographic order. To sort files based on file modification time, set the configuration option `logs_config.file_wildcard_selection_mode` to the value `by_modification_time`.
+
+This option is helpful when the number of total log file matches exceeds `logs_config.open_files_limit`. Using `by_modification_time` ensures that the most recently updated files are tailed first in the defined directory path.
+
+To restore default behavior, set the configuration option `logs_config.file_wildcard_selection_mode` to the value`by_name`.
+
+This feature requires Agent version 7.40.0 or above.
+
 ## Log file encodings
 
 By default, the Datadog Agent assumes that logs use UTF-8 encoding. If your application logs use a different encoding, specify the `encoding` parameter in the logs configuration setting.

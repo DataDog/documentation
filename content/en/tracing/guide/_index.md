@@ -14,11 +14,12 @@ aliases:
     {{< nextlink href="tracing/guide/week_over_week_p50_comparison" >}}2. Compare p50 latency week over week for a service{{< /nextlink >}}
     {{< nextlink href="tracing/guide/apm_dashboard" >}}3. Create a Dashboard to track and correlate APM metrics{{< /nextlink >}}
     {{< nextlink href="tracing/guide/slowest_request_daily" >}}4. Debug the slowest trace on the slowest endpoint of a web service{{< /nextlink >}}
+    <a id="enabling-tracing-tutorials">
     {{< nextlink href="tracing/guide/add_span_md_and_graph_it" >}}5. Add span tags and filter and group your application performance{{< /nextlink >}}
     {{< nextlink href="tracing/guide/instrument_custom_method" >}}6. Instrument a custom method to get deep visibility into your business logic.{{< /nextlink >}}
 {{< /whatsnext >}}
+
 <br>
-<a id="enabling-tracing-tutorials">
 {{< whatsnext desc="Tutorials: Enabling Tracing" >}}
     {{< nextlink href="tracing/guide/tutorial-enable-python-host" >}}<img src="/images/integrations_logos/python-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> Enabling Tracing on a Python Application on the Same Host as Datadog Agent{{< /nextlink >}}
     {{< nextlink href="tracing/guide/tutorial-enable-python-containers" >}}<img src="/images/integrations_logos/python-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-container-icon.png" /> Enabling Tracing on a Python Application and Datadog Agent in Containers{{< /nextlink >}}

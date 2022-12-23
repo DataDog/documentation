@@ -105,6 +105,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Mule® インテグレーション
+  uninstallation: README.md#Uninstallation
 ---
 
 

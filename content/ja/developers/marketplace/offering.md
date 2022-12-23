@@ -1,7 +1,7 @@
 ---
 description: Datadog マーケットプレイスで製品開発を行い、公開する方法について説明します。
 further_reading:
-- link: https://www.datadoghq.com/partner/
+- link: https://partners.datadoghq.com/
   tag: パートナーネットワーク
   text: Datadog パートナーネットワーク
 - link: https://www.datadoghq.com/blog/datadog-marketplace/
@@ -10,6 +10,9 @@ further_reading:
 - link: /developers/marketplace/
   tag: ドキュメント
   text: Datadog マーケットプレイスについて
+- link: /developers/integrations/oauth_for_integrations
+  tag: ドキュメント
+  text: OAuth を使ったインテグレーションについて
 title: マーケットプレイス製品の開発
 type: documentation
 ---
@@ -72,7 +75,7 @@ Datadog Agent ベースのインテグレーションの詳細については、
 
 ### REST API インテグレーション
 
-[API インテグレーション][14]を使用して、バックエンドからデータをリッチ化して送信したり、Datadog から直接データを取り出したりすることができます。API インテグレーションは、Datadog と他の SaaS プラットフォーム間のコネクタを構築する際に有効です。
+[API インテグレーション][14]を使用して、バックエンドからデータをリッチ化して送信したり、Datadog から直接データを取り出したりすることができます。API インテグレーションは、Datadog と他の SaaS プラットフォーム間のコネクターを構築する際に効果的です。この方法は、SaaS ベースで、作成者が認可のためにログインするための既存の Web サイトを持っている技術パートナーに最適です。
 
 API インテグレーションは、Datadog Agent を使用してデータを収集しないため、開発作業が完了したら、[情報タイルのみのリスト](#saas-license-or-professional-service-offerings)を作成する必要があります。
 
@@ -88,7 +91,9 @@ REST API インテグレーションは、以下の種類のデータを Datadog
 - [インシデント][10]
 - [セキュリティイベント][11]
 
-Datadog API エンドポイントにデータを送信するにはDatadog API キーが必要で、Datadog からデータをクエリしたり、Datadog サイト上のリソースを作成するにはアプリケーションキーが必要です。オプションとして、代わりにマーケットプレイスタイルで[インテグレーションのための OAuth][15] を設定することができます。
+Datadog API エンドポイントにデータを送信するには Datadog API キーが必要で、Datadog からデータをクエリするにはアプリケーションキーが必要です。Datadog では、これらの資格情報をユーザーに直接要求する代わりに、[OAuth][15] を使用して API ベースのインテグレーションの認可とアクセスを処理することを推奨しています。
+
+[Vantage][24] のような `integrations-extras` リポジトリで、既存の API インテグレーションの例を調べることができます。
 
 ### Datadog Apps
 
@@ -109,6 +114,7 @@ SaaS ライセンスまたはプロフェッショナルサービス製品をマ
    Datadog Development Toolkit コマンドは、`$HOME/dd/` ディレクトリで作業していることを想定しています。これは必須ではありませんが、異なるディレクトリで作業する場合は、追加の構成手順が必要です。
 3. マーケットプレイスのリポジトリへのアクセスが許可されたら、`dd` ディレクトリを作成し、`marketplace` リポジトリを複製します。
    {{< code-block lang="shell" >}}git clone git@github.com:DataDog/marketplace.git{{< /code-block >}}
+4. 作業するフィーチャーブランチを作成します。
 
 ## Datadog Development Toolkit をインストールして構成する
 
@@ -242,7 +248,7 @@ Agent ベースのインテグレーションのためのスキャフォール�
 
 ## プルリクエストを開く
 
-[`marketplace` リポジトリ][18]に、インテグレーションタイルのアセットファイル (イメージを含む) を含むプルリクエストを開きます。自動テストは、Azure DevOps パイプラインでチェックを実行し、プルリクエストが良い状態であり、更新に必要なすべてのコンテンツが含まれていることを確認します。
+機能ブランチをプッシュアップし、インテグレーションタイルのアセットファイル (イメージを含む) を含むプルリクエストを [`marketplace` リポジトリ][18]に開きます。Marketplace リポジトリはフォークを許可していません。リポジトリの複製を作成する手順については、[セットアップセクション](#set-up-a-directory and clone-the-marketplace-repository)を参照してください。プルリクエストを作成すると、Azure DevOps パイプラインで自動チェックが実行され、プルリクエストが正常であること、更新に必要なコンテンツがすべて含まれていることが確認されます。
 
 Azure DevOps パイプラインへのアクセスをリクエストするには、プルリクエストにコメントを残して、アクセスをリクエストします。
 
@@ -260,7 +266,7 @@ Azure DevOps パイプラインへのアクセスをリクエストするには�
 - [Datadog モニター][23]内のブログ記事
 - ソーシャルメディア投稿の増幅
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -287,3 +293,4 @@ Azure DevOps パイプラインへのアクセスをリクエストするには�
 [21]: https://pypi.org/project/datadog-checks-dev/
 [22]: /ja/developers/integrations/check_references/#manifest-file
 [23]: https://datadoghq.com/blog/
+[24]: https://github.com/DataDog/integrations-extras/tree/master/vantage

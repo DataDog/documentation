@@ -27,7 +27,9 @@
                     "account_management",
                     "synthetics",
                     "database_monitoring",
-                    "profiler"
+                    "profiler",
+                    "cloud_cost_management",
+                    "universal_service_monitoring"
                 ]
             },
             "tags": ["faq"],
@@ -120,7 +122,9 @@
                     "watchdog",
                     "database_monitoring",
                     "profiler",
-                    "containers"
+                    "containers",
+                    "cloud_cost_management",
+                    "universal_service_monitoring"
                 ]
             },
             "tags": ["docs"],

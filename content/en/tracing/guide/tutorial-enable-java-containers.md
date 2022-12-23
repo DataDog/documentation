@@ -23,7 +23,7 @@ further_reading:
 
 This tutorial walks you through the steps for enabling tracing on a sample Java application installed in a container. In this scenario, the Datadog Agent is also installed in a container. 
 
-For other scenarios, including the application and Agent on a host, the application in a container and Agent on a host, application and the Agent on cloud infrastructure, and applications written in other languages, see the other [Enabling Tracing tutorials][1].
+For other scenarios, including the application and Agent on a host, the application in a container and Agent on a host, the application and Agent on cloud infrastructure, and applications written in other languages, see the other [Enabling Tracing tutorials][1].
 
 See [Tracing Java Applications][2] for general comprehensive tracing setup documentation for Java.
 

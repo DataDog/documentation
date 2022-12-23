@@ -179,11 +179,11 @@ It supports the use of all PHP frameworks, and also the use no framework.
 
 {{< programming-lang lang="nodejs" >}}
 
-### Supported NodeJS versions
+### Supported Node.js versions
 
-The Datadog NodeJS library supports the following NodeJS versions:
+The Datadog Node.js library supports the following Node.js versions:
 
-- NodeJS 14 and higher
+- Node.js 14 and higher
 
 These are supported on the following architectures:
 
@@ -192,7 +192,7 @@ These are supported on the following architectures:
 - macOS (Darwin) x86-64
 - Windows (msvc) x86, x86-64
 
-You can monitor application security for NodeJS apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate.
+You can monitor application security for Node.js apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate.
 
 ### Supported frameworks
 

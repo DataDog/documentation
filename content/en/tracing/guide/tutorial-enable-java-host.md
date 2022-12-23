@@ -32,7 +32,7 @@ See [Tracing Java Applications][2] for general comprehensive tracing setup docum
 - A Datadog account and [organization API key][3]
 - Git
 - Curl
-- A Linux host, physical or virtual with root access when using sudo
+- A physical or virtual Linux host with root access when using sudo
 - Java 11-compatible JDK (not just a JRE) on the host. In this tutorial, you're building on and deploying to the same machine.
 
 ## Install the Agent
@@ -78,7 +78,7 @@ Build the sample app using either Maven or Gradle, whichever you are more comfor
 ./gradlew clean bootJar
 ```
 
-This uses the Spring Boot Jar plugin to create a single Jar file that contains all necessary files to run the Java application.
+This uses the Spring Boot Jar plugin to create a single Jar file that contains all the necessary files to run the Java application.
 
 {{% /tab %}}
 
@@ -219,13 +219,13 @@ Wait a few moments, and take a look at your Datadog UI. Navigate to [**APM > Tra
 
 {{< img src="tracing/guide/tutorials/tutorial-java-host-traces.png" alt="Traces view shows trace data coming in from host." style="width:100%;" >}}
 
-`h2` is the embedded in-memory database for this tutorial and `notes` is the Spring Boot application. The traces list shows all of the spans, when they started, what resource was tracked with the span, and how long it took. 
+The `h2` is the embedded in-memory database for this tutorial, and `notes` is the Spring Boot application. The traces list shows all the spans, when they started, what resource was tracked with the span, and how long it took. 
 
 If you don't see traces, clear any filter in the Traces Search field (sometimes it filters on an environment variable such as `ENV` that you aren't using).
 
 ### Examine a trace
 
-In the Traces page, click on a `POST /notes` trace and you'll see a flame graph that shows how long each span took and what other spans occurred before a span completed. The bar at the top of the graph is the span you selected on the previous screen (in this case, the initial entry point into our notes application). 
+On the Traces page, click on a `POST /notes` trace, and you'll see a flame graph that shows how long each span took and what other spans occurred before a span completed. The bar at the top of the graph is the span you selected on the previous screen (in this case, the initial entry point into our notes application). 
 
 The width of a bar indicates how long it took to complete. A bar at a lower depth represents a span that completes during the lifetime of a bar at a higher depth. 
 
@@ -242,11 +242,11 @@ A `GET /notes` trace looks something like this:
 
 The Java tracing library takes advantage of Java’s built-in agent and monitoring support. The flag `-javaagent:../dd-java-agent.jar` tells the JVM where to find the Java tracing library so it can run as a Java Agent. Learn more about Java Agents at [https://www.baeldung.com/java-instrumentation][7].
 
-In addition to the `javaagent` flag, which enables the Java Agent, the launch commands also specify three [Unified Service Tagging][10] settings to uniquely identify your application within Datadog. Always specify `env`, `service`, and `version` tags for every monitored application.
+In addition to the `javaagent` flag, which enables the Java Agent, the launch commands specify three [Unified Service Tagging][10] settings to uniquely identify your application within Datadog. Always specify `env`, `service`, and `version` tags for every monitored application.
 
 And finally, the `dd.trace.sample.rate` flag sets the sample rate for this application. The launch commands above set its value to `1`, which means that 100% of all requests to the `notes` service are sent to the Datadog backend for analysis and display. For a low-volume test application, this is fine. Do not do this in production or in any high-volume environment, because this results in a very large volume of data. Instead, sample some of your requests. Pick a value between 0 and 1. For example, `-Ddd.trace.sample.rate=0.1` sends traces for 10% of your requests to Datadog. Read more about [tracing configuration settings][14] and [sampling mechanisms][15].
 
-Notice that the flags in the commands appear _before_ the `-jar` flag. That’s because these are parameters for the Java Virtual Machine and not for your application. Make sure that when you add the Java Agent to your application, you specify the flags in the right location.
+Notice that the flags in the commands appear _before_ the `-jar` flag. That’s because these are parameters for the Java Virtual Machine, not your application. Make sure that when you add the Java Agent to your application, you specify the flags in the right location.
 
 
 ## Add manual instrumentation to the Java application
