@@ -19,7 +19,7 @@ further_reading:
 
 ## Overview
 
-AWS Fargate on EKS provides a fully managed experience for running Kubernetes workloads.  Kinesis Data Firehose can be used with EKS's Fluentbit log-router to collect logs in Datadog.
+AWS Fargate on EKS provides a fully managed experience for running Kubernetes workloads. Kinesis Data Firehose can be used with EKS's Fluentbit log-router to collect logs in Datadog.
 
 {{< img src="integrations/guide/aws-eks-fargate-logs-with-kinesis-data-firehose/log_streaming_diagram.png" alt="Diagram of the log flow" responsive="true">}}
  
@@ -33,17 +33,17 @@ AWS Fargate on EKS provides a fully managed experience for running Kubernetes wo
 
 The following are key differences between using Kinesis Data Firehose and Cloudwatch log forwarding.
 
-- **Metadata and tagging**: Metadata such as Kubernetes namespace and container ID are structured attributes when sending logs via Kinesis Data Firehose.
+- **Metadata and tagging**: Metadata such as Kubernetes namespace and container ID are accessible as structured attributes when sending logs with Kinesis Data Firehose.
 
 - **AWS Costs**: AWS Costs may vary for individual use cases but Kinesis Data Firehose ingestion is generally less than comparable Cloudwatch Log ingestion. 
 
 ## Requirements
-1. An EKS cluster with a [Fargate Profile][1]. In this guide, we used a cluster named `fargate-cluster` with a fargate profile nameed `fargate-profile` applied to the namespace `fargate-namespace`.
+1. An EKS cluster with a [Fargate Profile][1]. In this guide, the cluster is named `fargate-cluster` with a fargate profile nameed `fargate-profile` applied to the namespace `fargate-namespace`.
 2. The following command line tools: `kubectl`, `aws`, `jq`
 
 ## Setup
  
-### Create Kinesis Dlivery Stream
+### Create Kinesis Delivery Stream
 
 1. Go to the Amazon Kinesis Console. Under Data Firehose, click **Create delivery stream** and use the following settings:
     - **Source and Destination**
@@ -60,7 +60,7 @@ The following are key differences between using Kinesis Data Firehose and Cloudw
 2. Scroll to the bottom and click **Create delivery stream**
 3. After creatinng the delivery stream, use the **Test with demo data** function to verify connection to your Datadog account.
  
-### Configure Fluent Bit for Firehose on EKS Fargate Cluster
+### Configure Fluent Bit for Firehose on EKS Fargate cluster
  
 1. Create the `aws-observabilty` namespace and apply the following configmap for Fluent Bit. Substitue the name of hte delivery stream you created in place of `PUT-DOG-abcde`
 
@@ -89,7 +89,7 @@ data:
         delivery_stream PUT-DOG-abcde
  ```
 
-2. Provide the relevant IAM permissions for the log router running on AWS Fargate to write to the Kinesis Data Firehose by attaching an IAM policy to the pod execution role. In doing so, the underlying Fargate resource will gain permission to write to the Kinesis Data Firehouse instead of the workload running in the Kubernetes Pod. 
+2. Provide the relevant IAM permissions for the log router running on AWS Fargate to write to the Kinesis Data Firehose by attaching an IAM policy to the pod execution role.
 
  1. First define a policy in a file nammed `allow_kinesis_put_permission.json`. Replace the ARN with the relevant Firehouse Delivery Stream ARN when you create the file.
 
@@ -167,7 +167,7 @@ To generate logs and test the Kinesis pipeline, deploy a sample workload to your
 
 ### Remap attributes for log correlation
 
-Logs from this configuration will require some attributes to be remapped to maximize consistency with standard Kubernetes tags in Datadog.  
+Logs from this configuration require some attributes to be remapped to maximize consistency with standard Kubernetes tags in Datadog.  
 1. Go to [Datadog Log Pipelines][3]
 2. Create a new pipeline with **Name** `EKS Fargate Log Pipeline` filtered on **Tags:** `service:aws source:aws`
 3. Create 4 Remapper processors to remap the following Attributes to Tag Keys:
