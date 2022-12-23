@@ -722,7 +722,8 @@ const descColumn = (key, value, defaultMarkup) => {
   if(value.deprecated) {
     desc = `**DEPRECATED**: ${desc}`;
   }
-  return `<div class="col-5 column">${marked(desc) ? marked(desc).trim() : ""}${defaultMarkup}</div>`.trim();
+  let fmtDesc = marked(desc) ? marked(desc).trim() : "";
+  return `<div class="col-5 column">${(fmtDesc) ? fmtDesc : desc}${defaultMarkup}</div>`.trim();
 };
 
 const requiredColumn = (requiredField) => {
