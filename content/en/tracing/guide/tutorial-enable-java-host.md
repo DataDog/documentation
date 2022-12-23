@@ -25,7 +25,7 @@ This tutorial walks you through the steps for enabling tracing on a sample Java 
 
 For other scenarios, including applications in containers or on cloud infrastructure, Agent in a container, and applications written in different languages, see the other [Enabling Tracing tutorials][1].
 
-See [Tracing Java Applications][2] for general comprehensive tracing setup documentation for Java.
+See [Tracing Java Applications][2] for general comprehensive tracing setup documentation for Java. 
 
 ### Prerequisites
 

@@ -30,68 +30,56 @@ See [Tracing Java Applications][2] for general comprehensive tracing setup docum
 ### Prerequisites
 
 - A Datadog account and [organization API key][3]
-- Git
-- Java that meets the [tracing library requirements][4]
+- Git 
+- Docker
+- Curl
+- Java 11-compatible JDK (not just a JRE) on the host. In this tutorial, you're building on and deploying to the same machine.
 
 ## Install the sample Dockerized Java application
 
-The code sample for this tutorial is on GitHub, at [github.com/Datadog/apm-tutorial-python][9]. To get started, clone the repository:
+The code sample for this tutorial is on GitHub, at [github.com/DataDog/apm-tutorial-java-host][9]. To get started, clone the repository:
 
 {{< code-block lang="sh" >}}
-git clone https://github.com/DataDog/apm-tutorial-python.git
+git clone https://github.com/DataDog/apm-tutorial-java-host.git
 {{< /code-block >}}
 
-The repository contains a multi-service Python application pre-configured to be run within Docker containers. The sample app is a basic notes app with a REST API to add and change data.
+The repository contains a multi-service Java application pre-configured to be run within Docker containers. The sample app is a basic notes app with a REST API to add and change data. The `docker-compose` YAML files are located in the `docker` directory.
+
+This tutorial uses the `all-docker-compose.yaml` file, which builds containers for both the application and the Datadog Agent. 
+
+In each of the `notes` and `calendar` directories, there are two sets of Dockerfiles for building the applications either with Maven or with Gradle. This tutorial uses the Maven build, but if you are more familiar with Gradle, you can use it instead with the corresponding changes to build commands.
 
 ### Starting and exercising the sample application
 
-1. Build the application's container by running:
+1. Build the application's container by running the following from inside the `/docker` directory:
 
    {{< code-block lang="sh" >}}
-docker-compose -f docker/containers/exercise/docker-compose.yaml build notes_app
+docker-compose -f all-docker-compose.yaml build notes
 {{< /code-block >}}
+
+   If the build gets stuck, exit with `Ctrl+C` and re-run the command.
 
 2. Start the container:
 
    {{< code-block lang="sh" >}}
-docker-compose -f docker/containers/exercise/docker-compose.yaml up db notes_app
+docker-compose -f all-docker-compose.yaml up notes
 {{< /code-block >}}
 
-   The application is ready to use when you see the following output in the terminal: 
+   You can verify that it's running by viewing the running containers with the `docker ps` command. 
 
-   ```
-   notes          |  * Debug mode: on
-   notes          | INFO:werkzeug:WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
-   notes          |  * Running on all addresses (0.0.0.0)
-   notes          |  * Running on http://127.0.0.1:8080
-   notes          |  * Running on http://192.168.32.3:8080
-   notes          | INFO:werkzeug:Press CTRL+C to quit
-   notes          | INFO:werkzeug: * Restarting with stat
-   notes          | WARNING:werkzeug: * Debugger is active!
-   notes          | INFO:werkzeug: * Debugger PIN: 143-375-699
-   ```
+3. Open up another terminal and send API requests to exercise the app. The notes application is a REST API that stores data an in-memory H2 database running on the same container. Send it a few commands:
 
-   You can also verify that it's running by viewing the running containers with the `docker ps` command.
-
-3. Open up another terminal and send API requests to exercise the app. The notes application is a REST API that stores data in a Postgres database running in another container. Send it a few commands:
-
-`curl -X GET 'localhost:8080/notes'`
-: `{}`
+`curl localhost:8080/notes`
+: `[]`
 
 `curl -X POST 'localhost:8080/notes?desc=hello'`
-: `(1, hello)`
+: `{"id":1,"description":"hello"}`
 
-`curl -X GET 'localhost:8080/notes?id=1'`
-: `(1, hello)`
+`curl localhost:8080/notes/1`
+: `{"id":1,"description":"hello"`
 
-`curl -X GET 'localhost:8080/notes'`
-: `{”1”, "hello"}`
-
-`curl -X PUT 'localhost:8080/notes?id=1&desc=UpdatedNote'`
-: `(1, UpdatedNote)`
-
-`curl -X DELETE 'localhost:8080/notes?id=1'`
-: `Deleted`
+`curl localhost:8080/notes`
+: `[{"id":1,"description":"hello"}]`
 
 ### Stop the application
 
@@ -99,88 +87,110 @@ After you've seen the application running, stop it so that you can enable tracin
 
 1. Stop the containers:
    {{< code-block lang="sh" >}}
-docker-compose -f docker/containers/exercise/docker-compose.yaml down
+docker-compose -f all-docker-compose.yaml down
 {{< /code-block >}}
 
 2. Remove the containers:
    {{< code-block lang="sh" >}}
-docker-compose -f docker/containers/exercise/docker-compose.yaml rm
+docker-compose -f all-docker-compose.yaml rm
 {{< /code-block >}}
 
 ## Enable tracing
 
-Now that you have a working Python application, configure it to enable tracing.
+Now that you have a working Java application, configure it to enable tracing.
 
-1. Add the Python tracing package to your project. Open the file `apm-tutorial-python/requirements.txt`, and add `ddtrace` to the list if it is not already there:
-
-   ```
-   flask==2.2.2
-   psycopg2-binary==2.9.3
-   requests==2.28.1
-   ddtrace
-   ```
-
-2. Within the notes application Dockerfile, `docker/containers/exercise/Dockerfile.notes`, change the CMD line that starts the application to use the `ddtrace` package:
+1. Add the Java tracing package to your project. Because the Agent runs in a container, there is no need to install anything, but rather just ensure that the Dockerfiles are configured properly. Open the `notes/dockerfile.notes.maven` file, and uncomment the line that downloads `dd-java-agent`:
 
    ```
-   # Run the application with Datadog 
-   CMD ["ddtrace-run", "python", "-m", "notes_app.app"]
+   RUN curl -Lo dd-java-agent.jar https://dtdg.co/latest-java-tracer
+   ```
+
+2. Within the same `notes/dockerfile.notes.maven` file, comment out the `ENTRYPOINT` line for running without tracing. Then uncomment the `ENTRYPOINT` line, which runs the application with tracing enabled:
+
+   ```
+   ENTRYPOINT ["java" , "-javaagent:../dd-java-agent.jar", "-Ddd.trace.sample.rate=1", "-jar" , "target/notes-0.0.1-SNAPSHOT.jar"]
    ```
 
    This automatically instruments the application with Datadog services.
 
-3. Apply [Universal Service Tags][10], which identify traced services across different versions and deployment environments so that they can be correlated within Datadog, and you can use them to search and filter. The three environment variables used for Unified Service Tagging are `DD_SERVICE`, `DD_ENV`, and `DD_VERSION`. Add the following environment variables in the Dockerfile:
+   <div class="alert alert-warning"><strong>Note</strong>: The flags on these sample commands, particularly the sample rate, are not necessarily appropriate for environments outside this tutorial. For information about what to use in your real environment, read <a href="#tracing configuration">Tracing configuration</a>.</div>
 
-   ```
-   ENV DD_SERVICE="notes"
-   ENV DD_ENV="dev"
-   ENV DD_VERSION="0.1.0"
-   ```
+3. [Universal Service Tags][10] identify traced services across different versions and deployment environments so that they can be correlated within Datadog, and so you can use them to search and filter. The three environment variables used for Unified Service Tagging are `DD_SERVICE`, `DD_ENV`, and `DD_VERSION`. For applications deployed with Docker, these environment variables can be added within the Dockerfile or the `docker-compose` file.
+   For this tutorial, the `all-docker-compose.yaml` file already has these environment variables defined:
 
-4. Add Docker labels that correspond to the Universal Service Tags. This allows you to also get Docker metrics once your application is running. 
-
-   ```
-   LABEL com.datadoghq.tags.service="notes"
-   LABEL com.datadoghq.tags.env="dev"
-   LABEL com.datadoghq.tags.version="0.1.0"
+   ```yaml
+     environment:
+       - DD_SERVICE=notes
+       - DD_ENV=dev
+       - DD_VERSION=0.0.1
    ```
 
-To check that you've set things up correctly, compare your Dockerfile file with the one provided in the sample repository's solution file, `docker/containers/solution/Dockerfile.notes`.
+4. You can also see that Docker labels for the same Universal Service Tags `service`, `env`, and `version` values are set in the Dockerfile. This allows you to also get Docker metrics once your application is running. 
+
+   ```yaml
+     labels:
+       - com.datadoghq.tags.service="notes"
+       - com.datadoghq.tags.env="dev"
+       - com.datadoghq.tags.version="0.0.1"
+   ```
 
 ## Add the Agent container
 
-Add the Datadog Agent in the services section of your `docker-compose.yaml` file:
+Add the Datadog Agent in the services section of your `all-docker-compose.yaml` file to add the Agent to your build:
 
-1. Add the Agent configuration, and specify your own [Datadog API key][3] and [site][6]:
+1. Uncomment the Agent configuration, and specify your own [Datadog API key][3] and [site][6]:
    ```yaml
-     datadog:
-       container_name: dd-agent
+     datadog-agent:
+       container_name: datadog-agent
        image: "gcr.io/datadoghq/agent:latest"
+       pid: host
        environment:
-          - DD_API_KEY=<DD_API_KEY>
-          - DD_SITE=datadoghq.com  # Default. Change to eu.datadoghq.com, us3.datadoghq.com, us5.datadoghq.com as appropriate for your org
-          - DD_APM_ENABLED=true    # Enable APM
-       volumes: 
-          - /var/run/docker.sock:/var/run/docker.sock:ro 
-          - /proc/:/host/proc/:ro
-          - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+         - DD_API_KEY=<DD_API_KEY_HERE>
+         - DD_SITE=datadoghq.com  # Default. Change to eu.datadoghq.com, us3.datadoghq.com, us5.datadoghq.com as appropriate for your org
+         - DD_APM_ENABLED=true
+         - DD_APM_NON_LOCAL_TRAFFIC=true
+       volumes:
+         - /var/run/docker.sock:/var/run/docker.sock
+         - /proc/:/host/proc/:ro
+         - /sys/fs/cgroup:/host/sys/fs/cgroup:ro 
    ```
 
-2. Add the environment variable `DD_AGENT_HOST` and specify the hostname of the Agent container to the section for each container with code that you want to monitor, in this case, the `notes_app` container:
+3. Uncomment the `depends_on` fields for `datadog-agent` in the `notes` container.
+
+2. Observe that in the `notes` service section, the `DD_AGENT_HOST` environment variable is set to the hostname of the Agent container. Your `notes` container section looks like this:
    ```yaml
-       environment:
-        - DD_AGENT_HOST=datadog
+   notes:
+     container_name: notes
+     restart: always
+     build: 
+       context: ../
+       dockerfile: notes/dockerfile.notes.maven
+     ports:
+       - 8080:8080
+     labels:
+       - com.datadoghq.tags.service="notes"
+       - com.datadoghq.tags.env="dev"
+       - com.datadoghq.tags.version="0.0.1"
+     environment:
+       - DD_SERVICE=notes
+       - DD_ENV=dev
+       - DD_VERSION=0.0.1
+       - DD_AGENT_HOST=datadog-agent
+     # - CALENDAR_HOST=calendar
+     depends_on:
+     # - calendar
+       - datadog-agent
    ```
+   You'll configure the `calendar` sections and variables later in this tutorial.
 
-To check that you've set things up correctly, compare your `docker-compose.yaml` file with the one provided in the sample repository's solution file, `docker/containers/solution/docker-compose.yaml`.
 
 ## Launch the containers to see automatic tracing
 
 Now that the Tracing Library is installed, restart your application and start receiving traces. Run the following commands:
 
 ```
-docker-compose -f docker/containers/exercise/docker-compose.yaml build notes_app
-docker-compose -f docker/containers/exercise/docker-compose.yaml up db datadog notes_app
+docker-compose -f all-docker-compose.yaml build notes
+docker-compose -f all-docker-compose.yaml up notes
 ```
 
 You can tell the Agent is working by observing continuous output in the terminal, or by opening the [Events Explorer][8] in Datadog and seeing the start event for the Agent:
@@ -189,21 +199,23 @@ You can tell the Agent is working by observing continuous output in the terminal
 
 With the application running, send some curl requests to it:
 
+`curl localhost:8080/notes`
+: `[]`
+
 `curl -X POST 'localhost:8080/notes?desc=hello'`
-: `(1, hello)`
+: `{"id":1,"description":"hello"}`
 
-`curl -X GET 'localhost:8080/notes?id=1'`
-: `(1, hello)`
+`curl localhost:8080/notes/1`
+: `{"id":1,"description":"hello"}`
 
-`curl -X PUT 'localhost:8080/notes?id=1&desc=UpdatedNote'`
-: `(1, UpdatedNote)`
-
-`curl -X DELETE 'localhost:8080/notes?id=1'`
-: `Deleted`
+`curl localhost:8080/notes`
+: `[{"id":1,"description":"hello"}]`
 
 Wait a few moments, and go to [**APM > Traces**][11] in Datadog, where you can see a list of traces corresponding to your API calls:
 
-{{< img src="tracing/guide/tutorials/tutorial-python-container-traces.png" alt="Traces from the sample app in APM Trace Explorer" style="width:100%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-java-container-traces.png" alt="Traces from the sample app in APM Trace Explorer" style="width:100%;" >}}
+
+The `h2` is the embedded in-memory database for this tutorial and `notes` is the Spring Boot application. The traces list shows all of the spans, when they started, what resource was tracked with the span, and how long it took.
 
 If you don't see traces after several minutes, clear any filter in the Traces Search field (sometimes it filters on an environment variable such as `ENV` that you aren't using).
 
@@ -215,46 +227,96 @@ The width of a bar indicates how long it took to complete. A bar at a lower dept
 
 The flame graph for a `POST` trace looks something like this:
 
-{{< img src="tracing/guide/tutorials/tutorial-python-container-post-flame.png" alt="A flame graph for a POST trace." style="width:100%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-java-container-post-flame.png" alt="A flame graph for a POST trace." style="width:100%;" >}}
 
 A `GET /notes` trace looks something like this:
 
-{{< img src="tracing/guide/tutorials/tutorial-python-container-get-flame.png" alt="A flame graph for a GET trace." style="width:100%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-java-container-get-flame.png" alt="A flame graph for a GET trace." style="width:100%;" >}}
 
+### Tracing configuration
 
-## Add custom instrumentation to the Python application
+The Java tracing library takes advantage of Java’s built-in agent and monitoring support. The flag `-javaagent:../dd-java-agent.jar` in the Dockerfile tells the JVM where to find the Java tracing library so it can run as a Java Agent. Learn more about Java Agents at [https://www.baeldung.com/java-instrumentation][7].
 
-While automatic instrumentation is convenient, sometimes you want more fine-grained spans. Datadog's Python DD Trace API allows you to specify spans within your code using annotations or code.
+The `dd.trace.sample.rate` flag sets the sample rate for this application. The ENTRYPOINT command in the Dockerfile set its value to `1`, which means that 100% of all requests to the `notes` service are sent to the Datadog backend for analysis and display. For a low-volume test application, this is fine. Do not do this in production or in any high-volume environment, because this results in a very large volume of data. Instead, sample some of your requests. Pick a value between 0 and 1. For example, `-Ddd.trace.sample.rate=0.1` sends traces for 10% of your requests to Datadog. Read more about [tracing configuration settings][14] and [sampling mechanisms][15].
+
+Notice that the sampling rate flag in the command appears _before_ the `-jar` flag. That’s because this is a parameter for the Java Virtual Machine and not for your application. Make sure that when you add the Java Agent to your application, you specify the flag in the right location.
+
+## Add manual instrumentation to the Java application
+
+While automatic instrumentation is convenient, sometimes you want more fine-grained spans. Datadog's Java DD Trace API allows you to specify spans within your code using annotations or code.
 
 The following steps walk you through adding annotations to the code to trace some sample methods.
 
-1. Open `notes_app/notes_helper.py`.
-2. Add the following import:
-   {{< code-block lang="python" >}}
-from ddtrace import tracer{{< /code-block >}}
+1. Open `/notes/src/main/java/com/datadog/example/notes/NotesHelper.java`. This example already contains commented-out code that demonstrates the different ways to set up custom tracing on the code.
 
-3. Inside the `NotesHelper` class, add a tracer wrapper called `notes_helper` to better see how the `notes_helper.long_running_process` method works:
-   {{< code-block lang="python" >}}class NotesHelper:
+2. Uncomment the lines that import libraries to support manual tracing:
 
-    @tracer.wrap(service="notes_helper")
-    def long_running_process(self):
-        time.sleep(.3)
-        logging.info("Hello from the long running process")
-        self.__private_method_1(){{< /code-block >}}
+   ```java
+   import datadog.trace.api.Trace;
+   import datadog.trace.api.DDTags;
+   import io.opentracing.Scope;
+   import io.opentracing.Span;
+   import io.opentracing.Tracer;
+   import io.opentracing.tag.Tags;
+   import io.opentracing.util.GlobalTracer;
+   import java.io.PrintWriter;
+   import java.io.StringWriter
+   ```
 
-    Now, the tracer automatically labels the resource with the function name it is wrapped around, in this case, `long_running_process`.
+3. Uncomment the lines that manually trace the two public processes. These demonstrate the use of `@Trace` annotations to specify aspects such as `operationName` and `resourceName` in a trace:
+   ```java
+   @Trace(operationName = "traceMethod1", resourceName = "NotesHelper.doLongRunningProcess")
+   // ...
+   @Trace(operationName = "traceMethod2", resourceName = "NotesHelper.anotherProcess")
+   ```
 
-4. Rebuild the containers by running:
-   {{< code-block lang="sh" >}}
-docker-compose -f docker/containers/exercise/docker-compose.yaml build notes_app
-docker-compose -f docker/containers/exercise/docker-compose.yaml up db datadog notes_app
-{{< /code-block >}}
-4. Resend some HTTP requests, specifically some `GET` requests.
-5. On the Trace Explorer, click into one of the new `GET` requests, and see a flame graph like this:
+4. You can also create a separate span for a specific block of code in the application. Within the span, add service and resource name tags and error handling tags. All of these tags will result in a flame graph that shows the span and its metrics in Datadog visualizations. Uncomment the lines that manually trace the private method:
 
-   {{< img src="tracing/guide/tutorials/tutorial-python-container-custom-flame.png" alt="A flame graph for a GET trace with custom instrumentation." style="width:100%;" >}}
+   ```java
+           Tracer tracer = GlobalTracer.get();
+           // Tags can be set when creating the span
+           Span span = tracer.buildSpan("manualSpan1")
+               .withTag(DDTags.SERVICE_NAME, "NotesHelper")
+               .withTag(DDTags.RESOURCE_NAME, "privateMethod1")
+               .start();
+           try (Scope scope = tracer.activateSpan(span)) {
+               // Tags can also be set after creation 
+               span.setTag("postCreationTag", 1);
+   ```
+   And also the lines that set tags on errors:
+   ```java
+        } catch (Exception e) {
+            // Set error on span
+            span.setTag(Tags.ERROR, true);
+            span.setTag(DDTags.ERROR_MSG, e.getMessage());
+            span.setTag(DDTags.ERROR_TYPE, e.getClass().getName());
+            
+            final StringWriter errorString = new StringWriter();
+            e.printStackTrace(new PrintWriter(errorString));
+            span.setTag(DDTags.ERROR_STACK, errorString.toString());
+            Log.info(errorString.toString());
+        } finally {
+            span.finish();
+        }
+   ```
+
+5. Update your Maven build by opening `notes/pom.xml` and uncommenting the lines that configure dependencies for manual tracing. The `dd-trace-api` library is used for the `@Trace` annotations, and `opentracing-util` and `opentracing-api` are used for the manual span creation.
+
+6. Rebuild the containers:
+
+   ```sh
+   docker-compose -f all-docker-compose.yaml build notes
+   docker-compose -f all-docker-compose.yaml up notes
+   ```
+
+7. Resend some HTTP requests, specifically some `GET` requests.
+8. On the Trace Explorer, click into one of the new `GET` requests, and see a flame graph like this:
+
+   {{< img src="tracing/guide/tutorials/tutorial-java-container-custom-flame.png" alt="A flame graph for a GET trace with custom instrumentation." style="width:100%;" >}}
    
-   Note the higher level of detail in the stack trace now that the `get_notes` function has custom tracing.
+   Note the higher level of detail in the stack trace now that the `getAll` function has custom tracing.
+
+   The `privateMethod` around which you created a manual span now shows up as a separate block from the other calls and is highlighted by a different color. The other methods where you used the `@Trace` annotation show under the same service and color as the `GET` request, which is the `notes` application. Custom instrumentation is valuable when there are key parts of the code that need to be highlighted and monitored.
 
 For more information, read [Custom Instrumentation][12].
 
@@ -262,106 +324,88 @@ For more information, read [Custom Instrumentation][12].
 
 Tracing a single application is a great start, but the real value in tracing is seeing how requests flow through your services. This is called _distributed tracing_. 
 
-The sample project includes a second application called `calendar_app` that returns a random date whenever it is invoked. The `POST` endpoint in the Notes application has a second query parameter named `add_date`. When it is set to `y`, Notes calls the calendar application to get a date to add to the note.
+The sample project includes a second application called `calendar` that returns a random date whenever it is invoked. The `POST` endpoint in the Notes application has a second query parameter named `add_date`. When it is set to `y`, Notes calls the calendar application to get a date to add to the note.
 
-1. Configure the calendar app for tracing by adding `dd_trace` to the startup command in the Dockerfile, like you previously did for the notes app. Open `docker/containers/exercise/Dockerfile.calendar` and update the CMD line like this:
-   ```
-   CMD ["ddtrace-run", "python", "-m", "calendar_app.app"] 
-   ```
-
-3. Apply Universal Service Tags, just like we did for the notes app. Add the following environment variables in the `Dockerfile.calendar` file:
+1. Configure the calendar app for tracing by adding `dd-java-agent` to the startup command in the Dockerfile, like you previously did for the notes app. Open `calendar/Dockerfile.calendar.maven` and see that it is already downloading `dd-java-agent`:
 
    ```
-   ENV DD_SERVICE="calendar"
-   ENV DD_ENV="dev"
-   ENV DD_VERSION="0.1.0"
+   RUN curl -Lo dd-java-agent.jar https://dtdg.co/latest-java-tracer
    ```
 
-4. Again, add Docker labels that correspond to the Universal Service Tags, allowing you to also get Docker metrics once your application runs. 
+2. Within the same `calendar/dockerfile.calendar.maven` file, comment out the `ENTRYPOINT` line for running without tracing. Then uncomment the `ENTRYPOINT` line, which runs the application with tracing enabled:
 
    ```
-   LABEL com.datadoghq.tags.service="calendar"
-   LABEL com.datadoghq.tags.env="dev"
-   LABEL com.datadoghq.tags.version="0.1.0"
+   ENTRYPOINT ["java" , "-javaagent:../dd-java-agent.jar", "-Ddd.trace.sample.rate=1", "-jar" , "target/calendar-0.0.1-SNAPSHOT.jar"]
    ```
 
-2. Add the Agent container hostname, `DD_AGENT_HOST`, to the calendar application container to send traces to the correct location. Open `docker/containers/exercise/docker-compose.yaml` and add the following lines to the `calendar_app` section:
+   <div class="alert alert-warning"><strong>Note</strong>: Again, the flags, particularly the sample rate, are not necessarily appropriate for environments outside this tutorial. For information about what to use in your real environment, read <a href="#tracing configuration">Tracing configuration</a>.</div>:
+
+3.  Open `docker/all-docker-compose.yaml` and uncomment the environment variables for the `calendar` service to set up the Agent host and Unified Service Tags for the app and for Docker:
 
    ```yaml
+     calendar:
+       container_name: calendar
+       restart: always
+       build: 
+         context: ../
+         dockerfile: calendar/dockerfile.calendar.maven
+       labels:
+         - com.datadoghq.tags.service="calendar"
+         - com.datadoghq.tags.env="dev"
+         - com.datadoghq.tags.version="0.0.1"
        environment:
-        - DD_AGENT_HOST=datadog
+         - DD_SERVICE=calendar
+         - DD_ENV=dev
+         - DD_VERSION=0.0.1
+         - DD_AGENT_HOST=datadog-agent
+      ports:
+        - 9090:9090
+      depends_on:
+        - datadog-agent
    ```
 
-   To check that you've set things up correctly, compare your setup with the Dockerfile and `docker-config.yaml` files provided in the sample repository's `docker/containers/solution` directory.
+4. In the `notes` service section, uncomment the `CALENDAR_HOST` environment variable and the `calendar` entry in `depends_on` to make the needed connections between the two apps:
+
+   ```yaml
+     notes:
+     ...
+       environment:
+         - DD_SERVICE=notes
+         - DD_ENV=dev
+         - DD_VERSION=0.0.1
+         - DD_AGENT_HOST=datadog-agent
+         - CALENDAR_HOST=calendar
+       depends_on:
+         - calendar
+         - datadog-agent
+   ```
 
 5. Build the multi-service application by restarting the containers. First, stop all running containers:
    ```
-   docker-compose -f docker/containers/exercise/docker-compose.yaml down
+   docker-compose -f all-docker-compose.yaml down
    ```
 
    Then run the following commands to start them:
    ```
-   docker-compose -f docker/containers/exercise/docker-compose.yaml build
-   docker-compose -f docker/containers/exercise/docker-compose.yaml up
+   docker-compose -f all-docker-compose.yaml build
+   docker-compose -f all-docker-compose.yaml up
    ```
 
-6. Send a POST request with the `add_date` parameter:
+6. After all the containers are up, send a POST request with the `add_date` parameter:
 
 `curl -X POST 'localhost:8080/notes?desc=hello_again&add_date=y'`
-: `(2, hello_again with date 2022-11-06)`
+: `{"id":1,"description":"hello_again with date 2022-11-06"}`
 
 
 7. In the Trace Explorer, click this latest trace to see a distributed trace between the two services:
 
-   {{< img src="tracing/guide/tutorials/tutorial-python-container-distributed.png" alt="A flame graph for a distributed trace." style="width:100%;" >}}
+   {{< img src="tracing/guide/tutorials/tutorial-java-container-distributed.png" alt="A flame graph for a distributed trace." style="width:100%;" >}}
 
-## Add more custom instrumentation
+Note that you didn't change anything in the `notes` application. Datadog automatically instruments both the `okHttp` library used to make the HTTP call from `notes` to `calendar`, and the Jetty library used to listen for HTTP requests in `notes` and `calendar`. This allows the trace information to be passed from one application to the other, capturing a distributed trace.
 
-You can add custom instrumentation by using code. Suppose you want to further instrument the calendar service to better see the trace:
+## Troubleshooting
 
-1. Open `notes_app/notes_logic.py`. 
-2. Add the following import
-
-   ```python
-   from ddtrace import tracer
-   ```
-3. Inside the `try` block, at about line 28, add the following `with` statement:
-
-   ```python
-   with tracer.trace(name="notes_helper", service="notes_helper", resource="another_process") as span:
-   ```
-   Resulting in this:
-   {{< code-block lang="python" >}}
-def create_note(self, desc, add_date=None):
-        if (add_date):
-            if (add_date.lower() == "y"):
-                try:
-                    with tracer.trace(name="notes_helper", service="notes_helper", resource="another_process") as span:
-                        self.nh.another_process()
-                    note_date = requests.get(f"http://localhost:9090/calendar")
-                    note_date = note_date.text
-                    desc = desc + " with date " + note_date
-                    print(desc)
-                except Exception as e:
-                    print(e)
-                    raise IOError("Cannot reach calendar service.")
-        note = Note(description=desc, id=None)
-        note.id = self.db.create_note(note){{< /code-block >}}
-
-4. Rebuild the containers:
-   ```
-   docker-compose -f docker/containers/exercise/docker-compose.yaml build notes_app
-   docker-compose -f docker/containers/exercise/docker-compose.yaml up
-   ```
-
-5. Send some more HTTP requests, specifically `POST` requests, with the `add_date` argument.
-6. In the Trace Explorer, click into one of these new `POST` traces to see a custom trace across multiple services:
-   {{< img src="tracing/guide/tutorials/tutorial-python-container-cust-dist.png" alt="A flame graph for a distributed trace with custom instrumentation." style="width:100%;" >}}
-   Note the new span labeled `notes_helper.another_process`.
-
-If you're not receiving traces as expected, set up debug mode in the `ddtrace` Python package. Read [Enable debug mode][13] to find out more.
-
-
+If you're not receiving traces as expected, set up debug mode for the Java tracer. Read [Enable debug mode][13] to find out more.
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -372,8 +416,11 @@ If you're not receiving traces as expected, set up debug mode in the `ddtrace` P
 [4]: /tracing/trace_collection/compatibility/java/
 [6]: /getting_started/site/
 [8]: https://app.datadoghq.com/event/explorer
-[9]: https://github.com/DataDog/apm-tutorial-java
+[7]: https://www.baeldung.com/java-instrumentation
+[9]: https://github.com/DataDog/apm-tutorial-java-host
 [10]: /getting_started/tagging/unified_service_tagging/
 [11]: https://app.datadoghq.com/apm/traces
 [12]: /tracing/trace_collection/custom_instrumentation/java/
 [13]: /tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode
+[14]: /tracing/trace_collection/library_config/java/
+[15]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=java
