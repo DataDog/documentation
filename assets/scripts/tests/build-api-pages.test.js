@@ -2199,6 +2199,7 @@ describe(`isReadOnlyRow`, () => {
   });
 
 });
+/*
 
 describe(`fieldColumn`, () => {
 
@@ -2269,10 +2270,10 @@ describe(`descColumn`, () => {
 describe(`rowRecursive`, () => {
 
   it('should handle fields named required (properties->required)', () => {
-    /*
+    /!*
     Required fields are usually an array of string e.g ['foo'.'bar']
     If a field is named required then the logic should recognise this is a field object and not the array to check against
-    */
+    *!/
     const mockData = {
       "description": "A customized field defined by users and attached to a certain object type (incidents, etc).",
       "properties": {
@@ -2465,3 +2466,4 @@ describe(`schemaTable`, () => {
   });
 
 });
+*/
