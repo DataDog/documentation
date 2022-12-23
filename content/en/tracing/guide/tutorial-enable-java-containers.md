@@ -23,7 +23,7 @@ further_reading:
 
 This tutorial walks you through the steps for enabling tracing on a sample Java application installed in a container. In this scenario, the Datadog Agent is also installed in a container. 
 
-For other scenarios, including the application and Agent on a host, the application in a container and Agent on a host, application and the Agent on cloud infrastructure, and applications written in other languages, see the other [Enabling Tracing tutorials][1].
+For other scenarios, including the application and Agent on a host, the application in a container and Agent on a host, the application and Agent on cloud infrastructure, and applications written in other languages, see the other [Enabling Tracing tutorials][1].
 
 See [Tracing Java Applications][2] for general comprehensive tracing setup documentation for Java.
 
@@ -35,7 +35,7 @@ See [Tracing Java Applications][2] for general comprehensive tracing setup docum
 
 ## Install the sample Dockerized Java application
 
-The code sample for this tutorial is on GitHub, at [github.com/Datadog/apm-tutorial-python][9]. To get started, clone the repository:
+The code sample for this tutorial is on GitHub at [github.com/Datadog/apm-tutorial-python][9]. To get started, clone the repository:
 
 {{< code-block lang="sh" >}}
 git clone https://github.com/DataDog/apm-tutorial-python.git
