@@ -33,7 +33,7 @@ See [Tracing Java Applications][2] for general comprehensive tracing setup docum
 - Git
 - Java that meets the [tracing library requirements][4]
 
-## Install the sample Dockerized Python application
+## Install the sample Dockerized Java application
 
 The code sample for this tutorial is on GitHub, at [github.com/Datadog/apm-tutorial-python][9]. To get started, clone the repository:
 

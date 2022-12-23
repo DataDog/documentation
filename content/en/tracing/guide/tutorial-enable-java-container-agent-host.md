@@ -46,7 +46,7 @@ To send data to a Datadog site other than `datadoghq.com`, replace the `DD_SITE`
 If you have an Agent already installed on the host, ensure it is at least version 7.28. The minimum version of Datadog Agent required to use `ddtrace` to trace Python applications is documented in the [tracing library developer docs][7].
 
 
-## Install the sample Dockerized Python application
+## Install the sample Dockerized Java application
 
 The code sample for this tutorial is on GitHub, at [github.com/Datadog/apm-tutorial-python][9]. To get started, clone the repository:
 
