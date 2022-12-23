@@ -847,6 +847,8 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
               .map((obj, indx) => {
                 if("const" in value.items.oneOf[indx]) {
                   return {[value.items.oneOf[indx].const]: value.items.oneOf[indx]}
+                } else if("_metadata" in value.items.oneOf[indx] && "logical_name" in value.items.oneOf[indx]["_metadata"]) {
+                  return {[value.items.oneOf[indx]["_metadata"]["logical_name"]]: value.items.oneOf[indx]}
                 } else {
                   return {[`Option ${indx + 1}`]: value.items.oneOf[indx]}
                 }
@@ -874,6 +876,8 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
               .map((obj, indx) => {
                 if("const" in value.oneOf[indx]) {
                   return {[value.oneOf[indx].const]: value.oneOf[indx]}
+                } else if("_metadata" in value.oneOf[indx] && "logical_name" in value.oneOf[indx]["_metadata"]) {
+                  return {[value.oneOf[indx]["_metadata"]["logical_name"]]: value.oneOf[indx]}
                 } else {
                   return {[`Option ${indx + 1}`]: value.oneOf[indx]}
                 }
