@@ -5042,6 +5042,32 @@ api:
     url: /api/latest/metrics/
     identifier: metrics
     generated: true
+  - name: Timeseries cross product query
+    url: '#timeseries-cross-product-query'
+    identifier: metrics-timeseries-cross-product-query
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - QueryTimeseriesData
+      unstable:
+        - v2
+      order: 1
+  - name: Scalar cross product query
+    url: '#scalar-cross-product-query'
+    identifier: metrics-scalar-cross-product-query
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - QueryScalarData
+      unstable:
+        - v2
+      order: 2
   - name: List distinct metric volumes by metric name
     url: '#list-distinct-metric-volumes-by-metric-name'
     identifier: metrics-list-distinct-metric-volumes-by-metric-name

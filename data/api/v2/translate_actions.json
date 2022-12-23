@@ -473,6 +473,18 @@
     "description": "Get all processes for your organization.",
     "summary": "Get all processes"
   },
+  "QueryScalarData": {
+    "description": "The internal endpoint to query scalar/table data for multiple data sources and\nprocess the data using formulas and functions.",
+    "summary": "Scalar cross product query",
+    "request_description": "",
+    "request_schema_description": "A wrapper request around one scalar query to be executed."
+  },
+  "QueryTimeseriesData": {
+    "description": "The internal endpoint to query timeseries data for multiple data sources and\nprocess the data by applying formulas and functions.",
+    "summary": "Timeseries cross product query",
+    "request_description": "",
+    "request_schema_description": "A request wrapper around a single timeseries query to be executed."
+  },
   "ListRoles": {
     "description": "Returns all roles, including their names and their unique identifiers.",
     "summary": "List roles"
