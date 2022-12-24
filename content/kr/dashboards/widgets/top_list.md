@@ -10,16 +10,16 @@ further_reading:
   text: 노트북
 kind: 설명서
 title: 상위 목록 위젯
-widget_type: 탑리스트
+widget_type: toplist
 ---
 
-탑리스트 시각화를 사용하면 모든 메트릭 값을 기준으로 `hostname` 또는 `service`와 같은 태그 값들에 대하여 가장 많거나 적은 목록을 표시할 수 있습니다. 예: 가장 CPU를 많이 소비함, 디스크 공간이 가장 적은 호스트 등.
+상위 목록 시각화를 사용하면 `hostname` 또는 `service`와 같이 모든 메트릭 값이 가장 많거나 가장 적은 태그 값의 목록을 표시할 수 있습니다(예: 가장 많은 CPU 소비자, 디스크 공간이 가장 적은 호스트 등).
 
-{{< img src="dashboards/widgets/toplist/toplist.png" alt="탑리스트" >}}
+{{< img src="dashboards/widgets/toplist/toplist.png" alt="상위 목록" >}}
 
 ## 구성
 
-{{< img src="dashboards/widgets/toplist/toplist_setup.png" alt="탑리스트" style="width:80%;">}}
+{{< img src="dashboards/widgets/toplist/toplist_setup.png" alt="상위 목록" style="width:80%;">}}
 
 ### 설정
 
