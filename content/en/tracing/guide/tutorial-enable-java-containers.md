@@ -269,7 +269,7 @@ The following steps walk you through adding annotations to the code to trace som
    @Trace(operationName = "traceMethod2", resourceName = "NotesHelper.anotherProcess")
    ```
 
-4. You can also create a separate span for a specific block of code in the application. Within the span, add service and resource name tags and error handling tags. All of these tags will result in a flame graph that shows the span and its metrics in Datadog visualizations. Uncomment the lines that manually trace the private method:
+4. You can also create a separate span for a specific block of code in the application. Within the span, add service and resource name tags and error handling tags. All of these tags result in a flame graph that shows the span and its metrics in Datadog visualizations. Uncomment the lines that manually trace the private method:
 
    ```java
            Tracer tracer = GlobalTracer.get();
@@ -281,6 +281,8 @@ The following steps walk you through adding annotations to the code to trace som
            try (Scope scope = tracer.activateSpan(span)) {
                // Tags can also be set after creation 
                span.setTag("postCreationTag", 1);
+               Thread.sleep(30);
+               Log.info("Hello from the custom privateMethod1");
    ```
    And also the lines that set tags on errors:
    ```java
