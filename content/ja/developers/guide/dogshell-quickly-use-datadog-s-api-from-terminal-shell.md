@@ -63,6 +63,7 @@ appkey = <YOUR_APPLICATION_KEY>
 * `dog downtime`
 * `dog timeboard`
 * `dog screenboard`
+* `dog dashboard`
 * `dog host`
 * `dog tag`
 * `dog search`
