@@ -202,7 +202,7 @@ After redeploying your DaemonSet with these configurations in place, the Datadog
 
 ### Verification
 
-You can verify your Datadog Agent pods and Cluster Agent pods are running by executing the command:
+You can verify your Datadog Agent Pods and Cluster Agent Pods are running by executing the command:
 
 ```shell
 kubectl get pods | grep agent
@@ -266,7 +266,7 @@ For more information, see [Troubleshooting Windows Container Issues][2].
 
 ## Monitoring AWS managed services
 
-To monitor an AWS managed service like MSK, ElastiCache, or RDS, set `clusterChecksRunner` to create a pod with an IAM role assigned through the serviceAccountAnnotation in the Helm chart. Then, set the integration configurations under `clusterAgent.confd`.
+To monitor an AWS managed service like MSK, ElastiCache, or RDS, set `clusterChecksRunner` to create a Pod with an IAM role assigned through the serviceAccountAnnotation in the Helm chart. Then, set the integration configurations under `clusterAgent.confd`.
 
 {{< code-block lang="yaml" >}}
 clusterChecksRunner:

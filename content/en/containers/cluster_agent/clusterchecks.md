@@ -26,7 +26,7 @@ _Cluster checks_ extend this mechanism to monitor noncontainerized workloads, in
 - Datastores and endpoints ran outside of the cluster (for example, RDS or CloudSQL).
 - Load-balanced cluster services (for example, Kubernetes services).
 
-This ensures that only **one** instance of each check runs as opposed to **each** node-based Agent pod running this corresponding check. The [Cluster Agent][2] holds the configurations and dynamically dispatches them to node-based Agents. The Agents connect to the Cluster Agent every ten seconds and retrieve the configurations to run. If an Agent stops reporting, the Cluster Agent removes it from the active pool and dispatches the configurations to other Agents. This ensures that one (and only one) instance always runs, even as nodes are added and removed from the cluster.
+This ensures that only **one** instance of each check runs as opposed to **each** node-based Agent Pod running this corresponding check. The [Cluster Agent][2] holds the configurations and dynamically dispatches them to node-based Agents. The Agents connect to the Cluster Agent every ten seconds and retrieve the configurations to run. If an Agent stops reporting, the Cluster Agent removes it from the active pool and dispatches the configurations to other Agents. This ensures that one (and only one) instance always runs, even as nodes are added and removed from the cluster.
 
 Metrics, events, and service checks collected by cluster checks are submitted without a hostname, as it is not relevant. A `cluster_name` tag is added, to allow you to scope and filter your data.
 
@@ -311,7 +311,7 @@ spec:
         run: my-nginx
 ```
 
-In addition, each pod should be monitored with the [NGINX check][12], as it enables the monitoring of each worker as well as the aggregated service.
+In addition, each Pod should be monitored with the [NGINX check][12], as it enables the monitoring of each worker as well as the aggregated service.
 
 ## Further Reading
 

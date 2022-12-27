@@ -126,7 +126,7 @@ DD_EXTRA_CONFIG_PROVIDERS="kube_endpoints"
 DD_EXTRA_LISTENERS="kube_endpoints"
 ```
 
-**Note**: If the monitored endpoints are not backed by pods, you must [enable Cluster Checks][1]. Add the `kube_services` configuration provider and listener:
+**Note**: If the monitored endpoints are not backed by Pods, you must [enable Cluster Checks][1]. Add the `kube_services` configuration provider and listener:
 
 ```shell
 DD_EXTRA_CONFIG_PROVIDERS="kube_endpoints kube_services"
