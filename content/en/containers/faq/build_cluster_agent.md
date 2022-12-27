@@ -3,6 +3,7 @@ title: Build the Datadog Cluster Agent
 kind: documentation
 aliases:
 - /agent/cluster_agent/build
+- /containers/cluster_agent/build
 ---
 
 The Datadog Cluster Agent should be used in a containerized ecosystem. To build it:

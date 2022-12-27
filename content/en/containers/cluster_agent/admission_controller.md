@@ -13,12 +13,12 @@ further_reading:
 ---
 
 ## Overview
-The Datadog admission controller is a component of the Datadog Cluster Agent. The main benefit of the admission controller is to simplify your application pod configuration. For that, it has two main functionalities:
+The Datadog Admission Controller is a component of the Datadog Cluster Agent. The main benefit of the Admission Controller is to simplify your application pod configuration. For that, it has two main functionalities:
 
 - Inject environment variables (`DD_AGENT_HOST`, `DD_TRACE_AGENT_URL` and `DD_ENTITY_ID`) to configure DogStatsD and APM tracer libraries into the user's application containers.
 - Inject Datadog standard tags (`env`, `service`, `version`) from application labels into the container environment variables.
 
-Datadog's admission controller is `MutatingAdmissionWebhook` type. For more details on admission controllers, see the [Kubernetes guide][1].
+Datadog's Admission Controller is `MutatingAdmissionWebhook` type. For more details on admission controllers, see the [Kubernetes guide on admission controllers][1].
 
 ## Requirements
 
@@ -27,11 +27,11 @@ Datadog's admission controller is `MutatingAdmissionWebhook` type. For more deta
 ## Configuration
 {{< tabs >}}
 {{% tab "Helm chart" %}}
-Starting from Helm chart v2.35.0, Datadog Admission controller is activated by default. No extra configuration is needed to enable the admission controller.
+Starting from Helm chart v2.35.0, Datadog Admission controller is activated by default. No extra configuration is needed to enable the Admission Controller.
 
-To enable the admission controller for Helm chart v2.34.6 and earlier, set the parameter `clusterAgent.admissionController.enabled` to `true`:
+To enable the Admission Controller for Helm chart v2.34.6 and earlier, set the parameter `clusterAgent.admissionController.enabled` to `true`:
 
-{{< code-block lang="yaml" filename="values.yaml" disable_copy="true" >}}
+{{< code-block lang="yaml" filename="values.yaml" disable_copy="false" >}}
 [...]
  clusterAgent:
 [...]
@@ -54,9 +54,9 @@ To enable the admission controller for Helm chart v2.34.6 and earlier, set the p
 
 {{% tab "Datadog Operator" %}}
 
-To enable the admission controller for the Datadog operator, set the parameter `clusterAgent.config.admissionController.enabled` to `true` in the custom resource:
+To enable the Admission Controller for the Datadog operator, set the parameter `clusterAgent.config.admissionController.enabled` to `true` in the custom resource:
 
-```yaml
+{{< code-block lang="yaml" disable_copy="false" >}}
 [...]
  clusterAgent:
 [...]
@@ -65,12 +65,12 @@ To enable the admission controller for the Datadog operator, set the parameter `
         enabled: true
         mutateUnlabelled: false
 [...]
-```
+{{< /code-block >}}
 {{% /tab %}}
 
 {{% tab "Manual setup" %}}
 
-To enable the admission controller without using Helm or the Datadog operator, add the following to your configuration:
+To enable the Admission Controller without using Helm or the Datadog operator, add the following to your configuration:
 
 First, download the [Cluster Agent RBAC permissions][1] manifest, and add the following under `rules`:
 
@@ -135,7 +135,7 @@ Finally, run the following commands:
 {{< /tabs >}}
 
 ### Instrumentation library injection
-You can configure the Cluster Agent (version 7.39 and higher) to inject instrumentation libraries. Read [Instrumentation library injection with Admission Controller][2] for more information
+You can configure the Cluster Agent (version 7.39 and higher) to inject instrumentation libraries. Read [Instrumentation library injection with Admission Controller][2] for more information.
 
 
 ### APM and DogStatsD
@@ -163,9 +163,9 @@ Possible options:
 
 
 #### Order of priority
-The Datadog admission controller does not inject the environment variables `DD_VERSION`, `DD_ENV`, and `DD_SERVICE` if they already exist.
+The Datadog Admission Controller does not inject the environment variables `DD_VERSION`, `DD_ENV`, or `DD_SERVICE` if they already exist.
 
-When these environment variables are not set, the admission controller uses standard tags value in the following order (highest first):
+When these environment variables are not set, the Admission Controller uses standard tags value in the following order (highest first):
 
 - Labels on the pod
 - Labels on the `ownerReference` (ReplicaSets, DaemonSets, Deployments...)
@@ -182,13 +182,13 @@ Possible options:
 | `service`          | Inject Datadog's local-service DNS name in `DD_AGENT_HOST` environment variable (available with Kubernetes v1.22+)|
 | `socket`           | Inject Unix Domain Socket path in `DD_TRACE_AGENT_URL` environment variable and the volume definition to access the corresponding path |
 
-**Note**: Pod-specific mode takes precedence over the global mode defined at the Admission controller level.
+**Note**: Pod-specific mode takes precedence over the global mode defined at the Admission Controller level.
 
 #### Notes
 
-- The admission controller needs to be deployed and configured before the creation of new application pods. It cannot update pods that already exist.
-- To disable the admission controller injection feature, use the Cluster Agent configuration: `DD_ADMISSION_CONTROLLER_INJECT_CONFIG_ENABLED=false`
-- By using the Datadog admission controller, users can skip configuring the application pods using downward API ([step 2 in Kubernetes Trace Collection setup][3]).
+- The Admission Controller needs to be deployed and configured before the creation of new application pods. It cannot update pods that already exist.
+- To disable the Admission Controller injection feature, use the Cluster Agent configuration: `DD_ADMISSION_CONTROLLER_INJECT_CONFIG_ENABLED=false`
+- By using the Datadog Admission Controller, users can skip configuring the application pods using downward API ([step 2 in Kubernetes Trace Collection setup][3]).
 - In a Google Kubernetes Engine (GKE) Private Cluster, you need to [add a Firewall Rule for the control plane][4]. The webhook handling incoming connections receives the request on port `443` and directs it to a service implemented on port `8000`. By default, in the Network for the cluster there should be a Firewall Rule named like `gke-<CLUSTER_NAME>-master`. The "Source filters" of the rule match the "Control plane address range" of the cluster. Edit this Firewall Rule to allow ingress to the TCP port `8000`.
 
 
