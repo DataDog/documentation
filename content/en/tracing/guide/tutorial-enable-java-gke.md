@@ -1,5 +1,5 @@
 ---
-title: Tutorial - Enabling Tracing for a Java Application and Datadog Agent in Containers
+title: Tutorial - Enabling Tracing for a Java Application on Google Kubernetes Engine
 kind: guide
 further_reading:
 - link: /tracing/trace_collection/library_config/java/
@@ -21,20 +21,40 @@ further_reading:
 
 ## Overview
 
-This tutorial walks you through the steps for enabling tracing on a sample Java application installed in a container. In this scenario, the Datadog Agent is also installed in a container. 
+This tutorial walks you through the steps for enabling tracing on a sample Java application installed in a cluster on Google Kubernetes Engine (GKE). In this scenario, the Datadog Agent is also installed in the cluster. 
 
-For other scenarios, including the application and Agent on a host, the application in a container and Agent on a host, the application and Agent on cloud infrastructure, and applications written in other languages, see the other [Enabling Tracing tutorials][1].
+For other scenarios, including on a host, in a container, on other cloud infrastructure, and applications written in other languages, see the other [Enabling Tracing tutorials][1].
 
 See [Tracing Java Applications][2] for general comprehensive tracing setup documentation for Java.
 
 ### Prerequisites
 
 - A Datadog account and [organization API key][3]
-- Git 
-- Docker
-- Curl
+- Git
+- Kubectl
+- GCloud
 
-## Install the sample Dockerized Java application
+  Set the `USE_GKE_GCLOUD_AUTH_PLUGIN` environment variable and configure additional properties for your GCloud project by running these commands:
+  {{< code-block lang="sh" >}}
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True	
+gcloud config set project <PROJECT_NAME>
+gcloud config set compute/zone <COMPUTE_ZONE>
+gcloud config set compute/region <COMPUTE_REGION>{{< /code-block >}}
+- Helm
+
+  Install by running these commands:
+  {{< code-block lang="sh" >}}
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh{{< /code-block >}}
+  Configure Helm by running these commands:
+  {{< code-block lang="sh" >}}
+helm repo add datadog-crds https://helm.datadoghq.com
+helm repo add kube-state-metrics https://prometheus-community.github.io/helm-charts
+helm repo add datadog https://helm.datadoghq.com
+helm repo update{{< /code-block >}}
+
+## Install the sample Kubernetes Java application
 
 The code sample for this tutorial is on GitHub, at [github.com/DataDog/apm-tutorial-java-host][9]. To get started, clone the repository:
 
@@ -42,57 +62,103 @@ The code sample for this tutorial is on GitHub, at [github.com/DataDog/apm-tutor
 git clone https://github.com/DataDog/apm-tutorial-java-host.git
 {{< /code-block >}}
 
-The repository contains a multi-service Java application pre-configured to be run within Docker containers. The sample app is a basic notes app with a REST API to add and change data. The `docker-compose` YAML files are located in the `docker` directory.
-
-This tutorial uses the `all-docker-compose.yaml` file, which builds containers for both the application and the Datadog Agent. 
+The repository contains a multi-service Java application pre-configured to be run inside a Kubernetes cluster. The sample app is a basic notes app with a REST API to add and change data. The `docker-compose` YAML files to make the containers for the Kubernetes pods are located in the `docker` directory. This tutorial uses the `service-docker-compose-k8s.yaml` file, which builds containers for the application. 
 
 In each of the `notes` and `calendar` directories, there are two sets of Dockerfiles for building the applications either with Maven or with Gradle. This tutorial uses the Maven build, but if you are more familiar with Gradle, you can use it instead with the corresponding changes to build commands.
 
-### Starting and exercising the sample application
+Kubernetes configuration files for the `notes` app, the `calendar` app, and the Datadog Agent are in the `kubernetes` directory.
 
-1. Build the application's container by running the following from inside the `/docker` directory:
+The process of getting the sample application involves building the images from the `docker` folder, uploading them to a registry, and creating kubernetes resources from the `kubernetes` folder.
 
-   {{< code-block lang="sh" >}}
-docker-compose -f all-docker-compose.yaml build notes
-{{< /code-block >}}
+### Starting the cluster
 
-   If the build gets stuck, exit with `Ctrl+C` and re-run the command.
-
-2. Start the container:
+1. If you don't already have a GKE cluster that you want to re-use, create one by running the following command, replacing the `<VARIABLES>` with the values you want to use:
 
    {{< code-block lang="sh" >}}
-docker-compose -f all-docker-compose.yaml up notes
+gcloud container clusters create <CLUSTER_NAME> --num-nodes=1 --network=<NETWORK> --subnetwork=<SUBNETWORK>{{< /code-block >}}
+
+   **Note**: For a list of available networks and subnetworks, use the following command:
+   {{< code-block lang="sh" >}}
+gcloud compute networks subnets list{{< /code-block >}}
+
+2. Connect to the cluster by running:
+
+   {{< code-block lang="sh" >}}
+gcloud container clusters get-credentials <CLUSTER_NAME>
+gcloud config set container/cluster <CLUSTER_NAME>{{< /code-block >}}
+
+3. To facilitate communication with the applications that will be deployed, [edit the network's firewall rules][17] to ensure that the GKE cluster allows TCP traffic on port `30080` and `30090`. 
+
+### Build and upload the application image
+
+If you're not familiar with Google Container Registry (GCR), it might be helpful to read [Quickstart for Container Registry][16].
+
+1. Authenticate with GCR by running:
+   {{< code-block lang="sh" >}}
+gcloud auth configure-docker{{< /code-block >}}
+
+2. Build a Docker image for the sample app, adjusting the platform setting to match yours:
+   {{< code-block lang="sh" >}}
+DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose -f service-docker-compose-k8s.yaml build{{< /code-block >}}
+
+3. Tag the container with the GCR destination:
+   {{< code-block lang="sh" >}}
+docker tag docker_notes:latest gcr.io/<PROJECT_ID>/<REPO_NAME>:notes{{< /code-block >}}
+
+4. Upload the container to the GCR registry:
+   {{< code-block lang="sh" >}}
+docker push gcr.io/<PROJECT_ID>/<REPO_NAME>:notes{{< /code-block >}}
+
+Your application is containerized and available for GKE clusters to pull.
+
+### Configure the application locally and deploy
+
+1. Open `kubernetes/notes-app.yaml` and update the `image` entry with the URL for the GCR image, where you pushed the container in step 4 above:
+   {{< code-block lang="yaml" >}}
+    spec:
+      containers:
+        - name: notes-app
+          image: gcr.io/<PROJECT_ID>/<REPO_NAME>:notes
+          imagePullPolicy: Always
 {{< /code-block >}}
 
-   You can verify that it's running by viewing the running containers with the `docker ps` command. 
+2. From the `/kubernetes` directory, run the following command to deploy the `notes` app:
+   {{< code-block lang="sh" >}}
+kubectl create -f notes-app.yaml{{< /code-block >}}
+
+3. To exercise the app, you need to know its external IP address to call its REST API. First, find the `notes-app-deploy` pod in the list output by the following command, and note its node:
+
+   {{< code-block lang="sh" >}}
+kubectl get pods -o wide{{< /code-block >}}
+
+   {{< img src="tracing/guide/tutorials/tutorial-java-gke-pods.png" alt="Output of the kubectl command showing the notes-app-deploy pod and its associated node name" style="width:100%;" >}}
+
+   Then find that node name in the output from the following command, and note the external IP value:
+
+      {{< code-block lang="sh" >}}
+kubectl get nodes -o wide{{< /code-block >}}
+   
+   {{< img src="tracing/guide/tutorials/tutorial-java-gke-external-ip.png" alt="Output of the kubectl command showing the external IP value for the node" style="width:100%;" >}}
+
+   In the examples shown, the `notes-app` is running on node `gke-java-tracing-gke-default-pool-ccbd5526-dd3d` which has an external IP of `35.196.6.199`.
 
 3. Open up another terminal and send API requests to exercise the app. The notes application is a REST API that stores data an in-memory H2 database running on the same container. Send it a few commands:
 
-`curl localhost:8080/notes`
+`curl <EXTERNAL_IP>:30080/notes`
 : `[]`
 
-`curl -X POST 'localhost:8080/notes?desc=hello'`
+`curl -X POST '<EXTERNAL_IP>:30080/notes?desc=hello'`
 : `{"id":1,"description":"hello"}`
 
-`curl localhost:8080/notes/1`
+`curl <EXTERNAL_IP>:30080/notes?id=1`
 : `{"id":1,"description":"hello"}`
 
-`curl localhost:8080/notes`
+`curl <EXTERNAL_IP>:30080/notes`
 : `[{"id":1,"description":"hello"}]`
 
-### Stop the application
-
-After you've seen the application running, stop it so that you can enable tracing on it.
-
-1. Stop the containers:
+4. After you've seen the application running, stop it so that you can enable tracing on it:
    {{< code-block lang="sh" >}}
-docker-compose -f all-docker-compose.yaml down
-{{< /code-block >}}
-
-2. Remove the containers:
-   {{< code-block lang="sh" >}}
-docker-compose -f all-docker-compose.yaml rm
-{{< /code-block >}}
+kubectl delete -f notes-app.yaml{{< /code-block >}}
 
 ## Enable tracing
 
@@ -425,3 +491,5 @@ If you're not receiving traces as expected, set up debug mode for the Java trace
 [13]: /tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode
 [14]: /tracing/trace_collection/library_config/java/
 [15]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=java
+[16]: https://cloud.google.com/container-registry/docs/quickstart
+[17]: https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters#add_firewall_rules
