@@ -81,7 +81,7 @@
       - "*/datadog_checks/*/__about__.py"
 
     - action: pull-and-push-folder
-      branch: master
+      branch: heston/DOCS-4573
       globs:
       - docs/dev/*.md
       options:
