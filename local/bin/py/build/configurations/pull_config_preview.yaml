@@ -1170,7 +1170,7 @@
     - action: workflows
       branch: main
       globs:
-        - "domains/workflow/actionplatform/apps/manifest_generator/manifest.schema.json"
+        - "domains/workflow/actionplatform/apps/tools/manifest_generator/manifest.schema.json"
         - "domains/workflow/actionplatform/runner/bundles/com.datadoghq.*/manifest.json"
       options:
         dest_path: '/workflows/actions_catalog/'
