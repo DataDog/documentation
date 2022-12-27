@@ -464,33 +464,28 @@ main:
     parent: containers_cluster
     identifier: cluster_agent_setup
     weight: 401
-  - name: Cluster Checks
-    url: containers/cluster_agent/clusterchecks/
-    parent: containers_cluster
-    weight: 402
-  - name: Endpoints Checks
-    url: containers/cluster_agent/endpointschecks/
-    parent: containers_cluster
-    weight: 403
-  - name: Admission Controller
-    url: containers/cluster_agent/admission_controller/
-    parent: containers_cluster
-    weight: 404
   - name: Commands & Options
     url: containers/cluster_agent/commands/
     identifier: cluster_agent_commands
     parent: containers_cluster
-    weight: 405
-  - name: Cluster Checks Runner
-    url: containers/cluster_agent/clusterchecksrunner
-    identifier: cluster_agent_clcr
+    weight: 402
+  - name: Cluster Checks
+    url: containers/cluster_agent/clusterchecks/
     parent: containers_cluster
-    weight: 406
+    weight: 403
+  - name: Endpoint Checks
+    url: containers/cluster_agent/endpointschecks/
+    parent: containers_cluster
+    weight: 404
+  - name: Admission Controller
+    url: containers/cluster_agent/admission_controller/
+    parent: containers_cluster
+    weight: 405
   - name: Troubleshooting
     url: containers/cluster_agent/troubleshooting/
     identifier: cluster_agent_troubleshooting
     parent: containers_cluster
-    weight: 407
+    weight: 406
   - name: Amazon ECS
     url: containers/amazon_ecs/
     parent: containers

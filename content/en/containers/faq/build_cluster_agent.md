@@ -1,6 +1,6 @@
 ---
 title: Build the Datadog Cluster Agent
-kind: documentation
+kind: faq
 aliases:
 - /agent/cluster_agent/build
 - /containers/cluster_agent/build
