@@ -2608,7 +2608,7 @@ main:
   - name: Cloud Security Management
     url: security/cloud_security_management
     parent: security_platform_heading
-    pre: cspm
+    pre: cloud-security-management
     identifier: csm
     weight: 181500
   - name: Cloud Security Posture Management
