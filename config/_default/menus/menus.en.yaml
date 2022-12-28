@@ -3497,6 +3497,11 @@ main:
     parent: dev_tools_marketplace
     identifier: dev_tools_marketplace_offering
     weight: 501
+  - name: Create an Agent-based Integration
+    url: developers/marketplace/marketplace-agent-integration
+    parent: dev_tools_marketplace
+    identifier: marketplace-agent-integration
+    weight: 502
   - name: Datadog Apps
     url: developers/datadog_apps
     parent: dev_tools
