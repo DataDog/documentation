@@ -24,7 +24,7 @@ You can create Datadog events with emails sent from an Amazon SNS topic. Use thi
 2. From the SNS topic that you want to subscribe to, click **Create subscription** and select `Email` as the protocol. Paste the email address from step 1 in the `Endpoint` field, configure other settings as desired, and click **Create subscription**.
 3. In the Datadog [Events Explorer][2], search for an event with the subject `AWS Notification - Subscription Confirmation`. Copy the URL provided for confirmation.
 
-{{< img src="integrations/guide/sns_events_with_email/sns_events_with_email.png" alt="The Datadog events explorer showing a detail view of an event with the subject AWS Notification - Subscription Confirmation and a URL highlighted next to the text Confirm Subscription" >}}
+{{< img src="integrations/guide/events_from_sns_emails/events_from_sns_emails.png" alt="The Datadog events explorer showing a detail view of an event with the subject AWS Notification - Subscription Confirmation and a URL highlighted next to the text Confirm Subscription" >}}
 
 4. Open a new tab in your browser, and paste the URL into the address bar. The subscription is confirmed when the browser opens the URL.
 
