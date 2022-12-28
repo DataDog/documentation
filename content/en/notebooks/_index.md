@@ -39,7 +39,7 @@ Everyone on your team can open any notebook, but a notebook can only be modified
 
 ### Commenting
 
-To add a comment, select some text or hover over a graph. The **Add comment** icon is displayed to the right of the cell. Click the three vertical dots in the top-right corner of your comment to edit or delete a comment you wrote. View or re-open resolved comments in the Comment History side panel, available in the Notebook cog menu.
+To add a comment, select some text or hover over a graph. The **Add comment** icon is displayed to the right of the cell. From the comments you can also notify a member on your team through the `@mention` feature. Click the three vertical dots in the top-right corner of your comment to edit or delete a comment you wrote. View or re-open resolved comments in the Comment History side panel, available in the Notebook cog menu.
 
 Notebook authors receive email notifications for new comments on their notebooks, and commenters are notified for replies to their comments. Manage your notification settings through `Notifications` in the notebook cog menu.
 
@@ -150,8 +150,8 @@ In a Notebook cell, click **Edit** to view the cell configuration in edit mode. 
 **Note**: Changing any of these settings only affects the targeted cell.
 
 #### Types of content
-Notebooks support visualizations and text cells. Text cells are formatted with [Markdown][5], which enables the use of headings, subheadings, links, images, lists, and code blocks.
-
+Notebooks support visualizations and text cells. Text cells are formatted with [Markdown][5], which enables the use of headings, subheadings, links, images, lists, and code blocks. Notebooks also support diagrams formatted with [MermaidJS
+](https://mermaid.js.org/)
 Graphs in notebooks support all Datadog data sources: metrics, log events, Indexed Spans, live processes, network traffic, RUM events, profiling metrics, and security signals.
 
 Graphs are created with the Datadog query editor. Notebooks support:
