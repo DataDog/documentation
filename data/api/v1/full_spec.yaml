@@ -3833,6 +3833,7 @@ components:
       - profiled_host_usage
       - snmp_usage
       - estimated_rum_sessions_usage
+      - cont_usage
       type: string
       x-enum-varnames:
       - API_USAGE
@@ -3863,6 +3864,7 @@ components:
       - PROFILED_HOST_USAGE
       - SNMP_USAGE
       - ESTIMATED_RUM_SESSIONS_USAGE
+      - CONT_USAGE
     IFrameWidgetDefinition:
       description: The iframe widget allows you to embed a portion of any other web
         page on your dashboard. Only available on FREE layout dashboards.
@@ -7191,6 +7193,8 @@ components:
       - snmp_percentage
       - estimated_rum_sessions_usage
       - estimated_rum_sessions_percentage
+      - cont_usage
+      - cont_percentage
       - '*'
       type: string
       x-enum-varnames:
@@ -7250,6 +7254,8 @@ components:
       - SNMP_PERCENTAGE
       - ESTIMATED_RUM_SESSIONS_USAGE
       - ESTIMATED_RUM_SESSIONS_PERCENTAGE
+      - CONT_USAGE
+      - CONT_PERCENTAGE
       - ALL
     MonthlyUsageAttributionValues:
       description: Fields in Usage Summary by tag(s).
@@ -7303,6 +7309,15 @@ components:
           type: number
         browser_usage:
           description: The synthetic browser test usage by tag(s).
+          format: double
+          type: number
+        cont_percentage:
+          description: The percentage of container usage without the Datadog Agent
+            by tag(s).
+          format: double
+          type: number
+        cont_usage:
+          description: The container usage without Datadog agent by tag(s).
           format: double
           type: number
         container_percentage:
