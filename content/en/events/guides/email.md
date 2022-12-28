@@ -107,4 +107,4 @@ http://example.com/session_id%3A123456
 [2]: /agent/agent_checks/
 [3]: https://app.datadoghq.com
 [5]: http://daringfireball.net/projects/markdown/syntax#lin
-[6]: /integrations/guide/sns-events-with-email/
+[6]: /integrations/guide/events-from-sns-emails/
