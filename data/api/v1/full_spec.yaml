@@ -3833,6 +3833,7 @@ components:
       - profiled_host_usage
       - snmp_usage
       - estimated_rum_sessions_usage
+      - cont_usage
       type: string
       x-enum-varnames:
       - API_USAGE
@@ -3863,6 +3864,7 @@ components:
       - PROFILED_HOST_USAGE
       - SNMP_USAGE
       - ESTIMATED_RUM_SESSIONS_USAGE
+      - CONT_USAGE
     IFrameWidgetDefinition:
       description: The iframe widget allows you to embed a portion of any other web
         page on your dashboard. Only available on FREE layout dashboards.
@@ -7191,6 +7193,8 @@ components:
       - snmp_percentage
       - estimated_rum_sessions_usage
       - estimated_rum_sessions_percentage
+      - cont_usage
+      - cont_percentage
       - '*'
       type: string
       x-enum-varnames:
@@ -7250,6 +7254,8 @@ components:
       - SNMP_PERCENTAGE
       - ESTIMATED_RUM_SESSIONS_USAGE
       - ESTIMATED_RUM_SESSIONS_PERCENTAGE
+      - CONT_USAGE
+      - CONT_PERCENTAGE
       - ALL
     MonthlyUsageAttributionValues:
       description: Fields in Usage Summary by tag(s).
@@ -7303,6 +7309,15 @@ components:
           type: number
         browser_usage:
           description: The synthetic browser test usage by tag(s).
+          format: double
+          type: number
+        cont_percentage:
+          description: The percentage of container usage without the Datadog Agent
+            by tag(s).
+          format: double
+          type: number
+        cont_usage:
+          description: The container usage without Datadog agent by tag(s).
           format: double
           type: number
         container_percentage:
@@ -9873,6 +9888,14 @@ components:
             description: A tag to apply to your SLO.
             type: string
           type: array
+        target_threshold:
+          description: 'The target threshold such that when the service level indicator
+            is above this
+
+            threshold over the given timeframe, the objective is being met.'
+          example: 99.9
+          format: double
+          type: number
         thresholds:
           description: 'The thresholds (timeframes and associated targets) for this
             service level
@@ -9887,8 +9910,24 @@ components:
           items:
             $ref: '#/components/schemas/SLOThreshold'
           type: array
+        timeframe:
+          $ref: '#/components/schemas/SLOTimeframe'
         type:
           $ref: '#/components/schemas/SLOType'
+        warning_threshold:
+          description: 'The optional warning threshold such that when the service
+            level indicator is
+
+            below this value for the given threshold, but above the target threshold,
+            the
+
+            objective appears in a "warning" state. This value must be greater than
+            the target
+
+            threshold.'
+          example: 99.95
+          format: double
+          type: number
       type: object
     SLOThreshold:
       description: SLO thresholds (target and optionally warning) for a single time
@@ -10825,6 +10864,14 @@ components:
             description: A tag to apply to your SLO.
             type: string
           type: array
+        target_threshold:
+          description: 'The target threshold such that when the service level indicator
+            is above this
+
+            threshold over the given timeframe, the objective is being met.'
+          example: 99.9
+          format: double
+          type: number
         thresholds:
           description: 'The thresholds (timeframes and associated targets) for this
             service level
@@ -10839,8 +10886,24 @@ components:
           items:
             $ref: '#/components/schemas/SLOThreshold'
           type: array
+        timeframe:
+          $ref: '#/components/schemas/SLOTimeframe'
         type:
           $ref: '#/components/schemas/SLOType'
+        warning_threshold:
+          description: 'The optional warning threshold such that when the service
+            level indicator is
+
+            below this value for the given threshold, but above the target threshold,
+            the
+
+            objective appears in a "warning" state. This value must be greater than
+            the target
+
+            threshold.'
+          example: 99.95
+          format: double
+          type: number
       required:
       - name
       - thresholds
@@ -10929,6 +10992,14 @@ components:
             description: A tag to apply to your SLO.
             type: string
           type: array
+        target_threshold:
+          description: 'The target threshold such that when the service level indicator
+            is above this
+
+            threshold over the given timeframe, the objective is being met.'
+          example: 99.9
+          format: double
+          type: number
         thresholds:
           description: 'The thresholds (timeframes and associated targets) for this
             service level
@@ -10943,8 +11014,24 @@ components:
           items:
             $ref: '#/components/schemas/SLOThreshold'
           type: array
+        timeframe:
+          $ref: '#/components/schemas/SLOTimeframe'
         type:
           $ref: '#/components/schemas/SLOType'
+        warning_threshold:
+          description: 'The optional warning threshold such that when the service
+            level indicator is
+
+            below this value for the given threshold, but above the target threshold,
+            the
+
+            objective appears in a "warning" state. This value must be greater than
+            the target
+
+            threshold.'
+          example: 99.95
+          format: double
+          type: number
       required:
       - name
       - thresholds
