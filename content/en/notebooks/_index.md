@@ -20,6 +20,7 @@ further_reading:
 Notebooks combine graphs and text in a linear, cell-based format. They help you explore and share stories with your data by creating postmortems, investigations, runbooks, documentation, and more.
 
 ## Getting started
+
 1. Build a [new notebook][1], from the main navigation **Notebooks > New Notebook**.
 
 2. Click the **Save Notebook** button. </br>
@@ -135,6 +136,7 @@ Notebooks support template variables. Dynamically scope visualizations by adding
 To add cells, use the **+** button that appears to the left of the cell, or select an option from the **Add New Cell** section at the bottom of the notebook. Use the action tray that appears above the cell on hover to share, clone, or delete cells. Graph cells can be exported to a dashboard, or downloaded as a PNG or a CSV of graph data. Changes made in edit mode are saved automatically when you click **Done**. To discard your changes, click **Cancel** instead of **Done**.
 
 #### Edit options
+
 Click on **More options** in the inline editor of a widget to edit widget options. Add details like event overlays, markers, and y-axis controls. 
 
 #### Layout options
@@ -150,10 +152,10 @@ In a Notebook cell, click **Edit** to view the cell configuration in edit mode. 
 **Note**: Changing any of these settings only affects the targeted cell.
 
 #### Types of content
-Notebooks support visualizations and text cells. Text cells are formatted with [Markdown][5], which enables the use of headings, subheadings, links, images, lists, and code blocks. Notebooks also support diagrams formatted with [MermaidJS][15].
-Graphs in notebooks support all Datadog data sources: metrics, log events, Indexed Spans, live processes, network traffic, RUM events, profiling metrics, security signals, and more.
 
-Graphs are created with the Datadog query editor. Notebooks support:
+Notebooks support visualizations and text cells. Text cells are formatted with [Markdown][5], which enables the use of headings, subheadings, links, images, lists, and code blocks. Notebooks also support diagrams formatted with [MermaidJS][15].
+
+Graphs in notebooks support all Datadog data sources: metrics, log events, Indexed Spans, live processes, network traffic, RUM events, profiling metrics, security signals, and more. Graphs are created with the Datadog query editor. Notebooks support:
 
 * [Timeseries][6]
 * [Top List][7]
