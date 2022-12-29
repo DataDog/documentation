@@ -2503,31 +2503,41 @@ main:
     parent: observability_pipelines
     identifier: observability_pipelines_setup
     weight: 1
+  - name: Production Deployment Overview
+    url: observability_pipelines/production_deployment_overview/
+    parent: observability_pipelines
+    identifier: observability_pipelines_production_deployment_overview
+    weight: 2
+  - name: Architecture Design and Principles
+    url: observability_pipelines/production_deployment_overview/architecture_design_and_principles/
+    parent: observability_pipelines_production_deployment_overview
+    identifier: observability_pipelines_architecture_design_and_principles
+    weight: 201
   - name: Vector Configurations
     url: observability_pipelines/vector_configurations/
     parent: observability_pipelines
     identifier: observability_pipelines_vector_configuration
-    weight: 2
+    weight: 3
   - name: Working with Data
     url: observability_pipelines/working_with_data/
     parent: observability_pipelines
     identifier: observability_pipelines_working_with_data
-    weight: 3
+    weight: 4
   - name: Integrations
     url: observability_pipelines/integrations/
     parent: observability_pipelines
     identifier: observability_pipelines_integrations
-    weight: 4
+    weight: 5
   - name: Integrate Vector with Datadog
     url: observability_pipelines/integrations/integrate_vector_with_datadog/
     parent: observability_pipelines_integrations
     identifier: observability_pipelines_integrate_vector_with_datadog
-    weight: 302
+    weight: 502
   - name: Guides
     url: observability_pipelines/guide/
     parent: observability_pipelines
     identifier: observability_pipelines_guides
-    weight: 5
+    weight: 6
   - name: Security Overview
     url: security/
     pre: security-platform
