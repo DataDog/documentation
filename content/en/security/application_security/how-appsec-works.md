@@ -91,7 +91,7 @@ The blocked requests feature JSON or HTML content. If the [`Accept` HTTP header]
 
 Both contents are embedded in the Datadog tracer library package and loaded locally. Example of the templates for [HTML][17] and [JSON][18] in the Datadog Java tracer source code on Github.
 
-The HTML and JSON contents can respectively be changed using the `DD_APPSEC_HTTP_BLOCKED_TEMPLATE_HTML` and `DD_APPSEC_HTTP_BLOCKED_TEMPLATE_JSON` environment variables. Alternative, you can use the `dd.appsec.http.blocked.template.html` / `dd.appsec.http.blocked.template.json` configuration entries.
+The HTML and JSON content can both be changed using the `DD_APPSEC_HTTP_BLOCKED_TEMPLATE_HTML` and `DD_APPSEC_HTTP_BLOCKED_TEMPLATE_JSON` environment variables. Alternatively, you can use the `dd.appsec.http.blocked.template.html` / `dd.appsec.http.blocked.template.json` configuration entries.
 
 {{< img src="/security_platform/application_security/asm-blocking-page-html.png" alt="The page displayed as ASM blocks requests originating from blocked IPs" width="75%">}}
 
