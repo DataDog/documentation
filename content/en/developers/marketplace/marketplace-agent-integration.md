@@ -500,7 +500,7 @@ Once a Marketplace tile is live, Technology Partners can meet with Datadog's Par
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/integrations/new_check_how_to/
+[1]: /developers/integrations/new_check_howto/
 [2]: https://github.com/pypa/pipx
 [3]: /developers/integrations/python/
 [4]: https://docs.docker.com/get-docker/
