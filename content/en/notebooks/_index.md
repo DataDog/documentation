@@ -69,7 +69,7 @@ Use **Export Notebook JSON** to download a JSON file containing the definition o
 
 ### Link to individual cells
 
-Copy the URL for a specific cell by clicking **Link directly to cell**. Direct linking is available for both visualization and Markdown cells.
+Copy the URL for a specific cell by clicking **Link directly to cell** in the cell's **Share** menu. Direct linking is available for both visualization and Markdown cells.
 
 When a user visits the URL for a specific cell, the notebook is opened to show the cell at the top of the viewport. Links are absolute. A cell's URL remains the same even if it is moved to a new position within the notebook.
 
