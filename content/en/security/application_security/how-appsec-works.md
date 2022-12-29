@@ -87,7 +87,7 @@ From there, all services already protected by ASM block incoming requests perfor
 
 {{< img src="/security/application_security/asm-blocking-ui.png" alt="A security signal panel in Datadog ASM, allowing to block the attackers' IPs" width="75%">}}
 
-The blocked requests will feature a JSON or an HTML content. If the [`Accept` HTTP header][19] is pointing to HTML - like `text/html` -, the HTML content is used, otherwise the JSON one is. 
+The blocked requests feature JSON or HTML content. If the [`Accept` HTTP header][19] is pointing to HTML - like `text/html` -, the HTML content is used, otherwise the JSON one is. 
 
 Both contents are embedded in the Datadog tracer library package and loaded locally. Example of the templates for [HTML][17] and [JSON][18] in the Datadog Java tracer source code on Github.
 
