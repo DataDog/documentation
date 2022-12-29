@@ -7,7 +7,7 @@ kind: Documentation
 
 When you start deploying Observability Pipelines Worker into your infrastructure, you may run into questions such as: 
 
-- Where should the Observability Pipelines Worker be deployed within my network?
+- Where should the Observability Pipelines Worker be deployed within the network?
 - How should the data be collected?
 - Where should the data be processed?
 
@@ -32,10 +32,6 @@ When deploying the Observability Pipelines Worker as an aggregator, it should be
 When using firewalls, restrict agent communication to your aggregators and restrict aggregator communication to your configured sources and sinks.
 
 If you prefer to use a HTTP proxy, Observability Pipelines Worker offers a global proxy option to route all Observability Pipelines Worker HTTP traffic through a proxy.
-
-|  Port    | Description |
-| -------- | ----------- |
-|   |   |
 
 ### Using DNS and service discovery
 

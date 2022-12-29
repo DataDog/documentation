@@ -33,7 +33,7 @@ As an aggregator, the Observability Pipelines Worker is deployed as a standalone
 
 Agents are configured to forward data to your Observability Pipelines Worker aggregators. This is the recommended role for users looking to get started with Observability Pipelines Worker because it is easy to set up and integrate into any infrastructure.
 
- ## Reference Architectures
+ ## Reference architectures
 
  There are three common reference architectures that demonstrate how the two deployment roles can work in your infrastructure:
 
