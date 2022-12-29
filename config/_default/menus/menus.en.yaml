@@ -454,11 +454,6 @@ main:
     parent: containers_kubernetes
     identifier: containers_kubernetes_data_collected
     weight: 310
-  - name: Operator configuration
-    url: containers/kubernetes/operator_configuration
-    parent: containers_kubernetes
-    identifier: containers_kubernetes_operator_configuration
-    weight: 311
   - name: Cluster Agent
     url: containers/cluster_agent/
     parent: containers
@@ -546,16 +541,21 @@ main:
     parent: containers
     identifier: ecs_fargate
     weight: 6
+  - name: Datadog Operator
+    url: containers/datadog_operator
+    identifier: containers_datadog_operator
+    parent: containers
+    weight: 7
   - name: Troubleshooting
     url: containers/troubleshooting/
     parent: containers
     identifier: containers_troubleshooting
-    weight: 7
+    weight: 8
   - name: Duplicate hosts
     url: containers/troubleshooting/duplicate_hosts
     parent: containers_troubleshooting
     identifier: containers_troubleshooting_duplicate_hosts
-    weight: 701
+    weight: 801
   - name: Integrations
     url: integrations/
     identifier: integrations_top_level
