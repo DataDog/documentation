@@ -83,7 +83,7 @@ The [Notebook List][2] allows you to view and search previously created notebook
 * **All Notebooks**: All Notebooks in your organization.
 * **[Notebook Type](#notebook-types)**: Group notebooks by type.
 
-Hover over the Preview icon for any Notebook to see a preview of the contents, including widget types and Markdown. To open the Notebook in [View Mode](#read-mode), hover over the notebook and click **Open notebook in view mode** on the right.
+Hover over the Preview icon for any Notebook to see a preview of the contents, including widget types and Markdown. To open the Notebook in [View Mode](#view-mode), hover over the notebook and click **Open notebook in view mode** on the right.
 
 ## Template gallery
 From the [Template Gallery][3], see ready-to-use templates including an Incident Response postmortem and an Incident Report which you can create new notebooks from. You can also create a new custom template to build reusable notebook structures.
@@ -112,7 +112,7 @@ To view a different time frame on a single cell, edit the cell and use the toggl
 
 {{< img src="notebooks/add_notebook_type.png" alt="Add Type button highlighted in a Notebook" style="width:100%;">}}
 
-Notebooks can be grouped into types, this gives you quick access to relevant information. Notebooks built from other products like Incident Management or Monitors may automatically assign a type. Hover over the notebook title to display the option to add or edit the type. Click **+ Add Type**, or to edit the type, click the pencil icon that appears next to it on hover.
+Notebooks can be grouped into types, giving you quick access to relevant information. Notebooks built from other products like Incident Management or Monitors may automatically assign a type. Hover over the notebook title to display the option to add or edit the type. Click **+ Add Type**, or to edit the type, click the pencil icon that appears next to it on hover.
 
 ### Graph snapshots
 
@@ -145,14 +145,13 @@ In a Notebook cell, click **Edit** to view the cell configuration in edit mode. 
 * **Graph legend**: Uncheck the box to hide the legend. Legends are automatically disabled for `XS` and `S` graphs.
 * **Grouping**: Display one graph per tag value to see small multiples of your visualization.
 
-{{< img src="notebooks/edit_cell_action_menu.png" alt="layout options for graph size, legend, and grouping configuration" style="width:100%;">}}
+{{< img src="notebooks/edit_cell_action_menu.png" alt="The graph settings option of a notebook cell in edit mode displaying layout options for graph size, legend, and grouping configuration" style="width:100%;">}}
 
 **Note**: Changing any of these settings only affects the targeted cell.
 
 #### Types of content
-Notebooks support visualizations and text cells. Text cells are formatted with [Markdown][5], which enables the use of headings, subheadings, links, images, lists, and code blocks. Notebooks also support diagrams formatted with [MermaidJS
-](https://mermaid.js.org/)
-Graphs in notebooks support all Datadog data sources: metrics, log events, Indexed Spans, live processes, network traffic, RUM events, profiling metrics, and security signals.
+Notebooks support visualizations and text cells. Text cells are formatted with [Markdown][5], which enables the use of headings, subheadings, links, images, lists, and code blocks. Notebooks also support diagrams formatted with [MermaidJS][15].
+Graphs in notebooks support all Datadog data sources: metrics, log events, Indexed Spans, live processes, network traffic, RUM events, profiling metrics, security signals, and more.
 
 Graphs are created with the Datadog query editor. Notebooks support:
 
@@ -184,3 +183,4 @@ Graphs are created with the Datadog query editor. Notebooks support:
 [12]: /dashboards/widgets/query_value/
 [13]: /dashboards/widgets/funnel/
 [14]: /dashboards/widgets/pie_chart/
+[15]: https://mermaid.js.org/
