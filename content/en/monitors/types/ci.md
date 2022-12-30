@@ -157,7 +157,7 @@ When a CI Test or Pipeline monitor is triggered, samples or values can be added 
 | Grouped Multi-Alert count        | Up to 10 samples.                    |
 | Ungrouped Simple-Alert measure   | Up to 10 samples.                    |
 | Grouped Simple-Alert measure     | Up to 10 facet or measure values.    |
-| Grouped Multi-Alert count        | Up to 10 facet or measure values.    |
+| Grouped Multi-Alert measure        | Up to 10 facet or measure values.    |
 
 These are available for notifications sent to Slack, Jira, webhooks, Microsoft Teams, Pagerduty, and email. **Note**: Samples are not displayed for recovery notifications.
 
