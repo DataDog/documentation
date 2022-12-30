@@ -62,7 +62,7 @@ Choose between a **Pipelines** or a **Tests** monitor:
 5. Configure the alerting grouping strategy (optional):
    * If the query has a `group by`, multi alerts apply the alert to each source according to your group parameters. An alerting event is generated for each group that meets the set conditions. For example, you could group a query by `@ci.pipeline.name` to receive a separate alert for each CI Pipeline name when the number of errors is high.
 
-{{< img src="monitors/monitor_types/ci_pipelines/define-the-search-query.png" alt="A query for CI Status:Error that is being set to group by Pipeline Name" style="width:100%;" >}}
+{{< img src="monitors/monitor_types/ci_pipelines/define-the-search-query.png" alt="A query for CI Status:Error that is being set to group by Test Name" style="width:100%;" >}}
 
 #### Using formulas and functions
 
