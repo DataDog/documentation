@@ -83,7 +83,7 @@ The following example is of a pipeline error rate monitor using a formula that c
 1. Common monitor types: (optional) Provides a template query for each of the **New Flaky Test**, **Test Failures**, and **Test Performance** common monitor types, which you can then customize. Learn more about this feature by reading [Track new flaky tests](#track-new-flaky-tests).
 2. Construct a search query using the same logic as a CI Test explorer search. For example, you can search failed tests for the `main` branch of the `myapp` test service using the following query: `@test.status:fail @git.branch:main @test.service:myapp`.
 3. Choose to monitor over a CI Test event count, facet, or measure:
-    * **CI Test event count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of CI Pipeline events over a selected time frame, then compares it to the threshold conditions.
+    * **CI Test event count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of CI Pipeline test events over a selected time frame, then compares it to the threshold conditions.
     * **Dimension**: Select dimension (qualitative facet) to alert over the `Unique value count` of the facet.
     * **Measure**: Select measure (quantitative facet) to alert over the numerical value of the CI Pipeline facet (similar to a metric monitor). Select the aggregation (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
 4. Group CI Test events by multiple dimensions (optional):
