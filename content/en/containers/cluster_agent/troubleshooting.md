@@ -294,7 +294,7 @@ And indeed `824 * 3 replicas = 2472`.
 
 ### Kubernetes: find the leader Cluster Agent
 
-When leader election is enabled, only the leader serves Cluster Check configurations to the node-based Agents. If only one replica of the Cluster Agent Pod is running, it is the leader. Otherwise, you can identify the name of the leader in the `datadog-leader-election` `ConfigMap`:
+When leader election is enabled, only the leader serves cluster check configurations to the node-based Agents. If only one replica of the Cluster Agent Pod is running, it is the leader. Otherwise, you can identify the name of the leader in the `datadog-leader-election` ConfigMap:
 
 ```yaml
 # kubectl get cm datadog-leader-election -o yaml
@@ -302,7 +302,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   annotations:
-    control-plane.alpha.kubernetes.io/leader: '{"holderIdentity":"cluster-agent-rhttz", ...''
+    control-plane.alpha.kubernetes.io/leader: '{"holderIdentity":"cluster-agent-rhttz", ... }'
 ```
 
 In this case, the leader Pod is `cluster-agent-rhttz`. If the Pod is deleted or unresponsive, another Pod takes over automatically.
