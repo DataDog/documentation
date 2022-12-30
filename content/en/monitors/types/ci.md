@@ -169,7 +169,7 @@ Include a table of CI Test 10 samples in the alert notification:
 {{< img src="monitors/monitor_types/ci_tests/10_ci_tests_samples.png" alt="Top 10 CI Test samples"  style="width:60%;" >}}
 
 Include a table of CI Pipeline 10 samples in the alert notification:
-{{< img src="monitors/monitor_types/ci_pipelines/10_ci_pipelines_samples.png" alt="Top 10 CI Test samples"  style="width:60%;" >}}
+{{< img src="monitors/monitor_types/ci_pipelines/10_ci_pipelines_samples.png" alt="Top 10 CI Pipeline samples"  style="width:60%;" >}}
 
 #### Notifications behavior when there is no data
 
