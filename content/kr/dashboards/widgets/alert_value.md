@@ -34,7 +34,7 @@ title: 경고 값 위젯
 
 #### 타이틀
 
-`Show a Title` 확인란을 활성화하여 위젯의 사용자 지정 제목을 표시하세요.
+`Show a Title` 확인란을 활성화하여 위젯의 커스텀 타이틀을 표시하세요.
 
 {{< img src="dashboards/widgets/options/title.png" alt="위젯 타이틀" style="width:80%;">}}
 
