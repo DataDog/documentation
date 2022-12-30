@@ -56,7 +56,7 @@ Choose between a **Pipelines** or a **Tests** monitor:
 3. Choose to monitor over a CI Pipeline event count, facet, or measure:
     * **CI Pipeline event count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of CI Pipeline events over a selected time frame, then compares it to the threshold conditions.
     * **Dimension**: Select dimension (qualitative facet) to alert over the `Unique value count` of the facet.
-    * **Measure**: Select measure (quantitative facet) to alert over the numerical value of the CI Pipeline facet (similar to a metric monitor). Select the aggregation (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
+    * **Measure**: Select measure (quantitative facet) to alert over the numerical value of the CI Pipeline measure (similar to a metric monitor). Select the aggregation (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
 4. Group CI Pipeline events by multiple dimensions (optional):
     * All CI Pipeline events matching the query are aggregated into groups based on the value of up to four facets.
 5. Configure the alerting grouping strategy (optional):
