@@ -10,14 +10,30 @@ title: トレースガイド
 
 
 {{< whatsnext desc="APM の概要" >}}
-    {{< nextlink href="tracing/guide/alert_anomalies_p99_database" >}}1. データベースサービスの異常な p99 レイテンシーに関するアラート{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/alert_anomalies_p99_database" >}}1. データベースサービス P99 のレイテンシーに関する異常のアラート{{< /nextlink >}}
     {{< nextlink href="tracing/guide/week_over_week_p50_comparison" >}}2. サービスの p50 レイテンシーを前週と比較する{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/apm_dashboard" >}}3. ダッシュボードを作成して、APM メトリクスを追跡、関連付ける{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/slowest_request_daily" >}}4. ウェブサービスの最も遅いエンドポイントで最も遅いトレースをデバッグする{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/add_span_md_and_graph_it" >}}5. スパンタグを追加し、アプリケーションのパフォーマンスをフィルター・グループ化する{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/instrument_custom_method" >}}6. カスタムメソッドをインスツルメントして、ビジネスロジックを詳細に可視化する{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/apm_dashboard" >}}3. APM メトリクスを追跡し、関連付けるためのダッシュボードを作成する{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/slowest_request_daily" >}}4. Web サービスの最も遅いエンドポイントでの最も遅いトレースをデバッグする{{< /nextlink >}}
+    <a id="enabling-tracing-tutorials">
+    {{< nextlink href="tracing/guide/add_span_md_and_graph_it" >}}5. スパンタグを追加し、アプリケーションのパフォーマンスをフィルタリングしてグループ化する{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/instrument_custom_method" >}}6. カスタムメソッドをインスツルメンテーションして、ビジネスロジックを深く可視化する{{< /nextlink >}}
+{{< /whatsnext >}}
+
+<br>
+{{< whatsnext desc="チュートリアル: トレースの有効化" >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-python-host" >}}Datadog Agent と同じホスト上の Python アプリケーションでトレースを有効にする{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-python-containers" >}}コンテナ内の Python アプリケーションと Datadog Agent でトレースを有効にする{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-python-container-agent-host" >}}コンテナ内の Python アプリケーションとホスト上の Agent のトレースを有効にする{{< /nextlink >}}
 {{< /whatsnext >}}
 <br>
+
+
+{{< whatsnext desc="APM インテグレーションのアクション" >}}
+    {{< nextlink href="/tracing/guide/monitor-kafka-queues/" >}}Kafka キューをトレースする{{< /nextlink >}}
+    {{< nextlink href="/tracing/guide/trace-php-cli-scripts/" >}}PHP CLI スクリプトをトレースする{{< /nextlink >}}
+{{< /whatsnext >}}
+<br>
+
 {{< whatsnext desc="トレーシングガイド" >}}
     {{< nextlink href="tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm" >}}サービスごとに Apdex スコアを構成する{{< /nextlink >}}
     {{< nextlink href="tracing/guide/configuring-primary-operation" >}}サービスのプライマリオペレーション {{< /nextlink >}}
@@ -31,5 +47,5 @@ title: トレースガイド
     {{< nextlink href="tracing/guide/serverless_enable_aws_xray/" >}}Datadog APM と AWS X-Ray をいつ使用するかの決定{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/setting_up_apm_with_cpp/" >}}C++ による APM の設定{{< /nextlink >}}
      {{< nextlink href="/tracing/guide/trace_ingestion_volume_control/" >}}取り込みメカニズムによる取り込み量の制御{{< /nextlink >}}
-    {{< nextlink href="/tracing/guide/trace-php-cli-scripts/" >}}PHP CLI スクリプトのトレース{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/guide/ingestion_sampling_with_opentelemetry/" >}}OpenTelemetry による取り込みサンプリング{{< /nextlink >}}
 {{< /whatsnext >}}
