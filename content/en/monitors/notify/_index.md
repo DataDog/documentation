@@ -122,12 +122,12 @@ Providing additional context, monitor notifications can include content such as 
 
 The options are:
 
-- **Default**: no content is hidden
-- **Hide Query**: removes the monitor's query from its notification
-- **Hide Handles**: strips away the @-mentions that are used in the notification message
-- **Hide All**: notification does not include query, handles, any snapshot (for metric monitors), and additional links in footers
+- **Default**: No content is hidden.
+- **Hide Query**: Remove the monitor's query from the notification message.
+- **Hide Handles**: Remove the @-mentions that are used in the notification message.
+- **Hide All**: Notification message does not include query, handles, any snapshots (for metric monitors), or additional links in footers.
 
-Note, some content might not be displayed by defauly depending on the integration.
+**Note**: Depending on the integration, some content may not be displayed by default.
 
 ### Modifications
 
