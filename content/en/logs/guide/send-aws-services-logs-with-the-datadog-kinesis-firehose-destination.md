@@ -29,18 +29,22 @@ AWS fully manages Amazon Kinesis Data Firehose, so you don't need to maintain an
 
 Datadog recommends using a Kinesis data stream as input when using the Datadog Kinesis destination. It gives you the ability to forward your logs to multiple destinations in case Datadog is not the only consumer for those logs. If Datadog is the only destination for your logs, or if you already have a Kinesis data stream with your logs, you can ignore step one.
 
-1. Optionally, use the [Create the Kinesis Data Streams][1] documentation in AWS to create a new Kinesis data stream. Name the stream something descriptive, like `DatadogLogStream`.
+1. Optionally, use the [Create a Data Stream][1] section of the Amazon Kinesis Data Streams developer guide in AWS to create a new Kinesis data stream. Name the stream something descriptive, like `DatadogLogStream`.
 2. Create a [new delivery stream][2].  
-   a. Set the source as `Amazon Kinesis Data Streams` if your logs are coming from a Kinesis data stream, or `Direct PUT or other sources` if your logs are coming directly from a CloudWatch log group. Set the destination as `Datadog`.  
-   b. Provide a name for the delivery stream.  
-   c. In the **Destination settings**, choose the `Datadog logs` HTTP endpoint URL that corresponds to your [Datadog site][5].  
-   d. Paste your API key into the **API key** field. You can get or create an API key from the [Datadog API Keys page][3].  
-   e. Optionally, configure the **Retry duration**, the buffer settings, or add **Parameters**, which are attached as tags to your logs.  
-   f. In the **Backup settings**, select an S3 backup bucket to receive any failed events that exceed the retry duration.  
-     **Note**: To ensure that logs that fail through the delivery stream are still sent to Datadog, set the Datadog Forwarder Lambda function to [forward logs][4] from this S3 bucket.  
-   g. Click **Create delivery stream**.
+   a. Set the source: 
+      - `Amazon Kinesis Data Streams` if your logs are coming from a Kinesis data stream
+      - `Direct PUT or other sources` if your logs are coming directly from a CloudWatch log group
 
-[1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/app-hotspots-prepare.html#app-hotspots-create-two-streams
+   b. Set the destination as `Datadog`.  
+   c. Provide a name for the delivery stream.  
+   d. In the **Destination settings**, choose the `Datadog logs` HTTP endpoint URL that corresponds to your [Datadog site][5].  
+   e. Paste your API key into the **API key** field. You can get or create an API key from the [Datadog API Keys page][3].  
+   f. Optionally, configure the **Retry duration**, the buffer settings, or add **Parameters**, which are attached as tags to your logs.  
+   g. In the **Backup settings**, select an S3 backup bucket to receive any failed events that exceed the retry duration.  
+     **Note**: To ensure that logs that fail through the delivery stream are still sent to Datadog, set the Datadog Forwarder Lambda function to [forward logs][4] from this S3 bucket.  
+   h. Click **Create delivery stream**.
+
+[1]: https://docs.aws.amazon.com/streams/latest/dev/tutorial-stock-data-kplkcl-create-stream.html
 [2]: https://console.aws.amazon.com/firehose/
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=automaticcloudformation#collecting-logs-from-s3-buckets
@@ -57,8 +61,8 @@ Alternatively, customize this CloudFormation template and install it from the AW
 
 ## Send AWS logs to your Kinesis stream
 
-Subscribe your new Kinesis stream to the CloudWatch log groups you want to ingest into Datadog. You can check the `Subscriptions` column on the [log groups index page][1] to see current subscriptions to your log groups. Subscriptions can be created through the AWS console or API with the specifications below.
-  **Note**: Each CloudWatch Log group can only have two subscriptions.
+Subscribe your new Kinesis stream to the CloudWatch log groups you want to ingest into Datadog. You can check the **Subscriptions** column on the [log groups index page][1] to see current subscriptions to your log groups. Subscriptions can be created through the AWS console or API with the specifications below.  
+   **Note**: Each CloudWatch Log group can only have two subscriptions.
 
 ### Create an IAM Role and Policy
 
@@ -71,29 +75,31 @@ Use the [Subscription filters with Kinesis][2] example (steps 3 to 6) for an exa
 ### Create a subscription filter
 
 The following example creates a subscription filter through the AWS CLI:
+
     ```
     aws logs put-subscription-filter \
-        --log-group-name "MYLOGGROUPNAME" \
-        --filter-name "MyFilterName" \
+        --log-group-name "<MYLOGGROUPNAME>" \
+        --filter-name "<MyFilterName>" \
         --filter-pattern "" \
-        --destination-arn "DESTINATIONARN (data stream or delivery stream)" \
-        --role-arn "MYROLEARN"
+        --destination-arn "<DESTINATIONARN> (data stream or delivery stream)" \
+        --role-arn "<MYROLEARN>"
     ```
+
 You can also create a subscription filter through the AWS console. 
 
-1. Go to your log group in CloudWatch and click on the **Subscription filters** tab, then **Create**.
-  - If your logs are flowing through a Kinesis data stream, select `Create Kinesis subscription filter`.
-  - If you are sending logs directly from your log group to your Kinesis Firehose delivery stream, select `Create Kinesis Firehose subscription filter`.
+1. Go to your log group in [CloudWatch][1] and click on the **Subscription filters** tab, then **Create**.
+   - If you are sending logs through a Kinesis data stream, select `Create Kinesis subscription filter`.
+   - If you are sending logs directly from your log group to your Kinesis Firehose delivery stream, select `Create Kinesis Firehose subscription filter`.
 
 2. Select the data stream or Firehose delivery stream as applicable, as well as the [IAM role](#create-an-iam-role-and-policy) previously created.
 
 3. Provide a name for the subscription filter, and click **Start streaming**.
 
-**Important note**: The destination of the subscription filter must be in the same account as the log group, as described in the [AWS documentation][3].
+**Important note**: The destination of the subscription filter must be in the same account as the log group, as described in the [Amazon CloudWatch Logs API Reference][3].
 
 ### Validation
 
-Check the `Subscriptions` column in the [log groups index page][1] to confirm that the new Kinesis stream is now subscribed to your log groups.
+Check the `Subscriptions` column in the log groups index page in [CloudWatch][1] to confirm that the new Kinesis stream is now subscribed to your log groups.
 
 ### Search for AWS Kinesis logs in Datadog
 
