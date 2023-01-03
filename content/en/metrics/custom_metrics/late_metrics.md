@@ -25,19 +25,13 @@ You can now ingest/configure late metrics for counts, rates, and gauges via the 
 
 ## Late Metrics Submission Mechanisms
 
-Late metrics can be submitted to Datadog via the API or the Agent. For the API, you can send metrics points with old timestamps in the payload, while ensuring that the metric name that is ingesting the point has been configured to receive Late Metrics. For the Agent, ensure that you have Agent version 7.40.0 installed, and you’ll be able to send delayed metric points via the updated DogStatsD interface. 
+Late metrics can be submitted to Datadog via our API or the Agent. 
 
-## Late Metrics Ingestion Latency
+For the API, you can send metrics points with old timestamps in the payload, while ensuring that the metric name that is ingesting the point has been configured to receive Late Metrics (via the UI). 
 
-Ingesting Late Metrics will include some ingestion latencies, dependent on how far into the past the ingestion is taking place.
+For the Agent, ensure that you have Agent version 7.40.0 installed, and you’ll be able to send delayed metric points via the updated DogStatsD interface. 
 
-| Metrics Outdated by: | Ingestion Latency                     |
-|----------------------|---------------------------------------|
-| 1-12 hours           | Near Real-Time Ingestion (1 hour MAX) |
-| 12 hours - 30 days   | Up to 14 hour latency                 |
-| +30 days             | +14 hours latency                     |
-
-## Configure of Late Metrics
+## Configuring Late Metrics
 
 Click on any metric name to open its details side-panel. “Late Data” will be the second option under the already existing “Advanced” section in the Metrics side panel. Clicking on “Edit” will move to the next screen. 
 
@@ -49,10 +43,22 @@ GIF FROM JOE GOES HERE
 
 There are also APIs available so you can enable or disable late metric ingestion.
 
-## Configure multiple metrics at a time
+## Bulk Configuring Late Metrics
 
 Optimize your Late Metrics enablement by using our Bulk Late Metric Enablement feature. By clicking Late Metrics on Metrics Summary, you can specify a namespace for your metrics. You can then configure all metrics matching that namespace to enable Late metrics ingestion.
 
 GIF FROM JOE GOES HERE
+
+## Late Metrics Ingestion Latency
+
+Ingesting Late Metrics will include some ingestion latencies, dependent on the age of the metric timestamp. 
+
+| Metrics Outdated by: | Ingestion Latency                     |
+|----------------------|---------------------------------------|
+| 1-12 hours           | Near Real-Time Ingestion (1 hour MAX) |
+| 12 hours - 30 days   | Up to 14 hour latency                 |
+| +30 days             | +14 hours latency                     |
+
+*Ingestion latencies will improve with time.*
 
 [1]: /metrics/summary/
