@@ -49,7 +49,7 @@ GIF FROM JOE GOES HERE
 
 There are also APIs available so you can enable or disable late metric ingestion.
 
-## Bulk Configuring Late Metrics
+### Bulk Configuring Late Metrics
 
 Optimize your Late Metrics enablement by using our Bulk Late Metric Enablement feature. By clicking Late Metrics on Metrics Summary, you can specify a namespace for your metrics. You can then configure all metrics matching that namespace to enable Late metrics ingestion.
 
@@ -65,6 +65,6 @@ Ingesting Late Metrics will include some ingestion latencies, dependent on the a
 | 12 hours - 30 days   | Up to 14 hour latency                 |
 | +30 days             | +14 hours latency                     |
 
-*Ingestion latencies will improve with time.*
+*Above mentioned Ingestion Latencies are not final and are subject to improvements with compliance to Datadog's committment to continuous growth.*
 
 [1]: /metrics/summary/
