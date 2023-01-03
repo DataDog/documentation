@@ -10,7 +10,7 @@ further_reading:
 
 ## Overview
 
-RUM lets you capture all events in your browser applications and explore them to troubleshoot slow pages and code errors, or to analyze application usage. All events are available in [RUM Explorer][1] for querying, dashboarding, and alerting.
+RUM captures events from your browser applications and lets you explore them to troubleshoot slow pages and code errors, or to analyze application usage. All captured events are available in [RUM Explorer][1] for querying, dashboarding, and alerting.
 
 If your browser application is large, it's likely been built by multiple web development teams. Each team has an area of ownership that they focus on when troubleshooting errors, slowness, or analyzing usage.
 
@@ -54,7 +54,7 @@ You can track the following milestones in the lifecycle of the search component 
 
 - `search_component_render`: The search component renders
 - `search_component_input`: The search component gets input from the user keyboard
-- `search_component_suggestions_display`: The search component displays suggestions 
+- `search_component_suggestions_display`: The search component displays suggestions
 
 The custom action then automatically carries attributes for:
 
@@ -79,7 +79,7 @@ datadogRum.addAction('search_component_render', {
 From the RUM Explorer, you can then analyze:
 
 - The page where a component is used the most
-- The browser application where a component is used the most 
+- The browser application where a component is used the most
 - The P75 percentile for the time for the component to fully render
 
 ## Track team ownership
@@ -96,14 +96,14 @@ Inside your RUM application, create services for each set of pages owned by a te
 2. For each page of your website, assign a view name and a service following [the instructions for overriding default RUM view names][8].
    - `"purchase"` service for the pages available at `/checkout`, `/payment`, `/confirmOrder`.
    - `"catalog"` service for the pages available at `/beds`, `/chairs/123`, `/search`.
-3. [Upload a source map for each service][9] to view unminified stack traces in Error Tracking. 
+3. [Upload a source map for each service][9] to view unminified stack traces in Error Tracking.
 
 Get insights into the performance or the adoption of a given team's scope by using the `service` attribute in RUM:
 
 1. From the RUM Application Overview page, narrow down all graphs by `service` to get a holistic view for a team's scope
-2. Any query done in the RUM Explorer can use the `service` attribute to filter: 
-   - Errors by service 
-   - Page views by service 
+2. Any query done in the RUM Explorer can use the `service` attribute to filter:
+   - Errors by service
+   - Page views by service
 
 {{< img src="real_user_monitoring/guide/define-applications-services-components-rum/rum-guide-rum-applications-overview-page.jpg" alt="Search query for actions grouped by user name on Shopist's Cart page" style="width:90%;">}}
 
@@ -111,10 +111,10 @@ Get insights into the performance or the adoption of a given team's scope by usi
 
 {{< img src="real_user_monitoring/guide/define-applications-services-components-rum/rum-guide-team-owns-ui-components-1.jpg" alt="Components can be tracked using custom actions" style="width:90%;">}}
 
-Components are tracked using custom actions [mentioned above][10]: 
+Components are tracked using custom actions [mentioned above][10]:
 
-1. Add a team attribute inside the custom action definition. 
-2. Track the loading time and other timings during the component's lifecycle as attributes in the custom actions. 
+1. Add a team attribute inside the custom action definition.
+2. Track the loading time and other timings during the component's lifecycle as attributes in the custom actions.
 
 ## Further reading
 
