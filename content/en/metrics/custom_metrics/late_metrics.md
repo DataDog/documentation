@@ -27,9 +27,9 @@ You can now ingest/configure late metrics for counts, rates, and gauges via the 
 
 Late metrics can be submitted to Datadog via our API or the Agent. 
 
-For the API, you can send metrics points with old timestamps in the payload, while ensuring that the metric name that is ingesting the point has been configured to receive Late Metrics (via the UI). 
+**If you intend to submit late metrics via the API**:, you can send metrics points with old timestamps in the payload, while ensuring that the metric name that is ingesting the point has been configured to receive Late Metrics (via the UI). 
 
-For the Agent, ensure that you have Agent version 7.40.0 installed, and you’ll be able to send delayed metric points via the updated DogStatsD interface. 
+**If you intend to submit late metrics via the Agent**:  ensure that you have Agent version +7.40.0 installed, and you’ll be able to send delayed metric points via the updated DogStatsD interface (*currently supporting GoLang and .NET versions*). 
 
 ## Configuring Late Metrics
 
