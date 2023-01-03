@@ -20,8 +20,6 @@ This guide describes how to define an application in RUM. In addition, it covers
 
 The first step to tracking and analyzing your browser application is to [create a RUM application][2]. A RUM application maps a browser application available at a given domain that renders the experience for what customers would perceive as a website.
 
-If your browser application has subdomains, like `https://www.account.yourwebsite.com`, create a RUM application for each subdomain.
-
 ## Track pages in your browser application
 
 Whether your browser application is a single page application or is one that uses server-side rendering, the Browser RUM SDK automatically tracks route changes and creates a view event for every route change.
