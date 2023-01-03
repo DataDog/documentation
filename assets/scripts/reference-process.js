@@ -81,7 +81,11 @@ function simpleExampleYaml(data1) {
   const outData = {};
   if(data1 && data1.hasOwnProperty('properties')) {
     Object.entries(data1.properties).forEach(([key, value]) => {
-      outData[key] = value.default || value.type || value.const || "";
+      let type = value.type;
+      if(type instanceof Array) {
+        type = value.type[0]
+      }
+      outData[key] = value.default || type || value.const || "";
     });
   }
   return yaml.dump(outData, {lineWidth: -1, sortKeys:false});
@@ -91,7 +95,11 @@ function advancedExampleYaml(data1) {
   const outData = {};
   if(data1 && data1.hasOwnProperty('properties')) {
     Object.entries(data1.properties).forEach(([key, value]) => {
-      outData[key] = value.default || value.type || value.const || "";
+      let type = value.type;
+      if(type instanceof Array) {
+        type = value.type[0]
+      }
+      outData[key] = value.default || type || value.const || "";
     });
   }
   return yaml.dump(outData, {lineWidth: -1, sortKeys:false});
@@ -101,12 +109,20 @@ function exampleYaml(data1, data2) {
   const outData = {};
   if(data1 && data1.hasOwnProperty('properties')) {
     Object.entries(data1.properties).forEach(([key, value]) => {
-      outData[key] = value.default || value.type || value.const || "";
+      let type = value.type;
+      if(type instanceof Array) {
+        type = value.type[0]
+      }
+      outData[key] = value.default || type || value.const || "";
     });
   }
   if(data2 && data2.hasOwnProperty('properties')) {
     Object.entries(data2.properties).forEach(([key, value]) => {
-      outData[key] = value.default || value.type || value.const || "";
+      let type = value.type;
+      if(type instanceof Array) {
+        type = value.type[0]
+      }
+      outData[key] = value.default || type || value.const || "";
     });
   }
   return yaml.dump(outData, {lineWidth: -1, sortKeys:false});
