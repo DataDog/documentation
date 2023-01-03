@@ -43,6 +43,9 @@
   .code-snippet-wrapper button[disabled], {
     opacity:1;
   }
+  .code-snippet-wrapper .code-snippet pre {
+    padding-top:10px;
+  }
 </style>
     <h1 id="pagetitle">{{ .Title }}</h1>
     {{ with .Content }}{{ . }}{{ end }}
