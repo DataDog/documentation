@@ -47,11 +47,11 @@ The code sample for this tutorial is on GitHub, at [github.com/DataDog/apm-tutor
 git clone https://github.com/DataDog/apm-tutorial-java-host.git
 {{< /code-block >}}
 
-The repository contains a multi-service Java application pre-configured to be run inside Docker containers. The sample app is a basic notes app with a REST API to add and change data. The `docker-compose` YAML files to make the containers for the Kubernetes pods are located in the `docker` directory. This tutorial uses the `service-docker-compose-ECS.yaml` file, which builds containers for the application. 
+The repository contains a multi-service Java application pre-configured to be run inside Docker containers. The `docker-compose` YAML files to make the containers are located in the `docker` directory. This tutorial uses the `service-docker-compose-ECS.yaml` file, which builds containers for the application. 
 
 In each of the `notes` and `calendar` directories, there are two sets of Dockerfiles for building the applications either with Maven or with Gradle. This tutorial uses the Maven build, but if you are more familiar with Gradle, you can use it instead with the corresponding changes to build commands.
 
-The sample application is a simple Java multi-service application with two APIs, one for a `notes` service and another for a `calendar` service. The `notes` service has `GET`, `POST`, `PUT` and `DELETE` endpoints for notes stored within an in-memory database. The `calendar` service can take a request and return a random date to be used in a note. Both applications have their own associated Docker images, and you deploy them on AWS ECS as separate services, each with its own tasks and respective containers.
+The sample application is a simple multi-service Java application with two APIs, one for a `notes` service and another for a `calendar` service. The `notes` service has `GET`, `POST`, `PUT` and `DELETE` endpoints for notes stored within an in-memory database. The `calendar` service can take a request and return a random date to be used in a note. Both applications have their own associated Docker images, and you deploy them on AWS ECS as separate services, each with its own tasks and respective containers.
 
 
 
