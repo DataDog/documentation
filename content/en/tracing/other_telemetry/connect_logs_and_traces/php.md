@@ -71,7 +71,6 @@ For monolog v2:
 
 ```php
 <?php
-
   $logger->pushProcessor(function ($record) {
       $context = \DDTrace\current_context();
       return $record->with(message: $record['message'] . sprintf(
@@ -79,7 +78,8 @@ For monolog v2:
           $context['trace_id'],
           $context['span_id']
       ));
-  });
+    });
+  ?>
 ```
 
 If your application uses json logs format instead of appending trace_id and span_id to the log message you can add first-level key "dd" containing these ids:
