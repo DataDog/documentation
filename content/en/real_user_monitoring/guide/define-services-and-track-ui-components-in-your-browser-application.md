@@ -31,7 +31,7 @@ If, for example, automatically capturing page views by route change does not pro
 
 ## Track timings during the rendering lifecycle of your pages
 
-The Browser SDK automatically tracks a set of latencies, or timings, that are industry standards. These include the Core Web Vitals, page loading times, [and more][4].
+The Browser SDK automatically tracks a set of industry standards timings, Core Web Vitals, page loading times [and more][4].
 
 In addition, you can track the time it takes for a specific item on the page to render, such as an image or a component. You can track more timings by capturing them in code, then pasting the values in your view events. For details on how to do this, see the documentation on [adding your own performance timing][5].
 
