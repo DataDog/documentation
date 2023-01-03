@@ -47,7 +47,7 @@ Datadog recommends using a Kinesis data stream as input when using the Datadog K
 [1]: https://docs.aws.amazon.com/streams/latest/dev/tutorial-stock-data-kplkcl-create-stream.html
 [2]: https://console.aws.amazon.com/firehose/
 [3]: https://app.datadoghq.com/organization-settings/api-keys
-[4]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=automaticcloudformation#collecting-logs-from-s3-buckets
+[4]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=automaticcloudformation#collecting-logs-from-s3-buckets
 [5]: /getting_started/site/
 {{% /tab %}}
 
@@ -99,7 +99,7 @@ You can also create a subscription filter through the AWS console.
 
 ### Validation
 
-Check the `Subscriptions` column in the log groups index page in [CloudWatch][1] to confirm that the new Kinesis stream is now subscribed to your log groups.
+Check the **Subscriptions** column in the log groups index page in [CloudWatch][1] to confirm that the new Kinesis stream is now subscribed to your log groups.
 
 ### Search for AWS Kinesis logs in Datadog
 
