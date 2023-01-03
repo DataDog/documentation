@@ -256,7 +256,8 @@ To configure the rare sampler, update the `apm_config.enable_rare_sampler` setti
 @env DD_APM_ENABLE_RARE_SAMPLER - boolean - optional - default: false
 ```
 
-To adjust the rare sampler so that it evaluates spans dropped by tracing library rules or custom logic such as `manual.keep`, enable the feature with: `DD_APM_FEATURES=error_rare_sample_tracer_drop` in the Trace Agent.
+To evaluate spans dropped by tracing library rules or custom logic such as `manual.keep`,
+ enable the feature with: `DD_APM_FEATURES=error_rare_sample_tracer_drop` in the Trace Agent.
 
 
 #### Datadog Agent 6/7.33 to 6/7.40.x
