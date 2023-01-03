@@ -22,9 +22,9 @@ To build a funnel, select your starting view or action and click on the plus ico
 
 {{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-building-a-funnel-1.mp4" alt="Filtering network map with search" video=true >}}
 
-### Suggested next steps
+### Suggested next steps panel
 
-When you have a starting point in mind, but aren't sure what your users did next, suggested next steps helps remove the guesswork. After inputting steps, the suggested next steps panel shows you the top five most common views that users typically have next, as well as the top five most common actions that users typically take next. This allows you to build funnels quicker knowing the paths your users are taking in sequence.
+When you have a starting point in mind, but aren't sure what your users did next, use the suggested next steps panel to help remove the guesswork. After inputting steps, the suggested next steps panel automatically loads the top five most common **views** and **actions** that users typically see and take next. This allows you to build funnels quicker knowing the paths your users are taking in sequence.
 
 {{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-suggested-next-steps.jpg" alt="Build a funnel" style="width:90%;" >}}
 
@@ -70,7 +70,10 @@ Note that you have a few options when it comes to sharing:
 
 Setting up alerts on conversion/dropoff rates allows you to be notified when conversion drops below a predefined threshold. You can export the conversion rate query to a monitor in a few ways:
 
-- From the visualization: This option takes the end-to-end workflow's query, allowing you to alert on the conversion rate for an entire workflow. 
+- From the visualization: This option takes the end-to-end workflow's query, allowing you to alert on the conversion rate for an entire workflow.
+
+  {{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-alert-on-conversion-rate.mp4" alt="Create an alert on the conversion rate for an entire workflow" video=true >}}
+
 - From the Funnel Insights panel: This allows you to take individual queries and alert on them. While this could be the overall workflow, you also have the option to alert on individual steps' dropoff and conversion.
   - For example, if you want to alert on the dropoff rate between steps 3 and 4, you can do that from the Funnel Insights panel as shown below:
 
