@@ -660,6 +660,13 @@
       "description": "List tags by metric name returns \"Success\" response"
     }
   ],
+  "QueryScalarData": [
+    {
+      "group": "metrics",
+      "suffix": "",
+      "description": "Scalar cross product query returns \"OK\" response"
+    }
+  ],
   "SubmitMetrics": [
     {
       "group": "metrics",
@@ -677,6 +684,13 @@
       "group": "metrics",
       "suffix": "",
       "description": "Tag Configuration Cardinality Estimator returns \"Success\" response"
+    }
+  ],
+  "QueryTimeseriesData": [
+    {
+      "group": "metrics",
+      "suffix": "",
+      "description": "Timeseries cross product query returns \"OK\" response"
     }
   ],
   "UpdateTagConfiguration": [

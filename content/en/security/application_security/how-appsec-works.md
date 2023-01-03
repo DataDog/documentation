@@ -85,8 +85,15 @@ You can block attackers' IPs that are flagged in ASM Security Signals temporaril
 
 From there, all services already protected by ASM block incoming requests performed by the blocked IP, for the specified duration. All blocked traces are tagged with `security_response.block_ip` and displayed in the [Trace Explorer][14]. Services where ASM is disabled aren't protected.
 
-
 {{< img src="/security/application_security/asm-blocking-ui.png" alt="A security signal panel in Datadog ASM, allowing to block the attackers' IPs" width="75%">}}
+
+The blocked requests feature JSON or HTML content. If the [`Accept` HTTP header][19] is pointing to HTML - like `text/html` -, the HTML content is used, otherwise the JSON one is. 
+
+Both sets of content is embedded in the Datadog tracer library package and loaded locally. See the examples of the templates for [HTML][17] and [JSON][18] in the Datadog Java tracer source code on Github.
+
+The HTML and JSON content can both be changed using the `DD_APPSEC_HTTP_BLOCKED_TEMPLATE_HTML` and `DD_APPSEC_HTTP_BLOCKED_TEMPLATE_JSON` environment variables. Alternatively, you can use the `dd.appsec.http.blocked.template.html` / `dd.appsec.http.blocked.template.json` configuration entries.
+
+{{< img src="/security/application_security/asm-blocking-page-html.png" alt="The page displayed as ASM blocks requests originating from blocked IPs" width="75%">}}
 
 ## Coverage
 
@@ -129,3 +136,6 @@ Datadog ASM includes over 100 attack patterns that help protect against [many di
 [14]: https://app.datadoghq.com/security/appsec/traces?query=%40appsec.blocked%3Atrue
 [15]: https://app.datadoghq.com/security/appsec/event-rules
 [16]: /security/cloud_siem/
+[17]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/agent-bootstrap/src/main/resources/datadog/trace/bootstrap/blocking/template.html
+[18]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/agent-bootstrap/src/main/resources/datadog/trace/bootstrap/blocking/template.json
+[19]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept

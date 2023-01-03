@@ -77,6 +77,11 @@ main:
     url: getting_started/integrations/aws/
     weight: 701
     parent: getting_started_integrations
+  - name: Terraform
+    identifier: getting_started_with_terraform
+    url: getting_started/integrations/terraform/
+    weight: 702
+    parent: getting_started_integrations
   - name: Dashboards
     identifier: getting_started_dashboards
     url: getting_started/dashboards/
@@ -2608,7 +2613,7 @@ main:
   - name: Cloud Security Management
     url: security/cloud_security_management
     parent: security_platform_heading
-    pre: cspm
+    pre: cloud-security-management
     identifier: csm
     weight: 181500
   - name: Cloud Security Posture Management
@@ -3459,7 +3464,7 @@ main:
     parent: dev_tools
     identifier: dev_tools_integrations
     weight: 4
-  - name: Create a New Integration
+  - name: Create an Agent-based Integration
     url: developers/integrations/new_check_howto/
     parent: dev_tools_integrations
     weight: 401
@@ -5047,6 +5052,32 @@ api:
     url: /api/latest/metrics/
     identifier: metrics
     generated: true
+  - name: Timeseries cross product query
+    url: '#timeseries-cross-product-query'
+    identifier: metrics-timeseries-cross-product-query
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - QueryTimeseriesData
+      unstable:
+        - v2
+      order: 1
+  - name: Scalar cross product query
+    url: '#scalar-cross-product-query'
+    identifier: metrics-scalar-cross-product-query
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - QueryScalarData
+      unstable:
+        - v2
+      order: 2
   - name: List distinct metric volumes by metric name
     url: '#list-distinct-metric-volumes-by-metric-name'
     identifier: metrics-list-distinct-metric-volumes-by-metric-name
@@ -6464,9 +6495,9 @@ api:
         - CreateTest
       unstable: []
       order: 27
-  - name: Get the list of all tests
-    url: '#get-the-list-of-all-tests'
-    identifier: synthetics-get-the-list-of-all-tests
+  - name: Get the list of all Synthetic tests
+    url: '#get-the-list-of-all-synthetic-tests'
+    identifier: synthetics-get-the-list-of-all-synthetic-tests
     parent: synthetics
     generated: true
     params:

@@ -9,6 +9,7 @@
   ],
   "options": {
     "complianceRuleOptions": {
+      "resourceType": "gcp_compute_disk",
       "regoRule": {
         "policy": "package datadog\n",
         "resourceTypes": [

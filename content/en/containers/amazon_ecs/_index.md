@@ -116,14 +116,16 @@ Ideally, you want one running Datadog Agent container on each EC2 instance. The 
 6. Daemon services don't need Auto Scaling, so click **Next Step**, and then **Create Service**.
 
 ### Setup Additional Agent Features
+
 The initial Task Definition provided above is a fairly minimal one. This Task Definition deploys an Agent container with a base configuration to collect core metrics about the containers in your ECS cluster. This Agent can also run Agent Integrations based on [Docker Autodiscovery Labels][12] discovered on your corresponding containers.
 
 If you're using:
-- APM you can consult the [APM setup documentation][6] and the sample [datadog-agent-ecs-apm.json][23]
-- Log Management you can consult the [Log collection documentation][7] and the sample [datadog-agent-ecs-logs.json][24]
+- APM: Consult the [APM setup documentation][6] and the sample [datadog-agent-ecs-apm.json][23]
+- Log Management: Consult the [Log collection documentation][7] and the sample [datadog-agent-ecs-logs.json][24]
 
 #### DogStatsD
-If you're using [DogStatsD][8] you can add in a Host Port mapping for 8125/udp to your Dataog Agent's container definition like:
+
+If you're using [DogStatsD][8], add in a Host Port mapping for 8125/udp to your Dataog Agent's container definition:
 ```json
 "portMappings": [
   {
@@ -133,7 +135,8 @@ If you're using [DogStatsD][8] you can add in a Host Port mapping for 8125/udp t
   }
 ]
 ```
-as well as set the environment variable `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` to `true`.
+
+You can also set the environment variable `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` to `true`.
 
 For APM and DogStatsD double check the security group settings on your EC2 instances. Make sure these ports are not open to the public. Datadog recommends using the host's private IP to route data from the application containers to the Datadog Agent container.
 

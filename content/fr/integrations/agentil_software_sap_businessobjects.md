@@ -75,6 +75,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: SAP BusinessObjects
+  uninstallation: README.md#Uninstallation
 ---
 
 
@@ -98,12 +99,12 @@ Cette intégration recueille et analyse en temps réel les données provenant de
 - CMC et avertissements d'audit
 
 ## Assistance
-Si vous avez besoin d'aide ou avez des questions concernant certaines fonctionnalités, contactez AGENTIL Software à l'adresse support@agentil-software.com
+Pour obtenir de l'aide ou demander l'ajout d'une fonctionnalité, contactez AGENTIL Software à l'adresse support@agentil-software.com
 
-*Si vous êtes à la recherche d'un partenaire de confiance pour des intégrations spécifiques avec SAP ou d'autres plateformes, vous vous trouvez au bon endroit et il vous suffit de nous contacter.*
+*Si vous êtes à la recherche d'un partenaire de confiance pour des intégrations spécifiques avec SAP ou d'autres plateformes, vous êtes au bon endroit. Contactez-nous !*
 
 ---
-Ce produit a été conçu et développé à Genève, Suisse. 
+Ce produit a été conçu et développé à Genève, en Suisse. 
 
 
 ---
