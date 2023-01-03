@@ -9,9 +9,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/slo-monitoring-tracking/"
   tag: "Blog"
   text: "Track the status and error budget of your SLOs with Datadog"
-- link: "https://learn.datadoghq.com/course/view.php?id=34"
+- link: "https://learn.datadoghq.com/courses/intro-to-slo"
   tag: "Learning Center"
-  text: "Introduction to Service Level Objectives (SLOs)"
+  text: "Introduction to Service Level Objectives"
 - link: "https://www.datadoghq.com/blog/service-page/"
   tag: "Blog"
   text: "Service Telemetry, Error Tracking, SLOs and more"
@@ -50,8 +50,8 @@ You can use Datadog’s [Service Level Objectives status page][1] to create new 
 ### Configuration
 
 1. On the [SLO status page][1], select **New SLO +**.
-2. Define the source for your SLOs. SLO types are [Metric-based][3] and [Monitor-based][4].
-3. Set up to three SLO targets. Each target consists of a target percentage and a rolling time window. Available time windows are: 7 days, 30 days, and 90 days. It is recommended that you make the SLO target percentage stricter than the target percentages stipulated in your SLAs.
+2. Define the source for your SLO. You can create an SLO from [metrics][3] or [monitors][4].
+3. Set a target and a rolling time window (past 7, 30, or 90 days) for the SLO. Datadog recommends you make the target stricter than your stipulated SLAs. If you configure more than one time window, select one to be the primary time window. This time window is displayed on SLO lists. By default, the shortest time window is selected. 
 4. Finally, give the SLO a title, describe it in more detail or add links in the description, add tags, and save it.
 
 After you set up the SLO, select it from the [Service Level Objectives list view][1] to open the details side panel. The side panel displays the overall status percentage and remaining error budget for each of the SLO's targets, as well as status bars (monitor-based SLOs) or bar graphs (metric-based SLOs) of the SLI's history. If you created a grouped monitor-based SLO using one [multi alert monitor][5] or a grouped metric-based SLO using the [`sum by` clause][6], the status percentage and remaining error budget for each individual group is displayed in addition to the overall status percentage and remaining error budget.
@@ -165,25 +165,28 @@ You can also query the Event Explorer programmatically using the [Datadog Events
 
 {{< img src="monitors/service_level_objectives/slo-audit-events.png" alt="SLO audit events"  >}}
 
-To proactively manage the configurations of your SLOs, set an [Event Monitor][14] to notify you when events corresponding to certain tags occur.
-
 For example, if you wish to be notified when a specific SLO's configuration is modified, set an Event Monitor to track the text `[SLO Modified]` over the tags `audit,slo_id:<SLO ID>`.
 
 {{< img src="monitors/service_level_objectives/slo-event-monitor.png" alt="SLO event monitor"  >}}
 
 ## SLO widgets
 
+To proactively manage the configurations of your SLOs, set an [Event Monitor][14] to notify you when events corresponding to certain tags occur.
+
 After creating your SLO, you can use the SLO Summary dashboard widget to visualize the status of an SLO along with your dashboard metrics, logs and APM data. For more information about SLO Widgets, see the [SLO Widgets documentation][2] page.
 
 ## SLO status corrections
 
-Status corrections allow you to specify time periods such as planned maintenance that an SLO excludes from its status and error budget calculations.
+Status corrections allow you to exclude specific time periods from SLO status and error budget calculations. This way, you can:
+- Prevent expected downtime, such as scheduled maintenance, from depleting your error budget
+- Ignore non-business hours, where you're not expected to conform to your SLOs
+- Ensure that temporary issues caused by deployments do not negatively impact your SLOs
 
-When you create a correction window for an SLO, the time period you specify is removed from the SLO’s calculation.
-- For monitor-based SLOs, time in the correction window is not counted.
+When you apply a correction, the time period you specify is dropped from the SLO’s calculation.
+- For monitor-based SLOs, the correction time window is not counted.
 - For metric-based SLOs, all good and bad events in the correction window are not counted.
 
-You have the option to create one-time corrections for ad-hoc adjustments, or recurring corrections for predictable adjustments that occur on a regular cadence. One-time corrections require a start and end time, while recurring corrections require a start time, duration, and interval. Recurring corrections are based on [iCalendar RFC 5545's RRULE specification][15]. Specifying an end date for recurring corrections is optional in case you need the correction to repeat indefinitely.
+You have the option to create one-time corrections for ad-hoc adjustments, or recurring corrections for predictable adjustments that occur on a regular cadence. One-time corrections require a start and end time, while recurring corrections require a start time, duration, and interval. Recurring corrections are based on [iCalendar RFC 5545's RRULE specification][15]. The supported rules are `FREQ`, `INTERVAL`, `COUNT`, and `UNTIL`. Specifying an end date for recurring corrections is optional in case you need the correction to repeat indefinitely. 
 
 For either type of correction, you must select a correction category that states why the correction is being made. The available categories are `Scheduled Maintenance`, `Outside Business Hours`, `Deployment`, and `Other`. You can optionally include a description to provide additional context if necessary.
 
@@ -191,7 +194,7 @@ Each SLO has a maximum limit of corrections that can be configured to ensure que
 - If the end time of a one-time correction is before the past 90 days, it does count towards your limit.
 - If the end time of the final repetition of a recurring correction is before the past 90 days, it does not count towards your limit.
 
-The 90 day limits per SLO are as follows:
+The 90-day limits per SLO are as follows:
 
 | Correction Type   | Limit per SLO |
 | ----------------- | ------------- |

@@ -1,14 +1,29 @@
 ---
+app_id: nginx
+app_uuid: b98a5a97-1d65-4f74-9d1a-b2c1be85a470
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     NGINX Plus base overview: assets/dashboards/plus_overview.json
     NGINX-Metrics: assets/dashboards/NGINX-Metrics_dashboard.json
     NGINX-Overview: assets/dashboards/NGINX-Overview_dashboard.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check:
+      - nginx.net.connections
+      - nginx.connections.active
+      metadata_path: metadata.csv
+      prefix: nginx.
+    process_signatures:
+    - 'nginx: マスタープロセス'
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Nginx
   logs:
     source: nginx
-  metrics_metadata: metadata.csv
   monitors:
     '[NGINX] 4xx Errors higher than usual': assets/monitors/4xx.json
     '[NGINX] 5xx Errors higher than usual': assets/monitors/5xx.json
@@ -19,39 +34,47 @@ assets:
     bot_errors: assets/saved_views/bot_errors.json
     nginx_processes: assets/saved_views/nginx_processes.json
     status_code_overview: assets/saved_views/status_code_overview.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - web
 - log collection
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/nginx/README.md
-display_name: Nginx
+display_on_public_website: true
 draft: false
 git_integration_title: nginx
-guid: 88620208-3919-457c-ba51-d844d09ac97f
 integration_id: nginx
 integration_title: Nginx
-integration_version: 5.3.0
+integration_version: 5.4.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: nginx.
-metric_to_check:
-- nginx.net.connections
-- nginx.connections.active
+manifest_version: 2.0.0
 name: nginx
-process_signatures:
-- 'nginx: マスタープロセス'
-public_title: Datadog-Nginx インテグレーション
+oauth: {}
+public_title: Nginx
 short_description: 接続およびリクエストのメトリクスを監視。NGINX Plus でさらに多くのメトリクスを取得できます。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Web
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: 接続およびリクエストのメトリクスを監視。NGINX Plus でさらに多くのメトリクスを取得できます。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Nginx
 ---
 
 
@@ -340,6 +363,8 @@ LABEL "com.datadoghq.ad.logs"='[{"source":"nginx","service":"nginx"}]'
 
 アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]をポッドアノテーションとして設定します。または、[ファイル、コンフィギュレーションマップ、または Key-Value ストア][2]を使用してテンプレートを構成することもできます。
 
+**Annotations v1** (Datadog Agent < v7.36 向け)
+
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -358,6 +383,29 @@ metadata:
     name: nginx
 ```
 
+**Annotations v2** (Datadog Agent v7.36+ 向け)
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  annotations:
+    ad.datadoghq.com/nginx.checks: |
+      {
+        "nginx": {
+          "init_config": {},
+          "instances": [
+            {
+              "nginx_status_url":"http://%%host%%:81/nginx_status/"
+            }
+          ]
+        }
+      }
+  labels:
+    name: nginx
+```
+
 **注**: このインスタンスは NGINX オープンソースでのみ機能します。NGINX Plus を使用している場合は、対応するインスタンス構成をインライン化します。
 
 #### ログの収集
@@ -366,6 +414,8 @@ metadata:
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][3]を参照してください。
 
 次に、[ログインテグレーション][4]をポッドアノテーションとして設定します。または、[ファイル、コンフィギュレーションマップ、または Key-Value ストア][5]を使用してこれを構成することもできます。
+
+**Annotations v1/v2**
 
 ```yaml
 apiVersion: v1

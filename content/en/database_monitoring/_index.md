@@ -20,10 +20,6 @@ further_reading:
 
 {{< img src="database_monitoring/dbm-main.png" alt="Database Monitoring" style="width:100%;">}}
 
-{{< site-region region="us5,gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
-
 Datadog Database Monitoring provides deep visibility into databases across all of your hosts. Dig into historical query performance metrics, explain plans, and host-level metrics all in one place, to understand the health and performance of your databases and troubleshoot issues as they arise.
 
 ## Getting started

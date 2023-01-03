@@ -20,6 +20,10 @@ further_reading:
 - link: https://www.datadoghq.com/blog/network-device-monitoring/
   tag: Blog
   text: Présentation de la fonctionnalité Network Device Monitoring
+- link: https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/
+  tag: Blog
+  text: Surveiller et résoudre des problèmes de performance réseau avec des interruptions
+    SNMP
 kind: documentation
 title: Network Device Monitoring
 ---

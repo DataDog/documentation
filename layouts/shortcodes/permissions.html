@@ -9,11 +9,17 @@
     {{ partial "rbac-permissions-table.html" (dict "data" $permissions_data "group" $single_permission_group) }}
   {{ else }}
     {{- range $group_name, $group_permissions_data := $permissions_data -}}
-      {{- if and (ne $group_name "General") (ne $group_name "Logs") -}}
+      {{- $intro_text := print "Find below the list of permissions for the " (lower $group_name) " assets:" -}}
+
+      {{- if eq $group_name "Log Management" -}}
+        {{- $intro_text = "Find below the list of permissions for the log configuration assets and log data, along with the typical category of user you’d assign this permission to. See the recommendations on how to assign permissions to team members in the <a href='/logs/guide/logs-rbac'>Logs RBAC guide</a>." -}}
+      {{- end -}}
+
+      {{- if ne $group_name "General" -}}
         <h2 id="{{ anchorize $group_name }}">
           {{- $group_name -}}
         </h2>
-        <p>Find below the list of permissions for the {{ lower $group_name }} assets:</p>
+        <p>{{ $intro_text | safeHTML }}</p>
         {{ partial "rbac-permissions-table.html" (dict "data" $group_permissions_data "group" $group_name) }}
       {{- end -}}
     {{- end -}}

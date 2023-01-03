@@ -22,7 +22,7 @@ further_reading:
       text: 'Ease troubleshooting with cross product correlation.'
 ---
 
-You can set up your logging library and .NET tracing configurations so that trace and span IDs are injected into application logs, providing you with application performance monitoring data correlated with log data. 
+You can set up your logging library and .NET tracing configurations so that trace and span IDs are injected into application logs, providing you with application performance monitoring data correlated with log data.
 
 Configure the .NET Tracer with [Unified Service Tagging][1] for the best experience and helpful context when correlating application traces and logs.
 
@@ -30,11 +30,16 @@ The .NET Tracer supports the following logging libraries:
 - [Serilog][2] (v1.4+)
 - [log4net][3]
 - [NLog][4]
-- [Microsoft.Extensions.Logging][5] (added in v1.28.6) 
+- [Microsoft.Extensions.Logging][5] (added in v1.28.6)
 
 ## Getting started
 
 To inject correlation identifiers into your log messages, follow the instructions for your logging library.
+
+<div class="alert alert-info">
+  <div class="alert-info">See the <a href="https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/AutomaticTraceIdInjection">samples in dd-trace-dotnet</a> for more examples.</div>
+  </div>
+</div>
 
 {{< tabs >}}
 {{% tab "Serilog" %}}
@@ -159,7 +164,7 @@ To automatically inject correlation identifiers into your log messages:
 
 ```csharp
 Host.CreateDefaultBuilder(args)
-    .ConfigureLogging(logging => 
+    .ConfigureLogging(logging =>
     {
         logging.AddFile(opts =>
         {
@@ -194,7 +199,7 @@ The final step to enable automatic correlation identifier injection is to:
 
 After configuring the correlation identifier injection, see [C# Log Collection][7] to configure your log collection.
 
-**Note:** To correlate traces with logs, you might need to set up a [trace ID remapper][8] to parse `dd_trace_id` as the log's trace ID. See [correlated logs in the Trace ID panel][9] for more information.
+**Note:** To correlate traces with logs, you might need to set up a [trace ID remapper][8] to parse `dd_trace_id` as the log's trace ID. See [Correlated Logs Not Showing Up in the Trace ID Panel][9] for more information.
 
 ## Manual injection
 
@@ -208,8 +213,7 @@ If you prefer to manually correlate your traces with your logs, you can add corr
   | `dd.trace_id`  | Active trace ID during the log statement. Defaults to `0` if no trace.  |
   | `dd.span_id`   | Active span ID during the log statement. Defaults to `0` if no trace. |
 
-
-**Note:** If you are not using a [Datadog Log Integration][7] to parse your logs, custom log parsing rules must parse `dd.trace_id` and `dd.span_id` as strings. For information, see the [FAQ on this topic][10].
+**Note:** If you are not using a [Datadog Log Integration][7] to parse your logs, custom log parsing rules must parse `dd.trace_id` and `dd.span_id` as strings. For information, see [Correlated Logs Not Showing Up in the Trace ID Panel][10].
 
 **Note**: If you are using Serilog, Nlog or log4net through ILogger, see the Microsoft.Extensions.Logging section to configure these properties using `BeginScope()`.
 
@@ -339,8 +343,8 @@ Ensure that log collection is configured in the Datadog Agent and that the [Logs
 [6]: /tracing/trace_collection/library_config/dotnet-core/#configuring-the-net-tracer
 [7]: /logs/log_collection/csharp/
 [8]: /logs/log_configuration/processors/?tab=ui#trace-remapper
-[9]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=withlogintegration
-[10]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom
+[9]: /tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=withlogintegration
+[10]: /tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=custom
 [11]: https://www.nuget.org/packages/Datadog.Trace/
 [12]: https://nblumhardt.com/2016/11/ilogger-beginscope/
 [13]: https://github.com/NLog/NLog.Extensions.Logging/wiki/NLog-properties-with-Microsoft-Extension-Logging

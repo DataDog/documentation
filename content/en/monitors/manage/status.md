@@ -5,7 +5,7 @@ description: "Get an overview of your monitor status over time"
 aliases:
 - /monitors/monitor_status/
 further_reading:
-- link: "/monitors/create/"
+- link: "/monitors/"
   tag: "Documentation"
   text: "Create monitors"
 - link: "/monitors/notify/"
@@ -129,7 +129,7 @@ You can obtain a JSON export of any monitor from the monitor's status page. Clic
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/create/
+[1]: /monitors/
 [2]: /monitors/notify/downtimes/
 [3]: /api/v1/monitors/
 [4]: /dashboards/querying/

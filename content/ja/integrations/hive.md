@@ -1,43 +1,66 @@
 ---
+app_id: hive
+app_uuid: 827ff57e-83db-45b4-8a59-2f0270d389e8
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Hive Overview: assets/dashboards/overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: hive.server.memory.total.used
+      metadata_path: metadata.csv
+      prefix: hive.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Hive
   logs:
     source: hive
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - web
 - ログの収集
 - オートディスカバリー
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/hive/README.md
-display_name: Hive
+display_on_public_website: true
 draft: false
 git_integration_title: hive
-guid: 3faee302-f293-45de-9eb8-ba6b7fa052a3
 integration_id: hive
 integration_title: Hive
 integration_version: 1.8.1
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: hive.
-metric_to_check: hive.server.memory.total.used
+manifest_version: 2.0.0
 name: hive
-public_title: Datadog-Hive インテグレーション
+oauth: {}
+public_title: Hive
 short_description: HiveServer2 と Hive MetaStore から、さまざまな JMX メトリクスを収集
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Web
+  - Category::Log Collection
+  - Category::Autodiscovery
+  configuration: README.md#Setup
+  description: HiveServer2 と Hive MetaStore から、さまざまな JMX メトリクスを収集
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Hive
 ---
 
 

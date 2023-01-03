@@ -1,17 +1,19 @@
 ---
-title: Programmation de l'accès aux données de log à l'aide de l'API Logs Search
-kind: guide
 further_reading:
-  - link: /logs/explorer/
-    tag: Documentation
-    text: "En savoir plus sur la vue Log\_Explorer"
-  - link: /logs/explorer/
-    tag: Documentation
-    text: En savoir plus sur la syntaxe de recherche
-  - link: /logs/search_syntax/
-    tag: Documentation
-    text: En savoir plus sur la syntaxe de l'API Logs Search
+- link: /logs/explorer/
+  tag: Documentation
+  text: En savoir plus sur la vue Log Explorer
+- link: /logs/explorer/
+  tag: Documentation
+  text: En savoir plus sur la syntaxe de recherche
+- link: /logs/search_syntax/
+  tag: Documentation
+  text: En savoir plus sur la syntaxe de l'API Logs Search
+kind: guide
+title: Programmation de l'accès aux données de log à l'aide de l'API Logs Search
 ---
+
+
 ## Présentation
 
 Utilisez l'[API Logs Search][1] pour programmer l'accès à vos données de log et l'exécution de vos requêtes. 
@@ -26,13 +28,11 @@ Les scénarios suivants sont abordés dans ce guide :
 
 ## Prérequis
 
-- Vous devez disposer d'une clé d'API ainsi qu'une clé d'application provenant d'un administrateur. Ces informations sont disponibles sur la [page dédiée du compte Datadog][2]. Remplacez `<CLÉ_API_DATADOG>` et `<CLÉ_APP_DATADOG>` par votre clé d'API Datadog et votre clé d'application Datadog.
+- Pour utiliser l'API Logs Search, vous devez disposer d'une [clé d'API][2] et d'une [clé d'application][3]. L'utilisateur qui a créé la clé d'application doit disposer de l'autorisation appropriée pour accéder aux données. Pour utiliser les exemples ci-dessous, remplacez respectivement `<CLÉ_API_DATADOG>` et `<CLÉ_APPLICATION_DATADOG>` par votre clé d'API Datadog et votre clé d'application Datadog.
 
-- Ce guide inclut des exemples `curl`. Si vous ne l'avez pas déjà fait, installez [curl][3]. Vous pouvez également consulter [dans la documentation sur l'API][1] des exemples dans d'autres langages pour cet endpoint d'API.
+- Ce guide contient des exemples `curl`. Si vous ne l'avez pas déjà fait, installez [curl][4]. Sinon, consultez la [documentation sur l'API Logs][1] pour découvrir des exemples dans d'autres langages pour cet endpoint d'API.
 
-**Remarque :** par défaut, tous les utilisateurs disposant du rôle Admin, Standard ou Read-Only ont accès aux données de log. Toutefois, les résultats des recherches peuvent être limités en fonction des autorisations de l'utilisateur qui a fourni la `<CLÉ_APP_DATADOG>`.
-
-## Scénarios
+## Exemples
 
 ### Recherche de base
 
@@ -44,7 +44,7 @@ Le paramètre `from` indique l'`heure de début`, tandis que le paramètre `to` 
 
 ```bash
 
-curl -L -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/v2/logs/events/search" -H "Content-Type: application/json" -H "DD-API-KEY: <CLÉ_API_DATADOG>" -H "DD-APPLICATION-KEY: <CLÉ_APP_DATADOG>" --data-raw '{
+curl -L -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/v2/logs/events/search" -H "Content-Type: application/json" -H "DD-API-KEY: <CLÉ_API_DATADOG>" -H "DD-APPLICATION-KEY: <CLÉ_APPLICATION_DATADOG>" --data-raw '{
   "filter": {
     "from": "2020-10-07T00:00:00+00:00",
     "to": "2020-10-07T00:15:00+00:00",
@@ -148,7 +148,7 @@ L'appel d'API suivant trie les événements de log récupérés selon une facett
 
 ```bash
 
-curl -L -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/v2/logs/events/search" -H "Content-Type: application/json" -H "DD-API-KEY: <CLÉ_API_DATADOG>" -H "DD-APPLICATION-KEY: <CLÉ_APP_DATADOG>" --data-raw '{
+curl -L -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/v2/logs/events/search" -H "Content-Type: application/json" -H "DD-API-KEY: <CLÉ_API_DATADOG>" -H "DD-APPLICATION-KEY: <CLÉ_APPLICATION_DATADOG>" --data-raw '{
   "filter": {
     "from": "2020-10-07T00:00:00+00:00",
     "to": "2020-10-07T00:15:00+00:00",
@@ -251,7 +251,7 @@ L'appel d'API suivant trie les événements de log récupérés dans l'ordre cro
 
 ```bash
 
-curl -L -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/v2/logs/events/search" -H "Content-Type: application/json" -H "DD-API-KEY: <CLÉ_API_DATADOG>" -H "DD-APPLICATION-KEY: <CLÉ_APP_DATADOG>" --data-raw '{
+curl -L -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/v2/logs/events/search" -H "Content-Type: application/json" -H "DD-API-KEY: <CLÉ_API_DATADOG>" -H "DD-APPLICATION-KEY: <CLÉ_APPLICATION_DATADOG>" --data-raw '{
   "filter": {
     "from": "2020-10-07T00:00:00+00:00",
     "to": "2020-10-07T00:15:00+00:00",
@@ -352,7 +352,7 @@ L'appel d'API suivant limite le nombre d'événements de log récupérés. Le pa
 
 ```bash
 
-curl -L -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/v2/logs/events/search" -H "Content-Type: application/json" -H "DD-API-KEY: <CLÉ_API_DATADOG>" -H "DD-APPLICATION-KEY: <CLÉ_APP_DATADOG>" --data-raw '{
+curl -L -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/v2/logs/events/search" -H "Content-Type: application/json" -H "DD-API-KEY: <CLÉ_API_DATADOG>" -H "DD-APPLICATION-KEY: <CLÉ_APPLICATION_DATADOG>" --data-raw '{
   "filter": {
     "from": "2020-10-07T00:00:00+00:00",
     "to": "2020-10-07T00:15:00+00:00",
@@ -443,7 +443,7 @@ Les paramètres `from` and `to` peuvent être définis sur les valeurs suivantes
 }
 ```
 
-Le fuseau horaire peut être défini en précisant un décalage (p. ex., UTC +3) ou une zone régionale (p. ex., Europe/Paris). Si vous précisez à la fois un décalage et une zone, le décalage est prioritaire. Il doit être exprimé en secondes.
+Le fuseau horaire peut être défini en précisant un décalage (par exemple, UTC +3) ou une zone régionale (par exemple, Europe/Paris). Si vous précisez à la fois un décalage et une zone, le décalage est prioritaire. Il doit être exprimé en secondes.
 
 ```javascript
 {
@@ -467,7 +467,7 @@ Pour l'exemple JSON ci-dessus, utilisez la valeur `after` `eyJhZnRlciI6IkFRQUFBW
 
 ```bash
 
-curl -L -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/v2/logs/events/search" -H "Content-Type: application/json" -H "DD-API-KEY: <CLÉ_API_DATADOG>" -H "DD-APPLICATION-KEY: <CLÉ_APP_DATADOG>" --data-raw '{
+curl -L -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/v2/logs/events/search" -H "Content-Type: application/json" -H "DD-API-KEY: <CLÉ_API_DATADOG>" -H "DD-APPLICATION-KEY: <CLÉ_APPLICATION_DATADOG>" --data-raw '{
   "filter": {
     "from": "2020-10-07T00:00:00+00:00",
     "to": "2020-10-07T00:15:00+00:00",
@@ -550,8 +550,7 @@ La réponse renvoie les deux prochains résultats, à savoir l'utilisateur `joe`
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/api/v2/logs/
-[2]: /fr/api/v1/authentication/
-[3]: https://curl.haxx.se/download.html
-[4]: /fr/logs/search_syntax/
+[2]: /fr/account_management/api-app-keys/#api-keys
+[3]: /fr/account_management/api-app-keys/#application-keys
+[4]: https://curl.haxx.se/download.html
 [5]: /fr/account_management/rbac/permissions/?tab=ui#log-data-access
-[6]: /fr/logs/explorer/facets/#overview

@@ -200,16 +200,14 @@ The Datadog UI uses tags to set span level metadata. Custom tags may be set for 
 <?php
   namespace App\Http\Controllers;
 
-  use DDTrace\GlobalTracer;
-
   class ShoppingCartController extends Controller
   {
       public shoppingCartAction (Request $request) {
           // Get the currently active span
-          $span = GlobalTracer::get()->getActiveSpan();
+          $span = \DDTrace\active_span();
           if (null !== $span) {
               // customer_id -> 254889
-              $span->setTag('customer_id', $request->get('customer_id'));
+              $span->meta['customer_id'] = $request->get('customer_id');
           }
 
           // [...]
@@ -286,7 +284,7 @@ Finally, you can also see all the traces relevant to your query by clicking the 
 [3]: /tracing/glossary/#span-tags
 [4]: /tracing/glossary/#resources
 [5]: /tracing/glossary/#services
-[6]: https://app.datadoghq.com/apm/search
+[6]: https://app.datadoghq.com/apm/traces
 [7]: /tracing/trace_explorer/#live-search-for-15-minutes
 [8]: https://app.datadoghq.com/apm/analytics
 [9]: /tracing/trace_explorer/query_syntax/

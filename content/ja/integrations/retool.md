@@ -1,39 +1,59 @@
 ---
+app_id: retool
+app_uuid: 13239057-ebc6-4cb6-a789-35f064bbcd0f
 assets:
   dashboards:
     'Retool + Datadog: ElasticSearch Action Console': assets/dashboards/retool_retool_overview.json
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: retool
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Retool
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: support@retool.com
+  support_email: support@retool.com
 categories:
-- 開発ツール
-creates_events: false
-ddtype: check
+- developer tools
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/retool/README.md
-display_name: Retool
+display_on_public_website: true
 draft: false
 git_integration_title: retool
-guid: c058f7b5-c3b3-46c4-910f-a5eba256a152
 integration_id: retool
 integration_title: Retool
 integration_version: ''
 is_public: true
 kind: インテグレーション
-maintainer: support@retool.com
-manifest_version: 1.0.0
-metric_prefix: retool
-metric_to_check: ''
+manifest_version: 2.0.0
 name: retool
+oauth: {}
 public_title: Retool
 short_description: Retool は内部ツールを素早く構築する方法です
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Developer Tools
+  configuration: README.md#Setup
+  description: Retool は内部ツールを素早く構築する方法です
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Retool
 ---
 
 

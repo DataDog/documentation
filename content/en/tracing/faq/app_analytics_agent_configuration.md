@@ -70,7 +70,7 @@ For example, if you have a Python service named `python-api`, and it's running F
 [2]: /tracing/app_analytics/#automatic-configuration
 [3]: /tracing/app_analytics/#custom-instrumentation
 [4]: /tracing/send_traces/
-[5]: https://app.datadoghq.com/apm/docs/trace-search
+[5]: https://app.datadoghq.com/apm/settings
 [6]: /tracing/glossary/#services
 [7]: /tracing/glossary/#resources
 [8]: /tracing/app_analytics/search/#analysed-span

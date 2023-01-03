@@ -1,13 +1,14 @@
 ---
-title: カスタム Agent チェックを使用したイベント
-kind: documentation
-further_reading:
-  - link: /developers/custom_checks/write_agent_check/
-    tag: ドキュメント
-    text: カスタム Agent チェックの書き方
 aliases:
-  - /ja/events/agent/
+- /ja/events/agent/
+further_reading:
+- link: /developers/custom_checks/write_agent_check/
+  tag: ドキュメント
+  text: カスタム Agent チェックの書き方
+kind: documentation
+title: カスタム Agent チェックを使用したイベント
 ---
+
 ## 送信
 
 カスタム Agent チェックからイベントを送信するには、以下の `event(<イベント_辞書>)` 関数を使用します。
@@ -102,10 +103,6 @@ self.event(
         (...)
     ```
 
-7. 最後に、[Datadog のイベントストリーム][5]に移動して、イベントを確認します。
-
-{{< img src="developers/events/agent_check/event_stream_example.png" alt="イベントストリームの例" style="width:80%;">}}
-
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -115,4 +112,3 @@ self.event(
 [2]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: /ja/agent/guide/agent-commands/#restart-the-agent
 [4]: /ja/agent/guide/agent-commands/#agent-information
-[5]: https://app.datadoghq.com/event/stream

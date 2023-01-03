@@ -1,39 +1,57 @@
 ---
-"assets":
-  "dashboards":
-    "Postman API Dashboard": assets/dashboards/overview.json
-  "logs": {}
-  "metrics_metadata": metadata.csv
-  "monitors": {}
-  "saved_views": {}
-  "service_checks": assets/service_checks.json
-"categories":
-- ""
-"creates_events": true
-"ddtype": "check"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/postman/README.md"
-"display_name": "Postman"
-"draft": false
-"git_integration_title": "postman"
-"guid": "c678faae-1fc2-420b-83af-e973441b99de"
-"integration_id": "postman"
-"integration_title": "Postman"
-"integration_version": ""
-"is_public": true
-"kind": "integration"
-"maintainer": "integrations-partnerships@postman.com"
-"manifest_version": "1.0.0"
-"metric_prefix": "postman"
-"metric_to_check": "postman.monitor.run.total_latency"
-"name": "postman"
-"public_title": "Postman"
-"short_description": "Postman Monitoring を実行し、Datadog でメトリクスを分析しイベントを生成します。　"
-"support": "contrib"
-"supported_os":
+app_id: postman
+app_uuid: 9ba70e31-8e84-4d6b-84a1-95d6ba713df9
+assets:
+  dashboards:
+    Postman API Dashboard: assets/dashboards/overview.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: true
+    metrics:
+      check: postman.monitor.run.total_latency
+      metadata_path: metadata.csv
+      prefix: postman
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Postman
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: integrations-partnerships@postman.com
+  support_email: integrations-partnerships@postman.com
+categories: []
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/postman/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: postman
+integration_id: postman
+integration_title: Postman
+integration_version: ''
+is_public: true
+kind: integration
+manifest_version: 2.0.0
+name: postman
+oauth: {}
+public_title: Postman
+short_description: Postman Monitoring を実行し、Datadog でメトリクスを分析しイベントを生成します。　
+supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  configuration: README.md#Setup
+  description: Postman Monitoring を実行し、Datadog でメトリクスを分析しイベントを生成します。　
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Postman
 ---
 
 
@@ -47,9 +65,10 @@
 - Datadog で実行された Postman Monitoring のメトリクスを分析
 
 - 成功および失敗した Monitoring のイベントを生成
+
 ## セットアップ
 
-詳細な手順は [Postman のドキュメントページ][2]を参照してください。Postman インテグレーションを利用するには、Postman の [Team, Business, Enterprise プラン][3]のご契約が必要です。
+詳細な手順は [Postman のドキュメント][2]を参照してください。Postman インテグレーションを利用するには、Postman の [Team, Business, Enterprise プラン][3]のご契約が必要です。
 
 ### コンフィギュレーション
 
@@ -66,10 +85,6 @@
 
 ![インテグレーションを構成][6]
 
-### 検証
-
-
-
 ## 収集データ
 
 ### メトリクス
@@ -82,7 +97,12 @@ Postman には、サービスのチェック機能は含まれません。
 
 ### イベント
 
-Postman でモニターが実行されるたびにイベントが生成されます。イベントの重要度は、Postman Monitor で全てのテストが合格した場合は "Low" となり、一部失敗した場合やイベントの実行時にエラーが発生した場合は "Normal" となります。
+Postman で監視が実行されるたびにイベントが生成されます。イベントの重大度は、Postman モニターのテストに基づきます。
+
+| 重大度 | 説明                                                           |
+|----------|-----------------------------------------------------------------------|
+| `Low`    | すべてのテストが合格の場合                                                 |
+| `Normal` | 一部のテストが合格しなかった、またはイベントの実行でエラーが発生した場合 |
 
 ## トラブルシューティング
 
@@ -96,4 +116,3 @@ Postman でモニターが実行されるたびにイベントが生成されま
 [6]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/postman/images/add-integration-datadog.jpeg
 [7]: https://github.com/DataDog/integrations-extras/blob/master/postman/metadata.csv
 [8]: https://www.postman.com/support/
-

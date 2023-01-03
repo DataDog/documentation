@@ -1,8 +1,7 @@
 ---
 categories:
-  - cloud
-  - azure
-ddtype: crawler
+- cloud
+- azure
 dependencies: []
 description: Azure Virtual Network のキーメトリクスを追跡。
 doc_link: https://docs.datadoghq.com/integrations/azure_virtual_networks/
@@ -20,6 +19,7 @@ public_title: Datadog-Microsoft Azure Virtual Network インテグレーショ�
 short_description: Azure Virtual Network のキーメトリクスを追跡。
 version: '1.0'
 ---
+
 ## 概要
 
 Azure Virtual Network は、Azure の非公開ネットワーク用の基本的な構成要素です。Virtual Network により、Azure Virtual Machine など、数々のタイプの Azure リソースが互いに、または internet やオンプレミスのネットワークと安全に通信できるようになります。Datadog を使用して有効なアドレス空間を監視し、肝心な時にアドレス空間が不足することを防げます。

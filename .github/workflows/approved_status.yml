@@ -10,6 +10,9 @@ on:
       - submitted
       - dismissed
 
+permissions:
+  contents: read # to fetch code (actions/checkout)
+
 jobs:
   send_status:
     runs-on: ubuntu-latest
@@ -27,7 +30,7 @@ jobs:
           private_key: ${{ secrets.PIPELINE_GITHUB_APP_PRIVATE_KEY }}
           repository: DataDog/datadog-api-spec
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Post PR review status check
         uses: DataDog/github-actions/post-review-status@v1.0.0
         with:

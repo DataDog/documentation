@@ -1,8 +1,7 @@
 ---
 categories:
-  - cloud
-  - azure
-ddtype: crawler
+- cloud
+- azure
 dependencies: []
 description: Azure Diagnostic Extension のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_diagnostic_extension/
@@ -20,6 +19,7 @@ public_title: Datadog-Azure Diagnostic Extension インテグレーション
 short_description: Azure Diagnostic Extension のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Azure Diagnostic Extension は、Microsoft Azure 上で実行されている VM の健全性の監視を支援します。

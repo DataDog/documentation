@@ -1,22 +1,34 @@
 ---
-title: Continuous Integration Visibility
-kind: documentation
 aliases:
-  - /fr/ci
+- /fr/ci
 further_reading:
-  - link: /continuous_integration/explore_pipelines/
-    tag: Documentation
-    text: Explorer les données de pipeline pour résoudre les problèmes liés aux builds
-  - link: /continuous_integration/explore_tests/
-    tag: Documentation
-    text: Explorer les données de tests pour identifier et corriger les tests problématiques
-  - link: https://www.datadoghq.com/blog/circleci-monitoring-datadog/
-    tag: Blog
-    text: Surveiller votre environnement CircleCI avec Datadog
+- link: https://app.datadoghq.com/release-notes?category=CI%20Visibility
+  tag: Notes de version
+  text: Découvrez les dernières versions de la solution CI Visibility (connexion à
+    l'application requise).
+- link: /continuous_integration/pipelines
+  tag: Documentation
+  text: Explorer les données de pipeline pour résoudre les problèmes liés aux builds
+- link: /continuous_integration/tests/
+  tag: Documentation
+  text: Explorer les données de tests pour identifier et corriger les tests problématiques
+- link: https://www.datadoghq.com/blog/circleci-monitoring-datadog/
+  tag: Blog
+  text: Surveiller votre environnement CircleCI avec Datadog
+- link: https://www.datadoghq.com/blog/configure-pipeline-alerts-with-ci-monitors/
+  tag: GitHub
+  text: Configurer des alertes de pipeline avec les monitors CI Datadog
+kind: documentation
+title: Continuous Integration Visibility
 ---
+
+{{< vimeo 664357090 >}}
+
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">À l'heure actuelle, la solution CI Visibility n'est pas disponible pour le site que vous avez sélectionné ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-warning">La solution CI Visibility n'est pas encore disponible pour le site que vous avez sélectionné ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
+
+<div class="alert alert-info">Cette page explique comment intégrer vos métriques et données d'intégration continue (CI) dans des dashboards Datadog. Si vous souhaitez exécuter des tests continus dans vos pipelines CI, consultez plutôt la section <a href="/continuous_testing/cicd_integrations/" target="_blank">Tests continus et CI/CD</a>.</div>
 
 La solution Continuous Integration (CI) Visibility de Datadog regroupe au sein d'une seule interface des informations sur les résultats des pipelines et des tests CI, _ainsi que_ des données relatives aux performances, aux tendances et à la fiabilité de l'intégration continue. Elle offre aux développeurs les moyens d'analyser les raisons derrière l'échec d'un test ou d'un pipeline, de surveiller les tendances relatives à la durée d'exécution des collections de tests, ou encore d'observer l'incidence d'un certain commit sur un pipeline. Ce n'est pas tout : grâce à CI Visibility, les ingénieurs build disposent d'une vue d'ensemble de l'intégration continue à l'échelle de l'organisation et peuvent surveiller l'évolution des performances des pipelines.
 
@@ -65,7 +77,7 @@ Consultez les sections relatives à la [configuration des pipelines][3] et à la
 
 [1]: https://app.datadoghq.com/dashboard/lists
 [2]: https://app.datadoghq.com/notebook/list
-[3]: /fr/continuous_integration/setup_pipelines/
-[4]: /fr/continuous_integration/setup_tests/
-[5]: /fr/continuous_integration/explore_pipelines/
-[6]: /fr/continuous_integration/explore_tests/
+[3]: /fr/continuous_integration/pipelines/
+[4]: /fr/continuous_integration/tests/
+[5]: /fr/continuous_integration/pipelines/
+[6]: /fr/continuous_integration/tests/

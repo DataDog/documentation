@@ -1,43 +1,64 @@
 ---
+app_id: open-policy-agent
+app_uuid: 98c54837-27eb-48ca-9780-29bb593eecb8
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     OPA base dashboard: assets/dashboards/open_policy_agent_overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: open_policy_agent.policies
+      metadata_path: metadata.csv
+      prefix: open_policy_agent.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: open_policy_agent
   logs:
     source: opa
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: ara.pulido@datadoghq.com
+  support_email: ara.pulido@datadoghq.com
 categories:
 - security
 - containers
 - 構成 & デプロイ
 - ログの収集
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/open_policy_agent/README.md
-display_name: open_policy_agent
+display_on_public_website: true
 draft: false
 git_integration_title: open_policy_agent
-guid: 73fdfc40-51ea-11eb-ae93-0242ac130002
 integration_id: open-policy-agent
 integration_title: Open Policy Agent
 integration_version: 0.0.1
 is_public: true
 kind: integration
-maintainer: ara.pulido@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: open_policy_agent.
-metric_to_check: open_policy_agent.policies
+manifest_version: 2.0.0
 name: open_policy_agent
+oauth: {}
 public_title: Open Policy Agent
 short_description: OPA インテグレーション
-support: contrib
 supported_os:
 - linux
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Category::Security
+  - Category::Containers
+  - Category::Configuration & Deployment
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: OPA インテグレーション
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Open Policy Agent
 ---
 
 
@@ -180,6 +201,6 @@ open_policy_agent には、イベントは含まれません。
 [9]: https://github.com/DataDog/integrations-extras/blob/master/open_policy_agent/datadog_checks/open_policy_agent/data/conf.yaml.example
 [10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [11]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[12]: https://github.com/DataDog/integrations-core/blob/master/open_policy_agent/metadata.csv
+[12]: https://github.com/DataDog/integrations-extras/blob/master/open_policy_agent/metadata.csv
 [13]: https://github.com/DataDog/integrations-extras/blob/master/open_policy_agent/assets/service_checks.json
 [14]: https://docs.datadoghq.com/ja/help/

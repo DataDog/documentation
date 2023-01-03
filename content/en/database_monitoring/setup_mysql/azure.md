@@ -9,7 +9,7 @@ further_reading:
 
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
@@ -196,7 +196,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
       "name": "<YOUR_INSTANCE_NAME>"
     }
   }]' \
-  datadog/agent:${DD_AGENT_VERSION}
+  gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
 ```
 
 ### Dockerfile
@@ -326,6 +326,9 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 ### Validate
 
 [Run the Agent's status subcommand][6] and look for `mysql` under the **Checks** section. Or visit the [Databases][7] page to get started.
+
+## Example Agent Configurations
+{{% dbm-mysql-agent-config-examples %}}
 
 ## Install the Azure MySQL Integration
 

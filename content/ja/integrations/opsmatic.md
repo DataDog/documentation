@@ -1,8 +1,7 @@
 ---
 categories:
-  - monitoring
-  - notification
-ddtype: crawler
+- monitoring
+- notification
 dependencies: []
 description: Datadog イベントストリームから Opsmatic アラートを参照および認識。
 doc_link: https://docs.datadoghq.com/integrations/opsmatic/
@@ -11,6 +10,7 @@ git_integration_title: opsmatic
 has_logo: true
 integration_id: opsmatic
 integration_title: Opsmatic
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -19,6 +19,7 @@ public_title: Datadog-Opsmatic インテグレーション
 short_description: Datadog イベントストリームから Opsmatic アラートを参照および認識。
 version: '1.0'
 ---
+
 ## 概要
 
 Opsmatic を Datadog に接続して、以下のことができます。

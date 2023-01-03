@@ -1,8 +1,7 @@
 ---
 categories:
-  - cloud
-  - azure
-ddtype: crawler
+- cloud
+- azure
 dependencies: []
 description: Azure Service Bus のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_service_bus/
@@ -20,6 +19,7 @@ public_title: Datadog-Microsoft Azure Service Bus インテグレーション
 short_description: Azure Service Bus のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Microsoft Azure Service Bus は、フルマネージド型のエンタープライズ統合メッセージブローカーです。

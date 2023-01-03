@@ -2,6 +2,12 @@
 title: Basic Agent Usage for AIX
 kind: documentation
 further_reading:
+- link: "/agent/basic_agent_usage/#agent-architecture"
+  tag: "Documentation"
+  text: "Find out more about the Agent's architecture"
+- link: "/agent/guide/network#configure-ports"
+  tag: "Documentation"
+  text: "Configure inbound ports"
 - link: "https://www.datadoghq.com/blog/announcing-ibm-aix-agent/"
   tag: "Blog"
   text: "Monitor AIX with the Datadog Unix Agent"
@@ -91,7 +97,9 @@ Additionally, the following integrations can be enabled to collect further metri
 
 Enable the above integrations by copying and editing the sample configuration files provided. These are found in `/etc/datadog-agent/conf.d`. The name of the YAML configuration file should match that of the integration: `/etc/datadog-agent/conf.d/<INTEGRATION_NAME>.d/conf.yaml` enables the integration `<INTEGRATION_NAME>`, and set its configuration. Example configuration files can be found at `/etc/datadog-agent/conf.d/<INTEGRATION_NAME>.d/conf.yaml.example`
 
-Note: Some of the available metrics differ between the integrations for the Unix Agent and the integrations for Linux, Windows and MacOS. Although it is possible to monitor processes and network metrics with the Unix Agent, the Live Process Monitoring and Network Performance Monitoring capabilities aren't available.
+**Note**: Some of the available metrics differ between the integrations for the Unix Agent and the integrations for Linux, Windows and MacOS. Although it is possible to monitor processes and network metrics with the Unix Agent, the Live Process Monitoring and Network Performance Monitoring capabilities aren't available. Log Management is also not available with the Unix Agent.
+  
+<div class="alert alert-info">The Unix Agent has no trace-agent component, so APM tracing and profiling is not supported.</div>
 
 ## Running DogStatsD
 

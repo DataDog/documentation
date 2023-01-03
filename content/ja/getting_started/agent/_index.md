@@ -25,7 +25,7 @@ title: Agent の概要
 
 Datadog Agent は、ホスト上で実行されるソフトウェアです。ホストからイベントやメトリクスを収集し、Datadog に送信し、モニタリングやパフォーマンスデータを分析することができます。ローカルホスト (Windows、MacOS)、コンテナ環境 (Docker、Kubernetes)、オンプレミスデータセンターで実行することが可能です。構成管理ツール (Chef、Puppet、Ansible) を使って、インストールと構成が可能です。
 
-Agent は、15～20 秒ごとに 75～100 のシステムレベルメトリクスを収集することができます。また、追加のセットアップと構成により、Agent はライブプロセスデータ、ログ、トレースを Datadog プラットフォームに送信することができます。Datadog Agent はオープンソースで、ソースコードは GitHub の [DataDog/datadog-agent][1] で公開されています。
+Agent は、15～20 秒ごとに 75～100 のシステムレベルメトリクスを収集することができます。また、追加の構成により、Agent は実行中のプロセスからライブプロセスデータ、ログ、トレースを Datadog プラットフォームに送信することができます。Datadog Agent はオープンソースで、ソースコードは GitHub の [DataDog/datadog-agent][1] で公開されています。
 
 ### Agent のオーバーヘッド
 
@@ -99,19 +99,21 @@ Agent は 15 秒ごとにホストデータを収集し、環境全体で何が�
 
 ### インストール
 
-Datadog UI で、**Integrations > Agent** に移動して、Ubuntu の [Agent Installation Page][18] に移動します。
+Datadog UI で、**Integrations &gt; Agent** に移動し、Ubuntu を選択して、Ubuntu 用の Agent インストールページに移動します。Datadog Agent をホストにインストールするには、そのページにある 1 行のインストールコマンド (以下に示す例) を使用し、[Datadog API キー][16]で更新します。
 
-[Datadog API キー][2]を付加した [1 行のインストールコマンド][19]を使用して、Datadog Host Agent をインストールします。
+Ubuntu の 1 行インストールコマンドの例:
 
 ```shell
-DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
+DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
 ```
+
+最新のインストール方法については、お使いの OS のアプリ内 [Agent インストールページ][18]をご覧ください。
 
 ### 検証
 
 #### ターミナルコマンド
 
-インストールを検証するには、Agent の[ステータスコマンド][20]を実行します。
+インストールを検証するには、Agent の[ステータスコマンド][19]を実行します。
 
 ```shell
 sudo datadog-agent status
@@ -152,7 +154,7 @@ Agent は、以下のサービスチェックを行うように設定されて�
   - `datadog.agent.check_status`:
     Agent チェックが Datadog にメトリクスを送信できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
-これらのチェックは、Datadog プラットフォームで使用することで、モニターやダッシュボードを通じて Agent のステータスを一目で視覚化することができます。詳しくは、[サービスチェックの概要][21]を参照してください。
+これらのチェックは、Datadog プラットフォームで使用することで、モニターやダッシュボードを通じて Agent のステータスを一目で視覚化することができます。詳しくは、[サービスチェックの概要][20]を参照してください。
 
 #### メトリクス
 
@@ -168,7 +170,7 @@ Agent の主なコンフィギュレーションファイルは `datadog.yaml` �
 - [Datadog API キー][16]。Agent のデータを組織と関連付けるために使用されます。
 - Datadog サイト ({{< region-param key="dd_site" code="true" >}})
 
-使用可能なすべての構成オプションの詳細については、[サンプル `config_template.yaml` ファイル][22]を参照してください。
+使用可能なすべての構成オプションの詳細については、[サンプル `config_template.yaml` ファイル][21]を参照してください。
 
 Agent のコンフィギュレーションファイルを調整することで、タグを含む他の Datadog の機能を利用することができます。
 
@@ -176,9 +178,9 @@ Agent のコンフィギュレーションファイルを調整することで�
 
 タグは、メトリクスとイベントにメタデータの追加レイヤーを追加します。これにより、Datadog の視覚化において、データのスコープと比較ができるようになります。複数のホストから Datadog にデータが送信された場合、この情報をタグ付けすることで、最も視覚化したいデータにスコープを絞ることができます。
 
-例えば、異なるチームから収集したデータを持っていて、チーム・アルファのメトリクスだけを見たい場合、特定のホストに `team:alpha` または `team:bravo` タグを付けると、`team:alpha` タグが付いているメトリクスにフィルターがかかるようになります。タグ付けの詳細については、[タグの使用を開始する][23]を参照してください。
+例えば、異なるチームから収集したデータを持っていて、チーム・アルファのメトリクスだけを見たい場合、特定のホストに `team:alpha` または `team:bravo` タグを付けると、`team:alpha` タグが付いているメトリクスにフィルターがかかるようになります。タグ付けの詳細については、[タグの使用を開始する][22]を参照してください。
 
-1. Agent の[メインコンフィギュレーションファイル][24]を探します。Ubuntu の場合、ファイルの場所は `/etc/datadog-agent/datadog.yaml` です。
+1. Agent の[メインコンフィギュレーションファイル][23]を探します。Ubuntu の場合、ファイルの場所は `/etc/datadog-agent/datadog.yaml` です。
 
 2. `datadog.yaml` ファイルで、`tags` パラメーターを探します。ホストレベルのタグを `datadog.yaml` 構成で設定すると、このホストから転送される全てのメトリクス、トレース、ログにタグを適用することができます。
 
@@ -215,7 +217,7 @@ Agent のコンフィギュレーションファイルを調整することで�
       - test:agent_walkthrough
    ```
 
-4. Agent の [restart コマンド][25]を実行して、Agent を再起動します。Ubuntu の restart コマンド:
+4. Agent の [restart コマンド][24]を実行して、Agent を再起動します。Ubuntu の restart コマンド:
 
    ```shell
    sudo service datadog-agent restart
@@ -227,7 +229,7 @@ Agent のコンフィギュレーションファイルを調整することで�
 
 #### その他の構成オプション
 
-[ログ][26]、[トレース][19]、[プロセス][27]のデータ収集は、Agent コンフィギュレーションファイルから有効にすることができます。これらは、デフォルトで有効になっている機能ではありません。例えば、コンフィギュレーションファイルで、`logs_enabled` パラメーターが false に設定されていることに注目してください。
+[ログ][25]、[トレース][26]、[プロセス][27]のデータ収集は、Agent コンフィギュレーションファイルから有効にすることができます。これらは、デフォルトで有効になっている機能ではありません。例えば、コンフィギュレーションファイルで、`logs_enabled` パラメーターが false に設定されていることに注目してください。
 
 ```yaml
 ##################################
@@ -250,7 +252,7 @@ Agent コンフィギュレーションファイルを通じて構成可能な�
 
 ## コマンド
 
-Agent を[起動][32]、[停止][33] または [再起動][25]する方法については、[Agent のコマンド][31]を参照してください。
+Agent を[起動][32]、[停止][33] または [再起動][24]する方法については、[Agent のコマンド][31]を参照してください。
 
 ## トラブルシューティング
 
@@ -292,17 +294,17 @@ Agent のトラブルシューティングに関するヘルプ
 [15]: https://www.datadoghq.com
 [16]: https://app.datadoghq.com/organization-settings/api-keys
 [17]: /ja/agent/basic_agent_usage/?tab=agentv6v7
-[18]: https://app.datadoghq.com/account/settings#agent/ubuntu
-[19]: /ja/tracing/
-[20]: /ja/agent/guide/agent-commands/#agent-status-and-information
-[21]: /ja/developers/service_checks/#visualize-your-service-check-in-datadog
-[22]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
-[23]: /ja/getting_started/tagging/
-[24]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[25]: /ja/agent/guide/agent-commands/#restart-the-agent
-[26]: /ja/logs/
+[18]: https://app.datadoghq.com/account/settings#agent/
+[19]: /ja/agent/guide/agent-commands/#agent-status-and-information
+[20]: /ja/developers/service_checks/#visualize-your-service-check-in-datadog
+[21]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
+[22]: /ja/getting_started/tagging/
+[23]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
+[24]: /ja/agent/guide/agent-commands/#restart-the-agent
+[25]: /ja/logs/
+[26]: /ja/tracing/
 [27]: /ja/infrastructure/process/?tab=linuxwindows#introduction
-[28]: /ja/tracing/setup_overview/open_standards/otlp_ingest_in_the_agent/?tab=host
+[28]: /ja/tracing/trace_collection/open_standards/otlp_ingest_in_the_agent/?tab=host
 [29]: /ja/agent/logs/advanced_log_collection/
 [30]: /ja/developers/dogstatsd/?tab=hostagent
 [31]: /ja/agent/guide/agent-commands/

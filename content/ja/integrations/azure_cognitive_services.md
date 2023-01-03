@@ -1,10 +1,9 @@
 ---
 aliases:
-  - /ja/integrations/azure_cognitiveservices
+- /ja/integrations/azure_cognitiveservices
 categories:
-  - cloud
-  - azure
-ddtype: crawler
+- cloud
+- azure
 dependencies: []
 description: Azure Cognitive Services のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_cognitive_services/
@@ -22,6 +21,7 @@ public_title: Datadog-Microsoft Azure Cognitive Services インテグレーシ�
 short_description: Azure Cognitive Services のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Azure Cognitive Services は、開発者に AI やデータサイエンスに関する直接的なスキルや知識がなくても、インテリジェントなアプリケーションを構築するために使用できる API、SDK、およびサービスです。

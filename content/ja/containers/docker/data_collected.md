@@ -5,19 +5,21 @@ kind: documentation
 title: Docker の収集データ
 ---
 
-## メトリクス
+## Docker インテグレーション
+
+### メトリクス
 
 Docker コンテナにデプロイされた Agent が収集するメトリクス:
 
 {{< get-metrics-from-git "docker_daemon" >}}
 
-## イベント
+### イベント
 
 Docker Agent は以下のイベントを生成します。
 
 - Delete Image
 - Die
-- エラー
+- Error
 - Fail
 - Kill
 - Out of memory (oom)
@@ -26,6 +28,27 @@ Docker Agent は以下のイベントを生成します。
 - Restart Daemon
 - Update
 
-## サービスチェック
+### サービスチェック
 
 {{< get-service-checks-from-git "docker" >}}
+
+## コンテナインテグレーション
+
+### メトリクス
+{{< get-metrics-from-git "コンテナ" >}}
+
+## Containerd インテグレーション
+
+### メトリクス
+
+{{< get-metrics-from-git "containerd" >}}
+
+### イベント
+
+containerd チェックは、イベントを収集できます。`filters` を使用して関連イベントを選択します。詳細については、サンプル [`containerd.d/conf.yaml`][1] を参照してください。
+
+### サービスチェック
+
+{{< get-service-checks-from-git "containerd" >}}
+
+[1]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/containerd.d/conf.yaml.default

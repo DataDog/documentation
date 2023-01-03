@@ -1,27 +1,28 @@
 ---
-title: Explorateur de résultats CI
-kind: documentation
-description: Examiner des tâches CI exécutant des tests Synthetic.
 aliases:
-  - /fr/synthetics/cicd_testing/ci_results_explorer
+- /fr/synthetics/cicd_testing/ci_results_explorer
+description: Examiner des tâches CI exécutant des tests Synthetic.
 further_reading:
-  - link: https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/
-    tag: Blog
-    text: Intégrer des tests Datadog Synthetic dans votre pipeline de CI/CD.
-  - link: https://learn.datadoghq.com/enrol/index.php?id=37
-    tag: Centre d'apprentissage
-    text: Découvrir comment exécuter des tests Synthetic dans des pipelines de CI/CD
-  - link: /synthetics/search/
-    tag: Documentation
-    text: Découvrir comment effectuer des recherches dans vos objets Synthetic
+- link: https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/
+  tag: Blog
+  text: Intégrer des tests Datadog Synthetic dans votre pipeline de CI/CD.
+- link: https://learn.datadoghq.com/courses/synthetic-tests-ci-cd-pipeline
+  tag: Centre d'apprentissage
+  text: Découvrir comment exécuter des tests Synthetic dans un pipeline de CI/CD
+- link: /synthetics/search/
+  tag: Documentation
+  text: Découvrir comment effectuer des recherches dans vos objets Synthetic
+kind: documentation
+title: Explorateur de résultats CI
 ---
+
 ## Présentation
 
 L'explorateur de résultats CI vous permet de visualiser les tâches CI qui exécutent vos tests Synthetic. 
 
-{{< img src="synthetics/ci_results_explorer/ci_results_explorer.png" alt="Explorateur de résultats CI" style="width:100%;">}}
+{{< img src="synthetics/ci_results_explorer/ci_results_explorer_1.png" alt="Explorateur de résultats CI" style="width:100%;">}}
 
-Vous pouvez :
+Vous pouvez réaliser les actions suivantes :
 
 * Analyser chaque exécution de tâche CI pour identifier et dépanner les résultats d'échec de test.
 * Comparer les résultats des tests sur divers appareils et navigateurs pour identifier des problèmes liés aux navigateurs et appareils.

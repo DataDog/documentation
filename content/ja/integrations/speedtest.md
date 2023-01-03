@@ -1,41 +1,62 @@
 ---
+app_id: speedtest
+app_uuid: 550862f8-f1d1-4924-b802-185b865e09a4
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Speedtest: assets/dashboards/speedtest.json
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: speedtest.download.bandwidth
+      metadata_path: metadata.csv
+      prefix: speedtest.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: speedtest
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: cody.lee@datadoghq.com
+  support_email: cody.lee@datadoghq.com
 categories:
 - isp
 - ネットワーク
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/speedtest/README.md
-display_name: speedtest
+display_on_public_website: true
 draft: false
 git_integration_title: speedtest
-guid: 4bf81e32-170a-44f3-868d-1683ef39464f
 integration_id: speedtest
 integration_title: speedtest
 integration_version: 1.0.0
 is_public: true
 kind: integration
-maintainer: cody.lee@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: speedtest.
-metric_to_check: speedtest.download.bandwidth
+manifest_version: 2.0.0
 name: speedtest
-public_title: Datadog-speedtest インテグレーション
+oauth: {}
+public_title: speedtest
 short_description: speedtest-cli を使用して Speedtest の結果を実行します
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - カテゴリ::ISP
+  - Category::Network
+  configuration: README.md#Setup
+  description: speedtest-cli を使用して Speedtest の結果を実行します
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: speedtest
 ---
 
 

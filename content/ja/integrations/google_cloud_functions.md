@@ -1,17 +1,17 @@
 ---
 categories:
-  - cloud
-  - google cloud
-  - log collection
-ddtype: crawler
+- cloud
+- google cloud
+- log collection
 dependencies: []
 description: 関数実行時間の最小、最大、平均を追跡。
-doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_functions/'
+doc_link: https://docs.datadoghq.com/integrations/google_cloud_functions/
 draft: false
 git_integration_title: google_cloud_functions
 has_logo: true
 integration_id: google-cloud-functions
 integration_title: Google Cloud Functions
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -20,6 +20,7 @@ public_title: Datadog-Google Cloud Functions インテグレーション
 short_description: 関数実行時間の最小、最大、平均を追跡。
 version: '1.0'
 ---
+
 ## 概要
 
 Google Cloud Functions は、単一目的の小規模な関数を作成できる、軽量、イベントベース、かつ非同期のコンピューティングソリューションです。
@@ -39,16 +40,13 @@ Google Functions からメトリクスを取得して、以下のことができ
 
 ### ログの収集
 
-Google Cloud Function のログは Stackdriver により収集され、HTTP プッシュフォワーダーを使用して Cloud Pub/Sub へ送信されます。[HTTP プッシュフォワーダーを使用した Cloud Pub/Sub][2] をまだセットアップしていない場合は、これをセットアップしてください。
+Google Cloud Function のログは Google Cloud Logging により収集され、HTTP プッシュフォワーダーを使用して Cloud Pub/Sub へ送信されます。[HTTP プッシュフォワーダーを使用した Cloud Pub/Sub][2] をまだセットアップしていない場合は、これをセットアップしてください。
 
-セットアップが完了したら、Google Cloud Function のログを Stackdriver から Pub/Sub へエクスポートします。
+これが完了したら、Google Cloud Firestore のログを Google Cloud Function から Pub/Sub へエクスポートします。
 
-1. [Stackdriver ページ][3]に移動し、Google Cloud Function のログを絞り込みます。
+1. [Google Cloud Logging のページ][3]に移動し、Google Cloud Function のログを絞り込みます。
 2. **シンクを作成**し、シンクに適宜名前を付けます。
 3. エクスポート先として「Cloud Pub/Sub」を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクト内に配置することもできます。
-
-    {{< img src="integrations/google_cloud_pubsub/creating_sink.png" alt="Google Cloud Pub/Sub ログを Pub Sub へエクスポート" >}}
-
 4. **作成**をクリックし、確認メッセージが表示されるまで待ちます。
 
 ## 収集データ

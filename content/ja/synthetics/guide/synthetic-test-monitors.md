@@ -3,10 +3,13 @@ description: Synthetic テストで作成された Synthetic モニターにつ�
 further_reading:
 - link: /monitors/manage/
   tag: ドキュメント
-  text: モニターの管理
+  text: モニターの管理方法について
+- link: /monitors/guide/integrate-monitors-with-statuspage/
+  tag: ドキュメント
+  text: モニターと Statuspage のインテグレーション方法について
 - link: /synthetics/metrics/
   tag: ドキュメント
-  text: Synthetic モニタリングメトリクス
+  text: Synthetic モニタリングメトリクスについて
 kind: ガイド
 title: Synthetic テストモニターを利用する
 ---
@@ -51,6 +54,8 @@ Synthetic テストモニターは、メール、Slack、Pagerduty、Microsoft T
 4. モニター通知セクションに必要事項を記入し、モニター名にサマリーを追加します。例: `Shopist Checkout Functionality`
 5. モニターの構成が完了したら、**Save & Exit** をクリックします。
 
+詳しくは、[Statuspage とモニターのインテグレーション][8]をご覧ください。
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -62,3 +67,4 @@ Synthetic テストモニターは、メール、Slack、Pagerduty、Microsoft T
 [5]: /ja/monitors/notify/#renotify
 [6]: https://support.atlassian.com/statuspage/
 [7]: https://support.atlassian.com/statuspage/docs/get-started-with-email-automation/
+[8]: /ja/monitors/guide/integrate-monitors-with-statuspage/

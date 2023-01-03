@@ -1,9 +1,8 @@
 ---
 categories:
-  - cloud
-  - aws
-  - ログの収集
-ddtype: crawler
+- cloud
+- aws
+- ログの収集
 dependencies: []
 description: Amazon Elemental MediaPackage のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_mediapackage/
@@ -21,6 +20,7 @@ public_title: Datadog-Amazon Elemental MediaPackage インテグレーション
 short_description: Amazon Elemental MediaPackage のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Amazon Elemental MediaPackage は、さまざまな再生デバイスに安全性、拡張性、信頼性の高いビデオストリームを配信するジャストインタイムのビデオパッケージングおよびオリジネーションサービスです。
@@ -35,7 +35,7 @@ Amazon Elemental MediaPackage は、さまざまな再生デバイスに安全�
 
 ### メトリクスの収集
 
-1. [AWS インテグレーションタイル][2]のメトリクス収集で、`MediaPackage` をオンにします。
+1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `MediaPackage` が有効になっていることを確認します。
 2. [Datadog - Amazon Elemental MediaPackage インテグレーション][3]をインストールします。
 
 ### ログの収集
@@ -73,8 +73,8 @@ Amazon Elemental MediaPackage インテグレーションには、サービス�
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[3]: https://app.datadoghq.com/account/settings#integrations/amazon-mediapackage
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
+[3]: https://app.datadoghq.com/integrations/amazon-mediapackage
 [4]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
 [5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
 [6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group

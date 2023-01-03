@@ -1,44 +1,62 @@
 ---
+app_id: vercel
+app_uuid: 3ee4a2db-aea9-4663-93a9-d5758f71ba9d
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
-categories:
-  - ''
-creates_events: false
-ddtype: check
+  dashboards:
+    Vercel: assets/dashboards/vercel_overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: vercel.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Vercel
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: help@datadoghq.com
+  support_email: help@datadoghq.com
+categories: []
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/vercel/README.md
-display_name: Vercel
+- https://github.com/DataDog/integrations-extras/blob/master/vercel/README.md
+display_on_public_website: true
 draft: false
-further_reading:
-  - link: https://www.datadoghq.com/blog/monitor-vercel-serverless-functions-with-datadog/
-    tag: ブログ
-    text: Datadog で Vercel のサーバーレス関数を監視する
 git_integration_title: vercel
-guid: cf0daf64-9c85-43b1-8b6b-7d08f8d31b0f
 integration_id: vercel
 integration_title: Vercel
+integration_version: ''
 is_public: true
 kind: integration
-maintainer: https://docs.datadoghq.com/help/
-manifest_version: 1.0.0
-metric_prefix: vercel.
-metric_to_check: ''
+manifest_version: 2.0.0
 name: vercel
+oauth: {}
 public_title: Vercel
 short_description: Vercel で実行中のサーバーレスアプリケーションを監視する
-support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  configuration: README.md#Setup
+  description: Vercel で実行中のサーバーレスアプリケーションを監視する
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Vercel
 ---
+
+
+
 ![Datadog インテグレーション][1]
 
 ## 概要
@@ -47,15 +65,14 @@ supported_os:
 
 Vercel を Datadog と統合すると、以下のことができます。
 
-* [Datadog のログ管理機能][5]を使用してアプリケーションのログを表示・解析
-* Vercel 上で動作しているサーバーレスアプリケーションや API へのリクエスト数および 4xx/5xx  HTTPエラー数の確認
-* [Datadog Synthetics][6] によるフロントエンドのパフォーマンス監視
+- [Datadog のログ管理機能][5]を使用してアプリケーションのログを表示・解析
+- Vercel 上で動作しているサーバーレスアプリケーションや API へのリクエスト数および 4xx/5xx  HTTPエラー数の確認
+- [Datadog Synthetics][6] によるフロントエンドのパフォーマンス監視
 
 ## セットアップ
 
-
-* [Datadog API キー][7]の生成
-* [Vercel Marketplace][8]を通じたログインテグレーションの構成
+- [Datadog API キー][7]の生成
+- [Vercel Marketplace][8]を通じたログインテグレーションの構成
 
 ## 収集データ
 
@@ -85,5 +102,5 @@ Vercel インテグレーションには、イベントは含まれません。
 [4]: https://vercel.com/docs/serverless-functions/introduction
 [5]: /ja/logs/
 [6]: /ja/synthetics/
-[7]: https://app.datadoghq.com/account/settings#api
+[7]: https://app.datadoghq.com/organization-settings/api-keys
 [8]: https://vercel.com/integrations/datadog-logs

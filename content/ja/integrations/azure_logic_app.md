@@ -1,18 +1,18 @@
 ---
 categories:
-  - cloud
-  - configuration & deployment
-  - network
-  - azure
-ddtype: crawler
+- cloud
+- configuration & deployment
+- network
+- azure
 dependencies: []
 description: トリガーワークフロー、アクションのレイテンシー、失敗したアクションなどを追跡。
-doc_link: 'https://docs.datadoghq.com/integrations/azure_logic_app/'
+doc_link: https://docs.datadoghq.com/integrations/azure_logic_app/
 draft: false
 git_integration_title: azure_logic_app
 has_logo: true
 integration_id: azure-logic-app
 integration_title: Microsoft Azure Logic App
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -21,9 +21,10 @@ public_title: Datadog-Microsoft Azure Logic App インテグレーション
 short_description: トリガーワークフロー、アクションのレイテンシー、失敗したアクションなどを追跡。
 version: '1.0'
 ---
+
 ## 概要
 
-Logic App を使用して、開発者はトリガーと一連の手順によって目的を明確化するワークフローを設計できます。
+Logic App を使用して、開発者はトリガーと一連の手順で目的を明確化するワークフローを設計できます。
 
 Azure Logic App からメトリクスを取得すると、以下のことができます。
 

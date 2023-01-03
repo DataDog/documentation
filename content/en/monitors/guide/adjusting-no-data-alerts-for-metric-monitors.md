@@ -38,6 +38,6 @@ Contact [us][6] should you experience any issues.
 [1]: /monitors/create/types/metric/
 [2]: /integrations/amazon_web_services/
 [3]: /monitors/create/types/metric/?tab=threshold#advanced-alert-conditions
-[4]: /integrations/faq/cloud-metric-delay/
+[4]: /integrations/guide/cloud-metric-delay/
 [5]: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
 [6]: /help/

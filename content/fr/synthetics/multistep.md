@@ -52,7 +52,7 @@ Sélectionnez les **emplacements** de votre test API à plusieurs étapes. Les t
 
 Pour créer une étape de requête HTTP, cliquez sur **Create Your First Step**.
 
-{{< img src="synthetics/api_tests/create_request2.png" alt="Créer les requêtes de votre test API à plusieurs étapes" style="width:100%;" >}}
+{{< img src="synthetics/api_tests/ms_create_request.png" alt="Créer les requêtes de votre test API à plusieurs étapes" style="width:100%;" >}}
 
 **Remarque :** par défaut, vous ne pouvez pas créer plus de 10 étapes. Pour augmenter cette limite, contactez l'<a href="https://docs.datadoghq.com/help/">assistance Datadog</a>.
 
@@ -119,7 +119,7 @@ Pour créer une étape de requête HTTP, cliquez sur **Create Your First Step**.
 
 Cliquez sur **Test URL** pour tester la configuration de requête. Un aperçu de la réponse s'affiche alors.
 
-{{< img src="synthetics/api_tests/ms_define_request2.png" alt="Définir une requête pour votre test API à plusieurs étapes" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/ms_define_request.png" alt="Définir une requête pour votre test API à plusieurs étapes" style="width:90%;" >}}
 
 #### Ajouter des assertions
 
@@ -136,7 +136,7 @@ Les assertions définissent un résultat de test escompté. Lorsque vous cliquez
 
 Vous pouvez créer jusqu'à 20 assertions par étape en cliquant sur **New assertion** ou directement sur l'aperçu de la réponse.
 
-{{< img src="synthetics/api_tests/assertions2.png" alt="Définir des assertions pour votre test API à plusieurs étapes" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/assertions_multi.png" alt="Définir des assertions pour votre test API à plusieurs étapes" style="width:90%;" >}}
 
 #### Ajouter des paramètres d'exécution
 
@@ -162,7 +162,7 @@ Pour parser votre variable :
     * Extraire la valeur à partir du **Response Header** : utilisez l'en-tête de réponse complet de votre requête HTTP comme valeur de variable, ou parsez l'en-tête à l'aide d'une [`regex`][10].
     * Extraire la valeur à partir du **Response Body** : utilisez le corps de réponse complet de votre requête HTTP comme valeur de variable, ou parsez le corps avec une [`regex`][10], une expression [`JSONPath`][8] ou une expression [`XPath`][9].
 
-{{< img src="synthetics/api_tests/ms_extract_variable3.png" alt="Extraire des variables depuis des requêtes HTTP dans un test API à plusieurs étapes" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/ms_extract_variable.png" alt="Extraire des variables depuis des requêtes HTTP dans un test API à plusieurs étapes" style="width:90%;" >}}
 
 Une fois la variable créée, vous pouvez l'utiliser dans les étapes ultérieures de votre test API à plusieurs étapes. Pour en savoir plus, consultez la rubrique [Utiliser des variables](#utiliser-des-variables).
 

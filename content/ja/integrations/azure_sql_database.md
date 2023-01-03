@@ -1,18 +1,18 @@
 ---
 categories:
-  - cloud
-  - data store
-  - caching
-  - azure
-ddtype: crawler
+- cloud
+- data store
+- caching
+- azure
 dependencies: []
 description: Azure SQL Database の主要メトリクスを追跡。
-doc_link: 'https://docs.datadoghq.com/integrations/azure_sql_database/'
+doc_link: https://docs.datadoghq.com/integrations/azure_sql_database/
 draft: false
 git_integration_title: azure_sql_database
 has_logo: true
 integration_id: azure-sql-database
 integration_title: Microsoft Azure SQL Database
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -21,6 +21,7 @@ public_title: Datadog-Microsoft Azure SQL Database インテグレーション
 short_description: Azure SQL Database の主要メトリクスを追跡。
 version: '1.0'
 ---
+
 ## 概要
 
 Azure SQL Database は、需要に応じて柔軟にスケーリングできるロバストなデータストアを提供します。

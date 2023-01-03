@@ -8,15 +8,15 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/template-variable-associated-values/"
     tag: "Blog"
     text: "Use associated template variables to refine your dashboards"
-  - link: "https://learn.datadoghq.com/enrol/index.php?id=8"
-    tag: "Learning"
-    text: "Self-paced online learning: Building Better Dashboards"
+  - link: "https://learn.datadoghq.com/courses/building-better-dashboards"
+    tag: "Learning Center"
+    text: "Building Better Dashboards"
   - link: "/dashboards/"
     tag: "Documentation"
     text: "Dashboards basics"
   - link: "/notebooks/"
     tag: "Documentation"
-    text: "Tell a story about data with Notebooks"
+    text: "Tell a story about data with notebooks"
   - link: "/monitors/"
     tag: "Documentation"
     text: "Monitors, SLOs, notifications, downtimes, and incidents"
@@ -141,7 +141,7 @@ The mobile app enables you to view and search all of the dashboards that you hav
 [9]: /dashboards/template_variables/
 [10]: /dashboards/
 [11]: /dashboards/widgets/timeseries/
-[12]: https://learn.datadoghq.com/enrol/index.php?id=8
+[12]: https://learn.datadoghq.com/courses/building-better-dashboards/
 [13]: /integrations/slack/
 [14]: /api/v1/dashboards/
 [15]: /mobile/

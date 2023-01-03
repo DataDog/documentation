@@ -59,7 +59,7 @@ Datadog réduit les chaînes suivantes lorsqu'elles dépassent le nombre de cara
 
 En outre, une span ne peut pas inclure simultanément plus de 250 [tags de span][8].
 
-Sur un intervalle donné de 10 minutes, Datadog accepte les combinaisons d'éléments suivantes. Pour prendre en charge des volumes plus importants, contactez l'[assistance][1] afin de présenter votre scénario d'utilisation.
+Sur un intervalle donné de 40 minutes, Datadog accepte les combinaisons d'éléments suivantes. Pour prendre en charge des volumes plus importants, contactez l'[assistance][1] afin de présenter votre scénario d'utilisation.
 
 - 1 000 environnements et combinaisons de service uniques
 - 30 groupes de hosts uniques par environnement

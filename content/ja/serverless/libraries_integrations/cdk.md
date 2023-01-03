@@ -101,7 +101,7 @@ datadog.addForwarderToNonLambdaLogGroups([<LOG_GROUPS>])
 async function main() {
   // パッケージマネージャーで @datadog/datadog-ci を追加することを確認します
   const datadogCi = require("@datadog/datadog-ci");
-  const gitHash = await datadogCi.gitMetadata.uploadGitCommitHash('{Datadog_API_Key}', '<SITE>')
+  const [, gitHash] = await datadogCi.gitMetadata.uploadGitCommitHash('{Datadog_API_Key}', '<SITE>')
 
   const app = new cdk.App();
   // ExampleStack のコンストラクタにハッシュを渡します

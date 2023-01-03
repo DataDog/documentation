@@ -1,0 +1,9 @@
+{
+  "data": {
+    "attributes": {
+      "name": "my_new_rum_application",
+      "type": "ios"
+    },
+    "type": "rum_application_create"
+  }
+}

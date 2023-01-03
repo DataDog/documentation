@@ -51,6 +51,14 @@ If a metric `10 + x%10 {*}` increments itself by 1 starting from 10 until it dro
 
 {{< img src="dashboards/functions/smoothing/ewma5.png" alt="EWMA5" style="width:80%;">}}
 
+### Ewma 7
+
+| Function   | Description                                                         | Example                    |
+| :----      | :-------                                                            | :---------                 |
+| `ewma_7()` | Compute the exponentially weighted moving average over a span of 7. | `ewma_7(<METRIC_NAME>{*})` |
+
+Note: The span value is the number of data points. So `ewma_7()` uses the last 7 data points to calculate the average.
+
 ### Ewma 10
 
 | Function    | Description                                                          | Example                     |

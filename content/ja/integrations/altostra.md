@@ -1,44 +1,69 @@
 ---
+app_id: altostra
+app_uuid: c22d6f84-3404-4638-99bc-7cb19ab4508a
 assets:
   dashboards:
     Altostra: assets/dashboards/altostra.json
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: altostra.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Altostra
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: support@altostra.com
+  support_email: support@altostra.com
 categories:
-  - 自動化
-  - AWS
-  - cloud
-  - 構成 & デプロイ
-  - ログの収集
-creates_events: false
-ddtype: crawler
+- 自動化
+- cloud
+- 構成 & デプロイ
+- ログの収集
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/altostra/README.md
-display_name: Altostra
+- https://github.com/DataDog/integrations-extras/blob/master/altostra/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: altostra
-guid: c5b325e5-a55a-4ff2-9c91-3aac9463c6be
 integration_id: altostra
 integration_title: Altostra
 integration_version: ''
 is_public: true
 kind: integration
-maintainer: support@altostra.com
-manifest_version: 1.0.0
-metric_prefix: altostra.
-metric_to_check: ''
+manifest_version: 2.0.0
 name: altostra
-public_title: Datadog-Altostra インテグレーション
+oauth: {}
+public_title: Altostra
 short_description: Altostra から Datadog へクラウドアプリケーションログを自動的に送信
-support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Automation
+  - Category::Cloud
+  - Category::Configuration & Deployment
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: Altostra から Datadog へクラウドアプリケーションログを自動的に送信
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Altostra
 ---
+
+
+
 ## 概要
 
 Altostra は、クラウドコンピューティングサービスと統合し、開発チームにエンドツーエンドのワークフローを提供します。

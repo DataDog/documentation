@@ -1,6 +1,6 @@
 ---
 further_reading:
-- link: /tracing/trace_ingestion/ingestion_controls/
+- link: /tracing/trace_pipeline/ingestion_controls/
   tag: ドキュメント
   text: 取り込み制御ページ
 kind: ガイド
@@ -21,6 +21,8 @@ title: APM 分散型トレーシングによる取り込み量制御
 {{< img src="/tracing/guide/trace_ingestion_volume_control/sampling_25_percent.png" alt="25% のトレースが取り込まれたことを表示する APM 取り込みサンプリング" style="width:70%;" >}}
 
 特定のサービスの取り込み量を減らすことにしても、**リクエスト、エラー、およびレイテンシーの[メトリクス][3]** (RED (Requests, Errors, and Duration) メトリクスとして知られている) は、サンプリング構成に関係なく、アプリケーションの 100% のトラフィックに基づいて計算されているため、100% の精度を維持します。これらのメトリクスは、Datadog APM の購入時に含まれています。アプリケーションのトラフィックを完全に可視化するために、これらのメトリクスを使用して、ダッシュボード、モニター、SLO を作成し、サービスやリソースの潜在的なエラーを発見することができます。
+
+**注**: アプリケーションやサービスが OpenTelemetry ライブラリでインスツルメンテーションされ、SDK レベルやコレクターレベルでサンプリングを設定した場合、APM メトリクスは**サンプリングされた**データセットに基づきます。
 
 トレースデータは非常に反復性が高いため、取り込みサンプリングでも問題を調査するためのトレースサンプルは利用可能です。高スループットのサービスでは、通常、すべてのリクエストを収集する必要はありません。十分重要な問題は、常に複数のトレースで症状を示すはずです。取り込み制御は、予算の範囲内で、問題のトラブルシューティングに必要な可視性を確保するのに役立ちます。
 
@@ -74,6 +76,8 @@ Downstream Bytes/s レートが高く、サンプリングレートも高いサ�
 
 Agent レベルで取り込み量を減らすには、`DD_APM_MAX_TPS` (デフォルトでは `10` に設定) を構成して、ヘッドベースのサンプリング量のシェアを減らしてください。[デフォルトのサンプリングメカニズム][6]について詳しくはこちら。
 
+**注**: この構成オプションは、**Datadog トレーシングライブラリ**を使用しているときのみ有効になります。Agent の OTLP Ingest が OpenTelemetry でインスツルメンテーションされたアプリケーションからデータを収集する場合、`DD_APM_MAX_TPS` を変更しても、トレーシングライブラリで適用されるサンプリングレートは変わりません。
+
 さらに、[エラー][8]や[レア][9]トレースの量を減らすには
 - エラーサンプリングのシェアを減らすために、`DD_APM_ERROR_TPS` を構成します。
 - `DD_APM_DISABLE_RARE_SAMPLER` を true に設定すると、レアトレースのサンプリングが停止します。
@@ -89,6 +93,15 @@ Agent レベルで取り込み量を減らすには、`DD_APM_MAX_TPS` (デフ�
 サービスのサンプリングレートを構成するには、**Manage Ingestion Rate** ボタンをクリックします。サービスの言語と適用したい取り込みサンプリングレートを選択します。
 
 **注:** 構成の変更を適用するには、アプリケーションを再デプロイする必要があります。Datadog では、[環境変数][10]を設定することで変更を適用することを推奨しています。
+
+### OpenTelemetry によるトレースサンプリング
+
+アプリケーションやサービスが OpenTelemetry ライブラリでインスツルメンテーションされ、OpenTelemetry コレクターを使用している場合、以下の OpenTelemetry サンプリング機能を使用することができます。
+
+- [TraceIdRatioBased][11] と [ParentBased][12] は、**SDK** レベルで trace_id に基づく決定論的なヘッドベースサンプリングを実装することができる 2 つの組み込みサンプラーです。
+- [Tail Sampling Processor][13] と [Probabilistic Sampling Processor][14] は、**コレクター**レベルで一連のルールに基づいてトレースをサンプリングすることが可能です。
+
+2 つのオプションのいずれかを使用すると、[APM メトリクス](#effects-of-reducing-trace-ingestion-volume)のサンプリングが行われます。
 
 ## 取り込み理由の用語集
 
@@ -111,7 +124,7 @@ _どの取り込みメカニズムが取り込み量の大部分を担ってい�
 | `error`            | [Agent](#globally-configure-the-ingestion-sampling-rate-at-the-agent-level)             | ヘッドベースサンプリングで捕捉できないエラーのサンプリング。             | 10 トレース/秒/Agent (ルールが定義されている場合は null) |
 | `rare`            | [Agent](#globally-configure-the-ingestion-sampling-rate-at-the-agent-level)             |  レアトレースのサンプリング (一連のスパンタグのすべての組み合わせを捕捉)。        | 5 トレース/秒/Agent (ルールが定義されている場合は null) |
 | `manual`             | コード内         | スパンとその子を保持/削除するための、コード内決定のオーバーライド。    | null |
-| `analytics`          | Agent とトレーシングライブラリ | フルトレースなしで単一スパンをサンプリングする[非推奨の取り込みメカニズム][11]。   | null                 |
+| `analytics`          | Agent とトレーシングライブラリ | フルトレースなしで単一スパンをサンプリングする[非推奨の取り込みメカニズム][15]。   | null                 |
 
 さらに、サンプリングされたスパン量には、他の製品が関与している可能性があります。
 
@@ -121,18 +134,22 @@ _どの取り込みメカニズムが取り込み量の大部分を担ってい�
 
 取り込みの理由については、[取り込みメカニズムに関するドキュメント][2]を参照してください。
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/trace_ingestion/ingestion_controls
-[2]: /ja/tracing/trace_ingestion/mechanisms
-[3]: /ja/tracing/guide/metrics_namespace/
-[4]: /ja/tracing/generate_metrics/
+[1]: /ja/tracing/trace_pipeline/ingestion_controls
+[2]: /ja/tracing/trace_pipeline/ingestion_mechanisms/
+[3]: /ja/tracing/metrics/metrics_namespace/
+[4]: /ja/tracing/trace_pipeline/generate_metrics/
 [5]: /ja/monitors/create/types/apm/?tab=analytics
-[6]: /ja/tracing/trace_ingestion/mechanisms/#head-based-default-mechanism
-[7]: /ja/tracing/trace_retention/usage_metrics/
-[8]: /ja/tracing/trace_ingestion/mechanisms#error-traces
-[9]: /ja/tracing/trace_ingestion/mechanisms#rare-traces
-[10]: /ja/tracing/trace_ingestion/mechanisms/?tab=environmentvariables#in-tracing-libraries-user-defined-rules
-[11]: /ja/tracing/legacy_app_analytics
+[6]: /ja/tracing/trace_pipeline/ingestion_mechanisms/#head-based-sampling
+[7]: /ja/tracing/trace_pipeline/metrics/
+[8]: /ja/tracing/trace_pipeline/ingestion_mechanisms/#error-traces
+[9]: /ja/tracing/trace_pipeline/ingestion_mechanisms/#rare-traces
+[10]: /ja/tracing/trace_pipeline/ingestion_mechanisms/?tab=environmentvariables#in-tracing-libraries-user-defined-rules
+[11]: https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/trace/sdk.md#traceidratiobased
+[12]: https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/trace/sdk.md#parentbased
+[13]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/tailsamplingprocessor/README.md
+[14]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/probabilisticsamplerprocessor/README.md
+[15]: /ja/tracing/legacy_app_analytics

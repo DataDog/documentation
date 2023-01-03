@@ -1,6 +1,8 @@
 ---
 aliases:
 - /ja/graphing/guide/
+- /ja/faq/treemap-graph-visualization-can-i-use-this-elsewhere/
+disable_toc: true
 kind: ガイド
 private: true
 title: グラフ作成ガイド
@@ -15,6 +17,7 @@ title: グラフ作成ガイド
     {{< nextlink href="dashboards/guide/how-to-use-terraform-to-restrict-dashboards" >}}Terraform を使ってダッシュボードの編集を制限する{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/embeddable-graphs-with-template-variables" >}}テンプレート変数による埋め込み可能なグラフ{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/unable-to-iframe" >}}特定の HTTPS URL を iFrame で表示できないのはなぜですか？{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/powerpacks-best-practices" >}}パワーパックのベストプラクティス{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="非推奨の API:" >}}

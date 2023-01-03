@@ -1,9 +1,8 @@
 ---
 categories:
-  - cloud
-  - AWS
-  - ログの収集
-ddtype: crawler
+- cloud
+- AWS
+- ログの収集
 dependencies: []
 description: 主要な AWS App Runner メトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_app_runner/
@@ -21,6 +20,7 @@ public_title: Datadog-AWS App Runner Integration
 short_description: 主要な AWS App Runner メトリクスを追跡します。
 version: '1.0'
 ---
+
 ## 概要
 
 AWS App Runner を使用すると、ソースコードまたはコンテナイメージから AWS にアプリケーションをデプロイできます。
@@ -35,7 +35,7 @@ AWS App Runner を使用すると、ソースコードまたはコンテナイ�
 
 ### メトリクスの収集
 
-1. [AWS インテグレーションタイル][2]のメトリクス収集で、`AppRunner` をオンにします。
+1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `AppRunner` が有効になっていることを確認します。
 2. [Datadog - AWS App Runner インテグレーション][3]をインストールします。
 
 ### ログの収集
@@ -77,8 +77,8 @@ AWS App Runner  インテグレーションには、サービスのチェック�
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[3]: https://app.datadoghq.com/account/settings#integrations/amazon-app-runner
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
+[3]: https://app.datadoghq.com/integrations/amazon-app-runner
 [4]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
 [5]: https://app.datadoghq.com/logs
 [6]: https://app.datadoghq.com/event/stream

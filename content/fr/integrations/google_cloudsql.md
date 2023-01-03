@@ -1,26 +1,29 @@
 ---
 categories:
-  - cloud
-  - data store
-  - google cloud
-  - log collection
-ddtype: crawler
+- cloud
+- data store
+- google cloud
+- log collection
 dependencies: []
-description: 'Surveillez des métriques de base de données relatives aux performances, à la santé et à la réplication.'
-doc_link: 'https://docs.datadoghq.com/integrations/google_cloudsql/'
+description: Surveillez des métriques de base de données relatives aux performances,
+  à la santé et à la réplication.
+doc_link: https://docs.datadoghq.com/integrations/google_cloudsql/
 draft: false
 git_integration_title: google_cloudsql
 has_logo: true
 integration_id: google-cloudsql
-integration_title: Google CloudSQL
+integration_title: Google Cloud SQL
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: google_cloudsql
-public_title: "Intégration Datadog/Google\_Cloud\_SQL"
-short_description: 'Surveillez des métriques de base de données relatives aux performances, à la santé et à la réplication.'
+public_title: Intégration Datadog/Google Cloud SQL
+short_description: Surveillez des métriques de base de données relatives aux performances,
+  à la santé et à la réplication.
 version: '1.0'
 ---
+
 ## Présentation
 
 Google Cloud SQL est un service de base de données entièrement géré qui vous permet de configurer, maintenir, gérer et administrer facilement vos bases de données SQL dans le cloud.
@@ -44,14 +47,27 @@ Pour recueillir des étiquettes CloudSQL personnalisées sous forme de tags, act
 
 #### Collecte de logs
 
-Les logs Google Cloud SQL sont recueillis avec Stackdriver et envoyés à un Cloud Pub/Sub via un redirecteur Push HTTP. Si vous ne l'avez pas déjà fait, configurez le [Cloud Pub/Sub à l'aide d'un redirecteur Push HTTP][2].
+{{< site-region region="us3" >}}
 
-Une fois cette opération effectuée, exportez vos logs Google Cloud SQL depuis Stackdriver vers le Pub/Sub :
+La collecte de logs n'est plus prise en charge pour ce site.
 
-1. Accédez à la [page Stackdriver][3] et filtrez les logs Google Cloud SQL.
+{{< /site-region >}}
+
+{{< site-region region="us,eu,gov" >}}
+
+Les logs Google Cloud SQL sont recueillis avec Google Cloud Logging et envoyés à un Cloud Pub/Sub via un forwarder Push HTTP. Si vous ne l'avez pas déjà fait, configurez un [Cloud Pub/Sub à l'aide d'un forwarder Push HTTP][2].
+
+Une fois cette opération effectuée, exportez vos logs Google Cloud SQL depuis Google Cloud Logging vers le Pub/Sub :
+
+1. Accédez à la [page Google Cloud Logging][3] et filtrez les logs Google Cloud SQL.
 2. Cliquez sur **Create Sink** et nommez le récepteur.
 3. Choisissez Cloud Pub/Sub comme destination et sélectionnez le Pub/Sub créé à cette fin. **Remarque** : le Pub/Sub peut se situer dans un autre projet.
 4. Cliquez sur **Create** et attendez que le message de confirmation s'affiche.
+
+[2]: https://docs.datadoghq.com/fr/integrations/google_cloud_platform/#log-collection
+[3]: https://console.cloud.google.com/logs/viewer
+
+{{< /site-region >}}
 
 ## Données collectées
 
@@ -70,10 +86,8 @@ L'état de service actuel de l'instance Cloud SQL.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][5].
+Besoin d'aide ? Contactez [l'assistance Datadog][3].
 
 [1]: https://docs.datadoghq.com/fr/integrations/google_cloud_platform/
-[2]: https://docs.datadoghq.com/fr/integrations/google_cloud_platform/#log-collection
-[3]: https://console.cloud.google.com/logs/viewer
-[4]: https://github.com/DataDog/dogweb/blob/prod/integration/google_cloudsql/google_cloudsql_metadata.csv
-[5]: https://docs.datadoghq.com/fr/help/
+[2]: https://github.com/DataDog/dogweb/blob/prod/integration/google_cloudsql/google_cloudsql_metadata.csv
+[3]: https://docs.datadoghq.com/fr/help/

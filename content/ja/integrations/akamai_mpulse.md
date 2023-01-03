@@ -1,7 +1,6 @@
 ---
 categories:
-  - cloud
-ddtype: crawler
+- cloud
 dependencies: []
 description: Akamai mPulse と Datadog を統合
 doc_link: https://docs.datadoghq.com/integrations/akamai_mpulse/
@@ -17,8 +16,10 @@ manifest_version: '1.0'
 name: akamai_mpulse
 public_title: Datadog-Akamai mPulse
 short_description: Akamai mPulse と Datadog を統合
+team: web-integrations
 version: '1.0'
 ---
+
 ## 概要
 
 Datadog と Akamai mPulse を接続してリアルユーザーモニタリング (RUM) メトリクスを収集し、エンドユーザーが Web サイトのパフォーマンスをどのように見ているかを可視化します。

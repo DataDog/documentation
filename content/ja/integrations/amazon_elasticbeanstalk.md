@@ -1,25 +1,25 @@
 ---
 aliases:
-  - /ja/integrations/awsbeanstalk/
-  - /ja/developers/faq/i-want-my-application-deployed-in-a-container-through-elasticbeanstalk-to-talk-to-dogstatsd/
+- /ja/integrations/awsbeanstalk/
+- /ja/developers/faq/i-want-my-application-deployed-in-a-container-through-elasticbeanstalk-to-talk-to-dogstatsd/
 categories:
-  - cloud
-  - configuration & deployment
-  - aws
-  - log collection
-ddtype: crawler
+- cloud
+- configuration & deployment
+- aws
+- log collection
 dependencies: []
 description: Amazon Elastic Beanstalk のキーメトリクスを追跡
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_elasticbeanstalk/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_elasticbeanstalk/
 draft: false
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/deploy-datadog-aws-elastic-beanstalk'
-    tag: ブログ
-    text: AWS Elastic Beanstalk への Datadog のデプロイ
+- link: https://www.datadoghq.com/blog/deploy-datadog-aws-elastic-beanstalk
+  tag: ブログ
+  text: AWS Elastic Beanstalk への Datadog のデプロイ
 git_integration_title: amazon_elasticbeanstalk
 has_logo: true
 integration_id: amazon-elastic-beanstalk
 integration_title: Amazon Elastic Beanstalk
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -28,6 +28,7 @@ public_title: Datadog-Amazon Elastic Beanstalk インテグレーション
 short_description: Amazon Elastic Beanstalk のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 AWS Elastic Beanstalk は、Apache、Nginx、Passenger、IIS などの使い慣れたサーバーで、Java、.NET、PHP、Node.js、Python、Ruby、Go、および Docker を使用して開発された Web アプリケーションやサービスをデプロイおよびスケーリングするための使いやすいサービスです。
@@ -36,9 +37,11 @@ AWS Elastic Beanstalk は、Apache、Nginx、Passenger、IIS などの使い慣�
 
 ### インストール
 
-必要に応じて、まず [Amazon Web Services インテグレーション][1]をセットアップします。Elastic Beanstalk メトリクスを受信するには、ご使用の環境で[拡張ヘルスレポート機能を有効][2]にし、[拡張ヘルスメトリクスを CloudWatch に公開][3]するように環境を構成する必要があります。
+まだ行っていない場合は、まず [Amazon Web Services インテグレーション][1]をセットアップします。Elastic Beanstalk メトリクスを受信するには、ご使用の環境で[拡張ヘルスレポート機能を有効][2]にし、[拡張ヘルスメトリクスを CloudWatch に公開][3]するように環境を構成する必要があります。
 
 **注**: これらの設定により、CloudWatch カスタムメトリクス料金が加算されます。
+
+次のステップでは、Elastic Beanstalk VM に Datadog Agent をデプロイし、AWS インテグレーションによってクロールされるメトリクスに加えて、ホストメトリクスもレポートするようにします。
 
 ### コンフィギュレーション
 
@@ -49,35 +52,37 @@ AWS Elastic Beanstalk は、Apache、Nginx、Passenger、IIS などの使い慣�
 
 単一の Docker コンテナのセットアップの場合、[コンフィギュレーションファイル (.ebextensions) による高度な環境のカスタマイズ][1]を使用して、Datadog Agent を Elastic Beanstalk にインストールします。
 
-1. [アプリケーションソースバンドル][2]のルートに `.ebextensions` という名前のフォルダーを作成します。
-2. [99datadog.config][3] または [99datadog-amazon-linux-2.config][4] (Amazon Linux 2 の場合) を `.ebextensions` にダウンロードします。
-3. `99datadog.config` の `option_settings` 内の `DD_API_KEY` の値を [Datadog API キー][5]に変更します。
-4. すべてのホストが同じバージョンの Agent を実行するように、`option_settings` の下に `DD_AGENT_VERSION` を設定して特定の Agent バージョンを固定することをお勧めします。
-5. [Elastic Beanstalk コンソール][6]、[EB CLI][7]、または [AWS CLI][8] でアプリケーションをデプロイします。
+**注**: このセットアップでは、API キーをソースコードの一部である .ebextensions ディレクトリに配置する必要があります。[AWS Secret Manager][2] などのシークレット管理ツールを用いて、API キーを保護してください。
 
-`99datadog.config` の `"/configure_datadog_yaml.sh"` セクションを更新することで、`datadog.yaml` にさらに設定を追加します。以下のラインで Datadog Process Agent が有効になります。
+1. [アプリケーションソースバンドル][3]のルートに `.ebextensions` という名前のフォルダーを作成します。
+2. [99datadog.config][4] をダウンロードし、`.ebextensions` フォルダに入れます。
+3. `/etc/datadog-agent/datadog.yaml` のファイルテンプレート内の `api_key` の値を、お使いの [Datadog API キー][5]で変更します。
+4. Agent が正しい Datadog ロケーションにデータを送信するために、`/etc/datadog-agent/datadog.yaml` の `site` の値を Datadog リージョンに変更します (例: {{&lt; region-param key="dd_site" code="true" &gt;}})。
+5. すべてのホストが同じバージョンの Agent を実行するように、`option_settings` の下に `DD_AGENT_VERSION` を設定して特定の Agent バージョンを固定します。
+6. [Elastic Beanstalk コンソール][6]、[EB CLI][7]、または [AWS CLI][8] でアプリケーションをデプロイします。
+
+Agent の設定は `/etc/datadog-agent/datadog.yaml` に追加することができます。
+
+例えば、ライブプロセスモニタリングを有効にするには
 
 ```text
-echo -e "process_config:\n  enabled: \"true\"\n" >> /etc/datadog-agent/datadog.yaml
+process_config:
+  enabled: "true"
 ```
 
 #### トレースの収集
 
 単一の Docker コンテナのトレースを有効にするには
 
-1. `99datadog.config` ファイルの `"/configure_datadog_yaml.sh"` セクションを `apm_non_local_traffic` で更新し、次のようなフォーマットにします。
+1. `99datadog.config` ファイルの `/etc/datadog-agent/datadog.yaml` セクションを `apm_non_local_traffic` で更新し、次のようなフォーマットにします。
 
-    ```shell
-
-    echo -e "apm_config:\n  enabled: \"true\"\n" >> /etc/datadog-agent/datadog.yaml
-
-    echo -e "  apm_non_local_traffic: \"true\"\n" >> /etc/datadog-agent/datadog.yaml
     ```
-2. トレーシングライブラリをセットアップして、トレースが [ブリッジネットワークの Gateway IP][9] に送られるようにします。アプリケーションコンテナ内からのデフォルトが `172.17.0.1` になります（これが Gateway IP かどうかわからない場合は、`docker inspect <container id>` を実行して確認します）。
+    apm_config:
+      enabled: "true"
+      apm_non_local_traffic: "true"
+    ```
 
-{{< site-region region="us3,eu,gov" >}} 
-3. Datadog Agent の `DD_SITE` を {{< region-param key="dd_site" code="true" >}} に設定して、Agent が正しい Datadog の場所にデータを送信するようにします。
-{{< /site-region >}} 
+2. トレーシングライブラリをセットアップして、トレースが [ブリッジネットワークの Gateway IP][9] に送られるようにします。アプリケーションコンテナ内からのデフォルトが `172.17.0.1` になります（これが Gateway IP かどうかわからない場合は、`docker inspect <container id>` を実行して確認します）。
 
 すべての言語で、環境変数 `DD_AGENT_HOST` をゲートウェイ IP に設定します。または、以下の言語の場合、次を使用してプログラムでホスト名を設定します。
 
@@ -126,10 +131,10 @@ func main() {
 
 
 [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/ebextensions.html
-[2]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/applications-sourcebundle.html
-[3]: https://docs.datadoghq.com/ja/config/99datadog.config
-[4]: https://docs.datadoghq.com/ja/config/99datadog-amazon-linux-2.config
-[5]: https://app.datadoghq.com/account/settings#api
+[2]: https://aws.amazon.com/secrets-manager/
+[3]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/applications-sourcebundle.html
+[4]: https://docs.datadoghq.com/ja/config/99datadog.config
+[5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-console-ebextensions
 [7]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-ebcli
 [8]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-awscli
@@ -143,7 +148,7 @@ func main() {
 
 `Dockerrun.aws.json` ファイルは、単独で使用することも、他のソースコードと共にアーカイブに圧縮して使用することもできます。`Dockerrun.aws.json` と共にアーカイブされるソースコードは、コンテナインスタンスにデプロイされ、`/var/app/current/` ディレクトリでアクセスできます。構成の `volumes` セクションを使用して、インスタンスで実行されるコンテナのマウントポイントを提供します。また、埋め込みコンテナ定義の `mountPoints` セクションを使用して、コンテナからマウントポイントをマウントします。
 
-以下のコードサンプルは、Datadog Agent を宣言する `Dockerrun.aws.json` を示しています。`containerDefinitions` セクションを、ご使用の [Datadog API キー][1]、タグ (オプション)、および追加のコンテナ定義で更新してください。必要に応じて、このファイルを上述の追加コンテンツと共に圧縮できます。このファイルの構文の詳細については、[Beanstalk のドキュメント][2]を参照してください。
+以下のコードサンプルは、Datadog Agent を宣言する `Dockerrun.aws.json` を示しています。`containerDefinitions` セクションを、ご使用の [Datadog API キー][1]、タグ (オプション)、および追加のコンテナ定義で更新してください。必要に応じて、このファイルを上述の追加コンテンツと共に圧縮できます。このファイルの構文の詳細については、[マルチコンテナ Docker コンフィギュレーション][2]を参照してください。
 
 **注**:
 
@@ -243,47 +248,71 @@ func main() {
 詳細については、[DogStatsD と Docker][5] を参照してください。
 
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_docker_v2config.html
 [3]: https://gcr.io/datadoghq/agent
 [4]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_docker_ecstutorial.html
 [5]: https://docs.datadoghq.com/ja/integrations/faq/dogstatsd-and-docker/
 {{% /tab %}}
-{{% tab "コンテナなし" %}}
+{{% tab "コンテナなし (Linux)" %}}
 
 コンテナなしのセットアップの場合、[コンフィギュレーションファイル (.ebextensions) による高度な環境のカスタマイズ][1]を使用して、Datadog Agent を Elastic Beanstalk にインストールします。
 
 1. [アプリケーションソースバンドル][2]のルートに `.ebextensions` という名前のフォルダーを作成します。
-2. [99datadog.config][3] または [99datadog-amazon-linux-2.config][4] (Amazon Linux 2 の場合) を `.ebextensions` にダウンロードします。
-3. `99datadog.config` の `option_settings` 内の `DD_API_KEY` の値を [Datadog API キー][5]に変更します。
-4. すべてのホストが同じバージョンの Agent を実行するように、`option_settings` の下に `DD_AGENT_VERSION` を設定して特定の Agent バージョンを固定することをお勧めします。
-5. [Elastic Beanstalk コンソール][6]、[EB CLI][7]、または [AWS CLI][8] でアプリケーションをデプロイします。
+2. [99datadog.config][3] をダウンロードし、`.ebextensions` フォルダに入れます。
+3. `/etc/datadog-agent/datadog.yaml` のファイルテンプレート内の `api_key` の値を、お使いの [Datadog API キー][4]で変更します。
+4. Agent が正しい Datadog ロケーションにデータを送信するために、`/etc/datadog-agent/datadog.yaml` の `site` の値を Datadog リージョンに変更します (例: {{&lt; region-param key="dd_site" code="true" &gt;}})。
+5. すべてのホストが同じバージョンの Agent を実行するように、`option_settings` の下に `DD_AGENT_VERSION` を設定して特定の Agent バージョンを固定します。
+6. [Elastic Beanstalk コンソール][5]、[EB CLI][6]、または [AWS CLI][7] でアプリケーションをデプロイします。
 
-`99datadog.config` の `"/configure_datadog_yaml.sh"` セクションを更新することで、`datadog.yaml` にさらに設定を追加します。以下のラインで Datadog Process Agent が有効になります。
+Agent の設定は `/etc/datadog-agent/datadog.yaml` に追加することができます。
+
+例えば、ライブプロセスモニタリングを有効にするには
 
 ```text
-echo -e "process_config:\n  enabled: \"true\"\n" >> /etc/datadog-agent/datadog.yaml
+process_config:
+  enabled: "true"
 ```
 
 #### トレースの収集
 
-アプリケーションがコンテナ化されておらず、Datadog Agent が `99datadog.config` で構成されているとき、アプリケーションが[トレーシングライブラリセットアップ][9]でインスツルメントされている場合は、追加のコンフィギュレーションなしでトレーシングが有効になります。
-
-{{< site-region region="us3,eu,gov" >}} 
-環境変数 `DD_SITE` を {{< region-param key="dd_site" code="true" >}} に設定して、Agent が正しい Datadog の場所にデータを送信するようにします。<p></p>
-{{< /site-region >}}
-
+アプリケーションがコンテナ化されておらず、Datadog Agent が `99datadog.config` で構成されているとき、アプリケーションが[トレーシングライブラリセットアップ][8]でインスツルメントされている場合は、追加のコンフィギュレーションなしでトレーシングが有効になります。
 
 
 [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/ebextensions.html
 [2]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/applications-sourcebundle.html
 [3]: https://docs.datadoghq.com/ja/config/99datadog.config
-[4]: https://docs.datadoghq.com/ja/config/99datadog-amazon-linux-2.config
-[5]: https://app.datadoghq.com/account/settings#api
-[6]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-console-ebextensions
-[7]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-ebcli
-[8]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-awscli
-[9]: https://docs.datadoghq.com/ja/tracing/setup/
+[4]: https://app.datadoghq.com/organization-settings/api-keys
+[5]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-console-ebextensions
+[6]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-ebcli
+[7]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-awscli
+[8]: https://docs.datadoghq.com/ja/tracing/setup/
+{{% /tab %}}
+
+{{% tab "コンテナなし (Windows)" %}}
+
+コンテナなしのセットアップの場合、[コンフィギュレーションファイル (.ebextensions) による高度な環境のカスタマイズ][1]を使用して、Datadog Agent を Elastic Beanstalk にインストールします。
+
+1. [アプリケーションソースバンドル][2]のルートに `.ebextensions` という名前のフォルダーを作成します。
+2. [99datadog-windows.config][3] をダウンロードし、`.ebextensions` フォルダに移動します。
+3. `99datadog-windows.config` で、`APIKEY` の値を [Datadog API キー][4]に置き換えます。
+4. (オプション) `99datadog-windows.config` ファイルは、トレースを生成するために .NET APM トレースライブラリを追加します。APM を有効にしない場合は、`packages`セクション、`02_setup-APM1`セクション、`03_setup-APM2` セクションを削除します。
+5. (オプション) 環境変数を追加する必要がある場合は、`99datadog-windows.config` の `00_setup-env1` セクションで環境変数を設定します。環境変数を設定する必要がない場合は、このセクションを削除してもかまいません。
+6. [Elastic Beanstalk コンソール][5]、[EB CLI][6]、または [AWS CLI][7] でアプリケーションをデプロイします。
+
+#### トレースの収集
+
+アプリケーションがコンテナ化されておらず、Datadog Agent が `99datadog-windows.config` で構成されているとき、追加のコンフィギュレーションなしでトレーシングが有効になります。トレーシングのインスツルメンテーションについては、[Datadog APM のセットアップ][8]を参照してください。
+
+
+[1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/ebextensions.html
+[2]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/applications-sourcebundle.html
+[3]: https://docs.datadoghq.com/ja/config/99datadog-windows.config
+[4]: https://app.datadoghq.com/organization-settings/api-keys
+[5]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-console-ebextensions
+[6]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-ebcli
+[7]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-awscli
+[8]: https://docs.datadoghq.com/ja/tracing/setup/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -301,7 +330,7 @@ echo -e "process_config:\n  enabled: \"true\"\n" >> /etc/datadog-agent/datadog.y
 ```text
  "containerDefinitions": [    {
       "name": "dd-agent",
-      "image": "public.ecr.aws/datadog/agent:latest",
+      "image": "datadog/agent:latest",
       "environment": [
           {
               "name": "DD_API_KEY",
@@ -352,7 +381,7 @@ echo -e "process_config:\n  enabled: \"true\"\n" >> /etc/datadog-agent/datadog.y
 {{< get-metrics-from-git "amazon_elasticbeanstalk" >}}
 
 
-AWS から取得される各メトリクスには、ホスト名やセキュリティグループなど、AWS コンソールに表示されるタグと同じタグが割り当てられます。
+AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
 ### イベント
 

@@ -1,42 +1,59 @@
 ---
+app_id: php-apcu
+app_uuid: ec09379e-851f-4ecc-be78-de5297087994
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: php_apcu.cache.mem_size
+      metadata_path: metadata.csv
+      prefix: php_apcu.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: PHP APCu
   monitors:
     '[php_apcu] Cache Full has been detected': assets/monitors/php-apcu_expunges.json
     '[php_apcu] Detected High Cache Usage': assets/monitors/php-apcu_high_usage.json
-  saved_views: {}
-  service_checks: assets/service_checks.json
-categories:
-- ''
-creates_events: false
-ddtype: check
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: noname@withgod.jp
+  support_email: noname@withgod.jp
+categories: []
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/php_apcu/README.md
-display_name: PHP APCu
+display_on_public_website: true
 draft: false
 git_integration_title: php_apcu
-guid: d6b2f21e-8a91-4c5a-98c3-647af53065b7
 integration_id: php-apcu
 integration_title: PHP APCu
 integration_version: 0.0.2
 is_public: true
 kind: integration
-maintainer: noname@withgod.jp
-manifest_version: 1.0.0
-metric_prefix: php_apcu.
-metric_to_check: php_apcu.cache.mem_size
+manifest_version: 2.0.0
 name: php_apcu
-public_title: Datadog-PHP APCu インテグレーション
+oauth: {}
+public_title: PHP APCu
 short_description: PHP APCu のメモリ内データキャッシュを監視します。
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  configuration: README.md#Setup
+  description: PHP APCu のメモリ内データキャッシュを監視します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: PHP APCu
 ---
 
 

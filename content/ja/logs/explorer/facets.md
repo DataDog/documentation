@@ -199,6 +199,8 @@ title: ログファセット
 
 新しいファセットを作成するのではなく、常に既存のファセットを使用することを習慣にすると良いでしょう（[ファセットのエイリアス設定](#alias-facets)セクションを参照）。類似した性質の情報に一意のファセットを使用すると、チーム間のコラボレーションが促されます。
 
+JSON オブジェクトの配列にファセットを作成するには、まず [grok パーサー][28]を使って属性を抽出し、その属性のファセットを作成します。
+
 **注**: ファセットが作成されると、そのコンテンツは**どちらか**のインデックスに流れる**すべての新しいログに対して**入力されます。ログ管理ソリューションを最適な形で利用するため、Datadog では最大 1000 ファセットで使用することをおすすめしています。
 
 #### ログサイドパネル
@@ -261,7 +263,7 @@ _エイリアス設定された_ファセットを_標準_ファセットにエ�
 - ファセットの鉛筆アイコンをクリックします。
 - **Delete** をクリックします。
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -283,3 +285,4 @@ _エイリアス設定された_ファセットを_標準_ファセットにエ�
 [25]: /ja/logs/log_configuration/attributes_naming_convention/#reserved-attributes
 [26]: /ja/logs/log_configuration/attributes_naming_convention
 [27]: /ja/logs/indexes/#indexes
+[28]: /ja/logs/log_configuration/parsing/?tab=matchers#nested-json

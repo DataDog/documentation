@@ -1,23 +1,26 @@
 ---
-title: Ajouter des tags de span et filtrer ou regrouper les données de performance de votre application
-kind: guide
 further_reading:
-  - link: /tracing/guide/alert_anomalies_p99_database/
-    tag: "3\_minutes"
-    text: Être alerté en cas de latence au 99e centile anormale pour un service de base de données
-  - link: /tracing/guide/week_over_week_p50_comparison/
-    tag: "2\_minutes"
-    text: Comparer la latence d'un service avec celle de la semaine précédente
-  - link: /tracing/guide/apm_dashboard/
-    tag: "4\_minutes"
-    text: Créer un dashboard pour suivre et corréler les métriques APM
-  - link: /tracing/guide/slowest_request_daily/
-    tag: "3\_minutes"
-    text: Débuguer la trace la plus lente sur l'endpoint le plus lent d'un service web
-  - link: /tracing/guide/
-    tag: ''
-    text: Tous les guides
+- link: /tracing/guide/alert_anomalies_p99_database/
+  tag: 3 minutes
+  text: Être alerté en cas de latence au 99e centile anormale pour un service de base
+    de données
+- link: /tracing/guide/week_over_week_p50_comparison/
+  tag: 2 minutes
+  text: Comparer la latence d'un service avec celle de la semaine précédente
+- link: /tracing/guide/apm_dashboard/
+  tag: 4 minutes
+  text: Créer un dashboard pour suivre et corréler les métriques APM
+- link: /tracing/guide/slowest_request_daily/
+  tag: 3 minutes
+  text: Débuguer la trace la plus lente sur l'endpoint le plus lent d'un service web
+- link: /tracing/guide/
+  tag: ''
+  text: Tous les guides
+kind: guide
+title: Ajouter des tags de span et filtrer ou regrouper les données de performance
+  de votre application
 ---
+
 _Temps de lecture : 7 minutes_
 
 {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_6.mp4" alt="Vue Analytics" video="true"  style="width:90%;">}}
@@ -91,10 +94,8 @@ require 'ddtrace'
 class ShoppingCartController < ApplicationController
   # GET /shopping_cart
   def index
-    # Get the active span
-    current_span = Datadog.tracer.active_span
-    # customer_id -> 254889
-    current_span.set_tag('customer.id', params.permit([:customer_id])) unless current_span.nil?
+    # Récupérer la span active et définir customer_id -> 254889
+    Datadog::Tracing.active_span&.set_tag('customer.id', params.permit([:customer_id]))
 
     # [...]
   end
@@ -201,16 +202,14 @@ L'interface utilisateur de Datadog utilise les tags pour définir des métadonn�
 <?php
   namespace App\Http\Controllers;
 
-  use DDTrace\GlobalTracer;
-
   class ShoppingCartController extends Controller
   {
       public shoppingCartAction (Request $request) {
           // Récupérer la span active
-          $span = GlobalTracer::get()->getActiveSpan();
+          $span = \DDTrace\active_span();
           if (null !== $span) {
               // customer_id -> 254889
-              $span->setTag('customer_id', $request->get('customer_id'));
+              $span->meta['customer_id'] = $request->get('customer_id');
           }
 
           // [...]
@@ -282,12 +281,12 @@ Enfin, vous pouvez également afficher l'ensemble des traces associées à votre
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/tracing/visualization/#trace
-[2]: /fr/tracing/visualization/#spans
-[3]: /fr/tracing/visualization/#span-tags
-[4]: /fr/tracing/visualization/#resources
-[5]: /fr/tracing/visualization/#services
-[6]: https://app.datadoghq.com/apm/search
+[1]: /fr/tracing/glossary/#trace
+[2]: /fr/tracing/glossary/#spans
+[3]: /fr/tracing/glossary/#span-tags
+[4]: /fr/tracing/glossary/#resources
+[5]: /fr/tracing/glossary/#services
+[6]: https://app.datadoghq.com/apm/traces
 [7]: /fr/tracing/trace_explorer/#live-search-for-15-minutes
 [8]: https://app.datadoghq.com/apm/analytics
 [9]: /fr/tracing/trace_explorer/query_syntax/

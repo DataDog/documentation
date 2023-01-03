@@ -45,7 +45,8 @@ Datadog Agent をインストールしたら、[Agent のメイン構成ファ�
 
 ```yaml
 process_config:
-    enabled: 'true'
+  process_collection:
+    enabled: true
 ```
 
 `enabled` の値は文字列で、以下のオプションがあります。

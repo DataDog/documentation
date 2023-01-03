@@ -35,7 +35,7 @@ Note that the function <code>\DDTrace\current_context()</code> has been introduc
 
 To connect your logs and traces together, your logs must contain the `dd.trace_id` and `dd.span_id` attributes that respectively contain your trace ID and your span ID.
 
-If you are not using a [Datadog Log Integration][1] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id` and `dd.span_id` are being parsed as strings and remapped thanks to the [Trace Remapper][2]. More information can be found in the [Why can't I see my correlated logs in the Trace ID panel?][3] FAQ.
+If you are not using a [Datadog Log Integration][1] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id` and `dd.span_id` are being parsed as strings and remapped thanks to the [Trace Remapper][2]. More information can be found in [Correlated Logs Not Showing Up in the Trace ID Panel][3].
 
 For instance, you would append those two attributes to your logs with:
 
@@ -43,7 +43,7 @@ For instance, you would append those two attributes to your logs with:
   <?php
   $context = \DDTrace\current_context();
   $append = sprintf(
-      ' [dd.trace_id=%d dd.span_id=%d]',
+      ' [dd.trace_id=%s dd.span_id=%s]',
       $context['trace_id'],
       $context['span_id']
   );
@@ -51,14 +51,14 @@ For instance, you would append those two attributes to your logs with:
 ?>
 ```
 
-If the logger implements the [**monolog/monolog** library][4], use `Logger::pushProcessor()` to automatically append the identifiers to all log messages:
+If the logger implements the [**monolog/monolog** library][4], use `Logger::pushProcessor()` to automatically append the identifiers to all log messages. For monolog v1:
 
 ```php
 <?php
   $logger->pushProcessor(function ($record) {
       $context = \DDTrace\current_context();
       $record['message'] .= sprintf(
-          ' [dd.trace_id=%d dd.span_id=%d]',
+          ' [dd.trace_id=%s dd.span_id=%s]',
           $context['trace_id'],
           $context['span_id']
       );
@@ -67,12 +67,27 @@ If the logger implements the [**monolog/monolog** library][4], use `Logger::push
 ?>
 ```
 
+For monolog v2:
+
+```php
+<?php
+  $logger->pushProcessor(function ($record) {
+      $context = \DDTrace\current_context();
+      return $record->with(message: $record['message'] . sprintf(
+          ' [dd.trace_id=%s dd.span_id=%s]',
+          $context['trace_id'],
+          $context['span_id']
+      ));
+    });
+  ?>
+```
+
 If your application uses json logs format instead of appending trace_id and span_id to the log message you can add first-level key "dd" containing these ids:
 
 ```php
 <?php
   $context = \DDTrace\current_context();
-  $logger->pushProcessor(function ($record) {
+  $logger->pushProcessor(function ($record) use ($context) {
       $record['dd'] = [
           'trace_id' => $context['trace_id'],
           'span_id'  => $context['span_id'],
@@ -89,5 +104,5 @@ If your application uses json logs format instead of appending trace_id and span
 
 [1]: /logs/log_collection/php/
 [2]: /logs/log_configuration/processors/#trace-remapper
-[3]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom
+[3]: /tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=custom
 [4]: https://github.com/Seldaek/monolog

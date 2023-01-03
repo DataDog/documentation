@@ -1,0 +1,32 @@
+{
+  "title": "Example-Create_a_new_dashboard_with_slo_list_widget",
+  "description": "",
+  "widgets": [
+    {
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 60,
+        "height": 21
+      },
+      "definition": {
+        "title_size": "16",
+        "title_align": "left",
+        "type": "slo_list",
+        "requests": [
+          {
+            "query": {
+              "query_string": "env:prod AND service:my-app",
+              "limit": 75
+            },
+            "request_type": "slo_list"
+          }
+        ]
+      }
+    }
+  ],
+  "template_variables": [],
+  "layout_type": "free",
+  "is_read_only": false,
+  "notify_list": []
+}

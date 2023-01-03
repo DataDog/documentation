@@ -1,6 +1,6 @@
 ---
 
-title: APM & Continuous Profiler
+title: APM
 kind: documentation
 description: Instrument your code to improve performance
 further_reading:
@@ -107,7 +107,7 @@ Traces start in your instrumented applications and flow into Datadog. For high-t
 [2]: /tracing/trace_collection/dd_libraries/java
 [3]: /tracing/trace_collection/proxy_setup/
 [4]: /serverless/distributed_tracing
-[5]: /tracing/trace_collection/open_standards/
+[5]: /opentelemetry/otel_tracing/
 [6]: /tracing/trace_pipeline/ingestion_controls/
 [7]: /tracing/trace_pipeline/trace_retention/#retention-filters
 [8]: /tracing/trace_pipeline/generate_metrics/
@@ -118,4 +118,4 @@ Traces start in your instrumented applications and flow into Datadog. For high-t
 [13]: /tracing/services/services_map/
 [14]: /tracing/services/service_page/
 [15]: /tracing/services/deployment_tracking/
-[16]: /tracing/profiler/
+[16]: /profiler/

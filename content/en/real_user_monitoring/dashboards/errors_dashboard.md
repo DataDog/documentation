@@ -2,14 +2,14 @@
 title: RUM Error Dashboard
 kind: documentation
 further_reading:
-    - link: '/real_user_monitoring/explorer'
-      tag: 'Documentation'
-      text: 'Learn about the RUM Explorer'
+- link: '/real_user_monitoring/explorer'
+  tag: 'Documentation'
+  text: 'Learn about the RUM Explorer'
 ---
 
 ## Overview
 
-The errors dashboard provides insights about your applications’ errors. It is separated in two sections:
+The errors dashboard provides insights about your applications’ errors. It shows:
 
 - **General errors**:
     Visualize which pages, browser, and countries are the most affected by frontend errors.
@@ -18,7 +18,7 @@ The errors dashboard provides insights about your applications’ errors. It is 
 
 {{< img src="real_user_monitoring/dashboards/errors_dashboard.png" alt="Error Dashboard" >}}
 
-For more information about the information displayed, see [RUM Browser Data Collected][1].
+For more information about the data displayed, see [RUM Browser Data Collected][1].
 
 ## Further Reading
 

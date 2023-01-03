@@ -60,7 +60,7 @@ To track the count of sessions priced under a given RUM SKU, navigate to the [Da
 
 ## Alert on unexpected spikes
 
-You can the RUM metric in [anomaly detection monitors][3].
+You can use the RUM metric in [anomaly detection monitors][3].
 
 {{< img src="real_user_monitoring/guide/monitor-your-rum-usage/anomaly-monitor-notification.png" alt="Example notification message in the Anomaly monitor" style="width:90%" >}}
 

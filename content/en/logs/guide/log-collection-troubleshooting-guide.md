@@ -43,7 +43,7 @@ And then by sending a log like the following:
 
 ```yaml
 logs_config:
-  use_http: true
+  force_use_http: true
 ```
 
 See the [HTTPS log forwarding section][4] for more information.

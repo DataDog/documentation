@@ -1,60 +1,115 @@
 ---
-"assets":
-  "dashboards":
-    "Insights Overview": assets/dashboards/overview.json
-  "metrics_metadata": metadata.csv
-  "monitors": {}
-  "saved_views": {}
-  "service_checks": assets/service_checks.json
-"author":
-  "homepage": "https://www.fairwinds.com"
-  "name": Fairwinds
-"categories":
+app_id: fairwinds-insights
+app_uuid: a488d774-fd45-4765-b947-e48792c6ab32
+assets:
+  dashboards:
+    Insights Overview: assets/dashboards/overview.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: true
+    metrics:
+      check: fairwinds.insights.action_items
+      metadata_path: metadata.csv
+      prefix: fairwinds.insights.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Fairwinds Insights
+author:
+  homepage: https://www.fairwinds.com
+  name: Fairwinds
+  sales_email: datadog-marketplace@fairwinds.com
+  support_email: insights@fairwinds.com
+  vendor_id: fairwinds
+categories:
 - マーケットプレイス
 - containers
 - コスト管理
 - security
-"creates_events": true
-"ddtype": "crawler"
-"dependencies": []
-"display_name": "Fairwinds Insights"
-"draft": false
-"git_integration_title": "fairwinds_insights"
-"guid": "fd4bd190-d57d-449b-9880-76cbf8325a3e"
-"integration_id": "fairwinds-insights"
-"integration_title": "Fairwinds Insights"
-"is_public": true
-"kind": "integration"
-"maintainer": "insights@fairwinds.com"
-"manifest_version": "1.0.0"
-"metric_prefix": "fairwinds.insights."
-"metric_to_check": "fairwinds.insights.action_items"
-"name": "fairwinds_insights"
-"pricing":
-- "billing_type": tag_count
-  "metric": datadog.marketplace.fairwinds.insights
-  "tag": insights_cluster
-  "unit_label": Kubernetes クラスター
-  "unit_price": !!int "699"
-"public_title": "Fairwinds Insights"
-"short_description": "業務の遂行に不可欠な Kubernetes アプリケーションを保護、最適化します。"
-"support": "パートナー"
-"supported_os":
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: fairwinds_insights
+integration_id: fairwinds-insights
+integration_title: Fairwinds Insights
+integration_version: ''
+is_public: true
+kind: integration
+legal_terms:
+  eula: assets/eula.pdf
+manifest_version: 2.0.0
+name: fairwinds_insights
+oauth: {}
+pricing:
+- billing_type: tag_count
+  includes_assets: true
+  metric: datadog.marketplace.fairwinds.insights
+  product_id: insights
+  short_description: Kubernetes セキュリティ・ガバナンスソフトウェア
+  tag: insights_node
+  unit_label: Kubernetes ノード
+  unit_price: 100
+public_title: Fairwinds Insights
+short_description: 業務の遂行に不可欠な Kubernetes アプリケーションを保護、最適化します
+supported_os:
 - linux
-- mac_os
+- mac os
 - windows
-"terms":
-  "eula": assets/eula.pdf
-  "legal_email": datadog-marketplace@fairwinds.com
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Mac OS
+  - Supported OS::Windows
+  - Category::Marketplace
+  - Category::Containers
+  - Category::Cost Management
+  - Category::Security
+  - Offering::Software License
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: 業務の遂行に不可欠な Kubernetes アプリケーションを保護、最適化します
+  media:
+  - caption: Fairwinds Insights は、セキュリティアラート、ガードレール、コンプライアンスの知見とコスト最適化のアドバイスを提供する
+      Kubernetes ガバナンスおよびセキュリティソフトウェアです。Fairwinds Insights は Datadog と統合するため、一箇所ですべてのレポートを確認することができます。
+    image_url: images/Video_Front_Cover.png
+    media_type: ビデオ
+    vimeo_id: 619368230
+  - caption: Fairwinds Insights Admission Controller は、新しいリソースがクラスターに追加されるたびに実行されます。リソースが組織のポリシーに違反している場合、Admission
+      Controller はそれを拒否し、クライアントに通知します。
+    image_url: images/Fairwinds_Insights_Admission_Controller_Image_v1.png
+    media_type: image
+  - caption: Fairwinds Insights は、複数のクラスターをセキュリティ設定に照らして継続的に監視し、リスクを低減してベストプラクティスが守られているかどうかを確認します。Insights
+      は、コンテナと Kubernetes のリスクをピンポイントで特定し、リスクに優先順位を付け、修正ガイダンスとステータスの追跡を提供します。
+    image_url: images/Fairwinds_Insights_Automate_Kubernetes_Policies_Image_v1.png
+    media_type: image
+  - caption: チームは、OPA を介してカスタマイズされたポリシーを構築し、施行することができ、CI/CD パイプライン、アドミッションコントローラー、クラスター内エージェントを含む
+      Fairwinds Insights のあらゆる部分に統合することができます。Insights には、OPA テンプレートのライブラリが含まれています。
+    image_url: images/Fairwinds_Insights_Customize_Open_Policy_Agent_Image_v1.png
+    media_type: image
+  - caption: Insights は、CPU とメモリの使用状況を監視し、リソースの制限や要求に関する推奨事項を提供します。Kubernetes のワークロードの
+      CPU とメモリの使用効率を最大化します。
+    image_url: images/Fairwinds_Insights_Optimize_Kubernetes_Resources_Image_v1.png
+    media_type: image
+  - caption: Fairwinds Insights は CI/CD パイプラインに緊密に統合され、セキュリティを左遷します。DevOps チームは、CI/CD
+      を通じて設定ミスを防ぎ、手動で介入することなく、開発者に修正アドバイスを提供することができます。開発者はセーフティネットがある状態で自由に開発することができます。
+    image_url: images/Fairwinds_Insights_Shift_Left_Security_Image_v1.png
+    media_type: image
+  - caption: Fairwinds Insights は、コンテナランタイムの監視と CI/CD プロセスへの統合を実現します。Insights は、コンテナ内の既知の脆弱性を追跡し、発見された脆弱性を重要度によって優先順位付けし、改善策を提供します。Insights
+      は、チケッティングや割り当てワークフローと統合し、修復のステータスを追跡します。
+    image_url: images/Fairwinds_Insights_VulnerabilityScanning_Image_v1.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Fairwinds Insights
+  uninstallation: README.md#Uninstallation
 ---
 
 
 
 ## 概要
 
-{{< img src="marketplace/fairwinds_insights/images/dashboard.png" alt="ダッシュボード" >}}
-
-### 業務の遂行に不可欠な Kubernetes アプリケーションを保護、最適化するためのソフトウェア。
+業務の遂行に不可欠な Kubernetes アプリケーションを保護、最適化するためのソフトウェア。
 
 #### 開発からオペレーションまでのハンドオフを効率化
 
@@ -101,9 +156,6 @@ Fairwinds Insights にサービスのチェックは含まれません。
 
 [こちら](https://insights.docs.fairwinds.com/)でドキュメントをご確認いただけます。セットアップ、インテグレーションのほか、Fairwinds Insights を最大限に活用するための実際の使用法などをご紹介しています。
 
----
-このアプリケーションは、マーケットプレイスにて利用可能で、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、[こちらをクリック](https://app.datadoghq.com/marketplace/app/fairwinds-insights/pricing)してください。
-
 ### よくある質問
 
 **Fairwinds Insights の仕組みについて教えてください。**
@@ -141,3 +193,5 @@ Insights のキャンセルおよび返金ポリシー:
 
 Fairwinds Insights は月々の定額利用で提供されるため、お客様は Datadog マーケットプレイスのアカウントを使用していつでもご利用を中止することが可能です。定額利用を中止した場合、その時点で有効な月間利用期間の残りの分のみが請求されます。Insights では、すでにお支払いいただいた料金の返金はいたしかねます。
 
+---
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/fairwinds-insights" target="_blank">こちらをクリック</a>してください。

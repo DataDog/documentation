@@ -4,9 +4,9 @@ kind: guide
 aliases:
   - /real_user_monitoring/faq/session_replay_service_worker/
 further_reading:
-   - link: '/real_user_monitoring/session_replay/'
-     tag: 'Documentation'
-     text: 'Learn about Session Replay'
+- link: '/real_user_monitoring/session_replay/'
+  tag: 'Documentation'
+  text: 'Learn about Session Replay'
 ---
 
 ## Overview

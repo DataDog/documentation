@@ -1,15 +1,16 @@
 ---
 categories:
-  - notification
-  - monitoring
-ddtype: crawler
+- notification
+- monitoring
 dependencies: []
 description: VictorOps を Datadog のアラートとイベントで通知チャンネルとして使用。
-doc_link: 'https://docs.datadoghq.com/integrations/victorops/'
+doc_link: https://docs.datadoghq.com/integrations/victorops/
 draft: false
 git_integration_title: victorops
 has_logo: true
+integration_id: victorops
 integration_title: VictorOps
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -18,6 +19,7 @@ public_title: Datadog-VictorOps インテグレーション
 short_description: VictorOps を Datadog のアラートとイベントで通知チャンネルとして使用。
 version: '1.0'
 ---
+
 ## 概要
 
 Datadog-VictorOps インテグレーションを使用して、Datadog のアラートを VictorOps に送信し、ルーティングとエスカレーションに対して高精度な制御を行うことができます。**@victorops** を使用して、以下の方法でアラートを作成することで、問題を迅速に見つけ、解決までの時間を短縮できます。
@@ -57,12 +59,9 @@ VictorOps インテグレーションには、サービスのチェック機能�
 
 ### ナレッジベース
 
-#### VictorOps ルーティングキー
+#### ルーティングキー
 
-特定の VictorOps ユーザーに直接アラートを送信できます。
-Datadog で使用するすべてのルーティングキーをリストしてください (何も設定しなかった場合、VictorOps はアラートをデフォルトのグループに送信します)。
-
-次に、@victorops を使用して、アラートを受け取る VictorOps エンドポイントを選択できます。
+特定の VictorOps ユーザー宛にアラートを送信するには、Datadog におけるすべてのルーティングキーをリストします。キーが設定されていない場合、VictorOps は既定のグループにアラートを送信します。その後、`@victorops` を使用してアラートを受信する VictorOps エンドポイントを選択します。
 
 名前には、特殊文字を使用できません。英大文字/小文字、数字、'\_'、'-' を使用できます。
 

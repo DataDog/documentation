@@ -1,41 +1,63 @@
 ---
+app_id: azure-active-directory
+app_uuid: 8c4717a8-93f0-4de6-b79b-1e7f52c94895
 assets:
-  dashboards: {}
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Azure Active Directory
   logs:
     source: azure.active_directory
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
-  - azure
-  - ログの収集
-  - セキュリティ
-creates_events: false
-ddtype: check
+- azure
+- ログの収集
+- セキュリティ
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/azure_active_directory/README.md'
-display_name: Azure Active Directory
+- https://github.com/DataDog/integrations-core/blob/master/azure_active_directory/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: azure_active_directory
-guid: 1f6dbea8-db4a-4b0e-bfe8-f69efb3e877b
 integration_id: azure-active-directory
 integration_title: Azure Active Directory
+integration_version: ''
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: azure_active_directory.
-metric_to_check: ''
+manifest_version: 2.0.0
 name: azure_active_directory
-public_title: Datadog-Azure Active Directory インテグレーション
+oauth: {}
+public_title: Azure Active Directory
 short_description: Azure Active Directory アクティビティログを分析
-support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Azure
+  - Category::Log Collection
+  - Category::Security
+  configuration: README.md#Setup
+  description: Azure Active Directory アクティビティログを分析
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Azure Active Directory
 ---
+
+
+
 ## 概要
 
 Azure Active Directory は、Microsoft Azure によるクラウドホスト型 Active Directory 製品です。

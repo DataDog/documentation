@@ -126,7 +126,7 @@ window.DD_LOGS.init({
 | パラメーター             | タイプ                                                                      | 必須 | デフォルト         | 説明                                                                                                                                     |
 | --------------------- | ------------------------------------------------------------------------- | -------- | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
 | `clientToken`         | 文字列                                                                    | はい      |                 | [Datadog クライアントトークン][2]。                                                                                                                    |
-| `site`                | 文字列                                                                    | はい      | `datadoghq.com` | 組織の Datadog サイト。US: `datadoghq.com`、EU: `datadoghq.eu`                                                                  |
+| `site`                | 文字列                                                                    | はい      | `datadoghq.com` | 組織の Datadog サイトパラメーター][9]。                                                                  |
 | `service`             | 文字列                                                                    | いいえ       |                 | アプリケーションのサービス名。[タグの構文要件][7]に従っている必要があります。                                                       |
 | `env`                 | 文字列                                                                    | いいえ       |                 | アプリケーションの環境 (例: prod、pre-prod、staging など)。[タグの構文要件][7]に従っている必要があります。                    |
 | `version`             | 文字列                                                                    | いいえ       |                 | アプリケーションのバージョン。例: 1.2.3、6c44da20、2020.02.13 など。[タグの構文要件][7]に従っている必要があります。                    |
@@ -485,9 +485,18 @@ if (window.DD_LOGS) {
 
 Datadog ブラウザログ SDK を初期化すると、以下のことが可能になります。
 
-- `setLoggerGlobalContext (context: Context)` API を使用して、すべてのロガーのコンテキスト全てを設定。
-- `addLoggerGlobalContext (key: string, value: any)` API を使用して、あなたのすべてのロガーにコンテキストを追加。
-- `getLoggerGlobalContext ()` API を使用して、グローバルコンテキスト全体を取得。
+-  `setGlobalContext (context: object)` API を使用して、すべてのロガーのコンテキスト全てを設定。
+- `setGlobalContextProperty (key: string, value: any)` API を使用して、すべてのロガーにコンテキストを追加。
+- `getGlobalContext ()` API を使用して、グローバルコンテキスト全体を取得。
+- `removeGlobalContextProperty (key: string)` API を使用して、コンテキストプロパティを削除。
+- `clearGlobalContext ()` API を使用して、既存のコンテキストプロパティをすべてクリア。
+
+> Log Browser SDK v4.17.0 では、いくつかの API の名称が更新されました。
+>
+> - `getLoggerGlobalContext` に代わって `getGlobalContext`
+> - `setLoggerGlobalContext` に代わって `setGlobalContext`
+> - `addLoggerGlobalContext` に代わって `setGlobalContextProperty`
+> - `removeLoggerGlobalContext` に代わって `removeGlobalContextProperty`
 
 ##### NPM
 
@@ -496,11 +505,19 @@ NPM の場合は以下を使用します。
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs'
 
-datadogLogs.setLoggerGlobalContext({ env: 'staging' })
+datadogLogs.setGlobalContext({ env: 'staging' })
 
-datadogLogs.addLoggerGlobalContext('referrer', document.referrer)
+datadogLogs.setGlobalContextProperty('referrer', document.referrer)
 
-const context = datadogLogs.getLoggerGlobalContext() // => {env: 'staging', referrer: ...}
+datadogLogs.getGlobalContext() // => {env: 'staging', referrer: ...}
+
+datadogLogs.removeGlobalContextProperty('referrer')
+
+datadogLogs.getGlobalContext() // => {env: 'staging'}
+
+datadogLogs.clearGlobalContext()
+
+datadogLogs.getGlobalContext() // => {}
 ```
 
 #### CDN 非同期
@@ -509,15 +526,31 @@ CDN 非同期の場合は以下を使用します。
 
 ```javascript
 DD_LOGS.onReady(function () {
-  DD_LOGS.setLoggerGlobalContext({ env: 'staging' })
+DD_LOGS.setGlobalContext({ env: 'staging' })
 })
 
 DD_LOGS.onReady(function () {
-  DD_LOGS.addLoggerGlobalContext('referrer', document.referrer)
+DD_LOGS.setGlobalContextProperty('referrer', document.referrer)
 })
 
 DD_LOGS.onReady(function () {
-  var context = DD_LOGS.getLoggerGlobalContext() // => {env: 'staging', referrer: ...}
+DD_LOGS.getGlobalContext() // => {env: 'staging', referrer: ...}
+})
+
+DD_LOGS.onReady(function () {
+DD_LOGS.removeGlobalContextProperty('referrer')
+})
+
+DD_LOGS.onReady(function () {
+DD_LOGS.getGlobalContext() // => {env: 'staging'}
+})
+
+DD_LOGS.onReady(function () {
+DD_LOGS.clearGlobalContext()
+})
+
+DD_LOGS.onReady(function () {
+DD_LOGS.getGlobalContext() // => {}
 })
 ```
 
@@ -528,11 +561,19 @@ DD_LOGS.onReady(function () {
 CDN 同期の場合は以下を使用します。
 
 ```javascript
-window.DD_LOGS && DD_LOGS.setLoggerGlobalContext({ env: 'staging' })
+window.DD_LOGS && DD_LOGS.setGlobalContext({ env: 'staging' })
 
-window.DD_LOGS && DD_LOGS.addLoggerGlobalContext('referrer', document.referrer)
+window.DD_LOGS && DD_LOGS.setGlobalContextProperty('referrer', document.referrer)
 
-var context = window.DD_LOGS && DD_LOGS.getLoggerGlobalContext() // => {env: 'staging', referrer: ...}
+window.DD_LOGS && DD_LOGS.getGlobalContext() // => {env: 'staging', referrer: ...}
+
+window.DD_LOGS && DD_LOGS.removeGlobalContextProperty('referrer')
+
+window.DD_LOGS && DD_LOGS.getGlobalContext() // => {env: 'staging'}
+
+window.DD_LOGS && DD_LOGS.clearGlobalContext()
+
+window.DD_LOGS && DD_LOGS.getGlobalContext() // => {}
 ```
 
 **注**: `window.DD_LOGS` チェックは、SDK で読み込みエラーが起きた際に問題を防ぐために使用されます。
@@ -541,7 +582,7 @@ var context = window.DD_LOGS && DD_LOGS.getLoggerGlobalContext() // => {env: 'st
 
 ロガーを作成すると、以下のことができます。
 
-- `setContext (context: Context)` API を使用して、すべてのロガーのコンテキスト全てを設定。
+- `setContext (context: object)` API を使用して、すべてのロガーのコンテキスト全てを設定。
 - `addContext (key: string, value: any)` API を使用して、あなたのロガーにコンテキストを追加。
 
 ##### NPM
@@ -673,6 +714,44 @@ window.DD_LOGS && DD_LOGS.logger.setHandler(['<HANDLER1>', '<HANDLER2>'])
 
 **注**: `window.DD_LOGS` チェックは、SDK で読み込みエラーが起きた際に問題を防ぐために使用されます。
 
+### 内部コンテキストにアクセスする
+
+Datadog ブラウザログ SDK が初期化された後、SDK の内部コンテキストにアクセスすることができます。これにより、`session_id` にアクセスすることができます。
+
+```
+getInternalContext (startTime?: 'number' | undefined)
+```
+
+オプションで `startTime` パラメーターを使用すると、特定の時刻のコンテキストを取得することができます。このパラメーターが省略された場合は、現在のコンテキストが返されます。
+
+##### NPM
+
+NPM の場合は、以下を使用します。
+
+```javascript
+import { datadogLogs } from '@datadog/browser-logs'
+
+datadogLogs.getInternalContext() // { session_id: "xxxx-xxxx-xxxx-xxxx" }
+```
+
+#### CDN 非同期
+
+CDN 非同期の場合は、以下を使用します。
+
+```javascript
+DD_LOGS.onReady(function () {
+DD_LOGS.getInternalContext() // { session_id: "xxxx-xxxx-xxxx-xxxx" }
+})
+```
+
+##### CDN 同期
+
+CDN 同期の場合は、以下を使用します。
+
+```javascript
+window.DD_LOGS && window.DD_LOGS.getInternalContext() // { session_id: "xxxx-xxxx-xxxx-xxxx" }
+```
+
 <!-- 注: URL はすべて絶対値でなければなりません -->
 
 [1]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#api-keys
@@ -683,3 +762,4 @@ window.DD_LOGS && DD_LOGS.logger.setHandler(['<HANDLER1>', '<HANDLER2>'])
 [6]: https://docs.datadoghq.com/ja/real_user_monitoring/faq/proxy_rum_data/
 [7]: https://docs.datadoghq.com/ja/getting_started/tagging/#defining-tags
 [8]: https://developer.mozilla.org/en-US/docs/Web/API/Reporting_API
+[9]: https://docs.datadoghq.com/ja/getting_started/site/

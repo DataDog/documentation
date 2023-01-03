@@ -1,8 +1,7 @@
 ---
 categories:
-  - provisioning
-  - configuration & deployment
-ddtype: チェック
+- provisioning
+- configuration & deployment
 dependencies: []
 description: Puppet の実行を追跡。失敗、成功、大きな変更を把握。
 doc_link: https://docs.datadoghq.com/integrations/puppet/
@@ -11,6 +10,7 @@ git_integration_title: puppet
 has_logo: true
 integration_id: puppet
 integration_title: Puppet
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -19,6 +19,7 @@ public_title: Datadog-Puppet インテグレーション
 short_description: Puppet の実行を追跡。失敗、成功、大きな変更を把握。
 version: '1.0'
 ---
+
 ## 概要
 
 Puppet を Datadog に接続して、以下のことができます。

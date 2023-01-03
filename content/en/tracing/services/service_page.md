@@ -34,7 +34,7 @@ Consult on this page:
 * [Out-of-the-box graphs](#out-of-the-box-graphs)
 * [Resources associated to this service][2]
 * [Additional tabs](#additional-tabs)
-    *  [Deployments](#deployments), [Error Tracking](#error-tracking), [Traces](#traces), and more
+    *  [Deployments](#deployments), [Error Tracking](#error-tracking), [Traces](#traces), [Security](#security), and more
 
 ## Service monitor
 
@@ -50,9 +50,9 @@ Enable them directly or create your own [APM monitors][3].
 
 The service page features summary cards with highlights on your service health. Easily spot potential faulty deployments, click into the card to view details or traces of the latest deployment, or view all deployments on this service. See new issues flagged on your service through our integration with [Error Tracking][4], where errors are automatically aggregated into issues.
 
-{{< img src="tracing/visualization/service/summary_cards.jpg" alt="Summary cards"  style="width:100%;">}}
+{{< img src="tracing/visualization/service/summary_cards.png" alt="Summary cards" style="width:100%;">}}
 
-Our [Service Level Objectives (SLOs)][5] and [Incidents][6] summaries allow you to monitor the status of SLOs and ongoing incidents, so that you can keep performance goals top of mind. Click the cards to create a new SLO on the service or declare an incident.
+Our [Service Level Objectives (SLOs)][5] and [Incidents][6] summaries allow you to monitor the status of SLOs and ongoing incidents, so that you can keep performance goals top of mind. Click the cards to create a new SLO on the service or declare an incident. The [security signals][18] summary highlights how your services react to application threats.
 
 {{< img src="tracing/visualization/service/watchdog_insights.png" alt="Watchdog Insights"  style="width:70%;">}}
 
@@ -97,6 +97,8 @@ See Requests, Latency, and Error graphs broken down by resource to identify prob
 Below, there’s a list of [resources][11] associated with your service. Sort the resources for this service by requests, latency, errors, and time, to identify areas of high traffic or potential trouble. Note that these metric columns are configurable (see image below).
 
 {{< img src="tracing/visualization/service/resources_tab.jpg" alt="Resources"  style="width:100%;">}}
+
+Click on a resource to open a side panel that displays the resource's out-of-the-box graphs (about requests, errors, and latency), a resource dependency map, and a span summary table. Use keyboard navigation keys to toggle between resources on the **Resources** list and compare resources in a service. To view the full resource page, click **Open Full Page**.
 
 [Refer to the dedicated resource documentation to learn more][2].
 
@@ -147,6 +149,13 @@ This tab has overview graphs that show which resources have the most issues and 
 
 {{< img src="tracing/visualization/service/error_tracking_side_panel.jpg" alt="Error Tracking tab"  style="width:90%;">}}
 
+### Security
+View security signals on your service, which are automatically created when Datadog detects application attacks impacting your services. The signals identify meaningful threats for you review instead of assessing each individual attack attempt. Read more about [Application Security][18].
+
+This tab has overview graphs that show the timeline of attacks, the types of attacks, and attacker information (Client IP or authenticated user). Click on a security signal to get information about what the detected threat is and what actions you can take to remediate it.
+
+{{< img src="tracing/visualization/service/security_tab.jpg" alt="Security" style="width:90%;">}}
+
 ### Infrastructure
 If your service is running on Kubernetes, you can see an Infrastructure tab on the Service Page. The live Kubernetes Pods table displays detailed information on your pods, such as if memory usage is close to its limit, and allows you to improve resource allocation by seeing if provisioned compute resources exceed what is required for optimal application performance. 
 
@@ -196,6 +205,7 @@ View common patterns in your service’s logs, and use facets like status in the
 [12]: /tracing/services/deployment_tracking/#versions-deployed
 [13]: /getting_started/tagging/unified_service_tagging/?tab=systemmetrics#non-containerized-environment
 [14]: /tracing/metrics/runtime_metrics/
-[15]: /tracing/profiler/
+[15]: /profiler/
 [16]: /tracing/trace_explorer/query_syntax/#facets
 [17]: https://www.datadoghq.com/blog/log-patterns/
+[18]: /security/application_security/how-appsec-works/

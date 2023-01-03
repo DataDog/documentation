@@ -7,7 +7,6 @@ assets:
 categories:
 - os & system
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/upsc/README.md
 display_name: UPSC
@@ -16,7 +15,7 @@ git_integration_title: upsc
 guid: f14607ca-0e30-4c7f-9564-fbdb46ca3030
 integration_id: upsc
 integration_title: UPSC
-integration_version: 1.0.0
+integration_version: 1.0.1
 is_public: true
 kind: インテグレーション
 maintainer: '@platinummonkey'
@@ -24,7 +23,7 @@ manifest_version: 1.0.0
 metric_prefix: upsc.
 metric_to_check: upsc.battery.charge
 name: upsc
-public_title: Datadog-UPSC インテグレーション
+public_title: UPSC
 short_description: UPS バッテリーの UPSC 統計コレクター
 support: contrib
 supported_os:

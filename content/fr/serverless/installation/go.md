@@ -1,83 +1,98 @@
 ---
-title: Instrumenter des applications Go
-kind: documentation
+aliases:
+- /fr/serverless/datadog_lambda_library/go/
 further_reading:
-  - link: serverless/serverless_tagging/
-    tag: Documentation
-    text: Taguer des applications sans serveur
-  - link: serverless/distributed_tracing/
-    tag: Documentation
-    text: Tracer des applications sans serveur
-  - link: serverless/custom_metrics/
-    tag: Documentation
-    text: Envoyer des métriques custom depuis des applications sans serveur
+- link: /serverless/configuration
+  tag: Documentation
+  text: Configurer la surveillance sans serveur
+- link: /serverless/guide/troubleshoot_serverless_monitoring
+  tag: Documentation
+  text: Dépannage de la surveillance sans serveur
+- link: serverless/custom_metrics/
+  tag: Documentation
+  text: Envoyer des métriques custom depuis des applications sans serveur
+kind: documentation
+title: Instrumenter des applications Go sans serveur
 ---
-## Configuration requise
 
-Si vous n'avez pas encore réalisé la configuration :
+<div class="alert alert-warning">Si vos fonctions Lambda Go utilisent utiliser le runtime <code>go1.x</code> et que vous ne pouvez pas passer au runtime <code>provided.al2</code>, vous devez <a href="https://docs.datadoghq.com/serverless/guide/datadog_forwarder_go">instrumenter vos applications à l'aide du Forwarder Datadog</a>.</div>
 
-- Installez [l'intégration AWS][1]. Datadog pourra ainsi ingérer les métriques Lambda depuis AWS.
-- Installez la [fonction Lambda du Forwarder Datadog][2], qui est nécessaire pour l'ingestion des traces, des métriques optimisées, des métriques custom et des logs AWS Lambda.
+<div class="alert alert-warning">Si vos fonctions Lambda sont déployées dans un VPC sans accès à Internet, vous pouvez transmettre des données <a href="/agent/guide/private-link/">en utilisant soit AWS PrivateLink</a> pour le site <code>datadoghq.com</code> de <a href="/getting_started/site/">Datadog</a>, soit <a href="/agent/proxy/">un proxy</a> pour tous les autres sites.
 
-Après avoir installé l'[intégration AWS][1] et le [Forwarder Datadog][2], suivez ces étapes pour instrumenter votre application afin d'envoyer des métriques, des logs et des traces à Datadog.
+## Installation
 
-## Configuration
+{{< tabs >}}
+{{% tab "Framework Serverless" %}}
+
+Le [plug-in Serverless Datadog][1] configure vos fonctions de sorte à ce qu'elles envoient les métriques, les traces et les logs à Datadog via l'[extension Lambda Datadog][2].
+
+Pour installer et configurer le plug-in Serverless Datadog, suivez les étapes suivantes :
+
+### Pour installer le plug-in Serverless Datadog :
+
+```sh
+serverless plugin install --name serverless-plugin-datadog
+```
+
+### Mettez à jour votre fichier`serverless.yml` :
+
+```yaml
+custom:
+  datadog:
+    site: <SITE_DATADOG>
+    apiKeySecretArn: <ARN_SECRET_CLÉ_API_DATADOG>
+```
+
+Renseignez les paramètres fictifs comme suit :
+- Remplacez `<SITE_DATADOG>` par le [site Datadog][3] auquel vous envoyez les données de télémétrie.
+- Remplacez `<ARN_SECRET_CLÉ_API_DATADOG>` par l'ARN du secret AWS où votre [clé d'API Datadog][4] est stockée en toute sécurité. La clé doit être stockée sous forme de chaîne de texte brut (et non un blob JSON). L'autorisation `secretsmanager:GetSecretValue` est requise. Pour un test rapide, vous pouvez également utiliser `apiKey` et définir la clé d'API Datadog sous forme de texte brut.
+
+Pour obtenir plus de détails ainsi que des paramètres supplémentaires, consultez la [documentation du plug-in][4].
+
+[1]: https://docs.datadoghq.com/fr/serverless/serverless_integrations/plugin
+[2]: https://docs.datadoghq.com/fr/serverless/libraries_integrations/extension
+[3]: https://docs.datadoghq.com/fr/getting_started/site/
+[4]: https://app.datadoghq.com/organization-settings/api-keys
+{{% /tab %}}
+{{% tab "Configuration personnalisée" %}}
+### Installer l'extension Lambda Datadog
+
+[Ajoutez la couche Lambda][1] de l'extension Lambda Datadog à vos fonctions Lambda, en utilisant le format d'ARN adapté à votre architecture et région AWS :
+
+```sh
+# Utiliser ce format lorsque Lambda est déployé avec l'architecture x86 dans les régions commerciales d'AWS
+arn:aws:lambda:<RÉGION_AWS>:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
+
+# Utiliser ce format lorsque Lambda est déployé avec l'architecture arm64 dans les régions commerciales d'AWS
+arn:aws:lambda:<RÉGION_AWS>:464622532012:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
+
+# Utiliser ce format lorsque Lambda est déployé avec l'architecture x86 dans les régions GovCloud d'AWS
+arn:aws-us-gov:lambda:<RÉGION_AWS>:002406178527:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
+
+# Utiliser ce format lorsque Lambda est déployé avec l'architecture arm64 dans les régions GovCloud d'AWS
+arn:aws-us-gov:lambda:<RÉGION_AWS>:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
+```
+
+Remplacez `<RÉGION_AWS>` par une région AWS valide, telle que `us-east-1`.
+
+### Configurer les variables d'environnement requises
+
+- Définissez `DD_SITE` sur {{< region-param key="dd_site" code="true" >}} (assurez-vous que le SITE sélectionné à droite est correct).
+- Définissez `DD_API_KEY_SECRET_ARN` sur l'ARN du secret AWS où votre [clé d'API Datadog][3] est stockée en toute sécurité. La clé doit être stockée sous forme de chaîne de texte brut (et non d'un blob JSON). L'autorisation `secretsmanager:GetSecretValue` est requise. Pour effectuer un test rapide, vous pouvez également utiliser `DD_API_KEY` et définir la clé d'API Datadog sous forme de texte brut.
+
+[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+[2]: https://docs.datadoghq.com/fr/getting_started/site/
+[3]: https://app.datadoghq.com/organization-settings/api-keys
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Installer la bibliothèque Lambda Datadog
-
-Vous pouvez installer la [bibliothèque Lambda de Datadog][3] localement en exécutant la commande suivante :
 
 ```
 go get github.com/DataDog/datadog-lambda-go
 ```
 
-### Configurer la fonction
-
-1. Définissez la variable d'environnement `DD_FLUSH_TO_LOG` sur `true`.
-2. Activez [le tracing actif AWS X-Ray][4] pour votre fonction Lambda.
-3. Incorporez la fonction Lambda de votre gestionnaire à l'aide du wrapper fourni par la bibliothèque Lambda de Datadog.
-    ```go
-    package main
-
-    import (
-      "github.com/aws/aws-lambda-go/lambda"
-      "github.com/DataDog/datadog-lambda-go"
-    )
-
-    func main() {
-      // Wrap your lambda handler like this
-      lambda.Start(ddlambda.WrapFunction(myHandler, nil))
-      /* OR with manual configuration options
-      lambda.Start(ddlambda.WrapFunction(myHandler, &ddlambda.Config{
-        BatchInterval: time.Second * 15
-        APIKey: "my-api-key",
-      }))
-      */
-    }
-
-    func myHandler(ctx context.Context, event MyEvent) (string, error) {
-      // ...
-    }
-    ```
-
-### Abonner le Forwarder Datadog aux groupes de logs
-
-Pour pouvoir envoyer des métriques, traces et logs à Datadog, vous devez abonner la fonction Lambda du Forwarder Datadog à chaque groupe de logs de votre fonction.
-
-1. [Si ce n'est pas déjà fait, installez le Forwarder Datadog][2].
-2. [Abonnez le Forwarder Datadog aux groupes de logs de votre fonction][5].
-
-### Tagging de service unifié
-
-Bien que cette opération soit facultative, nous vous recommandons fortement d'ajouter les tags `env`, `service` et `version` à vos applications sans serveur. Pour ce faire, suivez la [documentation relative au tagging de service unifié][6].
-
-## Explorer la surveillance sans serveur de Datadog
-
-Après avoir configuré votre fonction en suivant la procédure ci-dessus, vous devriez pouvoir visualiser vos métriques, logs et traces sur la [page Serverless principale][7].
-
-## Surveiller une logique opérationnelle personnalisée
-
-Si vous souhaitez envoyer une métrique custom, consultez l'exemple de code ci-dessous :
+### Mettre à jour le code de votre fonction Lambda
 
 ```go
 package main
@@ -85,14 +100,22 @@ package main
 import (
   "github.com/aws/aws-lambda-go/lambda"
   "github.com/DataDog/datadog-lambda-go"
+  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+  httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
 )
 
 func main() {
-  // Inclure la fonction handler dans un wrapper
+  // Utiliser un wrapper pour incorporer la fonction Lambda du gestionnaire
   lambda.Start(ddlambda.WrapFunction(myHandler, nil))
 }
 
 func myHandler(ctx context.Context, event MyEvent) (string, error) {
+  // Tracer une requête HTTP
+  req, _ := http.NewRequestWithContext(ctx, "GET", "https://www.datadoghq.com", nil)
+  client := http.Client{}
+  client = *httptrace.WrapClient(&client)
+  client.Do(req)
+
   // Envoyer une métrique custom
   ddlambda.Metric(
     "coffee_house.order_value", // Nom de la métrique
@@ -100,35 +123,28 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
     "product:latte", "order:online" // Tags associés
   )
 
-  // Envoyer une métrique custom avec un timestamp
-  ddlambda.MetricWithTimestamp(
-    "coffee_house.order_value", // Nom de la métrique
-    12.45, // Valeur de la métrique
-    time.Now(), // Timestamp (dans les 20 dernières minutes)
-    "product:latte", "order:online" // Tags associés
-  )
-
-  req, err := http.NewRequest("GET", "http://example.com/status")
-
-  // Ajouter les en-têtes de tracing distribué Datadog
-  ddlambda.AddTraceHeaders(ctx, req)
-
-  client := http.Client{}
-  client.Do(req)
+  // Créer une span personnalisée
+  s, _ := tracer.StartSpanFromContext(ctx, "child.span")
+  time.Sleep(100 * time.Millisecond)
+  s.Finish()
 }
 ```
 
-Pour en savoir plus sur l'envoi de métriques custom, consultez [cette page][8].
+## Et ensuite ?
+
+- Félicitations, vous pouvez désormais visualiser des métriques, logs et traces sur la [page d'accueil Serverless][1].
+- Consultez le [guide de dépannage][2] si vous ne parvenez pas à recueillir les données de télémétrie
+- Vérifiez les [configurations avancées][3] pour
+    - associer des données de télémétrie à l'aide de tags
+    - recueillir les données de télémétrie pour AWS API Gateway, SQS, etc.
+    - capturer les charges utiles des requêtes et des réponses de Lambda
+    - associer les erreurs de vos fonctions Lambda à votre code source
+    - filtrer ou nettoyer des informations sensibles des logs ou des traces
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/integrations/amazon_web_services/
-[2]: /fr/serverless/forwarder/
-[3]: https://github.com/DataDog/datadog-lambda-go
-[4]: https://docs.aws.amazon.com/xray/latest/devguide/xray-services-lambda.html
-[5]: /fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
-[6]: /fr/getting_started/tagging/unified_service_tagging/#aws-lambda-functions
-[7]: https://app.datadoghq.com/functions
-[8]: /fr/serverless/custom_metrics?tab=go
+[1]: https://app.datadoghq.com/functions
+[2]: /fr/serverless/guide/troubleshoot_serverless_monitoring/
+[3]: /fr/serverless/configuration/

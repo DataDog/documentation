@@ -1,23 +1,25 @@
 ---
 categories:
-  - notification
-ddtype: crawler
+- notification
 dependencies: []
-description: xMatters を Datadog のアラートとイベントで通知チャンネルとして使用。
+description: xMatters を Datadog のアラートとイベントの通知チャンネルとして使用。
 doc_link: https://docs.datadoghq.com/integrations/xmatters/
 draft: false
 git_integration_title: xmatters
 has_logo: true
 integration_id: xmatters
 integration_title: xMatters
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
 name: xmatters
 public_title: Datadog-xMatters インテグレーション
 short_description: xMatters を Datadog のアラートとイベントで通知チャンネルとして使用。
+team: web-integrations
 version: '1.0'
 ---
+
 {{< img src="integrations/xmatters/xmatters.png" alt="xMatters の概要" popup="true">}}
 
 ## 概要
@@ -40,7 +42,7 @@ xMatters-Datadog インテグレーションをセットアップするには、
 
 - xMatters で使用する[新しいアプリケーションキー][1]を生成します。
 - [xMatters 通信プランを構成][2]します。
-- [Datadog Webhook インテグレーション][3]を通して、各 xMatters Webhook を構成します。
+- [Datadog Webhook インテグレーション][3]を使って、各 xMatters Webhook を構成します。
 
 ## 収集データ
 
@@ -60,7 +62,7 @@ xMatters インテグレーションには、サービスのチェック機能�
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://help.xmatters.com/integrations/#cshid=DATADOG
 [3]: https://app.datadoghq.com/account/settings#integrations/webhooks
 [4]: https://docs.datadoghq.com/ja/help/

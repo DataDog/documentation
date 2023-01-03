@@ -1,46 +1,67 @@
 ---
-aliases:
-  - /ja/integrations/docker
+app_id: docker
+app_uuid: ca1a7870-7d95-40c7-9790-ef6c1e928967
 assets:
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: true
+    metrics:
+      check: docker.containers.running
+      metadata_path: metadata.csv
+      prefix: docker.
+    process_signatures:
+    - dockerd
+    - docker-containerd
+    - docker run
+    - docker daemon
+    - docker-containerd-shim
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Docker
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
-  - containers
-  - ログの収集
-creates_events: true
-ddtype: check
+- containers
+- ログの収集
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/docker_daemon/README.md
-display_name: Docker
+- https://github.com/DataDog/integrations-core/blob/master/docker_daemon/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: docker_daemon
-guid: 08ee2733-0441-4438-8af8-e2f6fb926772
 integration_id: docker
 integration_title: Docker Daemon
 integration_version: ''
 is_public: true
 kind: integration
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: docker.
-metric_to_check: docker.containers.running
+manifest_version: 2.0.0
 name: docker_daemon
-process_signatures:
-  - dockerd
-  - docker-containerd
-  - docker run
-  - docker daemon
-  - docker-containerd-shim
-public_title: Datadog-Docker Daemon インテグレーション
+oauth: {}
+public_title: Docker Daemon
 short_description: コンテナのパフォーマンスをその内部で実行中のサービスのパフォーマンスと関連付けます。
-support: コア
 supported_os:
-  - linux
-  - mac_os
+- linux
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Category::Containers
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: コンテナのパフォーマンスをその内部で実行中のサービスのパフォーマンスと関連付けます。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Docker Daemon
 ---
+
+
+
 **注**: Docker Daemon チェックのメンテナンスは継続されていますが、**Agent v5** でのみ動作します。
 
 <div class="alert alert-warning">
@@ -189,7 +210,7 @@ Docker インテグレーションは以下のイベントを生成します。
 {{< get-service-checks-from-git "docker_daemon" >}}
 
 
-**注**: `docker.exit` を使用するには、[Docker YAML ファイル][21]に `collect_exit_code: true` を追加し、Agent を再起動します。
+**注**: `docker.exit` を使用するには、[Docker YAML ファイル][21]に `collect_exit_codes: true` を追加し、Agent を再起動します。
 
 ## トラブルシューティング
 
@@ -228,9 +249,9 @@ Docker インテグレーションは以下のイベントを生成します。
 [18]: https://docs.datadoghq.com/ja/agent/#cli
 [19]: https://github.com/DataDog/integrations-core/blob/master/docker_daemon/metadata.csv
 [20]: https://github.com/DataDog/integrations-core/blob/master/docker_daemon/assets/service_checks.json
-[21]: https://github.com/DataDog/integrations-core/blob/master/docker_daemon/datadog_checks/docker_daemon/data/conf.yaml.example#L124
+[21]: https://github.com/DataDog/integrations-core/blob/7.39.0/docker_daemon/datadog_checks/docker_daemon/data/conf.yaml.example#L151-L154
 [22]: https://docs.datadoghq.com/ja/help
-[23]: https://docs.datadoghq.com/ja/integrations/faq/compose-and-the-datadog-agent
+[23]: https://docs.datadoghq.com/ja/agent/guide/compose-and-the-datadog-agent
 [24]: https://docs.datadoghq.com/ja/integrations/faq/dogstatsd-and-docker
 [25]: https://www.datadoghq.com/blog/the-docker-monitoring-problem
 [26]: https://www.datadoghq.com/blog/how-to-monitor-docker-resource-metrics

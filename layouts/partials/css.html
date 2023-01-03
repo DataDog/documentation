@@ -7,6 +7,9 @@
     {{- $outputStyles = resources.Get $inputStyleFile | toCSS $options -}}
 {{- else -}}
     {{- $outputStyles = resources.Get $inputStyleFile | toCSS $options | minify | fingerprint -}}
+    {{ if ne (path.Ext $outputStyles.Permalink) ".css" }}
+        {{ errorf "ERROR CSS File Not Found! %q" .Path }}
+    {{ end }}
 {{- end -}}
 
-<link rel="stylesheet" href="{{- $outputStyles.Permalink -}}">
+<link rel="stylesheet" integrity="{{ $outputStyles.Data.Integrity }}" href="{{- $outputStyles.Permalink -}}">

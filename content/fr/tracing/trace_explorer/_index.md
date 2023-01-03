@@ -8,7 +8,7 @@ kind: documentation
 title: Trace Explorer
 ---
 
-{{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-0.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Parcours d'une trace" >}}
+{{< img src="tracing/apm_lifecycle/trace_explorer.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Explorer" >}}
 
 ## Présentation
 
@@ -47,7 +47,7 @@ Après avoir instrumenté vos services et ingéré des traces, définissez des [
 
 ## Live Search pendant 15 minutes
 
-{{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Parcours d'une trace" >}}
+{{< img src="tracing/apm_lifecycle/trace_explorer_live_search.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Live Search" >}}
 
 En mode Live Search, Datadog affiche les spans dès qu'elles ont été envoyées par l'Agent Datadog et avant qu'elles aient été indexées par vos filtres de rétention. Toutes les spans ingérées sont affichées pour les 15 dernières minutes (période mobile) sans aucun échantillonnage.
 
@@ -109,7 +109,7 @@ Vous pouvez également rechercher des attributs qui ne sont pas définis en tant
 
 ## Recherche de spans indexées avec rétention de 15 jours
 
-{{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-4.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Parcours d'une trace" >}}
+{{< img src="tracing/apm_lifecycle/trace_explorer_indexed_search.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Recherche indexée" >}}
 
 La recherche de traces conservées se fait de la même façon qu'en mode Live Search. Pour passer du mode Live aux données conservées, modifiez le sélecteur d'intervalle pour choisir une durée supérieure à 15 minutes. Toutes les spans indexées par des filtres de rétention sont accessibles via la recherche. Ces spans sont conservées par Datadog pendant 15 jours après avoir été indexées par un filtre de rétention.
 

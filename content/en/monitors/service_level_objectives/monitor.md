@@ -35,9 +35,9 @@ Under **Define the source**, select **Monitor Based**.
 
 ### Define queries
 
-In the search box, start typing the name of a monitor. A list of matching monitors appears. Click on a monitor name to add it to the source list. 
+In the search box, start typing the name of a monitor. A list of matching monitors appears. Click on a monitor name to add it to the source list.
 
-If you’re only using a single multi-alert monitor in an SLO, you can optionally select “Calculate on selected groups” and pick up to 20 groups. By default, the SLO is calculated using five groups with the worst SLO statuses. Group selection is not supported for SLOs that contain multiple monitors. 
+If you’re only using a single multi alert monitor in an SLO, you can optionally select "Calculate on selected groups" and pick up to 20 groups. Group selection is not supported for SLOs that contain multiple monitors.
 
 
 ### Set your SLO targets
@@ -73,11 +73,11 @@ Select **Save & Exit** to save your new SLO.
 
 {{< img src="monitors/service_level_objectives/aggregate_slo.jpg" alt="SLO detail showing 99 percent green with 8 groups aggregated"  >}}
 
-Datadog calculates the overall status as the percentage of the time where **all** monitors or **all** the calculated groups in a single multi-alert monitor are NOT in the `ALERT` state. Datadog does not calculate the average of the aggregated monitors or the aggregated groups. 
+Datadog calculates the overall SLO status as the uptime percentage across all monitors or monitor groups, unless specific groups have been selected. If specific groups have been selected, the SLO status is calculated with only those groups. If no specific groups are selected, the UI displays the five groups with the worst statuses.
 
 Monitor-based SLOs treat the `WARN` state as `OK`. The definition of an SLO requires a binary distinction between good and bad behavior. SLO calculations treat `WARN` as good behavior since `WARN` is not severe enough to indicate bad behavior.
 
-Consider the following example for a monitor-based SLO containing 3 monitors. The calculation for a monitor-based SLO based on a single multi-alert monitor would look similar.
+Consider the following example for a monitor-based SLO containing 3 monitors. The calculation for a monitor-based SLO based on a single multi alert monitor would look similar.
 
 | Monitor            | t1 | t2 | t3    | t4 | t5    | t6 | t7 | t8 | t9    | t10 | Status |
 |--------------------|----|----|-------|----|-------|----|----|----|-------|-----|--------|
@@ -110,9 +110,10 @@ Muting a monitor does not affect the SLO calculation.
 To exclude time periods from an SLO calculation, use the [SLO status corrections][5] feature.
 
 ### Missing data
-When you create a monitor, you choose whether it sends an alert when data is missing. This configuration affects how a monitor-based SLO calculation interprets missing data.
+When you create a metric monitor or service check, you choose whether it sends an alert when data is missing. This configuration affects how a monitor-based SLO calculation interprets missing data. For monitors configured to ignore missing data, time periods with missing data are treated as OK (uptime) by the SLO. For monitors configured to alert on missing data, time periods with missing data are treated as ALERT (downtime) by the SLO.
 
-For monitors configured to ignore missing data, time periods with missing data are treated as OK by the SLO. For monitors configured to alert on missing data, time periods with missing data are treated as ALERT by the SLO.
+If you pause a Synthetic test, the SLO removes the time period with missing data from its calculation. In the UI, these time periods are marked light gray on the SLO status bar.
+
 
 ## Underlying monitor and SLO histories
 

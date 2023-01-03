@@ -5,19 +5,6 @@ kind: Documentation
 title: Agent 率制限
 ---
 
-## 1 秒あたりの最大イベント制限
-
-Agent ログに以下のエラーメッセージが表示される場合、アプリケーションは、デフォルトで APM で許可されている毎秒 200 件を超えるトレースイベントを発行しています。
-
-```
-Max events per second reached (current=300.00/s, max=200.00/s). Some events are now being dropped (sample rate=0.54). Consider adjusting event sampling rates.
-
-```
-
-Agent の APM レート制限を増やすには、Agent のコンフィギュレーションファイル (`apm_config:` セクションの下) 内で `max_events_per_second` 属性を構成します。コンテナ化されたデプロイメント (Docker、Kubernetes など) の場合は、`DD_APM_MAX_EPS` 環境変数を使用します。
-
-**注**: APM レート制限を増やすと、App Analytics のコストが増加する可能性があります。
-
 ## 最大接続制限
 
 Agent ログに以下のエラーメッセージが表示される場合、デフォルトの APM 接続制限である 2000 を超えています。
@@ -38,3 +25,13 @@ CRITICAL | (pkg/trace/osutil/file.go:39 in Exitf) | OOM
 ```
 
 Agent の最大メモリ制限を増やすには、Agent のコンフィギュレーションファイルの `apm_config` セクションで `max_memory` 属性を構成します。コンテナ型のデプロイメント (例えば、Docker や Kubernetes) の場合は、環境変数 `DD_APM_MAX_MEMORY` を使用します。
+
+Kubernetes などのオーケストレーターでメモリ制限を処理したい場合、Datadog Agent 7.23.0 以降、この制限を `0` に設定することで無効にすることができます。
+
+## 最大 CPU 使用率
+
+この設定は、APM Agent が使用する最大 CPU パーセントを定義します。Kubernetes 以外の環境では、デフォルトで 50 に設定されており、これは 0.5 コアに相当します (100 = 1 コア)。この制限に達すると、CPU 使用量が再び制限を下回るまでペイロードは拒否されます。これは `datadog.trace_agent.receiver.ratelimit` によって反映され、現在ドロップされているペイロードの割合を表します (値が 1 の場合は、トレースがドロップされていないことを意味します)。これは、[Service Table View][1] で、`Limited Resource` という警告として表示されることもあります。
+
+オーケストレーター (または外部サービス) に Datadog Agent のリソース制限を管理させたい場合、Datadog では環境変数 `DD_APM_MAX_CPU_PERCENT` を `0` に設定してこれを無効にすることを推奨します (Datadog Agent 7.23.0 からサポートされるようになりました)。
+
+[1]: /ja/tracing/trace_pipeline/ingestion_controls/#service-table-view

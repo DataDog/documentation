@@ -44,7 +44,7 @@ heroku config:add DD_API_KEY=$DD_API_KEY
 
 # Déployer sur Heroku pour forcer un rebuild
 git commit --allow-empty -m "Rebuild slug"
-git push heroku master
+git push heroku main
 ```
 
 Une fois terminé, l'Agent Datadog se lance automatiquement à chaque démarrage de dyno.
@@ -92,9 +92,9 @@ Pour mettre à niveau ce buildpack ou modifier l'une de ces options, telle que `
 # Définir la nouvelle version de l'Agent
 heroku config:set DD_AGENT_VERSION=<NOUVELLE_VERSION_AGENT> -a <NOM_VOTRE_APPLICATION>
 
-# Reconstruire votre slug avec la nouvelle version de l'Agent :
+# Reconstruire votre slug avec la nouvelle version de l'Agent
 git commit --allow-empty -m "Rebuild slug"
-git push heroku master
+git push heroku main
 ```
 
 ## Configuration
@@ -304,7 +304,14 @@ Le buildpack Datadog ne recueille pas de logs à partir de la plateforme Heroku.
 
 ## Utiliser Heroku avec des images Docker
 
-Ce buildpack ne fonctionne que pour les déploiements de Heroku qui utilisent le [compilateur de slug de Heroku][24]. Si vous déployez votre application dans Heroku en utilisant des conteneurs Docker, intégrez l'Agent Datadog à votre image Docker et lancez l'Agent en tant que processus distinct dans votre conteneur.
+Ce buildpack ne fonctionne que pour les déploiements Heroku qui utilisent le [compilateur de slug Heroku][24]. Si vous déployez votre application dans Heroku à l'aide de conteneurs Docker :
+
+1. Intégrez l'Agent Datadog à votre image Docker et lancez l'Agent en tant que processus distinct dans votre conteneur.
+2. Définissez l'option de configuration suivante dans votre application Heroku pour vous assurer que Datadog la transmet bien comme un dyno Heroku :
+
+```shell
+heroku config:add DD_HEROKU_DYNO=true
+```
 
 Par exemple, si vous créez votre image Docker depuis un système d'exploitation basé sur Debian, ajoutez les lignes suivantes à votre `Dockerfile` :
 

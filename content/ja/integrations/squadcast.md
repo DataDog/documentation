@@ -1,40 +1,63 @@
 ---
+app_id: Squadcast
+app_uuid: cfa65726-33af-42bf-8be3-7abb43147a47
 assets:
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: Squadcast.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Squadcast
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: it@squadcast.com
+  support_email: it@squadcast.com
 categories:
 - 問題追跡
 - コラボレーション
 - notification
 - モニター
-creates_events: false
-ddtype: crawler
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/squadcast/README.md
-display_name: Squadcast
+display_on_public_website: true
 draft: false
 git_integration_title: Squadcast
-guid: a2b0e9fe-f824-460b-864a-50c4bda759a0
 integration_id: Squadcast
 integration_title: Squadcast
 integration_version: ''
 is_public: true
 kind: インテグレーション
-maintainer: it@squadcast.com
-manifest_version: 1.0.0
-metric_prefix: Squadcast.
-metric_to_check: ''
+manifest_version: 2.0.0
 name: Squadcast
-public_title: Datadog-Squadcast インテグレーション
+oauth: {}
+public_title: Squadcast
 short_description: Datadog アラートの通知を受け取り Squadcast でアクションを実行します。
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Issue Tracking
+  - Category::Collaboration
+  - Category::Notification
+  - Category::Monitoring
+  configuration: README.md#Setup
+  description: Datadog アラートの通知を受け取り Squadcast でアクションを実行します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Squadcast
 ---
 
 ## 概要

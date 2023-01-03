@@ -1,31 +1,28 @@
 ---
-title: ログ用に RBAC を設定する方法
 aliases:
-  - /ja/logs/guide/restrict-access-to-log-events-with-restriction-queries
-kind: ガイド
+- /ja/logs/guide/restrict-access-to-log-events-with-restriction-queries
 further_reading:
-  - link: /logs/guide/logs-rbac-permissions/
-    tag: Documentation
-    text: ログの RBAC アクセス許可の詳細
-  - link: /logs/explorer/
-    tag: Documentation
-    text: ログエクスプローラーの詳細
-  - link: /logs/explorer/#patterns
-    tag: Documentation
-    text: ログパターンビューの概要
-  - link: /logs/live_tail/
-    tag: Documentation
-    text: Live Tail のご紹介
+- link: /logs/guide/logs-rbac-permissions/
+  tag: Documentation
+  text: ログの RBAC アクセス許可の詳細
+- link: /logs/explorer/
+  tag: Documentation
+  text: ログエクスプローラーの詳細
+- link: /logs/explorer/#patterns
+  tag: Documentation
+  text: ログパターンビューの概要
+- link: /logs/live_tail/
+  tag: Documentation
+  text: Live Tail のご紹介
+kind: ガイド
+title: ログ用に RBAC を設定する方法
 ---
+
 ## 概要
 
 ログには、[スクラブ][1]されるか組織内の権限のあるユーザーのみがアクセスできる**機密データ**が含まれている場合があります。また、コンフィギュレーションと予算管理に関する限り、ユーザーが**互いに干渉しない**ようにユーザーをセグメント化することもできます。
 
 このガイドでは、ユーザーが準拠した方法でログとログ機能にアクセスするための、カスタマイズされた Datadog ロールを開発する方法を紹介します。
-
-<div class="alert alert-warning">
-カスタムロールの作成と変更は、オプトイン機能です。ご使用のアカウントでこの機能を有効にしたい場合は、<a href="/help">Datadog のサポートチームにお問い合わせください</a>。
-</div>
 
 ### 複数のチーム
 
@@ -65,15 +62,14 @@ ACME の受信ログに `team:acme` タグを付けます。これは、ログ�
 
 ### Datadog 管理者としてログインする
 
-そのガイドで実行する必要のあるアクションでは、Datadog 管理者ロールに属している必要があります。具体的には、次のものが必要です。
+このガイドのその他のアクションを実行するには、ユーザーアカウントに Datadog Admin または同等のロールが必要です。以下の権限が必要になります。
 
-* ロールを作成し、ユーザーをロールに割り当てるためのアクセス許可 (実際の特権アクセス)。
+* ロールを作成し、ユーザーをロールに割り当てるためのアクセス許可。
 * [ログパイプライン][4]、[ログインデックス][5]、[ログアーカイブ][6]を作成するためのアクセス許可。
 * API を介してこれらのオペレーションを実行する場合は、[ログコンフィギュレーション API][7] を介して操作するためのアクセス許可。
 
-[Datadog][8] にこれらすべてのアクセス許可があることを確認してください。不足しているものがある場合は、Datadog 管理者ユーザーに設定を依頼してください。
+[Users list][8] で、これらすべてのアクセス許可があることを確認してください。不足しているものがある場合は、Datadog 管理者ユーザーに設定を依頼してください。
 
-{{< img src="logs/guide/rbac/admin_permissions.png" alt="管理者としてのアクセス許可を確認"  style="width:60%;">}}
 
 ### API キーとアプリキーを取得する
 
@@ -122,16 +118,14 @@ curl -X GET "https://app.datadoghq.com/api/v2/permissions" -H "Content-Type: app
 {{< tabs >}}
 {{% tab "UI" %}}
 
-Datadog の [Team Section][1] で、Role タブの Add Role ボタンを使用して、新しい `ACME Admin` と `ACME User` のロールを作成します。
+Datadog オーガニゼーションの設定の [Groups Section][1] で、Role タブの Add Role ボタンを使用して、新しい `ACME Admin` と `ACME User` のロールを作成します。
 
-{{< img src="logs/guide/rbac/add_role.png" alt="新しいロールを追加する"  style="width:60%;">}}
+{{< img src="logs/guide/rbac/add_role.png" alt="新しいロールを追加する" style="width:60%;">}}
 
 新しいロールを作成する場合
 
 * 標準アクセスで作成します。
 * Read Index Data と Live Tail のアクセス許可を付与します。これらは、安全に有効にできる[レガシーアクセス許可][2]です。
-
-{{< img src="logs/guide/rbac/minimal_permissions.png" alt="最小限のアクセス許可を付与する"  style="width:60%;">}}
 
 ロールの作成の詳細については、[アカウントの管理][3]セクションを参照してください。
 
@@ -392,7 +386,7 @@ curl -X POST "https://app.datadoghq.com/api/v2/roles/<ROLE_ID>/permissions" -H "
 [5]: /ja/account_management/rbac/permissions?tab=ui#logs_modify_indexes
 [6]: /ja/account_management/rbac/permissions?tab=ui#logs_write_archives
 [7]: /ja/account_management/rbac/permissions?tab=ui#logs_public_config_api
-[8]: https://app.datadoghq.com/access/users
+[8]: https://app.datadoghq.com/organization-settings/users
 [9]: https://app.datadoghq.com/organization-settings/api-keys
 [10]: /ja/account_management/api-app-keys/
 [11]: /ja/api/v2/roles/#list-permissions

@@ -1,34 +1,53 @@
 ---
+app_id: lighthouse
+app_uuid: e61bdb03-995f-4f46-8b14-afd59e35453b
 assets:
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: lighthouse.performance
+      metadata_path: metadata.csv
+      prefix: lighthouse.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Lighthouse
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: mustin.eric@gmail.com
+  support_email: mustin.eric@gmail.com
 categories:
 - web
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/lighthouse/README.md
-display_name: Lighthouse
+display_on_public_website: true
 draft: false
 git_integration_title: lighthouse
-guid: 4e66e6d6-bcb0-4250-b950-95ef11176494
 integration_id: lighthouse
 integration_title: Lighthouse
 integration_version: 2.1.0
 is_public: true
 kind: インテグレーション
-maintainer: mustin.eric@gmail.com
-manifest_version: 1.0.0
-metric_prefix: lighthouse.
-metric_to_check: lighthouse.performance
+manifest_version: 2.0.0
 name: lighthouse
-public_title: Datadog-Lighthouse インテグレーション
+oauth: {}
+public_title: Lighthouse
 short_description: Google Lighthouse 監査統計
-support: contrib
 supported_os:
 - linux
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Category::Web
+  configuration: README.md#Setup
+  description: Google Lighthouse 監査統計
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Lighthouse
 ---
 
 

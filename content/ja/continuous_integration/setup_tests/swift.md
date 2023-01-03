@@ -89,9 +89,11 @@ end
 
 ### Datadog の構成
 
-テストのインスツルメンテーションを有効にするには、テストターゲットに以下の環境変数を（または[以下で説明](#using-infoplist-for-configuration)されているとおり `Info.plist` ファイルに）追加します。また、テストプランを使用する場合は、`Expand variables based on` コンボまたは `Target for Variable Expansion` でメインターゲットを選択する必要があります。
+テストのインスツルメンテーションを有効にするには、テストターゲットに以下の環境変数を、または[以下で説明](#using-infoplist-for-configuration)されているとおり `Info.plist` ファイルに追加します。テストプランを使用している場合は、`Expand variables based on` コンボまたは `Target for Variable Expansion` でメインターゲットを選択する**必要があります**。
 
 {{< img src="continuous_integration/swift_env.png" alt="Swift 環境" >}}
+
+<div class="alert alert-warning">環境変数の変数展開にメインターゲットがあるはずです。選択されていない場合、変数は有効ではありません。 </div>
 
 UITests では、フレームワークにより自動的に値がアプリケーションに挿入されるため、環境変数はテストターゲットのみに設定する必要があります。
 
@@ -309,14 +311,15 @@ span?.end()
 {{< tabs >}}
 {{% tab "Jenkins" %}}
 
-| 環境変数 | 値             |
-| -------------------- | ----------------- |
-| `JENKINS_URL`        | `$(JENKINS_URL)`  |
-| `WORKSPACE`          | `$(WORKSPACE)`    |
-| `BUILD_TAG`          | `$(BUILD_TAG)`    |
-| `BUILD_NUMBER`       | `$(BUILD_NUMBER)` |
-| `BUILD_URL`          | `$(BUILD_URL)`    |
-| `JOB_NAME`           | `$(JOB_NAME)`     |
+| 環境変数 | 値                  |
+| -------------------- | ---------------------- |
+| `JENKINS_URL`        | `$(JENKINS_URL)`       |
+| `WORKSPACE`          | `$(WORKSPACE)`         |
+| `BUILD_TAG`          | `$(BUILD_TAG)`         |
+| `BUILD_NUMBER`       | `$(BUILD_NUMBER)`      |
+| `BUILD_URL`          | `$(BUILD_URL)`         |
+| `JOB_NAME`           | `$(JOB_NAME)`          |
+| `DD_CUSTOM_TRACE_ID` | `$(DD_CUSTOM_TRACE_ID)`|
 
 物理デバイスのテスト用追加 Git コンフィギュレーション:
 
@@ -362,6 +365,8 @@ span?.end()
 | `CI_PIPELINE_IID`    | `$(CI_PIPELINE_IID)` |
 | `CI_PIPELINE_URL`    | `$(CI_PIPELINE_URL)` |
 | `CI_PROJECT_PATH`    | `$(CI_PROJECT_PATH)` |
+| `CI_PROJECT_URL`     | `$(CI_PROJECT_URL)`  |
+
 
 物理デバイスのテスト用追加 Git コンフィギュレーション:
 
@@ -547,27 +552,42 @@ span?.end()
 | `GIT_CLONE_COMMIT_COMMITER_EMAIL`  | `$(GIT_CLONE_COMMIT_COMMITER_EMAIL)`  |
 
 {{% /tab %}}
+{{% tab "Xcode Cloud" %}}
+
+| 環境変数    | 値                   |
+| ----------------------- | ----------------------- |
+| `DD_GIT_REPOSITORY_URL` | リポジトリ URL      |
+| `CI_WORKSPACE`          | `$(CI_WORKSPACE)`       |
+| `CI_COMMIT`             | `$(CI_COMMIT)`          |
+| `CI_BUILD_ID`           | `$(CI_BUILD_ID)`        |
+| `CI_BUILD_NUMBER`       | `$(CI_BUILD_NUMBER)`    |
+| `CI_WORKFLOW`           | `$(CI_WORKFLOW)`        |
+| `CI_TAG`                | `$(CI_TAG)`             |
+| `CI_BRANCH`             | `$(CI_BRANCH)`          |
+| `CI_GIT_REF`            | `$(CI_GIT_REF)`         |
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## 手動テスト API
 
 Swift プロジェクトで XCTests を使用している場合、`DatadogSDKTesting`フレームワークが自動的にインスツルメントし、Datadog バックエンドに結果を送信します。XCTest を使用しない場合、代わりに Swift/Objective-C の手動テスト API を使用することができ、これもバックエンドにテスト結果を報告します。
 
-この API は、*テストセッション*、*テストスイート*、*テスト*の 3 つの概念に基づいています。
+この API は、*テストモジュール*、*テストスイート*、*テスト*の 3 つの概念に基づいています。
 
-### テストセッション
+### テストモジュール
 
-テストセッションには、ユーザーがテストプロセスを起動してから、最後のテストが終了して結果が報告されるまでの、テスト実行の全プロセスが含まれます。また、テストセッションには、テストが実行される環境とプロセスの起動も含まれます。
+テストモジュールは、テストを含むライブラリやバンドルのロードを表します。
 
-テストセッションを開始するには、`DDTestSession.start()` を呼び出して、テストするモジュールまたはバンドルの名前を渡します。
+テストモジュールを開始するには、`DDTestModule.start()` を呼び出して、テストするモジュールまたはバンドルの名前を渡します。
 
-すべてのテストが終了したら、`session.end()` を呼び出して、残りのテスト結果をすべてバックエンドに送信するようにします。
+すべてのテストが終了したら、`module.end()` を呼び出して、残りのテスト結果をすべてバックエンドに送信するようにします。
 
 ### テストスイート
 
 テストスイートは、共通の機能を持つテストのセットで構成されます。これらのテストは、共通の初期化および終了を共有することができ、また、いくつかの変数を共有することができます。
 
-テストスイートは `session.suiteStart()` を呼び出してテストスイートの名前を渡すことでテストセッションに作成します。
+テストスイートは `module.suiteStart()` を呼び出してテストスイートの名前を渡すことでテストモジュールに作成します。
 
 スイートの中の関連するテストがすべて実行を終えたら `suite.end()` を呼び出します。
 
@@ -580,25 +600,25 @@ Swift プロジェクトで XCTests を使用している場合、`DatadogSDKTes
 ### API インターフェイス
 
 {{< code-block lang="swift" >}}
-class DDTestSession {
-    // セッションを開始します。
+class DDTestModule {
+    // モジュールを開始します。
     // - パラメーター:
     //   - bundleName: テストするモジュールまたはバンドルの名前。
-    //   - startTime: オプション。セッションが開始された時間。
-    static func start(bundleName: String, startTime: Date? = nil) -> DDTestSession
+    //   - startTime: オプション。モジュールが開始された時間。
+    static func start(bundleName: String, startTime: Date? = nil) -> DDTestModule
     //
-    // セッションを終了します。
+    // モジュールを終了します。
     // - パラメーター:
-    //   - endTime: オプション。セッションが終了した時間。
+    //   - endTime: オプション。モジュールが終了した時間。
     func end(endTime: Date? = nil)
-    // テストセッションにタグ/属性を追加します。タグはいくつでも追加可能です。
+    // テストモジュールにタグ/属性を追加します。タグはいくつでも追加可能です。
     // - パラメーター:
     //   - key: タグの名前。同じ名前のタグが既に存在する場合、
     //     その値は新しい値で置き換えられます。
     //   - value: タグの値。数値または文字列を指定することができます。
     func setTag(key: String, value: Any)
     //
-    // このセッションでスイートを開始します。
+    // このモジュールでスイートを開始します。
     // - パラメーター:
     //   - name: スイートの名前。
     //   - startTime: オプション。スイートの開始時間。
@@ -665,8 +685,8 @@ enum DDTestStatus {
 
 {{< code-block lang="swift" >}}
 import DatadogSDKTesting
-let session = DDTestSession.start(bundleName: "ManualSession")
-let suite1 = session.suiteStart(name: "ManualSuite 1")
+let module = DDTestModule.start(bundleName: "ManualModule")
+let suite1 = module.suiteStart(name: "ManualSuite 1")
 let test1 = suite1.testStart(name: "Test 1")
 test1.setTag(key: "key", value: "value")
 test1.end(status: .pass)
@@ -674,13 +694,13 @@ let test2 = suite1.testStart(name: "Test 2")
 test2.SetErrorInfo(type: "Error Type", message: "Error message", callstack: "Optional callstack")
 test2.end(test: test2, status: .fail)
 suite1.end()
-let suite2 = session.suiteStart(name: "ManualSuite 2")
+let suite2 = module.suiteStart(name: "ManualSuite 2")
 ..
 ..
-session.end()
+module.end()
 {{< /code-block >}}
 
-最後に必ず `session.end()` を呼び出し、すべてのテスト情報を Datadog に流すようにします。
+最後に必ず `module.end()` を呼び出し、すべてのテスト情報を Datadog に流すようにします。
 
 ## その他の参考資料
 

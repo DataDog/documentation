@@ -42,7 +42,7 @@ Consultez la [liste des endpoints de collecte de logs Datadog](#endpoints-de-jou
 {{% tab "Host" %}}
 
 1. Installez l'[Agent Datadog][1].
-2. Pour activer la collecte de logs, remplacez `logs_enabled:false` par `logs_enabled:true` dans le principal fichier de configuration de votre Agent (`datadog.yaml`). Consultez la section [Collecte de logs de l'Agent de host][5] pour obtenir plus de détails et d'exemples.
+2. Pour activer la collecte de logs, remplacez `logs_enabled: false` par `logs_enabled: true` dans le principal fichier de configuration de votre Agent (`datadog.yaml`). Consultez la section [Collecte de logs de l'Agent de host][5] pour obtenir plus de détails et d'exemples.
 3. Une fois la collecte activée, vous pouvez configurer l'Agent Datadog afin de [suivre les fichiers de log ou de détecter les logs envoyés via UDP/TCP][2], de [filtrer les logs ou de nettoyer les données sensibles][3] et d'[agréger les logs multiligne][4].
 
 [1]: https://app.datadoghq.com/account/settings#agent
@@ -55,7 +55,7 @@ Consultez la [liste des endpoints de collecte de logs Datadog](#endpoints-de-jou
 {{% tab "Application" %}}
 
 1. Installez l'[Agent Datadog][1].
-2. Pour activer la collecte de logs, remplacez `logs_enabled:false` par `logs_enabled:true` dans le principal fichier de configuration de votre Agent (`datadog.yaml`). Consultez la section [Collecte de logs de l'Agent de host][2] pour obtenir plus de détails et d'exemples.
+2. Pour activer la collecte de logs, remplacez `logs_enabled: false` par `logs_enabled: true` dans le principal fichier de configuration de votre Agent (`datadog.yaml`). Consultez la section [Collecte de logs de l'Agent de host][2] pour obtenir plus de détails et d'exemples.
 3. Suivez les instructions d'installation correspondant au langage de votre application pour configurer un logger et commencer à générer des logs :
 
 {{< partial name="logs/logs-languages.html" >}}

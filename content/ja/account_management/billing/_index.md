@@ -21,8 +21,9 @@ Datadog は、ホストとカスタムメトリクスの数を毎時間測定し
 
 ### サーバーレス
 
-Datadog では、すべてのアカウントでご利用の当月の AWS Lambda 呼び出しの合計に基づきご請求が発生します。Pro および Enterprise プランには、100 万件の呼び出しごとに 150,000 件の Indexed Span と 5 個のカスタムメトリクスが含まれます。サーバーレス APM の請求は、Datadog APM サービスに送信された [Indexed Span][4] のうち、バンドルされた数量を超過した総数に基づき、月末に課金されます。サーバーレス使用時は、請求可能な [APM ホスト][4]はありません。
+請求は、アカウントの 1 か月間の 1 時間あたりの平均関数の数に基づきます。Datadog では、1 回以上実行された、Datadog アカウントで監視されている関数の数を 1 時間ごとに記録します。月末に、記録された関数の時間当たり平均数が算出され、請求に反映されます。Pro プランと Enterprise プランには、請求対象関数ごとに 5 つのカスタムメトリクスが含まれています。
 
+サーバーレス APM の請求は、ある月の APM 取り込みスパンに接続された AWS Lambda の呼び出しの合計に基づきます。また、月末に Datadog APM サービスに送信された[インデックス化スパン][4]の合計がバンドル数量を超えた場合、請求されます。サーバーレス利用時に請求対象となる [APM ホスト][4]はありません。
 
 詳細については、[サーバーレス請求ページ][5]および[Datadog 料金ページ][6]を参照してください。
 
@@ -48,13 +49,25 @@ IoT のご請求に関する詳細については、[Datadog 料金ページ][7]
 
 小切手、ACH、または電信送金でお支払いの場合、請求書は毎月 10 営業日近くに請求先のメールアドレスにメールで送信されます。追加のコピーが必要な場合は、[Datadog の請求担当][10]にメールを送信してください。支払い先の詳細は請求書に記載されています。
 
-お支払い方法を変更するには、[カスタマーサクセス][12]マネージャーにお問い合わせください。
+### 支払い方法の管理
 
-### 請求メール
+[**Payment Method**][12] セクションには、支払い方法の詳細が記載されています。
 
-[Billing history][13] ページの **Manage Billing Emails** で、請求書の受信用メールアドレスを設定できます。
+{{< img src="account_management/billing/PaymentMethodOverview.png" alt="プランページの支払い方法" style="width:80%;" >}}
 
-{{< img src="account_management/billing/billing01.png" alt="請求メールの管理" >}}
+**Edit Payment** は、支払い方法を管理するためのオプションを提供します。カードの編集や削除、カードから請求書、またはその逆への支払い方法の変更を依頼することができます。
+
+{{< img src="account_management/billing/PaymentSettingsDetails.png" alt="プランページの支払い設定" style="width:80%;" >}}
+
+### 請求先情報の管理
+
+請求先情報は、[**Billing Contact Details**][12] セクションで確認することができます。
+
+{{< img src="account_management/billing/BillingContactDetailsOverview.png" alt="プランページの請求先情報" style="width:80%;" >}}
+
+**Edit Details** を通じて、請求先住所の追加、編集、削除を行うことができます。また、請求書を受け取るための特定のメールアドレスを設定することもできます。
+
+{{< img src="account_management/billing/BillingContactDetailsEdit.png" alt="プランページでの請求先情報の編集" style="width:80%;" >}}
 
 **注**: このメールアドレスは、Datadog 内のチームメンバーでなくてもかまいません。たとえば、`invoices@yourcompany.com` を使用できます。
 
@@ -100,5 +113,4 @@ IoT のご請求に関する詳細については、[Datadog 料金ページ][7]
 [9]: https://app.datadoghq.com/account/billing_history
 [10]: mailto:billing@datadoghq.com
 [11]: /ja/account_management/billing/credit_card/
-[12]: mailto:success@datadoghq.com
-[13]: https://app.datadoghq.com/billing/history
+[12]: https://app.datadoghq.com/billing/plan

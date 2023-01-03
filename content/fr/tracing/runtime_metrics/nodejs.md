@@ -1,21 +1,23 @@
 ---
-title: Métriques de runtime NodeJS
-kind: documentation
-description: Consultez des statistiques supplémentaires sur les performances de votre application NodeJS grâce aux métriques runtime associées à vos traces.
+description: Consultez des statistiques supplémentaires sur les performances de votre
+  application NodeJS grâce aux métriques runtime associées à vos traces.
 further_reading:
-  - link: tracing/connect_logs_and_traces
-    tag: Documentation
-    text: Associer vos logs à vos traces
-  - link: tracing/manual_instrumentation
-    tag: Documentation
-    text: Instrumenter vos applications manuellement pour créer des traces
-  - link: tracing/opentracing
-    tag: Documentation
-    text: Implémenter Opentracing dans vos applications
-  - link: tracing/visualization/
-    tag: Documentation
-    text: Explorer vos services, ressources et traces
+- link: tracing/connect_logs_and_traces
+  tag: Documentation
+  text: Associer vos logs à vos traces
+- link: tracing/manual_instrumentation
+  tag: Documentation
+  text: Instrumenter vos applications manuellement pour créer des traces
+- link: tracing/opentracing
+  tag: Documentation
+  text: Implémenter Opentracing dans vos applications
+- link: tracing/visualization/
+  tag: Documentation
+  text: Explorer vos services, ressources et traces
+kind: documentation
+title: Métriques de runtime NodeJS
 ---
+
 <div class="alert alert-warning">
 Cette fonctionnalité est actuellement en version bêta privée. <a href="https://docs.datadoghq.com/help/">Contactez l'assistance</a> afin de demander son activation pour votre compte.
 </div>
@@ -36,15 +38,15 @@ Les métriques suivantes sont recueillies par défaut après l'activation des m�
 
 {{< get-metrics-from-git "node" >}}
 
-Datadog fournit non seulement ces métriques sur votre page Service de l'APM, mais également un [dashboard de runtime Node par défaut][6] comportant les tags `service` et `runtime-id` appliqués à ces métriques.
+Datadog fournit non seulement ces métriques sur votre page Service APM, mais également un [dashboard pour le runtime Node par défaut][6].
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/apm/services
-[2]: /fr/metrics/dogstatsd_metrics_submission/#setup
+[2]: /fr/metrics/custom_metrics/dogstatsd_metrics_submission/#setup
 [3]: /fr/agent/docker/#dogstatsd-custom-metrics
 [4]: /fr/developers/dogstatsd/?tab=kubernetes#agent
-[5]: /fr/integrations/amazon_ecs/?tab=python#create-an-ecs-task
+[5]: /fr/agent/amazon_ecs/#create-an-ecs-task
 [6]: https://app.datadoghq.com/dash/integration/30269/node-runtime-metrics

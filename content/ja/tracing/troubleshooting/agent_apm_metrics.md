@@ -90,15 +90,15 @@ Agent が受け入れたペイロード数。
 
 `datadog.trace_agent.receiver.spans_dropped`
 : **タイプ**: カウント<br>
-Agent で削除されたペイロードの合計バイト数。
+Agent によってドロップされたスパンの数。
 
 `datadog.trace_agent.receiver.spans_filtered`
 : **タイプ**: カウント<br>
-Agent でフィルタリングされたペイロードの合計バイト数
+Agent によってフィルターされたスパンの数。
 
 `datadog.trace_agent.receiver.spans_received`
 : **タイプ**: カウント<br>
-Agent が受信したペイロードの合計バイト数。
+Agent が受信したスパンの総数。
 
 `datadog.trace_agent.receiver.tcp_connections`
 : **タイプ**: カウント<br>

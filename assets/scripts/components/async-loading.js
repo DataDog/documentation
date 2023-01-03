@@ -2,7 +2,7 @@ import { updateTOC, buildTOCMap } from './table-of-contents';
 import initCodeTabs from './codetabs';
 import { redirectToRegion } from '../region-redirects';
 import { initializeIntegrations } from './integrations';
-import { initializeSecurityRules } from './security-rules';
+import { initializeGroupedListings } from './grouped-item-listings';
 import {updateMainContentAnchors, reloadWistiaVidScripts, gtag, getCookieByName } from '../helpers/helpers';
 import configDocs from '../config/config-docs';
 import { redirectCodeLang, addCodeTabEventListeners, addCodeBlockVisibilityToggleEventListeners, activateCodeLangNav, toggleMultiCodeLangNav } from './code-languages'; // eslint-disable-line import/no-cycle
@@ -141,7 +141,7 @@ function loadPage(newUrl) {
                 wistiaVidId = wistiaVid.dataset.wistiaId;
             }
 
-            initializeSecurityRules();
+            initializeGroupedListings();
 
             // if newly requested TOC is NOT disabled
             if (newTOC && newTOC.querySelector('#TableOfContents') && currentTOC) {

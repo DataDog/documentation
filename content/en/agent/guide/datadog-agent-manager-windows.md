@@ -30,7 +30,7 @@ The Datadog Agent Manager GUI is browser-based. The port the GUI runs on can be 
 | Chrome        | 60                           |                         |
 | Safari        | 8                            |                         |
 | IOS           | 12                           |  Mobile Safari          |
- 
+
 ### Start the Datadog Agent Manager
 
 After the Agent is [installed][1] on your Windows host, start the Datadog Agent Manager to manage the Agent graphically.
@@ -41,10 +41,9 @@ From the Windows start menu:
 * Right click on Datadog Agent Manager.
 * Choose `Run as Administrator`.
 
-From an elevated Powershell prompt:
-
+From an elevated PowerShell prompt:
 ```powershell
-& "%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" launch-gui
+& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" launch-gui
 ```
 
 The Datadog Agent Manager launches in your default web browser. The web address is `http://127.0.0.1:5002`.

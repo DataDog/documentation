@@ -18,7 +18,7 @@ title: DogStatsD によるイベント
 
 ## 送信
 
-[DogStatsD をインストール][1]した後、次の関数を使用して [Datadog のイベントストリーム][2]にイベントを送信できます。
+[DogStatsD をインストール][1]した後、次の関数を使用して [Datadog のイベントエクスプローラー][2]にイベントを送信できます。
 
 ```text
 event(<title>, <message>, <alert_type>, <aggregation_key>, <source_type_name>, <date_happened>, <priority>, <tags>, <hostname>)

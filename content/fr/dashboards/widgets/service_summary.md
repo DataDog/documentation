@@ -1,18 +1,16 @@
 ---
-title: Widget Résumé de service
-kind: documentation
-description: Affiche le graphique d'un service précis dans votre screenboard.
-widget_type: trace_service
 aliases:
-  - /fr/graphing/widgets/service_summary/
+- /fr/graphing/widgets/service_summary/
+description: Affiche le graphique d'un service précis dans votre screenboard.
 further_reading:
-  - link: /dashboards/screenboards/
-    tag: Documentation
-    text: Screenboard
-  - link: /dashboards/graphing_json/
-    tag: Documentation
-    text: Créer des dashboards avec JSON
+- link: /dashboards/graphing_json/
+  tag: Documentation
+  text: Créer des dashboards avec JSON
+kind: documentation
+title: Widget Résumé de service
+widget_type: trace_service
 ---
+
 Le résumé de service affiche le graphique d'un [service][1] précis dans votre screenboard.
 
 {{< img src="dashboards/widgets/service_summary/service_summary.png" alt="résumé de service" >}}
@@ -29,9 +27,9 @@ Le résumé de service affiche le graphique d'un [service][1] précis dans votre
     * Hits
     * Erreurs
     * Latence
-    * Breakdown
+    * Répartition
     * Distribution
-    * Ressource
+    * Ressources (**remarque** : pour afficher des ressources, la plus grande taille de widget est requise)
 4. Choisissez votre préférence d'affichage en sélectionnant un intervalle et le nombre de colonnes à représenter sur vos graphiques.
 5. Saisissez un titre pour votre graphique.
 

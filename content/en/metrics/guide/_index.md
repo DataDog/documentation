@@ -5,7 +5,7 @@ description: Index of Metrics Guides
 aliases:
     - /metrics/custom_metrics/guide/
 private: true
-disable_sidebar: true
+disable_toc: true
 ---
 
 {{< whatsnext desc="General guides:" >}}
@@ -14,5 +14,5 @@ disable_sidebar: true
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Custom metrics guides:" >}}
-    {{< nextlink href="integrations/observability_pipelines/guide/custom-metrics-governance-drop-metrics-missing-specific-tags" >}}Custom Metrics Governance - Drop Metrics Missing Specific Tags{{< /nextlink >}}
+    {{< nextlink href="/observability_pipelines/guide/custom-metrics-governance" >}}Custom Metrics Governance{{< /nextlink >}}
 {{< /whatsnext >}}

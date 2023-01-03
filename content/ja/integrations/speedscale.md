@@ -1,42 +1,65 @@
 ---
+app_id: speedscale
+app_uuid: 35e3ad0c-9189-4453-b3c3-2b4aefa7c176
 assets:
   dashboards:
     speedscale: assets/dashboards/SpeedscaleOverview.json
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: true
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: speedscale.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Speedscale
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: support@speedscale.com
+  support_email: support@speedscale.com
 categories:
 - 自動化
 - コンテナ
 - orchestration
 - テスト
-creates_events: true
-ddtype: crawler
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/speedscale/README.md
-display_name: Speedscale
+display_on_public_website: true
 draft: false
 git_integration_title: speedscale
-guid: f2e3ed64-a756-440f-9a1f-43089536aa08
 integration_id: speedscale
 integration_title: Speedscale
 integration_version: ''
 is_public: true
 kind: integration
-maintainer: support@speedscale.com
-manifest_version: 1.0.0
-metric_prefix: speedscale.
-metric_to_check: ''
+manifest_version: 2.0.0
 name: speedscale
+oauth: {}
 public_title: Speedscale
 short_description: Speedscale のトラフィックリプレイ結果を Datadog に公開します。
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Automation
+  - Category::Containers
+  - Category::Orchestration
+  - Category::Testing
+  configuration: README.md#Setup
+  description: Speedscale のトラフィックリプレイ結果を Datadog に公開します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Speedscale
 ---
 
 ## 概要
@@ -64,7 +87,7 @@ supported_os:
 3. 特定のレポート ID と Datadog API キーで、`speedctl` コマンドを実行し、そのトラフィックリプレイレポートを Datadog イベントとしてエクスポートします。
 
    ```
-   speedctl export datadog report ${SPD_REPORT_ID} --apiKey ${DDOG_API_KEY}
+   speedctl export datadog ${SPD_REPORT_ID} --apiKey ${DDOG_API_KEY}
    {"status":"ok",...}
    ```
 ### 検証

@@ -135,7 +135,7 @@ RUM をトレースに接続するには、`service` フィールドにブラウ
 
 **注**: デフォルトでは、リストされたホストのすべてのサブドメインがトレースされます。たとえば、`example.com` を追加すると、`api.example.com` と `foo.example.com` のトレースも有効になります。
 
-4.  _(オプション)_ `tracingSampleRate` 初期化パラメータを設定して、バックエンドトレースの定義されたパーセンテージを保持するように設定します。設定しない場合、アプリケーションのリクエストから来るトレースの 100% が Datadog に送信されます。バックエンドトレースの 20% を保持する場合:
+4.  _(オプション)_ `tracingSamplingRate` 初期化パラメータを設定して、バックエンドトレースの定義されたパーセンテージを保持するように設定します。設定しない場合、アプリケーションのリクエストから来るトレースの 100% が Datadog に送信されます。バックエンドトレースの 20% を保持する場合:
     ```swift
     Datadog.initialize(
     appContext: .init(),
@@ -183,9 +183,6 @@ Real User Monitoring から生成されたトレースが、APM インデック�
 `x-datadog-sampling-priority: 1`
 : Agent がトレースを維持するようにします。
 
-`x-datadog-sampled: 1`
-Real User Monitoring SDK から生成されます。このリクエストがサンプリング用に選択されていることを示します。
-
 **注**: 上記 HTTP ヘッダーは CORS セーフリストに登録されていないため、SDK が監視するように設定されているリクエストを扱うサーバーで [Access-Control-Allow-Headers を構成][16]する必要があります。サーバーは、すべてのリクエストの前に SDK によって作られる[プレフライトリクエスト][17]も許可する必要があります (OPTIONS リクエスト)。
 
 ## APM クオータへの影響
@@ -199,21 +196,21 @@ RUM とトレースを接続すると、APM の取り込み量が大幅に増加
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing
-[2]: /ja/tracing/setup_overview/setup/python/
+[2]: /ja/tracing/trace_collection/dd_libraries/python/
 [3]: https://github.com/DataDog/dd-trace-py/releases/tag/v0.22.0
-[4]: /ja/tracing/setup_overview/setup/go/
+[4]: /ja/tracing/trace_collection/dd_libraries/go/
 [5]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.10.0
-[6]: /ja/tracing/setup_overview/setup/java/
+[6]: /ja/tracing/trace_collection/dd_libraries/java/
 [7]: https://github.com/DataDog/dd-trace-java/releases/tag/v0.24.1
-[8]: /ja/tracing/setup_overview/setup/ruby/
+[8]: /ja/tracing/trace_collection/dd_libraries/ruby/
 [9]: https://github.com/DataDog/dd-trace-rb/releases/tag/v0.20.0
-[10]: /ja/tracing/setup_overview/setup/nodejs/
+[10]: /ja/tracing/trace_collection/dd_libraries/nodejs/
 [11]: https://github.com/DataDog/dd-trace-js/releases/tag/v0.10.0
-[12]: /ja/tracing/setup_overview/setup/php/
+[12]: /ja/tracing/trace_collection/dd_libraries/php/
 [13]: https://github.com/DataDog/dd-trace-php/releases/tag/0.33.0
-[14]: /ja/tracing/setup_overview/setup/dotnet-core/
+[14]: /ja/tracing/trace_collection/dd_libraries/dotnet-core/
 [15]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.18.2
 [16]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers
 [17]: https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request
 [18]: /ja/tracing/trace_explorer/#live-search-for-15-minutes
-[19]: /ja/tracing/trace_retention/#retention-filters
+[19]: /ja/tracing/trace_pipeline/trace_retention/#retention-filters

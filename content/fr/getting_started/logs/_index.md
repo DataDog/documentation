@@ -1,17 +1,21 @@
 ---
-title: Débuter avec les logs
-kind: documentation
 further_reading:
-  - link: https://learn.datadoghq.com/enrol/index.php?id=15
-    tag: Centre d'apprentissage
-    text: Présentation des logs dans Datadog
-  - link: /logs/log_collection/
-    tag: Documentation
-    text: Collecte de logs et intégrations
-  - link: /getting_started/tagging/unified_service_tagging
-    tag: Documentation
-    text: Apprendre à configurer le tagging de service unifié
+- link: https://learn.datadoghq.com/courses/intro-to-log-management
+  tag: Centre d'apprentissage
+  text: Présentation de Log Management
+- link: https://learn.datadoghq.com/courses/going-deeper-with-logs-processing
+  tag: Centre d'apprentissage
+  text: Des analyses plus poussées grâce au traitement des logs
+- link: /logs/log_collection/
+  tag: Documentation
+  text: Collecte de logs et intégrations
+- link: /getting_started/tagging/unified_service_tagging
+  tag: Documentation
+  text: Apprendre à configurer le tagging de service unifié
+kind: documentation
+title: Débuter avec les logs
 ---
+
 ## Présentation
 
 Utilisez la fonction Datadog Log Management, également appelée logs, pour recueillir les logs issus de plusieurs sources de journalisation, comme votre serveur, votre conteneur, votre environnement Cloud, votre application ou vos processeurs et forwarders de logs existants. Avec un système de journalisation conventionnel, vous devez choisir les logs à analyser et à conserver afin de limiter les coûts. La fonctionnalité Logging without Limits* de Datadog vous permet de recueillir, traiter, archiver, explorer et surveiller vos logs sans limites de journalisation.
@@ -53,7 +57,7 @@ Pour commencer à recueillir des logs à partir d'un serveur :
 
     **Remarque** : si vous recueillez des logs à partir de fichiers personnalisés et avez besoin d'exemples pour les fichiers suivis, TCP/UDP, journald ou événements Windows, consultez la section [Collecte de logs personnalisés][9].
 
-### Conteneur
+### Container
 
 À partir de l'Agent Datadog v6, l'Agent peut recueillir des logs à partir de conteneurs. Chaque service de conteneurisation dispose d'instructions de configuration spécifiques en fonction de l'emplacement où l'Agent est déployé ou exécuté, ou encore de l'acheminement des logs.
 
@@ -77,7 +81,7 @@ Datadog vous permet de recueillir des logs à partir de clients via des SDK ou b
 
 Pour commencer à recueillir des logs à partir d'un service cloud, suivez les [instructions dans l'application][14].
 
-### Other
+### Autre
 
 Si vous utilisez des utilitaires ou services de journalisation existants, comme rsyslog, Fluentd ou Logstash, Datadog offre des plug-ins et options de transmission de logs.
 
@@ -125,7 +129,7 @@ Une fois qu'une source de journalisation est configurée et que vos logs sont di
 *Logging without Limits est une marque déposée de Datadog, Inc.
 
 [1]: https://www.datadoghq.com
-[2]: /fr/tracing/connect_logs_and_traces/
+[2]: /fr/tracing/other_telemetry/connect_logs_and_traces/
 [3]: /fr/logs/guide/correlate-logs-with-metrics/
 [4]: /fr/security_platform/cloud_siem/
 [5]: /fr/getting_started/integrations/

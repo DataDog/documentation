@@ -55,7 +55,7 @@ A custom `.rollup()` function can be used to enforce the type of time aggregatio
 
 **Note**: Queries for `COUNT` and `RATE` type metrics have the `.as_count()` modifier appended automatically in the UI, which sets the rollup method used to `sum` and disables interpolation. This `.as_count()` is explicitly visible at the end of the query:
 
-  {{< img src="dashboards/functions/rollup/as_count.png" alt="as_count" style="width:50%;">}}
+  {{< img src="dashboards/functions/rollup/as_count_dropdown.png" alt="as_count" style="width:100%;">}}
 
 For more details about how to use `.as_count()` and `.as_rate()` see the [Visualize StatsD metrics][3] blog post, or learn more about the effects of those functions with the documentation on [in-application modifiers][4].
 

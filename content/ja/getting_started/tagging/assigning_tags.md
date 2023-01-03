@@ -3,6 +3,7 @@ aliases:
 - /ja/agent/tagging
 - /ja/getting_started/tagging/assigning_tags
 - /ja/tagging/assigning_tags/
+description: Datadog でタグを割り当てる方法について説明します。
 further_reading:
 - link: /getting_started/tagging/
   tag: Documentation
@@ -43,7 +44,7 @@ title: タグの付け方
 {{% /tab %}}
 {{< /tabs >}}
 
-## タグ付けの方法
+## タグの割り当て方法
 
 ### 構成ファイル
 
@@ -263,7 +264,7 @@ Datadog トレーサーは環境変数、システムプロパティ、または
 {{< tabs >}}
 {{% tab "Host Map" %}}
 
-[Host Map ページ][1]を使って UI でホストタグを割り当てます。ページの下部にホストオーバーレイを表示するには、六角形（ホスト）をクリックします。次に、*User* セクションで **Edit Tags** ボタンをクリックします。タグをカンマ区切りリストで入力し、**Save Tags** をクリックします。**注**: UI で行われたメトリクスタグの変更が適用されるまでに最大 30 分かかる場合があります。
+[Host Map ページ][1]を使って UI でホストタグを割り当てます。ページの下部にホストオーバーレイを表示するには、六角形（ホスト）をクリックします。次に、*User* セクションで **Edit Tags** ボタンをクリックします。タグをカンマ区切りリストで入力し、**Save Tags** をクリックします。UI でホストタグに加えた変更は、適用されるまでに最大 5 分かかる場合があります。
 
 {{< img src="tagging/assigning_tags/hostmapuitags.png" alt="ホストマップタグ" style="width:80%;">}}
 
@@ -271,7 +272,7 @@ Datadog トレーサーは環境変数、システムプロパティ、または
 {{% /tab %}}
 {{% tab "Infrastructure List" %}}
 
-[Infrastructure List ページ][1]を使って UI でホストタグを割り当てます。ページの右にホストオーバーレイを表示するには、ホストをクリックします。次に、*User* セクションで **Edit Tags** ボタンをクリックします。タグをカンマ区切りリストで入力し、**Save Tags** をクリックします。**注**: UI で行われたメトリクスタグの変更が適用されるまでに最大 30 分かかる場合があります。
+[Infrastructure List ページ][1]を使って UI でホストタグを割り当てます。ページの右にホストオーバーレイを表示するには、ホストをクリックします。次に、*User* セクションで **Edit Tags** ボタンをクリックします。タグをカンマ区切りリストで入力し、**Save Tags** をクリックします。UI でホストタグに加えた変更は、適用されるまでに最大 5 分かかる場合があります。タグを追加したら、タグが UI に表示されていることを確認してから、さらにタグを追加してください。
 
 {{< img src="tagging/assigning_tags/hostuitags.png" alt="インフラストラクチャーリストタグ" style="width:80%;">}}
 

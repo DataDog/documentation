@@ -1,9 +1,8 @@
 ---
 categories:
-  - cloud
-  - google cloud
-  - ログの収集
-ddtype: crawler
+- cloud
+- google cloud
+- ログの収集
 dependencies: []
 description: Google Cloud IoT のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_iot/
@@ -21,6 +20,7 @@ public_title: Datadog-Google Cloud IoT インテグレーション
 short_description: Google Cloud IoT のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Cloud IoT は、世界中に分散した数百万のデバイスの接続、管理、データの取り込みを簡単かつ安全に行うことができるフルマネージド型のサービスです。

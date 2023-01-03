@@ -2,7 +2,6 @@
 categories:
 - cloud
 - azure
-ddtype: crawler
 dependencies: []
 description: Azure Recovery Service Vault のキーメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/azure_recovery_service_vault/

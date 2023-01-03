@@ -8,7 +8,7 @@ code_lang_weight: 80
 aliases:
   - /tracing/connect_logs_and_traces/opentelemetry
 further_reading:
-- link: "/tracing/trace_collection/open_standards/"
+- link: "/opentelemetry/otel_tracing/"
   tag: "Documentation"
   text: "Send OpenTelemetry Traces to Datadog"
 - link: "https://opentelemetry.io/docs/collector/"
@@ -78,9 +78,9 @@ log.info("Example log line with trace correlation info")
 [3]: https://github.com/DataDog/trace-examples/blob/98626d924f82666de60d6b2d6a65d87eebebdff1/opentelemetry/python-microservice/ddlogging/injection.py#L3
 {{% /tab %}}
 
-{{% tab "NodeJS" %}}
+{{% tab "Node.js" %}}
 
-To manually correlate your traces with your logs, patch the logging module you are using with a processor that translates OpenTelemetry formatted `trace_id` and `span_id` into the Datadog format. The following example uses the [winston logging library][1]. For other logging libraries, it may be more appropriate to [modify the Datadog SDK examples][2]. You can also find [an example OpenTelemetry instrumented NodeJS application with trace and log correlation][3] in the `trace-examples` GitHub repository.
+To manually correlate your traces with your logs, patch the logging module you are using with a processor that translates OpenTelemetry formatted `trace_id` and `span_id` into the Datadog format. The following example uses the [winston logging library][1]. For other logging libraries, it may be more appropriate to [modify the Datadog SDK examples][2]. You can also find [an example OpenTelemetry instrumented Node.js application with trace and log correlation][3] in the `trace-examples` GitHub repository.
 
 ```js
 // ########## logger.js
@@ -172,7 +172,7 @@ function readInt32 (buffer, offset) {
 
 const tracingFormat = function () {
   return winston.format(info => {
-    const span = opentelemetry.getSpan(opentelemetry.context.active());
+    const span = opentelemetry.trace.getSpan(opentelemetry.context.active());
     if (span) {
       const context = span.context();
       const traceIdEnd = context.traceId.slice(context.traceId.length / 2)

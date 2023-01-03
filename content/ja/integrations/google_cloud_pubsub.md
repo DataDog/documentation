@@ -1,19 +1,19 @@
 ---
 categories:
-  - cloud
-  - processing
-  - messaging
-  - google cloud
-  - log collection
-ddtype: crawler
+- cloud
+- processing
+- messaging
+- google cloud
+- log collection
 dependencies: []
 description: Google Cloud PubSub の主要メトリクスを追跡。
-doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_pubsub/'
+doc_link: https://docs.datadoghq.com/integrations/google_cloud_pubsub/
 draft: false
 git_integration_title: google_cloud_pubsub
 has_logo: true
 integration_id: google-cloud-pubsub
 integration_title: Google Pub/Sub
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -22,6 +22,7 @@ public_title: Datadog-Google Pub/Sub インテグレーション
 short_description: Google Cloud PubSub の主要メトリクスを追跡。
 version: '1.0'
 ---
+
 ## 概要
 
 Google Cloud Pub/Sub は、エンタープライズメッセージ指向ミドルウェアの拡張性、柔軟性、信頼性をクラウドにもたらします。
@@ -45,11 +46,11 @@ Google Pub/Sub からメトリクスを取得して、以下のことができ�
 
 ### ログの収集
 
-Google Cloud Pub/Sub のログは Stackdriver により収集され、HTTP プッシュフォワーダーを使用して Cloud Pub/Sub へ送信されます。[HTTP プッシュフォワーダーを使用した Cloud Pub/Sub][2] をまだセットアップしていない場合は、これをセットアップしてください。
+Google Cloud Pub/Sub のログは Google Cloud Logging により収集され、HTTP プッシュフォワーダーを使用して Cloud Pub/Sub へ送信されます。[HTTP プッシュフォワーダーを使用した Cloud Pub/Sub][2] をまだセットアップしていない場合は、これをセットアップしてください。
 
-セットアップが完了したら、Google Cloud Pub/Sub のログを Stackdriver から Pub/Sub へエクスポートします。
+これが完了したら、Google Cloud Pub/Sub のログを Google Cloud Logging から Pub/Sub へエクスポートします。
 
-1. [Stackdriver ページ][3]に移動し、Google Cloud Pub/Sub のログを絞り込みます。
+1. [Google Cloud Logging のページ][3]に移動し、Google Cloud Pub/Sub のログを絞り込みます。
 2. **シンクを作成**し、シンクに適宜名前を付けます。
 3. エクスポート先として「Cloud Pub/Sub」を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクト内に配置することもできます。
 

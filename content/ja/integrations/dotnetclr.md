@@ -1,37 +1,54 @@
 ---
+app_id: dotnetclr
+app_uuid: 2147d078-2742-413e-83eb-58400657de56
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: dotnetclr.memory.time_in_gc
+      metadata_path: metadata.csv
+      prefix: dotnetclr.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: .NET CLR
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - languages
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/dotnetclr/README.md
-display_name: .NET CLR
+display_on_public_website: true
 draft: false
 git_integration_title: dotnetclr
-guid: 3d21557e-65bd-4b66-99b9-5521f32b5957
 integration_id: dotnetclr
 integration_title: .NET CLR
-integration_version: 1.12.1
+integration_version: 1.13.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: dotnetclr.
-metric_to_check: dotnetclr.memory.time_in_gc
+manifest_version: 2.0.0
 name: dotnetclr
-public_title: Datadog-.NET CLR インテグレーション
+oauth: {}
+public_title: .NET CLR
 short_description: Dotnetclr の状態を視覚化および監視
-support: コア
 supported_os:
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Windows
+  - Category::言語
+  configuration: README.md#Setup
+  description: Dotnetclr の状態を視覚化および監視
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: .NET CLR
 ---
 
 

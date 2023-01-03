@@ -7,18 +7,18 @@ further_reading:
 - link: https://www.datadoghq.com/blog/browser-tests/
   tag: ブログ
   text: ブラウザテストによるユーザーエクスペリエンスの監視
-- link: https://learn.datadoghq.com/course/view.php?id=39
-  tag: ラーニングセンター
-  text: Synthetic テストの紹介
-- link: /getting_started/synthetics/browser_test
-  tag: Documentation
-  text: ブラウザテストの概要
 - link: https://www.datadoghq.com/blog/test-creation-best-practices/
   tag: ブログ
   text: エンドツーエンドテスト作成のベストプラクティス
-- link: /synthetics/guide/
+- link: https://learn.datadoghq.com/courses/intro-to-synthetic-tests
+  tag: ラーニングセンター
+  text: Synthetic テストの紹介
+- link: /getting_started/synthetics/browser_test
+  tag: ドキュメント
+  text: ブラウザテストの概要
+- link: /synthetics/guide/synthetic-test-monitors
   tag: Documentation
-  text: Synthetic モニタリングガイド
+  text: Synthetic テストモニターについて
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test
   tag: Terraform
   text: Terraform による Synthetic ブラウザテストの作成と管理
@@ -36,112 +36,134 @@ title: ブラウザテスト
 
 ブラウザテストの構成を定義します。
 
-1. <mrk mid="23" mtype="seg"/><mrk mid="24" mtype="seg"/>
-2. **Advanced Options** (オプション): ブラウザテストに特定のオプションを設定します。
+1. **Starting URL** を入力します。ブラウザテストがシナリオを開始する URL です。
+2. **Advanced Options** を追加します (オプション)。ブラウザテストに特定のオプションを設定します。
 
-  {{< tabs >}}
+   {{< tabs >}}
 
-  {{% tab "リクエストオプション" %}}
+   {{% tab "リクエストオプション" %}}
 
-  クロスオリジンリソース共有 (CORS) ポリシーでテストがブロックされないようにするには、**Disable CORS** を選択します。
+   クロスオリジンリソース共有 (CORS) ポリシーがテストをブロックするのを防ぐには、**Disable CORS** を選択します。コンテンツセキュリティポリシー (CSP) がテストをブロックするのを防ぐには、**Disable CSP** を選択します。
 
-  * **Request Headers**: **Name** および **Value* フィールドでヘッダーを定義して、デフォルトのブラウザヘッダーに追加またはオーバーライドします。たとえば、ヘッダーに User Agent を設定して、[Datadog スクリプトを識別][1]できます。
-  * **Cookies**: ブラウザのデフォルトのクッキーに追加するクッキーを定義します。1 行に 1 つのクッキーを入力し、[`Set-Cookie`][2] の構文を使用します。
-  * **HTTP Authentication**: HTTP Basic、Digest または NTLM を使用し、ユーザー名とパスワードで認証を行います。資格情報は、ブラウザテストのすべてのステップで使用されます。
+   * **Request Headers**: **Name** および **Value* フィールドでヘッダーを定義して、デフォルトのブラウザヘッダーに追加またはオーバーライドします。たとえば、ヘッダーに User Agent を設定して、[Datadog スクリプトを識別][1]できます。
+   * **Cookies**: ブラウザのデフォルトのクッキーに追加するクッキーを定義します。1 行に 1 つのクッキーを入力し、[`Set-Cookie`][2] の構文を使用します。
+   * **HTTP Authentication**: HTTP Basic、Digest または NTLM を使用し、ユーザー名とパスワードで認証を行います。資格情報は、ブラウザテストのすべてのステップで使用されます。
 
-  リクエストオプションは、テストの実行ごとに設定され、記録時間ではなく、実行時にブラウザテストのすべてのステップに適用されます。
-  次のステップを記録するためにこれらのオプションを有効にしたままにする必要がある場合は、記録元のページでオプションを手動で適用し、テスト内で次のステップを作成します。
+   リクエストオプションは、テストの実行ごとに設定され、記録時ではなく、実行時にブラウザテストのすべてのステップに適用されます。次の手順を記録するためにこれらのオプションをアクティブのままにしておく必要がある場合は、記録元のページにオプションを手動で適用し、テストの後続の手順を作成します。
 
 
 [1]: /ja/synthetics/guide/identify_synthetics_bots/?tab=apitests
 [2]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie
-  {{% /tab %}}
+   {{% /tab %}}
 
-  {{% tab "証明書" %}}
+   {{% tab "証明書" %}}
 
 **Ignore server certificate error** を選択すると、サーバー証明書のエラーをスキップするようにテストが指示されます。
 
-  * **Client Certificate**: クライアント証明書を必要とするシステムでテストを行うには、**Upload File** をクリックして、証明書ファイルと秘密鍵をアップロードしてください。PEM 証明書のみ受け付けます。
-  * **Client Certificate Domains**: 証明書ファイルをアップロードすると、クライアント証明書は、開始 URL のドメインに適用されます。別のドメインにクライアント証明書を適用する場合は、**Value** 欄にドメインを指定します。 
+   * **Client Certificate**: クライアント証明書を必要とするシステムでテストを行うには、**Upload File** をクリックして、証明書ファイルと秘密鍵をアップロードしてください。PEM 証明書のみ受け付けます。
+   * **Client Certificate Domains**: 証明書ファイルをアップロードすると、クライアント証明書は、開始 URL のドメインに適用されます。別のドメインにクライアント証明書を適用する場合は、**Value** 欄にドメインを指定します。 
 
-  URL にワイルドカードを含めることができます。
+   URL にワイルドカードを含めることができます。
 
-  {{% /tab %}}
+   {{% /tab %}}
 
-  {{% tab "プロキシ" %}}
+   {{% tab "プロキシ" %}}
 
-  **Proxy URL** フィールドに、リクエストを送信するプロキシの URL を `http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>` として入力します。
+   **Proxy URL** フィールドに、リクエストを送信するプロキシの URL を `http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>` として入力します。
 
-  URL に[グローバル変数](#use-global-variables)を含めることができます。
+   URL に[グローバル変数](#use-global-variables)を含めることができます。
 
-  {{% /tab %}}
+   {{% /tab %}}
 
-  {{% tab "Privacy" %}}
+   {{% tab "Privacy" %}}
 
-  **Do not capture any screenshots for this test** を選択して、テストステップでスクリーンショットが撮影されないようにします。
+   **Do not capture any screenshots for this test** を選択して、テストステップでスクリーンショットが撮影されないようにします。
 
-  このプライバシーオプションは、個々のテストステップレベルの[詳細オプション][1]として利用でき、テスト結果に機密データが表示されないようにすることができます。
-
-  テストがスクリーンショットを撮らないようにすると、失敗のトラブルシューティングが難しくなります。詳しくは、[セキュリティ][2]を参照してください。
+   このプライバシー オプションは、個々のテストステップレベルで[詳細オプション][1]として利用でき、テスト結果に機密データが表示されないようにすることができます。テストによるスクリーンショットの撮影を防止すると、失敗のトラブルシューティングがより困難になります。詳細については、[データセキュリティ][2]を参照してください。
 
 [1]: /ja/synthetics/browser_tests/advanced_options#prevent-screenshot-capture
-[2]: /ja/security/synthetics
-  {{% /tab %}}
+[2]: /ja/data_security/synthetics
+   {{% /tab %}}
 
-  {{< /tabs >}}
+   {{< /tabs >}}
 
-3. <mrk mid="33" mtype="seg"/><mrk mid="34" mtype="seg"/>
-4. **Select tags**: ブラウザのテストにアタッチされる `env` と関連するタグです。与えられた `<KEY>` に対する `<VALUE>` をフィルタリングするには、`<KEY>:<VALUE>` という形式を使用します。
-5. **Browsers & Devices**: テストを実行するブラウザ (`Chrome`、`Firefox`、`Edge` など) とデバイス (`Laptop Large`、`Tablet`、`Mobile Small` など)。
+3. **名前**を追加します。ブラウザテストの名前です。
+4. **環境と追加タグ**を選択します。ブラウザのテストにアタッチされる `env` と関連するタグを設定します。与えられた `<KEY>` に対する `<VALUE>` をフィルタリングするには、`<KEY>:<VALUE>` という形式を使用します。
+5. **ブラウザとデバイス**を選択します。テストを実行するブラウザ (`Chrome`、`Firefox`、`Edge` など) とデバイス (`Laptop Large`、`Tablet`、`Mobile Small` など) です。
    - 大型のラップトップデバイスの場合、寸法は 1440 ピクセル × 1100 ピクセルです。
    - タブレットデバイスの場合、寸法は 768 ピクセル × 1020 ピクセルです。
    - 小型のモバイルデバイスの場合、寸法は 320 ピクセル × 550 ピクセルです。
-6. **Select locations**: テストを実行するための Datadog が管理するロケーションです。世界中の多くの AWS ロケーションが各サイトで利用可能です。また、[プライベートロケーション][1]を設定して、カスタムロケーションやプライベートネットワーク内部からブラウザテストを実行することも可能です。[Datadog アプリ][2]でロケーションの全リストを見るか、[API][3] を使用してください。 {{< site-region region="gov" >}}**注**: Datadog for Government のサイトでは、 West US (AWS GovCloud) のロケーションがサポートされています。{{< /site-region >}}
-7. **Select test frequency**: 間隔は 5 分に 1 回から週に 1 回までさまざまです。1 分ごとの頻度については、[サポートにお問い合わせ][4]ください。
+6. **管理ロケーションとプライベートロケーション**を選択します。Datadog が管理する世界中のロケーションを設定し、そこからテストを実行します。また、[プライベートロケーション][1]を作成し、カスタムロケーションやプライベートネットワーク内からブラウザテストを実行することも可能です。ロケーションの完全なリストについては、[UI][2] に移動するか、[API][3] を使用してください。{{< site-region region="gov" >}}**注**: Datadog for Government のサイトでは、 West US (AWS GovCloud) のロケーションがサポートされています。{{< /site-region >}}
+7. **テスト頻度**を設定します。間隔は 5 分に 1 回から週に 1 回までさまざまです。1 分単位の頻度を希望する場合は、[サポートにお問い合わせ][4]ください。
+
+## 変数
+
+### ローカル変数を作成する
+
+ローカル変数を作成するには、右上の **Create Local Variable** をクリックします。以下の利用可能なビルトインのいずれかから選択することができます。
+
+`{{ numeric(n) }}`
+: `n` 桁の数字列を生成します。
+
+`{{ alphabetic(n) }}`
+: `n` 文字のアルファベット文字列を生成します。
+
+`{{ alphanumeric(n) }}`
+: `n` 文字の英数字文字列を生成します。
+
+`{{ date(n unit, format) }}` 
+: テストが + または - `n` 単位で開始された UTC 日付に対応する値を使用して、Datadog の許容される形式のいずれかで日付を生成します。
+
+`{{ timestamp(n, unit) }}` 
+: テストが + または - `n` 単位で開始された UTC タイムスタンプに対応する値を使用して、Datadog の許容される単位のいずれかでタイムスタンプを生成します。
+
+テスト結果のローカル変数値を難読化するには、**Hide and obfuscate variable value** を選択します。変数文字列を定義したら、**Add Variable** をクリックします。
 
 ### グローバル変数を使用する
 
-[**Settings** で定義したグローバル変数][5]は、**Starting URL** のほか、ブラウザテストの **Advanced Options** でも使用できます。変数の一覧を表示するには、フィールドに `{{` と入力します。
+ブラウザテストの詳細の **Starting URL** と **Advanced Options**、およびテストの記録で [**Settings** で定義されているグローバル変数][5]を使用してローカル変数を定義することができます。利用可能な変数のリストを表示するには、目的のフィールドに `{{` と入力してください。
 
-{{< img src="synthetics/browser_tests/using_variables_browser.mp4" alt="ブラウザテストで変数を使用する" video="true" width="80%" >}}
+{{< img src="synthetics/browser_tests/recording_global_variable.mp4" alt="グローバル変数からローカル変数を定義する" video="true" width="90%" >}}
 
-ブラウザテストの記録でグローバル変数を使用するには、記録したステップに移動して、**Start Recording** ボタンの下にある **+ Variables** をクリックします。ドロップダウンメニューから、**Global Variable** を選択します。
+記録を開始する前に、ユーザージャーニーに組み込む変数を定義します。
 
-{{< img src="synthetics/browser_tests/available-global-variables.png" alt="利用可能なグローバル変数" style="width:50%;" >}}
+{{< img src="synthetics/browser_tests/recording_inject_variable.mp4" alt="ブラウザレコーディング時にローカル変数をフィールドに挿入する" video="true" width="90%" >}}
 
-利用可能なグローバル変数を検索し、**+** をクリックして記録パネルに追加します。グローバル変数の追加が完了したら、**OK** をクリックします。
+記録中に利用可能な変数を注入することができます。ブラウザテストの記録で変数を使用する方法については、[ブラウザテストの手順][6]を参照してください。
 
 ### アラート条件を定義する
 
 アラートの条件をカスタマイズして、通知アラートの送信をテストする状況を定義できます。
 
+{{< img src="synthetics/browser_tests/alerting_rules.png" alt="ブラウザテストのアラートルール" style="width:80%" >}}
+
 * `N` のうち `n` の数の場所で、`X` の時間（分）継続してアサーションが失敗した場合は、アラートがトリガーされます。このアラートルールにより、通知をトリガーする前にテストが失敗する必要がある時間と場所の数を指定できます。
-* 場所が失敗としてマークされる前に、`X` 回再試行します。これにより、場所が失敗と見なされるために、連続していくつのテスト失敗が発生する必要があるかを定義できます。デフォルトでは、失敗したテストを再試行する前に 300 ミリ秒待機します。この間隔は、[API][6] で構成できます。
+* 場所が失敗としてマークされる前に、`X` 回再試行します。これにより、場所が失敗と見なされるために、連続していくつのテスト失敗が発生する必要があるかを定義できます。デフォルトでは、失敗したテストを再試行する前に 300 ミリ秒待機します。この間隔は、[API][7] で構成できます。
 
-{{< img src="synthetics/browser_tests/alerting_rules.png" alt="ブラウザテストのアラートルール" >}}
+### テストモニターを構成する
 
-### チームへの通知
-
-通知はアラート設定の条件に従って送信されます。通知を構成するには以下の手順に従ってください。
+設定されたアラート条件に従って、通知が送信されます。このセクションを使用して、チームにメッセージを送る方法と内容を定義します。
 
 1. ブラウザテストの**メッセージ**を入力します。このフィールドでは、標準の[マークダウン形式][7]のほか、以下の[条件付き変数][8]を使用できます。
 
     | 条件付き変数       | 説明                                                         |
     |----------------------------|---------------------------------------------------------------------|
-    | `{{#is_alert}}`            | モニターがアラートする場合に表示                                            |
-    | `{{^is_alert}}`            | モニターがアラートしない場合に表示                                          |
-    | `{{#is_recovery}}`         | モニターがいずれかの ALERT から回復する場合に表示   |
-    | `{{^is_recovery}}`         | モニターがいずれかの ALERT から回復しない場合に表示 |
-    | `{{#is_renotify}}`         | モニターが再通知したときに表示します。   |
-    | `{{^is_renotify}}`         | モニターが再通知しない限り表示します。 |
-    | `{{#is_priority}}`         | モニターが優先順位 (P1～P5) に一致したときに表示します。   |
-    | `{{^is_priority}}`         | モニターが優先順位 (P1～P5) に一致しない限り表示します。  |
+    | `{{#is_alert}}`            | モニターがアラートを発する場合に表示します。                                       |
+    | `{{^is_alert}}`            | モニターがアラートを発しない限り表示します。                                     |
+    | `{{#is_recovery}}`         | モニターが `alert` から回復したときに表示します。                          |
+    | `{{^is_recovery}}`         | モニターが `alert` から回復しない限り表示します。                        |
+    | `{{#is_renotify}}`         | モニターが再通知したときに表示します。                                   |
+    | `{{^is_renotify}}`         | モニターが再通知しない限り表示します。                                 |
+    | `{{#is_priority}}`         | モニターが優先順位 (P1～P5) に一致したときに表示します。                  |
+    | `{{^is_priority}}`         | モニターが優先順位 (P1～P5) に一致しない限り表示します。                |
 
     通知メッセージには、このセクションで定義された**メッセージ**や、失敗した場所に関する情報が記載されます。
 
-2. 通知先の[サービス][9]あるいはチームメンバーを選択します。
+2. 通知するメンバーやサービスを選択します。
 3. 再通知の頻度を指定します。テストの失敗を再通知しない場合は、`Never renotify if the monitor has not been resolved` オプションを使用してください。
-4. **Save Details and Record Test** をクリックします。
+4. **Save Details and Record Test** をクリックすると、テストの構成が保存され、ブラウザのステップが記録されます。
+
+詳しくは、[Synthetic テストモニターの使用][9]をご覧ください。
 
 ## ステップを記録する
 
@@ -149,16 +171,16 @@ title: ブラウザテスト
 
 アプリケーション上でアクションを実行するために (リンクをクリックして別のタブを開くなど) ブラウザテストの記録でタブを切り替え、別のテストステップを追加することができます。ブラウザテストは、[アサーション][12]を実行する前に、まず (クリックによって) ページと相互作用する必要があります。すべてのテストステップを記録することによって、ブラウザテストはテスト実行時に自動的にタブを切り替えることができます。
 
-{{< img src="synthetics/browser_tests/browser_check_record_test.png" alt="ブラウザでのテストの記録" width="80%" >}}
+{{< img src="synthetics/browser_tests/browser_check_record_test.png" alt="ブラウザでのテストの記録" width="90%" >}}
 
 1. 必要に応じて、ページの右上にある **Open in a pop-up** を選択して、別のポップアップウィンドウでテスト記録を開きます。これは、アプリケーションが iframe で開くことをサポートしていない場合、または記録時のサイズの問題を回避したい場合に役立ちます。**シークレットモード**でポップアップを開いて、ログイン済みのセッションや既存のブラウザからの Cookie などを使用せずに、新しいブラウザからテストの記録を開始することもできます。
 2. オプションとして、ブラウザテストからステップの記録を実行する際に、Datadog が自動的に RUM データを収集するように設定します。詳細については、[RUM とセッションリプレイの探索][13]を参照してください。
 3. **Start Recording** をクリックして、ブラウザテストの記録を開始します。
 4. 監視したいユーザージャーニーを通過するアプリケーションをクリックすると、アクションが自動的に記録され、左側のブラウザテストシナリオ内で[ステップ][14]を作成するために使用されます。
 5. 自動的に記録されたステップに加えて、左上隅にある[ステップ][14]を使用して、シナリオを強化することもできます。
-    {{< img src="synthetics/browser_tests/manual_steps.png" alt="ブラウザテストのステップ" style="width:80%;">}}
+   {{< img src="synthetics/browser_tests/manual_steps.png" alt="ブラウザテストのステップ" style="width:80%;">}}
 
-    **注**: ブラウザテストによって実行されたジャーニーが期待される状態になったことを確認するために、常に**ブラウザテストは、[アサーション][12]で終了する**必要があります。
+   ブラウザテストによって実行されたジャーニーが期待される状態になったことを確認するために、Datadog では、ブラウザテストは**[アサーション][12]**で終了することを推奨します。
 6. シナリオが終了したら、**Save and Launch Test** をクリックします。
 
 ## アクセス許可
@@ -184,10 +206,10 @@ title: ブラウザテスト
 [3]: /ja/api/latest/synthetics/#get-all-locations-public-and-private
 [4]: /ja/help/
 [5]: /ja/synthetics/settings/#global-variables
-[6]: /ja/api/v1/synthetics/#create-or-clone-a-test
-[7]: http://daringfireball.net/projects/markdown/syntax
-[8]: /ja/monitors/notify/?tab=is_alert#integrations
-[9]: /ja/integrations/#cat-notification
+[6]: /ja/synthetics/browser_tests/actions#variables
+[7]: /ja/api/latest/synthetics/#create-or-clone-a-test
+[8]: http://daringfireball.net/projects/markdown/syntax
+[9]: /ja/synthetics/guide/synthetic-test-monitors
 [10]: https://www.google.com/chrome
 [11]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
 [12]: /ja/synthetics/browser_tests/actions/#assertion

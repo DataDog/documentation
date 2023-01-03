@@ -1,43 +1,44 @@
 ---
 categories:
-  - cloud
-  - monitoring
-  - google cloud
-ddtype: crawler
+- cloud
+- monitoring
+- google cloud
 dependencies: []
-description: Google Stackdriver に収集されたログのサイズを追跡。
-doc_link: 'https://docs.datadoghq.com/integrations/google_stackdriver_logging/'
+description: Google Cloud Logging に収集されたログのサイズを追跡。
+doc_link: https://docs.datadoghq.com/integrations/google_stackdriver_logging/
 draft: false
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/collect-stackdriver-logs-with-datadog/'
-    tag: ブログ
-    text: Datadog を使用した Google Stackdriver ログの収集。
+- link: https://www.datadoghq.com/blog/collect-stackdriver-logs-with-datadog/
+  tag: ブログ
+  text: Datadog を使用した Google Cloud ログの収集。
 git_integration_title: google_stackdriver_logging
 has_logo: true
 integration_id: google-stackdriver-logging
-integration_title: Google Stackdriver Logging
+integration_title: Google Cloud Logging
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
 name: google_stackdriver_logging
-public_title: Datadog-Google Stackdriver Logging インテグレーション
+public_title: Datadog-Google Cloud Logging インテグレーション
 short_description: Google Stackdriver に収集されたログのサイズを追跡。
 version: '1.0'
 ---
+
 ## 概要
 
-Google の Stackdriver Logging 製品を使用すると、Google Cloud Platform からのログデータやイベントを保存、検索、分析、監視、およびアラートすることができます。
+Google の Cloud Logging 製品を使用すると、Google Cloud Platform からのログデータやイベントを保存、検索、分析、監視、およびアラートすることができます。
 
-Datadog は Google Stackdriver Logging から**メトリクス**をプルして、以下を実行します。
+Datadog は Google Cloud Logging から**メトリクス**をプルして、以下を実行します。
 
-- Stackdriver ログのパフォーマンスを視覚化。
-- Stackdriver ログのパフォーマンスをアプリケーションと関連付け。
+- Google Cloud ログのパフォーマンスを視覚化。
+- Google Cloud ログのパフォーマンスをアプリケーションと関連付け。
 
 ## セットアップ
 
 ### インストール
 
-Stackdriver ログのメトリクスは、[Google Cloud Platform インテグレーション][1]に含まれています。追加のインストール手順は必要ありません。
+Google Cloud ログのメトリクスは、[Google Cloud Platform インテグレーション][1]に含まれています。追加のインストール手順は必要ありません。
 
 ### ログの収集
 
@@ -49,15 +50,15 @@ Stackdriver ログのメトリクスは、[Google Cloud Platform インテグレ
 {{< get-metrics-from-git "google_stackdriver_logging" >}}
 
 
-**注**: Datadog は、プレフィックス `gcp.logging.user` を使用して Google Stackdriver の[ユーザー定義のメトリクス][4]を収集します。
+**注**: Datadog は、プレフィックス `gcp.logging.user` を使用して Google Cloud Logging の[ユーザー定義のメトリクス][4]を収集します。
 
 ### イベント
 
-Google Stackdriver Logging インテグレーションには、イベントは含まれません。
+Google Cloud Logging インテグレーションには、イベントは含まれません。
 
 ### サービスのチェック
 
-Google Stackdriver Logging インテグレーションには、サービスのチェック機能は含まれません。
+Google Cloud Logging インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 

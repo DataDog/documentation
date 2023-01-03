@@ -9,7 +9,7 @@ assets:
     events:
       creates_events: false
     metrics:
-      check: ''
+      check: []
       metadata_path: metadata.csv
       prefix: rookout.
     service_checks:
@@ -18,13 +18,9 @@ assets:
 author:
   homepage: https://rookout.com
   name: Rookout
+  sales_email: support@rookout.com
   support_email: support@rookout.com
 categories: []
-classifier_tags:
-- Supported OS::Linux
-- Supported OS::Mac OS
-- Supported OS::Windows
-- Offering::UI Extension
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/rookout/README.md
 display_on_public_website: true
@@ -46,6 +42,12 @@ supported_os:
 - mac os
 - windows
 tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Mac OS
+  - Supported OS::Windows
+  - Offering::UI Extension
   configuration: README.md#Setup
   description: Utilisez Rookout pour recueillir des métriques depuis votre code exécuté
     en production.
@@ -96,7 +98,7 @@ Ajoutez le widget Rookout à votre dashboard pour visualiser les points de métr
 
 ## Configuration
 
-### Procédure à suivre
+### Configuration
 
 Pour ajouter l'option de menu contextuel Rookout à un widget de série temporelle dans votre dashboard, vous devez ajouter un filtre d'étiquette Rookout dans son titre.
 

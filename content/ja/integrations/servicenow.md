@@ -2,7 +2,6 @@
 categories:
 - issue tracking
 - notification
-ddtype: crawler
 dependencies: []
 description: Datadog アラートからチケットを自動的に生成および更新
 doc_link: https://docs.datadoghq.com/integrations/servicenow/
@@ -229,4 +228,4 @@ answer = (function transformEntry(source)
 [3]: https://docs.datadoghq.com/resources/xml/Datadog-SNow_Update_Set.xml
 [4]: https://app.datadoghq.com/account/settings#integrations/servicenow
 [5]: https://docs.datadoghq.com/ja/help/
-[6]: https://docs.servicenow.com/bundle/latest-it-service-management/page/product/incident-management/task/def-prio-lookup-rules.html
+[6]: https://docs.servicenow.com/en-US/bundle/sandiego-it-service-management/page/product/incident-management/task/def-prio-lookup-rules.html

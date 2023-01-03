@@ -52,7 +52,7 @@ If the parameter `send_distribution_counts_as_monotonic` is `true`, each metric 
 
 ### Summary
 
-For [Prometheus/OpenMetrics `summary`][9], the `_count` and `_sum` values of the summary are each mapped to Datadog's `gauge`.
+For [Prometheus/OpenMetrics `summary`][9], the `_count` and `_sum` values of the summary are each mapped to Datadog's `count`.
 
 If the parameter `send_distribution_buckets` is `true`, the histogram is converted to a distribution, and each `_bucket` can be fetched using `distribution` tags.
 

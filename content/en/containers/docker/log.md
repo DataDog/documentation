@@ -39,6 +39,8 @@ Configuring log collection depends on your current environment. Choose one of th
 
 - If your container writes logs to files (only partially writes logs to `stdout`/`stderr` and writes logs to files OR fully writes logs to files), follow the [host Agent with custom log collection](?tab=hostagentwithcustomlogging#installation) installation or follow the [containerized Agent](?tab=containerized-agent#installation) installation and check the [log collection from file with Autodiscovery configuration example](?tab=logcollectionfromfile#examples).
 
+The CLI commands on this page are for the Docker runtime. Replace `docker` with `nerdctl` for the containerd runtime, or `podman` for the Podman runtime. Support for containerd and Podman log collection is limited.
+
 ## Installation
 
 {{< tabs >}}
@@ -51,6 +53,7 @@ To run a [Docker container][1] that embeds the Datadog Agent to monitor your hos
 ```shell
 docker run -d --name datadog-agent \
            --cgroupns host \
+           --pid host \
            -e DD_API_KEY=<DATADOG_API_KEY> \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
@@ -68,6 +71,7 @@ docker run -d --name datadog-agent \
 ```shell
 docker run -d --name datadog-agent \
            --cgroupns host \
+           --pid host \
            -e DD_API_KEY=<DATADOG_API_KEY> \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
@@ -84,6 +88,7 @@ Add the path `/opt/datadog-agent/run` under Docker Desktop -> Settings -> Resour
 ```shell
 docker run -d --name datadog-agent \
            --cgroupns host \
+           --pid host \
            -e DD_API_KEY=<DATADOG_API_KEY> \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \

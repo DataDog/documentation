@@ -5,7 +5,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/
   tag: Blog
   text: Intégrer des tests Datadog Synthetic dans votre pipeline de CI/CD.
-- link: https://learn.datadoghq.com/enrol/index.php?id=37
+- link: https://learn.datadoghq.com/courses/synthetic-tests-ci-cd-pipeline
   tag: Centre d'apprentissage
   text: Découvrir comment exécuter des tests Synthetic dans des pipelines de CI/CD
 - link: https://www.datadoghq.com/blog/internal-application-testing-with-datadog/

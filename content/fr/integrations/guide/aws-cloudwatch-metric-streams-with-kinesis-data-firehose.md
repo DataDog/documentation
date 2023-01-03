@@ -1,13 +1,13 @@
 ---
-title: "Flux de métriques AWS\_CloudWatch avec Kinesis Data Firehose"
-kind: guide
 further_reading:
-  - link: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Streams.html
-    tag: Documentation
-    text: "Flux de métriques - Amazon\_CloudWatch"
-  - link: https://www.datadoghq.com/blog/amazon-cloudwatch-metric-streams-datadog/
-    tag: Blog
-    text: "Recueillez des métriques Amazon\_CloudWatch à l'aide des flux de métriques."
+- link: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Streams.html
+  tag: Documentation
+  text: Flux de métriques - Amazon CloudWatch
+- link: https://www.datadoghq.com/blog/amazon-cloudwatch-metric-streams-datadog/
+  tag: Blog
+  text: Recueillez des métriques Amazon CloudWatch à l'aide des flux de métriques.
+kind: guide
+title: Flux de métriques AWS CloudWatch avec Kinesis Data Firehose
 ---
 {{< site-region region="us3,us5,gov" >}}
 
@@ -30,10 +30,6 @@ Avec les flux de métriques Amazon CloudWatch et Amazon Kinesis Data Firehose
 ### Comparaison entre les flux de métriques et l'API (#flux-de-metriques-et-api)
 
 Les principales différences entre les flux de métriques CloudWatch et l'API sont les suivantes :
-
-- **Centiles CloudWatch** : les métriques CloudWatch liées aux [statistiques de centile][1] (`aws.*.pXX`) ne peuvent pas être diffusées. Cela signifie que les noms des métriques recueillies peuvent différer. Exemples de métriques non prises en charge : `aws.elb.latency.p95`, `aws.applicationelb.target_response_time.p99` et `aws.applicationelb.target_response_time.p50`. 
-
-  (**Remarque** : ces métriques sont différentes des [métriques de distribution Datadog][2].)
 
 - **Filtrage par espace de nommage sur AWS** : les valeurs par défaut des espaces de nommage et les paramètres de compte du carré d'intégration AWS s'appliquent uniquement à l'API. Toutes les règles d'inclusion et d'exclusion d'espaces de nommage dans les flux doivent être gérées en utilisant la configuration des flux de métriques CloudWatch dans vos comptes AWS.
 
@@ -115,14 +111,16 @@ Si vous souhaitez configurer les flux de métriques à l'aide de la console AWS,
  - Pour la compression de S3, choisissez `GZIP`.
  - Activez la journalisation des erreurs.
 2. Suivez les étapes suivantes pour créer votre [flux de métriques CloudWatch][2] :
- 1. Précisez si vous voulez diffuser toutes les métriques CloudWatch ou seulement certains espaces de nommage spécifiques à l'aide des listes Include et Exclude.
+3. Précisez si vous voulez diffuser toutes les métriques CloudWatch ou seulement certains espaces de nommage spécifiques à l'aide des listes Include et Exclude.
    {{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/cloudwatch-metric-stream.png" alt="Flux de métriques CloudWatch" responsive="true" style="width:60%;">}}
- 2. Sélectionnez le Firehose que vous avez créé lors de la première étape et que vous souhaitez utiliser pour envoyer les métriques à Datadog.
+4. Sélectionnez le Firehose que vous avez créé lors de la première étape et que vous souhaitez utiliser pour envoyer les métriques à Datadog.
    {{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/firehose.png" alt="Firehose" responsive="true" style="width:60%;">}}
- 3. Créez un nouveau rôle de service pour importer des enregistrements dans Kinesis Data Firehose.
- 4. Choisissez le format de sortie OpenTelemetry 0.7.
- 5. Nommez votre flux de métriques.
- 6. Cliquez sur **Create metric stream**.
+5. Créez un nouveau rôle de service pour importer des enregistrements dans Kinesis Data Firehose.
+6. **Définissez le format de sortie OpenTelemetry 0.7**.
+7. Ajoutez des statistiques supplémentaires afin d'inclure les métriques de centile AWS que vous souhaitez envoyer à Datadog. Référez-vous à notre [modèle CloudFormation][4] pour consulter la liste des métriques de centile prises en charge par Datadog via le processus d'interrogation.
+   {{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/percentiles.png" alt="Centiles" responsive="true" style="width:60%;">}}
+8. Nommez votre flux de métriques.
+9. Cliquez sur **Create metric stream**.
 
 ### Résultats
 
@@ -135,6 +133,7 @@ Une fois la ressource de flux de métriques créée, patientez cinq minutes le t
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#metric-streams:streams/create
 [3]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
+[4]: https://github.com/DataDog/cloudformation-template/blob/master/aws_streams/streams_single_region.yaml#L168-L249
 {{% /tab %}}
 {{< /tabs >}}
 

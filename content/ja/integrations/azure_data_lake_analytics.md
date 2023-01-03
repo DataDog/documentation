@@ -1,10 +1,9 @@
 ---
 aliases:
-  - /ja/integrations/azure_datalakeanalytics
+- /ja/integrations/azure_datalakeanalytics
 categories:
-  - cloud
-  - azure
-ddtype: crawler
+- cloud
+- azure
 dependencies: []
 description: Azure Data Lake Analytics のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_data_lake_analytics/
@@ -22,6 +21,7 @@ public_title: Datadog-Microsoft Azure Data Lake Analytics インテグレーシ�
 short_description: Azure Data Lake Analytics のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Azure Data Lake Analytics は、ビッグデータを簡略化するオンデマンド分析ジョブサービスです。

@@ -1,41 +1,65 @@
 ---
+app_id: ilert
+app_uuid: 12731389-915a-4fb7-baec-3319f87dfc7f
 assets:
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: ilert.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: iLert
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: support@ilert.com
+  support_email: support@ilert.com
 categories:
-  - 問題追跡
-  - コラボレーション
-  - notification
-  - モニタリング
-creates_events: false
-ddtype: crawler
+- 問題追跡
+- コラボレーション
+- notification
+- モニタリング
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/ilert/README.md
-display_name: iLert
+- https://github.com/DataDog/integrations-extras/blob/master/ilert/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: ilert
-guid: 875497b9-a27e-4099-92e9-968a70c592fa
 integration_id: ilert
 integration_title: iLert
 integration_version: ''
 is_public: true
 kind: integration
-maintainer: support@ilert.com
-manifest_version: 1.0.0
-metric_prefix: ilert.
-metric_to_check: ''
+manifest_version: 2.0.0
 name: ilert
-public_title: iLert インテグレーション
+oauth: {}
+public_title: iLert
 short_description: Datadog アラートの通知を受け取り iLert でアクションを実行します。
-support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Issue Tracking
+  - Category::Collaboration
+  - Category::Notification
+  - Category::Monitoring
+  configuration: README.md#Setup
+  description: Datadog アラートの通知を受け取り iLert でアクションを実行します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: iLert
 ---
+
 ## 概要
 
 [iLert][1] インテグレーションは、Datadog アラートを iLert に送信し、iLert プラットフォーム内でこれらのアラートに対してシームレスにアクションを実行します。

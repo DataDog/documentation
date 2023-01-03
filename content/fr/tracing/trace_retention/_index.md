@@ -68,7 +68,7 @@ Le filtre de rétention intelligent est toujours activé pour vos services. Il c
 La rétention intelligente conserve les éléments suivants pendant 30 jours :
 
  - Une sélection représentative d'erreurs, afin de garantir la diversité de celles-ci (par exemple, les codes de réponse 400 et 500)
- - Les quartiles `p75`, `p90` et `p95` de latence élevée
+ - Les centiles `p75`, `p90` et `p95` de latence élevée
  - Toutes les ressources associées à des traces pour l'intervalle sélectionné, quel que soit leur trafic.
  - La trace de durée maximale réelle pour chaque intervalle.
 

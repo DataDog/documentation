@@ -155,7 +155,7 @@ custom check
 : メインのコンフィギュレーションファイルです。このファイルで、Agent 全体が自身のインテグレーションやユーザーのシステムとやり取りする方法を定義します。このファイルを使用して、API キー、プロキシ、ホストタグなどのグローバル設定を更新します。
 
 event
-: イベントは、システムに関する情報メッセージです。これを[イベントストリーム][40]で使用して、イベントに対するモニターを作成できます。
+: イベントは、システムに関する情報メッセージです。これを[イベントエクスプローラー][40]で使用して、イベントに対するモニターを作成できます。
 
 instance
 : 監視対象が何であれ、そのインスタンスを `conf.yaml` ファイルで定義し、マップします。たとえば、[`http_check` インテグレーション][41]の場合は、アップタイムやダウンタイムを監視する HTTP エンドポイントのインスタンスに関連付けられた名前を定義します。同じインテグレーションで**複数のインスタンス**を監視できます。それには、`conf.yaml` ファイルでそれぞれのインスタンスを定義します。
@@ -224,7 +224,7 @@ tagging
 [37]: /ja/agent/troubleshooting/
 [38]: /ja/help/
 [39]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[40]: https://app.datadoghq.com/event/stream
+[40]: https://app.datadoghq.com/event/explorer
 [41]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example#L13
 [42]: /ja/metrics/
 [43]: /ja/metrics/custom_metrics/

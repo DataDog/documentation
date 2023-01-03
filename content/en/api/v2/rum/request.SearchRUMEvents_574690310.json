@@ -1,0 +1,15 @@
+{
+  "filter": {
+    "from": "now-15m",
+    "query": "@type:session AND @session.type:user",
+    "to": "now"
+  },
+  "options": {
+    "time_offset": 0,
+    "timezone": "GMT"
+  },
+  "page": {
+    "limit": 2
+  },
+  "sort": "timestamp"
+}

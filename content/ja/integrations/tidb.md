@@ -1,44 +1,66 @@
 ---
+app_id: tidb
+app_uuid: 79e5c6d7-c494-4df7-98bc-c639e211c0b8
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     TiDB Overview: assets/dashboards/overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: tidb_cluster.tidb_executor_statement_total
+      metadata_path: metadata.csv
+      prefix: tidb_cluster
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: TiDB
   logs:
-    service: tidb
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+    source: tidb
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: xuyifan02@pingcap.com
+  support_email: xuyifan02@pingcap.com
 categories:
 - data store
 - cloud
 - ログの収集
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/tidb/README.md
-display_name: TiDB
+display_on_public_website: true
 draft: false
 git_integration_title: tidb
-guid: 4b34acac-39ce-4ec4-9329-c68cc4e61279
 integration_id: tidb
 integration_title: TiDB
 integration_version: 2.1.0
 is_public: true
 kind: インテグレーション
-maintainer: xuyifan02@pingcap.com
-manifest_version: 1.0.0
-metric_prefix: tidb_cluster
-metric_to_check: tidb_cluster.tidb_executor_statement_total
+manifest_version: 2.0.0
 name: tidb
+oauth: {}
 public_title: TiDB
 short_description: TiDB クラスター用インテグレーション
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Data Store
+  - Category::Cloud
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: TiDB クラスター用インテグレーション
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: TiDB
 ---
 
 

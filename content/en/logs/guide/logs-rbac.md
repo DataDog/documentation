@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview
 
-Logs might contain **sensitive information** that could either get [scrubbed][1] or be accessible only to authorized users of your organization. You may also wish to segment your users so that they **don't interfere one with another** as far as configuration and budget control is concerned.
+Logs might contain **sensitive information** that could either get [scrubbed][1] or be accessible only to authorized users of your organization. You may also wish to segment your users so that they **don't interfere with one another** as far as configuration and budget control is concerned.
 
 This guide provides a methodology in developing customized Datadog roles that allows users to access logs and log features in a compliant manner.
 

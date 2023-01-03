@@ -1,38 +1,43 @@
 ---
-title: Database Monitoring
-kind: documentation
 description: En savoir plus sur la solution Database Monitoring et se lancer
 further_reading:
-  - link: https://www.datadoghq.com/blog/database-performance-monitoring-datadog
-    tag: Blog
-    text: Surveillez et visualisez les performances de vos bases de données
-  - link: /database_monitoring/data_collected/
-    tag: Documentation
-    text: Données collectées
-  - link: /database_monitoring/troubleshooting/
-    tag: Documentation
-    text: Dépannage
+- link: https://www.datadoghq.com/blog/database-performance-monitoring-datadog
+  tag: Blog
+  text: Surveillez et visualisez les performances de vos bases de données
+- link: https://www.datadoghq.com/blog/sql-server-and-azure-managed-services-database-monitoring/
+  tag: Blog
+  text: Surveiller des bases de données gérées par SQL Server et Azure avec Database Monitoring
+- link: /database_monitoring/data_collected/
+  tag: Documentation
+  text: Données collectées
+- link: /database_monitoring/troubleshooting/
+  tag: Documentation
+  text: Dépannage
+kind: documentation
+title: Database Monitoring
 ---
-{{< img src="database_monitoring/dbm-main.png" alt="Database Monitoring" style="width:100%;">}}
 
-{{< site-region region="us5,gov" >}}
-<div class="alert alert-warning">La solution Database Monitoring n'est pas prise en charge pour ce site.</div>
-{{< /site-region >}}
+{{< img src="database_monitoring/dbm-main.png" alt="Database Monitoring" style="width:100%;">}}
 
 La solution Database Monitoring de Datadog vous permet d'analyser en détail vos bases de données parmi l'ensemble de vos hosts. Consultez les métriques de performance de vos requêtes, les plans d'exécution et les métriques issues de vos hosts depuis une plateforme centralisée afin de mieux surveiller la santé et les performances de vos bases de données tout en traitant chaque problème dès qu'il est détecté.
 
 ## Prise en main
 
-La solution Database Monitoring de Datadog prend en charge la surveillance des versions auto-hébergées et des versions cloud gérées de **Postgres** et **MySQL**. Pour commencer à utiliser cette fonctionnalité, configurez votre base de données et installez l'Agent Datadog. Suivez les instructions de configuration correspondant à votre type de base de données :
+La solution Database Monitoring de Datadog prend en charge la surveillance des versions auto-hébergées et des versions cloud gérées de **Postgres**, **MySQL** et **SQL Server**. Pour commencer à utiliser cette fonctionnalité, configurez votre base de données et installez l'Agent Datadog. Suivez les instructions de configuration correspondant à votre type de base de données :
 
-### Bases de données auto-hébergées
+### Postgres
 
-{{< partial name="dbm/dbm-getting-started" >}}
+{{< partial name="dbm/dbm-setup-postgres" >}}
 <p></p>
 
-### Bases de données gérées
+### MySQL
 
-{{< partial name="dbm/dbm-getting-started-managed" >}}
+{{< partial name="dbm/dbm-setup-mysql" >}}
+<p></p>
+
+### SQL Server
+
+{{< partial name="dbm/dbm-setup-sql-server" >}}
 <p></p>
 
 ## Explorer la solution Database Monitoring de Datadog

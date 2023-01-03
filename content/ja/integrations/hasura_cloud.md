@@ -1,45 +1,70 @@
 ---
+app_id: hasura-cloud
+app_uuid: d7eb9597-f00b-48dc-9100-7afda5fe4bce
 assets:
   dashboards:
     Hasura Cloud Datadog Integration Dashboard: assets/dashboards/hasura_cloud.json
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check:
+      - hasura_cloud.requests_per_minute
+      - hasura_cloud.average_execution_time
+      - hasura_cloud.success_rate
+      metadata_path: metadata.csv
+      prefix: hasura_cloud.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Hasura Cloud
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: support@hasura.io
+  support_email: support@hasura.io
 categories:
-  - モニタリング
-  - ログの収集
-  - cloud
-creates_events: false
-ddtype: check
+- モニタリング
+- ログの収集
+- cloud
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/hasura_cloud/README.md
-display_name: Hasura Cloud
+- https://github.com/DataDog/integrations-extras/blob/master/hasura_cloud/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: hasura_cloud
-guid: fa26fe8b-6dbf-43fc-9597-a7dd1b56abaa
 integration_id: hasura-cloud
 integration_title: Hasura Cloud
 integration_version: ''
 is_public: true
 kind: integration
-maintainer: support@hasura.io
-manifest_version: 1.0.0
-metric_prefix: hasura_cloud.
-metric_to_check:
-  - hasura_cloud.requests_per_minute
-  - hasura_cloud.average_execution_time
-  - hasura_cloud.success_rate
+manifest_version: 2.0.0
 name: hasura_cloud
-public_title: Datadog-Hasura Cloud インテグレーション
+oauth: {}
+public_title: Hasura Cloud
 short_description: Hasura Cloud プロジェクトを監視します
-support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Monitoring
+  - Category::Log Collection
+  - Category::Cloud
+  configuration: README.md#Setup
+  description: Hasura Cloud プロジェクトを監視します
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Hasura Cloud
 ---
+
+
+
 ## 概要
 
 [Hasura Cloud][1] は、スケーラブルで可用性が高くグローバルに分散された

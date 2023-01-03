@@ -1,38 +1,55 @@
 ---
-"assets":
-  "dashboards": {}
-  "logs": {}
-  "metrics_metadata": metadata.csv
-  "monitors": {}
-  "saved_views": {}
-  "service_checks": assets/service_checks.json
-"categories":
-- ""
-"creates_events": true
-"ddtype": "crawler"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/statsig/README.md"
-"display_name": "Statsig"
-"draft": false
-"git_integration_title": "statsig"
-"guid": "f22e08ca-b524-45ad-815c-9ad654015158"
-"integration_id": "statsig"
-"integration_title": "Statsig"
-"integration_version": ""
-"is_public": true
-"kind": "integration"
-"maintainer": "support@statsig.com"
-"manifest_version": "1.0.0"
-"metric_prefix": "statsig."
-"metric_to_check": "statsig.log_event.count"
-"name": "statsig"
-"public_title": "Statsig"
-"short_description": "Datadog で Statsig の変更を監視する"
-"support": "contrib"
-"supported_os":
+app_id: statsig
+app_uuid: 57fb9235-151d-4ed9-b15e-a3e6f918dcca
+assets:
+  integration:
+    configuration: {}
+    events:
+      creates_events: true
+    metrics:
+      check: statsig.log_event.count
+      metadata_path: metadata.csv
+      prefix: statsig.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Statsig
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: support@statsig.com
+  support_email: support@statsig.com
+categories: []
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/statsig/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: statsig
+integration_id: statsig
+integration_title: Statsig
+integration_version: ''
+is_public: true
+kind: integration
+manifest_version: 2.0.0
+name: statsig
+oauth: {}
+public_title: Statsig
+short_description: Datadog で Statsig の変更を監視する
+supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  configuration: README.md#Setup
+  description: Datadog で Statsig の変更を監視する
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Statsig
 ---
 
 
@@ -85,4 +102,3 @@ Statsig インテグレーションにより、Statsig でのコンフィギュ�
 [3]: mailto:support@statsig.com
 [4]: https://www.statsig.com/contact
 [5]: https://www.datadoghq.com/blog/feature-monitoring-statsig-datadog-marketplace/
-

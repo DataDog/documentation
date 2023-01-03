@@ -28,9 +28,10 @@
           <!-- if we are outputting v1 and we know v2 is stable we should collapse v1 -->
           {{- $s.SetInMap "output" "isVisibleVersion" false -}}
           <!-- if v1 and v2 are both stable, we should deprecate v1 -->
+          <!-- lets not output the word deprecated -->
           {{- $s.SetInMap "output" "labelPrefix" "~" -}}
           {{- $s.SetInMap "output" "labelSuffix" "~" -}}
-          {{- $s.SetInMap "output" "label" "deprecated" -}}
+          {{- $s.SetInMap "output" "label" "" -}}
         {{ end }}
     {{ else if eq $versionNum "v2" }}
         {{ if in $menuChild.Params.unstable "v2" }}

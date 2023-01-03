@@ -57,7 +57,8 @@ Log Explorer は、[複数のインデックスにわたるクエリ][7]をサ�
 削除されたインデックスと同じ名前のインデックスを再作成することはできません。 
 </div>
 
-**注:** 削除されたインデックスは、今後新しい受信ログを受け付けません。削除されたインデックス内のログは、クエリに使用できなくなります。保持期間に達した後、そのインデックスはインデックスページに表示されなくなります。
+**注:** 削除されたインデックスは、今後新しい受信ログを受け付けません。削除されたインデックス内のログは、クエリに使用できなくなります。適用される保持期間に従ってすべてのログがエージングアウトした後、そのインデックスはインデックスページに表示されなくなります。
+
 
 
 ## インデックスフィルター
@@ -130,26 +131,26 @@ Web アクセスサーバーリクエストからのすべてのログを保持�
 ## ログの保持を更新
 
 インデックス保持設定は、ログが Datadog に保存され、検索できる期間を決定します。保持は、アカウントコンフィギュレーションで許可されている任意の値に設定できます。
-現在の契約にない保持を追加するには、[Datadog サポート][17]にお問い合わせください。
+現在の契約にない保持を追加するには、`success@datadoghq.com` のカスタマーサクセスにお問い合わせください。
 
 {{< img src="logs/indexes/log_retention.png" alt="インデックスの詳細"  style="width:70%;">}}
 
 ## 日別の割り当てを設定する
 
 1 日の割り当てを設定して、インデックスに格納されるログの数を日別に制限することができます。この割り当ては、格納されるべき (除外フィルターが適用された後など) すべてのログに対して適用されます。
-1 日の割り当て数に到達したら、ログはインデックス化されなくなりますが、[livetail][18] では利用できるほか、[アーカイブにも送信][10]されるので、[ログからメトリクスを生成する][9]ために使用できます。
+1 日の割り当て数に到達したら、ログはインデックス化されなくなりますが、[livetail][17] では利用できるほか、[アーカイブにも送信][10]されるので、[ログからメトリクスを生成する][9]ために使用できます。
 
 この割り当ては、インデックスを編集していつでも更新または削除できます。
 
 {{< img src="logs/indexes/index_quota.png" alt="インデックスの詳細"  style="width:70%;">}}
 
-**注**: インデックスの 1 日の割り当ては、[UTC 時間の 2:00pm][19] に自動的にリセットされます。
+**注**: インデックスの 1 日の割り当ては、[UTC 時間の 2:00pm][18] に自動的にリセットされます。
 
 日別の割り当てに達したらイベントが生成されます。
 
 {{< img src="logs/indexes/index_quota_event.png" alt="インデックスの割り当て数通知"  style="width:70%;">}}
 
-[ログ使用ガイド][20]に従って、現在の使用量を監視し、アラートを発動させる方法をご確認ください。
+ [ログ使用ガイド][19]に従って、現在の使用量を監視し、アラートを発動させる方法をご確認ください。
 
 ## その他の参考資料
 
@@ -171,9 +172,8 @@ Web アクセスサーバーリクエストからのすべてのログを保持�
 [12]: /ja/api/v1/logs-indexes/#update-an-index
 [13]: /ja/logs/log_configuration/processors/#user-agent-parser
 [14]: /ja/logs/log_configuration/processors/#geoip-parser
-[15]: /ja/tracing/connect_logs_and_traces/
+[15]: /ja/tracing/other_telemetry/connect_logs_and_traces/
 [16]: /ja/logs/log_configuration/processors/#trace-remapper
-[17]: /ja/help/
-[18]: /ja/logs/live_tail/#overview
-[19]: https://www.timeanddate.com/worldclock/converter.html
-[20]: /ja/logs/guide/logs-monitors-on-volumes/#monitor-indexed-logs-with-fixed-threshold
+[17]: /ja/logs/live_tail/#overview
+[18]: https://www.timeanddate.com/worldclock/converter.html
+[19]: /ja/logs/guide/logs-monitors-on-volumes/#monitor-indexed-logs-with-fixed-threshold

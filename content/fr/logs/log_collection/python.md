@@ -1,25 +1,26 @@
 ---
-title: Collecte de logs avec Python
-kind: documentation
 aliases:
-  - /fr/logs/languages/python
+- /fr/logs/languages/python
 further_reading:
-  - link: https://www.datadoghq.com/blog/python-logging-best-practices/
-    tag: Blog
-    text: Comment recueillir, personnaliser et centraliser des logs Python
-  - link: /logs/log_configuration/processors
-    tag: Documentation
-    text: Apprendre à traiter vos logs
-  - link: /logs/log_configuration/parsing
-    tag: Documentation
-    text: En savoir plus sur le parsing
-  - link: /logs/explorer/
-    tag: Documentation
-    text: Apprendre à explorer vos logs
-  - link: /logs/faq/log-collection-troubleshooting-guide/
-    tag: FAQ
-    text: Dépannage pour la collecte de logs
+- link: https://www.datadoghq.com/blog/python-logging-best-practices/
+  tag: Blog
+  text: Comment recueillir, personnaliser et centraliser des logs Python
+- link: /logs/log_configuration/processors
+  tag: Documentation
+  text: Apprendre à traiter vos logs
+- link: /logs/log_configuration/parsing
+  tag: Documentation
+  text: En savoir plus sur le parsing
+- link: /logs/explorer/
+  tag: Documentation
+  text: Apprendre à explorer vos logs
+- link: /logs/faq/log-collection-troubleshooting-guide/
+  tag: FAQ
+  text: Guide de dépannage pour la collecte de logs
+kind: documentation
+title: Collecte de logs avec Python
 ---
+
 ## Présentation
 
 Utilisez votre logger Python préféré pour écrire des logs dans un fichier sur votre host. Surveillez ensuite le fichier avec l'Agent Datadog pour envoyer vos logs vers Datadog.
@@ -107,31 +108,16 @@ logger.setLevel(logging.INFO)
 logger.info('Sign up', extra={'referral_code': '52d6ce'})
 ```
 
-Une fois le [gestionnaire configuré][2], le fichier de log comprend l'entrée de log suivante (sur une ligne) :
+Le fichier de log comprend l'entrée de log suivante (sur une ligne) :
 
 ```json
 {
-  "threadName": "MainThread",
-  "name": "root",
-  "thread": 140735202359648,
-  "created": 1336281068.506248,
-  "process": 41937,
-  "processName": "MainProcess",
-  "relativeCreated": 9.100914001464844,
-  "module": "tests",
-  "funcName": "testFormatKeys",
-  "levelno": 20,
-  "msecs": 506.24799728393555,
-  "pathname": "tests/tests.py",
-  "lineno": 60,
-  "asctime": ["12-05-05 22:11:08,506248"],
-  "message": "testing logging format",
-  "filename": "tests.py",
-  "levelname": "INFO",
-  "special": "value",
-  "run": 12
+  "message": "Sign up",
+  "referral_code": "52d6ce"
 }
 ```
+
+Pour en savoir plus sur la configuration du handler, consultez la documentation [Python-json-logger][2].
 
 [1]: https://github.com/madzak/python-json-logger
 [2]: https://github.com/madzak/python-json-logger#customizing-fields

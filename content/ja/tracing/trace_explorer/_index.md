@@ -8,7 +8,7 @@ kind: documentation
 title: トレースエクスプローラー
 ---
 
-{{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-0.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="トレースジャーニー" >}}
+{{< img src="tracing/apm_lifecycle/trace_explorer.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="トレースエクスプローラー" >}}
 
 ## 概要
 
@@ -32,22 +32,22 @@ Live Search は、トレースページのデフォルトの表示です。Live 
 
 ### トレースボリュームコントロール
 
-[取り込み][6]および[保持][7]の両方で、設定をカスタマイズして最も関連性の高いデータを送信、維持することができます。
+[取り込みおよび保持][6]の両方で、設定をカスタマイズして最も関連性の高いデータを送信、維持することができます。
 
 #### 取り込み
 
-[Datadog Agent の構成オプション][8]でグローバルにボリュームを制御したり、Datadog APM でインスツルメンテーションされたサービスごとに正確な[取り込みルール][9]を設定することができます。
+[Datadog Agent の構成オプション][7]でグローバルにボリュームを制御したり、Datadog APM でインスツルメンテーションされたサービスごとに正確な[取り込みルール][8]を設定することができます。
 
 
 #### インデックス化
 
 サービスをインスツルメントし、トレースを取り込んだら、タグベースの[保持フィルター][3]を Datadog アプリ内に設定すると、関連性の高いスパンを Datadog で保持できます。
 
-**注:** 取り込まれたスパンおよびインデックス化されたスパンはどちらも請求に影響を与える場合があります。詳細は [APM 料金][10]を参照してください。
+**注:** 取り込まれたスパンおよびインデックス化されたスパンはどちらも請求に影響を与える場合があります。詳細は [APM 料金][9]を参照してください。
 
 ## 15 分間の Live Search
 
-{{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="トレースジャーニー" >}}
+{{< img src="tracing/apm_lifecycle/trace_explorer_live_search.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="ライブ検索" >}}
 
 Live Search を使用すると、スパンは、Datadog Agent から送信された時点で、保持フィルターによりインデックス化する前に Datadog に表示されます。取り込まれたすべてのスパンは、15 分間利用可能になり（ローリングウィンドウ）、サンプリングなしで表示されます。
 
@@ -97,7 +97,7 @@ Live Search の **List view** では、以下のことが可能です。
 
 検索バーに有効なクエリを入力すると、**すべてのスパン**にわたり検索条件に一致するトレースが表示されます。Live Search ビューの検索構文は他のトレースビューのものと同じですが、クエリはインデックス化されたトレースだけでなく、**任意のスパン**と**任意のタグ**で収集されたすべてのトレースと照合されます。
 
-トレーステーブルの上のボックスに選択を変更することで、[サービスエントリスパン][11]、[ルートスパン][12]、またはすべてのスパンをクエリすることが可能です。トラフィックの多いアプリケーションでこの機能を使用すると、表示されるスパンの数を減らし、サービスのエントリポイントのスパンまたはトレースのエントリポイントのみを表示することができます。このボックスを選択すると、リストに表示されるスパンのみがフィルターされます。スパンをクリックしてトレースの詳細を表示しても、他のスパンはフレームグラフに表示されます。
+トレーステーブルの上のボックスに選択を変更することで、[サービスエントリスパン][10]、[ルートスパン][11]、またはすべてのスパンをクエリすることが可能です。トラフィックの多いアプリケーションでこの機能を使用すると、表示されるスパンの数を減らし、サービスのエントリポイントのスパンまたはトレースのエントリポイントのみを表示することができます。このボックスを選択すると、リストに表示されるスパンのみがフィルターされます。スパンをクリックしてトレースの詳細を表示しても、他のスパンはフレームグラフに表示されます。
 
 ファセットとして定義されていない属性でも絞り込むことができます。たとえば、`cart.value` 属性で絞り込むには、以下の 2 つの方法があります。
 
@@ -109,7 +109,7 @@ Live Search の **List view** では、以下のことが可能です。
 
 ## 15 日間保持のインデックス化されたスパンの検索
 
-{{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-4.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="トレースジャーニー" >}}
+{{< img src="tracing/apm_lifecycle/trace_explorer_indexed_search.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="インデックス検索" >}}
 
 Live Search と同じように、保持されたトレースを検索することができます。ライブデータ検索から保持データ検索に切り替えるには、タイムセレクターを 15 分以上の任意の期間に変更します。保持フィルターによってインデックス化されたすべてのスパンは、検索からアクセスできます。これらのスパンは、保持フィルターによってインデックス化された後、Datadog によって 15 日間保持されます。
 
@@ -135,19 +135,18 @@ Live Search と同じように、保持されたトレースを検索するこ�
 
 ### 保持構成
 
-保持されるスパンと保持率をカスタマイズできます。デフォルトでは、[Datadog インテリジェント保持フィルター][4]が適用され、エラーおよびレイテンシーの多様性や、低スループットのリソースを含むトレースを自動的に保持します。デフォルトのインテリジェント保持フィルターの詳細と独自の追加フィルターの作成方法については、[保持フィルターのドキュメント][3]を参照してください。独自のフィルターを作成または変更するには、Datadog アプリの[保持フィルターのページ][13]にアクセスしてください。
+保持されるスパンと保持率をカスタマイズできます。デフォルトでは、[Datadog インテリジェント保持フィルター][4]が適用され、エラーおよびレイテンシーの多様性や、低スループットのリソースを含むトレースを自動的に保持します。デフォルトのインテリジェント保持フィルターの詳細と独自の追加フィルターの作成方法については、[保持フィルターのドキュメント][3]を参照してください。独自のフィルターを作成または変更するには、Datadog アプリの[保持フィルターのページ][12]にアクセスしてください。
 
 
 [1]: https://app.datadoghq.com/apm/traces
-[2]: /ja/tracing/trace_ingestion/ingestion_controls
-[3]: /ja/tracing/trace_retention/#retention-filters
-[4]: /ja/tracing/trace_retention/#datadog-intelligent-retention-filter
-[5]: /ja/tracing/visualization/#indexed-span
-[6]: /ja/tracing/trace_ingestion/
-[7]: /ja/tracing/trace_retention/
-[8]: /ja/tracing/trace_ingestion/mechanisms#in-the-agent
-[9]: /ja/tracing/trace_ingestion/mechanisms#in-tracing-libraries-user-defined-rules
-[10]: /ja/account_management/billing/apm_distributed_tracing/
-[11]: /ja/tracing/visualization/#service-entry-span
-[12]: /ja/tracing/visualization/#trace-root-span
-[13]: https://app.datadoghq.com/apm/traces/retention-filters
+[2]: /ja/tracing/trace_pipeline/ingestion_controls
+[3]: /ja/tracing/trace_pipeline/trace_retention/#retention-filters
+[4]: /ja/tracing/trace_pipeline/trace_retention/#datadog-intelligent-retention-filter
+[5]: /ja/tracing/glossary/#indexed-span
+[6]: /ja/tracing/trace_pipeline/
+[7]: /ja/tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
+[8]: /ja/tracing/trace_pipeline/ingestion_mechanisms/#in-tracing-libraries-user-defined-rules
+[9]: /ja/account_management/billing/apm_distributed_tracing/
+[10]: /ja/tracing/glossary/#service-entry-span
+[11]: /ja/tracing/glossary/#trace-root-span
+[12]: https://app.datadoghq.com/apm/traces/retention-filters

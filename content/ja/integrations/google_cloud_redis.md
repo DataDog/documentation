@@ -1,9 +1,8 @@
 ---
 categories:
-  - cloud
-  - google cloud
-  - ログの収集
-ddtype: crawler
+- cloud
+- google cloud
+- ログの収集
 dependencies: []
 description: Google Cloud Memorystore for Redis のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_redis/
@@ -21,6 +20,7 @@ public_title: Datadog-Google Cloud Memorystore for Redis インテグレーシ�
 short_description: Google Cloud Memorystore for Redis のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Google Cloud Memorystore for Redis は、拡張性、安全性、可用性に優れたインフラストラクチャー上に構築されたフルマネージド型のインメモリデータストアサービスです。

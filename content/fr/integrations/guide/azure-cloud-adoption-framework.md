@@ -1,31 +1,33 @@
 ---
-title: Utilisation du Cloud Adoption Framework Azure avec Datadog
-kind: guide
 further_reading:
-  - link: /integrations/azure/
-    tag: Documentation
-    text: Intégration Datadog/Azure
+- link: /integrations/azure/
+  tag: Documentation
+  text: Intégration Datadog/Azure
+- link: https://www.datadoghq.com/blog/migrate-to-azure-with-the-microsoft-cloud-adoption-framework/
+  tag: Blog
+  text: Migrer vers Azure avec le Cloud Adoption Framework de Microsoft
+kind: guide
+title: Utilisation du Cloud Adoption Framework Azure avec Datadog
 ---
+
 ## Présentation
 
-Il peut être risqué de migrer vos services vers un environnement cloud depuis des environnements sur site ou un autre fournisseur cloud.
+Utilisez le Cloud Adoption Framework Azure avec Datadog pour accélérer et sécuriser vos migrations vers un nouvel environnement cloud, que vous partiez d'un environnement physique ou d'un autre environnement cloud.
 
-Le Cloud Adoption Framework Azure met en œuvre une stratégie éprouvée afin de garantir le succès de vos migrations. La surveillance Datadog vérifie que vos migrations s'effectuent rapidement et en toute sécurité. Vous pouvez ainsi mesurer la santé de vos anciens et nouveaux environnements, avec un cadre unique d'observabilité et de gestion des incidents.
-
-Vous pouvez :
+Vous pourrez :
 
 1. configurer votre compte Datadog pour vos équipes, afin d'exécuter efficacement la migration de leurs workloads (phase de planification) ;
 2. utiliser Datadog pour mesurer la santé de vos anciens environnements et de vos nouveaux workloads durant leur lancement dans les nouvelles zones d'atterrissage (phase de migration).
 
 Ce guide présente le processus de migration à suivre si votre organisation a adopté le Cloud Adoption Framework Azure.
 
-Si vous ne possédez pas encore de compte Datadog, vous pouvez [bénéficier d'une version d'essai gratuite de deux semaines][2].
+Si vous ne possédez pas encore de compte Datadog, vous pouvez [bénéficier d'une version d'essai gratuite de deux semaines][1].
 
 ## Planification
 
 La planification de votre migration consiste à configurer votre compte Datadog de façon à ce qu'il surveille vos nouveaux workloads dès leur migration vers votre compte Azure. Pour configurer votre compte, procédez comme suit :
 
-1. Activez l'[intégration Datadog/Azure][1] pour visualiser les performances et la santé de vos nouveaux workloads.
+1. Activez l'[intégration Datadog/Azure][2] pour visualiser les performances et la santé de vos nouveaux workloads.
 2. Préparez une stratégie de tagging permettant à vos équipes de décrire leurs workloads durant leur migration.
 3. Configurez des dashboards afin que les parties prenantes puissent suivre l'avancée de la migration et consulter la santé globale des nouveaux workloads.
 4. Créez des canaux de communication pour la gestion des incidents.
@@ -34,7 +36,7 @@ La planification de votre migration consiste à configurer votre compte Datadog 
 
 Datadog et Azure se sont associés afin de vous proposer des services Datadog depuis votre compte Azure. Pour chacune de vos zones d'atterrissage, vous pouvez créer une ressource Datadog permettant d'associer votre compte Datadog à votre compte Azure, puis consulter vos données d'observabilité dans Azure.
 
-Pour vous faire une idée des données Azure à recueillir dans Datadog, consultez la [documentation Microsoft Azure][1].
+Pour vous faire une idée des données Azure à recueillir dans Datadog, consultez la [documentation Microsoft Azure][2].
 
 La ressource Datadog simplifie la configuration d'un grand nombre d'intégrations Datadog/Azure et permet à vos équipes de bénéficier d'une visibilité accrue sur la santé et les performances des nouveaux workloads Azure. Datadog vous conseille d'activer l'[intégration Azure DevOps][3] pour pouvoir mettre en corrélation les données de performance des workloads avec les événements de build et de version.
 
@@ -98,7 +100,7 @@ Pour qu'un propriétaire de workload ou de service puisse accéder à des donné
 
 L'Agent Datadog est un logiciel léger conçu pour s'exécuter sur l'ensemble de vos serveurs (sur site ou dans le cloud) et recueillir les données nécessaires pour vérifier l'intégrité de vos services. Toutes ces données sont rassemblées au sein de votre compte Datadog.
 
-[Cette page][11] vous explique comment installer l'Agent sur des serveurs individuels et comment installer votre outil de gestion des configurations préféré (installation conseillée).
+[Cette page][11] vous explique comment installer l'Agent sur des serveurs individuels et comment installer votre outil de gestion des configurations préféré (configuration conseillée).
 
 Après avoir installé l'Agent Datadog, ajoutez les outils de collecte de données suivants pour visualiser en détail la santé de votre environnement :
 
@@ -119,7 +121,7 @@ Vous pouvez dupliquer et personnaliser ces dashboards, ou même créer des dashb
 
 Il peut parfois être intéressant de comparer les performances de vos anciens environnements à celles de vos nouveaux workloads.
 
-Suivez les étapes suivantes pour recréer ce type de dashboard :
+Suivez les étapes suivantes pour créer un exemple de dashboard :
 
 1. [Créez un dashboard][22] depuis votre compte Datadog.
 2. Cliquez sur l'icône **Settings** en haut à droite.
@@ -140,7 +142,7 @@ Le processus à suivre pour configurer des alertes exploitables varie grandement
 
 Vous pouvez configurer des [tests Synthetic][27] pour vérifier de façon proactive que vos utilisateurs finaux ne rencontrent pas de problème majeur lors de leur parcours.
 
-Si vos nouveaux workloads sont utilisés par les mêmes utilisateurs que vos anciens environnements, il est essentiel d'exécuter des tests Synthetic. Si jamais votre processus de migration entraîne de nouvelles erreurs ou des régressions, vous pouvez signaler les problèmes associés et les corriger avant que vos clients ne s'en rendent compte.
+Si vos nouveaux workloads sont utilisés par les mêmes utilisateurs que vos anciens environnements, il est essentiel d'exécuter des tests Synthetic. Si jamais votre processus de migration entraîne de nouvelles erreurs ou des régressions, vous pourrez identifier les problèmes associés et les corriger avant que vos clients ne s'en rendent compte.
 
 Vous pouvez également [intégrer ces tests à vos pipelines de CI/CD][28] dans Azure DevOps, afin de tester l'expérience de vos utilisateurs finaux dans le cadre de votre processus de déploiement.
 
@@ -154,8 +156,8 @@ Pour découvrir comment configurer des SLO et les partager à des parties prenan
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/integrations/azure/?tab=link&site=us3
-[2]: https://us3.datadoghq.com/signup
+[1]: https://us3.datadoghq.com/signup
+[2]: /fr/integrations/azure/?tab=link&site=us3
 [3]: /fr/integrations/azure_devops/#overview
 [4]: /fr/integrations/azure_devops/#setup
 [5]: /fr/integrations/#cat-collaboration

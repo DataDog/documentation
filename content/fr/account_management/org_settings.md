@@ -1,6 +1,6 @@
 ---
-title: Paramètres d'organisation
 kind: documentation
+title: Paramètres d'organisation
 ---
 ## Présentation
 Les [administrateurs][1] peuvent accéder à la section des paramètres d'organisation en cliquant sur **Organization Settings** depuis le menu Account de la barre de navigation en bas à gauche, ou en sélectionnant **Organization Settings** depuis la liste déroulante en haut de la page Personal Settings.
@@ -59,13 +59,13 @@ L'onglet **Public Sharing** répertorie les dashboards et les graphiques partag�
 
 L'onglet **Login Methods** rassemble les paramètres relatifs aux mots de passe, à Google et à l'authentification SAML. Vous pouvez activer ou désactiver les différentes options à l'aide des listes déroulantes **Enabled by Default**. Pour imposer une connexion SAML stricte, ou un autre type de connexion stricte, désactivez les autres méthodes de connexion. L'onglet User Management vous permet de définir des exceptions pour certains utilisateurs, afin qu'ils puissent se connecter avec une autre méthode si besoin.
 
-#### Audit Logs
+#### Audit Trail
 
-L'onglet **Audit Logs** de la page Organization Settings vous permet d'ouvrir un nouvel onglet dans l'explorateur d'événements d'audit.
+L'onglet **Audit Trail** de la page Organization Settings vous permet d'ouvrir un nouvel onglet dans l'explorateur d'événements d'audit.
 
-#### Audit Log Settings
+#### Audit Trail Settings
 
-L'onglet **Audit Log Settings** vous permet de définir la période de rétention des logs d'audit et d'activer l'archivage vers d'autres services de stockage dans le cloud.
+L'onglet **Audit Trail Settings** vous permet de définir la période de rétention des pistes d'audit et d'activer l'archivage vers d'autres services de stockage dans le cloud.
 
 #### OAuth Apps
 
@@ -75,7 +75,7 @@ La page [**OAuth Apps**][9] vous permet de consulter ou de gérer des applicatio
 
 #### Rename organization
 
-Pour renommer votre organisation, cliquez sur l'onglet **Rename organization**, saisissez un nouveau nom, puis cliquez sur **Save**.
+Pour renommer votre organisation, cliquez sur le bouton **Edit** dans l'onglet **Preferences** de la page **Organization Settings**, saisissez un nouveau nom, puis cliquez sur le bouton **Save**.
 
 **Remarque : le nom de votre organisation ne doit pas dépasser 32 caractères.**
 

@@ -1,36 +1,57 @@
 ---
+app_id: riak-repl
+app_uuid: bbba11cf-2ea1-4a8b-904c-eb3b55ed169a
 assets:
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: riak_repl.server_bytes_sent
+      metadata_path: metadata.csv
+      prefix: riak_repl.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Riak MDC Replication
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: britt.treece@gmail.com
+  support_email: britt.treece@gmail.com
 categories:
 - data store
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/riak_repl/README.md
-display_name: Riak MDC Replication
+display_on_public_website: true
 draft: false
 git_integration_title: riak_repl
-guid: 8a6c8c1e-8c41-4037-9a7b-1eb45f327e3d
 integration_id: riak-repl
 integration_title: Riak MDC Replication
 integration_version: 1.0.1
 is_public: true
 kind: インテグレーション
-maintainer: britt.treece@gmail.com
-manifest_version: 1.0.0
-metric_prefix: riak_repl.
-metric_to_check: riak_repl.server_bytes_sent
+manifest_version: 2.0.0
 name: riak_repl
-public_title: Datadog-Riak MDC Replication インテグレーション
+oauth: {}
+public_title: Riak MDC Replication
 short_description: レプリケーションのパフォーマンス、容量、健全性を追跡
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Data Store
+  configuration: README.md#Setup
+  description: レプリケーションのパフォーマンス、容量、健全性を追跡
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Riak MDC Replication
 ---
 
 

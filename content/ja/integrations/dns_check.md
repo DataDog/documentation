@@ -1,42 +1,60 @@
 ---
-aliases:
-- /ja/integrations/dnscheck
+app_id: dns
+app_uuid: a21dc4ff-8b3f-427e-a5cc-17790a36b147
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: dns.response_time
+      metadata_path: metadata.csv
+      prefix: dns.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: DNS
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - network
 - web
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/dns_check/README.md
-display_name: DNS
+display_on_public_website: true
 draft: false
 git_integration_title: dns_check
-guid: 31e4c84c-fc4b-4cd4-97ed-0331bf4e2023
 integration_id: dns
 integration_title: DNS Check
 integration_version: 2.3.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: dns.
-metric_to_check: dns.response_time
+manifest_version: 2.0.0
 name: dns_check
-public_title: Datadog-DNS Check インテグレーション
+oauth: {}
+public_title: DNS Check
 short_description: DNS レコードの解決可能性とルックアップ時間を監視。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Network
+  - Category::Web
+  configuration: README.md#Setup
+  description: DNS レコードの解決可能性とルックアップ時間を監視。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: DNS Check
 ---
 
 

@@ -31,8 +31,8 @@ Datadog API を使用すると、Datadog との間でデータをやり取りで
 </br>
 <div class="postman-run-button"
 data-postman-action="collection/fork"
-data-postman-var-1="7274195-5d3dff85-334d-45f5-a5cc-68c1f4908095"
-data-postman-collection-url="entityId=7274195-5d3dff85-334d-45f5-a5cc-68c1f4908095&entityType=collection&workspaceId=bf049f54-c695-4e91-b879-0cad1854bafa"
+data-postman-var-1="20651290-b051b74a-bbe6-433a-8670-7ec450e80199"
+data-postman-collection-url="entityId=20651290-b051b74a-bbe6-433a-8670-7ec450e80199&entityType=collection&workspaceId=bf049f54-c695-4e91-b879-0cad1854bafa"
 data-postman-param="env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBpX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiIiwic2Vzc2lvbkluZGV4IjowfSx7ImtleSI6ImFwcGxpY2F0aW9uX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiIiwic2Vzc2lvbkluZGV4IjoxfV0="></div>
 <script type="text/javascript">
   (function (p,o,s,t,m,a,n) {

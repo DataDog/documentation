@@ -1,39 +1,58 @@
 ---
+app_id: システム
+app_uuid: 423f4b03-ce99-4ffc-a553-e522ebd451be
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: system.nfs.ops
+      metadata_path: metadata.csv
+      prefix: system.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Nfsstat
   logs:
     source: nfsstat
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - os & system
 - log collection
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/nfsstat/README.md
-display_name: Nfsstat
+display_on_public_website: true
 draft: false
 git_integration_title: nfsstat
-guid: 9f2fe3a7-ae19-4da9-a253-ae817a5557ab
 integration_id: システム
 integration_title: Nfsstat
 integration_version: 1.11.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: system.
-metric_to_check: system.nfs.ops
+manifest_version: 2.0.0
 name: nfsstat
-public_title: Datadog-Nfsstat インテグレーション
+oauth: {}
+public_title: Nfsstat
 short_description: nfsstat は nfsiostat-sysstat メトリクスを取得します。
-support: コア
 supported_os:
 - linux
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Category::OS & System
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: nfsstat は nfsiostat-sysstat メトリクスを取得します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Nfsstat
 ---
 
 

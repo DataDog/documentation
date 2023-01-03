@@ -56,25 +56,6 @@ resource "datadog_monitor" "metric-based-slo" {
 }
 ```
 
-**Pour les versions 3 et ultérieures du fournisseur**
-
-```
-resource "datadog_monitor" "metric-based-slo" {
-    name = "Exemple d'alerte de marge d'erreur de SLO"
-    type  = "slo alert"
-
-    query = <<EOT
-    error_budget("slo_id").over("time_window") > 75 
-    EOT
-
-    message = "Exemple de message de monitor"
-    monitor_thresholds {
-      critical = 75
-    }
-    tags = ["foo:bar", "baz"]
-}
-```
-
 [1]: /fr/monitors/service_level_objectives/metric/
 [2]: /fr/monitors/service_level_objectives/monitor/
 [3]: https://app.datadoghq.com/slo

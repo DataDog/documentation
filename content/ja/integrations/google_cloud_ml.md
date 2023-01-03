@@ -1,17 +1,17 @@
 ---
 categories:
-  - cloud
-  - google cloud
-  - log collection
-ddtype: crawler
+- cloud
+- google cloud
+- log collection
 dependencies: []
 description: Google Cloud Machine Learning の主要メトリクスを追跡。
-doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_ml/'
+doc_link: https://docs.datadoghq.com/integrations/google_cloud_ml/
 draft: false
 git_integration_title: google_cloud_ml
 has_logo: true
 integration_id: google-cloud-ml
 integration_title: Google Machine Learning
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -20,6 +20,7 @@ public_title: Datadog-Google Machine Learning インテグレーション
 short_description: Google Cloud Machine Learning の主要メトリクスを追跡。
 version: '1.0'
 ---
+
 ## 概要
 
 Google Cloud Machine Learning は、あらゆるサイズおよび種類のデータに対して機能する機械学習モデルを簡単に構築できるマネージド型のサービスです。
@@ -37,11 +38,11 @@ Google Machine Learning からメトリクスを取得して、以下のこと�
 
 ### ログの収集
 
-Google Cloud Machine Learning のログは Stackdriver により収集され、HTTP プッシュフォワーダーを使用して Cloud Pub/Sub へ送信されます。[HTTP プッシュフォワーダーを使用した Cloud Pub/Sub][2] をまだセットアップしていない場合は、これをセットアップしてください。
+Google Cloud  Machine Learning のログは Google Cloud Logging により収集され、HTTP プッシュフォワーダーを使用して Cloud Pub/Sub へ送信されます。[HTTP プッシュフォワーダーを使用した Cloud Pub/Sub][2] をまだセットアップしていない場合は、これをセットアップしてください。
 
-セットアップが完了したら、Google Cloud Machine Learning のログを Stackdriver から Pub/Sub へエクスポートします。
+これが完了したら、Google Cloud  Machine Learning のログを Google Cloud Logging から Pub/Sub へエクスポートします。
 
-1. [Stackdriver ページ][3]に移動し、Google Cloud Machine Learning のログを絞り込みます。
+1. [Google Cloud Logging のページ][3]に移動し、Google Cloud  Machine Learning のログを絞り込みます。
 2. **Create Export** をクリックし、シンクに名前を付けます。
 3. エクスポート先として「Cloud Pub/Sub」を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクト内に配置することもできます。
 4. **作成**をクリックし、確認メッセージが表示されるまで待ちます。

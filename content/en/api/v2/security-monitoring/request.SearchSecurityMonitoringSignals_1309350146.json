@@ -1,0 +1,11 @@
+{
+  "filter": {
+    "from": "2021-11-11T10:56:11+00:00",
+    "query": "security:attack status:high",
+    "to": "2021-11-11T11:11:11+00:00"
+  },
+  "page": {
+    "limit": 2
+  },
+  "sort": "timestamp"
+}

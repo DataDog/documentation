@@ -57,6 +57,22 @@ APM サービスリストと比較して、サービスカタログには、ト�
 
 右側の設定アイコンをクリックすると、サービスリストから列を非表示にすることができます。
 
+
+#### PagerDuty インテグレーション
+サービスカタログに PagerDuty のメタデータを追加して、Reliability ビューを完成させることができます。
+
+- [PagerDuty インテグレーションページ][3]の説明に従って、PagerDuty インテグレーションの設定を行います。
+- [PagerDuty から API アクセスキー][4]を取得します。
+- PagerDuty のサービスを Service Definition YAML にリンクします。
+```yaml
+schema-version: v2
+dd-service: product-recommendation-lite
+team: Shopist
+integrations:
+  pagerduty: https://www.pagerduty.com/service-directory/shopping-cart
+tags: []
+```
+
 ### Performance ビュー
 
 **Performance** タブでは、サービスのパフォーマンスや最も注意を払う必要があるものを表示する方法がいくつか用意されています。列をクリックして表をソートすると、以下のことがわかります。
@@ -67,7 +83,7 @@ APM サービスリストと比較して、サービスカタログには、ト�
 - 最も高いエラー数またはエラー率を持っているサービス
 - 最も多くのポッド、ホスト、またはサーバーレス環境上で動作しているサービス
 - 関連するダッシュボードがあるサービス。関連するダッシュボードでは、より多くのパフォーマンスデータの内訳を確認でき、サービス定義にダッシュボードを追加する必要があるものを特定することができます
-- [Apdex スコア][3]が最高または最低であるサービス
+- [Apdex スコア][5]が最高または最低であるサービス
 - トリガーされるモニターを持つサービス
 
 右側の設定アイコンをクリックすると、サービスリストからメトリクス列を非表示にすることができます。
@@ -88,7 +104,7 @@ APM サービスリストと比較して、サービスカタログには、ト�
 
 ## サービス定義
 
-サービスとは、独立した、デプロイ可能なソフトウェアの単位です。Datadog [統合サービスタグ付け][4]と `DD_SERVICE` タグは、インフラストラクチャーのメトリクス、ログ、トレースなど複数のテレメトリータイプで一貫してサービスを管理・監視するための標準的な方法を提供します。追加の基準を使用してサービスを定義するには、アーキテクチャーのスタイルに合うようにサービス定義をカスタマイズすることができます。
+サービスとは、独立した、デプロイ可能なソフトウェアの単位です。Datadog [統合サービスタグ付け][6]と `DD_SERVICE` タグは、インフラストラクチャーのメトリクス、ログ、トレースなど複数のテレメトリータイプで一貫してサービスを管理・監視するための標準的な方法を提供します。追加の基準を使用してサービスを定義するには、アーキテクチャーのスタイルに合うようにサービス定義をカスタマイズすることができます。
 
 サービス定義には以下の要素が含まれ、すべて任意です (サービス名を除く)。
 
@@ -116,45 +132,14 @@ Tags
 Integrations
 : PagerDuty などのインテグレーションを接続し、オンコールサービスを特定するためのカスタム文字列。
 
-### リストサービスを充実させる
+## 既存の APM サービスを充実させる
 
-テレメトリー製品 (Trace、Logs、Profiles、Infrastructure、Network Performance、RUM) のいずれかを通じて Datadog にデータを送信するサービスは、当初、`UNDEFINED` ラベルでリストされ、これは、まだサービス定義がサービスに関連付けされていないことを意味します。
+すでに APM を使用してアプリケーションを追跡している場合は、それらのサービスに関する情報を追加します。初期状態では、Service Catalog ページにリストされた APM 監視対象サービスには `UNDEFINED` というラベルが貼られています。
 
-チーム名、Slack チャンネル、ソースコードレポジトリなどのサービス所有権情報を追加するには、[サービス定義 API][5] を使用します。
+チーム名、Slack チャンネル、ソースコードリポジトリなどのサービス所有権情報を、POST エンドポイントを用いて YAML ファイルを [Service Definition API][7] にプッシュすることで追加します。
 
-### 新規サービスの登録
-
-また、Datadog テレメトリーを発信しないサービスの所有権情報を管理することも可能です。サービスを登録するには、[サービス定義 API][5] を使用して、サービスの所有権、オンコール情報、およびカスタムタグを指定します。
-
-以下のサービス定義の YAML 例を参照してください。
-
-```yaml
----
-schema-version: v2
-dd-service: product-recommendation-lite
-team: Shopist
-contacts:
-  - type: slack
-    contact: https://exampleco.slack.com/archives/S319HSDB32
-links: 
-  - name: Demo Dashboard
-    type: dashboard
-    url: https://app.datadoghq.com/dashboard/abc-def-ghi
-repos: 
-  - name: Source 
-    provider: github 
-    url: https://github.com/DataDog/shopist/tree/prod/product-recommendation-lite
-  - name: Deployment 
-    provider: github 
-    url: https://github.com/DataDog/shopist/blob/prod/k8s/dd-trace-demo/templates/product-recommendation-lite-deployment.yaml
-docs: 
-  - name: Datadog Doc
-    provider: link
-    url: https://docs.datadoghq.com/tracing/faq/service_catalog/
-tags: []
-```
-
-1 つの YAML ファイルに複数のサービスを登録するには、各サービスの定義をハイフン 3 つで区切った行、`---` で記述します。
+## 新規サービスの登録
+[Service Definition API][7] を使って Datadog テレメトリー (APM トレースなど) を発信していないサービスでも、Service Catalog でサービスの所有権情報を管理することができます。YAML ファイルでサービスの所有権、オンコール情報、カスタムタグを指定すると、その情報が Service Catalog に反映されます。
 
 ## その他の参考資料
 
@@ -162,6 +147,8 @@ tags: []
 
 [1]: https://app.datadoghq.com/services
 [2]: /ja/integrations/github/
-[3]: /ja/tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
-[4]: https://www.datadoghq.com/blog/unified-service-tagging/
-[5]: /ja/tracing/faq/service_definition_api/
+[3]: https://docs.datadoghq.com/ja/integrations/pagerduty/
+[4]: https://support.pagerduty.com/docs/api-access-keys
+[5]: /ja/tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
+[6]: https://www.datadoghq.com/blog/unified-service-tagging/
+[7]: /ja/tracing/faq/service_definition_api/

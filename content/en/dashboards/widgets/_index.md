@@ -21,17 +21,20 @@ Widgets are building blocks for your dashboards. They are categorized into three
     {{< nextlink href="/dashboards/widgets/distribution" >}}Distribution{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/event_stream" >}}Event Stream{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/event_timeline" >}}Event Timeline{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/funnel" >}}Funnel{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/geomap" >}}Geomap{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/heat_map" >}}Heat Map{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/hostmap" >}}Hostmap{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/list" >}}List{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/log_stream" >}}Log Stream{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/pie_chart" >}}Pie Chart{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/query_value" >}}Query Value{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/scatter_plot" >}}Scatter Plot{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/table" >}}Table{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/treemap" >}}Treemap{{< /nextlink >}}    
+    {{< nextlink href="/dashboards/widgets/treemap" >}}Treemap{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/timeseries" >}}Timeseries{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/top_list" >}}Top List{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/topology_map" >}}Topology Map{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Summary widgets to display Synthetic Monitoring information: ">}}
@@ -39,8 +42,8 @@ Widgets are building blocks for your dashboards. They are categorized into three
     {{< nextlink href="/dashboards/widgets/alert_value" >}}Alert Value{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/check_status" >}}Check Status{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/monitor_summary" >}}Monitor Summary{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/slo" >}}Service Level Objective (SLO){{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/service_map" >}}Service Map{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/slo" >}}Service Level Objective (SLO) Summary{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/slo_list" >}}Service Level Objective (SLO) List{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/service_summary" >}}Service Summary{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -69,9 +72,9 @@ Additional options are available for [timeseries widgets][1].
 
 ## Custom links
 
-Custom links connect data values to URLs such as a Datadog page or your AWS console. 
+Custom links connect data values to URLs such as a Datadog page or your AWS console.
 
-To customize interactions with data inline your generic widgets, see [Custom Links][2]. 
+To customize interactions with data inline your generic widgets, see [Custom Links][2].
 
 ## Copy and paste widgets
 

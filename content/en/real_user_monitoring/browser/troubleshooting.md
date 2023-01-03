@@ -2,12 +2,12 @@
 title: Troubleshooting
 kind: documentation
 further_reading:
-    - link: 'https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/'
-      tag: 'Blog'
-      text: 'Real User Monitoring'
-    - link: '/real_user_monitoring/faq/content_security_policy/'
-      tag: 'Documentation'
-      text: 'Content Security Policy'
+- link: 'https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/'
+  tag: 'Blog'
+  text: 'Real User Monitoring'
+- link: '/real_user_monitoring/faq/content_security_policy/'
+  tag: 'Documentation'
+  text: 'Content Security Policy'
 ---
 
 If you experience unexpected behavior with Datadog Browser RUM, use this guide to resolve issues quickly. If you continue to have trouble, contact [Datadog Support][1] for further assistance. Regularly update to the latest version of the [RUM Browser SDK][2], as each release contains improvements and fixes.
@@ -35,6 +35,8 @@ If the RUM Browser SDK is not installed, or if it is not successfully initialize
 {{< img src="real_user_monitoring/browser/troubleshooting/error_rum_internal_context.png" alt="Error get internal context command">}}
 
 You can also check your browser developer tools console or network tab if you notice any errors related to the loading of the RUM Browser SDK.
+
+**Note**: To ensure accurate results, set `sampleRate` to 100. For more information, see [Configure Your Setup For Browser RUM and Browser RUM & Session Replay Sampling][8].
 
 ### Data to the Datadog intake
 
@@ -117,3 +119,4 @@ The warning is shown because the intake returns a non-empty JSON object. This be
 [5]: /real_user_monitoring/faq/content_security_policy/
 [6]: /real_user_monitoring/browser/data_collected/?tab=session
 [7]: https://bugs.chromium.org/p/chromium/issues/detail?id=1255707
+[8]: /real_user_monitoring/guide/sampling-browser-plans/

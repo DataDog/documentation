@@ -2,12 +2,9 @@
 title: Tracking User Actions
 kind: documentation
 further_reading:
-  - link: "/real_user_monitoring/guide/send-rum-custom-actions/"
-    tag: "Guide"
-    text: "Sending RUM Custom Actions from Code"
   - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
     tag: "Blog"
-    text: "Real User Monitoring"
+    text: "Introducing Datadog Real User Monitoring"
   - link: "/real_user_monitoring/explorer/"
     tag: "Documentation"
     text: "Explore your views within Datadog"
@@ -16,32 +13,36 @@ further_reading:
     text: "Apply visualizations on your events"
   - link: "/real_user_monitoring/dashboards/"
     tag: "Documentation"
-    text: "RUM Dashboards"
+    text: "Learn about RUM dashboards"
 ---
 
+## Overview
 
-Real User Monitoring (RUM) Browser SDK automatically detects user interactions performed during a user journey.
+Browser Monitoring automatically detects user interactions performed during a user journey and provides insights into your users' behavior without requiring you to manually instrument every single click in your application.
 
-The automatic collection of user actions provides insights into user behavior, without having to manually instrument every single click in your application. It helps you achieve the following objectives:
-* Understand the performance of key interactions (for example, a click on the "Add to cart" button)
+You can accomplish the following objectives:
+
+* Understand the performance of key interactions (for example, a click on the **Add to cart** button)
 * Quantify feature adoption
 * Identify the steps that led to a specific browser error
 
-You can extend the collection of user interactions by [sending your own custom actions](#custom-actions).
+## Manage information being collected
 
-The `trackInteractions` initialization parameter enables the collection of user clicks in your application. **Sensitive and private data** contained on your pages may be included to identify the elements interacted with. You can control which information is sent to Datadog by [manually setting an action name](#declaring-a-name-for-click-actions), or by [implementing global scrubbing rules in the RUM Browser SDK][1].
+The `trackInteractions` initialization parameter enables the collection of user clicks in your application, which means sensitive and private data contained on your pages may be included to identify elements that a user interacted with. 
 
-## What interactions are being tracked?
+To control which information is sent to Datadog, [manually set an action name](#declare-a-name-for-click-actions), or [implement a global scrubbing rule in the Datadog Browser SDK for RUM][1].
 
-The RUM Browser SDK automatically tracks clicks. A click action is created if **all** of the following conditions are met:
+## Track user interactions
+
+The RUM Browser SDK automatically tracks clicks. A click action is created if **all of the following** conditions are met:
 
 * Activity following the click is detected. See [How page activity is calculated][2] for details.
-* The click does not lead to a new page being loaded, in which case, the RUM Browser SDK generates another RUM View event.
-* A name can be computed for the action. See [Declaring a name for click actions](#declaring-a-name-for-click-actions) for details.
+* The click does not lead to a new page being loaded, in which case, the Datadog Browser SDK generates another RUM View event.
+* A name can be computed for the action. See [Declaring a name for click actions](#declare-a-name-for-click-actions) for details.
 
 ## Action timing metrics
 
-For information about the default attributes for all RUM event types, see [Data Collected][3]. For information about configuring for sampling or global context see [Modifying RUM Data and Context][1].
+For information about the default attributes for all RUM event types, see [RUM Browser Data Collected][3]. 
 
 | Metric    | Type   | Description              |
 |--------------|--------|--------------------------|
@@ -50,9 +51,9 @@ For information about the default attributes for all RUM event types, see [Data 
 | `action.resource.count`         | number      | Count of all resources collected for this action. |
 | `action.error.count`      | number      | Count of all errors collected for this action.|
 
-### How action loading time is calculated
+The Datadog Browser SDK for RUM calculates action loading time by monitoring page activity following every click. An action is considered complete when the page has no more activity. See [How page activity is calculated][2] for details.
 
-The RUM Browser SDK watches the page activity following every click. The action is considered finished when the page has no more activity. See [How page activity is calculated][2] for details.
+For more information about configuring for sampling or global context, see [Modifying RUM Data and Context][1].
 
 ## Action attributes
 
@@ -61,11 +62,13 @@ The RUM Browser SDK watches the page activity following every click. The action 
 | `action.id` | string | UUID of the user action. |
 | `action.type` | string | Type of the user action. For custom user actions, it is set to `custom`. |
 | `action.target.name` | string | Element that the user interacted with. Only for automatically collected actions. |
-| `action.name` | string | User-friendly name created (for example `Click on #checkout`). For custom user actions, the action name given in the API call. |
+| `action.name` | string | User-friendly name created (for example, `Click on #checkout`). For custom user actions, the action name given in the API call. |
 
-## Declaring a name for click actions
+## Declare a name for click actions
 
-The RUM library uses various strategies to get a name for click actions. If you want more control, you can define a `data-dd-action-name` attribute on clickable elements (or any of their parents) that is used to name the action. For example:
+The Datadog Browser SDK for RUM uses various strategies to get a name for click actions. If you want more control, you can define a `data-dd-action-name` attribute on clickable elements (or any of their parents) that is used to name the action. 
+
+For example:
 
 ```html
 <a class="btn btn-default" href="#" role="button" data-dd-action-name="Login button">Try it out!</a>
@@ -77,7 +80,9 @@ The RUM library uses various strategies to get a name for click actions. If you 
 </div>
 ```
 
-Starting with [version 2.16.0][4], with the `actionNameAttribute` initialization parameter, you can specify your own attribute that is used to name the action. For example:
+Starting with [version 2.16.0][4], with the `actionNameAttribute` initialization parameter, you can specify your own attribute that is used to name the action. 
+
+For example:
 
 ```html
 <script>
@@ -92,70 +97,13 @@ Starting with [version 2.16.0][4], with the `actionNameAttribute` initialization
 <a class="btn btn-default" href="#" role="button" data-custom-name="Login button">Try it out!</a>
 ```
 
-**Note**: `data-dd-action-name` is favored when both attributes are present on an element.
+`data-dd-action-name` is favored when both attributes are present on an element.
 
-## Custom actions
+## Send custom actions
 
-Custom actions are user actions declared and sent manually by using the `addAction` API. They are used to send information relative to an event occurring during a user journey. In the following example, the RUM Browser SDK collects a visitor's cart data when they click the checkout button. The number of items within the cart, the list of items, and how much the cart is worth overall are collected.
-
-{{< tabs >}}
-{{% tab "NPM" %}}
+To extend the collection of user interactions, send your custom actions using the `addAction` API. These custom actions send information relative to an event that occurs during a user journey. 
 
-```javascript
-import { datadogRum } from '@datadog/browser-rum';
-
-datadogRum.addAction('<NAME>', '<JSON_OBJECT>');
-
-// Code example
-datadogRum.addAction('checkout', {
-    cart: {
-        amount: 42,
-        currency: '$',
-        nb_items: 2,
-        items: ['socks', 't-shirt'],
-    },
-});
-```
-
-{{% /tab %}}
-{{% tab "CDN async" %}}
-```javascript
-DD_RUM.onReady(function() {
-    DD_RUM.addAction('<NAME>', '<JSON_OBJECT>');
-})
-
-// Code example
-DD_RUM.onReady(function() {
-    DD_RUM.addAction('checkout', {
-        cart: {
-            amount: 42,
-            currency: '$',
-            nb_items: 2,
-            items: ['socks', 't-shirt'],
-        },
-    });
-})
-```
-{{% /tab %}}
-{{% tab "CDN sync" %}}
-
-```javascript
-window.DD_RUM && DD_RUM.addAction('<NAME>', '<JSON_OBJECT>');
-
-// Code example
-window.DD_RUM &&
-    DD_RUM.addAction('checkout', {
-        cart: {
-            amount: 42,
-            currency: '$',
-            nb_items: 2,
-            items: ['socks', 't-shirt'],
-        },
-    });
-```
-
-{{% /tab %}}
-{{< /tabs >}}
+For more information, see [Send Custom Actions][5].
 
 ## Further Reading
 
@@ -165,3 +113,4 @@ window.DD_RUM &&
 [2]: /real_user_monitoring/browser/monitoring_page_performance/#how-page-activity-is-calculated
 [3]: /real_user_monitoring/browser/data_collected/#default-attributes
 [4]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2160
+[5]: /real_user_monitoring/guide/send-rum-custom-actions

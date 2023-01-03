@@ -1,19 +1,19 @@
 ---
 aliases:
-  - /ja/integrations/awspolly/
+- /ja/integrations/awspolly/
 categories:
-  - cloud
-  - aws
-  - log collection
-ddtype: crawler
+- cloud
+- aws
+- log collection
 dependencies: []
 description: AWS Polly のキーメトリクスを追跡。
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_polly/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_polly/
 draft: false
 git_integration_title: amazon_polly
 has_logo: true
 integration_id: amazon-polly
 integration_title: Amazon Polly
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -22,6 +22,7 @@ public_title: Datadog-Amazon Polly インテグレーション
 short_description: AWS Polly のキーメトリクスを追跡。
 version: '1.0'
 ---
+
 ## 概要
 
 Amazon Polly は、文章をリアルな音声に変換するサービスです。
@@ -36,7 +37,7 @@ Amazon Polly は、文章をリアルな音声に変換するサービスです�
 
 ### メトリクスの収集
 
-1. [AWS インテグレーションタイル][2]のメトリクス収集で、`Polly` をオンにします。
+1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `Polly` が有効になっていることを確認します。
 2. [Datadog - AWS Polly インテグレーション][3]をインストールします。
 
 ### ログの収集
@@ -61,7 +62,7 @@ Amazon Polly から S3 バケットまたは CloudWatch のいずれかにログ
 {{< get-metrics-from-git "amazon_polly" >}}
 
 
-AWS から取得される各メトリクスには、ホスト名やセキュリティグループなど、AWS コンソールに表示されるタグと同じタグが割り当てられます。
+AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
 ### イベント
 
@@ -76,8 +77,8 @@ AWS Polly インテグレーションには、サービスのチェック機能�
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[3]: https://app.datadoghq.com/account/settings#integrations/amazon_polly
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
+[3]: https://app.datadoghq.com/integrations/amazon-polly
 [4]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
 [5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
 [6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group

@@ -29,6 +29,8 @@ Starting with version 6.5.0, the Agent includes [OpenMetrics][3] and [Prometheus
 
 This page explains the basic usage of these checks, enabling you to import all your Prometheus exposed metrics within Datadog.
 
+The CLI commands on this page are for the Docker runtime. Replace `docker` with `nerdctl` for the containerd runtime, or `podman` for the Podman runtime.
+
 ## Setup
 
 ### Installation
@@ -40,6 +42,7 @@ Launch the Docker Agent next to your other containers by replacing `<DATADOG_API
 
 ```shell
 docker run -d --cgroupns host \
+    --pid host \
     -v /var/run/docker.sock:/var/run/docker.sock:ro \
     -v /proc/:/host/proc/:ro \
     -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
@@ -143,6 +146,7 @@ To get started with collecting metrics exposed by Prometheus running within a co
 
 ```shell
 docker run -d --cgroupns host \
+    --pid host \
     -v /var/run/docker.sock:/var/run/docker.sock:ro \
     -v /proc/:/host/proc/:ro \
     -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \

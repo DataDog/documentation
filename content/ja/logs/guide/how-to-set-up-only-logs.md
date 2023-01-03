@@ -39,6 +39,7 @@ title: Datadog Agent をログ収集のみに使用
 ```shell
 docker run -d --name datadog-agent \
            --cgroupns host \
+           --pid host \
            -e DD_API_KEY=<DATADOG_API_KEY> \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
