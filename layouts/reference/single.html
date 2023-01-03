@@ -56,7 +56,7 @@
     {{ range $data := $iterable_data }}
       <div style="padding:10px;">
         <h3 id="{{ $data.metadata.logical_name | anchorize }}"><a href="#{{ $data.metadata.logical_name | anchorize }}">{{ $data.description1 }}</a></h3>
-        <p>{{ $data.description2 }}</p>
+        <p>{{ $data.description2 | markdownify }}</p>
 
         <div class="tab-content">
         <ul class="nav nav-tabs border-none response-toggle">
