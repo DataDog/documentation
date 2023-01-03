@@ -114,7 +114,7 @@ Once you've decided on an offering, set up a directory:
 
 The Datadog Development Toolkit command (`ddev`) allows you to create scaffolding when you are developing an integration by generating a skeleton of your integration tile's assets and metadata.
 
-Before you install the Development Toolkit, make sure you've installed Python 3.8 and pipx. For instructions, see [Set Up Python for Agent-based Integration Development][99].
+Assuming you've [installed Python and pipx][17], install the Development Toolkit for your operating system:
 
 To install the toolkit:
 
@@ -138,7 +138,7 @@ To install the toolkit:
       ```
    1. If the command returns output, a virtual environment is running. Run `deactivate` to exit the virtual environment.
 1. Install `ddev`:
-   <div class="alert alert-warning">Do not run this command with `sudo`.</a></div>
+   <div class="alert alert-warning">Do not run this command with <code>sudo</code>.</a></div>
 
    ```
    pipx install ddev --python /usr/local/opt/python@3.8/bin/python3.8
@@ -182,7 +182,6 @@ To install the toolkit:
    ddev config set marketplace <PATH/TO/MARKETPLACE>
    ddev config set repo marketplace
    ```
-   ```
 
 {{% /tab %}}
 
@@ -193,7 +192,7 @@ To install the toolkit:
    ```
 
 1. To install `ddev`, run:
-   <div class="alert alert-warning">Do not run this command with `sudo`.</a></div>
+   <div class="alert alert-warning">Do not run this command with <code>sudo</code>.</a></div>
 
    ```
    pipx install ddev
@@ -265,7 +264,7 @@ Once you have addressed the feedback and re-requested reviews, these reviewers a
 Once a Marketplace tile is live, Technology Partners can meet with Datadog's Partner Marketing team to coordinate a joint go-to-market (GTM) strategy, which includes the following:
 
 - A Datadog quote for partner press releases
-- A blog post on the [Datadog Monitor][20]
+- A blog post on the [Datadog Monitor][18]
 - Amplification of social media posts
 
 ## Further Reading
@@ -288,7 +287,5 @@ Once a Marketplace tile is live, Technology Partners can meet with Datadog's Par
 [14]: https://app.datadoghq.com/apps/
 [15]: https://github.com/Datadog/marketplace
 [16]: /developers/marketplace/#request-access-to-marketplace
-[17]: https://www.python.org/downloads/
-[18]: https://pypi.org/project/datadog-checks-dev/
-[20]: https://datadoghq.com/blog/
-[99]: /developers/integrations/python/
+[17]: /developers/integrations/python/
+[18]: https://datadoghq.com/blog/
