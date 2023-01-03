@@ -68,10 +68,9 @@ With custom instrumentation, the custom action can be assigned attributes for:
 
 ```
 datadogRum.addAction('search_component_render', {
-        'team': 'Team A', // for example, 42.12
-        'time_to_full_render': 16.5, // for example, ['tomato', 'strawberries']
-    })
-
+    'team': 'Team A', // for example, 42.12
+    'time_to_full_render': 16.5, // for example, ['tomato', 'strawberries']
+})
 ```
 
 From the RUM Explorer, you can then analyze:
