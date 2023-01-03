@@ -1,9 +1,10 @@
 ---
-title: Custom Metrics Server
+title: Autoscaling with Cluster Agent Custom & External Metrics
 kind: documentation
 aliases:
 - /agent/guide/cluster-agent-custom-metrics-server
 - /agent/cluster_agent/external_metrics
+- /containers/cluster_agent/external_metrics
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-cluster-agent/"
   tag: "Blog"
@@ -24,19 +25,20 @@ further_reading:
 
 ## Overview
 
-The Horizontal Pod Autoscaling feature was introduced in [Kubernetes v1.2][1] to allow autoscaling off of basic metrics like `CPU`, but it requires a resource called `metrics-server` to run alongside your application. As of Kubernetes v1.6, it is possible to autoscale off of [custom metrics][2].
-Custom metrics are user defined and are collected from within the cluster. As of Kubernetes v1.10, support for external metrics was introduced to autoscale off of any metric from outside the cluster that is collected for you by Datadog.
+Horizontal Pod Autoscaling, introduced in [Kubernetes v1.2][1], allows autoscaling off of basic metrics like `CPU`, but it requires a resource called `metrics-server` to run alongside your application. As of Kubernetes v1.6, it is possible to autoscale off of [custom metrics][2].
 
-The custom and external metric providers, as opposed to the metrics server, are resources that have to be implemented and registered by the user.
+Custom metrics are user defined and are collected from within the cluster. As of Kubernetes v1.10, support for external metrics was introduced to autoscale off of any metric from outside the cluster that is collected by Datadog.
 
-As of v1.0.0, the Custom Metrics Server in the Datadog Cluster Agent implements the External Metrics Provider interface for external metrics. This documentation page explains how to set it up and how to autoscale your Kubernetes workload based off of your Datadog metrics.
+A user must implement and register the Custom Metrics Server and External Metrics Provider.
+
+As of v1.0.0, the Custom Metrics Server in the Datadog Cluster Agent implements the External Metrics Provider interface for external metrics. This page explains how to set it up and how to autoscale your Kubernetes workload based off of your Datadog metrics.
 
 ## Setup
 
 ### Requirements
 
-1. Running Kubernetes >v1.10 in order to be able to register the External Metrics Provider resource against the API server.
-2. Having the aggregation layer enabled. See [Kubernetes aggregation layer configuration][3] for details.
+1. Kubernetes >v1.10: you must register the External Metrics Provider resource against the API server.
+2. Enable the Kubernetes [aggregation layer][3].
 
 ### Installation
 
@@ -55,13 +57,13 @@ To enable the external metrics server with your Cluster Agent in Helm, update yo
       enabled: true
   ```
 
-This automatically updates the necessary RBAC configurations as well as sets up the corresponding `Service` and `APIService` for Kubernetes to use.
+This automatically updates the necessary RBAC configurations and sets up the corresponding `Service` and `APIService` for Kubernetes to use.
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
 {{% tab "Operator" %}}
 
-To enable the external metrics server with your Cluster Agent managed by the Datadog Operator, [setup the Datadog Operator][1]. Then, set `clusterAgent.config.externalMetrics.enabled` to `true` in the `DatadogAgent` custom resource:
+To enable the external metrics server with your Cluster Agent managed by the Datadog Operator, first [set up the Datadog Operator][1]. Then, set `clusterAgent.config.externalMetrics.enabled` to `true` in the `DatadogAgent` custom resource:
 
   ```yaml
   apiVersion: datadoghq.com/v1alpha1
@@ -88,8 +90,8 @@ The Operator automatically updates the necessary RBAC configurations and sets th
 
 To enable the Custom Metrics Server, first follow the instructions to [set up the Datadog Cluster Agent][1] within your cluster. Once you have verified a successful base deployment, edit your `Deployment` manifest for the Datadog Cluster Agent with the following steps:
 
-1. Set `DD_EXTERNAL_METRICS_PROVIDER_ENABLED` environment variable to `true`
-2. Ensure you have **both** your environment variables `DD_APP_KEY` and `DD_API_KEY` set
+1. Set `DD_EXTERNAL_METRICS_PROVIDER_ENABLED` environment variable to `true`.
+2. Ensure you have **both** your environment variables `DD_APP_KEY` and `DD_API_KEY` set.
 3. Ensure you have your `DD_SITE` environment variable set to your Datadog site: {{< region-param key="dd_site" code="true" >}}. It defaults to the `US` site `datadoghq.com`.
 
 #### Register the external metrics provider service
@@ -238,7 +240,7 @@ To activate the usage of the `DatadogMetric` CRD update your `DatadogAgent` cust
 The Operator automatically updates the necessary RBAC configurations and directs the Cluster Agent to manage these HPA queries through these `DatadogMetric` resources.
 
 {{% /tab %}}
-{{% tab "Daemonset" %}}
+{{% tab "DaemonSet" %}}
 To activate usage of the `DatadogMetric` CRD, follow these extra steps:
 
 1. Install the `DatadogMetric` CRD in your cluster.
