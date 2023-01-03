@@ -1,5 +1,5 @@
 ---
-title: Late Metrics
+title: Late Metrics Ingestion
 kind: documentation
 aliases:
   - /guides/metrics/late_metrics
@@ -17,9 +17,9 @@ further_reading:
 
 ## Overview
 
-*What are Late Metrics?* If you are emitting metric points, which posses timestamps that are older than an hour relative to the time of submission, Datadog will classify this metric point as a Late Metric. 
+*What are Late Metrics?* If you are emitting metric points, which possess timestamps that are older than an hour relative to the time of submission, Datadog will classify this metric point as a Late Metric. 
 
-**Example**: You emit a metric point at 1PM EST and the timestamp on said metric point reads 10AM EST. This metric point is considered late, as it is delayed by 3 hours relative to the time of submission. 
+**Example**: You emit a metric point at 1:00 PM EST and the timestamp on said metric point reads 10:00AM EST. This metric point will be classified as a Late Metric, as it is delayed by 3 hours relative to the time of submission. 
 
 *Why does this matter to the average Datadog Metrics user?* Traditionally, Datadog has not supported Late Metrics, hence the introduction of Late Metric Ingestion will allow you to start monitroing a pleathora of new use-cases with your Datadog Metrics. (Outage Recovery, Overwriting Invalid Metrics, and Managing IoT Delays to name a few)
 
@@ -65,6 +65,6 @@ Ingesting Late Metrics will include some ingestion latencies, dependent on the a
 | 12 hours - 30 days   | Up to 14 hour latency                 |
 | +30 days             | +14 hours latency                     |
 
-*Above mentioned Ingestion Latencies are not final and are subject to improvements with compliance to Datadog's committment to continuous growth.*
+*Above mentioned ingestion latencies are not final and are subject to improvements with compliance to Datadog's committment to continuous growth.*
 
 [1]: /metrics/summary/
