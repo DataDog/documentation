@@ -708,7 +708,7 @@ const typeColumn = (key, value, readOnlyMarkup) => {
  * @param {object} value - part of a schema object
  * returns html column
  */
-const descColumn = (key, value) => {
+const descColumn = (key, value, defaultMarkup) => {
   let desc = '';
   if(value.description) {
     if (value.enum){
@@ -722,8 +722,83 @@ const descColumn = (key, value) => {
   if(value.deprecated) {
     desc = `**DEPRECATED**: ${desc}`;
   }
-  return `<div class="col-6 column">${marked(desc) ? marked(desc).trim() : ""}</div>`.trim();
+  let fmtDesc = marked(desc) ? marked(desc).trim() : "";
+  return `<div class="col-5 column">${(fmtDesc) ? fmtDesc : desc}${defaultMarkup}</div>`.trim();
 };
+
+const requiredColumn = (requiredField) => {
+  return `<div class="col-2 column"><p>${requiredField ? "required" : "optional"}</p></div>`.trim();
+}
+
+const defaultColumn = (key, value, parentDefaults) => {
+  let def = '';
+  let parentDefault = '';
+  if(typeof parentDefaults === 'object') {
+    if (key in parentDefaults) {
+      if(parentDefaults[key] && typeof parentDefaults[key] === 'object' && Object.keys(parentDefaults[key]).length > 0) {
+        parentDefault = parentDefaults[key];
+      } else {
+        parentDefault = `${parentDefaults[key]}`;
+      }
+    }
+  }
+  let localDefault = '';
+  if(typeof value.default === 'object') {
+    localDefault = (value.default && key in value.default) ? ((typeof value.default[key] === 'object') ? value.default[key] : `${value.default[key]}`) : '';
+     if (value.default && key in value.default) {
+      if(value.default[key] && typeof value.default[key] === 'object' && Object.keys(value.default[key]).length > 0) {
+        parentDefault = value.default[key];
+      } else {
+        parentDefault = `${value.default[key]}`;
+      }
+    }
+  }
+  def = localDefault || parentDefault || '';
+  if (typeof def === 'object') {
+    def = JSON.stringify(def);
+  }
+  return (def) ? `<span style="font-size:12px;font-weight:bold;border: 1px solid #632ca6;color: #632ca6;border-radius: 12px;padding: 2px 8px;display:inline-block; white-space:break-spaces; max-width:100%">default: ${def}</span>`.trim() : '';
+}
+
+/*const processChild = (childData, key, value, requiredFields, newRequiredFields, tableType, level, newParentKey, skipAnyKeys, parentKey, isNested) => {
+  let html = '';
+  if (skipAnyKeys && childData) {
+    Object.entries(childData).forEach(([ckey, cvalue]) => {
+      if(ckey === "&lt;any-key&gt;") {
+        delete childData[ckey];
+        if(Object.keys(childData).length === 0) {
+          childData = null;
+        }
+      }
+    });
+  }
+
+  const isReadOnly = isReadOnlyRow(value);
+
+  // build up row classes
+  const outerRowClasses = `${(isNested) ? "isNested d-none" : ""} ${(childData) ? "hasChildData" : ""} ${(isReadOnly) ? "isReadOnly" : ""}`;
+  const nestedRowClasses = `first-row ${(childData) ? "js-collapse-trigger collapse-trigger" : ""} ${(isReadOnly) ? "isReadOnly" : ""}`;
+
+  // build markdown
+  const toggleArrow = (childData) ? '<span class="toggle-arrow"><svg width="6" height="9" viewBox="0 0 6 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z" fill="black"/></svg></span> ' : "" ;
+  const required = requiredFields.includes(key) ? '&nbsp;[<em>required</em>]' : "";
+  const readOnlyField = (isReadOnly) ? '' : '';
+
+  // build html
+  html += `
+  <div class="row ${outerRowClasses}">
+    <div class="col-12 first-column">
+      <div class="row ${nestedRowClasses}">
+        ${fieldColumn(key, value, toggleArrow, required, parentKey)}
+        ${typeColumn(key, value, readOnlyField)}
+        ${descColumn(key, value)}
+      </div>
+      ${(childData) ? rowRecursive(tableType, childData, true, (newRequiredFields || []), (level + 1), newParentKey, skipAnyKeys) : ''}
+    </div>
+  </div>
+  `.trim();
+  return html;
+}*/
 
 
 /**
@@ -737,7 +812,7 @@ const descColumn = (key, value) => {
  * @param {boolean} skipAnyKeys - whether to skip <any-key> rows
  * returns html row with nested rows
  */
-const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, parentKey = '', skipAnyKeys = false) => {
+const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, parentKey = '', skipAnyKeys = false, parentDefaults = {}) => {
   let html = '';
   let newRequiredFields;
 
@@ -769,8 +844,16 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
             // for items -> oneOf
             if (value.items.oneOf && value.items.oneOf instanceof Array && value.items.oneOf.length < 20) {
               childData = value.items.oneOf
+              // if one of the entries is just { type: null } we don't want to show it
+              .filter((obj) => !(Object.keys(obj).length === 1))
               .map((obj, indx) => {
-                return {[`Option ${indx + 1}`]: value.items.oneOf[indx]}
+                if("const" in value.items.oneOf[indx]) {
+                  return {[value.items.oneOf[indx].const]: value.items.oneOf[indx]}
+                } else if("_metadata" in value.items.oneOf[indx] && "logical_name" in value.items.oneOf[indx]["_metadata"]) {
+                  return {[value.items.oneOf[indx]["_metadata"]["logical_name"]]: value.items.oneOf[indx]}
+                } else {
+                  return {[`Option ${indx + 1}`]: value.items.oneOf[indx]}
+                }
               })
               .reduce((obj, item) => ({...obj, ...item}), {});
             }
@@ -792,11 +875,25 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
           // for properties -> oneOf
           if(value.oneOf instanceof Array && value.oneOf.length < 20) {
             childData = value.oneOf
+              // if one of the entries is just { type: null } we don't want to show it
+              .filter((obj) => !(Object.keys(obj).length === 1))
               .map((obj, indx) => {
-                return {[`Option ${indx + 1}`]: value.oneOf[indx]}
+                if("const" in value.oneOf[indx]) {
+                  return {[value.oneOf[indx].const]: value.oneOf[indx]}
+                } else if("_metadata" in value.oneOf[indx] && "logical_name" in value.oneOf[indx]["_metadata"]) {
+                  return {[value.oneOf[indx]["_metadata"]["logical_name"]]: value.oneOf[indx]}
+                } else {
+                  return {[`Option ${indx + 1}`]: value.oneOf[indx]}
+                }
               })
               .reduce((obj, item) => ({...obj, ...item}), {});
           }
+        } else if (typeof value === 'object' && "allOf" in value) {
+          childData = value.allOf
+             .map((obj, indx) => {
+               return {[`ALLOF_COMBINE ${indx + 1}`]: value.allOf[indx]}
+             })
+             .reduce((obj, item) => ({...obj, ...item}), {});
         }
         // for widgets
         /*
@@ -812,7 +909,6 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
         //   console.log(childData)
         //   childData = value["oneOf"];
         // }
-
 
         if (skipAnyKeys && childData) {
           Object.entries(childData).forEach(([ckey, cvalue]) => {
@@ -836,19 +932,29 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
         const required = requiredFields.includes(key) ? '&nbsp;[<em>required</em>]' : "";
         const readOnlyField = (isReadOnly) ? '' : '';
 
-        // build html
-        html += `
-        <div class="row ${outerRowClasses}">
-          <div class="col-12 first-column">
-            <div class="row ${nestedRowClasses}">
-              ${fieldColumn(key, value, toggleArrow, required, parentKey)}
-              ${typeColumn(key, value, readOnlyField)}
-              ${descColumn(key, value)}
-            </div>
-            ${(childData) ? rowRecursive(tableType, childData, true, (newRequiredFields || []), (level + 1), newParentKey, skipAnyKeys) : ''}
-          </div>
-        </div>
+       // console.log(requiredFields, newRequiredFields);
+
+        const defaultMarkup = defaultColumn(key, value, parentDefaults);
+
+        if(key.startsWith('ALLOF_COMBINE ')) {
+          html += `
+                ${(childData) ? rowRecursive(tableType, childData, true, (newRequiredFields || []), (level + 1), newParentKey, skipAnyKeys, value.default || {}) : ''}
         `.trim();
+        } else {
+          html += `
+          <div class="row ${outerRowClasses}">
+              <div class="col-12 first-column">
+                <div class="row ${nestedRowClasses}">
+                  ${fieldColumn(key, value, toggleArrow, required, parentKey)}
+                  ${requiredColumn(requiredFields.includes(key))}
+                  ${typeColumn(key, value, readOnlyField)}
+                  ${descColumn(key, value, defaultMarkup)}
+                </div>
+                ${(childData) ? rowRecursive(tableType, childData, true, (newRequiredFields || []), (level + 1), newParentKey, skipAnyKeys, value.default || {}) : ''}
+              </div>
+          </div>
+        `.trim();
+        }
       });
     } else {
       html += `<div class="primitive">${data || ''}</div>`;
@@ -884,6 +990,8 @@ const schemaTable = (tableType, data, skipAnyKeys = false) => {
         return {[`Option ${indx + 1}`]: data.oneOf[indx]}
       })
       .reduce((obj, item) => ({...obj, ...item}), {});
+  } else if(data.allOf && data.allOf.length > 0) {
+
   } else {
     initialData = data.properties;
   }
@@ -896,7 +1004,36 @@ const schemaTable = (tableType, data, skipAnyKeys = false) => {
         </div>
       </div>
     </div>`.trim();
-  return `<div class="${extraClasses}">${(initialData) ? rowRecursive(tableType, initialData, false, data.required || [], 0, '', skipAnyKeys) : emptyRow}</div>`;
+  if(data.allOf && data.allOf.length > 0) {
+    const tables = data.allOf.map((obj, indx) => {
+        let x = data.allOf[indx];
+        let req = data.required || [];
+        if("properties" in data.allOf[indx]) {
+          x = data.allOf[indx].properties;
+          req = data.allOf[indx].required || data.required || [];
+        } else if("allOf" in data.allOf[indx]) {
+          x = data.allOf[indx].allOf;
+          req = data.allOf[indx].required || data.required || [];
+        }
+        //console.log(x);
+        if(x instanceof Array) {
+          return x.map((ite) => {
+            if(typeof ite === 'object' && "properties" in ite) {
+              return rowRecursive(tableType, ite.properties, false, req, 0, '', skipAnyKeys);
+            } else {
+              return '';
+            }
+          }).reduce((acc, currentValue) => (acc + currentValue), "");
+        } else if(typeof x === "object") {
+          return rowRecursive(tableType, x, false, req, 0, '', skipAnyKeys);
+        } else {
+          return '';
+        }
+    }).reduce((acc, currentValue) => (acc + currentValue), "");
+    return `<div class="${extraClasses}">${tables}</div>`;
+  } else {
+    return `<div class="${extraClasses}">${(initialData) ? rowRecursive(tableType, initialData, false, data.required || [], 0, '', skipAnyKeys) : emptyRow}</div>`;
+  }
 };
 
 /**

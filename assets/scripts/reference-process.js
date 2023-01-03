@@ -5,8 +5,8 @@ const safeJsonStringify = require('safe-json-stringify');
 const myArgs = process.argv.slice(2);
 const input = (myArgs.length > 0) ? myArgs[0] : './data/reference/schema.json';
 const output = (myArgs.length > 1) ? myArgs[1] : './data/reference/schema.deref.json';
-const schemaTable = require('./build-api-pages').schemaTable;
-const filterExampleJson = require('./build-api-pages').filterExampleJson;
+const schemaTable = require('./build-reference-pages').schemaTable;
+const filterExampleJson = require('./build-reference-pages').filterExampleJson;
 const yaml = require('js-yaml');
 const {split} = require("lodash/string");
 
