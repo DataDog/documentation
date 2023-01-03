@@ -93,7 +93,7 @@ Both sets of content is embedded in the Datadog tracer library package and loade
 
 The HTML and JSON content can both be changed using the `DD_APPSEC_HTTP_BLOCKED_TEMPLATE_HTML` and `DD_APPSEC_HTTP_BLOCKED_TEMPLATE_JSON` environment variables. Alternatively, you can use the `dd.appsec.http.blocked.template.html` / `dd.appsec.http.blocked.template.json` configuration entries.
 
-{{< img src="/security_platform/application_security/asm-blocking-page-html.png" alt="The page displayed as ASM blocks requests originating from blocked IPs" width="75%">}}
+{{< img src="/security/application_security/asm-blocking-page-html.png" alt="The page displayed as ASM blocks requests originating from blocked IPs" width="75%">}}
 
 ## Coverage
 
