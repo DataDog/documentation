@@ -17,11 +17,17 @@ further_reading:
 
 ## Overview
 
-Late metric ingestion allows you to ingest metric points that possess outdated timestamps (older than one hour, but no older than your total metric retention period). Today, Datadog’s metrics intake pipelines are restricted to only ingest metric timestamps that are no older than one hour from the time of ingestion. You can now start monitoring events that will not allow you to send metrics in realtime (outages and delayed backend services) or correcting invalid metric submissions.
+*What are Late Metrics?* If you are emitting metric points, which posses timestamps that are older than an hour relative to the time of submission, Datadog will classify this metric point as a Late Metric. 
+
+**Example**: You emit a metric point at 1PM EST and the timestamp on said metric point reads 10AM EST. This metric point is considered late, as it is delayed by 3 hours relative to the time of submission. 
+
+*Why does this matter to the average Datadog Metrics user?* Traditionally, Datadog has not supported Late Metrics, hence the introduction of Late Metric Ingestion will allow you to start monitroing a pleathora of new use-cases with your Datadog Metrics. (Outage Recovery, Overwriting Invalid Metrics, and Managing IoT Delays to name a few)
+
+Late Metric Ingestion allows you to collect metric points that possess outdated timestamps (older than one hour from the time of submission, but no older than your total metric retention period (*defaults to 15 months for all metrics*)). 
 
 **Note**: Resending metric ponts (sending metrics points with an already existing timestamp and tag combination within Datadog) will be replaced, with compliance to our last point wins ingestion rule.
 
-You can now ingest/configure late metrics for counts, rates, and gauges via the [Metrics Summary Page][1].
+You can now start ingesting Late Metrics by configuring Late Metrics Ingestion via the [Metrics Summary Page][1] for counts, rates, and gauges.
 
 ## Late Metrics Submission Mechanisms
 
