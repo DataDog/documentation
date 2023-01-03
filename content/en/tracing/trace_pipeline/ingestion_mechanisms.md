@@ -247,7 +247,7 @@ The rare sampler sends a set of rare spans to Datadog. It catches combinations o
 
 By default, the rare sampler is **not enabled**. 
 
-Note: When **enabled**, spans dropped by tracing library rules or custom logic such as `manual.keep` are **excluded** under this sampler.
+**Note**: When **enabled**, spans dropped by tracing library rules or custom logic such as `manual.keep` are **excluded** under this sampler.
 
 To configure the rare sampler, update the `apm_config.enable_rare_sampler` setting in the Agent main configuration file (`datadog.yaml`) or with the environment variable `DD_APM_ENABLE_RARE_SAMPLER`:
 
