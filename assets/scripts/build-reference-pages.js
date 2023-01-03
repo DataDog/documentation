@@ -722,6 +722,14 @@ const descColumn = (key, value, defaultMarkup) => {
   if(value.deprecated) {
     desc = `**DEPRECATED**: ${desc}`;
   }
+
+  if(value.title) {
+    desc = `${value.title}\n\n${desc}`;
+  }
+
+  //const regex = /!?\[([^\]]*)?\]\:\s+((https?:\/\/)?[A-Za-z0-9\:\/\. ]+)(\"(.+)\")?/gm;
+  //const subst = `[$1]($2)`;
+  //const descModified = desc.replace(regex, subst);
   let fmtDesc = marked(desc) ? marked(desc).trim() : "";
   return `<div class="col-5 column">${(fmtDesc) ? fmtDesc : desc}${defaultMarkup}</div>`.trim();
 };

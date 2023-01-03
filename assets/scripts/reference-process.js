@@ -52,14 +52,13 @@ function buildSection(specStr, deref, allData) {
   dataEntries.forEach(([key, value]) => {
       const Sx = ("allOf" in value.allOf[0]) ? value.allOf[0].allOf[0] : value.allOf[0];
       const Sx2 = ("allOf" in value.allOf[0]) ? value.allOf[0].allOf[1] : value.allOf[0];
-      console.log(value.description, value.allOf[0].description)
       let entryData = {
         "description1": value.description || "",
         "description2": value.allOf[0].description || "",
         "title": value.allOf[0].title || "",
         "metadata": value._metadata || {},
-        "simple": simpleExampleYaml(Sx),
-        "advanced": exampleYaml(Sx2, Sx),
+        "simple": yaml.dump(simpleExampleYaml(value.allOf), {lineWidth: -1, sortKeys:false}),
+        "advanced": yaml.dump(advancedExampleYaml(value.allOf), {lineWidth: -1, sortKeys:false}),
         "html": {}
       };
       let lastChar = entryData.description1.slice(-1);
@@ -77,32 +76,42 @@ function buildSection(specStr, deref, allData) {
   });
 }
 
-function simpleExampleYaml(data1) {
-  const outData = {};
-  if(data1 && data1.hasOwnProperty('properties')) {
-    Object.entries(data1.properties).forEach(([key, value]) => {
-      let type = value.type;
-      if(type instanceof Array) {
-        type = value.type[0]
-      }
-      outData[key] = value.default || type || value.const || "";
-    });
-  }
-  return yaml.dump(outData, {lineWidth: -1, sortKeys:false});
+function simpleExampleYaml(allOf) {
+  let outData = {};
+  const iter = (allOf instanceof Array) ? allOf : [allOf];
+  iter.forEach((data) => {
+    if(data && data.hasOwnProperty('properties')) {
+      Object.entries(data.properties).forEach(([key, value]) => {
+        let type = value.type;
+        if(type instanceof Array) {
+          type = value.type[0]
+        }
+        outData[key] = value.default || type || value.const || "";
+      });
+    } else if(data && data.hasOwnProperty('allOf')) {
+      outData = {...outData, ...simpleExampleYaml([data.allOf[0]]) };
+    }
+  });
+  return outData;
 }
 
-function advancedExampleYaml(data1) {
-  const outData = {};
-  if(data1 && data1.hasOwnProperty('properties')) {
-    Object.entries(data1.properties).forEach(([key, value]) => {
-      let type = value.type;
-      if(type instanceof Array) {
-        type = value.type[0]
-      }
-      outData[key] = value.default || type || value.const || "";
-    });
-  }
-  return yaml.dump(outData, {lineWidth: -1, sortKeys:false});
+function advancedExampleYaml(allOf) {
+  let outData = {};
+  const iter = (allOf instanceof Array) ? allOf : [allOf];
+  iter.forEach((data) => {
+    if(data && data.hasOwnProperty('properties')) {
+      Object.entries(data.properties).forEach(([key, value]) => {
+        let type = value.type;
+        if(type instanceof Array) {
+          type = value.type[0]
+        }
+        outData[key] = value.default || type || value.const || "";
+      });
+    } else if(data && data.hasOwnProperty('allOf')) {
+      outData = {...outData, ...simpleExampleYaml(data.allOf) };
+    }
+  });
+  return outData;
 }
 
 function exampleYaml(data1, data2) {
