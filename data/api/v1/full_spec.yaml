@@ -13098,6 +13098,11 @@ components:
         pattern:
           description: Pattern of the variable.
           type: string
+        secure:
+          description: Whether the value of this variable will be obfuscated in test
+            results.
+          example: false
+          type: boolean
         type:
           $ref: '#/components/schemas/SyntheticsConfigVariableType'
       required:

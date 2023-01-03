@@ -93,10 +93,6 @@ Use one of the following methods to enable CSPM for your Azure subscriptions:
 
 {{% tab "GCP" %}}
 
-<div class="alert alert-warning">
-CSPM support for GCP is in public beta.
-</div>
-
 ### Set up the Datadog GCP integration
 
 If you haven't already, set up the [Google Cloud Platform integration][1] and make sure that you have successfully completed the steps for enabling [metric collection][2].
