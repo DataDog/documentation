@@ -29,14 +29,6 @@ Late Metric Ingestion allows you to collect metric points that possess outdated 
 
 You can now start ingesting Late Metrics by configuring Late Metrics Ingestion via the [Metrics Summary Page][1] for counts, rates, and gauges.
 
-## Late Metrics Submission Mechanisms
-
-Late metrics can be submitted to Datadog via our API or the Agent. 
-
-**If you intend to submit late metrics via the API**:, you can send metrics points with old timestamps in the payload, while ensuring that the metric name that is ingesting the point has been configured to receive Late Metrics (via the UI). 
-
-**If you intend to submit late metrics via the Agent**:  ensure that you have Agent version +7.40.0 installed, and you’ll be able to send delayed metric points via the updated DogStatsD interface (*currently supporting GoLang and .NET versions*). 
-
 ## Configuring Late Metrics
 
 Click on any metric name to open its details side-panel. “Late Data” will be the second option under the already existing “Advanced” section in the Metrics side panel. Clicking on “Edit” will move to the next screen. 
@@ -55,6 +47,16 @@ Optimize your Late Metrics enablement by using our Bulk Late Metric Enablement f
 
 GIF FROM JOE GOES HERE
 
+## Late Metrics Submission Mechanisms
+
+Late metrics can be submitted to Datadog via our API or the Agent. 
+
+**If you intend to submit late metrics via the API**:, you can send metrics points with old timestamps in the payload, while ensuring that the metric name that is ingesting the point has been configured to receive Late Metrics (via the UI). 
+
+
+
+**If you intend to submit late metrics via the Agent**:  ensure that you have Agent version +7.40.0 installed, and you’ll be able to send delayed metric points via the updated DogStatsD interface (*currently supporting GoLang and .NET versions*). 
+
 ## Late Metrics Ingestion Latency
 
 Ingesting Late Metrics will include some ingestion latencies, dependent on the age of the metric timestamp. 
@@ -68,3 +70,4 @@ Ingesting Late Metrics will include some ingestion latencies, dependent on the a
 *Above mentioned ingestion latencies are not final and are subject to improvements with compliance to Datadog's committment to continuous growth.*
 
 [1]: /metrics/summary/
+[2]: /metrics/#submit-metrics
