@@ -206,10 +206,16 @@ configuring injection/extraction styles. Two styles are
 supported: `Datadog` and `B3`.
 
 Configure injection styles using the environment variable:
-`DD_PROPAGATION_STYLE_INJECT=Datadog,B3`
+`DD_TRACE_PROPAGATION_STYLE_INJECT=Datadog,B3`
 
 Configure extraction styles using the environment variable:
-`DD_PROPAGATION_STYLE_EXTRACT=Datadog,B3`
+`DD_TRACE_PROPAGATION_STYLE_EXTRACT=Datadog,B3`
+
+Configure both styles using the environment variable:
+`DD_TRACE_PROPAGATION_STYLE=Datadog,B3`
+
+Values from the respective injection and extraction style environment variables
+take precedence over `DD_TRACE_PROPAGATION_STYLE`.
 
 The values of these environment variables are comma separated lists of
 header styles that are enabled for injection or extraction. By default,
