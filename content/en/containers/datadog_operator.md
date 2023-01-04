@@ -54,8 +54,8 @@ For all installation and configuration options, see the detailed [installation][
 [1]: http://github.com/DataDog/datadog-operator
 [2]: https://kubernetes.io/docs/concepts/extend-kubernetes/operator/
 [3]: /containers/cluster_agent
-[4]: /containers/cluster_agent/cluster_checks
+[4]: /containers/cluster_agent/clusterchecks
 [5]: https://github.com/DataDog/extendeddaemonset
-[6]: /getting_started/datadog_operator
+[6]: /getting_started/containers/datadog_operator
 [7]: https://github.com/DataDog/datadog-operator/blob/main/docs/installation.md
 [8]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
