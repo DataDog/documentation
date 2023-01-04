@@ -29,6 +29,9 @@ As an alternative, you can instead set the system property `-Ddd.data.streams.en
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.data.streams.enabled=true -jar path/to/your/app.jar
 ```
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent
 [2]: /tracing/trace_collection/dd_libraries/java/

@@ -1,10 +1,6 @@
 ---
 title: Data Streams Terms and Concepts
 kind: documentation
-further_reading:
-    - link: '/data_streams/glossary/'
-      tag: 'Documentation'
-      text: 'Data Streams Glossary'
 ---
 
 There are a number of terms and concepts specific to Data Streams Monitoring.

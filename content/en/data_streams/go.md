@@ -109,6 +109,9 @@ _, ctx = datastreams.SetCheckpoint(ctx, "type:internal", "event_type:sell")
 
 You only need to add the `event_type` tag for the first service in each pathway. High-cardinality data (such as request IDs or hosts) are not supported as values for the `event_type` tag.
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent
 [2]: https://github.com/DataDog/data-streams-go

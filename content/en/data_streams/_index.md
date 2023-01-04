@@ -1,6 +1,10 @@
 ---
 title: Data Streams Monitoring
 kind: documentation
+further_reading:
+    - link: '/data_streams/glossary/'
+      tag: 'Documentation'
+      text: 'Data Streams Glossary'
 ---
 
 {{< img src="data_streams/data_streams_hero.png" alt="Datadog Data Streams Monitoring" style="width:100%;" >}}
@@ -23,6 +27,10 @@ Data Streams Monitoring provides a standardized method for teams to understand a
 | Other | See [Agent installation requirements][2] |
 
 {{< partial name="data_streams/setup-languages.html" >}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: /data_streams/go#manual-instrumentation

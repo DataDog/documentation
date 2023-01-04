@@ -22,7 +22,9 @@ For example:
 environment:
   - DD_DATA_STREAMS_ENABLED: "true"
 ```
+## Further Reading
 
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent
 [2]: /tracing/trace_collection/dd_libraries/dotnet-core
