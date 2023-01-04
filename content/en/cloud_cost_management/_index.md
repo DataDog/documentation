@@ -30,8 +30,8 @@ Select the following Delivery options:
 
 * Time granularity: **Hourly**
 * Report versioning: **Create new report version**
-* Compression type: **GZIP**
-* Format: `text/csv`
+* Compression type: **GZIP** or **Parquet**
+* Format: `text/csv` or `Parquet`
 
 ### Configure the AWS integration
 
