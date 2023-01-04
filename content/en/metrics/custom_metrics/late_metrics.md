@@ -320,8 +320,11 @@ curl -X POST "https://api.datadoghq.com/api/v2/series" \
       "metric": "system.load.1",
       "type": 0,
       "points": [
-        {  
+        {
+            # Add late timestamp here
           "timestamp": 1636629071,
+            # ***********************
+
           "value": 0.7
         }
       ],
