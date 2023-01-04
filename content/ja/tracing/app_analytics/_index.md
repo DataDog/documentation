@@ -386,7 +386,7 @@ def my_method():
 ```ruby
 Datadog.tracer.trace('my.task') do |span|
   #  分析サンプリングレートを 1.0 に設定します
-  span.set_tag(Datadog::Ext::Analytics::TAG_ENABLED, true)
+  span.set_tag(Datadog::Tracing::Metadata::Ext::Analytics::TAG_ENABLED, true)
 end
 ```
 
