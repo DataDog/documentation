@@ -36,7 +36,7 @@ See [Tracing Java Applications][2] for general comprehensive tracing setup docum
 - Docker
 - Terraform
 - AWS ECS
-- AWS ECR
+- an AWS ECR repository for hosting images
 - An AWS IAM user with `AdministratorAccess` permission. You must add the profile to your local credentials file using the access and secret access keys. For more information, read [Using the AWS credentials file and credential Profiles][20].
 
 ## Install the sample Java application
@@ -51,22 +51,32 @@ The repository contains a multi-service Java application pre-configured to be ru
 
 In each of the `notes` and `calendar` directories, there are two sets of Dockerfiles for building the applications either with Maven or with Gradle. This tutorial uses the Maven build, but if you are more familiar with Gradle, you can use it instead with the corresponding changes to build commands.
 
-The sample application is a simple multi-service Java application with two APIs, one for a `notes` service and another for a `calendar` service. The `notes` service has `GET`, `POST`, `PUT` and `DELETE` endpoints for notes stored within an in-memory database. The `calendar` service can take a request and return a random date to be used in a note. Both applications have their own associated Docker images, and you deploy them on AWS ECS as separate services, each with its own tasks and respective containers.
+The sample application is a simple multi-service Java application with two APIs, one for a `notes` service and another for a `calendar` service. The `notes` service has `GET`, `POST`, `PUT` and `DELETE` endpoints for notes stored within an in-memory H2 database. The `calendar` service can take a request and return a random date to be used in a note. Both applications have their own associated Docker images, and you deploy them on AWS ECS as separate services, each with its own tasks and respective containers. ECS pulls the images from ECR, a repository for application images that you publish the images to after building.
 
+### Initial EC2 setup
 
+The application requires some initial configuration, including adding your AWS profile (already configured with the correct permissions to create an ECS cluster and read from ECR), AWS region, and AWS ECR repository.
 
-### Starting the cluster
+Open `terraform/EC2/global_constants/variables.tf` replace the variable values below with your correct AWS account information:
 
-If you don't already have a EKS cluster that you want to re-use, create one by running the following command, replacing `<CLUSTER_NAME>` with the name you want to use:
+```
+output "aws_profile" {
+    value = "<AWS_PROFILE>"
+    sensitive = true
+}
 
-{{< code-block lang="sh" >}}
-eksctl create cluster --name <CLUSTER_NAME>{{< /code-block >}}
+output "aws_region" {
+    value = "<AWS_REGION>"
+    sensitive = true
+}
 
-This creates an EKS cluster with a managed nodegroup to allow for pods to be deployed on. Read [the eksctl documentation on creating clusters][16] for more information on troubleshooting and configuration. If you're using a cluster created another way (for example by the AWS web console), ensure that the cluster is connected to your local `kubeconfig` file as described in that eksctl documentation.
+output "aws_ecr_repository" {
+    value = "<AWS_ECR_REPOSITORY_URL>"
+    sensitive = true
+}
+```
 
-Creating the clusters may take 15 to 20 minutes to complete. Continue to other steps while waiting for the cluster to finish creation.
-
-### Build and upload the application image
+### Build and upload the application images
 
 If you're not familiar with Amazon ECR, a registry for EKS images, it might be helpful to read [Using Amazon ECR with the AWS CLI][17].
 
@@ -76,86 +86,75 @@ In the sample project's `/docker` directory, run the following commands:
    {{< code-block lang="sh" >}}
 aws ecr get-login-password --region us-east-1 | docker login --username <YOUR_AWS_USER> --password-stdin <USER_CREDENTIALS>{{< /code-block >}}
 
-2. Build a Docker image for the sample app, adjusting the platform setting to match yours:
+2. Build a Docker image for the sample apps, adjusting the platform setting to match yours:
    {{< code-block lang="sh" >}}
-DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose -f service-docker-compose-k8s.yaml build{{< /code-block >}}
+DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose -f service-docker-compose-ECS.yaml build{{< /code-block >}}
 
-3. Tag the container with the ECR destination:
+3. Tag the containers with the ECR destination:
    {{< code-block lang="sh" >}}
-docker tag docker_notes:latest <ECR_REGISTRY_URL>:notes{{< /code-block >}}
+docker tag docker_notes:latest <ECR_REGISTRY_URL>:notes
+docker tag docker_calendar:latest <ECR_REGISTRY_URL>:calendar{{< /code-block >}}
 
 4. Upload the container to the ECR registry:
    {{< code-block lang="sh" >}}
-docker push <ECR_REGISTRY_URL>:notes{{< /code-block >}}
+docker push <ECR_REGISTRY_URL>:notes
+docker push <ECR_REGISTRY_URL>:calendar{{< /code-block >}}
 
-Your application is containerized and available for EKS clusters to pull.
+Your application (without tracing enabled) is containerized and available for ECS to pull.
 
-### Update AWS cluster inbound security policies
 
-To communicate with the sample applications, ensure that the cluster's security rules are configured with ports `30080` and `30090` open. 
+### Deploy the application
 
-1. Open AWS Console and navigate to your deployed cluster within the EKS service. 
+Start the application and send some requests without tracing. After you've seen how the application works, you'll instrument it using the tracing library and Datadog Agent.
 
-2. On the cluster console, select the networking tab, and click your cluster security group.
+To start, use a terraform script to deploy to AWS ECS:
 
-3. In your security group settings, edit the inbound rules. Add a rule allowing custom TCP traffic, a port range of `30060` to `30100`, and source of `0.0.0.0/0`. 
+1. From the `terraform/EC2/deployment` directory, run the following commands:
 
-4. Save the rule.
+   ```sh
+   terraform init
+   terraform apply
+   terraform state show 'aws_alb.application_load_balancer'
+   ```
 
-### Configure the application locally and deploy
+   **Note**: If the `terraform apply` command returns a CIDR block message, it means that the script to obtain your IP address did not work on your local machine. To fix this, set the value manually in the `terraform/EC2/deployment/security.tf` file. Inside the `ingress` block of the `load_balancer_security_group`, switch which `cidr_blocks` line is commented out and update the now-uncommented example line with your machine’s IP4 address.
 
-1. Open `kubernetes/notes-app.yaml` and update the `image` entry with the URL for the ECR image, where you pushed the container above:
-   {{< code-block lang="yaml" >}}
-    spec:
-      containers:
-        - name: notes-app
-          image: <ECR_REGISTRY_URL>:notes
-          imagePullPolicy: Always
-{{< /code-block >}}
-
-2. From the `/kubernetes` directory, run the following command to deploy the `notes` app:
-   {{< code-block lang="sh" >}}
-kubectl create -f notes-app.yaml{{< /code-block >}}
-
-3. To exercise the app, you need to find its external IP address to call its REST API. First, find the `notes-app-deploy` pod in the list output by the following command, and note its node:
-
-   {{< code-block lang="sh" >}}
-kubectl get pods -o wide{{< /code-block >}}
-
-   {{< img src="tracing/guide/tutorials/tutorial-java-eks-pods.png" alt="Output of the kubectl command showing the notes-app-deploy pod and its associated node name" style="width:100%;" >}}
-
-   Then find that node name in the output from the following command, and note the external IP value:
-
-      {{< code-block lang="sh" >}}
-kubectl get nodes -o wide{{< /code-block >}}
-   
-   {{< img src="tracing/guide/tutorials/tutorial-java-eks-external-ip.png" alt="Output of the kubectl command showing the external IP value for the node" style="width:100%;" >}}
-
-   In the examples shown, the `notes-app` is running on node `ip-192-189-63-129.ec2.internal` which has an external IP of `34.230.7.210`.
+2. Make note of the DNS name of the load balancer. You'll use that base domain in API calls to the sample app. Wait a few minutes for the instances to start up.
 
 3. Open up another terminal and send API requests to exercise the app. The notes application is a REST API that stores data an in-memory H2 database running on the same container. Send it a few commands:
 
-`curl <EXTERNAL_IP>:30080/notes`
-: `[]`
+   `curl -X GET 'BASE_DOMAIN:8080/notes'`
+   : `[]`
 
-`curl -X POST '<EXTERNAL_IP>:30080/notes?desc=hello'`
-: `{"id":1,"description":"hello"}`
+   `curl -X POST 'BASE_DOMAIN:8080/notes?desc=hello'`
+   : `{"id":0,"description":"hello"}`
 
-`curl <EXTERNAL_IP>:30080/notes?id=1`
-: `{"id":1,"description":"hello"}`
+   `curl -X GET 'BASE_DOMAIN:8080/notes?id=0'`
+   : `{"id":0,"description":"hello"}`
 
-`curl <EXTERNAL_IP>:30080/notes`
-: `[{"id":1,"description":"hello"}]`
+   `curl -X GET 'BASE_DOMAIN:8080/notes'`
+   : `[{"id":0,"description":"hello"}]`
 
-4. After you've seen the application running, stop it so that you can enable tracing on it:
+   `curl -X PUT 'BASE_DOMAIN:8080/notes?id=0&desc=UpdatedNote'`
+   : `{"id":0,"description":"UpdatedNote"}`
+
+   `curl -X GET 'BASE_DOMAIN:8080/notes'`
+   : `[{"id":0,"description":"UpdatedNote"}]`
+
+   `curl -X POST 'BASE_DOMAIN:8080/notes?desc=NewestNote&add_date=y'`
+   : `{"id":1,"description":"NewestNote with date 12/02/2022."}`
+
+      This command calls both the `notes` and `calendar` services.
+
+4. After you've seen the application running, run the following command to stop it and clean up the AWS resources so that you can enable tracing:
    {{< code-block lang="sh" >}}
-kubectl delete -f notes-app.yaml{{< /code-block >}}
+terraform destroy{{< /code-block >}}
 
 ## Enable tracing
 
 Now that you have a working Java application, configure it to enable tracing.
 
-1. Add the Java tracing package to your project. Because the Agent runs in an EKS cluster, there is no need to install anything, but rather just ensure that the Dockerfiles are configured properly. Open the `notes/dockerfile.notes.maven` file, and uncomment the line that downloads `dd-java-agent`:
+1. Add the Java tracing package to your project. Because the Agent runs on EC2 instances, there is no need to install anything, but rather just ensure that the Dockerfiles are configured properly. Open the `notes/dockerfile.notes.maven` file, and uncomment the line that downloads `dd-java-agent`:
 
    ```
    RUN curl -Lo dd-java-agent.jar https://dtdg.co/latest-java-tracer
@@ -166,120 +165,22 @@ Now that you have a working Java application, configure it to enable tracing.
    ```
    ENTRYPOINT ["java" , "-javaagent:../dd-java-agent.jar", "-Ddd.trace.sample.rate=1", "-jar" , "target/notes-0.0.1-SNAPSHOT.jar"]
    ```
+   
+   Repeat this step with the other service, `calendar`. Open `calendar/dockerfile.calendar.maven`, comment out the `ENTRYPOINT` line for running without tracing. Then uncomment the `ENTRYPOINT` line, which runs the application with tracing enabled:
 
-   This automatically instruments the application with Datadog services.
+   ```
+   ENTRYPOINT ["java", "-javaagent:../dd-java-agent.jar", "-Ddd.trace.sample.rate=1", "-jar" , "target/calendar-0.0.1-SNAPSHOT.jar"] 
+   ```
+
+   Now both services will have automatic instrumentation.
 
    <div class="alert alert-warning"><strong>Note</strong>: The flags on these sample commands, particularly the sample rate, are not necessarily appropriate for environments outside this tutorial. For information about what to use in your real environment, read <a href="#tracing-configuration">Tracing configuration</a>.</div>
 
-3. [Universal Service Tags][10] identify traced services across different versions and deployment environments so that they can be correlated within Datadog, and so you can use them to search and filter. The three environment variables used for Unified Service Tagging are `DD_SERVICE`, `DD_ENV`, and `DD_VERSION`. For applications deployed with Kubernetes, these environment variables can be added within the deployment YAML file, specifically for the deployment object, pod spec, and pod container template.
-   
-   For this tutorial, the `kubernetes/notes-app.yaml` file already has these environment variables defined for the notes application for the deployment object, the pod spec, and the pod container template, for example:
+3. While automatic instrumentation is convenient, sometimes you want more fine-grained spans. Datadog's Java DD Trace API allows you to specify spans within your code using annotations or code. Add some annotations to the code to trace into some sample methods. 
 
-   ```yaml
-   ...
-   spec:
-     replicas: 1
-     selector: 
-       matchLabels:
-         name: notes-app-pod
-         app: java-tutorial-app
-     template:
-       metadata:
-         name: notes-app-pod
-         labels:
-           name: notes-app-pod
-           app: java-tutorial-app
-           tags.datadoghq.com/env: "dev"
-           tags.datadoghq.com/service: "notes"
-           tags.datadoghq.com/version: "0.0.1"
-      ...
-   ```
+   Open `/notes/src/main/java/com/datadog/example/notes/NotesHelper.java`. This example already contains commented-out code that demonstrates the different ways to set up custom tracing on the code.
 
-### Rebuild and upload the application image
-
-Rebuild the image with tracing enabled using the [same steps as before](#build-and-upload-the-application-image):
-{{< code-block lang="sh" >}}
-aws ecr get-login-password --region us-east-1 | docker login --username <YOUR_AWS_USER> --password-stdin <USER_CREDENTIALS>
-DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose -f service-docker-compose-k8s.yaml build
-docker tag docker_notes:latest <ECR_REGISTRY_URL>:notes
-docker push <ECR_REGISTRY_URL>:notes{{< /code-block >}}
-
-Your application with tracing enabled is containerized and available for EKS clusters to pull.
-
-## Install and run the Agent using Helm
-
-Next, deploy the Agent to EKS to collect the trace data from your instrumented application.
-
-1. Open `kubernetes/datadog-values.yaml` to see the minimum required configuration for the Agent and APM on GKE. This configuration file is used by the command you run next.
-
-2. From the `/kubernetes` directory, run the following command, inserting your API key and cluster name:
-   {{< code-block lang="sh" >}}
-helm upgrade -f datadog-values.yaml --install --debug latest --set datadog.apiKey=<DD_API_KEY> --set datadog.clusterName=<CLUSTER_NAME> --set datadog.site=datadoghq.com datadog/datadog{{< /code-block >}}
-
-   For more secure deployments that do not expose the API Key, read [this guide on using secrets][18]. Also, if you use a [Datadog site][6] other than `us1`, replace `datadoghq.com` with your site.
-
-## Launch the app to see automatic tracing
-
-Using [the same steps as before](#configure-the-application-locally-and-deploy), deploy the `notes` app with `kubectl create -f notes-app.yaml` and find the external IP address for the node it runs on.
-
-Run some curl commands to exercise the app:
-
-`curl <EXTERNAL_IP>:30080/notes`
-: `[]`
-
-`curl -X POST '<EXTERNAL_IP>:30080/notes?desc=hello'`
-: `{"id":1,"description":"hello"}`
-
-`curl <EXTERNAL_IP>:30080/notes?id=1`
-: `{"id":1,"description":"hello"}`
-
-`curl <EXTERNAL_IP>:30080/notes`
-: `[{"id":1,"description":"hello"}]`
-
-
-Wait a few moments, and go to [**APM > Traces**][11] in Datadog, where you can see a list of traces corresponding to your API calls:
-
-{{< img src="tracing/guide/tutorials/tutorial-java-container-traces.png" alt="Traces from the sample app in APM Trace Explorer" style="width:100%;" >}}
-
-The `h2` is the embedded in-memory database for this tutorial and `notes` is the Spring Boot application. The traces list shows all of the spans, when they started, what resource was tracked with the span, and how long it took.
-
-If you don't see traces after several minutes, clear any filter in the Traces Search field (sometimes it filters on an environment variable such as `ENV` that you aren't using).
-
-### Examine a trace
-
-On the Traces page, click on a `POST /notes` trace to see a flame graph that shows how long each span took and what other spans occurred before a span completed. The bar at the top of the graph is the span you selected on the previous screen (in this case, the initial entry point into our notes application). 
-
-The width of a bar indicates how long it took to complete. A bar at a lower depth represents a span that completes during the lifetime of a bar at a higher depth. 
-
-The flame graph for a `POST` trace looks something like this:
-
-{{< img src="tracing/guide/tutorials/tutorial-java-container-post-flame.png" alt="A flame graph for a POST trace." style="width:100%;" >}}
-
-A `GET /notes` trace looks something like this:
-
-{{< img src="tracing/guide/tutorials/tutorial-java-container-get-flame.png" alt="A flame graph for a GET trace." style="width:100%;" >}}
-
-### Tracing configuration
-
-The Java tracing library takes advantage of Java’s built-in agent and monitoring support. The flag `-javaagent:../dd-java-agent.jar` in the Dockerfile tells the JVM where to find the Java tracing library so it can run as a Java Agent. Learn more about Java Agents at [https://www.baeldung.com/java-instrumentation][7].
-
-The `dd.trace.sample.rate` flag sets the sample rate for this application. The ENTRYPOINT command in the Dockerfile set its value to `1`, which means that 100% of all requests to the `notes` service are sent to the Datadog backend for analysis and display. For a low-volume test application, this is fine. Do not do this in production or in any high-volume environment, because this results in a very large volume of data. Instead, sample some of your requests. Pick a value between 0 and 1. For example, `-Ddd.trace.sample.rate=0.1` sends traces for 10% of your requests to Datadog. Read more about [tracing configuration settings][14] and [sampling mechanisms][15].
-
-Notice that the sampling rate flag in the command appears _before_ the `-jar` flag. That’s because this is a parameter for the Java Virtual Machine and not for your application. Make sure that when you add the Java Agent to your application, you specify the flag in the right location.
-
-## Add manual instrumentation to the Java application
-
-While automatic instrumentation is convenient, sometimes you want more fine-grained spans. Datadog's Java DD Trace API allows you to specify spans within your code using annotations or code.
-
-The following steps walk you through modifying the build scripts to download the Java tracing library and adding some annotations to the code to trace into some sample methods.
-
-1. Delete the current application deployments:
-   {{< code-block lang="sh" >}}
-kubectl delete -f notes-app.yaml{{< /code-block >}}
-
-2. Open `/notes/src/main/java/com/datadog/example/notes/NotesHelper.java`. This example already contains commented-out code that demonstrates the different ways to set up custom tracing on the code.
-
-3. Uncomment the lines that import libraries to support manual tracing:
+4. Uncomment the lines that import libraries to support manual tracing:
 
    ```java
    import datadog.trace.api.Trace;
@@ -293,14 +194,14 @@ kubectl delete -f notes-app.yaml{{< /code-block >}}
    import java.io.StringWriter
    ```
 
-4. Uncomment the lines that manually trace the two public processes. These demonstrate the use of `@Trace` annotations to specify aspects such as `operationName` and `resourceName` in a trace:
+5. Uncomment the lines that manually trace the two public processes. These demonstrate the use of `@Trace` annotations to specify aspects such as `operationName` and `resourceName` in a trace:
    ```java
    @Trace(operationName = "traceMethod1", resourceName = "NotesHelper.doLongRunningProcess")
    // ...
    @Trace(operationName = "traceMethod2", resourceName = "NotesHelper.anotherProcess")
    ```
 
-5. You can also create a separate span for a specific block of code in the application. Within the span, add service and resource name tags and error handling tags. All of these tags result in a flame graph that shows the span and its metrics in Datadog visualizations. Uncomment the lines that manually trace the private method:
+6. You can also create a separate span for a specific block of code in the application. Within the span, add service and resource name tags and error handling tags. All of these tags result in a flame graph that shows the span and its metrics in Datadog visualizations. Uncomment the lines that manually trace the private method:
 
    ```java
            Tracer tracer = GlobalTracer.get();
@@ -332,97 +233,209 @@ kubectl delete -f notes-app.yaml{{< /code-block >}}
         }
    ```
 
-6. Update your Maven build by opening `notes/pom.xml` and uncommenting the lines that configure dependencies for manual tracing. The `dd-trace-api` library is used for the `@Trace` annotations, and `opentracing-util` and `opentracing-api` are used for the manual span creation.
+7. Update your Maven build by opening `notes/pom.xml` and uncommenting the lines that configure dependencies for manual tracing. The `dd-trace-api` library is used for the `@Trace` annotations, and `opentracing-util` and `opentracing-api` are used for the manual span creation.
 
-7. Rebuild the application and upload it to ECR following the [same steps as before](#build-and-upload-the-application-image), running these commands:
-
-   {{< code-block lang="sh" >}}
-aws ecr get-login-password --region us-east-1 | docker login --username <YOUR_AWS_USER> --password-stdin <USER_CREDENTIALS>
-DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose -f service-docker-compose-k8s.yaml build
-docker tag docker_notes:latest <ECR_REGISTRY_URL>:notes
-docker push <ECR_REGISTRY_URL>:notes
-{{< /code-block >}}
-
-8. Using [the same steps as before](#configure-the-application-locally-and-deploy), deploy the `notes` app with `kubectl create -f notes-app.yaml` and find the external IP address for the node it runs on. 
-
-9. Resend some HTTP requests, specifically some `GET` requests.
-10. On the Trace Explorer, click into one of the new `GET` requests, and see a flame graph like this:
-
-    {{< img src="tracing/guide/tutorials/tutorial-java-container-custom-flame.png" alt="A flame graph for a GET trace with custom instrumentation." style="width:100%;" >}}
+8. [Universal Service Tags][10] identify traced services across different versions and deployment environments so that they can be correlated within Datadog, and so you can use them to search and filter. The three environment variables used for Unified Service Tagging are `DD_SERVICE`, `DD_ENV`, and `DD_VERSION`. For applications deployed on ECS, these environment variables are set within the task definition for the containers.
    
-    Note the higher level of detail in the stack trace now that the `getAll` function has custom tracing.
+   For this tutorial, the `/terraform/EC2/deployment/main.tf` file already has these environment variables defined for the notes and calendar applications, for example for `notes`:
 
-    The `privateMethod` around which you created a manual span now shows up as a separate block from the other calls and is highlighted by a different color. The other methods where you used the `@Trace` annotation show under the same service and color as the `GET` request, which is the `notes` application. Custom instrumentation is valuable when there are key parts of the code that need to be highlighted and monitored.
-
-For more information, read [Custom Instrumentation][12].
-
-## Add a second application to see distributed traces
-
-Tracing a single application is a great start, but the real value in tracing is seeing how requests flow through your services. This is called _distributed tracing_. 
-
-The sample project includes a second application called `calendar` that returns a random date whenever it is invoked. The `POST` endpoint in the Notes application has a second query parameter named `add_date`. When it is set to `y`, Notes calls the calendar application to get a date to add to the note.
-
-1. Stop the previous deployment by running:
-   {{< code-block lang="sh" >}}
-kubectl delete -f notes-app.yaml{{< /code-block >}}
-
-2. Configure the `calendar` app for tracing by adding `dd-java-agent` to the startup command in the Dockerfile, like you previously did for the notes app. Open `calendar/Dockerfile.calendar.maven` and see that it is already downloading `dd-java-agent`:
-
+   ```yaml
+   ...
+   
+      name : "notes",
+      image : "${module.settings.aws_ecr_repository}:notes",
+      essential : true,
+      portMappings : [
+        {
+          containerPort : 8080,
+          hostPort : 8080
+        }
+      ],
+      memory : 512,
+      cpu : 256,
+      environment : [
+        {
+          name : "CALENDAR_HOST",
+          value : "localhost"
+        },
+        {
+          name : "DD_SERVICE",
+          value : "notes"
+        },
+        {
+          name : "DD_ENV",
+          value : "dev"
+        },
+        {
+          name : "DD_VERSION",
+          value : "0.0.1"
+        }
+      ],
+      dockerLabels : {
+        "com.datadoghq.tags.service" : "notes",
+        "com.datadoghq.tags.env" : "dev",
+        "com.datadoghq.tags.version" : "0.0.1"
+      },
+      ...
    ```
-   RUN curl -Lo dd-java-agent.jar https://dtdg.co/latest-java-tracer
+   And for `calendar`:
+
+   ```yaml
+   ...
+      name : "calendar",
+      image : "${module.settings.aws_ecr_repository}:calendar",
+      essential : true,
+      environment : [
+        {
+          name : "DD_SERVICE",
+          value : "calendar"
+        },
+        {
+          name : "DD_ENV",
+          value : "dev"
+        },
+        {
+          name : "DD_VERSION",
+          value : "0.0.1"
+        }
+      ],
+      dockerLabels : {
+        "com.datadoghq.tags.service" : "calendar",
+        "com.datadoghq.tags.env" : "dev",
+        "com.datadoghq.tags.version" : "0.0.1"
+      },
+      ...
    ```
 
-3. Within the same `calendar/dockerfile.calendar.maven` file, comment out the `ENTRYPOINT` line for running without tracing. Then uncomment the `ENTRYPOINT` line, which runs the application with tracing enabled:
+   You can also see that Docker labels for the same Universal Service Tags `service`, `env`, and `version` values are set. This allows you to also get Docker metrics once your application is running.
 
-   ```
-   ENTRYPOINT ["java" , "-javaagent:../dd-java-agent.jar", "-Ddd.trace.sample.rate=1", "-jar" , "target/calendar-0.0.1-SNAPSHOT.jar"]
-   ```
+### Tracing configuration
 
-   <div class="alert alert-warning"><strong>Note</strong>: Again, the flags, particularly the sample rate, are not necessarily appropriate for environments outside this tutorial. For information about what to use in your real environment, read <a href="#tracing-configuration">Tracing configuration</a>.</div>
+The Java tracing library takes advantage of Java’s built-in agent and monitoring support. The flag `-javaagent:../dd-java-agent.jar` in the Dockerfile tells the JVM where to find the Java tracing library so it can run as a Java Agent. Learn more about Java Agents at [https://www.baeldung.com/java-instrumentation][7].
 
-4. Build both applications and publish them to ECR:
-   {{< code-block lang="sh" >}}
+The `dd.trace.sample.rate` flag sets the sample rate for this application. The ENTRYPOINT command in the Dockerfile set its value to `1`, which means that 100% of all requests to the services are sent to the Datadog backend for analysis and display. For a low-volume test application, this is fine. Do not do this in production or in any high-volume environment, because this results in a very large volume of data. Instead, sample some of your requests. Pick a value between 0 and 1. For example, `-Ddd.trace.sample.rate=0.1` sends traces for 10% of your requests to Datadog. Read more about [tracing configuration settings][14] and [sampling mechanisms][15].
+
+Notice that the sampling rate flag in the commands appears _before_ the `-jar` flag. That’s because this is a parameter for the Java Virtual Machine and not for your application. Make sure that when you add the Java Agent to your application, you specify the flag in the right location.
+
+### Rebuild and upload the application image
+
+Rebuild the image with tracing enabled using the [same steps as before](#build-and-upload-the-application-images):
+{{< code-block lang="sh" >}}
 aws ecr get-login-password --region us-east-1 | docker login --username <YOUR_AWS_USER> --password-stdin <USER_CREDENTIALS>
-DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose -f service-docker-compose-k8s.yaml build
+DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose -f service-docker-compose-ECS.yaml build
 docker tag docker_notes:latest <ECR_REGISTRY_URL>:notes
 docker tag docker_calendar:latest <ECR_REGISTRY_URL>:calendar
 docker push <ECR_REGISTRY_URL>:notes
-docker push <ECR_REGISTRY_URL>:calendar
-{{< /code-block >}}
+docker push <ECR_REGISTRY_URL>:calendar{{< /code-block >}}
 
-5. Open `kubernetes/calendar-app.yaml` and update the `image` entry with the URL for the ECR image, where you pushed the `calendar` app in the previous step:
-   {{< code-block lang="yaml" >}}
-    spec:
-      containers:
-        - name: calendar-app
-          image: <ECR_REGISTRY_URL>:calendar
-          imagePullPolicy: Always
-{{< /code-block >}}
+Your multi-service application with tracing enabled is containerized and available for ECS to pull.
 
-6. Deploy both `notes` and `calendar` apps, now with custom instrumentation, on the cluster:
-   {{< code-block lang="sh" >}}
-kubectl create -f notes-app.yaml
-kubectl create -f calendar-app.yaml{{< /code-block >}}
+## Deploy the Agent on ECS
 
-7. Using the method you used before, find the external IP of the `notes` app.
+Next, deploy the Agent collect the trace data from your instrumented application. For an ECS environment, there is no need to download anything in order to run the Agent. Instead, follow these steps to create a Datadog Agent task definition, upload the task definition to AWS, and create an Agent service on your cluster using that task definition.
 
-8. Send a POST request with the `add_date` parameter:
+1. Open `terraform/EC2/dd_agent_task_definition.json`, which provides a basic configuration for running the Agent with APM tracing enabled. Provide your Datadog organization API key and Datadog site as appropriate:
 
-`curl -X POST '<EXTERNAL_IP>:30080/notes?desc=hello_again&add_date=y'`
-: `{"id":1,"description":"hello_again with date 2022-11-06"}`
+   ```yaml
+   ...
+   "environment": [
+     {
+       "name": "DD_API_KEY",
+       "value": "<API_KEY_HERE>"
+     },
+     {
+       "name": "DD_SITE",
+       "value": "datadoghq.com"
+     },
+     ...
+   ```
+ 
+2. Register the Agent task definition, replacing the profile and region with your information. From the `terraform/EC2` folder, run: 
 
-9. In the Trace Explorer, click this latest trace to see a distributed trace between the two services:
+   ```sh
+   aws ecs register-task-definition --cli-input-json file://dd_agent_task_definition.json --profile <AWS_PROFILE> --region <AWS_REGION>
+   ```
 
-   {{< img src="tracing/guide/tutorials/tutorial-java-container-distributed.png" alt="A flame graph for a distributed trace." style="width:100%;" >}}
+   From the output, take note of the `taskDefinitionArn` value, which is used in the next step.
 
-   Note that you didn't change anything in the `notes` application. Datadog automatically instruments both the `okHttp` library used to make the HTTP call from `notes` to `calendar`, and the Jetty library used to listen for HTTP requests in `notes` and `calendar`. This allows the trace information to be passed from one application to the other, capturing a distributed trace.
+3. Create the Agent service on the cluster by running this command, supplying the task definition ARN from the previous step, your AWS profile, and AWS region:
 
-10. When you're done exploring, clean up all resources and delete the deployments:
-    {{< code-block lang="sh" >}}
-kubectl delete -f notes-app.yaml
-kubectl delete -f calendar-app.yaml{{< /code-block >}}
+   ```sh
+   aws ecs create-service --cluster apm-tutorial-ec2-java --task-definition <TASK_DEFINITION_ARN> --launch-type EC2 --scheduling-strategy DAEMON --service-name datadog-agent --profile <PROFILE> --region <AWS_REGION>
+   ```
 
-    See [the documentation for EKS][19] for information about deleting the cluster.
+## Launch the app to see traces
+
+Redeploy the application and exercise the API:
+
+1. Redeploy the application to AWS ECS using the [same terraform commands as before](#deploy-the-application). From the `terraform/EC2/deployment` directory, run the following commands:
+
+   ```sh
+   terraform init
+   terraform apply
+   terraform state show 'aws_alb.application_load_balancer'
+   ```
+
+2. Make note of the DNS name of the load balancer. You'll use that base domain in API calls to the sample app.
+
+3. Wait a few minutes for the instances to start up.Wait a few minutes to ensure the containers for the applications are ready. Run some curl commands to exercise the instrumented app:
+
+   `curl -X GET 'BASE_DOMAIN:8080/notes'`
+   : `[]`
+   
+   `curl -X POST 'BASE_DOMAIN:8080/notes?desc=hello'`
+   : `{"id":0,"description":"hello"}`
+   
+   `curl -X GET 'BASE_DOMAIN:8080/notes?id=0'`
+   : `{"id":0,"description":"hello"}`
+   
+   `curl -X GET 'BASE_DOMAIN:8080/notes'`
+   : `[{"id":0,"description":"hello"}]`
+   
+   `curl -X PUT 'BASE_DOMAIN:8080/notes?id=0&desc=UpdatedNote'`
+   : `{"id":0,"description":"UpdatedNote"}`
+   
+   `curl -X GET 'BASE_DOMAIN:8080/notes'`
+   : `[{"id":0,"description":"hello"}]`
+   
+   `curl -X POST 'BASE_DOMAIN:8080/notes?desc=NewestNote&add_date=y'`
+   : `{"id":0,"description":"NewestNote with date 12/02/2022."}`
+   : This command calls both the `notes` and `calendar` services.
+
+4. Wait a few moments, and go to [**APM > Traces**][11] in Datadog, where you can see a list of traces corresponding to your API calls:
+
+   {{< img src="tracing/guide/tutorials/tutorial-java-container-traces.png" alt="Traces from the sample app in APM Trace Explorer" style="width:100%;" >}}
+
+   The `h2` is the embedded in-memory database for this tutorial and `notes` is the Spring Boot application. The traces list shows all of the spans, when they started, what resource was tracked with the span, and how long it took.
+
+If you don't see traces after several minutes, clear any filter in the Traces Search field (sometimes it filters on an environment variable such as `ENV` that you aren't using).
+
+### Examine a trace
+
+On the Traces page, click on a `POST /notes` trace to see a flame graph that shows how long each span took and what other spans occurred before a span completed. The bar at the top of the graph is the span you selected on the previous screen (in this case, the initial entry point into the notes application). 
+
+The width of a bar indicates how long it took to complete. A bar at a lower depth represents a span that completes during the lifetime of a bar at a higher depth. 
+
+On the Trace Explorer, click into one of the `GET` requests, and see a flame graph like this:
+
+{{< img src="tracing/guide/tutorials/tutorial-java-container-custom-flame.png" alt="A flame graph for a GET trace with custom instrumentation." style="width:100%;" >}}
+   
+The `privateMethod` around which you created a manual span shows up as a separate block from the other calls and is highlighted by a different color. The other methods where you used the `@Trace` annotation show under the same service and color as the `GET` request, which is the `notes` application. Custom instrumentation is valuable when there are key parts of the code that need to be highlighted and monitored.
+
+For more information, read [Custom Instrumentation][12].
+
+Tracing a single service is a great start, but the real value in tracing is seeing how requests flow through your services. This is called _distributed tracing_. Click the trace for the last API call, the one that added a date to the note, to see a distributed trace between the two services:
+
+{{< img src="tracing/guide/tutorials/tutorial-java-container-distributed.png" alt="A flame graph for a distributed trace." style="width:100%;" >}}
+
+Note that you didn't change anything in the `notes` application. Datadog automatically instruments both the `okHttp` library used to make the HTTP call from `notes` to `calendar`, and the Jetty library used to listen for HTTP requests in `notes` and `calendar`. This allows the trace information to be passed from one application to the other, capturing a distributed trace.
+
+When you're done exploring, clean up all resources and delete the deployments:
+
+```sh
+aws ecs delete-service --cluster apm-tutorial-ec2-java --service datadog-agent --profile <PROFILE> --region <REGION>
+terraform destroy
+```
 
 ## Troubleshooting
 
