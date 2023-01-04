@@ -14,6 +14,7 @@
       options:
         dest_path: '/integrations/'
         file_name: 'jenkins.md'
+        use_cached: true
         front_matters:
           dependencies: ["https://github.com/jenkinsci/datadog-plugin/blob/master/README.md"]
           public_title: Datadog-Jenkins Integration
@@ -139,6 +140,7 @@
       options:
         dest_path: '/agent/basic_agent_usage/'
         file_name: 'ansible.md'
+        use_cached: true
         front_matters:
           title: Ansible
           kind: documentation
@@ -154,6 +156,7 @@
       options:
         dest_path: '/agent/basic_agent_usage/'
         file_name: 'chef.md'
+        use_cached: true
         front_matters:
           title: Chef
           kind: documentation

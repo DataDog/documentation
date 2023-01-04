@@ -2,6 +2,7 @@
 import os
 
 import requests
+import tarfile
 import glob
 import shutil
 from github_connect import GitHub
@@ -208,3 +209,41 @@ def prepare_content(configuration, github_token, extract_dir):
                 "\x1b[31mERROR\x1b[0m: Downloading files failed, stopping build.")
             sys.exit(1)
     return list_of_contents
+
+
+def copy_cached_content(cached_content_array):
+    """
+    :param cached_content_array:
+    """    
+    # From S3 download the latest artifact.
+
+    try:
+        content_base_path = 'content/en'
+        s3_url = f'https://origin-static-assets.s3.amazonaws.com/build_artifacts/master/99074b6a793f1716fbaf58af6d2c4a3b2259ba2d-ignored.tar.gz'
+        artifact_download_response = requests.get(s3_url, stream=True)
+        
+        if artifact_download_response.status_code == requests.codes.ok:
+            unzipped_contents = tarfile.open(mode='r|gz', fileobj=artifact_download_response.raw)
+
+            # Loop through the cached_content_array and reconstruct what the file path should be based on the action.
+            for index in cached_content_array:
+                action = index.get('action', '')
+
+                if action == 'pull-and-push-file':
+                    dest_path = index.get('options', {}).get('dest_path')
+                    dest_file_name = index.get('options', {}).get('file_name')
+                    full_dest_path = f'{content_base_path}{dest_path}{dest_file_name}'
+
+                    for tar_file in unzipped_contents:
+                        if tar_file.isfile():
+                            # If there's a match, extract that file(s) directly into the repo.
+                            if tar_file.name == full_dest_path:
+                                print(f'FOUND DEST PATH {tar_file.name}')
+
+                                # Extract & Copy file
+                                unzipped_contents.extractall(full_dest_path)
+
+                else:
+                    print('Action is not push and pull file')
+    except Exception as e:
+        print(e)

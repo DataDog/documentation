@@ -5,7 +5,7 @@ import yaml
 
 from actions.pull_and_push_file import pull_and_push_file
 from actions.pull_and_push_folder import pull_and_push_folder
-from content_manager import prepare_content
+from content_manager import prepare_content, copy_cached_content
 from actions.integrations import Integrations
 from actions.security_rules import security_rules
 from actions.workflows import workflows
@@ -56,10 +56,17 @@ class Build:
         Int = Integrations(self.options.source, self.tempdir,
                            self.integration_mutations)
 
+        # Initialize an object to save what external content should be pulled from cache.
+        cached_content = []
+
         # Depending of the action attached to the content the proper function is called
         for content in list_of_contents:
             try:
-                if content["action"] == "integrations":
+                use_cached = content.get('options', {}).get('use_cached', False)
+                
+                if use_cached:
+                    cached_content.append(content)
+                elif content["action"] == "integrations":
                     Int.process_integrations(content)
                 elif content["action"] == "marketplace-integrations":
                     Int.process_integrations(content, marketplace=True)
@@ -81,6 +88,7 @@ class Build:
                     print(
                         "\x1b[31mERROR\x1b[0m: Action {} unknown for {}".format(content["action"], content))
                     raise ValueError
+
             except Exception as e:
                 print(e)
                 if not getenv("CI_COMMIT_REF_NAME"):
@@ -104,6 +112,12 @@ class Build:
                 print(
                     "\x1b[31mERROR\x1b[0m: Integration merge failed, stopping build.")
                 sys.exit(1)
+
+        if len(cached_content) > 0:
+            try:
+                copy_cached_content(cached_content)
+            except Exception as e:
+                print(e)
 
 
 if __name__ == "__main__":
