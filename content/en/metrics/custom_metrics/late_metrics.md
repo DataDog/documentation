@@ -47,13 +47,11 @@ Optimize your Late Metrics enablement by using our Bulk Late Metric Enablement f
 
 GIF FROM JOE GOES HERE
 
-## Late Metrics Submission Mechanisms
+## Late Metrics Submission
 
 Late metrics can be submitted to Datadog via our API or the Agent. 
 
 **If you intend to submit late metrics via the API**:, you can send metrics points with old timestamps in the payload, while ensuring that the metric name that is ingesting the point has been configured to receive Late Metrics (via the UI). 
-
-
 
 {{< programming-lang-wrapper langs="python,java,go,ruby,typescript,curl" >}}
 
