@@ -55,7 +55,7 @@ Late metrics can be submitted to Datadog via our API or the Agent.
 
 
 
-{{< programming-lang-wrapper langs="python,java,go" >}}
+{{< programming-lang-wrapper langs="python,java,go,ruby,typescript,curl" >}}
 
 {{< programming-lang lang="python" >}}
 ```python
@@ -342,12 +342,6 @@ EOF
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}
-
-
-
-
-
-
 
 **If you intend to submit late metrics via the Agent**:  ensure that you have Agent version +7.40.0 installed, and you’ll be able to send delayed metric points via the updated DogStatsD interface (*currently supporting GoLang and .NET versions*). 
 
