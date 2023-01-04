@@ -14,7 +14,7 @@ module.exports = {
     },
     preview: {
         ddClientToken: 'pub36877d3864fab670b5ae7e1d5d26cb08',
-        ddApplicationId: 'c4e83ad8-4eda-4d2e-aae1-d943abce0463',
+        ddApplicationId: '3493b4e7-ab12-4852-8836-ba96af7bc745',
         loggingHandler: 'http',
         algoliaConfig: {
             index: 'docsearch_docs_preview',
