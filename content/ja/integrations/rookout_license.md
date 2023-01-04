@@ -59,6 +59,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Rookout
+  uninstallation: README.md#Uninstallation
 ---
 
 

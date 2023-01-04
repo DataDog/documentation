@@ -77,6 +77,11 @@ main:
     url: getting_started/integrations/aws/
     weight: 701
     parent: getting_started_integrations
+  - name: Terraform
+    identifier: getting_started_with_terraform
+    url: getting_started/integrations/terraform/
+    weight: 702
+    parent: getting_started_integrations
   - name: Dashboards
     identifier: getting_started_dashboards
     url: getting_started/dashboards/
@@ -449,11 +454,6 @@ main:
     parent: containers_kubernetes
     identifier: containers_kubernetes_data_collected
     weight: 310
-  - name: Operator configuration
-    url: containers/kubernetes/operator_configuration
-    parent: containers_kubernetes
-    identifier: containers_kubernetes_operator_configuration
-    weight: 311
   - name: Cluster Agent
     url: containers/cluster_agent/
     parent: containers
@@ -464,53 +464,28 @@ main:
     parent: containers_cluster
     identifier: cluster_agent_setup
     weight: 401
-  - name: Event Collection
-    url: containers/cluster_agent/event_collection/
-    parent: containers_cluster
-    identifier: cluster_agent_event_collection
-    weight: 402
-  - name: Custom & External Metrics
-    url: containers/cluster_agent/external_metrics/
-    parent: containers_cluster
-    identifier: cluster_agent_external_metrics
-    weight: 403
-  - name: Cluster Checks
-    url: containers/cluster_agent/clusterchecks/
-    parent: containers_cluster
-    weight: 404
-  - name: Endpoints Checks
-    url: containers/cluster_agent/endpointschecks/
-    parent: containers_cluster
-    weight: 405
-  - name: Admission Controller
-    url: containers/cluster_agent/admission_controller/
-    parent: containers_cluster
-    weight: 406
   - name: Commands & Options
     url: containers/cluster_agent/commands/
     identifier: cluster_agent_commands
     parent: containers_cluster
-    weight: 407
-  - name: Cluster metadata provider
-    url: containers/cluster_agent/metadata_provider/
-    identifier: cluster_agent_metadata_provider
+    weight: 402
+  - name: Cluster Checks
+    url: containers/cluster_agent/clusterchecks/
     parent: containers_cluster
-    weight: 408
-  - name: Build
-    url: containers/cluster_agent/build/
-    identifier: cluster_agent_build
+    weight: 403
+  - name: Endpoint Checks
+    url: containers/cluster_agent/endpointschecks/
     parent: containers_cluster
-    weight: 409
-  - name: Cluster Checks Runner
-    url: containers/cluster_agent/clusterchecksrunner
-    identifier: cluster_agent_clcr
+    weight: 404
+  - name: Admission Controller
+    url: containers/cluster_agent/admission_controller/
     parent: containers_cluster
-    weight: 410
+    weight: 405
   - name: Troubleshooting
     url: containers/cluster_agent/troubleshooting/
     identifier: cluster_agent_troubleshooting
     parent: containers_cluster
-    weight: 411
+    weight: 406
   - name: Amazon ECS
     url: containers/amazon_ecs/
     parent: containers
@@ -541,16 +516,26 @@ main:
     parent: containers
     identifier: ecs_fargate
     weight: 6
+  - name: Datadog Operator
+    url: containers/datadog_operator
+    identifier: containers_datadog_operator
+    parent: containers
+    weight: 7
   - name: Troubleshooting
     url: containers/troubleshooting/
     parent: containers
     identifier: containers_troubleshooting
-    weight: 7
+    weight: 8
   - name: Duplicate hosts
     url: containers/troubleshooting/duplicate_hosts
     parent: containers_troubleshooting
     identifier: containers_troubleshooting_duplicate_hosts
-    weight: 701
+    weight: 801
+  - name: Guides
+    url: containers/guide
+    parent: containers
+    identifier: containers_guide
+    weight: 9
   - name: Integrations
     url: integrations/
     identifier: integrations_top_level
@@ -2608,7 +2593,7 @@ main:
   - name: Cloud Security Management
     url: security/cloud_security_management
     parent: security_platform_heading
-    pre: cspm
+    pre: cloud-security-management
     identifier: csm
     weight: 181500
   - name: Cloud Security Posture Management
@@ -3454,7 +3439,7 @@ main:
     parent: dev_tools
     identifier: dev_tools_integrations
     weight: 4
-  - name: Create a New Integration
+  - name: Create an Agent-based Integration
     url: developers/integrations/new_check_howto/
     parent: dev_tools_integrations
     weight: 401
@@ -5042,6 +5027,32 @@ api:
     url: /api/latest/metrics/
     identifier: metrics
     generated: true
+  - name: Timeseries cross product query
+    url: '#timeseries-cross-product-query'
+    identifier: metrics-timeseries-cross-product-query
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - QueryTimeseriesData
+      unstable:
+        - v2
+      order: 1
+  - name: Scalar cross product query
+    url: '#scalar-cross-product-query'
+    identifier: metrics-scalar-cross-product-query
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - QueryScalarData
+      unstable:
+        - v2
+      order: 2
   - name: List distinct metric volumes by metric name
     url: '#list-distinct-metric-volumes-by-metric-name'
     identifier: metrics-list-distinct-metric-volumes-by-metric-name
@@ -6459,9 +6470,9 @@ api:
         - CreateTest
       unstable: []
       order: 27
-  - name: Get the list of all tests
-    url: '#get-the-list-of-all-tests'
-    identifier: synthetics-get-the-list-of-all-tests
+  - name: Get the list of all Synthetic tests
+    url: '#get-the-list-of-all-synthetic-tests'
+    identifier: synthetics-get-the-list-of-all-synthetic-tests
     parent: synthetics
     generated: true
     params:
@@ -8649,6 +8660,118 @@ api:
         - v2
       operationids:
         - ListPermissions
+      unstable: []
+      order: 1
+  - name: Sensitive Data Scanner
+    url: /api/latest/sensitive-data-scanner/
+    identifier: sensitive-data-scanner
+    generated: true
+  - name: List standard patterns
+    url: '#list-standard-patterns'
+    identifier: sensitive-data-scanner-list-standard-patterns
+    parent: sensitive-data-scanner
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListStandardPatterns
+      unstable: []
+      order: 3
+  - name: Update Scanning Rule
+    url: '#update-scanning-rule'
+    identifier: sensitive-data-scanner-update-scanning-rule
+    parent: sensitive-data-scanner
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateScanningRule
+      unstable: []
+      order: 8
+  - name: Delete Scanning Rule
+    url: '#delete-scanning-rule'
+    identifier: sensitive-data-scanner-delete-scanning-rule
+    parent: sensitive-data-scanner
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteScanningRule
+      unstable: []
+      order: 9
+  - name: Create Scanning Rule
+    url: '#create-scanning-rule'
+    identifier: sensitive-data-scanner-create-scanning-rule
+    parent: sensitive-data-scanner
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateScanningRule
+      unstable: []
+      order: 7
+  - name: Update Scanning Group
+    url: '#update-scanning-group'
+    identifier: sensitive-data-scanner-update-scanning-group
+    parent: sensitive-data-scanner
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateScanningGroup
+      unstable: []
+      order: 5
+  - name: Delete Scanning Group
+    url: '#delete-scanning-group'
+    identifier: sensitive-data-scanner-delete-scanning-group
+    parent: sensitive-data-scanner
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteScanningGroup
+      unstable: []
+      order: 6
+  - name: Create Scanning Group
+    url: '#create-scanning-group'
+    identifier: sensitive-data-scanner-create-scanning-group
+    parent: sensitive-data-scanner
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateScanningGroup
+      unstable: []
+      order: 4
+  - name: Reorder Groups
+    url: '#reorder-groups'
+    identifier: sensitive-data-scanner-reorder-groups
+    parent: sensitive-data-scanner
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ReorderScanningGroups
+      unstable: []
+      order: 2
+  - name: List Scanning Groups
+    url: '#list-scanning-groups'
+    identifier: sensitive-data-scanner-list-scanning-groups
+    parent: sensitive-data-scanner
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListScanningGroups
       unstable: []
       order: 1
   - name: Service Accounts

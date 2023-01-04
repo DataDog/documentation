@@ -137,3 +137,16 @@ instances:
     password: '<PASSWORD>'
     reported_hostname: products-replica-1
 ```
+
+### Discovering ports automatically
+
+SQL Server Browser Service, Named Instances, and other services can automatically detect port numbers. You can use this instead of hardcoding port numbers in connection strings. To use the Agent with one of these services, set the `port` field to `0`.
+
+For example, a Named Instance config:
+
+```yaml
+init_config:
+instances:
+  - host: <hostname\instance name>
+    port: 0
+```

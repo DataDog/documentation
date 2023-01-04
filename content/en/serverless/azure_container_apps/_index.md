@@ -64,7 +64,7 @@ CMD ["/nodejs/bin/node", "/path/to/your/app.js"] (adapt this line to your needs)
 
 ```
 
-See [Tracing NodeJS Applications][1] for detailed instructions. [Sample code for a simple NodeJS application][2].
+See [Tracing Node.js Applications][1] for detailed instructions. [Sample code for a simple Node.js application][2].
 
 [1]: /tracing/setup_overview/setup/nodejs/?tabs=containers
 [2]: https://github.com/DataDog/crpb/tree/main/js
