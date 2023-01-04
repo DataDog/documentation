@@ -55,6 +55,322 @@ Late metrics can be submitted to Datadog via our API or the Agent.
 
 
 
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
+
+{{< programming-lang lang="python" >}}
+```python
+from datadog import initialize, statsd
+import time
+
+options = {
+    'statsd_host':'127.0.0.1',
+    'statsd_port':8125
+}
+
+initialize(**options)
+
+i = 0
+
+while(1):
+  i += 1
+  statsd.gauge('example_metric.gauge', i, tags=["environment:dev"])
+  time.sleep(10)
+```
+{{< /programming-lang >}}
+
+{{< programming-lang lang="ruby" >}}
+```ruby
+require 'datadog/statsd'
+
+statsd = Datadog::Statsd.new('localhost', 8125)
+
+i = 0
+
+while true do
+    i += 1
+    statsd.gauge('example_metric.gauge', i, tags: ['environment:dev'])
+    sleep 10
+end
+```
+{{< /programming-lang >}}
+
+{{< programming-lang lang="go" >}}
+```go
+package main
+
+import (
+	"log"
+	"time"
+
+	"github.com/DataDog/datadog-go/statsd"
+)
+
+func main() {
+	statsd, err := statsd.New("127.0.0.1:8125")
+	if err != nil {
+		log.Fatal(err)
+	}
+	var i float64
+	for {
+		i += 1
+		statsd.Gauge("example_metric.gauge", i, []string{"environment:dev"}, 1)
+		time.Sleep(10 * time.Second)
+	}
+}
+```
+{{< /programming-lang >}}
+
+{{< programming-lang lang="java" >}}
+```java
+import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
+import com.timgroup.statsd.StatsDClient;
+import java.util.Random;
+
+public class DogStatsdClient {
+
+    public static void main(String[] args) throws Exception {
+
+        StatsDClient Statsd = new NonBlockingStatsDClientBuilder()
+            .prefix("statsd").
+            .hostname("localhost")
+            .port(8125)
+            .build();
+        for (int i = 0; i < 10; i++) {
+            Statsd.recordGaugeValue("example_metric.gauge", i, new String[]{"environment:dev"});
+            Thread.sleep(10000);
+        }
+    }
+}
+```
+{{< /programming-lang >}}
+
+{{< programming-lang lang=".NET" >}}
+```csharp
+using StatsdClient;
+using System;
+
+public class DogStatsdClient
+{
+    public static void Main()
+    {
+        var dogstatsdConfig = new StatsdConfig
+        {
+            StatsdServerName = "127.0.0.1",
+            StatsdPort = 8125,
+        };
+
+        using (var dogStatsdService = new DogStatsdService())
+        {
+            dogStatsdService.Configure(dogstatsdConfig);
+            var random = new Random(0);
+
+            for (int i = 0; i < 10; i--)
+            {
+                dogStatsdService.Gauge("example_metric.gauge", i, tags: new[] {"environment:dev"});
+                System.Threading.Thread.Sleep(100000);
+            }
+        }
+    }
+}
+```
+{{< /programming-lang >}}
+
+{{< programming-lang lang="php" >}}
+```php
+<?php
+
+require __DIR__ . '/vendor/autoload.php';
+
+use DataDog\DogStatsd;
+
+$statsd = new DogStatsd(
+    array('host' => '127.0.0.1',
+          'port' => 8125,
+     )
+  );
+
+$i = 0;
+while (TRUE) {
+    $i++;
+    $statsd->gauge('example_metric.gauge', $i, array('environment'=>'dev'));
+    sleep(10);
+}
+```
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
+
+After running the code above, your metric data is available to graph in Datadog:
+
+{{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/gauge.png" alt="Gauge" >}}
+
+### SET
+
+`set(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)`
+: Stored as a `GAUGE` type in Datadog. Each value in the stored timeseries is the count of unique values submitted to StatsD for a metric over the flush period.
+
+#### Code examples
+
+{{< programming-lang-wrapper langs="python,go,java" >}}
+
+{{< programming-lang lang="python" >}}
+```python
+"""
+Submit metrics returns "Payload accepted" response
+"""
+
+from datetime import datetime
+from datadog_api_client import ApiClient, Configuration
+from datadog_api_client.v2.api.metrics_api import MetricsApi
+from datadog_api_client.v2.model.metric_intake_type import MetricIntakeType
+from datadog_api_client.v2.model.metric_payload import MetricPayload
+from datadog_api_client.v2.model.metric_point import MetricPoint
+from datadog_api_client.v2.model.metric_resource import MetricResource
+from datadog_api_client.v2.model.metric_series import MetricSeries
+
+body = MetricPayload(
+    series=[
+        MetricSeries(
+            metric="system.load.1",
+            type=MetricIntakeType.UNSPECIFIED,
+            points=[
+                MetricPoint(
+                    timestamp=int(datetime.now().timestamp()),
+                    value=0.7,
+                ),
+            ],
+            resources=[
+                MetricResource(
+                    name="dummyhost",
+                    type="host",
+                ),
+            ],
+        ),
+    ],
+)
+
+configuration = Configuration()
+with ApiClient(configuration) as api_client:
+    api_instance = MetricsApi(api_client)
+    response = api_instance.submit_metrics(body=body)
+
+    print(response)
+```
+{{< /programming-lang >}}
+
+{{< programming-lang lang="go" >}}
+```go
+// Submit metrics returns "Payload accepted" response
+
+package main
+
+import (
+	"context"
+	"encoding/json"
+	"fmt"
+	"os"
+	"time"
+
+	"github.com/DataDog/datadog-api-client-go/v2/api/datadog"
+	"github.com/DataDog/datadog-api-client-go/v2/api/datadogV2"
+)
+
+func main() {
+	body := datadogV2.MetricPayload{
+		Series: []datadogV2.MetricSeries{
+			{
+				Metric: "system.load.1",
+				Type:   datadogV2.METRICINTAKETYPE_UNSPECIFIED.Ptr(),
+				Points: []datadogV2.MetricPoint{
+					{
+						Timestamp: datadog.PtrInt64(time.Now().Unix()),
+						Value:     datadog.PtrFloat64(0.7),
+					},
+				},
+				Resources: []datadogV2.MetricResource{
+					{
+						Name: datadog.PtrString("dummyhost"),
+						Type: datadog.PtrString("host"),
+					},
+				},
+			},
+		},
+	}
+	ctx := datadog.NewDefaultContext(context.Background())
+	configuration := datadog.NewConfiguration()
+	apiClient := datadog.NewAPIClient(configuration)
+	api := datadogV2.NewMetricsApi(apiClient)
+	resp, r, err := api.SubmitMetrics(ctx, body, *datadogV2.NewSubmitMetricsOptionalParameters())
+
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `MetricsApi.SubmitMetrics`: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+
+	responseContent, _ := json.MarshalIndent(resp, "", "  ")
+	fmt.Fprintf(os.Stdout, "Response from `MetricsApi.SubmitMetrics`:\n%s\n", responseContent)
+}
+```
+{{< /programming-lang >}}
+
+{{< programming-lang lang="java" >}}
+```java
+// Submit metrics returns "Payload accepted" response
+import com.datadog.api.client.ApiClient;
+import com.datadog.api.client.ApiException;
+import com.datadog.api.client.v2.api.MetricsApi;
+import com.datadog.api.client.v2.model.IntakePayloadAccepted;
+import com.datadog.api.client.v2.model.MetricIntakeType;
+import com.datadog.api.client.v2.model.MetricPayload;
+import com.datadog.api.client.v2.model.MetricPoint;
+import com.datadog.api.client.v2.model.MetricResource;
+import com.datadog.api.client.v2.model.MetricSeries;
+import java.time.OffsetDateTime;
+import java.util.Collections;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = ApiClient.getDefaultApiClient();
+    MetricsApi apiInstance = new MetricsApi(defaultClient);
+
+    MetricPayload body =
+        new MetricPayload()
+            .series(
+                Collections.singletonList(
+                    new MetricSeries()
+                        .metric("system.load.1")
+                        .type(MetricIntakeType.UNSPECIFIED)
+                        .points(
+                            Collections.singletonList(
+                                new MetricPoint()
+                                    .timestamp(OffsetDateTime.now().toInstant().getEpochSecond())
+                                    .value(0.7)))
+                        .resources(
+                            Collections.singletonList(
+                                new MetricResource().name("dummyhost").type("host")))));
+
+    try {
+      IntakePayloadAccepted result = apiInstance.submitMetrics(body);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling MetricsApi#submitMetrics");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+{{< /programming-lang >}}
+
+{{< /programming-lang-wrapper >}}
+
+
+
+
+
+
+
 **If you intend to submit late metrics via the Agent**:  ensure that you have Agent version +7.40.0 installed, and you’ll be able to send delayed metric points via the updated DogStatsD interface (*currently supporting GoLang and .NET versions*). 
 
 ## Late Metrics Ingestion Latency
