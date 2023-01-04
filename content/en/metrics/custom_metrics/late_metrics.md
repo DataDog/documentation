@@ -79,7 +79,11 @@ body = MetricPayload(
             type=MetricIntakeType.UNSPECIFIED,
             points=[
                 MetricPoint(
+
+                    """ Add late timestamp here """
                     timestamp=int(datetime.now().timestamp()),
+                    """ *********************** """
+
                     value=0.7,
                 ),
             ],
@@ -132,7 +136,11 @@ public class Example {
                         .points(
                             Collections.singletonList(
                                 new MetricPoint()
+                            
+                                    //Add late timestamp here
                                     .timestamp(OffsetDateTime.now().toInstant().getEpochSecond())
+                                    //***********************
+
                                     .value(0.7)))
                         .resources(
                             Collections.singletonList(
@@ -177,8 +185,11 @@ func main() {
 				Metric: "system.load.1",
 				Type:   datadogV2.METRICINTAKETYPE_UNSPECIFIED.Ptr(),
 				Points: []datadogV2.MetricPoint{
-					{
+					{   
+                        //Add late timestamp here
 						Timestamp: datadog.PtrInt64(time.Now().Unix()),
+                        //***********************
+
 						Value:     datadog.PtrFloat64(0.7),
 					},
 				},
@@ -222,7 +233,11 @@ body = DatadogAPIClient::V2::MetricPayload.new({
       type: DatadogAPIClient::V2::MetricIntakeType::UNSPECIFIED,
       points: [
         DatadogAPIClient::V2::MetricPoint.new({
+
+          #Add late timestamp here  
           timestamp: Time.now.to_i,
+          #***********************  
+
           value: 0.7,
         }),
       ],
@@ -258,7 +273,10 @@ const params: v2.MetricsApiSubmitMetricsRequest = {
         type: 0,
         points: [
           {
+            //Add late timestamp here
             timestamp: Math.round(new Date().getTime() / 1000),
+            //***********************
+
             value: 0.7,
           },
         ],
@@ -302,7 +320,7 @@ curl -X POST "https://api.datadoghq.com/api/v2/series" \
       "metric": "system.load.1",
       "type": 0,
       "points": [
-        {
+        {  
           "timestamp": 1636629071,
           "value": 0.7
         }
