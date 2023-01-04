@@ -54,17 +54,13 @@ Funnels can be shared with your teams on dashboards to analyze conversion alongs
 
 Note that you have a few options when it comes to sharing:
 
-- Share the entire visualization 
+- Share the entire visualization to notebooks and dashboards
 
-  [ ADD IMAGE TK ]
+  {{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-share-entire-visualization.jpg" alt="Share the entire visualization by clicking Export" style="width:90%;" >}}
 
 - Share individual widgets
 
-{{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-share-individual-widgets-1.mp4" video="true" >}}
-
-- Add your funnel as a saved view
-
-  [ ADD IMAGE TK ]
+  {{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-share-individual-widgets-1.mp4" video="true" width=90% >}}
 
 ## Alerting on conversion
 
@@ -72,12 +68,13 @@ Setting up alerts on conversion/dropoff rates allows you to be notified when con
 
 - From the visualization: This option takes the end-to-end workflow's query, allowing you to alert on the conversion rate for an entire workflow.
 
-  {{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-alert-on-conversion-rate.mp4" alt="Create an alert on the conversion rate for an entire workflow" video=true >}}
+  {{< img src="real_user_monitoring/funnel_analysis/funnel-insights-alert-on-conversion-rate.mp4" alt="Create an alert on the conversion rate for an entire workflow" video=true width=90% >}}
 
 - From the Funnel Insights panel: This allows you to take individual queries and alert on them. While this could be the overall workflow, you also have the option to alert on individual steps' dropoff and conversion.
+
   - For example, if you want to alert on the dropoff rate between steps 3 and 4, you can do that from the Funnel Insights panel as shown below:
 
-    {{< img src="real_user_monitoring/funnel_analysis/funnel-insights-panel.mp4" >}}
+    {{< img src="real_user_monitoring/funnel_analysis/funnel-insights-panel.mp4" alt="Alert on the dropoff rate from the Funnel Insights panel" video=true width=90% >}}
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
