@@ -13,7 +13,7 @@ further_reading:
 
 1. Navigate to [portal.azure.com][1].
 2. In the left sidebar, select **Azure Active Directory**.
-3. Under **Basic information**, you will find the **Name** value.
+3. Under **Basic information**, find the **Name** value.
 
 ## Unable to login
 
