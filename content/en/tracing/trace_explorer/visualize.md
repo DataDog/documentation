@@ -28,7 +28,7 @@ The default sort for spans in the list visualization is by timestamp, with the m
 
 The configuration of the columns is stored alongside other elements of your troubleshooting context in saved views.
 
-If the trace is somehow malformed (for example if there is a loop in the trace or if the root span is missing) it could result in spans without data under the "LATENCY BREAKDOWN" column. In some cases, a root service may decide to drop a trace while a downstream service decides to keep it. Only the downstream-service spans are ingested in this case, resulting in an incomplete trace. It is misleading to display a latency breakdown for an incomplete trace, so the data is omitted. 
+The `Latency Breakdown` of the trace might be missing for some spans if the trace is malformed or incomplete. For instance, the error and the rare samplers capture pieces of traces, without the guarantee of capturing the complete trace. In this case, the data is omitted to avoid displaying inconsistent of misleading latency information that would only make sense when the trace is complete.
 
 ## Timeseries
 
