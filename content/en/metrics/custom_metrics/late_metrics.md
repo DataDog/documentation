@@ -55,7 +55,8 @@ Late metrics can be submitted to Datadog via our API or the Agent.
 
 
 
-{{< programming-lang-wrapper langs="python,java" >}}
+{{< programming-lang-wrapper langs="python,java,go" >}}
+
 {{< programming-lang lang="python" >}}
 ```python
 """
@@ -149,6 +150,173 @@ public class Example {
     }
   }
 }
+```
+{{< /programming-lang >}}
+
+{{< programming-lang lang="go" >}}
+```go
+// Submit metrics returns "Payload accepted" response
+
+package main
+
+import (
+	"context"
+	"encoding/json"
+	"fmt"
+	"os"
+	"time"
+
+	"github.com/DataDog/datadog-api-client-go/v2/api/datadog"
+	"github.com/DataDog/datadog-api-client-go/v2/api/datadogV2"
+)
+
+func main() {
+	body := datadogV2.MetricPayload{
+		Series: []datadogV2.MetricSeries{
+			{
+				Metric: "system.load.1",
+				Type:   datadogV2.METRICINTAKETYPE_UNSPECIFIED.Ptr(),
+				Points: []datadogV2.MetricPoint{
+					{
+						Timestamp: datadog.PtrInt64(time.Now().Unix()),
+						Value:     datadog.PtrFloat64(0.7),
+					},
+				},
+				Resources: []datadogV2.MetricResource{
+					{
+						Name: datadog.PtrString("dummyhost"),
+						Type: datadog.PtrString("host"),
+					},
+				},
+			},
+		},
+	}
+	ctx := datadog.NewDefaultContext(context.Background())
+	configuration := datadog.NewConfiguration()
+	apiClient := datadog.NewAPIClient(configuration)
+	api := datadogV2.NewMetricsApi(apiClient)
+	resp, r, err := api.SubmitMetrics(ctx, body, *datadogV2.NewSubmitMetricsOptionalParameters())
+
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `MetricsApi.SubmitMetrics`: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+
+	responseContent, _ := json.MarshalIndent(resp, "", "  ")
+	fmt.Fprintf(os.Stdout, "Response from `MetricsApi.SubmitMetrics`:\n%s\n", responseContent)
+}
+```
+{{< /programming-lang >}}
+
+{{< programming-lang lang="ruby" >}}
+```ruby
+# Submit metrics returns "Payload accepted" response
+
+require "datadog_api_client"
+api_instance = DatadogAPIClient::V2::MetricsAPI.new
+
+body = DatadogAPIClient::V2::MetricPayload.new({
+  series: [
+    DatadogAPIClient::V2::MetricSeries.new({
+      metric: "system.load.1",
+      type: DatadogAPIClient::V2::MetricIntakeType::UNSPECIFIED,
+      points: [
+        DatadogAPIClient::V2::MetricPoint.new({
+          timestamp: Time.now.to_i,
+          value: 0.7,
+        }),
+      ],
+      resources: [
+        DatadogAPIClient::V2::MetricResource.new({
+          name: "dummyhost",
+          type: "host",
+        }),
+      ],
+    }),
+  ],
+})
+p api_instance.submit_metrics(body)
+```
+{{< /programming-lang >}}
+
+{{< programming-lang lang="typescript" >}}
+```typescript
+/**
+ * Submit metrics returns "Payload accepted" response
+ */
+
+import { client, v2 } from "@datadog/datadog-api-client";
+
+const configuration = client.createConfiguration();
+const apiInstance = new v2.MetricsApi(configuration);
+
+const params: v2.MetricsApiSubmitMetricsRequest = {
+  body: {
+    series: [
+      {
+        metric: "system.load.1",
+        type: 0,
+        points: [
+          {
+            timestamp: Math.round(new Date().getTime() / 1000),
+            value: 0.7,
+          },
+        ],
+        resources: [
+          {
+            name: "dummyhost",
+            type: "host",
+          },
+        ],
+      },
+    ],
+  },
+};
+
+apiInstance
+  .submitMetrics(params)
+  .then((data: v2.IntakePayloadAccepted) => {
+    console.log(
+      "API called successfully. Returned data: " + JSON.stringify(data)
+    );
+  })
+  .catch((error: any) => console.error(error));
+```
+{{< /programming-lang >}}
+
+{{< programming-lang lang="curl" >}}
+```bash
+## Dynamic Points
+# Post time-series data that can be graphed on Datadog’s dashboards.
+# Template variables
+export NOW="$(date +%s)"
+# Curl command
+curl -X POST "https://api.datadoghq.com/api/v2/series" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: ${DD_API_KEY}" \
+-d @- << EOF
+{
+  "series": [
+    {
+      "metric": "system.load.1",
+      "type": 0,
+      "points": [
+        {
+          "timestamp": 1636629071,
+          "value": 0.7
+        }
+      ],
+      "resources": [
+        {
+          "name": "dummyhost",
+          "type": "host"
+        }
+      ]
+    }
+  ]
+}
+EOF
 ```
 {{< /programming-lang >}}
 
