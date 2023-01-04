@@ -34,7 +34,7 @@ Each type of list widget will have its own configuration
 
 ### Issue list options
 
-{{< img src="dashboards/widgets/list/issue_list_options.png" alt="Options available for the issue list" style="width:50%;">}}
+{{< img src="dashboards/widgets/list/issue_list_options.png" alt="Options available for the issue list" style="width:100%;">}}
 
 #### Sorting by
 
@@ -48,7 +48,7 @@ For issues, you can sort by:
 
 ### Log list options
 
-{{< img src="dashboards/widgets/list/log_list_options.png" alt="Options available for the log list" style="width:50%;">}}
+{{< img src="dashboards/widgets/list/log_list_options.png" alt="Options available for the log list" style="width:100%;">}}
 
 #### Grouping by
 
@@ -59,7 +59,7 @@ For logs, you can group by:
 
 ### RUM event list options
 
-{{< img src="dashboards/widgets/list/rum_event_list_options.png" alt="Options available for the rum event list" style="width:50%;">}}
+{{< img src="dashboards/widgets/list/rum_event_list_options.png" alt="Options available for the rum event list" style="width:100%;">}}
 
 #### Sorting by
 
@@ -78,7 +78,7 @@ Ascending or descending
 
 ### Events options
 
-{{< img src="dashboards/widgets/list/event_list_options.png" alt="Options available for the event list" style="width:50%;">}}
+{{< img src="dashboards/widgets/list/event_list_options.png" alt="Options available for the event list" style="width:100%;">}}
 
 #### Report format size:
 
