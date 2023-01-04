@@ -383,7 +383,7 @@ Les applications utilisant une instrumentation personnalisée peuvent activer Ap
 ```ruby
 Datadog.tracer.trace('my.task') do |span|
   # Définir le taux d'échantillonnage de l'analyse sur 1.0
-  span.set_tag(Datadog::Ext::Analytics::TAG_ENABLED, true)
+  span.set_tag(Datadog::Tracing::Metadata::Ext::Analytics::TAG_ENABLED, true)
 end
 ```
 
