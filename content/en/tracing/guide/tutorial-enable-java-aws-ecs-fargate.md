@@ -1,5 +1,5 @@
 ---
-title: Tutorial - Enabling Tracing for a Java Application on AWS ECS with EC2
+title: Tutorial - Enabling Tracing for a Java Application on AWS ECS with Fargate
 kind: guide
 further_reading:
 - link: /tracing/trace_collection/library_config/java/
@@ -21,7 +21,7 @@ further_reading:
 
 ## Overview
 
-This tutorial walks you through the steps for enabling tracing on a sample Java application installed in a cluster on AWS Elastic Container Service (ECS). In this scenario, the Datadog Agent is also installed in the cluster. 
+This tutorial walks you through the steps for enabling tracing on a sample Java application installed in a cluster on AWS Elastic Container Service (ECS) with EC2. In this scenario, the Datadog Agent is also installed in the cluster. 
 
 For other scenarios, including on a host, in a container, on other cloud infrastructure, and applications written in other languages, see the other [Enabling Tracing tutorials][1]. Some of those other tutorials, for example the ones using containers or EKS, step through the differences seen in Datadog between automatic and custom instrumentation. This tutorial skips right to a fully custom instrumented example.
 
