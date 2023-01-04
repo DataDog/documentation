@@ -60,7 +60,7 @@ Next, install a sample application to trace. The code sample for this tutorial c
 git clone https://github.com/DataDog/apm-tutorial-java-host.git
 {{< /code-block >}}
 
-Build the sample app using either Maven or Gradle, whichever you are more comfortable with. Run one of the following:
+Build the sample app using either Maven or Gradle, whichever you are more comfortable with. Navigate to the `notes` directory within `apm-tutorial-java-host` and run one of the following:
 
 {{< tabs >}}
 
