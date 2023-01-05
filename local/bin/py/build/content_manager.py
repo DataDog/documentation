@@ -214,16 +214,15 @@ def prepare_content(configuration, github_token, extract_dir):
 def copy_cached_content(cached_content_array):
     """
     :param cached_content_array:
-    """    
-    # From S3 download the latest artifact.
-
+    """
     try:
         content_base_path = 'content/en'
         s3_url = f'https://origin-static-assets.s3.amazonaws.com/build_artifacts/master/99074b6a793f1716fbaf58af6d2c4a3b2259ba2d-ignored.tar.gz'
         artifact_download_response = requests.get(s3_url, stream=True)
         
         if artifact_download_response.status_code == requests.codes.ok:
-            unzipped_contents = tarfile.open(mode='r|gz', fileobj=artifact_download_response.raw)
+            unzipped_contents = tarfile.open(mode='r', fileobj=artifact_download_response.raw)
+            files_to_extract = []
 
             # Loop through the cached_content_array and reconstruct what the file path should be based on the action.
             for index in cached_content_array:
@@ -233,17 +232,24 @@ def copy_cached_content(cached_content_array):
                     dest_path = index.get('options', {}).get('dest_path')
                     dest_file_name = index.get('options', {}).get('file_name')
                     full_dest_path = f'{content_base_path}{dest_path}{dest_file_name}'
+                    files_to_extract.append(full_dest_path)
+                elif action in ('workflows', 'security-rules'):
+                    directory = index.get('options', {}).get('dest_path', '')
+                    full_dir_path = f'{content_base_path}{directory}'
+                    all_files = [x.name for x in unzipped_contents.getmembers() if x.name.startswith(full_dir_path)]
+                    files_to_extract = [*files_to_extract, *all_files]
+                else: # Throw err
+                    print('Action is unsupported, exiting')
 
-                    for tar_file in unzipped_contents:
-                        if tar_file.isfile():
-                            # If there's a match, extract that file(s) directly into the repo.
-                            if tar_file.name == full_dest_path:
-                                print(f'FOUND DEST PATH {tar_file.name}')
-
-                                # Extract & Copy file
-                                unzipped_contents.extractall(full_dest_path)
-
-                else:
-                    print('Action is not push and pull file')
+            for tar_file in unzipped_contents:
+                if tar_file.isfile():
+                    if tar_file.name in files_to_extract:
+                        print(f'***FOUND DEST PATH {tar_file.name}')
+                        file_extracted = unzipped_contents.extractfile(tar_file)
+                        content = file_extracted.read()
+                        new_file = open(tar_file.name, 'x')
+                        new_file.write(content.decode('utf-8'))
+                        new_file.close()
     except Exception as e:
+        print('error')
         print(e)
