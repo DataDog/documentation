@@ -224,7 +224,7 @@ View event correlations by using the **Event Overlays** section in the graphing 
 [7]: /metrics/advanced-filtering/
 [8]: /getting_started/tagging/
 [9]: /metrics/#time-aggregation
-[10]: dashboards/functions/rollup/#rollup-interval-enforced-vs-custom
+[10]: /dashboards/functions/rollup/#rollup-interval-enforced-vs-custom
 [11]: /dashboards/functions/rollup/
 [12]: /dashboards/functions/#apply-functions-optional
 [13]: /metrics/advanced-filtering/#boolean-filtered-queries
