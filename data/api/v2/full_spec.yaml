@@ -11833,6 +11833,9 @@ components:
             incident_settings_write: Configure Incidents settings.
             incident_write: Create, view, and manage incidents in Datadog.
             metrics_read: View custom metrics.
+            monitors_downtime: Set downtimes to suppress alerts from any monitor in
+              an organization. The ability to write monitors is not required to set
+              downtimes.
             monitors_read: View monitors.
             security_monitoring_filters_read: Read Security Filters.
             security_monitoring_filters_write: Create, edit, and delete Security Filters.
