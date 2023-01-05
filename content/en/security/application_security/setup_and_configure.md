@@ -303,6 +303,10 @@ To disable ASM, remove the `DD_APPSEC_ENABLED=true` environment variable from yo
 
 If you need additional help, contact [Datadog support][6].
 
+## Configure a Custom Blocking Page / Payload
+
+{{% asm-protection-page-configuration %}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
