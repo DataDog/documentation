@@ -472,7 +472,7 @@ Ensure that your shell session has _administrator_ privileges.
 Before you open a pull request, run the following command to catch any problems with your integration:
 
 ```
-ddev validate all changes
+ddev validate all <INTEGRATION_NAME>
 ```
 
 Push up your feature branch and open a pull request that contains your integration tile's asset files (including images) in the [`marketplace` repository][7]. The Marketplace repository does not allow forks. For instructions on creating a clone of the repo, see the [Set up section](#set-up-a-directory-and-clone-the-marketplace-repository). After you've created your pull request, automatic checks run in Azure DevOps pipelines to verify that your pull request is in good shape and contains all the required content to be updated.
