@@ -85,6 +85,12 @@ Define the configuration of your browser test.
 [2]: /data_security/synthetics
    {{% /tab %}}
 
+   {{% tab "Starting URL" %}}
+
+   Enter an amount of time in seconds for the test to wait before declaring the initial test step as failed.
+
+   {{% /tab %}}
+
    {{< /tabs >}}
 
 3. Add a **name**: The name of your browser test.
@@ -96,8 +102,10 @@ Define the configuration of your browser test.
 6. Select **managed and private locations**: Select locations around the world that are managed by Datadog or create [private locations][1] to run your browser test from custom locations or inside private networks. 
 
    {{% managed-locations %}} 
+
+   For more information about using the `datadog-ci` NPM package to trigger tests on a private application, see the [Continuous Testing Tunnel][15]. 
   
-7. Set the **test frequency**: The intervals vary from every five minutes to once per week. To request one-minute frequency, [contact Support][2].
+7. Set the **test frequency** by selecting a value in the **Basic** tab or entering values in the **Advanced** tab. The intervals vary from every five minutes to once per week. To request one-minute frequency, [contact Support][2].
 
 ## Variables
 
@@ -218,3 +226,4 @@ You can restrict access to a browser test based on the roles in your organizatio
 [12]: /synthetics/browser_tests/actions/
 [13]: /account_management/rbac#custom-roles
 [14]: /account_management/rbac/#create-a-custom-role
+[15]: /continuous_testing/testing_tunnel
