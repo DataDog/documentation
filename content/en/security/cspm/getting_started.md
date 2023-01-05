@@ -185,11 +185,11 @@ To filter the default detection rules by cloud provider:
 
 After you explore the default detection rules, you can review and take action on your cloud misconfigurations in the [Security Findings Explorer][3], [customize how each rule scans your environment][4], and [set up notification targets][5].
 
-## Disabling CSPM
+## Disable CSPM
 
-When you disable CSPM, your previous findings and homepage are still available in-app, but you will not incur additional billing costs. 
+Once you've disabled CSPM, your previous findings and the homepage are still available in-app, and you do not incur additional billing costs. 
 
-To disable CSPM for your cloud providers, do the following:
+To disable CSPM for your cloud providers:
 
 - **AWS**: On the **Setup & Configuration** > **Cloud Providers** tab, click the **AWS** tile, and turn off the **Collect Resources** toggle for your AWS accounts. 
 - **Azure**: On the **Setup & Configuration** > **Cloud Providers** tab, click the **Azure** tile, and turn off the **CSPM Enabled** toggle for your Azure subscriptions.
