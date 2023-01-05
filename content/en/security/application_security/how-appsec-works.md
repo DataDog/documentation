@@ -89,6 +89,8 @@ From there, all services already protected by ASM block incoming requests perfor
 
 {{% asm-protection-page-configuration %}}
 
+{{< img src="/security/application_security/asm-blocking-page-html.png" alt="The page displayed as ASM blocks requests originating from blocked IPs" width="75%" >}}
+
 ## Coverage
 
 Datadog ASM categorizes attack attempts into different threat types:
