@@ -18,7 +18,11 @@ Funnel analysis helps you track conversion rates across key workflows to identif
 
 ## Building a funnel
 
-To build a funnel, select your starting view or action and click on the plus icon to proceed in building additional steps. You can also use drag and drop functionality to move steps around. 
+To get started with building a funnel, navigate to the Funnels tab within RUM.
+
+{{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-funnels-tab.jpg" alt="Navigate to the Funnels tab within RUM" style="width:100%;" >}}
+
+From the funnels page, build your starting view or action and click on the plus icon to proceed in building additional steps. You can also use drag and drop functionality to move steps around. 
 
 {{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-building-a-funnel-1.mp4" alt="Filtering network map with search" video=true >}}
 
