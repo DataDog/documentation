@@ -88,7 +88,7 @@ From the RUM Explorer, you can then analyze:
 
 Imagine a web development team owns a set of pages like the example below.
 
-{{< img src="real_user_monitoring/guide/define-applications-services-components-rum/rum-guide-track-team-ownership-1.jpg" alt="Examples of sets of pages a web development could own" style="width:90%;">}}
+{{< img src="real_user_monitoring/guide/define-applications-services-components-rum/rum-guide-track-team-ownership-2.png" alt="Examples of sets of pages a web development could own" style="width:90%;">}}
 
 Inside your RUM application, create services for each set of pages owned by a team by doing the following:
 
@@ -109,7 +109,7 @@ Get insights into the performance or the adoption of a given team's scope by usi
 
 ### Teams own UI components
 
-{{< img src="real_user_monitoring/guide/define-applications-services-components-rum/rum-guide-team-owns-ui-components-1.jpg" alt="Components can be tracked using custom actions" style="width:90%;">}}
+{{< img src="real_user_monitoring/guide/define-applications-services-components-rum/rum-guide-team-owns-ui-components-2.png" alt="Components can be tracked using custom actions" style="width:90%;">}}
 
 Components are tracked using custom actions [mentioned above][10]: 
 
