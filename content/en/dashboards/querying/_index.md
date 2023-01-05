@@ -81,7 +81,7 @@ Regardless of the options chosen above, there is always some aggregation of data
 
 In practice, metrics are collected by the Agent every 15-20 seconds. So one day's worth of data is 4,320 data points. If you display a day's worth of data on single graph, Datadog automatically rolls up the data. For more details on time aggregation, see the [Metrics Introduction][9]. See the [Rollup][10] documentation to learn more about the rollup intervals and how Datadog automatically rolls up data points.
 
-To manually rollup the data, use the [rollup function][11]. Click the sigma icon to add a function and choose `rollup` from the dropdown. Then choose how you want to aggregate the data and the interval in seconds. 
+To manually rollup the data, use the [rollup function][11]. Click the sigma icon to add a function and select `rollup` from the dropdown menu. Then choose how you want to aggregate the data and the interval in seconds. 
 
 This query creates a single line that represents the total available disk space, on average, across all machines rolled up in 1 min buckets:
 
