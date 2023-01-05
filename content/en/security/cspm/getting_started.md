@@ -51,8 +51,6 @@ Use one of the following methods to enable CSPM for your AWS accounts:
 2. Select **Cloud Security Posture Management Collection** to enable resource collection for CSPM.
 3. Click **Save**.
 
-**Note**: To disable CSPM, turn off the **Collect Resources** toggle for your AWS accounts. Your previous findings and homepage will still be available in-app, but you will not incur additional billing costs.
-
 [1]: https://docs.datadoghq.com/integrations/amazon_web_services/
 [2]: /integrations/amazon_web_services/?tab=roledelegation#cloud-security-posture-management
 [3]: https://app.datadoghq.com/security/configuration
@@ -83,8 +81,6 @@ Use one of the following methods to enable CSPM for your Azure subscriptions:
 2. Under **Resource Collection**, select the **Enable resource collection for Cloud Security Posture Management** checkbox.
 3. Click **Update Configuration**.
 
-**Note**: To disable CSPM, turn off the **CSPM Enabled** toggle for your Azure subscriptions. Your previous findings and homepage will still be available in-app, but you will not incur additional billing costs.
-
 [1]: https://docs.datadoghq.com/integrations/azure
 [2]: https://app.datadoghq.com/security/configuration
 [3]: https://app.datadoghq.com/security/configuration?sectionId=secureCloudEnvironment&secure-cloud-environment=azure
@@ -114,8 +110,6 @@ Use one of the following methods to enable CSPM for your GCP projects:
 2. Under **Enable resource collection for Cloud Security Posture Management**, select the **Resource collection** checkbox.
 3. Click **Update Configuration**.
 
-**Note**: To disable CSPM, turn off the **CSPM Enabled** toggle for your GCP projects. Your previous findings and homepage will still be available in-app, but you will not incur additional billing costs.
-
 [1]: https://docs.datadoghq.com/integrations/google_cloud_platform
 [2]: https://docs.datadoghq.com/integrations/google_cloud_platform/#metric-collection
 [3]: https://app.datadoghq.com/security/configuration
@@ -132,8 +126,6 @@ Use one of the following methods to enable CSPM for your GCP projects:
 3. On the **Setup & Configuration** > **Host and containers** tab, click the **[Docker][2]** tile.
 4. Click **Select API key** to choose the API key you want to use with CSPM.
 5. Copy the automatically generated command and run it in your Docker environment to enable CSPM.
-
-**Note**: To disable CSPM, set `DD_COMPLIANCE_CONFIG_ENABLED` to `false`. Your previous findings and homepage will still be available in-app, but you will not incur additional billing costs.
 
 [1]: https://app.datadoghq.com/security/configuration
 [2]: https://app.datadoghq.com/security/configuration?sectionId=secureHostsAndContainers&secure-cloud-environment=google-cloud-platform&secure-hosts-and-containers=docker
@@ -161,8 +153,6 @@ Use one of the following methods to enable CSPM for your GCP projects:
     ```
 
 5. Restart the Agent.
-
-**Note**: To disable CSPM, set `compliance` > `enabled` to `false`. Your previous findings and homepage will still be available in-app, but you will not incur additional billing costs.
 
 [1]: https://app.datadoghq.com/account/settings#agent/kubernetes
 [2]: https://app.datadoghq.com/security/configuration
@@ -194,6 +184,18 @@ To filter the default detection rules by cloud provider:
     - **Kubernetes**: framework:cis-kubernetes
 
 After you explore the default detection rules, you can review and take action on your cloud misconfigurations in the [Security Findings Explorer][3], [customize how each rule scans your environment][4], and [set up notification targets][5].
+
+## Disable CSPM
+
+Once you've disabled CSPM, your previous findings and the homepage are still available in-app, and you do not incur additional billing costs. 
+
+To disable CSPM for your cloud providers:
+
+- **AWS**: On the **Setup & Configuration** > **Cloud Providers** tab, click the **AWS** tile, and turn off the **Collect Resources** toggle for your AWS accounts. 
+- **Azure**: On the **Setup & Configuration** > **Cloud Providers** tab, click the **Azure** tile, and turn off the **CSPM Enabled** toggle for your Azure subscriptions.
+- **GCP**: On the **Setup & Configuration** > **Cloud Providers** tab, click the **GCP** tile, and turn off the **CSPM Enabled** toggle for your GCP projects.
+- **Docker**: Set `DD_COMPLIANCE_CONFIG_ENABLED` to `false` in your Docker configuration.
+- **Kubernetes**: In the `datadog` section of the `values.yaml` file, set `compliance` > `enabled` to `false`.
 
 ## Further Reading
 
