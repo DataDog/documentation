@@ -53,7 +53,7 @@ In each of the `notes` and `calendar` directories, there are two sets of Dockerf
 
 The sample application is a simple multi-service Java application with two APIs, one for a `notes` service and another for a `calendar` service. The `notes` service has `GET`, `POST`, `PUT` and `DELETE` endpoints for notes stored within an in-memory H2 database. The `calendar` service can take a request and return a random date to be used in a note. Both applications have their own associated Docker images, and you deploy them on AWS ECS as separate services, each with its own tasks and respective containers. ECS pulls the images from ECR, a repository for application images that you publish the images to after building.
 
-### Initial EC2 setup
+### Initial ECS setup
 
 The application requires some initial configuration, including adding your AWS profile (already configured with the correct permissions to create an ECS cluster and read from ECR), AWS region, and AWS ECR repository.
 
@@ -378,7 +378,7 @@ Redeploy the application and exercise the API:
 
 2. Make note of the DNS name of the load balancer. You'll use that base domain in API calls to the sample app.
 
-3. Wait a few minutes for the instances to start up.Wait a few minutes to ensure the containers for the applications are ready. Run some curl commands to exercise the instrumented app:
+3. Wait a few minutes for the instances to start up. Wait a few minutes to ensure the containers for the applications are ready. Run some curl commands to exercise the instrumented app:
 
    `curl -X GET 'BASE_DOMAIN:8080/notes'`
    : `[]`
@@ -399,7 +399,7 @@ Redeploy the application and exercise the API:
    : `[{"id":0,"description":"hello"}]`
    
    `curl -X POST 'BASE_DOMAIN:8080/notes?desc=NewestNote&add_date=y'`
-   : `{"id":0,"description":"NewestNote with date 12/02/2022."}`
+   : `{"id":1,"description":"NewestNote with date 12/02/2022."}`
    : This command calls both the `notes` and `calendar` services.
 
 4. Wait a few moments, and go to [**APM > Traces**][11] in Datadog, where you can see a list of traces corresponding to your API calls:
