@@ -118,7 +118,7 @@ Disk space is low @ops-team@company.com
 
 Monitor notifications include content such as the monitor's query, the @-mentions used, metric snapshots (for metric monitors), and links back to relevant pages in Datadog. You have the option to choose which content you would like to include or exclude from notifications for individual monitors. 
 
-{{< img src="monitors/notifications/monitor_notification_presets.png" alt="Set a monitor preset" style="width:100%;" >}}
+{{< img src="monitors/notifications/monitor_notification_presets.png" alt="Set a monitor preset" style="width:70%;" >}}
 
 The options are:
 
