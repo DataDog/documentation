@@ -1,5 +1,5 @@
 ---
-title: Microsoft Azure App Service
+title: Azure App Service - Windows
 kind: documentation
 aliases:
   - /infrastructure/serverless/azure_app_services/
@@ -30,7 +30,7 @@ The Datadog extension for Azure App Service provides additional monitoring capab
 - Customized APM service and trace views showing relevant Azure App Service metrics and metadata.
 - Support for manual APM instrumentation to customize spans.
 - `Trace_ID` injection into application logs.
-- Support for submitting custom metrics using [DogStatsD][7].
+- Support for submitting custom metrics using [DogStatsD][1].
 
 ## Setup
 
@@ -360,7 +360,7 @@ It is likely that you do not have the Azure integration configured to monitor yo
 
 1. Go to the Azure integration tile.
 
-2. Ensure you have installed the [Azure integration][8] for the Azure subscription where your application is running.
+2. Ensure you have installed the [Azure integration][2] for the Azure subscription where your application is running.
 
 3. Ensure that any App Service plan filtering rules you have applied include the App Service plan where the app is running. If an App Service plan is not included, all apps and functions hosted on it are also not included. Tags on the app itself are not used for filtering by Datadog.
 
@@ -375,19 +375,13 @@ It is likely that you do not have the Azure integration configured to monitor yo
 
 **Note**: To expedite the process of investigating application errors with the support team, set `DD_TRACE_DEBUG:true` and add the content of the Datadog logs directory (`%AzureAppServiceHomeDirectory%\LogFiles\datadog`) to your email.
 
-Still need help? Contact [Datadog support][9].
+Still need help? Contact [Datadog support][3].
 
 ### Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://docs.microsoft.com/en-us/azure/app-service/
-[2]: /integrations/azure_app_services/
-[3]: /integrations/azure_functions/
-[4]: https://app.datadoghq.com/functions?cloud=azure&config_serverless-azure-app=true&group=service
-[5]: https://docs.microsoft.com/en-us/azure/azure-monitor/platform/resource-logs
-[6]: /integrations/azure/?tab=eventhub#log-collection
-[7]: /developers/dogstatsd
-[8]: /integrations/azure
-[9]: /help
+[1]: /developers/dogstatsd
+[2]: /integrations/azure
+[3]: /help
