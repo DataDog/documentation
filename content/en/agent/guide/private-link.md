@@ -84,7 +84,7 @@ However, to route traffic to Datadog's PrivateLink offering in `us-east-1` from 
     ```
 
     This configuration is required when sending logs to Datadog with AWS PrivateLink and the Datadog Agent, and is not required for the Lambda Extension. For more details, see [Agent log collection][3].
-    
+
 12. If your Lambda Extension loads the Datadog API Key from AWS Secrets Manager using the ARN specified by the environment variable `DD_API_KEY_SECRET_ARN`, you need to [create a VPC endpoint for Secrets Manager][4].
 
 13. [Restart your Agent][5] to send data to Datadog through AWS PrivateLink.
@@ -136,7 +136,7 @@ However, to route traffic to Datadog's PrivateLink offering in `us-east-1` from 
 
 8. Click on the VPC endpoint ID to check its status.
 9. Wait for the status to move from _Pending_ to _Available_. This can take up to 10 minutes.
-10. Once this is created, route traffic from another region to send the data to Datadog using private link. For more information, see the [Work With VPC Peering connections][2] AWS documentation. 
+10. Once this is created, route traffic from another region to send the data to Datadog using private link. For more information, see the [Work With VPC Peering connections][2] AWS documentation.
 
 {{< img src="agent/guide/private_link/vpc_status.png" alt="VPC status" style="width:80%;" >}}
 
@@ -172,6 +172,8 @@ This returns `metrics.agent.datadoghq.com`, the private hosted zone name that yo
 2. Within each new Route53 private hosted zone, create an A record with the same name. Toggle the **Alias** option, then under **Route traffic to**, choose **Alias to VPC endpoint**, **us-east-1**, and enter the DNS name of the VPC endpoint associated with the DNS name.
 
     **Note**: To retrieve your DNS name, see the [View endpoint service private DNS name configuration documentation.][2]
+
+    **Note**: The agent sends telemetry to versioned endpoints e.g. `<version>-app.agent.datadoghq.com` which resolves to `metrics.agent.datadoghq.com` via a CNAME alias. Therefore, you only need to set up a private hosted zone for `metrics.agent.datadoghq.com`.
 
 {{< img src="agent/guide/private_link/create-an-a-record.png" alt="Create an A record" style="width:90%;" >}}
 
@@ -215,7 +217,7 @@ The VPCs with Private Hosted Zone (PHZ) attached need to have a couple of settin
     ```
 
     This configuration is required when sending logs to Datadog with AWS PrivateLink and the Datadog Agent, and is not required for the Lambda Extension. For more details, see [Agent log collection][8].
-    
+
 2. If your Lambda Extension loads the Datadog API Key from AWS Secrets Manager using the ARN specified by the environment variable `DD_API_KEY_SECRET_ARN`, you need to [create a VPC endpoint for Secrets Manager][9].
 
 3. [Restart the Agent][6].
