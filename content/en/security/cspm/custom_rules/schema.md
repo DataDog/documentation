@@ -19,7 +19,6 @@ When you [write custom rules for CSPM][1], you specify the resource types that a
     {{< nextlink href="/security/cspm/custom_rules/aws_elb_load_balancer/" >}}<code>aws_elb_load_balancer</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/aws_elbv2_load_balancer/" >}}<code>aws_elbv2_load_balancer</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/aws_eks_cluster/" >}}<code>aws_eks_cluster</code>{{< /nextlink >}}
-    {{< nextlink href="/security/cspm/custom_rules/aws_iam_account/" >}}<code>aws_iam_account</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/aws_iam_credential_report/" >}}<code>aws_iam_credential_report</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/aws_iam_server_certificate/" >}}<code>aws_iam_server_certificate</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/aws_kms/" >}}<code>aws_kms</code>{{< /nextlink >}}
@@ -30,9 +29,7 @@ When you [write custom rules for CSPM][1], you specify the resource types that a
     {{< nextlink href="/security/cspm/custom_rules/aws_redshift_cluster/" >}}<code>aws_redshift_cluster</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/aws_s3_account_public_access_block/" >}}<code>aws_s3_account_public_access_block</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/aws_security_group/" >}}<code>aws_security_group</code>{{< /nextlink >}}
-    {{< nextlink href="/security/cspm/custom_rules/aws_vpc_endpoint/" >}}<code>aws_vpc_endpoint</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/aws_vpc_endpoint_policy_statement/" >}}<code>aws_vpc_endpoint_policy_statement</code>{{< /nextlink >}}
-    {{< nextlink href="/security/cspm/custom_rules/aws_vpc_nat_gateway_address/" >}}<code>aws_vpc_nat_gateway_address</code>{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## GCP
