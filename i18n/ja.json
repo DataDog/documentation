@@ -48,7 +48,7 @@
   },
 
   "email_support_sentence": {
-    "other": "Datadog サポートチームには、メール（<a href=\"mailto:support@datadoghq.com\">support@datadoghq.com</a>）でお問い合わせいただけます（すべてのサイト）"
+    "other": "help.datadoghq.com にアクセスして、サポート チームに連絡することができます。"
   },
 
   "live_chat_support_sentence": {
