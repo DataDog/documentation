@@ -173,6 +173,10 @@
     "request_description": "Incident payload.",
     "request_schema_description": "Create request for an incident."
   },
+  "SearchIncidents": {
+    "description": "Search for incidents matching a certain query.",
+    "summary": "Search for incidents"
+  },
   "DeleteIncident": {
     "description": "Deletes an existing incident from the users organization.",
     "summary": "Delete an existing incident"
