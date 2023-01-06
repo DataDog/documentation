@@ -691,7 +691,7 @@ const typeColumn = (key, value, readOnlyMarkup) => {
   } else if(value.enum) {
       typeVal = 'enum';
     } else {
-      typeVal = (value.format || value.type || '');
+      typeVal = (value.format || value.type || value.const || '');
     }
   if(value.type === 'array') {
     return `<div class="col-2 column"><p>[${(value.items === '[Circular]') ? 'object' : (value.items.type || '')}${oneOfLabel}]${readOnlyMarkup}</p></div>`;
@@ -884,17 +884,17 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
           if(value.oneOf instanceof Array && value.oneOf.length < 20) {
             childData = value.oneOf
               // if one of the entries is just { type: null } we don't want to show it
-              .filter((obj) => !(Object.keys(obj).length === 1))
+              .filter((element, index, array) => !(Object.keys(element).length === 1 && Object.keys(element).indexOf("type") > -1))
               .map((obj, indx) => {
-                if("const" in value.oneOf[indx]) {
-                  return {[value.oneOf[indx].const]: value.oneOf[indx]}
-                } else if("_metadata" in value.oneOf[indx] && "logical_name" in value.oneOf[indx]["_metadata"]) {
-                  return {[value.oneOf[indx]["_metadata"]["logical_name"]]: value.oneOf[indx]}
+                if("const" in obj) {
+                  return {[obj.const]: obj}
+                } else if("_metadata" in obj && "logical_name" in obj["_metadata"]) {
+                  return {[obj["_metadata"]["logical_name"]]: obj}
                 } else {
-                  return {[`Option ${indx + 1}`]: value.oneOf[indx]}
+                  return {[`Option ${indx + 1}`]: obj}
                 }
               })
-              .reduce((obj, item) => ({...obj, ...item}), {});
+              .reduce((o, i) => ({...o, ...i}), {});
           }
         } else if (typeof value === 'object' && "allOf" in value) {
           childData = value.allOf
