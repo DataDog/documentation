@@ -28,7 +28,7 @@ You can accomplish the following objectives:
 
 ## Manage information being collected
 
-The `trackInteractions` initialization parameter enables the collection of user clicks in your application, which means sensitive and private data contained on your pages may be included to identify elements that a user interacted with. 
+The `trackUserInteractions` initialization parameter enables the collection of user clicks in your application, which means sensitive and private data contained on your pages may be included to identify elements that a user interacted with.
 
 To control which information is sent to Datadog, [manually set an action name](#declare-a-name-for-click-actions), or [implement a global scrubbing rule in the Datadog Browser SDK for RUM][1].
 
@@ -42,7 +42,7 @@ The RUM Browser SDK automatically tracks clicks. A click action is created if **
 
 ## Action timing metrics
 
-For information about the default attributes for all RUM event types, see [RUM Browser Data Collected][3]. 
+For information about the default attributes for all RUM event types, see [RUM Browser Data Collected][3].
 
 | Metric    | Type   | Description              |
 |--------------|--------|--------------------------|
@@ -66,7 +66,7 @@ For more information about configuring for sampling or global context, see [Modi
 
 ## Declare a name for click actions
 
-The Datadog Browser SDK for RUM uses various strategies to get a name for click actions. If you want more control, you can define a `data-dd-action-name` attribute on clickable elements (or any of their parents) that is used to name the action. 
+The Datadog Browser SDK for RUM uses various strategies to get a name for click actions. If you want more control, you can define a `data-dd-action-name` attribute on clickable elements (or any of their parents) that is used to name the action.
 
 For example:
 
@@ -80,7 +80,7 @@ For example:
 </div>
 ```
 
-Starting with [version 2.16.0][4], with the `actionNameAttribute` initialization parameter, you can specify your own attribute that is used to name the action. 
+Starting with [version 2.16.0][4], with the `actionNameAttribute` initialization parameter, you can specify your own attribute that is used to name the action.
 
 For example:
 
@@ -88,7 +88,7 @@ For example:
 <script>
   DD_RUM.init({
     ...
-    trackInteractions: true,
+    trackUserInteractions: true,
     actionNameAttribute: 'data-custom-name',
   ...
   })
@@ -101,7 +101,7 @@ For example:
 
 ## Send custom actions
 
-To extend the collection of user interactions, send your custom actions using the `addAction` API. These custom actions send information relative to an event that occurs during a user journey. 
+To extend the collection of user interactions, send your custom actions using the `addAction` API. These custom actions send information relative to an event that occurs during a user journey.
 
 For more information, see [Send Custom Actions][5].
 
