@@ -240,7 +240,7 @@ A `GET /notes` trace looks something like this:
 
 ### Tracing configuration
 
-The Java tracing library takes advantage of Java’s built-in agent and monitoring support. The flag `-javaagent:../dd-java-agent.jar` tells the JVM where to find the Java tracing library so it can run as a Java Agent. Learn more about Java Agents at [https://www.baeldung.com/java-instrumentation][7].
+The Java tracing library uses Java’s built-in agent and monitoring support. The flag `-javaagent:../dd-java-agent.jar` tells the JVM where to find the Java tracing library so it can run as a Java Agent. Learn more about Java Agents at [https://www.baeldung.com/java-instrumentation][7].
 
 In addition to the `javaagent` flag, which enables the Java Agent, the launch commands specify three [Unified Service Tagging][10] settings to uniquely identify your application within Datadog. Always specify `env`, `service`, and `version` tags for every monitored application.
 
@@ -251,7 +251,7 @@ Notice that the flags in the commands appear _before_ the `-jar` flag. That’s 
 
 ## Add manual instrumentation to the Java application
 
-While automatic instrumentation is convenient, sometimes you want more fine-grained spans. Datadog's Java DD Trace API allows you to specify spans within your code using annotations or code.
+Automatic instrumentation is convenient, but sometimes you want more fine-grained spans. Datadog's Java DD Trace API allows you to specify spans within your code using annotations or code.
 
 The following steps walk you through adding annotations to the code to trace some sample methods.
 
@@ -278,7 +278,7 @@ The following steps walk you through adding annotations to the code to trace som
    @Trace(operationName = "traceMethod2", resourceName = "NotesHelper.anotherProcess")
    ```
 
-4. You can also create a separate span for a specific block of code in the application. Within the span, add service and resource name tags and error handling tags. All of these tags result in a flame graph that shows the span and its metrics in Datadog visualizations. Uncomment the lines that manually trace the private method:
+4. You can also create a separate span for a specific code block in the application. Within the span, add service and resource name tags and error handling tags. These tags result in a flame graph showing the span and metrics in Datadog visualizations. Uncomment the lines that manually trace the private method:
 
    ```java
            Tracer tracer = GlobalTracer.get();
@@ -315,7 +315,7 @@ The following steps walk you through adding annotations to the code to trace som
 
 {{% tab "Maven" %}}
 
-a. Open `notes/pom.xml` and uncomment the lines that configure dependencies for manual tracing. The `dd-trace-api` library is used for the `@Trace` annotations, and `opentracing-util` and `opentracing-api` are used for the manual span creation.
+a. Open `notes/pom.xml` and uncomment the lines configuring dependencies for manual tracing. The `dd-trace-api` library is used for the `@Trace` annotations, and `opentracing-util` and `opentracing-api` are used for manual span creation.
 
 b. Run:
 
@@ -335,7 +335,7 @@ b. Run:
 
 {{% tab "Gradle" %}}
 
-a. Open `notes/build.gradle` and uncomment the lines that configure dependencies for manual tracing. The `dd-trace-api` library is used for the `@Trace` annotations, and `opentracing-util` and `opentracing-api` are used for the manual span creation.
+a. Open `notes/build.gradle` and uncomment the lines configuring dependencies for manual tracing. The `dd-trace-api` library is used for the `@Trace` annotations, and `opentracing-util` and `opentracing-api` are used for manual span creation.
 
 b. Run: 
    ```sh

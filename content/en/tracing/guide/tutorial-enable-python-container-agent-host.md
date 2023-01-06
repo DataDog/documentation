@@ -152,7 +152,7 @@ Now that you have a working Python application, configure it to enable tracing.
    ENV DD_VERSION="0.1.0"
    ```
 
-4. Add Docker labels that correspond to the Universal Service Tags. This allows you to also get Docker metrics once your application is running. 
+4. Add Docker labels that correspond to the Universal Service Tags. This allows you also to get Docker metrics once your application is running. 
 
    ```
    LABEL com.datadoghq.tags.service="notes"
@@ -259,7 +259,7 @@ A `GET /notes` trace looks something like this:
 
 ## Add custom instrumentation to the Python application
 
-While automatic instrumentation is convenient, sometimes you want more fine-grained spans. Datadog's Python DD Trace API allows you to specify spans within your code using annotations or code.
+Automatic instrumentation is convenient, but sometimes you want more fine-grained spans. Datadog's Python DD Trace API allows you to specify spans within your code using annotations or code.
 
 The following steps walk you through adding annotations to the code to trace some sample methods.
 
