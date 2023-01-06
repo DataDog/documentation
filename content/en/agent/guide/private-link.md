@@ -171,9 +171,9 @@ This returns `metrics.agent.datadoghq.com`, the private hosted zone name that yo
 
 2. Within each new Route53 private hosted zone, create an A record with the same name. Toggle the **Alias** option, then under **Route traffic to**, choose **Alias to VPC endpoint**, **us-east-1**, and enter the DNS name of the VPC endpoint associated with the DNS name.
 
-    **Note**: To retrieve your DNS name, see the [View endpoint service private DNS name configuration documentation.][2]
-
-    **Note**: The agent sends telemetry to versioned endpoints e.g. `<version>-app.agent.datadoghq.com` which resolves to `metrics.agent.datadoghq.com` via a CNAME alias. Therefore, you only need to set up a private hosted zone for `metrics.agent.datadoghq.com`.
+   **Notes**:
+      - To retrieve your DNS name, see the [View endpoint service private DNS name configuration documentation.][2]
+      - The Agent sends telemetry to versioned endpoints, for example, `<version>-app.agent.datadoghq.com` which resolves to `metrics.agent.datadoghq.com` through a CNAME alias. Therefore, you only need to set up a private hosted zone for `metrics.agent.datadoghq.com`.
 
 {{< img src="agent/guide/private_link/create-an-a-record.png" alt="Create an A record" style="width:90%;" >}}
 
