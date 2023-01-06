@@ -97,6 +97,24 @@ psql -h localhost -U datadog -d postgres -c "select * from pg_stat_statements LI
 
 If you specified a `dbname` other than the default `postgres` in your Agent config, you must run `CREATE EXTENSION pg_stat_statements` in that database.
 
+If you created the extension in your target database and you still see this warning, the extension may have been created in a schema that is not accessible to the `datadog` user. To verify this, run this command to check which schema `pg_stat_statements` was created in:
+
+```bash
+psql -h localhost -U datadog -d postgres -c "select nspname from pg_extension, pg_namespace where extname = 'pg_stat_statements' and pg_extension.extnamespace = pg_namespace.oid;"
+```
+
+Then, run this command to check which schemas are visible to the `datadog` user:
+
+```bash
+psql -h localhost -U datadog -d <your_database> -c "show search_path;"
+```
+
+If you do not see the `pg_stat_statements` schema in the `datadog` user's `search_path`, you need to add it to the `datadog` user. For example:
+
+```sql
+ALTER ROLE datadog SET search_path = "$user",public,schema_with_pg_stat_statements;
+```
+
 ### Certain queries are missing
 
 If you have data from some queries, but do not see a particular query or set of queries in Database Monitoring that you're expecting to see , follow this guide.
@@ -215,6 +233,15 @@ sudo apt-get install postgresql-contrib-10
 ```
 
 For more information, see the appropriate version of the [Postgres `contrib` documentation][22].
+
+### Queries from Agent are slow and/or have a high impact on the database
+
+The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. Below are possible reasons for Agent queries to require more resources.
+
+#### High value for `pg_stat_statements.max` {#high-pg-stat-statements-max-configuration}
+The recommended value for `pg_stat_statements.max` is `10000`. Setting this configuration to a higher value
+may cause the collection query to take longer to run which can lead to query timeouts and gaps in query metric collection. If the Agent reports this warning, make sure that `pg_stat_statements.max` is set to `10000` on the database. 
+
 
 [1]: /database_monitoring/setup_postgres/
 [2]: /agent/troubleshooting/

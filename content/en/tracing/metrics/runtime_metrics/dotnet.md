@@ -28,6 +28,7 @@ further_reading:
 - .NET Core 3.1
 - .NET 5
 - .NET 6
+- .NET 7
  
 ## Automatic configuration
 

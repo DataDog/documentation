@@ -10,9 +10,9 @@ further_reading:
     - link: '/tracing/glossary/'
       tag: 'Documentation'
       text: 'Use the APM UI'
-    - link: 'https://learn.datadoghq.com/enrol/index.php?id=4'
+    - link: 'https://learn.datadoghq.com/courses/intro-to-apm'
       tag: 'Learning Center'
-      text: 'Learn Application Performance Monitoring with Docker'
+      text: 'Introduction to Application Performance Monitoring'
 ---
 
 ## Overview

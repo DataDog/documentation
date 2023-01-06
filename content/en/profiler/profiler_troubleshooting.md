@@ -163,9 +163,11 @@ If you've configured the profiler and don't see profiles in the profile search p
 - Operating system type and version (for example, Linux Ubuntu 20.04)
 - Runtime type, version, and vendor (for example, Python 3.9.5)
 
+Refer to the python APM client [troubleshooting documentation][3] for additional guidance.  
 
 [1]: /tracing/troubleshooting/#tracer-debug-logs
 [2]: /help/
+[3]: https://ddtrace.readthedocs.io/en/stable/troubleshooting.html
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
@@ -270,7 +272,7 @@ If you've configured the profiler and don't see profiles in the profile search p
 
    2. Open the `DD-DotNet-Profiler-Native-<Application Name>-<pid>` log file in the `/var/log/datadog` folder.
 
-   3. Look for `libddprof error: Failed to send profile.` entries: this message means it can't contact the agent.
+   3. Look for `libddprof error: Failed to send profile.` entries: this message means it can't contact the agent. Ensure the `DD_TRACE_AGENT_URL` is set to the correct Agent URL. See [Enabling the .NET Profiler-Configuration][1] for more information.
 
    4. If the `Failed to send profile` message is not present, look for `The profile was sent. Success?` entries.
 
@@ -280,6 +282,8 @@ If you've configured the profiler and don't see profiles in the profile search p
       ```
 
    5. Check the other HTTP codes for possible errors such as 403 for invalid API key.
+
+[1]: /profiler/enabling/dotnet/?tab=linux#configuration
 
 {{% /tab %}}
 
@@ -317,7 +321,7 @@ If you've configured the profiler and don't see profiles in the profile search p
 
    2. Open the `DD-DotNet-Profiler-Native-<Application Name>-<pid>` log file in the `%ProgramData%\Datadog-APM\logs\DotNet` folder.
 
-   3. Look for `libddprof error: Failed to send profile.` entries: This message means that it can't contact the agent.
+   3. Look for `libddprof error: Failed to send profile.` entries: This message means that it can't contact the agent. Ensure the `DD_TRACE_AGENT_URL` is set to the correct Agent URL. See [Enabling the .NET Profiler-Configuration][1] for more information.
 
    4. If the `Failed to send profile` message is not present, look for `The profile was sent. Success?` entries.
 
@@ -327,6 +331,8 @@ If you've configured the profiler and don't see profiles in the profile search p
       ```
 
    5. Check the other HTTP codes for possible errors such as 403 for invalid API key.
+
+[1]: /profiler/enabling/dotnet/?tab=linux#configuration
 
 {{% /tab %}}
 
