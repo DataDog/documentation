@@ -17,7 +17,7 @@ assets:
 author:
   homepage: https://www.rapdev.io
   name: RapDev
-  sales_email: sales@rapdev.io
+  sales_email: ddsales@rapdev.io
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
@@ -66,6 +66,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Backup Automator
+  uninstallation: README.md#Uninstallation
 ---
 
 
