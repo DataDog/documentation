@@ -127,22 +127,22 @@ To start, use a terraform script to deploy to AWS ECS:
    : `[]`
 
    `curl -X POST 'BASE_DOMAIN:8080/notes?desc=hello'`
-   : `{"id":0,"description":"hello"}`
+   : `{"id":1,"description":"hello"}`
 
-   `curl -X GET 'BASE_DOMAIN:8080/notes?id=0'`
-   : `{"id":0,"description":"hello"}`
-
-   `curl -X GET 'BASE_DOMAIN:8080/notes'`
-   : `[{"id":0,"description":"hello"}]`
-
-   `curl -X PUT 'BASE_DOMAIN:8080/notes?id=0&desc=UpdatedNote'`
-   : `{"id":0,"description":"UpdatedNote"}`
+   `curl -X GET 'BASE_DOMAIN:8080/notes?id=1'`
+   : `{"id":1,"description":"hello"}`
 
    `curl -X GET 'BASE_DOMAIN:8080/notes'`
-   : `[{"id":0,"description":"UpdatedNote"}]`
+   : `[{"id":1,"description":"hello"}]`
+
+   `curl -X PUT 'BASE_DOMAIN:8080/notes?id=1&desc=UpdatedNote'`
+   : `{"id":1,"description":"UpdatedNote"}`
+
+   `curl -X GET 'BASE_DOMAIN:8080/notes'`
+   : `[{"id":1,"description":"UpdatedNote"}]`
 
    `curl -X POST 'BASE_DOMAIN:8080/notes?desc=NewestNote&add_date=y'`
-   : `{"id":1,"description":"NewestNote with date 12/02/2022."}`
+   : `{"id":2,"description":"NewestNote with date 12/02/2022."}`
 
       This command calls both the `notes` and `calendar` services.
 
@@ -354,22 +354,22 @@ Redeploy the application and exercise the API:
    : `[]`
    
    `curl -X POST 'BASE_DOMAIN:8080/notes?desc=hello'`
-   : `{"id":0,"description":"hello"}`
+   : `{"id":1,"description":"hello"}`
    
-   `curl -X GET 'BASE_DOMAIN:8080/notes?id=0'`
-   : `{"id":0,"description":"hello"}`
-   
-   `curl -X GET 'BASE_DOMAIN:8080/notes'`
-   : `[{"id":0,"description":"hello"}]`
-   
-   `curl -X PUT 'BASE_DOMAIN:8080/notes?id=0&desc=UpdatedNote'`
-   : `{"id":0,"description":"UpdatedNote"}`
+   `curl -X GET 'BASE_DOMAIN:8080/notes?id=1'`
+   : `{"id":1,"description":"hello"}`
    
    `curl -X GET 'BASE_DOMAIN:8080/notes'`
-   : `[{"id":0,"description":"hello"}]`
+   : `[{"id":1,"description":"hello"}]`
+   
+   `curl -X PUT 'BASE_DOMAIN:8080/notes?id=1&desc=UpdatedNote'`
+   : `{"id":1,"description":"UpdatedNote"}`
+   
+   `curl -X GET 'BASE_DOMAIN:8080/notes'`
+   : `[{"id":1,"description":"hello"}]`
    
    `curl -X POST 'BASE_DOMAIN:8080/notes?desc=NewestNote&add_date=y'`
-   : `{"id":1,"description":"NewestNote with date 12/02/2022."}`
+   : `{"id":2,"description":"NewestNote with date 12/02/2022."}`
    : This command calls both the `notes` and `calendar` services.
 
 4. Wait a few moments, and go to [**APM > Traces**][11] in Datadog, where you can see a list of traces corresponding to your API calls:
