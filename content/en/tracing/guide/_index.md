@@ -23,7 +23,7 @@ aliases:
 
 ### Tutorials: Enabling Tracing
 
-These tutorials walk you through setting up a sample multi-service application with automatic and custom/manual instrumentation, and configuring the stack until you see traces in Datadog APM. The tutorials all do the same thing, but with different programming languages and infrastructure setups. Choose the one most like your development and deployment environment to learn the basics about getting started with APM.
+These tutorials walk you through setting up a sample multi-service application with automatic and custom/manual instrumentation, and configuring the stack until you see traces in Datadog APM. The tutorials all do the same thing, but with different programming languages and infrastructure setups. Choose the one most like your development and deployment environment to learn the basics of getting started with APM.
 
 {{< whatsnext desc="Choose your language and environment:" >}}
     {{< nextlink href="tracing/guide/tutorial-enable-python-host" >}}<img src="/images/integrations_logos/python-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> Enabling Tracing on a Python Application on the Same Host as Datadog Agent{{< /nextlink >}}
