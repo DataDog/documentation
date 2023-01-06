@@ -659,8 +659,8 @@ const fieldColumn = (key, value, toggleMarkup, requiredMarkup, parentKey = '') =
     field = (key || '');
   }
   return `
-    <div class="col-3 column">
-      <p class="key">${toggleMarkup}${field}</p>
+    <div class="col-4 column">
+      <p class="key">${toggleMarkup}${field}${requiredMarkup}</p>
     </div>
   `.trim();
 };
