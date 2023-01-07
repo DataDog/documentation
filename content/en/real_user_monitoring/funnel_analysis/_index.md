@@ -10,19 +10,20 @@ further_reading:
 
 ## Overview
 
-Funnel analysis helps you track conversion rates across key workflows to identify and address any bottlenecks. Specifically, you can:
+Funnel analysis helps you track conversion rates across key workflows to identify and address any bottlenecks in end-to-end user journeys. Specifically, you can:
 
 - See if customers drop off at a certain point due to poor website performance
-- Track how conversion rate changes over time as new features are built
+- Track how the conversion rate changes over time as new features are built
 - Measure the impact of how adding new steps to a workflow impacts dropoff rate
 
-## Building a funnel
+**Note:** The conversion rate is the number of visitors to your website that completed a desired goal (a conversion) out of the total number of visitors.
+## Build a funnel
 
-To get started with building a funnel, navigate to the Funnels tab within RUM.
+To build a funnel, navigate to the Funnels tab within RUM.
 
 {{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-funnels-tab.jpg" alt="Navigate to the Funnels tab within RUM" style="width:100%;" >}}
 
-From the funnels page, build your starting view or action and click on the plus icon to proceed in building additional steps. You can also use drag and drop functionality to move steps around. 
+From the funnels page, build your starting view or action and click on the plus icon to proceed in building additional steps. You can also use drag and drop functionality to move steps around.
 
 {{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-building-a-funnel-1.mp4" alt="Filtering network map with search" video=true >}}
 
@@ -31,6 +32,8 @@ From the funnels page, build your starting view or action and click on the plus 
 When you have a starting point in mind, but aren't sure what your users did next, use the suggested next steps panel to help remove the guesswork. After inputting steps, the suggested next steps panel automatically loads the top five most common **views** and **actions** that users typically see and take next. This allows you to build funnels quicker knowing the paths your users are taking in sequence.
 
 {{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-suggested-next-steps.jpg" alt="Build a funnel" style="width:90%;" >}}
+
+**Note:** Any action or view that happens between two steps in a funnel does not impact the step-by-step or overall conversion rate. As long as step 1 and step 2 happen in the right order in a given session at least once, it counts as a single converted session.
 
 ### Filtering
 
@@ -52,7 +55,7 @@ The user behavior section allows you to compare the average frustration count (f
 
 {{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-user-behavior.jpg" alt="User behavior section within funnel analysis" style="width:90%;" >}}
 
-## Sharing a funnel
+## Share a funnel
 
 Funnels can be shared with your teams on dashboards to analyze conversion alongside other telemetry metrics, or in a [Notebook][4] to be used for reporting.
 
