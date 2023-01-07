@@ -202,6 +202,8 @@ datadog_config:
 
 [Cloud Workload Security][8] は `runtime_security_config` 変数の下で構成されます。その下にネストされる変数はすべて、`runtime_security_config` セクションの `system-probe.yaml` および `security-agent.yaml` に書き込まれます。
 
+[Universal Service Monitoring][17] (USM) は `service_monitoring_config` 変数で構成されます。その下にネストされた変数は `system-probe.yaml` の `service_monitoring_config` セクションに書き込まれます。
+
 **Windows をご利用の方へのご注意**: NPM は Agent v6.27+ と v7.27+ で Windows 上でサポートされています。NPM はオプションコンポーネントとして出荷され、Agent のインストールまたはアップグレード時に `network_config.enabled` が true に設定された場合にのみインストールされます。このため、Agent を同時にアップグレードしない限り、既存のインストールでは NPM コンポーネントをインストールするために一旦 Agent をアンインストールして再インストールする必要があるかもしれません。
 
 #### 構成サンプル
@@ -215,6 +217,8 @@ datadog_config:
 system_probe_config:
   sysprobe_socket: /opt/datadog-agent/run/sysprobe.sock
 network_config:
+  enabled: true
+service_monitoring_config:
   enabled: true
 runtime_security_config:
   enabled: true
@@ -256,7 +260,7 @@ datadog_config_ex:
 
 これにより、ホストが複数の OS で稼働している場合に、バージョンを指定することが可能になります。以下に例を示します。
 
-| 指定された内容                            | インストール     | システム                |
+| 指定された内容                            | インストール     | System                |
 |-------------------------------------|--------------|-----------------------|
 | `datadog_agent_version: 7.16.0`     | `1:7.16.0-1` | Debian および SUSE ベース |
 | `datadog_agent_version: 7.16.0`     | `7.16.0-1`   | RedHat ベース          |
@@ -639,3 +643,4 @@ localhost | FAILED! => {
 [14]: https://github.com/DataDog/ansible-datadog/blob/main/tasks/agent-win.yml
 [15]: https://www.datadoghq.com/blog/datadog-marketplace/
 [16]: https://github.com/ansible/ansible/blob/stable-2.9/changelogs/CHANGELOG-v2.9.rst#id61
+[17]: https://docs.datadoghq.com/ja/tracing/universal_service_monitoring/?tab=configurationfiles#enabling-universal-service-monitoring
