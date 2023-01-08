@@ -60,13 +60,17 @@ In the “Notify” section, configure zero or more notification targets for eac
 
 {{< img src="security/cspm/frameworks_and_benchmarks/notification.png" alt="Select a severity and notification target" >}}
 
+## Create custom rules
+
+To extend the rules being applied to your environment to evaluate your security posture, you can clone detection rules and edit the copies, and you can create your own rules from scratch.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /security/default_rules/#cat-posture-management-cloud
 [2]: /security/detection_rules/
 [3]: https://docs.datadoghq.com/security_monitoring/default_rules/aws-cloudfront-distributions-encrypted/
 [4]: /security/cspm/frameworks_and_benchmarks
 [5]: /security/default_rules/#cat-posture-management-infra
 [6]: https://docs.datadoghq.com/security_monitoring/default_rules/cis-docker-1.2.0-3.22/
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
