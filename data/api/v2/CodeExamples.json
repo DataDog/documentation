@@ -398,6 +398,13 @@
       "description": "Get the details of an incident returns \"OK\" response"
     }
   ],
+  "SearchIncidents": [
+    {
+      "group": "incidents",
+      "suffix": "",
+      "description": "Search for incidents returns \"OK\" response"
+    }
+  ],
   "CreateAPIKey": [
     {
       "group": "key_management",
@@ -660,6 +667,13 @@
       "description": "List tags by metric name returns \"Success\" response"
     }
   ],
+  "QueryScalarData": [
+    {
+      "group": "metrics",
+      "suffix": "",
+      "description": "Scalar cross product query returns \"OK\" response"
+    }
+  ],
   "SubmitMetrics": [
     {
       "group": "metrics",
@@ -677,6 +691,13 @@
       "group": "metrics",
       "suffix": "",
       "description": "Tag Configuration Cardinality Estimator returns \"Success\" response"
+    }
+  ],
+  "QueryTimeseriesData": [
+    {
+      "group": "metrics",
+      "suffix": "",
+      "description": "Timeseries cross product query returns \"OK\" response"
     }
   ],
   "UpdateTagConfiguration": [

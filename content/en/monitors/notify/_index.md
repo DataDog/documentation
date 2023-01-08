@@ -114,6 +114,21 @@ Disk space is low @ops-team@company.com
 
 {{% notifications-integrations %}}
 
+### Toggle additional content
+
+Monitor notifications include content such as the monitor's query, the @-mentions used, metric snapshots (for metric monitors), and links back to relevant pages in Datadog. You have the option to choose which content you would like to include or exclude from notifications for individual monitors. 
+
+{{< img src="monitors/notifications/monitor_notification_presets.png" alt="Set a monitor preset" style="width:70%;" >}}
+
+The options are:
+
+- **Default**: No content is hidden.
+- **Hide Query**: Remove the monitor's query from the notification message.
+- **Hide Handles**: Remove the @-mentions that are used in the notification message.
+- **Hide All**: Notification message does not include query, handles, any snapshots (for metric monitors), or additional links in footers.
+
+**Note**: Depending on the integration, some content may not be displayed by default.
+
 ### Modifications
 
 An [event][8] is created anytime a monitor is created, modified, silenced, or deleted. Set the `Notify` option to notify team members, chat services, and the monitor creator of these events.

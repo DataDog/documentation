@@ -12,6 +12,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/"
   tag: "Blog"
   text: "Send metrics, traces, and logs from OpenTelemetry Collector to Datadog using Datadog Exporter"
+- link: "https://www.datadoghq.com/blog/hivemq-opentelemetry-monitor-iot-applications/"
+  tag: "Blog"
+  text: "Use HiveMQ and OpenTelemetry to monitor IoT applications in Datadog"
 ---
 
 The OpenTelemetry Collector is a vendor-agnostic agent process for collecting and exporting telemetry data emitted by many processes. The [Datadog Exporter][1] for the OpenTelemetry Collector allows you to forward trace, metric, and logs data from OpenTelemetry SDKs on to Datadog (without the Datadog Agent). It works with all supported languages, and you can [connect those OpenTelemetry trace data with application logs][2].
@@ -78,7 +81,7 @@ exporters:
   datadog:
     api:
       site: <DD_SITE>
-      key: ${DD_API_KEY}
+      key: ${env:DD_API_KEY}
 
 service:
   pipelines:
@@ -342,7 +345,7 @@ To deploy the OpenTelemetry Collector and Datadog Exporter in a Kubernetes Gatew
      datadog:
        api:
          site: <DD_SITE>
-         key: ${DD_API_KEY}
+         key: ${env:DD_API_KEY}
    # ...
    ```
 
@@ -424,7 +427,7 @@ To use the OpenTelemetry Operator:
        exporters:
          datadog:
            api:
-             key: ${DD_API_KEY}
+             key: ${env:DD_API_KEY}
        service:
          pipelines:
            metrics:
@@ -458,7 +461,7 @@ To use the OpenTelemetry Collector alongside the Datadog Agent:
    # ...
    exporters:
      otlp:
-       endpoint: "${HOST_IP}:4317"
+       endpoint: "${env:HOST_IP}:4317"
    # ...
    ```
 
