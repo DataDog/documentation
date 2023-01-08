@@ -111,6 +111,13 @@ See [Tracing Ruby Applications][1] for detailed instructions. [Sample code for a
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
+#### Troubleshooting
+This integration depends on your runtime having a full SSL implementation. If you are using a slim image for Node, you may need to add the following command to your Dockerfile to include certificates.
+
+```
+RUN apt-get update && apt-get install -y ca-certificates
+```
+
 #### Build with the Datadog buildpack
 
 1. Build your application by running the following:

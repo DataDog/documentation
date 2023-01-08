@@ -398,6 +398,13 @@
       "description": "Get the details of an incident returns \"OK\" response"
     }
   ],
+  "SearchIncidents": [
+    {
+      "group": "incidents",
+      "suffix": "",
+      "description": "Search for incidents returns \"OK\" response"
+    }
+  ],
   "CreateAPIKey": [
     {
       "group": "key_management",

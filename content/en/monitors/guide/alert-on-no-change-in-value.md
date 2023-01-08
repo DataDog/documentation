@@ -20,9 +20,9 @@ Next, apply the abs() function to take the absolute value of these deltas.
 
 * `abs(diff(avg:system.mem.free{*}))`
 
-These functions can be applied to your query in the UI, via the "+" button.
+These functions can be applied to your query in the UI.
 
-{{< img src="monitors/faq/new_query_ui_monitors.png" alt="new_query_ui_monitors"  >}}
+{{< img src="monitors/guide/alert_value_difference.png" alt="Apply diff function through Sigma icon > Rate > Value difference" >}}
 
 Alternatively, your complex query can be manually entered in the 'edit monitor' UI, via the Source tab (or applied programmatically via the [API][1]). See image below.
 

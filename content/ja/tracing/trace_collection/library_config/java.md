@@ -110,6 +110,13 @@ Datadog Agent とのネットワークインタラクションのタイムアウ
 大文字・小文字を区別しないヘッダーキーとタグ名のマップを受け取り、一致するレスポンスヘッダー値を自動的にタグとしてトレースに適用します。また、タグ名を指定しないエントリーも受け入れ、`http.response.headers.<header-name>` という形式のタグに自動的にマップされます。<br>
 バージョン 0.96.0 以降で利用可能です。
 
+`dd.trace.header.baggage`
+: **環境変数**: `DD_TRACE_HEADER_BAGGAGE`<br>
+**デフォルト**: `null`<br>
+**例**: `CASE-insensitive-Header:my-baggage-name,User-ID:userId,My-Header-And-Baggage-Name`<br>
+<br>大文字・小文字を区別しないヘッダキーとバゲッジキーのマップを受け取り、 一致したリクエストヘッダ値をトレース時にバゲッジとして自動的に適用します。伝搬時には、逆のマッピングが適用されます。バゲッジはヘッダーにマップされます。
+バージョン 1.3.0 以降で利用可能です。
+
 `dd.trace.annotations`
 : **環境変数**: `DD_TRACE_ANNOTATIONS`<br>
 **デフォルト**: ([listed here][4])<br>

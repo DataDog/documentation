@@ -1,7 +1,7 @@
 export default {
     allowedRegions: ['us', 'us3', 'us5', 'eu', 'gov'],
     dd_datacenter: {
-        us: 'US',
+        us: 'US1',
         us3: 'US3',
         us5: 'US5',
         eu: 'EU',
@@ -22,7 +22,7 @@ export default {
         gov: 'app.ddog-gov.com'
     },
     dd_site_name: {
-        us: 'US',
+        us: 'US1',
         us3: 'US3',
         us5: 'US5',
         eu: 'EU',

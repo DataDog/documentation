@@ -44,7 +44,7 @@ Supported .NET runtimes (64-bit applications)
 .NET 6<br/>
 .NET 7
 <div class="alert alert-warning">
-  <strong>Note:</strong> The beta for lock contention and allocation profiling is only available for .NET 5+.
+  <strong>Note:</strong> The beta for lock contention is only available for .NET 5+ and only in .NET 6+ for allocation profiling.
 </div>
 
 Supported languages
