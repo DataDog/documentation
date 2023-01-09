@@ -45,19 +45,6 @@ The following steps outline the process for sending logs from a sample applicati
 
 See the [Send AWS service logs with the Datadog Kinesis Firehose Destination][4] guide to set up a Kinesis Firehose Delivery stream.  
 **Note**: Set the **Source** as `Direct PUT`.
-    - **Source and Destination**
-{{< img src="integrations/guide/aws-eks-fargate-logs-with-kinesis-data-firehose/kinesis_delivery_stream_configuration.jpg" alt="Delivery Stream Configuration" responsive="true">}}
-    - **Source:** Select `Direct PUT`.  
-    - **Destination:**  Select `Datadog`.  
-    - **Delivery stream name** Set the name of your Delivery stream. (Optional since one is generated)  
-    - **Destination Settings**
-{{< img src="integrations/guide/aws-eks-fargate-logs-with-kinesis-data-firehose/kinesis_delivery_stream_destination.jpg" alt="Delivery Stream Destination" responsive="true">}}
-    - **HTTP endpoint URL** Select URL corresponding to your Datadog site: `Datadog logs - US` or `Datadog logs - EU`.
-    - **API key:** Enter your [Datadog API key][2].  
-    - **S3 backup bucket:** Select `Failed data only` and choose the desired S3 bucket for backup.  
-    - Leave remaining settings as the defaults.
-2. Scroll to the bottom and click **Create delivery stream**
-3. After creatinng the delivery stream, use the **Test with demo data** function to verify connection to your Datadog account.
  
 ### Configure Fluent Bit for Firehose on EKS Fargate cluster
  
