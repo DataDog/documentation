@@ -48,7 +48,7 @@ See the [Send AWS service logs with the Datadog Kinesis Firehose Destination][4]
  
 ### Configure Fluent Bit for Firehose on an EKS Fargate cluster
  
-1. Create the `aws-observabilty` namespace and apply the following configmap for Fluent Bit. Substitue the name of hte delivery stream you created in place of `PUT-DOG-abcde`
+1. Create the `aws-observability` namespace and apply the following configmap for Fluent Bit. Substitute the name of your delivery stream.
 
  ```yaml
 apiVersion: v1
