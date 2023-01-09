@@ -3303,7 +3303,7 @@ main:
     url: real_user_monitoring/guide/
     parent: rum
     identifier: rum_guides
-    weight: 13
+    weight: 14
   - name: Network Monitoring
     url: network_monitoring/
     pre: network
