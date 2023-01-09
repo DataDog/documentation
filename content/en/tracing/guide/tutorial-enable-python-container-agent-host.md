@@ -285,7 +285,7 @@ docker-compose -f docker/host-and-containers/exercise/docker-compose.yaml build 
 docker-compose -f docker/host-and-containers/exercise/docker-compose.yaml up db notes_app
 {{< /code-block >}}
 4. Resend some HTTP requests, specifically some `GET` requests.
-5. On the Trace Explorer, click into one of the new `GET` requests, and see a flame graph like this:
+5. On the Trace Explorer, click on one of the new `GET` requests, and see a flame graph like this:
 
    {{< img src="tracing/guide/tutorials/tutorial-python-container-custom-flame.png" alt="A flame graph for a GET trace with custom instrumentation." style="width:100%;" >}}
 

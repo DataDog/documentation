@@ -213,7 +213,7 @@ from ddtrace import tracer{{< /code-block >}}
     Now, the tracer automatically labels the resource with the function name it is wrapped around, in this case, `long_running_process`.
 
 4. Resend some HTTP requests, specifically some `GET` requests.
-5. On the Trace Explorer, click into one of the new `GET` requests, and see a flame graph like this:
+5. On the Trace Explorer, click on one of the new `GET` requests, and see a flame graph like this:
 
    {{< img src="tracing/guide/tutorials/tutorial-python-host-custom-flame.png" alt="A flame graph for a GET trace with custom instrumentation." style="width:100%;" >}}
    

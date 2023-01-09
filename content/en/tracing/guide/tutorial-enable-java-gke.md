@@ -83,7 +83,7 @@ gcloud compute networks subnets list{{< /code-block >}}
 gcloud container clusters get-credentials <CLUSTER_NAME>
 gcloud config set container/cluster <CLUSTER_NAME>{{< /code-block >}}
 
-3. To facilitate communication with the applications that will be deployed, [edit the network's firewall rules][17] to ensure that the GKE cluster allows TCP traffic on port `30080` and `30090`. 
+3. To facilitate communication with the applications that will be deployed, [edit the network's firewall rules][17] to ensure that the GKE cluster allows TCP traffic on ports `30080` and `30090`. 
 
 ### Build and upload the application image
 
@@ -136,7 +136,7 @@ kubectl get nodes -o wide{{< /code-block >}}
    
    {{< img src="tracing/guide/tutorials/tutorial-java-gke-external-ip.png" alt="Output of the kubectl command showing the external IP value for the node" style="width:100%;" >}}
 
-   In the examples shown, the `notes-app` is running on node `gke-java-tracing-gke-default-pool-ccbd5526-dd3d` which has an external IP of `35.196.6.199`.
+   In the examples shown, the `notes-app` is running on node `gke-java-tracing-gke-default-pool-ccbd5526-dd3d`, which has an external IP of `35.196.6.199`.
 
 3. Open up another terminal and send API requests to exercise the app. The notes application is a REST API that stores data in an in-memory H2 database running on the same container. Send it a few commands:
 
@@ -245,7 +245,7 @@ Wait a few moments, and go to [**APM > Traces**][11] in Datadog, where you can s
 
 {{< img src="tracing/guide/tutorials/tutorial-java-container-traces.png" alt="Traces from the sample app in APM Trace Explorer" style="width:100%;" >}}
 
-The `h2` is the embedded in-memory database for this tutorial and `notes` is the Spring Boot application. The traces list shows all of the spans, when they started, what resource was tracked with the span, and how long it took.
+The `h2` is the embedded in-memory database for this tutorial, and `notes` is the Spring Boot application. The traces list shows all the spans, when they started, what resource was tracked with the span, and how long it took.
 
 If you don't see traces after several minutes, clear any filter in the Traces Search field (sometimes it filters on an environment variable such as `ENV` that you aren't using).
 
@@ -267,9 +267,9 @@ A `GET /notes` trace looks something like this:
 
 The Java tracing library uses Java’s built-in agent and monitoring support. The flag `-javaagent:../dd-java-agent.jar` in the Dockerfile tells the JVM where to find the Java tracing library so it can run as a Java Agent. Learn more about Java Agents at [https://www.baeldung.com/java-instrumentation][7].
 
-The `dd.trace.sample.rate` flag sets the sample rate for this application. The ENTRYPOINT command in the Dockerfile set its value to `1`, which means that 100% of all requests to the `notes` service are sent to the Datadog backend for analysis and display. For a low-volume test application, this is fine. Do not do this in production or in any high-volume environment, because this results in a very large volume of data. Instead, sample some of your requests. Pick a value between 0 and 1. For example, `-Ddd.trace.sample.rate=0.1` sends traces for 10% of your requests to Datadog. Read more about [tracing configuration settings][14] and [sampling mechanisms][15].
+The `dd.trace.sample.rate` flag sets the sample rate for this application. The ENTRYPOINT command in the Dockerfile sets its value to `1`, which means that 100% of all requests to the `notes` service are sent to the Datadog backend for analysis and display. For a low-volume test application, this is fine. Do not do this in production or in any high-volume environment, because this results in a very large volume of data. Instead, sample some of your requests. Pick a value between 0 and 1. For example, `-Ddd.trace.sample.rate=0.1` sends traces for 10% of your requests to Datadog. Read more about [tracing configuration settings][14] and [sampling mechanisms][15].
 
-Notice that the sampling rate flag in the command appears _before_ the `-jar` flag. That’s because this is a parameter for the Java Virtual Machine and not for your application. Make sure that when you add the Java Agent to your application, you specify the flag in the right location.
+Notice that the sampling rate flag in the command appears _before_ the `-jar` flag. That’s because this is a parameter for the Java Virtual Machine, not your application. Make sure that when you add the Java Agent to your application, you specify the flag in the right location.
 
 ## Add manual instrumentation to the Java application
 
@@ -350,7 +350,7 @@ docker push gcr.io/<PROJECT_NAME>/<REPO_NAME>:notes
 8. Using [the same steps as before](#configure-the-application-locally-and-deploy), deploy the `notes` app with `kubectl create -f notes-app.yaml` and find the external IP address for the node it runs on. 
 
 9. Resend some HTTP requests, specifically some `GET` requests.
-10. On the Trace Explorer, click into one of the new `GET` requests, and see a flame graph like this:
+10. On the Trace Explorer, click on one of the new `GET` requests, and see a flame graph like this:
 
     {{< img src="tracing/guide/tutorials/tutorial-java-container-custom-flame.png" alt="A flame graph for a GET trace with custom instrumentation." style="width:100%;" >}}
    

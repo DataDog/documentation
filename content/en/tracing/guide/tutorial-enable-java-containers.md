@@ -214,7 +214,7 @@ Wait a few moments, and go to [**APM > Traces**][11] in Datadog, where you can s
 
 {{< img src="tracing/guide/tutorials/tutorial-java-container-traces.png" alt="Traces from the sample app in APM Trace Explorer" style="width:100%;" >}}
 
-The `h2` is the embedded in-memory database for this tutorial and `notes` is the Spring Boot application. The traces list shows all of the spans, when they started, what resource was tracked with the span, and how long it took.
+The `h2` is the embedded in-memory database for this tutorial, and `notes` is the Spring Boot application. The traces list shows all the spans, when they started, what resource was tracked with the span, and how long it took.
 
 If you don't see traces after several minutes, clear any filter in the Traces Search field (sometimes it filters on an environment variable such as `ENV` that you aren't using).
 
@@ -236,9 +236,9 @@ A `GET /notes` trace looks something like this:
 
 The Java tracing library uses Java’s built-in agent and monitoring support. The flag `-javaagent:../dd-java-agent.jar` in the Dockerfile tells the JVM where to find the Java tracing library so it can run as a Java Agent. Learn more about Java Agents at [https://www.baeldung.com/java-instrumentation][7].
 
-The `dd.trace.sample.rate` flag sets the sample rate for this application. The ENTRYPOINT command in the Dockerfile set its value to `1`, which means that 100% of all requests to the `notes` service are sent to the Datadog backend for analysis and display. For a low-volume test application, this is fine. Do not do this in production or in any high-volume environment, because this results in a very large volume of data. Instead, sample some of your requests. Pick a value between 0 and 1. For example, `-Ddd.trace.sample.rate=0.1` sends traces for 10% of your requests to Datadog. Read more about [tracing configuration settings][14] and [sampling mechanisms][15].
+The `dd.trace.sample.rate` flag sets the sample rate for this application. The ENTRYPOINT command in the Dockerfile sets its value to `1`, which means that 100% of all requests to the `notes` service are sent to the Datadog backend for analysis and display. For a low-volume test application, this is fine. Do not do this in production or in any high-volume environment, because this results in a very large volume of data. Instead, sample some of your requests. Pick a value between 0 and 1. For example, `-Ddd.trace.sample.rate=0.1` sends traces for 10% of your requests to Datadog. Read more about [tracing configuration settings][14] and [sampling mechanisms][15].
 
-Notice that the sampling rate flag in the command appears _before_ the `-jar` flag. That’s because this is a parameter for the Java Virtual Machine and not for your application. Make sure that when you add the Java Agent to your application, you specify the flag in the right location.
+Notice that the sampling rate flag in the command appears _before_ the `-jar` flag. That’s because this is a parameter for the Java Virtual Machine, not your application. Make sure that when you add the Java Agent to your application, you specify the flag in the right location.
 
 ## Add manual instrumentation to the Java application
 
@@ -311,7 +311,7 @@ The following steps walk you through adding annotations to the code to trace som
    ```
 
 7. Resend some HTTP requests, specifically some `GET` requests.
-8. On the Trace Explorer, click into one of the new `GET` requests, and see a flame graph like this:
+8. On the Trace Explorer, click on one of the new `GET` requests, and see a flame graph like this:
 
    {{< img src="tracing/guide/tutorials/tutorial-java-container-custom-flame.png" alt="A flame graph for a GET trace with custom instrumentation." style="width:100%;" >}}
    

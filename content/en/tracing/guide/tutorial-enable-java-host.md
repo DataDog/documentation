@@ -355,7 +355,7 @@ b. Run:
 {{< /tabs >}}
 
 6. Resend some HTTP requests, specifically some `GET` requests.
-7. On the Trace Explorer, click into one of the new `GET` requests, and see a flame graph like this:
+7. On the Trace Explorer, click on one of the new `GET` requests, and see a flame graph like this:
 
    {{< img src="tracing/guide/tutorials/tutorial-java-host-custom-flame.png" alt="A flame graph for a GET trace with custom instrumentation." style="width:100%;" >}}
    

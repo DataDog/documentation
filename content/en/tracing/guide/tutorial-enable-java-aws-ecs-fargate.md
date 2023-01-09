@@ -319,7 +319,7 @@ The Java tracing library uses Java’s built-in agent and monitoring support. Th
 
 The `dd.trace.sample.rate` flag sets the sample rate for this application. The ENTRYPOINT command in the Dockerfile sets its value to `1`, meaning that 100% of all service requests are sent to the Datadog backend for analysis and display. For a low-volume test application, this is fine. Do not do this in production or in any high-volume environment, because this results in a very large volume of data. Instead, sample some of your requests. Pick a value between 0 and 1. For example, `-Ddd.trace.sample.rate=0.1` sends traces for 10% of your requests to Datadog. Read more about [tracing configuration settings][14] and [sampling mechanisms][15].
 
-Notice that the sampling rate flag in the commands appears _before_ the `-jar` flag. That’s because this is a parameter for the Java Virtual Machine and not for your application. Make sure that when you add the Java Agent to your application, you specify the flag in the right location.
+Notice that the sampling rate flag in the commands appears _before_ the `-jar` flag. That’s because this is a parameter for the Java Virtual Machine, not your application. Make sure that when you add the Java Agent to your application, you specify the flag in the right location.
 
 ### Rebuild and upload the application image
 
@@ -376,7 +376,7 @@ Redeploy the application and exercise the API:
 
    {{< img src="tracing/guide/tutorials/tutorial-java-container-traces.png" alt="Traces from the sample app in APM Trace Explorer" style="width:100%;" >}}
 
-   The `h2` is the embedded in-memory database for this tutorial and `notes` is the Spring Boot application. The traces list shows all of the spans, when they started, what resource was tracked with the span, and how long it took.
+   The `h2` is the embedded in-memory database for this tutorial, and `notes` is the Spring Boot application. The traces list shows all the spans, when they started, what resource was tracked with the span, and how long it took.
 
 If you don't see traces after several minutes, clear any filter in the Traces Search field (sometimes it filters on an environment variable such as `ENV` that you aren't using).
 
