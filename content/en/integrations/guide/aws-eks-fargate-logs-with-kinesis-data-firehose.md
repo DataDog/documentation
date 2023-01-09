@@ -22,7 +22,7 @@ AWS Fargate on EKS provides a fully managed experience for running Kubernetes wo
    
 ### Kinesis Data Firehose vs Cloudwatch log forwarding {#firehose-vs-cloudwatch}
 
-The following are key differences between using Kinesis Data Firehose and Cloudwatch log forwarding.
+The following are key differences between using Kinesis Data Firehose and CloudWatch log forwarding.
 
 - **Metadata and tagging**: Metadata such as Kubernetes namespace and container ID are accessible as structured attributes when sending logs with Kinesis Data Firehose.
 
