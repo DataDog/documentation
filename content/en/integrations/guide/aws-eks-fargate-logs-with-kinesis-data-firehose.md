@@ -12,10 +12,6 @@ further_reading:
   tag: "AWS Documentation: AWS Fargate profile"
   text: 
 ---
-{{< site-region region="us3,us5,gov" >}}
-
-**The AWS CloudWatch Metric Streams with Kinesis Data Firehose is not supported on this Datadog site.**
-{{< /site-region >}}
 
 ## Overview
 
