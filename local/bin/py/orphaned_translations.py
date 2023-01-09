@@ -1,5 +1,6 @@
 import os
 
+
 def get_orphaned_translated_files_by_language(language_code):
     """
     Returns a list of orphaned translated files for the given language
@@ -44,5 +45,4 @@ def main():
             print('\n'.join(orphaned))
 
 
-if __name__ == "__main__":
-    main()
+main()
