@@ -101,7 +101,7 @@ data:
          --policy-name FluentBitEKSFargate \
          --policy-document file://allow_kinesis_put_permission.json 
 {{< /code-block >}}
-3. Retrieve the Fargate Pod Execution Role and attach the IAM policy to the Fargate Pod Execution Role
+4. Retrieve the Fargate Pod Execution Role and attach the IAM policy.
 
 {{< code-block lang="bash" filename="" disable_copy="false" collapsible="false" >}}
  # Retrieve the pod execution role
