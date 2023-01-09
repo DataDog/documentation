@@ -35,7 +35,7 @@ The following syntax is supported for Boolean filtered metric queries:
 - `NOT IN`, `not in`
 
 **Note:** Symbolic boolean syntax (`!`, `,`) cannot be used with functional syntax operators (`NOT`, `AND`, `OR`, `IN`, `NOT IN`). The following query is considered _invalid_: 
-`avg:mymetric{env:prod AND resource_name NOT IN (!resource_name:A, !resource_name:B)}`
+`avg:mymetric{env:prod AND !env:dev}`
 
 #### Boolean filtered query examples
 
