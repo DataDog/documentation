@@ -50,7 +50,7 @@ See the [Send AWS service logs with the Datadog Kinesis Firehose Destination][4]
  
 1. Create the `aws-observability` namespace and apply the following configmap for Fluent Bit. Substitute the name of your delivery stream.
 
- ```yaml
+{{< code-block lang="yaml" filename="" disable_copy="false" collapsible="false" >}}
 apiVersion: v1
 kind: ConfigMap
 metadata:
