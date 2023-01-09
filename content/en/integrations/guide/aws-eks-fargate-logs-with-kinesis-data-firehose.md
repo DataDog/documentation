@@ -3,14 +3,14 @@ title: AWS EKS Fargate logs with Kinesis Data Firehose
 kind: guide
 further_reading:
 - link: https://docs.datadoghq.com/logs/log_configuration/processors/
-  tag: "Documentation: Processors"
-  text: 
+  tag: Documentation
+  text: Processors 
 - link: https://docs.aws.amazon.com/eks/latest/userguide/fargate-logging.html
-  tag: "AWS Documentation: Fargate logging"
-  text:
+  tag: Documentation
+  text: Fargate logging
 - link: https://docs.aws.amazon.com/eks/latest/userguide/fargate-profile.html
-  tag: "AWS Documentation: AWS Fargate profile"
-  text: 
+  tag: Documentation
+  text: AWS Fargate profile
 ---
 
 ## Overview
