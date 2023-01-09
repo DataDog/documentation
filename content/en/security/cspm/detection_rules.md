@@ -27,19 +27,21 @@ CSPM uses the following rule types to validate the configuration of your cloud i
 
 ## Customize how your environment is scanned by each rule
 
-Customization of a cloud configuration query directly is not supported at this time, but you can customize how your environment is scanned for each rule. For example, you can exclude resources tagged with `env:dev` from being assessed by rules associated with the PCI framework.
+Customization of a cloud configuration query directly is not supported at this time, but you can customize how your environment is scanned by each rule.
 
 On the [Rules][13] page, select a rule to open its details page. Under **Exclude benign activity with suppression queries**, set the filtering logic for how the rule scans your environment.
 
-For example, you can remove all resources tagged with `env:staging` using the **This rule will not generate a finding if there is a match with any of the following suppression queries** function. Or, limit the scope for a certain rule to resources tagged with `compliance:pci` using the **Only generate a finding if there is a match with any of the following queries** function.
+For example, you can exclude resources tagged with `env:staging` using the **This rule will not generate a finding if there is a match with any of the following suppression queries** function. You can also limit the scope for a certain rule to resources tagged with `compliance:pci` using the **Only generate a finding if there is a match with any of the following queries** function.
 
-*Add note about ability to do this via API with link to docs*
+After you customize a rule, click **Update Rule** at the bottom of the page to apply your changes.
 
-{{< img src="security/cspm/frameworks_and_benchmarks/never-trigger-a-finding.png" alt="In the Datadog app, select Advanced to populate Never trigger a finding when, and add a query." >}}
+*Add note about ability to do this via API with link to relevant docs*
+
+{{< img src="security/cspm/frameworks_and_benchmarks/never-trigger-a-finding-2.png" alt="In the Datadog app, select Advanced to populate Never trigger a finding when, and add a query." >}}
 
 ## Set notification targets for detection rules
 
-From the [Rules][13] page, you can add notification targets. The complete list of notification options are:
+You can send real-time notifications when a new misconfiguration is detected in your environment by adding notification targets. The complete list of notification options are:
 
 - [Slack][14]
 - [Jira][15]
@@ -49,13 +51,19 @@ From the [Rules][13] page, you can add notification targets. The complete list o
 - [Webhooks][19]
 - Email
 
-In the **Set severity and notifications** section, configure zero or more notification targets for each rule case. You cannot edit the preset severity. See [Notifications][7] for more information.
+On the [Rules][13] page, select a rule to open its details page. In the **Set severity and notifications** section, configure zero or more notification targets for each rule case. You cannot edit the preset severity. See [Notifications][7] for more information on configuring notifications for detection rules.
+
+*Update screenshot*
 
 {{< img src="security/cspm/frameworks_and_benchmarks/notification.png" alt="Select a severity and notification target" >}}
 
 ## Create custom rules
 
-To extend the rules being applied to your environment to evaluate your security posture, you can clone detection rules and edit the copies, and you can create your own rules from scratch.
+To extend the rules being applied to your environment to evaluate your security posture, you can clone detection rules and edit the copies, and you can create your own rules from scratch. See [Custom Rules][20] for more information.
+
+**Note**: Creating and using custom CSPM rules is a beta feature, available only for Google Cloud Platform (GCP).
+
+*Add screenshot here*
 
 ## Further Reading
 
@@ -75,3 +83,4 @@ To extend the rules being applied to your environment to evaluate your security 
 [17]: /integrations/servicenow/
 [18]: /integrations/microsoft_teams/
 [19]: /integrations/webhooks/
+[20]: /security/cspm/custom_rules/
