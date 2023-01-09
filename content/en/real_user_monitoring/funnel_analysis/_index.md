@@ -45,7 +45,7 @@ When constructing your funnel, you can add all [default attributes][1] (core, de
 
 After building a funnel, to understand why you see the conversion rate you do, the Funnel Insights panel offers correlated data on performance and user behavior trends.
 
-For high level trends, you can see the end-to-end conversion rate for your entire workflow and also see individual steps to step conversion to dropoff rates. If you want to understand what it looks like for someone who converted versus someone who dropped off, you can watch a session replay for each case.
+For high level trends, you can see the end-to-end conversion rate for your entire workflow and also see individual steps to step conversion to dropoff rates. If you want to understand what it looks like for someone who converted versus someone who dropped off, you can watch a [Session Replay][5] for each case.
 
 {{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-analyzing-funnel.jpg" alt="Use the Funnel Insights panel to review performance and user behavior trends" style="width:90%;" >}}
 
@@ -90,3 +90,4 @@ Setting up alerts on conversion/dropoff rates allows you to be notified when con
 [2]: /real_user_monitoring/browser/data_collected/#session-metrics
 [3]: /real_user_monitoring/frustration_signals/
 [4]: /notebooks/
+[5]: /real_user_monitoring/session_replay
