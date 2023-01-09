@@ -94,7 +94,7 @@ data:
 ]
 }
 {{< /code-block >}}
-2. Create the policy.
+3. Create the policy.
 
  ```bash
  $ aws iam create-policy \
