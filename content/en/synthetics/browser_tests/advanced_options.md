@@ -16,12 +16,12 @@ further_reading:
 
 ## Overview
 
-This page describes how Synthetic browser tests are self maintained and the various advanced options available in the recording workflow. 
+This page describes advanced options for Synthetic browser tests. 
 
 
 ## Locate an element
 
-## Datadog algorithm
+### Datadog algorithm
 
 Flakiness is a pain point in end-to-end testing because tests occasionally fail when a frontend team implements changes, causing an identifier in your test to alert instead of an actual application issue.
 
