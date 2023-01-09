@@ -64,6 +64,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Composer インテグレーション
+  uninstallation: README.md#Uninstallation
 ---
 
 

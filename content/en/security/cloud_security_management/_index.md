@@ -25,6 +25,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/security-labs-ruleset-launch/"
     tag: "Blog"
     text: "Fix common cloud security risks with the Datadog Security Labs Ruleset"
+  - link: "https://www.datadoghq.com/blog/securing-cloud-native-applications/"
+    tag: "Blog"
+    text: "Best practices for application security in cloud-native environments"
 ---
 
 ## Overview

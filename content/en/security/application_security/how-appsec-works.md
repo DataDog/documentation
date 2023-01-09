@@ -85,8 +85,11 @@ You can block attackers' IPs that are flagged in ASM Security Signals temporaril
 
 From there, all services already protected by ASM block incoming requests performed by the blocked IP, for the specified duration. All blocked traces are tagged with `security_response.block_ip` and displayed in the [Trace Explorer][14]. Services where ASM is disabled aren't protected.
 
-
 {{< img src="/security/application_security/asm-blocking-ui.png" alt="A security signal panel in Datadog ASM, allowing to block the attackers' IPs" width="75%">}}
+
+{{% asm-protection-page-configuration %}}
+
+{{< img src="/security/application_security/asm-blocking-page-html.png" alt="The page displayed as ASM blocks requests originating from blocked IPs" width="75%" >}}
 
 ## Coverage
 
@@ -129,3 +132,6 @@ Datadog ASM includes over 100 attack patterns that help protect against [many di
 [14]: https://app.datadoghq.com/security/appsec/traces?query=%40appsec.blocked%3Atrue
 [15]: https://app.datadoghq.com/security/appsec/event-rules
 [16]: /security/cloud_siem/
+[17]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/agent-bootstrap/src/main/resources/datadog/trace/bootstrap/blocking/template.html
+[18]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/agent-bootstrap/src/main/resources/datadog/trace/bootstrap/blocking/template.json
+[19]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept

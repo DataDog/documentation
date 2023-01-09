@@ -103,11 +103,6 @@ datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
   kubelet:
-    host:
-      valueFrom:
-        fieldRef:
-          fieldPath: spec.nodeName
-    hostCAPath: /etc/kubernetes/certs/kubeletserver.crt
     tlsVerify: false # Required as of Agent 7.35. See Notes.
 ```
 
@@ -128,10 +123,6 @@ spec:
   agent:
     config:
       kubelet:
-        host:
-          fieldRef:
-            fieldPath: spec.nodeName
-        hostCAPath: /etc/kubernetes/certs/kubeletserver.crt
         tlsVerify: false # Required as of Agent 7.35. See Notes.
   clusterAgent:
     image:
