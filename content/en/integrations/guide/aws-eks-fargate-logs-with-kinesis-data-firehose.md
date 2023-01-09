@@ -93,7 +93,7 @@ data:
        }
 ]
 }
- ```
+{{< /code-block >}}
 2. Create the policy.
 
  ```bash
