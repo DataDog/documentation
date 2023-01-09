@@ -26,7 +26,7 @@ The following are key differences between using Kinesis Data Firehose and Cloudw
 
 - **Metadata and tagging**: Metadata such as Kubernetes namespace and container ID are accessible as structured attributes when sending logs with Kinesis Data Firehose.
 
-- **AWS Costs**: AWS Costs may vary for individual use cases but Kinesis Data Firehose ingestion is generally less than comparable Cloudwatch Log ingestion. 
+- **AWS Costs**: AWS Costs may vary for individual use cases but Kinesis Data Firehose ingestion is generally less expensive than comparable Cloudwatch Log ingestion. 
 
 ## Requirements
 1. An EKS cluster with a [Fargate Profile][1]. In this guide, the cluster is named `fargate-cluster` with a fargate profile nameed `fargate-profile` applied to the namespace `fargate-namespace`.
