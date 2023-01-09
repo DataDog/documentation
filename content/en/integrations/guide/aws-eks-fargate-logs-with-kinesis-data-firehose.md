@@ -89,7 +89,7 @@ data:
                 "firehose:PutRecordBatch"
             ],
             "Resource":
-       "arn:aws:firehose:<region>:<accountid>:deliverystream/<firehose>"
+       "arn:aws:firehose:<REGION>:<ACCOUNTID>:deliverystream/<DELIVERY-STREAM-NAME>"
        }
 ]
 }
