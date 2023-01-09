@@ -58,41 +58,79 @@ The Datadog Agent only collects logs that have been written after it has started
 
 ## Permission issues tailing log files
 
-The `datadog-agent` does not run as root (and running as root is not recommended, as a general best-practice). For this reason, when you configure your `datadog-agent` to tail log files (for custom logs or for integrations) you need to take special care to ensure the `datadog-agent` user has read access to tail the log files you want to collect from.
+The Datadog Agent does not run as root (and running as root is not recommended, as a general best-practice). When you configure your Agent to tail log files for custom logs or for integrations, you need to take special care to ensure the Agent user has the correct access to the log files.
 
-In that case, you should see an error message when checking the [Agent status][5]:
+The default Agent user per operating system:
+| Operating system | Default Agent user |
+| ---------------  | ------------------ |
+| Linux | `datadog-agent` |
+| MacOS | `datadog-agent` |
+| Windows | `ddagentuser` |
 
-```text
-==========
-Logs Agent
-==========
+If the Agent does not have the correct permissions, you might see one of the following error messages when checking the [Agent status][5]:
+- The file does not exist.
+- Access is denied.
+- Could not find any file matching pattern `<path/to/filename>`, check that all its subdirectories are executable.
 
-  test
-  ----
-    Type: file
-    Path: /var/log/application/error.log
-    Status: Error: file /var/log/application/error.log does not exist
-```
+To fix the error, give the Datadog Agent user read, write, and execute permissions to the log file and subdirectories.
 
-Run the `namei` command to obtain more information about the file permissions:
+{{< tabs >}}
+{{% tab "Linux and MacOS" %}}
+1. Run the `namei` command as the `datadog-agent` user to obtain more information about the file permissions:
+   ```text
+   > sudo -u datadog-agent namei -m /var/log/application/error.log
+   > f: /var/log/application/error.log
+   drwxr-xr-x /
+   drwxr-xr-x var
+   drwxrwxr-x log
+   drw-r--r-- application
+   -rw-r----- error.log
+   ```
 
-```text
-> namei -m /var/log/application/error.log
-> f: /var/log/application/error.log
- drwxr-xr-x /
- drwxr-xr-x var
- drwxrwxr-x log
- drw-r--r-- application
- -rw-r----- error.log
-```
+   In this example, the Agent user does not have `execute` permissions on the `application` directory or read permissions on the `error.log` file.
 
-In this example, the `application` directory is not executable by the Agent, therefore the Agent cannot list its files. Furthermore, the Agent does not have read permissions on the `error.log` file.
-Add the missing permissions via the [chmod command][6].
+1. Add the missing permissions using the [`chmod` command][1]:
 
-{{< img src="logs/agent-log-permission-ok.png" alt="Permission OK"  style="width:70%;">}}
+   ```bash
+   sudo -u datadog-agent chmod -R +rwx <path/to/folder>
+   ```
 
-**Note**: When adding the appropriate read permissions, make sure that these permissions are correctly set in your log rotation configuration. Otherwise, on the next log rotate, the Datadog Agent may lose its read permissions.
-Set permissions as `644` in the log rotation configuration to make sure the Agent has read access to the files.
+**Note**: Make sure that these permissions are correctly set in your log rotation configuration. Otherwise, on the next log rotate, the Datadog Agent might lose its read permissions. Set permissions as `644` in the log rotation configuration to make sure the Agent has read access to the files.
+
+[1]: https://en.wikipedia.org/wiki/Chmod
+{{% /tab %}}
+
+{{% tab "Windows PowerShell" %}}
+
+1. Retrieve the ACL permissions for the file:
+   ```powershell
+   > get-acl C:\application\logs\ | fl
+
+   Path   : Microsoft.PowerShell.Core\FileSystem::C:\app\application\
+   Owner  : BUILTIN\Administrators
+   Group  : EC2AMAZ-SGO963L\None
+   Access : NT AUTHORITY\SYSTEM Allow  FullControl
+            BUILTIN\Administrators Allow  FullControl
+   ...
+   ```
+   In this example, the `application` directory is not executable by the Agent.
+
+1. Run this PowerShell script to give read and execute privileges to `ddagentuser`:
+   ```powershell
+   $acl = Get-Acl <path\to\logs\folder>
+   $AccessRule = New-Object System.Security.AccessControl.FileSystemAccessRule("ddagentuser","ReadAndExecute","Allow")
+   $acl.SetAccessRule($AccessRule)
+   $acl | Set-Acl <path\to\logs\folder>
+   ```
+
+1. Restart the Agent service and check the status to see if the problem is resolved:
+   ```powershell
+   & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" restart-service
+   & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" status
+   ```
+{{% /tab %}}
+
+{{< /tabs >}}
 
 ## Permission issue and Journald
 
@@ -141,7 +179,6 @@ Check if logs appear in the [Datadog Live Tail][11]. If they appear in the Live 
 [3]: /agent/guide/agent-commands/#restart-the-agent
 [4]: /agent/logs/log_transport?tab=https#enforce-a-specific-transport
 [5]: /agent/guide/agent-commands/#agent-status-and-information
-[6]: https://en.wikipedia.org/wiki/Chmod
 [7]: /integrations/journald/
 [8]: https://codebeautify.org/yaml-validator
 [9]: /logs/guide/docker-logs-collection-troubleshooting-guide/
