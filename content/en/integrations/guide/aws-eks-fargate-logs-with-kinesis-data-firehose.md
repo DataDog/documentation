@@ -77,7 +77,7 @@ data:
 
 2. Attach an IAM policy to the pod execution role to allow the log router running on AWS Fargate to write to the Kinesis Data Firehose. You can use the example below, replacing the ARN in the **Resource** field with the ARN of your delivery stream.
 
- ```json
+{{< code-block lang="json" filename="allow_kinesis_put_permission.json" disable_copy="false" collapsible="false" >}}
 {
     "Version": "2012-10-17",
     "Statement": [
