@@ -120,7 +120,7 @@ To generate logs and test the Kinesis pipeline, deploy a sample workload to your
 
 1. Create a deployment manifest `sample-deployment.yaml`.
  
- ```yaml
+{{< code-block lang="yaml" filename="sample-deployment.yaml" disable_copy="false" collapsible="false" >}}
  apiVersion: apps/v1
  kind: Deployment
  metadata:
@@ -141,7 +141,7 @@ To generate logs and test the Kinesis pipeline, deploy a sample workload to your
          image: nginx
          ports:
          - containerPort: 80
- ```
+{{< /code-block >}}
  
  2. Use `kubectl` to apply the deployment manifest;
 
