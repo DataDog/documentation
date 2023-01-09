@@ -213,8 +213,7 @@ Configure extraction styles using the environment variable:
 
 Configure both styles using the environment variable:
 `DD_TRACE_PROPAGATION_STYLE=Datadog,B3`.
-Note that if either `DD_TRACE_PROPAGATION_STYLE_INJECT` or 
-`DD_TRACE_PROPAGATION_STYLE_EXTRACT` are set, those will take precedence.
+*Note*: `DD_TRACE_PROPAGATION_STYLE_INJECT` and `DD_TRACE_PROPAGATION_STYLE_EXTRACT`, if set, take precedence.
 
 The values of these environment variables are comma separated lists of
 header styles that are enabled for injection or extraction. By default,
