@@ -103,7 +103,7 @@ Define the configuration of your browser test.
 
    {{% managed-locations %}} 
 
-   You can also use the [Continuous Testing Tunnel][15] to easily trigger tests on your local development setup or in your CI/CD pipeline to test internal environments. 
+   You can also use the [Continuous Testing Tunnel][15] to trigger tests on your local development setup or in your CI/CD pipeline to test internal environments. 
   
 7. Set the **test frequency**: The intervals vary from every five minutes to once per week. To request one-minute frequency, [contact Support][2].
 
