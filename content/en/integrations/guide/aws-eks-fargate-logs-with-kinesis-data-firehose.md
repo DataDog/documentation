@@ -177,7 +177,7 @@ Logs from this configuration require some attributes to be remapped to maximize 
  | `kubernetes.docker_id` | `container_id` |
 
 4. After creating this pipeline, logs emitted by the sample app should be tagged like this example with the log attributes remapped to Kubernetes tags:
-{{< img src="integrations/guide/aws-eks-fargate-logs-with-kinesis-data-firehose/log_example_remapped.jpg" alt="Log Example Remapped" responsive="true">}}
+{{< img src="integrations/guide/aws-eks-fargate-logs-with-kinesis-data-firehose/log_example_remapped.jpg" alt="The detail view of a log in Datadog with the container_id, kube_container_name, kube_namespace, and pod_name tags" responsive="true">}}
 
 ## Further Reading
  {{< partial name="whats-next/whats-next.html" >}}
