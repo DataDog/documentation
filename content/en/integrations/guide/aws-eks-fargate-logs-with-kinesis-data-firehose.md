@@ -103,7 +103,7 @@ data:
 {{< /code-block >}}
 3. Retrieve the Fargate Pod Execution Role and attach the IAM policy to the Fargate Pod Execution Role
 
- ```bash
+{{< code-block lang="bash" filename="" disable_copy="false" collapsible="false" >}}
  # Retrieve the pod execution role
  POD_EXEC_ROLE=$(aws eks describe-fargate-profile \
    --cluster-name fargate-cluster \
@@ -111,9 +111,9 @@ data:
 
  # Attach the role policy
  aws iam attach-role-policy \
-         --policy-arn arn:aws:iam::<accountid>:policy/FluentBitEKSFargate \
+         --policy-arn arn:aws:iam::<ACCOUNTID>:policy/FluentBitEKSFargate \
          --role-name $POD_EXEC_ROLE
- ```
+{{< /code-block >}}
 ### Deploy sample application
 
 To generate logs and test the Kinesis pipeline, deploy a sample workload to your EKS Fargate cluster.
