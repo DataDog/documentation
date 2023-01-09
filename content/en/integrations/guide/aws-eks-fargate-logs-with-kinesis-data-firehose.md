@@ -96,11 +96,11 @@ data:
 {{< /code-block >}}
 3. Create the policy.
 
- ```bash
+{{< code-block lang="bash" filename="" disable_copy="false" collapsible="false" >}}
  $ aws iam create-policy \
          --policy-name FluentBitEKSFargate \
          --policy-document file://allow_kinesis_put_permission.json 
- ```
+{{< /code-block >}}
 3. Retrieve the Fargate Pod Execution Role and attach the IAM policy to the Fargate Pod Execution Role
 
  ```bash
