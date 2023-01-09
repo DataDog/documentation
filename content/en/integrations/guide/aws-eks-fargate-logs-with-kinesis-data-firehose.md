@@ -114,7 +114,7 @@ data:
          --policy-arn arn:aws:iam::<ACCOUNTID>:policy/FluentBitEKSFargate \
          --role-name $POD_EXEC_ROLE
 {{< /code-block >}}
-### Deploy sample application
+### Deploy a sample application
 
 To generate logs and test the Kinesis pipeline, deploy a sample workload to your EKS Fargate cluster.
 
