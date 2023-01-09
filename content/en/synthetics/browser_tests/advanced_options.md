@@ -18,7 +18,10 @@ further_reading:
 
 This page describes how Synthetic browser tests are self maintained and the various advanced options available in the recording workflow. 
 
-## Test maintenance
+
+## Locate an element
+
+## Datadog algorithm
 
 Flakiness is a pain point in end-to-end testing because tests occasionally fail when a frontend team implements changes, causing an identifier in your test to alert instead of an actual application issue.
 
@@ -28,7 +31,7 @@ When the test runs successfully, the browser test recomputes (or "self heals") a
 
 To ensure that your browser test does not validate an unexpected change, use [assertions][5] in your test creation. Assertions allow you to define what is and what is not expected behavior associated with the test step journey. 
 
-## User specified locator
+### User specified locator
 
 By default, browser tests use the Datadog locator system. When a test searches for a specific element to interact with (for example, a checkout button), instead of looking at an element with a specific XPath or a specific CSS selector, the test uses several different points of reference to locate the element (for example, XPath, text, classes, and nearby elements). 
 

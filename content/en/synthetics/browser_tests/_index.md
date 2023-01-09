@@ -103,9 +103,9 @@ Define the configuration of your browser test.
 
    {{% managed-locations %}} 
 
-   For more information about using the `datadog-ci` NPM package to trigger tests on a private application, see the [Continuous Testing Tunnel][15]. 
+   You can also use the [Continuous Testing Tunnel][15] to easily trigger tests on your local development setup or in your CI/CD pipeline to test internal environments. 
   
-7. Set the **test frequency** by selecting a value in the **Basic** tab or entering values in the **Advanced** tab. The intervals vary from every five minutes to once per week. To request one-minute frequency, [contact Support][2].
+7. Set the **test frequency**: The intervals vary from every five minutes to once per week. To request one-minute frequency, [contact Support][2].
 
 ## Variables
 
