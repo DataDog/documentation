@@ -89,7 +89,8 @@ build_preview:
     - make config
     - ./node_modules/.bin/jest --testPathPattern=assets/scripts/tests/
     - yarn run prebuild
-    - build_site
+    - ./node_modules/.bin/hugo -d ./public -s ./ -v --minify -D -F --environment preview --log --verbose --debug
+    - exit 1
     # remove service_checks json as we don't need to s3 push that..
     - rm -rf data/service_checks
     - in-isolation deploy_preview > logs/deploy.txt
