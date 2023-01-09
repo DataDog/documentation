@@ -183,4 +183,8 @@ Logs from this configuration require some attributes to be remapped to maximize 
 [1]: https://docs.aws.amazon.com/eks/latest/userguide/fargate-profile.html 
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/logs/pipelines
-
+[4]: /logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/?tab=kinesisfirehosedeliverystream#setup
+[5]: /logs/log_configuration/processors/?tab=ui#remapper
+[6]: https://kubernetes.io/docs/tasks/tools/
+[7]: https://aws.amazon.com/cli/
+[8]: https://stedolan.github.io/jq/
