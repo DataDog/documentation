@@ -46,7 +46,7 @@ The following steps outline the process for sending logs from a sample applicati
 See the [Send AWS service logs with the Datadog Kinesis Firehose Destination][4] guide to set up a Kinesis Firehose Delivery stream.  
 **Note**: Set the **Source** as `Direct PUT`.
  
-### Configure Fluent Bit for Firehose on EKS Fargate cluster
+### Configure Fluent Bit for Firehose on an EKS Fargate cluster
  
 1. Create the `aws-observabilty` namespace and apply the following configmap for Fluent Bit. Substitue the name of hte delivery stream you created in place of `PUT-DOG-abcde`
 
