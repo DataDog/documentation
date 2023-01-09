@@ -27,15 +27,28 @@ To control the functions whose invocations Datadog is monitoring, filter out par
 
 To use the UI to control which AWS Lambda functions Datadog is monitoring, navigate to the [AWS Integration page][5]. From the left sidebar, select the relevant AWS account, and navigate to the **Metric Collection tab**. Scroll down to the **Limit Metric Collection to Specific Resources** heading, and select Lambda from the **Select AWS Service** dropdown. You can then add tags as `key:value` sets to the field to the right.
 
-To exclude functions with a given tag, add a `!` before the tag key. For example:
-
-`!env:staging,!env:test1`
-
-This filter excludes anything that is tagged with `env:staging` or `env:test1`.
+See the [tags](#Tags) section below for more information about how to use tags in this field.
 
 ### API
 
-To use the API to control limit which AWS Lambda functions Datadog is monitoring, reference the [tag filter documentation][6].
+To use the API to control which AWS Lambda functions Datadog is monitoring, reference the [API tag filter documentation][6].
+
+### Tags
+
+Datadog accepts a comma-separated list of tags in the form `key:value`. These lists defines filter which will be used when collecting metrics from the associated AWS Service. These `key:value` pairs can be used to both whitelist and blacklist tags. To add a blacklisted tag, include a `!` before the tag key. Wildcards, such as `?` (for single characters) and `*` (for multiple characters), also can be used.
+
+The filter only will exclude resources where all whitelisted tags are missing — or, in other words, where the list of whitelisted tags forms an "OR" statement.
+
+For example: `datadog:monitored,env:production`
+
+This filter only will collect EC2 instances that contain the tag `datadog:monitored` OR the tag `env:production`.
+
+If you add a blacklisted tag to the list, it will take precedence — or, in other words, add an "AND" statement.
+
+For example: `datadog:monitored,env:production,instance-type:c1.*,!region:us-east-1`
+
+This filter will only collect EC2 instances that contain the tag
+`datadog:monitored` OR the tag `env:production` OR an instance-type tag with a `c1.*` value AND NOT a `region:us-east-1` tag.
 
 ## Troubleshooting
 
