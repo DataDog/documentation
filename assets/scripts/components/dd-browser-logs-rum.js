@@ -27,7 +27,7 @@ if (window.DD_RUM) {
             trackFrustrations: true,
             enableExperimentalFeatures: ["clickmap"],
             sampleRate: 50,
-            premiumSampleRate: 50,
+            sessionReplaySampleRate: 50,
             allowedTracingOrigins: [window.location.origin],
             internalAnalyticsSubdomain: 'iam-rum-intake'
         });
