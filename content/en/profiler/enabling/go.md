@@ -22,7 +22,9 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 
 ## Requirements
 
-The Datadog Profiler requires Go 1.12+.
+The Datadog Profiler requires Go 1.12+. For Endpoints profiling.
+
+For Code Hotspots and Endpoints profiling, use Go version 1.18 or greater and `dd-trace-go` version 1.37.0 or greater.
 
 Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
 

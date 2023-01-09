@@ -37,6 +37,13 @@ The following profiling features are available depending on your Python version.
 
 The installation requires pip version 18 or above.
 
+The following profiling features are available in the following minimum versions of the `dd-trace-py` library:
+
+|      Feature         | Required `dd-trace-py` version          |
+|----------------------|-----------------------------------------|
+| Code Hotspots        | 0.44.0 or greater                       |
+| Endpoints            | 0.54.0 or greater                       |
+
 ## Installation
 
 Install `ddtrace`, which provides both tracing and profiling functionalities:
