@@ -145,9 +145,9 @@ To generate logs and test the Kinesis pipeline, deploy a sample workload to your
  
  2. Use `kubectl` to apply the deployment manifest;
 
-  ```bash
-  $ kubectl apply -f sammple-deployment.yaml
-  ```
+  {{< code-block lang="bash" filename="" disable_copy="false" collapsible="false" >}}
+  $ kubectl apply -f sample-deployment.yaml
+  {{< /code-block >}}
 
 ### Remap attributes for log correlation
 
