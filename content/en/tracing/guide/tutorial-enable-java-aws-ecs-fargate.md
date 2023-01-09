@@ -154,13 +154,13 @@ terraform destroy{{< /code-block >}}
 
 Now that you have a working Java application, configure it to enable tracing.
 
-1. Add the Java tracing package to your project. Because the Agent runs on EC2 instances, ensure that the Dockerfiles are configured properly, and there is no need to install anything. Open the `notes/dockerfile.notes.maven` file, and uncomment the line that downloads `dd-java-agent`:
+1. Add the Java tracing package to your project. Because the Agent runs on EC2 instances, ensure that the Dockerfiles are configured properly, and there is no need to install anything. Open the `notes/dockerfile.notes.maven` file and uncomment the line that downloads `dd-java-agent`:
 
    ```
    RUN curl -Lo dd-java-agent.jar https://dtdg.co/latest-java-tracer
    ```
 
-2. Within the same `notes/dockerfile.notes.maven` file, and comment out the `ENTRYPOINT` line for running without tracing. Then uncomment the `ENTRYPOINT` line, which runs the application with tracing enabled:
+2. Within the same `notes/dockerfile.notes.maven` file, comment out the `ENTRYPOINT` line for running without tracing. Then uncomment the `ENTRYPOINT` line, which runs the application with tracing enabled:
 
    ```
    ENTRYPOINT ["java" , "-javaagent:../dd-java-agent.jar", "-Ddd.trace.sample.rate=1", "-jar" , "target/notes-0.0.1-SNAPSHOT.jar"]
