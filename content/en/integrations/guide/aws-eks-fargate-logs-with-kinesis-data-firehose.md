@@ -30,7 +30,7 @@ The following are key differences between using Kinesis Data Firehose and CloudW
 
 ## Requirements
 1. An EKS cluster with a [Fargate Profile][1]. In this guide, the cluster is named `fargate-cluster` with a fargate profile nameed `fargate-profile` applied to the namespace `fargate-namespace`.
-2. The following command line tools: `kubectl`, `aws`, `jq`
+2. The following command line tools: `[kubectl][6]`, `[aws][7]`, `[jq][8]`
 
 ## Setup
  
