@@ -16,22 +16,19 @@ Cloud Security Posture Management is not currently available in this site.
 </div>
 {{< /site-region >}}
 
-Cloud Security Posture Management (CSPM) [out-of-the-box detection rules][1] evaluate the configuration of your cloud resources and identifies potential misconfigurations so you can immediately take steps to remediate.
+Cloud Security Posture Management (CSPM) [out-of-the-box detection rules][1] evaluate the configuration of your cloud resources and identify potential misconfigurations so you can immediately take steps to remediate.
 
 The detection rules follow the same [conditional logic][2] as all Datadog Security detection rules. For CSPM, each rule maps to controls within one or more [compliance frameworks or industry benchmarks][4]. 
 
-Datadog continuously develops new default rules, which are automatically imported into your account.
-
-Datadog Cloud Security Posture Management (CSPM) uses the following rule types to validate the configuration of your cloud infrastructure:
+CSPM uses the following rule types to validate the configuration of your cloud infrastructure:
 
 - [**Cloud configuration**][1]: These detection rules analyze the configuration of resources within your cloud environment. For example, the [Cloudfront distribution is encrypted][3] rule evaluates an AWS Cloudfront distribution's configuration for encrypted status.
 - [**Infrastructure configuration**][5]: These detection rules analyze your containers and Kubernetes clusters to find configuration issues, as defined in the popular CIS compliance benchmarks for Docker and Kubernetes. For example, the [/etc/default/docker file permissions are set to 644 or more restrictively][6] rule evaluates Docker file permissions running on a host.
 
-
-
-
-
 Customization of a cloud configuration query directly is not supported at this time, but you can customize how you environment is [scanned][4] for each rule.
+
+Datadog continuously develops new default rules, which are automatically imported into your account.
+
 
 ## Customize how your environment is scanned by each rule
 
@@ -53,7 +50,7 @@ From the [Rules][13] page, you can add notification targets. The complete list o
 - [Webhooks][19]
 - Email
 
-In the “Notify” section, configure zero or more notification targets for each rule case. You cannot edit the preset severity.
+In the **Set severity and notifications** section, configure zero or more notification targets for each rule case. You cannot edit the preset severity. See [Notifications][7] for more information.
 
 {{< img src="security/cspm/frameworks_and_benchmarks/notification.png" alt="Select a severity and notification target" >}}
 
@@ -71,3 +68,11 @@ To extend the rules being applied to your environment to evaluate your security 
 [4]: /security/cspm/frameworks_and_benchmarks
 [5]: /security/default_rules/#cat-posture-management-infra
 [6]: https://docs.datadoghq.com/security_monitoring/default_rules/cis-docker-1.2.0-3.22/
+[7]: /security/notifications/
+[13]: https://app.datadoghq.com/security/configuration/rules/
+[14]: /integrations/slack/
+[15]: /integrations/jira/
+[16]: /integrations/pagerduty
+[17]: /integrations/servicenow/
+[18]: /integrations/microsoft_teams/
+[19]: /integrations/webhooks/
