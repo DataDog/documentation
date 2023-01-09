@@ -72,7 +72,7 @@ data:
         Name kinesis_firehose
         Match kube.*
         region us-west-2
-        delivery_stream PUT-DOG-abcde
+        delivery_stream <YOUR-DELIVERY-STREAM-NAME>
  ```
 
 2. Provide the relevant IAM permissions for the log router running on AWS Fargate to write to the Kinesis Data Firehose by attaching an IAM policy to the pod execution role.
