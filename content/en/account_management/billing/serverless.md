@@ -35,15 +35,15 @@ To use the API to control which AWS Lambda functions Datadog is monitoring, refe
 
 ### Tags
 
-Datadog accepts a comma-separated list of tags in the form `key:value`. These lists defines filter which will be used when collecting metrics from the associated AWS Service. These `key:value` pairs can be used to both whitelist and blacklist tags. To add a blacklisted tag, include a `!` before the tag key. Wildcards, such as `?` (for single characters) and `*` (for multiple characters), also can be used.
+Datadog accepts a comma-separated list of tags in the form `key:value`. These lists defines filter which will be used when collecting metrics from the associated AWS Service. These `key:value` pairs can be used to both allow and exclude tags. To indicate an exclusion, add a `!` before the tag key. Wildcards, such as `?` (for single characters) and `*` (for multiple characters), also can be used.
 
-The filter only will exclude resources where all whitelisted tags are missing—or, in other words, where the list of whitelisted tags forms an "OR" statement.
+The filter only will exclude resources where all allowed tags are missing—or, in other words, where the list of allowed tags forms an "OR" statement.
 
 For example: `datadog:monitored,env:production`
 
 This filter only will collect EC2 instances that contain the tag `datadog:monitored` OR the tag `env:production`.
 
-If you add a blacklisted tag to the list, it will take precedence—or, in other words, add an "AND" statement.
+If you add an exclusion tag to the list, it will take precedence—or, in other words, add an "AND" statement.
 
 For example: `datadog:monitored,env:production,instance-type:c1.*,!region:us-east-1`
 
