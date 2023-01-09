@@ -152,8 +152,6 @@ Depuis un dashboard, cliquez sur l'icône en forme d'engrenage (en haut à droit
 | Import&nbsp;dashboard&nbsp;JSON | Coller ou importer votre fichier JSON vers le dashboard. Cette option remplace tout le contenu du dashboard. Si le fichier JSON se trouve déjà dans votre presse-papiers, utilisez `Ctrl + V` (ou `Cmd + V` sur un Mac). |
 | Export&nbsp;dashboard&nbsp;JSON | Télécharger un fichier JSON contenant le JSON de votre dashboard.                                                                                                                |
 
-{{< img src="dashboards/copy_dashboard.png" alt="Copier un dashboard" style="width:30%;">}}
-
 #### Delete dashboard
 
 Utilisez cette option pour supprimer définitivement votre dashboard. Vous serez invité à confirmer votre choix.

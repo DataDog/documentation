@@ -79,13 +79,13 @@ Additionally, you can click the tags in the metric dropdown used for [choosing t
 
 Regardless of the options chosen above, there is always some aggregation of data due to the physical size constraints of the window holding the graph. If a metric is updated every second, and you are looking at 4 hours of data, you need 14,400 points to display everything. Each graph displayed has about 300 points shown at any given time. Therefore, each point displayed on the screen represents 48 data points.
 
-In practice, metrics are collected by the Agent every 15-20 seconds. So one day's worth of data is 4,320 data points. If you display a day's worth of data on single graph, Datadog automatically rolls up the data. For more details, see the [Metrics Introduction][9].
+In practice, metrics are collected by the Agent every 15-20 seconds. So one day's worth of data is 4,320 data points. If you display a day's worth of data on single graph, Datadog automatically rolls up the data. For more details on time aggregation, see the [Metrics Introduction][9]. See the [Rollup][10] documentation to learn more about the rollup intervals and how Datadog automatically rolls up data points.
 
-To manually rollup the data, use the [rollup function][10]. Click the plus sign to the right of the aggregation group and choose `rollup` from the dropdown. Then choose how you want to aggregate the data and the interval in seconds.
+To manually rollup the data, use the [rollup function][11]. Click the sigma icon to add a function and select `rollup` from the dropdown menu. Then choose how you want to aggregate the data and the interval in seconds. 
 
 This query creates a single line that represents the total available disk space, on average, across all machines rolled up in 1 min buckets:
 
-{{< img src="dashboards/querying/references-graphing-rollup-example-2.png" alt="rollup example" style="width:90%;">}}
+{{< img src="dashboards/querying/references-graphing-rollup-example-3.png" alt="rollup example of system.disk.free metric highlighting sigma add function icon" style="width:100%;">}}
 
 When switching to the JSON view, the query looks like this:
 
@@ -136,13 +136,13 @@ For more about using the JSON view, see [Graphing with JSON][1].
 
 ### Advanced graphing
 
-Depending on your analysis needs, you may choose to apply other mathematical functions to the query. Examples include rates and derivatives, smoothing, and others. See the [list of available functions][11].
+Depending on your analysis needs, you may choose to apply other mathematical functions to the query. Examples include rates and derivatives, smoothing, and others. See the [list of available functions][12].
 
 Datadog also supports the ability to graph your metrics, logs, traces, and other data sources with various arithmetic operations. Use: `+`, `-`, `/`, and `*` to modify the values displayed on your graphs. This syntax allows for both integer values and arithmetic using multiple metrics.
 
 To graph metrics separately, use the comma (`,`). For example, `a, b, c`.
 
-**Note**: Queries using commas are only supported in visualizations, they do not work on monitors. Use [boolean operators][12] or arithmetic operations to combine multiple metrics in a monitor.
+**Note**: Queries using commas are only supported in visualizations, they do not work on monitors. Use [boolean operators][13] or arithmetic operations to combine multiple metrics in a monitor.
 
 #### Metric arithmetic using an integer
 
@@ -209,7 +209,7 @@ If your level of detail is resource or span, some widget types also require you 
 
 ### Event overlays
 
-View event correlations by using the **Event Overlays** section in the graphing editor. In the search field, enter any text or structured search query. For details on searching, see the Datadog [Event Query Language][13].
+View event correlations by using the **Event Overlays** section in the graphing editor. In the search field, enter any text or structured search query. For details on searching, see the Datadog [Event Query Language][14].
 
 ## Further Reading
 
@@ -223,8 +223,9 @@ View event correlations by using the **Event Overlays** section in the graphing 
 [6]: https://app.datadoghq.com/metric/summary
 [7]: /metrics/advanced-filtering/
 [8]: /getting_started/tagging/
-[9]: /metrics/introduction/
-[10]: /dashboards/functions/rollup/
-[11]: /dashboards/functions/#apply-functions-optional
-[12]: /metrics/advanced-filtering/#boolean-filtered-queries
-[13]: /events/#event-query-language
+[9]: /metrics/#time-aggregation
+[10]: /dashboards/functions/rollup/#rollup-interval-enforced-vs-custom
+[11]: /dashboards/functions/rollup/
+[12]: /dashboards/functions/#apply-functions-optional
+[13]: /metrics/advanced-filtering/#boolean-filtered-queries
+[14]: /events/#event-query-language
