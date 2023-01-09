@@ -315,11 +315,11 @@ The following steps walk you through adding annotations to the code to trace som
 
 5. Update your Maven build by opening `notes/pom.xml` and uncommenting the lines configuring dependencies for manual tracing. The `dd-trace-api` library is used for the `@Trace` annotations, and `opentracing-util` and `opentracing-api` are used for manual span creation.
 
-6. Rebuild the containers:
+6. Rebuild the containers (on Linux use `service-docker-compose-linux.yaml`):
 
    ```sh
-   docker-compose -f all-docker-compose.yaml build notes
-   docker-compose -f all-docker-compose.yaml up notes
+   docker-compose -f service-docker-compose.yaml build notes
+   docker-compose -f service-docker-compose.yaml up notes
    ```
 
 7. Resend some HTTP requests, specifically some `GET` requests.
