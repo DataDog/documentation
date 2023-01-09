@@ -107,6 +107,7 @@ Créez le schéma suivant :
 ```sql
 CREATE SCHEMA IF NOT EXISTS datadog;
 GRANT EXECUTE ON datadog.* to datadog@'%';
+GRANT CREATE TEMPORARY TABLES ON datadog.* TO datadog@'%';
 ```
 
 Créez la procédure `explain_statement` afin d'activer la collecte de plans d'exécution par l'Agent :
