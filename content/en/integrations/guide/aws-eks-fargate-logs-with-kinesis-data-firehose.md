@@ -19,11 +19,6 @@ AWS Fargate on EKS provides a fully managed experience for running Kubernetes wo
 
 {{< img src="integrations/guide/aws-eks-fargate-logs-with-kinesis-data-firehose/log_streaming_diagram.png" alt="Diagram of the log flow depicting a Fargate EKS cluster sending container logs through Fluentbit log router to Kinesis data firehose and an S3 backup bucket within AWS and then on to Datadog" responsive="true">}}
  
-1. Create a Kinesis Data Firehose delivery stream that delivers logs to Datadog, along with an S3 Backup for any failed log deliveries.
-2. Configure Fluentbit for Firehose on EKS Fargate
-3. Deploy sample application.
-4. Apply remapper processor for correlation using kubernetes tags and containe_id tag.
-5. Once you create these resources, Datadog immediately starts receiving the streamed logs and displays them on the Datadog site with no additional configuration needed.
    
 ### Kinesis Data Firehose vs Cloudwatch log forwarding {#firehose-vs-cloudwatch}
 
