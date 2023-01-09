@@ -16,9 +16,9 @@ OTLP Ingest in the Agent is a way to send telemetry data directly from applicati
 
 OTLP Ingest in the Agent allows you to use observability features in the Datadog Agent. Because the application is instrumented with OpenTelemetry SDK, some Datadog Library specific features aren't available for the ingested data including Application Security Management, Continuous Profiler, Runtime Metrics, and Ingestion Rules.
 
-To get started, you first [instrument your application][3] with OpenTelemetry SDKs. Then, export the telemetry data in OTLP format to the Datadog Agent. Configuring this varies depending on the kind of infrastructure your service is deployed on, as described on the page below.
+To get started, you first [instrument your application][3] with OpenTelemetry SDKs. Then, export the telemetry data in OTLP format to the Datadog Agent. Configuring this varies depending on the kind of infrastructure your service is deployed on, as described on the page below. Although the aim is to be compatible with the latest OTLP version, the OTLP Ingest in the Agent is not compatible with all OTLP versions. Verify OTLP version compatibility through the [Agent changelog][4]. 
 
-Read the OpenTelemetry instrumentation documentation to understand how to point your instrumentation to the Agent. The `receiver` section described below follows the [OpenTelemetry Collector OTLP receiver configuration schema][4].
+Read the OpenTelemetry instrumentation documentation to understand how to point your instrumentation to the Agent. The `receiver` section described below follows the [OpenTelemetry Collector OTLP receiver configuration schema][5].
 
 {{< img src="metrics/otel/otlp_ingestion_update.png" alt="OTel SDKs/Libraries, Datadog Trace Library, Datadog Integrations -> Datadog Agent -> Datadog" style="width:100%;">}}
 
@@ -162,7 +162,7 @@ This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` 
 {{% /tab %}}
 {{< /tabs >}}
 
-There are many other environment variables and settings supported in the Datadog Agent. To get an overview of them all, see [the configuration template][5].
+There are many other environment variables and settings supported in the Datadog Agent. To get an overview of them all, see [the configuration template][6].
 
 ## Sending OTLP traces from the application to Datadog Agent
 
@@ -216,5 +216,6 @@ There are many other environment variables and settings supported in the Datadog
 [1]: https://opentelemetry.io/docs/instrumentation/
 [2]: /metrics/open_telemetry/otlp_metric_types/
 [3]: https://opentelemetry.io/docs/concepts/instrumenting/
-[4]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/config.md
-[5]: https://github.com/DataDog/datadog-agent/blob/7.35.0/pkg/config/config_template.yaml
+[4]: https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst
+[5]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/config.md
+[6]: https://github.com/DataDog/datadog-agent/blob/7.35.0/pkg/config/config_template.yaml
