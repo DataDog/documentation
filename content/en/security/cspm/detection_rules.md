@@ -61,7 +61,7 @@ On the [Rules][13] page, select a rule to open its details page. In the **Set se
 
 To extend the rules being applied to your environment to evaluate your security posture, you can clone detection rules and edit the copies, and you can create your own rules from scratch. See [Custom Rules][20] for more information.
 
-**Note**: Creating and using custom CSPM rules is a beta feature, available only for Google Cloud Platform (GCP).
+**Note**: Creating and using custom CSPM rules is a beta feature, available for select Amazon Web Services (AWS), Microsoft Azure, and Google Cloud Platform (GCP) cloud resources.
 
 *Add screenshot here*
 
