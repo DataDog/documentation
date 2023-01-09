@@ -106,6 +106,7 @@ GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```sql
 CREATE SCHEMA IF NOT EXISTS datadog;
 GRANT EXECUTE ON datadog.* to datadog@'%';
+GRANT CREATE TEMPORARY TABLES ON datadog.* TO datadog@'%';
 ```
 
 Agent が説明プランを収集できるようにするには、`explain_statement` プロシージャを作成します。
