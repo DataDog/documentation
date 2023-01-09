@@ -366,12 +366,9 @@ list_orphaned_translations:manual:
   <<: *base_template
   stage: post-deploy
   cache: {}
-  environment: "live"
   script:
     - ./local/bin/py/orphaned_translations.py
   when: manual
-  only:
-    - /.+?\/[a-zA-Z0-9_-]+/
 
 test_missing_tms_live:
   <<: *base_template
