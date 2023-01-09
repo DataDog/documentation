@@ -2606,30 +2606,35 @@ main:
     parent: cspm
     identifier: cspm_getting_started
     weight: 101
+  - name: Detection Rules
+    url: security/cspm/detection_rules
+    parent: cspm
+    identifier: cspm_detection_rules
+    weight: 102
   - name: Custom Rules
     url: security/cspm/custom_rules
     parent: cspm
     identifier: custom_rules
-    weight: 102
+    weight: 103
   - name: Cloud Resources Schema
     url: security/cspm/custom_rules/schema/
     parent: cspm
     identifier: cspm_schema_gcp_test
-    weight: 103
+    weight: 104
   - name: Findings Reports
     url: security/cspm/frameworks_and_benchmarks
     parent: cspm
-    weight: 104
+    weight: 105
   - name: Security Findings Explorer
     url: /security/cspm/findings
     parent: cspm
     identifier: cspm_findings_explorer
-    weight: 105
+    weight: 106
   - name: Signals Explorer
     url: /security/cspm/signals_explorer/
     parent: cspm
     identifier: signals
-    weight: 106
+    weight: 107
   - name: Cloud Workload Security
     url: security/cloud_workload_security/
     parent: csm

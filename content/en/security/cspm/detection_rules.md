@@ -16,7 +16,7 @@ Cloud Security Posture Management is not currently available in this site.
 </div>
 {{< /site-region >}}
 
-Cloud Security Posture Management (CSPM) [out-of-the-box detection rules][1] evaluate the configuration of your cloud resources and identify potential misconfigurations so you can immediately take steps to remediate.
+Cloud Security Posture Management (CSPM) [out-of-the-box detection rules][1] evaluate the configuration of your cloud resources and identify potential misconfigurations so you can immediately take steps to remediate. 
 
 The detection rules follow the same [conditional logic][2] as all Datadog Security detection rules. For CSPM, each rule maps to controls within one or more [compliance frameworks or industry benchmarks][4].
 
@@ -25,13 +25,9 @@ CSPM uses the following rule types to validate the configuration of your cloud i
 - [**Cloud configuration**][1]: These detection rules analyze the configuration of resources within your cloud environment. For example, the [Cloudfront distribution is encrypted][3] rule evaluates an AWS Cloudfront distribution's configuration for encrypted status.
 - [**Infrastructure configuration**][5]: These detection rules analyze your containers and Kubernetes clusters to find configuration issues, as defined in the popular CIS compliance benchmarks for Docker and Kubernetes. For example, the [/etc/default/docker file permissions are set to 644 or more restrictively][6] rule evaluates Docker file permissions running on a host.
 
-Customization of a cloud configuration query directly is not supported at this time, but you can customize how you environment is [scanned][4] for each rule.
-
-Datadog continuously develops new default rules, which are automatically imported into your account.
-
 ## Customize how your environment is scanned by each rule
 
-*ex: all resources tagged with env:dev should not be assessed for PCI)*
+Customization of a cloud configuration query directly is not supported at this time, but you can customize how your environment is scanned for each rule. For example, you can exclude resources tagged with `env:dev` from being assessed by rules associated with the PCI framework.
 
 On the [Rules][13] page, select a rule to open its details page. Under **Exclude benign activity with suppression queries**, set the filtering logic for how the rule scans your environment.
 
