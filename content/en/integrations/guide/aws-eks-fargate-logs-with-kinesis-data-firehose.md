@@ -17,7 +17,7 @@ further_reading:
 
 AWS Fargate on EKS provides a fully managed experience for running Kubernetes workloads. Kinesis Data Firehose can be used with EKS's Fluentbit log router to collect logs in Datadog.
 
-{{< img src="integrations/guide/aws-eks-fargate-logs-with-kinesis-data-firehose/log_streaming_diagram.png" alt="Diagram of the log flow" responsive="true">}}
+{{< img src="integrations/guide/aws-eks-fargate-logs-with-kinesis-data-firehose/log_streaming_diagram.png" alt="Diagram of the log flow depicting a Fargate EKS cluster sending container logs through Fluentbit log router to Kinesis data firehose and an S3 backup bucket within AWS and then on to Datadog" responsive="true">}}
  
 1. Create a Kinesis Data Firehose delivery stream that delivers logs to Datadog, along with an S3 Backup for any failed log deliveries.
 2. Configure Fluentbit for Firehose on EKS Fargate
