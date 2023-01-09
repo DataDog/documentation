@@ -45,6 +45,9 @@ DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash 
 
 To send data to a Datadog site other than `datadoghq.com`, replace the `DD_SITE` environment variable with [your Datadog site][6].
 
+Ensure your Agent is configured to receive trace data from containers. Open its [configuration file][15] and ensure `apm_config:` is uncommented, and `apm_non_local_traffic` is uncommented and set to `true`.
+
+
 If you have an Agent already installed on the host, ensure it is at least version 7.28. The minimum version of Datadog Agent required to use `ddtrace` to trace Python applications is documented in the [tracing library developer docs][7].
 
 
@@ -422,3 +425,4 @@ If you're not receiving traces as expected, set up debug mode in the `ddtrace` P
 [12]: /tracing/trace_collection/custom_instrumentation/python/
 [13]: /tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode
 [14]: /agent/guide/agent-commands/?tab=agentv6v7#start-the-agent
+[15]: /agent/guide/agent-configuration-files/?tab=agentv6v7
