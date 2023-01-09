@@ -152,7 +152,7 @@ To generate logs and test the Kinesis pipeline, deploy a sample workload to your
 ### Remap attributes for log correlation
 
 Logs from this configuration require some attributes to be remapped to maximize consistency with standard Kubernetes tags in Datadog.  
-1. Go to [Datadog Log Pipelines][3]
+1. Go to the [Datadog Log Pipelines][3] page.
 2. Create a new pipeline with **Name** `EKS Fargate Log Pipeline` filtered on **Tags:** `service:aws source:aws`
 3. Create 4 Remapper processors to remap the following Attributes to Tag Keys:
  | Attribute to remap | Target Tag Key |
