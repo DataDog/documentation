@@ -16,8 +16,6 @@ When you [write custom rules for CSPM][1], you specify the resource types that a
     {{< nextlink href="/security/cspm/custom_rules/aws_dynamodb/" >}}<code>aws_dynamodb</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/aws_ebs_snapshot/" >}}<code>aws_ebs_snapshot</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/aws_ebs_volume/" >}}<code>aws_ebs_volume</code>{{< /nextlink >}}
-    {{< nextlink href="/security/cspm/custom_rules/aws_elb_load_balancer/" >}}<code>aws_elb_load_balancer</code>{{< /nextlink >}}
-    {{< nextlink href="/security/cspm/custom_rules/aws_elbv2_load_balancer/" >}}<code>aws_elbv2_load_balancer</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/aws_eks_cluster/" >}}<code>aws_eks_cluster</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/aws_iam_credential_report/" >}}<code>aws_iam_credential_report</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/aws_iam_server_certificate/" >}}<code>aws_iam_server_certificate</code>{{< /nextlink >}}
@@ -38,7 +36,6 @@ When you [write custom rules for CSPM][1], you specify the resource types that a
     {{< nextlink href="/security/cspm/custom_rules/azure_postgresql_firewall_rule/" >}}<code>azure_postgresql_firewall_rule</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/azure_security_center_auto_provisioning/" >}}<code>azure_security_center_auto_provisioning</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/azure_subscription/" >}}<code>azure_subscription</code>{{< /nextlink >}}
-    {{< nextlink href="/security/cspm/custom_rules/azure_ad_security_defaults_policy/" >}}<code>azure_ad_security_defaults_policy</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/azure_log_analytics_workspace/" >}}<code>azure_log_analytics_workspace</code>{{< /nextlink >}}
 {{< /whatsnext >}}
 ## GCP
