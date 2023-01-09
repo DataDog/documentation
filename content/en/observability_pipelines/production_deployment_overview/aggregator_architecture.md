@@ -66,7 +66,7 @@ Make it easy to send data to your Observability Pipelines Worker aggregator by i
 
 Use the Observability Pipelines Worker aggregator for processing most of your data, so that the responsibility is shifted away from your agents. This reduces your dependence on them, making it easier to change agents later on. 
 
-### Routing Data
+### Routing data
 
 #### Choose a system of record 
 
@@ -96,7 +96,7 @@ Most Observability Pipelines Worker workloads are CPU constrained and benefit fr
 | GCP           | Latest generation Intel Xeon, 8 vCPUs (recommended), at least 4 vCPUs |
 | Private       | Latest generation Intel Xeon, 8 vCPUs (recommended), at least 4 vCPUs |
 
-### CPU Architectures
+### CPU architectures
 
 Observability Pipelines Worker runs on modern CPU architectures. Benchmarks indicate that X86_64 architectures offer the best return on performance for Observability Pipelines Worker.
 
@@ -190,7 +190,7 @@ When configuring clients and load balancers, the following general settings are 
 
 ##### Load balancer hot spots
 
-Load balancing hot spots refer to one or more Observability Pipelines Worker instances receiving disproportionate traffic. Hot spots usually happens due to one of two reasons:
+Load balancing hot spots occur when one or more Observability Pipelines Worker instances receives disproportionate traffic. Hot spots usually happen due to one of two reasons:
 
 1. A substantial amount of traffic is being sent over a single connection.
 2. Traffic in one availability zone is much higher than in the others.
@@ -250,7 +250,7 @@ Be sure to review your own Observability Pipelines Worker configuration for the 
 
 #### Protocols
 
-The Observability Pipelines Worker is designed to receive and send data over a variety of protocols. Datadog recommends using the protocol best supported for your integration. Choose HTTP-based protocols for their application-level delivery acknowledgments and ubiquitous support across platforms when possible. Otherwise, choose TCP-based protocols. We do not recommend UDP, as there is risk of losing data. 
+The Observability Pipelines Worker is designed to receive and send data over a variety of protocols. Using the protocol best supported for your integration is recommended. Choose HTTP-based protocols for their application-level delivery acknowledgments and ubiquitous support across platforms when possible. Otherwise, choose TCP-based protocols. UDP is not recommended, as there is risk of losing data. 
 
 ##### Observability Pipelines Worker to Observability Pipelines Worker communication
 
