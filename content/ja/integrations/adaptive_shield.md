@@ -60,6 +60,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Adaptive Shield
+  uninstallation: README.md#Uninstallation
 ---
 
 ## 概要
@@ -75,7 +76,7 @@ Adaptive Shield とのインテグレーションにより、構成ドリフト�
 4. 認可するには **OAuth** をクリックします。
 
 
-### アンインストール
+## アンインストール
 
 このインテグレーションをアンインストールすると、それまでの認可はすべて取り消されます。
 

@@ -6,6 +6,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/metrics-without-limits
   tag: ブログ
   text: Metrics without LimitsTM でカスタムメトリクスのボリュームをダイナミックにコントロール
+- link: /observability_pipelines/guide/custom-metrics-governance
+  tag: ドキュメント
+  text: 観測可能性パイプラインを使用したカスタムメトリクスの管理
 kind: documentation
 title: Metrics without LimitsTM
 ---
@@ -96,7 +99,7 @@ Agent やコードレベルの変更を必要とせず、いつでも集計の�
 [5]: /ja/api/latest/metrics/#tag-configuration-cardinality-estimator
 [6]: /ja/metrics/#time-and-space-aggregation
 [7]: /ja/metrics/summary/#configuration-of-multiple-metrics
-[8]: /ja/account_management/billing/custom_metrics/?tab=countrategauge
+[8]: /ja/account_management/billing/custom_metrics/
 [9]: https://app.datadoghq.com/billing/usage
 [10]: /ja/account_management/billing/usage_metrics/
 [11]: /ja/account_management/rbac/permissions/?tab=ui#metrics

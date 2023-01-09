@@ -225,7 +225,7 @@ To display your list of variables, type `{{` in your desired field:
 
 A test is considered `FAILED` if it does not satisfy one or more assertions or if the request prematurely failed. In some cases, the test can fail without testing the assertions against the endpoint. 
 
-These reasons include the following:
+The most common errors include the following:
 
 `CONNREFUSED`
 : No connection could be made because the target machine actively refused it.

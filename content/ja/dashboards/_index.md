@@ -175,8 +175,6 @@ Terraform で Dashboards を管理する場合、最新バージョンの Datado
 | Import&nbsp;dashboard&nbsp;JSON | JSON をダッシュボードに貼り付ける、またはインポートします。このオプションを選択すると、ダッシュボードのすべてのコンテンツが上書きされます。JSON がすでにクリップボードにある場合は、`Ctrl V` (Mac の場合は `Cmd V`) を使用します。 |
 | Export&nbsp;dashboard&nbsp;JSON | ダッシュボードの JSON を含む JSON ファイルをダウンロードします。                                                                                                                |
 
-{{< img src="dashboards/copy_dashboard.png" alt="ダッシュボードのコピー" style="width:30%;">}}
-
 #### ダッシュボードを削除
 
 このオプションを使うと、ダッシュボードを完全に削除できます。このとき、削除の確認を求められます。
