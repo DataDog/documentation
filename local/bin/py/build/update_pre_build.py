@@ -62,7 +62,7 @@ class Build:
         # Depending of the action attached to the content the proper function is called
         for content in list_of_contents:
             try:
-                use_cached = content.get('options', {}).get('use_cached', False)
+                use_cached = content.get('options', {}).get('cached', False)
                 
                 if use_cached:
                     cached_content.append(content)

@@ -14,7 +14,7 @@
       options:
         dest_path: '/integrations/'
         file_name: 'jenkins.md'
-        use_cached: true
+        cached: true
         front_matters:
           dependencies: ["https://github.com/jenkinsci/datadog-plugin/blob/master/README.md"]
           public_title: Datadog-Jenkins Integration
@@ -87,6 +87,7 @@
       - docs/dev/*.md
       options:
         dest_dir: '/developers/integrations/'
+        cached: true
         path_to_remove: 'docs/dev/'
         front_matters:
           dependencies: [ "https://github.com/DataDog/integrations-core/blob/master/docs/dev/" ]
@@ -140,7 +141,7 @@
       options:
         dest_path: '/agent/basic_agent_usage/'
         file_name: 'ansible.md'
-        use_cached: true
+        cached: true
         front_matters:
           title: Ansible
           kind: documentation
@@ -156,7 +157,7 @@
       options:
         dest_path: '/agent/basic_agent_usage/'
         file_name: 'chef.md'
-        use_cached: true
+        cached: true
         front_matters:
           title: Chef
           kind: documentation
@@ -765,6 +766,7 @@
         - docs/rum_collection/*
       options:
         dest_dir: '/real_user_monitoring/ios/'
+        cached: true
         path_to_remove: 'docs/rum_collection/'
         front_matters:
           dependencies: [ "https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/" ]
@@ -1137,7 +1139,6 @@
         - "application-security/*.md"
       options:
         dest_path: '/security/default_rules/'
-        use_cached: true
 
   - repo_name: apps
     contents:
@@ -1177,7 +1178,7 @@
         - "domains/workflow/actionplatform/apps/tools/manifest_generator/manifest.schema.json"
         - "domains/workflow/actionplatform/apps/wf-actions-worker/src/runner/bundles/com.datadoghq.*/manifest.json"
       options:
-        use_cached: false
+        cached: true
         dest_path: '/workflows/actions_catalog/'
         bundle_excludes:
           - "com.datadoghq.test"

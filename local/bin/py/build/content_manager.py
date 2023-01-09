@@ -91,63 +91,66 @@ def local_or_upstream(github_token, extract_dir, list_of_contents):
     grouped_globs = grouped_globs_table(list_of_contents)
     is_in_ci = os.getenv("CI_COMMIT_REF_NAME")
     for content in list_of_contents:
-        local_repo_path = os.path.join("..", content["repo_name"])
-        repo_path_last_extract = os.path.join(extract_dir, content["repo_name"])
-        if isdir(local_repo_path) and not is_in_ci:
-            print(f"\x1b[32mINFO\x1b[0m: Local version of {content['repo_name']} found in: {local_repo_path}")
-            download_from_local_repo(local_repo_path, content["org_name"], content["repo_name"], content["branch"], grouped_globs.get(content["repo_name"], content["globs"]),
-                                     extract_dir, content.get("sha", None))
-            content["globs"] = update_globs(
-                "{0}{1}{2}".format(
-                    extract_dir,
-                    content["repo_name"],
-                    sep,
-                ),
-                content["globs"],
-            )
-        elif isdir(repo_path_last_extract) and not is_in_ci:
-            print(
-                f"\x1b[32mINFO\x1b[0m: Local version of {content['repo_name']} found from previous extract in:"
-                f" {repo_path_last_extract} "
-            )
-            content["globs"] = update_globs(
-                repo_path_last_extract,
-                content["globs"],
-            )
-        elif github_token != "false":
-            print(
-                f"\x1b[32mINFO\x1b[0m: No local version of {content['repo_name']} found, downloading content from "
-                f"upstream version and placing in: {extract_dir}"
-            )
-            download_from_repo(github_token,
-                               content["org_name"],
-                               content["repo_name"],
-                               content["branch"],
-                               grouped_globs.get(content["repo_name"], content["globs"]),
-                               extract_dir,
-                               content.get("sha", None)
-                               )
-            content[
-                "globs"
-            ] = update_globs(
-                "{0}{1}{2}".format(
-                    extract_dir,
-                    content["repo_name"],
-                    sep,
-                ),
-                content["globs"],
-            )
-        elif getenv("LOCAL") == 'True':
-            print(
-                "\x1b[33mWARNING\x1b[0m: No local version of {} found, no GITHUB_TOKEN available. Documentation is now in degraded mode".format(content["repo_name"]))
-            content["action"] = "Not Available"
-        else:
-            print(
-                "\x1b[31mERROR\x1b[0m: No local version of {} found, no GITHUB_TOKEN available.".format(
-                    content["repo_name"]
+        use_cached = content.get('options', {}).get('cached', False)
+
+        if not use_cached:
+            local_repo_path = os.path.join("..", content["repo_name"])
+            repo_path_last_extract = os.path.join(extract_dir, content["repo_name"])
+            if isdir(local_repo_path) and not is_in_ci:
+                print(f"\x1b[32mINFO\x1b[0m: Local version of {content['repo_name']} found in: {local_repo_path}")
+                download_from_local_repo(local_repo_path, content["org_name"], content["repo_name"], content["branch"], grouped_globs.get(content["repo_name"], content["globs"]),
+                                        extract_dir, content.get("sha", None))
+                content["globs"] = update_globs(
+                    "{0}{1}{2}".format(
+                        extract_dir,
+                        content["repo_name"],
+                        sep,
+                    ),
+                    content["globs"],
                 )
-            )
-            raise ValueError
+            elif isdir(repo_path_last_extract) and not is_in_ci:
+                print(
+                    f"\x1b[32mINFO\x1b[0m: Local version of {content['repo_name']} found from previous extract in:"
+                    f" {repo_path_last_extract} "
+                )
+                content["globs"] = update_globs(
+                    repo_path_last_extract,
+                    content["globs"],
+                )
+            elif github_token != "false":
+                print(
+                    f"\x1b[32mINFO\x1b[0m: No local version of {content['repo_name']} found, downloading content from "
+                    f"upstream version and placing in: {extract_dir}"
+                )
+                download_from_repo(github_token,
+                                content["org_name"],
+                                content["repo_name"],
+                                content["branch"],
+                                grouped_globs.get(content["repo_name"], content["globs"]),
+                                extract_dir,
+                                content.get("sha", None)
+                                )
+                content[
+                    "globs"
+                ] = update_globs(
+                    "{0}{1}{2}".format(
+                        extract_dir,
+                        content["repo_name"],
+                        sep,
+                    ),
+                    content["globs"],
+                )
+            elif getenv("LOCAL") == 'True':
+                print(
+                    "\x1b[33mWARNING\x1b[0m: No local version of {} found, no GITHUB_TOKEN available. Documentation is now in degraded mode".format(content["repo_name"]))
+                content["action"] = "Not Available"
+            else:
+                print(
+                    "\x1b[31mERROR\x1b[0m: No local version of {} found, no GITHUB_TOKEN available.".format(
+                        content["repo_name"]
+                    )
+                )
+                raise ValueError
     return list_of_contents
 
 
@@ -216,40 +219,42 @@ def copy_cached_content(cached_content_array):
     :param cached_content_array:
     """
     try:
-        content_base_path = 'content/en'
+        en_content_path = 'content/en'
+        directories_to_copy = []
         s3_url = f'https://origin-static-assets.s3.amazonaws.com/build_artifacts/master/99074b6a793f1716fbaf58af6d2c4a3b2259ba2d-ignored.tar.gz'
         artifact_download_response = requests.get(s3_url, stream=True)
-        
-        if artifact_download_response.status_code == requests.codes.ok:
-            unzipped_contents = tarfile.open(mode='r', fileobj=artifact_download_response.raw)
-            files_to_extract = []
 
-            # Loop through the cached_content_array and reconstruct what the file path should be based on the action.
-            for index in cached_content_array:
-                action = index.get('action', '')
+        # Extract cached content to temp folder
+        with tarfile.open(mode='r|gz', fileobj=artifact_download_response.raw) as artifact_tarfile:
+            artifact_tarfile.extractall('temp')
+            artifact_tarfile.close()
 
-                if action == 'pull-and-push-file':
-                    dest_path = index.get('options', {}).get('dest_path')
-                    dest_file_name = index.get('options', {}).get('file_name')
-                    full_dest_path = f'{content_base_path}{dest_path}{dest_file_name}'
-                    files_to_extract.append(full_dest_path)
-                elif action in ('workflows', 'security-rules'):
-                    directory = index.get('options', {}).get('dest_path', '')
-                    full_dir_path = f'{content_base_path}{directory}'
-                    all_files = [x.name for x in unzipped_contents.getmembers() if x.name.startswith(full_dir_path)]
-                    files_to_extract = [*files_to_extract, *all_files]
-                else: # Throw err
-                    print('Action is unsupported, exiting')
+        # Copy the files we want to use from the cache
+        for repo in cached_content_array:
+            action = repo.get('action', '')
 
-            for tar_file in unzipped_contents:
-                if tar_file.isfile():
-                    if tar_file.name in files_to_extract:
-                        print(f'***FOUND DEST PATH {tar_file.name}')
-                        file_extracted = unzipped_contents.extractfile(tar_file)
-                        content = file_extracted.read()
-                        new_file = open(tar_file.name, 'x')
-                        new_file.write(content.decode('utf-8'))
-                        new_file.close()
+            if action == 'pull-and-push-file':
+                dest_path = repo.get('options', {}).get('dest_path')
+                dest_file_name = repo.get('options', {}).get('file_name')
+                full_dest_path = f'{en_content_path}{dest_path}{dest_file_name}'
+                shutil.copy(f'temp/{full_dest_path}', full_dest_path)
+            elif action == 'pull-and-push-folder':
+                dest_dir = repo.get('options', {}).get('dest_dir', '')
+                directories_to_copy.append(f'{en_content_path}{dest_dir}')
+                print(f'{en_content_path}{dest_dir}')
+            elif action in ('integrations', 'marketplace-integrations'):
+                directories_to_copy.append(f'{en_content_path}integrations')
+            elif action in ('workflows', 'security-rules'):
+                directory_path = repo.get('options', {}).get('dest_path', '')
+                directories_to_copy.append(f'{en_content_path}{directory_path}')
+            
+        for dir_path in directories_to_copy:
+            for file_path in os.listdir(f'temp/{dir_path}'):
+                full_dest_path = f'{dir_path}{file_path}'
+                shutil.copy(f'temp/{full_dest_path}', full_dest_path)
+
+        shutil.rmtree('temp')
     except Exception as e:
         print('error')
         print(e)
+        shutil.rmtree('temp')
