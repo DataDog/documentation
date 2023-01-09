@@ -32,8 +32,7 @@ def get_translation_languages():
     return languages
 
 
-
-if __name__ == '__main__':
+def main():
     print('Searching for orphaned translated files...')
     languages = get_translation_languages()
 
@@ -43,3 +42,7 @@ if __name__ == '__main__':
         if len(orphaned) > 0:
             print(f'\nThe following {lang} pages are orphaned and should likely be removed from the repo:')
             print('\n'.join(orphaned))
+
+
+if __name__ == "__main__":
+    main()
