@@ -43,7 +43,8 @@ The following steps outline the process for sending logs from a sample applicati
 
 ### Create Kinesis Delivery Stream
 
-1. Go to the Amazon Kinesis Console. Under Data Firehose, click **Create delivery stream** and use the following settings:
+See the [Send AWS service logs with the Datadog Kinesis Firehose Destination][4] guide to set up a Kinesis Firehose Delivery stream.  
+**Note**: Set the **Source** as `Direct PUT`.
     - **Source and Destination**
 {{< img src="integrations/guide/aws-eks-fargate-logs-with-kinesis-data-firehose/kinesis_delivery_stream_configuration.jpg" alt="Delivery Stream Configuration" responsive="true">}}
     - **Source:** Select `Direct PUT`.  
