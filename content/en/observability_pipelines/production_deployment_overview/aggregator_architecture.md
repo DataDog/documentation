@@ -153,7 +153,7 @@ For push-based sources, front your Observability Pipelines Worker instances with
 
 A load balancer is not required for pull-based sources; just deploy Observability Pipelines Worker and scale it up and down. Your pub-sub system coordinates exclusive access to the data when Observability Pipelines Worker asks to read it.
 
-See the [Advanced configurations](#advanced-configurations) for more information on mixed workloads (push and pull-based sources).
+See [Advanced configurations](#advanced-configurations) for more information on mixed workloads (push and pull-based sources).
 
 #### Load balancing
 
