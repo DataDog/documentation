@@ -34,6 +34,13 @@ The following are key differences between using Kinesis Data Firehose and Cloudw
 
 ## Setup
  
+The following steps outline the process for sending logs from a sample application deployed on an EKS cluster through Fluentbit and a Kinesis Data Firehose delivery stream to Datadog. To maximize consistency with standard Kubernetes tags in Datadog, instructions are included to remap selected attributes to tag keys.
+
+1. [Create a Kinesis Data Firehose delivery stream](#create-kinesis-delivery-stream) that delivers logs to Datadog, along with an S3 Backup for any failed log deliveries.
+2. [Configure Fluent Bit for Firehose on EKS Fargate](#configure-fluent-bit-for-firehose-on-an-eks-fargate-cluster).
+3. [Deploy a sample application](#deploy-a-sample-application).
+4. [Apply remapper processors](#remap-attributes-for-log-correlation) for correlation using Kubernetes tags and the `container_id` tag.
+
 ### Create Kinesis Delivery Stream
 
 1. Go to the Amazon Kinesis Console. Under Data Firehose, click **Create delivery stream** and use the following settings:
