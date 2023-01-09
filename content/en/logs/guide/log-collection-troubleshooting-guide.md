@@ -58,7 +58,7 @@ The Datadog Agent only collects logs that have been written after it has started
 
 ## Permission issues tailing log files
 
-The Datadog Agent does not run as root (and running as root is not recommended, as a general best-practice). When you configure your Agent to tail log files for custom logs or for integrations, you need to take special care to ensure the Agent user has the correct access to the log files.
+The Datadog Agent does not run as root (and running as root is not recommended, as a general best practice). When you configure your Agent to tail log files for custom logs or for integrations, you need to take special care to ensure the Agent user has the correct access to the log files.
 
 The default Agent user per operating system:
 | Operating system | Default Agent user |
