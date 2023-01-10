@@ -59,7 +59,7 @@ The [Getting Started with Profiler][1] guide takes a sample service with a perfo
 
 ## Explore Datadog profiler
 
-After you've configured your application to send profiles to Datadog, start getting insights into your code performance.  
+After you configure your application to send profiles to Datadog, start getting insights into your code performance.  
 
 By default, profiles are retained for seven days, and metrics generated from profile data are retained for one month.
 
