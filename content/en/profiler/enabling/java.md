@@ -28,7 +28,7 @@ The Datadog Profiler requires [JDK Flight Recorder][2]. The Datadog Profiler lib
 
 Because non-LTS JDK versions may not contain stability and performance fixes related to the Datadog Profiler library, use versions 8, 11, and 17 of the Long Term Support JDK.
 
-Additional requirements profiling [code hotspots][11] feature:
+Additional requirements for profiling [Code Hotspots][11]:
  - OpenJDK 11 or greater and `dd-trace-java` version 0.65.0 or greater; or
  - OpenJDK 8 8u282 or greater and `dd-trace-java` version 0.77.0 or greater.
 

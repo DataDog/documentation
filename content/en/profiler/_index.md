@@ -61,7 +61,7 @@ The [Getting Started with Profiler][1] guide takes a sample service with a perfo
 
 After you've configured your application to send profiles to Datadog, start getting insights into your code performance.  
 
-By default, profiles are retained for 7 days, and metrics generated from profile data are retained for 1 month.
+By default, profiles are retained for seven days, and metrics generated from profile data are retained for one month.
 
 ### Profile types
 
