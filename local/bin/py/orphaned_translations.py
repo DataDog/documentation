@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import os
 
 
@@ -45,4 +46,5 @@ def main():
             print('\n'.join(orphaned))
 
 
-main()
+if __name__ == "__main__":
+    main()

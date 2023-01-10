@@ -367,7 +367,7 @@ list_orphaned_translations:manual:
   stage: post-deploy
   cache: {}
   script:
-    - chmod +x python3 ./local/bin/py/orphaned_translations.py
+    - python3 ./local/bin/py/orphaned_translations.py
   when: manual
 
 test_missing_tms_live:
