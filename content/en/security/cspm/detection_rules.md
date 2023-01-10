@@ -53,9 +53,7 @@ You can send real-time notifications when a new misconfiguration is detected in 
 
 On the [Rules][13] page, select a rule to open its details page. In the **Set severity and notifications** section, configure zero or more notification targets for each rule case. You cannot edit the preset severity. See [Notifications][7] for more information on configuring notifications for detection rules.
 
-*Update screenshot*
-
-{{< img src="security/cspm/frameworks_and_benchmarks/notification.png" alt="Select a severity and notification target" >}}
+{{< img src="security/cspm/frameworks_and_benchmarks/notification-2.png" alt="Select a severity and notification target" >}}
 
 ## Create custom rules
 
