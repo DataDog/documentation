@@ -72,7 +72,7 @@ To delete the key from the Datadog repofile, remove the `gpgkey` line that ends 
 
 ### Usage of automation tools
 
-Usage of automation tools like the Datadog Ansible role (see the full list in [What we're doing to mitigate the implications](#what-were-doing-to-mitigate-the-implications)) might reverse the manual changes recommended above. Until we release new versions that fix this, we recommend adding these manual changes to your automation tool runbooks.
+Usage of automation tools like the Datadog Ansible role (see the full list in [What we're doing to mitigate the implications](#what-datadog-is-doing-to-mitigate-the-implications)) might reverse the manual changes recommended above. Until we release new versions that fix this, we recommend adding these manual changes to your automation tool runbooks.
 
 ### Verifying installed Agent packages
 
@@ -88,7 +88,7 @@ The script will:
 * Verify that any installed Datadog packages signed by the affected key were indeed built by Datadog by verifying the full GPG signature of RPM headers and payload.
 * Search for any packages signed by the affected key that weren't built by Datadog.
 
-Lines starting with `[ ERROR ]` are considered suspicious and should be reported to [Datadog Support][4] along with the full script output.
+Lines starting with `[ ERROR ]` should be reported to [Datadog Support][4] along with the full script output.
 
 ## Implications of no longer trusting the affected key
 
