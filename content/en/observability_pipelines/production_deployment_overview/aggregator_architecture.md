@@ -106,7 +106,7 @@ Due to Observability Pipelines Worker's affine type system, memory is rarely con
 
 ### Disk sizing
 
-If you're using Observability Pipelines Worker's disk buffers for high durability (recommended) then you should provision at least 36 GiB per vCPU* of disk space. Following the recommendation of 8 vCPUs, you would then provision 288 GiB of disk space (10 MiB * 60 seconds * 60 minutes * 8 vCPUs).
+If you're using Observability Pipelines Worker's disk buffers for high durability (recommended), provision at least 36 GiB per vCPU* of disk space. Following the recommendation of 8 vCPUs, provision 288 GiB of disk space (10 MiB * 60 seconds * 60 minutes * 8 vCPUs).
 
 | Cloud Provider| Recommendation*                                               |
 | ------------- | --------------------------------------------------------------|
@@ -206,7 +206,7 @@ Observability Pipelines Worker's concurrency model automatically scales to take 
 
 ### Autoscaling
 
-Autoscaling should be based on average CPU utilization. In the vast majority of workloads, Observability Pipelines Worker is CPU constrained, and CPU utilization is the strongest signal for autoscaling since it does not produce false positives. The following settings are recommended, adjust as necessary:
+Autoscaling should be based on average CPU utilization. For the vast majority of workloads, Observability Pipelines Worker is CPU constrained. CPU utilization is the strongest signal for autoscaling since it does not produce false positives. The following settings are recommended, adjust as necessary:
 
 - Average CPU with a 85% utilization target.
 - A five minute stabilization period for scaling up and down.
@@ -217,7 +217,7 @@ Autoscaling should be based on average CPU utilization. In the vast majority of 
 
 #### Network boundaries
 
-Most users have complex production environments with many network boundaries, including multiple clouds, regions, VPCs, and clusters. It can get complicated when determining where Observability Pipelines Worker fits within those boundaries. Therefore, **starting with one Observability Pipelines Worker aggregator per region is recommended**, even if you have multiple accounts, VPCs, and clusters. This boundary is the broadest networking granularity that avoids sending data over the public internet. If you have multiple clusters, deploy Observability Pipelines Worker into your utility or tools cluster, or pick a cluster that is most appropriate for shared services like Observability Pipelines Worker.
+Most users have complex production environments with many network boundaries, including multiple clouds, regions, VPCs, and clusters. It can get complicated when determining where Observability Pipelines Worker fits within those boundaries. Therefore, **starting with one Observability Pipelines Worker aggregator per region is recommended**, even if you have multiple accounts, VPCs, and clusters. This boundary is the broadest networking granularity that avoids sending data over the public internet. If you have multiple clusters, deploy Observability Pipelines Worker into your utility or tools cluster, or pick a cluster that is most appropriate for shared services.
 
 As your Observability Pipelines Worker usage increases, it can then become clear where multiple Observability Pipelines Worker deployments fit in.
 
@@ -263,6 +263,7 @@ The Observability Pipelines Worker provides specific sources for many agents. Fo
 #### Compression
 
 Compression can impose a ~50% decrease in throughput based on our benchmarks. Use compression with caution and monitor performance after enabling.
+
 Compression of network traffic should only be used for cost-sensitive egress scenarios due to its impact on performance (for example, sending data over the public internet). Therefore, compression is not recommended for internal network traffic.
 
 ## High durability
@@ -299,15 +300,15 @@ sinks:
 
 With this feature enabled, Observability Pipelines Worker does not respond to agents until the data has been durably persisted. Thus, preventing the agent from releasing the data prematurely and sending it again if an acknowledgment has not been received.
 
-### Handling node failure
+### Handling node failures
 
 Node failures deal with the full failure of an individual node. These can also be addressed using end-to-end acknowledgements. See [Using end-to-end acknowledgment](#using-end-to-end-acknowledgment) for more details.
 
-### Handling disk failure
+### Handling disk failures
 
 Disk failures deal with the failure of an individual disk. Data loss related to disk failures can be mitigated by using a highly durable file system where data is replicated across multiple disks, such as block storage (for example, AWS EBS).
 
-### Handling data processing failure
+### Handling data processing failures
 
 The Observability Pipelines Worker can have problems, such as failing to parse a log, when trying to process malformed data. There are two ways to mitigate this issue:
 
@@ -319,7 +320,7 @@ The Observability Pipelines Worker can have problems, such as failing to parse a
 
 If durability is the most important criteria, use the direct archiving method because it addresses data loss scenarios. Use the failed event routing method, also commonly referred to as a data lake, if you prefer to analyze data in your archive. It has the advantage of using your archive/data lake for long-term analysis. Datadog [Log Archives][2] and AWS Athena are examples of archive storage solutions.
 
-### Handling destination failure
+### Handling destination failures
 
 Finally, destination failures refer to the total failure of a downstream destination (for example Elasticsearch). Data loss can be mitigated for issues with the downstream destination by using disk buffers large enough to sustain the outage time. This allows data to durably buffer while the service is down and then drain when the service comes back up. For this reason, disk buffers large enough to hold at least one hour's worth of data are recommended. See [disk sizing](#disk-sizing) for more details.
 
@@ -339,15 +340,15 @@ To achieve high durability:
 
 To mitigate a system process issue, distribute Observability Pipelines Worker across multiple nodes and front them with a network load balancer that can redirect traffic to another Observability Pipelines Worker instance as needed. In addition, platform-level automated self-healing should eventually restart the process or replace the node.
 
-#### Mitigating node failure
+#### Mitigating node failures
 
 To mitigate node issues, distribute the Observability Pipelines Worker across multiple nodes and front them with a network load balancer that can redirect traffic to another Observability Pipelines Worker node. In addition, platform-level automated self-healing should eventually replace the node.
 
-#### Handling availability zones failure
+#### Handling availability zone failures
 
 To mitigate issues with availability zones, deploy the Observability Pipelines Worker across multiple availability zones.
 
-#### Mitigating region failure
+#### Mitigating region failures
 
 Observability Pipelines Worker is designed to route internal observability data, and it should not failover to another region. Instead, Observability Pipelines Worker should be deployed in all of your regions as recommended in the [network boundaries](#network-boundaries) section. Therefore, if your entire network or region fails, Observability Pipelines Worker would fail with it.
 
