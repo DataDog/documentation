@@ -19,11 +19,12 @@ The treemap widget allows you to display proportions of one or datasets. This wi
 
 ## Configuration
 
-1. Select from the available data sources.
+1. Select from the available data sources. 
+2. Configure the query, see the following resources for more information:
     * Metrics: See the [querying ][1] documentation to configure a metric query.
     * Events: See the [log search][2] documentation to configure a log event query.
-2. (Optional) Modify query with a [formula][3].
-3. Customize your graph.
+3. (Optional) Modify query with a [formula][3].
+4. Customize your graph.
 
 ## Customization
 
