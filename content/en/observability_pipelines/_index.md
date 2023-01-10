@@ -21,7 +21,7 @@ further_reading:
     text: Configure Datadog Agents to send data to Observability Pipelines
 ---
 
-{{< img src="observability_pipelines/obs_pipelines_overview.png" alt="A graphic showing different data sources on the left that flows into three hexagons named transform, reduce, and route, with arrows pointing to different destinations for the modified data" style="width:100%;" >}}
+{{< img src="observability_pipelines/obs_pipelines.png" alt="A graphic showing different data sources on the left that flows into three hexagons named transform, reduce, and route, with arrows pointing to different destinations for the modified data" style="width:100%;" >}}
 
 ## What is Observability Pipelines?
 
