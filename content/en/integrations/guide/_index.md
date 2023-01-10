@@ -33,6 +33,7 @@ private: true
     {{< nextlink href="integrations/guide/error-datadog-not-authorized-sts-assume-role" tag=" AWS" >}}Error: Datadog is not authorized to perform sts:AssumeRole{{< /nextlink >}}
     {{< nextlink href="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose" tag=" AWS" >}}AWS CloudWatch Metric Streams with Kinesis Data Firehose{{< /nextlink >}}
     {{< nextlink href="integrations/guide/amazon_cloudformation" tag=" AWS" >}}Using Amazon CloudFormation{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/events-from-sns-emails" tag=" AWS" >}}Create Datadog events from Amazon SNS emails{{< /nextlink >}}
     {{< nextlink href="integrations/guide/aws-integration-and-cloudwatch-faq" tag=" AWS" >}}AWS integration and CloudWatch FAQ{{< /nextlink >}}
 {{< /whatsnext >}}
 

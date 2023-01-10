@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-Whether you’re using the Metrics Explorer, monitors, or dashboards to query metrics data, you can filter the data to narrow the scope of the timeseries returned. Any metric can be filtered by tag(s) using the **from dropdown** to the right of the metric. 
+Whether you're using the Metrics Explorer, monitors, or dashboards to query metrics data, you can filter the data to narrow the scope of the timeseries returned. Any metric can be filtered by tag(s) using the **from dropdown** to the right of the metric. 
 
 {{< img src="metrics/advanced-filtering/tags.png" alt="Filter with tags" style="width:80%;" >}}
 
@@ -34,8 +34,14 @@ The following syntax is supported for Boolean filtered metric queries:
 - `IN`, `in`
 - `NOT IN`, `not in`
 
+When including or excluding multiple tags:
+* Include uses `AND` logic
+* Exclude uses `OR` logic
+
+For more information on tags, see the guide for [Getting Started Using Tags][1].
+
 **Note:** Symbolic boolean syntax (`!`, `,`) cannot be used with functional syntax operators (`NOT`, `AND`, `OR`, `IN`, `NOT IN`). The following query is considered _invalid_: 
-`avg:mymetric{env:prod AND resource_name NOT IN (!resource_name:A, !resource_name:B)}`
+`avg:mymetric{env:prod AND !region:us-east}`
 
 #### Boolean filtered query examples
 
@@ -86,3 +92,5 @@ sum:kubernetes.pods.running{service:*-canary} by {service}
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /getting_started/tagging/using_tags/
