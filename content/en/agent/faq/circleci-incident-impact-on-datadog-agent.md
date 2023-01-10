@@ -3,7 +3,7 @@ title: Impact of the CircleCI Security Incident on the Datadog Agent
 kind: faq
 ---
 
-On January 4th, 2023, Datadog was notified by CircleCI that they were investigating a [security incident](https://circleci.com/blog/january-4-2023-security-alert/) that may have led to leaking stored secrets. Datadog identified a single secret stored in CircleCI that could theoretically be misused by a potential attacker, an old RPM GNU Privacy Guard (GPG) private signing key and its passphrase. This page documents the implications of the potential leak and the measures Datadog is taking to mitigate any risks to our customers.
+On January 4th, 2023, Datadog was notified by CircleCI that they were investigating a [security incident][1] that may have led to leaking stored secrets. Datadog identified a single secret stored in CircleCI that could theoretically be misused by a potential attacker, an old RPM GNU Privacy Guard (GPG) private signing key and its passphrase. This page documents the implications of the potential leak and the measures Datadog is taking to mitigate any risks to our customers.
 
 <div class="alert alert-info">
 <strong>Note</strong>: As of January 10th, 2023, Datadog has no indication that the key was actually leaked or misused, but we are still taking the following actions out of an abundance of caution.
@@ -11,7 +11,7 @@ On January 4th, 2023, Datadog was notified by CircleCI that they were investigat
 
 ## The affected key
 
-The RPM GPG signing key has fingerprint `4172A230`, and is accessible in [our signing keys location](https://keys.datadoghq.com/DATADOG_RPM_KEY.public). This key was historically used to sign Agent 5 releases and Agent 6 releases up to (and including) 6.13.0.
+The RPM GPG signing key has fingerprint `4172A230`, and is accessible in [our signing keys location][2]. This key was historically used to sign Agent 5 releases and Agent 6 releases up to (and including) 6.13.0.
 
 <div class="alert alert-info">
 <strong>Note</strong>: Official Datadog repositories were <strong>not</strong> compromised. The signing key, if actually leaked, could be used to construct an RPM package that looks like it's from Datadog.
@@ -76,7 +76,7 @@ Usage of automation tools like the Datadog Ansible role (see the full list in [W
 
 ### Verifying installed Agent packages
 
-If the GPG key was leaked, it is possible for an attacker to build a package that RPM will verify as coming from Datadog and install it on the system. Out of an abundance of caution, Datadog also recommends that you verify that all packages on your system signed by the affected key were built by Datadog. You can run [this script](/resources/sh/rpm_check.sh) to verify that:
+If the GPG key was leaked, it is possible for an attacker to build a package that RPM will verify as coming from Datadog and install it on the system. Out of an abundance of caution, Datadog also recommends that you verify that all packages on your system signed by the affected key were built by Datadog. You can run [this script][3] to verify that:
 
 ```bash
 $ curl -o /tmp/rpm_check.sh https://docs.datadoghq.com/resources/sh/rpm_check.sh && chmod +x /tmp/rpm_check.sh
@@ -88,7 +88,7 @@ The script will:
 * Verify that any installed Datadog packages signed by the affected key were indeed built by Datadog by verifying the full GPG signature of RPM headers and payload.
 * Search for any packages signed by the affected key that weren't built by Datadog.
 
-Lines starting with `[ ERROR ]` are considered suspicious and should be reported to [Datadog Support](https://www.datadoghq.com/support/) along with the full script output.
+Lines starting with `[ ERROR ]` are considered suspicious and should be reported to [Datadog Support][4] along with the full script output.
 
 ## Implications of no longer trusting the affected key
 
@@ -100,12 +100,25 @@ Lines starting with `[ ERROR ]` are considered suspicious and should be reported
 
 * We're working towards releasing a new Agent 5 version signed with the [current RPM signing key](https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public), `FD4BF915`.
 * We're working on new releases to Agent installation methods to ensure they make systems safe by explicitly removing the affected key from the RPM database and the Datadog repofile. We will be updating this section as we release the new versions:
-  * Datadog Ansible role: https://github.com/DataDog/ansible-datadog/
-  * Datadog Chef recipe: https://github.com/DataDog/chef-datadog
-  * Datadog Puppet module: https://github.com/DataDog/puppet-datadog-agent
-  * Datadog Saltstack formula: https://github.com/DataDog/datadog-formula
+  * Datadog Ansible role: [https://github.com/DataDog/ansible-datadog/][5]
+  * Datadog Chef recipe: [https://github.com/DataDog/chef-datadog][6]
+  * Datadog Puppet module: [https://github.com/DataDog/puppet-datadog-agent][7]
+  * Datadog Saltstack formula: [https://github.com/DataDog/datadog-formula][8]
   * The set of Datadog Agent 6/7 Linux install scripts:
-    * https://s3.amazonaws.com/dd-agent/scripts/install_script_agent6.sh
-    * https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh
-    * https://s3.amazonaws.com/dd-agent/scripts/install_script.sh (this one is deprecated and no longer recommended to use, but we will update it as well)
-  * The Datadog Agent 5 Linux install script: https://raw.githubusercontent.com/DataDog/dd-agent/master/packaging/datadog-agent/source/install_agent.sh
+    * [https://s3.amazonaws.com/dd-agent/scripts/install_script_agent6.sh][9]
+    * [https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh][10]
+    * [https://s3.amazonaws.com/dd-agent/scripts/install_script.sh][11] (this one is deprecated and no longer recommended to use, but we will update it as well)
+  * The Datadog Agent 5 Linux install script: [https://raw.githubusercontent.com/DataDog/dd-agent/master/packaging/datadog-agent/source/install_agent.sh][12]
+
+[1]: https://circleci.com/blog/january-4-2023-security-alert/
+[2]: https://keys.datadoghq.com/DATADOG_RPM_KEY.public
+[3]: /resources/sh/rpm_check.sh
+[4]: /help/
+[5]: https://github.com/DataDog/ansible-datadog/
+[6]: https://github.com/DataDog/chef-datadog
+[7]: https://github.com/DataDog/puppet-datadog-agent
+[8]: https://github.com/DataDog/datadog-formula
+[9]: https://s3.amazonaws.com/dd-agent/scripts/install_script_agent6.sh
+[10]: https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh
+[11]: https://s3.amazonaws.com/dd-agent/scripts/install_script.sh
+[12]: https://raw.githubusercontent.com/DataDog/dd-agent/master/packaging/datadog-agent/source/install_agent.sh
