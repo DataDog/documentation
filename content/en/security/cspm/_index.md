@@ -89,11 +89,11 @@ Framework
 [3]: https://app.datadoghq.com/security/compliance/homepage
 [4]: /security/cspm/findings
 [5]: https://www.pcisecuritystandards.org/pci_security/maintaining_payment_security
-[6]: /security/cspm/frameworks_and_benchmarks#customize-how-your-environment-is-scanned-by-each-rule
+[6]: /security/cspm/detection_rules#customize-how-your-environment-is-scanned-by-each-rule
 [7]: /security/default_rules/#cat-posture-management-cloud
 [8]: /security/cspm/custom_rules
 [9]: https://app.datadoghq.com/security/compliance
 [10]: /security/cspm/frameworks_and_benchmarks
-[11]: /security/cspm/frameworks_and_benchmarks#set-notification-targets-for-detection-rules
+[11]: /security/cspm/detection_rules#set-notification-targets-for-detection-rules
 [12]: /security/notifications/
 [13]: /security/notifications/#detection-rule-notifications
