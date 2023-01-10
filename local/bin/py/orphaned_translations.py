@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import os
-
+import re
 
 def get_orphaned_translated_files_by_language(language_code):
     """
@@ -12,10 +12,12 @@ def get_orphaned_translated_files_by_language(language_code):
 
     for root, dir_names, file_names in os.walk(content_dir):
         for file_name in file_names:
-            translated_content_path = os.path.join(root, file_name)
+            translated_content_path = os.path.join(root, file_name).replace('(', '')
+            translated_content_path = re.sub(r"[(|)]", '', translated_content_path)
             english_content_path = translated_content_path.replace(f'/{language_code}/', '/en/')
+            english_content_path = re.sub(r"[(|)]", '', english_content_path)
 
-            if not os.path.exists(english_content_path):
+            if not is_git_ignored(english_content_path) and not os.path.exists(english_content_path):
                 orphaned_translated_files.append(translated_content_path)
 
     return orphaned_translated_files
@@ -32,6 +34,11 @@ def get_translation_languages():
             languages.append(directory.name)
 
     return languages
+
+
+def is_git_ignored(file):
+    is_ignored = os.popen(f'git check-ignore {file}').read()
+    return len(is_ignored) > 0
 
 
 def main():
