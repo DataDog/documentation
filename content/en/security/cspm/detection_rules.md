@@ -8,6 +8,12 @@ further_reading:
   - link: "/security/cspm/getting_started"
     tag: "Documentation"
     text: Getting Started with CSPM
+  - link: "/security/cspm/custom_rules/"
+    tag: "Documentation"
+    text: Custom Rules
+  - link: "/security/cspm/frameworks_and_benchmarks/"
+    tag: "Documentation"
+    text: Findings Reports
 ---
 
 {{< site-region region="gov" >}}
@@ -51,17 +57,17 @@ You can send real-time notifications when a new misconfiguration is detected in 
 - [Webhooks][19]
 - Email
 
-On the [Rules][13] page, select a rule to open its details page. In the **Set severity and notifications** section, configure zero or more notification targets for each rule case. You cannot edit the preset severity. See [Notifications][7] for more information on configuring notifications for detection rules.
+On the [Rules][13] page, select a rule to open its details page. In the **Set severity and notifications** section, configure zero or more notification targets for each rule case. You cannot edit the preset severity. See [Notifications][7] for detailed instructions on configuring notifications for detection rules.
+
+Alternatively, create [notification rules][21] that span across multiple detection rules based on parameters such as severities, rule types, rule tags, signal attributes, and signal tags. This allows you to avoid having to manually edit notification preferences for individual detection rules.
 
 {{< img src="security/cspm/frameworks_and_benchmarks/notification-2.png" alt="Select a severity and notification target" >}}
 
 ## Create custom rules
 
-To extend the rules being applied to your environment to evaluate your security posture, you can clone detection rules and edit the copies, and you can create your own rules from scratch. See [Custom Rules][20] for more information.
+To extend the rules being applied to your environment to evaluate your security posture, you can clone the default detection rules and edit the copies. You can also create your own rules from scratch. See [Custom Rules][20] for more information.
 
 **Note**: Creating and using custom CSPM rules is a beta feature, available for select Amazon Web Services (AWS), Microsoft Azure, and Google Cloud Platform (GCP) cloud resources.
-
-*Add screenshot here*
 
 ## Further Reading
 
@@ -82,3 +88,4 @@ To extend the rules being applied to your environment to evaluate your security 
 [18]: /integrations/microsoft_teams/
 [19]: /integrations/webhooks/
 [20]: /security/cspm/custom_rules/
+[21]: /security/notifications/rules/
