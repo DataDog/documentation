@@ -3189,12 +3189,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bootstrap@npm:^5.2":
-  version: 5.2.1
-  resolution: "bootstrap@npm:5.2.1"
+"bootstrap@npm:^5.2.3":
+  version: 5.2.3
+  resolution: "bootstrap@npm:5.2.3"
   peerDependencies:
     "@popperjs/core": ^2.11.6
-  checksum: f7d733ae5d27177d813adb2ac2158f08069a558d8f664b3db8857aba0ab07423d83b4276dba6123dde52309e707bb06ec13e040fb905eaa293c53453110bb802
+  checksum: 0211805dec6a190c0911d142966df30fdb4b4139a04cc6c23dd83c6045ea3cb0a966b360ab2e701e7b3ad96ff01e05fdc0914be97b41bd876b11e457a8bdc6a3
   languageName: node
   linkType: hard
 
@@ -4417,7 +4417,7 @@ __metadata:
     a11y: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/a11y-v1.0.1.tgz"
     acorn: ^7.1.1
     algoliasearch: 4.14.2
-    bootstrap: ^5.2
+    bootstrap: ^5.2.3
     cross-env: ^5.2.0
     del: 4.1.1
     docsearch.js: ^2.6.3

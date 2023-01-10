@@ -1,6 +1,7 @@
 $(document).ready(function () {
 
-    $('#signupModal').on('show.bs.modal', function (e) {
+    const signupModal = document.getElementById('signupModal')
+    signupModal.addEventListener('show.bs.modal', function(e) {
         //$('body').css('overflow', 'hidden');
         //$('.modal').css('overflow', 'scroll');
         var regURL = 'https://app.datadoghq.com/signup_corp';
@@ -48,7 +49,9 @@ $(document).ready(function () {
         } else {
             $('#signUpIframe').attr('src', regURL+lang_param);
         }
-    }).on('hide.bs.modal', function(e) {
+    })
+
+    signupModal.addEventListener('hide.bs.modal', function(e) {
         $('#signUpIframe').attr('src', '');
         //$('body').css('overflow', '');
         //$('.modal').css('overflow', '');
