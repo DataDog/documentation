@@ -51,6 +51,19 @@ datadogRum.init({
 
 </details>
 
+<details open>
+  <summary>before<code>v4.30.0</code></summary>
+
+```
+datadogRum.init({
+    ....
+    sampleRate: 100,
+    sessionReplaySampleRate: 0
+});
+```
+
+</details>
+
 <details>
   <summary>before<code>v4.20.0</code></summary>
 
@@ -81,6 +94,19 @@ To track 100% of your sessions as Browser RUM & Session Replay:
 
 <details open>
   <summary>Latest version</summary>
+
+```
+datadogRum.init({
+    ....
+    sessionSampleRate: 100,
+    sessionReplaySampleRate: 100
+});
+```
+
+</details>
+
+<details open>
+  <summary>before<code>v4.30.0</code></summary>
 
 ```
 datadogRum.init({
@@ -132,6 +158,19 @@ If you set `sessionSampleRate` to 60 and `sessionReplaySampleRate` to 50, 40% of
 datadogRum.init({
     ....
     sessionSampleRate: 60,
+    sessionReplaySampleRate: 50
+});
+```
+
+</details>
+
+<details>
+  <summary>before<code>v4.30.0</code></summary>
+
+```
+datadogRum.init({
+    ....
+    sampleRate: 60,
     sessionReplaySampleRate: 50
 });
 ```
