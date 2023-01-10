@@ -38,7 +38,7 @@ When including or excluding multiple tags:
 * Include uses `AND` logic
 * Exclude uses `OR` logic
 
-For more information on tags, see the guide for [Getting Started Using Tags]
+For more information on tags, see the guide for [Getting Started Using Tags][1].
 
 **Note:** Symbolic boolean syntax (`!`, `,`) cannot be used with functional syntax operators (`NOT`, `AND`, `OR`, `IN`, `NOT IN`). The following query is considered _invalid_: 
 `avg:mymetric{env:prod AND !env:dev}`
