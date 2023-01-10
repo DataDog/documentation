@@ -1,5 +1,5 @@
 ---
-title: Findings Reports
+title: Compliance Frameworks
 kind: documentation
 aliases:
   - /security_platform/cspm/frameworks_and_benchmarks
@@ -40,6 +40,17 @@ Each [OOTB rule][1] maps to one or more controls within a compliance standard or
 
 **Note**: Datadog CSPM provides you with visibility into whether your resources are configured in accordance with certain detection rules. Datadog's OOTB detection rules address various regulatory frameworks, benchmarks, and standards (“Security Posture Frameworks”). Datadog CSPM does not provide an assessment of your actual compliance with any Security Posture Framework, and the OOTB rules may not address all configuration settings that are relevant to the Security Posture Frameworks. To be clear, just because your resources pass the OOTB Rules does not mean that you are meeting all the requirements under any particular Security Posture Framework. Datadog is not providing legal or compliance advice or guidance, and it is recommended that you use Datadog CSPM in consultation with your legal counsel or compliance experts.
 
+**TASKS**
+
+Access/view compliance reports on CSPM homepage
+- Framework "report" overview
+    - Explore past posture with time picker
+    - Export to PDF
+    - Top 3 high severity rule failures
+    - Rules breakdown
+    - Rules listed. Click on one rule to see a full breakdown of resources.
+- Explore resources (?)
+- Configure rules for a given framework
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
