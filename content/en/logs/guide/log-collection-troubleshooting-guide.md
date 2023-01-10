@@ -103,7 +103,7 @@ To fix the error, give the Datadog Agent user read, write, and execute permissio
 
 {{% /tab %}}
 
-{{% tab "Windows (icacls)" %}}
+{{% tab "Windows (cmd)" %}}
 1. Use the `icacls` command on the log folder to obtain more information about the file permissions:
    ```
    icacls path/to/logs/file /t
