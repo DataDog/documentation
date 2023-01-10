@@ -281,9 +281,7 @@ You can define advanced OpenMetrics check configurations or custom Autodiscovery
 
 `additionalConfigs` is a list of structures containing OpenMetrics check configurations and Autodiscovery rules.
 
-Every [configuration field][1] supported by the OpenMetrics check can be passed in the configurations list.
-
-**Note**: Only the parameters [on this page][15] are supported for OpenmetricsV2 with autodiscovery.
+Only the parameters [on this page][2] are supported for OpenMetrics v2 with autodiscovery and can be passed in the configurations list.
 
 The autodiscovery configuration can be based on container names or kubernetes annotations or both. When both `kubernetes_container_names` and `kubernetes_annotations` are defined, it uses AND logic (both rules must match).
 
@@ -333,9 +331,7 @@ You can define advanced OpenMetrics check configurations or custom Autodiscovery
 
 `DD_PROMETHEUS_SCRAPE_CHECKS` is a list of structures containing OpenMetrics check configurations and Autodiscovery rules.
 
-Every [configuration field][1] supported by the OpenMetrics check can be passed in the configurations list.
-
-**Note**: Only the parameters [on this page][15] are supported for OpenmetricsV2 with autodiscovery.
+Only the parameters [on this page][2] are supported for OpenMetrics v2 with autodiscovery and can be passed in the configurations list.
 
 The Autodiscovery configuration can be based on container names or Kubernetes annotations or both. When both `kubernetes_container_names` and `kubernetes_annotations` are defined, it uses AND logic (both rules must match).
 
@@ -365,6 +361,7 @@ In this example we're defining an advanced configuration targeting a container n
 
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
+[2]: https://github.com/DataDog/datadog-agent/blob/main/pkg/autodiscovery/common/types/prometheus.go#L92-L100
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -392,4 +389,3 @@ Official integrations have their own dedicated directories. There's a default in
 [12]: https://app.datadoghq.com/metric/summary
 [13]: /agent/faq/template_variables/
 [14]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy
-[15]: https://github.com/DataDog/datadog-agent/blob/main/pkg/autodiscovery/common/types/prometheus.go#L92-L100
