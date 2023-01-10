@@ -1872,7 +1872,7 @@ main:
     parent: tracing_error_tracking
     identifier: tracing_error_tracking_explorer
     weight: 801
-  - name: Custom grouping
+  - name: Custom Grouping
     url: tracing/error_tracking/custom_grouping
     parent: tracing_error_tracking
     identifier: tracing_error_tracking_custom_grouping
@@ -2462,7 +2462,7 @@ main:
     url: logs/error_tracking/backend
     parent: log_management_error_tracking
     weight: 603
-  - name: Custom grouping
+  - name: Custom Grouping
     url: logs/error_tracking/custom_grouping
     parent: log_management_error_tracking
     weight: 604
@@ -3303,7 +3303,7 @@ main:
     parent: rum_error_tracking
     identifier: rum_error_tracking_flutter
     weight: 1207
-  - name: Custom grouping
+  - name: Custom Grouping
     url: real_user_monitoring/error_tracking/custom_grouping
     parent: rum_error_tracking
     identifier: rum_error_tracking_custom_grouping

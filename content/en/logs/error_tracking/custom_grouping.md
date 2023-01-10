@@ -6,9 +6,9 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/error-tracking/'
     tag: 'Blog'
     text: 'Make sense of application issues with Datadog Error Tracking'
-  - link: '/logs/error_tracking/explorer/'
+  - link: '/logs/error_tracking/'
     tag: 'Documentation'
-    text: 'Learn about the Error Tracking Explorer'
+    text: 'Learn about Error Tracking for Logs'
 ---
 
 ## Overview
