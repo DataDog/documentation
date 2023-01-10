@@ -11,7 +11,7 @@ On January 4th, 2023, Datadog was notified by CircleCI that they were investigat
 
 ## The affected key
 
-The RPM GPG signing key has fingerprint `4172A230`, and is accessible in [our signing keys location][2]. This key was historically used to sign Agent 5 releases and Agent 6 releases up to (and including) 6.13.0.
+The RPM GPG signing key has fingerprint `60A389A44A0C32BAE3C03F0B069B56F54172A230`, and is accessible in [our signing keys location][2]. This key was historically used to sign Agent 5 releases and Agent 6 releases up to (and including) 6.13.0.
 
 <div class="alert alert-info">
 <strong>Note</strong>: Official Datadog repositories were <strong>not</strong> compromised. The signing key, if actually leaked, could be used to construct an RPM package that looks like it's from Datadog.
@@ -98,7 +98,7 @@ Lines starting with `[ ERROR ]` are considered suspicious and should be reported
 
 ## What Datadog is doing to mitigate the implications
 
-* We're working towards releasing a new Agent 5 version signed with the [current RPM signing key](https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public), `FD4BF915`.
+* We're working towards releasing a new Agent 5 version signed with the [current RPM signing key](https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public), `C6559B690CA882F023BDF3F63F4D1729FD4BF915`.
 * We're working on new releases to Agent installation methods to ensure they make systems safe by explicitly removing the affected key from the RPM database and the Datadog repofile. We will be updating this section as we release the new versions:
   * Datadog Ansible role: [https://github.com/DataDog/ansible-datadog/][5]
   * Datadog Chef recipe: [https://github.com/DataDog/chef-datadog][6]
