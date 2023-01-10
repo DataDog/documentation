@@ -13,12 +13,12 @@ further_reading:
 
 The pie chart widget can display a single dataset with corresponding proportions, or multiple datasets with nested proportions.
 
-{{< img src="dashboards/widgets/pie_chart/pie_chart_overview.png" alt="A pie chart widget. The innermost ring shows the user’s country, and the outermost ring is segmented proportionally to show the share of browsers used in each country." style="width:60%;">}}
+{{< img src="dashboards/widgets/pie_chart/pie_chart_overview.png" alt="A pie chart widget. The innermost ring shows the user's country, and the outermost ring is segmented proportionally to show the share of browsers used in each country." style="width:60%;">}}
 
 
 ## Configuration
 
-1. Select one or more data sources from metrics or events.
+1. Select from the available data sources.
     * Metrics: See the [querying][1] documentation to configure a metric query.
     * Events: See the [log search][2] documentation to configure a log event query.
 2. (Optional) Modify query with a [formula][3].
