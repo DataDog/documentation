@@ -17,7 +17,7 @@ further_reading:
 
 AWS Fargate on EKS provides a fully managed experience for running Kubernetes workloads. Kinesis Data Firehose can be used with EKS's Fluentbit log router to collect logs in Datadog.
 
-{{< img src="integrations/guide/aws-eks-fargate-logs-with-kinesis-data-firehose/log_streaming_diagram.png" alt="Diagram of the log flow depicting a Fargate EKS cluster sending container logs through Fluentbit log router to Kinesis data firehose and an S3 backup bucket within AWS and then on to Datadog" responsive="true">}}
+{{< img src="logs/guide/aws-eks-fargate-logs-with-kinesis-data-firehose/log_streaming_diagram.png" alt="Diagram of the log flow depicting a Fargate EKS cluster sending container logs through Fluentbit log router to Kinesis data firehose and an S3 backup bucket within AWS and then on to Datadog" responsive="true">}}
  
    
 ### Kinesis Data Firehose vs Cloudwatch log forwarding {#firehose-vs-cloudwatch}
@@ -163,7 +163,7 @@ Logs from this configuration require some attributes to be remapped to maximize 
  | `kubernetes.docker_id` | `container_id` |
 
 4. After creating this pipeline, logs emitted by the sample app should be tagged like this example with the log attributes remapped to Kubernetes tags:
-{{< img src="integrations/guide/aws-eks-fargate-logs-with-kinesis-data-firehose/log_example_remapped.jpg" alt="The detail view of a log in Datadog with the container_id, kube_container_name, kube_namespace, and pod_name tags" responsive="true">}}
+{{< img src="logs/guide/aws-eks-fargate-logs-with-kinesis-data-firehose/log_example_remapped.jpg" alt="The detail view of a log in Datadog with the container_id, kube_container_name, kube_namespace, and pod_name tags" responsive="true">}}
 
 ## Further Reading
  {{< partial name="whats-next/whats-next.html" >}}
