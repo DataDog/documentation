@@ -324,6 +324,7 @@ datadog:
 
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
+[2]: https://github.com/DataDog/datadog-agent/blob/main/pkg/autodiscovery/common/types/prometheus.go#L92-L100
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
 
