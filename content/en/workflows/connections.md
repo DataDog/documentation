@@ -5,44 +5,35 @@ disable_toc: false
 is_beta: true
 ---
 
-### Create custom connection
+{{< beta-callout url="https://forms.gle/VEjerYVQ2QJhauZ57" >}}
+  Workflows are in public beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.
+{{< /beta-callout >}}
 
-1. In the left navigation, go to **Integrations** -> **Workflows** to access the [Workflows list][7].
-1. Click **Connections** in the upper right.
-1. Select **New Connection**. A dialog box appears.
-1. Choose an integration schema. The **Custom** option allows you to authenticate using a token or username/password combination. The other options use authentication schemas associated with the integration.
-1. Fill in the remaining information required by the integration schema.
-1. Click **Create** to save your custom connection.
+Workflow connections extend your installed integrations to give you control over workflow step authentication. Use a custom connection to authenticate a [generic action][1] or any action for which the integration tile does not offer authentication. These custom connection credentials are only available for use within the Workflows product.
 
-## Working with connections
+Custom connections support the following example use cases:
+- The integration you need is not available as a built-in connection.
+- You wish to authenticate a custom action. For instance, you need to use the HTTP action with your own service.
+- The permissions needed are not supported by the integration, such as write permissions on AWS.
+- You want granular access control, for example restricting user access to certain workflows.
 
-### Restrict connection use
+## Work with connections
 
-You can set permissions on each connection to limit modifications or restrict their use. The granular permissions include **Viewer**, **Resolver**, and **Editor**.
+### View connections
 
-Viewer
-: Can view
+1. From the [Workflows list][2], click **Connections** in the upper right. The [connections list][3] opens.
+1. Click on a single line to view connection details.
 
-Resolver
-: Can resolve and view
+### Create connection
 
-Editor
-: Can edit, resolve, and view
-
-1. Navigate to the [Workflows list][7].
-1. Click **Connections** in the upper right. A list of connections appears.
-1. Hover over the connection on which you would like to set granular permissions. **Edit**, **Permissions**, and **Delete** icons appear on the right.
-1. Click the padlock (**Permissions**) icon.
-1. Select **Restrict Access**.
-1. Select a role from the dropdown. Click **Add**. The role you selected populates into the bottom of the dialog box.
-1. Next to the role name, select your desired permission from the dropdown.
-1. If you would like to remove access from a role, click the trash can icon to the right of the role name.
-1. Click **Save**.
+1. Navigate to the [connections list][3].
+1. Click the **New Connection** button in the upper right. The **New Connection** dialog box appears.
+1. Click on an icon to choose an integration schema.
+1. Fill in the appropriate fields. Click **Create**.
 
 ### Edit connection
 
-1. Navigate to the [Workflows list][7].
-1. Click **Connections** in the upper right. A list of connections appears.
+1. Navigate to the [connections list][3].
 1. Hover over the connection you would like to edit. **Edit**, **Permissions**, and **Delete** icons appear on the right.
 1. Click the pencil (**Edit**) icon. A dialog box appears.
 1. Update the fields you would like to change.
@@ -50,8 +41,32 @@ Editor
 
 ### Delete connection
 
-1. Navigate to the [Workflows list][7].
-1. Click **Connections** in the upper right. A list of connections appears.
+1. Navigate to the [connections list][3].
 1. Hover over the connection you would like to delete. **Edit**, **Permissions**, and **Delete** icons appear on the right.
 1. Click the trash can (**Delete**) icon. "Are you sure?" text appears.
 1. Select **Delete**.
+
+### Restrict connection use
+ 
+To learn how to restrict connection use, see [Access and Authentication][4].
+
+## HTTP connection
+
+To connect to an arbitrary service, use the HTTP connection type, and choose from two authentication options:
+- Token based authentication
+- A username and password combination
+
+### Create HTTP connection
+
+1. Navigate to the [connections list][3].
+1. Select **New Connection**. A dialog box appears.
+1. Select **HTTP Connection**. The dialog box updates to show the HTTP connection parameters.
+1. Enter the **Base URL**.
+1. If appropriate, use the **Add +** buttons to add headers or URL parameters.
+1. Choose an connection type: **Token Auth** or **Basic Auth**. Enter the appropriate parameters.
+1. Click **Create** to save your HTTP connection.
+
+[1]: /workflows/actions_catalog/generic_actions/
+[2]: https://app.datadoghq.com/workflow
+[3]: https://app.datadoghq.com/workflow/connections
+[4]: /workflows/access/#restrict-connection-use

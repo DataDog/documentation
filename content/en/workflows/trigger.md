@@ -4,7 +4,7 @@ kind: documentation
 is_beta: true
 disable_toc: false
 further_reading:
-- link: "/workflows/service_accounts/"
+- link: "/workflows/access/#service-accounts/"
   tag: "Documentation"
   text: "Find out more about Service Accounts for workflows"
 - link: "dashboards"
@@ -102,8 +102,6 @@ To schedule a workflow run:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
-TODO replace links to service accounts with new page
-[1]: /workflows/service_accounts/
+[1]: /workflows/access/#service-accounts
 [2]: https://app.datadoghq.com/monitors/manage
 [3]: https://app.datadoghq.com/security/configuration/rules
