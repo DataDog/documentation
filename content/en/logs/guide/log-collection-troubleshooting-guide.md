@@ -168,9 +168,9 @@ To fix the error, give the Datadog Agent user read, write, and execute permissio
 
 1. Retrieve the ACL permissions for the file:
    ```powershell
-   PS C:\Users\Administrator> get-acl C:\application\logs\ | fl
+   PS C:\Users\Administrator> get-acl C:\app\logs | fl
 
-   Path   : Microsoft.PowerShell.Core\FileSystem::C:\app\application\
+   Path   : Microsoft.PowerShell.Core\FileSystem::C:\app\logs
    Owner  : BUILTIN\Administrators
    Group  : EC2-ABCD\None
    Access : NT AUTHORITY\SYSTEM Allow  FullControl
