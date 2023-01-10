@@ -72,7 +72,7 @@ To delete the key from the Datadog repofile, remove the `gpgkey` line that ends 
 
 ### Usage of automation tools
 
-Usage of automation tools like the Datadog Ansible role (see the full list in [What we're doing to mitigate the implications](#what-datadog-is-doing-to-mitigate-the-implications)) might reverse the manual changes recommended above. Until we release new versions that fix this, we recommend adding these manual changes to your automation tool runbooks.
+Usage of automation tools like the Datadog Ansible role (see the full list in [What Datadog is doing to mitigate the implications](#what-datadog-is-doing-to-mitigate-the-implications)) might reverse the manual changes recommended above. Until we release new versions that fix this, we recommend adding these manual changes to your automation tool runbooks.
 
 ### Verifying installed Agent packages
 
@@ -98,7 +98,7 @@ Lines starting with `[ ERROR ]` should be reported to [Datadog Support][4] along
 
 ## What Datadog is doing to mitigate the implications
 
-* We're working towards releasing a new Agent 5 version signed with the [current RPM signing key](https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public), `C6559B690CA882F023BDF3F63F4D1729FD4BF915`.
+* We're working towards releasing a new Agent 5 version for CentOS/RHEL signed with the [current RPM signing key](https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public), `C6559B690CA882F023BDF3F63F4D1729FD4BF915`.
 * We're working on new releases to Agent installation methods to ensure they make systems safe by explicitly removing the affected key from the RPM database and the Datadog repofile. We will be updating this section as we release the new versions:
   * Datadog Ansible role: [https://github.com/DataDog/ansible-datadog/][5]
   * Datadog Chef recipe: [https://github.com/DataDog/chef-datadog][6]
