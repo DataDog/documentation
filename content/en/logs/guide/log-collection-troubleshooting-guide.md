@@ -76,10 +76,16 @@ To fix the error, give the Datadog Agent user read, write, and execute permissio
 
 {{< tabs >}}
 {{% tab "Linux and MacOS" %}}
-1. Run the `namei` command as the `datadog-agent` user to obtain more information about the file permissions:
-   ```text
-   > sudo -u datadog-agent namei -m /var/log/application/error.log
-   > f: /var/log/application/error.log
+1. Run the `namei` command to obtain more information about the file permissions:
+   ```
+   > namei -m /path/to/log/file
+   ```
+
+   In the following example, the Agent user does not have `execute` permissions on the `application` directory or read permissions on the `error.log` file.
+
+   ```
+   > namei -m /var/log/application/error.log
+   > f: /var/log/application/
    drwxr-xr-x /
    drwxr-xr-x var
    drwxrwxr-x log
@@ -87,28 +93,86 @@ To fix the error, give the Datadog Agent user read, write, and execute permissio
    -rw-r----- error.log
    ```
 
-   In this example, the Agent user does not have `execute` permissions on the `application` directory or read permissions on the `error.log` file.
-
-1. Add the missing permissions using the [`chmod` command][1]:
+1. Make the logs folder and its children readable:
 
    ```bash
-   sudo -u datadog-agent chmod -R +rwx <path/to/folder>
+   sudo chmod o+rx /path/to/logs
    ```
 
 **Note**: Make sure that these permissions are correctly set in your log rotation configuration. Otherwise, on the next log rotate, the Datadog Agent might lose its read permissions. Set permissions as `644` in the log rotation configuration to make sure the Agent has read access to the files.
 
-[1]: https://en.wikipedia.org/wiki/Chmod
 {{% /tab %}}
 
-{{% tab "Windows PowerShell" %}}
+{{% tab "Windows (icacls)" %}}
+1. Use the `icacls` command on the log folder to obtain more information about the file permissions:
+   ```
+   icacls path/to/logs/file /t
+   ```
+   The `/t` flag runs the command recursively on files and sub-folders.
+
+   In the following example, the `test` directory and its children are not accessible to `ddagentuser`:
+
+   ```powershell
+   PS C:\Users\Administrator> icacls C:\test\ /t
+   C:\test\ NT AUTHORITY\SYSTEM:(OI)(CI)(F)
+          BUILTIN\Administrators:(OI)(CI)(F)
+          CREATOR OWNER:(OI)(CI)(IO)(F)
+
+   C:\test\file.log NT AUTHORITY\SYSTEM:(F)
+          BUILTIN\Administrators:(F)
+
+   C:\test\file2.log NT AUTHORITY\SYSTEM:(F)
+          BUILTIN\Administrators:(F)
+   ```
+
+1. Use the `icacls` command to grant `ddagentuser` the required permissions (include the quotes):
+   ```
+   icacls "path\to\folder" /grant "ddagentuser:(OI)(CI)(RX)" /t
+   ```
+
+   In case the application uses log rotation, `(OI)` and `(CI)` inheritance rights ensure that any future log files created in the directory inherit the parent folder permissions.
+
+1. Run `icacls` again to check that `ddagentuser` has the correct permissions:
+   ```powershell
+   icacls path/to/logs/file /t
+   ```
+
+   In the following example, `ddagentuser` is now listed in the file permissions:
+   ```powershell
+   PS C:\Users\Administrator> icacls C:\test\ /t
+   C:\test\ EC2-ABCD\ddagentuser:(OI)(CI)(RX)
+          NT AUTHORITY\SYSTEM:(OI)(CI)(F)
+          BUILTIN\Administrators:(OI)(CI)(F)
+          CREATOR OWNER:(OI)(CI)(IO)(F)
+
+   C:\test\file.log NT AUTHORITY\SYSTEM:(F)
+                  BUILTIN\Administrators:(F)
+                  EC2-ABCD\ddagentuser:(RX)
+
+   C:\test\file2.log NT AUTHORITY\SYSTEM:(F)
+                  BUILTIN\Administrators:(F)
+                  EC2-ABCD\ddagentuser:(RX)
+   Successfully processed 3 files; Failed processing 0 files
+   ```
+
+1. Restart the Agent service and check the status to see if the problem is resolved:
+
+   ```powershell
+   & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" restart-service
+   & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" status
+   ```
+
+{{% /tab %}}
+
+{{% tab "Windows (PowerShell)" %}}
 
 1. Retrieve the ACL permissions for the file:
    ```powershell
-   > get-acl C:\application\logs\ | fl
+   PS C:\Users\Administrator> get-acl C:\application\logs\ | fl
 
    Path   : Microsoft.PowerShell.Core\FileSystem::C:\app\application\
    Owner  : BUILTIN\Administrators
-   Group  : EC2AMAZ-SGO963L\None
+   Group  : EC2-ABCD\None
    Access : NT AUTHORITY\SYSTEM Allow  FullControl
             BUILTIN\Administrators Allow  FullControl
    ...
@@ -123,11 +187,25 @@ To fix the error, give the Datadog Agent user read, write, and execute permissio
    $acl | Set-Acl <path\to\logs\folder>
    ```
 
+1. Retrieve the ACL permissions for the file again to check if `ddagentuser` has the correct permissions:
+   ```powershell
+   PS C:\Users\Administrator> get-acl C:\app\logs | fl
+   Path   : Microsoft.PowerShell.Core\FileSystem::C:\app\logs
+   Owner  : BUILTIN\Administrators
+   Group  : EC2-ABCD\None
+   Access : EC2-ABCD\ddagentuser Allow  ReadAndExecute, Synchronize
+            NT AUTHORITY\SYSTEM Allow  FullControl
+            BUILTIN\Administrators Allow  FullControl
+   ...
+   ```
+
 1. Restart the Agent service and check the status to see if the problem is resolved:
    ```powershell
    & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" restart-service
    & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" status
    ```
+
+
 {{% /tab %}}
 
 {{< /tabs >}}
