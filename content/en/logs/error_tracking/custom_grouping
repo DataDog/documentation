@@ -1,0 +1,67 @@
+---
+title: Custom grouping
+kind: documentation
+description: Customize how errors are grouped into issues.
+is_beta: true
+further_reading:
+  - link: 'https://www.datadoghq.com/blog/error-tracking/'
+    tag: 'Blog'
+    text: 'Make sense of application issues with Datadog Error Tracking'
+  - link: '/logs/error_tracking/explorer/'
+    tag: 'Documentation'
+    text: 'Learn about the Error Tracking Explorer'
+---
+
+## Overview
+
+Error Tracking intelligently groups similar errors into issues with a default strategy. However, it's also possible to
+customize the grouping behavior and gain full control over the grouping decision for your error logs.
+
+This is achieved by providing the material Error Tracking will use to create issues in an
+`error.fingerprint` attribute. The content of the `error.fingerprint` needs to be a string but doesn't have any other
+particular format or requirement.
+
+If `error.fingerprint` is provided, the grouping behavior follows these rules:
+
+* Custom grouping takes precedence over the default strategy.
+* Custom grouping can be applied only to a subset of your error logs and can coexist with the default strategy.
+* The content of `error.fingerprint` is used as-is without any modification.
+* Logs with the same `error.fingerprint` attribute are grouped into the same Error Tracking issue.
+* Logs with different `service` attributes are grouped into different Error Tracking issues.
+
+## Setup
+
+Custom grouping only needs an error log and an `error.fingerprint` string attrubute.
+
+If you aren’t already collecting logs with Datadog, see the [Logs documentation][1] to set up logs.
+Ensure that the `source` tag (specifying language) is properly configured.
+
+### Example
+
+If you're already logging in JSON format, just add a new `error.fingerprint` attribute to your error log.
+
+Here's an example in Python for a JSON-formatted logger:
+
+```python
+import logging
+import json_log_formatter
+
+formatter = json_log_formatter.JSONFormatter()
+
+json_handler = logging.FileHandler(filename='/var/log/my-log.json')
+json_handler.setFormatter(formatter)
+
+logger = logging.getLogger('my_json')
+logger.addHandler(json_handler)
+logger.setLevel(logging.INFO)
+
+logger.error('Error processing request', extra={'error.fingerprint': 'my-custom-grouping-material'})
+```
+
+In this case, `my-custom-grouping-material` is used to group these error logs into a single
+issue in Error Tracking.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+[1]: /logs/log_collection/

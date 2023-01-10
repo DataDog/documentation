@@ -1,0 +1,64 @@
+---
+title: Custom grouping
+kind: documentation
+description: Customize how errors are grouped into issues.
+further_reading:
+- link: "https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps"
+  tag: "GitHub"
+  text: "datadog-ci Source code"
+- link: "/real_user_monitoring/guide/upload-javascript-source-maps"
+  tag: "Documentation"
+  text: "Upload Javascript source maps"
+- link: "/real_user_monitoring/error_tracking/explorer"
+  tag: "Documentation"
+  text: "Learn about the Error Tracking Explorer"
+---
+
+## Overview
+
+Error Tracking intelligently groups similar errors into issues with a default strategy. However, it's also possible to
+customize the grouping behavior and gain full control over the grouping decision for your Real User Monitoring (RUM)
+errors.
+
+This is achieved by providing the material Error Tracking will use to create issues in an
+`error.fingerprint` attribute. The content of the `error.fingerprint` needs to be a string but doesn't have any other
+particular format or requirement.
+
+If `error.fingerprint` is provided, the grouping behavior follows these rules:
+
+* Custom grouping takes precedence over the default strategy.
+* Custom grouping can be applied only to a subset of your RUM errors and can coexist with the default strategy.
+* The content of `error.fingerprint` is used as-is without any modification.
+* RUM errors with the same `error.fingerprint` attribute are grouped into the same Error Tracking issue.
+* RUM errors with different `service` attributes are grouped into different Error Tracking issues.
+
+## Setup
+
+Custom grouping only needs a RUM error and an `error.fingerprint` string attrubute.
+
+If you aren’t already collecting RUM events with Datadog, see the [RUM documentation][1] to set up Real User Monitoring.
+
+### Example
+
+If you're already sending RUM events, just add a new `error.fingerprint` attribute to your RUM error event.
+
+Here's an example for [collecting browser errors][2]:
+
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+
+// Send a custom error with context
+const err = new Error('Something went wrong');
+datadogRum.addError(error, {
+  'error.fingerprint': 'my-custom-grouping-material',
+});
+```
+
+In this case, `my-custom-grouping-material` is used to group these RUM errors into a single
+issue in Error Tracking.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+[1]: /real_user_monitoring/
+[2]: /real_user_monitoring/browser/collecting_browser_errors/

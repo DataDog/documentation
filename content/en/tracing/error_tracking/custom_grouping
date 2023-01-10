@@ -1,0 +1,49 @@
+---
+title: Custom grouping
+kind: documentation
+description: Customize how errors are grouped into issues.
+---
+
+## Overview
+
+Error Tracking intelligently groups similar errors into issues with a default strategy. However, it's also possible to
+customize the grouping behavior and gain full control over the grouping decision for your error spans.
+
+This is achieved by providing the material Error Tracking will use to create issues in an
+`error.fingerprint` span tag. The content of the `error.fingerprint` needs to be a string but doesn't have any other
+particular format or requirement.
+
+If `error.fingerprint` is provided, the grouping behavior follows these rules:
+
+* Custom grouping takes precedence over the default strategy.
+* Custom grouping can be applied only to a subset of your error spans and can coexist with the default strategy.
+* The content of `error.fingerprint` is used as-is without any modification.
+* Spans with the same `error.fingerprint` attribute are grouped into the same Error Tracking issue.
+* Spans with different `service` attributes are grouped into different Error Tracking issues.
+
+## Setup
+
+Custom grouping only needs an error span and an `error.fingerprint` string span tag.
+
+If you aren’t already collecting APM traces with Datadog, see the [APM documentation][1] to set up APM.
+
+### Example
+
+If you're already sending APM spans, just add a new `error.fingerprint` tag to your error span.
+
+Here's an example in Python:
+
+```python
+with tracer.trace("throws.an.error") as span:
+  span.set_tag('error.fingerprint', 'my-custom-grouping-material')
+  raise Exception("Something went wrong")
+```
+
+Exception information is captured and attached to a span if there is one active when the exception is raised.
+In this case, `my-custom-grouping-material` is used to group these error spans into a single
+issue in Error Tracking.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+[1]: /tracing/
