@@ -162,6 +162,18 @@ def extract_config(configuration):
     :param configuration: Documentation build configuration file path.
     """
     list_of_contents = []
+    
+    print('Extracting config')
+    print(configuration)
+
+    # cache_config = configuration.get('config', {})
+    # print(cache_config)
+
+    # list_of_contents.append(cache_config)
+
+    cache_config = configuration[0]
+    print(cache_config)
+    
 
     for org in configuration:
         for repo in org["repos"]:
