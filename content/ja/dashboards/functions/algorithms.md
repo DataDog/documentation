@@ -1,9 +1,10 @@
 ---
-title: アルゴリズム
-kind: documentation
 aliases:
-  - /ja/graphing/functions/algorithms/
+- /ja/graphing/functions/algorithms/
+kind: documentation
+title: アルゴリズム
 ---
+
 ## 異常値
 
 | 関数      | 説明                                                                                | 例                                                    |
@@ -49,10 +50,6 @@ aliases:
 
 * `ALGORITHM`: 使用する予測アルゴリズム。`linear` または `seasonal` を選択します。これらのアルゴリズムの詳細については、[予測値アルゴリズム][3]のセクションを参照してください。
 * `DEVIATIONS`: 予測値の範囲の幅。この値を 1 ～ 2 にすると、大半の「正常」ポイントを正確に予測できます。
-
-予測値は独自に視覚化されるため、複数のグラフ作成オプションは非表示になります。**予測値**が正常に追加されると、エディターは以下のように表示されます。
-
-{{< img src="dashboards/functions/algorithms/forecast_query.png" alt="クエリエディター" style="width:80%;">}}
 
 ## その他の関数
 

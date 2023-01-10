@@ -22,39 +22,74 @@ Kubernetes 環境に Datadog Agent をインストールした後、追加の構
 {{< tabs >}}
 {{% tab "Operator" %}}
 
-Cluster Agent で Kubernetes のイベントを収集するには、`datadog-agent.yaml` マニフェストで `clusterAgent.config.collectEvents` を `true` に設定します。
+Cluster Agent で Kubernetes のイベントを収集するには、`datadog-agent.yaml` マニフェストで `clusterAgent.config.collectEvents` を true に設定します。
 
-例:
-
-```
+```yaml
 clusterAgent:
   config:
-    collectEvents: true
+    collectEvents: true 
 ```
 
-また、ノード Agent で Kubernetes のイベントを収集する場合は、`datadog-agent.yaml` マニフェストで `agent.config.collectEvents` を `true` に設定します。
-
-例:
-
-```
+また、Node Agent で Kubernetes のイベントを収集する場合は、`datadog-agent.yaml` マニフェストで `agent.config.collectEvents` を true に設定します。
+```yaml
 agent:
   config:
     collectEvents: true
 ```
 
+
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-Kubernetes のイベントを Datadog Cluster Agent で収集したい場合は、`value.yaml` ファイルで `clusterAgent.enabled`、`datadog.collectEvents`、`clusterAgent.rbac.create` オプションを `true` に設定してください。
+Kubernetes のイベントを Datadog Cluster Agent で収集したい場合は、`values.yaml` ファイルで `clusterAgent.enabled`、`datadog.collectEvents`、`clusterAgent.rbac.create` オプションが true に設定されていることを確認してください。
 
-Cluster Agent を使用しない場合でも、`value.yaml` ファイルで `datadog.leaderElection`、`datadog.collectEvents`、`agents.rbac.create` オプションを `true` に設定すれば、ノード Agent に Kubernetes イベントを収集させることができます。
+```yaml
+datadog:
+  collectEvents: true
+clusterAgent:
+  enabled: true
+  rbac: 
+    create: true
+```
+
+Cluster Agent を使用しない場合でも、`values.yaml` ファイルで `datadog.leaderElection`、`datadog.collectEvents`、`agents.rbac.create` オプションを true に設定すれば、Node Agent に Kubernetes イベントを収集させることができます。
+
+```yaml
+datadog:
+  leaderElection: true
+  collectEvents: true
+agents:
+  rbac:
+    create: true
 
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
 
-Kubernetes クラスターからイベントを収集する場合は、Agent マニフェストで環境変数 `DD_COLLECT_KUBERNETES_EVENTS` と `DD_LEADER_ELECTION` を `true` に設定します。または、[Datadog Cluster Agent イベント収集][1]を使用します
+Kubernetes のイベントを Datadog Cluster Agent で収集したい場合は、以下の手順を使用します。
 
-[1]: /ja/agent/cluster_agent/event_collection/
+1. `leader_election` 変数または `DD_LEADER_ELECTION` 環境変数を `false` に設定し、Node Agent でリーダー選出を無効にします。
+
+2. Cluster Agent のデプロイメントファイルで、`DD_COLLECT_KUBERNETES_EVENTS` と `DD_LEADER_ELECTION` 環境変数を `true` に設定します。
+
+      ```yaml
+        - name: DD_COLLECT_KUBERNETES_EVENTS
+          value: "true"
+        - name: DD_LEADER_ELECTION
+          value: "true"
+      ```
+
+
+上記の手順でリーダー選出を構成することで、イベントを収集する Cluster Agent が 1 つだけになるようにします。
+
+また、Node Agent から Kubernetes イベントを収集するには、Agent マニフェストで環境変数 `DD_COLLECT_KUBERNETES_EVENTS` と `DD_LEADER_ELECTION` を `true` に設定してください。
+
+```yaml
+- name: DD_COLLECT_KUBERNETES_EVENTS
+  value: "true"
+- name: DD_LEADER_ELECTION
+  value: "true"
+```
+
 {{% /tab %}}
 {{< /tabs >}}
 

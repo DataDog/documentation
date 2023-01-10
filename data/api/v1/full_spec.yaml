@@ -3825,7 +3825,6 @@ components:
       - estimated_ingested_spans_usage
       - fargate_usage
       - functions_usage
-      - indexed_logs_usage
       - infra_host_usage
       - invocations_usage
       - npm_host_usage
@@ -3856,7 +3855,6 @@ components:
       - ESTIMATED_INGESTED_SPANS_USAGE
       - FARGATE_USAGE
       - FUNCTIONS_USAGE
-      - INDEXED_LOGS_USAGE
       - INFRA_HOST_USAGE
       - INVOCATIONS_USAGE
       - NPM_HOST_USAGE
@@ -7177,8 +7175,6 @@ components:
       - fargate_percentage
       - functions_usage
       - functions_percentage
-      - indexed_logs_usage
-      - indexed_logs_percentage
       - infra_host_usage
       - infra_host_percentage
       - invocations_usage
@@ -7238,8 +7234,6 @@ components:
       - FARGATE_PERCENTAGE
       - FUNCTIONS_USAGE
       - FUNCTIONS_PERCENTAGE
-      - INDEXED_LOGS_USAGE
-      - INDEXED_LOGS_PERCENTAGE
       - INFRA_HOST_USAGE
       - INFRA_HOST_PERCENTAGE
       - INVOCATIONS_USAGE
@@ -7317,7 +7311,7 @@ components:
           format: double
           type: number
         cont_usage:
-          description: The container usage without Datadog agent by tag(s).
+          description: The container usage without the Datadog Agent by tag(s).
           format: double
           type: number
         container_percentage:
@@ -7449,14 +7443,6 @@ components:
           type: number
         functions_usage:
           description: The Lambda function usage by tag(s).
-          format: double
-          type: number
-        indexed_logs_percentage:
-          description: The percentage of indexed logs usage by tags.
-          format: double
-          type: number
-        indexed_logs_usage:
-          description: The indexed logs usage by tags.
           format: double
           type: number
         infra_host_percentage:
@@ -13098,6 +13084,11 @@ components:
         pattern:
           description: Pattern of the variable.
           type: string
+        secure:
+          description: Whether the value of this variable will be obfuscated in test
+            results.
+          example: false
+          type: boolean
         type:
           $ref: '#/components/schemas/SyntheticsConfigVariableType'
       required:
@@ -24901,6 +24892,11 @@ paths:
         - audit: `audit alert`
 
         - error-tracking: `error-tracking alert`
+
+
+        **Note**: Synthetic monitors are created through the Synthetics API. See the
+        [Synthetics API] (https://docs.datadoghq.com/api/latest/synthetics/) documentation
+        for more information.
 
 
         #### Query Types

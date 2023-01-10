@@ -6,6 +6,9 @@ further_reading:
 - link: /synthetics/cicd_integrations/configuration
   tag: ドキュメント
   text: Continuous Testing と CI/CD の構成について学ぶ
+- link: https://www.datadoghq.com/blog/best-practices-datadog-continuous-testing/
+  tag: GitHub
+  text: Datadog を使った継続的テストのベストプラクティス
 kind: documentation
 title: Continuous Testing と CI/CD のトラブルシューティング
 ---
