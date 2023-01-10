@@ -283,6 +283,8 @@ You can define advanced OpenMetrics check configurations or custom Autodiscovery
 
 Every [configuration field][1] supported by the OpenMetrics check can be passed in the configurations list.
 
+**Note**: Only the parameters [on this page][15] are supported for OpenmetricsV2 with autodiscovery.
+
 The autodiscovery configuration can be based on container names or kubernetes annotations or both. When both `kubernetes_container_names` and `kubernetes_annotations` are defined, it uses AND logic (both rules must match).
 
 `kubernetes_container_names` is a list of container names to target, it supports the `*` wildcard.
@@ -332,6 +334,8 @@ You can define advanced OpenMetrics check configurations or custom Autodiscovery
 `DD_PROMETHEUS_SCRAPE_CHECKS` is a list of structures containing OpenMetrics check configurations and Autodiscovery rules.
 
 Every [configuration field][1] supported by the OpenMetrics check can be passed in the configurations list.
+
+**Note**: Only the parameters [on this page][15] are supported for OpenmetricsV2 with autodiscovery.
 
 The Autodiscovery configuration can be based on container names or Kubernetes annotations or both. When both `kubernetes_container_names` and `kubernetes_annotations` are defined, it uses AND logic (both rules must match).
 
@@ -388,3 +392,4 @@ Official integrations have their own dedicated directories. There's a default in
 [12]: https://app.datadoghq.com/metric/summary
 [13]: /agent/faq/template_variables/
 [14]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy
+[15]: https://github.com/DataDog/datadog-agent/blob/main/pkg/autodiscovery/common/types/prometheus.go#L92-L100
