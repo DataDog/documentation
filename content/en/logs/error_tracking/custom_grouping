@@ -14,20 +14,17 @@ further_reading:
 
 ## Overview
 
-Error Tracking intelligently groups similar errors into issues with a default strategy. However, it's also possible to
-customize the grouping behavior and gain full control over the grouping decision for your error logs.
+Error Tracking intelligently groups similar errors into issues with a default strategy. It is possible to customize and gain full control over the grouping behavior for your error logs through _custom fingerprinting_.
 
-This is achieved by providing the material Error Tracking will use to create issues in an
-`error.fingerprint` attribute. The content of the `error.fingerprint` needs to be a string but doesn't have any other
-particular format or requirement.
+This is achieved by providing an `error.fingerprint` attribute that Error Tracking will use to group error logs into issues. The value of the `error.fingerprint` attribute must be a string but doesn't have any other particular format or requirement.
 
 If `error.fingerprint` is provided, the grouping behavior follows these rules:
 
 * Custom grouping takes precedence over the default strategy.
 * Custom grouping can be applied only to a subset of your error logs and can coexist with the default strategy.
 * The content of `error.fingerprint` is used as-is without any modification.
-* Logs with the same `error.fingerprint` attribute are grouped into the same Error Tracking issue.
-* Logs with different `service` attributes are grouped into different Error Tracking issues.
+* Logs from the same service with the same `error.fingerprint` attribute are grouped into the same issue.
+* Logs with different `service` attributes are grouped into different issues.
 
 ## Setup
 
@@ -38,7 +35,7 @@ Ensure that the `source` tag (specifying language) is properly configured.
 
 ### Example
 
-If you're already logging in JSON format, just add a new `error.fingerprint` attribute to your error log.
+If you're already logging in JSON format, simply add a new `error.fingerprint` attribute to your error log.
 
 Here's an example in Python for a JSON-formatted logger:
 
