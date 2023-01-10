@@ -137,7 +137,7 @@ To fix the error, give the Datadog Agent user read, write, and execute permissio
    icacls path/to/logs/file /t
    ```
 
-   In the following example, `ddagentuser` is now listed in the file permissions:
+   In the following example, `ddagentuser` is listed in the file permissions:
    ```powershell
    PS C:\Users\Administrator> icacls C:\test\ /t
    C:\test\ EC2-ABCD\ddagentuser:(OI)(CI)(RX)
