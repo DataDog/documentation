@@ -1140,7 +1140,7 @@
         dest_dir: '/security/cspm/custom_rules/'
         path_to_remove: 'generated/md/external/'
         front_matters:
-          dependencies: []
+          disable_edit: true
 
   - repo_name: apps
     contents:
