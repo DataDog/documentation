@@ -49,8 +49,8 @@ The following profiling features are available in the following minimum versions
 
 |      Feature         | Required `dd-trace-php` version          |
 |----------------------|-----------------------------------------|
-| Code Hotspots        | 0.71 or greater                       |
-| Endpoints            | 0.79.0 or greater                       |
+| Code Hotspots        | 0.71+                       |
+| Endpoint Profiling            | 0.79.0+                       |
 
 Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
 

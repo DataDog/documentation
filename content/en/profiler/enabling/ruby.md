@@ -35,8 +35,8 @@ The following profiling features are available in the following minimum versions
 
 |      Feature         | Required `dd-trace-rb` version          |
 |----------------------|-----------------------------------------|
-| Code Hotspots        | 0.49.0 or greater                       |
-| Endpoints            | 0.54.0 or greater                       |
+| Code Hotspots        | 0.49.0+                       |
+| Endpoint Profiling            | 0.54.0+                       |
 
 Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
 

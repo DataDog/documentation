@@ -41,8 +41,8 @@ The following profiling features are available in the following minimum versions
 
 |      Feature         | Required `dd-trace-py` version          |
 |----------------------|-----------------------------------------|
-| Code Hotspots        | 0.44.0 or greater                       |
-| Endpoints            | 0.54.0 or greater                       |
+| Code Hotspots        | 0.44.0+                       |
+| Endpoint Profiling            | 0.54.0+                       |
 
 ## Installation
 

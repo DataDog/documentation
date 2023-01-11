@@ -54,8 +54,8 @@ The following profiling features are available in the following minimum versions
 
 |      Feature         | Required `dd-trace-dotnet` version          |
 |----------------------|-----------------------------------------|
-| Code Hotspots        | 2.7.0 or greater                       |
-| Endpoints            | 2.15.0 or greater                       |
+| Code Hotspots        | 2.7.0+                       |
+| Endpoint Profiling            | 2.15.0+                       |
 
 ## Installation
 
