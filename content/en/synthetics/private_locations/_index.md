@@ -45,7 +45,7 @@ Your private location worker pulls your test configurations from Datadog’s ser
 
 ### Continuous Testing
 
-In order to use private locations for Continuous Testing tests, you need v1.27.0 or later.
+In order to use private locations for [Continuous Testing tests][23], you need v1.27.0 or later.
 
 ### Docker
 
