@@ -2,6 +2,7 @@
 // import 'bootstrap';
 
 import Modal from 'bootstrap/js/dist/modal';
+import 'bootstrap/js/dist/dropdown';
 
 import './datadog-docs';
 import './utms';
