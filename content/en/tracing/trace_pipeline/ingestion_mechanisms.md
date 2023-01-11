@@ -691,7 +691,7 @@ Read more about sampling controls in the [.NET tracing library documentation][2]
 
 A request from a web or mobile application generates a trace when the backend services are instrumented. [The APM integration with Real User Monitoring][7] links web and mobile application requests to their corresponding backend traces so you can see your full frontend and backend data through one lens.
 
-Starting in version `4.30.0` of the RUM browser SDK , you can control ingested volumes and keep a sampling of the backend traces by configuring the `traceSampleRate` initialization parameter.  Set `traceSampleRate` to a number between `0` and `100`.
+Beginning with version `4.30.0` of the RUM browser SDK, you can control ingested volumes and keep a sampling of the backend traces by configuring the `traceSampleRate` initialization parameter.  Set `traceSampleRate` to a number between `0` and `100`.
 If no `traceSampleRate` value is set, a default of 100% of the traces coming from the browser requests are sent to Datadog.
 
 Similarly, control the trace sampling rate in other SDKs by using similar parameters:
