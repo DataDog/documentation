@@ -21,11 +21,11 @@ This guide walks you through what to consider when designing your Observability 
 
 ## Networking
 
-The first step to architecting your Observability Pipelines Worker deployment is to understand where Observability Pipelines Worker fits within your network and where to deploy it.
+The first step to architecting your Observability Pipelines Worker deployment is understanding where Observability Pipelines Worker fits within your network and where to deploy it.
 
 ### Working with network boundaries
 
-When deploying the Observability Pipelines Worker as an aggregator, it should be deployed within your network boundaries to minimize egress costs. Ingress into the Observability Pipelines Worker should never travel over the public internet. Therefore, it is recommended to start with one aggregator per region to keep things simple.
+When deploying the Observability Pipelines Worker as an aggregator, it should be deployed within your network boundaries to minimize egress costs. Ingress into the Observability Pipelines Worker should never travel over the public internet. Therefore, Datadog recommends starting with one aggregator per region to keep things simple.
 
 ### Using firewalls and proxies
 
@@ -39,7 +39,7 @@ Discovery of your Observability Pipelines Worker aggregators and services should
 
 ### Choosing protocols
 
-When sending data to the Observability Pipelines Worker, Datadog recommends choosing a protocol that allows easy load-balancing and application-level delivery acknowledgment. HTTP and gRPC is preferred due to their ubiquitous nature and the amount of available tools and documentation to help operate HTTP/gRPC-based services effectively and efficiently.
+When sending data to the Observability Pipelines Worker, Datadog recommends choosing a protocol that allows easy load-balancing and application-level delivery acknowledgment. HTTP and gRPC are preferred due to their ubiquitous nature and the amount of available tools and documentation to help operate HTTP/gRPC-based services effectively and efficiently.
 
 Choose the source that aligns with your protocol. Each Observability Pipelines Worker source implements different protocols. For example, Observability Pipelines Worker sources and sinks use gRPC for inter-Observability Pipelines Worker communication, and the HTTP source allows you to receive data over HTTP.
 
@@ -72,7 +72,7 @@ For example, Datadog [Network Performance Monitoring][2] integrates the Datadog 
 
 As another example, the Datadog Agent collects service metrics and enriches them with vendor-specific Datadog tags. In this case, the Datadog Agent should send the metrics directly to Datadog or route them through the Observability Pipelines Worker. The Observability Pipelines Worker should not replace the Datadog Agent because the data being produced is enriched in a vendor-specific way.
 
-If you decide to integrate with an agent, configure the Observability Pipelines Worker to receive data directly from the agent over the local network, routing data through the Observability Pipelines Worker. Use source components such as the `datadog_agent` or `open_telemetry` to receive data from your agents.
+If you integrate with an agent, configure the Observability Pipelines Worker to receive data directly from the agent over the local network, routing data through the Observability Pipelines Worker. Use source components such as the `datadog_agent` or `open_telemetry` to receive data from your agents.
 
 Alternatively, you can deploy the Observability Pipelines Worker on separate nodes as an aggregator. See [Choosing where to process data](#choosing-where-to-process-data) for more details.
 
@@ -108,7 +108,7 @@ For remote processing, the Observability Pipelines Worker can be deployed on sep
 
 #### Unified processing
 
-Finally, you can also combine local and remote data process to create a unified observability data pipeline. Datadog recommends evolving towards unified processing after starting with [remote processing](#remote-processing).
+Finally, you can also combine local and remote data processing to create a unified observability data pipeline. Datadog recommends evolving towards unified processing after starting with [remote processing](#remote-processing).
 
 ## Buffering data
 
@@ -125,31 +125,31 @@ For these reasons, the Observability Pipelines Worker couples buffers with its s
 
 ### Choosing how to buffer data
 
-Observability Pipelines Worker's built-in buffers simplify operation and eliminates the need for complex external buffers.
+Observability Pipelines Worker's built-in buffers simplify operation and eliminate the need for complex external buffers.
 
 When choosing an Observability Pipelines Worker buffer type, select the type that is optimal for the destination's purpose. For example, your system of record should use disk buffers for high durability, and your system of analysis should use memory buffers for low latency. Additionally, both buffers can overflow to another buffer to prevent back pressure from propagating to your clients.
 
 ## Routing data
 
-Routing data, so that your aggregators send data to the proper destination, is the final piece in your pipeline design. Use aggregators to flexibly route data to the best system for your team(s).
+Routing data, so that your aggregators send data to the proper destination, is the final piece in your pipeline design. Use aggregators to route data flexibly to the best system for your team(s).
 
 ### Separating systems of record and analysis
 
-Separate your system of record from your system of analysis to optimize cost without making trade offs that affect their purpose. For example, your system of record can batch large amounts of data over time and compress it to minimize cost while ensuring high durability for all data. And your system of analysis can sample and clean data to reduce cost while keeping latency low for real-time analysis.
+Separate your system of record from your system of analysis to optimize cost without making trade-offs that affect their purpose. For example, your system of record can batch large amounts of data over time and compress it to minimize cost while ensuring high durability for all data. And your system of analysis can sample and clean data to reduce cost while keeping latency low for real-time analysis.
 
 ### Routing to your systems of record (Archiving)
 
-Optimize your system of record for durability while minimizing costs, by doing the following:
+Optimize your system of record for durability while minimizing costs by doing the following:
 
 - Only write to your archive from the aggregator role to reduce data loss due to node restarts and software failures.
 - Front the sink with a disk buffer.
-- Enable end-to-end acknowledgements on all sources.
+- Enable end-to-end acknowledgments on all sources.
 - Set `batch.max_bytes` to ≥ 5MiB, `batch.timeout_secs` to ≥ 5 minutes, and enable compression (the default for archiving sinks, such as the `aws_s3` sink).
 - Archive raw, unprocessed data to allow for data replay and reduce the risk of accidental data corruption during processing.
 
 ### Routing to your system of analysis
 
-Optimize your system of analysis for analysis while reducing costs, by doing the following:
+Optimize your system of analysis for analysis while reducing costs by doing the following:
 
 - Front the sink with a memory buffer.
 - Set `batch.timeout_sec` to ≤ 5 seconds (the default for analytical sinks, such as `datadog_logs`).
