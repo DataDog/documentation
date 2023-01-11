@@ -41,7 +41,7 @@ Error Tracking computes a fingerprint for each error span it processes using the
 
 ## Examine issues to start troubleshooting or debugging
 
-Error Tracking automatically categorizes errors into issues collected from your backend services in the [Error Tracking Explorer][1]. 
+Error Tracking automatically categorizes errors into issues collected from your backend services in the [Error Tracking Explorer][3]. 
 
 Click on an issue to see a summary of the error, the distribution of impacted spans, the latest most relevant stack trace, span tags, host tags, container tags, and metrics.
 
@@ -51,3 +51,4 @@ Click on an issue to see a summary of the error, the distribution of impacted sp
 
 [1]: /tracing/visualization/trace/?tab=spantags#more-information
 [2]: /tracing/trace_explorer/trace_view/?tab=spantags
+[3]: https://app.datadoghq.com/apm/error-tracking
