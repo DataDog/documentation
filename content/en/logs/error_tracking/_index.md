@@ -7,12 +7,15 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/error-tracking/'
     tag: 'Blog'
     text: 'Make sense of application issues with Datadog Error Tracking'
+  - link: 'https://www.datadoghq.com/blog/error-tracking-logs/'
+    tag: 'Blog'
+    text: 'Track and triage errors in your logs with Datadog Error Tracking'
   - link: '/logs/error_tracking/explorer'
     tag: 'Documentation'
     text: 'Learn about the Error Tracking Explorer'
-  - link: "https://www.datadoghq.com/blog/error-tracking-logs/"
-    tag: "Blog"
-    text: "Track and triage errors in your logs with Datadog Error Tracking"
+  - link: '/monitors/types/error_tracking/'
+    tag: 'Documentation'
+    text: 'Create an Error Tracking monitor'
 ---
 
 {{< beta-callout btn_hidden="true" >}}

@@ -12,12 +12,15 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/how-datadogs-tech-solutions-team-rum-session-replay/"
   tag: "Blog"
   text: "How Datadog's Technical Solutions team uses RUM, Session Replay, and Error Tracking to resolve customer issues"
-- link: "/real_user_monitoring/error_tracking/explorer"
-  tag: "Documentation"
-  text: "Learn about the Error Tracking Explorer"
 - link: "https://www.datadoghq.com/blog/error-tracking-logs/"
   tag: "Blog"
   text: "Track and triage errors in your logs with Datadog Error Tracking"
+- link: "/real_user_monitoring/error_tracking/explorer"
+  tag: "Documentation"
+  text: "Learn about the Error Tracking Explorer"
+- link: "/monitors/types/error_tracking/"
+  tag: "Documentation"
+  text: "Create an Error Tracking monitor"
 ---
 
 ## Overview

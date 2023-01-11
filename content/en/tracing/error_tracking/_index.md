@@ -6,12 +6,15 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/service-page/"
   tag: "Blog"
   text: "Explore a centralized view into service telemetry, Error Tracking, SLOs, and more"
-- link: "/tracing/error_tracking/explorer"
-  tag: "Documentation"
-  text: "Learn about the Error Tracking Explorer"
 - link: "/tracing/trace_explorer/trace_view/"
   tag: "Documentation"
   text: "Learn about the Trace Explorer"
+- link: "/tracing/error_tracking/explorer"
+  tag: "Documentation"
+  text: "Learn about the Error Tracking Explorer"
+- link: "/monitors/types/error_tracking/"
+  tag: "Documentation"
+  text: "Create an Error Tracking monitor"
 ---
 
 ## Overview
