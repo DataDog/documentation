@@ -366,7 +366,7 @@ If you're using a managed destination, such as Datadog, Observability Pipelines 
 
 ### Multiple aggregator deployments
 
-As covered in [network boundaries](#network-boundaries), it is recommended to start with one Observability Pipelines Worker aggregator per region. This is to prevent overcomplicating your initial deployment of Observability Pipelines Worker, but there are circumstances where starting with multiple deployments makes sense:
+As covered in [network boundaries](#network-boundaries), Datadog recommends to start with one Observability Pipelines Worker aggregator per region. This is to prevent overcomplicating your initial deployment of Observability Pipelines Worker, but there are circumstances where starting with multiple deployments makes sense:
 
 1. **Prevent sending data over the public internet.** If you have multiple clouds and regions, deploy the Observability Pipelines Worker aggregator in each of them to prevent sending large amounts of data over the internet. Your Observability Pipelines Worker aggregator should receive internal data and serve as the single point of egress for your network.
 
@@ -374,7 +374,7 @@ As covered in [network boundaries](#network-boundaries), it is recommended to st
 
 ### Multiple cloud accounts
 
-Many users have multiple cloud accounts with VPCs and clusters inside. It is still recommended in this case to deploy one Observability Pipelines Worker aggregator per region. Deploy Observability Pipelines Worker into your utility/tools cluster and configure all your cloud accounts to send data to this cluster. See [network boundaries](#network-boundaries) for more information.
+Many users have multiple cloud accounts with VPCs and clusters inside. Datadog still recommends in this case to deploy one Observability Pipelines Worker aggregator per region. Deploy Observability Pipelines Worker into your utility/tools cluster and configure all your cloud accounts to send data to this cluster. See [network boundaries](#network-boundaries) for more information.
 
 ### Pub-sub systems
 
@@ -387,14 +387,14 @@ Using a pub-sub system, like Kafka, is not required to make this architecture hi
 
 #### Pub-sub partitioning
 
-Partitioning, or "topics" in Kafka terminology, refers to separating data in your pub-sub systems. It is strongly recommended to partition along data origin lines, such as the service or host that generated the data.
+Partitioning, or "topics" in Kafka terminology, refers to separating data in your pub-sub systems. Datadog strongly recommends partitioning along data origin lines, such as the service or host that generated the data.
 
 #### Pub-sub configuration
 
 When using a pub-sub system, the following configuration changes for Observability Pipelines Worker are recommended:
 
 - **Enable end-to-end acknowledgements for all sinks.** This setting ensures that the pub-sub checkpoint is not advanced until data is successfully written.
-- **Use memory buffers.** There is no need to use Observability Pipelines Worker’s disk buffers when it sits behind a pub-sub system. Your pub-sub system is designed for long-term buffering with high durability. Observability Pipelines Worker should only be responsible for reading, processing, and routing the data (not durability).
+- **Use memory buffers.** There is no need to use Observability Pipelines Worker's disk buffers when it sits behind a pub-sub system. Your pub-sub system is designed for long-term buffering with high durability. Observability Pipelines Worker should only be responsible for reading, processing, and routing the data (not durability).
 
 ### Global aggregation
 
