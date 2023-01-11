@@ -66,6 +66,7 @@ before_script:
   image: public.ecr.aws/x2b9z2t7/webops/site-build:latest
   tags:
     - "runner:main"
+    - "size:2xlarge"
   except:
     - tags
   only:
