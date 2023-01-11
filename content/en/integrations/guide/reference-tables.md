@@ -106,6 +106,9 @@ After reviewing and assigning the role, you can import into Reference Tables fro
 
 For more information, see the [Azure integration documentation][4]. 
 
+**Note**: The upload from cloud object storage supports files up to 200MB.
+
+
 [1]: https://app.datadoghq.com/integrations/azure
 [2]: /integrations/azure/?tab=azurecliv20#integrating-through-the-azure-portal
 [3]: https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#storage-blob-data-reader
