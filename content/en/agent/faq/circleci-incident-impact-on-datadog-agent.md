@@ -6,7 +6,7 @@ kind: faq
 On January 4th, 2023, Datadog was notified by CircleCI that they were investigating a [security incident][1] that may have led to leaking stored secrets. Datadog identified a single secret stored in CircleCI that could theoretically be misused by a potential attacker, an old RPM GNU Privacy Guard (GPG) private signing key and its passphrase. This page documents the implications of the potential leak and the measures Datadog is taking to mitigate any risks to our customers.
 
 <div class="alert alert-info">
-<strong>Note</strong>: As of January 10th, 2023, Datadog has no indication that the key was actually leaked or misused, but we are still taking the following actions out of an abundance of caution.
+<strong>Note</strong>: As of January 11th, 2023, Datadog has no indication that the key was actually leaked or misused, but we are still taking the following actions out of an abundance of caution.
 </div>
 
 ## The affected key
@@ -14,7 +14,7 @@ On January 4th, 2023, Datadog was notified by CircleCI that they were investigat
 The RPM GPG signing key has fingerprint `60A389A44A0C32BAE3C03F0B069B56F54172A230`, and is accessible in [our signing keys location][2]. This key was historically used to sign Agent 5 releases and Agent 6 releases up to (and including) 6.13.0.
 
 <div class="alert alert-info">
-<strong>Note</strong>: Official Datadog repositories were <strong>not</strong> compromised. The signing key, if actually leaked, could be used to construct an RPM package that looks like it's from Datadog.
+<strong>Note</strong>: Official Datadog repositories were <strong>not</strong> compromised. The signing key, if actually leaked, could be used to construct an RPM package that looks like it's from Datadog but it would not be enough to place such a package in our official package repositories.
 </div>
 
 ## Am I affected?
@@ -26,11 +26,11 @@ You don't need to take any action if:
 * You're on an RPM-based Linux distribution (RHEL, CentOS, Rocky Linux, AlmaLinux, Amazon Linux, SUSE/SLES, Fedora), but your system doesn't trust the affected GPG key (see below on how to check)
 
 Datadog recommends you take action if:
-* You're on an RPM-based Linux distribution (RHEL, CentOS, Rocky Linux, AlmaLinux, Amazon Linux, SUSE/SLES, Fedora), and your system trusts the affected GPG key
+* You're on an RPM-based Linux distribution (RHEL, CentOS, Rocky Linux, AlmaLinux, Amazon Linux, SUSE/SLES, Fedora), **and** your system trusts the affected GPG key
 
 ## Does my system trust the affected key?
 
-Two places need to be checked to verify if your system trusts the affected key: the RPM database and the Datadog repofile. If either one of these is identified as trusting the key, we recommend taking the actions listed in the following sections. If neither of these is identified as trusting the key, no further action is needed.
+Two places need to be checked to verify if your system trusts the affected key: the RPM database and the Datadog repo file. If either one of these is identified as trusting the key, we recommend taking the actions listed in the following sections. If neither of these is identified as trusting the key, no further action is needed.
 
 ### Verifying if the key is imported in the RPM database
 
@@ -42,14 +42,14 @@ $ rpm -q gpg-pubkey-4172a230-55dd14f6
 
 If the command exits with 0 and prints `gpg-pubkey-4172a230-55dd14f6`, your system trusts the affected key, otherwise, it doesn't (it will exit with a non-0 exit code and print a message like `package gpg-pubkey-4172a230-55dd14f6 is not installed`).
 
-### Verifying if the key is used in the Datadog repofile
+### Verifying if the key is used in the Datadog repo file
 
-In default installations, the Datadog repofile can be found at:
+In default installations, the Datadog repo file can be found at:
 
 * `/etc/yum.repos.d/datadog.repo` on RHEL, CentOS, Rocky Linux, AlmaLinux, Amazon Linux and Fedora
 * `/etc/zypp/repos.d/datadog.repo` on OpenSUSE and SLES
 
-If the repofile contains a reference to one of these lines under the `gpgkey` entry, your system trusts the affected key:
+If the repo file contains a reference to one of these lines under the `gpgkey` entry, your system trusts the affected key:
 
 * `https://s3.amazonaws.com/public-signing-keys/DATADOG_RPM_KEY.public`
 * `https://keys.datadoghq.com/DATADOG_RPM_KEY.public`
@@ -68,7 +68,7 @@ To delete the key from the RPM database, run the following command:
 $ sudo rpm --erase gpg-pubkey-4172a230-55dd14f6
 ```
 
-To delete the key from the Datadog repofile, remove the `gpgkey` line that ends with `DATADOG_RPM_KEY.public`. If this was the only `gpgkey` entry in your repofile, replace it with `https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public`. Note that this has implications explained in the section [Implications of no Longer Trusting the Affected Key](#implications-of-no-longer-trusting-the-affected-key).
+To delete the key from the Datadog repo file, remove the `gpgkey` line that ends with `DATADOG_RPM_KEY.public`. If this was the only `gpgkey` entry in your repo file, replace it with `https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public`. Note that this has implications explained in the section [Implications of no Longer Trusting the Affected Key](#implications-of-no-longer-trusting-the-affected-key).
 
 ### Usage of automation tools
 
@@ -99,7 +99,7 @@ Lines starting with `[ ERROR ]` should be reported to [Datadog Support][4] along
 ## What Datadog is doing to mitigate the implications
 
 * We're working towards releasing a new Agent 5 version for CentOS/RHEL signed with the [current RPM signing key](https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public), `C6559B690CA882F023BDF3F63F4D1729FD4BF915`.
-* We're working on new releases to Agent installation methods to ensure they make systems safe by explicitly removing the affected key from the RPM database and the Datadog repofile. We will be updating this section as we release the new versions:
+* We're working on new releases to Agent installation methods to ensure they make systems safe by explicitly removing the affected key from the RPM database and the Datadog repo file. We will be updating this section as we release the new versions:
   * Datadog Ansible role: [https://github.com/DataDog/ansible-datadog/][5]
   * Datadog Chef recipe: [https://github.com/DataDog/chef-datadog][6]
   * Datadog Puppet module: [https://github.com/DataDog/puppet-datadog-agent][7]
