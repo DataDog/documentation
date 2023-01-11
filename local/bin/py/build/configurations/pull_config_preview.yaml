@@ -1138,7 +1138,7 @@
   - repo_name: infrastructure-resources
     contents:
     - action: pull-and-push-folder
-      branch: victoria.ding/external-docs
+      branch: prod
       globs:
         - "generated/md/external/*.md"
       options:
