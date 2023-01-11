@@ -35,8 +35,8 @@ All Agent traffic is sent over SSL. The destination is dependent on the Datadog 
 : `process.`{{< region-param key="dd_site" code="true" >}}
 
 [Network Device Monitoring][10]
-: `ndm-intake.`{{< region-param key="dd_site" code="true" >}}
-`snmp-traps-intake.`{{< region-param key="dd_site" code="true" >}}
+: `ndm-intake.`{{< region-param key="dd_site" code="true" >}}<br>
+`snmp-traps-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `ndmflow-intake.`{{< region-param key="dd_site" code="true" >}}
 
 

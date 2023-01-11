@@ -202,7 +202,7 @@ These HTTP headers are not CORS-safelisted, so you need to [configure Access-Con
 
 ## How are APM quotas affected?
 
-Connecting RUM and traces may significantly increase the APM ingested volumes. Use the initialization parameter `tracingSampleRate` to keep a share of the backend traces starting from browser and mobile requests.
+Connecting RUM and traces may significantly increase the APM-ingested volumes. Use the initialization parameter `tracingSampleRate` to keep a share of the backend traces starting from browser and mobile requests.
 
 ## How long are traces retained?
 

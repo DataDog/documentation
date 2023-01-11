@@ -13,11 +13,7 @@ further_reading:
 
 1. Navigate to [portal.azure.com][1].
 2. In the left sidebar, select **Azure Active Directory**.
-3. Under **Properties**, your tenant name is the **Directory ID** value.
-
-Your tenant name is also available from the URL when using the [classic portal][2]. It is the text in between (**not including**) the `@` and `#` symbol:
-
-{{< img src="integrations/guide/azure_troubleshooting/azure_tenant_url.png" alt="The azure tenant url with the text yourcompanyname.onmicrosoft.com highlighted between the @ and # symbols" style="width:70%">}}
+3. Under **Basic information**, find the **Name** value.
 
 ## Unable to login
 
