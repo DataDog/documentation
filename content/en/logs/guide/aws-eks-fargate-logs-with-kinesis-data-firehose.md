@@ -30,7 +30,7 @@ The following are key differences between using Kinesis Data Firehose and CloudW
 
 ## Requirements
 1. An EKS cluster with a [Fargate Profile][1]. In this guide, the cluster is named `fargate-cluster` with a fargate profile nameed `fargate-profile` applied to the namespace `fargate-namespace`.
-2. The following command line tools: [`kubectl`][6], [`aws`][7], [`jq`][8]
+2. The following command line tools: [`kubectl`][6], [`aws`][7]
 
 ## Setup
  
@@ -107,7 +107,7 @@ data:
  # Retrieve the pod execution role
  POD_EXEC_ROLE=$(aws eks describe-fargate-profile \
    --cluster-name fargate-cluster \
-   --fargate-profile-name fargate-profile | jq -r '.fargateProfile.podExecutionRoleArn' | cut -d '/' -f 1)
+   --fargate-profile-name fargate-profile | --query 'fargateProfile.podExecutionRoleArn' --output text |cut -d '/' -f 2)
 
  # Attach the role policy
  aws iam attach-role-policy \
@@ -175,4 +175,3 @@ Logs from this configuration require some attributes to be remapped to maximize 
 [5]: /logs/log_configuration/processors/?tab=ui#remapper
 [6]: https://kubernetes.io/docs/tasks/tools/
 [7]: https://aws.amazon.com/cli/
-[8]: https://stedolan.github.io/jq/
