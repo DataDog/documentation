@@ -20,7 +20,7 @@ AWS Fargate on EKS provides a fully managed experience for running Kubernetes wo
 {{< img src="logs/guide/aws-eks-fargate-logs-with-kinesis-data-firehose/log_streaming_diagram.png" alt="Diagram of the log flow depicting a Fargate EKS cluster sending container logs through Fluentbit log router to Kinesis data firehose and an S3 backup bucket within AWS and then on to Datadog" responsive="true">}}
  
    
-### Kinesis Data Firehose vs Cloudwatch log forwarding {#firehose-vs-cloudwatch}
+### Kinesis Data Firehose and CloudWatch log forwarding
 
 The following are key differences between using Kinesis Data Firehose and CloudWatch log forwarding.
 
