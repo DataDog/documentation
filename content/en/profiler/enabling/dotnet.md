@@ -43,9 +43,19 @@ Supported .NET runtimes (64-bit applications)
 .NET 5<br/>
 .NET 6<br/>
 .NET 7
+<div class="alert alert-warning">
+  <strong>Note:</strong> The beta for lock contention is only available for .NET 5+ and only in .NET 6+ for allocation profiling.
+</div>
 
 Supported languages
 : Any language that targets the .NET runtime, such as C#, F#, and Visual Basic.
+
+The following profiling features are available in the following minimum versions of the `dd-trace-dotnet` library:
+
+|      Feature         | Required `dd-trace-dotnet` version          |
+|----------------------|-----------------------------------------|
+| [Code Hotspots][12]        | 2.7.0+                       |
+| [Endpoint Profiling][13]            | 2.15.0+                       |
 
 ## Installation
 
@@ -352,3 +362,5 @@ The [Getting Started with Profiler][4] guide takes a sample service with a perfo
 [2]: https://app.datadoghq.com/account/settings?agent_version=6#agent
 [3]: /getting_started/tagging/unified_service_tagging
 [4]: /getting_started/profiler/
+[12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
+[13]: /profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints

@@ -8,6 +8,9 @@ further_reading:
 - link: "/synthetics/cicd_integrations/configuration"
   tag: "Documentation"
   text: "Learn how to configure Continuous Testing and CI/CD"
+- link: "https://www.datadoghq.com/blog/best-practices-datadog-continuous-testing/"
+  tag: "Blog"
+  text: "Best practices for continuous testing with Datadog"
 ---
 
 ## Overview

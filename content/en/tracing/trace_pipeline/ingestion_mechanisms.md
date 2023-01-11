@@ -68,16 +68,16 @@ The configuration can be set by environment variables or directly in the code:
 
 {{< tabs >}}
 {{% tab "Java" %}}
-For Java applications, set a global sampling rate in the library using the `DD_TRACE_SAMPLE_RATE` environment variable. Set by-service sampling rates with the `DD_TRACE_SAMPLING_SERVICE_RULES` environment variable.
+For Java applications, set a global sampling rate in the library using the `DD_TRACE_SAMPLE_RATE` environment variable. Set by-service sampling rates with the `DD_TRACE_SAMPLING_RULES` environment variable.
 
 For example, to send 20% of the traces for the service named `my-service`:
 
 ```
 # using system property
-java -Ddd.trace.sampling.service.rules=my-service:0.2 -javaagent:dd-java-agent.jar -jar my-app.jar
+java -Ddd.trace.sampling.rules=my-service:0.2 -javaagent:dd-java-agent.jar -jar my-app.jar
 
 # using environment variables
-export DD_TRACE_SAMPLING_SERVICE_RULES=my-service:0.2
+export DD_TRACE_SAMPLING_RULES=[{"service": "my-service", "sample_rate": 0.2}]
 ```
 
 The service name value is case sensitive and must match the case of the actual service name.
@@ -136,7 +136,7 @@ Read more about sampling controls in the [Go tracing library documentation][1].
 
 [1]: /tracing/trace_collection/dd_libraries/go
 {{% /tab %}}
-{{% tab "NodeJS" %}}
+{{% tab "Node.js" %}}
 For Node.js applications, set a global sampling rate in the library using the `DD_TRACE_SAMPLE_RATE` environment variable.
 
 You can also set by-service sampling rates. For instance, to send 50% of the traces for the service named `my-service` and 10% for the rest of the traces:
@@ -156,7 +156,7 @@ tracer.init({
 
 Configure a rate limit by setting the environment variable `DD_TRACE_RATE_LIMIT` to a number of traces per second per service instance. If no `DD_TRACE_RATE_LIMIT` value is set, a limit of 100 traces per second is applied.
 
-Read more about sampling controls in the [NodeJS tracing library documentation][1].
+Read more about sampling controls in the [Node.js tracing library documentation][1].
 
 [1]: /tracing/trace_collection/dd_libraries/nodejs
 {{% /tab %}}
@@ -241,29 +241,326 @@ With Agent version 7.33 and forward, you can configure the error sampler in the 
 
 The rare sampler sends a set of rare spans to Datadog. It catches combinations of `env`, `service`, `name`, `resource`, `error.type`, and `http.status` up to 5 traces per second (per Agent). It ensures visibility on low traffic resources when the head-based sampling rate is low.
 
-In Agent version 7.33 and forward, you can disable the rare sampler in the Agent main configuration file (`datadog.yaml`) or with an environment variable:
+**Note**: The rare sampler captures local traces at the Agent level. If the trace is distributed, there is no way to guarantee that the complete trace will be sent to Datadog.
+
+#### Datadog Agent 6/7.41.0 and higher
+
+By default, the rare sampler is **not enabled**. 
+
+**Note**: When **enabled**, spans dropped by tracing library rules or custom logic such as `manual.keep` are **excluded** under this sampler.
+
+To configure the rare sampler, update the `apm_config.enable_rare_sampler` setting in the Agent main configuration file (`datadog.yaml`) or with the environment variable `DD_APM_ENABLE_RARE_SAMPLER`:
+
+```
+@params apm_config.enable_rare_sampler - boolean - optional - default: false
+@env DD_APM_ENABLE_RARE_SAMPLER - boolean - optional - default: false
+```
+
+To evaluate spans dropped by tracing library rules or custom logic such as `manual.keep`,
+ enable the feature with: `DD_APM_FEATURES=error_rare_sample_tracer_drop` in the Trace Agent.
+
+
+#### Datadog Agent 6/7.33 to 6/7.40.x
+
+By default, the rare sampler is enabled.
+
+**Note**: When **enabled**, spans dropped by tracing library rules or custom logic such as `manual.keep` **are excluded** under this sampler. To include these spans in this logic, upgrade to Datadog Agent 6.41.0/7.41.0 or higher.
+
+To change the default rare sampler settings, update the `apm_config.disable_rare_sampler` setting in the Agent main configuration file (`datadog.yaml`) or with the environment variable `DD_APM_DISABLE_RARE_SAMPLER`:
 
 ```
 @params apm_config.disable_rare_sampler - boolean - optional - default: false
 @env DD_APM_DISABLE_RARE_SAMPLER - boolean - optional - default: false
 ```
 
-**Note**: The rare sampler captures local traces at the Agent level. If the trace is distributed, there is no way to guarantee that the complete trace will be sent to Datadog.
-
 ## Force keep and drop
 `ingestion_reason: manual`
 
 The head-based sampling mechanism can be overridden at the tracing library level. For example, if you need to monitor a critical transaction, you can force the associated trace to be kept. On the other hand, for unnecessary or repetitive information like health checks, you can force the trace to be dropped.
 
-- Set `ManualKeep` on a span to indicate that it and all child spans should be ingested. The resulting trace might appear incomplete in the UI if the span in question is not the root span of the trace.
+- Set Manual Keep on a span to indicate that it and all child spans should be ingested. The resulting trace might appear incomplete in the UI if the span in question is not the root span of the trace.
+
+- Set Manual Drop on a span to make sure that **no** child span is ingested. [Error and rare samplers](#error-and-rare-traces) will be ignored in the Agent.
+
+{{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php,cpp" >}}
+{{< programming-lang lang="java" >}}
+
+Manually keep a trace:
+
+```java
+import datadog.trace.api.DDTags;
+import io.opentracing.Span;
+import datadog.trace.api.Trace;
+import io.opentracing.util.GlobalTracer;
+
+public class MyClass {
+    @Trace
+    public static void myMethod() {
+        // grab the active span out of the traced method
+        Span span = GlobalTracer.get().activeSpan();
+        // Always keep the trace
+        span.setTag(DDTags.MANUAL_KEEP, true);
+        // method impl follows
+    }
+}
 ```
-// in dd-trace-go
-span.SetTag(ext.ManualKeep, true)
+
+Manually drop a trace:
+
+```java
+import datadog.trace.api.DDTags;
+import io.opentracing.Span;
+import datadog.trace.api.Trace;
+import io.opentracing.util.GlobalTracer;
+
+public class MyClass {
+    @Trace
+    public static void myMethod() {
+        // grab the active span out of the traced method
+        Span span = GlobalTracer.get().activeSpan();
+        // Always Drop the trace
+        span.setTag(DDTags.MANUAL_DROP, true);
+        // method impl follows
+    }
+}
 ```
-- Set ManualDrop to make sure that **no** child span is ingested. [Error and rare samplers](#error-and-rare-traces) will be ignored in the Agent.
+
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
+
+Manually keep a trace:
+
+```python
+from ddtrace import tracer
+from ddtrace.constants import MANUAL_DROP_KEY, MANUAL_KEEP_KEY
+
+@tracer.wrap()
+def handler():
+    span = tracer.current_span()
+    # Always Keep the Trace
+    span.set_tag(MANUAL_KEEP_KEY)
+    # method impl follows
 ```
-span.SetTag(ext.ManualDrop, true)
+
+Manually drop a trace:
+
+```python
+from ddtrace import tracer
+from ddtrace.constants import MANUAL_DROP_KEY, MANUAL_KEEP_KEY
+
+@tracer.wrap()
+def handler():
+    span = tracer.current_span()
+    # Always Drop the Trace
+    span.set_tag(MANUAL_DROP_KEY)
+    # method impl follows
 ```
+
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
+
+Manually keep a trace:
+
+```ruby
+Datadog::Tracing.trace(name, options) do |span, trace|
+  trace.keep! # Affects the active trace
+  # Method implementation follows
+end
+```
+
+Manually drop a trace:
+
+```ruby
+Datadog::Tracing.trace(name, options) do |span, trace|
+  trace.reject! # Affects the active trace
+  # Method implementation follows
+end
+```
+
+{{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
+
+Manually keep a trace:
+
+```Go
+package main
+
+import (
+    "log"
+    "net/http"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+)
+
+func handler(w http.ResponseWriter, r *http.Request) {
+    // Create a span for a web request at the /posts URL.
+    span := tracer.StartSpan("web.request", tracer.ResourceName("/posts"))
+    defer span.Finish()
+
+    // Always keep this trace:
+    span.SetTag(ext.ManualKeep, true)
+    //method impl follows
+
+}
+```
+
+Manually drop a trace:
+
+```Go
+package main
+
+import (
+    "log"
+    "net/http"
+
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+)
+
+func handler(w http.ResponseWriter, r *http.Request) {
+    // Create a span for a web request at the /posts URL.
+    span := tracer.StartSpan("web.request", tracer.ResourceName("/posts"))
+    defer span.Finish()
+
+    // Always drop this trace:
+    span.SetTag(ext.ManualDrop, true)
+    //method impl follows
+}
+```
+
+{{< /programming-lang >}}
+{{< programming-lang lang="nodejs" >}}
+
+Manually keep a trace:
+
+```js
+const tracer = require('dd-trace')
+const tags = require('dd-trace/ext/tags')
+
+const span = tracer.startSpan('web.request')
+
+// Always keep the trace
+span.setTag(tags.MANUAL_KEEP)
+//method impl follows
+
+```
+
+Manually drop a trace:
+
+```js
+const tracer = require('dd-trace')
+const tags = require('dd-trace/ext/tags')
+
+const span = tracer.startSpan('web.request')
+
+// Always drop the trace
+span.setTag(tags.MANUAL_DROP)
+//method impl follows
+
+```
+
+{{< /programming-lang >}}
+{{< programming-lang lang=".NET" >}}
+
+Manually keep a trace:
+
+```cs
+using Datadog.Trace;
+
+using(var scope = Tracer.Instance.StartActive("my-operation"))
+{
+    var span = scope.Span;
+
+    // Always keep this trace
+    span.SetTag(Datadog.Trace.Tags.ManualKeep, "true");
+    //method impl follows
+}
+```
+
+Manually drop a trace:
+
+```cs
+using Datadog.Trace;
+
+using(var scope = Tracer.Instance.StartActive("my-operation"))
+{
+    var span = scope.Span;
+
+    // Always drop this trace
+    span.SetTag(Datadog.Trace.Tags.ManualDrop, "true");
+    //method impl follows
+}
+```
+
+{{< /programming-lang >}}
+{{< programming-lang lang="php" >}}
+
+
+Manually keep a trace:
+
+```php
+<?php
+  $tracer = \DDTrace\GlobalTracer::get();
+  $span = $tracer->getActiveSpan();
+
+  if (null !== $span) {
+    // Always keep this trace
+    $span->setTag(\DDTrace\Tag::MANUAL_KEEP, true);
+  }
+?>
+```
+
+Manually drop a trace:
+
+```php
+<?php
+  $tracer = \DDTrace\GlobalTracer::get();
+  $span = $tracer->getActiveSpan();
+
+  if (null !== $span) {
+    // Always drop this trace
+    $span->setTag(\DDTrace\Tag::MANUAL_DROP, true);
+  }
+?>
+```
+
+{{< /programming-lang >}}
+{{< programming-lang lang="cpp" >}}
+
+Manually keep a trace:
+
+```cpp
+...
+#include <datadog/tags.h>
+...
+
+auto tracer = ...
+auto span = tracer->StartSpan("operation_name");
+// Always keep this trace
+span->SetTag(datadog::tags::manual_keep, {});
+//method impl follows
+```
+
+Manually drop a trace:
+
+```cpp
+...
+#include <datadog/tags.h>
+...
+
+auto tracer = ...
+auto another_span = tracer->StartSpan("operation_name");
+// Always drop this trace
+
+another_span->SetTag(datadog::tags::manual_drop, {});
+//method impl follows
+```
+
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
+
+Manual trace keeping should happen before context propagation. If it is kept after context propagation, the system can’t ensure that the entire trace is kept across services. Manual trace keep is set at tracing client location, so the trace can still be dropped by Agent or server location based on sampling rules.
+
 
 ## Single spans
 `ingestion_reason: single_span`
@@ -274,6 +571,20 @@ For example, if you are building [metrics from spans][6] to monitor specific ser
 
 
 {{< tabs >}}
+{{% tab "Java" %}}
+Starting in tracing library version [version 1.3.0][1], for Java applications, set by-service and by-operation name **span** sampling rules with the `DD_SPAN_SAMPLING_RULES` environment variable.
+
+For example, to collect 100% of the spans from the service named `my-service`, for the operation `http.request`, up to 50 spans per second:
+
+```
+@env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
+```
+
+Read more about sampling controls in the [Java tracing library documentation][2].
+
+[1]: https://github.com/DataDog/dd-trace-java/releases/tag/v1.3.0
+[2]: /tracing/trace_collection/dd_libraries/java
+{{% /tab %}}
 {{% tab "Python" %}}
 Starting from version [v1.4.0][1], for Python applications, set by-service and by-operation name **span** sampling rules with the `DD_SPAN_SAMPLING_RULES` environment variable.
 
@@ -288,14 +599,6 @@ Read more about sampling controls in the [Python tracing library documentation][
 
 [1]: https://github.com/DataDog/dd-trace-py/releases/tag/v1.4.0
 [2]: /tracing/trace_collection/dd_libraries/python
-{{% /tab %}}
-{{% tab "Java" %}}
-For Java applications, single span sampling rules are not supported. Contact [Datadog Support][1] if you are interested in this potential future feature.
-
-Read more about sampling controls in the [Java tracing library documentation][2].
-
-[1]: https://www.datadoghq.com/support/
-[2]: /tracing/trace_collection/dd_libraries/java
 {{% /tab %}}
 {{% tab "Ruby" %}}
 Starting from version [v1.5.0][1], for Ruby applications, set by-service and by-operation name **span** sampling rules with the `DD_SPAN_SAMPLING_RULES` environment variable.
@@ -325,7 +628,7 @@ Read more about sampling controls in the [Go tracing library documentation][2].
 [1]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.41.0
 [2]: /tracing/trace_collection/dd_libraries/go
 {{% /tab %}}
-{{% tab "NodeJS" %}}
+{{% tab "Node.js" %}}
 For Node.js applications, set by-service and by-operation name **span** sampling rules with the `DD_SPAN_SAMPLING_RULES` environment variable.
 
 For example, to collect `100%` of the spans from the service named `my-service`, for the operation `http.request`, up to `50` spans per second:
@@ -436,4 +739,4 @@ Some additional ingestion reasons are attributed to spans that are generated by 
 [12]: https://github.com/DataDog/dd-sdk-reactnative/releases/tag/1.0.0-rc6
 [13]: /synthetics/apm/
 [14]: /serverless/distributed_tracing/
-[15]: /security_platform/application_security/
+[15]: /security/application_security/

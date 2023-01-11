@@ -254,6 +254,12 @@ Voir les [cibles NTP par défaut][2]
 : Port utilisé pour la collecte de logs via TCP<br>
 Consultez les [endpoints pour les logs][3] pour découvrir d'autres types de connexions.
 
+6062/tcp
+: Port utilisé pour les endpoints de debugging de l'Agent de processus
+
+6162/tcp
+: Port utilisé pour la configuration des paramètres de runtime de l'Agent de processus
+
 10255/tcp
 : Port utilisé pour le [kubelet HTTP Kubernetes][4]
 
@@ -275,6 +281,12 @@ Consultez les [endpoints pour les logs][3] pour découvrir d'autres types de con
 123/udp
 : Port utilisé pour le NTP ([en savoir plus sur l'importance du NTP][1])<br>
 Voir les [cibles NTP par défaut][2]
+
+6062/tcp
+: Port utilisé pour les endpoints de debugging de l'Agent de processus
+
+6162/tcp
+: Port utilisé pour la configuration des paramètres de runtime de l'Agent de processus
 
 10255/tcp
 : Port utilisé pour le [kubelet HTTP Kubernetes][4]
@@ -322,6 +334,13 @@ Ports utilisés pour les services de l'Agent qui communiquent entre eux en local
 123/udp
 : Port utilisé pour le NTP ([en savoir plus sur l'importance du NTP][1]).<br>
 Voir les [cibles NTP par défaut][2].
+
+6062/tcp
+: Port utilisé pour les endpoints de debugging de l'Agent de processus
+
+6162/tcp
+: Port utilisé pour la configuration des paramètres de runtime de l'Agent de processus
+
 #### Trafic entrant
 
 8125/udp

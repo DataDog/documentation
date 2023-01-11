@@ -74,6 +74,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Embrace モバイルライセンス
+  uninstallation: README.md#Uninstallation
 ---
 
 

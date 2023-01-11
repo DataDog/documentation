@@ -74,7 +74,9 @@ To successfully proxy request to Datadog:
 2. Forward the request to the URL set in the `ddforward` query parameter using the POST method.
 4. The request body must remain unchanged.
 
-Ensure the `ddforward` attribute points to a valid Datadog endpoint for your [Datadog site][2]. Failure to do so may result in an insecure configuration. 
+<div class="alert alert-danger">
+Ensure the <code>ddforward</code> attribute points to a valid Datadog endpoint for your <a href="https://docs.datadoghq.com/getting_started/site/" target="_blank">Datadog site</a>. <strong>Failure to do so may result in an insecure configuration.</strong>
+</div>
 
 The site parameter is an SDK [initialization parameter][1]. Valid intake URL patterns for each site are listed below:
 
@@ -108,4 +110,3 @@ The site parameter is an SDK [initialization parameter][1]. Valid intake URL pat
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/browser/#initialization-parameters
-[2]: /getting_started/site/

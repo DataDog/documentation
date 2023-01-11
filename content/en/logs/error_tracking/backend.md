@@ -20,7 +20,7 @@ If you aren’t already collecting logs with Datadog, see the [Logs documentatio
 
 For languages such as **Python**, **Java**, and **Ruby**, no additional configuration is needed if the `source` tag in your logs is configured correctly. All required attributes are automatically tagged and sent to Datadog. 
 
-For backend languages such as **C#**, **.NET**, **Go**, and **NodeJS**, the code examples in each section demonstrate how to properly configure an error log and attach the required stack trace in the log's `error.stack`.
+For backend languages such as **C#**, **.NET**, **Go**, and **Node.js**, the code examples in each section demonstrate how to properly configure an error log and attach the required stack trace in the log's `error.stack`.
 
 If you are already sending stack traces to Datadog but they are not in `error.stack`, you can set up a [generic log remapper][8] to remap the stack trace to the correct attribute in Datadog.
 
@@ -180,11 +180,11 @@ try {
 {{% /tab %}}
 {{< /tabs >}}
 
-### NodeJS
+### Node.js
 
 #### Winston (JSON)
 
-If you have not setup log collection for NodeJS, see the [NodeJS Log Collection documentation][5].
+If you have not setup log collection for Node.js, see the [Node.js Log Collection documentation][5].
 
 To log a caught exception yourself, you may optionally use:
 

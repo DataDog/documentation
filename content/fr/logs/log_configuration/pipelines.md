@@ -12,9 +12,9 @@ further_reading:
 - link: /logs/explorer/
   tag: Documentation
   text: Apprendre à explorer vos logs
-- link: https://learn.datadoghq.com/course/view.php?id=10
+- link: https://learn.datadoghq.com/courses/going-deeper-with-logs-processing
   tag: Centre d'apprentissage
-  text: Aller plus loin avec les logs grâce au parsing
+  text: Des analyses plus poussées grâce au traitement des logs
 kind: documentation
 title: Pipelines
 ---

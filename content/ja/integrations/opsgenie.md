@@ -6,6 +6,10 @@ dependencies: []
 description: OpsGenie を Datadog のアラートとイベントで通知チャンネルとして使用。
 doc_link: https://docs.datadoghq.com/integrations/opsgenie/
 draft: false
+further_reading:
+- link: https://docs.datadoghq.com/tracing/service_catalog/integrations/#opsgenie-integration
+  tag: ブログ
+  text: サービスカタログとのインテグレーションを利用する
 git_integration_title: opsgenie
 has_logo: true
 integration_id: ''
@@ -67,6 +71,10 @@ Opsgenie インテグレーションには、サービスのチェック機能�
 ## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+
+## {{< partial name="whats-next/whats-next.html" >}}
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.opsgenie.com/settings/integration/integration-list
 [2]: https://app.datadoghq.com/organization-settings/api-keys
