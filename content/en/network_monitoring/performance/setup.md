@@ -132,6 +132,12 @@ To enable network performance monitoring with the Datadog Agent, use the followi
 
     **Note**: If the `systemctl` command is not available on your system, run the following command instead: `sudo service datadog-agent restart`
 
+{{< site-region region="us,us3,us5,eu" >}}
+
+6. Optionally, install the Azure integration for more visibility into Azure load balancers.
+
+{{< /site-region >}}
+
 ### SELinux-enabled systems
 
 On systems with SELinux enabled, the system-probe binary needs special permissions to use eBPF features.

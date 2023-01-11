@@ -3,7 +3,7 @@ description: Dépannage de la solution Database Monitoring pour Postgres
 kind: documentation
 title: Dépannage de la solution Database Monitoring pour Postgres
 ---
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">La solution Database Monitoring n'est pas prise en charge pour ce site.</div>
 {{< /site-region >}}
 
@@ -97,6 +97,24 @@ psql -h localhost -U datadog -d postgres -c "select * from pg_stat_statements LI
 
 Si vous avez défini `dbname` sur une valeur différente de la valeur par défaut `postgres` dans la configuration de votre Agent, vous devez exécuter `CREATE EXTENSION pg_stat_statements` dans cette base de données.
 
+Si vous avez créé l'extension dans votre base de données cible et que cet avertissement apparaît quand même, cela signifie que l'extension a peut-être été créée dans un schéma auquel l'utilisateur `datadog` ne peut pas accéder. Pour vous en assurer, exécutez cette commande pour vérifier dans quel schéma `pg_stat_statements` a été créé :
+
+```bash
+psql -h localhost -U datadog -d postgres -c "select nspname from pg_extension, pg_namespace where extname = 'pg_stat_statements' and pg_extension.extnamespace = pg_namespace.oid;"
+```
+
+Exécutez ensuite cette commande pour vérifier les schémas auxquels l'utilisateur `datadog` a accès :
+
+```bash
+psql -h localhost -U datadog -d <votre_base_de_données> -c "show search_path;"
+```
+
+Si le schéma `pg_stat_statements` ne se trouve pas dans le `search_path` de l'utilisateur `datadog`, vous devez l'ajouter à l'utilisateur `datadog`. Par exemple :
+
+```sql
+ALTER ROLE datadog SET search_path = "$user",public,schema_with_pg_stat_statements;
+```
+
 ### Certaines requêtes sont manquantes
 
 Si vous recevez des données pour certaines requêtes, mais que celles d'une ou de plusieurs requêtes spécifiques sont manquantes dans la section Database Monitoring, suivez ce guide.
@@ -173,26 +191,31 @@ Consultez la section sur les [échantillons de requête tronqués](#les-echantil
 
 Si un client utilise le [protocole de requête étendu][9] Postgres ou des instructions préparées, l'Agent Datadog ne peut pas recueillir les plans d'exécution, car la requête parsée et les paramètres de liaison bruts sont séparés. Si le client offre la possibilité d'utiliser exclusivement le protocole de requête simplifié, l'activation de cette option permet à l'Agent Datadog de recueillir les plans d'exécution.
 
-| Langage | Client                    | Configuration pour le protocole de requête simplifié                                                                                                                                                                                                                                                                                                                                                |
-|----------|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Go       | [pgx][10]                  | Définissez `PreferSimpleProtocol` pour activer le protocole de requête simplifié (voir la [documentation ConnConfig][11] en anglais).                                                                                                                                                                                                                                                                            |
-| Java     | [Client JDBC Postgres][12] | Définissez `preferQueryMode = simple` pour activer le protocole de requête simplifié (voir la [documentation PreferQueryMode][13] en anglais).                                                                                                                                                                                                                                                                   |
+| Langage | Client | Configuration pour le protocole de requête simplifié|
+|----------|--------|----------------------------------------|
+| Go       | [pgx][10] | Définissez `PreferSimpleProtocol` pour activer le protocole de requête simplifié (voir la [documentation ConnConfig][11] en anglais). Vous pouvez également l'appliquer pour des requêtes ou des appels spécifiques en utilisant le flag [QuerySimpleProtocol][24] comme premier argument sur les appels `Query` ou `Exec`.
+| Java     | [Client JDBC Postgres][12] | Définissez `preferQueryMode = simple` pour activer le protocole de requête simplifié (voir la [documentation PreferQueryMode][13] en anglais). |
 | Python   | [asyncpg][14]              | Utilise le protocole de requête étendu, qui ne peut pas être désactivé. La désactivation des instructions préparées ne permet pas de résoudre ce problème. Pour activer la collecte des plans d'exécution, formatez les requêtes SQL à l'aide de [psycopg sql][15] (ou d'un autre outil de formatage semblable qui échappe les valeurs SQL de façon adéquate) avant de les passer au client de base de données.                                                  |
 | Python   | [psycopg][16]             | `psycopg2` n'utilise pas le protocole de requête étendu : les plans d'exécution sont donc normalement recueillis. <br/> `psycopg3` utilise le protocole de requête étendu, qui ne peut pas être désactivé. La désactivation des instructions préparées ne permet pas de résoudre ce problème. Pour activer la collecte des plans d'exécution, formatez les requêtes SQL à l'aide de [psycopg sql][15] avant de les passer au client de base de données. |
-| Node     | [node-postgres][17]       | Utilise le protocole de requête étendu, qui ne peut pas être désactivé. Pour que l'Agent Datadog recueille les plans d'exécution, utilisez [pg-format][18] de manière à formater les requêtes SQL avant de les passer à [node-postgres][17].                                                                                                                                                                                 |
+| Node     | [node-postgres][17]       | Utilise le protocole de requête étendu, qui ne peut pas être désactivé. Pour que l'Agent Datadog recueille les plans d'exécution, utilisez [pg-format][18] de manière à formater les requêtes SQL avant de les passer à [node-postgres][17].|
 
 #### La requête est associée à une base de données ignorée par la configuration de l'instance de l'Agent
-La requête est associée à une base de données ignorée par le paramètre de configuration `ignore_databases` de l'instance de l'Agent. Les bases de données par défaut, telles que la base de données `postgres`, sont ignorées dans le paramètre `ignore_databases`. Les requêtes associées à ces bases de données ne comportent aucun échantillon ni aucun plan d'exécution. Vérifiez la valeur de ce paramètre dans la configuration de votre instance et les valeurs par défaut dans l'[exemple de fichier de configuration][19].
+La requête est associée à une base de données ignorée par le paramètre de configuration `ignore_databases` de l'instance de l'Agent. Les bases de données par défaut, telles que les bases de données `rdsadmin` et `azure_maintenance`, sont ignorées dans le paramètre `ignore_databases`. Les requêtes associées à ces bases de données ne comportent aucun échantillon ni aucun plan d'exécution. Vérifiez la valeur de ce paramètre dans la configuration de votre instance et les valeurs par défaut dans l'[exemple de fichier de configuration][19].
+
+**Remarque :** la base de données `postgres` est également ignorée par défaut dans les versions <7.41.0 de l'Agent.
 
 #### La requête ne prend pas en charge les plans d'exécution
 Certaines requêtes, telles que les requêtes BEGIN, COMMIT, SHOW, USE et ALTER, ne peuvent pas renvoyer un plan d'exécution valide à partir de la base de données. Seules les requêtes SELECT, UPDATE, INSERT, DELETE et REPLACE sont prises en charge pour les plans d'exécution.
 
 #### La requête est relativement peu fréquente ou s'exécute rapidement
-La requête n'a peut-être pas été sélectionnée pour être ajoutée dans l'échantillon, car elle ne représente pas une proportion significative du temps d'exécution total de la base de données. Pour recueillir la requête, il est conseillé d'essayer d'[augmenter les taux d'échantillonnage][10].
+La requête n'a peut-être pas été sélectionnée pour être ajoutée dans l'échantillon, car elle ne représente pas une proportion significative du temps d'exécution total de la base de données. Pour recueillir la requête, il est conseillé d'essayer d'[augmenter les taux d'échantillonnage][23].
 
 
 #### L'application repose sur des chemins de recherche pour indiquer les schémas à interroger
-Postgres n'expose pas le [chemin de recherche][20] actuel dans [`pg_stat_activity`][21]. L'Agent Datadog ne peut donc pas identifier le chemin de recherche utilisé par les processus Postgres actifs. La seule solution consiste à modifier le code de l'application afin d'utiliser des requêtes complètes plutôt que des chemins de recherche. Par exemple, privilégiez `select * from schema_A.table_B` et non `SET search_path TO schema_A; select * from table_B`.
+Étant donné que Postgres n'expose pas le [chemin de recherche][20] actuel dans [`pg_stat_activity`][21], l'Agent Datadog ne peut pas identifier le chemin de recherche utilisé pour les processus Postgres actifs. La solution consiste à modifier le chemin de recherche de l'utilisateur défini dans la configuration de l'intégration Postgres pour inclure le schéma.
+```sql
+ALTER ROLE datadog SET search_path = "$user",public,schema1,schema2,etc;
+```
 
 ### La configuration échoue à l'exécution de `create extension pg_stat_statements`
 
@@ -210,6 +233,14 @@ sudo apt-get install postgresql-contrib-10
 ```
 
 Pour en savoir plus, consultez la version appropriée de la [documentation Postgres sur `contrib`][22] (en anglais).
+
+### Les requêtes de l'Agent sont lentes et/ou ont un impact important sur la base de données
+
+La configuration par défaut de l'Agent pour Database Monitoring est relativement souple. Néanmoins, vous pouvez ajuster certains paramètres comme l'intervalle de collecte et le taux d'échantillonnage des requêtes pour mieux répondre à vos besoins. Pour la plupart des workloads, l'Agent monopolise moins d'un pour cent du temps d'exécution des requêtes sur la base de données, et moins d'un pour cent du CPU. Vous trouverez ci-dessous les raisons pour lesquelles les requêtes de l'Agent peuvent solliciter plus de ressources.
+
+#### Valeur élevée pour `pg_stat_statements.max` {#high-pg-stat-statements-max-configuration}
+Il est conseillé de définir la valeur de `pg_stat_statements.max` sur `10000`. Si vous utilisez une valeur plus élevée, l'exécution de la requête de collecte prendra plus de temps, ce qui peut entraîner l'expiration de la requête et empêcher la collecte d'une partie des métriques. Si l'Agent envoie cet avertissement, vérifiez que `pg_stat_statements.max` est défini sur `10000` pour la base de données.
+
 
 [1]: /fr/database_monitoring/setup_postgres/
 [2]: /fr/agent/troubleshooting/
@@ -233,3 +264,5 @@ Pour en savoir plus, consultez la version appropriée de la [documentation Postg
 [20]: https://www.postgresql.org/docs/14/ddl-schemas.html#DDL-SCHEMAS-PATH
 [21]: https://www.postgresql.org/docs/14/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW
 [22]: https://www.postgresql.org/docs/12/contrib.html
+[23]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example#L281
+[24]: https://pkg.go.dev/github.com/jackc/pgx/v4#QuerySimpleProtocol

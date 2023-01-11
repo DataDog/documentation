@@ -41,10 +41,21 @@ Supported .NET runtimes (64-bit applications)
 : .NET Framework 4.6.1+<br/>
 .NET Core 2.1, 3.1<br/>
 .NET 5<br/>
-.NET 6
+.NET 6<br/>
+.NET 7
+<div class="alert alert-warning">
+  <strong>Note:</strong> The beta for lock contention is only available for .NET 5+ and only in .NET 6+ for allocation profiling.
+</div>
 
 Supported languages
 : Any language that targets the .NET runtime, such as C#, F#, and Visual Basic.
+
+The following profiling features are available in the following minimum versions of the `dd-trace-dotnet` library:
+
+|      Feature         | Required `dd-trace-dotnet` version          |
+|----------------------|-----------------------------------------|
+| Code Hotspots        | 2.7.0 or greater                       |
+| Endpoints            | 2.15.0 or greater                       |
 
 ## Installation
 

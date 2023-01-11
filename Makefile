@@ -101,7 +101,7 @@ data/workflows/:
 derefs: $(DEREFS)
 
 .SECONDEXPANSION:
-$(DEREFS): %.json : integrations_data/extracted/dd-source/domains/workflow/actionplatform/runner/bundles/$$(basename $$(notdir $$@))/manifest.json | data/workflows/
+$(DEREFS): %.json : integrations_data/extracted/dd-source/domains/workflow/actionplatform/apps/wf-actions-worker/src/runner/bundles/$$(basename $$(notdir $$@))/manifest.json | data/workflows/
 	@node ./assets/scripts/workflow-process.js $< $@
 
 # builds permissions json from rbac

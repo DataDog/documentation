@@ -3279,26 +3279,6 @@ components:
       required:
       - message
       type: object
-    HTTPMethod:
-      description: The HTTP method.
-      enum:
-      - GET
-      - POST
-      - PATCH
-      - PUT
-      - DELETE
-      - HEAD
-      - OPTIONS
-      example: GET
-      type: string
-      x-enum-varnames:
-      - GET
-      - POST
-      - PATCH
-      - PUT
-      - DELETE
-      - HEAD
-      - OPTIONS
     HeatMapWidgetDefinition:
       description: The heat map visualization shows metrics aggregated across many
         tags, such as hosts. The more hosts that have a particular value, the darker
@@ -3602,6 +3582,7 @@ components:
           items:
             description: The version name.
             example: FreeBSD
+            nullable: true
             type: string
           type: array
         gohai:
@@ -3617,6 +3598,7 @@ components:
           items:
             description: Version name.
             example: Mac
+            nullable: true
             type: string
           type: array
         machine:
@@ -3628,6 +3610,7 @@ components:
           items:
             description: Version name.
             example: Ubuntu
+            nullable: true
             type: string
           type: array
         platform:
@@ -3655,6 +3638,7 @@ components:
           items:
             description: Version name.
             example: Windows
+            nullable: true
             type: string
           type: array
       type: object
@@ -3841,13 +3825,14 @@ components:
       - estimated_ingested_spans_usage
       - fargate_usage
       - functions_usage
-      - indexed_logs_usage
       - infra_host_usage
       - invocations_usage
       - npm_host_usage
       - profiled_container_usage
       - profiled_host_usage
       - snmp_usage
+      - estimated_rum_sessions_usage
+      - cont_usage
       type: string
       x-enum-varnames:
       - API_USAGE
@@ -3870,13 +3855,14 @@ components:
       - ESTIMATED_INGESTED_SPANS_USAGE
       - FARGATE_USAGE
       - FUNCTIONS_USAGE
-      - INDEXED_LOGS_USAGE
       - INFRA_HOST_USAGE
       - INVOCATIONS_USAGE
       - NPM_HOST_USAGE
       - PROFILED_CONTAINER_USAGE
       - PROFILED_HOST_USAGE
       - SNMP_USAGE
+      - ESTIMATED_RUM_SESSIONS_USAGE
+      - CONT_USAGE
     IFrameWidgetDefinition:
       description: The iframe widget allows you to embed a portion of any other web
         page on your dashboard. Only available on FREE layout dashboards.
@@ -6338,6 +6324,10 @@ components:
         enable_logs_sample:
           description: Whether or not to send a log sample when the log monitor triggers.
           type: boolean
+        enable_samples:
+          description: Whether or not to send a list of samples when the monitor triggers.
+            This is only used by CI Test and Pipeline monitors.
+          type: boolean
         escalation_message:
           default: none
           description: 'We recommend using the [is_renotify](https://docs.datadoghq.com/monitors/notify/?tab=is_alert#renotify),
@@ -7185,8 +7175,6 @@ components:
       - fargate_percentage
       - functions_usage
       - functions_percentage
-      - indexed_logs_usage
-      - indexed_logs_percentage
       - infra_host_usage
       - infra_host_percentage
       - invocations_usage
@@ -7199,6 +7187,10 @@ components:
       - profiled_host_percentage
       - snmp_usage
       - snmp_percentage
+      - estimated_rum_sessions_usage
+      - estimated_rum_sessions_percentage
+      - cont_usage
+      - cont_percentage
       - '*'
       type: string
       x-enum-varnames:
@@ -7242,8 +7234,6 @@ components:
       - FARGATE_PERCENTAGE
       - FUNCTIONS_USAGE
       - FUNCTIONS_PERCENTAGE
-      - INDEXED_LOGS_USAGE
-      - INDEXED_LOGS_PERCENTAGE
       - INFRA_HOST_USAGE
       - INFRA_HOST_PERCENTAGE
       - INVOCATIONS_USAGE
@@ -7256,6 +7246,10 @@ components:
       - PROFILED_HOST_PERCENTAGE
       - SNMP_USAGE
       - SNMP_PERCENTAGE
+      - ESTIMATED_RUM_SESSIONS_USAGE
+      - ESTIMATED_RUM_SESSIONS_PERCENTAGE
+      - CONT_USAGE
+      - CONT_PERCENTAGE
       - ALL
     MonthlyUsageAttributionValues:
       description: Fields in Usage Summary by tag(s).
@@ -7311,6 +7305,15 @@ components:
           description: The synthetic browser test usage by tag(s).
           format: double
           type: number
+        cont_percentage:
+          description: The percentage of container usage without the Datadog Agent
+            by tag(s).
+          format: double
+          type: number
+        cont_usage:
+          description: The container usage without the Datadog Agent by tag(s).
+          format: double
+          type: number
         container_percentage:
           description: The percentage of container usage by tag(s).
           format: double
@@ -7319,12 +7322,61 @@ components:
           description: The container usage by tag(s).
           format: double
           type: number
+        cspm_containers_percentage:
+          description: The percentage of CSPM container usage by tag(s).
+          format: double
+          type: number
+        cspm_containers_usage:
+          description: The CSPM container usage by tag(s).
+          format: double
+          type: number
+        cspm_hosts_percentage:
+          description: The percentage of CSPM host usage by by tag(s).
+          format: double
+          type: number
+        cspm_hosts_usage:
+          description: The CSPM host usage by tag(s).
+          format: double
+          type: number
         custom_timeseries_percentage:
           description: The percentage of custom metrics usage by tag(s).
           format: double
           type: number
         custom_timeseries_usage:
           description: The custom metrics usage by tag(s).
+          format: double
+          type: number
+        cws_containers_percentage:
+          description: The percentage of Cloud Workload Security container usage by
+            tag(s).
+          format: double
+          type: number
+        cws_containers_usage:
+          description: The Cloud Workload Security container usage by tag(s).
+          format: double
+          type: number
+        cws_hosts_percentage:
+          description: The percentage of Cloud Workload Security host usage by tag(s).
+          format: double
+          type: number
+        cws_hosts_usage:
+          description: The Cloud Workload Security host usage by tag(s).
+          format: double
+          type: number
+        dbm_hosts_percentage:
+          description: The percentage of Database Monitoring host usage by tag(s).
+          format: double
+          type: number
+        dbm_hosts_usage:
+          description: The Database Monitoring host usage by tag(s).
+          format: double
+          type: number
+        dbm_queries_percentage:
+          description: The percentage of Database Monitoring queries usage by tag(s).
+          format: double
+          type: number
+        dbm_queries_usage:
+          description: The Database Monitoring queries usage by tag(s).
           format: double
           type: number
         estimated_indexed_logs_percentage:
@@ -7367,6 +7419,16 @@ components:
             in private beta.
           format: double
           type: number
+        estimated_rum_sessions_percentage:
+          description: The percentage of estimated rum sessions usage by tag(s). This
+            field is in private beta.
+          format: double
+          type: number
+        estimated_rum_sessions_usage:
+          description: The estimated rum sessions usage by tag(s). This field is in
+            private beta.
+          format: double
+          type: number
         fargate_percentage:
           description: The percentage of Fargate usage by tags.
           format: double
@@ -7381,14 +7443,6 @@ components:
           type: number
         functions_usage:
           description: The Lambda function usage by tag(s).
-          format: double
-          type: number
-        indexed_logs_percentage:
-          description: The percentage of indexed logs usage by tags.
-          format: double
-          type: number
-        indexed_logs_usage:
-          description: The indexed logs usage by tags.
           format: double
           type: number
         infra_host_percentage:
@@ -9820,6 +9874,14 @@ components:
             description: A tag to apply to your SLO.
             type: string
           type: array
+        target_threshold:
+          description: 'The target threshold such that when the service level indicator
+            is above this
+
+            threshold over the given timeframe, the objective is being met.'
+          example: 99.9
+          format: double
+          type: number
         thresholds:
           description: 'The thresholds (timeframes and associated targets) for this
             service level
@@ -9834,8 +9896,24 @@ components:
           items:
             $ref: '#/components/schemas/SLOThreshold'
           type: array
+        timeframe:
+          $ref: '#/components/schemas/SLOTimeframe'
         type:
           $ref: '#/components/schemas/SLOType'
+        warning_threshold:
+          description: 'The optional warning threshold such that when the service
+            level indicator is
+
+            below this value for the given threshold, but above the target threshold,
+            the
+
+            objective appears in a "warning" state. This value must be greater than
+            the target
+
+            threshold.'
+          example: 99.95
+          format: double
+          type: number
       type: object
     SLOThreshold:
       description: SLO thresholds (target and optionally warning) for a single time
@@ -10613,7 +10691,8 @@ components:
       - host_name
       type: object
     ServiceCheckStatus:
-      description: The status of a service check.
+      description: The status of a service check. Set to `0` for OK, `1` for warning,
+        `2` for critical, and `3` for unknown.
       enum:
       - 0
       - 1
@@ -10771,6 +10850,14 @@ components:
             description: A tag to apply to your SLO.
             type: string
           type: array
+        target_threshold:
+          description: 'The target threshold such that when the service level indicator
+            is above this
+
+            threshold over the given timeframe, the objective is being met.'
+          example: 99.9
+          format: double
+          type: number
         thresholds:
           description: 'The thresholds (timeframes and associated targets) for this
             service level
@@ -10785,8 +10872,24 @@ components:
           items:
             $ref: '#/components/schemas/SLOThreshold'
           type: array
+        timeframe:
+          $ref: '#/components/schemas/SLOTimeframe'
         type:
           $ref: '#/components/schemas/SLOType'
+        warning_threshold:
+          description: 'The optional warning threshold such that when the service
+            level indicator is
+
+            below this value for the given threshold, but above the target threshold,
+            the
+
+            objective appears in a "warning" state. This value must be greater than
+            the target
+
+            threshold.'
+          example: 99.95
+          format: double
+          type: number
       required:
       - name
       - thresholds
@@ -10875,6 +10978,14 @@ components:
             description: A tag to apply to your SLO.
             type: string
           type: array
+        target_threshold:
+          description: 'The target threshold such that when the service level indicator
+            is above this
+
+            threshold over the given timeframe, the objective is being met.'
+          example: 99.9
+          format: double
+          type: number
         thresholds:
           description: 'The thresholds (timeframes and associated targets) for this
             service level
@@ -10889,8 +11000,24 @@ components:
           items:
             $ref: '#/components/schemas/SLOThreshold'
           type: array
+        timeframe:
+          $ref: '#/components/schemas/SLOTimeframe'
         type:
           $ref: '#/components/schemas/SLOType'
+        warning_threshold:
+          description: 'The optional warning threshold such that when the service
+            level indicator is
+
+            below this value for the given threshold, but above the target threshold,
+            the
+
+            objective appears in a "warning" state. This value must be greater than
+            the target
+
+            threshold.'
+          example: 99.95
+          format: double
+          type: number
       required:
       - name
       - thresholds
@@ -12234,6 +12361,8 @@ components:
           description: Scope to use when performing the authentication.
           example: scope
           type: string
+        tokenApiAuthentication:
+          $ref: '#/components/schemas/SyntheticsBasicAuthOauthTokenApiAuthentication'
         type:
           $ref: '#/components/schemas/SyntheticsBasicAuthOauthROPType'
         username:
@@ -12243,6 +12372,7 @@ components:
       required:
       - accessTokenUrl
       - password
+      - tokenApiAuthentication
       - username
       type: object
     SyntheticsBasicAuthOauthROPType:
@@ -12954,6 +13084,11 @@ components:
         pattern:
           description: Pattern of the variable.
           type: string
+        secure:
+          description: Whether the value of this variable will be obfuscated in test
+            results.
+          example: false
+          type: boolean
         type:
           $ref: '#/components/schemas/SyntheticsConfigVariableType'
       required:
@@ -13155,6 +13290,12 @@ components:
         restricted_roles:
           $ref: '#/components/schemas/SyntheticsRestrictedRoles'
       type: object
+    SyntheticsGlobalVariableOptions:
+      description: Options for the Global Variable for MFA.
+      properties:
+        totp_parameters:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableTOTPParameters'
+      type: object
     SyntheticsGlobalVariableParseTestOptions:
       description: Parser options to use for retrieving a Synthetics global variable
         from a Synthetics Test. Used in conjunction with `parse_test_public_id`.
@@ -13204,12 +13345,32 @@ components:
       - JSON_PATH
       - REGEX
       - X_PATH
+    SyntheticsGlobalVariableTOTPParameters:
+      description: Parameters for the TOTP/MFA variable
+      properties:
+        digits:
+          description: Number of digits for the OTP code.
+          example: 6
+          format: int32
+          maximum: 10
+          minimum: 4
+          type: integer
+        refresh_interval:
+          description: Interval for which to refresh the token (in seconds).
+          example: 30
+          format: int32
+          maximum: 999
+          minimum: 0
+          type: integer
+      type: object
     SyntheticsGlobalVariableValue:
       description: Value of the global variable.
       example:
         secure: true
         value: value
       properties:
+        options:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableOptions'
         secure:
           description: Determines if the value of the variable is hidden.
           type: boolean
@@ -13657,6 +13818,16 @@ components:
       - TYPE_TEXT
       - UPLOAD_FILES
       - WAIT
+    SyntheticsTestCallType:
+      description: The type of gRPC call to perform.
+      enum:
+      - healthcheck
+      - unary
+      example: unary
+      type: string
+      x-enum-varnames:
+      - HEALTHCHECK
+      - UNARY
     SyntheticsTestCiOptions:
       description: CI/CD options for a Synthetic test.
       properties:
@@ -13964,6 +14135,8 @@ components:
           type: string
         bodyType:
           $ref: '#/components/schemas/SyntheticsTestRequestBodyType'
+        callType:
+          $ref: '#/components/schemas/SyntheticsTestCallType'
         certificate:
           $ref: '#/components/schemas/SyntheticsTestRequestCertificate'
         certificateDomains:
@@ -13999,7 +14172,10 @@ components:
         metadata:
           $ref: '#/components/schemas/SyntheticsTestMetadata'
         method:
-          $ref: '#/components/schemas/HTTPMethod'
+          description: Either the HTTP method/verb to use or a gRPC method available
+            on the service set in the `service` field. Required if `subtype` is `HTTP`
+            or if `subtype` is `grpc` and `callType` is `unary`.
+          type: string
         noSavingResponseBody:
           description: Determines whether or not to save the response body.
           type: boolean
@@ -14027,7 +14203,8 @@ components:
             the same IP address and TCP port number.'
           type: string
         service:
-          description: gRPC service on which you want to perform the healthcheck.
+          description: The gRPC service on which you want to perform the gRPC call.
+          example: Greeter
           type: string
         shouldTrackHops:
           description: Turns on a traceroute probe to discover all gateways along
@@ -15019,6 +15196,8 @@ components:
       - apm_fargate_percentage
       - appsec_fargate_usage
       - appsec_fargate_percentage
+      - estimated_rum_usage_attribution_usage
+      - estimated_rum_usage_attribution_percentage
       type: string
       x-enum-varnames:
       - API_PERCENTAGE
@@ -15055,6 +15234,8 @@ components:
       - APM_FARGATE_PERCENTAGE
       - APPSEC_FARGATE_USAGE
       - APPSEC_FARGATE_PERCENTAGE
+      - ESTIMATED_RUM_USAGE_ATTRIBUTION_USAGE
+      - ESTIMATED_RUM_USAGE_ATTRIBUTION_PERCENTAGE
     UsageAttributionSupportedMetrics:
       description: Supported fields for usage attribution requests (valid requests
         contain one or more metrics, or `*` for all).
@@ -15103,6 +15284,8 @@ components:
       - apm_fargate_percentage
       - appsec_fargate_usage
       - appsec_fargate_percentage
+      - estimated_rum_usage_attribution_usage
+      - estimated_rum_usage_attribution_percentage
       - '*'
       type: string
       x-enum-varnames:
@@ -15150,6 +15333,8 @@ components:
       - APM_FARGATE_PERCENTAGE
       - APPSEC_FARGATE_USAGE
       - APPSEC_FARGATE_PERCENTAGE
+      - ESTIMATED_RUM_USAGE_ATTRIBUTION_USAGE
+      - ESTIMATED_RUM_USAGE_ATTRIBUTION_PERCENTAGE
       - ALL
     UsageAttributionTagNames:
       additionalProperties:
@@ -15341,6 +15526,16 @@ components:
             is in private beta.
           format: double
           type: number
+        estimated_rum_sessions_percentage:
+          description: The percentage of estimated rum sessions usage by tag(s). This
+            field is in private beta.
+          format: double
+          type: number
+        estimated_rum_sessions_usage:
+          description: The estimated rum sessions usage by tag(s). This field is in
+            private beta.
+          format: double
+          type: number
         infra_host_percentage:
           description: The percentage of infrastructure host usage by tag(s).
           format: double
@@ -15509,7 +15704,11 @@ components:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         apm_trace_search_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
+        application_security_fargate_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
         application_security_host_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        application_security_host_top99:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         ci_pipeline_indexed_spans_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
@@ -15522,6 +15721,10 @@ components:
         ci_testing_maximum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         ci_testing_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        cloud_cost_management_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        cloud_cost_management_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         cspm_container_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
@@ -15585,6 +15788,8 @@ components:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         lambda_function_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
+        logs_forwarding_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
         logs_indexed_15day_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         logs_indexed_180day_sum:
@@ -15639,6 +15844,12 @@ components:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         sensitive_data_scanner_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
+        serverless_apm_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        serverless_infra_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        serverless_infra_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
         serverless_invocation_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         siem_sum:
@@ -15646,6 +15857,8 @@ components:
         standard_timeseries_average:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         synthetics_api_tests_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        synthetics_app_testing_maximum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         synthetics_browser_checks_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
@@ -17074,6 +17287,11 @@ components:
             the current date for all organizations.
           format: int64
           type: integer
+        synthetics_parallel_testing_max_slots_hwm:
+          description: Shows the high-water mark of used synthetics parallel testing
+            slots over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         trace_search_indexed_events_count_sum:
           description: Shows the sum of all Indexed Spans indexed over all hours in
             the current date for all organizations.
@@ -17441,6 +17659,11 @@ components:
         synthetics_check_calls_count_sum:
           description: Shows the sum of all Synthetic API tests over all hours in
             the current date for the given org.
+          format: int64
+          type: integer
+        synthetics_parallel_testing_max_slots_hwm:
+          description: Shows the high-water mark of used synthetics parallel testing
+            slots over all hours in the current date for the given org.
           format: int64
           type: integer
         trace_search_indexed_events_count_sum:
@@ -17852,6 +18075,11 @@ components:
         synthetics_check_calls_count_agg_sum:
           description: Shows the sum of all Synthetic API tests over all hours in
             the current months for all organizations.
+          format: int64
+          type: integer
+        synthetics_parallel_testing_max_slots_hwm_sum:
+          description: Shows the sum of the high-water marks of used synthetics parallel
+            testing slots over all hours in the current month for all organizations.
           format: int64
           type: integer
         trace_search_indexed_events_count_agg_sum:
@@ -18545,6 +18773,8 @@ components:
           type: string
         limit:
           $ref: '#/components/schemas/WidgetFormulaLimit'
+        style:
+          $ref: '#/components/schemas/WidgetFormulaStyle'
       required:
       - formula
       type: object
@@ -18557,6 +18787,20 @@ components:
           type: integer
         order:
           $ref: '#/components/schemas/QuerySortOrder'
+      type: object
+    WidgetFormulaStyle:
+      description: Styling options for widget formulas.
+      properties:
+        palette:
+          description: The color palette used to display the formula. A guide to the
+            available color palettes can be found at https://docs.datadoghq.com/dashboards/guide/widget_colors
+          example: classic
+          type: string
+        palette_index:
+          description: Index specifying which color to use within the palette.
+          example: 1
+          format: int64
+          type: integer
       type: object
     WidgetGrouping:
       description: The kind of grouping to use.
@@ -19783,7 +20027,7 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
-      x-menu-order: 4
+      x-menu-order: 6
       x-undo:
         type: idempotent
     get:
@@ -19834,7 +20078,7 @@ paths:
       summary: Get all dashboards
       tags:
       - Dashboards
-      x-menu-order: 2
+      x-menu-order: 3
       x-undo:
         type: safe
     patch:
@@ -19888,7 +20132,7 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
-      x-menu-order: 5
+      x-menu-order: 7
       x-undo:
         type: idempotent
     post:
@@ -20235,7 +20479,7 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
-      x-menu-order: 1
+      x-menu-order: 8
       x-undo:
         operationId: DeletePublicDashboard
         parameters:
@@ -20283,7 +20527,7 @@ paths:
       summary: Revoke a shared dashboard URL
       tags:
       - Dashboards
-      x-menu-order: 4
+      x-menu-order: 13
       x-undo:
         type: idempotent
     get:
@@ -20327,7 +20571,7 @@ paths:
       summary: Get a shared dashboard
       tags:
       - Dashboards
-      x-menu-order: 2
+      x-menu-order: 9
       x-undo:
         type: safe
     put:
@@ -20399,7 +20643,7 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
-      x-menu-order: 3
+      x-menu-order: 10
       x-undo:
         type: idempotent
   /api/v1/dashboard/public/{token}/invitation:
@@ -20454,7 +20698,7 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
-      x-menu-order: 7
+      x-menu-order: 14
       x-undo:
         type: idempotent
     get:
@@ -20511,7 +20755,7 @@ paths:
       summary: Get all invitations for a shared dashboard
       tags:
       - Dashboards
-      x-menu-order: 5
+      x-menu-order: 12
       x-undo:
         type: safe
     post:
@@ -20576,7 +20820,7 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
-      x-menu-order: 6
+      x-menu-order: 11
       x-undo:
         operationId: DeletePublicDashboardInvitation
         parameters:
@@ -20629,7 +20873,7 @@ paths:
           - name: dashboard_id
             source: dashboard.id
           step: the "dashboard" was deleted
-      x-menu-order: 3
+      x-menu-order: 5
       x-undo:
         type: idempotent
     get:
@@ -20671,7 +20915,7 @@ paths:
       summary: Get a dashboard
       tags:
       - Dashboards
-      x-menu-order: 7
+      x-menu-order: 2
       x-undo:
         type: safe
     put:
@@ -20727,7 +20971,7 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
-      x-menu-order: 6
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v1/distribution_points:
@@ -21126,7 +21370,7 @@ paths:
         schema:
           type: string
       - description: A comma separated list indicating what tags, if any, should be
-          used to filter the list of monitors by scope.
+          used to filter the list of events.
         example: host:host0
         in: query
         name: tags
@@ -24676,6 +24920,11 @@ paths:
         - error-tracking: `error-tracking alert`
 
 
+        **Note**: Synthetic monitors are created through the Synthetics API. See the
+        [Synthetics API] (https://docs.datadoghq.com/api/latest/synthetics/) documentation
+        for more information.
+
+
         #### Query Types
 
 
@@ -28072,6 +28321,18 @@ paths:
     get:
       description: Get the list of all Synthetic tests.
       operationId: ListTests
+      parameters:
+      - description: Used for pagination. The number of tests returned in the page.
+        in: query
+        name: page_size
+        schema:
+          type: string
+      - description: Used for pagination. Which page you want to retrieve. Starts
+          at zero.
+        in: query
+        name: page_number
+        schema:
+          type: string
       responses:
         '200':
           content:
@@ -28098,7 +28359,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - synthetics_read
-      summary: Get the list of all tests
+      summary: Get the list of all Synthetic tests
       tags:
       - Synthetics
       x-menu-order: 10

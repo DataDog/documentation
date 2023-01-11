@@ -8,7 +8,7 @@ aliases:
   - /monitors/notifications/
 description: "Send notifications to your teams when monitors trigger alerts"
 further_reading:
-- link: "/monitors/create/"
+- link: "/monitors/"
   tag: "Documentation"
   text: "Create monitors"
 - link: "/monitors/manage/"
@@ -26,7 +26,7 @@ Use this section to set the notifications sent to your team.
 
 ### Title
 
-Add a unique title to your monitor (required). For multi-alert monitors, some tags identifying your triggering scope are automatically inserted. Additionally, you can use [tag variables][2].
+Add a unique title to your monitor (required). For multi alert monitors, some tags identifying your triggering scope are automatically inserted. Additionally, you can use [tag variables][2].
 
 ### Message
 
@@ -54,10 +54,10 @@ Enable monitor renotification (optional) to remind your team that a problem is n
 
 Configure the renotify interval, the monitor states from which the monitor renotifies (within `alert`, `no data`, and `warn`) and optionally set a limit to the number of renotification messages sent.
 
-For example, configure the monitor to `stop renotifying after 1 occurrence` to receive a single escalation message after the main alert.  
+For example, configure the monitor to `stop renotifying after 1 occurrence` to receive a single escalation message after the main alert.
 **Note:** [Attribute and tag variables][6] in the renotification are populated with the data available to the monitor during the time period of the renotification.
 
-If renotification is enabled, you are given the option to include an escalation message that is sent if the monitor remains in one of the chosen states for the specified time period.  
+If renotification is enabled, you are given the option to include an escalation message that is sent if the monitor remains in one of the chosen states for the specified time period.
 
 
 The escalation message can be added in the following ways:
@@ -114,6 +114,21 @@ Disk space is low @ops-team@company.com
 
 {{% notifications-integrations %}}
 
+### Toggle additional content
+
+Monitor notifications include content such as the monitor's query, the @-mentions used, metric snapshots (for metric monitors), and links back to relevant pages in Datadog. You have the option to choose which content you would like to include or exclude from notifications for individual monitors. 
+
+{{< img src="monitors/notifications/monitor_notification_presets.png" alt="Set a monitor preset" style="width:70%;" >}}
+
+The options are:
+
+- **Default**: No content is hidden.
+- **Hide Query**: Remove the monitor's query from the notification message.
+- **Hide Handles**: Remove the @-mentions that are used in the notification message.
+- **Hide All**: Notification message does not include query, handles, any snapshots (for metric monitors), or additional links in footers.
+
+**Note**: Depending on the integration, some content may not be displayed by default.
+
 ### Modifications
 
 An [event][8] is created anytime a monitor is created, modified, silenced, or deleted. Set the `Notify` option to notify team members, chat services, and the monitor creator of these events.
@@ -124,7 +139,7 @@ All users can read all monitors, regardless of the role they are associated with
 
 By default, only users attached to roles with the [Monitors Write permission][9] can edit monitors. [Datadog Admin Role and Datadog Standard Role][10] have the Monitors Write permission by default. If your organization uses [Custom Roles][11], other custom roles may have the Monitors Write permission.
 
-You can further restrict your monitor by specifying a list of [roles][12] allowed to edit it. The monitor's creator can always edit the monitor. 
+You can further restrict your monitor by specifying a list of [roles][12] allowed to edit it. The monitor's creator can always edit the monitor.
 
   {{< img src="monitors/notifications/monitor_rbac_restricted.jpg" alt="RBAC Restricted Monitor" style="width:90%;" >}}
 
@@ -180,5 +195,5 @@ Message variables auto-populate with a randomly selected group based on the scop
 [11]: /account_management/rbac/?tab=datadogapplication#custom-roles
 [12]: /account_management/rbac/?tab=datadogapplication
 [13]: /monitors/guide/how-to-set-up-rbac-for-monitors/
-[14]: /monitors/create/#monitor-types
+[14]: /monitors/types
 [15]: /monitors/guide/recovery-thresholds/

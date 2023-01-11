@@ -17,7 +17,7 @@ deployment:
     targets:
     - name: "live"
       URL: "s3://datadog-docs-live-hugo?region=us-east-1"
-      exclude: "**.{go,java,sh,py,rb}"
+      exclude: "**.{go,java,py,rb}"
       # cloudFrontDistributionID: E2B2OODXRYOXSA
     - name: "liveAssets"
       URL: "s3://origin-static-assets?region=us-east-1&prefix=documentation/"

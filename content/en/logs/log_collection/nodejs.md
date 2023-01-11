@@ -1,5 +1,5 @@
 ---
-title: NodeJS Log Collection
+title: Node.js Log Collection
 kind: documentation
 aliases:
   - /logs/languages/nodejs
@@ -24,7 +24,7 @@ further_reading:
 
 ## Configure your logger
 
-To send your logs to Datadog, log to a file and tail that file with your Datadog Agent. Use the [Winston][1] logging library to log from your NodeJS application.
+To send your logs to Datadog, log to a file and tail that file with your Datadog Agent. Use the [Winston][1] logging library to log from your Node.js application.
 
 Winston is available through [NPM][2], to get started, you want to add the dependency to your code:
 
@@ -136,7 +136,7 @@ If logs are in JSON format, Datadog automatically [parses the log messages][11] 
 ## Connect your service across logs and traces
 
 If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs,
-`env`, `service`, and `version` to your logs by [following the APM NodeJS instructions][3].
+`env`, `service`, and `version` to your logs by [following the APM Node.js instructions][3].
 
 **Note**: If the APM tracer injects `service` into your logs, it overrides the value set in the Agent configuration.
 

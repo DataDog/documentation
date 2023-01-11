@@ -25,11 +25,18 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 
 ## Requirements
 
-The Datadog Profiler requires MRI Ruby 2.1+.
+The Datadog Profiler requires MRI Ruby 2.2+.
 
 The following operating systems and architectures are supported:
 - Linux (GNU libc) x86-64, aarch64
 - Alpine Linux (musl libc) x86-64, aarch64
+
+The following profiling features are available in the following minimum versions of the `dd-trace-rb` library:
+
+|      Feature         | Required `dd-trace-rb` version          |
+|----------------------|-----------------------------------------|
+| Code Hotspots        | 0.49.0 or greater                       |
+| Endpoints            | 0.54.0 or greater                       |
 
 Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
 

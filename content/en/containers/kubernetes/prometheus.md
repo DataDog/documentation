@@ -216,6 +216,16 @@ With Prometheus Autodiscovery, the Datadog Agent is able to detect native Promet
 
 ### Configuration
 
+It's recommended to first check which pods and services have the `prometheus.io/scrape=true` annotation before enabling this feature. This can be done with the following commands:
+
+```shell
+kubectl get pods -o=jsonpath='{.items[?(@.metadata.annotations.prometheus\.io/scrape=="true")].metadata.name}' --all-namespaces
+
+kubectl get services -o=jsonpath='{.items[?(@.metadata.annotations.prometheus\.io/scrape=="true")].metadata.name}' --all-namespaces
+```
+
+Once the Prometheus Scrape feature is enabled the Datadog Agent collects custom metrics from these resources. If you do not want to collect the custom metrics from these resources you can remove this annotation or update the autodiscovery rules as described in the [advanced configuration section](#advanced-configuration).
+
 #### Basic configuration
 
 {{< tabs >}}
@@ -271,9 +281,9 @@ You can define advanced OpenMetrics check configurations or custom Autodiscovery
 
 `additionalConfigs` is a list of structures containing OpenMetrics check configurations and Autodiscovery rules.
 
-Every [configuration field][1] supported by the OpenMetrics check can be passed in the configurations list.
+Only the parameters [on this page][2] are supported for OpenMetrics v2 with Autodiscovery and can be passed in the configurations list.
 
-The autodiscovery configuration can be based on container names or kubernetes annotations or both. When both `kubernetes_container_names` and `kubernetes_annotations` are defined, it uses AND logic (both rules must match).
+The Autodiscovery configuration can be based on container names, Kubernetes annotations, or both. When both `kubernetes_container_names` and `kubernetes_annotations` are defined, it uses AND logic (both rules must match).
 
 `kubernetes_container_names` is a list of container names to target, it supports the `*` wildcard.
 
@@ -314,6 +324,7 @@ datadog:
 
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
+[2]: https://github.com/DataDog/datadog-agent/blob/main/pkg/autodiscovery/common/types/prometheus.go#L92-L100
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
 
@@ -321,9 +332,9 @@ You can define advanced OpenMetrics check configurations or custom Autodiscovery
 
 `DD_PROMETHEUS_SCRAPE_CHECKS` is a list of structures containing OpenMetrics check configurations and Autodiscovery rules.
 
-Every [configuration field][1] supported by the OpenMetrics check can be passed in the configurations list.
+Only the parameters [on this page][2] are supported for OpenMetrics v2 with Autodiscovery and can be passed in the configurations list.
 
-The Autodiscovery configuration can be based on container names or Kubernetes annotations or both. When both `kubernetes_container_names` and `kubernetes_annotations` are defined, it uses AND logic (both rules must match).
+The Autodiscovery configuration can be based on container names, Kubernetes annotations, or both. When both `kubernetes_container_names` and `kubernetes_annotations` are defined, it uses AND logic (both rules must match).
 
 `kubernetes_container_names` is a list of container names to target, it supports the `*` wildcard.
 
@@ -351,6 +362,7 @@ In this example we're defining an advanced configuration targeting a container n
 
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
+[2]: https://github.com/DataDog/datadog-agent/blob/main/pkg/autodiscovery/common/types/prometheus.go#L92-L100
 {{% /tab %}}
 {{< /tabs >}}
 

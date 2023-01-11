@@ -1,13 +1,15 @@
 ---
-title: Décalage temporel
-kind: documentation
 aliases:
-  - /fr/graphing/functions/timeshift/
+- /fr/graphing/functions/timeshift/
 further_reading:
-  - link: /dashboards/faq/how-can-i-graph-the-percentage-change-between-an-earlier-value-and-a-current-value/
-    tag: FAQ
-    text: Créez un graphique illustrant le changement de pourcentage entre une valeur passée et une valeur actuelle.
+- link: /dashboards/faq/how-can-i-graph-the-percentage-change-between-an-earlier-value-and-a-current-value/
+  tag: FAQ
+  text: Créez un graphique illustrant le changement de pourcentage entre une valeur
+    passée et une valeur actuelle.
+kind: documentation
+title: Décalage temporel
 ---
+
 Voici un ensemble de fonctions pour l'expression `<PÉRIODE>_before()`. Ces fonctions permettent d'afficher les valeurs de la période correspondante sur le graphique. Utilisées seules, leur intérêt peut être limité ; toutefois, lorsqu'elles sont combinées avec les valeurs actuelles, elles peuvent apporter des statistiques utiles concernant les performances de votre application.
 
 ## Décalage temporel
@@ -77,7 +79,6 @@ Voici un exemple de `aws.ec2.cpuutilization` avec la valeur `month_before()` rep
     {{< nextlink href="/dashboards/functions/smoothing" >}}Lissage : lissez les variations de votre métrique.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-<br>
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -13,9 +13,9 @@ further_reading:
   - link: "/logs/log_collection/"
     tag: "Documentation"
     text: "Starting collecting your logs"
-  - link: "https://learn.datadoghq.com"
+  - link: "https://learn.datadoghq.com/courses/intro-to-log-management"
     tag: "Learning Center"
-    text: "Learn more about Datadog Log Management"
+    text: "Introduction to Log Management"
   - link: "https://www.datadoghq.com/blog/accelerate-incident-investigations-with-log-anomaly-detection/"
     tag: "Blog"
     text: "Accelerate Incident Investigations with Log Anomaly Detection"
@@ -74,7 +74,7 @@ Start exploring your ingested logs in the [Log Explorer][1].
 \*Logging without Limits is a trademark of Datadog, Inc.
 
 [1]: /logs/explorer/
-[2]: /security_platform/cloud_siem/
+[2]: /security/cloud_siem/
 [3]: /logs/log_collection/
 [4]: /logs/log_configuration/
 [5]: /tracing/other_telemetry/connect_logs_and_traces/
