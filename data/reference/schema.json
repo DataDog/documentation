@@ -238,7 +238,7 @@
     },
     "vector_core::config::proxy::ProxyConfig": {
       "title": "Proxy configuration.",
-      "description": "Vector can be configured to proxy traffic through an HTTP(S) proxy when making external requests. Similar to common\nproxy configuration convention, users can set different proxies to use based on the type of traffic being proxied,\nas well as set specific hosts that should not be proxied.",
+      "description": "Configure to proxy traffic through an HTTP(S) proxy when making external requests. Similar to common\nproxy configuration convention, users can set different proxies to use based on the type of traffic being proxied,\nas well as set specific hosts that should not be proxied.",
       "type": "object",
       "properties": {
         "enabled": {
@@ -285,7 +285,7 @@
     },
     "vector_core::config::AcknowledgementsConfig": {
       "title": "Controls how acknowledgements are handled for this sink.",
-      "description": "See [End-to-end Acknowledgements][e2e_acks] for more information on how Vector handles event acknowledgement.\n\n[e2e_acks]: https://vector.dev/docs/about/under-the-hood/architecture/end-to-end-acknowledgements/",
+      "description": "See [End-to-end Acknowledgements][e2e_acks] for more information on how event acknowledgement is handled.\n\n[e2e_acks]: https://vector.dev/docs/about/under-the-hood/architecture/end-to-end-acknowledgements/",
       "type": "object",
       "properties": {
         "enabled": {
@@ -338,7 +338,7 @@
         "address": {
           "description": "The address to listen on for the API endpoint.",
           "default": "127.0.0.1:8686",
-          "$ref": "#/definitions/core::option::Option<std::net::addr::SocketAddr>"
+          "$ref": "#/definitions/core::option::Option<std::net::socket_addr::SocketAddr>"
         },
         "playground": {
           "description": "Whether or not to expose the GraphQL playground on the API endpoint.",
@@ -347,7 +347,7 @@
         }
       }
     },
-    "core::option::Option<std::net::addr::SocketAddr>": {
+    "core::option::Option<std::net::socket_addr::SocketAddr>": {
       "description": "An internet socket address, either IPv4 or IPv6.",
       "type": [
         "string",
@@ -1862,22 +1862,34 @@
           ],
           "items": {
             "type": "string"
+          },
+          "_metadata": {
+            "docs::examples": "h2"
           }
         },
         "ca_file": {
           "title": "Absolute path to an additional CA certificate file.",
           "description": "The certificate must be in the DER or PEM (X.509) format. Additionally, the certificate can be provided as an inline string in PEM format.",
-          "$ref": "#/definitions/core::option::Option<std::path::PathBuf>"
+          "$ref": "#/definitions/core::option::Option<std::path::PathBuf>",
+          "_metadata": {
+            "docs::examples": "/path/to/certificate_authority.crt"
+          }
         },
         "crt_file": {
           "title": "Absolute path to a certificate file used to identify this server.",
           "description": "The certificate must be in DER, PEM (X.509), or PKCS#12 format. Additionally, the certificate can be provided as\nan inline string in PEM format.\n\nIf this is set, and is not a PKCS#12 archive, `key_file` must also be set.",
-          "$ref": "#/definitions/core::option::Option<std::path::PathBuf>"
+          "$ref": "#/definitions/core::option::Option<std::path::PathBuf>",
+          "_metadata": {
+            "docs::examples": "/path/to/host_certificate.crt"
+          }
         },
         "key_file": {
           "title": "Absolute path to a private key file used to identify this server.",
           "description": "The key must be in DER or PEM (PKCS#8) format. Additionally, the key can be provided as an inline string in PEM format.",
-          "$ref": "#/definitions/core::option::Option<std::path::PathBuf>"
+          "$ref": "#/definitions/core::option::Option<std::path::PathBuf>",
+          "_metadata": {
+            "docs::examples": "/path/to/host_certificate.key"
+          }
         },
         "key_pass": {
           "title": "Passphrase used to unlock the encrypted key file.",
@@ -1885,7 +1897,13 @@
           "type": [
             "string",
             "null"
-          ]
+          ],
+          "_metadata": {
+            "docs::examples": [
+              "${KEY_PASS_ENV_VAR}",
+              "PassWord1"
+            ]
+          }
         }
       }
     },
@@ -2211,17 +2229,15 @@
           "type": "array",
           "items": {
             "type": "string"
+          },
+          "_metadata": {
+            "docs::examples": "http://localhost:8080/server-status/?auto"
           }
         },
         "scrape_interval_secs": {
-          "description": "The interval between scrapes, in seconds.",
+          "description": "The interval between scrapes.",
           "default": 15,
-          "type": "integer",
-          "maximum": 9007199254740991.0,
-          "minimum": 0.0,
-          "_metadata": {
-            "docs::numeric_type": "uint"
-          }
+          "$ref": "#/definitions/serde_with::DurationSeconds"
         },
         "namespace": {
           "title": "The namespace of the metric.",
@@ -2235,13 +2251,23 @@
         "docs::component_name": "apache_metrics"
       }
     },
+    "serde_with::DurationSeconds": {
+      "description": "A span of time, in whole seconds.",
+      "type": "integer",
+      "maximum": 9007199254740991.0,
+      "minimum": 0.0,
+      "_metadata": {
+        "docs::numeric_type": "uint",
+        "docs::type_unit": "seconds"
+      }
+    },
     "vector::sources::aws_ecs_metrics::AwsEcsMetricsSourceConfig": {
       "description": "Configuration for the `aws_ecs_metrics` source.",
       "type": "object",
       "properties": {
         "endpoint": {
           "title": "Base URI of the task metadata endpoint.",
-          "description": "If empty, the URI will be automatically discovered based on the latest version detected.\n\nBy default:\n- The version 2 endpoint base URI is `169.254.170.2/v2/`.\n- The version 3 endpoint base URI is stored in the environment variable `ECS_CONTAINER_METADATA_URI`.\n- The version 4 endpoint base URI is stored in the environment variable `ECS_CONTAINER_METADATA_URI_V4`.",
+          "description": "If empty, the URI will be automatically discovered based on the latest version detected.\n\nBy default:\n- The version 4 endpoint base URI is stored in the environment variable `ECS_CONTAINER_METADATA_URI_V4`.\n- The version 3 endpoint base URI is stored in the environment variable `ECS_CONTAINER_METADATA_URI`.\n- The version 2 endpoint base URI is `169.254.170.2/v2/`.",
           "default": "http://169.254.170.2/v2",
           "type": "string"
         },
@@ -2254,12 +2280,7 @@
         "scrape_interval_secs": {
           "description": "The interval between scrapes, in seconds.",
           "default": 15,
-          "type": "integer",
-          "maximum": 9007199254740991.0,
-          "minimum": 0.0,
-          "_metadata": {
-            "docs::numeric_type": "uint"
-          }
+          "$ref": "#/definitions/serde_with::DurationSeconds"
         },
         "namespace": {
           "title": "The namespace of the metric.",
@@ -2275,11 +2296,11 @@
     },
     "vector::sources::aws_ecs_metrics::Version": {
       "title": "Version of the AWS ECS task metadata endpoint to use.",
-      "description": "More information about the different versions can be found\n(here)[https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-metadata-endpoint.html].",
+      "description": "More information about the different versions can be found\n[here][meta_endpoint].\n\n[meta_endpoint]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-metadata-endpoint.html",
       "oneOf": [
         {
           "title": "Version 2.",
-          "description": "More information about version 2 of the task metadata endpoint can be found\n(here)[https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-metadata-endpoint-v2.html].",
+          "description": "More information about version 2 of the task metadata endpoint can be found [here][endpoint_v2].\n\n[endpoint_v2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-metadata-endpoint-v2.html",
           "const": "v2",
           "_metadata": {
             "logical_name": "V2"
@@ -2287,7 +2308,7 @@
         },
         {
           "title": "Version 3.",
-          "description": "More information about version 3 of the task metadata endpoint can be found\n(here)[https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-metadata-endpoint-v3.html].",
+          "description": "More information about version 3 of the task metadata endpoint can be found [here][endpoint_v3].\n\n[endpoint_v3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-metadata-endpoint-v3.html",
           "const": "v3",
           "_metadata": {
             "logical_name": "V3"
@@ -2295,7 +2316,7 @@
         },
         {
           "title": "Version 4.",
-          "description": "More information about version 4 of the task metadata endpoint can be found\n(here)[https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-metadata-endpoint-v4.html].",
+          "description": "More information about version 4 of the task metadata endpoint can be found [here][endpoint_v4].\n\n[endpoint_v4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-metadata-endpoint-v4.html",
           "const": "v4",
           "_metadata": {
             "logical_name": "V4"
@@ -2315,17 +2336,27 @@
       "properties": {
         "address": {
           "description": "The address to listen for connections on.",
-          "$ref": "#/definitions/stdlib::SocketAddr"
+          "$ref": "#/definitions/stdlib::SocketAddr",
+          "_metadata": {
+            "docs::examples": [
+              "0.0.0.0:443",
+              "localhost:443"
+            ]
+          }
         },
         "access_key": {
           "title": "An optional access key to authenticate requests against.",
           "description": "AWS Kinesis Firehose can be configured to pass along a user-configurable access key with each request. If\nconfigured, `access_key` should be set to the same value. Otherwise, all requests will be allowed.",
-          "$ref": "#/definitions/core::option::Option<vector_common::sensitive_string::SensitiveString>"
+          "$ref": "#/definitions/core::option::Option<vector_common::sensitive_string::SensitiveString>",
+          "_metadata": {
+            "docs::examples": "A94A8FE5CCB19BA61C4C08"
+          }
         },
         "record_compression": {
           "title": "The compression scheme to use for decompressing records within the Firehose message.",
-          "description": "Some services, like AWS CloudWatch Logs, will [compress the events with\ngzip](\\(urls.aws_cloudwatch_logs_firehose)), before sending them AWS Kinesis Firehose. This option can be used\nto automatically decompress them before forwarding them to the next component.\n\nNote that this is different from [Content encoding option](\\(urls.aws_kinesis_firehose_http_protocol)) of the\nFirehose HTTP endpoint destination. That option controls the content encoding of the entire HTTP request.",
-          "$ref": "#/definitions/core::option::Option<vector::sources::aws_kinesis_firehose::Compression>"
+          "description": "Some services, like AWS CloudWatch Logs, will [compress the events with gzip][events_with_gzip],\nbefore sending them AWS Kinesis Firehose. This option can be used to automatically decompress\nthem before forwarding them to the next component.\n\nNote that this is different from [Content encoding option][encoding_option] of the\nFirehose HTTP endpoint destination. That option controls the content encoding of the entire HTTP request.\n\n[events_with_gzip]: https://docs.aws.amazon.com/firehose/latest/dev/writing-with-cloudwatch-logs.html\n[encoding_option]: https://docs.aws.amazon.com/firehose/latest/dev/create-destination.html#create-destination-http",
+          "default": "auto",
+          "$ref": "#/definitions/vector::sources::aws_kinesis_firehose::Compression"
         },
         "tls": {
           "$ref": "#/definitions/core::option::Option<vector_core::tls::settings::TlsEnableableConfig>"
@@ -2379,12 +2410,12 @@
         "sensitive": true
       }
     },
-    "core::option::Option<vector::sources::aws_kinesis_firehose::Compression>": {
+    "vector::sources::aws_kinesis_firehose::Compression": {
       "description": "Compression scheme for records in a Firehose message.",
       "oneOf": [
         {
           "title": "Automatically attempt to determine the compression scheme.",
-          "description": "The compression scheme of the object is determined by looking at its file signature, also known\nas [magic bytes](\\(urls.magic_bytes)).\n\nIf the record fails to decompress with the discovered format, the record is forwarded as is.\nThus, if you know the records are always gzip encoded (for example, if they are coming from AWS CloudWatch Logs),\nset `gzip` in this field so that any records that are not-gzipped are rejected.",
+          "description": "The compression scheme of the object is determined by looking at its file signature, also known\nas [magic bytes][magic_bytes].\n\nIf the record fails to decompress with the discovered format, the record is forwarded as is.\nThus, if you know the records are always gzip encoded (for example, if they are coming from AWS CloudWatch Logs),\nset `gzip` in this field so that any records that are not-gzipped are rejected.\n\n[magic_bytes]: https://en.wikipedia.org/wiki/List_of_file_signatures",
           "const": "auto",
           "_metadata": {
             "logical_name": "Auto"
@@ -2403,9 +2434,6 @@
           "_metadata": {
             "logical_name": "Gzip"
           }
-        },
-        {
-          "type": "null"
         }
       ],
       "_metadata": {
@@ -2469,22 +2497,34 @@
           ],
           "items": {
             "type": "string"
+          },
+          "_metadata": {
+            "docs::examples": "h2"
           }
         },
         "ca_file": {
           "title": "Absolute path to an additional CA certificate file.",
           "description": "The certificate must be in the DER or PEM (X.509) format. Additionally, the certificate can be provided as an inline string in PEM format.",
-          "$ref": "#/definitions/core::option::Option<std::path::PathBuf>"
+          "$ref": "#/definitions/core::option::Option<std::path::PathBuf>",
+          "_metadata": {
+            "docs::examples": "/path/to/certificate_authority.crt"
+          }
         },
         "crt_file": {
           "title": "Absolute path to a certificate file used to identify this server.",
           "description": "The certificate must be in DER, PEM (X.509), or PKCS#12 format. Additionally, the certificate can be provided as\nan inline string in PEM format.\n\nIf this is set, and is not a PKCS#12 archive, `key_file` must also be set.",
-          "$ref": "#/definitions/core::option::Option<std::path::PathBuf>"
+          "$ref": "#/definitions/core::option::Option<std::path::PathBuf>",
+          "_metadata": {
+            "docs::examples": "/path/to/host_certificate.crt"
+          }
         },
         "key_file": {
           "title": "Absolute path to a private key file used to identify this server.",
           "description": "The key must be in DER or PEM (PKCS#8) format. Additionally, the key can be provided as an inline string in PEM format.",
-          "$ref": "#/definitions/core::option::Option<std::path::PathBuf>"
+          "$ref": "#/definitions/core::option::Option<std::path::PathBuf>",
+          "_metadata": {
+            "docs::examples": "/path/to/host_certificate.key"
+          }
         },
         "key_pass": {
           "title": "Passphrase used to unlock the encrypted key file.",
@@ -2492,7 +2532,13 @@
           "type": [
             "string",
             "null"
-          ]
+          ],
+          "_metadata": {
+            "docs::examples": [
+              "${KEY_PASS_ENV_VAR}",
+              "PassWord1"
+            ]
+          }
         }
       }
     },
@@ -2890,16 +2936,6 @@
           "default": 1,
           "$ref": "#/definitions/serde_with::DurationSeconds"
         }
-      }
-    },
-    "serde_with::DurationSeconds": {
-      "description": "A span of time, in whole seconds.",
-      "type": "integer",
-      "maximum": 9007199254740991.0,
-      "minimum": 0.0,
-      "_metadata": {
-        "docs::numeric_type": "uint",
-        "docs::type_unit": "seconds"
       }
     },
     "core::option::Option<vector::sources::util::multiline_config::MultilineConfig>": {
@@ -3345,6 +3381,7 @@
         }
       ],
       "_metadata": {
+        "docs::enum_tag_description": "The format of the randomly generated output.",
         "docs::enum_tagging": "internal",
         "docs::enum_tag_field": "format"
       }
@@ -3369,10 +3406,7 @@
         "host_key": {
           "title": "Overrides the name of the log field used to add the source path to each event.",
           "description": "The value will be the socket path itself.\n\nBy default, the [global `log_schema.host_key` option][global_host_key] is used.\n\n[global_host_key]: https://vector.dev/docs/reference/configuration/global-options/#log_schema.host_key",
-          "type": [
-            "string",
-            "null"
-          ]
+          "$ref": "#/definitions/core::option::Option<lookup::lookup_v2::optional_path::OptionalValuePath>"
         },
         "socket_path": {
           "title": "Absolute path to the socket file to read DNSTAP data from.",
@@ -3458,6 +3492,13 @@
         "docs::component_type": "source",
         "docs::component_name": "dnstap"
       }
+    },
+    "core::option::Option<lookup::lookup_v2::optional_path::OptionalValuePath>": {
+      "description": "An optional path that will deserialize empty string to None",
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "vector::sources::docker_logs::DockerLogsConfig": {
       "description": "Configuration for the `docker_logs` source.",
@@ -3583,7 +3624,7 @@
     },
     "core::option::Option<vector::docker::DockerTlsConfig>": {
       "title": "Configuration of TLS when connecting to the Docker daemon.",
-      "description": "Only relevant when connecting to Docker via an HTTPS URL.\n\nIf not configured, Vector will try to use environment variable `DOCKER_CERT_PATH` and then` DOCKER_CONFIG`. If both environment variables are absent, Vector will try to read certificates in `~/.docker/`.",
+      "description": "Only relevant when connecting to Docker via an HTTPS URL.\n\nIf not configured, the environment variable `DOCKER_CERT_PATH` is used. If `DOCKER_CERT_PATH` is absent, then` DOCKER_CONFIG` is used. If both environment variables are absent, the certificates in `~/.docker/` are read.",
       "type": [
         "object",
         "null"
@@ -3943,7 +3984,7 @@
         },
         "read_from": {
           "default": null,
-          "$ref": "#/definitions/core::option::Option<vector::sources::file::ReadFromConfig>"
+          "$ref": "#/definitions/core::option::Option<file_source::ReadFromConfig>"
         },
         "ignore_older_secs": {
           "description": "Ignore files with a data modification date older than the specified number of seconds.",
@@ -4102,14 +4143,7 @@
         "docs::component_name": "file"
       }
     },
-    "core::option::Option<lookup::lookup_v2::optional_path::OptionalValuePath>": {
-      "description": "An optional path that will deserialize empty string to None",
-      "type": [
-        "string",
-        "null"
-      ]
-    },
-    "core::option::Option<vector::sources::file::ReadFromConfig>": {
+    "core::option::Option<file_source::ReadFromConfig>": {
       "description": "File position to use when reading a new file.",
       "oneOf": [
         {
@@ -4147,8 +4181,7 @@
           ],
           "properties": {
             "bytes": {
-              "title": "Maximum number of bytes to use, from the lines that are read, for generating the checksum.",
-              "description": "TODO: Should we properly expose this in the documentation? There could definitely be value in allowing more\nbytes to be used for the checksum generation, but we should commit to exposing it rather than hiding it.",
+              "description": "Maximum number of bytes to use, from the lines that are read, for generating the checksum.",
               "type": [
                 "integer",
                 "null"
@@ -4190,14 +4223,16 @@
           }
         },
         {
-          "description": "Use the [device and inode](https://en.wikipedia.org/wiki/Inode) as the identifier.",
+          "title": "Use the [device and inode][inode] as the identifier.",
+          "description": "[inode]: https://en.wikipedia.org/wiki/Inode",
           "type": "object",
           "required": [
             "strategy"
           ],
           "properties": {
             "strategy": {
-              "description": "Use the [device and inode](https://en.wikipedia.org/wiki/Inode) as the identifier.",
+              "title": "Use the [device and inode][inode] as the identifier.",
+              "description": "[inode]: https://en.wikipedia.org/wiki/Inode",
               "const": "device_and_inode"
             }
           },
@@ -4207,6 +4242,7 @@
         }
       ],
       "_metadata": {
+        "docs::enum_tag_description": "The strategy used to uniquely identify files.\n\nThis is important for checkpointing when file rotation is used.",
         "docs::enum_tagging": "internal",
         "docs::enum_tag_field": "strategy"
       }
@@ -4223,7 +4259,7 @@
       "properties": {
         "charset": {
           "title": "Encoding of the source messages.",
-          "description": "Takes one of the encoding [label strings](https://encoding.spec.whatwg.org/#concept-encoding-get) defined as\npart of the [Encoding Standard](https://encoding.spec.whatwg.org/).\n\nWhen set, the messages are transcoded from the specified encoding to UTF-8, which is the encoding that Vector\nassumes internally for string-like data. You should enable this transcoding operation if you need your data to\nbe in UTF-8 for further processing. At the time of transcoding, any malformed sequences (that can’t be mapped to\nUTF-8) will be replaced with the Unicode [REPLACEMENT\nCHARACTER](https://en.wikipedia.org/wiki/Specials_(Unicode_block)#Replacement_character) and warnings will be\nlogged.",
+          "description": "Takes one of the encoding [label strings](https://encoding.spec.whatwg.org/#concept-encoding-get) defined as\npart of the [Encoding Standard](https://encoding.spec.whatwg.org/).\n\nWhen set, the messages are transcoded from the specified encoding to UTF-8, which is the encoding that is\nassumed internally for string-like data. Enable this transcoding operation if you need your data to\nbe in UTF-8 for further processing. At the time of transcoding, any malformed sequences (that can't be mapped to\nUTF-8) is replaced with the Unicode [REPLACEMENT\nCHARACTER](https://en.wikipedia.org/wiki/Specials_(Unicode_block)#Replacement_character) and warnings are\nlogged.",
           "$ref": "#/definitions/encoding_rs::Encoding"
         }
       }
@@ -4247,7 +4283,8 @@
           "maximum": 9007199254740991.0,
           "minimum": 0.0,
           "_metadata": {
-            "docs::numeric_type": "uint"
+            "docs::numeric_type": "uint",
+            "docs::type_unit": "bytes"
           }
         },
         "host_key": {
@@ -4270,7 +4307,8 @@
           "maximum": 4294967295.0,
           "minimum": 0.0,
           "_metadata": {
-            "docs::numeric_type": "uint"
+            "docs::numeric_type": "uint",
+            "docs::examples": 10
           }
         },
         "log_namespace": {
@@ -4413,10 +4451,7 @@
               "properties": {
                 "client_metadata_key": {
                   "description": "Event field for client certificate metadata.",
-                  "type": [
-                    "string",
-                    "null"
-                  ]
+                  "$ref": "#/definitions/core::option::Option<lookup::lookup_v2::optional_path::OptionalValuePath>"
                 }
               }
             },
@@ -4611,12 +4646,12 @@
       "properties": {
         "api_key": {
           "title": "An API key. ([documentation](https://cloud.google.com/docs/authentication/api-keys))",
-          "description": "Either an API key, or a path to a service account credentials JSON file can be specified.\n\nIf both are unset, Vector checks the `GOOGLE_APPLICATION_CREDENTIALS` environment variable for a filename. If no\nfilename is named, Vector will attempt to fetch an instance service account for the compute instance the program is\nrunning on. If Vector is not running on a GCE instance, then you must define eith an API key or service account\ncredentials JSON file.",
+          "description": "Either an API key, or a path to a service account credentials JSON file can be specified.\n\nIf both are unset, the `GOOGLE_APPLICATION_CREDENTIALS` environment variable is checked for a filename. If no\nfilename is named, an attempt is made to fetch an instance service account for the compute instance the program is\nrunning on. If this is not on a GCE instance, then you must define it with an API key or service account\ncredentials JSON file.",
           "$ref": "#/definitions/core::option::Option<vector_common::sensitive_string::SensitiveString>"
         },
         "credentials_path": {
           "title": "Path to a service account credentials JSON file. ([documentation](https://cloud.google.com/docs/authentication/production#manually))",
-          "description": "Either an API key, or a path to a service account credentials JSON file can be specified.\n\nIf both are unset, Vector checks the `GOOGLE_APPLICATION_CREDENTIALS` environment variable for a filename. If no\nfilename is named, Vector will attempt to fetch an instance service account for the compute instance the program is\nrunning on. If Vector is not running on a GCE instance, then you must define eith an API key or service account\ncredentials JSON file.",
+          "description": "Either an API key, or a path to a service account credentials JSON file can be specified.\n\nIf both are unset, the `GOOGLE_APPLICATION_CREDENTIALS` environment variable is checked for a filename. If no\nfilename is named, an attempt is made to fetch an instance service account for the compute instance the program is\nrunning on. If this is not on a GCE instance, then you must define it with an API key or service account\ncredentials JSON file.",
           "type": [
             "string",
             "null"
@@ -4637,8 +4672,14 @@
       ],
       "properties": {
         "address": {
-          "description": "The address to listen for connections on.",
-          "$ref": "#/definitions/stdlib::SocketAddr"
+          "description": "The socket address to listen for connections on.",
+          "$ref": "#/definitions/stdlib::SocketAddr",
+          "_metadata": {
+            "docs::examples": [
+              "0.0.0.0:80",
+              "localhost:80"
+            ]
+          }
         },
         "query_parameters": {
           "title": "A list of URL query parameters to include in the log event.",
@@ -4647,6 +4688,12 @@
           "type": "array",
           "items": {
             "type": "string"
+          },
+          "_metadata": {
+            "docs::examples": [
+              "application",
+              "source"
+            ]
           }
         },
         "tls": {
@@ -4703,11 +4750,23 @@
       "properties": {
         "username": {
           "description": "The username for basic authentication.",
-          "type": "string"
+          "type": "string",
+          "_metadata": {
+            "docs::examples": [
+              "AzureDiamond",
+              "admin"
+            ]
+          }
         },
         "password": {
           "description": "The password for basic authentication.",
-          "$ref": "#/definitions/vector_common::sensitive_string::SensitiveString"
+          "$ref": "#/definitions/vector_common::sensitive_string::SensitiveString",
+          "_metadata": {
+            "docs::examples": [
+              "hunter2",
+              "${PASSWORD}"
+            ]
+          }
         }
       }
     },
@@ -4744,17 +4803,6 @@
             "string",
             "null"
           ]
-        },
-        "cgroups": {
-          "default": {
-            "levels": 100,
-            "base": null,
-            "groups": {
-              "includes": null,
-              "excludes": null
-            }
-          },
-          "$ref": "#/definitions/vector::sources::host_metrics::cgroups::CGroupsConfig"
         },
         "disk": {
           "default": {
@@ -4800,13 +4848,6 @@
     "vector::sources::host_metrics::Collector": {
       "description": "Collector types.",
       "oneOf": [
-        {
-          "description": "CGroups.",
-          "const": "cgroups",
-          "_metadata": {
-            "logical_name": "CGroups"
-          }
-        },
         {
           "description": "CPU.",
           "const": "cpu",
@@ -4861,40 +4902,17 @@
         "docs::enum_tagging": "external"
       }
     },
-    "vector::sources::host_metrics::cgroups::CGroupsConfig": {
-      "title": "Options for the “cgroups” (controller groups) metrics collector.",
-      "description": "This collector is only available on Linux systems, and only supports either version 2 or hybrid cgroups.",
-      "default": {
-        "levels": 100,
-        "base": null,
-        "groups": {
-          "includes": null,
-          "excludes": null
-        }
-      },
+    "vector::sources::host_metrics::disk::DiskConfig": {
+      "description": "Options for the “disk” metrics collector.",
       "type": "object",
       "properties": {
-        "levels": {
-          "title": "The number of levels of the cgroups hierarchy for which to report metrics.",
-          "description": "A value of `1` means just the root or named cgroup.",
-          "type": "integer",
-          "maximum": 9007199254740991.0,
-          "minimum": 0.0,
-          "_metadata": {
-            "docs::numeric_type": "uint"
-          }
-        },
-        "base": {
-          "description": "The base cgroup name to provide metrics for.",
-          "$ref": "#/definitions/core::option::Option<std::path::PathBuf>"
-        },
-        "groups": {
-          "description": "Lists of group name patterns to include or exclude.",
+        "devices": {
+          "description": "Lists of device name patterns to include or exclude.",
+          "default": {
+            "includes": null,
+            "excludes": null
+          },
           "$ref": "#/definitions/vector::sources::host_metrics::FilterList"
-        },
-        "base_dir": {
-          "description": "Base cgroup directory, for testing use only",
-          "$ref": "#/definitions/core::option::Option<std::path::PathBuf>"
         }
       }
     },
@@ -4928,20 +4946,6 @@
       "title": "A compiled Unix shell-style pattern.",
       "description": "- `?` matches any single character.\n- `*` matches any (possibly empty) sequence of characters.\n- `**` matches the current directory and arbitrary subdirectories. This sequence must form a single path component,\n  so both `**a` and `b**` are invalid and will result in an error. A sequence of more than two consecutive `*`\n  characters is also invalid.\n- `[...]` matches any character inside the brackets. Character sequences can also specify ranges of characters, as\n  ordered by Unicode, so e.g. `[0-9]` specifies any character between 0 and 9 inclusive. An unclosed bracket is\n  invalid.\n- `[!...]` is the negation of `[...]`, i.e. it matches any characters not in the brackets.\n\nThe metacharacters `?`, `*`, `[`, `]` can be matched by using brackets (e.g. `[?]`). When a `]` occurs immediately\nfollowing `[` or `[!` then it is interpreted as being part of, rather then ending, the character set, so `]` and NOT\n`]` can be matched by `[]]` and `[!]]` respectively. The `-` character can be specified inside a character sequence\npattern by placing it at the start or the end, e.g. `[abc-]`.",
       "type": "string"
-    },
-    "vector::sources::host_metrics::disk::DiskConfig": {
-      "description": "Options for the “disk” metrics collector.",
-      "type": "object",
-      "properties": {
-        "devices": {
-          "description": "Lists of device name patterns to include or exclude.",
-          "default": {
-            "includes": null,
-            "excludes": null
-          },
-          "$ref": "#/definitions/vector::sources::host_metrics::FilterList"
-        }
-      }
     },
     "vector::sources::host_metrics::filesystem::FilesystemConfig": {
       "description": "Options for the “filesystem” metrics collector.",
@@ -5507,7 +5511,7 @@
         },
         "namespace": {
           "title": "Overrides the default namespace for the metrics emitted by the source.",
-          "description": "By default, `vector` is used.",
+          "description": "Overrides the default namespace.",
           "type": [
             "string",
             "null"
@@ -5765,31 +5769,31 @@
               "title": "Overrides the name of the log field used to add the message key to each event.",
               "description": "The value will be the message key of the Kafka message itself.\n\nBy default, `\"message_key\"` is used.",
               "default": "message_key",
-              "type": "string"
+              "$ref": "#/definitions/lookup::lookup_v2::optional_path::OptionalValuePath"
             },
             "topic_key": {
               "title": "Overrides the name of the log field used to add the topic to each event.",
               "description": "The value will be the topic from which the Kafka message was consumed from.\n\nBy default, `\"topic\"` is used.",
               "default": "topic",
-              "type": "string"
+              "$ref": "#/definitions/lookup::lookup_v2::optional_path::OptionalValuePath"
             },
             "partition_key": {
               "title": "Overrides the name of the log field used to add the partition to each event.",
               "description": "The value will be the partition from which the Kafka message was consumed from.\n\nBy default, `\"partition\"` is used.",
               "default": "partition",
-              "type": "string"
+              "$ref": "#/definitions/lookup::lookup_v2::optional_path::OptionalValuePath"
             },
             "offset_key": {
               "title": "Overrides the name of the log field used to add the offset to each event.",
               "description": "The value will be the offset of the Kafka message itself.\n\nBy default, `\"offset\"` is used.",
               "default": "offset",
-              "type": "string"
+              "$ref": "#/definitions/lookup::lookup_v2::optional_path::OptionalValuePath"
             },
             "headers_key": {
               "title": "Overrides the name of the log field used to add the headers to each event.",
               "description": "The value will be the headers of the Kafka message itself.\n\nBy default, `\"headers\"` is used.",
               "default": "headers",
-              "type": "string"
+              "$ref": "#/definitions/lookup::lookup_v2::optional_path::OptionalValuePath"
             },
             "librdkafka_options": {
               "title": "Advanced options set directly on the underlying `librdkafka` client.",
@@ -5922,6 +5926,8 @@
           "**/*.gz",
           "**/*.tmp"
         ],
+        "read_from": "beginning",
+        "ignore_older_secs": null,
         "max_read_bytes": 2048,
         "max_line_bytes": 32768,
         "fingerprint_lines": 1,
@@ -5974,6 +5980,23 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/stdlib::PathBuf"
+          }
+        },
+        "read_from": {
+          "default": "beginning",
+          "$ref": "#/definitions/file_source::ReadFromConfig"
+        },
+        "ignore_older_secs": {
+          "description": "Ignore files with a data modification date older than the specified number of seconds.",
+          "default": null,
+          "type": [
+            "integer",
+            "null"
+          ],
+          "maximum": 9007199254740991.0,
+          "minimum": 0.0,
+          "_metadata": {
+            "docs::numeric_type": "uint"
           }
         },
         "max_read_bytes": {
@@ -6152,6 +6175,28 @@
         }
       }
     },
+    "file_source::ReadFromConfig": {
+      "description": "File position to use when reading a new file.",
+      "oneOf": [
+        {
+          "description": "Read from the beginning of the file.",
+          "const": "beginning",
+          "_metadata": {
+            "logical_name": "Beginning"
+          }
+        },
+        {
+          "description": "Start reading from the current end of the file.",
+          "const": "end",
+          "_metadata": {
+            "logical_name": "End"
+          }
+        }
+      ],
+      "_metadata": {
+        "docs::enum_tagging": "external"
+      }
+    },
     "vector::sources::logstash::LogstashConfig": {
       "description": "Configuration for the `logstash` source.",
       "type": "object",
@@ -6273,11 +6318,8 @@
           "type": "string"
         },
         "subject": {
-          "description": "The NATS subject to publish messages to.",
-          "type": "string",
-          "_metadata": {
-            "docs::templateable": true
-          }
+          "description": "The NATS subject to pull messages from.",
+          "type": "string"
         },
         "queue": {
           "description": "NATS Queue Group to join.",
@@ -6318,7 +6360,7 @@
         "subject_key_field": {
           "description": "The `NATS` subject key.",
           "default": "subject",
-          "type": "string"
+          "$ref": "#/definitions/lookup::lookup_v2::optional_path::OptionalValuePath"
         }
       },
       "_metadata": {
@@ -6330,7 +6372,7 @@
       "description": "Configuration of the authentication strategy when interacting with NATS.",
       "oneOf": [
         {
-          "description": "Username and password authentication.\n([documentation](https://docs.nats.io/running-a-nats-service/configuration/securing_nats/auth_intro/username_password))",
+          "description": "Username/password authentication.",
           "type": "object",
           "required": [
             "strategy",
@@ -6341,7 +6383,7 @@
               "$ref": "#/definitions/vector::nats::NatsAuthUserPassword"
             },
             "strategy": {
-              "description": "Username and password authentication.\n([documentation](https://docs.nats.io/running-a-nats-service/configuration/securing_nats/auth_intro/username_password))",
+              "description": "Username/password authentication.",
               "const": "user_password"
             }
           },
@@ -6350,7 +6392,7 @@
           }
         },
         {
-          "description": "Token authentication.\n([documentation](https://docs.nats.io/running-a-nats-service/configuration/securing_nats/auth_intro/tokens))",
+          "description": "Token authentication.",
           "type": "object",
           "required": [
             "strategy",
@@ -6361,7 +6403,7 @@
               "$ref": "#/definitions/vector::nats::NatsAuthToken"
             },
             "strategy": {
-              "description": "Token authentication.\n([documentation](https://docs.nats.io/running-a-nats-service/configuration/securing_nats/auth_intro/tokens))",
+              "description": "Token authentication.",
               "const": "token"
             }
           },
@@ -6370,7 +6412,7 @@
           }
         },
         {
-          "description": "Credentials file authentication.\n([documentation](https://docs.nats.io/running-a-nats-service/configuration/securing_nats/auth_intro/jwt))",
+          "description": "Credentials file authentication. (JWT-based)",
           "type": "object",
           "required": [
             "credentials_file",
@@ -6381,7 +6423,7 @@
               "$ref": "#/definitions/vector::nats::NatsAuthCredentialsFile"
             },
             "strategy": {
-              "description": "Credentials file authentication.\n([documentation](https://docs.nats.io/running-a-nats-service/configuration/securing_nats/auth_intro/jwt))",
+              "description": "Credentials file authentication. (JWT-based)",
               "const": "credentials_file"
             }
           },
@@ -6390,7 +6432,7 @@
           }
         },
         {
-          "description": "NKey authentication.\n([documentation](https://docs.nats.io/running-a-nats-service/configuration/securing_nats/auth_intro/nkey_auth))",
+          "description": "NKey authentication.",
           "type": "object",
           "required": [
             "nkey",
@@ -6401,7 +6443,7 @@
               "$ref": "#/definitions/vector::nats::NatsAuthNKey"
             },
             "strategy": {
-              "description": "NKey authentication.\n([documentation](https://docs.nats.io/running-a-nats-service/configuration/securing_nats/auth_intro/nkey_auth))",
+              "description": "NKey authentication.",
               "const": "nkey"
             }
           },
@@ -6414,6 +6456,7 @@
         }
       ],
       "_metadata": {
+        "docs::enum_tag_description": "The strategy used to authenticate with the NATS server.\n\nMore information on NATS authentication, and the various authentication strategies, can be found in the\nNATS [documentation][nats_auth_docs]. For TLS client certificate authentication specifically, see the\n`tls` settings.\n\n[nats_auth_docs]: https://docs.nats.io/running-a-nats-service/configuration/securing_nats/auth_intro",
         "docs::enum_tagging": "internal",
         "docs::enum_tag_field": "strategy"
       }
@@ -6572,11 +6615,22 @@
         "address": {
           "title": "The address to listen for connections on.",
           "description": "It _must_ include a port.",
-          "$ref": "#/definitions/stdlib::SocketAddr"
+          "$ref": "#/definitions/stdlib::SocketAddr",
+          "_metadata": {
+            "docs::examples": [
+              "0.0.0.0:4317",
+              "localhost:4317"
+            ]
+          }
         },
         "tls": {
           "default": null,
           "$ref": "#/definitions/core::option::Option<vector_core::tls::settings::TlsEnableableConfig>"
+        }
+      },
+      "_metadata": {
+        "docs::examples": {
+          "address": "0.0.0.0:4317"
         }
       }
     },
@@ -6590,25 +6644,31 @@
         "address": {
           "title": "The address to listen for connections on.",
           "description": "It _must_ include a port.",
-          "$ref": "#/definitions/stdlib::SocketAddr"
+          "$ref": "#/definitions/stdlib::SocketAddr",
+          "_metadata": {
+            "docs::examples": [
+              "0.0.0.0:4318",
+              "localhost:4318"
+            ]
+          }
         },
         "tls": {
           "default": null,
           "$ref": "#/definitions/core::option::Option<vector_core::tls::settings::TlsEnableableConfig>"
         }
+      },
+      "_metadata": {
+        "docs::examples": {
+          "address": "0.0.0.0:4318"
+        }
       }
     },
     "vector::sources::postgresql_metrics::PostgresqlMetricsConfig": {
       "description": "Configuration for the `postgresql_metrics` source.",
-      "default": {
-        "endpoints": [],
-        "include_databases": null,
-        "exclude_databases": null,
-        "scrape_interval_secs": 15,
-        "namespace": "postgresql",
-        "tls": null
-      },
       "type": "object",
+      "required": [
+        "endpoints"
+      ],
       "properties": {
         "endpoints": {
           "title": "A list of PostgreSQL instances to scrape.",
@@ -6616,6 +6676,9 @@
           "type": "array",
           "items": {
             "type": "string"
+          },
+          "_metadata": {
+            "docs::examples": "postgresql://postgres:vector@localhost:5432/postgres"
           }
         },
         "include_databases": {
@@ -6627,6 +6690,13 @@
           ],
           "items": {
             "type": "string"
+          },
+          "_metadata": {
+            "docs::examples": [
+              "^postgres$",
+              "^vector$",
+              "^foo"
+            ]
           }
         },
         "exclude_databases": {
@@ -6638,20 +6708,22 @@
           ],
           "items": {
             "type": "string"
+          },
+          "_metadata": {
+            "docs::examples": [
+              "^postgres$",
+              "^template.*"
+            ]
           }
         },
         "scrape_interval_secs": {
-          "description": "The interval between scrapes, in seconds.",
-          "type": "integer",
-          "maximum": 9007199254740991.0,
-          "minimum": 0.0,
-          "_metadata": {
-            "docs::numeric_type": "uint"
-          }
+          "description": "The interval between scrapes.",
+          "default": 15,
+          "$ref": "#/definitions/serde_with::DurationSeconds"
         },
         "namespace": {
-          "title": "Overrides the default namespace for the metrics emitted by the source.",
-          "description": "By default, `postgresql` is used.",
+          "description": "Overrides the default namespace for the metrics emitted by the source.",
+          "default": "postgresql",
           "type": "string"
         },
         "tls": {
@@ -6676,7 +6748,10 @@
         "ca_file": {
           "title": "Absolute path to an additional CA certificate file.",
           "description": "The certificate must be in the DER or PEM (X.509) format.",
-          "$ref": "#/definitions/stdlib::PathBuf"
+          "$ref": "#/definitions/stdlib::PathBuf",
+          "_metadata": {
+            "docs::examples": "certs/ca.pem"
+          }
         }
       }
     },
@@ -6961,7 +7036,7 @@
           }
         },
         {
-          "description": "Listen on UDS, in datagram mode. (Unix domain socket)",
+          "description": "Listen on a Unix domain socket (UDS), in datagram mode.",
           "allOf": [
             {
               "$ref": "#/definitions/vector::sources::socket::unix::UnixConfig"
@@ -6973,7 +7048,7 @@
               ],
               "properties": {
                 "mode": {
-                  "description": "Listen on UDS, in datagram mode. (Unix domain socket)",
+                  "description": "Listen on a Unix domain socket (UDS), in datagram mode.",
                   "const": "unix_datagram"
                 }
               }
@@ -6984,7 +7059,7 @@
           }
         },
         {
-          "description": "Listen on UDS, in stream mode. (Unix domain socket)",
+          "description": "Listen on a Unix domain socket (UDS), in stream mode.",
           "allOf": [
             {
               "$ref": "#/definitions/vector::sources::socket::unix::UnixConfig"
@@ -6996,7 +7071,7 @@
               ],
               "properties": {
                 "mode": {
-                  "description": "Listen on UDS, in stream mode. (Unix domain socket)",
+                  "description": "Listen on a Unix domain socket (UDS), in stream mode.",
                   "const": "unix_stream"
                 }
               }
@@ -7008,6 +7083,7 @@
         }
       ],
       "_metadata": {
+        "docs::enum_tag_description": "The type of socket to use.",
         "docs::enum_tagging": "internal",
         "docs::enum_tag_field": "mode"
       }
@@ -7052,18 +7128,12 @@
         "host_key": {
           "title": "Overrides the name of the log field used to add the peer host to each event.",
           "description": "The value will be the peer host's address, including the port i.e. `1.2.3.4:9000`.\n\nBy default, the [global `log_schema.host_key` option][global_host_key] is used.\n\n[global_host_key]: https://vector.dev/docs/reference/configuration/global-options/#log_schema.host_key",
-          "type": [
-            "string",
-            "null"
-          ]
+          "$ref": "#/definitions/core::option::Option<lookup::lookup_v2::optional_path::OptionalValuePath>"
         },
         "port_key": {
           "title": "Overrides the name of the log field used to add the peer host's port to each event.",
           "description": "The value will be the peer host's port i.e. `9000`.\n\nBy default, `\"port\"` is used.",
-          "type": [
-            "string",
-            "null"
-          ]
+          "$ref": "#/definitions/core::option::Option<lookup::lookup_v2::optional_path::OptionalValuePath>"
         },
         "tls": {
           "$ref": "#/definitions/core::option::Option<vector_core::tls::settings::TlsSourceConfig>"
@@ -7137,18 +7207,12 @@
         "host_key": {
           "title": "Overrides the name of the log field used to add the peer host to each event.",
           "description": "The value will be the peer host's address, including the port i.e. `1.2.3.4:9000`.\n\nBy default, the [global `log_schema.host_key` option][global_host_key] is used.\n\n[global_host_key]: https://vector.dev/docs/reference/configuration/global-options/#log_schema.host_key",
-          "type": [
-            "string",
-            "null"
-          ]
+          "$ref": "#/definitions/core::option::Option<lookup::lookup_v2::optional_path::OptionalValuePath>"
         },
         "port_key": {
           "title": "Overrides the name of the log field used to add the peer host's port to each event.",
           "description": "The value will be the peer host's port i.e. `9000`.\n\nBy default, `\"port\"` is used.",
-          "type": [
-            "string",
-            "null"
-          ]
+          "$ref": "#/definitions/core::option::Option<lookup::lookup_v2::optional_path::OptionalValuePath>"
         },
         "receive_buffer_bytes": {
           "title": "The size, in bytes, of the receive buffer used for the listening socket.",
@@ -7226,10 +7290,7 @@
         "host_key": {
           "title": "Overrides the name of the log field used to add the peer host to each event.",
           "description": "The value will be the socket path itself.\n\nBy default, the [global `log_schema.host_key` option][global_host_key] is used.\n\n[global_host_key]: https://vector.dev/docs/reference/configuration/global-options/#log_schema.host_key",
-          "type": [
-            "string",
-            "null"
-          ]
+          "$ref": "#/definitions/core::option::Option<lookup::lookup_v2::optional_path::OptionalValuePath>"
         },
         "framing": {
           "default": null,
@@ -7464,6 +7525,7 @@
       "_metadata": {
         "docs::component_type": "source",
         "docs::component_name": "statsd",
+        "docs::enum_tag_description": "The type of socket to use.",
         "docs::enum_tagging": "internal",
         "docs::enum_tag_field": "mode"
       }
@@ -7584,7 +7646,8 @@
           "maximum": 9007199254740991.0,
           "minimum": 0.0,
           "_metadata": {
-            "docs::numeric_type": "uint"
+            "docs::numeric_type": "uint",
+            "docs::type_unit": "bytes"
           }
         },
         "host_key": {
@@ -7788,6 +7851,7 @@
         }
       ],
       "_metadata": {
+        "docs::enum_tag_description": "The type of socket to use.",
         "docs::enum_tagging": "internal",
         "docs::enum_tag_field": "mode"
       }
@@ -9458,17 +9522,25 @@
         {
           "title": "Encodes an event as [JSON][json].",
           "description": "[json]: https://www.json.org/",
-          "type": "object",
-          "required": [
-            "codec"
-          ],
-          "properties": {
-            "codec": {
-              "title": "Encodes an event as [JSON][json].",
-              "description": "[json]: https://www.json.org/",
-              "const": "json"
+          "allOf": [
+            {
+              "description": "Encoding options specific to the text serializer.",
+              "$ref": "#/definitions/codecs::encoding::format::json::JsonSerializerConfig"
+            },
+            {
+              "type": "object",
+              "required": [
+                "codec"
+              ],
+              "properties": {
+                "codec": {
+                  "title": "Encodes an event as [JSON][json].",
+                  "description": "[json]: https://www.json.org/",
+                  "const": "json"
+                }
+              }
             }
-          },
+          ],
           "_metadata": {
             "logical_name": "Json"
           }
@@ -9546,19 +9618,27 @@
           }
         },
         {
-          "title": "Plaintext encoding.",
-          "description": "This \"encoding\" simply uses the `message` field of a log event.\n\nUsers should take care if they're modifying their log events (such as by using a `remap`\ntransform, etc) and removing the message field while doing additional parsing on it, as this\ncould lead to the encoding emitting empty strings for the given event.",
-          "type": "object",
-          "required": [
-            "codec"
-          ],
-          "properties": {
-            "codec": {
-              "title": "Plaintext encoding.",
-              "description": "This \"encoding\" simply uses the `message` field of a log event.\n\nUsers should take care if they're modifying their log events (such as by using a `remap`\ntransform, etc) and removing the message field while doing additional parsing on it, as this\ncould lead to the encoding emitting empty strings for the given event.",
-              "const": "text"
+          "title": "Plain text encoding.",
+          "description": "This \"encoding\" simply uses the `message` field of a log event. For metrics, it uses an\nencoding that resembles the Prometheus export format.\n\nUsers should take care if they're modifying their log events (such as by using a `remap`\ntransform, etc) and removing the message field while doing additional parsing on it, as this\ncould lead to the encoding emitting empty strings for the given event.",
+          "allOf": [
+            {
+              "description": "Encoding options specific to the text serializer.",
+              "$ref": "#/definitions/codecs::encoding::format::text::TextSerializerConfig"
+            },
+            {
+              "type": "object",
+              "required": [
+                "codec"
+              ],
+              "properties": {
+                "codec": {
+                  "title": "Plain text encoding.",
+                  "description": "This \"encoding\" simply uses the `message` field of a log event. For metrics, it uses an\nencoding that resembles the Prometheus export format.\n\nUsers should take care if they're modifying their log events (such as by using a `remap`\ntransform, etc) and removing the message field while doing additional parsing on it, as this\ncould lead to the encoding emitting empty strings for the given event.",
+                  "const": "text"
+                }
+              }
             }
-          },
+          ],
           "_metadata": {
             "logical_name": "Text"
           }
@@ -9583,6 +9663,52 @@
           "_metadata": {
             "docs::examples": "{ \"type\": \"record\", \"name\": \"log\", \"fields\": [{ \"name\": \"message\", \"type\": \"string\" }] }"
           }
+        }
+      }
+    },
+    "codecs::encoding::format::json::JsonSerializerConfig": {
+      "description": "Config used to build a `JsonSerializer`.",
+      "type": "object",
+      "properties": {
+        "metric_tag_values": {
+          "title": "Controls how metric tag values are encoded.",
+          "description": "When set to `single`, only the last non-bare value of tags will be displayed with the\nmetric.  When set to `full`, all metric tags will be exposed as separate assignments.",
+          "default": "single",
+          "$ref": "#/definitions/codecs::MetricTagValues"
+        }
+      }
+    },
+    "codecs::MetricTagValues": {
+      "description": "The user configuration to choose the metric tag strategy.",
+      "oneOf": [
+        {
+          "description": "Tag values will be exposed as single strings, the same as they were before this config\noption. Tags with multiple values will show the last assigned value, and null values will be\nignored.",
+          "const": "single",
+          "_metadata": {
+            "logical_name": "Single"
+          }
+        },
+        {
+          "description": "All tags will be exposed as arrays of either string or null values.",
+          "const": "full",
+          "_metadata": {
+            "logical_name": "Full"
+          }
+        }
+      ],
+      "_metadata": {
+        "docs::enum_tagging": "external"
+      }
+    },
+    "codecs::encoding::format::text::TextSerializerConfig": {
+      "description": "Config used to build a `TextSerializer`.",
+      "type": "object",
+      "properties": {
+        "metric_tag_values": {
+          "title": "Controls how metric tag values are encoded.",
+          "description": "When set to `single`, only the last non-bare value of tags will be displayed with the\nmetric.  When set to `full`, all metric tags will be exposed as separate assignments.",
+          "default": "single",
+          "$ref": "#/definitions/codecs::MetricTagValues"
         }
       }
     },
@@ -11005,6 +11131,7 @@
         }
       ],
       "_metadata": {
+        "docs::enum_tag_description": "The framing method.",
         "docs::enum_tagging": "internal",
         "docs::enum_tag_field": "method"
       }
@@ -11246,6 +11373,14 @@
             "storage_account": {
               "title": "The Azure Blob Storage Account name.",
               "description": "Attempts to load credentials for the account in the following ways, in order:\n\n- read from environment variables ([more information][env_cred_docs])\n- looks for a [Managed Identity][managed_ident_docs]\n- uses the `az` CLI tool to get an access token ([more information][az_cli_docs])\n\nEither `connection_string`, or this field, must be specified.\n\n[env_cred_docs]: https://docs.rs/azure_identity/latest/azure_identity/struct.EnvironmentCredential.html\n[managed_ident_docs]: https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview\n[az_cli_docs]: https://docs.microsoft.com/en-us/cli/azure/account?view=azure-cli-latest#az-account-get-access-token",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "endpoint": {
+              "title": "The Azure Blob Storage Endpoint URL.",
+              "description": "This is used to override the default blob storage endpoint URL in cases where you are using\ncredentials read from the environment/managed identities or access tokens without using an\nexplicit connection_string (which already explicitly supports overriding the blob endpoint\nURL).\n\nThis may only be used with `storage_account` and will be ignored when used with\n`connection_string`.",
               "type": [
                 "string",
                 "null"
@@ -12040,9 +12175,10 @@
               "decrease_ratio": 0.9,
               "ewma_alpha": 0.4,
               "rtt_deviation_scale": 2.5
-            }
+            },
+            "headers": {}
           },
-          "$ref": "#/definitions/vector::sinks::util::service::TowerRequestConfig"
+          "$ref": "#/definitions/vector::sinks::util::http::RequestConfig"
         },
         "acknowledgements": {
           "default": {
@@ -12685,6 +12821,7 @@
         }
       ],
       "_metadata": {
+        "docs::enum_tag_description": "The authentication strategy to use.",
         "docs::enum_tagging": "internal",
         "docs::enum_tag_field": "strategy"
       }
@@ -12841,11 +12978,11 @@
             "docs::hidden": true
           }
         },
-        "enhanced_tags": {
-          "title": "Controls if this transform should encode tags using the enhanced encoding of [the\n`native_json` codec][vector_native_json]?",
-          "description": "If set to `false`, tags will always be encoded as single string values using the last value\nassigned to the tag.",
-          "default": false,
-          "type": "boolean"
+        "metric_tag_values": {
+          "title": "Controls how metric tag values are encoded.",
+          "description": "When set to `single`, only the last non-bare value of tags will be displayed with the\nmetric.  When set to `full`, all metric tags will be exposed as separate assignments as\ndescribed by [the `native_json` codec][vector_native_json].",
+          "default": "single",
+          "$ref": "#/definitions/codecs::MetricTagValues"
         }
       },
       "_metadata": {
@@ -14172,11 +14309,11 @@
             "docs::hidden": true
           }
         },
-        "enhanced_tags": {
-          "title": "Controls if this transform should encode tags using the enhanced encoding of [the\n`native_json` codec][vector_native_json]?",
-          "description": "If set to `false`, tags will always be encoded as single string values using the last value\nassigned to the tag.",
-          "default": false,
-          "type": "boolean"
+        "metric_tag_values": {
+          "title": "Controls how metric tag values are encoded.",
+          "description": "When set to `single`, only the last non-bare value of tags will be displayed with the\nmetric.  When set to `full`, all metric tags will be exposed as separate assignments as\ndescribed by [the `native_json` codec][vector_native_json].",
+          "default": "single",
+          "$ref": "#/definitions/codecs::MetricTagValues"
         }
       },
       "_metadata": {
@@ -15622,6 +15759,7 @@
         }
       ],
       "_metadata": {
+        "docs::enum_tag_description": "The authentication strategy to use.",
         "docs::enum_tagging": "internal",
         "docs::enum_tag_field": "strategy"
       }
@@ -16173,7 +16311,7 @@
       "description": "Socket mode.",
       "oneOf": [
         {
-          "description": "TCP.",
+          "description": "Send over TCP.",
           "allOf": [
             {
               "$ref": "#/definitions/vector::sinks::socket::TcpMode"
@@ -16185,7 +16323,7 @@
               ],
               "properties": {
                 "mode": {
-                  "description": "TCP.",
+                  "description": "Send over TCP.",
                   "const": "tcp"
                 }
               }
@@ -16196,7 +16334,7 @@
           }
         },
         {
-          "description": "UDP.",
+          "description": "Send over UDP.",
           "allOf": [
             {
               "$ref": "#/definitions/vector::sinks::socket::UdpMode"
@@ -16208,7 +16346,7 @@
               ],
               "properties": {
                 "mode": {
-                  "description": "UDP.",
+                  "description": "Send over UDP.",
                   "const": "udp"
                 }
               }
@@ -16219,7 +16357,7 @@
           }
         },
         {
-          "description": "Unix Domain Socket.",
+          "description": "Send over a Unix domain socket (UDS).",
           "allOf": [
             {
               "$ref": "#/definitions/vector::sinks::socket::UnixMode"
@@ -16231,7 +16369,7 @@
               ],
               "properties": {
                 "mode": {
-                  "description": "Unix Domain Socket.",
+                  "description": "Send over a Unix domain socket (UDS).",
                   "const": "unix"
                 }
               }
@@ -16243,6 +16381,7 @@
         }
       ],
       "_metadata": {
+        "docs::enum_tag_description": "The type of socket to use.",
         "docs::enum_tagging": "internal",
         "docs::enum_tag_field": "mode"
       }
@@ -16683,7 +16822,7 @@
       "description": "Socket mode.",
       "oneOf": [
         {
-          "description": "TCP.",
+          "description": "Send over TCP.",
           "allOf": [
             {
               "$ref": "#/definitions/vector::sinks::util::tcp::TcpSinkConfig"
@@ -16695,7 +16834,7 @@
               ],
               "properties": {
                 "mode": {
-                  "description": "TCP.",
+                  "description": "Send over TCP.",
                   "const": "tcp"
                 }
               }
@@ -16706,7 +16845,7 @@
           }
         },
         {
-          "description": "UDP.",
+          "description": "Send over UDP.",
           "allOf": [
             {
               "$ref": "#/definitions/vector::sinks::statsd::StatsdUdpConfig"
@@ -16718,7 +16857,7 @@
               ],
               "properties": {
                 "mode": {
-                  "description": "UDP.",
+                  "description": "Send over UDP.",
                   "const": "udp"
                 }
               }
@@ -16729,7 +16868,7 @@
           }
         },
         {
-          "description": "Unix Domain Socket.",
+          "description": "Send over a Unix domain socket (UDS).",
           "allOf": [
             {
               "$ref": "#/definitions/vector::sinks::util::unix::UnixSinkConfig"
@@ -16741,7 +16880,7 @@
               ],
               "properties": {
                 "mode": {
-                  "description": "Unix Domain Socket.",
+                  "description": "Send over a Unix domain socket (UDS).",
                   "const": "unix"
                 }
               }
@@ -16753,6 +16892,7 @@
         }
       ],
       "_metadata": {
+        "docs::enum_tag_description": "The type of socket to use.",
         "docs::enum_tagging": "internal",
         "docs::enum_tag_field": "mode"
       }
@@ -17956,6 +18096,7 @@
         }
       ],
       "_metadata": {
+        "docs::enum_tag_description": "The type of metric to create.",
         "docs::enum_tagging": "internal",
         "docs::enum_tag_field": "type"
       }
@@ -18166,7 +18307,7 @@
           "title": "When set to `single`, metric tag values will be exposed as single strings, the\nsame as they were before this config option. Tags with multiple values will show the last assigned value, and null values\nwill be ignored.",
           "description": "When set to `full`, all metric tags will be exposed as arrays of either string or null\nvalues.",
           "default": "single",
-          "$ref": "#/definitions/vector::transforms::MetricTagsValues"
+          "$ref": "#/definitions/codecs::MetricTagValues"
         }
       }
     },
@@ -18239,28 +18380,6 @@
             "docs::examples": "timer_handler"
           }
         }
-      }
-    },
-    "vector::transforms::MetricTagsValues": {
-      "description": "The user configuration to choose the metric tag strategy.",
-      "oneOf": [
-        {
-          "description": "Tag values will be exposed as single strings, the\nsame as they were before this config option. Tags with multiple values will show the last assigned value, and null values\nwill be ignored.",
-          "const": "single",
-          "_metadata": {
-            "logical_name": "Single"
-          }
-        },
-        {
-          "description": "All tags will be exposed as arrays of either string or null values.",
-          "const": "full",
-          "_metadata": {
-            "logical_name": "Full"
-          }
-        }
-      ],
-      "_metadata": {
-        "docs::enum_tagging": "external"
       }
     },
     "vector::transforms::reduce::ReduceConfig": {
@@ -18476,13 +18595,13 @@
           "title": "When set to `single`, metric tag values will be exposed as single strings, the\nsame as they were before this config option. Tags with multiple values will show the last assigned value, and null values\nwill be ignored.",
           "description": "When set to `full`, all metric tags will be exposed as arrays of either string or null\nvalues.",
           "default": "single",
-          "$ref": "#/definitions/vector::transforms::MetricTagsValues"
+          "$ref": "#/definitions/codecs::MetricTagValues"
         },
         "timezone": {
           "title": "The name of the timezone to apply to timestamp conversions that do not contain an explicit\ntime zone.",
           "description": "This overrides the [global `timezone`][global_timezone] option. The time zone name may be\nany name in the [TZ database][tz_database], or `local` to indicate system local time.\n\n[global_timezone]: https://vector.dev/docs/reference/configuration//global-options#timezone\n[tz_database]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones",
-          "default": "local",
-          "$ref": "#/definitions/vector_common::datetime::TimeZone"
+          "default": null,
+          "$ref": "#/definitions/core::option::Option<vector_common::datetime::TimeZone>"
         },
         "drop_on_error": {
           "title": "Drops any event that encounters an error during processing.",
@@ -18510,35 +18629,6 @@
       "_metadata": {
         "docs::component_type": "transform",
         "docs::component_name": "remap"
-      }
-    },
-    "vector_common::datetime::TimeZone": {
-      "title": "Timezone reference.",
-      "description": "This can refer to any valid timezone as defined in the [TZ database][tzdb], or \"local\" which refers to the system local timezone.\n\n[tzdb]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones",
-      "oneOf": [
-        {
-          "description": "System local timezone.",
-          "const": "local",
-          "_metadata": {
-            "logical_name": "Local"
-          }
-        },
-        {
-          "title": "A named timezone.",
-          "description": "Must be a valid name in the [TZ database][tzdb].\n\n[tzdb]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones",
-          "type": "string",
-          "_metadata": {
-            "logical_name": "Named"
-          }
-        }
-      ],
-      "_metadata": {
-        "docs::enum_tagging": "untagged",
-        "docs::examples": [
-          "local",
-          "America/New_York",
-          "EST5EDT"
-        ]
       }
     },
     "vector::transforms::route::RouteConfig": {
@@ -18701,6 +18791,7 @@
         }
       ],
       "_metadata": {
+        "docs::enum_tag_description": "Controls the approach taken for tracking tag cardinality.",
         "docs::enum_tagging": "internal",
         "docs::enum_tag_field": "mode"
       }
