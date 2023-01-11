@@ -1,6 +1,7 @@
 ---
 title: Connections
-kind: Documentation
+kind: documentation
+description: Workflow connections
 disable_toc: false
 is_beta: true
 ---
@@ -8,6 +9,14 @@ is_beta: true
 {{< beta-callout url="https://forms.gle/VEjerYVQ2QJhauZ57" >}}
   Workflows are in public beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.
 {{< /beta-callout >}}
+
+## Overview
+
+A connection is a link between Datadog and a third party through which data flows and actions can be performed. 
+
+Establishing a connection requires the following information:
+- What to connect to (for example, product name, URL) 
+- How to authenticate (for example, API key, username/password, oauth)
 
 Workflow connections extend your installed integrations to give you control over workflow step authentication. Use a custom connection to authenticate a [generic action][1] or any action for which the integration tile does not offer authentication. These custom connection credentials are only available for use within the Workflows product.
 

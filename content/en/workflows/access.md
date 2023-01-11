@@ -1,6 +1,10 @@
 ---
 title: Access and Authentication
 kind: documentation
+description: Access and authentication for Workflows
+aliases:
+  - "/workflows/service_accounts"
+  - "/workflows/setup"
 disable_toc: false
 is_beta: true
 further_reading:
