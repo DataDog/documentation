@@ -28,7 +28,7 @@ You can accomplish the following objectives:
 
 ## Manage information being collected
 
-The `trackUserInteractions` initialization parameter enables the collection of user clicks in your application, which means sensitive and private data contained on your pages may be included to identify elements that a user interacted with.
+The `trackUserInteractions` initialization parameter enables the collection of user clicks in your application, which means sensitive and private data contained in your pages may be included to identify elements that a user interacted with.
 
 To control which information is sent to Datadog, [manually set an action name](#declare-a-name-for-click-actions), or [implement a global scrubbing rule in the Datadog Browser SDK for RUM][1].
 
