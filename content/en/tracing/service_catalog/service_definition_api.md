@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-A service is an independent, deployable unit of software. Datadog [Unified Service Tagging][1] provides a standard way to manage and monitor service ownership consistently across every telemetry type. Service Catalog allows you to add and manage metadata for existing services (from APM, USM, and RUM) and add new, user-defined service entires. 
+A service is an independent, deployable unit of software. Datadog [Unified Service Tagging][1] provides a standard way to manage and monitor service ownership consistently across every telemetry type. Service Catalog allows you to add and manage metadata for existing services from APM, USM, and RUM, and add user-defined service entries. 
 
 For more details about creating, getting, and deleting service definitions, see the [Service Definitions API reference][8].
 
