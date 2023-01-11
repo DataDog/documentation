@@ -184,6 +184,11 @@ Enable tracing of PHP scripts from the CLI. See [Tracing CLI scripts](#tracing-c
 **Default**: `0`<br>
 Enable debug mode. When `1`, log messages are sent to the device or file set in the `error_log` INI setting. The actual value of `error_log` might be different than the output of `php -i` as it can be overwritten in the PHP-FPM/Apache configuration files.
 
+`DD_TRACE_FORKED_PROCESS`
+: **INI**: `datadog.trace.forked_process`<br>
+**Default**: `1`<br>
+Start a fresh or a distributed trace, depending on `DD_DISTRIBUTED_TRACING`. If set to `0`, the tracer will be disabled in the forked process. It then can be manually re-enabled in code with `ini_set("datadog.trace.enabled", "1");`.
+
 `DD_TRACE_ENABLED`
 : **INI**: `datadog.trace.enabled`<br>
 **Default**: `1`<br>
