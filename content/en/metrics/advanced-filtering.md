@@ -96,5 +96,5 @@ sum:kubernetes.pods.running{service:*-canary} by {service}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/tagging/using_tags/
-[2]: /logs/explorer/search_syntax/
+[1]: /logs/explorer/search_syntax/
+[2]: /getting_started/tagging/using_tags/
