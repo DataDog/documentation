@@ -62,11 +62,11 @@ Override the default trace Agent host address for trace submission.
 
 `DD_TRACE_AGENT_PORT`
 : **Default**: `8126` <br>
-Override the default trace Agent port for Datadog trace submission. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then the library configuration `DD_DOGSTATSD_PORT` must match it.
+Overrides the default trace Agent port for Datadog trace submission. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then the library configuration `DD_DOGSTATSD_PORT` must match it.
 
 `DD_DOGSTATSD_PORT`
 : **Default**: `8125` <br>
-Override the default trace Agent port for DogStatsD metric submission. If the [Agent configuration][13] sets `dogstatsd_port` or `DD_DOGSTATSD_PORT` to something other than the default `8125`, then the library configuration `DD_DOGSTATSD_PORT` must match it.
+Overrides the default trace Agent port for DogStatsD metric submission. If the [Agent configuration][13] sets `dogstatsd_port` or `DD_DOGSTATSD_PORT` to something other than the default `8125`, then the library configuration `DD_DOGSTATSD_PORT` must match it.
 
 `DD_TRACE_SAMPLING_RULES`
 : **Default**: `nil`<br>

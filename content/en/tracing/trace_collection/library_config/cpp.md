@@ -28,7 +28,7 @@ Sets the port where traces are sent (the port where the Agent is listening for c
 
 `DD_TRACE_AGENT_URL` 
 : **Version**: v1.1.4 <br>
-Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. This URL supports http, https and unix address schemes. If the [Agent configuration][3] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it.
+Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. This URL supports HTTP, HTTPS, and Unix address schemes. If the [Agent configuration][3] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it.
 
 `DD_ENV` 
 : **Version**: v1.0.0 <br>
