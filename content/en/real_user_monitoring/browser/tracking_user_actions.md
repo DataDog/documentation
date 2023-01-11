@@ -80,7 +80,7 @@ For example:
 </div>
 ```
 
-Starting with [version 2.16.0][4], with the `actionNameAttribute` initialization parameter, you can specify your own attribute that is used to name the action.
+Starting with [version 2.16.0][4], with the `actionNameAttribute` initialization parameter, you can specify a custom attribute that is used to name the action.
 
 For example:
 
