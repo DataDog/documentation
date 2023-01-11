@@ -41,8 +41,8 @@ The following profiling features are available in the following minimum versions
 
 |      Feature         | Required `dd-trace-py` version          |
 |----------------------|-----------------------------------------|
-| Code Hotspots        | 0.44.0 or greater                       |
-| Endpoints            | 0.54.0 or greater                       |
+| [Code Hotspots][12]        | 0.44.0+                       |
+| [Endpoint Profiling][13]            | 0.54.0+                       |
 
 ## Installation
 
@@ -132,3 +132,5 @@ The [Getting Started with Profiler][6] guide takes a sample service with a perfo
 [5]: https://ddtrace.readthedocs.io/en/stable/configuration.html#configuration
 [6]: /getting_started/profiler/
 [7]: /profiler/profile_types/?code-lang=python
+[12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
+[13]: /profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
