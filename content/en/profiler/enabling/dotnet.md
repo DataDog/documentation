@@ -50,6 +50,13 @@ Supported .NET runtimes (64-bit applications)
 Supported languages
 : Any language that targets the .NET runtime, such as C#, F#, and Visual Basic.
 
+The following profiling features are available in the following minimum versions of the `dd-trace-dotnet` library:
+
+|      Feature         | Required `dd-trace-dotnet` version          |
+|----------------------|-----------------------------------------|
+| Code Hotspots        | 2.7.0 or greater                       |
+| Endpoints            | 2.15.0 or greater                       |
+
 ## Installation
 
 <div class="alert alert-warning">

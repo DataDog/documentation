@@ -45,6 +45,13 @@ Version 3.13 or newer of Alpine Linux is required because the profiler is built 
 {{% /tab %}}
 {{< /tabs >}}
 
+The following profiling features are available in the following minimum versions of the `dd-trace-php` library:
+
+|      Feature         | Required `dd-trace-php` version          |
+|----------------------|-----------------------------------------|
+| Code Hotspots        | 0.71 or greater                       |
+| Endpoints            | 0.79.0 or greater                       |
+
 Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
 
 ## Installation
