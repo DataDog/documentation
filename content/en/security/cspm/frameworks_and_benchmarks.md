@@ -18,11 +18,9 @@ Cloud Security Posture Management is not currently available in this site.
 </div>
 {{< /site-region >}}
 
-{{< img src="security/cspm/frameworks_and_benchmarks/report.png" alt="Set a findings time window using the dropdown" style="width:80%;">}}
+Cloud Security Posture Management (CSPM) comes with more than 400 out-of-the-box detection rules that evaluate the configuration of your cloud resources and identify potential misconfigurations. 
 
-## Overview
-
-Each [OOTB rule][1] maps to one or more controls within a compliance standard or industry benchmark. Datadog OOTB rules currently map to controls and requirements for the following frameworks and benchmarks:
+Each [detection rule][1] maps to one or more controls within the following compliance standards and industry benchmarks:
 
 - [CIS AWS Foundations Benchmark v1.3.0*][2]
 - [CIS Azure Foundations Benchmark v1.3.0][3]
@@ -38,7 +36,11 @@ Each [OOTB rule][1] maps to one or more controls within a compliance standard or
 
 **Some [CIS Kubernetes Benchmark][5] detection rules only apply to self-hosted Kubernetes clusters.
 
-**Note**: Datadog CSPM provides you with visibility into whether your resources are configured in accordance with certain detection rules. Datadog's OOTB detection rules address various regulatory frameworks, benchmarks, and standards (“Security Posture Frameworks”). Datadog CSPM does not provide an assessment of your actual compliance with any Security Posture Framework, and the OOTB rules may not address all configuration settings that are relevant to the Security Posture Frameworks. To be clear, just because your resources pass the OOTB Rules does not mean that you are meeting all the requirements under any particular Security Posture Framework. Datadog is not providing legal or compliance advice or guidance, and it is recommended that you use Datadog CSPM in consultation with your legal counsel or compliance experts.
+Datadog also provides Datadog Security Labs, a set of recommendations developed by Datadog internal security experts. Based on common cloud security risks we have observed at Datadog, this ruleset aims to help users new to cloud security easily remediate high-impact misconfigurations across their cloud environments.
+
+**Note**: CSPM provides visibility into whether your resources are configured in accordance with certain detection rules. These rules address various regulatory frameworks, benchmarks, and standards ("Security Posture Frameworks"). CSPM does not provide an assessment of your actual compliance with any Security Posture Framework, and the detection rules may not address all configuration settings that are relevant to a given framework. Datadog recommends that you use CSPM in consultation with your legal counsel or compliance experts.
+
+## Compliance reports
 
 **TASKS**
 
@@ -51,6 +53,17 @@ Access/view compliance reports on CSPM homepage
     - Rules listed. Click on one rule to see a full breakdown of resources.
 - Explore resources (?)
 - Configure rules for a given framework
+
+On CSPM Overview page...
+
+**Framework Overview** takes to an overview page for the... compliance report?
+
+**Explore Resources** takes to you to the **Findings** page with filters applied to only show the resources that ...???? for the selected framework.
+
+**Configure Rules** takes you to a filtered view of the **Detection Rules** page showing only the rules that apply to a given framework. From here you can...
+
+{{< img src="security/cspm/frameworks_and_benchmarks/report.png" alt="Set a findings time window using the dropdown" style="width:80%;">}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
