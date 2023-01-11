@@ -54,8 +54,8 @@ The following profiling features are available in the following minimum versions
 
 |      Feature         | Required `dd-trace-dotnet` version          |
 |----------------------|-----------------------------------------|
-| Code Hotspots        | 2.7.0+                       |
-| Endpoint Profiling            | 2.15.0+                       |
+| [Code Hotspots][12]        | 2.7.0+                       |
+| [Endpoint Profiling][13]            | 2.15.0+                       |
 
 ## Installation
 
@@ -362,3 +362,5 @@ The [Getting Started with Profiler][4] guide takes a sample service with a perfo
 [2]: https://app.datadoghq.com/account/settings?agent_version=6#agent
 [3]: /getting_started/tagging/unified_service_tagging
 [4]: /getting_started/profiler/
+[12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
+[13]: /profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints

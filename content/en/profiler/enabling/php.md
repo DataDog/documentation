@@ -49,8 +49,8 @@ The following profiling features are available in the following minimum versions
 
 |      Feature         | Required `dd-trace-php` version          |
 |----------------------|-----------------------------------------|
-| Code Hotspots        | 0.71+                       |
-| Endpoint Profiling            | 0.79.0+                       |
+| [Code Hotspots][12]        | 0.71+                       |
+| [Endpoint Profiling][13]            | 0.79.0+                       |
 
 Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
 
@@ -131,3 +131,5 @@ The [Getting Started with Profiler][6] guide takes a sample service with a perfo
 [4]: /tracing/trace_collection/library_config/php/#environment-variable-configuration
 [5]: https://app.datadoghq.com/profiling
 [6]: /getting_started/profiler/
+[12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
+[13]: /profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
