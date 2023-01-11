@@ -26,10 +26,10 @@ The Agent collects telemetry directly from the database by logging in as a read-
 ## Before you begin
 
 Supported MySQL versions
-: 5.6, 5.7, or 8.0+
+: 5.6, 5.7, and 8.0 or later 
 
 Supported Agent versions
-: 7.36.1+
+: 7.36.1 or later
 
 Performance impact
 : The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. <br/><br/>
@@ -97,7 +97,7 @@ GRANT SELECT ON performance_schema.* TO datadog@'%';
 
 {{% /tab %}}
 
-{{% tab "MySQL 5.6 & 5.7" %}}
+{{% tab "MySQL 5.6 and 5.7" %}}
 
 Create the `datadog` user and grant basic permissions:
 
