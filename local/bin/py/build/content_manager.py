@@ -90,6 +90,7 @@ def local_or_upstream(github_token, extract_dir, list_of_contents):
     """
     grouped_globs = grouped_globs_table(list_of_contents)
     is_in_ci = os.getenv("CI_COMMIT_REF_NAME")
+
     for content in list_of_contents:
         use_cached = content.get('options', {}).get('cached', False)
 
@@ -162,20 +163,9 @@ def extract_config(configuration):
     :param configuration: Documentation build configuration file path.
     """
     list_of_contents = []
-    
-    print('Extracting config')
-    print(configuration)
+    content_configuration_data = configuration[1].get('data', {})
 
-    # cache_config = configuration.get('config', {})
-    # print(cache_config)
-
-    # list_of_contents.append(cache_config)
-
-    cache_config = configuration[0]
-    print(cache_config)
-    
-
-    for org in configuration:
+    for org in content_configuration_data:
         for repo in org["repos"]:
             for content in repo["contents"]:
                 content_temp = {}

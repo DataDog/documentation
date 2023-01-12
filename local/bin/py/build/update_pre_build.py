@@ -36,11 +36,11 @@ class Build:
             join(self.tempdir, "extracted") + sep
         )
         self.build_configuration = []
+        self.cache_config = dict()
 
     # Loads the configurations in the configuration/ folder and attaches it to the Build Class
     def load_config(self, build_configuration_file_path, integration_merge_configuration_file_path):
         self.build_configuration = yaml.safe_load(open(build_configuration_file_path))
-
         self.integration_mutations = OrderedDict(yaml.safe_load(open(integration_merge_configuration_file_path)))
 
     # Get the list of content to work with after it gets updated with the local globs or the

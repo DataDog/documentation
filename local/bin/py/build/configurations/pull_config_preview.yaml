@@ -1,6 +1,9 @@
 ---
 - cache_config:
+    # If true, build all content from external sources
     disable_global_cache: false
+
+    # If true, build all integrations from external sources
     disable_integrations_cache: false
 
 - data:
