@@ -63,7 +63,9 @@ The [Tail Sampling Processor][9] and [Probabilistic Sampling Processor][10] allo
 
 **Note**: Tail sampling's main limitation is that all spans for a given trace must be received by the same collector instance for effective sampling decisions. If the trace is distributed across multiple collector instances, there’s a risk that some parts of a trace are dropped whereas some other parts of the same trace are sent to Datadog.
 
-With collector-level tail-based sampling, the APM metrics are computed on the sampled traffic that the Datadog Exporter sees. Use the [ingestion volume control guide][11] to read more about the implications of setting up trace sampling on trace analytics monitors and metrics from spans.
+With collector-level tail-based sampling, the APM metrics are computed on the sampled traffic that the Datadog Exporter sees. For this reason, please use the [`datadogprocessor`][11] to ensure that APM metrics are computed for 100% of your traffic. The Datadog Processor is available starting v0.69.0.
+
+Use the [ingestion volume control guide][8] to read more about the implications of setting up trace sampling on trace analytics monitors and metrics from spans.
 
 ## Monitor ingested volumes from Datadog UI
 
@@ -84,5 +86,5 @@ You can leverage the [APM Estimated Usage dashboard][12] and the estimated usage
 [8]: /tracing/guide/trace_ingestion_volume_control/#effects-of-reducing-trace-ingestion-volume
 [9]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/tailsamplingprocessor/README.md
 [10]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/probabilisticsamplerprocessor/README.md
-[11]: /tracing/guide/trace_ingestion_volume_control/#effects-of-reducing-trace-ingestion-volume
+[11]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/datadogprocessor
 [12]: https://app.datadoghq.com/dash/integration/apm_estimated_usage
