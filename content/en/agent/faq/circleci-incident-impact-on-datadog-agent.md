@@ -114,7 +114,7 @@ Lines starting with `[ ERROR ]` should be reported to [Datadog Support][4] along
     * [https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh][10]
     * [https://s3.amazonaws.com/dd-agent/scripts/install_script.sh][11] (this one is deprecated and no longer recommended to use, but we will update it as well)
   * The Datadog Agent 5 Linux install script: [https://raw.githubusercontent.com/DataDog/dd-agent/master/packaging/datadog-agent/source/install_agent.sh][12]
-    * Released to its [download location] at 16:25 UTC on January 12th, 2023
+    * Released to its [download location][12] at 16:25 UTC on January 12th, 2023
 
 [1]: https://circleci.com/blog/january-4-2023-security-alert/
 [2]: https://keys.datadoghq.com/DATADOG_RPM_KEY.public
