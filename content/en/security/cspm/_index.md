@@ -33,7 +33,7 @@ CSPM comes with more than 400 out-of-the-box detection rules that are maintained
 
 ## Manage out-of-the-box and custom detection rules
 
-[Out-of-the-box detection rules][7] surface the most important risks so that you can immediately take steps to remediate. Datadog continuously develops new default rules, which are automatically imported into your account. [Customize the rules][6] by defining how each rule scans your environment, [create custom rules][8] (GCP only), and [set up real-time notifications for failed findings](#set-up-real-time-notifications).
+[Out-of-the-box detection rules][7] surface the most important risks so that you can immediately take steps to remediate. Datadog continuously develops new default rules, which are automatically imported into your account. [Customize the rules][6] by defining how each rule scans your environment, [create custom rules][8], and [set up real-time notifications for failed findings](#set-up-real-time-notifications).
 
 {{< img src="security/cspm/detection_rules.png" alt="Cloud Security Posture Management detection rules" width="100%">}}
 
