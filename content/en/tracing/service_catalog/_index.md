@@ -25,7 +25,7 @@ further_reading:
 
 Datadog Service Catalog is a centralized place to access important information about all services in your organization. Achieve end-to-end service ownership at scale, get real-time performance insights, detect and address reliability and security risks, and manage application dependencies all in one place. Access team communications tools such as Slack, source control such as GitHub, Datadog dashboards, and Datadog views that receive and monitor telemetry data for each service.
 
-Compared to the APM Service List, the Service Catalog includes services that do not actively emit trace metrics, which means you do not need to instrument your service for it to appear. Service Catalog also automatically include services detected by USM and RUM. Right now, Service Catalog supports 1-hour lookback window. If you do not see your APM services in Service Catalog, they are most likely not sending active trace metrics during the last hour. You may still find these services in APM Service List.
+Compared to the APM Service List, the Service Catalog includes services that do not actively emit trace metrics, which means you do not need to instrument your service for it to appear. Service Catalog also automatically includes services detected by USM and RUM. Service Catalog supports a one hour look back window. If you do not see your APM services in Service Catalog, they most likely were not sending active trace metrics during the last hour. You may still find these services in APM Service List.
 
 The Service Catalog is useful for:
 - Training new developers and site reliability engineers by providing a clear view of all services, their structures, and links to more information.
