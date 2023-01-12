@@ -41,8 +41,6 @@ For example, you can exclude resources tagged with `env:staging` using the **Thi
 
 After you customize a rule, click **Update Rule** at the bottom of the page to apply your changes.
 
-*Add note about ability to do this via API with link to relevant docs*
-
 {{< img src="security/cspm/frameworks_and_benchmarks/never-trigger-a-finding-2.png" alt="In the Datadog app, select Advanced to populate Never trigger a finding when, and add a query." >}}
 
 ## Set notification targets for detection rules
