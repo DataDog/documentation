@@ -27,7 +27,7 @@ This guide provides instructions for creating a Datadog Agent-based integration 
 
 The required Datadog Agent integration development tools include:
 
-- Python v3.8 and [pipx][2]. For instructions on installing Python and pipx, see [Python for Agent Integration Development][3].
+- Python v3.8, [pipx][2] and the Agent Integration Developer Tool (`ddev`). For installation instructions, see [Install the Datadog Agent Integration Developer Tool][3].
 - [Docker][4] to run the full test suite
 - The git [command-line][5] or [GitHub desktop client][6]
 
@@ -55,105 +55,24 @@ Follow these instructions to set up your repo for integration development:
    git switch -c <YOUR INTEGRATION NAME> origin/master
    ```
 
-## Install the Development Toolkit
+## Configure the developer tool
 
-Assuming you've [installed Python and pipx][3], install the Development Toolkit for your operating system:
+Assuming you've installed [the Agent Integration Developer Tool][3], configure the tool for the `marketplace` repo:
 
-{{< tabs >}}
-{{% tab "MacOS" %}}
 
-1. Make sure you're inside the `marketplace` directory:
-   ```
-   cd $HOME/dd/marketplace
-   ```
+Set `marketplace` as the default working repository:
 
-1. Run the following command and remove any executables shown in the output:
-   ```
-   which -a ddev
-   ```
+```
+ddev config set marketplace $HOME/dd/marketplace
+ddev config set repo marketplace
+```
 
-1. Make sure there are no virtual environments running:
-   1. Run the following command:
-      ```
-      echo VIRTUAL_ENV
-      ```
-   1. If the command returns output, a virtual environment is running. Run `deactivate` to exit the virtual environment.
-1. Install `ddev`:
-   <div class="alert alert-warning">Do not run this command with <code>sudo</code>.</a></div>
+If you used a directory other than `$HOME/dd` to clone the marketplace directory, use the following command to set your working repository:
 
-   ```
-   pipx install ddev --python /usr/local/opt/python@3.8/bin/python3.8
-   ```
-
-1. Set `marketplace` as the default working repository:
-   ```
-   ddev config set marketplace $HOME/dd/marketplace
-   ddev config set repo marketplace
-   ```
-
-   If you used a directory other than `$HOME/dd` to clone the marketplace directory, use the following command to set your working repository:
-
-   ```
-   ddev config set marketplace <PATH/TO/MARKETPLACE>
-   ddev config set repo marketplace
-   ```
-
-{{% /tab %}}
-
-{{% tab "Windows" %}}
-1. Make sure you're inside the `marketplace` directory:
-   ```
-   cd $HOME/dd/marketplace
-   ```
-
-1. To install `ddev`, run:
-   ```
-   pipx install ddev
-   ```
-
-1. Set `marketplace` as the default working repository:
-   ```
-   ddev config set marketplace $HOME/dd/marketplace
-   ddev config set repo marketplace
-   ```
-
-   If you used a directory other than `$HOME/dd` to clone the marketplace directory, use the following command to set your working repository:
-
-   ```
-   ddev config set marketplace <PATH/TO/MARKETPLACE>
-   ddev config set repo marketplace
-   ```
-
-{{% /tab %}}
-
-{{% tab "Linux" %}}
-1. Make sure you're inside the `marketplace` directory:
-   ```
-   cd $HOME/dd/marketplace
-   ```
-
-1. To install `ddev`, run:
-   <div class="alert alert-warning">Do not run this command with <code>sudo</code>.</a></div>
-
-   ```
-   pipx install ddev
-   ```
-
-1. Set `marketplace` as the default working repository:
-   ```
-   ddev config set marketplace $HOME/dd/marketplace
-   ddev config set repo marketplace
-   ```
-
-   If you used a directory other than `$HOME/dd` to clone the marketplace directory, use the following command to set your working repository:
-
-   ```
-   ddev config set marketplace <PATH/TO/MARKETPLACE>
-   ddev config set repo marketplace
-   ```
-
-{{% /tab %}}
-{{< /tabs >}}
+```
+ddev config set marketplace <PATH/TO/MARKETPLACE>
+ddev config set repo marketplace
+```
 
 ## Create your integration
 

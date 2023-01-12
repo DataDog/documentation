@@ -48,34 +48,46 @@ Choose from the following offering types to create an integration tile that repr
 - A [SaaS license or subscription](#saas-license-or-professional-service-offerings)
 - [Professional services](#saas-license-or-professional-service-offerings)
 
-### Agent-based integrations
-
-Agent-based integrations are bi-directional; they use Agent checks to pull data from and push data into Datadog. For more information about creating an Agent-based offering, see [Create an Agent-based Integration for Marketplace][2].
-
-There are three types of Agent checks:
-- An [OpenMetrics check][2] is suitable for gathering telemetry data from existing applications that expose metrics using the OpenMetrics standard.
-- A [Python check][3] is suitable for monitoring services or products that do not expose metrics in a standard format. Python checks can also be used to collect telemetry data from various APIs or command line tools.
-- [DogStatsD][4] is suitable for applications that already emit telemetry using the StatsD protocol.
-
-Integrations send the following types of data to Datadog:
-
-- [Metrics][5]
-- [Logs & Log Pipelines][6]
-- [Events][7]
-- [Service Checks][8]
-- [Traces][9]
-- [Incidents][10]
-- [Security Events][11]
-
 ### REST API integrations
 
-Use an [API integration][3] to enrich and submit data from your backend, or pull data directly out of Datadog. API integrations work well in building a connector between Datadog and another SaaS platform. This method is ideal for Technology Partners that are SaaS based, and have an existing website for users to log into for authorization purposes.
+Use an [API integration][2] to enrich and submit data from your backend, or pull data directly out of Datadog. API integrations work well in building a connector between Datadog and another SaaS platform. This method is ideal for Technology Partners that are SaaS based, and have an existing website for users to log into for authorization purposes.
 
 Since API integrations do not use the Datadog Agent to collect data, you need to create an [informational tile-only listing](#saas-license-or-professional-service-offerings) once your development work is complete.
 
 REST API integrations must be bi-directional, meaning that the integration should be able to pull data from and push data into Datadog.
 
 REST API Integrations send the following types of data to Datadog:
+
+- [Metrics][3]
+- [Logs & Log Pipelines][4]
+- [Events][5]
+- [Service Checks][6]
+- [Traces][7]
+- [Incidents][8]
+- [Security Events][9]
+
+A Datadog API key is required to submit data to a Datadog API endpoint, and an application key is required to query data from Datadog. Instead of requesting these credentials directly from a user, Datadog recommends using [OAuth][10] to handle authorization and access for API-based integrations.
+
+You can explore examples of existing API integrations in the `integrations-extras` repository such as [Vantage][11].
+
+### Datadog Apps
+
+[Datadog Apps][12] are custom dashboard widgets that are developed in the [Datadog Developer Platform][13]. Once your Datadog App is ready to publish, you need to create an [informational tile-only listing](#saas-license-or-professional-service-offerings) on the Integrations or Marketplace page.
+
+### SaaS license or professional service offerings
+
+To list a SaaS license or professional service offering in the Marketplace, you only need to create an informational tile-only listing.
+
+### Agent-based integrations
+
+Agent-based integrations are bi-directional; they use Agent checks to pull data from and push data into Datadog. For more information about creating an Agent-based offering, see [Create an Agent-based Integration for Marketplace][14].
+
+There are three types of Agent checks:
+- An [OpenMetrics check][14] is suitable for gathering telemetry data from existing applications that expose metrics using the OpenMetrics standard.
+- A [Python check][2] is suitable for monitoring services or products that do not expose metrics in a standard format. Python checks can also be used to collect telemetry data from various APIs or command line tools.
+- [DogStatsD][3] is suitable for applications that already emit telemetry using the StatsD protocol.
+
+Integrations send the following types of data to Datadog:
 
 - [Metrics][4]
 - [Logs & Log Pipelines][5]
@@ -84,18 +96,6 @@ REST API Integrations send the following types of data to Datadog:
 - [Traces][8]
 - [Incidents][9]
 - [Security Events][10]
-
-A Datadog API key is required to submit data to a Datadog API endpoint, and an application key is required to query data from Datadog. Instead of requesting these credentials directly from a user, Datadog recommends using [OAuth][11] to handle authorization and access for API-based integrations.
-
-You can explore examples of existing API integrations in the `integrations-extras` repository such as [Vantage][12].
-
-### Datadog Apps
-
-[Datadog Apps][13] are custom dashboard widgets that are developed in the [Datadog Developer Platform][14]. Once your Datadog App is ready to publish, you need to create an [informational tile-only listing](#saas-license-or-professional-service-offerings) on the Integrations or Marketplace page.
-
-### SaaS license or professional service offerings
-
-To list a SaaS license or professional service offering in the Marketplace, you only need to create an informational tile-only listing.
 
 ## Set up a directory and clone the Marketplace repository
 
@@ -112,107 +112,25 @@ Once you've decided on an offering, set up a directory:
 
 ## Install and configure the Datadog development toolkit
 
-The Datadog Development Toolkit command (`ddev`) allows you to create scaffolding when you are developing an integration by generating a skeleton of your integration tile's assets and metadata.
+The Agent Integration Developer Tool allows you to create scaffolding when you are developing an integration by generating a skeleton of your integration tile's assets and metadata. For instructions on installing the tool, seeInstall the [Datadog Agent Integration Developer Tool][17].
 
-Assuming you've [installed Python and pipx][17], install the Development Toolkit for your operating system:
+Once you've installed the Developer tool, configure the tool for the `marketplace` repo:
 
 To install the toolkit:
 
-{{< tabs >}}
-{{% tab "MacOS" %}}
+Set `marketplace` as the default working repository:
 
-1. Make sure you're inside the `marketplace` directory:
-   ```
-   cd $HOME/dd/marketplace
-   ```
+```
+ddev config set marketplace $HOME/dd/marketplace
+ddev config set repo marketplace
+```
 
-1. Run the following command and remove any executables shown in the output:
-   ```
-   which -a ddev
-   ```
+If you used a directory other than `$HOME/dd` to clone the marketplace directory, use the following command to set your working repository:
 
-1. Make sure there are no virtual environments running:
-   1. Run the following command:
-      ```
-      echo VIRTUAL_ENV
-      ```
-   1. If the command returns output, a virtual environment is running. Run `deactivate` to exit the virtual environment.
-1. Install `ddev`:
-   <div class="alert alert-warning">Do not run this command with <code>sudo</code>.</a></div>
-
-   ```
-   pipx install ddev --python /usr/local/opt/python@3.8/bin/python3.8
-   ```
-
-1. Set `marketplace` as the default working repository:
-   ```
-   ddev config set marketplace $HOME/dd/marketplace
-   ddev config set repo marketplace
-   ```
-
-   If you used a directory other than `$HOME/dd` to clone the marketplace directory, use the following command to set your working repository:
-
-   ```
-   ddev config set marketplace <PATH/TO/MARKETPLACE>
-   ddev config set repo marketplace
-   ```
-
-{{% /tab %}}
-
-{{% tab "Windows" %}}
-1. Make sure you're inside the `marketplace` directory:
-   ```
-   cd $HOME/dd/marketplace
-   ```
-
-1. To install `ddev`, run:
-   ```
-   pipx install ddev
-   ```
-
-1. Set `marketplace` as the default working repository:
-   ```
-   ddev config set marketplace $HOME/dd/marketplace
-   ddev config set repo marketplace
-   ```
-
-   If you used a directory other than `$HOME/dd` to clone the marketplace directory, use the following command to set your working repository:
-
-   ```
-   ddev config set marketplace <PATH/TO/MARKETPLACE>
-   ddev config set repo marketplace
-   ```
-
-{{% /tab %}}
-
-{{% tab "Linux" %}}
-1. Make sure you're inside the `marketplace` directory:
-   ```
-   cd $HOME/dd/marketplace
-   ```
-
-1. To install `ddev`, run:
-   <div class="alert alert-warning">Do not run this command with <code>sudo</code>.</a></div>
-
-   ```
-   pipx install ddev
-   ```
-
-1. Set `marketplace` as the default working repository:
-   ```
-   ddev config set marketplace $HOME/dd/marketplace
-   ddev config set repo marketplace
-   ```
-
-   If you used a directory other than `$HOME/dd` to clone the marketplace directory, use the following command to set your working repository:
-
-   ```
-   ddev config set marketplace <PATH/TO/MARKETPLACE>
-   ddev config set repo marketplace
-   ```
-
-{{% /tab %}}
-{{< /tabs >}}
+```
+ddev config set marketplace <PATH/TO/MARKETPLACE>
+ddev config set repo marketplace
+```
 
 ## Populate the integration tile scaffolding
 
@@ -241,6 +159,7 @@ Make sure that the following required assets for your integration are complete:
 ### Media carousel
 
 {{% integrations_media_carousel %}}
+
 ## Open a pull request
 
 Before you open a pull request, run the following command to catch any problems with your integration:
@@ -272,19 +191,19 @@ Once a Marketplace tile is live, Technology Partners can meet with Datadog's Par
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/marketplace/
-[2]: /developers/marketplace/marketplace-agent-integration/
-[3]: /api/latest/
-[4]: /api/latest/metrics/
-[5]: /logs/faq/partner_log_integration/
-[6]: /api/latest/events/
-[7]: /api/latest/service-checks/
-[8]: /tracing/guide/send_traces_to_agent_by_api/
-[9]: /api/latest/incidents/
-[10]: /api/latest/security-monitoring/
-[11]: /developers/integrations/oauth_for_integrations/
-[12]: https://github.com/DataDog/integrations-extras/tree/master/vantage
-[13]: /developers/datadog_apps/
-[14]: https://app.datadoghq.com/apps/
+[2]: /api/latest/
+[3]: /api/latest/metrics/
+[4]: /logs/faq/partner_log_integration/
+[5]: /api/latest/events/
+[6]: /api/latest/service-checks/
+[7]: /tracing/guide/send_traces_to_agent_by_api/
+[8]: /api/latest/incidents/
+[9]: /api/latest/security-monitoring/
+[10]: /developers/integrations/oauth_for_integrations/
+[11]: https://github.com/DataDog/integrations-extras/tree/master/vantage
+[12]: /developers/datadog_apps/
+[13]: https://app.datadoghq.com/apps/
+[14]: /developers/marketplace/marketplace-agent-integration/
 [15]: https://github.com/Datadog/marketplace
 [16]: /developers/marketplace/#request-access-to-marketplace
 [17]: /developers/integrations/python/
