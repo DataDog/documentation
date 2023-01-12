@@ -18,9 +18,7 @@ Cloud Security Posture Management is not currently available in this site.
 </div>
 {{< /site-region >}}
 
-Cloud Security Posture Management (CSPM) comes with more than 400 out-of-the-box detection rules that evaluate the configuration of your cloud resources and identify potential misconfigurations. 
-
-Each [detection rule][1] maps to one or more controls within the following compliance standards and industry benchmarks:
+Cloud Security Posture Management (CSPM) comes with more than 400 out-of-the-box detection rules that evaluate the configuration of your cloud resources and identify potential misconfigurations. Each [detection rule][1] maps to one or more controls within the following compliance standards and industry benchmarks:
 
 - [CIS AWS Foundations Benchmark v1.3.0*][2]
 - [CIS Azure Foundations Benchmark v1.3.0][3]
@@ -42,19 +40,22 @@ Datadog also provides Datadog Security Labs, a set of recommendations developed 
 
 ## Explore your compliance posture
 
-View a high-level overview of your compliance posture on the CSPM [Overview][20] page.
+View a high-level overview of your compliance posture for each framework on the CSPM [Overview][20] page.
 
-- Drill down deeper into the ... **Framework Overview** takes to an overview page for the... compliance report?
+- Drill down deeper into the details... **Framework Overview** takes to an overview page for the... compliance report?
 - **Explore Resources** takes to you to the **Findings** page with filters applied to only show the resources that ...???? for the selected framework. **Explore Resources** to view resources that have **Fail** findings for one or more rules that are mapped to the framework.
-- **Configure Rules** takes you to a filtered view of the **Detection Rules** page showing only the rules that apply to a given framework. From here you can...
+- **Configure Rules** to view a filtered view of the **Detection Rules** page showing only the rules that map to controls for the selected framework.
 
-test
+Set notification targets for detection rules
+Customize how your environment is scanned by each rule
 
-- **Framework Overview**:
-- **Explore Resources**:
-- **Configure Rules**:
+- **Framework Overview**: 
+- **Explore Resources**: View resources with Fail findings for rules that are mapped to the selected framework.
+- **Configure Rules**: 
 
 {{< img src="security/cspm/frameworks_and_benchmarks/compliance-reports-overview.png" alt="View a high-level overview of your compliance posture on the overview page" style="width:100%;">}}
+
+## Compliance reports
 
 **TASKS**
 
@@ -68,9 +69,7 @@ Access/view compliance reports on CSPM homepage
 - Explore resources (?)
 - Configure rules for a given framework
 
-On CSPM Overview page...
-
-{{< img src="security/cspm/frameworks_and_benchmarks/report.png" alt="Set a findings time window using the dropdown" style="width:80%;">}}
+{{< img src="security/cspm/frameworks_and_benchmarks/report-2.png" alt="Set a findings time window using the dropdown" style="width:100%;">}}
 
 ## Further reading
 
@@ -96,3 +95,4 @@ On CSPM Overview page...
 [18]: /integrations/microsoft_teams/
 [19]: /integrations/webhooks/
 [20]: https://app.datadoghq.com/security/compliance/homepage
+[21]: /security/cspm/detection_rules
