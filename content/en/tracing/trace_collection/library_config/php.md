@@ -187,7 +187,7 @@ Enable debug mode. When `1`, log messages are sent to the device or file set in 
 `DD_TRACE_FORKED_PROCESS`
 : **INI**: `datadog.trace.forked_process`<br>
 **Default**: `1`<br>
-Start a fresh or a distributed trace, depending on `DD_DISTRIBUTED_TRACING`. If set to `0`, the tracer will be disabled in the forked process. It then can be manually re-enabled in code with `ini_set("datadog.trace.enabled", "1");`.
+Indicates whether to trace a forked process. Set to `1` to trace forked processes, or to `0` to disable tracing in forked processes. If set to `0`, you can still manually re-enable a process' trace in code with `ini_set("datadog.trace.enabled", "1");`, but it will be presented as a fresh trace. Forked process traces are shown as whole distributed traces only when both `DD_TRACE_FORKED_PROCESS` and `DD_DISTRIBUTED_TRACING` are configured to `1` (on).
 
 `DD_TRACE_ENABLED`
 : **INI**: `datadog.trace.enabled`<br>
