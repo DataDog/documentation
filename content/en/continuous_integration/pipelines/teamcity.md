@@ -2,8 +2,8 @@
 title: Set up Tracing on a TeamCity Pipeline
 kind: documentation
 aliases:
-- /continuous_integration/setup_pipelines/teamcity
-  further_reading:
+  - /continuous_integration/setup_pipelines/teamcity
+further_reading:
   - link: "/continuous_integration/pipelines"
     tag: "Documentation"
     text: "Explore Pipeline Execution Results and Performance"
