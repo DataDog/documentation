@@ -60,7 +60,11 @@ If the repo file contains a reference to one of these lines under the `gpgkey` e
 
 ## Taking action
 
-Datadog recommends that all customers ensure that their systems stop trusting the affected key. If you find out that your system trusts the key based on at least one of the above criteria, here's how you can make your system stop trusting it:
+Datadog recommends that all affected customers ensure that their systems stop trusting the affected key. If you find out that your system trusts the key based on at least one of the above criteria, follow the steps below.
+
+### Delete the key
+
+Here's how you can make your system stop trusting the affected key:
 
 To delete the key from the RPM database, run the following command:
 
@@ -70,11 +74,11 @@ $ sudo rpm --erase gpg-pubkey-4172a230-55dd14f6
 
 To delete the key from the Datadog repo file, remove the `gpgkey` line that ends with `DATADOG_RPM_KEY.public`. If this was the only `gpgkey` entry in your repo file, replace it with `https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public`. Note that this has implications explained in the section [Implications of no Longer Trusting the Affected Key](#implications-of-no-longer-trusting-the-affected-key).
 
-### Usage of automation tools
+#### Usage of automation tools
 
 Usage of old versions of automation tools like the Datadog Ansible role (see the full list with updated versions in [What Datadog is doing to mitigate the implications](#what-datadog-is-doing-to-mitigate-the-implications)) might reverse the manual changes recommended above. If you can't yet update to the new versions that fix this, we recommend adding these manual changes to your automation tool runbooks.
 
-### Verifying installed Agent packages
+### Verify installed packages
 
 If the GPG key was leaked, it is possible for an attacker to build a package that RPM will verify as coming from Datadog and install it on the system. Out of an abundance of caution, Datadog also recommends that you verify that all packages on your system signed by the affected key were built by Datadog. You can run [this script][3] to verify that:
 
@@ -94,7 +98,7 @@ Lines starting with `[ ERROR ]` should be reported to [Datadog Support][4] along
 
 * If your system uses Agent 7, there is no implication. Agent 7 packages were never signed with the affected key.
 * Your system will no longer be able to install Agent 6 < 6.14.0. We recommend upgrading to Agent 6 >= 6.14.0 or Agent 7.
-* If your system uses Agent 5, you will no longer be able to install any currently released Agent 5 version.
+* If your system uses Agent 5, you will no longer be able to install Agent 5 <= 5.32.8. You will only be able to install Agent 5.32.9, or you can upgrade to 6 >= 6.14.0 or Agent 7.
 
 ## What Datadog is doing to mitigate the implications
 
