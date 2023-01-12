@@ -50,8 +50,9 @@ Set notification targets for detection rules
 Customize how your environment is scanned by each rule
 
 - **Framework Overview**: 
-- **Explore Resources**: View resources with Fail findings for rules that are mapped to the selected framework.
-- **Configure Rules**: 
+- **Explore Resources**: A filtered view of the **Findings** page that shows resources with findings that are associated with the selected compliance framework.
+- **Explore Resources**: A filtered view of the **Findings** page that shows resources with findings that are associated with a framework.
+- **Configure Rules**: Customize how your environment is scanned and set notification targets by modifying the detection rules for each framework.
 
 {{< img src="security/cspm/frameworks_and_benchmarks/compliance-reports-overview.png" alt="View a high-level overview of your compliance posture on the overview page" style="width:100%;">}}
 
