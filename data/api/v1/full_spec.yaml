@@ -14017,8 +14017,6 @@ components:
         follow_redirects:
           description: For API HTTP test, whether or not the test should follow redirects.
           type: boolean
-        httpVersion:
-          $ref: '#/components/schemas/SyntheticsTestOptionsHTTPVersion'
         ignoreServerCertificateError:
           description: Ignore server certificate error for browser tests.
           type: boolean
@@ -14065,17 +14063,6 @@ components:
           minimum: 30
           type: integer
       type: object
-    SyntheticsTestOptionsHTTPVersion:
-      description: HTTP version to use for a Synthetic test.
-      enum:
-      - http1
-      - http2
-      - any
-      type: string
-      x-enum-varnames:
-      - HTTP1
-      - HTTP2
-      - ANY
     SyntheticsTestOptionsMonitorOptions:
       description: 'Object containing the options for a Synthetic test as a monitor
 
