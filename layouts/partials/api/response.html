@@ -12,7 +12,7 @@
     {{ $count := 0}}
     {{ range $response_code, $response := $responses }}
         <li class="nav-item">
-            <a class="nav-link me-1  {{ if eq $count 0}}active{{end}}"  href="#{{ $operationid }}-{{ $response_code }}-{{ $version }}"  data-bs-toggle="tab">{{ $response_code }}</a>
+            <a class="nav-link me-1  {{ if eq $count 0}}active{{end}}"  href="#{{ $operationid }}-{{ $response_code }}-{{ $version }}"  data-bs-toggle="tab" data-bs-target="#{{ $operationid }}-{{ $response_code }}-{{ $version }}">{{ $response_code }}</a>
         </li>
         {{ $count = add $count 1 }}
     {{ end }}

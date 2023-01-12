@@ -84,29 +84,29 @@ $('.js-expand-all').click(function () {
     }
 });
 
-$('.js-model-link').click(function () {
-    $(this)
-        .closest('.tab-content')
-        .find('.js-example-link')
-        .removeClass('active');
-    $(this).closest('.tab-content').find('.js-model-link').addClass('active');
-    $(this)
-        .closest('.tab-content')
-        .find('.js-tab-example')
-        .removeClass('active');
-    $(this).closest('.tab-content').find('.js-tab-model').addClass('active');
-});
-
-$('.js-example-link').click(function () {
-    $(this)
-        .closest('.tab-content')
-        .find('.js-model-link')
-        .removeClass('active');
-    $(this).closest('.tab-content').find('.js-example-link').addClass('active');
-    $(this).closest('.tab-content').find('.js-tab-model').removeClass('active');
-    $(this).closest('.tab-content').find('.js-tab-example').addClass('active');
-});
-
+// $('.js-model-link').click(function () {
+//     $(this)
+//         .closest('.tab-content')
+//         .find('.js-example-link')
+//         .removeClass('active');
+//     $(this).closest('.tab-content').find('.js-model-link').addClass('active');
+//     $(this)
+//         .closest('.tab-content')
+//         .find('.js-tab-example')
+//         .removeClass('active');
+//     $(this).closest('.tab-content').find('.js-tab-model').addClass('active');
+// });
+//
+// $('.js-example-link').click(function () {
+//     $(this)
+//         .closest('.tab-content')
+//         .find('.js-model-link')
+//         .removeClass('active');
+//     $(this).closest('.tab-content').find('.js-example-link').addClass('active');
+//     $(this).closest('.tab-content').find('.js-tab-model').removeClass('active');
+//     $(this).closest('.tab-content').find('.js-tab-example').addClass('active');
+// });
+//
 $('.hasChildData .js-collapse-trigger').click(function () {
     $(this).closest('.row').siblings('.isNested').toggleClass('d-none');
     $(this).find('.toggle-arrow').toggleClass('expanded');
