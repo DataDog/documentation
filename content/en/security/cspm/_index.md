@@ -11,18 +11,47 @@ Cloud Security Posture Management is not currently available in this site.
 </div>
 {{< /site-region >}}
 
-## Overview
+Datadog Cloud Security Posture Management (CSPM) makes it easier to assess and visualize the current and historic security posture of your cloud resources, automate audit evidence collection, and remediate misconfigurations that leave your organization vulnerable to attacks.
 
-Datadog Cloud Security Posture Management (CSPM) makes it easier to assess and visualize the current and historic security posture of your cloud environment, automate audit evidence collection, and catch misconfigurations that leave your organization vulnerable to attacks.
+By continuously surfacing security weaknesses resulting from misconfigurations, teams can mitigate risks while ensuring compliance with industry standards.
 
-{{< img src="security/cspm/landing_page.png" alt="Cloud Security Posture Management" width="100%">}}
+## Detect misconfigurations across your cloud resources
 
-Assess the configuration of your cloud resources, such as security groups, storage buckets, load balancers, and databases against configuration rules. Use the Datadog Agent to review local configuration information from servers, containers, and Kubernetes clusters against Datadog's OOTB Posture Management [Cloud][1] and [Infrastructure][2] detection rules.
+Strengthen your security posture and achieve continuous compliance by detecting, prioritizing, and remediating misconfigurations across all your cloud resources using Datadog's [out-of-the-box detection rules](#manage-out-of-the-box-and-custom-detection-rules). 
 
-View your cloud security posture at a high level with the [Posture Management][3] page. Examine the details of findings and analyze historical configurations with [Findings][4].
+View a high-level overview of your security posture on the [Overview page][3]. Examine the details of findings and analyze historical configurations with the [Security Findings Explorer][9].
+
+{{< img src="security/cspm/overview_page.png" alt="Cloud Security Posture Management overview page" width="100%">}}
+
+## Maintain compliance with industry frameworks and benchmarks
+
+CSPM comes with more than 400 out-of-the-box detection rules that are maintained by a team of security experts. The rules map to controls and requirements within compliance standards and industry benchmarks, such as PCI and SOC2 compliance frameworks.
+
+[View compliance reports][10] to see how well you're doing against each control in a compliance framework. The reports include details such as resources with the most failed findings, a comprehensive breakdown of the number of resources with pass/fail findings, and the top three high-severity rule failures.
+
+{{< img src="security/cspm/compliance_frameworks.png" alt="Cloud Security Posture Management compliance frameworks" width="100%">}}
+
+## Manage out-of-the-box and custom detection rules
+
+[Out-of-the-box detection rules][7] surface the most important risks so that you can immediately take steps to remediate. Datadog continuously develops new default rules, which are automatically imported into your account. [Customize the rules][6] by defining how each rule scans your environment, [create custom rules][8], and [set up real-time notifications for failed findings](#set-up-real-time-notifications).
+
+{{< img src="security/cspm/detection_rules.png" alt="Cloud Security Posture Management detection rules" width="100%">}}
+
+## Set up real-time notifications
+
+[Send real-time notifications][11] when a new misconfiguration is detected in your environment, so that your teams can take action to mitigate the risk. Notifications can be sent to [Slack, email, PagerDuty, webhooks, and more][12].
+
+Use template variables and Markdown to [customize notification messages][13]. Edit, disable, and delete existing notification rules, or create new rules and define custom logic for when a notification is triggered based on severity and rule type.
+
+{{< img src="security/cspm/rule_notification_setup.png" alt="Cloud Security Posture Management rule notification setup page" width="100%">}}
+
+## Review and remediate findings
+
+Investigate details using the [Security Findings Explorer][4]. View detailed information about a resource, such as configuration, detection rules applied to the resource, and tags that provide additional context about who owns the resource and its location within your environment.
+
+{{< img src="security/cspm/security_findings_explorer.png" alt="Cloud Security Posture Management security findings explorer" width="100%">}}
 
 ## Glossary
-
 
 Security posture score
 : Percentage of your environment that satisfies all of your active Datadog OOTB [Cloud][1] and [Infrastructure][2] detection rules. Formula: `(# of evaluation:pass findings) / (total # of findings)`. Datadog then weighs this formula by severity: low severity detection rules have a weighting of "1" and critical severity detection rules have a weighting of "5". This means critical severity detection rules impact scores five times more than low severity detection rules to put greater emphasis on the detection rules that pose greater security risk. The score is also normalized to treat all all resource types and resource volumes the same (for example, 500 failing containers are weighted the same as three failing S3 buckets in the computed score). This normalization factor allows scores to be comparable across your cloud accounts, without the risk that they are heavily skewed if one account has more containers, or another has fewer storage buckets.
@@ -36,20 +65,14 @@ Control
 Resource
 : A configurable entity that needs to be continuously scanned for adherence with one or more controls. Examples of AWS instance resources include hosts, containers, security groups, users, and customer-managed IAM policies.
 
-  {{< img src="security/cspm/getting_started/resource.png" alt="Posture management resource information in the Datadog app" style="width:65%;">}}
-
 Rule
 : A rule evaluates the configuration of a resource to validate an element related to one or more controls. Rules may map to multiple controls, requirements, and frameworks.
-
-  {{< img src="security/cspm/getting_started/rules.png" alt="A list of Cloud Security Posture Management detection rules" style="width:65%;">}}
 
 Findings
 : A finding is the primary primitive for a rule evaluation against a resource. Every time a resource is evaluated against a rule, a finding is generated with a Pass or Fail status.
 
 Framework
 : A collection of requirements that map to an industry benchmark or regulatory standard.
-
-  {{< img src="security/cspm/getting_started/frameworks.png" alt="The frameworks overview in the Cloud Security Posture Management landing page" style="width:100%;">}}
 
 ## Get started
 
@@ -66,3 +89,11 @@ Framework
 [3]: https://app.datadoghq.com/security/compliance/homepage
 [4]: /security/cspm/findings
 [5]: https://www.pcisecuritystandards.org/pci_security/maintaining_payment_security
+[6]: /security/cspm/frameworks_and_benchmarks#customize-how-your-environment-is-scanned-by-each-rule
+[7]: /security/default_rules/#cat-posture-management-cloud
+[8]: /security/cspm/custom_rules
+[9]: https://app.datadoghq.com/security/compliance
+[10]: /security/cspm/frameworks_and_benchmarks
+[11]: /security/cspm/frameworks_and_benchmarks#set-notification-targets-for-detection-rules
+[12]: /security/notifications/
+[13]: /security/notifications/#detection-rule-notifications

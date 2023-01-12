@@ -12,9 +12,9 @@ further_reading:
 - link: /logs/explorer/
   tag: ドキュメント
   text: ログの調査方法
-- link: https://learn.datadoghq.com/course/view.php?id=10
+- link: https://learn.datadoghq.com/courses/going-deeper-with-logs-processing
   tag: ラーニングセンター
-  text: ログを極める パース
+  text: ログ処理を極める
 kind: documentation
 title: パイプライン
 ---

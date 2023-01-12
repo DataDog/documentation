@@ -22,6 +22,9 @@ further_reading:
     - link: '/agent/kubernetes/tag'
       tag: 'Documentation'
       text: 'Assign tags to all data emitted by a container'
+    - link: 'https://www.datadoghq.com/blog/monitor-vsphere-tanzu-kubernetes-grid-with-datadog/'
+      tag: 'Blog'
+      text: 'Monitor Tanzu Kubernetes Grid on vSphere'
 ---
 
 ## Overview
@@ -103,11 +106,6 @@ datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
   kubelet:
-    host:
-      valueFrom:
-        fieldRef:
-          fieldPath: spec.nodeName
-    hostCAPath: /etc/kubernetes/certs/kubeletserver.crt
     tlsVerify: false # Required as of Agent 7.35. See Notes.
 ```
 
@@ -128,10 +126,6 @@ spec:
   agent:
     config:
       kubelet:
-        host:
-          fieldRef:
-            fieldPath: spec.nodeName
-        hostCAPath: /etc/kubernetes/certs/kubeletserver.crt
         tlsVerify: false # Required as of Agent 7.35. See Notes.
   clusterAgent:
     image:

@@ -15,6 +15,8 @@ variables:
   DATADOG_SUBDOMAIN: 'dd-corpsite'
   FORCE_COLOR: '1'
   GIT_DEPTH: 50
+  DEFAULT_TAGS: "environment:${CI_ENVIRONMENT_NAME},job_name:${CI_JOB_NAME},job_stage:${CI_JOB_STAGE},project_name:${CI_PROJECT_NAME},docker_image:${CI_REGISTRY_IMAGE},pipeline_id:${CI_PIPELINE_ID},service:gitlab"
+
   # gitlab checkout
   DOCS_REPO_NAME: documentation
   REPO_URL: "https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.ddbuild.io/DataDog/${DOCS_REPO_NAME}.git"
@@ -34,6 +36,7 @@ before_script:
   - export DATADOG_APP_KEY=$(get_secret 'dd-app-key')
   - export BRANCH=${CI_COMMIT_REF_NAME}
   - git config --global url."https://${GITHUB_TOKEN}@github.com/DataDog".insteadOf https://github.com/DataDog
+  - type build_dogrc &>/dev/null && build_dogrc || echo "build_dogrc not found." # create .dogrc for metrics, events submission
 
 
 # set policy for the common case
@@ -60,9 +63,10 @@ before_script:
 
 # ================== templates ================== #
 .base_template: &base_template
-  image: public.ecr.aws/x2b9z2t7/webops/site-build:v2.3.0
+  image: public.ecr.aws/x2b9z2t7/webops/site-build:latest
   tags:
     - "runner:main"
+    - "size:2xlarge"
   except:
     - tags
   only:
@@ -83,16 +87,16 @@ build_preview:
     CONFIGURATION_FILE: "./local/bin/py/build/configurations/pull_config_preview.yaml"
     LOCAL: "False"
   script:
-    - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
+    - dog --config "$HOME/.dogrc" event post "documentation build ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" --alert_type "info" --tags="${DEFAULT_TAGS}"
     - touch Makefile.config
     - make dependencies
     - make config
     - ./node_modules/.bin/jest --testPathPattern=assets/scripts/tests/
     - yarn run prebuild
-    - yarn run build:preview
+    - build_site
     # remove service_checks json as we don't need to s3 push that..
     - rm -rf data/service_checks
-    - in-isolation deploy_preview > logs/deploy.txt
+    - in-isolation deploy_site > logs/deploy.txt
     # remove static images so we can skip from artifact passed in gitlab
     - remove_static_from_repo
     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_REF_NAME}> is ready for preview. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}| checks running>." "#31b834"
@@ -117,7 +121,7 @@ link_checks_preview:
     URL: ${PREVIEW_DOMAIN}
     GIT_STRATEGY: none
   script:
-    - post_dd_event "documentation htmltest ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
+    - dog --config "$HOME/.dogrc" event post "documentation htmltest ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" --alert_type "info" --tags="${DEFAULT_TAGS}"
     - find ./public -name "*.html" -exec sed -i -e "s#https://docs-staging.datadoghq.com/$CI_COMMIT_REF_NAME/#/#g" {} +
     - find ./public -name "*.html" -exec sed -i -e "s#/api/v1/#/api/latest/#g" {} +
     - find ./public -name "*.html" -exec sed -i -e "s#/api/v2/#/api/latest/#g" {} +
@@ -162,11 +166,11 @@ index_algolia_preview:
     - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers
   script:
     - |-
-        echo APPLICATION_ID=$(get_secret 'ci.documentation.algolia_preview_application_id') > .env
-        echo API_KEY=$(get_secret 'ci.documentation.algolia_preview_api_key') >> .env
-        export DISPLAY=:99
-        Xvfb :99 -ac &
-        echo "n" | docsearch run ./local/etc/algolia/docs_datadoghq_preview.json
+      echo APPLICATION_ID=$(get_secret 'ci.documentation.algolia_preview_application_id') > .env
+      echo API_KEY=$(get_secret 'ci.documentation.algolia_preview_api_key') >> .env
+      export DISPLAY=:99
+      Xvfb :99 -ac &
+      echo "n" | docsearch run ./local/etc/algolia/docs_datadoghq_preview.json
   dependencies:
     - build_preview
   when: manual
@@ -222,14 +226,14 @@ build_live:
     CONFIGURATION_FILE: "./local/bin/py/build/configurations/pull_config.yaml"
     LOCAL: "False"
   script:
-    - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
+    - dog --config "$HOME/.dogrc" event post "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" --alert_type "info" --tags="${DEFAULT_TAGS}"
     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_SHA:0:8}> sent to gitlab for production deployment. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}|details>" "#FFD700"
     - touch Makefile.config
     - make clean-examples
     - make dependencies
     - yarn run prebuild
-    - yarn run build:live
-    - in-isolation deploy_live
+    - build_site
+    - in-isolation deploy_site
     - create_artifact
     - create_artifact_ignored
     - remove_static_from_repo
@@ -267,7 +271,7 @@ test_live_link_checks:
     URL: ${LIVE_DOMAIN}
     GIT_STRATEGY: none
   script:
-    - post_dd_event "documentation htmltest ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
+    - dog --config "$HOME/.dogrc" event post "documentation htmltest ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" --alert_type "info" --tags="${DEFAULT_TAGS}"
     - find ./public -name "*.html" -exec sed -i -e "s#https://docs.datadoghq.com/#/#g" {} +
     - find ./public -name "*.html" -exec sed -i -e "s#/api/v1/#/api/latest/#g" {} +
     - find ./public -name "*.html" -exec sed -i -e "s#/api/v2/#/api/latest/#g" {} +
@@ -408,8 +412,8 @@ post_success_event_to_dd_live:
     GIT_STRATEGY: none
   when: on_success
   script:
-    - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} succeeded" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "success"
-    - post_dd_metric "documentation.pipeline.completed" "1" "" "success"
+    - dog --config "$HOME/.dogrc" event post "documentation deploy ${CI_COMMIT_REF_NAME} succeeded" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" --alert_type "info" --tags="${DEFAULT_TAGS}"
+    - dog --config "$HOME/.dogrc" metric post "documentation.pipeline.completed" "1" --tags="${DEFAULT_TAGS},step_status:success"
   only:
     - master
 
@@ -422,7 +426,7 @@ post_failure_event_to_dd_live:
     GIT_STRATEGY: none
   when: on_failure
   script:
-    - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} failed" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "error"
-    - post_dd_metric "documentation.pipeline.completed" "0" "" "failure"
+    - dog --config "$HOME/.dogrc" event post "documentation deploy ${CI_COMMIT_REF_NAME} failed" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" --alert_type "error" --tags="${DEFAULT_TAGS},step_status:failure"
+    - dog --config "$HOME/.dogrc" metric post "documentation.pipeline.completed" "0" --tags="${DEFAULT_TAGS},step_status:failure"
   only:
     - master

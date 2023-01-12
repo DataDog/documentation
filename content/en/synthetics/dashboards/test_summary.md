@@ -1,5 +1,5 @@
 ---
-title: Synthetics Test Summary Dashboard
+title: Synthetic Test Summary Dashboard
 kind: documentation
 further_reading:
 - link: '/synthetics/ci_results_explorer'

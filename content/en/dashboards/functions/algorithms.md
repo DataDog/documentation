@@ -51,10 +51,6 @@ The `forecast()` function has two parameters:
 * `ALGORITHM`: The forecasting algorithm to use - select `linear` or `seasonal`. For more information about these algorithms, see the [Forecast Algorithms][3] section.
 * `DEVIATIONS`: The width of the range of forecasted values. A value of 1 or 2 should be large enough to forecast most "normal" points accurately.
 
-Several of the graphing options disappear, as forecasts have a unique visualization. After successfully adding **Forecast**, your editor should show something like this:
-
-{{< img src="dashboards/functions/algorithms/forecast_query.png" alt="query editor" style="width:80%;">}}
-
 ## Other functions
 
 {{< whatsnext desc="Consult the other available functions:" >}}

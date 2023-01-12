@@ -37,8 +37,10 @@ Use frontend data from RUM, as well as backend, infrastructure, and log informat
 -   You have set up [APM tracing][1] on the services targeted by your RUM applications.
 -   Your services use an HTTP server.
 -   Your HTTP servers are using [a library that supports distributed tracing](#supported-libraries).
--   You have XMLHttpRequest (XHR) or Fetch resources on the RUM Explorer to your `allowedTracingOrigins`.
--   You have a corresponding trace for requests to `allowedTracingOrigins`.
+-   You have the following set up based on your SDK:
+    - With the **Browser SDK**, you have added the XMLHttpRequest (XHR) or Fetch resources on the RUM Explorer to your `allowedTracingOrigins`.
+    - With the **Mobile SDK**, you have added the Native or XMLHttpRequest (XHR) to your `firstPartyHosts`.
+-   You have a corresponding trace for requests to `allowedTracingOrigins` or `firstPartyHosts`.
 
 ### Setup RUM
 
@@ -191,7 +193,7 @@ Datadog uses the distributed tracing protocol and sets up the following HTTP hea
 : Generated from the Real User Monitoring SDK. Allows Datadog to generate the first span from the trace.
 
 `x-datadog-origin: rum`
-: To make sure the generated traces from Real User Monitoring don’t affect your APM Index Spans counts.
+: To make sure the generated traces from Real User Monitoring don't affect your APM Index Spans counts.
 
 `x-datadog-sampling-priority: 1`
 : To make sure that the Agent keeps the trace.
@@ -200,7 +202,7 @@ These HTTP headers are not CORS-safelisted, so you need to [configure Access-Con
 
 ## How are APM quotas affected?
 
-Connecting RUM and traces may significantly increase the APM ingested volumes. Use the initialization parameter `tracingSampleRate` to keep a share of the backend traces starting from browser and mobile requests.
+Connecting RUM and traces may significantly increase the APM-ingested volumes. Use the initialization parameter `tracingSampleRate` to keep a share of the backend traces starting from browser and mobile requests.
 
 ## How long are traces retained?
 

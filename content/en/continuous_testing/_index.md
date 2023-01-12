@@ -19,6 +19,9 @@ further_reading:
 - link: 'https://www.datadoghq.com/blog/release-confidently-with-datadog-continuous-testing/'
   tag: 'blog'
   text: 'Use Datadog Continuous Testing to release with confidence'
+- link: 'https://www.datadoghq.com/blog/best-practices-datadog-continuous-testing/'
+  tag: 'blog'
+  text: 'Best practices for continuous testing with Datadog'
 ---
 
 <div class="alert alert-info">This page is about running Continuous Testing tests in your CI/CD pipelines. If you want to view CI/CD metrics and dashboards, see the <a href="/continuous_integration/" target="_blank">CI Visibility documentation.</a></div>

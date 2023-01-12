@@ -144,7 +144,7 @@ Enter a message to notify your team about this downtime. The message field allow
 
 ### Notify your team
 
-Notify your team by specifying team members or send the message to a service [integration][3].
+Notify your team by specifying team members or send the message to a service [integration][3]. Datadog sends notifications to the specified destinations whenever the downtime is scheduled, started, cancelled, and expired. These audit notifications allows your team to be aware of the Downtimes in your system.
 
 #### Disable first recovery notification
 
