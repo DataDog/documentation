@@ -14,9 +14,9 @@ further_reading:
   text: "Learn about log pipelines"
 ---
 
-{{< beta-callout url="https://www.datadoghq.com/log-forwarding-limited-availability/" >}}
-  Log Forwarding is currently in beta. Fill out this form to request access.
-{{< /beta-callout >}}
+<div class="alert alert-warning">
+Log forwarding is in limited availability. Fill out this <a href="https://www.datadoghq.com/log-forwarding-limited-availability/">form</a> to request access.
+</div>
 
 ## Overview
 

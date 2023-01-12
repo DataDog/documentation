@@ -1944,7 +1944,7 @@ main:
     parent: apm_heading
     weight: 145000
   - name: Enabling the Profiler
-    url: profiler/enabling/java/
+    url: profiler/enabling/
     parent: profiler
     identifier: profiler_enabling
     weight: 1
@@ -1988,26 +1988,31 @@ main:
     parent: profiler_enabling
     identifier: profiler_enabling_linux
     weight: 108
+  - name: Profile Types
+    url: profiler/profile_types/
+    parent: profiler
+    identifier: profiler_types
+    weight: 2
   - name: Search Profiles
     url: profiler/search_profiles/
     parent: profiler
     identifier: profiler_search_profiles
-    weight: 2
+    weight: 3
   - name: Investigate Slow Traces or Endpoints
     url: profiler/connect_traces_and_profiles/
     parent: profiler
     identifier: profiler_traces_profiles
-    weight: 3
+    weight: 4
   - name: Compare Profiles
     url: profiler/compare_profiles
     parent: profiler
     identifier: profiler_compare
-    weight: 4
+    weight: 5
   - name: Profiler Troubleshooting
     url: profiler/profiler_troubleshooting/
     parent: profiler
     identifier: profiler_profiler_troubleshooting
-    weight: 5
+    weight: 6
   - name: CI Visibility
     url: continuous_integration/
     pre: ci
@@ -3244,21 +3249,26 @@ main:
     parent: rum_explorer
     identifier: rum_explorer_watchdog_insights
     weight: 908
+  - name: Funnel Analysis
+    url: real_user_monitoring/funnel_analysis
+    parent: rum
+    identifier: rum_funnel_analysis
+    weight: 10
   - name: Generate Metrics
     url: real_user_monitoring/generate_metrics
     parent: rum
     identifier: rum_generate_metrics
-    weight: 10
+    weight: 11
   - name: Connect RUM and Traces
     url: real_user_monitoring/connect_rum_and_traces
     parent: rum
     identifier: rum_connect_rum_and_traces
-    weight: 11
+    weight: 12
   - name: Error Tracking
     url: real_user_monitoring/error_tracking/
     parent: rum
     identifier: rum_error_tracking
-    weight: 12
+    weight: 13
   - name: Explorer
     url: real_user_monitoring/error_tracking/explorer/
     parent: rum_error_tracking
@@ -3298,7 +3308,7 @@ main:
     url: real_user_monitoring/guide/
     parent: rum
     identifier: rum_guides
-    weight: 13
+    weight: 14
   - name: Network Monitoring
     url: network_monitoring/
     pre: network
