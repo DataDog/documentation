@@ -10,7 +10,7 @@ further_reading:
   text: "Notebooks"
 ---
 
-The list widget enables you to display a list of events, issues and other events coming from different souces.
+The list widget enables you to display a list of events and issues coming from different sources.
 
 _List widget displaying error tracking issues_
 
@@ -30,7 +30,7 @@ _List widget displaying error tracking issues_
 
 ### Options
 
-Each type of list widget will have its own configuration
+Each type of list widget has its own configuration.
 
 ### Issue list options
 
