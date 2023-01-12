@@ -154,3 +154,4 @@ Read more about ingestion reasons in the [Ingestion Mechanisms documentation][2]
 [14]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/tailsamplingprocessor/README.md
 [15]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/probabilisticsamplerprocessor/README.md
 [16]: /tracing/legacy_app_analytics
+[17]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/datadogprocessor
