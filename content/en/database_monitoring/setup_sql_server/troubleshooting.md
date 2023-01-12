@@ -41,7 +41,9 @@ If the `datadog` user is unable to log into the SQL Server instance, please ensu
 
 Microsoft also provides a helpful doc on troubleshooting these types of errors, which can be [followed here][5].
 
-### SQL Server Unable to connect due to “Invalid connection string attribute” {#tcp-connection-error}
+### SQL Server Unable to connect {#tcp-connection-error}
+
+####  Due to “Invalid connection string attribute”
 
 The following ADO Providers are supported on Windows: `SQLOLEDB`, `MSOLEDBSQL`, `MSOLEDBSQL19`, `SQLNCLI11`.
 
@@ -62,21 +64,31 @@ Look in the error message for HResult error codes. Here are some known codes:
 
 `-2147217843` **“login failed for user”**: this means the agent succeeded in establishing a connection to the host but the login was rejected for some reason.
 
+`-2147467259` **“could not open database requested for login”**: this error appears either due to network issues or due to an unknown database.
+
+Please see the section below for tips on how to troubleshoot
+
+If neither step produces meaningful help, or the error code you are seeing is not listed, Datadog recommends to use the `MSOLEDBSQL` driver or the `Microsoft ODBC Driver for SQL Server`. Either of these options will produce more meaningful error messages, which should help troubleshooting why the connection is failing.
+
+#### Due to general TCP connection error
+
+TCP connection issues are common when there is a setup misconfiguration with the agent. Some common errors are:
+
+**“login failed for user”**: this means the agent succeeded in establishing a connection to the host but the login was rejected for some reason.
+
 To troubleshoot:
 
 1. Check the agent’s login credentials
 
 2. Try to login with those credentials manually using sqlcmd. For example: `sqlcmd -S localhost -U datadog -P ${SQL_PASSWORD} -d master`
 
-`-2147467259` **“could not open database requested for login”**: this error appears either due to network issues or due to an unknown database. To troubleshoot:
+**“could not open database requested for login”**: this error appears either due to network issues or due to an unknown database. To troubleshoot:
 
 To troubleshoot:
 
 1. Check the TCP connection from the agent to the host by running `telnet {host} {port}` to make sure there is network connectivity from the Agent to the database.
 
 2. Try to login manually using sqlcmd and see if there’s an issue with the configured database. For example: `sqlcmd -S localhost -U datadog -P ${SQL_PASSWORD} -d master`
-
-If neither step produces meaningful help, or the error code you are seeing is not listed, Datadog recommends to use the `MSOLEDBSQL` driver or the `Microsoft ODBC Driver for SQL Server`. Either of these options will produce more meaningful error messages, which should help troubleshooting why the connection is failing.
 
 ### SQL Server 'Unable to connect: Adaptive Server is unavailable or does not exist' {#adaptive-server-unavailable}
 
