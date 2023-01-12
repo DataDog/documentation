@@ -120,7 +120,7 @@ The following configuration variables are available for both automatic and custo
 
 `DD_TRACE_AGENT_URL`
 : **TracerSettings property**: `Exporter.AgentUri`<br>
-Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. <br>
+Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it.<br>
 It can contain a Unix path to a socket by prefixing the path with `unix://`. <br>
 **Default**: `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>` if they are set, `unix:///var/run/datadog/apm.socket` if the file exists, or `http://localhost:8126`.
 
@@ -129,7 +129,7 @@ It can contain a Unix path to a socket by prefixing the path with `unix://`. <br
 **Default**: `localhost`
 
 `DD_TRACE_AGENT_PORT`
-: Sets the TCP port where the Agent is listening for connections. Use `DD_TRACE_AGENT_URL`, which has precedence over this parameter. <br>
+: Sets the TCP port where the Agent is listening for connections. Use `DD_TRACE_AGENT_URL`, which has precedence over this parameter. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it.<br>
 **Default**: `8126`
 
 `DD_TRACE_SAMPLE_RATE`
@@ -309,3 +309,4 @@ If multiple extraction styles are enabled, the extraction attempt is completed i
 [10]: https://www.w3.org/TR/trace-context/#traceparent-header
 [11]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=net#pagetitle
 [12]: /tracing/trace_collection/custom_instrumentation/dotnet/#headers-extraction-and-injection
+[13]: /agent/guide/network/#configure-ports
