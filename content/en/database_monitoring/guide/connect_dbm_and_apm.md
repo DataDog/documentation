@@ -153,7 +153,7 @@ Update your app dependencies to include [dd-trace-py>=1.7.0][1]:
 pip install "ddtrace>=1.7.0"
 ```
 
-Install [psycopg2][2] (Note - DBM-APM linking is not currently supported for mysql clients):
+Install [psycopg2][2] (**Note**: Connecting DBM and APM is not supported for MySQL clients):
 ```
 pip install psycopg2
 ```
