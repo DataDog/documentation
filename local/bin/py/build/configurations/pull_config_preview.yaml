@@ -1135,6 +1135,18 @@
       options:
         dest_path: '/security/default_rules/'
 
+  - repo_name: infrastructure-resources
+    contents:
+    - action: pull-and-push-folder
+      branch: prod
+      globs:
+        - "generated/md/external/*.md"
+      options:
+        dest_dir: '/security/cspm/custom_rules/'
+        path_to_remove: 'generated/md/external/'
+        front_matters:
+          disable_edit: true
+
   - repo_name: apps
     contents:
     - action: pull-and-push-file
