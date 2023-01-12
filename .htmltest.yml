@@ -18,7 +18,8 @@ StripQueryString: false
 IgnoreDirectoryMissingTrailingSlash: true
 IgnoreEmptyHref: true
 IgnoreInternalEmptyHash: true
-DocumentConcurrencyLimit: 62
+DocumentConcurrencyLimit: 32
+HTTPConcurrencyLimit: 8
 
 # Ignore paths
 IgnoreDirs:
