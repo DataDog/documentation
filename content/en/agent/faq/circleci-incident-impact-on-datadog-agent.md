@@ -6,7 +6,7 @@ kind: faq
 On January 4th, 2023, Datadog was notified by CircleCI that they were investigating a [security incident][1] that may have led to leaking stored secrets. Datadog identified a single secret stored in CircleCI that could theoretically be misused by a potential attacker, an old RPM GNU Privacy Guard (GPG) private signing key and its passphrase. This page documents the implications of the potential leak and the measures Datadog is taking to mitigate any risks to our customers.
 
 <div class="alert alert-info">
-<strong>Note</strong>: As of January 11th, 2023, Datadog has no indication that the key was actually leaked or misused, but we are still taking the following actions out of an abundance of caution.
+<strong>Note</strong>: As of January 12th, 2023, Datadog has no indication that the key was actually leaked or misused, but we are still taking the following actions out of an abundance of caution.
 </div>
 
 ## The affected key
@@ -72,7 +72,7 @@ To delete the key from the Datadog repo file, remove the `gpgkey` line that ends
 
 ### Usage of automation tools
 
-Usage of automation tools like the Datadog Ansible role (see the full list in [What Datadog is doing to mitigate the implications](#what-datadog-is-doing-to-mitigate-the-implications)) might reverse the manual changes recommended above. Until we release new versions that fix this, we recommend adding these manual changes to your automation tool runbooks.
+Usage of old versions of automation tools like the Datadog Ansible role (see the full list with updated versions in [What Datadog is doing to mitigate the implications](#what-datadog-is-doing-to-mitigate-the-implications)) might reverse the manual changes recommended above. If you can't yet update to the new versions that fix this, we recommend adding these manual changes to your automation tool runbooks.
 
 ### Verifying installed Agent packages
 
@@ -98,17 +98,23 @@ Lines starting with `[ ERROR ]` should be reported to [Datadog Support][4] along
 
 ## What Datadog is doing to mitigate the implications
 
-* We're working towards releasing a new Agent 5 version for CentOS/RHEL signed with the [current RPM signing key](https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public), `C6559B690CA882F023BDF3F63F4D1729FD4BF915`.
-* We're working on new releases to Agent installation methods to ensure they make systems safe by explicitly removing the affected key from the RPM database and the Datadog repo file. We will be updating this section as we release the new versions:
+* We've released a new Agent 5 RPM for CentOS/RHEL, [5.32.9-1][17], signed with the [current RPM signing key](https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public), `C6559B690CA882F023BDF3F63F4D1729FD4BF915`. The RPM is available through the [Agent 5 RPM repository][18].
+* We've released new versions of Agent installation methods to ensure they make systems safe by explicitly removing the affected key from the RPM database and the Datadog repo file:
   * Datadog Ansible role: [https://github.com/DataDog/ansible-datadog/][5]
+    * Release [4.18.0][13] fixes the issue
   * Datadog Chef recipe: [https://github.com/DataDog/chef-datadog][6]
+    * Release [4.16.0][14] fixes the issue
   * Datadog Puppet module: [https://github.com/DataDog/puppet-datadog-agent][7]
+    * Release [3.20.0][15] fixes the issue
   * Datadog Saltstack formula: [https://github.com/DataDog/datadog-formula][8]
+    * Release [3.5][16] fixes the issue
   * The set of Datadog Agent 6/7 Linux install scripts:
+    * All the below scripts were released to the below locations with version 1.13.0 at 13:00 UTC on January 12th, 2023
     * [https://s3.amazonaws.com/dd-agent/scripts/install_script_agent6.sh][9]
     * [https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh][10]
     * [https://s3.amazonaws.com/dd-agent/scripts/install_script.sh][11] (this one is deprecated and no longer recommended to use, but we will update it as well)
   * The Datadog Agent 5 Linux install script: [https://raw.githubusercontent.com/DataDog/dd-agent/master/packaging/datadog-agent/source/install_agent.sh][12]
+    * Released to its [download location][12] at 16:25 UTC on January 12th, 2023
 
 [1]: https://circleci.com/blog/january-4-2023-security-alert/
 [2]: https://keys.datadoghq.com/DATADOG_RPM_KEY.public
@@ -122,3 +128,9 @@ Lines starting with `[ ERROR ]` should be reported to [Datadog Support][4] along
 [10]: https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh
 [11]: https://s3.amazonaws.com/dd-agent/scripts/install_script.sh
 [12]: https://raw.githubusercontent.com/DataDog/dd-agent/master/packaging/datadog-agent/source/install_agent.sh
+[13]: https://github.com/DataDog/ansible-datadog/releases/tag/4.18.0
+[14]: https://github.com/DataDog/chef-datadog/releases/tag/v4.16.0
+[15]: https://github.com/DataDog/puppet-datadog-agent/releases/tag/v3.20.0
+[16]: https://github.com/DataDog/datadog-formula/releases/tag/3.5
+[17]: https://yum.datadoghq.com/rpm/x86_64/datadog-agent-5.32.9-1.x86_64.rpm
+[18]: https://yum.datadoghq.com/rpm/x86_64/
