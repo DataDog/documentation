@@ -22,7 +22,7 @@ _List widget displaying error tracking issues_
 
 ### Configuration
 
-1. Choose the type of data to graph. You can create a list widget from Issues, Logs, Audit Trail, or Events depending of which products are available for your organization.
+1. Choose the type of data to graph. You can create a list widget from Issues, Logs, Audit Trail, or Events depending on which products are available for your organization.
 
 2. Set display preferences. On screenboards and notebooks, choose whether your widget has a custom timeframe or uses the global timeframe.
 
@@ -32,9 +32,7 @@ _List widget displaying error tracking issues_
 
 Each type of list widget has its own configuration.
 
-### Issue list options
-
-{{< img src="dashboards/widgets/list/issue_list_options.png" alt="Options available for the issue list" style="width:100%;">}}
+### Issues
 
 #### Sorting by
 
@@ -46,9 +44,7 @@ For issues, you can sort by:
 
 **Note:** Changing the "Sorting by" selection does not change the columns displayed. If you change your list to sort by impacted sessions, and want to see this on your widget, you must also select or add "Impacted Sessions" to the graph editor.
 
-### Log list options
-
-{{< img src="dashboards/widgets/list/log_list_options.png" alt="Options available for the log list" style="width:100%;">}}
+### Logs
 
 #### Grouping by
 
@@ -57,9 +53,8 @@ For logs, you can group by:
 * Patterns
 * Transactions
 
+<!-- Pending GA
 ### RUM event list options
-
-{{< img src="dashboards/widgets/list/rum_event_list_options.png" alt="Options available for the rum event list" style="width:100%;">}}
 
 #### Sorting by
 
@@ -74,11 +69,9 @@ For RUM, you can sort by:
 * Initial view name
 * Last view name
 
-Ascending or descending
+Ascending or descending -->
 
-### Events options
-
-{{< img src="dashboards/widgets/list/event_list_options.png" alt="Options available for the event list" style="width:100%;">}}
+### Events
 
 #### Report format size:
 
