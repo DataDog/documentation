@@ -51,14 +51,6 @@ before_script:
       - ${YARN_CACHE_FOLDER}
     policy: pull
 
-.medium-jobs-allocation: &medium-jobs-allocation
-  variables:
-    KUBERNETES_CPU_REQUEST: 1
-    KUBERNETES_MEMORY_REQUEST: 1Gi
-    KUBERNETES_MEMORY_LIMIT: 4Gi
-    NODE_OPTIONS: "--max-old-space-size=1000"
-
-
 .yarn_cache_pull_push: &yarn_cache_pull_push
   - key:
       files:
@@ -74,6 +66,7 @@ before_script:
   image: public.ecr.aws/x2b9z2t7/webops/site-build:latest
   tags:
     - "runner:main"
+    - "size:2xlarge"
   except:
     - tags
   only:
@@ -121,9 +114,6 @@ build_preview:
 
 link_checks_preview:
   <<: *base_template
-  extends:
-    - .medium-jobs-allocation
-  tags: ["arch:amd64", "specific:true"]
   stage: post-deploy
   cache: {}
   environment: "preview"
