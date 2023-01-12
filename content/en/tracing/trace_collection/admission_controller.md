@@ -87,9 +87,6 @@ The available library versions are listed in each container registry.
 
 **Note**: As mentioned above, library injection is applied on new pods only and does not have any impact on running pods. However, if you already have an application instrumented using version X of the library, and then use library injection to instrument using version Y of the same tracer library, the tracer will not break. Rather, the library version to be first loaded will be used.
 
-
-You can configure Datadog Admission Controller to enable injection config without having this pod label by configuring the Cluster Agent with `clusterAgent.admissionController.mutateUnlabelled` (or `DD_ADMISSION_CONTROLLER_MUTATE_UNLABELLED`) to `true`.
-
 <div class="alert alert-warning"><strong>Note</strong>: Using the <code>latest</code> tag is supported, but use it with caution because major library releases can introduce breaking changes.</div>
 
 For example:
