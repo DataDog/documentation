@@ -63,7 +63,7 @@ The [Tail Sampling Processor][9] and [Probabilistic Sampling Processor][10] allo
 
 **Note**: Tail sampling's main limitation is that all spans for a given trace must be received by the same collector instance for effective sampling decisions. If the trace is distributed across multiple collector instances, there’s a risk that some parts of a trace are dropped whereas some other parts of the same trace are sent to Datadog.
 
-With collector-level tail-based sampling, the APM metrics are computed on the sampled traffic that the Datadog Exporter sees. For this reason, please use the [`datadogprocessor`][11] to ensure that APM metrics are computed for 100% of your traffic. The Datadog Processor is available starting v0.69.0.
+To ensure that APM metrics are computed based on 100% of the applications' traffic while using collector-level tail-based sampling, preprend the [Datadog Processor][11] in front of your sampling processor in the collectors' traces pipeline. The processor is available starting from the v0.69.0 of the OpenTelemetry Collector Contrib release.
 
 Use the [ingestion volume control guide][8] to read more about the implications of setting up trace sampling on trace analytics monitors and metrics from spans.
 
