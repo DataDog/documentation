@@ -222,9 +222,9 @@ apm_config:
     # Remove all "error.stack" tag's value
     - name: "error.stack"
       pattern: "(?s).*"
-    # Replace postal codes in error messages
+    # Replace series of numbers in error messages
     - name: "error.msg"
-      pattern: "\(?:\d{5}-\d{4}|\d{5}|[A-Z]\d[A-Z] \d[A-Z]\d)"
+      pattern: "[0-9]{10}"
       repl: "[REDACTED]"
 ```
 
@@ -254,7 +254,7 @@ DD_APM_REPLACE_TAGS=[
       },
       {
         "name": "error.msg",
-        "pattern": "\(?:\d{5}-\d{4}|\d{5}|[A-Z]\d[A-Z] \d[A-Z]\d)",
+        "pattern": "[0-9]{10}",
         "repl": "[REDACTED]"
       }
 ]
@@ -289,7 +289,7 @@ Put this environment variable in the trace-agent container if you are using the 
             },
             {
               "name": "error.msg",
-              "pattern": "\(?:\d{5}-\d{4}|\d{5}|[A-Z]\d[A-Z] \d[A-Z]\d)",
+              "pattern": "[0-9]{10}",
               "repl": "[REDACTED]"
             }
           ]'
@@ -301,7 +301,7 @@ Put this environment variable in the trace-agent container if you are using the 
 {{% tab "docker-compose" %}}
 
 ```docker-compose.yaml
-- DD_APM_REPLACE_TAGS=[{"name":"http.url","pattern":"token/(.*)","repl":"?"},{"name":"resource.name","pattern":"(.*)\/$","repl": "$1"},{"name":"*","pattern":"foo","repl":"bar"},{"name":"error.stack","pattern":"(?s).*"}, {"name": "error.msg", "pattern": "\(?:\d{5}-\d{4}|\d{5}|[A-Z]\d[A-Z] \d[A-Z]\d)", "repl": "[REDACTED]"}]
+- DD_APM_REPLACE_TAGS=[{"name":"http.url","pattern":"token/(.*)","repl":"?"},{"name":"resource.name","pattern":"(.*)\/$","repl": "$1"},{"name":"*","pattern":"foo","repl":"bar"},{"name":"error.stack","pattern":"(?s).*"}, {"name": "error.msg", "pattern": "[0-9]{10}", "repl": "[REDACTED]"}]
 ```
 
 {{% /tab %}}
