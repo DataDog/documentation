@@ -254,7 +254,7 @@ client.query('SELECT $1::text as message', ['Hello world!'], (err, result) => {
 [6]: https://github.com/dataDog/dd-trace-rb
 [7]: https://github.com/brianmario/mysql2
 [8]: https://github.com/ged/ruby-pg
-[9]: https://github.com/dataDog/dd-trace-py
-[10]: https://www.psycopg.org/docs/index.html
-[11]: https://github.com/DataDog/dd-trace-js
-[12]: https://node-postgres.com/
+[9]: https://github.com/DataDog/dd-trace-js
+[10]: https://node-postgres.com/
+[11]: https://github.com/dataDog/dd-trace-py
+[12]: https://www.psycopg.org/docs/index.html
