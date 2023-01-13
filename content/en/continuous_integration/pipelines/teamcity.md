@@ -29,7 +29,7 @@ further_reading:
 ## Configure the Datadog integration
 
 The integration between [TeamCity][1] and Datadog CI Visibility is provided through a TeamCity plugin.
-The steps to activate the integration are:
+To activate the integration:
 1. Download the [Datadog CI Integration plugin][5] on the TeamCity server by going to
 Administration -> Plugins -> Browse Plugin Repository.
 2. For the integration to work properly, a [TeamCity composite build][6] needs be added as the last build
