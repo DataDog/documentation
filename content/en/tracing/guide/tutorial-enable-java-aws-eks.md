@@ -84,7 +84,7 @@ aws ecr get-login-password --region us-east-1 | docker login --username <YOUR_AW
 
 2. Build a Docker image for the sample app, adjusting the platform setting to match yours:
    {{< code-block lang="sh" >}}
-DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose -f service-docker-compose-k8s.yaml build{{< /code-block >}}
+DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose -f service-docker-compose-k8s.yaml build notes{{< /code-block >}}
 
 3. Tag the container with the ECR destination:
    {{< code-block lang="sh" >}}
@@ -206,7 +206,7 @@ Now that you have a working Java application, configure it to enable tracing.
 Rebuild the image with tracing enabled using the [same steps as before](#build-and-upload-the-application-image):
 {{< code-block lang="sh" >}}
 aws ecr get-login-password --region us-east-1 | docker login --username <YOUR_AWS_USER> --password-stdin <USER_CREDENTIALS>
-DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose -f service-docker-compose-k8s.yaml build
+DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose -f service-docker-compose-k8s.yaml build notes
 docker tag docker-notes:latest <ECR_REGISTRY_URL>:notes
 docker push <ECR_REGISTRY_URL>:notes{{< /code-block >}}
 
@@ -344,7 +344,7 @@ kubectl delete -f notes-app.yaml{{< /code-block >}}
 
    {{< code-block lang="sh" >}}
 aws ecr get-login-password --region us-east-1 | docker login --username <YOUR_AWS_USER> --password-stdin <USER_CREDENTIALS>
-DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose -f service-docker-compose-k8s.yaml build
+DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose -f service-docker-compose-k8s.yaml build notes
 docker tag docker-notes:latest <ECR_REGISTRY_URL>:notes
 docker push <ECR_REGISTRY_URL>:notes
 {{< /code-block >}}

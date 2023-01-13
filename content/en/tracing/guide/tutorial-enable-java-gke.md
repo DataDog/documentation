@@ -97,7 +97,7 @@ gcloud auth configure-docker{{< /code-block >}}
 
 2. Build a Docker image for the sample app, adjusting the platform setting to match yours:
    {{< code-block lang="sh" >}}
-DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose -f service-docker-compose-k8s.yaml build{{< /code-block >}}
+DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose -f service-docker-compose-k8s.yaml build notes{{< /code-block >}}
 
 3. Tag the container with the GCR destination:
    {{< code-block lang="sh" >}}
@@ -207,7 +207,7 @@ Now that you have a working Java application, configure it to enable tracing.
 Rebuild the image with tracing enabled using the [same steps as before](#build-and-upload-the-application-image) in the `docker` directory:
 {{< code-block lang="sh" >}}
 gcloud auth configure-docker
-DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose -f service-docker-compose-k8s.yaml build
+DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose -f service-docker-compose-k8s.yaml build notes
 docker tag docker-notes:latest gcr.io/<PROJECT_ID>/notes-tutorial:notes
 docker push gcr.io/<PROJECT_ID>/notes-tutorial:notes{{< /code-block >}}
 
@@ -344,7 +344,7 @@ kubectl delete -f notes-app.yaml{{< /code-block >}}
 
    {{< code-block lang="sh" >}}
 gcloud auth configure-docker
-DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose -f service-docker-compose-k8s.yaml build
+DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose -f service-docker-compose-k8s.yaml build notes
 docker tag docker-notes:latest  gcr.io/<PROJECT_NAME>/notes-tutorial:notes
 docker push gcr.io/<PROJECT_NAME>/notes-tutorial:notes
 {{< /code-block >}}
