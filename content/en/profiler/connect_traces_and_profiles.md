@@ -25,7 +25,7 @@ You can move directly from span information to profiling data on the Code Hotspo
 
 ### Prerequisites
 
-{{< programming-lang-wrapper langs="java,python,go,ruby,.NET,php" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby,dotnet,php" >}}
 {{< programming-lang lang="java" >}}
 Code Hotspots identification is enabled by default when you [turn on profiling for your Java service][1]. For manually instrumented code, continuous profiler requires scope activation of spans:
 
@@ -76,7 +76,7 @@ Require `dd-trace-go` version 1.37.0+.
 [4]: https://go-review.googlesource.com/c/go/+/369741/
 [5]: https://go-review.googlesource.com/c/go/+/369983/
 {{< /programming-lang >}}
-{{< programming-lang lang=".NET" >}}
+{{< programming-lang lang="dotnet" >}}
 
 Code Hotspots identification is enabled by default when you [turn on profiling for your .NET service][1].
 
@@ -137,7 +137,7 @@ Click the **Span/Trace/Full profile** selector to define the scope of the data:
 
 ### Prerequisites
 
-{{< programming-lang-wrapper langs="python,go,ruby,.NET,php" >}}
+{{< programming-lang-wrapper langs="python,go,ruby,dotnet,php" >}}
 {{< programming-lang lang="python" >}}
 
 Endpoint profiling is enabled by default when you [turn on profiling for your Python service][1].
@@ -167,7 +167,7 @@ Requires `dd-trace-rb` version 0.54.0+.
 
 [1]: /profiler/enabling/ruby
 {{< /programming-lang >}}
-{{< programming-lang lang=".NET" >}}
+{{< programming-lang lang="dotnet" >}}
 
 Endpoint profiling is enabled by default when you [turn on profiling for your .NET service][1].
 
