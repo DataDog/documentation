@@ -78,7 +78,7 @@ def grouped_globs_table(list_of_contents):
     return data
 
 
-def local_or_upstream(github_token, extract_dir, list_of_contents):
+def local_or_upstream(github_token, extract_dir, list_of_contents, cache_config):
     """
     This goes through the list_of_contents and check for each repo specified in order:
       * [ONLY LOCAL DEV] Check if a locally cloned version is on this developer machine; one level above this documentation repo
@@ -90,10 +90,16 @@ def local_or_upstream(github_token, extract_dir, list_of_contents):
     """
     grouped_globs = grouped_globs_table(list_of_contents)
     is_in_ci = os.getenv("CI_COMMIT_REF_NAME")
+    disable_global_cache = cache_config.get('disable_global_cache', False)
+    disable_integrations_cache = cache_config.get('disable_integrations_cache', False)
 
     for content in list_of_contents:
         use_cached = content.get('options', {}).get('cached', False)
 
+        # If disable_global_cache is true, we always want to do this
+        # If it's an integration action and disable_integrations_cache is true, we want to do this
+        # If use cached is false, we always want to do this
+        # if disable_integrations_cache or (action in ('integrations', 'marketplace-integrations') and disable_integrations_cache) or not use_cached:
         if not use_cached:
             local_repo_path = os.path.join("..", content["repo_name"])
             repo_path_last_extract = os.path.join(extract_dir, content["repo_name"])
@@ -203,8 +209,9 @@ def prepare_content(configuration, github_token, extract_dir):
     :param extract_dir: Directory into which to put all content downloaded.
     """
     try:
+        cache_config = configuration[0]
         list_of_contents = local_or_upstream(
-            github_token, extract_dir, extract_config(configuration))
+            github_token, extract_dir, extract_config(configuration), cache_config)
     except Exception as e:
         if not getenv("CI_COMMIT_REF_NAME"):
             print(
