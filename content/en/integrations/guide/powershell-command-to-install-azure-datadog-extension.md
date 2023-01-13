@@ -2,7 +2,7 @@
 title: Commands to install the Azure Datadog Extension
 kind: faq
 aliases:
-  - "/integrations/guide/powershell-command-to-install-azure-datadog-extension"
+  - "/integrations/faq/powershell-command-to-install-azure-datadog-extension"
 ---
 
 Datadog provides an Azure extension to assist with Agent deployment on Azure instances:
