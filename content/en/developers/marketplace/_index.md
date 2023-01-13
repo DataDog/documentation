@@ -56,7 +56,7 @@ Once you've joined the Technology Partners track and requested a sandbox account
 All Technology Partners can list a free integration on the **Integrations** page or a commercial offering on the **Marketplace** page. Additional offerings on Datadog Marketplace may include:
 
 Integrations
-: Out-of-the-box Marketplace integrations that submit or pull third-party data through the [Datadog Agent][15] or an [API][16].
+: Marketplace integrations that submit or pull third-party data through the [Datadog Agent][15] or an [API][16]. These integrations contain out-of-the-box metrics, events, or service checks. 
 
 Software licenses
 : SaaS licenses enable you to deliver and license software solutions to customers through the Datadog Marketplace.
