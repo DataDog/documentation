@@ -285,13 +285,16 @@ If you've configured the profiler and don't see profiles in the profile search p
 
 4. For missing CPU or Wall time profiles only, check the Datadog signal handler for stack walk has not been replaced:
 
-   1. Install gdb.
+   1. Open the `DD-DotNet-Profiler-Native-<Application Name>-<pid>` log file in the `/var/log/datadog` folder.
 
-   2. While the application is running, type the following command:
-      ```
-      gdb -p <process id> -batch -ex 'set $p = (struct sigaction *) malloc(sizeof (struct sigaction))' -ex 'print sigaction(10, 0, $p)' -ex 'print $p->__sigaction_handler.sa_handler' -ex "detach" -ex "quit
-      ```
-   3. TODO: check the output
+   2. Look for these two messages:
+      - `Profiler signal handler was replaced again. As of now, we will stopped restoring it to avoid issues: the profiler is disabled.`
+      - `Fail to restore profiler signal handler.`
+
+   3. If one of these messages is present, it means that the application code or a third party code is reinstalling again and again its own signal handler over Datadog signal handler. To avoid any further conflict, the CPU and Wall time profilers are disabled.
+
+   4. Note that another message could appear that does not impact Datadog profiling:
+      ``` Profiler signal handler handler has been replaced. Restoring it. ```: the Datadog signal handler is reinstalled once if it was overwritten.
 
 [1]: /profiler/enabling/dotnet/?tab=linux#configuration
 
