@@ -4,7 +4,7 @@ kind: documentation
 aliases:
   - /infrastructure/cloud_cost_management
 further_reading:
-  - link: "https://docs.datadoghq.com/infrastructure/cloud_cost_management/"
+  - link: "https://www.datadoghq.com/blog/control-your-cloud-spend-with-datadog-cloud-cost-management/"
     tag: "Blog"
     text: "Gain visibility and control of your cloud spend with Datadog Cloud Cost Management"
 ---
