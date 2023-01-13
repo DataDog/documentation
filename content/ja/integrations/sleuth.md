@@ -16,7 +16,7 @@ assets:
     source_type_name: Sleuth
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Sleuth
   sales_email: support@sleuth.io
   support_email: support@sleuth.io
 categories:
