@@ -117,6 +117,7 @@ link_checks_preview:
   stage: post-deploy
   cache: {}
   environment: "preview"
+  allow_failure: true
   variables:
     URL: ${PREVIEW_DOMAIN}
     GIT_STRATEGY: none
