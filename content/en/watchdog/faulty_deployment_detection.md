@@ -37,8 +37,8 @@ Watchdog attempts to determine if the new deployment is a plausible cause of the
 - Errors of this type do not appear to be new; they appear either in preceding versions or during recent deployments.
 - Errors of this type are few and transient, disappearing over time even as the new version remains in place.
 - There were not enough previous deployments in the recent history for Watchdog to establish a baseline for the analysis.
-- The error rate in the new version was not significantly higher than in preceding versions
-- This error pattern is common during deployments of the service, even when the new code version is not faulty
+- The error rate in the new version was not significantly higher than in preceding versions.
+- This error pattern is common during deployments of the service, even when the new code version is not faulty.
 
 [1]: https://app.datadoghq.com/apm/services
 [2]: /events/explorer
