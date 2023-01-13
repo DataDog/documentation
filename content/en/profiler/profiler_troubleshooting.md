@@ -370,14 +370,14 @@ It might happen that an application becomes unresponsive on Linux and CPU/Wall t
 
 3. If the message is found, it means that the stack walking mechanism could have deadlocked. To help investigate the issue, it is very helpful to dump the call stacks of all threads in the application. This is possible with a debugger such as gdb:
 
-   4. Install gdb.
+   1. Install gdb.
 
-   5. Type the following command:
+   2. Type the following command:
       ```
       gdb -p <process id> -batch -ex "thread apply all bt full" -ex "detach" -ex "quit"
       ```
 
-   6. Send the resulting output to the Datadog support.
+   3. Send the resulting output to the Datadog support.
 
 
 [1]: /tracing/troubleshooting/#tracer-debug-logs
