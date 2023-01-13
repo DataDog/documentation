@@ -32,7 +32,7 @@ function addCodeBlockVisibilityToggleEventListeners() {
 
 function addCodeTabEventListeners() {
     const codeLinks = document.querySelectorAll('.js-code-example-link');
-
+    
     if (codeLinks.length) {
         codeLinks.forEach((codeLink) => {
             codeLink.addEventListener('click', codeLangTabClickHandler);
@@ -87,7 +87,7 @@ function codeLangTabHoverHandler(event) {
         const { currentSection, baseUrl } = document.documentElement.dataset;
         const updatedHref = `${baseUrl}${currentSection}${codeLang}/?code-lang=${codeLang}`;
         tabElement.href = updatedHref;
-    }
+    } 
 }
 
 function codeLangTabClickHandler(event) {
