@@ -78,22 +78,6 @@ Visualize a single [measure][5] (or a [facet][5] unique count of values) on the 
 
 The RUM Analytics geomap shows the 75th percentile of the **Largest Contentful Paint** over the past day.
 
-## Funnel
-
-Visualize conversion rates across user workflows and end-to-end user journeys.
-
-{{< img src="real_user_monitoring/explorer/visualize/funnel.png" alt="Funnel graph in the RUM Explorer" style="width:90%;">}}
-
-To construct a funnel, select **View** or **Action** and choose a query from the dropdown menu. Click **+** and select another query from the dropdown menu to visualize the funnel. 
-
-{{< img src="real_user_monitoring/explorer/analytics/rum_funnel.mp4" alt="Create a funnel with queries" video="true" width="80%" >}}
-
-The funnel graph displays the sessions for your selected queries out of your total RUM sessions. When you click on the bar graph, a side panel displaying the step's **Overall Conversion Rate**, **Converted Rate**, and **Drop Off Rate** appears. Scroll down to see the step's performance, outstanding issues, and conversion rates by type. 
-
-{{< img src="real_user_monitoring/explorer/visualize/funnel_updated.mp4" alt="Funnel graph in the RUM Explorer" video="true" width="100%" >}}
-
-You can analyze user journeys in a [notebook][6] by exporting the funnel widget into an existing notebook or by creating a funnel widget in an existing notebook. For more information, see [Export RUM Events][7]. You can also alert on conversion and drop off rates by exporting the data points to a monitor.
-
 ## Related events
 
 For all visualizations besides the [funnel](#funnel), select a section of the graph or click on the graph to either zoom in or see a list of events that correspond to your selection.

@@ -67,7 +67,7 @@ Whether to enable tracing.
 `DD_TRACE_AGENT_URL`
 : **Configuration**: `url`<br>
 **Default**: `http://localhost:8126`<br>
-The URL of the Trace Agent that the tracer submits to. Takes priority over hostname and port, if set. Supports Unix Domain Sockets in combination with the `apm_config.receiver_socket` in your `datadog.yaml` file, or the `DD_APM_RECEIVER_SOCKET` environment variable.
+The URL of the Trace Agent that the tracer submits to. Takes priority over hostname and port, if set. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it. Supports Unix Domain Sockets in combination with the `apm_config.receiver_socket` in your `datadog.yaml` file, or the `DD_APM_RECEIVER_SOCKET` environment variable.
 
 `DD_TRACE_AGENT_HOSTNAME`
 : **Configuration**: `hostname`<br>
@@ -77,12 +77,12 @@ The address of the Agent that the tracer submits to.
 `DD_TRACE_AGENT_PORT`
 : **Configuration**: `port`<br>
 **Default**: `8126`<br>
-The port of the Trace Agent that the tracer submits to.
+The port of the Trace Agent that the tracer submits to. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it.
 
 `DD_DOGSTATSD_PORT`
 : **Configuration**: `dogstatsd.port`<br>
 **Default**: `8125`<br>
-The port of the DogStatsD Agent that metrics are submitted to.
+The port of the DogStatsD Agent that metrics are submitted to. If the [Agent configuration][13] sets `dogstatsd_port` or `DD_DOGSTATSD_PORT` to something other than the default `8125`, then this tracing library `DD_DOGSTATSD_PORT` must match it.
 
 `DD_LOGS_INJECTION`
 : **Configuration**: `logInjection`<br>
@@ -235,3 +235,4 @@ For more examples of how to work with the library see [API documentation][2].
 [2]: https://datadog.github.io/dd-trace-js/
 [3]: /tracing/trace_pipeline/ingestion_mechanisms/
 [4]: /help/
+[13]: /agent/guide/network/#configure-ports

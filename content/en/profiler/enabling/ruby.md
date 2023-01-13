@@ -31,6 +31,13 @@ The following operating systems and architectures are supported:
 - Linux (GNU libc) x86-64, aarch64
 - Alpine Linux (musl libc) x86-64, aarch64
 
+The following profiling features are available in the following minimum versions of the `dd-trace-rb` library:
+
+|      Feature         | Required `dd-trace-rb` version          |
+|----------------------|-----------------------------------------|
+| [Code Hotspots][12]        | 0.49.0+                       |
+| [Endpoint Profiling][13]            | 0.54.0+                       |
+
 Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
 
 ## Installation
@@ -113,3 +120,5 @@ The [Getting Started with Profiler][5] guide takes a sample service with a perfo
 [3]: https://app.datadoghq.com/account/settings?agent_version=6#agent
 [4]: https://app.datadoghq.com/profiling
 [5]: /getting_started/profiler/
+[12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
+[13]: /profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints

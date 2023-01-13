@@ -5,6 +5,7 @@ aliases:
   - /security_monitoring/
   - /security_platform/cloud_siem/security_home/
   - /security_platform/cloud_siem/
+  - /security/cloud_siem/security_home/
 further_reading:
 - link: "https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/"
   tag: "Blog"
@@ -26,7 +27,7 @@ Threats are surfaced in Datadog as Security Signals and can be correlated and tr
 {{< whatsnext >}}
   {{< nextlink href="/security/cloud_siem/getting_started">}}Complete setup and configuration{{< /nextlink >}}
   {{< nextlink href="/security/cloud_siem/guide/aws-config-guide-for-cloud-siem/">}}Set up the AWS integration for Cloud SIEM{{< /nextlink >}}
-  {{< nextlink href="/security/default_rules#cat-cloud-siem">}}Start using out-of-the-box Cloud SIEM detection rules{{< /nextlink >}}
+  {{< nextlink href="/security/default_rules#cat-cloud-siem-log-detection">}}Start using out-of-the-box Cloud SIEM detection rules{{< /nextlink >}}
   {{< nextlink href="/security/detection_rules">}}Create your own custom detection rules{{< /nextlink >}}
 {{< /whatsnext >}}
 

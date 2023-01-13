@@ -62,7 +62,7 @@ main:
     url: getting_started/containers/datadog_operator
     parent: getting_started_containers
     weight: 402
-  - name: Serverless (Lambda)
+  - name: Serverless for AWS Lambda
     identifier: getting_started_serverless
     url: getting_started/serverless/
     parent: getting_started
@@ -76,6 +76,11 @@ main:
     identifier: getting_started_with_aws
     url: getting_started/integrations/aws/
     weight: 701
+    parent: getting_started_integrations
+  - name: Terraform
+    identifier: getting_started_with_terraform
+    url: getting_started/integrations/terraform/
+    weight: 702
     parent: getting_started_integrations
   - name: Dashboards
     identifier: getting_started_dashboards
@@ -449,11 +454,6 @@ main:
     parent: containers_kubernetes
     identifier: containers_kubernetes_data_collected
     weight: 310
-  - name: Operator configuration
-    url: containers/kubernetes/operator_configuration
-    parent: containers_kubernetes
-    identifier: containers_kubernetes_operator_configuration
-    weight: 311
   - name: Cluster Agent
     url: containers/cluster_agent/
     parent: containers
@@ -464,53 +464,28 @@ main:
     parent: containers_cluster
     identifier: cluster_agent_setup
     weight: 401
-  - name: Event Collection
-    url: containers/cluster_agent/event_collection/
-    parent: containers_cluster
-    identifier: cluster_agent_event_collection
-    weight: 402
-  - name: Custom & External Metrics
-    url: containers/cluster_agent/external_metrics/
-    parent: containers_cluster
-    identifier: cluster_agent_external_metrics
-    weight: 403
-  - name: Cluster Checks
-    url: containers/cluster_agent/clusterchecks/
-    parent: containers_cluster
-    weight: 404
-  - name: Endpoints Checks
-    url: containers/cluster_agent/endpointschecks/
-    parent: containers_cluster
-    weight: 405
-  - name: Admission Controller
-    url: containers/cluster_agent/admission_controller/
-    parent: containers_cluster
-    weight: 406
   - name: Commands & Options
     url: containers/cluster_agent/commands/
     identifier: cluster_agent_commands
     parent: containers_cluster
-    weight: 407
-  - name: Cluster metadata provider
-    url: containers/cluster_agent/metadata_provider/
-    identifier: cluster_agent_metadata_provider
+    weight: 402
+  - name: Cluster Checks
+    url: containers/cluster_agent/clusterchecks/
     parent: containers_cluster
-    weight: 408
-  - name: Build
-    url: containers/cluster_agent/build/
-    identifier: cluster_agent_build
+    weight: 403
+  - name: Endpoint Checks
+    url: containers/cluster_agent/endpointschecks/
     parent: containers_cluster
-    weight: 409
-  - name: Cluster Checks Runner
-    url: containers/cluster_agent/clusterchecksrunner
-    identifier: cluster_agent_clcr
+    weight: 404
+  - name: Admission Controller
+    url: containers/cluster_agent/admission_controller/
     parent: containers_cluster
-    weight: 410
+    weight: 405
   - name: Troubleshooting
     url: containers/cluster_agent/troubleshooting/
     identifier: cluster_agent_troubleshooting
     parent: containers_cluster
-    weight: 411
+    weight: 406
   - name: Amazon ECS
     url: containers/amazon_ecs/
     parent: containers
@@ -541,16 +516,26 @@ main:
     parent: containers
     identifier: ecs_fargate
     weight: 6
+  - name: Datadog Operator
+    url: containers/datadog_operator
+    identifier: containers_datadog_operator
+    parent: containers
+    weight: 7
   - name: Troubleshooting
     url: containers/troubleshooting/
     parent: containers
     identifier: containers_troubleshooting
-    weight: 7
+    weight: 8
   - name: Duplicate hosts
     url: containers/troubleshooting/duplicate_hosts
     parent: containers_troubleshooting
     identifier: containers_troubleshooting_duplicate_hosts
-    weight: 701
+    weight: 801
+  - name: Guides
+    url: containers/guide
+    parent: containers
+    identifier: containers_guide
+    weight: 9
   - name: Integrations
     url: integrations/
     identifier: integrations_top_level
@@ -908,126 +893,74 @@ main:
     parent: infrastructure_heading
     weight: 100000
   - name: AWS Lambda
-    url: serverless/installation
+    url: serverless/aws_lambda
     parent: serverless
-    identifier: serverless_installation
+    identifier: serverless_aws_lambda
     weight: 1
-  - name: Python
-    url: serverless/installation/python
-    parent: serverless_installation
-    identifier: serverless_installation_python
+  - name: Installation
+    url: serverless/installation
+    parent: serverless_aws_lambda
+    identifier: serverless_aws_lambda_installation
     weight: 101
-  - name: Node.js
-    url: serverless/installation/nodejs
-    parent: serverless_installation
-    identifier: serverless_installation_nodejs
-    weight: 102
-  - name: Ruby
-    url: serverless/installation/ruby
-    parent: serverless_installation
-    identifier: serverless_installation_ruby
-    weight: 103
-  - name: Java
-    url: serverless/installation/java
-    parent: serverless_installation
-    identifier: serverless_installation_java
-    weight: 104
-  - name: Go
-    url: serverless/installation/go
-    parent: serverless_installation
-    identifier: serverless_installation_go
-    weight: 105
-  - name: .NET
-    url: serverless/installation/dotnet
-    parent: serverless_installation
-    identifier: serverless_installation_dotnet
-    weight: 106
-  - name: Advanced Configurations (AWS Lambda)
+  - name: Advanced Configuration
     url: serverless/configuration
-    parent: serverless
+    parent: serverless_aws_lambda
     identifier: serverless_configuration
-    weight: 2
+    weight: 102
   - name: Enhanced Lambda Metrics
     url: serverless/enhanced_lambda_metrics
-    parent: serverless
-    weight: 3
-  - name: Custom Metrics
-    url: serverless/custom_metrics
-    parent: serverless
-    identifier: custom_metrics
-    weight: 4
+    parent: serverless_aws_lambda
+    weight: 103
   - name: Distributed Tracing
     url: serverless/distributed_tracing
     identifier: serverless_distributed_tracing
-    parent: serverless
-    weight: 5
-  - name: Trace Merging (Advanced)
-    url: serverless/distributed_tracing/serverless_trace_merging
-    parent: serverless_distributed_tracing
-    weight: 502
-  - name: Trace Propagation (Advanced)
-    url: serverless/distributed_tracing/serverless_trace_propagation
-    parent: serverless_distributed_tracing
-    weight: 503
-  - name: Libraries & Integrations
-    url: serverless/libraries_integrations
-    parent: serverless
-    identifier: libraries_integrations
-    weight: 6
-  - name: Datadog Lambda Extension
-    url: serverless/libraries_integrations/extension/
-    parent: libraries_integrations
-    weight: 601
-  - name: Datadog Serverless Plugin
-    url: serverless/libraries_integrations/plugin/
-    parent: libraries_integrations
-    weight: 602
-  - name: Datadog Serverless Macro
-    url: serverless/libraries_integrations/macro/
-    parent: libraries_integrations
-    weight: 603
-  - name: Datadog Serverless CLI
-    url: serverless/libraries_integrations/cli/
-    parent: libraries_integrations
-    weight: 604
-  - name: Datadog CDK Construct
-    url: serverless/libraries_integrations/cdk/
-    parent: libraries_integrations
-    weight: 605
+    parent: serverless_aws_lambda
+    weight: 104
+  - name: Custom Metrics
+    url: serverless/custom_metrics
+    parent: serverless_aws_lambda
+    identifier: serverless_aws_lambdacustom_metrics
+    weight: 105
   - name: Deployment Tracking
     url: serverless/deployment_tracking
-    parent: serverless
-    weight: 7
+    parent: serverless_aws_lambda
+    identifier: serverless_aws_lambda_deployment_tracking
+    weight: 106
+  - name: Troubleshooting
+    url: serverless/troubleshooting
+    parent: serverless_aws_lambda
+    identifier: serverless_aws_lambda_troubleshooting
+    weight: 107
+  - name: Libraries & Integrations
+    url: serverless/libraries_integrations
+    parent: serverless_aws_lambda
+    identifier: libraries_integrations
+    weight: 108
   - name: Azure App Service
     url: serverless/azure_app_services
     parent: serverless
     identifier: serverless_app_services
-    weight: 8
+    weight: 2
   - name: Azure Container Apps
     url: serverless/azure_container_apps
     parent: serverless
     identifier: serverless_container_apps
-    weight: 9
+    weight: 3
   - name: Google Cloud Run
     url: serverless/google_cloud_run
     parent: serverless
     identifier: serverless_gcr
-    weight: 10
-  - name: Troubleshooting
-    url: serverless/troubleshooting
-    parent: serverless
-    identifier: serverless_troubleshooting
-    weight: 11
+    weight: 4
   - name: Glossary
     url: serverless/glossary
     parent: serverless
     identifier: serverless_glossary
-    weight: 12
+    weight: 5
   - name: Guides
     url: serverless/guide/
     identifier: serverless_guides
     parent: serverless
-    weight: 13
+    weight: 6
   - name: Cloud Cost
     url: cloud_cost_management/
     pre: cloud-cost-management
@@ -1959,7 +1892,7 @@ main:
     parent: apm_heading
     weight: 145000
   - name: Enabling the Profiler
-    url: profiler/enabling/java/
+    url: profiler/enabling/
     parent: profiler
     identifier: profiler_enabling
     weight: 1
@@ -2003,26 +1936,31 @@ main:
     parent: profiler_enabling
     identifier: profiler_enabling_linux
     weight: 108
+  - name: Profile Types
+    url: profiler/profile_types/
+    parent: profiler
+    identifier: profiler_types
+    weight: 2
   - name: Search Profiles
     url: profiler/search_profiles/
     parent: profiler
     identifier: profiler_search_profiles
-    weight: 2
+    weight: 3
   - name: Investigate Slow Traces or Endpoints
     url: profiler/connect_traces_and_profiles/
     parent: profiler
     identifier: profiler_traces_profiles
-    weight: 3
+    weight: 4
   - name: Compare Profiles
     url: profiler/compare_profiles
     parent: profiler
     identifier: profiler_compare
-    weight: 4
+    weight: 5
   - name: Profiler Troubleshooting
     url: profiler/profiler_troubleshooting/
     parent: profiler
     identifier: profiler_profiler_troubleshooting
-    weight: 5
+    weight: 6
   - name: CI Visibility
     url: continuous_integration/
     pre: ci
@@ -2598,7 +2536,7 @@ main:
   - name: Cloud Security Management
     url: security/cloud_security_management
     parent: security_platform_heading
-    pre: cspm
+    pre: cloud-security-management
     identifier: csm
     weight: 181500
   - name: Cloud Security Posture Management
@@ -3249,21 +3187,26 @@ main:
     parent: rum_explorer
     identifier: rum_explorer_watchdog_insights
     weight: 908
+  - name: Funnel Analysis
+    url: real_user_monitoring/funnel_analysis
+    parent: rum
+    identifier: rum_funnel_analysis
+    weight: 10
   - name: Generate Metrics
     url: real_user_monitoring/generate_metrics
     parent: rum
     identifier: rum_generate_metrics
-    weight: 10
+    weight: 11
   - name: Connect RUM and Traces
     url: real_user_monitoring/connect_rum_and_traces
     parent: rum
     identifier: rum_connect_rum_and_traces
-    weight: 11
+    weight: 12
   - name: Error Tracking
     url: real_user_monitoring/error_tracking/
     parent: rum
     identifier: rum_error_tracking
-    weight: 12
+    weight: 13
   - name: Explorer
     url: real_user_monitoring/error_tracking/explorer/
     parent: rum_error_tracking
@@ -3303,7 +3246,7 @@ main:
     url: real_user_monitoring/guide/
     parent: rum
     identifier: rum_guides
-    weight: 13
+    weight: 14
   - name: Network Monitoring
     url: network_monitoring/
     pre: network
@@ -3444,7 +3387,7 @@ main:
     parent: dev_tools
     identifier: dev_tools_integrations
     weight: 4
-  - name: Create a New Integration
+  - name: Create an Agent-based Integration
     url: developers/integrations/new_check_howto/
     parent: dev_tools_integrations
     weight: 401
@@ -5032,6 +4975,32 @@ api:
     url: /api/latest/metrics/
     identifier: metrics
     generated: true
+  - name: Timeseries cross product query
+    url: '#timeseries-cross-product-query'
+    identifier: metrics-timeseries-cross-product-query
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - QueryTimeseriesData
+      unstable:
+        - v2
+      order: 1
+  - name: Scalar cross product query
+    url: '#scalar-cross-product-query'
+    identifier: metrics-scalar-cross-product-query
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - QueryScalarData
+      unstable:
+        - v2
+      order: 2
   - name: List distinct metric volumes by metric name
     url: '#list-distinct-metric-volumes-by-metric-name'
     identifier: metrics-list-distinct-metric-volumes-by-metric-name
@@ -7900,7 +7869,7 @@ api:
         - UpdateIncidentAttachments
       unstable:
         - v2
-      order: 7
+      order: 8
   - name: Get a list of attachments
     url: '#get-a-list-of-attachments'
     identifier: incidents-get-a-list-of-attachments
@@ -7913,7 +7882,7 @@ api:
         - ListIncidentAttachments
       unstable:
         - v2
-      order: 6
+      order: 7
   - name: Update an existing incident
     url: '#update-an-existing-incident'
     identifier: incidents-update-an-existing-incident
@@ -7953,6 +7922,19 @@ api:
       unstable:
         - v2
       order: 4
+  - name: Search for incidents
+    url: '#search-for-incidents'
+    identifier: incidents-search-for-incidents
+    parent: incidents
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - SearchIncidents
+      unstable:
+        - v2
+      order: 6
   - name: Create an incident
     url: '#create-an-incident'
     identifier: incidents-create-an-incident
