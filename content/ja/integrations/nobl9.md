@@ -15,7 +15,7 @@ assets:
     source_type_name: Nobl9
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Nobl9
   sales_email: support@nobl9.com
   support_email: support@nobl9.com
 categories:
