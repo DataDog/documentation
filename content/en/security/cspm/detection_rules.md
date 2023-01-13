@@ -41,7 +41,7 @@ For example, you can exclude resources tagged with `env:staging` using the **Thi
 
 After you customize a rule, click **Update Rule** at the bottom of the page to apply your changes.
 
-{{< img src="security/cspm/frameworks_and_benchmarks/never-trigger-a-finding-2.png" alt="In the Datadog app, select Advanced to populate Never trigger a finding when, and add a query." >}}
+{{< img src="security/cspm/frameworks_and_benchmarks/never-trigger-a-finding-2.png" alt="Customize how your environment is scanned by selecting tags to include or exclude from a rule's scope" >}}
 
 ## Set notification targets for detection rules
 
@@ -59,7 +59,7 @@ On the [Rules][13] page, select a rule to open its details page. In the **Set se
 
 Alternatively, create [notification rules][21] that span across multiple detection rules based on parameters such as severities, rule types, rule tags, signal attributes, and signal tags. This allows you to avoid having to manually edit notification preferences for individual detection rules.
 
-{{< img src="security/cspm/frameworks_and_benchmarks/notification-2.png" alt="Select a severity and notification target" >}}
+{{< img src="security/cspm/frameworks_and_benchmarks/notification-2.png" alt="The Set severity and notifications section of the rule details page" >}}
 
 ## Create custom rules
 
