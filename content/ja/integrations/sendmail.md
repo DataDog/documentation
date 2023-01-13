@@ -1,34 +1,53 @@
 ---
+app_id: sendmail
+app_uuid: 8169d145-8d1f-4bb8-a4de-a0aa9aa84c0b
 assets:
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: sendmail.queue.size
+      metadata_path: metadata.csv
+      prefix: sendmail.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Sendmail
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: コミュニティ
+  sales_email: david.bouchare@datadoghq.com
+  support_email: david.bouchare@datadoghq.com
 categories:
 - コラボレーション
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/sendmail/README.md
-display_name: Sendmail
+display_on_public_website: true
 draft: false
 git_integration_title: sendmail
-guid: 4d4f72c7-c8c5-4e7a-b281-32c2d462c7c8
 integration_id: sendmail
 integration_title: Sendmail
 integration_version: 1.0.0
 is_public: true
 kind: integration
-maintainer: david.bouchare@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: sendmail.
-metric_to_check: sendmail.queue.size
+manifest_version: 2.0.0
 name: sendmail
-public_title: Datadog-Sendmail インテグレーション
+oauth: {}
+public_title: Sendmail
 short_description: メールキューを監視する Sendmail インテグレーション
-support: contrib
 supported_os:
 - linux
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Category::Collaboration
+  configuration: README.md#Setup
+  description: メールキューを監視する Sendmail インテグレーション
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Sendmail
 ---
 
 
