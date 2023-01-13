@@ -12,6 +12,9 @@ further_reading:
   - link: "/metrics/distributions/"
     tag: "Documentation"
     text: "Metrics Distributions"
+  - link: "/logs/explorer/search_syntax/"
+    tag: "Documentation"
+    text: "Logs Query Filter and Search Syntax"
 ---
 
 ## Overview
@@ -20,7 +23,7 @@ Whether you're using the Metrics Explorer, monitors, or dashboards to query metr
 
 {{< img src="metrics/advanced-filtering/tags.png" alt="Filter with tags" style="width:80%;" >}}
 
-You can also perform advanced filtering with Boolean or Wildcard tag value filters.
+You can also perform advanced filtering with Boolean or Wildcard tag value filters. For queries outside of metrics data such as logs, traces, Network Monitoring, Real User Monitoring, Synthetics, or Security, see the [Log Search Syntax documentation][1] for configuration.
 
 ### Boolean filtered queries 
 
@@ -38,7 +41,7 @@ When including or excluding multiple tags:
 * Include uses `AND` logic
 * Exclude uses `OR` logic
 
-For more information on tags, see the guide for [Getting Started Using Tags][1].
+For more information on tags, see the [Getting Started With Using Tags][2] guide.
 
 **Note:** Symbolic boolean syntax (`!`, `,`) cannot be used with functional syntax operators (`NOT`, `AND`, `OR`, `IN`, `NOT IN`). The following query is considered _invalid_: 
 `avg:mymetric{env:prod AND !region:us-east}`
@@ -93,4 +96,5 @@ sum:kubernetes.pods.running{service:*-canary} by {service}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/tagging/using_tags/
+[1]: /logs/explorer/search_syntax/
+[2]: /getting_started/tagging/using_tags/
