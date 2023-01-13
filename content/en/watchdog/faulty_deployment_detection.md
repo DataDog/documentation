@@ -11,7 +11,14 @@ When Watchdog finds that a currently active version is faulty, this is indicated
 
 {{< img src="watchdog/faulty_deployment.png" alt="The APM services page showing the yellow banner at the top and deployments table at the bottom" >}}
 
-Click **View Details** in the yellow banner to open a slide-out panel with additional information about the faulty deployment. This view provides details about the faulty deployment, which can include graphs of error rate increases, the error type of newly detected errors, the affected endpoint, and the HTTP status code. This view can also be accessed by clicking on any version in the Deployments table. The screenshot below gives an example of this detailed view, in which the error type `db.utils.OperationalError` is affecting the ` /inventory` endpoint, resulting in HTTP status code `(500)`.
+Click **View Details** in the banner to open a slide-out panel with additional information about the faulty deployment. This view provides details about the faulty deployment, which can include the following:
+
+- Graphs of error rate increases
+- The error type of newly detected errors
+- The affected endpoint
+- The HTTP status code
+
+This view can also be accessed by clicking on any version in the Deployments table. The screenshot below gives an example of this detailed view, in which the error type `db.utils.OperationalError` is affecting the ` /inventory` endpoint, resulting in HTTP status code `(500)`.
 
 {{< img src="watchdog/faulty_deployment_details.png" alt="The faulty deployment tracking details panel" >}}
 
