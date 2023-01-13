@@ -92,7 +92,7 @@ Click **New Reference Table +**, then add a name, select AWS S3, fill out all fi
 
 {{% tab "Azure storage" %}}
 
-1. If you haven't already, set up the [Azure integration][1] within the subscription that holds the storage account from which you want to import your Reference Table. This involves [creating an app registration that Datadog can use][2] to integrate with.
+1. If you haven't already, set up the [Azure integration][1] within the subscription that holds the storage account from which you want to import your Reference Table. This involves [creating an app registration that Datadog can][2] integrate with.
 2. In the Azure Portal, select the storage account that stores your Reference Table files.
 3. Within your storage account, navigate to **Access Control (IAM)** and select **Add** > **Add Role Assignment**.
 4. Input and select the **Storage Blob Data Reader** Role. The [Storage Blob Data Reader role][3] allows Datadog to read and list storage containers and blobs.
