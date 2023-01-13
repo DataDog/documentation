@@ -1,5 +1,5 @@
 ---
-title: Compliance Frameworks
+title: Compliance Reports
 kind: documentation
 aliases:
   - /security_platform/cspm/frameworks_and_benchmarks
@@ -42,37 +42,28 @@ Datadog also provides Datadog Security Labs, a set of recommendations developed 
 
 View a high-level overview of your compliance posture for each framework on the CSPM [Overview][20] page.
 
-- **Framework Overview**: A detailed compliance report that gives you insight into which controls are failing in your environment, along with additional details about the misconfigured resources.
+- **Framework Overview**: A detailed compliance report that gives you insight into which rules are failing in your environment, along with details about the misconfigured resources.
 - **Explore Resources**: A filtered view of the **Findings** page that shows resources with findings for the selected framework.
 - **Configure Rules**: Customize how your environment is scanned and set notification targets by modifying the detection rules for each framework.
 
 {{< img src="security/cspm/frameworks_and_benchmarks/compliance-reports-overview.png" alt="View a high-level overview of your compliance posture on the overview page" style="width:100%;">}}
 
-## Compliance reports
+## View a detailed compliance report
 
-At the top of the report 
+Compliance reports give you 
 
-The summary at the top of the report provides a 
+insight into which controls are failing in your environment, along with details about the misconfigured resources.
+all rules associated with a framework
+how they score against different framework requirements and rules.
+most critical rules that require immediate attention
 
-such as the number of rules with Pass/Fail findings, the top three high-severity rule failures, and a detailed rules breakdown that shows the percentage of rules with Fail findings for each severity, as well as the number of impacted resources. You can also explore your past posture with the time selector, and download a PDF copy of the report.
-
-**TASKS**
-
-Access/view compliance reports on CSPM homepage
-- Framework "report" overview
-    - Explore past posture with time picker
-    - Export to PDF
-    - Top 3 high severity rule failures
-    - Rules breakdown
-    - Rules listed. Click on one rule to see a full breakdown of resources.
-- Explore resources (?)
-- Configure rules for a given framework
+The summary at the top of the report shows the number of rules with Pass/Fail findings, the top three high-severity rule failures, and a detailed breakdown of the rules based on severity. You can also explore your past posture with the time selector, and download a PDF copy of the report.
 
 {{< img src="security/cspm/frameworks_and_benchmarks/report-2.png" alt="Set a findings time window using the dropdown" style="width:100%;">}}
 
-placeholder sentence.
+Select a rule to view details about the misconfigured resources, the rule description, its framework or industry benchmark mapping, and suggested remediation steps.
 
-{{< img src="security/cspm/frameworks_and_benchmarks/failed-finding.png" alt="Set a findings time window using the dropdown" style="width:80%;">}}
+{{< img src="security/cspm/frameworks_and_benchmarks/failed-finding.png" alt="Set a findings time window using the dropdown" style="width:75%;">}}
 
 ## Further reading
 
