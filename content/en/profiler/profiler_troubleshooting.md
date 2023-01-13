@@ -223,9 +223,9 @@ For further help with this issue, [contact support][2] and include the output of
 
 ## Frames omitted when backtraces are very deep
 
-The Ruby profiler truncates deep backtraces when collecting profiling data. Truncated backtraces are missing some of their caller functions making it impossible to link them to the root call frame. As a result, truncated backtraces are grouped together under a "N frames omitted" frame.
+The Ruby profiler truncates deep backtraces when collecting profiling data. Truncated backtraces are missing some of their caller functions, making it impossible to link them to the root call frame. As a result, truncated backtraces are grouped together under a `N frames omitted` frame.
 
-The maximum depth can be increased using the `DD_PROFILING_MAX_FRAMES` environment variable, or via code:
+You can increase the maximum depth with the `DD_PROFILING_MAX_FRAMES` environment variable, or in code:
 
 ```ruby
 Datadog.configure do |c|
