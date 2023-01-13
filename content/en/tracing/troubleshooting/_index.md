@@ -126,6 +126,13 @@ kubectl exec -it <agent-pod-name> -c trace-agent -- agent flare <case-id> --loca
 
 ## Service naming convention issues
 
+tk add description tk
+
+### Put ENV tag values into service names
+
+By default, the environment (env) is the primary tag for Datadog APM.
+
+{{< img src="/tracing/troubleshooting/troubleshooting-service-naming-convention-issues-1.png" alt="tk" style="width:100%;" >}}
 
 ## Further Reading
 
