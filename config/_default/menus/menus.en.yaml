@@ -1323,7 +1323,7 @@ main:
     identifier: tracing_trace_collection
     weight: 2
   - name: Instrumenting with Datadog Tracing Libraries
-    url: tracing/trace_collection/dd_libraries/java/
+    url: tracing/trace_collection/dd_libraries/
     parent: tracing_trace_collection
     identifier: tracing_dd_libraries
     weight: 101
@@ -1373,7 +1373,7 @@ main:
     identifier: tracing_ddlib_dotnet_framework
     weight: 109
   - name: Library Compatibility
-    url: tracing/trace_collection/compatibility/java/
+    url: tracing/trace_collection/compatibility/
     parent: tracing_trace_collection
     identifier: tracing_compatibility
     weight: 102
@@ -1423,7 +1423,7 @@ main:
     identifier: tracing_compatibility_dotnet_framework
     weight: 109
   - name: Library Configuration
-    url: tracing/trace_collection/library_config/java/
+    url: tracing/trace_collection/library_config/
     parent: tracing_trace_collection
     identifier: tracing_library_config
     weight: 103
