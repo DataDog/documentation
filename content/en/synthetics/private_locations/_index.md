@@ -43,6 +43,10 @@ Your private location worker pulls your test configurations from Datadog’s ser
 
 ## Prerequisites
 
+### Continuous Testing
+
+In order to use private locations for [Continuous Testing tests][23], you need v1.27.0 or later.
+
 ### Docker
 
 Private locations are Docker containers that you can install anywhere inside your private network. You can access the [private location worker image][3] on Google Container Registry. It can run on a Linux-based OS or Windows OS if the [Docker engine][4] is available on your host and can run in Linux containers mode.
