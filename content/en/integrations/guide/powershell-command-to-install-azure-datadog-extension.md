@@ -1,6 +1,8 @@
 ---
 title: Commands to install the Azure Datadog Extension
 kind: faq
+aliases:
+  - "/integrations/guide/powershell-command-to-install-azure-datadog-extension"
 ---
 
 Datadog provides an Azure extension to assist with Agent deployment on Azure instances:
@@ -97,8 +99,8 @@ This example shows how to specify a configuration for the Datadog Agent to use.
 az vm extension set --publisher "Datadog.Agent" --name "DatadogLinuxAgent" --version 6.0 --settings '{"site":"datadoghq.com", "agentVersion":"7.40.0", "agentConfiguration":"https://<CONFIGURATION_BLOB>.blob.core.windows.net/<FILE_PATH>.zip", "agentConfigurationChecksum":"<SHA256_CHECKSUM>"}' --protected-settings '{"api_key":"<YOUR_DATADOG_API_KEY>"}' --no-auto-upgrade-minor-version
 ```
 
-[1]: https://learn.microsoft.com/en-us/cli/azure/vm/extension
 
+[1]: https://learn.microsoft.com/en-us/cli/azure/vm/extension
 {{% /tab %}}
 {{< /tabs >}}
 
