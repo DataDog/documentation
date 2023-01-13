@@ -124,6 +124,9 @@ kubectl exec -it <agent-pod-name> -c trace-agent -- agent flare <case-id> --loca
 
     Knowing what versions are being used allows us to ensure integrations are supported in our [Compatiblity Requirements][15] section, check for known issues, or to recommend a tracer or language version upgrade if it will address the problem.
 
+## Service naming convention issues
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
