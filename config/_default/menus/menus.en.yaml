@@ -1588,7 +1588,7 @@ main:
     identifier: tracing_trace_metrics
     weight: 201
   - name: Runtime Metrics
-    url: tracing/metrics/runtime_metrics/
+    url: tracing/metrics/runtime_metrics/java/
     parent: tracing_metrics
     identifier: tracing_runtime_metrics
     weight: 202
@@ -1892,7 +1892,7 @@ main:
     parent: apm_heading
     weight: 145000
   - name: Enabling the Profiler
-    url: profiler/enabling/
+    url: profiler/enabling/java/
     parent: profiler
     identifier: profiler_enabling
     weight: 1
