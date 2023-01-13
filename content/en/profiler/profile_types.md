@@ -176,6 +176,9 @@ Allocations (beta for .NET 6+ only)
 Lock (beta for .NET 5+ only)
 : The number of times threads are waiting for a lock and for how long.
 
+Live Heap (beta for .NET 7+ only)
+: A subset of the allocated objects (with their class name) that are still in memory and for how long.
+
 [1]: /profiler/enabling/dotnet/#requirements
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}

@@ -44,7 +44,7 @@ Supported .NET runtimes (64-bit applications)
 .NET 6<br/>
 .NET 7
 <div class="alert alert-warning">
-  <strong>Note:</strong> The beta for lock contention is only available for .NET 5+ and only in .NET 6+ for allocation profiling.
+  <strong>Note:</strong> The beta for lock contention is only available for .NET 5+, only in .NET 6+ for allocation profiling and .NET 7+ is required for live heap profiling.
 </div>
 
 Supported languages
@@ -344,6 +344,7 @@ You can configure the profiler using the following environment variables. Note t
 | `DD_PROFILING_EXCEPTION_ENABLED` | Boolean        | If set to `true`, enables the Exceptions profiling (beta). Defaults to `false`.  |
 | `DD_PROFILING_ALLOCATION_ENABLED` | Boolean        | If set to `true`, enables the Allocations profiling (beta). Defaults to `false`.  |
 | `DD_PROFILING_LOCK_ENABLED` | Boolean        | If set to `true`, enables the Lock Contention profiling (beta). Defaults to `false`.  |
+| `DD_PROFILING_HEAP_ENABLED` | Boolean        | If set to `true`, enables the Live Heap profiling (beta). Defaults to `false`.  |
 
 <div class="alert alert-warning">
 <strong>Note</strong>: For IIS applications, you must set environment variables in the Registry (under <code>HKLM\System\CurrentControlSet\Services\WAS</code> and <code>HKLM\System\CurrentControlSet\Services\W3SVC</code> nodes) as shown in the <a href="?tab=windowsservices#installation">Windows Service tab, above</a>. The environment variables are applied for <em>all</em> IIS applications.
