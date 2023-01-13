@@ -283,6 +283,16 @@ If you've configured the profiler and don't see profiles in the profile search p
 
    5. Check the other HTTP codes for possible errors such as 403 for invalid API key.
 
+4. For missing CPU or Wall time profiles only, check the Datadog signal handler for stack walk has not been replaced:
+
+   1. Install gdb.
+
+   2. While the application is running, type the following command:
+      ```
+      gdb -p <process id> -batch -ex 'set $p = (struct sigaction *) malloc(sizeof (struct sigaction))' -ex 'print sigaction(10, 0, $p)' -ex 'print $p->__sigaction_handler.sa_handler' -ex "detach" -ex "quit
+      ```
+   3. TODO: check the output
+
 [1]: /profiler/enabling/dotnet/?tab=linux#configuration
 
 {{% /tab %}}
@@ -348,6 +358,27 @@ Otherwise, turn on [debug mode][1] and [open a support ticket][2] with the debug
 
 The profiler has a fixed overhead. The exact value can vary but this fixed cost means that the relative overhead of the profiler can be significant in very small containers. To avoid this situation, the profiler is disabled in containers with less than 1 core.
 You can override the 1 core threshold by setting `DD_PROFILING_MIN_CORES_THRESHOLD` environment variable to a value smaller than 1. For example, a value of `0.5` allows the profiler to run in a container with at least 0.5 cores.
+
+
+## Hang application on Linux
+
+It might happen that an application becomes unresponsive on Linux and CPU/Wall time samples are no more available. In that case, follow these steps:
+
+1. Open the `DD-DotNet-Profiler-Native-<Application Name>-<pid>` log file in the `/var/log/datadog/dotnet` folder.
+
+2. Look for `StackSamplerLoopManager::WatcherLoopIteration - Deadlock intervention still in progress for thread ...`. If this message is not present, the rest does not apply.
+
+3. If the message is found, it means that the stack walking mechanism could have deadlocked. To help investigate the issue, it is very helpful to dump the call stacks of all threads in the application. This is possible with a debugger such as gdb:
+
+   4. Install gdb.
+
+   5. Type the following command:
+      ```
+      gdb -p <process id> -batch -ex "thread apply all bt full" -ex "detach" -ex "quit"
+      ```
+
+   6. Send the resulting output to the Datadog support.
+
 
 [1]: /tracing/troubleshooting/#tracer-debug-logs
 [2]: /help/
