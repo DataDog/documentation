@@ -228,6 +228,11 @@ This is the escalation message @dev-team@company.com
 {{< /tabs >}}
 
 
+<div class="alert alert-info"><strong>Note</strong>: Any text or notification handle placed outside of the configured conditional variables will be invoked with every monitor state transition.  Any text or notification handle placed inside of configured conditional variables will only be invoked with that specific monitor state transition.
+</br></br>
+If you configure a conditional block for a state transition into `alert` or `warning` condition with an **@-notifications** handle, it is recommended to configure a corresponding `recovery` condition in order for a recovery notification to be sent to the handle.
+</div>
+
 ## Attribute and tag variables
 
 Use attribute and tag variables to render alert messages that are customized, informative, and specific to help people quickly understand the nature of the alert.
