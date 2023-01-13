@@ -91,7 +91,8 @@
       "count": 3,
       "interval": 10
     },
-    "tick_every": 60
+    "tick_every": 60,
+    "httpVersion": "http2"
   },
   "subtype": "http",
   "tags": [

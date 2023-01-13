@@ -26,7 +26,7 @@ if (window.DD_RUM) {
             trackInteractions: true,
             trackFrustrations: true,
             enableExperimentalFeatures: ["clickmap"],
-            sampleRate: 50,
+            sessionSampleRate: 100,
             sessionReplaySampleRate: 50,
             allowedTracingOrigins: [window.location.origin],
             internalAnalyticsSubdomain: 'iam-rum-intake'

@@ -200,6 +200,7 @@ Don't see your desired datastores? Datadog is continually adding additional supp
 | ----------------- | -------- | --------------- | ---------------------------------------------- |
 | Datanucleus JDO   | 4.0+     | Fully Supported | `datanucleus`                                  |
 | Dropwizard Views  | 0.7+     | Fully Supported | `dropwizard`, `dropwizard-view`                |
+| GraphQL         | 14.0+     | Fully Supported | `graphql-java`                  |
 | Hibernate         | 3.5+     | Fully Supported | `hibernate`, `hibernate-core`                  |
 | Hystrix           | 1.4+     | Fully Supported | `hystrix`                                      |
 | JSP Rendering     | 2.3+     | Fully Supported | `jsp`, `jsp-render`, `jsp-compile`             |

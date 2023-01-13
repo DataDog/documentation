@@ -16,17 +16,24 @@ When you [write custom rules for CSPM][1], you specify the resource types that a
     {{< nextlink href="/security/cspm/custom_rules/aws_dynamodb/" >}}<code>aws_dynamodb</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/aws_ebs_snapshot/" >}}<code>aws_ebs_snapshot</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/aws_ebs_volume/" >}}<code>aws_ebs_volume</code>{{< /nextlink >}}
+    {{< nextlink href="/security/cspm/custom_rules/aws_ec2_instance/" >}}<code>aws_ec2_instance</code>{{< /nextlink >}}
+    {{< nextlink href="/security/cspm/custom_rules/aws_elasticache/" >}}<code>aws_elasticache</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/aws_eks_cluster/" >}}<code>aws_eks_cluster</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/aws_iam_credential_report/" >}}<code>aws_iam_credential_report</code>{{< /nextlink >}}
+    {{< nextlink href="/security/cspm/custom_rules/aws_iam_policy/" >}}<code>aws_iam_policy</code>{{< /nextlink >}}
+    {{< nextlink href="/security/cspm/custom_rules/aws_iam_role/" >}}<code>aws_iam_role</code>{{< /nextlink >}}
+    {{< nextlink href="/security/cspm/custom_rules/aws_iam_user/" >}}<code>aws_iam_user</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/aws_iam_server_certificate/" >}}<code>aws_iam_server_certificate</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/aws_kms/" >}}<code>aws_kms</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/aws_lambda_function/" >}}<code>aws_lambda_function</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/aws_lambda_policy_statement/" >}}<code>aws_lambda_policy_statement</code>{{< /nextlink >}}
+    {{< nextlink href="/security/cspm/custom_rules/aws_network_acl/" >}}<code>aws_network_acl</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/aws_rds_db_snapshot/" >}}<code>aws_rds_db_snapshot</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/aws_rds_instance/" >}}<code>aws_rds_instance</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/aws_redshift_cluster/" >}}<code>aws_redshift_cluster</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/aws_s3_account_public_access_block/" >}}<code>aws_s3_account_public_access_block</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/aws_security_group/" >}}<code>aws_security_group</code>{{< /nextlink >}}
+    {{< nextlink href="/security/cspm/custom_rules/aws_sns_topic/" >}}<code>aws_sns_topic</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/aws_vpc_endpoint_policy_statement/" >}}<code>aws_vpc_endpoint_policy_statement</code>{{< /nextlink >}}
 {{< /whatsnext >}}
 
