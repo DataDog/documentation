@@ -42,8 +42,8 @@ composite build as their last build are ignored by the plugin.
    * `datadog.ci.enabled`: having as value `true` (`false`
    can be used to disable the plugin for a specific project).
 
-   These configuration parameters can be added either at TeamCity subprojects level
-   or at the [TeamCity Root Project][10] level. When added at the Root project level, they are propagated
+   These configuration parameters can be added either to TeamCity subprojects
+   or to the [TeamCity Root Project][10]. When added to the Root project, they are propagated
    to all the subprojects. For example, to enable the plugin for all projects, `datadog.ci.enabled` can be added with
    value `true` to the Root Project. More information on defining configuration parameters
    are available in the [TeamCity Project Hierarchy][9] docs.
