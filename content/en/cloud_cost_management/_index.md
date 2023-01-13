@@ -4,7 +4,7 @@ kind: documentation
 aliases:
   - /infrastructure/cloud_cost_management
 further_reading:
-  - link: "https://docs.datadoghq.com/infrastructure/cloud_cost_management/"
+  - link: "https://www.datadoghq.com/blog/control-your-cloud-spend-with-datadog-cloud-cost-management/"
     tag: "Blog"
     text: "Gain visibility and control of your cloud spend with Datadog Cloud Cost Management"
 ---
@@ -145,7 +145,7 @@ The following out-of-the-box tags are also available for filtering and grouping 
 | `aws_product_family`         | The category for the AWS service being billed (for example, Compute or Storage).|
 | `aws_management_account_name`| The AWS management account name associated with the item.|
 | `aws_management_account_id`  | The AWS management account ID associated with the item.|
-| `aws_member_account_name`    | The AWS memmber account name associated with the item.|
+| `aws_member_account_name`    | The AWS member account name associated with the item.|
 | `aws_member_account_id`      | The AWS member account ID associated with the item.|
 | `aws_cost_type`              | The type of charge covered by this item (for example, Usage, or Tax).|
 | `aws_pricing_term`           | Whether the usage is Reserved, Spot, or On-Demand.|
