@@ -94,9 +94,7 @@ If a user's account is disabled, any application keys that the user created are 
 
 ## Transferring keys
 
-Due to security reasons, Datadog does not transfer API/application keys from one user to another. The recommended best practice is to keep track of API/application keys and rotate those keys once a user has left the company. This way, a user that has left the company no longer has access to your account and Datadog's API. Transferring the API/application key allows a user that no longer remains with the company to continue to send and receive data from the Datadog API. Customers have also asked to change the handle that the API/application keys are associated with. This, however, does not resolve the inherent issue: that a user that no longer remains with the company continues to have the ability to send and retrieve data from the Datadog API.
-
-Alternatively, organizations have asked whether they can create a “service account” with which to own API/application keys. There are many cases where it makes sense to use a “service account” to own API keys. That being said, it is important that this is more than just a shared account that everyone has access to. If you plan on using a “service account”, it is important to secure storage of the service account credentials (such as using a password manager) as well as the principle of least privilege. To prevent the accidental leakage of service account credentials, there should only be a small number of people who have access—ideally, only those who truly need to be able to maintain the account.
+Due to security reasons, Datadog does not transfer application keys from one user to another. If you need to share an application key, use a [service account][11].
 
 ## What to do if an API or Application key was exposed
 
@@ -133,3 +131,4 @@ Need help? Contact [Datadog support][10].
 [8]: /api/latest/key-management/#create-an-application-key-for-current-user
 [9]: /api/latest/service-accounts/
 [10]: /help/
+[11]: /account_management/org_settings/service_accounts/

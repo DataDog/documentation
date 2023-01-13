@@ -17,22 +17,22 @@ title: CSPM の概要
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">
-Cloud Security Posture Management は、現在このサイトでは利用できません。
+クラウドセキュリティポスチャ管理は、現在このサイトでは利用できません。
 </div>
 {{< /site-region >}}
 
-Cloud Security Posture Management (CSPM) は、クラウドリソースの現在および過去のセキュリティポスチャ (セキュリティ体制) のスムーズな評価と視覚化、監査エビデンス収集の自動化、攻撃に対するオーガニゼーションの脆弱性の原因となるコンフィギュレーションミスの検知などをサポートします。
+クラウドセキュリティポスチャ管理 (CSPM) は、お使いのクラウドリソースにおける現在および過去のセキュリティポスチャ (セキュリティ体制) のスムーズな評価と視覚化、監査エビデンス収集の自動化、攻撃に対するオーガニゼーションの脆弱性の原因となるコンフィギュレーションミスの検知などをサポートします。
 
-## クラウドリソースで CSPM を有効にする
+## クラウドリソースの CSPM を有効にする
 
-CSPM は、AWS、Azure、GCP、Docker、Kubernetesなどのクラウドプロバイダーとの既存の Datadog インテグレーションを利用して、エージェントレスなオンボーディングを提供します。CSPM の構成方法の詳細を見るには、お使いのクラウドプロバイダーを選択し、説明に従ってください。
+CSPM は、AWS、Azure、GCP、Docker、Kubernetes などのクラウドプロバイダーと既存の Datadog インテグレーションを使用して、エージェントレスオンボーディングを提供します。CSPM の構成方法の詳細については、クラウドプロバイダーを選択し、指示に従ってください。
 
 {{< tabs >}}
 {{% tab "AWS" %}}
 
 ### Datadog AWS インテグレーションのセットアップ
 
-[Amazon Web Services インテグレーション][1]のセットアップがまだの場合は、先にセットアップを行ってください。また、CSPM を利用する場合は、リソース収集のために[必要なアクセス許可][2]を追加する必要があります。
+まだの場合は、[Amazon Web Services インテグレーション][1]を設定します。CSPM の場合は、リソース収集に必要な[必要な権限][2]も追加する必要があります。
 
 ### AWS に対して CSPM を有効にする
 
@@ -43,13 +43,13 @@ CSPM は、AWS、Azure、GCP、Docker、Kubernetesなどのクラウドプロバ
 1. **Security** > **Setup & Configuration** に移動します。
 2. [アプリ内の説明][3]に従い、アカウントに対して CSPM を有効にします。
 3. **Setup & Configuration** > **Cloud Providers** タブで、**[AWS][4]** タイルをクリックします。
-4. AWS アカウントに対して CSPM を有効にするために、**Collect Resources** のトグルをオンにします。
+4. AWS アカウントで CSPM を有効にするには、**Collect Resources** のトグルをオンにします。
 
 #### AWS インテグレーションタイル
 
-1. AWS インテグレーションタイルで、AWS アカウントを 1 つ選択し、**Resource Collection** をクリックします。
-2. **Cloud Security Posture Management Collection** を選択し、CSPM のためのリソース収集を有効にします。
-3. **Save** をクリックします。
+1. AWS インテグレーションタイルで、AWS アカウントを選択し、**Resource Collection** をクリックします。
+2. CSPM のリソース収集を有効にするには、**Cloud Security Posture Management Collection** を選択します。
+3. **保存**をクリックします。
 
 **注**: CSPM を無効にするには、AWS アカウントに対して **Collect Resources** のトグルをオフにします。以前の所見およびホームページは引き続きアプリ内で利用可能となりますが、追加の費用が請求されることはありません。
 
@@ -58,13 +58,13 @@ CSPM は、AWS、Azure、GCP、Docker、Kubernetesなどのクラウドプロバ
 [3]: https://app.datadoghq.com/security/configuration
 [4]: https://app.datadoghq.com/security/configuration?sectionId=secureCloudEnvironment&secure-cloud-environment=amazon-web-services
 
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "Azure" %}}
 
 ### Datadog Azure インテグレーションのセットアップ
 
-[Microsoft Azure integration][1] のセットアップがまだの場合は、先にセットアップを行ってください。
+[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、セットアップします。
 
 ### Azure に対して CSPM を有効にする
 
@@ -80,22 +80,18 @@ CSPM は、AWS、Azure、GCP、Docker、Kubernetesなどのクラウドプロバ
 #### Azure インテグレーションタイル
 
 1. Azure インテグレーションタイルで、Azure アプリを 1 つ選択します。
-2. **Resource Collection** で、**Enable resource collection for Cloud Security Posture Management** (クラウドセキュリティポスチャ管理のためにリソースの収集を有効にする) のチェックボックスをオンにします。
+2. **Resource Collection** で、**Enable resource collection for Cloud Security Posture Management** のチェックボックスを選択します。
 3. **Update Configuration** をクリックします。
 
-**注**: CSPM を無効にするには、 Azure サブスクリプションに対して **CSPM Enabled** のトグルをオフにします。以前の所見およびホームページは引き続きアプリ内で利用可能となりますが、追加の費用が請求されることはありません。
+**注**: CSPM を無効にするには、Azure サブスクリプションに対して **CSPM Enabled** のトグルをオフにします。以前の所見およびホームページは引き続きアプリ内で利用可能となりますが、追加の費用が請求されることはありません。
 
 [1]: https://docs.datadoghq.com/ja/integrations/azure
 [2]: https://app.datadoghq.com/security/configuration
 [3]: https://app.datadoghq.com/security/configuration?sectionId=secureCloudEnvironment&secure-cloud-environment=azure
 
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "GCP" %}}
-
-<div class="alert alert-warning">
-CSPM の GCP 対応は公開ベータ版です。
-</div>
 
 ### Datadog GCP インテグレーションのセットアップ
 

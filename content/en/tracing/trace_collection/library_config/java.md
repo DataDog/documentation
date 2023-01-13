@@ -72,7 +72,7 @@ Hostname for where to send traces to. If using a containerized environment, conf
 `dd.trace.agent.port`
 : **Environment Variable**: `DD_TRACE_AGENT_PORT`<br>
 **Default**: `8126`<br>
-Port number the Agent is listening on for configured host.
+The port number the Agent is listening on for configured host. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `dd.trace.agent.port` or `dd.trace.agent.url` must match it.
 
 `dd.trace.agent.unix.domain.socket`
 : **Environment Variable**: `DD_TRACE_AGENT_UNIX_DOMAIN_SOCKET`<br>
@@ -82,7 +82,7 @@ This can be used to direct trace traffic to a proxy, to later be sent to a remot
 `dd.trace.agent.url`
 : **Environment Variable**: `DD_TRACE_AGENT_URL`<br>
 **Default**: `null`<br>
-The URL to send traces to. This can start with `http://` to connect using HTTP or with `unix://` to use a Unix Domain Socket. When set this takes precedence over `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`. Available for versions 0.65+.
+The URL to send traces to. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `dd.trace.agent.port` or `dd.trace.agent.url` must match it. The URL value can start with `http://` to connect using HTTP or with `unix://` to use a Unix Domain Socket. When set this takes precedence over `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`. Available for versions 0.65+.
 
 `dd.trace.agent.timeout`
 : **Environment Variable**: `DD_TRACE_AGENT_TIMEOUT`<br>
@@ -426,3 +426,4 @@ If multiple extraction styles are enabled extraction attempt is done on the orde
 [8]: /tracing/compatibility_requirements/java#disabling-integrations
 [9]: /integrations/java/?tab=host#metric-collection
 [10]: https://github.com/openzipkin/b3-propagation
+[13]: /agent/guide/network/#configure-ports
