@@ -62,7 +62,7 @@ Software licenses
 : SaaS licenses enable you to deliver and license software solutions to customers through the Datadog Marketplace.
 
 UI extensions or applications
-: An application (such as a [Datadog App][5]) with a tile-only listing on the Datadog Marketplace.
+: An application (such as a [Datadog App][5]) with a [tile-only listing][17] on the Datadog Marketplace.
 
 Professional services
 : [Professional services][18] enable you to offer your team's services for implementation, support, or management for a set period of time.
