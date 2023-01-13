@@ -88,7 +88,7 @@ DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose -f service-docker-compose-k8s
 
 3. Tag the container with the ECR destination:
    {{< code-block lang="sh" >}}
-docker tag docker_notes:latest <ECR_REGISTRY_URL>:notes{{< /code-block >}}
+docker tag docker-notes:latest <ECR_REGISTRY_URL>:notes{{< /code-block >}}
 
 4. Upload the container to the ECR registry:
    {{< code-block lang="sh" >}}
@@ -141,16 +141,16 @@ kubectl get nodes -o wide{{< /code-block >}}
 
 3. Open up another terminal and send API requests to exercise the app. The notes application is a REST API that stores data in an in-memory H2 database running on the same container. Send it a few commands:
 
-`curl <EXTERNAL_IP>:30080/notes`
+`curl '<EXTERNAL_IP>:30080/notes'`
 : `[]`
 
 `curl -X POST '<EXTERNAL_IP>:30080/notes?desc=hello'`
 : `{"id":1,"description":"hello"}`
 
-`curl <EXTERNAL_IP>:30080/notes?id=1`
+`curl '<EXTERNAL_IP>:30080/notes?id=1'`
 : `{"id":1,"description":"hello"}`
 
-`curl <EXTERNAL_IP>:30080/notes`
+`curl '<EXTERNAL_IP>:30080/notes'`
 : `[{"id":1,"description":"hello"}]`
 
 4. After you've seen the application running, stop it so that you can enable tracing on it:
@@ -207,7 +207,7 @@ Rebuild the image with tracing enabled using the [same steps as before](#build-a
 {{< code-block lang="sh" >}}
 aws ecr get-login-password --region us-east-1 | docker login --username <YOUR_AWS_USER> --password-stdin <USER_CREDENTIALS>
 DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose -f service-docker-compose-k8s.yaml build
-docker tag docker_notes:latest <ECR_REGISTRY_URL>:notes
+docker tag docker-notes:latest <ECR_REGISTRY_URL>:notes
 docker push <ECR_REGISTRY_URL>:notes{{< /code-block >}}
 
 Your application with tracing enabled is containerized and available for EKS clusters to pull.
@@ -230,16 +230,16 @@ Using [the same steps as before](#configure-the-application-locally-and-deploy),
 
 Run some curl commands to exercise the app:
 
-`curl <EXTERNAL_IP>:30080/notes`
+`curl '<EXTERNAL_IP>:30080/notes'`
 : `[]`
 
 `curl -X POST '<EXTERNAL_IP>:30080/notes?desc=hello'`
 : `{"id":1,"description":"hello"}`
 
-`curl <EXTERNAL_IP>:30080/notes?id=1`
+`curl '<EXTERNAL_IP>:30080/notes?id=1'`
 : `{"id":1,"description":"hello"}`
 
-`curl <EXTERNAL_IP>:30080/notes`
+`curl '<EXTERNAL_IP>:30080/notes'`
 : `[{"id":1,"description":"hello"}]`
 
 
@@ -345,7 +345,7 @@ kubectl delete -f notes-app.yaml{{< /code-block >}}
    {{< code-block lang="sh" >}}
 aws ecr get-login-password --region us-east-1 | docker login --username <YOUR_AWS_USER> --password-stdin <USER_CREDENTIALS>
 DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose -f service-docker-compose-k8s.yaml build
-docker tag docker_notes:latest <ECR_REGISTRY_URL>:notes
+docker tag docker-notes:latest <ECR_REGISTRY_URL>:notes
 docker push <ECR_REGISTRY_URL>:notes
 {{< /code-block >}}
 
@@ -368,17 +368,13 @@ Tracing a single application is a great start, but the real value in tracing is 
 
 The sample project includes a second application called `calendar` that returns a random date whenever it is invoked. The `POST` endpoint in the Notes application has a second query parameter named `add_date`. When it is set to `y`, Notes calls the calendar application to get a date to add to the note.
 
-1. Stop the previous deployment by running:
-   {{< code-block lang="sh" >}}
-kubectl delete -f notes-app.yaml{{< /code-block >}}
-
-2. Configure the `calendar` app for tracing by adding `dd-java-agent` to the startup command in the Dockerfile, like you previously did for the notes app. Open `calendar/Dockerfile.calendar.maven` and see that it is already downloading `dd-java-agent`:
+1. Configure the `calendar` app for tracing by adding `dd-java-agent` to the startup command in the Dockerfile, like you previously did for the notes app. Open `calendar/dockerfile.calendar.maven` and see that it is already downloading `dd-java-agent`:
 
    ```
    RUN curl -Lo dd-java-agent.jar https://dtdg.co/latest-java-tracer
    ```
 
-3. Within the same `calendar/dockerfile.calendar.maven` file, comment out the `ENTRYPOINT` line for running without tracing. Then uncomment the `ENTRYPOINT` line, which runs the application with tracing enabled:
+2. Within the same `calendar/dockerfile.calendar.maven` file, comment out the `ENTRYPOINT` line for running without tracing. Then uncomment the `ENTRYPOINT` line, which runs the application with tracing enabled:
 
    ```
    ENTRYPOINT ["java" , "-javaagent:../dd-java-agent.jar", "-Ddd.trace.sample.rate=1", "-jar" , "target/calendar-0.0.1-SNAPSHOT.jar"]
@@ -386,17 +382,15 @@ kubectl delete -f notes-app.yaml{{< /code-block >}}
 
    <div class="alert alert-warning"><strong>Note</strong>: Again, the flags, particularly the sample rate, are not necessarily appropriate for environments outside this tutorial. For information about what to use in your real environment, read <a href="#tracing-configuration">Tracing configuration</a>.</div>
 
-4. Build both applications and publish them to ECR:
+3. Build both applications and publish them to ECR. From the `docker` directory, run:
    {{< code-block lang="sh" >}}
 aws ecr get-login-password --region us-east-1 | docker login --username <YOUR_AWS_USER> --password-stdin <USER_CREDENTIALS>
-DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose -f service-docker-compose-k8s.yaml build
-docker tag docker_notes:latest <ECR_REGISTRY_URL>:notes
-docker tag docker_calendar:latest <ECR_REGISTRY_URL>:calendar
-docker push <ECR_REGISTRY_URL>:notes
+DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose -f service-docker-compose-k8s.yaml build calendar
+docker tag docker-calendar:latest <ECR_REGISTRY_URL>:calendar
 docker push <ECR_REGISTRY_URL>:calendar
 {{< /code-block >}}
 
-5. Open `kubernetes/calendar-app.yaml` and update the `image` entry with the URL for the ECR image, where you pushed the `calendar` app in the previous step:
+4. Open `kubernetes/calendar-app.yaml` and update the `image` entry with the URL for the ECR image, where you pushed the `calendar` app in the previous step:
    {{< code-block lang="yaml" >}}
     spec:
       containers:
@@ -405,30 +399,30 @@ docker push <ECR_REGISTRY_URL>:calendar
           imagePullPolicy: Always
 {{< /code-block >}}
 
-6. Deploy both `notes` and `calendar` apps, now with custom instrumentation, on the cluster:
+5. Deploy both `notes` and `calendar` apps, now with custom instrumentation, on the cluster:
    {{< code-block lang="sh" >}}
 kubectl create -f notes-app.yaml
 kubectl create -f calendar-app.yaml{{< /code-block >}}
 
-7. Using the method you used before, find the external IP of the `notes` app.
+6. Using the method you used before, find the external IP of the `notes` app.
 
-8. Send a POST request with the `add_date` parameter:
+7. Send a POST request with the `add_date` parameter:
 
 `curl -X POST '<EXTERNAL_IP>:30080/notes?desc=hello_again&add_date=y'`
 : `{"id":1,"description":"hello_again with date 2022-11-06"}`
 
-9. In the Trace Explorer, click this latest trace to see a distributed trace between the two services:
+8. In the Trace Explorer, click this latest trace to see a distributed trace between the two services:
 
    {{< img src="tracing/guide/tutorials/tutorial-java-container-distributed.png" alt="A flame graph for a distributed trace." style="width:100%;" >}}
 
    Note that you didn't change anything in the `notes` application. Datadog automatically instruments both the `okHttp` library used to make the HTTP call from `notes` to `calendar`, and the Jetty library used to listen for HTTP requests in `notes` and `calendar`. This allows the trace information to be passed from one application to the other, capturing a distributed trace.
 
-10. When you're done exploring, clean up all resources and delete the deployments:
-    {{< code-block lang="sh" >}}
+9. When you're done exploring, clean up all resources and delete the deployments:
+   {{< code-block lang="sh" >}}
 kubectl delete -f notes-app.yaml
 kubectl delete -f calendar-app.yaml{{< /code-block >}}
 
-    See [the documentation for EKS][19] for information about deleting the cluster.
+   See [the documentation for EKS][19] for information about deleting the cluster.
 
 ## Troubleshooting
 
