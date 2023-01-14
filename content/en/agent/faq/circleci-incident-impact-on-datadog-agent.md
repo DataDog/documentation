@@ -46,7 +46,7 @@ $ rpm -q gpg-pubkey-4172a230-55dd14f6
 
 ### Verifying if the key is used in the Datadog repo file
 
-In the default installations, the Datadog repo file can be found at:
+For default installations, the Datadog repo file can be found at:
 
 * `/etc/yum.repos.d/datadog.repo` on RHEL, CentOS, Rocky Linux, AlmaLinux, Amazon Linux, and Fedora
 * `/etc/zypp/repos.d/datadog.repo` on OpenSUSE and SLES
