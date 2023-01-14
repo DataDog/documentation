@@ -51,7 +51,7 @@ For default installations, the Datadog repo file can be found at:
 * `/etc/yum.repos.d/datadog.repo` on RHEL, CentOS, Rocky Linux, AlmaLinux, Amazon Linux, and Fedora
 * `/etc/zypp/repos.d/datadog.repo` on OpenSUSE and SLES
 
-If the repo file contains a reference to `DATADOG_RPM_KEY.public` under the `gpgkey` entry like some of these examples, your system trusts the affected key:
+If the repo file contains a reference to `DATADOG_RPM_KEY.public` under the `gpgkey` entry as in the following examples, your system trusts the affected key:
 
 * `https://s3.amazonaws.com/public-signing-keys/DATADOG_RPM_KEY.public`
 * `https://keys.datadoghq.com/DATADOG_RPM_KEY.public`
