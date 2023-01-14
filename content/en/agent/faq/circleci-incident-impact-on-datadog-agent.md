@@ -42,7 +42,7 @@ $ rpm -q gpg-pubkey-4172a230-55dd14f6
 ```
 
 * If the command runs successfully and prints `gpg-pubkey-4172a230-55dd14f6`, your system trusts the affected key.
-* If the command fails (it will exit with a non-0 exit code and output a message like `package gpg-pubkey-4172a230-55dd14f6 is not installed`), your system does not trust the affected key.
+* If the command fails (exiting with a non-0 exit code and outputting a message like `package gpg-pubkey-4172a230-55dd14f6 is not installed`), your system does not trust the affected key.
 
 ### Verifying if the key is used in the Datadog repo file
 
