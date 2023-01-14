@@ -66,7 +66,7 @@ Vous pouvez par exemple :
 - Consulter le graphique des taux d'erreurs/hits et le graphique des codes de réponse pour identifier les problèmes.
 - Accéder aux données de télémétrie associées, comme les traces et les logs.
 
-{{< img src="tracing/api_catalog/endpoint-details-pivot-to-traces.mp4" alt=<Cliquez sur un endpoint pour consulter le graphique des erreurs, et accédez aux traces associées pour mener l'enquête." video="true" >}}
+{{< img src="tracing/api_catalog/endpoint-details-pivot-to-traces.mp4" alt="Cliquez sur un endpoint pour consulter le graphique des erreurs, et accédez aux traces associées pour mener l'enquête." video="true" >}}
 
 Par défaut, les graphiques de performances sont filtrés en fonction des mêmes paramètres que sur la page API Catalog. Utilisez le sélecteur de période et les autres menus déroulants sur la page des détails pour modifier ces paramètres en fonction de vos besoins et de l'enquête.
 
