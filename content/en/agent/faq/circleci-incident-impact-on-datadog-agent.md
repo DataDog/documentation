@@ -96,7 +96,7 @@ Lines starting with `[ ERROR ]` should be reported to [Datadog Support][4] along
 
 * If your system uses Agent 7, there is no implication. Agent 7 packages were never signed with the affected key.
 * Your system will no longer be able to install Agent 6 < 6.14.0. We recommend upgrading to Agent 6 >= 6.14.0 or Agent 7.
-* If your system uses Agent 5, you will no longer be able to install Agent 5 <= 5.32.8. You will only be able to install Agent 5.32.9+, or you can upgrade to 6 >= 6.14.0 or Agent 7.
+* If your system uses Agent 5, you will no longer be able to install Agent 5 <= 5.32.8. You will only be able to install Agent 5.32.9 or later, or you can upgrade to 6 >= 6.14.0 or Agent 7.
 
 ## What Datadog is doing to mitigate the implications
 
