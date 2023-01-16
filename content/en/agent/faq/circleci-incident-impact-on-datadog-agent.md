@@ -63,7 +63,7 @@ If the repo file contains a reference to `DATADOG_RPM_KEY.public` under the `gpg
 
 ## Taking action
 
-Datadog recommends that all affected customers ensure that their systems *stop trusting the affected key*. If you find out that your system trusts the key based on at least one of the above criteria, follow the steps below.
+Datadog recommends that all affected customers ensure that their systems **stop trusting the affected key**. If you find out that your system trusts the key based on at least one of the above criteria, follow the steps below.
 
 ### Official automation tools and install methods
 
