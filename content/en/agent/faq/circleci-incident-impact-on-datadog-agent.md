@@ -11,10 +11,13 @@ On January 4th, 2023, Datadog was notified by CircleCI that they were investigat
 
 ## The affected key
 
-The impacted RPM GPG signing key has the fingerprint `60A389A44A0C32BAE3C03F0B069B56F54172A230`, and is accessible in [our signing keys location][2]. This key was historically used to sign Agent 5 releases, Agent 6 releases up to (and including) v6.13.0, DogStatsD 6 releases and DogStatsD 7 releases up to (and including) v7.23.1.
+The impacted RPM GPG signing key has the fingerprint `60A389A44A0C32BAE3C03F0B069B56F54172A230`, and is accessible in [our signing keys location][2]. This key was historically used to sign:
+
+* Agent 5 releases and Agent 6 releases up to (and including) v6.13.0 (`datadog-agent` package)
+* Standalone DogStatsD 6 releases and Standalone DogStatsD 7 releases up to (and including) v7.23.1 (`datadog-dogstatsd` package)
 
 <div class="alert alert-info">
-<strong>Note</strong>: Official Datadog repositories were <strong>not</strong> compromised. The signing key, if actually leaked, could be used to construct an RPM package that looks like it is from Datadog but it would not be enough to place such a package in our official package repositories. Installing a malicious package on a system would require that the attacker has root access to the system or that they can upload the package to a repository trusted by the system.
+<strong>Note</strong>: Official Datadog repositories were <strong>not</strong> compromised. The signing key, if actually leaked, could be used to construct an RPM package that looks like it is from Datadog but it would not be enough to place such a package in our official package repositories. A hypothetical attacker with the affected key would need to be able upload the constructed RPM package to a repository used by the system.
 </div>
 
 ## Am I affected?
@@ -78,7 +81,7 @@ Usage of old versions of automation tools like the Datadog Ansible role (see the
 
 ### Verify installed packages
 
-Out of an abundance of caution, for impacted users Datadog also recommends that you verify that all packages on your system signed by the affected key were built by Datadog. You can run [this script][3] to verify that:
+Out of an abundance of caution, Datadog also recommends that, on your impacted systems, you verify that all packages signed by the affected key were built by Datadog. You can run [this script][3] to verify that:
 
 ```bash
 $ curl -o /tmp/rpm_check.sh https://docs.datadoghq.com/resources/sh/rpm_check.sh && chmod +x /tmp/rpm_check.sh
@@ -96,7 +99,7 @@ Lines starting with `[ ERROR ]` should be reported to [Datadog Support][4] along
 
 * If your system uses Agent 7, there is no implication. Agent 7 packages were never signed with the affected key.
 * Your system will no longer be able to install Agent 6 < 6.14.0. We recommend upgrading to Agent 6 >= 6.14.0 or Agent 7.
-* Your system will no longer be able to install DogStatsD 6 and DogStatsD < 7.24.0. We recommend upgrading to DogStatsD >= 7.24.0.
+* Your system will no longer be able to install Standalone DogStatsD 6 and Standalone DogStatsD < 7.24.0 (`datadog-dogstatsd` packages). We recommend upgrading to Standalone DogStatsD >= 7.24.0.
 * If your system uses Agent 5, you will no longer be able to install Agent 5 <= 5.32.8. You will only be able to install Agent 5.32.9 or later, or you can upgrade to 6 >= 6.14.0 or Agent 7.
 
 ## What Datadog is doing to mitigate the implications
