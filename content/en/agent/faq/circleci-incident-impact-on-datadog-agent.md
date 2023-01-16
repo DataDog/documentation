@@ -17,7 +17,7 @@ The impacted RPM GPG signing key has the fingerprint `60A389A44A0C32BAE3C03F0B06
 * Standalone DogStatsD 6 releases and Standalone DogStatsD 7 releases up to and including v7.23.1 (`datadog-dogstatsd` package)
 
 <div class="alert alert-info">
-<strong>Note</strong>: Official Datadog repositories were <strong>not</strong> compromised. The signing key, if actually leaked, could be used to construct an RPM package that looks like it is from Datadog, but it would not be enough to place such a package in our official package repositories. To be effective, a hypothetical attacker with the affected key would need to be able to upload the constructed RPM package to a repository used by hosts.
+<strong>Note</strong>: Official Datadog repositories were <strong>not</strong> compromised. The signing key, if actually leaked, could be used to construct an RPM package that looks like it is from Datadog, but it would not be enough to place such a package in our official package repositories. To be effective, a hypothetical attacker with the affected key would need to be able to upload the constructed RPM package to a repository used by your hosts.
 </div>
 
 ## Finding affected hosts
@@ -53,17 +53,17 @@ If either one of these is identified as trusting the key, take the actions liste
 
 ### Prioritizing your search
 
-Because of the variety of ways packages can be installed and updated over time, Datadog recommends you check **all** RPM-based Linux hosts with a Datadog package installed. To help you prioritize which hosts to check first, consider the following guidance. The following scenarios are **more likely** to be vulnerable:
+Because of the variety of ways packages can be installed and updated over time, Datadog recommends you check **all** RPM-based Linux hosts with a Datadog package installed. To help you prioritize which hosts to check first, consider the following guidance. The following scenarios are **more likely** to be affected:
 
-* Agent v5 or v6.13.0 and earlier
+* Agent v5 or v6
 * Standalone DogStatsD v6 or v7.23.2 and earlier
 
-On RPM-based Linux hosts, the following scenarios are **less likely** to be vulnerable, but still possible:
+On RPM-based Linux hosts, the following scenarios are **less likely** to be affected, but still possible:
 
-* The Agent is v7+ or v6.14.0+.
+* Agent v7
 * Standalone DogStatsD v7.23.2+.
 
-The following scenarios are **not** vulnerable:
+The following scenarios are **not** affected:
 * The Agent was installed with Datadog packages on macOS, Windows, Debian, or Ubuntu.
 * The host uses the Container Agent.
 
@@ -85,7 +85,7 @@ Ensure that your hosts **stop trusting the affected key**. If the previous steps
 
 4. If `DATADOG_RPM_KEY.public` is still listed in the repo file, delete the key by removing the `gpgkey` line that ends with `DATADOG_RPM_KEY.public`. If this is the only `gpgkey` entry in your repo file, replace it with `https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public`. Read more in the section [Implications of no longer trusting the affected key](#implications-of-no-longer-trusting-the-affected-key).
 
-5. Out of an abundance of caution, verify that Datadog built the packages on the affected hosts signed by the affected key by running [this script][3]:
+5. Out of an abundance of caution, verify that Datadog built the packages signed by the affected key on the affected hosts by running [this script][3]:
 
    ```bash
    $ curl -o /tmp/rpm_check.sh https://docs.datadoghq.com/resources/sh/rpm_check.sh && chmod +x /tmp/rpm_check.sh
