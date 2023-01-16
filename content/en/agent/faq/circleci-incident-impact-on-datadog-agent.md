@@ -6,12 +6,12 @@ kind: faq
 On January 4th, 2023, Datadog was notified by CircleCI that they were investigating a [security incident][1] that may have led to leaking of stored secrets. Datadog identified a single secret stored in CircleCI that could theoretically be misused by a potential attacker, an old RPM GNU Privacy Guard (GPG) private signing key and its passphrase. This page documents the implications of the potential leak and the measures Datadog is taking to mitigate any risks to our customers.
 
 <div class="alert alert-info">
-<strong>Note</strong>: As of January 12th, 2023, Datadog has no indication that the key was actually leaked or misused, but we are still taking the following actions out of an abundance of caution.
+<strong>Note</strong>: As of January 16th, 2023, Datadog has no indication that the key was actually leaked or misused, but we are still taking the following actions out of an abundance of caution.
 </div>
 
 ## The affected key
 
-The impacted RPM GPG signing key has the fingerprint `60A389A44A0C32BAE3C03F0B069B56F54172A230`, and is accessible in [our signing keys location][2]. This key was historically used to sign Agent 5 releases and Agent 6 releases up to (and including) v6.13.0.
+The impacted RPM GPG signing key has the fingerprint `60A389A44A0C32BAE3C03F0B069B56F54172A230`, and is accessible in [our signing keys location][2]. This key was historically used to sign Agent 5 releases, Agent 6 releases up to (and including) v6.13.0, DogStatsD 6 releases and DogStatsD 7 releases up to (and including) v7.23.1.
 
 <div class="alert alert-info">
 <strong>Note</strong>: Official Datadog repositories were <strong>not</strong> compromised. The signing key, if actually leaked, could be used to construct an RPM package that looks like it is from Datadog but it would not be enough to place such a package in our official package repositories. Installing a malicious package on a system would require that the attacker has root access to the system or that they can upload the package to a repository trusted by the system.
@@ -96,6 +96,7 @@ Lines starting with `[ ERROR ]` should be reported to [Datadog Support][4] along
 
 * If your system uses Agent 7, there is no implication. Agent 7 packages were never signed with the affected key.
 * Your system will no longer be able to install Agent 6 < 6.14.0. We recommend upgrading to Agent 6 >= 6.14.0 or Agent 7.
+* Your system will no longer be able to install DogStatsD 6 and DogStatsD < 7.24.0. We recommend upgrading to DogStatsD >= 7.24.0.
 * If your system uses Agent 5, you will no longer be able to install Agent 5 <= 5.32.8. You will only be able to install Agent 5.32.9 or later, or you can upgrade to 6 >= 6.14.0 or Agent 7.
 
 ## What Datadog is doing to mitigate the implications
