@@ -65,17 +65,17 @@ If the repo file contains a reference to `DATADOG_RPM_KEY.public` under the `gpg
 
 Datadog recommends that all affected customers ensure that their systems *stop trusting the affected key*. If you find out that your system trusts the key based on at least one of the above criteria, follow the steps below.
 
-### Official Automation Tools and Install methods
+### Official automation tools and install methods
 
-If you have only ever used our official installation methods to manage your Datadog Agent setup, update to the latest released version of your tool/plugin to secure your machine (see the full list with updated versions in [What Datadog is doing to mitigate the implications](#what-datadog-is-doing-to-mitigate-the-implications)).
+If you have only ever used Datadog official installation methods to manage your Agent setup, update to the latest released version of your tool/plugin to secure your machine (see the full list with updated versions in [What Datadog is doing to mitigate the implications](#what-datadog-is-doing-to-mitigate-the-implications)).
 
 For automation tools, like the Datadog Ansible role, simply updating to the latest version will suffice. 
 
 For setups relying on the official install scripts, you will have to re-run the latest version of the install script to untrust the key and provision the updated repo files.
 
-Please note, remaining on older versions of these automation tools or plugins might reverse any remediation efforts you may put in place. If you can't yet update to the new versions that fix this, we recommend adding the [manual remediation steps](manual-action) outlined below to your automation tool runbooks, and ensure these run _after_ the datadog tools/plugins in your runbook order.
+Note, remaining on older versions of these automation tools or plugins might reverse any remediation efforts you may put in place. If you can't yet update to the new versions that fix this, the recommendation is to add the [manual remediation steps](manual-action) outlined below to your automation tool runbooks, and ensure these run _after_ the datadog tools/plugins in your runbook order.
 
-### Manual Action
+### Manual action
 
 If you have not used official installation methods exclusively, or you are not sure, or if you have to remain on older automation tool versions, you will need to take manual action. 
 
@@ -87,7 +87,7 @@ To delete the key from the RPM database and stop trusting it, run the following 
 $ sudo rpm --erase gpg-pubkey-4172a230-55dd14f6
 ```
 
-#### Clean-up your Datadog Repo File
+#### Clean-up your Datadog repo file
 
 To delete the key from the Datadog repo file, remove the `gpgkey` line that ends with `DATADOG_RPM_KEY.public`. If the affected `DATADOG_RPM_KEY.public` key was the only `gpgkey` entry in your repo file, replace it with `https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public`. Note that this has implications explained in the section [Implications of no Longer Trusting the Affected Key](#implications-of-no-longer-trusting-the-affected-key).
 
