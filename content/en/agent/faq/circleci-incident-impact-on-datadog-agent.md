@@ -77,7 +77,9 @@ To delete the key from the Datadog repo file, remove the `gpgkey` line that ends
 
 #### Usage of automation tools
 
-Usage of old versions of automation tools like the Datadog Ansible role (see the full list with updated versions in [What Datadog is doing to mitigate the implications](#what-datadog-is-doing-to-mitigate-the-implications)) might reverse the manual changes recommended above. If you can't yet update to the new versions that fix this, we recommend adding these manual changes to your automation tool runbooks.
+If you're using an automation tool or plugin, such as the Ansible Datadog role, update to the latest version (see the full list with updated versions in [What Datadog is doing to mitigate the implications](#what-datadog-is-doing-to-mitigate-the-implications))).
+
+Older versions of these automation tools or plugins might reverse the manual steps recommended above. If you can't yet update to the new versions that fix this, we recommend adding these manual steps to your automation tool runbooks.
 
 ### Verify installed packages
 
