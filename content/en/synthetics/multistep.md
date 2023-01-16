@@ -235,7 +235,7 @@ To create a local variable, click **Create a Local Variable** at the top right h
 : Generates an alphanumeric string with `n` characters.
 
 `{{ uuid }}`
-: Generates a UUID -Universally Unique IDentifier- version 4.
+: Generates a version 4 universally unique identifier (UUID).
 
 `{{ date(n unit, format) }}`
 : Generates a date in one of Datadog's accepted formats with a value corresponding to the UTC date the test is initiated at + or - `n` units.
