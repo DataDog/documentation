@@ -22,11 +22,11 @@ The impacted RPM GPG signing key has the fingerprint `60A389A44A0C32BAE3C03F0B06
 
 ## Am I affected?
 
-You don't need to take any action if:
+You don't need to take any action if you:
 
-* You are installing the Agent with Datadog packages on macOS, Windows, Debian/Ubuntu
-* You are using the Container Agent
-* You are on an RPM-based Linux distribution (RHEL, CentOS, Rocky Linux, AlmaLinux, Amazon Linux, SUSE/SLES, Fedora), but your system doesn't trust the affected GPG key (see below on how to check)
+* Install the Agent with Datadog packages on macOS, Windows, Debian/Ubuntu.
+* Use the Container Agent.
+* Are on an RPM-based Linux distribution (RHEL, CentOS, Rocky Linux, AlmaLinux, Amazon Linux, SUSE/SLES, Fedora), but your system doesn't trust the affected GPG key (see below on how to check).
 
 Datadog recommends you take action if:
 
