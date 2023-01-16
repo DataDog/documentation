@@ -73,7 +73,7 @@ For automation tools, like the Datadog Ansible role, simply updating to the late
 
 For setups relying on the official install scripts, you will have to re-run the latest version of the install script to untrust the key and provision the updated repo files.
 
-Note, remaining on older versions of these automation tools or plugins might reverse any remediation efforts you may put in place. If you can't yet update to the new versions that fix this, the recommendation is to add the [manual remediation steps](manual-action) outlined below to your automation tool runbooks, and ensure these run _after_ the datadog tools/plugins in your runbook order.
+Note, remaining on older versions of these automation tools or plugins might reverse any remediation efforts you may put in place. If you can't yet update to the new versions that fix this, the recommendation is to add the [manual remediation steps](#manual-action) outlined below to your automation tool runbooks, and ensure these run _after_ the datadog tools/plugins in your runbook order.
 
 ### Manual action
 
