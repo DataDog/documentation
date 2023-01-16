@@ -67,7 +67,7 @@ The following tags are shown in the root span as well as the relevant job span i
 
 The resulting pipeline looks as follows:
 
-{{< img src="ci/buildkite-custom-tags.png" alt="Buildkite pipeline trace with custom tags" style="width:80%;">}}
+{{< img src="ci/buildkite-custom-tags.png" alt="Buildkite pipeline trace with custom tags" style="width:100%;">}}
 
 Any metadata with a key starting with `dd-metrics.` and containing a numerical value will be set as
 a metric tag that can be used to create numerical measures. You can use the `buildkite-agent meta-data set`
