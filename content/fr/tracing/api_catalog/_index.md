@@ -105,7 +105,7 @@ Lorsque vous ajoutez un tag, il apparaît dans la liste des facettes à gauche d
 
 Étant donné qu'il s'appuie automatiquement sur les données APM, l'API Catalog ne nécessite aucune configuration et peut simplement être activé dans une instance APM existante. Seuls les services instrumentés par APM et les bibliothèques prises en charge seront visibles dans le catalogue.
 
-Pour configurer votre liste d'endpoints dans l'API Catalog :
+Pour configurer votre liste d'endpoints dans l'API Catalog:
 - [Instrumentez les services][3] avec APM.
 - [Définissez les personnes responsables du service][2] via le Service Catalog.
 
