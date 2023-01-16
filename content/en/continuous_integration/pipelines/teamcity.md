@@ -63,16 +63,17 @@ correctly, these logs can be checked to get additional context on what might be 
 
 ## Git user information
 
-The plugin retrieves the Git author and committer information based on the [TeamCity username style][7].
-TeamCity has two username styles that do not contain the user email in them: "UserId" or "Author Name". When
-one of these styles is used, the plugin automatically generates an email for the user by adding `@Teamcity`
-at the end of the username.
+The plugin retrieves the Git author/committer name and email based on the [TeamCity username style][7].
+In this regard, we highly recommend to use either "Author Name and Email" or "Author Email" username styles, as they
+provide information about the user email. When one of the other username styles is used ("UserId" or "Author Name"),
+the plugin automatically generates an email for the user by adding `@Teamcity` at the end of the username.
 For example, the plugin generates `john.doe@Teamcity` as the Git author email when the "UserId" username
-style is used and the git author username is `john.doe`.
+style is used and the git author username is `john.doe`. The username style is defined for [VCS Roots][11],
+and can be modified in the VCS Root settings.
 
 <div class="alert alert-info"><strong>Note:</strong> The git author email is used for
 <a href="https://www.datadoghq.com/pricing/?product=ci-visibility#ci-visibility" target="_blank">billing</a> purposes,
-therefore there might be cost implications when either "UserId" or "Author Name" are used as TeamCity username styles.
+therefore there might be cost implications when username styles not providing email ("UserId" or "Author Name") are used.
 Reach out to us if you have any questions about your use case.</div>
 
 ## Plugin repository
@@ -93,3 +94,4 @@ The [source code][8] of the Datadog CI Integration plugin is open source under t
 [8]: https://github.com/DataDog/ci-teamcity-plugin
 [9]: https://www.jetbrains.com/help/teamcity/project.html#Project+Hierarchy
 [10]: https://www.jetbrains.com/help/teamcity/project.html#Root+Project
+[11]: https://www.jetbrains.com/help/teamcity/vcs-root.html
