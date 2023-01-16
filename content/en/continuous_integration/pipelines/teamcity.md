@@ -35,7 +35,8 @@ Administration -> Plugins -> Browse Plugin Repository.
 2. For the integration to work properly, a [TeamCity composite build][6] must be added as the last build
 of the build chain (this step can be skipped if there is already one). Namely, this build must have
 a dependency on the current last build of the chain and no other builds depending on it. Build chains not having a
-composite build as their last build are ignored by the plugin. Below is an example of an expected build chain:
+composite build as their last build are ignored by the plugin. Below is an example of an expected build chain,
+in which "Aggregating Results" is the last composite build:
 {{< img src="ci/teamcity_build_chain.png" alt="TeamCity build chain with composite build at the end" style="width:90%;">}}
 
 3. The following configuration parameters need to be present for the TeamCity projects:
