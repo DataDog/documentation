@@ -1,8 +1,7 @@
 ---
 is_beta: false
 kind: faq
-title: Pourquoi mon bouton « Save » est-il grisé lorsque je configure des tags de
-  métriques ?
+title: Pourquoi mon bouton « Save » est-il grisé lorsque je configure des tags de métriques ?
 ---
 Il arrive parfois qu'une configuration suggérée génère un volume de métriques custom indexées plus élevé que le volume initial de métriques ingérées. Le bouton « Save » est intentionnellement grisé dans les cas peu fréquents où il est plus rentable de ne pas du tout configurer une métrique et de ne pas utiliser Metrics Without Limits™.
 
@@ -15,7 +14,7 @@ Le nombre de métriques custom indexées obtenues pour votre configuration Metri
 **Exemple**
 Supposons que vous souhaitiez utiliser Metrics without Limits™ pour réduire la cardinalité de la métrique `shopist.basket.size`. 
 
-{{< img src="metrics/faq/all-tags.jpg" alt="Configuration « All tags »>}}
+{{< img src="metrics/faq/all-tags.jpg" alt="Configuration « All tags »">}}
 
 En partant du principe que `shopist.basket.size` transmet des valeurs pour quatre combinaisons de valeurs de tag, par exemple {host: a, region: us, env: prod}, cela signifie que `shopist.basket.size` émet initialement **quatre métriques custom**, comme le montre le schéma suivant :
 
