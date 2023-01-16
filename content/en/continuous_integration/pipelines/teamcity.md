@@ -35,7 +35,10 @@ Administration -> Plugins -> Browse Plugin Repository.
 2. For the integration to work properly, a [TeamCity composite build][6] must be added as the last build
 of the build chain (this step can be skipped if there is already one). Namely, this build must have
 a dependency on the current last build of the chain and no other builds depending on it. Build chains not having a
-composite build as their last build are ignored by the plugin.
+composite build as their last build are ignored by the plugin. Below is an example of an expected build chain:
+
+{{< img src="ci/teamcity_build_chain.png" alt="TeamCity build chain with composite build at the end" style="width:100%;">}}
+
 3. The following configuration parameters need to be present for the TeamCity projects:
    * `datadog.ci.api.key`: having as value your [Datadog API Key][2].
    * `datadog.ci.site`: having as value {{< region-param key="dd_site" code="true" >}}.
@@ -53,7 +56,7 @@ composite build as their last build are ignored by the plugin.
 
 The [Pipelines][3] and [Pipeline Executions][4] pages populate with data after the pipelines finish.
 
-**Note**: The Pipelines page shows data for only the default branch of each repository.
+**Note**: The Pipelines page shows data for only the [default branch][12] of each repository.
 
 ## Troubleshooting
 
@@ -95,3 +98,4 @@ The [source code][8] of the Datadog CI Integration plugin is open source under t
 [9]: https://www.jetbrains.com/help/teamcity/project.html#Project+Hierarchy
 [10]: https://www.jetbrains.com/help/teamcity/project.html#Root+Project
 [11]: https://www.jetbrains.com/help/teamcity/vcs-root.html
+[12]: https://docs.datadoghq.com/continuous_integration/troubleshooting/#the-default-branch-is-not-correct
