@@ -87,9 +87,9 @@ Pour extraire les configurations de test et renvoyer les résultats de test, le 
 
 {{< site-region region="gov" >}}
 
-| Port | Endpoint                         | Description                                                                                                                                                                                                                                                                          |
-|------|----------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 443  | `intake.synthetics.ddog-gov.com` | Utilisé par l'emplacement privé pour extraire les configurations de test et renvoyer les résultats de test à Datadog à l'aide d'un protocole interne basé sur le [protocole Signature Version 4 d'AWS][1]. Pour les versions >= 1.32.0, ces requêtes sont conformes à la norme FIPS. |
+| Port | Endpoint                                                                                             | Description                                                                                                                             |
+| ---- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| 443  | `intake.synthetics.ddog-gov.com` | Utilisé par l'emplacement privé pour extraire les configurations de test et renvoyer les résultats de test à Datadog à l'aide d'un protocole interne basé sur le [protocole Signature Version 4 d'AWS][1]. |
 
 [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 
