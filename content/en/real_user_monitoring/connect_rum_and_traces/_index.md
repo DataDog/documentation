@@ -66,9 +66,9 @@ Use frontend data from RUM, as well as backend, infrastructure, and log informat
     To connect RUM to Traces, you need to specify your browser application in the `service` field.
 
     `allowedTracingUrls` will match against the full URL (`<scheme>://<host>[:<port>]/<path>[?<query>][#<fragment>]`). It accepts the following types:
-      - `string`: evaluated using startsWith, so `https://api.example.com` will match `https://api.example.com/v1/resource`.
-      - `RegExp`: evaluated against the full URL
-      - `function`: evaluated with the full URL as parameter. Returning a `boolean` set to `true` indicates a match.
+      - `string`: matches any URL starting with the provided value, so `https://api.example.com` will match `https://api.example.com/v1/resource`.
+      - `RegExp`: executes a test with the provided RegExp and the URL
+      - `function`: evaluates with the URL as parameter. Returning a `boolean` set to `true` indicates a match.
 
 3.  _(Optional)_ Configure the `tracingSampleRate` initialization parameter to keep a defined percentage of the backend traces. If not set, 100% of the traces coming from browser requests are sent to Datadog. To keep 20% of backend traces:
 
@@ -232,17 +232,17 @@ Datadog uses the distributed tracing protocol and sets up the following HTTP hea
 {{% tab "W3C Trace Context" %}}
 `traceparent: [version]-[trace id]-[parent id]-[trace flags]`
 : version: The current specification assumes version is set to 00.
-: trace id: 128 bits trace ID, expressed as padded hexadecimal
-: parent id: 64 bits span ID, expressed as padded hexadecimal
+: trace id: 128 bits trace ID, hexadecimal on 32 characters (The source trace id is 64 bits to keep compatibility with APM)
+: parent id: 64 bits span ID, hexadecimal on 16 characters
 : trace flags: Sampled (01) or not sampled (00)
 
 Example:
-: `traceparent: 00-0af7651916cd43dd8448eb211c80319c-b7ad6b7169203331s-01`
+: `traceparent: 00-00000000000000008448eb211c80319c-b7ad6b7169203331s-01`
 {{% /tab %}}
 {{% tab "b3 / b3 Multiple Headers" %}}
 `b3: [trace id]-[span id]-[sampled]`
-: trace id: 64 bits trace ID, expressed as padded hexadecimal
-: span id: 64 bits span ID, expressed as padded hexadecimal
+: trace id: 64 bits trace ID, hexadecimal on 16 characters
+: span id: 64 bits span ID, hexadecimal on 16 characters
 : sampled: True (1) or False (0)
 
 Example for b3 single header:
