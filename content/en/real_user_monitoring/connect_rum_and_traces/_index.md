@@ -59,7 +59,7 @@ Use frontend data from RUM, as well as backend, infrastructure, and log informat
         clientToken: '<DATADOG_CLIENT_TOKEN>',
         ...otherConfig,
         service: "my-web-application",
-        allowedTracingUrls: ["https://api.example.com", /https:\/\/.*\.my-api-domain\.com/, (origin) => origin === "https://api.example.com"]
+        allowedTracingUrls: ["https://api.example.com", /https:\/\/.*\.my-api-domain\.com/, (url) => url.startsWith("https://api.example.com")]
     })
     ```
 
@@ -191,7 +191,7 @@ RUM also supports several propagator types to connect resources with backends in
 {{< tabs >}} {{% tab "Browser RUM" %}}
 1. Setup RUM to connect with APM as described above
 
-2. Modify allowedTracingUrls such as:
+2. Modify `allowedTracingUrls` such as:
     ```javascript
     import { datadogRum } from '@datadog/browser-rum'
 
@@ -202,7 +202,7 @@ RUM also supports several propagator types to connect resources with backends in
         ]
     })
     ```
-    `match` accepts the same parameter types (string, RegExp or function) as when used in its simple form.
+    `match` accepts the same parameter types (`string`, `RegExp` or `function`) as when used in its simple form.
 
     `propagatorTypes` accepts a list of strings for desired propagators:
       - `datadog`: Datadog's propagator (x-datadog-*)
