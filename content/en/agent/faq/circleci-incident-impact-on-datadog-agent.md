@@ -28,7 +28,7 @@ If RPM-based Linux hosts in your infrastructure trust the affected key, there ar
 - The RPM database.
 - The Datadog repo file.
 
-If either one of these is identified as trusting the key, take the actions listed in the following sections. If neither of these is identified as trusting the key, no further action is needed.
+If either one of these is identified as trusting the key, take the actions listed in the following sections to secure the affected host. If neither of these is identified as trusting the key, no further action is needed.
 
 1. Check the RPM database by running the following command:
 
@@ -69,22 +69,23 @@ The following scenarios are **not** vulnerable:
 
 ## Securing the affected hosts
 
-Ensure that your hosts stop trusting the affected key. If the previous steps indicated that a host trusts the key, follow these steps:
+Ensure that your hosts **stop trusting the affected key**. If the previous steps indicated that a host trusts the key, follow these steps:
 
-1. Delete the key from the RPM database and stop trusting it by running the following command:
+1. If you use configuration automation tools or plugins, such as the Ansible Datadog role, update them to the latest version listed in [What Datadog is doing](#what-datadog-is-doing).
+
+   Remaining on older versions of these automation tools or plugins might reverse your remediation efforts. If you can't yet update to the new fixed versions, add the manual key deletion steps (step 3 and 4) to your automation tool runbooks, and ensure these run _after_ the Datadog tools and plugins in your runbook order.
+
+2. For hosts that are set up using the official Datadog install scripts, run the latest version of the install script to untrust the key and provision the updated repo files.
+
+3. If running `rpm -q gpg-pubkey-4172a230-55dd14f6` still detects the key, delete the key from the RPM database and stop trusting it by running the following command:
 
    ```bash
    $ sudo rpm --erase gpg-pubkey-4172a230-55dd14f6
    ```
 
-2. Delete the key from the Datadog repo file by removing the `gpgkey` line that ends with `DATADOG_RPM_KEY.public`. If this is the only `gpgkey` entry in your repo file, replace it with `https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public`. Read more in the section [Implications of no longer trusting the affected key](#implications-of-no-longer-trusting-the-affected-key).
+4. If `DATADOG_RPM_KEY.public` is still listed in the repo file, delete the key by removing the `gpgkey` line that ends with `DATADOG_RPM_KEY.public`. If this is the only `gpgkey` entry in your repo file, replace it with `https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public`. Read more in the section [Implications of no longer trusting the affected key](#implications-of-no-longer-trusting-the-affected-key).
 
-
-3. Update your configuration automation tools or plugins, such as the Ansible Datadog role, to the latest version listed in [What Datadog is doing to mitigate the implications](#what-datadog-is-doing-to-mitigate-the-implications).
-
-   Older versions of these automation tools or plugins might reverse the manual steps recommended above. If you can't yet update to the new versions that fix this, add the manual key deletion steps to your automation tool runbooks.
-
-4. Out of an abundance of caution, verify that Datadog built the packages on the affected hosts signed by the affected key by running [this script][3]:
+5. Out of an abundance of caution, verify that Datadog built the packages on the affected hosts signed by the affected key by running [this script][3]:
 
    ```bash
    $ curl -o /tmp/rpm_check.sh https://docs.datadoghq.com/resources/sh/rpm_check.sh && chmod +x /tmp/rpm_check.sh
