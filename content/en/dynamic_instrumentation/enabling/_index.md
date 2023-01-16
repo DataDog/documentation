@@ -1,6 +1,7 @@
 ---
 title: Enabling Dynamic Instrumentation
 kind: Documentation
+type: multi-code-lang
 aliases:
     - /tracing/dynamic_instrumentation/enabling/
 is_beta: true

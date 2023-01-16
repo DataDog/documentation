@@ -26,16 +26,6 @@ categories:
 - containers
 - log collection
 - monitoring
-classifier_tags:
-- Supported OS::Linux
-- Supported OS::Mac OS
-- Supported OS::Windows
-- Category::Marketplace
-- Category::Containers
-- Category::Log Collection
-- Category::Monitoring
-- Offering::Software License
-- Offering::Integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -67,6 +57,16 @@ supported_os:
 - windows
 tile:
   changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Mac OS
+  - Supported OS::Windows
+  - Category::Marketplace
+  - Category::Containers
+  - Category::Log Collection
+  - Category::Monitoring
+  - Offering::Software License
+  - Offering::Integration
   configuration: README.md#Setup
   description: Outil de debugging en temps réel pour .NET, Java, Python et Node
   media:
@@ -88,6 +88,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: NerdVision
+  uninstallation: README.md#Uninstallation
 ---
 
 
@@ -133,4 +134,4 @@ E-mail : support@nerd.vision
 La documentation est disponible [ici](https://docs.nerd.vision/).
 
 ---
- Cette application est disponible sur le Marketplace et développée par un partenaire de Datadog. [Cliquez ici](https://app.datadoghq.com/marketplace/app/nerdvision/pricing) pour l'acheter.
+Cette application est disponible sur le Marketplace et développée par un partenaire technologique de Datadog. <a href="https://app.datadoghq.com/marketplace/app/nerdvision" target="_blank">Cliquez ici</a> pour l'acheter.

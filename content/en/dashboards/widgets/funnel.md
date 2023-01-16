@@ -45,4 +45,4 @@ Display a custom title for your widget by activating the `Show a Title` check bo
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/explorer/search/
-[2]: /real_user_monitoring/explorer/visualize#funnel
+[2]: /real_user_monitoring/funnel_analysis
