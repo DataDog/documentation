@@ -17,7 +17,7 @@ The impacted RPM GPG signing key has the fingerprint `60A389A44A0C32BAE3C03F0B06
 * Standalone DogStatsD 6 releases and Standalone DogStatsD 7 releases up to and including v7.23.1 (`datadog-dogstatsd` package)
 
 <div class="alert alert-info">
-<strong>Note</strong>: Official Datadog repositories were <strong>not</strong> compromised. The signing key, if actually leaked, could be used to construct an RPM package that looks like it is from Datadog, but it would not be enough to place such a package in our official package repositories. To be effective, a hypothetical attacker with the affected key would need to be able upload the constructed RPM package to a repository used by hosts.
+<strong>Note</strong>: Official Datadog repositories were <strong>not</strong> compromised. The signing key, if actually leaked, could be used to construct an RPM package that looks like it is from Datadog, but it would not be enough to place such a package in our official package repositories. To be effective, a hypothetical attacker with the affected key would need to be able to upload the constructed RPM package to a repository used by hosts.
 </div>
 
 ## Finding affected hosts
