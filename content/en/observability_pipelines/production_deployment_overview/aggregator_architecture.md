@@ -216,7 +216,7 @@ Autoscaling should be based on average CPU utilization. For the vast majority of
 
 #### Network boundaries
 
-Most users have complex production environments with many network boundaries, including multiple clouds, regions, VPCs, and clusters. It can get complicated when determining where Observability Pipelines Worker fits within those boundaries. Therefore, **starting with one Observability Pipelines Worker aggregator per region is recommended**, even if you have multiple accounts, VPCs, and clusters. This boundary is the broadest networking granularity that avoids sending data over the public internet. If you have multiple clusters, deploy Observability Pipelines Worker into your utility or tools cluster, or pick a cluster that is most appropriate for shared services.
+Most users have complex production environments with many network boundaries, including multiple clouds, regions, VPCs, and clusters. It can get complicated when determining where Observability Pipelines Worker fits within those boundaries. Therefore, Datadog recommends starting with one Observability Pipelines Worker aggregator per region, even if you have multiple accounts, VPCs, and clusters. This boundary is the broadest networking granularity that avoids sending data over the public internet. If you have multiple clusters, deploy Observability Pipelines Worker into your utility or tools cluster, or pick a cluster that is most appropriate for shared services.
 
 As your Observability Pipelines Worker usage increases, it can then become clear where multiple Observability Pipelines Worker deployments fit in.
 
