@@ -36,6 +36,7 @@ DATADOG_API_KEY ?= $(DD_API_KEY)
 DATADOG_APP_KEY ?= $(DD_APP_KEY)
 FULL_BUILD ?= false
 CONFIGURATION_FILE ?= "./local/bin/py/build/configurations/pull_config_preview.yaml"
+LATEST_COMMIT_HASH = $(shell git rev-parse HEAD)
 
 help:
 	@perl -nle'print $& if m{^[a-zA-Z_-]+:.*?## .*$$}' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-25s\033[0m %s\n", $$1, $$2}'
@@ -118,7 +119,8 @@ hugpython: local/etc/requirements3.txt
 	@${PY3} -m venv --clear $@ && . $@/bin/activate && $@/bin/pip install -r $<
 
 update_pre_build:
-	@. hugpython/bin/activate && GITHUB_TOKEN=$(GITHUB_TOKEN) ENV=$(CI_ENVIRONMENT_NAME) CONFIGURATION_FILE=$(CONFIGURATION_FILE) ./local/bin/py/build/update_pre_build.py
+	echo "Short hash is $(LATEST_COMMIT_HASH)"
+	hugpython/bin/activate && GITHUB_TOKEN=$(GITHUB_TOKEN) CONFIGURATION_FILE=$(CONFIGURATION_FILE) ./local/bin/py/build/update_pre_build.py
 
 # Only to be run during deployment
 # Updates hugo preview config file for feature branch naming scheme

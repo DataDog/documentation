@@ -1,10 +1,10 @@
 ---
 - cache_config:
-    # If true, build all content from external sources
-    disable_global_cache: false
+    # If false, build all external content from source
+    global_cache_enabled: true
 
-    # If true, build all integrations from external sources
-    disable_integrations_cache: false
+    # If false, build all integrations from source
+    integrations_cache_enabled: true
 
 - data:
     - org_name: jenkinsci
@@ -1159,15 +1159,15 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/apps/blob/master/docs/en/getting-started.md"]
 
-      - repo_name: datadog-agent
-        contents:
-        - action: pull-and-push-file
-          branch: main
-          globs:
-            - "pkg/config/config_template.yaml"
-          options:
-            file_name: 'agent_config.yaml'
-            output_content: false
+      # - repo_name: datadog-agent
+      #   contents:
+      #   - action: pull-and-push-file
+      #     branch: main
+      #     globs:
+      #       - "pkg/config/config_template.yaml"
+      #     options:
+      #       file_name: 'agent_config.yaml'
+      #       output_content: false
         - action: pull-and-push-folder
           branch: main
           globs:

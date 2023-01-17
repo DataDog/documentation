@@ -36,17 +36,21 @@ class Build:
             join(self.tempdir, "extracted") + sep
         )
         self.build_configuration = []
-        self.cache_config = dict()
+        self.integrations_cache_enabled = False
+        self.global_cache_enabled = False
 
     # Loads the configurations in the configuration/ folder and attaches it to the Build Class
     def load_config(self, build_configuration_file_path, integration_merge_configuration_file_path):
         self.build_configuration = yaml.safe_load(open(build_configuration_file_path))
+        cache_config = self.build_configuration[0].get('cache_config', {})
+        self.global_cache_enabled = cache_config.get('global_cache_enabled', False)
+        self.integrations_cache_enabled = cache_config.get('integrations_cache_enabled', False)
         self.integration_mutations = OrderedDict(yaml.safe_load(open(integration_merge_configuration_file_path)))
 
     # Get the list of content to work with after it gets updated with the local globs or the
     # downloaded globs from Github.
     def get_list_of_content(self, configuration):
-        self.list_of_contents = prepare_content(
+        self.list_of_contents = prepare_content(self,
             configuration, self.options.token, self.extract_dir)
 
     # Build the documentation by injecting content from other repository.
@@ -62,7 +66,8 @@ class Build:
         # Depending of the action attached to the content the proper function is called
         for content in list_of_contents:
             try:
-                use_cached = content.get('options', {}).get('cached', False)
+                # use_cached = content.get('options', {}).get('cached', False)
+                use_cached = True
                 
                 if use_cached:
                     cached_content.append(content)
@@ -101,21 +106,22 @@ class Build:
 
         # Once all the content is processed integrations are merged according to the integration_merge.yaml
         # configuration file. This needs to happen after all content is processed to avoid flacky integration merge
-        try:
-            Int.merge_integrations()
-        except Exception as e:
-            print(e)
-            if not getenv("CI_COMMIT_REF_NAME"):
-                print(
-                    "\x1b[33mWARNING\x1b[0m: Integration merge failed, documentation is now in degraded mode.")
-            else:
-                print(
-                    "\x1b[31mERROR\x1b[0m: Integration merge failed, stopping build.")
-                sys.exit(1)
+        if not self.integrations_cache_enabled:
+            try:
+                Int.merge_integrations()
+            except Exception as e:
+                print(e)
+                if not getenv("CI_COMMIT_REF_NAME"):
+                    print(
+                        "\x1b[33mWARNING\x1b[0m: Integration merge failed, documentation is now in degraded mode.")
+                else:
+                    print(
+                        "\x1b[31mERROR\x1b[0m: Integration merge failed, stopping build.")
+                    sys.exit(1)
 
         if len(cached_content) > 0:
             try:
-                copy_cached_content(cached_content)
+                copy_cached_content(self, cached_content)
             except Exception as e:
                 print(e)
 

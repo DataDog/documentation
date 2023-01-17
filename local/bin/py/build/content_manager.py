@@ -78,7 +78,7 @@ def grouped_globs_table(list_of_contents):
     return data
 
 
-def local_or_upstream(github_token, extract_dir, list_of_contents, cache_config):
+def local_or_upstream(self, github_token, extract_dir, list_of_contents):
     """
     This goes through the list_of_contents and check for each repo specified in order:
       * [ONLY LOCAL DEV] Check if a locally cloned version is on this developer machine; one level above this documentation repo
@@ -90,11 +90,21 @@ def local_or_upstream(github_token, extract_dir, list_of_contents, cache_config)
     """
     grouped_globs = grouped_globs_table(list_of_contents)
     is_in_ci = os.getenv("CI_COMMIT_REF_NAME")
-    disable_global_cache = cache_config.get('disable_global_cache', False)
-    disable_integrations_cache = cache_config.get('disable_integrations_cache', False)
 
     for content in list_of_contents:
         use_cached = content.get('options', {}).get('cached', False)
+        action = content.get('action', '')
+        print(f'Global Cache Enabled: {self.global_cache_enabled}')
+        print(f'Integrations Cache Enabled: {self.integrations_cache_enabled}')
+
+        get_content_from_source = (self.global_cache_enabled == False) \
+            or (action in ('integrations', 'marketplace-integrations') and not self.integrations_cache_enabled) \
+            or (use_cached == False)
+
+        if get_content_from_source == False:
+            print('Getting cached content for: ')
+            print(content.get('repo_name', '')) 
+            print(action)
 
         # If disable_global_cache is true, we always want to do this
         # If it's an integration action and disable_integrations_cache is true, we want to do this
@@ -200,7 +210,7 @@ def extract_config(configuration):
     return list_of_contents
 
 
-def prepare_content(configuration, github_token, extract_dir):
+def prepare_content(self, configuration, github_token, extract_dir):
     """
     Prepares the content for the documentation build. It checks for all content whether or
     not it's available locally or if it should be downloaded.
@@ -209,9 +219,8 @@ def prepare_content(configuration, github_token, extract_dir):
     :param extract_dir: Directory into which to put all content downloaded.
     """
     try:
-        cache_config = configuration[0]
         list_of_contents = local_or_upstream(
-            github_token, extract_dir, extract_config(configuration), cache_config)
+            self, github_token, extract_dir, extract_config(configuration))
     except Exception as e:
         if not getenv("CI_COMMIT_REF_NAME"):
             print(
@@ -223,20 +232,38 @@ def prepare_content(configuration, github_token, extract_dir):
     return list_of_contents
 
 
-def copy_cached_content(cached_content_array):
+def copy_directory(repo, action, copy_integrations=False):
+    destination = ''
+
+    if action == 'pull-and-push-folder':
+        destination = repo.get('options', {}).get('dest_dir', '')
+    elif action in ('workflows', 'security-rules'):
+        destination = repo.get('options', {}).get('dest_path', '')
+    elif copy_integrations:
+        destination = '/integrations'
+    else:
+        raise Exception(f'Unsupported action for copying directory: {action}')
+
+    shutil.copytree(f'temp/content/en{destination}', f'content/en{destination}', dirs_exist_ok=True)
+
+
+def copy_cached_content(self, cached_content_array):
     """
     :param cached_content_array:
     """
     try:
         en_content_path = 'content/en'
-        directories_to_copy = []
-        s3_url = f'https://origin-static-assets.s3.amazonaws.com/build_artifacts/master/99074b6a793f1716fbaf58af6d2c4a3b2259ba2d-ignored.tar.gz'
-        artifact_download_response = requests.get(s3_url, stream=True)
 
-        # Extract cached content to temp folder
-        with tarfile.open(mode='r|gz', fileobj=artifact_download_response.raw) as artifact_tarfile:
-            artifact_tarfile.extractall('temp')
-            artifact_tarfile.close()
+        if self.integrations_cache_enabled:
+            copy_directory('', '', True)
+
+        # s3_url = f'https://origin-static-assets.s3.amazonaws.com/build_artifacts/master/009963ba998e623a3e9c9df119638b13b150c6cb-ignored.tar.gz'
+        # artifact_download_response = requests.get(s3_url, stream=True)
+
+        # # Extract cached content to temp folder
+        # with tarfile.open(mode='r|gz', fileobj=artifact_download_response.raw) as artifact_tarfile:
+        #     artifact_tarfile.extractall('temp')
+        #     artifact_tarfile.close()
 
         # Copy the files we want to use from the cache
         for repo in cached_content_array:
@@ -246,24 +273,16 @@ def copy_cached_content(cached_content_array):
                 dest_path = repo.get('options', {}).get('dest_path')
                 dest_file_name = repo.get('options', {}).get('file_name')
                 full_dest_path = f'{en_content_path}{dest_path}{dest_file_name}'
-                shutil.copy(f'temp/{full_dest_path}', full_dest_path)
-            elif action == 'pull-and-push-folder':
-                dest_dir = repo.get('options', {}).get('dest_dir', '')
-                directories_to_copy.append(f'{en_content_path}{dest_dir}')
-                print(f'{en_content_path}{dest_dir}')
-            elif action in ('integrations', 'marketplace-integrations'):
-                directories_to_copy.append(f'{en_content_path}integrations')
-            elif action in ('workflows', 'security-rules'):
-                directory_path = repo.get('options', {}).get('dest_path', '')
-                directories_to_copy.append(f'{en_content_path}{directory_path}')
-            
-        for dir_path in directories_to_copy:
-            for file_path in os.listdir(f'temp/{dir_path}'):
-                full_dest_path = f'{dir_path}{file_path}'
-                shutil.copy(f'temp/{full_dest_path}', full_dest_path)
 
-        shutil.rmtree('temp')
+                os.makedirs(os.path.dirname(full_dest_path), exist_ok=True)
+                shutil.copy(f'temp/{full_dest_path}', full_dest_path)
+            elif action in ('pull-and-push-folder', 'workflows', 'security-rules'):
+                copy_directory(repo, action)
+            else:
+                print(f'Action {action} unsupported, skipping.')
+            
+        # shutil.rmtree('temp')
     except Exception as e:
         print('error')
         print(e)
-        shutil.rmtree('temp')
+        # shutil.rmtree('temp')
