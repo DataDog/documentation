@@ -291,10 +291,9 @@ If you've configured the profiler and don't see profiles in the profile search p
       - `Profiler signal handler was replaced again. As of now, we will stopped restoring it to avoid issues: the profiler is disabled.`
       - `Fail to restore profiler signal handler.`
 
-   3. If one of these messages is present, it means that the application code or a third party code is reinstalling again and again its own signal handler over Datadog signal handler. To avoid any further conflict, the CPU and Wall time profilers are disabled.
+   3. If one of these messages is present, it means that the application code or a third party code is repeatedly reinstalling its own signal handler over the Datadog signal handler. To avoid any further conflict, the CPU and Wall time profilers are disabled.
 
-   4. Note that another message could appear that does not impact Datadog profiling:
-      ``` Profiler signal handler handler has been replaced. Restoring it. ```: the Datadog signal handler is reinstalled once if it was overwritten.
+   Note that the following message could appear, but it does not impact Datadog profiling: `Profiler signal handler has been replaced. Restoring it.` This indicates only that the Datadog signal handler is reinstalled when it was overwritten.
 
 [1]: /profiler/enabling/dotnet/?tab=linux#configuration
 
@@ -363,24 +362,24 @@ The profiler has a fixed overhead. The exact value can vary but this fixed cost 
 You can override the 1 core threshold by setting `DD_PROFILING_MIN_CORES_THRESHOLD` environment variable to a value smaller than 1. For example, a value of `0.5` allows the profiler to run in a container with at least 0.5 cores.
 
 
-## Hang application on Linux
+## No CPU or Wall time because the application on Linux is hung
 
-It might happen that an application becomes unresponsive on Linux and CPU/Wall time samples are no more available. In that case, follow these steps:
+If an application hangs, or otherwise becomes unresponsive on Linux, CPU and Wall time samples are no longer available, follow these steps:
 
 1. Open the `DD-DotNet-Profiler-Native-<Application Name>-<pid>` log file in the `/var/log/datadog/dotnet` folder.
 
 2. Look for `StackSamplerLoopManager::WatcherLoopIteration - Deadlock intervention still in progress for thread ...`. If this message is not present, the rest does not apply.
 
-3. If the message is found, it means that the stack walking mechanism could have deadlocked. To help investigate the issue, it is very helpful to dump the call stacks of all threads in the application. This is possible with a debugger such as gdb:
+3. If the message is found, it means that the stack walking mechanism could be deadlocked. To investigate the issue, dump the call stacks of all threads in the application. For example, to do this with the gdb debugger:
 
    1. Install gdb.
 
-   2. Type the following command:
+   2. Run the following command:
       ```
       gdb -p <process id> -batch -ex "thread apply all bt full" -ex "detach" -ex "quit"
       ```
 
-   3. Send the resulting output to the Datadog support.
+   3. Send the resulting output to [Datadog Support][2].
 
 
 [1]: /tracing/troubleshooting/#tracer-debug-logs
