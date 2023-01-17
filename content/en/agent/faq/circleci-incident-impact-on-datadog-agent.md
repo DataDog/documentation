@@ -53,13 +53,12 @@ Before you start, if you have a large infrastructure, **prioritize your search**
    * Standalone DogStatsD v6 or v7.23.2 and earlier
 
    On RPM-based Linux hosts, the following scenarios are **less likely** to be affected, but still possible:
-   * Agent v7 (if upgraded from earlier versions of Agent 5 or 6)
+   * Agent v7
    * Standalone DogStatsD v7.23.2+.
 
    The following scenarios are **not** affected:
    * The Agent was installed with Datadog packages on macOS, Windows, Debian, or Ubuntu.
    * The host uses the Container Agent.
-   * Your Agents have all been installed after 16 September 2019, the release of the unaffected Agent 6.14.0
 
 Check each host to see if it trusts the affected key from either the RPM database or the Datadog repo file, or both:
 
