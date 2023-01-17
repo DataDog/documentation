@@ -20,27 +20,6 @@ This guide walks you through the recommended aggregator architecture for new Obs
 - Using the Observability Pipelines Worker as part of your [disaster recovery](#disaster-recovery).
 - More [advanced configurations](#advanced-configurations) for deploying multiple aggregators, publish-subscribe systems, and global aggregation.
 
-### Comparison
-
-Compared to the Observability Pipelines Worker agent architecture, the aggregator architecture has the following advantages and disadvantages.
-
-#### Advantages
-
-- **Easy to set up.** Deploy Observability Pipelines Worker like any other service.
-- **Easy to adopt.** Data sources can be onboarded incrementally, one source at a time.
-- **Reduced footprint.** This architecture touches fewer nodes.
-- **High availability.** Multi-node failover mitigates failure scenarios.
-- **High durability.** Centralized routing allows for sophisticated durability strategies.
-- **Improved security.** Edge nodes can be locked down, aggregator nodes can be hardened.
-- **Optimized delivery.** Data can be streamlined for optimal delivery to destinations.
-- **Service reliability.** Doing less on the edge reduces agent-induced incidents.
-- **Reduced lock-in.** Collect data from any source and send it to any destination.
-- **Global aggregation.** Data can be aggregated and analyzed across multiple nodes.
-
-#### Disadvantages
-
-- An entire aggregator outage can be a single point of failure for your observability data pipeline. Therefore, use [high availability](#high-availability) tactics to help mitigate this issue.
-
  ## Requirements
 
 | Type              | Minimum Value                                         			|
@@ -201,7 +180,7 @@ In these cases, the following respective mitigation tactics are recommended:
 
 ### Vertical scaling
 
-Observability Pipelines Worker's concurrency model automatically scales to take advantage of all vCPUs. There are no concurrency settings or configuration changes required. When vertically scaling, Datadog recommends capping an instance's size to process no more than 50% of your total volume to force deploy at least two Observability Pipelines Worker instances for high availability.
+Observability Pipelines Worker's concurrency model automatically scales to take advantage of all vCPUs. There are no concurrency settings or configuration changes required. When vertically scaling, Datadog recommends capping an instance's size to process no more than 50% of your total volume and deploying at least two Observability Pipelines Worker instances for high availability.
 
 ### Autoscaling
 
