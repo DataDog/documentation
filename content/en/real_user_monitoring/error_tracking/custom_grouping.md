@@ -45,7 +45,7 @@ Here's an example for [collecting browser errors][2]:
 import { datadogRum } from '@datadog/browser-rum';
 
 // Send a custom error with context
-const err = new Error('Something went wrong');
+const error = new Error('Something went wrong');
 datadogRum.addError(error, {
   'error.fingerprint': 'my-custom-grouping-material',
 });
