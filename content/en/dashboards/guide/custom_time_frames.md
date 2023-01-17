@@ -19,7 +19,7 @@ Both fixed and relative custom time frames are supported:
 
 {{< img src="dashboards/guide/custom_time_frames/custom_relative_time_frame.mp4" alt="Type custom relative time frame" video="true" width="500" >}}
 
-**Note**: Queries are run in UTC time. Additionally, you can toggle between displaying the default time zone or UTC from the [dashboard settings][1].
+**Note**: Queries are run in UTC time, but the query time range is selected according to your browser. Additionally, you can toggle between displaying the default time zone or UTC from the [dashboard settings][1].
 
 ## Supported syntaxes
 
