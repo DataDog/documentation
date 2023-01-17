@@ -65,9 +65,9 @@ Use frontend data from RUM, as well as backend, infrastructure, and log informat
 
     To connect RUM to Traces, you need to specify your browser application in the `service` field.
 
-    `allowedTracingUrls` will match against the full URL (`<scheme>://<host>[:<port>]/<path>[?<query>][#<fragment>]`). It accepts the following types:
-      - `string`: matches any URL starting with the provided value, so `https://api.example.com` will match `https://api.example.com/v1/resource`.
-      - `RegExp`: executes a test with the provided RegExp and the URL
+    `allowedTracingUrls` matches the full URL (`<scheme>://<host>[:<port>]/<path>[?<query>][#<fragment>]`). It accepts the following types:
+      - `string`: matches any URL that starts with the value, so `https://api.example.com` matches `https://api.example.com/v1/resource`.
+      - `RegExp`: executes a test with the provided RegExp and the URL.
       - `function`: evaluates with the URL as parameter. Returning a `boolean` set to `true` indicates a match.
 
 3.  _(Optional)_ Configure the `tracingSampleRate` initialization parameter to keep a defined percentage of the backend traces. If not set, 100% of the traces coming from browser requests are sent to Datadog. To keep 20% of backend traces:
@@ -184,14 +184,14 @@ The following Datadog tracing libraries are supported:
 | [.NET][14]                  | [1.18.2][15]                |
 
 
-## Open Telemetry support
+## OpenTelemetry support
 
-RUM also supports several propagator types to connect resources with backends instrumented with Open Telemetry libraries.
+RUM supports several propagator types to connect resources with backends that are instrumented with OpenTelemetry libraries.
 
 {{< tabs >}} {{% tab "Browser RUM" %}}
-1. Setup RUM to connect with APM as described above
+1. Set up RUM to connect with APM as described above.
 
-2. Modify `allowedTracingUrls` such as:
+2. Modify `allowedTracingUrls` as follows:
     ```javascript
     import { datadogRum } from '@datadog/browser-rum'
 
@@ -202,13 +202,13 @@ RUM also supports several propagator types to connect resources with backends in
         ]
     })
     ```
-    `match` accepts the same parameter types (`string`, `RegExp` or `function`) as when used in its simple form.
+    `match` accepts the same parameter types (`string`, `RegExp` or `function`) as when used in its simple form, described above.
 
     `propagatorTypes` accepts a list of strings for desired propagators:
-      - `datadog`: Datadog's propagator (x-datadog-*)
-      - `tracecontext`: [W3C Trace Context](https://www.w3.org/TR/trace-context/) (traceparent)
-      - `b3`: [B3 single header](https://github.com/openzipkin/b3-propagation#single-header) (b3)
-      - `b3multi`: [B3 multiple headers](https://github.com/openzipkin/b3-propagation#multiple-headers) (X-B3-*)
+      - `datadog`: Datadog's propagator (`x-datadog-*`)
+      - `tracecontext`: [W3C Trace Context](https://www.w3.org/TR/trace-context/) (`traceparent`)
+      - `b3`: [B3 single header](https://github.com/openzipkin/b3-propagation#single-header) (`b3`)
+      - `b3multi`: [B3 multiple headers](https://github.com/openzipkin/b3-propagation#multiple-headers) (`X-B3-*`)
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -231,19 +231,19 @@ Datadog uses the distributed tracing protocol and sets up the following HTTP hea
 {{% /tab %}}
 {{% tab "W3C Trace Context" %}}
 `traceparent: [version]-[trace id]-[parent id]-[trace flags]`
-: version: The current specification assumes version is set to 00.
-: trace id: 128 bits trace ID, hexadecimal on 32 characters (The source trace id is 64 bits to keep compatibility with APM)
-: parent id: 64 bits span ID, hexadecimal on 16 characters
-: trace flags: Sampled (01) or not sampled (00)
+: `version`: The current specification assumes version is set to `00`.
+: `trace id`: 128 bits trace ID, hexadecimal on 32 characters. The source trace ID is 64 bits to keep compatibility with APM.
+: `parent id`: 64 bits span ID, hexadecimal on 16 characters.
+: `trace flags`: Sampled (`01`) or not sampled (`00`)
 
 Example:
 : `traceparent: 00-00000000000000008448eb211c80319c-b7ad6b7169203331s-01`
 {{% /tab %}}
 {{% tab "b3 / b3 Multiple Headers" %}}
 `b3: [trace id]-[span id]-[sampled]`
-: trace id: 64 bits trace ID, hexadecimal on 16 characters
-: span id: 64 bits span ID, hexadecimal on 16 characters
-: sampled: True (1) or False (0)
+: `trace id`: 64 bits trace ID, hexadecimal on 16 characters.
+: `span id`: 64 bits span ID, hexadecimal on 16 characters.
+: `sampled`: True (`1`) or False (`0`)
 
 Example for b3 single header:
 : `b3: 8448eb211c80319c-b7ad6b7169203331-1`
