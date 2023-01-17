@@ -1444,7 +1444,7 @@ components:
         links:
           $ref: '#/components/schemas/CIAppResponseLinks'
         meta:
-          $ref: '#/components/schemas/CIAppResponseMetadata'
+          $ref: '#/components/schemas/CIAppResponseMetadataWithPagination'
       type: object
     CIAppPipelinesAggregateRequest:
       description: The object sent with the request to retrieve aggregation buckets
@@ -1465,8 +1465,6 @@ components:
           type: array
         options:
           $ref: '#/components/schemas/CIAppQueryOptions'
-        page:
-          $ref: '#/components/schemas/CIAppQueryPageOptions'
       type: object
     CIAppPipelinesAggregationBucketsResponse:
       description: The query results.
@@ -1596,6 +1594,29 @@ components:
           example: 132
           format: int64
           type: integer
+        request_id:
+          description: The identifier of the request.
+          example: MWlFUjVaWGZTTTZPYzM0VXp1OXU2d3xLSVpEMjZKQ0VKUTI0dEYtM3RSOFVR
+          type: string
+        status:
+          $ref: '#/components/schemas/CIAppResponseStatus'
+        warnings:
+          description: 'A list of warnings (non-fatal errors) encountered. Partial
+            results may return if
+
+            warnings are present in the response.'
+          items:
+            $ref: '#/components/schemas/CIAppWarning'
+          type: array
+      type: object
+    CIAppResponseMetadataWithPagination:
+      description: The metadata associated with a request.
+      properties:
+        elapsed:
+          description: The time elapsed in milliseconds.
+          example: 132
+          format: int64
+          type: integer
         page:
           $ref: '#/components/schemas/CIAppResponsePage'
         request_id:
@@ -1696,7 +1717,7 @@ components:
         links:
           $ref: '#/components/schemas/CIAppResponseLinks'
         meta:
-          $ref: '#/components/schemas/CIAppResponseMetadata'
+          $ref: '#/components/schemas/CIAppResponseMetadataWithPagination'
       type: object
     CIAppTestsAggregateRequest:
       description: The object sent with the request to retrieve aggregation buckets
@@ -1717,8 +1738,6 @@ components:
           type: array
         options:
           $ref: '#/components/schemas/CIAppQueryOptions'
-        page:
-          $ref: '#/components/schemas/CIAppQueryPageOptions'
       type: object
     CIAppTestsAggregationBucketsResponse:
       description: The query results.
@@ -9972,6 +9991,10 @@ components:
           description: User ID of the user who created the rule.
           format: int64
           type: integer
+        deprecationDate:
+          description: When the rule will be deprecated, timestamp in milliseconds.
+          format: int64
+          type: integer
         filters:
           description: Additional queries to filter matched events before they are
             processed.
@@ -10339,6 +10362,10 @@ components:
           type: integer
         creationAuthorId:
           description: User ID of the user who created the rule.
+          format: int64
+          type: integer
+        deprecationDate:
+          description: When the rule will be deprecated, timestamp in milliseconds.
           format: int64
           type: integer
         filters:
@@ -11664,6 +11691,7 @@ components:
       items:
         description: An individual value for a given time.
         format: double
+        nullable: true
         type: number
       type: array
     TimeseriesResponseValuesList:

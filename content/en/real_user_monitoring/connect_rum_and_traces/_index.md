@@ -67,18 +67,18 @@ Use frontend data from RUM, as well as backend, infrastructure, and log informat
 
     `allowedTracingOrigins` accepts JavaScript strings, regular expressions, and functions that match the origins called by your browser application, defined as: `<scheme> "://" <hostname> [ ":" <port> ]`.
 
-3.  _(Optional)_ Configure the `tracingSampleRate` initialization parameter to keep a defined percentage of the backend traces. If not set, 100% of the traces coming from browser requests are sent to Datadog. To keep 20% of backend traces:
+3.  _(Optional)_ Configure the `traceSampleRate` initialization parameter to keep a defined percentage of the backend traces. If not set, 100% of the traces coming from browser requests are sent to Datadog. To keep 20% of backend traces, for example:
 
     ```javascript
     import { datadogRum } from '@datadog/browser-rum'
 
     datadogRum.init({
         ...otherConfig,
-        tracingSampleRate: 20
+        traceSampleRate: 20
     })
     ```
 
-**Note**: `tracingSampleRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
+**Note**: `traceSampleRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
 
 <div class="alert alert-info">End-to-end tracing is available for requests fired after the Browser SDK is initialized. End-to-end tracing of the initial HTML document and early browser requests is not supported.</div>
 
@@ -202,7 +202,7 @@ These HTTP headers are not CORS-safelisted, so you need to [configure Access-Con
 
 ## How are APM quotas affected?
 
-Connecting RUM and traces may significantly increase the APM-ingested volumes. Use the initialization parameter `tracingSampleRate` to keep a share of the backend traces starting from browser and mobile requests.
+Connecting RUM and traces may significantly increase the APM-ingested volumes. Use the initialization parameter `traceSampleRate` to keep a share of the backend traces starting from browser and mobile requests.
 
 ## How long are traces retained?
 

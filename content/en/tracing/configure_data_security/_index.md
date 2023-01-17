@@ -207,7 +207,7 @@ For example:
 ```yaml
 apm_config:
   replace_tags:
-    # Replace all characters starting at the `token/` string in the tag "http.url" with "?":
+    # Replace all characters starting at the `token/` string in the tag "http.url" with "?"
     - name: "http.url"
       pattern: "token/(.*)"
       repl: "?"
@@ -215,13 +215,17 @@ apm_config:
     - name: "resource.name"
       pattern: "(.*)\/$"
       repl: "$1"
-    # Replace all the occurrences of "foo" in any tag with "bar":
+    # Replace all the occurrences of "foo" in any tag with "bar"
     - name: "*"
       pattern: "foo"
       repl: "bar"
-    # Remove all "error.stack" tag's value.
+    # Remove all "error.stack" tag's value
     - name: "error.stack"
       pattern: "(?s).*"
+    # Replace series of numbers in error messages
+    - name: "error.msg"
+      pattern: "[0-9]{10}"
+      repl: "[REDACTED]"
 ```
 
 {{% /tab %}}
@@ -235,8 +239,8 @@ DD_APM_REPLACE_TAGS=[
         "repl": "?"
       },
       {
-        "name": "resource.name"
-        "pattern": "(.*)\/$"
+        "name": "resource.name",
+        "pattern": "(.*)\/$",
         "repl": "$1"
       },
       {
@@ -247,6 +251,11 @@ DD_APM_REPLACE_TAGS=[
       {
         "name": "error.stack",
         "pattern": "(?s).*"
+      },
+      {
+        "name": "error.msg",
+        "pattern": "[0-9]{10}",
+        "repl": "[REDACTED]"
       }
 ]
 ```
@@ -265,8 +274,8 @@ Put this environment variable in the trace-agent container if you are using the 
               "repl": "?"
             },
             {
-              "name": "resource.name"
-              "pattern": "(.*)\/$"
+              "name": "resource.name",
+              "pattern": "(.*)\/$",
               "repl": "$1"
             },
             {
@@ -277,6 +286,11 @@ Put this environment variable in the trace-agent container if you are using the 
             {
               "name": "error.stack",
               "pattern": "(?s).*"
+            },
+            {
+              "name": "error.msg",
+              "pattern": "[0-9]{10}",
+              "repl": "[REDACTED]"
             }
           ]'
 ```
@@ -287,7 +301,7 @@ Put this environment variable in the trace-agent container if you are using the 
 {{% tab "docker-compose" %}}
 
 ```docker-compose.yaml
-- DD_APM_REPLACE_TAGS=[{"name":"http.url","pattern":"token/(.*)","repl":"?"},{"name":"resource.name","pattern":"(.*)\/$","repl": "$1"},{"name":"*","pattern":"foo","repl":"bar"},{"name":"error.stack","pattern":"(?s).*"}]
+- DD_APM_REPLACE_TAGS=[{"name":"http.url","pattern":"token/(.*)","repl":"?"},{"name":"resource.name","pattern":"(.*)\/$","repl": "$1"},{"name":"*","pattern":"foo","repl":"bar"},{"name":"error.stack","pattern":"(?s).*"}, {"name": "error.msg", "pattern": "[0-9]{10}", "repl": "[REDACTED]"}]
 ```
 
 {{% /tab %}}

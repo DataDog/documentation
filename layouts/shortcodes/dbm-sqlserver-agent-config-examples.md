@@ -24,7 +24,7 @@
         driver: '{ODBC Driver 18 for SQL Server}'
         dsn: 'DATADOG'
     ```
-4. Restart the agent.
+4. Restart the Agent.
 
 ### Using Always On
 When monitoring Always On clusters, the Agent must be installed on a separate server from the SQL Servers and connect to the cluster through the listener endpoint.
@@ -40,7 +40,7 @@ instances:
     include_fci_metrics: true   # If Failover Clustering is enabled
 ```
 
-### One agent connecting to multiple hosts
+### One Agent connecting to multiple hosts
 It is common to configure a single Agent host to connect to multiple remote database instances (see [Agent installation architectures](/database_monitoring/architecture/) for DBM). To connect to multiple hosts, create an entry for each host in the SQL Server integration config.
 In these cases, Datadog recommends limiting the number of instances per Agent to a maximum of 10 database instances to guarantee reliable performance.
 ```yaml

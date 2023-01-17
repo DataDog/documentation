@@ -461,7 +461,9 @@ To use the OpenTelemetry Collector alongside the Datadog Agent:
    # ...
    exporters:
      otlp:
-       endpoint: "${env:HOST_IP}:4317"
+       endpoint: "${HOST_IP}:4317"
+       tls:
+         insecure: true
    # ...
    ```
 
