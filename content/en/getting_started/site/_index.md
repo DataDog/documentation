@@ -26,7 +26,7 @@ You can identify which site you are on by matching your Datadog website URL to t
 | US1-FED | `https://app.ddog-gov.com`  | `ddog-gov.com`      | US       |
 
 
-## RUM domains
+## Real User Monitoring (RUM) domains
 
 All Datadog RUM traffic is transmitted over SSL (default 443) to the following domains:
 
@@ -48,7 +48,7 @@ All Datadog RUM traffic is transmitted over SSL (default 443) to the following d
 | US5  | `https://trace.browser-intake-us5-datadoghq.com`     |
 | EU1  | `https://public-trace-http-intake.logs.datadoghq.eu` |
 
-### RUM
+### RUM Events
 
 | Site | Site URL                                       |
 |------|------------------------------------------------|
