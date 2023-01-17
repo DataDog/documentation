@@ -130,9 +130,21 @@ tk add description tk
 
 ### Put ENV tag values into service names
 
-By default, the environment (env) is the primary tag for Datadog APM.
+By default, the environment (`env`) is the primary tag for Datadog APM.
 
 {{< img src="/tracing/troubleshooting/troubleshooting-service-naming-convention-issues-1.png" alt="tk" style="width:100%;" >}}
+
+A service is typically deployed in multiple environments, such as `prod`, `staging`, and `dev`. Performance metrics like request counts, latency, and error rate differ across various environments. The environment dropdown in the Service Catalog allows you to scope the data in the **Performance** tab to a specific environment.
+
+{{< img src="/tracing/troubleshooting/troubleshooting-service-naming-convention-issues-2.png" alt="tk" style="width:100%;" >}}
+
+Datadog's trace metrics are unsampled. The [volume guidelines][17] are put in place to ensure that we consistently provide users with optimal experience across the app.
+
+One pattern that often leads to issues with an overwhelming number of services is to include the environment value in service names. For example, instead of just a single web store service, there can be two unique services: `prod-web-store` and `dev-web-store` - assuming that the web store service operates in two separate environments.
+
+### Put metric partition or grouping variables into service names
+
+
 
 ## Further Reading
 
@@ -154,3 +166,4 @@ By default, the environment (env) is the primary tag for Datadog APM.
 [14]: /tracing/custom_instrumentation/
 [15]: /tracing/compatibility_requirements/
 [16]: /tracing/guide/setting_primary_tags_to_scope/?tab=helm#add-a-second-primary-tag-in-datadog
+[17]: /tracing/troubleshooting/#data-volume-guidelines
