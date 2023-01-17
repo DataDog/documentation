@@ -1,45 +1,67 @@
 ---
+app_id: sedai
+app_uuid: fa7de455-fef8-4cb2-af30-9baa50e351f2
 assets:
   dashboards:
     Sedai Overview: assets/dashboards/sedai_overview.json
-  logs: {}
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: sedai.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Sedai
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Sedai
+  sales_email: praveen.prakash@sedai.io
+  support_email: praveen.prakash@sedai.io
 categories:
 - 自動化
 - cloud
-- cost-management
 - notification
 - orchestration
 - プロビジョニング
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/sedai/README.md
-description: SRE のためのインテリジェントな オートパイロットとして機能する、エージェントレスでしきい値なしのクラウド管理プラットフォームです。Sedai
-  は、お客様の本番環境をプロアクティブに管理し、可用性の問題の防止、パフォーマンスの向上、クラウドコストの最適化、コードリリースに関する深い洞察を提供します。
-display_name: Sedai
+display_on_public_website: true
 draft: false
 git_integration_title: sedai
-guid: 147edbf7-176f-49de-af58-ed5f64336e07
 integration_id: sedai
 integration_title: Sedai
 integration_version: ''
 is_public: true
 kind: integration
-maintainer: praveen.prakash@sedai.io
-manifest_version: 1.0.0
-metric_prefix: sedai.
-metric_to_check: ''
+manifest_version: 2.0.0
 name: sedai
-public_title: Datadog-Sedai インテグレーション
+oauth: {}
+public_title: Sedai
 short_description: クラウドアプリケーションをインテリジェントに管理する自律的なプラットフォーム
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Automation
+  - Category::Cloud
+  - Category::Notification
+  - Category::Orchestration
+  - Category::Provisioning
+  configuration: README.md#Setup
+  description: クラウドアプリケーションをインテリジェントに管理する自律的なプラットフォーム
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Sedai
 ---
 
 ## 概要

@@ -18,7 +18,7 @@ assets:
     source_type_name: OctoPrint
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: コミュニティ
   sales_email: gwaldo@gmail.com
   support_email: gwaldo@gmail.com
 categories:
