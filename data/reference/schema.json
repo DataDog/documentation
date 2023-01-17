@@ -2346,10 +2346,28 @@
         },
         "access_key": {
           "title": "An optional access key to authenticate requests against.",
-          "description": "AWS Kinesis Firehose can be configured to pass along a user-configurable access key with each request. If\nconfigured, `access_key` should be set to the same value. Otherwise, all requests will be allowed.",
+          "description": "AWS Kinesis Firehose can be configured to pass along a user-configurable access key with each request. If\nconfigured, `access_key` should be set to the same value. Otherwise, all requests will be allowed.\n\nThis option has been deprecated, the `access_keys` option should be used instead.",
+          "deprecated": true,
           "$ref": "#/definitions/core::option::Option<vector_common::sensitive_string::SensitiveString>",
           "_metadata": {
             "docs::examples": "A94A8FE5CCB19BA61C4C08"
+          }
+        },
+        "access_keys": {
+          "title": "An optional list of access keys to authenticate requests against.",
+          "description": "AWS Kinesis Firehose can be configured to pass along a user-configurable access key with each request. If\nconfigured, `access_keys` should be set to the same value. Otherwise, all requests will be allowed.",
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/vector_common::sensitive_string::SensitiveString"
+          },
+          "_metadata": {
+            "docs::examples": [
+              "A94A8FE5CCB19BA61C4C08",
+              "B94B8FE5CCB19BA61C4C12"
+            ]
           }
         },
         "record_compression": {
@@ -2406,6 +2424,13 @@
         "string",
         "null"
       ],
+      "_metadata": {
+        "sensitive": true
+      }
+    },
+    "vector_common::sensitive_string::SensitiveString": {
+      "description": "Wrapper for sensitive strings containing credentials",
+      "type": "string",
       "_metadata": {
         "sensitive": true
       }
@@ -2905,13 +2930,6 @@
         "docs::enum_tagging": "untagged"
       }
     },
-    "vector_common::sensitive_string::SensitiveString": {
-      "description": "Wrapper for sensitive strings containing credentials",
-      "type": "string",
-      "_metadata": {
-        "sensitive": true
-      }
-    },
     "vector::aws::auth::ImdsAuthentication": {
       "description": "IMDS Client Configuration for authenticating with AWS.",
       "type": "object",
@@ -3203,18 +3221,6 @@
     },
     "vector::sources::demo_logs::DemoLogsConfig": {
       "description": "Configuration for the `demo_logs` source.",
-      "default": {
-        "interval": 1.0,
-        "count": 9223372036854775807,
-        "format": "json",
-        "framing": {
-          "method": "bytes"
-        },
-        "decoding": {
-          "codec": "bytes"
-        },
-        "log_namespace": null
-      },
       "allOf": [
         {
           "type": "object",
@@ -3222,16 +3228,20 @@
             "interval": {
               "title": "The amount of time, in seconds, to pause between each batch of output lines.",
               "description": "The default is one batch per second. In order to remove the delay and output batches as quickly as possible, set\n`interval` to `0.0`.",
-              "type": "number",
-              "maximum": 9007199254740991.0,
-              "minimum": -9007199254740991.0,
+              "default": 1.0,
+              "$ref": "#/definitions/serde_with::DurationFractionalSeconds",
               "_metadata": {
-                "docs::numeric_type": "float"
+                "docs::examples": [
+                  1.0,
+                  0.1,
+                  0.01
+                ]
               }
             },
             "count": {
               "title": "The total number of lines to output.",
               "description": "By default, the source continuously prints logs (infinitely).",
+              "default": 9223372036854775807,
               "type": "integer",
               "maximum": 9007199254740991.0,
               "minimum": 0.0,
@@ -3240,9 +3250,15 @@
               }
             },
             "framing": {
+              "default": {
+                "method": "bytes"
+              },
               "$ref": "#/definitions/codecs::decoding::FramingConfig"
             },
             "decoding": {
+              "default": {
+                "codec": "bytes"
+              },
               "$ref": "#/definitions/codecs::decoding::DeserializerConfig"
             },
             "log_namespace": {
@@ -3259,12 +3275,25 @@
           }
         },
         {
-          "$ref": "#/definitions/vector::sources::demo_logs::OutputFormat"
+          "$ref": "#/definitions/vector::sources::demo_logs::OutputFormat",
+          "_metadata": {
+            "docs::enum_tag_description": "The format of the randomly generated output."
+          }
         }
       ],
       "_metadata": {
         "docs::component_type": "source",
         "docs::component_name": "demo_logs"
+      }
+    },
+    "serde_with::DurationFractionalSeconds": {
+      "description": "A span of time, in fractional seconds.",
+      "type": "number",
+      "maximum": 9007199254740991.0,
+      "minimum": -9007199254740991.0,
+      "_metadata": {
+        "docs::numeric_type": "float",
+        "docs::type_unit": "seconds"
       }
     },
     "vector::sources::demo_logs::OutputFormat": {
@@ -3288,6 +3317,12 @@
               "type": "array",
               "items": {
                 "type": "string"
+              },
+              "_metadata": {
+                "docs::examples": [
+                  "line1",
+                  "line2"
+                ]
               }
             },
             "format": {
@@ -3300,14 +3335,14 @@
           }
         },
         {
-          "description": "Randomly generated logs in [Apache common](\\(urls.apache_common)) format.",
+          "description": "Randomly generated logs in [Apache common][apache_common] format.\n[apache_common]: https://httpd.apache.org/docs/current/logs.html#common",
           "type": "object",
           "required": [
             "format"
           ],
           "properties": {
             "format": {
-              "description": "Randomly generated logs in [Apache common](\\(urls.apache_common)) format.",
+              "description": "Randomly generated logs in [Apache common][apache_common] format.\n[apache_common]: https://httpd.apache.org/docs/current/logs.html#common",
               "const": "apache_common"
             }
           },
@@ -3316,14 +3351,14 @@
           }
         },
         {
-          "description": "Randomly generated logs in [Apache error](\\(urls.apache_error)) format.",
+          "description": "Randomly generated logs in [Apache error][apache_error] format.\n[apache_error]: https://httpd.apache.org/docs/current/logs.html#errorlog",
           "type": "object",
           "required": [
             "format"
           ],
           "properties": {
             "format": {
-              "description": "Randomly generated logs in [Apache error](\\(urls.apache_error)) format.",
+              "description": "Randomly generated logs in [Apache error][apache_error] format.\n[apache_error]: https://httpd.apache.org/docs/current/logs.html#errorlog",
               "const": "apache_error"
             }
           },
@@ -3332,14 +3367,14 @@
           }
         },
         {
-          "description": "Randomly generated logs in Syslog format ([RFC 5424](\\(urls.syslog_5424))).",
+          "description": "Randomly generated logs in Syslog format ([RFC 5424][syslog_5424]).\n[syslog_5424]: https://tools.ietf.org/html/rfc5424",
           "type": "object",
           "required": [
             "format"
           ],
           "properties": {
             "format": {
-              "description": "Randomly generated logs in Syslog format ([RFC 5424](\\(urls.syslog_5424))).",
+              "description": "Randomly generated logs in Syslog format ([RFC 5424][syslog_5424]).\n[syslog_5424]: https://tools.ietf.org/html/rfc5424",
               "const": "syslog"
             }
           },
@@ -3348,14 +3383,14 @@
           }
         },
         {
-          "description": "Randomly generated logs in Syslog format ([RFC 3164](\\(urls.syslog_3164))).",
+          "description": "Randomly generated logs in Syslog format ([RFC 3164][syslog_3164]).\n[syslog_3164]: https://tools.ietf.org/html/rfc3164",
           "type": "object",
           "required": [
             "format"
           ],
           "properties": {
             "format": {
-              "description": "Randomly generated logs in Syslog format ([RFC 3164](\\(urls.syslog_3164))).",
+              "description": "Randomly generated logs in Syslog format ([RFC 3164][syslog_3164]).\n[syslog_3164]: https://tools.ietf.org/html/rfc3164",
               "const": "bsd_syslog"
             }
           },
@@ -3364,14 +3399,14 @@
           }
         },
         {
-          "description": "Randomly generated HTTP server logs in [JSON](\\(urls.json)) format.",
+          "description": "Randomly generated HTTP server logs in [JSON][json] format.\n[json]: https://en.wikipedia.org/wiki/JSON",
           "type": "object",
           "required": [
             "format"
           ],
           "properties": {
             "format": {
-              "description": "Randomly generated HTTP server logs in [JSON](\\(urls.json)) format.",
+              "description": "Randomly generated HTTP server logs in [JSON][json] format.\n[json]: https://en.wikipedia.org/wiki/JSON",
               "const": "json"
             }
           },
@@ -3463,7 +3498,8 @@
           "maximum": 9007199254740991.0,
           "minimum": 0.0,
           "_metadata": {
-            "docs::numeric_type": "uint"
+            "docs::numeric_type": "uint",
+            "docs::type_unit": "bytes"
           }
         },
         "socket_send_buffer_size": {
@@ -3654,19 +3690,17 @@
       "type": "object",
       "properties": {
         "endpoint": {
-          "description": "Endpoints to scrape stats from.",
+          "description": "Endpoint to scrape stats from.",
           "default": "https://localhost:2113/stats",
-          "type": "string"
+          "type": "string",
+          "_metadata": {
+            "docs::examples": "https://localhost:2113/stats"
+          }
         },
         "scrape_interval_secs": {
           "description": "The interval between scrapes, in seconds.",
           "default": 15,
-          "type": "integer",
-          "maximum": 9007199254740991.0,
-          "minimum": 0.0,
-          "_metadata": {
-            "docs::numeric_type": "uint"
-          }
+          "$ref": "#/definitions/serde_with::DurationSeconds"
         },
         "default_namespace": {
           "title": "Overrides the default namespace for the metrics emitted by the source.",
@@ -3674,7 +3708,10 @@
           "type": [
             "string",
             "null"
-          ]
+          ],
+          "_metadata": {
+            "docs::examples": "eventstoredb"
+          }
         }
       },
       "_metadata": {
@@ -4503,10 +4540,11 @@
             },
             "endpoint": {
               "description": "The endpoint from which to pull data.",
-              "type": [
-                "string",
-                "null"
-              ]
+              "default": "https://pubsub.googleapis.com",
+              "type": "string",
+              "_metadata": {
+                "docs::examples": "https://us-central1-pubsub.googleapis.com"
+              }
             },
             "tls": {
               "$ref": "#/definitions/core::option::Option<vector_core::tls::settings::TlsConfig>"
@@ -4522,7 +4560,8 @@
               }
             },
             "full_response_size": {
-              "description": "The number of messages in a response to mark a stream as\n\"busy\". This is used to determine if more streams should be\nstarted.",
+              "title": "The number of messages in a response to mark a stream as\n\"busy\". This is used to determine if more streams should be\nstarted.",
+              "description": "The GCP Pub/Sub servers send responses with 100 or more messages when\nthe subscription is busy.",
               "default": 100,
               "type": "integer",
               "maximum": 9007199254740991.0,
@@ -4534,52 +4573,35 @@
             "poll_time_seconds": {
               "description": "How often to poll the currently active streams to see if they\nare all busy and so open a new stream.",
               "default": 2.0,
-              "type": "number",
-              "maximum": 9007199254740991.0,
-              "minimum": -9007199254740991.0,
-              "_metadata": {
-                "docs::numeric_type": "float"
-              }
+              "$ref": "#/definitions/serde_with::DurationFractionalSeconds"
             },
             "ack_deadline_secs": {
               "title": "The acknowledgement deadline, in seconds, to use for this stream.",
               "description": "Messages that are not acknowledged when this deadline expires may be retransmitted.",
-              "type": [
-                "integer",
-                "null"
-              ],
-              "maximum": 2147483647.0,
-              "minimum": -2147483648.0,
-              "_metadata": {
-                "docs::numeric_type": "int"
-              }
+              "default": 600,
+              "$ref": "#/definitions/serde_with::DurationSeconds"
             },
             "ack_deadline_seconds": {
               "description": "Deprecated, old name of `ack_deadline_secs`.",
+              "deprecated": true,
               "type": [
                 "integer",
                 "null"
               ],
-              "maximum": 2147483647.0,
-              "minimum": -2147483648.0,
+              "maximum": 65535.0,
+              "minimum": 0.0,
               "_metadata": {
-                "docs::numeric_type": "int"
+                "docs::numeric_type": "uint"
               }
             },
             "retry_delay_secs": {
               "description": "The amount of time, in seconds, to wait between retry attempts after an error.",
-              "type": [
-                "number",
-                "null"
-              ],
-              "maximum": 9007199254740991.0,
-              "minimum": -9007199254740991.0,
-              "_metadata": {
-                "docs::numeric_type": "float"
-              }
+              "default": 1.0,
+              "$ref": "#/definitions/serde_with::DurationFractionalSeconds"
             },
             "retry_delay_seconds": {
               "description": "Deprecated, old name of `retry_delay_secs`.",
+              "deprecated": true,
               "type": [
                 "number",
                 "null"
@@ -4593,12 +4615,7 @@
             "keepalive_secs": {
               "description": "The amount of time, in seconds, with no received activity\nbefore sending a keepalive request. If this is set larger than\n`60`, you may see periodic errors sent from the server.",
               "default": 60.0,
-              "type": "number",
-              "maximum": 9007199254740991.0,
-              "minimum": -9007199254740991.0,
-              "_metadata": {
-                "docs::numeric_type": "float"
-              }
+              "$ref": "#/definitions/serde_with::DurationFractionalSeconds"
             },
             "log_namespace": {
               "description": "The namespace to use for logs. This overrides the global setting.",
@@ -4804,6 +4821,17 @@
             "null"
           ]
         },
+        "cgroups": {
+          "default": {
+            "levels": 100,
+            "base": null,
+            "groups": {
+              "includes": null,
+              "excludes": null
+            }
+          },
+          "$ref": "#/definitions/vector::sources::host_metrics::cgroups::CGroupsConfig"
+        },
         "disk": {
           "default": {
             "devices": {
@@ -4848,6 +4876,13 @@
     "vector::sources::host_metrics::Collector": {
       "description": "Collector types.",
       "oneOf": [
+        {
+          "description": "CGroups.",
+          "const": "cgroups",
+          "_metadata": {
+            "logical_name": "CGroups"
+          }
+        },
         {
           "description": "CPU.",
           "const": "cpu",
@@ -4902,17 +4937,40 @@
         "docs::enum_tagging": "external"
       }
     },
-    "vector::sources::host_metrics::disk::DiskConfig": {
-      "description": "Options for the “disk” metrics collector.",
+    "vector::sources::host_metrics::cgroups::CGroupsConfig": {
+      "title": "Options for the “cgroups” (controller groups) metrics collector.",
+      "description": "This collector is only available on Linux systems, and only supports either version 2 or hybrid cgroups.",
+      "default": {
+        "levels": 100,
+        "base": null,
+        "groups": {
+          "includes": null,
+          "excludes": null
+        }
+      },
       "type": "object",
       "properties": {
-        "devices": {
-          "description": "Lists of device name patterns to include or exclude.",
-          "default": {
-            "includes": null,
-            "excludes": null
-          },
+        "levels": {
+          "title": "The number of levels of the cgroups hierarchy for which to report metrics.",
+          "description": "A value of `1` means just the root or named cgroup.",
+          "type": "integer",
+          "maximum": 9007199254740991.0,
+          "minimum": 0.0,
+          "_metadata": {
+            "docs::numeric_type": "uint"
+          }
+        },
+        "base": {
+          "description": "The base cgroup name to provide metrics for.",
+          "$ref": "#/definitions/core::option::Option<std::path::PathBuf>"
+        },
+        "groups": {
+          "description": "Lists of group name patterns to include or exclude.",
           "$ref": "#/definitions/vector::sources::host_metrics::FilterList"
+        },
+        "base_dir": {
+          "description": "Base cgroup directory, for testing use only",
+          "$ref": "#/definitions/core::option::Option<std::path::PathBuf>"
         }
       }
     },
@@ -4946,6 +5004,20 @@
       "title": "A compiled Unix shell-style pattern.",
       "description": "- `?` matches any single character.\n- `*` matches any (possibly empty) sequence of characters.\n- `**` matches the current directory and arbitrary subdirectories. This sequence must form a single path component,\n  so both `**a` and `b**` are invalid and will result in an error. A sequence of more than two consecutive `*`\n  characters is also invalid.\n- `[...]` matches any character inside the brackets. Character sequences can also specify ranges of characters, as\n  ordered by Unicode, so e.g. `[0-9]` specifies any character between 0 and 9 inclusive. An unclosed bracket is\n  invalid.\n- `[!...]` is the negation of `[...]`, i.e. it matches any characters not in the brackets.\n\nThe metacharacters `?`, `*`, `[`, `]` can be matched by using brackets (e.g. `[?]`). When a `]` occurs immediately\nfollowing `[` or `[!` then it is interpreted as being part of, rather then ending, the character set, so `]` and NOT\n`]` can be matched by `[]]` and `[!]]` respectively. The `-` character can be specified inside a character sequence\npattern by placing it at the start or the end, e.g. `[abc-]`.",
       "type": "string"
+    },
+    "vector::sources::host_metrics::disk::DiskConfig": {
+      "description": "Options for the “disk” metrics collector.",
+      "type": "object",
+      "properties": {
+        "devices": {
+          "description": "Lists of device name patterns to include or exclude.",
+          "default": {
+            "includes": null,
+            "excludes": null
+          },
+          "$ref": "#/definitions/vector::sources::host_metrics::FilterList"
+        }
+      }
     },
     "vector::sources::host_metrics::filesystem::FilesystemConfig": {
       "description": "Options for the “filesystem” metrics collector.",
@@ -5330,6 +5402,9 @@
             "items": {
               "type": "string"
             }
+          },
+          "_metadata": {
+            "docs::additional_props_description": "A query string parameter."
           }
         },
         "decoding": {
@@ -5347,7 +5422,8 @@
           "$ref": "#/definitions/codecs::decoding::FramingConfig"
         },
         "headers": {
-          "description": "Headers to apply to the HTTP requests.\nOne or more values for the same header can be provided.",
+          "title": "Headers to apply to the HTTP requests.",
+          "description": "One or more values for the same header can be provided.",
           "default": {},
           "type": "object",
           "additionalProperties": {
@@ -5355,6 +5431,9 @@
             "items": {
               "type": "string"
             }
+          },
+          "_metadata": {
+            "docs::additional_props_description": "An HTTP request header."
           }
         },
         "method": {
@@ -5458,15 +5537,15 @@
       "properties": {
         "host_key": {
           "title": "Overrides the name of the log field used to add the current hostname to each event.",
-          "description": "By default, the [global `log_schema.host_key` option][global_host_key] is used.\n\n[global_host_key]: https://vector.dev/docs/reference/configuration/global-options/#log_schema.host_key",
-          "default": null,
-          "$ref": "#/definitions/core::option::Option<lookup::lookup_v2::optional_path::OptionalValuePath>"
+          "description": "By default, the [global `log_schema.host_key` option][global_host_key] is used.\n\nSet to `\"\"` to suppress this key.\n\n[global_host_key]: https://vector.dev/docs/reference/configuration/global-options/#log_schema.host_key",
+          "default": "host",
+          "$ref": "#/definitions/lookup::lookup_v2::optional_path::OptionalValuePath"
         },
         "pid_key": {
           "title": "Overrides the name of the log field used to add the current process ID to each event.",
-          "description": "By default, `\"pid\"` is used.",
-          "default": null,
-          "$ref": "#/definitions/core::option::Option<lookup::lookup_v2::optional_path::OptionalValuePath>"
+          "description": "By default, `\"pid\"` is used.\n\nSet to `\"\"` to suppress this key.",
+          "default": "pid",
+          "$ref": "#/definitions/lookup::lookup_v2::optional_path::OptionalValuePath"
         },
         "log_namespace": {
           "description": "The namespace to use for logs. This overrides the global setting.",
@@ -5620,6 +5699,9 @@
               "type": "string"
             },
             "uniqueItems": true
+          },
+          "_metadata": {
+            "docs::additional_props_description": "A field/value pair."
           }
         },
         "exclude_matches": {
@@ -5632,6 +5714,9 @@
               "type": "string"
             },
             "uniqueItems": true
+          },
+          "_metadata": {
+            "docs::additional_props_description": "A field/value pair."
           }
         },
         "data_dir": {
@@ -5705,7 +5790,10 @@
             "bootstrap_servers": {
               "title": "A comma-separated list of Kafka bootstrap servers.",
               "description": "These are the servers in a Kafka cluster that a client should use to \"bootstrap\" its connection to the cluster,\nallowing discovering all other hosts in the cluster.\n\nMust be in the form of `host:port`, and comma-separated.",
-              "type": "string"
+              "type": "string",
+              "_metadata": {
+                "docs::examples": "10.14.22.123:9092,10.14.23.332:9092"
+              }
             },
             "topics": {
               "title": "The Kafka topics names to read events from.",
@@ -5713,87 +5801,137 @@
               "type": "array",
               "items": {
                 "type": "string"
+              },
+              "_metadata": {
+                "docs::examples": [
+                  "^(prefix1|prefix2)-.+",
+                  "topic-1",
+                  "topic-2"
+                ]
               }
             },
             "group_id": {
               "description": "The consumer group name to be used to consume events from Kafka.",
-              "type": "string"
+              "type": "string",
+              "_metadata": {
+                "docs::examples": "consumer-group-name"
+              }
+            },
+            "group_instance_id": {
+              "description": "Override dynamic membership and broker assignment behavior with static membership, using a group instance (member) id.",
+              "type": [
+                "string",
+                "null"
+              ],
+              "_metadata": {
+                "docs::examples": "kafka-streams-instance-1"
+              }
             },
             "auto_offset_reset": {
               "title": "If offsets for consumer group do not exist, set them using this strategy.",
               "description": "See the [librdkafka documentation](https://github.com/edenhill/librdkafka/blob/master/CONFIGURATION.md) for the `auto.offset.reset` option for further clarification.",
               "default": "largest",
-              "type": "string"
+              "type": "string",
+              "_metadata": {
+                "docs::examples": [
+                  "smallest",
+                  "earliest",
+                  "beginning",
+                  "largest",
+                  "latest",
+                  "end",
+                  "error"
+                ]
+              }
             },
             "session_timeout_ms": {
-              "description": "The Kafka session timeout, in milliseconds.",
+              "description": "The Kafka session timeout.",
               "default": 10000,
-              "type": "integer",
-              "maximum": 9007199254740991.0,
-              "minimum": 0.0,
+              "$ref": "#/definitions/serde_with::DurationMilliSeconds",
               "_metadata": {
-                "docs::numeric_type": "uint"
+                "docs::examples": [
+                  5000,
+                  10000
+                ]
               }
             },
             "socket_timeout_ms": {
-              "description": "Timeout for network requests, in milliseconds.",
+              "description": "Timeout for network requests.",
               "default": 60000,
-              "type": "integer",
-              "maximum": 9007199254740991.0,
-              "minimum": 0.0,
+              "$ref": "#/definitions/serde_with::DurationMilliSeconds",
               "_metadata": {
-                "docs::numeric_type": "uint"
+                "docs::examples": [
+                  30000,
+                  60000
+                ]
               }
             },
             "fetch_wait_max_ms": {
-              "description": "Maximum time the broker may wait to fill the response, in milliseconds.",
+              "description": "Maximum time the broker may wait to fill the response.",
               "default": 100,
-              "type": "integer",
-              "maximum": 9007199254740991.0,
-              "minimum": 0.0,
+              "$ref": "#/definitions/serde_with::DurationMilliSeconds",
               "_metadata": {
-                "docs::numeric_type": "uint"
+                "docs::examples": [
+                  50,
+                  100
+                ]
               }
             },
             "commit_interval_ms": {
-              "description": "The frequency that the consumer offsets are committed (written) to offset storage, in milliseconds.",
+              "description": "The frequency that the consumer offsets are committed (written) to offset storage.",
               "default": 5000,
-              "type": "integer",
-              "maximum": 9007199254740991.0,
-              "minimum": 0.0,
+              "$ref": "#/definitions/serde_with::DurationMilliSeconds",
               "_metadata": {
-                "docs::numeric_type": "uint"
+                "docs::examples": [
+                  5000,
+                  10000
+                ]
               }
             },
             "key_field": {
               "title": "Overrides the name of the log field used to add the message key to each event.",
               "description": "The value will be the message key of the Kafka message itself.\n\nBy default, `\"message_key\"` is used.",
               "default": "message_key",
-              "$ref": "#/definitions/lookup::lookup_v2::optional_path::OptionalValuePath"
+              "$ref": "#/definitions/lookup::lookup_v2::optional_path::OptionalValuePath",
+              "_metadata": {
+                "docs::examples": "message_key"
+              }
             },
             "topic_key": {
               "title": "Overrides the name of the log field used to add the topic to each event.",
               "description": "The value will be the topic from which the Kafka message was consumed from.\n\nBy default, `\"topic\"` is used.",
               "default": "topic",
-              "$ref": "#/definitions/lookup::lookup_v2::optional_path::OptionalValuePath"
+              "$ref": "#/definitions/lookup::lookup_v2::optional_path::OptionalValuePath",
+              "_metadata": {
+                "docs::examples": "topic"
+              }
             },
             "partition_key": {
               "title": "Overrides the name of the log field used to add the partition to each event.",
               "description": "The value will be the partition from which the Kafka message was consumed from.\n\nBy default, `\"partition\"` is used.",
               "default": "partition",
-              "$ref": "#/definitions/lookup::lookup_v2::optional_path::OptionalValuePath"
+              "$ref": "#/definitions/lookup::lookup_v2::optional_path::OptionalValuePath",
+              "_metadata": {
+                "docs::examples": "partition"
+              }
             },
             "offset_key": {
               "title": "Overrides the name of the log field used to add the offset to each event.",
               "description": "The value will be the offset of the Kafka message itself.\n\nBy default, `\"offset\"` is used.",
               "default": "offset",
-              "$ref": "#/definitions/lookup::lookup_v2::optional_path::OptionalValuePath"
+              "$ref": "#/definitions/lookup::lookup_v2::optional_path::OptionalValuePath",
+              "_metadata": {
+                "docs::examples": "offset"
+              }
             },
             "headers_key": {
               "title": "Overrides the name of the log field used to add the headers to each event.",
               "description": "The value will be the headers of the Kafka message itself.\n\nBy default, `\"headers\"` is used.",
               "default": "headers",
-              "$ref": "#/definitions/lookup::lookup_v2::optional_path::OptionalValuePath"
+              "$ref": "#/definitions/lookup::lookup_v2::optional_path::OptionalValuePath",
+              "_metadata": {
+                "docs::examples": "headers"
+              }
             },
             "librdkafka_options": {
               "title": "Advanced options set directly on the underlying `librdkafka` client.",
@@ -5804,6 +5942,14 @@
               ],
               "additionalProperties": {
                 "type": "string"
+              },
+              "_metadata": {
+                "docs::examples": {
+                  "client.id": "${ENV_VAR}",
+                  "fetch.error.backoff.ms": "1000",
+                  "socket.send.buffer.bytes": "100"
+                },
+                "docs::additional_props_description": "A librdkafka configuration option."
               }
             },
             "framing": {
@@ -5846,6 +5992,16 @@
         "docs::component_name": "kafka"
       }
     },
+    "serde_with::DurationMilliSeconds": {
+      "description": "A span of time, in whole milliseconds.",
+      "type": "integer",
+      "maximum": 9007199254740991.0,
+      "minimum": 0.0,
+      "_metadata": {
+        "docs::numeric_type": "uint",
+        "docs::type_unit": "milliseconds"
+      }
+    },
     "vector::kafka::KafkaAuthConfig": {
       "description": "Kafka authentication configuration.",
       "type": "object",
@@ -5878,18 +6034,30 @@
           "type": [
             "string",
             "null"
-          ]
+          ],
+          "_metadata": {
+            "docs::examples": "username"
+          }
         },
         "password": {
           "description": "The SASL password.",
-          "$ref": "#/definitions/core::option::Option<vector_common::sensitive_string::SensitiveString>"
+          "$ref": "#/definitions/core::option::Option<vector_common::sensitive_string::SensitiveString>",
+          "_metadata": {
+            "docs::examples": "password"
+          }
         },
         "mechanism": {
           "description": "The SASL mechanism to use.",
           "type": [
             "string",
             "null"
-          ]
+          ],
+          "_metadata": {
+            "docs::examples": [
+              "SCRAM-SHA-256",
+              "SCRAM-SHA-512"
+            ]
+          }
         }
       }
     },
@@ -6275,17 +6443,15 @@
           "type": "array",
           "items": {
             "type": "string"
+          },
+          "_metadata": {
+            "docs::examples": "mongodb://localhost:27017"
           }
         },
         "scrape_interval_secs": {
           "description": "The interval between scrapes, in seconds.",
           "default": 15,
-          "type": "integer",
-          "maximum": 9007199254740991.0,
-          "minimum": 0.0,
-          "_metadata": {
-            "docs::numeric_type": "uint"
-          }
+          "$ref": "#/definitions/serde_with::DurationSeconds"
         },
         "namespace": {
           "title": "Overrides the default namespace for the metrics emitted by the source.",
@@ -6538,17 +6704,15 @@
           "type": "array",
           "items": {
             "type": "string"
+          },
+          "_metadata": {
+            "docs::examples": "http://localhost:8000/basic_status"
           }
         },
         "scrape_interval_secs": {
-          "description": "The interval between scrapes, in seconds.",
+          "description": "The interval between scrapes.",
           "default": 15,
-          "type": "integer",
-          "maximum": 9007199254740991.0,
-          "minimum": 0.0,
-          "_metadata": {
-            "docs::numeric_type": "uint"
-          }
+          "$ref": "#/definitions/serde_with::DurationSeconds"
         },
         "namespace": {
           "title": "Overrides the default namespace for the metrics emitted by the source.",
@@ -6811,6 +6975,9 @@
             "items": {
               "type": "string"
             }
+          },
+          "_metadata": {
+            "docs::additional_props_description": "A query string parameter."
           }
         },
         "tls": {
@@ -7884,7 +8051,7 @@
           "$ref": "#/definitions/core::option::Option<vector::sources::vector::VectorConfigVersion>"
         },
         "address": {
-          "title": "The address to listen for connections on.",
+          "title": "The socket address to listen for connections on.",
           "description": "It _must_ include a port.",
           "$ref": "#/definitions/stdlib::SocketAddr"
         },
@@ -8092,40 +8259,6 @@
           },
           "_metadata": {
             "logical_name": "Memory"
-          }
-        },
-        {
-          "title": "Events are buffered on disk. (version 1)",
-          "description": "This is less performant, but more durable. Data that has been synchronized to disk will not\nbe lost if Vector is restarted forcefully or crashes.",
-          "deprecated": true,
-          "type": "object",
-          "required": [
-            "max_size",
-            "type"
-          ],
-          "properties": {
-            "max_size": {
-              "title": "The maximum size of the buffer on disk.",
-              "description": "Must be at least ~256 megabytes (268435488 bytes).",
-              "type": "integer",
-              "maximum": 9007199254740991.0,
-              "minimum": 1.0,
-              "_metadata": {
-                "docs::numeric_type": "uint"
-              }
-            },
-            "when_full": {
-              "default": "block",
-              "$ref": "#/definitions/vector_buffers::WhenFull"
-            },
-            "type": {
-              "title": "Events are buffered on disk. (version 1)",
-              "description": "This is less performant, but more durable. Data that has been synchronized to disk will not\nbe lost if Vector is restarted forcefully or crashes.",
-              "const": "disk_v1"
-            }
-          },
-          "_metadata": {
-            "logical_name": "DiskV1"
           }
         },
         {
@@ -10324,6 +10457,9 @@
               "type": "object",
               "additionalProperties": {
                 "type": "string"
+              },
+              "_metadata": {
+                "docs::additional_props_description": "An HTTP request header."
               }
             }
           }
@@ -10851,6 +10987,9 @@
           ],
           "additionalProperties": {
             "type": "string"
+          },
+          "_metadata": {
+            "docs::additional_props_description": "A single tag."
           }
         },
         "content_encoding": {
@@ -11622,6 +11761,11 @@
           "default": false,
           "type": "boolean"
         },
+        "date_time_best_effort": {
+          "description": "Sets `date_time_input_format` to `best_effort`, allowing ClickHouse to properly parse RFC3339/ISO 8601.",
+          "default": false,
+          "type": "boolean"
+        },
         "compression": {
           "default": "gzip",
           "$ref": "#/definitions/vector::sinks::util::buffer::compression::Compression"
@@ -11888,6 +12032,9 @@
           ],
           "additionalProperties": {
             "type": "string"
+          },
+          "_metadata": {
+            "docs::additional_props_description": "A single tag."
           }
         }
       }
@@ -11935,6 +12082,9 @@
                   ],
                   "additionalProperties": {
                     "type": "string"
+                  },
+                  "_metadata": {
+                    "docs::additional_props_description": "A key/value pair."
                   }
                 }
               }
@@ -12673,6 +12823,9 @@
           ],
           "additionalProperties": {
             "type": "string"
+          },
+          "_metadata": {
+            "docs::additional_props_description": "A query string parameter."
           }
         },
         "aws": {
@@ -13390,6 +13543,9 @@
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/vector::template::Template"
+          },
+          "_metadata": {
+            "docs::additional_props_description": "A type-specific label."
           }
         }
       ]
@@ -13485,6 +13641,9 @@
           "type": "object",
           "additionalProperties": {
             "type": "string"
+          },
+          "_metadata": {
+            "docs::additional_props_description": "A type-specific label."
           }
         }
       ]
@@ -13564,6 +13723,9 @@
               ],
               "additionalProperties": {
                 "type": "string"
+              },
+              "_metadata": {
+                "docs::additional_props_description": "A key/value pair."
               }
             },
             "key_prefix": {
@@ -13902,11 +14064,32 @@
               ],
               "additionalProperties": {
                 "type": "string"
+              },
+              "_metadata": {
+                "docs::additional_props_description": "An HTTP request header."
               }
             },
             "compression": {
               "default": "none",
               "$ref": "#/definitions/vector::sinks::util::buffer::compression::Compression"
+            },
+            "payload_prefix": {
+              "title": "A string to prefix the payload with.",
+              "description": "This option is ignored if the encoding is not character delimited JSON.\nIf specified, the `payload_suffix` must also be specified and together they must produce a valid JSON object.",
+              "default": "",
+              "type": "string",
+              "_metadata": {
+                "docs::examples": "{\"data\":"
+              }
+            },
+            "payload_suffix": {
+              "title": "A string to suffix the payload with.",
+              "description": "This option is ignored if the encoding is not character delimited JSON.\nIf specified, the `payload_prefix` must also be specified and together they must produce a valid JSON object.",
+              "default": "",
+              "type": "string",
+              "_metadata": {
+                "docs::examples": "}"
+              }
             },
             "batch": {
               "default": {
@@ -14580,6 +14763,9 @@
               ],
               "additionalProperties": {
                 "type": "string"
+              },
+              "_metadata": {
+                "docs::additional_props_description": "A tag key/value pair."
               }
             },
             "tls": {
@@ -14737,6 +14923,9 @@
               "type": "object",
               "additionalProperties": {
                 "type": "string"
+              },
+              "_metadata": {
+                "docs::additional_props_description": "A librdkafka configuration option."
               }
             },
             "headers_key": {
@@ -14991,11 +15180,11 @@
             "$ref": "#/definitions/vector::template::Template"
           },
           "_metadata": {
-            "docs::examples": [
-              "vector",
-              "{{ event_field }}",
-              "{{ kubernetes.pod_labels }}"
-            ],
+            "docs::examples": {
+              "source": "vector",
+              "{{ event_field }}": "{{ some_other_event_field }}",
+              "labels": "{{ kubernetes.pod_labels }}"
+            },
             "docs::additional_props_description": "A Loki label."
           }
         },
@@ -17969,6 +18158,9 @@
               ],
               "additionalProperties": {
                 "$ref": "#/definitions/vector::transforms::log_to_metric::TagConfig"
+              },
+              "_metadata": {
+                "docs::additional_props_description": "A metric tag."
               }
             }
           }
@@ -18419,6 +18611,9 @@
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/vector::transforms::reduce::merge_strategy::MergeStrategy"
+          },
+          "_metadata": {
+            "docs::additional_props_description": "An individual merge strategy."
           }
         },
         "ends_when": {
@@ -18435,16 +18630,6 @@
       "_metadata": {
         "docs::component_type": "transform",
         "docs::component_name": "reduce"
-      }
-    },
-    "serde_with::DurationMilliSeconds": {
-      "description": "A span of time, in whole milliseconds.",
-      "type": "integer",
-      "maximum": 9007199254740991.0,
-      "minimum": 0.0,
-      "_metadata": {
-        "docs::numeric_type": "uint",
-        "docs::type_unit": "milliseconds"
       }
     },
     "vector::transforms::reduce::merge_strategy::MergeStrategy": {
@@ -18854,16 +19039,6 @@
       "_metadata": {
         "docs::component_type": "transform",
         "docs::component_name": "throttle"
-      }
-    },
-    "serde_with::DurationFractionalSeconds": {
-      "description": "A span of time, in fractional seconds.",
-      "type": "number",
-      "maximum": 9007199254740991.0,
-      "minimum": -9007199254740991.0,
-      "_metadata": {
-        "docs::numeric_type": "float",
-        "docs::type_unit": "seconds"
       }
     },
     "vector::config::TestDefinition<alloc::string::String>": {
