@@ -241,7 +241,7 @@ Read more about [Creating and managing labels][2] in the Google Cloud documentat
 
 In the [Trace Explorer][1], you can filter traces with tags using the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`, for example: `service:coffee-house`. For advanced search, see [Search Spans][2].
 
-{{< img src="tagging/using_tags/tracesearchtags.png" alt="Trace Search Tags" style="width:80%;">}}
+{{< img src="tagging/using_tags/trace_explorer.png" alt="Trace Explorer Tags" style="width:80%;">}}
 
 [1]: /tracing/trace_explorer/search/
 [2]: /tracing/trace_explorer/query_syntax/#search-bar
