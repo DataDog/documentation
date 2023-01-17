@@ -9991,6 +9991,10 @@ components:
           description: User ID of the user who created the rule.
           format: int64
           type: integer
+        deprecationDate:
+          description: When the rule will be deprecated, timestamp in milliseconds.
+          format: int64
+          type: integer
         filters:
           description: Additional queries to filter matched events before they are
             processed.
@@ -10358,6 +10362,10 @@ components:
           type: integer
         creationAuthorId:
           description: User ID of the user who created the rule.
+          format: int64
+          type: integer
+        deprecationDate:
+          description: When the rule will be deprecated, timestamp in milliseconds.
           format: int64
           type: integer
         filters:
@@ -11683,6 +11691,7 @@ components:
       items:
         description: An individual value for a given time.
         format: double
+        nullable: true
         type: number
       type: array
     TimeseriesResponseValuesList:

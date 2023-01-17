@@ -196,8 +196,18 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_1039800684",
+      "description": "Create a new dashboard with logs_pattern_stream list_stream widget"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_3117424216",
       "description": "Create a new dashboard with logs_stream list_stream widget and storage parameter"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_2843286292",
+      "description": "Create a new dashboard with logs_transaction_stream list_stream widget"
     },
     {
       "group": "dashboards",

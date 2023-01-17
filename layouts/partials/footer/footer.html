@@ -187,13 +187,13 @@
                                 <span class="d-flex align-items-center">{{ partial "svg" (dict "context" $dot "src" "world.svg" "size" "15px" "color" "#ffffff"  )}}&nbsp;</span>
                                 <label class="visually-hidden" for="mobile-lang-select">Language Selection</label>
                                 <select class="mobile-lang-select" id="mobile-lang-select" id="" onchange="javascript:location.href = this.value;">
-                                    <option value="{{ .Permalink }}?lang_pref={{ .Language.Lang }}">{{ .Language.LanguageName }}</a>
+                                    <option value="{{ "" | absURL }}{{ cond (eq .Sites.First .Site) "" (printf "%s/" .Language.Lang) }}?lang_pref={{ .Language.Lang }}">{{ .Language.LanguageName }}</a>
                                     {{ if ne .Sites.First .Site }}
                                         <!-- if non eng site manually add english entry -->
-                                        <option value="{{ replace .Permalink (printf "/%s/" $dot.Language.Lang) "/" }}?lang_pref=en">English</a>
+                                        <option value="{{ "" | absURL }}?lang_pref=en">English</a>
                                     {{ end }}
                                     {{ range where .Translations "Language.Lang" "!=" "en" }}
-                                        <option value="{{ .Permalink }}?lang_pref={{ .Language.Lang }}">{{ .Language.LanguageName }}</a>
+                                        <option value="{{ "" | absURL }}{{ (printf "%s/" .Language.Lang) }}?lang_pref={{ .Language.Lang }}">{{ .Language.LanguageName }}</a>
                                     {{ end }}
                                 </select>
                                 {{ partial "svg" (dict "context" $dot "src" "arrow.svg" "size" "15px" "color" "#ffffff"  )}}
@@ -205,13 +205,13 @@
                                     <span class="d-flex align-items-center lang-toggle-arrow">{{ partial "svg" (dict "context" $dot "src" "arrow.svg" "size" "15px" "color" "#ffffff"  )}}</span>
                                 </div>
                                 <div class="js-lang-popup lang-popup">
-                                    <a class="active" href="{{ .Permalink }}?lang_pref={{ .Language.Lang }}">{{ .Language.LanguageName }}</span></a>
+                                    <a class="active" href="{{ "" | absURL }}{{ cond (eq .Sites.First .Site) "" (printf "%s/" .Language.Lang) }}?lang_pref={{ .Language.Lang }}">{{ .Language.LanguageName }}</span></a>
                                     {{ if ne .Sites.First .Site }}
                                         <!-- if non eng site manually add english entry -->
-                                        <a href="{{ replace .Permalink (printf "/%s/" $dot.Language.Lang) "/" }}?lang_pref=en">English</a>
+                                        <a href="{{ "" | absURL }}?lang_pref=en">English</a>
                                     {{ end }}
                                     {{ range where .Translations "Language.Lang" "!=" "en" }}
-                                        <a href="{{ .Permalink }}?lang_pref={{ .Language.Lang }}">{{ .Language.LanguageName }}</a>
+                                        <a href="{{ "" | absURL }}{{ (printf "%s/" .Language.Lang) }}?lang_pref={{ .Language.Lang }}">{{ .Language.LanguageName }}</a>
                                     {{ end }}
                                </div>
                             </div>

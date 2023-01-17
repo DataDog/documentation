@@ -22,13 +22,13 @@ Browser Monitoring automatically detects user interactions performed during a us
 
 You can accomplish the following objectives:
 
--   Understand the performance of key interactions (for example, a click on the **Add to cart** button)
--   Quantify feature adoption
--   Identify the steps that led to a specific browser error
+* Understand the performance of key interactions (for example, a click on the **Add to cart** button)
+* Quantify feature adoption
+* Identify the steps that led to a specific browser error
 
 ## Manage information being collected
 
-The `trackInteractions` initialization parameter enables the collection of user clicks in your application, which means sensitive and private data contained on your pages may be included to identify elements that a user interacted with.
+The `trackUserInteractions` initialization parameter enables the collection of user clicks in your application, which means sensitive and private data contained in your pages may be included to identify elements that a user interacted with.
 
 To control which information is sent to Datadog, [manually set an action name](#declare-a-name-for-click-actions), or [implement a global scrubbing rule in the Datadog Browser SDK for RUM][1].
 
@@ -36,20 +36,20 @@ To control which information is sent to Datadog, [manually set an action name](#
 
 The RUM Browser SDK automatically tracks clicks. A click action is created if **all of the following** conditions are met:
 
--   Activity following the click is detected. See [How page activity is calculated][2] for details.
--   The click does not lead to a new page being loaded, in which case, the Datadog Browser SDK generates another RUM View event.
--   A name can be computed for the action. See [Declaring a name for click actions](#declare-a-name-for-click-actions) for details.
+* Activity following the click is detected. See [How page activity is calculated][2] for details.
+* The click does not lead to a new page being loaded, in which case, the Datadog Browser SDK generates another RUM View event.
+* A name can be computed for the action. See [Declaring a name for click actions](#declare-a-name-for-click-actions) for details.
 
 ## Action timing metrics
 
 For information about the default attributes for all RUM event types, see [RUM Browser Data Collected][3].
 
-| Metric                   | Type        | Description                                        |
-| ------------------------ | ----------- | -------------------------------------------------- |
-| `action.loading_time`    | number (ns) | The loading time of the action.                    |
-| `action.long_task.count` | number      | Count of all long tasks collected for this action. |
-| `action.resource.count`  | number      | Count of all resources collected for this action.  |
-| `action.error.count`     | number      | Count of all errors collected for this action.     |
+| Metric    | Type   | Description              |
+|--------------|--------|--------------------------|
+| `action.loading_time` | number (ns) | The loading time of the action.  |
+| `action.long_task.count`        | number      | Count of all long tasks collected for this action. |
+| `action.resource.count`         | number      | Count of all resources collected for this action. |
+| `action.error.count`      | number      | Count of all errors collected for this action.|
 
 The Datadog Browser SDK for RUM calculates action loading time by monitoring page activity following every click. An action is considered complete when the page has no more activity. See [How page activity is calculated][2] for details.
 
@@ -57,12 +57,12 @@ For more information about configuring for sampling or global context, see [Modi
 
 ## Action attributes
 
-| Attribute            | Type   | Description                                                                                                                     |
-| -------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------- |
-| `action.id`          | string | UUID of the user action.                                                                                                        |
-| `action.type`        | string | Type of the user action. For custom user actions, it is set to `custom`.                                                        |
-| `action.target.name` | string | Element that the user interacted with. Only for automatically collected actions.                                                |
-| `action.name`        | string | User-friendly name created (for example, `Click on #checkout`). For custom user actions, the action name given in the API call. |
+| Attribute    | Type   | Description              |
+|--------------|--------|--------------------------|
+| `action.id` | string | UUID of the user action. |
+| `action.type` | string | Type of the user action. For custom user actions, it is set to `custom`. |
+| `action.target.name` | string | Element that the user interacted with. Only for automatically collected actions. |
+| `action.name` | string | User-friendly name created (for example, `Click on #checkout`). For custom user actions, the action name given in the API call. |
 
 ## Declare a name for click actions
 
@@ -80,18 +80,18 @@ For example:
 </div>
 ```
 
-Starting with [version 2.16.0][4], with the `actionNameAttribute` initialization parameter, you can specify your own attribute that is used to name the action.
+Starting with [version 2.16.0][4], with the `actionNameAttribute` initialization parameter, you can specify a custom attribute that is used to name the action.
 
 For example:
 
 ```html
 <script>
-    DD_RUM.init({
-      ...
-      trackInteractions: true,
-      actionNameAttribute: 'data-custom-name',
+  DD_RUM.init({
     ...
-    })
+    trackUserInteractions: true,
+    actionNameAttribute: 'data-custom-name',
+  ...
+  })
 </script>
 
 <a class="btn btn-default" href="#" role="button" data-custom-name="Login button">Try it out!</a>

@@ -109,7 +109,7 @@ For other environments, please refer to the [Integrations][5] documentation for 
 
 After the agent is installed, to begin tracing your applications:
 
-1. Download `dd-java-agent.jar` that contains the latest Agent class files:
+1. Download `dd-java-agent.jar` that contains the latest tracer class files, to a folder that is accessible by your Datadog user:
 
    ```shell
    wget -O dd-java-agent.jar https://dtdg.co/latest-java-tracer

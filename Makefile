@@ -115,7 +115,7 @@ placeholders:
 
 # create the virtual environment
 hugpython: local/etc/requirements3.txt
-	@${PY3} -m venv --clear $@ && . $@/bin/activate && $@/bin/pip install -r $<
+	@${PY3} -m venv --clear $@ && . $@/bin/activate && $@/bin/pip install --upgrade pip wheel && $@/bin/pip install -r $<
 
 update_pre_build:
 	@. hugpython/bin/activate && GITHUB_TOKEN=$(GITHUB_TOKEN) CONFIGURATION_FILE=$(CONFIGURATION_FILE) ./local/bin/py/build/update_pre_build.py

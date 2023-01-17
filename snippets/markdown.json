@@ -1,5 +1,21 @@
 {
-	"Region selector":{
+	"Expander":{
+    "prefix": ";;expander",
+    "body": [
+      "<details>",
+      "<summary>Add summary here</summary>",
+      "Full description goes here",
+      "</details>",
+      "",
+      "<details open>",
+      "<summary>Add another summary here</summary>",
+      "Full description goes here",
+      "</details>"
+    ],
+    "description": "Expanding model"
+  },
+
+  "Region selector":{
 		"prefix": ";;region",
 		"body": [
 			"{{< site-region region=\"us,us3,us5,eu,gov\" >}}",
@@ -75,13 +91,13 @@
 		"prefix": ";;tab",
 		"body": [
 			"{{< tabs >}}",
-			"{{< tab \"${1}\" >}}",
+			"{{% tab \"${1}\" %}}",
 			"",
-			"{{< /tab >}}",
+			"{{% /tab %}}",
 			"",
-			"{{< tab \"${2}\" >}}",
+			"{{% tab \"${2}\" %}}",
 			"",
-			"{{< /tab >}}",
+			"{{% /tab %}}",
 			"{{< /tabs >}}"
 		],
 		"description": "Tabs"

@@ -15,7 +15,7 @@ assets:
     source_type_name: Pulumi
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Pulumi
   sales_email: team@pulumi.com
   support_email: team@pulumi.com
 categories:
