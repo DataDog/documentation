@@ -2,7 +2,6 @@
 title: Injecting Libraries Using Admission Controller
 kind: documentation
 description: "Inject instrumentation libraries into applications using Cluster Agent and Admission Controller"
-is_beta: false
 ---
 
 ## Overview
