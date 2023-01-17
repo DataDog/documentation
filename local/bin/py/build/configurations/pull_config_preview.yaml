@@ -1,9 +1,6 @@
 ---
 - cache_config:
-    # If false, build all external content from source
     global_cache_enabled: true
-
-    # If false, build all integrations from source
     integrations_cache_enabled: true
 
 - data:
@@ -21,7 +18,7 @@
           options:
             dest_path: '/integrations/'
             file_name: 'jenkins.md'
-            cached: true
+            cached: false
             front_matters:
               dependencies: ["https://github.com/jenkinsci/datadog-plugin/blob/master/README.md"]
               public_title: Datadog-Jenkins Integration
@@ -94,7 +91,7 @@
           - docs/dev/*.md
           options:
             dest_dir: '/developers/integrations/'
-            cached: true
+            cached: false
             path_to_remove: 'docs/dev/'
             front_matters:
               dependencies: [ "https://github.com/DataDog/integrations-core/blob/master/docs/dev/" ]
@@ -773,7 +770,7 @@
             - docs/rum_collection/*
           options:
             dest_dir: '/real_user_monitoring/ios/'
-            cached: true
+            cached: false
             path_to_remove: 'docs/rum_collection/'
             front_matters:
               dependencies: [ "https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/" ]
@@ -1185,7 +1182,7 @@
             - "domains/workflow/actionplatform/apps/tools/manifest_generator/manifest.schema.json"
             - "domains/workflow/actionplatform/apps/wf-actions-worker/src/runner/bundles/com.datadoghq.*/manifest.json"
           options:
-            cached: true
+            cached: false
             dest_path: '/workflows/actions_catalog/'
             bundle_excludes:
               - "com.datadoghq.test"

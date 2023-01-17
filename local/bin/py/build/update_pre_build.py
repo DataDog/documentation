@@ -5,7 +5,7 @@ import yaml
 
 from actions.pull_and_push_file import pull_and_push_file
 from actions.pull_and_push_folder import pull_and_push_folder
-from content_manager import prepare_content, copy_cached_content
+from content_manager import prepare_content, copy_cached_content, download_content_from_external_source
 from actions.integrations import Integrations
 from actions.security_rules import security_rules
 from actions.workflows import workflows
@@ -36,8 +36,10 @@ class Build:
             join(self.tempdir, "extracted") + sep
         )
         self.build_configuration = []
+        self.integration_mutations = OrderedDict()
         self.integrations_cache_enabled = False
         self.global_cache_enabled = False
+        self.en_content_path = 'content/en'
 
     # Loads the configurations in the configuration/ folder and attaches it to the Build Class
     def load_config(self, build_configuration_file_path, integration_merge_configuration_file_path):
@@ -45,7 +47,9 @@ class Build:
         cache_config = self.build_configuration[0].get('cache_config', {})
         self.global_cache_enabled = cache_config.get('global_cache_enabled', False)
         self.integrations_cache_enabled = cache_config.get('integrations_cache_enabled', False)
-        self.integration_mutations = OrderedDict(yaml.safe_load(open(integration_merge_configuration_file_path)))
+
+        if self.integrations_cache_enabled == False:
+            self.integration_mutations = OrderedDict(yaml.safe_load(open(integration_merge_configuration_file_path)))
 
     # Get the list of content to work with after it gets updated with the local globs or the
     # downloaded globs from Github.
@@ -60,16 +64,13 @@ class Build:
         Int = Integrations(self.options.source, self.tempdir,
                            self.integration_mutations)
 
-        # Initialize an object to save what external content should be pulled from cache.
+        # Initialize an object to save what external content should be downloaded from cache.
         cached_content = []
 
         # Depending of the action attached to the content the proper function is called
         for content in list_of_contents:
-            try:
-                # use_cached = content.get('options', {}).get('cached', False)
-                use_cached = True
-                
-                if use_cached:
+            try:                
+                if download_content_from_external_source(self, content) == False:
                     cached_content.append(content)
                 elif content["action"] == "integrations":
                     Int.process_integrations(content)
@@ -152,6 +153,7 @@ if __name__ == "__main__":
 
     # Those hard-written variables should be set in the Makefile config later down the road.
     build_configuration_file_path = getenv("CONFIGURATION_FILE")
+    latest_commit_hash = getenv("LATEST_REV")
     integration_merge_configuration_file_path = "./local/bin/py/build/configurations/integration_merge.yaml"
     temp_directory = "./integrations_data"
 

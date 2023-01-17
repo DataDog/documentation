@@ -50,11 +50,13 @@ def download_from_repo(github_token, org, repo, branch, globs, extract_dir, comm
                     )
                 ]
 
+
 def download_from_local_repo(local_repo_path, org, repo, branch, globs, extract_dir, commit_sha=None):
     for path_to_file in chain.from_iterable(glob.glob('{}{}{}'.format(local_repo_path, sep, pattern), recursive=True) for pattern in globs):
         dest = "{0}{1}{2}{3}".format(extract_dir, repo, sep, normpath(path_to_file.replace(local_repo_path, '')))
         makedirs(dirname(dest), exist_ok=True)
         shutil.copyfile(path_to_file, dest)
+
 
 def update_globs(new_path, globs):
     """
@@ -78,6 +80,18 @@ def grouped_globs_table(list_of_contents):
     return data
 
 
+def download_content_from_external_source(self, content):
+    """
+    Returns a boolean determining whether pull_config content should be downloaded from cache or external source.
+    """
+    use_cached = content.get('options', {}).get('cached', False)
+    action = content.get('action', '')
+
+    return (self.global_cache_enabled == False) \
+        or (use_cached == False) \
+        or (action in ('integrations', 'marketplace-integrations') and self.integrations_cache_enabled == False)
+
+
 def local_or_upstream(self, github_token, extract_dir, list_of_contents):
     """
     This goes through the list_of_contents and check for each repo specified in order:
@@ -92,27 +106,10 @@ def local_or_upstream(self, github_token, extract_dir, list_of_contents):
     is_in_ci = os.getenv("CI_COMMIT_REF_NAME")
 
     for content in list_of_contents:
-        use_cached = content.get('options', {}).get('cached', False)
-        action = content.get('action', '')
-        print(f'Global Cache Enabled: {self.global_cache_enabled}')
-        print(f'Integrations Cache Enabled: {self.integrations_cache_enabled}')
-
-        get_content_from_source = (self.global_cache_enabled == False) \
-            or (action in ('integrations', 'marketplace-integrations') and not self.integrations_cache_enabled) \
-            or (use_cached == False)
-
-        if get_content_from_source == False:
-            print('Getting cached content for: ')
-            print(content.get('repo_name', '')) 
-            print(action)
-
-        # If disable_global_cache is true, we always want to do this
-        # If it's an integration action and disable_integrations_cache is true, we want to do this
-        # If use cached is false, we always want to do this
-        # if disable_integrations_cache or (action in ('integrations', 'marketplace-integrations') and disable_integrations_cache) or not use_cached:
-        if not use_cached:
+        if download_content_from_external_source(self, content):
             local_repo_path = os.path.join("..", content["repo_name"])
             repo_path_last_extract = os.path.join(extract_dir, content["repo_name"])
+
             if isdir(local_repo_path) and not is_in_ci:
                 print(f"\x1b[32mINFO\x1b[0m: Local version of {content['repo_name']} found in: {local_repo_path}")
                 download_from_local_repo(local_repo_path, content["org_name"], content["repo_name"], content["branch"], grouped_globs.get(content["repo_name"], content["globs"]),
@@ -168,6 +165,7 @@ def local_or_upstream(self, github_token, extract_dir, list_of_contents):
                     )
                 )
                 raise ValueError
+
     return list_of_contents
 
 
@@ -232,7 +230,7 @@ def prepare_content(self, configuration, github_token, extract_dir):
     return list_of_contents
 
 
-def copy_directory(repo, action, copy_integrations=False):
+def copy_directory(content, copy_integrations=False):
     destination = ''
 
     if action == 'pull-and-push-folder':
@@ -252,11 +250,6 @@ def copy_cached_content(self, cached_content_array):
     :param cached_content_array:
     """
     try:
-        en_content_path = 'content/en'
-
-        if self.integrations_cache_enabled:
-            copy_directory('', '', True)
-
         # s3_url = f'https://origin-static-assets.s3.amazonaws.com/build_artifacts/master/009963ba998e623a3e9c9df119638b13b150c6cb-ignored.tar.gz'
         # artifact_download_response = requests.get(s3_url, stream=True)
 
@@ -266,18 +259,18 @@ def copy_cached_content(self, cached_content_array):
         #     artifact_tarfile.close()
 
         # Copy the files we want to use from the cache
-        for repo in cached_content_array:
-            action = repo.get('action', '')
+        for content in cached_content_array:
+            action = content.get('action', '')
 
             if action == 'pull-and-push-file':
-                dest_path = repo.get('options', {}).get('dest_path')
-                dest_file_name = repo.get('options', {}).get('file_name')
-                full_dest_path = f'{en_content_path}{dest_path}{dest_file_name}'
+                dest_path = content.get('options', {}).get('dest_path')
+                dest_file_name = content.get('options', {}).get('file_name')
+                full_dest_path = f'{self.en_content_path}{dest_path}{dest_file_name}'
 
                 os.makedirs(os.path.dirname(full_dest_path), exist_ok=True)
                 shutil.copy(f'temp/{full_dest_path}', full_dest_path)
             elif action in ('pull-and-push-folder', 'workflows', 'security-rules'):
-                copy_directory(repo, action)
+                copy_directory(content, False)
             else:
                 print(f'Action {action} unsupported, skipping.')
             
