@@ -2,6 +2,34 @@
 title: Impact of the CircleCI Security Incident on the Datadog Agent
 kind: faq
 ---
+<details>
+  <summary>Page changelog</summary>
+  
+  <table>
+    <tr>
+        <td>Date</td>
+        <td>Description</td>
+    </tr>
+    <tr>
+        <td>10 Jan 2023</td>
+        <td>Initial publish</td>
+    </tr>
+    <tr>
+        <td>13 Jan 2023</td>
+        <td>Release of Agent v5.39.2-1</td>
+    </tr>
+    <tr>
+        <td>16 Jan 2023</td>
+        <td>Updated <code>rpm_check</code> script, edits for clarity</td>
+    </tr>
+    <tr>
+        <td>17 Jan 2023</td>
+        <td>Clearer identify and remedy steps</td>
+    </tr>
+</table>
+<p><a href="https://github.com/DataDog/documentation/commits/master/content/en/agent/faq/circleci-incident-impact-on-datadog-agent.md">Full commit history</a>.</p>
+<hr/>
+</details>
 
 On January 4th, 2023, Datadog was notified by CircleCI that they were investigating a [security incident][1] that may have led to leaking of stored secrets. Datadog identified a single secret stored in CircleCI that could theoretically be misused by a potential attacker, an old RPM GNU Privacy Guard (GPG) private signing key and its passphrase. This page provides information about the implications of the potential leak, actions you should take on your hosts, and the measures Datadog is taking to mitigate any risks to our customers.
 
@@ -24,11 +52,19 @@ The impacted RPM GPG signing key has the fingerprint `60A389A44A0C32BAE3C03F0B06
 
 The incident can affect hosts running **RPM-based Linux distributions**, including RHEL, CentOS, Rocky Linux, AlmaLinux, Amazon Linux, SUSE/SLES, and Fedora. Hosts running other operating systems such as macOS, Windows, Debian, and Ubuntu, and Container Agents are not affected.
 
-If RPM-based Linux hosts in your infrastructure trust the affected key, there are actions you must take to secure your hosts. Your host can trust the affected key from either of two places: 
-- The RPM database.
-- The Datadog repo file.
+Before you start, if you have a large infrastructure, **prioritize your search** for hosts that trust the key. Because of the variety of ways packages can be installed and updated over time, Datadog recommends you check **all** RPM-based Linux hosts with a Datadog package installed. To help you prioritize which hosts to check first, consider the following guidance. The following scenarios are **more likely** to be affected:
+   * Agent v5 or v6
+   * Standalone DogStatsD v6 or v7.23.2 and earlier
 
-If either one of these is identified as trusting the key, take the actions listed in the following sections to secure the affected host. If neither of these is identified as trusting the key, no further action is needed.
+   On RPM-based Linux hosts, the following scenarios are **less likely** to be affected, but still possible:
+   * Agent v7
+   * Standalone DogStatsD v7.23.2+.
+
+   The following scenarios are **not** affected:
+   * The Agent was installed with Datadog packages on macOS, Windows, Debian, or Ubuntu.
+   * The host uses the Container Agent.
+
+Check each host to see if it trusts the affected key from either the RPM database or the Datadog repo file, or both:
 
 1. Check the RPM database by running the following command:
 
@@ -50,22 +86,7 @@ If either one of these is identified as trusting the key, take the actions liste
    * `https://s3.amazonaws.com/yum.datadoghq.com/DATADOG_RPM_KEY.public`
    * `https://yum.datadoghq.com/DATADOG_RPM_KEY.public`
 
-
-### Prioritizing your search
-
-Because of the variety of ways packages can be installed and updated over time, Datadog recommends you check **all** RPM-based Linux hosts with a Datadog package installed. To help you prioritize which hosts to check first, consider the following guidance. The following scenarios are **more likely** to be affected:
-
-* Agent v5 or v6
-* Standalone DogStatsD v6 or v7.23.2 and earlier
-
-On RPM-based Linux hosts, the following scenarios are **less likely** to be affected, but still possible:
-
-* Agent v7
-* Standalone DogStatsD v7.23.2+.
-
-The following scenarios are **not** affected:
-* The Agent was installed with Datadog packages on macOS, Windows, Debian, or Ubuntu.
-* The host uses the Container Agent.
+If either one or both of these is identified as trusting the key, take the actions listed in the following sections to secure the affected host. If neither of these is identified as trusting the key, no further action is needed.
 
 ## Securing the affected hosts
 
@@ -119,6 +140,8 @@ We released new versions of **Agent installation methods** to ensure they make h
     * [https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh][17]
     * [https://s3.amazonaws.com/dd-agent/scripts/install_script.sh][18] (Deprecated and no longer recommended, but updated.)
   * [Datadog Agent 5 Linux install script][19] released to its [download location][19] at 16:25 UTC on January 12th, 2023
+
+
 
 [1]: https://circleci.com/blog/january-4-2023-security-alert/
 [2]: https://keys.datadoghq.com/DATADOG_RPM_KEY.public
