@@ -1,16 +1,16 @@
 ---
-title: Configure Serverless Monitoring
+title: Configure Serverless Monitoring for AWS Lambda
 kind: documentation
 further_reading:
   - link: '/serverless/installation/'
     tag: 'Documentation'
-    text: 'Installing Serverless Monitoring'
+    text: 'Install Serverless Monitoring for AWS Lambda'
   - link: '/serverless/troubleshooting/'
     tag: 'Documentation'
-    text: 'Troubleshoot Serverless Monitoring'
+    text: 'Troubleshoot Serverless Monitoring for AWS Lambda'
   - link: '/integrations/github'
     tag: 'Documentation'
-    text: 'Learn about the GitHub integration'
+    text: 'Datadog GitHub integration'
 aliases:
     - /serverless/distributed_tracing/collect_lambda_payloads
     - /serverless/libraries_integrations/lambda_code_signing
@@ -18,7 +18,7 @@ aliases:
     - /serverless/guide/extension_private_link/
 ---
 
-First, [install][1] Datadog serverless monitoring to begin collecting metrics, traces, and logs. After installation is complete, refer to the following topics to configure your installation to suit your monitoring needs.
+First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, traces, and logs. After installation is complete, refer to the following topics to configure your installation to suit your monitoring needs.
 
 ### Metrics
 - [Collect metrics from non-Lambda resources](#collect-metrics-from-non-lambda-resources)

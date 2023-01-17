@@ -16,7 +16,7 @@ assets:
     source_type_name: Unifi Console
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: コミュニティ
   sales_email: antonin.bruneau@gmail.com
   support_email: antonin.bruneau@gmail.com
 categories: []

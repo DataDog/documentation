@@ -39,20 +39,20 @@ To start collecting frustration signals, add the following to your SDK configura
 
 ```
 DD_RUM.init({
-  trackInteractions: true,
+  trackUserInteractions: true,
   trackFrustrations: true
 })
 ```
 
-Frustration signals require actions. Enabling `trackFrustrations` automatically enables `trackInteractions`.
+Frustration signals require actions. Enabling `trackFrustrations` automatically enables `trackUserInteractions`.
 
 ## Usage
 
-Frustration signals appear as high-level data points representing sources of user frustration on the [**RUM Applications** page][1]. To display a list of frustration counts in the [RUM Explorer][2], click the **Options** button and add a column for `@session.frustration.count`. 
+Frustration signals appear as high-level data points representing sources of user frustration on the [**RUM Applications** page][1]. To display a list of frustration counts in the [RUM Explorer][2], click the **Options** button and add a column for `@session.frustration.count`.
 
 ### Application list
 
-Hover over the list of browser sessions and click on a session to observe a user's frustrated click behavior. Or, click **Frustrated Sessions** to access sessions with a frustration signal. 
+Hover over the list of browser sessions and click on a session to observe a user's frustrated click behavior. Or, click **Frustrated Sessions** to access sessions with a frustration signal.
 
 ### Explore the frustration signals dashboard
 
@@ -124,7 +124,7 @@ For more information, see the [Real User Monitoring Monitor documentation][9].
 
 ### Why is a rage click not created when a user presses a key (like Delete) on the keyboard?
 
-Frustration signals are generated from mouse clicks, not keyboard strokes. 
+Frustration signals are generated from mouse clicks, not keyboard strokes.
 
 ### Why does the side panel show that a session has a different number of frustration signals than in the event timeline?
 

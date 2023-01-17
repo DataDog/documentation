@@ -64,7 +64,7 @@ CMD ["/nodejs/bin/node", "/path/to/your/app.js"] (adapt this line to your needs)
 
 ```
 
-詳しくは [NodeJS アプリケーションのトレース][1]を参照してください。[簡単な NodeJS アプリケーションのサンプルコード][2]をご覧ください。
+詳しくは [Node.js アプリケーションのトレース][1]を参照してください。[簡単な Node.js アプリケーションのサンプルコード][2]をご覧ください。
 
 [1]: /ja/tracing/setup_overview/setup/nodejs/?tabs=containers
 [2]: https://github.com/DataDog/crpb/tree/main/js
