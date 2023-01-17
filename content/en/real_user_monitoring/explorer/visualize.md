@@ -121,3 +121,4 @@ For the remaining visualization options, click on the graph and click **View eve
 [5]: /real_user_monitoring/explorer/search#setup-facets-and-measures
 [6]: /notebooks
 [7]: /real_user_monitoring/explorer/export/
+[8]: /dashboards/widgets/list/
