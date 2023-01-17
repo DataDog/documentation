@@ -3,12 +3,12 @@ title: Impact of the CircleCI Security Incident on the Datadog Agent
 kind: faq
 ---
 <details>
-  <summary>Page changelog</summary>
+  <summary><strong>Page changelog</strong></summary>
   
   <table>
     <tr>
-        <td>Date</td>
-        <td>Description</td>
+        <td><strong>Date</strong></td>
+        <td><strong>Description</strong></td>
     </tr>
     <tr>
         <td>10 Jan 2023</td>
