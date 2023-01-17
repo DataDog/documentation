@@ -5,7 +5,7 @@ kind: Documentation
 
 ## Overview
 
-The Observability Pipelines Worker's aggregator architecture deploys Observability Pipelines Worker as a standalone service for centralized data processing and routing.
+The Observability Pipelines Worker's aggregator architecture deploys the Observability Pipelines Worker as a standalone service for centralized data processing and routing.
 
 Deploy Observability Pipelines Worker into your infrastructure, like any other service to intercept and manipulate data, and then forward it to your destinations. Each Observability Pipelines Worker instance operates independently, so that you can scale the architecture with a simple load balancer.
 
@@ -18,7 +18,7 @@ This guide walks you through the recommended aggregator architecture for new Obs
 - Determining your [network topology and configurations](#networking) for the Observability Pipelines Worker.
 - Achieving [high durability](#high-durability) and [high availability](#high-availability).
 - Using the Observability Pipelines Worker as part of your [disaster recovery](#disaster-recovery).
-- More [advanced configurations](#advanced-configurations) for deploying multiple aggregators, pub-sub systems, and global aggregation
+- More [advanced configurations](#advanced-configurations) for deploying multiple aggregators, publish-subscribe systems, and global aggregation.
 
 ### Comparison
 
@@ -56,11 +56,11 @@ Compared to the Observability Pipelines Worker agent architecture, the aggregato
 
 ## Configuring Observability Pipelines Worker
 
-While your configuration may deviate, it should still follow the primary goals below.
+While your configuration may vary, it should follow the following primary goals.
 
 ### Collecting data
 
-Make it easy to send data to your Observability Pipelines Worker aggregator by integrating as many sources as possible. It's not uncommon for Observability Pipelines Worker aggregators to have dozens of sources. Configure the source component as long as it supports your security and durability requirements. This makes it easy for users across your company to adopt the Observability Pipelines Worker aggregator, even if they are using legacy services.
+Make it easy to send data to your Observability Pipelines Worker aggregator by integrating as many sources as possible. It's not uncommon for Observability Pipelines Worker aggregators to have dozens of sources. Configure the source component as long as it supports your security and durability requirements. This enables users across your company to adopt the Observability Pipelines Worker aggregator, even if they are using legacy services.
 
 ### Processing data
 
@@ -76,7 +76,7 @@ Separate your system of analysis (for example, Datadog) from your system of reco
 
 ### Instance sizing
 
-Compute optimized instances with at least 8 vCPUs and 16 GiB of memory. These are good units for horizontally scaling the Observability Pipelines Worker aggregator. Observability Pipelines Worker can vertically scale and automatically take advantage of additional resources if you choose larger instances. Choose a size that allows for at least two Observability Pipelines Worker instances for your data volume to improve availability.
+Compute optimized instances with at least 8 vCPUs and 16 GiB of memory. These are ideal units for horizontally scaling the Observability Pipelines Worker aggregator. Observability Pipelines Worker can vertically scale and automatically take advantage of additional resources if you choose larger instances. Choose a size that allows for at least two Observability Pipelines Worker instances for your data volume to improve availability.
 
 | Cloud Provider| Recommendation                                    	|
 | ------------- | ----------------------------------------------------- |
@@ -98,15 +98,15 @@ Most Observability Pipelines Worker workloads are CPU constrained and benefit fr
 
 ### CPU architectures
 
-Observability Pipelines Worker runs on modern CPU architectures. Benchmarks indicate that X86_64 architectures offer the best return on performance for Observability Pipelines Worker.
+Observability Pipelines Worker runs on modern CPU architectures. X86_64 architectures offer the best return on performance for Observability Pipelines Worker.
 
 ### Memory sizing
 
-Due to Observability Pipelines Worker's affine type system, memory is rarely constrained for Observability Pipelines Worker workloads. Therefore,  ≥2 GiB of memory per vCPU as a starting point is recommended. Memory usage increases with the number of sinks due to the in-memory buffering and batching. If you have a lot of sinks, consider increasing the memory or switching to disk buffers.
+Due to Observability Pipelines Worker's affine type system, memory is rarely constrained for Observability Pipelines Worker workloads. Therefore, Datadog recommends ≥2 GiB of memory per vCPU minimum. Memory usage increases with the number of sinks due to the in-memory buffering and batching. If you have a lot of sinks, consider increasing the memory or switching to disk buffers.
 
 ### Disk sizing
 
-If you're using Observability Pipelines Worker's disk buffers for high durability (recommended), provision at least 36 GiB per vCPU* of disk space. Following the recommendation of 8 vCPUs, provision 288 GiB of disk space (10 MiB * 60 seconds * 60 minutes * 8 vCPUs).
+If you're using Observability Pipelines Worker's disk buffers for high durability (recommended), provision at least 36 GiB per vCPU of disk space. Following the recommendation of 8 vCPUs, provision 288 GiB of disk space (10 MiB * 60 seconds * 60 minutes * 8 vCPUs).
 
 | Cloud Provider| Recommendation*                                               |
 | ------------- | --------------------------------------------------------------|
@@ -119,13 +119,13 @@ If you're using Observability Pipelines Worker's disk buffers for high durabilit
 
 #### Disk types
 
-Choose a disk type that optimizes for durability and recovery. For example, standard block storage is ideal since it is decoupled from the instance and replicates data across multiple disks for high durability. High-performance local drives are not recommended since their throughput exceeds Observability Pipelines Worker's needs, and their durability is reduced relative to block storage.
+Choose a disk type that optimizes for durability and recovery. For example, standard block storage is ideal because it is decoupled from the instance and replicates data across multiple disks for high durability. High-performance local drives are not recommended because their throughput exceeds Observability Pipelines Worker's needs, and their durability is reduced relative to block storage.
 
 See [High durability](#high-durability) for more information on why disks are used in this architecture.
 
 #### Operating systems and GCC
 
-Choose a Linux-based operating system with glibc (GNU) ≥ 2.14 (released in 2011) if possible. Observability Pipelines Worker runs on other platforms, but this combination produces the best performance in our benchmarks.
+Choose a Linux-based operating system with glibc (GNU) ≥ 2.14 (released in 2011) if possible. Observability Pipelines Worker runs on other platforms, but this combination produces the best performance in Datadog's benchmarks.
 
 ## Capacity planning
 
@@ -151,7 +151,7 @@ Horizontal scaling refers to distributing traffic across multiple Observability 
 
 For push-based sources, front your Observability Pipelines Worker instances with a network load balancer and scale them up and down as needed.
 
-A load balancer is not required for pull-based sources; just deploy Observability Pipelines Worker and scale it up and down. Your pub-sub system coordinates exclusive access to the data when Observability Pipelines Worker asks to read it.
+A load balancer is not required for pull-based sources; deploy Observability Pipelines Worker and scale it up and down as needed. Your publish-subscription system coordinates exclusive access to the data when Observability Pipelines Worker asks to read it.
 
 See [Advanced configurations](#advanced-configurations) for more information on mixed workloads (push and pull-based sources).
 
@@ -168,7 +168,7 @@ Client-side load balancing is not recommended. Client-side load balancing refers
 
 ##### Load balancer types
 
-Datadog recommends layer-4 load balancers (network load balancers) since they support Observability Pipelines Worker's protocols (TCP, UDP, and HTTP). Even if you're exclusively sending HTTP traffic (layer-7), layer-4 load balancers are still recommended for their performance and simplicity. 
+Datadog recommends Layer 4 (L4) load balancers (network load balancers) since they support Observability Pipelines Worker's protocols (TCP, UDP, and HTTP). Even if you're exclusively sending HTTP traffic (Layer 7), Datadog recommends L4 load balancers for their performance and simplicity. 
 
 | Cloud Provider| Recommendation                                                |
 | ------------- | --------------------------------------------------------------|
@@ -179,25 +179,25 @@ Datadog recommends layer-4 load balancers (network load balancers) since they su
 
 ##### Load balancer configurations
 
-When configuring clients and load balancers, the following general settings are recommended:
+When configuring clients and load balancers, Datadog recommends the following general settings:
 
 - Use a simple round-robin load balancing strategy.
 - Do not enable cross-zone load balancing unless the traffic across zones is very imbalanced.
 - Configure load balancers to use Observability Pipelines Worker's health API endpoint for target health.
-- Ensure that your Observability Pipelines Worker instances automatically register/deregister as they scale. See [service discovery](#dns-and-service-discovery) for more information).
+- Ensure that your Observability Pipelines Worker instances automatically register or de-register as they scale. See [service discovery](#dns-and-service-discovery) for more information).
 - Enable keep-alive with no more than one minute idle timeout for both your clients and load balancers.
-- If supported, enable connection concurrency/pooling on your agents. If that is not supported, consider the unified architecture which deploys Observability Pipelines Worker at the edge. Connection pooling ensures large volumes of data are spread across multiple connections to help balance traffic.
+- If supported, enable connection concurrency and pooling on your agents. If that is not supported, consider the unified architecture which deploys Observability Pipelines Worker at the edge. Connection pooling ensures large volumes of data are spread across multiple connections to help balance traffic.
 
 ##### Load balancer hot spots
 
-Load balancing hot spots occur when one or more Observability Pipelines Worker instances receives disproportionate traffic. Hot spots usually happen due to one of two reasons:
+Load balancing hot spots occur when one or more Observability Pipelines Worker instance receives disproportionate traffic. Hot spots usually happen due to one of two reasons:
 
 1. A substantial amount of traffic is being sent over a single connection.
 2. Traffic in one availability zone is much higher than in the others.
 
 In these cases, the following respective mitigation tactics are recommended:
 
-1. Split large connections into multiple connections. Most clients allow connection concurrency/pooling that distributes data over multiple connections. This tactic allows your load balancer to distribute the connection across multiple Observability Pipelines Worker instances. If your client does not support this, consider the unified architecture, where Observability Pipelines Worker can be additionally deployed to the edge.
+1. Split large connections into multiple connections. Most clients allow connection concurrency and pooling that distributes data over multiple connections. This tactic allows your load balancer to distribute the connection across multiple Observability Pipelines Worker instances. If your client does not support this, consider the unified architecture, where Observability Pipelines Worker can be additionally deployed to the edge.
 2. Enable cross-zone load balancing on your load balancer. Cross-zone balancing balances all availability zone traffic across all Observability Pipelines Worker instances.
 
 ### Vertical scaling
@@ -206,7 +206,7 @@ Observability Pipelines Worker's concurrency model automatically scales to take 
 
 ### Autoscaling
 
-Autoscaling should be based on average CPU utilization. For the vast majority of workloads, Observability Pipelines Worker is CPU constrained. CPU utilization is the strongest signal for autoscaling since it does not produce false positives. The following settings are recommended, adjust as necessary:
+Autoscaling should be based on average CPU utilization. For the vast majority of workloads, Observability Pipelines Worker is CPU constrained. CPU utilization is the strongest signal for autoscaling since it does not produce false positives. Datadog recommends you use the following settings, adjusting as necessary:
 
 - Average CPU with a 85% utilization target.
 - A five minute stabilization period for scaling up and down.
@@ -225,7 +225,7 @@ See [Advanced configurations](#advanced-configurations) for more information on 
 
 #### DNS and service discovery
 
-Your organization might have adopted some form of service discovery, even if it's facilitated through basic DNS. Discovery of your Observability Pipelines Worker aggregators and services should resolve through your service discovery mechanism.
+Your organization may have adopted some form of service discovery, even if it's facilitated through basic DNS. Discovery of your Observability Pipelines Worker aggregators and services should resolve through your service discovery mechanism.
 
 Service discovery allows you to configure your agents with named hostnames (not static IP addresses), facilitating routing and load balancing of your traffic. This is how your agents discover your load balancers and how your load balancers discover your Observability Pipelines Worker aggregators.
 
@@ -246,13 +246,13 @@ The Observability Pipelines Worker requires all ports to be explicitly configure
 | 8282 | Datadog Agent  | HTTP      | Incoming | Accepts data from the fluent source.   |
 | 123  | Files          | Syslog    | Incoming | Accepts data from the Syslog source.   |
 
-Be sure to review your own Observability Pipelines Worker configuration for the exact ports exposed as your administrator may have changed them.
+Be sure to review your Observability Pipelines Worker configuration for the exact ports exposed, as your administrator may have changed them.
 
 #### Protocols
 
-The Observability Pipelines Worker is designed to receive and send data over a variety of protocols. Using the protocol best supported for your integration is recommended. Choose HTTP-based protocols for their application-level delivery acknowledgments and ubiquitous support across platforms when possible. Otherwise, choose TCP-based protocols. UDP is not recommended, as there is risk of losing data. 
+The Observability Pipelines Worker is designed to receive and send data over a variety of protocols. Datadog recommends using the protocol best supported for your integration. Choose HTTP-based protocols for their application-level delivery acknowledgments and ubiquitous support across platforms when possible. Otherwise, choose TCP-based protocols. UDP is not recommended, as there is risk of losing data. 
 
-##### Observability Pipelines Worker to Observability Pipelines Worker communication
+##### Worker-to-worker communication
 
 Use the Observability Pipelines Worker source and sink to send data between Observability Pipelines Worker instances (for example, with the unified architecture). These sources use the GRPC protocol for efficient lossless communication.
 
@@ -262,7 +262,7 @@ The Observability Pipelines Worker provides specific sources for many agents. Fo
 
 #### Compression
 
-Compression can impose a ~50% decrease in throughput based on our benchmarks. Use compression with caution and monitor performance after enabling.
+Compression can impose a 50% decrease in throughput based on Datadog benchmarks. Use compression with caution and monitor performance after enabling.
 
 Compression of network traffic should only be used for cost-sensitive egress scenarios due to its impact on performance (for example, sending data over the public internet). Therefore, compression is not recommended for internal network traffic.
 
@@ -298,7 +298,7 @@ sinks:
 		acknowledgments: true
 ```
 
-With this feature enabled, Observability Pipelines Worker does not respond to agents until the data has been durably persisted. Thus, preventing the agent from releasing the data prematurely and sending it again if an acknowledgment has not been received.
+With this feature enabled, Observability Pipelines Worker does not respond to agents until the data has been durably persisted. This prevents the agent from releasing the data prematurely and sending it again if an acknowledgment has not been received.
 
 ### Handling node failures
 
@@ -322,7 +322,7 @@ If durability is the most important criteria, use the direct archiving method be
 
 ### Handling destination failures
 
-Finally, destination failures refer to the total failure of a downstream destination (for example Elasticsearch). Data loss can be mitigated for issues with the downstream destination by using disk buffers large enough to sustain the outage time. This allows data to durably buffer while the service is down and then drain when the service comes back up. For this reason, disk buffers large enough to hold at least one hour's worth of data are recommended. See [disk sizing](#disk-sizing) for more details.
+Destination failures refer to the total failure of a downstream destination (for example, Elasticsearch). Data loss can be mitigated for issues with the downstream destination by using disk buffers large enough to sustain the outage time. This allows data to durably buffer while the service is down and then drain when the service comes back up. For this reason, disk buffers large enough to hold at least one hour's worth of data are recommended. See [disk sizing](#disk-sizing) for more details.
 
 ## High availability
 
@@ -338,7 +338,7 @@ To achieve high durability:
 
 #### Handling Observability Pipelines Worker process issues
 
-To mitigate a system process issue, distribute Observability Pipelines Worker across multiple nodes and front them with a network load balancer that can redirect traffic to another Observability Pipelines Worker instance as needed. In addition, platform-level automated self-healing should eventually restart the process or replace the node.
+To mitigate a system process issue, distribute the Observability Pipelines Worker across multiple nodes and front them with a network load balancer that can redirect traffic to another Observability Pipelines Worker instance as needed. In addition, platform-level automated self-healing should eventually restart the process or replace the node.
 
 #### Mitigating node failures
 
@@ -366,48 +366,48 @@ If you're using a managed destination, such as Datadog, Observability Pipelines 
 
 ### Multiple aggregator deployments
 
-As covered in [network boundaries](#network-boundaries), Datadog recommends to start with one Observability Pipelines Worker aggregator per region. This is to prevent overcomplicating your initial deployment of Observability Pipelines Worker, but there are circumstances where starting with multiple deployments makes sense:
+As covered in [network boundaries](#network-boundaries), Datadog recommends to start with one Observability Pipelines Worker aggregator per region. This is to prevent overcomplicating your initial deployment of Observability Pipelines Worker, but there are circumstances where starting with multiple deployments is ideal:
 
 1. **Prevent sending data over the public internet.** If you have multiple clouds and regions, deploy the Observability Pipelines Worker aggregator in each of them to prevent sending large amounts of data over the internet. Your Observability Pipelines Worker aggregator should receive internal data and serve as the single point of egress for your network.
 
-2. **Independent management.** You have teams that can operate and manage a Observability Pipelines Worker aggregator independently for their use case. For example, your Data Science team may be responsible for operating their own infrastructure and has the means to independently operate their own Observability Pipelines Worker aggregator.
+2. **Independent management.** You have teams that can operate and manage an Observability Pipelines Worker aggregator independently for their use case. For example, your Data Science team may be responsible for operating their own infrastructure and has the means to independently operate their own Observability Pipelines Worker aggregator.
 
 ### Multiple cloud accounts
 
-Many users have multiple cloud accounts with VPCs and clusters inside. Datadog still recommends in this case to deploy one Observability Pipelines Worker aggregator per region. Deploy Observability Pipelines Worker into your utility/tools cluster and configure all your cloud accounts to send data to this cluster. See [network boundaries](#network-boundaries) for more information.
+Many users have multiple cloud accounts with VPCs and clusters inside. Datadog still recommends in this case to deploy one Observability Pipelines Worker aggregator per region. Deploy Observability Pipelines Worker into your utility or tools cluster and configure all your cloud accounts to send data to this cluster. See [network boundaries](#network-boundaries) for more information.
 
-### Pub-sub systems
+### Publish-subscribe (pub-sub) systems
 
-Using a pub-sub system, like Kafka, is not required to make this architecture highly available or highly durable (see the high durability and high availability sections), but they do offer the following advantages:
+Using a pub-sub system such as Kafka is not required to make your architecture highly available or highly durable (see the high durability and high availability sections), but they do offer the following advantages:
 
-1. **Improved reliability.** Pub-sub systems are designed to be highly reliable and durable systems that change infrequently. They are especially reliable if you are using a managed option. The Observability Pipelines Worker is likely to change more often by nature of its purpose. Insulate Observability Pipelines Worker downtime behind a pub-sub system to increase availability from the perception of your clients and make recovery simpler.
+1. **Improved reliability.** Pub-sub systems are designed to be highly reliable and durable systems that change infrequently. They are especially reliable if you are using a managed option. The Observability Pipelines Worker is likely to change more often based on its purpose. Isolate Observability Pipelines Worker downtime behind a pub-sub system to increase availability from the perception of your clients and make recovery simpler.
 
 
 2. **Load balancer not required.** Pub-sub systems eliminate the need for a load balancer. Your pub-sub system handles the coordination of consumers, making it easy to scale Observability Pipelines Worker horizontally.
 
 #### Pub-sub partitioning
 
-Partitioning, or "topics" in Kafka terminology, refers to separating data in your pub-sub systems. Datadog strongly recommends partitioning along data origin lines, such as the service or host that generated the data.
+Partitioning, or "topics" in Kafka terminology, refers to separating data in your pub-sub systems. You should partition along data origin lines, such as the service or host that generated the data.
 
 #### Pub-sub configuration
 
-When using a pub-sub system, the following configuration changes for Observability Pipelines Worker are recommended:
+When using a pub-sub system, Datadog recommends the following configuration changes for Observability Pipelines Worker:
 
 - **Enable end-to-end acknowledgements for all sinks.** This setting ensures that the pub-sub checkpoint is not advanced until data is successfully written.
 - **Use memory buffers.** There is no need to use Observability Pipelines Worker's disk buffers when it sits behind a pub-sub system. Your pub-sub system is designed for long-term buffering with high durability. Observability Pipelines Worker should only be responsible for reading, processing, and routing the data (not durability).
 
 ### Global aggregation
 
-This section provides recommendations for performing global calculations for legacy destinations. Modern destinations already support global calculations. For example, Datadog supports distributions (DDSketch) that solve global observations of your metrics data.
+This section provides recommendations for performing global calculations for legacy destinations. Modern destinations already support global calculations. For example, Datadog supports distributions (such as DDSketch) that solve global observations of your metrics data.
 
 Global aggregation refers to the ability to aggregate data for an entire region. For example, computing global quantiles for CPU load averages. To achieve this, a single Observability Pipelines Worker instance must have access to every node's CPU load average statistics. This is not possible with horizontal scaling; each individual Observability Pipelines Worker instance only has access to a slice of the overall data. Therefore, aggregation should be tiered.
 
-The structure is that tier 2 aggregators receive an aggregated sub-stream of the overall data from tier 1 aggregators. This allows a single instance to get a global view without processing the entire stream and introducing a single point of failure.
+The structure is that tier two aggregators receive an aggregated sub-stream of the overall data from tier one aggregators. This allows a single instance to get a global view without processing the entire stream and introducing a single point of failure.
 
 #### Recommendations
 
 - Limit global aggregation to tasks that can reduce data, such as computing global histograms. Never send all data to your global aggregators.
-- Continue to use your local aggregators to process and deliver most data so that you do notintroduce a single point of failure.
+- Continue to use your local aggregators to process and deliver most data so that you do not introduce a single point of failure.
 
 
 [1]: https://wiki.archlinux.org/title/Domain_name_resolution
