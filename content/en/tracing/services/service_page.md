@@ -152,7 +152,7 @@ This tab has overview graphs that show which resources have the most issues and 
 ### Security
 Understand the security posture of the service, including known vulnerabilities exposed in the service’s libraries and security signals on your service, which are automatically created when Datadog detects application attacks impacting your services. The signals identify meaningful threats for you to review instead of assessing each individual attack attempt. Read more about [Application Security][18].
 
-The top section of the security tab has overview graphs that show the number of severity of vulnerabilities, timeline of attacks, the types of attacks, and attacker information (Client IP or authenticated user). 
+The top section of the security tab has overview graphs that show the number and severity of vulnerabilities, a timeline of attacks, the types of attacks, and attacker information (client IP or authenticated user). 
 
 The next section of the panel lists all the vulnerabilities and signals concerning the service. Click on a security vulnerability to open a side panel with relevant details to investigate further and remediate the vulnerability. Click on a security signal to get information about what the detected threat is and what actions you can take to remediate it.
 
