@@ -102,7 +102,7 @@ Click the Settings icon on the right hand corner to hide metric columns from the
 ### Security view
 The **Security tab** provides several ways to assess and improve the security posture of your services. This includes understanding the number and severity of known security vulnerabilities in the open source libraries and viewing how your services are targeted by attackers. Sort the table by clicking columns to reveal services that:
 
-- Expose known security vulnerabilities, including the individual severities
+- Expose known security vulnerabilities, including the individual severities.
 - Are receiving the most attack attempts.
 - Are targeted by the most attackers.
 - Have the most severe threats, where the services are impacted by the attacks. 
