@@ -283,12 +283,12 @@ If you've configured the profiler and don't see profiles in the profile search p
 
    5. Check the other HTTP codes for possible errors such as 403 for invalid API key.
 
-4. For missing CPU or Wall time profiles only, check the Datadog signal handler for stack walk has not been replaced:
+4. For missing CPU or Wall time profiles only, check that the Datadog signal handler for stack walk has not been replaced:
 
    1. Open the `DD-DotNet-Profiler-Native-<Application Name>-<pid>` log file in the `/var/log/datadog` folder.
 
    2. Look for these two messages:
-      - `Profiler signal handler was replaced again. As of now, we will stopped restoring it to avoid issues: the profiler is disabled.`
+      - `Profiler signal handler was replaced again. It will not be restored: the profiler is disabled.`
       - `Fail to restore profiler signal handler.`
 
    3. If one of these messages is present, it means that the application code or a third party code is repeatedly reinstalling its own signal handler over the Datadog signal handler. To avoid any further conflict, the CPU and Wall time profilers are disabled.
