@@ -74,12 +74,13 @@ $ DD_API_KEY=<DD_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.
 ## Configuration
 
 - The configuration file for the Worker is located at `/etc/datadog-observability-pipelines-worker/observability-pipelines-worker.yaml`.
-- All configuration options can be found in the Configuration Reference.
-- Configuration examples can be found in the integrations and working with data sections.
+- See Configuration Reference for all configuration options.
+- See [Working with Data][6] and Configuration Reference for configuration examples.
 
 [1]: https://en.wikipedia.org/wiki/APT_%28software%29
 [2]: https://debian.org/
 [3]: https://ubuntu.com/
 [4]: https://linux.org/
 [5]: /account_management/api-app-keys/#api-keys
+[6]: /observability_pipelines/working_with_data/
 
