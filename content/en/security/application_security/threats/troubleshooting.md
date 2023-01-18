@@ -3,6 +3,7 @@ title: Troubleshooting Application Security Management
 kind: documentation
 aliases:
   - /security_platform/application_security/troubleshooting
+  - /security/application_security/troubleshooting
 further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"

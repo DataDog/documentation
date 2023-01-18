@@ -6,6 +6,7 @@ type: multi-code-lang
 code_lang_weight: 0
 aliases:
   - /security_platform/application_security/getting_started/java
+  - /security/application_security/getting_started/java
 further_reading:
 - link: "/security/application_security/add-user-info/"
   tag: "Documentation"
