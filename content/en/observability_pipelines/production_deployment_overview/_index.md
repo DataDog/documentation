@@ -13,10 +13,6 @@ This article walks you through architectural best practices for deploying Observ
 
 Most users of Observability Pipelines Worker have complex production environments with many clusters, services, and observability tools. A common mistake is to plan multiple Observability Pipelines Worker deployments instead of starting with one. Datadog recommends to start by deploying a single Observability Pipelines Worker aggregator and onboarding one service at a time. This allows you to get set up quickly and gain experience operating Observability Pipelines Worker before adopting more complex deployment strategies. 
 
-### Optimize for agility
-
-Another common mistake is attempting to standardize everything on one agent or specification. Variety is inevitable for any moderately complex environment, and it continues to manifest as your environment evolves. To work with variety, deploy flexible tooling designed to bridge past, current, and future standards. This allows different observability tools to work together. 
-
  ## Deployment roles
 
  The Observability Pipelines Worker can be deployed anywhere in your infrastructure as an agent or an aggregator.
