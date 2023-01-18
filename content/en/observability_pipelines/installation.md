@@ -3,7 +3,14 @@ title: Installation
 kind: Documentation
 aliases:
     - /observability_pipelines/setup/
+further_reading:
+  - link: /observability_pipelines/production_deployment_overview/
+    tag: Documentation
+    text: Taking the Worker to production environments
 ---
+
+{{< tabs >}}
+{{% tab "Linux" %}}
 
 ## Overview
 
@@ -83,4 +90,97 @@ $ DD_API_KEY=<DD_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.
 [4]: https://linux.org/
 [5]: /account_management/api-app-keys/#api-keys
 [6]: /observability_pipelines/working_with_data/
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+## Overview
+
+Install the Observability Pipelines Worker in your Kubernetes environment with Helm Chart.
+
+## Prerequisites
+
+Before installing, make sure you have:
+
+1. Kubernetes version 1.15.0-0 or above.
+2. [Helm][1] for deploying the datadog-operator.
+3. [Kubectl CLI][2] for installing the datadog-agent.
+4. A valid [Datadog API key][3].
+5. An Observability Pipelines Configuration ID.
+
+## Installation
+
+1. Run the following commands to add Datadog Observability Pipelines Worker repository to your Helm repositories: 
+
+    ```
+    $ helm repo add datadog https://helm.datadoghq.com
+    $ helm repo update
+    ```
+
+2. Install [Observability Pipelines Worker][4]:
+
+    ```
+    $ helm install opw datadog/observability-pipelines-worker
+    ```
+
+    If you want to install the chart with a specific release name, run the following command, replacing <RELEASE_NAME> with the specific release name:
+
+    ```
+    $ helm install --name <RELEASE_NAME> \
+        --set datadog.apiKey=<DD_API_KEY> \
+        --set datadog.configKey=<DD_OP_CONFIG_KEY> \
+        datadog/observability-pipelines-worker
+    ```
+
+    You can set your Datadog site using the `datadog.site` option.
+
+    ```
+    $ helm install --name <RELEASE_NAME> \
+        --set datadog.apiKey=<DD_API_KEY> \
+        --set datadog.configKey=<DD_OP_CONFIG_KEY> \
+        datadog/observability-pipelines-worker
+    ```
+
+    By default, this chart creates Secrets for your Observability Pipelines API and configuration keys. However, you can use manually created Secrets by setting the `datadog.apiKeyExistingSecret` and/or `datadog.appKeyExistingSecret` values. See the next step on how to create a Secret.
+
+    **Note**: Make sure to name the key fields `api-key` and `config-key` when you create the Secret(s).
+
+    After a few minutes, you should see your new pipeline active in Datadog.
+
+3. Create and provide a Secret that contains your Datadog API and Configuration Keys. To create a Secret that contains your Datadog API key, replace the `<DATADOG_API_KEY>` below with the Datadog API key for your organization. This Secret is used in the manifest to deploy the Observability Pipelines Worker.
+
+    ```
+    export DATADOG_SECRET_NAME=datadog-secrets
+    kubectl create secret generic $DATADOG_SECRET_NAME \
+        --from-literal api-key="<DD_API_KEY>" \
+        --from-literal config-key="<DD_OP_CONFIG_KEY>"
+    ```
+
+    **Note**: This creates a Secret in the default namespace. If you are using a custom namespace, update the namespace flag of the command before running it.
+
+    The following installation command references the Secret:
+
+    ```
+    helm install --name <RELEASE_NAME> \
+        --set datadog.apiKeyExistingSecret=$DATADOG_SECRET_NAME \
+        --set datadog.configKeyExistingSecret=$DATADOG_SECRET_NAME \
+        datadog/observability-pipelines-worker
+    ```
+
+## Values
+
+See [this table][5] for the the list of values.
+
+[1]: https://helm.sh/ 
+[2]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
+[3]: /account_management/api-app-keys/#api-keys
+[4]: https://artifacthub.io/packages/helm/datadog/observability-pipelines-worker
+[5]: https://github.com/DataDog/helm-charts/tree/main/charts/observability-pipelines-worker#values
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
