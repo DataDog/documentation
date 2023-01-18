@@ -37,7 +37,7 @@ further_reading:
 
 Observability Pipelines enables you to shape and transform observability data. Similar to Logging without Limits™ pipelines, you can configure pipelines for Observability Pipelines that are composed of a series of `transform` components. These transforms allow you to parse, structure, and enrich data with built-in type safety.
 
-## Remap data with Vector Remap Language
+## Remap data with VRL
 
 Vector Remap Language (VRL) is an expression-oriented, domain specific language designed for transforming observability data (logs and metrics). It features a simple syntax and [built-in functions][1] tailored to observability use cases.
 

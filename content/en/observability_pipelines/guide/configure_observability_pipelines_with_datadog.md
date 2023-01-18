@@ -489,12 +489,12 @@ Read more about [architecting buffers][13].
 [2]: /observability_pipelines/installation/
 [3]: /observability_pipelines/configurations/
 [4]: /agent/kubernetes/?tab=helm
-[5]: https://vector.dev/docs/reference/configuration/sources/datadog_agent/
+[5]: /observability_pipelines/reference/sources/#datadogagent
 [6]: /observability_pipelines/working_with_data
 [7]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
 [8]: https://vector.dev/docs/reference/vrl/
 [9]: /getting_started/tagging
-[10]: https://vector.dev/docs/reference/configuration/sinks/datadog_logs/
-[11]: https://vector.dev/docs/reference/configuration/sinks/datadog_metrics/
+[10]: /observability_pipelines/reference/sinks/#datadoglogs
+[11]: /observability_pipelines/reference/sinks/#datadogmetrics
 [12]: https://vector.dev/docs/about/concepts/#buffers
 [13]: https://vector.dev/docs/setup/going-to-prod/architecting/#buffering-data
