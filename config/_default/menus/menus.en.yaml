@@ -2457,7 +2457,7 @@ main:
     identifier: observability_pipelines_reference
     weight: 3
   - name: Configuration
-    url: observability_pipelines/vector_configurations/
+    url: observability_pipelines/configurations/
     parent: observability_pipelines_reference
     identifier: observability_pipelines_vector_configuration
     weight: 2
