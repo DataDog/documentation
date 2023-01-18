@@ -1,0 +1,27 @@
+{{ $dot := . }}
+<div class="risk-mgmt-languages">
+  <div class="container cards-dd col-num-4">
+    <div class="card-deck">
+      <a class="card" href="java">
+        <div class="card-body text-center py-2 px-1">
+          {{ partial "img.html" (dict "root" . "src" "integrations_logos/java.png" "class" "img-fluid" "alt" "Java" "width" "200") }}
+        </div>
+      </a>
+      <a class="card" href="dotnet">
+        <div class="card-body text-center py-2 px-1">
+          {{ partial "img.html" (dict "root" . "src" "integrations_logos/dotnet_text.png" "class" "img-fluid" "alt" ".Net" "width" "200") }}
+        </div>
+      </a>
+      <a class="card" href="nodejs">
+        <div class="card-body text-center py-2 px-1">
+          {{ partial "img.html" (dict "root" . "src" "integrations_logos/nodejs.png" "class" "img-fluid" "alt" "Node.js" "width" "200") }}
+        </div>
+      </a>
+      <a class="card" href="python">
+        <div class="card-body text-center py-2 px-1">
+          {{ partial "img.html" (dict "root" . "src" "integrations_logos/python.png" "class" "img-fluid" "alt" "Python" "width" "200") }}
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
