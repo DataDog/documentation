@@ -99,7 +99,7 @@ To pull test configurations and push test results, the private location worker n
 
 | Port | Endpoint                         | Description                                                                                                                                                                                                                            |
 |------|----------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 443  | `intake.synthetics.ddog-gov.com` | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1]. For versions 1.32.0 and later, these requests are FIPS compliant. |
+| 443  | `intake.synthetics.ddog-gov.com` | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1]. For versions 1.32.0 and later, these requests are Federal Information Processing Standards (FIPS) compliant. |
 
 [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 
