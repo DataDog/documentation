@@ -18,13 +18,13 @@ Before installing, make sure you have:
 
 ## Installation
 
-### Automatic
+<!-- ### Automatic
 
 Datadog provides a script that runs the necessary steps to install the Worker. Use the following command to run the script, replacing `DD_API_KEY` with your Datadog API key:
 
 ```
 $ DD_API_KEY=<DD_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_observability_pipelines_worker.sh)"
-```
+``` -->
 
 ### Manual
 
