@@ -29,7 +29,7 @@ The following are key differences between using Kinesis Data Firehose and CloudW
 - **AWS Costs**: AWS Costs may vary for individual use cases but Kinesis Data Firehose ingestion is generally less expensive than comparable Cloudwatch Log ingestion. 
 
 ## Requirements
-1. An EKS cluster with a [Fargate Profile][1]. In this guide, the cluster is named `fargate-cluster` with a fargate profile nameed `fargate-profile` applied to the namespace `fargate-namespace`.
+1. An EKS cluster with a [Fargate Profile][1]. In this guide, the cluster is named `fargate-cluster` with a Fargate profile named `fargate-profile` applied to the namespace `fargate-namespace`.
 2. The following command line tools: [`kubectl`][6], [`aws`][7]
 
 ## Setup
@@ -71,7 +71,7 @@ data:
     [OUTPUT]
         Name kinesis_firehose
         Match kube.*
-        region us-west-2
+        region <REGION>
         delivery_stream <YOUR-DELIVERY-STREAM-NAME>
 {{< /code-block >}}
 
