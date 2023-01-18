@@ -18,7 +18,7 @@ The [trace][1] panel contains information about the trace, host, and correlated 
 
 {{< img src="tracing/troubleshooting/tracing_no_logs_in_trace.png" alt="A trace page showing an empty log section" style="width:90%;">}}
 
-There are two types of logs that appear in a [trace][1]:
+There are four types of logs that appear in a [trace][1]:
 
 - `trace_id`: Display logs that have the corresponding trace ID.
 - `host`: Display logs from the trace's host within the trace's timeframe.
