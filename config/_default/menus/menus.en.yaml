@@ -2513,6 +2513,11 @@ main:
     parent: observability_pipelines_production_deployment_overview
     identifier: observability_pipelines_architecture_design_and_principles
     weight: 201
+  - name: Aggregator Architecture
+    url: observability_pipelines/production_deployment_overview/aggregator_architecture/
+    parent: observability_pipelines_production_deployment_overview
+    identifier: observability_pipelines_aggregator_architecture
+    weight: 202
   - name: Vector Configurations
     url: observability_pipelines/vector_configurations/
     parent: observability_pipelines
