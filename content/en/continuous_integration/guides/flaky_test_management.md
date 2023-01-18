@@ -76,5 +76,17 @@ Failed test runs that were known to be flaky as per the definition above are dis
 
 {{< img src="ci/known-flaky-failed-tests.png" alt="CI Tests Branches view with a branch selected and a text box in the Failed column displaying 1 tests failed and 1 known flaky" style="width:100%;">}}
 
+
+## Flaky tests attributes
+
+
+Test runs that are flaky, new flaky or known flaky contain attributes that can be used to filter queries or build monitors.
+
+| Name        | Attribute                   | Description                                                                                                                                                                                                                                                                                                  |
+|-------------|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Flaky       | `@test.is_flaky:true`       | Test runs that exhibit a flaky behavior in the current commit: a previous test run was received for the same test and passed (resp. failed) whereas this test run fails (resp. passes). The attribute is only present the first time a test is detected flaky in a commit.                                   |
+| New Flaky   | `@test.is_known_flaky:true` | Test runs that exhibit a flaky behavior and didn’t previously exist in the Flaky Tests table for the current branch or default branch of the repository. When a test run has this attribute, it means that it has never been detected as flaky so this commit is introducing a new flaky test in the branch. |
+| Known Flaky | `@test.is_new_flaky:true`   | **Failing** tests runs that that previously exhibited flaky behavior on the current or default branch of the repository. When a test run has this attribute, it means that the test was detected flaky in the past and that this failure might not be the result of a change in this commit.                 |
+
 [1]: https://app.datadoghq.com/ci/test-runs
 [2]: https://app.datadoghq.com/ci/test-services
