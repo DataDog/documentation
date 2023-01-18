@@ -486,7 +486,7 @@ Read more about [architecting buffers][13].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/basic_agent_usage/?tabs=agentv6v7
-[2]: /observability_pipelines/setup/#install-vector
+[2]: /observability_pipelines/installation/
 [3]: /observability_pipelines/configurations/
 [4]: /agent/kubernetes/?tab=helm
 [5]: https://vector.dev/docs/reference/configuration/sources/datadog_agent/

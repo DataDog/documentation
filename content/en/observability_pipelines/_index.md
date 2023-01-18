@@ -4,7 +4,7 @@ kind: Documentation
 aliases:
   - /integrations/observability_pipelines/
 further_reading:
-  - link: /observability_pipelines/setup/
+  - link: /observability_pipelines/installation/
     tag: Documentation
     text: Set up Observability Pipelines 
   - link: https://www.datadoghq.com/blog/datadog-observability-pipelines/
@@ -25,11 +25,11 @@ further_reading:
 
 ## What is Observability Pipelines?
 
-Observability Pipelines is a monitoring solution that enables you to monitor and manage all of your telemetry pipelines at scale. Observability Pipelines is deployed as an aggregator within your infrastructure to collect, transform, and route all of your logs, metrics, and traces to any destination.
+Observability Pipelines is a monitoring solution that enables you to monitor and manage all of your telemetry pipelines at scale. Deploy the Observability Pipelines Worker as an aggregator within your infrastructure to collect, transform, and route all of your logs, metrics, and traces to any destination.
 
 Add your Datadog API key to your Observability Pipelines configuration to monitor your pipelines in Datadog: Identify bottlenecks and latencies, fine-tune performance, monitor data delivery, and more. 
 
-With Observability Pipelines, you can also:
+With the Observability Pipelines Worker, you can also:
 
 - Control your data volume before routing to manage costs.
 - Route data anywhere to reduce vendor lock-in and simplify migrations.
@@ -40,9 +40,8 @@ Build performant and reliable data pipelines with complete visibility and simpli
 
 ## Get started
 
-1. [Install Observability Pipelines][1].
+1. [Install the Observability Pipelines Worker][1].
 2. [Set up configurations][2] to collect, transform and route your data.
-3. [Connect Observability Pipelines to Datadog][3] with your Datadog API key.
 
 ## Explore Observability Pipelines
 
@@ -70,6 +69,5 @@ Find out if data is reaching its destination and get full visibility into any la
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /observability_pipelines/setup/#install-vector
-[2]: /observability_pipelines/setup/#set-up-vector-configurations
-[3]: /observability_pipelines/setup/#connect-vector-to-observability-pipelines
+[1]: /observability_pipelines/installation/
+[2]: /observability_pipelines/configurations/
