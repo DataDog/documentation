@@ -406,7 +406,7 @@ For example, to see what **Views** your feature flag is being evaluated on, you 
 Here are a few examples of reasons why your feature flag is being evaluated on unrelated Views that can help with your investigations:
 
 - A common react component that appears on multiple pages which evaluates feature flags whenever they run.
-A routing issue where components that have a feature flag evals are rendered before/after URL changes. 
+- A routing issue where components with a feature flag evaluation are rendered before/after URL changes. 
 
 When performing your investigations, you can also scope your data for `View Name`’s that are relevant to your feature flag.
 
