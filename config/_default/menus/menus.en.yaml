@@ -2431,10 +2431,10 @@ main:
     identifier: observability_pipelines
     parent: log_management_heading
     weight: 175000
-  - name: Setup
-    url: observability_pipelines/setup/
+  - name: Installation
+    url: observability_pipelines/installation/
     parent: observability_pipelines
-    identifier: observability_pipelines_setup
+    identifier: observability_pipelines_installation
     weight: 1
   - name: Configurations
     url: observability_pipelines/configurations/
