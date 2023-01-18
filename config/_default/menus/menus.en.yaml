@@ -2441,18 +2441,23 @@ main:
     identifier: observability_pipelines
     parent: log_management_heading
     weight: 175000
-  - name: Setup
-    url: observability_pipelines/setup/
+  - name: Installation
+    url: observability_pipelines/installation/
     parent: observability_pipelines
-    identifier: observability_pipelines_setup
+    identifier: observability_pipelines_installation
     weight: 1
+  - name: Working with Data
+    url: observability_pipelines/working_with_data/
+    parent: observability_pipelines
+    identifier: observability_pipelines_working_with_data
+    weight: 2
   - name: Reference
     url: observability_pipelines/reference/
     parent: observability_pipelines
     identifier: observability_pipelines_reference
     weight: 3
-  - name: Configuration
-    url: observability_pipelines/vector_configurations/
+  - name: Configurations
+    url: observability_pipelines/configurations/
     parent: observability_pipelines_reference
     identifier: observability_pipelines_vector_configuration
     weight: 2
@@ -2471,26 +2476,11 @@ main:
     parent: observability_pipelines_vector_configuration
     identifier: observability_pipelines_reference_sinks
     weight: 303
-  - name: Working with Data
-    url: observability_pipelines/working_with_data/
-    parent: observability_pipelines
-    identifier: observability_pipelines_working_with_data
-    weight: 3
-  - name: Integrations
-    url: observability_pipelines/integrations/
-    parent: observability_pipelines
-    identifier: observability_pipelines_integrations
-    weight: 4
-  - name: Integrate Vector with Datadog
-    url: observability_pipelines/integrations/integrate_vector_with_datadog/
-    parent: observability_pipelines_integrations
-    identifier: observability_pipelines_integrate_vector_with_datadog
-    weight: 302
   - name: Guides
     url: observability_pipelines/guide/
     parent: observability_pipelines
     identifier: observability_pipelines_guides
-    weight: 5
+    weight: 4
   - name: Security Overview
     url: security/
     pre: security-platform
@@ -3691,7 +3681,7 @@ main:
     parent: administration_heading
     weight: 240000
   - name: Aggregating Agents
-    url: observability_pipelines/integrations/integrate_vector_with_datadog/
+    url: observability_pipelines/guide/configure_observability_pipelines_with_datadog/
     parent: agent
     identifier: vector_aggregation
     weight: 13

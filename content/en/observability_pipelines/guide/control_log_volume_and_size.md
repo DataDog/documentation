@@ -6,23 +6,23 @@ aliases:
 further_reading:
   - link: "/observability_pipelines/working_with_data/"
     tag: "Documentation"
-    text: "Working with data using Vector"
-  - link: /observability_pipelines/vector_configurations/
+    text: "Working with data using Observability Pipelines"
+  - link: /observability_pipelines/configurations/
     tag: Documentation
-    text: Learn more about Vector configurations
+    text: Learn more about Observability Pipelines configurations
 ---
 
 ## Overview
 
-Because your log volume grows as your organization scales, the cost of ingesting and indexing in your downstream services (for example, log management solutions, SIEMs, and so forth) also rises. This guide walks you through using Vector transforms to cut down on log volume and trim down the size of your logs to control your costs *before* data leaves your infrastructure or network. 
+Because your log volume grows as your organization scales, the cost of ingesting and indexing in your downstream services (for example, log management solutions, SIEMs, and so forth) also rises. This guide walks you through using Observability Pipelines' transforms to cut down on log volume and trim down the size of your logs to control your costs *before* data leaves your infrastructure or network. 
 
 ## Prerequisites
-- You have [installed and configured Vector][1] to collect data from your sources and route it to your destinations.
-- You are familiar with [the basics of configuring Vector][2].
+- You have [installed and configured the Observability Pipelines Worker][1] to collect data from your sources and route it to your destinations.
+- You are familiar with [the basics of configuring Observability Pipelines][2].
 
 ## Use transforms to manage log volumes
 
-In Observability Pipelines, a **transform** performs an action that modifies events, where events are logs, metrics, or traces flowing through the pipeline. 
+In Observability Pipelines, a transform performs an action that modifies events, where events are logs, metrics, or traces flowing through the pipeline. 
 
 ### Deduplicate events 
 
@@ -71,7 +71,7 @@ inputs = [ "my-source-or-transform-id" ]
 {{% /tab %}}
 {{< /tabs >}}
 
-Vector assigns every event a unique identifier to track deduplicated events. The `cache` option enables you to cache recent events to be used to check for duplicated data in the future, and defaults to 5,000 events. The `fields` option lists which fields are used to determine if an event is a duplicate.
+The Observability Pipelines Worker assigns every event a unique identifier to track deduplicated events. The `cache` option enables you to cache recent events to be used to check for duplicated data in the future, and defaults to 5,000 events. The `fields` option lists which fields are used to determine if an event is a duplicate.
 
 ### Filter events
 
@@ -493,8 +493,8 @@ del(.unecessary_tag_field)"""
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /observability_pipelines/setup/
-[2]: /observability_pipelines/vector_configurations/
+[1]: /observability_pipelines/installation/
+[2]: /observability_pipelines/configurations/
 [3]: https://vector.dev/docs/reference/configuration/transforms/dedupe/
 [4]: https://vector.dev/docs/reference/configuration/transforms/filter/
 [5]: https://vector.dev/docs/reference/vrl/
