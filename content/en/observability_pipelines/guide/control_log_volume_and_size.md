@@ -6,7 +6,7 @@ aliases:
 further_reading:
   - link: "/observability_pipelines/working_with_data/"
     tag: "Documentation"
-    text: "Working with data using Vector"
+    text: "Working with data using Observability Pipelines"
   - link: /observability_pipelines/configurations/
     tag: Documentation
     text: Learn more about Observability Pipelines configurations
