@@ -80,16 +80,19 @@ To edit an SLO, hover over the SLO's row in the list view and click the edit pen
 
 #### Role based access
 
-All users can view SLOs and their status corrections, regardless of the [role][9] they are associated with. Only users attached to roles with the `slos_write` permission can create, edit, and delete SLOs.
+All users can view SLOs and [SLO status corrections](#slo-status-corrections), regardless of their associated [role][9]. Only users attached to roles with the `slos_write` permission can create, edit, and delete SLOs.
 
 To create, edit, and delete status corrections, users require the `slos_corrections` permissions. A user with this permission can make status corrections, even if they do not have permission to edit those SLOs. For the full list of permissions, see the [RBAC documentation][10].
-#### Restrict SLO to specific roles
 
-You can also restrict access to individual SLOs by specifying a list of roles that are allowed to edit. Click on the SLO to open the details side panel. Click the cog icon in the top right of the panel and select the Permissions option.
+#### Restrict SLO permissions to specific roles
 
-<!-- [screenshot] -->
+Restrict access to individual SLOs by specifying a list of roles that are allowed to edit it. Click on the SLO to open the details side panel. Click the cog icon in the top right of the panel and select the Permissions option.
 
-Specify a list of roles that are permitted to edit the SLO. For a user to edit or delete the SLO, their role needs to have editing privileges and the `slow_write` permission. For a user to create, edit, or delete a status correction, their role needs to be an editor of the SLO and have the `slo_corrections` permissions
+{{< img src="monitors/service_level_objectives/slo_set_permissions.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="SLO permissions option in the cog menu">}}
+
+Specify a list of roles that are permitted to edit the SLO. Users needs to be an editor of the SLO and have `slo_write` permissions to edit or delete the SLO. For SLO status corrections, users needs to be an editor of the SLO and have the `slo_corrections` permissions to create, edit, or delete a status correction.
+
+Users on the access control list can add roles and can only remove roles other than their own.
 
 **Note**: Users can create SLOs on any monitor even if they do not have write permissions to the monitor. Similarly, users can create SLO alerts even if they do not have write permissions to the SLO. For more information on RBAC permissions for Monitors, see the [RBAC documentation][11] or the [guide on how to set up RBAC for Monitors][12].
 
