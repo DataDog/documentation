@@ -26,26 +26,25 @@ further_reading:
 
 ## Overview
 
-Service Level Objectives, or SLOs, are a key part of the site reliability engineering toolkit. SLOs provide a
-framework for defining clear targets around application performance, which ultimately help teams provide a consistent customer experience, balance feature development with platform stability, and improve communication with internal and external users.
+Service Level Objectives, or SLOs, are a key part of the site reliability engineering toolkit. SLOs provide a framework for defining clear targets around application performance, which ultimately help teams provide a consistent customer experience, balance feature development with platform stability, and improve communication with internal and external users.
 
 ## Key terminology
 
 Service Level Indicator (SLI)
-: A quantitative measurement of a service’s performance or reliability. In Datadog SLOs an SLI is a metric or an aggregation of one or more monitors.
+: A quantitative measurement of a service's performance or reliability. In Datadog SLOs an SLI is a metric or an aggregation of one or more monitors.
 
 Service Level Objective (SLO)
 : A target percentage for an SLI over a specific period of time.
 
 Service Level Agreement (SLA)
-: An explicit or implicit agreement between a client and service provider stipulating the client’s reliability expectations and service provider’s consequences for not meeting them.
+: An explicit or implicit agreement between a client and service provider stipulating the client's reliability expectations and service provider's consequences for not meeting them.
 
 Error Budget
-: The allowed amount of unreliability derived from an SLO’s target percentage (100% - target percentage) that is meant to be invested into product development.
+: The allowed amount of unreliability derived from an SLO's target percentage (100% - target percentage) that is meant to be invested into product development.
 
 ## Setup
 
-You can use Datadog’s [Service Level Objectives status page][1] to create new SLOs or to view and manage all your existing SLOs. You can also add [SLO Summary widgets][2] to your dashboards to visualize your SLO statuses at a glance.
+Use Datadog's [Service Level Objectives status page][1] to create new SLOs or to view and manage all your existing SLOs. You can also add [SLO Summary widgets][2] to your dashboards to visualize your SLO statuses at a glance.
 
 ### Configuration
 
@@ -77,6 +76,23 @@ Setting a 100% target means having an error budget of 0% since error budget is e
 
 To edit an SLO, hover over the SLO's row in the list view and click the edit pencil icon that appears at the right of the row, or click on the row to open the details side panel and select the edit button from the cog icon in the top right of the panel.
 
+## Permissions
+
+#### Role based access
+
+All users can view SLOs and their status corrections, regardless of the [role][9] they are associated with. Only users attached to roles with the `slos_write` permission can create, edit, and delete SLOs.
+
+To create, edit, and delete status corrections, users require the `slos_corrections` permissions. A user with this permission can make status corrections, even if they do not have permission to edit those SLOs. For the full list of permissions, see the [RBAC documentation][10].
+#### Restrict SLO to specific roles
+
+You can also restrict access to individual SLOs by specifying a list of roles that are allowed to edit. Click on the SLO to open the details side panel. Click the cog icon in the top right of the panel and select the Permissions option.
+
+<!-- [screenshot] -->
+
+Specify a list of roles that are permitted to edit the SLO. For a user to edit or delete the SLO, their role needs to have editing privileges and the `slow_write` permission. For a user to create, edit, or delete a status correction, their role needs to be an editor of the SLO and have the `slo_corrections` permissions
+
+**Note**: Users can create SLOs on any monitor even if they do not have write permissions to the monitor. Similarly, users can create SLO alerts even if they do not have write permissions to the SLO. For more information on RBAC permissions for Monitors, see the [RBAC documentation][11] or the [guide on how to set up RBAC for Monitors][12].
+
 ## Searching and viewing SLOs
 
 The [Service Level Objectives status page][1] lets you run an advanced search of all SLOs so you can find, view, edit, clone or delete SLOs from the search results.
@@ -93,13 +109,13 @@ To run a search, use the facet checkboxes on the left and the search bar at the 
 
 To edit an individual SLO, hover over it and use the buttons that appear at the right of its row: **Edit**, **Clone**, **Delete**. To see more details on an SLO, click its table row to open its details side panel.
 
-**Note**: You can view your SLOs from your mobile device home screen by downloading the [Datadog Mobile App][9], available on the [Apple App Store][10] and [Google Play Store][11].
+**Note**: You can view your SLOs from your mobile device home screen by downloading the [Datadog Mobile App][13], available on the [Apple App Store][14] and [Google Play Store][15].
 
 {{< img src="monitors/service_level_objectives/slos-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="SLOs on iOS and Android">}}
 
 ### SLO tags
 
-When you create or edit an SLO, you can add tags for filtering on the [SLO status page][1] or for creating [SLO saved views][12].
+When you create or edit an SLO, you can add tags for filtering on the [SLO status page][1] or for creating [SLO saved views][16].
 
 ### SLO default view
 
@@ -159,7 +175,7 @@ Three types of SLO audit events appear in the Event Explorer:
 
 To get a full list of all SLO audit events, enter the search query `tags:audit,slo` in the Event Explorer. To view the list of audit events for a specific SLO, enter `tags:audit,slo_id:<SLO ID>` with the ID of the desired SLO.
 
-You can also query the Event Explorer programmatically using the [Datadog Events API][13].
+You can also query the Event Explorer programmatically using the [Datadog Events API][17].
 
 **Note:** If you don't see events appear in the UI, be sure to set the time frame of the Event Explorer to a longer period, for example, the past 7 days.
 
@@ -171,7 +187,7 @@ For example, if you wish to be notified when a specific SLO's configuration is m
 
 ## SLO widgets
 
-To proactively manage the configurations of your SLOs, set an [Event Monitor][14] to notify you when events corresponding to certain tags occur.
+To proactively manage the configurations of your SLOs, set an [Event Monitor][18] to notify you when events corresponding to certain tags occur.
 
 After creating your SLO, you can use the SLO Summary dashboard widget to visualize the status of an SLO along with your dashboard metrics, logs and APM data. For more information about SLO Widgets, see the [SLO Widgets documentation][2] page.
 
@@ -182,11 +198,11 @@ Status corrections allow you to exclude specific time periods from SLO status an
 - Ignore non-business hours, where you're not expected to conform to your SLOs
 - Ensure that temporary issues caused by deployments do not negatively impact your SLOs
 
-When you apply a correction, the time period you specify is dropped from the SLO’s calculation.
+When you apply a correction, the time period you specify is dropped from the SLO's calculation.
 - For monitor-based SLOs, the correction time window is not counted.
 - For metric-based SLOs, all good and bad events in the correction window are not counted.
 
-You have the option to create one-time corrections for ad-hoc adjustments, or recurring corrections for predictable adjustments that occur on a regular cadence. One-time corrections require a start and end time, while recurring corrections require a start time, duration, and interval. Recurring corrections are based on [iCalendar RFC 5545's RRULE specification][15]. The supported rules are `FREQ`, `INTERVAL`, `COUNT`, and `UNTIL`. Specifying an end date for recurring corrections is optional in case you need the correction to repeat indefinitely. 
+You have the option to create one-time corrections for ad-hoc adjustments, or recurring corrections for predictable adjustments that occur on a regular cadence. One-time corrections require a start and end time, while recurring corrections require a start time, duration, and interval. Recurring corrections are based on [iCalendar RFC 5545's RRULE specification][19]. The supported rules are `FREQ`, `INTERVAL`, `COUNT`, and `UNTIL`. Specifying an end date for recurring corrections is optional in case you need the correction to repeat indefinitely. 
 
 For either type of correction, you must select a correction category that states why the correction is being made. The available categories are `Scheduled Maintenance`, `Outside Business Hours`, `Deployment`, and `Other`. You can optionally include a description to provide additional context if necessary.
 
@@ -203,7 +219,7 @@ The 90-day limits per SLO are as follows:
 | Weekly recurring  | 3             |
 | Monthly recurring | 5             |
 
-You may configure status corrections through the UI by selecting `Correct Status` in your SLO's side panel, the [SLO status corrections API][16], or a [Terraform resource][17].
+You may configure status corrections through the UI by selecting `Correct Status` in your SLO's side panel, the [SLO status corrections API][20], or a [Terraform resource][21].
 
 {{< img src="monitors/service_level_objectives/slo-corrections-ui.png" alt="SLO correction UI"  >}}
 
@@ -212,14 +228,14 @@ You may configure status corrections through the UI by selecting `Correct Status
 To access SLO status corrections in the UI:
 
 1. Create a new SLO or click on an existing one.
-2. Navigate to an SLO’s details side panel view.
+2. Navigate to an SLO's details side panel view.
 3. Under the gear icon, select **Correct Status** to access the **Status Corrections** creation modal.
 4. Choose between `One-Time` and `Recurring` in the **Select the Time Correction Window**, and specify the time period you wish to correct.
 5. Select a **Correction Type**.
 6. Optionally add **Notes**.
 7. Click **Apply Correction**.
 
-To view, edit, and delete existing status corrections, click on the **Corrections** tab at the top of an SLO’s detailed side panel view.
+To view, edit, and delete existing status corrections, click on the **Corrections** tab at the top of an SLO's detailed side panel view.
 
 ## Further Reading
 
@@ -233,12 +249,16 @@ To view, edit, and delete existing status corrections, click on the **Correction
 [6]: /monitors/service_level_objectives/metric/#define-queries
 [7]: /monitors/service_level_objectives/monitor/#set-your-slo-targets
 [8]: /monitors/service_level_objectives/metric/#set-your-slo-targets
-[9]: /mobile
-[10]: https://apps.apple.com/app/datadog/id1391380318
-[11]: https://play.google.com/store/apps/details?id=com.datadog.app
-[12]: /monitors/service_level_objectives/#saved-views
-[13]: /api/v1/events/#query-the-event-stream
-[14]: /monitors/create/types/event/
-[15]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
-[16]: /api/latest/service-level-objective-corrections/
-[17]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/slo_correction
+[9]: /account_management/rbac/
+[10]: /account_management/rbac/permissions/#service-level-objectives/
+[11]: /account_management/rbac/permissions/#monitors/
+[12]: /monitors/guide/how-to-set-up-rbac-for-monitors/
+[13]: /mobile
+[14]: https://apps.apple.com/app/datadog/id1391380318
+[15]: https://play.google.com/store/apps/details?id=com.datadog.app
+[16]: /monitors/service_level_objectives/#saved-views
+[17]: /api/v1/events/#query-the-event-stream
+[18]: /monitors/create/types/event/
+[19]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
+[20]: /api/latest/service-level-objective-corrections/
+[21]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/slo_correction
