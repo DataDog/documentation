@@ -107,7 +107,8 @@ data:
  # Retrieve the pod execution role
  POD_EXEC_ROLE=$(aws eks describe-fargate-profile \
    --cluster-name fargate-cluster \
-   --fargate-profile-name fargate-profile | --query 'fargateProfile.podExecutionRoleArn' --output text |cut -d '/' -f 2)
+   --fargate-profile-name fargate-profile \
+   --query 'fargateProfile.podExecutionRoleArn' --output text |cut -d '/' -f 2)
 
  # Attach the role policy
  aws iam attach-role-policy \
@@ -143,7 +144,7 @@ To generate logs and test the Kinesis pipeline, deploy a sample workload to your
          - containerPort: 80
 {{< /code-block >}}
  
- 2. Use `kubectl` to apply the deployment manifest;
+ 2. Create the namespace `fargate-namespace` if it does not exist and use `kubectl` to apply the deployment manifest;
 
   {{< code-block lang="bash" filename="" disable_copy="false" collapsible="false" >}}
   $ kubectl apply -f sample-deployment.yaml
