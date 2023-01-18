@@ -4,16 +4,18 @@ kind: guide
 further_reading:
 - link: ""
   tag: "Documentation"
-  text: "Create and load an Autodiscovery Integration Template"
-- link: "/agent/guide/autodiscovery-management/"
+  text: "description of doc"
+- link: ""
   tag: "Documentation"
-  text: "Manage which Container to include in the Agent Autodiscovery"
+  text: "description of doc"
 ---
 
 Placeholder content
 
 
+{{< img src="static/images/RC_Diagram.png" alt="RC Diagram" >}}
 
+{{< img src="static/images/RC_Key.png" alt="RC Key" >}}
 
 
 ## Further Reading
