@@ -153,7 +153,6 @@ if __name__ == "__main__":
 
     # Those hard-written variables should be set in the Makefile config later down the road.
     build_configuration_file_path = getenv("CONFIGURATION_FILE")
-    latest_commit_hash = getenv("LATEST_REV")
     integration_merge_configuration_file_path = "./local/bin/py/build/configurations/integration_merge.yaml"
     temp_directory = "./integrations_data"
 

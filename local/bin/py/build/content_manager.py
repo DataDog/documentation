@@ -84,7 +84,8 @@ def download_content_from_external_source(self, content):
     """
     Returns a boolean determining whether pull_config content should be downloaded from cache or external source.
     """
-    use_cached = content.get('options', {}).get('cached', False)
+    # use_cached = content.get('options', {}).get('cached', False)
+    use_cached = True
     action = content.get('action', '')
 
     return (self.global_cache_enabled == False) \
@@ -107,6 +108,7 @@ def local_or_upstream(self, github_token, extract_dir, list_of_contents):
 
     for content in list_of_contents:
         if download_content_from_external_source(self, content):
+            print(f'Downloading content from {content["repo_name"]}')
             local_repo_path = os.path.join("..", content["repo_name"])
             repo_path_last_extract = os.path.join(extract_dir, content["repo_name"])
 
@@ -230,19 +232,19 @@ def prepare_content(self, configuration, github_token, extract_dir):
     return list_of_contents
 
 
-def copy_directory(content, copy_integrations=False):
-    destination = ''
+def download_and_extract_cached_content():
+    latest_commit_hash = getenv("LATEST_REV_HASH") # Sourced from Makefile
+    print(f'Latest commit hash = {latest_commit_hash}')
+    s3_url = f'https://origin-static-assets.s3.amazonaws.com/build_artifacts/master/{latest_commit_hash}-ignored.tar.gz'
+    artifact_download_response = requests.get(s3_url, stream=True)
+    print(artifact_download_response)
 
-    if action == 'pull-and-push-folder':
-        destination = repo.get('options', {}).get('dest_dir', '')
-    elif action in ('workflows', 'security-rules'):
-        destination = repo.get('options', {}).get('dest_path', '')
-    elif copy_integrations:
-        destination = '/integrations'
-    else:
-        raise Exception(f'Unsupported action for copying directory: {action}')
-
-    shutil.copytree(f'temp/content/en{destination}', f'content/en{destination}', dirs_exist_ok=True)
+    # Extract cached content to temp folder
+    with tarfile.open(mode='r|gz', fileobj=artifact_download_response.raw) as artifact_tarfile:
+        print('Before extractall to the temp dir')
+        artifact_tarfile.extractall('temp')
+        print('After extractall to the temp dir.')
+        artifact_tarfile.close()
 
 
 def copy_cached_content(self, cached_content_array):
@@ -250,17 +252,12 @@ def copy_cached_content(self, cached_content_array):
     :param cached_content_array:
     """
     try:
-        # s3_url = f'https://origin-static-assets.s3.amazonaws.com/build_artifacts/master/009963ba998e623a3e9c9df119638b13b150c6cb-ignored.tar.gz'
-        # artifact_download_response = requests.get(s3_url, stream=True)
-
-        # # Extract cached content to temp folder
-        # with tarfile.open(mode='r|gz', fileobj=artifact_download_response.raw) as artifact_tarfile:
-        #     artifact_tarfile.extractall('temp')
-        #     artifact_tarfile.close()
+        download_and_extract_cached_content()
 
         # Copy the files we want to use from the cache
         for content in cached_content_array:
             action = content.get('action', '')
+            destination = ''
 
             if action == 'pull-and-push-file':
                 dest_path = content.get('options', {}).get('dest_path')
@@ -269,13 +266,22 @@ def copy_cached_content(self, cached_content_array):
 
                 os.makedirs(os.path.dirname(full_dest_path), exist_ok=True)
                 shutil.copy(f'temp/{full_dest_path}', full_dest_path)
-            elif action in ('pull-and-push-folder', 'workflows', 'security-rules'):
-                copy_directory(content, False)
-            else:
-                print(f'Action {action} unsupported, skipping.')
+            elif action == 'pull-and-push-folder':
+                destination = content.get('options', {}).get('dest_dir', '')
+            elif action in ('workflows', 'security-rules'):
+                destination = content.get('options', {}).get('dest_path', '')
+            elif action not in ('integrations', 'marketplace-integrations'):
+                print(f'Action {action} unsupported, cannot copy from cache.')
+
+            if destination != '':
+                shutil.copytree(f'temp/{self.en_content_path}{destination}', f'{self.en_content_path}{destination}', dirs_exist_ok=True)
+
+        # Integrations are handled separately for now
+        if self.integrations_cache_enabled:
+            shutil.copytree(f'temp/{self.en_content_path}/integrations', f'{self.en_content_path}/integrations', dirs_exist_ok=True)
             
-        # shutil.rmtree('temp')
+        shutil.rmtree('temp')
     except Exception as e:
-        print('error')
+        print('Error copying cached content')
         print(e)
-        # shutil.rmtree('temp')
+        shutil.rmtree('temp')
