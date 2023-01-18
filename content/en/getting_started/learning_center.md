@@ -1,5 +1,5 @@
 ---
-title: Datadog Learning Center
+title: Datadog Learning Resources
 kind: documentation
 aliases:
   - /video-categories/
@@ -33,9 +33,6 @@ aliases:
   - /videos/weekly_monitor_report/
 ---
 
-Datadog is an extensive platform for understanding your infrastructure. [The Datadog Learning Center][1] ensures you are able to leverage everything the platform has to offer.
+Everything you need to learn more about Datadog. Quickly get started, learn about all Datadog has to offer through live and on-demand learning sessions, troubleshoot issues, discover upcoming new features and functionality, and join a community of Datadog users.
 
-For a list of available courses, see [Courses][2].
-
-[1]: https://learn.datadoghq.com
-[2]: https://learn.datadoghq.com/collections
+{{< partial name="getting-started/learning_resources.html" >}}
