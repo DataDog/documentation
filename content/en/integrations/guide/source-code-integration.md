@@ -17,10 +17,10 @@ further_reading:
 ## Overview
 
 <div class="alert alert-info">
-The source code integration supports the following languages (Go, Java, JavaScript, and Python) and the following Git providers (GitHub, GitLab, and BitBucket).</br></br> Custom URLs are not supported—while your Git provider may be GitHub, if your source code is hosted on <code>xyz.com</code>, for example, and not <code>github.com</code>, the source code integration does not work.
+The source code integration supports:</br>Languages:<ul><li>Go</li><li>Java</li><li>JavaScript</li><li>Python</li></ul></br>Git providers:<ul><li>GitHub</li><li>GitLab</li><li>BitBucket</li></br></br> Custom URLs are not supported—while your Git provider may be GitHub, if your source code is hosted on <code>xyz.com</code>, for example, and not <code>github.com</code>, the source code integration does not work.
 </div>
 
-Datadog's source code integration allows you to connect your telemetry with your Git repositories hosted in GitHub, GitLab, or Bitbucket. Once you have enabled the [GitHub integration][5], you can debug stack traces, slow profiles, and more issues by quickly accessing the relevant lines of your source code.
+Datadog's source code integration allows you to connect your telemetry with your Git repositories hosted in GitHub, GitLab, or Bitbucket. Once you have enabled the [GitHub integration][5], you can debug stack traces, slow profiles, and other issues by quickly accessing the relevant lines of your source code.
 
 {{< img src="integrations/guide/source_code_integration/inline-code-snippet.png" alt="Inline code snippet of a Java RuntimeException with a button to view the code in Github" style="width:100%;">}}
 
