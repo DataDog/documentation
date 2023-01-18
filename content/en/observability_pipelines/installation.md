@@ -117,7 +117,7 @@ Before installing, make sure you have:
     $ helm repo update
     ```
 
-2. Install [Observability Pipelines Worker][4]:
+2. Install the [Observability Pipelines Worker][4]:
 
     ```
     $ helm install opw datadog/observability-pipelines-worker
