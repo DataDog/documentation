@@ -81,7 +81,7 @@ Within 10 minutes of merging to master, it deploys automatically.
 
 Prerequsites:
 - Running Monterey OSX
-- Docker Desktop >= 4.7.1 is installed
+- [Docker Desktop][12] >= 4.7.1 is installed
 - At least 6GB of RAM is dedicated towards Docker for Mac
   1. Open the Docker for Mac app dashboard
   2. Click the gear icon
@@ -114,7 +114,8 @@ To stop the app, hit Ctrl-C or run `make stop-docker`
 [9]: https://github.com/yuin/goldmark
 [10]: https://spec.commonmark.org/0.29/
 [11]: https://docs.datadoghq.com/developers/integrations
-[12]: https://gohugo.io/getting-started/installing/
-[13]: https://golang.org/doc/install
-[14]: https://github.blog/2019-02-14-introducing-draft-pull-requests/
-[15]: https://github.com/DataDog/documentation/blob/master/README.md#docker-development
+[12]: https://www.docker.com/products/docker-desktop/
+[13]: https://gohugo.io/getting-started/installing/
+[14]: https://golang.org/doc/install
+[15]: https://github.blog/2019-02-14-introducing-draft-pull-requests/
+[16]: https://github.com/DataDog/documentation/blob/master/README.md#docker-development
