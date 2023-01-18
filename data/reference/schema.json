@@ -2331,7 +2331,8 @@
       "description": "Configuration for the `aws_kinesis_firehose` source.",
       "type": "object",
       "required": [
-        "address"
+        "address",
+        "store_access_key"
       ],
       "properties": {
         "address": {
@@ -2369,6 +2370,11 @@
               "B94B8FE5CCB19BA61C4C12"
             ]
           }
+        },
+        "store_access_key": {
+          "title": "Whether or not to store the AWS Firehose Access Key in event secrets.",
+          "description": "If set to `true`, when incoming requests contains an Access Key sent by AWS Firehose, it will be kept in the\nevent secrets as \"aws_kinesis_firehose_access_key\".",
+          "type": "boolean"
         },
         "record_compression": {
           "title": "The compression scheme to use for decompressing records within the Firehose message.",
@@ -5945,9 +5951,9 @@
               },
               "_metadata": {
                 "docs::examples": {
-                  "client.id": "${ENV_VAR}",
+                  "socket.send.buffer.bytes": "100",
                   "fetch.error.backoff.ms": "1000",
-                  "socket.send.buffer.bytes": "100"
+                  "client.id": "${ENV_VAR}"
                 },
                 "docs::additional_props_description": "A librdkafka configuration option."
               }
@@ -15181,9 +15187,9 @@
           },
           "_metadata": {
             "docs::examples": {
-              "source": "vector",
+              "labels": "{{ kubernetes.pod_labels }}",
               "{{ event_field }}": "{{ some_other_event_field }}",
-              "labels": "{{ kubernetes.pod_labels }}"
+              "source": "vector"
             },
             "docs::additional_props_description": "A Loki label."
           }

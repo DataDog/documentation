@@ -694,10 +694,10 @@ const typeColumn = (key, value, readOnlyMarkup) => {
       typeVal = (value.format || value.type || value.const || '');
     }
   if(value.type === 'array') {
-    return `<div class="col-1-5 column"><p>[${(value.items === '[Circular]') ? 'object' : (value.items.type || '')}${oneOfLabel}]${readOnlyMarkup}</p></div>`;
+    return `<div class="col-1-5 column" style="word-break: break-all"><p>[${(value.items === '[Circular]') ? 'object' : (value.items.type || '')}${oneOfLabel}]${readOnlyMarkup}</p></div>`;
   } else {
     // return `<div class="col-2"><p>${validKeys.includes(key) ? value : (value.enum ? 'enum' : (value.format || value.type || ''))}${readOnlyMarkup}</p></div>`;
-    return `<div class="col-1-5 column"><p>${typeVal}${oneOfLabel}${readOnlyMarkup}</p></div>`.trim().replace(",",",&ZeroWidthSpace;");
+    return `<div class="col-1-5 column" style="word-break: break-all"><p>${typeVal}${oneOfLabel}${readOnlyMarkup}</p></div>`.trim().replace(",",",&ZeroWidthSpace;");
   }
 };
 
