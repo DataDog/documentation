@@ -23,20 +23,22 @@ further_reading:
 
 {{< img src="observability_pipelines/obs_pipelines.png" alt="A graphic showing different data sources on the left that flows into three hexagons named transform, reduce, and route, with arrows pointing to different destinations for the modified data" style="width:100%;" >}}
 
-## What is Observability Pipelines?
+## What is Observability Pipelines and the Observability Pipelines Worker?
 
-Observability Pipelines is a monitoring solution that enables you to monitor and manage all of your telemetry pipelines at scale. Deploy the Observability Pipelines Worker as an aggregator within your infrastructure to collect, transform, and route all of your logs, metrics, and traces to any destination.
+### Observability Pipelines Worker
 
-Add your Datadog API key to your Observability Pipelines configuration to monitor your pipelines in Datadog: Identify bottlenecks and latencies, fine-tune performance, monitor data delivery, and more. 
-
-With the Observability Pipelines Worker, you can also:
+Observability Pipelines Worker is an on-premise end-to-end data pipeline solution designed to collect, process, and route logs and metrics from any source to any destination. You can deploy Observability Pipelines as an aggregator within your infrastructure for central processing, collecting data from multiple upstream sources, and performing cross-host aggregation and analysis. With the Observability Pipelines Worker, you can also:
 
 - Control your data volume before routing to manage costs.
 - Route data anywhere to reduce vendor lock-in and simplify migrations.
-- Meet residency requirements and redact sensitive data to stay more compliant.
-- Enrich, structure, and transform your events to make them more useful.
+- Transform logs and metrics by adding, parsing, enriching, and removing fields and tags.
+- Redact sensitive data from your telemetry data.
 
-Build performant and reliable data pipelines with complete visibility and simplified management using Observability Pipelines. 
+### Observability Pipelines
+
+Observability Pipelines is a control plane that enables you to monitor, build, and manage all of your Observability Pipelines Worker deployments at scale.
+
+Add your Datadog API key to your Observability Pipelines configuration to monitor your pipelines in Datadog: Identify bottlenecks and latencies, fine-tune performance, monitor data delivery, and more.
 
 ## Get started
 
