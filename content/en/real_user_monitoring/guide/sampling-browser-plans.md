@@ -51,7 +51,7 @@ datadogRum.init({
 
 </details>
 
-<details open>
+<details>
   <summary>before<code>v4.30.0</code></summary>
 
 ```
@@ -105,7 +105,7 @@ datadogRum.init({
 
 </details>
 
-<details open>
+<details>
   <summary>before<code>v4.30.0</code></summary>
 
 ```
