@@ -27,13 +27,25 @@ kind: faq
 
 <div class="alert alert-warning"><strong>Summary</strong>: Check your RPM-based Linux hosts (RHEL, CentOS, Rocky Linux, AlmaLinux, Amazon Linux, SUSE/SLES, Fedora) to find and fix any that trust the key with fingerprint <code>60A389A44A0C32BAE3C03F0B069B56F54172A230</code>.</a></div>
 
+## Table of contents
+
+- [1. What is the issue?](#1-what-is-the-issue)
+- [2. What is the affected key?](#2-what-is-the-affected-key)
+- [3. Are my hosts affected by it?](#3-are-my-hosts-affected-by-it)
+- [4. I run RPM based linux hosts, how do I quickly check if a host is affected?](#4--i-run-rpm-based-linux-hosts-how-do-i-quickly-check-if-a-host-is-affected)
+- [5. How do I secure the affected hosts?](#5-how-do-i-secure-the-affected-hosts)
+- [6. What are the implications of no longer trusting the affected key?](#6-what-are-the-implications-of-no-longer-trusting-the-affected-key)
+- [7. What is Datadog is doing to mitigate?](#7-what-is-datadog-is-doing-to-mitigate)
+
+## 1. What is the issue?
+
 On January 4th, 2023, Datadog was notified by CircleCI that they were investigating a [security incident][1] that may have led to leaking of stored secrets. Datadog identified a single secret stored in CircleCI that could theoretically be misused by a potential attacker, an old RPM GNU Privacy Guard (GPG) private signing key and its passphrase. This page provides information about the implications of the potential leak, actions you should take on your hosts, and the measures Datadog is taking to mitigate any risks to our customers.
 
 <div class="alert alert-info">
 <strong>Note</strong>: As of January 16th, 2023, Datadog has no indication that the key was actually leaked or misused, but we are still taking and advising the following actions out of an abundance of caution.
 </div>
 
-## The affected key
+## 2. What is the affected key?
 
 The impacted RPM GPG signing key has the fingerprint `60A389A44A0C32BAE3C03F0B069B56F54172A230`, and is accessible in [our signing keys location][2]. This key was historically used to sign:
 
@@ -44,7 +56,7 @@ The impacted RPM GPG signing key has the fingerprint `60A389A44A0C32BAE3C03F0B06
 <strong>Note</strong>: Official Datadog repositories were <strong>not</strong> compromised. The signing key, if actually leaked, could be used to construct an RPM package that looks like it is from Datadog, but it would not be enough to place such a package in our official package repositories. To be effective, a hypothetical attacker with the affected key would need to be able to upload the constructed RPM package to a repository used by your hosts.
 </div>
 
-## Finding affected hosts
+## 3. Are my hosts affected by it?
 
 The incident can affect hosts running **RPM-based Linux distributions**, including RHEL, CentOS, Rocky Linux, AlmaLinux, Amazon Linux, SUSE/SLES, and Fedora. Hosts running other operating systems such as macOS, Windows, Debian, and Ubuntu, and Container Agents are not affected.
 
@@ -59,6 +71,8 @@ Before you start, if you have a large infrastructure, **prioritize your search**
    The following scenarios are **not** affected:
    * The Agent was installed with Datadog packages on macOS, Windows, Debian, or Ubuntu.
    * The host uses the Container Agent.
+
+## 4. I run RPM based linux hosts, how do I quickly check if a host is affected?
 
 Check each host to see if it trusts the affected key from either the RPM database or the Datadog repo file, or both:
 
@@ -84,7 +98,7 @@ Check each host to see if it trusts the affected key from either the RPM databas
 
 If either one or both of these is identified as trusting the key, take the actions listed in the following sections to secure the affected host. If neither of these is identified as trusting the key, no further action is needed.
 
-## Securing the affected hosts
+## 5. How do I secure the affected hosts?
 
 Ensure that your hosts **stop trusting the affected key**. If the previous steps indicated that a host trusts the key, follow these steps:
 
@@ -113,7 +127,7 @@ Ensure that your hosts **stop trusting the affected key**. If the previous steps
 
    If the output contains lines that start with `[ ERROR ]` **report these to [Datadog Support][4]** along with the full script output.
 
-## Implications of no longer trusting the affected key
+## 6. What are the implications of no longer trusting the affected key?
 
 If the host in question uses Agent 7, there is no implication. Agent 7 packages were never signed with the affected key.
 
@@ -122,7 +136,7 @@ Hosts can no longer install:
 - Standalone DogStatsD v6 or Standalone DogStatsD earlier than v7.24.0 (`datadog-dogstatsd` packages). Upgrade to Standalone DogStatsD 7.24.0+.
 - Agents earlier than v5.32.8. Install Agent v5.32.9+ or upgrade to v6.14.0+ or Agent v7.
 
-## What Datadog is doing
+## 7. What is Datadog is doing to mitigate?
 
 We released a **new Agent 5 RPM** for CentOS/RHEL, [5.32.9-1][5], signed with the [current RPM signing key][6], `C6559B690CA882F023BDF3F63F4D1729FD4BF915`. The RPM is available through the [Agent 5 RPM repository][7].
 
