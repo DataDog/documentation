@@ -100,7 +100,7 @@ The **Performance** tab provides several ways to view how your services are perf
 Click the Settings icon on the right hand corner to hide metric columns from the service list.
 
 ### Security view
-The **Security tab** provides several ways to assess and improve the security posture of your services. This includes understanding the number and severity of known security vulnerabilities in the open source libraries and viewing how your services are targeted by attackers. Sort the table by clicking columns to reveal services that:
+The **Security tab** provides several ways to assess and improve the security posture of your services. This includes understanding the number and severity of known security vulnerabilities in the open source libraries, and viewing how your services are targeted by attackers. Sort the table by clicking columns to reveal services that:
 
 - Expose known security vulnerabilities, including the individual severities.
 - Are receiving the most attack attempts.
