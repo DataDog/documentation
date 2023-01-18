@@ -254,7 +254,7 @@ To view, edit, and delete existing status corrections, click on the **Correction
 [8]: /monitors/service_level_objectives/metric/#set-your-slo-targets
 [9]: /account_management/rbac/
 [10]: /account_management/rbac/permissions/#service-level-objectives/
-[11]: /account_management/rbac/permissions/#monitors/
+[11]: /account_management/rbac/permissions/#monitors
 [12]: /monitors/guide/how-to-set-up-rbac-for-monitors/
 [13]: /mobile
 [14]: https://apps.apple.com/app/datadog/id1391380318
