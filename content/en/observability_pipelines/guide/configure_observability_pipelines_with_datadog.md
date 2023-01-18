@@ -83,7 +83,7 @@ Use the official Datadog Helm chart, and add the [Agent configuration settings](
 
 For additional details about the Datadog Helm chart, see [the Kubernetes documentation][4].
 
-Observability Pipelines Worker's chart can hold any valid configuration in the `values.yaml` file using the `customConfig` field. To enable `datadog_logs`, these [configurations](#observability-pipelines-worker-configurations) can be directly included as-is in the chart configuration.
+The Observability Pipelines Worker's chart can hold any valid configuration in the `values.yaml` file using the `customConfig` field. To enable `datadog_logs`, these [configurations](#observability-pipelines-worker-configurations) can be directly included as-is in the chart configuration.
 
 ## Observability Pipelines Worker configurations
 
@@ -134,11 +134,11 @@ multiple_outputs = true
 
 Logs and metrics sent by the Datadog Agent to the Observability Pipelines Worker can be manipulated or formatted as explained in [working with data][6]. When submitting logs using the Datadog API, see the [Datadog reserved attributes][7] for more information.
 
-The Observability Pipelines Worker can also directly collect logs and metrics from alternative sources. When doing so, third-party logs may not include proper tagging. Use the [Vector Remap Language][8] (VRL) to [add tags][9], sources, or service values.
+The Worker can also directly collect logs and metrics from alternative sources. When doing so, third-party logs may not include proper tagging. Use the [Vector Remap Language][8] (VRL) to [add tags][9], sources, or service values.
 
 #### Logs
 
-You can include specific Observability Pipelines Worker tags when sending logs to Datadog. Adding these tags is useful if you are migrating to Observability Pipelines Worker. In this example, all logs sent to Datadog is tagged with the Observability Pipelines Worker host.
+You can include specific Observability Pipelines Worker tags when sending logs to Datadog. Adding these tags is useful if you are migrating to the Worker. In this example, all logs sent to Datadog is tagged with the Worker host.
 
 {{< tabs >}}
 {{% tab "YAML" %}}
@@ -209,9 +209,9 @@ del(.status)"
 {{% /tab %}}
 {{< /tabs >}}
 
-These tags can be used to validate whether the Observability Pipelines Worker sent the data. More specifically, if you are migrating to the Observability Pipelines Worker, use these tags as attributes to determine whether the data has been moved over correctly.
+These tags can be used to validate whether the Observability Pipelines Worker sent the data. More specifically, if you are migrating to the Worker, use these tags as attributes to determine whether the data has been moved over correctly.
 
-**Note:** The `del(.status)` in this configuration handles container logs that are categorized as `ERROR` by the Datadog Agent. This status is usually stripped out by the logs ingestion endpoint, but since the Observability Pipelines Worker receives the raw payload from the Agent, the Observability Pipelines Worker must perform this processing itself.
+**Note:** The `del(.status)` in this configuration handles container logs that are categorized as `ERROR` by the Datadog Agent. This status is usually stripped out by the logs ingestion endpoint, but since the Worker receives the raw payload from the Agent, the Worker must perform this processing itself.
 
 #### Metrics
 
@@ -435,7 +435,7 @@ compression = "gzip"
 
 #### Disk space
 
-You should provision at least 36 GiB per vCPU * of disk space. If you follow the recommendation of 8 vCPUs, you would provision 288 GiB of disk space (10 MiB * 60 seconds * 60 minutes * 8 vCPUs), allocating ​​48 GiB for metrics and 240 GiB for logs. You can add a volume to the the Observability Pipelines Worker instances to hold the buffer in your Helm chart:
+You should provision at least 36 GiB per vCPU of disk space. If you follow the recommendation of 8 vCPUs, you would provision 288 GiB of disk space (10 MiB * 60 seconds * 60 minutes * 8 vCPUs), allocating ​​48 GiB for metrics and 240 GiB for logs. You can add a volume to the the Observability Pipelines Worker instances to hold the buffer in your Helm chart:
 
 {{< tabs >}}
 {{% tab "AWS" %}}

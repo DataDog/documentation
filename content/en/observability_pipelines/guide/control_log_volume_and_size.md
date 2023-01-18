@@ -17,12 +17,12 @@ further_reading:
 Because your log volume grows as your organization scales, the cost of ingesting and indexing in your downstream services (for example, log management solutions, SIEMs, and so forth) also rises. This guide walks you through using Observability Pipelines' transforms to cut down on log volume and trim down the size of your logs to control your costs *before* data leaves your infrastructure or network. 
 
 ## Prerequisites
-- You have [installed and configured Observability Pipelines][1] to collect data from your sources and route it to your destinations.
+- You have [installed and configured the Observability Pipelines Worker][1] to collect data from your sources and route it to your destinations.
 - You are familiar with [the basics of configuring Observability Pipelines][2].
 
 ## Use transforms to manage log volumes
 
-In Observability Pipelines, a **transform** performs an action that modifies events, where events are logs, metrics, or traces flowing through the pipeline. 
+In Observability Pipelines, a transform performs an action that modifies events, where events are logs, metrics, or traces flowing through the pipeline. 
 
 ### Deduplicate events 
 
@@ -71,7 +71,7 @@ inputs = [ "my-source-or-transform-id" ]
 {{% /tab %}}
 {{< /tabs >}}
 
-Observability Pipelines assigns every event a unique identifier to track deduplicated events. The `cache` option enables you to cache recent events to be used to check for duplicated data in the future, and defaults to 5,000 events. The `fields` option lists which fields are used to determine if an event is a duplicate.
+The Observability Pipelines Worker assigns every event a unique identifier to track deduplicated events. The `cache` option enables you to cache recent events to be used to check for duplicated data in the future, and defaults to 5,000 events. The `fields` option lists which fields are used to determine if an event is a duplicate.
 
 ### Filter events
 
