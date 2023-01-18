@@ -172,9 +172,9 @@ Allow URLs to add APM integration headers to those URLs. Datadog's APM integrati
 
 Define which endpoints you want to send the APM headers to by entering a URL in the **Value** field. If the endpoint is being traced and is allowed, your browser test results are automatically tied to its corresponding trace.
 
-Use `*` to allow wider domain names. For example, adding `https://*.datadoghq.com/*` allows everything on `https://datadoghq.com/`.
+Use `*` to allow wider domain names. For example, adding `https://*.datadoghq.com/*` allows everything on `https://datadoghq.com/`. When you are done adding URLs, click **Save APM Integration Settings**. 
 
-When you are done adding URLs, click **Save APM Integration Settings**.
+For more information, see [Connect Synthetics and Traces][15].
 
 ### Synthetic data collection and RUM applications
 
@@ -208,3 +208,4 @@ If you are using the [custom role feature][12], add your user to any custom role
 [12]: /account_management/rbac/?tab=datadogapplication#custom-role
 [13]: /account_management/billing/usage_attribution
 [14]: /synthetics/guide/explore-rum-through-synthetics/
+[15]: /synthetics/apm/#prerequisites

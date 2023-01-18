@@ -2813,8 +2813,8 @@ main:
     url: synthetics/browser_tests/actions
     parent: synthetics_browser_tests
     weight: 301
-  - name: Test Results and Performance
-    url: synthetics/browser_tests/test_results
+  - name: Test Runs
+    url: synthetics/browser_tests/test_runs
     parent: synthetics_browser_tests
     weight: 302
   - name: Advanced Options for Steps
