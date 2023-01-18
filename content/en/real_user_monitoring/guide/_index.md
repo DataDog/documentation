@@ -31,5 +31,5 @@ disable_toc: true
 {{< whatsnext desc="Session Replay:" >}}
     {{< nextlink href="/real_user_monitoring/guide/session-replay-service-worker" >}}Allow third-party service workers for Session Replay{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/session-replay-for-solutions" >}}Use Session Replay in your Support workflows{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/shadow-dom" >}}Enriched replays with Shadow DOM components{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/shadow-dom" >}}Enrich your replays with Shadow DOM components{{< /nextlink >}}
 {{< /whatsnext >}}
