@@ -1,7 +1,7 @@
 ---
 title: Datadog Source Code Integration
 kind: guide
-description: "Set up links to a Git repository and inline source code with Datadog."
+description: "Set up the source code integration that integrates with APM to link your telemetry with your backend services' repositories and generate inline code snippets."
 further_reading:
 - link: "https://docs.datadoghq.com/integrations/github/"
   tag: "Documentation"
@@ -17,7 +17,7 @@ further_reading:
 ## Overview
 
 <div class="alert alert-info">
-The source code integration supports Go, Java, JavaScript, and Python.
+The source code integration supports the following languages (Go, Java, JavaScript, and Python) and the following Git providers (GitHub, GitLab, and BitBucket).</br></br> Custom URLs are not supported—while your Git provider may be GitHub, if your source code is hosted on <code>xyz.com</code>, for example, and not <code>github.com</code>, the source code integration does not work.
 </div>
 
 Datadog's source code integration allows you to connect your telemetry with your Git repositories hosted in GitHub, GitLab, or Bitbucket. Once you have enabled the [GitHub integration][5], you can debug stack traces, slow profiles, and more issues by quickly accessing the relevant lines of your source code.
