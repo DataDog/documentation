@@ -17,7 +17,7 @@ assets:
     source_type_name: Speedscale
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Speedscale
   sales_email: support@speedscale.com
   support_email: support@speedscale.com
 categories:

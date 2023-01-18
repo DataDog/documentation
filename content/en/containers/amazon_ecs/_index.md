@@ -125,7 +125,7 @@ If you're using:
 
 #### DogStatsD
 
-If you're using [DogStatsD][8], add in a Host Port mapping for 8125/udp to your Dataog Agent's container definition:
+If you're using [DogStatsD][8], add in a Host Port mapping for 8125/udp to your Datadog Agent's container definition:
 ```json
 "portMappings": [
   {
