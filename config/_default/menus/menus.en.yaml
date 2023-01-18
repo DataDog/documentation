@@ -2446,16 +2446,31 @@ main:
     parent: observability_pipelines
     identifier: observability_pipelines_installation
     weight: 1
+  - name: Production Deployment Overview
+    url: observability_pipelines/production_deployment_overview/
+    parent: observability_pipelines
+    identifier: observability_pipelines_production_deployment_overview
+    weight: 2
+  - name: Architecture Design and Principles
+    url: observability_pipelines/production_deployment_overview/architecture_design_and_principles/
+    parent: observability_pipelines_production_deployment_overview
+    identifier: observability_pipelines_architecture_design_and_principles
+    weight: 201
+  - name: Aggregator Architecture
+    url: observability_pipelines/production_deployment_overview/aggregator_architecture/
+    parent: observability_pipelines_production_deployment_overview
+    identifier: observability_pipelines_aggregator_architecture
+    weight: 202
   - name: Working with Data
     url: observability_pipelines/working_with_data/
     parent: observability_pipelines
     identifier: observability_pipelines_working_with_data
-    weight: 2
+    weight: 3
   - name: Reference
     url: observability_pipelines/reference/
     parent: observability_pipelines
     identifier: observability_pipelines_reference
-    weight: 3
+    weight: 4
   - name: Configurations
     url: observability_pipelines/configurations/
     parent: observability_pipelines_reference
@@ -2465,22 +2480,22 @@ main:
     url: observability_pipelines/reference/sources/
     parent: observability_pipelines_vector_configuration
     identifier: observability_pipelines_reference_sources
-    weight: 301
+    weight: 401
   - name: Transforms
     url: observability_pipelines/reference/transforms/
     parent: observability_pipelines_vector_configuration
     identifier: observability_pipelines_reference_transforms
-    weight: 302
+    weight: 402
   - name: Sinks
     url: observability_pipelines/reference/sinks/
     parent: observability_pipelines_vector_configuration
     identifier: observability_pipelines_reference_sinks
-    weight: 303
+    weight: 403
   - name: Guides
     url: observability_pipelines/guide/
     parent: observability_pipelines
     identifier: observability_pipelines_guides
-    weight: 4
+    weight: 5
   - name: Security Overview
     url: security/
     pre: security-platform
