@@ -794,6 +794,11 @@
       "group": "synthetics",
       "suffix": "",
       "description": "Create a browser test returns \"OK - Returns the created test details.\" response"
+    },
+    {
+      "group": "synthetics",
+      "suffix": "_397420811",
+      "description": "Create a browser test with advanced scheduling options returns \"OK - Returns the created test details.\" response"
     }
   ],
   "CreateGlobalVariable": [
