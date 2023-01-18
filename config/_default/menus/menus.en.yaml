@@ -62,7 +62,7 @@ main:
     url: getting_started/containers/datadog_operator
     parent: getting_started_containers
     weight: 402
-  - name: Serverless (Lambda)
+  - name: Serverless for AWS Lambda
     identifier: getting_started_serverless
     url: getting_started/serverless/
     parent: getting_started
@@ -893,126 +893,74 @@ main:
     parent: infrastructure_heading
     weight: 100000
   - name: AWS Lambda
-    url: serverless/installation
+    url: serverless/aws_lambda
     parent: serverless
-    identifier: serverless_installation
+    identifier: serverless_aws_lambda
     weight: 1
-  - name: Python
-    url: serverless/installation/python
-    parent: serverless_installation
-    identifier: serverless_installation_python
+  - name: Installation
+    url: serverless/installation
+    parent: serverless_aws_lambda
+    identifier: serverless_aws_lambda_installation
     weight: 101
-  - name: Node.js
-    url: serverless/installation/nodejs
-    parent: serverless_installation
-    identifier: serverless_installation_nodejs
-    weight: 102
-  - name: Ruby
-    url: serverless/installation/ruby
-    parent: serverless_installation
-    identifier: serverless_installation_ruby
-    weight: 103
-  - name: Java
-    url: serverless/installation/java
-    parent: serverless_installation
-    identifier: serverless_installation_java
-    weight: 104
-  - name: Go
-    url: serverless/installation/go
-    parent: serverless_installation
-    identifier: serverless_installation_go
-    weight: 105
-  - name: .NET
-    url: serverless/installation/dotnet
-    parent: serverless_installation
-    identifier: serverless_installation_dotnet
-    weight: 106
-  - name: Advanced Configurations (AWS Lambda)
+  - name: Advanced Configuration
     url: serverless/configuration
-    parent: serverless
+    parent: serverless_aws_lambda
     identifier: serverless_configuration
-    weight: 2
+    weight: 102
   - name: Enhanced Lambda Metrics
     url: serverless/enhanced_lambda_metrics
-    parent: serverless
-    weight: 3
-  - name: Custom Metrics
-    url: serverless/custom_metrics
-    parent: serverless
-    identifier: custom_metrics
-    weight: 4
+    parent: serverless_aws_lambda
+    weight: 103
   - name: Distributed Tracing
     url: serverless/distributed_tracing
     identifier: serverless_distributed_tracing
-    parent: serverless
-    weight: 5
-  - name: Trace Merging (Advanced)
-    url: serverless/distributed_tracing/serverless_trace_merging
-    parent: serverless_distributed_tracing
-    weight: 502
-  - name: Trace Propagation (Advanced)
-    url: serverless/distributed_tracing/serverless_trace_propagation
-    parent: serverless_distributed_tracing
-    weight: 503
-  - name: Libraries & Integrations
-    url: serverless/libraries_integrations
-    parent: serverless
-    identifier: libraries_integrations
-    weight: 6
-  - name: Datadog Lambda Extension
-    url: serverless/libraries_integrations/extension/
-    parent: libraries_integrations
-    weight: 601
-  - name: Datadog Serverless Plugin
-    url: serverless/libraries_integrations/plugin/
-    parent: libraries_integrations
-    weight: 602
-  - name: Datadog Serverless Macro
-    url: serverless/libraries_integrations/macro/
-    parent: libraries_integrations
-    weight: 603
-  - name: Datadog Serverless CLI
-    url: serverless/libraries_integrations/cli/
-    parent: libraries_integrations
-    weight: 604
-  - name: Datadog CDK Construct
-    url: serverless/libraries_integrations/cdk/
-    parent: libraries_integrations
-    weight: 605
+    parent: serverless_aws_lambda
+    weight: 104
+  - name: Custom Metrics
+    url: serverless/custom_metrics
+    parent: serverless_aws_lambda
+    identifier: serverless_aws_lambdacustom_metrics
+    weight: 105
   - name: Deployment Tracking
     url: serverless/deployment_tracking
-    parent: serverless
-    weight: 7
+    parent: serverless_aws_lambda
+    identifier: serverless_aws_lambda_deployment_tracking
+    weight: 106
+  - name: Troubleshooting
+    url: serverless/troubleshooting
+    parent: serverless_aws_lambda
+    identifier: serverless_aws_lambda_troubleshooting
+    weight: 107
+  - name: Libraries & Integrations
+    url: serverless/libraries_integrations
+    parent: serverless_aws_lambda
+    identifier: libraries_integrations
+    weight: 108
   - name: Azure App Service
     url: serverless/azure_app_services
     parent: serverless
     identifier: serverless_app_services
-    weight: 8
+    weight: 2
   - name: Azure Container Apps
     url: serverless/azure_container_apps
     parent: serverless
     identifier: serverless_container_apps
-    weight: 9
+    weight: 3
   - name: Google Cloud Run
     url: serverless/google_cloud_run
     parent: serverless
     identifier: serverless_gcr
-    weight: 10
-  - name: Troubleshooting
-    url: serverless/troubleshooting
-    parent: serverless
-    identifier: serverless_troubleshooting
-    weight: 11
+    weight: 4
   - name: Glossary
     url: serverless/glossary
     parent: serverless
     identifier: serverless_glossary
-    weight: 12
+    weight: 5
   - name: Guides
     url: serverless/guide/
     identifier: serverless_guides
     parent: serverless
-    weight: 13
+    weight: 6
   - name: Cloud Cost
     url: cloud_cost_management/
     pre: cloud-cost-management
@@ -1375,7 +1323,7 @@ main:
     identifier: tracing_trace_collection
     weight: 2
   - name: Instrumenting with Datadog Tracing Libraries
-    url: tracing/trace_collection/dd_libraries/java/
+    url: tracing/trace_collection/dd_libraries/
     parent: tracing_trace_collection
     identifier: tracing_dd_libraries
     weight: 101
@@ -1425,7 +1373,7 @@ main:
     identifier: tracing_ddlib_dotnet_framework
     weight: 109
   - name: Library Compatibility
-    url: tracing/trace_collection/compatibility/java/
+    url: tracing/trace_collection/compatibility/
     parent: tracing_trace_collection
     identifier: tracing_compatibility
     weight: 102
@@ -1475,7 +1423,7 @@ main:
     identifier: tracing_compatibility_dotnet_framework
     weight: 109
   - name: Library Configuration
-    url: tracing/trace_collection/library_config/java/
+    url: tracing/trace_collection/library_config/
     parent: tracing_trace_collection
     identifier: tracing_library_config
     weight: 103
@@ -1872,6 +1820,11 @@ main:
     parent: tracing_error_tracking
     identifier: tracing_error_tracking_explorer
     weight: 801
+  - name: Custom Grouping
+    url: tracing/error_tracking/custom_grouping
+    parent: tracing_error_tracking
+    identifier: tracing_error_tracking_custom_grouping
+    weight: 1208
   - name: Data Security
     url: tracing/configure_data_security/
     parent: tracing
@@ -2462,6 +2415,11 @@ main:
     url: logs/error_tracking/backend
     parent: log_management_error_tracking
     weight: 603
+  - name: Custom Grouping
+    url: logs/error_tracking/custom_grouping
+    parent: log_management_error_tracking
+    identifier: log_management_error_tracking_custom_grouping
+    weight: 604
   - name: Guides
     url: logs/guide/
     parent: log_management
@@ -3304,6 +3262,11 @@ main:
     parent: rum_error_tracking
     identifier: rum_error_tracking_flutter
     weight: 1207
+  - name: Custom Grouping
+    url: real_user_monitoring/error_tracking/custom_grouping
+    parent: rum_error_tracking
+    identifier: rum_error_tracking_custom_grouping
+    weight: 1208
   - name: Guides
     url: real_user_monitoring/guide/
     parent: rum
