@@ -105,7 +105,7 @@ footer_scripts:
 
 # Docs allowed regions for redirecting
 allowedRegions:
-  - name: US
+  - name: US1
     value: us
     weight: 10
     domain: datadoghq.com

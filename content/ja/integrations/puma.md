@@ -16,7 +16,7 @@ assets:
     source_type_name: Puma
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: コミュニティ
   sales_email: justin.morris@ferocia.com.au
   support_email: justin.morris@ferocia.com.au
 categories:

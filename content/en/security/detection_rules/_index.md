@@ -24,7 +24,7 @@ further_reading:
 
 Detection Rules define conditional logic that is applied to all ingested logs and cloud configurations. When at least one case defined in a rule that is matched over a given period of time, Datadog generates a Security Signal.
 
-For each of monitoring option, there are [default detection rules][1] that work out-of-the-box with integration configuration.
+For each monitoring option, there are [default detection rules][1] that work out-of-the-box with integration configuration.
 
 - [Cloud SIEM][2] uses log detection to analyze ingested logs in real-time. You can also create [custom detection rules][3] to tailor to your environment.
 

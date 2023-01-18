@@ -2,12 +2,7 @@
 title: Injecting Libraries Using Admission Controller
 kind: documentation
 description: "Inject instrumentation libraries into applications using Cluster Agent and Admission Controller"
-is_beta: true
 ---
-
-{{< beta-callout url="#" btn_hidden="true">}}
-  Tracing library injection using Admission Controller is in beta. 
-{{< /beta-callout >}}
 
 ## Overview
 
@@ -88,6 +83,8 @@ To select your pods for library injection, annotate them with the following, cor
 | Python     | `admission.datadoghq.com/python-lib.version: "<lib-version>"` |
 
 The available library versions are listed in each container registry.
+
+**Note**: If you already have an application instrumented using version X of the library, and then use library injection to instrument using version Y of the same tracer library, the tracer does not break. Rather, the library version loaded first is used. As Library Injection happens at the admission controller level prior to runtime, it will take precedent over any manually configured libraries.
 
 <div class="alert alert-warning"><strong>Note</strong>: Using the <code>latest</code> tag is supported, but use it with caution because major library releases can introduce breaking changes.</div>
 

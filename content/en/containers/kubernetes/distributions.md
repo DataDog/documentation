@@ -22,6 +22,9 @@ further_reading:
     - link: '/agent/kubernetes/tag'
       tag: 'Documentation'
       text: 'Assign tags to all data emitted by a container'
+    - link: 'https://www.datadoghq.com/blog/monitor-vsphere-tanzu-kubernetes-grid-with-datadog/'
+      tag: 'Blog'
+      text: 'Monitor Tanzu Kubernetes Grid on vSphere'
 ---
 
 ## Overview

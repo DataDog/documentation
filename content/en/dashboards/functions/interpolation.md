@@ -101,7 +101,7 @@ default_zero(avg:custom_metric{*})
     {{< nextlink href="/dashboards/functions/timeshift" >}}Timeshift: Shift your metric data point along the timeline. {{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: /dashboards/faq/interpolation-the-fill-modifier-explained/
+[1]: /metrics/guide/interpolation-the-fill-modifier-explained/
 [2]: /getting_started/from_the_query_to_the_graph/#proceed-to-space-aggregation
 [3]: /monitors/guide/as-count-in-monitor-evaluations/
 [4]: /metrics/

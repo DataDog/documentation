@@ -16,7 +16,7 @@ assets:
     source_type_name: Zabbix
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: コミュニティ
   sales_email: KosukeKamiya@users.noreply.github.com
   support_email: KosukeKamiya@users.noreply.github.com
 categories:

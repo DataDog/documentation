@@ -15,7 +15,7 @@ assets:
     source_type_name: iLert
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: iLert
   sales_email: support@ilert.com
   support_email: support@ilert.com
 categories:
