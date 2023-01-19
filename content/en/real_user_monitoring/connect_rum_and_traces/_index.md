@@ -120,7 +120,7 @@ Use frontend data from RUM, as well as backend, infrastructure, and log informat
 
 1.  Set up [RUM iOS Monitoring][1].
 
-2.  Call the `trackURLSession(firstPartyHostsWithHeaderTypes:)` builder function with the dictionary of internal, first-party origins with corresponding header types called by your iOS application.
+2.  Call the `trackURLSession(firstPartyHosts:)` builder function with the list of internal, first-party origins called by your iOS application.
     ```swift
     Datadog.initialize(
         appContext: .init(),
@@ -236,7 +236,7 @@ RUM supports several propagator types to connect resources with backends that ar
             .build()
         )
     ```
-    `trackURLSession(firstPartyHostsWithHeaderTypes:)` takes `Dictionary<String, Set<TracingHeaderType>>` as a parameter, where key is a host and value is a set of supported tracing header types.
+    `trackURLSession(firstPartyHostsWithHeaderTypes:)` takes `Dictionary<String, Set<TracingHeaderType>>` as a parameter, where key is a host and value is a list of supported tracing header types.
 
     `TracingHeaderType` in an enum representing following tracing header types:
       - `.datadog`: Datadog's propagator (`x-datadog-*`)
