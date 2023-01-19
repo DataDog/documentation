@@ -138,7 +138,7 @@ If the configuration is successful, you should see the line `DatadogCompilerPlug
 {{% tab "Maven" %}}
 
 Include the snippets below in the relevant sections of the same Maven profile that you have added to your root `pom.xml` for the tracer config.
-Replace `$VERSION` with the latest version of the plugin accessible from the [Maven Repository][1] (without the preceding `v`): ![Maven Central][2]
+Replace `$VERSION` with the latest version of the artifacts accessible from the [Maven Repository][1] (without the preceding `v`): ![Maven Central][2]
 
 {{< code-block lang="xml" filename="pom.xml" >}}
 <dependency>
@@ -177,7 +177,7 @@ Replace `$VERSION` with the latest version of the plugin accessible from the [Ma
 > property starting with version 3.5.
 > If you absolutely must use an older version, declare Datadog compiler plugin as a regular dependency in your project.
 
-Additionally, if you are using JDK 16 or newer, add the following flags
+Additionally, if you are using JDK 16 or newer, add the following lines
 to [.mvn/jvm.config][4] in your project base directory:
 
 {{< code-block lang="properties" filename=".mvn/jvm.config" >}}
@@ -196,8 +196,8 @@ to [.mvn/jvm.config][4] in your project base directory:
 {{% tab "Gradle" %}}
 
 Add plugin-client JAR to the project's classpath, add plugin JAR to the compiler's annotation processor path, and pass
-the plugin argument to the task that compiles the tests.
-Replace `$VERSION` with the latest version of the tracer accessible from the [Maven Repository][1] (without the preceding `v`): ![Maven Central][2]
+the plugin argument to the tasks that compile Java classes.
+Replace `$VERSION` with the latest version of the artifacts accessible from the [Maven Repository][1] (without the preceding `v`): ![Maven Central][2]
 
 {{< code-block lang="groovy" filename="build.gradle" >}}
 if (project.hasProperty("dd-civisibility")) {
@@ -213,7 +213,7 @@ if (project.hasProperty("dd-civisibility")) {
 }
 {{< /code-block >}}
 
-Additionally, if you are using JDK 16 or newer, add the following flags to your
+Additionally, if you are using JDK 16 or newer, add the following lines to your
 [gradle.properties][3]
 file:
 
