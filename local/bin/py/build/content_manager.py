@@ -264,6 +264,7 @@ def copy_cached_content_into_repo(self, cached_content_array):
                 full_dest_path = f'{self.en_content_path}{dest_path}{dest_file_name}'
 
                 os.makedirs(os.path.dirname(full_dest_path), exist_ok=True)
+                print(f'Copying {full_dest_path} from cache')
                 shutil.copy(f'temp/{full_dest_path}', full_dest_path)
             elif action == 'pull-and-push-folder':
                 destination = content.get('options', {}).get('dest_dir', '')
@@ -273,6 +274,7 @@ def copy_cached_content_into_repo(self, cached_content_array):
                 print(f'Action {action} unsupported, cannot copy from cache.')
 
             if destination != '':
+                print(f'Copying {self.en_content_path}{destination} directory from cache')
                 shutil.copytree(f'temp/{self.en_content_path}{destination}', f'{self.en_content_path}{destination}', dirs_exist_ok=True)
 
         # Integrations are handled separately for now

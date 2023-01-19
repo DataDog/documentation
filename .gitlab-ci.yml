@@ -32,6 +32,7 @@ before_script:
   - export GITHUB_TOKEN=$(get_secret 'github_token')
   - export DATADOG_API_KEY=$(get_secret 'dd-api-key')
   - export DATADOG_APP_KEY=$(get_secret 'dd-app-key')
+  - export STATIC_BUCKET=$(get_secret 'static_bucket')
   - export BRANCH=${CI_COMMIT_REF_NAME}
   - git config --global url."https://${GITHUB_TOKEN}@github.com/DataDog".insteadOf https://github.com/DataDog
 
@@ -81,7 +82,7 @@ build_preview:
     CONFIG: ${PREVIEW_CONFIG}
     MESSAGE: ":gift_heart: Your preview site is available!\nNow running tests..."
     CONFIGURATION_FILE: "./local/bin/py/build/configurations/pull_config_preview.yaml"
-    STATIC_BUCKET: $(get_secret 'static_bucket')
+    STATIC_BUCKET: ${STATIC_BUCKET}
     LOCAL: "False"
   script:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
