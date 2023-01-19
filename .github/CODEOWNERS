@@ -30,6 +30,8 @@ package.json              @DataDog/corpweb @DataDog/documentation
 # Marketplace
 /content/en/developers/marketplace/                     @Datadog/marketplace-product-management @DataDog/documentation
 /layouts/shortcodes/integration-assets.md               @Datadog/marketplace-product-management @DataDog/documentation
+/layouts/shortcodes/integration-media-carousel.md       @Datadog/marketplace-product-management @DataDog/documentation
+/layouts/shortcodes/integration-readme.md               @Datadog/marketplace-product-management @DataDog/documentation
 
 # Websites
 .github/workflows                                       @DataDog/corpweb
