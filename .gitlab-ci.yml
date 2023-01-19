@@ -74,7 +74,7 @@ before_script:
 build_reference:
   image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/docker:18.03.1
   tags:
-    - "runner:main"
+    - "runner:docker"
   except:
     - tags
   stage: build
