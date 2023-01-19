@@ -22,7 +22,7 @@ The source code integration supports:</br></br>Languages:<ul><li>Go</li><li>Java
 
 Datadog's source code integration allows you to connect your telemetry with your Git repositories hosted in GitHub, GitLab, or Bitbucket. Once you have enabled the [source code integration][7], you can debug stack traces, slow profiles, and other issues by quickly accessing the relevant lines of your source code. 
 
-{{< img src="integrations/guide/source_code_integration/inline-code-snippet.png" alt="Inline code snippet of a Java RuntimeException with a button to view the code in Github" style="width:100%;">}}
+{{< img src="integrations/guide/source_code_integration/inline-code-snippet.png" alt="Inline code snippet of a Java RuntimeException with a button to view the code in GitHub" style="width:100%;">}}
 
 
 ## Setup
@@ -87,6 +87,8 @@ Datadog only captures the repository URL, the commit SHA of the current branch, 
 
 If you are a GitHub SaaS user, install Datadog's [GitHub integration][1] on the [GitHub integration tile][2] to link your telemetry with your source code. When specifying permissions on the integration tile, enable Datadog read permissions to **Contents**.
 
+By setting up the GitHub integration, you can see inline code snippets in **Error Tracking**. For more information, see [Inline Source Code](#inline-source-code).
+
 [1]: https://docs.datadoghq.com/integrations/github/
 [2]: https://app.datadoghq.com/integrations/github/
 {{% /tab %}}
@@ -112,9 +114,38 @@ Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@gi
 {{% /tab %}}
 {{< /tabs >}}
 
-By setting up the GitHub integration, you can see inline code snippets in **Error Tracking**. For more information, see [Inline Source Code](#inline-source-code).
+## Usage
 
-## Use the source code integration
+### Links to Git providers
+
+{{< tabs >}}
+{{% tab "Error Tracking" %}}
+You can directly access a trace in its source repository on GitHub in [Error Tracking][1].
+
+1. Navigate to [**APM** > **Error Tracking**][2].
+2. Click on an issue. The **Issue Details** panel appears on the right.
+3. Under **Latest Event**, click the **View** button on the right of a frame or select **View file**, **View Git blame**, or **View commit** to be redirected to your source code management tool.
+
+{{< img src="integrations/guide/source_code_integration/links-to-git-error.png" alt="A view repository button available on the right of a trace in Error Tracking" style="width:90%;">}}
+
+[1]: /tracing/error_tracking/
+[2]: https://app.datadoghq.com/apm/error-tracking
+
+{{% /tab %}}
+{{% tab "Continuous Profiler" %}}
+
+You can directly access a trace in its source repository on GitHub in the [Continuous Profiler][1].
+
+1. Navigate to [**APM** > **Profile Search**][2].
+2. Click on a profile and hover your cursor over a method in the flamegraph. A kebab icon with the **More actions** label appears on the right.
+3. Click **More actions** > **View in repo** to open the trace in its source code repository.
+
+{{< img src="integrations/guide/source_code_integration/profiler-link-to-git.png" alt="Link to GitHub from the Continuous Profiler" style="width:100%;">}}
+
+[1]: /profiler/search_profiles/
+[2]: https://app.datadoghq.com/profiling/search
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Inline source code
 
@@ -123,22 +154,11 @@ If you are a GitHub SaaS user, install Datadog's [GitHub integration][2] to dire
 1. Navigate to [**APM** > **Error Tracking**][1].
 2. Click on an issue. The **Issue Details** panel appears on the right.
 3. Click **Connect to Preview** and **Authorize** to access the source code snippet containing the error.
-4. Under **Latest Event**, click the **View Code** button to the right of a frame containing the code snippet.
-5. Click **View file**, **View Git blame**, or **View commit** to be redirected to your source code management tool.
+4. Under **Latest Event**, click the **View Code** button on the right of a frame or select **View file**, **View Git blame**, or **View commit** to be redirected to your source code management tool.
 
 {{< img src="integrations/guide/source_code_integration/error-tracking-panel.png" alt="An inline code snippet in a stack trace" style="width:100%;">}}
 
 To install a GitHub App for your organization, you need to be an organization owner or have admin permissions in a repository. You can also install a GitHub App on your personal GitHub account. For more information, see [GitHub Apps & OAuth Apps][3].
-
-### Continuous Profiler
-
-You can directly access a trace in its source repository on GitHub in the [Continuous Profiler][4].
-
-1. Navigate to [**APM** > **Profile Search**][9].
-2. Click on a profile and hover your cursor over a method in the flamegraph. A kebab icon with the **More actions** label appears on the right.
-3. Click **More actions** > **View in repo** to open the trace in its source code repository.
-
-{{< img src="integrations/guide/source_code_integration/profiler-link-to-git.png" alt="Link to GitHub from the Continuous Profiler" style="width:100%;">}}
 
 ## Further Reading
 
@@ -147,9 +167,7 @@ You can directly access a trace in its source repository on GitHub in the [Conti
 [1]: https://app.datadoghq.com/apm/error-tracking
 [2]: https://app.datadoghq.com/integrations/github/
 [3]: https://docs.github.com/en/developers/apps/getting-started-with-apps/about-apps
-[4]: /profiler/search_profiles/
 [5]: /integrations/github/
 [6]: /tracing/
 [7]: https://app.datadoghq.com/source-code/setup/apm
 [8]: /tracing/error_tracking/
-[9]: https://app.datadoghq.com/profiling/search
