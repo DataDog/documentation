@@ -72,7 +72,9 @@ before_script:
     - branches
 
 build_reference:
-  image: timberio/vector:nightly-distroless-static
+  image:
+    name: timberio/vector:nightly-distroless-static
+    entrypoint: [ "" ]
   tags:
     - "runner:main"
   except:
@@ -82,7 +84,7 @@ build_reference:
   variables:
     GIT_STRATEGY: none
   script:
-    - generate-schema > data/reference/schema.json
+    - vector generate-schema > data/reference/schema.json
   artifacts:
     paths:
       - data/reference/schema.json
