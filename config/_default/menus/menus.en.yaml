@@ -7641,6 +7641,70 @@ api:
         - DownloadCloudWorkloadPolicyFile
       unstable: []
       order: 1
+  - name: Cloudflare Integration
+    url: /api/latest/cloudflare-integration/
+    identifier: cloudflare-integration
+    generated: true
+  - name: Update Cloudflare account
+    url: '#update-cloudflare-account'
+    identifier: cloudflare-integration-update-cloudflare-account
+    parent: cloudflare-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateCloudflareAccount
+      unstable: []
+      order: 4
+  - name: Get Cloudflare account
+    url: '#get-cloudflare-account'
+    identifier: cloudflare-integration-get-cloudflare-account
+    parent: cloudflare-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetCloudflareAccount
+      unstable: []
+      order: 3
+  - name: Delete Cloudflare account
+    url: '#delete-cloudflare-account'
+    identifier: cloudflare-integration-delete-cloudflare-account
+    parent: cloudflare-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteCloudflareAccount
+      unstable: []
+      order: 5
+  - name: Add Cloudflare account
+    url: '#add-cloudflare-account'
+    identifier: cloudflare-integration-add-cloudflare-account
+    parent: cloudflare-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateCloudflareAccount
+      unstable: []
+      order: 2
+  - name: List Cloudflare accounts
+    url: '#list-cloudflare-accounts'
+    identifier: cloudflare-integration-list-cloudflare-accounts
+    parent: cloudflare-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListCloudflareAccounts
+      unstable: []
+      order: 1
   - name: Confluent Cloud
     url: /api/latest/confluent-cloud/
     identifier: confluent-cloud

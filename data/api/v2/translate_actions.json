@@ -225,6 +225,30 @@
     "request_description": "Opsgenie service payload.",
     "request_schema_description": "Update request for an Opsgenie service."
   },
+  "ListCloudflareAccounts": {
+    "description": "List Cloudflare accounts.",
+    "summary": "List Cloudflare accounts"
+  },
+  "CreateCloudflareAccount": {
+    "description": "Create a Cloudflare account.",
+    "summary": "Add Cloudflare account",
+    "request_description": "",
+    "request_schema_description": "Payload schema when adding a Cloudflare account."
+  },
+  "DeleteCloudflareAccount": {
+    "description": "Delete a Cloudflare account.",
+    "summary": "Delete Cloudflare account"
+  },
+  "GetCloudflareAccount": {
+    "description": "Get a Cloudflare account.",
+    "summary": "Get Cloudflare account"
+  },
+  "UpdateCloudflareAccount": {
+    "description": "Update a Cloudflare account.",
+    "summary": "Update Cloudflare account",
+    "request_description": "",
+    "request_schema_description": "Payload schema when updating a Cloudflare account."
+  },
   "ListConfluentAccount": {
     "description": "List Confluent accounts.",
     "summary": "List Confluent accounts"
