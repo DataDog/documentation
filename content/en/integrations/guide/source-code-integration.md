@@ -1,7 +1,7 @@
 ---
 title: Datadog Source Code Integration
 kind: guide
-description: "Set up the source code integration that integrates with APM to link your telemetry with your backend services' repositories and generate inline code snippets."
+description: "Set up the source code integration that integrates with APM to link your telemetry with your repositories and use the GitHub integration to generate inline code snippets."
 further_reading:
 - link: "https://docs.datadoghq.com/integrations/github/"
   tag: "Documentation"
@@ -17,14 +17,13 @@ further_reading:
 ## Overview
 
 <div class="alert alert-info">
-The source code integration supports:</br></br>Languages:<ul><li>Go</li><li>Java</li><li>JavaScript</li><li>Python</li></ul></br>Git providers:<ul><li>GitHub</li><li>GitLab</li><li>BitBucket</li></ul></br> Custom URLs are not supported—while your Git provider may be GitHub, if your source code is hosted on <code>xyz.com</code>, for example, and not <code>github.com</code>, the source code integration does not work.
+The source code integration supports:</br></br>Languages:<ul><li>Go</li><li>Java</li><li>JavaScript (doesn't support transpired JavaScript)</li><li>Python</li></ul></br>Git providers:<ul><li>GitHub</li><li>GitLab</li><li>BitBucket</li></ul></br> Self-hosted instances or private URLs are not supported.
 </div>
 
-Datadog's source code integration allows you to connect your telemetry with your Git repositories hosted in GitHub, GitLab, or Bitbucket. Once you have enabled the [GitHub integration][5], you can debug stack traces, slow profiles, and other issues by quickly accessing the relevant lines of your source code.
+Datadog's source code integration allows you to connect your telemetry with your Git repositories hosted in GitHub, GitLab, or Bitbucket. Once you have enabled the [source code integration][7], you can debug stack traces, slow profiles, and other issues by quickly accessing the relevant lines of your source code. 
 
 {{< img src="integrations/guide/source_code_integration/inline-code-snippet.png" alt="Inline code snippet of a Java RuntimeException with a button to view the code in Github" style="width:100%;">}}
 
-By setting up the GitHub integration, you can see inline code snippets in **Error Tracking for Backend Services** and the **Continuous Profiler**. For more information, see [Inline Source Code](#inline-source-code) and [Continuous Profiler](#continuous-profiler).
 
 ## Setup
 
@@ -34,7 +33,7 @@ If you have [APM][6] set up already, navigate to [**Integrations** > **Link Sour
 
 ## Tag your telemetry
 
-To link data to a specific commit, tag your telemetry with `git.commit.sha` and `git.repository_url` tags. Ensure that the `git.repository_url` tag does not contain protocols. For example, if your repository RUL is `https://github.con/example_repo`, the value for the `git.repository_url` tag should be `github.com/example_repo`.
+To link data to a specific commit, tag your telemetry with `git.commit.sha` and `git.repository_url` tags. Ensure that the `git.repository_url` tag does not contain protocols. For example, if your repository URL is `https://github.con/example_repo`, the value for the `git.repository_url` tag should be `github.com/example_repo`.
 
 {{< tabs >}}
 {{% tab "Docker Runtime" %}}
@@ -95,7 +94,7 @@ If you are a GitHub SaaS user, install Datadog's [GitHub integration][1] on the 
 
 To link telemetry to your source code, Datadog collects metadata for every commit SHA from your Git repository with the [`datadog-ci git-metadata upload`][1] command.
 
-When you run `datadog-ci git-metadata upload` within a git repository, Datadog receives the repository URL, the commit SHA of the current branch, and a list of tracked file paths.
+When you run `datadog-ci git-metadata upload` within a Git repository, Datadog receives the repository URL, the commit SHA of the current branch, and a list of tracked file paths.
 
 ### Validation
 
@@ -113,17 +112,19 @@ Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@gi
 {{% /tab %}}
 {{< /tabs >}}
 
-## Examples of links to Git repositories
+By setting up the GitHub integration, you can see inline code snippets in **Error Tracking**. For more information, see [Inline Source Code](#inline-source-code).
+
+## Use the source code integration
 
 ### Inline source code
 
-If you are a GitHub SaaS user, install Datadog's [GitHub integration][2] to directly inline code snippets from your GitHub repository in your stack traces in [Error Tracking for Backend Services][8]. When specifying permissions on the integration tile, enable Datadog read permissions to **Contents**.
+If you are a GitHub SaaS user, install Datadog's [GitHub integration][2] to directly inline code snippets from your GitHub repository in your stack traces in [Error Tracking][8]. When specifying permissions on the integration tile, enable Datadog read permissions to **Contents**.
 
 1. Navigate to [**APM** > **Error Tracking**][1].
 2. Click on an issue. The **Issue Details** panel appears on the right.
 3. Click **Connect to Preview** and **Authorize** to access the source code snippet containing the error.
 4. Under **Latest Event**, click the **View Code** button to the right of a frame containing the code snippet.
-5. Click **View file on GitHub**, **View Git blame**, or **View commit** to be redirected to GitHub.
+5. Click **View file**, **View Git blame**, or **View commit** to be redirected to your source code management tool.
 
 {{< img src="integrations/guide/source_code_integration/error-tracking-panel.png" alt="An inline code snippet in a stack trace" style="width:100%;">}}
 
