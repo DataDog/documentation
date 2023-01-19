@@ -11,7 +11,7 @@ further_reading:
 ---
 
 ## Overview
-Remote Configuration is a Datadog capability that allows you, as a user of Datadog, the ability to remotely configure the behavior of Agents and tracers running in your infrastructure, for select product features. Using Remote Configuration makes it easier to apply Agent and Tracer configurations in your environment on demand, decreases management costs, and accelerates resolution time by reducing friction between teams. For Datadog security products, Application Security Management and Cloud Workload Security, Remote Configuration enabled Agents and Tracers provides real-time security updates, enhancing security posture for your applications and cloud infrastructure.  
+Remote Configuration is a Datadog capability that allows you, as a user of Datadog, the ability to remotely configure the behavior of Agents and tracers running in your infrastructure, for select product features. Using Remote Configuration makes it easier to apply Agent and tracer configurations in your environment on demand, decreases management costs, and accelerates resolution time by reducing friction between teams. For Datadog security products, Application Security Management and Cloud Workload Security, Remote Configuration enabled Agents and tracers provides real-time security updates, enhancing security posture for your applications and cloud infrastructure.  
 
 ## How it works
 Remote Configuration is a capability in which once configured, the Datadog Agent will poll the configured [Datadog site](https://docs.datadoghq.com/getting_started/site/) every 5 seconds, to determine if there have been any configuration changes that should be updated to your Remote Config enabled Agents or tracers.
