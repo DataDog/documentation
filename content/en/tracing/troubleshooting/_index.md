@@ -126,25 +126,31 @@ kubectl exec -it <agent-pod-name> -c trace-agent -- agent flare <case-id> --loca
 
 ## Service naming convention issues
 
-tk add description tk
+If you run into quota-related issues, try following the steps below to ensure you're following best practices for service naming conventions.
 
-### Put ENV tag values into service names
+### Exclude environment tag values from service names
 
 By default, the environment (`env`) is the primary tag for Datadog APM.
 
-{{< img src="/tracing/troubleshooting/troubleshooting-service-naming-convention-issues-1.png" alt="tk" style="width:100%;" >}}
+{{< img src="/tracing/troubleshooting/troubleshooting-service-naming-convention-issues-3.png" alt="Environment is the default primary tag" style="width:100%;" >}}
 
 A service is typically deployed in multiple environments, such as `prod`, `staging`, and `dev`. Performance metrics like request counts, latency, and error rate differ across various environments. The environment dropdown in the Service Catalog allows you to scope the data in the **Performance** tab to a specific environment.
 
-{{< img src="/tracing/troubleshooting/troubleshooting-service-naming-convention-issues-2.png" alt="tk" style="width:100%;" >}}
+{{< img src="/tracing/troubleshooting/troubleshooting-service-naming-convention-issues-2.png" alt="Choose a specific environment using the `env` dropdown in the Service Catalog" style="width:100%;" >}}
 
-Datadog's trace metrics are unsampled. The [volume guidelines][17] are put in place to ensure that we consistently provide users with optimal experience across the app.
+One pattern that often leads to issues with an overwhelming number of services is to include the environment value in service names. For example, you might have two unique services instead of one since they are operating in two separate environments: `prod-web-store` and `dev-web-store`.
 
-One pattern that often leads to issues with an overwhelming number of services is to include the environment value in service names. For example, instead of just a single web store service, there can be two unique services: `prod-web-store` and `dev-web-store` - assuming that the web store service operates in two separate environments.
+You should avoid this pattern and rename your services by tuning your instrumentation.
 
-### Put metric partition or grouping variables into service names
+**Note**: Datadog's trace metrics are unsampled, which means the app shows all data instead of subsections of them. The [volume guidelines][17] are applied to ensure that we consistently provide users with an optimal experience across the app.
 
+### Use the second primary tag instead of putting metric partitions or grouping variables into service names
 
+Second primary tags are additional tags that you can use to group and aggregate your trace metrics. You can use the dropdown to scope the performance data to a given cluster name or data center value.
+
+{{< img src="/tracing/troubleshooting/troubleshooting-service-naming-convention-issues-1.png" alt="Use the dropdown menu to select a specific cluster or data center value" style="width:100%;" >}}
+
+Including metric partition or grouping variables in service names instead of applying the second primary tag will unnecessarily inflate the number of unique services in an account and result in potential delay or data loss. For example, instead of the service `web-store`, you might decide to name different instances of a service `web-store-us-1`, `web-store-eu-1`, and `web-store-eu2` to see performance metrics for these partitions side by side. Instead, we recommend implementing the **region value** as a second primary tag.
 
 ## Further Reading
 
