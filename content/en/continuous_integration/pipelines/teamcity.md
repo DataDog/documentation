@@ -51,7 +51,8 @@ the VCS Root attached and the [VCS Trigger][13] configured.
    to all the subprojects. For example, to enable the plugin for all projects, `datadog.ci.enabled` can be added with
    value `true` to the Root Project. More information on defining configuration parameters
    are available in the [TeamCity Project Hierarchy][9] docs.
-4. Enable the plugin by restarting the TeamCity server.
+4. To enable the plugin, click on "Enable uploaded plugins" in the Administration -> Plugins page.
+Alternatively, restart the TeamCity server.
 
 ## Visualize pipeline data in Datadog
 
