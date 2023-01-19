@@ -74,7 +74,7 @@ before_script:
 build_reference:
   image:
     name: timberio/vector:nightly-distroless-static
-    entrypoint: [ "" ]
+    entrypoint: ["/bin/sh", "-c"]
   tags:
     - "runner:main"
   except:
