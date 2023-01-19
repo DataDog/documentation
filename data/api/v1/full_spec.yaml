@@ -6519,6 +6519,8 @@ components:
           format: int64
           nullable: true
           type: integer
+        notification_preset_name:
+          $ref: '#/components/schemas/MonitorOptionsNotificationPresets'
         notify_audit:
           default: false
           description: A Boolean indicating whether tagged users is notified on changes
@@ -6631,6 +6633,20 @@ components:
           type: string
       readOnly: true
       type: object
+    MonitorOptionsNotificationPresets:
+      default: show_all
+      description: Toggles the display of additional content sent in the monitor notification.
+      enum:
+      - show_all
+      - hide_query
+      - hide_handles
+      - hide_all
+      type: string
+      x-enum-varnames:
+      - SHOW_ALL
+      - HIDE_QUERY
+      - HIDE_HANDLES
+      - HIDE_ALL
     MonitorOptionsSchedulingOptions:
       description: Configuration options for scheduling.
       properties:
