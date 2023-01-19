@@ -4,6 +4,9 @@ kind: documentation
 aliases:
   - /security_platform/cspm/frameworks_and_benchmarks
 further_reading:
+- link: "security/cspm/getting_started"
+  tag: "Documentation"
+  text: "Getting started with CSPM"
 - link: "security/default_rules"
   tag: "Documentation"
   text: "Explore default Posture Management cloud configuration detection rules"
@@ -38,26 +41,23 @@ Datadog also provides Datadog Security Labs, a set of recommendations developed 
 
 **Note**: CSPM provides visibility into whether your resources are configured in accordance with certain detection rules. These rules address various regulatory frameworks, benchmarks, and standards ("Security Posture Frameworks"). CSPM does not provide an assessment of your actual compliance with any Security Posture Framework, and the detection rules may not address all configuration settings that are relevant to a given framework. Datadog recommends that you use CSPM in consultation with your legal counsel or compliance experts.
 
-## Explore your compliance posture
+## View your compliance posture
 
 View a high-level overview of your compliance posture for each framework on the CSPM [Overview][20] page.
 
-- **Framework Overview**: A detailed compliance report that gives you insight into which rules are failing in your environment, along with details about the misconfigured resources.
+- **Framework Overview**: A detailed report that gives you insight into how you score against a framework's requirements and rules.
 - **Explore Resources**: A filtered view of the **Findings** page that shows resources with findings for the selected framework.
 - **Configure Rules**: Customize how your environment is scanned and set notification targets by modifying the detection rules for each framework.
 
 {{< img src="security/cspm/frameworks_and_benchmarks/compliance-reports-overview.png" alt="View a high-level overview of your compliance posture on the overview page" style="width:100%;">}}
 
-## View a detailed compliance report
+## Explore compliance framework reports
 
-Compliance reports give you 
-
-insight into which controls are failing in your environment, along with details about the misconfigured resources.
-all rules associated with a framework
-how they score against different framework requirements and rules.
-most critical rules that require immediate attention
+Compliance framework reports show which rules are failing in your environment, along with details about the misconfigured resources.
 
 The summary at the top of the report shows the number of rules with Pass/Fail findings, the top three high-severity rule failures, and a detailed breakdown of the rules based on severity. You can also explore your past posture with the time selector, and download a PDF copy of the report.
+
+Below the summary is a complete listing of all rules associated with the framework, organized by requirements and controls, along with the number of resources checked by the rule, and the percentage of failures.
 
 {{< img src="security/cspm/frameworks_and_benchmarks/report-2.png" alt="Set a findings time window using the dropdown" style="width:100%;">}}
 
