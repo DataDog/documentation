@@ -72,9 +72,7 @@ before_script:
     - branches
 
 build_reference:
-  image:
-    name: timberio/vector:nightly-distroless-static
-    entrypoint: ["vector", "generate-schema"]
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/docker:18.03.1
   tags:
     - "runner:main"
   except:
@@ -83,6 +81,8 @@ build_reference:
   cache: { }
   variables:
     GIT_STRATEGY: none
+  script:
+    - docker run --rm --pull always timberio/vector:nightly-distroless-static generate-schema > data/reference/schema.json
   artifacts:
     paths:
       - data/reference/schema.json
