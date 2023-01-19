@@ -37,7 +37,8 @@ GIF FROM JOE GOES HERE
 
 You can now click on “Enable Late Data” and hit “Save” to start ingesting late metrics for the metric name you selected.
 
-GIF FROM JOE GOES HERE
+{{< img src="metrics/ldi_enablement.mp4" alt="Late Metrics Configuration" video=true >}}
+
 
 There are also APIs available so you can enable or disable late metric ingestion.
 
@@ -45,7 +46,8 @@ There are also APIs available so you can enable or disable late metric ingestion
 
 Optimize your Late Metrics enablement by using our Bulk Late Metric Enablement feature. By clicking Late Metrics on Metrics Summary, you can specify a namespace for your metrics. You can then configure all metrics matching that namespace to enable Late metrics ingestion.
 
-GIF FROM JOE GOES HERE
+{{< img src="metrics/bulk_ldi_enablement.mp4" alt="Bulk Late Metrics Configuration" video=true >}}
+
 
 ## Late Metrics Submission
 
