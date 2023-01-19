@@ -82,6 +82,7 @@ build_reference:
   variables:
     GIT_STRATEGY: none
   script:
+    - mkdir -p data/reference/
     - docker run --rm --pull always timberio/vector:nightly-distroless-static generate-schema > data/reference/schema.json
   artifacts:
     paths:
