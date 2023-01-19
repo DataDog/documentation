@@ -56,13 +56,13 @@ Choose between a **Pipelines** or a **Tests** monitor:
 3. Choose to monitor over a CI Pipeline event count, facet, or measure:
     * **CI Pipeline event count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of CI Pipeline events over a selected time frame, then compares it to the threshold conditions.
     * **Dimension**: Select dimension (qualitative facet) to alert over the `Unique value count` of the facet.
-    * **Measure**: Select measure (quantitative facet) to alert over the numerical value of the CI Pipeline facet (similar to a metric monitor). Select the aggregation (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
+    * **Measure**: Select measure (quantitative facet) to alert over the numerical value of the CI Pipeline measure (similar to a metric monitor). Select the aggregation (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
 4. Group CI Pipeline events by multiple dimensions (optional):
     * All CI Pipeline events matching the query are aggregated into groups based on the value of up to four facets.
 5. Configure the alerting grouping strategy (optional):
    * If the query has a `group by`, multi alerts apply the alert to each source according to your group parameters. An alerting event is generated for each group that meets the set conditions. For example, you could group a query by `@ci.pipeline.name` to receive a separate alert for each CI Pipeline name when the number of errors is high.
 
-{{< img src="monitors/monitor_types/ci_pipelines/define-the-search-query.png" alt="A query for CI Status:Error that is being set to group by Pipeline Name" style="width:100%;" >}}
+{{< img src="monitors/monitor_types/ci_pipelines/define-the-search-query.png" alt="A query for CI Status:Error that is being set to group by Test Name" style="width:100%;" >}}
 
 #### Using formulas and functions
 
@@ -83,7 +83,7 @@ The following example is of a pipeline error rate monitor using a formula that c
 1. Common monitor types: (optional) Provides a template query for each of the **New Flaky Test**, **Test Failures**, and **Test Performance** common monitor types, which you can then customize. Learn more about this feature by reading [Track new flaky tests](#track-new-flaky-tests).
 2. Construct a search query using the same logic as a CI Test explorer search. For example, you can search failed tests for the `main` branch of the `myapp` test service using the following query: `@test.status:fail @git.branch:main @test.service:myapp`.
 3. Choose to monitor over a CI Test event count, facet, or measure:
-    * **CI Test event count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of CI Pipeline events over a selected time frame, then compares it to the threshold conditions.
+    * **CI Test event count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of CI Pipeline test events over a selected time frame, then compares it to the threshold conditions.
     * **Dimension**: Select dimension (qualitative facet) to alert over the `Unique value count` of the facet.
     * **Measure**: Select measure (quantitative facet) to alert over the numerical value of the CI Pipeline facet (similar to a metric monitor). Select the aggregation (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
 4. Group CI Test events by multiple dimensions (optional):
@@ -157,7 +157,7 @@ When a CI Test or Pipeline monitor is triggered, samples or values can be added 
 | Grouped Multi-Alert count        | Up to 10 samples.                    |
 | Ungrouped Simple-Alert measure   | Up to 10 samples.                    |
 | Grouped Simple-Alert measure     | Up to 10 facet or measure values.    |
-| Grouped Multi-Alert count        | Up to 10 facet or measure values.    |
+| Grouped Multi-Alert measure        | Up to 10 facet or measure values.    |
 
 These are available for notifications sent to Slack, Jira, webhooks, Microsoft Teams, Pagerduty, and email. **Note**: Samples are not displayed for recovery notifications.
 
@@ -169,7 +169,7 @@ Include a table of CI Test 10 samples in the alert notification:
 {{< img src="monitors/monitor_types/ci_tests/10_ci_tests_samples.png" alt="Top 10 CI Test samples"  style="width:60%;" >}}
 
 Include a table of CI Pipeline 10 samples in the alert notification:
-{{< img src="monitors/monitor_types/ci_pipelines/10_ci_pipelines_samples.png" alt="Top 10 CI Test samples"  style="width:60%;" >}}
+{{< img src="monitors/monitor_types/ci_pipelines/10_ci_pipelines_samples.png" alt="Top 10 CI Pipeline samples" style="width:60%;" >}}
 
 #### Notifications behavior when there is no data
 

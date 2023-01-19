@@ -15,7 +15,7 @@ assets:
     source_type_name: Amixr
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Amixr
   sales_email: ildar@amixr.io
   support_email: ildar@amixr.io
 categories:

@@ -1,6 +1,7 @@
 {{ $ctx := .ctx }}
 {{ $type := .type}}
 {{ $editLink := "" }}
+{{ if ne $ctx.Params.disable_edit true }}
 {{ if $ctx.Params.dependencies }}
 {{/* Files with dependencies link to corresponding URL */}}
 
@@ -41,4 +42,5 @@
         {{ partial "page-edit-body.html" (dict "ctx" $ctx "link" $editLink "type" $type) }}
     {{ end }}
 
+{{ end }}
 {{ end }}

@@ -37,8 +37,10 @@ Required Agent version
 
 Your containerized service must be running on one of the following supported platforms
 : Linux Kernel 4.14 and greater<br/>
-CentOS or RHEL 8.0 and greater<br/>
-IIS on Windows 2012 R2 and greater
+CentOS or RHEL 8.0 and greater
+
+Supported Windows platforms
+: IIS on Windows 2012 R2 and greater
 
 Supported application-layer protocols
 : HTTP<br/>
