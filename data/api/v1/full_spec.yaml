@@ -14220,7 +14220,7 @@ components:
             $ref: '#/components/schemas/SyntheticsTestOptionsSchedulingTimeframe'
           type: array
         timezone:
-          description: Timezone on which the timeframe are based.
+          description: Timezone in which the timeframe is based.
           example: America/New_York
           type: string
       type: object
