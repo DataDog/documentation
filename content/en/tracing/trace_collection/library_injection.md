@@ -4,12 +4,7 @@ kind: documentation
 description: "Inject instrumentation libraries into applications"
 aliases:
  - /tracing/trace_collection/admission_controller/
-is_beta: true
 ---
-
-{{< beta-callout url="#" btn_hidden="true">}}
-  Tracing library injection is in beta. 
-{{< /beta-callout >}}
 
 ## Overview
 
@@ -198,6 +193,8 @@ The instrumentation also starts sending telemetry to Datadog (for example, trace
 
 {{% tab "Host" %}}
 
+<div class="alert alert-info">Tracing library injection on a host is in beta.</a></div>
+
 When both the Agent and your services are running on a host, real or virtual, Datadog injects the tracing library by using a library that is preloaded and that overrides calls to `execve`. Any newly started processes are intercepted and the specified instrumentation library is injected into the services.
 
 ## Requirements
@@ -228,6 +225,8 @@ When both the Agent and your services are running on a host, real or virtual, Da
    curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
    sudo apt install nodejs -y
    ```
+   For .NET applications, ensure you have the [.NET runtime installed][3].
+
 2. If you haven't already, install your app.
 
 ## Configure the injection
@@ -313,7 +312,25 @@ Set `service_language` to one of the following values:
 
 In this configuration file, the value of `version` is always `1`. This refers to the configuration schema version in use, not the version of the content.
 
-Other values in the configuration map to similar ones in [tracing library configuration][2]. Tracer library configuration options that aren't mentioned in the injection configuration are still available for use through environment variables the usual way.
+The following table shows how the injection configuration values map to the corresponding [tracing library configuration options][2]:
+
+| Injection | Java tracer | NodeJS tracer | .NET tracer |
+| --------- | ----------- | ------------- | ----------- |
+| `tracing_enabled` | `dd.trace.enabled` | `DD_TRACE_ENABLED` | `DD_TRACE_ENABLED` |
+| `log_injection_enabled` | `dd.logs.injection` | `DD_LOGS_INJECTION` | `DD_LOGS_INJECTION` |
+| `health_metrics_enabled` | `dd.trace.health.metrics.enabled` |    n/a   |    n/a  |
+| `runtime_metrics_enabled` | `dd.jmxfetch.enabled` | `DD_RUNTIME_METRICS_ENABLED` | `DD_RUNTIME_METRICS_ENABLED` |
+| `tracing_sampling_rate` | `dd.trace.sample.rate` | `DD_TRACE_SAMPLE_RATE` | `DD_TRACE_SAMPLE_RATE` |
+| `tracing_rate_limit` | n/a       | `DD_TRACE_RATE_LIMIT` | `DD_TRACE_RATE_LIMIT` |
+| `tracing_tags` | `dd.tags` | `DD_TAGS` | `DD_TAGS` |
+| `tracing_service_mapping` | `dd.service.mapping` | `DD_SERVICE_MAPPING` | `DD_TRACE_SERVICE_MAPPING` |
+| `tracing_agent_timeout` | `dd.trace.agent.timeout` |  n/a | n/a |
+| `tracing_header_tags` | `dd.trace.header.tags` |    n/a    | `DD_TRACE_HEADER_TAGS` |
+| `tracing_partial_flush_min_spans` | `dd.trace.partial.flush.min.spans` | `DD_TRACE_PARTIAL_FLUSH_MIN_SPANS` | `DD_TRACE_PARTIAL_FLUSH_ENABLED ` |
+| `tracing_debug` | `dd.trace.debug` | `DD_TRACE_DEBUG` | `DD_TRACE_DEBUG` |
+| `tracing_log_level` | `datadog.slf4j.simpleLogger.defaultLogLevel` | `DD_TRACE_LOG_LEVEL` |   n/a    |
+
+Tracer library configuration options that aren't mentioned in the injection configuration are still available for use through properties or environment variables the usual way.
 
 ## Launch your services
 
@@ -322,25 +339,31 @@ Launch your services, indicating the preload library configuration in the launch
 **Java app example**:
 ```sh
 DD_CONFIG_SOURCES=BASIC java -jar <SERVICE_1>.jar &
-DD_CONFIG_SOURCES=LOCAL:/tmp/config.yaml;BASIC java -jar <SERVICE_2>.jar
+DD_CONFIG_SOURCES=LOCAL:/tmp/config.yaml;BASIC java -jar <SERVICE_2>.jar &
 ```
 
 **Node app example**:
 ```sh
-
+DD_CONFIG_SOURCES=BASIC node index.js &
+DD_CONFIG_SOURCES=LOCAL:/tmp/config.yaml;BASIC node index.js &
 ```
 
 **.NET app example**:
 ```sh
-
+DD_CONFIG_SOURCES=BASIC dotnet <APP_NAME>.dll &
+DD_CONFIG_SOURCES=LOCAL:/etc/<APP_NAME>/config.yaml;BASIC dotnet <APP_NAME>.dll &
 ```
 
 
 [1]: https://app.datadoghq.com/account/settings#agent/overview
 [2]: /tracing/trace_collection/library_config/
+[3]: https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu
 {{% /tab %}}
 <!--
 {{% tab "Agent on host, app in containers" %}}
+
+<div class="alert alert-info">Tracing library injection on a host or in a container is in beta.</a></div>
+
 
 The first is a library that is preloaded to override calls to execve. The second part is a runc shim that intercepts container creation, and configures the initial process launched in a docker container. The primary use case for the preload library is when a service runs directly on the host alongside the agent. The runc shim is for docker containers. 
 With these two libraries to facilitate tracer injection, any newly started processes will be intercepted to inject the specified instrumentation library into services.
@@ -349,6 +372,9 @@ With these two libraries to facilitate tracer injection, any newly started proce
 {{% /tab %}}
 
 {{% tab "Agent and app in containers" %}}
+
+<div class="alert alert-info">Tracing library injection in a container is in beta.</a></div>
+
 
 {{% /tab %}}
 -->
