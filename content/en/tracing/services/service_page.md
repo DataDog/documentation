@@ -19,6 +19,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-clipboard/"
   tag: "Blog"
   text: "Add an APM service page url to your clipboard"
+- link: "https://www.datadoghq.com/blog/apm-security-view/"
+  tag: "Blog"
+  text: "Gain visibility into risks, vulnerabilities, and attacks with APM Security View"
 ---
 
 {{< img src="tracing/visualization/service/overview_service_page.png" alt="Detailed service page" style="width:100%;">}}
