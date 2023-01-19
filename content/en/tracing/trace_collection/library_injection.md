@@ -1,21 +1,28 @@
 ---
-title: Injecting Libraries Using Admission Controller
+title: Injecting Libraries
 kind: documentation
-description: "Inject instrumentation libraries into applications using Cluster Agent and Admission Controller"
+description: "Inject instrumentation libraries into applications"
+aliases:
+ - /tracing/trace_collection/admission_controller/
 is_beta: true
 ---
 
 {{< beta-callout url="#" btn_hidden="true">}}
-  Tracing library injection using Admission Controller is in beta. 
+  Tracing library injection is in beta. 
 {{< /beta-callout >}}
 
 ## Overview
 
-In a Kubernetes environment, there are two ways to instrument your application:
-* Injecting the instrumentation library using the [Admission Controller][1], as described on this page; or
+There are two ways to instrument your application:
+* Injecting the instrumentation library, as described on this page; or
 * [Manually adding the instrumentation library in the application][2].
 
-With the Admission Controller approach, the Agent uses the Kubernetes Admission Controller to intercept requests to the Kubernetes API and mutate new pods to inject the specified instrumentation library.
+How to inject the library, without touching the application code at all, varies depending on where and how your Agent and application are installed. Select the scenario that represents your environment:
+
+{{< tabs >}}
+{{% tab "Kubernetes" %}}
+
+With the [Admission Controller][1] approach, the Agent uses the Kubernetes Admission Controller to intercept requests to the Kubernetes API and mutate new pods to inject the specified instrumentation library.
 
 <div class="alert alert-warning">Library injection is applied on new pods only and does not have any impact on running pods.</div>
 
@@ -50,7 +57,7 @@ For your Kubernetes applications whose traces you want to send to Datadog, confi
 3. Tag your pods with Unified Service Tags to tie Datadog telemetry together and navigate seamlessly across traces, metrics, and logs with consistent tags.
 4. Apply your new configuration.
 
-<div class="alert alert-info">You do not need to generate a new application image to inject the library. The library injection is taking care of adding the instrumentation library, so no change is required in your application image.</div>
+<div class="alert alert-info">You do not need to generate a new application image to inject the library. The library injection is taken care of adding the instrumentation library, so no change is required in your application image.</div>
 
 ### Step 1 - Enable Datadog Admission Controller to mutate your pods
 
@@ -168,10 +175,6 @@ Or run `kubectl describe pod <my-pod>` to see the `datadog-lib-init` init contai
 
 The instrumentation also starts sending telemetry to Datadog (for example, traces to [APM][15]).
 
-## Configuring the library
-
-The supported features and configuration options for the tracing library are the same for library injection as for other installation methods, and can be set with environment variables. Read the [Datadog Library configuration page][16] for your language for more details.
-
 
 
 [1]: /containers/cluster_agent/admission_controller/
@@ -189,4 +192,161 @@ The supported features and configuration options for the tracing library are the
 [13]: http://gallery.ecr.aws/datadog/dd-lib-python-init
 [14]: /getting_started/tagging/unified_service_tagging/
 [15]: https://app.datadoghq.com/apm/traces
+[16]: /tracing/trace_collection/library_config/
+
+{{% /tab %}}
+
+{{% tab "Host" %}}
+
+When both the Agent and your services are running on a host, real or virtual, Datadog injects the tracing library by using a library that is preloaded and that overrides calls to `execve`. Any newly started processes are intercepted and the specified instrumentation library is injected into the services.
+
+## Requirements
+
+- A recent [Datadog Agent v7][1] installation 
+
+
+## Install the preload library
+
+1. Run the following commands, for example, with `apt`, where `<LANG>` is one of `java`, `nodejs`, `dotnet`, or `all`:
+
+   ```sh
+   sudo apt update
+   sudo apt install -y datadog-apm-inject datadog-apm-library-<LANG>
+   dd-install-ld-preload
+   ```
+
+2. The preload library injection only works in a new shell, so exit and open a new shell.
+
+## Install the language and your app
+
+1. For Java applications, ensure you have a JDK installed, for example:
+   ```sh
+   sudo apt install openjdk-17-jdk -y
+   ```
+   For NodeJS applications, ensure you have NodeJS installed, for example:
+   ```sh
+   curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+   sudo apt install nodejs -y
+   ```
+2. If you haven't already, install your app.
+
+## Configure the injection
+
+The following environment variables configure library injection. You can pass these in by `export` on the command line (`export DD_AUTO_INJECT=1`) or by creating a configuration file and passing it in using the `DD_CONFIG_SOURCES` variable:
+
+`DD_AUTO_INJECT`
+: Set to `TRUE` or `1` to enable injection. Set to `FALSE` or `0` to turn injection off.<br>
+**Default**: 
+
+`DD_INJECT_DEBUG`
+: Set to `TRUE` or `1` to log debug information.<br>
+**Default**: `FALSE`
+
+`DD_OUTPUT_PATHS`
+: A comma-separated list of places to write the debug logs.<br>
+**Default**: `stderr`
+
+`DD_CONFIG_SOURCES`
+: Specifies a location to load configuration from. Optionally, separate multiple values with semicolons to indicate multiple possible locations. The first value that returns without an error is used. Configuration is not merged across configuration sources.The valid values are:
+  - `BLOB:<URL>` - Load from a blob store located at `<URL>`.
+  - `LOCAL:<PATH>` - load from a local file located at `<PATH>`.
+  - `BASIC` - Use exported or default values.
+  - `OFF` - Default. Don't configure.<br>
+  
+If you specify `BLOB` or `LOCAL` configuration source, provide the configuration either as JSON:
+
+```json
+{
+	"version": 1,
+	"service_language": "<LANG>",
+	"tracing_enabled": true,
+	"log_injection_enabled": true,
+	"health_metrics_enabled": true,
+	"runtime_metrics_enabled": true,
+	"tracing_sampling_rate": 1.0,
+	"tracing_rate_limit": 1,
+	"tracing_tags": ["a=b", "foo"],
+	"tracing_service_mapping": [
+		{ "from_key": "mysql", "to_name": "super_db"},
+		{ "from_key": "postgres", "to_name": "my_pg"}
+	],
+	"tracing_agent_timeout": 1,
+	"tracing_header_tags": [
+		{"header": "HEADER", "tag_name":"tag"}
+	],
+	"tracing_partial_flush_min_spans": 1,
+	"tracing_debug": true,
+	"tracing_log_level": "debug",
+}
+
+```
+
+or as YAML:
+```yaml
+---
+version: 1
+service_language: <LANG>
+tracing_enabled: true
+log_injection_enabled: true
+health_metrics_enabled: true
+runtime_metrics_enabled: true
+tracing_sampling_rate: 1.0
+tracing_rate_limit: 1
+tracing_tags: 
+- a=b 
+- foo
+tracing_service_mapping:
+- from_key: mysql
+  to_name: super_db
+- from_key: postgres
+  to_name: my_pg
+tracing_agent_timeout: 1
+tracing_header_tags:
+- header: HEADER
+  tag_name: tag
+tracing_partial_flush_min_spans: 1
+tracing_debug: true
+tracing_log_level: debug
+```
+
+Set `service_language` to one of the following values:
+- `java`
+- `node`
+- `nodemon` (NodeJS launched with nodemon)
+- Experimental: `npm` (NodeJS launched with npm)
+- `dotnet`
+
+Other values in the configuration map to similar ones in [tracing library configuration][2].
+
+## Launch your services
+
+Launch your service 
+
+
+[1]: https://app.datadoghq.com/account/settings#agent/overview
+[2]: /tracing/trace_collection/library_config/
+{{% /tab %}}
+
+{{% tab "Agent on host, app in containers" %}}
+
+The first is a library that is preloaded to override calls to execve. The second part is a runc shim that intercepts container creation, and configures the initial process launched in a docker container. The primary use case for the preload library is when a service runs directly on the host alongside the agent. The runc shim is for docker containers. 
+With these two libraries to facilitate tracer injection, any newly started processes will be intercepted to inject the specified instrumentation library into services.
+
+
+{{% /tab %}}
+
+{{% tab "Agent and app in containers" %}}
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
+
+
+## Configuring the library
+
+The supported features and configuration options for the tracing library are the same for library injection as for other installation methods, and can be set with environment variables. Read the [Datadog Library configuration page][16] for your language for more details.
+
+
+[2]: /tracing/trace_collection/
 [16]: /tracing/trace_collection/library_config/
