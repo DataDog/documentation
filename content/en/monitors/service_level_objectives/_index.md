@@ -260,7 +260,7 @@ To view, edit, and delete existing status corrections, click on the **Correction
 [14]: https://apps.apple.com/app/datadog/id1391380318
 [15]: https://play.google.com/store/apps/details?id=com.datadog.app
 [16]: /monitors/service_level_objectives/#saved-views
-[17]: /api/v1/events/#query-the-event-stream
+[17]: /api/latest/events/
 [18]: /monitors/create/types/event/
 [19]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
 [20]: /api/latest/service-level-objective-corrections/
