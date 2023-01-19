@@ -6519,6 +6519,8 @@ components:
           format: int64
           nullable: true
           type: integer
+        notification_preset_name:
+          $ref: '#/components/schemas/MonitorOptionsNotificationPresets'
         notify_audit:
           default: false
           description: A Boolean indicating whether tagged users is notified on changes
@@ -6631,6 +6633,20 @@ components:
           type: string
       readOnly: true
       type: object
+    MonitorOptionsNotificationPresets:
+      default: show_all
+      description: Toggles the display of additional content sent in the monitor notification.
+      enum:
+      - show_all
+      - hide_query
+      - hide_handles
+      - hide_all
+      type: string
+      x-enum-varnames:
+      - SHOW_ALL
+      - HIDE_QUERY
+      - HIDE_HANDLES
+      - HIDE_ALL
     MonitorOptionsSchedulingOptions:
       description: Configuration options for scheduling.
       properties:
@@ -14135,6 +14151,8 @@ components:
           $ref: '#/components/schemas/SyntheticsTestOptionsRetry'
         rumSettings:
           $ref: '#/components/schemas/SyntheticsBrowserTestRumSettings'
+        scheduling:
+          $ref: '#/components/schemas/SyntheticsTestOptionsScheduling'
         tick_every:
           description: The frequency at which to run the Synthetic test (in seconds).
           format: int64
@@ -14184,6 +14202,46 @@ components:
             300ms.'
           format: double
           type: number
+      type: object
+    SyntheticsTestOptionsScheduling:
+      description: Object containing timeframes and timezone used for advanced scheduling.
+      properties:
+        timeframes:
+          description: Array containing objects describing the scheduling pattern
+            to apply to each day.
+          example:
+          - day: 1
+            from: 07:00
+            to: '16:00'
+          - day: 3
+            from: 07:00
+            to: '16:00'
+          items:
+            $ref: '#/components/schemas/SyntheticsTestOptionsSchedulingTimeframe'
+          type: array
+        timezone:
+          description: Timezone in which the timeframe is based.
+          example: America/New_York
+          type: string
+      type: object
+    SyntheticsTestOptionsSchedulingTimeframe:
+      description: Object describing a timeframe.
+      properties:
+        day:
+          description: Number representing the day of the week.
+          example: 1
+          format: int32
+          maximum: 7
+          minimum: 1
+          type: integer
+        from:
+          description: The hour of the day on which scheduling starts.
+          example: 07:00
+          type: string
+        to:
+          description: The hour of the day on which scheduling ends.
+          example: '16:00'
+          type: string
       type: object
     SyntheticsTestPauseStatus:
       description: 'Define whether you want to start (`live`) or pause (`paused`)

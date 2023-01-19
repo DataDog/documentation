@@ -19,6 +19,10 @@
     "name": "Cloud Workload Security",
     "description": "Workload activity security rules for generating events using the Datadog security Agent."
   },
+  "cloudflare-integration": {
+    "name": "Cloudflare Integration",
+    "description": "Configure your Datadog Cloudflare integration directly through the Datadog API."
+  },
   "confluent-cloud": {
     "name": "Confluent Cloud",
     "description": "Configure your Datadog Confluent Cloud integration directly through the Datadog API."
