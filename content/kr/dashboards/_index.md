@@ -175,8 +175,6 @@ Terraform으로 대시보드를 관리하는 경우 최신 버전의 Datadog Ter
 | Import&nbsp;dashboard&nbsp;JSON | JSON을 대시보드에 붙여넣거나 가져옵니다. 이 옵션은 대시보드의 모든 콘텐츠를 덮어씁니다. JSON이 이미 클립보드에 있는 경우 `Ctrl V`(Mac의 경우 `Cmd V`)을(를) 사용합니다. |
 | Export&nbsp;dashboard&nbsp;JSON | 대시보드의 JSON이 포함된 JSON 파일을 다운로드합니다.                                                                                                                |
 
-{{< img src="dashboards/copy_dashboard.png" alt="대시보드 복사" style="width:30%;">}}
-
 #### 대시보드 삭제
 
 대시보드를 영구적으로 삭제하려면 이 옵션을 사용하세요. 삭제를 확인하라는 메시지가 표시됩니다.

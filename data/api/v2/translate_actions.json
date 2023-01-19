@@ -173,6 +173,10 @@
     "request_description": "Incident payload.",
     "request_schema_description": "Create request for an incident."
   },
+  "SearchIncidents": {
+    "description": "Search for incidents matching a certain query.",
+    "summary": "Search for incidents"
+  },
   "DeleteIncident": {
     "description": "Deletes an existing incident from the users organization.",
     "summary": "Delete an existing incident"
@@ -220,6 +224,30 @@
     "summary": "Update a single service object",
     "request_description": "Opsgenie service payload.",
     "request_schema_description": "Update request for an Opsgenie service."
+  },
+  "ListCloudflareAccounts": {
+    "description": "List Cloudflare accounts.",
+    "summary": "List Cloudflare accounts"
+  },
+  "CreateCloudflareAccount": {
+    "description": "Create a Cloudflare account.",
+    "summary": "Add Cloudflare account",
+    "request_description": "",
+    "request_schema_description": "Payload schema when adding a Cloudflare account."
+  },
+  "DeleteCloudflareAccount": {
+    "description": "Delete a Cloudflare account.",
+    "summary": "Delete Cloudflare account"
+  },
+  "GetCloudflareAccount": {
+    "description": "Get a Cloudflare account.",
+    "summary": "Get Cloudflare account"
+  },
+  "UpdateCloudflareAccount": {
+    "description": "Update a Cloudflare account.",
+    "summary": "Update Cloudflare account",
+    "request_description": "",
+    "request_schema_description": "Payload schema when updating a Cloudflare account."
   },
   "ListConfluentAccount": {
     "description": "List Confluent accounts.",

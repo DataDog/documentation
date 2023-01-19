@@ -100,6 +100,25 @@ Datadog Agent と Cluster Agent は、[ライブコンテナ][1]の Kubernetes �
         - get
         - watch
       - apiGroups:
+        - ""
+        resources:
+        - serviceaccounts
+        verbs:
+        - list
+        - get
+        - watch
+      - apiGroups:
+        - rbac.authorization.k8s.io
+        resources:
+        - roles
+        - rolebindings
+        - clusterroles
+        - clusterrolebindings
+        verbs:
+        - list
+        - get
+        - watch
+      - apiGroups:
        - networking.k8s.io
        resources:
        - ingresses
@@ -127,6 +146,9 @@ Datadog Agent と Cluster Agent は、[ライブコンテナ][1]の Kubernetes �
     value: "<YOUR_CLUSTER_NAME>"
   ```
 
+  [1]: /containers/cluster_agent/
+  [2]: /containers/cluster_agent/setup/?tab=daemonset#pagetitle
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -144,6 +166,7 @@ Datadog Agent と Cluster Agent は、[ライブコンテナ][1]の Kubernetes �
 | デプロイ | 7.27.0 | 1.11.0 | 2.10.0 |
 | Ingresses | 7.27.0 | 1.22.0 | 2.30.7 |
 | ジョブ | 7.27.0 | 1.13.1 | 2.15.5 |
+| ネームスペース | 7.27.0 | 7.41.0 | 2.30.9 |
 | ノード | 7.27.0 | 1.11.0 | 2.10.0 |
 | PersistentVolumes | 7.27.0 | 1.18.0 | 2.30.4 |
 | PersistentVolumeClaims | 7.27.0 | 1.18.0 | 2.30.4 |
@@ -262,4 +285,5 @@ password::::== <MY_PASSWORD>
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: /ja/infrastructure/livecontainers/#overview
 [4]: /ja/infrastructure/livecontainers/legacy

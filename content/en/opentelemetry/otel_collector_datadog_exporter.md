@@ -81,7 +81,7 @@ exporters:
   datadog:
     api:
       site: <DD_SITE>
-      key: ${DD_API_KEY}
+      key: ${env:DD_API_KEY}
 
 service:
   pipelines:
@@ -345,7 +345,7 @@ To deploy the OpenTelemetry Collector and Datadog Exporter in a Kubernetes Gatew
      datadog:
        api:
          site: <DD_SITE>
-         key: ${DD_API_KEY}
+         key: ${env:DD_API_KEY}
    # ...
    ```
 
@@ -427,7 +427,7 @@ To use the OpenTelemetry Operator:
        exporters:
          datadog:
            api:
-             key: ${DD_API_KEY}
+             key: ${env:DD_API_KEY}
        service:
          pipelines:
            metrics:
@@ -462,6 +462,8 @@ To use the OpenTelemetry Collector alongside the Datadog Agent:
    exporters:
      otlp:
        endpoint: "${HOST_IP}:4317"
+       tls:
+         insecure: true
    # ...
    ```
 

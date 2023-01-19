@@ -1198,18 +1198,31 @@
             dest_path: '/security/default_rules/'
             cached: true
 
-      - repo_name: apps
-        contents:
-        - action: pull-and-push-file
-          branch: master
-          globs:
-            - "docs/en/getting-started.md"
-          options:
-            dest_path: "/developers/"
-            file_name: "datadog_apps.md"
-            cached: true
-            front_matters:
-              dependencies: ["https://github.com/DataDog/apps/blob/master/docs/en/getting-started.md"]
+  - repo_name: infrastructure-resources
+    contents:
+    - action: pull-and-push-folder
+      branch: prod
+      globs:
+        - "generated/md/external/*.md"
+      options:
+        dest_dir: '/security/cspm/custom_rules/'
+        path_to_remove: 'generated/md/external/'
+        cached: false
+        front_matters:
+          disable_edit: true
+
+  - repo_name: apps
+    contents:
+    - action: pull-and-push-file
+      branch: master
+      globs:
+        - "docs/en/getting-started.md"
+      options:
+        dest_path: "/developers/"
+        file_name: "datadog_apps.md"
+        cached: false
+        front_matters:
+          dependencies: ["https://github.com/DataDog/apps/blob/master/docs/en/getting-started.md"]
 
       - repo_name: datadog-agent
         contents:

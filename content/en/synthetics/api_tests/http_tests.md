@@ -205,6 +205,9 @@ To create a local variable, click **Create a Local Variable** at the top right h
 `{{ alphanumeric(n) }}`
 : Generates an alphanumeric string with `n` characters.
 
+`{{ uuid }}`
+: Generates a version 4 universally unique identifier (UUID).
+
 `{{ date(n unit, format) }}`
 : Generates a date in one of Datadog's accepted formats with a value corresponding to the UTC date the test is initiated at + or - `n` units.
 
@@ -225,7 +228,7 @@ To display your list of variables, type `{{` in your desired field:
 
 A test is considered `FAILED` if it does not satisfy one or more assertions or if the request prematurely failed. In some cases, the test can fail without testing the assertions against the endpoint. 
 
-These reasons include the following:
+The most common errors include the following:
 
 `CONNREFUSED`
 : No connection could be made because the target machine actively refused it.

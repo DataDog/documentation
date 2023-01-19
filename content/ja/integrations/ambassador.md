@@ -15,7 +15,7 @@ assets:
     source_type_name: Ambassador
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Ambassador
   sales_email: hello@datawire.io
   support_email: hello@datawire.io
 categories:
