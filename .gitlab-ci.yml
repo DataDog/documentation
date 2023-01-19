@@ -91,7 +91,8 @@ build_preview:
   script:
     - dog --config "$HOME/.dogrc" event post "documentation build ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" --alert_type "info" --tags="${DEFAULT_TAGS}"
     - touch Makefile.config
-    - export LATEST_MASTER_REV_HASH=$(git rev-parse HEAD)
+    - git fetch origin master
+    - export LATEST_MASTER_REV_HASH=$(git rev-parse origin/master)
     - make dependencies
     - make config
     - ./node_modules/.bin/jest --testPathPattern=assets/scripts/tests/
