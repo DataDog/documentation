@@ -84,13 +84,13 @@ def download_content_from_external_source(self, content):
     """
     Returns a boolean determining whether pull_config content should be downloaded from cache or external source.
     """
-    # use_cached = content.get('options', {}).get('cached', False)
-    use_cached = True
+    use_cached = content.get('options', {}).get('cached', False)
     action = content.get('action', '')
 
     return (self.global_cache_enabled == False) \
         or (use_cached == False) \
-        or (action in ('integrations', 'marketplace-integrations') and self.integrations_cache_enabled == False)
+        or (action in ('integrations', 'marketplace-integrations') and self.integrations_cache_enabled == False) \
+        or (getenv('LOCAL') == True)
 
 
 def local_or_upstream(self, github_token, extract_dir, list_of_contents):
@@ -233,21 +233,21 @@ def prepare_content(self, configuration, github_token, extract_dir):
 
 
 def download_and_extract_cached_content():
-    latest_commit_hash = getenv("LATEST_REV_HASH") # Sourced from Makefile
-    print(f'Latest commit hash = {latest_commit_hash}')
-    s3_url = f'https://origin-static-assets.s3.amazonaws.com/build_artifacts/master/{latest_commit_hash}-ignored.tar.gz'
+    # Sourced from Makefile
+    latest_commit_hash = getenv("LATEST_REV_HASH")
+    static_bucket = getenv("STATIC_BUCKET")
+    print(static_bucket)
+
+    s3_url = f'https://{static_bucket}/build_artifacts/master/{latest_commit_hash}-ignored.tar.gz'
     artifact_download_response = requests.get(s3_url, stream=True)
     print(artifact_download_response)
 
-    # Extract cached content to temp folder
     with tarfile.open(mode='r|gz', fileobj=artifact_download_response.raw) as artifact_tarfile:
-        print('Before extractall to the temp dir')
         artifact_tarfile.extractall('temp')
-        print('After extractall to the temp dir.')
         artifact_tarfile.close()
 
 
-def copy_cached_content(self, cached_content_array):
+def copy_cached_content_into_repo(self, cached_content_array):
     """
     :param cached_content_array:
     """

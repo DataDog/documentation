@@ -5,7 +5,7 @@ import yaml
 
 from actions.pull_and_push_file import pull_and_push_file
 from actions.pull_and_push_folder import pull_and_push_folder
-from content_manager import prepare_content, copy_cached_content, download_content_from_external_source
+from content_manager import prepare_content, copy_cached_content_into_repo, download_content_from_external_source
 from actions.integrations import Integrations
 from actions.security_rules import security_rules
 from actions.workflows import workflows
@@ -107,6 +107,7 @@ class Build:
 
         # Once all the content is processed integrations are merged according to the integration_merge.yaml
         # configuration file. This needs to happen after all content is processed to avoid flacky integration merge
+        # If the integrations are being pulled from cache we can skip this step.
         if not self.integrations_cache_enabled:
             try:
                 Int.merge_integrations()
@@ -122,7 +123,7 @@ class Build:
 
         if len(cached_content) > 0:
             try:
-                copy_cached_content(self, cached_content)
+                copy_cached_content_into_repo(self, cached_content)
             except Exception as e:
                 print(e)
 

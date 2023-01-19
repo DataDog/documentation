@@ -37,6 +37,7 @@ DATADOG_APP_KEY ?= $(DD_APP_KEY)
 FULL_BUILD ?= false
 CONFIGURATION_FILE ?= "./local/bin/py/build/configurations/pull_config_preview.yaml"
 LATEST_REV_HASH = $(shell git rev-parse origin/master)
+STATIC_BUCKET = $(shell get_secret 'static_bucket')
 
 help:
 	@perl -nle'print $& if m{^[a-zA-Z_-]+:.*?## .*$$}' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-25s\033[0m %s\n", $$1, $$2}'
@@ -119,7 +120,7 @@ hugpython: local/etc/requirements3.txt
 	@${PY3} -m venv --clear $@ && . $@/bin/activate && $@/bin/pip install -r $<
 
 update_pre_build:
-	@. hugpython/bin/activate && GITHUB_TOKEN=$(GITHUB_TOKEN) CONFIGURATION_FILE=$(CONFIGURATION_FILE) LATEST_REV_HASH=$(LATEST_REV_HASH) ./local/bin/py/build/update_pre_build.py
+	@. hugpython/bin/activate && GITHUB_TOKEN=$(GITHUB_TOKEN) CONFIGURATION_FILE=$(CONFIGURATION_FILE) LATEST_REV_HASH=$(LATEST_REV_HASH) STATIC_BUCKET=$(STATIC_BUCKET) ./local/bin/py/build/update_pre_build.py
 
 # Only to be run during deployment
 # Updates hugo preview config file for feature branch naming scheme
