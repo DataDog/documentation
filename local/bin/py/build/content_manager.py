@@ -90,7 +90,7 @@ def download_content_from_external_source(self, content):
     return (self.global_cache_enabled == False) \
         or (use_cached == False) \
         or (action in ('integrations', 'marketplace-integrations') and self.integrations_cache_enabled == False) \
-        or (getenv('LOCAL') == True)
+        or (not getenv("CI_COMMIT_REF_NAME"))
 
 
 def local_or_upstream(self, github_token, extract_dir, list_of_contents):
@@ -233,7 +233,6 @@ def prepare_content(self, configuration, github_token, extract_dir):
 
 
 def download_and_extract_cached_content():
-    # Sourced from Makefile
     latest_commit_hash = getenv("LATEST_REV_HASH")
     static_bucket = getenv("STATIC_BUCKET")
     print(static_bucket)
