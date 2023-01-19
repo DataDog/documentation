@@ -339,7 +339,7 @@ DD_CONFIG_SOURCES=LOCAL:/tmp/config.yaml;BASIC java -jar <SERVICE_2>.jar
 [1]: https://app.datadoghq.com/account/settings#agent/overview
 [2]: /tracing/trace_collection/library_config/
 {{% /tab %}}
-
+<!--
 {{% tab "Agent on host, app in containers" %}}
 
 The first is a library that is preloaded to override calls to execve. The second part is a runc shim that intercepts container creation, and configures the initial process launched in a docker container. The primary use case for the preload library is when a service runs directly on the host alongside the agent. The runc shim is for docker containers. 
@@ -351,6 +351,7 @@ With these two libraries to facilitate tracer injection, any newly started proce
 {{% tab "Agent and app in containers" %}}
 
 {{% /tab %}}
+-->
 
 {{< /tabs >}}
 
