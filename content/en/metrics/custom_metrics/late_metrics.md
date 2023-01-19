@@ -31,16 +31,9 @@ You can now start ingesting Late Metrics by configuring Late Metrics Ingestion v
 
 ## Configuring Late Metrics
 
-Click on any metric name to open its details side-panel. “Late Data” will be the second option under the already existing “Advanced” section in the Metrics side panel. Clicking on “Edit” will move to the next screen. 
-
-GIF FROM JOE GOES HERE
-
-You can now click on “Enable Late Data” and hit “Save” to start ingesting late metrics for the metric name you selected.
+Click on any metric name to trigger the side-panel. *Late Data* will be the an option under the *Advanced* section in the Metrics side panel. Clicking on “Edit”, “Enable Late Data” and pressing “Save” will enable the ingestion of late metrics.
 
 {{< img src="metrics/ldi_enablement.mp4" alt="Late Metrics Configuration" video=true >}}
-
-
-There are also APIs available so you can enable or disable late metric ingestion.
 
 ### Bulk Configuring Late Metrics
 
