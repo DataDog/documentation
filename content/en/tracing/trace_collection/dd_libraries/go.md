@@ -15,7 +15,7 @@ further_reading:
 - link: "https://github.com/DataDog/dd-trace-go/tree/v1"
   tag: "GitHub"
   text: "Source code"
-- link: "https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
+- link: "https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
   tag: "GoDoc"
   text: "Package page"
 - link: "/tracing/glossary/"
@@ -112,4 +112,4 @@ For configuration instructions and details about using the API, see the Datadog 
 [1]: /tracing/compatibility_requirements/go
 [2]: https://app.datadoghq.com/apm/service-setup
 [3]: /tracing/trace_collection/library_config/go/
-[4]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
+[4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
