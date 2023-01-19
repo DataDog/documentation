@@ -1,39 +1,56 @@
 ---
+app_id: trino
+app_uuid: 5d6fa7f8-e827-408c-9cf1-8f2bd64b45d3
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
-categories:
-- ''
-creates_events: false
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: trino.memory.reserved_distributed_bytes
+      metadata_path: metadata.csv
+      prefix: trino.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Trino
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: コミュニティ
+  sales_email: help@datadoghq.com
+  support_email: help@datadoghq.com
+categories: []
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/trino/README.md
-display_name: Trino
+display_on_public_website: true
 draft: false
 git_integration_title: trino
-guid: f82a7dd0-5d8a-4d1c-ac99-5463da28d890
 integration_id: trino
 integration_title: Trino
 integration_version: 1.0.0
 is_public: true
 kind: integration
-maintainer: '@ndrluis'
-manifest_version: 1.0.0
-metric_prefix: trino.
-metric_to_check: trino.memory.reserved_distributed_bytes
+manifest_version: 2.0.0
 name: trino
+oauth: {}
 public_title: Trino
 short_description: Trino クラスターのパフォーマンスと使用量を収集する
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  configuration: README.md#Setup
+  description: Trino クラスターのパフォーマンスと使用量を収集する
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Trino
 ---
 
 

@@ -78,20 +78,6 @@ RUM イベントテーブルの構成は、トラブルシューティングコ�
 
 RUM Analytics ジオマップは、過去 1 日間の **Largest Contentful Paint** の 75 パーセンタイルを示しています。
 
-## ファネル
-
-ユーザーのワークフローとエンドツーエンドのユーザージャーニーにおけるコンバージョン率を視覚化します。
-
-{{< img src="real_user_monitoring/explorer/visualize/funnel.png" alt="RUM エクスプローラーのファネルグラフ" style="width:90%;">}}
-
-ファネルを構築するには、**View** または **Action** を選択し、ドロップダウンメニューからクエリを選択します。**+** をクリックし、ドロップダウンメニューから別のクエリを選択すると、ファネルが表示されます。
-
-{{< img src="real_user_monitoring/explorer/analytics/rum_funnel.mp4" alt="クエリでファネルを作成する" video="true" width="80%" >}}
-
-ファネルグラフは、RUM セッション全体のうち、選択したクエリのセッションを表示します。棒グラフをクリックすると、ステップの **Overall Conversion Rate**、**Converted Rate**、**Drop Off Rate** を表示するサイドパネルが表示されます。スクロールダウンして、ステップのパフォーマンス、未解決の問題、タイプ別のコンバージョン率を確認できます。
-
-{{< img src="real_user_monitoring/explorer/visualize/funnel_updated.mp4" alt="RUM エクスプローラーのファネルグラフ" video="true" width="100%" >}}
-
 ## 関連イベント
 
 [ファネル](#funnel)以外のすべての視覚化では、グラフのセクションを選択するか、グラフをクリックしてズームインするか、選択した項目に対応するイベントのリストを表示します。
@@ -111,3 +97,5 @@ RUM Analytics ジオマップは、過去 1 日間の **Largest Contentful Paint
 [3]: /ja/logs/explorer/facets/
 [4]: /ja/real_user_monitoring/explorer/saved_views/
 [5]: /ja/real_user_monitoring/explorer/search#setup-facets-and-measures
+[6]: /ja/notebooks
+[7]: /ja/real_user_monitoring/explorer/export/
