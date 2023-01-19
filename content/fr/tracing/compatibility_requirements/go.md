@@ -41,6 +41,7 @@ Le traceur Go prend en charge les datastores et les bibliothèques suivants.
 | Bibliothèque                 | Type de prise en charge    | Exemples et documentation                                                      |
 |-------------------------|-----------------|---------------------------------------------------------------------------------|
 | [AWS SDK][14]           | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/aws/aws-sdk-go/aws][15]                |
+| [AWS SDK v2][65]        | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/aws/aws-sdk-go-v2/aws][66]                |
 | [Elasticsearch][16]     | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/olivere/elastic][17]                   |
 | [Cassandra][18]         | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/gocql/gocql][19]                       |
 | [GraphQL][20]           | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/graph-gophers/graphql-go][21]          |
@@ -142,3 +143,5 @@ import "gopkg.in/DataDog/dd-trace-go.v1/contrib/<RÉPERTOIRE_PAQUET>/<NOM_PAQUET
 [62]: https://pkg.go.dev/k8s.io/client-go/kubernetes
 [63]: https://github.com/bradfitz/gomemcache/memcache
 [64]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/bradfitz/gomemcache/memcache
+[65]: https://aws.github.io/aws-sdk-go-v2/docs/
+[66]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/aws/aws-sdk-go-v2/aws

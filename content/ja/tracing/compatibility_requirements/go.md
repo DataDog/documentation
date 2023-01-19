@@ -41,6 +41,7 @@ Go トレーサーには、次のデータストアとライブラリのサポ�
 | ライブラリ                 | サポートの種類    | 例とドキュメント                                                      |
 |-------------------------|-----------------|---------------------------------------------------------------------------------|
 | [AWS SDK][14]           | 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/aws/aws-sdk-go/aws][15]                |
+| [AWS SDK v2][65]        | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/aws/aws-sdk-go-v2/aws][66]      |
 | [Elasticsearch][16]     | 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/olivere/elastic][17]                   |
 | [Cassandra][18]         | 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/gocql/gocql][19]                       |
 | [GraphQL][20]           | 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/graph-gophers/graphql-go][21]          |
@@ -142,3 +143,5 @@ import "gopkg.in/DataDog/dd-trace-go.v1/contrib/<パッケージディレクト�
 [62]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/k8s.io/client-go/kubernetes
 [63]: https://github.com/bradfitz/gomemcache/memcache
 [64]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/bradfitz/gomemcache/memcache
+[65]: https://aws.github.io/aws-sdk-go-v2/docs/
+[66]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/aws/aws-sdk-go-v2/aws
