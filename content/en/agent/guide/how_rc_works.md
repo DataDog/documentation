@@ -14,7 +14,7 @@ further_reading:
 Remote Configuration is a Datadog capability that allows you to remotely configure the behavior of Datadog resources (e.g., Agents and tracers) deployed in your infrastructure, for select product features. Using Remote Configuration makes it easier to apply Agent and tracer configurations in your environment on demand, decreasing management costs and reduces friction between teams, accelerating resolution times. For Datadog security products, Application Security Management and Cloud Workload Security, Remote Configuration enabled Agents and tracers provide real-time security updates, enhancing security posture for your applications and cloud infrastructure.  
 
 ## How it works
-Once you enabled Remote Configuration on the Datadog Agent, it will poll the configured [Datadog site](https://docs.datadoghq.com/getting_started/site/) periodically, to determine if there are any configuration changes to apply to your Remote Configuration enabled Agents or tracers.
+Once you enable Remote Configuration on the Datadog Agent, it will poll the configured [Datadog site](https://docs.datadoghq.com/getting_started/site/) periodically, to determine if there are any configuration changes to apply to your Remote Configuration enabled Agents or tracers.
 
 The process is asynchronous, for example, after submitting changes in the respective Datadog product UI for a Remote Config enabled product feature, this configuration change will be applied and stored in Datadog. When your Agents are enabled with Remote Config, they will poll Datadog for any configuration changes they can receive and apply automatically.
 
@@ -28,14 +28,14 @@ The following products and features are supported with Remote Config:
 #### ASM (Application Security Management):  
 ASM features available in Public Beta:
 
-- **1-click ASM activation**: Ability to enable/disable ASM in 1 click from the UI
+- **1-click ASM activation**: This feature allows you to enable ASM in 1-click from Datadog UI.
 
-- **Protection**: Datadog automatically sends IPs, Requests, or Users identified to be blocked by libraries. See [How App Sec works](https://docs.datadoghq.com/security/application_security/how-appsec-works/#built-in-protection) for more information
+- **Protect**: This feature allows you to block attackers IPs that are flagged in ASM Security Signals temporarily or permanently with a single click in the Datadog UI. See [How App Sec works](https://docs.datadoghq.com/security/application_security/how-appsec-works/#built-in-protection) for more information<br>
 [placeholder link to ASM specific RC docs]
 
-- **Datadog Event Rules**: Real time security updates
+- **Datadog Event Rules**: This feature provides the ability to receive and apply Datadog-defined or default event rules in real-time.
 
-- **Custom Event Rules**: Ability to configure custom event rules running in your application libraries 
+- **Custom Event Rules**: This feature provides the ability to configure custom event rules for your application.
 
 #### CWS (Cloud Workload Security):
 Available in Private Beta only
@@ -71,16 +71,16 @@ Remote Configuration capability needs to be enabled on either your existing API 
 
 1. In your [Organization Settings](https://app.datadoghq.com/organization-settings/api-keys) page, either click on your existing API key, or click to Create a new API key.
 
-2. After saving your new key, or clicking to edit your existing key, you will be presented with a screen that includes a drop-down toggle to enable Remote Configuration:
+2. After saving your new key, or clicking to edit your existing key, you will be presented with a screen to enable Remote Configuration:
 
-{{<img src="agent/guide/RC_Key.png" alt="RC Key" width="90%" style="center">}}
+{{<img src="agent/guide/RC_Key_updated.png" alt="RC Key Updated" width="90%" style="center">}}
 
 **Note**: Datadog Administrator permissions are required to enable Remote Configuration and create a key. This is a one-time setup per environment. If you do not have the necessary access rights, contact your Datadog administrator.
 
 3. Enable Remote Configuration:
 
 {{< tabs >}}
-{{% tab "Host based agent" %}}
+{{% tab "Host based Agent" %}}
 Add the following to your datadog-agent `datadog.yaml`:
 ```yaml
 api_key: xxx
