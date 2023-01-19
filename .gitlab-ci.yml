@@ -33,7 +33,7 @@ before_script:
   - export DATADOG_API_KEY=$(get_secret 'dd-api-key')
   - export DATADOG_APP_KEY=$(get_secret 'dd-app-key')
   - export STATIC_BUCKET=$(get_secret 'static_bucket')
-  - export LATEST_MASTER_REV_HASH=$(git rev-parse origin/master)
+  - export LATEST_MASTER_REV_HASH=$(git rev-parse HEAD)
   - export BRANCH=${CI_COMMIT_REF_NAME}
   - git config --global url."https://${GITHUB_TOKEN}@github.com/DataDog".insteadOf https://github.com/DataDog
 
@@ -89,6 +89,7 @@ build_preview:
   script:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
     - touch Makefile.config
+    - git branch
     - make dependencies
     - make config
     - ./node_modules/.bin/jest --testPathPattern=assets/scripts/tests/
