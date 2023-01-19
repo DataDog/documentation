@@ -232,11 +232,8 @@ When both the Agent and your services are running on a host, real or virtual, Da
 
 ## Configure the injection
 
-The following environment variables configure library injection. You can pass these in by `export` on the command line (`export DD_AUTO_INJECT=1`) or by creating a configuration file and passing it in using the `DD_CONFIG_SOURCES` variable:
+The following environment variables configure library injection. You can pass these in by `export` on the command line (`export DD_CONFIG_SOURCES=BASIC`), in your shell configuration, or by passing them in on the launch command:
 
-`DD_AUTO_INJECT`
-: Set to `TRUE` or `1` to enable injection. Set to `FALSE` or `0` to turn injection off.<br>
-**Default**: `FALSE`
 
 `DD_INJECT_DEBUG`
 : Set to `TRUE` or `1` to log debug information.<br>
@@ -312,11 +309,11 @@ tracing_log_level: debug
 Set `service_language` to one of the following values:
 - `java`
 - `node`
-- `nodemon` (NodeJS launched with nodemon)
-- Experimental: `npm` (NodeJS launched with npm)
 - `dotnet`
 
-Other values in the configuration map to similar ones in [tracing library configuration][2].
+In this configuration file, the value of `version` is always `1`. This refers to the configuration schema version in use, not the version of the content.
+
+Other values in the configuration map to similar ones in [tracing library configuration][2]. Tracer library configuration options that aren't mentioned in the injection configuration are still available for use through environment variables the usual way.
 
 ## Launch your services
 
