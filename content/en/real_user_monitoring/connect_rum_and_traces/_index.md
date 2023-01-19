@@ -39,7 +39,7 @@ Use frontend data from RUM, as well as backend, infrastructure, and log informat
 -   Your HTTP servers are using [a library that supports distributed tracing](#supported-libraries).
 -   You have the following set up based on your SDK:
     - With the **Browser SDK**, you have added the XMLHttpRequest (XHR) or Fetch resources on the RUM Explorer to your `allowedTracingUrls`.
-    - With the **Mobile SDK**, you have added the Native or XMLHttpRequest (XHR) to your `firstPartyHosts`.
+    - With the **Mobile SDK**, you have added the Native or XMLHttpRequest (XHR) to using `trackURLSession(firstPartyHosts:)` builder function.
 -   You have a corresponding trace for requests to `allowedTracingUrls` or `firstPartyHosts`.
 
 ### Setup RUM
@@ -120,13 +120,17 @@ Use frontend data from RUM, as well as backend, infrastructure, and log informat
 
 1.  Set up [RUM iOS Monitoring][1].
 
-2.  Set the `firstPartyHosts` initialization parameter with the list of internal, first-party origins called by your iOS application.
+2.  Call the `trackURLSession(firstPartyHostsWithHeaderTypes:)` builder function with the dictionary of internal, first-party origins with corresponding header types called by your iOS application.
     ```swift
     Datadog.initialize(
         appContext: .init(),
         configuration: Datadog.Configuration
-            .builderUsing(rumApplicationID: "<rum_app_id>", clientToken: "<client_token>", environment: "<env_name>")
-            .set(firstPartyHosts: ["example.com", "api.yourdomain.com"])
+            .builderUsing(
+                rumApplicationID: "<rum_app_id>", 
+                clientToken: "<client_token>", 
+                environment: "<env_name>"
+            )
+            .trackURLSession(firstPartyHosts: ["example.com", "api.yourdomain.com"])
             .build()
     )
     ```
@@ -209,7 +213,36 @@ RUM supports several propagator types to connect resources with backends that ar
       - `tracecontext`: [W3C Trace Context](https://www.w3.org/TR/trace-context/) (`traceparent`)
       - `b3`: [B3 single header](https://github.com/openzipkin/b3-propagation#single-header) (`b3`)
       - `b3multi`: [B3 multiple headers](https://github.com/openzipkin/b3-propagation#multiple-headers) (`X-B3-*`)
+{{% /tab %}}
 
+{{% tab "iOS RUM" %}}
+1. Set up RUM to connect with APM as described above.
+
+2. Use `trackURLSession(firstPartyHostsWithHeaderTypes:)` instead of `trackURLSession(firstPartyHosts:)` as follows:
+    ```swift
+    Datadog.initialize(
+        appContext: .init(),
+        configuration: Datadog.Configuration
+            .builderUsing(
+                rumApplicationID: "<rum_app_id>", 
+                clientToken: "<client_token>", 
+                environment: "<env_name>"
+            )
+            .trackURLSession(
+                firstPartyHostsWithHeaderTypes: [
+                    "api.example.com": [.tracecontext]
+                ]
+            )
+            .build()
+        )
+    ```
+    `trackURLSession(firstPartyHostsWithHeaderTypes:)` takes `Dictionary<String, Set<TracingHeaderType>>` as a parameter, where key is a host and value is a set of supported tracing header types.
+
+    `TracingHeaderType` in an enum representing following tracing header types:
+      - `.datadog`: Datadog's propagator (`x-datadog-*`)
+      - `.tracecontext`: [W3C Trace Context](https://www.w3.org/TR/trace-context/) (`traceparent`)
+      - `.b3`: [B3 single header](https://github.com/openzipkin/b3-propagation#single-header) (`b3`)
+      - `.b3multi`: [B3 multiple headers](https://github.com/openzipkin/b3-propagation#multiple-headers) (`X-B3-*`)
 {{% /tab %}}
 {{< /tabs >}}
 
