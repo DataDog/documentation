@@ -71,6 +71,24 @@ before_script:
   only:
     - branches
 
+build_reference:
+  image: timberio/vector:nightly-distroless-static
+  tags:
+    - "runner:main"
+  except:
+    - tags
+  cache: { }
+  variables:
+    GIT_STRATEGY: none
+  script:
+    - generate-schema > data/reference/schema.json
+  artifacts:
+    paths:
+      - data/reference/schema.json
+  only:
+    - /.+?\/[a-zA-Z0-9_-]+/
+  interruptible: true
+
 # ================== preview ================== #
 # If the branch has a name of <slack-user>/<feature-name> then ci builds a preview site
 build_preview:
@@ -78,6 +96,8 @@ build_preview:
   stage: build
   cache:
     - *yarn_cache_pull_push
+  dependencies:
+    - build_reference
   environment: "preview"
   variables:
     URL: ${PREVIEW_DOMAIN}
@@ -217,6 +237,8 @@ build_live:
   stage: build
   cache:
     - *yarn_cache_pull_push
+  dependencies:
+    - build_reference
   environment: "live"
   variables:
     CONFIG: ${LIVE_CONFIG}

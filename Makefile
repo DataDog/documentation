@@ -89,7 +89,7 @@ node_modules: package.json yarn.lock
 	@yarn install --immutable
 
 # All the requirements for a full build
-dependencies: clean hugpython all-examples data/permissions.json data/reference/schema.json update_pre_build node_modules
+dependencies: clean hugpython all-examples data/permissions.json update_pre_build node_modules
 	@make placeholders
 	@make derefs
 
@@ -127,9 +127,9 @@ config:
 	envsubst '$$CI_COMMIT_REF_NAME' < "config/$(CI_ENVIRONMENT_NAME)/params.yaml" | sponge "config/$(CI_ENVIRONMENT_NAME)/params.yaml"; \
 	echo -e "\nbranch: ${CI_COMMIT_REF_NAME}" >> config/$(CI_ENVIRONMENT_NAME)/params.yaml;
 
-# build out reference schema, only run in CI for now
+# build out reference schema
 data/reference/schema.json: FORCE
-	[[ -n $$CI_COMMIT_REF_NAME ]] && (docker run --rm --pull always timberio/vector:nightly-distroless-static generate-schema > $@ && node ./assets/scripts/reference-process.js) || echo "Skipping update reference schema"
+	docker run --rm --pull always timberio/vector:nightly-distroless-static generate-schema > $@ && node ./assets/scripts/reference-process.js
 
 # https://www.gnu.org/software/make/manual/make.html#Force-Targets
 FORCE: ;
