@@ -237,7 +237,7 @@ def download_and_extract_cached_content():
     static_bucket = getenv("STATIC_BUCKET")
     print(static_bucket)
 
-    s3_url = f'https://{static_bucket}/build_artifacts/master/{latest_commit_hash}-ignored.tar.gz'
+    s3_url = f'https://{static_bucket}.s3.amazonaws.com/build_artifacts/master/{latest_commit_hash}-ignored.tar.gz'
     artifact_download_response = requests.get(s3_url, stream=True)
     print(artifact_download_response)
 
