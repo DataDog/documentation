@@ -16,7 +16,9 @@ further_reading:
   text: "How Application Security Management Works in Datadog"
 ---
 
-
+{{< beta-callout btn_hidden="true">}}
+Application Risk Management is currently in beta.
+{{< /beta-callout >}}
 ## Overview
 
 If you experience unexpected behavior with Application Risk Management, there are common issues you can investigate, as mentioned below. If you continue to have trouble, reach out to [Datadog support][1] for further assistance.

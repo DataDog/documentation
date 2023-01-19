@@ -7,6 +7,9 @@ further_reading:
   text: "TKTK"
 ---
 
+{{< beta-callout btn_hidden="true">}}
+Application Risk Management is currently in beta.
+{{< /beta-callout >}}
 TKTK
 
 ## Further reading

@@ -20,6 +20,10 @@ further_reading:
 
 ---
 
+{{< beta-callout btn_hidden="true">}}
+Application Risk Management is currently in beta.
+{{< /beta-callout >}}
+
 Java getting started TKTK
 
 ## Further Reading

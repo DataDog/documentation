@@ -22,6 +22,10 @@ further_reading:
   tag: "Blog"
   text: "TKTK"
 ---
+{{< beta-callout btn_hidden="true">}}
+Application Risk Management is currently in beta.
+{{< /beta-callout >}}
+
 TKTK
 
 Select your application language for details on how to do these steps for your language and infrastructure types.

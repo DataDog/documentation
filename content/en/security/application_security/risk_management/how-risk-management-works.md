@@ -13,6 +13,9 @@ further_reading:
   text: "Get started with Application Security Management"
 ---
 
+{{< beta-callout btn_hidden="true">}}
+Application Risk Management is currently in beta.
+{{< /beta-callout >}}
 ## Overview
 
 Datadog Application Risk Management ... TKTK

@@ -22,6 +22,9 @@ further_reading:
   text: "How Application Security Management Works in Datadog"
 ---
 
+{{< beta-callout btn_hidden="true">}}
+Application Risk Management is currently in beta.
+{{< /beta-callout >}}
 ## Compatibility
 
 {{< programming-lang-wrapper langs="java,dotnet,nodejs,python" >}}
