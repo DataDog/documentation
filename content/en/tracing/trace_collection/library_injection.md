@@ -236,7 +236,7 @@ The following environment variables configure library injection. You can pass th
 
 `DD_AUTO_INJECT`
 : Set to `TRUE` or `1` to enable injection. Set to `FALSE` or `0` to turn injection off.<br>
-**Default**: 
+**Default**: `FALSE`
 
 `DD_INJECT_DEBUG`
 : Set to `TRUE` or `1` to log debug information.<br>
@@ -320,7 +320,23 @@ Other values in the configuration map to similar ones in [tracing library config
 
 ## Launch your services
 
-Launch your service 
+Launch your services, indicating the preload library configuration in the launch command:
+
+**Java app example**:
+```sh
+DD_CONFIG_SOURCES=BASIC java -jar <SERVICE_1>.jar &
+DD_CONFIG_SOURCES=LOCAL:/tmp/config.yaml;BASIC java -jar <SERVICE_2>.jar
+```
+
+**Node app example**:
+```sh
+
+```
+
+**.NET app example**:
+```sh
+
+```
 
 
 [1]: https://app.datadoghq.com/account/settings#agent/overview
