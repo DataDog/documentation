@@ -233,7 +233,7 @@ def prepare_content(self, configuration, github_token, extract_dir):
 
 
 def download_and_extract_cached_content():
-    latest_commit_hash = getenv("LATEST_REV_HASH")
+    latest_commit_hash = getenv("LATEST_MASTER_REV_HASH")
     static_bucket = getenv("STATIC_BUCKET")
 
     s3_url = f'https://{static_bucket}.s3.amazonaws.com/build_artifacts/master/{latest_commit_hash}-ignored.tar.gz'
