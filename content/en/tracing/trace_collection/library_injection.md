@@ -249,7 +249,7 @@ The following environment variables configure library injection. You can pass th
   - `BASIC` - Use exported or default values.
   - `OFF` - Default. Don't configure.<br>
   
-If you specify `BLOB` or `LOCAL` configuration source, provide the configuration either as JSON:
+If you specify `BLOB` or `LOCAL` configuration source, create a JSON or YAML file at `etc/<APP_NAME>/config.json` or `.yaml`, and provide the configuration either as JSON:
 
 ```json
 {
@@ -339,19 +339,19 @@ Launch your services, indicating the preload library configuration in the launch
 **Java app example**:
 ```sh
 DD_CONFIG_SOURCES=BASIC java -jar <SERVICE_1>.jar &
-DD_CONFIG_SOURCES=LOCAL:/tmp/config.yaml;BASIC java -jar <SERVICE_2>.jar &
+DD_CONFIG_SOURCES=LOCAL:/etc/<SERVICE_2>/config.yaml;BASIC java -jar <SERVICE_2>.jar &
 ```
 
 **Node app example**:
 ```sh
 DD_CONFIG_SOURCES=BASIC node index.js &
-DD_CONFIG_SOURCES=LOCAL:/tmp/config.yaml;BASIC node index.js &
+DD_CONFIG_SOURCES=LOCAL:/etc/<SERVICE_2>/config.yaml;BASIC node index.js &
 ```
 
 **.NET app example**:
 ```sh
-DD_CONFIG_SOURCES=BASIC dotnet <APP_NAME>.dll &
-DD_CONFIG_SOURCES=LOCAL:/etc/<APP_NAME>/config.yaml;BASIC dotnet <APP_NAME>.dll &
+DD_CONFIG_SOURCES=BASIC dotnet <SERVICE_1>.dll &
+DD_CONFIG_SOURCES=LOCAL:/etc/<SERVICE_2>/config.yaml;BASIC dotnet <SERVICE_2>.dll &
 ```
 
 
