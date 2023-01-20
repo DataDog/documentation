@@ -61,13 +61,13 @@ Install and enable the [Datadog Jenkins plugin][3] v3.3.0 or newer:
 
 {{< tabs >}}
 {{% tab "Using UI" %}}
-  
+
 {{< tabs >}}
 
 {{% tab "Report through the Datadog Agent (recommended)" %}}
 
 This option relies on a Datadog Agent to report Jenkins metrics to Datadog. If you don't have an Agent running yet, first follow the [Agent installation instructions](https://docs.datadoghq.com/agent/).
-  
+
 1. In your Jenkins instance web interface, go to **Manage Jenkins > Configure System**.
 2. Go to the `Datadog Plugin` section, scrolling down the configuration screen.
 3. Select the mode `Use the Datadog Agent to report to Datadog`.
@@ -80,11 +80,11 @@ This option relies on a Datadog Agent to report Jenkins metrics to Datadog. If y
 
 {{< img src="ci/ci-jenkins-plugin-config-agentful.png" alt="Datadog Plugin configuration for Jenkins" style="width:100%;">}}
 {{% /tab %}}
-  
+
 {{% tab "Agentless (using an API key)" %}}
 
 Use this option to make the Jenkins plugin report directly to Datadog without using the Datadog Agent. It requires an API Key.
-  
+
 1. In your Jenkins instance web interface, go to **Manage Jenkins > Configure System**.
 2. Go to the `Datadog Plugin` section, scrolling down the configuration screen.
 3. Select the mode `Use Datadog API URL and Key to report to Datadog`.
@@ -96,37 +96,77 @@ Use this option to make the Jenkins plugin report directly to Datadog without us
 
 {{< img src="ci/ci-jenkins-plugin-config-agentless.png" alt="Datadog Plugin configuration for Jenkins" style="width:100%;">}}
 {{% /tab %}}
-  
+{{< /tabs >}}
+
 {{% /tab %}}
-  
+
 {{% tab "Using configuration-as-code" %}}
 If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 
+{{< tabs >}}
+
+{{% tab "Report through the Datadog Agent (recommended)" %}}
+
 1. Create or modify the configuration YAML by adding an entry for `datadogGlobalConfiguration`:
+
     ```yaml
     unclassified:
         datadogGlobalConfiguration:
-            # Select the `Datadog Agent` mode.
+            # Select the `Datadog Agent` mode (DSD).
             reportWith: "DSD"
             # Configure the `Agent` host
-            targetHost: "agent-host"
-            # Configure the `Traces Collection` port (default `8126`).
+            targetHost: "<your-agent-host>"
+            # Configure the `Traces Collection` port
             targetTraceCollectionPort: 8126
             # Enable CI Visibility flag
             enableCiVisibility: true
             # (Optional) Configure your CI Instance name
             ciInstanceName: "jenkins"
     ```
+
 2. In your Jenkins instance web interface, go to **Manage Jenkins > Configuration as Code**.
 3. Apply or reload the configuration.
 4. Check the configuration using the `View Configuration` button.
+
+{{% /tab %}}
+
+{{% tab "Agentless (using an API key)" %}}
+
+1. Create or modify the configuration YAML by adding an entry for `datadogGlobalConfiguration`:
+
+    ```yaml
+    unclassified:
+        datadogGlobalConfiguration:
+            # Select the `Agentless` mode (HTTP).
+            reportWith: "HTTP"
+            # Update the endpoints if reporting to Datadog sites other that `datadoghq.com`
+            targetApiURL: "https://api.datadoghq.com/api/"
+            targetLogIntakeURL: "https://http-intake.logs.datadoghq.com/v1/input/"
+            targetWebhookIntakeURL: "https://webhook-intake.datadoghq.com/api/v2/webhook/"
+            # Configure your API key
+            targetCredentialsApiKey: "<your-api-key>"
+            # (Optional) Configure your CI Instance name
+            ciInstanceName: "jenkins"
+    ```
+
+2. In your Jenkins instance web interface, go to **Manage Jenkins > Configuration as Code**.
+3. Apply or reload the configuration.
+4. Check the configuration using the `View Configuration` button.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 [1]: https://github.com/jenkinsci/configuration-as-code-plugin/blob/master/README.md
 {{% /tab %}}
 {{% tab "Using Groovy" %}}
 
+{{< tabs >}}
+
+{{% tab "Report through the Datadog Agent (recommended)" %}}
+
 1. In your Jenkins instance web interface, go to **Manage Jenkins > Script Console**.
 2. Run the configuration script:
+
     ```groovy
     import jenkins.model.*
     import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
@@ -138,7 +178,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
     d.setReportWith('DSD')
 
     // Configure the Agent host.
-    d.setTargetHost('<agent host>')
+    d.setTargetHost('<your-agent-host>')
 
     // Configure the Traces Collection port (default 8126)
     d.setTargetTraceCollectionPort(8126)
@@ -152,16 +192,60 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
     // Save config
     d.save()
     ```
+
+{{% /tab %}}
+
+{{% tab "Agentless (using an API key)" %}}
+
+1. In your Jenkins instance web interface, go to **Manage Jenkins > Script Console**.
+2. Run the configuration script:
+
+    ```groovy
+    import jenkins.model.*
+    import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
+
+    def j = Jenkins.getInstance()
+    def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
+
+    // Select the Datadog Agent mode
+    d.setReportWith('HTTP')
+
+    // Update the endpoints if reporting to Datadog sites other that `datadoghq.com` (default)
+    d.setTargetApiURL("https://api.datadoghq.com/api/")
+    d.setTargetLogIntakeURL("https://http-intake.logs.datadoghq.com/v1/input/")
+    d.setTargetWebhookIntakeURL("https://webhook-intake.datadoghq.com/api/v2/webhook/")
+
+    // Configure your API key
+    d.setTargetApiKey("your-api-key")
+
+    // Enable CI Visibility
+    d.setEnableCiVisibility(true)
+
+    // (Optional) Configure your CI Instance name
+    d.setCiInstanceName("jenkins")
+
+    // Save config
+    d.save()
+    ```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 {{% /tab %}}
 {{% tab "Using Environment Variables" %}}
 
+{{< tabs >}}
+
+{{% tab "Report through the Datadog Agent (recommended)" %}}
+
 1. Set the following environment variables on your Jenkins instance machine:
+
     ```bash
     # Select the Datadog Agent mode
     DATADOG_JENKINS_PLUGIN_REPORT_WITH=DSD
 
     # Configure the Agent host
-    DATADOG_JENKINS_PLUGIN_TARGET_HOST=agent-host
+    DATADOG_JENKINS_PLUGIN_TARGET_HOST=your-agent-host
 
     # Configure the Traces Collection port (default 8126)
     DATADOG_JENKINS_PLUGIN_TARGET_TRACE_COLLECTION_PORT=8126
@@ -172,7 +256,37 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
     # (Optional) Configure your CI Instance name
     DATADOG_JENKINS_PLUGIN_CI_VISIBILITY_CI_INSTANCE_NAME=jenkins
     ```
+
 2. Restart your Jenkins instance.
+
+{{% /tab %}}
+
+{{% tab "Agentless (using an API key)" %}}
+
+1. Set the following environment variables on your Jenkins instance machine:
+
+    ```bash
+    # Select the Datadog Agent mode
+    DATADOG_JENKINS_PLUGIN_REPORT_WITH=HTTP
+
+    # Update the endpoints if reporting to Datadog sites other that `datadoghq.com` (default)
+    DATADOG_JENKINS_PLUGIN_TARGET_API_URL="https://api.datadoghq.com/api/"
+    DATADOG_JENKINS_PLUGIN_TARGET_LOG_INTAKE_URL="https://http-intake.logs.datadoghq.com/v1/input/"
+    DATADOG_JENKINS_TARGET_WEBHOOK_INTAKE_URL="https://webhook-intake.datadoghq.com/api/v2/webhook/"
+
+    # Configure your API key
+    DATADOG_JENKINS_PLUGIN_TARGET_API_KEY=your-api-key
+
+    # Enable CI Visibility
+    DATADOG_JENKINS_PLUGIN_ENABLE_CI_VISIBILITY=true
+
+    # (Optional) Configure your CI Instance name
+    DATADOG_JENKINS_PLUGIN_CI_VISIBILITY_CI_INSTANCE_NAME=jenkins
+    ```
+
+2. Restart your Jenkins instance.
+{{% /tab %}}
+{{< /tabs >}}
 
 {{% /tab %}}
 {{< /tabs >}}
