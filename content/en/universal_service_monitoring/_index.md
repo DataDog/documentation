@@ -37,8 +37,10 @@ Required Agent version
 
 Your containerized service must be running on one of the following supported platforms
 : Linux Kernel 4.14 and greater<br/>
-CentOS or RHEL 8.0 and greater<br/>
-IIS on Windows 2012 R2 and greater
+CentOS or RHEL 8.0 and greater
+
+Supported Windows platforms
+: IIS on Windows 2012 R2 and greater
 
 Supported application-layer protocols
 : HTTP<br/>
@@ -50,7 +52,10 @@ If you have feedback about what platforms and protocols you'd like to see suppor
 
 ### Prerequisites
 
-- Your service is running in a container.
+- If on Linux:
+    - Your service is running in a container.
+- If on Windows and using IIS:
+    - Your service is running on a virtual machine.
 - Datadog Agent is installed alongside your service. Installing a tracing library is _not_ required.
 - The `env` tag for [Unified Service Tagging][1] has been applied to your deployment. The `service` and `version` tags are optional.
 
@@ -281,7 +286,7 @@ DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true
 
 **For services running on IIS:**
 
-1. Install the [Datadog Agent][1] (version 6.40 or 7.40 and later) with the network driver component enabled. During installation, pass `ADDLOCAL="MainApplication,NPM"` to the `msiexec` command, or select **Network Performance Monitoring** when running the Agent installation through the UI.
+1. Install the [Datadog Agent][1] (version 6.41 or 7.41 and later) with the network driver component enabled. During installation, pass `ADDLOCAL="MainApplication,NPM"` to the `msiexec` command, or select **Network Performance Monitoring** when running the Agent installation through the UI.
 
 2. Edit `C:\ProgramData\Datadog\system-probe.yaml` to set the enabled flag to `true`:
 

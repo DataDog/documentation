@@ -68,6 +68,7 @@
         "safe-json-stringify": "^1.2.0",
         "slugify": "^1.4.6",
         "tiny-async-pool": "^1.0.4",
+        "tomlify-j0.4": "^3.0.0",
         "traverse": "0.6.6",
         "yaml-lint": "^1.2.4"
     },

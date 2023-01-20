@@ -7,7 +7,7 @@ title: Go 向け Datadog Lambda ライブラリ
 ![build](https://github.com/DataDog/datadog-lambda-go/workflows/build/badge.svg)
 [![Code Coverage](https://img.shields.io/codecov/c/github/DataDog/datadog-lambda-go)](https://codecov.io/gh/DataDog/datadog-lambda-go)
 [![Slack](https://img.shields.io/badge/slack-%23serverless-blueviolet?logo=slack)](https://datadoghq.slack.com/channels/serverless/)
-[![Godoc](https://img.shields.io/badge/godoc-reference-blue.svg)](https://godoc.org/github.com/DataDog/datadog-lambda-go)
+[![Godoc](https://img.shields.io/badge/godoc-reference-blue.svg)](https://pkg.go.dev/github.com/DataDog/datadog-lambda-go)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](https://github.com/DataDog/datadog-lambda-go/blob/main/LICENSE)
 
 Datadog Lambda Library for Go は、拡張 Lambda メトリクス、分散型トレーシング、および AWS Lambda 関数からのカスタムメトリクス送信を可能にします。
@@ -30,7 +30,7 @@ Datadog Lambda Library for Go は、拡張 Lambda メトリクス、分散型ト
 
 ## トレーシング
 
-`DD_TRACE_ENABLED` 環境変数を `true` に設定して、Datadog トレースを有効にします。Datadog トレースが有効になっている場合、ライブラリは Lambda の実行を表すスパンをコンテキストオブジェクトに挿入します。次に、付属の `dd-trace-go` パッケージを使用して、コンテキストから追加のスパンを作成したり、コンテキストを他のサービスに渡したりできます。詳細については、[dd-trace-go ドキュメント](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace)を参照してください。
+`DD_TRACE_ENABLED` 環境変数を `true` に設定して、Datadog トレースを有効にします。Datadog トレースが有効になっている場合、ライブラリは Lambda の実行を表すスパンをコンテキストオブジェクトに挿入します。次に、付属の `dd-trace-go` パッケージを使用して、コンテキストから追加のスパンを作成したり、コンテキストを他のサービスに渡したりできます。詳細については、[dd-trace-go ドキュメント](https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace)を参照してください。
 
 ```
 import (

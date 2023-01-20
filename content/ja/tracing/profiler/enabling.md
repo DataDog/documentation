@@ -253,7 +253,7 @@ Datadog Profiler には Go 1.12 以降が必要です。アプリケーション
 
 [1]: https://app.datadoghq.com/account/settings#agent/overview
 [2]: https://app.datadoghq.com/account/settings?agent_version=6#agent
-[3]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/profiler#pkg-constants
+[3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#pkg-constants
 [4]: https://app.datadoghq.com/profiling
 [5]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#WithProfileTypes
 [6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#ProfileType
