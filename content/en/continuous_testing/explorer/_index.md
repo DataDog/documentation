@@ -37,12 +37,12 @@ You can accomplish the following actions:
 
 Navigate to [**UX Monitoring** > **Explorer**][1] and click on an out-of-the-box search query to start viewing your test batches or test runs and create visualizations.
 
+{{< img src="continuous_testing/explorer_search_query.png" alt="Out-of-the-box search queries available in the Explorer" style="width:100%;">}}
+
 - View failed tests running in a CI pipeline by filtering on their blocking status and confirming if they are blocking your new releases.
 - Analyze failing test runs with HTTP error status codes to identify API tests with unexpected status codes.
 - Examine test runs that initially failed and passed after a retry.
 - Access test IDs to include in your CI pipeline. 
-
-to add image here
 
 For more information, see [Search Syntax][5].
 
@@ -54,7 +54,7 @@ The Explorer displays all of your test runs from [Synthetic Monitoring][7] and [
 2. Analyze your test run performance, or API and multistep API test performance.
 3. Create a visualization such as a timeseries graph, top list, or table.
 
-to add image here
+{{< img src="continuous_testing/api_test_run.png" alt="API test run details page" style="width:100%;">}}
 
 For more information about test runs, see [Search Test Runs][6].
 
