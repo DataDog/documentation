@@ -245,7 +245,7 @@ def download_and_extract_cached_content():
 
 def copy_cached_content_into_repo(self, cached_content_array):
     """
-    :param cached_content_array:
+    :param cached_content_array: Array of repos from which we want to pull content from s3 cache
     """
     try:
         download_and_extract_cached_content()
