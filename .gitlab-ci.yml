@@ -247,20 +247,6 @@ build_live:
   only:
     - master
 
-index_internal_doc:
-  stage: post-deploy
-  cache: {}
-  environment: "live"
-  image: registry.ddbuild.io/datadoc/webapp:prod-released
-  dependencies:
-    - build_live
-  only:
-    - master
-  except: [ tags, schedules ]
-  tags: ["runner:main"]
-  script:
-    - INDEXING_SERVICE=https://datadoc.ddbuild.io index-repository hugo https://docs.datadoghq.com/ "Datadog" "Public Documentation" --source_folder=content/en --tags="team:Documentation,source:hugo-website,visibility:public,github-repository:documentation"
-
 test_live_link_checks:
   <<: *base_template
   stage: post-deploy
