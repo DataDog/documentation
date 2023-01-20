@@ -42,11 +42,32 @@ further_reading:
 
 ## Install the Datadog Agent (optional)
 
-The Jenkins plugin can either report metrics through the Datadog Agent or directly to Datadog if an API key is provided. If you don't have a Datadog Agent running on the Jenkins controller instance, Datadog recommends installing it first by following the [Agent installation instructions](https://docs.datadoghq.com/agent/).
+The Datadog Jenkins plugin can either report metrics through the Datadog Agent or directly to Datadog if an API key is provided. If you don't have a Datadog Agent running on the Jenkins controller instance, Datadog recommends installing it first by following the [Agent installation instructions](https://docs.datadoghq.com/agent/).
 
 If the Jenkins controller and the Datadog Agent have been deployed to a Kubernetes cluster, Datadog recommends using the [Admission Controller][2], which automatically sets the `DD_AGENT_HOST` environment variable in the Jenkins controller pod to communicate with the local Datadog Agent.
 
 <div class="alert alert-info"><strong>Note</strong>: Unix domain sockets are not yet supported for sending CI Visibility traces.</div>
+
+### Configure the Agent for logs collection
+
+To enable collecting logs from your jobs (see section below about this feature), you need to configure the Datadog Agent to listen for logs on a TCP port:
+
+1. Add `logs_enabled: true` to your Agent configuration file `datadog.yaml`, or set the `DD_LOGS_ENABLED=true` environment variable.
+
+2. Create a file at `/etc/datadog-agent/conf.d/jenkins.d/conf.yaml` (on Linux) with the contents below. Make sure that `service` matches the CI instance name provided earlier. For other operating systems, see [Agent configuration directory][5] guide.
+
+{{< code-block lang="yaml" >}}
+logs:
+  - type: tcp
+    port: 10518
+    service: my-jenkins-instance
+    source: jenkins
+{{< /code-block >}}
+
+3. [Restart the Agent][6] for the changes to take effect.
+
+With this setup, the Agent listens in port `10518` for logs.
+
 
 ## Install the Datadog Jenkins plugin
 
@@ -99,11 +120,11 @@ Use this option to make the Jenkins plugin report directly to Datadog without us
 
 ### Using configuration-as-code
 
-If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
-
 {{< tabs >}}
 
 {{% tab "Report through the Datadog Agent (recommended)" %}}
+
+If your Jenkins instance uses the Jenkins [`configuration-as-code`][13] plugin:
 
 1. Create or modify the configuration YAML by adding an entry for `datadogGlobalConfiguration`:
 
@@ -130,6 +151,8 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 
 {{% tab "Agentless (using an API key)" %}}
 
+If your Jenkins instance uses the Jenkins [`configuration-as-code`][13] plugin:
+
 1. Create or modify the configuration YAML by adding an entry for `datadogGlobalConfiguration`:
 
     ```yaml
@@ -153,8 +176,6 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 
 {{% /tab %}}
 {{< /tabs >}}
-
-[1]: https://github.com/jenkinsci/configuration-as-code-plugin/blob/master/README.md
 
 ### Using Groovy
 
@@ -319,56 +340,47 @@ This is only required for Jenkins workers. For the Jenkins controller, the infra
 
 ## Enable job log collection
 
-This is an optional step that enables the collection of job logs. It involves two steps: enabling the job collection port on the Datadog Agent, and enabling job collection on the Datadog Plugin.
+This is an optional step that enables the collection of job logs.
 
-### Datadog Agent
-
-First, enable job log collection on the Datadog Agent by opening a TCP port to collect logs:
-
-1. Add `logs_enabled: true` to your Agent configuration file `datadog.yaml`, or set the `DD_LOGS_ENABLED=true` environment variable.
-
-2. Create a file at `/etc/datadog-agent/conf.d/jenkins.d/conf.yaml` on Linux with the contents below. Make sure that `service` matches the CI instance name provided earlier. For other operating systems, see [Agent configuration directory][5] guide.
-
-{{< code-block lang="yaml" >}}
-logs:
-  - type: tcp
-    port: 10518
-    service: my-jenkins-instance
-    source: jenkins
-{{< /code-block >}}
-
-3. [Restart the Agent][6] for the changes to take effect.
-
-With this setup, the Agent listens in port `10518` for logs.
-
-### Datadog Plugin
-
-Second, enable job log collection on the Datadog Plugin:
+### Using the Jenkins configuration UI
 
 {{< tabs >}}
-{{% tab "Using UI" %}}
+
+{{% tab "Report through the Datadog Agent (recommended)" %}}
 
 1. In the web interface of your Jenkins instance, go to **Manage Jenkins > Configure System**.
 2. Go to the `Datadog Plugin` section, scrolling down the configuration screen.
-3. Select the `Datadog Agent` mode.
-4. Configure the `Agent` host, if not previously configured.
-5. Configure the `Log Collection` port, as configured in the previous step.
-6. Click on `Enable Log Collection` checkbox to activate it.
-7. Check the connectivity with the Datadog Agent.
-8. Save your configuration.
+3. Double check that the `Use the Datadog Agent to report to Datadog`. option is selected.
+4. Configure the `Log Collection` port, as configured in the Datadog Agent.
+5. Click on `Enable Log Collection` checkbox to activate it.
+6. Check the connectivity with the Datadog Agent.
+7. Save your configuration.
 {{% /tab %}}
-{{% tab "Using configuration-as-code" %}}
-If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 
-1. Create or modify the configuration YAML for the entry `datadogGlobalConfiguration`:
+{{% tab "Agentless (using an API key)" %}}
+
+1. In the web interface of your Jenkins instance, go to **Manage Jenkins > Configure System**.
+2. Go to the `Datadog Plugin` section, scrolling down the configuration screen.
+3. Double check that `Use the Datadog Agent to report to Datadog` is selcted and that `Log Intake URL` points to a URL in your current Datadog site.
+4. Click on `Enable Log Collection` checkbox to activate it.
+5. Save your configuration.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Using configuration-as-code
+
+{{< tabs >}}
+
+{{% tab "Report through the Datadog Agent (recommended)" %}}
+
+If your Jenkins instance uses the Jenkins [`configuration-as-code`][13] plugin:
+
+1. Modify the configuration YAML for the entry `datadogGlobalConfiguration` to include the following:
     ```yaml
     unclassified:
     datadogGlobalConfiguration:
-        # Select the `Datadog Agent` mode.
-        reportWith: "DSD"
-        # Configure the `Agent` host
-        targetHost: "agent-host"
-        # Configure the `Log Collection` port, as configured in the previous step.
+        # Configure the `Log Collection` port, as configured in the Datadog Agent,
         targetLogCollectionPort: 10518
         # Enable Log collection
         collectBuildLogs: true
@@ -376,13 +388,37 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 2. In your Jenkins instance web interface, go to **Manage Jenkins > Configuration as Code**.
 3. Apply or reload the configuration.
 4. Check the configuration using the `View Configuration` button.
-
-[1]: https://github.com/jenkinsci/configuration-as-code-plugin/blob/master/README.md
 {{% /tab %}}
-{{% tab "Using Groovy" %}}
+
+{{% tab "Agentless (using an API key)" %}}
+
+If your Jenkins instance uses the Jenkins [`configuration-as-code`][13] plugin:
+
+1. Modify the configuration YAML for the entry `datadogGlobalConfiguration` to include the following:
+    ```yaml
+    unclassified:
+    datadogGlobalConfiguration:
+        # Update the endpoints if reporting to Datadog sites other that `datadoghq.com`
+        targetLogIntakeURL: "https://http-intake.logs.datadoghq.com/v1/input/"
+        # Enable Log collection
+        collectBuildLogs: true
+    ```
+2. In your Jenkins instance web interface, go to **Manage Jenkins > Configuration as Code**.
+3. Apply or reload the configuration.
+4. Check the configuration using the `View Configuration` button.
+{{% /tab %}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Using Groovy
+
+{{< tabs >}}
+
+{{% tab "Report through the Datadog Agent (recommended)" %}}
 
 1. In your Jenkins instance web interface, go to **Manage Jenkins > Script Console**.
-2. Run the configuration script:
+2. Update your configuration script to include the following:
     ```groovy
     import jenkins.model.*
     import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
@@ -390,13 +426,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
     def j = Jenkins.getInstance()
     def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
 
-    // Select the Datadog Agent mode
-    d.setReportWith('DSD')
-
-    // Configure the Agent host, if not previously configured.
-    d.setTargetHost('<agent host>')
-
-    // Configure the Log Collection port, as configured in the previous step.
+    // Configure the Log Collection port, as configured in the Datadog Agent.
     d.setTargetLogCollectionPort(10518)
 
     // Enable log collection
@@ -406,18 +436,53 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
     d.save()
     ```
 {{% /tab %}}
-{{% tab "Using Environment Variables" %}}
 
-1. Set the following environment variables on your Jenkins instance machine:
+{{% tab "Agentless (using an API key)" %}}
+
+1. In your Jenkins instance web interface, go to **Manage Jenkins > Script Console**.
+2. Update your configuration script to include the following:
+    ```groovy
+    import jenkins.model.*
+    import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
+
+    def j = Jenkins.getInstance()
+    def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
+
+    // Update the endpoints if reporting to Datadog sites other that `datadoghq.com`
+    d.setTargetLogIntakeURL("https://http-intake.logs.datadoghq.com/v1/input/")
+
+    // Enable log collection
+    d.setCollectBuildLogs(true)
+
+    // Save config
+    d.save()
+    ```
+{{% /tab %}}
+{{< /tabs >}}
+
+### Using Environment Variables
+
+{{< tabs >}}
+
+{{% tab "Report through the Datadog Agent (recommended)" %}}
+
+1. Add the following environment variables on your Jenkins instance machine:
     ```bash
-    # Select the Datadog Agent mode
-    DATADOG_JENKINS_PLUGIN_REPORT_WITH=DSD
-
-    # Configure the Agent host
-    DATADOG_JENKINS_PLUGIN_TARGET_HOST=agent-host
-
     # Configure the Log Collection port, as configured in the previous step.
     DATADOG_JENKINS_PLUGIN_TARGET_LOG_COLLECTION_PORT=10518
+
+    # Enable log collection
+    DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
+    ```
+2. Restart your Jenkins instance.
+{{% /tab %}}
+
+{{% tab "Agentless (using an API key)" %}}
+
+1. Add the following environment variables on your Jenkins instance machine:
+    ```bash
+    # Update the endpoints if reporting to Datadog sites other that `datadoghq.com`
+    DATADOG_JENKINS_PLUGIN_TARGET_LOG_INTAKE_URL="https://http-intake.logs.datadoghq.com/v1/input/"
 
     # Enable log collection
     DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
@@ -773,3 +838,4 @@ Failed to reinitialize Datadog-Plugin Tracer, Cannot enable traces collection vi
 [10]: https://docs.datadoghq.com/continuous_integration/pipelines/jenkins/?tab=usingui#enable-job-log-collection
 [11]: https://docs.datadoghq.com/continuous_integration/pipelines/jenkins/?tab=usingui#infrastructure-metric-correlation
 [12]: https://docs.datadoghq.com/continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
+[13]: https://github.com/jenkinsci/configuration-as-code-plugin/blob/master/README.md
