@@ -134,7 +134,7 @@ multiple_outputs = true
 
 Logs and metrics sent by the Datadog Agent to the Observability Pipelines Worker can be manipulated or formatted as explained in [working with data][6]. When submitting logs using the Datadog API, see the [Datadog reserved attributes][7] for more information.
 
-The Worker can also directly collect logs and metrics from alternative sources. When doing so, third-party logs may not include proper tagging. Use the [Vector Remap Language][8] (VRL) to [add tags][9], sources, or service values.
+The Worker can also directly collect logs and metrics from [alternative sources][8]. When doing so, third-party logs may not include proper tagging. Use the [Vector Remap Language][9] (VRL) to [add tags][10], sources, or service values.
 
 #### Logs
 
@@ -268,7 +268,7 @@ source = """
 
 #### Logs
 
-To send logs to Datadog, the Observability Pipelines Worker must be configured with at least one [datadog_logs][10] sink. See the following example:
+To send logs to Datadog, the Observability Pipelines Worker must be configured with at least one [datadog_logs][11] sink. See the following example:
 
 {{< tabs >}}
 {{% tab "YAML" %}}
@@ -322,7 +322,7 @@ default_api_key = "${DATADOG_API_KEY}"
 
 #### Metrics
 
-Similarly to send metrics to Datadog, the Observability Pipelines Worker must be configured with at least one [datadog_metrics][11] sink. See the following example:
+Similarly to send metrics to Datadog, the Observability Pipelines Worker must be configured with at least one [datadog_metrics][12] sink. See the following example:
 
 {{< tabs >}}
 {{% tab "YAML" %}}
@@ -374,7 +374,7 @@ compression = "gzip"
 
 ### Disk buffers
 
-Datadog recommends enabling disk buffers to prevent data loss. The Observability Pipelines Worker uses [disk buffers][12] to ensure no data is lost when there is a spike in data being sent or the downstream service is sending back pressure. See the configuration below for setting buffers at the sink level.
+Datadog recommends enabling disk buffers to prevent data loss. The Observability Pipelines Worker uses [disk buffers][13] to ensure no data is lost when there is a spike in data being sent or the downstream service is sending back pressure. See the configuration below for setting buffers at the sink level.
 
 {{< tabs >}}
 {{% tab "YAML" %}}
@@ -479,7 +479,7 @@ observability_pipelines_worker:
 {{% /tab %}}
 {{< /tabs >}}
 
-Read more about [architecting buffers][13].
+Read more about [architecting buffers][14].
 
 ## Further Reading
 
@@ -492,9 +492,10 @@ Read more about [architecting buffers][13].
 [5]: /observability_pipelines/reference/sources/#datadogagent
 [6]: /observability_pipelines/working_with_data
 [7]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
-[8]: https://vector.dev/docs/reference/vrl/
-[9]: /getting_started/tagging
-[10]: /observability_pipelines/reference/sinks/#datadoglogs
-[11]: /observability_pipelines/reference/sinks/#datadogmetrics
-[12]: https://vector.dev/docs/about/concepts/#buffers
-[13]: https://vector.dev/docs/setup/going-to-prod/architecting/#buffering-data
+[8]: /observability_pipelines/reference/sources/
+[9]: https://vector.dev/docs/reference/vrl/
+[10]: /getting_started/tagging
+[11]: /observability_pipelines/reference/sinks/#datadoglogs
+[12]: /observability_pipelines/reference/sinks/#datadogmetrics
+[13]: https://vector.dev/docs/about/concepts/#buffers
+[14]: https://vector.dev/docs/setup/going-to-prod/architecting/#buffering-data
