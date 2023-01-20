@@ -489,7 +489,7 @@ Set `service_language` to one of the following values:
 
 In this configuration file, the value of `version` is always `1`. This refers to the configuration schema version in use, not the version of the content.
 
-The following table shows how the injection configuration values map to the corresponding [tracing library configuration options][2]:
+The following table shows how the injection configuration values map to the corresponding [tracing library configuration options][3]:
 
 | Injection | Java tracer | NodeJS tracer | .NET tracer |
 | --------- | ----------- | ------------- | ----------- |
@@ -524,6 +524,7 @@ Exercise your application to start generating telemetry data, which you can see 
 
 [1]: https://app.datadoghq.com/account/settings#agent/overview
 [2]: https://docs.docker.com/engine/install/ubuntu/
+[3]: /tracing/trace_collection/library_config/
 [4]: https://app.datadoghq.com/apm/traces
 
 {{% /tab %}}
@@ -653,7 +654,7 @@ Set `service_language` to one of the following values:
 
 In this configuration file, the value of `version` is always `1`. This refers to the configuration schema version in use, not the version of the content.
 
-The following table shows how the injection configuration values map to the corresponding [tracing library configuration options][2]:
+The following table shows how the injection configuration values map to the corresponding [tracing library configuration options][3]:
 
 | Injection | Java tracer | NodeJS tracer | .NET tracer |
 | --------- | ----------- | ------------- | ----------- |
@@ -730,6 +731,7 @@ Exercise your application to start generating telemetry data, which you can see 
 
 
 [2]: https://docs.docker.com/engine/install/ubuntu/
+[3]: /tracing/trace_collection/library_config/
 [4]: https://app.datadoghq.com/apm/traces
 
 {{% /tab %}}
