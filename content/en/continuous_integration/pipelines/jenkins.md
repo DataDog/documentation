@@ -61,19 +61,44 @@ Install and enable the [Datadog Jenkins plugin][3] v3.3.0 or newer:
 
 {{< tabs >}}
 {{% tab "Using UI" %}}
+  
+{{< tabs >}}
 
+{{% tab "Report through the Datadog Agent (recommended)" %}}
+
+This option relies on a Datadog Agent to report Jenkins metrics to Datadog. If you don't have an Agent running yet, first follow the [Agent installation instructions](https://docs.datadoghq.com/agent/).
+  
 1. In your Jenkins instance web interface, go to **Manage Jenkins > Configure System**.
 2. Go to the `Datadog Plugin` section, scrolling down the configuration screen.
-3. Select the `Datadog Agent` mode. CI Visibility is **not supported** using Datadog API URL and API key.
+3. Select the mode `Use the Datadog Agent to report to Datadog`.
 4. Configure the `Agent` host.
-5. Configure the `Traces Collection` port (default `8126`).
-6. Click on `Enable CI Visibility` checkbox to activate it.
+5. Configure the `Traces Collection Port` if not using the default port `8126`.
+6. Mark the `Enable CI Visibility` checkbox.
 7. (Optional) Configure your CI Instance name.
 8. Check the connectivity with the Datadog Agent.
 9. Save your configuration.
 
-{{< img src="ci/ci-jenkins-plugin-config.png" alt="Datadog Plugin configuration for Jenkins" style="width:100%;">}}
+{{< img src="ci/ci-jenkins-plugin-config-agentful.png" alt="Datadog Plugin configuration for Jenkins" style="width:100%;">}}
 {{% /tab %}}
+  
+{{% tab "Agentless (using an API key)" %}}
+
+Use this option to make the Jenkins plugin report directly to Datadog without using the Datadog Agent. It requires an API Key.
+  
+1. In your Jenkins instance web interface, go to **Manage Jenkins > Configure System**.
+2. Go to the `Datadog Plugin` section, scrolling down the configuration screen.
+3. Select the mode `Use Datadog API URL and Key to report to Datadog`.
+4. For Datadog sites other that `datadoghq.com`, change the `Datadog API URL`, `Log Intake URL` and `Webhook Intake URL` to point to your Datadog site.
+5. Enter a valid `Datadog API Key`
+6. Mark the `Enable CI Visibility` checkbox.
+7. (Optional) Configure your CI Instance name.
+8. Save your configuration.
+
+{{< img src="ci/ci-jenkins-plugin-config-agentless.png" alt="Datadog Plugin configuration for Jenkins" style="width:100%;">}}
+{{% /tab %}}
+  
+{{% /tab %}}
+  
 {{% tab "Using configuration-as-code" %}}
 If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 
