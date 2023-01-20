@@ -83,13 +83,13 @@ Use the official Datadog Helm chart, and add the [Agent configuration settings](
 
 For additional details about the Datadog Helm chart, see [the Kubernetes documentation][4].
 
-The Observability Pipelines Worker's chart can hold any valid configuration in the `values.yaml` file using the `customConfig` field. To enable `datadog_logs`, these [configurations](#observability-pipelines-worker-configurations) can be directly included as-is in the chart configuration.
+The Observability Pipelines Worker's [chart][5] can hold any valid configuration in the `values.yaml` file using the `customConfig` field. To enable `datadog_logs`, these [configurations](#observability-pipelines-worker-configurations) can be directly included as-is in the chart configuration.
 
 ## Observability Pipelines Worker configurations
 
 ### Source configuration
 
-To receive data from the Datadog Agent, configure the Observability Pipelines Worker with a [datadog_agent][5] source:
+To receive data from the Datadog Agent, configure the Observability Pipelines Worker with a [datadog_agent][6] source:
 
 {{< tabs >}}
 {{% tab "YAML" %}}
@@ -132,9 +132,9 @@ multiple_outputs = true
 
 ### Add Observability Pipelines Worker tags
 
-Logs and metrics sent by the Datadog Agent to the Observability Pipelines Worker can be manipulated or formatted as explained in [working with data][6]. When submitting logs using the Datadog API, see the [Datadog reserved attributes][7] for more information.
+Logs and metrics sent by the Datadog Agent to the Observability Pipelines Worker can be manipulated or formatted as explained in [working with data][7]. When submitting logs using the Datadog API, see the [Datadog reserved attributes][8] for more information.
 
-The Worker can also directly collect logs and metrics from [alternative sources][8]. When doing so, third-party logs may not include proper tagging. Use the [Vector Remap Language][9] (VRL) to [add tags][10], sources, or service values.
+The Worker can also directly collect logs and metrics from [alternative sources][9]. When doing so, third-party logs may not include proper tagging. Use the [Vector Remap Language][10] (VRL) to [add tags][11], sources, or service values.
 
 #### Logs
 
@@ -268,7 +268,7 @@ source = """
 
 #### Logs
 
-To send logs to Datadog, the Observability Pipelines Worker must be configured with at least one [datadog_logs][11] sink. See the following example:
+To send logs to Datadog, the Observability Pipelines Worker must be configured with at least one [datadog_logs][12] sink. See the following example:
 
 {{< tabs >}}
 {{% tab "YAML" %}}
@@ -322,7 +322,7 @@ default_api_key = "${DATADOG_API_KEY}"
 
 #### Metrics
 
-Similarly to send metrics to Datadog, the Observability Pipelines Worker must be configured with at least one [datadog_metrics][12] sink. See the following example:
+Similarly to send metrics to Datadog, the Observability Pipelines Worker must be configured with at least one [datadog_metrics][13] sink. See the following example:
 
 {{< tabs >}}
 {{% tab "YAML" %}}
@@ -374,7 +374,7 @@ compression = "gzip"
 
 ### Disk buffers
 
-Datadog recommends enabling disk buffers to prevent data loss. The Observability Pipelines Worker uses [disk buffers][13] to ensure no data is lost when there is a spike in data being sent or the downstream service is sending back pressure. See the configuration below for setting buffers at the sink level.
+Datadog recommends enabling disk buffers to prevent data loss. The Observability Pipelines Worker uses [disk buffers][14] to ensure no data is lost when there is a spike in data being sent or the downstream service is sending back pressure. See the configuration below for setting buffers at the sink level.
 
 {{< tabs >}}
 {{% tab "YAML" %}}
@@ -479,7 +479,7 @@ observability_pipelines_worker:
 {{% /tab %}}
 {{< /tabs >}}
 
-Read more about [architecting buffers][14].
+Read more about [architecting buffers][15].
 
 ## Further Reading
 
@@ -489,13 +489,14 @@ Read more about [architecting buffers][14].
 [2]: /observability_pipelines/installation/
 [3]: /observability_pipelines/configurations/
 [4]: /agent/kubernetes/?tab=helm
-[5]: /observability_pipelines/reference/sources/#datadogagent
-[6]: /observability_pipelines/working_with_data
-[7]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
-[8]: /observability_pipelines/reference/sources/
-[9]: https://vector.dev/docs/reference/vrl/
-[10]: /getting_started/tagging
-[11]: /observability_pipelines/reference/sinks/#datadoglogs
-[12]: /observability_pipelines/reference/sinks/#datadogmetrics
-[13]: https://vector.dev/docs/about/concepts/#buffers
-[14]: https://vector.dev/docs/setup/going-to-prod/architecting/#buffering-data
+[5]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/README.md
+[6]: /observability_pipelines/reference/sources/#datadogagent
+[7]: /observability_pipelines/working_with_data
+[8]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
+[9]: /observability_pipelines/reference/sources/
+[10]: https://vector.dev/docs/reference/vrl/
+[11]: /getting_started/tagging
+[12]: /observability_pipelines/reference/sinks/#datadoglogs
+[13]: /observability_pipelines/reference/sinks/#datadogmetrics
+[14]: https://vector.dev/docs/about/concepts/#buffers
+[15]: https://vector.dev/docs/setup/going-to-prod/architecting/#buffering-data
