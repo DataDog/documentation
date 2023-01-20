@@ -105,6 +105,7 @@ remote_configuration:
 Add the following environment variable to your Agent manifest: You need to update the api_key field only if you are creating a new API key.
 
 ```yaml
+DD_API_KEY=xxx
 DD_REMOTE_CONFIGURATION_ENABLED=true
 ```
 {{% /tab %}}
