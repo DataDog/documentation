@@ -43,7 +43,7 @@ Make it easy to send data to your Observability Pipelines Worker aggregator by i
 
 ### Processing data
 
-Use the Observability Pipelines Worker aggregator for processing most of your data, so that the responsibility is shifted away from your agents. This reduces your dependence on them, making it easier to change agents later on. 
+Use the Observability Pipelines Worker aggregator for processing most of your data, so that the responsibility is shifted away from your agents. This reduces your dependence on them, making it easier to change agents later on. See [Working with Data][1] for more information on data processing.
 
 ### Routing data
 
@@ -207,7 +207,7 @@ Your organization may have adopted some form of service discovery, even if it's 
 
 Service discovery allows you to configure your agents with named hostnames (not static IP addresses), facilitating routing and load balancing of your traffic. This is how your agents discover your load balancers and how your load balancers discover your Observability Pipelines Worker aggregators.
 
-Observability Pipelines Worker itself does not resolve DNS queries and delegates this to a system-level resolver (for example, [Linux resolving][1]).
+Observability Pipelines Worker itself does not resolve DNS queries and delegates this to a system-level resolver (for example, [Linux resolving][2]).
 
 ### Network traffic
 
@@ -296,7 +296,7 @@ The Observability Pipelines Worker can have problems, such as failing to parse a
 
 #### Which strategy is best?
 
-If durability is the most important criteria, use the direct archiving method because it addresses data loss scenarios. Use the failed event routing method, also commonly referred to as a data lake, if you prefer to analyze data in your archive. It has the advantage of using your archive/data lake for long-term analysis. Datadog [Log Archives][2] and AWS Athena are examples of archive storage solutions.
+If durability is the most important criteria, use the direct archiving method because it addresses data loss scenarios. Use the failed event routing method, also commonly referred to as a data lake, if you prefer to analyze data in your archive. It has the advantage of using your archive/data lake for long-term analysis. Datadog [Log Archives][3] and AWS Athena are examples of archive storage solutions.
 
 ### Handling destination failures
 
@@ -388,5 +388,6 @@ The structure is that tier two aggregators receive an aggregated sub-stream of t
 - Continue to use your local aggregators to process and deliver most data so that you do not introduce a single point of failure.
 
 
-[1]: https://wiki.archlinux.org/title/Domain_name_resolution
-[2]: /logs/log_configuration/archives
+[1]: /observability_pipelines/working_with_data/
+[2]: https://wiki.archlinux.org/title/Domain_name_resolution
+[3]: /logs/log_configuration/archives
