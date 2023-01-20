@@ -16,7 +16,7 @@ assets:
     source_type_name: fluxcd
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: コミュニティ
   sales_email: melchior.moulin@blablacar.com
   support_email: melchior.moulin@blablacar.com
 categories: []
@@ -116,5 +116,5 @@ fluxcd インテグレーションには、サービスのチェック機能は�
 [5]: https://github.com/DataDog/integrations-extras/blob/master/fluxcd/datadog_checks/fluxcd/data/conf.yaml.example
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-core/blob/master/check/metadata.csv
+[8]: https://github.com/DataDog/integrations-extras/blob/master/fluxcd/metadata.csv
 [9]: https://docs.datadoghq.com/ja/help/

@@ -18,7 +18,7 @@ assets:
     source_type_name: Gitea
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: コミュニティ
   sales_email: florent.clarret@gmail.com
   support_email: florent.clarret@gmail.com
 categories:

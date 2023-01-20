@@ -22,7 +22,7 @@ assets:
     source_type_name: Tyk
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Tyk
   sales_email: yaara@tyk.io
   support_email: yaara@tyk.io
 categories:

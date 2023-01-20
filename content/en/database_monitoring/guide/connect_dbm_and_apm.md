@@ -16,7 +16,8 @@ This guide assumes that you have configured [Datadog Monitoring][1] and are usin
 Supported tracers
 : [dd-trace-go][3] >= 1.44.0 (support for [database/sql][4] and [sqlx][5] packages)<br />
 [dd-trace-rb][6] >= 1.6.0 (support for [mysql2][7] and [pg][8] gems)<br />
-[dd-trace-js][9] >= 3.9.0 or >= 2.22.0 (support for [postgres client][10])
+[dd-trace-js][9] >= 3.9.0 or >= 2.22.0 (support for [postgres client][10])<br />
+[dd-trace-py][11] >= 1.7.0 (support for [psycopg2][12])
 
 Supported databases
 : postgres, mysql
@@ -145,6 +146,53 @@ client.query("SELECT 1;")
 
 {{% /tab %}}
 
+{{% tab "Python" %}}
+
+Update your app dependencies to include [dd-trace-py>=1.7.0][1]:
+```
+pip install "ddtrace>=1.7.0"
+```
+
+Install [psycopg2][2] (**Note**: Connecting DBM and APM is not supported for MySQL clients):
+```
+pip install psycopg2
+```
+
+Enable the database monitoring propagation feature by setting the following environment variable:
+   - `DD_TRACE_SQL_COMMENT_INJECTION_MODE=full`
+
+For the best user experience ensure the following environment variables are set in your application:
+   - `DD_SERVICE=(application name)`
+   - `DD_ENV=(application environment)`
+   - `DD_VERSION=(application version)`
+
+Full example:
+```python
+
+import psycopg2
+
+#TODO: update postgres configurations
+POSTGRES_CONFIG = {
+    "host": "127.0.0.1",
+    "port": 5432,
+    "user": "postgres_user",
+    "password": "postgres_password",
+    "dbname": "postgres_db_name",
+}
+
+# connect to postgres db
+conn = psycopg2.connect(**POSTGRES_CONFIG)
+cursor = conn.cursor()
+# execute sql queries
+cursor.execute("select 'blah'")
+cursor.executemany("select %s", (("foo",), ("bar",)))
+```
+
+[1]: https://ddtrace.readthedocs.io/en/stable/release_notes.html
+[2]: https://ddtrace.readthedocs.io/en/stable/integrations.html#module-ddtrace.contrib.psycopg
+
+{{% /tab %}}
+
 {{% tab "Node.js" %}}
 
 Install or udpate [dd-trace-js][1] to version greater than `3.9.0` (or `2.22.0` if using end-of-life Node.js version 12):
@@ -208,3 +256,5 @@ client.query('SELECT $1::text as message', ['Hello world!'], (err, result) => {
 [8]: https://github.com/ged/ruby-pg
 [9]: https://github.com/DataDog/dd-trace-js
 [10]: https://node-postgres.com/
+[11]: https://github.com/DataDog/dd-trace-py
+[12]: https://www.psycopg.org/docs/index.html

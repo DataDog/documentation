@@ -16,6 +16,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/manage-service-catalog-categories-with-service-definition-json-schema/"
   tag: "Blog"
   text: "Manage Service Catalog entries with the Service Definition JSON Schema"
+- link: "https://www.datadoghq.com/blog/apm-security-view/"
+  tag: "Blog"
+  text: "Gain visibility into risks, vulnerabilities, and attacks with APM Security View"
 ---
 
 
@@ -37,6 +40,7 @@ The Service Catalog is useful for:
 - Providing engineering leadership with a high-level view of reliability practices across teams and services.
 - Spotting issues like missing SLOs, monitors, or services without ownership.
 - Proactively identifying services exposed to application attacks.
+- Reducing application risks by finding and fixing known security vulnerabilities in the dependencies of your services.
 
 ## Browse the Service Catalog
 
@@ -99,12 +103,15 @@ The **Performance** tab provides several ways to view how your services are perf
 Click the Settings icon on the right hand corner to hide metric columns from the service list.
 
 ### Security view
-The **Security** tab provides several ways to view how your services are targeted by attackers. Sort the table by clicking columns to reveal services that:
+The **Security tab** provides several ways to assess and improve the security posture of your services. This includes understanding the number and severity of known security vulnerabilities in the open source libraries, and viewing how your services are targeted by attackers. Sort the table by clicking columns to reveal services that:
 
+- Expose known security vulnerabilities, including the individual severities.
 - Are receiving the most attack attempts.
 - Are targeted by the most attackers.
 - Have the most severe threats, where the services are impacted by the attacks. 
 - Are monitored and protected by [Application Security Management][11]
+
+To access additional details describing security vulnerabilities and signals, click on the service row to open a detailed side panel. Alternatively, click on the pop-over **View Service Details** button, which opens the service page, and in turn, its security tab.
 
 Click the Settings icon on the right hand corner to hide metric columns from the service list.
 
@@ -115,7 +122,7 @@ Clicking on a service opens a side panel with details including:
 - **Ownership information** from the service definition such as links to team contacts, source code, and supplemental information like documentation and dashboards.
 - **Reliability information** including deployment status, SLOs, ongoing incidents, and error information.
 - **Performance graphs** showing requests, errors, latency, and time spent by downstream services.
-- **Security information** including timeline and type of attacks, identify of attackers, and security threats impacting your services.
+- **Security information** including known vulnerabilities exposed in the service’s libraries, the timeline and type of attacks, identity of attackers, and security threats impacting your services.
 - **Configuration completeness status** for Datadog products that can collect data for the service.
 - **Service definition** in YAML with a link to the service's source code.
 - An interactive service map displaying services upstream and downstream from this service.

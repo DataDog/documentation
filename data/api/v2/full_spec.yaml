@@ -2188,6 +2188,130 @@ components:
             $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleData'
           type: array
       type: object
+    CloudflareAccountCreateRequest:
+      description: Payload schema when adding a Cloudflare account.
+      properties:
+        data:
+          $ref: '#/components/schemas/CloudflareAccountCreateRequestData'
+      required:
+      - data
+      type: object
+    CloudflareAccountCreateRequestAttributes:
+      description: Attributes object for creating a Cloudflare account.
+      properties:
+        api_key:
+          description: The API key (or token) for the Cloudflare account.
+          example: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3
+          type: string
+        email:
+          description: The email associated with the Cloudflare account. If an API
+            key is provided (and not a token), this field is also required.
+          example: test-email@example.com
+          type: string
+        name:
+          description: The name of the Cloudflare account.
+          example: test-name
+          type: string
+      required:
+      - api_key
+      - name
+      type: object
+    CloudflareAccountCreateRequestData:
+      description: Data object for creating a Cloudflare account.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CloudflareAccountCreateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/CloudflareAccountType'
+      required:
+      - attributes
+      - type
+      type: object
+    CloudflareAccountResponse:
+      description: The expected response schema when getting a Cloudflare account.
+      properties:
+        data:
+          $ref: '#/components/schemas/CloudflareAccountResponseData'
+      type: object
+    CloudflareAccountResponseAttributes:
+      description: Attributes object of a Cloudflare account.
+      properties:
+        email:
+          description: The email associated with the Cloudflare account.
+          example: test-email@example.com
+          type: string
+        name:
+          description: The name of the Cloudflare account.
+          example: test-name
+          type: string
+      required:
+      - name
+      type: object
+    CloudflareAccountResponseData:
+      description: Data object of a Cloudflare account.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CloudflareAccountResponseAttributes'
+        id:
+          description: The ID of the Cloudflare account, a hash of the account name.
+          example: c1a8e059bfd1e911cf10b626340c9a54
+          type: string
+        type:
+          $ref: '#/components/schemas/CloudflareAccountType'
+      required:
+      - attributes
+      - id
+      - type
+      type: object
+    CloudflareAccountType:
+      default: cloudflare-accounts
+      description: The JSON:API type for this API. Should always be `cloudflare-accounts`.
+      enum:
+      - cloudflare-accounts
+      example: cloudflare-accounts
+      type: string
+      x-enum-varnames:
+      - CLOUDFLARE_ACCOUNTS
+    CloudflareAccountUpdateRequest:
+      description: Payload schema when updating a Cloudflare account.
+      properties:
+        data:
+          $ref: '#/components/schemas/CloudflareAccountUpdateRequestData'
+      required:
+      - data
+      type: object
+    CloudflareAccountUpdateRequestAttributes:
+      description: Attributes object for updating a Cloudflare account.
+      properties:
+        api_key:
+          description: The API key of the Cloudflare account.
+          example: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3
+          type: string
+        email:
+          description: The email associated with the Cloudflare account. If an API
+            key is provided (and not a token), this field is also required.
+          example: test-email@example.com
+          type: string
+      required:
+      - api_key
+      type: object
+    CloudflareAccountUpdateRequestData:
+      description: Data object for updating a Cloudflare account.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CloudflareAccountUpdateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/CloudflareAccountType'
+      type: object
+    CloudflareAccountsResponse:
+      description: The expected response schema when getting Cloudflare accounts.
+      properties:
+        data:
+          description: The JSON:API data schema.
+          items:
+            $ref: '#/components/schemas/CloudflareAccountResponseData'
+          type: array
+      type: object
     ConfluentAccountCreateRequest:
       description: Payload schema when adding a Confluent account.
       properties:
@@ -11691,6 +11815,7 @@ components:
       items:
         description: An individual value for a given time.
         format: double
+        nullable: true
         type: number
       type: array
     TimeseriesResponseValuesList:
@@ -14236,6 +14361,187 @@ paths:
       summary: Update a single service object
       tags:
       - Opsgenie Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      x-undo:
+        type: idempotent
+  /api/v2/integrations/cloudflare/accounts:
+    get:
+      description: List Cloudflare accounts.
+      operationId: ListCloudflareAccounts
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudflareAccountsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: List Cloudflare accounts
+      tags:
+      - Cloudflare Integration
+      x-menu-order: 1
+      x-undo:
+        type: safe
+    post:
+      description: Create a Cloudflare account.
+      operationId: CreateCloudflareAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CloudflareAccountCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudflareAccountResponse'
+          description: CREATED
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Add Cloudflare account
+      tags:
+      - Cloudflare Integration
+      x-codegen-request-body-name: body
+      x-given:
+        cloudflare_account:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"cloudflare-accounts\",\n    \"attributes\":
+              {\n      \"api_key\": \"6Zm7WEgKzAlCnt_4exfEK0mSoeHHAaDf41O1AAfu\",\n
+              \     \"name\": \"datadog-dev\",\n      \"email\": \"dev@datadog.com\"\n
+              \   }\n  }\n}"
+          step: there is a valid "cloudflare_account" in the system
+      x-menu-order: 2
+      x-undo:
+        operationId: DeleteCloudflareAccount
+        parameters:
+        - name: account_id
+          source: data.id
+        type: unsafe
+  /api/v2/integrations/cloudflare/accounts/{account_id}:
+    delete:
+      description: Delete a Cloudflare account.
+      operationId: DeleteCloudflareAccount
+      parameters:
+      - description: None
+        in: path
+        name: account_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Delete Cloudflare account
+      tags:
+      - Cloudflare Integration
+      x-menu-order: 5
+      x-undo:
+        type: idempotent
+    get:
+      description: Get a Cloudflare account.
+      operationId: GetCloudflareAccount
+      parameters:
+      - description: None
+        in: path
+        name: account_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudflareAccountResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Get Cloudflare account
+      tags:
+      - Cloudflare Integration
+      x-menu-order: 3
+      x-undo:
+        type: safe
+    patch:
+      description: Update a Cloudflare account.
+      operationId: UpdateCloudflareAccount
+      parameters:
+      - description: None
+        in: path
+        name: account_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CloudflareAccountUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudflareAccountResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Update Cloudflare account
+      tags:
+      - Cloudflare Integration
       x-codegen-request-body-name: body
       x-menu-order: 4
       x-undo:
@@ -21067,6 +21373,9 @@ tags:
 - description: Workload activity security rules for generating events using the Datadog
     security Agent.
   name: Cloud Workload Security
+- description: Configure your Datadog Cloudflare integration directly through the
+    Datadog API.
+  name: Cloudflare Integration
 - description: Configure your Datadog Confluent Cloud integration directly through
     the Datadog API.
   name: Confluent Cloud
