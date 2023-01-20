@@ -77,7 +77,7 @@ Remote Configuration capability needs to be enabled on either your existing API 
 
 **Note**: Datadog Administrator permissions are required to enable Remote Configuration and create a key. This is a one-time setup per environment. If you do not have the necessary access rights, contact your Datadog administrator.
 
-3. Enable Remote Configuration:
+3. Update your agent configuration file:
 
 {{< tabs >}}
 {{% tab "Host based Agent" %}}
