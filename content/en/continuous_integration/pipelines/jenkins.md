@@ -59,8 +59,9 @@ Install and enable the [Datadog Jenkins plugin][3] v3.3.0 or newer:
 
 ## Enabling CI Visibility on the plugin
 
-{{< tabs >}}
-{{% tab "Using UI" %}}
+There are several ways you can configure the Datadog Jenkins plugin.
+
+### Using the Jenkins configuration UI
 
 {{< tabs >}}
 
@@ -96,9 +97,8 @@ Use this option to make the Jenkins plugin report directly to Datadog without us
 {{% /tab %}}
 {{< /tabs >}}
 
-{{% /tab %}}
+### Using configuration-as-code
 
-{{% tab "Using configuration-as-code" %}}
 If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 
 {{< tabs >}}
@@ -155,8 +155,8 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 {{< /tabs >}}
 
 [1]: https://github.com/jenkinsci/configuration-as-code-plugin/blob/master/README.md
-{{% /tab %}}
-{{% tab "Using Groovy" %}}
+
+### Using Groovy
 
 {{< tabs >}}
 
@@ -229,8 +229,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 {{% /tab %}}
 {{< /tabs >}}
 
-{{% /tab %}}
-{{% tab "Using Environment Variables" %}}
+### Using Environment Variables
 
 {{< tabs >}}
 
@@ -286,8 +285,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 {{% /tab %}}
 {{< /tabs >}}
 
-{{% /tab %}}
-{{< /tabs >}}
+## Validating the configuration
 
 To verify that CI Visibility is enabled, go to `Jenkins Log` and search for:
 
