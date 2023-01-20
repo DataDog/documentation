@@ -21,9 +21,16 @@ further_reading:
 
 You can search, access, and manage all of your tests on the [Synthetic Tests page][1]. 
 
-To better understand the state of your application, click **Show Metrics**. The **Overview Metrics** section appears with graphs about your overall tests' uptime and response time. For more information about the data displayed, see [Synthetic Monitoring Metrics][2].
+To better understand the state of your application, click **Show Metrics**. The **Overview Metrics** section appears with graphs about your overall tests' uptime and response time. Explore [out-of-the-box Synthetic dashboards][3] to better understand your tests' performance and usage. For more information about the data displayed, see [Synthetic Monitoring Metrics][2].
 
-You can use facets to find Synthetic tests, manage your tests with bulk actions, and monitor events to track changes to your Synthetic Monitoring configuration. Explore [out-of-the-box Synthetic dashboards][3] to better understand your testing coverage.
+You can use facets to accomplish the following actions:
+
+- Search for specific Synthetic tests
+- Investigate every CI/CD job execution to identify and troubleshoot failing test runs
+- Keep track of the progress of your tests in CI/CD pipelines
+- Identify flaky tests to fix
+- Manage your tests with bulk actions
+- Monitor events to track changes to your Synthetic Monitoring configuration
 
 ## Search for tests
 

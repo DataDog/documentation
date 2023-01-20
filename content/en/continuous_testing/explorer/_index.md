@@ -1,5 +1,5 @@
 ---
-title: Continuous Testing Explorer
+title: Synthetic Monitoring & Continuous Testing Explorer
 kind: documentation
 description: Examine CI jobs executing Continuous Testing tests.
 aliases: 
@@ -16,25 +16,51 @@ further_reading:
 - link: "/continuous_testing/explorer/search/"
   tag: "Documentation"
   text: "Learn how to search through your test batches"
-  
+- link: "/continuous_testing/explorer/search_runs/"
+  tag: "Documentation"
+  text: "Learn how to search through your test runs"
 ---
 
 ## Overview
 
-The [Continuous Testing Explorer][1] provides visibility into the CI/CD jobs executing your Continuous Testing tests. 
+The [Explorer][1] provides visibility into all test runs and CI batches for **Synthetic Monitoring** and **Continuous Testing**. 
 
 {{< img src="continuous_testing/explorer_ci_batches.png" alt="Continuous Testing Explorer" style="width:100%;">}}
 
 You can accomplish the following actions:
 
-* Investigate every CI/CD job execution to identify and troubleshoot failing test results
-* Compare test results executed against various devices and browsers to pinpoint cross browser and device issues
-* Keep track of the progress of your tests in CI/CD pipelines
-* Identify flaky tests to fix
+* Compare test runs executed against various devices and browsers to pinpoint cross browser and device issues
+* Examine performance issues with result timing facets and filter runs by failing status codes
+* Try onboarding search queries to get started with searching in the Explorer
+
+## Create a search query
+
+Navigate to [**UX Monitoring** > **Explorer**][1] and click on an out-of-the-box search query to start viewing your test batches or test runs and create visualizations.
+
+- View failed tests running in a CI pipeline by filtering on their blocking status and confirming if they are blocking your new releases.
+- Analyze failing test runs with HTTP error status codes to identify API tests with unexpected status codes.
+- Examine test runs that initially failed and passed after a retry.
+- Access test IDs to include in your CI pipeline. 
+
+to add image here
+
+For more information, see [Search Syntax][5].
+
+## Explore test runs
+
+The Explorer displays all of your test runs from [Synthetic Monitoring][7] and [Continuous Testing][8]. Every test corresponds to a test run for a particular test subtype, including fast retries. Click on a test in the Explorer to access the test run page.
+
+1. Click on a test run to navigate to the test results or details page. 
+2. Analyze your test run performance, or API and multistep API test performance.
+3. Create a visualization such as a timeseries graph, top list, or table.
+
+to add image here
+
+For more information about test runs, see [Search Test Runs][6].
 
 ## Explore test batches
 
-The Continuous Testing Explorer displays batches of tests run by [Continuous Testing and your CI/CD provider][2]. Every batch corresponds with a call to the Datadog API (through one of your [CI/CD integrations][2], the [datadog-ci][3] NPM package, or directly through the API endpoint) and triggers one or several test executions. 
+The Explorer displays batches of tests run by [Continuous Testing and your CI/CD provider][2]. Every batch corresponds with a call to the Datadog API (through one of your [CI/CD integrations][2], the [datadog-ci][3] NPM package, or directly through the API endpoint) and triggers one or several test executions. 
 
 1. Click on a batch to open a side panel containing batch CI/CD metadata and batch test results. 
 2. Explore the test executions performed as part of the batch and pinpoint test failures. 
@@ -42,18 +68,17 @@ The Continuous Testing Explorer displays batches of tests run by [Continuous Tes
 
 {{< img src="continuous_testing/open_sidepanel.png" alt="Side panel in the CI Results Explorer" style="width:100%;">}}
 
-For more information about search, see [Search Test Batches][4].
-
-## Create a search query
-
-To start querying the CI Results Explorer data, see [Search Syntax][5].
+For more information about test batches, see [Search Test Batches][4].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/synthetics/explorer/ci
+[1]: https://app.datadoghq.com/synthetics/explorer/
 [2]: /continuous_testing/cicd_integrations
 [3]: https://www.npmjs.com/package/@datadog/datadog-ci
 [4]: /continuous_testing/explorer/search/
 [5]: /continuous_testing/explorer/search_syntax/
+[6]: /continuous_testing/explorer/search_runs/
+[7]: /synthetics/
+[8]: /continuous_testing/
