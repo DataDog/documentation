@@ -48,7 +48,7 @@ The impacted RPM GPG signing key has the fingerprint `60A389A44A0C32BAE3C03F0B06
 
 The incident can affect hosts running **RPM-based Linux distributions**, including RHEL, CentOS, Rocky Linux, AlmaLinux, Amazon Linux, SUSE/SLES, and Fedora. Hosts running other operating systems such as macOS, Windows, Debian, and Ubuntu, and Container Agents are not affected.
 
-Before you start, if you have a large infrastructure, **prioritize your search** for hosts that trust the key. Because of the variety of ways packages can be installed and updated over time, Datadog recommends you check **all** RPM-based Linux hosts with a Datadog package installed. To help you prioritize which hosts to check first, consider the following guidance. The following scenarios are **more likely** to be affected:
+Before you start, if you have a large infrastructure, **prioritize your search** for hosts that trust the key. Because of the variety of ways packages can be installed and updated over time, Datadog recommends you check **all** RPM-based Linux hosts with a Datadog package installed. To help you prioritize which hosts to check first, consider the following guidance. The following scenarios are **highly likely** to be affected:
    * Agent v5 or v6
    * Standalone DogStatsD v6 or v7.23.2 and earlier
 

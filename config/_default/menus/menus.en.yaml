@@ -2441,18 +2441,38 @@ main:
     identifier: observability_pipelines
     parent: log_management_heading
     weight: 175000
-  - name: Setup
-    url: observability_pipelines/setup/
+  - name: Installation
+    url: observability_pipelines/installation/
     parent: observability_pipelines
-    identifier: observability_pipelines_setup
+    identifier: observability_pipelines_installation
     weight: 1
+  - name: Production Deployment Overview
+    url: observability_pipelines/production_deployment_overview/
+    parent: observability_pipelines
+    identifier: observability_pipelines_production_deployment_overview
+    weight: 2
+  - name: Architecture Design and Principles
+    url: observability_pipelines/production_deployment_overview/architecture_design_and_principles/
+    parent: observability_pipelines_production_deployment_overview
+    identifier: observability_pipelines_architecture_design_and_principles
+    weight: 201
+  - name: Aggregator Architecture
+    url: observability_pipelines/production_deployment_overview/aggregator_architecture/
+    parent: observability_pipelines_production_deployment_overview
+    identifier: observability_pipelines_aggregator_architecture
+    weight: 202
+  - name: Working with Data
+    url: observability_pipelines/working_with_data/
+    parent: observability_pipelines
+    identifier: observability_pipelines_working_with_data
+    weight: 3
   - name: Reference
     url: observability_pipelines/reference/
     parent: observability_pipelines
     identifier: observability_pipelines_reference
-    weight: 3
-  - name: Configuration
-    url: observability_pipelines/vector_configurations/
+    weight: 4
+  - name: Configurations
+    url: observability_pipelines/configurations/
     parent: observability_pipelines_reference
     identifier: observability_pipelines_vector_configuration
     weight: 2
@@ -2460,32 +2480,17 @@ main:
     url: observability_pipelines/reference/sources/
     parent: observability_pipelines_vector_configuration
     identifier: observability_pipelines_reference_sources
-    weight: 301
+    weight: 401
   - name: Transforms
     url: observability_pipelines/reference/transforms/
     parent: observability_pipelines_vector_configuration
     identifier: observability_pipelines_reference_transforms
-    weight: 302
+    weight: 402
   - name: Sinks
     url: observability_pipelines/reference/sinks/
     parent: observability_pipelines_vector_configuration
     identifier: observability_pipelines_reference_sinks
-    weight: 303
-  - name: Working with Data
-    url: observability_pipelines/working_with_data/
-    parent: observability_pipelines
-    identifier: observability_pipelines_working_with_data
-    weight: 3
-  - name: Integrations
-    url: observability_pipelines/integrations/
-    parent: observability_pipelines
-    identifier: observability_pipelines_integrations
-    weight: 4
-  - name: Integrate Vector with Datadog
-    url: observability_pipelines/integrations/integrate_vector_with_datadog/
-    parent: observability_pipelines_integrations
-    identifier: observability_pipelines_integrate_vector_with_datadog
-    weight: 302
+    weight: 403
   - name: Guides
     url: observability_pipelines/guide/
     parent: observability_pipelines
@@ -3691,7 +3696,7 @@ main:
     parent: administration_heading
     weight: 240000
   - name: Aggregating Agents
-    url: observability_pipelines/integrations/integrate_vector_with_datadog/
+    url: observability_pipelines/guide/configure_observability_pipelines_with_datadog/
     parent: agent
     identifier: vector_aggregation
     weight: 13
@@ -7634,6 +7639,70 @@ api:
         - v2
       operationids:
         - DownloadCloudWorkloadPolicyFile
+      unstable: []
+      order: 1
+  - name: Cloudflare Integration
+    url: /api/latest/cloudflare-integration/
+    identifier: cloudflare-integration
+    generated: true
+  - name: Update Cloudflare account
+    url: '#update-cloudflare-account'
+    identifier: cloudflare-integration-update-cloudflare-account
+    parent: cloudflare-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateCloudflareAccount
+      unstable: []
+      order: 4
+  - name: Get Cloudflare account
+    url: '#get-cloudflare-account'
+    identifier: cloudflare-integration-get-cloudflare-account
+    parent: cloudflare-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetCloudflareAccount
+      unstable: []
+      order: 3
+  - name: Delete Cloudflare account
+    url: '#delete-cloudflare-account'
+    identifier: cloudflare-integration-delete-cloudflare-account
+    parent: cloudflare-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteCloudflareAccount
+      unstable: []
+      order: 5
+  - name: Add Cloudflare account
+    url: '#add-cloudflare-account'
+    identifier: cloudflare-integration-add-cloudflare-account
+    parent: cloudflare-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateCloudflareAccount
+      unstable: []
+      order: 2
+  - name: List Cloudflare accounts
+    url: '#list-cloudflare-accounts'
+    identifier: cloudflare-integration-list-cloudflare-accounts
+    parent: cloudflare-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListCloudflareAccounts
       unstable: []
       order: 1
   - name: Confluent Cloud
