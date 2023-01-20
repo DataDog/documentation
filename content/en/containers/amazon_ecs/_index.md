@@ -138,7 +138,7 @@ If you're using [DogStatsD][8], add in a Host Port mapping for 8125/udp to your 
 
 In addition to this port mapping, set the environment variable `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` to `true`.
 
-This setup allows the DogStatsD traffic to route from the application containers, through the host and host port, to the Datadog Agent container. However, this setup requires the application container to use the host's private IP address for this traffic. This can be done by setting the environment variable `DD_AGENT_HOST` to the private IP address of the EC2 instance fetched from the Instance Metadata Service (IMDS). Alternatively, this can be set in the code during initialization. The implementation for DogStatsD is the same as for APM, see [configure the trace agent endpoint][17] for examples of setting the Agent endpoint.
+This setup allows the DogStatsD traffic to be routed from the application containers, through the host and host port, to the Datadog Agent container. However, the application container must use the host's private IP address for this traffic. This can be enabled by setting the environment variable `DD_AGENT_HOST` to the private IP address of the EC2 instance, which can be retrieved from the Instance Metadata Service (IMDS). Alternatively, this can be set in the code during initialization. The implementation for DogStatsD is the same as for APM, see [configure the Trace Agent endpoint][17] for examples of setting the Agent endpoint.
 
 Ensure that the security group settings on your EC2 instances do not publicly expose the ports for APM and DogStatsD.
 
