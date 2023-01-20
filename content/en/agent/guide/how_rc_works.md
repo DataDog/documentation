@@ -2,12 +2,19 @@
 title: How Remote Configuration Works
 kind: guide
 further_reading:
-- link: ""
+- link: "https://docs.datadoghq.com/security/application_security/how-appsec-works/#built-in-protection"
   tag: "Documentation"
-  text: "description of doc"
-- link: ""
+  text: "How App Sec works"
+- link: "https://www.datadoghq.com/blog/dash-2022-new-feature-roundup/#application-security-management-protection"
+  tag: "Blog"
+  text: "Application Security Protection"
+- link: "https://docs.datadoghq.com/dynamic_instrumentation/?tab=configurationyaml#enable-remote-configuration"
   tag: "Documentation"
-  text: "description of doc"
+  text: "Dynamic Instrumentation"
+- link: "https://docs.datadoghq.com/security/cloud_workload_security/getting_started/?tab=kubernetes#overview"
+  tag: "Documentation"
+  text: "Getting Started with Cloud Workload Security"
+
 ---
 
 ## Overview
