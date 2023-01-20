@@ -40,9 +40,9 @@ further_reading:
 
 - **Pipeline failure reasons**: Identify pipeline failure reasons
 
-## Prerequisite
+## Install the Datadog Agent (optional)
 
-Install the [Datadog Agent][1] on the Jenkins controller instance.
+The Jenkins plugin can either report metrics through the Datadog Agent or directly to Datadog if an API key is provided. If you don't have a Datadog Agent running on the Jenkins controller instance, Datadog recommends installing it first by following the [Agent installation instructions](https://docs.datadoghq.com/agent/).
 
 If the Jenkins controller and the Datadog Agent have been deployed to a Kubernetes cluster, Datadog recommends using the [Admission Controller][2], which automatically sets the `DD_AGENT_HOST` environment variable in the Jenkins controller pod to communicate with the local Datadog Agent.
 
@@ -65,8 +65,6 @@ Install and enable the [Datadog Jenkins plugin][3] v3.3.0 or newer:
 {{< tabs >}}
 
 {{% tab "Report through the Datadog Agent (recommended)" %}}
-
-This option relies on a Datadog Agent to report Jenkins metrics to Datadog. If you don't have an Agent running yet, first follow the [Agent installation instructions](https://docs.datadoghq.com/agent/).
 
 1. In your Jenkins instance web interface, go to **Manage Jenkins > Configure System**.
 2. Go to the `Datadog Plugin` section, scrolling down the configuration screen.
