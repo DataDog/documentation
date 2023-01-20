@@ -362,7 +362,7 @@ starts_when = "match(string!(.message), r'^[^\\s]')"
 
 In the reduce transform, `group_by` is an ordered list of fields used to group events. In this example, the events are grouped by `host`, `pid`, and `tid` fields. 
 
-`merge_strategies` is a map of field names to custom merge strategies. There are [different merge strategies][10], including `array`, where each value is appended to an array, and `sum`, which adds all numeric values. In this example, `concat_newline` is used, where each string value is concatenated, then delimited by a newline.
+`merge_strategies` is a map of field names to custom merge strategies. There are different merge strategies, including `array`, where each value is appended to an array, and `sum`, which adds all numeric values. In this example, `concat_newline` is used, where each string value is concatenated, then delimited by a newline.
 
 `starts_when` is a condition used to distinguish the first event of a transaction. If this condition resolves to `true` for an event, the previous transaction is flushed without this event, and a new transaction is started. In this example, events with `.message` that do not match the `^[^\\s]` regular expression condition are reduced into a single event. 
 
@@ -495,11 +495,11 @@ del(.unecessary_tag_field)"""
 
 [1]: /observability_pipelines/installation/
 [2]: /observability_pipelines/configurations/
-[3]: https://vector.dev/docs/reference/configuration/transforms/dedupe/
-[4]: https://vector.dev/docs/reference/configuration/transforms/filter/
+[3]: /observability_pipelines/reference/transforms/#dedupe
+[4]: /observability_pipelines/reference/transforms/#filter
 [5]: https://vector.dev/docs/reference/vrl/
 [6]: /logs/explorer/search_syntax/
-[7]: https://vector.dev/docs/reference/configuration/transforms/sample/
-[8]: https://vector.dev/docs/reference/configuration/transforms/log_to_metric/
-[9]: https://vector.dev/docs/reference/configuration/transforms/reduce/
-[10]: https://vector.dev/docs/reference/configuration/transforms/reduce/#merge_strategies
+[7]: /observability_pipelines/reference/transforms/#sample
+[8]: /observability_pipelines/reference/transforms/#logtometric
+[9]: /observability_pipelines/reference/transforms/#reduce
+
