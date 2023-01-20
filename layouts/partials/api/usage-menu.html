@@ -1,0 +1,16 @@
+{{ $dot := .dot }}
+{{ $ParamTitleEn := .ParamTitleEn }}
+<ul>
+{{ range (where $dot.Sites.First.Menus.api ".Name" "==" $ParamTitleEn) }}
+  {{ range $menuChild := sort .Children ".Params.order" "asc" }}
+    {{ $anchorStr := $menuChild.Name }}
+
+    {{ if hasPrefix ($menuChild.Name | lower) "get hourly usage for" }}
+      {{ range $versionIndex, $versionNum := $menuChild.Params.versions }}
+        <li><a href="#{{ (print $anchorStr) | anchorize }}">{{ $menuChild.Name }}</a></li>
+      {{ end }}
+    {{ end }}
+
+  {{ end }}
+{{ end }}
+</ul>

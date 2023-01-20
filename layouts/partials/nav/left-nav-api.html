@@ -34,11 +34,14 @@
             <ul class="nav">
                 {{ range sort .Children ".Params.order" "asc"  }}
                     {{ $menuChild := . }}
+                    {{ if hasPrefix (.Name | lower) "get hourly usage for" }}
+                    {{ else }}
                     <li class="row nav-item {{ if $currentPage.IsMenuCurrent $apiMenu . }}active{{ end }}">
                         <a class="col nav-link d-inline-block" href="{{ if hasPrefix .URL "#" }}#{{ .Name | anchorize }}{{ else }}{{ (strings.TrimLeft "/" .URL) | absLangURL }}{{ end }}" data-target="#{{.Identifier}}">
                           <span class="d-inline-block">{{ .Name }}</span>
                         </a>
                     </li>
+                    {{ end }}
                 {{ end }}
             </ul>
         </li>
