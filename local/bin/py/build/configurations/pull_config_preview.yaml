@@ -76,6 +76,8 @@
           - integration/*/service_checks.json
           - integration/*/README.md
           - integration/*/__init__.py
+          options:
+            cached: true
 
       - repo_name: integrations-core
         contents:
@@ -88,6 +90,8 @@
           - "*/assets/service_checks.json"
           - "*/README.md"
           - "*/datadog_checks/*/__about__.py"
+          options:
+            cached: true
 
         - action: pull-and-push-folder
           branch: master
@@ -111,6 +115,8 @@
           - "*/assets/service_checks.json"
           - "*/README.md"
           - "*/datadog_checks/*/__about__.py"
+          options:
+            cached: true
 
       - repo_name: integrations-internal-core
         contents:
@@ -123,6 +129,8 @@
           - "*/assets/service_checks.json"
           - "*/README.md"
           - "*/datadog_checks/*/__about__.py"
+          options:
+            cached: true
 
       - repo_name: marketplace
         contents:
@@ -138,6 +146,8 @@
           - "*/images/*.jpg"
           - "*/images/*.jpeg"
           - "*/images/*.svg"
+          options:
+            cached: true
 
       - repo_name: ansible-datadog
         contents:
