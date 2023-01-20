@@ -4,24 +4,21 @@ kind: Documentation
 aliases:
   - /integrations/observability_pipelines/working_with_data/
 further_reading:
-  - link: https://vector.dev/docs/reference/configuration/transforms/aws_ec2_metadata/
+  - link: /observability_pipelines/reference/transforms/#awsec2metadata
     tag: Documentation
     text: Parsing metadata emitted by AWS EC2 instance
-  - link: https://vector.dev/docs/reference/configuration/transforms/lua/
+  - link: /observability_pipelines/reference/transforms/#lua
     tag: Documentation
     text: Modifying events with Lua
-  - link: https://vector.dev/docs/reference/configuration/transforms/tag_cardinality_limit/ 
+  - link: /observability_pipelines/reference/transforms/#tagcardinalitylimit
     tag: Documentation
     text: Limit the cardinality of tags on metrics to safeguard against cardinality explosion
-  - link: https://vector.dev/docs/reference/configuration/transforms/log_to_metric/
+  - link: /observability_pipelines/reference/transforms/#logtometric
     tag: Documentation
     text: Convert logs to metric events
-  - link: https://vector.dev/docs/reference/configuration/transforms/metric_to_log/ 
+  - link: /observability_pipelines/reference/transforms/#metrictolog
     tag: Documentation
     text: Convert metrics to log events
-  - link: https://vector.dev/docs/reference/configuration/transforms/geoip/
-    tag: Documentation
-    text: Enrich events with GeoIP metadata
   - link: https://vector.dev/guides/level-up/csv-enrichment-guide/
     tag: Documentation
     text: Use CSV enrichment to provide more context to your data
