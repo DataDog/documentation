@@ -406,7 +406,6 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][13] plugin:
 2. In your Jenkins instance web interface, go to **Manage Jenkins > Configuration as Code**.
 3. Apply or reload the configuration.
 4. Check the configuration using the `View Configuration` button.
-{{% /tab %}}
 
 {{% /tab %}}
 {{< /tabs >}}
