@@ -37,19 +37,19 @@ a dependency on the current last build of the chain and no other builds dependin
 composite build as their last build are ignored by the plugin. Below is an example of an expected build chain,
 in which `Aggregating Results` is the last composite build:
 {{< img src="ci/teamcity_build_chain.png" alt="TeamCity build chain with composite build at the end" style="width:90%;">}}
-The final composite build should be properly configured in terms of version control settings. It should have
+The final composite build must be properly configured in terms of version control settings, with
 the VCS Root attached and the [VCS Trigger][13] configured.
-3. The following configuration parameters need to be present for the TeamCity projects:
-   * `datadog.ci.api.key`: having as value your [Datadog API Key][2].
-   * `datadog.ci.site`: having as value {{< region-param key="dd_site" code="true" >}}.
-   * `datadog.ci.enabled`: having as value `true` (`false`
+3. The following configuration parameters need to be present for TeamCity projects:
+   * `datadog.ci.api.key`: Your [Datadog API Key][2].
+   * `datadog.ci.site`: {{< region-param key="dd_site" code="true" >}}.
+   * `datadog.ci.enabled`: `true` (`false`
    can be used to disable the plugin for a specific project).
 
    These configuration parameters can be added either to TeamCity subprojects
    or to the [TeamCity Root Project][10]. When added to the Root project, they are propagated
-   to all the subprojects. For example, to enable the plugin for all projects, `datadog.ci.enabled` can be added with
+   to all its subprojects. For example, to enable the plugin for all projects, add `datadog.ci.enabled` with the
    value `true` to the Root Project. More information on defining configuration parameters
-   are available in the [TeamCity Project Hierarchy][9] docs.
+   is available in the [TeamCity Project Hierarchy][9] documentation.
 4. To enable the plugin, click on **Enable uploaded plugins** in the **Administration** -> **Plugins** page.
 Alternatively, restart the TeamCity server.
 
@@ -68,17 +68,18 @@ Check these logs to get additional context on any issues with the plugin.
 ## Git user information
 
 The plugin retrieves the Git author name and email based on the [TeamCity username style][7].
-In this regard, we highly recommend to use either "Author Name and Email" or "Author Email" username styles, as they
-provide information about the user email. When one of the other username styles is used ("UserId" or "Author Name"),
-the plugin automatically generates an email for the user by adding `@Teamcity` at the end of the username.
-For example, the plugin generates `john.doe@Teamcity` as the Git author email when the "UserId" username
-style is used and the git author username is `john.doe`. The username style is defined for [VCS Roots][11],
+Datadog recommends using either **Author Name and Email** or **Author Email** username styles, as they
+provide information about the user email. When one of the other username styles is used (**UserId** or **Author Name**),
+the plugin automatically generates an email for the user by appending `@Teamcity` to the username.
+For example, if the **UserId** username style is used and the git author username is `john.doe`,
+the plugin generates `john.doe@Teamcity` as the Git author email. The username style is defined for [VCS Roots][11],
 and can be modified in the VCS Root settings.
 
 <div class="alert alert-info"><strong>Note:</strong> The git author email is used for
 <a href="https://www.datadoghq.com/pricing/?product=ci-visibility#ci-visibility" target="_blank">billing</a> purposes,
-therefore there might be cost implications when username styles not providing email ("UserId" or "Author Name") are used.
-Reach out to us if you have any questions about your use case.</div>
+therefore there might be cost implications when username styles not providing email
+(<strong>UserId</strong> or <strong>Author Name</strong>) are used. Reach out to us if you have any questions about your use case.
+</div>
 
 ## Plugin repository
 
