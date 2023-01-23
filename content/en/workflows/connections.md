@@ -64,7 +64,7 @@ To learn how to restrict connection use, see [Access and Authentication][4].
 ## HTTP connection
 
 To connect to an arbitrary service, use the HTTP connection type, and choose from two authentication options:
-- Token based authentication
+- Token-based authentication
 - A username and password combination
 
 ### Create HTTP connection
