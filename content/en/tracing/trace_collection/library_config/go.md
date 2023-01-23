@@ -8,7 +8,7 @@ further_reading:
 - link: "https://github.com/DataDog/dd-trace-go/tree/v1"
   tag: "GitHub"
   text: "Source code"
-- link: "https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
+- link: "https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
   tag: "GoDoc"
   text: "Package page"
 - link: "/tracing/glossary/"
@@ -152,7 +152,7 @@ extracted value is used.
 
 [1]: /tracing/trace_collection/dd_libraries/go
 [2]: /getting_started/tagging/unified_service_tagging
-[3]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartOption
+[3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartOption
 [4]: /tracing/trace_pipeline/ingestion_mechanisms/
 [5]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=go#pagetitle
 [6]: /tracing/configure_data_security#telemetry-collection

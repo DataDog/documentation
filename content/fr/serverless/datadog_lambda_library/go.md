@@ -7,7 +7,7 @@ title: Bibliothèque Lambda Datadog pour Go
 ![build](https://github.com/DataDog/datadog-lambda-go/workflows/build/badge.svg)
 [![Code Coverage](https://img.shields.io/codecov/c/github/DataDog/datadog-lambda-go)](https://codecov.io/gh/DataDog/datadog-lambda-go)
 [![Slack](https://img.shields.io/badge/slack-%23serverless-blueviolet?logo=slack)](https://datadoghq.slack.com/channels/serverless/)
-[![Godoc](https://img.shields.io/badge/godoc-reference-blue.svg)](https://godoc.org/github.com/DataDog/datadog-lambda-go)
+[![Godoc](https://img.shields.io/badge/godoc-reference-blue.svg)](https://pkg.go.dev/github.com/DataDog/datadog-lambda-go)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](https://github.com/DataDog/datadog-lambda-go/blob/master/LICENSE)
 
 La bibliothèque Lambda Datadog pour Go permet de recueillir des métriques Lambda optimisées, d'activer le tracing distribué et d'envoyer des métriques custom à partir de fonctions AWS Lambda.
@@ -30,7 +30,7 @@ Consultez les instructions relatives à l'[envoi de métriques custom à partir 
 
 ## Tracing
 
-Définissez la variable d'environnement `DD_TRACE_ENABLED` sur `true` pour activer le tracing Datadog. Une fois le tracing Datadog activé, la bibliothèque injecte une span représentant l'exécution de Lambda dans l'objet de contexte. Vous pouvez ensuite utiliser le package `dd-trace-go` inclus pour créer des spans supplémentaires à partir du contexte ou transmettre ce dernier à d'autres services. Pour en savoir plus, consultez la [documentation dédiée à dd-trace-go](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace) (en anglais).
+Définissez la variable d'environnement `DD_TRACE_ENABLED` sur `true` pour activer le tracing Datadog. Une fois le tracing Datadog activé, la bibliothèque injecte une span représentant l'exécution de Lambda dans l'objet de contexte. Vous pouvez ensuite utiliser le package `dd-trace-go` inclus pour créer des spans supplémentaires à partir du contexte ou transmettre ce dernier à d'autres services. Pour en savoir plus, consultez la [documentation dédiée à dd-trace-go](https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace) (en anglais).
 
 ```
 import (
