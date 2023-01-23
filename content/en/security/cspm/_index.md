@@ -84,16 +84,15 @@ Framework
   {{< nextlink href="https://www.datadoghq.com/blog/cspm-for-azure-with-datadog/">}} Monitor the security and compliance posture of your Azure environment with Datadog{{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: /security/default_rules/#cat-posture-management-cloud
-[2]: /security/default_rules/#cat-posture-management-infra
-[3]: https://app.datadoghq.com/security/compliance/homepage
-[4]: /security/cspm/findings
-[5]: https://www.pcisecuritystandards.org/pci_security/maintaining_payment_security
-[6]: /security/cspm/detection_rules#customize-how-your-environment-is-scanned-by-each-rule
-[7]: /security/default_rules/#cat-posture-management-cloud
-[8]: /security/cspm/custom_rules
-[9]: https://app.datadoghq.com/security/compliance
-[10]: /security/cspm/frameworks_and_benchmarks
-[11]: /security/cspm/detection_rules#set-notification-targets-for-detection-rules
-[12]: /security/notifications/
-[13]: /security/notifications/#detection-rule-notifications
+[1]: https://app.datadoghq.com/security/compliance/homepage
+[2]: https://app.datadoghq.com/security/compliance
+[3]: /security/cspm/frameworks_and_benchmarks
+[4]: /security/default_rules/#cat-posture-management-cloud
+[5]: /security/cspm/frameworks_and_benchmarks#customize-how-your-environment-is-scanned-by-each-rule
+[6]: /security/cspm/custom_rules
+[7]: /security/cspm/frameworks_and_benchmarks#set-notification-targets-for-detection-rules
+[8]: /security/notifications/
+[9]: /security/notifications/#detection-rule-notifications
+[10]: /security/cspm/findings
+[11]: /security/default_rules/#cat-posture-management-infra
+[12]: https://www.pcisecuritystandards.org/pci_security/maintaining_payment_security
