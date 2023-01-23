@@ -73,10 +73,15 @@ labels:
   com.datadoghq.ad.instances: '[<INSTANCE_CONFIG>]'
 ```
 
-**`docker run`, `nerdctl run`, or `podman run` commands**:
+**using `docker run`, `nerdctl run`, or `podman run` commands**:
 
 ```shell
 -l com.datadoghq.ad.check_names='[<INTEGRATION_NAME>]' -l com.datadoghq.ad.init_configs='[<INIT_CONFIG>]' -l com.datadoghq.ad.instances='[<INSTANCE_CONFIG>]'
+```
+
+**Note**: You can escape JSON while configuring these labels. For example:
+```shell
+docker run --label "com.datadoghq.ad.check_names=[\"redisdb\"]" --label "com.datadoghq.ad.init_configs=[{}]" --label "com.datadoghq.ad.instances=[{\"host\":\"%%host%%\",\"port\":6379}]" --label "com.datadoghq.ad.logs=[{\"source\":\"redis\"}]" --name redis redis
 ```
 
 **Docker Swarm**:
