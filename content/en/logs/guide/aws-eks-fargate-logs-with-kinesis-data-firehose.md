@@ -15,9 +15,9 @@ further_reading:
 
 ## Overview
 
-AWS Fargate on EKS provides a fully managed experience for running Kubernetes workloads. Kinesis Data Firehose can be used with EKS's Fluentbit log router to collect logs in Datadog. This guide provides a comparison of log forwarding through Kinesis Data Firehose and CloudWatch logs, as well as a sample EKS Fargate application to send logs to Datadog through Kinesis Data Firehose.
+AWS Fargate on EKS provides a fully managed experience for running Kubernetes workloads. Kinesis Data Firehose can be used with EKS's Fluent Bit log router to collect logs in Datadog. This guide provides a comparison of log forwarding through Kinesis Data Firehose and CloudWatch logs, as well as a sample EKS Fargate application to send logs to Datadog through Kinesis Data Firehose.
 
-{{< img src="logs/guide/aws-eks-fargate-logs-with-kinesis-data-firehose/log_streaming_diagram.png" alt="Diagram of the log flow depicting a Fargate EKS cluster sending container logs through Fluentbit log router to Kinesis data firehose and an S3 backup bucket within AWS and then on to Datadog" responsive="true">}}
+{{< img src="logs/guide/aws-eks-fargate-logs-with-kinesis-data-firehose/log_streaming_diagram.png" alt="Diagram of the log flow depicting a Fargate EKS cluster sending container logs through Fluent Bit log router to Kinesis data firehose and an S3 backup bucket within AWS and then on to Datadog" responsive="true">}}
  
    
 ### Kinesis Data Firehose and CloudWatch log forwarding
@@ -34,7 +34,7 @@ The following are key differences between using Kinesis Data Firehose and CloudW
 
 ## Setup
  
-The following steps outline the process for sending logs from a sample application deployed on an EKS cluster through Fluentbit and a Kinesis Data Firehose delivery stream to Datadog. To maximize consistency with standard Kubernetes tags in Datadog, instructions are included to remap selected attributes to tag keys.
+The following steps outline the process for sending logs from a sample application deployed on an EKS cluster through Fluent Bit and a Kinesis Data Firehose delivery stream to Datadog. To maximize consistency with standard Kubernetes tags in Datadog, instructions are included to remap selected attributes to tag keys.
 
 1. [Create a Kinesis Data Firehose delivery stream](#create-kinesis-delivery-stream) that delivers logs to Datadog, along with an S3 Backup for any failed log deliveries.
 2. [Configure Fluent Bit for Firehose on EKS Fargate](#configure-fluent-bit-for-firehose-on-an-eks-fargate-cluster).
