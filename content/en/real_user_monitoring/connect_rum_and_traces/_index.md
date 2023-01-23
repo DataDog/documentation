@@ -39,7 +39,7 @@ Use frontend data from RUM, as well as backend, infrastructure, and log informat
 -   Your HTTP servers are using [a library that supports distributed tracing](#supported-libraries).
 -   You have the following set up based on your SDK:
     - With the **Browser SDK**, you have added the XMLHttpRequest (XHR) or Fetch resources on the RUM Explorer to your `allowedTracingUrls`.
-    - With the **Mobile SDK**, you have added the Native or XMLHttpRequest (XHR) to using `trackURLSession(firstPartyHosts:)` builder function.
+    - With the **Mobile SDK**, you have added the Native or XMLHttpRequest (XHR) to your `firstPartyHosts`.
 -   You have a corresponding trace for requests to `allowedTracingUrls` or `firstPartyHosts`.
 
 ### Setup RUM
@@ -236,9 +236,9 @@ RUM supports several propagator types to connect resources with backends that ar
             .build()
         )
     ```
-    `trackURLSession(firstPartyHostsWithHeaderTypes:)` takes `Dictionary<String, Set<TracingHeaderType>>` as a parameter, where key is a host and value is a list of supported tracing header types.
+    `trackURLSession(firstPartyHostsWithHeaderTypes:)` takes `Dictionary<String, Set<TracingHeaderType>>` as a parameter, where the key is a host and the value is a list of supported tracing header types.
 
-    `TracingHeaderType` in an enum representing following tracing header types:
+    `TracingHeaderType` in an enum representing the following tracing header types:
       - `.datadog`: Datadog's propagator (`x-datadog-*`)
       - `.tracecontext`: [W3C Trace Context](https://www.w3.org/TR/trace-context/) (`traceparent`)
       - `.b3`: [B3 single header](https://github.com/openzipkin/b3-propagation#single-header) (`b3`)
