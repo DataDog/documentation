@@ -41,7 +41,7 @@ Discovery of your Observability Pipelines Worker aggregators and services should
 
 When sending data to the Observability Pipelines Worker, Datadog recommends choosing a protocol that allows easy load-balancing and application-level delivery acknowledgment. HTTP and gRPC are preferred due to their ubiquitous nature and the amount of available tools and documentation to help operate HTTP/gRPC-based services effectively and efficiently.
 
-Choose the source that aligns with your protocol. Each Observability Pipelines Worker source implements different protocols. For example, Observability Pipelines Worker sources and sinks use gRPC for inter-Observability Pipelines Worker communication, and the HTTP source allows you to receive data over HTTP.
+Choose the source that aligns with your protocol. Each Observability Pipelines Worker source implements different protocols. For example, Observability Pipelines Worker sources and sinks use gRPC for inter-Observability Pipelines Worker communication, and the HTTP source allows you to receive data over HTTP. See [Sources][2] for their respective protocols.
 
 ## Collecting data
 
@@ -68,7 +68,7 @@ If you decide to replace an agent, configure Observability Pipelines Worker to p
 
 The Observability Pipelines Worker should integrate with agents that produce vendor-specific data that the Observability Pipelines Worker cannot replicate.
 
-For example, Datadog [Network Performance Monitoring][2] integrates the Datadog Agent with vendor-specific systems and produces vendor-specific data. Therefore, the Datadog Agent should collect the data and send it directly to Datadog, since the data is not a supported data type in the Observability Pipelines Worker.
+For example, Datadog [Network Performance Monitoring][4] integrates the Datadog Agent with vendor-specific systems and produces vendor-specific data. Therefore, the Datadog Agent should collect the data and send it directly to Datadog, since the data is not a supported data type in the Observability Pipelines Worker.
 
 As another example, the Datadog Agent collects service metrics and enriches them with vendor-specific Datadog tags. In this case, the Datadog Agent should send the metrics directly to Datadog or route them through the Observability Pipelines Worker. The Observability Pipelines Worker should not replace the Datadog Agent because the data being produced is enriched in a vendor-specific way.
 
@@ -105,6 +105,8 @@ Local processing is recommended for:
 #### Remote processing
 
 For remote processing, the Observability Pipelines Worker can be deployed on separate nodes as an aggregator. Data processing is shifted off your nodes and onto remote aggregator nodes. Remote processing is recommended for environments that require high durability and high availability (most environments). In addition, this is easier to set up since it does not require the infrastructure restructuring necessary when adding an agent.
+
+See [Aggregator Architecture][5] for more details.
 
 #### Unified processing
 
@@ -159,5 +161,7 @@ Optimize your system of analysis for analysis while reducing costs by doing the 
 
 
 [1]: https://wiki.archlinux.org/title/Domain_name_resolution
-[2]: /network_monitoring/performance/
+[2]: /observability_pipelines/reference/sources/
 [3]: /observability_pipelines/production_deployment_overview/#start-with-one-aggregator
+[4]: /network_monitoring/performance/
+[5]: /observability_pipelines/production_deployment_overview/aggregator_architecture/

@@ -282,6 +282,6 @@ If successfully setup, the parsed demo logs are printed in JSON format.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://vector.dev/docs/reference/configuration/sources/
-[2]: https://vector.dev/docs/reference/configuration/transforms/
-[3]: https://vector.dev/docs/reference/configuration/sinks/
+[1]: /observability_pipelines/reference/sources/
+[2]: /observability_pipelines/reference/transforms/
+[3]: /observability_pipelines/reference/sinks/
