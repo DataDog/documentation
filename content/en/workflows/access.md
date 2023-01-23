@@ -4,7 +4,6 @@ kind: documentation
 description: Access and authentication for Workflows
 aliases:
   - "/workflows/service_accounts"
-  - "/workflows/setup"
 disable_toc: false
 is_beta: true
 further_reading:
@@ -29,13 +28,13 @@ To add an automated trigger to a workflow, the workflow must have an associated 
 - provide an identity for workflow executions
 - provide an identity for workflow [audit trails][1]
 
-To create a service account for a workflow, you must have either the Datadog admin role, or a custom role with the **Service Account Write** permission. The service account you create adopts your role and permissions. For more information on service accounts and permissions, see [Service accounts][2].
+To create a service account for a workflow, you must have either the Datadog admin role, or a custom role with the **Service Account Write** permission. The service account you create adopts your role and permissions. For more information on service accounts and permissions, see [Service accounts][2] or [Role based access control][3].
 
 <div class="alert alert-info">The service account you create allows a workflow to be triggered automatically. However, individual actions in the workflow may require <a href="/workflows/connections/">Connections</a>.</div>
 
 ### Associate a service account with a workflow
 
-You can dynamically create a service account for your workflow when you [add an automatic trigger][3].
+You can dynamically create a service account for your workflow when you [add an automatic trigger][4].
 
 1. Click the **Create** button. The **Create Service Account** dialog opens.
 1. Use the dropdown to select a role for your service account user.
@@ -57,7 +56,7 @@ To view a service account's details:
 
 ## Action credentials
 
-Because workflow [actions][4] connect with external software systems, you may need to authenticate your Datadog account to the corresponding integration. A workflow can run successfully only if every workflow action that requires authentication can verify the identity of your Datadog account.
+Because workflow [actions][5] connect with external software systems, you may need to authenticate your Datadog account to the corresponding integration. A workflow can run successfully only if every workflow action that requires authentication can verify the identity of your Datadog account.
 
 Workflow actions can be authenticated in two ways:
 - Credentials and permissions configured in the integration tile
@@ -70,11 +69,11 @@ Credentials and account authentication that you set up in the following Datadog 
 - PagerDuty
 - Slack
 
-Configure the integration tiles by following instructions in [Datadog Integrations][5].
+Configure the integration tiles by following instructions in [Datadog Integrations][6].
 
 ### Connection credentials
 
-Use a custom [connection][6] to authenticate a [generic action][7] or any action for which the integration tile does not offer authentication.The workflow connection object allows you to provide credentials to connect to an integration. The parameters vary by integration.
+Use a custom [connection][7] to authenticate a [generic action][8] or any action for which the integration tile does not offer authentication.The workflow connection object allows you to provide credentials to connect to an integration. The parameters vary by integration.
 
 To connect to an arbitrary service, use the HTTP Connection type, and choose from two authentication options:
 - Token based authentication
@@ -84,7 +83,7 @@ To connect to an arbitrary service, use the HTTP Connection type, and choose fro
 
 Whether you configured credentials in the integration tile or created a custom connection, Workflows makes your credentials available for each workflow action. To add credentials to an action, follow the steps below:
 
-1. Navigate to the [Workflows list][8].
+1. Navigate to the [Workflows list][9].
 1. Select the workflow containing the action to which you need to add a credential. The workflow builder appears.
 1. In the workflow visualization, click the action to which you need to add a credential.
 1. The right side panel populates with the action details.
@@ -93,7 +92,7 @@ Whether you configured credentials in the integration tile or created a custom c
 
 ## Workflow permissions
 
-Use [role-based access control (RBAC)][9] to control access to your workflows and connections. To see the list of permissions that apply to workflows and connections, see [Datadog Role Permissions][10].
+Use [role-based access control (RBAC)][3] to control access to your workflows and connections. To see the list of permissions that apply to workflows and connections, see [Datadog Role Permissions][10].
 
 ### Restrict connection use
 
@@ -108,7 +107,7 @@ Resolver
 Editor
 : Can edit, resolve, and view
 
-1. Navigate to the [Workflows list][8].
+1. Navigate to the [Workflows list][9].
 1. Click **Connections** in the upper right. A list of connections appears.
 1. Hover over the connection on which you would like to set granular permissions. **Edit**, **Permissions**, and **Delete** icons appear on the right.
 1. Click the padlock (**Permissions**) icon.
@@ -124,11 +123,11 @@ Editor
 
 [1]: /account_management/audit_trail/#overview
 [2]: /account_management/org_settings/service_accounts/
-[3]: /workflows/trigger/
-[4]: /workflows/actions_catalog/
-[5]: /integrations/
-[6]: /workflows/connections/
-[7]: /workflows/actions_catalog/generic_actions/
-[8]: https://app.datadoghq.com/workflow
-[9]: /account_management/rbac/
+[3]: /account_management/rbac/
+[4]: /workflows/trigger/
+[5]: /workflows/actions_catalog/
+[6]: /integrations/
+[7]: /workflows/connections/
+[8]: /workflows/actions_catalog/generic_actions/
+[9]: https://app.datadoghq.com/workflow
 [10]: /account_management/rbac/permissions/#workflows

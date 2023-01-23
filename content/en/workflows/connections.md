@@ -2,6 +2,8 @@
 title: Connections
 kind: documentation
 description: Workflow connections
+aliases:
+  - "/workflows/setup"
 disable_toc: false
 is_beta: true
 ---
