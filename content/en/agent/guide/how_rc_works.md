@@ -37,7 +37,7 @@ The following diagram describes how Remote Configuration works:
 
 **Note**: The configuration changes applied through Remote Configuration take priority over Agent configuration file and environment variables, don't overwrite your existing configuration settings, and are not visible in the Agent configuration file.
 
-## Product and capabilities
+## Product and feature capabilities
 The following products and features are supported with Remote Config: 
 
 #### Application Security Management (ASM):  
