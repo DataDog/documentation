@@ -81,7 +81,7 @@ There are a number of configuration options available to scrub sensitive data or
 
 ## Service naming convention issues
 
-If the number of services exceeds what is specified in [Volume Guidelines][#data-volume-guidelines], try following these best practices for service naming conventions.
+If the number of services exceeds what is specified in the [data volume guidelines](#data-volume-guidelines), try following these best practices for service naming conventions.
 
 ### Exclude environment tag values from service names
 
