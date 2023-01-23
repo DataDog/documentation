@@ -4,6 +4,7 @@ kind: documentation
 type: multi-code-lang
 aliases:
   - /security_platform/application_security/getting_started/
+  - /security/application_security/getting_started/
 further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"
@@ -31,6 +32,8 @@ further_reading:
 Set up your application to [detect and protect against threats][1] targeting your production systems, using the Datadog library for your application language. You can monitor application security for apps hosted directly on a server, Docker, Kubernetes, AWS ECS, and (for supported languages) AWS Fargate.
 
 {{% appsec-getstarted %}}
+
+{{% appsec-getstarted-with-rc %}}
 
 Select your application language for details on how to do these steps for your language and infrastructure types.
 

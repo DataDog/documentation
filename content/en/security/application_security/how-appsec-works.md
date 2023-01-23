@@ -4,6 +4,8 @@ kind: documentation
 aliases:
   - /security_platform/guide/how-appsec-works/
   - /security_platform/application_security/how-appsec-works/
+  - /security/application_security/how-appsec-works/
+  - /security/guide/how-appsec-works/
 further_reading:
 - link: "/security/application_security/setup_and_configure/#compatibility"
   tag: "Documentation"
@@ -31,6 +33,9 @@ Datadog ASM identifies bad actors by collecting client IP addresses and manually
 Datadog ASM uses the information APM is already collecting, and flags traces containing attack attempts. Services exposed to application attacks are highlighted directly in the security views embedded in APM ([Service Catalog][1], [Service Page][2], [Traces][3]).
 
 Because APM collects a sample of your application traffic, enabling ASM in the tracing library is necessary to effectively monitor and protect your services.
+
+<div class="alert alert-info"><strong>Beta: 1-Click Enablement</strong><br>
+If your service is running with <a href="/agent/guide/how_rc_works/#enabling-remote-configuration">an Agent with Remote Configuration enabled and a tracing library version that supports it</a>, you can <a href="security/application_security/threats/getting_started/">enable ASM</a> from the Datadog UI without additional configuration of the Agent or tracing libraries.</div>
 
 ## Compatibility
 
@@ -72,14 +77,17 @@ Datadog uses multiple pattern sources, including the [OWASP ModSecurity Core Rul
 
 Security Signals are automatically created when Datadog detects meaningful attacks targeting your production services. It provides you with visibility on the attackers and the targeted services. You can set custom detection rules with thresholds to determine which attacks you want to be notified about.
 
+<div class="alert alert-info"><strong>Beta: Automatic Threat Patterns Updates</strong><br>
+If your service is running with <a href="/agent/guide/how_rc_works/#enabling-remote-configuration">an Agent with Remote Configuration enabled and a tracing library version that supports it</a>, the threat patterns being used to monitor your service is automatically updated whenever Datadog publishes updates.</div>
+
 ## Built-in protection
 
-<div class="alert alert-info">One-click IP blocking is in private beta. Access early preview through <a href="https://dashcon.io/appsec" target="_blank">this form</a>.</div>
+<div class="alert alert-info">One-click IP blocking is in beta.</div>
 
 Datadog ASM offers built-in protection capabilities to slow down attacks and attackers. 
 
 IP blocking actions are implemented through the [tracing libraries][9], not introducing any new dependencies in your stack.
-IP blocks are saved in the Datadog platform, automatically and securely fetched by the [Datadog Agent][12], deployed in your infrastructure, and applied to your application.
+IP blocks are saved in the Datadog platform, automatically and securely fetched by the [Datadog Agent][13], deployed in your infrastructure, and applied to your application. For details, read [How Remote Configuration Works][20].
 
 You can block attackers' IPs that are flagged in ASM Security Signals temporarily or permanently with a single click in the Datadog UI.
 
@@ -135,3 +143,4 @@ Datadog ASM includes over 100 attack patterns that help protect against [many di
 [17]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/agent-bootstrap/src/main/resources/datadog/trace/bootstrap/blocking/template.html
 [18]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/agent-bootstrap/src/main/resources/datadog/trace/bootstrap/blocking/template.json
 [19]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept
+[20]: /agent/guide/how_rc_works/
