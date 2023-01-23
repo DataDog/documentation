@@ -73,7 +73,7 @@ Configure the integration tiles by following instructions in [Datadog Integratio
 
 ### Connection credentials
 
-Use a custom [connection][7] to authenticate a [generic action][8] or any action for which the integration tile does not offer authentication.The workflow connection object allows you to provide credentials to connect to an integration. The parameters vary by integration.
+Use a custom [connection][7] to authenticate a [generic action][8] or any action for which the integration tile does not offer authentication. The workflow connection object allows you to provide credentials to connect to an integration. The parameters vary by integration.
 
 To connect to an arbitrary service, use the HTTP Connection type and choose from two authentication options:
 - Token-based authentication
@@ -106,6 +106,10 @@ Resolver
 
 Editor
 : Can edit, resolve, and view
+
+Resolving a connection includes getting the connection object assigned to a step and retrieving the secret associated with it.
+
+Follow the steps below to modify the permissions on a specific connection:
 
 1. Navigate to the [Workflows list][9].
 1. Click **Connections** in the upper right. A list of connections appears.
