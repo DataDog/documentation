@@ -1,8 +1,6 @@
 ---
 title: How Remote Configuration Works
 kind: guide
-is_beta: true
-private: true
 further_reading:
 - link: "https://docs.datadoghq.com/security/application_security/how-appsec-works/#built-in-protection"
   tag: "Documentation"
@@ -45,7 +43,7 @@ The following products and features are supported with Remote Config:
 
 - **1-click ASM activation**: This feature allows you to enable ASM in 1-click from the Datadog UI.
 - **In-App Web Application Firewall (WAF) automated attack patterns updates**: this feature allows your service to receive the newest attack patterns as Datadog releases them, following new vulnerabilities or attack vectors being disclosed.
-- **Protect**: This feature allows you to block attackers’ IPs, authenticated users, and suspicious requests that are flagged in ASM Security Signals/Traces temporarily or permanently through the Datadog UI.
+- **Protect**: This feature allows you to block attackers' IPs, authenticated users, and suspicious requests that are flagged in ASM Security Signals/Traces temporarily or permanently through the Datadog UI.
 
 #### Application Performance Management (APM) Dynamic Instrumentation:
 - **Ability to send critical metrics, traces, and logs from your live applications with no code changes**. 
