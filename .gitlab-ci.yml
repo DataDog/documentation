@@ -84,7 +84,7 @@ build_reference:
   before_script: []
   script:
     - mkdir -p data/reference/
-    - docker run registry.ddbuild.io/timberio/vector:nightly-alpine generate-schema > data/reference/schema.json
+    - docker run registry.ddbuild.io/timberio/vector:0.27.0-alpine generate-schema > data/reference/schema.json
   artifacts:
     paths:
       - data/reference/schema.json
