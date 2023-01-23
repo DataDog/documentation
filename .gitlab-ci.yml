@@ -10,6 +10,10 @@ variables:
   ARTIFACT_RESOURCE: "public"
   LIVE_DOMAIN: "https://docs.datadoghq.com/"
   PREVIEW_DOMAIN: "https://docs-staging.datadoghq.com/"
+  KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: documentation
+  KUBERNETES_CPU_REQUEST: 8
+  KUBERNETES_MEMORY_REQUEST: 10Gi
+  KUBERNETES_MEMORY_LIMIT: 10Gi
   # datadog-ci
   DATADOG_SITE: 'datadoghq.com'
   DATADOG_SUBDOMAIN: 'dd-corpsite'
