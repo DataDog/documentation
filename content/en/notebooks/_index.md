@@ -167,7 +167,7 @@ Graphs in notebooks support all Datadog data sources: metrics, log events, Index
 * [Funnel][14]
 * [Pie][15]
 
-#### Limit edit access
+### Limit edit access
 
 By default, all users have full access to notebooks.
 
@@ -180,10 +180,11 @@ Use granular access controls to limit the [roles][16] that may edit a particular
 1. Click **Add**.
 1. The dialog box updates to show that the role you selected has the **Editor** permission.
 1. Click **Save**
+
 **Note:** To maintain your edit access to the notebook, the system requires you to include at least one role that you are a member of before saving. 
 
 To restore general access to a notebook with restricted access, follow the steps below:
-1. While viewing the notebook, click on the cog in the upper right. The the settings menu opens.
+1. While viewing the notebook, click on the cog in the upper right. The settings menu opens.
 1. Select **Permissions**.
 1. Click **Restore Full Access**.
 1. Click **Save**.
