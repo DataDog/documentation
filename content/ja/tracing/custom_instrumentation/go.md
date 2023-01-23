@@ -261,12 +261,12 @@ func main() {
 [1]: /ja/tracing/visualization/#span-tags
 [2]: /ja/tracing/visualization/#spans
 [3]: /ja/tracing/setup/go/#compatibility
-[4]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
-[5]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartSpan
-[6]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartSpanFromContext
+[4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
+[5]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartSpan
+[6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartSpanFromContext
 [7]: /ja/tracing/visualization/#trace
 [8]: https://github.com/openzipkin/b3-propagation
 [9]: /ja/tracing/security
 [10]: https://github.com/opentracing/opentracing-go
-[11]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentracer
+[11]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentracer
 [12]: http://opentracing.io

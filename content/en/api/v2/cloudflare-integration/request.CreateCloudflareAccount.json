@@ -1,0 +1,10 @@
+{
+  "data": {
+    "attributes": {
+      "api_key": "6Zm7WEgKzAlCnt_4exfEK0mSoeHHAaDf41O1AAfu",
+      "email": "new@email",
+      "name": "test-name"
+    },
+    "type": "cloudflare-accounts"
+  }
+}

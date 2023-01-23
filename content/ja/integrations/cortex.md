@@ -15,7 +15,7 @@ assets:
     source_type_name: cortex
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Cortex
   sales_email: support@getcortexapp.com
   support_email: support@getcortexapp.com
 categories:

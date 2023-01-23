@@ -4165,11 +4165,86 @@ components:
       - AUTO
       - COMPACT
       - FULL
+    ListStreamComputeAggregation:
+      description: Aggregation value.
+      enum:
+      - count
+      - cardinality
+      - median
+      - pc75
+      - pc90
+      - pc95
+      - pc98
+      - pc99
+      - sum
+      - min
+      - max
+      - avg
+      - earliest
+      - latest
+      - most_frequent
+      example: count
+      type: string
+      x-enum-varnames:
+      - COUNT
+      - CARDINALITY
+      - MEDIAN
+      - PC75
+      - PC90
+      - PC95
+      - PC98
+      - PC99
+      - SUM
+      - MIN
+      - MAX
+      - AVG
+      - EARLIEST
+      - LATEST
+      - MOST_FREQUENT
+    ListStreamComputeItems:
+      description: List of facets and aggregations which to compute.
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/ListStreamComputeAggregation'
+        facet:
+          description: Facet name.
+          example: resource_name
+          type: string
+      required:
+      - aggregation
+      type: object
+    ListStreamGroupByItems:
+      description: List of facets on which to group.
+      properties:
+        facet:
+          description: Facet name.
+          example: resource_name
+          type: string
+      required:
+      - facet
+      type: object
     ListStreamQuery:
       description: Updated list stream widget.
       properties:
+        compute:
+          description: Compute configuration for the List Stream Widget. Compute can
+            be used only with the logs_transaction_stream (from 1 to 5 items) list
+            stream source.
+          items:
+            $ref: '#/components/schemas/ListStreamComputeItems'
+          maxItems: 5
+          minItems: 1
+          type: array
         data_source:
           $ref: '#/components/schemas/ListStreamSource'
+        group_by:
+          description: Group by configuration for the List Stream Widget. Group by
+            can be used only with logs_pattern_stream (up to 3 items) or logs_transaction_stream
+            (one group by item is required) list stream source.
+          items:
+            $ref: '#/components/schemas/ListStreamGroupByItems'
+          maxItems: 3
+          type: array
         indexes:
           description: List of indexes.
           items:
@@ -4205,6 +4280,7 @@ components:
       - rum_issue_stream
       - apm_issue_stream
       - logs_pattern_stream
+      - logs_transaction_stream
       example: apm_issue_stream
       type: string
       x-enum-varnames:
@@ -4213,6 +4289,7 @@ components:
       - RUM_ISSUE_STREAM
       - APM_ISSUE_STREAM
       - LOGS_PATTERN_STREAM
+      - LOGS_TRANSACTION_STREAM
     ListStreamWidgetDefinition:
       description: 'The list stream visualization displays a table of recent events
         in your application that
@@ -6442,6 +6519,8 @@ components:
           format: int64
           nullable: true
           type: integer
+        notification_preset_name:
+          $ref: '#/components/schemas/MonitorOptionsNotificationPresets'
         notify_audit:
           default: false
           description: A Boolean indicating whether tagged users is notified on changes
@@ -6554,6 +6633,20 @@ components:
           type: string
       readOnly: true
       type: object
+    MonitorOptionsNotificationPresets:
+      default: show_all
+      description: Toggles the display of additional content sent in the monitor notification.
+      enum:
+      - show_all
+      - hide_query
+      - hide_handles
+      - hide_all
+      type: string
+      x-enum-varnames:
+      - SHOW_ALL
+      - HIDE_QUERY
+      - HIDE_HANDLES
+      - HIDE_ALL
     MonitorOptionsSchedulingOptions:
       description: Configuration options for scheduling.
       properties:
@@ -14058,6 +14151,8 @@ components:
           $ref: '#/components/schemas/SyntheticsTestOptionsRetry'
         rumSettings:
           $ref: '#/components/schemas/SyntheticsBrowserTestRumSettings'
+        scheduling:
+          $ref: '#/components/schemas/SyntheticsTestOptionsScheduling'
         tick_every:
           description: The frequency at which to run the Synthetic test (in seconds).
           format: int64
@@ -14107,6 +14202,46 @@ components:
             300ms.'
           format: double
           type: number
+      type: object
+    SyntheticsTestOptionsScheduling:
+      description: Object containing timeframes and timezone used for advanced scheduling.
+      properties:
+        timeframes:
+          description: Array containing objects describing the scheduling pattern
+            to apply to each day.
+          example:
+          - day: 1
+            from: 07:00
+            to: '16:00'
+          - day: 3
+            from: 07:00
+            to: '16:00'
+          items:
+            $ref: '#/components/schemas/SyntheticsTestOptionsSchedulingTimeframe'
+          type: array
+        timezone:
+          description: Timezone in which the timeframe is based.
+          example: America/New_York
+          type: string
+      type: object
+    SyntheticsTestOptionsSchedulingTimeframe:
+      description: Object describing a timeframe.
+      properties:
+        day:
+          description: Number representing the day of the week.
+          example: 1
+          format: int32
+          maximum: 7
+          minimum: 1
+          type: integer
+        from:
+          description: The hour of the day on which scheduling starts.
+          example: 07:00
+          type: string
+        to:
+          description: The hour of the day on which scheduling ends.
+          example: '16:00'
+          type: string
       type: object
     SyntheticsTestPauseStatus:
       description: 'Define whether you want to start (`live`) or pause (`paused`)

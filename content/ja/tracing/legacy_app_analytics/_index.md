@@ -68,7 +68,7 @@ App Analyticsは、Go トレースクライアントのバージョン 1.11.0 �
 
 * バージョン 1.26.0 以降は、環境変数 `DD_TRACE_ANALYTICS_ENABLED=true` を使用
 
-[1]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithAnalytics
+[1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithAnalytics
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
