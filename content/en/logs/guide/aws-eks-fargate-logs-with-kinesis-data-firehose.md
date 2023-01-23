@@ -75,7 +75,7 @@ data:
         delivery_stream <YOUR-DELIVERY-STREAM-NAME>
 {{< /code-block >}}
 
-2. Attach an IAM policy to the pod execution role to allow the log router running on AWS Fargate to write to the Kinesis Data Firehose. You can use the example below, replacing the ARN in the **Resource** field with the ARN of your delivery stream.
+2. Create an IAM policy and attach it to the pod execution role to allow the log router running on AWS Fargate to write to the Kinesis Data Firehose. You can use the example below, replacing the ARN in the **Resource** field with the ARN of your delivery stream.
 
 {{< code-block lang="json" filename="allow_kinesis_put_permission.json" disable_copy="false" collapsible="false" >}}
 {
@@ -94,14 +94,14 @@ data:
 ]
 }
 {{< /code-block >}}
-3. Create the policy.
+   a. Create the policy.
 
 {{< code-block lang="bash" filename="" disable_copy="false" collapsible="false" >}}
- $ aws iam create-policy \
+aws iam create-policy \
          --policy-name FluentBitEKSFargate \
          --policy-document file://allow_kinesis_put_permission.json 
 {{< /code-block >}}
-4. Retrieve the Fargate Pod Execution Role and attach the IAM policy.
+   b. Retrieve the Fargate Pod Execution Role and attach the IAM policy.
 
 {{< code-block lang="bash" filename="" disable_copy="false" collapsible="false" >}}
  # Retrieve the pod execution role
@@ -144,7 +144,7 @@ To generate logs and test the Kinesis pipeline, deploy a sample workload to your
          - containerPort: 80
 {{< /code-block >}}
  
- 2. Create the namespace `fargate-namespace` if it does not exist and use `kubectl` to apply the deployment manifest;
+ 2. Use `kubectl` to apply the deployment manifest:
 
   {{< code-block lang="bash" filename="" disable_copy="false" collapsible="false" >}}
   $ kubectl apply -f sample-deployment.yaml
@@ -163,7 +163,7 @@ Logs from this configuration require some attributes to be remapped to maximize 
  | `kubernetes.pod_name` | `pod_name` |
  | `kubernetes.docker_id` | `container_id` |
 
-4. After creating this pipeline, logs emitted by the sample app should be tagged like this example with the log attributes remapped to Kubernetes tags:
+4. After creating this pipeline, logs emitted by the sample app are tagged like this example with the log attributes remapped to Kubernetes tags:
 {{< img src="logs/guide/aws-eks-fargate-logs-with-kinesis-data-firehose/log_example_remapped.jpg" alt="The detail view of a log in Datadog with the container_id, kube_container_name, kube_namespace, and pod_name tags" responsive="true">}}
 
 ## Further Reading
