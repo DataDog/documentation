@@ -29,4 +29,4 @@ class MyValidatorClass(BaseAssetValidator):
         print("errors")
 
 
-validation_results = validate("dd-asset-library-pull-requests", "9afda94a0de5cffe5db006894eacb3f079765e82", validators=[MyValidatorClass])
+validation_results = validate("dd-asset-library-pull-requests", "9afda94a0de5cffe5db006894eacb3f079765e82", validator_klasses=[MyValidatorClass])
