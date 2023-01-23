@@ -48,7 +48,13 @@ See the [Send AWS service logs with the Datadog Kinesis Firehose Destination][4]
  
 ### Configure Fluent Bit for Firehose on an EKS Fargate cluster
  
-1. Create the `aws-observability` namespace and apply the following Kubernetes ConfigMap for Fluent Bit. Substitute the name of your delivery stream.
+1. Create the `aws-observability` namespace.
+
+{{< code-block lang="bash" filename="" disable_copy="false" collapsible="false" >}}
+kubectl create namespace aws-observability
+{{< /code-block >}}
+
+2. Create the following Kubernetes ConfigMap for Fluent Bit as `aws-logging-configmap.yaml`. Substitute the name of your delivery stream.
 
 {{< code-block lang="yaml" filename="" disable_copy="false" collapsible="false" >}}
 apiVersion: v1
@@ -75,7 +81,13 @@ data:
         delivery_stream <YOUR-DELIVERY-STREAM-NAME>
 {{< /code-block >}}
 
-2. Create an IAM policy and attach it to the pod execution role to allow the log router running on AWS Fargate to write to the Kinesis Data Firehose. You can use the example below, replacing the ARN in the **Resource** field with the ARN of your delivery stream.
+3. Use `kubectl` to apply the ConfigMap manifest.
+
+{{< code-block lang="bash" filename="" disable_copy="false" collapsible="false" >}}
+kubectl apply -f aws-logging-configmap.yaml
+{{< /code-block >}}
+
+4. Create an IAM policy and attach it to the pod execution role to allow the log router running on AWS Fargate to write to the Kinesis Data Firehose. You can use the example below, replacing the ARN in the **Resource** field with the ARN of your delivery stream.
 
 {{< code-block lang="json" filename="allow_kinesis_put_permission.json" disable_copy="false" collapsible="false" >}}
 {
@@ -94,6 +106,7 @@ data:
 ]
 }
 {{< /code-block >}}
+
    a. Create the policy.
 
 {{< code-block lang="bash" filename="" disable_copy="false" collapsible="false" >}}
@@ -101,16 +114,14 @@ aws iam create-policy \
          --policy-name FluentBitEKSFargate \
          --policy-document file://allow_kinesis_put_permission.json 
 {{< /code-block >}}
+
    b. Retrieve the Fargate Pod Execution Role and attach the IAM policy.
 
 {{< code-block lang="bash" filename="" disable_copy="false" collapsible="false" >}}
- # Retrieve the pod execution role
  POD_EXEC_ROLE=$(aws eks describe-fargate-profile \
    --cluster-name fargate-cluster \
    --fargate-profile-name fargate-profile \
    --query 'fargateProfile.podExecutionRoleArn' --output text |cut -d '/' -f 2)
-
- # Attach the role policy
  aws iam attach-role-policy \
          --policy-arn arn:aws:iam::<ACCOUNTID>:policy/FluentBitEKSFargate \
          --role-name $POD_EXEC_ROLE
@@ -144,11 +155,17 @@ To generate logs and test the Kinesis pipeline, deploy a sample workload to your
          - containerPort: 80
 {{< /code-block >}}
  
- 2. Use `kubectl` to apply the deployment manifest:
+ 2. Create the `fargate-namespace` namespace.
 
-  {{< code-block lang="bash" filename="" disable_copy="false" collapsible="false" >}}
-  $ kubectl apply -f sample-deployment.yaml
-  {{< /code-block >}}
+ {{< code-block lang="bash" filename="" disable_copy="false" collapsible="false" >}}
+ kubectl create namespace fargate-namespace
+ {{< /code-block >}}
+
+ 3. Use `kubectl` to apply the deployment manifest.
+
+ {{< code-block lang="bash" filename="" disable_copy="false" collapsible="false" >}}
+ kubectl apply -f sample-deployment.yaml
+ {{< /code-block >}}
 
 ### Remap attributes for log correlation
 
