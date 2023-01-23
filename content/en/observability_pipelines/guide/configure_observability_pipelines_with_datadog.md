@@ -5,6 +5,7 @@ aliases:
   - /agent/vector_aggregation/
   - /integrations/observability_pipelines/integrate_vector_with_datadog/
   - /observability_pipelines/integrate_vector_with_datadog/
+  - /observability_pipelines/integrations/integrate_vector_with_datadog/
 further_reading:
 - link: "/logs/"
   tag: "Documentation"
