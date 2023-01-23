@@ -206,10 +206,14 @@ configuring injection/extraction styles. Two styles are
 supported: `Datadog` and `B3`.
 
 Configure injection styles using the environment variable:
-`DD_PROPAGATION_STYLE_INJECT=Datadog,B3`
+`DD_TRACE_PROPAGATION_STYLE_INJECT=Datadog,B3`
 
 Configure extraction styles using the environment variable:
-`DD_PROPAGATION_STYLE_EXTRACT=Datadog,B3`
+`DD_TRACE_PROPAGATION_STYLE_EXTRACT=Datadog,B3`
+
+Configure both styles using the environment variable:
+`DD_TRACE_PROPAGATION_STYLE=Datadog,B3`.
+*Note*: `DD_TRACE_PROPAGATION_STYLE_INJECT` and `DD_TRACE_PROPAGATION_STYLE_EXTRACT`, if set, take precedence.
 
 The values of these environment variables are comma separated lists of
 header styles that are enabled for injection or extraction. By default,
@@ -230,9 +234,9 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [1]: /tracing/glossary/#span-tags
 [2]: /tracing/glossary/#spans
 [3]: /tracing/setup/go/#compatibility
-[4]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
-[5]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartSpan
-[6]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartSpanFromContext
+[4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
+[5]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartSpan
+[6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartSpanFromContext
 [7]: /tracing/glossary/#trace
 [8]: https://github.com/openzipkin/b3-propagation
 [9]: /tracing/security

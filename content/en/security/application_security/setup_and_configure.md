@@ -129,7 +129,7 @@ To install the above requirements:
 
 **Note**: The Go toolchain disables CGO when cross-compiling and so, CGO needs to be explicitly enabled.
 
-[1]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib
+[1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib
 [2]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc#example-package-Server
 [3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http#example-package
 [4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux#example-package
@@ -302,6 +302,12 @@ See [APM Data Security][3] for information about other mechanisms in the Datadog
 To disable ASM, remove the `DD_APPSEC_ENABLED=true` environment variable from your application configuration. Once it's removed, restart your service.
 
 If you need additional help, contact [Datadog support][6].
+
+## Configure a custom blocking page or payload
+
+{{% asm-protection-page-configuration %}}
+
+{{<img src="/security/application_security/asm-blocking-page-html.png" alt="The page displayed as ASM blocks requests originating from blocked IPs" width="75%" >}}
 
 ## Further Reading
 

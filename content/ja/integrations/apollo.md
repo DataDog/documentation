@@ -17,7 +17,7 @@ assets:
     source_type_name: Apollo Engine
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Apollo
   sales_email: sachin@apollographql.com
   support_email: sachin@apollographql.com
 categories:

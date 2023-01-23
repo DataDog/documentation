@@ -162,6 +162,34 @@
       "description": "Update a Cloud Workload Security Agent rule returns \"OK\" response"
     }
   ],
+  "CreateCloudflareAccount": [
+    {
+      "group": "cloudflare_integration",
+      "suffix": "",
+      "description": "Add Cloudflare account returns \"CREATED\" response"
+    }
+  ],
+  "GetCloudflareAccount": [
+    {
+      "group": "cloudflare_integration",
+      "suffix": "",
+      "description": "Get Cloudflare account returns \"OK\" response"
+    }
+  ],
+  "ListCloudflareAccounts": [
+    {
+      "group": "cloudflare_integration",
+      "suffix": "",
+      "description": "List Cloudflare accounts returns \"OK\" response"
+    }
+  ],
+  "UpdateCloudflareAccount": [
+    {
+      "group": "cloudflare_integration",
+      "suffix": "",
+      "description": "Update Cloudflare account returns \"OK\" response"
+    }
+  ],
   "CreateConfluentResource": [
     {
       "group": "confluent_cloud",
@@ -262,6 +290,34 @@
       "group": "events",
       "suffix": "_3856995058",
       "description": "Search events returns \"OK\" response with pagination"
+    }
+  ],
+  "CreateFastlyAccount": [
+    {
+      "group": "fastly_integration",
+      "suffix": "",
+      "description": "Add Fastly account returns \"CREATED\" response"
+    }
+  ],
+  "GetFastlyAccount": [
+    {
+      "group": "fastly_integration",
+      "suffix": "",
+      "description": "Get Fastly account returns \"OK\" response"
+    }
+  ],
+  "ListFastlyAccounts": [
+    {
+      "group": "fastly_integration",
+      "suffix": "",
+      "description": "List Fastly accounts returns \"OK\" response"
+    }
+  ],
+  "UpdateFastlyAccount": [
+    {
+      "group": "fastly_integration",
+      "suffix": "",
+      "description": "Update Fastly account returns \"OK\" response"
     }
   ],
   "CreateIncidentService": [
@@ -396,6 +452,13 @@
       "group": "incidents",
       "suffix": "",
       "description": "Get the details of an incident returns \"OK\" response"
+    }
+  ],
+  "SearchIncidents": [
+    {
+      "group": "incidents",
+      "suffix": "",
+      "description": "Search for incidents returns \"OK\" response"
     }
   ],
   "CreateAPIKey": [

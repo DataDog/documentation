@@ -35,8 +35,8 @@ All Agent traffic is sent over SSL. The destination is dependent on the Datadog 
 : `process.`{{< region-param key="dd_site" code="true" >}}
 
 [Network Device Monitoring][10]
-: `ndm-intake.`{{< region-param key="dd_site" code="true" >}}
-`snmp-traps-intake.`{{< region-param key="dd_site" code="true" >}}
+: `ndm-intake.`{{< region-param key="dd_site" code="true" >}}<br>
+`snmp-traps-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `ndmflow-intake.`{{< region-param key="dd_site" code="true" >}}
 
 
@@ -56,7 +56,7 @@ API test results for worker v>0.1.6 `intake.synthetics.`{{< region-param key="dd
 Browser test results for worker v>0.2.0 `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
 API test results for worker v<0.1.5 `api.`{{< region-param key="dd_site" code="true" >}}
 
-{{< site-region region="us,eu,us3" >}}
+{{< site-region region="us,eu,us3,us5" >}}
 [Database Monitoring][2]
 : `dbm-metrics-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `dbquery-intake.`{{< region-param key="dd_site" code="true" >}}
@@ -411,6 +411,8 @@ The APM receiver and the DogStatsD ports are located in the **Trace Collection C
 #
 # receiver_port: 8126
 {{< /code-block >}}
+
+<div class="alert alert-warning">If you change the DogStatsD port or APM receiver port value here, you must also change the APM tracing library configuration for the corresponding port. See the information about configuring ports in the <a href="/tracing/trace_collection/library_config/">Library Configuration docs for your language</a>.</div>
 
 ## Using proxies
 

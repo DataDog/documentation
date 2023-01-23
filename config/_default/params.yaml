@@ -101,11 +101,10 @@ header_scripts:
   - marketo: false
 
 footer_scripts:
-  - snowplow: false
 
 # Docs allowed regions for redirecting
 allowedRegions:
-  - name: US
+  - name: US1
     value: us
     weight: 10
     domain: datadoghq.com
