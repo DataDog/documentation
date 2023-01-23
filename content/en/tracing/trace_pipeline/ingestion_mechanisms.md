@@ -699,10 +699,10 @@ Similarly, control the trace sampling rate in other SDKs by using similar parame
 | SDK         | Parameter             | Minimum version    |
 |-------------|-----------------------|--------------------|
 | Browser     | `traceSampleRate`     | [v4.30.0][8]       |
-| iOS         | `tracingSamplingRate` | [1.11.0][9] / _sampling rate reported in the Ingestion Control Page since [1.13.0][16]_ |
-| Android     | `traceSamplingRate`   | [1.13.0][10] / _sampling rate reported in the Ingestion Control Page since [1.15.0][17]_ |
+| iOS         | `tracingSamplingRate` | [1.11.0][9] _Sampling rate is reported in the Ingestion Control Page since [1.13.0][16]_ |
+| Android     | `traceSamplingRate`   | [1.13.0][10] _Sampling rate is reported in the Ingestion Control Page since [1.15.0][17]_ |
 | Flutter     | `tracingSamplingRate` | [1.0.0][11] |
-| React Native | `tracingSamplingRate` | [1.0.0][12] / _sampling rate reported in the Ingestion Control Page since [1.2.0][18]_  |
+| React Native | `tracingSamplingRate` | [1.0.0][12] _Sampling rate is reported in the Ingestion Control Page since [1.2.0][18]_  |
 
 ### Synthetic traces
 `ingestion_reason:synthetics` and `ingestion_reason:synthetics-browser`
