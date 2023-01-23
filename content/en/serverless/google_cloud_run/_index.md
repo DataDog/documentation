@@ -25,6 +25,8 @@ If you are using a Dockerfile to build your application, complete the following:
 
 4. Use the `CMD` instruction to run your existing application and other required commands as arguments.
 
+5. Set a DD_API_KEY value in your application runtime to complete Agent configuration
+
 The following are examples of how to complete these three steps. You may need to adjust these examples depending on your existing Dockerfile setup. 
 
 
@@ -174,7 +176,8 @@ You can submit custom metrics using a [DogStatsd client][6].
 
 | Variable | Description |
 | -------- | ----------- |
-| `DD_SITE` | [Datadog site][7]. |
+|`DD_API_KEY`| [Datadog API Key][9] - **Required**|
+| `DD_SITE` | [Datadog site][7] - **Required** |
 | `DD_LOGS_ENABLED` | When true, send logs (stdout and stderr) to Datadog. Defaults to false. |
 | `DD_SERVICE` | See [Unified Service Tagging][8]. |
 | `DD_VERSION` | See [Unified Service Tagging][8]. |
@@ -199,3 +202,4 @@ You can use the [GCP integration][1] to collect logs. Alternatively, you can set
 [6]: /metrics/custom_metrics/dogstatsd_metrics_submission/
 [7]: /getting_started/site/
 [8]: /getting_started/tagging/unified_service_tagging/
+[9]: /account_management/api-app-keys/#api-keys
