@@ -45,7 +45,7 @@ After you customize a rule, click **Update Rule** at the bottom of the page to a
 
 ## Set notification targets for detection rules
 
-You can send real-time notifications when a new misconfiguration is detected in your environment by adding notification targets. The complete list of notification options are:
+You can send real-time notifications when a new misconfiguration is detected in your environment by adding notification targets. The available notification options are:
 
 - [Slack][14]
 - [Jira][15]
@@ -63,7 +63,7 @@ Alternatively, create [notification rules][21] that span across multiple detecti
 
 ## Create custom rules
 
-To extend the rules being applied to your environment to evaluate your security posture, you can create custom rules from scratch. You can also clone the default detection rules and edit the copies (GCP only). See [Custom Rules][20] for more information.
+You can create custom rules to extend the rules being applied to your environment to evaluate your security posture. You can also clone the default detection rules and edit the copies (GCP only). See [Custom Rules][20] for more information.
 
 **Note**: Creating and using custom CSPM rules is a beta feature, available for select Amazon Web Services (AWS), Microsoft Azure, and Google Cloud Platform (GCP) cloud resources.
 
