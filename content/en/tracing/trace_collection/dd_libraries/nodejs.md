@@ -116,6 +116,7 @@ After the Agent is installed, follow these steps to add the Datadog tracing libr
     npm install dd-trace@latest-node12
     ```
     For more information on our distribution tags and Node.js runtime version support, see the [Compatibility Requirements][1] page.
+    Use this [migration guide][5] to assess any breaking changes if you upgraded your library from 0.x to 2.x.
 
 2. Import and initialize the tracer either in code or via command line arguments. The Node.js tracing library needs to be imported and initialized **before** any other module.
 
@@ -179,3 +180,4 @@ If needed, configure the tracing library to send application performance telemet
 [2]: https://app.datadoghq.com/apm/service-setup
 [3]: https://datadog.github.io/dd-trace-js/#tracer-settings
 [4]: /tracing/trace_collection/library_config/nodejs/
+[5]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
