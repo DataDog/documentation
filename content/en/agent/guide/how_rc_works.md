@@ -1,6 +1,8 @@
 ---
 title: How Remote Configuration Works
 kind: guide
+#is_beta:true
+#private:true
 further_reading:
 - link: "https://docs.datadoghq.com/security/application_security/how-appsec-works/#built-in-protection"
   tag: "Documentation"
@@ -46,7 +48,7 @@ The following products and features are supported with Remote Config:
 - **Protect**: This feature allows you to block attackers' IPs, authenticated users, and suspicious requests that are flagged in ASM Security Signals/Traces temporarily or permanently through the Datadog UI.
 
 #### Application Performance Management (APM) Dynamic Instrumentation:
-- **Ability to send critical metrics, traces, and logs from your live applications with no code changes**. 
+- **Dynamic Instrumentation**: This feature provides you the ability to send critical metrics, traces, and logs from your live applications with no code changes.
 
 {{< beta-callout url="https://www.datadoghq.com/dynamic-instrumentation-request/" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
   Dynamic Instrumentation is in private beta. Fill out this form if you would like to
