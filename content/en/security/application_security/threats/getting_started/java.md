@@ -27,6 +27,8 @@ You can monitor application security for Java apps running in Docker, Kubernetes
 
 {{% appsec-getstarted %}}
 
+{{% appsec-getstarted-with-rc %}}
+
 ## Get started
 
 1. **Update your [Datadog Java library][1]** to at least version 0.94.0:

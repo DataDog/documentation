@@ -26,6 +26,8 @@ You can monitor application security for .NET apps running in Docker, Kubernetes
 
 {{% appsec-getstarted %}}
 
+{{% appsec-getstarted-with-rc %}}
+
 ## Get started
 
 1. **Update your [Datadog .NET library][1]** to at least version 2.2.0, for your target operating system architecture.
