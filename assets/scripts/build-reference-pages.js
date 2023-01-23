@@ -673,10 +673,11 @@ const fieldColumn = (key, value, toggleMarkup, requiredMarkup, parentKey = '') =
  * @param {string} readOnlyMarkup - optional markup for when the field is read only
  * returns html column
  */
-const typeColumn = (key, value, readOnlyMarkup) => {
+const typeColumn = (key, value, readOnlyMarkup, level = 0) => {
   const validKeys = ['type', 'format'];
   let typeVal = '';
   let oneOfLabel = "";
+  let style = "";
   if(typeof value === 'object' && "oneOf" in value) {
     // oneof label if properties -> oneOf
     oneOfLabel = "&nbsp;&lt;oneOf&gt;";
@@ -693,11 +694,14 @@ const typeColumn = (key, value, readOnlyMarkup) => {
     } else {
       typeVal = (value.format || value.type || value.const || '');
     }
+  if(level > 1) {
+    style = 'word-break: break-all'
+  }
   if(value.type === 'array') {
-    return `<div class="col-1-5 column" style="word-break: break-all"><p>[${(value.items === '[Circular]') ? 'object' : (value.items.type || '')}${oneOfLabel}]${readOnlyMarkup}</p></div>`;
+    return `<div class="col-1-5 column" style="${style}"><p>[${(value.items === '[Circular]') ? 'object' : (value.items.type || '')}${oneOfLabel}]${readOnlyMarkup}</p></div>`;
   } else {
     // return `<div class="col-2"><p>${validKeys.includes(key) ? value : (value.enum ? 'enum' : (value.format || value.type || ''))}${readOnlyMarkup}</p></div>`;
-    return `<div class="col-1-5 column" style="word-break: break-all"><p>${typeVal}${oneOfLabel}${readOnlyMarkup}</p></div>`.trim().replace(",",",&ZeroWidthSpace;");
+    return `<div class="col-1-5 column" style="${style}"><p>${typeVal}${oneOfLabel}${readOnlyMarkup}</p></div>`.trim().replace(",",",&ZeroWidthSpace;");
   }
 };
 
@@ -955,7 +959,7 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
                 <div class="row ${nestedRowClasses}">
                   ${fieldColumn(key, value, toggleArrow, required, parentKey)}
                   ${requiredColumn(requiredFields.includes(key))}
-                  ${typeColumn(key, value, readOnlyField)}
+                  ${typeColumn(key, value, readOnlyField, level)}
                   ${descColumn(key, value, defaultMarkup)}
                 </div>
                 ${(childData) ? rowRecursive(tableType, childData, true, (newRequiredFields || []), (level + 1), newParentKey, skipAnyKeys, value.default || {}) : ''}

@@ -5,7 +5,7 @@ further_reading:
 - link: https://github.com/DataDog/dd-trace-go/tree/v1
   tag: GitHub
   text: ソースコード
-- link: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
+- link: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
   tag: GoDoc
   text: パッケージページ
 - link: /tracing/glossary/
@@ -130,7 +130,7 @@ Datadog APM トレーサーは、分散型トレーシングの [B3 ヘッダー
 
 [1]: https://github.com/openzipkin/b3-propagation
 [2]: /ja/getting_started/tagging/unified_service_tagging
-[3]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartOption
+[3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartOption
 [4]: /ja/tracing/trace_pipeline/ingestion_mechanisms/?tab=go#pagetitle
 [5]: /ja/tracing/advanced/setting_primary_tags_to_scope/#environment
 [6]: /ja/getting_started/tracing/#environment-name

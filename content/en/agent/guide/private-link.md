@@ -14,6 +14,18 @@ further_reading:
 <div class="alert alert-warning">Datadog PrivateLink does not support the Datadog for Government site.</div>
 {{< /site-region >}}
 
+{{< site-region region="us3" >}}
+<div class="alert alert-warning">Datadog PrivateLink does not support the Datadog US3 site.</div>
+{{< /site-region >}}
+
+{{< site-region region="us5" >}}
+<div class="alert alert-warning">Datadog PrivateLink does not support the Datadog US5 site.</div>
+{{< /site-region >}}
+
+{{< site-region region="eu" >}}
+<div class="alert alert-warning">Datadog PrivateLink does not support the Datadog EU site.</div>
+{{< /site-region >}}
+
 This guide walks you through how to configure [AWS PrivateLink][1] for use with Datadog.
 
 ## Overview

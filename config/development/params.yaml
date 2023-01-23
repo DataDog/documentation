@@ -11,5 +11,3 @@ header_scripts:
   - marketo: false
 
 footer_scripts:
-  - snowplow: false
-
