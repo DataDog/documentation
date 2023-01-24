@@ -29,17 +29,17 @@ In the **Properties** section, you can see the test ID, test creation and edit d
 : This section describes the test URL, the number of locations, the number of devices, the test interval, and the number of test steps, including custom steps.
 
 **Monitor**
-: This section contains the name of the [Synthetic test's monitor][13] and the notification message.
+: This section contains the name of the [Synthetic test's monitor][13] and the configured notification message.
 
 **CI/CD Execution**
-: This section contains a dropdown menu to change the [execution rule][12] for this test running in a CI/CD pipeline.
+: This section contains a dropdown menu to change the [execution rule][12] for this test running as part of a [Continuous Testing CI pipeline][19].
 
 ## Test history
 
 In the **History** section, you can see three graphs:
 
-- The **Global Uptime** graph displays the total uptime of all test locations in a given time interval. 
-- The **Time-to-interactive by location and device** graph displays the amount of time in seconds the [last Long Task][15] takes to complete in a given time interval. For more information about uptime monitoring, see the [Website Uptime Monitoring with SLOs][14] guide.
+- The **Global Uptime** graph displays the total uptime of all test locations in a given time interval. The global uptime takes into consideration the [alert conditions][20] configured for a test.
+- The **Time-to-interactive by location and device** graph displays the amount of time until a page could be interacted with in seconds. For more information about uptime monitoring, see the [Website Uptime Monitoring with SLOs][14] guide.
 - The **Test duration by location and device** graph displays the amount of time in minutes each location and device takes to complete in a given time interval. 
 
 {{< img src="synthetics/browser_tests/history.png" alt="The History and Sample Runs section in the Test Details page" style="width=80%" >}}
@@ -48,7 +48,7 @@ In the **History** section, you can see three graphs:
 
 Browser test runs include components such as [screenshots](#screenshots), [page performance data](#page-performance), [errors](#errors), [resources](#resources), and [backend traces](#backend-traces) to help troubleshoot your [test failure](#failed-test-runs).
 
-In the **Sample Runs** section, you can examine the latest failed sample runs and compare them to recent successful sample runs.
+In the **Sample Runs** section, you can examine the latest failed test runs and compare them to recent successful test runs.
 
 ### Overview attributes
 
@@ -81,11 +81,11 @@ Run type
 
 ### RUM sessions
 
-To view related sessions and available replays in the RUM Explorer, click **View Session in RUM**. To access a user session for a particular action or step in Session Replay, click **Replay Session**. For more information, see [Test Coverage][16].
+To view related sessions and available replays in the RUM Explorer, click **View Session in RUM**. To access a user session for a particular action or step in Session Replay, click **Replay Session**. For more information, see [Explore RUM & Session Replay in Synthetics][16].
 
 ### Screenshots and actions
 
-Every executed test step contains a screenshot of the test action, a link to the session in Session Replay, the test action description, the starting URL, the step ID, the step duration, and page performance information.
+Every executed test step contains a screenshot of the step action, a link to the session in Session Replay, the step description, the starting URL for a given step, the step ID, the step duration, and page performance information.
 
 ### Page performance
 
@@ -95,7 +95,7 @@ Synthetic Monitoring displays two [Core Web Vital metrics][6] ([Largest Contentf
 
 Click the **Errors** pill to access the **Errors & Warnings** tab and examine a list of errors separated by error type (`js` or `network`) and status (the network status code).
 
-The error type is logged when the browser test interacts with the page. It corresponds to the errors collected between the time the page is opened and [NEEDS REPHRASING: the time interaction with that page is realized]. The maximum number of errors that can be displayed is 8, for example: 2 `network` + 6 `js` errors.
+The error type is logged when the browser test interacts with the page. It corresponds to the errors collected between the time the page is opened and the time the page can be interacted with. The maximum number of errors that can be displayed is 8, for example: 2 `network` + 6 `js` errors.
 
 ### Resources
 
@@ -137,13 +137,15 @@ Size
 
 Click the **Traces** pill to access the **Traces** tab and explore APM traces associated with the browser test. While the UI is similar to the [Trace View][7] in the Trace Explorer, one browser test step can make multiple requests to different URLs or endpoints. This results in several associated traces, depending on your tracing setup and on the URLs you allowed in for browser tests in the [Synthetic Monitoring Settings page][8]. 
 
+For more information about cross-product correlation, see the [Ease Troubleshooting With Cross-Product Correlation][21] guide.
+
 ### Step duration
 
 The step duration represents the amount of time the step takes to execute with the [Datadog locator system][9]. Not only does the step duration include the action (such as user interactions), but also it incorporates the wait and retry mechanism, which allows browser tests to ensure an element is able to be interacted with. For more information, see [Advanced Options for Browser Test Steps][9].
 
 ## Failed runs
 
-A test result is considered `FAILED` if it does not satisfy its assertions or if a step failed for another reason. You can troubleshoot failed runs by looking at their screenshots, checking for potential [errors](#errors) at the step level, and looking into [resources][17] with [backend traces](#backend-traces) generated by their steps.
+A test result is considered `FAILED` if it does not satisfy its assertions or if a step failed for another reason. You can troubleshoot failed runs by looking at their screenshots, checking for potential [errors](#errors) at the step level, and looking into [resources][17] and [backend traces](#backend-traces) generated by their steps.
 
 Common browser test errors include:
 
@@ -188,3 +190,6 @@ Alerts from your Synthetic test monitors appear in the **Events** tab under **Te
 [16]: /synthetics/guide/explore-rum-through-synthetics/
 [17]: /tracing/services/resource_page/
 [18]: https://app.datadoghq.com/event/explorer
+[19]: /continuous_testing/cicd_integrations
+[20]: /synthetics/browser_tests/?tab=requestoptions#define-alert-conditions
+[21]: /logs/guide/ease-troubleshooting-with-cross-product-correlation/#leverage-trace-correlation-to-troubleshoot-synthetic-tests

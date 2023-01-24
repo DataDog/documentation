@@ -174,7 +174,7 @@ Define which endpoints you want to send the APM headers to by entering a URL in 
 
 Use `*` to allow wider domain names. For example, adding `https://*.datadoghq.com/*` allows everything on `https://datadoghq.com/`. When you are done adding URLs, click **Save APM Integration Settings**. 
 
-For more information, see [Connect Synthetics and Traces][15].
+For more information, see [Connect Synthetics and APM Traces][15].
 
 ### Synthetic data collection and RUM applications
 
