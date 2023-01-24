@@ -164,22 +164,22 @@ Once profiling is enabled, the following profile types are collected for [suppor
 Wall Time
 : The elapsed time spent in managed methods. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the method is running.
 
-CPU (since 2.15)
+CPU (v2.15+)
 : The time each method spent running on the CPU.
 
-Thrown Exceptions (beta since 2.10)
+Thrown Exceptions (beta, v2.10+)
 : The number of caught or uncaught exceptions raised by each method, as well as their type and message.
 
-Allocations (beta since 2.18)
-: The number and size of allocated objects by each method, as well as their type.
+Allocations (beta, v2.18+)
+: The number and size of allocated objects by each method, as well as their type.<br />
 _Requires: .NET 6+_
 
-Lock (beta since 2.18)
-: The number of times threads are waiting for a lock and for how long.
+Lock (beta, v2.18+)
+: The number of times threads are waiting for a lock and for how long.<br />
 _Requires: .NET 5+_
 
-Live Heap (beta since 2.22)
-: A subset of the allocated objects (with their class name) that are still in memory and for how long.
+Live Heap (beta, v2.22+)
+: A subset of the allocated objects (with their class name) that are still in memory and for how long.<br />
 _Requires: .NET 7+_
 
 [1]: /profiler/enabling/dotnet/#requirements
