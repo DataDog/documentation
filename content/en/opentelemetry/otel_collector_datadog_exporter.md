@@ -71,10 +71,8 @@ receivers:
 
 processors:
   batch:
-    # Datadog APM Intake limit is 3.2MB. Let's make sure the batches do not
-    # go over that.
-    send_batch_max_size: 1000
-    send_batch_size: 100
+    send_batch_max_size: 100
+    send_batch_size: 10
     timeout: 10s
 
 exporters:
@@ -97,7 +95,10 @@ service:
 
 Where `<DD_SITE>` is your site, {{< region-param key="dd_site" code="true" >}}.
 
-The above configuration enables the receiving of OTLP data from OpenTelemetry instrumentation libraries over HTTP and gRPC, and sets up a [batch processor][5], which is mandatory for any non-development environment.
+The above configuration enables the receiving of OTLP data from OpenTelemetry instrumentation libraries over HTTP and gRPC, and sets up a [batch processor][5], which is mandatory for any non-development environment. Note that you may get 413 - Request Entity Too Large errors if you batch too much telemetry data in the batch processor. The exact config of batch processor depends on your specific workload as well as the signal types - Datadog intake has different payload size limits for the 3 signal types:
+- Trace intake: 3.2MB
+- Log intake: https://docs.datadoghq.com/api/latest/logs/
+- Metrics V2 intake: https://docs.datadoghq.com/api/latest/metrics/#submit-metrics
 
 #### Advanced configuration
 
@@ -419,10 +420,8 @@ To use the OpenTelemetry Operator:
        processors:
          k8sattributes:
          batch:
-           # Datadog APM Intake limit is 3.2MB. Let's make sure the batches do not
-           # go over that.
-           send_batch_max_size: 1000
-           send_batch_size: 100
+           send_batch_max_size: 100
+           send_batch_size: 10
            timeout: 10s
        exporters:
          datadog:
