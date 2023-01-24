@@ -78,7 +78,7 @@ and can be modified in the VCS Root settings.
 <div class="alert alert-danger"><strong>Note:</strong> The Git author email is used for
 <a href="https://www.datadoghq.com/pricing/?product=ci-visibility#ci-visibility" target="_blank">billing</a> purposes,
 therefore there might be cost implications when username styles not providing email
-(<strong>UserId</strong> or <strong>Author Name</strong>) are used. Reach out to us if you have any questions about your use case.
+(<strong>UserId</strong> or <strong>Author Name</strong>) are used. <a href="https://docs.datadoghq.com/help/" target="_blank">Reach out to the Datadog support team</a> if you have any questions about your use case.
 </div>
 
 ## Plugin repository
