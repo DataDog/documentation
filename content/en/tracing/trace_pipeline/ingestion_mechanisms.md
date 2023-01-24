@@ -231,9 +231,19 @@ With Agent version 7.33 and forward, you can configure the error sampler in the 
 @env DD_APM_ERROR_TPS - integer - optional - default: 10
 ```
 
-**Note**: Set the parameter to `0` to disable the error sampler.
+**Notes**: 
+1. Set the parameter to `0` to disable the error sampler.
+2. The error sampler captures local traces with error spans at the Agent level. If the trace is distributed, there is no way to guarantee that the complete trace will be sent to Datadog.
+3. By default, spans dropped by tracing library rules or custom logic such as `manual.keep` are **excluded** under the `error` sampler.
 
-**Note**: The error sampler captures local traces with error spans at the Agent level. If the trace is distributed, there is no way to guarantee that the complete trace will be sent to Datadog.
+#### Datadog Agent 6/7.41.0 and higher
+
+To override the default behavior so that spans dropped by the tracing library rules or custom logic such as `manual.keep` are **included** by the error sampler, enable the feature with: `DD_APM_FEATURES=error_rare_sample_tracer_drop` in the Trace Agent.
+
+
+#### Datadog Agent 6/7.33 to 6/7.40.x
+
+No further customization exist. To customize the default behavior, upgrade the Datadog Agent to Datadog Agent 6/7.41.0 and higher.
 
 
 ### Rare traces
