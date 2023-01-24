@@ -71,7 +71,7 @@ The plugin retrieves the Git author name and email based on the [TeamCity userna
 Datadog recommends using either **Author Name and Email** or **Author Email** username styles, as they
 provide information about the user email. When one of the other username styles is used (**UserId** or **Author Name**),
 the plugin automatically generates an email for the user by appending `@Teamcity` to the username.
-For example, if the **UserId** username style is used and the git author username is `john.doe`,
+For example, if the **UserId** username style is used and the Git author username is `john.doe`,
 the plugin generates `john.doe@Teamcity` as the Git author email. The username style is defined for [VCS Roots][11],
 and can be modified in the VCS Root settings.
 
