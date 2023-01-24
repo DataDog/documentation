@@ -54,6 +54,12 @@ The following profiling features are available in the following minimum versions
 
 |      Feature         | Required `dd-trace-dotnet` version          |
 |----------------------|-----------------------------------------|
+| Wall time profiling        |                        |
+| CPU profiling        | 2.15.0+                       |
+| Exceptions profiling        | beta since 2.10.0+                       |
+| Allocations profiling        | beta since 2.18.0+                       |
+| Lock Contention profiling        | beta since 2.18.0+                       |
+| Live heap profiling        | beta since 2.22.0+                       |
 | [Code Hotspots][12]        | 2.7.0+                       |
 | [Endpoint Profiling][13]            | 2.15.0+                       |
 
