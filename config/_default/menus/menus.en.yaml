@@ -1054,6 +1054,11 @@ main:
     pre: notebook
     parent: platform_heading
     weight: 120000
+  - name: Guides
+    url: notebooks/guide
+    parent: notebooks
+    identifier: notebooks_guide
+    weight: 1
   - name: Alerting
     url: monitors/
     pre: monitor
