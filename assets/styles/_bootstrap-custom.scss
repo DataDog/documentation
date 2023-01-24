@@ -34,6 +34,8 @@ $theme-colors: (
     'white': #fff
 );
 
+$theme-colors: map-merge($theme-colors, $color-var);
+
 $spacer: 1rem !default;
 
 $spacers: (
