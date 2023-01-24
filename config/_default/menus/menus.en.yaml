@@ -3117,7 +3117,7 @@ main:
     parent: rum_flutter
     identifier: rum_flutter_mobile_vitals
     weight: 504
-  - name: Open Telemetry Support
+  - name: OpenTelemetry Support
     url: real_user_monitoring/flutter/otel_support/
     parent: rum_flutter
     identifier: rum_flutter_otel_support
