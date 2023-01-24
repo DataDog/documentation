@@ -3117,11 +3117,16 @@ main:
     parent: rum_flutter
     identifier: rum_flutter_mobile_vitals
     weight: 504
+  - name: Open Telemetry Support
+    url: real_user_monitoring/flutter/otel_support/
+    parent: rum_flutter
+    identifier: rum_flutter_otel_support
+    weight: 505
   - name: Troubleshooting
     url: real_user_monitoring/flutter/troubleshooting/
     parent: rum_flutter
     identifier: rum_flutter_troubleshooting
-    weight: 505
+    weight: 506
   - name: Session Replay
     url: real_user_monitoring/session_replay/
     parent: rum
