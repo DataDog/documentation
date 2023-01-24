@@ -35,19 +35,20 @@ The facets panel on the left lists several facets you can use to search through 
 
 ### Timings attributes
 
-**Timings** facets allow you to filter on timing related attributes.
+**Timings** facets allow you to filter on timing-related attributes for API test runs.
 
 | Facet          | Description                                 |
 |----------------|---------------------------------------------|
-| `DNS`  | The CI provider associated with the batch.  |
-| `Download`     | The job name associated with the batch.     |
-| `First Byte`      | The job URL associated with the batch.      |
-| `Open`  | The pipeline ID associated with the batch.  |
-| `Received` | The pipeline or repository name associated with the batch. |
-| `TCP` | The pipeline or build number associated with the batch. |
-| `Total` | The pipeline URL associated with the batch. |
+| `DNS`  | The time spent resolving the DNS name for an API test run.  |
+| `Download`     | The time spent downloading the response for an API test run.     |
+| `First Byte`      | The time spent waiting for the first byte of the response to be received for an API test run.      |
+| `Open`  | The overall time a websocket remained open for a WebSocket test run.  |
+| `Received` | The overall time a websocket connection spent receiving data for a WebSocket test run. |
+| `TCP` | The time spent establishing a TCP connection for an API test run. |
+| `Total` | The total response time for an API test run. |
 
 ### HTTP attributes
+
 **HTTP** facets allow you to filter on HTTP attributes.
 
 | Facet          | Description                                 |

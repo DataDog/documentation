@@ -50,11 +50,11 @@ For more information, see [Search Syntax][5].
 
 The Explorer displays all of your test runs from [Synthetic Monitoring][7] and [Continuous Testing][8]. Every test corresponds to a test run for a particular test subtype, including fast retries. Click on a test in the Explorer to access the test run page.
 
+{{< img src="continuous_testing/api_test_run.png" alt="API test run details page" style="width:100%;">}}
+
 1. Click on a test run to navigate to the test results or details page. 
 2. Analyze your test run performance, or API and multistep API test performance.
 3. Create a visualization such as a timeseries graph, top list, or table.
-
-{{< img src="continuous_testing/api_test_run.png" alt="API test run details page" style="width:100%;">}}
 
 For more information about test runs, see [Search Test Runs][6].
 
@@ -62,11 +62,11 @@ For more information about test runs, see [Search Test Runs][6].
 
 The Explorer displays batches of tests run by [Continuous Testing and your CI/CD provider][2]. Every batch corresponds with a call to the Datadog API (through one of your [CI/CD integrations][2], the [datadog-ci][3] NPM package, or directly through the API endpoint) and triggers one or several test executions. 
 
+{{< img src="continuous_testing/open_sidepanel.png" alt="Side panel in the CI Results Explorer" style="width:100%;">}}
+
 1. Click on a batch to open a side panel containing batch CI/CD metadata and batch test results. 
 2. Explore the test executions performed as part of the batch and pinpoint test failures. 
 3. Click on a failing test result to see the detailed **Test Result** page and investigate the root cause of the issue.
-
-{{< img src="continuous_testing/open_sidepanel.png" alt="Side panel in the CI Results Explorer" style="width:100%;">}}
 
 For more information about test batches, see [Search Test Batches][4].
 
