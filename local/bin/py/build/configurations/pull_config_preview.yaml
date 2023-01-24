@@ -1067,7 +1067,7 @@
               tag: "Documentation"
               text: "Learn how to explore your RUM data"
     - action: pull-and-push-file
-      branch: jward/otel-docs
+      branch: main
       globs:
       - 'packages/datadog_flutter_plugin/doc/rum/otel_support.md'
       options:
