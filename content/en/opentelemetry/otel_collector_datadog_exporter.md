@@ -95,7 +95,9 @@ service:
 
 Where `<DD_SITE>` is your site, {{< region-param key="dd_site" code="true" >}}.
 
-The above configuration enables the receiving of OTLP data from OpenTelemetry instrumentation libraries over HTTP and gRPC, and sets up a [batch processor][5], which is mandatory for any non-development environment. Note that you may get 413 - Request Entity Too Large errors if you batch too much telemetry data in the batch processor. The exact config of batch processor depends on your specific workload as well as the signal types - Datadog intake has different payload size limits for the 3 signal types:
+The above configuration enables the receiving of OTLP data from OpenTelemetry instrumentation libraries over HTTP and gRPC, and sets up a [batch processor][5], which is mandatory for any non-development environment. Note that you may get `413 - Request Entity Too Large` errors if you batch too much telemetry data in the batch processor.
+
+The exact configuration of the batch processor depends on your specific workload as well as the signal types. Datadog intake has different payload size limits for the 3 signal types:
 - Trace intake: 3.2MB
 - Log intake: https://docs.datadoghq.com/api/latest/logs/
 - Metrics V2 intake: https://docs.datadoghq.com/api/latest/metrics/#submit-metrics
