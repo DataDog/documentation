@@ -61,6 +61,48 @@ The side panel lists detection rules that were evaluated against the resource, s
 
 {{< img src="security/cspm/findings/passed-rules.png" alt="Group and aggregate by resource in search" style="width:100%;">}}
 
+## Mute findings for selected resources
+
+For example, you might have a Fail finding on a resource...
+
+
+
+1. On the finding side panel, select a resource.
+2. Click **Mute**.
+3. Select a reason for muting the finding:
+    - Pending fix
+    - False positive
+    - Accepted risk
+    - Other
+4. Enter an optional **Description**.
+5. Select the duration for which the finding is muted:
+    - 2 weeks
+    - 1 month
+    - 3 months
+    - Indefinite
+    - Custom
+6. Click **Mute**.
+
+### Unmute a finding
+
+1. On the finding side panel, select the resource with the muted finding.
+2. Click **Unmute**.
+3. Select a reason for the unmute:
+    - No Pending Fix
+    - Human Error
+    - No Longer Accepted Risk
+    - Other
+4. Enter an optional **Description**.
+5. Click **Unmute**.
+
+### Audit your muted findings
+
+CSPM provides several options for viewing an auditing muted findings:
+
+- Sort by the **Muted** column on the Security Findings Explorer.
+- Filter the page using the Muted facet.
+- View finding > Timeline
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
