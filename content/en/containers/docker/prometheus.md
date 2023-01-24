@@ -90,6 +90,14 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='["{\"openmetrics_endpoint\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<NAMESPACE>\",\"metrics\":[{\"<METRIC_TO_FETCH>\": \"<NEW_METRIC_NAME>\"}]}"]'
 ```
 
+**Multiple endpoints example**:
+
+```conf
+LABEL "com.datadoghq.ad.check_names"='["openmetrics","openmetrics"]'
+LABEL "com.datadoghq.ad.init_configs"='[{},{}]'
+LABEL "com.datadoghq.ad.instances"='["{\"openmetrics_endpoint\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<NAMESPACE>\",\"metrics\":[{\"<METRIC_TO_FETCH>\": \"<NEW_METRIC_NAME>\"}]}", "{\"openmetrics_endpoint\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<NAMESPACE>\",\"metrics\":[{\"<METRIC_TO_FETCH>\": \"<NEW_METRIC_NAME>\"}]}"]'
+```
+
 {{% /tab %}}
 {{% tab "docker-compose.yaml" %}}
 
@@ -109,11 +117,42 @@ labels:
     ]
 ```
 
+**Multiple endpoints example**:
+
+```yaml
+labels:
+  com.datadoghq.ad.check_names: '["openmetrics", "openmetrics"]'
+  com.datadoghq.ad.init_configs: '[{},{}]'
+  com.datadoghq.ad.instances: |
+    [
+      {
+        "openmetrics_endpoint": "http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT>",
+        "namespace": "<NAMESPACE>",
+        "metrics": [
+          {"<METRIC_TO_FETCH>": "<NEW_METRIC_NAME>"}
+        ]
+      },
+      {
+        "openmetrics_endpoint": "http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT>",
+        "namespace": "<NAMESPACE>",
+        "metrics": [
+          {"<METRIC_TO_FETCH>": "<NEW_METRIC_NAME>"}
+        ]
+      }
+    ]
+```
+
 {{% /tab %}}
 {{% tab "Docker run command" %}}
 
 ```shell
 -l com.datadoghq.ad.check_names='["openmetrics"]' -l com.datadoghq.ad.init_configs='[{}]' -l com.datadoghq.ad.instances='["{\"openmetrics_endpoint\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<NAMESPACE>\",\"metrics\":[{\"<METRIC_TO_FETCH>\": \"<NEW_METRIC_NAME>\"}]}"]'
+```
+
+**Multiple endpoints example**:
+
+```shell
+-l com.datadoghq.ad.check_names='["openmetrics", "openmetrics"]' -l com.datadoghq.ad.init_configs='[{},{}]' -l com.datadoghq.ad.instances='["{\"openmetrics_endpoint\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<NAMESPACE>\",\"metrics\":[{\"<METRIC_TO_FETCH>\": \"<NEW_METRIC_NAME>\"}]}", "{\"openmetrics_endpoint\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<NAMESPACE>\",\"metrics\":[{\"<METRIC_TO_FETCH>\": \"<NEW_METRIC_NAME>\"}]}"]'
 ```
 
 {{% /tab %}}
