@@ -1067,7 +1067,7 @@
               tag: "Documentation"
               text: "Learn how to explore your RUM data"
     - action: pull-and-push-file
-      branch: main
+      branch: develop
       globs:
       - 'packages/datadog_flutter_plugin/doc/rum/otel_support.md'
       options:
@@ -1077,7 +1077,7 @@
           title: OpenTelemetry Support
           kind: documentation
           description: "Learn about using OpenTelemetry with RUM Flutter."
-          dependencies: ["https://github.com/DataDog/dd-sdk-flutter/blob/main/packages/datadog_flutter_plugin/doc/rum/otel_support.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-flutter/blob/develop/packages/datadog_flutter_plugin/doc/rum/otel_support.md"]
           further_reading:
             - link: "https://www.datadoghq.com/blog/monitor-flutter-application-performance-with-mobile-rum/"
               tag: "Blog"
