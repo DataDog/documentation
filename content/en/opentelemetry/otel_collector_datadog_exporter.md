@@ -99,8 +99,8 @@ The above configuration enables the receiving of OTLP data from OpenTelemetry in
 
 The exact configuration of the batch processor depends on your specific workload as well as the signal types. Datadog intake has different payload size limits for the 3 signal types:
 - Trace intake: 3.2MB
-- Log intake: https://docs.datadoghq.com/api/latest/logs/
-- Metrics V2 intake: https://docs.datadoghq.com/api/latest/metrics/#submit-metrics
+- Log intake: [5MB uncompressed][15]
+- Metrics V2 intake: [500KB or 5MB after decompression][16]
 
 #### Advanced configuration
 
@@ -546,3 +546,5 @@ The OpenTelemetry Collector has [two primary deployment methods][14]: Agent and 
 [8]: /getting_started/tagging/unified_service_tagging/
 [9]: https://opentelemetry.io/docs/reference/specification/resource/sdk/#sdk-provided-resource-attributes
 [14]: https://opentelemetry.io/docs/collector/deployment/
+[15]: https://docs.datadoghq.com/api/latest/logs/
+[16]: https://docs.datadoghq.com/api/latest/metrics/#submit-metrics
