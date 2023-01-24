@@ -422,7 +422,7 @@ public class DogStatsdClient
 
 Ingesting Late Metrics will include some ingestion latencies, which depends on the delay associated with the metric timestamp.
 
-| Metrics Outdated by: | Ingestion Latency                     |
+| Metric Delayed by:   | Ingestion Latency                     |
 |----------------------|---------------------------------------|
 | 1-12 hours           | Near Real-Time Ingestion (1 hour MAX) |
 | 12 hours - 30 days   | Up to 14 hour latency                 |
