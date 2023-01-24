@@ -15,6 +15,7 @@ $card-border-color: rgba(0, 0, 0, 0.125);
 // TODO: Explore customization options that might allow us to customize root
 @import '../../node_modules/bootstrap/scss/mixins';
 @import '../../node_modules/bootstrap/scss/root';
+@import '../styles/base/colors';
 
 /* Bootstrap variable customization here */
 $ddpurple: #632ca6;
