@@ -56,14 +56,17 @@ The following products and features are supported with Remote Config:
 - **In-App Web Application Firewall (WAF) automated attack patterns updates**: this feature allows your service to receive the newest attack patterns as Datadog releases them, following new vulnerabilities or attack vectors being disclosed.
 - **Protect**: This feature allows you to block attackers' IPs, authenticated users, and suspicious requests that are flagged in ASM Security Signals/Traces temporarily or permanently through the Datadog UI.
 
+#### Application Performance Monitoring (APM):  
+<div class="alert alert-info">This feature is in beta.</div>
+
+- **Remotely set agent sampling rate**<br>
+See [Manage Ingestion](https://docs.datadoghq.com/tracing/trace_pipeline/ingestion_controls/#managing-ingestion-for-all-services-at-the-agent-level) for more information
+
 #### Application Performance Monitoring (APM) Dynamic Instrumentation:
-- **Dynamic Instrumentation**: This feature provides you the ability to send critical metrics, traces, and logs from your live applications with no code changes.
-<div class="alert alert-info">This feature is only available in private beta.</div> 
+<div class="alert alert-info">This feature is only available in private beta.</div>
+
+- **Dynamic Instrumentation**: This feature provides you the ability to send critical metrics, traces, and logs from your live applications with no code changes.<br>
 See How to Enable [Dyamic Instrumentation](https://docs.datadoghq.com/dynamic_instrumentation/?tab=configurationyaml) for more information.
-
-### Application Performance Monitoring (APM):  Private Beta (not available until 7.42.0)
-
-- **Remotely set agent sampling rate** See [Manage Ingestion][https://docs.datadoghq.com/tracing/trace_pipeline/ingestion_controls/#managing-ingestion-for-all-services-at-the-agent-level] for more information
 
 #### Cloud Workload Security (CWS):
 <div class="alert alert-info">This feature is only available in private beta.</div>
@@ -74,12 +77,12 @@ See How to Enable [Dyamic Instrumentation](https://docs.datadoghq.com/dynamic_in
  
 To ensure confidentiality, integrity, and availability of configurations received and applied by your Agents and tracing libraries, Datadog has implemented the following safeguards:
 
-* Agents deployed in your infrastructure request configurations from Datadog 
+* Agents deployed in your infrastructure request configurations from Datadog.
 * Datadog never sends configurations unless requested by Agents, and only sends configurations relevant to the requesting Agent.
 * Since these requests are initiated from your Agents to Datadog , there is no need to open additional ports in your network firewall.
 * The communication between your Agents and Datadog is encrypted using HTTPS, and is authenticated and authorized using your Datadog API key. 
 * Only users with the right RBAC permissions can add Remote Configuration scope on the API key and use the supported product features. 
-* Your configuration changes submitted via the Datadog UI are signed and validated on the Agent and tracing libraries, guaranteeing end-to-end integrity of the configuration.
+* Your configuration changes submitted via the Datadog UI are signed and validated on the Agent and tracing libraries, which verifies the integrity of the configuration from its receipt to delivery.
 
 ## Enabling Remote Configuration
 
@@ -87,13 +90,13 @@ To ensure confidentiality, integrity, and availability of configurations receive
 
 To use Remote Configuration, you need to meet the following prerequisites:
 
-1. Datadog Agent version 7.41.1 or higher must be installed on your hosts or containers. 
+1. Datadog Agent version `7.41.1` or higher must be installed on your hosts or containers. 
 2. For features that use tracing libraries (APM, ASM), use the following minimum versions of Datadog tracing libraries:
 
 
 | Product feature                        | Go            | Java          | Python        | .Net          | NodeJS        |
 |----------------------------------------|---------------|---------------|---------------|---------------|---------------|
-| APM (Feature: Dynamic Instrumentation) |               | 1.5.0         | x.y.z         | 2.22.0        |               |
+| APM (feature: Dynamic Instrumentation) |               | 1.5.0         | x.y.z         | 2.22.0        |               |
 | ASM feature: Protection                | 1.45.1        | 1.4.0         |               | 2.16.0        | 3.11.0        |
 | ASM feature: 1-click activation        |               | 1.4.0         |               | 2.17.0        | 3.9.0         |
 | APM Sampling rate                      |               |               |               |               |               |
@@ -101,30 +104,34 @@ To use Remote Configuration, you need to meet the following prerequisites:
 #### Setup:
 Once you've ensured that you meet the prerequisites, you can proceed with enabling Remote Configuration using the following steps: 
 
-1. Ensure your RBAC permissions include [api_keys_write](https://docs.datadoghq.com/account_management/api-app-keys/) so you can add Remote Configuration scope on an existing API key or create a new API key. Contact your organization's Datadog administrator and update your permissions if you don't have it.
+1. Ensure your RBAC permissions include [api_keys_write](https://docs.datadoghq.com/account_management/api-app-keys/) so you can add Remote Configuration scope on an existing API key, or create a new API key. Contact your organization's Datadog administrator and update your permissions if you don't have it.
 
-2. In your [Organization Settings](https://app.datadoghq.com/organization-settings/api-keys) page, either click on your existing API key, or click to Create a new API key.
+2. To authenticate and authorize your Agent to use Remote Configuration, you need to add Remote Configuration scope on your Datadog API key. You can add Remote Configuration scope on either your existing API key or you may choose to create a new API key. 
 
-3. After creating a new API key, or clicking to edit your existing API key, you will see a screen to enable Remote Configuration:
+3. In your [Organization Settings](https://app.datadoghq.com/organization-settings/api-keys) page, either click on your existing API key, or click to Create a new API key.
+
+4. After creating a new API key, or clicking to edit your existing API key, you will see a screen to enable Remote Configuration:
 
 {{<img src="agent/guide/RC_Key_updated.png" alt="RC Key Updated" width="90%" style="center">}}
 
-4. Update your agent configuration file:
+5. Update your agent configuration file:
 
 {{< tabs >}}
 {{% tab "Configuration yaml" %}}
-Add the following to your configuration yaml:
-Ensure your Agent configuration is using the api_key that has Remote Config scope enabled. 
+Add the following to your configuration yaml.
+Ensure your Agent configuration is using the `api_key` that has Remote Config scope enabled. 
 ```yaml
 api_key: xxx
 remote_configuration:
   enabled: true
   ```
 
+6. After updating your Agent configuration file, restart your Datadog Agent for the changes to take effect. 
+
 {{% /tab %}}
 {{% tab "Environment variable" %}}
-Add the following to your Datadog Agent manifest:
-Ensure your Agent configuration is using the api_key that has Remote Config scope enabled. 
+Add the following to your Datadog Agent manifest.
+Ensure your Agent configuration is using the `api_key` that has Remote Config scope enabled. 
 ```yaml
 DD_API_KEY=xxx
 DD_REMOTE_CONFIGURATION_ENABLED=true
@@ -132,8 +139,7 @@ DD_REMOTE_CONFIGURATION_ENABLED=true
 {{% /tab %}}
 {{< /tabs >}}
 
-After completing the steps listed above, your Agent is ready to receive remotely issued configurations. To use the features outlined above, follow the [ASM](https://docs.datadoghq.com/security/application_security/how-appsec-works/#built-in-protection) and [APM](https://docs.datadoghq.com/dynamic_instrumentation/?tab=configurationyaml#enable-remote-configuration) specific instructions.
-
+After completing the steps listed above, your Agent is ready to receive remotely issued configurations, and the [CWS default agent](https://docs.datadoghq.com/security/default_rules/#cat-workload-security) rules will begin updating automatically as released.  To use the features outlined above for ASM and APM, follow the [ASM](https://docs.datadoghq.com/security/application_security/how-appsec-works/#built-in-protection) and [APM](https://docs.datadoghq.com/dynamic_instrumentation/?tab=configurationyaml#enable-remote-configuration) specific instructions.
 
 
 ## Further Reading
