@@ -15,7 +15,7 @@ further_reading:
   text: "Official and Community created API and DogStatsD client libraries"
 ---
 
-<div class="alert alert-info">Early BETA Access</div>
+<div class="alert alert-info">BETA ACCESS</div>
 
 ## Overview
 
