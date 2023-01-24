@@ -48,9 +48,9 @@ Late metrics can be submitted to Datadog via our API or the Agent.
 
 **If you plan to submit late metrics through the API**, you can include metric points with old timestamps in the payload, as long as the metric name for the point has been configured to accept Late Metrics via the user interface.
 
-{{< programming-lang-wrapper langs="python,java,go,ruby,typescript,curl" >}}
+{{< programming-lang-wrapper langs="python,java,go,ruby,typescript,curl" collapsible="true">}}
 
-{{< programming-lang lang="python" >}}
+{{< programming-lang lang="python">}}
 ```python
 """
 Submit metrics returns "Payload accepted" response
