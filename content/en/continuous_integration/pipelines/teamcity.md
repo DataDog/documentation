@@ -40,9 +40,9 @@ in which `Aggregating Results` is the last composite build:
 The final composite build must be properly configured in terms of version control settings, with
 the VCS Root attached and the [VCS Trigger][13] configured.
 3. The following configuration parameters need to be present for TeamCity projects:
-   * `datadog.ci.api.key`: Your [Datadog API Key][2].
-   * `datadog.ci.site`: {{< region-param key="dd_site" code="true" >}}.
-   * `datadog.ci.enabled`: `true` (`false`
+   * **datadog.ci.api.key**: Your [Datadog API Key][2].
+   * **datadog.ci.site**: {{< region-param key="dd_site" code="true" >}}.
+   * **datadog.ci.enabled**: `true` (`false`
    can be used to disable the plugin for a specific project).
 
    These configuration parameters can be added either to TeamCity subprojects
