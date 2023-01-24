@@ -1069,9 +1069,9 @@
         dest_path: '/real_user_monitoring/flutter/'
         file_name: 'otel_support.md'
         front_matters:
-          title: Open Telemetry Support
+          title: OpenTelemetry Support
           kind: documentation
-          description: "Learn about using Open Telemetry with RUM Flutter."
+          description: "Learn about using OpenTelemetry with RUM Flutter."
           dependencies: ["https://github.com/DataDog/dd-sdk-flutter/blob/main/packages/datadog_flutter_plugin/doc/rum/otel_support.md"]
           further_reading:
             - link: "https://www.datadoghq.com/blog/monitor-flutter-application-performance-with-mobile-rum/"
