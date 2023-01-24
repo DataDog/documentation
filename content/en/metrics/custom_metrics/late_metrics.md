@@ -15,6 +15,8 @@ further_reading:
   text: "Official and Community created API and DogStatsD client libraries"
 ---
 
+<div class="alert alert-info">Early BETA Access</div>
+
 ## Overview
 
 **What are Late Metrics?** If you emit metric points with timestamps that are older than an hour relative to the time of submission, Datadog will classify these points as Late Metrics. 
