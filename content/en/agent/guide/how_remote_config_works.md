@@ -20,6 +20,13 @@ further_reading:
   text: "Getting Started with Cloud Workload Security"
 
 ---
+{{< site-region region="gov" >}}
+
+Remote configuration is not available on the US1-FED Datadog site.
+
+{{< /site-region >}}
+
+{{< site-region region="us,us3,us5,eu" >}}
 
 ## Overview
 Remote Configuration is a Datadog capability that allows you to remotely configure the behavior of Datadog resources (for example, Agents and tracing libraries) deployed in your infrastructure, for select product features. Using Remote Configuration makes it easier to apply Agent and tracing library configurations in your environment on demand, decreasing management costs and reducing friction between teams, accelerating resolution times. For Datadog security products, Application Security Management and Cloud Workload Security, Remote Configuration enabled Agents and compatible tracing libraries provide real-time security updates and responses, enhancing security posture for your applications and cloud infrastructure. 
@@ -127,6 +134,10 @@ DD_REMOTE_CONFIGURATION_ENABLED=true
 
 After completing the steps listed above, your Agent is ready to receive remotely issued configurations. To use the features outlined above, follow the [ASM](https://docs.datadoghq.com/security/application_security/how-appsec-works/#built-in-protection) and [APM](https://docs.datadoghq.com/dynamic_instrumentation/?tab=configurationyaml#enable-remote-configuration) specific instructions.
 
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+{{< /site-region >}}
