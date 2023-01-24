@@ -420,7 +420,7 @@ public class DogStatsdClient
 
 ## Late Metrics Ingestion Latency
 
-Ingesting Late Metrics will include some ingestion latencies, which depends on delay associated with the timestamp.
+Ingesting Late Metrics will include some ingestion latencies, which depends on the delay associated with the metric timestamp.
 
 | Metrics Outdated by: | Ingestion Latency                     |
 |----------------------|---------------------------------------|
