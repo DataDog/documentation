@@ -336,7 +336,85 @@ EOF
 
 {{< /programming-lang-wrapper >}}
 
-**To submit late metrics via the Agent**, make sure you have Agent version 7.40.0 or later installed. This version includes an updated DogStatsD interface, which currently supports **GoLang** and **.NET**. This allows you to send delayed metric points through the Agent.
+**To submit late metrics with the Agent**, make sure you have Agent version 7.40.0 or later installed. This version includes an updated DogStatsD interface, which supports **Java**, **GoLang**, and **.NET**. This allows you to send delayed metric points through the Agent.
+
+
+{{< programming-lang-wrapper langs="java,go,.NET" >}}
+
+{{< programming-lang lang="java" >}}
+```java
+import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
+import com.timgroup.statsd.StatsDClient;
+import java.util.Random;
+
+public class DogStatsdClient {
+
+    public static void main(String[] args) throws Exception {
+
+        StatsDClient Statsd = new NonBlockingStatsDClientBuilder()
+            .prefix("statsd").
+            .hostname("localhost")
+            .port(8125)
+            .build();
+        Statsd.gaugeWithTimestamp("example_metric.gauge_with_timestamp", new Random().nextInt(20), 1205794800, new String[]{"environment:dev"});
+        Statsd.countWithTimestamp("example_metric.count_with_timestamp", new Random().nextInt(20), 1205794800, new String[]{"environment:dev"});
+    }
+}
+```
+{{< /programming-lang >}}
+
+{{< programming-lang lang="go" >}}
+```go
+package main
+
+import (
+	"log"
+  "time"
+
+	"github.com/DataDog/datadog-go/statsd"
+)
+
+func main() {
+	statsd, err := statsd.New("127.0.0.1:8125")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+  ts := time.Date(2008, time.March, 17, 23, 0, 0, 0, time.UTC)
+	statsd.GaugeWithTimestamp("example_metric.gauge_with_timestamp", 12, []string{"environment:dev"}, 1, ts)
+  statsd.CountWithTimestamp("example_metric.count_with_timestamp", 12, []string{"environment:dev"}, 1, ts)
+}
+```
+{{< /programming-lang >}}
+
+{{< programming-lang lang=".NET" >}}
+```csharp
+using StatsdClient;
+
+public class DogStatsdClient
+{
+    public static void Main()
+    {
+        var dogstatsdConfig = new StatsdConfig
+        {
+            StatsdServerName = "127.0.0.1",
+            StatsdPort = 8125,
+        };
+
+        using (var dogStatsdService = new DogStatsdService())
+        {
+            dogStatsdService.Configure(dogstatsdConfig);
+            var random = new Random(0);
+            var dto = new DateTimeOffset(2008, 03, 17, 23, 00, 00, new TimeSpan(0, 0, 0))
+            dogStatsdService.Gauge("example_metric.gauge_with_timestamp", 10, tags: new[] {"environment:dev"}, dto);
+            dogStatsdService.Counter("example_metric.count_with_timestamp", 10, tags: new[] {"environment:dev"}, dto);
+        }
+    }
+}
+```
+{{< /programming-lang >}}
+
+{{< /programming-lang-wrapper >}}
 
 ## Late Metrics Ingestion Latency
 
