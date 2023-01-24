@@ -226,7 +226,7 @@ RUM supports several propagator types to connect resources with backends that ar
        .build()
     ```
     
-    `TracingHeaderType` in an enum representing the following tracing header types:
+    `TracingHeaderType` is an enum representing the following tracing header types:
       - `.DATADOG`: Datadog's propagator (`x-datadog-*`)
       - `.TRACECONTEXT`: [W3C Trace Context](https://www.w3.org/TR/trace-context/) (`traceparent`)
       - `.B3`: [B3 single header](https://github.com/openzipkin/b3-propagation#single-header) (`b3`)
