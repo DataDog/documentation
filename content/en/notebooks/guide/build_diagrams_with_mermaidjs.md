@@ -34,6 +34,8 @@ graph TD;
 ```
 {{< /code-block >}}
 
+Copy the example flowchart syntax into the mermaid code block. After you click **Done** the cell will populate the diagram.
+
 {{< img src="/notebooks/guide/build_diagrams_with_mermaidjs/build-diagram-mermaidjs.mp4" alt="Setup steps with example flowchart syntax" video=true style="width:100%;" >}}
 
 [1]: https://mermaid.js.org/#/
