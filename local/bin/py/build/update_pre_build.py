@@ -74,9 +74,7 @@ class Build:
     def build_documentation(self):
 
         # Instanciation of the integrations class since it's needed for content management below.
-        # This can be skipped if integrations are being pulled from cache.
-        if not self.integrations_cache_enabled:
-            Int = Integrations(self.source_dir, self.tempdir, self.integration_mutations)
+        Int = Integrations(self.source_dir, self.tempdir, self.integration_mutations)
 
         # Depending of the action attached to the content the proper function is called
         for content in self.list_of_sourced_contents:
