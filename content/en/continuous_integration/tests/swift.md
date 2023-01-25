@@ -273,6 +273,9 @@ The framework enables auto-instrumentation of all supported libraries, but in so
 `DD_DISABLE_RUM_INTEGRATION`
 : Disables integration with RUM Sessions (Boolean)
 
+`DD_DISABLE_SOURCE_LOCATION`
+: Disables test source code location and Codeowners (Boolean)
+
 `DD_DISABLE_CRASH_HANDLER`
 : Disables crash handling and reporting. (Boolean)
 <div class="alert alert-warning"><strong>Important</strong>: If you disable crash reporting, tests that crash are not reported at all, and don't appear as test failures. If you need to disable crash handling for any of your tests, run them as a separate target, so you don't disable it for the others.</div>
@@ -302,6 +305,12 @@ For Network auto-instrumentation, you can configure these additional settings:
 `DD_ENABLE_NETWORK_CALL_STACK_SYMBOLICATED`
 : Shows the call stack information with not only the method name, but also the precise file and line information. May impact your tests' performance (Boolean)
 
+### Infrastructure test correlation
+
+If you are running tests in your own infrastructure (macOS or simulator tests), you can correlate your tests with your infrastructure metrics by installing the Datadog Agent and setting the following:
+
+`DD_CIVISIBILITY_REPORT_HOSTNAME`
+: Reports the hostname of the machine launching the tests (Boolean)
 
 You can also disable or enable specific auto-instrumentation in some of the tests from Swift or Objective-C by importing the module `DatadogSDKTesting` and using the class: `DDInstrumentationControl`.
 
