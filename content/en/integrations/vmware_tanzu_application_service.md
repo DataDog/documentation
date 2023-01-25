@@ -70,7 +70,6 @@ Log collection is not supported for this site.
 To start collecting logs from your application in VMware Tanzu Application Service, the Agent contained in the buildpack needs to be activated and log collection enabled.
 
 ```shell
-cf set-env <YOUR_APP_NAME> RUN_AGENT true
 cf set-env <YOUR_APP_NAME> DD_LOGS_ENABLED true
 # Disable the Agent core checks to disable system metrics collection
 cf set-env <YOUR_APP_NAME> DD_ENABLE_CHECKS false
@@ -88,7 +87,6 @@ The following table describes the parameters above, and how they can be used to 
 
 | Parameter                 | Description                                                                                                                                |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `RUN_AGENT`               | Set to `true` to start the Datadog Agent.                                                                                                  |
 | `DD_LOGS_ENABLED`         | Set to `true` to enable Datadog Agent log collection.                                                                                      |
 | `DD_ENABLE_CHECKS`        | Set to `false` to disable the Agent's system metrics collection through core checks.                                                       |
 | `STD_LOG_COLLECTION_PORT` | Must be used when collecting logs from `stdout` or `stderr`. It redirects the `stdout` or `stderr` stream to the corresponding local port value. |

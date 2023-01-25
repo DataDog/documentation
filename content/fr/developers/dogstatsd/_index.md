@@ -351,7 +351,7 @@ Pour découvrir plus d'options, consultez la [documentation Datadog pour Go][1] 
 
 
 
-[1]: https://godoc.org/github.com/DataDog/datadog-go/v5/statsd
+[1]: https://pkg.go.dev/github.com/DataDog/datadog-go/v5/statsd
 {{< /programming-lang >}}
 
 {{< programming-lang lang="java" >}}
@@ -485,7 +485,7 @@ Le client Go dispose de plusieurs options pour la configuration du comportement 
 Pour découvrir toutes les options disponibles, consultez la [documentation Datadog pour Go][1] (en anglais).
 
 
-[1]: https://godoc.org/github.com/DataDog/datadog-go/v5/statsd#Option
+[1]: https://pkg.go.dev/github.com/DataDog/datadog-go/v5/statsd#Option
 {{< /programming-lang >}}
 {{< programming-lang lang="java" >}}
 

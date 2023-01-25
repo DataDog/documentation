@@ -16,6 +16,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/manage-service-catalog-categories-with-service-definition-json-schema/"
   tag: "Blog"
   text: "Manage Service Catalog entries with the Service Definition JSON Schema"
+- link: "https://www.datadoghq.com/blog/apm-security-view/"
+  tag: "Blog"
+  text: "Gain visibility into risks, vulnerabilities, and attacks with APM Security View"
 ---
 
 

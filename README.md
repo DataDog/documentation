@@ -10,9 +10,9 @@ Built with [hugo][1], a static website generation tool.
 
 2. [Install Python3][3] (you can also use [pyenv][4])
 
-3. [Install hugo][12]
+3. [Install hugo][13]
 
-4. [Install Go][13] (at minimum, `go version` 1.12)
+4. [Install Go][14] (at minimum, `go version` 1.12)
 
 5. Install yarn: `npm install -g yarn`
 
@@ -30,7 +30,7 @@ To run the documentation site locally, execute:
 |---------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `make start-no-pre-build` | Build the lightweight version of the documentation with no extra content                                                                                                                                                                   |
 | `make start`*             | Build the full documentation with all extra content (integrations, extra pulled files, localized content, etc). Only useful if you have a GitHub personal token setup in your `Makefile.config` or the extra content is available locally. |
-| `make start-docker`       | Build the documentation using the docker image. For more information see [Docker Development][15].                                                                                                                                         |
+| `make start-docker`       | Build the documentation using the docker image. For more information see [Docker Development][16].                                                                                                                                         |
 
 **Documentation is then available at `http://localhost:1313`**
 
@@ -51,7 +51,7 @@ To learn more about how the documentation is built, refer to the [Documentation 
 * Name your branch `<SLACK_HANDLE>/<FEATURE_NAME>` if you would like to create a preview site and run tests.
 * When you are ready to commit, create a new pull request to master from your branch.
 * Consult our [contributing guidelines][8], and the [Documentation Build Wiki][7].
-* Use GitHub's [draft pull request][14] feature and appropriate labels such as "Do Not Merge" or "Work in Progress" until your PR is ready to be merged and live on production.
+* Use GitHub's [draft pull request][15] feature and appropriate labels such as "Do Not Merge" or "Work in Progress" until your PR is ready to be merged and live on production.
 
 ### Outside Contributors
 

@@ -17,6 +17,9 @@ further_reading:
   text: "Troubleshooting"
 
 ---
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
+{{< /site-region >}}
 
 {{< img src="database_monitoring/dbm-main.png" alt="Database Monitoring" style="width:100%;">}}
 

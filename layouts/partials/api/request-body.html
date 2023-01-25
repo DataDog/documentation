@@ -62,10 +62,10 @@
 
                       <ul class="nav nav-tabs border-none response-toggle">
                           <li class="nav-item">
-                              <a class="nav-link mr-1  js-model-link active" href="#" data-toggle="tab">{{ i18n "model" }}</a>
+                              <a class="nav-link me-1  js-model-link active" href="#" data-bs-toggle="tab">{{ i18n "model" }}</a>
                           </li>
                           <li class="nav-item">
-                              <a class="nav-link mr-1  js-example-link"  href="#" data-toggle="tab">{{ i18n "example" }}</a>
+                              <a class="nav-link me-1  js-example-link"  href="#" data-bs-toggle="tab">{{ i18n "example" }}</a>
                           </li>
                       </ul>
 
@@ -76,7 +76,7 @@
                                   {{ $html | safeHTML }}
                               {{ else }}
                                   <div class="table-request schema-table row {{ if not (in $html "js-collapse-trigger") }}has-no-expands{{ end }} {{ if (in $html "hide-table") }}d-none{{ end }}">
-                                    <p class="expand-all js-expand-all text-primary">Expand All</p>
+                                    <p class="expand-all js-expand-all text-primary text-end">Expand All</p>
                                     <div class="col-12">
                                       <div class="row table-header">
                                         <div class="col-4 column">
@@ -112,13 +112,13 @@
                                               {{ if gt $fileCount 1 }}
                                               <div class="card-header p-0">
                                                 <h5 class="m-0">
-                                                  <button class="btn btn-link {{if gt $i 0}}collapsed{{ end}}" data-toggle="collapse" data-target="#{{ $operationid | lower }}-{{ $version }}-request-example-{{ $i }}" aria-expanded="true" aria-controls="collapseOne">
+                                                  <button class="btn btn-link {{if gt $i 0}}collapsed{{ end}}" data-bs-toggle="collapse" data-bs-target="#{{ $operationid | lower }}-{{ $version }}-request-example-{{ $i }}" aria-expanded="true" aria-controls="collapseOne">
                                                     {{ $item.description }}
                                                   </button>
                                                 </h5>
                                               </div>
                                               {{ end }}
-                                              <div id="{{ $operationid | lower }}-{{ $version }}-request-example-{{ $i }}" class="collapse {{if eq $i 0}}show{{ end }}" data-parent="#accordion-{{ $operationid | lower }}-{{ $version }}-json">
+                                              <div id="{{ $operationid | lower }}-{{ $version }}-request-example-{{ $i }}" class="collapse {{if eq $i 0}}show{{ end }}" data-bs-parent="#accordion-{{ $operationid | lower }}-{{ $version }}-json">
                                                 <div class="card-body p-0 code-snippet">
                                                     <div class="code-button-wrapper position-absolute">
                                                         <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
