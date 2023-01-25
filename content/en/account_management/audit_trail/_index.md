@@ -48,7 +48,7 @@ To enable Datadog Audit Trail, navigate to your [Organization Settings][2] and s
 
 To see who enabled Audit Trail:
 1. Navigate to [Events Explorer][3].
-2. Enter `Datadog Audit Trail was enabled by` in the search bar. You might have to select a wider time range to capture the event.
+2. Enter `Datadog Audit Trail was enabled by` in the search bar. You may have to select a wider time range to capture the event.
 3.  The most recent event with the title "A user enabled Datadog Audit Trail" shows who last enabled Audit Trail.
 
 ## Configuration
