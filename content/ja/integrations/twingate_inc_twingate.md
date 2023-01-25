@@ -45,8 +45,6 @@ supported_os:
 - linux
 - macos
 - windows
-terms:
-  legal_email: legalnotices@twingate.com
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
