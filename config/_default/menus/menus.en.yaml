@@ -2052,6 +2052,11 @@ main:
     parent: pipeline_visibility
     identifier: ci_jenkins
     weight: 206
+  - name: TeamCity
+    url: continuous_integration/pipelines/teamcity/
+    parent: pipeline_visibility
+    identifier: ci_teamcity
+    weight: 207
   - name: Custom Commands
     url: continuous_integration/pipelines/custom_commands/
     parent: pipeline_visibility
