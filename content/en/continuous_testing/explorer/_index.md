@@ -35,7 +35,7 @@ You can accomplish the following actions:
 
 ## Create a search query
 
-Navigate to [**UX Monitoring** > **Explorer**][1] and click on an out-of-the-box search query to start viewing your test batches or test runs and create visualizations.
+Navigate to [**UX Monitoring** > **Explorer**][1] and click on an out-of-the-box search query to start viewing your test batches or runs and creating visualizations.
 
 {{< img src="continuous_testing/explorer_search_query.png" alt="Out-of-the-box search queries available in the Explorer" style="width:100%;">}}
 
