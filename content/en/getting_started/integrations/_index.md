@@ -2,17 +2,19 @@
 title: Introduction to Integrations
 kind: documentation
 aliases:
-    - '/getting_started/integrations'
+    - /getting_started/integrations
 further_reading:
-    - link: 'https://learn.datadoghq.com/'
-      tag: 'Learning Center'
-      text: 'Introduction to Datadog'
-    - link: '/integrations/'
-      tag: 'Integrations'
-      text: "Datadog's full list of integrations"
+  - link: 'https://learn.datadoghq.com/courses/intro-to-integrations'
+    tag: 'Learning Center'
+    text: 'Introduction to Integrations'
+  - link: '/integrations/'
+    tag: 'Documentation'
+    text: 'See a list of Datadog integrations'
 ---
 
-This is a guide for using integrations, if you are looking for information about building a new integration, see the [Create a new integration][1] page.
+## Overview
+
+This is a guide for using integrations. If you are looking for information about building a new integration, see the [Create a new integration][1] page.
 
 An integration, at the highest level, is when you assemble a unified system from units that are usually considered separately. At Datadog, you can use integrations to bring together all of the metrics and logs from your infrastructure and gain insight into the unified system as a whole—you can see pieces individually and also how individual pieces are impacting the whole.
 
@@ -213,7 +215,7 @@ tagging
 [27]: /getting_started/tagging/unified_service_tagging/
 [28]: /agent/guide/agent-commands/#agent-status-and-information
 [29]: /infrastructure/process/
-[30]: /security/
+[30]: /data_security/
 [31]: /metrics/explorer/
 [32]: /dashboards/
 [33]: /monitors/

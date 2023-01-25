@@ -49,6 +49,6 @@ func main() {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentracer
+[1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentracer
 [2]: http://opentracing.io
 [3]: https://github.com/opentracing/opentracing-go

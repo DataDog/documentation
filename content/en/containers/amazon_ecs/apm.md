@@ -107,7 +107,7 @@ cat $ECS_CONTAINER_METADATA_FILE | jq -r .HostPrivateIPv4Address
 
 Provide the result of this request to the tracer by setting the `DD_AGENT_HOST` environment variable for each application container that sends traces.
 
-### Configure the trace agent endpoint
+### Configure the Trace Agent endpoint
 
 In cases where variables on your ECS application are set at launch time (Java, .NET, and PHP), you **must** set the hostname of the tracer endpoint as an environment variable with `DD_AGENT_HOST` using one of the above methods. The examples below use the IMDSv1 metadata endpoint, but the configuration can be interchanged if needed. If you have a startup script as your entry point, include this call as part of the script, otherwise add it to the ECS Task Definition's `entryPoint`.
 
@@ -151,12 +151,12 @@ tracer.configure(hostname=get_aws_ip())
 {{< programming-lang lang="nodeJS" >}}
 
 #### Launch time variable
-Update the Task Definition's `entryPoint` with the following, substituting your `<NodeJS Startup Command>`:
+Update the Task Definition's `entryPoint` with the following, substituting your `<Node.js Startup Command>`:
 ```json
 "entryPoint": [
   "sh",
   "-c",
-  "export DD_AGENT_HOST=$(curl http://169.254.169.254/latest/meta-data/local-ipv4); <NodeJS Startup Command>"
+  "export DD_AGENT_HOST=$(curl http://169.254.169.254/latest/meta-data/local-ipv4); <Node.js Startup Command>"
 ]
 ```
 

@@ -150,7 +150,7 @@ In addition to setting the environment variables, you or a user in your organiza
 
 ### Swift
 
-To enable Intelligent Test Runner, the version of the `dd-sdk-swift` framework must be >= 2.2.0-rc.1. The `Code Coverage` option must also be enabled in the test settings of your scheme or test plan, or  `--enable-code-coverage` must be added to your `swift test` command (if using a SPM target).
+To enable Intelligent Test Runner, the version of the `dd-sdk-swift` framework must be >= 2.2.0. The `Code Coverage` option must also be enabled in the test settings of your scheme or test plan, or  `--enable-code-coverage` must be added to your `swift test` command (if using a SPM target).
 
 The following environment variables must also be set:
 

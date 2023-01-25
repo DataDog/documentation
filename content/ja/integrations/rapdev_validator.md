@@ -25,7 +25,7 @@ assets:
 author:
   homepage: https://www.rapdev.io
   name: RapDev
-  sales_email: sales@rapdev.io
+  sales_email: ddsales@rapdev.io
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
@@ -73,6 +73,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Tag Validator
+  uninstallation: README.md#Uninstallation
 ---
 
 
@@ -83,7 +84,7 @@ RapDev Validator は、Datadog 環境でのタグモニタリングと Agent の
 ### ダッシュボード  
 1. RapDev Validator ダッシュボード
 
-### モニター
+### アラート設定
 1. ホストに必要なタグキーが割り当てられていない
 2. ホストのタグキーに非準拠の値が割り当てられている
 

@@ -23,7 +23,7 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/amazon-ecs-anywhere-monitoring/'
       tag: 'Blog'
       text: 'Monitor Amazon ECS Anywhere with Datadog'
-    - link: 'integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/??tab=cloudformation'
+    - link: '/integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/?tab=cloudformation'
       tag: 'Documentation'
       text: 'AWS CloudWatch Metric Streams with Kinesis Data Firehose'
     - link: 'https://www.datadoghq.com/blog/monitor-aws-graviton3-with-datadog/'
@@ -74,7 +74,7 @@ Before getting started, ensure you have the following prerequisites:
     * secretsmanager:CreateSecret
     * secretsmanager:GetSecretValue
     * secretsmanager:PutSecretValue
-    * serverless:CreateCloudFormationTemplate
+    * serverlessrepo:CreateCloudFormationTemplate
 
 ## Setup
 

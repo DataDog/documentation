@@ -2,6 +2,8 @@
 aliases:
 - /ja/security/guide/
 kind: guide
+disable_toc: true
+kind: ガイド
 private: true
 title: セキュリティガイド
 cascade:
