@@ -43,7 +43,7 @@ Microsoft also provides a helpful doc on troubleshooting these types of errors, 
 
 ### SQL Server TCP connection error {#tcp-connection-error}
 
-TCP connection issues are common when there is a setup misconfiguration with the Agent. The error messages produced by the driver are not always clear.
+TCP connection issues are common when there is a setup misconfiguration with the Agent. The error messages provided by the driver are not always clear.
 
 For example, the following error is because the TCP connection failed:
 
@@ -53,7 +53,7 @@ TCP-connection(ERROR: getaddrinfo failed). Exception: unable to connect: could n
 
 Some common errors are:
 
-**"login failed for user"**: this means the agent succeeded in establishing a connection to the host, but the login was rejected for some reason.
+**"login failed for user"**: this means the Agent succeeded in establishing a connection to the host, but the login was rejected for some reason.
 
 To troubleshoot:
 
@@ -61,7 +61,7 @@ To troubleshoot:
 
 2. Try to login with those credentials manually using sqlcmd. For example: `sqlcmd -S localhost -U datadog -P ${SQL_PASSWORD} -d master`
 
-**"could not open database requested for login"**: this error appears either due to network issues or due to an unknown database. To troubleshoot:
+**"could not open database requested for login"**: this error appears either due to network issues or due to an unknown database.
 
 To troubleshoot:
 
@@ -73,7 +73,7 @@ To troubleshoot:
 
 The following ADO Providers are supported on Windows: `SQLOLEDB`, `MSOLEDBSQL`, `MSOLEDBSQL19`, `SQLNCLI11`.
 
-The `SQLOLEDB` and `SQLNCLI11` providers produce the error message `Invalid connection string attribute` for a wide variety of possible issues. For example:
+The `SQLOLEDB` and `SQLNCLI11` providers could show the error message `Invalid connection string attribute` due to several issues. For example:
 
 ```
 datadog_checks.sqlserver.connection.SQLConnectionError:
@@ -84,15 +84,15 @@ OperationalError(com_error(-2147352567, 'Exception occurred.',
 'Error opening connection to "ConnectRetryCount=2;Provider=SQLOLEDB;Data Source=foo.com,1433;Initial Catalog=master;User ID=datadog;Password=******;"')
 ```
 
-This same error is produced regardless of failure reason (unknown hostname, could not establish TCP connection, invalid login credentials, unknown database).
+This same error is shown regardless of the reason for the failure (for example, due to an unknown hostname, the TCP connection not established, invalid login credentials, or an unknown database).
 
-Look in the error message for HResult error codes. Here are some known codes:
+Look in the error message for the HResult error codes. These are examples of known codes:
 
 `-2147217843` **"login failed for user"**: this means the agent succeeded in establishing a connection to the host, but the login was rejected for some reason.
 
 `-2147467259` **"could not open database requested for login"**: this error appears either due to network issues or due to an unknown database.
 
-If neither step helps with the issue, or the error code you see is not listed, Datadog recommends using the `MSOLEDBSQL` driver or the `Microsoft ODBC Driver for SQL Server`. The drivers produce more meaningful error messages, which can help with troubleshooting why the connection is failing.
+If neither step helps with the issue, or the error code you see is not listed, Datadog recommends using the `MSOLEDBSQL` driver or the `Microsoft ODBC Driver for SQL Server`. The drivers provide more detailed error messages, which can help with troubleshooting why the connection is failing.
 
 ### SQL Server 'Unable to connect: Adaptive Server is unavailable or does not exist' {#adaptive-server-unavailable}
 
