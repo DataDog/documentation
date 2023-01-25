@@ -61,20 +61,32 @@ before_script:
       - ${YARN_CACHE_FOLDER}
     policy: pull-push
 
+# ==================== rules ==================== #
+.preview_rules: &preview_rules
+  rules:
+    - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_BRANCH =~ $PREVIEW_PATTERN
+      when: on_success
+
+.live_rules: &live_rules
+  rules:
+    - if: $CI_COMMIT_REF_NAME == "master"
+      when: on_success
+
 # ================== templates ================== #
 .base_template: &base_template
   image: public.ecr.aws/x2b9z2t7/webops/site-build:latest
   tags:
     - "runner:main"
-  except:
-    - tags
-  only:
-    - branches
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "tags"
+      when: never
+    - if: $CI_COMMIT_BRANCH != null # Variable doesnt exists on merge request pipelines or tag pipelines.
 
 # ================== preview ================== #
 # If the branch has a name of <slack-user>/<feature-name> then ci builds a preview site
 build_preview:
   <<: *base_template
+  <<: *preview_rules
   stage: build
   cache:
     - *yarn_cache_pull_push
@@ -107,12 +119,11 @@ build_preview:
       - .vale.ini
       - .htmltest.yml
       - ./logs
-  only:
-    - /.+?\/[a-zA-Z0-9_-]+/
   interruptible: true
 
 link_checks_preview:
   <<: *base_template
+  <<: *preview_rules
   stage: post-deploy
   cache: {}
   environment: "preview"
@@ -129,8 +140,6 @@ link_checks_preview:
     - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers
     - RESULT="⛈ htmltest result; the following issues were found:\n$(tail -n +2 ./tmp/.htmltest/htmltest.log)\n--------------------" # output all but first line
     - if grep -q "not exist" tmp/.htmltest/htmltest.log; then notify_slack "${RESULT}" "#31b834"; fi
-  only:
-    - /.+?\/[a-zA-Z0-9_-]+/
   artifacts:
     paths:
       - ./tmp/.htmltest
@@ -138,6 +147,7 @@ link_checks_preview:
 
 missing_tms_preview:
   <<: *base_template
+  <<: *preview_rules
   stage: post-deploy
   environment: "preview"
   allow_failure: true
@@ -148,11 +158,11 @@ missing_tms_preview:
     - build_preview
   script:
     - check_missing_tms
-  only:
-    - /.+?\/[a-zA-Z0-9_-]+/
   interruptible: true
 
 index_algolia_preview:
+  <<: *preview_rules
+  when: manual
   image:
     name: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:docsearch-scraper-latest
     entrypoint: [""] # force an empty entrypoint (see https://gitlab.com/gitlab-org/gitlab-runner/issues/2692)
@@ -172,13 +182,12 @@ index_algolia_preview:
       echo "n" | docsearch run ./local/etc/algolia/docs_datadoghq_preview.json
   dependencies:
     - build_preview
-  when: manual
-  only:
-    - /.+?\/[a-zA-Z0-9_-]+/
   interruptible: true
 
 replica_algolia_preview:
   <<: *base_template
+  <<: *preview_rules
+  when: manual
   stage: post-deploy
   cache:
     - *yarn_cache
@@ -188,13 +197,13 @@ replica_algolia_preview:
     - ALGOLIA_APP_ID=$(get_secret 'algolia_preview_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_preview_api_key') yarn run algolia:config
   dependencies:
     - build_preview
-  when: manual
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
   interruptible: true
 
 sourcemaps_preview:
   <<: *base_template
+  <<: *preview_rules
   stage: post-deploy
   cache:
     - *yarn_cache
@@ -207,8 +216,6 @@ sourcemaps_preview:
   dependencies:
     - build_preview
   allow_failure: true
-  only:
-    - /.+?\/[a-zA-Z0-9_-]+/
   interruptible: true
 
 # ================== live ================== #
