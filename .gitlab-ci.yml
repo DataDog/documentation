@@ -197,8 +197,6 @@ replica_algolia_preview:
     - ALGOLIA_APP_ID=$(get_secret 'algolia_preview_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_preview_api_key') yarn run algolia:config
   dependencies:
     - build_preview
-  only:
-    - /.+?\/[a-zA-Z0-9_-]+/
   interruptible: true
 
 sourcemaps_preview:
