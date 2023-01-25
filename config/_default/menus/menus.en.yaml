@@ -2610,10 +2610,9 @@ main:
     identifier: cspm_schema_gcp_test
     weight: 104
   - name: Compliance Reports
-    weight: 105
-  - name: Findings Reports
     url: security/cspm/frameworks_and_benchmarks
     parent: cspm
+    identifier: cspm_frameworks_benchmarks
     weight: 106
   - name: Security Findings Explorer
     url: /security/cspm/findings
