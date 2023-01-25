@@ -196,8 +196,18 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_1039800684",
+      "description": "Create a new dashboard with logs_pattern_stream list_stream widget"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_3117424216",
       "description": "Create a new dashboard with logs_stream list_stream widget and storage parameter"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_2843286292",
+      "description": "Create a new dashboard with logs_transaction_stream list_stream widget"
     },
     {
       "group": "dashboards",
@@ -263,6 +273,11 @@
       "group": "dashboards",
       "suffix": "_2850365602",
       "description": "Create a new dashboard with template variable presets using values returns \"OK\" response"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_41622531",
+      "description": "Create a new dashboard with timeseries widget and formula style attributes"
     },
     {
       "group": "dashboards",
@@ -779,6 +794,11 @@
       "group": "synthetics",
       "suffix": "",
       "description": "Create a browser test returns \"OK - Returns the created test details.\" response"
+    },
+    {
+      "group": "synthetics",
+      "suffix": "_397420811",
+      "description": "Create a browser test with advanced scheduling options returns \"OK - Returns the created test details.\" response"
     }
   ],
   "CreateGlobalVariable": [
@@ -805,6 +825,11 @@
       "group": "synthetics",
       "suffix": "_1487281163",
       "description": "Create an API HTTP test returns \"OK - Returns the created test details.\" response"
+    },
+    {
+      "group": "synthetics",
+      "suffix": "_960766374",
+      "description": "Create an API HTTP with oauth-rop test returns \"OK - Returns the created test details.\" response"
     },
     {
       "group": "synthetics",

@@ -69,6 +69,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Trek10 AWS Coverage Advisor
+  uninstallation: README.md#Uninstallation
 ---
 
 

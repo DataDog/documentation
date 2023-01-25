@@ -33,9 +33,13 @@ If you can see test results data in the **Test Runs** tab, but not the **Tests**
 2. Next, tracers fetch Git metadata using the local `.git` folder, if present, by executing `git` commands. This populates all Git metadata fields, including commit message, author, and committer information. Ensure the `.git` folder is present and the `git` binary is installed and in `$PATH`. This information is used to populate attributes not detected in the previous step.
 3. You can also provide Git information manually using environment variables, which override information detected by any of the previous steps. The supported environment variables for providing Git information are the following:
 
-   `DD_GIT_REPOSITORY_URL`
+   `DD_GIT_REPOSITORY_URL` **(required)**
    : URL of the repository where the code is stored. Both HTTP and SSH URLs are supported.<br/>
    **Example**: `git@github.com:MyCompany/MyApp.git`, `https://github.com/MyCompany/MyApp.git`
+
+   `DD_GIT_COMMIT_SHA` **(required)**
+   : Full (40-character long SHA1) commit hash.<br/>
+   **Example**: `a18ebf361cc831f5535e58ec4fae04ffd98d8152`
 
    `DD_GIT_BRANCH`
    : Git branch being tested. Leave empty if providing tag information instead.<br/>
@@ -44,10 +48,6 @@ If you can see test results data in the **Test Runs** tab, but not the **Tests**
    `DD_GIT_TAG`
    : Git tag being tested (if applicable). Leave empty if providing branch information instead.<br/>
    **Example**: `1.0.1`
-
-   `DD_GIT_COMMIT_SHA`
-   : Full commit hash.<br/>
-   **Example**: `a18ebf361cc831f5535e58ec4fae04ffd98d8152`
 
    `DD_GIT_COMMIT_MESSAGE`
    : Commit message.<br/>

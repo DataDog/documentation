@@ -7,9 +7,6 @@ further_reading:
 - link: logs/log_configuration/processors
   tag: ドキュメント
   text: ログの処理方法
-- link: logs/logging_without_limits
-  tag: ドキュメント
-  text: Datadog でインデックス化するログの量を制御する
 kind: documentation
 title: 取り込んだログからメトリクスを生成する
 ---

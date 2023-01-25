@@ -105,8 +105,8 @@ Through **Edit Details**, you can add, edit or remove your billing address. You 
 [1]: https://app.datadoghq.com/account/usage/hourly
 [2]: /infrastructure/
 [3]: /agent/
-[4]: https://docs.datadoghq.com/account_management/billing/pricing/#apm
-[5]: https://docs.datadoghq.com/account_management/billing/serverless
+[4]: /account_management/billing/pricing/#apm
+[5]: /account_management/billing/serverless
 [6]: https://www.datadoghq.com/pricing/?product=serverless#serverless
 [7]: https://www.datadoghq.com/pricing/
 [8]: /account_management/rbac/#datadog-default-roles

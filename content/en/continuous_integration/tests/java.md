@@ -23,7 +23,7 @@ further_reading:
 
 Supported test frameworks:
 * JUnit >= 4.10 and >= 5.3
-  * Also includes any test framework based on JUnit, such as Spock Framework and Cucumber-Junit
+  * Also includes any test framework based on JUnit, such as Spock Framework and Cucumber-Junit. **Note**: Only Cucumber v1, which uses JUnit 4, is supported.
 * TestNG >= 6.4
 
 ## Configuring reporting method

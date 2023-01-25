@@ -15,7 +15,7 @@ assets:
     source_type_name: Auth0
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Auth0
   sales_email: help@datadoghq.com
   support_email: help@datadoghq.com
 categories:

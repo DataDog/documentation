@@ -97,6 +97,6 @@ func handler(w http.ResponseWriter, r *http.Request) {
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/tracing/setup/go/#compatibility
-[2]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
+[2]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
 [3]: /fr/tracing/visualization/#trace
 [4]: /fr/tracing/visualization/#spans

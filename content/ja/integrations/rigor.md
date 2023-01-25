@@ -15,7 +15,7 @@ assets:
     source_type_name: Rigor
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Rigor
   sales_email: support@rigor.com
   support_email: support@rigor.com
 categories:

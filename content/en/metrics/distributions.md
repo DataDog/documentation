@@ -25,7 +25,7 @@ Distributions provide enhanced query functionality and configuration options tha
 
   * **Percentile thresholds on metric monitors**:
   
-    _“Alert me when the p99 of my application’s request latency is greater than 200 ms for the last 5 min.”_
+    _“Alert me when the p95 of my application’s request latency is greater than 200 ms for the last 5 min.”_
 
   * **Threshold Queries**:
   
@@ -58,7 +58,7 @@ You can use percentile aggregations in a variety of other widgets and for alerti
 {{< img src="metrics/distributions/percentile_qvw.jpg" alt="A query value widget displaying a single value (7.33s) for the 99.99 percentile aggregation of a single metric" style="width:80%;">}}
 
 * **Percentile thresholds on metric monitors**
-  _“Alert me when the p99 of my application’s request latency is greater than 200 ms for the last 5 min.”_ 
+  _“Alert me when the p95 of my application’s request latency is greater than 200 ms for the last 5 min.”_ 
 
 {{< img src="metrics/distributions/percentile_monitor.jpg" alt="Percentile threshold being set with a drop down for alert conditions in a monitor " style="width:80%;">}}
 

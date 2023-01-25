@@ -65,6 +65,8 @@ Use the top right percentile selectors to zoom into a given percentile, or hover
 
 You can also view a map of all of a resource’s upstream and downstream service dependencies. With the Dependency Map, you can quickly see the flow of services with spans that go through the specific resource (such as endpoints or database queries) end-to-end.
 
+The dependency map is only available for resources containing service entry spans.
+
 {{<img alt="resource dependency map" src="tracing/visualization/resource/resource_dependency_map.png" style="width:100%;">}}
 
 Hover over a node to view metrics of each service including requests/second, error rate, and average latency.
@@ -96,6 +98,8 @@ The displayed metrics represent, per span:
 : Average ratio of execution time for which the span was active, for traces including the current resource, where the span is present at least once.
 
 **Note**: A span is considered active when it's not waiting for a child span to complete. The active spans at a given time, for a given trace, are all the leaf spans (in other words, spans without children).
+
+The span summary table is only available for resources containing service entry spans.
 
 ## Traces
 

@@ -86,6 +86,9 @@ It's recommended to install the agent directly on the SQL Server host as that en
 {{% /tab %}}
 {{< /tabs >}}
 
+## Example Agent Configurations
+{{% dbm-sqlserver-agent-config-examples %}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

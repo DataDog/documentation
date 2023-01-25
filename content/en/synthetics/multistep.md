@@ -37,18 +37,20 @@ You can accomplish the following:
 
 If one of your services starts answering more slowly, or in an unexpected way (for example, unexpected response body or status code), your test can [**alert your team**][3], [**block your CI pipeline**][4], or even [**roll back the faulty deployment**][4].
 
-Multistep API tests can run from Datadog [managed locations][5] and [private locations][6], allowing **full coverage of your systems**, both external and internal.
+Multistep API tests can run from Datadog [managed](#select-locations) and [private locations][5], allowing **full coverage of your systems**, both external and internal.
 
 ## Configuration
 
 ### Name and tag your test
 
 1. Name your Multistep API test.
-2. Add `env` and other tags to your Multistep API test. You can use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][7].
+2. Add `env` and other tags to your Multistep API test. You can use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][6].
 
 ### Select locations
 
-Select the **Locations** for your Multistep API test. Multistep API tests can run from both [managed][5] and [private locations][6] depending on your preference for running the test from outside or inside your network.
+Select the **Locations** for your Multistep API test. Multistep API tests can run from both managed and [private locations][5] depending on your preference for running the test from outside or inside your network.
+
+{{% managed-locations %}} 
 
 ### Define steps
 
@@ -126,8 +128,8 @@ Assertions define what an expected test result is. After you click **Test URL**,
 
 | Type          | Operator                                                                                               | Value type                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][8], [`xpath`][9] | _String_ <br> _[Regex][10]_ <br> _String_, _[Regex][10]_ |
-| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][10]_                                      |
+| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][7], [`xpath`][8] | _String_ <br> _[Regex][9]_ <br> _String_, _[Regex][9]_ |
+| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][9]_                                      |
 | response time | `is less than`                                                                                         | _Integer (ms)_                                                  |
 | status code   | `is`, `is not`                                                                                         | _Integer_                                                      |
 
@@ -158,8 +160,8 @@ To start parsing a variable, click **Extract a variable from response content**:
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores and must have at least three characters.
 2. Decide whether to extract your variable from the response headers or from the response body.
 
-   * Extract the value from **response header**: use the full response header of your HTTP request as the variable value, or parse it with a [`regex`][10].
-   * Extract the value from **response body**: use the full response body of your HTTP request as the variable value or parse it with a [`regex`][10], a [`JSONPath`][8], or a [`XPath`][9].
+   * Extract the value from **response header**: use the full response header of your HTTP request as the variable value, or parse it with a [`regex`][9].
+   * Extract the value from **response body**: use the full response body of your HTTP request as the variable value or parse it with a [`regex`][9], a [`JSONPath`][7], or a [`XPath`][8].
 
 {{< img src="synthetics/api_tests/ms_extract_variable.png" alt="Extract variables from HTTP requests in Multistep API test" style="width:90%;" >}}
 
@@ -197,9 +199,9 @@ Location uptime is computed on a per-evaluation basis (whether the last test res
 
 A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what to message your team.
 
-1. [Similar to monitors][11], select **users and/or services** that should receive notifications either by adding an `@notification` to the message or by searching for team members and connected integrations with the drop-down box.
+1. [Similar to monitors][10], select **users and/or services** that should receive notifications either by adding an `@notification` to the message or by searching for team members and connected integrations with the drop-down box.
 
-2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][12] and supports the following [conditional variables][13]:
+2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][11] and supports the following [conditional variables][12]:
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -211,7 +213,7 @@ A notification is sent by your test based on the [alerting conditions](#define-a
 3. Specify how often you want your test to **re-send the notification message** in case of test failure. To prevent renotification on failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
 4. Click **Create** to save your test configuration and monitor.
 
-For more information, see [Using Synthetic Test Monitors][14].
+For more information, see [Using Synthetic Test Monitors][13].
 
 ## Variables
 
@@ -232,6 +234,9 @@ To create a local variable, click **Create a Local Variable** at the top right h
 `{{ alphanumeric(n) }}`
 : Generates an alphanumeric string with `n` characters.
 
+`{{ uuid }}`
+: Generates a version 4 universally unique identifier (UUID).
+
 `{{ date(n unit, format) }}`
 : Generates a date in one of Datadog's accepted formats with a value corresponding to the UTC date the test is initiated at + or - `n` units.
 
@@ -242,7 +247,7 @@ To obfuscate local variable values in test results, select **Hide and obfuscate 
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][15] and the [locally defined variables](#create-local-variables) in the URL, advanced options, and assertions of your HTTP tests.
+You can use the [global variables defined in the `Settings`][14] and the [locally defined variables](#create-local-variables) in the URL, advanced options, and assertions of your HTTP tests.
 
 To display your list of variables, type `{{` in your desired field.
 
@@ -265,7 +270,7 @@ A test is considered `FAILED` if a step does not satisfy one or several assertio
 : The configuration of the test is invalid (for example, a typo in the URL).
 
 `SSL`
-: The SSL connection couldn't be performed. [See the dedicated error page for more information][16].
+: The SSL connection couldn't be performed. [See the dedicated error page for more information][15].
 
 `TIMEOUT`
 : The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
@@ -278,13 +283,13 @@ A test is considered `FAILED` if a step does not satisfy one or several assertio
 
 ## Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][17] can create, edit, and delete Synthetic multistep API tests. To get create, edit, and delete access to Synthetic multistep API tests, upgrade your user to one of those two [default roles][17].
+By default, only users with the [Datadog Admin and Datadog Standard roles][16] can create, edit, and delete Synthetic multistep API tests. To get create, edit, and delete access to Synthetic multistep API tests, upgrade your user to one of those two [default roles][16].
 
-If you are using the [custom role feature][18], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
+If you are using the [custom role feature][17], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
 
 ### Restrict access
 
-Access restriction is available for customers using [custom roles][19] on their accounts.
+Access restriction is available for customers using [custom roles][18] on their accounts.
 
 You can restrict access to a multistep API test based on the roles in your organization. When creating a multistep API test, choose which roles (in addition to your user) can read and write your test. 
 
@@ -298,18 +303,17 @@ You can restrict access to a multistep API test based on the roles in your organ
 [2]: /synthetics/api_tests/
 [3]: /synthetics/api_tests/http_tests?tab=requestoptions#notify-your-team
 [4]: /synthetics/cicd_integrations
-[5]: /api/latest/synthetics/#get-all-locations-public-and-private
-[6]: /synthetics/private_locations
-[7]: /synthetics/search/#search
-[8]: https://restfulapi.net/json-jsonpath/
-[9]: https://www.w3schools.com/xml/xpath_syntax.asp
-[10]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[11]: /monitors/notify/?tab=is_alert#notification
-[12]: http://daringfireball.net/projects/markdown/syntax
-[13]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
-[14]: /synthetics/guide/synthetic-test-monitors
-[15]: /synthetics/settings/#global-variables
-[16]: /synthetics/api_tests/errors/#ssl-errors
-[17]: /account_management/rbac/
-[18]: /account_management/rbac#custom-roles
-[19]: /account_management/rbac/#create-a-custom-role
+[5]: /synthetics/private_locations
+[6]: /synthetics/search/#search
+[7]: https://restfulapi.net/json-jsonpath/
+[8]: https://www.w3schools.com/xml/xpath_syntax.asp
+[9]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[10]: /monitors/notify/?tab=is_alert#notification
+[11]: http://daringfireball.net/projects/markdown/syntax
+[12]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
+[13]: /synthetics/guide/synthetic-test-monitors
+[14]: /synthetics/settings/#global-variables
+[15]: /synthetics/api_tests/errors/#ssl-errors
+[16]: /account_management/rbac/
+[17]: /account_management/rbac#custom-roles
+[18]: /account_management/rbac/#create-a-custom-role
