@@ -6,8 +6,8 @@ disable_toc: false
 
 ## Overview
 
-Datadog Notebooks supports Mermaid JS in any Markdown cell. 
-Mermaid is a compact notation for creating diagrams and flowcharts in Markdown. Learn more about Mermaid in the [official documentation][1] or by using the [Mermaid live editor][2].
+Datadog Notebooks support Mermaid JS in any Markdown cell. 
+Mermaid is a JavaScript-based tool for creating diagrams and flowcharts in Markdown. Learn more about Mermaid in the [official documentation][1] or by using the [Mermaid live editor][2].
 
 ## Setup
 
@@ -36,7 +36,7 @@ graph TD;
 
 {{< img src="/notebooks/guide/build_diagrams_with_mermaidjs/build-diagram-mermaidjs.mp4" alt="Setup steps with example flowchart syntax" video=true style="width:100%;" >}}
 
-[1]: https://mermaid.js.org/#/
+[1]: https://mermaid.js.org/intro/
 [2]: https://mermaid.live/
 [3]: https://app.datadoghq.com/notebook/template/13/build-diagrams-with-mermaid-js
 [4]: https://mermaid.js.org/syntax/classDiagram.html
