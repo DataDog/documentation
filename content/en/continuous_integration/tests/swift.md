@@ -305,9 +305,9 @@ For Network auto-instrumentation, you can configure these additional settings:
 `DD_ENABLE_NETWORK_CALL_STACK_SYMBOLICATED`
 : Shows the call stack information with not only the method name, but also the precise file and line information. May impact your tests' performance (Boolean)
 
-### Infrastructure Test correlation
+### Infrastructure test correlation
 
-If you are running tests in your own infrastructure (mac or simulators tests), you can correlate your tests with your Infrastructure metrics reported by installing the Datadog agent and setting the following setting:
+If you are running tests in your own infrastructure (macOS or simulator tests), you can correlate your tests with your infrastructure metrics by installing the Datadog Agent and setting the following:
 
 `DD_CIVISIBILITY_REPORT_HOSTNAME`
 : Reports the hostname of the machine launching the tests (Boolean)
