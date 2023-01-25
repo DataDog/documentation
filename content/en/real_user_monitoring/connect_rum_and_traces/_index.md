@@ -214,6 +214,7 @@ RUM supports several propagator types to connect resources with backends that ar
 
 {{% tab "Android RUM" %}}
 1. Set up RUM to connect with APM as described above.
+
 2. Configure the `OkHttpClient` interceptor with the list of internal, first-party origins and the tracing header type to use as follows:
     ```java
     val tracedHosts = mapOf("example.com" to setOf(TracingHeaderType.TRACECONTEXT), 
@@ -232,9 +233,7 @@ RUM supports several propagator types to connect resources with backends that ar
       - `.B3`: [B3 single header](https://github.com/openzipkin/b3-propagation#single-header) (`b3`)
       - `.B3MULTI`: [B3 multiple headers](https://github.com/openzipkin/b3-propagation#multiple-headers) (`X-B3-*`)
     
-{{% /tab %}}
-
-{{< /tabs >}}
+{{% /tab %}} {{< /tabs >}}
 
 ## How are RUM resources linked to traces?
 
