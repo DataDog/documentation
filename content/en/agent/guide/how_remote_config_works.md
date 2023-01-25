@@ -57,9 +57,9 @@ The following products and features are supported with Remote Config:
 - **Protect**: This feature allows you to block attackers' IPs, authenticated users, and suspicious requests that are flagged in ASM Security Signals/Traces temporarily or permanently through the Datadog UI.
 
 #### Application Performance Monitoring (APM):  
-<div class="alert alert-info">This feature is in beta.</div>
+<div class="alert alert-info">This feature is only available in private beta.</div>
 
-- **Remotely set agent sampling rate**<br>
+- **Remotely set agent sampling rate**: This features provides you the ability to remotely configure the Datadog Agent to change its trace sampling rates and set rules to scale your organization's trace ingestion according to your needs, without needing to restart your Datadog Agent. This feature works across all languages.<br>
 See [Manage Ingestion](https://docs.datadoghq.com/tracing/trace_pipeline/ingestion_controls/#managing-ingestion-for-all-services-at-the-agent-level) for more information
 
 #### Application Performance Monitoring (APM) Dynamic Instrumentation:
@@ -99,7 +99,6 @@ To use Remote Configuration, you need to meet the following prerequisites:
 | APM (feature: Dynamic Instrumentation) |               | 1.5.0         | x.y.z         | 2.22.0        |               |
 | ASM feature: Protection                | 1.45.1        | 1.4.0         |               | 2.16.0        | 3.11.0        |
 | ASM feature: 1-click activation        |               | 1.4.0         |               | 2.17.0        | 3.9.0         |
-| APM Sampling rate                      |               |               |               |               |               |
 
 #### Setup:
 Once you've ensured that you meet the prerequisites, you can proceed with enabling Remote Configuration using the following steps: 
