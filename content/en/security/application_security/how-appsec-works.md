@@ -33,7 +33,7 @@ Datadog ASM uses the information APM is already collecting, and flags traces con
 Because APM collects a sample of your application traffic, enabling ASM in the tracing library is necessary to effectively monitor and protect your services.
 
 <div class="alert alert-info"><strong>Beta: 1-Click Enablement</strong><br>
-If your service is running with <a href="/agent/guide/how_rc_works/#enabling-remote-configuration">an Agent with Remote Configuration enabled and a tracing library version that supports it</a>, you can <a href="security/application_security/threats/getting_started/">enable ASM</a> from the Datadog UI without additional configuration of the Agent or tracing libraries.</div>
+If your service is running with <a href="/agent/guide/how_rc_works/#enabling-remote-configuration">an Agent with Remote Configuration enabled and a tracing library version that supports it</a>, you can <a href="/security/application_security/threats/getting_started/">enable ASM</a> from the Datadog UI without additional configuration of the Agent or tracing libraries.</div>
 
 ## Compatibility
 
