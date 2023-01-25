@@ -80,7 +80,7 @@ Go to the [APM Settings][6] page to define, change, or remove your primary tags.
 * Only organization administrators have access to this page.
 * Changes may take up to two hours to be reflected in the UI.
 * The tracer always adds `resource`, `name`, and `service` tags to spans. Datadog recommends never adding these as host level tags to avoid confusion.
-* The second primary tag support up to 30 unique values. See [APM Data Volume Guidelines][9] for details.
+* The second primary tag supports up to 30 unique values. See [APM Data Volume Guidelines][9] for details.
 
 If you change a previously set primary tag, be aware of the following:
 
