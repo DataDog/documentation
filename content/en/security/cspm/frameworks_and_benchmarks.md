@@ -45,7 +45,7 @@ Datadog also provides Essential Cloud Security Controls, a set of recommendation
 
 View a high-level overview of your compliance posture for each framework on the CSPM [Overview][20] page.
 
-- **Framework Overview**: A detailed report that gives you insight into how you score against a framework's requirements and rules.
+- **Framework Overview**: A [detailed report](#explore-compliance-framework-reports) that gives you insight into how you score against a framework's requirements and rules.
 - **Explore Resources**: A filtered view of the **Findings** page that shows resources with findings for the selected framework.
 - **Configure Rules**: Customize how your environment is scanned and set notification targets by modifying the detection rules for each framework.
 
