@@ -59,14 +59,12 @@ The following products and features are supported with Remote Config:
 #### Application Performance Monitoring (APM):  
 <div class="alert alert-info">This feature is only available in private beta.</div>
 
-- **Remotely set agent sampling rate**: This features provides you the ability to remotely configure the Datadog Agent to change its trace sampling rates and set rules to scale your organization's trace ingestion according to your needs, without needing to restart your Datadog Agent. This feature works across all languages.<br>
-See [Manage Ingestion](https://docs.datadoghq.com/tracing/trace_pipeline/ingestion_controls/#managing-ingestion-for-all-services-at-the-agent-level) for more information
+- **Remotely set agent sampling rate**: This features provides you the ability to remotely configure the Datadog Agent to change its trace sampling rates and set rules to scale your organization's trace ingestion according to your needs, without needing to restart your Datadog Agent. This feature works across all languages.
 
 #### Application Performance Monitoring (APM) Dynamic Instrumentation:
 <div class="alert alert-info">This feature is only available in private beta.</div>
 
-- **Dynamic Instrumentation**: This feature provides you the ability to send critical metrics, traces, and logs from your live applications with no code changes.<br>
-See How to Enable [Dyamic Instrumentation](https://docs.datadoghq.com/dynamic_instrumentation/?tab=configurationyaml) for more information.
+- **Dynamic Instrumentation**: This feature provides you the ability to send critical metrics, traces, and logs from your live applications with no code changes.
 
 #### Cloud Workload Security (CWS):
 <div class="alert alert-info">This feature is only available in private beta.</div>
@@ -81,7 +79,7 @@ To ensure confidentiality, integrity, and availability of configurations receive
 * Datadog never sends configurations unless requested by Agents, and only sends configurations relevant to the requesting Agent.
 * Since these requests are initiated from your Agents to Datadog , there is no need to open additional ports in your network firewall.
 * The communication between your Agents and Datadog is encrypted using HTTPS, and is authenticated and authorized using your Datadog API key. 
-* Only users with the right RBAC permissions can add Remote Configuration scope on the API key and use the supported product features. 
+* Only users with the right RBAC permissions are authorized to enable Remote Configuration scope on the API key and use the supported product features. 
 * Your configuration changes submitted via the Datadog UI are signed and validated on the Agent and tracing libraries, which verifies the integrity of the configuration from its receipt to delivery.
 
 ## Enabling Remote Configuration
@@ -125,7 +123,7 @@ remote_configuration:
   enabled: true
   ```
 
-6. After updating your Agent configuration file, restart your Datadog Agent for the changes to take effect. 
+6. Restart your Datadog Agent for the changes to take effect.  
 
 {{% /tab %}}
 {{% tab "Environment variable" %}}
@@ -138,8 +136,11 @@ DD_REMOTE_CONFIGURATION_ENABLED=true
 {{% /tab %}}
 {{< /tabs >}}
 
-After completing the steps listed above, your Agent is ready to receive remotely issued configurations, and the [CWS default agent](https://docs.datadoghq.com/security/default_rules/#cat-workload-security) rules will begin updating automatically as released.  To use the features outlined above for ASM and APM, follow the [ASM](https://docs.datadoghq.com/security/application_security/how-appsec-works/#built-in-protection) and [APM](https://docs.datadoghq.com/dynamic_instrumentation/?tab=configurationyaml#enable-remote-configuration) specific instructions.
-
+With this configuration, your Agent requests its configuration from Datadog, and the features that use remote configuration are enabled:
+- CWS [default agent rules](https://docs.datadoghq.com/security/default_rules/#cat-workload-security) update automatically as released.
+- APM Agent-level [sampling rates](https://docs.datadoghq.com/tracing/trace_pipeline/ingestion_controls/#managing-ingestion-for-all-services-at-the-agent-level) are applied.  
+- [Dynamic Instrumentation](https://docs.datadoghq.com/dynamic_instrumentation/?tab=configurationyaml#enable-remote-configuration) is enabled.
+- [ASM](https://docs.datadoghq.com/security/application_security/how-appsec-works/#built-in-protection) 1-Click enablement, IP blocking, and attack pattern updates are enabled.
 
 ## Further Reading
 
