@@ -54,6 +54,12 @@ The following profiling features are available in the following minimum versions
 
 |      Feature         | Required `dd-trace-dotnet` version          |
 |----------------------|-----------------------------------------|
+| Wall time profiling        |                        |
+| CPU profiling        | 2.15.0+                       |
+| Exceptions profiling        | beta, 2.10.0+                       |
+| Allocations profiling        | beta, 2.18.0+                       |
+| Lock Contention profiling        | beta, 2.18.0+                       |
+| Live heap profiling        | beta, 2.22.0+                       |
 | [Code Hotspots][12]        | 2.7.0+                       |
 | [Endpoint Profiling][13]            | 2.15.0+                       |
 
@@ -290,7 +296,7 @@ To install the .NET Profiler per-application:
    CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    CORECLR_PROFILER_PATH=<System-dependent path>
    DD_PROFILING_ENABLED=1
-   LD_PRELOAD=<APP_DIRECTORY>/datadog/continuousprofiler/Datadog.Linux.ApiWrapper.x64.so
+   LD_PRELOAD=<System-dependent path>
    DD_SERVICE=MyService
    DD_ENV=production
    DD_VERSION=1.2.3
@@ -299,13 +305,13 @@ To install the .NET Profiler per-application:
 
    The value for the `<APP_DIRECTORY>` placeholder is the path to the directory containing the application's `.dll` files. The value for the `CORECLR_PROFILER_PATH` environment variable varies based on the system where the application is running:
 
-   Operating System and Process Architecture | CORECLR_PROFILER_PATH Value
-   ------------------------------------------|----------------------------
-   Alpine Linux x64 | `<APP_DIRECTORY>/datadog/linux-musl-x64/Datadog.Trace.ClrProfiler.Native.so`
-   Linux x64        | `<APP_DIRECTORY>/datadog/linux-x64/Datadog.Trace.ClrProfiler.Native.so`
-   Linux ARM64      | `<APP_DIRECTORY>/datadog/linux-arm64/Datadog.Trace.ClrProfiler.Native.so`
-   Windows x64      | `<APP_DIRECTORY>\datadog\win-x64\Datadog.Trace.ClrProfiler.Native.dll`
-   Windows x86      | `<APP_DIRECTORY>\datadog\win-x86\Datadog.Trace.ClrProfiler.Native.dll`
+   Operating System and Process Architecture | CORECLR_PROFILER_PATH Value | LD_PRELOAD Value
+   ------------------------------------------|-------------------------------------|---------------------------
+   Alpine Linux x64 | `<APP_DIRECTORY>/datadog/linux-musl-x64/Datadog.Trace.ClrProfiler.Native.so`| `<APP_DIRECTORY>/datadog/linux-musl-x64/Datadog.Linux.ApiWrapper.x64.so`
+   Linux x64        | `<APP_DIRECTORY>/datadog/linux-x64/Datadog.Trace.ClrProfiler.Native.so` | `<APP_DIRECTORY>/datadog/linux-x64/Datadog.Linux.ApiWrapper.x64.so`
+   Linux ARM64      | `<APP_DIRECTORY>/datadog/linux-arm64/Datadog.Trace.ClrProfiler.Native.so`| `<APP_DIRECTORY>/datadog/linux-arm64/Datadog.Linux.ApiWrapper.x64.so`
+   Windows x64      | `<APP_DIRECTORY>\datadog\win-x64\Datadog.Trace.ClrProfiler.Native.dll` | N/A
+   Windows x86      | `<APP_DIRECTORY>\datadog\win-x86\Datadog.Trace.ClrProfiler.Native.dll` | N/A
 
 3. For Docker images running on Linux, configure the image to run the `createLogPath.sh` script:
 
