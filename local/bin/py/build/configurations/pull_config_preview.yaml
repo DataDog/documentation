@@ -1,6 +1,6 @@
 ---
 - cache_config:
-    global_cache_enabled: true
+    global_cache_enabled: false
     integrations_cache_enabled: true
 
 - data:

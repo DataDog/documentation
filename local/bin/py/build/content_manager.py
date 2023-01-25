@@ -82,17 +82,24 @@ def grouped_globs_table(list_of_contents):
 def download_content_from_external_source(self, content):
     """
     Returns a boolean determining whether pull_config content should be downloaded from cache or external source.
+    Content should always be pulled from source if:
+        * Global or individual cache variables are set to false
+        * Generated file is not .md
+        * This is not a local build, it's a GitLab build.
     """
     use_cached = content.get('options', {}).get('cached', False)
+    file_name = content.get('options', {}).get('file_name', '')
     action = content.get('action', '')
 
     return (self.global_cache_enabled == False) \
         or (use_cached == False) \
-        or (action in ('integrations', 'marketplace-integrations') and self.integrations_cache_enabled == False) \
-        or (not getenv("CI_COMMIT_REF_NAME"))
+        or (action in ('integrations', 'marketplace-integrations') and not self.integrations_cache_enabled) \
+        or (action == 'npm-integrations') \
+        or (file_name != '' and not file_name.endswith('.md')) \
+        # or (not getenv("CI_COMMIT_REF_NAME"))
 
 
-def local_or_upstream(self, github_token, extract_dir, list_of_contents):
+def fetch_sourced_content_from_local_or_upstream(self, github_token, extract_dir):
     """
     This goes through the list_of_contents and check for each repo specified in order:
       * [ONLY LOCAL DEV] Check if a locally cloned version is on this developer machine; one level above this documentation repo
@@ -102,111 +109,106 @@ def local_or_upstream(self, github_token, extract_dir, list_of_contents):
     :param extract_dir: Directory into which to put all content downloaded.
     :param list_of_content: List of content to check if available locally or if it needs to be downloaded from Github
     """
-    grouped_globs = grouped_globs_table(list_of_contents)
+    grouped_globs = grouped_globs_table(self.list_of_sourced_contents)
     is_in_ci = os.getenv("CI_COMMIT_REF_NAME")
 
-    for content in list_of_contents:
-        if download_content_from_external_source(self, content):
-            print(f'Downloading content from {content["repo_name"]}')
-            local_repo_path = os.path.join("..", content["repo_name"])
-            repo_path_last_extract = os.path.join(extract_dir, content["repo_name"])
+    for content in self.list_of_sourced_contents:
+        print(f'Downloading content from {content["repo_name"]}')
+        local_repo_path = os.path.join("..", content["repo_name"])
+        repo_path_last_extract = os.path.join(extract_dir, content["repo_name"])
 
-            if isdir(local_repo_path) and not is_in_ci:
-                print(f"\x1b[32mINFO\x1b[0m: Local version of {content['repo_name']} found in: {local_repo_path}")
-                download_from_local_repo(local_repo_path, content["org_name"], content["repo_name"], content["branch"], grouped_globs.get(content["repo_name"], content["globs"]),
-                                        extract_dir, content.get("sha", None))
-                content["globs"] = update_globs(
-                    "{0}{1}{2}".format(
-                        extract_dir,
-                        content["repo_name"],
-                        sep,
-                    ),
-                    content["globs"],
+        if isdir(local_repo_path) and not is_in_ci:
+            print(f"\x1b[32mINFO\x1b[0m: Local version of {content['repo_name']} found in: {local_repo_path}")
+            download_from_local_repo(local_repo_path, content["org_name"], content["repo_name"], content["branch"], grouped_globs.get(content["repo_name"], content["globs"]),
+                                    extract_dir, content.get("sha", None))
+            content["globs"] = update_globs(
+                "{0}{1}{2}".format(
+                    extract_dir,
+                    content["repo_name"],
+                    sep,
+                ),
+                content["globs"],
+            )
+        elif isdir(repo_path_last_extract) and not is_in_ci:
+            print(
+                f"\x1b[32mINFO\x1b[0m: Local version of {content['repo_name']} found from previous extract in:"
+                f" {repo_path_last_extract} "
+            )
+            content["globs"] = update_globs(
+                repo_path_last_extract,
+                content["globs"],
+            )
+        elif github_token != "false":
+            print(
+                f"\x1b[32mINFO\x1b[0m: No local version of {content['repo_name']} found, downloading content from "
+                f"upstream version and placing in: {extract_dir}"
+            )
+            download_from_repo(github_token,
+                            content["org_name"],
+                            content["repo_name"],
+                            content["branch"],
+                            grouped_globs.get(content["repo_name"], content["globs"]),
+                            extract_dir,
+                            content.get("sha", None)
+                            )
+            content[
+                "globs"
+            ] = update_globs(
+                "{0}{1}{2}".format(
+                    extract_dir,
+                    content["repo_name"],
+                    sep,
+                ),
+                content["globs"],
+            )
+        elif getenv("LOCAL") == 'True':
+            print(
+                "\x1b[33mWARNING\x1b[0m: No local version of {} found, no GITHUB_TOKEN available. Documentation is now in degraded mode".format(content["repo_name"]))
+            content["action"] = "Not Available"
+        else:
+            print(
+                "\x1b[31mERROR\x1b[0m: No local version of {} found, no GITHUB_TOKEN available.".format(
+                    content["repo_name"]
                 )
-            elif isdir(repo_path_last_extract) and not is_in_ci:
-                print(
-                    f"\x1b[32mINFO\x1b[0m: Local version of {content['repo_name']} found from previous extract in:"
-                    f" {repo_path_last_extract} "
-                )
-                content["globs"] = update_globs(
-                    repo_path_last_extract,
-                    content["globs"],
-                )
-            elif github_token != "false":
-                print(
-                    f"\x1b[32mINFO\x1b[0m: No local version of {content['repo_name']} found, downloading content from "
-                    f"upstream version and placing in: {extract_dir}"
-                )
-                download_from_repo(github_token,
-                                content["org_name"],
-                                content["repo_name"],
-                                content["branch"],
-                                grouped_globs.get(content["repo_name"], content["globs"]),
-                                extract_dir,
-                                content.get("sha", None)
-                                )
-                content[
-                    "globs"
-                ] = update_globs(
-                    "{0}{1}{2}".format(
-                        extract_dir,
-                        content["repo_name"],
-                        sep,
-                    ),
-                    content["globs"],
-                )
-            elif getenv("LOCAL") == 'True':
-                print(
-                    "\x1b[33mWARNING\x1b[0m: No local version of {} found, no GITHUB_TOKEN available. Documentation is now in degraded mode".format(content["repo_name"]))
-                content["action"] = "Not Available"
-            else:
-                print(
-                    "\x1b[31mERROR\x1b[0m: No local version of {} found, no GITHUB_TOKEN available.".format(
-                        content["repo_name"]
-                    )
-                )
-                raise ValueError
-
-    return list_of_contents
+            )
+            raise ValueError
 
 
-def extract_config(configuration):
+def extract_sourced_and_cached_content_from_pull_config(self, configuration):
     """
     This pulls the content from the configuration file at `configuration` location
     then parses it to populate the list_of_content variable that contains all contents
     that needs to be pulled and processed.
     :param configuration: Documentation build configuration file path.
     """
-    list_of_contents = []
-    content_configuration_data = configuration[1].get('data', {})
+    pull_config_content = configuration[1].get('data', {})
 
-    for org in content_configuration_data:
+    for org in pull_config_content:
         for repo in org["repos"]:
             for content in repo["contents"]:
-                content_temp = {}
-                content_temp["org_name"] = org[
-                    "org_name"
-                ]
-                content_temp["repo_name"] = repo[
-                    "repo_name"
-                ]
-                content_temp["branch"] = content[
-                    "branch"
-                ]
-                content_temp["sha"] = content.get("sha", None)
-                content_temp["action"] = content[
-                    "action"
-                ]
-                content_temp["globs"] = content["globs"]
+                if download_content_from_external_source(self, content):
+                    content_temp = {}
+                    content_temp["org_name"] = org[
+                        "org_name"
+                    ]
+                    content_temp["repo_name"] = repo[
+                        "repo_name"
+                    ]
+                    content_temp["branch"] = content[
+                        "branch"
+                    ]
+                    content_temp["sha"] = content.get("sha", None)
+                    content_temp["action"] = content[
+                        "action"
+                    ]
+                    content_temp["globs"] = content["globs"]
 
-                if content["action"] in ("pull-and-push-folder", "pull-and-push-file", "security-rules", "compliance-rules", "workflows"):
-                    content_temp["options"] = content["options"]
+                    if content["action"] in ("pull-and-push-folder", "pull-and-push-file", "security-rules", "compliance-rules", "workflows"):
+                        content_temp["options"] = content["options"]
 
-                list_of_contents.append(
-                    content_temp
-                )
-
-    return list_of_contents
+                    self.list_of_sourced_contents.append(content_temp)
+                else:
+                    self.list_of_cached_contents.append(content)
 
 
 def prepare_content(self, configuration, github_token, extract_dir):
@@ -218,24 +220,21 @@ def prepare_content(self, configuration, github_token, extract_dir):
     :param extract_dir: Directory into which to put all content downloaded.
     """
     try:
-        list_of_contents = local_or_upstream(
-            self, github_token, extract_dir, extract_config(configuration))
+        extract_sourced_and_cached_content_from_pull_config(self, configuration)
+        fetch_sourced_content_from_local_or_upstream(self, github_token, extract_dir)
     except Exception as e:
         if not getenv("CI_COMMIT_REF_NAME"):
-            print(
-                f"\x1b[33mWARNING\x1b[0m: Downloading files failed, documentation is now in degraded mode. {e}")
+            print(f"\x1b[33mWARNING\x1b[0m: Downloading files failed, documentation is now in degraded mode. {e}")
         else:
-            print(
-                "\x1b[31mERROR\x1b[0m: Downloading files failed, stopping build.")
+            print("\x1b[31mERROR\x1b[0m: Downloading files failed, stopping build.")
             sys.exit(1)
-    return list_of_contents
 
 
-def download_and_extract_cached_content():
-    latest_commit_hash = getenv("LATEST_MASTER_REV_HASH")
-    static_bucket = getenv("STATIC_BUCKET")
+def download_and_extract_cached_files_from_s3():
+    # static_bucket = getenv("STATIC_BUCKET")
+    static_bucket = 'origin-static-assets'
 
-    s3_url = f'https://{static_bucket}.s3.amazonaws.com/build_artifacts/master/{latest_commit_hash}-ignored.tar.gz'
+    s3_url = f'https://{static_bucket}.s3.amazonaws.com/build_artifacts/master/latest-ignored.tar.gz'
     artifact_download_response = requests.get(s3_url, stream=True)
 
     with tarfile.open(mode='r|gz', fileobj=artifact_download_response.raw) as artifact_tarfile:
@@ -243,43 +242,34 @@ def download_and_extract_cached_content():
         artifact_tarfile.close()
 
 
-def copy_cached_content_into_repo(self, cached_content_array):
-    """
-    :param cached_content_array: Array of repos from which we want to pull content from s3 cache
-    """
-    try:
-        download_and_extract_cached_content()
+def download_cached_content_into_repo(self):
+    # download_and_extract_cached_files_from_s3()
 
-        # Copy the files we want to use from the cache
-        for content in cached_content_array:
-            action = content.get('action', '')
-            destination = ''
+    for content in self.list_of_cached_contents:
+        action = content.get('action', '')
+        destination = ''
 
-            if action == 'pull-and-push-file':
-                dest_path = content.get('options', {}).get('dest_path')
-                dest_file_name = content.get('options', {}).get('file_name')
-                full_dest_path = f'{self.en_content_path}{dest_path}{dest_file_name}'
+        if action == 'pull-and-push-file':
+            dest_path = content.get('options', {}).get('dest_path')
+            dest_file_name = content.get('options', {}).get('file_name')
+            full_dest_path = f'{self.relative_en_content_path}{dest_path}{dest_file_name}'
 
-                os.makedirs(os.path.dirname(full_dest_path), exist_ok=True)
-                print(f'Copying {full_dest_path} from cache')
-                shutil.copy(f'temp/{full_dest_path}', full_dest_path)
-            elif action == 'pull-and-push-folder':
-                destination = content.get('options', {}).get('dest_dir', '')
-            elif action in ('workflows', 'security-rules'):
-                destination = content.get('options', {}).get('dest_path', '')
-            elif action not in ('integrations', 'marketplace-integrations'):
-                print(f'Action {action} unsupported, cannot copy from cache.')
+            os.makedirs(os.path.dirname(full_dest_path), exist_ok=True)
+            print(f'Copying {full_dest_path} from cache')
+            shutil.copy(f'temp/{full_dest_path}', full_dest_path)
+        elif action == 'pull-and-push-folder':
+            destination = content.get('options', {}).get('dest_dir', '')
+        elif action in ('workflows', 'security-rules'):
+            destination = content.get('options', {}).get('dest_path', '')
+        elif action not in ('integrations', 'marketplace-integrations', 'npm-integrations'):
+            print(f'Action {action} unsupported, cannot copy from cache.')
 
-            if destination != '':
-                print(f'Copying {self.en_content_path}{destination} directory from cache')
-                shutil.copytree(f'temp/{self.en_content_path}{destination}', f'{self.en_content_path}{destination}', dirs_exist_ok=True)
+        if destination != '':
+            print(f'Copying {self.relative_en_content_path}{destination} directory from cache')
+            shutil.copytree(f'temp/{self.relative_en_content_path}{destination}', f'{self.relative_en_content_path}{destination}', dirs_exist_ok=True)
 
-        # Integrations are handled separately for now
-        if self.integrations_cache_enabled:
-            shutil.copytree(f'temp/{self.en_content_path}/integrations', f'{self.en_content_path}/integrations', dirs_exist_ok=True)
-            
-        shutil.rmtree('temp')
-    except Exception as e:
-        print('Error copying cached content')
-        print(e)
-        shutil.rmtree('temp')
+    # Integrations are handled separately for now
+    if self.integrations_cache_enabled:
+        shutil.copytree(f'temp/{self.relative_en_content_path}/integrations', f'{self.relative_en_content_path}/integrations', dirs_exist_ok=True)
+        
+    # shutil.rmtree('temp')
