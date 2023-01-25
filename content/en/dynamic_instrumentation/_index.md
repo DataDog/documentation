@@ -36,6 +36,7 @@ Dynamic Instrumentation lets you capture data from your live applications withou
 Dynamic Instrumentation requires the following:
 
 - [Datadog Agent][1] 7.41.1 or higher is installed alongside your service.
+- [Remote Configuration][8] is enabled in that Agent.
 - For Java applications, tracing library [`dd-trace-java`][2] 1.5 or higher.
 - For Python applications, tracing library [`dd-trace-py`][3] 1.5 or higher.
 - For .NET applications, tracing library [`dd-trace-dotnet`][4] 2.22 or higher.
@@ -44,31 +45,6 @@ Dynamic Instrumentation requires the following:
 
 **Note**: `debugger_read` and `debugger_write` permissions are required to access the Dynamic Instrumentation page. For more information about roles and on how to assign roles to users, see [Role Based Access Control][7].
 
-### Enable Remote Configuration
-
-1. Go to the [Remote Configuration setup page][8] and enable the feature for your organization.
-2. Create a key. 
-3. Update your `datadog-agent` with the provided configuration snippet.
-4. Set `remote_configuration.refresh_interval` to be 5 seconds:
-   {{< tabs >}}
-   {{% tab "Configuration YAML" %}}
-   
-   Edit `datadog-agent.yaml` to add:
-   ```yaml
-   remote_configuration:
-     refresh_interval: 5s
-   ```
-   {{% /tab %}}
-   {{% tab "Environment variables" %}}
-   
-   Export the following environment variable:
-   ```shell
-   export DD_REMOTE_CONFIGURATION_REFRESH_INTERVAL=5s
-   ```
-   {{% /tab %}}
-   {{< /tabs >}}
-
-**Note**: Datadog Administrator permissions are required to enable Remote Configuration and create a key. This is a one-time setup per environment. If you do not have the necessary access rights, contact your Datadog administrator.
 
 ### Create a logs index
 
@@ -146,7 +122,7 @@ To remove the filter, open the same menu item and click **Delete Filter**.
 [5]: /getting_started/tagging/unified_service_tagging/
 [6]: /integrations/guide/source-code-integration/
 [7]: /account_management/rbac/permissions#apm
-[8]: https://app.datadoghq.com/organization-settings/remote-config
+[8]: /agent/guide/how_remote_config_works/
 [9]: /logs/log_configuration/indexes/#exclusion-filters
 [10]: /logs/log_configuration/indexes/#add-indexes
 [11]: /dynamic_instrumentation/how-it-works/
