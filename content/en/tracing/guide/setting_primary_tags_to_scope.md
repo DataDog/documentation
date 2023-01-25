@@ -70,7 +70,7 @@ Environments appear at the top of APM pages. Use the `env` dropdown to scope the
 
 ## Add a second primary tag in Datadog
 
-If you need to aggregate your trace metrics by additional dimensions, we recommend setting up a second primary tag in addition to the
+If you need to aggregate your trace metrics across additional dimensions, we recommend setting up a second primary tag in addition to the
 default and mandatory primary tag `env:<ENVIRONMENT>`. Once configured, you will see a second dropdown in Service Catalog Performance tab. 
 
 Go to the [APM Settings][6] page to define, change, or remove your primary tags.
