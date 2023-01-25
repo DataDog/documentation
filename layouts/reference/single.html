@@ -1,0 +1,96 @@
+{{ define "main" }}
+    <h1 id="pagetitle">{{ .Title }}</h1>
+    {{ with .Content }}{{ . }}{{ end }}
+
+    {{ $t := (index .Site.Data.reference "schema.tables") }}
+    {{ $iterable_data := (index $t (.Title | lower)) }}
+
+    {{ range $data := $iterable_data }}
+      <div style="padding:10px;">
+        <h3 id="{{ $data.metadata.logical_name | anchorize }}"><a href="#{{ $data.metadata.logical_name | anchorize }}">{{ $data.description1 }}</a></h3>
+        <p>{{ $data.description2 | markdownify }}</p>
+
+        <div class="tab-content">
+        <ul class="nav nav-tabs border-none response-toggle">
+            <li class="nav-item">
+                <a class="nav-link mr-1 js-model-link active" href="#" data-bs-toggle="tab">Options</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link mr-1 js-example-link" href="#" data-bs-toggle="tab">Schema</a>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active js-tab-model" id="{{ $data.metadata.logical_name | lower }}-request-model">
+            <div class="schema-table row">
+              {{ if in . "toggle-arrow" }}<p class="expand-all js-expand-all text-primary">Expand All</p>{{ end }}
+              <div class="col-12">
+                <div class="row table-header">
+                  <div class="col-4 column">
+                    <p class="font-semibold">{{ i18n "field" }}</p>
+                  </div>
+                  <div class="col-1-5 column">
+                    <p class="font-semibold">required</p>
+                  </div>
+                  <div class="col-1-5 column">
+                    <p class="font-semibold">{{ i18n "type" }}</p>
+                  </div>
+                  <div class="col-5 column">
+                    <p class="font-semibold">{{ i18n "description" }}</p>
+                  </div>
+                </div>
+                {{ $data.html | safeHTML }}
+              </div>
+            </div>
+          </div>
+          <div role="tabpanel" class="tab-pane js-tab-example" id="{{ $data.metadata.logical_name | lower }}-request-example">
+             <div class="code-snippet-wrapper">
+                <div class="code-snippet">
+
+                  <div class="example-accordion" id="{{ $data.metadata.logical_name | lower }}-accordion-parent">
+                    <div class="card">
+                      <div class="card-header p-0">
+                        <h5 class="m-0">
+                          <button class="btn btn-link font-bold w-100 text-start" data-bs-toggle="collapse" data-bs-target="#{{ $data.metadata.logical_name | lower }}-example-simple" aria-expanded="true" type="button" aria-controls="{{ $data.metadata.logical_name | lower }}-example-simple">
+                            Simple
+                          </button>
+                        </h5>
+                      </div>
+                      <div id="{{ $data.metadata.logical_name | lower }}-example-simple" class="collapse show" data-bs-parent="#{{ $data.metadata.logical_name | lower }}-accordion-parent" style>
+                        <div class="card-body p-0 code-snippet">
+                            <div class="code-button-wrapper position-absolute">
+                                <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
+                            </div>
+                            {{ highlight $data.simple "yaml" "" }}
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card">
+                      <div class="card-header p-0">
+                        <h5 class="m-0">
+                          <button class="btn btn-link font-bold w-100 text-start" data-bs-toggle="collapse" data-bs-target="#{{ $data.metadata.logical_name | lower }}-example-advanced" aria-expanded="false" type="button" aria-controls="{{ $data.metadata.logical_name | lower }}-example-advanced">
+                            Advanced
+                          </button>
+                        </h5>
+                      </div>
+                      <div id="{{ $data.metadata.logical_name | lower }}-example-advanced" class="collapse" data-bs-parent="#{{ $data.metadata.logical_name | lower }}-accordion-parent" style>
+                        <div class="card-body p-0 code-snippet">
+                            <div class="code-button-wrapper position-absolute">
+                                <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
+                            </div>
+                            {{ highlight $data.advanced "yaml" "" }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+             </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    {{ end }}
+
+{{ end }}

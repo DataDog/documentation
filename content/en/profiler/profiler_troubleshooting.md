@@ -217,10 +217,21 @@ Without this flag, profiles for short-lived Resque jobs will be unavailable.
 
 There is a known incompatibility between Ruby 2.7 and older GCC versions (4.8 and below) that impacts the profiler ([upstream Ruby report][6], [`dd-trace-rb` bug report][7]). This can result in the following error message: "Your ddtrace installation is missing support for the Continuous Profiler because compilation of the Ruby VM just-in-time header failed. Your C compiler or Ruby VM just-in-time compiler seem to be broken."
 
-
 To fix this, update your operating system or Docker image so that the GCC version is something more recent than v4.8.
 
 For further help with this issue, [contact support][2] and include the output of running `DD_PROFILING_FAIL_INSTALL_IF_MISSING_EXTENSION=true gem install ddtrace` and the resulting `mkmf.log` file.
+
+## Frames omitted when backtraces are very deep
+
+The Ruby profiler truncates deep backtraces when collecting profiling data. Truncated backtraces are missing some of their caller functions, making it impossible to link them to the root call frame. As a result, truncated backtraces are grouped together under a `N frames omitted` frame.
+
+You can increase the maximum depth with the `DD_PROFILING_MAX_FRAMES` environment variable, or in code:
+
+```ruby
+Datadog.configure do |c|
+  c.profiling.advanced.max_frames = 500
+end
+```
 
 [1]: /tracing/troubleshooting/#tracer-debug-logs
 [2]: /help/
@@ -282,6 +293,18 @@ If you've configured the profiler and don't see profiles in the profile search p
       ```
 
    5. Check the other HTTP codes for possible errors such as 403 for invalid API key.
+
+4. For missing CPU or Wall time profiles only, check that the Datadog signal handler for stack walk has not been replaced:
+
+   1. Open the `DD-DotNet-Profiler-Native-<Application Name>-<pid>` log file in the `/var/log/datadog` folder.
+
+   2. Look for these two messages:
+      - `Profiler signal handler was replaced again. It will not be restored: the profiler is disabled.`
+      - `Fail to restore profiler signal handler.`
+
+   3. If one of these messages is present, it means that the application code or a third party code is repeatedly reinstalling its own signal handler over the Datadog signal handler. To avoid any further conflict, the CPU and Wall time profilers are disabled.
+
+   Note that the following message could appear, but it does not impact Datadog profiling: `Profiler signal handler has been replaced. Restoring it.` This indicates only that the Datadog signal handler is reinstalled when it was overwritten.
 
 [1]: /profiler/enabling/dotnet/?tab=linux#configuration
 
@@ -348,6 +371,27 @@ Otherwise, turn on [debug mode][1] and [open a support ticket][2] with the debug
 
 The profiler has a fixed overhead. The exact value can vary but this fixed cost means that the relative overhead of the profiler can be significant in very small containers. To avoid this situation, the profiler is disabled in containers with less than 1 core.
 You can override the 1 core threshold by setting `DD_PROFILING_MIN_CORES_THRESHOLD` environment variable to a value smaller than 1. For example, a value of `0.5` allows the profiler to run in a container with at least 0.5 cores.
+
+
+## No CPU or Wall time because the application on Linux is hung
+
+If an application hangs, or otherwise becomes unresponsive on Linux, CPU and Wall time samples are no longer available, follow these steps:
+
+1. Open the `DD-DotNet-Profiler-Native-<Application Name>-<pid>` log file in the `/var/log/datadog/dotnet` folder.
+
+2. Look for `StackSamplerLoopManager::WatcherLoopIteration - Deadlock intervention still in progress for thread ...`. If this message is not present, the rest does not apply.
+
+3. If the message is found, it means that the stack walking mechanism could be deadlocked. To investigate the issue, dump the call stacks of all threads in the application. For example, to do this with the gdb debugger:
+
+   1. Install gdb.
+
+   2. Run the following command:
+      ```
+      gdb -p <process id> -batch -ex "thread apply all bt full" -ex "detach" -ex "quit"
+      ```
+
+   3. Send the resulting output to [Datadog Support][2].
+
 
 [1]: /tracing/troubleshooting/#tracer-debug-logs
 [2]: /help/

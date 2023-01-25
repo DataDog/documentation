@@ -21,7 +21,7 @@ assets:
     source_type_name: Apache APISIX
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: コミュニティ
   sales_email: dev@apisix.apache.org
   support_email: dev@apisix.apache.org
 categories:

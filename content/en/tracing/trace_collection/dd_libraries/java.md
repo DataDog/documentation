@@ -56,7 +56,7 @@ Install and configure the Datadog Agent to receive traces from your instrumented
    ```
    DD_TRACE_AGENT_URL=http://custom-hostname:1234
    DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket
-   
+
    ```
 
    ```bash
@@ -109,12 +109,12 @@ For other environments, please refer to the [Integrations][5] documentation for 
 
 After the agent is installed, to begin tracing your applications:
 
-1. Download `dd-java-agent.jar` that contains the latest Agent class files:
+1. Download `dd-java-agent.jar` that contains the latest tracer class files, to a folder that is accessible by your Datadog user:
 
    ```shell
    wget -O dd-java-agent.jar https://dtdg.co/latest-java-tracer
    ```
-   
+
    **Note:** To download a specific major version, use the `https://dtdg.co/java-tracer-vX` link instead, where `vX` is the desired version.
    For example, use `https://dtdg.co/java-tracer-v0` for the latest version 0.
    Alternatively, see Datadog's [Maven repository][3] for any specific version.
