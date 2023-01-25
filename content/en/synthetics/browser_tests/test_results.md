@@ -88,7 +88,7 @@ Every executed test step contains a screenshot of the step action, a link to the
 
 ### Page performance
 
-Synthetic Monitoring displays two [Core Web Vital metrics][6] ([Largest Contentful Paint][2] and [Cumulative Layout Shift][3]) as pills to the right of each step URL. [First Input Delay][4] is available if you are using [Real User Monitoring][5] to collect real user data. For more information, see [Monitoring Page Performance][6].
+Synthetic Monitoring includes two [Core Web Vital metrics][6] ([Largest Contentful Paint][2] and [Cumulative Layout Shift][3]) as lab metrics and displays them as pills to the right of each step URL. [First Input Delay][4] is available as a real metric if you are using [Real User Monitoring][5] to collect real user data. For more information, see [Monitoring Page Performance][6].
 
 ### Errors and warnings
 
