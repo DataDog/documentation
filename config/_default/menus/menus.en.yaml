@@ -265,7 +265,7 @@ main:
     identifier: agent_logs
     parent: agent
     weight: 8
-  - name: Advanced Log Collection
+  - name: Advanced Configurations
     url: agent/logs/advanced_log_collection
     parent: agent_logs
     weight: 801
