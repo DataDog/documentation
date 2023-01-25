@@ -40,10 +40,8 @@ You can access performance metrics for your views in:
 
 {{< img src="real_user_monitoring/browser/core-web-vitals.png" alt="Core Web Vitals summary visualization"  >}}
 
-Real User Monitoring includes these metrics as lab metrics in a RUM application's Overview page.
-
 - First Input Delay and Largest Contentful Paint are not collected for pages opened in the background (for example, in a new tab or a window without focus).
-- Metrics collected from your real users' page views may differ from those calculated for pages loaded in a fixed environment such as a [Synthetic browser test][6].
+- Metrics collected from your real users' page views may differ from those calculated for pages loaded in a fixed, controlled environment such as a [Synthetic browser test][6]. Synthetic Monitoring displays Largest Contentful Paint and Cumulative Layout Shift as lab metrics, not real metrics.  
 
 | Metric                   | Focus            | Description                                                                                           | Target value |
 |--------------------------|------------------|-------------------------------------------------------------------------------------------------------|--------------|
