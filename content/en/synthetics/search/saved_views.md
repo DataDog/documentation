@@ -2,9 +2,9 @@
 title: Saved Views
 kind: documentation
 further_reading:
-- link: "/continuous_testing/explorer/search/"
+- link: "/synthetics/search/"
   tag: "Documentation"
-  text: "Create a search query for your CI batches"
+  text: "Learn how to search and manage your Synthetic tests"
 ---
 
 ## Overview
