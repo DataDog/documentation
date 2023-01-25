@@ -231,8 +231,7 @@ def prepare_content(self, configuration, github_token, extract_dir):
 
 
 def download_and_extract_cached_files_from_s3():
-    # static_bucket = getenv("STATIC_BUCKET")
-    static_bucket = 'origin-static-assets'
+    static_bucket = getenv("STATIC_BUCKET")
 
     s3_url = f'https://{static_bucket}.s3.amazonaws.com/build_artifacts/master/latest-ignored.tar.gz'
     artifact_download_response = requests.get(s3_url, stream=True)
@@ -243,7 +242,7 @@ def download_and_extract_cached_files_from_s3():
 
 
 def download_cached_content_into_repo(self):
-    # download_and_extract_cached_files_from_s3()
+    download_and_extract_cached_files_from_s3()
 
     for content in self.list_of_cached_contents:
         action = content.get('action', '')
@@ -272,4 +271,6 @@ def download_cached_content_into_repo(self):
     if self.integrations_cache_enabled:
         shutil.copytree(f'temp/{self.relative_en_content_path}/integrations', f'{self.relative_en_content_path}/integrations', dirs_exist_ok=True)
         
-    # shutil.rmtree('temp')
+    # Cleanup temporary dir after cache download complete
+    if os.path.isdir('temp'):
+        shutil.rmtree('temp')

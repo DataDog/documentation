@@ -43,16 +43,22 @@ class Build:
         self.extract_dir = "{0}".format(
             join(self.tempdir, "extracted") + sep
         )
+        
 
     # Loads the configurations in the configuration/ folder and attaches it to the Build Class
-    def load_config(self, build_configuration_file_path, integration_merge_configuration_file_path):
+    def load_config(self, build_configuration_file_path, integration_merge_configuration_file_path, disable_cache_on_retry=False):
         """
         Loads configurations for external content to pull and/or cache, and attaches it to the Build Class
         """
         self.build_configuration = yaml.safe_load(open(build_configuration_file_path))
-        cache_config = self.build_configuration[0].get('cache_config', {})
-        self.global_cache_enabled = cache_config.get('global_cache_enabled', False)
-        self.integrations_cache_enabled = False if not self.global_cache_enabled else cache_config.get('integrations_cache_enabled', False)
+
+        if disable_cache_on_retry:
+            self.global_cache_enabled = False
+            self.integrations_cache_enabled = False
+        else:
+            cache_config = self.build_configuration[0].get('cache_config', {})
+            self.global_cache_enabled = cache_config.get('global_cache_enabled', False)
+            self.integrations_cache_enabled = False if not self.global_cache_enabled else cache_config.get('integrations_cache_enabled', False)
 
         if not self.integrations_cache_enabled:
             self.integration_mutations = OrderedDict(yaml.safe_load(open(integration_merge_configuration_file_path)))
@@ -68,7 +74,7 @@ class Build:
     def build_documentation(self):
 
         # Instanciation of the integrations class since it's needed for content management below.
-        # This can be skipped if integrations are being pulled out of cache.
+        # This can be skipped if integrations are being pulled from cache.
         if not self.integrations_cache_enabled:
             Int = Integrations(self.source_dir, self.tempdir, self.integration_mutations)
 
@@ -133,14 +139,11 @@ class Build:
                 if os.path.isdir('temp'):
                     shutil.rmtree('temp')
 
-                print('Error downloading cached content')
-
-                # if not getenv("CI_COMMIT_REF_NAME"):
-                #     print('Downloading cached content failed, documentation is now in degraded mode.')
-                # else:
-                #     print('Download cached content failed, retrying with full build...')
-
-                main(True)
+                if not getenv("CI_COMMIT_REF_NAME"):
+                    print('Downloading cached content failed, documentation is now in degraded mode.')
+                else:
+                    print('Download cached content failed, retrying with full build from external sources.')
+                    main(True)
 
 
 def main(disable_cache_on_retry=False):
@@ -155,16 +158,8 @@ def main(disable_cache_on_retry=False):
     # 3. Retrieve the list of content to work with and updates it based of the configuration specification
     # 4. Actually build the documentation with the udpated list of content.
     build = Build(temp_directory)
-
-    if disable_cache_on_retry: 
-        build.integrations_cache_enabled = False
-        build.global_cache_enabled = False
-
-    build.load_config(build_configuration_file_path,
-                      integration_merge_configuration_file_path)
-
+    build.load_config(build_configuration_file_path, integration_merge_configuration_file_path, disable_cache_on_retry)
     build.get_list_of_content(build.build_configuration)
-
     build.build_documentation()
 
 
