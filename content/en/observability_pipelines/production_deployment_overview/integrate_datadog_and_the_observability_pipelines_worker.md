@@ -1,11 +1,12 @@
 ---
-title: Configure Observability Pipelines with Datadog
+title: Integrate Datadog and the Observability Pipelines Worker
 kind: documentation
 aliases:
   - /agent/vector_aggregation/
   - /integrations/observability_pipelines/integrate_vector_with_datadog/
   - /observability_pipelines/integrate_vector_with_datadog/
   - /observability_pipelines/integrations/integrate_vector_with_datadog/
+  - /observability_pipelines/guide/configure_observability_pipelines_with_datadog/
 further_reading:
 - link: "/logs/"
   tag: "Documentation"
