@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-Saved views allow you to save the state of the **Search and Manage** [Synthetic Tests page][1] and enable effective troubleshooting by providing you with quick access to scoped queries, relevant facets, [test coverage widgets][3], and the time range. 
+Saved views allow you to save the state of the **Search and Manage** [Synthetic Tests page][1]. They enable effective troubleshooting by providing you with quick access to scoped queries, relevant facets, [test coverage widgets][3], and the time range. 
 
 You can also use saved views to share common queries and configurations with your teammates.
 
