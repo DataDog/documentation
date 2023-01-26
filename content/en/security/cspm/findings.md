@@ -61,21 +61,36 @@ The side panel lists detection rules that were evaluated against the resource, s
 
 {{< img src="security/cspm/findings/passed-rules.png" alt="Group and aggregate by resource in search" style="width:100%;">}}
 
-## Mute findings for selected resources
+## Mute findings
+
+{{< beta-callout url="#" >}}
+  Muted findings is in beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.
+{{< /beta-callout >}}
+
+Triage your findings 
+
+Users can now mute a finding so that it will no longer be listed or included in visualisations allowing them to better focus on misconfigurations that matters.
+
+change the status of any pass/fail finding to “muted” and vice versa 
 
 For example, you might have a Fail finding on a resource...
+a failed finding for a S3 bucket that should not be publicly exposed. 
 
+For example, you might have a **Fail** finding for the 'Block Public Access' feature is enabled for S3 bucket finding. 
 
+For example, the 
+
+while providing justification for the suppression.
 
 1. On the finding side panel, select a resource.
 2. Click **Mute**.
-3. Select a reason for muting the finding:
+3. Select a reason for the mute:
     - Pending fix
     - False positive
     - Accepted risk
     - Other
 4. Enter an optional **Description**.
-5. Select the duration for which the finding is muted:
+5. Select the duration of the mute:
     - 2 weeks
     - 1 month
     - 3 months
@@ -84,6 +99,8 @@ For example, you might have a Fail finding on a resource...
 6. Click **Mute**.
 
 ### Unmute a finding
+
+Muted findings automatically unmute after the specified mute duration expires. If necessary, you can also manually unmute a finding.
 
 1. On the finding side panel, select the resource with the muted finding.
 2. Click **Unmute**.
@@ -97,10 +114,12 @@ For example, you might have a Fail finding on a resource...
 
 ### Audit your muted findings
 
-CSPM provides several options for viewing an auditing muted findings:
+CSPM provides several options for viewing your muted findings. 
+
+This allows you to audit your findings, as well as review whether a muted finding is currently in a pass or fail state for a given resource.
 
 - Sort by the **Muted** column on the Security Findings Explorer.
-- Filter the page using the Muted facet.
+- Filter the Security Findings Explorer using the **Muted** facet.
 - View finding > Timeline
 
 ## Further reading
