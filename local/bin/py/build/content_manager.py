@@ -253,12 +253,11 @@ def download_cached_content_into_repo(self):
             print(f'Copying {full_dest_path} from cache')
             shutil.copy(f'temp/{full_dest_path}', full_dest_path)
         elif action == 'pull-and-push-folder':
-            raise ValueError('This is a fake error')
             destination = content.get('options', {}).get('dest_dir', '')
         elif action in ('workflows', 'security-rules'):
             destination = content.get('options', {}).get('dest_path', '')
         elif action not in ('integrations', 'marketplace-integrations', 'npm-integrations'):
-            print(f'Action {action} unsupported, cannot copy from cache.')
+            raise ValueError(f'Action {action} unsupported, cannot copy from cache.')
 
         if destination != '':
             print(f'Copying {self.relative_en_content_path}{destination} directory from cache')
