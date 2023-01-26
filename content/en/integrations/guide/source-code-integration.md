@@ -126,7 +126,7 @@ You can directly access a trace in its source repository on GitHub in [Error Tra
 2. Click on an issue. The **Issue Details** panel appears on the right.
 3. Under **Latest Event**, click the **View** button on the right of a frame or select **View file**, **View Git blame**, or **View commit** to be redirected to your source code management tool.
 
-{{< img src="integrations/guide/source_code_integration/links-to-git-error.png" alt="A view repository button available on the right of a trace in Error Tracking" style="width:90%;">}}
+{{< img src="integrations/guide/source_code_integration/links-to-git-error-full.png" alt="A view repository button with three options (view file, view blame, and view commit) available on the right side of an error stack trace in Error Tracking" style="width:100%;">}}
 
 [1]: /tracing/error_tracking/
 [2]: https://app.datadoghq.com/apm/error-tracking
