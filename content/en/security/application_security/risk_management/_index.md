@@ -9,7 +9,7 @@ further_reading:
 
 <div class="alert alert-info">Application Security Risk Management is in beta.</a></div>
 
-ASM Risk Management offers built-in detection capabilities that warn you about the vulnerabilities detected in your open source dependencies. Details of that information are shown in the [Vulnerability Explorer][20], identifying the severity, affected services, potentially vulnerable infrastructure, and remediation instructions to solve the surfaced risks.
+ASM Risk Management offers built-in detection capabilities that warn you about the vulnerabilities detected in your open source dependencies. Details of that information are shown in the [Vulnerability Explorer][3], identifying the severity, affected services, potentially vulnerable infrastructure, and remediation instructions to solve the surfaced risks.
 
 The Vulnerability Explorer shows a complete list of vulnerabilities detected by ASM Risk Management, ordering the vulnerabilities based on their severity, and offering filtering capabilities so you can investigate and prioritize problems. It also shows the number of affected libraries, the language of the affected library, and the last time that vulnerability was detected.
 
@@ -49,3 +49,4 @@ Risk Management uses the information APM is already collecting, and flags librar
 
 [1]: /help/
 [2]: https://app.datadoghq.com/services?lens=Security
+[3]: https://app.datadoghq.com/security/appsec/vm

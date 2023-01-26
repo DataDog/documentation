@@ -99,6 +99,8 @@ From there, all services already protected by ASM block incoming requests perfor
 
 ## Built-in vulnerability detection
 
+<div class="alert alert-info">Risk Management through vulnerability detection is in beta.</a></div>
+
 Datadog ASM offers built-in detection capabilities that warn you about the vulnerabilities detected in your open source dependencies. Details of that information are shown in the [Vulnerability Explorer][20], identifying the severity, affected services, potentially vulnerable infrastructure, and remediation instructions to solve the surfaced risks.
 
 For more information, see [Risk Management][21].
