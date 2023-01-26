@@ -156,7 +156,7 @@ If you are a GitHub SaaS user, install Datadog's [GitHub integration][2] to dire
 3. Click **Connect to Preview** and **Authorize** to access the source code snippet containing the error.
 4. Under **Latest Event**, click the **View Code** button on the right of a frame or select **View file**, **View Git blame**, or **View commit** to be redirected to your source code management tool.
 
-{{< img src="integrations/guide/source_code_integration/error-tracking-panel.png" alt="An inline code snippet in a stack trace" style="width:100%;">}}
+{{< img src="integrations/guide/source_code_integration/error-tracking-panel-full.png" alt="An inline code snippet in a stack trace" style="width:100%;">}}
 
 To install a GitHub App for your organization, you need to be an organization owner or have admin permissions in a repository. You can also install a GitHub App on your personal GitHub account. For more information, see [GitHub Apps & OAuth Apps][3].
 
