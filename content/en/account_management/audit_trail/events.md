@@ -134,6 +134,7 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [Facet][42] | A user created, modified, or deleted a [facet][43] and the previous and/or new values for the facet configuration. | `@evt.name:APM @asset.type:facet` |
 | [Primary operation name][44] | A user created, modified, or deleted the [primary operation name][45] of a service and the previous and/or new values for the configuration. | `@evt.name:APM @asset.type:service_operation_name` |
 | [Second Primary tag][46] | A user added, modified, or deleted the [second primary tag][47] and the previous and/or new values for the configuration.  | `@evt.name:APM @asset.type:second_primary_tag` |
+| [Samplers remote configuration][81] | A user remotely configured the APM agents sampling rates.  | `@evt.name:APM @asset.type:samplerconfig` |
 
 ### Metrics events
 | Name | Description of audit event                                          | Query in audit explorer                           |
@@ -295,3 +296,4 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 [78]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Application%20Security%22%20%40asset.type%3Aip_denylist
 [79]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Application%20Security%22%20%40asset.type%3Aevent_rules
 [80]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A"Application%20Security"%20%40asset.type%3Acompatible_services
+[81]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3AAPM%20%40asset.type%3Asamplerconfig
