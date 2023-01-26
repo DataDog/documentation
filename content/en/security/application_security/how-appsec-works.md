@@ -20,17 +20,23 @@ further_reading:
 
 Datadog Application Security Management (ASM) provides observability into application-level attacks that aim to exploit code-level vulnerabilities, and into any bad actors targeting your systems.
 
-APM records information about each application request, referred to as traces. Datadog ASM uses the same library as APM to monitor your traffic, and flags attack attempts based on suspicious requests that match known attack patterns. Security signals are automatically created when Datadog detects application attacks impacting your services. The signals identify meaningful threats for you review instead of assessing each individual attack attempt. Depending on your security signal settings, you can receive notifications from Slack, email, or PagerDuty.
+APM records information about each application request, referred to as traces. Datadog ASM uses the same library as APM to monitor your traffic, and flags attack attempts based on suspicious requests that match known attack patterns. Security signals are automatically created when Datadog detects application attacks impacting your services. The signals identify meaningful threats for your review instead of assessing each individual attack attempt. Depending on your security signal settings, you can receive notifications from Slack, email, or PagerDuty.
 
 Traditional Web Application Firewalls (WAFs) are usually deployed at the perimeter and have no context of the application behavior. For ASM to be effective, it must be embedded in the application to get access to the data. Datadog ASM leverages known attack patterns, similar to a Web Application Firewall (WAF) but with additional application context to increase the signal to noise ratio, lowering false positives.
 
 Datadog ASM identifies bad actors by collecting client IP addresses and manually-added user tags on all requests.
+
+In addition, ASM detects the risks built into your applications, for example through vulnerable libraries and dependencies the application uses at runtime.
 
 ## Identify services exposed to application attacks
 
 Datadog ASM uses the information APM is already collecting, and flags traces containing attack attempts. Services exposed to application attacks are highlighted directly in the security views embedded in APM ([Service Catalog][1], [Service Page][2], [Traces][3]).
 
 Because APM collects a sample of your application traffic, enabling ASM in the tracing library is necessary to effectively monitor and protect your services.
+
+## Identify Vulnerable services
+
+Datadog ASM uses various known vulnerability data sources related to open source software libraries, plus information provided by the Datadog security research team, to match the libraries your application depends on at runtime with their potential vulnerabilities and to make remediation recommendations.
 
 ## Compatibility
 
@@ -72,7 +78,7 @@ Datadog uses multiple pattern sources, including the [OWASP ModSecurity Core Rul
 
 Security Signals are automatically created when Datadog detects meaningful attacks targeting your production services. It provides you with visibility on the attackers and the targeted services. You can set custom detection rules with thresholds to determine which attacks you want to be notified about.
 
-## Built-in protection
+## Built-in threat protection
 
 <div class="alert alert-info">One-click IP blocking is in private beta. Access early preview through <a href="https://dashcon.io/appsec" target="_blank">this form</a>.</div>
 
@@ -91,7 +97,22 @@ From there, all services already protected by ASM block incoming requests perfor
 
 {{< img src="/security/application_security/asm-blocking-page-html.png" alt="The page displayed as ASM blocks requests originating from blocked IPs" width="75%" >}}
 
-## Coverage
+## Built-in vulnerability detection
+
+Datadog ASM offers built-in detection capabilities that warn you about the vulnerabilities detected in your open source dependencies. Details of that information are shown in the [Vulnerability Explorer][20], identifying the severity, affected services, potentially vulnerable infrastructure, and remediation instructions to solve the surfaced risks.
+
+The Vulnerability Explorer shows a complete list of vulnerabilities detected by ASM Risk Management, ordering the vulnerabilities based on their severity, and offering filtering capabilities so you can investigate and prioritize problems. It also shows the number of affected libraries, the language of the affected library, and the last time that vulnerability was detected.
+
+{{< img src="security/application_security/appsec-vuln-explorer.png" alt="ASM Risk Management Vulnerability Explorer page." style="width:100%;" >}}
+
+Select a specific vulnerability to see its details, including which services are compromised. From here you can explore what containers and infrastructure are potentially affected by the vulnerability, so you know more about the extent of a risk. This provides valuable information for prioritizing remediation tasks.
+
+The explorer also offers remediation recommendations for detected vulnerabilities and shows a collection of links and references to websites or information sources that help you understand the context behind each vulnerability.
+
+{{< img src="security/application_security/appsec-vuln-details.png" alt="ASM Risk Management vulnerability details page showing affected services, links to infrastructure, suggested remediation, and links to more information." style="width:100%;" >}}
+
+
+## Threat Monitoring Coverage
 
 Datadog ASM categorizes attack attempts into different threat types:
 
@@ -135,3 +156,4 @@ Datadog ASM includes over 100 attack patterns that help protect against [many di
 [17]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/agent-bootstrap/src/main/resources/datadog/trace/bootstrap/blocking/template.html
 [18]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/agent-bootstrap/src/main/resources/datadog/trace/bootstrap/blocking/template.json
 [19]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept
+[20]: https://app.datadoghq.com/security/appsec/vm
