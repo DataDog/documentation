@@ -48,7 +48,7 @@ Agent DogStatsD UDS を有効にするには
     ## Listen for Dogstatsd metrics on a Unix Socket (*nix only).
     ## Set to a valid and existing filesystem path to enable.
     #
-    dogstatsd_socket: '/var/run/datadog/dsd.socket'
+    dogstatsd_socket: '/opt/datadog-agent/run/dsd.socket'
     ```
 
 2. [Agent を再起動します][2]。
