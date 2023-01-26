@@ -2569,7 +2569,7 @@ main:
     identifier: cloud_siem_signal_correlation_rules
     weight: 3
   - name: OOTB Rules
-    url: /security/default_rules#cat-cloud-siem
+    url: /security/default_rules/#cat-cloud-siem-log-detection
     parent: cloud_siem
     identifier: cloud_siem_default_rules
     weight: 4
