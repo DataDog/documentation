@@ -21,7 +21,7 @@ Si vous utilisez AWS, Azure, GCP ou un autre fournisseur de métriques cloud, l'
 
 * **Métriques custom avec DogStatsD** : utilisez le client StatsD intégré conjointement à l'Agent Datadog afin d'envoyer des métriques custom à partir de votre application. Vous pourrez ainsi mettre en corrélation les performances de votre application, les comportements de vos utilisateurs et l'activité de votre système.
 
-  {{< img src="agent/guide/Agent_VS_AWSA.jpg" alt="Comparaison entre l'Agent et CloudWatch" style="width:70%;">}}
+  {{< img src="agent/guide/Agent_VS_AWSA.jpg" alt="Comparaison entre l'Agent et AWS CloudWatch" style="width:70%;">}}
 
 L'Agent Datadog est un outil léger et entièrement open source. Vous pouvez donc examiner son code et même y contribuer en envoyant une pull request.
 

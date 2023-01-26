@@ -11111,10 +11111,11 @@ components:
         description:
           description: Description of the rule.
           type: string
-        excluded_attributes:
-          description: Attributes excluded from the scan.
+        excluded_namespaces:
+          description: Attributes excluded from the scan. If namespaces is provided,
+            it has to be a sub-path of the namespaces array.
           example:
-          - username
+          - admin.name
           items:
             type: string
           type: array
@@ -11124,6 +11125,16 @@ components:
         name:
           description: Name of the rule.
           type: string
+        namespaces:
+          description: 'Attributes included in the scan. If namespaces is empty or
+            missing, all attributes except excluded_namespaces are scanned.
+
+            If both are missing the whole event is scanned.'
+          example:
+          - admin
+          items:
+            type: string
+          type: array
         pattern:
           description: Not included if there is a relationship to a standard pattern.
           type: string
@@ -19872,11 +19883,11 @@ paths:
           - name: body
             value: "{\n  \"data\": {\n    \"type\": \"sensitive_data_scanner_rule\",\n
               \   \"attributes\": {\n      \"name\": \"{{ unique }}\",\n      \"pattern\":
-              \"pattern\",\n      \"text_replacement\": {\n        \"type\": \"none\"\n
-              \     },\n      \"tags\":[\n        \"sensitive_data:true\"\n      ],\n
-              \     \"is_enabled\":true\n    },\n    \"relationships\": {\n      \"group\":
-              {\n        \"data\": {\n          \"id\": \"{{ group.data.id }}\",\n
-              \         \"type\": \"{{ group.data.type }}\"\n        }\n      }\n
+              \"pattern\",\n      \"namespaces\": [\"admin.email\"],\n      \"text_replacement\":
+              {\n        \"type\": \"none\"\n      },\n      \"tags\":[\n        \"sensitive_data:true\"\n
+              \     ],\n      \"is_enabled\":true\n    },\n    \"relationships\":
+              {\n      \"group\": {\n        \"data\": {\n          \"id\": \"{{ group.data.id
+              }}\",\n          \"type\": \"{{ group.data.type }}\"\n        }\n      }\n
               \   }\n  },\n  \"meta\": {}\n}"
           step: the "scanning_group" has a "scanning_rule"
       x-menu-order: 7

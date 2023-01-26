@@ -1,5 +1,5 @@
 ---
-title: Advanced Log Collection
+title: Advanced Log Collection Configurations
 kind: documentation
 description: Use the Datadog Agent to collect your logs and send them to Datadog
 further_reading:
