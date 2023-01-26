@@ -34,7 +34,7 @@ Datadog ASM uses the information APM is already collecting, and flags traces con
 
 Because APM collects a sample of your application traffic, enabling ASM in the tracing library is necessary to effectively monitor and protect your services.
 
-## Identify Vulnerable services
+## Identify vulnerable services
 
 Datadog ASM uses various known vulnerability data sources related to open source software libraries, plus information provided by the Datadog security research team, to match the libraries your application depends on at runtime with their potential vulnerabilities and to make remediation recommendations.
 
