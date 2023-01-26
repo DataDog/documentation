@@ -57,9 +57,11 @@ The query returns a series of points, but a single value is needed to compare to
 | Option                  | Description                                            |
 |-------------------------|--------------------------------------------------------|
 | average         | The series is averaged to produce a single value that is checked against the threshold. It adds the `avg()` function to your monitor query. |
-| max | If any single value in the generated series crosses the threshold, then an alert is triggered. It adds the `max()` function to your monitor query. |
-| min  | If all points in the evaluation window for your query cross the threshold, then an alert is triggered. It adds the `min()` function to your monitor query. |
+| max | If any single value in the generated series crosses the threshold, then an alert is triggered. It adds the `max()` function to your monitor query.* |
+| min  | If all points in the evaluation window for your query cross the threshold, then an alert is triggered. It adds the `min()` function to your monitor query.* |
 | sum | If the summation of every point in the series crosses the threshold, then an alert is triggered. It adds the `sum()` function to your monitor query. |
+
+\* These descriptions of max and min assume that the monitor alerts when the metric goes _above_ the threshold. For monitors that alert when _below_ the threshold, the max and min behavior is reversed.
 
 **Note**: There are different behaviors when utilizing `as_count()`. See [as_count() in Monitor Evaluations][1] for details.
 

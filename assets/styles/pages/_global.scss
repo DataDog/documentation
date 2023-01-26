@@ -53,6 +53,10 @@ body {
     @media (max-width: 991px) {
         padding-top: 65px;
     }
+    // Restores previous positioning setting for bootstrap columns from bootstrap 4
+    div[class*='col-'] {
+        position: relative;
+    }
 }
 
 .greyside {
@@ -358,7 +362,6 @@ h2 {
     line-height: 36px;
 }
 h4 {
-    text-transform: uppercase;
     margin-top: 14px;
 }
 

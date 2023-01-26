@@ -26,14 +26,14 @@
 {{ $link := $.Scratch.Get "link" }}
 
 {{- with .Parent -}}
-    <a class="list-group-item list-group-item-white d-flex justify-content-between align-items-center" href="{{ $link }}">
-        <span><span class="text">{{ $text }}</span>{{ if $tag }}<span class="badge badge-white">{{ $tag | upper }}</span>{{ end }}</span>
+    <a class="list-group-item list-group-item-white list-group-item-action d-flex justify-content-between align-items-center" href="{{ $link }}">
+        <span class="w-100 d-flex justify-content-between"><span class="text">{{ $text }}</span>{{ if $tag }}<span class="badge badge-white pe-2 border-0">{{ $tag | upper }}</span>{{ end }}</span>
         {{ partial "img.html" (dict "root" $dot "src" "icons/list-group-arrow.png" "class" "img-fluid static" "alt" "more") }}
         {{ partial "img.html" (dict "root" $dot "src" "icons/list-group-arrow-r.png" "class" "img-fluid hover" "alt" "more" "disable_lazy" "true") }}
     </a>
 {{- else -}}
-    <a class="list-group-item list-group-item-white d-flex justify-content-between align-items-center" href="{{ $link }}">
-        <span><span class="text">{{ $text }}</span>{{ if $tag }}<span class="badge badge-white">{{ $tag | upper }}</span>{{ end }}</span>
+    <a class="list-group-item list-group-item-white list-group-item-action d-flex justify-content-between align-items-center" href="{{ $link }}">
+        <span class="w-100 d-flex justify-content-between"><span class="text">{{ $text }}</span>{{ if $tag }}<span class="badge badge-white pe-2 border-0">{{ $tag | upper }}</span>{{ end }}</span>
         {{ partial "img.html" (dict "root" $dot "src" "icons/list-group-arrow.png" "class" "img-fluid static" "alt" "more") }}
         {{ partial "img.html" (dict "root" $dot "src" "icons/list-group-arrow-r.png" "class" "img-fluid hover" "alt" "more" "disable_lazy" "true") }}
     </a>

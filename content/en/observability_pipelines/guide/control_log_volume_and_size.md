@@ -6,23 +6,23 @@ aliases:
 further_reading:
   - link: "/observability_pipelines/working_with_data/"
     tag: "Documentation"
-    text: "Working with data using Vector"
-  - link: /observability_pipelines/vector_configurations/
+    text: "Working with data using Observability Pipelines"
+  - link: /observability_pipelines/configurations/
     tag: Documentation
-    text: Learn more about Vector configurations
+    text: Learn more about Observability Pipelines configurations
 ---
 
 ## Overview
 
-Because your log volume grows as your organization scales, the cost of ingesting and indexing in your downstream services (for example, log management solutions, SIEMs, and so forth) also rises. This guide walks you through using Vector transforms to cut down on log volume and trim down the size of your logs to control your costs *before* data leaves your infrastructure or network. 
+Because your log volume grows as your organization scales, the cost of ingesting and indexing in your downstream services (for example, log management solutions, SIEMs, and so forth) also rises. This guide walks you through using Observability Pipelines' transforms to cut down on log volume and trim down the size of your logs to control your costs *before* data leaves your infrastructure or network. 
 
 ## Prerequisites
-- You have [installed and configured Vector][1] to collect data from your sources and route it to your destinations.
-- You are familiar with [the basics of configuring Vector][2].
+- You have [installed and configured the Observability Pipelines Worker][1] to collect data from your sources and route it to your destinations.
+- You are familiar with [the basics of configuring Observability Pipelines][2].
 
 ## Use transforms to manage log volumes
 
-In Observability Pipelines, a **transform** performs an action that modifies events, where events are logs, metrics, or traces flowing through the pipeline. 
+In Observability Pipelines, a transform performs an action that modifies events, where events are logs, metrics, or traces flowing through the pipeline. 
 
 ### Deduplicate events 
 
@@ -71,7 +71,7 @@ inputs = [ "my-source-or-transform-id" ]
 {{% /tab %}}
 {{< /tabs >}}
 
-Vector assigns every event a unique identifier to track deduplicated events. The `cache` option enables you to cache recent events to be used to check for duplicated data in the future, and defaults to 5,000 events. The `fields` option lists which fields are used to determine if an event is a duplicate.
+The Observability Pipelines Worker assigns every event a unique identifier to track deduplicated events. The `cache` option enables you to cache recent events to be used to check for duplicated data in the future, and defaults to 5,000 events. The `fields` option lists which fields are used to determine if an event is a duplicate.
 
 ### Filter events
 
@@ -362,7 +362,7 @@ starts_when = "match(string!(.message), r'^[^\\s]')"
 
 In the reduce transform, `group_by` is an ordered list of fields used to group events. In this example, the events are grouped by `host`, `pid`, and `tid` fields. 
 
-`merge_strategies` is a map of field names to custom merge strategies. There are [different merge strategies][10], including `array`, where each value is appended to an array, and `sum`, which adds all numeric values. In this example, `concat_newline` is used, where each string value is concatenated, then delimited by a newline.
+`merge_strategies` is a map of field names to custom merge strategies. There are different merge strategies, including `array`, where each value is appended to an array, and `sum`, which adds all numeric values. In this example, `concat_newline` is used, where each string value is concatenated, then delimited by a newline.
 
 `starts_when` is a condition used to distinguish the first event of a transaction. If this condition resolves to `true` for an event, the previous transaction is flushed without this event, and a new transaction is started. In this example, events with `.message` that do not match the `^[^\\s]` regular expression condition are reduced into a single event. 
 
@@ -493,13 +493,13 @@ del(.unecessary_tag_field)"""
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /observability_pipelines/setup/
-[2]: /observability_pipelines/vector_configurations/
-[3]: https://vector.dev/docs/reference/configuration/transforms/dedupe/
-[4]: https://vector.dev/docs/reference/configuration/transforms/filter/
+[1]: /observability_pipelines/installation/
+[2]: /observability_pipelines/configurations/
+[3]: /observability_pipelines/reference/transforms/#dedupe
+[4]: /observability_pipelines/reference/transforms/#filter
 [5]: https://vector.dev/docs/reference/vrl/
 [6]: /logs/explorer/search_syntax/
-[7]: https://vector.dev/docs/reference/configuration/transforms/sample/
-[8]: https://vector.dev/docs/reference/configuration/transforms/log_to_metric/
-[9]: https://vector.dev/docs/reference/configuration/transforms/reduce/
-[10]: https://vector.dev/docs/reference/configuration/transforms/reduce/#merge_strategies
+[7]: /observability_pipelines/reference/transforms/#sample
+[8]: /observability_pipelines/reference/transforms/#logtometric
+[9]: /observability_pipelines/reference/transforms/#reduce
+

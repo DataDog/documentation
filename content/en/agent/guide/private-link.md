@@ -10,10 +10,11 @@ further_reading:
       text: 'Collect logs from your AWS services'
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Datadog PrivateLink does not support the Datadog for Government site.</div>
+{{< site-region region="us3,us5,eu,gov" >}}
+<div class="alert alert-warning">Datadog PrivateLink does not support the selected Datadog site.</div>
 {{< /site-region >}}
 
+{{< site-region region="us" >}}
 This guide walks you through how to configure [AWS PrivateLink][1] for use with Datadog.
 
 ## Overview
@@ -243,3 +244,4 @@ The VPCs with Private Hosted Zone (PHZ) attached need to have a couple of settin
 
 [1]: https://aws.amazon.com/privatelink/
 [2]: https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html
+{{< /site-region >}}

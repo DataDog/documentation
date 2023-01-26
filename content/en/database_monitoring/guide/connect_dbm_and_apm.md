@@ -4,6 +4,9 @@ kind: guide
 beta: true
 private: true
 ---
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
+{{< /site-region >}}
 
 <div class="alert alert-warning">
 The features described on this page are in beta. Contact your Customer Success Manager to learn more about them.
