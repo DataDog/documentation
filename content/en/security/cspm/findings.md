@@ -67,20 +67,11 @@ The side panel lists detection rules that were evaluated against the resource, s
   Muted findings is in beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.
 {{< /beta-callout >}}
 
-Triage your findings 
+There may be times where a finding does not match the use case for your business, or you accept it as a known risk. To ignore these types of findings, you can mute the finding for the impacted resource. This allows you to focus on high-severity and critical findings that require your attention.
 
-Users can now mute a finding so that it will no longer be listed or included in visualisations allowing them to better focus on misconfigurations that matters.
+For example, the ['Block Public Access' feature is enabled for S3 bucket][4] rule evaluates whether a S3 bucket is publicly accessible. If you have a S3 bucket with static assets that are meant to be publicly shared, you can mute the finding for the S3 bucket.
 
-change the status of any pass/fail finding to “muted” and vice versa 
-
-For example, you might have a Fail finding on a resource...
-a failed finding for a S3 bucket that should not be publicly exposed. 
-
-For example, you might have a **Fail** finding for the 'Block Public Access' feature is enabled for S3 bucket finding. 
-
-For example, the 
-
-while providing justification for the suppression.
+Muted findings do not appear in visualizations and do not impact your posture score. You can mute both pass and fail findings at any time while providing justification for the suppression.
 
 1. On the finding side panel, select a resource.
 2. Click **Mute**.
@@ -129,3 +120,4 @@ This allows you to audit your findings, as well as review whether a muted findin
 [1]: https://app.datadoghq.com/security/compliance?time=now
 [2]: /security/cloud_siem/
 [3]: /security/cloud_workload_security/
+[4]: /security/default_rules/cis-aws-1.3.0-1.20/
