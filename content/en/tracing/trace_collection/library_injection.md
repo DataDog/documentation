@@ -537,7 +537,7 @@ When your Agent and services are running in Docker containers on the same host, 
 
 Any newly started processes are intercepted and the specified instrumentation library is injected into the services.
 
-# Requirements
+## Requirements
 
 - [Docker Engine][2]
 
