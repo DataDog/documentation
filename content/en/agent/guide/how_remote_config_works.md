@@ -101,17 +101,19 @@ To use Remote Configuration, you need to meet the following prerequisites:
 #### Setup:
 Once you've ensured that you meet the prerequisites, you can proceed with enabling Remote Configuration using the following steps: 
 
-1. Ensure your RBAC permissions include [api_keys_write](https://docs.datadoghq.com/account_management/api-app-keys/) so you can add Remote Configuration scope on an existing API key, or create a new API key. Contact your organization's Datadog administrator and update your permissions if you don't have it.
+1.  [Contact support](https://docs.datadoghq.com/help/) to have your Organization added for Remote Config capability on API key.
 
-2. To authenticate and authorize your Agent to use Remote Configuration, you need to add Remote Configuration scope on your Datadog API key. You can add Remote Configuration scope on either your existing API key or you may choose to create a new API key. 
+2. Ensure your RBAC permissions include [api_keys_write](https://docs.datadoghq.com/account_management/api-app-keys/) so you can add Remote Configuration scope on an existing API key, or create a new API key. Contact your organization's Datadog administrator and update your permissions if you don't have it.
 
-3. In your [Organization Settings](https://app.datadoghq.com/organization-settings/api-keys) page, either click on your existing API key, or click to Create a new API key.
+3. To authenticate and authorize your Agent to use Remote Configuration, you need to add Remote Configuration scope on your Datadog API key. You can add Remote Configuration scope on either your existing API key or you may choose to create a new API key. 
 
-4. After creating a new API key, or clicking to edit your existing API key, you will see a screen to enable Remote Configuration:
+4. In your [Organization Settings](https://app.datadoghq.com/organization-settings/api-keys) page, either click on your existing API key, or click to Create a new API key.
+
+5. After creating a new API key, or clicking to edit your existing API key, you will see a screen to enable Remote Configuration:
 
 {{<img src="agent/guide/RC_Key_updated.png" alt="RC Key Updated" width="90%" style="center">}}
 
-5. Update your agent configuration file:
+6. Update your agent configuration file:
 
 {{< tabs >}}
 {{% tab "Configuration yaml" %}}
@@ -123,7 +125,7 @@ remote_configuration:
   enabled: true
   ```
 
-6. Restart your Datadog Agent for the changes to take effect.  
+7. Restart your Datadog Agent for the changes to take effect.  
 
 {{% /tab %}}
 {{% tab "Environment variable" %}}
