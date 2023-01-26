@@ -1,9 +1,6 @@
 .announcement .main h5 {
   pointer-events:all;
 }
-.main pre {
-  margin:0;
-}
 .main h5:before {
   display: none;
 }
@@ -36,6 +33,7 @@
 #accordion pre,
 .example-accordion pre {
   border-bottom: 3px solid rgba(119,0,255,.3);
+  margin:0;
 }
 .code-snippet-wrapper button:disabled,
 .code-snippet-wrapper button[disabled], {

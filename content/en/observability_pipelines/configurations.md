@@ -8,7 +8,7 @@ further_reading:
   - link: /observability_pipelines/working_with_data/
     tag: Documentation
     text: Working with data using Observability Pipelines
-  - link: /observability_pipelines/guide/configure_observability_pipelines_with_datadog/
+  - link: /observability_pipelines/production_deployment_overview/integrate_datadog_and_the_observability_pipelines_worker/
     tag: Documentation
     text: Configure Datadog Agents to send data to Observability Pipelines
 ---
@@ -282,6 +282,6 @@ If successfully setup, the parsed demo logs are printed in JSON format.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://vector.dev/docs/reference/configuration/sources/
-[2]: https://vector.dev/docs/reference/configuration/transforms/
-[3]: https://vector.dev/docs/reference/configuration/sinks/
+[1]: /observability_pipelines/reference/sources/
+[2]: /observability_pipelines/reference/transforms/
+[3]: /observability_pipelines/reference/sinks/

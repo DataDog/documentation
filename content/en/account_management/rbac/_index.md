@@ -186,6 +186,7 @@ Once you have RBAC roles set up, you can restrict access to individual resources
 The following resources allow granular access control:
 - [Dashboards][10]
 - [Monitors][11]
+- [Notebooks][5]
 - [Security rules][12]
 - [Synthetic tests][13]
 
