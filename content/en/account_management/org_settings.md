@@ -84,14 +84,17 @@ The [**OAuth Apps**][10] page allows you to view or manage OAuth applications in
 #### Rename organization
 
 To rename your organization, click the **Edit** button in the **Preferences** tab of **Organization Settings**, enter the new name, then click the **Save** button.
+**Note**: Your organization name may not exceed 32 characters.
 
 #### Out-of-Contract Retention Periods for Log Indexes
 
+Users with `Org Management` permission can choose to enable availability of out of out-of-contract retention periods for log indexes.
+
 When enabled, users with `Modify Index` permission can choose any of the 3/7/15/30/45/60 retention periods even if they are not in the contract. This is useful when troubleshooting a potential long standing issue or meeting compliance requirements for which customers need higher retention that is not part of the contract at the moment.
 
-Please note that using out of contract retention period will incur on-demand charges and we recommend that if a retention period is highly used that customers get in touch with their account manager or support to have it added as part of the contract.
+**Note** that using out of contract retention times incurs on-demand charges and Datadog recommends that if a retention period is highly used that customers get in touch with their account manager or support to have it added as part of the contract.
 
-**Note: Your organization name may not exceed 32 characters.**
+
 
 
 ## Further reading
