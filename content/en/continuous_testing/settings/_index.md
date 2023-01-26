@@ -25,7 +25,7 @@ You can access Continuous Testing settings on the [Synthetic Monitoring Settings
 
 {{< img src="continuous_testing/continuous_testing_default.png" alt="Default settings for Continuous Testing" style="width:100%;">}}
 
-By default, you can run one test sequentially. To change this behavior, set a [parallelization value](#set-parallelization) and save your selection.
+By default, all your tests running in CI/CD pipelines run sequentially (one after the other). To change this behavior, set a [parallelization value](#set-parallelization) and save your selection.
 
 ## Parallelization
 
@@ -50,7 +50,7 @@ This ensures you can:
 
 In order to customize the parallelization for Continuous Testing, you must have the `billing_edit` permission. 
 
-Otherwise, the following error displays: `You're missing edit permission for Continuous Testing settings. You can run 15 tests in parallel. To increase this value, reach out to your administrator admin.email@datadoghq.com`
+Otherwise, the following error displays: `You're missing edit permission for Continuous Testing settings. You can run your tests with a parallelization of X (up to X tests running at the same time at a given point during your CI). To increase this value, reach out to your administrator admin.email@datadoghq.com`
 
 For more information, see [Datadog Role Permissions][2].
 
