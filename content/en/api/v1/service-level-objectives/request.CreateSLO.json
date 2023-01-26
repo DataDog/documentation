@@ -25,6 +25,6 @@
     }
   ],
   "timeframe": "7d",
-  "target_threshold": 97.0,
+  "target_threshold": 95,
   "warning_threshold": 98
 }
