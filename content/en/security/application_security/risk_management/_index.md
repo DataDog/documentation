@@ -9,7 +9,11 @@ further_reading:
 
 <div class="alert alert-info">Application Security Risk Management is in beta.</a></div>
 
-ASM Risk Management offers built-in detection capabilities that warn you about the vulnerabilities detected in your open source dependencies. Details of that information are shown in the [Vulnerability Explorer][3], identifying the severity, affected services, potentially vulnerable infrastructure, and remediation instructions to solve the surfaced risks.
+## Overview
+
+ASM Risk Management offers built-in detection capabilities that warn you about the vulnerabilities detected in your services' open source dependencies. Details of that information are shown in the [Vulnerability Explorer][3], identifying the severity, affected services, potentially vulnerable infrastructure, and remediation instructions to solve the surfaced risks.
+
+## Explore vulnerabilities and remediation
 
 The Vulnerability Explorer shows a complete list of vulnerabilities detected by ASM Risk Management, ordering the vulnerabilities based on their severity, and offering filtering capabilities so you can investigate and prioritize problems. It also shows the number of affected libraries, the language of the affected library, and the last time that vulnerability was detected.
 
@@ -21,13 +25,15 @@ The explorer also offers remediation recommendations for detected vulnerabilitie
 
 {{< img src="security/application_security/appsec-vuln-details.png" alt="ASM Risk Management vulnerability details page showing affected services, links to infrastructure, suggested remediation, and links to more information." style="width:100%;" >}}
 
-## Detect known OSS vulnerabilities
+## Detect known open source vulnerabilities
 
 Risk management detects the open source libraries used by your application at runtime, and reports security vulnerabilities associated with them. In order to do it, Risk management combines various public open source software known vulnerability data sources along with data obtained by Datadog security research team. 
 
 ## Detect custom code vulnerabilities 
 
-Custom code vulnerabilities (_unknown vulnerabilities_) detection in private beta. Request access to the feature by [contacting Support][1]. The supported detected features include:
+<div class="alert alert-info">Custom code vulnerabilities (<em>unknown vulnerabilities</em>) detection is in private beta. Request access to the feature by <a href="/help/">contacting Support</a>.</div>
+
+ The supported detected features include:
 
 - Insecure Cipher
 - Insecure Hashing
