@@ -195,7 +195,7 @@ The instrumentation also starts sending telemetry to Datadog (for example, trace
 
 <div class="alert alert-info">Tracing library injection on a host is in beta.</a></div>
 
-When both the Agent and your services are running on a host, real or virtual, Datadog injects the tracing library by using a library that is preloaded and that overrides calls to `execve`. Any newly started processes are intercepted and the specified instrumentation library is injected into the services.
+When both the Agent and your services are running on a host, real or virtual, Datadog injects the tracing library by using a preload library that overrides calls to `execve`. Any newly started processes are intercepted and the specified instrumentation library is injected into the services.
 
 ## Requirements
 
@@ -212,7 +212,7 @@ When both the Agent and your services are running on a host, real or virtual, Da
    dd-install-ld-preload
    ```
 
-2. The preload library injection only works in a new shell, so exit and open a new shell.
+2. Exit and open a new shell to use the preload library.
 
 ## Install the language and your app
 
@@ -231,7 +231,7 @@ When both the Agent and your services are running on a host, real or virtual, Da
 
 ## Configure the injection
 
-The following environment variables configure library injection. You can pass these in by `export` on the command line (`export DD_CONFIG_SOURCES=BASIC`), in your shell configuration, or by passing them in on the launch command:
+The following environment variables configure library injection. You can pass these in by `export` through the command line (`export DD_CONFIG_SOURCES=BASIC`), shell configuration, or launch command:
 
 
 `DD_INJECT_DEBUG`
@@ -367,7 +367,7 @@ Exercise your application to start generating telemetry data, which you can see 
 <div class="alert alert-info">Tracing library injection on hosts and containers is in beta.</a></div>
 
 
-When your Agent is running on a host your services are running in containers, Datadog injects the tracing library by using a library that is preloaded and that overrides calls to `execve`, and a `runc` shim that intercepts container creation, and configures the initial process launched in a Docker container.
+When your Agent is running on a host, and your services are running in containers, Datadog injects the tracing library by using a preload library that overrides calls to `execve`. Datadog also uses a `runc` shim that intercepts container creation and configures the initial process launched in a Docker container.
 
 Any newly started processes are intercepted and the specified instrumentation library is injected into the services.
 
@@ -389,7 +389,7 @@ Any newly started processes are intercepted and the specified instrumentation li
    dd-install-docker-shim
    ```
 
-2. The preload library injection only works in a new shell, so exit and open a new shell.
+2. Exit and open a new shell to use the preload library.
 
 ## Configure Docker injection
 
@@ -533,7 +533,7 @@ Exercise your application to start generating telemetry data, which you can see 
 
 <div class="alert alert-info">Tracing library injection in containers is in beta.</a></div>
 
-When your Agent and services are running in Docker containers on the same host, Datadog injects the tracing library by using a library that is preloaded and that overrides calls to `execve`, and a `runc` shim that intercepts container creation, and configures the initial process launched in a Docker container.
+When your Agent and services are running in Docker containers on the same host, Datadog injects the tracing library by using a preload library that overrides calls to `execve`. Datadog also uses a `runc` shim that intercepts container creation and configures the initial process launched in a Docker container.
 
 Any newly started processes are intercepted and the specified instrumentation library is injected into the services.
 
@@ -554,7 +554,7 @@ Any newly started processes are intercepted and the specified instrumentation li
    dd-install-docker-shim
    ```
 
-2. The preload library injection only works in a new shell, so exit and open a new shell.
+2. Exit and open a new shell to use the preload library.
 
 ## Configure Docker injection
 
