@@ -2732,27 +2732,27 @@ main:
     weight: 3
   - name: Setup and Configure
     url: security/application_security/threats/setup_and_configure/
-    parent: application_threats
+    parent: appsec_threats
     identifier: threats_configuration
     weight: 301
   - name: OOTB Rules
     url: security/default_rules/#cat-application-security
-    parent: application_threats
+    parent: appsec_threats
     identifier: appsec_default_rules
     weight: 302
   - name: Tracking User Activity
     url: security/application_security/threats/add-user-info/
-    parent: application_threats
+    parent: appsec_threats
     identifier: threats_user_info
     weight: 303
   - name: Custom Detection Rules
     url: security/application_security/threats/custom_rules/
-    parent: application_threats
+    parent: appsec_threats
     identifier: threats_custom_rules
     weight: 304
   - name: Event Rules
     url: security/application_security/threats/event_rules/
-    parent: application_threats
+    parent: appsec_threats
     identifier: threats_event_rules
     weight: 305
   - name: Risk Management
