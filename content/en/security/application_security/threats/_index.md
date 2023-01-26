@@ -29,7 +29,7 @@ For additional information about how threat monitoring and protection works, rea
 
 When threat data is coming in for your services, ASM Overview shows a summary of what's happening. Here, you can review security monitoring coverage, and enable ASM on services. To investigate signals of suspicious activity, click a service's **Review** link.
 
-In the Signal Explorer, filter by attributes and facets to find critical threats. Click into a signal to see details for it, including the user information and their IP address, what rule they triggered, and related traces and other security signals.
+In the [Signals Explorer][2], filter by attributes and facets to find critical threats. Click into a signal to see details for it, including the user information and their IP address, what rule they triggered, and related traces and other security signals.
 
 From this page you can block and unblock users and IPs, or investigate what infrastructure might have been affected.
 
@@ -62,6 +62,7 @@ You can block attackers' IPs that are flagged in ASM Security Signals temporaril
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/services?lens=Security
+[2]: /security/explorer
 [4]: /security/application_security/how-appsec-works/
 [5]: /security/application_security/threats/event_rules/
 [6]: /security/application_security/threats/custom_rules/
