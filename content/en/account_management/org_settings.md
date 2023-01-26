@@ -51,11 +51,11 @@ You can filter application keys by name, ID, or owner, or click the **Only My Ke
 
 #### Client Tokens
 
-Client tokens are used to send events and logs from your user’s web and mobile applications. They are unique to your organization. Deleting a client token that is linked to a RUM Application causes your RUM Application to stop reporting. The [process to create client tokens][8] is similar to that for API and application keys.
+Client tokens are used to send events and logs from your user's web and mobile applications. They are unique to your organization. Deleting a client token that is linked to a RUM Application causes your RUM Application to stop reporting. The [process to create client tokens][8] is similar to that for API and application keys.
 
 #### Events API Emails
 
-If your application does not have an existing Datadog integration, and you don’t want to create a custom Agent check, you can send events with email. To learn how to set up events API emails, read the [Events with email guide][9].
+If your application does not have an existing Datadog integration, and you don't want to create a custom Agent check, you can send events with email. To learn how to set up events API emails, read the [Events with email guide][9].
 
 ### Security
 
@@ -89,6 +89,8 @@ To rename your organization, click the **Edit** button in the **Preferences** ta
 #### Out-of-Contract Retention Periods for Log Indexes
 
 Users with `Org Management` permission can choose to enable availability of out of out-of-contract retention periods for log indexes.
+
+{{< img src="account_management/out-of-contract-retention.png" alt="The out-of-contract retention periods for log indexes setting showing enabled." style="width:70%;" >}}
 
 When enabled, users with `Modify Index` permission can choose any of the 3/7/15/30/45/60 retention periods even if they are not in the contract. This is useful when troubleshooting a potential long standing issue or meeting compliance requirements for which customers need higher retention that is not part of the contract at the moment.
 
