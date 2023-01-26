@@ -215,12 +215,12 @@ Accessing the cloud provider metadata endpoint allows Datadog to properly match 
 Encountering this issue usually means that access to the metadata endpoint has been restricted.
 For example, on AWS, this could be due to the [hop limit setting][5].
 
-## Hostname errors in CI environments, sidecar setups, environments without access to container runtime
+## Hostname errors in CI environments, sidecar setups, and environments without access to container runtime
 
 When you run the Agent in a **CI environment** (so Agent is ephemeral) or as a sidecar without access to
 host information, two options are available:
 
-- Setting `DD_HOSTNAME` (`hostname` in `datadog.yaml`) explicitly to host hostname:
+- Setting `DD_HOSTNAME` (`hostname` in `datadog.yaml`) explicitly to the hostname:
 
 ```
 -e DD_HOSTNAME=$(hostname)
@@ -234,9 +234,9 @@ This option is available starting Datadog Agent **7.42.0**.
 -e DD_HOSTNAME_TRUST_UTS_NAMESPACE=true
 ```
 
-When this is set, the Agent will use in-container hostname (usually, container name or pod name).
+When this is set, the Agent will use the in-container hostname (usually the container name or pod name).
 
-**Note:** This does not apply to serverless solutions like Fargate.
+**Note**: This does not apply to serverless solutions like Fargate.
 
 If the solutions above did not fix your Agent setup, reach out to the [Datadog support team][6].
 
