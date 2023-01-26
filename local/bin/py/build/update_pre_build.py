@@ -45,10 +45,9 @@ class Build:
         )
         
 
-    # Loads the configurations in the configuration/ folder and attaches it to the Build Class
     def load_config(self, build_configuration_file_path, integration_merge_configuration_file_path, disable_cache_on_retry=False):
         """
-        Loads configurations for external content to pull and/or cache, and attaches it to the Build Class
+        Loads configurations for external content to pull from source or cache, and attaches it to the Build Class
         """
         self.build_configuration = yaml.safe_load(open(build_configuration_file_path))
 
@@ -70,9 +69,7 @@ class Build:
         prepare_content(self, configuration, self.github_token, self.extract_dir)
 
 
-    # Build the documentation by injecting content from other repository.
     def build_documentation(self):
-
         # Instanciation of the integrations class since it's needed for content management below.
         Int = Integrations(self.source_dir, self.tempdir, self.integration_mutations)
 
@@ -134,8 +131,7 @@ class Build:
             except Exception as err:
                 print(err)
 
-                if os.path.isdir('temp'):
-                    shutil.rmtree('temp')
+                if os.path.isdir('temp'): shutil.rmtree('temp')
 
                 if not getenv("CI_COMMIT_REF_NAME"):
                     print('Downloading cached content failed, documentation is now in degraded mode.')

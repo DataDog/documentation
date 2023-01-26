@@ -85,8 +85,6 @@ build_preview:
     CONFIG: ${PREVIEW_CONFIG}
     MESSAGE: ":gift_heart: Your preview site is available!\nNow running tests..."
     CONFIGURATION_FILE: "./local/bin/py/build/configurations/pull_config_preview.yaml"
-    STATIC_BUCKET: ${STATIC_BUCKET}
-    LATEST_MASTER_REV_HASH: $(LATEST_MASTER_REV_HASH)
     LOCAL: "False"
   script:
     - dog --config "$HOME/.dogrc" event post "documentation build ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" --alert_type "info" --tags="${DEFAULT_TAGS}"

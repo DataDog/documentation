@@ -82,10 +82,10 @@ def grouped_globs_table(list_of_contents):
 def download_content_from_external_source(self, content):
     """
     Returns a boolean determining whether pull_config content should be downloaded from cache or external source.
-    Content should always be pulled from source if:
+    Content will be pulled from external source if:
         * Global or individual cache variables are set to false
-        * Generated file is not .md
-        * This is not a local build, it's a GitLab build.
+        * This is an integration action and integration cache is disabled
+        * Generated file is not .md (this includes npm-integration action which is unsupported at this time)
     """
     use_cached = content.get('options', {}).get('cached', False)
     file_name = content.get('options', {}).get('file_name', '')
@@ -96,7 +96,6 @@ def download_content_from_external_source(self, content):
         or (action in ('integrations', 'marketplace-integrations') and not self.integrations_cache_enabled) \
         or (action == 'npm-integrations') \
         or (file_name != '' and not file_name.endswith('.md')) \
-        # or (not getenv("CI_COMMIT_REF_NAME"))
 
 
 def fetch_sourced_content_from_local_or_upstream(self, github_token, extract_dir):
@@ -107,13 +106,12 @@ def fetch_sourced_content_from_local_or_upstream(self, github_token, extract_dir
       * [LOCAL DEV AND CI] If neither of the above exist, pull the remote repo to use and store in the extract folder
     :param github_token: A valide Github token to download content with the Github Class
     :param extract_dir: Directory into which to put all content downloaded.
-    :param list_of_content: List of content to check if available locally or if it needs to be downloaded from Github
     """
     grouped_globs = grouped_globs_table(self.list_of_sourced_contents)
     is_in_ci = os.getenv("CI_COMMIT_REF_NAME")
 
     for content in self.list_of_sourced_contents:
-        print(f'Downloading content from {content["repo_name"]}')
+        print(f'Downloading external content from {content["repo_name"]}')
         local_repo_path = os.path.join("..", content["repo_name"])
         repo_path_last_extract = os.path.join(extract_dir, content["repo_name"])
 
@@ -177,8 +175,8 @@ def fetch_sourced_content_from_local_or_upstream(self, github_token, extract_dir
 def extract_sourced_and_cached_content_from_pull_config(self, configuration):
     """
     This pulls the content from the configuration file at `configuration` location
-    then parses it to populate the list_of_content variable that contains all contents
-    that needs to be pulled and processed.
+    then parses it to determine whether content should be downloaded from external source
+    or cache, and populates the associated class property to be processed later.
     :param configuration: Documentation build configuration file path.
     """
     pull_config_content = configuration[1].get('data', {})
@@ -231,9 +229,7 @@ def prepare_content(self, configuration, github_token, extract_dir):
 
 
 def download_and_extract_cached_files_from_s3():
-    static_bucket = getenv("STATIC_BUCKET")
-
-    s3_url = f'https://{static_bucket}.s3.amazonaws.com/build_artifacts/master/latest-ignored.tar.gz'
+    s3_url = f'https://origin-static-assets.s3.amazonaws.com/build_artifacts/master/latest-ignored.tar.gz'
     artifact_download_response = requests.get(s3_url, stream=True)
 
     with tarfile.open(mode='r|gz', fileobj=artifact_download_response.raw) as artifact_tarfile:
@@ -257,6 +253,7 @@ def download_cached_content_into_repo(self):
             print(f'Copying {full_dest_path} from cache')
             shutil.copy(f'temp/{full_dest_path}', full_dest_path)
         elif action == 'pull-and-push-folder':
+            raise ValueError('This is a fake error')
             destination = content.get('options', {}).get('dest_dir', '')
         elif action in ('workflows', 'security-rules'):
             destination = content.get('options', {}).get('dest_path', '')
