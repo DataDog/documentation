@@ -86,13 +86,21 @@ To create, edit, and delete status corrections, users require the `slos_correcti
 
 #### Restrict SLO permissions to specific roles
 
-Restrict access to individual SLOs by specifying a list of roles that are allowed to edit it. Click on the SLO to open the details side panel. Click the cog icon in the top right of the panel and select the Permissions option.
+Restrict access to individual SLOs by specifying a list of [roles][9] that are allowed to edit it. 
 
 {{< img src="monitors/service_level_objectives/slo_set_permissions.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="SLO permissions option in the cog menu">}}
 
-Specify a list of roles that are permitted to edit the SLO. Users needs to be an editor of the SLO and have `slo_write` permissions to edit or delete the SLO. For SLO status corrections, users needs to be an editor of the SLO and have the `slo_corrections` permissions to create, edit, or delete a status correction.
+1. Click on the SLO to open the details side panel. 
+1. Click the cog icon in the upper right of the panel. 
+1. Select **Permissions**.
+1. Click **Restrict Access**.
+1. The dialog box updates to show that members of your organization have **Viewer** access by default.
+1. Use the drop-down to select one or more roles that may edit the SLO.
+1. Click **Add**.
+1. The dialog box updates to show that the role you selected has the **Editor** permission.
+1. Click **Save**
 
-Users on the access control list can add roles and can only remove roles other than their own.
+To maintain your edit access to the notebook, the system requires you to include at least one role that you are a member of before saving. Users on the access control list can add roles and can only remove roles other than their own.
 
 **Note**: Users can create SLOs on any monitor even if they do not have write permissions to the monitor. Similarly, users can create SLO alerts even if they do not have write permissions to the SLO. For more information on RBAC permissions for Monitors, see the [RBAC documentation][11] or the [guide on how to set up RBAC for Monitors][12].
 
