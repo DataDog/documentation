@@ -17,9 +17,9 @@
         "build:hugo:live": "yarn run build:hugo -D -F --environment live",
         "build:live": "yarn run build:hugo:live",
         "deploy:previewAssets": "./node_modules/.bin/hugo deploy --target previewAssets -e preview --maxDeletes 0 --log --verbose",
-        "deploy:preview": "./node_modules/.bin/hugo deploy --target preview -e preview --maxDeletes -1 --invalidateCDN --log --verbose",
+        "deploy:preview": "./node_modules/.bin/hugo deploy --target preview -e preview --invalidateCDN --log --verbose",
         "deploy:liveAssets": "./node_modules/.bin/hugo deploy --target liveAssets -e live --maxDeletes 0 --log --verbose --debug",
-        "deploy:live": "./node_modules/.bin/hugo deploy --target live -e live --maxDeletes -1 --log --verbose --debug",
+        "deploy:live": "./node_modules/.bin/hugo deploy --target live -e live --log --verbose --debug",
         "build:apiPages": "node -e 'require(\"./assets/scripts/build-api-pages.js\").init()'",
         "dereference": "node ./assets/scripts/dereference.js",
         "jest-test": "./node_modules/.bin/jest ./assets/scripts/tests"
