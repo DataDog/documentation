@@ -12,9 +12,9 @@ further_reading:
   text: "See the list of workflow actions"
 ---
 
-{{< beta-callout url="https://forms.gle/VEjerYVQ2QJhauZ57" >}}
+{{< callout url="https://forms.gle/VEjerYVQ2QJhauZ57" >}}
   Workflows are in public beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.
-{{< /beta-callout >}}
+{{< /callout >}}
 
 Because workflow [actions][1] connect with external software systems, you may need to authenticate your Datadog account to the corresponding integration or integrations. A workflow can run successfully only if every workflow action that requires authentication can verify the identity of your Datadog account.
 

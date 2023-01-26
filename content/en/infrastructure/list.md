@@ -83,9 +83,9 @@ Datadog creates aliases for host names when there are multiple uniquely identifi
 
 #### Agent configuration
 
-{{< beta-callout url="#" btn_hidden="true" >}}
+{{< callout url="#" btn_hidden="true" >}}
   The Agent configuration view is in public beta and is available in Agent versions >= 7.39/6.39.
-{{< /beta-callout >}}
+{{< /callout >}}
 
 The Agent can send its own configuration to Datadog to be displayed in the `Agent Configuration` section of the host detail panel.
 

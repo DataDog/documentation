@@ -18,9 +18,9 @@ private: true
 title: ダイナミックインスツルメンテーション
 ---
 
-{{< beta-callout url="https://www.datadoghq.com/live-debugger-request/" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
+{{< callout url="https://www.datadoghq.com/live-debugger-request/" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
   ダイナミックインスツルメンテーションは、非公開ベータ版です。アクセスしたい場合は、このフォームに記入してください。
-{{< /beta-callout >}}
+{{< /callout >}}
 
 ダイナミックインスツルメンテーションにより、コードの変更や再デプロイメントを行うことなく、ライブアプリケーションからデータをキャプチャすることができます。
 

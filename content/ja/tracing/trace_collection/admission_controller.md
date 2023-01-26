@@ -5,9 +5,9 @@ kind: documentation
 title: Admission Controller を使ったライブラリの挿入
 ---
 
-{{< beta-callout url="#" btn_hidden="true">}}
+{{< callout url="#" btn_hidden="true">}}
   Admission Controller を使ったトレーシングライブラリの挿入はベータ版です。
-{{< /beta-callout >}}
+{{< /callout >}}
 
 ## 概要
 

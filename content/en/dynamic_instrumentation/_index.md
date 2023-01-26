@@ -23,10 +23,10 @@ further_reading:
   text: "Learn more about Metrics"
 ---
 
-{{< beta-callout url="https://www.datadoghq.com/dynamic-instrumentation-request/" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
+{{< callout url="https://www.datadoghq.com/dynamic-instrumentation-request/" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
   Dynamic Instrumentation is in private beta. Fill out this form if you would like to
   access it.
-{{< /beta-callout >}}
+{{< /callout >}}
 
 Dynamic Instrumentation lets you capture data from your live applications without needing to do any code changes or redployment.
 

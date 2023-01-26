@@ -8,9 +8,9 @@ further_reading:
   text: 'Session Replay'
 ---
 
-{{< beta-callout url="https://forms.gle/48wkkRoZfwhn74ycA" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
+{{< callout url="https://forms.gle/48wkkRoZfwhn74ycA" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
 Heatmaps are in private beta, but you can request access using this form. We'll reach out directly once approved.
-{{< /beta-callout >}} 
+{{< /callout >}} 
 
 {{< img src="real_user_monitoring/heatmaps/heatmap.jpeg" alt="An overview of the heatmap functionality." style="width:100%;">}}
 
@@ -58,9 +58,9 @@ Below the panel are all actions that occurred on the page, listed by frequency. 
 
 After understanding analytics, the next step is to understand the action in the context of other data outside of heatmaps. This might mean pivoting to the [RUM explorer][4] or building a funnel that includes the action in order to [analyze conversion rates][5]. You can also watch associated [session replays][1] to visually see a user performing the action in the context of their overall session.
 
+
 [1]: /real_user_monitoring/session_replay/
 [2]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/package.json
 [3]: https://app.datadoghq.com/rum/heatmap/view
 [4]: /real_user_monitoring/explorer/
 [5]: /real_user_monitoring/guide/alerting-with-conversion-rates/
-

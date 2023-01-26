@@ -12,9 +12,9 @@ further_reading:
   text: "Learn how to create Connections for the actions in your workflow."
 ---
 
-{{< beta-callout url="https://forms.gle/VEjerYVQ2QJhauZ57" >}}
+{{< callout url="https://forms.gle/VEjerYVQ2QJhauZ57" >}}
   Workflows are in public beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.
-{{< /beta-callout >}}
+{{< /callout >}}
 
 To add an automated trigger to a workflow, the workflow must have an associated service account. The service account is needed to:
 - resolve the connections defined in the workflow actions at runtime
