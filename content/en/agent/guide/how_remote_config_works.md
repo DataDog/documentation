@@ -92,11 +92,11 @@ To use Remote Configuration, you need to meet the following prerequisites:
 2. For features that use tracing libraries (APM, ASM), use the following minimum versions of Datadog tracing libraries:
 
 
-| Product feature                        | Go            | Java          | Python        | .Net          | NodeJS        |
-|----------------------------------------|---------------|---------------|---------------|---------------|---------------|
-| APM (feature: Dynamic Instrumentation) |               | 1.5.0         | x.y.z         | 2.22.0        |               |
-| ASM feature: Protection                | 1.45.1        | 1.4.0         |               | 2.16.0        | 3.11.0        |
-| ASM feature: 1-click activation        |               | 1.4.0         |               | 2.17.0        | 3.9.0         |
+| Product feature                        | Go            | Java          | .Net          | NodeJS          
+|----------------------------------------|---------------|---------------|---------------|---------------|
+| APM (feature: Dynamic Instrumentation) |               | 1.5.0         | 2.22.0        |               |
+| ASM feature: Protection                | 1.45.1        | 1.4.0         | 2.16.0        | 3.11.0        |
+| ASM feature: 1-click activation        |               | 1.4.0         | 2.17.0        | 3.9.0         |
 
 #### Setup:
 Once you've ensured that you meet the prerequisites, you can proceed with enabling Remote Configuration using the following steps: 
