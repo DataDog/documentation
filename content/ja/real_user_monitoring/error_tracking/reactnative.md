@@ -9,6 +9,9 @@ further_reading:
 - link: real_user_monitoring/error_tracking/explorer
   tag: ドキュメント
   text: エラートラッキングエクスプローラーについて
+- link: https://www.datadoghq.com/blog/rum-now-offers-react-native-crash-reporting-and-error-tracking/
+  tag: GitHub
+  text: RUM が React Native のクラッシュレポートとエラー追跡を提供開始
 kind: documentation
 title: React Native のクラッシュレポートとエラー追跡
 ---
@@ -79,6 +82,39 @@ echo "Size of source maps and bundle is $(($payloadsize / 1000000))MB"
 シンボル化されたファイルを自動的に送信するようにプロジェクトを設定するには、`npx datadog-react-native-wizard` を実行します。
 
 オプションについては、ウィザード[公式ドキュメント][13]を参照してください。
+
+## クラッシュレポートの実装をテストする
+
+ソースマップが正しく送信され、アプリケーションにリンクされていることを確認するために、[`react-native-performance-limiter`][14] パッケージでクラッシュを生成することができます。
+
+yarn や npm でインストールして、ポッドを再インストールします。
+
+```shell
+yarn install react-native-performance-limiter # or npm install react-native-performance-limiter
+(cd ios && pod install)
+```
+
+アプリから javascript のスレッドをクラッシュさせます。
+
+```javascript
+import { crashJavascriptThread } from 'react-native-performance-limiter';
+
+const crashApp = () => {
+    crashJavascriptThread('custom error message');
+};
+```
+
+新しいソースマップを送信するために、リリース用にアプリケーションを再構築し、クラッシュをトリガーし、[エラー追跡][1]ページでエラーが表示されるのを待ちます。
+
+dSYMs と Proguard マッピングファイルのアップロードをテストするには、代わりにネイティブのメインスレッドをクラッシュさせます。
+
+```javascript
+import { crashNativeMainThread } from 'react-native-performance-limiter';
+
+const crashApp = () => {
+    crashNativeMainThread('custom error message');
+};
+```
 
 ## `datadog-react-native-wizard` の代替となるもの
 
@@ -193,7 +229,7 @@ $(echo $PACKAGE_MANAGER_BIN datadog-ci react-native xcode)
 
 また、Datadog のサイト (`datadoghq.eu` など) を環境変数 `DATADOG_SITE` や、`datadog-ci.json` ファイルに `datadogSite` キーとして指定することも可能です。
 
-#### 各ビルドで手動 (Hermes なし)
+#### 各ビルドで手動
 
 ソースマップを出力するためには、XCode のビルドフェーズ "Bundle React Native Code and Images” を編集する必要があります。
 
@@ -227,9 +263,9 @@ export BUNDLE_PATH= # バンドルパスを入力します
 yarn datadog-ci react-native upload --platform ios --service $SERVICE --bundle $BUNDLE_PATH --sourcemap ./build/main.jsbundle.map --release-version $VERSION --build-version $BUILD
 ```
 
-#### 各ビルドで手動 (Hermes あり)
+#### 各ビルドで手動 (Hermes for React Native < 0.71 あり)
 
-現在、React Native で Hermes を使用した場合、不正なソースマップが生成されるバグがあります。
+React Native の 0.71 までのバージョンで、Hermes を使用した場合に不正なソースマップが生成されるバグがあります。
 
 これを解決するには、正しいソースマップファイルを生成するために、ビルドフェーズの**一番最後**に行を追加する必要があります。
 
@@ -238,12 +274,20 @@ yarn datadog-ci react-native upload --platform ios --service $SERVICE --bundle $
 ```bash
 set -e
 export SOURCEMAP_FILE=./build/main.jsbundle.map # <- ソースマップの出力にこの行を追加します
+# React Native 0.70 では、ソースマップを生成するために USE_HERMES を true に設定する必要があります
+export USE_HERMES=true
 
 # スクリプトの残りを変更せずにおきます
 
 # 以下の行を追加して、パッケージャーとコンパイラーのソースマップを 1 つのファイルにまとめます
 REACT_NATIVE_DIR=../node_modules/react-native
-source "$REACT_NATIVE_DIR/scripts/find-node.sh"
+
+if [ -f "$REACT_NATIVE_DIR/scripts/find-node-for-xcode.sh" ]; then
+    source "$REACT_NATIVE_DIR/scripts/find-node-for-xcode.sh"
+else
+    # Before RN 0.70, the script was named find-node.sh
+    source "$REACT_NATIVE_DIR/scripts/find-node.sh"
+fi
 source "$REACT_NATIVE_DIR/scripts/node-binary.sh"
 "$NODE_BINARY" "$REACT_NATIVE_DIR/scripts/compose-source-maps.js" "$CONFIGURATION_BUILD_DIR/main.jsbundle.map" "$CONFIGURATION_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/main.jsbundle.map" -o "../$SOURCEMAP_FILE"
 ```
@@ -262,7 +306,25 @@ yarn datadog-ci react-native upload --platform ios --service $SERVICE --bundle $
 
 ### Android ビルドにおける JavaScript ソースマップのアップロード
 
-#### 各リリースビルドで自動的に
+#### 各リリースビルドで自動的に (React Native >= 0.71)
+
+`android/app/build.gradle` ファイルで、`apply plugin: "com.facebook.react"` 行の後に、以下を追加します。
+
+```groovy
+apply from: "../../node_modules/@datadog/mobile-react-native/datadog-sourcemaps.gradle"
+```
+
+アップロードを動作させるためには、Datadog API キーを指定する必要があります。環境変数 `DATADOG_API_KEY` として指定するか、API キーを含む `datadog-ci.json` ファイルをプロジェクトのルートに作成します。
+
+```json
+{
+    "apiKey": "<YOUR_DATADOG_API_KEY>"
+}
+```
+
+また、Datadog のサイト (`datadoghq.eu` など) を環境変数 `DATADOG_SITE` や、`datadog-ci.json` ファイルに `datadogSite` キーとして指定することも可能です。
+
+#### 各リリースビルドで自動的に (React Native < 0.71)
 
 `android/app/build.gradle` ファイルで、`apply from: "../../node_modules/react-native/react.gradle"` 行の後に、以下を追加します。
 
@@ -282,7 +344,17 @@ apply from: "../../node_modules/@datadog/mobile-react-native/datadog-sourcemaps.
 
 #### 各ビルドで手動
 
-Android では、バンドルファイルは `android/app/build/generated/assets/react/release/index.android.bundle` に、ソースマップファイルは `android/app/build/generated/sourcemaps/react/release/index.android.bundle.map` に配置されます。アプリケーションにもっと包括的なバリアントがある場合は、パスの `release` をバリアント名で置き換えてください。
+Android では、ソースマップファイルは `android/app/build/generated/sourcemaps/react/release/index.android.bundle.map` に配置されます。
+バンドルファイルの場所は、React Native (RN) と Android Gradle Plugin (AGP) のバージョンに依存します。
+
+-   RN >= 0.71 および AGP >= 7.4.0: `android/app/build/generated/assets/createBundleReleaseJsAndAssets/index.android.bundle`
+-   RN >= 0.71 および AGP < 7.4.0: `android/app/build/ASSETS/createBundleReleaseJsAndAssets/index.android.bundle`
+-   RN < 0.71: `android/app/build/generated/assets/react/release/index.android.bundle`
+
+Android Gradle Plugin のバージョンは `android/build.gradle` ファイル内の `com.android.tools.build:gradle` で指定します。例: `classpath("com.android.tools.build:gradle:7.3.1")`
+
+もし、アプリケーションがより包括的なバリアントを持っている場合は、パス中の `release` をバリアント名に置き換えてください。
+`android/app/build.gradle` の react 構成で `bundleAssetName` を指定した場合は、 `index.android.bundle` をその値で置き換えてください。
 
 ビルドを実行した後、React Native プロジェクトのルートからこのコマンドを実行して、ソースマップをアップロードします。
 
@@ -317,7 +389,7 @@ yarn datadog-ci react-native upload --platform android --service $SERVICE --bund
 
 ```groovy
 plugins {
-    id("com.datadoghq.dd-sdk-android-gradle-plugin") version "1.5.0"
+    id("com.datadoghq.dd-sdk-android-gradle-plugin") version "1.5.1"
 }
 
 datadog {
@@ -372,3 +444,4 @@ React Native のクラッシュレポートとエラー追跡の構成を確認�
 [11]: https://www.bitrise.io/
 [12]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/react-native#xcode
 [13]: https://github.com/DataDog/datadog-react-native-wizard
+[14]: https://github.com/DataDog/react-native-performance-limiter

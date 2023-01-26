@@ -265,7 +265,7 @@ main:
     identifier: agent_logs
     parent: agent
     weight: 8
-  - name: Advanced Log Collection
+  - name: Advanced Configurations
     url: agent/logs/advanced_log_collection
     parent: agent_logs
     weight: 801
@@ -2052,6 +2052,11 @@ main:
     parent: pipeline_visibility
     identifier: ci_jenkins
     weight: 206
+  - name: TeamCity
+    url: continuous_integration/pipelines/teamcity/
+    parent: pipeline_visibility
+    identifier: ci_teamcity
+    weight: 207
   - name: Custom Commands
     url: continuous_integration/pipelines/custom_commands/
     parent: pipeline_visibility
@@ -2461,6 +2466,11 @@ main:
     parent: observability_pipelines_production_deployment_overview
     identifier: observability_pipelines_aggregator_architecture
     weight: 202
+  - name: Integrate Datadog and the Worker
+    url: observability_pipelines/production_deployment_overview/integrate_datadog_and_the_observability_pipelines_worker/
+    parent: observability_pipelines_production_deployment_overview
+    identifier: observability_pipelines_integrate_datadog_and_the_op_worker
+    weight: 203
   - name: Working with Data
     url: observability_pipelines/working_with_data/
     parent: observability_pipelines
@@ -2594,30 +2604,36 @@ main:
     parent: cspm
     identifier: cspm_getting_started
     weight: 101
+  - name: Detection Rules
+    url: security/cspm/detection_rules
+    parent: cspm
+    identifier: cspm_detection_rules
+    weight: 102
   - name: Custom Rules
     url: security/cspm/custom_rules
     parent: cspm
     identifier: custom_rules
-    weight: 102
+    weight: 103
   - name: Cloud Resources Schema
     url: security/cspm/custom_rules/schema/
     parent: cspm
     identifier: cspm_schema_gcp_test
-    weight: 103
-  - name: Findings Reports
+    weight: 104
+  - name: Compliance Reports
     url: security/cspm/frameworks_and_benchmarks
     parent: cspm
-    weight: 104
+    identifier: cspm_frameworks_benchmarks
+    weight: 106
   - name: Security Findings Explorer
     url: /security/cspm/findings
     parent: cspm
     identifier: cspm_findings_explorer
-    weight: 105
+    weight: 107
   - name: Signals Explorer
     url: /security/cspm/signals_explorer/
     parent: cspm
     identifier: signals
-    weight: 106
+    weight: 108
   - name: Cloud Workload Security
     url: security/cloud_workload_security/
     parent: csm
@@ -2827,7 +2843,13 @@ main:
   - name: Search and Manage
     url: synthetics/search/
     parent: synthetics
+    identifier: synthetics_search
     weight: 5
+  - name: Saved Views
+    url: synthetics/search/saved_views
+    parent: synthetics_search
+    identifier: synthetics_search_saved_views
+    weight: 501
   - name: Test Coverage
     url: synthetics/test_coverage
     parent: synthetics
@@ -3696,7 +3718,7 @@ main:
     parent: administration_heading
     weight: 240000
   - name: Aggregating Agents
-    url: observability_pipelines/guide/configure_observability_pipelines_with_datadog/
+    url: observability_pipelines/production_deployment_overview/integrate_datadog_and_the_observability_pipelines_worker/
     parent: agent
     identifier: vector_aggregation
     weight: 13
@@ -7829,6 +7851,130 @@ api:
         - ListConfluentAccount
       unstable: []
       order: 10
+  - name: Fastly Integration
+    url: /api/latest/fastly-integration/
+    identifier: fastly-integration
+    generated: true
+  - name: Update Fastly service
+    url: '#update-fastly-service'
+    identifier: fastly-integration-update-fastly-service
+    parent: fastly-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateFastlyService
+      unstable: []
+      order: 9
+  - name: Get Fastly service
+    url: '#get-fastly-service'
+    identifier: fastly-integration-get-fastly-service
+    parent: fastly-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetFastlyService
+      unstable: []
+      order: 8
+  - name: Delete Fastly service
+    url: '#delete-fastly-service'
+    identifier: fastly-integration-delete-fastly-service
+    parent: fastly-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteFastlyService
+      unstable: []
+      order: 10
+  - name: Add Fastly service
+    url: '#add-fastly-service'
+    identifier: fastly-integration-add-fastly-service
+    parent: fastly-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateFastlyService
+      unstable: []
+      order: 7
+  - name: List Fastly services
+    url: '#list-fastly-services'
+    identifier: fastly-integration-list-fastly-services
+    parent: fastly-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListFastlyServices
+      unstable: []
+      order: 6
+  - name: Update Fastly account
+    url: '#update-fastly-account'
+    identifier: fastly-integration-update-fastly-account
+    parent: fastly-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateFastlyAccount
+      unstable: []
+      order: 4
+  - name: Get Fastly account
+    url: '#get-fastly-account'
+    identifier: fastly-integration-get-fastly-account
+    parent: fastly-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetFastlyAccount
+      unstable: []
+      order: 3
+  - name: Delete Fastly account
+    url: '#delete-fastly-account'
+    identifier: fastly-integration-delete-fastly-account
+    parent: fastly-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteFastlyAccount
+      unstable: []
+      order: 5
+  - name: Add Fastly account
+    url: '#add-fastly-account'
+    identifier: fastly-integration-add-fastly-account
+    parent: fastly-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateFastlyAccount
+      unstable: []
+      order: 2
+  - name: List Fastly accounts
+    url: '#list-fastly-accounts'
+    identifier: fastly-integration-list-fastly-accounts
+    parent: fastly-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListFastlyAccounts
+      unstable: []
+      order: 1
   - name: Incident Services
     url: /api/latest/incident-services/
     identifier: incident-services

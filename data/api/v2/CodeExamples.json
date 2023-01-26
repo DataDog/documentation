@@ -292,6 +292,34 @@
       "description": "Search events returns \"OK\" response with pagination"
     }
   ],
+  "CreateFastlyAccount": [
+    {
+      "group": "fastly_integration",
+      "suffix": "",
+      "description": "Add Fastly account returns \"CREATED\" response"
+    }
+  ],
+  "GetFastlyAccount": [
+    {
+      "group": "fastly_integration",
+      "suffix": "",
+      "description": "Get Fastly account returns \"OK\" response"
+    }
+  ],
+  "ListFastlyAccounts": [
+    {
+      "group": "fastly_integration",
+      "suffix": "",
+      "description": "List Fastly accounts returns \"OK\" response"
+    }
+  ],
+  "UpdateFastlyAccount": [
+    {
+      "group": "fastly_integration",
+      "suffix": "",
+      "description": "Update Fastly account returns \"OK\" response"
+    }
+  ],
   "CreateIncidentService": [
     {
       "group": "incident_services",

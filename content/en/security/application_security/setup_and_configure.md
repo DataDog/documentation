@@ -129,7 +129,7 @@ To install the above requirements:
 
 **Note**: The Go toolchain disables CGO when cross-compiling and so, CGO needs to be explicitly enabled.
 
-[1]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib
+[1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib
 [2]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc#example-package-Server
 [3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http#example-package
 [4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux#example-package
