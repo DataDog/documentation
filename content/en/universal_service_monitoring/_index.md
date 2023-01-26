@@ -77,7 +77,7 @@ datadog:
     enabled: true
 ```
 
-If your cluster is running Google Container-Optimized OS, add the following to your values file as well:
+If your cluster is running Google Container-Optimized OS (COS), add the following to your values file as well:
 
 ```
 providers:
