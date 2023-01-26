@@ -20,9 +20,13 @@ Utilisez l'[API Downtime][1] pour gérer des calendriers de maintenance avancés
 
 Ce guide explique comment configurer des downtimes pour les cas d'utilisation suivants :
 
-* [Downtime pendant le week-end](#downtime-pendant-le-week-end)
-* [Downtime en dehors des heures de travail](#downtime-en-dehors-des-heures-de-travail)
-* [Downtime récurrent à un jour précis du mois](#downtime-recurrent-a-un-jour-precis-du-mois)
+- [Présentation](#présentation)
+- [Prérequis](#prérequis)
+- [Scénarios](#scénarios)
+  - [Downtime pendant le week-end](#downtime-pendant-le-week-end)
+  - [Downtime en dehors des heures de travail](#downtime-en-dehors-des-heures-de-travail)
+  - [Downtime récurrent à un jour précis du mois](#downtime-récurrent-à-un-jour-précis-du-mois)
+  - [Pour aller plus loin](#pour-aller-plus-loin)
 
 ## Prérequis
 
