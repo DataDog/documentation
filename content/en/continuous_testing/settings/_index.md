@@ -25,7 +25,7 @@ You can access Continuous Testing settings on the [Synthetic Monitoring Settings
 
 {{< img src="continuous_testing/continuous_testing_default.png" alt="Default settings for Continuous Testing" style="width:100%;">}}
 
-By default, all your tests running in CI/CD pipelines will run sequentially (one after the other). To change this behavior, set a [parallelization value](#set-parallelization) and save your selection.
+By default, all your tests running in CI/CD pipelines run sequentially (one after the other). To change this behavior, set a [parallelization value](#set-parallelization) and save your selection.
 
 ## Parallelization
 
