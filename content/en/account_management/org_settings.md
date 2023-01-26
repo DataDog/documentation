@@ -92,7 +92,7 @@ Users with `Org Management` permission can enable the out-of-contract retention 
 
 {{< img src="account_management/out-of-contract-retention.png" alt="The out-of-contract retention periods for log indexes setting showing enabled." style="width:70%;" >}}
 
-When enabled, users with `Modify Index` permission can choose any of the 3/7/15/30/45/60 retention periods even if they are not in the contract. This is useful when troubleshooting a potential long standing issue or meeting compliance requirements for which customers need higher retention that is not part of the contract at the moment.
+When enabled, users with `Modify Index` permission can choose any of the 3-, 7-, 15-, 30-, 45-, and 60-day retention periods, even if it is not in the contract. This can be useful when troubleshooting a potential long standing issue or meeting compliance requirements for which customers need a higher retention period that is not part of the current contract.
 
 **Note** that using out of contract retention times incurs on-demand charges and Datadog recommends that if a retention period is highly used that customers get in touch with their account manager or support to have it added as part of the contract.
 
