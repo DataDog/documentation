@@ -102,9 +102,9 @@ You can monitor the security of your Python apps running in Docker, Kubernetes, 
    {{% /tab %}}
    {{< /tabs >}}
 
-{{% appsec-getstarted-2-canary %}}
+{{% appsec-getstarted-2-plusrisk %}}
 
-{{< img src="/security/application_security/application-security-signal.png" alt="Security Signal details page showing tags, metrics, suggested next steps, and attacker IP addresses associated with a threat." style="width:100%;" >}}
+{{< img src="/security/application_security/appsec-getstarted-threat-and-vuln.png" alt="Video showing Signals exporer and details, and Vulnerabilities explorer and details." video="true" >}}
 
 ## Further Reading
 
