@@ -12,7 +12,9 @@ further_reading:
 
 Shadow DOM helps developers build more modern websites by allowing them to incorporate isolated and reusable components into their code. Often used in order to keep a clean code structure and avoid style clashes, Shadow DOM usage has become more prominent in modern web development practices. 
 
-Datadog provides support of open Shadow DOM without any extra configuration required — components which are located inside a shadow root are automatically captured by Session Replay.
+Starting with `v4.31.0`, Datadog provides support of open Shadow DOM without any extra configuration required — components which are located inside a shadow root are automatically captured by Session Replay.
+
+**Note**: The open Shadow DOM compatibility has been tested on popular frameworks. Closed and dynamic Shadow DOM, as well as change in the dynamic CSS style are not supported.
 
 ## Further Reading
 
