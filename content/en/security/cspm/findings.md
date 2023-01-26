@@ -71,7 +71,7 @@ There may be times where a finding does not match the use case for your business
 
 For example, the ['Block Public Access' feature is enabled for S3 bucket][4] rule evaluates whether a S3 bucket is publicly accessible. If you have a S3 bucket with static assets that are meant to be publicly shared, you can mute the finding for the S3 bucket.
 
-Muted findings do not appear in visualizations and do not impact your posture score. You can mute both pass and fail findings at any time while providing justification for the suppression.
+Muted findings do not appear in visualizations and do not impact your posture score. You can mute pass/fail findings at any time. CSPM also provides [several methods](#audit-your-muted-findings) for keeping track of your muted findings.
 
 1. On the finding side panel, select a resource.
 2. Click **Mute**.
