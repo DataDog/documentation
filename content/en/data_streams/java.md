@@ -2,9 +2,12 @@
 title: Setup Data Streams Monitoring for Java
 kind: documentation
 further_reading:
-    - link: '/data_streams/glossary/'
+    - link: '/integrations/kafka/'
       tag: 'Documentation'
-      text: 'Data Streams Glossary'
+      text: 'Kafka Integration'
+    - link: '/tracing/service_catalog/'
+      tag: 'Documentation'
+      text: 'Service Catalog'
 ---
 
 ### Prerequisites
