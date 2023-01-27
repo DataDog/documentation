@@ -33,7 +33,7 @@ See [Tracing Go Applications][2] for general comprehensive tracing setup documen
 ### Prerequisites
 
 - A Datadog account and [organization API key][3]
-- A physical or virtual Linux host with root access when using sudo. The host has the following requirements:
+- A physical or virtual Linux host with root access when using `sudo`. The host has the following requirements:
   - Git
   - Curl
   - Go version 1.18+
@@ -44,8 +44,7 @@ See [Tracing Go Applications][2] for general comprehensive tracing setup documen
 If you haven't installed a Datadog Agent on your machine, go to [**Integrations > Agent**][5] and select your operating system. For example, on most Linux platforms, you can install the Agent by running the following script, replacing `<YOUR_API_KEY>` with your [Datadog API key][3]:
 
 {{< code-block lang="bash" >}}
-DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
-{{< /code-block >}}
+DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"{{< /code-block >}}
 
 To send data to a Datadog site other than `datadoghq.com`, replace the `DD_SITE` environment variable with [your Datadog site][6].
 
@@ -60,7 +59,7 @@ Verify that the Agent is running and sending data to Datadog by going to [**Even
 Next, install a sample application to trace. The code sample for this tutorial can be found at [github.com/DataDog/apm-tutorial-golang.git][9]. Clone the git repository by running:
 
 {{< code-block lang="bash" >}}
-git clone git clone https://github.com/DataDog/apm-tutorial-golang.git
+git clone https://github.com/DataDog/apm-tutorial-golang.git
 {{< /code-block >}}
 
 To install the necessary libraries for the sample app, run the following command from the root directory of the repo:
@@ -69,16 +68,10 @@ To install the necessary libraries for the sample app, run the following command
 go mod download
 {{< /code-block >}}
 
-Build the sample application using the following command:
+Build the sample application using the following command. The command might take a while the first time you run it:
 
 {{< code-block lang="bash" >}}
 make run
-{{< /code-block >}}
-
-Run the applications in the background with this command:
-
-{{< code-block lang="bash" >}}
-./cmd/notes/notes &
 {{< /code-block >}}
 
 The sample `notes` application is a basic REST API that stores data in an in-memory database. Use `curl` to send a few API requests:
@@ -104,41 +97,28 @@ Run more API calls to see the application in action. When you're done, run the f
 make exit
 {{< /code-block >}}
 
-## Install and run a sample instrumented Go application
-
-Clone the git repository by running:
-
-{{< code-block lang="bash" >}}
-git clone git clone https://github.com/DataDog/apm-tutorial-golang.git
-{{< /code-block >}}
-
 ## Install Datadog tracing
 
 Next, install the Go tracer. From your `apm-tutorial-golang` directory, run:
 
 {{< code-block lang="bash" >}}
 go get gopkg.in/DataDog/dd-trace-go.v1/ddtrace
+go get gopkg.in/DataDog/dd-trace-go.v1/internal/remoteconfig@v1.46.1
 {{< /code-block >}}
 
 Ensure that the following lines of code are present in each of the apps defined in `apm-tutorial-golang/cmd/calendar/main.go` and `apm-tutorial-golang/cmd/notes/main.go`:
 
 {{< code-block lang="go" >}}
 func main() {
-	tracer.Start()
-	defer tracer.Stop()
+  tracer.Start()
+  defer tracer.Stop()
+  ...
+}
 {{< /code-block >}}
 
-## Launch the Go application with automatic instrumentation
+## Launch the Go application and explore automatic instrumentation
 
-To start generating and collecting traces, restart the sample application with additional flags that cause tracing data to be sent to Datadog.
-
-<div class="alert alert-warning"><strong>Note</strong>: The flags on these sample commands, particularly the sample rate, are not necessarily appropriate for environments outside this tutorial. For information about what to use in your production environment, read <a href="#tracing-configuration">Tracing configuration</a>.</div>
-
-From your `apm-tutorial-golang` directory, run:
-
-{{< code-block lang="bash">}}
-DD_TRACE_SAMPLE_RATE=1 DD_SERVICE=notes DD_ENV=dev DD_VERSION=0.0.1 ./cmd/notes/notes &
-{{< /code-block >}}
+To start generating and collecting traces, launch the application again with `make run`.
 
 Use `curl` to again send requests to the application:
 
@@ -178,15 +158,14 @@ A `GET /notes` trace looks something like this:
 
 ## Tracing configuration
 
-The tracing library enables the use of tags to help compile and display data accurately in the Datadog dashboard. This is done by enabling a few environment variables when running the application. The project `Makefile` includes the environment variables `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`, which are set to enable [Unified Service Tagging][47]:
+The tracing library enables the use of tags to help compile and display data accurately in the Datadog dashboard. This is done by enabling a few environment variables when running the application. The project `Makefile` includes the environment variables `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`, which are set to enable [Unified Service Tagging][17]:
 
 {{< code-block lang="go" filename="Makefile" disable_copy="true" collapsible="true" >}}
 run: build
-	DD_TRACE_SAMPLE_RATE=1 DD_SERVICE=notes DD_ENV=dev DD_VERSION=0.0.1 ./cmd/notes/notes &
+  DD_TRACE_SAMPLE_RATE=1 DD_SERVICE=notes DD_ENV=dev DD_VERSION=0.0.1 ./cmd/notes/notes &
 {{< /code-block >}}
 
-The `Makefile` also sets the environment variable `DD_TRACE_SAMPLE_RATE` to `1`, which represents a 100% sample rate. The guide sets a 100% sample rate to
-ensure that all requests to the notes service are sent to the datadog backend for analysis and display. Avoid changing the sample rate in a production or high-volume environment. Setting a high sample rate in the application overrides the Agent configuration and results in a very large volume of data being sent to Datadog. For most use cases, allow the Agent to automatically determine the sampling rate.
+<div class="alert alert-warning">The <code>Makefile</code> also sets the environment variable <code>DD_TRACE_SAMPLE_RATE</code> to <code>1</code>, which represents a 100% sample rate. The guide sets a 100% sample rate to ensure that all requests to the notes service are sent to the Datadog backend for analysis and display. Avoid changing the sample rate in a production or high-volume environment. Setting a high sample rate in the application overrides the Agent configuration and results in a very large volume of data being sent to Datadog. For most use cases, allow the Agent to automatically determine the sampling rate.</div>
 
 For more information on available configuration options, see [Configuring the Go Tracing Library][14].
 
@@ -196,12 +175,12 @@ Datadog has several fully supported libraries for Go that allow for automatic tr
 
 {{< code-block lang="go" filename="main.go" disable_copy="true" collapsible="true" >}}
 import (
-	...
+  ...
 
-	sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
-	chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
-	httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
-	...
+  sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
+  chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
+  httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
+  ...
 )
 {{< /code-block >}}
 
@@ -216,7 +195,7 @@ r.Mount("/", nr.Register())
 
 Using `chitrace.WithServiceName("notes")` ensures that all elements traced by the library fall under the service name `notes`.
 
-The `main.go` file contains more implementation examples for each of these libraries. For an extensive list of libraries, see [Go Compatibility Requirements][46].
+The `main.go` file contains more implementation examples for each of these libraries. For an extensive list of libraries, see [Go Compatibility Requirements][16].
 
 ### Use custom tracing with context
 
@@ -297,11 +276,11 @@ The sample project includes a second application called `calendar` that returns 
    {{< img src="tracing/guide/tutorials/tutorial-go-host-distributed.png" alt="A flame graph for a distributed trace." style="width:100%;" >}}
 
 This flame graph combines interactions from multiple applications:
-- The first span is a POST request sent by the user and handled by the chi router through the supported `go-chi` library.
+- The first span is a POST request sent by the user and handled by the `chi` router through the supported `go-chi` library.
 - The second span is a `createNote` function that was manually traced by the `makeSpanMiddleware` function. The function created a span from the context of the HTTP request.
 - The next span is the request sent by the notes application using the supported `http` library and the client initialized in the `main.go` file. This GET request is sent to the calendar application. The calendar application spans appear in blue because they are separate service.
-- Inside the calendar application, there is a similar setup. A `go-chi` router handles the GET request, and the `GetDate` function is manually traced with its own span under the GET request.
-- Finally, the purple `db` call is its own service from the supported SQL library and is the same level as the yellow notes `GET /Calendar` request since they are both called by the parent span `CreateNote`.
+- Inside the calendar application, a `go-chi` router handles the GET request and the `GetDate` function is manually traced with its own span under the GET request.
+- Finally, the purple `db` call is its own service from the supported `sql` library. It appears at the same level as the `GET /Calendar` request because they are both called by the parent span `CreateNote`.
 
 ## Troubleshooting
 
@@ -326,6 +305,5 @@ If you're not receiving traces as expected, set up debug mode for the Java trace
 [13]: /tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode
 [14]: /tracing/trace_collection/library_config/go/
 [15]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=Go
-[45]: https://app.datadoghq.com/apm/service-setup?architecture=host-based&language=go
-[46]: /tracing/trace_collection/compatibility/go/#library-compatibility
-[47]: /getting_started/tagging/unified_service_tagging/
+[16]: /tracing/trace_collection/compatibility/go/#library-compatibility
+[17]: /getting_started/tagging/unified_service_tagging/
