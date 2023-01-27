@@ -127,7 +127,7 @@ This powerpack provides graphs about usage by country, actions on a view, and ac
 [3]: /real_user_monitoring/ios/advanced_configuration/?tab=swift#enrich-user-sessions
 [4]: /real_user_monitoring/android/advanced_configuration/?tab=kotlin#enrich-user-sessions
 [5]: https://app.datadoghq.com/rum/explorer
-[6]: /real_user_monitoring/explorer/visualize#funnel
+[6]: /real_user_monitoring/funnel_analysis/
 [7]: /real_user_monitoring/explorer/saved_views/
 [8]: /real_user_monitoring/explorer/export/
 [9]: /real_user_monitoring/error_tracking/

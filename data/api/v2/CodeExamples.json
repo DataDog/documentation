@@ -162,6 +162,34 @@
       "description": "Update a Cloud Workload Security Agent rule returns \"OK\" response"
     }
   ],
+  "CreateCloudflareAccount": [
+    {
+      "group": "cloudflare_integration",
+      "suffix": "",
+      "description": "Add Cloudflare account returns \"CREATED\" response"
+    }
+  ],
+  "GetCloudflareAccount": [
+    {
+      "group": "cloudflare_integration",
+      "suffix": "",
+      "description": "Get Cloudflare account returns \"OK\" response"
+    }
+  ],
+  "ListCloudflareAccounts": [
+    {
+      "group": "cloudflare_integration",
+      "suffix": "",
+      "description": "List Cloudflare accounts returns \"OK\" response"
+    }
+  ],
+  "UpdateCloudflareAccount": [
+    {
+      "group": "cloudflare_integration",
+      "suffix": "",
+      "description": "Update Cloudflare account returns \"OK\" response"
+    }
+  ],
   "CreateConfluentResource": [
     {
       "group": "confluent_cloud",
@@ -262,6 +290,34 @@
       "group": "events",
       "suffix": "_3856995058",
       "description": "Search events returns \"OK\" response with pagination"
+    }
+  ],
+  "CreateFastlyAccount": [
+    {
+      "group": "fastly_integration",
+      "suffix": "",
+      "description": "Add Fastly account returns \"CREATED\" response"
+    }
+  ],
+  "GetFastlyAccount": [
+    {
+      "group": "fastly_integration",
+      "suffix": "",
+      "description": "Get Fastly account returns \"OK\" response"
+    }
+  ],
+  "ListFastlyAccounts": [
+    {
+      "group": "fastly_integration",
+      "suffix": "",
+      "description": "List Fastly accounts returns \"OK\" response"
+    }
+  ],
+  "UpdateFastlyAccount": [
+    {
+      "group": "fastly_integration",
+      "suffix": "",
+      "description": "Update Fastly account returns \"OK\" response"
     }
   ],
   "CreateIncidentService": [
@@ -670,7 +726,7 @@
   "QueryScalarData": [
     {
       "group": "metrics",
-      "suffix": "",
+      "suffix": "_3112571352",
       "description": "Scalar cross product query returns \"OK\" response"
     }
   ],
@@ -696,7 +752,7 @@
   "QueryTimeseriesData": [
     {
       "group": "metrics",
-      "suffix": "",
+      "suffix": "_301142940",
       "description": "Timeseries cross product query returns \"OK\" response"
     }
   ],
@@ -705,6 +761,41 @@
       "group": "metrics",
       "suffix": "",
       "description": "Update a tag configuration returns \"OK\" response"
+    }
+  ],
+  "CreateMonitorConfigPolicy": [
+    {
+      "group": "monitors",
+      "suffix": "",
+      "description": "Create a monitor configuration policy returns \"OK\" response"
+    }
+  ],
+  "DeleteMonitorConfigPolicy": [
+    {
+      "group": "monitors",
+      "suffix": "",
+      "description": "Delete a monitor configuration policy returns \"OK\" response"
+    }
+  ],
+  "UpdateMonitorConfigPolicy": [
+    {
+      "group": "monitors",
+      "suffix": "",
+      "description": "Edit a monitor configuration policy returns \"OK\" response"
+    }
+  ],
+  "GetMonitorConfigPolicy": [
+    {
+      "group": "monitors",
+      "suffix": "",
+      "description": "Get a monitor configuration policy returns \"OK\" response"
+    }
+  ],
+  "ListMonitorConfigPolicies": [
+    {
+      "group": "monitors",
+      "suffix": "",
+      "description": "Get all monitor configuration policies returns \"OK\" response"
     }
   ],
   "CreateOpsgenieService": [

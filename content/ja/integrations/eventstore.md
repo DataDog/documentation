@@ -16,7 +16,7 @@ assets:
     source_type_name: Eventstore
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: コミュニティ
   sales_email: help@datadoghq.com
   support_email: help@datadoghq.com
 categories:

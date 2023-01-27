@@ -31,6 +31,13 @@ The following operating systems and architectures are supported:
 - Linux (GNU libc) x86-64, aarch64
 - Alpine Linux (musl libc) x86-64, aarch64
 
+You also need either the [`pkg-config`](https://www.freedesktop.org/wiki/Software/pkg-config/) or the [`pkgconf`](https://github.com/pkgconf/pkgconf) Linux system utility installed.
+This utility is available on the software repositories of most Linux distributions. For example:
+
+- The `pkg-config` package is available for [Homebrew](https://formulae.brew.sh/formula/pkg-config), and [Debian](https://packages.debian.org/search?keywords=pkg-config)- and [Ubuntu](https://packages.ubuntu.com/search?keywords=pkg-config)-based Linux
+- The `pkgconf` package is available for [Arch](https://archlinux.org/packages/?q=pkgconf)- and [Alpine](https://pkgs.alpinelinux.org/packages?name=pkgconf)-based Linux
+- The `pkgconf-pkg-config` package is available for [Fedora](https://packages.fedoraproject.org/pkgs/pkgconf/pkgconf-pkg-config/)- and [Red-Hat](https://rpmfind.net/linux/rpm2html/search.php?query=pkgconf-pkg-config)-based Linux
+
 Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
 
 ## Installation
@@ -113,3 +120,5 @@ The [Getting Started with Profiler][5] guide takes a sample service with a perfo
 [3]: https://app.datadoghq.com/account/settings?agent_version=6#agent
 [4]: https://app.datadoghq.com/profiling
 [5]: /getting_started/profiler/
+[12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
+[13]: /profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints

@@ -18,7 +18,7 @@ This guide provides an example of how to customize the amount of Browser RUM & S
 
 ## Setup
 
-The `sessionReplaySampleRate` parameter is a percentage of `sampleRate`.
+The `sessionReplaySampleRate` parameter is a percentage of `sessionSampleRate`.
 
 This feature requires the Datadog Browser SDK v3.0.0+.
 
@@ -33,13 +33,26 @@ When a session is created, RUM tracks it as either:
 
 Two initialization parameters are available to control how the session is tracked:
 
-- `sampleRate` controls the percentage of overall sessions being tracked. It defaults to `100%`, so every session is tracked by default.
+- `sessionSampleRate` controls the percentage of overall sessions being tracked. It defaults to `100%`, so every session is tracked by default.
 - `sessionReplaySampleRate` is applied **after** the overall sample rate, and controls the percentage of sessions tracked as Browser RUM & Session Replay. It defaults to `100%`, so every session is tracked as Browser RUM & Session Replay by default.
 
 To track 100% of your sessions as Browser RUM:
 
 <details open>
   <summary>Latest version</summary>
+
+```
+datadogRum.init({
+    ....
+    sessionSampleRate: 100,
+    sessionReplaySampleRate: 0
+});
+```
+
+</details>
+
+<details>
+  <summary>before<code>v4.30.0</code></summary>
 
 ```
 datadogRum.init({
@@ -85,6 +98,19 @@ To track 100% of your sessions as Browser RUM & Session Replay:
 ```
 datadogRum.init({
     ....
+    sessionSampleRate: 100,
+    sessionReplaySampleRate: 100
+});
+```
+
+</details>
+
+<details>
+  <summary>before<code>v4.30.0</code></summary>
+
+```
+datadogRum.init({
+    ....
     sampleRate: 100,
     sessionReplaySampleRate: 100
 });
@@ -123,10 +149,23 @@ Use the slider to set the percentage of Browser RUM & Session Replay sessions co
 
 {{< img src="real_user_monitoring/browser/example-initialization-snippet.mp4" alt="Example initialization snippet for a browser application with custom percentages" video="true" width="100%" >}}
 
-If you set `sampleRate` to 60 and `sessionReplaySampleRate` to 50, 40% of sessions are dropped, 30% of sessions are collected as Browser RUM, and 30% of sessions are collected as Browser RUM & Session Replay.
+If you set `sessionSampleRate` to 60 and `sessionReplaySampleRate` to 50, 40% of sessions are dropped, 30% of sessions are collected as Browser RUM, and 30% of sessions are collected as Browser RUM & Session Replay.
 
 <details open>
   <summary>Latest version</summary>
+
+```
+datadogRum.init({
+    ....
+    sessionSampleRate: 60,
+    sessionReplaySampleRate: 50
+});
+```
+
+</details>
+
+<details>
+  <summary>before<code>v4.30.0</code></summary>
 
 ```
 datadogRum.init({
