@@ -32,17 +32,17 @@ Remote configuration is not available on the US1-FED Datadog site.
 Remote Configuration is a Datadog capability that allows you to remotely configure the behavior of Datadog resources (for example, Agents and tracing libraries) deployed in your infrastructure, for select product features. Using Remote Configuration makes it easier to apply Agent and tracing library configurations in your environment on demand, decreasing management costs and reducing friction between teams, accelerating resolution times. For Datadog security products, Application Security Management and Cloud Workload Security, Remote Configuration enabled Agents and compatible tracing libraries provide real-time security updates and responses, enhancing security posture for your applications and cloud infrastructure. 
 
 ## How it works
-Once you enable Remote Configuration on the Datadog Agent, it will poll the configured [Datadog site](https://docs.datadoghq.com/getting_started/site/) periodically, to determine if there are any configuration changes to apply to your Remote Configuration enabled Agents or tracing libraries.
+Once you enable Remote Configuration on the Datadog Agent, it will periodically poll the configured [Datadog site](https://docs.datadoghq.com/getting_started/site/), to determine whether there are configuration changes to apply to your Remote Configuration enabled Agents or tracing libraries.
 
-After submitting configuration changes in the respective Datadog product UI for a Remote Configuration enabled product feature, the changes are stored in Datadog. When your Agents are enabled with Remote Configuration, they will poll Datadog for any configuration changes they should receive and apply automatically.
+After you submit configuration changes in the respective Datadog product UI for a Remote Configuration enabled product feature, the changes are stored in Datadog. 
 
-The following diagram describes how Remote Configuration works:
+The following diagram illustrates how Remote Configuration works:
 
 {{<img src="agent/guide/RC_Diagram_v2.png" alt="RC Diagram" width="90%" style="center">}}
 
-1. Configure select product features through Datadog UI.
-2. Configurations are stored securely within Datadog.
-3. Agents in your environments securely poll, receive, and automatically apply configurations from Datadog.
+1. Configure select product features through the Datadog UI.
+2. The product feature configurations are securely stored within Datadog.
+3. Agents in your environments securely poll, receive, and automatically apply configuration updates from Datadog.
 
 **Note**: You cannot see configuration changes applied through Remote Configuration in your Agent configuration file.
 
@@ -53,7 +53,7 @@ The following products and features are supported with Remote Config:
 <div class="alert alert-info">This feature is in beta.</div>
 
 - **1-click ASM activation**: This feature allows you to enable ASM in 1-click from the Datadog UI.
-- **In-App Web Application Firewall (WAF) automated attack patterns updates**: this feature allows your service to receive the newest attack patterns as Datadog releases them, following new vulnerabilities or attack vectors being disclosed.
+- **In-App Web Application Firewall (WAF) automated attack patterns updates**: This feature allows your service to receive the newest attack patterns as Datadog releases them, following new vulnerabilities or attack vectors being disclosed.
 - **Protect**: This feature allows you to block attackers' IPs, authenticated users, and suspicious requests that are flagged in ASM Security Signals/Traces temporarily or permanently through the Datadog UI.
 
 #### Application Performance Monitoring (APM):  
@@ -73,7 +73,7 @@ The following products and features are supported with Remote Config:
 
 ## Security Considerations
  
-To ensure confidentiality, integrity, and availability of configurations received and applied by your Agents and tracing libraries, Datadog has implemented the following safeguards:
+Datadog has implemented the following safeguards which are designed to protect the confidentiality, integrity, and availability of configurations received and applied to your Agents and tracing libraries:
 
 * Agents deployed in your infrastructure request configurations from Datadog.
 * Datadog never sends configurations unless requested by Agents, and only sends configurations relevant to the requesting Agent.
