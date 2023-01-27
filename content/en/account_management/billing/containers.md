@@ -43,7 +43,7 @@ The on-demand calculations are performed using the allotment that is based on th
 
 **Are Datadog Agent containers counted against the allocation?**
 
-Yes.
+No.
 
 **Are containers belonging to pods in constant `CrashLoopBackoff` counted?**
 
