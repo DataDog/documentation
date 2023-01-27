@@ -81,10 +81,8 @@ before_script:
   tags:
     - "runner:main"
   rules:
-    - if: $CI_PIPELINE_SOURCE == "tags"
+    - if: $CI_PIPELINE_SOURCE == "tags" || $CI_COMMIT_BRANCH =~ "/pull/\/.*/"
       when: never
-    - if: $CI_COMMIT_BRANCH != null # Variable doesnt exists on merge request pipelines or tag pipelines.
-      when: on_success
 
 
 # ================== preview ================== #
