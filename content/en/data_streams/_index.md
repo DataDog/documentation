@@ -17,26 +17,27 @@ Data Streams Monitoring provides a standardized method for teams to understand a
 * Pinpoint faulty producers, consumers or queues, then pivot to related logs or clusters to troubleshoot faster.
 * Prevent cascading delays by equipping service owners to stop backed up events from overwhelming downstream services.
 
+## Setup
+
+To get started, follow the installation instructions to configure services with Data Streams Monitoring:
+
+{{< partial name="data_streams/setup-languages.html" >}}
+
 | Runtime | Supported technologies |
 |---|----|
 | Java | Kafka (self-hosted, Amazon MSK), RabbitMQ, HTTP, gRPC |
 | Go | All (via [manual instrumentation][1]) |
 | .NET | Kafka (self-hosted, Amazon MSK) |
 
-### Setup
-
-{{< partial name="data_streams/setup-languages.html" >}}
 
 ## Explore Data Streams Monitoring
 
-### Measure End-to-end Pipeline Health with New Metrics
-
-{{< img src="data_streams/data_streams_edge_latency.png" alt="Datadog Data Streams Monitoring" style="width:100%;" >}}
+### Measure end-to-end pipeline health with new metrics
 
 Once you've configured Data Streams Monitoring, you can measure the time it typically takes for events to traverse between any two points in your asynchronous system:
 
-| Metric Name | Notable Tags | Use Case |
-|---|----|
+| Metric Name | Notable Tags | Description |
+|---|---|-----|
 | dd.stream.edge_latency | `service`, `upstream_service`, `topic`, `partition` | Time elapsed from producing messages in a client to receiving messages in the consuming service. |
 | dd.stream.latency_from_origin | `service`, `upstream_service`, `hash` | Time elapsed from producing messages at their point of origin to receiving messages in the selected service. |
 
@@ -44,13 +45,17 @@ We recommend using the "Pipeline Health" tab on any service in Data Streams Moni
 
 {{< img src="data_streams/data_streams_create_slo.png" alt="Datadog Data Streams Monitoring" style="width:100%;" >}}
 
-### Attribute Incoming Messages to any Queue, Service or Cluster
+You can also graph and visualize these metrics on any dashboard or notebook:
+
+{{< img src="data_streams/data_streams_edge_latency.png" alt="Datadog Data Streams Monitoring" style="width:100%;" >}}
+
+### Attribute incoming messages to any queue, service or cluster
+
+High lag on a consuming service, increased resource use on a Kafka broker and increased RabbitMQ queue size are frequently explained by changes in the way adjacent services are producing to or consuming from these entities.
 
 {{< img src="data_streams/data_streams_throughput_tab.png" alt="Datadog Data Streams Monitoring" style="width:100%;" >}}
 
-High lag on a consuming service, increased resource use on a Kafka broker and increased RabbitMQ queue size can all be explained by changes in the way adjacent services are producing to or consuming from these entities.
-
-You can use the "Throughput" tab on any service or queue in Data Streams Monitoring to quickly detect changes in throughput and which service these originate from. Once you've configured the [Service Catalog][3], you can immediately pivot to the corresponding team's Slack channel, or on-call engineer.
+You can use the "Throughput" tab on any service or queue in Data Streams Monitoring to quickly detect changes in throughput, and which upstream or downstream service these changes originate from. Once you've configured the [Service Catalog][3], you can immediately pivot to the corresponding team's Slack channel, or on-call engineer.
 
 ## Further Reading
 
