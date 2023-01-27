@@ -59,7 +59,7 @@ The following products and features are supported with Remote Config:
 #### Application Performance Monitoring (APM):  
 <div class="alert alert-info">This feature is only available in private beta.</div>
 
-- **Remotely set agent sampling rate**: This features provides you the ability to remotely configure the Datadog Agent to change its trace sampling rates and set rules to scale your organization's trace ingestion according to your needs, without needing to restart your Datadog Agent. This feature works across all languages.
+- **Remotely set agent sampling rate**: This features provides you the ability to remotely configure the Datadog Agent to change its trace sampling rates and set rules to scale your organization's trace ingestion according to your needs, without needing to restart your Datadog Agent. 
 
 #### Dynamic Instrumentation:
 <div class="alert alert-info">This feature is only available in private beta.</div>
@@ -69,7 +69,7 @@ The following products and features are supported with Remote Config:
 #### Cloud Workload Security (CWS):
 <div class="alert alert-info">This feature is only available in private beta.</div>
 
-- **Automatic default agent rule updates**: This feature allows you to automatically receive and update the default agent rules maintained by Datadog Product Detection Engineering (PDE) as new agent detections and enhancements are released. 
+- **Automatic default agent rule updates**: This feature allows you to automatically receive and update the default agent rules maintained by Datadog as new agent detections and enhancements are released. 
 
 ## Security Considerations
  
