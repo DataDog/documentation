@@ -71,7 +71,7 @@ The following products and features are supported with Remote Config:
 
 - **Automatic default agent rule updates**: This feature allows you to automatically receive and update the default agent rules maintained by Datadog Product Detection Engineering (PDE) as new agent detections and enhancements are released. 
 
-## Security for Remote Config
+## Security Considerations
  
 To ensure confidentiality, integrity, and availability of configurations received and applied by your Agents and tracing libraries, Datadog has implemented the following safeguards:
 
