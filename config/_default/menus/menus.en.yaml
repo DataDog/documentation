@@ -2854,6 +2854,21 @@ main:
     parent: synthetics
     identifier: synthetics_explorer
     weight: 6
+  - name: Search Test Batches
+    url: continuous_testing/explorer/search/
+    parent: synthetics_explorer
+    identifier: continuous_testing_explorer_search
+    weight: 601
+  - name: Search Test Runs
+    url: continuous_testing/explorer/search_runs/
+    parent: synthetics_explorer
+    identifier: continuous_testing_explorer_search_runs
+    weight: 602
+  - name: Search Syntax
+    url: continuous_testing/explorer/search_syntax/
+    parent: synthetics_explorer
+    identifier: continuous_testing_explorer_search_syntax
+    weight: 603
   - name: Test Coverage
     url: synthetics/test_coverage
     parent: synthetics
@@ -2962,21 +2977,6 @@ main:
     parent: continuous_testing
     identifier: continuous_testing_explorer
     weight: 4
-  - name: Search Test Batches
-    url: continuous_testing/explorer/search/
-    parent: continuous_testing_explorer
-    identifier: continuous_testing_explorer_search
-    weight: 401
-  - name: Search Test Runs
-    url: continuous_testing/explorer/search_runs/
-    parent: continuous_testing_explorer
-    identifier: continuous_testing_explorer_search_runs
-    weight: 402
-  - name: Search Syntax
-    url: continuous_testing/explorer/search_syntax/
-    parent: continuous_testing_explorer
-    identifier: continuous_testing_explorer_search_syntax
-    weight: 403
   - name: Troubleshooting
     url: continuous_testing/troubleshooting/
     parent: continuous_testing
