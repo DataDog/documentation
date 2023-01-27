@@ -91,6 +91,7 @@ before_script:
 build_preview:
   <<: *base_template
   <<: *preview_rules
+  when: always
   stage: build
   cache:
     - *yarn_cache_pull_push
