@@ -5057,9 +5057,9 @@ api:
     url: /api/latest/metrics/
     identifier: metrics
     generated: true
-  - name: Timeseries cross product query
-    url: '#timeseries-cross-product-query'
-    identifier: metrics-timeseries-cross-product-query
+  - name: Query timeseries data across multiple products
+    url: '#query-timeseries-data-across-multiple-products'
+    identifier: metrics-query-timeseries-data-across-multiple-products
     parent: metrics
     generated: true
     params:
@@ -5070,9 +5070,9 @@ api:
       unstable:
         - v2
       order: 1
-  - name: Scalar cross product query
-    url: '#scalar-cross-product-query'
-    identifier: metrics-scalar-cross-product-query
+  - name: Query scalar data across multiple products
+    url: '#query-scalar-data-across-multiple-products'
+    identifier: metrics-query-scalar-data-across-multiple-products
     parent: metrics
     generated: true
     params:
