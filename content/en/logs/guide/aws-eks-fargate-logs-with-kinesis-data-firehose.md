@@ -167,6 +167,59 @@ To generate logs and test the Kinesis pipeline, deploy a sample workload to your
  kubectl apply -f sample-deployment.yaml
  {{< /code-block >}}
 
+### Validation
+
+1. Verify that `sample-app` pods are running in the namespace `fargatge-namespace`.
+
+ {{< code-block lang="bash" filename="" disable_copy="false" collapsible="false" >}}
+ kubectl get pods -n fargate-namespace
+ {{< /code-block >}}
+
+Expected output:
+
+ {{< code-block lang="bash" filename="" disable_copy="true" collapsible="false" >}}
+ NAME                          READY   STATUS    RESTARTS   AGE
+ sample-app-6c8b449b8f-kq2qz   1/1     Running   0          3m56s
+ sample-app-6c8b449b8f-nn2w7   1/1     Running   0          3m56s
+ sample-app-6c8b449b8f-wzsjj   1/1     Running   0          3m56s
+ {{< /code-block >}}
+
+2. Use `kubectl describe pod` to confirm that the Fargate logging feature is enabled.  
+
+ {{< code-block lang="bash" filename="" disable_copy="false" collapsible="false" >}}
+ kubectl describe pod <POD-NAME> -n fargate-namespace |grep Logging
+ {{< /code-block >}}
+
+Expected output:
+
+ {{< code-block lang="bash" filename="" disable_copy="true" collapsible="false" >}}
+                    Logging: LoggingEnabled
+ Normal  LoggingEnabled   5m   fargate-scheduler  Successfully enabled logging for pod
+ {{< /code-block >}}
+
+3. Inspect deployment logs.
+
+ {{< code-block lang="bash" filename="" disable_copy="false" collapsible="false" >}}
+ kubectl logs -l app=nginx -n fargate-namespace
+ {{< /code-block >}}
+
+Expected output:
+
+ {{< code-block lang="bash" filename="" disable_copy="true" collapsible="false" >}}
+ /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+ /docker-entrypoint.sh: Configuration complete; ready for start up
+ 2023/01/27 16:53:42 [notice] 1#1: using the "epoll" event method
+ 2023/01/27 16:53:42 [notice] 1#1: nginx/1.23.3
+ 2023/01/27 16:53:42 [notice] 1#1: built by gcc 10.2.1 20210110 (Debian 10.2.1-6)
+ 2023/01/27 16:53:42 [notice] 1#1: OS: Linux 4.14.294-220.533.amzn2.x86_64
+ 2023/01/27 16:53:42 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1024:65535
+ 2023/01/27 16:53:42 [notice] 1#1: start worker processes 
+ ...
+ {{< /code-block >}}
+
+4. Verify logs in Datadog UI. Select `source:aws` to filter for logs from Kinesis Data Firehose.
+{{< img src="logs/guide/aws-eks-fargate-logs-with-kinesis-data-firehose/log_verification.jpg" alt="Verification of the nginx log lines in Datadog Log Explorer" responsive="true">}}
+
 ### Remap attributes for log correlation
 
 Logs from this configuration require some attributes to be remapped to maximize consistency with standard Kubernetes tags in Datadog.  
