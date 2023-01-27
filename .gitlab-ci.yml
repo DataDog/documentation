@@ -23,7 +23,7 @@ variables:
   # yarn/node cache dirs
   YARN_CACHE_FOLDER: "${CI_PROJECT_DIR}/.yarn/cache/"
   PREVIEW_PATTERN: '/.+?\/[a-zA-Z0-9_-]+/'
-  
+
 
 # ================== copy scripts =============== #
 before_script:
@@ -69,10 +69,16 @@ before_script:
     - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_BRANCH =~ $PREVIEW_PATTERN
       when: on_success
 
+.preview_manual_rules: &preview_manual_rules
+  rules:
+    - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_BRANCH =~ $PREVIEW_PATTERN
+      when: manual
+
 .live_rules: &live_rules
   rules:
     - if: $CI_COMMIT_REF_NAME == "master"
       when: on_success
+
 .live_schedule_rules: &live_schedule_rules
   rules:
     - if: $CI_COMMIT_REF_NAME == "master" && $CI_PIPELINE_SOURCE == "schedule"
@@ -86,6 +92,7 @@ before_script:
     - if: $CI_PIPELINE_SOURCE == "tags"
       when: never
     - if: $CI_COMMIT_BRANCH != null # Variable doesnt exists on merge request pipelines or tag pipelines.
+      when: on_success
 
 
 # ================== preview ================== #
@@ -167,8 +174,7 @@ missing_tms_preview:
   interruptible: true
 
 index_algolia_preview:
-  <<: *preview_rules
-  when: manual
+  <<: *preview_manual_rules
   image:
     name: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:docsearch-scraper-latest
     entrypoint: [""] # force an empty entrypoint (see https://gitlab.com/gitlab-org/gitlab-runner/issues/2692)
@@ -192,8 +198,7 @@ index_algolia_preview:
 
 replica_algolia_preview:
   <<: *base_template
-  <<: *preview_rules
-  when: manual
+  <<: *preview_manual_rules
   stage: post-deploy
   cache:
     - *yarn_cache
