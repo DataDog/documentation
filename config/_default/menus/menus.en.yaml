@@ -5293,6 +5293,66 @@ api:
     url: /api/latest/monitors/
     identifier: monitors
     generated: true
+  - name: Edit a monitor configuration policy
+    url: '#edit-a-monitor-configuration-policy'
+    identifier: monitors-edit-a-monitor-configuration-policy
+    parent: monitors
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateMonitorConfigPolicy
+      unstable: []
+      order: 12
+  - name: Get a monitor configuration policy
+    url: '#get-a-monitor-configuration-policy'
+    identifier: monitors-get-a-monitor-configuration-policy
+    parent: monitors
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetMonitorConfigPolicy
+      unstable: []
+      order: 9
+  - name: Delete a monitor configuration policy
+    url: '#delete-a-monitor-configuration-policy'
+    identifier: monitors-delete-a-monitor-configuration-policy
+    parent: monitors
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteMonitorConfigPolicy
+      unstable: []
+      order: 13
+  - name: Create a monitor configuration policy
+    url: '#create-a-monitor-configuration-policy'
+    identifier: monitors-create-a-monitor-configuration-policy
+    parent: monitors
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateMonitorConfigPolicy
+      unstable: []
+      order: 11
+  - name: Get all monitor configuration policies
+    url: '#get-all-monitor-configuration-policies'
+    identifier: monitors-get-all-monitor-configuration-policies
+    parent: monitors
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListMonitorConfigPolicies
+      unstable: []
+      order: 10
   - name: Unmute all monitors
     url: '#unmute-all-monitors'
     identifier: monitors-unmute-all-monitors
