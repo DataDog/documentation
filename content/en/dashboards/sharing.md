@@ -31,7 +31,7 @@ When you share a dashboard by URL or email link, the shared page shows live, rea
 
 To share an entire dashboard publicly, generate a URL:
 
-1. On the dashboard's page, click the settings cog in the upper right.
+1. On the dashboard's page, click the settings upload icon in the upper right.
 2. Select **Generate public URL**.
 3. Under **Time & Variable Settings**, configure your desired options for the time frame and whether users can change it, as well as which tags are visible for selectable template variables.
 4. Copy the URL and click **Done**.
@@ -42,7 +42,8 @@ To share an entire dashboard publicly, generate a URL:
 
  To authorize one or more specific email addresses to view a dashboard page:
 
-1. On the dashboard's page, click the settings cog in the upper right.
+1. On the dashboard's page, click the settings 
+in the upper right.
 2. Select **Generate public URL**.
 3. Select **Only specified people** for indicating who can access this dashboard.
 4. Input the email addresses for people you would like to share your dashboard with.
@@ -62,7 +63,7 @@ To revoke a shared dashboard:
 
 1. Navigate to the [Dashboard List][1].
 2. Select the dashboard you want to revoke access to.
-3. Click on the settings cog in the upper right.
+3. Click on the settings upload icon in the upper right.
 4. Click **Configure sharing**.
 5. Click **Revoke public URL**.
 
