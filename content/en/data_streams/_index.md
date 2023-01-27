@@ -23,6 +23,8 @@ To get started, follow the installation instructions to configure services with 
 
 {{< partial name="data_streams/setup-languages.html" >}}
 
+<br/>
+
 | Runtime | Supported technologies |
 |---|----|
 | Java | Kafka (self-hosted, Amazon MSK), RabbitMQ, HTTP, gRPC |
