@@ -80,7 +80,7 @@ Run type
 
 ### RUM sessions
 
-To view related sessions and available replays in the RUM Explorer, click **View Session in RUM**. To access a user session for a particular action or step in Session Replay, click **Replay Session**. For more information, see [Explore RUM & Session Replay in Synthetics][16].
+To view related sessions and available replays in the [RUM Explorer][22], click **View Session in RUM**. To access a user session for a particular action or step in [Session Replay][23], click **Replay Session**. For more information, see [Explore RUM & Session Replay in Synthetics][16].
 
 ### Screenshots and actions
 
@@ -88,11 +88,17 @@ Every executed test step contains a screenshot of the step action, a link to the
 
 ### Page performance
 
-Synthetic Monitoring includes two [Core Web Vital metrics][6] ([Largest Contentful Paint][2] and [Cumulative Layout Shift][3]) as lab metrics and displays them as pills to the right of each step URL. [First Input Delay][4] is available as a real metric if you are using [Real User Monitoring][5] to collect real user data. For more information, see [Monitoring Page Performance][6].
+Synthetic Monitoring includes two [Core Web Vital metrics][6] ([Largest Contentful Paint][2] and [Cumulative Layout Shift][3]) as lab metrics and displays them as pills to the right of each step URL. 
+
+{{< img src="synthetics/browser_tests/test_results/page_performance_lab_metrics.png" alt="Synthetic lab metrics" style="width:100%" >}}
+
+[First Input Delay][4] is available as a real metric if you are using [Real User Monitoring][5] to collect real user data. For more information, see [Monitoring Page Performance][6].
 
 ### Errors and warnings
 
 Click the **Errors** pill to access the **Errors & Warnings** tab and examine a list of errors separated by error type (`js` or `network`) and status (the network status code).
+
+{{< img src="synthetics/browser_tests/test_results/errors_pill.png" alt="Errors pill" style="width:100%" >}}
 
 The error type is logged when the browser test interacts with the page. It corresponds to the errors collected between the time the page is opened and the time the page can be interacted with. The maximum number of errors that can be displayed is 8, for example: 2 `network` + 6 `js` errors.
 
@@ -100,9 +106,11 @@ The error type is logged when the browser test interacts with the page. It corre
 
 Click the **Resources** pill to access the **Resources** tab and examine the combination of requests and assets, including the total step duration time under **Fully Loaded** and the CDN provider serving the resources. 
 
-{{< img src="synthetics/browser_tests/resources_panel.png" alt="Resources Panel" style="width:90%" >}}
+{{< img src="synthetics/browser_tests/test_results/resources_pill.png" alt="Resources pill" style="width:100%" >}}
 
 You can filter resources by type and search by name in the search bar. The maximum number of resources that can be displayed is 100. Resources are ordered by the time when they start and display the first 100 in Datadog.
+
+{{< img src="synthetics/browser_tests/resources_panel.png" alt="Resources Panel" style="width:100%" >}}
 
 Relative Time 
 : The resource duration over the total interaction time.
@@ -192,3 +200,5 @@ Alerts from your Synthetic test monitors appear in the **Events** tab under **Te
 [19]: /continuous_testing/cicd_integrations
 [20]: /synthetics/browser_tests/?tab=requestoptions#define-alert-conditions
 [21]: /logs/guide/ease-troubleshooting-with-cross-product-correlation/#leverage-trace-correlation-to-troubleshoot-synthetic-tests
+[22]: /real_user_monitoring/explorer
+[23]: /real_user_monitoring/session_replay
