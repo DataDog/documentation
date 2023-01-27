@@ -50,14 +50,14 @@ In addition to code highlighting, you can use the Datadog plugin for Intellij ID
 Alternatively, you can install the plugin from the [Jetbrains Marketplace][6].
 <span id="datadog_plugin_install_button"></span>
 
-### Add Datadog credentials
+### Log in to Datadog
 
-After installing the Datadog plugin and restarting IDEA, add your Datadog API and application keys to authenticate with Datadog:
+After installing the Datadog plugin and restarting IDEA, log in to Datadog:
 1. With a file or project open in IDEA, click the **Datadog** tool window.
-1. Click **Add your credentials...**.
-1. Enter your name, [API key and application key][5], and select a site.
+1. Click **Log in...**.
+1. In the browser window that opens, select your site and organisation then authorize access to the platform.
 
-**Note**: For most users, one pair of keys is all that is required. If you're using a multi-org setup with multiple key pairs, check to ensure that the correct pair is active. To find out which key IDEA is using, click **Preferences** -> **Tools** -> **Datadog** and check which account is active.
+**Note**: For most users, one login is all that is required. If you're using a multi-org setup, check to ensure that the correct account is active. To find out which login IDEA is using, click **Preferences** -> **Tools** -> **Datadog** and check which account is active.
 
 ### Link a service
 
@@ -156,5 +156,5 @@ Let us know what you think about the plugin! Provide feedback on our [discussion
 [1]: https://github.com/DataDog/datadog-for-intellij/discussions
 [3]: /getting_started/profiler/
 [4]: https://www.datadoghq.com/
-[5]: /account_management/api-app-keys/
+[5]: /getting_started/site/#overview
 [6]: https://plugins.jetbrains.com/plugin/19495-datadog
