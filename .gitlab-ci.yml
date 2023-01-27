@@ -22,6 +22,8 @@ variables:
   REPO_URL: "https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.ddbuild.io/DataDog/${DOCS_REPO_NAME}.git"
   # yarn/node cache dirs
   YARN_CACHE_FOLDER: "${CI_PROJECT_DIR}/.yarn/cache/"
+  PREVIEW_PATTERN: '/.+?\/[a-zA-Z0-9_-]+/'
+  
 
 # ================== copy scripts =============== #
 before_script:
@@ -81,8 +83,9 @@ before_script:
   tags:
     - "runner:main"
   rules:
-    - if: $CI_PIPELINE_SOURCE == "tags" || $CI_COMMIT_BRANCH =~ "/pull/\/.*/"
+    - if: $CI_PIPELINE_SOURCE == "tags"
       when: never
+    - if: $CI_COMMIT_BRANCH != null # Variable doesnt exists on merge request pipelines or tag pipelines.
 
 
 # ================== preview ================== #
