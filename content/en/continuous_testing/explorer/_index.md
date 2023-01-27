@@ -25,7 +25,14 @@ further_reading:
 
 The [Explorer][1] provides visibility into all test runs and CI batches for **Synthetic Monitoring** and **Continuous Testing**. 
 
-{{< img src="continuous_testing/explorer_ci_batches.png" alt="Continuous Testing Explorer" style="width:100%;">}}
+{{< tabs >}}
+{{% tab "CI Batches" %}}
+{{< img src="continuous_testing/explorer_ci_batches.png" alt="Search and manage your CI batches in the Synthetic Monitoring & Continuous Testing Explorer" style="width:100%;">}}
+{{% /tab %}}
+{{% tab "Test Runs" %}}
+{{< img src="continuous_testing/explorer_test_runs.png" alt="Search and manage your test runs in the Synthetic Monitoring & Continuous Testing Explorer" style="width:100%;">}}
+{{% /tab %}}
+{{< /tabs >}}
 
 You can accomplish the following actions:
 
