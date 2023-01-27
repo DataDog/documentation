@@ -2,9 +2,12 @@
 title: Application Risk Management
 kind: documentation
 further_reading:
-- link: "/"
+- link: "/security/application_security/how-appsec-works/"
   tag: "Documentation"
-  text: "tktk"
+  text: "How Application Security Works in Datadog"
+- link: "/security/application_security/getting_started/"
+  tag: "Documentation"
+  text: "Get started by enabling Application Security on your services"
 ---
 
 <div class="alert alert-info">Application Security Risk Management is in beta.</a></div>
