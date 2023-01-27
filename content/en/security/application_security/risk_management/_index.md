@@ -27,7 +27,7 @@ The explorer also offers remediation recommendations for detected vulnerabilitie
 
 ## Detect known open source vulnerabilities
 
-Risk management detects the open source libraries used by your application at runtime, and reports security vulnerabilities associated with them. In order to do it, Risk management combines various public open source software known vulnerability data sources along with data obtained by Datadog security research team. 
+Risk management detects the open source libraries used by your application at runtime, and reports security vulnerabilities associated with them. In order to do it, Risk Management combines various public open source software known vulnerability data sources along with data obtained by Datadog security research team. 
 
 ## Detect custom code vulnerabilities 
 

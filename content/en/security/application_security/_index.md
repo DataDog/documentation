@@ -65,9 +65,9 @@ In the [Security Signals Explorer][6], click on any security signal to see what 
 
 ## Investigate risk introduced in upstream open source libraries and dependencies
 
-<div class="alert alert-info">Risk Management is in beta</a></div>
+<div class="alert alert-info">Application Security Risk Management is in beta.</a></div>
 
-[ASM Risk Management][] shows you when your services are at risk because they use or have dependencies on open source libraries that have known vulnerabilities. Investigate vulnerability findings and secure your software by following remediation advice or researching the cause of the vulnerability.
+[ASM Risk Management][8] shows you when your services are at risk because they use or have dependencies on open source libraries that have known vulnerabilities. Investigate vulnerability findings and secure your software by following remediation advice or researching the cause of the vulnerability.
 
 ## Next steps
 

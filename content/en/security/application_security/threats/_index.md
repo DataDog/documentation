@@ -18,7 +18,7 @@ further_reading:
 
 ASM Threat Monitoring and Protection uses trace telemetry from your APM-instrumented applications to identify threats and attacks on your running services by comparing the observed behavior against known attack patterns. 
 
-Security signals raised by Threat Monitoring are summarize and surfaced in views you already commonly visit to monitor service health and performance. The [Service Catalog][1] and individual Service Pages in APM provide quick insights into application threat signals, and let you quickly click through to investigate signals and block attackers.
+Security signals raised by Threat Monitoring are summarized and surfaced in views you already commonly visit to monitor service health and performance. The [Service Catalog][1] and individual Service Pages in APM provide quick insights into application threat signals, and let you quickly click through to investigate signals and block attackers.
 
 {{< img src="security/application_security/threats-on-svc-cat.png" alt="Service Catalog with services showing threat signals" style="width:100%;" >}}
 
@@ -27,7 +27,7 @@ For additional information about how threat monitoring and protection works, rea
 
 ## Explore threat signals
 
-When threat data is coming in for your services, ASM Overview shows a summary of what's happening. Here, you can review security monitoring coverage, and enable ASM on services. To investigate signals of suspicious activity, click a service's **Review** link.
+When threat data for your services is coming into Datadog, ASM Overview shows a summary of what's happening. Here, you can review security monitoring coverage, and enable ASM on services. To investigate signals of suspicious activity, click a service's **Review** link.
 
 In the [Signals Explorer][2], filter by attributes and facets to find critical threats. Click into a signal to see details for it, including the user information and their IP address, what rule they triggered, and related traces and other security signals.
 
@@ -46,7 +46,7 @@ You can [create event rules][5] that define what suspicious behavior looks like 
 
 Datadog ASM offers built-in protection capabilities to slow down attacks and attackers. 
 
-IP blocking actions are implemented through the [tracing libraries][7], not introducing any new dependencies in your stack. IP blocks are saved in the Datadog platform automatically, and securely fetched by the [Datadog Agent][8], deployed in your infrastructure, and applied to your application.
+IP blocking actions are implemented through the [tracing libraries][7], and do not introduce any new dependencies in your stack. IP blocks are saved in the Datadog platform automatically, and securely fetched by the [Datadog Agent][8], deployed in your infrastructure, and applied to your application.
 
 You can block attackers' IPs that are flagged in ASM Security Signals temporarily or permanently in the Datadog UI. From there, all services already protected by ASM block incoming requests performed by the blocked IP, for the specified duration. All blocked traces are tagged with `security_response.block_ip` and displayed in the [Trace Explorer][9]. Services where ASM is disabled aren't protected.
 
