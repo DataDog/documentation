@@ -2852,6 +2852,28 @@ components:
       - INTEGRATION_SCREENBOARD
       - INTEGRATION_TIMEBOARD
       - HOST_TIMEBOARD
+    DataScalarColumn:
+      description: A column containing the numerical results for a formula or query.
+      properties:
+        meta:
+          $ref: '#/components/schemas/ScalarMeta'
+        name:
+          description: The name referencing the formula or query for this column.
+          example: a
+          type: string
+        type:
+          description: The type of column present.
+          example: number
+          type: string
+        values:
+          description: The array of numerical values for one formula or query.
+          items:
+            description: An individual value for a given column and group-by.
+            example: 0.5
+            format: double
+            type: number
+          type: array
+      type: object
     Event:
       description: The metadata associated with a request.
       properties:
@@ -3653,6 +3675,29 @@ components:
             description: Name of scope.
             type: string
           nullable: true
+          type: array
+      type: object
+    GroupScalarColumn:
+      description: A column containing the tag keys and values in a group.
+      properties:
+        name:
+          description: The name of the tag key or group.
+          example: env
+          type: string
+        type:
+          description: The type of column present.
+          example: group
+          type: string
+        values:
+          description: The array of tag values for each group found for the results
+            of the formulas or queries.
+          items:
+            description: An individual tag value for a given group column.
+            items:
+              description: One tag value within a values array.
+              example: production
+              type: string
+            type: array
           type: array
       type: object
     GroupTags:
@@ -7222,7 +7267,7 @@ components:
           type: string
         query:
           description: A classic metrics query string.
-          example: avg:system.cpu.user{*}
+          example: avg:system.cpu.user{*} by {env}
           type: string
       required:
       - data_source
@@ -7239,7 +7284,7 @@ components:
           type: string
         query:
           description: A classic metrics query string.
-          example: avg:system.cpu.user{*}
+          example: avg:system.cpu.user{*} by {env}
           type: string
       required:
       - data_source
@@ -9446,20 +9491,9 @@ components:
       - SAML_ASSERTION_ATTRIBUTES
     ScalarColumn:
       description: A single column in a scalar query response.
-      properties:
-        unit:
-          description: List of units.
-          items:
-            $ref: '#/components/schemas/Unit'
-          type: array
-        values:
-          description: Array of values for each group-by combination that results
-            from one formula or query.
-          items:
-            description: An individual value for a given column and group-by.
-            format: double
-            type: number
-          type: array
+      oneOf:
+      - $ref: '#/components/schemas/GroupScalarColumn'
+      - $ref: '#/components/schemas/DataScalarColumn'
       type: object
     ScalarFormulaQueryRequest:
       description: A wrapper request around one scalar query to be executed.
@@ -9540,8 +9574,6 @@ components:
           items:
             $ref: '#/components/schemas/ScalarColumn'
           type: array
-        series:
-          $ref: '#/components/schemas/ScalarResponseSeriesList'
       type: object
     ScalarFormulaResponseType:
       default: scalar_response
@@ -9552,6 +9584,23 @@ components:
       type: string
       x-enum-varnames:
       - SCALAR_RESPONSE
+    ScalarMeta:
+      description: Metadata for the resulting numerical values.
+      properties:
+        unit:
+          description: 'Detailed information about the unit.
+
+            First element describes the "primary unit" (for example, `bytes` in `bytes
+            per second`).
+
+            The second element describes the "per unit" (for example, `second` in
+            `bytes per second`).
+
+            If the second element is not present, the API returns null.'
+          items:
+            $ref: '#/components/schemas/Unit'
+          type: array
+      type: object
     ScalarQuery:
       description: An individual scalar query to one of the basic Datadog data sources.
       oneOf:
@@ -9566,12 +9615,6 @@ components:
         type:
           $ref: '#/components/schemas/ScalarFormulaResponseType'
       type: object
-    ScalarResponseSeriesList:
-      description: List of group-by tags for the response. Parallel array to the values
-        in each scalar column.
-      items:
-        $ref: '#/components/schemas/GroupTags'
-      type: array
     SecurityFilter:
       description: The security filter's properties.
       properties:
@@ -12186,7 +12229,15 @@ components:
           maximum: 2147483647
           type: integer
         unit:
-          description: List of units.
+          description: 'Detailed information about the unit.
+
+            The first element describes the "primary unit" (for example, `bytes` in
+            `bytes per second`).
+
+            The second element describes the "per unit" (for example, `second` in
+            `bytes per second`).
+
+            If the second element is not present, the API returns null.'
           items:
             $ref: '#/components/schemas/Unit'
           type: array
@@ -12208,6 +12259,9 @@ components:
       type: array
     TimeseriesResponseValues:
       description: Array of values for an individual formula or query.
+      example:
+      - 1575317847.0
+      - 0.5
       items:
         description: An individual value for a given time.
         format: double
@@ -18102,8 +18156,10 @@ paths:
         type: safe
   /api/v2/query/scalar:
     post:
-      description: 'The internal endpoint to query scalar/table data for multiple
-        data sources and
+      description: 'Query scalar values (as seen on Query Value, Table and Toplist
+        widgets).
+
+        Multiple data sources are supported with the ability to
 
         process the data using formulas and functions.'
       operationId: QueryScalarData
@@ -18128,7 +18184,7 @@ paths:
           $ref: '#/components/responses/ForbiddenResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Scalar cross product query
+      summary: Query scalar data across multiple products
       tags:
       - Metrics
       x-codegen-request-body-name: body
@@ -18143,8 +18199,7 @@ paths:
         contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/query/timeseries:
     post:
-      description: 'The internal endpoint to query timeseries data for multiple data
-        sources and
+      description: 'Query timeseries data across various data sources and
 
         process the data by applying formulas and functions.'
       operationId: QueryTimeseriesData
@@ -18169,7 +18224,7 @@ paths:
           $ref: '#/components/responses/ForbiddenResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Timeseries cross product query
+      summary: Query timeseries data across multiple products
       tags:
       - Metrics
       x-codegen-request-body-name: body

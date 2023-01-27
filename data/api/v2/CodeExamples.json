@@ -726,7 +726,7 @@
   "QueryScalarData": [
     {
       "group": "metrics",
-      "suffix": "",
+      "suffix": "_3112571352",
       "description": "Scalar cross product query returns \"OK\" response"
     }
   ],
@@ -752,7 +752,7 @@
   "QueryTimeseriesData": [
     {
       "group": "metrics",
-      "suffix": "",
+      "suffix": "_301142940",
       "description": "Timeseries cross product query returns \"OK\" response"
     }
   ],
