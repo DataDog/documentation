@@ -36,7 +36,7 @@ The [Explorer][1] provides visibility into all test runs and CI batches for **Sy
 
 You can accomplish the following actions:
 
-* Compare test runs executed against various devices and browsers to pinpoint cross browser and device issues
+* Compare test runs executed against various devices and browsers to pinpoint cross-browser and device issues
 * Examine performance issues with result timing facets and filter runs by failing status codes
 * Try onboarding search queries to get started with searching in the Explorer
 
