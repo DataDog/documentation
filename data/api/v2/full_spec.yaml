@@ -7245,6 +7245,182 @@ components:
       - data_source
       - query
       type: object
+    MonitorConfigPolicyAttributeCreateRequest:
+      description: Policy and policy type for a monitor configuration policy.
+      properties:
+        policy:
+          $ref: '#/components/schemas/MonitorConfigPolicyPolicyCreateRequest'
+        policy_type:
+          $ref: '#/components/schemas/MonitorConfigPolicyType'
+      required:
+      - policy_type
+      - policy
+      type: object
+    MonitorConfigPolicyAttributeEditRequest:
+      description: Policy and policy type for a monitor configuration policy.
+      properties:
+        policy:
+          $ref: '#/components/schemas/MonitorConfigPolicyPolicy'
+        policy_type:
+          $ref: '#/components/schemas/MonitorConfigPolicyType'
+      required:
+      - policy_type
+      - policy
+      type: object
+    MonitorConfigPolicyAttributeResponse:
+      description: Policy and policy type for a monitor configuration policy.
+      properties:
+        policy:
+          $ref: '#/components/schemas/MonitorConfigPolicyPolicy'
+        policy_type:
+          $ref: '#/components/schemas/MonitorConfigPolicyType'
+      type: object
+    MonitorConfigPolicyCreateData:
+      description: A monitor configuration policy data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MonitorConfigPolicyAttributeCreateRequest'
+        type:
+          $ref: '#/components/schemas/MonitorConfigPolicyResourceType'
+      required:
+      - type
+      - attributes
+      type: object
+    MonitorConfigPolicyCreateRequest:
+      description: Request for creating a monitor configuration policy.
+      properties:
+        data:
+          $ref: '#/components/schemas/MonitorConfigPolicyCreateData'
+      required:
+      - data
+      type: object
+    MonitorConfigPolicyEditData:
+      description: A monitor configuration policy data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MonitorConfigPolicyAttributeEditRequest'
+        id:
+          description: ID of this monitor configuration policy.
+          example: 00000000-0000-1234-0000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/MonitorConfigPolicyResourceType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    MonitorConfigPolicyEditRequest:
+      description: Request for editing a monitor configuration policy.
+      properties:
+        data:
+          $ref: '#/components/schemas/MonitorConfigPolicyEditData'
+      required:
+      - data
+      type: object
+    MonitorConfigPolicyListResponse:
+      description: Response for retrieving all monitor configuration policies.
+      properties:
+        data:
+          description: An array of monitor configuration policies.
+          items:
+            $ref: '#/components/schemas/MonitorConfigPolicyResponseData'
+          type: array
+      type: object
+    MonitorConfigPolicyPolicy:
+      description: Configuration for the policy.
+      oneOf:
+      - $ref: '#/components/schemas/MonitorConfigPolicyTagPolicy'
+      type: object
+    MonitorConfigPolicyPolicyCreateRequest:
+      description: Configuration for the policy.
+      oneOf:
+      - $ref: '#/components/schemas/MonitorConfigPolicyTagPolicyCreateRequest'
+      type: object
+    MonitorConfigPolicyResourceType:
+      default: monitor-config-policy
+      description: Monitor configuration policy resource type.
+      enum:
+      - monitor-config-policy
+      example: monitor-config-policy
+      type: string
+      x-enum-varnames:
+      - MONITOR_CONFIG_POLICY
+    MonitorConfigPolicyResponse:
+      description: Response for retrieving a monitor configuration policy.
+      properties:
+        data:
+          $ref: '#/components/schemas/MonitorConfigPolicyResponseData'
+      type: object
+    MonitorConfigPolicyResponseData:
+      description: A monitor configuration policy data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MonitorConfigPolicyAttributeResponse'
+        id:
+          description: ID of this monitor configuration policy.
+          example: 00000000-0000-1234-0000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/MonitorConfigPolicyResourceType'
+      type: object
+    MonitorConfigPolicyTagPolicy:
+      description: Tag attributes of a monitor configuration policy.
+      properties:
+        tag_key:
+          description: The key of the tag.
+          example: datacenter
+          maxLength: 255
+          type: string
+        tag_key_required:
+          description: If a tag key is required for monitor creation.
+          example: true
+          type: boolean
+        valid_tag_values:
+          description: Valid values for the tag.
+          example:
+          - prod
+          - staging
+          items:
+            maxLength: 255
+            type: string
+          type: array
+      type: object
+    MonitorConfigPolicyTagPolicyCreateRequest:
+      description: Tag attributes of a monitor configuration policy.
+      properties:
+        tag_key:
+          description: The key of the tag.
+          example: datacenter
+          maxLength: 255
+          type: string
+        tag_key_required:
+          description: If a tag key is required for monitor creation.
+          example: true
+          type: boolean
+        valid_tag_values:
+          description: Valid values for the tag.
+          example:
+          - prod
+          - staging
+          items:
+            maxLength: 255
+            type: string
+          type: array
+      required:
+      - tag_key
+      - tag_key_required
+      - valid_tag_values
+      type: object
+    MonitorConfigPolicyType:
+      default: tag
+      description: The monitor configuration policy type.
+      enum:
+      - tag
+      example: tag
+      type: string
+      x-enum-varnames:
+      - TAG
     MonitorType:
       description: Attributes from the monitor that triggered the event.
       nullable: true
@@ -17554,6 +17730,238 @@ paths:
       x-menu-order: 8
       x-undo:
         type: safe
+  /api/v2/monitor/policy:
+    get:
+      description: Get all monitor configuration policies.
+      operationId: ListMonitorConfigPolicies
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorConfigPolicyListResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitors_read
+      summary: Get all monitor configuration policies
+      tags:
+      - Monitors
+      x-menu-order: 10
+      x-undo:
+        type: safe
+    post:
+      description: Create a monitor configuration policy.
+      operationId: CreateMonitorConfigPolicy
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MonitorConfigPolicyCreateRequest'
+        description: Create a monitor configuration policy request body.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorConfigPolicyResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitors_configuration_policy_write
+      summary: Create a monitor configuration policy
+      tags:
+      - Monitors
+      x-codegen-request-body-name: body
+      x-given:
+        monitor_configuration_policy:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"monitor-config-policy\",\n    \"attributes\":
+              {\n      \"policy_type\": \"tag\",\n      \"policy\": {\n        \"tag_key\":
+              \"dc\", \"tag_key_required\": true, \"valid_tag_values\": [\"prod\",
+              \"staging\"]\n      }\n    }\n  }\n}"
+          step: there is a valid "monitor_configuration_policy" in the system
+      x-menu-order: 11
+      x-undo:
+        operationId: DeleteMonitorConfigPolicy
+        parameters:
+        - name: policy_id
+          source: data.id
+        type: unsafe
+  /api/v2/monitor/policy/{policy_id}:
+    delete:
+      description: Delete a monitor configuration policy.
+      operationId: DeleteMonitorConfigPolicy
+      parameters:
+      - description: ID of the monitor configuration policy.
+        in: path
+        name: policy_id
+        required: true
+        schema:
+          example: 00000000-0000-1234-0000-000000000000
+          type: string
+      responses:
+        '204':
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitors_configuration_policy_write
+      summary: Delete a monitor configuration policy
+      tags:
+      - Monitors
+      x-menu-order: 13
+      x-undo:
+        type: idempotent
+    get:
+      description: Get a monitor configuration policy by `policy_id`.
+      operationId: GetMonitorConfigPolicy
+      parameters:
+      - description: ID of the monitor configuration policy.
+        in: path
+        name: policy_id
+        required: true
+        schema:
+          example: 00000000-0000-1234-0000-000000000000
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorConfigPolicyResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitors_read
+      summary: Get a monitor configuration policy
+      tags:
+      - Monitors
+      x-menu-order: 9
+      x-undo:
+        type: safe
+    patch:
+      description: Edit a monitor configuration policy.
+      operationId: UpdateMonitorConfigPolicy
+      parameters:
+      - description: ID of the monitor configuration policy.
+        in: path
+        name: policy_id
+        required: true
+        schema:
+          example: 00000000-0000-1234-0000-000000000000
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MonitorConfigPolicyEditRequest'
+        description: Description of the update.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorConfigPolicyResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Unprocessable Entity
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitors_configuration_policy_write
+      summary: Edit a monitor configuration policy
+      tags:
+      - Monitors
+      x-codegen-request-body-name: body
+      x-menu-order: 12
+      x-undo:
+        type: idempotent
   /api/v2/permissions:
     get:
       description: Returns a list of all permissions, including name, description,
@@ -22015,6 +22423,20 @@ tags:
     `manage_tags` API methods can only be performed by\na user who has the `Manage
     Tags for Metrics` permission."
   name: Metrics
+- description: '[Monitors](https://docs.datadoghq.com/monitors) allow you to watch
+    a metric or check that you care about and
+
+    notifies your team when a defined threshold has exceeded.
+
+
+    For more information, see [Creating Monitors](https://docs.datadoghq.com/monitors/create/types/)
+    and
+
+    [Tag Policies](https://docs.datadoghq.com/monitors/settings/).'
+  externalDocs:
+    description: Find out more at
+    url: https://docs.datadoghq.com/monitors/create/types/
+  name: Monitors
 - description: 'Configure your [Datadog Opsgenie integration](https://docs.datadoghq.com/integrations/opsgenie/)
 
     directly through the Datadog API.'
