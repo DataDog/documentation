@@ -5,7 +5,7 @@ kind: documentation
 
 ## Overview
 
-The Watchdog alerts feature proactively detects service and infrastructure anomalies. Watchdog scans all of your monitored technologies for unusual behavior. If the unusual behavior matches one of Watchdog's anomaly patterns, Watchdog creates an alert.
+The Watchdog alerts feature proactively detects service, infrastructure, and log (beta) anomalies. Watchdog scans all of your monitored technologies for unusual behavior. If the unusual behavior matches one of Watchdog's anomaly patterns, Watchdog creates an alert.
 
 ## Alerts
 
@@ -64,11 +64,14 @@ The left side of the Watchdog alerts feed contains the search facets below. Chec
 
 | Facet           | Description                                                                       |
 |-----------------|-----------------------------------------------------------------------------------|
-| Alert Category  | Display all `apm` or all `infrastructure` alerts.                                 |
+| Alert Category  | Display all `apm`, `infrastructure`, or `logs` alerts.                            |
 | Alert Type      | Select alerts using metrics from APM or infrastructure integrations.              |
 | APM Environment | The [APM Environment][5] to display alerts from.                                  |
 | APM Primary Tag | The [defined APM primary tag][6] to display alerts from.                          |
 | APM Service     | The [APM Service][7] to display alerts from.                                      |
+| Log Anomaly Type| Only display log anomalies of this type. The currently supported types are new log patterns and increases in existing log patterns.                                                                                             |
+| Log Source      | Only display alerts containing logs from this source.                             |
+| Log Status      | Only display alerts containing logs of this log status.                           |
 
 
 ## Manage archived alerts

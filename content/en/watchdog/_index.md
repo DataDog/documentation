@@ -36,6 +36,10 @@ Watchdog is an algorithmic feature for APM performance and infrastructure metric
   * Error rate
   * Latency
 
+* Logs (beta)
+  * New error logs
+  * Increases in existing error logs
+
 * Infrastructure metrics from integrations:
   * [System][1], for the Host-level memory usage (memory leaks) and TCP retransmit rate.
   * [Redis][2]
