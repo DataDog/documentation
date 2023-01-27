@@ -2817,7 +2817,7 @@ main:
     url: synthetics/browser_tests/actions
     parent: synthetics_browser_tests
     weight: 301
-  - name: Test Results and Performance
+  - name: Test Results
     url: synthetics/browser_tests/test_results
     parent: synthetics_browser_tests
     weight: 302
