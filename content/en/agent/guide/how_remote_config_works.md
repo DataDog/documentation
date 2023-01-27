@@ -29,10 +29,10 @@ Remote configuration is not available on the US1-FED Datadog site.
 {{< site-region region="us,us3,us5,eu" >}}
 
 ## Overview
-Remote Configuration is a Datadog capability that allows you to remotely configure the behavior of Datadog resources (for example, Agents and tracing libraries) deployed in your infrastructure, for select product features. Using Remote Configuration makes it easier to apply Agent and tracing library configurations in your environment on demand, decreasing management costs and reducing friction between teams, accelerating resolution times. For Datadog security products, Application Security Management and Cloud Workload Security, Remote Configuration enabled Agents and compatible tracing libraries provide real-time security updates and responses, enhancing security posture for your applications and cloud infrastructure. 
+Remote Configuration is a Datadog capability that allows you to remotely configure the behavior of Datadog resources (for example, Agents and tracing libraries) deployed in your infrastructure, for select product features. Using Remote Configuration makes it easier to apply Agent and tracing library configurations in your environment on demand, decreasing management costs and reducing friction between teams, accelerating resolution times. For Datadog security products, Application Security Management and Cloud Workload Security, Remote Configuration-enabled Agents and compatible tracing libraries provide real-time security updates and responses, enhancing security posture for your applications and cloud infrastructure. 
 
 ## How it works
-Once you enable Remote Configuration on the Datadog Agent, it will periodically poll the configured [Datadog site](https://docs.datadoghq.com/getting_started/site/), to determine whether there are configuration changes to apply to your Remote Configuration enabled Agents or tracing libraries.
+Once you enable Remote Configuration on the Datadog Agent, it will periodically poll the configured [Datadog site](https://docs.datadoghq.com/getting_started/site/), to determine whether there are configuration changes to apply to your Remote Configuration-enabled Agents or tracing libraries.
 
 After you submit configuration changes in the respective Datadog product UI for a Remote Configuration enabled product feature, the changes are stored in Datadog. 
 
