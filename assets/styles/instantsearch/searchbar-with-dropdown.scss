@@ -112,10 +112,10 @@
 
     .ais-Hits-item {
         & a {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: flex-end;
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
             padding: 3px 12px 4px 12px;
+            gap: 0.375rem;
 
             &:hover {
                 background-color: rgba(69, 142, 225, 0.05);
@@ -123,15 +123,12 @@
         }
 
         & .ais-Hits-subcategory {
-            width: 25%;
+            grid-column: span 1 / span 1;
+            border-right: 1px solid #e6e6e6;
         }
 
-        & .ais-Hits-title {
-            width: 75%;
-        }
-
-        & .ais-Hits-content {
-            width: 75%;
+        & div {
+            grid-column: span 3 / span 3;
         }
 
         & p {

@@ -67,9 +67,9 @@ const renderHits = (renderOptions, isFirstRender) => {
             .map((item) => {
                 const link = item.full_url;
                 const hitData = item._highlightResult;
-                const title = hitData.title.value;
+                const title = item.title;
                 const subcategory = hitData.subcategory ? hitData.subcategory.value : title;
-                const sectionHeader = hitData.section_header ? hitData.section_header.value : null;
+                const sectionHeader = item.section_header ? item.section_header : null;
                 const content = hitData.content.value;
 
                 const displayTitle = sectionHeader ? sectionHeader : title;
@@ -77,10 +77,12 @@ const renderHits = (renderOptions, isFirstRender) => {
 
                 return `
                     <li class="ais-Hits-item">
-                            <a href="${link}" target="_blank" rel="noopener noreferrer">
+                        <a href="${link}" target="_blank" rel="noopener noreferrer">
                             <p class="ais-Hits-subcategory">${subcategory}</p>
-                            <p class="ais-Hits-title"><strong>${displayTitle}</strong></p>
-                            <p class="ais-Hits-content">${displayContent}</p>
+                            <div>
+                                <p class="ais-Hits-title"><strong>${displayTitle}</strong></p>
+                                <p class="ais-Hits-content">${displayContent}</p>
+                            </div>
                         </a>
                     </li>
                 `;

@@ -15,18 +15,18 @@ function getConfig(environment) {
 }
 
 function getPageLanguage() {
-    const pageLanguage = document.documentElement.lang
+    const pageLanguage = document.documentElement.lang;
 
     // Page lang element is set to en-US due to Zendesk
     if (pageLanguage) {
-        return pageLanguage.toLowerCase() === 'en-us' ? 'en' : pageLanguage
+        return pageLanguage.toLowerCase() === 'en-us' ? 'en' : pageLanguage;
     }
 
-    return 'en'
+    return 'en';
 }
 
 const { env } = document.documentElement.dataset;
-const pageLanguage =getPageLanguage();
+const pageLanguage = getPageLanguage();
 const algoliaConfig = getConfig(env).algoliaConfig;
 
 const searchClient = algoliasearch(algoliaConfig.appId, algoliaConfig.apiKey);
@@ -52,8 +52,6 @@ if (searchResultsPage) {
 
 // No searchBoxContainer means no instantSearch
 if (searchBoxContainer) {
-    console.log('searchBoxContainer')
-    console.log(indexName)
     const search = instantsearch({
         indexName,
         searchClient,
