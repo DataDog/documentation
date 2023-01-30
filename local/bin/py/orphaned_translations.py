@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import os
-import re
+
 
 def get_orphaned_translated_files_by_language(language_code):
     """
@@ -12,10 +12,8 @@ def get_orphaned_translated_files_by_language(language_code):
 
     for root, dir_names, file_names in os.walk(content_dir):
         for file_name in file_names:
-            translated_content_path = os.path.join(root, file_name).replace('(', '')
-            translated_content_path = re.sub(r"[(|)]", '', translated_content_path)
+            translated_content_path = os.path.join(root, file_name)
             english_content_path = translated_content_path.replace(f'/{language_code}/', '/en/')
-            english_content_path = re.sub(r"[(|)]", '', english_content_path)
 
             if not is_git_ignored(english_content_path) and not os.path.exists(english_content_path):
                 orphaned_translated_files.append(translated_content_path)
@@ -42,6 +40,10 @@ def is_git_ignored(file):
 
 
 def main():
+    """
+    Note this script was created as a one-off to identify translated markdown files that became out of sync
+    due to a gap in the translation system.  This is currently unused in any jobs/automation.
+    """
     print('Searching for orphaned translated files...')
     languages = get_translation_languages()
 
@@ -49,7 +51,7 @@ def main():
         orphaned = get_orphaned_translated_files_by_language(lang)
 
         if len(orphaned) > 0:
-            print(f'\nThe following {lang} pages are orphaned and should likely be removed from the repo:')
+            print(f'\nThe following {lang} pages are orphaned and should be reviewed for deletion:')
             print('\n'.join(orphaned))
 
 

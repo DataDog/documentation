@@ -349,14 +349,6 @@ manage_ignored_translations:on-schedule:
     - echo "Downloading ignored translation source files..."
     - manage_ignored_translation_files
 
-list_orphaned_translations:manual:
-  <<: *base_template
-  stage: post-deploy
-  cache: {}
-  script:
-    - python3 ./local/bin/py/orphaned_translations.py
-  when: manual
-
 test_missing_tms_live:
   <<: *base_template
   stage: post-deploy
