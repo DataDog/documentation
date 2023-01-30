@@ -130,7 +130,7 @@ dependencies {
 The Java compiler plugin works in combination with the tracer, providing it with additional source code information.
 Installing the plugin is an optional step that improves performance and accuracy of certain CI visibility features.
 
-> The plugin works with the standard `javac` compiler (Eclipse JDT compiler is not supported).
+The plugin works with the standard `javac` compiler (Eclipse JDT compiler is not supported).
 
 If the configuration is successful, you should see the line `DatadogCompilerPlugin initialized` in your compiler's output.
 
