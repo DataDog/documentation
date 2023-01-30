@@ -174,8 +174,7 @@ Replace `$VERSION` with the latest version of the artifacts accessible from the 
 
 Maven compiler plugin supports [annotationProcessorPaths][3] property starting with version 3.5. If you absolutely must use an older version, declare Datadog compiler plugin as a regular dependency in your project.
 
-Additionally, if you are using JDK 16 or newer, add the following lines
-to [.mvn/jvm.config][4] in your project base directory:
+Additionally, if you are using JDK 16 or newer, add the following lines to the [.mvn/jvm.config][4] file in your project base directory:
 
 {{< code-block lang="properties" filename=".mvn/jvm.config" >}}
 --add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED
