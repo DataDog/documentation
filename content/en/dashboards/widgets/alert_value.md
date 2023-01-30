@@ -10,7 +10,7 @@ further_reading:
   text: "Building Dashboards using JSON"
 ---
 
-Alert values are query values showing the current value of the metric in any metric monitor defined on your system:
+Alert values are query values showing the current value of the metric in any simple-alert metric monitor defined on your system:
 
 {{< img src="dashboards/widgets/alert_value/alert_value.png" alt="Alert Value" >}}
 
