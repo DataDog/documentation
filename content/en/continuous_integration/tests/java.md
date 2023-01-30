@@ -209,9 +209,7 @@ if (project.hasProperty("dd-civisibility")) {
 }
 {{< /code-block >}}
 
-Additionally, if you are using JDK 16 or newer, add the following lines to your
-[gradle.properties][3]
-file:
+Additionally, if you are using JDK 16 or newer, add the following lines to your [gradle.properties][3] file:
 
 {{< code-block lang="properties" filename="gradle.properties" >}}
 org.gradle.jvmargs=\
