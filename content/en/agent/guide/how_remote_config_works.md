@@ -6,16 +6,16 @@ private: true
 aliases:
 - /agent/guide/how_rc_works
 further_reading:
-- link: "https://docs.datadoghq.com/security/application_security/how-appsec-works/#built-in-protection"
+- link: "/security/application_security/how-appsec-works/#built-in-protection"
   tag: "Documentation"
   text: "How Application Security Monitoring Works"
 - link: "https://www.datadoghq.com/blog/dash-2022-new-feature-roundup/#application-security-management-protection"
   tag: "Blog"
   text: "Application Security Protection"
-- link: "https://docs.datadoghq.com/dynamic_instrumentation/?tab=configurationyaml#enable-remote-configuration"
+- link: "/dynamic_instrumentation/?tab=configurationyaml#enable-remote-configuration"
   tag: "Documentation"
   text: "Dynamic Instrumentation"
-- link: "https://docs.datadoghq.com/security/cloud_workload_security/getting_started/?tab=kubernetes#overview"
+- link: "/security/cloud_workload_security/getting_started/?tab=kubernetes#overview"
   tag: "Documentation"
   text: "Getting Started with Cloud Workload Security"
 
@@ -143,9 +143,6 @@ After you perform these steps, your Agent requests its configuration from Datado
 - [Dynamic Instrumentation][7] is enabled.
 - [ASM 1-Click enablement, IP blocking, and attack pattern updates][8] are enabled.
 
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /getting_started/site/
 [2]: /help/
@@ -158,3 +155,7 @@ After you perform these steps, your Agent requests its configuration from Datado
 
 
 {{< /site-region >}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
