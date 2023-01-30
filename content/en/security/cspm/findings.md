@@ -65,13 +65,13 @@ The side panel lists detection rules that were evaluated against the resource, s
 
 <div class="alert alert-info">Muted findings is a beta feature. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.</div>
 
-There may be times where a finding does not match the use case for your business, or you accept it as a known risk. To ignore these types of findings, you can mute the finding for the impacted resource. This allows you to focus on high-severity and critical findings that require your attention.
+There may be times when a finding does not match the use case for your business, or you choose to accept it as a known risk. To ignore these findings, you can mute the finding for the impacted resource. This allows you to focus on high-severity and critical findings that require your attention.
 
 For example, the ['Block Public Access' feature is enabled for S3 bucket][4] rule evaluates whether a S3 bucket is publicly accessible. If you have a S3 bucket with static assets that are meant to be publicly shared, you can mute the finding for the S3 bucket.
 
 Muted findings do not appear in visualizations and do not impact your posture score. You can mute pass/fail findings at any time. CSPM also provides [several methods](#audit-your-muted-findings) for auditing your muted findings.
 
-**placeholder for screenshot**
+{{< img src="security/cspm/findings/muted-findings.png" alt="The Mute findings dialog box contains fields for specifying the reason and duration of the mute" style="width:100%;">}}
 
 1. On the [finding side panel](#explore-your-cloud-misconfigurations-with-findings), select a resource.
 2. Click **Mute**.
@@ -105,27 +105,23 @@ Muted findings automatically unmute after the specified mute duration expires. I
 
 ### Audit your muted findings
 
-CSPM provides several options for viewing your muted findings. 
+You can view your organization's muted findings, review whether a muted finding is currently in a pass or fail state, and audit the history for a resource to determine when and by whom a finding was muted.
 
-This allows you to audit your findings, as well as review whether a muted finding is currently in a pass or fail state for a given resource.
+To view your organization's muted findings:
 
 - Sort by the **Muted** column on the Security Findings Explorer.
 - Filter the Security Findings Explorer using the **Muted** facet.
-- View finding > Timeline
 
-Determine who (un)muted findings for accountability purposes
+To audit the history for a resource:
 
-“Muted” status changes are documented in a finding’s Timeline (i.e. it will not be retroactive - the suppression applies starting upon change) and will show:
+1. Open the [finding side panel](#explore-your-cloud-misconfigurations-with-findings).
+2. Select the resource with the muted finding.
+3. If the finding status has changed, click **See Latest State**.
+4. Click **View Finding**.
 
-Editor details
-When the change was made
-Reason for the status change
-Duration until mute resets to pass/fail (if applicable)
-Any time the status of a finding is changed, an Audit Log must be generated and include:
-Editor details
-When the change was made
-Reason for the status change
-Duration until mute resets to pass/fail (if applicable)
+On the **Message** tab, use the **Resource evaluation over time** timeline to view when the finding was muted or unmuted over a specified period of time (up to six months).
+
+Click the **Timeline** tab to view a chronological history of the finding, including the name of the person who made the change and the reason specified for justifying the suppression.
 
 ## Further reading
 
