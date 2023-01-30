@@ -92,7 +92,7 @@ build_preview:
   script:
     - touch Makefile.config
     - make dependencies
-    - . hugpython/bin/activate && pip install https://binaries.ddbuild.io/dd-source/python/assetlib-0_v11998383.fff0632-py2.py3-none-any.whl
+    - . hugpython/bin/activate && pip install https://binaries.ddbuild.io/dd-source/python/assetlib-0_v11998383.fff0632-py2.py3-none-any.whl && pip install marshmallow==2.21.0
     - chmod +x ./local/bin/py/ootb.py && . hugpython/bin/activate && assume_marketing_deploy_role && ./local/bin/py/ootb.py
 #    - dog --config "$HOME/.dogrc" event post "documentation build ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" --alert_type "info" --tags="${DEFAULT_TAGS}"
 #    - touch Makefile.config
