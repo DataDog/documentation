@@ -101,6 +101,9 @@ class Integrations:
             r"(\S*FROM_DISPLAY_NAME\s*=\s*\{)(.*?)\}",
             re.DOTALL,
         )
+        self.regex_site_region = re.compile(
+            r"\{\{< ([\/]?site-region.*) >\}\}", re.MULTILINE
+        )
         self.datafile_json = []
         self.integration_mutations = integration_mutations
         self.initial_integration_files = glob.glob(
@@ -769,6 +772,9 @@ class Integrations:
             )
             result = re.sub(
                 self.regex_partial_close, "", result, 0
+            )
+            result = re.sub(
+                self.regex_site_region, r"{{% \1 %}}", result, 0   
             )
 
         # if __init__.py exists lets grab the integration id
