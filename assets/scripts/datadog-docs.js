@@ -4,6 +4,7 @@ import { updateTOC, buildTOCMap, onScroll, closeMobileTOC } from './components/t
 import initCodeTabs from './components/codetabs';
 import configDocs from './config/config-docs';
 import { loadPage } from './components/async-loading';
+import { loadInstantSearch } from './components/algolia';
 import { updateMainContentAnchors, gtag } from './helpers/helpers';
 import { getQueryParameterByName } from './helpers/browser';
 import {setMobileNav, closeMobileNav} from './components/mobile-nav'
@@ -48,9 +49,9 @@ $(document).ready(function () {
     });
 
     // algolia
-    $('.ds-hint').css('background', 'transparent');
-
     const searchParam = getQueryParameterByName('s');
+    // load algolia instant search for the first time
+    loadInstantSearch(asyncLoad=false);
     if (searchParam) {
         $('.sidenav-search input[name="s"]').val(searchParam);
     }

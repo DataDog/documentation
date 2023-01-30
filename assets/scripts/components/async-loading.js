@@ -6,6 +6,7 @@ import { initializeGroupedListings } from './grouped-item-listings';
 import {updateMainContentAnchors, reloadWistiaVidScripts, gtag, getCookieByName } from '../helpers/helpers';
 import configDocs from '../config/config-docs';
 import { redirectCodeLang, addCodeTabEventListeners, addCodeBlockVisibilityToggleEventListeners, activateCodeLangNav, toggleMultiCodeLangNav } from './code-languages'; // eslint-disable-line import/no-cycle
+import { loadInstantSearch } from './algolia';
 
 const { env } = document.documentElement.dataset;
 const { gaTag } = configDocs[env];
@@ -52,6 +53,31 @@ function loadPage(newUrl) {
 
             const currentSidebar = document.querySelector('.sidebar');
             const newSidebar = httpRequest.responseXML.querySelector('.sidebar');
+
+            const currentPageIsSearchPage = document.documentElement.dataset.relpermalink.includes("search");
+            const newPageIsSearchPage = httpRequest.responseXML.querySelector("html").dataset.relpermalink.includes("search");
+
+            // This logic is for going from the search page (/search) where no sidenav searchbar is mounted, to another page asynchronously and the sidenav searchbar is required
+            if (currentPageIsSearchPage && !newPageIsSearchPage) {
+                const sidenavSearchbarMount = document.querySelector('#async-searchbar-mount');
+
+                const searchBoxContainer = document.createElement("div");
+                searchBoxContainer.classList.add("searchbox-container");
+                const searchBox = document.createElement("div");
+                searchBox.setAttribute("id", "searchbox");
+                const hitsContainer = document.createElement("div");
+                hitsContainer.classList.add("hits-container", "d-none");
+                const hits = document.createElement("div");
+                hits.setAttribute("id", "hits");
+
+                searchBoxContainer.append(searchBox);
+                searchBoxContainer.append(hitsContainer);
+                hitsContainer.append(hits);
+
+                sidenavSearchbarMount.append(searchBoxContainer);
+
+                loadInstantSearch(asyncLoad=true);
+            }
 
             if (newContent === null) {
                 return;

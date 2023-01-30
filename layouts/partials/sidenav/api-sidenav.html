@@ -6,9 +6,7 @@
                 <p class="h4">{{ i18n "datadog_docs" }} &nbsp;&nbsp;<span class="font-semibold">API</span></p>
             </a>
 
-            {{ if ne .File.ContentBaseName "search" }}
             {{ partial "search.html" . }}
-            {{ end }}
 
             <div class="sidenav-nav">
                 {{ partial "nav/left-nav-api.html" . }}

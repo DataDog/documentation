@@ -31,128 +31,138 @@ const algoliaConfig = getConfig(env).algoliaConfig;
 
 const searchClient = algoliasearch(algoliaConfig.appId, algoliaConfig.apiKey);
 const indexName = algoliaConfig.index;
-const searchResultsPage = document.querySelector('.search_results_page');
-const searchBoxContainerContainer = document.querySelector('.searchbox-container');
-const searchBoxContainer = document.querySelector('#searchbox');
-const hitsContainerContainer = document.querySelector('.hits-container');
-const hitsContainer = document.querySelector('#hits');
-const filtersDocs = `language: ${pageLanguage}`;
-let basePathName = '';
-let numHits = 5;
-let hitComponent = searchbarHits;
 
-if (document.documentElement.dataset.commitRef) {
-    basePathName = `/${document.documentElement.dataset.commitRef}/`;
-}
+function loadInstantSearch(asyncLoad) {
+    const searchBoxContainerContainer = document.querySelector('.searchbox-container');
+    const searchBoxContainer = document.querySelector('#searchbox');
+    const hitsContainerContainer = document.querySelector('.hits-container');
+    const hitsContainer = document.querySelector('#hits');
+    const filtersDocs = `language: ${pageLanguage}`;
+    let searchResultsPage = document.querySelector('.search_results_page');
+    let basePathName = '';
+    let numHits = 5;
+    let hitComponent = searchbarHits;
 
-if (searchResultsPage) {
-    numHits = 10;
-    hitComponent = searchpageHits;
-}
+    // If asyncLoad is true, we're not on the search page anymore
+    if (asyncLoad === true) {
+        searchResultsPage = false;
+    }
 
-// No searchBoxContainer means no instantSearch
-if (searchBoxContainer) {
-    const search = instantsearch({
-        indexName,
-        searchClient,
-        routing: {
-            stateMapping: {
-                stateToRoute(uiState) {
-                    const indexUiState = uiState[indexName];
-                    return {
-                        s: indexUiState.query
-                    };
-                },
-                routeToState(routeState) {
-                    return {
-                        [indexName]: {
-                            query: routeState.s
-                        }
-                    };
+    if (document.documentElement.dataset.commitRef) {
+        basePathName = `/${document.documentElement.dataset.commitRef}/`;
+    }
+
+    if (searchResultsPage) {
+        numHits = 10;
+        hitComponent = searchpageHits;
+    }
+
+    // No searchBoxContainer means no instantSearch
+    if (searchBoxContainer) {
+        const search = instantsearch({
+            indexName,
+            searchClient,
+            routing: {
+                stateMapping: {
+                    stateToRoute(uiState) {
+                        const indexUiState = uiState[indexName];
+                        return {
+                            s: indexUiState.query
+                        };
+                    },
+                    routeToState(routeState) {
+                        return {
+                            [indexName]: {
+                                query: routeState.s
+                            }
+                        };
+                    }
                 }
-            }
-        },
-        searchFunction(helper) {
-            if (helper.state.query) {
-                helper.search();
-                if (!searchResultsPage) {
-                    searchBoxContainerContainer.classList.add('active-search');
-                    hitsContainerContainer.classList.remove('d-none');
-                }
-            } else {
-                if (!searchResultsPage) {
-                    searchBoxContainerContainer.classList.remove('active-search');
-                    hitsContainerContainer.classList.add('d-none');
-                } else {
+            },
+            searchFunction(helper) {
+                if (helper.state.query) {
                     helper.search();
+                    if (!searchResultsPage) {
+                        searchBoxContainerContainer.classList.add('active-search');
+                        hitsContainerContainer.classList.remove('d-none');
+                    }
+                } else {
+                    if (!searchResultsPage) {
+                        searchBoxContainerContainer.classList.remove('active-search');
+                        hitsContainerContainer.classList.add('d-none');
+                    } else {
+                        helper.search();
+                    }
                 }
             }
+        });
+
+        search.addWidgets([
+            configure({
+                hitsPerPage: numHits,
+                filters: filtersDocs,
+                distinct: 1
+            }),
+
+            searchBox({
+                container: searchBoxContainer,
+                placeholder: 'Search documentation...',
+                autofocus: false,
+                showReset: false,
+                showSubmit: true,
+                templates: {
+                    submit({ cssClasses }, { html }) {
+                        return html`<span id="submit-text" class="${cssClasses.submit}">search</span
+                            ><i id="submit-icon" class="${cssClasses.submit} icon-search"></i>`;
+                    }
+                }
+            }),
+
+            hitComponent({
+                container: hitsContainer
+            }),
+
+            customPagination({
+                isNotSearchPage: !searchResultsPage,
+                container: document.querySelector('#pagination'),
+                scrollTo: document.querySelector('#pagetitle'),
+                padding: 5
+            })
+        ]);
+
+        search.start();
+
+        if (!searchResultsPage) {
+            const handleSearchbarKeydown = (e) => {
+                if (e.code === 'Enter') {
+                    e.preventDefault();
+                    window.location.pathname = `${basePathName}search`;
+                }
+            };
+
+            const handleSearchbarSubmitClick = () => {
+                if (document.querySelector('.ais-SearchBox-input').value) {
+                    window.location.pathname = `${basePathName}search`;
+                }
+            };
+
+            const handleOutsideSearchbarClick = (e) => {
+                let target = e.target;
+                do {
+                    if (target === searchBoxContainerContainer) {
+                        return;
+                    }
+                    target = target.parentNode;
+                } while (target);
+
+                hitsContainerContainer.classList.add('d-none');
+            };
+
+            document.querySelector('.ais-SearchBox-input').addEventListener('keydown', handleSearchbarKeydown);
+            document.querySelector('.ais-SearchBox-submit').addEventListener('click', handleSearchbarSubmitClick);
+            document.addEventListener('click', handleOutsideSearchbarClick);
         }
-    });
-
-    search.addWidgets([
-        configure({
-            hitsPerPage: numHits,
-            filters: filtersDocs,
-            distinct: 1
-        }),
-
-        searchBox({
-            container: searchBoxContainer,
-            placeholder: 'Search documentation...',
-            autofocus: false,
-            showReset: false,
-            showSubmit: true,
-            templates: {
-                submit({ cssClasses }, { html }) {
-                    return html`<span id="submit-text" class="${cssClasses.submit}">search</span
-                        ><i id="submit-icon" class="${cssClasses.submit} icon-search"></i>`;
-                }
-            }
-        }),
-
-        hitComponent({
-            container: hitsContainer
-        }),
-
-        customPagination({
-            isNotSearchPage: !searchResultsPage,
-            container: document.querySelector('#pagination'),
-            scrollTo: document.querySelector('#pagetitle'),
-            padding: 5
-        })
-    ]);
-
-    search.start();
-
-    if (!searchResultsPage) {
-        const handleSearchbarKeydown = (e) => {
-            if (e.code === 'Enter') {
-                e.preventDefault();
-                window.location.pathname = `${basePathName}search`;
-            }
-        };
-
-        const handleSearchbarSubmitClick = () => {
-            if (document.querySelector('.ais-SearchBox-input').value) {
-                window.location.pathname = `${basePathName}search`;
-            }
-        };
-
-        const handleOutsideSearchbarClick = (e) => {
-            let target = e.target;
-            do {
-                if (target === searchBoxContainerContainer) {
-                    return;
-                }
-                target = target.parentNode;
-            } while (target);
-
-            hitsContainerContainer.classList.add('d-none');
-        };
-
-        document.querySelector('.ais-SearchBox-input').addEventListener('keydown', handleSearchbarKeydown);
-        document.querySelector('.ais-SearchBox-submit').addEventListener('click', handleSearchbarSubmitClick);
-        document.addEventListener('click', handleOutsideSearchbarClick);
     }
 }
+
+export { loadInstantSearch };
