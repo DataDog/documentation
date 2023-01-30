@@ -66,7 +66,7 @@ The following products and features are supported with Remote Config:
 ### Dynamic Instrumentation:
 <div class="alert alert-info">This feature is in private beta.</div>
 
-- * Send critical metrics, traces, and logs from your live applications with no code changes.
+- Send critical metrics, traces, and logs from your live applications with no code changes.
 
 ### Cloud Workload Security (CWS):
 <div class="alert alert-info">This feature is in private beta.</div>
