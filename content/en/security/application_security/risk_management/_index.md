@@ -16,7 +16,22 @@ further_reading:
 
 ASM Risk Management offers built-in detection capabilities that warn you about the vulnerabilities detected in your services' open source dependencies. Details of that information are shown in the [Vulnerability Explorer][3], identifying the severity, affected services, potentially vulnerable infrastructure, and remediation instructions to solve the surfaced risks.
 
-Risk Management is available with recent APM tracing libraries for Java, .NET, Python, and NodeJS.
+## Compatibility
+
+Risk Management is available with the following APM tracing libraries:
+
+| Language | Minimum Datadog Tracing Library Version |
+| -------- | --------------------------------------- |
+| Java     | 1.1.4 |
+| .NET     | 2.16.0 |
+| NodeJS   | 2.23.0 for NodeJS 12+, or 3.10.0 for NodeJS 14+ |
+| Python   | 1.5.0 |
+
+## Get Started
+
+**Join the beta!** If you already use Application security, enroll from the [Application Security home page][4]. If you're new to Application Security, visit the [Application Security landing page][5] for an overview and to get started.
+
+Alternatively, when you view a service details page in APM, the Security tab also provides an **Enable Risk Management** link where you can join the Risk Management beta.
 
 ## Explore vulnerabilities and remediation
 
@@ -38,7 +53,9 @@ Risk management detects the open source libraries used by your application at ru
 
 <div class="alert alert-info">Custom code vulnerabilities (<em>unknown vulnerabilities</em>) detection is in private beta. Request access to the feature by <a href="/help/">contacting Support</a>.</div>
 
- The supported detected features include:
+Risk Management can find issues in the your services' custom code, the proprietary code that implements the business logic of your application from scratch, in addition to open source and third party libraries. 
+
+The custom code vulnerabilities it can find include:
 
 - Insecure Cipher
 - Insecure Hashing
@@ -61,3 +78,5 @@ Risk Management uses the information APM is already collecting, and flags librar
 [1]: /help/
 [2]: https://app.datadoghq.com/services?lens=Security
 [3]: https://app.datadoghq.com/security/appsec/vm
+[4]: https://app.datadoghq.com/security/appsec
+[5]: https://app.datadoghq.com/security/appsec/landing
