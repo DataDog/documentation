@@ -34,12 +34,13 @@ Here's a two-minute video walkthrough:
 ### Create
 
 1. After the feature is enabled, see the [New Organization Page][3].
-2. Enter the name of the child-organization you wish to create and click the **Create** button. **The child-organization name cannot exceed 32 characters.**
+2. Enter the name of the child-organization you wish to create. **The child-organization name cannot exceed 32 characters.**
 3. Optionally, invite admin users to your child-organization:
     - Enter one or more email addresses.
     - Invited users are assigned the [Datadog Admin role][4]. You can invite more users in
 Organization Settings after creating your organization.
     - If the user does not have a password, Datadog sends an email invitation with a link to set a password and join the new child-organization.
+4. Click the **Create** button.
 
 The new child-organization inherits the parent-organization's plan and is added to the parent-organization's billing account. If you want to update the child-organization's billing, [contact your sales representative][5].
 
