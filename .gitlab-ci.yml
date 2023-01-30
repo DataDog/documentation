@@ -184,6 +184,7 @@ index_algolia_preview:
     entrypoint: [""] # force an empty entrypoint (see https://gitlab.com/gitlab-org/gitlab-runner/issues/2692)
   tags: ["arch:amd64"]
   stage: post-deploy
+  allow_failure: true
   cache: []
   environment: "preview"
   timeout: 2h 30m
@@ -203,6 +204,7 @@ index_algolia_preview:
 replica_algolia_preview:
   <<: *base_template
   <<: *preview_manual_rules
+  allow_failure: true
   stage: post-deploy
   cache:
     - *yarn_cache
@@ -342,6 +344,7 @@ sourcemaps_live:
 evaluate_missing_metrics:
   <<: *base_template
   stage: post-deploy
+  allow_failure: true
   cache: {}
   environment: "live"
   script:
