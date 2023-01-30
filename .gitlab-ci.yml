@@ -10,6 +10,10 @@ variables:
   ARTIFACT_RESOURCE: "public"
   LIVE_DOMAIN: "https://docs.datadoghq.com/"
   PREVIEW_DOMAIN: "https://docs-staging.datadoghq.com/"
+  KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: documentation
+  KUBERNETES_CPU_REQUEST: 8
+  KUBERNETES_MEMORY_REQUEST: 16Gi
+  KUBERNETES_MEMORY_LIMIT: 16Gi
   # datadog-ci
   DATADOG_SITE: 'datadoghq.com'
   DATADOG_SUBDOMAIN: 'dd-corpsite'
@@ -63,9 +67,9 @@ before_script:
 
 # ================== templates ================== #
 .base_template: &base_template
-  image: public.ecr.aws/x2b9z2t7/webops/site-build:latest
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:webops-site-build-latest
   tags:
-    - "runner:main"
+    - "arch:amd64"
   except:
     - tags
   only:
@@ -156,7 +160,7 @@ index_algolia_preview:
   image:
     name: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:docsearch-scraper-latest
     entrypoint: [""] # force an empty entrypoint (see https://gitlab.com/gitlab-org/gitlab-runner/issues/2692)
-  tags: ["runner:main"]
+  tags: ["arch:amd64"]
   stage: post-deploy
   cache: []
   environment: "preview"
@@ -233,8 +237,8 @@ build_live:
     - yarn run prebuild
     - build_site
     - in-isolation deploy_site
-    - create_artifact
-    - create_artifact_ignored
+    - in-isolation create_artifact
+    - in-isolation create_artifact_ignored
     - remove_static_from_repo
   artifacts:
     when: on_success
@@ -246,20 +250,6 @@ build_live:
     expire_in: 1 week
   only:
     - master
-
-index_internal_doc:
-  stage: post-deploy
-  cache: {}
-  environment: "live"
-  image: registry.ddbuild.io/datadoc/webapp:prod-released
-  dependencies:
-    - build_live
-  only:
-    - master
-  except: [ tags, schedules ]
-  tags: ["runner:main"]
-  script:
-    - INDEXING_SERVICE=https://datadoc.ddbuild.io index-repository hugo https://docs.datadoghq.com/ "Datadog" "Public Documentation" --source_folder=content/en --tags="team:Documentation,source:hugo-website,visibility:public,github-repository:documentation"
 
 test_live_link_checks:
   <<: *base_template
@@ -289,7 +279,7 @@ index_algolia:
   image:
     name: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:docsearch-scraper-latest
     entrypoint: [ "" ] # force an empty entrypoint (see https://gitlab.com/gitlab-org/gitlab-runner/issues/2692)
-  tags: ["runner:main"]
+  tags: ["arch:amd64"]
   before_script:
     - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers
   stage: post-deploy

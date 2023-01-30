@@ -133,6 +133,9 @@ Pour créer une variable locale, cliquez sur **Create Local Variable** en haut �
 `{{ alphanumeric(n) }}`
 : Génère une chaîne alphanumérique de `n` caractères.
 
+`{{ uuid }}`
+: Génère un identifiant unique universel (UUID) de version 4.
+
 `{{ date(n unit, format) }}`
 : Génère une date dans l'un des formats acceptés de Datadog. Sa valeur correspond à la date UTC d'initiation du test + ou - `n` unités.
 
@@ -172,7 +175,7 @@ Vous pouvez faire en sorte que certains rôles au sein de votre organisation ne 
 
 {{< img src="synthetics/settings/restrict_access.png" alt="Définir des autorisations pour votre test" style="width:70%;" >}}
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 

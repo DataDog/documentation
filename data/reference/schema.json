@@ -5952,8 +5952,8 @@
               "_metadata": {
                 "docs::examples": {
                   "socket.send.buffer.bytes": "100",
-                  "fetch.error.backoff.ms": "1000",
-                  "client.id": "${ENV_VAR}"
+                  "client.id": "${ENV_VAR}",
+                  "fetch.error.backoff.ms": "1000"
                 },
                 "docs::additional_props_description": "A librdkafka configuration option."
               }
@@ -15187,9 +15187,9 @@
           },
           "_metadata": {
             "docs::examples": {
-              "labels": "{{ kubernetes.pod_labels }}",
               "{{ event_field }}": "{{ some_other_event_field }}",
-              "source": "vector"
+              "source": "vector",
+              "labels": "{{ kubernetes.pod_labels }}"
             },
             "docs::additional_props_description": "A Loki label."
           }

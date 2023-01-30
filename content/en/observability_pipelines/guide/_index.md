@@ -3,8 +3,6 @@ title: Observability Pipelines Guides
 kind: guide
 private: true
 disable_toc: true
-aliases:
-    - /integrations/observability_pipelines/guide/
 ---
 
 {{< whatsnext desc="General guides:" >}}
