@@ -1,10 +1,6 @@
 ---
 title: Setup Data Streams Monitoring for .NET
 kind: documentation
-further_reading:
-    - link: '/data_streams/glossary/'
-      tag: 'Documentation'
-      text: 'Data Streams Glossary'
 ---
 
 ### Prerequisites
@@ -22,9 +18,6 @@ For example:
 environment:
   - DD_DATA_STREAMS_ENABLED: "true"
 ```
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent
 [2]: /tracing/trace_collection/dd_libraries/dotnet-core
