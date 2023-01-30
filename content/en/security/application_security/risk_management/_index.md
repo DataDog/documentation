@@ -31,7 +31,7 @@ Risk Management is available with the following APM tracing libraries:
 
 **Join the beta!** If you already use Application security, enroll from the [Application Security home page][4]. If you're new to Application Security, visit the [Application Security landing page][5] for an overview and to get started.
 
-Alternatively, when you view a service details page in APM, the Security tab also provides an **Enable Risk Management** link where you can join the Risk Management beta.
+Alternatively, when you view a service details page in APM, the Security tab also provides an **Enable ASM** link where you can join the Risk Management beta.
 
 ## Explore vulnerabilities and remediation
 
