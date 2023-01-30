@@ -6,16 +6,16 @@ private: true
 aliases:
 - /agent/guide/how_rc_works
 further_reading:
-- link: "https://docs.datadoghq.com/security/application_security/how-appsec-works/#built-in-protection"
+- link: "/security/application_security/how-appsec-works/#built-in-protection"
   tag: "Documentation"
   text: "How Application Security Monitoring Works"
 - link: "https://www.datadoghq.com/blog/dash-2022-new-feature-roundup/#application-security-management-protection"
   tag: "Blog"
   text: "Application Security Protection"
-- link: "https://docs.datadoghq.com/dynamic_instrumentation/?tab=configurationyaml#enable-remote-configuration"
+- link: "/dynamic_instrumentation/?tab=configurationyaml#enable-remote-configuration"
   tag: "Documentation"
   text: "Dynamic Instrumentation"
-- link: "https://docs.datadoghq.com/security/cloud_workload_security/getting_started/?tab=kubernetes#overview"
+- link: "/security/cloud_workload_security/getting_started/?tab=kubernetes#overview"
   tag: "Documentation"
   text: "Getting Started with Cloud Workload Security"
 
