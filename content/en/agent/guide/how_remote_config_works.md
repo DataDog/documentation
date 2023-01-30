@@ -57,7 +57,7 @@ The following products and features are supported with Remote Config:
 <div class="alert alert-info">This feature is in beta.</div>
 
 - **1-click ASM activation**: Enable ASM in 1-click from the Datadog UI.
-- **In-App attack patterns updates**: Receive the newest Web Application Firewall (WAF) attack patterns automatically as Datadog releases them, following new vulnerabilities or attack vectors being disclosed.
+- **In-App attack patterns updates**: Receive the newest Web Application Firewall (WAF) attack patterns automatically as Datadog releases them, following newly disclosed vulnerabilities or attack vectors.
 - **Protect**: Block attackers' IPs, authenticated users, and suspicious requests that are flagged in ASM Security Signals and Traces temporarily or permanently through the Datadog UI.
 
 ### Application Performance Monitoring (APM)
@@ -119,7 +119,7 @@ To enable Remote Configuration:
 {{< tabs >}}
 {{% tab "Configuration YAML file" %}}
 Add the following to your configuration YAML file, specifying the API key that has Remote Config scope enabled:
-   ```yaml
+```yaml
 api_key: xxx
 remote_configuration:
   enabled: true
@@ -137,7 +137,7 @@ DD_REMOTE_CONFIGURATION_ENABLED=true
 {{% /tab %}}
 {{< /tabs >}}
 
-With this configuration, your Agent requests its configuration from Datadog, and the features that use remote configuration are enabled:
+After you perform these steps, your Agent requests its configuration from Datadog, and the features that use remote configuration are enabled:
 - [CWS default agent rules][5] update automatically as released.
 - [APM Agent-level sampling rates][6] are applied.  
 - [Dynamic Instrumentation][7] is enabled.
