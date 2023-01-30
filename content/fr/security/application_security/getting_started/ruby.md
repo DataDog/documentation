@@ -85,7 +85,7 @@ Vous pouvez surveiller la sécurité de vos applications Ruby exécutées dans D
 
 {{% /tab %}}
 
-{{% /tab %}}
+{{% tab "Sinatra" %}}
 
    ```ruby
    require 'sinatra'
@@ -122,7 +122,6 @@ Vous pouvez surveiller la sécurité de vos applications Ruby exécutées dans D
    Ajoutez ce qui suit à votre fichier `config.ru` pour activer le traceur APM :
 
 {{% /tab %}}
-{{% /tab %}}
 
 {{< /tabs >}}
 
@@ -130,8 +129,6 @@ Vous pouvez surveiller la sécurité de vos applications Ruby exécutées dans D
 
    {{< tabs >}}
 {{% tab "Docker CLI" %}}
-
-{{< tabs >}}
 
 ```shell
 docker run [...] -e DD_APPSEC_ENABLED=true [...]
