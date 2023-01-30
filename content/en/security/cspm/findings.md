@@ -63,17 +63,17 @@ The side panel lists detection rules that were evaluated against the resource, s
 
 ## Mute findings
 
-{{< beta-callout url="#" >}}
-  Muted findings is in beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.
-{{< /beta-callout >}}
+<div class="alert alert-info">Muted findings is a beta feature. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.</div>
 
 There may be times where a finding does not match the use case for your business, or you accept it as a known risk. To ignore these types of findings, you can mute the finding for the impacted resource. This allows you to focus on high-severity and critical findings that require your attention.
 
 For example, the ['Block Public Access' feature is enabled for S3 bucket][4] rule evaluates whether a S3 bucket is publicly accessible. If you have a S3 bucket with static assets that are meant to be publicly shared, you can mute the finding for the S3 bucket.
 
-Muted findings do not appear in visualizations and do not impact your posture score. You can mute pass/fail findings at any time. CSPM also provides [several methods](#audit-your-muted-findings) for keeping track of your muted findings.
+Muted findings do not appear in visualizations and do not impact your posture score. You can mute pass/fail findings at any time. CSPM also provides [several methods](#audit-your-muted-findings) for auditing your muted findings.
 
-1. On the finding side panel, select a resource.
+**placeholder for screenshot**
+
+1. On the [finding side panel](#explore-your-cloud-misconfigurations-with-findings), select a resource.
 2. Click **Mute**.
 3. Select a reason for the mute:
     - Pending fix
@@ -93,7 +93,7 @@ Muted findings do not appear in visualizations and do not impact your posture sc
 
 Muted findings automatically unmute after the specified mute duration expires. If necessary, you can also manually unmute a finding.
 
-1. On the finding side panel, select the resource with the muted finding.
+1. On the [finding side panel](#explore-your-cloud-misconfigurations-with-findings), select the resource with the muted finding.
 2. Click **Unmute**.
 3. Select a reason for the unmute:
     - No Pending Fix
@@ -112,6 +112,20 @@ This allows you to audit your findings, as well as review whether a muted findin
 - Sort by the **Muted** column on the Security Findings Explorer.
 - Filter the Security Findings Explorer using the **Muted** facet.
 - View finding > Timeline
+
+Determine who (un)muted findings for accountability purposes
+
+“Muted” status changes are documented in a finding’s Timeline (i.e. it will not be retroactive - the suppression applies starting upon change) and will show:
+
+Editor details
+When the change was made
+Reason for the status change
+Duration until mute resets to pass/fail (if applicable)
+Any time the status of a finding is changed, an Audit Log must be generated and include:
+Editor details
+When the change was made
+Reason for the status change
+Duration until mute resets to pass/fail (if applicable)
 
 ## Further reading
 
