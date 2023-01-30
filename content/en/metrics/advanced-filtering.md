@@ -19,13 +19,15 @@ further_reading:
 
 ## Overview
 
-Whether you're using the Metrics Explorer, monitors, or dashboards to query metrics data, you can filter the data to narrow the scope of the timeseries returned. Any metric can be filtered by tag(s) using the **from dropdown** to the right of the metric. 
+When using the Metrics Explorer, monitors, or dashboards to query metrics data, you can filter the data to narrow the scope of the timeseries returned. Any metric can be filtered by tag(s) using the **from** field to the right of the metric. 
 
-{{< img src="metrics/advanced-filtering/tags.png" alt="Filter with tags" style="width:80%;" >}}
+You can also perform advanced filtering with Boolean or Wildcard tag value filters. For queries outside of metrics data such as logs, traces, Network Monitoring, Real User Monitoring, Synthetics, or Security, see the [Log Search Syntax][1] documentation for configuration.
 
-You can also perform advanced filtering with Boolean or Wildcard tag value filters. For queries outside of metrics data such as logs, traces, Network Monitoring, Real User Monitoring, Synthetics, or Security, see the [Log Search Syntax documentation][1] for configuration.
+To use the examples presented, copy and paste into your graph editor to see the the query in the UI by clicking on the code icon `</>`.
 
-### Boolean filtered queries 
+{{< img src="metrics/advanced-filtering/graph_editor_code_option.mp4" alt="Click code icon to see the raw query" video=true >}}
+
+## Boolean filtered queries 
 
 The following syntax is supported for Boolean filtered metric queries: 
 
@@ -46,29 +48,25 @@ For more information on tags, see the [Getting Started With Using Tags][2] guide
 **Note:** Symbolic boolean syntax (`!`, `,`) cannot be used with functional syntax operators (`NOT`, `AND`, `OR`, `IN`, `NOT IN`). The following query is considered _invalid_: 
 `avg:mymetric{env:prod AND !region:us-east}`
 
-#### Boolean filtered query examples
+### Boolean filtered query examples
 
 ```
 avg:system.cpu.user{env:staging AND (availability-zone:us-east-1a OR availability-zone:us-east-1c)} by {availability-zone}
 ```
 
-{{< img src="metrics/advanced-filtering/ex1.png" alt="Example 1" style="width:80%;" >}}
-
 ```
 avg:system.cpu.user{env:shop.ist AND availability-zone IN (us-east-1a, us-east-1b, us-east4-b)} by {availability-zone}
 ```
 
-{{< img src="metrics/advanced-filtering/ex2.mp4" alt="Example 2" video=true style="width:80%;" >}}
-
-
+{{< img src="metrics/advanced-filtering/boolean_and_in.png" alt="Boolean example AND IN" style="width:100%;" >}}
 ```
 avg:system.cpu.user{env:prod AND location NOT IN (atlanta,seattle,las-vegas)}
 ```
 
-{{< img src="metrics/advanced-filtering/NOTIN.jpg" alt="Example 3" style="width:80%;" >}}
+{{< img src="metrics/advanced-filtering/boolean_not_in.png" alt="Boolean example NOT IN" style="width:100%;" >}}
 
 
-### Wildcard filtered queries 
+## Wildcard filtered queries 
 
 Tag value prefix and suffix wildcard matching is supported: 
 -  `pod_name: web-*` 
@@ -77,19 +75,19 @@ Tag value prefix and suffix wildcard matching is supported:
 **Note**: Prefix and suffix wildcard matching in the same filter is not supported.
 
 
-#### Wildcard filtered query examples
+### Wildcard filtered query examples
 
 ```
 avg:system.disk.in_use{!device:/dev/loop*} by {device}
 ```
 
-{{< img src="metrics/advanced-filtering/wildcards1.mp4" alt="Example 1" video=true style="width:80%;" >}}
+{{< img src="metrics/advanced-filtering/wildcard_prefix.png" alt="Wildcard used as prefix" style="width:100%;" >}}
 
 ```
 sum:kubernetes.pods.running{service:*-canary} by {service}
 ```
 
-{{< img src="metrics/advanced-filtering/wildcards2.jpg" alt="Example 2" style="width:80%;" >}}
+{{< img src="metrics/advanced-filtering/wildcard_suffix.png" alt="Wildcard used as suffix" style="width:100%;" >}}
 
 
 ## Further Reading
