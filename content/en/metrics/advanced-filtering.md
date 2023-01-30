@@ -23,7 +23,7 @@ When using the Metrics Explorer, monitors, or dashboards to query metrics data, 
 
 You can also perform advanced filtering with Boolean or Wildcard tag value filters. For queries outside of metrics data such as logs, traces, Network Monitoring, Real User Monitoring, Synthetics, or Security, see the [Log Search Syntax][1] documentation for configuration.
 
-To use the examples presented, copy and paste into your graph editor to see the the query in the UI by clicking on the code icon `</>`.
+To use the examples below, click the code icon `</>` to see the query editor in the UI, and then copy and paste the query example into the query editor.
 
 {{< img src="metrics/advanced-filtering/graph_editor_code_option.mp4" alt="Click code icon to see the raw query" video=true >}}
 
