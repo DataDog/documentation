@@ -16,6 +16,8 @@ further_reading:
 
 ASM Risk Management offers built-in detection capabilities that warn you about the vulnerabilities detected in your services' open source dependencies. Details of that information are shown in the [Vulnerability Explorer][3], identifying the severity, affected services, potentially vulnerable infrastructure, and remediation instructions to solve the surfaced risks.
 
+Risk Management is available with recent APM tracing libraries for Java, .NET, Python, and NodeJS.
+
 ## Explore vulnerabilities and remediation
 
 The Vulnerability Explorer shows a complete list of vulnerabilities detected by ASM Risk Management, ordering the vulnerabilities based on their severity, and offering filtering capabilities so you can investigate and prioritize problems. It also shows the number of affected libraries, the language of the affected library, and the last time that vulnerability was detected.
