@@ -191,8 +191,8 @@ Additionally, if you are using JDK 16 or newer, add the following lines to the [
 {{% /tab %}}
 {{% tab "Gradle" %}}
 
-Add plugin-client JAR to the project's classpath, add plugin JAR to the compiler's annotation processor path, and pass
-the plugin argument to the tasks that compile Java classes.
+Add plugin-client JAR to the project's classpath, add plugin JAR to the compiler's annotation processor path, and pass the plugin argument to the tasks that compile Java classes.
+
 Replace `$VERSION` with the latest version of the artifacts accessible from the [Maven Repository][1] (without the preceding `v`): ![Maven Central][2]
 
 {{< code-block lang="groovy" filename="build.gradle" >}}
