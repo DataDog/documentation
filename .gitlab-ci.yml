@@ -44,7 +44,7 @@ before_script:
   - git config --global url."https://${GITHUB_TOKEN}@github.com/DataDog".insteadOf https://github.com/DataDog
   - type build_dogrc &>/dev/null && build_dogrc || echo "build_dogrc not found." # create .dogrc for metrics, events submission
 
-
+# testing
 # set policy for the common case
 # yarn cache is used in a lot but only built during build job so lets default to pull and explicit push in build job
 .yarn_cache: &yarn_cache
