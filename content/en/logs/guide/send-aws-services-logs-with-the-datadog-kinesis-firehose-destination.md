@@ -33,7 +33,7 @@ Datadog recommends using a Kinesis data stream as input when using the Datadog K
 2. Create a [new delivery stream][2].  
    a. Set the source: 
       - `Amazon Kinesis Data Streams` if your logs are coming from a Kinesis data stream
-      - `Direct PUT or other sources` if your logs are coming directly from a CloudWatch log group
+      - `Direct PUT` if your logs are coming directly from a CloudWatch log group
 
    b. Set the destination as `Datadog`.  
    c. Provide a name for the delivery stream.  
