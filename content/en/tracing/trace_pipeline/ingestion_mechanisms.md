@@ -74,7 +74,7 @@ For example, to send 20% of the traces for the service named `my-service`:
 
 ```
 # using system property
-java -Ddd.trace.sampling.rules=my-service:0.2 -javaagent:dd-java-agent.jar -jar my-app.jar
+java -Ddd.trace.sampling.rules='[{\"service\": \"my-service\", \"sample_rate\":0.2}]' -javaagent:dd-java-agent.jar -jar my-app.jar
 
 # using environment variables
 export DD_TRACE_SAMPLING_RULES=[{"service": "my-service", "sample_rate": 0.2}]

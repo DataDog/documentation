@@ -1,6 +1,4 @@
 ---
-aliases:
-- /fr/integrations/observability_pipelines/guide/
 disable_toc: true
 kind: guide
 private: true
