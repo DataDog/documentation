@@ -32881,7 +32881,7 @@ tags:
   externalDocs:
     url: https://docs.datadoghq.com/api/?lang=bash#integration-aws-logs
   name: AWS Logs Integration
-- description: "All requests to Datadog\u2019s API must be authenticated.\nRequests
+- description: "Testing CI - All requests to Datadog\u2019s API must be authenticated.\nRequests
     that write data require reporting access and require an `API key`.\nRequests that
     read data require full access and also require an `application key`.\n\n**Note:**
     All Datadog API clients are configured by default to consume Datadog US site APIs.\nIf
