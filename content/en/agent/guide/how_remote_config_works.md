@@ -115,9 +115,10 @@ To enable Remote Configuration:
    {{<img src="agent/guide/RC_Key_updated.png" alt="API Key properties with Remote Config scope Enable button." width="90%" style="center">}}
 
 5. Update your Agent configuration:
+
 {{< tabs >}}
 {{% tab "Configuration YAML file" %}}
-   Add the following to your configuration YAML file, specifying the API key that has Remote Config scope enabled:
+Add the following to your configuration YAML file, specifying the API key that has Remote Config scope enabled:
    ```yaml
 api_key: xxx
 remote_configuration:
