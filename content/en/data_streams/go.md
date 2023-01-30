@@ -25,25 +25,25 @@ Initiate a Data Streams pathway with `datastreams.Start()` at the start of your 
 
 1. Configure producers to call `TraceKafkaProduce()` before sending out a Kafka message:
 
-```go
-import (ddkafka "github.com/DataDog/data-streams-go/integrations/kafka")
-...
-ctx = ddkafka.TraceKafkaProduce(ctx, &kafkaMsg)
-```
+   ```go
+   import (ddkafka "github.com/DataDog/data-streams-go/integrations/kafka")
+   ...
+   ctx = ddkafka.TraceKafkaProduce(ctx, &kafkaMsg)
+   ```
 
-This function adds a new checkpoint onto any existing pathway in the provided Go context, or creates a new pathway if none are found. It then adds the pathway into your Kafka message headers.
+   This function adds a new checkpoint onto any existing pathway in the provided Go context, or creates a new pathway if none are found. It then adds the pathway into your Kafka message headers.
 
 2. Configure consumers to call `TraceKafkaConsume()`:
 
-```go
-import ddkafka "github.com/DataDog/data-streams-go/integrations/kafka"
-...
-ctx = ddkafka.TraceKafkaConsume(ctx, &kafkaMsg, consumer_group)
-```
+   ```go
+   import ddkafka "github.com/DataDog/data-streams-go/integrations/kafka"
+   ...
+   ctx = ddkafka.TraceKafkaConsume(ctx, &kafkaMsg, consumer_group)
+   ```
 
-This function extracts the pathway that a Kafka message has gone through so far. It sets a new checkpoint on the pathway to record the successful consumption of a message and stores the pathway into the provided Go context.
+   This function extracts the pathway that a Kafka message has gone through so far. It sets a new checkpoint on the pathway to record the successful consumption of a message and stores the pathway into the provided Go context.
 
-**Note**: The output `ctx` from `TraceKafkaProduce()` and the output `ctx` from `TraceKafkaConsume()` both contain information about the updated pathway. 
+   **Note**: The output `ctx` from `TraceKafkaProduce()` and the output `ctx` from `TraceKafkaConsume()` both contain information about the updated pathway. 
 
 For `TraceKafkaProduce()`, if you are sending multiple Kafka messages at once (fan-out), do not reuse the output `ctx` across calls.
 
