@@ -7,6 +7,9 @@ further_reading:
 - link: "/agent/cluster_agent/troubleshooting/"
   tag: "Documentation"
   text: "Troubleshooting the Datadog Cluster Agent"
+- link: "https://www.datadoghq.com/blog/auto-instrument-kubernetes-tracing-with-datadog/"
+  tag: "Blog"
+  text: "Use library injection to auto-instrument tracing for Kubernetes applications with Datadog APM"
 ---
 
 ## Overview
