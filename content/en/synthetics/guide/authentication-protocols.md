@@ -24,7 +24,7 @@ This guide discusses the various authentication protocols available for Syntheti
 
 If your endpoint requires authentication, you can add your credentials when [creating an API][4] or [multistep API test][5]. API and multistep API tests support the following authentication protocols: Basic Access Authentication, Digest Access Authentication, OAuth2.0, NTLM, AWS Sigv4, and client certificates. 
 
-Click **Advanced Options** > **Authentication** and select an authentication method: 
+In the **Define the request** section, click **Advanced Options** > **Authentication** and select an authentication method: 
 
 {{< tabs >}}
 {{% tab "Basic Access" %}}
@@ -44,27 +44,24 @@ Click **Digest Auth** and enter a username and password. Digital access authenti
 {{% /tab %}}
 {{% tab "OAuth 2.0" %}}
 
-Click **OAuth 2.0**, select a grant type (**Client Credentials** or **Resource Password**), and include an Access Token URL, Client ID, and Client Secret. Select a token API authentication method (**Send as Basic Auth header** or **Send client credentials in body**) and optionally, include an audience, resource, and scope. OAuth 2.0 authentication is supported in [HTTP tests][1], [multistep API tests][2], and [WebSocket tests][3].
+Click **OAuth 2.0**, select a grant type (**Client Credentials** or **Resource Password**), and include an Access Token URL, Client ID, and Client Secret. Select a token API authentication method (**Send as Basic Auth header** or **Send client credentials in body**) and optionally, include an audience, resource, and scope. OAuth 2.0 authentication is supported in [HTTP tests][1] and [multistep API tests][2].
 
 [1]: /synthetics/api_tests/http_tests/
 [2]: /synthetics/multistep/
-[3]: /synthetics/api_tests/websocket_tests/
 {{% /tab %}}
 {{% tab "NTLM" %}}
 
-Click **NTLM**, enter a username and password, and optionally, a domain and work station. NTLM authentication is supported in [HTTP tests][1] and [multistep API tests][2], and [WebSocket tests][3].
+Click **NTLM**, enter a username and password, and optionally, a domain and work station. NTLM authentication is supported in [HTTP tests][1] and [multistep API tests][2].
 
 [1]: /synthetics/api_tests/http_tests/
 [2]: /synthetics/multistep/
-[3]: /synthetics/api_tests/websocket_tests/
 {{% /tab %}}
 {{% tab "AWS Signature" %}}
 
-Click **AWS Signature**, enter an Access Key ID and Secret Access Key, and optionally, a region, service name, and session token. AWS Signature authentication is supported in [HTTP tests][1], [multistep API tests][2], and [WebSocket tests][3].
+Click **AWS Signature**, enter an Access Key ID and Secret Access Key, and optionally, a region, service name, and session token. AWS Signature authentication is supported in [HTTP tests][1] and [multistep API tests][2].
 
 [1]: /synthetics/api_tests/http_tests/
 [2]: /synthetics/multistep/
-[3]: /synthetics/api_tests/websocket_tests/
 {{% /tab %}}
 {{% tab "Client Certificate" %}}
 
