@@ -145,4 +145,14 @@ With this configuration, your Agent requests its configuration from Datadog, and
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: /getting_started/site/
+[2]: /help/
+[3]: /account_management/api-app-keys/
+[4]: https://app.datadoghq.com/organization-settings/api-keys
+[5]: /security/default_rules/#cat-workload-security
+[6]: /tracing/trace_pipeline/ingestion_controls/#managing-ingestion-for-all-services-at-the-agent-level
+[7]: /dynamic_instrumentation/?tab=configurationyaml#enable-remote-configuration
+[8]: /security/application_security/how-appsec-works/#built-in-protection
+
+
 {{< /site-region >}}
