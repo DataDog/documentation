@@ -265,7 +265,7 @@ main:
     identifier: agent_logs
     parent: agent
     weight: 8
-  - name: Advanced Log Collection
+  - name: Advanced Configurations
     url: agent/logs/advanced_log_collection
     parent: agent_logs
     weight: 801
@@ -1054,6 +1054,11 @@ main:
     pre: notebook
     parent: platform_heading
     weight: 120000
+  - name: Guides
+    url: notebooks/guide
+    parent: notebooks
+    identifier: notebooks_guide
+    weight: 1
   - name: Alerting
     url: monitors/
     pre: monitor
@@ -2569,7 +2574,7 @@ main:
     identifier: cloud_siem_signal_correlation_rules
     weight: 3
   - name: OOTB Rules
-    url: /security/default_rules#cat-cloud-siem
+    url: /security/default_rules/#cat-cloud-siem-log-detection
     parent: cloud_siem
     identifier: cloud_siem_default_rules
     weight: 4
@@ -2619,20 +2624,21 @@ main:
     parent: cspm
     identifier: cspm_schema_gcp_test
     weight: 104
-  - name: Findings Reports
+  - name: Compliance Reports
     url: security/cspm/frameworks_and_benchmarks
     parent: cspm
-    weight: 105
+    identifier: cspm_frameworks_benchmarks
+    weight: 106
   - name: Security Findings Explorer
     url: /security/cspm/findings
     parent: cspm
     identifier: cspm_findings_explorer
-    weight: 106
+    weight: 107
   - name: Signals Explorer
     url: /security/cspm/signals_explorer/
     parent: cspm
     identifier: signals
-    weight: 107
+    weight: 108
   - name: Cloud Workload Security
     url: security/cloud_workload_security/
     parent: csm
@@ -2811,7 +2817,7 @@ main:
     url: synthetics/browser_tests/actions
     parent: synthetics_browser_tests
     weight: 301
-  - name: Test Results and Performance
+  - name: Test Results
     url: synthetics/browser_tests/test_results
     parent: synthetics_browser_tests
     weight: 302
@@ -2849,58 +2855,78 @@ main:
     parent: synthetics_search
     identifier: synthetics_search_saved_views
     weight: 501
+  - name: Explorer
+    url: continuous_testing/explorer/
+    parent: synthetics
+    identifier: synthetics_explorer
+    weight: 6
+  - name: Search Test Batches
+    url: continuous_testing/explorer/search/
+    parent: synthetics_explorer
+    identifier: continuous_testing_explorer_search
+    weight: 601
+  - name: Search Test Runs
+    url: continuous_testing/explorer/search_runs/
+    parent: synthetics_explorer
+    identifier: continuous_testing_explorer_search_runs
+    weight: 602
+  - name: Search Syntax
+    url: continuous_testing/explorer/search_syntax/
+    parent: synthetics_explorer
+    identifier: continuous_testing_explorer_search_syntax
+    weight: 603
   - name: Test Coverage
     url: synthetics/test_coverage
     parent: synthetics
     identifier: synthetics_test_coverage
-    weight: 6
+    weight: 7
   - name: Dashboards
     url: synthetics/dashboards
     parent: synthetics
     identifier: synthetics_dashboards
-    weight: 7
+    weight: 8
   - name: API Test
     url: synthetics/dashboards/api_test
     parent: synthetics_dashboards
     identifier: synthetics_dashboards_api_test
-    weight: 701
+    weight: 801
   - name: Browser Test
     url: synthetics/dashboards/browser_test
     parent: synthetics_dashboards
     identifier: synthetics_dashboards_browser_test
-    weight: 702
+    weight: 802
   - name: Test Summary
     url: synthetics/dashboards/test_summary
     parent: synthetics_dashboards
     identifier: synthetics_dashboards_test_summary
-    weight: 703
+    weight: 803
   - name: APM Integration
     url: synthetics/apm/
     parent: synthetics
     identifier: synthetics_apm
-    weight: 8
+    weight: 9
   - name: Settings
     url: synthetics/settings/
     parent: synthetics
-    weight: 9
+    weight: 10
   - name: Metrics
     url: synthetics/metrics/
     parent: synthetics
-    weight: 10
+    weight: 11
   - name: Data Security
     url: data_security/synthetics/
     parent: synthetics
-    weight: 11
+    weight: 12
   - name: Guides
     url: synthetics/guide/
     parent: synthetics
     identifier: synthetics_guides
-    weight: 12
+    weight: 13
   - name: Troubleshooting
     url: synthetics/troubleshooting/
     parent: synthetics
     identifier: synthetics_troubleshooting
-    weight: 13
+    weight: 14
   - name: Continuous Testing
     url: continuous_testing/
     pre: continuous-testing
@@ -2957,16 +2983,6 @@ main:
     parent: continuous_testing
     identifier: continuous_testing_explorer
     weight: 4
-  - name: Search Test Batches
-    url: continuous_testing/explorer/search/
-    parent: continuous_testing_explorer
-    identifier: continuous_testing_explorer_search
-    weight: 401
-  - name: Search Syntax
-    url: continuous_testing/explorer/search_syntax/
-    parent: continuous_testing_explorer
-    identifier: continuous_testing_explorer_search_syntax
-    weight: 402
   - name: Troubleshooting
     url: continuous_testing/troubleshooting/
     parent: continuous_testing
@@ -3138,11 +3154,16 @@ main:
     parent: rum_flutter
     identifier: rum_flutter_mobile_vitals
     weight: 504
+  - name: OpenTelemetry Support
+    url: real_user_monitoring/flutter/otel_support/
+    parent: rum_flutter
+    identifier: rum_flutter_otel_support
+    weight: 505
   - name: Troubleshooting
     url: real_user_monitoring/flutter/troubleshooting/
     parent: rum_flutter
     identifier: rum_flutter_troubleshooting
-    weight: 505
+    weight: 506
   - name: Session Replay
     url: real_user_monitoring/session_replay/
     parent: rum
@@ -5046,9 +5067,9 @@ api:
     url: /api/latest/metrics/
     identifier: metrics
     generated: true
-  - name: Timeseries cross product query
-    url: '#timeseries-cross-product-query'
-    identifier: metrics-timeseries-cross-product-query
+  - name: Query timeseries data across multiple products
+    url: '#query-timeseries-data-across-multiple-products'
+    identifier: metrics-query-timeseries-data-across-multiple-products
     parent: metrics
     generated: true
     params:
@@ -5059,9 +5080,9 @@ api:
       unstable:
         - v2
       order: 1
-  - name: Scalar cross product query
-    url: '#scalar-cross-product-query'
-    identifier: metrics-scalar-cross-product-query
+  - name: Query scalar data across multiple products
+    url: '#query-scalar-data-across-multiple-products'
+    identifier: metrics-query-scalar-data-across-multiple-products
     parent: metrics
     generated: true
     params:
@@ -5282,6 +5303,66 @@ api:
     url: /api/latest/monitors/
     identifier: monitors
     generated: true
+  - name: Edit a monitor configuration policy
+    url: '#edit-a-monitor-configuration-policy'
+    identifier: monitors-edit-a-monitor-configuration-policy
+    parent: monitors
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateMonitorConfigPolicy
+      unstable: []
+      order: 12
+  - name: Get a monitor configuration policy
+    url: '#get-a-monitor-configuration-policy'
+    identifier: monitors-get-a-monitor-configuration-policy
+    parent: monitors
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetMonitorConfigPolicy
+      unstable: []
+      order: 9
+  - name: Delete a monitor configuration policy
+    url: '#delete-a-monitor-configuration-policy'
+    identifier: monitors-delete-a-monitor-configuration-policy
+    parent: monitors
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteMonitorConfigPolicy
+      unstable: []
+      order: 13
+  - name: Create a monitor configuration policy
+    url: '#create-a-monitor-configuration-policy'
+    identifier: monitors-create-a-monitor-configuration-policy
+    parent: monitors
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateMonitorConfigPolicy
+      unstable: []
+      order: 11
+  - name: Get all monitor configuration policies
+    url: '#get-all-monitor-configuration-policies'
+    identifier: monitors-get-all-monitor-configuration-policies
+    parent: monitors
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListMonitorConfigPolicies
+      unstable: []
+      order: 10
   - name: Unmute all monitors
     url: '#unmute-all-monitors'
     identifier: monitors-unmute-all-monitors
