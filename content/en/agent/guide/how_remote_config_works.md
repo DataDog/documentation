@@ -34,7 +34,7 @@ Remote Configuration is a Datadog capability that allows you to remotely configu
 For Datadog security products, Application Security Management and Cloud Workload Security, Remote Configuration-enabled Agents and compatible tracing libraries provide real-time security updates and responses, enhancing security posture for your applications and cloud infrastructure. 
 
 ## How it works
-Once you enable Remote Configuration on the Datadog Agent, it will periodically poll the configured [Datadog site](https://docs.datadoghq.com/getting_started/site/), to determine whether there are configuration changes to apply to your Remote Configuration-enabled Agents or tracing libraries.
+Once you enable Remote Configuration on the Datadog Agent, it periodically polls the configured [Datadog site][1], to determine whether there are configuration changes to apply to your Remote Configuration-enabled Agents or tracing libraries.
 
 After you submit configuration changes in the respective Datadog product UI for a Remote Configuration enabled product feature, the changes are stored in Datadog. 
 
@@ -102,11 +102,11 @@ Datadog implements the following safeguards, designed to protect the confidentia
 ### Setup
 To enable Remote Configuration: 
 
-1.  To authenticate and authorize your Agent to use Remote Configuration, you need to add Remote Configuration scope on your Datadog API key. [Contact support](https://docs.datadoghq.com/help/) to have your Organization added for Remote Config capability on API key.
+1.  [Contact support][2] to have your organization enabled for adding the Remote Configuration capability on API keys.
 
-2. Ensure your RBAC permissions include [api_keys_write](https://docs.datadoghq.com/account_management/api-app-keys/) so you can add Remote Configuration scope on an existing API key, or create a new API key. Contact your organization's Datadog administrator and update your permissions if you don't have it.
+2. Ensure your RBAC permissions include [`api_keys_write`][3] so you can create a new API key with the Remote Configuration scope, or add the scope on an existing API key. Contact your organization's Datadog administrator to update your permissions if you don't have it. You'll use the key with this scope to authenticate and authorize your Agent to use Remote Configuration. 
 
-3. In your [Organization Settings](https://app.datadoghq.com/organization-settings/api-keys) page, either click on your existing API key, or click to Create a new API key.
+3. On the [Organization Settings][4] page, either select an existing API key, or create a new API key.
 
 4. Enable Remote Config scope on the key:
 
@@ -136,10 +136,10 @@ DD_REMOTE_CONFIGURATION_ENABLED=true
 {{< /tabs >}}
 
 With this configuration, your Agent requests its configuration from Datadog, and the features that use remote configuration are enabled:
-- CWS [default agent rules](https://docs.datadoghq.com/security/default_rules/#cat-workload-security) update automatically as released.
-- APM Agent-level [sampling rates](https://docs.datadoghq.com/tracing/trace_pipeline/ingestion_controls/#managing-ingestion-for-all-services-at-the-agent-level) are applied.  
-- [Dynamic Instrumentation](https://docs.datadoghq.com/dynamic_instrumentation/?tab=configurationyaml#enable-remote-configuration) is enabled.
-- [ASM](https://docs.datadoghq.com/security/application_security/how-appsec-works/#built-in-protection) 1-Click enablement, IP blocking, and attack pattern updates are enabled.
+- [CWS default agent rules][5] update automatically as released.
+- [APM Agent-level sampling rates][6] are applied.  
+- [Dynamic Instrumentation][7] is enabled.
+- [ASM 1-Click enablement, IP blocking, and attack pattern updates][8] are enabled.
 
 ## Further Reading
 
