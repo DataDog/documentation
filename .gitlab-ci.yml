@@ -237,8 +237,8 @@ build_live:
     - yarn run prebuild
     - build_site
     - in-isolation deploy_site
-    - create_artifact
-    - create_artifact_ignored
+    - in-isolation create_artifact
+    - in-isolation create_artifact_ignored
     - remove_static_from_repo
   artifacts:
     when: on_success
