@@ -6,16 +6,18 @@ kind: documentation
 ### Prerequisites
 
 To start with Data Streams Monitoring, you need recent versions of the Datadog Agent and Data Streams Monitoring libraries:
-* [Datadog Agent v7.34.0+][1]
-* [Data Streams Library v0.2+][2]
+* [Datadog Agent v7.34.0 or later][1]
+* [Data Streams Library v0.2 or later][2]
 
 ### Installation
 
-Initiate a Data Streams pathway with `datastreams.Start()` at the start of your pipeline. Then, two types of instrumentation are available:
+Initiate a Data Streams pathway with `datastreams.Start()` at the start of your pipeline. 
+
+Two types of instrumentation are available:
 - Instrumentation for Kafka-based workloads
 - Custom instrumentation for any other queuing technology or protocol
 
-<div class="alert alert-info">The default Trace Agent URL is <code>localhost:8126</code>. If this is different for your application, use the option <code>datastreams.Start(datastreams.WithAgentAddr("notlocalhost:8126"))</code>.</div>
+<div class="alert alert-info">The default Trace Agent URL is <code>localhost:8126</code>. If this is different for your application, use the <code>datastreams.Start(datastreams.WithAgentAddr("notlocalhost:8126"))</code> option.</div>
 
 ### Kafka instrumentation
 
@@ -66,9 +68,7 @@ ddkafka.TraceKafkaProduce(mergedContext, &producedMsg)
 
 ### Manual instrumentation
 
-You can also use manual instrumentation.
-
-For example, in HTTP, you can propagate the pathway with HTTP headers.
+You can also use manual instrumentation. For example, in HTTP, you can propagate the pathway with HTTP headers.
 
 To inject a pathway:
 

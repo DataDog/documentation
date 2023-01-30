@@ -57,7 +57,7 @@ High lag on a consuming service, increased resource use on a Kafka broker and in
 
 {{< img src="data_streams/data_streams_throughput_tab.png" alt="Datadog Data Streams Monitoring" style="width:100%;" >}}
 
-You can use the **Throughput** tab on any service or queue in Data Streams Monitoring to quickly detect changes in throughput, and which upstream or downstream service these changes originate from. Once the [Service Catalog][2] is configured, you can immediately pivot to the corresponding team's Slack channel or on-call engineer.
+Click on the **Throughput** tab on any service or queue in Data Streams Monitoring to quickly detect changes in throughput, and which upstream or downstream service these changes originate from. Once the [Service Catalog][2] is configured, you can immediately pivot to the corresponding team's Slack channel or on-call engineer.
 
 ## Further Reading
 
