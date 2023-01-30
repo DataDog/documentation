@@ -117,6 +117,9 @@ Datadog ASM offers built-in detection capabilities that warn you about the vulne
 
 For more information, read [Risk Management][21].
 
+### Risk Management coverage
+
+Risk Management is available with recent APM tracing libraries for Java, .NET, Python, and NodeJS.
 
 ## How Datadog ASM protects against Log4Shell
 
