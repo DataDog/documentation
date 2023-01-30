@@ -170,6 +170,8 @@ Datadog does not store your secrets, so store them locally before clicking **Vie
 
 ### Install your private location
 
+You can use `DATADOG_API_KEY`, `DATADOG_ACCESS_KEY`, `DATADOG_SECRET_ACCESS_KEY`, `DATADOG_PUBLIC_KEY_PEM` and `DATADOG_PRIVATE_KEY` environment variables in your task definition.
+
 Launch your private location on:
 
 {{< tabs >}}
@@ -318,8 +320,6 @@ Alternatively:
 
 Create a new EC2 task definition that matches the following. Replace each parameter with the corresponding value found in your previously generated private location configuration file:
 
-You can use `DATADOG_API_KEY`, `DATADOG_ACCESS_KEY`, `DATADOG_SECRET_ACCESS_KEY`, `DATADOG_PUBLIC_KEY_PEM` and `DATADOG_PRIVATE_KEY` environment variables in your task definition.
-
 ```yaml
 {
     ...
@@ -348,11 +348,12 @@ You can use `DATADOG_API_KEY`, `DATADOG_ACCESS_KEY`, `DATADOG_SECRET_ACCESS_KEY`
 }
 ```
 
-**Note:** If you have blocked reserved IPs, configure a [linuxParameters][1] to grant `NET_ADMIN` capabilities to your private location containers.
+**Notes:** 
+
+- If you have blocked reserved IPs, configure a [linuxParameters][1] to grant `NET_ADMIN` capabilities to your private location containers.
+- If you use the `DATADOG_API_KEY`, `DATADOG_ACCESS_KEY`, `DATADOG_SECRET_ACCESS_KEY`, `DATADOG_PUBLIC_KEY_PEM` and `DATADOG_PRIVATE_KEY` environment variables, you do not need to include them in the `"command": [ ]` section.
 
 [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_LinuxParameters.html
-
-**Note** If you use the environment variables `DATADOG_API_KEY`, `DATADOG_ACCESS_KEY`, `DATADOG_SECRET_ACCESS_KEY`, `DATADOG_PUBLIC_KEY_PEM` and `DATADOG_PRIVATE_KEY`, you do not need to include them in the `"command": [ ]` section.
 
 {{% /tab %}}
 
