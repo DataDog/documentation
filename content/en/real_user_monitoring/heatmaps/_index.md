@@ -8,7 +8,7 @@ further_reading:
   text: 'Session Replay'
 ---
 
-{{< beta-callout url="https://forms.gle/48wkkRoZfwhn74ycA" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
+{{< beta-callout url="https://forms.gle/48wkkRoZfwhn74ycA" >}}
 Heatmaps are in private beta, but you can request access using this form. We'll reach out directly once approved.
 {{< /beta-callout >}} 
 
