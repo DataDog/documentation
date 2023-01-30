@@ -25,8 +25,6 @@ You can also perform advanced filtering with Boolean or Wildcard tag value filte
 
 To use the examples below, click the code icon `</>` to see the query editor in the UI, and then copy and paste the query example into the query editor.
 
-{{< img src="metrics/advanced-filtering/graph_editor_code_option.mp4" alt="Click code icon to see the raw query" video=true >}}
-
 ## Boolean filtered queries 
 
 The following syntax is supported for Boolean filtered metric queries: 
@@ -54,6 +52,8 @@ For more information on tags, see the [Getting Started With Using Tags][2] guide
 avg:system.cpu.user{env:staging AND (availability-zone:us-east-1a OR availability-zone:us-east-1c)} by {availability-zone}
 ```
 
+{{< img src="metrics/advanced-filtering/graph_editor_code_option.mp4" alt="Click code icon to see the raw query" video=true >}}
+
 ```
 avg:system.cpu.user{env:shop.ist AND availability-zone IN (us-east-1a, us-east-1b, us-east4-b)} by {availability-zone}
 ```
@@ -65,7 +65,6 @@ avg:system.cpu.user{env:prod AND location NOT IN (atlanta,seattle,las-vegas)}
 
 {{< img src="metrics/advanced-filtering/boolean_not_in.png" alt="Boolean example NOT IN" style="width:100%;" >}}
 
-
 ## Wildcard filtered queries 
 
 Tag value prefix and suffix wildcard matching is supported: 
@@ -74,21 +73,18 @@ Tag value prefix and suffix wildcard matching is supported:
 
 **Note**: Prefix and suffix wildcard matching in the same filter is not supported.
 
-
 ### Wildcard filtered query examples
 
 ```
 avg:system.disk.in_use{!device:/dev/loop*} by {device}
 ```
 
-{{< img src="metrics/advanced-filtering/wildcard_prefix.png" alt="Wildcard used as prefix" style="width:100%;" >}}
-
+{{< img src="metrics/advanced-filtering/wildcard_suffix.png" alt="Wildcard used as suffix" style="width:100%;" >}}
 ```
 sum:kubernetes.pods.running{service:*-canary} by {service}
 ```
 
-{{< img src="metrics/advanced-filtering/wildcard_suffix.png" alt="Wildcard used as suffix" style="width:100%;" >}}
-
+{{< img src="metrics/advanced-filtering/wildcard_prefix.png" alt="Wildcard used as prefix" style="width:100%;" >}}
 
 ## Further Reading
 
