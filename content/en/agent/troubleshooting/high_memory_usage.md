@@ -56,10 +56,10 @@ If the high memory consumption is not associated with a single integration, send
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/help/
-[2]: https://docs.datadoghq.com/agent/basic_agent_usage/#cli
-[3]: https://docs.datadoghq.com/infrastructure/process/
-[4]: https://docs.datadoghq.com/integrations/process/#configuration
-[5]: https://docs.datadoghq.com/developers/write_agent_check/#collection-interval
-[6]: https://docs.datadoghq.com/getting_started/containers/#enable-autodiscovery
-[7]: https://docs.datadoghq.com/agent/troubleshooting/debug_mode/
+[1]: /help/
+[2]: /agent/basic_agent_usage/#cli
+[3]: /infrastructure/process/
+[4]: /integrations/process/#configuration
+[5]: /developers/write_agent_check/#collection-interval
+[6]: /getting_started/containers/#enable-autodiscovery
+[7]: /agent/troubleshooting/debug_mode/
