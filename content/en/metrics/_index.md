@@ -61,7 +61,7 @@ Datadog has many other types of graphs and widgets for visualizations. You can l
 
 #### Query Value Widget/Toplist Widgets
 
-Regardless of the type of widget, each metric query consists of the same two evaluation steps to start: 1)Time aggregation, 2)Space aggregation [(refresher here).][22]
+Regardless of the type of widget, each metric query consists of the same two evaluation steps to start: 1) Time aggregation, 2) Space aggregation [(refresher here).][22]
 
 ###### [Query Value Widget][23]
 - A [Query Value Widget][23] simply reduces the results of those two steps into a single value.
