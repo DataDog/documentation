@@ -29,8 +29,9 @@ The following are key differences between using Kinesis Data Firehose and CloudW
 - **AWS Costs**: AWS Costs may vary for individual use cases but Kinesis Data Firehose ingestion is generally less expensive than comparable Cloudwatch Log ingestion. 
 
 ## Requirements
-1. An EKS cluster with a [Fargate Profile][1]. In this guide, the cluster is named `fargate-cluster` with a Fargate profile named `fargate-profile` applied to the namespace `fargate-namespace`.
-2. The following command line tools: [`kubectl`][6], [`aws`][7]
+1. The following command line tools: [`kubectl`][6], [`aws`][7].
+2. An EKS cluster with a [Fargate profile][1] and Fargate pod execution role. In this guide, the cluster is named `fargate-cluster` with a Fargate profile named `fargate-profile` applied to the namespace `fargate-namespace`. If you don't already have these resources, use [Getting Started with Amazon EKS][8] to create the cluster and [Getting Started with AWS Fargate using Amazon EKS][9] to create the Fargate profile and pod execution role.
+
 
 ## Setup
  
@@ -225,7 +226,7 @@ Expected output:
 Logs from this configuration require some attributes to be remapped to maximize consistency with standard Kubernetes tags in Datadog.  
 1. Go to the [Datadog Log Pipelines][3] page.
 2. Create a new pipeline with **Name** `EKS Fargate Log Pipeline` and **Filter** `service:aws source:aws`.
-3. Create four Remapper processors to remap the following attributes to tag keys:
+3. Create four [Remapper processors][5] to remap the following attributes to tag keys:
  | Attribute to remap | Target Tag Key |
  |--------------------|----------------|
  | `kubernetes.container_name` | `kube_container_name` |
