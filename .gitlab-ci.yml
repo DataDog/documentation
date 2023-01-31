@@ -10,10 +10,6 @@ variables:
   ARTIFACT_RESOURCE: "public"
   LIVE_DOMAIN: "https://docs.datadoghq.com/"
   PREVIEW_DOMAIN: "https://docs-staging.datadoghq.com/"
-  KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: documentation
-  KUBERNETES_CPU_REQUEST: 8
-  KUBERNETES_MEMORY_REQUEST: 16Gi
-  KUBERNETES_MEMORY_LIMIT: 16Gi
   # datadog-ci
   DATADOG_SITE: 'datadoghq.com'
   DATADOG_SUBDOMAIN: 'dd-corpsite'
@@ -67,9 +63,9 @@ before_script:
 
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:webops-site-build-12899749
+  image: public.ecr.aws/x2b9z2t7/webops/site-build:latest
   tags:
-    - "arch:amd64"
+    - "runner:main"
   except:
     - tags
   only:
@@ -160,7 +156,7 @@ index_algolia_preview:
   image:
     name: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:docsearch-scraper-latest
     entrypoint: [""] # force an empty entrypoint (see https://gitlab.com/gitlab-org/gitlab-runner/issues/2692)
-  tags: ["arch:amd64"]
+  tags: ["runner:main"]
   stage: post-deploy
   cache: []
   environment: "preview"
@@ -237,8 +233,8 @@ build_live:
     - yarn run prebuild
     - build_site
     - in-isolation deploy_site
-    - in-isolation create_artifact
-    - in-isolation create_artifact_ignored
+    - create_artifact
+    - create_artifact_ignored
     - remove_static_from_repo
   artifacts:
     when: on_success
@@ -279,7 +275,7 @@ index_algolia:
   image:
     name: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:docsearch-scraper-latest
     entrypoint: [ "" ] # force an empty entrypoint (see https://gitlab.com/gitlab-org/gitlab-runner/issues/2692)
-  tags: ["arch:amd64"]
+  tags: ["runner:main"]
   before_script:
     - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers
   stage: post-deploy

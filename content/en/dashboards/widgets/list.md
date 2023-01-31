@@ -53,6 +53,7 @@ For logs, you can group by:
 * Patterns
 * Transactions
 
+<!-- Pending GA
 ### RUM event list options
 
 #### Sorting by
@@ -68,7 +69,7 @@ For RUM, you can sort by:
 * Initial view name
 * Last view name
 
-Ascending or descending
+Ascending or descending -->
 
 ### Events
 

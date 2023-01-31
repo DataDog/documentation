@@ -52,7 +52,7 @@ Before you start, if you have a large infrastructure, **prioritize your search**
    * Agent v5 or v6
    * Standalone DogStatsD v6 or v7.23.2 and earlier
 
-   On RPM-based Linux hosts, the following scenarios are **unlikely** to be affected, but still worth checking your hosts:
+   On RPM-based Linux hosts, the following scenarios are **less likely** to be affected, but still possible:
    * Agent v7
    * Standalone DogStatsD v7.23.2+.
 

@@ -348,10 +348,7 @@ Create a new EC2 task definition that matches the following. Replace each parame
 }
 ```
 
-**Notes:** 
-
-- If you have blocked reserved IPs, configure a [linuxParameters][1] to grant `NET_ADMIN` capabilities to your private location containers.
-- If you use the `DATADOG_API_KEY`, `DATADOG_ACCESS_KEY`, `DATADOG_SECRET_ACCESS_KEY`, `DATADOG_PUBLIC_KEY_PEM` and `DATADOG_PRIVATE_KEY` environment variables, you do not need to include them in the `"command": [ ]` section.
+**Note:** If you have blocked reserved IPs, configure a [linuxParameters][1] to grant `NET_ADMIN` capabilities to your private location containers.
 
 [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_LinuxParameters.html
 

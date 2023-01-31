@@ -70,17 +70,13 @@ Environments appear at the top of APM pages. Use the `env` dropdown to scope the
 
 ## Add a second primary tag in Datadog
 
-If you need to aggregate your trace metrics across additional dimensions, we recommend setting up a second primary tag in addition to the
-default and mandatory primary tag `env:<ENVIRONMENT>`. Once configured, a second dropdown is available in the **Service Catalog Performance** tab. 
-
-Go to the [APM Settings][6] page to define, change, or remove your primary tags.
+If you added a host tag other than `env:<ENVIRONMENT>` to your traces, it can be set as a primary tag along with the environment tag. Go to the [APM Settings][6] page to define, change, or remove your primary tags.
 
 **Note**:
 
 * Only organization administrators have access to this page.
 * Changes may take up to two hours to be reflected in the UI.
 * The tracer always adds `resource`, `name`, and `service` tags to spans. Datadog recommends never adding these as host level tags to avoid confusion.
-* The second primary tag supports up to 30 unique values. See [APM Data Volume Guidelines][7] for details.
 
 If you change a previously set primary tag, be aware of the following:
 
@@ -151,11 +147,11 @@ DD_APM_FEATURES=enable_cid_stats
 
 Restart the Agent. Go to the [APM Settings][6] page and select the second primary tag you want to use. It can take up to two hours for changes to this setting to take effect. 
 
-Now you can filter your services in the [Service List][8] by the tag being sent by your containerized services. Trace metrics used by Dashboards and Monitors can also be aggregated by the container primary tag.
+Now you can filter your services in the [Service List][7] by the tag being sent by your containerized services. Trace metrics used by Dashboards and Monitors can also be aggregated by the container primary tag.
 
 ### Custom labels as tags
 
-If you haven't already, you may also configure the Agent to send container or Pod labels as custom tags for your traces with [Assigning Tags][9].
+If you haven't already, you may also configure the Agent to send container or Pod labels as custom tags for your traces with [Assigning Tags][8].
 
 ## View data by primary tag
 
@@ -174,6 +170,5 @@ Primary tags appear at the top of APM pages. Use these selectors to filter the d
 [4]: /getting_started/tagging/assigning_tags/#traces
 [5]: /tracing/metrics/metrics_namespace/
 [6]: https://app.datadoghq.com/apm/settings
-[7]: /tracing/troubleshooting/#data-volume-guidelines
-[8]: https://app.datadoghq.com/apm/services
-[9]: /getting_started/tagging/assigning_tags
+[7]: https://app.datadoghq.com/apm/services
+[8]: /getting_started/tagging/assigning_tags

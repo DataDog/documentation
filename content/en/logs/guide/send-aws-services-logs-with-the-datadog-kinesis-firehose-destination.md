@@ -33,22 +33,22 @@ Datadog recommends using a Kinesis data stream as input when using the Datadog K
 2. Create a [new delivery stream][2].  
    a. Set the source: 
       - `Amazon Kinesis Data Streams` if your logs are coming from a Kinesis data stream
-      - `Direct PUT` if your logs are coming directly from a CloudWatch log group
+      - `Direct PUT or other sources` if your logs are coming directly from a CloudWatch log group
 
    b. Set the destination as `Datadog`.  
    c. Provide a name for the delivery stream.  
-   d. In the **Destination settings**, choose the `Datadog logs` HTTP endpoint URL that corresponds to your [Datadog site][3].  
-   e. Paste your API key into the **API key** field. You can get or create an API key from the [Datadog API Keys page][4].  
+   d. In the **Destination settings**, choose the `Datadog logs` HTTP endpoint URL that corresponds to your [Datadog site][5].  
+   e. Paste your API key into the **API key** field. You can get or create an API key from the [Datadog API Keys page][3].  
    f. Optionally, configure the **Retry duration**, the buffer settings, or add **Parameters**, which are attached as tags to your logs.  
    g. In the **Backup settings**, select an S3 backup bucket to receive any failed events that exceed the retry duration.  
-     **Note**: To ensure that logs that fail through the delivery stream are still sent to Datadog, set the Datadog Forwarder Lambda function to [forward logs][5] from this S3 bucket.  
+     **Note**: To ensure that logs that fail through the delivery stream are still sent to Datadog, set the Datadog Forwarder Lambda function to [forward logs][4] from this S3 bucket.  
    h. Click **Create delivery stream**.
 
 [1]: https://docs.aws.amazon.com/streams/latest/dev/tutorial-stock-data-kplkcl-create-stream.html
 [2]: https://console.aws.amazon.com/firehose/
-[3]: /getting_started/site/
-[4]: https://app.datadoghq.com/organization-settings/api-keys
-[5]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=automaticcloudformation#collecting-logs-from-s3-buckets
+[3]: https://app.datadoghq.com/organization-settings/api-keys
+[4]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=automaticcloudformation#collecting-logs-from-s3-buckets
+[5]: /getting_started/site/
 {{% /tab %}}
 
 {{% tab "CloudFormation template" %}}
@@ -107,7 +107,7 @@ After you have set up an Amazon Kinesis delivery stream, you can analyze the log
 
 To populate all logs by ARN:
 
-1. Go to the [Logs Explorer][4] in Datadog to see all of your subscribed logs.
+1. Go to the [Logs Explorer][5] in Datadog to see all of your subscribed logs.
 2. In the search bar, type `@aws.firehose.arn:"<ARN>"`, replace `<ARN>` with your Amazon Kinesis Data Firehose ARN, and press **Enter**.
 
 ## Further Reading
@@ -117,4 +117,5 @@ To populate all logs by ARN:
 [1]: https://console.aws.amazon.com/cloudwatch/home
 [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs//SubscriptionFilters.html#DestinationKinesisExample
 [3]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutSubscriptionFilter.html
-[4]: /logs/explorer/
+[4]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SubscriptionFilters.html#FirehoseExample
+[5]: /logs/explorer/
