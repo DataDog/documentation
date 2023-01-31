@@ -41,5 +41,5 @@ The **Group into fields** aggregation supports one dimension for the [Top list][
 
 [1]: /real_user_monitoring/explorer/visualize#top-list
 [2]: /real_user_monitoring/explorer/visualize#timeseries
-[3]: /real_user_monitoring/exploroer/visualize#lists
+[3]: /real_user_monitoring/explorer/visualize#lists
 [4]: /real_user_monitoring/explorer/visualize#nested-tables
