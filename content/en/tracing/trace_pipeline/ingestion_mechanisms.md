@@ -243,7 +243,7 @@ To override the default behavior so that spans dropped by the tracing library ru
 
 #### Datadog Agent 6/7.33 to 6/7.40.x
 
-No further customization exist. To customize the default behavior, upgrade the Datadog Agent to Datadog Agent 6/7.41.0 and higher.
+Error sampling default behavior can't be changed for these Agent versions. Upgrade the Datadog Agent to Datadog Agent 6/7.41.0 and higher.
 
 
 ### Rare traces
