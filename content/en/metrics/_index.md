@@ -59,15 +59,15 @@ This line graph plots latency (in milliseconds) experienced by users on the y-ax
 
 Datadog has many other types of graphs and widgets for visualizations. You can learn more about them in Datadog's [blog series about metric graphs][6].
 
-#### QVW/Toplist Widgets
+#### Query Value Widget/Toplist Widgets
 
-Regardless of the type of widget, each metric query consists of the same two evaluation steps to start: 1. Time aggregation, 2. Space aggregation [(refresher here).][22]
+Regardless of the type of widget, each metric query consists of the same two evaluation steps to start: 1.Time aggregation, 2.Space aggregation [(refresher here).][22]
 
-###### [QVW][23]
-A Query Value Widget simply reduces the results of those two steps into a single value.
+###### [Query Value Widget][23]
+A [Query Value Widget][23] simply reduces the results of those two steps into a single value.
 
 ###### [Toplist][24]
-A Top List Widget returns a single value per group.” 
+A [Top List Widget][24] returns a single value per group.
 
 ### Submitting metrics to Datadog
 
