@@ -33,17 +33,17 @@ When you first open the graphing editor, you are on the **Edit** tab. Here, you 
 To configure your graph on dashboards, follow this process:
 
 1. [Select the visualization](#select-your-visualization)
-2. [Choose the metric to graph](#choose-the-metric-to-graph)
-3. [Filter](#filter)
-4. [Aggregate and rollup](#aggregate-and-rollup)
-5. [Apply additional functions](#advanced-graphing)
+2. [Define the metric](#define-the-metric-to-graph)
+3. [Filter your metric](#filter)
+4. [Configure the time aggregation](#aggregate-and-rollup)
+5. [Apply function (optional)](#advanced-graphing)
 6. [Title the graph](#create-a-title)
 
 ### Select your visualization
 
 Select your visualization from the available [widgets][3].
 
-### Choose the metric to graph
+### Define the metric
 
 Choose the metric to graph by searching or selecting it from the dropdown next to **Metric**. If you don't know which metric to use, the metric dropdown provides additional information, including the `unit`, `type`, `interval`, `description`, `tags`, and number of `tag values`. 
 
