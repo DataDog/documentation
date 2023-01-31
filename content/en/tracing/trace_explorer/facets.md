@@ -85,13 +85,13 @@ Hiding facets is specific to your own troubleshooting context and does not impac
 
 ### Grouping facets
 
-Facets are grouped into meaningful themes, to ease navigation in the facet list. Assigning or reassigning a group for a facet (see [Managing facets](#managing-facets)) affects only the facet list, and has no impact on search and analytics.
+Facets are grouped into meaningful themes in the facet list. Assigning or reassigning a group for a facet affects only the facet list, and has no impact on search or analytics.
 
 {{< img src="tracing/trace_explorer/facets/group_facets.png" alt="Group Facets" style="width:30%;">}}
 
 ### Filtering facets
 
-Use the search facets box on the facet panel to scope the whole facet list and navigate more quickly to the one facet you need to interact with. Search facets uses both facet display name and facet field name to scope results.
+Use the search facets box on the facet panel to scope the whole facet list and navigate more quickly to the one facet you need to interact with. Search facets uses the facet display name and field name to scope results.
 
 {{< img src="tracing/trace_explorer/facets/filter_facets.png" alt="Search Facet" style="width:30%;">}}
 
