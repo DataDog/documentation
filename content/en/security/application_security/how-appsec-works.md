@@ -35,7 +35,7 @@ Because APM collects a sample of your application traffic, enabling ASM in the t
 Datadog Threat Monitoring and Detection identifies bad actors by collecting client IP addresses and manually-added user tags on all requests.
 
 <div class="alert alert-info"><strong>Beta: 1-Click Enablement</strong><br>
-If your service is running with <a href="/agent/guide/how_remote_config_works/#enabling-remote-configuration">an Agent with Remote Configuration enabled and a tracing library version that supports it</a>, you can <a href="/security/application_security/threats/getting_started/">enable ASM</a> from the Datadog UI without additional configuration of the Agent or tracing libraries.</div>
+If your service is running with <a href="/agent/guide/how_remote_config_works/#enabling-remote-configuration">an Agent with Remote Configuration enabled and a tracing library version that supports it</a>, you can <a href="/security/application_security/getting_started/">enable ASM</a> from the Datadog UI without additional configuration of the Agent or tracing libraries.</div>
 
 ### Identify vulnerable services
 
@@ -86,7 +86,7 @@ If your service is running with <a href="/agent/guide/how_remote_config_works/#e
 
 Security Signals are automatically created when Datadog detects meaningful attacks targeting your production services. It provides you with visibility on the attackers and the targeted services. You can set custom detection rules with thresholds to determine which attacks you want to be notified about.
 
-## Built-in threat protection
+## Built-in protection
 
 <div class="alert alert-info"><strong>Beta: IP and user blocking</strong><br>
 If your service is running with <a href="/agent/guide/how_remote_config_works/#enabling-remote-configuration">an Agent with Remote Configuration enabled and a tracing library version that supports it</a>, you can block attackers from the Datadog UI without additional configuration of the Agent or tracing libraries.</div>
