@@ -3,25 +3,28 @@ title: Span Facets
 kind: documentation
 description: 'Trace Facets and Facet Panel'
 further_reading:
-    - link: 'tracing/trace_explorer/'
-      tag: 'Documentation'
-      text: 'Trace Explorer'
+- link: 'tracing/trace_explorer/'
+  tag: 'Documentation'
+  text: 'Trace Explorer'
 ---
 
 ## Overview
 
-Facets are user-defined tags and attributes from your spans. They are useful for both qualitative and quantitative data analysis. You can use facets in the Trace Explorer to:
+Facets are user-defined tags and attributes from your spans. They are useful for both [qualitative](#qualitative-facets) and [quantitative](#quantitative-facets-measures) data analysis. 
+
+You can use facets in the Trace Explorer to:
 
 - [Search for and filter spans][1]
 - Perform trace analytics
+- Start troubleshooting once your spans are ingested
 
-Facets also allow you to manipulate spans in your [trace analytics monitors][3], and in APM queries that appear on [dashboards][4] and in [notebooks][5].
+Facets allow you to manipulate spans in your [Trace Analytics monitors][3], and in APM queries that appear on [dashboards][4] and in [notebooks][5]. The Trace Explorer includes out-of-the-box facets such as `Status` and `Service`.
 
-{{< img src="tracing/trace_explorer/facets/facet_panel.png" alt="Facets panel" style="width:80%;">}}
+{{< img src="tracing/trace_explorer/facets/facet_panel.png" alt="The Facets panel in the Trace Explorer" style="width:90%;">}}
 
 {{< site-region region="us,eu,us3,us5" >}}
 
-**Note**: [Creating facets](#creating-facets) is not required to [search spans][1], to [generate metrics from spans][2], or to [index spans with retention filters][3]. In all these contexts, autocomplete capabilities do use existing facets, but also any input that matches incoming spans also works.
+Creating facets is **not required** for [searching spans][1], [generating metrics from spans][2], or [indexing spans with retention filters][3]. In these contexts, autocomplete capabilities use existing facets, but also any input that matches incoming spans applies.
 
 [1]: /tracing/trace_explorer/search
 [2]: /tracing/trace_pipeline/generate_metrics
@@ -91,38 +94,6 @@ Facets are grouped into meaningful themes, to ease navigation in the facet list.
 Use the search facets box on the facet panel to scope the whole facet list and navigate more quickly to the one facet you need to interact with. Search facets uses both facet display name and facet field name to scope results.
 
 {{< img src="tracing/trace_explorer/facets/filter_facets.png" alt="Search Facet" style="width:30%;">}}
-
-## Managing facets
-
-### Out-of-the-box facets
-
-Most common facets such as `Status` and `Service` come out-of-the-box, so you can start troubleshooting right away once your spans are ingested.
-
-### Creating facets
-
-As a matter of good practice, consider reusing an existing facet rather than creating a new one. Using a single facet for information of a similar nature fosters cross-team collaboration.
-
-#### Creating facets from the trace side panel
-
-The easiest way to create a facet is to add it from the trace side panel, so that most of the facet details (field path, underlying type) are pre-filled. Navigate in the [Trace Explorer][1] a span of interest that contains the field to create a facet on. Open the trace side-panel for this span by selecting the span from the list. Click on the desired field (either in span tags or in infrastructure tags) and create a facet from there:
-
-- If the field has a numerical value, you can create either a facet or a measure.
-- If the field has a string value, only facet creation is available.
-
-{{< img src="tracing/trace_explorer/facets/create_facet.png" alt="Add Facet from tags" style="width:50%;">}}
-
-#### Creating facets from the facet list
-
-If finding a span that has the desired field is not an option, create a facet directly from the facet panel by clicking _+ Add_.
-
-Define the underlying field (key) name for this facet:
-
-- Use tag key name for infrastructure tags.
-- Use the attribute path for span attributes, with `@` prefix.
-
-Autocomplete based on the content in spans of the current views helps you to define the proper field name. But you can use virtually any value here, specifically in the case that you don't yet have matching spans received by Datadog.
-
-{{< img src="tracing/trace_explorer/facets/create_facet_from_scratch.png" alt="Add Facet from scratch" style="width:30%;">}}
 
 ## Further Reading
 
