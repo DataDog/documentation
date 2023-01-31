@@ -36,8 +36,9 @@ To configure your graph on dashboards, follow this process:
 2. [Define the metric](#define-the-metric-to-graph)
 3. [Filter your metric](#filter)
 4. [Configure the time aggregation](#aggregate-and-rollup)
-5. [Apply function (optional)](#advanced-graphing)
-6. [Title the graph](#create-a-title)
+5. [Configure the space aggregation](#aggregate-and-rollup)
+6. [Apply function (optional)](#advanced-graphing)
+7. [Title the graph](#create-a-title)
 
 ### Select your visualization
 
