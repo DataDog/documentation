@@ -23,8 +23,6 @@ When using the Metrics Explorer, monitors, or dashboards to query metrics data, 
 
 You can also perform advanced filtering with Boolean or Wildcard tag value filters. For queries outside of metrics data such as logs, traces, Network Monitoring, Real User Monitoring, Synthetics, or Security, see the [Log Search Syntax][1] documentation for configuration.
 
-To use the examples below, click the code icon `</>` to see the query editor in the UI, and then copy and paste the query example into the query editor.
-
 ## Boolean filtered queries 
 
 The following syntax is supported for Boolean filtered metric queries: 
@@ -47,6 +45,8 @@ For more information on tags, see the [Getting Started With Using Tags][2] guide
 `avg:mymetric{env:prod AND !region:us-east}`
 
 ### Boolean filtered query examples
+
+To use the examples below, click the code icon `</>` to see the query editor in the UI, and then copy and paste the query example into the query editor.
 
 ```
 avg:system.cpu.user{env:staging AND (availability-zone:us-east-1a OR availability-zone:us-east-1c)} by {availability-zone}
