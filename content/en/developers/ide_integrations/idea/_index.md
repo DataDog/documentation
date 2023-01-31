@@ -33,8 +33,8 @@ In addition to code highlighting, you can use the Datadog plugin for Intellij ID
 
 ## Requirements
 
-- **A Datadog account**: The plugin requires a Datadog account. If you're new to Datadog, go to the [Datadog website][4] to learn more about Datadog's observability tools and sign up for a free trial.
-- **Continuous Profiling**: To display code-level insights, the plugin requires Continuous Profiling instrumented on your Java Services. For more information, see [Getting Started with the Continuous Profiler][3].
+- **A Datadog account**: The plugin requires a Datadog account. If you're new to Datadog, go to the [Datadog website][3] to learn more about Datadog's observability tools and sign up for a free trial.
+- **Continuous Profiling**: To display code-level insights, the plugin requires Continuous Profiling instrumented on your Java Services. For more information, see [Getting Started with the Continuous Profiler][2].
 
 ## Setup
 
@@ -47,7 +47,7 @@ In addition to code highlighting, you can use the Datadog plugin for Intellij ID
 
 {{< img src="/developers/ide_integrations/idea/datadog-plugin1.png" alt="The Datadog plugin" style="width:100%;" >}}
 
-Alternatively, you can install the plugin from the [Jetbrains Marketplace][6].
+Alternatively, you can install the plugin from the [Jetbrains Marketplace][4].
 <span id="datadog_plugin_install_button"></span>
 
 ### Log in to Datadog
@@ -154,7 +154,6 @@ Let us know what you think about the plugin! Provide feedback on our [discussion
 </script>
 
 [1]: https://github.com/DataDog/datadog-for-intellij/discussions
-[3]: /getting_started/profiler/
-[4]: https://www.datadoghq.com/
-[5]: /getting_started/site/#overview
-[6]: https://plugins.jetbrains.com/plugin/19495-datadog
+[2]: /getting_started/profiler/
+[3]: https://www.datadoghq.com/
+[4]: https://plugins.jetbrains.com/plugin/19495-datadog
