@@ -84,7 +84,7 @@ Beta integrations are disabled by default but can be enabled individually:
 | Vert.x                  | 3.4-3.9.x  | Fully Supported | `vertx`, `vertx-3.4`                           |
 
 **Note**: Many application servers are Servlet compatible and are automatically covered by that instrumentation, such as Websphere, Weblogic, and JBoss.
-Also, frameworks like Spring Boot (version 3) inherently work because it usually uses a supported embedded application server, such as Tomcat, Jetty, or Netty).
+Also, frameworks like Spring Boot (version 3) inherently work because it usually uses a supported embedded application server, such as Tomcat, Jetty, or Netty.
 
 **Integrations Disabled By Default**
 
