@@ -132,7 +132,6 @@ aws ecs execute-command --cluster <CLUSTER_NAME> \
 | Kubernetes    | `kubectl exec <POD_NAME> -it datadog-cluster-agent flare <CASE_ID>` |
 | Cloud Foundry | `/var/vcap/packages/datadog-cluster-agent/datadog-cluster-agent-cloudfoundry flare -c /var/vcap/jobs/datadog-cluster-agent/config <CASE_ID>` |
 {{% /tab %}}
-
 {{< /tabs >}}
 
 ## Manual submission
