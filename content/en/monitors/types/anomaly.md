@@ -182,7 +182,7 @@ avg(<query_window>):anomalies(<metric_query>, '<algorithm>', <deviations>, direc
 : Use `true` for most monitors. Set to `false` only if submitting a count metric in which the lack of a value should _not_ be interpreted as a zero.
 
 `seasonality`
-: `hourly`, `daily` or `weekly`. Exclude this parameter when using the `basic` algorithm.
+: `hourly`, `daily`, or `weekly`. Exclude this parameter when using the `basic` algorithm.
 
 `threshold`
 : A positive number no larger than 1. The fraction of points in the `alert_window` that must be anomalous in order for a critical alert to trigger.
