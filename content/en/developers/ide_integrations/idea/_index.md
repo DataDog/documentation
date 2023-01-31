@@ -57,7 +57,7 @@ After installing the Datadog plugin and restarting IDEA, log in to Datadog:
 1. Click **Log in...**.
 1. In the browser window that opens, select your site and organization, then authorize access to the platform.
 
-**Note**: For most users, one login is all that is required. If you're using a multi-org setup, check to ensure that the correct account is active. To find out which login IDEA is using, click **Preferences** -> **Tools** -> **Datadog** and check which account is active.
+**Note**: For most users, one login is all that is required. If you're using a multi-org setup, check to ensure that the correct account is active. To find out which login IDEA is using, click **Preferences** -> **Tools** -> **Datadog**, and check which account is active.
 
 ### Link a service
 
