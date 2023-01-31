@@ -13,6 +13,16 @@ Real User Monitoring (RUM) events are valuable both individually and collectivel
 
 {{< img src="real_user_monitoring/explorer/group_into_fields.png" alt="Group into fields section of the Search query" style="width:90%;" >}}
 
+Grouping is supported for the following visualization types:
+
+- Timeseries
+- Top List
+- Table
+- Distribution
+- Geomap
+- Treemap
+- Pie Chart
+
 Your selection of fields to group, aggregate, and measure your events by do not change as you switch between visualization types.
 
 ## Aggregate by fields
