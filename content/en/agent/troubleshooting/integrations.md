@@ -24,7 +24,7 @@ If the integration is listed under **Running Checks**, but is not visible in the
 1. Check the [Metrics Explorer][3] to see if system metrics are showing up from the host. For example, on the host where you configured the integration, look for `system.cpu.user`.
 1. If there are still no metrics, check the [Datadog Logs][4] for errors and send them along with the `status` command output to [Datadog support][5].
 
-If the integration does not show up in the `status` output:
+If the integration is not listed under **Running Checks**:
 1. Make sure that the configuration file for the integration is in the right location and named correctly.
 1. [Consult the documentation][6] for the integration to check that you've configured it correctly.
 1. Check the configuration file using a [YAML parser][7] to make sure the YAML is valid.
