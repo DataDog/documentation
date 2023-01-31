@@ -53,7 +53,7 @@ Risk management detects the open source libraries used by your application at ru
 
 <div class="alert alert-info">Custom code vulnerabilities (<em>unknown vulnerabilities</em>) detection is in private beta. Request access to the feature by <a href="/help/">contacting Support</a>.</div>
 
-Risk Management can find issues in the your services' custom code, the proprietary code that implements the business logic of your application from scratch, in addition to open source and third party libraries. 
+Risk Management can find issues in your services' custom code, the proprietary code that implements the business logic of your application from scratch, in addition to open source and third party libraries. 
 
 The custom code vulnerabilities it can find include:
 
