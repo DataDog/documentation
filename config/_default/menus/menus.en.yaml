@@ -348,6 +348,10 @@ main:
     url: agent/troubleshooting/config
     weight: 1111
     parent: agent_troubleshooting
+  - name: High CPU or Memory Consumption
+    url: agent/troubleshooting/high_memory_usage/
+    weight: 1112
+    parent: agent_troubleshooting
   - name: Guides
     url: agent/guide/
     identifier: agent_guides
