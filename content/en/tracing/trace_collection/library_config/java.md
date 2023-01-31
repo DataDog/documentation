@@ -72,7 +72,7 @@ Hostname for where to send traces to. If using a containerized environment, conf
 `dd.trace.agent.port`
 : **Environment Variable**: `DD_TRACE_AGENT_PORT`<br>
 **Default**: `8126`<br>
-The port number the Agent is listening on for configured host. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `dd.trace.agent.port` or `dd.trace.agent.url` must match it.
+The port number the Agent is listening on for configured host. If the [Agent configuration][4] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `dd.trace.agent.port` or `dd.trace.agent.url` must match it.
 
 `dd.trace.agent.unix.domain.socket`
 : **Environment Variable**: `DD_TRACE_AGENT_UNIX_DOMAIN_SOCKET`<br>
@@ -82,7 +82,7 @@ This can be used to direct trace traffic to a proxy, to later be sent to a remot
 `dd.trace.agent.url`
 : **Environment Variable**: `DD_TRACE_AGENT_URL`<br>
 **Default**: `null`<br>
-The URL to send traces to. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `dd.trace.agent.port` or `dd.trace.agent.url` must match it. The URL value can start with `http://` to connect using HTTP or with `unix://` to use a Unix Domain Socket. When set this takes precedence over `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`. Available for versions 0.65+.
+The URL to send traces to. If the [Agent configuration][4] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `dd.trace.agent.port` or `dd.trace.agent.url` must match it. The URL value can start with `http://` to connect using HTTP or with `unix://` to use a Unix Domain Socket. When set this takes precedence over `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`. Available for versions 0.65+.
 
 `dd.trace.agent.timeout`
 : **Environment Variable**: `DD_TRACE_AGENT_TIMEOUT`<br>
@@ -119,7 +119,7 @@ Available since version 1.3.0.
 
 `dd.trace.annotations`
 : **Environment Variable**: `DD_TRACE_ANNOTATIONS`<br>
-**Default**: ([listed here][4])<br>
+**Default**: ([listed here][5])<br>
 **Example**: `com.some.Trace;io.other.Trace`<br>
 A list of method annotations to treat as `@Trace`.
 
@@ -253,19 +253,23 @@ When `false`, informational startup logging is disabled. Available for versions 
 **Default**: `false`<br>
 When `true`, user principal is collected. Available for versions 0.61+.
 
+`dd.instrumentation.telemetry.enabled`
+: **Environment Variable**: `DD_INSTRUMENTATION_TELEMETRY_ENABLED`<br>
+**Default**: `true`<br>
+When `true`, the tracer collects [telemetry data][6]. Available for versions 0.104+. Defaults to `true` for versions 0.115+.
 
 **Note**:
 
 - If the same key type is set for both, the system property configuration takes priority.
 - System properties can be used as JVM parameters.
-- By default, JMX metrics from your application are sent to the Datadog Agent thanks to DogStatsD over port `8125`. Make sure that [DogStatsD is enabled for the Agent][5].
+- By default, JMX metrics from your application are sent to the Datadog Agent thanks to DogStatsD over port `8125`. Make sure that [DogStatsD is enabled for the Agent][7].
 
-  - If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to `true`][6], and that port `8125` is open on the Agent container.
-  - In Kubernetes, [bind the DogStatsD port to a host port][7]; in ECS, [set the appropriate flags in your task definition][2].
+  - If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to `true`][8], and that port `8125` is open on the Agent container.
+  - In Kubernetes, [bind the DogStatsD port to a host port][9]; in ECS, [set the appropriate flags in your task definition][2].
 
 ### Integrations
 
-See how to disable integrations in the [integrations][8] compatibility section.
+See how to disable integrations in the [integrations][10] compatibility section.
 
 ### Examples
 
@@ -385,11 +389,11 @@ Would produce the following result:
 
 {{< img src="tracing/setup/java/jmxfetch_example.png" alt="JMX fetch example"  >}}
 
-See the [Java integration documentation][9] to learn more about Java metrics collection with JMX fetch.
+See the [Java integration documentation][11] to learn more about Java metrics collection with JMX fetch.
 
 ### B3 headers extraction and injection
 
-Datadog APM tracer supports [B3 headers extraction][10] and injection for distributed tracing.
+Datadog APM tracer supports [B3 headers extraction][12] and injection for distributed tracing.
 
 Distributed headers injection and extraction is controlled by configuring injection/extraction styles. Currently two styles are supported:
 
@@ -419,11 +423,12 @@ If multiple extraction styles are enabled extraction attempt is done on the orde
 [1]: /getting_started/tagging/unified_service_tagging/
 [2]: /agent/amazon_ecs/#create-an-ecs-task
 [3]: /tracing/setup/docker/
-[4]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
-[5]: /developers/dogstatsd/#setup
-[6]: /agent/docker/#dogstatsd-custom-metrics
-[7]: /developers/dogstatsd/
-[8]: /tracing/compatibility_requirements/java#disabling-integrations
-[9]: /integrations/java/?tab=host#metric-collection
-[10]: https://github.com/openzipkin/b3-propagation
-[13]: /agent/guide/network/#configure-ports
+[4]: /agent/guide/network/#configure-ports
+[5]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
+[6]: /tracing/configure_data_security/#telemetry-collection
+[7]: /developers/dogstatsd/#setup
+[8]: /agent/docker/#dogstatsd-custom-metrics
+[9]: /developers/dogstatsd/
+[10]: /tracing/compatibility_requirements/java#disabling-integrations
+[11]: /integrations/java/?tab=host#metric-collection
+[12]: https://github.com/openzipkin/b3-propagation

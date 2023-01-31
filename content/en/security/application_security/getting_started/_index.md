@@ -28,9 +28,11 @@ further_reading:
   text: "Secure serverless applications with Datadog ASM"
 ---
 
-Set up your application to [detect and protect against threats][1] targeting your production systems, using the Datadog library for your application language. You can monitor application security for apps hosted directly on a server, Docker, Kubernetes, AWS ECS, and (for supported languages) AWS Fargate.
+Set up your application to [detect and protect against threats][1] targeting your production systems, and to [manage risks][2] in your code and its open source dependencies, using the Datadog library for your application language. You can detect vulnerabilities and threats for apps hosted on a server, Docker, Kubernetes, AWS ECS, and (for supported languages) AWS Fargate.
 
 {{% appsec-getstarted %}}
+
+{{% appsec-getstarted-with-rc %}}
 
 Select your application language for details on how to do these steps for your language and infrastructure types.
 
@@ -42,4 +44,5 @@ Select your application language for details on how to do these steps for your l
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/
+[1]: /security/application_security/threats/
+[2]: /security/application_security/risk_management/
