@@ -1,10 +1,19 @@
 #!/usr/bin/env python3
 from os import getenv, path
+from sys import exit
 import requests
 
-def get_transifex_files_out_of_sync():
-    print('Starting...')
+
+def list_out_of_sync_transifex_resources():
+    """
+    Identifies transifex resources that no longer exist in the repo and can be removed from the Transifex.
+    """
+    print('Identifying files out of sync with Transifex...')
     transifex_api_key = getenv("TRANSIFEX_API_KEY")
+
+    if not transifex_api_key:
+        print('Transifex API key not found, exiting')
+        exit(1)
 
     next_page_url = 'https://rest.api.transifex.com/resources?filter[project]=o:datadog:p:documentation_loc'
 
@@ -27,4 +36,5 @@ def get_transifex_files_out_of_sync():
         next_page_url = resources_dict.get('links', {}).get('next', '')
 
 
-get_transifex_files_out_of_sync()
+if __name__ == "__main__":
+    list_out_of_sync_transifex_resources()
