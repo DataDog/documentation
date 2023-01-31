@@ -87,7 +87,7 @@ data:
 kubectl apply -f aws-logging-configmap.yaml
 {{< /code-block >}}
 
-4. Create an IAM policy and attach it to the pod execution role to allow the log router running on AWS Fargate to write to the Kinesis Data Firehose. You can use the example below, replacing the ARN in the **Resource** field with the ARN of your delivery stream.
+4. Create an IAM policy and attach it to the pod execution role to allow the log router running on AWS Fargate to write to the Kinesis Data Firehose. You can use the example below, replacing the ARN in the **Resource** field with the ARN of your delivery stream, as well as specifying your region and account ID.
 
 {{< code-block lang="json" filename="allow_kinesis_put_permission.json" disable_copy="false" collapsible="false" >}}
 {
@@ -224,7 +224,7 @@ Expected output:
 
 Logs from this configuration require some attributes to be remapped to maximize consistency with standard Kubernetes tags in Datadog.  
 1. Go to the [Datadog Log Pipelines][3] page.
-2. Create a new pipeline with **Name** `EKS Fargate Log Pipeline` filtered on **Tags:** `service:aws source:aws`.
+2. Create a new pipeline with **Name** `EKS Fargate Log Pipeline` and **Filter** `service:aws source:aws`.
 3. Create four Remapper processors to remap the following attributes to tag keys:
  | Attribute to remap | Target Tag Key |
  |--------------------|----------------|
@@ -246,3 +246,5 @@ Logs from this configuration require some attributes to be remapped to maximize 
 [5]: /logs/log_configuration/processors/?tab=ui#remapper
 [6]: https://kubernetes.io/docs/tasks/tools/
 [7]: https://aws.amazon.com/cli/
+[8]: https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html
+[9]: https://docs.aws.amazon.com/eks/latest/userguide/fargate-getting-started.html
