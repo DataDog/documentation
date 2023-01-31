@@ -874,13 +874,13 @@ Failed to reinitialize Datadog-Plugin Tracer, Cannot enable traces collection vi
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/
-[2]: https://docs.datadoghq.com/agent/cluster_agent/admission_controller/
+[2]: /agent/cluster_agent/admission_controller/
 [3]: https://plugins.jenkins.io/datadog/
 [4]: https://wiki.jenkins-ci.org/display/JENKINS/Plugins#Plugins-Howtoinstallplugins
 [7]: https://app.datadoghq.com/ci/pipelines
 [8]: https://app.datadoghq.com/ci/pipeline-executions
 [9]: https://plugins.jenkins.io/kubernetes/#plugin-content-pod-template
-[10]: https://docs.datadoghq.com/continuous_integration/pipelines/jenkins/?tab=usingui#enable-job-log-collection
-[11]: https://docs.datadoghq.com/continuous_integration/pipelines/jenkins/?tab=usingui#infrastructure-metric-correlation
-[12]: https://docs.datadoghq.com/continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
+[10]: /continuous_integration/pipelines/jenkins/#enable-job-log-collection
+[11]: /continuous_integration/pipelines/jenkins/#infrastructure-metric-correlation
+[12]: /continuous_integration/pipelines/custom_tags_and_metrics/
 [14]: /agent/
