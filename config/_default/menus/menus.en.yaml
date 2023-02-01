@@ -7328,18 +7328,6 @@ api:
         - SendInvitations
       unstable: []
       order: 8
-  - name: Create a service account
-    url: '#create-a-service-account'
-    identifier: users-create-a-service-account
-    parent: users
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - CreateServiceAccount
-      unstable: []
-      order: 1
   - name: Update a user
     url: '#update-a-user'
     identifier: users-update-a-user
@@ -9149,6 +9137,18 @@ api:
         - ListServiceAccountApplicationKeys
       unstable: []
       order: 6
+  - name: Create a service account
+    url: '#create-a-service-account'
+    identifier: service-accounts-create-a-service-account
+    parent: service-accounts
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateServiceAccount
+      unstable: []
+      order: 1
   - name: Service Definition
     url: /api/latest/service-definition/
     identifier: service-definition
