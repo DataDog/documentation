@@ -11,7 +11,7 @@ This article walks you through architectural best practices for deploying Observ
 
 ### Start with one aggregator
 
-Most users of Observability Pipelines Worker have complex production environments with many clusters, services, and observability tools. A common mistake is to plan multiple Observability Pipelines Worker deployments instead of starting with one. Datadog recommends to start by deploying a single Observability Pipelines Worker aggregator and onboarding one service at a time. This allows you to get set up quickly and gain experience operating Observability Pipelines Worker before adopting more complex deployment strategies. 
+Most users of Observability Pipelines Worker (OPW) have complex production environments with many clusters, services, and observability tools. A common mistake is to plan multiple Observability Pipelines Worker deployments instead of starting with one. Datadog recommends to start by deploying a single Observability Pipelines Worker aggregator and onboarding one service at a time. This allows you to get set up quickly and gain experience operating Observability Pipelines Worker before adopting more complex deployment strategies. 
 
  ## Deployment roles
 
@@ -19,13 +19,17 @@ Most users of Observability Pipelines Worker have complex production environment
 
  ### Agent role
 
- As an agent, the Observability Pipelines Worker is deployed on each individual node, shifting data collection and processing to the edge.
+ As an agent, the Observability Pipelines Worker (OPW) is deployed on each individual node, shifting data collection and processing to the edge:
 
- Data can be received from other agents on the same node (for example, from the Datadog Agent) or collected directly from the node itself (for example, tailing log files). The goal is to centralize egress on the node through the Observability Pipelines Worker and take advantage of underutilized edge resources. Most users can deploy Observability Pipelines Worker as an agent without increasing their provisioned resources.
+{{< img src="observability_pipelines/production_deployment_overview/agent_role.png" alt="There are two separate nodes, each containing services and the Observability Pipelines Worker, with data flowing from the Worker to the sinks" style="width:80%;" >}}
+
+Data can be received from other agents on the same node (for example, from the Datadog Agent) or collected directly from the node itself (for example, tailing log files). The goal is to centralize egress on the node through the Observability Pipelines Worker and take advantage of underutilized edge resources. Most users can deploy Observability Pipelines Worker as an agent without increasing their provisioned resources.
 
 ### Aggregator role
 
-As an aggregator, the Observability Pipelines Worker is deployed as a standalone service on dedicated nodes, shifting data processing and routing to the dedicated nodes.
+As an aggregator, the Observability Pipelines Worker (OPW) is deployed as a standalone service on dedicated nodes, shifting data processing and routing to the dedicated nodes:
+
+{{< img src="observability_pipelines/production_deployment_overview/aggregator_role.png" alt="There is an Observability Pipelines Worker aggregator containing multiple Workers that are receiving data from the network load balancer and sending data to different sinks" style="width:100%;" >}}
 
 Agents are configured to forward data to your Observability Pipelines Worker aggregators. Datadog recommends this role for users looking to get started with Observability Pipelines Worker because it is easy to set up and integrate into any infrastructure.
 
