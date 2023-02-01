@@ -364,6 +364,8 @@ translation_data_checks:manual:
     - python3 ./local/bin/py/translations/translation_data_checks.py
   rules:
     - when: manual
+  dependencies:
+    - build_preview
 
 # Uploads git ignored source (EN) files to Transifex as part of the nightly build.
 # The translation syncing pipeline is triggered by github webhook, but these files are not in git.
