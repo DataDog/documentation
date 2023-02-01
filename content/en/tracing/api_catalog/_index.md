@@ -8,7 +8,7 @@ further_reading:
   text: "Datadog Service Catalog"
 ---
 
-{{< callout url="https://forms.gle/TgezmEhUPXzebvv27" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
+{{< callout url="https://forms.gle/TgezmEhUPXzebvv27" >}}
   Datadog API Catalog is in beta! Use this form request access. 
 {{< /callout >}} 
 
