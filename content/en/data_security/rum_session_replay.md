@@ -37,10 +37,10 @@ You have several options when it comes to collecting and redacting data captured
 
 ### Event tracking
 You have the option to redact the data that is captured by RUM before it is sent and stored in Datadog through advanced configuration options for the following methods:
-- [beforeSend API][]
-- [iOS][]
-- [Android][]
-- [Flutter][]
+- [beforeSend API][1]
+- [iOS][2]
+- [Android][3]
+- [Flutter][4]
 
 Additionally, you can turn off automatic tracking of user interactions and page views to only capture the interaction of your choice. By default, we use target content to generate action names from actions automatically collected by the SDK. You can [explicitly override][5] this behavior with any given name.
 
