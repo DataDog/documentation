@@ -5,7 +5,7 @@ kind: documentation
 
 ## Overview
 
-The Watchdog alerts feature proactively detects service, infrastructure, and log anomalies (beta). Watchdog scans all of your monitored technologies for unusual behavior. If the unusual behavior matches one of Watchdog's anomaly patterns, Watchdog creates an alert.
+The Watchdog alerts feature proactively detects service, infrastructure, and log anomalies. Watchdog scans all of your monitored technologies for unusual behavior. If the unusual behavior matches one of Watchdog's anomaly patterns, Watchdog creates an alert.
 
 ## Alerts
 
