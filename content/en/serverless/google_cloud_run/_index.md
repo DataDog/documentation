@@ -218,7 +218,7 @@ for managing container images, secrets, or deployments, you may use those instea
 
 ### Results
 
-You should know be able to see metrics and traces of your Cloud Run application in the Datadog UI!
+You should be able to see metrics and traces of your Cloud Run application in the Datadog UI!
 You can submit custom metrics using a [DogStatsd client][7]. Only `DISTRIBUTION` metrics should be used.
 
 ### Logs
