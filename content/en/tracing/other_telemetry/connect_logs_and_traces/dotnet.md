@@ -32,7 +32,13 @@ The .NET Tracer supports the following logging libraries:
 - [NLog][4]
 - [Microsoft.Extensions.Logging][5] (added in v1.28.6)
 
-## Getting started
+## Configure log collection
+
+Ensure that log collection is configured in the Datadog Agent and that the [Logs Agent configuration][15] for the specified files to tail is set to `source: csharp` so log pipelines can parse the log files. For more information, see [C# Log Collection][7]. If the `source` is set to a value other than `csharp`, you may need to add a [trace remapper][8] to the appropriate log processing pipeline for the correlation to work correctly.
+
+<div class="alert alert-warning"><strong>Note:</strong> Automatic log collection only works for logs formatted as JSON. Alternatively, use custom parsing rules.</div>
+
+## Configure injection in logs
 
 To inject correlation identifiers into your log messages, follow the instructions for your logging library.
 
@@ -324,12 +330,6 @@ You can read more about using BeginScope to create structured log messages for t
 - Serilog: [The semantics of ILogger.BeginScope()][12]
 - NLog: [NLog properties with Microsoft Extension Logging][13]
 - log4net: [Using BeginScope][14]
-
-## Configure log collection
-
-Ensure that log collection is configured in the Datadog Agent and that the [Logs Agent configuration][15] for the specified files to tail is set to `source: csharp` so log pipelines can parse the log files. For more information, see [C# Log Collection][7]. If the `source` is set to a value other than `csharp`, you may need to add a [trace remapper][8] to the appropriate log processing pipeline for the correlation to work correctly.
-
-<div class="alert alert-warning"><strong>Note:</strong> Automatic log collection only works for logs formatted as JSON. Alternatively, use custom parsing rules.</div>
 
 ## Further Reading
 
