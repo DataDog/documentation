@@ -39,7 +39,7 @@ When aggregating by Fields, all logs matching your query filter are aggregated i
 
 **Note**: Individual logs with multiple values for a single facet belong to that many aggregates. For instance, a log having the `team:sre` and the `team:marketplace` tags are counted once in the `team:sre` aggregate and once in the `team:marketplace` aggregate.
 
-The Fields aggregation supports one dimension for the [Top list][4] visualization, and up to three dimensions for the [Timeseries][5] and [Table][6] visualizations. When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, then according to the third dimension within the top values of the second dimension.
+The Fields aggregation supports one dimension for the [Top list][4] visualization, and up to four dimensions for the [Timeseries][5] and [Table][6] visualizations. When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, then according to the third dimension within the top values of the second dimension.
 
 ### Multiple queries
 
