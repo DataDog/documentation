@@ -361,8 +361,9 @@ translation_data_checks:manual:
   environment: "preview"
   script:
     - export TRANSIFEX_API_KEY=$(get_secret 'translate_token')
-    - python3 ./local/bin/py/translation_data_checks
-  when: manual
+    - python3 ./local/bin/py/translations/translation_data_checks
+  rules:
+    - when: manual
 
 # Uploads git ignored source (EN) files to Transifex as part of the nightly build.
 # The translation syncing pipeline is triggered by github webhook, but these files are not in git.
