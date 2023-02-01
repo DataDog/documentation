@@ -8,10 +8,6 @@ further_reading:
   text: 'Session Replay'
 ---
 
-{{< beta-callout url="https://forms.gle/48wkkRoZfwhn74ycA" >}}
-Heatmaps are in private beta, but you can request access using this form. We'll reach out directly once approved.
-{{< /beta-callout >}} 
-
 {{< img src="real_user_monitoring/heatmaps/heatmap.jpeg" alt="An overview of the heatmap functionality." style="width:100%;">}}
 
 A heatmap (or heat map) is a visualization of your user's Session Replay data, where your user's interactions (clicks) are represented by color in the image. Seeing where a user clicks helps you understand if users engage with your page the way you expect and if they are finding all of your call to actions (CTAs) and important buttons. Visualizing these interactions in a heatmap makes it easy to understand complex data at a glance. Taking the insights from heatmaps helps you make UI decisions to optimize your user experience and increase retention.
@@ -33,7 +29,7 @@ datadogRum.init({
 
 ### Getting started
 
-On the [heatmap page][3], select your application and view. A heatmap displays the aggregrate of where all users (sessions) clicked on a single view, with the view being a single page within an application. Each session is one user's activity and includes everything they did, including all pages they viewed and all actions they clicked.
+On the view list page, select your application and view. This will take you to the[heatmap page][3]for a particular view. You can switch the view being shown with the view and application selector at the top.A heatmap displays the aggregrate of where all users (sessions) clicked on a single view, with the view being a single page within an application. Each session is one user's activity and includes everything they did, including all pages they viewed and all actions they clicked.
 
 To adjust the filters (to look at specific geography, for example), you can add a filter from the panel on the left side.
 
@@ -46,6 +42,8 @@ The right panel helps you understand the data in the heatmap:
 - The popularity of the selected page in the context of the selected application.
 - The total number of unique users viewing the page.
 - The actions on the page where a frustration signal occurred.
+
+You can click into any of these queries to pivot to an analytical view of these data points.
 
 Below the panel are all actions that occurred on the page, listed by frequency. When you click into an action, you can understand more about that interaction, for example:
 
