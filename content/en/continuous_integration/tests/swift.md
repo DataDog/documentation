@@ -104,7 +104,7 @@ end
 {{% /tab %}}
 {{% tab "GitHub Actions" %}}
 
-If you use GitHub, you can use the [Swift Test Action][1] from GitHub marketplace to automatically configure and run your tests. By default, the rest of configuration explained in this document can be skipped (except the configuration of the action itself), but can also use the configuration environment variables for disabling or configuring extra functionality.
+If you use GitHub, you can use the [Swift test action][1] from GitHub marketplace to automatically configure and run your tests. By default, the rest of the configuration explained in this document can be skipped (except the configuration of the action itself), but can also use the configuration environment variables for disabling or configuring extra functionality.
 
 This option has the benefit that no code changes are needed but has the drawback that it is less flexible to configure and run.
 
