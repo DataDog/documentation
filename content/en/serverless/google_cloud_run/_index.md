@@ -197,8 +197,10 @@ Using your GCP container registry:
 
 {{% /tab %}}
 {{% tab "gcloud CLI" %}}
-Using an environment variable (unsafe) and allowing any external connection to reach the service, this one line command
-will deploy the service. It expects `DD_API_KEY` to be set as environment variable and a service listening to port 80
+For testing purpose, the Datadog API key can be exposed as an environment variable. That is unsafe due to its value
+being displayed in plaintext. Allowing any external connection to reach the service, this one line command will deploy
+the service. It expects `DD_API_KEY` to be set as
+environment variable and a service listening to port 80
 
 ```shell
 gcloud run deploy APP_NAME --image=gcr.io/YOUR_PROJECT/APP_NAME \
