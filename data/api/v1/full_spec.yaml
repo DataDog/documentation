@@ -3001,6 +3001,12 @@ components:
             Only hosts that match one of the defined tags are imported into Datadog.'
           example: key:value,filter:example
           type: string
+        is_cspm_enabled:
+          default: false
+          description: When enabled, Datadog performs configuration checks across
+            your Google Cloud environment by continuously scanning every resource.
+          example: true
+          type: boolean
         private_key:
           description: Your private key name found in your JSON service account key.
           example: private_key

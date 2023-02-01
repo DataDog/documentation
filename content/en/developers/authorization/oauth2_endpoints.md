@@ -7,9 +7,9 @@ further_reading:
   tag: "Documentation"
   text: "Learn about OAuth2 Authorization"
 ---
-{{< beta-callout btn_hidden="true" >}}
+{{< callout btn_hidden="true" >}}
   The Datadog Developer Platform is currently in beta. If you don't have access, contact apps@datadoghq.com.
-{{< /beta-callout >}} 
+{{< /callout >}} 
 
 ## Overview
 
@@ -24,7 +24,7 @@ Applications using protected Datadog resources must be authorized by a user befo
 
 #### Overview
 
-To start the authorization code grant flow, an application makes a `GET` request to Datadog’s authorization endpoint. This redirects a user to Datadog’s authorization-grant flow and renders a consent page displaying the list of scopes requested by your application and a prompt for the user to authorize access. This also returns the [Datadog site][3] that the request is being made from. 
+To start the authorization code grant flow, an application makes a `GET` request to Datadog’s authorization endpoint. This redirects a user to Datadog’s authorization-grant flow and renders a consent page displaying the list of scopes requested by your application and a prompt for the user to authorize access. This also returns the [Datadog site][1] that the request is being made from. 
 
 #### Request 
 In the authorization request, the application constructs the redirect URI by adding the following parameters to the query component of the URI using the `application/x-www-form-urlencoded` format: 
@@ -52,22 +52,22 @@ If a user successfully grants the access request, your application [obtains an a
 
 If the request fails due to an invalid `redirect_uri` or `client_id`, the user is not redirected to the specified URI; instead, a Datadog error page displays.
 
-If a user denies authorization, or the request fails due to other reasons, the user is redirected to the `redirect_uri` with an [error][1] parameter in the query component.
+If a user denies authorization, or the request fails due to other reasons, the user is redirected to the `redirect_uri` with an [error][2] parameter in the query component.
 
 ## Obtain an authorization code
 
 ### `POST /oauth2/v1/authorize`
 
 #### Overview
-When a user clicks the **Authorize** button on the consent page, a `POST` request is automatically sent to the [authorization endpoint][2] to verify the request and return a unique authorization code. The user is redirected to your application’s `redirect_uri` with the authorization code parameter in the query component.
+When a user clicks the **Authorize** button on the consent page, a `POST` request is automatically sent to the [authorization endpoint][3] to verify the request and return a unique authorization code. The user is redirected to your application’s `redirect_uri` with the authorization code parameter in the query component.
 
 #### Request 
 Your application does not need to make this authorization request. This step is a response to the previous user authorization request and is automatically requested by Datadog when a user successfully authorizes an application. 
 
 
-[1]: https://datatracker.ietf.org/doc/html/rfc6749#section-4.1.2.1
-[2]: https://datatracker.ietf.org/doc/html/rfc6749#section-3.1
-[3]: https://docs.datadoghq.com/getting_started/site/
+[1]: https://docs.datadoghq.com/getting_started/site/
+[2]: https://datatracker.ietf.org/doc/html/rfc6749#section-4.1.2.1
+[3]: https://datatracker.ietf.org/doc/html/rfc6749#section-3.1
 {{% /tab %}}
 {{% tab "Token Endpoints" %}}
 

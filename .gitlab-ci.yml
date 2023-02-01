@@ -361,7 +361,7 @@ translation_data_checks:manual:
   environment: "preview"
   script:
     - export TRANSIFEX_API_KEY=$(get_secret 'translate_token')
-    - python3 ./local/bin/py/translations/translation_data_checks
+    - python3 ./local/bin/py/translations/translation_data_checks.py
   rules:
     - when: manual
 
