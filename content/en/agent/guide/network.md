@@ -201,12 +201,10 @@ Add all of the `ip-ranges` to your inclusion list. While only a subset are activ
 
 <div class="alert alert-warning">
 All outbound traffic is sent over SSL through TCP / UDP.
+Ensure the Agent is only accessible by your applications or trusted network sources using a firewall rule or similar network restriction. Untrusted access can allow malicious actors to perform several invasive actions, including but not limited to writing traces and metrics to your Datadog account, or obtaining information about your configuration and services.
 </div>
 
 Open the following ports to benefit from all the **Agent** functionalities:
-<div class="alert alert-warning">
-You should ensure the Agent is only accessible by your applications or trusted network sources using a firewall rule or similar network restriction. Untrusted access could allow malicious actors to perform several invasive actions, including but not limited to writing traces and metrics to your Datadog account, or obtaining information about your configuration and services.
-</div>
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
