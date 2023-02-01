@@ -104,7 +104,7 @@ Origin detection is supported in Agent 6.10.0+ and allows DogStatsD to detect wh
 
 Origin detection in non-Kubernetes environments is based on an extension of the dogstatsd protocol: [Datagram Format and Shell Usage](https://docs.datadoghq.com/developers/dogstatsd/datagram_shell/?tab=metrics#dogstatsd-protocol-v12). To enable the feature in the agent the environment variable `DD_DOGSTATSD_ORIGIN_DETECTION_CLIENT=true` needs to be set.
 
-**Note:** Origin Detection is not supported for Fargate environments.
+**Note**: Origin Detection is not supported for Fargate environments.
 
 [1]: /developers/dogstatsd/unix_socket/
 {{% /tab %}}
