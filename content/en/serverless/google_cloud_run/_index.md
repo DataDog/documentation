@@ -20,11 +20,13 @@ metrics, and direct log collection.
 
 ## Getting started
 
+To deploy a sample application in one click, without the need to
+follow the rest of the steps, you can use the Cloud Run Button of [these examples][12].
+
 ### Prerequisites
 
 Make sure you have a [Datadog API Key][10] and are using a programming
-language [supported by a Datadog tracing library][2]. To deploy a sample application in one click, without the need to
-follow the rest of the steps, you can use the Cloud Run Button of [these examples][12].
+language [supported by a Datadog tracing library][2].
 
 ### Build your container with Datadog instrumentation
 
