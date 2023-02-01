@@ -68,7 +68,7 @@ The following profiling features are available in the following minimum versions
 <div class="alert alert-warning">
   <strong>Note:</strong> Datadog's automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, Datadog's .NET Tracer with Profiler enabled). To ensure maximum visibility, run only one APM solution in your application environment.
 
-  Because APM tracing also relies on the CLR Profiling API, if you want to stop collecting .NET profiles but continue receiving .NET traces, set `DD_PROFILING_ENABLED=0` but keep `CORECLR_ENABLE_PROFILING=1`.
+  Because APM tracing also relies on the CLR Profiling API, if you want to stop collecting .NET profiles but continue receiving .NET traces, set <code>DD_PROFILING_ENABLED=0</code> but keep <code>CORECLR_ENABLE_PROFILING=1</code>.
 </div>
 
 If you are already using Datadog, upgrade your Agent to version [7.20.2][1]+ or [6.20.2][2]+. The profiler ships together with the tracer, so install it using the following steps, depending on your operating system.
