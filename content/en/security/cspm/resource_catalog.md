@@ -11,7 +11,7 @@ further_reading:
   text: "Cloud Resource Schema"
 ---
 
-{{< callout url="https://dashcon.io/security" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
+{{< callout url="https://dashcon.io/security" >}}
   Resource Catalog is in private beta. Fill out this form if you would like to access it.
 {{< /callout >}}
 
