@@ -20,34 +20,22 @@ metrics, and direct log collection.
 
 ## Getting started
 
-To deploy a sample application in one click, without the need to
-follow the rest of the steps, you can use the Cloud Run Button of [these examples][12].
-
 ### Prerequisites
 
 Make sure you have a [Datadog API Key][10] and are using a programming
 language [supported by a Datadog tracing library][2].
 
+### Deploy a sample application in one click
+
+To deploy a sample application without the need to follow the rest of the guide, you can use
+the [Cloud Run Button](https://github.com/GoogleCloudPlatform/cloud-run-button)
+from one of [these examples][12]. The installation process will ask the required
+details.
+
 ### Build your container with Datadog instrumentation
 
-Cloud Run requires applications to be packaged in a container. From the application root folder use one
-of the following methods.
-
-#### Using Datadog buildpack
-
-[`Pack Buildpacks`][4] provide a convenient way to package your container without using a Dockerfile. This example
-will use the GCP container registry
-and [Datadog serverless buildpack](https://registry.hub.docker.com/r/datadog/serverless-buildpack).
-Build your application by running the following:
-
-   ```shell
-   pack build --builder=gcr.io/buildpacks/builder \
-   --buildpack from=builder \
-   --buildpack datadog/serverless-buildpack:beta4 \
-   gcr.io/YOUR_PROJECT/YOUR_APP_NAME
-   ```
-
-**Note**: Not compatible with Alpine.
+Cloud Run requires applications to be packaged in a container. From the application root folder follow the steps
+for either Dockerfile or buildpack build.
 
 #### Using Dockerfile
 
@@ -164,9 +152,25 @@ docker build --tag gcr.io/YOUR_PROJECT/YOUR_APP_NAME .
 
 ```
 
+#### Using Datadog buildpack
+
+[`Pack Buildpacks`][4] provide a convenient way to package your container without using a Dockerfile. This example
+will use the GCP container registry and Datadog serverless buildpack. Build your application by running the following
+command making sure to use the latest tag for [`datadog/serverless-buildpack`][13]:
+
+   ```shell
+   pack build --builder=gcr.io/buildpacks/builder \
+   --buildpack from=builder \
+   --buildpack datadog/serverless-buildpack:beta4 \
+   gcr.io/YOUR_PROJECT/YOUR_APP_NAME
+   ```
+
+**Note**: Not compatible with Alpine.
+
 ### Push the container image to the registry
 
-Using your GCP container registry:
+Make sure you are logged in `gcloud` and authorized docker with `gcloud auth configure-docker`. Then push to your GCP
+container registry:
 
    ```shell
    docker push gcr.io/YOUR_PROJECT/YOUR_APP_NAME
@@ -293,3 +297,5 @@ GCP buildpack requires a [Procfile][11] for some languages such as Python.
 [11]: https://github.com/GoogleCloudPlatform/buildpack-samples/blob/master/sample-python/Procfile
 
 [12]: https://github.com/DataDog/crpb/tree/main
+
+[13]: https://registry.hub.docker.com/r/datadog/serverless-buildpack
