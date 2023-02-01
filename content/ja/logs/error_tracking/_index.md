@@ -12,9 +12,9 @@ kind: documentation
 title: ログのエラー追跡
 ---
 
-{{< beta-callout btn_hidden="true" >}}
+{{< callout btn_hidden="true" >}}
   ログのエラー追跡はベータ版です。
-{{< /beta-callout >}} 
+{{< /callout >}} 
 
 ## 概要
 
