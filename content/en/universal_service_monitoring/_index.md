@@ -287,11 +287,13 @@ DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true
 Set the following attributes on your nodes:
 
 ```rb
-node["datadog"]["system_probe"]["service_monitoring_enabled" = true
+node["datadog"]["system_probe"]["service_monitoring_enabled"] = true
 ```
 
 {{% /tab %}}
 {{% tab "Puppet" %}}
+
+Enable `service_monitoring_enabled`.
 
 ```conf
 class { 'datadog_agent::system_probe':
