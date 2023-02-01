@@ -1,5 +1,5 @@
 ---
-title: AWS EKS Fargate logs with Kinesis Data Firehose
+title: Send AWS EKS Fargate Logs with Kinesis Data Firehose
 kind: guide
 further_reading:
 - link: https://docs.datadoghq.com/logs/log_configuration/processors/
@@ -127,6 +127,7 @@ aws iam create-policy \
          --policy-arn arn:aws:iam::<ACCOUNTID>:policy/FluentBitEKSFargate \
          --role-name $POD_EXEC_ROLE
 {{< /code-block >}}
+
 ### Deploy a sample application
 
 To generate logs and test the Kinesis pipeline, deploy a sample workload to your EKS Fargate cluster.
@@ -170,7 +171,7 @@ To generate logs and test the Kinesis pipeline, deploy a sample workload to your
 
 ### Validation
 
-1. Verify that `sample-app` pods are running in the namespace `fargatge-namespace`.
+1. Verify that `sample-app` pods are running in the namespace `fargate-namespace`.
 
  {{< code-block lang="bash" filename="" disable_copy="false" collapsible="false" >}}
  kubectl get pods -n fargate-namespace
