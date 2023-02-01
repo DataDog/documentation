@@ -293,7 +293,7 @@ node["datadog"]["system_probe"]["service_monitoring_enabled"] = true
 {{% /tab %}}
 {{% tab "Puppet" %}}
 
-Enable `service_monitoring_enabled`.
+Set `service_monitoring_enabled`:
 
 ```conf
 class { 'datadog_agent::system_probe':
