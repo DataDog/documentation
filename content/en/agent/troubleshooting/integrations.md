@@ -6,13 +6,13 @@ aliases:
 further_reading:
 - link: "/agent/troubleshooting/debug_mode/"
   tag: "Agent Troubleshooting"
-  text: "Agent Debug Mode"
+  text: "Agent debug mode"
 - link: "/agent/troubleshooting/send_a_flare/"
   tag: "Agent Troubleshooting"
-  text: "Send an Agent Flare"
+  text: "Send an Agent flare"
 - link: "/agent/troubleshooting/agent_check_status/"
   tag: "Agent Troubleshooting"
-  text: "Get the Status of an Agent Check"
+  text: "Get the status of an Agent check"
 ---
 
 Datadog integrations are configured through the Datadog Agent using YAML configuration files. For the path to the configuration directory for your operating system, consult the [Agent Configuration Files][1] documentation.
@@ -22,7 +22,7 @@ If an integration that you've configured is not showing up in Datadog, run the [
 If the integration is listed under **Running Checks**, but is not visible in the Datadog app:
 1. Make sure there are no errors or warnings listed under the integration's entry in the `status` output.
 1. Check the [Metrics Explorer][3] to see if system metrics are showing up from the host. For example, on the host where you configured the integration, look for `system.cpu.user`.
-1. If there are still no metrics, check the [Datadog Logs][4] for errors and send them along with the `status` command output to [Datadog support][5].
+1. If there are still no metrics, check the [Datadog logs][4] for errors and send them along with the `status` command output to [Datadog support][5].
 
 If the integration is not listed under **Running Checks**:
 1. Make sure that the configuration file for the integration is in the right location and named correctly.
