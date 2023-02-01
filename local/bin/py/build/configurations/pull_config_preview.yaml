@@ -1069,6 +1069,28 @@
     - action: pull-and-push-file
       branch: main
       globs:
+      - 'packages/datadog_flutter_plugin/doc/rum/otel_support.md'
+      options:
+        dest_path: '/real_user_monitoring/flutter/'
+        file_name: 'otel_support.md'
+        front_matters:
+          title: OpenTelemetry Support
+          kind: documentation
+          description: "Learn about using OpenTelemetry with RUM Flutter."
+          dependencies: ["https://github.com/DataDog/dd-sdk-flutter/blob/main/packages/datadog_flutter_plugin/doc/rum/otel_support.md"]
+          further_reading:
+            - link: "https://www.datadoghq.com/blog/monitor-flutter-application-performance-with-mobile-rum/"
+              tag: "Blog"
+              text: "Monitor Flutter application performance with Datadog Mobile RUM"
+            - link: "https://github.com/DataDog/dd-sdk-flutter"
+              tag: "GitHub"
+              text: "dd-sdk-flutter Source code"
+            - link: "real_user_monitoring/explorer/"
+              tag: "Documentation"
+              text: "Learn how to explore your RUM data"
+    - action: pull-and-push-file
+      branch: main
+      globs:
       - 'packages/datadog_flutter_plugin/doc/troubleshooting.md'
       options:
         dest_path: '/real_user_monitoring/flutter/'

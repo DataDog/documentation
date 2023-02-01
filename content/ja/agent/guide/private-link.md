@@ -10,10 +10,11 @@ kind: ガイド
 title: AWS PrivateLink を介して Datadog に接続する
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Datadog PrivateLink は、政府関係のサイトに対する Datadog の使用をサポートしていません。</div>
+{{< site-region region="us3,us5,eu,gov" >}}
+<div class="alert alert-warning">Datadog PrivateLink は、選択された Datadog サイトをサポートしていません。</div>
 {{< /site-region >}}
 
+{{< site-region region="us" >}}
 このガイドでは Datadog で [AWS PrivateLink][1] を構成および使用する方法についてご説明します。
 
 ## 概要
@@ -96,7 +97,7 @@ Datadog は、**us-east-1** で AWS PrivateLink のエンドポイントを公�
 [3]: /ja/agent/logs/?tab=tailexistingfiles#send-logs-over-https
 [4]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/vpc-endpoint-overview.html
 [5]: /ja/agent/guide/agent-commands/#restart-the-agent
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "VPC ピアリング" %}}
 
@@ -136,7 +137,7 @@ Datadog は、**us-east-1** で AWS PrivateLink のエンドポイントを公�
 
 8. VPC エンドポイントの ID をクリックしてステータスを確認します。
 9. ステータスが _Pending_ から _Available_ に変わるまでお待ちください。約 10 分要する場合があります。
-10. これを作成したら、他のリージョンからプライベートリンクを使用して Datadog にデータを送信するようトラフィックをルーティングします。詳しくは、AWS のドキュメント [VPC ピアリング接続での作業][2]を参照してください。
+10. エンドポイントが作成されたら、VPC ピアリングを使って、別のリージョンでも PrivateLink エンドポイントを利用して PrivateLink 経由で Datadog にテレメトリーを送信できるようにします。詳しくは、AWS の [VPC ピアリング接続での作業][10]ページをご覧ください。
 
 {{< img src="agent/guide/private_link/vpc_status.png" alt="VPC のステータス" style="width:80%;" >}}
 
@@ -171,7 +172,9 @@ Datadog は、**us-east-1** で AWS PrivateLink のエンドポイントを公�
 
 2. それぞれの新しい Route53 プライベートホストゾーン内に、同じ名前で A レコードを作成します。**Alias** オプションをトグルし、**Route traffic to** で、**Alias to VPC endpoint**、**us-east-1** を選び、DNS 名と関連付けられた VPC エンドポイントの DNS 名を入力します。
 
-   **注**: DNS 名を取得するには、[エンドポイントサービスのプライベート DNS 名構成ドキュメントを表示する][2]を参照してください。
+   **注**:
+      - DNS 名を取得するには、[エンドポイントサービスのプライベート DNS 名構成ドキュメントを表示する][2]を参照してください。
+      - Agent はバージョン付きのエンドポイント (例: `<version>-app.agent.datadoghq.com`) にテレメトリーを送信します。エンドポイントでは CNAME エイリアスを通じた名前解決が行われ、`metrics.agent.datadoghq.com` にルーティングされます。したがって、 `metrics.agent.datadoghq.com` のプライベートホストゾーンのセットアップのみが必要となります。
 
 {{< img src="agent/guide/private_link/create-an-a-record.png" alt="A レコードの作成" style="width:90%;" >}}
 
@@ -205,13 +208,13 @@ DNS は正しく解決しているのに、`port 443` への接続に失敗す�
 
     ```yaml
     logs_config:
-        use_http: true
+        force_use_http: true
     ```
 
    コンテナ Agent をお使いの場合は、代わりに環境変数を設定してください。
 
     ```
-    DD_LOGS_CONFIG_USE_HTTP=true
+    DD_LOGS_CONFIG_FORCE_USE_HTTP=true
     ```
 
    この構成は、AWS PrivateLink と Datadog Agent で Datadog にログを送信する際に必要で、Lambda Extension では必要ありません。詳しくは、[Agent のログ収集][8]をご参照ください。
@@ -230,6 +233,7 @@ DNS は正しく解決しているのに、`port 443` への接続に失敗す�
 [7]: /ja/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [8]: https://docs.datadoghq.com/ja/agent/logs/?tab=tailexistingfiles#send-logs-over-https
 [9]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/vpc-endpoint-overview.html
+[10]: https://docs.aws.amazon.com/vpc/latest/peering/working-with-vpc-peering.html
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -240,3 +244,4 @@ DNS は正しく解決しているのに、`port 443` への接続に失敗す�
 
 [1]: https://aws.amazon.com/privatelink/
 [2]: https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html
+{{< /site-region >}}

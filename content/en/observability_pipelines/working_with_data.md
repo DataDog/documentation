@@ -19,10 +19,7 @@ further_reading:
   - link: /observability_pipelines/reference/transforms/#metrictolog
     tag: Documentation
     text: Convert metrics to log events
-  - link: https://vector.dev/guides/level-up/csv-enrichment-guide/
-    tag: Documentation
-    text: Use CSV enrichment to provide more context to your data
-  - link: /observability_pipelines/guide/configure_observability_pipelines_with_datadog/
+  - link: /observability_pipelines/production_deployment_overview/integrate_datadog_and_the_observability_pipelines_worker/
     tag: Documentation
     text: Configure Datadog Agents to send data to Observability Pipelines
   - link: /observability_pipelines/configurations/

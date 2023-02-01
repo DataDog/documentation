@@ -221,13 +221,16 @@ module.exports = defineConfig({
 })
 {{< /code-block >}}
 
-Your `supportFile` should look the same as in `cypress<10`:
+Add the following line to the **top level** of your `supportFile`:
 
 {{< code-block lang="javascript" filename="cypress/support/e2e.js" >}}
-// your previous code is before this line
+// Your code can be before this line
+// require('./commands')
 require('dd-trace/ci/cypress/support')
-// also supported:
+// Also supported:
 // import 'dd-trace/ci/cypress/support'
+// Your code can also be after this line
+// Cypress.Commands.add('login', (email, pw) => {})
 {{< /code-block >}}
 
 If you're using other Cypress plugins, your `cypress.config.js` file should contain the following:
@@ -264,10 +267,13 @@ module.exports = (on, config) => {
 }
 {{< /code-block >}}
 
-2. Add the following line to the [`supportFile`][4]:
+2. Add the following line to the **top level** of your [`supportFile`][4]:
 {{< code-block lang="javascript" filename="cypress/support/index.js" >}}
-// your previous code is before this line
+// Your code can be before this line
+// require('./commands')
 require('dd-trace/ci/cypress/support')
+// Your code can also be after this line
+// Cypress.Commands.add('login', (email, pw) => {})
 {{< /code-block >}}
 
 

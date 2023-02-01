@@ -1,0 +1,32 @@
+{
+  "title": "Example-Create_a_new_dashboard_with_run_workflow_widget",
+  "description": "",
+  "widgets": [
+    {
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 47,
+        "height": 15
+      },
+      "definition": {
+        "title": "Run workflow title",
+        "title_size": "16",
+        "title_align": "left",
+        "time": {},
+        "type": "run_workflow",
+        "workflow_id": "2e055f16-8b6a-4cdd-b452-17a34c44b160",
+        "inputs": [
+          {
+            "name": "environment",
+            "value": "$env.value"
+          }
+        ]
+      }
+    }
+  ],
+  "template_variables": [],
+  "layout_type": "free",
+  "is_read_only": false,
+  "notify_list": []
+}

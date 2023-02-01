@@ -19,9 +19,9 @@ Cloud Security Posture Management is not available in this site.
 </div>
 {{< /site-region >}}
 
-{{< beta-callout url="#" btn_hidden="true">}}
+{{< callout url="#" btn_hidden="true">}}
 Creating and using custom CSPM rules is a beta feature, available only for Google Cloud Platform (GCP).
-{{< /beta-callout >}} 
+{{< /callout >}} 
 
 
 ## Overview

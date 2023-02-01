@@ -162,7 +162,8 @@ Don't see your desired networking framework? Datadog is continually adding addit
 | Jedis                   | 1.4+     | Fully Supported | `jedis`, `redis`                                                                         |
 | Lettuce                 | 4.0+     | Fully Supported | `lettuce`, `lettuce-4-async`, `lettuce-5-rx`                                             |
 | MongoDB                 | 3.0-4.0+ | Fully Supported | `mongo`                                                                                  |
-| RediScala               | 1.5+     | Fully Supported | `rediscala`, `redis`                                                                     |
+| RediScala | 1.5+     | Fully Supported | `rediscala`, `redis`                                                                     |
+| Redisson | 2.x-3.x      | Fully Supported | `redisson`, `redis`                                                                     |
 | SpyMemcached            | 2.12+    | Fully Supported | `spymemcached`                                                                           |
 | Vert.x Cassandra Client | 3.9		 | Fully Supported | `cassandra`																			  |
 | Vert.x Redis Client     | 3.9      | Fully Supported | `vertx-redis-client`                                                                     |
