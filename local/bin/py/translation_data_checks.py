@@ -12,7 +12,7 @@ def list_out_of_sync_transifex_resources():
     transifex_api_key = getenv("TRANSIFEX_API_KEY")
 
     if not transifex_api_key:
-        print('Transifex API key not found, exiting')
+        print('Transifex API key was not found, exiting')
         exit(1)
 
     next_page_url = 'https://rest.api.transifex.com/resources?filter[project]=o:datadog:p:documentation_loc'
