@@ -5,7 +5,7 @@ kind: documentation
 
 ## Overview
 
-The Watchdog alerts feature proactively detects service, infrastructure, and log (beta) anomalies. Watchdog scans all of your monitored technologies for unusual behavior. If the unusual behavior matches one of Watchdog's anomaly patterns, Watchdog creates an alert.
+The Watchdog alerts feature proactively detects service, infrastructure, and log anomalies (beta). Watchdog scans all of your monitored technologies for unusual behavior. If the unusual behavior matches one of Watchdog's anomaly patterns, Watchdog creates an alert.
 
 ## Alerts
 
@@ -76,7 +76,7 @@ The left side of the Watchdog alerts feed contains the search facets below. Chec
 
 | Log-specific Facet          | Description                                                                       |
 |-----------------|-----------------------------------------------------------------------------------|
-| Log Anomaly Type| Only display log anomalies of this type. The currently supported types are new log patterns and increases in existing log patterns.                                                                                             |
+| Log Anomaly Type| Only display log anomalies of this type. The supported types are new log patterns and increases in existing log patterns.                                                                                             |
 | Log Source      | Only display alerts containing logs from this source.                             |
 | Log Status      | Only display alerts containing logs of this log status.                           |
 
