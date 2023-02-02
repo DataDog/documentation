@@ -32,7 +32,7 @@ To deploy a sample application without the need to follow the rest of the guide,
 
 To build your container with Datadog instrumentation you can follow one of these two methods, depending if you are using a Dockerfile or buildpack.
 
-#### Using Dockerfile
+#### Configure the Datadog Agent using Dockerfile
 
 Using a Dockerfile to build your container, the following steps are needed:
 
@@ -146,7 +146,7 @@ docker build --tag gcr.io/YOUR_PROJECT/YOUR_APP_NAME .
 
 ```
 
-#### Using Datadog buildpack
+#### Configure the Datadog Agent using buildpack
 
 [`Pack Buildpacks`][4] provide a convenient way to package your container without using a Dockerfile. This example will use the GCP container registry and Datadog serverless buildpack. Build your application by running the following command making sure to use the latest tag for [`datadog/serverless-buildpack`][13]:
 
@@ -159,34 +159,27 @@ docker build --tag gcr.io/YOUR_PROJECT/YOUR_APP_NAME .
 
 **Note**: Not compatible with Alpine.
 
-### Push the container image to the registry
-
-Make sure you are logged in `gcloud` and authorized docker with `gcloud auth configure-docker`. Then push to your GCP container registry:
-
-   ```shell
-   docker push gcr.io/YOUR_PROJECT/YOUR_APP_NAME
-   ```
-
-### Deploy to Cloud Run
+### Datadog Agent Configuration
 
 {{< tabs >}}
 
 {{% tab "Cloud Run web UI" %}}
 
-1. Create a secret with Datadog API key. This can be done via [Secret Manager](https://console.cloud.google.com/security/secret-manager) in your GCP console and clicking on
-2. **Create secret**. Set a name (for example, `datadog-api-key`) in the **Name** field. Then, paste your Datadog API key in the **Secret value** field.
+1. Create a secret with Datadog API key. This can be done via [Secret Manager](https://console.cloud.google.com/security/secret-manager) in your GCP console and clicking on **Create secret**. Set a name (for example, `datadog-api-key`) in the **Name** field. Then, paste your Datadog API key in the **Secret value** field.
 
-3. Go to [Cloud Run](https://console.cloud.google.com/run) in your GCP console. and click on **Create service**.
+2. Go to [Cloud Run](https://console.cloud.google.com/run) in your GCP console. and click on **Create service**.
 
-4. Select **Deploy one revision from an existing container image**. Choose your previously built image.
+3. Select **Deploy one revision from an existing container image**. Choose your previously built image.
 
-5. Select your invocation authentication method.
+4. Select your invocation authentication method.
 
-6. Reference your previously created secret, named `datadog-api-key` in this guide. Go to the **Container, Networking, Security** section and select the **Secrets** tab. click on **Reference a secret** and choose the secret you created from your Datadog API key. You may need to grant your user access to the secret.
+5. Reference your previously created secret, named `datadog-api-key` in this guide. Go to the **Container, Networking, Security** section and select the **Secrets** tab. click on **Reference a secret** and choose the secret you created from your Datadog API key. You may need to grant your user access to the secret.
 
-7. Under **Reference method**, select **Exposed as environment variable**.
+6. Under **Reference method**, select **Exposed as environment variable**.
 
-8. Under the **Environment variables** section, ensure that the name is set to `DD_API_KEY`.
+7. Under the **Environment variables** section, ensure that the name is set to `DD_API_KEY`.
+
+8. Still under **Environment variables**, create two more variables. One named `DD_TRACE_ENABLED` set to `true` to enable tracing. Another named`DD_SITE` (if not set, it defaults to `datadoghq.com`)
 
 {{% /tab %}}
 {{% tab "gcloud CLI" %}}
@@ -235,17 +228,11 @@ Distributions provide `avg`, `sum`, `max`, `min`, and `count` aggregations by de
 
 ## Troubleshooting
 
-#### SSL
-
 This integration depends on your runtime having a full SSL implementation. If you are using a slim image for Node, you may need to add the following command to your Dockerfile to include certificates.
 
 ```
 RUN apt-get update && apt-get install -y ca-certificates
 ```
-
-#### Buildpack fail with 'Failed to run /bin/build: for Python, an entrypoint must be manually set, either with "GOOGLE_ENTRYPOINT"'
-
-GCP buildpack requires a [Procfile][11] for some languages such as Python.
 
 ## Further reading
 
