@@ -150,7 +150,7 @@ When a start or end condition is used to define a transaction, click on a transa
 - Access all logs within each transaction
 - View statistics for each transaction and summary statistics for the entire transaction group
 
-{{< img src="logs/explorer/transaction_group_side_panel.png" alt="The transaction group panel showing transactions within the selected group in sequence" style="width:80%;" >}}
+{{< img src="logs/explorer/transaction_group_side_panel.png" alt="The transaction group panel showing transactions within the selected group in sequence" style="width:50%;" >}}
 
 ## Further reading
 
