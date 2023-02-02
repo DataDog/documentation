@@ -112,9 +112,9 @@ Once you've decided on an offering, set up a directory:
 
 ## Install and configure the Datadog development toolkit
 
-The Agent Integration Developer Tool allows you to create scaffolding when you are developing an integration by generating a skeleton of your integration tile's assets and metadata. For instructions on installing the tool, seeInstall the [Datadog Agent Integration Developer Tool][17].
+The Agent Integration Developer Tool allows you to create scaffolding when you are developing an integration by generating a skeleton of your integration tile's assets and metadata. For instructions on installing the tool, see [Install the Datadog Agent Integration Developer Tool][17].
 
-Once you've installed the Developer tool, configure the tool for the `marketplace` repo:
+Once you've installed the Developer tool, configure the tool for the `marketplace` repo.
 
 To install the toolkit:
 
@@ -134,7 +134,7 @@ ddev config set repo marketplace
 
 ## Populate the integration tile scaffolding
 
-Run the `ddev` command to generate a skeleton of the folders and files needed for your integration. The options you use with the command are different depending on what type of integration you are developing. For a full list of the files created by the `ddev` command, see [Integrations assets][19].
+Run the `ddev` command to generate a skeleton of the folders and files needed for your integration. The options you use with the command are different depending on what type of integration you are developing. For a full list of the files created by the `ddev` command, see the [Integrations assets](#complete-the-necessary-integration-asset-files) section below.
 
 For Datadog Apps, Datadog REST API integrations, professional services, and standalone SaaS licenses, use the Datadog Development Toolkit to create scaffolding for an informational tile-only listing.
 
