@@ -632,7 +632,7 @@ class Integrations:
                 manifest_json = json.load(fp)
                 integration_id = manifest_json.get("integration_id", "") or manifest_json.get('app_id', "") or ""
                 collision_name = integration_id.replace('-', '_') or manifest_json.get("name", "") or dir_name
-    
+
         return collision_name
 
     def process_integration_readme(self, file_name, marketplace=False):
@@ -816,9 +816,9 @@ class Integrations:
             )
 
         if not exist_already and no_integration_issue:
+            out_name = self.content_integrations_dir + new_file_name
             # let's only write out file.md if it's going to be public
             if manifest_json.get("is_public", False):
-                out_name = self.content_integrations_dir + new_file_name
 
                 # let's make relative app links to integrations tile absolute
                 regex = r"(?<!https://app.datadoghq.com)(/account/settings#integrations[^.)\s]*)"
@@ -850,6 +850,10 @@ class Integrations:
                     final_text = format_link_file(out_name, regex_skip_sections_start, regex_skip_sections_end)
                     with open(out_name, 'w') as final_file:
                         final_file.write(final_text)
+            else:
+                if exists(out_name):
+                    print(f"removing {integration_name} due to is_public/display_on_public_websites flag, {out_name}")
+                    remove(out_name)
 
     def add_integration_frontmatter(
         self, file_name, content, dependencies=[], integration_id="", integration_version="", manifest_json=None

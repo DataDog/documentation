@@ -23,7 +23,7 @@ Risk Management is available with the following APM tracing libraries:
 | Language | Minimum Datadog Tracing Library Version |
 | -------- | --------------------------------------- |
 | Java     | 1.1.4 |
-| .NET     | 2.16.0 |
+| .NET | 2.16.0 |
 | NodeJS   | 2.23.0 for NodeJS 12+, or 3.10.0 for NodeJS 14+ |
 | Python   | 1.5.0 |
 

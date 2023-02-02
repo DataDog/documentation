@@ -20586,7 +20586,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Create a service account
       tags:
-      - Users
+      - Service Accounts
       x-codegen-request-body-name: body
       x-given:
         service_account_user:
@@ -20602,6 +20602,7 @@ paths:
         parameters:
         - name: user_id
           source: data.id
+        tag: Users
         type: unsafe
   /api/v2/service_accounts/{service_account_id}/application_keys:
     get:

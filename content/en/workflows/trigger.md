@@ -18,9 +18,9 @@ further_reading:
   text: "Find out more about Monitors"
 ---
 
-{{< beta-callout url="https://forms.gle/VEjerYVQ2QJhauZ57" >}}
+{{< callout url="https://forms.gle/VEjerYVQ2QJhauZ57" >}}
   Workflows are in public beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.
-{{< /beta-callout >}}
+{{< /callout >}}
 
 You can trigger a workflow manually, or using a variety of automated methods such as a recurring schedule, a Datadog Monitor, or a Security Signal Notification Rule. Before you can trigger an automatic workflow, you must associate the workflow with a unique service account. For more information on service accounts, see [Service accounts for Workflows][1].
 
