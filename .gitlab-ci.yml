@@ -353,20 +353,6 @@ evaluate_missing_metrics:
     - if: $CI_COMMIT_REF_NAME == "master"
       when: manual
 
-translation_data_checks:manual:
-  <<: *base_template
-  stage: post-deploy
-  allow_failure: true
-  cache: {}
-  environment: "preview"
-  script:
-    - export TRANSIFEX_API_KEY=$(get_secret 'translate_token')
-    - python3 ./local/bin/py/translations/translation_data_checks.py
-  rules:
-    - when: manual
-  dependencies:
-    - build_preview
-
 # Uploads git ignored source (EN) files to Transifex as part of the nightly build.
 # The translation syncing pipeline is triggered by github webhook, but these files are not in git.
 # This allows some dynamically built content (such as integrations) to be localized automatically.
