@@ -386,7 +386,7 @@ We currently support integrations with:
    });
    ```
 
-2. Initialize Flagsmith's SDK with the `datadogRum` option reporting feature flags evaluations to Datadog using the snippet of code shown below. 
+2. Initialize Flagsmith's SDK with the `datadogRum` option, which reports feature flags evaluations to Datadog using the snippet of code shown below.
 
    Optionally, you can configure the client so that Flagsmith traits are sent to Datadog via `datadogRum.setUser()`. For more information about initializing Flagsmith's SDK, check out [Flagsmith's JavaScript SDK documentation][1].
 
@@ -425,7 +425,7 @@ We currently support integrations with:
    </script>
    ```
 
-2. Initialize Flagsmith's SDK and create an inspector reporting feature flags evaluations to Datadog using the snippet of code below.
+2. Initialize Flagsmith's SDK with the `datadogRum` option, which reports feature flags evaluations to Datadog using the snippet of code shown below.
 
     Optionally, you can configure the client so that Flagsmith traits are sent to Datadog via `datadogRum.setUser()`. For more information about initializing Flagsmith's SDK, check out [Flagsmith's JavaScript SDK documentation][1].
 
@@ -459,7 +459,7 @@ We currently support integrations with:
    </script>
    ```
 
-2. Initialize Flagsmith's SDK and create an inspector reporting feature flags evaluations to Datadog using the snippet of code below.
+2. Initialize Flagsmith's SDK with the `datadogRum` option, which reports feature flags evaluations to Datadog using the snippet of code shown below.
 
     Optionally, you can configure the client so that Flagsmith traits are sent to Datadog via `datadogRum.setUser()`. For more information about initializing Flagsmith's SDK, check out [Flagsmith's JavaScript SDK documentation][1].
 
