@@ -166,6 +166,7 @@ To install the .NET Profiler per-application:
    For .NET Core and .NET 5+:
    ```text
    CORECLR_ENABLE_PROFILING=1
+   CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    DD_PROFILING_ENABLED=1
    DD_ENV=production
    DD_VERSION=1.2.3
@@ -176,6 +177,7 @@ To install the .NET Profiler per-application:
    For .NET Framework:
    ```text
    COR_ENABLE_PROFILING=1
+   COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    DD_PROFILING_ENABLED=1
    DD_ENV=production
    DD_VERSION=1.2.3
@@ -210,6 +212,7 @@ To install the .NET Profiler per-application:
    For .NET Core and .NET 5+:
    ```text
    CORECLR_ENABLE_PROFILING=1
+   CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    DD_PROFILING_ENABLED=1
    DD_SERVICE=MyService
    DD_ENV=production
@@ -220,6 +223,7 @@ To install the .NET Profiler per-application:
    For .NET Framework:
    ```text
    COR_ENABLE_PROFILING=1
+   COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    DD_PROFILING_ENABLED=1
    DD_SERVICE=MyService
    DD_ENV=production
@@ -233,6 +237,7 @@ To install the .NET Profiler per-application:
    ```powershell
    [string[]] $v = @(
        "CORECLR_ENABLE_PROFILING=1",
+       "CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}",
        "DD_PROFILING_ENABLED=1",
        "DD_SERVICE=MyService",
        "DD_ENV=production",
@@ -245,6 +250,7 @@ To install the .NET Profiler per-application:
    ```powershell
    [string[]] $v = @(
        "COR_ENABLE_PROFILING=1",
+       "COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}",
        "DD_PROFILING_ENABLED=1",
        "DD_SERVICE=MyService",
        "DD_ENV=production",
@@ -264,6 +270,7 @@ To install the .NET Profiler per-application:
    For .NET Core and .NET 5+:
    ```cmd
    SET CORECLR_ENABLE_PROFILING=1
+   SET CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    SET DD_PROFILING_ENABLED=1
    SET DD_SERVICE=MyService
    SET DD_ENV=production
@@ -275,6 +282,7 @@ To install the .NET Profiler per-application:
    For .NET Framework:
    ```cmd
    SET COR_ENABLE_PROFILING=1
+   SET COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    SET DD_PROFILING_ENABLED=1
    SET DD_SERVICE=MyService
    SET DD_ENV=production
