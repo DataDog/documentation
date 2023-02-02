@@ -60,23 +60,23 @@ After understanding analytics, the next step is to understand the action in the 
 
 ### I am looking at a heatmap for a given view, but it’s showing me an unexpected page.
 
-Heatmaps are based on RUM view names and depending on how your RUM Application is configured, many pages can start being grouped under the same view name, or you can start having very specific view names. If you think the default view name gathering is not sufficient, you can override it manually with the [startView][6] function. 
+Heatmaps are based on RUM view names. Depending on how your RUM application is configured, many pages can start being grouped under the same view name, or you can start having very specific view names. If you think the default view name gathering is not sufficient, you can override it manually with the [startView][6] function. 
 
 ### After attempting to create a heatmap, I see a "No Replay Data" state appear. 
 
-This means that we could not find any Session Replay to use as a Heatmap background that matches the current search filters. If you just started to record sessions with the [Browser SDK][2], it may also take a few minutes for the Session Replay to be available for viewing.
+This means that Datadog could not find any Session Replays to use as a heatmap background that matches the current search filters. If you just started to record sessions with the [Browser SDK][2], it may also take a few minutes for the Session Replay to be available for viewing.
 
 ### After attempting to create a heatmap, I see a "Not enough data to generate a heatmap" state appear.
 
-This means that we weren't able to match any user actions with the current selected replay. It happens for a variety of reasons such as:
+This means that Datadog wasn't able to match any user actions with the current selected replay. This happens for a variety of reasons, such as:
 
-- Your application may not be using the latest SDK version (>= 4.20.0)
-- RUM actions are not enabled (learn how to [track user interactions][7])
-- Your page has changed drastically recently 
+- Your application is not using the latest SDK version (>= 4.20.0).
+- RUM actions are not enabled. Learn how to [track user interactions][7].
+- Your page has recently changed drastically. 
 
 ### All of the user information on the page is empty.
 
-User information is not collected by default. Heatmaps leverage the user information available in your session data to display relevant insights on behavior. You can set up user information in RUM by following [these steps][8].
+User information is not collected by default. Heatmaps use the user information available in your session data to display relevant insights on behavior. You can set up user information in RUM by following the steps in [Modifying Data and Context][8].
 
 [1]: /real_user_monitoring/session_replay/
 [2]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/package.json
