@@ -112,7 +112,7 @@ With the following definitions:
 
 ### Duration
 
-<div class="alert alert-warning"> We recommend using <a href="/tracing/guide/ddsketch_trace_metrics/">tracing distribution metrics using DDSketch</a>.</div>
+<div class="alert alert-warning">Datadog recommends <a href="/tracing/guide/ddsketch_trace_metrics/">tracing distribution metrics using DDSketch</a> instead.</div>
 
 `trace.<SPAN_NAME>.duration`
 : **Prerequisite:** This metric exists for any APM service.<br>
