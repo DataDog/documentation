@@ -14,11 +14,11 @@ further_reading:
 
 ## Setup
 
-Follow [Create SAML app integrations][6] docs to configure Okta as a SAML IdP.
+Follow Okta's [Create SAML app integrations][6] docs to configure Okta as a SAML IdP.
 
 **Note**: It's recommended that you set up Datadog as an Okta application manually, as opposed to using a `pre-configured` configuration.
 
-**Note**: For `US1` customers, there's a `pre-configured` configuration [How to Configure SAML 2.0 for Datadog][1] docs to configure Okta as a SAML IdP.
+**Note**: US1 customers can use the preset configuration in Okta's [How to Configure SAML 2.0 for Datadog][1] docs to configure Okta as a SAML IdP.
 
 ## General details
 
