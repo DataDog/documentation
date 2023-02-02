@@ -37,7 +37,7 @@ Supported test frameworks:
 The instrumentation works at runtime, so any transpilers such as TypeScript, Webpack, Babel, or others are supported out of the box.
 
 ### Test suite level visibility compatibility
-[Test suite level visibility][4] is supported from `dd-trace>=3.10.0` and only Jest, Mocha and Playwright are currently supported.
+[Test suite level visibility][4] is supported from `dd-trace>=3.10.0`. Jest, Mocha, and Playwright are supported.
 
 * Jest >= 24.8.0
   * From `dd-trace>=3.10.0`.
@@ -162,7 +162,7 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn t
 
 ### Adding custom tags to tests
 
-Custom tags are not supported in playwright yet.
+Custom tags are not supported for Playwright.
 
 {{% /tab %}}
 
@@ -173,7 +173,7 @@ Set the `NODE_OPTIONS` environment variable to `-r dd-trace/ci/init`. Run your t
 NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn test
 ```
 
-**Important**: if you set a value for `NODE_OPTIONS`, make sure it does not overwrite `-r dd-trace/ci/init`. This can be done using the `${NODE_OPTIONS:-}` clause:
+**Note**: If you set a value for `NODE_OPTIONS`, make sure it does not overwrite `-r dd-trace/ci/init`. This can be done using the `${NODE_OPTIONS:-}` clause:
 
 {{< code-block lang="json" filename="package.json" >}}
 {
@@ -411,7 +411,7 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 [Mocha >=9.0.0][8] uses an ESM-first approach to load test files. That means that if ES modules are used (for example, by defining test files with the `.mjs` extension), _the instrumentation is limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see the [Node.js documentation][9].
 
 ### Browser tests
-Browser tests executed with `mocha`, `jest`, `cucumber`, `cypress` and `playwright` are instrumented by `dd-trace-js`, but visibility into the browser session itself is not provided by default (for example, network calls, user actions, page loads, and so on).
+Browser tests executed with `mocha`, `jest`, `cucumber`, `cypress`, and `playwright` are instrumented by `dd-trace-js`, but visibility into the browser session itself is not provided by default (for example, network calls, user actions, page loads, etc.).
 
 If you want visibility into the browser process, consider using [RUM & Session Replay][10]. When using Cypress, test results and their generated RUM browser sessions and session replays are automatically linked. Learn more in the [RUM integration][11] guide.
 
