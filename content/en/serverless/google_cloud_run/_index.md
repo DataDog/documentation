@@ -148,7 +148,7 @@ docker build --tag gcr.io/YOUR_PROJECT/YOUR_APP_NAME .
 
 #### Configure the Datadog Agent using buildpack
 
-[`Pack Buildpacks`][4] provide a convenient way to package your container without using a Dockerfile. This example will use the GCP container registry and Datadog serverless buildpack. Build your application by running the following command making sure to use the latest tag for [`datadog/serverless-buildpack`][13]:
+[`Pack Buildpacks`][4] provide a convenient way to package your container without using a Dockerfile. This example will use the GCP container registry and Datadog serverless buildpack. Build your application by running the following command:
 
    ```shell
    pack build --builder=gcr.io/buildpacks/builder \
