@@ -18,7 +18,7 @@ Le volet d'une [trace][1] contient des informations sur la trace, le host et les
 
 {{< img src="tracing/troubleshooting/tracing_no_logs_in_trace.png" alt="Volet d'une trace sans aucun log trouvé" style="width:90%;">}}
 
-Deux types de logs différents peuvent s'afficher sur le volet d'une [trace][1] :
+Quatre types de logs différents peuvent s'afficher sur le volet d'une [trace][1] :
 
 - `trace_id` : affiche les logs associés à l'ID de trace correspondant.
 - `host` : affiche les logs générés par le host de la trace durant son intervalle.

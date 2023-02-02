@@ -84,14 +84,13 @@ To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] d
 {{% /tab %}}
 {{% tab "Other Environments" %}}
 
-Tracing is available for other environments, including [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3], and [Azure App Service][4].
+Tracing is available for other environments, including [Heroku][1], [Cloud Foundry][2], and [AWS Elastic Beanstalk][3].
 
 For other environments, see the [Integrations][5] documentation for that environment and [contact support][6] if you encounter setup issues.
 
 [1]: /agent/basic_agent_usage/heroku/#installation
 [2]: /integrations/cloud_foundry/#trace-collection
 [3]: /integrations/amazon_elasticbeanstalk/
-[4]: /infrastructure/serverless/azure_app_services/#overview
 [5]: /integrations/
 [6]: /help/
 {{% /tab %}}
@@ -116,6 +115,7 @@ After the Agent is installed, follow these steps to add the Datadog tracing libr
     npm install dd-trace@latest-node12
     ```
     For more information on our distribution tags and Node.js runtime version support, see the [Compatibility Requirements][1] page.
+    If you are upgrading from a previous major version of the library (0.x, 1.x, or 2.x) to another major version (2.x or 3.x), read the [Migration Guide][5] to assess any breaking changes.
 
 2. Import and initialize the tracer either in code or via command line arguments. The Node.js tracing library needs to be imported and initialized **before** any other module.
 
@@ -179,3 +179,4 @@ If needed, configure the tracing library to send application performance telemet
 [2]: https://app.datadoghq.com/apm/service-setup
 [3]: https://datadog.github.io/dd-trace-js/#tracer-settings
 [4]: /tracing/trace_collection/library_config/nodejs/
+[5]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md

@@ -10,9 +10,9 @@ further_reading:
     tag: "Blog"
     text: "Monitor all your CI pipelines with Datadog"
 ---
-{{< beta-callout url="https://app.datadoghq.com/ci/getting-started" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
+{{< callout url="https://app.datadoghq.com/ci/getting-started" >}}
 Intelligent Test Runner for CI Visibility is in private beta. You can request access by completing the form on the CI Visibility Getting Started page.
-{{< /beta-callout >}}
+{{< /callout >}}
 
 ## Overview
 
@@ -150,7 +150,7 @@ In addition to setting the environment variables, you or a user in your organiza
 
 ### Swift
 
-To enable Intelligent Test Runner, the version of the `dd-sdk-swift` framework must be >= 2.2.0-rc.1. The `Code Coverage` option must also be enabled in the test settings of your scheme or test plan, or  `--enable-code-coverage` must be added to your `swift test` command (if using a SPM target).
+To enable Intelligent Test Runner, the version of the `dd-sdk-swift` framework must be >= 2.2.0. The `Code Coverage` option must also be enabled in the test settings of your scheme or test plan, or  `--enable-code-coverage` must be added to your `swift test` command (if using a SPM target).
 
 The following environment variables must also be set:
 

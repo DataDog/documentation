@@ -1,7 +1,7 @@
 ---
 title: Universal Service Monitoring
 kind: documentation
-aliases: 
+aliases:
 - /tracing/universal_service_monitoring/
 further_reading:
 - link: "https://www.datadoghq.com/blog/universal-service-monitoring-datadog/"
@@ -52,7 +52,10 @@ If you have feedback about what platforms and protocols you'd like to see suppor
 
 ### Prerequisites
 
-- Your service is running in a container.
+- If on Linux:
+    - Your service is running in a container.
+- If on Windows and using IIS:
+    - Your service is running on a virtual machine.
 - Datadog Agent is installed alongside your service. Installing a tracing library is _not_ required.
 - The `env` tag for [Unified Service Tagging][1] has been applied to your deployment. The `service` and `version` tags are optional.
 
@@ -279,11 +282,41 @@ DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true
 ```
 
 {{% /tab %}}
+{{% tab "Chef" %}}
+
+Set the following attributes on your nodes:
+
+```rb
+node["datadog"]["system_probe"]["service_monitoring_enabled"] = true
+```
+
+{{% /tab %}}
+{{% tab "Puppet" %}}
+
+Set `service_monitoring_enabled`:
+
+```conf
+class { 'datadog_agent::system_probe':
+    service_monitoring_enabled => true,
+}
+```
+
+{{% /tab %}}
+{{% tab "Ansible" %}}
+
+Add the following attributes in your playbook:
+
+```yaml
+service_monitoring_config:
+  enabled: true
+```
+
+{{% /tab %}}
 {{% tab "Windows" %}}
 
 **For services running on IIS:**
 
-1. Install the [Datadog Agent][1] (version 6.40 or 7.40 and later) with the network driver component enabled. During installation, pass `ADDLOCAL="MainApplication,NPM"` to the `msiexec` command, or select **Network Performance Monitoring** when running the Agent installation through the UI.
+1. Install the [Datadog Agent][1] (version 6.41 or 7.41 and later) with the network driver component enabled. During installation, pass `ADDLOCAL="MainApplication,NPM"` to the `msiexec` command, or select **Network Performance Monitoring** when running the Agent installation through the UI.
 
 2. Edit `C:\ProgramData\Datadog\system-probe.yaml` to set the enabled flag to `true`:
 
@@ -317,7 +350,7 @@ After enabling Universal Service Monitoring, you can:
 
 - Navigate to **APM** > **Service Catalog** or **APM** > **Service Map** to [visualize your services and their dependencies][3].
 
-- Click into specific Service pages to see golden signal metrics (requests, errors, and duration), and correlate these against recent code changes with [Deployment Tracking][2]. 
+- Click into specific Service pages to see golden signal metrics (requests, errors, and duration), and correlate these against recent code changes with [Deployment Tracking][2].
 
 - Create [monitors][4], [dashboards][5], and [SLOs][6] using the `universal.http.*` metrics.
 

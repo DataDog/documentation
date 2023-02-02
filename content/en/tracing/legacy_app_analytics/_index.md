@@ -68,7 +68,7 @@ App Analytics is available starting in version 1.11.0 of the Go tracing client, 
 
 * starting in version 1.26.0 using environment variable: `DD_TRACE_ANALYTICS_ENABLED=true`
 
-[1]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithAnalytics
+[1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithAnalytics
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 

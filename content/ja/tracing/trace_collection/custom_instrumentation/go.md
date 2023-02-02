@@ -226,9 +226,9 @@ Datadog APM トレーサーは、分散型トレーシングの [B3 ヘッダー
 [1]: /ja/tracing/glossary/#span-tags
 [2]: /ja/tracing/glossary/#spans
 [3]: /ja/tracing/setup/go/#compatibility
-[4]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
-[5]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartSpan
-[6]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartSpanFromContext
+[4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
+[5]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartSpan
+[6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartSpanFromContext
 [7]: /ja/tracing/glossary/#trace
 [8]: https://github.com/openzipkin/b3-propagation
 [9]: /ja/tracing/security
