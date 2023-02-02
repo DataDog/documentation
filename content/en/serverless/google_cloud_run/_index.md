@@ -22,20 +22,15 @@ metrics, and direct log collection.
 
 ### Prerequisites
 
-Make sure you have a [Datadog API Key][10] and are using a programming
-language [supported by a Datadog tracing library][2].
+Make sure you have a [Datadog API Key][10] and are using a programming language [supported by a Datadog tracing library][2].
 
 ### Deploy a sample application in one click
 
-To deploy a sample application without the need to follow the rest of the guide, you can use
-the [Cloud Run Button](https://github.com/GoogleCloudPlatform/cloud-run-button)
-from one of [these examples][12]. The installation process will ask the required
-details.
+To deploy a sample application without the need to follow the rest of the guide, you can use on of [these examples][12]. The installation process will ask the required details.
 
 ### Build your container with Datadog instrumentation
 
-Cloud Run requires applications to be packaged in a container. From the application root folder follow the steps
-for either Dockerfile or buildpack build.
+To build your container with Datadog instrumentation you can follow one of these two methods, depending if you are using a Dockerfile or buildpack.
 
 #### Using Dockerfile
 
@@ -47,8 +42,7 @@ Using a Dockerfile to build your container, the following steps are needed:
 
 3. Use the `CMD` instruction to run your existing application and other required commands as arguments.
 
-You can accomplish those steps by adding the following lines to your Dockerfile. You may need to adjust these examples
-depending on your existing Dockerfile setup.
+You can accomplish those steps by adding the following lines to your Dockerfile. You may need to adjust these examples depending on your existing Dockerfile setup.
 
 {{< programming-lang-wrapper langs="go,python,nodejs,java,dotnet,ruby" >}}
 {{< programming-lang lang="go" >}}
@@ -154,9 +148,7 @@ docker build --tag gcr.io/YOUR_PROJECT/YOUR_APP_NAME .
 
 #### Using Datadog buildpack
 
-[`Pack Buildpacks`][4] provide a convenient way to package your container without using a Dockerfile. This example
-will use the GCP container registry and Datadog serverless buildpack. Build your application by running the following
-command making sure to use the latest tag for [`datadog/serverless-buildpack`][13]:
+[`Pack Buildpacks`][4] provide a convenient way to package your container without using a Dockerfile. This example will use the GCP container registry and Datadog serverless buildpack. Build your application by running the following command making sure to use the latest tag for [`datadog/serverless-buildpack`][13]:
 
    ```shell
    pack build --builder=gcr.io/buildpacks/builder \
@@ -169,8 +161,7 @@ command making sure to use the latest tag for [`datadog/serverless-buildpack`][1
 
 ### Push the container image to the registry
 
-Make sure you are logged in `gcloud` and authorized docker with `gcloud auth configure-docker`. Then push to your GCP
-container registry:
+Make sure you are logged in `gcloud` and authorized docker with `gcloud auth configure-docker`. Then push to your GCP container registry:
 
    ```shell
    docker push gcr.io/YOUR_PROJECT/YOUR_APP_NAME
@@ -182,10 +173,8 @@ container registry:
 
 {{% tab "Cloud Run web UI" %}}
 
-1. Create a secret with Datadog API key. This can be done
-   via [Secret Manager](https://console.cloud.google.com/security/secret-manager) in your GCP console and clicking on
-2. **Create secret**. Set a name (for example, `datadog-api-key`) in the **Name** field. Then, paste your Datadog API
-   key in the **Secret value** field.
+1. Create a secret with Datadog API key. This can be done via [Secret Manager](https://console.cloud.google.com/security/secret-manager) in your GCP console and clicking on
+2. **Create secret**. Set a name (for example, `datadog-api-key`) in the **Name** field. Then, paste your Datadog API key in the **Secret value** field.
 
 3. Go to [Cloud Run](https://console.cloud.google.com/run) in your GCP console. and click on **Create service**.
 
@@ -193,9 +182,7 @@ container registry:
 
 5. Select your invocation authentication method.
 
-6. Reference your previously created secret, named `datadog-api-key` in this guide. Go to the **Container, Networking,
-   Security** section and select the **Secrets** tab. click on **Reference a secret** and choose the secret you created
-   from your Datadog API key. You may need to grant your user access to the secret.
+6. Reference your previously created secret, named `datadog-api-key` in this guide. Go to the **Container, Networking, Security** section and select the **Secrets** tab. click on **Reference a secret** and choose the secret you created from your Datadog API key. You may need to grant your user access to the secret.
 
 7. Under **Reference method**, select **Exposed as environment variable**.
 
@@ -203,10 +190,7 @@ container registry:
 
 {{% /tab %}}
 {{% tab "gcloud CLI" %}}
-For testing purpose, the Datadog API key can be exposed as an environment variable. That is unsafe due to its value
-being displayed in plaintext. Allowing any external connection to reach the service, this one line command will deploy
-the service. It expects `DD_API_KEY` to be set as
-environment variable and a service listening to port 80
+For testing purpose, the Datadog API key can be exposed as an environment variable. That is unsafe due to its value being displayed in plaintext. Allowing any external connection to reach the service, this one line command will deploy the service. It expects `DD_API_KEY` to be set as environment variable and a service listening to port 80
 
 ```shell
 gcloud run deploy APP_NAME --image=gcr.io/YOUR_PROJECT/APP_NAME \
@@ -219,18 +203,15 @@ gcloud run deploy APP_NAME --image=gcr.io/YOUR_PROJECT/APP_NAME \
 {{% /tab %}}
 {{< /tabs >}}
 
-These are instructions for deploying a Cloud Run service using standard GCP tools. If you have other systems in place
-for managing container images, secrets, or deployments, you may use those instead.
+These are instructions for deploying a Cloud Run service using standard GCP tools. If you have other systems in place for managing container images, secrets, or deployments, you may use those instead.
 
 ### Results
 
-You should be able to see metrics and traces of your Cloud Run application in the Datadog UI!
-You can submit custom metrics using a [DogStatsd client][7]. Only `DISTRIBUTION` metrics should be used.
+You should be able to see metrics and traces of your Cloud Run application in the Datadog UI! You can submit custom metrics using a [DogStatsd client][7]. Only `DISTRIBUTION` metrics should be used.
 
 ### Logs
 
-If you use [GCP integration][1] your logs are already being collected. Alternatively, you can set the `DD_LOGS_ENABLED`
-environment variable to true to capture application logs through the serverless instrumentation.
+If you use [GCP integration][1] your logs are already being collected. Alternatively, you can set the `DD_LOGS_ENABLED` environment variable to true to capture application logs through the serverless instrumentation.
 
 ### Custom metrics
 You can submit custom metrics using a [DogStatsD client][7]. For monitoring Cloud Run and other serverless applications, use [distribution][12] metrics.
@@ -256,8 +237,7 @@ Distributions provide `avg`, `sum`, `max`, `min`, and `count` aggregations by de
 
 #### SSL
 
-This integration depends on your runtime having a full SSL implementation. If you are using a slim image for Node, you
-may need to add the following command to your Dockerfile to include certificates.
+This integration depends on your runtime having a full SSL implementation. If you are using a slim image for Node, you may need to add the following command to your Dockerfile to include certificates.
 
 ```
 RUN apt-get update && apt-get install -y ca-certificates
