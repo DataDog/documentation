@@ -48,7 +48,7 @@ You can accomplish those steps by adding the following lines to your Dockerfile.
 {{< programming-lang lang="go" >}}
 
 ```
-COPY --from=datadog/serverless-init:beta4 /datadog-init /app/datadog-init
+COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
 ENTRYPOINT ["/app/datadog-init"]
 CMD ["/path/to/your-go-binary"] (adapt this line to your needs)
 ```
@@ -64,7 +64,7 @@ See [Tracing Go Applications][1] for more details. There is also [sample code fo
 {{< programming-lang lang="python" >}}
 
 ```
-COPY --from=datadog/serverless-init:beta4 /datadog-init /app/datadog-init
+COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
 ENTRYPOINT ["/app/datadog-init"]
 CMD ["ddtrace-run", "python", "app.py"] (adapt this line to your needs)
 ```
@@ -79,7 +79,7 @@ See [Tracing Python Applications][1] for detailed instructions. [Sample code for
 {{< programming-lang lang="nodejs" >}}
 
 ```
-COPY --from=datadog/serverless-init:beta4 /datadog-init /app/datadog-init
+COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
 ENTRYPOINT ["/app/datadog-init"]
 CMD ["/nodejs/bin/node", "/path/to/your/app.js"] (adapt this line to your needs)
 
@@ -94,7 +94,7 @@ See [Tracing Node.js Applications][1] for detailed instructions. [Sample code fo
 {{< programming-lang lang="java" >}}
 
 ```
-COPY --from=datadog/serverless-init:beta4 /datadog-init /app/datadog-init
+COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
 ENTRYPOINT ["/app/datadog-init"]
 CMD ["./mvnw", "spring-boot:run"] (adapt this line to your needs)
 
@@ -110,7 +110,7 @@ See [Tracing Java Applications][1] for detailed instructions. [Sample code for a
 {{< programming-lang lang="dotnet" >}}
 
 ```
-COPY --from=datadog/serverless-init:beta4 /datadog-init /app/datadog-init
+COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
 ENTRYPOINT ["/app/datadog-init"]
 CMD ["dotnet", "helloworld.dll"] (adapt this line to your needs)
 
@@ -125,7 +125,7 @@ See [Tracing .NET Applications][1] for detailed instructions. [Sample code for a
 {{< programming-lang lang="ruby" >}}
 
 ```
-COPY --from=datadog/serverless-init:beta4 /datadog-init /app/datadog-init
+COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
 ENTRYPOINT ["/app/datadog-init"]
 CMD ["rails", "server", "-b", "0.0.0.0"] (adapt this line to your needs)
 
@@ -153,7 +153,7 @@ docker build --tag gcr.io/YOUR_PROJECT/YOUR_APP_NAME .
    ```shell
    pack build --builder=gcr.io/buildpacks/builder \
    --buildpack from=builder \
-   --buildpack datadog/serverless-buildpack:beta4 \
+   --buildpack datadog/serverless-buildpack \
    gcr.io/YOUR_PROJECT/YOUR_APP_NAME
    ```
 
