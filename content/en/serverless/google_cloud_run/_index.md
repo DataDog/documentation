@@ -183,7 +183,7 @@ Depending on your deployment process, push the image built to a registry. The `g
 
 7. Under the **Environment variables** section, ensure that the name is set to `DD_API_KEY`.
 
-8. Still under **Environment variables**, create two more variables. One named `DD_TRACE_ENABLED` set to `true` to enable tracing. Another named`DD_SITE` (if not set, it defaults to `datadoghq.com`)
+8. Still under **Environment variables**, create two more variables. One named `DD_TRACE_ENABLED` set to `true` to enable tracing. Another named `DD_SITE` containing the Datadog site which will collect the data (if not set, it defaults to `datadoghq.com`)
 
 {{% /tab %}}
 {{% tab "gcloud CLI" %}}
@@ -193,14 +193,14 @@ For testing purpose, the Datadog API key can be exposed as an environment variab
 gcloud run deploy APP_NAME --image=gcr.io/YOUR_PROJECT/APP_NAME \
   --port=80 \
   --update-env-vars=DD_API_KEY=$(DD_API_KEY) \
+  --update-env-vars=DD_TRACE_ENABLED=true \
+  --update-env-vars=DD_SITE='datadoghq.com' \
   --allow-unauthenticated
 
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
-
-These are instructions for deploying a Cloud Run service using standard GCP tools. If you have other systems in place for managing container images, secrets, or deployments, you may use those instead.
 
 ### Results
 
