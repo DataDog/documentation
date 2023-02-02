@@ -144,7 +144,7 @@ Transactions support the [List Aggregates][15] visualization. Clicking a transac
 
 {{< img src="logs/explorer/transactions_side_panel.png" alt="The transaction log panel showing logs within the selected transaction" style="width:80%;" >}}
 
-When a start or end condition is used to define a transaction, clicking on a transaction group in the list opens the transaction group side panel from which you can:
+When a start or end condition is used to define a transaction, click on a transaction group in the list to open the transaction group side panel, from which you can:
 
 - Access the transactions within that transaction group in sequence
 - Access all logs within each transaction
