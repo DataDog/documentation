@@ -32,7 +32,7 @@ Supported test frameworks:
 * Cypress >= 6.7.0
   * From `dd-trace>=1.4.0`
 * Playwright >= 1.18.0
-  * From `dd-trace>=TBD`
+  * From `dd-trace>=3.13.0` and `dd-trace>=2.26.0` for 2.x release line.
 
 The instrumentation works at runtime, so any transpilers such as TypeScript, Webpack, Babel, or others are supported out of the box.
 
@@ -45,7 +45,7 @@ The instrumentation works at runtime, so any transpilers such as TypeScript, Web
 * Mocha >= 5.2.0
   * From `dd-trace>=3.10.0`.
 * Playwright >= 1.18.0
-  * From `dd-trace>=TBD`.
+  * From `dd-trace>=3.13.0` and `dd-trace>=2.26.0` for 2.x release line.
 
 ## Configuring reporting method
 
@@ -162,7 +162,7 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn t
 
 ### Adding custom tags to tests
 
-This is currently not supported in playwright.
+Custom tags are not supported in playwright yet.
 
 {{% /tab %}}
 
