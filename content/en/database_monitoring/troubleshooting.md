@@ -31,7 +31,7 @@ It is recommended to have a single Datadog Agent monitor at most 10 DBM hosts. I
 
 ### No DBM data visible in Datadog: Connection Issues?
 
-If you think that your setup is correct, but you're not seeing data in your DBM pages, it's possible that your agent is not able to send data to our data collection endpoints. Performing these connection troubleshooting steps from the location where the agent is running will help diagnose any connection issues.
+If you think that your setup is correct, but you're not seeing data in your DBM pages, it's possible that your Agent is not able to send data to Datadog's data collection endpoints. To diagnose connection issues, perform the following connection troubleshooting steps from the location where the Agent is running.
 
 1. Test TCP connectivity on DBM collection endpoints:
 
@@ -41,7 +41,7 @@ telnet dbquery-intake.datadoghq.com 443
 ```
 
 2. Test posting an empty payload with an invalid API key on both DBM endpoints. 
-We expect these commands to fail with HTTP code `403: Forbidden`. 
+These commands should fail with HTTP code `403: Forbidden`. 
 
 ```
 curl -vvv -X POST "https://dbm-metrics-intake.datadoghq.com/api/v2/databasequery" \
@@ -59,7 +59,7 @@ curl -vvv -X POST "https://dbquery-intake.datadoghq.com/api/v2/databasequery" \
 
 The responses should contain `{"status":"error","code":403,"errors":["Forbidden"],...}` if requests were successfully sent and a response was received.
 
-Some common causes of connection failure include proxy setups and firewalls preventing outbound traffic to our endpoints. If you have a proxy or firewall, make sure the IPs addresses for the DBM endpoints are whitelisted. The IP addresses are contained in the APM block defined at https://ip-ranges.datadoghq.com/.
+Some common causes of connection failure include proxy setups and firewalls, which outbound traffic to Datadog's endpoints. If you have a proxy or firewall, make sure the IPs addresses for the DBM endpoints are allowed. Refer to the APM block in Datadog's [IP addresses](https://ip-ranges.datadoghq.com/).
 
 
 ## Need more help?
