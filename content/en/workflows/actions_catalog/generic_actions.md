@@ -87,7 +87,7 @@ Pause the execution of the workflow for a duration specified in seconds.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/
-[2]: https://app.datadoghq.com/workflow
-[3]: /workflows/setup/
+[1]: /workflows/build/#context-variables
+[2]: https://docs.datadoghq.com/api/latest/ip-ranges/#list-ip-ranges
+[3]: /workflows/access/
 [4]: https://lodash.com/
