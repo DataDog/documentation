@@ -62,13 +62,13 @@ The properties section is the overview of your monitor's:
 | Property     | Description                                                                           |
 |--------------|---------------------------------------------------------------------------------------|
 | Status       | Alert, Warn, No Data, or OK                                                           |
-| Type         | Learn more about [monitor types][10].                                                  |
-| ID           | Used for the [monitor API][3].                                                        |
+| Type         | Learn more about [monitor types][3].                                                  |
+| ID           | Used for the [monitor API][4].                                                        |
 | Date created | The date the monitor was created.                                                     |
 | Author       | The person who created the monitor.                                                   |
 | Tags         | The tags attached at the monitor level. Edit the tags by clicking on the pencil icon. |
-| Query        | Learn more about [querying][4].                                                       |
-| Message      | The message specified in the [notification][5] section of the monitor.                |
+| Query        | Learn more about [querying][5].                                                       |
+| Message      | The message specified in the [notification][6] section of the monitor.                |
 
 ## Status and history
 
@@ -85,7 +85,7 @@ The status graph shows your monitor's status over time, broken out by group. **N
 
 #### Investigate a Monitor in a Notebook
 
-For further investigation into your metrics evolution, click **Open in a notebook** by the status graph. This generates an investigation [notebook][6] with a formatted graph of the monitor query.
+For further investigation into your metrics evolution, click **Open in a notebook** by the status graph. This generates an investigation [notebook][7] with a formatted graph of the monitor query.
 
 {{< img src="monitors/monitor_status/notebook-button.png" alt="Open in notebook button" style="width:90%;">}}
 
@@ -97,7 +97,7 @@ The history graph shows the collected data aligned with the status graph. It sho
 
 ### Evaluation graph
 
-The evaluation graph is specific to the monitor. It uses the same query logic as the history graph, however it is scoped to the timeframe bracket on the history graph. It has a fixed, zoomed window that corresponds to your monitor [evaluation window][11] to ensure the displayed points are aggregated correctly. For example, if the monitor is configured to evaluate the average of the query over the last 15 minutes, each datapoint in the evaluation graph shows the aggregate value of the metric for the previous 15 minute evaluation window.
+The evaluation graph is specific to the monitor. It uses the same query logic as the history graph, however it is scoped to the timeframe bracket on the history graph. It has a fixed, zoomed window that corresponds to your monitor [evaluation window][8] to ensure the displayed points are aggregated correctly. For example, if the monitor is configured to evaluate the average of the query over the last 15 minutes, each datapoint in the evaluation graph shows the aggregate value of the metric for the previous 15 minute evaluation window.
 
 This graph shows the results from the raw data points of a metric applied against the evaluation conditions you configure in the monitor. This visualization is different from the History graph because it's showing the value of the data after it has gone through the monitor query. 
 
@@ -105,11 +105,11 @@ This graph shows the results from the raw data points of a metric applied agains
 
 ## Events
 
-Events generated from your monitor (alerts, warnings, recoveries, etc.) are shown in this section based on the time selector above the **Status & History** section. The events are also displayed in your [Events Explorer][8].
+Events generated from your monitor (alerts, warnings, recoveries, etc.) are shown in this section based on the time selector above the **Status & History** section. The events are also displayed in your [Events Explorer][9].
 
 ### Audit events
 
-For all monitor types, monitor changes (monitor edits for instance) create an event in the Events Explorer. This event explains the change and displays the user that made the change. For more information, see the [Events][7] documentation.
+For all monitor types, monitor changes (monitor edits for instance) create an event in the Events Explorer. This event explains the change and displays the user that made the change. For more information, see the [Events][10] documentation.
 
 If you made changes to a monitor, you can see examples with the following event search:
 
@@ -119,13 +119,13 @@ https://app.datadoghq.com/event/stream?per_page=30&query=tags%3Aaudit%20status%3
 
 Datadog also provides a notification option for changes to monitors you create. At the bottom of the monitor editor, under **Define permissions and audit notifications**, select **Notify** in the drop-down next to: *If this monitor is modified, notify monitor creator and alert recipients.*.
 
-The notify setting sends an email with the monitor audit event to all people who are alerted in the specific monitor as well as to the monitor creator. The monitor audit event also appears in the [Events Explorer][8].
+The notify setting sends an email with the monitor audit event to all people who are alerted in the specific monitor as well as to the monitor creator. The monitor audit event also appears in the [Events Explorer][9].
 
 ## Export and import
 
 You can obtain a JSON export of any monitor from the monitor's status page. Click the settings cog (top right) and choose **Export** from the menu.
 
-[Import a monitor][9] to Datadog with JSON using the main navigation: *Monitors --> New Monitor --> Import*.
+[Import a monitor][11] to Datadog with JSON using the main navigation: *Monitors --> New Monitor --> Import*.
 
 ## Further Reading
 
@@ -133,12 +133,12 @@ You can obtain a JSON export of any monitor from the monitor's status page. Clic
 
 [1]: /monitors/configuration/
 [2]: /monitors/notify/downtimes/
-[3]: /api/v1/monitors/
-[4]: /dashboards/querying/
-[5]: /monitors/notify/
-[6]: /notebooks
-[7]: /events/
-[8]: https://app.datadoghq.com/event/explorer
-[9]: https://app.datadoghq.com/monitors#create/import
-[10]: /monitors/types/
-[11]: /monitors/configuration/?tab=thresholdalert#evaluation-window
+[3]: /monitors/types/
+[4]: /api/v1/monitors/
+[5]: /dashboards/querying/
+[6]: /monitors/notify/
+[7]: /notebooks
+[8]: /monitors/configuration/?tab=thresholdalert#evaluation-window
+[9]: https://app.datadoghq.com/event/explorer
+[10]: /events/
+[11]: https://app.datadoghq.com/monitors#create/import
