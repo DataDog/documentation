@@ -73,6 +73,8 @@ No selection is necessary. You are notified when Watchdog detects issues across 
 
 A logs alert indicates that either a new pattern of error logs has been detected or that there has been an increase in an existing pattern of error logs.
 
+{{< img src="/monitors/monitor_types/watchdog/log_anomaly_monitor.png" alt="The Watchdog monitor's edit page showing the alert category set to logs, alert type as log anomaly, env set to production, service set to ad-server, and the monitor's title is Anomaly Detected in Production Ad Server" style="width:85%;">}}
+
 ### Select sources {#select-sources-3}
 
 Choose your environment, service, log source, log status, and log anomaly type from the drop-down menus.
