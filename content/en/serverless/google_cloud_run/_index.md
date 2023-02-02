@@ -154,7 +154,7 @@ See [Tracing Ruby Applications][1] for detailed instructions. [Sample code for a
 
 ### Push the container image to a registry
 
-Depending on your deployment process, push the image built to a registry. The `gcr.io` prefix in the examples above assumed [Google Cloud Registry][11]
+Depending on your deployment process, push the image built to a registry. The `gcr.io` prefix in the examples above assumed [Google Cloud Registry][11].
 
 ### Datadog Agent Configuration
 
