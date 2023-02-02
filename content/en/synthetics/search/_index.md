@@ -88,7 +88,7 @@ To search on a type of Synthetics test, select the test type under the **Type** 
 
 ### Batch actions
 
-Manage your Synthetic tests in bulk by selecting multiple test checkboxes in the list on the [Synthetic Tests page][1]. Click **Run Tests Now** or **Delete** to bulk run or delete the Synthetic tests you selected.
+Manage your Synthetic tests in bulk by selecting multiple test checkboxes in the list on the [Synthetic Tests page][1]. Click **Run Tests Now**, **Edit Tags**, or **Delete** to bulk edit tags, run or delete the Synthetic tests you selected.
 
 ### Test actions
 
