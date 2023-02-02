@@ -28,6 +28,40 @@ Depending on how complex the databases being monitored are, too many DBM hosts o
 
 It is recommended to have a single Datadog Agent monitor at most 10 DBM hosts. If you have more than 10 DBM hosts then you should consider spreading them over multiple Datadog Agents.
 
+
+### No DBM data visible in Datadog: Connection Issues?
+
+If you think that your setup is correct, but you're not seeing data in your DBM pages, it's possible that your agent is not able to send data to our data collection endpoints. Performing these connection troubleshooting steps from the location where the agent is running will help diagnose any connection issues.
+
+1. Test TCP connectivity on DBM collection endpoints:
+
+```
+telnet dbm-metrics-intake.datadoghq.com 443
+telnet dbquery-intake.datadoghq.com 443
+```
+
+2. Test posting an empty payload with an invalid API key on both DBM endpoints. 
+We expect these commands to fail with HTTP code `403: Forbidden`. 
+
+```
+curl -vvv -X POST "https://dbm-metrics-intake.datadoghq.com/api/v2/databasequery" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: NONE" \
+-d "[{}]"
+
+curl -vvv -X POST "https://dbquery-intake.datadoghq.com/api/v2/databasequery" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: NONE" \
+-d "[{}]"
+```
+
+The responses should contain `{"status":"error","code":403,"errors":["Forbidden"],...}` if requests were successfully sent and a response was received.
+
+Some common causes of connection failure include proxy setups and firewalls preventing outbound traffic to our endpoints. If you have a proxy or firewall, make sure the IPs addresses for the DBM endpoints are whitelisted. The IP addresses are contained in the APM block defined at https://ip-ranges.datadoghq.com/.
+
+
 ## Need more help?
 
 If you are still experiencing problems, contact [Datadog Support][5] for help.
