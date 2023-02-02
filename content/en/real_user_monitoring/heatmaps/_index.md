@@ -56,9 +56,33 @@ Below the panel are all actions that occurred on the page, listed by frequency. 
 
 After understanding analytics, the next step is to understand the action in the context of other data outside of heatmaps. This might mean pivoting to the [RUM explorer][4] or building a funnel that includes the action in order to [analyze conversion rates][5]. You can also watch associated [session replays][1] to visually see a user performing the action in the context of their overall session.
 
+## Troubleshooting
+
+### I am looking at a heatmap for a given view, but it’s showing me an unexpected page.
+
+Heatmaps are based on RUM view names. Depending on how your RUM application is configured, many pages can start being grouped under the same view name, or you can start having very specific view names. If you think the default view name gathering is not sufficient, you can override it manually with the [startView][6] function. 
+
+### After attempting to create a heatmap, I see a "No Replay Data" state appear. 
+
+This means that Datadog could not find any Session Replays to use as a heatmap background that matches the current search filters. If you just started to record sessions with the [Browser SDK][2], it may also take a few minutes for the Session Replay to be available for viewing.
+
+### After attempting to create a heatmap, I see a "Not enough data to generate a heatmap" state appear.
+
+This means that Datadog wasn't able to match any user actions with the current selected replay. This happens for a variety of reasons, such as:
+
+- Your application is not using the latest SDK version (>= 4.20.0).
+- RUM actions are not enabled. Learn how to [track user interactions][7].
+- Your page has recently changed drastically. 
+
+### All of the user information on the page is empty.
+
+User information is not collected by default. Heatmaps use the user information available in your session data to display relevant insights on behavior. You can set up user information in RUM by following the steps in [Modifying Data and Context][8].
+
 [1]: /real_user_monitoring/session_replay/
 [2]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/package.json
 [3]: https://app.datadoghq.com/rum/heatmap/view
 [4]: /real_user_monitoring/explorer/
 [5]: /real_user_monitoring/guide/alerting-with-conversion-rates/
-
+[6]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#override-default-rum-view-names)
+[7]: /real_user_monitoring/browser/tracking_user_actions/#manage-information-being-collected
+[8]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#user-session
