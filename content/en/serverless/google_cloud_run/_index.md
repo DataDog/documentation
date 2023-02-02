@@ -53,14 +53,9 @@ ENTRYPOINT ["/app/datadog-init"]
 CMD ["/path/to/your-go-binary"] (adapt this line to your needs)
 ```
 
-See [Tracing Go Applications][1] for more details. There is also [sample code for a simple Go application][2].
+[Sample code for a simple Go application](https://github.com/DataDog/crpb/tree/main/go).
 
-
-[1]: /tracing/setup_overview/setup/go/?tabs=containers
-
-[2]: https://github.com/DataDog/crpb/tree/main/go
 {{< /programming-lang >}}
-
 {{< programming-lang lang="python" >}}
 
 ```
@@ -69,13 +64,9 @@ ENTRYPOINT ["/app/datadog-init"]
 CMD ["ddtrace-run", "python", "app.py"] (adapt this line to your needs)
 ```
 
-See [Tracing Python Applications][1] for detailed instructions. [Sample code for a simple Python application][2].
+[Sample code for a simple Python application](https://github.com/DataDog/crpb/tree/main/python).
 
-[1]: /tracing/setup_overview/setup/python/?tabs=containers
-
-[2]: https://github.com/DataDog/crpb/tree/main/python
 {{< /programming-lang >}}
-
 {{< programming-lang lang="nodejs" >}}
 
 ```
@@ -85,11 +76,8 @@ CMD ["/nodejs/bin/node", "/path/to/your/app.js"] (adapt this line to your needs)
 
 ```
 
-See [Tracing Node.js Applications][1] for detailed instructions. [Sample code for a simple Node.js application][2].
+[Sample code for a simple Node.js application](https://github.com/DataDog/crpb/tree/main/js).
 
-[1]: /tracing/setup_overview/setup/nodejs/?tabs=containers
-
-[2]: https://github.com/DataDog/crpb/tree/main/js
 {{< /programming-lang >}}
 {{< programming-lang lang="java" >}}
 
@@ -100,13 +88,9 @@ CMD ["./mvnw", "spring-boot:run"] (adapt this line to your needs)
 
 ```
 
-See [Tracing Java Applications][1] for detailed instructions. [Sample code for a simple Java application][2].
+[Sample code for a simple Java application](https://github.com/DataDog/crpb/tree/main/java).
 
-[1]: /tracing/setup_overview/setup/java/?tabs=containers
-
-[2]: https://github.com/DataDog/crpb/tree/main/java
 {{< /programming-lang >}}
-
 {{< programming-lang lang="dotnet" >}}
 
 ```
@@ -116,11 +100,8 @@ CMD ["dotnet", "helloworld.dll"] (adapt this line to your needs)
 
 ```
 
-See [Tracing .NET Applications][1] for detailed instructions. [Sample code for a simple .NET application][2].
+[Sample code for a simple .NET application](https://github.com/DataDog/crpb/tree/main/dotnet).
 
-[1]: /tracing/trace_collection/dd_libraries/dotnet-core?tab=containers
-
-[2]: https://github.com/DataDog/crpb/tree/main/dotnet
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
@@ -131,11 +112,8 @@ CMD ["rails", "server", "-b", "0.0.0.0"] (adapt this line to your needs)
 
 ```
 
-See [Tracing Ruby Applications][1] for detailed instructions. [Sample code for a simple Ruby application][2].
+[Sample code for a simple Ruby application](https://github.com/DataDog/crpb/tree/main/ruby-on-rails).
 
-[1]: /tracing/trace_collection/dd_libraries/ruby/
-
-[2]: https://github.com/DataDog/crpb/tree/main/ruby-on-rails
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -201,9 +179,11 @@ Once the deploy is completed, you should be able to see metrics and traces of yo
 
 ## Additional Configurations
 
-- **Logs**: If you use [GCP integration][1] your logs are already being collected. Alternatively, you can set the `DD_LOGS_ENABLED` environment variable to true to capture application logs through the serverless instrumentation.
+- **Tracing:** the Datadog Agent already provides some basic tracing for popular frameworks. Follow the guide for [advanced tracing](2) for more
 
-- **Custom Metrics**: You can submit custom metrics using a [DogStatsd client][7]. Only `DISTRIBUTION` metrics should be used.
+- **Logs:** If you use [GCP integration][1] your logs are already being collected. Alternatively, you can set the `DD_LOGS_ENABLED` environment variable to true to capture application logs through the serverless instrumentation.
+
+- **Custom Metrics:** You can submit custom metrics using a [DogStatsd client][7]. Only `DISTRIBUTION` metrics should be used.
 
 ### Custom metrics
 You can submit custom metrics using a [DogStatsD client][7]. For monitoring Cloud Run and other serverless applications, use [distribution][12] metrics.
