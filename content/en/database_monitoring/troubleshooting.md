@@ -59,7 +59,7 @@ curl -vvv -X POST "https://dbquery-intake.datadoghq.com/api/v2/databasequery" \
 
 The responses should contain `{"status":"error","code":403,"errors":["Forbidden"],...}` if requests were successfully sent and a response was received.
 
-Some common causes of connection failure include proxy setups and firewalls, which outbound traffic to Datadog's endpoints. If you have a proxy or firewall, make sure the IPs addresses for the DBM endpoints are allowed. Refer to the APM block in Datadog's [IP addresses](https://ip-ranges.datadoghq.com/).
+Some common causes of connection failure include [proxy setups][7] and firewalls, which outbound traffic to Datadog's endpoints. If you have a proxy or firewall, make sure the IPs addresses for the DBM endpoints are allowed. Refer to the APM block in Datadog's [IP addresses][6].
 
 
 ## Need more help?
@@ -72,3 +72,5 @@ If you are still experiencing problems, contact [Datadog Support][5] for help.
 [3]: /database_monitoring/setup_postgres/troubleshooting/
 [4]: /database_monitoring/setup_sql_server/troubleshooting/
 [5]: /help/
+[6]: https://ip-ranges.datadoghq.com
+[7]: /agent/proxy/?tab=linux
