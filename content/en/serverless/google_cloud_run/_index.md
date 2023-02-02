@@ -159,6 +159,10 @@ docker build --tag gcr.io/YOUR_PROJECT/YOUR_APP_NAME .
 
 **Note**: Not compatible with Alpine.
 
+### Push the container image to a registry
+
+Depending on your deployment process, push the image built to a registry. The `gcr.io` prefix in the examples above assumed [Google Cloud Registry][11]
+
 ### Datadog Agent Configuration
 
 {{< tabs >}}
@@ -261,8 +265,6 @@ RUN apt-get update && apt-get install -y ca-certificates
 [13]: /metrics/#time-and-space-aggregation
 [10]: /account_management/api-app-keys/
 
-[11]: https://github.com/GoogleCloudPlatform/buildpack-samples/blob/master/sample-python/Procfile
+[11]: https://cloud.google.com/run/docs/deploying.
 
 [12]: https://github.com/DataDog/crpb/tree/main
-
-[13]: https://registry.hub.docker.com/r/datadog/serverless-buildpack
