@@ -15,6 +15,24 @@ function getConfig() {
 
 const Config = getConfig();
 
+const generateRumDeviceId = () => Math.floor(Math.random() * (2 ** 53)).toString(36)
+
+const getRumDeviceId = () => {
+    const matches = /_dd_device_id=(\w+)/.exec(document.cookie)
+    return matches ? matches[1] : generateRumDeviceId()
+}
+
+// Temporary solution attributing website page views w. dd app user
+const setRumDeviceId = () => {
+    const deviceId = getRumDeviceId()
+    const domain = window.location.hostname.split('.').slice(-2).join('.')
+    const maxAge = 60 * 60 * 24 * 365
+
+    document.cookie = `_dd_device_id=${deviceId}; Domain=.${domain}; Max-Age=${maxAge}; Path=/; SameSite=None; Secure`
+
+    window.DD_RUM.setUserProperty('device_id', deviceId)
+}
+
 if (window.DD_RUM) {
     if (env === 'preview' || env === 'live') {
         window.DD_RUM.init({
@@ -36,6 +54,10 @@ if (window.DD_RUM) {
 
         if (branch) {
             window.DD_RUM.addRumGlobalContext('branch', branch);
+        }
+
+        if (env === 'live') {
+            setRumDeviceId()
         }
     }
 }
