@@ -7,6 +7,7 @@ import requests
 def list_out_of_sync_transifex_resources():
     """
     Identifies transifex resources that no longer exist in the repo and can be removed from the Transifex.
+    *Note* on local runs please do `make clean-all && make start` first so files built via single-sourcing are included.
     """
     print('Identifying files out of sync with Transifex...')
     transifex_api_key = getenv("TRANSIFEX_API_KEY")
