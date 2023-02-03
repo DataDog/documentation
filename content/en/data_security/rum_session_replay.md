@@ -13,6 +13,9 @@ further_reading:
 - link: "/real_user_monitoring/session_replay/privacy_options/"
   tag: "Documentation"
   text: "Session Replay Privacy Options"
+- link: "https://www.datadoghq.com/blog/default-privacy-session-replay/"
+  tag: "Blog"
+  text: "Obfuscate user data with Session Replay default privacy settings"
 ---
 
 <div class="alert alert-info">This page is about the security of data sent to Datadog. If you're looking for cloud and application security products and features, see the <a href="/security/" target="_blank">Security</a> section.</div>
@@ -84,6 +87,12 @@ In addition to removing client IPs, you can choose to remove geolocation (countr
 #### Role-based access control
 Datadog provides role-based access control (RBAC) for managing who sees RUM data. Default settings for data access depend on the role a user gets added to. There are three types of Datadog roles available: Administrator, Standard, and Read Only roles. More granular RUM-specific permissions are defined in [Datadog role permissions][10]. For example, you can grant or revoke access to view Session Replays.
 
+### Proactively search for sensitive data with Sensitive Data Scanner
+Datadog Sensitive Data Scanner allows you to proactively search and scrub sensitive data upon ingestion by Datadog. In other words, when received by Datadog in volatile memory but before being sent out to data pipelines. The tool has the power to scrub, hash, or partially redact PII data before it is stored. It works by applying out-of-the-box or customer-developed pattern matching rules. Learn more about [Sensitive Data Scanner][11].
+
+## Session Replay-specific privacy options
+See [privacy options specific to Session Replay][12].
+
 ### Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -98,3 +107,5 @@ Datadog provides role-based access control (RBAC) for managing who sees RUM data
 [8]: /help/
 [9]: /help/
 [10]: /account_management/rbac/permissions/#real-user-monitoring
+[11]: /product/sensitive-data-scanner/
+[12]: /real_user_monitoring/session_replay/privacy_options
