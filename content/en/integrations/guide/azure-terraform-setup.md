@@ -32,7 +32,7 @@ resource "datadog_integration_azure" "sandbox" {
 
 {{< /code-block >}}
 
-3. Run `terraform apply`. Wait up to 10 minutes for data to start being collected, and then view the out-of-the-box [Azure overview dashboard][3] to see metrics sent by your Azure resources.
+3. Run `terraform apply`. Wait up to 10 minutes for data to start being collected, and then view the out-of-the-box Azure overview dashboard to see metrics sent by your Azure resources.
 
 ## Additional sections as needed
 
