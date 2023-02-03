@@ -28,11 +28,11 @@ Make sure you have a [Datadog API Key][10] and are using a programming language 
 
 To deploy a sample application without the need to follow the rest of the guide, you can use on of [these examples][12]. The installation process will ask the required details such as the Datadog API Key. Note that these applications send data to the default website `datadoghq.com`.
 
-### Configure your container with the Datadog Agent
+### Instrument your application
 
 To build your container with Datadog instrumentation you can follow one of these two methods, depending if you are using a Dockerfile or buildpack.
 
-#### Configure the Datadog Agent using Dockerfile
+#### Instrument using Dockerfile
 
 Using a Dockerfile to build your container, the following steps are needed:
 
@@ -117,7 +117,7 @@ CMD ["rails", "server", "-b", "0.0.0.0"] (adapt this line to your needs)
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-#### Configure the Datadog Agent using buildpack
+#### Instrument using buildpack
 
 [`Pack Buildpacks`][4] provide a convenient way to package your container without using a Dockerfile. This example will use the GCP container registry and Datadog serverless buildpack. Build your application by running the following command:
 
