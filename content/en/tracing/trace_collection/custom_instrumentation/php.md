@@ -33,7 +33,7 @@ If you run on PHP 8, starting v0.84 of the tracer, you can add attributes to you
 ```php
 <?php
 class Foo {
-    #[DDTrace\Trace(name: "simplename", resource: "rsrc", type: "typeee", service: "test", tags: ["a" => "b", 1 => "ignored"])]
+    #[DDTrace\Trace(name: "simplename", resource: "rsrc", type: "typeee", service: "test", tags: ["a" => "b"])]
     static function simple($arg) {}
 
     #[DDTrace\Trace]
