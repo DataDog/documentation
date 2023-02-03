@@ -44,8 +44,12 @@ When you [write custom rules for CSPM][1], you specify the resource types that a
 
 {{< whatsnext desc="Review detailed information about Azure resource types in the following pages." >}}
     {{< nextlink href="/security/cspm/custom_rules/azure_key_vault_key/" >}}<code>azure_key_vault_key</code>{{< /nextlink >}}
+    {{< nextlink href="/security/cspm/custom_rules/azure_key_vault_secret/" >}}<code>azure_key_vault_secret</code>{{< /nextlink >}}
+    {{< nextlink href="/security/cspm/custom_rules/azure_managed_disk/" >}}<code>azure_managed_disk</code>{{< /nextlink >}}
+    {{< nextlink href="/security/cspm/custom_rules/azure_mysql_server/" >}}<code>azure_mysql_server</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/azure_postgresql_firewall_rule/" >}}<code>azure_postgresql_firewall_rule</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/azure_security_center_auto_provisioning/" >}}<code>azure_security_center_auto_provisioning</code>{{< /nextlink >}}
+    {{< nextlink href="/security/cspm/custom_rules/azure_security_contact/" >}}<code>azure_security_contact</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/azure_security_group/" >}}<code>azure_security_group</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/azure_subscription/" >}}<code>azure_subscription</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/azure_log_analytics_workspace/" >}}<code>azure_log_analytics_workspace</code>{{< /nextlink >}}

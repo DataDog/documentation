@@ -18,9 +18,9 @@ further_reading:
     text: 'Create an Error Tracking monitor'
 ---
 
-{{< beta-callout btn_hidden="true" >}}
+{{< callout btn_hidden="true" >}}
   Error Tracking for Logs is in beta.
-{{< /beta-callout >}} 
+{{< /callout >}} 
 
 ## Overview
 

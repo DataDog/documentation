@@ -15,6 +15,9 @@ further_reading:
   - link: "/logs/explorer/search_syntax/"
     tag: "Documentation"
     text: "Logs Query Filter and Search Syntax"
+  - link: "/dashboards/functions/exclusion/"
+    tag: "Documentation"
+    text: "Exclusion Functions"
 ---
 
 ## Overview
@@ -86,9 +89,19 @@ sum:kubernetes.pods.running{service:*-canary} by {service}
 
 {{< img src="metrics/advanced-filtering/wildcard_prefix.png" alt="Wildcard used as prefix" style="width:100%;" >}}
 
+## Exclusion functions
+
+Add an [exclusion function][3] to your query to: 
+- Exclude N/A values.
+- Apply a minimum or maximum value to metrics that meet the threshold.
+- Exclude values that are above or below threshold values.
+
+Functions do not delete datapoints from Datadog, but they do remove datapoints from your visualizations.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/explorer/search_syntax/
 [2]: /getting_started/tagging/using_tags/
+[3]: /dashboards/functions/exclusion/

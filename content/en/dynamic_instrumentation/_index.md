@@ -23,10 +23,10 @@ further_reading:
   text: "Learn more about Metrics"
 ---
 
-{{< beta-callout url="https://www.datadoghq.com/dynamic-instrumentation-request/" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
+{{< callout url="https://www.datadoghq.com/dynamic-instrumentation-request/" >}}
   Dynamic Instrumentation is in private beta. Fill out this form if you would like to
   access it.
-{{< /beta-callout >}}
+{{< /callout >}}
 
 Dynamic Instrumentation lets you capture data from your live applications without needing to do any code changes or redployment.
 
@@ -36,14 +36,14 @@ Dynamic Instrumentation lets you capture data from your live applications withou
 Dynamic Instrumentation requires the following:
 
 - [Datadog Agent][1] 7.41.1 or higher is installed alongside your service.
-- [Remote Configuration][8] is enabled in that Agent.
-- For Java applications, tracing library [`dd-trace-java`][2] 1.5 or higher.
-- For Python applications, tracing library [`dd-trace-py`][3] 1.5 or higher.
-- For .NET applications, tracing library [`dd-trace-dotnet`][4] 2.22 or higher.
-- [Unified Service Tagging][5] tags `service`, `env`, and `version` are applied to your deployment.
-- Optionally, [Source Code Integration][6] is set up for your service.
+- [Remote Configuration][2] is enabled in that Agent.
+- For Java applications, tracing library [`dd-trace-java`][3] 1.5 or higher.
+- For Python applications, tracing library [`dd-trace-py`][4] 1.5 or higher.
+- For .NET applications, tracing library [`dd-trace-dotnet`][5] 2.22 or higher.
+- [Unified Service Tagging][6] tags `service`, `env`, and `version` are applied to your deployment.
+- Optionally, [Source Code Integration][7] is set up for your service.
 
-**Note**: `debugger_read` and `debugger_write` permissions are required to access the Dynamic Instrumentation page. For more information about roles and on how to assign roles to users, see [Role Based Access Control][7].
+**Note**: `debugger_read` and `debugger_write` permissions are required to access the Dynamic Instrumentation page. For more information about roles and on how to assign roles to users, see [Role Based Access Control][8].
 
 
 ### Create a logs index
@@ -116,13 +116,13 @@ To remove the filter, open the same menu item and click **Delete Filter**.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/
-[2]: https://github.com/DataDog/dd-trace-java
-[3]: https://github.com/DataDog/dd-trace-py
-[4]: https://github.com/DataDog/dd-trace-dotnet
-[5]: /getting_started/tagging/unified_service_tagging/
-[6]: /integrations/guide/source-code-integration/
-[7]: /account_management/rbac/permissions#apm
-[8]: /agent/guide/how_remote_config_works/
+[2]: /agent/guide/how_remote_config_works/
+[3]: https://github.com/DataDog/dd-trace-java
+[4]: https://github.com/DataDog/dd-trace-py
+[5]: https://github.com/DataDog/dd-trace-dotnet
+[6]: /getting_started/tagging/unified_service_tagging/
+[7]: /integrations/guide/source-code-integration/
+[8]: /account_management/rbac/permissions#apm
 [9]: /logs/log_configuration/indexes/#exclusion-filters
 [10]: /logs/log_configuration/indexes/#add-indexes
 [11]: /dynamic_instrumentation/how-it-works/

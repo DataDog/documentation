@@ -241,6 +241,7 @@ build_live:
   cache:
     - *yarn_cache_pull_push
   environment: "live"
+  retry: 1
   variables:
     CONFIG: ${LIVE_CONFIG}
     URL: ${LIVE_DOMAIN}

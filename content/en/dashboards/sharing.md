@@ -31,8 +31,9 @@ When you share a dashboard by URL or email link, the shared page shows live, rea
 
 To share an entire dashboard publicly, generate a URL:
 
+
 1. On the dashboard's page, click the export icon in the upper right.
-2. Select **Generate public URL**.
+2. Select **Generate public URL**, which opens up a *Sharing: On* popup modal.
 3. Under **Time & Variable Settings**, configure your desired options for the time frame and whether users can change it, as well as which tags are visible for selectable template variables.
 4. Copy the URL and click **Done**.
 
@@ -43,7 +44,7 @@ To share an entire dashboard publicly, generate a URL:
  To authorize one or more specific email addresses to view a dashboard page:
 
 1. On the dashboard's page, click the export icon in the upper right.
-2. Select **Generate public URL**.
+2. Select **Generate public URL**, which opens up a *Sharing: On* popup modal.
 3. Select **Only specified people** for indicating who can access this dashboard.
 4. Input the email addresses for people you would like to share your dashboard with.
 5. Under **Time & Variable Settings**, configure your desired options for the time frame and whether users can change it, as well as which tags are visible for selectable template variables.

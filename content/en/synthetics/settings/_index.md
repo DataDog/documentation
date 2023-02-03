@@ -109,7 +109,7 @@ To generate and use a TOTP in your tests, create a global variable where you ent
 
 {{< img src="synthetics/guide/browser-tests-totp/new-variable-totp.png" alt="Create a MFA token" style="width:100%;" >}}
 
-**Note**: For more information about TOTP-based MFA in a browser test, see the [TOTP guide][1].
+For more information about TOTP-based MFA in a browser test, see [TOTPs For Multi-Factor Authentication (MFA) In Browser Tests][1].
 
 [1]: /synthetics/guide/browser-tests-totp
 {{% /tab %}}
@@ -118,7 +118,7 @@ To generate and use a TOTP in your tests, create a global variable where you ent
 
 Once created, global variables can be used in all Synthetic tests. To import your global variables into your test, click **+ Variables**, type `{{` in a field you want to add the variable, and select your global variable. 
 
-For more information, see the [HTTP test][7], [Multistep API test][8], [Browser test configuration][9], and [Steps documentation][10].
+For more information, see the [HTTP test][8], [Multistep API test][9], [Browser test configuration][10], and [Steps documentation][16].
 
 ### Permissions
 
@@ -209,3 +209,4 @@ If you are using the [custom role feature][12], add your user to any custom role
 [13]: /account_management/billing/usage_attribution
 [14]: /synthetics/guide/explore-rum-through-synthetics/
 [15]: /synthetics/apm/#prerequisites
+[16]: /synthetics/browser_tests/actions/#use-variables
