@@ -195,11 +195,13 @@ In containerized setups, submitting traces to `localhost` or `127.0.0.1` is ofte
 Determine if the networking between the application and the Datadog Agent matches what is needed for that configuration.
 
 In particular, check to make sure that the Datadog Agent has access to port `8126` (or to the port you have defined) and that your application is able to direct traces to the Datadog Agent’s location.
-To do so, you can run the following command, from the application container and by replacing the `{agent_ip}`, `{agent_port}` variables:
+To do so, you can run the following command from the application container, replacing the `{agent_ip}` and `{agent_port}` variables:
 
-`curl -X GET http://{agent_ip}:{agent_port}/info`.
+```
+curl -X GET http://{agent_ip}:{agent_port}/info
+```
 
-If this command fails, your container cannot access the agent. Refer to the following sections to get hints on what could be causing this issue.
+If this command fails, your container cannot access the Agent. Refer to the following sections to get hints on what could be causing this issue.
 
 A great place to get started is the [APM in-app setup documentation][6].
 
@@ -216,7 +218,7 @@ See the table below for example setups. Some require setting up additional netwo
 | [AWS EKS on Fargate][9] | Do not set `DD_AGENT_HOST` |
 | [AWS Elastic Beanstalk - Single Container][10] | Gateway IP (usually `172.17.0.1`) |
 | [AWS Elastic Beanstalk - Multiple Containers][11] | Link pointing to the Datadog Agent container name |
-| [Kubernetes][12] | 1) [Unix Domain Socket][13], 2) [`status.hostIP`][14] added manually, or 3) through the [Admission Controller][15]. Also, if using TCP, don't forget to check the [network policies][21] applied on your container |
+| [Kubernetes][12] | 1) [Unix Domain Socket][13], 2) [`status.hostIP`][14] added manually, or 3) through the [Admission Controller][15]. If using TCP, check the [network policies][21] applied on your container |
 | [AWS EKS (non Fargate)][16] | 1) [Unix Domain Socket][13], 2) [`status.hostIP`][14] added manually, or 3) through the [Admission Controller][15] |
 | [Datadog Agent and Application Docker Containers][17] | Datadog Agent container |
 
