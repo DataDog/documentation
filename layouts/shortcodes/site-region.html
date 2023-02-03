@@ -1,9 +1,13 @@
-{{ if  not (.Get "region") }}
+{{ $region := .Get "region" }}
+
+{{ if  not $region }}
     {{ errorf "Site region error: Missing region for param 'region': %s" .Position }}
 {{ end }}
 
-{{ $region := .Get "region" }}
-
-<div class="d-none site-region-container" data-region="{{ $region }}">
-    {{.Inner}}
-</div>
+{{ if eq .Page.Type "account_management"}}
+    <div class="d-none site-region-container" data-region="{{ $region }}">
+        {{.Inner}}
+    </div>
+{{ else }}
+    <div class="d-none site-region-container" data-region="{{ $region }}"><p>{{- .Inner | markdownify -}}</p></div>
+{{ end }}
