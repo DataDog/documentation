@@ -325,18 +325,18 @@ To filter tests by tags, use the search bar or facet checkboxes. The search bar 
 [1]: https://app.datadoghq.com/synthetics/tests
 [2]: /synthetics/search/
 {{% /tab %}}
-{{% tab "CI Results Explorer" %}}
+{{% tab "Explorer" %}}
 
-The [CI Results Explorer][1] displays your browser test results running in a [CI pipeline][2].
+The [Synthetic Monitoring & Continuous Testing Explorer][1] displays your test runs and batches of runs in a [CI pipeline][2].
 
-To filter test runs by tags, use the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`. For example: `@ci.provider.name:github`. For advanced search, see [Search and Manage Synthetic Tests][3].
+To filter test runs by tags, use the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`. For example: `@ci.provider.name:github`. For advanced search, see [Search Test Batches][3].
 
 {{< img src="tagging/using_tags/syntheticscitags.png" alt="Synthetics and CI Tags" style="width:80%;">}}
 
 
-[1]: https://app.datadoghq.com/synthetics/explorer/ci
-[2]: /synthetics/cicd_integrations
-[3]: /synthetics/search/
+[1]: https://app.datadoghq.com/synthetics/explorer/
+[2]: /continuous_testing/cicd_integrations
+[3]: /continuous_testing/explorer/search/
 {{% /tab %}}
 {{< /tabs >}}
 

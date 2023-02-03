@@ -5,7 +5,7 @@ kind: documentation
 
 ## Overview
 
-The Watchdog alerts feature proactively detects service and infrastructure anomalies. Watchdog scans all of your monitored technologies for unusual behavior. If the unusual behavior matches one of Watchdog's anomaly patterns, Watchdog creates an alert.
+The Watchdog alerts feature proactively detects service, infrastructure, and log anomalies. Watchdog scans all of your monitored technologies for unusual behavior. If the unusual behavior matches one of Watchdog's anomaly patterns, Watchdog creates an alert.
 
 ## Alerts
 
@@ -40,7 +40,7 @@ Clicking anywhere on an alert overview card opens the alerts details pane.
 In addition to repeating the information in the alert overview card, the **Overview** tab may contain one or more of the following fields:
 - Expected Bounds: Click the **Show expected bounds** checkbox. The graph changes color to differentiate between expected and anomalous behavior.
 - Suggested Next Steps: Describes steps for investigation and triage of the anomalous behavior.
-- Correlated dashboards: Suggests some of your dashboards that are related to the alert. Datadog highlights which of the dashboard’s metrics are related to the insights in the alert.
+- Correlated dashboards: Suggests some of your dashboards that are related to the alert. Datadog highlights which of the dashboard's metrics are related to the insights in the alert.
 
 The **Monitors** tab lists monitors associated with your alert. Each monitor displayed has the metric of the current alert and its associated tags included in its scope.
 
@@ -62,13 +62,24 @@ Enter text in the **Filter alerts** search box to search over your alert titles.
 
 The left side of the Watchdog alerts feed contains the search facets below. Check the corresponding boxes to filter your alerts by facet.
 
-| Facet           | Description                                                                       |
+| General Facet           | Description                                                                       |
 |-----------------|-----------------------------------------------------------------------------------|
-| Alert Category  | Display all `apm` or all `infrastructure` alerts.                                 |
+| Alert Category  | Display all `apm`, `infrastructure`, or `logs` alerts.                            |
 | Alert Type      | Select alerts using metrics from APM or infrastructure integrations.              |
-| APM Environment | The [APM Environment][5] to display alerts from.                                  |
+| Environment     | The environment to display alerts from. See [Unified Service Tagging][5] for more information about the `env` tag.                                                                      |
+| Service         | The service to display alerts from. See [Unified Service Tagging][5] for more information about the `service` tag.                                                                  |
+
+
+| APM-specific Facet          | Description                                                                       |
+|-----------------|-----------------------------------------------------------------------------------|
 | APM Primary Tag | The [defined APM primary tag][6] to display alerts from.                          |
-| APM Service     | The [APM Service][7] to display alerts from.                                      |
+
+| Log-specific Facet          | Description                                                                       |
+|-----------------|-----------------------------------------------------------------------------------|
+| Log Anomaly Type| Only display log anomalies of this type. The supported types are new log patterns and increases in existing log patterns.                                                                                             |
+| Log Source      | Only display alerts containing logs from this source.                             |
+| Log Status      | Only display alerts containing logs of this log status.                           |
+
 
 
 ## Manage archived alerts
@@ -83,6 +94,5 @@ To see archived alerts, select the checkbox option to "Show N archived alerts" i
 [2]: https://app.datadoghq.com/apm/home
 [3]: /tracing/services/service_page/
 [4]: /watchdog/impact_analysis/
-[5]: /tracing/guide/setting_primary_tags_to_scope/#environment
+[5]: /getting_started/tagging/unified_service_tagging/
 [6]: /tracing/guide/setting_primary_tags_to_scope/
-[7]: /tracing/glossary/#services

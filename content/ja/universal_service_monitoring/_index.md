@@ -37,8 +37,10 @@ title: ユニバーサル サービス モニタリング
 
 コンテナ化されたサービスは、以下のサポートされたプラットフォームのいずれかで実行されている必要があります。
 : Linux Kernel 4.14 以上<br/>
-CentOS または RHEL 8.0 以上<br/>
-Windows 2012 R2 以降の IIS
+CentOS または RHEL 8.0 以上
+
+対応 Windows プラットフォーム
+: Windows 2012 R2 以降の IIS
 
 対応アプリケーション層プロトコル
 : HTTP<br/>
@@ -51,7 +53,10 @@ HTTPS (OpenSSL)
 
 ### 前提条件
 
-- サービスがコンテナで動作していること。
+- Linux の場合:
+    - サービスがコンテナで動作していること。
+- Windows で IIS を使用する場合:
+    - サービスが仮想マシンで動作していること。
 - Datadog Agent がサービスと共にインストールされていること。トレースライブラリのインストールは必要_ありません_。
 - [統合サービスタグ付け][1]の `env` タグがデプロイメントに適用されていること。`service` と `version` タグはオプションです。
 
@@ -282,7 +287,7 @@ DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true
 
 **IIS 上で動作するサービスの場合:**
 
-1. ネットワークドライバーコンポーネントを有効にして、[Datadog Agent][1] (バージョン 6.40 または 7.40 以降) をインストールします。インストール中、`msiexec` コマンドに `ADDLOCAL="MainApplication,NPM"` を渡すか、UI から Agent のインストールを実行するときに **Network Performance Monitoring** を選択します。
+1. ネットワークドライバーコンポーネントを有効にして、[Datadog Agent][1] (バージョン 6.41 または 7.41 以降) をインストールします。インストール中、`msiexec` コマンドに `ADDLOCAL="MainApplication,NPM"` を渡すか、UI から Agent のインストールを実行するときに **Network Performance Monitoring** を選択します。
 
 2. `C:\ProgramData\Datadog\system-probe.yaml` を編集し、有効フラグを `true` に設定します。
 
@@ -321,7 +326,7 @@ Agent を構成した後、サービスカタログにサービスが表示さ�
 - `universal.http.*` メトリクスを使用して、[モニター][4]、[ダッシュボード][5]、[SLO][6] を作成します。
 
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

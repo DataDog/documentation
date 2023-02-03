@@ -15,9 +15,9 @@ private: true
 title: カスタム宛先へのログの転送
 ---
 
-{{< beta-callout url="https://www.datadoghq.com/log-forwarding-limited-availability/" >}}
+{{< callout url="https://www.datadoghq.com/log-forwarding-limited-availability/" >}}
   ログ転送は現在ベータ版です。このフォームにご記入の上、アクセスをリクエストしてください。
-{{< /beta-callout >}}
+{{< /callout >}}
 
 ## 概要
 

@@ -39,7 +39,7 @@ When aggregating by Fields, all logs matching your query filter are aggregated i
 
 **Note**: Individual logs with multiple values for a single facet belong to that many aggregates. For instance, a log having the `team:sre` and the `team:marketplace` tags are counted once in the `team:sre` aggregate and once in the `team:marketplace` aggregate.
 
-The Fields aggregation supports one dimension for the [Top list][4] visualization, and up to three dimensions for the [Timeseries][5] and [Table][6] visualizations. When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, then according to the third dimension within the top values of the second dimension.
+The Fields aggregation supports one dimension for the [Top list][4] visualization, and up to four dimensions for the [Timeseries][5] and [Table][6] visualizations. When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, then according to the third dimension within the top values of the second dimension.
 
 ### Multiple queries
 
@@ -135,6 +135,7 @@ Transactions aggregate indexed logs according to instances of a **sequence** of 
 - **Maximum Severity** found in logs in the transaction. _This measure is automatically added_.
 - **Finding key items:** For any `facet` with string values, calculate specific log information using the operations `count unique`, `latest`, `earliest` and `most frequent`.
 - **Getting Statistics:** For any `measure`, calculate statistical information using the operations `min`, `max`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, and `pc99`.
+- **Set Start and End Conditions:** Customize transaction boundaries by specifying the start and end of the transaction using distinct queries.
 
 Transactions support the [List Aggregates][15] visualization. Clicking a transaction in the list opens the transaction side panel from which you can:
 
@@ -142,6 +143,14 @@ Transactions support the [List Aggregates][15] visualization. Clicking a transac
 - Search specific logs within that transaction
 
 {{< img src="logs/explorer/transactions_side_panel.png" alt="The transaction log panel showing logs within the selected transaction" style="width:80%;" >}}
+
+When a start or end condition is used to define a transaction, click on a transaction group in the list to open the transaction group side panel, from which you can:
+
+- Access the transactions within that transaction group in sequence
+- Access all logs within each transaction
+- View statistics for each transaction and summary statistics for the entire transaction group
+
+{{< img src="logs/explorer/transaction_group_side_panel.png" alt="The transaction group panel showing transactions within the selected group in sequence" style="width:50%;" >}}
 
 ## Further reading
 

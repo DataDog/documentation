@@ -7,12 +7,18 @@ aliases:
 further_reading:
 - link: '/continuous_testing/explorer'
   tag: 'Documentation'
-  text: 'Learn about the CI Results Explorer'
+  text: 'Learn about the Synthetic Monitoring & Continuous Testing Explorer'
 ---
 
 ## Overview
 
-After selecting a time frame from the dropdown menu on the top right, you can search for batches of CI jobs in the [CI Results Explorer][1].
+After selecting a time frame from the dropdown menu on the top right, you can search for batches of CI jobs by clicking on the **CI Batches** event type in the [Synthetic Monitoring & Continuous Testing Explorer][1].
+
+You can use facets to accomplish the following actions:
+
+- Observe the latest batches of tests running in a CI pipeline.
+- Aggregate CI batches and identify test IDs to add into your CI pipeline.
+- Compare the number of failing test runs by their blocking status.
 
 ## Explore facets
 
@@ -75,5 +81,5 @@ For more information about searching for CI batches, see [Search Syntax][2].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/synthetics/explorer/ci
+[1]: https://app.datadoghq.com/synthetics/explorer/
 [2]: /continuous_testing/explorer/search_syntax
