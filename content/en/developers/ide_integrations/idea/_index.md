@@ -12,9 +12,9 @@ further_reading:
   text: "Getting started with Continuous Profiler."
 ---
 
-{{< beta-callout url="#" btn_hidden="true">}}
+{{< callout url="#" btn_hidden="true">}}
   The Datadog plugin for IntelliJ IDEA is in public beta. It is intended for Java developers who use the <a href="https://docs.datadoghq.com/profiler/#pagetitle">Continuous Profiler</a> for their Java services. If the plugin stops working unexpectedly, check for plugin updates or <a href=#feedback>reach out to the team</a>.
-{{< /beta-callout >}}
+{{< /callout >}}
 
 ## Overview
 
@@ -48,6 +48,7 @@ In addition to code highlighting, you can use the Datadog plugin for Intellij ID
 {{< img src="/developers/ide_integrations/idea/datadog-plugin1.png" alt="The Datadog plugin" style="width:100%;" >}}
 
 Alternatively, you can install the plugin from the [Jetbrains Marketplace][4].
+
 <span id="datadog_plugin_install_button"></span>
 
 ### Log in to Datadog
@@ -141,7 +142,7 @@ The active Profiling tab also affects the IDEA project tree view, which is annot
 
 ## Feedback
 
-Let us know what you think about the plugin! Provide feedback on our [discussion forum][1], or send an e-mail to `team-ide-integration@datadoghq.com`.
+Let us know what you think about the plugin! Provide feedback on our [discussion forum][5], or send an e-mail to `team-ide-integration@datadoghq.com`.
 
 ## Further reading
 

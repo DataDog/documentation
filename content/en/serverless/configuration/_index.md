@@ -740,9 +740,9 @@ If you have trouble configuring your installations, set the environment variable
 [30]: /agent/proxy/
 [31]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#aws-privatelink-support
 [32]: /agent/guide/dual-shipping/
-[33]: /serverless/distributed_tracing/serverless_trace_propagation/
+[33]: /serverless/distributed_tracing/#trace-propagation
 [34]: /integrations/amazon_xray/
-[35]: /serverless/distributed_tracing/serverless_trace_merging
+[35]: /serverless/distributed_tracing/#trace-merging
 [36]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html
 [37]: /serverless/guide/extension_motivation/
 [38]: /serverless/guide#install-using-the-datadog-forwarder

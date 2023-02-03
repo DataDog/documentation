@@ -25,7 +25,7 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 
 ## Requirements
 
-The Datadog Profiler requires MRI Ruby 2.2+.
+The Datadog Profiler requires Ruby 2.3+ (JRuby and TruffleRuby are not supported).
 
 The following operating systems and architectures are supported:
 - Linux (GNU libc) x86-64, aarch64

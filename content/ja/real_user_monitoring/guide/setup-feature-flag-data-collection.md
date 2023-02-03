@@ -12,9 +12,9 @@ private: true
 title: RUM の機能フラグデータの概要
 ---
 
-{{< beta-callout url="#" btn_hidden="true" >}}
+{{< callout url="#" btn_hidden="true" >}}
 RUM の機能フラグデータ収集は非公開ベータ版です。アクセスをリクエストするには、サポート (support@datadoghq.com) までご連絡ください。
-{{< /beta-callout >}}
+{{< /callout >}}
 
 ## 概要
 機能フラグデータにより、どのユーザーに特定の機能が表示されているか、導入した変更がユーザー体験に影響を与えているか、パフォーマンスに悪影響を与えているかを判断できるため、ユーザー体験やパフォーマンス監視の可視性が高まります。

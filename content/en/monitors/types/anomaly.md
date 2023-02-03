@@ -70,7 +70,7 @@ Algorithm
 : The [anomaly detection algorithm](#anomaly-detection-algorithms) (`basic`, `agile`, or `robust`).
 
 Seasonality
-: The [seasonality](#seasonality) (`hourly`, `daily`, or `weekly`) of the cycle for the `agile` or `robust` algorithm to analyze the metric. For the `agile` algorithm, `monthly` is also available.
+: The [seasonality](#seasonality) (`hourly`, `daily`, or `weekly`) of the cycle for the `agile` or `robust` algorithm to analyze the metric.
 
 Daylight savings
 : Available for `agile` or `robust` anomaly detection with `weekly` or `daily` seasonality. For more information, see [Anomaly Detection and Time Zones][4].
@@ -92,9 +92,6 @@ Daily
 
 Weekly
 : The algorithm expects that a given day of the week behaves like past days of the week, for example this Tuesday behaves like past Tuesdays.
-
-Monthly
-: The algorithm expects that a given day of the month behaves like past days of the month, for example the first day of the month behaves like past first days of a month. Available for the `agile` algorithm.
 
 ### Anomaly detection algorithms
 Basic
@@ -185,7 +182,7 @@ avg(<query_window>):anomalies(<metric_query>, '<algorithm>', <deviations>, direc
 : Use `true` for most monitors. Set to `false` only if submitting a count metric in which the lack of a value should _not_ be interpreted as a zero.
 
 `seasonality`
-: `hourly`, `daily`, `weekly`, or `monthly`. Exclude this parameter when using the `basic` algorithm. The `monthly` parameter is available when using the `agile` algorithm.
+: `hourly`, `daily`, or `weekly`. Exclude this parameter when using the `basic` algorithm.
 
 `threshold`
 : A positive number no larger than 1. The fraction of points in the `alert_window` that must be anomalous in order for a critical alert to trigger.

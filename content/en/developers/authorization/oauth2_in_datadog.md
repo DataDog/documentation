@@ -8,9 +8,9 @@ further_reading:
   text: "Learn how to use the OAuth 2.0 authorization endpoints"
 ---
 
-{{< beta-callout btn_hidden="true" >}}
+{{< callout btn_hidden="true" >}}
   The Datadog Developer Platform is in beta. If you don't have access, contact apps@datadoghq.com.
-{{< /beta-callout >}} 
+{{< /callout >}} 
 
 ## Overview
 
