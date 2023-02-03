@@ -154,7 +154,7 @@ Depending on your deployment process, push the image built to a registry. The `g
 
 7. Under the **Environment variables** section, ensure that the name is set to `DD_API_KEY`.
 
-8. Still under **Environment variables**, create two more variables. One named `DD_TRACE_ENABLED` set to `true` to enable tracing. Another named `DD_SITE` containing the Datadog site which will collect the data (if not set, it defaults to `datadoghq.com`)
+8. Still under **Environment variables**, create two more variables. One named `DD_TRACE_ENABLED` set to `true` to enable tracing. Another named `DD_SITE` containing the Datadog site which will collect the data (if not set, it defaults to `datadoghq.com`). Your `DD_SITE` is {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right of the page).
 
 {{% /tab %}}
 {{% tab "gcloud CLI" %}}
