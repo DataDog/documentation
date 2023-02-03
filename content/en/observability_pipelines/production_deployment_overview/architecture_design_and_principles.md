@@ -37,7 +37,7 @@ If you prefer to use a HTTP proxy, Observability Pipelines Worker offers a globa
 
 Discovery of your Observability Pipelines Worker aggregators and services should resolve through DNS or service discovery. This strategy facilitates routing and load balancing of your traffic, and is how your agents and load balancers discover your aggregators. For proper separation of concerns, the Observability Pipelines Worker does not resolve DNS queries and, instead, delegates this to a system-level resolver (for example, [Linux resolving][1]).
 
-{{< img src="observability_pipelines/production_deployment_overview/dns_service_discovery.png" alt=A diagram showing a cloud region with a cluster of agents, cluster of load balancers, and aggregate of Observability Pipelines Workers, where each group is sending separate queries to the DNS or service registry" style="width:70%;" >}}
+{{< img src="observability_pipelines/production_deployment_overview/dns_service_discovery.png" alt="A diagram showing a cloud region with a cluster of agents, cluster of load balancers, and aggregate of Observability Pipelines Workers, where each group is sending separate queries to the DNS or service registry" style="width:70%;" >}}
 
 ### Choosing protocols
 
@@ -116,7 +116,7 @@ Local processing is recommended for:
 
 For remote processing, the Observability Pipelines Worker can be deployed on separate nodes as an aggregator. 
 
-{{< img src="observability_pipelines/production_deployment_overview/aggregator_role.png" alt="A diagram showingß an Observability Pipelines Worker aggregator containing multiple Workers that are receiving data from the network load balancer and sending data to different sinks" style="width:100%;" >}}
+{{< img src="observability_pipelines/production_deployment_overview/aggregator_role.png" alt="A diagram showing an Observability Pipelines Worker aggregator containing multiple Workers that are receiving data from the network load balancer and sending data to different sinks" style="width:100%;" >}}
 
 Data processing is shifted off your nodes and onto remote aggregator nodes. Remote processing is recommended for environments that require high durability and high availability (most environments). In addition, this is easier to set up since it does not require the infrastructure restructuring necessary when adding an agent.
 
