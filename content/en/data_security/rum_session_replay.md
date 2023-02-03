@@ -88,7 +88,7 @@ In addition to removing client IPs, you can choose to remove geolocation (countr
 Datadog provides role-based access control (RBAC) for managing who sees RUM data. Default settings for data access depend on the role a user gets added to. There are three types of Datadog roles available: Administrator, Standard, and Read Only roles. More granular RUM-specific permissions are defined in [Datadog role permissions][10]. For example, you can grant or revoke access to view Session Replays.
 
 ### Proactively search for sensitive data with Sensitive Data Scanner
-Datadog Sensitive Data Scanner allows you to proactively search and scrub sensitive data upon ingestion by Datadog. In other words, when received by Datadog in volatile memory but before being sent out to data pipelines. The tool has the power to scrub, hash, or partially redact PII data before it is stored. It works by applying out-of-the-box or customer-developed pattern matching rules. Learn more about [Sensitive Data Scanner][11].
+[Sensitive Data Scanner][11] allows you to proactively search and scrub sensitive data upon ingestion by Datadog. In other words, when received by Datadog in volatile memory but before being sent out to data pipelines. The tool has the power to scrub, hash, or partially redact PII data before it is stored. It works by applying out-of-the-box or customer-developed pattern matching rules.
 
 ## Session Replay-specific privacy options
 See [privacy options specific to Session Replay][12].
