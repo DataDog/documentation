@@ -34,7 +34,7 @@ Mobile RUM tracking is only run upon user consent. If the end user accepts the R
 You have several options and tools when it comes to collecting and redacting data captured by RUM.
 
 ### Event tracking
-You can opt to to redact the data that is captured by RUM before it is sent and stored in Datadog through advanced configuration options for the following methods:
+You can opt to redact the data that is captured by RUM before it is sent and stored in Datadog through advanced configuration options for the following methods:
 
 - [beforeSend API][1]
 - [iOS][2]
