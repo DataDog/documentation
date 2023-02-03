@@ -31,7 +31,7 @@ Browser RUM requires **first party cookies** to be enabled on an end user’s br
 Mobile RUM tracking is only run upon user consent. If the end user accepts the RUM tracking, we track their activity and session experience. If the user declines the RUM tracking, we do not track their activity and session experience.
 
 ## Privacy options
-You have several options when it comes to collecting and redacting data captured by RUM.
+You have several options and tools when it comes to collecting and redacting data captured by RUM.
 
 ### Event tracking
 You can opt to to redact the data that is captured by RUM before it is sent and stored in Datadog through advanced configuration options for the following methods:
@@ -77,6 +77,9 @@ You can request that client IP addresses be scrubbed by submitting a support tic
 #### Geolocation
 In addition to removing client IPs, you can choose to remove geolocation (country, city, county), or GeoIP, as well. It is not possible to remove only GeoIP data without removing client IPs. Geolocation scrubbing occurs at the organization level; this data cannot be removed for specific applications, services, and so on. It is done at the backend level, which means the Browser SDK will still be sending data, but geolocation IP will be scrubbed out by our backend pipelines and dropped at processing time.
 
+#### Role-based access control
+Datadog provides role-based access control (RBAC) for managing who sees RUM data. Default settings for data access depend on the role a user gets added to. There are three types of Datadog roles available: Administrator, Standard, and Read Only roles. More granular RUM-specific permissions are defined in [Datadog role permissions][10]. For example, you can grant or revoke access to view Session Replays.
+
 ### Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -90,3 +93,4 @@ In addition to removing client IPs, you can choose to remove geolocation (countr
 [7]: /help/
 [8]: /help/
 [9]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#user-session
+[10]: /account_management/rbac/permissions/#real-user-monitoring
