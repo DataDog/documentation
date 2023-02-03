@@ -37,7 +37,7 @@ On January 4th, 2023, Datadog was notified by CircleCI that they were investigat
 
 The impacted RPM GPG signing key has the fingerprint `60A389A44A0C32BAE3C03F0B069B56F54172A230`, and is accessible in [our signing keys location][2]. This key was historically used to sign:
 
-* Agent 5 releases and Agent 6 releases up to and including v6.13.0 (`datadog-agent` package)
+* Agent 5 releases up to and including v5.32.8 and Agent 6 releases up to and including v6.13.0 (`datadog-agent` package)
 * Standalone DogStatsD 6 releases and Standalone DogStatsD 7 releases up to and including v7.23.1 (`datadog-dogstatsd` package)
 
 <div class="alert alert-info">
