@@ -135,11 +135,11 @@ Horizontal scaling refers to distributing traffic across multiple Observability 
 
 For push-based sources, front your Observability Pipelines Worker instances with a network load balancer and scale them up and down as needed.
 
-{{< img src="observability_pipelines/production_deployment_overview/horizontal_scaling_push.png" alt="A diagram showing a cloud region broken down into agents, network load balancers, and an Observability Pipelines Worker aggregator, and the data from the agents are sent to the load balancer, Observability Pipelines Workers, and then to other destinations" style="width:70%;" >}}
+{{< img src="observability_pipelines/production_deployment_overview/horizontal_scaling_push.png" alt="A diagram showing a cloud region broken down into agents, network load balancers, and an Observability Pipelines Worker aggregator, and the data from the agents are sent to the load balancer, Observability Pipelines Workers, and then to other destinations" style="width:60%;" >}}
 
 A load balancer is not required for pull-based sources; deploy Observability Pipelines Worker and scale it up and down as needed. Your publish-subscription system coordinates exclusive access to the data when Observability Pipelines Worker asks to read it.
 
-{{< img src="observability_pipelines/production_deployment_overview/horizontal_scaling_pull.png" alt="A diagram showing a cloud region broken down into agents, brokers, and an Observability Pipelines aggregator. Data from the agents are sent to the brokers, and then sent and received between the broker and the Observability Pipelines Workers, and then sent from the Workers out to the other destinations" style="width:70%;" >}}
+{{< img src="observability_pipelines/production_deployment_overview/horizontal_scaling_pull.png" alt="A diagram showing a cloud region broken down into agents, brokers, and an Observability Pipelines aggregator. Data from the agents are sent to the brokers, and then sent and received between the broker and the Observability Pipelines Workers, and then sent from the Workers out to the other destinations" style="width:60%;" >}}
 
 See [Advanced configurations](#advanced-configurations) for more information on mixed workloads (push and pull-based sources).
 
@@ -207,7 +207,7 @@ Autoscaling should be based on average CPU utilization. For the vast majority of
 
 Most users have complex production environments with many network boundaries, including multiple clouds, regions, VPCs, and clusters. It can get complicated when determining where Observability Pipelines Worker fits within those boundaries. Therefore, Datadog recommends starting with one Observability Pipelines Worker aggregator per region, even if you have multiple accounts, VPCs, and clusters. This boundary is the broadest networking granularity that avoids sending data over the public internet. If you have multiple clusters, deploy Observability Pipelines Worker into your utility or tools cluster, or pick a cluster that is most appropriate for shared services.
 
-{{< img src="observability_pipelines/production_deployment_overview/multi-cluster.png" alt="A diagram showing a cloud region with data sent from two clusters with multiple agents to a utility and tools cluster with network load balancers and an aggregator with multiple Observability Pipelines Workers" style="width:70%;" >}}
+{{< img src="observability_pipelines/production_deployment_overview/multi-cluster.png" alt="A diagram showing a cloud region with data sent from two clusters with multiple agents to a utility and tools cluster with network load balancers and an aggregator with multiple Observability Pipelines Workers" style="width:75%;" >}}
 
 As your Observability Pipelines Worker usage increases, it can then become clear where multiple Observability Pipelines Worker deployments fit in.
 
@@ -262,7 +262,7 @@ Compression of network traffic should only be used for cost-sensitive egress sce
 
 High durability is the ability to retain data when there are system failures. The aggregator architecture is designed to take on the responsibility of high durability. This simplifies your durability strategy by shifting the burden away from your agents and localizing it to your aggregators. In addition, this concentrated approach allows for durability strategies that would be difficult to implement across all of your agent nodes.
 
-{{< img src="observability_pipelines/production_deployment_overview/high_durability.png" alt="A diagram showing the Observability Pipelines Worker sending data to a replicated block storage" style="width:60%;" >}}
+{{< img src="observability_pipelines/production_deployment_overview/high_durability.png" alt="A diagram showing the Observability Pipelines Worker sending data to a replicated block storage" style="width:100%;" >}}
 
 To achieve high durability:
 
@@ -294,7 +294,7 @@ sinks:
 
 With this feature enabled, Observability Pipelines Worker does not respond to agents until the data has been durably persisted. This prevents the agent from releasing the data prematurely and sending it again if an acknowledgment has not been received.
 
-{{< img src="observability_pipelines/production_deployment_overview/end_to_end_acknowledgments.png" alt="A diagram showing acknowledgments sent from the Observability Pipelines Worker's source back to the client" style="width:90%;" >}}
+{{< img src="observability_pipelines/production_deployment_overview/end_to_end_acknowledgments.png" alt="A diagram showing acknowledgments sent from the Observability Pipelines Worker's source back to the client" style="width:100%;" >}}
 
 ### Handling node failures
 
@@ -324,7 +324,7 @@ Destination failures refer to the total failure of a downstream destination (for
 
 High availability refers to Observability Pipelines Worker remaining available if there are any system issues.
 
-{{< img src="observability_pipelines/production_deployment_overview/high_availability.png" alt="A diagram showing availability zone one with load balancer one offline, and both agents sending data to load balancer two and then to Worker one and Worker two. In availability zone two, Worker three is down, so both load balancers are sending data to Worker N" style="width:70%;" >}}
+{{< img src="observability_pipelines/production_deployment_overview/high_availability.png" alt="A diagram showing availability zone one with load balancer one offline, and both agents sending data to load balancer two and then to Worker one and Worker two. In availability zone two, Worker three is down, so both load balancers are sending data to Worker N" style="width:65%;" >}}
 
 To achieve high durability:
 
@@ -338,7 +338,7 @@ To achieve high durability:
 
 To mitigate a system process issue, distribute the Observability Pipelines Worker across multiple nodes and front them with a network load balancer that can redirect traffic to another Observability Pipelines Worker instance as needed. In addition, platform-level automated self-healing should eventually restart the process or replace the node.
 
-{{< img src="observability_pipelines/production_deployment_overview/process_failure.png" alt="A diagram showing three nodes, where each node has an Observability Pipelines Worker" style="width:50%;" >}}
+{{< img src="observability_pipelines/production_deployment_overview/process_failure.png" alt="A diagram showing three nodes, where each node has an Observability Pipelines Worker" style="width:45%;" >}}
 
 #### Mitigating node failures
 
@@ -350,7 +350,7 @@ To mitigate node issues, distribute the Observability Pipelines Worker across mu
 
 To mitigate issues with availability zones, deploy the Observability Pipelines Worker across multiple availability zones.
 
-{{< img src="observability_pipelines/production_deployment_overview/availability_zone_failure.png" alt="A diagram showing the load balancers and Observability Pipelines Worker down in availability zone one, but load balancers and Workers in zone N still receiving and sending data" style="width:40%;" >}}
+{{< img src="observability_pipelines/production_deployment_overview/availability_zone_failure.png" alt="A diagram showing the load balancers and Observability Pipelines Worker down in availability zone one, but load balancers and Workers in zone N still receiving and sending data" style="width:45%;" >}}
 
 #### Mitigating region failures
 
@@ -366,7 +366,7 @@ Observability Pipelines Worker is an infrastructure-level tool designed to route
 
 If you're using a managed destination, such as Datadog, Observability Pipelines Worker can facilitate automatic routing data to your Datadog DR site using Observability Pipelines Worker's circuit breaker feature.
 
-{{< img src="observability_pipelines/production_deployment_overview/external_disaster_recovery.png" alt="A diagram showing Observability Pipelines Workers in different zones, and all sending data to the same disaster recovery destination" style="width:70%;" >}}
+{{< img src="observability_pipelines/production_deployment_overview/external_disaster_recovery.png" alt="A diagram showing Observability Pipelines Workers in different zones, and all sending data to the same disaster recovery destination" style="width:75%;" >}}
 
 ## Advanced configurations
 
@@ -410,7 +410,7 @@ This section provides recommendations for performing global calculations for leg
 
 Global aggregation refers to the ability to aggregate data for an entire region. For example, computing global quantiles for CPU load averages. To achieve this, a single Observability Pipelines Worker instance must have access to every node's CPU load average statistics. This is not possible with horizontal scaling; each individual Observability Pipelines Worker instance only has access to a slice of the overall data. Therefore, aggregation should be tiered.
 
-{{< img src="observability_pipelines/production_deployment_overview/global_aggregation.png" alt="A diagram showing load balancers sending data to a tier one aggregator, which has multiple Observability Pipelines Workers, and then from tier one the data is sent to the tier two aggregator, which has one Worker" style="width:80%;" >}}
+{{< img src="observability_pipelines/production_deployment_overview/global_aggregation.png" alt="A diagram showing load balancers sending data to a tier one aggregator, which has multiple Observability Pipelines Workers, and then from tier one the data is sent to the tier two aggregator, which has one Worker" style="width:90%;" >}}
 
 In the above diagram, the tier two aggregators receive an aggregated sub-stream of the overall data from the tier one aggregators. This allows a single instance to get a global view without processing the entire stream and introducing a single point of failure.
 

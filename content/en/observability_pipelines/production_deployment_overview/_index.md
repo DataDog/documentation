@@ -21,7 +21,7 @@ Most users of Observability Pipelines Worker have complex production environment
 
  As an agent, the Observability Pipelines Worker (OPW) is deployed on each individual node, shifting data collection and processing to the edge:
 
-{{< img src="observability_pipelines/production_deployment_overview/agent.png" alt="A diagram showing an Observability Pipelines Worker in each of the two nodes, where the Workers are both receiving data from the central control plane and sending data to various sinks" style="width:80%;" >}}
+{{< img src="observability_pipelines/production_deployment_overview/agent.png" alt="A diagram showing an Observability Pipelines Worker in each of the two nodes, where the Workers are both receiving data from the central control plane and sending data to various sinks" style="width:70%;" >}}
 
 Data can be received from other agents on the same node (for example, from the Datadog Agent) or collected directly from the node itself (for example, tailing log files). The goal is to centralize egress on the node through the Observability Pipelines Worker and take advantage of underutilized edge resources. Most users can deploy Observability Pipelines Worker as an agent without increasing their provisioned resources.
 
