@@ -62,16 +62,10 @@ Next, install a sample application to trace. The code sample for this tutorial c
 git clone https://github.com/DataDog/apm-tutorial-golang.git
 {{< /code-block >}}
 
-To install the necessary libraries for the sample app, run the following command from the root directory of the repo:
-
-{{< code-block lang="go">}}
-go mod download
-{{< /code-block >}}
-
 Build the sample application using the following command. The command might take a while the first time you run it:
 
 {{< code-block lang="bash" >}}
-make run
+make runNotes
 {{< /code-block >}}
 
 The sample `notes` application is a basic REST API that stores data in an in-memory database. Use `curl` to send a few API requests:
@@ -94,7 +88,7 @@ The sample `notes` application is a basic REST API that stores data in an in-mem
 Run more API calls to see the application in action. When you're done, run the following command to exit the application:
 
 {{< code-block lang="bash" >}}
-make exit
+make exitNotes
 {{< /code-block >}}
 
 ## Install Datadog tracing
@@ -103,17 +97,50 @@ Next, install the Go tracer. From your `apm-tutorial-golang` directory, run:
 
 {{< code-block lang="bash" >}}
 go get gopkg.in/DataDog/dd-trace-go.v1/ddtrace
-go get gopkg.in/DataDog/dd-trace-go.v1/internal/remoteconfig@v1.46.1
 {{< /code-block >}}
 
-Ensure that the following lines of code are present in each of the apps defined in `apm-tutorial-golang/cmd/calendar/main.go` and `apm-tutorial-golang/cmd/notes/main.go`:
+Now that the tracing library has been added to `go.mod`, enable tracing support.
+
+Uncomment the following imports in `apm-tutorial-golang/cmd/calendar/main.go`:
+{{< code-block lang="go" >}}
+	sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
+	chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
+	httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
+	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+{{< /code-block >}}
+
+In the `main()` function, uncomment the following lines:
 
 {{< code-block lang="go" >}}
-func main() {
-  tracer.Start()
-  defer tracer.Stop()
-  ...
-}
+tracer.Start()
+defer tracer.Stop()
+{{< /code-block >}}
+
+{{< code-block lang="go" >}}
+client = httptrace.WrapClient(client, httptrace.RTWithResourceNamer(func(req *http.Request) string {
+		return fmt.Sprintf("%s %s", req.Method, req.URL.Path)
+	}))
+{{< /code-block >}}
+
+{{< code-block lang="go" >}}
+r.Use(chitrace.Middleware(chitrace.WithServiceName("notes")))
+{{< /code-block >}}
+
+In `setupDB()`, uncomment the following lines:
+
+{{< code-block lang="go" >}}
+sqltrace.Register("sqlite3", &sqlite3.SQLiteDriver{}, sqltrace.WithServiceName("db"))
+db, err := sqltrace.Open("sqlite3", "file::memory:?cache=shared")
+{{< /code-block >}}
+
+Comment out the following line:
+{{< code-block lang="go" >}}
+db, err := sql.Open("sqlite3", "file::memory:?cache=shared")
+{{< /code-block >}}
+
+Once you've made these changes, run:
+{{< code-block lang="go" >}}
+go mod tidy
 {{< /code-block >}}
 
 ## Launch the Go application and explore automatic instrumentation
@@ -199,36 +226,35 @@ The `main.go` file contains more implementation examples for each of these libra
 
 ### Use custom tracing with context
 
-In cases where code doesn't fall under a supported library, you can create spans manually. There are several examples of custom tracing in the sample application.
+In cases where code doesn't fall under a supported library, you can create spans manually.
 
-The `makeSpanMiddleware` function starts a span using the context found from the HTTP request. It sets the name of the span to the function name used to resolve the REST call:
+Remove the comments around the `makeSpanMiddleware` function in `notes/notesController.go`. It generates middleware that wraps a request in a span with the supplied name. To use this function, comment out the following lines:
 
-{{< code-block lang="go" filename="notes/notesController.go" disable_copy="true" collapsible="true" >}}
-func (nr *Router) Register() chi.Router {
-	r := chi.NewRouter()
-	r.Get("/notes", makeSpanMiddleware("GetAllNotes", nr.GetAllNotes))               // GET /notes
+{{< code-block lang="go" disable_copy="true" collapsible="true" >}}
+  r.Get("/notes", nr.GetAllNotes)                // GET /notes
+	r.Post("/notes", nr.CreateNote)                // POST /notes
+	r.Get("/notes/{noteID}", nr.GetNoteByID)       // GET /notes/123
+	r.Put("/notes/{noteID}", nr.UpdateNoteByID)    // PUT /notes/123
+	r.Delete("/notes/{noteID}", nr.DeleteNoteByID) // DELETE /notes/123
+{{< /code-block >}}
+
+Remove the comments around the following lines:
+
+{{< code-block lang="go" disable_copy="true" collapsible="true" >}}
+  r.Get("/notes", makeSpanMiddleware("GetAllNotes", nr.GetAllNotes))               // GET /notes
 	r.Post("/notes", makeSpanMiddleware("CreateNote", nr.CreateNote))                // POST /notes
 	r.Get("/notes/{noteID}", makeSpanMiddleware("GetNote", nr.GetNoteByID))          // GET /notes/123
 	r.Put("/notes/{noteID}", makeSpanMiddleware("UpdateNote", nr.UpdateNoteByID))    // PUT /notes/123
 	r.Delete("/notes/{noteID}", makeSpanMiddleware("DeleteNote", nr.DeleteNoteByID)) // DELETE /notes/123
-
-	r.Post("/notes/quit", func(rw http.ResponseWriter, r *http.Request) {
-		time.AfterFunc(1*time.Second, func() { os.Exit(0) })
-		rw.Write([]byte("Goodbye\n"))
-	}) //Quits program
-
-	return r
-}
-
-func makeSpanMiddleware(name string, h http.HandlerFunc) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		span, ctx := tracer.StartSpanFromContext(r.Context(), name)
-		r = r.WithContext(ctx)
-		defer span.Finish()
-		h.ServeHTTP(w, r)
-	}
-}
 {{< /code-block >}}
+
+Also remove the comment around the following import:
+
+{{< code-block lang="go" disable_copy="true" collapsible="true" >}}
+"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+{{< /code-block >}}
+
+There are several examples of custom tracing in the sample application. Here are a couple more examples. Remove the comments to enable these spans:
 
 The `doLongRunningProcess` function creates child spans from a parent context:
 
@@ -268,7 +294,24 @@ Tracing a single application is a great start, but the real value in tracing is 
 
 The sample project includes a second application called `calendar` that returns a random date whenever it is invoked. The `POST` endpoint in the notes application has a second query parameter named `add_date`. When it is set to `y`, the notes application calls the calendar application to get a date to add to the note.
 
-1. If needed, run `make run` again to start the sample application.
+To enable tracing in the calendar application, uncomment the following lines in cmd/calendar/main.go:
+
+{{< code-block lang="go" filename="notes/notesHelper.go" disable_copy="true" collapsible="true" >}}
+chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
+	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+{{< /code-block >}}
+
+{{< code-block lang="go" filename="notes/notesHelper.go" disable_copy="true" collapsible="true" >}}
+tracer.Start()
+	defer tracer.Stop()
+{{< /code-block >}}
+
+{{< code-block lang="go" filename="notes/notesHelper.go" disable_copy="true" collapsible="true" >}}
+	r.Use(chitrace.Middleware(chitrace.WithServiceName("calendar")))
+{{< /code-block >}}
+
+1. If the notes application is still running, use make exitNotes to stop it.
+1. Run `make run` to start the sample application.
 1. Send a POST request with the `add_date` parameter:
    {{< code-block lang="go">}}curl -X POST 'localhost:8080/notes?desc=hello_again&add_date=y'{{< /code-block >}}
 
@@ -284,7 +327,7 @@ This flame graph combines interactions from multiple applications:
 
 ## Troubleshooting
 
-If you're not receiving traces as expected, set up debug mode for the Java tracer. Read [Enable debug mode][13] to find out more.
+If you're not receiving traces as expected, set up debug mode for the Go tracer. Read [Enable debug mode][13] to find out more.
 
 ## Further reading
 
@@ -302,7 +345,7 @@ If you're not receiving traces as expected, set up debug mode for the Java trace
 [10]: /getting_started/tagging/unified_service_tagging/#non-containerized-environment
 [11]: https://app.datadoghq.com/apm/traces
 [12]: /tracing/trace_collection/custom_instrumentation/go/
-[13]: /tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode
+[13]: /tracing/troubleshooting/tracer_debug_logs/?code-lang=go
 [14]: /tracing/trace_collection/library_config/go/
 [15]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=Go
 [16]: /tracing/trace_collection/compatibility/go/#library-compatibility
