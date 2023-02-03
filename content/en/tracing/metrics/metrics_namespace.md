@@ -116,7 +116,7 @@ With the following definitions:
 
 `trace.<SPAN_NAME>.duration`
 : **Prerequisite:** This metric exists for any APM service.<br>
-**Description:** Measure the total time for a collection of spans within a time interval, including child spans seen in the collecting service. For most use cases, it is recommended to use the [Latency Distribution](#latency-distribution) for calculation of average latency or percentiles. To calculate the average latency with host tag filters, you can use this metric with the following formula: <br>
+**Description:** Measure the total time for a collection of spans within a time interval, including child spans seen in the collecting service. For most use cases, Datadog recommends using the [Latency Distribution](#latency-distribution) for calculation of average latency or percentiles. To calculate the average latency with host tag filters, you can use this metric with the following formula: <br>
 `sum:trace.<SPAN_NAME>.duration{<FILTER>}.rollup(sum).fill(zero) / sum:trace.<SPAN_NAME>.hits{<FILTER>}` <br>
 This metric does not support percentile aggregations. Please refer to the [Latency Distribution](#latency-distribution) section.
 **Metric type:** [GAUGE][7].<br>
