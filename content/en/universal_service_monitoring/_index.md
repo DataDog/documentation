@@ -1,7 +1,7 @@
 ---
 title: Universal Service Monitoring
 kind: documentation
-aliases: 
+aliases:
 - /tracing/universal_service_monitoring/
 further_reading:
 - link: "https://www.datadoghq.com/blog/universal-service-monitoring-datadog/"
@@ -282,6 +282,36 @@ DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true
 ```
 
 {{% /tab %}}
+{{% tab "Chef" %}}
+
+Set the following attributes on your nodes:
+
+```rb
+node["datadog"]["system_probe"]["service_monitoring_enabled"] = true
+```
+
+{{% /tab %}}
+{{% tab "Puppet" %}}
+
+Set `service_monitoring_enabled`:
+
+```conf
+class { 'datadog_agent::system_probe':
+    service_monitoring_enabled => true,
+}
+```
+
+{{% /tab %}}
+{{% tab "Ansible" %}}
+
+Add the following attributes in your playbook:
+
+```yaml
+service_monitoring_config:
+  enabled: true
+```
+
+{{% /tab %}}
 {{% tab "Windows" %}}
 
 **For services running on IIS:**
@@ -320,7 +350,7 @@ After enabling Universal Service Monitoring, you can:
 
 - Navigate to **APM** > **Service Catalog** or **APM** > **Service Map** to [visualize your services and their dependencies][3].
 
-- Click into specific Service pages to see golden signal metrics (requests, errors, and duration), and correlate these against recent code changes with [Deployment Tracking][2]. 
+- Click into specific Service pages to see golden signal metrics (requests, errors, and duration), and correlate these against recent code changes with [Deployment Tracking][2].
 
 - Create [monitors][4], [dashboards][5], and [SLOs][6] using the `universal.http.*` metrics.
 

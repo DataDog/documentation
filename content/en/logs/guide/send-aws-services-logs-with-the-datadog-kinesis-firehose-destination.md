@@ -1,5 +1,5 @@
 ---
-title: Send AWS services logs with the Datadog Kinesis Firehose Destination
+title: Send AWS Services Logs with the Datadog Kinesis Firehose Destination
 kind: documentation
 further_reading:
 - link: "/logs/explorer/"

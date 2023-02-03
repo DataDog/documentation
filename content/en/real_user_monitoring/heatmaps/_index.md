@@ -8,10 +8,6 @@ further_reading:
   text: 'Session Replay'
 ---
 
-{{< beta-callout url="https://forms.gle/48wkkRoZfwhn74ycA" >}}
-Heatmaps are in private beta, but you can request access using this form. We'll reach out directly once approved.
-{{< /beta-callout >}} 
-
 {{< img src="real_user_monitoring/heatmaps/heatmap.jpeg" alt="An overview of the heatmap functionality." style="width:100%;">}}
 
 A heatmap (or heat map) is a visualization of your user's Session Replay data, where your user's interactions (clicks) are represented by color in the image. Seeing where a user clicks helps you understand if users engage with your page the way you expect and if they are finding all of your call to actions (CTAs) and important buttons. Visualizing these interactions in a heatmap makes it easy to understand complex data at a glance. Taking the insights from heatmaps helps you make UI decisions to optimize your user experience and increase retention.
@@ -33,7 +29,7 @@ datadogRum.init({
 
 ### Getting started
 
-On the [heatmap page][3], select your application and view. A heatmap displays the aggregrate of where all users (sessions) clicked on a single view, with the view being a single page within an application. Each session is one user's activity and includes everything they did, including all pages they viewed and all actions they clicked.
+On the view list page, select your application and view. This will take you to the [heatmap page][3] for a particular view. You can switch the view being shown with the **View Name** and **Application** selectors at the top. A heatmap displays the aggregate of where all users (sessions) clicked on a single view, with the view being a single page within an application. Each session is one user's activity and includes everything they did, including all pages they viewed and all actions they clicked.
 
 To adjust the filters (to look at specific geography, for example), you can add a filter from the panel on the left side.
 
@@ -47,6 +43,8 @@ The right panel helps you understand the data in the heatmap:
 - The total number of unique users viewing the page.
 - The actions on the page where a frustration signal occurred.
 
+You can click into any of these queries to pivot to an analytical view of these data points.
+
 Below the panel are all actions that occurred on the page, listed by frequency. When you click into an action, you can understand more about that interaction, for example:
 
 - The number of times the user performed the action and where it falls in overall analytics of top actions on a given page.
@@ -58,9 +56,34 @@ Below the panel are all actions that occurred on the page, listed by frequency. 
 
 After understanding analytics, the next step is to understand the action in the context of other data outside of heatmaps. This might mean pivoting to the [RUM explorer][4] or building a funnel that includes the action in order to [analyze conversion rates][5]. You can also watch associated [session replays][1] to visually see a user performing the action in the context of their overall session.
 
+## Troubleshooting
+
+### I am looking at a heatmap for a given view, but it’s showing me an unexpected page.
+
+Heatmaps are based on RUM view names. Depending on how your RUM application is configured, many pages can start being grouped under the same view name, or you can start having very specific view names. If you think the default view name gathering is not sufficient, you can override it manually with the [startView][6] function. 
+
+### After attempting to create a heatmap, I see a "No Replay Data" state appear. 
+
+This means that Datadog could not find any Session Replays to use as a heatmap background that matches the current search filters. If you just started to record sessions with the [Browser SDK][2], it may also take a few minutes for the Session Replay to be available for viewing.
+
+### After attempting to create a heatmap, I see a "Not enough data to generate a heatmap" state appear.
+
+This means that Datadog was not able to match any user actions with the current selected replay. This happens for a variety of reasons, such as:
+
+- Your application is not using the latest SDK version (>= 4.20.0).
+- RUM actions are not enabled. Learn how to [track user interactions][7].
+- Your page has recently changed drastically. 
+
+### All of the user information on the page is empty.
+
+User information is not collected by default. Heatmaps use the user information available in your session data to display relevant insights on behavior. You can set up user information in RUM by following the steps in [Modifying Data and Context][8].
+
+
 [1]: /real_user_monitoring/session_replay/
 [2]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/package.json
 [3]: https://app.datadoghq.com/rum/heatmap/view
 [4]: /real_user_monitoring/explorer/
 [5]: /real_user_monitoring/guide/alerting-with-conversion-rates/
-
+[6]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#override-default-rum-view-names
+[7]: /real_user_monitoring/browser/tracking_user_actions/#manage-information-being-collected
+[8]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#user-session

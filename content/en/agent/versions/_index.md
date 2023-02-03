@@ -68,7 +68,7 @@ The big difference between Agent 5 and Agent 6 is that Agent 6 is a complete rew
 
 To see all changes between Agent v5 and v6, consult the [Datadog Agent dedicated changes][4] documentation. The following are key differentiators:
 
-- [Distributions metrics][5] can be performed on the server directly to calculate real, effective global percentiles. (NOTE: this feature is in BETA. Contact support for details on how to have it enabled for your account.)
+- [Distributions metrics][5] can be performed on the server directly to calculate real, effective global percentiles.
 - [DogStatsD][3] can be used over a Unix socket instead of over UDP.
 - [Live Process monitoring is available for Windows][6].
 - [Prometheus OpenMetrics is supported natively][7].

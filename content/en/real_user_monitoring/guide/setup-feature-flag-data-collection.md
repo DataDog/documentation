@@ -2,7 +2,6 @@
 title: Getting Started with Feature Flag Data in RUM
 kind: guide
 beta: true
-private: true
 description: Learn how to set up RUM to capture feature flag data and analyze the performance in Datadog
 aliases:
 - /real_user_monitoring/guide/getting-started-feature-flags/
@@ -12,9 +11,9 @@ further_reading:
   text: 'Visualize your RUM data in the RUM Explorer'
 ---
 
-{{< beta-callout url="#" btn_hidden="true" >}}
+{{< callout url="#" btn_hidden="true" >}}
 Feature Flag data collection in RUM is in private beta. To request access, contact Support at support@datadoghq.com.
-{{< /beta-callout >}}
+{{< /callout >}}
 
 ## Overview
 Feature flag data gives you greater visibility into your user experience and performance monitoring by allowing you to determine which users are being shown a specific feature and if any change you introduce is impacting your user experience or negatively affecting performance. 
@@ -24,11 +23,12 @@ By enriching your RUM data with feature flag data, you can be confident that you
 ## Setup
 Feature flag tracking is available in the RUM Browser SDK. To start, set up [RUM browser monitoring][1]. You need the Browser RUM SDK version >= 4.25.0.
 
-You can start collecting feature flag data for [custom feature flag management solutions][2], or using one of our integration partners. 
+You can start collecting feature flag data for [custom feature flag management solutions](#custom-feature-flag-management), or using one of our integration partners. 
 
 We currently support integrations with:
-- [LaunchDarkly][3]
-- [Split][4]
+- [LaunchDarkly](#launchdarkly-integration)
+- [Split](#split-integration)
+- [Flagsmith](#flagsmith-integration)
 
 ### Custom feature flag management
 
@@ -128,7 +128,7 @@ We currently support integrations with:
 
 2. Initialize LaunchDarkly's SDK and create an inspector reporting feature flags evaluations to Datadog using the snippet of code shown below.
 
-   For more information about initializing LaunchDarkly's SDK, check out [LaunchDarkly's JavaScript SDK documentation][5].
+   For more information about initializing LaunchDarkly's SDK, check out [LaunchDarkly's JavaScript SDK documentation][1].
 
    ```javascript
    const client = LDClient.initialize("<APP_KEY>", "<USER_ID>", {
@@ -144,8 +144,8 @@ We currently support integrations with:
    });
    ```
 
-[5]: https://docs.launchdarkly.com/sdk/client-side/javascript#initializing-the-client
 
+[1]: https://docs.launchdarkly.com/sdk/client-side/javascript#initializing-the-client
 {{% /tab %}}
 {{% tab "CDN async" %}}
 
@@ -170,7 +170,7 @@ We currently support integrations with:
 
 2. Initialize LaunchDarkly's SDK and create an inspector reporting feature flags evaluations to Datadog using the snippet of code below.
 
-   For more information about initializing LaunchDarkly's SDK, check out [LaunchDarkly's JavaScript SDK documentation][5].
+   For more information about initializing LaunchDarkly's SDK, check out [LaunchDarkly's JavaScript SDK documentation][1].
 
    ```javascript
    const client = LDClient.initialize("<APP_KEY>", "<USER_ID>", {
@@ -186,8 +186,8 @@ We currently support integrations with:
    });
    ```
 
-[5]: https://docs.launchdarkly.com/sdk/client-side/javascript#initializing-the-client
 
+[1]: https://docs.launchdarkly.com/sdk/client-side/javascript#initializing-the-client
 {{% /tab %}}
 {{% tab "CDN sync" %}}
 
@@ -207,7 +207,7 @@ We currently support integrations with:
 
 2. Initialize LaunchDarkly's SDK and create an inspector reporting feature flags evaluations to Datadog using the snippet of code below.
 
-   For more information about initializing LaunchDarkly's SDK, check out [LaunchDarkly's JavaScript SDK documentation][5].
+   For more information about initializing LaunchDarkly's SDK, check out [LaunchDarkly's JavaScript SDK documentation][1].
 
    ```javascript
    const client = LDClient.initialize("<APP_KEY>", "<USER_ID>", {
@@ -223,8 +223,8 @@ We currently support integrations with:
    });
    ```
 
-[5]: https://docs.launchdarkly.com/sdk/client-side/javascript#initializing-the-client
 
+[1]: https://docs.launchdarkly.com/sdk/client-side/javascript#initializing-the-client
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -249,7 +249,7 @@ We currently support integrations with:
 
 2. Initialize Split's SDK and and create an impression listener reporting feature flags evaluations to Datadog using the following snippet of code
 
-   For more information about initializing Split's SDK, check out Split's [JavaScript SDK documentation][6].
+   For more information about initializing Split's SDK, check out Split's [JavaScript SDK documentation][1].
 
    ```javascript
    const factory = SplitFactory({
@@ -271,8 +271,8 @@ We currently support integrations with:
    const client = factory.client();
    ```
 
-[6]: https://help.split.io/hc/en-us/articles/360020448791-JavaScript-SDK#2-instantiate-the-sdk-and-create-a-new-split-client
 
+[1]: https://help.split.io/hc/en-us/articles/360020448791-JavaScript-SDK#2-instantiate-the-sdk-and-create-a-new-split-client
 {{% /tab %}}
 {{% tab "CDN async" %}}
 
@@ -297,7 +297,7 @@ We currently support integrations with:
 
 2. Initialize Split's SDK and create an inspector reporting feature flags evaluations to Datadog using the snippet of code below.
 
-   For more information about initializing Split's SDK, check out Split's [JavaScript SDK documentation][6].
+   For more information about initializing Split's SDK, check out Split's [JavaScript SDK documentation][1].
 
    ```javascript
    const factory = SplitFactory({
@@ -319,8 +319,8 @@ We currently support integrations with:
    const client = factory.client();
    ```
 
-[6]: https://help.split.io/hc/en-us/articles/360020448791-JavaScript-SDK#2-instantiate-the-sdk-and-create-a-new-split-client
 
+[1]: https://help.split.io/hc/en-us/articles/360020448791-JavaScript-SDK#2-instantiate-the-sdk-and-create-a-new-split-client
 {{% /tab %}}
 {{% tab "CDN sync" %}}
 
@@ -340,7 +340,7 @@ We currently support integrations with:
 
 2. Initialize Split's SDK and create an inspector reporting feature flags evaluations to Datadog using the snippet of code below.
 
-   For more information about initializing Split's SDK, check out Split's [JavaScript SDK documentation][6].
+   For more information about initializing Split's SDK, check out Split's [JavaScript SDK documentation][1].
 
    ```javascript
    const factory = SplitFactory({
@@ -362,11 +362,122 @@ We currently support integrations with:
    const client = factory.client();
    ```
 
-[6]: https://help.split.io/hc/en-us/articles/360020448791-JavaScript-SDK#2-instantiate-the-sdk-and-create-a-new-split-client
 
+[1]: https://help.split.io/hc/en-us/articles/360020448791-JavaScript-SDK#2-instantiate-the-sdk-and-create-a-new-split-client
 {{% /tab %}}
 {{< /tabs >}}
 
+
+### Flagsmith Integration
+
+{{< tabs >}}
+{{% tab "npm" %}}
+
+1. To start collecting feature flag data, initialize the RUM SDK and configure the `enableExperimentalFeatures` initialization parameter with ` ["feature_flags"]`.
+
+   ```javascript
+   import { datadogRum } from '@datadog/browser-rum';
+
+   // Initialize Datadog Browser SDK
+   datadogRum.init({
+     …
+     enableExperimentalFeatures: ["feature_flags"],
+     …
+   });
+   ```
+
+2. Initialize Flagsmith's SDK with the `datadogRum` option, which reports feature flags evaluations to Datadog using the snippet of code shown below.
+
+   Optionally, you can configure the client so that Flagsmith traits are sent to Datadog via `datadogRum.setUser()`. For more information about initializing Flagsmith's SDK, check out [Flagsmith's JavaScript SDK documentation][1].
+
+   ```javascript
+    // Initialize the Flagsmith SDK
+    flagsmith.init({
+        datadogRum: {
+            client: datadogRum,
+            trackTraits: true,
+        },
+        ...
+    })
+   ```
+
+
+[1]: https://docs.flagsmith.com/clients/javascript
+{{% /tab %}}
+{{% tab "CDN async" %}}
+
+1. To start collecting feature flag data, initialize the RUM SDK and configure the `enableExperimentalFeatures` initialization parameter with ` ["feature_flags"]`.
+
+   ```html
+   <script>
+     (function(h,o,u,n,d) {
+        h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+        d=o.createElement(u);d.async=1;d.src=n
+        n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+     })(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-rum-v4.js','DD_RUM')
+     DD_RUM.onReady(function() {
+       DD_RUM.init({
+         ...
+         enableExperimentalFeatures: ["feature_flags"],
+         ...
+       })
+     })
+   </script>
+   ```
+
+2. Initialize Flagsmith's SDK with the `datadogRum` option, which reports feature flags evaluations to Datadog using the snippet of code shown below.
+
+    Optionally, you can configure the client so that Flagsmith traits are sent to Datadog via `datadogRum.setUser()`. For more information about initializing Flagsmith's SDK, check out [Flagsmith's JavaScript SDK documentation][1].
+
+   ```javascript
+    // Initialize the Flagsmith SDK
+    flagsmith.init({
+        datadogRum: {
+            client: datadogRum,
+            trackTraits: true,
+        },
+        ...
+    })
+   ```
+
+
+[1]: https://docs.flagsmith.com/clients/javascript
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+
+1. To start collecting feature flag data, initialize the RUM SDK and configure the `enableExperimentalFeatures` initialization parameter with ` ["feature_flags"]`.
+
+   ```html
+   <script src="https://www.datadoghq-browser-agent.com/datadog-rum-v4.js" type="text/javascript"></script>
+   <script>
+     window.DD_RUM &&
+       window.DD_RUM.init({
+         ...
+         enableExperimentalFeatures: ["feature_flags"],
+         ...
+       })
+   </script>
+   ```
+
+2. Initialize Flagsmith's SDK with the `datadogRum` option, which reports feature flags evaluations to Datadog using the snippet of code shown below.
+
+    Optionally, you can configure the client so that Flagsmith traits are sent to Datadog via `datadogRum.setUser()`. For more information about initializing Flagsmith's SDK, check out [Flagsmith's JavaScript SDK documentation][1].
+
+   ```javascript
+    // Initialize the Flagsmith SDK
+    flagsmith.init({
+        datadogRum: {
+            client: datadogRum,
+            trackTraits: true,
+        },
+        ...
+    })
+   ```
+
+
+[1]: https://docs.flagsmith.com/clients/javascript
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Analyze your Feature Flag performance in RUM
 
@@ -375,7 +486,7 @@ Feature flags appear in the context of your RUM Sessions, Views, and Errors as a
 {{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/feature-flag-list-rum-event.png" alt="Feature Flag list of attributes in RUM Explorer" style="width:75%;">}}
 
 ### Search feature flags using the RUM Explorer
-Search through all the data collected by RUM in the [RUM Explorer][7] to surface trends on feature flags, analyze patterns with greater context, or export them into [dashboards][8] and [monitors][9]. You can search your Sessions, Views, or Errors in the RUM Explorer, with the `@feature_flags.{flag_name}` attribute. 
+Search through all the data collected by RUM in the [RUM Explorer][2] to surface trends on feature flags, analyze patterns with greater context, or export them into [dashboards][3] and [monitors][4]. You can search your Sessions, Views, or Errors in the RUM Explorer, with the `@feature_flags.{flag_name}` attribute. 
 
 #### Sessions
 Filtering your **Sessions** with the `@feature_flags.{flag_name}` attribute, you will find all sessions in the given time frame where your feature flag was evaluated.
@@ -414,11 +525,6 @@ When performing your investigations, you can also scope your data for `View Name
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/browser#setup
-[2]: #custom-feature-flag-management
-[3]: #launchdarkly-integration
-[4]: #split-integration
-[5]: https://docs.launchdarkly.com/sdk/client-side/javascript#initializing-the-client
-[6]: https://help.split.io/hc/en-us/articles/360020448791-JavaScript-SDK#2-instantiate-the-sdk-and-create-a-new-split-client
-[7]: https://app.datadoghq.com/rum/explorer
-[8]: /dashboards/
-[9]: /monitors/#create-monitors
+[2]: https://app.datadoghq.com/rum/explorer
+[3]: /dashboards/
+[4]: /monitors/#create-monitors
