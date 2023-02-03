@@ -34,23 +34,25 @@ To build your container with Datadog instrumentation you can follow one of these
 
 #### Instrument using Dockerfile
 
-Using a Dockerfile to build your container, the following steps are needed:
-
-1. Use the `COPY` instruction to copy the [Datadog `serverless-init` binary][3] into your Docker image.
-
-2. Use the `ENTRYPOINT` instruction to run the `serverless-init` binary as your Docker container is initiated.
-
-3. Use the `CMD` instruction to run your existing application and other required commands as arguments.
-
-You can accomplish those steps by adding the following lines to your Dockerfile. You may need to adjust these examples depending on your existing Dockerfile setup.
+You can instrument your application by adding the following lines to your Dockerfile. You may need to adjust these examples depending on your existing Dockerfile setup.
 
 {{< programming-lang-wrapper langs="go,python,nodejs,java,dotnet,ruby" >}}
 {{< programming-lang lang="go" >}}
 
 ```
+# copy the Datadog `serverless-init` into your Docker image
 COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
+
+# change the entrypoint to wrap your application into the Datadog serverless-init process
 ENTRYPOINT ["/app/datadog-init"]
-CMD ["/path/to/your-go-binary"] (adapt this line to your needs)
+
+# optionally add Datadog tags
+ENV DD_SERVICE=datadog-demo-run-go
+ENV DD_ENV=datadog-demo
+ENV DD_VERSION=1
+
+# execute your binary application wrapped in the entrypoint. Adapt this line to your needs
+CMD ["/path/to/your-go-binary"]
 ```
 
 [Sample code for a simple Go application](https://github.com/DataDog/crpb/tree/main/go).
@@ -59,20 +61,61 @@ CMD ["/path/to/your-go-binary"] (adapt this line to your needs)
 {{< programming-lang lang="python" >}}
 
 ```
+# copy the Datadog `serverless-init` into your Docker image
 COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
+
+# install the python tracing library here or in requirements.txt
+RUN pip install --no-cache-dir ddtrace==1.7.3
+
+# optionally add Datadog tags
+ENV DD_SERVICE=datadog-demo-run-python
+ENV DD_ENV=datadog-demo
+ENV DD_VERSION=1
+
+# change the entrypoint to wrap your application into the Datadog serverless-init process
 ENTRYPOINT ["/app/datadog-init"]
-CMD ["ddtrace-run", "python", "app.py"] (adapt this line to your needs)
+
+# execute your binary application wrapped in the entrypoint, launched by the Datadog trace library. Adapt this line to your needs
+CMD ["ddtrace-run", "python", "app.py"]
 ```
 
 [Sample code for a simple Python application](https://github.com/DataDog/crpb/tree/main/python).
 
+[1]: /tracing/trace_collection/dd_libraries/python/?tab=containers#instrument-your-application
+
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
+1. Use the `COPY` instruction to copy the [Datadog `serverless-init` binary][3] into your Docker image.
+
+2. Add the environment variable `--require dd-trace/init`
+
+3. Use the `ENTRYPOINT` instruction to run the `serverless-init` binary as your Docker container is initiated.
+
+4. Use the `CMD` instruction to run your existing application and other required commands as arguments.
+
+You can accomplish those steps by adding the following lines to your Dockerfile. You may need to adjust these examples depending on your existing Dockerfile setup.
 ```
+# copy the Datadog `serverless-init` into your Docker image
 COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
+
+# install the Datadog js tracing library, either here or in package.json
+
+npm i dd-trace@2.2.0
+
+# enable the Datadog tracing library
+ENV NODE_OPTIONS="--require dd-trace/init"
+
+# optionally add Datadog tags
+ENV DD_SERVICE=datadog-demo-run-python
+ENV DD_ENV=datadog-demo
+ENV DD_VERSION=1
+
+# change the entrypoint to wrap your application into the Datadog serverless-init process
 ENTRYPOINT ["/app/datadog-init"]
-CMD ["/nodejs/bin/node", "/path/to/your/app.js"] (adapt this line to your needs)
+
+# execute your binary application wrapped in the entrypoint. Adapt this line to your needs
+CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
 
 ```
 
@@ -82,9 +125,19 @@ CMD ["/nodejs/bin/node", "/path/to/your/app.js"] (adapt this line to your needs)
 {{< programming-lang lang="java" >}}
 
 ```
+# copy the Datadog `serverless-init` into your Docker image
 COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
+
+# optionally add Datadog tags
+ENV DD_SERVICE=datadog-demo-run-python
+ENV DD_ENV=datadog-demo
+ENV DD_VERSION=1
+
+# change the entrypoint to wrap your application into the Datadog serverless-init process
 ENTRYPOINT ["/app/datadog-init"]
-CMD ["./mvnw", "spring-boot:run"] (adapt this line to your needs)
+
+# execute your binary application wrapped in the entrypoint. Adapt this line to your needs
+CMD ["./mvnw", "spring-boot:run"]
 
 ```
 
@@ -94,9 +147,19 @@ CMD ["./mvnw", "spring-boot:run"] (adapt this line to your needs)
 {{< programming-lang lang="dotnet" >}}
 
 ```
+# copy the Datadog `serverless-init` into your Docker image
 COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
+
+# optionally add Datadog tags
+ENV DD_SERVICE=datadog-demo-run-python
+ENV DD_ENV=datadog-demo
+ENV DD_VERSION=1
+
+# change the entrypoint to wrap your application into the Datadog serverless-init process
 ENTRYPOINT ["/app/datadog-init"]
-CMD ["dotnet", "helloworld.dll"] (adapt this line to your needs)
+
+# execute your binary application wrapped in the entrypoint. Adapt this line to your needs
+CMD ["dotnet", "helloworld.dll"]
 
 ```
 
@@ -104,8 +167,18 @@ CMD ["dotnet", "helloworld.dll"] (adapt this line to your needs)
 {{< programming-lang lang="ruby" >}}
 
 ```
+# copy the Datadog `serverless-init` into your Docker image
 COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
+
+# optionally add Datadog tags
+ENV DD_SERVICE=datadog-demo-run-python
+ENV DD_ENV=datadog-demo
+ENV DD_VERSION=1
+
+# change the entrypoint to wrap your application into the Datadog serverless-init process
 ENTRYPOINT ["/app/datadog-init"]
+
+# execute your binary application wrapped in the entrypoint. Adapt this line to your needs
 CMD ["rails", "server", "-b", "0.0.0.0"] (adapt this line to your needs)
 
 ```
