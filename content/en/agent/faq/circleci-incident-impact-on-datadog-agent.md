@@ -22,6 +22,10 @@ kind: faq
         <td>17 Jan 2023</td>
         <td>Updated <a href="/resources/sh/rpm_check.sh"><code>rpm_check</code></a> script v1.2.0, clearer identify and remedy steps</td>
     </tr>
+    <tr>
+        <td>3 Feb 2023</td>
+        <td>Clarify which Agents 5 versions are signed with the affected key</td>
+    </tr>
 </table>
 </details>
 
