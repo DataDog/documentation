@@ -134,7 +134,7 @@ CMD ["rails", "server", "-b", "0.0.0.0"] (adapt this line to your needs)
 
 Depending on your deployment process, push the image built to a registry. The `gcr.io` prefix in the examples above assumed [Google Cloud Registry][11].
 
-### Datadog Agent Configuration
+### Deploy the Application with the Datadog Agent
 
 {{< tabs >}}
 
