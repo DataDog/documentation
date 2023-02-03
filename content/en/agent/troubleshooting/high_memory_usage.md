@@ -11,7 +11,7 @@ further_reading:
   text: "Get the Status of an Agent Check"
 ---
 
-Several different factors can cause high Agent CPU or memory consumption. If you try the troubleshooting steps below and continue to have trouble, [contact Datadog Support for further assistance](#reach-out-to-datadog-support).
+Several factors can cause high Agent CPU or memory consumption. If you try the steps below and continue to have trouble, [contact Datadog Support for further assistance](#reach-out-to-datadog-support).
 
 Common causes of high CPU or memory consumption:
 
@@ -23,13 +23,12 @@ Common causes of high CPU or memory consumption:
 
 Here are some adjustments you can make to your Agent configuration to reduce resource usage:
 
-- For integrations that have many check instances or are collecting large numbers of metrics, adjust the `min_collection_interval` in the integration's `conf.yaml` file. In general, the Agent runs each check instance every 10 to 15 seconds. Setting `min_collection_interval` to 60 seconds or more can help reduce resource consumption. For an example, see the
-  For more information on the check collection interval, see the [Custom Agent Check documentation][5].
+- For integrations that have many check instances or are collecting large numbers of metrics, adjust the `min_collection_interval` in the integration's `conf.yaml` file. In general, the Agent runs each check instance every 10 to 15 seconds. Setting `min_collection_interval` to 60 seconds or more can help reduce resource consumption. For more information on the check collection interval, see the [Custom Agent Check documentation][5].
 - Check if an integration is configured to use Autodiscovery, or if an integration is using a wildcard (`*`) that could be scoped more specifically. For more information on Autodiscovery, see [Basic Agent Autodiscovery][6].
 
 ## Reach out to Datadog Support
 
-If none of the above solutions are right for your situation, [reach out to Datadog Support][1]. Before you read out, make sure you've enabled [Live Processes Monitoring][3] to confirm that the Agent process is consuming unexpected amounts of memory or CPU.
+If none of the above solutions are right for your situation, [reach out to Datadog Support][1]. Make sure you've enabled [Live Processes Monitoring][3] to confirm that the Agent process is consuming unexpected amounts of memory or CPU.
 
 When opening a ticket, include information on how you are confirming the issue and what steps you have taken so far. Depending on whether or not you can isolate the problem to a single integration, include information from one of the following sections.
 
