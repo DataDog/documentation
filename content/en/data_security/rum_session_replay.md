@@ -71,7 +71,7 @@ You have some options available for removing Personally Identifiable Information
 #### Unstructured personally identifiable information
 Unstructured PII data, such as an individual’s name, can only be removed through a data deletion requisition for a specified timeframe.
 
-**Note**: [User data][9], such as name and email address, require users to opt-in to track.
+**Note**: [User data][9], such as name and email address, are not required attributes for utilizing RUM sessions.
 
 When it comes to URLs, you have the option to track page views manually in order to remove any PII or use beforeSend to change the URL shape.
 
