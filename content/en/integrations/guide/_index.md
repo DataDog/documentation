@@ -39,6 +39,7 @@ private: true
 
 {{< whatsnext desc="Azure guides:" >}}
     {{< nextlink href="integrations/guide/azure-cloud-adoption-framework" tag=" Azure" >}}Azure Cloud Adoption Framework with Datadog{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/azure-terraform-setup" tag=" Azure" >}}Azure integration management with Terraform{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-status-metric" tag=" Azure" >}}Azure status and count metrics{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-portal" tag=" Azure" >}}Managing the Azure Native Integration{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-troubleshooting" tag=" Azure" >}}Azure troubleshooting{{< /nextlink >}}
