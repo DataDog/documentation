@@ -50,7 +50,7 @@ You can opt to redact the data that is captured by RUM before it is sent and sto
 Additionally, you can turn off automatic tracking of user interactions and page views to only capture the interaction of your choice. By default, we use target content to generate action names from actions automatically collected by the SDK. You can [explicitly override][5] this behavior with any given name.
 
 ### User identity tracking
-By default, there is **no tracking of users’ identity**. You have the option of writing code to capture user identities, then using them to [enrich and modify][6] RUM sessions.
+By default, there is **no tracking of users’ identity**. You have the option of writing code to capture [user data][9] such as name and email address, then using them to [enrich and modify][6] RUM sessions, but they are not required.
 
 ### Data retention
 You can decide how long your captured data stays in Datadog.
@@ -70,8 +70,6 @@ You have some options available for removing Personally Identifiable Information
 
 #### Unstructured personally identifiable information
 Unstructured PII data, such as an individual’s name, can only be removed through a data deletion requisition for a specified timeframe.
-
-**Note**: [User data][9], such as name and email address, are not required attributes for utilizing RUM sessions.
 
 When it comes to URLs, you have the option to track page views manually in order to remove any PII or use beforeSend to change the URL shape.
 
