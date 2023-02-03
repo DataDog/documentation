@@ -57,16 +57,10 @@ By default, data retention for production environments is:
 Any of this retained data can be extended to a maximum of 90 days at no additional cost by [opening a support ticket][7].
 
 ### Data deletion
-If, for example, sensitive data has been leaked, you can hard-delete data from within a given timeframe. With a timeframe, all data is deleted; it cannot be specific to an application. Furthermore, we cannot look up and delete personal information from an individual, but we can delete specific personal information if the timeframe is known. If you need any data deleted, reach out to the [Datadog support team][8].
+If, for example, sensitive data has been leaked, you can hard-delete data from within a given timeframe. With a hard delete, all data is deleted; it cannot be targeted towards a a specific application. Furthermore, we cannot look up and delete personal information from an individual, but we can delete specific personal information if the timeframe is known. If you need any data deleted, reach out to the [Datadog support team][8].
 
 ### Personal and sensitive data removal
 You have some options available for removing Personally Identifiable Information (PII) and sensitive data, including IP addresses and geolocation.
-
-#### IP address
-You can request that client IP addresses be scrubbed by submitting a support ticket. Once the change is made, IP addresses are scrubbed from newly collected data only - it is not possible to remove IPs from data prior to initiating scrubbing. IP scrubbing occurs at the organization level; this data cannot be removed for specific applications, services, and so on. It is done at the backend level, which means the Browser SDK will still be sending data, but IP addresses will be scrubbed out by our backend pipelines and dropped at processing time.
-
-#### Geolocation
-In addition to removing client IPs, you can choose to remove geolocation (country, city, county), or GeoIP, as well. It is not possible to remove only GeoIP data without removing client IPs. Geolocation scrubbing occurs at the organization level; this data cannot be removed for specific applications, services, and so on. It is done at the backend level, which means the Browser SDK will still be sending data, but geolocation IP will be scrubbed out by our backend pipelines and dropped at processing time.
 
 #### Unstructured personally identifiable information
 Unstructured PII data, such as an individual’s name, can only be removed through a data deletion requisition for a specified timeframe.
@@ -75,7 +69,13 @@ Unstructured PII data, such as an individual’s name, can only be removed throu
 
 When it comes to URLs, you have the option to track page views manually in order to remove any PII or use beforeSend to change the URL shape.
 
-You can also transmit all RUM events through your own (proxy) server so that end user devices never communicate with Datadog directly.
+You can also transmit all RUM events through your own (proxy) server so that end user devices never directly communicate with Datadog.
+
+#### IP address
+You can request that client IP addresses be scrubbed by submitting a support ticket. Once the change is made, IP addresses are scrubbed from newly collected data only - it is not possible to remove IPs from data prior to initiating scrubbing. IP scrubbing occurs at the organization level; this data cannot be removed for specific applications, services, and so on. It is done at the backend level, which means the Browser SDK will still be sending data, but IP addresses will be scrubbed out by our backend pipelines and dropped at processing time.
+
+#### Geolocation
+In addition to removing client IPs, you can choose to remove geolocation (country, city, county), or GeoIP, as well. It is not possible to remove only GeoIP data without removing client IPs. Geolocation scrubbing occurs at the organization level; this data cannot be removed for specific applications, services, and so on. It is done at the backend level, which means the Browser SDK will still be sending data, but geolocation IP will be scrubbed out by our backend pipelines and dropped at processing time.
 
 ### Further Reading
 
