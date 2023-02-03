@@ -100,8 +100,6 @@ CMD ["dotnet", "helloworld.dll"] (adapt this line to your needs)
 
 ```
 
-[Sample code for a simple .NET application](https://github.com/DataDog/crpb/tree/main/dotnet).
-
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
