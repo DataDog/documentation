@@ -50,7 +50,7 @@ You can opt to redact the data that is captured by RUM before it is sent and sto
 Additionally, you can turn off automatic tracking of user interactions and page views to only capture the interaction of your choice. By default, we use target content to generate action names from actions automatically collected by the SDK. You can [explicitly override][5] this behavior with any given name.
 
 ### User identity tracking
-By default, there is **no tracking of users’ identity**. You have the option of writing code to capture [user data][9] such as name and email address, then using them to [enrich and modify][6] RUM sessions, but they are not required.
+By default, there is **no tracking of users’ identity**. You have the option of writing code to capture [user data][6] such as name and email address, then using them to [enrich and modify][7] RUM sessions, but they are not required.
 
 ### Data retention
 You can decide how long your captured data stays in Datadog.
@@ -60,10 +60,10 @@ By default, data retention for production environments is:
 - 30 days for sessions, views, actions, errors, and session recordings
 - 15 days for resources
 
-Any of this retained data can be extended to a maximum of 90 days at no additional cost by [opening a support ticket][7].
+Any of this retained data can be extended to a maximum of 90 days at no additional cost by [opening a support ticket][8].
 
 ### Data deletion
-If, for example, sensitive data has been leaked, you can hard-delete data from within a given timeframe. With a hard delete, all data is deleted; it cannot be targeted towards a a specific application. Furthermore, we cannot look up and delete personal information from an individual, but we can delete specific personal information if the timeframe is known. If you need any data deleted, reach out to the [Datadog support team][8].
+If, for example, sensitive data has been leaked, you can hard-delete data from within a given timeframe. With a hard delete, all data is deleted; it cannot be targeted towards a a specific application. Furthermore, we cannot look up and delete personal information from an individual, but we can delete specific personal information if the timeframe is known. If you need any data deleted, reach out to the [Datadog support team][9].
 
 ### Personal and sensitive data removal
 You have some options available for removing Personally Identifiable Information (PII) and sensitive data, including IP addresses and geolocation.
@@ -94,7 +94,7 @@ Datadog provides role-based access control (RBAC) for managing who sees RUM data
 [4]: /real_user_monitoring/flutter/advanced_configuration/#modify-or-drop-rum-events
 [5]: /real_user_monitoring/browser/tracking_user_actions/#declare-a-name-for-click-actions
 [6]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#user-session
-[7]: /help/
+[7]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#user-session
 [8]: /help/
-[9]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#user-session
+[9]: /help/
 [10]: /account_management/rbac/permissions/#real-user-monitoring
