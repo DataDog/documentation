@@ -55,7 +55,9 @@ ENV DD_VERSION=1
 CMD ["/path/to/your-go-binary"]
 ```
 
-[Sample code for a simple Go application](https://github.com/DataDog/crpb/tree/main/go).
+[Sample code for a simple Go application][1].
+
+[1]: https://github.com/DataDog/crpb/tree/main/go
 
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
@@ -79,22 +81,15 @@ ENTRYPOINT ["/app/datadog-init"]
 CMD ["ddtrace-run", "python", "app.py"]
 ```
 
-[Sample code for a simple Python application](https://github.com/DataDog/crpb/tree/main/python).
+[Sample code for a simple Python application][1].
+More details on the [Python tracing library][2].
 
-[1]: /tracing/trace_collection/dd_libraries/python/?tab=containers#instrument-your-application
+[1]: https://github.com/DataDog/crpb/tree/main/python
+[2]: /tracing/trace_collection/dd_libraries/python/?tab=containers#instrument-your-application
 
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
-1. Use the `COPY` instruction to copy the [Datadog `serverless-init` binary][3] into your Docker image.
-
-2. Add the environment variable `--require dd-trace/init`
-
-3. Use the `ENTRYPOINT` instruction to run the `serverless-init` binary as your Docker container is initiated.
-
-4. Use the `CMD` instruction to run your existing application and other required commands as arguments.
-
-You can accomplish those steps by adding the following lines to your Dockerfile. You may need to adjust these examples depending on your existing Dockerfile setup.
 ```
 # copy the Datadog `serverless-init` into your Docker image
 COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
@@ -107,7 +102,7 @@ npm i dd-trace@2.2.0
 ENV NODE_OPTIONS="--require dd-trace/init"
 
 # optionally add Datadog tags
-ENV DD_SERVICE=datadog-demo-run-python
+ENV DD_SERVICE=datadog-demo-run-nodejs
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
 
@@ -119,7 +114,11 @@ CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
 
 ```
 
-[Sample code for a simple Node.js application](https://github.com/DataDog/crpb/tree/main/js).
+[Sample code for a simple Node.js application][1].
+More details on the [Node.js tracing library][2].
+
+[1]: https://github.com/DataDog/crpb/tree/main/js
+[2]: /tracing/trace_collection/dd_libraries/nodejs/?tab=containers#instrument-your-application
 
 {{< /programming-lang >}}
 {{< programming-lang lang="java" >}}
@@ -129,7 +128,7 @@ CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
 COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
 
 # optionally add Datadog tags
-ENV DD_SERVICE=datadog-demo-run-python
+ENV DD_SERVICE=datadog-demo-run-java
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
 
@@ -141,7 +140,11 @@ CMD ["./mvnw", "spring-boot:run"]
 
 ```
 
-[Sample code for a simple Java application](https://github.com/DataDog/crpb/tree/main/java).
+[Sample code for a simple Java application][1].
+More details on the [Java tracing library][2].
+
+[1]: https://github.com/DataDog/crpb/tree/main/java
+[2]: /tracing/trace_collection/dd_libraries/java/?tab=containers#instrument-your-application
 
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
@@ -151,7 +154,7 @@ CMD ["./mvnw", "spring-boot:run"]
 COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
 
 # optionally add Datadog tags
-ENV DD_SERVICE=datadog-demo-run-python
+ENV DD_SERVICE=datadog-demo-run-dotnet
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
 
@@ -171,7 +174,7 @@ CMD ["dotnet", "helloworld.dll"]
 COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
 
 # optionally add Datadog tags
-ENV DD_SERVICE=datadog-demo-run-python
+ENV DD_SERVICE=datadog-demo-run-ruby
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
 
@@ -183,7 +186,11 @@ CMD ["rails", "server", "-b", "0.0.0.0"] (adapt this line to your needs)
 
 ```
 
-[Sample code for a simple Ruby application](https://github.com/DataDog/crpb/tree/main/ruby-on-rails).
+[Sample code for a simple Ruby application][1].
+More details on the [Ruby tracing library][2].
+
+[1]: https://github.com/DataDog/crpb/tree/main/ruby-on-rails
+[2]: /tracing/trace_collection/dd_libraries/ruby/?tab=containers#instrument-your-application
 
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
