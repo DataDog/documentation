@@ -25,7 +25,7 @@ If you are using a Dockerfile to build your application, complete the following:
 
 4. Use the `CMD` instruction to run your existing application and other required commands as arguments.
 
-The following are examples of how to complete these three steps. You may need to adjust these examples depending on your existing Dockerfile setup. 
+The following are examples of how to complete these three steps. You may need to adjust these examples depending on your existing Dockerfile setup.
 
 
 {{< programming-lang-wrapper langs="go,python,nodejs,java,dotnet,ruby" >}}
@@ -84,7 +84,7 @@ See [Tracing Java Applications][1] for detailed instructions. [Sample code for a
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 ```
-COPY --from=datadog/serverless-init:beta4 /datadog-init /app/datadog-init
+COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
 ENTRYPOINT ["/app/datadog-init"]
 CMD ["dotnet", "helloworld.dll"] (adapt this line to your needs)
 
@@ -96,7 +96,7 @@ See [Tracing .NET Applications][1] for detailed instructions.
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 ```
-COPY --from=datadog/serverless-init:beta4 /datadog-init /app/datadog-init
+COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
 ENTRYPOINT ["/app/datadog-init"]
 CMD ["rails", "server", "-b", "0.0.0.0"] (adapt this line to your needs)
 
