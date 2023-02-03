@@ -42,11 +42,13 @@ After activating log collection, the Agent is ready to forward logs to Datadog. 
 
 Datadog Agent v6 can collect logs and forward them to Datadog from files, the network (TCP or UDP), journald, and Windows channels:
 
-1. Create a new `<CUSTOM_LOG_SOURCE>.d/` folder in the `conf.d/` directory at the root of your [Agent's configuration directory][4].
+1. In the `conf.d/` directory at the root of your [Agent's configuration directory][4], create a new `<CUSTOM_LOG_SOURCE>.d/` folder that is accessible by the Datadog user.
 2. Create a new `conf.yaml` file in this new folder.
 3. Add a custom log collection configuration group with the parameters below.
 4. [Restart your Agent][6] to take into account this new configuration.
 5. Run the [Agent's status subcommand][7] and look for `<CUSTOM_LOG_SOURCE>` under the Checks section.
+
+If there are permission errors, see [Permission issues tailing log files][12] to troubleshoot.
 
 Below are examples of custom log collection setup:
 
@@ -63,7 +65,7 @@ logs:
     source: "<SOURCE>"
 ```
 
-On Windows, use the path `"<DRIVE_LETTER>:\\<PATH_LOG_FILE>\\<LOG_FILE_NAME>.log"`, and verify that the user `ddagentuser` has read and write access to the log file.
+On **Windows**, use the path `"<DRIVE_LETTER>:\<PATH_LOG_FILE>\<LOG_FILE_NAME>.log"`, and verify that the user `ddagentuser` has read and write access to the log file.
 
 [1]: /agent/guide/agent-configuration-files/
 {{% /tab %}}
@@ -179,3 +181,4 @@ List of all available parameters for log collection:
 [9]: /getting_started/tagging/unified_service_tagging
 [10]: /metrics/custom_metrics/#overview
 [11]: /getting_started/tagging/
+[12]: /logs/guide/log-collection-troubleshooting-guide/#permission-issues-tailing-log-files

@@ -1,0 +1,24 @@
+{
+  "compute": [
+    {
+      "aggregation": "pc90",
+      "metric": "@duration",
+      "type": "total"
+    }
+  ],
+  "filter": {
+    "from": "now-15m",
+    "query": "@ci.provider.name:(gitlab OR github)",
+    "to": "now"
+  },
+  "group_by": [
+    {
+      "facet": "@ci.status",
+      "limit": 10,
+      "total": false
+    }
+  ],
+  "options": {
+    "timezone": "GMT"
+  }
+}

@@ -81,10 +81,12 @@ GCS ストレージバケットを持つプロジェクト用の [GCP インテ�
 
 - バケットは一般ユーザーが読み取り可能になるよう設定してください。
 - まれに最後のデータを書き換える必要があるため、[オブジェクトロック][3]を設定しないでください (通常はタイムアウト)。
+- 地域間データ転送料とクラウドストレージコストへの影響については、[AWS Pricing][4] を参照してください。地域間のデータ転送料を管理するために、ストレージバケットを `us-east-1` に作成することを検討してください。
 
 [1]: https://s3.console.aws.amazon.com/s3
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html
 [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock-overview.html
+[4]: https://aws.amazon.com/s3/pricing/
 {{% /tab %}}
 
 {{% tab "Azure Storage" %}}
@@ -379,9 +381,11 @@ Datadog アカウントでアーカイブ設定が正常に構成された時点
 
 ただし、アーカイブ構成を作成または更新してから次にアーカイブのアップロードが試行されるまで、数分かかることがあります。アーカイブがアップロードされる頻度は様々です。**15 分待ってストレージバケットをチェックし**、Datadog アカウントからアーカイブが正常にアップロードされたことを確認してください。その後、アーカイブが依然として保留中の場合は、包含フィルターをチェックしクエリが有効であることと、[live tail][11] でログイベントが一致することを確認します。
 
-Datadog でコンフィギュレーションの問題が検出された場合、該当するアーカイブがコンフィギュレーションページでハイライトされます。エラーアイコンをチェックして、問題を修正するためにとるべきアクションを確認します。
+設定や権限の意図しない変更により、Datadog が外部アーカイブへのログのアップロードに失敗すると、該当するログアーカイブが構成ページでハイライト表示されます。アーカイブにカーソルを合わせると、エラーの詳細と問題を解決するために取るべきアクションが表示されます。
 
-{{< img src="logs/archives/archive_validation.png" alt="アーカイブが適切にセットアップされたことを確認。"  style="width:75%;">}}
+さらに、[イベントエクスプローラー][12]に表示されるイベントが生成されます。このようなイベントに対するモニターを構築して、障害を迅速に検出し、修正することができます。
+
+{{< img src="logs/archives/archive_errors.png" alt="アーカイブが適切にセットアップされたことを確認。"  style="width:75%;">}}
 
 ## 複数のアーカイブ
 
@@ -418,7 +422,7 @@ Datadog がストレージバケットに転送するログアーカイブは、
 }
 ```
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< whatsnext desc="次に、Datadog からアーカイブされたログコンテンツにアクセスする方法を説明します。" >}}
     {{< nextlink href="/logs/archives/rehydrating" >}}<u>アーカイブからリハイドレート</u>: ログイベントをアーカイブから取得し、Datadog の Log Explorer に戻します。{{< /nextlink >}}
@@ -440,3 +444,4 @@ Datadog がストレージバケットに転送するログアーカイブは、
 [9]: /ja/account_management/rbac/permissions#logs_read_index_data
 [10]: /ja/account_management/rbac/permissions#logs_read_data
 [11]: /ja/logs/explorer/live_tail/
+[12]: /ja/events/explorer/

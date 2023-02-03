@@ -25,15 +25,16 @@ further_reading:
 Shared dashboards and graphs allow you to display metric, trace, and log visualizations outside of Datadog.
 
 ## Dashboards
-When you share a dashboard by URL or email link, the shared page shows live, read-only contents of that dashboard. 
+When you share a dashboard by URL or email link, the shared page shows live, read-only contents of that dashboard.
 
 ### Share a dashboard by public URL
 
 To share an entire dashboard publicly, generate a URL:
 
-1. On the dashboard's page, click the settings cog in the upper right.
-2. Select **Generate public URL**.
-3. Under **Time & Variable Settings**, configure your desired options for the time frame and whether users can change it, as well which tags are visible for selectable template variables.
+
+1. On the dashboard's page, click the export icon in the upper right.
+2. Select **Generate public URL**, which opens up a *Sharing: On* popup modal.
+3. Under **Time & Variable Settings**, configure your desired options for the time frame and whether users can change it, as well as which tags are visible for selectable template variables.
 4. Copy the URL and click **Done**.
 
 **Note**: Widgets based on APM traces queries do not display data on public dashboards. The Log Stream widget doesn't show data either, but other log-based queries do.
@@ -41,12 +42,12 @@ To share an entire dashboard publicly, generate a URL:
 ### Share a dashboard with individual email addresses
 
  To authorize one or more specific email addresses to view a dashboard page:
- 
-1. On the dashboard's page, click the settings cog in the upper right.
-2. Select **Generate public URL**.
+
+1. On the dashboard's page, click the export icon in the upper right.
+2. Select **Generate public URL**, which opens up a *Sharing: On* popup modal.
 3. Select **Only specified people** for indicating who can access this dashboard.
 4. Input the email addresses for people you would like to share your dashboard with.
-5. Under **Time & Variable Settings**, configure your desired options for the time frame and whether users can change it, as well which tags are visible for selectable template variables.
+5. Under **Time & Variable Settings**, configure your desired options for the time frame and whether users can change it, as well as which tags are visible for selectable template variables.
 6. (Optional) Copy the URL to share; the specified email addresses also receive an email with the link.
 7. Click **Done**.
 
@@ -62,9 +63,13 @@ To revoke a shared dashboard:
 
 1. Navigate to the [Dashboard List][1].
 2. Select the dashboard you want to revoke access to.
-3. Click on the settings cog in the upper right.
-4. Click **Configure sharing**.
-5. Click **Revoke public URL**.
+3. Click on the export icon in the upper right.
+4. Click **Configure public URL**.
+5. Click **Revoke URL**.
+
+### Refresh interval
+
+Publicly shared dashboards refresh every 30 seconds. This refresh interval cannot be customized.
 
 ## Graphs
 

@@ -1,42 +1,62 @@
 ---
+app_id: gatekeeper
+app_uuid: 9c48b05d-ee74-4557-818e-14456c6f427b
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Gatekeeper base dashboard: assets/dashboards/gatekeeper_overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: gatekeeper.constraints
+      metadata_path: metadata.csv
+      prefix: gatekeeper.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Gatekeeper
   logs:
     source: gatekeeper
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: コミュニティ
+  sales_email: ara.pulido@datadoghq.com
+  support_email: ara.pulido@datadoghq.com
 categories:
 - security
 - containers
 - 構成 & デプロイ
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/gatekeeper/README.md
-display_name: Gatekeeper
+display_on_public_website: true
 draft: false
 git_integration_title: gatekeeper
-guid: a68c72bd-a16a-4fcf-8911-43575dd722b9
 integration_id: gatekeeper
 integration_title: Gatekeeper
-integration_version: 0.0.1
+integration_version: 1.0.0
 is_public: true
 kind: integration
-maintainer: ara.pulido@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: gatekeeper.
-metric_to_check: gatekeeper.constraints
+manifest_version: 2.0.0
 name: gatekeeper
+oauth: {}
 public_title: Gatekeeper
 short_description: Gatekeeper インテグレーション
-support: contrib
 supported_os:
 - linux
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Category::Security
+  - Category::Containers
+  - Category::Configuration & Deployment
+  configuration: README.md#Setup
+  description: Gatekeeper インテグレーション
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Gatekeeper
 ---
 
 
@@ -172,6 +192,6 @@ Gatekeeper には、イベントは含まれません。
 [6]: https://github.com/DataDog/integrations-extras/blob/master/gatekeeper/datadog_checks/gatekeeper/data/conf.yaml.example
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[9]: https://github.com/DataDog/integrations-core/blob/master/gatekeeper/metadata.csv
+[9]: https://github.com/DataDog/integrations-extras/blob/master/gatekeeper/metadata.csv
 [10]: https://github.com/DataDog/integrations-extras/blob/master/gatekeeper/assets/service_checks.json
 [11]: https://docs.datadoghq.com/ja/help/

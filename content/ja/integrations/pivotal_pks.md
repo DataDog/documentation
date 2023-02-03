@@ -60,30 +60,33 @@ tile:
 
 ## セットアップ
 
-Datadog は既に Kubernetes と統合されているため、すぐに PKS を監視することができます。
+Datadog はすでに Kubernetes とインテグレーションしているため、Pivotal Kubernetes Service (PKS) を監視するための準備が整っています。このインテグレーションと一緒に Datadog の[クラスターモニタリングタイル][2]を使用することで、クラスターの監視を行うことができます。
+
+PKS 環境内の非ワーカーの各 VM に、Datadog Agent をインストールします。Pivotal Application Service (PAS) がインストールされていない環境では、タイルの `Resource Config` セクションを選択し、`datadog-firehose-nozzle` の `instances` を `0` に設定します。
 
 ### メトリクスの収集
 
-PKS を監視するには、[Kubernetes][2] の Datadog インテグレーションをセットアップする必要があります。
+PKS を監視するには、[Kubernetes][3] の Datadog インテグレーションをセットアップする必要があります。
 
 ### ログの収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
 セットアップは Kubernetes の場合とまったく同じです。
-すべてのコンテナからのログ収集を開始するには、Datadog Agent の[環境変数][3]を使用します。
+すべてのコンテナからのログ収集を開始するには、Datadog Agent の[環境変数][4]を使用します。
 
-DaemonSets を利用して、すべてのノードで [Datadog Agent を自動的にデプロイ][4]することもできます。
+DaemonSets を利用して、すべてのノードで [Datadog Agent を自動的にデプロイ][5]することもできます。
 
-環境変数の詳細とさらに高度なセットアップオプションについては、[コンテナログの収集手順][5]を参照してください。
+環境変数の詳細とさらに高度なセットアップオプションについては、[コンテナログの収集手順][6]を参照してください。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
 
 [1]: https://pivotal.io/platform/pivotal-container-service
-[2]: https://docs.datadoghq.com/ja/integrations/kubernetes/
-[3]: https://docs.datadoghq.com/ja/agent/basic_agent_usage/kubernetes/#log-collection-setup
-[4]: https://docs.datadoghq.com/ja/agent/basic_agent_usage/kubernetes/#container-installation
-[5]: https://docs.datadoghq.com/ja/logs/log_collection/docker/#option-2-container-installation
-[6]: https://docs.datadoghq.com/ja/help/
+[2]: https://network.pivotal.io/products/datadog
+[3]: https://docs.datadoghq.com/ja/integrations/kubernetes/
+[4]: https://docs.datadoghq.com/ja/agent/basic_agent_usage/kubernetes/#log-collection-setup
+[5]: https://docs.datadoghq.com/ja/agent/basic_agent_usage/kubernetes/#container-installation
+[6]: https://docs.datadoghq.com/ja/logs/log_collection/docker/#option-2-container-installation
+[7]: https://docs.datadoghq.com/ja/help/

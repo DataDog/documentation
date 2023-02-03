@@ -10,6 +10,44 @@ type: Opaque
 data:
   api-key: PUT_YOUR_BASE64_ENCODED_API_KEY_HERE
 ---
+# Source: datadog/templates/cluster-agent-confd-configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: datadog-cluster-agent-confd
+  namespace: default
+  labels: {}
+  annotations: {}
+data:
+  kubernetes_state_core.yaml.default: |-
+    init_config:
+    instances:
+      - collectors:
+        - secrets
+        - nodes
+        - pods
+        - services
+        - resourcequotas
+        - replicationcontrollers
+        - limitranges
+        - persistentvolumeclaims
+        - persistentvolumes
+        - namespaces
+        - endpoints
+        - daemonsets
+        - deployments
+        - replicasets
+        - statefulsets
+        - cronjobs
+        - jobs
+        - horizontalpodautoscalers
+        - poddisruptionbudgets
+        - storageclasses
+        - volumeattachments
+        - ingresses
+        labels_as_tags:
+            {}
+---
 # Source: datadog/templates/install_info-configmap.yaml
 apiVersion: v1
 kind: ConfigMap
@@ -25,6 +63,103 @@ data:
       tool: kubernetes sample manifests
       tool_version: kubernetes sample manifests
       installer_version: kubernetes sample manifests
+---
+# Source: datadog/templates/kube-state-metrics-core-rbac.yaml
+apiVersion: "rbac.authorization.k8s.io/v1"
+kind: ClusterRole
+metadata:
+  labels: {}
+  name: datadog-ksm-core
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - secrets
+      - nodes
+      - pods
+      - services
+      - resourcequotas
+      - replicationcontrollers
+      - limitranges
+      - persistentvolumeclaims
+      - persistentvolumes
+      - namespaces
+      - endpoints
+      - events
+    verbs:
+      - list
+      - watch
+  - apiGroups:
+      - extensions
+    resources:
+      - daemonsets
+      - deployments
+      - replicasets
+    verbs:
+      - list
+      - watch
+  - apiGroups:
+      - apps
+    resources:
+      - statefulsets
+      - daemonsets
+      - deployments
+      - replicasets
+    verbs:
+      - list
+      - watch
+  - apiGroups:
+      - batch
+    resources:
+      - cronjobs
+      - jobs
+    verbs:
+      - list
+      - watch
+  - apiGroups:
+      - autoscaling
+    resources:
+      - horizontalpodautoscalers
+    verbs:
+      - list
+      - watch
+  - apiGroups:
+      - policy
+    resources:
+      - poddisruptionbudgets
+    verbs:
+      - list
+      - watch
+  - apiGroups:
+      - storage.k8s.io
+    resources:
+      - storageclasses
+      - volumeattachments
+    verbs:
+      - list
+      - watch
+  - apiGroups:
+      - networking.k8s.io
+    resources:
+      - ingresses
+    verbs:
+      - list
+      - watch
+---
+# Source: datadog/templates/kube-state-metrics-core-rbac.yaml
+apiVersion: "rbac.authorization.k8s.io/v1"
+kind: ClusterRoleBinding
+metadata:
+  labels: {}
+  name: datadog-ksm-core
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: datadog-ksm-core
+subjects:
+  - kind: ServiceAccount
+    name: datadog-cluster-agent
+    namespace: default
 ---
 # Source: datadog/templates/daemonset.yaml
 apiVersion: apps/v1
@@ -45,9 +180,10 @@ spec:
       name: datadog
       annotations: {}
     spec:
+      hostPID: true
       containers:
         - name: agent
-          image: "gcr.io/datadoghq/agent:7.38.2"
+          image: "gcr.io/datadoghq/agent:7.40.1"
           imagePullPolicy: IfNotPresent
           command: ["agent", "run"]
           resources: {}
@@ -92,6 +228,8 @@ spec:
               value: "false"
             - name: DD_HEALTH_PORT
               value: "5555"
+            - name: DD_IGNORE_AUTOCONF
+              value: "kubernetes_state"
             - name: DD_EXPVAR_PORT
               value: "6000"
           volumeMounts:
@@ -130,7 +268,7 @@ spec:
             successThreshold: 1
             timeoutSeconds: 5
         - name: trace-agent
-          image: "gcr.io/datadoghq/agent:7.38.2"
+          image: "gcr.io/datadoghq/agent:7.40.1"
           imagePullPolicy: IfNotPresent
           command: ["trace-agent", "-foreground", "-config=C:/ProgramData/Datadog/datadog.yaml"]
           resources: {}
@@ -178,7 +316,7 @@ spec:
               port: 8126
             timeoutSeconds: 5
         - name: process-agent
-          image: "gcr.io/datadoghq/agent:7.38.2"
+          image: "gcr.io/datadoghq/agent:7.40.1"
           imagePullPolicy: IfNotPresent
           command: ["process-agent", "-foreground", "--cfgpath=C:/ProgramData/Datadog/datadog.yaml"]
           resources: {}
@@ -220,7 +358,7 @@ spec:
               mountPath: \\.\pipe\containerd-containerd
       initContainers:
         - name: init-volume
-          image: "gcr.io/datadoghq/agent:7.38.2"
+          image: "gcr.io/datadoghq/agent:7.40.1"
           imagePullPolicy: IfNotPresent
           command: ["pwsh", "-Command"]
           args:
@@ -234,7 +372,7 @@ spec:
               mountPath: C:/Temp/install_info
           resources: {}
         - name: init-config
-          image: "gcr.io/datadoghq/agent:7.38.2"
+          image: "gcr.io/datadoghq/agent:7.40.1"
           imagePullPolicy: IfNotPresent
           command: ["pwsh", "-Command"]
           args:

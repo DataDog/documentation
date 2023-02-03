@@ -2,7 +2,7 @@ import docsearch from 'docsearch.js';
 import configDocs from '../config/config-docs';
 
 const { env } = document.documentElement.dataset;
-const lang = document.documentElement.lang || 'en';
+const lang = document.documentElement.lang.toLowerCase() || 'en-us';
 
 // Set baseUrl based on environment
 let baseUrl = window.location.origin;
@@ -53,7 +53,7 @@ const appendHomeLinkToAutocompleteWidget = () => {
     const autocompleteHeaderElement = headers[0];
     const searchPageLink = document.createElement('a');
 
-    searchPageLink.className = "font-regular text-underline pl-2 js-api-search";
+    searchPageLink.className = "font-regular text-underline ps-2 js-api-search";
     searchPageLink.innerText = 'Click here to search the full docs';
     searchPageLink.href = `${baseUrl}/search/`;
 

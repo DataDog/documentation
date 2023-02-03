@@ -38,7 +38,7 @@ draft: false
 git_integration_title: gitlab
 integration_id: gitlab
 integration_title: GitLab
-integration_version: 5.2.3
+integration_version: 5.3.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0

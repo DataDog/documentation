@@ -23,7 +23,7 @@ author:
   homepage: https://www.rapdev.io
   name: RapDev
   sales_email: ddsales@rapdev.io
-  support_email: datadog-engineering@rapdev.io
+  support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
 - マーケットプレイス
@@ -77,6 +77,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Synthetic Email インテグレーション
+  uninstallation: README.md#Uninstallation
 ---
 
 ## 概要
@@ -86,14 +87,14 @@ tile:
 ## サポート
 サポートまたは機能リクエストについては、以下のチャンネルで RapDev.io までお問い合わせください。
 
- - メール: datadog-engineering@rapdev.io 
+ - メール: support@rapdev.io 
  - チャット: [rapdev.io](https://www.rapdev.io/#Get-in-touch)
  - 電話: 855-857-0222 
 
 ---
 ボストンより ❤️ を込めて
 
-*お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:datadog-engineering@rapdev.io)からメッセージをお送りいただければ、導入をサポートいたします！*
+*お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:support@rapdev.io)からメッセージをお送りいただければ、導入をサポートいたします！*
 
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-syntheticemail" target="_blank">こちらをクリック</a>してください。

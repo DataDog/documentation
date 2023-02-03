@@ -71,7 +71,12 @@ tile:
 
 ## 概要
 
-このチェックは、Datadog Agent を通じて [SingleStore][1] を監視します。
+このチェックでは、Datadog Agent を通じて [SingleStore][1] を監視します。SingleStore は、保存されたデータのトランザクション処理と分析処理を提供します。Datadog-SingleStoreDB インテグレーションを有効にすると、以下が可能になります。
+
+- メトリクスとイベントにより、クラスターとノードの健全性を把握する。
+- ストレージ容量の低下に対応する。
+- リソースの利用効率を高める。
+
 
 ## セットアップ
 
@@ -130,9 +135,6 @@ SingleStore チェックは [Datadog Agent][3] パッケージに含まれてい
 | `<インテグレーション名>` | `singlestore`                                                   |
 | `<初期コンフィギュレーション>`      | 空白または `{}`                                              |
 | `<インスタンスコンフィギュレーション>`  | `{"host": "%%host%%", "port": "%%port%%", "username": "<ユーザー>", "password": "<パスワード>"}`       |
-
-
-**注**: デフォルトでは、SingleStore インテグレーションは `MV_GLOBAL_STATUS`、`AGGREGATORS`、`LEAVES` テーブルからしかメトリクスを収集しません。システムレベルのメトリクス (CPU、ディスク、ネットワーク IO、メモリ) を追加で収集するには、`singlestore.d/conf.yaml` ファイルで `"collect_system_metrics": "true"` を追加します。
 
 ##### ログの収集
 

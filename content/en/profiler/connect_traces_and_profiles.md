@@ -15,7 +15,7 @@ aliases:
   - /tracing/profiler/connect_traces_and_profiles/
 ---
 
-If your application is showing performance problems in production, integrating distributed tracing with code stack trace benchmarks from profiling is a powerful way to identify the performance bottlenecks. Application processes that have both APM distributed tracing and continuous profiler enabled are automatically linked. 
+If your application is showing performance problems in production, integrating distributed tracing with code stack trace benchmarks from profiling is a powerful way to identify the performance bottlenecks. Application processes that have both APM distributed tracing and continuous profiler enabled are automatically linked.
 
 You can move directly from span information to profiling data on the Code Hotspots tab, and find specific lines of code related to performance issues. Similarly, you can also debug slow and resource consuming endpoints directly in the Profiling UI.
 
@@ -25,9 +25,9 @@ You can move directly from span information to profiling data on the Code Hotspo
 
 ### Prerequisites
 
-{{< programming-lang-wrapper langs="java,python,go,ruby,.NET,php" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby,dotnet,php" >}}
 {{< programming-lang lang="java" >}}
-Code Hotspots identification is enabled by default when you [turn on profiling for your service][1]. For manually instrumented code, continuous profiler requires scope activation of spans:
+Code Hotspots identification is enabled by default when you [turn on profiling for your Java service][1]. For manually instrumented code, continuous profiler requires scope activation of spans:
 
 ```java
 final Span span = tracer.buildSpan("ServicehandlerSpan").start();
@@ -41,66 +41,54 @@ try (final Scope scope = tracer.activateSpan(span)) { // mandatory for Datadog c
 ```
 
 Requires:
-- OpenJDK 11 or greater and tracing library version 0.65.0 or greater; or
-- If on OpenJDK 8: 8u282 or greater and tracing library version 0.77.0 or greater.
-
+- OpenJDK 11+ and `dd-trace-java` version 0.65.0+; or
+- OpenJDK 8: 8u282+ and `dd-trace-java` version 0.77.0+.
 
 [1]: /profiler/enabling/java
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-Code Hotspots identification is enabled by default when you [turn on profiling for your service][1].
+Code Hotspots identification is enabled by default when you [turn on profiling for your Python service][1].
 
-Requires tracing library version 0.44.0 or greater.
-
+Requires `dd-trace-py` version 0.44.0+.
 
 [1]: /profiler/enabling/python
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-Code Hotspots identification is enabled by default when you [turn on profiling for your service][1].
+Code Hotspots identification is enabled by default when you [turn on profiling for your Ruby service][1].
 
-Requires tracing library version 0.49.0 or greater.
-
+Requires `dd-trace-rb` version 0.49.0+.
 
 [1]: /profiler/enabling/ruby
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-To enable Code Hotspots identification for Go, [turn on profiling for your service][1] and ensure that:
+Code Hotspots identification is enabled by default [turn on profiling for your Go service][1].
 
-- You are using [dd-trace-go][2] version 1.35.0 or later.
-- [`DD_PROFILING_CODE_HOTSPOTS_COLLECTION_ENABLED=true`][3] is set in your environment, or the [`tracer.WithProfilerCodeHotspots(true)`][3] option is passed to [`tracer.Start()`][4]. This option is enabled by default in [dd-trace-go][2] versions 1.37.0+.
-- [`profiler.CPUDuration(60*time.Second)`][5] and [`profiler.WithPeriod(60*time.Second)`][6] are passed to [`profiler.Start()`][7] to capture hotspot information for 100% of all spans. These values are set by default in [dd-trace-go][2] versions 1.37.0+.
+Require `dd-trace-go` version 1.37.0+.
 
-
-**Warning:** Go 1.17 and below has several bugs (see [GH-35057][8], [GH-48577][9], [CL-369741][10], [CL-369983][11]) that can reduce the accuracy of this feature, especially when using a lot of CGO. They are scheduled to be fixed in the 1.18 release.
+**Note:** This feature works best with Go version 1.18 or newer. Go 1.17 and below have several bugs (see [GH-35057][2], [GH-48577][3], [CL-369741][4], and [CL-369983][5]) that can reduce the accuracy of this feature, especially when using a lot of CGO.
 
 [1]: /profiler/enabling/go
-[2]: https://github.com/DataDog/dd-trace-go/releases
-[3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithProfilerCodeHotspots
-[4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#Start
-[5]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#CPUDuration
-[6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#WithPeriod
-[7]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#Start
-[8]: https://github.com/golang/go/issues/35057
-[9]: https://github.com/golang/go/issues/48577
-[10]: https://go-review.googlesource.com/c/go/+/369741/
-[11]: https://go-review.googlesource.com/c/go/+/369983/
+[2]: https://github.com/golang/go/issues/35057
+[3]: https://github.com/golang/go/issues/48577
+[4]: https://go-review.googlesource.com/c/go/+/369741/
+[5]: https://go-review.googlesource.com/c/go/+/369983/
 {{< /programming-lang >}}
-{{< programming-lang lang=".NET" >}}
+{{< programming-lang lang="dotnet" >}}
 
-Code Hotspots identification is enabled by default when you [turn on profiling for your service][1].
+Code Hotspots identification is enabled by default when you [turn on profiling for your .NET service][1].
 
-Requires tracing library version 2.7.0 or greater.
+Requires `dd-trace-dotnet` version 2.7.0+.
 
 [1]: /profiler/enabling/dotnet
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
-Code Hotspots identification is enabled by default when you [turn on profiling for your service][1].
+Code Hotspots identification is enabled by default when you [turn on profiling for your PHP service][1].
 
-Requires tracing library version 0.71 or greater.
+Requires `dd-trace-php` version 0.71+.
 
 [1]: /profiler/enabling/php
 {{< /programming-lang >}}
@@ -149,51 +137,57 @@ Click the **Span/Trace/Full profile** selector to define the scope of the data:
 
 ### Prerequisites
 
-{{< programming-lang-wrapper langs="python,go,ruby,php" >}}
+{{< programming-lang-wrapper langs="python,go,ruby,dotnet,php" >}}
 {{< programming-lang lang="python" >}}
 
-Endpoint profiling is enabled by default when you turn on profiling for your [Python][1] service. It requires `dd-trace-py` version 0.54.0 or greater.
-<p></p>
+Endpoint profiling is enabled by default when you [turn on profiling for your Python service][1].
+
+Requires `dd-trace-py` version 0.54.0+.
 
 [1]: /profiler/enabling/python
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
-Endpoint profiling is disabled by default when you turn on profiling for your [Go][1] service. To enable it, you need to ensure that:
+Endpoint profiling is enabled by default when you [turn on profiling for your Go service][1].
 
-- You are using [dd-trace-go][2] version 1.35.0 or later.
-- [`DD_PROFILING_ENDPOINT_COLLECTION_ENABLED=true`][3] is set in your environment, or the [`tracer.WithProfilerEndpoints(true)`][3] option is passed to [`tracer.Start()`][4]. This option is enabled by default in [dd-trace-go][2] versions 1.37.0+.
+Requires `dd-trace-go` version 1.37.0+.
 
-**Warning:** Go 1.17 and below has several bugs (see [GH-35057][5], [GH-48577][6], [CL-369741][7], [CL-369983][8]) that can reduce the accuracy of this feature, especially when using a lot of CGO. They are scheduled to be fixed in the 1.18 release.
+**Note:** This feature works best with Go version 1.18 or newer. Go 1.17 and below have several bugs (see [GH-35057][2], [GH-48577][3], [CL-369741][4], and [CL-369983][5]) that can reduce the accuracy of this feature, especially when using a lot of CGO.
 
 [1]: /profiler/enabling/go
-[2]: https://github.com/DataDog/dd-trace-go/releases
-[3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithProfilerEndpoints
-[4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#Start
-[5]: https://github.com/golang/go/issues/35057
-[6]: https://github.com/golang/go/issues/48577
-[7]: https://go-review.googlesource.com/c/go/+/369741/
-[8]: https://go-review.googlesource.com/c/go/+/369983/
+[2]: https://github.com/golang/go/issues/35057
+[3]: https://github.com/golang/go/issues/48577
+[4]: https://go-review.googlesource.com/c/go/+/369741/
+[5]: https://go-review.googlesource.com/c/go/+/369983/
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-Endpoint profiling is enabled by default when you turn on profiling for your [Ruby][1] service. It requires `dd-trace-rb` version 0.54.0 or greater.
-<p></p>
+Endpoint profiling is enabled by default when you [turn on profiling for your Ruby service][1].
+
+Requires `dd-trace-rb` version 0.54.0+.
 
 [1]: /profiler/enabling/ruby
 {{< /programming-lang >}}
+{{< programming-lang lang="dotnet" >}}
+
+Endpoint profiling is enabled by default when you [turn on profiling for your .NET service][1].
+
+Requires `dd-trace-dotnet` version 2.15.0+.
+
+[1]: /profiler/enabling/dotnet
+{{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
-Endpoint profiling is enabled by default when you turn on profiling for your [PHP][1] service. It requires [`ddtrace`][2] v0.79.0+. To disable endpoint profiling, set the environment variable `DD_PROFILING_ENDPOINT_COLLECTION_ENABLED` to `0`, `no`, `off`, or `false`.
-<p></p>
+Endpoint profiling is enabled by default when you [turn on profiling for your PHP service][1].
+
+Requires `dd-trace-php` version 0.79.0+.
 
 [1]: /profiler/enabling/php
-[2]: https://github.com/DataDog/dd-trace-php
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
 ### Scope flame graphs by endpoints
 
-Endpoint profiling allows you to scope your flame graphs by any endpoint of your web service to find endpoints that are slow, latency-heavy, and causing poor end-user experience. These endpoints can be tricky to debug and understand why they are slow. The slowness could be caused by an unintended large amount of resource consumption such as the endpoint consuming lots of CPU cycles. 
+Endpoint profiling allows you to scope your flame graphs by any endpoint of your web service to find endpoints that are slow, latency-heavy, and causing poor end-user experience. These endpoints can be tricky to debug and understand why they are slow. The slowness could be caused by an unintended large amount of resource consumption such as the endpoint consuming lots of CPU cycles.
 
 With endpoint profiling you can:
 
@@ -206,7 +200,7 @@ With endpoint profiling you can:
 
 ### Track the endpoints that consume the most resources
 
-It is valuable to track top endpoints that are consuming valuable resources such as CPU and wall time. The list can help you identify if your endpoints have regressed or if you have newly introduced endpoints that are consuming drastically more resources, slowing down your overall service. 
+It is valuable to track top endpoints that are consuming valuable resources such as CPU and wall time. The list can help you identify if your endpoints have regressed or if you have newly introduced endpoints that are consuming drastically more resources, slowing down your overall service.
 
 {{< img src="profiler/endpoint_metric.mp4" alt="Graphing top endpoints in terms of resource consumption" video=true >}}
 

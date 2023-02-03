@@ -5,9 +5,12 @@ aliases:
   - /metrics/faq/metrics-without-limits/
   - /metrics/guide/metrics-without-limits-getting-started/
 further_reading:
-  - link: https://www.datadoghq.com/blog/metrics-without-limits
-    tag: Blog
+  - link: "https://www.datadoghq.com/blog/metrics-without-limits"
+    tag: "Blog"
     text: "Dynamically control custom metrics volume with Metrics without Limits™"
+  - link: "/observability_pipelines/guide/custom-metrics-governance"
+    tag: "Documentation"
+    text: "Use Observability Pipelines to govern custom metrics"
 ---
 
 ## Overview
@@ -96,7 +99,7 @@ Learn more about [Custom Metrics Billing][8].
 [5]: /api/latest/metrics/#tag-configuration-cardinality-estimator
 [6]: /metrics/#time-and-space-aggregation
 [7]: /metrics/summary/#configuration-of-multiple-metrics
-[8]: /account_management/billing/custom_metrics/?tab=countrategauge
+[8]: /account_management/billing/custom_metrics/
 [9]: https://app.datadoghq.com/billing/usage
 [10]: /account_management/billing/usage_metrics/
 [11]: /account_management/rbac/permissions/?tab=ui#metrics

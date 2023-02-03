@@ -1,6 +1,7 @@
 ---
 title: Glossary
 is_beta: true
+private: true
 cascade:
     disable_toc: true
 scrollspy:

@@ -41,7 +41,7 @@ draft: false
 git_integration_title: nginx_ingress_controller
 integration_id: nginx-ingress-controller
 integration_title: nginx-ingress-controller
-integration_version: 2.2.0
+integration_version: 2.3.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0

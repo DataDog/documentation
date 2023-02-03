@@ -1,20 +1,21 @@
 ---
-title: SLO サマリーウィジェット
-kind: documentation
-description: SLO を追跡します。
 aliases:
-  - /ja/monitors/monitor_uptime_widget/
-  - /ja/monitors/slo_widget/
-  - /ja/graphing/widgets/slo/
-  - /ja/dashboards/faq/how-can-i-graph-host-uptime-percentage/
+- /ja/monitors/monitor_uptime_widget/
+- /ja/monitors/slo_widget/
+- /ja/graphing/widgets/slo/
+- /ja/dashboards/faq/how-can-i-graph-host-uptime-percentage/
+description: SLO の追跡
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/slo-monitoring-tracking/'
-    tag: ブログ
-    text: Datadog ですべての SLO のステータスを追跡する
+- link: https://www.datadoghq.com/blog/slo-monitoring-tracking/
+  tag: ブログ
+  text: Datadog ですべての SLO のステータスを追跡する
+kind: documentation
+title: SLO サマリーウィジェット
 ---
+
 ## セットアップ
 
-SLO サマリーウィジェットを使用して、スクリーンボードとタイムボードで [SLO (サービスレベル目標)][1] を追跡できます。Datadog の[サービスレベル目標ページ][2]で、SLO の新規作成や既存 SLO の一覧表示が可能です。画面上で既存の SLO を選択し、SLO サマリーウィジェットを使用して任意のダッシュボードに SLO を表示させます。
+SLO サマリーウィジェットを使用して、ダッシュボード上で [サービスレベル目標 (SLO)][1] を視覚化します。
 
 {{< img src="dashboards/widgets/slo/slo_summary_editor.png" alt="SLO サマリーウィジェット"  >}}
 
@@ -56,9 +57,9 @@ SLO サマリーウィジェットを使用して、スクリーンボードと�
 
 ## API
 
-このウィジェットは、**ダッシュボード API** とともに使用できます。詳しくは、[ダッシュボード API][3] ドキュメントをご参照ください。
+このウィジェットは、**ダッシュボード API** とともに使用できます。詳しくは、[ダッシュボード API][2] ドキュメントをご参照ください。
 
-サービスマップウィジェットの[ウィジェット JSON スキーマ定義][4]は次のとおりです。
+SLO サマリーウィジェットの[ウィジェット JSON スキーマ定義][3]は次のとおりです。
 
 {{< dashboards-widgets-api >}}
 
@@ -67,6 +68,5 @@ SLO サマリーウィジェットを使用して、スクリーンボードと�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/monitors/service_level_objectives/
-[2]: https://app.datadoghq.com/slo
-[3]: /ja/api/v1/dashboards/
-[4]: /ja/dashboards/graphing_json/widget_json/
+[2]: /ja/api/v1/dashboards/
+[3]: /ja/dashboards/graphing_json/widget_json/

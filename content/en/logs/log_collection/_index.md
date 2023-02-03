@@ -10,6 +10,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/log-file-control-with-logrotate/"
   tag: "Blog"
   text: "How to manage log files using Logrotate"
+- link: "/agent/logs/advanced_log_collection"
+  tag: "Documentation"
+  text: "Advanced log collection configurations"
 - link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Discover how to process your logs"
@@ -127,6 +130,7 @@ Use the [site][13] selector dropdown on the right side of the page to see suppor
 | Site | Type        | Endpoint                                                                  | Port         | Description                                                                                                                                                                 |
 |------|-------------|---------------------------------------------------------------------------|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | US   | HTTPS       | `http-intake.logs.datadoghq.com`                                          | 443   | Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [Logs HTTP API documentation][1].                                                    |
+| US   | HTTPS       | `agent-http-intake-pci.logs.datadoghq.com`                                | 443   | Used by the Agent to send logs over HTTPS to an org with PCI DSS compliance enabled. See [PCI DSS compliance for Log Management][3] for more information.                 |
 | US   | HTTPS       | `agent-http-intake.logs.datadoghq.com`                                    | 443   | Used by the Agent to send logs in JSON format over HTTPS. See the [Host Agent Log collection documentation][2].                                                             |
 | US   | HTTPS       | `lambda-http-intake.logs.datadoghq.com`                                   | 443   | Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS.                                                                                            |
 | US   | HTTPS       | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443   | Used by the Browser SDK to send logs in JSON format over HTTPS.                                                                                                             |
@@ -138,6 +142,7 @@ Use the [site][13] selector dropdown on the right side of the page to see suppor
 
 [1]: /api/latest/logs/#send-logs
 [2]: /agent/logs/#send-logs-over-https
+[3]: /data_security/logs/#pci-dss-compliance-for-log-management
 {{< /site-region >}}
 
 {{< site-region region="eu" >}}
@@ -320,7 +325,7 @@ Once logs are collected and ingested, they are available in **Log Explorer**. Lo
 [3]: /integrations/nxlog/
 [4]: /integrations/fluentd/#log-collection
 [5]: /integrations/logstash/#log-collection
-[6]: /security/logs/#information-security
+[6]: /data_security/logs/#information-security
 [7]: /agent/logs/#send-logs-over-https
 [8]: /api/v1/logs/#send-logs
 [9]: /logs/explorer/facets/

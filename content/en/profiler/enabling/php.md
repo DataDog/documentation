@@ -45,6 +45,13 @@ Version 3.13 or newer of Alpine Linux is required because the profiler is built 
 {{% /tab %}}
 {{< /tabs >}}
 
+The following profiling features are available in the following minimum versions of the `dd-trace-php` library:
+
+|      Feature         | Required `dd-trace-php` version          |
+|----------------------|-----------------------------------------|
+| [Code Hotspots][12]        | 0.71+                       |
+| [Endpoint Profiling][13]            | 0.79.0+                       |
+
 Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
 
 ## Installation
@@ -65,7 +72,9 @@ To begin profiling applications:
 Set the environment variables before calling PHP, for example:
 
 ```
+# DD_PROFILING_ENABLED is not required for v0.82.0+.
 export DD_PROFILING_ENABLED=true
+
 export DD_SERVICE=app-name
 export DD_ENV=prod
 export DD_VERSION=1.3.2
@@ -79,7 +88,9 @@ php hello.php
 Use the `env` directive in the php-fpm’s `www.conf` file, for example:
 
 ```
+; DD_PROFILING_ENABLED is not required for v0.82.0+
 env[DD_PROFILING_ENABLED] = true
+
 env[DD_SERVICE] = app-name
 env[DD_ENV] = prod
 env[DD_VERSION] = 1.3.2
@@ -91,7 +102,9 @@ env[DD_VERSION] = 1.3.2
 Use `SetEnv` from the server config, virtual host, directory, or `.htaccess` file:
 
 ```
+# DD_PROFILING_ENABLED is not required for v0.82.0+.
 SetEnv DD_PROFILING_ENABLED true
+
 SetEnv DD_SERVICE app-name
 SetEnv DD_ENV prod
 SetEnv DD_VERSION 1.3.2
@@ -118,3 +131,5 @@ The [Getting Started with Profiler][6] guide takes a sample service with a perfo
 [4]: /tracing/trace_collection/library_config/php/#environment-variable-configuration
 [5]: https://app.datadoghq.com/profiling
 [6]: /getting_started/profiler/
+[12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
+[13]: /profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints

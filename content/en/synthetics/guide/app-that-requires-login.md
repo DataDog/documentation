@@ -1,31 +1,32 @@
 ---
 title: Running Tests On An Application That Requires Authentication
 kind: guide
+description: Learn how to ensure your Synthetic browser tests can log in to your applications. 
 further_reading:
-  - link: '/synthetics/guide/browser-tests-totp'
-    tag: 'Documentation'
-    text: 'TOTPs For Multi-Factor Authentication (MFA) in Browser Test'
-  - link: '/synthetics/browser_tests'
-    tag: 'Documentation'
-    text: 'Browser Tests'
-  - link: '/synthetics/browser_tests/actions'
-    tag: 'Documentation'
-    text: 'Browser Test Steps'
   - link: 'https://www.datadoghq.com/blog/test-creation-best-practices/'
     tag: 'Blog'
     text: 'Best practices for creating end-to-end tests'
+  - link: '/synthetics/guide/browser-tests-totp'
+    tag: 'Documentation'
+    text: 'TOTPs for Multi-Factor Authentication (MFA) in browser tests'
+  - link: '/synthetics/browser_tests'
+    tag: 'Documentation'
+    text: 'Learn about browser tests'
+  - link: '/synthetics/browser_tests/actions'
+    tag: 'Documentation'
+    text: 'Learn about browser test steps'
 ---
 
 ## Overview 
 
-You may need to monitor journeys located behind a login. There are two ways to ensure that your Datadog Browser tests can go through the login steps of your application to perform validation on post login pages:
+<div class="alert alert-info">If you are interested in testing applications sitting behind MFA, visit the <a href="/synthetics/guide/app-that-requires-login/#multi-factor-authentication" target="_blank">Multi-factor authentication section</a> and <a href="https://docs.google.com/forms/d/e/1FAIpQLSdjx8PDZ8kJ3MD2ehouTri9z_Fh7PoK90J8arRQgt7QFgFxog/viewform?usp=sf_link">send feedback</a> to help Datadog work on the systems that matter the most to your teams.</div>
 
-- [Include the login steps in your recording](#include-the-login-steps-in-your-recording)
-- [Leverage browser test configuration options](#leverage-browser-test-configuration-options)
+You may need to monitor user journeys located behind a login. There are two ways to ensure that your Datadog browser tests can go through the login steps of your application to perform validation on post-login pages:
 
-You can also ensure your credentials are securely stored and obfuscated across the application [using secured global variables](#account-security).
+- [Include the login steps in your browser test recording](#include-the-login-steps-in-your-recording)
+- [Leverage advanced options in your browser tests](#leverage-test-configuration-options)
 
-<div class="alert alert-info"> Are you interested in testing applications sitting behind MFA? Visit the <a href="/synthetics/guide/app-that-requires-login/#multi-factor-authentication" target="_blank">below section</a> and <a href="https://docs.google.com/forms/d/e/1FAIpQLSdjx8PDZ8kJ3MD2ehouTri9z_Fh7PoK90J8arRQgt7QFgFxog/viewform?usp=sf_link">send us feedback</a> to help us work on the systems that matter the most to your teams.</div>
+To ensure your credentials are securely stored and obfuscated across the application, use [obfuscated global variables](#account-security).
 
 ## Include the login steps in your recording
 
@@ -83,11 +84,13 @@ You can manually apply these configured headers, cookies, and credentials on the
 
 ### Secure your authentication data
 
-Store your credentials as [global variables][6] (for example, one global variable for username, another one for password) and  set these variables as secure to obfuscate their values from anyone else who has access to your instance of Datadog.
+Store your credentials as [global variables][6] (for example, one global variable for username, another one for password) and select **Hide and obfuscate variable value** to hide their values from test results. You can restrict permissions on a browser test for individuals who have access to your instance of Datadog.
 
-Once you create the secure variables, you can then [import these global variables][7] into your browser tests and leverage them for your login steps.
+Once you create the obfuscated variables, you can then [import these global variables][7] into your browser tests and leverage them for your login steps.
 
 **Note:** Although Datadog global variables are securely stored and encrypted, it is strongly recommended that you use an account dedicated to testing with dummy credentials as a general testing best practice.
+
+For more information about account security, see [Synthetic Monitoring Data Security][8].
 
 ## Further Reading
 
@@ -100,3 +103,4 @@ Once you create the secure variables, you can then [import these global variable
 [5]: /synthetics/browser_tests/actions/#test-your-ui-with-custom-javascript
 [6]: /synthetics/settings/?tab=specifyvalue#global-variables
 [7]: /synthetics/browser_tests/actions#a-global-variable
+[8]: /data_security/synthetics

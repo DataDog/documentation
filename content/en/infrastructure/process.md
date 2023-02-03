@@ -45,6 +45,7 @@ Once the Datadog Agent is installed, enable Live Processes collection by editing
 
 ```yaml
 process_config:
+  process_collection:
     enabled: true
 ```
 

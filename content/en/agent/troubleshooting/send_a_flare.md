@@ -129,7 +129,7 @@ aws ecs execute-command --cluster <CLUSTER_NAME> \
 
 | Platform   | Command                                                             |
 |------------|---------------------------------------------------------------------|
-| Kubernetes | `kubectl exec <POD_NAME> -it datadog-cluster-agent flare <CASE_ID>` |
+| Kubernetes | `kubectl exec <CLUSTER_POD_NAME> -it datadog-cluster-agent flare <CASE_ID>` |
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -142,7 +142,7 @@ Manually obtain this file and provide it to support if there are any issues with
 ### Kubernetes
 To obtain the archive file in Kubernetes, use the kubectl command:
 ```
-kubectl cp datadog-<pod-name>:/tmp/datadog-agent-<date-of-the-flare>.zip flare.zip
+kubectl cp datadog-<pod-name>:tmp/datadog-agent-<date-of-the-flare>.zip flare.zip -c agent
 ```
 
 ## Further Reading

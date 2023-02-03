@@ -9,277 +9,113 @@ further_reading:
 - link: /logs/log_configuration/processors
   tag: Documentation
   text: ログの処理方法
+- link: https://www.datadoghq.com/blog/send-amazon-vpc-flow-logs-to-kinesis-firehose-and-datadog/
+  tag: GitHub
+  text: Amazon VPC フローログを Amazon Kinesis Data Firehose と Datadog に送信する
 kind: ドキュメント
-title: Datadog の Lambda 関数で AWS サービスのログを送信する
+title: Datadog Kinesis Firehose Destination を使用して AWS サービスログを送信する
 ---
 
-AWS サービスログは、Datadog Forwarder Lambda 関数を使用して収集できます。S3 Buckets、CloudWatch ロググループ、および EventBridge イベントでトリガーするこの Lambda は、ログを Datadog に転送します。
+## 概要
 
-AWS サービスからログの収集を開始するには
+AWS サービスのログは通常、S3 バケットや CloudWatch ロググループに保存されています。これらのログを購読し、Amazon Kinesis ストリームに転送して、1 つまたは複数の宛先に転送することができます。Datadog は、Amazon Kinesis 配信ストリームのデフォルトの転送先の 1 つです。
 
-1. AWS アカウントで [Datadog Forwarder Lambda 関数][1]をセットアップします。
-2. AWS サービスで[ログを有効にします](#enable-logging-for-your-aws-service) (大部分の AWS サービスは、S3 バケットまたは CloudWatch ログ グループにログインできます)。
-3. 転送する新しいログがあったときに Forwarder Lambda を実行させる[トリガーの設定](#set-up-triggers)をします。トリガーの構成は 2 通りあります。
+AWS は Amazon Kinesis Data Firehose を完全に管理しているため、ログをストリーミングするための追加のインフラストラクチャーや転送構成を維持する必要はありません。AWS Firehose コンソールで Kinesis Firehose Delivery Stream を設定するか、CloudFormation テンプレートを使って自動的に転送先を設定することができます。
 
-**注**: AWS us-east-1 リージョンにいる場合は、[Datadog-AWS Private Link][2] を利用してください。
+## セットアップ
 
-**注**: Cloudformation は、すべてのリソースに対して KMS:Decrypt を含む IAM ポリシーを作成します。これは、Security ハブのベストプラクティスと一致しないことが知られています。この権限が使用される理由は、Lambda 関数を設定するために KMS で暗号化された S3 バケットからオブジェクトを復号するためで、どの KMS キーが S3 バケットの暗号化に使用されているかは予測できません。インストーラーが正常に終了したら、この権限を安全に削除することができます。
+{{< tabs >}}
+{{% tab "Kinesis Firehose Delivery stream" %}}
 
-## トリガーの設定
+Datadog は、Datadog Kinesis 宛先を使用する場合、入力として Kinesis データストリームを使用することをお勧めします。Datadog がログの唯一のコンシューマーではない場合に備えて、ログを複数の宛先に転送する機能が用意されています。Datadog がログの唯一の宛先である場合、またはすでにログを含む Kinesis データストリームを持っている場合、ステップ 1 を無視することができます。
 
-Datadog Forwarder Lambda 関数でトリガーを構成する場合、オプションは 2 つあります。
+1. オプションとして、AWS の Amazon Kinesis Data Streams 開発者ガイドの[データストリームの作成][1]セクションを使用して、新しい Kinesis データストリームを作成します。ストリームには `DatadogLogStream` のような分かりやすい名前を付けます。
+2. [新しい配信ストリーム][2]を作成します。
+   a. ソースを設定します。
+      - ログが Kinesis データストリームから取得されている場合は、`Amazon Kinesis Data Streams`
+      - ログが CloudWatch のロググループから直接送られてくる場合は、`Direct PUT or other sources`
 
-- [自動](#automatically-set-up-triggers): Datadog は、選択されている AWS サービスのログロケーションを自動的に受信し、Datadog Forwarder Lambda 関数のトリガーとして追加します。また、リストを最新状態に維持します。
-- [手動](#automatically-set-up-triggers): 各トリガーをセットアップします。
+   b. 宛先を `Datadog` にします。 
+   c. 配信ストリームの名前を指定します。
+   d. **Destination settings** で、[Datadog サイト][5]に対応する `Datadog logs` HTTP エンドポイント URL を選択します。 
+   e. API キーを **API key** フィールドに貼り付けます。API キーは、[Datadog API Keys ページ][3]から取得または作成できます。 
+   f. オプションとして、**Retry duration**、バッファの設定を構成するか、またはログにタグとしてアタッチされる **Parameters** を追加することができます。 
+   g. **Backup settings** で、再試行期間を超える失敗したイベントを受け取る S3 バックアップバケットを選択します。 
+   **注**: 配信ストリームで失敗したログがまだ Datadog に送信されるようにするには、Datadog Forwarder Lambda 関数をこの S3 バケットから[ログを転送][4]するように設定します。
+   h. **Create delivery stream** をクリックします。
 
-### トリガーを自動的にセットアップする
+[1]: https://docs.aws.amazon.com/streams/latest/dev/tutorial-stock-data-kplkcl-create-stream.html
+[2]: https://console.aws.amazon.com/firehose/
+[3]: https://app.datadoghq.com/organization-settings/api-keys
+[4]: /ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=automaticcloudformation#collecting-logs-from-s3-buckets
+[5]: /ja/getting_started/site/
+{{< /tabs >}}
 
-Datadog は、Datadog Forwarder Lambda 関数にトリガーを自動的に構成し、以下のソースとロケーションから AWS ログを収集することができます。
+{{% tab "CloudFormation template" %}}
 
-| ソース                          | 場所       |
-| ------------------------------- | ---------------|
-| API ゲートウェイのアクセスログ         | CloudWatch     |
-| API ゲートウェイの実行ログ      | CloudWatch     |
-| アプリケーション ELB アクセスログ     | S3             |
-| クラシック ELB アクセスログ         | S3             |
-| CloudFront のアクセスログ          | S3             |
-| Lambda ログ                     | CloudWatch     |
-| Redshift ログ                   | S3             |
-| S3 アクセスログ                  | S3             |
+または、この CloudFormation テンプレートをカスタマイズして、AWS コンソールからインストールします。[Kinesis CloudFormation テンプレート][1]全体をご覧ください。
 
-1. [Datadog ログコレクション AWS Lambda 関数][1]をまだセットアップしていない場合は、セットアップします。
-2. [Datadog と AWS のインテグレーション][3]に使用する IAM ロールのポリシーに、次のアクセス許可があることを確認します。この許可の使用方法については、以下に説明されています。
+[1]: /resources/json/kinesis-logs-cloudformation-template.json
+{{% /tab %}}
+{{< /tabs >}}
 
-    ```text
-    "cloudfront:GetDistributionConfig",
-    "cloudfront:ListDistributions",
-    "elasticloadbalancing:DescribeLoadBalancers",
-    "elasticloadbalancing:DescribeLoadBalancerAttributes",
-    "lambda:List*",
-    "lambda:GetPolicy",
-    "redshift:DescribeClusters",
-    "redshift:DescribeLoggingStatus",
-    "s3:GetBucketLogging",
-    "s3:GetBucketLocation",
-    "s3:GetBucketNotification",
-    "s3:ListAllMyBuckets",
-    "s3:PutBucketNotification",
-    "logs:PutSubscriptionFilter",
-    "logs:DeleteSubscriptionFilter",
-    "logs:DescribeSubscriptionFilters"
+## AWS ログを Kinesis ストリームに送信する
+
+Datadog に取り込みたい CloudWatch のロググループに、新しい Kinesis ストリームをサブスクライブします。[ロググループインデックスページ][1]の **Subscriptions** 列で、ロググループに対する現在のサブスクリプションを確認することができます。サブスクリプションは、AWS のコンソールや API から以下の仕様で作成することができます。 
+**注**: 各 CloudWatch Log グループは、2 つのサブスクリプションしか持つことができません。
+
+### IAM ロールとポリシーの作成
+
+CloudWatch Log が Kinesis ストリームにデータを入れることができるように、IAM ロールと権限ポリシーを作成します。
+   - ロールの **Trust relationships** で `logs.amazonaws.com` または `logs.<region>.amazonaws.com` がサービスプリンシパルとして構成されていることを確認してください。
+   - ロールのアタッチされた権限ポリシーで、`firehose:PutRecord` `firehose:PutRecordBatch`、`kinesis:PutRecord`、`kinesis:PutRecords` の各アクションが許可されていることを確認してください。
+
+AWS CLI で設定する例としては、[Kinesis を使ったサブスクリプションフィルター][2]の例 (ステップ 3～6) を使用します。
+
+### サブスクリプションフィルターの作成
+
+以下の例では、AWS CLI でサブスクリプションフィルターを作成しています。
+
+    ```
+    aws logs put-subscription-filter \
+        --log-group-name "<MYLOGGROUPNAME>" \
+        --filter-name "<MyFilterName>" \
+        --filter-pattern "" \
+        --destination-arn "<DESTINATIONARN> (data stream or delivery stream)" \
+        --role-arn "<MYROLEARN>"
     ```
 
-    | AWS アクセス許可                                           | 説明                                                                  |
-    | ----------------------------------------------------------- | ---------------------------------------------------------------------------- |
-    | `cloudfront:GetDistributionConfig`                          | CloudFront アクセスログを含む S3 バケットの名前を取得します。             |
-    | `cloudfront:ListDistributions`                              | すべての CloudFront ディストリビューションを一覧表示します。|
-    | `elasticloadbalancing:`<br>`DescribeLoadBalancers`          | すべてのロードバランサーを一覧表示します。|
-    | `elasticloadbalancing:`<br>`DescribeLoadBalancerAttributes` | ELB アクセスログを含む S3 バケットの名前を取得します。|
-    | `lambda:List*`                                              | すべての Lambda 関数を一覧表示します。 |
-    | `lambda:GetPolicy`                                          | トリガーが解除された際に Lambda ポリシーを取得します。|
-    | `redshift:DescribeClusters`                                 | すべての Redshift クラスターを一覧表示します。|
-    | `redshift:DescribeLoggingStatus`                            | Redshift ログを含む S3 バケットの名前を取得します。|
-    | `s3:GetBucketLogging`                                       | S3 アクセスログを含む S3 バケットの名前を取得します。|
-    | `s3:GetBucketLocation`                                      | S3 アクセスログを含む S3 バケットのリージョンを取得します。|
-    | `s3:GetBucketNotification`                                  | 既存の Lambda トリガーコンフィギュレーションを取得します。    |
-    | `s3:ListAllMyBuckets`                                       | すべての S3 バケットを一覧表示します。|
-    | `s3:PutBucketNotification`                                  | S3 バケットのイベントに基づいて Lambda トリガーを追加または削除します。|
-    | `logs:PutSubscriptionFilter`                                | CloudWatch ログのイベントに基づいて Lambda トリガーを追加します。|
-    | `logs:DeleteSubscriptionFilter`                             | CloudWatch ログのイベントに基づいて Lambda トリガーを削除します。|
-    | `logs:DescribeSubscriptionFilters`                          | 特定のロググループのサブスクリプションフィルターを一覧表示します。|
+また、AWS コンソールからサブスクリプションフィルターを作成することも可能です。
 
-3. [AWS インテグレーションタイル][4]で _Collect Logs _ タブに移動します。
-4. ログを収集する必要がある AWS アカウントを選択し、前のセクションで作成された Lambda の ARN を入力します。
-   {{< img src="logs/aws/AWSLogStep1.png" alt="Lambda を入力" popup="true" style="width:80%;" >}}
-5. ログを収集するサービスを選択し、保存をクリックします。特定のサービスからのログの収集を停止するには、チェックを外します。
-   {{< img src="logs/aws/AWSLogStep2.png" alt="サービスを選択" popup="true" style="width:80%;" >}}
-6. 複数のリージョンにログがある場合は、そのリージョンに追加の Lambda 関数を作成して、タイルに入力する必要があります。
-7. すべての AWS ログの収集を停止するには、各 Lambda ARN の隣にある _x_ を押します。その関数のすべてのトリガーが削除されます。
-8. この初期のセットアップから数分以内に、AWS ログがほぼリアルタイムで Datadog [log explorer ページ][5]に表示されるようになります。
+1. [CloudWatch][1] のロググループに移動し、**Subscription filters** タブをクリックし、**Create** をクリックします。
+   - Kinesis データストリームでログを送信する場合、`Create Kinesis subscription filter` を選択します。
+   - ロググループから Kinesis Firehose 配信ストリームに直接ログを送信する場合、`Create Kinesis Firehose subscription filter` を選択します。
 
-### 手動でトリガーをセットアップする
+2. データストリームまたは Firehose 配信ストリームを選択し、以前に作成した [IAM ロール](#create-an-iam-role-and-policy)も同様に選択します。
 
-#### CloudWatch ロググループからログを収集する
+3. サブスクリプションフィルターの名前を入力し、**Start streaming** をクリックします。
 
-CloudWatch のロググループからログを収集している場合、以下のいずれかの方法で [Datadog Forwarder Lambda 関数][1]へのトリガーを構成します。
+**重要**: [Amazon CloudWatch Logs API Reference][3] で説明されているように、サブスクリプションフィルターの宛先はロググループと同じアカウントである必要があります。
 
-{{< tabs >}}
-{{% tab "AWS コンソール" %}}
+### 検証
 
-1. AWS コンソールで、**Lambda** に移動します。
-2. **Functions** をクリックし、Datadog Forwarder を選択します。
-3. **Add trigger** をクリックし、**CloudWatch Logs** を選択します。
-4. ドロップダウンメニューからロググループを選択します。
-5. フィルターの名前を入力し、オプションでフィルターパターンを指定します。
-6. **Add** をクリックします。
-7. [Datadog Log セクション][1]にアクセスし、ロググループに送信された新しいログイベントを確認します。
+[CloudWatch][1] のロググループインデックスページの **Subscriptions** をチェックして、新しい Kinesis ストリームがロググループをサブスクライブしているかを確認します。
 
-[1]: https://app.datadoghq.com/logs
-{{% /tab %}}
-{{% tab "Terraform" %}}
+### Datadog で AWS Kinesis ログを検索する
 
-Terraform ユーザーは、[aws_cloudwatch_log_subscription_filter][1] リソースを使いトリガーのプロビジョニングと管理ができます。以下のサンプルコードを参照してください。
+Amazon Kinesis 配信ストリームを設定した後、Datadog で配信ストリームにサブスクライブされたログを分析できます。
 
-```conf
-resource "aws_cloudwatch_log_subscription_filter" "datadog_log_subscription_filter" {
-  name            = "datadog_log_subscription_filter"
-  log_group_name  = <CLOUDWATCH_LOG_GROUP_NAME> # 例: /aws/lambda/my_lambda_name
-  destination_arn = <DATADOG_FORWARDER_ARN> # 例: arn:aws:lambda:us-east-1:123:function:datadog-forwarder
-  filter_pattern  = ""
-}
-```
+ARN ですべてのログにデータを入力するには
 
-[1]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_subscription_filter
-{{% /tab %}}
-{{% tab "CloudFormation" %}}
+1. Datadog の [Logs Explorer][5] に移動して、サブスクライブされたすべてのログを表示します。
+2. 検索バーに `@aws.firehose.arn:"<ARN>"` と入力し、`<ARN>` を Amazon Kinesis Data Firehose ARN に置き換えて、**Enter** を押します。
 
-AWS CloudFormation ユーザーは、CloudFormation [AWS::Logs::SubscriptionFilter][1] リソースを使いトリガーのプロビジョニングと管理ができます。以下のサンプルコードを参照してください。
+## その他の参考資料
 
-このサンプルコードは、AWS の [SAM][2] と [Serverless Framework][3] でも動作します。Serverless Framework の場合は、`serverless.yml` の [resources][4] セクションにコードを記述してください。
+{{< partial name="whats-next/whats-next.html" >}}
 
-```yaml
-Resources:
-  MyLogSubscriptionFilter:
-    Type: "AWS::Logs::SubscriptionFilter"
-    Properties:
-      DestinationArn: "<DATADOG_FORWARDER_ARN>"
-      LogGroupName: "<CLOUDWATCH_LOG_GROUP_NAME>"
-      FilterPattern: ""
-```
-
-[1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-subscriptionfilter.html
-[2]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html
-[3]: https://www.serverless.com/
-[4]: https://www.serverless.com/framework/docs/providers/aws/guide/resources/
-{{% /tab %}}
-{{< /tabs >}}
-
-#### S3 バケットからログを収集する
-
-S3 バケットからログを収集している場合、以下のいずれかの方法で [Datadog Forwarder Lambda 関数][1]へのトリガーを構成します。
-
-{{< tabs >}}
-{{% tab "AWS Console" %}}
-
-1. Lambda 関数がインストールされたら、AWS コンソールから手動で、ログを含む S3 バケットにトリガーを追加します。
-  {{< img src="logs/aws/adding_trigger.png" alt="トリガーの追加" popup="true"style="width:80%;">}}
-
-2. バケットを選択して AWS の指示に従います。
-  {{< img src="logs/aws/integration_lambda.png" alt="Lambda インテグレーション" popup="true" style="width:80%;">}}
-
-3. S3 バケットで正しいイベントタイプを設定します。
-  {{< img src="logs/aws/object_created.png" alt="作成されたオブジェクト" popup="true" style="width:80%;">}}
-
-完了したら、[Datadog Log セクション][1]に移動し、ログを確認します。
-
-[1]: https://app.datadoghq.com/logs
-{{% /tab %}}
-{{% tab "Terraform" %}}
-
-Terraform ユーザーは、[aws_s3_bucket_notification][1] リソースを使用してトリガーのプロビジョニングと管理ができます。以下のサンプルコードを参照してください。
-
-```conf
-resource "aws_s3_bucket_notification" "my_bucket_notification" {
-  bucket = my_bucket
-  lambda_function {
-    lambda_function_arn = "<DATADOG_FORWARDER_ARN>"
-    events              = ["s3:ObjectCreated:*"]
-    filter_prefix       = "AWSLogs/"
-    filter_suffix       = ".log"
-  }
-}
-```
-
-
-[1]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_notification
-{{% /tab %}}
-{{% tab "CloudFormation" %}}
-
-CloudFormation をご利用の方は、S3 バケットの CloudFormation [NotificationConfiguration][1] を利用してトリガーを構成することが可能です。以下のサンプルコードをご参照ください。
-
-```yaml
-Resources:
-  Bucket:
-    Type: AWS::S3::Bucket
-    Properties:
-      BucketName: "<MY_BUCKET>"
-      NotificationConfiguration:
-        LambdaConfigurations:
-        - Event: 's3:ObjectCreated:*'
-          Function: "<DATADOG_FORWARDER_ARN>"
-```
-
-
-[1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-notificationconfig.html
-{{% /tab %}}
-{{< /tabs >}}
-
-## AWS サービスのログを有効にする
-
-S3 バケットまたは CloudWatch ログ グループにログを生成する AWS サービスがサポートされています。以下の表で、よく使用されるサービスの具体的なセットアップ手順を参照してください。
-
-| AWS サービス                        | AWS サービス ログを有効にする                                                                    | AWS ログを Datadog に送信する                                                    |
-| ---------------------------------- | ----------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| [API Gateway][6]                  | [AWS API Gateway ログを有効にする][7]                                                               | [手動][8]ログコレクション                                                 |
-| [Cloudfront][9]                   | [AWS Cloudfront ログを有効にする][10]                                                                | [手動][11]および[自動](#automatically-set-up-triggers)ログコレクション  |
-| [Cloudtrail][12]                   | [AWS Cloudtrail ログを有効にする][12]                                                                | [手動][13]ログコレクション                                                 |
-| [DynamoDB][14]                     | [AWS DynamoDB ログを有効にする][15]                                                                  | [手動][16]ログコレクション                                                 |
-| [EC2][17]                          | `-`                                                                                             | [Datadog Agent][17] を使用してログを Datadog に送信します                    |
-| [ECS][18]                          | `-`                                                                                             | [docker Agent を使用してログを収集します][19]                              |
-| [Elastic Load Balancing (ELB)][20] | [AWS ELB ログを有効にする][21]                                                                       | [手動][22]および[自動](#automatically-set-up-triggers)ログコレクション  |
-| [Lambda][23]                       | `-`                                                                                             | [手動][24]および[自動](#automatically-set-up-triggers)ログコレクション |
-| [RDS][25]                         | [AWS RDS ログを有効にします][26]                                                                      | [手動][27]ログコレクション                                                |
-| [Route 53][28]                    | [AWS Route 53 ログを有効にする][29]                                                                 | [手動][30]ログコレクション                                                |
-| [S3][31]                          | [AWS S3 ログを有効にする][32]                                                                       | [手動][33]および[自動](#automatically-set-up-triggers)ログコレクション |
-| [SNS][34]                         | 「SNS ログ」はありません。SNS サービスに送信されるログとイベントを処理します。 | [手動][35]ログコレクション                                                |
-| [RedShift][36]                    | [AWS Redshift ログを有効にします][37]                                                                 | [手動][38]および[自動](#automatically-set-up-triggers)ログコレクション |
-| [VPC][39]                         | [AWS VPC ログを有効にする][40]                                                                      | [手動][41]ログコレクション                                                |
-
-## スクラビングとフィルター
-
-Lambda 関数から送信されるログからメールや IP アドレスをスクラブしたり、カスタムスクラブルールを [Lambda パラメーターで][42]定義することができます。
-また、[フィルターオプション][43]を使用して、特定のパターンに一致するログのみを除外または送信することができます。
-
-[1]: /ja/serverless/forwarder/
-[2]: /ja/serverless/forwarder#aws-privatelink-support
-[3]: /ja/integrations/amazon_web_services/
-[4]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[5]: https://app.datadoghq.com/logs
-[6]: /ja/integrations/amazon_api_gateway/
-[7]: /ja/integrations/amazon_api_gateway/#log-collection
-[8]: /ja/integrations/amazon_api_gateway/#send-logs-to-datadog
-[9]: /ja/integrations/amazon_cloudfront/
-[10]: /ja/integrations/amazon_cloudfront/#enable-cloudfront-logging
-[11]: /ja/integrations/amazon_cloudfront/#send-logs-to-datadog
-[12]: /ja/integrations/amazon_cloudtrail/#enable-cloudtrail-logging
-[13]: /ja/integrations/amazon_cloudtrail/#send-logs-to-datadog
-[14]: /ja/integrations/amazon_dynamodb/#enable-dynamodb-logging
-[15]: /ja/integrations/amazon_dynamodb/
-[16]: /ja/integrations/amazon_dynamodb/#send-logs-to-datadog
-[17]: /ja/integrations/amazon_ec2/
-[18]: /ja/integrations/amazon_ecs/
-[19]: /ja/integrations/amazon_ecs/#log-collection
-[20]: /ja/integrations/amazon_elb/
-[21]: /ja/integrations/amazon_elb/#enable-aws-elb-logging
-[22]: /ja/integrations/amazon_elb/#manual-installation-steps
-[23]: /ja/integrations/amazon_lambda/
-[24]: /ja/integrations/amazon_lambda/#log-collection
-[25]: /ja/integrations/amazon_rds/
-[26]: /ja/integrations/amazon_rds/#enable-rds-logging
-[27]: /ja/integrations/amazon_rds/#send-logs-to-datadog
-[28]: /ja/integrations/amazon_route53/
-[29]: /ja/integrations/amazon_route53/#enable-route53-logging
-[30]: /ja/integrations/amazon_route53/#send-logs-to-datadog
-[31]: /ja/integrations/amazon_s3/
-[32]: /ja/integrations/amazon_s3/#enable-s3-access-logs
-[33]: /ja/integrations/amazon_s3/#manual-installation-steps
-[34]: /ja/integrations/amazon_sns/
-[35]: /ja/integrations/amazon_sns/#send-logs-to-datadog
-[36]: /ja/integrations/amazon_redshift/
-[37]: /ja/integrations/amazon_redshift/#enable-aws-redshift-logging
-[38]: /ja/integrations/amazon_redshift/#log-collection
-[39]: /ja/integrations/amazon_vpc/
-[40]: /ja/integrations/amazon_vpc/#enable-vpc-flow-log-logging
-[41]: /ja/integrations/amazon_vpc/#log-collection
-[42]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#log-scrubbing-optional
-[43]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#log-filtering-optional
+[1]: https://console.aws.amazon.com/cloudwatch/home
+[2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs//SubscriptionFilters.html#DestinationKinesisExample
+[3]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutSubscriptionFilter.html
+[4]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SubscriptionFilters.html#FirehoseExample
+[5]: /ja/logs/explorer/

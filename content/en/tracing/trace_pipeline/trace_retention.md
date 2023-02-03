@@ -26,8 +26,9 @@ To track or monitor your volume of ingested and indexed data, see the [Usage Met
 
 After spans have been ingested by Datadog, some are kept for 15 days according to the retention filters that have been set on your account.
 
-By default, two retention filters are enabled for your account:
+By default, some retention filters are enabled for your account:
 - The `Error Default` retention filter indexes error spans with `status:error`. The retention rate and the query can be configured. For instance, to capture production errors, set the query to `status:error, env:production`. Disable the retention filter if you do not want to capture the errors by default.
+- The `Application Security` retention filter is enabled if you are using Application Security Management. It ensures the retention of all spans in traces that have been identified as having an application security impact (an attack attempt).
 - The [Intelligent Retention Filter](#datadog-intelligent-retention-filter) retains diverse error traces and traces from different latency distributions.
 
 You can also create any number of additional [tag-based retention filters](#create-your-own-retention-filter) for your services.
@@ -64,9 +65,9 @@ The `Spans Indexed` column for each retention filter is powered by the `datadog.
 
 ### Datadog intelligent retention filter
 
-The intelligent retention filter is always active for your services, and it keeps a proportion of traces to help you monitor the health of your applications. All [service entry spans][5] are indexed for the traces kept by the intelligent retention filter.
+The Datadog intelligent retention filter is always active for your services, and it keeps a proportion of traces to help you monitor the health of your applications. 
 
-For 30 days, intelligent retention retains:
+It scans through the **service entry spans** and retains for 30 days:
 
  - A representative selection of errors, ensuring error diversity (for example, response code 400s, 500s).
  - High latency in the `p75`, `p90`, and `p95` percentiles.

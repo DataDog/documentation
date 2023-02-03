@@ -253,7 +253,7 @@ instances:
     host: <INSTANCE_ADDRESS>
     port: 3306
     username: datadog
-    password: <UNIQUEPASSWORD" \
+    password: <UNIQUEPASSWORD>" \
   datadog/datadog
 ```
 

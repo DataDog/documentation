@@ -131,7 +131,7 @@ Once a logging source is configured, and your logs are available in the Log Expl
 [1]: https://www.datadoghq.com
 [2]: /tracing/other_telemetry/connect_logs_and_traces/
 [3]: /logs/guide/correlate-logs-with-metrics/
-[4]: /security_platform/cloud_siem/
+[4]: /security/cloud_siem/
 [5]: /getting_started/integrations/
 [6]: /agent/
 [7]: https://github.com/DataDog/datadog-agent/blob/main/docs/agent/changes.md#cli

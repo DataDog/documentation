@@ -91,6 +91,7 @@ These traces are retained [just like your classical APM traces][20].
 {{< partial name="whats-next/whats-next.html" >}}
 
 
+
 [1]: /synthetics/api_tests/http_tests/?tab=requestoptions
 [2]: /synthetics/multistep?tab=requestoptions
 [3]: /synthetics/browser_tests/
@@ -111,4 +112,3 @@ These traces are retained [just like your classical APM traces][20].
 [18]: /tracing/trace_collection/dd_libraries/dotnet-core/
 [19]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.18.2
 [20]: /tracing/trace_pipeline/trace_retention/
-

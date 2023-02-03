@@ -29,7 +29,7 @@ Unary Calls
 Health Checks 
 : gRPC health checks are a standard for reporting the health of gRPC services. Determine if your gRPC servers and services are responsive, running, and capable of handling remote procedure calls (RPCs).<br> By implementing gRPC health checks, you can run gRPC health checks tests without having to provide a `.proto` file to Datadog. For more information, see the [example health checks `.proto` file][1] shared by the gRPC community.
 
-gRPC tests can run from both [managed][2] and [private locations][3] depending on your preference for running the test from outside or inside your network. gRPC tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][4].
+gRPC tests can run from both [managed](#select-locations) and [private locations][2] depending on your preference for running the test from outside or inside your network. gRPC tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][3].
 
 ## Configuration
 
@@ -88,7 +88,7 @@ After choosing to create a `gRPC` test, define your test's request.
 
 3. **Name** your gRPC test.
 
-4. Add `env` **Tags** as well as any other tag to your gRPC test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][5].
+4. Add `env` **Tags** as well as any other tag to your gRPC test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][4].
 
    {{< img src="synthetics/api_tests/grpc_test_config.png" alt="Define gRPC request" style="width:90%;" >}}
 
@@ -129,14 +129,16 @@ If a test contains an assertion on the response body and the timeout limit is re
 
 ### Select locations
 
-Select the **Locations** to run your gRPC test from. gRPC tests can run from both [managed][2] and [private locations][3] depending on your preference for running the test from outside or inside your network.
+Select the **Locations** to run your gRPC test from. gRPC tests can run from both managed and [private locations][2] depending on your preference for running the test from outside or inside your network.
+
+{{% managed-locations %}} 
 
 ### Specify test frequency
 
 gRPC tests can run:
 
 * **On a schedule** to ensure your most important services are always accessible to your users. Select the frequency at which you want Datadog to run your gRPC test.
-* [**Within your CI/CD pipelines**][4] to start shipping without fearing faulty code might impact your customers experience.
+* [**Within your CI/CD pipelines**][3] to start shipping without fearing faulty code might impact your customers experience.
 * **On-demand** to run your tests whenever makes the most sense for your team.
 
 ### Define alert conditions
@@ -160,9 +162,9 @@ Location uptime is computed on a per-evaluation basis (whether the last test res
 
 A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what to message your teams.
 
-1. [Similar to how you configure monitors][6], select **users and/or services** that should receive notifications either by adding a `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
+1. [Similar to how you configure monitors][5], select **users and/or services** that should receive notifications either by adding a `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
 
-2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][7] and supports the following [conditional variables][8]:
+2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][6] and supports the following [conditional variables][7]:
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -179,7 +181,7 @@ A notification is sent by your test based on the [alerting conditions](#define-a
 
 4. Click **Create** to save your test configuration and monitor.
 
-For more information, see [Using Synthetic Test Monitors][9].
+For more information, see [Using Synthetic Test Monitors][8].
 
 ## Variables
 
@@ -196,6 +198,9 @@ To create a local variable, click **Create a Local Variable** at the top right h
 `{{ alphanumeric(n) }}`
 : Generates an alphanumeric string with `n` characters.
 
+`{{ uuid }}`
+: Generates a version 4 universally unique identifier (UUID).
+
 `{{ date(n unit, format) }}`
 : Generates a date in one of Datadog's accepted formats with a value corresponding to the UTC date the test is initiated at + or - `n` units.
 
@@ -206,7 +211,7 @@ To obfuscate local variable values in test results, select **Hide and obfuscate 
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][10] in the URL, advanced options, and assertions of your gRPC tests.
+You can use the [global variables defined in the `Settings`][9] in the URL, advanced options, and assertions of your gRPC tests.
 
 To display your list of variables, type `{{` in your desired field:
 
@@ -219,7 +224,7 @@ A test is considered `FAILED` if it does not satisfy one or more assertions or i
 These reasons include the following:
 
 `gRPC specific errors`
-: gRPC has a list of specific status codes that can be found in the [official gRPC documentation][11].
+: gRPC has a list of specific status codes that can be found in the [official gRPC documentation][10].
 
 `CONNRESET`
 : The connection was abruptly closed by the remote server. Possible causes include the web server encountering an error or crashing while responding, or losing connectivity to the web server.
@@ -231,7 +236,7 @@ These reasons include the following:
 : The configuration of the test is invalid (for example, a typo in the URL).
 
 `SSL`
-: The SSL connection couldn't be performed. [See the dedicated error page for more information][12].
+: The SSL connection couldn't be performed. [See the dedicated error page for more information][11].
 
 `TIMEOUT`
 : The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
@@ -241,13 +246,13 @@ These reasons include the following:
 
 ## Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][13] can create, edit, and delete Synthetic gRPC tests. To get create, edit, and delete access to Synthetic gRPC tests, upgrade your user to one of those two [default roles][13].
+By default, only users with the [Datadog Admin and Datadog Standard roles][12] can create, edit, and delete Synthetic gRPC tests. To get create, edit, and delete access to Synthetic gRPC tests, upgrade your user to one of those two [default roles][12].
 
-If you are using the [custom role feature][14], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
+If you are using the [custom role feature][13], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
 
 ## Restrict access
 
-Access restriction is available for customers using [custom roles][15] on their accounts.
+Access restriction is available for customers using [custom roles][14] on their accounts.
 
 You can restrict access to a browser test based on the roles in your organization. When creating a browser test, choose which roles (in addition to your user) can read and write your test.
 
@@ -260,17 +265,16 @@ You can restrict access to a browser test based on the roles in your organizatio
 
 
 [1]: https://github.com/grpc/grpc/blob/master/doc/health-checking.md
-[2]: /api/v1/synthetics/#get-all-locations-public-and-private
-[3]: /synthetics/private_locations
-[4]: /synthetics/cicd_testing
-[5]: /synthetics/search/#search
-[6]: /monitors/notify/#notify-your-team
-[7]: https://www.markdownguide.org/basic-syntax/
-[8]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
-[9]: /synthetics/guide/synthetic-test-monitors
-[10]: /synthetics/settings/#global-variables
-[11]: https://grpc.github.io/grpc/core/md_doc_statuscodes.html
-[12]: /synthetics/api_tests/errors/#ssl-errors
-[13]: /account_management/rbac/
-[14]: /account_management/rbac#custom-roles
-[15]: /account_management/rbac/#create-a-custom-role
+[2]: /synthetics/private_locations
+[3]: /synthetics/cicd_testing
+[4]: /synthetics/search/#search
+[5]: /monitors/notify/#notify-your-team
+[6]: https://www.markdownguide.org/basic-syntax/
+[7]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
+[8]: /synthetics/guide/synthetic-test-monitors
+[9]: /synthetics/settings/#global-variables
+[10]: https://grpc.github.io/grpc/core/md_doc_statuscodes.html
+[11]: /synthetics/api_tests/errors/#ssl-errors
+[12]: /account_management/rbac/
+[13]: /account_management/rbac#custom-roles
+[14]: /account_management/rbac/#create-a-custom-role

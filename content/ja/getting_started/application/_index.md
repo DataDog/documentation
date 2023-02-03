@@ -9,6 +9,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-quick-nav-menu/
   tag: ブログ
   text: Datadog クイックナビメニューのご紹介
+- link: https://www.datadoghq.com/blog/engineering/druids-the-design-system-that-powers-datadog/
+  tag: GitHub
+  text: Datadog を支えるデザインシステム、DRUIDS
 kind: documentation
 title: Datadog の開始
 ---
@@ -140,7 +143,7 @@ Datadog [Synthetic Monitoring][22] では、API やブラウザのテストを�
 
 {{< img src="getting_started/application/mobile-app-store-screens.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS 向けモバイルアプリ">}}
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com

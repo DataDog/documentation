@@ -13,7 +13,7 @@ further_reading:
 
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
@@ -69,6 +69,8 @@ CREATE USER datadog FOR LOGIN datadog;
 
 It's recommended to install the agent directly on the SQL Server host as that enables the agent to collect a variety of system telemetry (CPU, memory, disk, network) in addition to SQL Server specific telemetry.
 
+**For AlwaysOn users**, the Agent must be installed on a separate server and connected to the cluster through the listener endpoint, as information about Availability Group (AG) secondary replicas is collected from the primary replica. Additionally, installing the Agent in this way helps keep it up and running in the event of a failover.
+
 {{< tabs >}}
 {{% tab "Windows Host" %}}
 {{% dbm-sqlserver-agent-setup-windows %}}
@@ -83,6 +85,9 @@ It's recommended to install the agent directly on the SQL Server host as that en
 {{% dbm-sqlserver-agent-setup-kubernetes %}}
 {{% /tab %}}
 {{< /tabs >}}
+
+## Example Agent Configurations
+{{% dbm-sqlserver-agent-config-examples %}}
 
 ## Further reading
 

@@ -81,7 +81,7 @@ An event is generated when the daily quota is reached. Set up a monitor to be no
 
 {{< img src="logs/guide/daily_quota_event_monitor.png" alt="Configuration page of event monitor with Source:datadog in query and datadog_index selected in the group by section" style="width:70%;">}}
 
-Events generated when the daily quota is reached have the `datadog_index` tag by default, displaying the index name. You can optionally [create a facet][9] on the `datadog_index` tag, enabling its use in the `group by` step for [multi-alerts][10], as shown in the screenshot above.
+Events generated when the daily quota is reached have the `datadog_index` tag by default, displaying the index name. You can optionally [create a facet][9] on the `datadog_index` tag, enabling its use in the `group by` step for [multi alerts][10], as shown in the screenshot above.
 
 Here is an example of what the notification would look like in Slack:
 

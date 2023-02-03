@@ -18,24 +18,26 @@ The [trace][1] panel contains information about the trace, host, and correlated 
 
 {{< img src="tracing/troubleshooting/tracing_no_logs_in_trace.png" alt="A trace page showing an empty log section" style="width:90%;">}}
 
-There are two types of logs that appear in a [trace][1]:
+There are four types of logs that appear in a [trace][1]:
 
-- `host`: Display logs from the trace's host within the trace's timeframe.
 - `trace_id`: Display logs that have the corresponding trace ID.
+- `host`: Display logs from the trace's host within the trace's timeframe.
+- `container_id`: Display logs from the trace's container within the trace's timeframe.
+- `pod_name`: Display logs from the trace's pod within the trace's timeframe.
 
-{{< img src="tracing/troubleshooting/tracing_logs_display_option.png" alt="A trace's log dropdown menu showing the trace ID and host options" style="width:35%;">}}
+{{< img src="tracing/troubleshooting/tracing_logs_display_option.png" alt="A trace's log dropdown menu showing the trace ID and host options" style="width:80%;">}}
 
 In some cases, the **Logs** section in the trace panel may appear empty. This guide walks you through how to fix this issue.
 
-## Host option
+## Infrastructure options
 
-If the **Log** section is empty for the `host` option, navigate to the [Log Explorer][2] and ensure the following conditions:
+If the **Log** section is empty for the `host`, `container_id`, or `pod_name` options, navigate to the [Log Explorer][2] and ensure the following conditions:
 
-1. Logs are being sent from the host that emitted the trace.
+1. Logs are being sent from the host/container/pod that emitted the trace.
 2. There are logs for that host within the trace's timeframe.
 3. The logs' timestamp is properly set. For more information, see [Logs Not Showing Expected Timestamp][3].
 
-## Trace_id option
+## Trace ID option
 
 If the **Log** section is empty for the `trace_id` option, ensure you have a standard `trace_id` attribute in your logs. If your logs do not contain `trace_id`, [correlate your traces and logs][4] in order to do the following:
 

@@ -39,7 +39,7 @@ When aggregating by Fields, all logs matching your query filter are aggregated i
 
 **Note**: Individual logs with multiple values for a single facet belong to that many aggregates. For instance, a log having the `team:sre` and the `team:marketplace` tags are counted once in the `team:sre` aggregate and once in the `team:marketplace` aggregate.
 
-The Fields aggregation supports one dimension for the [Top list][4] visualization, and up to three dimensions for the [Timeseries][5] and [Table][6] visualizations. When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, then according to the third dimension within the top values of the second dimension.
+The Fields aggregation supports one dimension for the [Top list][4] visualization, and up to four dimensions for the [Timeseries][5] and [Table][6] visualizations. When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, then according to the third dimension within the top values of the second dimension.
 
 ### Multiple queries
 
@@ -109,6 +109,20 @@ Patterns support the [List Aggregates][15] visualization. Clicking a pattern in 
 
 {{< img src="logs/explorer/patterns_side_panel.jpg" alt="The log side panel with the view all button and the parsing rule highlighted" style="width:80%;" >}}
 
+### Pattern Inspector
+
+Use Pattern Inspector to get a visual breakdown of the underlying values of a log pattern's aggregation based on your search query. For example, if you are investigating an issue, you could see how many hosts are involved or what regions or data centers are impacted.
+
+{{< img src="logs/explorer/group/inspect_values.png" alt="The distribution of values graph showing a bar graph of the values" style="width:70%;" >}}
+
+To use Pattern Inspector:
+
+1. Go to [Log Explorer][16].
+2. Click **Patterns** in the **Group into** section. In the list of patterns, the aggregate values in the message section are highlighted in yellow. Hover over an aggregate value to get a preview of the visual distribution of its values. 
+3. Click on an aggregate value to open the log pattern's side panel and see more details in the **Pattern Inspector** tab. 
+
+{{< img src="logs/explorer/group/pattern_inspector_panel.png" alt="The pattern panel showing the Pattern Inspector tab" style="width:50%;" >}}
+
 ## Transactions
 
 Transactions aggregate indexed logs according to instances of a **sequence** of events, such as a user session or a request processed across multiple micro-services. For example, an e-commerce website groups logs across various user actions, such as catalog search, add to cart, and checkout, to build a transaction view using a common attribute such as `requestId` or `orderId`.
@@ -121,6 +135,7 @@ Transactions aggregate indexed logs according to instances of a **sequence** of 
 - **Maximum Severity** found in logs in the transaction. _This measure is automatically added_.
 - **Finding key items:** For any `facet` with string values, calculate specific log information using the operations `count unique`, `latest`, `earliest` and `most frequent`.
 - **Getting Statistics:** For any `measure`, calculate statistical information using the operations `min`, `max`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, and `pc99`.
+- **Set Start and End Conditions:** Customize transaction boundaries by specifying the start and end of the transaction using distinct queries.
 
 Transactions support the [List Aggregates][15] visualization. Clicking a transaction in the list opens the transaction side panel from which you can:
 
@@ -128,6 +143,14 @@ Transactions support the [List Aggregates][15] visualization. Clicking a transac
 - Search specific logs within that transaction
 
 {{< img src="logs/explorer/transactions_side_panel.png" alt="The transaction log panel showing logs within the selected transaction" style="width:80%;" >}}
+
+When a start or end condition is used to define a transaction, click on a transaction group in the list to open the transaction group side panel, from which you can:
+
+- Access the transactions within that transaction group in sequence
+- Access all logs within each transaction
+- View statistics for each transaction and summary statistics for the entire transaction group
+
+{{< img src="logs/explorer/transaction_group_side_panel.png" alt="The transaction group panel showing transactions within the selected group in sequence" style="width:50%;" >}}
 
 ## Further reading
 
@@ -148,3 +171,4 @@ Transactions support the [List Aggregates][15] visualization. Clicking a transac
 [13]: /dashboards/functions/rollup
 [14]: /dashboards/functions/exclusion
 [15]: /logs/explorer/visualize/#list-aggregates-of-logs
+[16]: https://app.datadoghq.com/logs

@@ -22,7 +22,7 @@ further_reading:
 
 Configure your Datadog account to forward all the logs ingested - whether [indexed][1] or not - to a cloud storage system of your own. Keep your logs in a storage-optimized archive for longer periods of time and meet compliance requirements while also keeping auditability for ad hoc investigations, with [Rehydration][2].
 
-{{< img src="logs/archives/log_archives_s3_multiple.png" alt="Archive page view"  style="width:75%;">}}
+{{< img src="logs/archives/log_archives_s3_multiple.png" alt="Archive page view" style="width:75%;">}}
 
 This guide shows you how to set up an archive for forwarding ingested logs to your own cloud-hosted storage bucket:
 
@@ -57,13 +57,15 @@ If not already configured, set up the [AWS integration][1] for the AWS account t
 
 Set up the [Azure integration][1] within the subscription that holds your new storage account, if you haven't already. This involves [creating an app registration that Datadog can use][2] to integrate with.
 
+**Note:** Archiving to Azure ChinaCloud is not supported.
+
 [1]: https://app.datadoghq.com/account/settings#integrations/azure
 [2]: /integrations/azure/?tab=azurecliv20#integrating-through-the-azure-portal
 {{% /tab %}}
 
 {{% tab "Google Cloud Storage" %}}
 
-Set up the [GCP integration][1] for the project that holds your GCS storage bucket, if you haven’t already. This involves [creating a GCP service account that Datadog can use][2] to integrate with.
+Set up the [GCP integration][1] for the project that holds your GCS storage bucket, if you haven't already. This involves [creating a GCP service account that Datadog can use][2] to integrate with.
 
 [1]: https://app.datadoghq.com/account/settings#integrations/google-cloud-platform
 [2]: /integrations/google_cloud_platform/?tab=datadogussite#setup
@@ -81,12 +83,13 @@ Go into your [AWS console][1] and [create an S3 bucket][2] to send your archives
 
 - Do not make your bucket publicly readable.
 - Do not set [Object Lock][3] because the last data needs to be rewritten in some rare cases (typically a timeout).
-- See [AWS Pricing][4] for inter-region data transfer fees and how cloud storage costs may be impacted. Consider creating your storage bucket in `us-east-1` to manage your inter-region data transfer fees.
+- For [US1, US3, and US5 sites][4], see [AWS Pricing][5] for inter-region data transfer fees and how cloud storage costs may be impacted. Consider creating your storage bucket in `us-east-1` to manage your inter-region data transfer fees.
 
 [1]: https://s3.console.aws.amazon.com/s3
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html
 [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock-overview.html
-[4]: https://aws.amazon.com/s3/pricing/
+[4]: /getting_started/site/
+[5]: https://aws.amazon.com/s3/pricing/
 {{% /tab %}}
 
 {{% tab "Azure Storage" %}}
@@ -368,9 +371,11 @@ Alternatively, Datadog supports server side encryption with a CMK from [AWS KMS]
 
 3. Go to the **Properties** tab in your S3 bucket and select **Default Encryption**. Choose the "AWS-KMS" option, select your CMK ARN, and save.
 
+For any changes to existing KSM keys, reach out to [Datadog support][3] for further assistance
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/default-bucket-encryption.html
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
+[3]: /help/
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -381,9 +386,11 @@ Once your archive settings are successfully configured in your Datadog account, 
 
 However, after creating or updating your archive configurations, it can take several minutes before the next archive upload is attempted. The frequency at which archives are uploaded can vary. **Check back on your storage bucket in 15 minutes** to make sure the archives are successfully being uploaded from your Datadog account. After that, if the archive is still in a pending state, check your inclusion filters to make sure the query is valid and matches log events in [live tail][11].
 
-If Datadog detects a broken configuration, the corresponding archive is highlighted in the configuration page. Click on the error icon to see the actions to take to resolve the issue.
+When Datadog fails to upload logs to an external archive, due to unintentional changes in settings or permissions, the corresponding Log Archive is highlighted in the configuration page. Hover over the archive to view the error details and the actions to take to resolve the issue.
 
-{{< img src="logs/archives/archive_validation.png" alt="Check that your archives are properly set up."  style="width:75%;">}}
+In addition, an event is generated, visible in the [Events Explorer][12]. Build a monitor on such events to detect and remediate failures quickly.
+
+{{< img src="logs/archives/archive_errors.png" alt="Check that your archives are properly set up."  style="width:75%;">}}
 
 ## Multiple archives
 
@@ -442,3 +449,4 @@ Within the zipped JSON file, each event’s content is formatted as follows:
 [9]: /account_management/rbac/permissions#logs_read_index_data
 [10]: /account_management/rbac/permissions#logs_read_data
 [11]: /logs/explorer/live_tail/
+[12]: /events/explorer/

@@ -17,7 +17,7 @@ assets:
     source_type_name: InsightFinder
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: InsightFinder
   sales_email: support@insightfinder.com
   support_email: support@insightfinder.com
 categories:

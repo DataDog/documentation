@@ -2,7 +2,6 @@
 categories:
 - data store
 - cloud
-ddtype: crawler
 dependencies: []
 description: MongoDB Atlas peut transmettre des métriques calculées à Datadog pour
   vous permettre de visualiser ses performances.
@@ -35,10 +34,6 @@ version: '1.0'
 
 ## Présentation
 
-{{< site-region region="us3" >}}
-**Cette intégration n'est pas prise en charge pour ce site.**
-{{< /site-region >}}
-
 MongoDB Atlas peut transmettre des métriques calculées à Datadog pour vous permettre de :
 
 - Visualiser les métriques clés de MongoDB Atlas.
@@ -48,7 +43,7 @@ MongoDB Atlas peut transmettre des métriques calculées à Datadog pour vous p
 
 ## Configuration
 
-### Installation
+### Configurer l'Agent Datadog pour l'APM
 
 Vous pouvez installer l'intégration MongoDB Atlas en vous connectant au portail Atlas.
 
@@ -63,11 +58,11 @@ Vous pouvez installer l'intégration MongoDB Atlas en vous connectant au portai
 {{< get-metrics-from-git "mongodb_atlas" >}}
 
 
-### Événements
+### Events
 
 MongoDB Atlas peut transmettre des [alertes][4] à Datadog sous la forme d'événements.
 
-### Checks de service
+### Service Checks
 
 L'intégration MongoDB Atlas n'inclut aucun check de service.
 
@@ -75,7 +70,7 @@ L'intégration MongoDB Atlas n'inclut aucun check de service.
 
 Besoin d'aide ? [Contactez l'assistance Datadog][5].
 
-## Pour aller plus loin
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

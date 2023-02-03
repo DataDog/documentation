@@ -1,14 +1,15 @@
 ---
-title: コンテナディスカバリー管理
-kind: ガイド
 aliases:
-  - /ja/agent/autodiscovery/management
-  - /ja/agent/kubernetes/management
+- /ja/agent/autodiscovery/management
+- /ja/agent/kubernetes/management
 further_reading:
-  - link: /agent/kubernetes/integrations/
-    tag: ドキュメント
-    text: オートディスカバリーのインテグレーションテンプレートの作成とロード
+- link: /agent/kubernetes/integrations/
+  tag: ドキュメント
+  text: オートディスカバリーのインテグレーションテンプレートの作成とロード
+kind: ガイド
+title: コンテナディスカバリー管理
 ---
+
 Datadog Agent は、利用可能なすべてのコンテナを自動検出する設定になっています。検出パラメーターを制限したりデータの収集をコンテナのサブセットのみに制限するには、それぞれのコンフィギュレーションで取り扱いを設定します。
 
 **注**: `kubernetes.containers.running`、`kubernetes.pods.running`、`docker.containers.running`、`.stopped`、`.running.total`、`.stopped.total` の各メトリクスは、この設定の影響を受けず、常にすべてのコンテナを対象とします。
@@ -144,7 +145,7 @@ container_exclude: [kube_namespace:<NAMESPACE>]
 {{< tabs >}}
 {{% tab "Containerized Agent" %}}
 
-**Agent v7.20 以前**でオートディスカバリーから**画像** `<IMAGE_NAME>`を持つ特定のDockerコンテナを含めるには、次の環境変数を Datadog Agent に追加します。
+**Agent v7.20 以降**でオートディスカバリーから**画像** `<IMAGE_NAME>`を持つ特定のDockerコンテナを含めるには、次の環境変数を Datadog Agent に追加します。
 
 ```shell
 DD_CONTAINER_INCLUDE = "image:<IMAGE_NAME>"
@@ -158,7 +159,7 @@ DD_AC_INCLUDE = "image:<IMAGE_NAME>"
 
 **注**: `DD_AC_INCLUDE` は **Agent v7.20 以降では推奨されません**。
 
-**Agent v7.20 以前**でオートディスカバリーから**名前** `<NAME>`を持つ特定のDockerコンテナを含めるには、次の環境変数を Datadog Agent に追加します。
+**Agent v7.20 以降**でオートディスカバリーから**名前** `<NAME>`を持つ特定のDockerコンテナを含めるには、次の環境変数を Datadog Agent に追加します。
 
 ```shell
 DD_CONTAINER_INCLUDE = "name:<NAME>"

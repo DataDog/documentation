@@ -19,7 +19,7 @@ assets:
     source: zscaler
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Datadog
   sales_email: help@datadoghq.com
   support_email: help@datadoghq.com
 categories: []

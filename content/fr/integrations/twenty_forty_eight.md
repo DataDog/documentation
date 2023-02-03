@@ -6,15 +6,10 @@ author:
   homepage: https://datadoghq.com
   name: Datadog
   sales_email: sales@datadog.com
-  support_email: apps@datadog.com
+  support_email: help@datadoghq.com
 categories: []
-classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Mac OS
-  - Supported OS::Windows
-  - Offering::UI Extension
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/twenty_forty_eight/README.md
+- https://github.com/DataDog/integrations-extras/blob/master/twenty_forty_eight/README.md
 display_on_public_website: true
 draft: false
 git_integration_title: twenty_forty_eight
@@ -29,21 +24,29 @@ oauth: {}
 public_title: Twenty Forty Eight
 short_description: Un jeu de logique amusant à ajouter à vos dashboards Datadog
 supported_os:
-  - linux
-  - mac os
-  - windows
+- linux
+- mac os
+- windows
 tile:
   changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Mac OS
+  - Supported OS::Windows
+  - Offering::UI Extension
   configuration: README.md#Setup
   description: Un jeu de logique amusant à ajouter à vos dashboards Datadog
   media:
-    - caption: Twenty Forty Eight
-      image_url: images/twenty-forty-eight.jpg
-      media_type: image
+  - caption: Twenty Forty Eight
+    image_url: images/twenty-forty-eight.jpg
+    media_type: image
   overview: README.md#Overview
   support: README.md#Support
   title: Twenty Forty Eight
 ---
+
+
+
 ## Présentation
 
 Twenty Forty Eight est un jeu amusant qui peut être ajouté à vos dashboards Datadog. Cette extension repose sur les [Apps Datadog][1], qui permettent d'intégrer à l'interface utilisateur du contenu tiers qui n'est pas pris en charge nativement. Si vous souhaitez enrichir votre expérience Datadog avec de nouvelles fonctionnalités utiles ou amusantes, vous pouvez [concevoir votre propre app ou jeu][1].

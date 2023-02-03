@@ -84,14 +84,13 @@ To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] d
 {{% /tab %}}
 {{% tab "Other Environments" %}}
 
-Tracing is available for other environments, including [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3], and [Azure App Service][4].
+Tracing is available for other environments, including [Heroku][1], [Cloud Foundry][2], and [AWS Elastic Beanstalk][3].
 
 For other environments, see the [Integrations][5] documentation for that environment and [contact support][6] if you encounter setup issues.
 
 [1]: /agent/basic_agent_usage/heroku/#installation
 [2]: /integrations/cloud_foundry/#trace-collection
 [3]: /integrations/amazon_elasticbeanstalk/
-[4]: /infrastructure/serverless/azure_app_services/#overview
 [5]: /integrations/
 [6]: /help/
 {{% /tab %}}
@@ -101,6 +100,8 @@ For other environments, see the [Integrations][5] documentation for that environ
 Read [tracer settings][3] for a list of initialization options.
 
 ### Instrument your application
+
+<div class="alert alert-info">If you are collecting traces from a Kubernetes application, as an alternative to the following instructions, you can inject the tracing library into your application using the Cluster Agent Admission Controller. Read <a href="/tracing/trace_collection/admission_controller">Injecting Libraries Using Admission Controller</a> for instructions.</div>
 
 After the Agent is installed, follow these steps to add the Datadog tracing library to your Node.js applications:
 
@@ -114,6 +115,7 @@ After the Agent is installed, follow these steps to add the Datadog tracing libr
     npm install dd-trace@latest-node12
     ```
     For more information on our distribution tags and Node.js runtime version support, see the [Compatibility Requirements][1] page.
+    If you are upgrading from a previous major version of the library (0.x, 1.x, or 2.x) to another major version (2.x or 3.x), read the [Migration Guide][5] to assess any breaking changes.
 
 2. Import and initialize the tracer either in code or via command line arguments. The Node.js tracing library needs to be imported and initialized **before** any other module.
 
@@ -174,6 +176,7 @@ If needed, configure the tracing library to send application performance telemet
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/compatibility_requirements/nodejs
-[2]: https://app.datadoghq.com/apm/docs
+[2]: https://app.datadoghq.com/apm/service-setup
 [3]: https://datadog.github.io/dd-trace-js/#tracer-settings
 [4]: /tracing/trace_collection/library_config/nodejs/
+[5]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md

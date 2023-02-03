@@ -12,7 +12,7 @@ further_reading:
 - link: https://github.com/DataDog/dd-trace-go/tree/v1
   tag: GitHub
   text: ソースコード
-- link: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
+- link: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
   tag: GoDoc
   text: パッケージページ
 - link: /tracing/glossary/
@@ -31,7 +31,7 @@ Go トレーサーは、Go `1.17+` と Datadog Agent `>= 5.21.1` が必要です
 
 ### アプリ内のドキュメントに従ってください (推奨)
 
-Datadog アプリ内の[クイックスタート手順][7]に従って、最高のエクスペリエンスを実現します。例:
+Datadog アプリ内の[クイックスタート手順][2]に従って、最高のエクスペリエンスを実現します。例:
 
 - デプロイコンフィギュレーション (ホスト、Docker、Kubernetes、または Amazon ECS) を範囲とする段階的な手順。
 - `service`、`env`、`version` タグを動的に設定します。
@@ -101,19 +101,15 @@ Datadog には、一連のライブラリとフレームワークをインスツ
 
 ## ライブラリ構成
 
-必要に応じて、統合サービスタグ付けの設定など、アプリケーションパフォーマンスのテレメトリーデータを送信するためのトレースライブラリーを構成します。詳しくは、[ライブラリの構成][8]を参照してください。
+必要に応じて、統合サービスタグ付けの設定など、アプリケーションパフォーマンスのテレメトリーデータを送信するためのトレースライブラリーを構成します。詳しくは、[ライブラリの構成][3]を参照してください。
 
-コンフィギュレーションおよび API の使用の詳細については、Datadog の [API ドキュメント][2]を参照してください。
+コンフィギュレーションおよび API の使用の詳細については、Datadog の [API ドキュメント][4]を参照してください。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/compatibility_requirements/go
-[2]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
-[3]: /ja/tracing/glossary/
-[4]: https://github.com/DataDog/dd-trace-go/tree/v1#contributing
-[5]: https://github.com/DataDog/dd-trace-go/tree/v1/MIGRATING.md
-[6]: /ja/profiler/enabling/?code-lang=go
-[7]: https://app.datadoghq.com/apm/docs
-[8]: /ja/tracing/trace_collection/library_config/go/
+[2]: https://app.datadoghq.com/apm/service-setup
+[3]: /ja/tracing/trace_collection/library_config/go/
+[4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace

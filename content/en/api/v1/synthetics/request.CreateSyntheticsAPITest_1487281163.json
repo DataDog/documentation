@@ -20,6 +20,15 @@
           "targetValue": "0"
         },
         "type": "body"
+      },
+      {
+        "operator": "validatesXPath",
+        "target": {
+          "xPath": "target-xpath",
+          "targetValue": "0",
+          "operator": "contains"
+        },
+        "type": "body"
       }
     ],
     "configVariables": [
@@ -52,6 +61,16 @@
       "proxy": {
         "url": "https://datadoghq.com",
         "headers": {}
+      },
+      "basicAuth": {
+        "accessTokenUrl": "https://datadog-token.com",
+        "audience": "audience",
+        "clientId": "client-id",
+        "clientSecret": "client-secret",
+        "resource": "resource",
+        "scope": "yoyo",
+        "tokenApiAuthentication": "header",
+        "type": "oauth-client"
       }
     }
   },
@@ -72,7 +91,8 @@
       "count": 3,
       "interval": 10
     },
-    "tick_every": 60
+    "tick_every": 60,
+    "httpVersion": "http2"
   },
   "subtype": "http",
   "tags": [

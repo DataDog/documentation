@@ -8,7 +8,7 @@ further_reading:
 ---
 ## Startup logs
 
-Tracer startup logs capture all obtainable information at startup and log it either as `DATADOG TRACER CONFIGURATION` or `DATADOG TRACER DIAGNOSTICS` to simplify searching within your logs. 
+Tracer startup logs capture all obtainable information at startup and log it as `DATADOG TRACER CONFIGURATION`, `DATADOG TRACER DIAGNOSTICS`, or `DATADOG CONFIGURATION` to simplify searching within your logs. 
 
 Some languages log to a separate file depending on language conventions and the safety of accessing `Stdout` or equivalent. In those cases, the location of logs are noted in the language tab below. Some languages don't log diagnostics entries, also noted below. 
 
@@ -185,7 +185,7 @@ DATADOG TRACER CONFIGURATION - {"date":"2020-07-02T18:51:18.294Z","os_name":"Dar
 
 **Diagnostics:**
 
-The NodeJS Tracer prints a diagnostic line when the Agent cannot be reached.
+The Node.js Tracer prints a diagnostic line when the Agent cannot be reached.
 
 ```text
 DATADOG TRACER DIAGNOSTIC - Agent Error: Network error trying to reach the agent: connect ECONNREFUSED 127.0.0.1:8126

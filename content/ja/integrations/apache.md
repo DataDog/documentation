@@ -47,7 +47,7 @@ draft: false
 git_integration_title: apache
 integration_id: apache
 integration_title: Apache
-integration_version: 4.1.0
+integration_version: 4.2.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0

@@ -1,5 +1,5 @@
 ---
-title: Watchdog
+title: Datadog Watchdog™
 kind: Documentation
 description: Automatically detect potential application and infrastructure issues
 aliases:
@@ -29,12 +29,16 @@ further_reading:
 
 ## Overview
 
-Watchdog is an algorithmic feature for APM performance and infrastructure metrics that automatically detects potential application and infrastructure issues. It leverages the same seasonal algorithms that power anomalies and dashboards. Watchdog observes trends and patterns in:
+Watchdog is an algorithmic feature for APM performance, infrastructure metrics, and logs that automatically detects potential application and infrastructure issues. It leverages the same seasonal algorithms that power anomalies and dashboards. Watchdog observes trends and patterns in:
 
 * APM metrics:
   * Hits (request rate)
   * Error rate
   * Latency
+
+* Logs
+  * New error logs
+  * Increases in existing error logs
 
 * Infrastructure metrics from integrations:
   * [System][1], for the Host-level memory usage (memory leaks) and TCP retransmit rate.

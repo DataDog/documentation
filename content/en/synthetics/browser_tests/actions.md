@@ -250,6 +250,9 @@ You can select one of the following available builtins:
 `{{ alphanumeric(n) }}`
 : Generates an alphanumeric string with `n` characters.
 
+`{{ uuid }}`
+: Generates a version 4 universally unique identifier (UUID).
+
 `{{ date(n unit, format) }}`
 : Generates a date in one of Datadog's accepted formats with a value corresponding to the UTC date the test is initiated at + or - `n` units.
 
@@ -353,8 +356,6 @@ To define your HTTP request:
    * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
    * **Digest Auth**: Add Digest authentication credentials. 
    * **NTLM**: Add NTLM authentication credentials. Support both NTLMv2 and NTLMv1.
-   * **AWS Signature v4**: Enter your Access Key ID and Secret Access Key. Datadog generates the signature for your request. This option uses the basic implementation of SigV4. Specific signatures such as AWS S3 are not supported out-of-the box.  
-   For “Single Chunk” transfer requests to AWS S3 buckets, add `x-amz-content-sha256` containing the sha256-encoded body of the request as a header (for an empty body: `x-amz-content-sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`).
 
    {{% /tab %}}
 
@@ -414,7 +415,7 @@ You can create up to 20 assertions per step by clicking **New Assertion** or by 
 
 #### Extract a variable from the response
 
-Optionally, extract a variable from the response of your HTTP request by parsing its response headers or body. The value of the variable updates each time the HTTP request step runs.
+Optionally, extract a variable from the response of your HTTP request by parsing its response headers or body. The value of the variable updates each time the HTTP request step runs. Once created, this variable can be used in the [following steps](#use-variables) of your browser test.
 
 To start parsing a variable, click **Extract a variable from response content**:
 
@@ -426,7 +427,6 @@ To start parsing a variable, click **Extract a variable from response content**:
 
 {{< img src="synthetics/browser_tests/extracted_variable.png" alt="Extracted variable from response" style="width:80%;" >}}
 
-You can extract up to ten variables per test step. Once created, this variable can be used in the [following steps](#use-variables) of your browser test.
 
 ## Manage step order
 

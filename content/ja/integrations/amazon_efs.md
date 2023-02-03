@@ -38,7 +38,7 @@ Datadog のすべての EFS メトリクスを収集するには、このイン�
 
 ### メトリクスの収集
 
-1. [AWS インテグレーションタイル][2]のメトリクス収集で、`EFS` をオンにします。
+1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `EFS` が有効になっていることを確認します。
 2. Amazon EFS のメトリクスを収集するために、次のアクセス許可を [Datadog IAM ポリシー][3]に追加します。
 
     - `elasticfilesystem:DescribeTags`: ファイルシステムに適用されたカスタムタグを取得します。
@@ -94,10 +94,10 @@ AWS Elastic File System インテグレーションには、サービスのチ�
 ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/efs/latest/ug/auth-and-access-control.html
-[5]: https://app.datadoghq.com/account/settings#integrations/amazon_efs
+[5]: https://app.datadoghq.com/integrations/amazon-efs
 [6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
 [7]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
 [8]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group

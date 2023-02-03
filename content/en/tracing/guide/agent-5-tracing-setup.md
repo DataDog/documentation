@@ -58,7 +58,7 @@ Additionally, some configuration options may be set as environment variables. No
 | `apm_enabled`           | `DD_APM_ENABLED`           | The Datadog Agent accepts trace metrics when the value is set to `true`. The default value is `true`.                                                            |
 | `receiver_port`         | `DD_RECEIVER_PORT`         | The port that the Datadog Agent's trace receiver should listen on. The default value is `8126`.                                                                  |
 | `connection_limit`      | `DD_CONNECTION_LIMIT`      | The number of unique client connections to allow during one 30 second lease period. The default value is `2000`.                                                 |
-| `resource`              | `DD_IGNORE_RESOURCE`       | A blacklist of regular expressions to filter out traces by their resource name.                                                                                  |
+| `resource`              | `DD_IGNORE_RESOURCE`       | An exclude list of regular expressions to filter out traces by their resource name.                                                                                  |
 
 For more information about the Datadog Agent, see the [dedicated doc page][9] or refer to the [`datadog.conf.example` file][10].
 

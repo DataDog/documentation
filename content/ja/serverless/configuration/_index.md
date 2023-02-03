@@ -546,7 +546,7 @@ export class ExampleStack extends cdk.Stack {
 
 ## PrivateLink またはプロキシ経由でテレメトリーを送信する
 
-Datadog Lambda 拡張機能は、Datadog にデータを送信するために公衆インターネットにアクセスする必要があります。Lambda 関数が公衆インターネットにアクセスできない VPC にデプロイされている場合、`datadoghq.com` [Datadog サイト][29] には [AWS PrivateLink 経由でデータを送信][28]し、それ以外のサイトには[プロキシ経由でデータを送信][30]することができます。
+Datadog Lambda 拡張機能は、Datadog にデータを送信するために公衆インターネットにアクセスする必要があります。Lambda 関数が公衆インターネットにアクセスできない VPC にデプロイされている場合、`datadoghq.com` [Datadog サイト][29] には [AWS PrivateLink 経由でデータを送信][28]し、それ以外のサイトには [datadog.yaml を使ってプロキシ経由でデータを送信][30]することができます。
 
 Datadog Forwarder を使用している場合は、こちらの[手順][31]に従ってください。
 

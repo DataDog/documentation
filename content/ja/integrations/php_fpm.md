@@ -43,7 +43,7 @@ draft: false
 git_integration_title: php_fpm
 integration_id: php-fpm
 integration_title: PHP FPM
-integration_version: 2.1.1
+integration_version: 2.2.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0

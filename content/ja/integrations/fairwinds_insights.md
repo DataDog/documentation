@@ -102,6 +102,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Fairwinds Insights
+  uninstallation: README.md#Uninstallation
 ---
 
 

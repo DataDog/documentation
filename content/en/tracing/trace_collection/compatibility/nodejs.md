@@ -1,7 +1,7 @@
 ---
-title: NodeJS Compatibility Requirements
+title: Node.js Compatibility Requirements
 kind: documentation
-description: 'Compatibility Requirements for the NodeJS tracer'
+description: 'Compatibility Requirements for the Node.js tracer'
 aliases:
   - /tracing/compatibility_requirements/nodejs
   - /tracing/setup_overview/compatibility_requirements/nodejs
@@ -106,6 +106,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 | [elasticsearch][30]    | `>=10`   | Fully supported | Supports `@elastic/elasticsearch` versions `>=5` |
 | [ioredis][31]          | `>=2`    | Fully supported |                                                  |
 | [knex][32]             | `>=0.8`  | Fully supported | This integration is only for context propagation |
+| [mariadb][63]          | `>=3`    | Fully supported |                                                  |
 | [memcached][33]        | `>=2.2`  | Fully supported |                                                  |
 | [mongodb-core][34]     | `>=2`    | Fully supported | Supports Mongoose                                |
 | [mysql][35]            | `>=2`    | Fully supported |                                                  |
@@ -227,3 +228,4 @@ For additional information or to discuss [leave a comment on this github issue][
 [60]: https://nodejs.org/api/async_hooks.html
 [61]: https://www.meteor.com/
 [62]: https://github.com/DataDog/dd-trace-js/issues/1229
+[63]: https://github.com/mariadb-corporation/mariadb-connector-nodejs

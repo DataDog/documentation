@@ -2,6 +2,7 @@
 title: RUM Error Tracking Explorer
 kind: documentation
 beta: true
+private: true
 ---
 
 {{< img src="real_user_monitoring/error_tracking/explorer.png" alt="Error Tracking Explorer"  >}}

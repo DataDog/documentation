@@ -3001,6 +3001,12 @@ components:
             Only hosts that match one of the defined tags are imported into Datadog.'
           example: key:value,filter:example
           type: string
+        is_cspm_enabled:
+          default: false
+          description: When enabled, Datadog performs configuration checks across
+            your Google Cloud environment by continuously scanning every resource.
+          example: true
+          type: boolean
         private_key:
           description: Your private key name found in your JSON service account key.
           example: private_key
@@ -3279,26 +3285,6 @@ components:
       required:
       - message
       type: object
-    HTTPMethod:
-      description: The HTTP method.
-      enum:
-      - GET
-      - POST
-      - PATCH
-      - PUT
-      - DELETE
-      - HEAD
-      - OPTIONS
-      example: GET
-      type: string
-      x-enum-varnames:
-      - GET
-      - POST
-      - PATCH
-      - PUT
-      - DELETE
-      - HEAD
-      - OPTIONS
     HeatMapWidgetDefinition:
       description: The heat map visualization shows metrics aggregated across many
         tags, such as hosts. The more hosts that have a particular value, the darker
@@ -3602,6 +3588,7 @@ components:
           items:
             description: The version name.
             example: FreeBSD
+            nullable: true
             type: string
           type: array
         gohai:
@@ -3617,6 +3604,7 @@ components:
           items:
             description: Version name.
             example: Mac
+            nullable: true
             type: string
           type: array
         machine:
@@ -3628,6 +3616,7 @@ components:
           items:
             description: Version name.
             example: Ubuntu
+            nullable: true
             type: string
           type: array
         platform:
@@ -3655,6 +3644,7 @@ components:
           items:
             description: Version name.
             example: Windows
+            nullable: true
             type: string
           type: array
       type: object
@@ -3824,6 +3814,7 @@ components:
       - api_usage
       - apm_fargate_usage
       - apm_host_usage
+      - appsec_fargate_usage
       - appsec_usage
       - browser_usage
       - container_usage
@@ -3840,18 +3831,20 @@ components:
       - estimated_ingested_spans_usage
       - fargate_usage
       - functions_usage
-      - indexed_logs_usage
       - infra_host_usage
       - invocations_usage
       - npm_host_usage
       - profiled_container_usage
       - profiled_host_usage
       - snmp_usage
+      - estimated_rum_sessions_usage
+      - cont_usage
       type: string
       x-enum-varnames:
       - API_USAGE
       - APM_FARGATE_USAGE
       - APM_HOST_USAGE
+      - APPSEC_FARGATE_USAGE
       - APPSEC_USAGE
       - BROWSER_USAGE
       - CONTAINER_USAGE
@@ -3868,13 +3861,14 @@ components:
       - ESTIMATED_INGESTED_SPANS_USAGE
       - FARGATE_USAGE
       - FUNCTIONS_USAGE
-      - INDEXED_LOGS_USAGE
       - INFRA_HOST_USAGE
       - INVOCATIONS_USAGE
       - NPM_HOST_USAGE
       - PROFILED_CONTAINER_USAGE
       - PROFILED_HOST_USAGE
       - SNMP_USAGE
+      - ESTIMATED_RUM_SESSIONS_USAGE
+      - CONT_USAGE
     IFrameWidgetDefinition:
       description: The iframe widget allows you to embed a portion of any other web
         page on your dashboard. Only available on FREE layout dashboards.
@@ -4177,11 +4171,86 @@ components:
       - AUTO
       - COMPACT
       - FULL
+    ListStreamComputeAggregation:
+      description: Aggregation value.
+      enum:
+      - count
+      - cardinality
+      - median
+      - pc75
+      - pc90
+      - pc95
+      - pc98
+      - pc99
+      - sum
+      - min
+      - max
+      - avg
+      - earliest
+      - latest
+      - most_frequent
+      example: count
+      type: string
+      x-enum-varnames:
+      - COUNT
+      - CARDINALITY
+      - MEDIAN
+      - PC75
+      - PC90
+      - PC95
+      - PC98
+      - PC99
+      - SUM
+      - MIN
+      - MAX
+      - AVG
+      - EARLIEST
+      - LATEST
+      - MOST_FREQUENT
+    ListStreamComputeItems:
+      description: List of facets and aggregations which to compute.
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/ListStreamComputeAggregation'
+        facet:
+          description: Facet name.
+          example: resource_name
+          type: string
+      required:
+      - aggregation
+      type: object
+    ListStreamGroupByItems:
+      description: List of facets on which to group.
+      properties:
+        facet:
+          description: Facet name.
+          example: resource_name
+          type: string
+      required:
+      - facet
+      type: object
     ListStreamQuery:
       description: Updated list stream widget.
       properties:
+        compute:
+          description: Compute configuration for the List Stream Widget. Compute can
+            be used only with the logs_transaction_stream (from 1 to 5 items) list
+            stream source.
+          items:
+            $ref: '#/components/schemas/ListStreamComputeItems'
+          maxItems: 5
+          minItems: 1
+          type: array
         data_source:
           $ref: '#/components/schemas/ListStreamSource'
+        group_by:
+          description: Group by configuration for the List Stream Widget. Group by
+            can be used only with logs_pattern_stream (up to 3 items) or logs_transaction_stream
+            (one group by item is required) list stream source.
+          items:
+            $ref: '#/components/schemas/ListStreamGroupByItems'
+          maxItems: 3
+          type: array
         indexes:
           description: List of indexes.
           items:
@@ -4217,6 +4286,7 @@ components:
       - rum_issue_stream
       - apm_issue_stream
       - logs_pattern_stream
+      - logs_transaction_stream
       example: apm_issue_stream
       type: string
       x-enum-varnames:
@@ -4225,6 +4295,7 @@ components:
       - RUM_ISSUE_STREAM
       - APM_ISSUE_STREAM
       - LOGS_PATTERN_STREAM
+      - LOGS_TRANSACTION_STREAM
     ListStreamWidgetDefinition:
       description: 'The list stream visualization displays a table of recent events
         in your application that
@@ -5002,6 +5073,7 @@ components:
         daily_limit:
           description: The number of log events you can send in this index per day
             before you are rate-limited.
+          example: 300000000
           format: int64
           type: integer
         disable_daily_limit:
@@ -5012,6 +5084,7 @@ components:
             omitted, the index''s current
 
             `daily_limit` is maintained.'
+          example: false
           type: boolean
         exclusion_filters:
           description: 'An array of exclusion objects. The logs are tested against
@@ -5037,6 +5110,7 @@ components:
             for all logs
 
             already in this index. It may also affect billing.'
+          example: 15
           format: int64
           type: integer
       required:
@@ -5170,7 +5244,9 @@ components:
             associated target attribute values,
 
             formatted as `["source_key1,target_value1", "source_key2,target_value2"]`'
-          example: []
+          example:
+          - source_key1,target_value1
+          - source_key2,target_value2
           items:
             description: Mapping between a source and a value, it should follow the
               format `"<SOURCE>,<VALUE>"`.
@@ -5181,14 +5257,14 @@ components:
           type: string
         source:
           description: Source attribute used to perform the lookup.
-          example: ''
+          example: service_id
           type: string
         target:
           description: 'Name of the attribute that contains the corresponding value
             in the mapping list
 
             or the `default_lookup` if not found in the mapping list.'
-          example: ''
+          example: service
           type: string
         type:
           $ref: '#/components/schemas/LogsLookupProcessorType'
@@ -5375,6 +5451,7 @@ components:
       - $ref: '#/components/schemas/LogsPipelineProcessor'
       - $ref: '#/components/schemas/LogsGeoIPParser'
       - $ref: '#/components/schemas/LogsLookupProcessor'
+      - $ref: '#/components/schemas/ReferenceTableLogsLookupProcessor'
       - $ref: '#/components/schemas/LogsTraceRemapper'
       type: object
     LogsQueryCompute:
@@ -5879,10 +5956,13 @@ components:
         unit:
           description: 'Detailed information about the metric unit.
 
-            First element describes the "primary unit" (for example, `bytes` in `bytes
-            per second`),
+            The first element describes the "primary unit" (for example, `bytes` in
+            `bytes per second`).
 
-            second describes the "per unit" (for example, `second` in `bytes per second`).'
+            The second element describes the "per unit" (for example, `second` in
+            `bytes per second`).
+
+            If the second element is not present, the API returns null.'
           items:
             $ref: '#/components/schemas/MetricsQueryUnit'
           maxItems: 2
@@ -6205,12 +6285,20 @@ components:
       - rum
       - ci_pipelines
       - ci_tests
+      - audit
+      - events
+      - logs
+      - spans
       example: rum
       type: string
       x-enum-varnames:
       - RUM
       - CI_PIPELINES
       - CI_TESTS
+      - AUDIT
+      - EVENTS
+      - LOGS
+      - SPANS
     MonitorFormulaAndFunctionQueryDefinition:
       description: A formula and function query.
       oneOf:
@@ -6321,6 +6409,10 @@ components:
           type: array
         enable_logs_sample:
           description: Whether or not to send a log sample when the log monitor triggers.
+          type: boolean
+        enable_samples:
+          description: Whether or not to send a list of samples when the monitor triggers.
+            This is only used by CI Test and Pipeline monitors.
           type: boolean
         escalation_message:
           default: none
@@ -6436,11 +6528,33 @@ components:
           format: int64
           nullable: true
           type: integer
+        notification_preset_name:
+          $ref: '#/components/schemas/MonitorOptionsNotificationPresets'
         notify_audit:
           default: false
           description: A Boolean indicating whether tagged users is notified on changes
             to this monitor.
           type: boolean
+        notify_by:
+          description: 'Controls what granularity a monitor alerts on. Only available
+            for monitors with groupings.
+
+            For instance, a monitor grouped by `cluster`, `namespace`, and `pod` can
+            be configured to only notify on each
+
+            new `cluster` violating the alert conditions by setting `notify_by` to
+            `["cluster"]`. Tags mentioned
+
+            in `notify_by` must be a subset of the grouping tags in the query.
+
+            For example, a query grouped by `cluster` and `namespace` cannot notify
+            on `region`.
+
+            Setting `notify_by` to `[*]` configures the monitor to notify as a simple-alert.'
+          items:
+            description: A grouping tag.
+            type: string
+          type: array
         notify_no_data:
           default: false
           description: A Boolean indicating whether this monitor notifies when data
@@ -6475,6 +6589,8 @@ components:
             to `false` for sparse metrics,\notherwise some evaluations are skipped.
             Default is false."
           type: boolean
+        scheduling_options:
+          $ref: '#/components/schemas/MonitorOptionsSchedulingOptions'
         silenced:
           additionalProperties:
             description: UTC epoch timestamp in seconds when the downtime for the
@@ -6525,6 +6641,53 @@ components:
           example: count
           type: string
       readOnly: true
+      type: object
+    MonitorOptionsNotificationPresets:
+      default: show_all
+      description: Toggles the display of additional content sent in the monitor notification.
+      enum:
+      - show_all
+      - hide_query
+      - hide_handles
+      - hide_all
+      type: string
+      x-enum-varnames:
+      - SHOW_ALL
+      - HIDE_QUERY
+      - HIDE_HANDLES
+      - HIDE_ALL
+    MonitorOptionsSchedulingOptions:
+      description: Configuration options for scheduling.
+      properties:
+        evaluation_window:
+          $ref: '#/components/schemas/MonitorOptionsSchedulingOptionsEvaluationWindow'
+      type: object
+    MonitorOptionsSchedulingOptionsEvaluationWindow:
+      description: Configuration options for the evaluation window. If `hour_starts`
+        is set, no other fields may be set. Otherwise, `day_starts` and `month_starts`
+        must be set together.
+      properties:
+        day_starts:
+          description: The time of the day at which a one day cumulative evaluation
+            window starts. Must be defined in UTC time in `HH:mm` format.
+          example: 04:00
+          type: string
+        hour_starts:
+          description: The minute of the hour at which a one hour cumulative evaluation
+            window starts.
+          example: 0
+          format: int32
+          maximum: 59
+          minimum: 0
+          type: integer
+        month_starts:
+          description: The day of the month at which a one month cumulative evaluation
+            window starts.
+          example: 1
+          format: int32
+          maximum: 1
+          minimum: 1
+          type: integer
       type: object
     MonitorOverallStates:
       description: The different states your monitor can be in.
@@ -7078,6 +7241,8 @@ components:
       - api_percentage
       - apm_fargate_usage
       - apm_fargate_percentage
+      - appsec_fargate_usage
+      - appsec_fargate_percentage
       - apm_host_usage
       - apm_host_percentage
       - appsec_usage
@@ -7112,8 +7277,6 @@ components:
       - fargate_percentage
       - functions_usage
       - functions_percentage
-      - indexed_logs_usage
-      - indexed_logs_percentage
       - infra_host_usage
       - infra_host_percentage
       - invocations_usage
@@ -7126,6 +7289,10 @@ components:
       - profiled_host_percentage
       - snmp_usage
       - snmp_percentage
+      - estimated_rum_sessions_usage
+      - estimated_rum_sessions_percentage
+      - cont_usage
+      - cont_percentage
       - '*'
       type: string
       x-enum-varnames:
@@ -7133,6 +7300,8 @@ components:
       - API_PERCENTAGE
       - APM_FARGATE_USAGE
       - APM_FARGATE_PERCENTAGE
+      - APPSEC_FARGATE_USAGE
+      - APPSEC_FARGATE_PERCENTAGE
       - APM_HOST_USAGE
       - APM_HOST_PERCENTAGE
       - APPSEC_USAGE
@@ -7167,8 +7336,6 @@ components:
       - FARGATE_PERCENTAGE
       - FUNCTIONS_USAGE
       - FUNCTIONS_PERCENTAGE
-      - INDEXED_LOGS_USAGE
-      - INDEXED_LOGS_PERCENTAGE
       - INFRA_HOST_USAGE
       - INFRA_HOST_PERCENTAGE
       - INVOCATIONS_USAGE
@@ -7181,6 +7348,10 @@ components:
       - PROFILED_HOST_PERCENTAGE
       - SNMP_USAGE
       - SNMP_PERCENTAGE
+      - ESTIMATED_RUM_SESSIONS_USAGE
+      - ESTIMATED_RUM_SESSIONS_PERCENTAGE
+      - CONT_USAGE
+      - CONT_PERCENTAGE
       - ALL
     MonthlyUsageAttributionValues:
       description: Fields in Usage Summary by tag(s).
@@ -7209,6 +7380,16 @@ components:
           description: The APM host usage by tag(s).
           format: double
           type: number
+        appsec_fargate_percentage:
+          description: The percentage of Application Security Monitoring ECS Fargate
+            task usage by tag(s).
+          format: double
+          type: number
+        appsec_fargate_usage:
+          description: The Application Security Monitoring ECS Fargate task usage
+            by tag(s).
+          format: double
+          type: number
         appsec_percentage:
           description: The percentage of Application Security Monitoring host usage
             by tag(s).
@@ -7226,6 +7407,15 @@ components:
           description: The synthetic browser test usage by tag(s).
           format: double
           type: number
+        cont_percentage:
+          description: The percentage of container usage without the Datadog Agent
+            by tag(s).
+          format: double
+          type: number
+        cont_usage:
+          description: The container usage without the Datadog Agent by tag(s).
+          format: double
+          type: number
         container_percentage:
           description: The percentage of container usage by tag(s).
           format: double
@@ -7234,12 +7424,61 @@ components:
           description: The container usage by tag(s).
           format: double
           type: number
+        cspm_containers_percentage:
+          description: The percentage of CSPM container usage by tag(s).
+          format: double
+          type: number
+        cspm_containers_usage:
+          description: The CSPM container usage by tag(s).
+          format: double
+          type: number
+        cspm_hosts_percentage:
+          description: The percentage of CSPM host usage by by tag(s).
+          format: double
+          type: number
+        cspm_hosts_usage:
+          description: The CSPM host usage by tag(s).
+          format: double
+          type: number
         custom_timeseries_percentage:
           description: The percentage of custom metrics usage by tag(s).
           format: double
           type: number
         custom_timeseries_usage:
           description: The custom metrics usage by tag(s).
+          format: double
+          type: number
+        cws_containers_percentage:
+          description: The percentage of Cloud Workload Security container usage by
+            tag(s).
+          format: double
+          type: number
+        cws_containers_usage:
+          description: The Cloud Workload Security container usage by tag(s).
+          format: double
+          type: number
+        cws_hosts_percentage:
+          description: The percentage of Cloud Workload Security host usage by tag(s).
+          format: double
+          type: number
+        cws_hosts_usage:
+          description: The Cloud Workload Security host usage by tag(s).
+          format: double
+          type: number
+        dbm_hosts_percentage:
+          description: The percentage of Database Monitoring host usage by tag(s).
+          format: double
+          type: number
+        dbm_hosts_usage:
+          description: The Database Monitoring host usage by tag(s).
+          format: double
+          type: number
+        dbm_queries_percentage:
+          description: The percentage of Database Monitoring queries usage by tag(s).
+          format: double
+          type: number
+        dbm_queries_usage:
+          description: The Database Monitoring queries usage by tag(s).
           format: double
           type: number
         estimated_indexed_logs_percentage:
@@ -7282,6 +7521,16 @@ components:
             in private beta.
           format: double
           type: number
+        estimated_rum_sessions_percentage:
+          description: The percentage of estimated rum sessions usage by tag(s). This
+            field is in private beta.
+          format: double
+          type: number
+        estimated_rum_sessions_usage:
+          description: The estimated rum sessions usage by tag(s). This field is in
+            private beta.
+          format: double
+          type: number
         fargate_percentage:
           description: The percentage of Fargate usage by tags.
           format: double
@@ -7296,14 +7545,6 @@ components:
           type: number
         functions_usage:
           description: The Lambda function usage by tag(s).
-          format: double
-          type: number
-        indexed_logs_percentage:
-          description: The percentage of indexed logs usage by tags.
-          format: double
-          type: number
-        indexed_logs_usage:
-          description: The indexed logs usage by tags.
           format: double
           type: number
         infra_host_percentage:
@@ -8596,11 +8837,115 @@ components:
         security_query:
           $ref: '#/components/schemas/LogQueryDefinition'
       type: object
+    ReferenceTableLogsLookupProcessor:
+      description: '**Note**: Reference Tables are in public beta.
+
+        Use the Lookup Processor to define a mapping between a log attribute
+
+        and a human readable value saved in a Reference Table.
+
+        For example, you can use the Lookup Processor to map an internal service ID
+
+        into a human readable service name. Alternatively, you could also use it to
+        check
+
+        if the MAC address that just attempted to connect to the production
+
+        environment belongs to your list of stolen machines.'
+      properties:
+        is_enabled:
+          default: false
+          description: Whether or not the processor is enabled.
+          type: boolean
+        lookup_enrichment_table:
+          description: Name of the Reference Table for the source attribute and their
+            associated target attribute values.
+          example: service_id_to_service_name_table
+          type: string
+        name:
+          description: Name of the processor.
+          type: string
+        source:
+          description: Source attribute used to perform the lookup.
+          example: service_id
+          type: string
+        target:
+          description: Name of the attribute that contains the corresponding value
+            in the mapping list.
+          example: service
+          type: string
+        type:
+          $ref: '#/components/schemas/LogsLookupProcessorType'
+      required:
+      - source
+      - target
+      - lookup_enrichment_table
+      - type
+      type: object
     ResponseMetaAttributes:
       description: Object describing meta attributes of response.
       properties:
         page:
           $ref: '#/components/schemas/Pagination'
+      type: object
+    RunWorkflowWidgetDefinition:
+      description: Run workflow is widget that allows you to run a workflow from a
+        dashboard.
+      properties:
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: '#/components/schemas/WidgetCustomLink'
+          type: array
+        inputs:
+          description: Array of workflow inputs to map to dashboard template variables.
+          items:
+            $ref: '#/components/schemas/RunWorkflowWidgetInput'
+          type: array
+        time:
+          $ref: '#/components/schemas/WidgetTime'
+        title:
+          description: Title of your widget.
+          type: string
+        title_align:
+          $ref: '#/components/schemas/WidgetTextAlign'
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: '#/components/schemas/RunWorkflowWidgetDefinitionType'
+        workflow_id:
+          description: Workflow id.
+          example: <workflow_id>
+          type: string
+      required:
+      - type
+      - workflow_id
+      type: object
+    RunWorkflowWidgetDefinitionType:
+      default: run_workflow
+      description: Type of the run workflow widget.
+      enum:
+      - run_workflow
+      example: run_workflow
+      type: string
+      x-enum-varnames:
+      - RUN_WORKFLOW
+    RunWorkflowWidgetInput:
+      description: Object to map a dashboard template variable to a workflow input.
+      properties:
+        name:
+          description: Name of the workflow input.
+          example: Environment
+          type: string
+        value:
+          description: Dashboard template variable. Can be suffixed with '.value'
+            or '.key'.
+          example: $env.value
+          type: string
+      required:
+      - name
+      - value
       type: object
     SLOBulkDelete:
       additionalProperties:
@@ -8918,7 +9263,8 @@ components:
           type: string
         id:
           description: User ID of the creator.
-          type: string
+          format: int64
+          type: integer
         name:
           description: Name of the creator.
           type: string
@@ -9433,6 +9779,76 @@ components:
           format: int64
           type: integer
       type: object
+    SLOListWidgetDefinition:
+      description: Use the SLO List widget to track your SLOs (Service Level Objectives)
+        on dashboards.
+      properties:
+        requests:
+          description: Array of one request object to display in the widget.
+          items:
+            $ref: '#/components/schemas/SLOListWidgetRequest'
+          maxItems: 1
+          minItems: 1
+          type: array
+        title:
+          description: Title of the widget.
+          type: string
+        title_align:
+          $ref: '#/components/schemas/WidgetTextAlign'
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: '#/components/schemas/SLOListWidgetDefinitionType'
+      required:
+      - type
+      - requests
+      type: object
+    SLOListWidgetDefinitionType:
+      default: slo_list
+      description: Type of the SLO List widget.
+      enum:
+      - slo_list
+      example: slo_list
+      type: string
+      x-enum-varnames:
+      - SLO_LIST
+    SLOListWidgetQuery:
+      description: Updated SLO List widget.
+      properties:
+        limit:
+          default: 100
+          description: Maximum number of results to display in the table.
+          format: int64
+          maximum: 100
+          minimum: 1
+          type: integer
+        query_string:
+          description: Widget query.
+          example: env:prod AND service:my-app
+          type: string
+      required:
+      - query_string
+      type: object
+    SLOListWidgetRequest:
+      description: Updated SLO List widget.
+      properties:
+        query:
+          $ref: '#/components/schemas/SLOListWidgetQuery'
+        request_type:
+          $ref: '#/components/schemas/SLOListWidgetRequestType'
+      required:
+      - query
+      - request_type
+      type: object
+    SLOListWidgetRequestType:
+      description: Widget request type.
+      enum:
+      - slo_list
+      example: slo_list
+      type: string
+      x-enum-varnames:
+      - SLO_LIST
     SLOOverallStatuses:
       description: Overall status of the SLO by timeframes.
       properties:
@@ -9619,6 +10035,14 @@ components:
             description: A tag to apply to your SLO.
             type: string
           type: array
+        target_threshold:
+          description: 'The target threshold such that when the service level indicator
+            is above this
+
+            threshold over the given timeframe, the objective is being met.'
+          example: 99.9
+          format: double
+          type: number
         thresholds:
           description: 'The thresholds (timeframes and associated targets) for this
             service level
@@ -9633,8 +10057,24 @@ components:
           items:
             $ref: '#/components/schemas/SLOThreshold'
           type: array
+        timeframe:
+          $ref: '#/components/schemas/SLOTimeframe'
         type:
           $ref: '#/components/schemas/SLOType'
+        warning_threshold:
+          description: 'The optional warning threshold such that when the service
+            level indicator is
+
+            below this value for the given threshold, but above the target threshold,
+            the
+
+            objective appears in a "warning" state. This value must be greater than
+            the target
+
+            threshold.'
+          example: 99.95
+          format: double
+          type: number
       type: object
     SLOThreshold:
       description: SLO thresholds (target and optionally warning) for a single time
@@ -9976,7 +10416,7 @@ components:
       properties:
         facets:
           $ref: '#/components/schemas/SearchSLOResponseDataAttributesFacets'
-        slo:
+        slos:
           description: SLOs
           items:
             $ref: '#/components/schemas/SearchServiceLevelObjective'
@@ -10057,12 +10497,14 @@ components:
           type: string
         last:
           description: Link to first page.
+          nullable: true
           type: string
         next:
           description: Link to the next page.
           type: string
         prev:
           description: Link to previous page.
+          nullable: true
           type: string
         self:
           description: Link to current page.
@@ -10171,22 +10613,25 @@ components:
       - THIRTY_DAYS
       - NINETY_DAYS
     SearchServiceLevelObjective:
+      description: A service level objective data container.
+      properties:
+        data:
+          $ref: '#/components/schemas/SearchServiceLevelObjectiveData'
+      type: object
+    SearchServiceLevelObjectiveAttributes:
       description: 'A service level objective object includes a service level indicator,
         thresholds
 
-        for one or more timeframes, and metadata (`name`, `description`, `tags`, etc.).'
+        for one or more timeframes, and metadata (`name`, `description`, and `tags`).'
       properties:
         all_tags:
           description: 'A list of tags associated with this service level objective.
 
-            Always included in service level objective responses (but may be empty).
-
-            Optional in create/update requests.'
+            Always included in service level objective responses (but may be empty).'
           example:
           - env:prod
           - app:core
           items:
-            description: A tag to apply to your SLO.
             type: string
           type: array
         created_at:
@@ -10208,18 +10653,16 @@ components:
             Optional in create/update requests.'
           nullable: true
           type: string
+        env_tags:
+          description: Tags with the `env` tag key.
+          items:
+            type: string
+          type: array
         groups:
           description: 'A list of (up to 100) monitor groups that narrow the scope
             of a monitor service level objective.
 
-
-            Included in service level objective responses if it is not empty. Optional
-            in
-
-            create/update requests for monitor service level objectives, but may only
-            be
-
-            used when then length of the `monitor_ids` field is one.'
+            Included in service level objective responses if it is not empty.'
           example:
           - env:prod
           - role:mysql
@@ -10228,13 +10671,6 @@ components:
             type: string
           nullable: true
           type: array
-        id:
-          description: 'A unique identifier for the service level objective object.
-
-
-            Always included in service level objective responses.'
-          readOnly: true
-          type: string
         modified_at:
           description: 'Modification timestamp (UNIX time in seconds)
 
@@ -10247,7 +10683,7 @@ components:
           description: 'A list of monitor ids that defines the scope of a monitor
             service level
 
-            objective. **Required if type is `monitor`**.'
+            objective.'
           items:
             description: A monitor ID.
             format: int64
@@ -10265,6 +10701,18 @@ components:
           type: array
         query:
           $ref: '#/components/schemas/SearchSLOQuery'
+        service_tags:
+          description: Tags with the `service` tag key.
+          items:
+            type: string
+          type: array
+        slo_type:
+          $ref: '#/components/schemas/SLOType'
+        team_tags:
+          description: Tags with the `team` tag key.
+          items:
+            type: string
+          type: array
         thresholds:
           description: 'The thresholds (timeframes and associated targets) for this
             service level
@@ -10282,8 +10730,23 @@ components:
           items:
             $ref: '#/components/schemas/SearchSLOThreshold'
           type: array
+      type: object
+    SearchServiceLevelObjectiveData:
+      description: A service level objective ID and attributes.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SearchServiceLevelObjectiveAttributes'
+        id:
+          description: 'A unique identifier for the service level objective object.
+
+
+            Always included in service level objective responses.'
+          readOnly: true
+          type: string
         type:
-          $ref: '#/components/schemas/SLOType'
+          description: The type of the object, must be `slo`.
+          type: string
+      type: object
     SelectableTemplateVariableItems:
       description: Object containing the template variable's name, associated tag/attribute,
         default value and selectable values.
@@ -10389,7 +10852,8 @@ components:
       - host_name
       type: object
     ServiceCheckStatus:
-      description: The status of a service check.
+      description: The status of a service check. Set to `0` for OK, `1` for warning,
+        `2` for critical, and `3` for unknown.
       enum:
       - 0
       - 1
@@ -10547,6 +11011,14 @@ components:
             description: A tag to apply to your SLO.
             type: string
           type: array
+        target_threshold:
+          description: 'The target threshold such that when the service level indicator
+            is above this
+
+            threshold over the given timeframe, the objective is being met.'
+          example: 99.9
+          format: double
+          type: number
         thresholds:
           description: 'The thresholds (timeframes and associated targets) for this
             service level
@@ -10561,8 +11033,24 @@ components:
           items:
             $ref: '#/components/schemas/SLOThreshold'
           type: array
+        timeframe:
+          $ref: '#/components/schemas/SLOTimeframe'
         type:
           $ref: '#/components/schemas/SLOType'
+        warning_threshold:
+          description: 'The optional warning threshold such that when the service
+            level indicator is
+
+            below this value for the given threshold, but above the target threshold,
+            the
+
+            objective appears in a "warning" state. This value must be greater than
+            the target
+
+            threshold.'
+          example: 99.95
+          format: double
+          type: number
       required:
       - name
       - thresholds
@@ -10651,6 +11139,14 @@ components:
             description: A tag to apply to your SLO.
             type: string
           type: array
+        target_threshold:
+          description: 'The target threshold such that when the service level indicator
+            is above this
+
+            threshold over the given timeframe, the objective is being met.'
+          example: 99.9
+          format: double
+          type: number
         thresholds:
           description: 'The thresholds (timeframes and associated targets) for this
             service level
@@ -10665,8 +11161,24 @@ components:
           items:
             $ref: '#/components/schemas/SLOThreshold'
           type: array
+        timeframe:
+          $ref: '#/components/schemas/SLOTimeframe'
         type:
           $ref: '#/components/schemas/SLOType'
+        warning_threshold:
+          description: 'The optional warning threshold such that when the service
+            level indicator is
+
+            below this value for the given threshold, but above the target threshold,
+            the
+
+            objective appears in a "warning" state. This value must be greater than
+            the target
+
+            threshold.'
+          example: 99.95
+          format: double
+          type: number
       required:
       - name
       - thresholds
@@ -11084,6 +11596,7 @@ components:
       - open
       - archived
       - under_review
+      example: open
       type: string
       x-enum-varnames:
       - OPEN
@@ -11692,6 +12205,7 @@ components:
       oneOf:
       - $ref: '#/components/schemas/SyntheticsAssertionTarget'
       - $ref: '#/components/schemas/SyntheticsAssertionJSONPathTarget'
+      - $ref: '#/components/schemas/SyntheticsAssertionXPathTarget'
       type: object
     SyntheticsAssertionJSONPathOperator:
       description: Assertion operator to apply.
@@ -11821,6 +12335,42 @@ components:
       - RECEIVED_MESSAGE
       - GRPC_HEALTHCHECK_STATUS
       - CONNECTION
+    SyntheticsAssertionXPathOperator:
+      description: Assertion operator to apply.
+      enum:
+      - validatesXPath
+      example: validatesXPath
+      type: string
+      x-enum-varnames:
+      - VALIDATES_X_PATH
+    SyntheticsAssertionXPathTarget:
+      description: An assertion for the `validatesXPath` operator.
+      properties:
+        operator:
+          $ref: '#/components/schemas/SyntheticsAssertionXPathOperator'
+        property:
+          description: The associated assertion property.
+          type: string
+        target:
+          $ref: '#/components/schemas/SyntheticsAssertionXPathTargetTarget'
+        type:
+          $ref: '#/components/schemas/SyntheticsAssertionType'
+      required:
+      - type
+      - operator
+      type: object
+    SyntheticsAssertionXPathTargetTarget:
+      description: Composed target for `validatesXPath` operator.
+      properties:
+        operator:
+          description: The specific operator to use on the path.
+          type: string
+        targetValue:
+          description: The path target value to compare to.
+        xPath:
+          description: The X path to assert.
+          type: string
+      type: object
     SyntheticsBasicAuth:
       description: Object to handle basic authentication when performing the test.
       oneOf:
@@ -11828,6 +12378,8 @@ components:
       - $ref: '#/components/schemas/SyntheticsBasicAuthSigv4'
       - $ref: '#/components/schemas/SyntheticsBasicAuthNTLM'
       - $ref: '#/components/schemas/SyntheticsBasicAuthDigest'
+      - $ref: '#/components/schemas/SyntheticsBasicAuthOauthClient'
+      - $ref: '#/components/schemas/SyntheticsBasicAuthOauthROP'
       type: object
     SyntheticsBasicAuthDigest:
       description: Object to handle digest authentication when performing the test.
@@ -11891,6 +12443,118 @@ components:
       type: string
       x-enum-varnames:
       - NTLM
+    SyntheticsBasicAuthOauthClient:
+      description: Object to handle `oauth client` authentication when performing
+        the test.
+      properties:
+        accessTokenUrl:
+          description: Access token URL to use when performing the authentication.
+          example: https://example.com
+          type: string
+        audience:
+          description: Audience to use when performing the authentication.
+          example: audience
+          type: string
+        clientId:
+          description: Client ID to use when performing the authentication.
+          example: oauth-username
+          type: string
+        clientSecret:
+          description: Client secret to use when performing the authentication.
+          example: oauth-password
+          type: string
+        resource:
+          description: Resource to use when performing the authentication.
+          example: resource
+          type: string
+        scope:
+          description: Scope to use when performing the authentication.
+          example: scope
+          type: string
+        tokenApiAuthentication:
+          $ref: '#/components/schemas/SyntheticsBasicAuthOauthTokenApiAuthentication'
+        type:
+          $ref: '#/components/schemas/SyntheticsBasicAuthOauthClientType'
+      required:
+      - accessTokenUrl
+      - tokenApiAuthentication
+      - clientId
+      - clientSecret
+      type: object
+    SyntheticsBasicAuthOauthClientType:
+      default: oauth-client
+      description: The type of basic authentication to use when performing the test.
+      enum:
+      - oauth-client
+      example: oauth-client
+      type: string
+      x-enum-varnames:
+      - OAUTH_CLIENT
+    SyntheticsBasicAuthOauthROP:
+      description: Object to handle `oauth rop` authentication when performing the
+        test.
+      properties:
+        accessTokenUrl:
+          description: Access token URL to use when performing the authentication.
+          example: https://example.com
+          type: string
+        audience:
+          description: Audience to use when performing the authentication.
+          example: audience
+          type: string
+        clientId:
+          description: Client ID to use when performing the authentication.
+          example: client-id
+          type: string
+        clientSecret:
+          description: Client secret to use when performing the authentication.
+          example: client-secret
+          type: string
+        password:
+          description: Password to use when performing the authentication.
+          example: password
+          type: string
+        resource:
+          description: Resource to use when performing the authentication.
+          example: resource
+          type: string
+        scope:
+          description: Scope to use when performing the authentication.
+          example: scope
+          type: string
+        tokenApiAuthentication:
+          $ref: '#/components/schemas/SyntheticsBasicAuthOauthTokenApiAuthentication'
+        type:
+          $ref: '#/components/schemas/SyntheticsBasicAuthOauthROPType'
+        username:
+          description: Username to use when performing the authentication.
+          example: username
+          type: string
+      required:
+      - accessTokenUrl
+      - password
+      - tokenApiAuthentication
+      - username
+      type: object
+    SyntheticsBasicAuthOauthROPType:
+      default: oauth-rop
+      description: The type of basic authentication to use when performing the test.
+      enum:
+      - oauth-rop
+      example: oauth-rop
+      type: string
+      x-enum-varnames:
+      - OAUTH_ROP
+    SyntheticsBasicAuthOauthTokenApiAuthentication:
+      description: Type of token to use when performing the authentication.
+      enum:
+      - header
+      - body
+      example: header
+      type: string
+      x-enum-varnames:
+      - HEADER
+      - BODY
     SyntheticsBasicAuthSigv4:
       description: Object to handle `SIGV4` authentication when performing the test.
       properties:
@@ -12084,7 +12748,7 @@ components:
         status:
           $ref: '#/components/schemas/SyntheticsTestPauseStatus'
         steps:
-          description: The steps of the test.
+          description: Array of steps for the test.
           items:
             $ref: '#/components/schemas/SyntheticsStep'
           type: array
@@ -12581,6 +13245,11 @@ components:
         pattern:
           description: Pattern of the variable.
           type: string
+        secure:
+          description: Whether the value of this variable will be obfuscated in test
+            results.
+          example: false
+          type: boolean
         type:
           $ref: '#/components/schemas/SyntheticsConfigVariableType'
       required:
@@ -12782,6 +13451,12 @@ components:
         restricted_roles:
           $ref: '#/components/schemas/SyntheticsRestrictedRoles'
       type: object
+    SyntheticsGlobalVariableOptions:
+      description: Options for the Global Variable for MFA.
+      properties:
+        totp_parameters:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableTOTPParameters'
+      type: object
     SyntheticsGlobalVariableParseTestOptions:
       description: Parser options to use for retrieving a Synthetics global variable
         from a Synthetics Test. Used in conjunction with `parse_test_public_id`.
@@ -12831,12 +13506,32 @@ components:
       - JSON_PATH
       - REGEX
       - X_PATH
+    SyntheticsGlobalVariableTOTPParameters:
+      description: Parameters for the TOTP/MFA variable
+      properties:
+        digits:
+          description: Number of digits for the OTP code.
+          example: 6
+          format: int32
+          maximum: 10
+          minimum: 4
+          type: integer
+        refresh_interval:
+          description: Interval for which to refresh the token (in seconds).
+          example: 30
+          format: int32
+          maximum: 999
+          minimum: 0
+          type: integer
+      type: object
     SyntheticsGlobalVariableValue:
       description: Value of the global variable.
       example:
         secure: true
         value: value
       properties:
+        options:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableOptions'
         secure:
           description: Determines if the value of the variable is hidden.
           type: boolean
@@ -13138,6 +13833,9 @@ components:
         name:
           description: The name of the step.
           type: string
+        noScreenshot:
+          description: A boolean set to not take a screenshot for the step.
+          type: boolean
         params:
           description: The parameters of the step.
           type: object
@@ -13281,6 +13979,16 @@ components:
       - TYPE_TEXT
       - UPLOAD_FILES
       - WAIT
+    SyntheticsTestCallType:
+      description: The type of gRPC call to perform.
+      enum:
+      - healthcheck
+      - unary
+      example: unary
+      type: string
+      x-enum-varnames:
+      - HEALTHCHECK
+      - UNARY
     SyntheticsTestCiOptions:
       description: CI/CD options for a Synthetic test.
       properties:
@@ -13446,7 +14154,8 @@ components:
             certificates.'
           type: boolean
         allow_insecure:
-          description: Allows loading insecure content for an HTTP request.
+          description: Allows loading insecure content for an HTTP request in an API
+            test.
           type: boolean
         checkCertificateRevocation:
           description: For SSL test, whether or not the test should fail on revoked
@@ -13469,8 +14178,10 @@ components:
         follow_redirects:
           description: For API HTTP test, whether or not the test should follow redirects.
           type: boolean
+        httpVersion:
+          $ref: '#/components/schemas/SyntheticsTestOptionsHTTPVersion'
         ignoreServerCertificateError:
-          description: Ignore server certificate error.
+          description: Ignore server certificate error for browser tests.
           type: boolean
         initialNavigationTimeout:
           description: Timeout before declaring the initial step as failed (in seconds)
@@ -13508,6 +14219,8 @@ components:
           $ref: '#/components/schemas/SyntheticsTestOptionsRetry'
         rumSettings:
           $ref: '#/components/schemas/SyntheticsBrowserTestRumSettings'
+        scheduling:
+          $ref: '#/components/schemas/SyntheticsTestOptionsScheduling'
         tick_every:
           description: The frequency at which to run the Synthetic test (in seconds).
           format: int64
@@ -13515,6 +14228,17 @@ components:
           minimum: 30
           type: integer
       type: object
+    SyntheticsTestOptionsHTTPVersion:
+      description: HTTP version to use for a Synthetic test.
+      enum:
+      - http1
+      - http2
+      - any
+      type: string
+      x-enum-varnames:
+      - HTTP1
+      - HTTP2
+      - ANY
     SyntheticsTestOptionsMonitorOptions:
       description: 'Object containing the options for a Synthetic test as a monitor
 
@@ -13546,6 +14270,46 @@ components:
             300ms.'
           format: double
           type: number
+      type: object
+    SyntheticsTestOptionsScheduling:
+      description: Object containing timeframes and timezone used for advanced scheduling.
+      properties:
+        timeframes:
+          description: Array containing objects describing the scheduling pattern
+            to apply to each day.
+          example:
+          - day: 1
+            from: 07:00
+            to: '16:00'
+          - day: 3
+            from: 07:00
+            to: '16:00'
+          items:
+            $ref: '#/components/schemas/SyntheticsTestOptionsSchedulingTimeframe'
+          type: array
+        timezone:
+          description: Timezone in which the timeframe is based.
+          example: America/New_York
+          type: string
+      type: object
+    SyntheticsTestOptionsSchedulingTimeframe:
+      description: Object describing a timeframe.
+      properties:
+        day:
+          description: Number representing the day of the week.
+          example: 1
+          format: int32
+          maximum: 7
+          minimum: 1
+          type: integer
+        from:
+          description: The hour of the day on which scheduling starts.
+          example: 07:00
+          type: string
+        to:
+          description: The hour of the day on which scheduling ends.
+          example: '16:00'
+          type: string
       type: object
     SyntheticsTestPauseStatus:
       description: 'Define whether you want to start (`live`) or pause (`paused`)
@@ -13585,6 +14349,10 @@ components:
         body:
           description: Body to include in the test.
           type: string
+        bodyType:
+          $ref: '#/components/schemas/SyntheticsTestRequestBodyType'
+        callType:
+          $ref: '#/components/schemas/SyntheticsTestCallType'
         certificate:
           $ref: '#/components/schemas/SyntheticsTestRequestCertificate'
         certificateDomains:
@@ -13620,7 +14388,10 @@ components:
         metadata:
           $ref: '#/components/schemas/SyntheticsTestMetadata'
         method:
-          $ref: '#/components/schemas/HTTPMethod'
+          description: Either the HTTP method/verb to use or a gRPC method available
+            on the service set in the `service` field. Required if `subtype` is `HTTP`
+            or if `subtype` is `grpc` and `callType` is `unary`.
+          type: string
         noSavingResponseBody:
           description: Determines whether or not to save the response body.
           type: boolean
@@ -13648,7 +14419,8 @@ components:
             the same IP address and TCP port number.'
           type: string
         service:
-          description: gRPC service on which you want to perform the healthcheck.
+          description: The gRPC service on which you want to perform the gRPC call.
+          example: Greeter
           type: string
         shouldTrackHops:
           description: Turns on a traceroute probe to discover all gateways along
@@ -13663,6 +14435,24 @@ components:
           example: https://example.com
           type: string
       type: object
+    SyntheticsTestRequestBodyType:
+      description: Type of the request body.
+      enum:
+      - text/plain
+      - application/json
+      - text/xml
+      - text/html
+      - application/x-www-form-urlencoded
+      - graphql
+      example: text/plain
+      type: string
+      x-enum-varnames:
+      - TEXT_PLAIN
+      - APPLICATION_JSON
+      - TEXT_XML
+      - TEXT_HTML
+      - APPLICATION_X_WWW_FORM_URLENCODED
+      - GRAPHQL
     SyntheticsTestRequestCertificate:
       description: Client certificate to use when performing the test request.
       properties:
@@ -14620,6 +15410,10 @@ components:
       - estimated_ingested_spans_percentage
       - apm_fargate_usage
       - apm_fargate_percentage
+      - appsec_fargate_usage
+      - appsec_fargate_percentage
+      - estimated_rum_usage_attribution_usage
+      - estimated_rum_usage_attribution_percentage
       type: string
       x-enum-varnames:
       - API_PERCENTAGE
@@ -14654,6 +15448,10 @@ components:
       - ESTIMATED_INGESTED_SPANS_PERCENTAGE
       - APM_FARGATE_USAGE
       - APM_FARGATE_PERCENTAGE
+      - APPSEC_FARGATE_USAGE
+      - APPSEC_FARGATE_PERCENTAGE
+      - ESTIMATED_RUM_USAGE_ATTRIBUTION_USAGE
+      - ESTIMATED_RUM_USAGE_ATTRIBUTION_PERCENTAGE
     UsageAttributionSupportedMetrics:
       description: Supported fields for usage attribution requests (valid requests
         contain one or more metrics, or `*` for all).
@@ -14700,6 +15498,10 @@ components:
       - estimated_ingested_spans_percentage
       - apm_fargate_usage
       - apm_fargate_percentage
+      - appsec_fargate_usage
+      - appsec_fargate_percentage
+      - estimated_rum_usage_attribution_usage
+      - estimated_rum_usage_attribution_percentage
       - '*'
       type: string
       x-enum-varnames:
@@ -14745,6 +15547,10 @@ components:
       - ESTIMATED_INGESTED_SPANS_PERCENTAGE
       - APM_FARGATE_USAGE
       - APM_FARGATE_PERCENTAGE
+      - APPSEC_FARGATE_USAGE
+      - APPSEC_FARGATE_PERCENTAGE
+      - ESTIMATED_RUM_USAGE_ATTRIBUTION_USAGE
+      - ESTIMATED_RUM_USAGE_ATTRIBUTION_PERCENTAGE
       - ALL
     UsageAttributionTagNames:
       additionalProperties:
@@ -14799,6 +15605,16 @@ components:
           type: number
         apm_host_usage:
           description: The APM host usage by tag(s).
+          format: double
+          type: number
+        appsec_fargate_percentage:
+          description: The percentage of Application Security Monitoring ECS Fargate
+            task usage by tag(s).
+          format: double
+          type: number
+        appsec_fargate_usage:
+          description: The Application Security Monitoring ECS Fargate task usage
+            by tag(s).
           format: double
           type: number
         appsec_percentage:
@@ -14924,6 +15740,16 @@ components:
         estimated_ingested_spans_usage:
           description: The estimated ingested spans usage by tag(s). Note this field
             is in private beta.
+          format: double
+          type: number
+        estimated_rum_sessions_percentage:
+          description: The percentage of estimated rum sessions usage by tag(s). This
+            field is in private beta.
+          format: double
+          type: number
+        estimated_rum_sessions_usage:
+          description: The estimated rum sessions usage by tag(s). This field is in
+            private beta.
           format: double
           type: number
         infra_host_percentage:
@@ -15094,7 +15920,11 @@ components:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         apm_trace_search_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
+        application_security_fargate_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
         application_security_host_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        application_security_host_top99:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         ci_pipeline_indexed_spans_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
@@ -15107,6 +15937,10 @@ components:
         ci_testing_maximum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         ci_testing_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        cloud_cost_management_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        cloud_cost_management_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         cspm_container_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
@@ -15170,6 +16004,8 @@ components:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         lambda_function_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
+        logs_forwarding_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
         logs_indexed_15day_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         logs_indexed_180day_sum:
@@ -15224,6 +16060,12 @@ components:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         sensitive_data_scanner_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
+        serverless_apm_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        serverless_infra_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        serverless_infra_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
         serverless_invocation_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         siem_sum:
@@ -15231,6 +16073,8 @@ components:
         standard_timeseries_average:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         synthetics_api_tests_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        synthetics_app_testing_maximum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         synthetics_browser_checks_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
@@ -15253,19 +16097,23 @@ components:
       properties:
         ci_pipeline_indexed_spans:
           description: The number of spans for pipelines in the queried hour.
+          format: int64
           type: integer
         ci_test_indexed_spans:
           description: The number of spans for tests in the queried hour.
+          format: int64
           type: integer
         ci_visibility_pipeline_committers:
           description: Shows the total count of all active Git committers for Pipelines
             in the current month. A committer is active if they commit at least 3
             times in a given month.
+          format: int64
           type: integer
         ci_visibility_test_committers:
           description: The total count of all active Git committers for tests in the
             current month. A committer is active if they commit at least 3 times in
             a given month.
+          format: int64
           type: integer
         org_name:
           description: The organization name.
@@ -15349,6 +16197,12 @@ components:
         container_count:
           description: The total number of Cloud Security Posture Management containers
             during a given hour.
+          format: double
+          nullable: true
+          type: number
+        gcp_host_count:
+          description: The number of Cloud Security Posture Management GCP hosts during
+            a given hour.
           format: double
           nullable: true
           type: number
@@ -15482,6 +16336,11 @@ components:
             hour.
           format: int64
           type: integer
+        appsec_fargate_count:
+          description: The Application Security Monitoring ECS Fargate tasks during
+            the given hour.
+          format: int64
+          type: integer
         avg_profiled_fargate_tasks:
           description: The average profiled task count for Fargate Profiling.
           format: int64
@@ -15586,6 +16445,11 @@ components:
             Azure App Services integration
 
             (and were NOT running the Datadog Agent).'
+          format: int64
+          type: integer
+        opentelemetry_apm_host_count:
+          description: Contains the total number of hosts using APM reported by Datadog
+            exporter for the OpenTelemetry Collector.
           format: int64
           type: integer
         opentelemetry_host_count:
@@ -15976,6 +16840,7 @@ components:
           type: string
         online_archive_events_count:
           description: Total count of online archived events within the hour.
+          format: int64
           type: integer
         org_name:
           description: The organization name.
@@ -16125,6 +16990,18 @@ components:
       description: Sensitive Data Scanner usage for a given organization for a given
         hour.
       properties:
+        apm_scanned_bytes:
+          description: "The total number of bytes scanned of APM usage across all
+            usage types by the Sensitive Data Scanner from the start of the given
+            hour\u2019s month until the given hour."
+          format: int64
+          type: integer
+        events_scanned_bytes:
+          description: "The total number of bytes scanned of Events usage across all
+            usage types by the Sensitive Data Scanner from the start of the given
+            hour\u2019s month until the given hour."
+          format: int64
+          type: integer
         hour:
           description: The hour for the usage.
           format: date-time
@@ -16141,6 +17018,12 @@ components:
         public_id:
           description: The organization public ID.
           type: string
+        rum_scanned_bytes:
+          description: "The total number of bytes scanned of RUM usage across all
+            usage types by the Sensitive Data Scanner from the start of the given
+            hour\u2019s month until the given hour."
+          format: int64
+          type: integer
         total_scanned_bytes:
           description: "The total number of bytes scanned across all usage types by
             the Sensitive Data Scanner from the start of the given hour\u2019s month
@@ -16294,6 +17177,11 @@ components:
             hours in the current date for all organizations.
           format: int64
           type: integer
+        appsec_fargate_count_avg:
+          description: Shows the average of all Application Security Monitoring ECS
+            Fargate tasks over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         audit_logs_lines_indexed_sum:
           description: Shows the sum of audit logs lines indexed over all hours in
             the current date for all organizations.
@@ -16396,6 +17284,11 @@ components:
         cspm_container_hwm:
           description: Shows the high-water mark of Cloud Security Posture Management
             containers over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        cspm_gcp_host_top99p:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            GCP hosts over all hours in the current date for all organizations.
           format: int64
           type: integer
         cspm_host_top99p:
@@ -16532,6 +17425,12 @@ components:
             date for all organizations.
           format: int64
           type: integer
+        opentelemetry_apm_host_top99p:
+          description: Shows the 99th percentile of APM hosts reported by the Datadog
+            exporter for the OpenTelemetry Collector over all hours in the current
+            date for all organizations.
+          format: int64
+          type: integer
         opentelemetry_host_top99p:
           description: Shows the 99th percentile of all hosts reported by the Datadog
             exporter for the OpenTelemetry Collector over all hours in the current
@@ -16568,9 +17467,24 @@ components:
             hours in the current date for all organizations.
           format: int64
           type: integer
+        sds_apm_scanned_bytes_sum:
+          description: Sum of all APM bytes scanned with sensitive data scanner over
+            all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        sds_events_scanned_bytes_sum:
+          description: Sum of all event stream events bytes scanned with sensitive
+            data scanner over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         sds_logs_scanned_bytes_sum:
           description: Shows the sum of all bytes scanned of logs usage by the Sensitive
             Data Scanner over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        sds_rum_scanned_bytes_sum:
+          description: Sum of all RUM bytes scanned with sensitive data scanner over
+            all hours in the current date for all organizations.
           format: int64
           type: integer
         sds_total_scanned_bytes_sum:
@@ -16587,6 +17501,11 @@ components:
         synthetics_check_calls_count_sum:
           description: Shows the sum of all Synthetic API tests over all hours in
             the current date for all organizations.
+          format: int64
+          type: integer
+        synthetics_parallel_testing_max_slots_hwm:
+          description: Shows the high-water mark of used synthetics parallel testing
+            slots over all hours in the current date for all organizations.
           format: int64
           type: integer
         trace_search_indexed_events_count_sum:
@@ -16627,6 +17546,11 @@ components:
         apm_host_top99p:
           description: Shows the 99th percentile of all distinct APM hosts over all
             hours in the current date for the given org.
+          format: int64
+          type: integer
+        appsec_fargate_count_avg:
+          description: Shows the average of all Application Security Monitoring ECS
+            Fargate tasks over all hours in the current months for the given org.
           format: int64
           type: integer
         audit_logs_lines_indexed_sum:
@@ -16732,6 +17656,11 @@ components:
         cspm_container_hwm:
           description: Shows the high-water mark of Cloud Security Posture Management
             containers over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        cspm_gcp_host_top99p:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            GCP hosts over all hours in the current date for the given org.
           format: int64
           type: integer
         cspm_host_top99p:
@@ -16869,6 +17798,12 @@ components:
             date for the given org.
           format: int64
           type: integer
+        opentelemetry_apm_host_top99p:
+          description: Shows the 99th percentile of APM hosts reported by the Datadog
+            exporter for the OpenTelemetry Collector over all hours in the current
+            date for the given org.
+          format: int64
+          type: integer
         opentelemetry_host_top99p:
           description: Shows the 99th percentile of all hosts reported by the Datadog
             exporter for the OpenTelemetry Collector over all hours in the current
@@ -16906,9 +17841,24 @@ components:
             hours in the current date for the given org.
           format: int64
           type: integer
+        sds_apm_scanned_bytes_sum:
+          description: Sum of all APM bytes scanned with sensitive data scanner over
+            all hours in the current date for the given org.
+          format: int64
+          type: integer
+        sds_events_scanned_bytes_sum:
+          description: Sum of all event stream events bytes scanned with sensitive
+            data scanner over all hours in the current date for the given org.
+          format: int64
+          type: integer
         sds_logs_scanned_bytes_sum:
           description: Shows the sum of all bytes scanned of logs usage by the Sensitive
             Data Scanner over all hours in the current month for the given org.
+          format: int64
+          type: integer
+        sds_rum_scanned_bytes_sum:
+          description: Sum of all RUM bytes scanned with sensitive data scanner over
+            all hours in the current date for the given org.
           format: int64
           type: integer
         sds_total_scanned_bytes_sum:
@@ -16925,6 +17875,11 @@ components:
         synthetics_check_calls_count_sum:
           description: Shows the sum of all Synthetic API tests over all hours in
             the current date for the given org.
+          format: int64
+          type: integer
+        synthetics_parallel_testing_max_slots_hwm:
+          description: Shows the high-water mark of used synthetics parallel testing
+            slots over all hours in the current date for the given org.
           format: int64
           type: integer
         trace_search_indexed_events_count_sum:
@@ -16965,6 +17920,11 @@ components:
         apm_host_top99p_sum:
           description: Shows the 99th percentile of all distinct APM hosts over all
             hours in the current months for all organizations.
+          format: int64
+          type: integer
+        appsec_fargate_count_avg_sum:
+          description: Shows the average of all Application Security Monitoring ECS
+            Fargate tasks over all hours in the current months for all organizations.
           format: int64
           type: integer
         audit_logs_lines_indexed_agg_sum:
@@ -17077,6 +18037,11 @@ components:
           description: Shows the sum of the the high-water marks of Cloud Security
             Posture Management containers over all hours in the current months for
             all organizations.
+          format: int64
+          type: integer
+        cspm_gcp_host_top99p_sum:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            GCP hosts over all hours in the current months for all organizations.
           format: int64
           type: integer
         cspm_host_top99p_sum:
@@ -17233,6 +18198,12 @@ components:
             months for all organizations.
           format: int64
           type: integer
+        opentelemetry_apm_host_top99p_sum:
+          description: Shows the 99th percentile of APM hosts reported by the Datadog
+            exporter for the OpenTelemetry Collector over all hours in the current
+            months for all organizations.
+          format: int64
+          type: integer
         opentelemetry_host_top99p_sum:
           description: Shows the 99th percentile of all hosts reported by the Datadog
             exporter for the OpenTelemetry Collector over all hours in the current
@@ -17281,9 +18252,24 @@ components:
             hours in the current months for all organizations.
           format: int64
           type: integer
+        sds_apm_scanned_bytes_sum:
+          description: Sum of all APM bytes scanned with sensitive data scanner in
+            the current months for all organizations.
+          format: int64
+          type: integer
+        sds_events_scanned_bytes_sum:
+          description: Sum of all event stream events bytes scanned with sensitive
+            data scanner in the current months for all organizations.
+          format: int64
+          type: integer
         sds_logs_scanned_bytes_sum:
           description: Shows the sum of all bytes scanned of logs usage by the Sensitive
             Data Scanner over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        sds_rum_scanned_bytes_sum:
+          description: Sum of all RUM bytes scanned with sensitive data scanner in
+            the current months for all organizations.
           format: int64
           type: integer
         sds_total_scanned_bytes_sum:
@@ -17305,6 +18291,11 @@ components:
         synthetics_check_calls_count_agg_sum:
           description: Shows the sum of all Synthetic API tests over all hours in
             the current months for all organizations.
+          format: int64
+          type: integer
+        synthetics_parallel_testing_max_slots_hwm_sum:
+          description: Shows the sum of the high-water marks of used synthetics parallel
+            testing slots over all hours in the current month for all organizations.
           format: int64
           type: integer
         trace_search_indexed_events_count_agg_sum:
@@ -17914,8 +18905,10 @@ components:
       - $ref: '#/components/schemas/MonitorSummaryWidgetDefinition'
       - $ref: '#/components/schemas/NoteWidgetDefinition'
       - $ref: '#/components/schemas/QueryValueWidgetDefinition'
+      - $ref: '#/components/schemas/RunWorkflowWidgetDefinition'
       - $ref: '#/components/schemas/ScatterPlotWidgetDefinition'
       - $ref: '#/components/schemas/SLOWidgetDefinition'
+      - $ref: '#/components/schemas/SLOListWidgetDefinition'
       - $ref: '#/components/schemas/ServiceMapWidgetDefinition'
       - $ref: '#/components/schemas/ServiceSummaryWidgetDefinition'
       - $ref: '#/components/schemas/SunburstWidgetDefinition'
@@ -17997,6 +18990,8 @@ components:
           type: string
         limit:
           $ref: '#/components/schemas/WidgetFormulaLimit'
+        style:
+          $ref: '#/components/schemas/WidgetFormulaStyle'
       required:
       - formula
       type: object
@@ -18009,6 +19004,20 @@ components:
           type: integer
         order:
           $ref: '#/components/schemas/QuerySortOrder'
+      type: object
+    WidgetFormulaStyle:
+      description: Styling options for widget formulas.
+      properties:
+        palette:
+          description: The color palette used to display the formula. A guide to the
+            available color palettes can be found at https://docs.datadoghq.com/dashboards/guide/widget_colors
+          example: classic
+          type: string
+        palette_index:
+          description: Index specifying which color to use within the palette.
+          example: 1
+          format: int64
+          type: integer
       type: object
     WidgetGrouping:
       description: The kind of grouping to use.
@@ -18515,6 +19524,7 @@ components:
             user_access_invite: Invite other users to your organization.
             user_access_manage: Disable users, manage user roles, manage SAML-to-role
               mappings, and configure logs restriction queries.
+            user_access_read: View users and their roles and settings.
           tokenUrl: /oauth2/v1/token
       type: oauth2
     apiKeyAuth:
@@ -19234,7 +20244,7 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
-      x-menu-order: 4
+      x-menu-order: 6
       x-undo:
         type: idempotent
     get:
@@ -19285,7 +20295,7 @@ paths:
       summary: Get all dashboards
       tags:
       - Dashboards
-      x-menu-order: 2
+      x-menu-order: 3
       x-undo:
         type: safe
     patch:
@@ -19339,7 +20349,7 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
-      x-menu-order: 5
+      x-menu-order: 7
       x-undo:
         type: idempotent
     post:
@@ -19686,7 +20696,7 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
-      x-menu-order: 1
+      x-menu-order: 8
       x-undo:
         operationId: DeletePublicDashboard
         parameters:
@@ -19734,7 +20744,7 @@ paths:
       summary: Revoke a shared dashboard URL
       tags:
       - Dashboards
-      x-menu-order: 4
+      x-menu-order: 13
       x-undo:
         type: idempotent
     get:
@@ -19778,7 +20788,7 @@ paths:
       summary: Get a shared dashboard
       tags:
       - Dashboards
-      x-menu-order: 2
+      x-menu-order: 9
       x-undo:
         type: safe
     put:
@@ -19850,7 +20860,7 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
-      x-menu-order: 3
+      x-menu-order: 10
       x-undo:
         type: idempotent
   /api/v1/dashboard/public/{token}/invitation:
@@ -19905,7 +20915,7 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
-      x-menu-order: 7
+      x-menu-order: 14
       x-undo:
         type: idempotent
     get:
@@ -19962,7 +20972,7 @@ paths:
       summary: Get all invitations for a shared dashboard
       tags:
       - Dashboards
-      x-menu-order: 5
+      x-menu-order: 12
       x-undo:
         type: safe
     post:
@@ -20027,7 +21037,7 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
-      x-menu-order: 6
+      x-menu-order: 11
       x-undo:
         operationId: DeletePublicDashboardInvitation
         parameters:
@@ -20080,7 +21090,7 @@ paths:
           - name: dashboard_id
             source: dashboard.id
           step: the "dashboard" was deleted
-      x-menu-order: 3
+      x-menu-order: 5
       x-undo:
         type: idempotent
     get:
@@ -20122,7 +21132,7 @@ paths:
       summary: Get a dashboard
       tags:
       - Dashboards
-      x-menu-order: 7
+      x-menu-order: 2
       x-undo:
         type: safe
     put:
@@ -20178,7 +21188,7 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
-      x-menu-order: 6
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v1/distribution_points:
@@ -20577,7 +21587,7 @@ paths:
         schema:
           type: string
       - description: A comma separated list indicating what tags, if any, should be
-          used to filter the list of monitors by scope.
+          used to filter the list of events.
         example: host:host0
         in: query
         name: tags
@@ -20760,6 +21770,7 @@ paths:
       summary: Get all embeds
       tags:
       - Embeddable Graphs
+      x-menu-order: 5
       x-undo:
         type: safe
     post:
@@ -20807,6 +21818,7 @@ paths:
       tags:
       - Embeddable Graphs
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         operationId: TODO
         parameters: []
@@ -20850,6 +21862,7 @@ paths:
       summary: Get specific embed
       tags:
       - Embeddable Graphs
+      x-menu-order: 3
       x-undo:
         type: safe
   /api/v1/graph/embed/{embed_id}/enable:
@@ -20893,6 +21906,7 @@ paths:
       summary: Enable embed
       tags:
       - Embeddable Graphs
+      x-menu-order: 2
       x-undo:
         type: safe
   /api/v1/graph/embed/{embed_id}/revoke:
@@ -20936,6 +21950,7 @@ paths:
       summary: Revoke embed
       tags:
       - Embeddable Graphs
+      x-menu-order: 1
       x-undo:
         type: safe
   /api/v1/graph/snapshot:
@@ -22536,6 +23551,7 @@ paths:
       summary: Delete a Slack integration
       tags:
       - Slack Integration
+      x-menu-order: 1
       x-undo:
         type: idempotent
     get:
@@ -22572,6 +23588,7 @@ paths:
       summary: Get info about a Slack integration
       tags:
       - Slack Integration
+      x-menu-order: 4
       x-undo:
         type: safe
     post:
@@ -22614,6 +23631,7 @@ paths:
       tags:
       - Slack Integration
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         operationId: DeleteSlackIntegration
         parameters: []
@@ -22655,6 +23673,7 @@ paths:
       tags:
       - Slack Integration
       x-codegen-request-body-name: body
+      x-menu-order: 2
       x-undo:
         type: idempotent
   /api/v1/integration/slack/configuration/accounts/{account_name}/channels:
@@ -23415,7 +24434,7 @@ paths:
       tags:
       - Logs Indexes
       x-codegen-request-body-name: body
-      x-menu-order: 2
+      x-menu-order: 3
       x-undo:
         operationId: TODO
         parameters: []
@@ -23456,7 +24475,7 @@ paths:
       summary: Get an index
       tags:
       - Logs Indexes
-      x-menu-order: 3
+      x-menu-order: 2
       x-undo:
         type: safe
     put:
@@ -24116,6 +25135,11 @@ paths:
         - audit: `audit alert`
 
         - error-tracking: `error-tracking alert`
+
+
+        **Note**: Synthetic monitors are created through the Synthetics API. See the
+        [Synthetics API] (https://docs.datadoghq.com/api/latest/synthetics/) documentation
+        for more information.
 
 
         #### Query Types
@@ -25075,6 +26099,7 @@ paths:
       tags:
       - Monitors
       x-codegen-request-body-name: body
+      x-menu-order: 2
       x-undo:
         type: safe
   /api/v1/monitor/{monitor_id}/unmute:
@@ -25139,6 +26164,7 @@ paths:
       tags:
       - Monitors
       x-codegen-request-body-name: body
+      x-menu-order: 1
       x-undo:
         type: safe
   /api/v1/monitor/{monitor_id}/validate:
@@ -25444,6 +26470,7 @@ paths:
       summary: Get all notebooks
       tags:
       - Notebooks
+      x-menu-order: 2
       x-undo:
         type: safe
     post:
@@ -25524,6 +26551,7 @@ paths:
           - file: notebook_payload.json
             name: body
           step: there is a valid "notebook" in the system
+      x-menu-order: 1
       x-undo:
         operationId: DeleteNotebook
         parameters:
@@ -25568,6 +26596,7 @@ paths:
       summary: Delete a notebook
       tags:
       - Notebooks
+      x-menu-order: 3
       x-undo:
         type: idempotent
     get:
@@ -25611,6 +26640,7 @@ paths:
       summary: Get a notebook
       tags:
       - Notebooks
+      x-menu-order: 5
       x-undo:
         type: safe
     put:
@@ -25706,6 +26736,7 @@ paths:
       tags:
       - Notebooks
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v1/org:
@@ -26121,6 +27152,7 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
+      x-menu-order: 1
       x-undo:
         type: idempotent
   /api/v1/security_analytics/signals/{signal_id}/assignee:
@@ -26167,6 +27199,7 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: idempotent
   /api/v1/security_analytics/signals/{signal_id}/state:
@@ -26213,6 +27246,7 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
+      x-menu-order: 2
       x-undo:
         type: idempotent
   /api/v1/series:
@@ -26677,6 +27711,22 @@ paths:
     get:
       description: Get all Service Level Objective corrections.
       operationId: ListSLOCorrection
+      parameters:
+      - description: The specific offset to use as the beginning of the returned response.
+        in: query
+        name: offset
+        required: false
+        schema:
+          format: int64
+          type: integer
+      - description: The number of SLO corrections to return in the response. Default
+          is 25.
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: int64
+          type: integer
       responses:
         '200':
           content:
@@ -27254,9 +28304,6 @@ paths:
       x-menu-order: 6
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/synthetics/ci/batch/{batch_id}:
     get:
       description: Get a batch's updated details.
@@ -27491,6 +28538,18 @@ paths:
     get:
       description: Get the list of all Synthetic tests.
       operationId: ListTests
+      parameters:
+      - description: Used for pagination. The number of tests returned in the page.
+        in: query
+        name: page_size
+        schema:
+          type: string
+      - description: Used for pagination. Which page you want to retrieve. Starts
+          at zero.
+        in: query
+        name: page_number
+        schema:
+          type: string
       responses:
         '200':
           content:
@@ -27517,7 +28576,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - synthetics_read
-      summary: Get the list of all tests
+      summary: Get the list of all Synthetic tests
       tags:
       - Synthetics
       x-menu-order: 10
@@ -30945,8 +32004,7 @@ paths:
         type: safe
   /api/v1/usage/summary:
     get:
-      description: Get usage across your multi-org account. You must have the multi-org
-        feature enabled.
+      description: Get all usage across your account.
       operationId: GetUsageSummary
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
@@ -31003,7 +32061,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-      summary: Get usage across your multi-org account
+      summary: Get usage across your account
       tags:
       - Usage Metering
       x-menu-order: 8
@@ -31366,7 +32424,8 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - user_access_read
       summary: List all users
       tags:
       - Users
@@ -31811,6 +32870,7 @@ paths:
       tags:
       - Monitors
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: safe
   /v1/monitor/unmute_all:
@@ -31837,6 +32897,7 @@ paths:
       tags:
       - Monitors
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: safe
 security:

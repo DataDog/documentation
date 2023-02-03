@@ -1,10 +1,15 @@
 ---
-title: Logs de debugging du traceur
+further_reading:
+- link: /tracing/troubleshooting/connection_errors/
+  tag: Documentation
+  text: Résoudre les erreurs de connexion APM
 kind: Documentation
+title: Logs de debugging du traceur
 ---
-### Activer le mode debugging du traceur
 
-Utilisez les paramètres de debugging de Datadog pour diagnostiquer les problèmes ou auditer les données de trace. Nous vous déconseillons d'activer le mode debugging sur vos systèmes de production, car cela augmente le nombre d'événements envoyés à vos loggers. Utilisez cette fonctionnalité avec parcimonie, et uniquement à des fins de debugging.
+## Activer le mode debugging
+
+Utilisez les paramètres de debugging de Datadog pour diagnostiquer des problèmes ou auditer les données de trace. Datadog vous déconseille d'activer le mode debugging sur vos systèmes de production, car cela augmente le nombre d'événements envoyés à vos loggers. Utilisez le mode debugging uniquement à des fins de debugging.
 
 Le mode debugging est désactivé par défaut. Pour l'activer, suivez les instructions correspondant au langage utilisé :
 
@@ -16,31 +21,55 @@ Pour activer le mode debugging pour le traceur Java Datadog, définissez le flag
 
 **Remarque** : le traceur Java Datadog implémente SL4J SimpleLogger. [Tous ses paramètres peuvent donc être appliqués][1]. Par exemple, il est possible d'enregistrer les logs dans un fichier dédié :
 ```
--Ddatadog.slf4j.simpleLogger.logFile=<NOUVEAU_CHEMIN_FICHIER_LOG>`
-````
+-Ddatadog.slf4j.simpleLogger.logFile=<NOUVEAU_CHEMIN_FICHIER_LOG>
+```
+
 
 [1]: https://www.slf4j.org/api/org/slf4j/impl/SimpleLogger.html
-
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python" >}}
 
-Pour activer le mode debugging pour le traceur Python Datadog, définissez la variable d'environnement `DD_TRACE_DEBUG=true` lorsque vous utilisez `ddtrace-run`.
-<p></p>
+Les étapes à suivre pour activer le mode debugging dans le traceur Python Datadog dépendent de la version du traceur utilisée par votre application. Choisissez le scénario qui s'applique :
+
+### Scénario 1 : ddtrace 1.3.2 ou une version ultérieure
+
+1. Pour activer le mode debugging : `DD_TRACE_DEBUG=true`
+
+2. Pour transmettre les logs de debugging vers un fichier de log, définissez `DD_TRACE_LOG_FILE` avec le nom du fichier dans lequel les logs du traceur doivent être écrits en fonction de votre répertoire de travail actuel. Par exemple, `DD_TRACE_LOG_FILE=ddtrace_logs.log`. 
+   Par défaut, la taille du fichier est de 15728640 octets (environ 15 Mo) et un fichier de sauvegarde est créé. Pour augmenter la taille par défaut du fichier de log, spécifiez la taille en octets à l'aide du paramètre `DD_TRACE_LOG_FILE_SIZE_BYTES`.
+
+3. Pour transmettre les logs vers la console avec une application **Python 2**, configurez `logging.basicConfig()` ou un paramètre similaire. Les logs sont automatiquement envoyés vers la console pour les applications **Python 3**. 
+
+
+### Scénario 2 : ddtrace 1.0.x à 1.2.x
+
+1. Pour activer le mode debugging : `DD_TRACE_DEBUG=true`
+
+2. Pour transmettre les logs vers la console avec une application **Python 2 ou Python 3**, configurez `logging.basicConfig()` ou utilisez `DD_CALL_BASIC_CONFIG=true`.
+
+### Scénario 3 : ddtrace 0.x
+
+1. Pour activer le mode debugging : `DD_TRACE_DEBUG=true`
+
+2. Pour transmettre les logs vers la console avec une application **Python 2 ou Python 3**, configurez `logging.basicConfig()` ou utilisez `DD_CALL_BASIC_CONFIG=true`.
+
+### Scénario 4 : Configurer les logs de debugging dans le code de l'application avec la bibliothèque de logging standard
+
+Pour toutes les versions de ddtrace, au lieu de définir la variable d'environnement du traceur `DD_TRACE_DEBUG`, vous pouvez activer les logs de debugging dans le code de l'application en utilisant la bibliothèque `logging` standard directement :
+
+```
+log = logging.getLogger("ddtrace.tracer")
+log.setLevel(logging.DEBUG)
+```
 
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby" >}}
 
-Pour activer le mode debugging pour le traceur Ruby Datadog, définissez l'option `debug` sur `true` dans la configuration d'initialisation du traceur :
+Pour activer le mode debugging pour le traceur Ruby Datadog, définissez la variable d'environnement `DD_TRACE_DEBUG=true`.
 
-```ruby
-Datadog.configure do |c|
-  c.tracer debug: true
-end
-```
-
-**Logs d'application** :
+**Logs d'application**
 
 Par défaut, tous les logs sont traités par le logger Ruby de base. Lorsque vous utilisez Rails, les messages s'affichent dans le fichier de log de votre application.
 
@@ -51,16 +80,16 @@ Vous pouvez utiliser un logger personnalisé à la place du logger par défaut �
 ```ruby
 f = File.new("<NOMFICHIER>.log", "w+")           # Les messages de log doivent être ici
 Datadog.configure do |c|
-  c.tracer log: Logger.new(f)                 # Remplacement du traceur par défaut
+  c.logger.instance = Logger.new(f)                 # Remplacement du traceur par défaut
 end
 
-Datadog::Tracer.log.info { "Ceci est généralement appelé par le code de tracing" }
+Datadog::Tracing.logger.info { "Ceci est généralement appelé par le code de tracing" }
 ```
 
 Consultez [la documentation relative à l'API][1] pour en savoir plus.
 
-[1]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#custom-logging
 
+[1]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#custom-logging
 {{< /programming-lang >}}
 
 {{< programming-lang lang="go" >}}
@@ -82,19 +111,13 @@ func main() {
 
 {{< programming-lang lang="nodejs" >}}
 
-Pour activer le mode debugging pour le traceur Node.js Datadog, activez-le durant son `init` :
+Pour activer le mode debugging pour le traceur Node.js Datadog, utilisez la variable d'environnement `DD_TRACE_DEBUG=true`. 
 
-```javascript
-const tracer = require('dd-trace').init({
-  debug: true
-})
-```
+**Remarque** : pour les versions antérieures à 2.X, vous pouvez activer le mode debugging par programmation lors de l'initialisation du traceur. Cette fonctionnalité n'est toutefois plus possible avec les nouvelles versions.
 
-**Logs d'application** :
+**Logs d'application**
 
-Par défaut, la journalisation à partir de cette bibliothèque est désactivée. Pour obtenir les informations de debugging et les erreurs envoyées aux logs, définissez les options `debug` sur `true` dans la méthode [init()][1].
-
-Le traceur enregistre ensuite les informations de debugging dans `console.log()` et les erreurs dans `console.error()`. Vous pouvez modifier ce comportement en transmettant un logger personnalisé au traceur. Celui-ci doit contenir des méthodes `debug()` et `error()` capables de gérer respectivement les messages et les erreurs.
+En mode debugging, le traceur enregistre les informations de debugging dans `console.log()` et les erreurs dans `console.error()`. Vous pouvez modifier ce comportement en transmettant un logger personnalisé au traceur. Celui-ci doit contenir des méthodes `debug()` et `error()` capables de gérer respectivement les messages et les erreurs.
 
 Par exemple :
 
@@ -109,27 +132,25 @@ const tracer = require('dd-trace').init({
   logger: {
     debug: message => logger.trace(message),
     error: err => logger.error(err)
-  },
-  debug: true
+  }
 })
 ```
 
 Consultez ensuite les logs de votre Agent et recherchez des informations supplémentaires sur le problème.
 
-* Si la trace a été correctement envoyée à l'Agent, vous devriez voir des entrées de log `Response from the Agent: OK`. Cela indique que le traceur fonctionne correctement et que le problème est donc susceptible de résider au niveau de l'Agent. Consultez le [guide de dépannage de l'Agent][2] pour en savoir plus.
+* Si la trace a été correctement envoyée à l'Agent, vous devriez voir des entrées de log `Response from the Agent: OK`. Ce message indique que le traceur fonctionne correctement et que le problème réside donc probablement au niveau de l'Agent. Consultez le [guide de dépannage de l'Agent][1] pour en savoir plus.
 
-* Si une erreur est signalée par l'Agent (ou qu'aucune communication avec l'Agent ne peut être établie), des entrées `Error from the Agent` apparaissent alors dans le log. Dans ce cas, validez votre configuration réseau pour vérifier que la connexion à l'Agent est possible. Si vous êtes sûr que le réseau est opérationnel et que l'erreur provient de l'Agent, consultez le [Guide de dépannage de l'Agent][2].
+* Si une erreur est signalée par l'Agent (ou qu'aucune communication avec l'Agent ne peut être établie), des entrées `Error from the Agent` apparaissent alors dans le log. Dans ce cas, validez votre configuration réseau pour vérifier que la connexion à l'Agent est possible. Si vous êtes sûr que le réseau est opérationnel et que l'erreur provient de l'Agent, consultez le [Guide de dépannage de l'Agent][1].
 
-Si aucune de ces entrées de log n'est présente, aucune requête n'a été envoyée à l'Agent, ce qui signifie que le traceur n'instrumente pas votre application. Dans ce cas, [contactez l'assistance Datadog][3] et envoyez les entrées de log pertinentes avec [un flare][4].
+Si aucune de ces entrées de log n'est présente, aucune requête n'a été envoyée à l'Agent, ce qui signifie que le traceur n'instrumente pas votre application. Dans ce cas, [contactez l'assistance Datadog][2] et envoyez les entrées de log pertinentes avec [un flare][3].
 
-Pour découvrir davantage de paramètres pour le traceur, consultez la [documentation relative à l'API][5].
+Pour découvrir davantage de paramètres pour le traceur, consultez la [documentation relative à l'API][4].
 
-[1]: https://datadog.github.io/dd-trace-js/Tracer.html#init
-[2]: /fr/agent/troubleshooting/
-[3]: /fr/help/
-[4]: /fr/agent/troubleshooting/#send-a-flare
-[5]: https://datadog.github.io/dd-trace-js/#tracer-settings
 
+[1]: /fr/agent/troubleshooting/
+[2]: /fr/help/
+[3]: /fr/agent/troubleshooting/#send-a-flare
+[4]: https://datadog.github.io/dd-trace-js/#tracer-settings
 {{< /programming-lang >}}
 
 {{< programming-lang lang=".NET" >}}
@@ -150,18 +171,19 @@ Les fichiers de logs sont par défaut enregistrés dans les répertoires suivant
 |----------|-------------------------------------------|
 | Windows  | `%ProgramData%\Datadog .NET Tracer\logs\` |
 | Linux    | `/var/log/datadog/dotnet/`                |
+| Azure App Service | `%AzureAppServiceHomeDirectory%\LogFiles\datadog`|
 
 **Remarque :** sous Linux, vous devez créer le répertoire des logs avant d'activer le mode debugging.
 
 Pour en savoir plus sur la configuration du traceur .NET, consultez la section [Configuration][1].
 
 Deux types de logs sont créés à ces emplacements :
-1. **Les logs provenant du code natif :** avec la version 1.21.0 et ultérieur, ces logs sont enregistrés sous le nom `dotnet-tracer-native.log`. Avec les versions antérieures, ils sont stockés sous le nom `dotnet-profiler.log`.
+1. **Les logs provenant du code natif :** pour la version 1.26.0 et les versions ultérieures, ces logs sont enregistrés sous le nom `dotnet-tracer-native-<nomprocessus>-<idprocessus>.log`. Pour les versions 1.21.0 à 1.25.x, ces logs sont enregistrés sous le nom `dotnet-tracer-native.log`. Pour la version 1.20.x et les versions antérieures, ils sont stockés sous le nom `dotnet-profiler.log`.
 2. **Les logs provenant du code géré :** avec la version 1.21.0 et ultérieur, ces logs sont enregistrés sous le nom `dotnet-tracer-managed-<nom_processus>-<date>.log`. Avec les versions antérieures, ils sont stockés sous le nom `dotnet-tracer-<nom_processus>-<date>.log`.
 
 
-[1]: /fr/tracing/setup/dotnet/#configuration
 
+[1]: /fr/tracing/setup/dotnet/#configuration
 {{< /programming-lang >}}
 
 {{< programming-lang lang="php" >}}
@@ -174,8 +196,8 @@ Si vous exploitez un serveur Apache, utilisez la directive `ErrorLog`.
 Si vous exploitez un serveur NGINX, utilisez la directive `error_log`.
 Si vous effectuez une configuration au niveau de PHP, utilisez le paramètre ini `error_log` de PHP.
 
-[1]: https://www.php-fig.org/psr/psr-3
 
+[1]: https://www.php-fig.org/psr/psr-3
 {{< /programming-lang >}}
 
 {{< programming-lang lang="cpp" >}}
@@ -193,7 +215,7 @@ make install
 
 {{< /programming-lang-wrapper >}}
 
-### Examiner les logs de debugging du traceur
+## Examiner les logs de debugging
 
 Lorsque le mode debugging pour votre traceur est activé, des messages de log concernant le traceur indiquent comment le traceur a été initialisé et si des traces ont été envoyées à l'Agent. **Ces logs ne sont pas envoyés à l'Agent Datadog dans le flare et sont stockés dans un chemin distinct selon votre configuration de log**. Les exemples de logs suivants montrent les éléments qui peuvent figurer dans votre fichier de log.
 
@@ -227,45 +249,32 @@ Si vous constatez des erreurs que vous ne comprenez pas, ou si les traces sont s
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-Pour plus de visibilité, ajoutez `DD_TRACE_LOGGING_RATE=0`.
+Le nom du gestionnaire de logging dans les logs générés par le traceur Python est `ddtrace`. 
 
 **Des traces ont été générées :**
 
 ```shell
-<YYYY-MM-DD> 16:01:11,280 DEBUG [ddtrace.tracer] [tracer.py:470] - writing 8 spans (enabled:True)
+<AAAA-MM-JJ> 19:51:22,262 DEBUG [ddtrace.internal.processor.trace] [trace.py:211] - trace <ID TRACE> has 8 spans, 7 finished
 ```
 
 **Span générée par le traceur Python :**
 
 ```text
-<YYYY-MM-DD> 16:01:11,280 DEBUG [ddtrace.tracer] [tracer.py:472] -
-      name flask.request
-        id <id span>
-  trace_id <id trace>
- parent_id <id parent>
-   service flask
-  resource GET /
-      type http
-     start <heure début>
-       end <heure fin>
-  duration 0.004759s
-     error 0
-      tags
-           flask.endpoint:index
-           flask.url_rule:/
-           flask.version:1.1.1
-           http.method:GET
-           http.status_code:200
-           http.url:http://0.0.0.0:5050/
-           system.pid:25985
-
+<AAAA-MM-JJ> 19:51:22,251 DEBUG [ddtrace.tracer] [tracer.py:715] - finishing span name='flask.process_response' id=<ID SPAN> trace_id=<ID TRACE>  parent_id=<ID PARENT> service='flask' resource='flask.process_response' type=None start=1655495482.2478693 end=1655495482.2479873 duration=0.000118125 error=0 tags={} metrics={} (enabled:True)
+0.0:5050/
 ```
 
 
 **Des traces ont été envoyées à l'Agent Datadog :**
 
-```shell
-<YYYY-MM-DD> 16:01:11,637 DEBUG [ddtrace.api] [api.py:236] - reported 1 traces in 0.00207s
+```text
+<AAAA-MM-JJ> 19:59:19,657 DEBUG [ddtrace.internal.writer] [writer.py:405] - sent 1.57KB in 0.02605s to http://localhost:8126/v0.4/traces
+```
+
+**Des traces n'ont pas pu être envoyées à l'Agent Datadog :**
+
+```text
+<AAAA-MM-JJ> 19:51:23,249 ERROR [ddtrace.internal.writer] [writer.py:567] - failed to send traces to Datadog Agent at http://localhost:8126/v0.4/traces
 ```
 
 {{< /programming-lang >}}
@@ -350,8 +359,6 @@ YYYY/MM/DD 16:06:35 Datadog Tracer <version> DEBUG: Sending payload: size: <tail
 
 {{< programming-lang lang=".NET" >}}
 
-Pour des raisons de performance, le traceur écrit chaque message de log unique au moins une fois toutes les 60 secondes. Pour bénéficier d'une meilleure visibilité pendant le debugging, désactivez la limite de débit en définissant la variable d'environnement `DD_TRACE_LOGGING_RATE=0`.
-
 **Logs provenant du code natif :**
 
 ```shell
@@ -407,6 +414,10 @@ YYYY-MM-DD HH:MM:SS.<nombre entier> +00:00 [ERR] An error occurred while sending
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}
+
+## Pour aller plus loin
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/help/
 [2]: /fr/agent/troubleshooting/#send-a-flare

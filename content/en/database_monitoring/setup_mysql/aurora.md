@@ -9,7 +9,7 @@ further_reading:
 
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
@@ -26,10 +26,10 @@ The Agent collects telemetry directly from the database by logging in as a read-
 ## Before you begin
 
 Supported MySQL versions
-: 5.6 or 5.7
+: 5.6, 5.7, and 8.0 or later 
 
 Supported Agent versions
-: 7.36.1+
+: 7.36.1 or later
 
 Performance impact
 : The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. <br/><br/>
@@ -82,6 +82,22 @@ The Datadog Agent requires read-only access to the database in order to collect 
 
 The following instructions grant the Agent permission to login from any host using `datadog@'%'`. You can restrict the `datadog` user to be allowed to login only from localhost by using `datadog@'localhost'`. See the [MySQL documentation][4] for more info.
 
+{{< tabs >}}
+{{% tab "MySQL ≥ 8.0" %}}
+
+Create the `datadog` user and grant basic permissions:
+
+```sql
+CREATE USER datadog@'%' IDENTIFIED WITH mysql_native_password by '<UNIQUEPASSWORD>';
+ALTER USER datadog@'%' WITH MAX_USER_CONNECTIONS 5;
+GRANT REPLICATION CLIENT ON *.* TO datadog@'%';
+GRANT PROCESS ON *.* TO datadog@'%';
+GRANT SELECT ON performance_schema.* TO datadog@'%';
+```
+
+{{% /tab %}}
+
+{{% tab "MySQL 5.6 and 5.7" %}}
 
 Create the `datadog` user and grant basic permissions:
 
@@ -91,6 +107,9 @@ GRANT REPLICATION CLIENT ON *.* TO datadog@'%' WITH MAX_USER_CONNECTIONS 5;
 GRANT PROCESS ON *.* TO datadog@'%';
 GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 Create the following schema:
 
@@ -254,7 +273,7 @@ instances:
     host: <INSTANCE_ADDRESS>
     port: 3306
     username: datadog
-    password: <UNIQUEPASSWORD" \
+    password: <UNIQUEPASSWORD>" \
   datadog/datadog
 ```
 
@@ -322,6 +341,9 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 ### Validate
 
 [Run the Agent's status subcommand][6] and look for `mysql` under the Checks section. Or visit the [Databases][7] page to get started!
+
+## Example Agent Configurations
+{{% dbm-mysql-agent-config-examples %}}
 
 ## Install the RDS Integration
 

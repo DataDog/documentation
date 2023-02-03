@@ -1,9 +1,10 @@
 ---
-title: Erreurs de connexion APM
-kind: Documentation
 aliases:
-  - /fr/tracing/faq/why-am-i-getting-errno-111-connection-refused-errors-in-my-application-logs/
+- /fr/tracing/faq/why-am-i-getting-errno-111-connection-refused-errors-in-my-application-logs/
+kind: Documentation
+title: Erreurs de connexion APM
 ---
+
 Si l'application utilisant la bibliothèque de tracing ne parvient pas à communiquer avec l'Agent Datadog, consultez les [logs de lancement du traceur][1] ou les [logs de debugging du traceur][2], qui se trouvent dans les logs de votre application, pour vérifier s'ils comportent des erreurs de connexion. 
 
 ## Erreurs indiquant un problème de connexion APM
@@ -20,7 +21,7 @@ Si les messages ci-dessous figurent dans vos logs, cela signifie que vos traces 
 Depuis la version 0.82.0 du traceur Java, vous pouvez utiliser une commande de diagnostic à l'emplacement où le traceur Java est installé afin de détecter de potentiels problèmes de connexion. Depuis l'emplacement où `dd-java-agent.jar` est installé (dans le conteneur de l'application), exécutez ce qui suit :
 
 ```bash
-java -jar /path/to/dd-java-agent.jar sampleTrace -c 1
+java -jar /chemin/vers/dd-java-agent.jar sampleTrace -c 1
 ```
 
 Exemple de sortie :
@@ -210,8 +211,8 @@ Consultez le tableau ci-dessous pour obtenir des exemples de configuration. Cert
 | [AWS EKS sur Fargate][9] | Ne pas définir `DD_AGENT_HOST` |
 | [AWS Elastic Beanstalk avec un seul conteneur][10] | IP de passerelle (généralement `172.17.0.1`) |
 | [AWS Elastic Beanstalk avec plusieurs conteneurs][11] | Lien pointant vers le nom du conteneur de l'Agent Datadog |
-| [Kubernetes][12] | [`status.hostIP`][13] ajouté manuellement ou par l'intermédiaire du [contrôleur d'admission][14] |
-| [AWS EKS (pas sur Fargate)][15] | [`status.hostIP`][13] ajouté manuellement ou par l'intermédiaire du [contrôleur d'admission][14] |
+| [Kubernetes][12] | 1) [Socket de domaine Unix][20], 2) [`status.hostIP`][13] ajouté manuellement ou 3) par l'intermédiaire du [contrôleur d'admission][14] |
+| [AWS EKS (pas sur Fargate)][15] | 1) [Socket de domaine Unix][20], 2) [`status.hostIP`][13] ajouté manuellement ou 3) par l'intermédiaire du [contrôleur d'admission][14] |
 | [Agent Datadog et conteneurs Docker d'application][16] | Conteneur de l'Agent Datadog |
 
 
@@ -259,7 +260,7 @@ Si la configuration ne contient pas d'erreur, mais que vous continuez à recevoi
 [3]: /fr/agent/guide/agent-commands/#agent-information
 [4]: /fr/help/
 [5]: /fr/agent/troubleshooting/send_a_flare/
-[6]: https://app.datadoghq.com/apm/docs
+[6]: https://app.datadoghq.com/apm/service-setup
 [7]: /fr/agent/amazon_ecs/apm/?tab=ec2metadataendpoint
 [8]: /fr/integrations/ecs_fargate/#trace-collection
 [9]: /fr/integrations/eks_fargate/#traces-collection
@@ -273,3 +274,4 @@ Si la configuration ne contient pas d'erreur, mais que vous continuez à recevoi
 [17]: /fr/tracing/setup_overview/setup/php/?tab=containers#apache
 [18]: /fr/tracing/setup_overview/setup/php/?tab=containers#nginx
 [19]: /fr/agent/troubleshooting/send_a_flare/?tab=agentv6v7#trace-agent
+[20]: /fr/containers/kubernetes/apm/?tabs=daemonsetuds#configure-the-datadog-agent-to-accept-traces

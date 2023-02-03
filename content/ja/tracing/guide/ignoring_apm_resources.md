@@ -54,12 +54,26 @@ apm_config:
     reject: ["http.url:http://localhost:5050/healthcheck"]
 {{< /code-block >}}
 
-<div class="alert alert-warning"><strong>注</strong>: このようにトレースをフィルタリングすると、<a href="/tracing/guide/metrics_namespace/">トレースメトリクス</a>からこれらのリクエストが削除されます。トレースメトリクスに影響を与えずに取り込み量を削減する方法については、<a href="/tracing/trace_ingestion/ingestion_controls">取り込みコントロール</a>を参照してください。</div>
+この方法でトレースをフィルターすると、[トレースメトリクス][3]からこれらのリクエストが削除されます。トレースメトリクスに影響を与えずに取り込みを減らす方法については、[Ingestion Controls][4] を参照してください。
 
+バックエンドでは、Datadog は取り込み後に以下のスパンタグを作成し、スパンに追加します。これらのタグは、Datadog Agent レベルでトレースをドロップするために使用することはできません。
+
+
+| 名前                                    | 説明                                      |
+|-----------------------------------------|--------------------------------------------------|
+| `http.path_group`                       | `http.url` タグからの完全な URL パス。        |
+| `http.url_details.host`                 | `http.url` タグのホスト名部分。      |
+| `http.url_details.path`                 | HTTP リクエスト行で渡された完全なリクエスト対象、またはそれに相当するもの。 |
+| `http.url_details.scheme`               | `http.url` タグからのリクエストスキーム。       |
+| `http.url_details.queryString`          | `http.url` タグからのクエリ文字列部分。 |
+| `http.url_details.port`                 | `http.url` タグからの HTTP ポート。            |
+| `http.useragent_details.os.family`      | User-Agent によって報告された OS ファミリー。         |
+| `http.useragent_details.browser.family` | User-Agent によって報告されたブラウザファミリー。    |
+| `http.useragent_details.device.family`  | User-Agent によって報告されたデバイスファミリー。     |
 
 ### リソースに基づいて無視する
 
-**ignore resources** オプションを使用すると、トレースのグローバルルートスパンが特定の基準に一致する場合にリソースを除外することができます。「[リソースを収集から除外][3]」を参照してください。このオプションは、この特定の Datadog Agent にトレースを送信するすべてのサービスに適用されます。ignore resources により無視されたトレースは、トレースメトリクスに含まれません。
+**ignore resources** オプションを使用すると、トレースのグローバルルートスパンが特定の基準に一致する場合にリソースを除外することができます。[リソースを収集から除外][5]を参照してください。このオプションは、この特定の Datadog Agent にトレースを送信するすべてのサービスに適用されます。ignore resources により無視されたトレースは、トレースメトリクスに含まれません。
 
 無視するリソースは、Agent のコンフィギュレーションファイル、`datadog.yaml`、または `DD_APM_IGNORE_RESOURCES` 環境変数で指定します。以下の例を参照してください。
 
@@ -73,7 +87,7 @@ apm_config:
 {{< /code-block >}}
 
 **注**:
-- Trace Agent が許容する正規表現の構文は、Go の[regexp][4] によって評価されます。
+- Trace Agent が許容する正規表現の構文は、Go の [regexp][6] によって評価されます。
 - デプロイ戦略によっては、特殊文字をエスケープして正規表現を調整しなければならない場合もあります。
 - Kubernetes で専用コンテナを使用している場合は、ignore resource オプションの環境変数が **trace-agent** コンテナに適用されていることを確認してください。
 
@@ -356,5 +370,7 @@ public class GreetingController {
 
 [1]: /ja/help/
 [2]: /ja/tracing/guide/add_span_md_and_graph_it/
-[3]: /ja/tracing/configure_data_security/?tab=mongodb#exclude-resources-from-being-collected
-[4]: https://golang.org/pkg/regexp/
+[3]: /ja/tracing/guide/metrics_namespace/
+[4]: /ja/tracing/trace_ingestion/ingestion_controls
+[5]: /ja/tracing/configure_data_security/?tab=mongodb#exclude-resources-from-being-collected
+[6]: https://golang.org/pkg/regexp/

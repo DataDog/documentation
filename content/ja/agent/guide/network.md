@@ -36,6 +36,8 @@ title: ネットワークトラフィック
 
 [ネットワークデバイスモニタリング][10]
 : `ndm-intake.`{{< region-param key="dd_site" code="true" >}}
+: `snmp-traps-intake.`{{< region-param key="dd_site" code="true" >}}
+
 
 [オーケストレーター][5]
 : `orchestrator.`{{< region-param key="dd_site" code="true" >}}
@@ -252,6 +254,12 @@ v6.1.0 以降、Agent は Datadog の API にもクエリを実行、重要で�
 :TCP 経由のログ収集用ポート。<br>
 その他の接続タイプについては[ログのエンドポイント][3]を参照してください。
 
+6062/tcp
+: Process Agent のデバッグエンドポイント用のポート。
+
+6162/tcp
+: Process Agent のランタイム設定を構成するためのポート。
+
 10255/tcp
 : [Kubernetes HTTP Kubelet][4] 用のポート
 
@@ -273,6 +281,12 @@ v6.1.0 以降、Agent は Datadog の API にもクエリを実行、重要で�
 123/udp
 : NTP 用のポート (詳細は、[NTP の重要性に関するドキュメント][1]を参照してください)。<br>
 [デフォルトの NTP ターゲット][2]を参照してください。
+
+6062/tcp
+: Process Agent のデバッグエンドポイント用のポート。
+
+6162/tcp
+: Process Agent のランタイム設定を構成するためのポート。
 
 10255/tcp
 : [Kubernetes HTTP Kubelet][4] 用のポート
@@ -320,6 +334,13 @@ Agent のサービスがホスト内のローカルで相互通信する場合�
 123/udp
 : NTP 用のポート (詳細は、[NTP の重要性に関するドキュメント][1]を参照してください)。<br>
 [デフォルトの NTP ターゲット][2]を参照してください。
+
+6062/tcp
+: Process Agent のデバッグエンドポイント用のポート。
+
+6162/tcp
+: Process Agent のランタイム設定を構成するためのポート。
+
 #### インバウンド
 
 8125/udp
@@ -353,7 +374,7 @@ Agent の v7.27.0 以降では、メモリ制限に達した場合にディス�
 
 メトリクスは `forwarder_storage_path` 設定で定義されたフォルダーに格納されます。デフォルトでは Unix システムの場合 `/opt/datadog-agent/run/transactions_to_retry`、Windows の場合 `C:\ProgramData\Datadog\run\transactions_to_retry` に設定されています。
 
-ストレージスペースの不足を避けるために、ストレージスペースの使用量合計が 95 パーセントを切った場合、Agent はメトリクスをディスクのみに保存します。この制限は `forwarder_storage_max_disk_ratio` 設定で定義されます。
+ストレージスペースの不足を避けるために、ストレージスペースの使用量合計が95パーセント未満の場合のみAgentはメトリクスをディスクに保存します。この制限は `forwarder_storage_max_disk_ratio` 設定で定義されます。
 
 ## その他の参考資料
 
@@ -365,7 +386,7 @@ Agent の v7.27.0 以降では、メモリ制限に達した場合にディス�
 [4]: /ja/infrastructure/process/
 [5]: /ja/infrastructure/livecontainers/#kubernetes-resources-1
 [6]: /ja/real_user_monitoring/
-[7]: /ja/tracing/profiler/
+[7]: /ja/profiler/
 [8]: /ja/synthetics/private_locations
 [9]: /ja/agent/proxy/
 [10]: /ja/network_monitoring/devices

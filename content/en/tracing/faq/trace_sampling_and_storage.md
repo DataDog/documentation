@@ -388,4 +388,4 @@ Individual traces are stored for 15 days. This means that all **sampled** traces
 [1]: /tracing/glossary/#trace
 [2]: /tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm/
 [3]: /tracing/app_analytics/#span-filtering
-[4]: /security/tracing/#resource-filtering
+[4]: /tracing/configure_data_security/#exclude-resources-from-being-collected

@@ -3,7 +3,7 @@ title: Variables
 kind: documentation
 description: "Use variables to customize your monitor notifications"
 further_reading:
-- link: "/monitors/create/"
+- link: "/monitors/"
   tag: "Documentation"
   text: "Create monitors"
 - link: "/monitors/notify/"
@@ -227,14 +227,17 @@ This is the escalation message @dev-team@company.com
 {{% /tab %}}
 {{< /tabs >}}
 
+If you configure a conditional block for a state transition into `alert` or `warning` conditions with an **@-notifications** handle, it is recommended to configure a corresponding `recovery` condition in order for a recovery notification to be sent to the handle.
+
+**Note**: Any text or notification handle placed **outside** the configured conditional variables is invoked with every monitor state transition. Any text or notification handle placed **inside** of configured conditional variables is only invoked if the monitor state transition matches its condition.
 
 ## Attribute and tag variables
 
 Use attribute and tag variables to render alert messages that are customized, informative, and specific to help people quickly understand the nature of the alert.
 
-### Multi-alert variables
+### Multi alert variables
 
-Configure multi-alert variables in [multi-alert monitors][1] based on the dimension selected in the multi-alert group box. Enrich the notification to dynamically include the value associated with the group by dimension in each alert.
+Configure multi alert variables in [multi alert monitors][1] based on the dimension selected in the multi alert group box. Enrich the notification to dynamically include the value associated with the group by dimension in each alert.
 
 {{< tabs >}}
 {{% tab "Group by tag" %}}
@@ -249,7 +252,7 @@ This renders the `value` associated with the `key` in each alert notification. I
 
 **Example**: If your monitor triggers an alert for each `env`, then the variable `{{env.name}}` is available in your notification message.
 
-{{< img src="monitors/notifications/multi_alert_variable.png" alt="Multi-alert variable syntax" style="width:90%;">}}
+{{< img src="monitors/notifications/multi_alert_variable.png" alt="Multi alert variable syntax" style="width:90%;">}}
 
 #### Query group by host
 
@@ -287,7 +290,7 @@ Log monitors, Trace Analytics monitors, RUM monitors and Event monitors can use 
 {{ @facet_key.name }}
 ```
 
-**Example**: To include group-specific information in a multi-alert log monitor group by `@machine_id`:
+**Example**: To include group-specific information in a multi alert log monitor group by `@machine_id`:
 
 ```text
 This alert was triggered on {{ @machine_id.name }}
@@ -490,7 +493,7 @@ The monitors link is customizable with additional parameters. The most common ar
 
 
 
-[1]: /monitors/create/#monitor-types
+[1]: /monitors/types
 {{% /tab %}}
 {{% tab "Logs" %}}
 
