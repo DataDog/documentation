@@ -181,7 +181,7 @@ Once the deploy is completed, you should be able to see metrics and traces of yo
 
 - **Tracing:** the Datadog Agent already provides some basic tracing for popular frameworks. Follow the guide for [advanced tracing](2) for more
 
-- **Logs:** If you use [GCP integration][1] your logs are already being collected. Alternatively, you can set the `DD_LOGS_ENABLED` environment variable to true to capture application logs through the serverless instrumentation.
+- **Logs:** If you use [GCP integration][1] your logs are already being collected. Alternatively, you can set the `DD_LOGS_ENABLED` environment variable to `true` to capture application logs through the serverless instrumentation directly.
 
 - **Custom Metrics:** You can submit custom metrics using a [DogStatsd client][7]. Only `DISTRIBUTION` metrics should be used.
 
