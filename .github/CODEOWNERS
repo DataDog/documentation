@@ -41,4 +41,4 @@ docker-compose-docs.yml                                 @DataDog/corpweb
 .htmltest.yml                                           @DataDog/corpweb
 
 # Cloud Cost Management
-documentation/content/*/cloud_cost_management/_index.md         @DataDog/cloud-cost-management-visibility
+documentation/content/en/cloud_cost_management/_index.md         @DataDog/cloud-cost-management-visibility
