@@ -424,6 +424,133 @@ service_monitoring_config:
 ```
 
 {{% /tab %}}
+
+{{% tab "ECS" %}}
+
+The following json represents the `task definition` of `USM` (and `system-probe`) for ECS.
+
+The `task` should be deployed as `daemon service` (follow instructions [here](https://docs.datadoghq.com/containers/amazon_ecs/?tab=awscli#run-the-agent-as-a-daemon-service))
+```json
+{
+    "containerDefinitions": [
+        {
+            "name": "datadog-agent",
+            "image": "public.ecr.aws/datadog/agent:7",
+            "cpu": 500,
+            "memory": 1024,
+            "essential": true,
+            "mountPoints": [
+                {
+                    "containerPath": "/var/run/docker.sock",
+                    "sourceVolume": "docker_sock",
+                    "readOnly": null
+                },
+                {
+                    "containerPath": "/host/sys/fs/cgroup",
+                    "sourceVolume": "cgroup",
+                    "readOnly": null
+                },
+                {
+                    "containerPath": "/host/proc",
+                    "sourceVolume": "proc",
+                    "readOnly": null
+                },
+                {
+                    "containerPath": "/opt/datadog-agent/run",
+                    "sourceVolume": "pointdir",
+                    "readOnly": false
+                },
+                {
+                    "containerPath": "/var/lib/docker/containers",
+                    "sourceVolume": "containers_root",
+                    "readOnly": true
+                },
+                {
+                    "containerPath": "/sys/kernel/debug",
+                    "sourceVolume": "debug"
+                }
+            ],
+            "environment": [
+                {
+                    "name": "DD_API_KEY",
+                    "value": "<YOUR_DATADOG_API_KEY>"
+                },
+                {
+                    "name": "DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED",
+                    "value": "true"
+                }
+            ],
+            "linuxParameters": {
+                "capabilities": {
+                    "add": [
+                        "SYS_ADMIN",
+                        "SYS_RESOURCE",
+                        "SYS_PTRACE",
+                        "NET_ADMIN",
+                        "NET_BROADCAST",
+                        "NET_RAW",
+                        "IPC_LOCK",
+                        "CHOWN"
+                    ]
+                }
+            }
+        }
+    ],
+    "requiresCompatibilities": [
+        "EC2"
+    ],
+    "volumes": [
+        {
+            "host": {
+                "sourcePath": "/var/run/docker.sock"
+            },
+            "name": "docker_sock"
+        },
+        {
+            "host": {
+                "sourcePath": "/proc/"
+            },
+            "name": "proc"
+        },
+        {
+            "host": {
+                "sourcePath": "/sys/fs/cgroup/"
+            },
+            "name": "cgroup"
+        },
+        {
+            "host": {
+                "sourcePath": "/opt/datadog-agent/run"
+            },
+            "name": "pointdir"
+        },
+        {
+            "host": {
+                "sourcePath": "/var/lib/docker/containers/"
+            },
+            "name": "containers_root"
+        },
+        {
+            "host": {
+                "sourcePath": "/sys/kernel/debug"
+            },
+            "name": "debug"
+        }
+    ],
+    "family": "datadog-agent-task"
+}
+```
+
+If the OS image is Ubuntu or Debian, then add the following after `environment`:
+
+```yaml
+"dockerSecurityOptions": [
+  "apparmor:unconfined"
+]
+```
+
+{{% /tab %}}
+
 {{% tab "Windows" %}}
 
 **For services running on IIS:**
