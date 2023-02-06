@@ -7,6 +7,10 @@ CWS...
 
 Security profiles...
 
+With this information, CWS generates [suppression suggestions](#suppress-signals-based-on-suggested-actions).
+
+{{< img src="security/cws/security_profiles/security-profiles-overview.png" alt="Cloud Workload Security security profile page" width="100%">}}
+
 Security profiles provide a baseline a workload's typical behavior in order to surface unusual activity.
 
 - Allows you to view how common...
@@ -16,7 +20,7 @@ Security profiles provide a baseline a workload's typical behavior in order to s
 - Associate security profiles to provide additional workload behavior context when investigating security signals.
 - Link to full security profile details from within the signal view to distinguish between potential threats and normal workload behavior.
 
-auto generated once you have enabled activity dumps in the agent.  There are settings on how many workload containers are profiled at the same time (default: 3) and for what period of time (default: 30 minutes).  These parameters will be configurable via the UI in the next release update. There will be no ability for customers to create their own security profile.  This is behavior learning so we are capturing what the workload is actually doing across all similar workloads in the customer environment.
+auto generated once you have enabled activity dumps in the agent. There are settings on how many workload containers are profiled at the same time (default: 3) and for what period of time (default: 30 minutes). These parameters will be configurable via the UI in the next release update. There will be no ability for customers to create their own security profile. This is behavior learning so we are capturing what the workload is actually doing across all similar workloads in the customer environment.
 
 Datadog Cloud Security Management reduces an organization's alerting signal-to-noise ratio by using Workload Security Profiles, which create a baseline out of a workload's typical behavior in order to surface unusual activity. For example, an attacker may attempt to launch a new cron job on a host in order to execute malicious code. Datadog Cloud Security Management can automatically flag this kind of activity as suspicious behavior in the Security Overview Page.
 
@@ -27,6 +31,7 @@ Status for ML model: Stable / Learning
 ## Explore security profiles
 
 main page/tab
+
 detailed view includes:
 
 - commonality score
@@ -39,7 +44,27 @@ commonality scores explained further
 
 {{< img src="security/cws/security_profiles/security-profile-modeled-activity.png" alt="Cloud Workload Security security profile page" width="50%">}}
 
+placeholder
+
+{{< img src="security/cws/security_profiles/signal-security-profile.png" alt="Cloud Workload Security security profile page" width="80%">}}
+
 ## Suppress signals based on suggested actions
+
+On the Signals page,
+
+view security profile
+view activity detail
+suppress signals
+
+- click suppress signals button to open new dialog box. Create a suppression query
+
+If a suppression isn't generated...
+
+If the signal does not match any known security profile, <-- Maybe should go with "Explore Security Profiles" section...
+
+**Add Suppression to Rule**.
+
+{{< img src="security/cws/security_profiles/suppression-suggestion.png" alt="Cloud Workload Security security profile page" width="80%">}}
 
 ## Adjust security profiles settings
 
