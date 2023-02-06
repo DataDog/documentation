@@ -28,11 +28,11 @@ Make sure you have a [Datadog API Key][10] and are using a programming language 
 
 To deploy a sample application without the need to follow the rest of the guide, you can use on of [these examples][12]. The installation process will ask the required details such as the Datadog API Key. Note that these applications send data to the default website `datadoghq.com`.
 
-### Instrument your application
+### 1. Instrument your application
 
 To build your container with Datadog instrumentation you can follow one of these two methods, depending if you are using a Dockerfile or buildpack.
 
-#### Instrument using Dockerfile
+#### 1.a Instrument using Dockerfile
 
 You can instrument your application by adding the following lines to your Dockerfile. You may need to adjust these examples depending on your existing Dockerfile setup.
 
@@ -59,7 +59,7 @@ CMD ["/path/to/your-go-binary"]
 More details on the [Go tracing library][2].
 
 [1]: https://github.com/DataDog/crpb/tree/main/go
-[2]: https://docs.datadoghq.com/serverless/installation/go/?tab=serverlessframework#install-the-datadog-lambda-library
+[2]: /serverless/installation/go/?tab=serverlessframework#install-the-datadog-lambda-library
 
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
@@ -197,11 +197,11 @@ More details on the [Ruby tracing library][2].
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-#### Instrument using buildpack
+#### 1.b Instrument using buildpack
 
 [`Pack Buildpacks`][4] provide a convenient way to package your container without using a Dockerfile. This example will use the GCP container registry and Datadog serverless buildpack.
 
-**Note** follow the instruction to install the [tracing library][13] for your language before running the buildpack
+**Note** follow the instruction to install the [tracing library][2] for your language before running the buildpack.
 
 Build your application by running the following command:
 
@@ -214,35 +214,16 @@ Build your application by running the following command:
 
 **Note**: Not compatible with Alpine.
 
-### Push the container image to a registry
+### 2. Datadog Agent Configuration
 
-Depending on your deployment process, push the image built to a registry. The `gcr.io` prefix in the examples above assumed [Google Cloud Registry][11].
+Once the container is built and pushed to your registry, the last step is to set the required environment variables for the  Datadog agent:
+- `DD_API_KEY`: Datadog API key, used to send data to your Datadog account. It should be configured as a GCP Secret for privacy and safety issue.
+- `DD_SITE`: Datadog endpoint and website. If the correct SITE is selected on the right of this page it is {{< region-param key="dd_site" code="true" >}}.
+- `DD_TRACE_ENABLED`: set to `true` to enable tracing
 
-### Deploy the Application with the Datadog Agent
+For more environment variables and their function, see [Additional Configurations](#additional-configurations)
 
-{{< tabs >}}
-
-{{% tab "Cloud Run web UI" %}}
-
-1. Create a secret with Datadog API key. This can be done via [Secret Manager](https://console.cloud.google.com/security/secret-manager) in your GCP console and clicking on **Create secret**. Set a name (for example, `datadog-api-key`) in the **Name** field. Then, paste your Datadog API key in the **Secret value** field.
-
-2. Go to [Cloud Run](https://console.cloud.google.com/run) in your GCP console. and click on **Create service**.
-
-3. Select **Deploy one revision from an existing container image**. Choose your previously built image.
-
-4. Select your invocation authentication method.
-
-5. Reference your previously created secret, named `datadog-api-key` in this guide. Go to the **Container, Networking, Security** section and select the **Secrets** tab. click on **Reference a secret** and choose the secret you created from your Datadog API key. You may need to grant your user access to the secret.
-
-6. Under **Reference method**, select **Exposed as environment variable**.
-
-7. Under the **Environment variables** section, ensure that the name is set to `DD_API_KEY`.
-
-8. Still under **Environment variables**, create two more variables. One named `DD_TRACE_ENABLED` set to `true` to enable tracing. Another named `DD_SITE` containing the Datadog site which will collect the data (if not set, it defaults to `datadoghq.com`). Your `DD_SITE` is {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right of the page).
-
-{{% /tab %}}
-{{% tab "gcloud CLI" %}}
-For testing purpose, the Datadog API key can be exposed as an environment variable. That is unsafe due to its value being displayed in plaintext. Allowing any external connection to reach the service, this one line command will deploy the service. It expects `DD_API_KEY` to be set as environment variable and a service listening to port 80
+Allowing any external connection to reach the service, this one line command will deploy the service. It expects `DD_API_KEY` to be set as environment variable and your service listening to port 80
 
 ```shell
 gcloud run deploy APP_NAME --image=gcr.io/YOUR_PROJECT/APP_NAME \
@@ -254,16 +235,13 @@ gcloud run deploy APP_NAME --image=gcr.io/YOUR_PROJECT/APP_NAME \
 
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+### 3. Results
 
-### Results
-
-Once the deploy is completed, you should be able to see metrics and traces of your Cloud Run application in the Datadog UI after at most a few minutes!
+Once the deploy is completed, your metrics and traces will be sent to your Datadog UI after a few minutes at most! Navigate to `Infrastructure->Serverless` to see the Ser
 
 ## Additional Configurations
 
-- **Tracing:** the Datadog Agent already provides some basic tracing for popular frameworks. Follow the guide for [advanced tracing](2) for more
+- **Advanced Tracing:** the Datadog Agent already provides some basic tracing for popular frameworks. Follow the guide for [advanced tracing][2] for more
 
 - **Logs:** If you use [GCP integration][1] your logs are already being collected. Alternatively, you can set the `DD_LOGS_ENABLED` environment variable to `true` to capture application logs through the serverless instrumentation directly.
 
@@ -328,5 +306,3 @@ RUN apt-get update && apt-get install -y ca-certificates
 [11]: https://cloud.google.com/run/docs/deploying.
 
 [12]: https://github.com/DataDog/crpb/tree/main
-
-[13]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/
