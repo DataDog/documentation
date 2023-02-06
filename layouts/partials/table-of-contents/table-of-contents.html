@@ -19,13 +19,11 @@
                   </ul>
                 </nav>
               {{else if eq .Page.Type "schema"}}
-              {{ $schema_data := (index .Page.Params.list_section) }}
+              {{ $schema_data := .Page.Params.list_section }}
                 <nav id="TableOfContents">
                   <ul>
-                    {{ range $single_object := $schema_data }}
-                      {{ range $key, $value := $single_object}}
-                        <li><a href="#{{ $key | anchorize }}">{{ $key }}</a></li>
-                      {{ end }}
+                    {{ range $key, $value := $schema_data}}
+                      <li><a href="#{{ $key | anchorize }}">{{ $key | upper }}</a></li>
                     {{ end }}
                   </ul>
                 </nav>

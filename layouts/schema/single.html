@@ -15,13 +15,12 @@
   {{ with .Content }}{{ . }}{{ end }}
   <!-- Build The Nav-->
   <!-- Loop over the array of sections  -->
-  {{ range $section := .Params.list_section}}
+  {{ range $key, $value := .Params.list_section}}
   <!-- Extract the key (section name) and value (section description) from each item -->
-  {{ range $key, $value := $section }}
     <!-- Set the lowercase key to a variable to use in the findRE function -->
     {{ $lowerKey := $key | lower}}
     <!-- Add the Section Title   -->
-    <h2 id="{{ $key | anchorize }}">{{ $key }}</h2>
+    <h2 id="{{ $key | anchorize }}">{{ $key | upper }}</h2>
     <!-- Add the Section Description   -->
     <p>{{ $value  | markdownify }}</p>
 
@@ -44,7 +43,6 @@
       {{ end }}
       {{ end }}
     </div>
-  {{ end }}
   {{ end }}
 
 {{ end }}
