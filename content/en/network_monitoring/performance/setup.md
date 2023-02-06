@@ -90,7 +90,7 @@ Network Performance Monitoring supports use of the following provisioning system
 
 ## Setup
 
-Given this tool's focus and strength is in analyzing traffic _between_ network endpoints and mapping network dependencies, it is recommended to install it on a meaningful subset of your infrastructure and a **_minimum of 2 hosts_** to maximize value. 
+Given this tool's focus and strength is in analyzing traffic _between_ network endpoints and mapping network dependencies, it is recommended to install it on a meaningful subset of your infrastructure and a **_minimum of 2 hosts_** to maximize value.
 
 {{< tabs >}}
 {{% tab "Agent (Linux)" %}}
@@ -206,7 +206,7 @@ To enable Network Performance Monitoring for Windows hosts:
     ```shell
     net /y stop datadogagent && net start datadogagent
     ```
-**Note**: Network Performance Monitoring monitors Windows hosts only, and not Windows containers. 
+**Note**: Network Performance Monitoring monitors Windows hosts only, and not Windows containers.
 
 
 [1]: /agent/basic_agent_usage/windows/?tab=commandline
@@ -387,7 +387,7 @@ To enable Network Performance Monitoring in Docker, use the following configurat
 $ docker run --cgroupns host \
 --pid host \
 -e DD_API_KEY="<DATADOG_API_KEY>" \
--e DD_SYSTEM_PROBE_ENABLED=true \
+-e DD_SYSTEM_PROBE_NETWORK_ENABLED=true \
 -e DD_PROCESS_AGENT_ENABLED=true \
 -v /var/run/docker.sock:/var/run/docker.sock:ro \
 -v /proc/:/host/proc/:ro \
@@ -416,7 +416,7 @@ services:
   datadog:
     image: "gcr.io/datadoghq/agent:latest"
     environment:
-       DD_SYSTEM_PROBE_ENABLED: 'true'
+       DD_SYSTEM_PROBE_NETWORK_ENABLED: 'true'
        DD_PROCESS_AGENT_ENABLED: 'true'
        DD_API_KEY: '<DATADOG_API_KEY>'
     volumes:
