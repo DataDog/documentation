@@ -21,7 +21,7 @@
     <!-- Set the lowercase key to a variable to use in the findRE function -->
     {{ $lowerKey := $key | lower}}
     <!-- Add the Section Title   -->
-    <h2 id="{{ $key | anchorize }}"><a href="#{{ $key | anchorize }}">{{ $key }}</a></h2>
+    <h2 id="{{ $key | anchorize }}">{{ $key }}</h2>
     <!-- Add the Section Description   -->
     <p>{{ $value  | markdownify }}</p>
 
