@@ -176,7 +176,7 @@ Live Container data is automatically collected by the Datadog Agent container. T
        "environment": [
          (...)
          {
-           "name": "DD_SYSTEM_PROBE_ENABLED",
+           "name": "DD_SYSTEM_PROBE_NETWORK_ENABLED",
            "value": "true"
          }
        ],
