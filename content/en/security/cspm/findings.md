@@ -71,24 +71,15 @@ Sometimes, a finding does not match the use case for your business, or you choos
 
 For example, the ['Block Public Access' feature is enabled for S3 bucket][4] rule evaluates whether an S3 bucket is publicly accessible. If you have an S3 bucket with static assets that are meant to be publicly shared, you can mute the finding for the S3 bucket.
 
-You can mute pass/fail findings at any time. Muted findings do not impact your posture score.
+You can mute pass/fail findings at any time. Muting a finding removes it from the calculation of your posture score.
 
 {{< img src="security/cspm/findings/muted-findings.png" alt="The Mute findings dialog box contains fields for specifying the reason and duration of the mute" style="width:100%;">}}
 
 1. On the [finding side panel](#explore-your-cloud-misconfigurations-with-findings), select a resource.
 2. Click **Mute**.
-3. Select a reason for the mute:
-    - Pending fix
-    - False positive
-    - Accepted risk
-    - Other
+3. Select a reason for the mute, for example, a fix is pending, it's a false positive, or it's an accepted risk.
 4. Enter an optional **Description**.
-5. Select the duration of the mute:
-    - 2 weeks
-    - 1 month
-    - 3 months
-    - Indefinite
-    - Custom
+5. Select the duration of the mute.
 6. Click **Mute**.
 
 ### Unmute a finding
@@ -97,11 +88,7 @@ Muted findings automatically unmute after the specified mute duration expires. Y
 
 1. On the [finding side panel](#explore-your-cloud-misconfigurations-with-findings), select the resource with the muted finding.
 2. Click **Unmute**.
-3. Select a reason for the unmute:
-    - No Pending Fix
-    - Human Error
-    - No Longer Accepted Risk
-    - Other
+3. Select a reason for the unmute, for example, there's no pending fix, it was a human error, or it's no longer an accepted risk.
 4. Enter an optional **Description**.
 5. Click **Unmute**.
 
@@ -119,4 +106,4 @@ To view your organization's muted findings:
 [1]: https://app.datadoghq.com/security/compliance?time=now
 [2]: /security/cloud_siem/
 [3]: /security/cloud_workload_security/
-[4]: /security/default_rules/cis-aws-1.3.0-1.20/
+[4]: /security/default_rules/cis-aws-1.5.0-2.1.5/
