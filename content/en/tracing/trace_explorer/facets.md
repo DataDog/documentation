@@ -33,11 +33,12 @@ The [Trace Explorer][6] includes out-of-the-box facets such as `Status` and `Ser
 ### Qualitative facets
 
 Use qualitative facets when you need to:
+
 - **Get relative insights** for values. For example, create a facet on a `datacenter` span tag to scope down the investigation to one specific region when slow requests are detected.
 - **Count unique values**. For example, create a facet on `usr.email` to see how many distinct users experience errors while loading a specific resource.
 - Frequently **filter** your spans against particular values. For example, create a facet on an environment tag to scope troubleshooting down to development, staging, or production environments.<br>
 
-  **Note:** Although facets are not required for filtering on tags, defining facets for tags that you often use during investigations can help reduce your time to resolution.
+**Note:** Although facets are not required for filtering on tags, defining facets for tags that you often use during investigations can help reduce your time to resolution.
 
 ### Quantitative facets (measures)
 
