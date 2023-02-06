@@ -15,6 +15,9 @@ further_reading:
 - link: "/agent/guide/agent-configuration-files/"
   tag: "FAQ"
   text: "Location of all Agent configuration files"
+- link: "https://www.datadoghq.com/blog/engineering/performance-improvements-in-the-datadog-agent-metrics-pipeline/"
+  tag: "Blog"
+  text: "Performance Improvements in the Datadog Agent Metrics Pipeline"
 ---
 
 {{< partial name="platforms/platforms.html" links="platforms" >}}
