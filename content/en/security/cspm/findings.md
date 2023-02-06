@@ -64,12 +64,12 @@ The side panel lists detection rules that were evaluated against the resource, s
 ## Mute findings
 
 {{< callout url="" btn_hidden="true" >}}
-  Muted findings is a beta feature available to all CSPM customers. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.
+  Muted findings is a beta feature available to all CSPM customers. If you have feedback or questions, contact <a href="/help">Datadog support</a>.
 {{< /callout >}} 
 
-There may be times when a finding does not match the use case for your business, or you choose to accept it as a known risk. To ignore these findings, you can mute the finding for the impacted resource. This allows you to focus on high-severity and critical findings that require your attention.
+Sometimes, a finding does not match the use case for your business, or you choose to accept it as a known risk. To ignore these findings, mute the finding for the impacted resource so you can focus on high-severity and critical findings.
 
-For example, the ['Block Public Access' feature is enabled for S3 bucket][4] rule evaluates whether a S3 bucket is publicly accessible. If you have a S3 bucket with static assets that are meant to be publicly shared, you can mute the finding for the S3 bucket.
+For example, the ['Block Public Access' feature is enabled for S3 bucket][4] rule evaluates whether an S3 bucket is publicly accessible. If you have an S3 bucket with static assets that are meant to be publicly shared, you can mute the finding for the S3 bucket.
 
 You can mute pass/fail findings at any time. Muted findings do not impact your posture score.
 
