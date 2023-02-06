@@ -427,9 +427,8 @@ service_monitoring_config:
 
 {{% tab "ECS" %}}
 
-The following json represents the `task definition` of `USM` (and `system-probe`) for ECS.
+For ECS, enable USM and the system probe with the following JSON task definition. Deploy the task definition as a [daemon service][1]. 
 
-The `task` should be deployed as `daemon service` (follow instructions [here](https://docs.datadoghq.com/containers/amazon_ecs/?tab=awscli#run-the-agent-as-a-daemon-service))
 ```json
 {
     "containerDefinitions": [
@@ -489,7 +488,7 @@ The `task` should be deployed as `daemon service` (follow instructions [here](ht
 }
 ```
 
-If the OS image is Ubuntu or Debian, then add the following after `environment`:
+If the operating system image is Ubuntu or Debian, add the following after `environment`:
 
 ```yaml
 "dockerSecurityOptions": [
@@ -497,6 +496,7 @@ If the OS image is Ubuntu or Debian, then add the following after `environment`:
 ]
 ```
 
+[1]: /containers/amazon_ecs/?tab=awscli#run-the-agent-as-a-daemon-service
 {{% /tab %}}
 
 {{% tab "Windows" %}}
