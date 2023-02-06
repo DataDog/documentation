@@ -3509,7 +3509,7 @@ main:
     url: developers/integrations/oauth_for_integrations
     parent: dev_tools_integrations
     weight: 405
-  - name: Python
+  - name: Install Agent Integration Developer Tool
     url: developers/integrations/python/
     parent: dev_tools_integrations
     weight: 406
