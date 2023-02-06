@@ -376,7 +376,7 @@ compression = "gzip"
 
 ### Disk buffers
 
-Datadog recommends enabling disk buffers to prevent data loss. The Observability Pipelines Worker uses [disk buffers][14] to ensure no data is lost when there is a spike in data being sent or the downstream service is sending back pressure. See the configuration below for setting buffers at the sink level.
+Datadog recommends enabling disk buffers to prevent data loss. The Observability Pipelines Worker uses disk buffers to ensure no data is lost when there is a spike in data being sent or the downstream service is sending back pressure. See the configuration below for setting buffers at the sink level.
 
 {{< tabs >}}
 {{% tab "YAML" %}}
@@ -481,7 +481,7 @@ observability_pipelines_worker:
 {{% /tab %}}
 {{< /tabs >}}
 
-Read more about [architecting buffers][15].
+Read more about [architecting buffers][14].
 
 ## Further Reading
 
@@ -500,5 +500,4 @@ Read more about [architecting buffers][15].
 [11]: /getting_started/tagging
 [12]: /observability_pipelines/reference/sinks/#datadoglogs
 [13]: /observability_pipelines/reference/sinks/#datadogmetrics
-[14]: https://vector.dev/docs/about/concepts/#buffers
-[15]: https://vector.dev/docs/setup/going-to-prod/architecting/#buffering-data
+[14]: /observability_pipelines/production_deployment_overview/architecture_design_and_principles/#buffering-data

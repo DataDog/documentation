@@ -2,6 +2,8 @@
 import os
 
 import requests
+from requests.adapters import HTTPAdapter
+from requests.packages.urllib3.util.retry import Retry
 import glob
 import shutil
 from github_connect import GitHub
@@ -34,6 +36,16 @@ def download_from_repo(github_token, org, repo, branch, globs, extract_dir, comm
         )
         with Pool(processes=pool_size) as pool:
             with requests.Session() as s:
+                retries = Retry(
+                    total=3,
+                    read=3,
+                    connect=3,
+                    backoff_factor=0.3,
+                    status_forcelist=[429],
+                    respect_retry_after_header=True
+                )
+                s.mount('https://', HTTPAdapter(max_retries=retries, pool_connections=10, pool_maxsize=pool_size))
+                s.mount('http://', HTTPAdapter(max_retries=retries, pool_connections=10, pool_maxsize=pool_size))
                 r = [
                     x
                     for x in pool.imap_unordered(
