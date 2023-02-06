@@ -500,4 +500,4 @@ Read more about [architecting buffers][14].
 [11]: /getting_started/tagging
 [12]: /observability_pipelines/reference/sinks/#datadoglogs
 [13]: /observability_pipelines/reference/sinks/#datadogmetrics
-[14]: https://docs.datadoghq.com/observability_pipelines/production_deployment_overview/architecture_design_and_principles/#buffering-data
+[14]: /observability_pipelines/production_deployment_overview/architecture_design_and_principles/#buffering-data
