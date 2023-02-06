@@ -34,7 +34,7 @@
         <a class="list-group-item list-group-item-action list-group-item-white  d-flex justify-content-between align-items-center" href='/security/cspm/custom_rules/{{ trim .Name ".md" }}/'>
           <span class="w-100 d-flex justify-content-between">
               <span class="text">
-                <code>{{ trim .Name ".md" }}</code>
+                <code>{{ strings.TrimSuffix ".md" .Name }}</code>
               </span>
           </span>
           {{- partial "img.html" (dict "root" $dot "src" "icons/list-group-whats-next-arrow-1.png" "class" "img-fluid static" "alt" "more") -}}
