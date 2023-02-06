@@ -15,9 +15,9 @@ further_reading:
 kind: documentation
 title: OpenTelemetry Support
 ---
-The [Datadog Tracking HTTP Client][1] package and [gRPC Interceptor][2] package both support distributed traces through both automatic header generation and header ingestion.
+The [Datadog Tracking Http Client][1] package and [gRPC Interceptor][2] package both support distributed traces through both automatic header generation and header ingestion.
 
-## Datadog header generation
+## Datadog Header Generation
 
 When configuring your tracking client or gRPC Interceptor, you can specify the types of tracing headers you want Datadog to generate. For example, if you want to send `b3` headers to `example.com` and `tracecontext` headers for `myapi.names`, you can do so with the following code:
 
@@ -38,7 +38,7 @@ final configuration = DdSdkConfiguration(
 );
 ```
 
-Then enable tracing as normal.
+You can then enable tracing as usual.
 
 This information is merged with any hosts set on `DdSdkConfiguration.firstPartyHosts`. Hosts specified in `firstPartyHosts` generate Datadog Tracing Headers by default.
 
