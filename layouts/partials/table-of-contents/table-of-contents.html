@@ -18,6 +18,17 @@
                     {{ end }}
                   </ul>
                 </nav>
+              {{else if eq .Page.Type "schema"}}
+              {{ $schema_data := (index .Page.Params.list_section) }}
+                <nav id="TableOfContents">
+                  <ul>
+                    {{ range $single_object := $schema_data }}
+                      {{ range $key, $value := $single_object}}
+                        <li><a href="#{{ $key | anchorize }}">{{ $key }}</a></li>
+                      {{ end }}
+                    {{ end }}
+                  </ul>
+                </nav>
               {{ else }}
                 {{ .TableOfContents }}
               {{ end }}
