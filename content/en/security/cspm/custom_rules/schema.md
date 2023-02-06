@@ -1,9 +1,11 @@
 ---
 title: Cloud Resources Schema Reference
 kind: documentation
-type: cspm
+type: schema
+
 aliases:
   - /security_platform/cspm/custom_rules/schema
+
 list_section:
   - AWS: Review detailed information about AWS resource types in the following pages.
   - Azure: Review detailed information about Azure resource types in the following pages.

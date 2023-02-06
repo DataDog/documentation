@@ -13,20 +13,17 @@
 
   <!-- Page Content-->
   {{ with .Content }}{{ . }}{{ end }}
-<div>
   <!-- Build The Nav-->
   <!-- Loop over the array of sections  -->
   {{ range $section := .Params.list_section}}
   <!-- Extract the key (section name) and value (section description) from each item -->
   {{ range $key, $value := $section }}
-    <!-- Set the lowercase key to a variable since it's reused a few times -->
+    <!-- Set the lowercase key to a variable to use in the findRE function -->
     {{ $lowerKey := $key | lower}}
     <!-- Add the Section Title   -->
-    <h2 id="{{ $lowerKey }}">
-      <a href="#{{ $lowerKey }}"> {{ $key | upper }} </a>
-    </h2>
+    <h2 id="{{ $key | anchorize }}"><a href="#{{ $key | anchorize }}">{{ $key }}</a></h2>
     <!-- Add the Section Description   -->
-    <p>{{ $value }}</p>
+    <p>{{ $value  | markdownify }}</p>
 
     <!-- Loop over the file names and display with links -->
     <div class="whatsnext mb-3">
@@ -49,7 +46,6 @@
     </div>
   {{ end }}
   {{ end }}
-</div>
 
 {{ end }}
 
