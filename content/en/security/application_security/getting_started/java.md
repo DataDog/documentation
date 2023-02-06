@@ -26,9 +26,11 @@ You can monitor application security for Java apps running in Docker, Kubernetes
 
 {{% appsec-getstarted %}}
 
+{{% appsec-getstarted-with-rc %}}
+
 ## Get started
 
-1. **Update your [Datadog Java library][1]** to at least version 0.94.0:
+1. **Update your [Datadog Java library][1]** to at least version 0.94.0 (at least version 1.1.4 for Risk Management vulnerability detection features):
    ```shell
    wget -O dd-java-agent.jar 'https://github.com/DataDog/dd-trace-java/releases/latest/download/dd-java-agent.jar'
    ```
@@ -111,9 +113,9 @@ java -javaagent:dd-java-agent.jar \
 
    {{< /tabs >}}
 
-{{% appsec-getstarted-2-canary %}}
+{{% appsec-getstarted-2-plusrisk %}}
 
-{{< img src="/security/application_security/application-security-signal.png" alt="Security Signal details page showing tags, metrics, suggested next steps, and attacker IP addresses associated with a threat." style="width:100%;" >}}
+{{< img src="/security/application_security/appsec-getstarted-threat-and-vuln.mp4" alt="Video showing Signals explorer and details, and Vulnerabilities explorer and details." video="true" >}}
 
 ## Further Reading
 

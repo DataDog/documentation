@@ -57,7 +57,7 @@ La solution NPM Datadog ne prend pas en charge les plateformes macOS.
 
 ### Containers
 
-NPM vous aide à visualiser l'architecture et les performances de vos environnements orchestrés et conteneurisés, avec la prise en charge de [Docker][5], [Kubernetes][6], [ECS][7], et d'autres technologies de conteneur. Les intégrations pour conteneurs de Datadog vous permettent d'agréger le trafic en fonction d'entités pertinentes (conteneurs, tâches, pods, clusters, déploiements, etc.) grâce à des tags prêts à l'emploi (tels que `container_name`, `task_name` et `kube_service`). 
+NPM vous aide à visualiser l'architecture et les performances de vos environnements orchestrés et conteneurisés, avec la prise en charge de [Docker][5], [Kubernetes][6], [ECS][7], et d'autres technologies de conteneur. Les intégrations pour conteneurs de Datadog vous permettent d'agréger le trafic en fonction d'entités pertinentes (conteneurs, tâches, pods, clusters, déploiements, etc.) grâce à des tags prêts à l'emploi (tels que `container_name`, `task_name` et `kube_service`).
 
 ### Outils de routage réseau
 
@@ -179,7 +179,7 @@ Si ces utilitaires ne sont pas disponibles pour votre distribution, suivez les m
 
 La collecte de logs réseau pour Windows repose sur un pilote de filtre.
 
-Pour activer NPM pour des hosts Windows, procédez comme suit 
+Pour activer NPM pour des hosts Windows, procédez comme suit
 
 1. Installez l'[Agent Datadog][1 (version 7.27.1+) en prenant soin d'activer le composant du pilote de filtre.
 
@@ -201,7 +201,7 @@ Pour activer NPM pour des hosts Windows, procédez comme suit 
     ```shell
     net /y stop datadogagent && net start datadogagent
     ```
-**Remarque** : NPM surveille uniquement des hosts Windows, et non des conteneurs Windows. 
+**Remarque** : NPM surveille uniquement des hosts Windows, et non des conteneurs Windows.
 
 
 [1]: /fr/agent/basic_agent_usage/windows/?tab=commandline
@@ -255,7 +255,7 @@ Si l'[Agent est déjà exécuté avec un manifeste][4] :
                       # (...)
                           - name: DD_PROCESS_AGENT_ENABLED
                             value: 'true'
-                          - name: DD_SYSTEM_PROBE_ENABLED
+                          - name: DD_SYSTEM_PROBE_NETWORK_ENABLED
                             value: 'true'
                           - name: DD_SYSTEM_PROBE_EXTERNAL
                             value: 'true'
@@ -382,7 +382,7 @@ Pour configurer la fonctionnalité Network Performance Monitoring dans Docker, u
 $ docker run --cgroupns host \
 --pid host \
 -e DD_API_KEY="<CLÉ_API_DATADPG>" \
--e DD_SYSTEM_PROBE_ENABLED=true \
+-e DD_SYSTEM_PROBE_NETWORK_ENABLED=true \
 -e DD_PROCESS_AGENT_ENABLED=true \
 -v /var/run/docker.sock:/var/run/docker.sock:ro \
 -v /proc/:/host/proc/:ro \
@@ -411,7 +411,7 @@ services:
   datadog:
     image: "gcr.io/datadoghq/agent:latest"
     environment:
-       DD_SYSTEM_PROBE_ENABLED: 'true'
+       DD_SYSTEM_PROBE_NETWORK_ENABLED: 'true'
        DD_PROCESS_AGENT_ENABLED: 'true'
        DD_API_KEY: '<CLÉ_API_DATADOG>'
     volumes:

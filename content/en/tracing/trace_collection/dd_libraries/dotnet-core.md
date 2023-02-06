@@ -218,10 +218,13 @@ For information about the different methods for setting environment variables, s
 
 #### Services not in IIS
 
+<div class="alert alert-info">Starting v2.14.0, you don't need to set <code>CORECLR_PROFILER</code> if you installed the tracer using the MSI.</div>
+
 1. Set the following required environment variables for automatic instrumentation to attach to your application:
 
    ```
    CORECLR_ENABLE_PROFILING=1
+   CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    ```
 2. For standalone applications and Windows services, manually restart the application.
 
@@ -322,6 +325,8 @@ To attach automatic instrumentation to your service, you must set the required e
 
 #### Windows services
 
+<div class="alert alert-info">Starting v2.14.0, you don't need to set <code>CORECLR_PROFILER</code> if you installed the tracer using the MSI.</div>
+
 {{< tabs >}}
 
 {{% tab "Registry Editor" %}}
@@ -330,6 +335,7 @@ In the Registry Editor, create a multi-string value called `Environment` in the 
 
 ```text
 CORECLR_ENABLE_PROFILING=1
+CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 ```
 
 {{< img src="tracing/setup/dotnet/RegistryEditorCore.png" alt="Using the Registry Editor to create environment variables for a Windows service" >}}
@@ -339,7 +345,7 @@ CORECLR_ENABLE_PROFILING=1
 {{% tab "PowerShell" %}}
 
 ```powershell
-[string[]] $v = @("CORECLR_ENABLE_PROFILING=1")
+[string[]] $v = @("CORECLR_ENABLE_PROFILING=1", "CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}")
 Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<SERVICE NAME> -Name Environment -Value $v
 ```
 {{% /tab %}}
@@ -353,6 +359,8 @@ To automatically instrument a console application, set the environment variables
 ```bat
 rem Set environment variables
 SET CORECLR_ENABLE_PROFILING=1
+rem Unless v2.14.0+ and you installed the tracer with the MSI
+SET CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 
 rem Start application
 dotnet.exe example.dll

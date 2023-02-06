@@ -20,9 +20,12 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/troubleshoot-with-session-replay-developer-tools/"
     tag: "Blog"
     text: "Troubleshoot with Session Replay browser dev tools"
+  - link: "https://www.datadoghq.com/blog/correlate-traces-datadog-rum-otel/"
+    tag: "Blog"
+    text: "Correlate Datadog RUM events with traces from OTel-instrumented applications"
 ---
 
-{{< img src="real_user_monitoring/connect_rum_and_traces/rum_trace_tab.png" alt="RUM and Traces"  style="width:100%;">}}
+{{< img src="real_user_monitoring/connect_rum_and_traces/rum_trace_tab.png" alt="RUM and Traces" style="width:100%;">}}
 
 ## Overview
 

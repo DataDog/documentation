@@ -171,7 +171,7 @@ Live Container のデータは、Datadog Agent コンテナによって自動的
        "environment": [
          (...)
          {
-           "name": "DD_SYSTEM_PROBE_ENABLED",
+           "name": "DD_SYSTEM_PROBE_NETWORK_ENABLED",
            "value": "true"
          }
        ],

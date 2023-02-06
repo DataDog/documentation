@@ -4,9 +4,9 @@ dependencies:
 kind: documentation
 title: データインテグレーションのための OAuth
 ---
-{{< beta-callout btn_hidden="true" >}}
+{{< callout btn_hidden="true" >}}
   Datadog Developer Platform は現在ベータ版です。アクセス権をお持ちでない場合は、apps@datadoghq.com までご連絡ください。
-{{< /beta-callout >}} 
+{{< /callout >}} 
 
 ## 概要
 
