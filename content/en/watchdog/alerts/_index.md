@@ -62,23 +62,19 @@ Enter text in the **Filter alerts** search box to search over your alert titles.
 
 The left side of the Watchdog alerts feed contains the search facets below. Check the corresponding boxes to filter your alerts by facet.
 
-| General Facet           | Description                                                                       |
-|-----------------|-----------------------------------------------------------------------------------|
-| Alert Category  | Display all `apm`, `infrastructure`, or `logs` alerts.                            |
-| Alert Type      | Select alerts using metrics from APM or infrastructure integrations.              |
-| Environment     | The environment to display alerts from. See [Unified Service Tagging][5] for more information about the `env` tag.                                                                      |
-| Service         | The service to display alerts from. See [Unified Service Tagging][5] for more information about the `service` tag.                                                                  |
+| All Alerts Group    | Description                                                           |
+|---------------------|-----------------------------------------------------------------------|
+| Alert Category      | Display all `apm`, `infrastructure`, or `logs` alerts.                |
+| Alert Type          | Select alerts using metrics from APM or infrastructure integrations.  |
+| APM Primary Tag     | The [defined APM primary tag][6] to display alerts from.              |
+| Environment         | The environment to display alerts from. See [Unified Service Tagging][5] for more information about the `env` tag.                                                                                          |
+| Service             | The service to display alerts from. See [Unified Service Tagging][5] for more information about the `service` tag.                                                                                          |
 
-
-| APM-specific Facet          | Description                                                                       |
-|-----------------|-----------------------------------------------------------------------------------|
-| APM Primary Tag | The [defined APM primary tag][6] to display alerts from.                          |
-
-| Log-specific Facet          | Description                                                                       |
-|-----------------|-----------------------------------------------------------------------------------|
-| Log Anomaly Type| Only display log anomalies of this type. The supported types are new log patterns and increases in existing log patterns.                                                                                             |
-| Log Source      | Only display alerts containing logs from this source.                             |
-| Log Status      | Only display alerts containing logs of this log status.                           |
+| Logs Group      | Description                                                           |
+|-----------------|-----------------------------------------------------------------------|
+| Log Anomaly Type| Only display log anomalies of this type. The supported types are new log patterns and increases in existing log patterns.                                                                                 |
+| Log Source      | Only display alerts containing logs from this source.                 |
+| Log Status      | Only display alerts containing logs of this log status.               |
 
 
 
