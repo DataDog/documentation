@@ -89,5 +89,5 @@ Pause the execution of the workflow for a duration specified in seconds.
 
 [1]: /workflows/build/#context-variables
 [2]: https://docs.datadoghq.com/api/latest/ip-ranges/#list-ip-ranges
-[3]: /workflows/setup/
+[3]: /workflows/access/
 [4]: https://lodash.com/

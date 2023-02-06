@@ -52,7 +52,7 @@ L'exemple suivant montre comment effectuer une surveillance générale de l'infr
 
 1. Pour les conteneurs Linux, téléchargez le fichier [datadog-agent-ecs.json][20]
     1. Si vous utilisez une AMI Amazon Linux 1 d'origine, utilisez [datadog-agent-ecs1.json][21]
-    2. Si vous êtes sous Windows, utilisez [datadog-agent-ecs-win.json][22] 
+    2. Si vous êtes sous Windows, utilisez [datadog-agent-ecs-win.json][22]
 
 2. Modifiez votre fichier de définition de tâche de départ
     1. Remplacez `<YOUR_DATADOG_API_KEY>` par la [clé d'API Datadog][14] de votre compte.
@@ -174,7 +174,7 @@ Le conteneur de l'Agent Datadog recueille automatiquement les données des live 
        "environment": [
          (...)
          {
-           "name": "DD_SYSTEM_PROBE_ENABLED",
+           "name": "DD_SYSTEM_PROBE_NETWORK_ENABLED",
            "value": "true"
          }
        ],

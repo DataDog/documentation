@@ -1,7 +1,7 @@
 ---
 title: Universal Service Monitoring
 kind: documentation
-aliases: 
+aliases:
 - /tracing/universal_service_monitoring/
 further_reading:
 - link: "https://www.datadoghq.com/blog/universal-service-monitoring-datadog/"
@@ -75,6 +75,14 @@ datadog:
   ...
   serviceMonitoring:
     enabled: true
+```
+
+If your cluster is running Google Container-Optimized OS (COS), add the following to your values file as well:
+
+```
+providers:
+  gke:
+    cos: true
 ```
 
 {{% /tab %}}
@@ -167,7 +175,40 @@ datadog:
              mountPath: /sys/kernel/debug
            - name: sysprobe-socket-dir
              mountPath: /var/run/sysprobe
+           - name: modules
+             mountPath: /lib/modules
+             readOnly: true
+           - name: src
+             mountPath: /usr/src
+             readOnly: true
+           - name: runtime-compiler-output-dir
+             mountPath: /var/tmp/datadog-agent/system-probe/build
+           - name: kernel-headers-download-dir
+             mountPath: /var/tmp/datadog-agent/system-probe/kernel-headers
+             readOnly: false
+           - name: apt-config-dir
+             mountPath: /host/etc/apt
+             readOnly: true
+           - name: yum-repos-dir
+             mountPath: /host/etc/yum.repos.d
+             readOnly: true
+           - name: opensuse-repos-dir
+             mountPath: /host/etc/zypp
+             readOnly: true
+           - name: public-key-dir
+             mountPath: /host/etc/pki
+             readOnly: true
+           - name: yum-vars-dir
+             mountPath: /host/etc/yum/vars
+             readOnly: true
+           - name: dnf-vars-dir
+             mountPath: /host/etc/dnf/vars
+             readOnly: true
+           - name: rhel-subscription-dir
+             mountPath: /host/etc/rhsm
+             readOnly: true
    ```
+
    And add the following volumes to your manifest:
    ```
    volumes:
@@ -176,7 +217,55 @@ datadog:
      - name: debugfs
        hostPath:
          path: /sys/kernel/debug
+     - hostPath:
+         path: /lib/modules
+       name: modules
+     - hostPath:
+         path: /usr/src
+       name: src
+     - hostPath:
+         path: /var/tmp/datadog-agent/system-probe/build
+       name: runtime-compiler-output-dir
+     - hostPath:
+         path: /var/tmp/datadog-agent/system-probe/kernel-headers
+       name: kernel-headers-download-dir
+     - hostPath:
+         path: /etc/apt
+       name: apt-config-dir
+     - hostPath:
+         path: /etc/yum.repos.d
+       name: yum-repos-dir
+     - hostPath:
+         path: /etc/zypp
+       name: opensuse-repos-dir
+     - hostPath:
+         path: /etc/pki
+       name: public-key-dir
+     - hostPath:
+         path: /etc/yum/vars
+       name: yum-vars-dir
+     - hostPath:
+         path: /etc/dnf/vars
+       name: dnf-vars-dir
+     - hostPath:
+         path: /etc/rhsm
+       name: rhel-subscription-dir
+
    ```
+
+    **Note**: If your cluster is running on Google Container-Optimized OS (COS), you will need to remove the `src` mount. In order to do this, remove the following from your container definition:
+   ```
+    - name: src
+      mountPath: /usr/src
+      readOnly: true
+   ```
+    and the following from your manifest:
+   ```
+    - hostPath:
+        path: /usr/src
+      name: src
+   ```
+
 5. For optional HTTPS support, add the following to the `system-probe` container:
 
    ```
@@ -204,6 +293,18 @@ Add the following to your `docker run` command:
 
 ```
 -v /sys/kernel/debug:/sys/kernel/debug \
+-v /:/host/root:ro \
+-v /lib/modules:/lib/modules:ro \
+-v /usr/src:/usr/src:ro \
+-v /var/tmp/datadog-agent/system-probe/build:/var/tmp/datadog-agent/system-probe/build \
+-v /var/tmp/datadog-agent/system-probe/kernel-headers:/var/tmp/datadog-agent/system-probe/kernel-headers \
+-v /etc/apt:/host/etc/apt:ro \
+-v /etc/yum.repos.d:/host/etc/yum.repos.d:ro \
+-v /etc/zypp:/host/etc/zypp:ro \
+-v /etc/pki:/host/etc/pki:ro \
+-v /etc/yum/vars:/host/etc/yum/vars:ro \
+-v /etc/dnf/vars:/host/etc/dnf/vars:ro \
+-v /etc/rhsm:/host/etc/rhsm:ro \
 -e DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true \
 --security-opt apparmor:unconfined \
 --cap-add=SYS_ADMIN \
@@ -236,6 +337,17 @@ services:
      - DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED: 'true'
     volumes:
      - /sys/kernel/debug:/sys/kernel/debug
+     - /lib/modules:/lib/modules
+     - /usr/src:/usr/src
+     - /var/tmp/datadog-agent/system-probe/build:/var/tmp/datadog-agent/system-probe/build
+     - /var/tmp/datadog-agent/system-probe/kernel-headers:/var/tmp/datadog-agent/system-probe/kernel-headers
+     - /etc/apt:/host/etc/apt
+     - /etc/yum.repos.d:/host/etc/yum.repos.d
+     - /etc/zypp:/host/etc/zypp
+     - /etc/pki:/host/etc/pki
+     - /etc/yum/vars:/host/etc/yum/vars
+     - /etc/dnf/vars:/host/etc/dnf/vars
+     - /etc/rhsm:/host/etc/rhsm
     cap_add:
      - SYS_ADMIN
      - SYS_RESOURCE
@@ -282,6 +394,36 @@ DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true
 ```
 
 {{% /tab %}}
+{{% tab "Chef" %}}
+
+Set the following attributes on your nodes:
+
+```rb
+node["datadog"]["system_probe"]["service_monitoring_enabled"] = true
+```
+
+{{% /tab %}}
+{{% tab "Puppet" %}}
+
+Set `service_monitoring_enabled`:
+
+```conf
+class { 'datadog_agent::system_probe':
+    service_monitoring_enabled => true,
+}
+```
+
+{{% /tab %}}
+{{% tab "Ansible" %}}
+
+Add the following attributes in your playbook:
+
+```yaml
+service_monitoring_config:
+  enabled: true
+```
+
+{{% /tab %}}
 {{% tab "Windows" %}}
 
 **For services running on IIS:**
@@ -320,7 +462,7 @@ After enabling Universal Service Monitoring, you can:
 
 - Navigate to **APM** > **Service Catalog** or **APM** > **Service Map** to [visualize your services and their dependencies][3].
 
-- Click into specific Service pages to see golden signal metrics (requests, errors, and duration), and correlate these against recent code changes with [Deployment Tracking][2]. 
+- Click into specific Service pages to see golden signal metrics (requests, errors, and duration), and correlate these against recent code changes with [Deployment Tracking][2].
 
 - Create [monitors][4], [dashboards][5], and [SLOs][6] using the `universal.http.*` metrics.
 
