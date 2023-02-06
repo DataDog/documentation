@@ -56,8 +56,10 @@ CMD ["/path/to/your-go-binary"]
 ```
 
 [Sample code for a simple Go application][1].
+More details on the [Go tracing library][2].
 
 [1]: https://github.com/DataDog/crpb/tree/main/go
+[2]: https://docs.datadoghq.com/serverless/installation/go/?tab=serverlessframework#install-the-datadog-lambda-library
 
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
@@ -197,7 +199,11 @@ More details on the [Ruby tracing library][2].
 
 #### Instrument using buildpack
 
-[`Pack Buildpacks`][4] provide a convenient way to package your container without using a Dockerfile. This example will use the GCP container registry and Datadog serverless buildpack. Build your application by running the following command:
+[`Pack Buildpacks`][4] provide a convenient way to package your container without using a Dockerfile. This example will use the GCP container registry and Datadog serverless buildpack.
+
+**Note** follow the instruction to install the [tracing library][13] for your language before running the buildpack
+
+Build your application by running the following command:
 
    ```shell
    pack build --builder=gcr.io/buildpacks/builder \
@@ -322,3 +328,5 @@ RUN apt-get update && apt-get install -y ca-certificates
 [11]: https://cloud.google.com/run/docs/deploying.
 
 [12]: https://github.com/DataDog/crpb/tree/main
+
+[13]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/
