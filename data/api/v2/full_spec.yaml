@@ -9939,7 +9939,6 @@ components:
       - anomaly_detection
       - impossible_travel
       - hardcoded
-      - third_party
       type: string
       x-enum-varnames:
       - THRESHOLD
@@ -9947,7 +9946,6 @@ components:
       - ANOMALY_DETECTION
       - IMPOSSIBLE_TRAVEL
       - HARDCODED
-      - THIRD_PARTY
     SecurityMonitoringRuleEvaluationWindow:
       description: 'A time window is specified to match when at least one of the cases
         matches true. This is a sliding window
@@ -10161,7 +10159,6 @@ components:
       - new_value
       - geo_data
       - event_count
-      - none
       type: string
       x-enum-varnames:
       - COUNT
@@ -10171,7 +10168,6 @@ components:
       - NEW_VALUE
       - GEO_DATA
       - EVENT_COUNT
-      - NONE
     SecurityMonitoringRuleResponse:
       description: Create a new rule.
       oneOf:
@@ -20590,7 +20586,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Create a service account
       tags:
-      - Service Accounts
+      - Users
       x-codegen-request-body-name: body
       x-given:
         service_account_user:
@@ -20606,7 +20602,6 @@ paths:
         parameters:
         - name: user_id
           source: data.id
-        tag: Users
         type: unsafe
   /api/v2/service_accounts/{service_account_id}/application_keys:
     get:
