@@ -42,7 +42,7 @@ You can [create event rules][5] that define what suspicious behavior looks like 
 
 ## Slow down attacks
 
-<div class="alert alert-info">One-click IP blocking is in private beta. Access early preview through <a href="https://dashcon.io/appsec" target="_blank">this form</a>.</div>
+<div class="alert alert-info">One-click IP blocking is in beta.</div>
 
 Datadog ASM offers built-in protection capabilities to slow down attacks and attackers. 
 

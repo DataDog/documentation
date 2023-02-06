@@ -32,6 +32,8 @@ Set up your application to [detect and protect against threats][1] targeting you
 
 {{% appsec-getstarted %}}
 
+{{% appsec-getstarted-with-rc %}}
+
 Select your application language for details on how to do these steps for your language and infrastructure types.
 
 {{< partial name="security-platform/appsec-languages.html" >}}

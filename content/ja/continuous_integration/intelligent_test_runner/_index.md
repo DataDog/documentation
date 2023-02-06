@@ -10,9 +10,9 @@ is_beta: true
 kind: documentation
 title: Intelligent Test Runner
 ---
-{{< beta-callout url="https://app.datadoghq.com/ci/getting-started" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
+{{< callout url="https://app.datadoghq.com/ci/getting-started" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
 Intelligent Test Runner for CI Visibility は非公開ベータ版です。CI Visibility の概要のページにあるフォームに記入して、アクセスをリクエストすることができます。
-{{< /beta-callout >}}
+{{< /callout >}}
 
 ## 概要
 
