@@ -28,7 +28,7 @@ If you have not yet read the instructions for auto-instrumentation and setup, st
 
 ## Annotations
 
-If you run on PHP 8, starting v0.84 of the tracer, you can add attributes to your code to instrument it. It is a lighter alternative to [custom instrumentation written in code](#writing-custom-instrumentation). For instance, just add `#[DDTrace\Trace]` attribute to methods for Datadog to trace them.
+If you are using PHP 8, as of v0.84 of the tracer, you can add attributes to your code to instrument it. It is a lighter alternative to [custom instrumentation written in code](#writing-custom-instrumentation). For example, add the `#[DDTrace\Trace]` attribute to methods for Datadog to trace them.
 
 ```php
 <?php
@@ -51,7 +51,7 @@ You can provide the following arguments:
 - `$service`: The service to be assigned to the span. Defaults to default or inherited service name.
 - `$tags`: The tags to be assigned to the span.
 - `$recurse`: Whether recursive calls shall be traced.
-- `$run_if_limited`: Whether the function shall be traced in limited mode. (E.g. when span limit exceeded)
+- `$run_if_limited`: Whether the function shall be traced in limited mode. (For example, when span limit exceeded)
 
 ## Writing custom instrumentation
 
