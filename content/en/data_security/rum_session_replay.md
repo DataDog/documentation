@@ -34,7 +34,7 @@ RUM and Session Replay are compliant with many compliance frameworks, including,
 By default, there are some privacy restrictions in place to protect user data while meeting compliance framework standards.
 
 ### Browser RUM use of cookies
-Browser RUM requires **first party cookies** to be enabled on an end user’s browser to begin collecting data. This means the end user must accept cookies before any data can be collected. In addition, you can enable RUM for an end user, but if they turn on a browser setting that prevents any cookies from being written, RUM cannot be run for that user.
+Browser RUM requires **first party cookies** to be enabled on an end user’s browser to begin collecting data. This means the end user must accept cookies before any data can be collected.
 
 ### Mobile RUM consent management
 Mobile RUM tracking is only run upon user consent. If the end user accepts the RUM tracking, we track their activity and session experience. If the user declines the RUM tracking, we do not track their activity and session experience.
@@ -56,14 +56,17 @@ Additionally, you can turn off automatic tracking of user interactions and page 
 By default, there is **no tracking of users’ identity**. You have the option of writing code to capture [user data][6] such as name and email address, then using them to [enrich and modify][7] RUM sessions, but they are not required.
 
 ### Data retention
-You can decide how long your captured data stays in Datadog.
+After you have configured the event capture, events are stored in Datadog. You can decide how long your captured events and properties stay in Datadog.
 
 By default, data retention for production environments is:
 
 - 30 days for sessions, views, actions, errors, and session recordings
-- 15 days for resources
+- 15 days for resources and long tasks
 
 Any of this retained data can be extended to a maximum of 90 days at no additional cost by [opening a support ticket][8].
+
+#### Role-based access control
+Datadog provides role-based access control (RBAC) for managing who sees captured RUM data. Default settings for data access depend on the role a user gets added to. There are three types of Datadog roles available: Administrator, Standard, and Read Only roles. More granular RUM-specific permissions are defined in [Datadog role permissions][10]. For example, you can grant or revoke access to view Session Replays.
 
 ### Data deletion
 If, for example, sensitive data has been leaked, you can hard-delete data from within a given timeframe. With a hard delete, all data is deleted; it cannot be targeted towards a a specific application. Furthermore, we cannot look up and delete personal information from an individual, but we can delete specific personal information if the timeframe is known. If you need any data deleted, reach out to the [Datadog support team][9].
@@ -84,11 +87,8 @@ You can request that client IP addresses be scrubbed by submitting a support tic
 #### Geolocation
 In addition to removing client IPs, you can choose to remove geolocation (country, city, county), or GeoIP, as well. It is not possible to remove only GeoIP data without removing client IPs. Geolocation scrubbing occurs at the organization level; this data cannot be removed for specific applications, services, and so on. It is done at the backend level, which means the Browser SDK will still be sending data, but geolocation IP will be scrubbed out by our backend pipelines and dropped at processing time.
 
-#### Role-based access control
-Datadog provides role-based access control (RBAC) for managing who sees RUM data. Default settings for data access depend on the role a user gets added to. There are three types of Datadog roles available: Administrator, Standard, and Read Only roles. More granular RUM-specific permissions are defined in [Datadog role permissions][10]. For example, you can grant or revoke access to view Session Replays.
-
 ### Proactively search for sensitive data with Sensitive Data Scanner
-[Sensitive Data Scanner][11] allows you to proactively search and scrub sensitive data upon ingestion by Datadog. In other words, when received by Datadog in volatile memory but before being sent out to data pipelines. The tool has the power to scrub, hash, or partially redact PII data before it is stored. It works by applying out-of-the-box or customer-developed pattern matching rules.
+[Sensitive Data Scanner][11] allows you to proactively search and scrub sensitive data upon ingestion by Datadog. RUM events are scanned on the stream before any data is stored within Datadog. The tool has the power to scrub, hash, or partially redact PII data before it is stored. It works by applying out-of-the-box or customer-developed pattern matching rules.
 
 ## Session Replay-specific privacy options
 See [privacy options specific to Session Replay][12].
