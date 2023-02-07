@@ -27,37 +27,39 @@ further_reading:
 
 This page details common use cases for adding and customizing observability with Datadog APM. For a list of supported runtimes, see the [.NET Framework Compatibility Requirements][1] or the [.NET Core Compatibility Requirements][2].
 
-There are several ways to get more instrumentation:
+There are several ways to get more than the [default automatic instrumentation][3]:
 
-- [Through configuration](#instrument-methods-via-configuration). It requires automatic instrumentation and will not allow you to add specific tags.
-- [Using attributes](#instrument-methods-via-attributes). It requires automatic instrumentation and will allow you to customize operation and resource names.
-- [Using custom code](#custom-instrumentation-with-code). It can work alongside automatic instrumentation or without it. It gives you the most control on the spans.
+- [Through configuration](#instrument-methods-through-configuration), which depends on automatic instrumentation and does not allow you to add specific tags.
+- [Using attributes](#instrument-methods-through-attributes), which depends on automatic instrumentation and allows you to customize operation and resource names.
+- [Using custom code](#custom-instrumentation-with-code), which can work alongside automatic instrumentation or without it. It gives you the most control on the spans.
 
-Those solutions can be combined with one another.
+You can combine these solutions with each other to achieve the instrumentation detail you want.
 
-## Instrument methods via configuration
+## Instrument methods through configuration
 
 <div class="alert alert-info">
-  <strong>Note:</strong> This feature requires enabling automatic instrumentation for your application. For instructions on how to setup the .NET Tracer and enable automatic instrumentation, see the <a href="https://docs.datadoghq.com/tracing/setup/dotnet-framework/">.NET Framework setup instructions</a> or the <a href="https://docs.datadoghq.com/tracing/setup/dotnet-core/">.NET Core setup instructions</a>.
+  <strong>Note</strong>: This feature requires enabling automatic instrumentation for your application. For instructions on how to setup the .NET Tracer and enable automatic instrumentation, see the <a href="/tracing/trace_collection/dd_libraries/dotnet-framework/">.NET Framework setup instructions</a> or the <a href="/tracing/trace_collection/dd_libraries/dotnet-core/">.NET Core setup instructions</a>.
 </div>
 
-Using the `DD_TRACE_METHODS` environment variable, you can get visibility into unsupported frameworks without changing application code. For full details on the input format, see the [.NET Framework setup instructions][8] or the [.NET Core setup instructions][9]. For the following example, assume that the desired method to instrument is named `SaveSession` and the method is defined on the `Store.Managers.SessionManager` type:
+Using the `DD_TRACE_METHODS` environment variable, you can get visibility into unsupported frameworks without changing application code. For full details on the input format for `DD_TRACE_METHODS`, see the [.NET Framework configuration instructions][8] or the [.NET Core configuration instructions][9]. For example, to instrument a method called `SaveSession` defined on the `Store.Managers.SessionManager` type, set:
 
 ```ini
 DD_TRACE_METHODS=Store.Managers.SessionManager[SaveSession]
 ```
 
-The resulting span has an `operationName` set to `trace.annotation` and `resourceName` set to `SaveSession`. If you would like to customize the span's attributes and you have the ability to modify the source code, you can [instrument methods via attributes](#instrument-methods-via-attributes) instead.
+The resulting span has an `operationName` attribute with the value `trace.annotation` and a `resourceName` attribute with the value `SaveSession`.
 
-## Instrument methods via attributes
+If you want to customize the span's attributes and you have the ability to modify the source code, you can [instrument methods through attributes](#instrument-methods-through-attributes) instead.
+
+## Instrument methods through attributes
 
 <div class="alert alert-info">
-  <strong>Note:</strong> This feature requires adding the <a href="https://www.nuget.org/packages/Datadog.Trace.Annotations">Datadog.Trace.Annotations NuGet package</a> to your application and setting up automatic instrumentation. For instructions on how to setup the .NET Tracer and enable automatic instrumentation, see the <a href="https://docs.datadoghq.com/tracing/setup/dotnet-framework/">.NET Framework setup instructions</a> or the <a href="https://docs.datadoghq.com/tracing/setup/dotnet-core/">.NET Core setup instructions</a>.
+  <strong>Note</strong>: This feature requires adding the <a href="https://www.nuget.org/packages/Datadog.Trace.Annotations"><code>Datadog.Trace.Annotations</code> NuGet package</a> to your application and setting up automatic instrumentation. For instructions on how to setup the .NET Tracer and enable automatic instrumentation, see the <a href="/tracing/trace_collection/dd_libraries/dotnet-framework/">.NET Framework setup instructions</a> or the <a href="/tracing/trace_collection/dd_libraries/dotnet-core/">.NET Core setup instructions</a>.
 </div>
 
 Add `[Trace]` to methods for Datadog to trace them when running with automatic instrumentation. If automatic instrumentation is not enabled, this attribute has no effect on your application.
 
-`[Trace]` attributes have the default operation name `trace.annotation` and resource name of the traced method. These can be set as named arguments of the `[Trace]` attribute to better reflect what is being instrumented.  Operation name and resource name are the only possible arguments that can be set for the `[Trace]` attribute.
+`[Trace]` attributes have the default operation name `trace.annotation` and resource name of the traced method. You can set **operation name** and **resource name** as named arguments of the `[Trace]` attribute to better reflect what is being instrumented.  Operation name and resource name are the only possible arguments that can be set for the `[Trace]` attribute. For example:
 
 ```csharp
 using Datadog.Trace.Annotations;
@@ -78,16 +80,16 @@ namespace Store.Managers
 ## Custom instrumentation with code
 
 <div class="alert alert-info">
-  <strong>Note:</strong> To perform the steps outlined below, you need to add the <a href="https://www.nuget.org/packages/Datadog.Trace">Datadog.Trace NuGet package</a>. to your application. It provides an API to directly access the Tracer and the active span.
+  <strong>Note</strong>: This feature requires adding the <a href="https://www.nuget.org/packages/Datadog.Trace"><code>Datadog.Trace</code> NuGet package</a>. to your application. It provides an API to directly access the Tracer and the active span.
 </div>
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> When simultaneously using the `Datadog.Trace` NuGet package and automatic instrumentation, it is important to keep the versions in sync.
+  <strong>Note</strong>: When using both the <code>Datadog.Trace</code> NuGet package and automatic instrumentation, it is important to keep the versions in sync.
 </div>
 
 ### Configuring Datadog in code
 
-There are multiple ways to configure your application: using environment variables, a `web.config` file, or a `datadog.json` file, [as described in our documentation](https://docs.datadoghq.com/tracing/setup_overview/setup/dotnet-core/#configuration). This NuGet package also allows you to configure settings in code.
+There are multiple ways to configure your application: using environment variables, a `web.config` file, or a `datadog.json` file, [as described in our documentation][11]. The `Datadog.Trace` NuGet package also allows you to configure settings in code.
 
 To override configuration settings, create an instance of `TracerSettings`, and pass it to the static `Tracer.Configure()` method:
 
@@ -105,7 +107,7 @@ settings.GlobalTags.Add("SomeKey", "SomeValue");
 Tracer.Configure(settings);
 ```
 
-Calling `Tracer.Configure()` will replace the settings for all subsequent traces, both for custom instrumentation and for automatic instrumentation.
+Calling `Tracer.Configure()` replaces the settings for all subsequent traces, both for custom instrumentation and for automatic instrumentation.
 
 <div class="alert alert-warning">
   Replacing the configuration should be done <strong>once, as early as possible</strong> in your application.
@@ -115,9 +117,10 @@ Calling `Tracer.Configure()` will replace the settings for all subsequent traces
 
 In addition to automatic instrumentation, the `[Trace]` attribute, and `DD_TRACE_METHODS` configurations, you can customize your observability by programmatically creating spans around any block of code.
 
-To create and activate a custom span, use `Tracer.Instance.StartActive()`. If a trace is already active (when created by automatic instrumentation, for example), the span will be part of the current trace. If there is no current trace, a new one will be started.
+To create and activate a custom span, use `Tracer.Instance.StartActive()`. If a trace is already active (when created by automatic instrumentation, for example), the span is part of the current trace. If there is no current trace, a new one is started.
 
-> :warning: Ensure you dispose of the scope returned from StartActive. Disposing the scope will close the span, and ensure the trace is flushed to Datadog once all its spans are closed.
+<div class="alert alert-warning"><strong>Warning</strong>: Ensure you dispose of the scope returned from <code>StartActive</code>. Disposing the scope closes the span, and ensures the trace is flushed to Datadog once all its spans are closed.
+</div>
 
 ```csharp
 using Datadog.Trace;
@@ -133,7 +136,7 @@ Add custom [span tags][5] to your [spans][6] to customize your observability wit
 
 ### Manually creating a new span
 
-. Spans created in this manner integrate with other tracing mechanisms automatically. In other words, if a trace has already started, the manual span has its caller as its parent span. Similarly, any traced methods called from the wrapped block of code have the manual span as its parent.
+Manually created spans automatically integrate with spans from other tracing mechanisms. In other words, if a trace has already started, the manual span has its caller as its parent span. Similarly, any traced methods called from the wrapped block of code have the manual span as its parent.
 
 ```csharp
 using (var parentScope =
@@ -183,7 +186,7 @@ public class ShoppingCartController : Controller
 
 ### Set errors on a span
 
-To mark errors that occur in your code, utilize the `Span.SetException(Exception)` method. The method marks the span as an error and adds [related span metadata][5] to provide insight into the exception.
+To mark errors that occur in your code, use the `Span.SetException(Exception)` method. The method marks the span as an error and adds [related span metadata][5] to provide insight into the exception.
 
 ```csharp
 try
@@ -196,7 +199,10 @@ catch(Exception e)
 }
 ```
 
-This sets three tags on the span: `"error.msg":exception.Message`,  `"error.stack":exception.ToString()`, and `"error.type":exception.GetType().ToString()`.
+This sets the following tags on the span: 
+- `"error.msg":exception.Message`
+- `"error.stack":exception.ToString()`
+- `"error.type":exception.GetType().ToString()`
 
 ### Headers extraction and injection
 
@@ -251,7 +257,7 @@ When using the `SpanContextExtractor` API to trace Kafka consumer spans, set `DD
 
 ## Adding tags globally to all spans
 
-Use the `DD_TAGS` environment variable to set tags across all generated spans for an application. This can be useful for grouping stats for your applications, data centers, regions, etc. within the Datadog UI. For example:
+Use the `DD_TAGS` environment variable to set tags across all generated spans for an application. This can be useful for grouping stats for your applications, data centers, or regions within the Datadog UI. For example:
 
 ```ini
 DD_TAGS=datacenter:njc,key2:value2
@@ -268,10 +274,11 @@ You can exclude traces based on the resource name to remove Synthetics traffic s
 
 [1]: /tracing/trace_collection/compatibility/dotnet-framework
 [2]: /tracing/trace_collection/compatibility/dotnet-core
-[3]: https://www.nuget.org/packages/Datadog.Trace
+[3]: /tracing/trace_collection/dd_libraries/dotnet-core
 [5]: /tracing/glossary/#span-tags
 [6]: /tracing/glossary/#spans
 [7]: /tracing/glossary/#trace
-[8]: /tracing/trace_collection/dd_libraries/dotnet-framework
-[9]: /tracing/trace_collection/dd_libraries/dotnet-core
+[8]: /tracing/trace_collection/library_config/dotnet-framework/#automatic-instrumentation-optional-configuration
+[9]: /tracing/trace_collection/library_config/dotnet-core/#automatic-instrumentation-optional-configuration
 [10]: /tracing/security
+[11]: /tracing/trace_collection/library_config/dotnet-core/
