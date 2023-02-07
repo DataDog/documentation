@@ -129,7 +129,7 @@ aws ecs execute-command --cluster <CLUSTER_NAME> \
 
 | Platform   | Command                                                             |
 |------------|---------------------------------------------------------------------|
-| Kubernetes | `kubectl exec <POD_NAME> -it datadog-cluster-agent flare <CASE_ID>` |
+| Kubernetes | `kubectl exec <CLUSTER_POD_NAME> -it datadog-cluster-agent flare <CASE_ID>` |
 
 {{% /tab %}}
 {{< /tabs >}}

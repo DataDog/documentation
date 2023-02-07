@@ -31,17 +31,21 @@ Supported test frameworks:
 * Cucumber-js >= 7.0.0
 * Cypress >= 6.7.0
   * From `dd-trace>=1.4.0`
+* Playwright >= 1.18.0
+  * From `dd-trace>=3.13.0` and `dd-trace>=2.26.0` for 2.x release line.
 
 The instrumentation works at runtime, so any transpilers such as TypeScript, Webpack, Babel, or others are supported out of the box.
 
 ### Test suite level visibility compatibility
-[Test suite level visibility][4] is supported from `dd-trace>=3.3.0`, only in Agentless mode, and only Jest and Mocha are currently supported.
+[Test suite level visibility][4] is supported from `dd-trace>=3.10.0`. Jest, Mocha, and Playwright are supported.
 
 * Jest >= 24.8.0
-  * From `dd-trace>=3.3.0`.
+  * From `dd-trace>=3.10.0`.
   * Only [`jest-circus`][1] is supported as [`testRunner`][3].
 * Mocha >= 5.2.0
-  * From `dd-trace>=3.3.0`.
+  * From `dd-trace>=3.10.0`.
+* Playwright >= 1.18.0
+  * From `dd-trace>=3.13.0` and `dd-trace>=2.26.0` for 2.x release line.
 
 ## Configuring reporting method
 
@@ -121,20 +125,6 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn t
 }
 {{< /code-block >}}
 
-### Using Yarn >=2
-
-If you're using `yarn>=2` and a `.pnp.cjs` file, and you get the following error message when using `NODE_OPTIONS`:
-
-```text
- Error: Cannot find module 'dd-trace/ci/init'
-```
-
-You can fix it by setting `NODE_OPTIONS` to the following:
-
-```bash
-NODE_OPTIONS="-r $(pwd)/.pnp.cjs -r dd-trace/ci/init" yarn test
-```
-
 ### Adding custom tags to tests
 
 You can add custom tags to your tests by using the current active span:
@@ -153,7 +143,7 @@ To create filters or `group by` fields for these tags, you must first create fac
 [1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
 {{% /tab %}}
 
-{{% tab "Cucumber" %}}
+{{% tab "Playwright" %}}
 Set the `NODE_OPTIONS` environment variable to `-r dd-trace/ci/init`. Run your tests as you normally would, specifying the environment where the tests are run in the `DD_ENV` environment variable. For example, set `DD_ENV` to `local` when running tests on a developer workstation, or `ci` when running them on a CI provider:
 
 ```bash
@@ -170,19 +160,28 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn t
 }
 {{< /code-block >}}
 
-### Using Yarn >=2
+### Adding custom tags to tests
 
-If you're using `yarn>=2` and a `.pnp.cjs` file, and you get the following error message when using `NODE_OPTIONS`:
+Custom tags are not supported for Playwright.
 
-```text
- Error: Cannot find module 'dd-trace/ci/init'
+{{% /tab %}}
+
+{{% tab "Cucumber" %}}
+Set the `NODE_OPTIONS` environment variable to `-r dd-trace/ci/init`. Run your tests as you normally would, specifying the environment where the tests are run in the `DD_ENV` environment variable. For example, set `DD_ENV` to `local` when running tests on a developer workstation, or `ci` when running them on a CI provider:
+
+```bash
+NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn test
 ```
 
-You can fix this by setting `NODE_OPTIONS` to the following:
+**Note**: If you set a value for `NODE_OPTIONS`, make sure it does not overwrite `-r dd-trace/ci/init`. This can be done using the `${NODE_OPTIONS:-}` clause:
 
-```
-NODE_OPTIONS="-r $(pwd)/.pnp.cjs -r dd-trace/ci/init" yarn test
-```
+{{< code-block lang="json" filename="package.json" >}}
+{
+  "scripts": {
+    "test": "NODE_OPTIONS=\"--max-old-space-size=12288 ${NODE_OPTIONS:-}\" jest"
+  }
+}
+{{< /code-block >}}
 
 ### Adding custom tags to tests
 
@@ -324,6 +323,20 @@ If the browser application being tested is instrumented using [RUM][6], your Cyp
 
 {{< /tabs >}}
 
+### Using Yarn >=2
+
+If you're using `yarn>=2` and a `.pnp.cjs` file, and you get the following error message when using `NODE_OPTIONS`:
+
+```text
+ Error: Cannot find module 'dd-trace/ci/init'
+```
+
+You can fix it by setting `NODE_OPTIONS` to the following:
+
+```bash
+NODE_OPTIONS="-r $(pwd)/.pnp.cjs -r dd-trace/ci/init" yarn test
+```
+
 
 ## Configuration settings
 
@@ -404,7 +417,7 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 [Mocha >=9.0.0][8] uses an ESM-first approach to load test files. That means that if ES modules are used (for example, by defining test files with the `.mjs` extension), _the instrumentation is limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see the [Node.js documentation][9].
 
 ### Browser tests
-Browser tests executed with `mocha`, `jest`, `cucumber` and `cypress` are instrumented by `dd-trace-js`, but visibility into the browser session itself is not provided by default (for example, network calls, user actions, page loads, and so on).
+Browser tests executed with `mocha`, `jest`, `cucumber`, `cypress`, and `playwright` are instrumented by `dd-trace-js`, but visibility into the browser session itself is not provided by default (for example, network calls, user actions, page loads, etc.).
 
 If you want visibility into the browser process, consider using [RUM & Session Replay][10]. When using Cypress, test results and their generated RUM browser sessions and session replays are automatically linked. Learn more in the [RUM integration][11] guide.
 

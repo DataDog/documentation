@@ -198,7 +198,7 @@ The following resources allow granular access control:
 [2]: /dashboards/
 [3]: /monitors/
 [4]: /events/
-[5]: /notebooks/
+[5]: /notebooks/#limit-edit-access
 [6]: /api/v2/roles/
 [7]: /account_management/rbac/permissions/
 [8]: https://app.datadoghq.com/organization-settings/
