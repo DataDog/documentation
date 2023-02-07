@@ -25,7 +25,7 @@ If you are using a Dockerfile to build your application, complete the following:
 
 4. Use the `CMD` instruction to run your existing application and other required commands as arguments.
 
-5. Set a DD_API_KEY value in your application runtime to complete Agent configuration
+5. Set a `DD_API_KEY` value in your application runtime to complete Agent configuration.
 
 The following are examples of how to complete these three steps. You may need to adjust these examples depending on your existing Dockerfile setup. 
 
