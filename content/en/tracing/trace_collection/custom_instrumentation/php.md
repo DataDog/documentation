@@ -32,12 +32,12 @@ If you are using PHP 8, as of v0.84 of the tracer, you can add attributes to you
 
 ```php
 <?php
-class Foo {
-    #[DDTrace\Trace(name: "simplename", resource: "rsrc", type: "typeee", service: "test", tags: ["a" => "b"])]
-    static function simple($arg) {}
+class Server {
+    #[DDTrace\Trace(name: "spanName", resource: "resourceName", type: "Custom", service: "myService", tags: ["aTag" => "aValue"]))]
+    static function process($arg) {}
 
     #[DDTrace\Trace]
-    function bar() {
+    function get() {
       Foo::simple(1);
     }
 }
