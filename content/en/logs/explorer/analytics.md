@@ -1,5 +1,5 @@
 ---
-title: Group Logs
+title: Log Analytics
 kind: documentation
 description: 'Group queried logs into higher-level entities in order to derive or consolidate information.'
 aliases:
