@@ -1287,9 +1287,9 @@ main:
     identifier: workflows_build
     weight: 1
   - name: Authentication
-    url: workflows/setup/
+    url: workflows/access/
     parent: workflows
-    identifier: workflows_setup
+    identifier: workflows_access
     weight: 2
   - name: Trigger Workflows
     url: workflows/trigger/
@@ -1306,10 +1306,10 @@ main:
     parent: workflows_actions_catalog
     identifier: workflows_generic_actions
     weight: 101
-  - name: Service Accounts
-    url: workflows/service_accounts/
+  - name: Connections
+    url: workflows/connections/
     parent: workflows
-    identifier: workflows_service_accounts
+    identifier: workflows_connections
     weight: 5
   - name: APM
     url: tracing/
@@ -2730,41 +2730,41 @@ main:
     parent: application_security
     identifier: appsec_howitworks
     weight: 2
-  - name: Threat Monitoring and Protection
-    url: security/application_security/threats/
-    parent: application_security
-    identifier: appsec_threats
-    weight: 3
-  - name: Setup and Configure
-    url: security/application_security/threats/setup_and_configure/
-    parent: appsec_threats
-    identifier: threats_configuration
-    weight: 301
-  - name: OOTB Rules
-    url: security/default_rules/#cat-application-security
-    parent: appsec_threats
-    identifier: appsec_default_rules
-    weight: 302
-  - name: Tracking User Activity
-    url: security/application_security/threats/add-user-info/
-    parent: appsec_threats
-    identifier: threats_user_info
-    weight: 303
-  - name: Custom Detection Rules
-    url: security/application_security/threats/custom_rules/
-    parent: appsec_threats
-    identifier: threats_custom_rules
-    weight: 304
-  - name: Event Rules
-    url: security/application_security/threats/event_rules/
-    parent: appsec_threats
-    identifier: threats_event_rules
-    weight: 305
   - name: Risk Management
     url: security/application_security/risk_management/
     parent: application_security
     identifier: application_risk_management
+    weight: 3
+  - name: Threat Monitoring and Protection
+    url: security/application_security/threats/
+    parent: application_security
+    identifier: appsec_threats
     weight: 4
+  - name: Setup and Configure
+    url: security/application_security/threats/setup_and_configure/
+    parent: appsec_threats
+    identifier: threats_configuration
+    weight: 401
+  - name: OOTB Rules
+    url: security/default_rules/#cat-application-security
+    parent: appsec_threats
+    identifier: appsec_default_rules
+    weight: 402
+  - name: Tracking User Activity
+    url: security/application_security/threats/add-user-info/
+    parent: appsec_threats
+    identifier: threats_user_info
+    weight: 403
+  - name: Custom Detection Rules
+    url: security/application_security/threats/custom_rules/
+    parent: appsec_threats
+    identifier: threats_custom_rules
+    weight: 404
+  - name: Event Rules
+    url: security/application_security/threats/event_rules/
+    parent: appsec_threats
+    identifier: threats_event_rules
+    weight: 405
   - name: Troubleshooting
     url: security/application_security/troubleshooting/
     parent: application_security
@@ -3509,7 +3509,7 @@ main:
     url: developers/integrations/oauth_for_integrations
     parent: dev_tools_integrations
     weight: 405
-  - name: Python
+  - name: Install Agent Integration Developer Tool
     url: developers/integrations/python/
     parent: dev_tools_integrations
     weight: 406
@@ -7328,18 +7328,6 @@ api:
         - SendInvitations
       unstable: []
       order: 8
-  - name: Create a service account
-    url: '#create-a-service-account'
-    identifier: users-create-a-service-account
-    parent: users
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - CreateServiceAccount
-      unstable: []
-      order: 1
   - name: Update a user
     url: '#update-a-user'
     identifier: users-update-a-user
@@ -9149,6 +9137,18 @@ api:
         - ListServiceAccountApplicationKeys
       unstable: []
       order: 6
+  - name: Create a service account
+    url: '#create-a-service-account'
+    identifier: service-accounts-create-a-service-account
+    parent: service-accounts
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateServiceAccount
+      unstable: []
+      order: 1
   - name: Service Definition
     url: /api/latest/service-definition/
     identifier: service-definition

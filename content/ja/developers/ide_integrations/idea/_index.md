@@ -12,9 +12,9 @@ kind: documentation
 title: IntelliJ IDEA 用 Datadog プラグイン
 ---
 
-{{< beta-callout url="#" btn_hidden="true">}}
+{{< callout url="#" btn_hidden="true">}}
   IntelliJ IDEA 用 Datadog プラグインが公開ベータ版になりました。これは、Java サービスに <a href="https://docs.datadoghq.com/profiler/#pagetitle">Continuous Profiler</a> を使用している Java 開発者を対象としています。プラグインが予期せず動作しなくなった場合は、プラグインの更新を確認するか、<a href=#feedback>チームに連絡</a>してください。
-{{< /beta-callout >}}
+{{< /callout >}}
 
 ## 概要
 

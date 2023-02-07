@@ -42,7 +42,7 @@ After you submit configuration changes in the respective Datadog product UI for 
 
 The following diagram illustrates how Remote Configuration works:
 
-{{<img src="agent/guide/RC_Diagram_v2.png" alt="RC Diagram" width="90%" style="center">}}
+{{<img src="agent/guide/RC_Diagram_v3.png" alt="Users configure features in the UI, the config is stored in Datadog, the Agent requests config updates." width="90%" style="center">}}
 
 1. You configure select product features in the Datadog UI.
 2. The product feature configurations are securely stored within Datadog.

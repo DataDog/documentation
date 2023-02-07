@@ -1,13 +1,8 @@
 ---
 description: Cluster Agent と Admission Controller を用いたアプリケーションへのインスツルメンテーションライブラリの挿入
-is_beta: true
 kind: documentation
 title: Admission Controller を使ったライブラリの挿入
 ---
-
-{{< beta-callout url="#" btn_hidden="true">}}
-  Admission Controller を使ったトレーシングライブラリの挿入はベータ版です。
-{{< /beta-callout >}}
 
 ## 概要
 
@@ -88,6 +83,8 @@ template:
 | Python     | `admission.datadoghq.com/python-lib.version: "<lib-version>"` |
 
 利用可能なライブラリのバージョンは、各コンテナレジストリに記載されています。
+
+**注**: ライブラリのバージョン X を使用してインストルメンテーションを行ったアプリケーションで、ライブラリ挿入を使用して同じトレーサーライブラリのバージョン Y を使用してインストルメンテーションを行う場合、トレーサーは中断されません。むしろ、最初にロードされたライブラリのバージョンが使用されます。ライブラリ挿入は実行前にアドミッションコントローラレベルで行われるため、手動で構成されたライブラリよりも優先されます。
 
 <div class="alert alert-warning"><strong>注</strong>: <code>最新の</code>タグを使用することはサポートされていますが、主要なライブラリのリリースでは、壊れるような変更が導入されることがあるので、注意して使用してください。</div>
 
