@@ -44,7 +44,7 @@ This guide walks you through using the Datadog site for declaring an incident, u
 
 **Scenario:** A monitor is alerting on a high number of errors which may be slowing down several services. It's unclear whether customers are being impacted.
 
-This guide describes using the [Datadog Clipboard][2] to declare an incident.    Using the Clipboard, you can gather information from different sources, such as graphs, monitors, entire dashboards, or [notebooks][3]. This helps you provide as much information as possible when declaring an incident.
+This guide describes using the [Datadog Clipboard][2] to declare an incident. Using the Clipboard, you can gather information from different sources, such as graphs, monitors, entire dashboards, or [notebooks][3]. This helps you provide as much information as possible when declaring an incident.
 
 1. In the Datadog menu on the left-hand side, go to **Dashboard** > **Dashboard lists** and select **System - Metrics**.
 2. Hover over one of the graphs and copy it to the Clipboard with one of the following commands:
@@ -64,24 +64,18 @@ This guide describes using the [Datadog Clipboard][2] to declare an incident.   
 | Incident Commander       | Leave this assigned to you. In an actual incident this would be assigned to the leader of the incident investigation. You or others can update who the incident commander is as the incident investigation progresses.                                                                                 |
 | Notifications            | Leave blank because this is only a test, and you don't want to alert anyone else or another service. For an actual incident, add people and services that should be notified to help with the investigation and remediation. You can send these notifications to Slack and PagerDuty as well. |
 | Notes & Links            | Add information to support the reason you are declaring the incident. These can be graphs, logs, or other key visuals. The graph and the monitor you selected is already included but you can add additional signals. For example, copy and paste the URL for this guide.   
-
 9. Click **Declare Incident** to create the incident.
-
    You can also declare an incident from a [graph][4], [monitor][5], or the [incidents API][6]. For APM users, you can click the incidents icon on any APM graph to declare an incident.
-
-   {{< img src="getting_started/incident_management/apm_siren.png" alt="APM incidents icon" responsive="true" style="width:50%;">}}
-
-    As part of the Slack integration, you can also use the `/datadog incident` shortcut to declare an incident and set the title, severity, and customer impact.
-
+As part of the Slack integration, you can also use the `/datadog incident` shortcut to declare an incident and set the title, severity, and customer impact.
 10. Click **Slack Channel** on the incident's page to go to the incident's Slack channel.
+   
+A new Slack channel dedicated to the incident is automatically created for any new incident, so that you can consolidate communication with your team and begin troubleshooting. If your organization's Slack integration is set up to update a global incident channel, then the channel is updated with the new incident.
 
-    A new Slack channel dedicated to the incident is automatically created for any new incident, so that you can consolidate communication with your team and begin troubleshooting. If your organization's Slack integration is set up to update a global incident channel, then the channel is updated with the new incident.
+In this example, you are the only one added to the new incident channel. When you add people or services in _Notifications_ for an actual incident, all recipients are automatically added to the incident channel.
 
-    In this example, you are the only one added to the new incident channel. When you add people or services in _Notifications_ for an actual incident, all recipients are automatically added to the incident channel.
+If you don't have the Slack integration enabled, click **Add Chat** to add the link to the chat service you are using to discuss the incident.
 
-    If you don't have the Slack integration enabled, click **Add Chat** to add the link to the chat service you are using to discuss the incident.
-
-    Click **Add Video Call** to add a link to the call where discussions about the incident are happening. 
+Click **Add Video Call** to add a link to the call where discussions about the incident are happening. 
 
 ### Troubleshooting and updating the incident
 
@@ -133,7 +127,7 @@ You can add any Slack comment in the incident channel to the timeline so that yo
  In the _Remediation_ section, you can keep track of documents and tasks for investigating the issue or for post-incident remediation tasks.
 
 1. Click the **Remediation** tab.
-2. Click the the plus icon `+` in the _Documents_ box and add a link to a [Datadog notebook][13]. All updates to the _Documents_ section are added to the timeline as an _Incident Update_ type.
+2. Click the the plus icon `+` in the _Documents_ box and add a link to a [Datadog notebook][7]. All updates to the _Documents_ section are added to the timeline as an _Incident Update_ type.
 3. Add a task by adding a description of a task in the _Incident Tasks_ box, for example: `Run the steps in the notebook.`
 4. Click **Create Task**.
 5. Click **Assign To** and assign yourself the task.
@@ -156,7 +150,7 @@ In the _Notifications_ section, you can send out a notification updating the sta
 6. Add yourself to the _Recipients_ field.
 7. Click **Send**.
     You should receive an email with the message.
-    You can create customized [message templates][14]. Group templates together using the _Category_ field.
+    You can create customized [message templates][8]. Group templates together using the _Category_ field.
 
 ### Resolution and postmortem
 
@@ -175,15 +169,15 @@ If there are follow-up tasks that you and your team need to complete to ensure t
 {{< img src="getting_started/incident_management/generate_postmortem.png" alt="Generate Postmortem" responsive="true" style="width:80%;">}}
 ## Customizing your incident management workflow
 
-Datadog Incident Management can be customized with different severity and status levels, based on your organization's needs, and also include additional information such as APM services and teams related to the incident. For more information, see this [section][7] of the Incident Management page.
+Datadog Incident Management can be customized with different severity and status levels, based on your organization's needs, and also include additional information such as APM services and teams related to the incident. For more information, see this [section][9] of the Incident Management page.
 
-You can also set up notification rules to automatically notify specific people or services based on an incident's severity level. For more information, see the [Notification Rules][8] documentation.
+You can also set up notification rules to automatically notify specific people or services based on an incident's severity level. For more information, see the [Notification Rules][10] documentation.
 
-To customize Incident Management, go to the [incident settings page][9]. From the Datadog menu on the left-hand side, go to **Monitors** > **Incidents** (if you get an Incident Management welcome screen, click **Get Started**). Then on the top, click **Settings**.
+To customize Incident Management, go to the [incident settings page][11]. From the Datadog menu on the left-hand side, go to **Monitors** > **Incidents** (if you get an Incident Management welcome screen, click **Get Started**). Then on the top, click **Settings**.
 
 ## Create and Manage Incidents on Mobile
 
-The [Datadog Mobile App][10], available on the [Apple App Store][11] and [Google Play Store][12], enables users to create, view, search, and filter all incidents you have access to in your Datadog account from the Datadog Mobile App to ensure quick response and resolution without opening your laptop.
+The [Datadog Mobile App][12], available on the [Apple App Store][13] and [Google Play Store][14], enables users to create, view, search, and filter all incidents you have access to in your Datadog account from the Datadog Mobile App to ensure quick response and resolution without opening your laptop.
 
 You can also declare and edit incidents and quickly communicate to your teams through integrations with Slack, Zoom, and many more.
 
@@ -199,11 +193,11 @@ You can also declare and edit incidents and quickly communicate to your teams th
 [4]: /monitors/incident_management/#from-a-graph
 [5]: /monitors/incident_management/#from-a-monitor
 [6]: /api/latest/incidents/#create-an-incident
-[7]: /monitors/incident_management/#status-levels
-[8]: /monitors/incident_management/notification_rules
-[9]: https://app.datadoghq.com/incidents/settings
-[10]: /mobile/
-[11]: https://apps.apple.com/app/datadog/id1391380318
-[12]: https://play.google.com/store/apps/details?id=com.datadog.app
-[13]: https://app.datadoghq.com/notebook/list
-[14]: https://app.datadoghq.com/incidents/settings#Messages
+[7]: https://app.datadoghq.com/notebook/list
+[8]: https://app.datadoghq.com/incidents/settings#Messages
+[9]: /monitors/incident_management/#status-levels
+[10]: /monitors/incident_management/notification_rules
+[11]: https://app.datadoghq.com/incidents/settings
+[12]: /mobile/
+[13]: https://apps.apple.com/app/datadog/id1391380318
+[14]: https://play.google.com/store/apps/details?id=com.datadog.app
