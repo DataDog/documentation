@@ -3604,8 +3604,6 @@ components:
           items:
             description: Version name.
             example: Mac
-            nullable: true
-            type: string
           type: array
         machine:
           description: The machine architecture.
@@ -13247,7 +13245,7 @@ components:
           type: string
         secure:
           description: Whether the value of this variable will be obfuscated in test
-            results.
+            results. Only for config variables of type `text`.
           example: false
           type: boolean
         type:

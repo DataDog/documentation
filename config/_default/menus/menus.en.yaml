@@ -1287,9 +1287,9 @@ main:
     identifier: workflows_build
     weight: 1
   - name: Authentication
-    url: workflows/setup/
+    url: workflows/access/
     parent: workflows
-    identifier: workflows_setup
+    identifier: workflows_access
     weight: 2
   - name: Trigger Workflows
     url: workflows/trigger/
@@ -1306,10 +1306,10 @@ main:
     parent: workflows_actions_catalog
     identifier: workflows_generic_actions
     weight: 101
-  - name: Service Accounts
-    url: workflows/service_accounts/
+  - name: Connections
+    url: workflows/connections/
     parent: workflows
-    identifier: workflows_service_accounts
+    identifier: workflows_connections
     weight: 5
   - name: APM
     url: tracing/
@@ -3509,7 +3509,7 @@ main:
     url: developers/integrations/oauth_for_integrations
     parent: dev_tools_integrations
     weight: 405
-  - name: Python
+  - name: Install Agent Integration Developer Tool
     url: developers/integrations/python/
     parent: dev_tools_integrations
     weight: 406
