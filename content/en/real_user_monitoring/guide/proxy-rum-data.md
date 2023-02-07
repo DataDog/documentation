@@ -66,7 +66,7 @@ window.DD_RUM &&
 
 ## Proxy setup
 
-When your proxy receives data from the RUM Browser SDK, it must be forwarded to Datadog. The RUM Browser SDK adds the `ddforward` query parameter to all POST requests to your proxy. This query parameter contains the URL path and parameters where all data must be forwarded to.
+When your proxy receives data from the RUM Browser SDK, it must be forwarded to Datadog. The RUM Browser SDK adds the `ddforward` query parameter to all POST requests to your proxy. This query parameter contains the URL path and parameters that all data must be forwarded to.
 
 To successfully proxy request to Datadog:
 
@@ -77,7 +77,7 @@ To successfully proxy request to Datadog:
 3. Forward the request to the Datadog intake URL using the POST method.
 4. Leave the request body unchanged.
 
-The Site Parameter is an SDK [initialization parameter][1]. Datadog intake origins for each site are listed below:
+The site parameter is an SDK [initialization parameter][1]. Datadog intake origins for each site are listed below:
 
 | Site    | Site Parameter            | Datadog intake origin                      |
 | ------- | ------------------------- | ------------------------------------------ |
@@ -87,7 +87,7 @@ The Site Parameter is an SDK [initialization parameter][1]. Datadog intake origi
 | EU1     | `datadoghq.eu`            | `https://browser-intake-datadoghq.eu`      |
 | US1-FED | `ddog-gov.com`            | `https://browser-intake-ddog-gov.com`      |
 
-The Datadog intake origin corresponding to your Site Parameter should be defined in your proxy implementation.
+The Datadog intake origin corresponding to your site parameter should be defined in your proxy implementation.
 
 ## Legacy proxy setups
 
@@ -95,7 +95,7 @@ Before Browser SDK v4.TODO, the `proxyUrl` initialization parameter was used and
 
 The Datadog intake origin now needs to be defined in your proxy implementation to ensure security.
 
-<strong>If you are still using a proxy with an older version of the Browser SDK, please consider upgrading to a newer version of the Browser SDK.</strong>
+<strong>If you are still using a proxy with an older version of the Browser SDK, we recommend upgrading to a newer version of the Browser SDK.</strong>
 
 ## Further Reading
 
