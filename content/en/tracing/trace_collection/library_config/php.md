@@ -301,7 +301,7 @@ A comma-separated list of query parameters to be collected as part of the resour
 `DD_TRACE_CLIENT_IP_ENABLED`
 : **INI**: `datadog.trace.client_ip_enabled`<br>
 **Default**: `false`<br>
-Enables IP Collection client side. Added in version `0.84.0`.
+Enables IP collection client side. Added in version `0.84.0`.
 
 `DD_TRACE_CLIENT_IP_HEADER`
 : **INI**: `datadog.trace.client_ip_header`<br>
