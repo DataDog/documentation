@@ -75,7 +75,7 @@ To successfully proxy request to Datadog:
     - the path and parameters provided by `ddforward`.
 2. Add a `X-Forwarded-For` header containing the request client IP address for accurate geoIP.
 3. Forward the request to the Datadog intake URL using the POST method.
-4. The request body must remain unchanged.
+4. Leave the request body unchanged.
 
 The Site Parameter is an SDK [initialization parameter][1]. Datadog intake origins for each site are listed below:
 
