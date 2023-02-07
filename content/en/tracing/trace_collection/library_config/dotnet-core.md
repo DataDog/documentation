@@ -150,7 +150,7 @@ For more information, see [Ingestion Mechanisms][11].<br>
 `DD_TRACE_RATE_LIMIT`
 : **TracerSettings property**: `MaxTracesSubmittedPerSecond` <br>
 The number of traces allowed to be submitted per second (deprecates `DD_MAX_TRACES_PER_SECOND`). <br>
-**Default**: `100` when `DD_TRACE_SAMPLE_RATE` is set. Otherwise, delegates rate limiting to the Datadog Agent. 
+**Default**: `100` when `DD_TRACE_SAMPLE_RATE` is set. Otherwise, delegates rate limiting to the Datadog Agent.
 
 `DD_SPAN_SAMPLING_RULES`
 : **Default**: `null`<br>
@@ -281,7 +281,7 @@ The .NET Tracer supports the following styles:
 
 - Datadog: `Datadog`
 - B3 Multi Header: `b3multi` (`B3` is deprecated)
-- W3C (TraceParent): `tracecontext` (`W3C` is deprecated)
+- W3C: `tracecontext` (`W3C` is deprecated)
 - B3 Single Header: `B3 single header` (`B3SingleHeader` is deprecated)
 
 You can use the following environment variables to configure injection and extraction styles:
