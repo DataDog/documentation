@@ -3,15 +3,11 @@ title: CWS Security Profiles
 kind: documentation
 ---
 
-CWS...
-
-Security profiles...
+CWS... Security profiles provide a baseline a workload's typical behavior in order to surface unusual activity.
 
 With this information, CWS generates [suppression suggestions](#suppress-signals-based-on-suggested-actions) for signals that meet the suppression suggestion threshold.
 
 {{< img src="security/cws/security_profiles/security-profiles-overview.png" alt="CWS Security Profiles page with auto-generated security profiles" width="100%">}}
-
-Security profiles provide a baseline a workload's typical behavior in order to surface unusual activity.
 
 CWS automatically generates security profiles
 
