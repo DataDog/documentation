@@ -4241,6 +4241,8 @@ components:
           type: array
         data_source:
           $ref: '#/components/schemas/ListStreamSource'
+        event_size:
+          $ref: '#/components/schemas/WidgetEventSize'
         group_by:
           description: Group by configuration for the List Stream Widget. Group by
             can be used only with logs_pattern_stream (up to 3 items) or logs_transaction_stream
@@ -4285,6 +4287,7 @@ components:
       - apm_issue_stream
       - logs_pattern_stream
       - logs_transaction_stream
+      - event_stream
       example: apm_issue_stream
       type: string
       x-enum-varnames:
@@ -4294,6 +4297,7 @@ components:
       - APM_ISSUE_STREAM
       - LOGS_PATTERN_STREAM
       - LOGS_TRANSACTION_STREAM
+      - EVENT_STREAM
     ListStreamWidgetDefinition:
       description: 'The list stream visualization displays a table of recent events
         in your application that
