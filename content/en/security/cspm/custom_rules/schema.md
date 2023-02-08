@@ -51,6 +51,7 @@ When you [write custom rules for CSPM][1], you specify the resource types that a
     {{< nextlink href="/security/cspm/custom_rules/azure_security_center_auto_provisioning/" >}}<code>azure_security_center_auto_provisioning</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/azure_security_contact/" >}}<code>azure_security_contact</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/azure_security_group/" >}}<code>azure_security_group</code>{{< /nextlink >}}
+    {{< nextlink href="/security/cspm/custom_rules/azure_sql_server/" >}}<code>azure_sql_server</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/azure_subscription/" >}}<code>azure_subscription</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/azure_log_analytics_workspace/" >}}<code>azure_log_analytics_workspace</code>{{< /nextlink >}}
 {{< /whatsnext >}}
