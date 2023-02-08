@@ -375,6 +375,16 @@ services:
 ```
 
 {{% /tab %}}
+{{% tab "Docker Swarm" %}}
+
+As `Docker Swarm` does not yet support of changing `security_opt`, then we can run only if the Operating System
+does not have a running `apparmor` instance.
+
+If that is the case, then use the same `docker-compose.yml` file from `Docker-Compose` section[1] besides the field `security_opt`.
+
+[1]: /universal_service_monitoring/?tab=dockercompose
+
+{{% /tab %}}
 {{% tab "Configuration files (Linux)" %}}
 
 If you are not using Helm Charts or environment variables, set the following in your `system-probe.yaml` file:
