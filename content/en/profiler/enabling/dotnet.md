@@ -43,25 +43,22 @@ Supported .NET runtimes (64-bit applications)
 .NET 5<br/>
 .NET 6<br/>
 .NET 7
-<div class="alert alert-warning">
-  <strong>Note:</strong><br />Lock Contention profiling beta is only available for .NET 5+. <br />Allocations profiling beta is only for .NET 6+.<br />Live Heap profiling beta is only for .NET 7+.
-</div>
 
 Supported languages
 : Any language that targets the .NET runtime, such as C#, F#, and Visual Basic.
 
 The following profiling features are available in the following minimum versions of the `dd-trace-dotnet` library:
 
-|      Feature         | Required `dd-trace-dotnet` version          |
-|----------------------|-----------------------------------------|
-| Wall time profiling        |                        |
-| CPU profiling        | 2.15.0+                       |
-| Exceptions profiling        | beta, 2.10.0+                       |
-| Allocations profiling        | beta, 2.18.0+                       |
-| Lock Contention profiling        | beta, 2.18.0+                       |
-| Live heap profiling        | beta, 2.22.0+                       |
-| [Code Hotspots][12]        | 2.7.0+                       |
-| [Endpoint Profiling][13]            | 2.15.0+                       |
+|      Feature         | Required `dd-trace-dotnet` version      | Required .NET Runtime versions        |
+|----------------------|-----------------------------------------|---------------------------------------|
+| Wall time profiling        | 2.7.0+                     |All supported runtime versions.      |
+| CPU profiling        | 2.15.0+                       | All supported runtime versions.      |
+| Exceptions profiling        | beta, 2.10.0+                       | All supported runtime versions.      |
+| Allocations profiling        | beta, 2.18.0+                       | .NET 6+      |
+| Lock Contention profiling        | beta, 2.18.0+                       | .NET 5+      |
+| Live heap profiling        | beta, 2.22.0+                       | .NET 7+      |
+| [Code Hotspots][12]        | 2.7.0+                       | All supported runtime versions.      |
+| [Endpoint Profiling][13]            | 2.15.0+                       | All supported runtime versions.      |
 
 ## Installation
 
@@ -128,8 +125,10 @@ To install the .NET Profiler per-application:
 {{< /tabs >}}
 
 <br>
-<div class="alert alert-warning">
+<div class="alert alert-info">
+  <div class="alert-info">
   <strong>Note:</strong> The following steps include setting environment variables to enable the profiler. Datadog <strong>does not recommend</strong> setting those environment variables at machine-level. If set at machine-level, every .NET application running on the machine is profiled and this incurs a significant overhead on the CPU and memory of your machine.
+  </div>
 </div>
 
 {{< tabs >}}
