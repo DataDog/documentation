@@ -377,8 +377,8 @@ services:
 {{% /tab %}}
 {{% tab "Docker Swarm" %}}
 
-As `Docker Swarm` does not yet support of changing `security_opt`, then we can run only if the Operating System
-does not have a running `apparmor` instance.
+As `Docker Swarm` does not yet support the changing of `security_opt`, the operating system
+must not have a running `apparmor` instance.
 
 If that is the case, then use the same `docker-compose.yml` file from `Docker-Compose` [section][1] besides the field `security_opt`.
 
