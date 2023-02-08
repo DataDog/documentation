@@ -194,10 +194,10 @@ Wall Time
 CPU
 : Shows the time each function spent running on the CPU.
 
-Allocations
+Allocations (beta, v0.84+)
 : The number of allocations by each function during the profiling period (default: 67s), including allocations which were subsequently freed. Stack allocations are not tracked.
 
-Allocated memory
+Allocated memory (beta, v0.84+)
 : The amount of heap memory allocated by each function during the profiling period (default: 67s), including allocations which were subsequently freed. Stack allocations are not tracked.
 
 [1]: /profiler/enabling/php/#requirements
@@ -209,10 +209,10 @@ Once profiling is enabled, the following profile types are collected for [suppor
 CPU
 : The time each function spent running on the CPU.
 
-Allocations (beta, v0.84+)
+Allocations
 : The number of allocations by each function during the profiling period (default: 59s), including allocations which were subsequently freed. Stack allocations are not tracked. 
 
-Allocated memory (beta, v0.84+)
+Allocated memory
 : The amount of heap memory allocated by each function during the profiling period (default: 59s), including allocations which were subsequently freed. Stack allocations are not tracked. 
 
 [1]: /profiler/enabling/ddprof/
