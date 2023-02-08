@@ -187,7 +187,7 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 ### Security Notification events
 | Name                 | Description of audit event                                                       | Query in audit explorer                                           |
 | -------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------|
-| [Token leaked][80] | A user's API or Application Key has leaked online and been detected. | `@evt.name:"Security Notification" @asset.type:(api_key OR application_key) @action:notification` |
+| [Token leaked][80] | Datadog has detected leaked Datadog API or Application Key that should be revoked| `@evt.name:"Security Notification" @asset.type:(api_key OR application_key) @action:notification` |
 
 ### Sensitive Data Scanner events
 | Name | Description of audit event                                          | Query in audit explorer                           |
