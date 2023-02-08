@@ -424,6 +424,257 @@ service_monitoring_config:
 ```
 
 {{% /tab %}}
+
+{{% tab "ECS" %}}
+
+For ECS, enable USM and the system probe with the following JSON task definition. Deploy the task definition as a [daemon service][1].
+
+```json
+{
+  "containerDefinitions": [
+    {
+      "name": "datadog-agent",
+      "image": "public.ecr.aws/datadog/agent:7",
+      "cpu": 500,
+      "memory": 1024,
+      "essential": true,
+      "mountPoints": [
+        ...
+        {
+          "containerPath": "/sys/kernel/debug",
+          "sourceVolume": "sys_kernel_debug"
+        },
+        {
+          "containerPath": "/host/proc",
+          "sourceVolume": "proc"
+        },
+        {
+          "containerPath": "/var/run/docker.sock",
+          "sourceVolume": "var_run_docker_sock"
+        },
+        {
+          "containerPath": "/host/sys/fs/cgroup",
+          "sourceVolume": "sys_fs_cgroup"
+        },
+        {
+          "readOnly": true,
+          "containerPath": "/var/lib/docker/containers",
+          "sourceVolume": "var_lib_docker_containers"
+        },
+        {
+          "containerPath": "/lib/modules",
+          "sourceVolume": "lib_modules"
+        },
+        {
+          "containerPath": "/usr/src",
+          "sourceVolume": "usr_src"
+        },
+        {
+          "containerPath": "/var/tmp/datadog-agent/system-probe/build",
+          "sourceVolume": "var_tmp_datadog_agent_system_probe_build"
+        },
+        {
+          "containerPath": "/var/tmp/datadog-agent/system-probe/kernel-headers",
+          "sourceVolume": "var_tmp_datadog_agent_system_probe_kernel_headers"
+        },
+        {
+          "containerPath": "/host/etc/apt",
+          "sourceVolume": "etc_apt"
+        },
+        {
+          "containerPath": "/host/etc/yum.repos.d",
+          "sourceVolume": "etc_yum_repos_d"
+        },
+        {
+          "containerPath": "/host/etc/zypp",
+          "sourceVolume": "etc_zypp"
+        },
+        {
+          "containerPath": "/host/etc/pki",
+          "sourceVolume": "etc_pki"
+        },
+        {
+          "containerPath": "/host/etc/yum/vars",
+          "sourceVolume": "etc_yum_vars"
+        },
+        {
+          "containerPath": "/host/etc/dnf/vars",
+          "sourceVolume": "etc_dnf_vars"
+        },
+        {
+          "containerPath": "/host/etc/rhsm",
+          "sourceVolume": "etc_rhsm"
+        }
+      ],
+      "environment": [
+        {
+          "name": "DD_API_KEY",
+          "value": "<YOUR_DATADOG_API_KEY>"
+        },
+        ...
+        {
+          "name": "DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED",
+          "value": "true"
+        }
+      ],
+      "linuxParameters": {
+        "capabilities": {
+          "add": [
+            "SYS_ADMIN",
+            "SYS_RESOURCE",
+            "SYS_PTRACE",
+            "NET_ADMIN",
+            "NET_BROADCAST",
+            "NET_RAW",
+            "IPC_LOCK",
+            "CHOWN"
+          ]
+        }
+      }
+    }
+  ],
+  "requiresCompatibilities": [
+    "EC2"
+  ],
+  "volumes": [
+    ...
+    {
+      "host": {
+        "sourcePath": "/sys/kernel/debug"
+      },
+      "name": "sys_kernel_debug"
+    },
+    {
+      "host": {
+        "sourcePath": "/proc/"
+      },
+      "name": "proc"
+    },
+    {
+      "host": {
+        "sourcePath": "/var/run/docker.sock"
+      },
+      "name": "var_run_docker_sock"
+    },
+    {
+      "host": {
+        "sourcePath": "/sys/fs/cgroup/"
+      },
+      "name": "sys_fs_cgroup"
+    },
+    {
+      "host": {
+        "sourcePath": "/var/lib/docker/containers/"
+      },
+      "name": "var_lib_docker_containers"
+    },
+    {
+      "host": {
+        "sourcePath": "/lib/modules"
+      },
+      "name": "lib_modules"
+    },
+    {
+      "host": {
+        "sourcePath": "/usr/src"
+      },
+      "name": "usr_src"
+    },
+    {
+      "host": {
+        "sourcePath": "/var/tmp/datadog-agent/system-probe/build"
+      },
+      "name": "var_tmp_datadog_agent_system_probe_build"
+    },
+    {
+      "host": {
+        "sourcePath": "/var/tmp/datadog-agent/system-probe/kernel-headers"
+      },
+      "name": "var_tmp_datadog_agent_system_probe_kernel_headers"
+    },
+    {
+      "host": {
+        "sourcePath": "/etc/apt"
+      },
+      "name": "etc_apt"
+    },
+    {
+      "host": {
+        "sourcePath": "/etc/yum.repos.d"
+      },
+      "name": "etc_yum_repos_d"
+    },
+    {
+      "host": {
+        "sourcePath": "/etc/zypp"
+      },
+      "name": "etc_zypp"
+    },
+    {
+      "host": {
+        "sourcePath": "/etc/pki"
+      },
+      "name": "etc_pki"
+    },
+    {
+      "host": {
+        "sourcePath": "/etc/yum/vars"
+      },
+      "name": "etc_yum_vars"
+    },
+    {
+      "host": {
+        "sourcePath": "/etc/dnf/vars"
+      },
+      "name": "etc_dnf_vars"
+    },
+    {
+      "host": {
+        "sourcePath": "/etc/rhsm"
+      },
+      "name": "etc_rhsm"
+    }
+  ],
+  "family": "datadog-agent-task"
+}
+```
+
+If the operating system image is Ubuntu or Debian, add the following after `environment`:
+
+```yaml
+"dockerSecurityOptions": [
+  "apparmor:unconfined"
+]
+```
+
+For optional HTTPS support, also add:
+
+```yaml
+"mountPoints": [
+  ...
+  {
+    "containerPath": "/host/root",
+    "sourceVolume": "host_root"
+  },
+  ...
+]
+...
+"volumes": [
+  ...
+  {
+    "host": {
+      "sourcePath": "/"
+    },
+    "name": "host_root"
+  },
+  ...
+]
+```
+
+
+[1]: /containers/amazon_ecs/?tab=awscli#run-the-agent-as-a-daemon-service
+{{% /tab %}}
+
 {{% tab "Windows" %}}
 
 **For services running on IIS:**
