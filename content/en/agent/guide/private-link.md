@@ -233,6 +233,8 @@ The VPCs with Private Hosted Zone (PHZ) attached need to have a couple of settin
 
 ## Further Reading
 
+Additional helpful documentation, links, and articles:
+
 - [Enable log collection with the Agent][3]
 - [Collect logs from your AWS services][4]
 
