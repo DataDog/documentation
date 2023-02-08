@@ -70,13 +70,7 @@ To learn more about tags, see the [Tagging documentation][8].
 
 Aggregation method is next to the filter dropdown. This defaults to `avg by` but you can change the method to `max by`, `min by`, or `sum by`. In most cases, the metric has many values for each time interval, coming from many hosts or instances. The aggregation method chosen determines how the metrics are aggregated into a single line.
 
-#### Aggregation groups
-
-Next to the aggregation method dropdown, choose what constitutes a line or grouping on a graph. For example, if you choose `host`, there is a line for every `host`. Each line is made up of the selected metric on a particular `host` aggregated using the chosen method.
-
-Additionally, you can click the tags in the metric dropdown used for [choosing the metric](#choose-the-metric-to-graph) to group and aggregate your data.
-
-#### Rollup to aggregate over time
+#### Configure your time aggregation
 
 Regardless of the options chosen above, there is always some aggregation of data due to the physical size constraints of the window holding the graph. If a metric is updated every second, and you are looking at 4 hours of data, you need 14,400 points to display everything. Each graph displayed has about 300 points shown at any given time. Therefore, each point displayed on the screen represents 48 data points.
 
@@ -134,6 +128,12 @@ The full JSON looks like this:
 ```
 
 For more about using the JSON view, see [Graphing with JSON][1].
+
+#### Configure your space aggregation
+
+Next to the aggregation method dropdown, choose what constitutes a line or grouping on a graph. For example, if you choose `host`, there is a line for every `host`. Each line is made up of the selected metric on a particular `host` aggregated using the chosen method.
+
+Additionally, you can click the tags in the metric dropdown used for [choosing the metric](#choose-the-metric-to-graph) to group and aggregate your data. 
 
 ### Advanced graphing
 
