@@ -3001,6 +3001,12 @@ components:
             Only hosts that match one of the defined tags are imported into Datadog.'
           example: key:value,filter:example
           type: string
+        is_cspm_enabled:
+          default: false
+          description: When enabled, Datadog performs configuration checks across
+            your Google Cloud environment by continuously scanning every resource.
+          example: true
+          type: boolean
         private_key:
           description: Your private key name found in your JSON service account key.
           example: private_key
@@ -3598,8 +3604,6 @@ components:
           items:
             description: Version name.
             example: Mac
-            nullable: true
-            type: string
           type: array
         machine:
           description: The machine architecture.
@@ -3811,6 +3815,7 @@ components:
       - appsec_fargate_usage
       - appsec_usage
       - browser_usage
+      - container_excl_agent_usage
       - container_usage
       - cspm_containers_usage
       - cspm_hosts_usage
@@ -3832,7 +3837,6 @@ components:
       - profiled_host_usage
       - snmp_usage
       - estimated_rum_sessions_usage
-      - cont_usage
       type: string
       x-enum-varnames:
       - API_USAGE
@@ -3841,6 +3845,7 @@ components:
       - APPSEC_FARGATE_USAGE
       - APPSEC_USAGE
       - BROWSER_USAGE
+      - CONTAINER_EXCL_AGENT_USAGE
       - CONTAINER_USAGE
       - CSPM_CONTAINERS_USAGE
       - CSPM_HOSTS_USAGE
@@ -3862,7 +3867,6 @@ components:
       - PROFILED_HOST_USAGE
       - SNMP_USAGE
       - ESTIMATED_RUM_SESSIONS_USAGE
-      - CONT_USAGE
     IFrameWidgetDefinition:
       description: The iframe widget allows you to embed a portion of any other web
         page on your dashboard. Only available on FREE layout dashboards.
@@ -4237,6 +4241,8 @@ components:
           type: array
         data_source:
           $ref: '#/components/schemas/ListStreamSource'
+        event_size:
+          $ref: '#/components/schemas/WidgetEventSize'
         group_by:
           description: Group by configuration for the List Stream Widget. Group by
             can be used only with logs_pattern_stream (up to 3 items) or logs_transaction_stream
@@ -4281,6 +4287,7 @@ components:
       - apm_issue_stream
       - logs_pattern_stream
       - logs_transaction_stream
+      - event_stream
       example: apm_issue_stream
       type: string
       x-enum-varnames:
@@ -4290,6 +4297,7 @@ components:
       - APM_ISSUE_STREAM
       - LOGS_PATTERN_STREAM
       - LOGS_TRANSACTION_STREAM
+      - EVENT_STREAM
     ListStreamWidgetDefinition:
       description: 'The list stream visualization displays a table of recent events
         in your application that
@@ -5950,10 +5958,13 @@ components:
         unit:
           description: 'Detailed information about the metric unit.
 
-            First element describes the "primary unit" (for example, `bytes` in `bytes
-            per second`),
+            The first element describes the "primary unit" (for example, `bytes` in
+            `bytes per second`).
 
-            second describes the "per unit" (for example, `second` in `bytes per second`).'
+            The second element describes the "per unit" (for example, `second` in
+            `bytes per second`).
+
+            If the second element is not present, the API returns null.'
           items:
             $ref: '#/components/schemas/MetricsQueryUnit'
           maxItems: 2
@@ -7240,6 +7251,8 @@ components:
       - appsec_percentage
       - browser_usage
       - browser_percentage
+      - container_excl_agent_usage
+      - container_excl_agent_percentage
       - container_usage
       - container_percentage
       - cspm_containers_percentage
@@ -7282,8 +7295,6 @@ components:
       - snmp_percentage
       - estimated_rum_sessions_usage
       - estimated_rum_sessions_percentage
-      - cont_usage
-      - cont_percentage
       - '*'
       type: string
       x-enum-varnames:
@@ -7299,6 +7310,8 @@ components:
       - APPSEC_PERCENTAGE
       - BROWSER_USAGE
       - BROWSER_PERCENTAGE
+      - CONTAINER_EXCL_AGENT_USAGE
+      - CONTAINER_EXCL_AGENT_PERCENTAGE
       - CONTAINER_USAGE
       - CONTAINER_PERCENTAGE
       - CSPM_CONTAINERS_PERCENTAGE
@@ -7341,8 +7354,6 @@ components:
       - SNMP_PERCENTAGE
       - ESTIMATED_RUM_SESSIONS_USAGE
       - ESTIMATED_RUM_SESSIONS_PERCENTAGE
-      - CONT_USAGE
-      - CONT_PERCENTAGE
       - ALL
     MonthlyUsageAttributionValues:
       description: Fields in Usage Summary by tag(s).
@@ -7398,12 +7409,12 @@ components:
           description: The synthetic browser test usage by tag(s).
           format: double
           type: number
-        cont_percentage:
+        container_excl_agent_percentage:
           description: The percentage of container usage without the Datadog Agent
             by tag(s).
           format: double
           type: number
-        cont_usage:
+        container_excl_agent_usage:
           description: The container usage without the Datadog Agent by tag(s).
           format: double
           type: number
@@ -8878,6 +8889,65 @@ components:
       properties:
         page:
           $ref: '#/components/schemas/Pagination'
+      type: object
+    RunWorkflowWidgetDefinition:
+      description: Run workflow is widget that allows you to run a workflow from a
+        dashboard.
+      properties:
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: '#/components/schemas/WidgetCustomLink'
+          type: array
+        inputs:
+          description: Array of workflow inputs to map to dashboard template variables.
+          items:
+            $ref: '#/components/schemas/RunWorkflowWidgetInput'
+          type: array
+        time:
+          $ref: '#/components/schemas/WidgetTime'
+        title:
+          description: Title of your widget.
+          type: string
+        title_align:
+          $ref: '#/components/schemas/WidgetTextAlign'
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: '#/components/schemas/RunWorkflowWidgetDefinitionType'
+        workflow_id:
+          description: Workflow id.
+          example: <workflow_id>
+          type: string
+      required:
+      - type
+      - workflow_id
+      type: object
+    RunWorkflowWidgetDefinitionType:
+      default: run_workflow
+      description: Type of the run workflow widget.
+      enum:
+      - run_workflow
+      example: run_workflow
+      type: string
+      x-enum-varnames:
+      - RUN_WORKFLOW
+    RunWorkflowWidgetInput:
+      description: Object to map a dashboard template variable to a workflow input.
+      properties:
+        name:
+          description: Name of the workflow input.
+          example: Environment
+          type: string
+        value:
+          description: Dashboard template variable. Can be suffixed with '.value'
+            or '.key'.
+          example: $env.value
+          type: string
+      required:
+      - name
+      - value
       type: object
     SLOBulkDelete:
       additionalProperties:
@@ -13179,7 +13249,7 @@ components:
           type: string
         secure:
           description: Whether the value of this variable will be obfuscated in test
-            results.
+            results. Only for config variables of type `text`.
           example: false
           type: boolean
         type:
@@ -18837,6 +18907,7 @@ components:
       - $ref: '#/components/schemas/MonitorSummaryWidgetDefinition'
       - $ref: '#/components/schemas/NoteWidgetDefinition'
       - $ref: '#/components/schemas/QueryValueWidgetDefinition'
+      - $ref: '#/components/schemas/RunWorkflowWidgetDefinition'
       - $ref: '#/components/schemas/ScatterPlotWidgetDefinition'
       - $ref: '#/components/schemas/SLOWidgetDefinition'
       - $ref: '#/components/schemas/SLOListWidgetDefinition'

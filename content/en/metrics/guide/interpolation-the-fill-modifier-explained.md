@@ -6,6 +6,8 @@ aliases:
     - /dashboards/faq/interpolation-the-fill-modifier-explained
 ---
 
+{{< img src="metrics/guide/graph_fill_example.png" alt="Fill() function in the graph options" style="width:100%;" >}}
+
 ## Why interpolation?
 
 Interpolation is not about filling arbitrary large gaps in a metric series, but aligning several series together, to make it possible to perform aggregation across sources.

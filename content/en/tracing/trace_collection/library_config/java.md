@@ -253,6 +253,10 @@ When `false`, informational startup logging is disabled. Available for versions 
 **Default**: `false`<br>
 When `true`, user principal is collected. Available for versions 0.61+.
 
+`dd.instrumentation.telemetry.enabled`
+: **Environment Variable**: `DD_INSTRUMENTATION_TELEMETRY_ENABLED`<br>
+**Default**: `true`<br>
+When `true`, the tracer collects [telemetry data][14]. Available for versions 0.104+. Defaults to `true` for versions 0.115+.
 
 **Note**:
 
@@ -427,3 +431,4 @@ If multiple extraction styles are enabled extraction attempt is done on the orde
 [9]: /integrations/java/?tab=host#metric-collection
 [10]: https://github.com/openzipkin/b3-propagation
 [13]: /agent/guide/network/#configure-ports
+[14]: /tracing/configure_data_security/#telemetry-collection
