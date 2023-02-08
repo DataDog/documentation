@@ -92,6 +92,7 @@ def download_content_from_external_source(self, content):
     return (self.cache_enabled == False) \
         or (action == 'npm-integrations') \
         or (file_name != '' and not file_name.endswith('.md')) \
+        or (getenv("CI_COMMIT_REF_NAME") == 'master')
 
 
 def fetch_sourced_content_from_local_or_upstream(self, github_token, extract_dir):
@@ -107,25 +108,26 @@ def fetch_sourced_content_from_local_or_upstream(self, github_token, extract_dir
     is_in_ci = os.getenv("CI_COMMIT_REF_NAME")
 
     for content in self.list_of_sourced_contents:
-        print(f'Downloading external content from {content["repo_name"]}')
-        local_repo_path = os.path.join("..", content["repo_name"])
-        repo_path_last_extract = os.path.join(extract_dir, content["repo_name"])
+        repo = content["repo_name"]
+        print(f'Downloading external content from {repo}...')
+        local_repo_path = os.path.join("..", repo)
+        repo_path_last_extract = os.path.join(extract_dir, repo)
 
         if isdir(local_repo_path) and not is_in_ci:
-            print(f"\x1b[32mINFO\x1b[0m: Local version of {content['repo_name']} found in: {local_repo_path}")
-            download_from_local_repo(local_repo_path, content["org_name"], content["repo_name"], content["branch"], grouped_globs.get(content["repo_name"], content["globs"]),
+            print(f"\x1b[32mINFO\x1b[0m: Local version of {repo} found in: {local_repo_path}")
+            download_from_local_repo(local_repo_path, content["org_name"], repo, content["branch"], grouped_globs.get(repo, content["globs"]),
                                     extract_dir, content.get("sha", None))
             content["globs"] = update_globs(
                 "{0}{1}{2}".format(
                     extract_dir,
-                    content["repo_name"],
+                    repo,
                     sep,
                 ),
                 content["globs"],
             )
         elif isdir(repo_path_last_extract) and not is_in_ci:
             print(
-                f"\x1b[32mINFO\x1b[0m: Local version of {content['repo_name']} found from previous extract in:"
+                f"\x1b[32mINFO\x1b[0m: Local version of {repo} found from previous extract in:"
                 f" {repo_path_last_extract} "
             )
             content["globs"] = update_globs(
@@ -134,14 +136,14 @@ def fetch_sourced_content_from_local_or_upstream(self, github_token, extract_dir
             )
         elif github_token != "false":
             print(
-                f"\x1b[32mINFO\x1b[0m: No local version of {content['repo_name']} found, downloading content from "
+                f"\x1b[32mINFO\x1b[0m: No local version of {repo} found, downloading content from "
                 f"upstream version and placing in: {extract_dir}"
             )
             download_from_repo(github_token,
                             content["org_name"],
-                            content["repo_name"],
+                            repo,
                             content["branch"],
-                            grouped_globs.get(content["repo_name"], content["globs"]),
+                            grouped_globs.get(repo, content["globs"]),
                             extract_dir,
                             content.get("sha", None)
                             )
@@ -150,21 +152,16 @@ def fetch_sourced_content_from_local_or_upstream(self, github_token, extract_dir
             ] = update_globs(
                 "{0}{1}{2}".format(
                     extract_dir,
-                    content["repo_name"],
+                    repo,
                     sep,
                 ),
                 content["globs"],
             )
         elif getenv("LOCAL") == 'True':
-            print(
-                "\x1b[33mWARNING\x1b[0m: No local version of {} found, no GITHUB_TOKEN available. Documentation is now in degraded mode".format(content["repo_name"]))
+            print("\x1b[33mWARNING\x1b[0m: No local version of {} found, no GITHUB_TOKEN available. Documentation is now in degraded mode".format(repo))
             content["action"] = "Not Available"
         else:
-            print(
-                "\x1b[31mERROR\x1b[0m: No local version of {} found, no GITHUB_TOKEN available.".format(
-                    content["repo_name"]
-                )
-            )
+            print("\x1b[31mERROR\x1b[0m: No local version of {} found, no GITHUB_TOKEN available.".format(repo))
             raise ValueError
 
 
@@ -259,8 +256,8 @@ def download_cached_content_into_repo(self):
             print(f'Copying {self.relative_en_content_path}{destination} directory from cache')
             shutil.copytree(f'temp/{self.relative_en_content_path}{destination}', f'{self.relative_en_content_path}{destination}', dirs_exist_ok=True)
 
-    # Integrations are handled separately for now
-    if self.integrations_cache_enabled:
+    # Integrations are handled separately for now (there is active work underway to improve this)
+    if self.cache_enabled:
         shutil.copytree(f'temp/{self.relative_en_content_path}/integrations', f'{self.relative_en_content_path}/integrations', dirs_exist_ok=True)
         
     # Cleanup temporary dir after cache download complete
