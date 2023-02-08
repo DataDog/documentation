@@ -73,7 +73,7 @@ labels:
   com.datadoghq.ad.instances: '[<INSTANCE_CONFIG>]'
 ```
 
-**using `docker run`, `nerdctl run`, or `podman run` commands**:
+**Using `docker run`, `nerdctl run`, or `podman run` commands**:
 
 ```shell
 -l com.datadoghq.ad.check_names='[<INTEGRATION_NAME>]' -l com.datadoghq.ad.init_configs='[<INIT_CONFIG>]' -l com.datadoghq.ad.instances='[<INSTANCE_CONFIG>]'
