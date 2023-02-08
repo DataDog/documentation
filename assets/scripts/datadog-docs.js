@@ -68,12 +68,6 @@ $(document).ready(function () {
 
     updateMainContentAnchors();
 
-    // disable lazy load
-    const images = document.querySelectorAll("img");
-    images.forEach(img => {
-        img.loading = "eager";
-    });
-
     // add targer-blank to external links
     const newLinks = document.getElementsByTagName('a');
     for (let i = 0; i < newLinks.length; i++) {
