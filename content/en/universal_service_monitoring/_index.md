@@ -320,7 +320,7 @@ docker run --cgroupns host \
 --cap-add=NET_BROADCAST \
 --cap-add=NET_RAW \
 --cap-add=IPC_LOCK \
---cap-add=CHOWN
+--cap-add=CHOWN \
 gcr.io/datadoghq/agent:latest
 ```
 
