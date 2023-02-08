@@ -91,7 +91,7 @@ The Datadog intake origin corresponding to your site parameter should be defined
 
 ## Legacy proxy setups
 
-Before Browser SDK v4.TODO, the `proxyUrl` initialization parameter was used and the Datadog intake origin was included in the <code>ddforward</code> attribute. The proxy implementation was in charge of validating this host and failure to do so resulted in various vulnerabilities.
+Before Browser SDK v4.34.0, the `proxyUrl` initialization parameter was used and the Datadog intake origin was included in the <code>ddforward</code> attribute. The proxy implementation was in charge of validating this host and failure to do so resulted in various vulnerabilities.
 
 The Datadog intake origin now needs to be defined in your proxy implementation to ensure security.
 
