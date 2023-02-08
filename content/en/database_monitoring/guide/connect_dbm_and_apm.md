@@ -19,7 +19,7 @@ This guide assumes that you have configured [Datadog Monitoring][1] and are usin
 Supported tracers
 : [dd-trace-go][3] >= 1.44.0 (support for [database/sql][4] and [sqlx][5] packages)<br />
 [dd-trace-rb][6] >= 1.6.0 (support for [mysql2][7] and [pg][8] gems)<br />
-[dd-trace-js][9] >= 3.9.0 or >= 2.22.0 (support for [postgres client][10])<br />
+[dd-trace-js][9] >= 3.13.0 or >= 2.26.0 (support for [postgres][10], [mysql][13] and [mysql2][14] clients)<br />
 [dd-trace-py][11] >= 1.7.0 (support for [psycopg2][12])
 
 Supported databases
@@ -261,3 +261,5 @@ client.query('SELECT $1::text as message', ['Hello world!'], (err, result) => {
 [10]: https://node-postgres.com/
 [11]: https://github.com/DataDog/dd-trace-py
 [12]: https://www.psycopg.org/docs/index.html
+[13]: https://github.com/mysqljs/mysql
+[14]: https://github.com/sidorares/node-mysql2
