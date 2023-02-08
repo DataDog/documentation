@@ -183,4 +183,4 @@ Follow our [Log Usage guide][20] to see how to monitor and alert on your usage.
 [17]: /logs/log_configuration/processors/#trace-remapper
 [18]: /logs/live_tail/#overview
 [19]: https://www.timeanddate.com/worldclock/converter.html
-[20]: /logs/guide/logs-monitors-on-volumes/#monitor-indexed-logs-with-fixed-threshold
+[20]: /logs/guide/best-practices-for-log-management/#monitor-log-usage
