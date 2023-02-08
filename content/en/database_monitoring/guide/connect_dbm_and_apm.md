@@ -103,7 +103,7 @@ func main() {
 
 {{% tab "Ruby" %}}
 
-In your Gemfile, install or udpate [dd-trace-rb][1] to version greater than `1.8.0`:
+In your Gemfile, install or update [dd-trace-rb][1] to version `1.8.0` or greater:
 
 ```rb
 source 'https://rubygems.org'
