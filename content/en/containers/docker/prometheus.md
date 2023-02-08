@@ -90,7 +90,7 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='["{\"openmetrics_endpoint\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<NAMESPACE>\",\"metrics\":[{\"<METRIC_TO_FETCH>\": \"<NEW_METRIC_NAME>\"}]}"]'
 ```
 
-**Multiple endpoints example**:
+#### Multiple endpoints example
 
 ```conf
 LABEL "com.datadoghq.ad.check_names"='["openmetrics","openmetrics"]'
