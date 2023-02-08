@@ -380,7 +380,7 @@ services:
 As `Docker Swarm` does not yet support the changing of `security_opt`, the operating system
 must not have a running `apparmor` instance.
 
-If that is the case, then use the same `docker-compose.yml` file from `Docker-Compose` [section][1] besides the field `security_opt`.
+If the operating system does not have a running `apparmor` instance, then use the same `docker-compose.yml` file from `Docker-Compose` [section][1] beside the field `security_opt`.
 
 [1]: /universal_service_monitoring/?tab=dockercompose#enabling-universal-service-monitoring
 
