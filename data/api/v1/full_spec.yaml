@@ -3815,6 +3815,7 @@ components:
       - appsec_fargate_usage
       - appsec_usage
       - browser_usage
+      - container_excl_agent_usage
       - container_usage
       - cspm_containers_usage
       - cspm_hosts_usage
@@ -3836,7 +3837,6 @@ components:
       - profiled_host_usage
       - snmp_usage
       - estimated_rum_sessions_usage
-      - cont_usage
       type: string
       x-enum-varnames:
       - API_USAGE
@@ -3845,6 +3845,7 @@ components:
       - APPSEC_FARGATE_USAGE
       - APPSEC_USAGE
       - BROWSER_USAGE
+      - CONTAINER_EXCL_AGENT_USAGE
       - CONTAINER_USAGE
       - CSPM_CONTAINERS_USAGE
       - CSPM_HOSTS_USAGE
@@ -3866,7 +3867,6 @@ components:
       - PROFILED_HOST_USAGE
       - SNMP_USAGE
       - ESTIMATED_RUM_SESSIONS_USAGE
-      - CONT_USAGE
     IFrameWidgetDefinition:
       description: The iframe widget allows you to embed a portion of any other web
         page on your dashboard. Only available on FREE layout dashboards.
@@ -7247,6 +7247,8 @@ components:
       - appsec_percentage
       - browser_usage
       - browser_percentage
+      - container_excl_agent_usage
+      - container_excl_agent_percentage
       - container_usage
       - container_percentage
       - cspm_containers_percentage
@@ -7289,8 +7291,6 @@ components:
       - snmp_percentage
       - estimated_rum_sessions_usage
       - estimated_rum_sessions_percentage
-      - cont_usage
-      - cont_percentage
       - '*'
       type: string
       x-enum-varnames:
@@ -7306,6 +7306,8 @@ components:
       - APPSEC_PERCENTAGE
       - BROWSER_USAGE
       - BROWSER_PERCENTAGE
+      - CONTAINER_EXCL_AGENT_USAGE
+      - CONTAINER_EXCL_AGENT_PERCENTAGE
       - CONTAINER_USAGE
       - CONTAINER_PERCENTAGE
       - CSPM_CONTAINERS_PERCENTAGE
@@ -7348,8 +7350,6 @@ components:
       - SNMP_PERCENTAGE
       - ESTIMATED_RUM_SESSIONS_USAGE
       - ESTIMATED_RUM_SESSIONS_PERCENTAGE
-      - CONT_USAGE
-      - CONT_PERCENTAGE
       - ALL
     MonthlyUsageAttributionValues:
       description: Fields in Usage Summary by tag(s).
@@ -7405,12 +7405,12 @@ components:
           description: The synthetic browser test usage by tag(s).
           format: double
           type: number
-        cont_percentage:
+        container_excl_agent_percentage:
           description: The percentage of container usage without the Datadog Agent
             by tag(s).
           format: double
           type: number
-        cont_usage:
+        container_excl_agent_usage:
           description: The container usage without the Datadog Agent by tag(s).
           format: double
           type: number
