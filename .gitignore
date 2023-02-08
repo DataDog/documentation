@@ -91,6 +91,8 @@ npm-debug.log*
 content/en/logs/log_collection/flutter.md
 
 # RUM
+!content/en/real_user_monitoring/android/.gitkeep
+!content/en/real_user_monitoring/flutter/.gitkeep
 content/en/real_user_monitoring/android/_index.md
 content/en/real_user_monitoring/android/data_collected.md
 content/en/real_user_monitoring/android/advanced_configuration.md
