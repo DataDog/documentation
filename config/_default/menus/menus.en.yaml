@@ -3350,7 +3350,7 @@ main:
     identifier: rum_guides
     weight: 14
   - name: Data Security
-    url: data_security/rum_session_replay/
+    url: data_security/real_user_monitoring/
     parent: rum
     weight: 15
   - name: Network Monitoring
@@ -3741,8 +3741,8 @@ main:
     url: data_security/synthetics/
     parent: data_security
     weight: 4
-  - name: RUM & Session Replay
-    url: data_security/rum_session_replay/
+  - name: Real User Monitoring
+    url: data_security/real_user_monitoring/
     parent: data_security
     weight: 5
   - name: Guides
