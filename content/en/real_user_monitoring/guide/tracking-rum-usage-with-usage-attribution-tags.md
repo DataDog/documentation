@@ -28,10 +28,20 @@ Categories for usage are determined by tags. Before setting up your RUM usage at
 ### Add tags to your RUM sessions
 Once your usage attribution tags have been configured, you can tag your RUM sessions with them. 
 
-To do so, set the RUM global context at the start of the session (right after calling `datadogRum.init`) using the [`setGlobalContextProperty`][2] method. For example, here's how we would tag sessions so they can be tracked for the marketing department: 
+To set tags for **browser sessions**, set the RUM global context at the start of the session (right after calling `datadogRum.init`) using the [`setGlobalContextProperty`][2] method. For example, here's how we would tag sessions so they can be tracked for the marketing department: 
 
 ```javascript
 datadogRum.setGlobalContextProperty('department', 'marketing');
+```
+
+To set tags for **mobile sessions**, use the [`addAttribute`][5] method. Here's an example:
+
+```javascript
+//Android
+GlobalRum.addAttribute(‘department’, ‘marketing’)
+
+//iOS
+Global.rum.addAttribute(forKey: ‘department’, value: ‘marketing’)
 ```
 
 **Note**: We include a few tags by default (service, env, version, and application.id). For anything else, set the global context using the method above.
@@ -53,3 +63,4 @@ Usage information is also available through the [`GetHourlyUsageAttribution`][4]
 [2]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#global-context
 [3]: https://app.datadoghq.com/billing/usage-attribution
 [4]: /api/latest/usage-metering/#get-hourly-usage-attribution-v1
+[5]: /real_user_monitoring/android/advanced_configuration/?tab=kotlin#track-attributes
