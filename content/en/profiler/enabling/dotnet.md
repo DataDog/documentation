@@ -126,9 +126,7 @@ To install the .NET Profiler per-application:
 
 <br>
 <div class="alert alert-info">
-  <div class="alert-info">
   <strong>Note:</strong> The following steps include setting environment variables to enable the profiler. Datadog <strong>does not recommend</strong> setting those environment variables at machine-level. If set at machine-level, every .NET application running on the machine is profiled and this incurs a significant overhead on the CPU and memory of your machine.
-  </div>
 </div>
 
 {{< tabs >}}
