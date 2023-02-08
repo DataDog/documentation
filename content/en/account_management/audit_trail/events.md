@@ -23,6 +23,7 @@ further_reading:
 - [Notebook](#notebook-events)
 - [OAuth](#oauth-events)
 - [Organization management](#organization-management-events)
+- [Security Notifications](#security-notification-events)
 
 #### Product-Specific Events
 - [Application Performance Monitoring (APM)](#apm-events)
