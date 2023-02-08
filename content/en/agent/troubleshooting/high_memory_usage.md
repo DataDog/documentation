@@ -13,13 +13,15 @@ further_reading:
 
 Several factors can cause high Agent CPU or memory consumption. If you try the steps below and continue to have trouble, [contact Datadog Support for further assistance](#reach-out-to-datadog-support).
 
-Common causes of high CPU or memory consumption:
+### Common causes of high CPU or memory consumption
 
 - An integration is returning thousands of metrics, or is running a large number of check instances. You can see a summary of the running check instances, as well as the number of metrics collected, by running [the `status` CLI command][2] and checking the **Collector** section.
 - The Agent's Python or Go runtime is causing high resource consumption. Enable [Live Processes Monitoring][3] to check if the Agent process is consuming unexpected amounts of memory or CPU. You can also use your operating system's activity manager to check Agent process resource consumption.
 - The Agent is monitoring a large number of processes. This is configured in the [Process Check configuration file][4].
 - The Agent's behavior is triggering Windows anti-malware or antivirus tools, causing high CPU usage.
-- The Agent is forwarding a very large number of log lines or DogstatsD metrics.
+- The Agent is forwarding a very large number of log lines or DogStatsD metrics.
+
+### Adjustments to reduce resource usage
 
 Here are some adjustments you can make to your Agent configuration to reduce resource usage:
 
