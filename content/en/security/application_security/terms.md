@@ -14,12 +14,12 @@ further_reading:
   text: "Risk Management"
 ---
 
-Datadog Application Security Management (ASM) monitors threats and provides protection against application-level attacks that aim to exploit code-level vulnerabilities. It leverages runtime code execution context, traces and errors telemetry, and user attribution.
+Datadog Application Security Management (ASM) monitors threats and provides protection against application-level attacks that aim to exploit code-level vulnerabilities. It leverages runtime code execution context, trace and error data, and user attribution.
 
 ## General application security terms
 
 attack attempt
-: An indication that a security rule was triggered by the trace.
+: Which security rule was triggered by the trace.
 
 Datadog library
 : _also_ tracer, tracing library
@@ -27,12 +27,15 @@ Datadog library
 
 detection rule
 : A conditional logic definition that is applied to ingested data and cloud configurations. When at least one case defined in a rule is matched over a given period of time, Datadog generates a _security signal_.
+: See [Detection rules][10].
 
 exclusion filter
 : A mechanism for discarding suspicious requests flagged through the ASM library and the event rules. Exclusion filters are applied as requests are ingested into Datadog (intake). Exclusion filters help you manage false positives and intake costs.
+: See [Exclusion filters][11] in the app.
 
 event rules
 : A set of rules executed in the Datadog libraries to catch security activity. These include Web Application Firewall (WAF) patterns that monitor for attempts to exploit known vulnerabilities.
+: See [Event rules][12].
 
 interactive application security testing (IAST)
 : An application security testing method that proactively detects vulnerabilities while the app is run by an automated test, human tester, or any activity interacting with the application functionality.
@@ -46,6 +49,7 @@ service
 
 signal
 : A detection of an application attack that impacts your services. Signals identify meaningful threats for you to review, and should be triaged with a high priority.
+: See [Signals Explorer][13] in the app
 
 software composition analysis (SCA)
 : Comparing the open source libraries loaded by your services to databases of known vulnerabilities. SCA helps you identify vulnerable dependencies, outdated libraries, and licensing issues in the open source libraries that your web services load.
@@ -58,6 +62,7 @@ suspicious request
 
 user attribution
 : A mechanism that maps suspicious requests to known users your systems. 
+: See [Tracking User Activity][14].
 
 vulnerability
 : Passive risk within an application. From [OWASP][1]: "A vulnerability is a hole or a weakness in the application, which can be a design flaw or an implementation bug, that allows an attacker to cause harm to the stakeholders of an application. Stakeholders include the application owner, application users, and other entities that rely on the application."
@@ -126,3 +131,8 @@ runtime technology
 [7]: https://owasp.org/www-project-top-ten/2017/A1_2017-Injection
 [8]: /agent/guide/how_remote_config_works/
 [9]: https://en.wikipedia.org/wiki/Software_framework
+[10]: /security/detection_rules/
+[11]: https://app.datadoghq.com/security/appsec/exclusions
+[12]: /security/application_security/event_rules/#overview
+[13]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Application%20Security%22&product=appsec&view=signal
+[14]: /security/application_security/threats/add-user-info/
