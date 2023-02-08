@@ -1,8 +1,6 @@
 ---
-# Please keep these values as false for now
-- cache_config:
-    global_cache_enabled: false
-    integrations_cache_enabled: false
+- config:
+    cache_enabled: false
 
 - data:
     - org_name: jenkinsci

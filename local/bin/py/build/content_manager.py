@@ -83,17 +83,13 @@ def download_content_from_external_source(self, content):
     """
     Returns a boolean determining whether pull_config content should be downloaded from cache or external source.
     Content will be pulled from external source if:
-        * Global or individual cache variables are set to false
-        * This is an integration action and integration cache is disabled
-        * Generated file is not .md (this includes npm-integration action which is unsupported at this time)
+        * cache is disabled
+        * generated file is not .md (this includes npm-integrations), which is currently unsupported.
     """
-    use_cached = content.get('options', {}).get('cached', False)
     file_name = content.get('options', {}).get('file_name', '')
     action = content.get('action', '')
 
-    return (self.global_cache_enabled == False) \
-        or (use_cached == False) \
-        or (action in ('integrations', 'marketplace-integrations') and not self.integrations_cache_enabled) \
+    return (self.cache_enabled == False) \
         or (action == 'npm-integrations') \
         or (file_name != '' and not file_name.endswith('.md')) \
 

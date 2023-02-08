@@ -1,7 +1,6 @@
 ---
-- cache_config:
-    global_cache_enabled: true
-    integrations_cache_enabled: true
+- config:
+    cache_enabled: true
 
 - data:
     - org_name: jenkinsci
@@ -18,7 +17,6 @@
           options:
             dest_path: '/integrations/'
             file_name: 'jenkins.md'
-            cached: true
             front_matters:
               dependencies: ["https://github.com/jenkinsci/datadog-plugin/blob/master/README.md"]
               public_title: Datadog-Jenkins Integration
@@ -46,8 +44,6 @@
           globs:
           # https://github.com/aws/aws-sdk-go/blob/main/aws/endpoints/defaults.go
           - aws/endpoints/defaults.go
-          options:
-            cached: false
 
     - org_name: DataDog
 
@@ -61,8 +57,6 @@
           globs:
           # https://github.com/DataDog/dd-go/blob/prod/networks/model/domain/gcp_services.go
           - networks/model/domain/gcp_services.go
-          options:
-            cached: false
 
       - repo_name: dogweb
 
@@ -76,8 +70,6 @@
           - integration/*/service_checks.json
           - integration/*/README.md
           - integration/*/__init__.py
-          options:
-            cached: true
 
       - repo_name: integrations-core
         contents:
@@ -90,8 +82,6 @@
           - "*/assets/service_checks.json"
           - "*/README.md"
           - "*/datadog_checks/*/__about__.py"
-          options:
-            cached: true
 
         - action: pull-and-push-folder
           branch: master
@@ -99,7 +89,6 @@
           - docs/dev/*.md
           options:
             dest_dir: '/developers/integrations/'
-            cached: true
             path_to_remove: 'docs/dev/'
             front_matters:
               dependencies: [ "https://github.com/DataDog/integrations-core/blob/master/docs/dev/" ]
@@ -115,8 +104,6 @@
           - "*/assets/service_checks.json"
           - "*/README.md"
           - "*/datadog_checks/*/__about__.py"
-          options:
-            cached: true
 
       - repo_name: integrations-internal-core
         contents:
@@ -129,8 +116,6 @@
           - "*/assets/service_checks.json"
           - "*/README.md"
           - "*/datadog_checks/*/__about__.py"
-          options:
-            cached: true
 
       - repo_name: marketplace
         contents:
@@ -146,8 +131,6 @@
           - "*/images/*.jpg"
           - "*/images/*.jpeg"
           - "*/images/*.svg"
-          options:
-            cached: true
 
       - repo_name: ansible-datadog
         contents:
@@ -159,7 +142,6 @@
           options:
             dest_path: '/agent/basic_agent_usage/'
             file_name: 'ansible.md'
-            cached: true
             front_matters:
               title: Ansible
               kind: documentation
@@ -175,7 +157,6 @@
           options:
             dest_path: '/agent/basic_agent_usage/'
             file_name: 'chef.md'
-            cached: true
             front_matters:
               title: Chef
               kind: documentation
@@ -191,7 +172,6 @@
           options:
             dest_path: '/agent/basic_agent_usage/'
             file_name: 'heroku.md'
-            cached: true
             front_matters:
               title: Datadog Heroku Buildpack
               kind: documentation
@@ -209,7 +189,6 @@
           options:
             dest_path: '/agent/basic_agent_usage/'
             file_name: 'puppet.md'
-            cached: true
             front_matters:
               title: Puppet
               kind: documentation
@@ -225,7 +204,6 @@
           options:
             dest_path: '/agent/basic_agent_usage/'
             file_name: 'saltstack.md'
-            cached: true
             front_matters:
               title: SaltStack
               kind: documentation
@@ -240,7 +218,6 @@
           options:
             dest_path: '/tracing/trace_collection/dd_libraries/'
             file_name: 'ruby.md'
-            cached: true
             front_matters:
               dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/release/docs/GettingStarted.md"]
               title: Tracing Ruby Applications
@@ -266,7 +243,6 @@
           options:
             dest_path: '/logs/guide/'
             file_name: 'forwarder.md'
-            cached: true
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/README.md"]
 
@@ -279,7 +255,6 @@
           options:
             dest_path: '/serverless/libraries_integrations/'
             file_name: 'plugin.md'
-            cached: true
             front_matters:
               dependencies: ["https://github.com/DataDog/serverless-plugin-datadog/blob/master/README.md"]
               title: Datadog Serverless Framework Plugin
@@ -296,7 +271,6 @@
           options:
             dest_path: '/serverless/libraries_integrations/'
             file_name: 'macro.md'
-            cached: true
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-cloudformation-macro/blob/master/serverless/README.md"]
               title: Datadog Serverless Macro
@@ -313,7 +287,6 @@
           options:
             dest_path: '/serverless/libraries_integrations/'
             file_name: 'cli.md'
-            cached: true
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-ci/blob/master/src/commands/lambda/README.md"]
               title: Datadog Serverless CLI
@@ -328,7 +301,6 @@
           options:
             dest_path: '/continuous_testing/cicd_integrations/'
             file_name: 'configuration.md'
-            cached: true
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-ci/blob/master/src/commands/synthetics/README.md"]
               title: Continuous Testing and CI/CD Configuration
@@ -359,7 +331,6 @@
           options:
             dest_path: '/serverless/libraries_integrations/'
             file_name: 'cdk.md'
-            cached: true
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-cdk-constructs/blob/main/README.md"]
               title: Datadog CDK Construct
@@ -374,7 +345,6 @@
           options:
             dest_path: '/serverless/libraries_integrations/'
             file_name: 'extension.md'
-            cached: true
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-lambda-extension/blob/main/README.md"]
               title: Datadog Lambda Extension
@@ -392,7 +362,6 @@
           options:
             dest_path: '/continuous_testing/cicd_integrations/'
             file_name: 'azure_devops_extension.md'
-            cached: true
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-ci-azure-devops/blob/main/README.md"]
               title: Continuous Testing and Datadog CI Azure DevOps Extension
@@ -410,7 +379,6 @@
           options:
             dest_path: '/continuous_testing/cicd_integrations/'
             file_name: 'github_actions.md'
-            cached: true
             front_matters:
               dependencies: ["https://github.com/DataDog/synthetics-ci-github-action/blob/main/README.md"]
               title: Continuous Testing and GitHub Actions
@@ -427,7 +395,6 @@
           options:
             dest_path: '/continuous_testing/cicd_integrations/'
             file_name: 'circleci_orb.md'
-            cached: true
             front_matters:
               dependencies: ["https://github.com/DataDog/synthetics-ci-orb/blob/main/README.md"]
               title: Continuous Testing and CircleCI Orb
@@ -444,7 +411,6 @@
           options:
             dest_path: '/real_user_monitoring/android/'
             file_name: '_index.md'
-            cached: true
             front_matters:
               dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/rum_getting_started.md"]
               title: RUM Android and Android TV Monitoring
@@ -463,7 +429,6 @@
           options:
             dest_path: '/real_user_monitoring/android/'
             file_name: 'data_collected.md'
-            cached: true
             front_matters:
               dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/mobile_data_collected.md"]
               title: RUM Android Data Collected
@@ -482,7 +447,6 @@
           options:
             dest_path: '/real_user_monitoring/android/'
             file_name: 'advanced_configuration.md'
-            cached: true
             front_matters:
               dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/configure_rum_android_sdk.md"]
               title: RUM Android Advanced Configuration
@@ -501,7 +465,6 @@
           options:
             dest_path: '/real_user_monitoring/android/'
             file_name: 'mobile_vitals.md'
-            cached: true
             front_matters:
               dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/rum_mobile_vitals.md"]
               title: Mobile Vitals
@@ -521,7 +484,6 @@
           options:
             dest_path: '/real_user_monitoring/android/'
             file_name: 'web_view_tracking.md'
-            cached: true
         - action: pull-and-push-file
           branch: master
           globs:
@@ -529,7 +491,6 @@
           options:
             dest_path: '/real_user_monitoring/android/'
             file_name: 'integrated_libraries.md'
-            cached: true
             front_matters:
               dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/integrated_libraries_android.md"]
               title: Android Integrated Libraries
@@ -548,7 +509,6 @@
           options:
             dest_path: '/real_user_monitoring/android/'
             file_name: 'troubleshooting.md'
-            cached: true
             front_matters:
               dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/troubleshooting_android.md"]
               title: Troubleshooting
@@ -569,7 +529,6 @@
           options:
             dest_path: '/real_user_monitoring/browser/'
             file_name: '_index.md'
-            cached: true
             front_matters:
               dependencies: ["https://github.com/DataDog/browser-sdk/blob/main/packages/rum/README.md"]
               title: RUM Browser Monitoring
@@ -590,7 +549,6 @@
           options:
             dest_path: '/logs/log_collection/'
             file_name: 'javascript.md'
-            cached: true
             front_matters:
               dependencies: ["https://github.com/DataDog/browser-sdk/blob/main/packages/logs/README.md"]
               title: Browser Log Collection
@@ -606,7 +564,6 @@
           options:
             dest_path: '/real_user_monitoring/error_tracking/'
             file_name: 'android.md'
-            cached: true
             front_matters:
               dependencies: ["https://github.com/DataDog/dd-sdk-android-gradle-plugin/blob/main/docs/upload_mapping_file.md"]
               title: Android Crash Reporting and Error Tracking
@@ -630,7 +587,6 @@
           options:
             dest_path: '/integrations/guide/'
             file_name: 'amazon_cloudformation.md'
-            cached: true
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-cloudformation-resources/blob/master/README.md"]
               title: Datadog-Amazon CloudFormation
@@ -647,7 +603,6 @@
           options:
             dest_path: '/logs/log_collection/'
             file_name: 'android.md'
-            cached: true
             front_matters:
               title: Android Log Collection
               kind: documentation
@@ -668,7 +623,6 @@
           options:
             dest_path: '/tracing/trace_collection/dd_libraries/'
             file_name: 'android.md'
-            cached: true
             front_matters:
               title: Android Trace Collection
               kind: documentation
@@ -694,7 +648,6 @@
           options:
             dest_path: '/real_user_monitoring/ios/'
             file_name: '_index.md'
-            cached: true
             front_matters:
               title: RUM iOS and tvOS Monitoring
               kind: documentation
@@ -715,7 +668,6 @@
           options:
             dest_path: '/logs/log_collection/'
             file_name: 'ios.md'
-            cached: true
             front_matters:
               title: iOS Log Collection
               kind: documentation
@@ -736,7 +688,6 @@
           options:
             dest_path: '/tracing/trace_collection/dd_libraries/'
             file_name: 'ios.md'
-            cached: true
             front_matters:
               title: iOS Trace Collection
               kind: documentation
@@ -760,7 +711,6 @@
           options:
             dest_path: '/real_user_monitoring/ios/'
             file_name: 'mobile_vitals.md'
-            cached: true
             front_matters:
               title: Mobile Vitals
               kind: documentation
@@ -781,7 +731,6 @@
           options:
             dest_path: '/real_user_monitoring/error_tracking/'
             file_name: 'ios.md'
-            cached: true
             front_matters:
               title: iOS Crash Reporting and Error Tracking
               kind: documentation
@@ -807,7 +756,6 @@
           options:
             dest_path: '/real_user_monitoring/ios/'
             file_name: 'swiftui.md'
-            cached: true
             front_matters:
               dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/swiftui.md"]
 
@@ -817,7 +765,6 @@
             - docs/rum_collection/*
           options:
             dest_dir: '/real_user_monitoring/ios/'
-            cached: true
             path_to_remove: 'docs/rum_collection/'
             front_matters:
               dependencies: [ "https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/" ]
@@ -831,7 +778,6 @@
           options:
             dest_path: '/real_user_monitoring/reactnative/'
             file_name: '_index.md'
-            cached: true
             front_matters:
               title: React Native Monitoring
               kind: documentation
@@ -854,7 +800,6 @@
           options:
             dest_path: '/real_user_monitoring/reactnative/'
             file_name: 'advanced_configuration.md'
-            cached: true
             front_matters:
               title: RUM React Native Advanced Configuration
               kind: documentation
@@ -874,7 +819,6 @@
           options:
             dest_path: '/real_user_monitoring/reactnative/'
             file_name: 'integrated_libraries.md'
-            cached: true
             front_matters:
               title: React Native Integrated Libraries
               kind: faq
@@ -897,7 +841,6 @@
           options:
             dest_path: '/real_user_monitoring/reactnative/'
             file_name: 'mobile_vitals.md'
-            cached: true
             front_matters:
               title: Mobile Vitals
               kind: documentation
@@ -920,7 +863,6 @@
           options:
             dest_path: '/real_user_monitoring/reactnative/'
             file_name: 'expo.md'
-            cached: true
             front_matters:
               title: Expo
               kind: documentation
@@ -941,7 +883,6 @@
           options:
             dest_path: '/real_user_monitoring/reactnative/'
             file_name: 'codepush.md'
-            cached: true
             front_matters:
               dependencies: ["https://github.com/DataDog/dd-sdk-reactnative/blob/main/docs/codepush.md"]
               title: CodePush
@@ -962,7 +903,6 @@
           options:
             dest_path: '/real_user_monitoring/error_tracking/'
             file_name: 'expo.md'
-            cached: true
             front_matters:
               dependencies: ["https://github.com/DataDog/dd-sdk-reactnative/blob/main/docs/expo_crash_reporting.md"]
               title: Expo Crash Reporting and Error Tracking
@@ -988,7 +928,6 @@
           options:
             dest_path: '/real_user_monitoring/error_tracking/'
             file_name: 'reactnative.md'
-            cached: true
             front_matters:
               title: React Native Crash Reporting and Error Tracking
               kind: documentation
@@ -1014,7 +953,6 @@
           options:
             dest_path: '/real_user_monitoring/flutter/'
             file_name: '_index.md'
-            cached: true
             front_matters:
               title: Flutter Monitoring
               kind: documentation
@@ -1037,7 +975,6 @@
           options:
             dest_path: '/logs/log_collection/'
             file_name: 'flutter.md'
-            cached: true
             front_matters:
               title: Flutter Log Collection
               kind: documentation
@@ -1057,7 +994,6 @@
           options:
             dest_path: '/real_user_monitoring/flutter/'
             file_name: 'setup.md'
-            cached: true
             front_matters:
               title: Setup
               kind: documentation
@@ -1080,7 +1016,6 @@
           options:
             dest_path: '/real_user_monitoring/flutter/'
             file_name: 'advanced_configuration.md'
-            cached: true
             front_matters:
               title: RUM Flutter Advanced Configuration
               kind: documentation
@@ -1100,7 +1035,6 @@
           options:
             dest_path: '/real_user_monitoring/flutter/'
             file_name: 'data_collected.md'
-            cached: true
             front_matters:
               title: RUM Flutter Data Collected
               kind: documentation
@@ -1120,7 +1054,6 @@
           options:
             dest_path: '/real_user_monitoring/flutter/'
             file_name: 'mobile_vitals.md'
-            cached: true
             front_matters:
               title: Mobile Vitals
               kind: documentation
@@ -1143,7 +1076,6 @@
           options:
             dest_path: '/real_user_monitoring/flutter/'
             file_name: 'troubleshooting.md'
-            cached: true
             front_matters:
               title: Troubleshooting
               kind: documentation
@@ -1163,7 +1095,6 @@
           options:
             dest_path: '/real_user_monitoring/error_tracking/'
             file_name: 'flutter.md'
-            cached: true
             front_matters:
               title: Flutter Crash Reporting and Error Tracking
               kind: documentation
@@ -1206,7 +1137,6 @@
             - "application-security/*.md"
           options:
             dest_path: '/security/default_rules/'
-            cached: true
 
       - repo_name: infrastructure-resources
         contents:
@@ -1217,7 +1147,6 @@
           options:
             dest_dir: '/security/cspm/custom_rules/'
             path_to_remove: 'generated/md/external/'
-            cached: true
             front_matters:
               disable_edit: true
 
@@ -1230,7 +1159,6 @@
           options:
             dest_path: "/developers/"
             file_name: "datadog_apps.md"
-            cached: true
             front_matters:
               dependencies: ["https://github.com/DataDog/apps/blob/master/docs/en/getting-started.md"]
 
@@ -1243,7 +1171,6 @@
           options:
             file_name: 'agent_config.yaml'
             output_content: false
-            cached: false # Dont change for now
         - action: pull-and-push-folder
           branch: main
           globs:
@@ -1252,7 +1179,6 @@
           options:
             dest_dir: '/security/cloud_workload_security/'
             path_to_remove: 'docs/cloud-workload-security/'
-            cached: true
 
       - repo_name: dd-source
         contents:
@@ -1262,7 +1188,6 @@
             - "domains/workflow/actionplatform/apps/tools/manifest_generator/manifest.schema.json"
             - "domains/workflow/actionplatform/apps/wf-actions-worker/src/runner/bundles/com.datadoghq.*/manifest.json"
           options:
-            cached: true
             dest_path: '/workflows/actions_catalog/'
             bundle_excludes:
               - "com.datadoghq.test"

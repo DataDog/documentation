@@ -31,8 +31,7 @@ class Build:
         self.list_of_cached_contents = []
         self.build_configuration = []
         self.integration_mutations = OrderedDict()
-        self.integrations_cache_enabled = False
-        self.global_cache_enabled = False
+        self.cache_enabled = False
         self.tempdir = tempdir
         self.relative_en_content_path = 'content/en'
         self.content_dir = "{0}{1}{2}".format(
@@ -52,14 +51,11 @@ class Build:
         self.build_configuration = yaml.safe_load(open(build_configuration_file_path))
 
         if disable_cache_on_retry:
-            self.global_cache_enabled = False
-            self.integrations_cache_enabled = False
+            self.cache_enabled = False
         else:
-            cache_config = self.build_configuration[0].get('cache_config', {})
-            self.global_cache_enabled = cache_config.get('global_cache_enabled', False)
-            self.integrations_cache_enabled = False if not self.global_cache_enabled else cache_config.get('integrations_cache_enabled', False)
+            self.cache_enabled = self.build_configuration[0].get('config', {}).get('cache_enabled', False)
 
-        if not self.integrations_cache_enabled:
+        if not self.cache_enabled:
             self.integration_mutations = OrderedDict(yaml.safe_load(open(integration_merge_configuration_file_path)))
 
 
@@ -112,7 +108,7 @@ class Build:
         # Once all the content is processed integrations are merged according to the integration_merge.yaml
         # configuration file. This needs to happen after all content is processed to avoid flacky integration merge
         # If the integrations are being pulled from cache we can skip this step.
-        if not self.integrations_cache_enabled:
+        if not self.cache_enabled:
             try:
                 Int.merge_integrations()
             except Exception as e:
