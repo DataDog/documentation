@@ -204,15 +204,49 @@ When both the Agent and your services are running on a host, real or virtual, Da
 **Note**: Injection on arm64 is not supported. Injection with `musl` on Alpine Linux container images is untested.
 ## Install the preload library
 
-1. Run the following commands, for example, with `apt`, where `<LANG>` is one of `java`, `js`, `dotnet`, or `all`:
+**For Ubuntu, Debian or other Debian-based Linux distributions:**
 
+1. Set up the Datadog deb repo on your system and create a Datadog archive keyring:
    ```sh
-   sudo apt update
-   sudo apt install -y datadog-apm-inject datadog-apm-library-<LANG>
-   dd-install-ld-preload
-   ```
+   sudo sh -c "echo 'deb [signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] https://apt.datadoghq.com/ stable 7' > /etc/apt/sources.list.d/datadog.list"
+   sudo touch /usr/share/keyrings/datadog-archive-keyring.gpg
+   sudo chmod a+r /usr/share/keyrings/datadog-archive-keyring.gpg
 
-2. Exit and open a new shell to use the preload library.
+   curl https://keys.datadoghq.com/DATADOG_APT_KEY_CURRENT.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+   curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+   curl https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+   ```
+2. Update your local apt repo and install the library:
+   ```sh
+   sudo apt-get update
+   sudo apt-get install datadog-apm-inject datadog-apm-library-<LANG>
+   ```
+   where `<LANG>` is one of `java`, `js`, `dotnet`, or `all`.
+
+3. Exit and open a new shell to use the preload library.
+
+**For CentOS, RedHat, or another distribution that uses yum/RPM:**
+
+1. Set up Datadog’s Yum repo on your system by creating a file called `/etc/yum.repos.d/datadog.repo` with the following contents:
+   ```
+   [datadog]
+   name = Datadog, Inc.
+   baseurl = https://yum.datadoghq.com/stable/7/x86_64/
+   enabled=1
+   gpgcheck=1
+   repo_gpgcheck=1
+   gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.publichttps://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.publichttps://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+   ```
+   **Note**: Due to a [bug in dnf][5], on RedHat/CentOS 8.1 set `repo_gpgcheck=0` instead of `1`.
+
+2. Update install the library:
+   ```sh
+   sudo yum makecache
+   sudo yum install datadog-apm-inject datadog-apm-library-<LANG>
+   ```
+   where `<LANG>` is one of `java`, `js`, `dotnet`, or `all`.
+
+3. Exit and open a new shell to use the preload library.
 
 ## Install the language and your app
 
@@ -360,6 +394,7 @@ Exercise your application to start generating telemetry data, which you can see 
 [2]: /tracing/trace_collection/library_config/
 [3]: https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu
 [4]: https://app.datadoghq.com/apm/traces
+[5]: https://bugzilla.redhat.com/show_bug.cgi?id=1792506
 {{% /tab %}}
 
 {{% tab "Agent on host, app in containers" %}}
@@ -367,7 +402,7 @@ Exercise your application to start generating telemetry data, which you can see 
 <div class="alert alert-info">Tracing library injection on hosts and containers is in beta.</a></div>
 
 
-When your Agent is running on a host, and your services are running in containers, Datadog injects the tracing library by using a preload library that overrides calls to `execve`. Datadog also uses a `runc` shim that intercepts container creation and configures the initial process launched in a Docker container.
+When your Agent is running on a host, and your services are running in containers, Datadog injects the tracing library by using a preload library that overrides calls to `execve`, intercepts container creation, and configures the initial process launched in a Docker container.
 
 Any newly started processes are intercepted and the specified instrumentation library is injected into the services.
 
@@ -378,18 +413,51 @@ Any newly started processes are intercepted and the specified instrumentation li
 
 **Note**: Injection on arm64 is not supported. Injection with `musl` on Alpine Linux container images is untested.
 
-## Install the preload library and shim
+## Install the preload library
 
-1. Run the following commands, for example, with `apt`, where `<LANG>` is one of `java`, `js`, `dotnet`, or `all`:
+**For Ubuntu, Debian or other Debian-based Linux distributions:**
 
+1. Set up the Datadog deb repo on your system and create a Datadog archive keyring:
    ```sh
-   sudo apt update
-   sudo apt install -y datadog-apm-inject datadog-apm-library-<LANG>
-   dd-install-ld-preload
-   dd-install-docker-shim
-   ```
+   sudo sh -c "echo 'deb [signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] https://apt.datadoghq.com/ stable 7' > /etc/apt/sources.list.d/datadog.list"
+   sudo touch /usr/share/keyrings/datadog-archive-keyring.gpg
+   sudo chmod a+r /usr/share/keyrings/datadog-archive-keyring.gpg
 
-2. Exit and open a new shell to use the preload library.
+   curl https://keys.datadoghq.com/DATADOG_APT_KEY_CURRENT.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+   curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+   curl https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+   ```
+2. Update your local apt repo and install the library:
+   ```sh
+   sudo apt-get update
+   sudo apt-get install datadog-apm-inject datadog-apm-library-<LANG>
+   ```
+   where `<LANG>` is one of `java`, `js`, `dotnet`, or `all`.
+
+3. Exit and open a new shell to use the preload library.
+
+**For CentOS, RedHat, or another distribution that uses yum/RPM:**
+
+1. Set up Datadog’s Yum repo on your system by creating a file called `/etc/yum.repos.d/datadog.repo` with the following contents:
+   ```
+   [datadog]
+   name = Datadog, Inc.
+   baseurl = https://yum.datadoghq.com/stable/7/x86_64/
+   enabled=1
+   gpgcheck=1
+   repo_gpgcheck=1
+   gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.publichttps://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.publichttps://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+   ```
+   **Note**: Due to a [bug in dnf][5], on RedHat/CentOS 8.1 set `repo_gpgcheck=0` instead of `1`.
+
+2. Update install the library:
+   ```sh
+   sudo yum makecache
+   sudo yum install datadog-apm-inject datadog-apm-library-<LANG>
+   ```
+   where `<LANG>` is one of `java`, `js`, `dotnet`, or `all`.
+
+3. Exit and open a new shell to use the preload library.
 
 ## Configure Docker injection
 
@@ -526,6 +594,7 @@ Exercise your application to start generating telemetry data, which you can see 
 [2]: https://docs.docker.com/engine/install/ubuntu/
 [3]: /tracing/trace_collection/library_config/
 [4]: https://app.datadoghq.com/apm/traces
+[5]: https://bugzilla.redhat.com/show_bug.cgi?id=1792506
 
 {{% /tab %}}
 
@@ -533,7 +602,7 @@ Exercise your application to start generating telemetry data, which you can see 
 
 <div class="alert alert-info">Tracing library injection in containers is in beta.</a></div>
 
-When your Agent and services are running in Docker containers on the same host, Datadog injects the tracing library by using a preload library that overrides calls to `execve`. Datadog also uses a `runc` shim that intercepts container creation and configures the initial process launched in a Docker container.
+When your Agent and services are running in Docker containers on the same host, Datadog injects the tracing library by using a preload library that overrides calls to `execve`, intercepts container creation, and configures the initial process launched in a Docker container.
 
 Any newly started processes are intercepted and the specified instrumentation library is injected into the services.
 
@@ -543,18 +612,51 @@ Any newly started processes are intercepted and the specified instrumentation li
 
 **Note**: Injection on arm64 is not supported. Injection with `musl` on Alpine Linux container images is untested.
 
-## Install the preload library and shim
+## Install the preload library
 
-1. Run the following commands, for example, with `apt`, where `<LANG>` is one of `java`, `js`, `dotnet`, or `all`:
+**For Ubuntu, Debian or other Debian-based Linux distributions:**
 
+1. Set up the Datadog deb repo on your system and create a Datadog archive keyring:
    ```sh
-   sudo apt update
-   sudo apt install -y datadog-apm-inject datadog-apm-library-<LANG>
-   dd-install-ld-preload
-   dd-install-docker-shim
-   ```
+   sudo sh -c "echo 'deb [signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] https://apt.datadoghq.com/ stable 7' > /etc/apt/sources.list.d/datadog.list"
+   sudo touch /usr/share/keyrings/datadog-archive-keyring.gpg
+   sudo chmod a+r /usr/share/keyrings/datadog-archive-keyring.gpg
 
-2. Exit and open a new shell to use the preload library.
+   curl https://keys.datadoghq.com/DATADOG_APT_KEY_CURRENT.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+   curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+   curl https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+   ```
+2. Update your local apt repo and install the library:
+   ```sh
+   sudo apt-get update
+   sudo apt-get install datadog-apm-inject datadog-apm-library-<LANG>
+   ```
+   where `<LANG>` is one of `java`, `js`, `dotnet`, or `all`.
+
+3. Exit and open a new shell to use the preload library.
+
+**For CentOS, RedHat, or another distribution that uses yum/RPM:**
+
+1. Set up Datadog’s Yum repo on your system by creating a file called `/etc/yum.repos.d/datadog.repo` with the following contents:
+   ```
+   [datadog]
+   name = Datadog, Inc.
+   baseurl = https://yum.datadoghq.com/stable/7/x86_64/
+   enabled=1
+   gpgcheck=1
+   repo_gpgcheck=1
+   gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.publichttps://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.publichttps://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+   ```
+   **Note**: Due to a [bug in dnf][5], on RedHat/CentOS 8.1 set `repo_gpgcheck=0` instead of `1`.
+
+2. Update install the library:
+   ```sh
+   sudo yum makecache
+   sudo yum install datadog-apm-inject datadog-apm-library-<LANG>
+   ```
+   where `<LANG>` is one of `java`, `js`, `dotnet`, or `all`.
+
+3. Exit and open a new shell to use the preload library.
 
 ## Configure Docker injection
 
@@ -733,6 +835,7 @@ Exercise your application to start generating telemetry data, which you can see 
 [2]: https://docs.docker.com/engine/install/ubuntu/
 [3]: /tracing/trace_collection/library_config/
 [4]: https://app.datadoghq.com/apm/traces
+[5]: https://bugzilla.redhat.com/show_bug.cgi?id=1792506
 
 {{% /tab %}}
 
