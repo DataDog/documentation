@@ -39,6 +39,7 @@ Thanks to Real User Monitoring you can identify issues such as broken links, slo
 
 {{< tabs >}}
 {{% tab "CDN async" %}}
+```html
 <script>
   (function(h,o,u,n,d) {
      h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
@@ -61,8 +62,10 @@ Thanks to Real User Monitoring you can identify issues such as broken links, slo
     })
   })
 </script>
+```
 {{% /tab %}}
 {{% tab "CDN sync" %}}
+```html
 <script src="https://www.datadoghq-browser-agent.com/datadog-rum-v4.js" type="text/javascript"></script>
 <script>
   window.DD_RUM &&
@@ -80,6 +83,7 @@ Thanks to Real User Monitoring you can identify issues such as broken links, slo
       trackUserInteractions: true,
     })
 </script>
+```
 {{% /tab %}}
 {{< /tabs >}}
   
