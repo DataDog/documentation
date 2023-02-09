@@ -164,7 +164,7 @@ Below are instructions for deploying a Cloud Run service using standard GCP tool
    Under the **Environment variables** section, ensure that the name is set to `DD_API_KEY`.
 
 ### Custom metrics
-You can submit custom metrics using a [DogStatsd client][7].
+You can submit custom metrics using a [DogStatsD client][7].
 
 **Note**: Only `DISTRIBUTION` metrics should be used.
 
