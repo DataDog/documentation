@@ -10,6 +10,9 @@ further_reading:
     - link: "/logs/log_configuration/parsing"
       tag: "Documentation"
       text: "Learn more about parsing"
+    - link: "https://www.datadoghq.com/blog/log-management-policies/"
+      tag: "Blog"
+      text: "How to implement log management policies with your teams"
 ---
 
 ## Overview
@@ -147,13 +150,13 @@ To set up a monitor to alert when the daily quota is reached for an index:
 
 This is an example of what the notification looks like in Slack:
 
-{{< img src="logs/guide/daily_quota_notification.png" alt="Notification on daily quota of datadog_index:retention-7" style="width:70%;">}}
+{{< img src="logs/guide/daily_quota_notification.png" alt="A slack notification on the daily quota reached on datadog_index:retention-7" style="width:70%;">}}
 
 ### Review the estimated usage dashboard
 
 Once you begin ingesting logs, an out-of-the-box [dashboard][18] summarizing your log usage metrics is automatically installed in your account.
 
-{{< img src="logs/guide/logslight.png" alt="Log estimated usage dashboard" style="width:70%;">}}
+{{< img src="logs/guide/logslight.png" alt="The log estimated usage dashboard showing the breakdown of indexed and ingested in different widgets" style="width:70%;">}}
 
 **Note**: The metrics used in this dashboard are estimates and may differ from official billing numbers.
 
@@ -161,13 +164,15 @@ To find this dashboard, go to **Dashboards > Dashboards List** and search for [L
 
 ### Set up exclusion filters on high-volume logs
 
-When your usage monitors alert, you can set up exclusion filters and increase the sampling rate to reduce the volume. See [Exclusion Filters][20] on how to set them up.
+When your usage monitors alert, you can set up exclusion filters and increase the sampling rate to reduce the volume. See [Exclusion Filters][20] on how to set them up. You can also use [Log Patterns][24] to help you group and identify high-volume logs, and then add an exclusion filter if you want to stop indexing those logs.
 
-### Enable sensitive data scanner for PII detection
+{{< img src="logs/guide/patterns_exclusion.png" alt="The log explorer page showing the side-panel details of a pattern with the add exclusion filter button at the top" style="width:80%;">}}
+
+### Enable Sensitive Data Scanner for Personally Identifiable Information (PII) detection
 
 If you want to prevent data leaks and limit non-compliance risks, use Sensitive Data Scanner to identify, tag, and optionally redact or hash sensitive data. For example, you can scan for credit card numbers, bank routing numbers, and API keys in your logs, APM spans, and RUM events, See [Sensitive Data Scanner][21] on how to set up scanning rules to determine what data to scan. 
 
-### Enable audit trail to see user activities
+### Enable Audit Trail to see user activities
 
 If you want to see user activities, such as who changed the retention of an index or who modified an exclusion filter, enable Audit Trail to see these events. See [Audit Trail Events][22] for a list of platform and product-specific events that are available. To enable and configure Audit Trail, follow the steps in the [Audit Trail documentation][23].
 
@@ -198,3 +203,4 @@ If you want to see user activities, such as who changed the retention of an inde
 [21]: /account_management/org_settings/sensitive_data_detection/
 [22]: /account_management/audit_trail/events/
 [23]: /account_management/audit_trail/
+[24]: /logs/explorer/analytics/#patterns
