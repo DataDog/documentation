@@ -43,6 +43,7 @@ When you [write custom rules for CSPM][1], you specify the resource types that a
 ## Azure
 
 {{< whatsnext desc="Review detailed information about Azure resource types in the following pages." >}}
+    {{< nextlink href="/security/cspm/custom_rules/azure_storage_blob_container/" >}}<code>azure_storage_blob_container</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/azure_key_vault_key/" >}}<code>azure_key_vault_key</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/azure_key_vault_secret/" >}}<code>azure_key_vault_secret</code>{{< /nextlink >}}
     {{< nextlink href="/security/cspm/custom_rules/azure_managed_disk/" >}}<code>azure_managed_disk</code>{{< /nextlink >}}
