@@ -43,6 +43,8 @@ The families and usage types:
     * `ci_test_indexed_spans`
     * `ci_visibility_pipeline_committers`
     * `ci_visibility_test_committers`
+- **cloud_cost_management**
+    * `host_count`
 - **cspm**
     * `aas_host_count`
     * `azure_host_count`
