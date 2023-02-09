@@ -71,6 +71,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Rollbar
+  uninstallation: README.md#Uninstallation
 ---
 
 

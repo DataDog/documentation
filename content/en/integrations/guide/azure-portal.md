@@ -31,9 +31,9 @@ This page describes the Azure Portal experience. If you prefer to use CLI, see t
 
 ## Overview
 
-Select "Overview" in the left sidebar to view information for your Datadog resource.
+Select **Overview** in the left sidebar to view information for your Datadog resource.
 
-{{< img src="integrations/guide/azure_portal/resource-overview.png" alt="Azure US3 Resource overview" responsive="true" style="width:100%;">}}
+{{< img src="integrations/guide/azure_portal/resource-overview.png" alt="The Azure portal with Overview highlighted in the left nav bar" responsive="true" style="width:100%;">}}
 
 ### Essentials
 
@@ -58,23 +58,23 @@ The overview page provides a summary table of the resources sending logs and met
 
 ### Disable
 
-To stop sending logs and metrics from Azure to Datadog, select "Disable" on the overview page, then click "OK".
+To stop sending logs and metrics from Azure to Datadog, select **Disable** on the overview page, then click **OK**.
 
-{{< img src="integrations/guide/azure_portal/disable.png" alt="Azure US3 Disable integration" responsive="true" style="width:100%;">}}
+{{< img src="integrations/guide/azure_portal/disable.png" alt="The Datadog resource page within the Azure portal with Overview selected on the left nav bar, the Disable tab highlighted, and the OK button highlighted" responsive="true" style="width:100%;">}}
 
 **Note**: Disabling the Datadog resource stops the submission of metrics and platform logs to Datadog for the associated subscription. Any resources in the subscription submitting data directly to Datadog through the Agent or extension are unaffected.
 
 ### Enable
 
-To start sending logs and metrics from Azure to Datadog, select "Enable" on the overview page, then click "OK". Any previous configuration for logs and metrics is retrieved and enabled.
+To start sending logs and metrics from Azure to Datadog, select **Enable** on the overview page, then click **OK**. Any previous configuration for logs and metrics is retrieved and enabled.
 
-{{< img src="integrations/guide/azure_portal/enable.png" alt="Azure US3 Enable integration" responsive="true" style="width:100%;">}}
+{{< img src="integrations/guide/azure_portal/enable.png" alt="The Datadog resource page within the Azure portal, with Overview selected in the left nav bar,the Enable tab highlighted, and the OK button highlighted" responsive="true" style="width:100%;">}}
 
 ### Delete
 
-To delete the Datadog resource, select "Delete" on the overview page. Confirm deletion by typing `yes`, then click "Delete".
+To delete the Datadog resource, select **Delete** on the overview page. Confirm deletion by typing `yes`, then click **Delete**.
 
-{{< img src="integrations/guide/azure_portal/delete.png" alt="Azure US3 delete Datadog resource" responsive="true" style="width:100%;">}}
+{{< img src="integrations/guide/azure_portal/delete.png" alt="The Datadog resource page within the Azure portal, with Overview selected in the left nav bar, the Delete tab highlighted, and a field to confirm deletion" responsive="true" style="width:100%;">}}
 
 For Datadog organizations billed through the Azure Marketplace:
 - If the deleted Datadog resource is the only Datadog resource mapped to its associated Datadog organization, logs and metrics are no longer sent to Datadog and all billing stops for Datadog through Azure. Datadog support will reach out to confirm next steps with your account.
@@ -84,16 +84,16 @@ If your Datadog organization is NOT billed through the Azure Marketplace, deleti
 
 ### Change plan
 
-Select "Change Plan" on the overview page to change your Datadog billing plan.
+Select **Change Plan** on the overview page to change your Datadog billing plan.
 
-{{< img src="integrations/guide/azure_portal/change-plan1.png" alt="Azure US3 Change plan" responsive="true" style="width:100%;">}}
+{{< img src="integrations/guide/azure_portal/change-plan1.png" alt="The Datadog resource page within the Azure portal, with Overview selected along the left nav bar and the Change Plan tab highlighted" responsive="true" style="width:100%;">}}
 
-The portal retrieves all the available Datadog plans for your tenant, this includes any private offers. Select the appropriate plan and click "Change Plan".
+The portal retrieves all the available Datadog plans for your tenant, including any private offers. Select the appropriate plan and click **Change Plan**.
 
 ## Datadog org configurations
 ### Metrics and logs
 
-Select “Metrics and logs” in the left sidebar to change the configuration rules for metrics and logs. All rules are applied dynamically across the entire subscription as resources are added or tags change.
+Select **Metrics and logs** in the left sidebar to change the configuration rules for metrics and logs. All rules are applied dynamically across the entire subscription as resources are added or tags change.
 
 Changes to metric or log configuration settings should take effect within a few minutes.
 
@@ -119,15 +119,15 @@ There are three types of logs that can be emitted from Azure to Datadog using th
 
 ##### Activity logs
 
-Subscription level logs provide insight into the operations on your resources at the [control plane][3]. Updates on service health events are also included. Use the activity log to determine the what, who, and when for any write operations (PUT, POST, DELETE).
+Subscription level logs provide insight into the operations on your resources at the [control plane][3]. Updates on service health events are also included. Use the activity log to determine the what, who, and when for any write operations (`PUT`, `POST`, `DELETE`).
 
-To send subscription level logs to Datadog, select "Send subscription activity logs". If this option is left unchecked, none of the subscription level logs are sent to Datadog.
+To send subscription level logs to Datadog, select **Send subscription activity logs**. If this option is left unchecked, none of the subscription level logs are sent to Datadog.
 
 ##### Resource logs
 
 Azure resource logs provide insight into operations taken on Azure resources at the [data plane][3]. For example, getting a secret from a key vault or making a request to a database are data plane operations. The content of resource logs varies by the Azure service and resource type.
 
-To send Azure resource logs to Datadog, select "Send Azure resource logs for all defined resources". The types of Azure resource logs are listed in the [Azure Monitor Resource Log categories][4]. When this option is selected, all resource logs are sent to Datadog, including any new resources created in the subscription.
+To send Azure resource logs to Datadog, select **Send Azure resource logs for all defined resources**. The types of Azure resource logs are listed in the [Azure Monitor Resource Log categories][4]. When this option is selected, all resource logs are sent to Datadog, including any new resources created in the subscription.
 
 You can optionally filter the set of Azure resources sending logs to Datadog using Azure resource tags.
 
@@ -155,11 +155,11 @@ All Azure AD logs from the tenant are sent to the Datadog organization linked to
 
 ### Monitored resources
 
-Select "Monitored Resources" in the left sidebar to see a list of resources emitting logs and metrics to Datadog. Use the search to filter the list by resource name, type, group, location, logs to Datadog, or metrics to Datadog.
+Select **Monitored Resources** in the left sidebar to see a list of resources emitting logs and metrics to Datadog. Use the search to filter the list by resource name, type, group, location, logs to Datadog, or metrics to Datadog.
 
-{{< img src="integrations/guide/azure_portal/monitored-resources.png" alt="Azure US3 Monitored resources" responsive="true" style="width:100%;">}}
+{{< img src="integrations/guide/azure_portal/monitored-resources.png" alt="The Datadog resource page in the Azure portal with Monitored Resources highlighted under Datadog org configurations" responsive="true" style="width:100%;">}}
 
-The "Logs to Datadog" column displays `Sending` if the resource is sending logs to Datadog. Otherwise, this field indicates why logs aren't being sent. Possible reasons:
+The **Logs to Datadog** column displays `Sending` if the resource is sending logs to Datadog. Otherwise, this field indicates why logs aren't being sent. Possible reasons:
 
 | Reason                                    | Description                                                                                                             |
 |-------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
@@ -172,7 +172,7 @@ The "Logs to Datadog" column displays `Sending` if the resource is sending logs 
 
 ### Virtual machine agent
 
-To see a list of virtual machines (VMs) in the subscription, select "Virtual machine agent" in the left sidebar. On this page, you can install the Datadog Agent on a VM as an extension.
+To see a list of virtual machines (VMs) in the subscription, select **Virtual machine agent** in the left sidebar. On this page, you can install the Datadog Agent on a VM as an extension.
 
 For each VM, the following information is displayed:
 
@@ -188,17 +188,17 @@ For each VM, the following information is displayed:
 
 #### Install
 
-To install the Datadog Agent, select the appropriate VM, then click "Install Agent". The portal asks for confirmation to install the Agent with the default key. Select "OK" to begin installation. Azure shows the status as `Installing` until the Agent is installed and provisioned. After the Datadog Agent is installed, the status changes to `Installed`.
+To install the Datadog Agent, select the appropriate VM, then click **Install Agent**. The portal asks for confirmation to install the Agent with the default key. Select **OK** to begin installation. Azure shows the status as `Installing` until the Agent is installed and provisioned. After the Datadog Agent is installed, the status changes to `Installed`.
 
 #### Uninstall
 
-If the Datadog Agent was installed with the Azure VM extension, you can uninstall the Agent by selecting the appropriate VM, then click "Uninstall Agent".
+If the Datadog Agent was installed with the Azure VM extension, you can uninstall the Agent by selecting the appropriate VM, then click **Uninstall Agent**.
 
 If the Agent was installed using a different method, you can not use the Datadog resource to deploy or remove the Agent, but information about the Agent is still reflected on this page.
 
 ### App Service extension
 
-Select "App Service extension" in the left sidebar to see a list of app services in the subscription. On this page, you can install the Datadog extension on Azure App Service to enable APM tracing and custom metrics.
+Select **App Service extension** in the left sidebar to see a list of app services in the subscription. On this page, you can install the Datadog extension on Azure App Service to enable APM tracing and custom metrics.
 
 For each app service, the following information is displayed:
 
@@ -211,7 +211,7 @@ For each app service, the following information is displayed:
 
 #### Install
 
-To install the [Datadog extension][6], select the appropriate app, then click "Install Extension". The portal asks for confirmation to install the extension. Select "OK" to begin installation. This restarts your app and adds the following settings:
+To install the [Datadog extension][6], select the appropriate app, then click **Install Extension**. The portal asks for confirmation to install the extension. Select **OK** to begin installation. This restarts your app and adds the following settings:
 
 - `DD_API_KEY:<DEFAULT_API_KEY>`
 - `DD_SITE:us3.datadoghq.com`
@@ -223,22 +223,22 @@ Azure shows the status as `Installing` until the Agent is installed and provisio
 
 #### Uninstall
 
-To uninstall the Datadog extension, select the appropriate app, then click "Uninstall Extension".
+To uninstall the Datadog extension, select the appropriate app, then click **Uninstall Extension**.
 
 ## Settings
 ### Single sign-on
 
-Select "Single sign-on" in the left sidebar to reconfigure single sign-on.
+Select **Single sign-on** in the left sidebar to reconfigure single sign-on.
 
-To activate single sign-on through Azure Active Directory, select "Enable single sign-on". The portal retrieves the appropriate Datadog application from Azure Active Directory. The app name is the enterprise app name you chose when setting up the integration. Select the Datadog application name as shown below:
+To activate single sign-on through Azure Active Directory, select **Enable single sign-on**. The portal retrieves the appropriate Datadog application from Azure Active Directory. The app name is the enterprise app name you chose when setting up the integration. Select the Datadog application name as shown below.
 
-{{< img src="integrations/guide/azure_portal/sso.png" alt="Azure US3 Single sign-on" responsive="true" style="width:100%;">}}
+{{< img src="integrations/guide/azure_portal/sso.png" alt="The Azure portal with Enable Single sign-on through Azure active directory enabled" responsive="true" style="width:100%;">}}
 
 ### API keys
 
-Select "Keys" in the left sidebar to view a list of API keys for your Datadog resource.
+Select **Keys** in the left sidebar to view a list of API keys for your Datadog resource.
 
-{{< img src="integrations/guide/azure_portal/api-keys.png" alt="Azure US3 API keys" responsive="true" style="width:100%;">}}
+{{< img src="integrations/guide/azure_portal/api-keys.png" alt="The Keys view within the Azure portal displaying one API key" responsive="true" style="width:100%;">}}
 
 The Azure portal provides a read-only view of the API keys. To manage the keys, select the "Datadog portal" link. After making changes in Datadog, refresh the Azure portal view.
 
@@ -266,4 +266,4 @@ To disable, uncheck the box and click **Save**.
 [5]: https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings
 [6]: /serverless/azure_app_services
 [7]: /serverless/azure_app_services/#requirements
-[8]: /security_platform/cspm/
+[8]: /security/cspm/

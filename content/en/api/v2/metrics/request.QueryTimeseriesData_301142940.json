@@ -1,0 +1,26 @@
+{
+  "data": {
+    "attributes": {
+      "formulas": [
+        {
+          "formula": "a",
+          "limit": {
+            "count": 10,
+            "order": "desc"
+          }
+        }
+      ],
+      "from": 1671612804000,
+      "interval": 5000,
+      "queries": [
+        {
+          "data_source": "metrics",
+          "query": "avg:system.cpu.user{*}",
+          "name": "a"
+        }
+      ],
+      "to": 1671620004000
+    },
+    "type": "timeseries_request"
+  }
+}

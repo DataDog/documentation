@@ -44,7 +44,7 @@ draft: false
 git_integration_title: kong
 integration_id: kong
 integration_title: Kong
-integration_version: 2.2.0
+integration_version: 2.3.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0

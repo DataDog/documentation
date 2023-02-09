@@ -72,7 +72,7 @@ Hostname for where to send traces to. If using a containerized environment, conf
 `dd.trace.agent.port`
 : **Environment Variable**: `DD_TRACE_AGENT_PORT`<br>
 **Default**: `8126`<br>
-Port number the Agent is listening on for configured host.
+The port number the Agent is listening on for configured host. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `dd.trace.agent.port` or `dd.trace.agent.url` must match it.
 
 `dd.trace.agent.unix.domain.socket`
 : **Environment Variable**: `DD_TRACE_AGENT_UNIX_DOMAIN_SOCKET`<br>
@@ -82,7 +82,7 @@ This can be used to direct trace traffic to a proxy, to later be sent to a remot
 `dd.trace.agent.url`
 : **Environment Variable**: `DD_TRACE_AGENT_URL`<br>
 **Default**: `null`<br>
-The URL to send traces to. This can start with `http://` to connect using HTTP or with `unix://` to use a Unix Domain Socket. When set this takes precedence over `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`. Available for versions 0.65+.
+The URL to send traces to. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `dd.trace.agent.port` or `dd.trace.agent.url` must match it. The URL value can start with `http://` to connect using HTTP or with `unix://` to use a Unix Domain Socket. When set this takes precedence over `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`. Available for versions 0.65+.
 
 `dd.trace.agent.timeout`
 : **Environment Variable**: `DD_TRACE_AGENT_TIMEOUT`<br>
@@ -109,6 +109,13 @@ Available since version 0.96.0.
 **Example**: `CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name`<br>
 Accepts a map of case-insensitive header keys to tag names and automatically applies matching response header values as tags on traces. Also accepts entries without a specified tag name that are automatically mapped to tags of the form `http.response.headers.<header-name>`.<br>
 Available since version 0.96.0.
+
+`dd.trace.header.baggage`
+: **Environment Variable**: `DD_TRACE_HEADER_BAGGAGE`<br>
+**Default**: `null`<br>
+**Example**: `CASE-insensitive-Header:my-baggage-name,User-ID:userId,My-Header-And-Baggage-Name`<br>
+Accepts a map of case-insensitive header keys to baggage keys and automatically applies matching request header values as baggage on traces. On propagation the reverse mapping is applied: Baggage is mapped to headers.<br>
+Available since version 1.3.0.
 
 `dd.trace.annotations`
 : **Environment Variable**: `DD_TRACE_ANNOTATIONS`<br>
@@ -246,6 +253,10 @@ When `false`, informational startup logging is disabled. Available for versions 
 **Default**: `false`<br>
 When `true`, user principal is collected. Available for versions 0.61+.
 
+`dd.instrumentation.telemetry.enabled`
+: **Environment Variable**: `DD_INSTRUMENTATION_TELEMETRY_ENABLED`<br>
+**Default**: `true`<br>
+When `true`, the tracer collects [telemetry data][14]. Available for versions 0.104+. Defaults to `true` for versions 0.115+.
 
 **Note**:
 
@@ -419,3 +430,5 @@ If multiple extraction styles are enabled extraction attempt is done on the orde
 [8]: /tracing/compatibility_requirements/java#disabling-integrations
 [9]: /integrations/java/?tab=host#metric-collection
 [10]: https://github.com/openzipkin/b3-propagation
+[13]: /agent/guide/network/#configure-ports
+[14]: /tracing/configure_data_security/#telemetry-collection

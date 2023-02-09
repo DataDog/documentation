@@ -18,9 +18,9 @@ Dynamic Instrumentation is a feature of supporting Datadog tracing libraries. If
 
 ## Installation
 
-1. Install or upgrade your Agent to version [7.39.1][2]+.
+1. Install or upgrade your Agent to version [7.41.1][2]+.
 2. If you don't already have APM enabled, in your Agent configuration, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
-3. Install or upgrade the .NET tracing libraries to version 2.15, by following the relevant instructions for [.NET Framework][2] or [.NET Core][3].
+3. Install or upgrade the .NET tracing libraries to version 2.22, by following the relevant instructions for [.NET Framework][2] or [.NET Core][3].
 
    **Note**: Dynamic Instrumentation is available in the `dd-trace-dotnet` library in versions 2.15 and later.
 

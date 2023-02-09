@@ -10,6 +10,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/log-file-control-with-logrotate/"
   tag: "Blog"
   text: "How to manage log files using Logrotate"
+- link: "/agent/logs/advanced_log_collection"
+  tag: "Documentation"
+  text: "Advanced log collection configurations"
 - link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Discover how to process your logs"
@@ -322,7 +325,7 @@ Once logs are collected and ingested, they are available in **Log Explorer**. Lo
 [3]: /integrations/nxlog/
 [4]: /integrations/fluentd/#log-collection
 [5]: /integrations/logstash/#log-collection
-[6]: /security/logs/#information-security
+[6]: /data_security/logs/#information-security
 [7]: /agent/logs/#send-logs-over-https
 [8]: /api/v1/logs/#send-logs
 [9]: /logs/explorer/facets/

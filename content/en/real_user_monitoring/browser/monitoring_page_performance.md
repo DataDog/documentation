@@ -33,7 +33,7 @@ You can access performance metrics for your views in:
 ## Event timings and core web vitals
 
 <div class="alert alert-warning">
-  Datadog's core web vitals metrics are available from the <a href="https://github.com/DataDog/browser-sdk">@datadog/browser-rum</a> package v2.2.0+.
+  Datadog's Core Web Vitals metrics are available from the <a href="https://github.com/DataDog/browser-sdk">@datadog/browser-rum</a> package v2.2.0+.
 </div>
 
 [Google's Core Web Vitals][5] are a set of three metrics designed to monitor a site's user experience. These metrics focus on giving you a view of load performance, interactivity, and visual stability. Each metric comes with guidance on the range of values that translate to good user experience. Datadog recommends monitoring the 75th percentile for these metrics.
@@ -41,7 +41,7 @@ You can access performance metrics for your views in:
 {{< img src="real_user_monitoring/browser/core-web-vitals.png" alt="Core Web Vitals summary visualization"  >}}
 
 - First Input Delay and Largest Contentful Paint are not collected for pages opened in the background (for example, in a new tab or a window without focus).
-- Metrics collected from your real users' page views may differ from those calculated for pages loaded in a fixed environment such as a [Synthetic browser test][6].
+- Metrics collected from your real users' page views may differ from those calculated for pages loaded in a fixed, controlled environment such as a [Synthetic browser test][6]. Synthetic Monitoring displays Largest Contentful Paint and Cumulative Layout Shift as lab metrics, not real metrics.  
 
 | Metric                   | Focus            | Description                                                                                           | Target value |
 |--------------------------|------------------|-------------------------------------------------------------------------------------------------------|--------------|
@@ -72,7 +72,7 @@ You can access performance metrics for your views in:
 
 ## Monitoring single page applications (SPA)
 
-For single page applications (SPAs), the RUM Browser SDK differentiates between `initial_load` and `route_change` navigation with the `loading_type` attribute. If a click on your web page leads to a new page without a full refresh of the page, the RUM SDK starts a new view event with `loading_type:route_change`. RUM tracks page changes using the [History API][16].
+For single page applications (SPAs), the RUM Browser SDK differentiates between `initial_load` and `route_change` navigation with the `loading_type` attribute. If an interaction on your web page leads to a different URL without a full refresh of the page, the RUM SDK starts a new view event with `loading_type:route_change`. RUM tracks URL changes using the [History API][16].
 
 Datadog provides a unique performance metric, `loading_time`, which calculates the time needed for a page to load. This metric works for both `initial_load` and `route_change` navigation.
 
@@ -85,11 +85,13 @@ To account for modern web applications, loading time watches for network request
   - The difference between `navigationStart` and `loadEventEnd`.
   - Or the difference between `navigationStart` and the first time the page has no activity. Read [How page activity is calculated](#how-page-activity-is-calculated) for details.
 
-- **SPA Route Change**: Loading Time is equal to the difference between the user click and the first time the page has no activity. Read [How page activity is calculated](#how-page-activity-is-calculated) for details.
+- **SPA Route Change**: Loading Time is equal to the difference between the URL change and the first time the page has no activity. Read [How page activity is calculated](#how-page-activity-is-calculated) for details.
 
 ### How page activity is calculated
 
-Whenever a navigation or a click occurs, the RUM Browser SDK tracks the page activity to estimate the time until the interface is stable again. The page is deemed to have activity by looking at network requests and DOM mutations. The page activity ends when there are no ongoing requests and no DOM mutation for more than 100ms. The page is determined to have no activity if no requests or DOM mutation occurred in 100ms.
+The RUM Browser SDK tracks the page activity to estimate the time until the interface is stable again. The page is deemed to have activity by looking at network requests and DOM mutations. The page activity ends when there are no ongoing requests and no DOM mutation for more than 100ms. The page is determined to have no activity if no requests or DOM mutation occurred in 100ms.
+
+**Caveats:**
 
 The criteria of 100ms since last request or DOM mutation might not be an accurate determination of activity in the following scenarios:
 

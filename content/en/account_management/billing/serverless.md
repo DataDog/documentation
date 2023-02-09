@@ -25,17 +25,30 @@ To control the functions whose invocations Datadog is monitoring, filter out par
 
 ### UI
 
-To use the UI to control which AWS Lambda functions Datadog is monitoring, navigate to the [AWS Integration page][5] and add tags as `key:value` sets to the **to Lambdas with tag:** field.
+To use the UI to control which AWS Lambda functions Datadog is monitoring, navigate to the [AWS Integration page][5]. From the left sidebar, select the relevant AWS account, and navigate to the **Metric Collection tab**. Scroll down to the **Limit Metric Collection to Specific Resources** heading, and select Lambda from the **Select AWS Service** dropdown. You can then add tags as `key:value` sets to the field to the right.
 
-To exclude functions with a given tag, add a `!` before the tag key. For example:
-
-`!env:staging,!env:test1`
-
-This filter excludes anything that is tagged with `env:staging` or `env:test1`.
+See the [tags](#Tags) section below for more information about how to use tags in this field.
 
 ### API
 
-To use the API to control limit which AWS Lambda functions Datadog is monitoring, reference the [tag filter documentation][6].
+To use the API to control which AWS Lambda functions Datadog is monitoring, reference the [API tag filter documentation][6].
+
+### Tags
+
+Datadog accepts a comma-separated list of tags in the form `key:value`. This list defines a filter that is used when collecting metrics from the associated AWS service. These `key:value` pairs can both allow and exclude tags. To indicate an exclusion, add a `!` before the tag key. Wildcards, such as `?` (for single characters) and `*` (for multiple characters), can also be used.
+
+The filter only excludes resources where all allowed tags are missing—that is, where the list of allowed tags forms an "OR" statement.
+
+For example: `datadog:monitored,env:production`
+
+This filter only collects EC2 instances that contain the tag `datadog:monitored` OR the tag `env:production`.
+
+If you add an exclusion tag to the list, it takes precedence—that is, adding an exclusion tag adds an "AND" statement.
+
+For example: `datadog:monitored,env:production,instance-type:c1.*,!region:us-east-1`
+
+This filter only collects EC2 instances that contain the tag
+`datadog:monitored` OR the tag `env:production` OR an instance-type tag with a `c1.*` value AND NOT a `region:us-east-1` tag.
 
 ## Troubleshooting
 

@@ -41,10 +41,21 @@ Windows Server バージョン 2012 以降
 : .NET Framework 4.6.1+<br/>
 .NET Core 2.1、3.1<br/>
 .NET 5<br/>
-.NET 6
+.NET 6<br/>
+.NET 7
+<div class="alert alert-warning">
+  <strong>注:</strong> ロック競合のベータ版は .NET 5+ のみ、アロケーションプロファイリングは .NET 6+ のみです。
+</div>
 
 対応言語
 : C#、F#、Visual Basic など、.NET ランタイムをターゲットとするあらゆる言語。
+
+以下のプロファイリング機能は、`dd-trace-dotnet` ライブラリの以下の最小バージョンで利用可能です。
+
+|      機能         | 必要な `dd-trace-dotnet` のバージョン          |
+|----------------------|-----------------------------------------|
+| [Code Hotspots][12]        | 2.7.0+                       |
+| [Endpoint Profiling][13]            | 2.15.0+                       |
 
 ## APM に Datadog Agent を構成する
 
@@ -328,8 +339,11 @@ Datadog .NET Profiler は、マシン上のすべてのサービスがインス�
 | `DD_TRACE_DEBUG`           | Boolean        | デバッグログを有効または無効にします (トラブルシューティングの調査時に役立ちます)。有効な値は `true` または `false` です。デフォルトは `false` です。  |
 | `DD_PROFILING_LOG_DIR`     | 文字列        | .NET Profiler のログを保存するディレクトリを設定します。デフォルトは `%ProgramData%\Datadog-APM\logs\` です。  |
 | `DD_PROFILING_ENABLED`     | Boolean        | `true` に設定すると、.NET Profiler が有効になります。デフォルトは `false` です。  |
+| `DD_PROFILING_WALLTIME_ENABLED` | Boolean        | `false` に設定すると、Wall time プロファイリングが無効になります。デフォルトは `true` です。  |
 | `DD_PROFILING_CPU_ENABLED` | Boolean        | `false` に設定すると、CPU プロファイリングが無効になります。デフォルトは `true` です。  |
-| `DD_PROFILING_EXCEPTION_ENABLED` | Boolean        | `true` に設定すると、Exceptions プロファイリングが有効になります。デフォルトは `false` です。  |
+| `DD_PROFILING_EXCEPTION_ENABLED` | Boolean        | `true` に設定すると、Exceptions プロファイリングが有効になります (ベータ版)。デフォルトは `false` です。  |
+| `DD_PROFILING_ALLOCATION_ENABLED` | Boolean        | `true` に設定すると、Allocations プロファイリングが有効になります (ベータ版)。デフォルトは `false` です。  |
+| `DD_PROFILING_LOCK_ENABLED` | Boolean        | `true` に設定すると、Lock Contention プロファイリングが有効になります (ベータ版)。デフォルトは `false` です。  |
 
 <div class="alert alert-warning">
 <strong>注</strong>: IIS アプリケーションでは、<a href="?tab=windowsservices#installation">上記の Windows Service タブ</a>のように、レジストリ(<code>HKLM\System\CurrentControlSet\Services\WAS</code> および <code>HKLM\System\CurrentControlSet\Services\W3SVC</code> ノード) で環境変数の設定を行う必要があります。この環境変数は、<em>すべての</em> IIS アプリケーションに適用されます。
@@ -338,7 +352,7 @@ IIS 10 以降では、<a href="https://docs.microsoft.com/en-us/iis/get-started/
 
 <br>
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 [プロファイラーの概要][4]ガイドでは、パフォーマンスの問題があるサンプルサービスを例に、Continuous Profiler を使用して問題を理解し修正する方法を確認します。
 
@@ -348,3 +362,5 @@ IIS 10 以降では、<a href="https://docs.microsoft.com/en-us/iis/get-started/
 [2]: https://app.datadoghq.com/account/settings?agent_version=6#agent
 [3]: /ja/getting_started/tagging/unified_service_tagging
 [4]: /ja/getting_started/profiler/
+[12]: /ja/profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
+[13]: /ja/profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints

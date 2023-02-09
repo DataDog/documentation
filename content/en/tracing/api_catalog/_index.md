@@ -8,9 +8,9 @@ further_reading:
   text: "Datadog Service Catalog"
 ---
 
-{{< beta-callout url="https://forms.gle/TgezmEhUPXzebvv27" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
+{{< callout url="https://forms.gle/TgezmEhUPXzebvv27" >}}
   Datadog API Catalog is in beta! Use this form request access. 
-{{< /beta-callout >}} 
+{{< /callout >}} 
 
 {{< img src="tracing/api_catalog/api-catalog-overview.png" alt="API Catalog showing a list of API endpoints along with their Error Rate, P99 Latency, Requests Count, and Owning Team, with searching, filtering, and scoping features." style="width:100%;" >}}
 

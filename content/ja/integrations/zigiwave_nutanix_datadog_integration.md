@@ -65,6 +65,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Nutanix インテグレーション
+  uninstallation: README.md#Uninstallation
 ---
 
 

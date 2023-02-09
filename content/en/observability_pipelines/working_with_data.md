@@ -4,44 +4,38 @@ kind: Documentation
 aliases:
   - /integrations/observability_pipelines/working_with_data/
 further_reading:
-  - link: https://vector.dev/docs/reference/configuration/transforms/aws_ec2_metadata/
+  - link: /observability_pipelines/reference/transforms/#awsec2metadata
     tag: Documentation
     text: Parsing metadata emitted by AWS EC2 instance
-  - link: https://vector.dev/docs/reference/configuration/transforms/lua/
+  - link: /observability_pipelines/reference/transforms/#lua
     tag: Documentation
     text: Modifying events with Lua
-  - link: https://vector.dev/docs/reference/configuration/transforms/tag_cardinality_limit/ 
+  - link: /observability_pipelines/reference/transforms/#tagcardinalitylimit
     tag: Documentation
     text: Limit the cardinality of tags on metrics to safeguard against cardinality explosion
-  - link: https://vector.dev/docs/reference/configuration/transforms/log_to_metric/
+  - link: /observability_pipelines/reference/transforms/#logtometric
     tag: Documentation
     text: Convert logs to metric events
-  - link: https://vector.dev/docs/reference/configuration/transforms/metric_to_log/ 
+  - link: /observability_pipelines/reference/transforms/#metrictolog
     tag: Documentation
     text: Convert metrics to log events
-  - link: https://vector.dev/docs/reference/configuration/transforms/geoip/
+  - link: /observability_pipelines/production_deployment_overview/integrate_datadog_and_the_observability_pipelines_worker/
     tag: Documentation
-    text: Enrich events with GeoIP metadata
-  - link: https://vector.dev/guides/level-up/csv-enrichment-guide/
+    text: Configure Datadog Agents to send data to Observability Pipelines
+  - link: /observability_pipelines/configurations/
     tag: Documentation
-    text: Use CSV enrichment to provide more context to your data
-  - link: /observability_pipelines/integrations/integrate_vector_with_datadog/
-    tag: Documentation
-    text: Configure Datadog agents to send data to Vector
-  - link: /observability_pipelines/vector_configurations/
-    tag: Documentation
-    text: Learn more about Vector configurations
+    text: Learn more about Observability Pipelines configurations
 ---
 
 ## Overview
 
-Vector enables you to shape and transform observability data. Similar to Logging without Limits™ pipelines, you can configure Vector pipelines that are composed of a series of Vector `transform` components. These transforms allow you to parse, structure, and enrich data with built-in type safety.
+Observability Pipelines enables you to shape and transform observability data. Similar to Logging without Limits™ pipelines, you can configure pipelines for Observability Pipelines that are composed of a series of `transform` components. These transforms allow you to parse, structure, and enrich data with built-in type safety.
 
-## Remap data with Vector Remap Language
+## Remap data with VRL
 
 Vector Remap Language (VRL) is an expression-oriented, domain specific language designed for transforming observability data (logs and metrics). It features a simple syntax and [built-in functions][1] tailored to observability use cases.
 
-Vector Remap Language is supported in Vector’s `remap` transform. 
+Vector Remap Language is supported in the `remap` transform. 
 
 Remap transforms act on a single event and can be used to transform them or specify conditions for routing and filtering. You can use VRL in the following ways:
 
@@ -110,7 +104,7 @@ In this example, the `type` field is set to a `remap` transform. The `inputs` fi
 
 The second line adds the `.timestamp` field and the value to the event, changing the content of every event that passes through this transform.
 
-See [VRL References][14] and [Vector Configurations][15] for more information.
+See [VRL References][14] and [Configurations][15] for more information.
 
 ## Parse data
 
@@ -190,7 +184,7 @@ This configuration returns the following:
 
 ## Sample, reduce, filter, and aggregate data
 
-Sampling, reducing, filtering, and aggregating are common transforms to reduce the volume of observability data delivered to downstream services. Vector offers a variety of ways to control your data volume:
+Sampling, reducing, filtering, and aggregating are common transforms to reduce the volume of observability data delivered to downstream services. Observability Pipelines offers a variety of ways to control your data volume:
 
 - [Sample events][16] based on supplied criteria and at a configurable rate.
 - [Reduce and collapse][17] multiple events into a single event.
@@ -212,7 +206,7 @@ The below snippet is an example log that you want to route to different destinat
 {
   "logs": {
     "kind": "absolute",
-    “level”: “info”,
+    "level": "info,
     "name": "memory_available_bytes",
     "namespace": "host",
     "tags": {}
@@ -402,12 +396,12 @@ The `threshold` field defines the number of events allowed for a given bucket. `
 [12]: https://vector.dev/docs/reference/vrl/functions/#event-functions
 [13]: https://vector.dev/docs/reference/vrl/functions/#path-functions
 [14]: https://vector.dev/docs/reference/vrl/#reference
-[15]: /observability_pipelines/vector_configurations
-[16]: https://vector.dev/docs/reference/configuration/transforms/sample/
-[17]: https://vector.dev/docs/reference/configuration/transforms/reduce/
-[18]: https://vector.dev/docs/reference/configuration/transforms/dedupe/
-[19]: https://vector.dev/docs/reference/configuration/transforms/filter/
-[20]: https://vector.dev/docs/reference/configuration/transforms/aggregate/
-[21]: https://vector.dev/docs/reference/configuration/transforms/metric_to_log/
+[15]: /observability_pipelines/configurations/
+[16]: /observability_pipelines/reference/transforms/#sample
+[17]: /observability_pipelines/reference/transforms/#reduce
+[18]: /observability_pipelines/reference/transforms/#dedupe
+[19]: /observability_pipelines/reference/transforms/#filter
+[20]: /observability_pipelines/reference/transforms/#aggregate
+[21]: /observability_pipelines/reference/transforms/#metrictolog
 [22]: /observability_pipelines/guide/control_log_volume_and_size/
-[23]: https://vector.dev/docs/reference/configuration/transforms/route/
+[23]: /observability_pipelines/reference/transforms/#route

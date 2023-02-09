@@ -14,6 +14,7 @@
 @import 'base/typography';
 @import 'base/spacing';
 @import 'base/helpers';
+$baseImgURL: '{{.Site.Params.img_url}}';
 
 // vendor
 @import 'vendor/chroma-styles';
@@ -35,6 +36,7 @@
 @import "pages/404";
 @import "pages/home";
 @import "pages/glossary";
+@import "pages/reference";
 
 // Components
 @import 'base/iconfont'; // imported from websites-modules

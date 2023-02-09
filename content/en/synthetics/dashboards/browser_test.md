@@ -1,7 +1,7 @@
 ---
-title: Synthetics Browser Test Performance Dashboard
+title: Synthetic Browser Test Performance Dashboard
 kind: documentation
-description: Learn about the out-of-the-box Synthetics browser test performance dashboard.
+description: Learn about the out-of-the-box Synthetic browser test performance dashboard.
 further_reading:
 - link: '/synthetics/ci_results_explorer'
   tag: 'Documentation'

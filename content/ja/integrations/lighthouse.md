@@ -15,7 +15,7 @@ assets:
     source_type_name: Lighthouse
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: コミュニティ
   sales_email: mustin.eric@gmail.com
   support_email: mustin.eric@gmail.com
 categories:
@@ -27,7 +27,7 @@ draft: false
 git_integration_title: lighthouse
 integration_id: lighthouse
 integration_title: Lighthouse
-integration_version: 2.1.0
+integration_version: 2.1.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0

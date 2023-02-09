@@ -1,5 +1,5 @@
 ---
-title: Custom Metrics from Serverless Applications
+title: Custom Metrics from AWS Lambda Serverless Applications
 kind: documentation
 ---
 

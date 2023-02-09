@@ -16,6 +16,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/circleci-monitoring-datadog/"
     tag: "Blog"
     text: "Monitor your CircleCI environment with Datadog"
+  - link: "https://www.datadoghq.com/blog/configure-pipeline-alerts-with-ci-monitors/"
+    tag: "Blog"
+    text: "Configure pipeline alerts with Datadog CI monitors"
 ---
 
 {{< vimeo 664357090 >}}

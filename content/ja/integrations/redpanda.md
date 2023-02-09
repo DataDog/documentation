@@ -1,44 +1,68 @@
 ---
+app_id: redpanda
+app_uuid: 4c7855c5-6c2c-46c5-bfc3-1a7df1ac6b77
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Redpanda Overview: assets/dashboards/overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: redpanda.application.uptime
+      metadata_path: metadata.csv
+      prefix: redpanda.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Redpanda
   logs:
     source: redpanda
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Redpanda
+  sales_email: support@vectorized.io
+  support_email: support@vectorized.io
 categories:
 - 処理
 - メッセージング
 - ログの収集
 - autodiscovery
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/redpanda/README.md
-display_name: Redpanda
+display_on_public_website: true
 draft: false
 git_integration_title: redpanda
-guid: 7aa73d69-b635-4973-8b7c-b0bb325d407b
 integration_id: redpanda
 integration_title: Redpanda
 integration_version: 1.1.0
 is_public: true
 kind: integration
-maintainer: support@vectorized.io
-manifest_version: 1.0.0
-metric_prefix: redpanda.
-metric_to_check: redpanda.application.uptime
+manifest_version: 2.0.0
 name: redpanda
+oauth: {}
 public_title: Redpanda
 short_description: Redpanda クラスターの全体的な健全性とパフォーマンスを監視します。
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Processing
+  - Category::Messaging
+  - Category::Log Collection
+  - Category::Autodiscovery
+  configuration: README.md#Setup
+  description: Redpanda クラスターの全体的な健全性とパフォーマンスを監視します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Redpanda
 ---
 
 

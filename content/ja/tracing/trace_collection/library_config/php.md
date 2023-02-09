@@ -104,19 +104,24 @@ Agent ホスト名。
 `prod`、`pre-prod`、`stage` など、アプリケーションの環境を設定します。バージョン `0.47.0` に追加されています。
 
 `DD_PROFILING_ENABLED`
-: **INI**: Not available<br>
-**デフォルト**: `0`<br>
-Datadog プロファイラーを有効にします。バージョン `0.69.0` に追加されています。[PHP プロファイラーの有効化][4]を参照。
+: **INI**: `datadog.profiling.enabled`INI は `0.82.0` から利用可能です。<br>
+**デフォルト**: `1`<br>
+Datadog プロファイラーを有効にします。バージョン `0.69.0` で追加されました。PHP プロファイラーを有効にする][4]を参照してください。バージョン `0.81.0` 以降では、デフォルトで `0` になっています。
+
+`DD_PROFILING_ENDPOINT_COLLECTION_ENABLED`
+: **INI**: `datadog.profiling.endpoint_collection_enabled`INI は `0.82.0` から利用可能です。<br>
+**デフォルト**: `1`<br>
+プロファイルでエンドポイントデータの収集を有効にするかどうか。バージョン `0.79.0` で追加されました。
 
 `DD_PROFILING_EXPERIMENTAL_CPU_TIME_ENABLED`
-: **INI**: 利用不可<br>
+: **INI**: `datadog.profiling.experimental_cpu_time_enabled`。INI は `0.82.0` から利用可能です。<br>
 **デフォルト**: `1`<br>
 試験的 CPU プロファイルタイプを有効にします。バージョン `0.69.0` に追加されています。バージョン `0.76` 以下では、デフォルトで `0` になっていました。
 
 `DD_PROFILING_LOG_LEVEL`
-: **INI**: Not available<br>
+: **INI**: `datadog.profiling.log_level`。INI は `0.82.0` から利用可能です。<br>
 **デフォルト**: `off`<br>
-プロファイラーのログレベルを設定します。許可される値は `off`、`error`、`warn`、`info`、`debug` です。プロファイラーのログは、プロセスの標準エラーストリームに書き込まれます。バージョン `0.69.0` に追加されています。
+プロファイラーのログレベルを設定します。許可される値は `off`、`error`、`warn`、`info`、`debug`、`trace` です。プロファイラーのログは、プロセスの標準エラーストリームに書き込まれます。バージョン `0.69.0` に追加されています。
 
 `DD_PRIORITY_SAMPLING`
 : **INI**: `datadog.priority_sampling`<br>
@@ -249,10 +254,23 @@ Linux で動作します。`true` に設定すると、有効なユーザー ID 
 **デフォルト**: `null`<br>
 JSON でエンコードされた文字列で、サンプリングレートを構成します。例: サンプルレートを 20% に設定する場合は `'[{"sample_rate": 0.2}]'` となります。'a' ではじまる、スパン名が 'b' のサービスのサンプルレートを 10% に、その他のサービスのサンプルレートを 20% に設定する場合は `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'`  のようになります ([インテグレーション名](#integration-names) を参照してください) 。二重引用符 (`"`) のエスケープ処理による問題を防ぐため、JSON オブジェクトは**必ず**単一引用符 (`'`) で囲むようにしてください。
 
+`DD_TRACE_RATE_LIMIT`
+: **INI**: `datadog.trace.rate_limit`<br>
+**デフォルト**: `0`<br>
+1 秒間にサンプリングするスパンの最大数。Apache または FPM プール内のすべてのプロセスは、同じリミッターを共有します。未設定 (0) の場合、レート制限は Datadog Agent に委ねられます。
+
 `DD_TRACE_SPANS_LIMIT`
-: **INI**: `datadog.trace.spans_limit`
+: **INI**: `datadog.trace.spans_limit`<br>
 **Default**: `1000`<br>
-1 つのトレース内で生成されるスパンの最大数。最大数に達すると、その後スパンは生成されなくなります。上限を増大すると、保留中のトレースに使用されるメモリの量が増加し、許可されるメモリの PHP 最大量に達する可能性があります。許可されるメモリの最大量は、PHP INI システム設定の `memory_limit`.limit で増加できます。
+1 つのトレース内で生成されるスパンの最大数。最大数に達すると、その後スパンは生成されなくなります。上限を増大すると、保留中のトレースに使用されるメモリの量が増加し、許可されるメモリの PHP 最大量に達する可能性があります。許可されるメモリの最大量は、PHP INI システム設定の `memory_limit` で増加できます。
+
+`DD_SPAN_SAMPLING_RULES`
+: **INI**: `datadog.span_sampling_rules`<br>
+**デフォルト**: `null`<br>
+サンプリングレートを構成するための JSON エンコードされた文字列。ルールは、スパンのサンプルレートを決定するために構成された順序で適用されます。`sample_rate` の値は 0.0 から 1.0 の間でなければなりません (この値を含む)。 <br>
+**例**: サービス名 'my-service'、演算子名 ‘http.request' に対して、スパンのサンプルレートを 50％ に設定、最大で 50 トレース/秒に設定: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`JSON オブジェクトは、ダブルクォート (`'`) 文字のエスケープの問題を避けるために、シングルクォート (`"`) で囲む**必要があります**。<br>
+詳しくは、[取り込みメカニズム][6]をご覧ください。<br>
+
 
 `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED`
 : **INI**: `datadog.trace.url_as_resource_names_enabled`<br>
@@ -269,10 +287,10 @@ JSON でエンコードされた文字列で、サンプリングレートを構
 **デフォルト**: `*`<br>
 URL の一部として収集するクエリパラメータのカンマ区切りリスト。パラメータを収集しない場合は空、すべてのパラメータを収集する場合は `*` を設定します。バージョン `0.74.0` で追加されました。
 
-`DD_TRACE_CLIENT_IP_HEADER_DISABLED`
-: **INI**: `datadog.trace.client_ip_header_disabled`<br>
-**デフォルト**: `0`<br>
-関連する IP ヘッダーからのクライアント IP 収集を無効にします。バージョン `0.76.0` で追加されました。
+`DD_TRACE_RESOURCE_URI_QUERY_PARAM_ALLOWED`
+: **INI**: `datadog.trace.resource_uri_query_param_allowed`<br>
+**デフォルト**: `*`<br>
+リソース URI の一部として収集するクエリパラメータのカンマ区切りリスト。パラメータを収集しない場合は空、すべてのパラメータを収集する場合は `*` を設定します。バージョン `0.74.0` で追加されました。
 
 `DD_TRACE_CLIENT_IP_HEADER`
 : **INI**: `datadog.trace.client_ip_header`<br>
@@ -395,10 +413,10 @@ HTTP サーバーとクライアントインテグレーションでは、URL �
 
 ### `open_basedir` 制限
 
-[`open_basedir`][6] 設定が使用される場合、許可されるディレクトリに `/opt/datadog-php` を追加する必要があります。
+[`open_basedir`][9] 設定が使用される場合、許可されるディレクトリに `/opt/datadog-php` を追加する必要があります。
 アプリケーションを Docker コンテナで実行する場合は、許可されるディレクトリにパス `/proc/self` も追加する必要があります。
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -407,6 +425,7 @@ HTTP サーバーとクライアントインテグレーションでは、URL �
 [3]: /ja/tracing/setup/nginx/#nginx-and-fastcgi
 [4]: /ja/profiler/enabling/php/
 [5]: https://github.com/mind04/mod-ruid2
-[6]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir
+[6]: /ja/tracing/trace_pipeline/ingestion_mechanisms/
 [7]: https://github.com/openzipkin/b3-propagation
 [8]: https://github.com/openzipkin/b3-propagation#single-header
+[9]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir

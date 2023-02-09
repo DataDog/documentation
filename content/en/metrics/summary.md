@@ -132,10 +132,10 @@ For any particular tag key, you can:
 
 [Learn more about tagging][5].
 
-## Metrics without Limits\*
-Metrics without Limits\* provides you control over the size of your custom metrics without requiring any agent or code-level changes. 
+## Metrics without Limits™
+Metrics without Limits™ provides you control over the size of your custom metrics without requiring any agent or code-level changes. 
 
-**Note:** Metrics without Limits\* is only available for custom metrics.
+**Note:** Metrics without Limits™ is only available for custom metrics.
 
 You can configure tags using the bulk metric tag configuration button or the **Manage Tags** button in a metric's details side panel. 
 
@@ -150,11 +150,11 @@ You can configure tags using the bulk metric tag configuration button or the **M
 
 ### Queryable tags 
 
-Once your metric has been configured with Metrics without Limits\*, you can view which tags remain Queryable -- ultimately those that contribute to _Indexed Custom Metrics_ volume. And you can toggle back to all originally submitted and ingested tags that contribute to your _Ingested Custom Metrics_ volume. 
+Once your metric has been configured with Metrics without Limits™, you can view which tags remain Queryable -- ultimately those that contribute to _Indexed Custom Metrics_ volume. And you can toggle back to all originally submitted and ingested tags that contribute to your _Ingested Custom Metrics_ volume. 
 
 ### Optimize your metric with aggregations in Advanced Mode
 
-For custom metrics of the count, gauge, or rate metric type, you can further refine your metric's configurations by optionally including additional aggregations with the advanced mode of Metrics without Limits\*. By default, Datadog stores the most frequently queried aggregation combination depending on the metric's type to preserve the mathematical accuracy of your configured metric's query as listed below: 
+For custom metrics of the count, gauge, or rate metric type, you can further refine your metric's configurations by optionally including additional aggregations with the advanced mode of Metrics without Limits™. By default, Datadog stores the most frequently queried aggregation combination depending on the metric's type to preserve the mathematical accuracy of your configured metric's query as listed below: 
 
 - Configured counts/rates are queryable with time/space aggregations of `SUM`
 - Configured gauges are queryable in time/space aggregations of `AVG`

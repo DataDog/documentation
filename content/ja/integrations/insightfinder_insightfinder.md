@@ -75,6 +75,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: InsightFinder
+  uninstallation: README.md#Uninstallation
 ---
 
 

@@ -4,13 +4,13 @@ kind: documentation
 is_beta: true
 disable_toc: false
 further_reading:
-- link: "/workflows/service_accounts/"
+- link: "/workflows/access/#service-accounts/"
   tag: "Documentation"
   text: "Find out more about Service Accounts for workflows"
 - link: "dashboards"
   tag: "Documentation"
   text: "Find out more about setting up a dashboard"
-- link: "security_platform/explorer"
+- link: "security/explorer"
   tag: "Documentation"
   text: "Find out more about Security Signals"
 - link: "monitors"
@@ -18,11 +18,19 @@ further_reading:
   text: "Find out more about Monitors"
 ---
 
-{{< beta-callout url="https://forms.gle/VEjerYVQ2QJhauZ57" >}}
+{{< callout url="https://forms.gle/VEjerYVQ2QJhauZ57" >}}
   Workflows are in public beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.
-{{< /beta-callout >}}
+{{< /callout >}}
 
-You can trigger a workflow manually, or using a variety of automated methods such as a recurring schedule, a Datadog Monitor, or a Security Signal Notification Rule. Before you can trigger an automatic workflow, you must associate the workflow with a unique service account. For more information on service accounts, see [Service accounts for Workflows][1].
+You can trigger a workflow manually or automatically.
+
+All automatically triggered workflows require you to associate the workflow with a unique service account. Automatic workflow triggers include the following trigger types:
+
+- @mention in a monitor
+- @mention in Security Signal notification rule or detection rule 
+- Scheduled
+
+For more information on service accounts, see [Service accounts for Workflows][1].
 
 ## Manually trigger a workflow
 
@@ -94,6 +102,6 @@ To schedule a workflow run:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /workflows/service_accounts/
+[1]: /workflows/access/#service-accounts
 [2]: https://app.datadoghq.com/monitors/manage
 [3]: https://app.datadoghq.com/security/configuration/rules

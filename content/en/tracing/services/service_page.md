@@ -19,6 +19,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-clipboard/"
   tag: "Blog"
   text: "Add an APM service page url to your clipboard"
+- link: "https://www.datadoghq.com/blog/apm-security-view/"
+  tag: "Blog"
+  text: "Gain visibility into risks, vulnerabilities, and attacks with APM Security View"
 ---
 
 {{< img src="tracing/visualization/service/overview_service_page.png" alt="Detailed service page" style="width:100%;">}}
@@ -150,9 +153,11 @@ This tab has overview graphs that show which resources have the most issues and 
 {{< img src="tracing/visualization/service/error_tracking_side_panel.jpg" alt="Error Tracking tab"  style="width:90%;">}}
 
 ### Security
-View security signals on your service, which are automatically created when Datadog detects application attacks impacting your services. The signals identify meaningful threats for you review instead of assessing each individual attack attempt. Read more about [Application Security][18].
+Understand the security posture of the service, including known vulnerabilities exposed in the service’s libraries and security signals on your service, which are automatically created when Datadog detects application attacks impacting your services. The signals identify meaningful threats for you to review instead of assessing each individual attack attempt. Read more about [Application Security][18].
 
-This tab has overview graphs that show the timeline of attacks, the types of attacks, and attacker information (Client IP or authenticated user). Click on a security signal to get information about what the detected threat is and what actions you can take to remediate it.
+The top section of the security tab has overview graphs that show the number and severity of vulnerabilities, a timeline of attacks, the types of attacks, and attacker information (client IP or authenticated user). 
+
+The next section of the panel lists all the vulnerabilities and signals concerning the service. Click on a security vulnerability to open a side panel with relevant details to investigate further and remediate the vulnerability. Click on a security signal to get information about what the detected threat is and what actions you can take to remediate it.
 
 {{< img src="tracing/visualization/service/security_tab.jpg" alt="Security" style="width:90%;">}}
 
@@ -208,4 +213,4 @@ View common patterns in your service’s logs, and use facets like status in the
 [15]: /profiler/
 [16]: /tracing/trace_explorer/query_syntax/#facets
 [17]: https://www.datadoghq.com/blog/log-patterns/
-[18]: /security_platform/application_security/how-appsec-works/
+[18]: /security/application_security/how-appsec-works/

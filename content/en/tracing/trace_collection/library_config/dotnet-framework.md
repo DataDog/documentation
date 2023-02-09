@@ -139,7 +139,7 @@ The following configuration variables are available for both automatic and custo
 
 `DD_TRACE_AGENT_URL`
 : **TracerSettings property**: `Exporter.AgentUri`<br>
-Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set.<br>
+Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it.<br>
 **Default**: `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>` if they are set or `http://localhost:8126`.
 
 `DD_AGENT_HOST`
@@ -147,7 +147,7 @@ Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_T
 **Default**: `localhost`
 
 `DD_TRACE_AGENT_PORT`
-: Sets the TCP port where the Agent is listening for connections. Use `DD_TRACE_AGENT_URL`, which has precedence over this parameter. <br>
+: Sets the TCP port where the Agent is listening for connections. Use `DD_TRACE_AGENT_URL`, which has precedence over this parameter. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it.<br>
 **Default**: `8126`
 
 `DD_TRACE_SAMPLE_RATE`
@@ -168,14 +168,12 @@ For more information, see [Ingestion Mechanisms][6].<br>
 `DD_TRACE_RATE_LIMIT`
 : **TracerSettings property**: `MaxTracesSubmittedPerSecond` <br>
 The number of traces allowed to be submitted per second (deprecates `DD_MAX_TRACES_PER_SECOND`). <br>
-**Default**: `100` when `DD_TRACE_SAMPLE_RATE` is set. Otherwise, delegates rate limiting to the Datadog Agent. <br>
+**Default**: `100` when `DD_TRACE_SAMPLE_RATE` is set. Otherwise, delegates rate limiting to the Datadog Agent.
 
 `DD_SPAN_SAMPLING_RULES`
-**Default**: `null`<br>
-A JSON array of objects. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive).
-For more information, see [Ingestion Mechanisms][3].<br>
-**Example:**<br>
-  - Set the span sample rate to 50% for the service `my-service` and operation name `http.request`, up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`
+: **Default**: `null`<br>
+A JSON array of objects. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive). For more information, see [Ingestion Mechanisms][3].<br>
+**Example**: Set the span sample rate to 50% for the service `my-service` and operation name `http.request`, up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`
 
 `DD_TRACE_GLOBAL_TAGS`
 : **TracerSettings property**: `GlobalTags`<br>
@@ -197,6 +195,11 @@ Added in version 1.18.3. Response header support and entries without tag names a
 : Enables client IP collection from relevant IP headers.<br>
 Added in version `2.19.0`.<br>
 **Default**: `false`<br>
+
+`DD_TRACE_CLIENT_IP_HEADER`
+: The IP header to be used for client IP collection, for example: `x-forwarded-for`. <br>
+Added in version `2.19.0`.<br>
+**Default**: Datadog parses the following: `"x-forwarded-for", "x-real-ip", "client-ip", "x-forwarded", "x-cluster-client-ip", "forwarded-for", "forwarded", "via", "true-client-ip"`. If several are present, none will be reported.<br>
 
 `DD_TAGS`
 : **TracerSettings property**: `GlobalTags`<br>
@@ -260,7 +263,7 @@ Wildcard support `[*]` added in version 2.7.0.
 : Alters the behavior of the Kafka consumer span<br>
 **Default**: `true`<br>
 When set to `true`, the consumer span is created when a message is consumed and closed before consuming the next message. The span duration is representative of the computation between one message consumption and the next. Use this setting when message consumption is performed in a loop. <br>
-When set to `false`, the consumer span is created when a message is consumed and immediately closed. Use this setting when a message is not processed completely before consuming the next one, or when multiple messages are consumed at once.
+When set to `false`, the consumer span is created when a message is consumed and immediately closed. Use this setting when a message is not processed completely before consuming the next one, or when multiple messages are consumed at once. When you set this parameter to `false`, consumer spans are closed right away. If you have child spans to trace, you must extract the context manually. Read [Headers extraction and injection][12] for more details.
 
 #### Automatic instrumentation integration configuration
 
@@ -327,3 +330,5 @@ If multiple extraction styles are enabled, the extraction attempt is completed i
 [8]: /tracing/trace_collection/custom_instrumentation/dotnet/
 [9]: https://github.com/openzipkin/b3-propagation
 [10]: https://www.w3.org/TR/trace-context/#traceparent-header
+[12]: /tracing/trace_collection/custom_instrumentation/dotnet/#headers-extraction-and-injection
+[13]: /agent/guide/network/#configure-ports

@@ -15,7 +15,7 @@ assets:
     source_type_name: Gremlin
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Gremlin
   sales_email: support@gremlin.com
   support_email: support@gremlin.com
 categories:

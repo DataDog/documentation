@@ -28,9 +28,14 @@ The Datadog Profiler requires [JDK Flight Recorder][2]. The Datadog Profiler lib
 
 Because non-LTS JDK versions may not contain stability and performance fixes related to the Datadog Profiler library, use versions 8, 11, and 17 of the Long Term Support JDK.
 
+Additional requirements for profiling [Code Hotspots][11]:
+ - OpenJDK 11+ and `dd-trace-java` version 0.65.0+; or
+ - OpenJDK 8 8u282+ and `dd-trace-java` version 0.77.0+.
+
 All JVM-based languages, such as Java, Scala, Groovy, Kotlin, and Clojure are supported.
 
 Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
+
 
 ## Installation
 
@@ -236,3 +241,4 @@ The [Getting Started with Profiler][10] guide takes a sample service with a perf
 [8]: /profiler/profiler_troubleshooting/#enabling-the-allocation-profiler
 [9]: /getting_started/tagging/unified_service_tagging
 [10]: /getting_started/profiler/
+[11]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces

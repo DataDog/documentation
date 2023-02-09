@@ -36,11 +36,11 @@ datadogRum.init({
     //  service: 'my-web-application',
     //  env: 'production',
     //  version: '1.0.0',
-    sampleRate: 100,
+    sessionSampleRate: 100,
     sessionReplaySampleRate: 100,
     trackResources: true,
     trackLongTasks: true,
-    trackInteractions: true,
+    trackUserInteractions: true,
     defaultPrivacyLevel: 'mask-user-input' | 'mask' | 'allow'
 });
 

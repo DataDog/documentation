@@ -6,17 +6,22 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/service-page/"
   tag: "Blog"
   text: "Explore a centralized view into service telemetry, Error Tracking, SLOs, and more"
-- link: "/tracing/error_tracking/explorer"
-  tag: "Documentation"
-  text: "Learn about the Error Tracking Explorer"
 - link: "/tracing/trace_explorer/trace_view/"
   tag: "Documentation"
   text: "Learn about the Trace Explorer"
+- link: "/tracing/error_tracking/explorer"
+  tag: "Documentation"
+  text: "Learn about the Error Tracking Explorer"
+- link: "/monitors/types/error_tracking/"
+  tag: "Documentation"
+  text: "Create an Error Tracking monitor"
 ---
 
 ## Overview
 
 It is critical for your system's health to consistently monitor the errors collected by Datadog. When there are many individual error events, it becomes hard to prioritize errors for troubleshooting. By tracking, triaging, and debugging stack traces, you can minimize the impact of fatal errors on your backend services.
+
+Once you have set up APM for **Backend Services** error tracking, the issue list populates with cards. You can view open, ignored, or all issues, sort issues by volume or age, and filter issues by all custom and default facets on your backend services.
 
 {{< img src="tracing/error_tracking/explorer_with_backend_issues.png" alt="The Error Tracking Explorer for APM displaying issues from your backend services" style="width:100%;" >}}
 
@@ -39,7 +44,7 @@ Error Tracking computes a fingerprint for each error span it processes using the
 
 ## Examine issues to start troubleshooting or debugging
 
-Error Tracking automatically categorizes errors into issues collected from your backend services in the [Error Tracking Explorer][1]. 
+Error Tracking automatically categorizes errors into issues collected from your backend services in the [Error Tracking Explorer][3]. 
 
 Click on an issue to see a summary of the error, the distribution of impacted spans, the latest most relevant stack trace, span tags, host tags, container tags, and metrics.
 
@@ -49,3 +54,4 @@ Click on an issue to see a summary of the error, the distribution of impacted sp
 
 [1]: /tracing/visualization/trace/?tab=spantags#more-information
 [2]: /tracing/trace_explorer/trace_view/?tab=spantags
+[3]: https://app.datadoghq.com/apm/error-tracking

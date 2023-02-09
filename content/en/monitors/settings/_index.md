@@ -10,10 +10,6 @@ further_reading:
   text: "Monitor Notifications"
 ---
 
-{{< beta-callout url="#" btn_hidden="true" >}}
-Monitor tag policies are in private beta. To request access, contact Support at support@datadoghq.com.
-{{< /beta-callout >}}
-
 Monitor tag policies allow you to enforce the presence of certain tags and tag values on your Datadog monitors. This is useful for attribution purposes and for ensuring that alerts are routed to the correct downstream systems and workflows for triage and processing.
 
 Once set up, tag policies apply to **all** Datadog monitors and Synthetic tests.

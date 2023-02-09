@@ -10,9 +10,9 @@ further_reading:
     tag: "Blog"
     text: "Monitor all your CI pipelines with Datadog"
 ---
-{{< beta-callout url="https://app.datadoghq.com/ci/getting-started" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
+{{< callout url="https://app.datadoghq.com/ci/getting-started" >}}
 Intelligent Test Runner for CI Visibility is in private beta. You can request access by completing the form on the CI Visibility Getting Started page.
-{{< /beta-callout >}}
+{{< /callout >}}
 
 ## Overview
 
@@ -79,10 +79,9 @@ After setting these environment variables, run your tests as you normally do:
 NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app DD_CIVISIBILITY_AGENTLESS_ENABLED=true DD_API_KEY=$API_KEY DD_CIVISIBILITY_GIT_UPLOAD_ENABLED=true DD_CIVISIBILITY_ITR_ENABLED=true yarn test
 {{< /code-block >}}
 
-**Important**:  It is possible for Intelligent Test Runner to skip every test. By default, `jest` fails if there are no tests to run. To prevent `jest` from failing, pass [`--passWithNoTests`][5] to `jest`.
 
 #### UI activation
-In addition to setting the environment variables, you or a user in your organization with admin permissions must activate the Intelligent Test Runner on the [Test Service Settings][6] page.
+In addition to setting the environment variables, you or a user in your organization with admin permissions must activate the Intelligent Test Runner on the [Test Service Settings][5] page.
 
 #### Compatibility
 
@@ -120,7 +119,7 @@ To enable Intelligent Test Runner, the version of the `dd-trace` tool must be >=
 **Default**: `false`<br/>
 **Note**: Required only during Beta
 
-After setting these environment variables, run your tests as you normally do by using [dotnet test][7] or [VSTest.Console.exe][8]:
+After setting these environment variables, run your tests as you normally do by using [dotnet test][6] or [VSTest.Console.exe][7]:
 
 {{< tabs >}}
 
@@ -146,11 +145,11 @@ dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- VSTest.Console.exe {te
 
 #### UI activation
 
-In addition to setting the environment variables, you or a user in your organization with admin permissions must activate the Intelligent Test Runner on the [Test Service Settings][6] page.
+In addition to setting the environment variables, you or a user in your organization with admin permissions must activate the Intelligent Test Runner on the [Test Service Settings][5] page.
 
 ### Swift
 
-To enable Intelligent Test Runner, the version of the `dd-sdk-swift` framework must be >= 2.2.0-rc.1. The `Code Coverage` option must also be enabled in the test settings of your scheme or test plan, or  `--enable-code-coverage` must be added to your `swift test` command (if using a SPM target).
+To enable Intelligent Test Runner, the version of the `dd-sdk-swift` framework must be >= 2.2.0. The `Code Coverage` option must also be enabled in the test settings of your scheme or test plan, or  `--enable-code-coverage` must be added to your `swift test` command (if using a SPM target).
 
 The following environment variables must also be set:
 
@@ -174,7 +173,7 @@ The following environment variables must also be set:
 
 #### UI activation
 
-In addition to setting the environment variables, you or a user in your organization with admin permissions must activate the Intelligent Test Runner on the [Test Service Settings][6] page.
+In addition to setting the environment variables, you or a user in your organization with admin permissions must activate the Intelligent Test Runner on the [Test Service Settings][5] page.
 
 ## Setup CI Job
 
@@ -184,7 +183,9 @@ An efficient alternative to shallow clones are partial clones (supported in Git 
 
 ## Configuration
 
-The default branch is automatically excluded from having Intelligent Test Runner enabled to reduce irrelevant test noise, but it remains configurable. Because impacted tests could be missed by this exclusion, Datadog recommends including your default branch.
+The default branch of your repository is automatically excluded from having Intelligent Test Runner enabled. Due to the limitations described above, the Intelligent Test Runner might skip some of the tests that should be run, therefore Datadog recommends to continue running all tests in your default branch (or the branch you release from).
+
+If there are other branches you want to exclude, you can add them from the Intelligent Test Runner settings page. The query bar supports the wildcard character `*` to exclude any branches that match.
 
 {{< img src="continuous_integration/itr_configuration.png" alt="Select branches to exclude from intelligent test runner" style="width:80%;">}}
 
@@ -197,7 +198,6 @@ The default branch is automatically excluded from having Intelligent Test Runner
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/organization-settings/application-keys
 [4]: /getting_started/site/
-[5]: https://jestjs.io/docs/cli#--passwithnotests
-[6]: https://app.datadoghq.com/ci/settings/test-service
-[7]: https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-test
-[8]: https://docs.microsoft.com/en-us/visualstudio/test/vstest-console-options
+[5]: https://app.datadoghq.com/ci/settings/test-service
+[6]: https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-test
+[7]: https://docs.microsoft.com/en-us/visualstudio/test/vstest-console-options

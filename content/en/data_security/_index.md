@@ -1,9 +1,6 @@
 ---
 title: Reducing Data Related Risks
 kind: documentation
-aliases:
-  - /security/
-  - /security/other/
 further_reading:
 - link: "/data_security/logs/"
   tag: "Documentation"
@@ -28,7 +25,7 @@ further_reading:
   text: "Sensitive Data Scanner"
 ---
 
-<div class="alert alert-info">This page is about the tools and security for protecting data sent to Datadog. If you're looking for cloud and application security products and features, see the <a href="/security_platform/" target="_blank">Security</a> section.</div>
+<div class="alert alert-info">This page is about the tools and security for protecting data sent to Datadog. If you're looking for cloud and application security products and features, see the <a href="/security/" target="_blank">Security</a> section.</div>
 
 In the normal course of using Datadog as intended, you send data to Datadog. Datadog works together with you to reduce data risk by providing you tools to appropriately limit the data you send and securing data during and after its transmission.
 

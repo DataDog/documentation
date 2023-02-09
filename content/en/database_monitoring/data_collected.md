@@ -85,4 +85,4 @@ _Other Queries_ represent the metrics of all queries which do not appear in the 
 [1]: /dashboards/
 [2]: /monitors/
 [3]: /notebooks/
-[4]: /security/logs/
+[4]: /data_security/logs/

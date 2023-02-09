@@ -12,6 +12,12 @@ further_reading:
 - link: /tracing/
   tag: Documentation
   text: トレースの収集
+- link: /agent/basic_agent_usage/#agent-architecture
+  tag: Documentation
+  text: Agent のアーキテクチャを詳しく見る
+- link: /agent/guide/network#configure-ports
+  tag: Documentation
+  text: インバウンドポートの構成
 kind: documentation
 platform: Windows
 title: Windows 用 Agent の基本的な使用方法
@@ -23,7 +29,7 @@ Datadog Agent をまだインストールしていない場合は、以下の手
 
 Datadog EU サイトへのインストールと構成には、`SITE=` パラメーターを使用します。以下の構成変数の表を参照してください。
 
-### インストール
+### APM に Datadog Agent を構成する
 
 **Agent v6.11.0** 以降、Windows Agent のコアと APM/トレースコンポーネントは、`LOCAL_SYSTEM` アカウントではなくインストール時に作成された `ddagentuser` アカウントで実行します。ライブプロセスコンポーネントは、有効になっている場合、`LOCAL_SYSTEM` アカウントで実行します。Datadog Windows Agent ユーザーの詳細については、[こちら][3]を参照してください。
 
@@ -34,13 +40,17 @@ Datadog Agent をドメイン環境にインストールするには、[Agent �
 {{< tabs >}}
 {{% tab "GUI" %}}
 
-1. [Datadog Agent インストーラー][1]をダウンロードします。
+1. [Datadog Agent インストーラー][1]をダウンロードし、最新バージョンの Agent をインストールします。
+
+   <div class="alert alert-info">特定のバージョンの Agent をインストールする必要がある場合は、<a href="https://s3.amazonaws.com/ddagent-windows-stable/installers.json">インストーラーリスト</a>を参照してください。</div>
+
 2. `datadog-agent-7-latest.amd64.msi` を開き、インストーラーを (**管理者**として) 実行します。
 3. プロンプトに従ってライセンス契約に同意し、[Datadog API キー][2]を入力します。
 4. インストールが終了したら、オプションから Datadog Agent Manager を起動できます。
 
 [1]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi
 [2]: https://app.datadoghq.com/organization-settings/api-keys
+
 {{% /tab %}}
 {{% tab "コマンドライン" %}}
 

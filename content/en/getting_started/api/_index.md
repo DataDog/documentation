@@ -56,7 +56,7 @@ The collection includes a [Postman environment][6] called `Datadog Authenticatio
 
 Follow these steps to set up your environment:
 
-1. Click the **Environments** drop down in the upper right corner of Postman.
+1. Click the **Environments** drop down in the upper right corner of Postman. If you don't currently have an environment selected, the **Environments** drop down says `No Environment`.
 
 2. Select **Datadog Authentication**
 

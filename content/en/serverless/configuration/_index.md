@@ -1,16 +1,16 @@
 ---
-title: Configure Serverless Monitoring
+title: Configure Serverless Monitoring for AWS Lambda
 kind: documentation
 further_reading:
   - link: '/serverless/installation/'
     tag: 'Documentation'
-    text: 'Installing Serverless Monitoring'
+    text: 'Install Serverless Monitoring for AWS Lambda'
   - link: '/serverless/troubleshooting/'
     tag: 'Documentation'
-    text: 'Troubleshoot Serverless Monitoring'
+    text: 'Troubleshoot Serverless Monitoring for AWS Lambda'
   - link: '/integrations/github'
     tag: 'Documentation'
-    text: 'Learn about the GitHub integration'
+    text: 'Datadog GitHub integration'
 aliases:
     - /serverless/distributed_tracing/collect_lambda_payloads
     - /serverless/libraries_integrations/lambda_code_signing
@@ -18,7 +18,7 @@ aliases:
     - /serverless/guide/extension_private_link/
 ---
 
-First, [install][1] Datadog serverless monitoring to begin collecting metrics, traces, and logs. After installation is complete, refer to the following topics to configure your installation to suit your monitoring needs.
+First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, traces, and logs. After installation is complete, refer to the following topics to configure your installation to suit your monitoring needs.
 
 ### Metrics
 - [Collect metrics from non-Lambda resources](#collect-metrics-from-non-lambda-resources)
@@ -740,9 +740,9 @@ If you have trouble configuring your installations, set the environment variable
 [30]: /agent/proxy/
 [31]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#aws-privatelink-support
 [32]: /agent/guide/dual-shipping/
-[33]: /serverless/distributed_tracing/serverless_trace_propagation/
+[33]: /serverless/distributed_tracing/#trace-propagation
 [34]: /integrations/amazon_xray/
-[35]: /serverless/distributed_tracing/serverless_trace_merging
+[35]: /serverless/distributed_tracing/#trace-merging
 [36]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html
 [37]: /serverless/guide/extension_motivation/
 [38]: /serverless/guide#install-using-the-datadog-forwarder

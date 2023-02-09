@@ -87,6 +87,12 @@ com.datadoghq.ad.check.id: <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
 
 **Note**: The `com.datadoghq.ad.check.id` label takes precedence over the image/name.
 
+In Kubernetes pods, you can add the following pod annotation instead:
+
+```yaml
+ad.datadoghq.com/<CONTAINER_NAME>.check.id: <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
+```
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

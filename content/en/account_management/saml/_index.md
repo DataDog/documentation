@@ -65,7 +65,7 @@ Some important notes on assertions:
 * Datadog specifies `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress` for the format of the **NameIDPolicy** in assertion requests.
 * Assertions must be signed.
 * Assertions can be encrypted, but unencrypted assertions are accepted.
-* Reference [Datadog's SP Metadata][18] for more information.
+* Reference [Datadog's Service Provider metadata][18] for more information. You must be signed in to Datadog to access the file.
 
 Attributes may be included in a SAML Assertion. Datadog looks for three attributes in an `AttributeStatement`:
 

@@ -100,6 +100,25 @@ In some setups, the Process Agent and Cluster Agent cannot automatically detect 
         - get
         - watch
       - apiGroups:
+        - ""
+        resources:
+        - serviceaccounts
+        verbs:
+        - list
+        - get
+        - watch
+      - apiGroups:
+        - rbac.authorization.k8s.io
+        resources:
+        - roles
+        - rolebindings
+        - clusterroles
+        - clusterrolebindings
+        verbs:
+        - list
+        - get
+        - watch
+      - apiGroups:
        - networking.k8s.io
        resources:
        - ingresses
@@ -126,6 +145,9 @@ In some setups, the Process Agent and Cluster Agent cannot automatically detect 
   - name: DD_CLUSTER_NAME
     value: "<YOUR_CLUSTER_NAME>"
   ```
+  
+  [1]: /containers/cluster_agent/
+  [2]: /containers/cluster_agent/setup/?tab=daemonset#pagetitle
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -144,6 +166,7 @@ The following table presents the list of collected resources and the minimal Age
 | Deployments | 7.27.0 | 1.11.0 | 2.10.0 |
 | Ingresses | 7.27.0 | 1.22.0 | 2.30.7 |
 | Jobs | 7.27.0 | 1.13.1 | 2.15.5 |
+| Namespaces | 7.27.0 | 7.41.0 | 2.30.9 |
 | Nodes | 7.27.0 | 1.11.0 | 2.10.0 |
 | PersistentVolumes | 7.27.0 | 1.18.0 | 2.30.4 |
 | PersistentVolumeClaims | 7.27.0 | 1.18.0 | 2.30.4 |
@@ -262,4 +285,5 @@ However, the scrubber does not scrub paths that contain sensitive words. For exa
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: /infrastructure/livecontainers/#overview
 [4]: /infrastructure/livecontainers/legacy

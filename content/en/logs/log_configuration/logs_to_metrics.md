@@ -13,7 +13,7 @@ further_reading:
 
 ## Overview
 
-Datadog’s [Logging without Limits][1]\* lets you dynamically decide what to include or exclude from your indexes for storage and query, at the same time many types of logs are meant to be used for telemetry to track trends, such as KPIs, over long periods of time. Log-based metrics are a cost-efficient way to summarize log data from the entire ingest stream. This means that even if you use [exclusion filters][2] to limit what you store for exploration, you can still visualize trends and anomalies over all of your log data at 10s granularity for 15 months.
+Datadog's [Logging without Limits][1]\* lets you dynamically decide what to include or exclude from your indexes for storage and query, at the same time many types of logs are meant to be used for telemetry to track trends, such as KPIs, over long periods of time. Log-based metrics are a cost-efficient way to summarize log data from the entire ingest stream. This means that even if you use [exclusion filters][2] to limit what you store for exploration, you can still visualize trends and anomalies over all of your log data at 10s granularity for 15 months.
 
 With log-based metrics, you can generate a count metric of logs that match a query or a [distribution metric][3] of a numeric value contained in the logs, such as request duration.
 
@@ -21,7 +21,7 @@ With log-based metrics, you can generate a count metric of logs that match a que
 
 ## Generate a log-based metric
 
-{{< img src="logs/processing/logs_to_metrics/generate_logs_to_metric.png" alt="Generate Logs to metric"  style="width:80%;">}}
+{{< img src="logs/processing/logs_to_metrics/generate_logs_to_metric.png" alt="Generate Logs to metric" style="width:80%;">}}
 
 To generate a new log-based metric, go to the [Configuration page][4] of your Datadog account and select the _[Generate Metrics][5]_ tab, then the **New Metric+** button.
 
@@ -37,7 +37,7 @@ You can also create metrics from an Analytics search by selecting the "Generate 
 2. **Select the field you would like to track**: Select `*` to generate a count of all logs matching your query or enter a log attribute (for example, `@network.bytes_written`) to aggregate a numeric value and create its corresponding `count`, `min`, `max`, `sum`, and `avg` aggregated metrics. If the log attribute facet is a [measure][7], the value of the metric is the value of the log attribute.
 3. **Add dimensions to `group by`**: By default, metrics generated from logs do not have any tags unless explicitly added. Any attribute or tag dimension that exists in your logs (for example, `@network.bytes_written`, `env`) can be used to create metric [tags][8]. Metric tags names are equal to the originating attribute or tag name, without the @. See the [Log Security][10] page for more information on using this feature for HIPAA-enabled customers.
 4. **Add percentile aggregations**: For distribution metrics, you can optionally generate p50, p75, p90, p95, and p99 percentiles. Percentile metrics are also considered custom metrics, and [billed accordingly][11].
-5. **Name your metric**: Log-based metric names must follow the [naming metric convention][12].
+5. **Name your metric**: Log-based metric names must follow the [custom metric naming convention][12].
 
 **Note**: Data points for Log-based metrics are generated at ten second intervals.
 
@@ -49,7 +49,7 @@ After a metric is created, the following fields can be updated:
 
 - Stream filter query: To change the set of matching logs to be aggregated into metrics
 - Aggregation groups: To update the tags or manage the cardinality of the generated metrics
-- Percentile selection: Check or uncheck the ‘Calculate percentiles’ box to remove or generate percentile metrics
+- Percentile selection: Check or uncheck the **Calculate percentiles** box to remove or generate percentile metrics
 
 To change the metric type or name, a new metric must be created.
 
@@ -61,7 +61,7 @@ Usage metrics are estimates of your current Datadog usage in near real-time. The
 
 - Graph your estimated usage.
 - Create monitors around your estimated usage.
-- Get instant alerts of spikes or drops in your usage.
+- Get instant alerts about spikes or drops in your usage.
 - Assess the potential impact of code changes on your usage in near real-time.
 
 Log Management usage metrics come with three tags that can be used for more granular monitoring:
@@ -89,6 +89,6 @@ An extra `status` tag is available on the `datadog.estimated_usage.logs.ingested
 [7]: /logs/explorer/facets/#quantitative-facets-measures
 [8]: /getting_started/tagging/
 [9]: /metrics/custom_metrics/
-[10]: /security/logs/#hipaa-enabled-customers
+[10]: /data_security/logs/#hipaa-enabled-customers
 [11]: /account_management/billing/custom_metrics/?tab=countrategauge
-[12]: /metrics/#naming-metrics
+[12]: /metrics/custom_metrics/#naming-custom-metrics

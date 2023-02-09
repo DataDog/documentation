@@ -36,7 +36,7 @@ If the RUM Browser SDK is not installed, or if it is not successfully initialize
 
 You can also check your browser developer tools console or network tab if you notice any errors related to the loading of the RUM Browser SDK.
 
-**Note**: To ensure accurate results, set `sampleRate` to 100. For more information, see [Configure Your Setup For Browser RUM and Browser RUM & Session Replay Sampling][8].
+**Note**: To ensure accurate results, set `sessionSampleRate` to 100. For more information, see [Configure Your Setup For Browser RUM and Browser RUM & Session Replay Sampling][8].
 
 ### Data to the Datadog intake
 

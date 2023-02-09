@@ -7,7 +7,7 @@ aliases:
     - /agent/network
     - /agent/faq/network
 further_reading:
-    - link: 'logs/'
+    - link: '/logs/'
       tag: 'Documentation'
       text: 'Collect your logs'
     - link: '/infrastructure/process'
@@ -35,8 +35,8 @@ All Agent traffic is sent over SSL. The destination is dependent on the Datadog 
 : `process.`{{< region-param key="dd_site" code="true" >}}
 
 [Network Device Monitoring][10]
-: `ndm-intake.`{{< region-param key="dd_site" code="true" >}}
-`snmp-traps-intake.`{{< region-param key="dd_site" code="true" >}}
+: `ndm-intake.`{{< region-param key="dd_site" code="true" >}}<br>
+`snmp-traps-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `ndmflow-intake.`{{< region-param key="dd_site" code="true" >}}
 
 
@@ -56,7 +56,7 @@ API test results for worker v>0.1.6 `intake.synthetics.`{{< region-param key="dd
 Browser test results for worker v>0.2.0 `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
 API test results for worker v<0.1.5 `api.`{{< region-param key="dd_site" code="true" >}}
 
-{{< site-region region="us,eu,us3" >}}
+{{< site-region region="us,eu,us3,us5" >}}
 [Database Monitoring][2]
 : `dbm-metrics-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `dbquery-intake.`{{< region-param key="dd_site" code="true" >}}
@@ -78,7 +78,7 @@ Other: See [logs endpoints][3]
 `http-encrypted-intake.logs.datadoghq.com`
 
 [1]: /logs/
-[2]: /security/logs/#hipaa-enabled-customers
+[2]: /data_security/logs/#hipaa-enabled-customers
 [3]: /logs/log_collection/#logging-endpoints
 
 {{< /site-region >}}
@@ -97,7 +97,7 @@ Other: See [logs endpoints][3]
 `http-encrypted-intake.logs.datadoghq.eu`
 
 [1]: /logs/
-[2]: /security/logs/#hipaa-enabled-customers
+[2]: /data_security/logs/#hipaa-enabled-customers
 [3]: /logs/log_collection/#logging-endpoints
 
 {{< /site-region >}}
@@ -114,7 +114,7 @@ Other: See [logs endpoints][3]
 `http-encrypted-intake.logs.us3.datadoghq.com`
 
 [1]: /logs/
-[2]: /security/logs/#hipaa-enabled-customers
+[2]: /data_security/logs/#hipaa-enabled-customers
 [3]: /logs/log_collection/#logging-endpoints
 
 {{< /site-region >}}
@@ -131,7 +131,7 @@ Other: See [logs endpoints][3]
 `http-encrypted-intake.logs.us5.datadoghq.com`
 
 [1]: /logs/
-[2]: /security/logs/#hipaa-enabled-customers
+[2]: /data_security/logs/#hipaa-enabled-customers
 [3]: /logs/log_collection/#logging-endpoints
 
 {{< /site-region >}}
@@ -148,7 +148,7 @@ Other: See [logs endpoints][3]
 `http-encrypted-intake.logs.ddog-gov.com`
 
 [1]: /logs/
-[2]: /security/logs/#hipaa-enabled-customers
+[2]: /data_security/logs/#hipaa-enabled-customers
 [3]: /logs/log_collection/#logging-endpoints
 
 {{< /site-region >}}
@@ -201,10 +201,11 @@ Add all of the `ip-ranges` to your inclusion list. While only a subset are activ
 
 <div class="alert alert-warning">
 All outbound traffic is sent over SSL through TCP / UDP.
+<br><br>
+Ensure the Agent is only accessible by your applications or trusted network sources using a firewall rule or similar network restriction. Untrusted access can allow malicious actors to perform several invasive actions, including but not limited to writing traces and metrics to your Datadog account, or obtaining information about your configuration and services.
 </div>
 
 Open the following ports to benefit from all the **Agent** functionalities:
-
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
@@ -255,6 +256,12 @@ See [default NTP targets][2].
 : Port for log collection over TCP.<br>
 See [logs endpoints][3] for other connection types.
 
+6062/tcp
+: Port for the debug endpoints for the Process Agent.
+
+6162/tcp
+: Port for configuring runtime settings for the Process Agent.
+
 10255/tcp
 : Port for the [Kubernetes HTTP Kubelet][4]
 
@@ -276,6 +283,12 @@ See [logs endpoints][3] for other connection types.
 123/udp
 : Port for NTP ([more details on the importance of NTP][1]).<br>
 See [default NTP targets][2].
+
+6062/tcp
+: Port for the debug endpoints for the Process Agent.
+
+6162/tcp
+: Port for configuring runtime settings for the Process Agent.
 
 10255/tcp
 : Port for the [Kubernetes HTTP Kubelet][4]
@@ -323,6 +336,13 @@ Used for Agent services communicating with each other locally within the host on
 123/udp
 : Port for NTP ([more details on the importance of NTP][1]).<br>
 See [default NTP targets][2].
+
+6062/tcp
+: Port for the debug endpoints for the Process Agent.
+
+6162/tcp
+: Port for configuring runtime settings for the Process Agent.
+
 #### Inbound
 
 8125/udp
@@ -392,6 +412,8 @@ The APM receiver and the DogStatsD ports are located in the **Trace Collection C
 #
 # receiver_port: 8126
 {{< /code-block >}}
+
+<div class="alert alert-warning">If you change the DogStatsD port or APM receiver port value here, you must also change the APM tracing library configuration for the corresponding port. See the information about configuring ports in the <a href="/tracing/trace_collection/library_config/">Library Configuration docs for your language</a>.</div>
 
 ## Using proxies
 

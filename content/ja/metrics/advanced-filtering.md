@@ -1,17 +1,20 @@
 ---
-title: 高度なフィルタリング
-kind: documentation
 description: データをフィルタリングして、返されるメトリクスのスコープを絞り込みます。
 further_reading:
-  - link: /metrics/explorer/
-    tag: Documentation
-    text: メトリクスエクスプローラー
-  - link: /metrics/summary/
-    tag: Documentation
-    text: メトリクスの概要
-  - link: /metrics/distributions/
-    tag: Documentation
-    text: ディストリビューションメトリクス
+- link: /metrics/explorer/
+  tag: Documentation
+  text: メトリクスエクスプローラー
+- link: /metrics/summary/
+  tag: Documentation
+  text: メトリクスの概要
+- link: /metrics/distributions/
+  tag: Documentation
+  text: ディストリビューションメトリクス
+- link: /logs/explorer/search_syntax/
+  tag: ドキュメント
+  text: ログクエリーフィルターと検索構文
+kind: documentation
+title: 高度なフィルタリング
 ---
 
 ## 概要
@@ -20,7 +23,7 @@ further_reading:
 
 {{< img src="metrics/advanced-filtering/tags.png" alt="タグでフィルタリングする" style="width:80%;" >}}
 
-ブールまたはワイルドカードタグ値フィルターを使用して高度なフィルタリングを実行することもできます。
+また、ブール値またはワイルドカードのタグ値フィルターを使用して、高度なフィルタリングを実行することもできます。ログ、トレース、ネットワーク・モニタリング、リアルユーザーモニタリング、Synthetics、セキュリティなど、メトリクスデータ以外のクエリについては、[ログ検索構文ドキュメント][1]を参照して、構成してください。
 
 ### ブールでフィルタリングされたクエリ
 
@@ -34,8 +37,14 @@ further_reading:
 - `IN`, `in`
 - `NOT IN`, `not in`
 
+複数のタグを含めたり除外したりする場合:
+* 含めるには `AND` ロジックを使用します
+* 除外するには `OR` ロジックを使用します
+
+タグの詳細については、[タグの使い方の概要][2]をご覧ください。
+
 **注:** 記号のブール構文 (`!`、`,`) は、機能的な構文演算子 (`NOT`、`AND`、`OR`、`IN`、`NOT IN`) と一緒に使用できません。以下のクエリは _無効_ とみなされます。
-`avg:mymetric{env:prod AND resource_name NOT IN (!resource_name:A, !resource_name:B)}`
+`avg:mymetric{env:prod AND !region:us-east}`
 
 #### ブールでフィルタリングされたクエリの例
 
@@ -86,3 +95,6 @@ sum:kubernetes.pods.running{service:*-canary} by {service}
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /ja/logs/explorer/search_syntax/
+[2]: /ja/getting_started/tagging/using_tags/

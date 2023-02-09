@@ -22,7 +22,7 @@ further_reading:
 
 Configure your Datadog account to forward all the logs ingested - whether [indexed][1] or not - to a cloud storage system of your own. Keep your logs in a storage-optimized archive for longer periods of time and meet compliance requirements while also keeping auditability for ad hoc investigations, with [Rehydration][2].
 
-{{< img src="logs/archives/log_archives_s3_multiple.png" alt="Archive page view"  style="width:75%;">}}
+{{< img src="logs/archives/log_archives_s3_multiple.png" alt="Archive page view" style="width:75%;">}}
 
 This guide shows you how to set up an archive for forwarding ingested logs to your own cloud-hosted storage bucket:
 
@@ -65,7 +65,7 @@ Set up the [Azure integration][1] within the subscription that holds your new st
 
 {{% tab "Google Cloud Storage" %}}
 
-Set up the [GCP integration][1] for the project that holds your GCS storage bucket, if you haven’t already. This involves [creating a GCP service account that Datadog can use][2] to integrate with.
+Set up the [GCP integration][1] for the project that holds your GCS storage bucket, if you haven't already. This involves [creating a GCP service account that Datadog can use][2] to integrate with.
 
 [1]: https://app.datadoghq.com/account/settings#integrations/google-cloud-platform
 [2]: /integrations/google_cloud_platform/?tab=datadogussite#setup
@@ -83,12 +83,13 @@ Go into your [AWS console][1] and [create an S3 bucket][2] to send your archives
 
 - Do not make your bucket publicly readable.
 - Do not set [Object Lock][3] because the last data needs to be rewritten in some rare cases (typically a timeout).
-- See [AWS Pricing][4] for inter-region data transfer fees and how cloud storage costs may be impacted. Consider creating your storage bucket in `us-east-1` to manage your inter-region data transfer fees.
+- For [US1, US3, and US5 sites][4], see [AWS Pricing][5] for inter-region data transfer fees and how cloud storage costs may be impacted. Consider creating your storage bucket in `us-east-1` to manage your inter-region data transfer fees.
 
 [1]: https://s3.console.aws.amazon.com/s3
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html
 [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock-overview.html
-[4]: https://aws.amazon.com/s3/pricing/
+[4]: /getting_started/site/
+[5]: https://aws.amazon.com/s3/pricing/
 {{% /tab %}}
 
 {{% tab "Azure Storage" %}}
@@ -370,9 +371,11 @@ Alternatively, Datadog supports server side encryption with a CMK from [AWS KMS]
 
 3. Go to the **Properties** tab in your S3 bucket and select **Default Encryption**. Choose the "AWS-KMS" option, select your CMK ARN, and save.
 
+For any changes to existing KSM keys, reach out to [Datadog support][3] for further assistance
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/default-bucket-encryption.html
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
+[3]: /help/
 {{% /tab %}}
 
 {{< /tabs >}}

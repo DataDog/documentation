@@ -41,7 +41,7 @@ draft: false
 git_integration_title: pgbouncer
 integration_id: pgbouncer
 integration_title: PGBouncer
-integration_version: 4.3.0
+integration_version: 4.3.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0

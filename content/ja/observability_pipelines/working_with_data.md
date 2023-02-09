@@ -2,46 +2,43 @@
 aliases:
 - /ja/integrations/observability_pipelines/working_with_data/
 further_reading:
-- link: https://vector.dev/docs/reference/configuration/transforms/aws_ec2_metadata/
+- link: /observability_pipelines/reference/transforms/#awsec2metadata
   tag: ドキュメント
   text: AWS EC2 インスタンスが発するメタデータのパース
-- link: https://vector.dev/docs/reference/configuration/transforms/lua/
+- link: /observability_pipelines/reference/transforms/#lua
   tag: ドキュメント
   text: Lua でイベントを変更する
-- link: https://vector.dev/docs/reference/configuration/transforms/tag_cardinality_limit/
+- link: /observability_pipelines/reference/transforms/#tagcardinalitylimit
   tag: ドキュメント
   text: カーディナリティの爆発を防ぐために、メトリクスのタグのカーディナリティを制限する
-- link: https://vector.dev/docs/reference/configuration/transforms/log_to_metric/
+- link: /observability_pipelines/reference/transforms/#logtometric
   tag: ドキュメント
   text: ログをメトリクスイベントに変換する
-- link: https://vector.dev/docs/reference/configuration/transforms/metric_to_log/
+- link: /observability_pipelines/reference/transforms/#metrictolog
   tag: ドキュメント
   text: メトリクスをログイベントに変換する
-- link: https://vector.dev/docs/reference/configuration/transforms/geoip/
-  tag: ドキュメント
-  text: GeoIP メタデータでイベントをリッチ化する
 - link: https://vector.dev/guides/level-up/csv-enrichment-guide/
   tag: ドキュメント
   text: CSV エンリッチメントを使用して、データにさらなるコンテクストを提供する
-- link: /observability_pipelines/integrations/integrate_vector_with_datadog/
+- link: /observability_pipelines/production_deployment_overview/integrate_datadog_and_the_observability_pipelines_worker/
   tag: ドキュメント
-  text: Vector にデータを送信するための Datadog Agent の構成
-- link: /observability_pipelines/vector_configurations/
+  text: 観測可能性パイプラインにデータを送信するための Datadog Agent の構成
+- link: /observability_pipelines/configurations/
   tag: ドキュメント
-  text: Vector の構成の詳細
+  text: 観測可能性パイプラインの構成の詳細
 kind: ドキュメント
 title: データを活用する
 ---
 
 ## 概要
 
-Vector は観測可能性データを整形し、変換することができます。Logging without LimitsTM パイプラインと同様に、一連の Vector `transform` コンポーネントで構成される Vector パイプラインを構成することができます。これらの変換により、ビルトインの型安全性でデータの解析、構造化、リッチ化を行うことができます。
+観測可能性パイプラインは観測可能性データを整形し、変換することができます。Logging without Limits™ パイプラインと同様に、一連の `transform` コンポーネントで構成される観測可能性パイプラインのパイプラインを構成することができます。これらの変換により、ビルトインの型安全性でデータの解析、構造化、リッチ化を行うことができます。
 
-## Vector Remap Language によるデータのリマップ
+## VRL でデータをリマップする
 
 Vector Remap Language (VRL) は、観測可能性データ (ログやメトリクス) を変換するために設計された、式指向のドメイン特化型言語です。観測可能性のユースケースに合わせたシンプルな構文と[組み込み関数][1]を特徴としています。
 
-Vector Remap Language は、Vector の `remap` 変換でサポートされています。
+Vector Remap Language は、`remap` 変換でサポートされています。
 
 リマップ変換は単一のイベントに作用し、それらを変換したり、ルーティングやフィルターのための条件を指定するために使用できます。VRL は次のような方法で使用することができます。
 
@@ -110,7 +107,7 @@ source = '''
 
 2 行目は `.timestamp` フィールドとその値をイベントに追加し、この変換を通過するすべてのイベントのコンテンツを変更します。
 
-詳しくは、[VRL リファレンス][14]、[Vector 構成][15]をご覧ください。
+詳しくは、[VRL リファレンス][14]、[構成][15]をご覧ください。
 
 ## データのパース
 
@@ -190,7 +187,7 @@ source = '''
 
 ## データのサンプリング、削減、フィルター、集計
 
-下流のサービスに配信される観測可能性データの量を減らすために、サンプリング、削減、フィルター、集計などの変換が一般的に行われています。Vector は、データ量をコントロールするための様々な方法を提供します。
+下流のサービスに配信される観測可能性データの量を減らすために、サンプリング、削減、フィルター、集計などの変換が一般的に行われています。観測可能性パイプラインは、データ量をコントロールするための様々な方法を提供します。
 
 - 指定された条件に基づき、構成可能なレートで[イベントをサンプリング][16]する。
 - 複数のイベントを 1 つのイベントに[縮小してまとめる][17]。
@@ -212,7 +209,7 @@ source = '''
 {
   "logs": {
     "kind": "absolute",
-    “level”: “info”,
+    "level": "info,
     "name": "memory_available_bytes",
     "namespace": "host",
     "tags": {}
@@ -384,7 +381,7 @@ window_secs = 1
 
 `threshold` フィールドは、与えられたバケットに許可されるイベント数を定義します。`window_secs` は、設定されたしきい値が適用される時間枠を定義します。この構成例では、コンポーネントが 1 秒間に 100 個以上のイベントを受信すると、それ以降のイベントはすべて削除されます。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -402,12 +399,12 @@ window_secs = 1
 [12]: https://vector.dev/docs/reference/vrl/functions/#event-functions
 [13]: https://vector.dev/docs/reference/vrl/functions/#path-functions
 [14]: https://vector.dev/docs/reference/vrl/#reference
-[15]: /ja/observability_pipelines/vector_configurations
-[16]: https://vector.dev/docs/reference/configuration/transforms/sample/
-[17]: https://vector.dev/docs/reference/configuration/transforms/reduce/
-[18]: https://vector.dev/docs/reference/configuration/transforms/dedupe/
-[19]: https://vector.dev/docs/reference/configuration/transforms/filter/
-[20]: https://vector.dev/docs/reference/configuration/transforms/aggregate/
-[21]: https://vector.dev/docs/reference/configuration/transforms/metric_to_log/
+[15]: /ja/observability_pipelines/configurations/
+[16]: /ja/observability_pipelines/reference/transforms/#sample
+[17]: /ja/observability_pipelines/reference/transforms/#reduce
+[18]: /ja/observability_pipelines/reference/transforms/#dedupe
+[19]: /ja/observability_pipelines/reference/transforms/#filter
+[20]: /ja/observability_pipelines/reference/transforms/#aggregate
+[21]: /ja/observability_pipelines/reference/transforms/#metrictolog
 [22]: /ja/observability_pipelines/guide/control_log_volume_and_size/
-[23]: https://vector.dev/docs/reference/configuration/transforms/route/
+[23]: /ja/observability_pipelines/reference/transforms/#route

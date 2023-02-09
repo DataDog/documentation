@@ -23,7 +23,7 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/amazon-ecs-anywhere-monitoring/'
       tag: 'Blog'
       text: 'Monitor Amazon ECS Anywhere with Datadog'
-    - link: 'integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/??tab=cloudformation'
+    - link: '/integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/?tab=cloudformation'
       tag: 'Documentation'
       text: 'AWS CloudWatch Metric Streams with Kinesis Data Firehose'
     - link: 'https://www.datadoghq.com/blog/monitor-aws-graviton3-with-datadog/'
@@ -74,7 +74,7 @@ Before getting started, ensure you have the following prerequisites:
     * secretsmanager:CreateSecret
     * secretsmanager:GetSecretValue
     * secretsmanager:PutSecretValue
-    * serverless:CreateCloudFormationTemplate
+    * serverlessrepo:CreateCloudFormationTemplate
 
 ## Setup
 
@@ -234,13 +234,13 @@ If you encounter any issues, be sure to check out the [Troubleshooting][57] sect
 [47]: /tracing/trace_collection/
 [48]: /tracing/#explore-datadog-apm
 [49]: /watchdog/
-[50]: /security_platform/cloud_siem/getting_started/
-[51]: /security_platform/default_rules/#cat-log-detection
-[52]: /security_platform/explorer/
-[53]: /security_platform/notifications/rules/
-[54]: /security_platform/cspm/getting_started/
-[55]: /security_platform/default_rules/#cat-posture-management-cloud
-[56]: /security_platform/default_rules/#cat-posture-management-infra
+[50]: /security/cloud_siem/getting_started/
+[51]: /security/default_rules/#cat-log-detection
+[52]: /security/explorer/
+[53]: /security/notifications/rules/
+[54]: /security/cspm/getting_started/
+[55]: /security/default_rules/#cat-posture-management-cloud
+[56]: /security/default_rules/#cat-posture-management-infra
 [57]: /integrations/amazon_web_services/?tab=roledelegation#troubleshooting
 [58]: https://app.datadoghq.com/organization-settings/api-keys
 [59]: /integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/??tab=cloudformation

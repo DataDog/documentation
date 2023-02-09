@@ -162,11 +162,11 @@ function getPathElement(event = null) {
         );
     }
 
-    // redirect support. if agent/aggregating agents is selected, highlight `observability_pipelines/integrations/integrate_vector_with_datadog` in the sidenav.
-    if (path.includes('observability_pipelines/integrations/integrate_vector_with_datadog')) {
+    // redirect support. if agent/aggregating agents is selected, highlight `observability_pipelines/production_deployment_overview/integrate_datadog_and_the_observability_pipelines_worker` in the sidenav.
+    if (path.includes('observability_pipelines/production_deployment_overview/integrate_datadog_and_the_observability_pipelines_worker')) {
         const observabilityPipelineEl = document.querySelector('.side .nav-top-level > [data-path*="observability_pipelines"]');
         sideNavPathElement = observabilityPipelineEl.nextElementSibling.querySelector(
-            '[data-path*="observability_pipelines/integrations/integrate_vector_with_datadog"]'
+            '[data-path*="observability_pipelines/production_deployment_overview/integrate_datadog_and_the_observability_pipelines_worker"]'
         );
         mobileNavPathElement = sideNavPathElement;
     }
@@ -182,7 +182,7 @@ function getPathElement(event = null) {
     }
 
     // if security rules section that has links to hashes, #cat-workload-security etc. try and highlight correct sidenav
-    if (path.includes('security_platform/default_rules')) {
+    if (path.includes('security/default_rules')) {
         const ref = ((event) ? event.target.href : window.location.hash) || window.location.hash;
         if(ref) {
           sideNavPathElement = document.querySelector(

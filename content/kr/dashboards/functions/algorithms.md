@@ -51,10 +51,6 @@ title: 알고리즘
 * `ALGORITHM`: 사용할 예측 알고리즘으로, `linear` 또는 `seasonal`을(를) 선택해야 합니다. 이러한 알고리즘에 대한 자세한 내용은 [예측 알고리즘][3] 섹션을 참조하세요.
 * `DEVIATIONS`: 예측 값 범위의 너비입니다. 1 또는 2의 값은 대부분의 "정상" 포인트를 정확하게 예측할 수 있을 만큼 충분히 커야 합니다.
 
-예측에 고유한 시각화 값이 있기 때문에 몇 가지 그래프화 옵션이 사라집니다. **Forecast**를 추가한 후 편집기는 다음과 같이 표시되어야 합니다.
-
-{{< img src="dashboards/functions/algorithms/forecast_query.png" alt="쿼리 편집기" style="width:80%;">}}
-
 ## 기타 함수
 
 {{< whatsnext desc="사용 가능한 다른 함수를 참조하세요." >}}

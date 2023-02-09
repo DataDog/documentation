@@ -15,7 +15,7 @@ assets:
     source_type_name: Vespa
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Vespa
   sales_email: dd@vespa.ai
   support_email: dd@vespa.ai
 categories:

@@ -1,5 +1,5 @@
 ---
-title: Advanced Log Collection
+title: Advanced Log Collection Configurations
 kind: documentation
 description: Use the Datadog Agent to collect your logs and send them to Datadog
 further_reading:
@@ -368,7 +368,7 @@ logs:
    log_processing_rules:
       - type: multi_line
         name: new_log_start_with_date
-        pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])\s
+        pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
 ```
 
 {{% /tab %}}
@@ -385,7 +385,7 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on your container
         "log_processing_rules": [{
           "type": "multi_line",
           "name": "log_start_with_date",
-          "pattern" : "\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])\\s"
+          "pattern" : "\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])"
         }]
       }]
 ```
@@ -414,7 +414,7 @@ spec:
             "log_processing_rules": [{
               "type": "multi_line",
               "name": "log_start_with_date",
-              "pattern" : "\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])\\s"
+              "pattern" : "\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])"
             }]
           }]
       labels:
@@ -525,7 +525,7 @@ logs_config:
   auto_multi_line_detection: true
   auto_multi_line_extra_patterns:
    - \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
-   - [A-Za-z_]+ \d+, \d+ \d+:\d+:\d+ (AM|PM)
+   - '[A-Za-z_]+ \d+, \d+ \d+:\d+:\d+ (AM|PM)'
 ```
 
 With this feature enabled, when a new log file is opened the Agent tries to detect a pattern. During this process the logs are sent as single lines. After the detection threshold is met, all future logs for that source are aggregated with the detected pattern, or as single lines if no pattern is found. Detection takes at most 30 seconds or the first 500 logs (whichever comes first).
@@ -567,6 +567,17 @@ logs:
 The example above matches `/var/log/myapp/log/myfile.log` and excludes `/var/log/myapp/log/debug.log` and `/var/log/myapp/log/trace.log`.
 
 **Note**: The Agent requires read and execute permissions on a directory to list all the available files in it.
+
+## Tail most recently modified files first
+**Note:** This feature is in public beta.
+
+When prioritizing files to tail, the Datadog Agent sorts the filenames in the directory path by reverse lexicographic order. To sort files based on file modification time, set the configuration option `logs_config.file_wildcard_selection_mode` to the value `by_modification_time`.
+
+This option is helpful when the number of total log file matches exceeds `logs_config.open_files_limit`. Using `by_modification_time` ensures that the most recently updated files are tailed first in the defined directory path.
+
+To restore default behavior, set the configuration option `logs_config.file_wildcard_selection_mode` to the value`by_name`.
+
+This feature requires Agent version 7.40.0 or above.
 
 ## Log file encodings
 
