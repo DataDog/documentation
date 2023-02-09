@@ -120,10 +120,11 @@ Create an anomaly detection monitor to alert on any unexpected log indexing spik
 Set up a monitor to alert if an indexed log volume in any scope of your infrastructure (for example, `service`, `availability-zone`, and so forth) is growing unexpectedly.
 
 1. Navigate to the [Log Explorer][14].
-2. Enter a [search query][15] that captures the log volume you want to monitor. Keep the query empty to monitor all the logs from that index.
+2. Enter a [search query][15] that includes the index name to capture the log volume you want to monitor.
 3. Click the down arrow next to **Download as CSV** and select **Create monitor**.
-4. Enter the **Alert threshold** for your use case. Optionally, enter a **Warning threshold**.
-5. Add a notification title, for example: 
+4. Add tags (for example, `host, `services, and so on) to the **group by** field.
+5. Enter the **Alert threshold** for your use case. Optionally, enter a **Warning threshold**.
+6. Add a notification title, for example: 
     ```
     Unexpected spike on indexed logs for service {{service.name}}
     ```
@@ -168,6 +169,8 @@ When your usage monitors alert, you can set up exclusion filters and increase th
 
 {{< img src="logs/guide/patterns_exclusion.png" alt="The log explorer page showing the side-panel details of a pattern with the add exclusion filter button at the top" style="width:80%;">}}
 
+Even if you use exclusion filters, you can still visualize trends and anomalies over all of your log data using log-based metrics. See [Generate Metrics from Ingested Logs][25] for more information.
+
 ### Enable Sensitive Data Scanner for Personally Identifiable Information (PII) detection
 
 If you want to prevent data leaks and limit non-compliance risks, use Sensitive Data Scanner to identify, tag, and optionally redact or hash sensitive data. For example, you can scan for credit card numbers, bank routing numbers, and API keys in your logs, APM spans, and RUM events, See [Sensitive Data Scanner][21] on how to set up scanning rules to determine what data to scan. 
@@ -204,3 +207,4 @@ If you want to see user activities, such as who changed the retention of an inde
 [22]: /account_management/audit_trail/events/
 [23]: /account_management/audit_trail/
 [24]: /logs/explorer/analytics/#patterns
+[25]: /logs/log_configuration/logs_to_metrics/
