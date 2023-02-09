@@ -66,7 +66,7 @@ docker-compose up -d
 After the containers are built and running, the "toolbox" container is available to explore:
 
 ```
-docker exec -it dd-continuous-profiler-example_toolbox_1 bash
+docker exec -it dd-continuous-profiler-example-toolbox-1 bash
 ```
 
 Use the API with:
