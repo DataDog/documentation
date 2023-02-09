@@ -45,7 +45,7 @@ To set up multiple indexes:
 2. Click **New Index** or **Add a new index**.
 3. Enter a name for the Index.
 4. Enter the search query to filter to the logs you want in this index.
-5. Set the daily quota to hard-limit the number of logs that are stored within an index per day.
+5. Set the daily quota to limit the number of logs that are stored within an index per day.
 6. Set the retention period to how long you want to retain these logs.
 7. Click **Save**.
 
@@ -53,11 +53,11 @@ Setting daily quotas on your indexes can help prevent billing overages when new 
 
 ### Set up multiple archives for long-term storage
 
-If you want to store your logs for longer periods of time, set up [Log Archives][2] to send your logs to a storage-optimized system, such as AWS S3, Azure Storage, or Google Cloud Storage. When you want to use Datadog to analyze those logs, use [Log Rehydration][3]™ to capture those logs back in Datadog. Multiple archives help with both segmentation of logs for compliance reasons and keeping costs of rehydration under control.
+If you want to store your logs for longer periods of time, set up [Log Archives][2] to send your logs to a storage-optimized system, such as AWS S3, Azure Storage, or Google Cloud Storage. When you want to use Datadog to analyze those logs, use [Log Rehydration][3]™ to capture those logs back in Datadog. With multiple archives, you can both segment logs for compliance reasons and keep rehydration costs under control.
 
 #### Set up max scan size to manage expensive rehydrations 
 
-When setting up an archive, you can define the maximum volume of log data that can be scanned for Rehydration to limit the volume of logs that can be rehydrated at one time. See [Define maximum scan size][4] for more information.
+Set a limit on the volume of logs that can be rehydrated at one time. When setting up an archive, you can define the maximum volume of log data that can be scanned for Rehydration. See [Define maximum scan size][4] for more information.
 
 ### Set up RBAC for custom roles
 
@@ -136,7 +136,7 @@ Set up a monitor to alert if an indexed log volume in any scope of your infrastr
 
 #### Alert on indexes reaching their daily quota
 
-[Set up a daily quota][16] on indexes to prevent indexing more than a given number of logs per day. When doing this, Datadog recommends that you set the [above monitor](#alert-when-an-indexed-log-volume-passes-a-specified-threshold) to alert when 80% of this quota is reached within the past 24 hours.
+[Set up a daily quota][16] on indexes to prevent indexing more than a given number of logs per day. If an index has a daily quota, Datadog recommends that you set the [monitor that notifies on that index's volume](#alert-when-an-indexed-log-volume-passes-a-specified-threshold) to alert when 80% of this quota is reached within the past 24 hours.
 
 An event is generated when the daily quota is reached. By default, these events have the `datadog_index` tag with the index name. You can, optionally, [create a facet][17] on the `datadog_index` tag, so that you can use `datadog_index` in the `group by` step for setting up a multi-alert monitor.
 
