@@ -8805,6 +8805,22 @@ api:
         - AggregateRUMEvents
       unstable: []
       order: 3
+  - name: Restriction Policies
+    url: /api/latest/restriction-policies/
+    identifier: restriction-policies
+    generated: true
+  - name: Get a restriction policy
+    url: '#get-a-restriction-policy'
+    identifier: restriction-policies-get-a-restriction-policy
+    parent: restriction-policies
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetRestrictionPolicy
+      unstable: []
+      order: 1
   - name: Roles
     url: /api/latest/roles/
     identifier: roles

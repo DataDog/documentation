@@ -585,6 +585,10 @@
     "request_description": "",
     "request_schema_description": "A request wrapper around a single timeseries query to be executed."
   },
+  "GetRestrictionPolicy": {
+    "description": "Retrieves the restriction policy associated with a specified resource.",
+    "summary": "Get a restriction policy"
+  },
   "ListRoles": {
     "description": "Returns all roles, including their names and their unique identifiers.",
     "summary": "List roles"
