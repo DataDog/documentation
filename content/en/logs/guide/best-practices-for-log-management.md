@@ -24,8 +24,8 @@ Therefore, this guide walks you through various Log Management best practices an
 
 This guide also goes through how to monitor your log usage by:
 
-- [Alerting on unexpected logs traffic spikes](#alert-on-unexpected-logs-traffic-spikes)
-- [Alerting on indexed logs when the volume passes a specified threshold](#alert-on-indexed-logs-when-the-volume-passes-a-specified-threshold)
+- [Alerting on unexpected log traffic spikes](#alert-on-unexpected-log-traffic-spikes)
+- [Alerting on indexed logs when the volume passes a specified threshold](#alert-when-an-indexed-log-volume-passes-a-specified-threshold)
 - [Setting up exclusion filters on high-volume logs](#set-up-exclusion-filters-on-high-volume-logs)
 
 ## Log account configuration
@@ -39,7 +39,7 @@ For example, if you have logs that only need to be retained for 7 days, while ot
 To set up multiple indexes:
 
 1. Navigate to [Log Indexes][1].
-2. Click **New Index**
+2. Click **New Index**.
 3. Enter a name for the Index.
 4. Enter the search query to filter to the logs you want in this index.
 5. Set the daily quota to hard-limit the number of logs that are stored within an index per day.
@@ -50,7 +50,7 @@ Setting daily quotas on your indexes can help prevent billing overages when new 
 
 ### Set up multiple archives for long-term storage
 
-If you want to store your logs for longer periods of time, set up [Log Archives][2] to send your logs to a storage-optimized system, such as AWS S3, Azure Storage, or Google Cloud Storage. When you want to use Datadog to analyze those logs, use [Log Rehydration][3] to capture those logs back in Datadog. Multiple archives help with both segmentation of logs for compliance reasons and keeping costs of rehydration under control.
+If you want to store your logs for longer periods of time, set up [Log Archives][2] to send your logs to a storage-optimized system, such as AWS S3, Azure Storage, or Google Cloud Storage. When you want to use Datadog to analyze those logs, use [Log Rehydration][3]™ to capture those logs back in Datadog. Multiple archives help with both segmentation of logs for compliance reasons and keeping costs of rehydration under control.
 
 #### Set up max scan size to manage expensive rehydrations 
 
@@ -58,7 +58,7 @@ When setting up an archive, you can define the maximum volume of log data that c
 
 ### Set up RBAC for custom roles
 
-There are three [default Datadog roles][5]: Admin, Standard, and Read-only. You can also create custom roles with unique permission sets. For example, you can create a role that restricts users from modifying index retention policies to avoid unintended cost spikes. Similarly, you can restrict who can modify log parsing configurations to avoid unwanted changes to well-defined log structure and formats.
+There are three [default Datadog roles][5]: Admin, Standard, and Read-only. You can also create custom roles with unique permission sets. For example, you can create a role that restricts users from modifying index retention policies to avoid unintended cost spikes. Similarly, you can restrict who can modify log parsing configurations to avoid unwanted changes to well-defined log structures and formats.
 
 To set up custom roles with permissions:
 
@@ -74,12 +74,12 @@ See [How to Set Up RBAC for Logs][9] for a step-by-step guide on how to set up a
 
 ## Monitor log usage
 
-You can monitor your log usage with estimated usage metrics, by setting up the following:
+You can monitor your log usage, by setting up the following:
 
-- [Alerts for unexpected logs traffic spikes](#alert-on-unexpected-logs-traffic-spikes)
-- [Alerts for when you are getting close to a budget threshold on your indexed logs](#alert-on-indexed-logs-when-the-volume-passes-a-specified-threshold)
+- [Alerts for unexpected log traffic spikes](#alert-on-unexpected-log-traffic-spikes)
+- [Alert when an indexed log volume passes a specified threshold](#alert-when-an-indexed-log-volume-passes-a-specified-threshold)
 
-### Alert on unexpected logs traffic spikes
+### Alert on unexpected log traffic spikes
 
 #### Log usage metrics
 
@@ -92,7 +92,7 @@ See [Anomaly detection monitors][11] for steps on how to create anomaly monitors
 
 **Note**: Datadog recommends setting the unit to `byte` for the `datadog.estimated_usage.logs.ingested_bytes` in the [metric summary page][12]:
 
-{{< img src="logs/guide/logs_estimated_bytes_unit.png" alt="Metric unit definition" style="width:70%;">}}
+{{< img src="logs/guide/logs_estimated_bytes_unit.png" alt="The metric summary page showing the datadog.estimated_usage.logs.ingested_bytes side panel with the unit set to byte" style="width:70%;">}}
 
 #### Anomaly detection monitors
 
@@ -102,7 +102,7 @@ To create an anomaly detection monitor to alert on any unexpected log indexing s
 2. In the **Define the metric** section, select the `datadog.estimated_usage.logs.ingested_events` metric.
 3. In the **from** field, add the `datadog_is_excluded:false` tag to monitor indexed logs and not ingested ones.
 4. In the **sum by** field, add the `service` and `datadog_index` tags, so that you are notified if a specific service spikes or stops sending logs in any index.
-5. Set the alert conditions to match your use case. For example, alert if the evaluated values are outside of an expected range.
+5. Set the alert conditions to match your use case. For example, set the monitor to alert if the evaluated values are outside of an expected range.
 6. Add a title for the notification and a message with actionable instructions. For example, this is a notification with contextual links:
     ```text
     An unexpected amount of logs has been indexed in the index: {{datadog_index.name}}
@@ -112,19 +112,19 @@ To create an anomaly detection monitor to alert on any unexpected log indexing s
     ``` 
 7. Click **Create**.
 
-### Alert on indexed logs when the volume passes a specified threshold
+### Alert when an indexed log volume passes a specified threshold
 
-Set up a monitor to alert if the indexed log volumes in any scope of your infrastructure (for example, `service`, `availability-zone`, and so forth) are growing unexpectedly.
+Set up a monitor to alert if an indexed log volume in any scope of your infrastructure (for example, `service`, `availability-zone`, and so forth) is growing unexpectedly.
 
 1. Navigate to the [Log Explorer][14].
-2. Enter a [search query][15] that captures the volume you want to monitor. Keep the query empty to monitor all the logs from that index.
+2. Enter a [search query][15] that captures the log volume you want to monitor. Keep the query empty to monitor all the logs from that index.
 3. Click the down arrow next to **Download as CSV** and select **Create monitor**.
 4. Enter the **Alert threshold** for your use case. Optionally, enter a **Warning threshold**.
-5. Add a notification title. For example: 
+5. Add a notification title, for example: 
     ```
     Unexpected spike on indexed logs for service {{service.name}}
     ```
-6.  Add a message. For example:
+6.  Add a message, for example:
     ```
     The volume on this service exceeded the threshold. Define an additional exclusion filter or increase the sampling rate to reduce the volume.
     ```
@@ -132,13 +132,18 @@ Set up a monitor to alert if the indexed log volumes in any scope of your infras
 
 #### Alert on indexes reaching their daily quota
 
-[Set up a daily quota][16] on indexes to prevent indexing more than a given number of logs per day. When doing this, Datadog recommends that you set the above monitor to alert when 80% of this quota is reached within the past 24 hours.
+[Set up a daily quota][16] on indexes to prevent indexing more than a given number of logs per day. When doing this, Datadog recommends that you set the [above monitor](#alert-when-an-indexed-log-volume-passes-a-specified-threshold) to alert when 80% of this quota is reached within the past 24 hours.
 
-An event is generated when the daily quota is reached. Set up a monitor to be notified when this happens:
+An event is generated when the daily quota is reached. By default, these events have the `datadog_index` tag with the index name. You can, optionally, [create a facet][17] on the `datadog_index` tag, so that you can use `datadog_index` in the `group by` step for setting up a multi-alert monitor.
 
-{{< img src="logs/guide/daily_quota_event_monitor.png" alt="Configuration page of event monitor with Source:datadog in query and datadog_index selected in the group by section" style="width:70%;">}}
+To set up a monitor to alert when the daily quota is reached for an index:
 
-When the daily quota is reached, by default, the related events that are generated have the `datadog_index` tag with the index name. Optionally, [create a facet][17] on the `datadog_index` tag, so that you can use `datadog_index` in the `group by` step for [multi alerts][18], as shown in the screenshot above.
+1. Navigate to [Monitors > New Monitor][13] and click **Event**.
+2. Enter: `source:datadog "daily quota reached"` in the **Define the search query** section.
+3. Add `datadog_index(datadog_index)` to the **group by** field.
+4. In the **Set alert conditions** section, select `above or equal to` and enter `1` for the **Alert threshold**.
+5. Add a notification title and message in the **Notify your team** section.The **Multi Alert** button is automatically selected because the monitor is grouped by `datadog_index(datadog_index)`.
+6. Click **Save**.
 
 This is an example of what the notification looks like in Slack:
 
@@ -146,25 +151,25 @@ This is an example of what the notification looks like in Slack:
 
 ### Review the estimated usage dashboard
 
-Once you begin ingesting logs, an out-of-the-box [dashboard][19] summarizing your log usage metrics is automatically installed in your account.
+Once you begin ingesting logs, an out-of-the-box [dashboard][18] summarizing your log usage metrics is automatically installed in your account.
 
 {{< img src="logs/guide/logslight.png" alt="Log estimated usage dashboard" style="width:70%;">}}
 
 **Note**: The metrics used in this dashboard are estimates and may differ from official billing numbers.
 
-To find this dashboard, go to **Dashboards > Dashboards List** and search for [Log Management - Estimated Usage][20].
+To find this dashboard, go to **Dashboards > Dashboards List** and search for [Log Management - Estimated Usage][19].
 
 ### Set up exclusion filters on high-volume logs
 
-When your usage monitors alert, you can set up exclusion filters and increase the sampling rate to reduce the volume. See [Exclusion Filters][21] on how to set them up.
+When your usage monitors alert, you can set up exclusion filters and increase the sampling rate to reduce the volume. See [Exclusion Filters][20] on how to set them up.
 
 ### Enable sensitive data scanner for PII detection
 
-If you want to prevent data leaks and limit non-compliance risks, use Sensitive Data Scanner to identify, tag, and optionally redact or hash sensitive data. For example, you can scan for credit card numbers, bank routing numbers, and API keys in your logs, APM spans, and RUM events, See [Sensitive Data Scanner][22] on how to set up scanning rules to determine what data to scan. 
+If you want to prevent data leaks and limit non-compliance risks, use Sensitive Data Scanner to identify, tag, and optionally redact or hash sensitive data. For example, you can scan for credit card numbers, bank routing numbers, and API keys in your logs, APM spans, and RUM events, See [Sensitive Data Scanner][21] on how to set up scanning rules to determine what data to scan. 
 
 ### Enable audit trail to see user activities
 
-If you want to see user activities, such as who changed the retention of an index or who modified an exclusion filter, enable Audit Trail to see these events. See Audit Trail Events for a list of platform and product-specific events that are available. To enable and configure Audit Trail, follow the steps in the [Audit Trail documentation][23].
+If you want to see user activities, such as who changed the retention of an index or who modified an exclusion filter, enable Audit Trail to see these events. See [Audit Trail Events][22] for a list of platform and product-specific events that are available. To enable and configure Audit Trail, follow the steps in the [Audit Trail documentation][23].
 
 ## Further Reading
 
@@ -187,9 +192,9 @@ If you want to see user activities, such as who changed the retention of an inde
 [15]: /logs/explorer/search/
 [16]: /logs/indexes/#set-daily-quota
 [17]: /events/explorer/#facets
-[18]: /monitors/create/types/event/?tab=threshold#define-the-search-query
-[19]: https://app.datadoghq.com/dash/integration/logs_estimated_usage
-[20]: https://app.datadoghq.com/dashboard/lists?q=Log+Management+-+Estimated+Usage
-[21]: /logs/log_configuration/indexes/#exclusion-filters
-[22]: /account_management/org_settings/sensitive_data_detection/
+[18]: https://app.datadoghq.com/dash/integration/logs_estimated_usage
+[19]: https://app.datadoghq.com/dashboard/lists?q=Log+Management+-+Estimated+Usage
+[20]: /logs/log_configuration/indexes/#exclusion-filters
+[21]: /account_management/org_settings/sensitive_data_detection/
+[22]: /account_management/audit_trail/events/
 [23]: /account_management/audit_trail/
