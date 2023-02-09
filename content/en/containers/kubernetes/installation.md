@@ -146,7 +146,7 @@ To modify the container image registry, see the [Changing Container Registry][9]
 [6]: https://app.datadoghq.com/organization-settings/api-keys
 [7]: /agent/guide/operator-advanced
 [8]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.md
-[9]: https://docs.datadoghq.com/agent/guide/changing_container_registry/#kubernetes-with-the-datadog-operator
+[9]: /agent/guide/changing_container_registry/#kubernetes-with-the-datadog-operator
 {{% /tab %}}
 {{% tab "Helm" %}}
 
