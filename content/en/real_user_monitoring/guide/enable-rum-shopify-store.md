@@ -1,5 +1,5 @@
 ---
-title: Enable RUM on your Shopify store
+title: Enable RUM on Your Shopify Store
 kind: guide
 further_reading:
 - link: '/real_user_monitoring/guide/rum-for-product-analytics/'
@@ -12,9 +12,7 @@ further_reading:
 
 ## Overview
 
-With the ever growing popularity of low-code e-commerce platforms such as Shopify, WooCommerce, or Squarespace, understanding how customers interact with your website — including which pages they visit, how much time they spend on your website, and which products are the most popular — is crucial to the success of your store. This data can be used to optimize your store and improve the overall customer experience.
-
-Thanks to Real User Monitoring you can identify issues such as broken links, slow load times, errors, and detect technical issues before they even arise. Real User Monitoring can be integrated with the aforementioned e-commerce platforms, and we will see in this guide how this can be achieved. Starting today, understand the performance of your web pages and gather valuable insights about your customers.
+Understanding how customers interact with your web pages is crucial to the success of your online store. This guide will walk through how you can set up Real User Monitoring on your Shopify-powered store.
 
 ## Setup
 
