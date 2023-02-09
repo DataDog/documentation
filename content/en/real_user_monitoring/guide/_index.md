@@ -27,7 +27,7 @@ disable_toc: true
     {{< nextlink href="real_user_monitoring/guide/devtools-tips" >}}Tips when using browser developers tools{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/define-services-and-track-ui-components-in-your-browser-application/" >}}Define services and track UI components in your browser application {{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/enable-rum-shopify-store/" >}}Enable RUM on your Shopify store{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/enable-rum-squarespace-store/" >}}Enable RUM on your Sqaurespace store{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/enable-rum-squarespace-store/" >}}Enable RUM on your Squarespace store{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/enable-rum-woocommerce-store/" >}}Enable RUM on your WordPress + WooCommerce store{{< /nextlink >}}
 {{< /whatsnext >}}
 
