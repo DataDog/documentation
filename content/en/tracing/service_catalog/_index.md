@@ -160,13 +160,13 @@ Tags
 Integrations
 : Custom strings to connect integrations such as PagerDuty for identifying the service on-call.
 
-## Enriching an existing APM service
+## Enriching an existing service
 
-If you already use APM to trace your applications, add information about those services. Initially, APM-monitored services listed on the Service Catalog page have a gray check mark.
+If you already use APM to trace your applications, or have RUM or USM enabled, you can directly add metadata about those services. 
 
 Add service ownership information such as the team name, Slack channels, and source code repositories by pushing a YAML file with the POST endpoint to the [Service Definition API][7]. Read [Setting Up Service Catalog][8] for more information.
 
-## Registering a new service
+## Registering a new service that has no tracing data
 You can manage your service ownership information with the Service Catalog even if those services are not emitting any Datadog telemetry (such as APM traces) with the [Service Definition API][7]. Specify the service ownership, on-call information, and custom tags in YAML files to reflect this information in the Service Catalog. Read [Setting Up Service Catalog][8] for more information.
 
 ## Role based access and permissions

@@ -17,7 +17,7 @@ author:
   homepage: https://lightstep.com/incident-response
   name: Datadog
   sales_email: success@lightstep.com
-  support_email: air-support@servicenow.com
+  support_email: help@datadoghq.com
 categories:
 - alerting
 - collaboration

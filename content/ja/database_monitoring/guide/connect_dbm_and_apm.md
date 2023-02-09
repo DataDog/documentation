@@ -4,6 +4,9 @@ kind: ガイド
 private: true
 title: DBM と APM の接続
 ---
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
+{{< /site-region >}}
 
 <div class="alert alert-warning">
 このページで説明されている機能はベータ版です。詳細については、カスタマーサクセスマネージャーにお問い合わせください。
@@ -14,8 +17,10 @@ title: DBM と APM の接続
 ## はじめに
 
 対応トレーサー
-: [dd-trace-go][3] >= 1.42.0 ([database/sql][4] および [sqlx][5] パッケージのサポート)<br />
-[dd-trace-rb][6] >= 1.6.0 ([mysql2][7] および [pg][8] Gems のサポート)
+: [dd-trace-go][3] >= 1.44.0 ([database/sql][4] および [sqlx][5] パッケージのサポート)<br />
+[dd-trace-rb][6] >= 1.6.0 ([mysql2][7] および [pg][8] gems のサポート)<br />
+[dd-trace-js][9] >= 3.9.0 or >= 2.22.0 ([postgres クライアント][10]のサポート)<br />
+[dd-trace-py][11] >= 1.7.0 ([psycopg2][12] のサポート)
 
 対応データベース
 : postgres、mysql
@@ -31,9 +36,9 @@ title: DBM と APM の接続
 {{< tabs >}}
 {{% tab "Go" %}}
 
-アプリの依存関係を更新して、[dd-trace-go@v1.42.0][1] 以上を含むようにします。
+アプリの依存関係を更新して、[dd-trace-go@v1.44.0][1] 以上を含むようにします。
 ```
-go get gopkg.in/DataDog/dd-trace-go.v1@v1.42.0
+go get gopkg.in/DataDog/dd-trace-go.v1@v1.44.0
 ```
 
 コードを更新して `contrib/database/sql` パッケージをインポートします。
@@ -47,18 +52,18 @@ import (
 
 以下のいずれかの方法で、データベースモニタリングの伝搬機能を有効にします。
 1. 環境変数:
-   `DD_TRACE_SQL_COMMENT_INJECTION_MODE=full`
+   `DD_DBM_PROPAGATION_MODE=full`
 
 2. ドライバー登録時にコードを使用する:
    ```go
-   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithSQLCommentInjection(tracer.SQLInjectionModeFull), sqltrace.WithServiceName("my-db-service"))
+   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull), sqltrace.WithServiceName("my-db-service"))
    ```
 
 3. `sqltrace.Open` のコードを使用する:
    ```go
    sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithServiceName("my-db-service"))
 
-   db, err := sqltrace.Open("postgres", "postgres://pqgotest:password@localhost/pqgotest?sslmode=disable", sqltrace.WithSQLCommentInjection(tracer.SQLInjectionModeFull))
+   db, err := sqltrace.Open("postgres", "postgres://pqgotest:password@localhost/pqgotest?sslmode=disable", sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull))
    if err != nil {
        log.Fatal(err)
    }
@@ -144,6 +149,103 @@ client.query("SELECT 1;")
 
 {{< /tabs >}}
 
+{{% tab "Python" %}}
+
+アプリの依存関係を更新して、[dd-trace-py>=1.7.0][1] を含むようにします。
+```
+pip install "ddtrace>=1.7.0"
+```
+
+[psycopg2][2] をインストールします (**注**: DBM と APM の接続は MySQL クライアントではサポートされていません)。
+```
+pip install psycopg2
+```
+
+以下の環境変数を設定して、データベースモニタリングの伝搬機能を有効にします。
+   - `DD_TRACE_SQL_COMMENT_INJECTION_MODE=full`
+
+最高のユーザーエクスペリエンスを得るために、アプリケーションで以下の環境変数が設定されていることを確認してください。
+   - `DD_SERVICE=(application name)`
+   - `DD_ENV=(application environment)`
+   - `DD_VERSION=(application version)`
+
+完全な例:
+```python
+
+import psycopg2
+
+#TODO: postgres の構成を更新する
+POSTGRES_CONFIG = {
+    "host": "127.0.0.1",
+    "port": 5432,
+    "user": "postgres_user",
+    "password": "postgres_password",
+    "dbname": "postgres_db_name",
+}
+
+# postgres db に接続する
+conn = psycopg2.connect(**POSTGRES_CONFIG)
+cursor = conn.cursor()
+# sql クエリを実行する
+cursor.execute("select 'blah'")
+cursor.executemany("select %s", (("foo",), ("bar",)))
+```
+
+[1]: https://ddtrace.readthedocs.io/en/stable/release_notes.html
+[2]: https://ddtrace.readthedocs.io/en/stable/integrations.html#module-ddtrace.contrib.psycopg
+
+{{< /tabs >}}
+
+{{% tab "Node.js" %}}
+
+[dd-trace-js][1] を `3.9.0` (または Node.js 12 を使用している場合は `2.22.0`) 以上のバージョンにインストールまたは更新してください。
+
+```
+npm install dd-trace@^3.9.0
+```
+
+トレーサーをインポートして初期化するようにコードを更新してください。
+```javascript
+// の行は、インスツルメントされたいずれのモジュールのインポートより前である必要があります。
+const tracer = require('dd-trace').init();
+```
+
+以下のいずれかの方法で、データベースモニタリングの伝搬機能を有効にします。
+1. 環境変数:
+   `DD_DBM_PROPAGATION_MODE=full`
+
+2. オプション `dbmPropagationMode` (デフォルト: `ENV['DD_DBM_PROPAGATION_MODE']`):
+   ```javascript
+   tracer.use('pg', { dbmPropagationMode: 'full', service: 'my-db-service' })
+   ```
+
+完全な例:
+```javascript
+const pg = require('pg')
+const tracer = require('dd-trace').init()
+
+tracer.use('pg', { dbmPropagationMode: 'full', service: 'my-db-service' })
+
+const client = new pg.Client({
+    user: 'postgres',
+    password: 'postgres',
+    database: 'postgres'
+})
+
+client.connect(err => {
+    console.error(err);
+    process.exit(1);
+});
+
+client.query('SELECT $1::text as message', ['Hello world!'], (err, result) => {
+    // 処理結果
+})
+```
+
+[1]: https://github.com/DataDog/dd-trace-js
+
+{{< /tabs >}}
+
 {{< /tabs >}}
 
 
@@ -155,3 +257,7 @@ client.query("SELECT 1;")
 [6]: https://github.com/dataDog/dd-trace-rb
 [7]: https://github.com/brianmario/mysql2
 [8]: https://github.com/ged/ruby-pg
+[9]: https://github.com/DataDog/dd-trace-js
+[10]: https://node-postgres.com/
+[11]: https://github.com/DataDog/dd-trace-py
+[12]: https://www.psycopg.org/docs/index.html

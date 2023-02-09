@@ -122,7 +122,7 @@ RUN apt-get update && apt-get install -y ca-certificates
 
 #### Build with the Datadog buildpack
 
-1. Build your application by running the following:
+1. Use [`pack`][4] to build your application by running the following:
    ```
    pack build --builder=gcr.io/buildpacks/builder \
    --buildpack from=builder \
@@ -147,11 +147,11 @@ Below are instructions for deploying a Cloud Run service using standard GCP tool
    gcloud builds submit --tag gcr.io/YOUR_PROJECT/YOUR_APP_NAME
    ```
 4. Create a secret from your Datadog API key.
-   Go to [Secret Manager][4] in your GCP console and click on **Create secret**.
+   Go to [Secret Manager][5] in your GCP console and click on **Create secret**.
 
    Set a name (for example, `datadog-api-key`) in the **Name** field. Then, paste your Datadog API key in the **Secret value** field.
 5. Deploy your service.
-   Go to [Cloud Run][5] in your GCP console. and click on **Create service**.
+   Go to [Cloud Run][6] in your GCP console. and click on **Create service**.
 
    Select **Deploy one revision from an existing container image**. Choose your previously built image.
 
@@ -166,7 +166,7 @@ Below are instructions for deploying a Cloud Run service using standard GCP tool
    Under the **Environment variables** section, ensure that the name is set to `DD_API_KEY`.
 
 ### Custom metrics
-You can submit custom metrics using a [DogStatsd client][6].
+You can submit custom metrics using a [DogStatsd client][7].
 
 **Note**: Only `DISTRIBUTION` metrics should be used.
 
@@ -176,14 +176,14 @@ You can submit custom metrics using a [DogStatsd client][6].
 
 | Variable | Description |
 | -------- | ----------- |
-|`DD_API_KEY`| [Datadog API Key][9] - **Required**|
-| `DD_SITE` | [Datadog site][7] - **Required** |
+|`DD_API_KEY`| [Datadog API Key][10] - **Required**|
+| `DD_SITE` | [Datadog site][8] - **Required** |
 | `DD_LOGS_ENABLED` | When true, send logs (stdout and stderr) to Datadog. Defaults to false. |
-| `DD_SERVICE` | See [Unified Service Tagging][8]. |
-| `DD_VERSION` | See [Unified Service Tagging][8]. |
-| `DD_ENV` | See [Unified Service Tagging][8]. |
-| `DD_SOURCE` | See [Unified Service Tagging][8]. |
-| `DD_TAGS` | See [Unified Service Tagging][8]. |
+| `DD_SERVICE` | See [Unified Service Tagging][9]. |
+| `DD_VERSION` | See [Unified Service Tagging][9]. |
+| `DD_ENV` | See [Unified Service Tagging][9]. |
+| `DD_SOURCE` | See [Unified Service Tagging][9]. |
+| `DD_TAGS` | See [Unified Service Tagging][9]. |
 
 ## Log collection
 
@@ -197,9 +197,10 @@ You can use the [GCP integration][1] to collect logs. Alternatively, you can set
 [1]: /integrations/google_cloud_platform/#log-collection
 [2]: /tracing/trace_collection/#for-setup-instructions-select-your-language
 [3]: https://registry.hub.docker.com/r/datadog/serverless-init
-[4]: https://console.cloud.google.com/security/secret-manager
-[5]: https://console.cloud.google.com/run
-[6]: /metrics/custom_metrics/dogstatsd_metrics_submission/
-[7]: /getting_started/site/
-[8]: /getting_started/tagging/unified_service_tagging/
-[9]: /account_management/api-app-keys/#api-keys
+[4]: https://buildpacks.io/docs/tools/pack/
+[5]: https://console.cloud.google.com/security/secret-manager
+[6]: https://console.cloud.google.com/run
+[7]: /metrics/custom_metrics/dogstatsd_metrics_submission/
+[8]: /getting_started/site/
+[9]: /getting_started/tagging/unified_service_tagging/
+[10]: /account_management/api-app-keys/#api-keys

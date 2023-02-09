@@ -61,6 +61,44 @@ The side panel lists detection rules that were evaluated against the resource, s
 
 {{< img src="security/cspm/findings/passed-rules.png" alt="Group and aggregate by resource in search" style="width:100%;">}}
 
+## Mute findings
+
+{{< callout url="" btn_hidden="true" >}}
+  Muted findings is a beta feature available to all CSPM customers. If you have feedback or questions, contact <a href="/help">Datadog support</a>.
+{{< /callout >}} 
+
+Sometimes, a finding does not match the use case for your business, or you choose to accept it as a known risk. To ignore these findings, mute the finding for the impacted resource so you can focus on high-severity and critical findings.
+
+For example, the ['Block Public Access' feature is enabled for S3 bucket][4] rule evaluates whether an S3 bucket is publicly accessible. If you have an S3 bucket with static assets that are meant to be publicly shared, you can mute the finding for the S3 bucket.
+
+You can mute pass/fail findings at any time. Muting a finding removes it from the calculation of your posture score.
+
+{{< img src="security/cspm/findings/muted-findings.png" alt="The Mute findings dialog box contains fields for specifying the reason and duration of the mute" style="width:100%;">}}
+
+1. On the [finding side panel](#explore-your-cloud-misconfigurations-with-findings), select a resource.
+2. Click **Mute**.
+3. Select a reason for the mute, for example, a fix is pending, it's a false positive, or it's an accepted risk.
+4. Enter an optional **Description**.
+5. Select the duration of the mute.
+6. Click **Mute**.
+
+### Unmute a finding
+
+Muted findings automatically unmute after the specified mute duration expires. You can also manually unmute a finding.
+
+1. On the [finding side panel](#explore-your-cloud-misconfigurations-with-findings), select the resource with the muted finding.
+2. Click **Unmute**.
+3. Select a reason for the unmute, for example, there's no pending fix, it was a human error, or it's no longer an accepted risk.
+4. Enter an optional **Description**.
+5. Click **Unmute**.
+
+### Audit your muted findings
+
+To view your organization's muted findings:
+
+- Sort by the **Muted** column on the Security Findings Explorer.
+- Filter the Security Findings Explorer using the **Muted** facet.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -68,3 +106,4 @@ The side panel lists detection rules that were evaluated against the resource, s
 [1]: https://app.datadoghq.com/security/compliance?time=now
 [2]: /security/cloud_siem/
 [3]: /security/cloud_workload_security/
+[4]: /security/default_rules/cis-aws-1.5.0-2.1.5/

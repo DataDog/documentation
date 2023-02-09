@@ -13,7 +13,7 @@ further_reading:
   - link: /observability_pipelines/configurations/
     tag: Documentation
     text: Learn more about Observability Pipelines configurations
-  - link: /observability_pipelines/guide/configure_observability_pipelines_with_datadog/
+  - link: /observability_pipelines/production_deployment_overview/integrate_datadog_and_the_observability_pipelines_worker/
     tag: Documentation
     text: Configure Datadog Agents to send data to Observability Pipelines
 ---

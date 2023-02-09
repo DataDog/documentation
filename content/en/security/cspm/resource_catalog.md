@@ -11,9 +11,9 @@ further_reading:
   text: "Cloud Resource Schema"
 ---
 
-{{< beta-callout url="https://dashcon.io/security" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
+{{< callout url="https://dashcon.io/security" >}}
   Resource Catalog is in private beta. Fill out this form if you would like to access it.
-{{< /beta-callout >}}
+{{< /callout >}}
 
 {{< img src="security/cspm/resource_catalog/resource_catalog.png" alt="Resource Catalog map view displaying host and cloud resources grouped by category and region." style="width:100%;" >}}
 

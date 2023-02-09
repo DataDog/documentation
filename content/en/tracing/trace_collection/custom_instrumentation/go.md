@@ -197,27 +197,29 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 There are additional configurations possible for both the tracing client and Datadog Agent for context propagation with B3 Headers, as well as excluding specific resources from sending traces to Datadog in the event these traces are not wanted in metrics calculated, such as Health Checks.
 
-### B3 headers extraction and injection
+## Trace context propagation for distributed tracing
 
-The Datadog APM tracer supports [B3 headers extraction][8] and injection for distributed tracing.
+The Datadog APM tracer supports extraction and injection of [B3][8] and [W3C][10] headers for distributed tracing.
 
 Distributed headers injection and extraction is controlled by
-configuring injection/extraction styles. Two styles are
-supported: `Datadog` and `B3`.
+configuring injection/extraction styles. Supported styles are:
+`tracecontext`, `Datadog`, `B3` and `B3 single header`.
 
-Configure injection styles using the environment variable:
-`DD_TRACE_PROPAGATION_STYLE_INJECT=Datadog,B3`
+- Configure injection styles using the `DD_PROPAGATION_STYLE_INJECT=tracecontext,B3` environment variable.
+- Configure extraction styles using the `DD_PROPAGATION_STYLE_EXTRACT=tracecontext,B3` environment variable.
+- Configure both injection and extraction styles using the `DD_TRACE_PROPAGATION_STYLE=tracecontext,B3` environment variable.
 
-Configure extraction styles using the environment variable:
-`DD_TRACE_PROPAGATION_STYLE_EXTRACT=Datadog,B3`
+The values of these environment variables are comma-separated lists of
+header styles enabled for injection or extraction. By default,
+the `tracecontext,Datadog` styles are enabled.
 
-Configure both styles using the environment variable:
-`DD_TRACE_PROPAGATION_STYLE=Datadog,B3`.
-*Note*: `DD_TRACE_PROPAGATION_STYLE_INJECT` and `DD_TRACE_PROPAGATION_STYLE_EXTRACT`, if set, take precedence.
+To disable trace context propagation, set the value of the environment variables to `none`.
+- Disable injection styles using the `DD_PROPAGATION_STYLE_INJECT=none` environment variable.
+- Disable extraction styles using the `DD_PROPAGATION_STYLE_EXTRACT=none` environment variable.
+- Disable all trace context propagation (both inject and extract) using the `DD_PROPAGATION_STYLE=none` environment variable.
 
-The values of these environment variables are comma separated lists of
-header styles that are enabled for injection or extraction. By default,
-the `Datadog` extraction style is enabled.
+If multiple environment variables are set, `DD_PROPAGATION_STYLE_INJECT` and `DD_PROPAGATION_STYLE_EXTRACT`
+override any value provided in `DD_PROPAGATION_STYLE`.
 
 If multiple extraction styles are enabled, extraction attempts are made
 in the order that those styles are specified. The first successfully
@@ -240,3 +242,4 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [7]: /tracing/glossary/#trace
 [8]: https://github.com/openzipkin/b3-propagation
 [9]: /tracing/security
+[10]: https://github.com/w3c/trace-context

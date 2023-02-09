@@ -46,7 +46,8 @@ disable_toc: true
     {{< nextlink href="synthetics/guide/api_test_timing_variations/" >}}Understanding API test timings and troubleshooting variations{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Security:" >}}
+{{< whatsnext desc="Data Security:" >}}
+    {{< nextlink href="synthetics/guide/authentication-protocols/" >}}Using authentication in API and multistep API tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/app-that-requires-login/" >}}Monitor an application that requires authentication{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/browser-tests-totp/" >}}TOTPs For multi-factor authentication (MFA) in browser tests{{< /nextlink >}}
 {{< /whatsnext >}}

@@ -8,9 +8,9 @@ kind: documentation
 title: OAuth2 dans Datadog
 ---
 
-{{< beta-callout btn_hidden="true" >}}
+{{< callout btn_hidden="true" >}}
   La plateforme de développement Datadog est en version bêta. Si vous n'y avez pas accès, envoyez un e-mail à l'adresse apps@datadoghq.com.
-{{< /beta-callout >}} 
+{{< /callout >}} 
 
 ## Présentation
 
