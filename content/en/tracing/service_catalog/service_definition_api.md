@@ -33,27 +33,27 @@ dd-service: web-store
 team: shopist
 contacts:
   - type: slack
-    contact: https://datadogincidents.slack.com/archives/C01EWN6319S
+    contact: https://exampleincidents.slack.com/archives/C01EWN6319S
 links:
   - name: Demo Dashboard
     type: dashboard
-    url: https://app.datadoghq.com/dashboard/krp-bq6-362
+    url: https://app.examplehq.com/dashboard/krp-bq6-362
   - name: Common Operations
     type: runbook
-    url: https://datadoghq.atlassian.net/wiki/
+    url: https://examplehq.atlassian.net/wiki/
   - name: Disabling Deployments
     type: runbook
-    url: https://datadoghq.atlassian.net/wiki/
+    url: https://examplehq.atlassian.net/wiki/
   - name: Rolling Back Deployments
     type: runbook
-    url: https://datadoghq.atlassian.net/wiki/
+    url: https://examplehq.atlassian.net/wiki/
 repos:
   - name: Source
     provider: github
-    url: https://github.com/DataDog/shopist/tree/prod/rails-storefront
+    url: https://github.com/Example/shopist/tree/prod/rails-storefront
   - name: Deployment
     provider: github
-    url: https://github.com/DataDog/shopist/blob/prod/k8s/dd-trace-demo/templates/rails-storefront-deployment.yaml
+    url: https://github.com/Example/shopist/blob/prod/k8s/dd-trace-demo/templates/rails-storefront-deployment.yaml
 docs:
   - name: Deployment Information
     provider: link
