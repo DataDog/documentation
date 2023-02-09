@@ -24,14 +24,14 @@ further_reading:
 
 ## Overview
 
-Microsoft [Azure App Services][1] is a group of serverless resources that enable you to build and host web apps, mobile back ends, event-driven functions, and RESTful APIs without managing infrastructure. It can host workloads of all sizes and offers auto-scaling and high availability options.
+Microsoft [Azure App Services][1] is a group of serverless resources that enable you to build and host web apps, mobile backends, event-driven functions, and RESTful APIs without managing infrastructure. It can host workloads of all sizes and offers auto-scaling and high availability options.
 
 Datadog provides monitoring capabilities for all Azure App Service resource types:
 
 - Azure Monitor metrics for [Apps][2] and [Functions][3] using the [Azure Integration][2].
 - Use the [Azure App Service View][4] to quickly spot issues, map relationships between your Azure App Service resources, and gain insights into cost and performance.
-- Custom metrics can be submitted using the API.
-- [Resource logs][5] can be submitted using [Event Hub][6].
+- Submit custom metrics through the API.
+- Submit [resource logs][5] through [Event Hub][6].
 
 Datadog provides additional monitoring capabilities for the following Azure App Service workload runtimes on Basic, Standard and Premium plans:
 
@@ -42,7 +42,7 @@ Datadog provides additional monitoring capabilities for the following Azure App 
 |Linux|.NET|Beta|[Link][9]|
 |Linux|Node|Beta|[Link][9]|
 
-- Full distributed APM tracing using automatic instrumentation.
+- Fully distributed APM tracing using automatic instrumentation.
 - Customized APM service and trace views showing relevant Azure App Service metrics and metadata.
 - Support for manual APM instrumentation to customize spans.
 - `Trace_ID` injection into application logs.
