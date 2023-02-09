@@ -103,11 +103,11 @@ func main() {
 
 {{% tab "Ruby" %}}
 
-In your Gemfile, install or udpate [dd-trace-rb][1] to version greater than `1.6.0`:
+In your Gemfile, install or update [dd-trace-rb][1] to version `1.8.0` or greater:
 
 ```rb
 source 'https://rubygems.org'
-gem 'ddtrace', '>= 1.6.0'
+gem 'ddtrace', '>= 1.8.0'
 
 # Depends on your usage
 gem 'mysql2'
@@ -116,13 +116,13 @@ gem 'pg'
 
 Enable the database monitoring propagation feature using one of the following methods:
 1. Env variable:
-   `DD_DBM_PROPAGATION_MODE=service`
+   `DD_DBM_PROPAGATION_MODE=full`
 
 2. Option `comment_propagation` (default: `ENV['DD_DBM_PROPAGATION_MODE']`), for [mysql2][2] or [pg][3]:
    ```rb
 	Datadog.configure do |c|
-		c.tracing.instrument :mysql2, comment_propagation: 'service'
-		c.tracing.instrument :pg, comment_propagation: 'disabled'
+		c.tracing.instrument :mysql2, comment_propagation: 'full'
+		c.tracing.instrument :pg, comment_propagation: 'full'
 	end
    ```
 
