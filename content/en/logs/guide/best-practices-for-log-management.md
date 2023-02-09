@@ -42,7 +42,7 @@ For example, if you have logs that only need to be retained for 7 days, while ot
 To set up multiple indexes:
 
 1. Navigate to [Log Indexes][1].
-2. Click **New Index**.
+2. Click **New Index** or **Add a new index**.
 3. Enter a name for the Index.
 4. Enter the search query to filter to the logs you want in this index.
 5. Set the daily quota to hard-limit the number of logs that are stored within an index per day.
@@ -99,9 +99,9 @@ See [Anomaly detection monitors][11] for steps on how to create anomaly monitors
 
 #### Anomaly detection monitors
 
-To create an anomaly detection monitor to alert on any unexpected log indexing spikes:
+Create an anomaly detection monitor to alert on any unexpected log indexing spikes:
 
-1. Navigate to [Monitor > New Monitor][13] and select **Anomaly**.
+1. Navigate to [Monitors > New Monitor][13] and select **Anomaly**.
 2. In the **Define the metric** section, select the `datadog.estimated_usage.logs.ingested_events` metric.
 3. In the **from** field, add the `datadog_is_excluded:false` tag to monitor indexed logs and not ingested ones.
 4. In the **sum by** field, add the `service` and `datadog_index` tags, so that you are notified if a specific service spikes or stops sending logs in any index.
@@ -189,7 +189,7 @@ If you want to see user activities, such as who changed the retention of an inde
 [7]: https://app.datadoghq.com/organization-settings/roles
 [8]: /account_management/rbac/permissions/?tab=ui#log-management
 [9]: /logs/guide/logs-rbac/
-[10]: /logs/logs_to_metrics/#recommended-usage-metrics
+[10]: /logs/logs_to_metrics/#logs-usage-metrics
 [11]: /monitors/create/types/anomaly/
 [12]: https://app.datadoghq.com/metric/summary?filter=datadog.estimated_usage.logs.ingested_bytes&metric=datadog.estimated_usage.logs.ingested_bytes
 [13]: https://app.datadoghq.com/monitors/create
