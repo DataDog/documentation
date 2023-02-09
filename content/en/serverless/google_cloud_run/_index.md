@@ -26,7 +26,7 @@ Make sure you have a [Datadog API Key][10] and are using a programming language 
 
 ### Deploy a sample application in one click
 
-To deploy a sample application without the need to follow the rest of the guide, you can use on of [these examples][12]. The installation process will ask the required details such as the Datadog API Key. Note that these applications send data to the default website `datadoghq.com`.
+To deploy a sample application without the need to follow the rest of the guide, you can use one of [these examples][12]. The installation process asks required details, such as your Datadog API key. Note that these applications send data to the default website `datadoghq.com`.
 
 ### 1. Instrument your application
 
@@ -199,9 +199,9 @@ More details on the [Ruby tracing library][2].
 
 #### 1.b Instrument using buildpack
 
-[`Pack Buildpacks`][4] provide a convenient way to package your container without using a Dockerfile. This example will use the GCP container registry and Datadog serverless buildpack.
+[`Pack Buildpacks`][4] provide a convenient way to package your container without using a Dockerfile. This example uses the GCP container registry and Datadog serverless buildpack.
 
-**Note** follow the instruction to install the [tracing library][2] for your language before running the buildpack.
+**Note**: Follow the instructions to install the [tracing library][2] for your language before running the buildpack.
 
 Build your application by running the following command:
 
@@ -214,16 +214,16 @@ Build your application by running the following command:
 
 **Note**: Not compatible with Alpine.
 
-### 2. Datadog Agent Configuration
+### 2. Datadog Agent configuration
 
-Once the container is built and pushed to your registry, the last step is to set the required environment variables for the  Datadog agent:
+Once the container is built and pushed to your registry, the last step is to set the required environment variables for the  Datadog Agent:
 - `DD_API_KEY`: Datadog API key, used to send data to your Datadog account. It should be configured as a GCP Secret for privacy and safety issue.
-- `DD_SITE`: Datadog endpoint and website. If the correct SITE is selected on the right of this page it is {{< region-param key="dd_site" code="true" >}}.
+- `DD_SITE`: Datadog endpoint and website. Select your site on the right side of this page. Your site is: {{< region-param key="dd_site" code="true" >}}.
 - `DD_TRACE_ENABLED`: set to `true` to enable tracing
 
-For more environment variables and their function, see [Additional Configurations](#additional-configurations)
+For more environment variables and their function, see [Additional Configurations](#additional-configurations).
 
-Allowing any external connection to reach the service, this one line command will deploy the service. It expects `DD_API_KEY` to be set as environment variable and your service listening to port 80
+This command deploys the service and allows any external connection to reach it. Set `DD_API_KEY` as an environment variable, and set your service listening to port 80.
 
 ```shell
 gcloud run deploy APP_NAME --image=gcr.io/YOUR_PROJECT/APP_NAME \
@@ -237,13 +237,13 @@ gcloud run deploy APP_NAME --image=gcr.io/YOUR_PROJECT/APP_NAME \
 
 ### 3. Results
 
-Once the deploy is completed, your metrics and traces will be sent to your Datadog UI after a few minutes at most! Navigate to `Infrastructure->Serverless` to see the Ser
+Once the deploy is completed, your metrics and traces are sent to Datadog. In Datadog, navigate to **Infrastructure->Serverless** to see your serverless metrics and traces.
 
-## Additional Configurations
+## Additional configurations
 
-- **Advanced Tracing:** the Datadog Agent already provides some basic tracing for popular frameworks. Follow the guide for [advanced tracing][2] for more
+- **Advanced Tracing:** The Datadog Agent already provides some basic tracing for popular frameworks. Follow the [advanced tracing guide][2] for more information.
 
-- **Logs:** If you use [GCP integration][1] your logs are already being collected. Alternatively, you can set the `DD_LOGS_ENABLED` environment variable to `true` to capture application logs through the serverless instrumentation directly.
+- **Logs:** If you use the [GCP integration][1], your logs are already being collected. Alternatively, you can set the `DD_LOGS_ENABLED` environment variable to `true` to capture application logs through the serverless instrumentation directly.
 
 - **Custom Metrics:** You can submit custom metrics using a [DogStatsd client][7]. Only `DISTRIBUTION` metrics should be used.
 
