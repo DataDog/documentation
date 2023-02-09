@@ -4287,6 +4287,7 @@ components:
       - apm_issue_stream
       - logs_pattern_stream
       - logs_transaction_stream
+      - rum_stream
       - event_stream
       example: apm_issue_stream
       type: string
@@ -4297,6 +4298,7 @@ components:
       - APM_ISSUE_STREAM
       - LOGS_PATTERN_STREAM
       - LOGS_TRANSACTION_STREAM
+      - RUM_STREAM
       - EVENT_STREAM
     ListStreamWidgetDefinition:
       description: 'The list stream visualization displays a table of recent events
