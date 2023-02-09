@@ -282,8 +282,7 @@ sinks:
     inputs:
        - remap_logs_for_datadog
     default_api_key: "${DATADOG_API_KEY}"
-    encoding:
-      codec: json
+    compression: gzip
 ```
 
 {{% /tab %}}
@@ -294,9 +293,7 @@ sinks:
 type = "datadog_logs"
 inputs = [ "remap_logs_for_datadog" ]
 default_api_key = "${DATADOG_API_KEY}"
-
-  [sinks.log_to_datadog.encoding]
-  codec = "json"
+compression = "gzip"
 ```
 
 {{% /tab %}}
@@ -311,9 +308,7 @@ default_api_key = "${DATADOG_API_KEY}"
         "remap_logs_for_datadog"
       ],
       "default_api_key": "${DATADOG_API_KEY}",
-      "encoding": {
-        "codec": "json"
-      }
+      "compression": "gzip"
     }
   }
 }
