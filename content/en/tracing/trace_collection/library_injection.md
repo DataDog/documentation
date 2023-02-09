@@ -204,7 +204,7 @@ When both the Agent and your services are running on a host, real or virtual, Da
 **Note**: Injection on arm64 is not supported. Injection with `musl` on Alpine Linux container images is untested.
 ## Install the preload library
 
-1. Run the following commands, for example, with `apt`, where `<LANG>` is one of `java`, `nodejs`, `dotnet`, or `all`:
+1. Run the following commands, for example, with `apt`, where `<LANG>` is one of `java`, `js`, `dotnet`, or `all`:
 
    ```sh
    sudo apt update
@@ -380,7 +380,7 @@ Any newly started processes are intercepted and the specified instrumentation li
 
 ## Install the preload library and shim
 
-1. Run the following commands, for example, with `apt`, where `<LANG>` is one of `java`, `nodejs`, `dotnet`, or `all`:
+1. Run the following commands, for example, with `apt`, where `<LANG>` is one of `java`, `js`, `dotnet`, or `all`:
 
    ```sh
    sudo apt update
@@ -545,7 +545,7 @@ Any newly started processes are intercepted and the specified instrumentation li
 
 ## Install the preload library and shim
 
-1. Run the following commands, for example, with `apt`, where `<LANG>` is one of `java`, `nodejs`, `dotnet`, or `all`:
+1. Run the following commands, for example, with `apt`, where `<LANG>` is one of `java`, `js`, `dotnet`, or `all`:
 
    ```sh
    sudo apt update
