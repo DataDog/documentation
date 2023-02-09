@@ -8,5 +8,4 @@ disable_toc: true
 {{< whatsnext desc="General guides:" >}}
     {{< nextlink href="/observability_pipelines/guide/custom-metrics-governance" >}}Custom Metrics Governance{{< /nextlink >}}
     {{< nextlink href="/observability_pipelines/guide/control_log_volume_and_size" >}}Control Log Volume and Size{{< /nextlink >}}
-    {{< nextlink href="/observability_pipelines/guide/configure_observability_pipelines_with_datadog" >}}Configure Observability Pipelines with Datadog{{< /nextlink >}}
 {{< /whatsnext >}}

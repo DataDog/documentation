@@ -13,21 +13,21 @@ $spacer-halved: 0.3125rem !default;
     .mt-half-#{$i} {
         margin-top: multiplyunit($spacer-halved, $i) !important;
     }
-    .ml-half-#{$i} {
+    .ms-half-#{$i} {
         margin-left: multiplyunit($spacer-halved, $i) !important;
     }
 
     @media (min-width: $screen-md) {
-        .ml-md-half-#{$i} {
+        .ms-md-half-#{$i} {
             margin-left: multiplyunit($spacer-halved, $i) !important;
         }
 
-        .ml-md-half-n#{$i} {
+        .ms-md-half-n#{$i} {
             margin-left: -1 * multiplyunit($spacer-halved, $i) !important;
         }
     }
 
-    .mr-half-#{$i} {
+    .me-half-#{$i} {
         margin-right: multiplyunit($spacer-halved, $i) !important;
     }
     .mb-half-#{$i} {

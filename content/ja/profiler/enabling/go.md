@@ -128,7 +128,7 @@ CPU プロファイルに C 関数の詳細な呼び出し情報を追加する�
 [1]: /ja/tracing/trace_collection/
 [2]: https://app.datadoghq.com/account/settings#agent/overview
 [3]: https://app.datadoghq.com/account/settings?agent_version=6#agent
-[4]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/profiler#pkg-constants
+[4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#pkg-constants
 [5]: https://app.datadoghq.com/profiling
 [6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#WithProfileTypes
 [7]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#ProfileType

@@ -214,4 +214,4 @@ transforms:
 [6]: /account_management/billing/usage_attribution/
 [7]: https://vector.dev/docs/reference/vrl/
 [8]: /account_management/billing/custom_metrics/?tab=countrategauge
-[9]: https://vector.dev/docs/reference/configuration/transforms/tag_cardinality_limit/
+[9]: /observability_pipelines/reference/transforms/#tagcardinalitylimit

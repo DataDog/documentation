@@ -224,6 +224,11 @@ A regex string to redact sensitive data by its key in attack reports.
 **Default**: N/A<br>
 A regex string to redact sensitive data by its value in attack reports.
 
+`DD_REMOTE_CONFIG_POLL_INTERVAL_SECONDS`
+: **Configuration**: `remoteConfig.pollInterval`<br>
+**Default**: 5<br>
+Remote configuration polling interval in seconds.
+
 
 For more examples of how to work with the library see [API documentation][2].
 
