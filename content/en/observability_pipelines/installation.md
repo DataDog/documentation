@@ -20,8 +20,9 @@ Install the Observability Pipelines Worker with the [Advanced Package Tool][1] (
 
 Before installing, make sure you have:
 
-1. A valid [Datadog API key][5].
-2. An Observability Pipelines Configuration ID.
+1. One of the supported Linux Archs: x86_64, AMD64
+2. A valid [Datadog API key][5].
+3. An Observability Pipelines Configuration ID.
 
 ## Installation
 
@@ -45,7 +46,7 @@ $ DD_API_KEY=<DD_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.
 2. Run the following commands to set up the Datadog `deb` repo on your system and create a Datadog archive keyring:
 
     ```
-    $ sudo sh -c "echo 'deb [signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] https://apt.datadoghq.com/ stable 7' > /etc/apt/sources.list.d/datadog.list"
+    $ sudo sh -c "echo 'deb [signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] https://apt.datadoghq.com/ stable observability-pipelines-worker-1' > /etc/apt/sources.list.d/datadog.list"
     $ sudo touch /usr/share/keyrings/datadog-archive-keyring.gpg
     $ sudo chmod a+r /usr/share/keyrings/datadog-archive-keyring.gpg
     $ curl https://keys.datadoghq.com/DATADOG_APT_KEY_CURRENT.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
@@ -60,7 +61,13 @@ $ DD_API_KEY=<DD_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.
     $ sudo apt-get install datadog-observability-pipelines-worker datadog-signing-keys
     ```
 
-4. Start the Worker:
+4. Create a SystemD service file using the [vector.service][7] example as a reference:
+   
+   ```
+   $ sudo vi /etc/systemd/system/datadog-observability-pipelines-worker.service
+   ```
+
+5. Start the Worker:
 
     ```
     $ sudo systemctl restart datadog-observability-pipelines-worker.service
@@ -90,6 +97,7 @@ $ DD_API_KEY=<DD_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.
 [4]: https://linux.org/
 [5]: /account_management/api-app-keys/#api-keys
 [6]: /observability_pipelines/working_with_data/
+[7]: https://github.com/vectordotdev/vector/blob/master/distribution/systemd/vector.service
 
 {{% /tab %}}
 {{% tab "Helm" %}}
