@@ -31,7 +31,7 @@ RUM can be configured for compliance with many standards and regulatory framewor
 - CCPA/CPRA
 
 ## Privacy restrictions
-By default, there are some privacy restrictions in place to protect user data while meeting compliance framework standards.
+By default, there are some privacy restrictions in place that protect user data to help comply with regulatory and standards frameworks.
 
 ### Browser RUM use of cookies
 Browser RUM requires **first party cookies** to be enabled on an end user's browser to collect data. If required by the jurisdictions in which you operate, your pages should be configured so that the end user must accept cookies RUM is initialized and begins collecting data.
