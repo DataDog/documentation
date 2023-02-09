@@ -3954,6 +3954,22 @@ components:
             type: string
           type: array
       type: object
+    IPPrefixesOrchestrator:
+      description: Available prefix information for the Orchestrator endpoints.
+      properties:
+        prefixes_ipv4:
+          description: List of IPv4 prefixes.
+          items:
+            description: IPv4 prefix
+            type: string
+          type: array
+        prefixes_ipv6:
+          description: List of IPv6 prefixes.
+          items:
+            description: IPv6 prefix
+            type: string
+          type: array
+      type: object
     IPPrefixesProcess:
       description: Available prefix information for the Process endpoints.
       properties:
@@ -4052,6 +4068,8 @@ components:
           description: Date when last updated, in the form `YYYY-MM-DD-hh-mm-ss`.
           example: 2019-10-31-20-00-00
           type: string
+        orchestrator:
+          $ref: '#/components/schemas/IPPrefixesOrchestrator'
         process:
           $ref: '#/components/schemas/IPPrefixesProcess'
         synthetics:
