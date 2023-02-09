@@ -94,10 +94,27 @@ Muted findings automatically unmute after the specified mute duration expires. Y
 
 ### Audit your muted findings
 
+You can view your organization's muted findings, review whether a muted finding is currently in a pass or fail state, and audit the history for a resource to determine when and by whom a finding was muted.
+
 To view your organization's muted findings:
 
 - Sort by the **Muted** column on the Security Findings Explorer.
 - Filter the Security Findings Explorer using the **Muted** facet.
+
+To audit the history for a resource:
+
+1. Open the [finding side panel](#explore-your-cloud-misconfigurations-with-findings).
+2. Select the resource with the muted finding.
+3. If the finding status has changed, click **See Latest State**.
+4. Click **View Finding**.
+
+{{< img src="security/cspm/findings/muted-findings-timeline-graph.png" alt="The Resource Evaluation Over Time graph shows the history of the finding including periods when it was muted" style="width:80%;">}}
+
+On the **Message** tab, use the **Resource evaluation over time** timeline to view when the finding was muted or unmuted over a specified period of time (up to six months).
+
+{{< img src="security/cspm/findings/muted-findings-timeline.png" alt="The Timeline tab shows a chronological history of the finding including details on when a finding was muted" style="width:80%;">}}
+
+Click the **Timeline** tab to view a chronological history of the finding, including the name of the person who made the change and the reason specified for justifying the suppression.
 
 ## Further reading
 
