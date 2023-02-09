@@ -24,7 +24,7 @@ To instrument your application, begin by adding the following key-value pairs as
 - `DD_SERVICE` is the service name used for this program. Defaults to the name field value in `package.json`.
 - `DD_START_APP` is the command used to start your application. For example, `node ./bin/www`.
 
-![storms-nodejs-example - Microsoft Azure 2022-11-30 at 4 15 47 PM](https://p-qkfgo2.t2.n0.cdn.getcloudapp.com/items/YEuD88kN/57eceb6b-dd34-4d5f-a7ea-a8fcc2ec77ba.jpg?source=viewer&v=505cc168a458a4ec84b7d6a903f78493)
+{{< img src="serverless/configuration-stack-settings.jpeg" alt="Azure UI, showing Settings > Configuration > Application settings. Underneath these settings are three items: DD_API_KEY, DD_SERVICE, and DD_START_APP."  style="width:100%;" >}}
 
 ### Startup command
 Next, add the following to the startup command field under General Settings.
@@ -32,7 +32,7 @@ Next, add the following to the startup command field under General Settings.
 
 `curl -s https://raw.githubusercontent.com/DataDog/datadog-aas-extension/linux-v0.1.4-beta/linux/datadog_wrapper | bash`
 
-![storms-nodejs-example - Microsoft Azure 2022-11-30 at 4 15 26 PM](https://p-qkfgo2.t2.n0.cdn.getcloudapp.com/items/P8uNWWQ6/02c4f33f-f4d9-42b3-b746-3d5c9d62a8f3.jpg?source=viewer&v=3db9f9bba7f342e88c43da5aed1218fd)
+{{< img src="serverless/application-settings-configuration.jpeg" alt="Azure UI, showing Settings > Configuration > Stack settings. In the Startup Command box is the curl command listed above."  style="width:100%;" >}}
 
 
 ### Viewing traces
