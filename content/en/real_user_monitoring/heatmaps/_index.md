@@ -29,7 +29,11 @@ datadogRum.init({
 
 ### Getting started
 
-On the view list page, select your application and view. This will take you to the [heatmap page][3] for a particular view. You can switch the view being shown with the **View Name** and **Application** selectors at the top. A heatmap displays the aggregate of where all users (sessions) clicked on a single view, with the view being a single page within an application. Each session is one user's activity and includes everything they did, including all pages they viewed and all actions they clicked.
+On the view list page, select your application and view. 
+
+{{< img src="real_user_monitoring/heatmaps/heatmap-view-list.png" alt="Select a view from the Heatmap view list" style="width:100%;" >}}
+
+This will take you to the [heatmap page][3] for a particular view. You can switch the view being shown with the **View Name** and **Application** selectors at the top. A heatmap displays the aggregate of where all users (sessions) clicked on a single view, with the view being a single page within an application. Each session is one user's activity and includes everything they did, including all pages they viewed and all actions they clicked.
 
 To adjust the filters (to look at specific geography, for example), you can add a filter from the panel on the left side.
 
