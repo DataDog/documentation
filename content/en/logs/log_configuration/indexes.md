@@ -156,7 +156,7 @@ An event is generated when the daily quota is reached:
 
 {{< img src="logs/indexes/index_quota_event.png" alt="index quota notification"  style="width:70%;">}}
 
-Follow our [Log Usage guide][20] to see how to monitor and alert on your usage.
+See [Monitor log usage][20] on how to monitor and alert on your usage.
 
 ## Further Reading
 
