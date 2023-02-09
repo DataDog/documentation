@@ -54,7 +54,7 @@ The data we track automatically contains primarily technical information, much o
 - [Flutter][4]
 
 ### Transmit RUM events through a proxy server
-You can transmit all RUM events through your own [proxy server][] so that end user devices never directly communicate with Datadog.
+You can transmit all RUM events through your own [proxy server][15] so that end user devices never directly communicate with Datadog.
 
 ### User identity tracking
 By default, there is **no tracking of users' identity**. You have the option of writing code to capture [user data][6] such as name and email address, then using them to [enrich and modify][7] RUM sessions, but they are not required.
