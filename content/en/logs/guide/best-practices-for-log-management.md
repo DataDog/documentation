@@ -164,7 +164,7 @@ To find this dashboard, go to **Dashboards > Dashboards List** and search for [L
 
 ### Set up exclusion filters on high-volume logs
 
-When your usage monitors alert, you can set up exclusion filters and increase the sampling rate to reduce the volume. See [Exclusion Filters][20] on how to set them up. You can also use [Log Patterns][24] to help you group and identify high-volume logs, and then add an exclusion filter if you want to stop indexing those logs.
+When your usage monitors alert, you can set up exclusion filters and increase the sampling rate to reduce the volume. See [Exclusion Filters][20] on how to set them up. You can also use [Log Patterns][24] to group and identify high-volume logs. Then, in the log pattern's side panel, click **Add Exclusion Filter** to add a filter to stop indexing those logs.
 
 {{< img src="logs/guide/patterns_exclusion.png" alt="The log explorer page showing the side-panel details of a pattern with the add exclusion filter button at the top" style="width:80%;">}}
 
