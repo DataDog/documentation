@@ -57,7 +57,7 @@ $ DD_API_KEY=<DD_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.
 
     ```
     $ sudo apt-get update
-    $ sudo apt-get install datadog-observability-pipelines-worker datadog-signing-keys
+    $ sudo apt-get install datadog-observability-pipelines-worker-1 datadog-signing-keys
     ```
 
 4. Start the Worker:
