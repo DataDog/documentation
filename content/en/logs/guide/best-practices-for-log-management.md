@@ -175,9 +175,13 @@ Even if you use exclusion filters, you can still visualize trends and anomalies 
 
 If you want to prevent data leaks and limit non-compliance risks, use Sensitive Data Scanner to identify, tag, and optionally redact or hash sensitive data. For example, you can scan for credit card numbers, bank routing numbers, and API keys in your logs, APM spans, and RUM events, See [Sensitive Data Scanner][21] on how to set up scanning rules to determine what data to scan. 
 
+**Note**: Sensitive Data Scanner is a separate billable product.
+
 ### Enable Audit Trail to see user activities
 
 If you want to see user activities, such as who changed the retention of an index or who modified an exclusion filter, enable Audit Trail to see these events. See [Audit Trail Events][22] for a list of platform and product-specific events that are available. To enable and configure Audit Trail, follow the steps in the [Audit Trail documentation][23].
+
+**Note**: Audit Trail is a separate billable product.
 
 ## Further Reading
 
