@@ -104,7 +104,7 @@ end
 {{% /tab %}}
 {{% tab "GitHub Actions" %}}
 
-If you use GitHub, you can use the [Swift test action][1] from GitHub marketplace to automatically configure and run your tests. By default, the rest of the configuration explained in this document can be skipped (except the configuration of the action itself), but can also use the configuration environment variables for disabling or configuring extra functionality.
+If you use GitHub, you can use the [Swift test action][1] from GitHub Marketplace to automatically configure and run your tests. By default, the rest of the configuration described on this page can be skipped (except the configuration of the action itself), but you can use the configuration environment variables for disabling or configuring additional functionality.
 
 This option has the benefit that no code changes are needed but has the drawback that it is less flexible to configure and run.
 
@@ -766,15 +766,15 @@ Follow these practices to take full advantage of the testing framework and CI Vi
 
 ### Generate symbols file when building
 
-Build in Xcode using `DWARF with dSYM File` (or `-Xswiftc -debug-info-format=dwarf` if building with `swift`)
+Build your code in Xcode using `DWARF with dSYM File` (or `-Xswiftc -debug-info-format=dwarf` if building with `swift`)
 
-The testing framework uses symbol files for some of its functionality: simbolicating crashes, reporting test source location, report codeowners... It automatically generates the symbol file when debug symbols are embedded in the binaries, but it can take some extra time at loading.
+The testing framework uses symbol files for some of its functionality, including: symbolicating crashes, reporting test source location, and reporting code owners. It automatically generates the symbol file when debug symbols are embedded in the binaries, but it can take some extra time to load.
 
 ### Disable sandbox for UI Tests on macOS
 
-With some Xcode versions UITest bundles are built by default with sandbox settings, the testing framework needs to run some system commands with `xcrun` and this settings dissallow running them, so must be disabled.
+In some Xcode versions, UI Test bundles are built with a sandbox by default. The settings that come with a sandbox prevent the testing framework from being run by some system commands with `xcrun`, so you need to disable it.
 
-Sandbox can be disabled by adding Entitlements to the UITest runner bundle & adding `App Sandbox = NO` to them. You can also create a .entitlement file and add it to the Signing Build Settings, this file should should include the following content:
+Disable the sandbox by adding Entitlements to the UI Test runner bundle, then adding `App Sandbox = NO` to them. You can also create an `.entitlement` file and add it to the Signing Build Settings. This file should should include the following content:
 
 {{< code-block lang="xml" >}}
 <key>com.apple.security.app-sandbox</key>
