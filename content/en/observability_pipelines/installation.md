@@ -18,7 +18,7 @@ Install the Observability Pipelines Worker with the [Advanced Package Tool][1] (
 
 ## Prerequisites
 
-Before installing, make sure you have:
+Before installing, make sure you:
 
 1. One of the supported Linux Archs: x86_64, AMD64
 2. A valid [Datadog API key][5].
