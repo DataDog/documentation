@@ -12,38 +12,6 @@ from os.path import (
 )
 
 
-def cache_by_sha(func):
-    """ only downloads fresh file, if we don't have one or we do and the sha has changed """
-
-    @wraps(func)
-    def cached_func(*args, **kwargs):
-        cache = {}
-        list_item = args[1]
-        dest_dir = kwargs.get("dest_dir")
-        path_to_file = list_item.get("path", "")
-        file_out = "{}{}".format(dest_dir, path_to_file)
-        p_file_out = "{}{}.pickle".format(
-            dest_dir, path_to_file
-        )
-        makedirs(dirname(file_out), exist_ok=True)
-        if exists(p_file_out) and exists(file_out):
-            with open(p_file_out, "rb") as pf:
-                cache = pickle.load(pf)
-        cache_sha = cache.get("sha", False)
-        input_sha = list_item.get("sha", False)
-        if (cache_sha and input_sha and cache_sha == input_sha):
-            # do nothing as we have the up to date file already
-            return None
-        else:
-            with open(p_file_out, mode="wb+") as pf:
-                pickle.dump(
-                    list_item, pf, pickle.HIGHEST_PROTOCOL
-                )
-            return func(*args, **kwargs)
-
-    return cached_func
-
-
 class GitHub:
     """ Class to handle Github connections and download content"""
 
@@ -150,7 +118,6 @@ class GitHub:
         else:
             return listing
 
-    @cache_by_sha
     def raw(
         self,
         list_item,
