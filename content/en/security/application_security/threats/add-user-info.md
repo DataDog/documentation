@@ -376,8 +376,6 @@ using Datadog.Trace.AppSec;
 
 void OnLogonSuccess(string userId, ...)
 {
-    // ...
-
     // metadata is optional
     var metadata = new Dictionary<string, string>()
     {
@@ -396,8 +394,6 @@ using Datadog.Trace.AppSec;
 
 void OnLogonFailure(string userId, bool userExists, ...)
 {
-    // ...
-
     // metadata is optional
     var metadata = new Dictionary<string, string>()
     {
@@ -407,7 +403,6 @@ void OnLogonFailure(string userId, bool userExists, ...)
 
     // ...
 }
-
 ```
 
 {{% /tab %}}
@@ -416,10 +411,7 @@ void OnLogonFailure(string userId, bool userExists, ...)
 ```csharp
 void OnUserSignupComplete(string userId, ...)
 {
-    // ...
-
     // the metadata parameter is optional, but adding the "usr.id"
-    // key is necessary for tracking the signup 
     var metadata = new Dictionary<string, string>()
     {
         { "usr.id", userId }
@@ -444,6 +436,7 @@ The example below shows how to track login events, as well as custom events (usi
 {{% tab "login success" %}}
 ```go
 import "gopkg.in/DataDog/dd-trace-go.v1/appsec"
+
 func handler(w http.ResponseWriter, r *http.Request) {
   metadata := /* optional extra event metadata */
   userdata := /* optional extra user data */
@@ -460,6 +453,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 {{% tab "login failure" %}}
 ```go
 import "gopkg.in/DataDog/dd-trace-go.v1/appsec"
+
 func handler(w http.ResponseWriter, r *http.Request) {
   exists := /* whether the given user id exists or not */
   metadata := /* optional extra event metadata */ 
@@ -483,7 +477,6 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 {{< /tabs >}}
 
-
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 Use the the Ruby tracer's API to track user events, released in dd-trace-rb v1.9.0. 
@@ -498,8 +491,6 @@ require 'datadog/kit/appsec/events'
 trace = Datadog::Tracing.active_trace
 Datadog::Kit::AppSec::Events.track_login_success(trace, user: { id: 'my_user_id' })
 ```
-{{% /tab %}}
-{{% tab "login failure" %}}
 {{% /tab %}}
 
 {{% tab "login failure" %}}
@@ -516,7 +507,6 @@ Datadog::Kit::AppSec::Events.track_login_failure(trace, user_id: 'my_user_id', u
 {{% /tab %}}
 
 {{% tab "custom business logic" %}}
-{{% /tab %}}
 ```ruby
 require 'datadog/kit/appsec/events'
 trace = Datadog::Tracing.active_trace
@@ -524,6 +514,7 @@ trace = Datadog::Tracing.active_trace
 # Leveraging custom business logic tracking to track user signups
 Datadog::Kit::AppSec::Events.track('users.signup', trace)
 ```
+{{% /tab %}}
 {{< /tabs >}}
 
 {{< /programming-lang >}}
@@ -536,11 +527,9 @@ The example below shows how to track login events, as well as custom events (usi
 {{% tab "login success" %}}
 ```php
 <?php
-\datadog\appsec\track_user_login_success_event($id, ['email' => $email])
+\datadog\appsec\track_user_login_success_event($id, $exists, ['email' => $email])
 ?>
 ```
-{{% /tab %}}
-{{% tab "login failure" %}}
 {{% /tab %}}
 
 {{% tab "login failure" %}}
@@ -633,28 +622,9 @@ metadata = {"custom": "customvalue"}
 # default to None except propagate that defaults to True. They'll be 
 # passed to the set_user() function
 track_user_login_success_event(tracer, "userid", metadata)
-# Call is_user_blocked() to possibly block the authenticated user when in the denylist
-if is_user_blocked(user_id):
-    block_current_request()
 ```
 {{% /tab %}}
 {{% tab "login failure" %}}
-```python
-from ddtrace.appsec.trace_utils import track_user_login_success_event
-from ddtrace import tracer
-metadata = {"custom": "customvalue"}
-# name, email, scope, role, session_id and propagate are optional arguments which 
-# default to None except propagate that defaults to True. They'll be 
-# passed to the set_user() function
-track_user_login_success_event(tracer, "userid", metadata)
-# Call is_user_blocked() to possibly block the authenticated user when in the denylist
-if is_user_blocked(user_id):
-    block_current_request()
-```
-{{% /tab %}}
-
-{{% tab "custom business logic" %}}
-
 ```python
 from ddtrace.appsec.trace_utils import track_user_login_failure_event
 from ddtrace import tracer
@@ -663,7 +633,9 @@ metadata = {"custom": "customvalue"}
 exists = False
 track_user_login_failure_event(tracer, "userid", exists, metadata)
 ```
+{{% /tab %}}
 
+{{% tab "custom business logic" %}}
 ```python
 from ddtrace.appsec.trace_utils import track_custom_event
 from ddtrace import tracer
