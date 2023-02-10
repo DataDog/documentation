@@ -54,7 +54,8 @@ function loadPage(newUrl) {
             const newSidebar = httpRequest.responseXML.querySelector('.sidebar');
 
             if (newContent === null) {
-                return;
+                // If we got a document in the response but there's no main content, its likely a redirect.
+                location.reload()
             }
 
             document.title = newDocument.title;
