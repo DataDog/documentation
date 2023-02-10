@@ -130,15 +130,19 @@ class GitHub:
         headers = self.headers()
         path_to_file = list_item.get("path", "")
         file_out = "{}{}".format(dest_dir, path_to_file)
-        print("https://raw.githubusercontent.com/{0}/{1}/{2}/{3}".format(
-            org, repo, branch, path_to_file
-        ))
         raw_response = request_session.get(
             "https://raw.githubusercontent.com/{0}/{1}/{2}/{3}".format(
                 org, repo, branch, path_to_file
             ),
             headers=headers,
         )
+        raw_url = "https://raw.githubusercontent.com/{0}/{1}/{2}/{3}".format(
+            org, repo, branch, path_to_file
+        )
+        if raw_url == "https://raw.githubusercontent.com/DataDog/integrations-extras/master/firefly/manifest.json":
+            print(raw_url)
+            print(raw_response.status_code)
+            print(raw_response.content)
         if raw_response.status_code == requests.codes.ok:
             makedirs(dirname(file_out), exist_ok=True)
             with open(file_out, mode="wb+") as f:
