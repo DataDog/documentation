@@ -44,7 +44,7 @@ To trigger a workflow from a Dashboard, add the **Run Workflow** widget:
 _This will allow the values of the template variables to be mapped directly to the input parameters when you run the Workflow._
 1. Enter a title for the widget if you want and click **Save**
 
-{{< img src="workflows/trigger-from-dashboard.png" alt="Click Run Workflow to trigger a workflow from Dashboard widget." >}}
+{{< img src="workflows/trigger-from-dashboard2.png" alt="Click Run Workflow to trigger a workflow from Dashboard widget." >}}
 
 To run the workflow:
 1. Click **Run Workflow** on your dashboard widget.
