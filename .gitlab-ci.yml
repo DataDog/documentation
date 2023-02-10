@@ -117,6 +117,7 @@ build_preview:
   script:
     - dog --config "$HOME/.dogrc" event post "documentation build ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" --alert_type "info" --tags="${DEFAULT_TAGS}"
     - touch Makefile.config
+    - make clean-dependent-repos
     - make dependencies
     - make config
     - ./node_modules/.bin/jest --testPathPattern=assets/scripts/tests/
@@ -253,6 +254,7 @@ build_live:
     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_SHA:0:8}> sent to gitlab for production deployment. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}|details>" "#FFD700"
     - touch Makefile.config
     - make clean-examples
+    - make clean-dependent-repos
     - make dependencies
     - yarn run prebuild
     - build_site
