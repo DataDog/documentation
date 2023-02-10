@@ -138,13 +138,13 @@ Set up a monitor to alert if an indexed log volume in any scope of your infrastr
 
 [Set up a daily quota][16] on indexes to prevent indexing more than a given number of logs per day. If an index has a daily quota, Datadog recommends that you set the [monitor that notifies on that index's volume](#alert-when-an-indexed-log-volume-passes-a-specified-threshold) to alert when 80% of this quota is reached within the past 24 hours.
 
-An event is generated when the daily quota is reached. By default, these events have the `datadog_index` tag with the index name. You can, optionally, [create a facet][17] on the `datadog_index` tag, so that you can use `datadog_index` in the `group by` step for setting up a multi-alert monitor.
+An event is generated when the daily quota is reached. By default, these events have the `datadog_index` tag with the index name. Therefore, when this event has been generated, you can [create a facet][17] on the `datadog_index` tag, so that you can use `datadog_index` in the `group by` step for setting up a multi-alert monitor. 
 
 To set up a monitor to alert when the daily quota is reached for an index:
 
 1. Navigate to [Monitors > New Monitor][13] and click **Event**.
 2. Enter: `source:datadog "daily quota reached"` in the **Define the search query** section.
-3. Add `datadog_index(datadog_index)` to the **group by** field.
+3. Add `datadog_index(datadog_index)` to the **group by** field. The `datadog_index(datadog_index)` tag is only available when an event has already been generated. 
 4. In the **Set alert conditions** section, select `above or equal to` and enter `1` for the **Alert threshold**.
 5. Add a notification title and message in the **Notify your team** section.The **Multi Alert** button is automatically selected because the monitor is grouped by `datadog_index(datadog_index)`.
 6. Click **Save**.
