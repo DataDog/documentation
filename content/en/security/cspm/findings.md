@@ -59,7 +59,7 @@ Findings can also be aggregated by resource to rank order resources that have fa
 
 The side panel lists detection rules that were evaluated against the resource, some of which you may choose to be addressed to improve your security configuration posture.
 
-{{< img src="security/cspm/findings/passed-rules.png" alt="Group and aggregate by resource in search" style="width:100%;">}}
+{{< img src="security/cspm/findings/passed-rules.png" alt="Group and aggregate by resource in search" style="width:60%;">}}
 
 ## Mute findings
 
@@ -108,13 +108,13 @@ To audit the history for a resource:
 3. If the finding status has changed, click **See Latest State**.
 4. Click **View Finding**.
 
-{{< img src="security/cspm/findings/muted-findings-timeline-graph.png" alt="The Resource Evaluation Over Time graph shows the history of the finding including periods when it was muted" style="width:80%;">}}
+{{< img src="security/cspm/findings/muted-findings-timeline-graph.png" alt="The resource evaluation over time timeline shows the history of the finding including periods when it was muted" style="width:100%;">}}
 
 On the **Message** tab, use the **Resource evaluation over time** timeline to view when the finding was muted or unmuted over a specified period of time (up to six months).
 
-{{< img src="security/cspm/findings/muted-findings-timeline.png" alt="The Timeline tab shows a chronological history of the finding including details on when a finding was muted" style="width:80%;">}}
+{{< img src="security/cspm/findings/muted-findings-timeline.png" alt="The Timeline tab shows a chronological history of the finding including details on when a finding was muted" style="width:100%;">}}
 
-Click the **Timeline** tab to view a chronological history of the finding, including the name of the person who made the change and the reason specified for justifying the suppression.
+Click the **Timeline** tab to view a chronological history of the finding. Hover over a mute or unmute action to view additional details, such as the reason for the mute, how long the mute was intended to last, and who muted it.
 
 ## Further reading
 
