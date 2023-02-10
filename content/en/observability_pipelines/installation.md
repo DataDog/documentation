@@ -97,7 +97,6 @@ $ DD_API_KEY=<DD_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.
 [4]: https://linux.org/
 [5]: /account_management/api-app-keys/#api-keys
 [6]: /observability_pipelines/working_with_data/
-[7]: https://github.com/vectordotdev/vector/blob/master/distribution/systemd/vector.service
 
 {{% /tab %}}
 {{% tab "Helm" %}}
