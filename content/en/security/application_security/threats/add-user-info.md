@@ -447,7 +447,7 @@ import "gopkg.in/DataDog/dd-trace-go.v1/appsec"
 func handler(w http.ResponseWriter, r *http.Request) {
   metadata := /* optional extra event metadata */
   userdata := /* optional extra user data */
-  
+
   // Track login success
   if appsec.TrackUserLoginSuccessEvent(r.Context(), "my-uid", metadata, userdata) != nil {
     // The given user id is blocked and the handler should be aborted asap.
