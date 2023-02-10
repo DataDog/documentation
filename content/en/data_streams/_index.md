@@ -42,6 +42,7 @@ Once Data Streams Monitoring is configured, you can measure the time it usually 
 |---|---|-----|
 | dd.stream.edge_latency | `service`, `upstream_service`, `topic`, `partition` | Time elapsed from producing messages in a client to receiving messages in the consuming service. |
 | dd.stream.latency_from_origin | `service`, `upstream_service`, `hash` | Time elapsed from producing messages at their point of origin to receiving messages in the selected service. |
+| dd.stream.kafka.lag_seconds | `consumer_group`, `partition`, `topic`, `env` | Lag in seconds between consumer and broker. |
 
 Datadog recommends using the **Pipeline SLOs** tab on any service in Data Streams Monitoring to create SLOs or monitors on end-to-end latency:
 
