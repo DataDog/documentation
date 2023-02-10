@@ -63,14 +63,14 @@ Integrations templates can be stored as Docker labels. With Autodiscovery, the A
 **Dockerfile**:
 
 ```yaml
-LABEL "com.datadoghq.ad.checks"="{\"<INTEGRATION_NAME>\": {\"instances\": [<INSTANCE_CONFIG>]}}"
+LABEL "com.datadoghq.ad.checks"='{"<INTEGRATION_NAME>": {"instances": [<INSTANCE_CONFIG>]}}'
 ```
 
 **docker-compose.yaml**:
 
 ```yaml
 labels:
-  com.datadoghq.ad.checks: "{\"<INTEGRATION_NAME>\": {\"instances\": [<INSTANCE_CONFIG>]}}"
+  com.datadoghq.ad.checks: '{"<INTEGRATION_NAME>": {"instances": [<INSTANCE_CONFIG>]}}'
 ```
 
 **Using `docker run`, `nerdctl run`, or `podman run` commands**:
@@ -95,7 +95,7 @@ services:
   project:
     image: '<IMAGE_NAME>'
     labels:
-      com.datadoghq.ad.checchecksk_names: "{\"<INTEGRATION_NAME>\": {\"instances\": [<INSTANCE_CONFIG>]}}"
+      com.datadoghq.ad.checchecksk_names: '{"<INTEGRATION_NAME>": {"instances": [<INSTANCE_CONFIG>]}}'
 
 ```
 
