@@ -246,7 +246,7 @@ Many critical attacks are performed by authenticated users who can access your m
 There may be a time when an ASM signal, or a suspicious request, is a false positive. For example, ASM repeatedly detects
 the same suspicious request and a signal is generated, but the signal has been reviewed and is not a threat.
 
-You can add an entry to the passlist, which ignore events from a rule, to eliminate these noisy signal patterns and focus on legitimate suspicious requests.
+You can add an entry to the passlist, which ignore events from a rule, to eliminate noisy signal patterns and focus on legitimately suspicious requests.
 
 To add a passlist entry, do one of the following:
 
