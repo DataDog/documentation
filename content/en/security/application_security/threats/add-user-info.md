@@ -17,15 +17,15 @@ further_reading:
 
 Instrument your services and track user activity to detect and block bad actors.
 
-Add authenticated user information on traces to identify and block bad actors targeting your authenticated attack surface. The authenticated user monitoring and blocking is done by setting the user id tag on the currently running Application Performance Monitoring (APM) trace and providing the necessary instrumentation for ASM to block authenticated attackers. This allows ASM to associate attacks and business logic events to users, in order to detect business logic abuse and ultimately block malicious users through the ASM’s denylist (https://app.datadoghq.com/security/appsec/denylist). 
+Add authenticated user information on traces to identify and block bad actors targeting your authenticated attack surface. The authenticated user monitoring and blocking is done by setting the user id tag on the running Application Performance Monitoring (APM) trace. It also provides the necessary instrumentation for ASM to block authenticated attackers. This allows ASM to associate attacks and business logic events to users.
 
-Track user logins to detect account takeovers with our out of the box detection rules, and to ultimately block the user ID or IP address associated with the attack. 
+Track user logins to detect account takeovers with out of the box detection rules, and ultimately block the user IDs or IP addresses associated with the attack. 
 
 Track additional business logic and create your own detection rules to prevent business logic abuse.
 
 ## Adding authenticated user information to traces
 
-You can [add custom tags to your root span][1], or use the instrumentation functions described below. Note that only setting the tags will prevent your from being able to block the attacking user.
+You can [add custom tags to your root span][1], or use the instrumentation functions described below. 
 
 {{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
 
