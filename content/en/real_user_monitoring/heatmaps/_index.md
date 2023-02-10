@@ -49,7 +49,6 @@ The right panel helps you understand the data in the heatmap:
 
 {{< img src="real_user_monitoring/heatmaps/insights-panel.png" alt="Data showing top insights detected in the heatmap." style="width:60%;">}}
 
-
 You can click into any of these queries to pivot to an analytical view of these data points.
 
 Below the panel are all actions that occurred on the page, listed by frequency. When you click into an action, you can understand more about that interaction, for example:
