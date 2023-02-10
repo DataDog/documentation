@@ -1526,11 +1526,16 @@ main:
     parent: tracing_custom_inst
     identifier: tracing_custom_inst_dotnet
     weight: 108
-  - name: Instrumenting with OpenStandards
-    url: opentelemetry/otel_tracing/
+  - name: OpenStandards
+    url: tracing/trace_collection/open_standards
     parent: tracing_trace_collection
     identifier: tracing_open_standards
-    weight: 105
+    weight: 105  
+  - name: OpenTelemetry
+    url: opentelemetry/otel_tracing/
+    parent: tracing_trace_collection
+    identifier: tracing_open_telemetry
+    weight: 106
   - name: Java
     url: tracing/trace_collection/open_standards/java/
     parent: tracing_open_standards
@@ -1570,22 +1575,22 @@ main:
     url: serverless/distributed_tracing/
     parent: tracing_trace_collection
     identifier: tracing_serverless
-    weight: 106
+    weight: 107
   - name: Admission Controller Injection
     url: tracing/trace_collection/admission_controller/
     parent: tracing_trace_collection
     identifier: tracing_admission_controller
-    weight: 107
+    weight: 108
   - name: Tracing Proxies
     url: tracing/trace_collection/proxy_setup/
     parent: tracing_trace_collection
     identifier: tracing_proxies
-    weight: 108
+    weight: 109
   - name: Span Tags Semantics
     url: tracing/trace_collection/tracing_naming_convention
     parent: tracing_trace_collection
     identifier: tracing_naming_convention
-    weight: 109
+    weight: 110
   - name: APM Metrics Collection
     url: tracing/metrics/
     parent: tracing
