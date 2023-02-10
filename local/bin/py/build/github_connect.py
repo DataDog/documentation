@@ -130,6 +130,9 @@ class GitHub:
         headers = self.headers()
         path_to_file = list_item.get("path", "")
         file_out = "{}{}".format(dest_dir, path_to_file)
+        print("https://raw.githubusercontent.com/{0}/{1}/{2}/{3}".format(
+            org, repo, branch, path_to_file
+        ))
         raw_response = request_session.get(
             "https://raw.githubusercontent.com/{0}/{1}/{2}/{3}".format(
                 org, repo, branch, path_to_file
