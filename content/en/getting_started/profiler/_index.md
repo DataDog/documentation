@@ -198,7 +198,7 @@ docker-compose up -d
 To test the results, generate traffic again:
 
 ```shell
-docker exec -it dd-continuous-profiler-example_toolbox_1 bash
+docker exec -it dd-continuous-profiler-example-toolbox-1 bash
 ab -c 10 -t 20 http://movies-api-java:8080/movies?q=the
 ```
 
