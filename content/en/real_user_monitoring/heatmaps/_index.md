@@ -66,6 +66,18 @@ After understanding analytics, the next step is to understand the action in the 
 
 Heatmaps are based on RUM view names. Depending on how your RUM application is configured, many pages can start being grouped under the same view name, or you can start having very specific view names. If you think the default view name gathering is not sufficient, you can override it manually with the [startView][6] function. 
 
+### The view that I selected is not showing the initial content.
+
+Heatmaps are generated with Session Replay data. Our intelligent algorithm smartly picks a replay that is both recent and best matches the initial state of the page. In some cases, we might not be able to find the correct replay. To switch the background of your heatmap, you can use the "Choose Background" button to navigate through the different states of the page and find the one you are looking for.
+
+{{< img src="real_user_monitoring/heatmaps/heatmaps-background-selector.mp4" alt="Select a different background via the choose background button" video=true >}}
+
+### On the action list on the side of my heatmap, I see an icon showing an element that is not visibile in the heatmap.
+
+{{< img src="real_user_monitoring/heatmaps/heatmaps-hidden-element.png" alt="Hidden elements in the action list on a heatmap." style="width:60%;">}}
+
+The tooltip on the icon says "element is not visible". This means that the element is a common action on your page, but it’s not displayed on the background in the heatmap. To see that element, you can click Choose Background in the bottom right corner to switch the background of your heatmap to one where that element is present. 
+
 ### After attempting to create a heatmap, I see a "No Replay Data" state appear. 
 
 This means that Datadog could not find any Session Replays to use as a heatmap background that matches the current search filters. If you just started to record sessions with the [Browser SDK][2], it may also take a few minutes for the Session Replay to be available for viewing.
