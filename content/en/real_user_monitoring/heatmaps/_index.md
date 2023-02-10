@@ -70,7 +70,7 @@ Heatmaps are based on RUM view names. Depending on how your RUM application is c
 
 ### The view that I selected is not showing the initial content.
 
-Heatmaps are generated with Session Replay data. Our intelligent algorithm smartly picks a replay that is both recent and best matches the initial state of the page. In some cases, we might not be able to find the correct replay. To switch the background of your heatmap, you can use the "Choose Background" button to navigate through the different states of the page and find the one you are looking for.
+Heatmaps are generated with Session Replay data. Datadog's intelligent algorithm smartly picks a replay that is both recent and best matches the initial state of the page. In some cases, we might not be able to find the correct replay. To switch the background of your heatmap, you can use the **Choose Background** button to navigate through the different states of the page and find the one you are looking for.
 
 {{< img src="real_user_monitoring/heatmaps/heatmaps-background-selector.mp4" alt="Select a different background via the choose background button" video=true >}}
 
