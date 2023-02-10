@@ -61,7 +61,7 @@ $ DD_API_KEY=<DD_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.
     $ sudo apt-get install datadog-observability-pipelines-worker datadog-signing-keys
     ```
 
-4. Create a SystemD service file using the [vector.service][7] example as a reference:
+4. Create a SystemD service file using this command:
    
    ```
    $ sudo vi /etc/systemd/system/datadog-observability-pipelines-worker.service
