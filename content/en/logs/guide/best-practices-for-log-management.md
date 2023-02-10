@@ -120,7 +120,7 @@ Create an anomaly detection monitor to alert on any unexpected log indexing spik
 Set up a monitor to alert if an indexed log volume in any scope of your infrastructure (for example, `service`, `availability-zone`, and so forth) is growing unexpectedly.
 
 1. Navigate to the [Log Explorer][14].
-2. Enter a [search query][15] that includes the index name to capture the log volume you want to monitor.
+2. Enter a [search query][15] that includes the index name (for example, `index:main`) to capture the log volume you want to monitor.
 3. Click the down arrow next to **Download as CSV** and select **Create monitor**.
 4. Add tags (for example, `host, `services, and so on) to the **group by** field.
 5. Enter the **Alert threshold** for your use case. Optionally, enter a **Warning threshold**.
