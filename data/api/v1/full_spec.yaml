@@ -7503,52 +7503,42 @@ components:
           type: number
         estimated_indexed_logs_percentage:
           description: The percentage of estimated live indexed logs usage by tag(s).
-            This field is in private beta.
           format: double
           type: number
         estimated_indexed_logs_usage:
-          description: The estimated live indexed logs usage by tag(s). This field
-            is in private beta.
+          description: The estimated live indexed logs usage by tag(s).
           format: double
           type: number
         estimated_indexed_spans_percentage:
           description: The percentage of estimated indexed spans usage by tag(s).
-            This field is in private beta.
           format: double
           type: number
         estimated_indexed_spans_usage:
-          description: The estimated indexed spans usage by tag(s). This field is
-            in private beta.
+          description: The estimated indexed spans usage by tag(s).
           format: double
           type: number
         estimated_ingested_logs_percentage:
           description: The percentage of estimated live ingested logs usage by tag(s).
-            This field is in private beta.
           format: double
           type: number
         estimated_ingested_logs_usage:
-          description: The estimated live ingested logs usage by tag(s). This field
-            is in private beta.
+          description: The estimated live ingested logs usage by tag(s).
           format: double
           type: number
         estimated_ingested_spans_percentage:
           description: The percentage of estimated ingested spans usage by tag(s).
-            This field is in private beta.
           format: double
           type: number
         estimated_ingested_spans_usage:
-          description: The estimated ingested spans usage by tag(s). This field is
-            in private beta.
+          description: The estimated ingested spans usage by tag(s).
           format: double
           type: number
         estimated_rum_sessions_percentage:
-          description: The percentage of estimated rum sessions usage by tag(s). This
-            field is in private beta.
+          description: The percentage of estimated rum sessions usage by tag(s).
           format: double
           type: number
         estimated_rum_sessions_usage:
-          description: The estimated rum sessions usage by tag(s). This field is in
-            private beta.
+          description: The estimated rum sessions usage by tag(s).
           format: double
           type: number
         fargate_percentage:
@@ -15724,52 +15714,42 @@ components:
           type: number
         estimated_indexed_logs_percentage:
           description: The percentage of estimated live indexed logs usage by tag(s).
-            Note this field is in private beta.
           format: double
           type: number
         estimated_indexed_logs_usage:
-          description: The estimated live indexed logs usage by tag(s). Note this
-            field is in private beta.
+          description: The estimated live indexed logs usage by tag(s).
           format: double
           type: number
         estimated_indexed_spans_percentage:
           description: The percentage of estimated indexed spans usage by tag(s).
-            Note this field is in private beta.
           format: double
           type: number
         estimated_indexed_spans_usage:
-          description: The estimated indexed spans usage by tag(s). Note this field
-            is in private beta.
+          description: The estimated indexed spans usage by tag(s).
           format: double
           type: number
         estimated_ingested_logs_percentage:
           description: The percentage of estimated live ingested logs usage by tag(s).
-            Note this field is in private beta.
           format: double
           type: number
         estimated_ingested_logs_usage:
-          description: The estimated live ingested logs usage by tag(s). Note this
-            field is in private beta.
+          description: The estimated live ingested logs usage by tag(s).
           format: double
           type: number
         estimated_ingested_spans_percentage:
           description: The percentage of estimated ingested spans usage by tag(s).
-            Note this field is in private beta.
           format: double
           type: number
         estimated_ingested_spans_usage:
-          description: The estimated ingested spans usage by tag(s). Note this field
-            is in private beta.
+          description: The estimated ingested spans usage by tag(s).
           format: double
           type: number
         estimated_rum_sessions_percentage:
-          description: The percentage of estimated rum sessions usage by tag(s). This
-            field is in private beta.
+          description: The percentage of estimated rum sessions usage by tag(s).
           format: double
           type: number
         estimated_rum_sessions_usage:
-          description: The estimated rum sessions usage by tag(s). This field is in
-            private beta.
+          description: The estimated rum sessions usage by tag(s).
           format: double
           type: number
         infra_host_percentage:
