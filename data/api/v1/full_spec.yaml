@@ -17622,6 +17622,11 @@ components:
             over all hours in the current date for the given org.
           format: int64
           type: integer
+        cloud_cost_management_host_count_avg:
+          description: Host count average of Cloud Cost Management for the given date
+            and given org.
+          format: int64
+          type: integer
         container_avg:
           description: Shows the average of all distinct containers over all hours
             in the current date for the given org.
@@ -18000,6 +18005,10 @@ components:
         ci_visibility_test_committers_hwm_sum:
           description: Shows the high-water mark of all CI visibility test committers
             over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        cloud_cost_management_host_count_avg_sum:
+          description: Sum of the host count average for Cloud Cost Management.
           format: int64
           type: integer
         container_avg_sum:
