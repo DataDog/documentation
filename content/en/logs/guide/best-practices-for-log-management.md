@@ -165,23 +165,23 @@ To find this dashboard, go to **Dashboards > Dashboards List** and search for [L
 
 ### Set up exclusion filters on high-volume logs
 
-When your usage monitors alert, you can set up exclusion filters and increase the sampling rate to reduce the volume. See [Exclusion Filters][20] on how to set them up. You can also use [Log Patterns][24] to group and identify high-volume logs. Then, in the log pattern's side panel, click **Add Exclusion Filter** to add a filter to stop indexing those logs.
+When your usage monitors alert, you can set up exclusion filters and increase the sampling rate to reduce the volume. See [Exclusion Filters][20] on how to set them up. You can also use [Log Patterns][21] to group and identify high-volume logs. Then, in the log pattern's side panel, click **Add Exclusion Filter** to add a filter to stop indexing those logs.
 
 {{< img src="logs/guide/patterns_exclusion.png" alt="The log explorer page showing the side-panel details of a pattern with the add exclusion filter button at the top" style="width:80%;">}}
 
-Even if you use exclusion filters, you can still visualize trends and anomalies over all of your log data using log-based metrics. See [Generate Metrics from Ingested Logs][25] for more information.
+Even if you use exclusion filters, you can still visualize trends and anomalies over all of your log data using log-based metrics. See [Generate Metrics from Ingested Logs][22] for more information.
 
 ### Enable Sensitive Data Scanner for Personally Identifiable Information (PII) detection
 
-If you want to prevent data leaks and limit non-compliance risks, use Sensitive Data Scanner to identify, tag, and optionally redact or hash sensitive data. For example, you can scan for credit card numbers, bank routing numbers, and API keys in your logs, APM spans, and RUM events, See [Sensitive Data Scanner][21] on how to set up scanning rules to determine what data to scan. 
+If you want to prevent data leaks and limit non-compliance risks, use Sensitive Data Scanner to identify, tag, and optionally redact or hash sensitive data. For example, you can scan for credit card numbers, bank routing numbers, and API keys in your logs, APM spans, and RUM events, See [Sensitive Data Scanner][23] on how to set up scanning rules to determine what data to scan. 
 
-**Note**: Sensitive Data Scanner is a separate billable product.
+**Note**: [Sensitive Data Scanner][24] is a separate billable product.
 
 ### Enable Audit Trail to see user activities
 
-If you want to see user activities, such as who changed the retention of an index or who modified an exclusion filter, enable Audit Trail to see these events. See [Audit Trail Events][22] for a list of platform and product-specific events that are available. To enable and configure Audit Trail, follow the steps in the [Audit Trail documentation][23].
+If you want to see user activities, such as who changed the retention of an index or who modified an exclusion filter, enable Audit Trail to see these events. See [Audit Trail Events][25] for a list of platform and product-specific events that are available. To enable and configure Audit Trail, follow the steps in the [Audit Trail documentation][26].
 
-**Note**: Audit Trail is a separate billable product.
+**Note**: [Audit Trail][27] is a separate billable product.
 
 ## Further Reading
 
@@ -207,8 +207,10 @@ If you want to see user activities, such as who changed the retention of an inde
 [18]: https://app.datadoghq.com/dash/integration/logs_estimated_usage
 [19]: https://app.datadoghq.com/dashboard/lists?q=Log+Management+-+Estimated+Usage
 [20]: /logs/log_configuration/indexes/#exclusion-filters
-[21]: /account_management/org_settings/sensitive_data_detection/
-[22]: /account_management/audit_trail/events/
-[23]: /account_management/audit_trail/
-[24]: /logs/explorer/analytics/#patterns
-[25]: /logs/log_configuration/logs_to_metrics/
+[21]: /logs/explorer/analytics/#patterns
+[22]: /logs/log_configuration/logs_to_metrics/
+[23]: /account_management/org_settings/sensitive_data_detection/
+[24]: https://www.datadoghq.com/pricing/?product=sensitive-data-scanner#sensitive-data-scanner
+[25]: /account_management/audit_trail/events/
+[26]: /account_management/audit_trail/
+[27]: https://www.datadoghq.com/pricing/?product=audit-trail#audit-trail
