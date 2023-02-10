@@ -78,7 +78,7 @@ Heatmaps are generated with Session Replay data. Datadog's intelligent algorithm
 
 {{< img src="real_user_monitoring/heatmaps/heatmaps-hidden-elements.png" alt="Hidden elements in the action list on a heatmap." style="width:60%;">}}
 
-The tooltip on the icon says "element is not visible". This means that the element is a common action on your page, but it’s not displayed on the background in the heatmap. To see that element, you can click Choose Background in the bottom right corner to switch the background of your heatmap to one where that element is present. 
+The tooltip on the icon says **element is not visible**. This means that the element is a common action on your page, but it's not displayed on the background in the heatmap. To see that element, you can click **Choose Background** in the bottom right corner to switch the background of your heatmap to one where that element is present. 
 
 ### After attempting to create a heatmap, I see a "No Replay Data" state appear. 
 
