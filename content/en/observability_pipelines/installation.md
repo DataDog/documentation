@@ -22,7 +22,7 @@ Before installing, make sure you:
 
 1. Are using one of the supported Linux Archs: x86_64 or AMD64
 2. Have a valid [Datadog API key][5].
-3. An Observability Pipelines Configuration ID.
+3. Have an Observability Pipelines Configuration ID.
 
 ## Installation
 
