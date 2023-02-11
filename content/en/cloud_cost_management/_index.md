@@ -13,12 +13,12 @@ further_reading:
 Cloud Cost Management provides insights for engineering and finance teams to see how changes to infrastructure can affect costs. It enables you to understand trends, allocate spend across your organization, and identify inefficiencies.
 Datadog ingests your cloud cost data and transforms it into queryable metrics. If costs rise, you can correlate the change with usage metrics to determine the root cause.
 
-To use Cloud Cost Management, you must have an AWS account with access to Cost and Usage Reports (CURs), and have the AWS integration installed in Datadog.
-
 ## Setup
+{{< tabs >}}
+{{% tab "AWS" %}}
 
-To setup Cloud Cost Management in Datadog, you need to generate a Cost and Usage report.
 
+To use AWS Cloud Cost Management, you must have an AWS account with access to Cost and Usage Reports (CURs), and have the AWS integration installed in Datadog. To setup Cloud Cost Management in Datadog, you need to generate a Cost and Usage report.
 ### Prerequisite: generate a Cost and Usage Report
 
 Follow AWS instructions for [Creating Cost and Usage Reports][1], and select the following content options for use with Datadog Cloud Cost Management:
@@ -122,7 +122,7 @@ Attach the new S3 policy to the Datadog integration role.
 5. Click **Attach policy**.
 
 **Note:** Data can take up to 48 to 72 hours after setup to stabilize in Datadog.
-## Cost types
+### Cost types
 
 You can visualize your ingested data using the following cost types:
 
@@ -133,7 +133,7 @@ You can visualize your ingested data using the following cost types:
 | `aws.cost.blended`   | Cost based on the average rate paid for a usage type across an organization's member accounts.|
 | `aws.cost.ondemand`  | Cost based on the list rate provided by AWS. |
 
-## Tag enrichment
+### Tag enrichment
 
 Datadog adds out-of-the-box tags to the ingested cost data to help you further break down and allocate your costs. These tags are derived from your [Cost and Usage Report (CUR)][6].
 
@@ -165,9 +165,68 @@ The following out-of-the-box tags are also available for filtering and grouping 
 | `is_aws_ec2_spot_instance`   | Whether the usage is associated with a Spot Instance.|
 | `is_aws_ec2_savings_plan`    | Whether the usage is associated with a Savings Plan.|
 
+[1]: https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html
+[2]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/consolidated-billing.html
+[3]: https://us-east-1.console.aws.amazon.com/cost-management/home?region=us-east-1#/settings
+[4]: https://docs.aws.amazon.com/cur/latest/userguide/view-cur.html
+[5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
+[6]: https://docs.aws.amazon.com/cur/latest/userguide/data-dictionary.html
+{{% /tab %}}
+
+{{% tab "Azure" %}}
+<div class="alert alert-warning">Azure Cloud Cost Management is in private beta. Fill out this <a href="https://docs.google.com/forms/d/e/1FAIpQLSftAIq_g4GxBAKdWV5OjP0Ui4CAjWTzH3YCKy3n930gMz0Krg/viewform?usp=sf_link">form</a> if you would like to access it.</div>
+
+To use Azure Cloud Cost Management in Datadog, you must have an Azure account and have the following billing exports set up: **amortized** and **actual exports**. Additionally, Datadog must have permissions to read the exports from the container.
+
+**Note**: If you use the recommended [Datadog Resource method][1] through the Azure portal to set up Datadog, App Registration creation is still required to support Cloud Cost Management.
+
+### Schedule exports
+
+1. Navigate to [Exports][2] under Azure portal's *Cost Management + Billing*.
+2. Select the billing scope. **Note:** The scope cannot be Management Group.
+3. Once the scope is selected, click **Add**.
+4. Metric should be **Actual Cost (usage and purchases)**.
+5. Make sure the Export type is: "Daily export of month-to-date costs".
+6. Make sure the File Partitioning is **on**.
+
+Repeat steps 1-6 with export metric type **Amortized Cost (usage and purchases)**. We recommend using the same storage account.
+
+### Provide Datadog access to your data
+
+1. Navigate to the Storage Container where your exports are saved.
+    - In the Exports tab, click the link under Storage Account to navigate to it.
+    -  Click the Containers tab.
+    -  Choose the storage container your bills are in.
+2. Select Access Control (IAM) tab.
+3. Click the Role Assignments tab then click **Add**.  
+4. Choose **Storage Blob Data Reader** and **Cost Management Reader** then click Next.
+5. Assign this new permission to one of the app registrations you have connected with Datadog.
+    - To see which app registrations are connected to Datadog, visit [Datadog's Azure integration][3].
+    -  Click **Select members**, pick the name of the app registration, and click **Select**.
+    - Select *review + assign*
+
+If your exports are in different storage accounts, repeat steps 1-6 for the other storage accounts.
+
+### Steps to find the scope id
+
+From the export, click on the scope link. You will find the id there:
+- If the scope type is Billing account, look for the Billing account ID.
+- If the scope type is Department, look for the Department Id.
+- If the scope type is Enrollment account, look for the Account Id.
+- If the scope type is Subscription, look for the Subscription ID.
+- If the scope type is Resource Groups, look for the Resource group name.
+
+
+
+[1]: https://www.datadoghq.com/blog/azure-datadog-partnership/
+[2]: https://portal.azure.com/#view/Microsoft_Azure_CostManagement/Menu/~/exports
+[3]: https://app.datadoghq.com/account/settings#integrations/azure
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Tag pipelines (beta)
 
-You can use tag pipelines to create tag rules to help fix missing or incorrect tags on your AWS bill, or to create new, inferred tags that align with business logic.
+You can use tag pipelines to create tag rules to help fix missing or incorrect tags on your Cloud bill, or to create new, inferred tags that align with business logic.
 
 There are two types of rules supported: **Create new tag**, and **Alias existing tag keys**. You can keep your rules organized by leveraging rules-sets, which act as folders for your rules. The rules are executed in order (from top to bottom), to keep the execution order deterministic. You can organize rules and rulesets to ensure the order of execution matches your business logic. 
 
@@ -191,9 +250,3 @@ Visualizing infrastructure spend alongside related utilization metrics can help 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html
-[2]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/consolidated-billing.html
-[3]: https://us-east-1.console.aws.amazon.com/cost-management/home?region=us-east-1#/settings
-[4]: https://docs.aws.amazon.com/cur/latest/userguide/view-cur.html
-[5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
-[6]: https://docs.aws.amazon.com/cur/latest/userguide/data-dictionary.html
