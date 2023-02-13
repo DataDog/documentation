@@ -20,12 +20,12 @@ To get started with heatmaps:
 - Enable [Session Replay][1].
 - While heatmaps are in beta, enable the feature flag by adding the following code to the [package.json][2] file in the SDK:
 
-{{< code-block lang="json" filename="block.json">}}
+```json
 datadogRum.init({
     ...
     enableExperimentalFeatures: ['clickmap']
 })
-{{< /code-block >}}
+```
 
 ### Getting started
 
