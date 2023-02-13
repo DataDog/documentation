@@ -77,13 +77,14 @@ Beta integrations are disabled by default but can be enabled individually:
 | Ratpack                 | 1.5+       | Fully Supported | `ratpack`                                      |
 | Restlet HTTP Server     | 2.2 - 2.4  | Fully Supported | `restlet-http`.                                |
 | Spark Java              | 2.3+       | [Beta][3]       | `sparkjava` (requires `jetty`)                 |
+| Spring Boot             | 1.5        | Fully Supported | `spring-web` or `spring-webflux`               |
 | Spring Web (MVC)        | 4.0+       | Fully Supported | `spring-web`                                   |
 | Spring WebFlux          | 5.0+       | Fully Supported | `spring-webflux`                               |
 | Tomcat                  | 5.5+       | Fully Supported | `tomcat`                                       |
 | Vert.x                  | 3.4-3.9.x  | Fully Supported | `vertx`, `vertx-3.4`                           |
 
 **Note**: Many application servers are Servlet compatible and are automatically covered by that instrumentation, such as Websphere, Weblogic, and JBoss.
-Also, frameworks like Spring Boot inherently work because it usually uses a supported embedded application server (Tomcat/Jetty/Netty).
+Also, frameworks like Spring Boot (version 3) inherently work because they usually use a supported embedded application server, such as Tomcat, Jetty, or Netty.
 
 **Integrations Disabled By Default**
 

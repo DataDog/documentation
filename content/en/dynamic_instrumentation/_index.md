@@ -28,7 +28,7 @@ further_reading:
   access it.
 {{< /callout >}}
 
-Dynamic Instrumentation lets you capture data from your live applications without needing to do any code changes or redployment.
+Dynamic Instrumentation lets you capture data from your live applications without needing to do any code changes or redeployment.
 
 ## Getting started
 

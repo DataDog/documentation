@@ -2647,6 +2647,10 @@ components:
         public_id:
           description: The organization public ID.
           type: string
+        region:
+          description: The region of the Datadog instance that the organization belongs
+            to.
+          type: string
         total_cost:
           description: The total cost of products for the month.
           format: double
@@ -21680,8 +21684,8 @@ paths:
       - description: 'Comma separated list of product families to retrieve. Available
           families are `all`, `analyzed_logs`,
 
-          `application_security`, `audit_logs`, `serverless`, `ci_app`, `cspm`, `custom_events`,
-          `cws`, `dbm`, `fargate`,
+          `application_security`, `audit_logs`, `serverless`, `ci_app`, `cloud_cost_management`,
+          `cspm`, `custom_events`, `cws`, `dbm`, `fargate`,
 
           `infra_hosts`, `incident_management`, `indexed_logs`, `indexed_spans`, `ingested_spans`,
           `iot`,

@@ -15,6 +15,9 @@ further_reading:
 - link: "/agent/guide/agent-configuration-files/"
   tag: "FAQ"
   text: "Location of all Agent configuration files"
+- link: "https://www.datadoghq.com/blog/engineering/performance-improvements-in-the-datadog-agent-metrics-pipeline/"
+  tag: "Blog"
+  text: "Performance Improvements in the Datadog Agent Metrics Pipeline"
 ---
 
 {{< partial name="platforms/platforms.html" links="platforms" >}}
@@ -166,7 +169,7 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 | [macOS][9]                               | macOS 11.0+                                               |
 
 
-**Notes**: 
+**Notes**:
 - [Source][11] install may work on operating systems not listed here and is supported on a best effort basis.
 - Datadog Agent v6+ supports Windows Server 2008 R2 with the most recent Windows updates installed. There is also a [known issue with clock drift and Go][12] that affects Windows Server 2008 R2.
 
@@ -244,7 +247,6 @@ With Agent v6+, the command line interface is based on subcommands. To run a sub
 | `hostname`        | Print the hostname used by the Agent.                                       |
 | `import`          | Import and convert configuration files from previous versions of the Agent. |
 | `launch-gui`      | Start the Datadog Agent GUI.                                                |
-| `regimport`       | Import the registry settings into `datadog.yaml`.                           |
 | `restart`         | [Restart the Agent][2].                                                     |
 | `restart-service` | Restart the Agent within the service control manager.                       |
 | `start`           | [Start the Agent][3].                                                       |
