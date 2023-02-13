@@ -16,6 +16,10 @@ further_reading:
     text: "RUM Dashboards"
 ---
 
+{{< callout btn_hidden="true" header="Join the Feature Flag Tracking Beta!">}}
+Enrich your RUM data with feature flags to get visibility into performance monitoring. Feature Flag Tracking is currently in private beta. To request access, contact Support at support@datadoghq.com.
+{{< /callout >}}
+
 The RUM Browser SDK collects resources and assets for every RUM view (page load): [XMLHttpRequest][1] (XHRs) and Fetch requests, but also images, CSS files, JavaScript assets, and font files. A RUM Resource event is generated for each one of them, with detailed timings and metadata.
 
 RUM Resources inherit from all the context related to the active RUM View at the time of collection.

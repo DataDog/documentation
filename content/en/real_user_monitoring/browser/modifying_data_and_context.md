@@ -22,6 +22,10 @@ further_reading:
   text: "Datadog Standard Attributes"
 ---
 
+{{< callout url="#" btn_hidden="true" header="Join the Feature Flag Tracking Beta!">}}
+To enrich your RUM data with feature flags and get visibility into performance monitoring and behavioral changes, join the Feature Flag Tracking private beta. To request access, contact Support at support@datadoghq.com.
+{{< /callout >}}
+
 ## Overview
 
 There are various ways you can modify the [data collected][1] by RUM, to support your needs for:

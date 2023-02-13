@@ -19,6 +19,10 @@ further_reading:
     text: "Learn about RUM Dashboards"
 ---
 
+{{< callout btn_hidden="true" header="Join the Feature Flag Tracking Beta!">}}
+Enrich your RUM data with feature flags to get visibility into performance monitoring. Feature Flag Tracking is currently in private beta. To request access, contact Support at support@datadoghq.com.
+{{< /callout >}}
+
 ## Overview
 
 RUM view events collect extensive performance metrics for every page view. Monitor your application's page views and explore performance metrics in dashboards and the RUM Explorer.
