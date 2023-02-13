@@ -15,6 +15,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/aws-opentelemetry-lambda-layer-datadog/
   tag: GitHub
   text: OpenTelemetry 用 AWS マネージド Lambda レイヤーについて
+- link: https://www.datadoghq.com/blog/correlate-traces-datadog-rum-otel/
+  tag: ブログ
+  text: Datadog RUM イベントと OTel インスツルメンテーションされたアプリケーションのトレースを相関させる
 kind: ドキュメント
 title: Datadog の OpenTelemetry
 ---
@@ -43,7 +46,7 @@ OpenTelemetry データの Datadog への送信、構成、Datadog の観測可�
 
 
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
