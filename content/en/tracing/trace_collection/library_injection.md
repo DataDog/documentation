@@ -201,36 +201,29 @@ When both the Agent and your services are running on a host, real or virtual, Da
 
 ## Requirements
 
-- A recent [Datadog Agent v7][1] installation 
+- A recent [Datadog Agent v7][1] installation
 
 **Note**: Injection on arm64, and injection with `musl` on Alpine Linux container images are not supported.
 ## Install the preload library
 
-**For Ubuntu, Debian or other Debian-based Linux distributions:**
+1. Ensure your [Agent is running][6].
 
-1. Update your local apt repo and install the library:
+2. Install the library with one of the following sets of commands, where `<LANG>` is one of `java`, `js`, `dotnet`, or `all`:
+   **For Ubuntu, Debian or other Debian-based Linux distributions:**
    ```sh
    sudo apt-get update
    sudo apt-get install datadog-apm-inject datadog-apm-library-<LANG>
    ```
-   where `<LANG>` is one of `java`, `js`, `dotnet`, or `all`.
-
-2. Run the command `dd-host-install`.
-
-3. Exit and open a new shell to use the preload library.
-
-**For CentOS, RedHat, or another distribution that uses yum/RPM:**
-
-1. Update the yum cache and install the library:
+   **For CentOS, RedHat, or another distribution that uses yum/RPM:**
    ```sh
    sudo yum makecache
    sudo yum install datadog-apm-inject datadog-apm-library-<LANG>
    ```
-   where `<LANG>` is one of `java`, `js`, `dotnet`, or `all`.
 
-2. Run the command `dd-host-install`.
+3. Run the command `dd-host-install`.
 
-3. Exit and open a new shell to use the preload library.
+4. Exit and open a new shell to use the preload library.
+
 
 ## Install the language and your app
 
@@ -388,6 +381,8 @@ Exercise your application to start generating telemetry data, which you can see 
 [3]: https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu
 [4]: https://app.datadoghq.com/apm/traces
 [5]: https://bugzilla.redhat.com/show_bug.cgi?id=1792506
+[6]: /agent/guide/agent-commands/?tab=agentv6v7#start-the-agent
+
 {{% /tab %}}
 
 {{% tab "Agent on host, app in containers" %}}
@@ -408,27 +403,22 @@ Any newly started processes are intercepted and the specified instrumentation li
 
 ## Install the preload library
 
-**For Ubuntu, Debian or other Debian-based Linux distributions:**
+1. Ensure your [Agent is running][6].
 
-1. Update your local apt repo and install the library:
+2. Install the library with one of the following sets of commands, where `<LANG>` is one of `java`, `js`, `dotnet`, or `all`:
+   **For Ubuntu, Debian or other Debian-based Linux distributions:**
    ```sh
    sudo apt-get update
    sudo apt-get install datadog-apm-inject datadog-apm-library-<LANG>
    ```
-   where `<LANG>` is one of `java`, `js`, `dotnet`, or `all`.
-
-2. Run the command `dd-host-container-install`.
-
-**For CentOS, RedHat, or another distribution that uses yum/RPM:**
-
-1. Update the yum cache and install the library:
+   **For CentOS, RedHat, or another distribution that uses yum/RPM:**
    ```sh
    sudo yum makecache
    sudo yum install datadog-apm-inject datadog-apm-library-<LANG>
    ```
-   where `<LANG>` is one of `java`, `js`, `dotnet`, or `all`.
 
 3. Run the command `dd-host-container-install`.
+
 
 ## Configure Docker injection
 
@@ -571,6 +561,7 @@ Exercise your application to start generating telemetry data, which you can see 
 [3]: /tracing/trace_collection/library_config/
 [4]: https://app.datadoghq.com/apm/traces
 [5]: https://bugzilla.redhat.com/show_bug.cgi?id=1792506
+[6]: /agent/guide/agent-commands/?tab=agentv6v7#start-the-agent
 
 {{% /tab %}}
 
@@ -798,7 +789,7 @@ If the environment variables `DD_ENV`, `DD_SERVICE`, or `DD_VERSION` are specifi
 
 If they are not specified, `DD_ENV` uses the `env` value set in the `/etc/datadog-agent/inject/docker_config.yaml` config file, if any. `DD_SERVICE` and `DD_VERSION` are derived from the name of the Docker image. An image with the name `my-service:1.0` is tagged with `DD_SERVICE` of `my-service` and a `DD_VERSION` of `1.0`.
 
-## Launch the Agent on docker
+## Launch the Agent on Docker
 
 The `dd-agent` container must be launched before any service containers. Run:
 
