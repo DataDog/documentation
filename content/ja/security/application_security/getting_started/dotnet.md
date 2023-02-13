@@ -41,7 +41,7 @@ Docker、Kubernetes、AWS ECS、AWS Fargate で動作する .NET アプリのア
 
    **または**アプリケーションの実行場所に応じて、以下の方法のいずれかを選択します。
 
-   {{< tabs >}}
+{{< tabs >}}
 {{% tab "Windows self-hosted" %}}
 
 Windows コンソールで: 
