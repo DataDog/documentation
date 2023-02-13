@@ -31,7 +31,7 @@ You can [add custom tags to your root span][1], or use the instrumentation funct
 
 {{< programming-lang lang="java" >}}
 
-Use the the Java tracer's API for adding custom tags to a root span and add user information so that you can monitor authenticated requests in the application.
+Use the Java tracer's API for adding custom tags to a root span and add user information so that you can monitor authenticated requests in the application.
 
 User monitoring tags are applied on the root span and start with the prefix `usr` followed by the name of the field. For example, `usr.name` is a user monitoring tag that tracks the user’s name.
 
@@ -187,7 +187,7 @@ trace.set_tag('usr.another_tag', 'another_value')
 
 {{< programming-lang lang="php" >}}
 
-Use the the PHP tracer's API for adding custom tags to a root span, and add user information so that you can monitor authenticated requests in the application.
+Use the PHP tracer's API for adding custom tags to a root span, and add user information so that you can monitor authenticated requests in the application.
 
 User monitoring tags are applied to the `meta` section of the root span and start with the prefix `usr` followed by the name of the field. For example, `usr.name` is a user monitoring tag that tracks the user’s name.
 
@@ -278,7 +278,7 @@ def view():
 {{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
 {{< programming-lang lang="java" >}}
 
-Starting in dd-trace-java v1.8.0, you can use the the Java tracer's API to track user events. 
+Starting in dd-trace-java v1.8.0, you can use the Java tracer's API to track user events. 
 
 The following examples show how to track login events or custom events (using signup as an example).
 
@@ -366,7 +366,7 @@ public class LoginController {
 
 {{< programming-lang lang="dotnet" >}}
 
-Starting in dd-trace-dotnet v2.23.0, you can use the the .NET tracer's API to track user events. 
+Starting in dd-trace-dotnet v2.23.0, you can use the .NET tracer's API to track user events. 
 
 The following examples show how to track login events or custom events (using signup as an example).
 
@@ -431,7 +431,7 @@ void OnUserSignupComplete(string userId, ...)
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-Starting in dd-trace-go v1.47.0, you can use the the Go tracer's API to track user events. 
+Starting in dd-trace-go v1.47.0, you can use the Go tracer's API to track user events. 
 
 The following examples show how to track login events or custom events (using signup as an example).
 
@@ -483,7 +483,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-Starting in dd-trace-rb v1.9.0, you can use the the Ruby tracer's API to track user events.
+Starting in dd-trace-rb v1.9.0, you can use the Ruby tracer's API to track user events.
 
 The following examples show how to track login events or custom events (using signup as an example).
 
@@ -524,7 +524,7 @@ Datadog::Kit::AppSec::Events.track('users.signup', trace)
 {{< /programming-lang >}}
 
 {{< programming-lang lang="php" >}}
-Starting in dd-trace-php v0.84.0, you can use the the PHP tracer's API to track user events.
+Starting in dd-trace-php v0.84.0, you can use the PHP tracer's API to track user events.
 
 The following examples show how to track login events or custom events (using signup as an example).
 
@@ -558,7 +558,7 @@ The following examples show how to track login events or custom events (using si
 
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
-Starting in dd-trace-js v3.13.1, you can use the the NodeJS tracer's API to track user events.
+Starting in dd-trace-js v3.13.1, you can use the NodeJS tracer's API to track user events.
 
 The following examples show how to track login events or custom events (using signup as an example).
 
@@ -612,7 +612,7 @@ tracer.appsec.trackCustomEvent(eventName, metadata)
 
 {{< programming-lang lang="python" >}}
 
-Starting in dd-trace-py v1.9.0, you can use the the Python tracer's API to track user events.
+Starting in dd-trace-py v1.9.0, you can use the Python tracer's API to track user events.
 
 The following examples show how to track login events or custom events (using signup as an example).
 
