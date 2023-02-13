@@ -17251,9 +17251,19 @@ components:
             over all hours in the current month for all organizations.
           format: int64
           type: integer
+        cloud_cost_management_host_count_avg:
+          description: Host count average of Cloud Cost Management for the given date
+            and given organization.
+          format: int64
+          type: integer
         container_avg:
           description: Shows the average of all distinct containers over all hours
             in the current date for all organizations.
+          format: int64
+          type: integer
+        container_excl_agent_avg:
+          description: Shows the average of containers without the Datadog Agent over
+            all hours in the current date for all organizations.
           format: int64
           type: integer
         container_hwm:
@@ -17630,6 +17640,11 @@ components:
         container_avg:
           description: Shows the average of all distinct containers over all hours
             in the current date for the given org.
+          format: int64
+          type: integer
+        container_excl_agent_avg:
+          description: Shows the average of containers without the Datadog Agent over
+            all hours in the current date for the given organization.
           format: int64
           type: integer
         container_hwm:
@@ -18014,6 +18029,11 @@ components:
         container_avg_sum:
           description: Shows the average of all distinct containers over all hours
             in the current months for all organizations.
+          format: int64
+          type: integer
+        container_excl_agent_avg_sum:
+          description: Shows the average of the containers without the Datadog Agent
+            over all hours in the current month for all organizations.
           format: int64
           type: integer
         container_hwm_sum:
