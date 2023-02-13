@@ -3,7 +3,8 @@ title: Reference
 disable_toc: true
 disable_sidebar: true
 type: reference
-external_redirect: /observability_pipelines/reference/sources/
+_build:
+  render: false
 cascade:
   disable_toc: false
   disable_sidebar: false
