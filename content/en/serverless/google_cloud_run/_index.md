@@ -214,10 +214,10 @@ Build your application by running the following command:
 
 **Note**: Not compatible with Alpine.
 
-### 2. Datadog Agent configuration
+### 2. Configure your application
 
 Once the container is built and pushed to your registry, the last step is to set the required environment variables for the  Datadog Agent:
-- `DD_API_KEY`: Datadog API key, used to send data to your Datadog account. It should be configured as a GCP Secret for privacy and safety issue.
+- `DD_API_KEY`: Datadog API key, used to send data to your Datadog account. It should be configured as a [GCP Secret][13] for privacy and safety issue.
 - `DD_SITE`: Datadog endpoint and website. Select your site on the right side of this page. Your site is: {{< region-param key="dd_site" code="true" >}}.
 - `DD_TRACE_ENABLED`: set to `true` to enable tracing
 
@@ -237,7 +237,7 @@ gcloud run deploy APP_NAME --image=gcr.io/YOUR_PROJECT/APP_NAME \
 
 ### 3. Results
 
-Once the deploy is completed, your metrics and traces are sent to Datadog. In Datadog, navigate to **Infrastructure->Serverless** to see your serverless metrics and traces.
+Once the deployment is completed, your metrics and traces are sent to Datadog. In Datadog, navigate to **Infrastructure->Serverless** to see your serverless metrics and traces.
 
 ## Additional configurations
 
@@ -306,3 +306,5 @@ RUN apt-get update && apt-get install -y ca-certificates
 [11]: https://cloud.google.com/run/docs/deploying.
 
 [12]: https://github.com/DataDog/crpb/tree/main
+
+[13]: https://cloud.google.com/run/docs/configuring/secrets
