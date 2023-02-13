@@ -7,50 +7,49 @@ private: true
 
 ## Overview
 
-Dynamic instrumentation allows you to add probes to your production systems at any point in your code, even in third-party libraries. Dynamic Instrumentation has low overhead and is guaranteed to have no side effects on your system.
+Dynamic instrumentation allows you to add probes to your production systems at any location in your application's code, including third-party libraries. Dynamic Instrumentation has low overhead and is guaranteed to have no side effects on your system.
 
 ## Probe types
 
-You can create *snapshot probes* and *metric probes*.
+You can create *log probes* and *metric probes*.
 
-### Snapshot probes
+### Log probes
 
-Snapshot probes capture the context of a method or line, including:
+Log probes are enabled by default on all service instances that match the desired environment and version. They are rate limited to 5000 logs/s.
 
-  - **Method arguments**, **local variables**, and **fields**, with the following limits:
-    - Three levels deep of class objects.
+If you enable `Capture method parameters and local variables` on the log probe, Dynamic Instrumentation will add the following data to the log event:
+  - **Method arguments**, **local variables**, and **fields**, with the following limits by default:
+    - Follow references three levels deep (configurable in the UI).
     - The first 100 items inside collections.
-    - 255 characters for string values.
-    - 20 collected fields in an object. Static fields are not collected.
+    - The first 255 characters for string values.
+    - 20 fields inside objects. Static fields are not collected.
   - Call **stack trace**.
   - Caught and uncaught **exceptions**.
 
-Snapshot probes are rate limited to one snapshot per second. 
+Since capturing snapshots is a more performance intensive operation, by default it is only enabled on one instance of your service that matches the desired environment and version. Probes with snapshot capture are rate limited to execute once every second.
 
 **Note**: The capture limits are configurable and subject to change while Dynamic Instrumentation is in beta.
 
 ### Metric probes
 
-Metric probes generate a dynamic metric. They use any argument, local variable, or field as a metric value. Metric probes are not rate limited and are invoked every time the method or line is invoked.
+Metric probes are enabled by default on all service instances that match the desired environment and version. Metric probes are not rate limited and execute every time the method or line is invoked.
 
-Dynamic metric probes support the following metric types:
+Dynamic Instrumentation metric probes support the following metric types:
 
-- [**Count**][1]: Counts how many times a given method or line is executed. Can be combined with [metric expressions](#metric-expressions) to count the values of a variable.
-- [**Gauge**][2]: Generates a gauge based on the last value of a variable. This metric requires a [metric expression](#metric-expressions).
-- [**Histogram**][3]: Generates a statistical distribution of a variable. This metric requires a [metric expression](#metric-expressions).
+- [**Count**][1]: Counts how many times a given method or line is executed. Can be combined with [metric expressions](#dynamic-Instrumentation-expression-language) to use the value of a variable to increment the count.
+- [**Gauge**][2]: Generates a gauge based on the last value of a variable. This metric requires a [metric expression](#dynamic-Instrumentation-expression-language).
+- [**Histogram**][3]: Generates a statistical distribution of a variable. This metric requires a [metric expression](#dynamic-Instrumentation-expression-language).
 
 
-#### Metric expressions
+#### Dynamic Instrumentation expression language
 
-Metric expression can be use generate dynamic metrics. For example, you can create an histogram for the size of a file by using a reference expression like `#file.content.size`.
+The dynamic instrumentation expression language is used in log message templates, metric expressions and probe conditions.
 
-The first part of the reference expression is a prefix that indicates the variable source:
+For example, you can create a histogram from the size of a collection using `count(myCollection)` as the metric expression. Metric expressions must evaluate to a number.
 
-- `.` (period) - to access fields of the local class
-- `#` (hash) - to access local variables
-- `^` (caret) - to access method arguments
+In log templates, expressions are delimited from the static parts of the template with brackets, for example: `User name {user.name}`. Log template expressions can evaluate to any value. If evaluating the expression fails, it will be replaced with `UNDEFINED`.
 
-You can use multiple reference segments to access inner fields. Metric expressions can only access fields (public or private) of an object. If the field in a reference expression doesn't exists or returns null, the reference path terminates.
+Probe conditions must evaluate to a boolean, for example: `startsWith(user.name, "abc")`, `len(str) > 20` or `a == b`.
 
 [1]: /metrics/types/?tab=count#metric-types
 [2]: /metrics/types/?tab=gauge#metric-types
