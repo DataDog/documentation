@@ -348,6 +348,10 @@ main:
     url: agent/troubleshooting/config
     weight: 1111
     parent: agent_troubleshooting
+  - name: High CPU or Memory Consumption
+    url: agent/troubleshooting/high_memory_usage/
+    weight: 1112
+    parent: agent_troubleshooting
   - name: Guides
     url: agent/guide/
     identifier: agent_guides
@@ -2384,8 +2388,8 @@ main:
     url: logs/explorer/facets/
     parent: log_explorer
     weight: 504
-  - name: Group
-    url: logs/explorer/group/
+  - name: Analytics
+    url: logs/explorer/analytics/
     parent: log_explorer
     weight: 505
   - name: Visualize

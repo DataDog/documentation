@@ -25,33 +25,44 @@ For more details about creating, getting, and deleting service definitions, see 
 
 The Service Definition Schema is a structure that contains basic information about a service. See the [full schema on GitHub][4].
 
-| Field                       |   Description      |Type  | Required |
-| --------------------------- | --------------- | ------------------------------------------------------- | -------- |
-| schema-version&nbsp;[_required_] | string          | Version of the service definition schema being used. Only value `v2` is supported.| yes |
-| dd-service&nbsp;[_required_]     | string          | Unique identifier of the service. Must be unique across all services, and used to match with a service in Datadog. | yes |
-| team                        | string          | Name of the team responsible for the service. | yes |
 
 #### Example
 {{< code-block lang="yaml" filename="service.definition.yaml" collapsible="true" >}}
 schema-version: v2
-dd-service: shopping-cart
-team: E-Commerce Team
-{{< /code-block >}}
-
-#### Contacts (Optional)
-| Field                       |   Description     |  Type| Required |
-| --------------------------- | --------------- | ------------------------------------------------------- | -------- |
-| Type | Contact type          | string| yes |
-| name | Contact name          | string| no |
-| contact | Contact value       | string| yes |
-
-#### Example
-{{< code-block lang="yaml" filename="service.definition.yaml" collapsible="true" >}}
+dd-service: web-store
+team: shopist
 contacts:
   - type: slack
-    contact: http://slack/e-commerce
-  - type: email 
-    contact: ecommerce@example.com  
+    contact: https://exampleincidents.slack.com/archives/C01EWN6319S
+links:
+  - name: Demo Dashboard
+    type: dashboard
+    url: https://app.examplehq.com/dashboard/krp-bq6-362
+  - name: Common Operations
+    type: runbook
+    url: https://examplehq.atlassian.net/wiki/
+  - name: Disabling Deployments
+    type: runbook
+    url: https://examplehq.atlassian.net/wiki/
+  - name: Rolling Back Deployments
+    type: runbook
+    url: https://examplehq.atlassian.net/wiki/
+repos:
+  - name: Source
+    provider: github
+    url: https://github.com/Example/shopist/tree/prod/rails-storefront
+  - name: Deployment
+    provider: github
+    url: https://github.com/Example/shopist/blob/prod/k8s/dd-trace-demo/templates/rails-storefront-deployment.yaml
+docs:
+  - name: Deployment Information
+    provider: link
+    url: https://docs.datadoghq.com/
+  - name: Service Documentation
+    provider: link
+    url: https://docs.datadoghq.com/
+tags: []
+integrations:
 External Resources (Optional)
 {{< /code-block >}}
 

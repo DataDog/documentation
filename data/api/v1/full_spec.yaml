@@ -3815,6 +3815,7 @@ components:
       - appsec_fargate_usage
       - appsec_usage
       - browser_usage
+      - container_excl_agent_usage
       - container_usage
       - cspm_containers_usage
       - cspm_hosts_usage
@@ -3836,7 +3837,6 @@ components:
       - profiled_host_usage
       - snmp_usage
       - estimated_rum_sessions_usage
-      - cont_usage
       type: string
       x-enum-varnames:
       - API_USAGE
@@ -3845,6 +3845,7 @@ components:
       - APPSEC_FARGATE_USAGE
       - APPSEC_USAGE
       - BROWSER_USAGE
+      - CONTAINER_EXCL_AGENT_USAGE
       - CONTAINER_USAGE
       - CSPM_CONTAINERS_USAGE
       - CSPM_HOSTS_USAGE
@@ -3866,7 +3867,6 @@ components:
       - PROFILED_HOST_USAGE
       - SNMP_USAGE
       - ESTIMATED_RUM_SESSIONS_USAGE
-      - CONT_USAGE
     IFrameWidgetDefinition:
       description: The iframe widget allows you to embed a portion of any other web
         page on your dashboard. Only available on FREE layout dashboards.
@@ -3940,6 +3940,22 @@ components:
       type: object
     IPPrefixesLogs:
       description: Available prefix information for the Logs endpoints.
+      properties:
+        prefixes_ipv4:
+          description: List of IPv4 prefixes.
+          items:
+            description: IPv4 prefix
+            type: string
+          type: array
+        prefixes_ipv6:
+          description: List of IPv6 prefixes.
+          items:
+            description: IPv6 prefix
+            type: string
+          type: array
+      type: object
+    IPPrefixesOrchestrator:
+      description: Available prefix information for the Orchestrator endpoints.
       properties:
         prefixes_ipv4:
           description: List of IPv4 prefixes.
@@ -4052,6 +4068,8 @@ components:
           description: Date when last updated, in the form `YYYY-MM-DD-hh-mm-ss`.
           example: 2019-10-31-20-00-00
           type: string
+        orchestrator:
+          $ref: '#/components/schemas/IPPrefixesOrchestrator'
         process:
           $ref: '#/components/schemas/IPPrefixesProcess'
         synthetics:
@@ -4241,6 +4259,8 @@ components:
           type: array
         data_source:
           $ref: '#/components/schemas/ListStreamSource'
+        event_size:
+          $ref: '#/components/schemas/WidgetEventSize'
         group_by:
           description: Group by configuration for the List Stream Widget. Group by
             can be used only with logs_pattern_stream (up to 3 items) or logs_transaction_stream
@@ -4285,6 +4305,7 @@ components:
       - apm_issue_stream
       - logs_pattern_stream
       - logs_transaction_stream
+      - event_stream
       example: apm_issue_stream
       type: string
       x-enum-varnames:
@@ -4294,6 +4315,7 @@ components:
       - APM_ISSUE_STREAM
       - LOGS_PATTERN_STREAM
       - LOGS_TRANSACTION_STREAM
+      - EVENT_STREAM
     ListStreamWidgetDefinition:
       description: 'The list stream visualization displays a table of recent events
         in your application that
@@ -7247,6 +7269,8 @@ components:
       - appsec_percentage
       - browser_usage
       - browser_percentage
+      - container_excl_agent_usage
+      - container_excl_agent_percentage
       - container_usage
       - container_percentage
       - cspm_containers_percentage
@@ -7289,8 +7313,6 @@ components:
       - snmp_percentage
       - estimated_rum_sessions_usage
       - estimated_rum_sessions_percentage
-      - cont_usage
-      - cont_percentage
       - '*'
       type: string
       x-enum-varnames:
@@ -7306,6 +7328,8 @@ components:
       - APPSEC_PERCENTAGE
       - BROWSER_USAGE
       - BROWSER_PERCENTAGE
+      - CONTAINER_EXCL_AGENT_USAGE
+      - CONTAINER_EXCL_AGENT_PERCENTAGE
       - CONTAINER_USAGE
       - CONTAINER_PERCENTAGE
       - CSPM_CONTAINERS_PERCENTAGE
@@ -7348,8 +7372,6 @@ components:
       - SNMP_PERCENTAGE
       - ESTIMATED_RUM_SESSIONS_USAGE
       - ESTIMATED_RUM_SESSIONS_PERCENTAGE
-      - CONT_USAGE
-      - CONT_PERCENTAGE
       - ALL
     MonthlyUsageAttributionValues:
       description: Fields in Usage Summary by tag(s).
@@ -7405,12 +7427,12 @@ components:
           description: The synthetic browser test usage by tag(s).
           format: double
           type: number
-        cont_percentage:
+        container_excl_agent_percentage:
           description: The percentage of container usage without the Datadog Agent
             by tag(s).
           format: double
           type: number
-        cont_usage:
+        container_excl_agent_usage:
           description: The container usage without the Datadog Agent by tag(s).
           format: double
           type: number
@@ -7481,52 +7503,42 @@ components:
           type: number
         estimated_indexed_logs_percentage:
           description: The percentage of estimated live indexed logs usage by tag(s).
-            This field is in private beta.
           format: double
           type: number
         estimated_indexed_logs_usage:
-          description: The estimated live indexed logs usage by tag(s). This field
-            is in private beta.
+          description: The estimated live indexed logs usage by tag(s).
           format: double
           type: number
         estimated_indexed_spans_percentage:
           description: The percentage of estimated indexed spans usage by tag(s).
-            This field is in private beta.
           format: double
           type: number
         estimated_indexed_spans_usage:
-          description: The estimated indexed spans usage by tag(s). This field is
-            in private beta.
+          description: The estimated indexed spans usage by tag(s).
           format: double
           type: number
         estimated_ingested_logs_percentage:
           description: The percentage of estimated live ingested logs usage by tag(s).
-            This field is in private beta.
           format: double
           type: number
         estimated_ingested_logs_usage:
-          description: The estimated live ingested logs usage by tag(s). This field
-            is in private beta.
+          description: The estimated live ingested logs usage by tag(s).
           format: double
           type: number
         estimated_ingested_spans_percentage:
           description: The percentage of estimated ingested spans usage by tag(s).
-            This field is in private beta.
           format: double
           type: number
         estimated_ingested_spans_usage:
-          description: The estimated ingested spans usage by tag(s). This field is
-            in private beta.
+          description: The estimated ingested spans usage by tag(s).
           format: double
           type: number
         estimated_rum_sessions_percentage:
-          description: The percentage of estimated rum sessions usage by tag(s). This
-            field is in private beta.
+          description: The percentage of estimated rum sessions usage by tag(s).
           format: double
           type: number
         estimated_rum_sessions_usage:
-          description: The estimated rum sessions usage by tag(s). This field is in
-            private beta.
+          description: The estimated rum sessions usage by tag(s).
           format: double
           type: number
         fargate_percentage:
@@ -15702,52 +15714,42 @@ components:
           type: number
         estimated_indexed_logs_percentage:
           description: The percentage of estimated live indexed logs usage by tag(s).
-            Note this field is in private beta.
           format: double
           type: number
         estimated_indexed_logs_usage:
-          description: The estimated live indexed logs usage by tag(s). Note this
-            field is in private beta.
+          description: The estimated live indexed logs usage by tag(s).
           format: double
           type: number
         estimated_indexed_spans_percentage:
           description: The percentage of estimated indexed spans usage by tag(s).
-            Note this field is in private beta.
           format: double
           type: number
         estimated_indexed_spans_usage:
-          description: The estimated indexed spans usage by tag(s). Note this field
-            is in private beta.
+          description: The estimated indexed spans usage by tag(s).
           format: double
           type: number
         estimated_ingested_logs_percentage:
           description: The percentage of estimated live ingested logs usage by tag(s).
-            Note this field is in private beta.
           format: double
           type: number
         estimated_ingested_logs_usage:
-          description: The estimated live ingested logs usage by tag(s). Note this
-            field is in private beta.
+          description: The estimated live ingested logs usage by tag(s).
           format: double
           type: number
         estimated_ingested_spans_percentage:
           description: The percentage of estimated ingested spans usage by tag(s).
-            Note this field is in private beta.
           format: double
           type: number
         estimated_ingested_spans_usage:
-          description: The estimated ingested spans usage by tag(s). Note this field
-            is in private beta.
+          description: The estimated ingested spans usage by tag(s).
           format: double
           type: number
         estimated_rum_sessions_percentage:
-          description: The percentage of estimated rum sessions usage by tag(s). This
-            field is in private beta.
+          description: The percentage of estimated rum sessions usage by tag(s).
           format: double
           type: number
         estimated_rum_sessions_usage:
-          description: The estimated rum sessions usage by tag(s). This field is in
-            private beta.
+          description: The estimated rum sessions usage by tag(s).
           format: double
           type: number
         infra_host_percentage:
@@ -17620,6 +17622,11 @@ components:
             over all hours in the current date for the given org.
           format: int64
           type: integer
+        cloud_cost_management_host_count_avg:
+          description: Host count average of Cloud Cost Management for the given date
+            and given org.
+          format: int64
+          type: integer
         container_avg:
           description: Shows the average of all distinct containers over all hours
             in the current date for the given org.
@@ -17998,6 +18005,10 @@ components:
         ci_visibility_test_committers_hwm_sum:
           description: Shows the high-water mark of all CI visibility test committers
             over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        cloud_cost_management_host_count_avg_sum:
+          description: Sum of the host count average for Cloud Cost Management.
           format: int64
           type: integer
         container_avg_sum:

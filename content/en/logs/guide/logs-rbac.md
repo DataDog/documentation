@@ -1,5 +1,5 @@
 ---
-title: How to set up RBAC for Logs
+title: How to Set Up RBAC for Logs
 aliases:
   - /logs/guide/restrict-access-to-log-events-with-restriction-queries
 kind: guide
