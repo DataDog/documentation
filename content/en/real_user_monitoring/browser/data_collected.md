@@ -115,12 +115,12 @@ The following attributes are related to the geo-location of IP addresses:
 
 In addition to default attributes, you can add user-related data to all RUM event types by [identifying user sessions][5]. This lets you follow the journey of a given user, figure out which users are the most impacted by errors, and monitor performance for your most important users.
 
-### Feature Flag attributes
+### Feature flag attributes
 
-You can [enrich your RUM event data with feature flags][16] to get visibility into performance monitoring. This lets you determine which users are shown a user experience and if it is negatively affecting the user’s performance. 
+You can [enrich your RUM event data with feature flags][16] to get visibility into performance monitoring. This lets you determine which users are shown a specific user experience and if it is negatively affecting the user’s performance. 
 
 {{< callout btn_hidden="true" header="Join the Feature Flag Tracking Beta!">}}
-Feature Flag Tracking is currently in private beta. To request access, contact Support at support@datadoghq.com.
+Feature Flag Tracking is in private beta. To request access, contact Datadog Support at support@datadoghq.com.
 {{< /callout >}}
 
 ## Event-specific metrics and attributes

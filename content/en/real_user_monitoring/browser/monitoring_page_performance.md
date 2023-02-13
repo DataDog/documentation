@@ -20,7 +20,7 @@ further_reading:
 ---
 
 {{< callout btn_hidden="true" header="Join the Feature Flag Tracking Beta!">}}
-Enrich your RUM data with feature flags to get visibility into performance monitoring. Feature Flag Tracking is currently in private beta. To request access, contact Support at support@datadoghq.com.
+Enrich your RUM data with feature flags to get visibility into performance monitoring. Feature Flag Tracking is in private beta. To request access, contact Datadog Support at support@datadoghq.com.
 {{< /callout >}}
 
 ## Overview
