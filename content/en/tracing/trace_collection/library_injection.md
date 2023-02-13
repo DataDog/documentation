@@ -201,7 +201,7 @@ When both the Agent and your services are running on a host, real or virtual, Da
 
 - A recent [Datadog Agent v7][1] installation 
 
-**Note**: Injection on arm64 is not supported. Injection with `musl` on Alpine Linux container images is untested.
+**Note**: Injection on arm64, and injection with `musl` on Alpine Linux container images are not supported.
 ## Install the preload library
 
 **For Ubuntu, Debian or other Debian-based Linux distributions:**
@@ -223,7 +223,9 @@ When both the Agent and your services are running on a host, real or virtual, Da
    ```
    where `<LANG>` is one of `java`, `js`, `dotnet`, or `all`.
 
-3. Exit and open a new shell to use the preload library.
+3. Run the command `dd-host-install`.
+
+4. Exit and open a new shell to use the preload library.
 
 **For CentOS, RedHat, or another distribution that uses yum/RPM:**
 
@@ -239,14 +241,16 @@ When both the Agent and your services are running on a host, real or virtual, Da
    ```
    **Note**: Due to a [bug in dnf][5], on RedHat/CentOS 8.1 set `repo_gpgcheck=0` instead of `1`.
 
-2. Update install the library:
+2. Update the yum cache and install the library:
    ```sh
    sudo yum makecache
    sudo yum install datadog-apm-inject datadog-apm-library-<LANG>
    ```
    where `<LANG>` is one of `java`, `js`, `dotnet`, or `all`.
 
-3. Exit and open a new shell to use the preload library.
+3. Run the command `dd-host-install`.
+
+4. Exit and open a new shell to use the preload library.
 
 ## Install the language and your app
 
@@ -268,6 +272,18 @@ When both the Agent and your services are running on a host, real or virtual, Da
 The following environment variables configure library injection. You can pass these in by `export` through the command line (`export DD_CONFIG_SOURCES=BASIC`), shell configuration, or launch command:
 
 
+`DD_CONFIG_SOURCES`
+: Turn on or off library injection and specify a location to load configuration from. Optionally, separate multiple values with semicolons to indicate multiple possible locations. The first value that returns without an error is used. Configuration is not merged across configuration sources. The valid values are:
+  - `BLOB:<URL>` - Load configuration from a blob store (S3-compatible) located at `<URL>`.
+  - `LOCAL:<PATH>` - Load from a file on the local file system at `<PATH>`.
+  - `BASIC` - Use exported or default values.
+  - `OFF` - Default. No injection performed.<br>
+For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-host).
+
+`DD_LIBRARY_INJECT`
+: Set to `FALSE` to turn off library injection altogether.<br>
+**Default**: `TRUE`
+
 `DD_INJECT_DEBUG`
 : Set to `TRUE` or `1` to log debug information.<br>
 **Default**: `FALSE`
@@ -276,13 +292,10 @@ The following environment variables configure library injection. You can pass th
 : A comma-separated list of places to write the debug logs.<br>
 **Default**: `stderr`
 
-`DD_CONFIG_SOURCES`
-: Specifies a location to load configuration from. Optionally, separate multiple values with semicolons to indicate multiple possible locations. The first value that returns without an error is used. Configuration is not merged across configuration sources. The valid values are:
-  - `BLOB:<URL>` - Load configuration from a blob store (S3-compatible) located at `<URL>`.
-  - `LOCAL:<PATH>` - Load from a file on the local file system at `<PATH>`.
-  - `BASIC` - Use exported or default values.
-  - `OFF` - Default. No injection performed.<br>
-  
+<a id="supplying-configuration-source-host">
+
+### Supplying configuration source 
+
 If you specify `BLOB` or `LOCAL` configuration source, create a JSON or YAML file at `etc/<APP_NAME>/config.json` or `.yaml`, and provide the configuration either as JSON:
 
 ```json
@@ -402,7 +415,7 @@ Exercise your application to start generating telemetry data, which you can see 
 <div class="alert alert-info">Tracing library injection on hosts and containers is in beta.</a></div>
 
 
-When your Agent is running on a host, and your services are running in containers, Datadog injects the tracing library by using a preload library that overrides calls to `execve`, intercepts container creation, and configures the initial process launched in a Docker container.
+When your Agent is running on a host, and your services are running in containers, Datadog injects the tracing library by intercepting container creation and configuring the Docker container.
 
 Any newly started processes are intercepted and the specified instrumentation library is injected into the services.
 
@@ -411,7 +424,7 @@ Any newly started processes are intercepted and the specified instrumentation li
 - A recent [Datadog Agent v7][1] installation 
 - [Docker Engine][2]
 
-**Note**: Injection on arm64 is not supported. Injection with `musl` on Alpine Linux container images is untested.
+**Note**: Injection on arm64, and injection with `musl` on Alpine Linux container images are not supported.
 
 ## Install the preload library
 
@@ -434,7 +447,7 @@ Any newly started processes are intercepted and the specified instrumentation li
    ```
    where `<LANG>` is one of `java`, `js`, `dotnet`, or `all`.
 
-3. Exit and open a new shell to use the preload library.
+3. Run the command `dd-host-container-install`.
 
 **For CentOS, RedHat, or another distribution that uses yum/RPM:**
 
@@ -450,14 +463,14 @@ Any newly started processes are intercepted and the specified instrumentation li
    ```
    **Note**: Due to a [bug in dnf][5], on RedHat/CentOS 8.1 set `repo_gpgcheck=0` instead of `1`.
 
-2. Update install the library:
+2. Update the yum cache and install the library:
    ```sh
    sudo yum makecache
    sudo yum install datadog-apm-inject datadog-apm-library-<LANG>
    ```
    where `<LANG>` is one of `java`, `js`, `dotnet`, or `all`.
 
-3. Exit and open a new shell to use the preload library.
+3. Run the command `dd-host-container-install`.
 
 ## Configure Docker injection
 
@@ -465,15 +478,23 @@ Edit `/etc/datadog-agent/inject/docker_config.yaml` and add the following YAML c
 
 ```yaml
 ---
-auto_inject: true
+config_sources: BASIC
+library_inject: true
 log_level: debug
 output_paths:
 - stderr
-config_sources: BASIC
 ```
 
-`auto_inject`
-: Set to `true` to enable injection, `false` to disable it.<br> 
+`config_sources`
+: Turn on or off library injection and specify a semicolon-separated ordered list of places where configuration is stored. The first value that returns without an error is used. Configuration is not merged across configuration sources. The valid values are:
+  - `BLOB:<URL>` - Load configuration from a blob store (S3-compatible) located at `<URL>`.
+  - `LOCAL:<PATH>` - Load from a file on the local file system at `<PATH>`.
+  - `BASIC` - Uses a default set of properties and stops looking for additional configurations.
+  - `OFF` - Default. No injection performed.<br>
+For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-hc).
+
+`library_inject`
+: Set to `false` to disable library injection altogether.<br> 
 **Default**: `true`
 
 `log_level`
@@ -483,16 +504,13 @@ config_sources: BASIC
 : A list of one or more places to write logs.<br>
 **Default**: `stderr`
 
-`config_sources`
-: A semicolon-separated ordered list of places where configuration is stored. The first value that returns without an error is used. Configuration is not merged across configuration sources. The valid values are:
-  - `BLOB:<URL>` - Load configuration from a blob store (S3-compatible) located at `<URL>`.
-  - `LOCAL:<PATH>` - Load from a file on the local file system at `<PATH>`.
-  - `BASIC` - Uses a default set of properties and stops looking for additional configurations.
-  - `OFF` - Default. No injection performed.
-
 Optional: `env`
 : Specifies the `DD_ENV` tag for the containers running in Docker, for example, `dev`, `prod`, `staging`. <br>
 **Default** None.
+
+<a id="supplying-configuration-source-hc">
+
+### Supplying configuration source
 
 If you specify `BLOB` or `LOCAL` configuration source, create a JSON or YAML file there, and provide the configuration either as JSON:
 
@@ -598,11 +616,11 @@ Exercise your application to start generating telemetry data, which you can see 
 
 {{% /tab %}}
 
-{{% tab "Containers" %}}
+{{% tab "Agent and app in separate containers" %}}
 
 <div class="alert alert-info">Tracing library injection in containers is in beta.</a></div>
 
-When your Agent and services are running in Docker containers on the same host, Datadog injects the tracing library by using a preload library that overrides calls to `execve`, intercepts container creation, and configures the initial process launched in a Docker container.
+When your Agent and services are running in separate Docker containers on the same host, Datadog injects the tracing library by intercepting container creation and configuring the Docker container.
 
 Any newly started processes are intercepted and the specified instrumentation library is injected into the services.
 
@@ -610,7 +628,7 @@ Any newly started processes are intercepted and the specified instrumentation li
 
 - [Docker Engine][2]
 
-**Note**: Injection on arm64 is not supported. Injection with `musl` on Alpine Linux container images is untested.
+**Note**: Injection on arm64, and injection with `musl` on Alpine Linux container images are not supported.
 
 ## Install the preload library
 
@@ -633,7 +651,7 @@ Any newly started processes are intercepted and the specified instrumentation li
    ```
    where `<LANG>` is one of `java`, `js`, `dotnet`, or `all`.
 
-3. Exit and open a new shell to use the preload library.
+3. Run the command `dd-container-install`.
 
 **For CentOS, RedHat, or another distribution that uses yum/RPM:**
 
@@ -649,14 +667,14 @@ Any newly started processes are intercepted and the specified instrumentation li
    ```
    **Note**: Due to a [bug in dnf][5], on RedHat/CentOS 8.1 set `repo_gpgcheck=0` instead of `1`.
 
-2. Update install the library:
+2. Update the yum cache and install the library:
    ```sh
    sudo yum makecache
    sudo yum install datadog-apm-inject datadog-apm-library-<LANG>
    ```
    where `<LANG>` is one of `java`, `js`, `dotnet`, or `all`.
 
-3. Exit and open a new shell to use the preload library.
+3. Run the command `dd-container-install`.
 
 ## Configure Docker injection
 
@@ -664,15 +682,23 @@ Edit `/etc/datadog-agent/inject/docker_config.yaml` and add the following YAML c
 
 ```yaml
 ---
-auto_inject: true
+library_inject: true
 log_level: debug
 output_paths:
 - stderr
 config_sources: BASIC
 ```
 
-`auto_inject`
-: Set to `true` to enable injection, `false` to disable it.<br> 
+`config_sources`
+: Turn on or off library injection and specify a semicolon-separated ordered list of places where configuration is stored. The first value that returns without an error is used. Configuration is not merged across configuration sources. The valid values are:
+  - `BLOB:<URL>` - Load configuration from a blob store (S3-compatible) located at `<URL>`.
+  - `LOCAL:<PATH>` - Load from a file on the local file system at `<PATH>`.
+  - `BASIC` - Uses a default set of properties and stops looking for additional configurations.
+  - `OFF` - Default. No injection performed.
+For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-c).
+
+`library_inject`
+: Set to `false` to disable library injection altogether.<br> 
 **Default**: `true`
 
 `log_level`
@@ -682,16 +708,13 @@ config_sources: BASIC
 : A list of one or more places to write logs.<br>
 **Default**: `stderr`
 
-`config_sources`
-: A semicolon-separated ordered list of places where configuration is stored. The first value that returns without an error is used. Configuration is not merged across configuration sources. The valid values are:
-  - `BLOB:<URL>` - Load configuration from a blob store (S3-compatible) located at `<URL>`.
-  - `LOCAL:<PATH>` - Load from a file on the local file system at `<PATH>`.
-  - `BASIC` - Uses a default set of properties and stops looking for additional configurations.
-  - `OFF` - Default. No injection performed.
-
 Optional: `env`
 : Specifies the `DD_ENV` tag for the containers running in Docker, for example, `dev`, `prod`, `staging`. <br>
 **Default** None.
+
+<a id="supplying-configuration-source-c">
+
+### Supplying configuration source 
 
 If you specify `BLOB` or `LOCAL` configuration source, create a JSON or YAML file there, and provide the configuration either as JSON:
 
