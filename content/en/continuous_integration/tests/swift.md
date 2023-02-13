@@ -106,7 +106,7 @@ end
 
 If you use GitHub, you can use the [Swift test action][1] from GitHub Marketplace to automatically configure and run your tests. By default, the rest of the configuration described on this page can be skipped (except the configuration of the action itself), but you can use the configuration environment variables for disabling or configuring additional functionality.
 
-This option has the benefit that no code changes are needed but has the drawback that it is less flexible to configure and run.
+Compared to other methods, such as Cocoapods and Framework linking, the Swift test action option may be less flexible to configure and run, but requires no code changes.
 
 [1]: https://github.com/marketplace/actions/swift-test-action-for-datadog
 {{% /tab %}}
