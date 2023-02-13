@@ -278,7 +278,7 @@ def view():
 {{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
 {{< programming-lang lang="java" >}}
 
-Starting in dd-trace-java v 1.8.0, you can use the the Java tracer's API to track user events. 
+Starting in dd-trace-java v1.8.0, you can use the the Java tracer's API to track user events. 
 
 The following examples show how to track login events or custom events (using signup as an example).
 
@@ -365,12 +365,13 @@ public class LoginController {
 {{< /programming-lang >}}
 
 {{< programming-lang lang="dotnet" >}}
-Use the the .NET tracer's API to track user events, released in dd-trace-dotnet v2.23.0. 
 
-The example below shows how to track login events, as well as custom events (using signup as an example)
+Starting in dd-trace-dotnet v2.23.0, you can use the the .NET tracer's API to track user events. 
+
+The following examples show how to track login events or custom events (using signup as an example).
 
 {{< tabs >}}
-{{% tab "login success" %}}
+{{% tab "Login success" %}}
 ```csharp
 using Datadog.Trace.AppSec;
 
@@ -388,7 +389,7 @@ void OnLogonSuccess(string userId, ...)
 
 ```
 {{% /tab %}}
-{{% tab "login failure" %}}
+{{% tab "Login failure" %}}
 ```csharp
 using Datadog.Trace.AppSec;
 
@@ -407,7 +408,7 @@ void OnLogonFailure(string userId, bool userExists, ...)
 
 {{% /tab %}}
 
-{{% tab "custom business logic" %}}
+{{% tab "Custom business logic" %}}
 ```csharp
 void OnUserSignupComplete(string userId, ...)
 {
@@ -429,11 +430,13 @@ void OnUserSignupComplete(string userId, ...)
 
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
-Use the the Go tracer's API to track user events, released in dd-trace-go v1.47.0. 
 
-The example below shows how to track login events, as well as custom events (using signup as an example)
+Starting in dd-trace-go v1.47.0, you can use the the Go tracer's API to track user events. 
+
+The following examples show how to track login events or custom events (using signup as an example).
+
 {{< tabs >}}
-{{% tab "login success" %}}
+{{% tab "Login success" %}}
 ```go
 import "gopkg.in/DataDog/dd-trace-go.v1/appsec"
 
@@ -450,7 +453,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 ```
 {{% /tab %}}
-{{% tab "login failure" %}}
+{{% tab "Login failure" %}}
 ```go
 import "gopkg.in/DataDog/dd-trace-go.v1/appsec"
 
@@ -462,7 +465,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 ```
 {{% /tab %}}
 
-{{% tab "custom business logic" %}}
+{{% tab "Custom business logic" %}}
 ```go
 import "gopkg.in/DataDog/dd-trace-go.v1/appsec"
 
@@ -479,12 +482,13 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
-Use the the Ruby tracer's API to track user events, released in dd-trace-rb v1.9.0. 
 
-The example below shows how to track login events, as well as custom events (using signup as an example)
+Starting in dd-trace-rb v1.9.0, you can use the the Ruby tracer's API to track user events.
+
+The following examples show how to track login events or custom events (using signup as an example).
 
 {{< tabs >}}
-{{% tab "login success" %}}
+{{% tab "Login success" %}}
 ```ruby
 require 'datadog/kit/appsec/events'
 
@@ -493,7 +497,7 @@ Datadog::Kit::AppSec::Events.track_login_success(trace, user: { id: 'my_user_id'
 ```
 {{% /tab %}}
 
-{{% tab "login failure" %}}
+{{% tab "Login failure" %}}
 ```ruby
 require 'datadog/kit/appsec/events'
 trace = Datadog::Tracing.active_trace
@@ -506,7 +510,7 @@ Datadog::Kit::AppSec::Events.track_login_failure(trace, user_id: 'my_user_id', u
 ```
 {{% /tab %}}
 
-{{% tab "custom business logic" %}}
+{{% tab "Custom business logic" %}}
 ```ruby
 require 'datadog/kit/appsec/events'
 trace = Datadog::Tracing.active_trace
@@ -520,11 +524,12 @@ Datadog::Kit::AppSec::Events.track('users.signup', trace)
 {{< /programming-lang >}}
 
 {{< programming-lang lang="php" >}}
-Use the the PHP tracer's API to track user events, released in dd-trace-php v0.84.0. 
+Starting in dd-trace-php v0.84.0, you can use the the PHP tracer's API to track user events.
 
-The example below shows how to track login events, as well as custom events (using signup as an example)
+The following examples show how to track login events or custom events (using signup as an example).
+
 {{< tabs >}}
-{{% tab "login success" %}}
+{{% tab "Login success" %}}
 ```php
 <?php
 \datadog\appsec\track_user_login_success_event($id, $exists, ['email' => $email])
@@ -532,7 +537,7 @@ The example below shows how to track login events, as well as custom events (usi
 ```
 {{% /tab %}}
 
-{{% tab "login failure" %}}
+{{% tab "Login failure" %}}
 ```php
 <?php
 \datadog\appsec\track_user_login_failure_event($id, ['email' => $email])
@@ -540,7 +545,7 @@ The example below shows how to track login events, as well as custom events (usi
 ```
 {{% /tab %}}
 
-{{% tab "custom business logic" %}}
+{{% tab "Custom business logic" %}}
 ```php
 <?php
 \datadog\appsec\track_custom_event(‘signup’, [‘id’ => $id, 'email' => $email]);
@@ -553,12 +558,12 @@ The example below shows how to track login events, as well as custom events (usi
 
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
-Use the the Node.js tracer's API to track user events, released in dd-trace-js v3.13.1. 
+Starting in dd-trace-js v3.13.1, you can use the the NodeJS tracer's API to track user events.
 
-The example below shows how to track login events, as well as custom events (using signup as an example)
+The following examples show how to track login events or custom events (using signup as an example).
 
 {{< tabs >}}
-{{% tab "login success" %}}
+{{% tab "Login success" %}}
 ```javascript
 const tracer = require('dd-trace')
 
@@ -574,7 +579,7 @@ tracer.appsec.trackUserLoginSuccessEvent(user, metadata) // metadata is optional
 ```
 {{% /tab %}}
 
-{{% tab "login failure" %}}
+{{% tab "Login failure" %}}
 ```javascript
 const tracer = require('dd-trace')
 
@@ -588,7 +593,7 @@ tracer.appsec.trackUserLoginFailureEvent(userId, userExists, metadata)
 ```
 {{% /tab %}}
 
-{{% tab "custom business logic" %}}
+{{% tab "Custom business logic" %}}
 ```javascript
 const tracer = require('dd-trace')
 
@@ -606,13 +611,14 @@ tracer.appsec.trackCustomEvent(eventName, metadata)
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python" >}}
-Use the the Python tracer's API to track user events, released in dd-trace-py v1.9.0. 
 
-The examples below shows how to track login events, as well as custom events (using signup as an example)
+Starting in dd-trace-py v1.9.0, you can use the the Python tracer's API to track user events.
+
+The following examples show how to track login events or custom events (using signup as an example).
 
 {{< tabs >}}
 
-{{% tab "login success" %}}
+{{% tab "Login success" %}}
 
 ```python
 from ddtrace.appsec.trace_utils import track_user_login_success_event
@@ -624,7 +630,7 @@ metadata = {"custom": "customvalue"}
 track_user_login_success_event(tracer, "userid", metadata)
 ```
 {{% /tab %}}
-{{% tab "login failure" %}}
+{{% tab "Login failure" %}}
 ```python
 from ddtrace.appsec.trace_utils import track_user_login_failure_event
 from ddtrace import tracer
@@ -635,7 +641,7 @@ track_user_login_failure_event(tracer, "userid", exists, metadata)
 ```
 {{% /tab %}}
 
-{{% tab "custom business logic" %}}
+{{% tab "Custom business logic" %}}
 ```python
 from ddtrace.appsec.trace_utils import track_custom_event
 from ddtrace import tracer
