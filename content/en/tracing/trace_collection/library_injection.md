@@ -272,7 +272,7 @@ For more information about configuring `BLOB` or `LOCAL` settings, see [Supplyin
 : A comma-separated list of places to write the debug logs.<br>
 **Default**: `stderr`
 
-<a id="supplying-configuration-source-host" />
+<a id="supplying-configuration-source-host"></a>
 
 ### Supplying configuration source 
 
@@ -466,7 +466,7 @@ Optional: `env`
 : Specifies the `DD_ENV` tag for the containers running in Docker, for example, `dev`, `prod`, `staging`. <br>
 **Default** None.
 
-<a id="supplying-configuration-source-hc" />
+<a id="supplying-configuration-source-hc"></a>
 
 ### Supplying configuration source
 
@@ -670,7 +670,7 @@ Optional: `env`
 : Specifies the `DD_ENV` tag for the containers running in Docker, for example, `dev`, `prod`, `staging`. <br>
 **Default** None.
 
-<a id="supplying-configuration-source-c" />
+<a id="supplying-configuration-source-c"></a>
 
 ### Supplying configuration source 
 
