@@ -62,14 +62,14 @@ The following profiling features are available in the following minimum versions
 
 ## Installation
 
+If you are already using Datadog, upgrade your Agent to version 7.20.2+ or 6.20.2+. As the profiler ships together with the tracer (beginning with Tracer v2.8.0), if you already have APM instrumented please move to section <a href="?tab=linux#enabling-the-proflier">Enabling the Profiler</a>.
+
+If not please continue in order to install the profiler using the following steps, depending on your operating system.
+
 <div class="alert alert-warning">
-  <strong>Note:</strong> Datadog's automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, Datadog's .NET Tracer with Profiler enabled). To ensure maximum visibility, run only one APM solution in your application environment.
-<br/><br/>Because APM tracing also relies on the CLR Profiling API, if you want to stop collecting .NET profiles but continue receiving .NET traces, set <code>DD_PROFILING_ENABLED=0</code> but keep <code>CORECLR_ENABLE_PROFILING=1</code>.
+  <strong>Note:</strong> Datadog's automatic instrumentation relies on the .NET CLR Profiling API. Since this API allows only one subscriber, run only one APM solution in your application environment.
 </div>
 
-If you are already using Datadog, upgrade your Agent to version [7.20.2][1]+ or [6.20.2][2]+. The profiler ships together with the tracer, so install it using the following steps, depending on your operating system.
-
-**Note:** The profiler ships with the tracer starting with version 2.8.0. If you're using an older version of the tracer, you need to upgrade first.
 
 You can install the Datadog .NET Profiler machine-wide so that all services on the machine can be instrumented, or you can install it on a per-application basis to allow developers to manage the instrumentation through the application's dependencies. To see machine-wide installation instructions, click the **Windows** or **Linux** tab. To see per-application installation instructions, click the **NuGet** tab.
 
@@ -125,10 +125,13 @@ To install the .NET Profiler per-application:
 {{< /tabs >}}
 
 <br>
+## Enabling the Profiler
+
 <div class="alert alert-info">
-  <strong>Note:</strong> The following steps include setting environment variables to enable the profiler. Datadog <strong>does not recommend</strong> setting those environment variables at machine-level. If set at machine-level, every .NET application running on the machine is profiled and this incurs a significant overhead on the CPU and memory of your machine.
+  <strong>Note:</strong> Datadog does not recommend enabling the profiler at machine-level or for all IIS applications. In the case it is enabled machine-wide, please refer to our <a href="/profiler/profiler_troubleshooting/?tab=linux&code-lang=dotnet">Troubleshooting Documentation</a> on how to reduce the overhead related to enabling the profiler for all system applications.
 </div>
 
+[1]: https://docs.datadoghq.com/profiler/profiler_troubleshooting/?tab=windows&code-lang=dotnet#high-cpu-usage-when-enabling-the-profiler
 {{< tabs >}}
 
 {{% tab "Linux" %}}
