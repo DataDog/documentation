@@ -156,7 +156,7 @@ An event is generated when the daily quota is reached:
 
 {{< img src="logs/indexes/index_quota_event.png" alt="index quota notification"  style="width:70%;">}}
 
-Follow our [Log Usage guide][20] to see how to monitor and alert on your usage.
+See [Monitor log usage][20] on how to monitor and alert on your usage.
 
 ## Further Reading
 
@@ -183,4 +183,4 @@ Follow our [Log Usage guide][20] to see how to monitor and alert on your usage.
 [17]: /logs/log_configuration/processors/#trace-remapper
 [18]: /logs/live_tail/#overview
 [19]: https://www.timeanddate.com/worldclock/converter.html
-[20]: /logs/guide/logs-monitors-on-volumes/#monitor-indexed-logs-with-fixed-threshold
+[20]: /logs/guide/best-practices-for-log-management/#monitor-log-usage

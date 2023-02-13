@@ -370,11 +370,7 @@ If you are using Jenkins workers, you can correlate pipelines with the infrastru
   * You can use fixed values or other environment variables as valid values.
 
 ```bash
-# Using fixed value
 export DD_CI_HOSTNAME=my-hostname
-
-# Using other environment variable
-export DD_CI_HOSTNAME=$HOSTNAME
 ```
 
 If you are using Kubernetes to manage your Jenkins instances, add the `DD_CI_HOSTNAME` environment variable to the [pod that executes the Jenkins job][9]. The value of this environment variable depends on what you are using in your Datadog Agent daemonset when reporting the infrastructure metrics.
