@@ -24,7 +24,7 @@ further_reading:
 
 You can trigger a workflow manually or automatically.
 
-While you run your Workflow, it can either run with the identity of the user who owns the Workflow or the identity of a service account associated to the Workflow.
+A workflow can either run with the identity of the user who owns it, or with the identity of a service account associated to the Workflow.
 For more information on service accounts, see [Service accounts for Workflows][1].
 
 ## Manually trigger a workflow
@@ -40,15 +40,14 @@ To trigger a workflow from a Dashboard, add the **Run Workflow** widget:
 1. From your Dashboard, click **Add Widget**.
 1. Search for `workflows` and add the **Run Workflow** widget.
 1. Under **Select the workflow**, find your workflow in the dropdown menu.
-1. In the second step, you will be asked to map template variables to the workflow input parameters if any.\
-_This will allow the values of the template variables to be mapped directly to the input parameters when you run the Workflow._
-1. Enter a title for the widget if you want and click **Save**
+1. Map dashboard template variables to workflow input parameters. This allows the values of your dashboard template variables to be mapped directly to the input parameters when you run the workflow.
+1. Enter a title for the widget and click **Save**.
 
 {{< img src="workflows/trigger-from-dashboard2.png" alt="Click Run Workflow to trigger a workflow from Dashboard widget." >}}
 
 To run the workflow:
 1. Click **Run Workflow** on your dashboard widget.
-1. Under **Execution parameters** any values selected in the template variables mapped to the input parameters will automatically be mapped. You can edit these inputs.
+1. Under **Execution parameters**, any template variables you mapped to workflow inputs are automatically populated. Enter the values for any unmapped execution parameters, or edit the existing values if needed. 
 1. Click **Run** to run the workflow.
 
 ## Trigger a workflow from a Monitor
