@@ -4,6 +4,16 @@ kind: documentation
 description: Describes the monitor creation page.
 aliases:
   - /monitors/create/configuration
+further_reading:
+- link: "/monitors/notify/"
+  tag: "Documentation"
+  text: "Monitor Notifications"
+- link: "/monitors/manage/"
+  tag: "Documentation"
+  text: "Manage monitors"
+- link: "/monitors/manage/status/"
+  tag: "Documentation"
+  text: "Monitor Status"
 ---
 
 ## Overview
@@ -275,6 +285,10 @@ If you configure tags or dimensions in your query, these values are available fo
 |-------------------------------------|------------------------|-----------------------|
 | _(everything)_                      | One single group triggering one notification | N/A |
 | 1&nbsp;or&nbsp;more&nbsp;dimensions | One notification if one or more groups meet the alert conditions | One notification per group meeting the alert conditions |
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /monitors/types
 [2]: /monitors/notify/variables/?tab=is_alert#tag-variables
