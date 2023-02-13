@@ -132,7 +132,8 @@ APM 用の構成コンテナを更新するには、`docker run` コマンドに
 docker run [...] -e DD_APPSEC_ENABLED=true [...] 
 ```
 
-   {{< /tabs >}}
+{{< /tabs >}}
+{{% tab "Dockerfile" %}}
 
 コンテナの Dockerfile に以下の環境変数の値を追加します。
 

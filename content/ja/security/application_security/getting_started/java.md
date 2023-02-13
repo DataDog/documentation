@@ -55,7 +55,8 @@ Docker、Kubernetes、AWS ECS、AWS Fargate で動作する Java アプリのア
 docker run [...] -e DD_APPSEC_ENABLED=true [...] 
 ```
 
-   {{< /tabs >}}
+{{< /tabs >}}
+{{% tab "Dockerfile" %}}
 
 コンテナの Dockerfile に以下の環境変数の値を追加します。
 
