@@ -17,9 +17,9 @@ further_reading:
 
 Instrument your services and track user activity to detect and block bad actors.
 
-Add authenticated user information on traces to identify and block bad actors targeting your authenticated attack surface. The authenticated user monitoring and blocking is done by setting the user id tag on the running Application Performance Monitoring (APM) trace. It also provides the necessary instrumentation for ASM to block authenticated attackers. This allows ASM to associate attacks and business logic events to users.
+Add authenticated user information on traces to identify and block bad actors targeting your authenticated attack surface. To do this, set the user ID tag on the running APM trace, providing the necessary instrumentation for ASM to block authenticated attackers. This allows ASM to associate attacks and business logic events to users.
 
-Track user logins to detect account takeovers with out of the box detection rules, and ultimately block attackers.
+Track user logins to detect account takeovers with out-of-the-box detection rules, and to ultimately block attackers.
 
 Track additional business logic and create your own detection rules to prevent business logic abuse.
 
@@ -278,12 +278,12 @@ def view():
 {{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
 {{< programming-lang lang="java" >}}
 
-Use the the Java tracer's API to track user events, released in dd-trace-java v1.8.0. 
+Starting in dd-trace-java v 1.8.0, you can use the the Java tracer's API to track user events. 
 
-The example below shows how to track login events, as well as custom events (using signup as an example)
+The following examples show how to track login events or custom events (using signup as an example).
 
 {{< tabs >}}
-{{% tab "login success" %}}
+{{% tab "Login success" %}}
 ```java
 import datadog.trace.api.EventTracker;
 import datadog.trace.api.GlobalTracer;
@@ -308,7 +308,7 @@ public class LoginController {
 ```
 {{% /tab %}}
 
-{{% tab "login failure" %}}
+{{% tab "Login failure" %}}
 ```java
 import datadog.trace.api.EventTracker;
 import datadog.trace.api.GlobalTracer;
@@ -335,7 +335,7 @@ public class LoginController {
 ```
 {{% /tab %}}
 
-{{% tab "custom business logic" %}}
+{{% tab "Custom business logic" %}}
 ```java
 import datadog.trace.api.EventTracker;
 import datadog.trace.api.GlobalTracer;
