@@ -23,7 +23,6 @@ author:
   support_email: help@datadoghq.com
 categories:
 - data store
-- autodiscovery
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/oracle/README.md
 display_on_public_website: true
@@ -50,7 +49,6 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::データストア
-  - Category::オートディスカバリー
   configuration: README.md#Setup
   description: エンタープライズグリッドコンピューティング向け Oracle リレーショナルデータベースシステム
   media: []
@@ -69,7 +67,7 @@ Oracle Database サーバーからメトリクスをリアルタイムに取得�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 #### 前提条件
 

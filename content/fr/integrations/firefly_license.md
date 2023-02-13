@@ -9,7 +9,6 @@ author:
   support_email: contact@gofirefly.io
   vendor_id: firefly
 categories:
-- autodiscovery
 - automation
 - cloud
 - google cloud
@@ -44,7 +43,6 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Autodiscovery
   - Category::Automation
   - Category::Cloud
   - Category::Google Cloud

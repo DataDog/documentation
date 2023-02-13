@@ -26,7 +26,6 @@ author:
 categories:
 - security
 - ログの収集
-- オートディスカバリー
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/twistlock/README.md
 display_on_public_website: true
@@ -54,7 +53,6 @@ tile:
   - Supported OS::Windows
   - Category::Security
   - Category::Log Collection
-  - Category::Autodiscovery
   configuration: README.md#Setup
   description: Twistlock はコンテナセキュリティスキャナ
   media: []
@@ -71,7 +69,7 @@ tile:
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Prisma Cloud Compute Edition チェックは [Datadog Agent][2] パッケージに含まれているため、サーバーに追加でインストールする必要はありません。
 
