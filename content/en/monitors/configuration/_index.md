@@ -21,24 +21,6 @@ To learn how to construct the search query, see the individual [monitor types][1
 
 {{< img src="/monitors/create/preview_graph_monitor.mp4" alt="Preview Graph" video=true style="width:90%;">}}
 
-### Alert grouping
-
-Alerts are grouped automatically based on your selection of the `group by` step when defining your query. Grouping defaults to `Simple Alert`. If the query is grouped by any dimension, grouping changes to `Multi Alert`.
-
-#### Simple alert
-`Simple Alert` mode aggregates over all reporting sources. You receive **one alert** when the aggregated value meets the set conditions.
-
-#### Multi alert
-`Multi Alert` mode applies the alert to each source according to your group parameters. You receive an alert for **each group** that meets the set conditions. For example, you could group a query looking at a capacity metric by `host` and `device` to receive a separate alert for each host device that is running out of space.  
-**Note**: If your metric is only reporting by `host` with no `device` tag, it is not detected by the monitor. Metrics with both `host` and `device` tags are detected by the monitor. 
-
-If you configure tags or dimensions, these values are available for every group evaluated in the multi alert to dynamically fill in notifications with useful context. See [Tag Variables][2] to learn how to reference tag values in the notification message.
-
-| Group by                       | Simple alert mode | Multi alert mode |
-|-------------------------------------|------------------------|-----------------------|
-| _(everything)_                      | One single group triggering one notification | N/A |
-| 1&nbsp;or&nbsp;more&nbsp;dimensions | One notification if one or more groups meet the alert conditions | One notification per group meeting the alert conditions |
-
 ## Set alert conditions
 
 The alert conditions vary based on the [monitor type][1]. Configure monitors to trigger if the query value crosses a threshold, or if a certain number of consecutive checks failed.
@@ -259,9 +241,46 @@ The time (in seconds) to delay evaluation. This should be a non-negative integer
 
 **Note**: A 15 minute delay is recommended for cloud metrics which are backfilled by service providers. Additionally, when using a division formula, a 60 second delay is helpful to ensure your monitor evaluates on complete values.
 
+## Notify your team
+
+Configure your notification messages to include the information you are most interested in. Specify which teams to send these alerts to as well as which attributes to trigger alerts for.
+
+### Message
+
+Use this section to configure notifications to your team and configure how to send these alerts
+  - [Configure your notification with Template Variables][8]
+  - [Send notifications to your team through email, Slack, PagerDuty, etc.][6]
+
+  For more information on the configuration options for the Notification message, see  [Alerting Notifications][7].
+
+### Notification aggregation
+
+Alerts are grouped automatically based on your selection of the `group by` step when defining your query. If the query has no grouping, it defaults to `Simple Alert`. If the query is grouped by any dimension, grouping changes to `Multi Alert`.
+
+#### Simple alert
+
+`Simple Alert` mode aggregates over all reporting sources. You receive **one alert** when the aggregated value meets the set conditions.
+
+#### Multi alert
+
+`Multi Alert` mode applies the alert to each source according to your group parameters. You receive an alert for **each group** that meets the set conditions. For example, you could group a query looking at a capacity metric by `host` and `device` to receive a separate alert for each host device that is running out of space.  
+
+Customize which dimensions that trigger alerts to reduce the noise and focus on the queries that matter most to you. For example, if you group your query by `host` and `device` but only want alerts triggered by the `host` attribute, you can remove the `device` attribute from your Multi-alert options and reduce the amount of notifications that are sent.
+
+**Note**: If your metric is only reporting by `host` with no `device` tag, it is not detected by the monitor. Metrics with both `host` and `device` tags are detected by the monitor. 
+
+If you configure tags or dimensions in your query, these values are available for every group evaluated in the multi alert to dynamically fill in notifications with useful context. See [Tag Variables][2] to learn how to reference tag values in the notification message.
+
+| Group by                       | Simple alert mode | Multi alert mode |
+|-------------------------------------|------------------------|-----------------------|
+| _(everything)_                      | One single group triggering one notification | N/A |
+| 1&nbsp;or&nbsp;more&nbsp;dimensions | One notification if one or more groups meet the alert conditions | One notification per group meeting the alert conditions |
 
 [1]: /monitors/types
 [2]: /monitors/notify/variables/?tab=is_alert#tag-variables
 [3]: /monitors/notify/#renotify
 [4]: /monitors/create/configuration#auto-resolve
 [5]: /monitors/create/configuration/?tabs=othermonitortypes#no-data
+[6]: /monitors/notify/#notify-your-team
+[7]: /monitors/notify/#say-whats-happening
+[8]: /monitors/notify/variables/
