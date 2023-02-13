@@ -8,7 +8,7 @@ title: Google Cloud Run
 ---
 
 ## 概要
-Google Cloud Run は、コンテナベースのアプリケーションをデプロイし、スケーリングするためのフルマネージドサーバーレスプラットフォームです。Datadog は、[GCP インテグレーション][1]を通して Cloud Run のモニタリングとログ収集を提供しています。また、Datadog は現在公開ベータ版として、トレース、カスタムメトリクス、直接ログ収集を可能にする専用 Agent で Cloud Run 実行アプリケーションをインスツルメントするソリューションも提供しています。
+Google Cloud Run は、コンテナベースのアプリケーションをデプロイし、スケーリングするためのフルマネージドサーバーレスプラットフォームです。Datadog は、[GCP インテグレーション][1]を通して Cloud Run のモニタリングとログ収集を提供しています。また、Datadog は現在公開ベータ版として、トレース、カスタムメトリクス、直接ログ収集を可能にする専用 Agent で Cloud Run アプリケーションをインスツルメントするソリューションも提供しています。
 
   <div class="alert alert-warning">この機能は公開ベータ版です。<a href="https://forms.gle/HSiDGnTPvDvbzDAQA">フィードバックフォーム</a>、または標準的なサポートチャンネルを通じてフィードバックを提供することができます。ベータ期間中は、Cloud Run モニタリングと APM トレースは直接費用なしで利用できます。既存の APM のお客様は、スパンの取り込みとボリュームのコストが増加する可能性があります。</div>
 
@@ -17,13 +17,15 @@ Google Cloud Run は、コンテナベースのアプリケーションをデプ
 
 Dockerfile を使用してアプリケーションを構築する場合は、以下を完了してください。
 
-1. [サポートされている Datadog トレーシングライブラリ][8]を使用して、アプリケーションをインスツルメントする
+1. [サポートされている Datadog トレーシングライブラリ][2]を使用して、アプリケーションをインスツルメントする
 
-2. [Datadog `serverless-init` バイナリ][2] を `COPY` 命令を使用して、Docker イメージにコピーします。
+2. [Datadog `serverless-init` バイナリ][3] を `COPY` 命令を使用して、Docker イメージにコピーします。
 
 3. `ENTRYPOINT` 命令を使用して、Docker コンテナが開始されるときに `serverless-init` バイナリを実行します。
 
 4. `CMD` 命令を使用して、既存のアプリケーションやその他の必要なコマンドを引数として実行します。
+
+5. アプリケーションランタイムに `DD_API_KEY` 値を設定し、Agent の構成を完了します。
 
 以下は、これらの 3 つのステップを完了する方法の例です。これらの例は、既存の Dockerfile のセットアップに応じて調整する必要があるかもしれません。
 
@@ -87,7 +89,7 @@ CMD ["./mvnw", "spring-boot:run"] (adapt this line to your needs)
 ```
 COPY --from=datadog/serverless-init:beta4 /datadog-init /app/datadog-init
 ENTRYPOINT ["/app/datadog-init"]
-CMD ["dotnet", "helloworld.dll"] (adapt this line to your needs)
+CMD ["dotnet", "helloworld.dll"] (この行はあなたのニーズに合わせてください)
 
 ```
 
@@ -120,7 +122,7 @@ RUN apt-get update && apt-get install -y ca-certificates
 
 #### Datadog のビルドパックで構築する
 
-1. 以下を実行して、アプリケーションを構築します。
+1. [`pack`][4] を使用して、以下を実行してアプリケーションを構築します。
    ```
    pack build --builder=gcr.io/buildpacks/builder \
    --buildpack from=builder \
@@ -145,11 +147,11 @@ RUN apt-get update && apt-get install -y ca-certificates
    gcloud builds submit --tag gcr.io/YOUR_PROJECT/YOUR_APP_NAME
    ```
 4. Datadog API キーからシークレットを作成します。
-   GCP コンソールの[シークレットマネージャー][3]から、**Create secret** をクリックします。
+   GCP コンソールの[シークレットマネージャー][5]から、**Create secret** をクリックします。
 
    **Name** フィールドに名前 (例えば、`datadog-api-key`) を設定します。次に、Datadog API キーを **Secret value** フィールドに貼り付けます。
 5. サービスをデプロイします。
-   GCP コンソールの [Cloud Run][4] から、**Create service** をクリックします。
+   GCP コンソールの [Cloud Run][6] から、**Create service** をクリックします。
 
    **Deploy one revision from an existing container image** (既存のコンテナイメージから 1 つのリビジョンをデプロイする) を選択します。以前にビルドしたイメージを選択します。
 
@@ -164,7 +166,7 @@ RUN apt-get update && apt-get install -y ca-certificates
    **Environment variables** セクションで、名前が `DD_API_KEY` に設定されていることを確認します。
 
 ### カスタムメトリクス
-[DogStatsd クライアント][5]を使って、カスタムメトリクスの送信を行うことができます。
+[DogStatsD クライアント][7]を使って、カスタムメトリクスの送信を行うことができます。
 
 **注**: `DISTRIBUTION` メトリクスのみを使用してください。
 
@@ -174,13 +176,14 @@ RUN apt-get update && apt-get install -y ca-certificates
 
 | 変数 | 説明 |
 | -------- | ----------- |
-| `DD_SITE` | [Datadog サイト][6]。 |
+|`DD_API_KEY`| [Datadog API キー][10] - **必須**|
+| `DD_SITE` | [Datadog サイト][8] - **必須** |
 | `DD_LOGS_ENABLED` | true の場合、ログ (stdout と stderr) を Datadog に送信します。デフォルトは false です。 |
-| `DD_SERVICE` | [統合サービスタグ付け][7]を参照してください。 |
-| `DD_VERSION` | [統合サービスタグ付け][7]を参照してください。 |
-| `DD_ENV` | [統合サービスタグ付け][7]を参照してください。 |
-| `DD_SOURCE` | [統合サービスタグ付け][7]を参照してください。 |
-| `DD_TAGS` | [統合サービスタグ付け][7]を参照してください。 |
+| `DD_SERVICE` | [統合サービスタグ付け][9]を参照してください。 |
+| `DD_VERSION` | [統合サービスタグ付け][9]を参照してください。 |
+| `DD_ENV` | [統合サービスタグ付け][9]を参照してください。 |
+| `DD_SOURCE` | [統合サービスタグ付け][9]を参照してください。 |
+| `DD_TAGS` | [統合サービスタグ付け][9]を参照してください。 |
 
 ## ログの収集
 
@@ -192,10 +195,12 @@ RUN apt-get update && apt-get install -y ca-certificates
 
 
 [1]: /ja/integrations/google_cloud_platform/#log-collection
-[2]: https://registry.hub.docker.com/r/datadog/serverless-init
-[3]: https://console.cloud.google.com/security/secret-manager
-[4]: https://console.cloud.google.com/run
-[5]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/
-[6]: /ja/getting_started/site/
-[7]: /ja/getting_started/tagging/unified_service_tagging/
-[8]: /ja/tracing/trace_collection/#for-setup-instructions-select-your-language
+[2]: /ja/tracing/trace_collection/#for-setup-instructions-select-your-language
+[3]: https://registry.hub.docker.com/r/datadog/serverless-init
+[4]: https://buildpacks.io/docs/tools/pack/
+[5]: https://console.cloud.google.com/security/secret-manager
+[6]: https://console.cloud.google.com/run
+[7]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/
+[8]: /ja/getting_started/site/
+[9]: /ja/getting_started/tagging/unified_service_tagging/
+[10]: /ja/account_management/api-app-keys/#api-keys
