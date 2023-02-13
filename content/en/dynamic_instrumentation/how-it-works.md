@@ -17,7 +17,7 @@ You can create *log probes* and *metric probes*.
 
 Log probes are enabled by default on all service instances that match the desired environment and version. They are rate limited to 5000 logs/s.
 
-If you enable `Capture method parameters and local variables` on the log probe, Dynamic Instrumentation will add the following data to the log event:
+If you enable `Capture method parameters and local variables` on the log probe, Dynamic Instrumentation captures the following data and adds it to the log event:
   - **Method arguments**, **local variables**, and **fields**, with the following limits by default:
     - Follow references three levels deep (configurable in the UI).
     - The first 100 items inside collections.
@@ -36,18 +36,18 @@ Metric probes are enabled by default on all service instances that match the des
 
 Dynamic Instrumentation metric probes support the following metric types:
 
-- [**Count**][1]: Counts how many times a given method or line is executed. Can be combined with [metric expressions](#dynamic-Instrumentation-expression-language) to use the value of a variable to increment the count.
-- [**Gauge**][2]: Generates a gauge based on the last value of a variable. This metric requires a [metric expression](#dynamic-Instrumentation-expression-language).
-- [**Histogram**][3]: Generates a statistical distribution of a variable. This metric requires a [metric expression](#dynamic-Instrumentation-expression-language).
+- [**Count**][1]: Counts how many times a given method or line is executed. Can be combined with [metric expressions](#expression-language) to use the value of a variable to increment the count.
+- [**Gauge**][2]: Generates a gauge based on the last value of a variable. This metric requires a [metric expression](#expression-language).
+- [**Histogram**][3]: Generates a statistical distribution of a variable. This metric requires a [metric expression](#expression-language).
 
 
-#### Dynamic Instrumentation expression language
+#### Expression language
 
 The dynamic instrumentation expression language is used in log message templates, metric expressions and probe conditions.
 
 For example, you can create a histogram from the size of a collection using `count(myCollection)` as the metric expression. Metric expressions must evaluate to a number.
 
-In log templates, expressions are delimited from the static parts of the template with brackets, for example: `User name {user.name}`. Log template expressions can evaluate to any value. If evaluating the expression fails, it will be replaced with `UNDEFINED`.
+In log templates, expressions are delimited from the static parts of the template with brackets, for example: `User name {user.name}`. Log template expressions can evaluate to any value. If evaluating the expression fails, it is replaced with `UNDEFINED`.
 
 Probe conditions must evaluate to a boolean, for example: `startsWith(user.name, "abc")`, `len(str) > 20` or `a == b`.
 

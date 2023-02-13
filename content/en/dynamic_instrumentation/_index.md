@@ -101,7 +101,7 @@ To create a log probe:
 A *metric probe* will emit a metric when it executes.
 
 Metric probes are automatically enabled on all service instances that match the configured environment and version.
-You can use the Dynamic Instrumentation expression language to reference numeric values from the context, such as from a local variable, class field or an expression that yields a numeric value (e.g. `count(collection)`).
+You can use the Dynamic Instrumentation expression language to reference numeric values from the context, such as a variable, class field or an expression that yields a numeric value.
 For more information, read [How Dynamic Instrumentation Works][11].
 
 To create a metric probe:
