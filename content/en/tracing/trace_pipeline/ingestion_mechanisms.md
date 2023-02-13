@@ -582,7 +582,7 @@ For example, if you are building [metrics from spans][6] to monitor specific ser
 
 {{< tabs >}}
 {{% tab "Java" %}}
-Starting in tracing library version [version 1.3.0][1], for Java applications, set by-service and by-operation name **span** sampling rules with the `DD_SPAN_SAMPLING_RULES` environment variable.
+Starting in tracing library version [version 1.7.0][1], for Java applications, set by-service and by-operation name **span** sampling rules with the `DD_SPAN_SAMPLING_RULES` environment variable.
 
 For example, to collect 100% of the spans from the service named `my-service`, for the operation `http.request`, up to 50 spans per second:
 
@@ -592,7 +592,7 @@ For example, to collect 100% of the spans from the service named `my-service`, f
 
 Read more about sampling controls in the [Java tracing library documentation][2].
 
-[1]: https://github.com/DataDog/dd-trace-java/releases/tag/v1.3.0
+[1]: https://github.com/DataDog/dd-trace-java/releases/tag/v1.7.0
 [2]: /tracing/trace_collection/dd_libraries/java
 {{% /tab %}}
 {{% tab "Python" %}}
