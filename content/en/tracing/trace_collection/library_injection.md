@@ -645,7 +645,7 @@ config_sources: BASIC
   - `BLOB:<URL>` - Load configuration from a blob store (S3-compatible) located at `<URL>`.
   - `LOCAL:<PATH>` - Load from a file on the local file system at `<PATH>`.
   - `BASIC` - Uses a default set of properties and stops looking for additional configurations.
-  - `OFF` - Default. No injection performed.
+  - `OFF` - Default. No injection performed.<br>
 For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-c).
 
 `library_inject`
