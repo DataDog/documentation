@@ -1,13 +1,15 @@
-
+{{/*  if indenting, indent 2 chars or else the markdown engine thinks it is a codeblock
+    https://discourse.gohugo.io/t/nested-shortcodes-converting-to-pre-code-blocks/28033/4    
+*/}}
 {{ if  not (.Get "region") }}
 {{ errorf "Site region error: Missing region for param 'region': %s" .Position }}
 {{ end }}
 
 {{ $region := .Get "region" }}
 {{ if eq .Page.Type "account_management"}}
-<div class="d-none site-region-container" data-region="{{ $region }}">
+  <div class="d-none site-region-container" data-region="{{ $region }}">
     {{.Inner}}
-</div>
+  </div>
 {{ else }}
-    <div class="d-none site-region-container" data-region="{{ $region }}"><p>{{- .Inner | markdownify -}}</p></div>
+  <div class="d-none site-region-container" data-region="{{ $region }}"><p>{{- .Inner | markdownify -}}</p></div>
 {{ end }}
