@@ -383,7 +383,7 @@ The profiler has a fixed overhead. The exact value can vary but this fixed cost 
 
 ### Disabling the Profiler
 
-Since APM tracing also relies on the CLR Profiling API, if you want to stop collecting .NET profiles but continue receiving .NET traces, set the following environment variables to disable profiling and keep tracing. 
+Since APM tracing also relies on the CLR Profiling API, if you want to stop collecting .NET profiles but continue receiving .NET traces, set the following environment variables to disable only profiling.
 
 ```
  DD_PROFILING_ENABLED=0 
