@@ -29,7 +29,7 @@ While RUM automatically captures events, you can also capture your own events. A
 
 To search through your RUM events, select an event type from the dropdown menu to the left of the search bar. 
 
-{{< img src="real_user_monitoring/explorer/search/rum_explorer_search.png" alt="RUM Explorer" style="width:100%;">}}
+{{< img src="real_user_monitoring/explorer/search/rum_explorer_search-1.png" alt="RUM Explorer" style="width:100%;">}}
 
 ## Search query
 
@@ -51,7 +51,7 @@ While most automatically collected attributes are indexed and faceted, your cust
 
 A facet displays all distinct members of an attribute or tag and provides basic analytics, such as the number of RUM events represented. Facets allow you to pivot or filter your datasets based on a given attribute. Selecting a value applies a filter in the search bar.
 
-{{< img src="real_user_monitoring/explorer/rum_explorer_1.png" alt="List of facets to the left of the events list" style="width:90%;">}}
+{{< img src="real_user_monitoring/explorer/facets.png" alt="List of facets to the left of the events list" style="width:90%;">}}
 
 To create a facet, find and click on an attribute in the [event side panel][7].
 

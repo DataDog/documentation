@@ -31,7 +31,7 @@ All saved views except for the [default view](#default-views) are shared across 
 - Custom saved views created by users. These are editable by anyone in your organization and display the user's avatar who created the view. Click **Save** to create a custom saved view from the current content in your RUM Explorer.
 - Saved view templates are out-of-the-box saved views that are predefined in the RUM Explorer. You can use these templates to create a saved view with a Datadog avatar. Scroll to the bottom of the list of saved views to access the templates.
 </br>
-  {{< img src="real_user_monitoring/explorer/events/views.png" alt="Access Saved Views by clicking the tab to the left of Real User Monitoring" width="20%" >}}
+  {{< img src="real_user_monitoring/explorer/events/views-1.png" alt="Access Saved Views by clicking the tab to the left of Real User Monitoring" width="50%" >}}
 
 You can: 
 
