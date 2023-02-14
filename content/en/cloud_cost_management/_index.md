@@ -171,6 +171,16 @@ You can use tag pipelines to create tag rules to help fix missing or incorrect t
 
 There are two types of rules supported: **Create new tag**, and **Alias existing tag keys**. You can keep your rules organized by leveraging rules-sets, which act as folders for your rules. The rules are executed in order (from top to bottom), to keep the execution order deterministic. You can organize rules and rulesets to ensure the order of execution matches your business logic. 
 
+### Rule types
+
+<div class="alert alert-info"><strong>Note</strong>: A maximum of 100 rules can be created. </div>
+
+**Create new tag** - This allows you to create a new tag (key + value) based on the presence of existing tags. For example, you can create a rule to tag all resources that are part of team A, B, or C, and also run a specified application, with a new `cost-center:webstore` tag.
+
+**Alias existing tag keys** - This allows you to use values from an existing tag, to map to a more standardized tag key. For example, if you're looking to standardize across your organization to use the `application` tag key, but several teams have a variation of that tag (like `app`, `web-app`, or `apps`), you can alias `apps` to `application`. Each alias tag rule allows you to alias a maximum of 25 tag keys to a new tag.   
+
+The rule stops executing for each resource, once a first match is found. For example, if a resource already has a `web-app` tag, then the rule no longer attempts to identify an `apps` or `service` tag. 
+
 [1]: https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html
 [2]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/consolidated-billing.html
 [3]: https://us-east-1.console.aws.amazon.com/cost-management/home?region=us-east-1#/settings
@@ -189,15 +199,13 @@ To use Azure Cloud Cost Management in Datadog, you must have an Azure account an
 ### Schedule exports
 
 1. Navigate to [Exports][2] under Azure portal's *Cost Management + Billing*.
-2. Select the billing scope. **Note:** The scope must be subscription, management group, or resource group.
+2. Select the billing scope. **Note:** The scope must be subscription or resource group.
 3. Once the scope is selected, click **Add**.
 4. Metric should be **Actual Cost (usage and purchases)**.
 5. Make sure the Export type is: "Daily export of month-to-date costs".
 6. Make sure the File Partitioning is **on**.
 
-<!-- {{< img src="path/to/your/image-name-here.png" alt="Your image description" style="width:100%;" >}} -->
-
-Repeat steps 1-6 with export metric type **Amortized Cost (usage and purchases)**. We recommend using the same storage account.
+Repeat steps 1-6 with export metric type **Amortized Cost (usage and purchases)**. We recommend using the same storage account container.
 
 ### Provide Datadog access to your data
 
@@ -213,14 +221,11 @@ Repeat steps 1-6 with export metric type **Amortized Cost (usage and purchases)*
     -  Click **Select members**, pick the name of the app registration, and click **Select**.
     - Select *review + assign*
 
-If your exports are in different storage accounts, repeat steps 1-6 for the other storage accounts.
+If your exports are in different storage containers, repeat steps 1-6 for the other storage containers.
 
 ### Steps to find the scope ID
 
 From the export, click on the scope link. You will find the id there:
-- If the scope type is Billing account, look for the Billing account ID.
-- If the scope type is Department, look for the Department ID.
-- If the scope type is Enrollment account, look for the Account ID.
 - If the scope type is Subscription, look for the Subscription ID.
 - If the scope type is Resource Groups, look for the Resource group name.
 
@@ -230,15 +235,6 @@ From the export, click on the scope link. You will find the id there:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Rule types
-
-**Create new tag** - This allows you to create a new tag (key + value) based on the presence of existing tags. For example, you can create a rule to tag all resources that are part of team A, B, or C, and also run a specified application, with a new `cost-center:webstore` tag.
-
-**Alias existing tag keys** - This allows you to use values from an existing tag, to map to a more standardized tag key. For example, if you're looking to standardize across your organization to use the `application` tag key, but several teams have a variation of that tag (like `app`, `web-app`, or `apps`), you can alias `apps` to `application`. Each alias tag rule allows you to alias a maximum of 25 tag keys to a new tag.   
-
-The rule stops executing for each resource, once a first match is found. For example, if a resource already has a `web-app` tag, then the rule no longer attempts to identify an `apps` or `service` tag. 
-
-**Note:** A maximum of 100 rules can be created. 
 ## Cloud costs in dashboards
 
 Visualizing infrastructure spend alongside related utilization metrics can help you spot potential inefficiencies and savings opportunities. You can add cloud costs to widgets in Datadog dashboards by selecting the *Cloud Cost* data source.
