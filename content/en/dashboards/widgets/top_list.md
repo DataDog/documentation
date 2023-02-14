@@ -11,15 +11,18 @@ further_reading:
 - link: "/notebooks/"
   tag: "Documentation"
   text: "Notebooks"
+- link: "/dashboards/guide/context-links/#overview/"
+  tag: "Documentation"
+  text: "Context Links"
 ---
 
 The top list visualization enables you to display a list of Tag values like `hostname` or `service` with the most or least of any metric value, such as highest consumers of CPU, hosts with the least disk space, etc:
 
-{{< img src="dashboards/widgets/toplist/toplist.png" alt="Top List" >}}
+{{< img src="dashboards/widgets/toplist/toplist_w_colors.png" alt="Top List widget with conditional visual formatting rules" >}}
 
 ## Setup
 
-{{< img src="dashboards/widgets/toplist/toplist_setup.png" alt="Top List" style="width:80%;">}}
+{{< img src="dashboards/widgets/toplist/toplist_config.png" alt="Top List" style="width:80%;">}}
 
 ### Configuration
 
@@ -28,7 +31,7 @@ The top list visualization enables you to display a list of Tag values like `hos
     * Indexed Spans: See the [Trace search documentation][2] to configure an Indexed Span query.
     * Log Events: See the [Log search documentation][3] to configure a log event query.
 
-2. Optional: configure conditional formatting depending on your entries' values.
+2. Optional: configure conditional formatting in **Visual Formatting Rules** depending on your entries' values. Add [context links][6] to connect data visualizations across Datadog.
 
 ### Options
 
@@ -61,3 +64,4 @@ The dedicated [widget JSON schema definition][5] for the top list widget is:
 [3]: /logs/search_syntax/
 [4]: /api/v1/dashboards/
 [5]: /dashboards/graphing_json/widget_json/
+[6]: /dashboards/guide/context-links/#overview
