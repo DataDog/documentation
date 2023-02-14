@@ -116,8 +116,6 @@ For monitoring Azure App Service and other serverless applications, use [distrib
 
 Distributions provide `avg`, `sum`, `max`, `min`, and `count` aggregations by default. On the Metric Summary page, you can enable percentile aggregations (p50, p75, p90, p95, p99) and also manage tags. To monitor a distribution for a gauge metric type, use `avg` for both the [time and space aggregations][9]. To monitor a distribution for a count metric type, use `sum` for both the time and space aggregations.
 
-For more information, see [Serverless Custom Metrics - Understanding distribution metrics][7].
-
 ### Advanced options and configurations
 
 #### Environment variables
@@ -147,6 +145,5 @@ You can use the [Azure integration][1] to collect logs. Alternatively, you can s
 [4]: /metrics/custom_metrics/dogstatsd_metrics_submission/
 [5]: /getting_started/site/
 [6]: /getting_started/tagging/unified_service_tagging/
-[7]: /serverless/custom_metrics/#understanding-distribution-metrics
 [8]: /metrics/distributions/
 [9]: /metrics/#time-and-space-aggregation

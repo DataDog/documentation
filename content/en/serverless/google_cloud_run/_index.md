@@ -170,8 +170,6 @@ You can submit custom metrics using a [DogStatsD client][7]. For monitoring Clou
 
 Distributions provide `avg`, `sum`, `max`, `min`, and `count` aggregations by default. On the Metric Summary page, you can enable percentile aggregations (p50, p75, p90, p95, p99) and also manage tags. To monitor a distribution for a gauge metric type, use `avg` for both the [time and space aggregations][13]. To monitor a distribution for a count metric type, use `sum` for both the time and space aggregations.
 
-For more information, see [Serverless Custom Metrics - Understanding distribution metrics][11].
-
 ### Advanced options and configurations
 
 #### Environment variables
@@ -206,6 +204,5 @@ You can use the [GCP integration][1] to collect logs. Alternatively, you can set
 [8]: /getting_started/site/
 [9]: /getting_started/tagging/unified_service_tagging/
 [10]: /account_management/api-app-keys/#api-keys
-[11]: /serverless/custom_metrics/#understanding-distribution-metrics
 [12]: /metrics/distributions/
 [13]: /metrics/#time-and-space-aggregation
