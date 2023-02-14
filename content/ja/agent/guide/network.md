@@ -5,7 +5,7 @@ aliases:
 - /ja/agent/network
 - /ja/agent/faq/network
 further_reading:
-- link: logs/
+- link: /logs/
   tag: Documentation
   text: ログの収集
 - link: /infrastructure/process
@@ -35,8 +35,9 @@ title: ネットワークトラフィック
 : `process.`{{< region-param key="dd_site" code="true" >}}
 
 [ネットワークデバイスモニタリング][10]
-: `ndm-intake.`{{< region-param key="dd_site" code="true" >}}
-: `snmp-traps-intake.`{{< region-param key="dd_site" code="true" >}}
+: `ndm-intake.`{{< region-param key="dd_site" code="true" >}}<br>
+`snmp-traps-intake.`{{< region-param key="dd_site" code="true" >}}<br>
+`ndmflow-intake.`{{< region-param key="dd_site" code="true" >}}
 
 
 [オーケストレーター][5]
@@ -55,7 +56,7 @@ Worker のバージョン 0.1.6 以降の API  テスト結果 `intake.synthetic
 Worker のバージョン 0.2.0 以降のブラウザテスト結果 `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
 Worker のバージョン 0.1.5 以降の API テスト結果 `api.`{{< region-param key="dd_site" code="true" >}}
 
-{{< site-region region="us,eu,us3" >}}
+{{< site-region region="us,eu,us3,us5" >}}
 [データベースモニタリング][2]
 : `dbm-metrics-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `dbquery-intake.`{{< region-param key="dd_site" code="true" >}}
@@ -77,7 +78,7 @@ HTTP: `agent-http-intake.logs.datadoghq.com`<br>
 `http-encrypted-intake.logs.datadoghq.com`
 
 [1]: /ja/logs/
-[2]: /ja/security/logs/#hipaa-enabled-customers
+[2]: /ja/data_security/logs/#hipaa-enabled-customers
 [3]: /ja/logs/log_collection/#logging-endpoints
 
 {{< /site-region >}}
@@ -96,7 +97,7 @@ HTTP: `agent-http-intake.logs.datadoghq.eu`<br>
 `http-encrypted-intake.logs.datadoghq.eu`
 
 [1]: /ja/logs/
-[2]: /ja/security/logs/#hipaa-enabled-customers
+[2]: /ja/data_security/logs/#hipaa-enabled-customers
 [3]: /ja/logs/log_collection/#logging-endpoints
 
 {{< /site-region >}}
@@ -113,7 +114,7 @@ HTTP: `agent-http-intake.logs.datadoghq.eu`<br>
 `http-encrypted-intake.logs.us3.datadoghq.com`
 
 [1]: /ja/logs/
-[2]: /ja/security/logs/#hipaa-enabled-customers
+[2]: /ja/data_security/logs/#hipaa-enabled-customers
 [3]: /ja/logs/log_collection/#logging-endpoints
 
 {{< /site-region >}}
@@ -130,7 +131,7 @@ HTTP: `agent-http-intake.logs.datadoghq.eu`<br>
 `http-encrypted-intake.logs.us5.datadoghq.com`
 
 [1]: /ja/logs/
-[2]: /ja/security/logs/#hipaa-enabled-customers
+[2]: /ja/data_security/logs/#hipaa-enabled-customers
 [3]: /ja/logs/log_collection/#logging-endpoints
 
 {{< /site-region >}}
@@ -147,7 +148,7 @@ HTTP: `agent-http-intake.logs.datadoghq.eu`<br>
 `http-encrypted-intake.logs.ddog-gov.com`
 
 [1]: /ja/logs/
-[2]: /ja/security/logs/#hipaa-enabled-customers
+[2]: /ja/data_security/logs/#hipaa-enabled-customers
 [3]: /ja/logs/log_collection/#logging-endpoints
 
 {{< /site-region >}}
@@ -199,11 +200,12 @@ v6.1.0 以降、Agent は Datadog の API にもクエリを実行、重要で�
 ## ポートのオープン
 
 <div class="alert alert-warning">
-すべての送信トラフィックは、TCP / UDP を介して SSL で送信されます。
+すべてのアウトバウンドトラフィックは、TCP / UDP を介して SSL で送信されます。
+<br><br>
+ファイアウォールルールまたは同様のネットワーク制限を使用して、Agent がお客様のアプリケーションまたは信頼できるネットワークソースからのみアクセス可能であることを確認してください。信頼できないアクセスにより、悪意のある行為者は Datadog アカウントにトレースやメトリクスを書き込んだり、構成やサービスに関する情報を取得したりすることを含むがこれに限定されない、いくつかの侵略的なアクションを実行できるようになります。
 </div>
 
 **Agent** のすべての機能を利用するには、以下のポートを開きます。
-
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
@@ -360,6 +362,58 @@ Agent のサービスがホスト内のローカルで相互通信する場合�
 [3]: /ja/tracing/
 {{% /tab %}}
 {{< /tabs >}}
+
+## ポートの構成
+
+デフォルトのポートがネットワーク上の既存のサービスによって既に使用されているため、インバウンドポートを変更する必要がある場合、`datadog.yaml`コンフィギュレーションファイルを編集してください。このファイルの **Advanced Configuration** セクションに、ほとんどのポートが記載されています。
+
+{{< code-block lang="yaml" filename="datadog.yaml" disable_copy="true" collapsible="true" >}}
+## @param expvar_port - 整数 - オプション - デフォルト: 5000
+## @env DD_EXPVAR_PORT - 整数 - オプション - デフォルト: 5000
+## go_expvar サーバーのポート。
+#
+# expvar_port: 5000
+
+## @param cmd_port - 整数 - オプション - デフォルト: 5001
+## @env DD_CMD_PORT - 整数 - オプション - デフォルト: 5001
+## IPC api がリッスンするポート。
+#
+# cmd_port: 5001
+
+## @param GUI_port - 整数 - オプション
+## @env DD_GUI_PORT - 整数 - オプション
+## ブラウザ GUI を提供するためのポート。
+## 'GUI_port: -1' を設定すると、GUI が完全にオフになります
+## デフォルト:
+##  * Windows & macOS : `5002`
+##  * Linux: `-1`
+##
+#
+# GUI_port: <GUI_PORT>
+
+{{< /code-block >}}
+
+APM レシーバーと DogStatsD ポートは、それぞれ `datadog.yaml` コンフィギュレーションファイルの **Trace Collection Configuration** と**DogStatsD Configuration** セクションに配置されています。
+
+{{< code-block lang="yaml" filename="datadog.yaml" disable_copy="true" collapsible="true" >}}
+## @param dogstatsd_port - 整数 - オプション - デフォルト: 8125
+## @env DD_DOGSTATSD_PORT - 整数 - オプション - デフォルト: 8125
+## Agent DogStatsD ポートをオーバーライドします。
+## 注: クライアントが同じ UDP ポートに送信していることを確認してください。
+#
+# dogstatsd_port: 8125
+
+[...]
+
+## @param receiver_port - 整数 - オプション - デフォルト: 8126
+## @env DD_APM_RECEIVER_PORT - 整数 - オプション - デフォルト: 8126
+## トレースレシーバーがリッスンするポート。
+## 0 を設定すると、HTTP レシーバーが無効になります。
+#
+# receiver_port: 8126
+{{< /code-block >}}
+
+<div class="alert alert-warning">ここで DogStatsD ポートや APM レシーバーポートの値を変更した場合、対応するポートの APM トレーシングライブラリの構成も変更する必要があります。<a href="/tracing/trace_collection/library_config/">お使いの言語のライブラリ構成のドキュメント</a>にあるポートの構成に関する情報をご覧ください。</div>
 
 ## プロキシの使用
 

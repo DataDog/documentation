@@ -1,11 +1,4 @@
 ---
-further_reading:
-- link: agent/logs
-  tag: ドキュメント
-  text: Agent によるログ収集を有効にします。
-- link: /integrations/amazon_web_services/#set-up-the-datadog-lambda-function
-  tag: ドキュメント
-  text: AWS サービスからログを収集する
 kind: ガイド
 title: AWS PrivateLink を介して Datadog に接続する
 ---
@@ -97,7 +90,7 @@ Datadog は、**us-east-1** で AWS PrivateLink のエンドポイントを公�
 [3]: /ja/agent/logs/?tab=tailexistingfiles#send-logs-over-https
 [4]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/vpc-endpoint-overview.html
 [5]: /ja/agent/guide/agent-commands/#restart-the-agent
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "VPC ピアリング" %}}
 
@@ -240,8 +233,13 @@ DNS は正しく解決しているのに、`port 443` への接続に失敗す�
 
 ## その他の参考資料
 
-{{< partial name="whats-next/whats-next.html" >}}
+お役に立つドキュメント、リンクや記事:
+
+- [Agent でログ収集を有効にする][3]
+- [AWS サービスからログを収集する][4]
 
 [1]: https://aws.amazon.com/privatelink/
 [2]: https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html
+[3]: /ja/agent/logs
+[4]: /ja/integrations/amazon_web_services/#log-collection
 {{< /site-region >}}

@@ -47,7 +47,7 @@ public_title: Fastly
 short_description: ファイルをキャッシュすることで、Web ページの読み込みを早くするコンテンツ配信ネットワーク
 supported_os: []
 tile:
-  changelog: ''
+  changelog: CHANGELOG.md
   classifier_tags:
   - Category::キャッシュ
   - Category::ログの収集

@@ -1581,16 +1581,21 @@ main:
     parent: tracing_trace_collection
     identifier: tracing_admission_controller
     weight: 108
+  - name: Injecting Libraries
+    url: tracing/trace_collection/library_injection/
+    parent: tracing_trace_collection
+    identifier: tracing_library_injection
+    weight: 109
   - name: Tracing Proxies
     url: tracing/trace_collection/proxy_setup/
     parent: tracing_trace_collection
     identifier: tracing_proxies
-    weight: 109
+    weight: 110
   - name: Span Tags Semantics
     url: tracing/trace_collection/tracing_naming_convention
     parent: tracing_trace_collection
     identifier: tracing_naming_convention
-    weight: 110
+    weight: 111
   - name: APM Metrics Collection
     url: tracing/metrics/
     parent: tracing

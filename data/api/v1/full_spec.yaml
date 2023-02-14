@@ -3588,8 +3588,6 @@ components:
           items:
             description: The version name.
             example: FreeBSD
-            nullable: true
-            type: string
           type: array
         gohai:
           description: JSON string containing system information.
@@ -3614,8 +3612,6 @@ components:
           items:
             description: Version name.
             example: Ubuntu
-            nullable: true
-            type: string
           type: array
         platform:
           description: The OS platform.
@@ -3642,8 +3638,6 @@ components:
           items:
             description: Version name.
             example: Windows
-            nullable: true
-            type: string
           type: array
       type: object
     HostMetaInstallMethod:
@@ -7503,52 +7497,42 @@ components:
           type: number
         estimated_indexed_logs_percentage:
           description: The percentage of estimated live indexed logs usage by tag(s).
-            This field is in private beta.
           format: double
           type: number
         estimated_indexed_logs_usage:
-          description: The estimated live indexed logs usage by tag(s). This field
-            is in private beta.
+          description: The estimated live indexed logs usage by tag(s).
           format: double
           type: number
         estimated_indexed_spans_percentage:
           description: The percentage of estimated indexed spans usage by tag(s).
-            This field is in private beta.
           format: double
           type: number
         estimated_indexed_spans_usage:
-          description: The estimated indexed spans usage by tag(s). This field is
-            in private beta.
+          description: The estimated indexed spans usage by tag(s).
           format: double
           type: number
         estimated_ingested_logs_percentage:
           description: The percentage of estimated live ingested logs usage by tag(s).
-            This field is in private beta.
           format: double
           type: number
         estimated_ingested_logs_usage:
-          description: The estimated live ingested logs usage by tag(s). This field
-            is in private beta.
+          description: The estimated live ingested logs usage by tag(s).
           format: double
           type: number
         estimated_ingested_spans_percentage:
           description: The percentage of estimated ingested spans usage by tag(s).
-            This field is in private beta.
           format: double
           type: number
         estimated_ingested_spans_usage:
-          description: The estimated ingested spans usage by tag(s). This field is
-            in private beta.
+          description: The estimated ingested spans usage by tag(s).
           format: double
           type: number
         estimated_rum_sessions_percentage:
-          description: The percentage of estimated rum sessions usage by tag(s). This
-            field is in private beta.
+          description: The percentage of estimated rum sessions usage by tag(s).
           format: double
           type: number
         estimated_rum_sessions_usage:
-          description: The estimated rum sessions usage by tag(s). This field is in
-            private beta.
+          description: The estimated rum sessions usage by tag(s).
           format: double
           type: number
         fargate_percentage:
@@ -15724,52 +15708,42 @@ components:
           type: number
         estimated_indexed_logs_percentage:
           description: The percentage of estimated live indexed logs usage by tag(s).
-            Note this field is in private beta.
           format: double
           type: number
         estimated_indexed_logs_usage:
-          description: The estimated live indexed logs usage by tag(s). Note this
-            field is in private beta.
+          description: The estimated live indexed logs usage by tag(s).
           format: double
           type: number
         estimated_indexed_spans_percentage:
           description: The percentage of estimated indexed spans usage by tag(s).
-            Note this field is in private beta.
           format: double
           type: number
         estimated_indexed_spans_usage:
-          description: The estimated indexed spans usage by tag(s). Note this field
-            is in private beta.
+          description: The estimated indexed spans usage by tag(s).
           format: double
           type: number
         estimated_ingested_logs_percentage:
           description: The percentage of estimated live ingested logs usage by tag(s).
-            Note this field is in private beta.
           format: double
           type: number
         estimated_ingested_logs_usage:
-          description: The estimated live ingested logs usage by tag(s). Note this
-            field is in private beta.
+          description: The estimated live ingested logs usage by tag(s).
           format: double
           type: number
         estimated_ingested_spans_percentage:
           description: The percentage of estimated ingested spans usage by tag(s).
-            Note this field is in private beta.
           format: double
           type: number
         estimated_ingested_spans_usage:
-          description: The estimated ingested spans usage by tag(s). Note this field
-            is in private beta.
+          description: The estimated ingested spans usage by tag(s).
           format: double
           type: number
         estimated_rum_sessions_percentage:
-          description: The percentage of estimated rum sessions usage by tag(s). This
-            field is in private beta.
+          description: The percentage of estimated rum sessions usage by tag(s).
           format: double
           type: number
         estimated_rum_sessions_usage:
-          description: The estimated rum sessions usage by tag(s). This field is in
-            private beta.
+          description: The estimated rum sessions usage by tag(s).
           format: double
           type: number
         infra_host_percentage:
@@ -17271,9 +17245,19 @@ components:
             over all hours in the current month for all organizations.
           format: int64
           type: integer
+        cloud_cost_management_host_count_avg:
+          description: Host count average of Cloud Cost Management for the given date
+            and given organization.
+          format: int64
+          type: integer
         container_avg:
           description: Shows the average of all distinct containers over all hours
             in the current date for all organizations.
+          format: int64
+          type: integer
+        container_excl_agent_avg:
+          description: Shows the average of containers without the Datadog Agent over
+            all hours in the current date for all organizations.
           format: int64
           type: integer
         container_hwm:
@@ -17642,9 +17626,19 @@ components:
             over all hours in the current date for the given org.
           format: int64
           type: integer
+        cloud_cost_management_host_count_avg:
+          description: Host count average of Cloud Cost Management for the given date
+            and given org.
+          format: int64
+          type: integer
         container_avg:
           description: Shows the average of all distinct containers over all hours
             in the current date for the given org.
+          format: int64
+          type: integer
+        container_excl_agent_avg:
+          description: Shows the average of containers without the Datadog Agent over
+            all hours in the current date for the given organization.
           format: int64
           type: integer
         container_hwm:
@@ -18022,9 +18016,18 @@ components:
             over all hours in the current months for all organizations.
           format: int64
           type: integer
+        cloud_cost_management_host_count_avg_sum:
+          description: Sum of the host count average for Cloud Cost Management.
+          format: int64
+          type: integer
         container_avg_sum:
           description: Shows the average of all distinct containers over all hours
             in the current months for all organizations.
+          format: int64
+          type: integer
+        container_excl_agent_avg_sum:
+          description: Shows the average of the containers without the Datadog Agent
+            over all hours in the current month for all organizations.
           format: int64
           type: integer
         container_hwm_sum:

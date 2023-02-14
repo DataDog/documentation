@@ -234,10 +234,18 @@ $ddpurple: #632ca6;
     .code-snippet-wrapper button[disabled] {
       font-weight: bold;
       color: #632ca6;
+      width: 100%;
+      justify-content: space-between;
+      display: flex;
+      text-align: left;
+      gap: 35px;
     }
     #accordion .btn.collapsed,
     .example-accordion .btn.collapsed {
       color: #666;
+      & i {
+        transform: rotate(180deg);
+      }
     }
     #accordion pre,
     .example-accordion pre {
