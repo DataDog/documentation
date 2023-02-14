@@ -9,7 +9,7 @@ further_reading:
   - link: "https://app.datadoghq.com/release-notes?category=Security%20%26%20Compliance"
     tag: "Release Notes"
     text: "Check out the latest Datadog Security releases! (App login required)."
-  - link: "/security/cloud_siem/getting_started"
+  - link: "/getting_started/cloud_siem"
     tag: "Documentation"
     text: "Begin detecting threats with Cloud SIEM"
   - link: "/security/cspm/getting_started"
