@@ -374,7 +374,7 @@ Otherwise, turn on [debug mode][1] and [open a support ticket][2] with the debug
 Datadog does not recommend enabling the profiler at machine-level or for all IIS application pools, as the profiler has fixed overhead per profiled application. In order to reduce the amount of resources used by the profiler, you can:
 - Increase the allocated resources, such as increasing CPU cores.
 - Profile only specific applications by setting environment in batch files instead of directly running the application.
-- Reduce the amount of IIS pools being profiled (only possible in IIS 10+).
+- Reduce the number of IIS pools being profiled (only possible in IIS 10 or later).
 - Disable wall time profiler with DD_PROFILING_WALLTIME_ENABLED=0.
 
 ### Linux Containers
