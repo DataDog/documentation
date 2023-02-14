@@ -2,6 +2,15 @@
 title: Getting Started with Cloud SIEM
 kind: documentation
 further_reading:
+    - link: "https://learn.datadoghq.com/courses/intro-to-cloud-siem"
+      tag: "Learning Center"
+      text: "Introduction to Cloud SIEM course"
+    - link: "https://www.datadoghq.com/blog/automate-end-to-end-processes-with-datadog-workflows/"
+      tag: "Blog"
+      text: "Automate end-to-end processes and quickly respond to events with Datadog Workflows"
+    - link: "https://app.datadoghq.com/workflow/blueprints?selected_category=SECURITY"
+      tag: "App"
+      text: "Automate responses with Workflows security blueprints"
     - link: "/security/notifications/variables/"
       tag: "Documentation"
       text: "Learn more about notification variables to customize notifications"
