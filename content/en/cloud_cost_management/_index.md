@@ -199,7 +199,7 @@ To use Azure Cloud Cost Management in Datadog, you must have an Azure account an
 ### Schedule exports
 
 1. Navigate to [Exports][2] under Azure portal's *Cost Management + Billing*.
-2. Select the billing scope. **Note:** The scope must be subscription or resource group.
+2. Select the billing scope. **Note:** The scope must be *subscription* or *resource group*.
 3. Once the scope is selected, click **Add**.
 4. Metric should be **Actual Cost (usage and purchases)**.
 5. Make sure the Export type is: "Daily export of month-to-date costs".
@@ -219,7 +219,7 @@ Repeat steps 1-6 with export metric type **Amortized Cost (usage and purchases)*
 5. Assign these permissions to one of the app registrations you have connected with Datadog.
     - To see which app registrations are connected to Datadog, visit [Datadog's Azure integration][3].
     -  Click **Select members**, pick the name of the app registration, and click **Select**.
-    - Select *review + assign*
+    - Select *review + assign*.
 
 If your exports are in different storage containers, repeat steps 1-6 for the other storage containers.
 
