@@ -20,12 +20,12 @@ aliases:
 
 The profiler is shipped within Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to enabling the profiler.
 
-As of dd-trace-java version 1.0.0, you have two options for the engine that generates CPU profile data for Java applications: [Java Flight Recorder (JFR)][2] or Async Profiler. As of version 1.3.0, Async Profiler is the default. Each profiler engine has different side effects, requirements, available configurations, and limitations, and this page describes each.
+As of dd-trace-java version 1.0.0, you have two options for the engine that generates CPU profile data for Java applications: [Java Flight Recorder (JFR)][2] or the Datadog Profiler. As of version 1.7.0, Datadog Profiler is the default. Each profiler engine has different side effects, requirements, available configurations, and limitations, and this page describes each.
 
 ## Requirements
 
 {{< tabs >}}
-{{% tab "Async" %}}
+{{% tab "Datadog" %}}
 
 Minimum JDK versions:
 
@@ -33,7 +33,7 @@ Minimum JDK versions:
 - Oracle JDK 11.0.17+, 17.0.5+
 - OpenJDK 8 version 8u352+
 
-Async Profiler uses the JVMTI `AsyncGetCallTrace` function, in which there is a [known issue][1] prior to JDK release 17.0.5. This fix was backported to 11.0.17 and 8u352. Async Profiler is not enabled unless the JVM the profiler is deployed into has this fix. Upgrade to at least 8u352, 11.0.17, 17.0.5, or the latest non-LTS JVM version to use Async Profiler.
+The Datadog Profiler uses the JVMTI `AsyncGetCallTrace` function, in which there is a [known issue][1] prior to JDK release 17.0.5. This fix was backported to 11.0.17 and 8u352. The Datadog Profiler is not enabled unless the JVM the profiler is deployed into has this fix. Upgrade to at least 8u352, 11.0.17, 17.0.5, or the latest non-LTS JVM version to use the Datadog Profiler.
 
 [1]: https://bugs.openjdk.org/browse/JDK-8283849
 {{% /tab %}}
@@ -41,10 +41,10 @@ Async Profiler uses the JVMTI `AsyncGetCallTrace` function, in which there is a 
 {{% tab "JFR" %}}
 
 Minimum JDK versions:
-- OpenJDK 11+ 
+- OpenJDK 11+
 - Oracle JDK 11+
 - [OpenJDK 8 (version 1.8.0.262/8u262+)][3]
-- Azul Zulu 8 (version 1.8.0.212/8u212+). 
+- Azul Zulu 8 (version 1.8.0.212/8u212+).
 
 JFR is not supported in OpenJ9.
 
@@ -123,31 +123,31 @@ java \
 
 ### Enabling CPU profiler engine options
 
-Since dd-trace-java version 1.0.0, you have two options for the CPU profiler used, Async or Java Flight Recorder (JFR). Since version 1.3.0, Async is the default, but you can optionally switch to JFR for CPU profiling. 
+Since dd-trace-java version 1.5.0, you have two options for the CPU profiler used, Datadog or Java Flight Recorder (JFR). Since version 1.5.0, Datadog is the default, but you can optionally switch to JFR for CPU profiling.
 
-Async produces more accurate profiles because the active span is recorded on every CPU sample, which improves the fidelity of the Code Hotspots and Endpoint profiling features. Enabling this engine supports much better integration with APM tracing. .
+The Datadog profiler records the active span on every sample, which improves the fidelity of the Code Hotspots and Endpoint profiling features. Enabling this engine supports much better integration with APM tracing.
 
-Async profiler consists of several profiling engines, including CPU, wallclock, allocation, and memory leak profilers.
+The Datadog profiler consists of several profiling engines, including CPU, wallclock, allocation, and memory leak profilers.
 
 
 {{< tabs >}}
-{{% tab "Async" %}}
+{{% tab "Datadog" %}}
 
-Async profiler is enabled by default in dd-trace-java versions 1.3.0+. To enable CPU profiling:
+The Datadog profiler is enabled by default in dd-trace-java versions 1.7.0+. Datadog CPU profiling is scheduled via perf events and is more accurate than JFR CPU profiling. To enable CPU profiling:
 
 ```
-export DD_PROFILING_ASYNC_ENABLED=true # this is the default in v1.3.0+ 
-export DD_PROFILING_ASYNC_CPU_ENABLED=true
+export DD_PROFILING_DDPROF_ENABLED=true # this is the default in v1.7.0+
+export DD_PROFILING_DDPROF_CPU_ENABLED=true
 ```
 
 or:
 
 ```
--Ddd.profiling.async.enabled=true # this is the default in v1.3.0+
--Ddd.profiling.async.cpu.enabled=true
+-Ddd.profiling.ddprof.enabled=true # this is the default in v1.7.0+
+-Ddd.profiling.ddprof.cpu.enabled=true
 ```
 
-For JDK Mission Control (JMC) users, the Async CPU sample event is `datadog.ExecutionSample`.
+For JDK Mission Control (JMC) users, the Datadog CPU sample event is `datadog.ExecutionSample`.
 
 #### Linux settings
 
@@ -161,16 +161,14 @@ sudo sh -c 'echo 2 >/proc/sys/kernel/perf_event_paranoid'
 
 {{% tab "JFR" %}}
 
-For version 1.3.0+, to switch from the default Async to JFR CPU profiling:
+For version 1.7.0+, to switch from the default Datadog to JFR CPU profiling:
 
 ```
-export DD_PROFILING_ASYNC_ENABLED=false
-export DD_PROFILING_ASYNC_CPU_ENABLED=false
+export DD_PROFILING_DDPROF_CPU_ENABLED=false
 ```
 or:
 ```
--Ddd.profiling.async.enabled=false
--Ddd.profiling.async.cpu.enabled=false
+-Ddd.profiling.ddprof.cpu.enabled=false
 ```
 For JDK Mission Control (JMC) users, the JFR CPU sample event is `jdk.ExecutionSample`.
 
@@ -178,66 +176,71 @@ For JDK Mission Control (JMC) users, the JFR CPU sample event is `jdk.ExecutionS
 {{< /tabs >}}
 
 
-### Async profiler wallclock engine
+### Datadog profiler wallclock engine
 
-The wallclock profiling engine is useful for profiling latency and integrates tightly with APM tracing. The engine samples all threads, on- or off-CPU, with active tracing activity and can be used to diagnose trace or span latency. The engine is disabled by default, but you can enable it with:
-
-```
-export DD_PROFILING_ASYNC_ENABLED=true # this is the default in v1.3.0+ 
-export DD_PROFILING_ASYNC_WALL_ENABLED=true
-```
+The wallclock profiling engine is useful for profiling latency and integrates tightly with APM tracing. The engine samples all threads, on- or off-CPU, with active tracing activity and can be used to diagnose trace or span latency. The engine has been enabled by default since 1.7.0.
 
 or:
 
 ```
--Ddd.profiling.async.enabled=true # this is the default in v1.3.0+
--Ddd.profiling.async.wall.enabled=true
+-Ddd.profiling.ddprof.enabled=true # this is the default in v1.7.0+
+-Ddd.profiling.ddprof.wall.enabled=true
+```
+
+For version 1.7.0+, to disable the wallclock profiler:
+
+```
+export DD_PROFILING_DDPROF_WALL_ENABLED=false
+```
+or:
+```
+-Ddd.profiling.ddprof.wall.enabled=false
 ```
 
 For JMC users, the `datadog.MethodSample` event is emitted for wallclock samples.
 
 The wallclock engine does not depend on the `/proc/sys/kernel/perf_event_paranoid` setting.
 
-### Async profiler allocation engine
+### Datadog profiler allocation engine
 
 In dd-java-agent v0.84.0+ and Java 15 and lower, the allocation profiler is turned off by default because it can use excessive CPU in allocation-heavy applications. This isn't common, so you may want to try it in a staging environment to see if it affects your application. To enable it, see [Enabling the allocation profiler][8].
 
-The Async allocation profiling engine contextualizes allocation profiles, which supports allocation profiles filtered by endpoint. It is disabled by default, but you can enable it with:
+The Datadog allocation profiling engine contextualizes allocation profiles, which supports allocation profiles filtered by endpoint. It is disabled by default, but you can enable it with:
 
 ```
-export DD_PROFILING_ASYNC_ENABLED=true # this is the default in v1.3.0+ 
-export DD_PROFILING_ASYNC_ALLOC_ENABLED=true
+export DD_PROFILING_DDPROF_ENABLED=true # this is the default in v1.7.0+
+export DD_PROFILING_DDPROF_ALLOC_ENABLED=true
 ```
 
 or:
 
 ```
--Ddd.profiling.async.enabled=true # this is the default in v1.3.0+
--Ddd.profiling.async.alloc.enabled=true
+-Ddd.profiling.ddprof.enabled=true # this is the default in v1.7.0+
+-Ddd.profiling.ddprof.alloc.enabled=true
 ```
 
-For JMC users, the Async allocation events are `datadog.ObjectAllocationInNewTLAB` and `datadog.ObjectAllocationOutsideTLAB`. The JFC allocation events are `jdk.ObjectAllocationInNewTLAB` and `jdk.ObjectAllocationOutsideTLAB`.
+For JMC users, the Datadog allocation events are `datadog.ObjectAllocationInNewTLAB` and `datadog.ObjectAllocationOutsideTLAB`. The JFR allocation events are `jdk.ObjectAllocationInNewTLAB` and `jdk.ObjectAllocationOutsideTLAB`.
 
 The allocation engine does not depend on the `/proc/sys/kernel/perf_event_paranoid` setting.
 
 ### Collecting native stack traces
 
-If Async profiler CPU or wallclock engines are enabled, you can collect native stack traces. Native stack traces include things like JVM internals, native libraries used by your application or the JVM, and syscalls. 
+If the Datadog profiler CPU or wallclock engines are enabled, you can collect native stack traces. Native stack traces include things like JVM internals, native libraries used by your application or the JVM, and syscalls.
 
 <div class="alert alert-warning">Native stack traces are not collected by default because usually they do not provide actionable insights and walking native stacks can potentially impact application stability. Test this setting in a non-production environment before you try using it in production.</a></div>
 
 To enable native stack trace collection, understanding that it can destabilize your application, set:
 
 ```
-export DD_PROFILING_ASYNC_ENABLED=true # this is the default in v1.3.0+ 
-export DD_PROFILING_ASYNC_CSTACK=dwarf
+export DD_PROFILING_DDPROF_ENABLED=true # this is the default in v1.7.0+
+export DD_PROFILING_DDPROF_CSTACK=dwarf
 ```
 
 or:
 
 ```
--Ddd.profiling.async.enabled=true # this is the default in v1.3.0+
--Ddd.profiling.async.cstack=dwarf
+-Ddd.profiling.ddprof.enabled=true # this is the default in v1.7.0+
+-Ddd.profiling.ddprof.cstack=dwarf
 ```
 
 
