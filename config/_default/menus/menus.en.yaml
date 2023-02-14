@@ -1381,11 +1381,16 @@ main:
     parent: tracing_dd_libraries
     identifier: tracing_ddlib_dotnet_framework
     weight: 109
+  - name: Injecting Libraries
+    url: tracing/trace_collection/library_injection/
+    parent: tracing_trace_collection
+    identifier: tracing_library_injection
+    weight: 102
   - name: Library Compatibility
     url: tracing/trace_collection/compatibility/
     parent: tracing_trace_collection
     identifier: tracing_compatibility
-    weight: 102
+    weight: 103
   - name: Java
     url: tracing/trace_collection/compatibility/java/
     parent: tracing_compatibility
@@ -1435,7 +1440,7 @@ main:
     url: tracing/trace_collection/library_config/
     parent: tracing_trace_collection
     identifier: tracing_library_config
-    weight: 103
+    weight: 104
   - name: Java
     url: tracing/trace_collection/library_config/java/
     parent: tracing_library_config
@@ -1485,7 +1490,7 @@ main:
     url: tracing/trace_collection/custom_instrumentation/
     parent: tracing_trace_collection
     identifier: tracing_custom_inst
-    weight: 104
+    weight: 105
   - name: Java
     url: tracing/trace_collection/custom_instrumentation/java/
     parent: tracing_custom_inst
@@ -1530,7 +1535,7 @@ main:
     url: opentelemetry/otel_tracing/
     parent: tracing_trace_collection
     identifier: tracing_open_standards
-    weight: 105
+    weight: 106
   - name: Java
     url: tracing/trace_collection/open_standards/java/
     parent: tracing_open_standards
@@ -1570,11 +1575,6 @@ main:
     url: serverless/distributed_tracing/
     parent: tracing_trace_collection
     identifier: tracing_serverless
-    weight: 106
-  - name: Injecting Libraries
-    url: tracing/trace_collection/library_injection/
-    parent: tracing_trace_collection
-    identifier: tracing_library_injection
     weight: 107
   - name: Tracing Proxies
     url: tracing/trace_collection/proxy_setup/
