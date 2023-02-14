@@ -183,7 +183,7 @@ A range of errors can be accepted. By default 5xx status codes are reported as e
 
 `dd.http.server.tag.query-string`
 : **Environment Variable**: `DD_HTTP_SERVER_TAG_QUERY_STRING`<br>
-**Default**: `false`<br>
+**Default**: `true`<br>
 When set to `true` query string parameters and fragment get added to web server spans
 
 `dd.trace.enabled`
