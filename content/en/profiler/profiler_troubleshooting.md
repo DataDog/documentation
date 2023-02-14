@@ -390,10 +390,6 @@ Since APM tracing also relies on the CLR Profiling API, if you want to stop coll
  CORECLR_ENABLE_PROFILING=1
 ```
 
-The profiler has a fixed overhead. The exact value can vary but this fixed cost means that the relative overhead of the profiler can be significant in very small containers. To avoid this situation, the profiler is disabled in containers with less than 1 core.
-You can override the 1 core threshold by setting `DD_PROFILING_MIN_CORES_THRESHOLD` environment variable to a value smaller than 1. For example, a value of `0.5` allows the profiler to run in a container with at least 0.5 cores.
-
-
 ## No CPU or Wall time because the application on Linux is hung
 
 If an application hangs, or otherwise becomes unresponsive on Linux, CPU and Wall time samples are no longer available, follow these steps:
