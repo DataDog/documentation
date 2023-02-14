@@ -73,6 +73,23 @@ Tracer.Configure(settings);
 
 {{% /tab %}}
 
+{{% tab "web.config" %}}
+
+To configure the Tracer using an `app.config` or `web.config` file, use the `<appSettings>` section. For example:
+
+```xml
+<configuration>
+  <appSettings>
+    <add key="DD_TRACE_AGENT_URL" value="http://localhost:8126"/>
+    <add key="DD_ENV" value="prod"/>
+    <add key="DD_SERVICE" value="MyService"/>
+    <add key="DD_VERSION" value="abc123"/>
+  </appSettings>
+</configuration>
+```
+
+{{% /tab %}}
+
 {{% tab "JSON file" %}}
 
 To configure the tracer using a JSON file, create `datadog.json` in the instrumented application's directory. The root JSON object must be an object with a key-value pair for each setting. For example:
