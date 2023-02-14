@@ -73,9 +73,9 @@ Tracer.Configure(settings);
 
 {{% /tab %}}
 
-{{% tab "web.config" %}}
+{{% tab "appsettings.json" %}}
 
-To configure the Tracer using an `app.config` or `web.config` file, use the `<appSettings>` section. For example:
+To configure the tracer using an `appsettings.json` file, use the `<appSettings>` section. For example:
 
 ```xml
 <configuration>
