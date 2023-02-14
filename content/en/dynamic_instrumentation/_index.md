@@ -39,7 +39,7 @@ Dynamic Instrumentation requires the following:
 - [Remote Configuration][2] is enabled in that Agent.
 - For Java applications, tracing library [`dd-trace-java`][3] 1.8.0 or higher.
 - For Python applications, tracing library [`dd-trace-py`][4] 1.7.5 or higher.
-- For .NET applications, tracing library [`dd-trace-dotnet`][5] 2.22.0 or higher.
+- For .NET applications, tracing library [`dd-trace-dotnet`][5] 2.23.0 or higher.
 - [Unified Service Tagging][6] tags `service`, `env`, and `version` are applied to your deployment.
 - Optionally, [Source Code Integration][7] is set up for your service.
 
