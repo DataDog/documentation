@@ -211,6 +211,10 @@ The top of the sidepanel displays common source and destination tags shared by t
 - Granular context such as the container, task, or host to which traffic is flowing.
 - Wider context such as the availability zone, cloud provider account, or deployment in which the service runs.
 
+### Security
+
+The **Security** tab highlights network threats detected by [Cloud Workload Security (CWS)][6]. These signals are based on network [security detection rules][7]. If Datadog detects a threat that matches a security rule, a signal is generated.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -220,3 +224,5 @@ The top of the sidepanel displays common source and destination tags shared by t
 [3]: /network_monitoring/performance/guide/aws_supported_services/
 [4]: /network_monitoring/performance/guide/gcp_supported_services/
 [5]: /logs/explorer/saved_views/
+[6]: /security/cloud_workload_security/
+[7]: /security/detection_rules/
