@@ -1571,10 +1571,10 @@ main:
     parent: tracing_trace_collection
     identifier: tracing_serverless
     weight: 106
-  - name: Admission Controller Injection
-    url: tracing/trace_collection/admission_controller/
+  - name: Injecting Libraries
+    url: tracing/trace_collection/library_injection/
     parent: tracing_trace_collection
-    identifier: tracing_admission_controller
+    identifier: tracing_library_injection
     weight: 107
   - name: Tracing Proxies
     url: tracing/trace_collection/proxy_setup/
