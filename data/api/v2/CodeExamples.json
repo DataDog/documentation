@@ -613,6 +613,13 @@
       "description": "Update Scanning Rule returns \"OK\" response"
     }
   ],
+  "CreateServiceAccount": [
+    {
+      "group": "service_accounts",
+      "suffix": "",
+      "description": "Create a service account returns \"OK\" response"
+    }
+  ],
   "CreateServiceAccountApplicationKey": [
     {
       "group": "service_accounts",
@@ -637,13 +644,6 @@
       "group": "service_definition",
       "suffix": "",
       "description": "Create or update service definition returns \"CREATED\" response"
-    }
-  ],
-  "CreateServiceAccount": [
-    {
-      "group": "users",
-      "suffix": "",
-      "description": "Create a service account returns \"OK\" response"
     }
   ],
   "CreateUser": [

@@ -17,7 +17,7 @@ further_reading:
 ## Overview
 
 <div class="alert alert-info">
-The source code integration supports:</br></br>Languages:<ul><li>Go</li><li>Java</li><li>JavaScript (doesn't support transpired JavaScript)</li><li>Python</li></ul></br>Git providers:<ul><li>GitHub</li><li>GitLab</li><li>BitBucket</li></ul></br> Self-hosted instances or private URLs are not supported.
+The source code integration supports:</br></br>Languages:<ul><li>Go</li><li>Java</li><li>JavaScript (doesn't support transpiled JavaScript)</li><li>Python</li></ul></br>Git providers:<ul><li>GitHub</li><li>GitLab</li><li>BitBucket</li></ul></br> Self-hosted instances or private URLs are not supported.
 </div>
 
 Datadog's source code integration allows you to connect your telemetry with your Git repositories hosted in GitHub, GitLab, or Bitbucket. Once you have enabled the [source code integration][7], you can debug stack traces, slow profiles, and other issues by quickly accessing the relevant lines of your source code. 
@@ -71,7 +71,7 @@ The `git.commit.sha` and `git.repository_url` are tagged in your telemetry.
 To tag your traces, spans, and profiles with `git.commit.sha` and `git.repository_url`, configure the tracer with the `DD_TAGS` environment variable:
 
 ```
-export DD_TAGS="git.commit.sha:<FULL_GIT_COMMIT_SHA> git.repository_url:git-provider.example/me/my-repo"
+export DD_TAGS="git.commit.sha:<FULL_GIT_COMMIT_SHA>,git.repository_url:git-provider.example/me/my-repo"
 ./my-application start
 ```
 

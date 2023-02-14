@@ -23,7 +23,7 @@ Risk Management is available with the following APM tracing libraries:
 | Language | Minimum Datadog Tracing Library Version |
 | -------- | --------------------------------------- |
 | Java     | 1.1.4 |
-| .NET     | 2.16.0 |
+| .NET | 2.16.0 |
 | NodeJS   | 2.23.0 for NodeJS 12+, or 3.10.0 for NodeJS 14+ |
 | Python   | 1.5.0 |
 
@@ -53,7 +53,7 @@ Risk management detects the open source libraries used by your application at ru
 
 <div class="alert alert-info">Custom code vulnerabilities (<em>unknown vulnerabilities</em>) detection is in private beta. Request access to the feature by <a href="/help/">contacting Support</a>.</div>
 
-Risk Management can find issues in the your services' custom code, the proprietary code that implements the business logic of your application from scratch, in addition to open source and third party libraries. 
+Risk Management can find issues in your services' custom code, the proprietary code that implements the business logic of your application from scratch, in addition to open source and third party libraries. 
 
 The custom code vulnerabilities it can find include:
 

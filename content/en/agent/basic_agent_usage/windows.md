@@ -151,7 +151,6 @@ The execution of the Agent is controlled by the Windows Service Control Manager.
 | hostname        | Prints the hostname used by the Agent.                                           |
 | import          | Imports and converts configuration files from previous versions of the Agent.    |
 | launch-gui      | Starts the Datadog Agent Manager.                                                |
-| regimport       | Import the registry settings into `datadog.yaml`.                                |
 | restart-service | Restarts the Agent within the service control manager.                           |
 | run             | Starts the Agent.                                                                |
 | start           | Starts the Agent. (Being deprecated, but accepted. Use `run` as an alternative.) |

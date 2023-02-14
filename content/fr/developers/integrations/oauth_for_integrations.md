@@ -4,9 +4,9 @@ dependencies:
 kind: documentation
 title: OAuth pour les intégrations
 ---
-{{< beta-callout btn_hidden="true" >}}
+{{< callout btn_hidden="true" >}}
   La plateforme de développement Datadog est encore en version bêta. Si vous n'y avez pas accès, envoyez un e-mail à l'adresse apps@datadoghq.com.
-{{< /beta-callout >}} 
+{{< /callout >}} 
 
 ## Présentation
 

@@ -192,7 +192,7 @@ Windows ホストのネットワークパフォーマンスモニタリングを
     ```
 3. [Agent を再起動します][2]。
 
-   PowerShell (`powershell.exe`) の場合: 
+   PowerShell (`powershell.exe`) の場合:
     ```shell
     restart-service -f datadogagent
     ```
@@ -381,7 +381,7 @@ Docker でネットワークパフォーマンスのモニタリングを有効�
 $ docker run --cgroupns host \
 --pid host \
 -e DD_API_KEY="<DATADOG_API_KEY>" \
--e DD_SYSTEM_PROBE_ENABLED=true \
+-e DD_SYSTEM_PROBE_NETWORK_ENABLED=true \
 -e DD_PROCESS_AGENT_ENABLED=true \
 -v /var/run/docker.sock:/var/run/docker.sock:ro \
 -v /proc/:/host/proc/:ro \
@@ -410,7 +410,7 @@ services:
   datadog:
     image: "gcr.io/datadoghq/agent:latest"
     environment:
-       DD_SYSTEM_PROBE_ENABLED: 'true'
+       DD_SYSTEM_PROBE_NETWORK_ENABLED: 'true'
        DD_PROCESS_AGENT_ENABLED: 'true'
        DD_API_KEY: '<DATADOG_API_KEY>'
     volumes:

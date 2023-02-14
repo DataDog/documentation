@@ -2647,6 +2647,10 @@ components:
         public_id:
           description: The organization public ID.
           type: string
+        region:
+          description: The region of the Datadog instance that the organization belongs
+            to.
+          type: string
         total_cost:
           description: The total cost of products for the month.
           format: double
@@ -2867,6 +2871,8 @@ components:
           type: string
         values:
           description: The array of numerical values for one formula or query.
+          example:
+          - 0.5
           items:
             description: An individual value for a given column and group-by.
             example: 0.5
@@ -3291,6 +3297,8 @@ components:
           $ref: '#/components/schemas/EventsQueryGroupBys'
         indexes:
           description: The indexes in which to search.
+          example:
+          - main
           items:
             description: The unique index name.
             example: main
@@ -3342,6 +3350,8 @@ components:
           $ref: '#/components/schemas/EventsQueryGroupBys'
         indexes:
           description: The indexes in which to search.
+          example:
+          - main
           items:
             description: The unique index name.
             example: main
@@ -3691,6 +3701,9 @@ components:
         values:
           description: The array of tag values for each group found for the results
             of the formulas or queries.
+          example:
+          - - production
+          - - staging
           items:
             description: An individual tag value for a given group column.
             items:
@@ -3704,6 +3717,7 @@ components:
       description: List of tags that apply to a single response value.
       items:
         description: A single tag that applies to a single response value.
+        example: env:production
         type: string
       type: array
     HTTPLog:
@@ -7248,13 +7262,15 @@ components:
       type: object
     MetricsDataSource:
       default: metrics
-      description: A data source that is powered by the Metrics backend.
+      description: A data source that is powered by the Metrics platform.
       enum:
       - metrics
+      - cloud_cost
       example: metrics
       type: string
       x-enum-varnames:
       - METRICS
+      - CLOUD_COST
     MetricsScalarQuery:
       description: An individual scalar metrics query.
       properties:
@@ -9939,6 +9955,7 @@ components:
       - anomaly_detection
       - impossible_travel
       - hardcoded
+      - third_party
       type: string
       x-enum-varnames:
       - THRESHOLD
@@ -9946,6 +9963,7 @@ components:
       - ANOMALY_DETECTION
       - IMPOSSIBLE_TRAVEL
       - HARDCODED
+      - THIRD_PARTY
     SecurityMonitoringRuleEvaluationWindow:
       description: 'A time window is specified to match when at least one of the cases
         matches true. This is a sliding window
@@ -10159,6 +10177,7 @@ components:
       - new_value
       - geo_data
       - event_count
+      - none
       type: string
       x-enum-varnames:
       - COUNT
@@ -10168,6 +10187,7 @@ components:
       - NEW_VALUE
       - GEO_DATA
       - EVENT_COUNT
+      - NONE
     SecurityMonitoringRuleResponse:
       description: Create a new rule.
       oneOf:
@@ -18191,12 +18211,13 @@ paths:
       x-menu-order: 2
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is GA for the metrics data source. Logs
-        is in beta.
+      x-unstable: '**Note**: This endpoint is GA for the metrics and cloud cost data
+        sources. Logs is
 
-        We are gradually onboarding support for more sources. If you have any feedback,
+        in beta. We are gradually onboarding support for more sources. If you have
+        any
 
-        contact [Datadog support](https://docs.datadoghq.com/help/).'
+        feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/query/timeseries:
     post:
       description: 'Query timeseries data across various data sources and
@@ -18231,12 +18252,13 @@ paths:
       x-menu-order: 1
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is GA for the metrics data source. Logs
-        is in beta.
+      x-unstable: '**Note**: This endpoint is GA for the metrics and cloud cost data
+        sources. Logs is
 
-        We are gradually onboarding support for more sources. If you have any feedback,
+        in beta. We are gradually onboarding support for more sources. If you have
+        any
 
-        contact [Datadog support](https://docs.datadoghq.com/help/).'
+        feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/roles:
     get:
       description: Returns all roles, including their names and their unique identifiers.
@@ -20586,7 +20608,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Create a service account
       tags:
-      - Users
+      - Service Accounts
       x-codegen-request-body-name: body
       x-given:
         service_account_user:
@@ -20602,6 +20624,7 @@ paths:
         parameters:
         - name: user_id
           source: data.id
+        tag: Users
         type: unsafe
   /api/v2/service_accounts/{service_account_id}/application_keys:
     get:
@@ -21675,8 +21698,8 @@ paths:
       - description: 'Comma separated list of product families to retrieve. Available
           families are `all`, `analyzed_logs`,
 
-          `application_security`, `audit_logs`, `serverless`, `ci_app`, `cspm`, `custom_events`,
-          `cws`, `dbm`, `fargate`,
+          `application_security`, `audit_logs`, `serverless`, `ci_app`, `cloud_cost_management`,
+          `cspm`, `custom_events`, `cws`, `dbm`, `fargate`,
 
           `infra_hosts`, `incident_management`, `indexed_logs`, `indexed_spans`, `ingested_spans`,
           `iot`,

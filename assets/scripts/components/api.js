@@ -1,3 +1,5 @@
+import Tab from 'bootstrap/js/dist/tab';
+
 const versionSelect = document.querySelector('.js-api-version-select');
 
 if (versionSelect) {
@@ -116,7 +118,8 @@ $('.toggle-version-tab').click(function() {
     const url = $(this).attr('href');
     const el = $(`a[href="${url}"]`);
     if(el) {
-      el.tab('show');
+      const tab = new Tab(el);
+      tab.show()
     }
     return false;
 });
@@ -128,7 +131,8 @@ $('a[data-version^="v"]').click(function() {
     const url = `${href}-${version}`;
     const el = $(`a[href="${url}"]`);
     if(el) {
-      el.tab('show');
+      const tab = new Tab(el);
+      tab.show()
     }
 });
 

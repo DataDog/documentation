@@ -8,9 +8,9 @@ kind: documentation
 title: API Catalog Datadog
 ---
 
-{{< beta-callout url="https://forms.gle/TgezmEhUPXzebvv27" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
+{{< callout url="https://forms.gle/TgezmEhUPXzebvv27" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
   La solution API Catalog de Datadog est en version bêta. Utilisez ce formulaire pour demander à y accéder. 
-{{< /beta-callout >}} 
+{{< /callout >}} 
 
 {{< img src="tracing/api_catalog/api-catalog-overview.png" alt="API Catalog affichant la liste des endpoints d'API avec leur taux d'erreur, leur latence au 99e centile, leur nombre de requêtes et l'équipe responsable. Des fonctions de recherche, de filtrage et de modification du contexte sont également proposées." style="width:100%;" >}}
 

@@ -37,6 +37,8 @@ To configure an integration with Autodiscovery, use the following parameters:
 | `<INIT_CONFIG>`      | Yes      | Configuration for the `init_config:` section for the given Datadog-`<INTEGRATION_NAME>`           |
 | `<INSTANCE_CONFIG>`  | Yes      | Configuration for the `instances:` section for the given Datadog-`<INTEGRATION_NAME>`             |
 
+**Note**: `<INIT_CONFIG>` is not required for Autodiscovery v2, introduced in Datadog Agent 7.36.
+
 [**Discover the full list of Agent integrations that are Autodiscovery ready with examples for those parameters**][3]
 
 Each tab in sections below shows a different way to apply integration templates to a given container. The available methods are:
@@ -50,7 +52,59 @@ Each tab in sections below shows a different way to apply integration templates 
 ## Configuration
 
 {{< tabs >}}
-{{% tab "Docker" %}}
+{{% tab "Docker (AD v2)" %}}
+
+**Note**: AD Annotations v2 was introduced in Datadog Agent 7.36 to simplify integration configuration. For previous versions of the Datadog Agent, use AD Annotations v1.
+
+To automatically enable Autodiscovery over Docker containers, mount `/var/run/docker.sock` into the containerized Agent. On Windows, mount `\\.\pipe\docker_engine`.
+
+Integrations templates can be stored as Docker labels. With Autodiscovery, the Agent detects if it's running on Docker and automatically searches all labels for integration templates. Autodiscovery expects labels to look like the following examples:
+
+**Dockerfile**:
+
+```yaml
+LABEL "com.datadoghq.ad.checks"='{"<INTEGRATION_NAME>": {"instances": [<INSTANCE_CONFIG>]}}'
+```
+
+**docker-compose.yaml**:
+
+```yaml
+labels:
+  com.datadoghq.ad.checks: '{"<INTEGRATION_NAME>": {"instances": [<INSTANCE_CONFIG>]}}'
+```
+
+**Using `docker run`, `nerdctl run`, or `podman run` commands**:
+
+```shell
+-l com.datadoghq.ad.checks="{\"<INTEGRATION_NAME>\": {\"instances\": [<INSTANCE_CONFIG>]}}"
+```
+
+**Note**: You can escape JSON while configuring these labels. For example:
+```shell
+docker run --label "com.datadoghq.ad.checks="{\"apache\": {\"instances\": [{\"apache_status_url\":\"http://%%host%%/server-status?auto2\"}]}}"
+```
+
+**Docker Swarm**:
+
+When using Swarm mode for Docker Cloud, labels must be applied to the image:
+
+```yaml
+version: "1.0"
+services:
+...
+  project:
+    image: '<IMAGE_NAME>'
+    labels:
+      com.datadoghq.ad.checchecksk_names: '{"<INTEGRATION_NAME>": {"instances": [<INSTANCE_CONFIG>]}}'
+
+```
+
+**Note**: When configuring Autodiscovery, Datadog recommends using Docker labels to unify telemetry across your containerized environment. Read the [unified service tagging][1] documentation for more information.
+
+
+[1]: /getting_started/tagging/unified_service_tagging/?tab=docker
+{{% /tab %}}
+{{% tab "Docker (AD v1)" %}}
 
 To automatically enable Autodiscovery over Docker containers, mount `/var/run/docker.sock` into the Containerized Agent. On Windows, mount `\\.\pipe\docker_engine`.
 
@@ -73,10 +127,15 @@ labels:
   com.datadoghq.ad.instances: '[<INSTANCE_CONFIG>]'
 ```
 
-**`docker run`, `nerdctl run`, or `podman run` commands**:
+**Using `docker run`, `nerdctl run`, or `podman run` commands**:
 
 ```shell
 -l com.datadoghq.ad.check_names='[<INTEGRATION_NAME>]' -l com.datadoghq.ad.init_configs='[<INIT_CONFIG>]' -l com.datadoghq.ad.instances='[<INSTANCE_CONFIG>]'
+```
+
+**Note**: You can escape JSON while configuring these labels. For example:
+```shell
+docker run --label "com.datadoghq.ad.check_names=[\"redisdb\"]" --label "com.datadoghq.ad.init_configs=[{}]" --label "com.datadoghq.ad.instances=[{\"host\":\"%%host%%\",\"port\":6379}]" --label "com.datadoghq.ad.logs=[{\"source\":\"redis\"}]" --name redis redis
 ```
 
 **Docker Swarm**:
