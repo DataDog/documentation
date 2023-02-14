@@ -367,7 +367,7 @@ Otherwise, turn on [debug mode][1] and [open a support ticket][2] with the debug
 - Application type (for example, Web application running in IIS).
 
 
-## Reduce Overhead when using the Profiler
+## Reduce overhead when using the profiler
 
 ### Enabling the profiler machine-wide
 
