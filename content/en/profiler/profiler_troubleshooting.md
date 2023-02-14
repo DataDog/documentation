@@ -367,7 +367,28 @@ Otherwise, turn on [debug mode][1] and [open a support ticket][2] with the debug
 - Application type (for example, Web application running in IIS).
 
 
-## High CPU usage when enabling the profiler
+## Reduce Overhead when using the Profiler
+
+### Enabling the Profiler Machine-wide
+
+Datadog does not recommend enabling the profiler at machine-level or for all IIS application pools, as the profiler has fixed overhead per profiled application. In order to reduce the amount of resources used by the profiler, you can:
+- Increase the allocated resources, such as increasing CPU cores.
+- Profile only specific applications by setting environment in batch files instead of directly running the application.
+- Reduce the amount of IIS pools being profiled (only possible in IIS 10+).
+- Disable wall time profiler with DD_PROFILING_WALLTIME_ENABLED=0.
+
+### Linux Containers
+
+The profiler has a fixed overhead. The exact value can vary but this fixed cost means that the relative overhead of the profiler can be significant in very small containers. To avoid this situation, the profiler is disabled in containers with less than 1 core. You can override the 1 core threshold by setting DD_PROFILING_MIN_CORES_THRESHOLD environment variable to a value smaller than 1. For example, a value of 0.5 allows the profiler to run in a container with at least 0.5 cores.
+
+### Disabling the Profiler
+
+Since APM tracing also relies on the CLR Profiling API, if you want to stop collecting .NET profiles but continue receiving .NET traces, set the following environment variables to disable profiling and keep tracing. 
+
+```
+ DD_PROFILING_ENABLED=0 
+ CORECLR_ENABLE_PROFILING=1
+```
 
 The profiler has a fixed overhead. The exact value can vary but this fixed cost means that the relative overhead of the profiler can be significant in very small containers. To avoid this situation, the profiler is disabled in containers with less than 1 core.
 You can override the 1 core threshold by setting `DD_PROFILING_MIN_CORES_THRESHOLD` environment variable to a value smaller than 1. For example, a value of `0.5` allows the profiler to run in a container with at least 0.5 cores.
