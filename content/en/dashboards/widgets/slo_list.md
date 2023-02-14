@@ -12,7 +12,7 @@ further_reading:
   text: "Building Dashboards using JSON" 
 ---
 
-The SLO List widget displays a subset of [SLOs][1] over their primary time window. All other configured time windows are still available in the SLO's side panel. 
+The SLO List widget displays a subset of [SLOs][1] over their primary time window. All other configured time windows are still available on the SLO's side panel. 
 
 {{< img src="dashboards/widgets/slo_list/slo_list_widget_v2.png" alt="The SLO List widget displaying a list of SLOs" style="width:90%;" >}}
 
