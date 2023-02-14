@@ -15,7 +15,7 @@ further_reading:
 
 The [Usage Attribution][1] page provides information and functionality related to data usage and usage types. By default, the data usage can be viewed and filtered by broader categories such as product, organization, or tag keys. This guide describes how to configure RUM usage attribution so it can be viewed by custom categories on the Usage Attribution page (accurate to +/- 20% of the actual value). This can help you track RUM sessions and costs for different departments, products, or other categories, instead of viewing a single aggregate number. 
 
-As an example, we'll walk through how to track RUM usage by department.
+As an example, this guide walks through how to track RUM usage by department.
 
 ## Set up RUM usage attribution
 
@@ -38,10 +38,10 @@ To set tags for **mobile sessions**, use the [`addAttribute`][5] method. Here's 
 
 ```javascript
 //Android
-GlobalRum.addAttribute(‘department’, ‘marketing’)
+GlobalRum.addAttribute('department', 'marketing')
 
 //iOS
-Global.rum.addAttribute(forKey: ‘department’, value: ‘marketing’)
+Global.rum.addAttribute(forKey: 'department', value: 'marketing')
 ```
 
 **Note**: We include a few tags by default (`service`, `env`, `version`, and `application.id`). For anything else, set the global context using the method above.
