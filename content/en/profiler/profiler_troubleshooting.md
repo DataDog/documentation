@@ -375,7 +375,7 @@ Datadog does not recommend enabling the profiler at machine-level or for all IIS
 - Increase the allocated resources, such as increasing CPU cores.
 - Profile only specific applications by setting environment in batch files instead of directly running the application.
 - Reduce the number of IIS pools being profiled (only possible in IIS 10 or later).
-- Disable wall time profiler with DD_PROFILING_WALLTIME_ENABLED=0.
+- Disable wall time profiling with the setting `DD_PROFILING_WALLTIME_ENABLED=0`.
 
 ### Linux Containers
 
