@@ -3588,8 +3588,6 @@ components:
           items:
             description: The version name.
             example: FreeBSD
-            nullable: true
-            type: string
           type: array
         gohai:
           description: JSON string containing system information.
@@ -3614,8 +3612,6 @@ components:
           items:
             description: Version name.
             example: Ubuntu
-            nullable: true
-            type: string
           type: array
         platform:
           description: The OS platform.
@@ -3642,8 +3638,6 @@ components:
           items:
             description: Version name.
             example: Windows
-            nullable: true
-            type: string
           type: array
       type: object
     HostMetaInstallMethod:
