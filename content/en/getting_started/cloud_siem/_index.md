@@ -1,6 +1,14 @@
 ---
 title: Getting Started with Cloud SIEM
 kind: documentation
+aliases:
+    - /cloud-siem/getting_started/
+    - /security_monitoring/getting_started/
+    - /security_platform/security_monitoring/
+    - /security_platform/security_monitoring/getting_started
+    - /security_platform/getting_started/
+    - /security_platform/cloud_siem/getting_started
+    - /security/cloud_siem/getting_started
 further_reading:
     - link: "https://learn.datadoghq.com/courses/intro-to-cloud-siem"
       tag: "Learning Center"
@@ -27,9 +35,9 @@ This guide walks you through best practices for getting started with Cloud SIEM.
 1. Configure [log ingestion][1] to collect logs from your sources. Review [Best Practices for Log Management][2].
 
     You can use [out-of-the-box integration pipelines][3] to collect logs for more than {{< translate key="integration_count" >}} integrations. 
-    
+
     Or, [create custom log pipelines][4] to send:
-   
+
     - [Cloud Audit logs][5]: See the [AWS Configuration Guide][6] for steps on setting up AWS Cloudtrail for Cloud SIEM.
     - [Identity Provider logs][7]
     - SaaS and Workspace logs

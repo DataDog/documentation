@@ -2566,41 +2566,36 @@ main:
     parent: security_platform_heading
     identifier: cloud_siem
     weight: 181000
-  - name: Getting Started
-    url: security/cloud_siem/getting_started
-    parent: cloud_siem
-    identifier: cloud_siem_getting_started
-    weight: 1
   - name: Log Detection Rules
     url: security/cloud_siem/log_detection_rules
     parent: cloud_siem
     identifier: cloud_siem_log_detection_rules
-    weight: 2
+    weight: 1
   - name: Signal Correlation Rules
     url: security/cloud_siem/signal_correlation_rules
     parent: cloud_siem
     identifier: cloud_siem_signal_correlation_rules
-    weight: 3
+    weight: 2
   - name: OOTB Rules
     url: /security/default_rules/#cat-cloud-siem-log-detection
     parent: cloud_siem
     identifier: cloud_siem_default_rules
-    weight: 4
+    weight: 3
   - name: Signals Explorer
     url: /security/explorer
     parent: cloud_siem
     identifier: cloud_siem_signals_explorer
-    weight: 5
+    weight: 4
   - name: Investigator
     url: security/cloud_siem/investigator
     parent: cloud_siem
     identifier: cloud_siem_investigator
-    weight: 6
+    weight: 5
   - name: Guides
     url: security/cloud_siem/guide/
     parent: cloud_siem
     identifier: siem_guides
-    weight: 7
+    weight: 6
   - name: Cloud Security Management
     url: security/cloud_security_management
     parent: security_platform_heading
