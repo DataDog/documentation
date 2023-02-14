@@ -101,17 +101,12 @@ Run more API calls to see the application in action. When you're done, shut down
    docker-compose -f all-docker-compose.yaml rm
    {{< /code-block >}}
 
-## Install Datadog tracing
+## Enable tracing
 
-Next, install the Go tracer. From your `apm-tutorial-golang` directory, run:
+Next, configure the Go application to enable tracing. Because the Agent runs in a container, there's no need to install anything.
 
-{{< code-block lang="bash" >}}
-go get gopkg.in/DataDog/dd-trace-go.v1/ddtrace
-{{< /code-block >}}
+To enable tracing support, uncomment the following imports in `apm-tutorial-golang/cmd/calendar/main.go`:
 
-Now that the tracing library has been added to `go.mod`, enable tracing support.
-
-Uncomment the following imports in `apm-tutorial-golang/cmd/calendar/main.go`:
 {{< code-block lang="go" >}}
 	sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
 	chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
@@ -143,19 +138,73 @@ sqltrace.Register("sqlite3", &sqlite3.SQLiteDriver{}, sqltrace.WithServiceName("
 db, err := sqltrace.Open("sqlite3", "file::memory:?cache=shared")
 {{< /code-block >}}
 
-Comment out the following line:
+Uncomment the following line:
 {{< code-block lang="go" >}}
 db, err := sql.Open("sqlite3", "file::memory:?cache=shared")
 {{< /code-block >}}
 
-Once you've made these changes, run:
-{{< code-block lang="go" >}}
-go mod tidy
+## Add the Agent container
+
+Add the Datadog Agent in the services section of your `all-docker-compose.yaml` file to add the Agent to your build:
+
+1. Uncomment the Agent configuration, and specify your own [Datadog API key][3]:
+   {{< code-block lang="yaml" >}}
+     datadog-agent:
+     container_name: datadog-agent
+     image: "gcr.io/datadoghq/agent:latest"
+     pid: host
+     environment:
+       - DD_API_KEY=<DD_API_KEY_HERE>
+       - DD_APM_ENABLED=true
+       - DD_APM_NON_LOCAL_TRAFFIC=true
+     volumes:
+       - /var/run/docker.sock:/var/run/docker.sock
+       - /proc/:/host/proc/:ro
+       - /sys/fs/cgroup:/host/sys/fs/cgroup:ro
+   {{< /code-block >}}
+
+1. Uncomment the `depends_on` fields for `datadog-agent` in the `notes` container.
+
+1. Observe that in the `notes` service section, the `DD_AGENT_HOST` environment variable is set to the hostname of the Agent container. Your `notes` container section should look like this:
+   {{< code-block lang="yaml" >}}
+   notes:
+    container_name: notes
+    restart: always
+    build:
+      context: ../
+      dockerfile: ../dockerfile.notes
+    ports:
+      - 8080:8080
+    labels:
+      - com.datadoghq.tags.service="notes"
+      - com.datadoghq.tags.env="dev"
+      - com.datadoghq.tags.version="0.0.1"
+    environment:
+      - DD_SERVICE=notes
+      - DD_ENV=dev
+      - DD_VERSION=0.0.1
+      - DD_AGENT_HOST=datadog-agent
+#     - CALENDAR_HOST=calendar
+    depends_on:
+#     - calendar
+      - datadog-agent
+   {{< /code-block >}}
+   You'll configure the `calendar` sections and variables later in this tutorial.
+
+## Launch the containers to explore automatic instrumentation
+
+Now that the Tracing Library is installed, spin up your application containers and start receiving traces. Run the following commands:
+
+{{< code-block lang="sh" >}}
+docker-compose -f all-docker-compose.yaml build
+docker-compose -f all-docker-compose.yaml up -d
 {{< /code-block >}}
 
-## Launch the Go application and explore automatic instrumentation
-
 To start generating and collecting traces, launch the application again with `make run`.
+
+You can tell the Agent is working by observing continuous output in the terminal, or by opening the [Events Explorer][8] in Datadog and seeing the start event for the Agent:
+
+{{< img src="tracing/guide/tutorials/tutorial-python-container-agent-start-event.png" alt="Agent start event shown in Events Explorer" style="width:100%;" >}}
 
 Use `curl` to again send requests to the application:
 
@@ -195,14 +244,14 @@ A `GET /notes` trace looks something like this:
 
 ## Tracing configuration
 
-The tracing library enables the use of tags to help compile and display data accurately in the Datadog dashboard. This is done by enabling a few environment variables when running the application. The project `Makefile` includes the environment variables `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`, which are set to enable [Unified Service Tagging][17]:
+The tracing library enables the use of tags to help compile and display data accurately in the Datadog dashboard. This is done by enabling a few environment variables when running the application. The project Compose file that you set up earlier includes the environment variables `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`, which are set to enable [Unified Service Tagging][17]:
 
-{{< code-block lang="go" filename="Makefile" disable_copy="true" collapsible="true" >}}
-run: build
-  DD_TRACE_SAMPLE_RATE=1 DD_SERVICE=notes DD_ENV=dev DD_VERSION=0.0.1 ./cmd/notes/notes &
+{{< code-block lang="go" filename="all-docker-compose.yaml" disable_copy="true" >}}
+environment:
+  - DD_API_KEY=<DD_API_KEY_HERE>
+  - DD_APM_ENABLED=true
+  - DD_APM_NON_LOCAL_TRAFFIC=true
 {{< /code-block >}}
-
-<div class="alert alert-warning">The <code>Makefile</code> also sets the environment variable <code>DD_TRACE_SAMPLE_RATE</code> to <code>1</code>, which represents a 100% sample rate. The guide sets a 100% sample rate to ensure that all requests to the notes service are sent to the Datadog backend for analysis and display. Avoid changing the sample rate in a production or high-volume environment. Setting a high sample rate in the application overrides the Agent configuration and results in a very large volume of data being sent to Datadog. For most use cases, allow the Agent to automatically determine the sampling rate.</div>
 
 For more information on available configuration options, see [Configuring the Go Tracing Library][14].
 
@@ -298,30 +347,87 @@ func privateMethod1(ctx context.Context) {
 
 For more information on custom tracing, see [Go Custom Instrumentation][12].
 
-## Examine distributed traces
+## Add a second application to see distributed traces
 
 Tracing a single application is a great start, but the real value in tracing is seeing how requests flow through your services. This is called _distributed tracing_.
 
 The sample project includes a second application called `calendar` that returns a random date whenever it is invoked. The `POST` endpoint in the notes application has a second query parameter named `add_date`. When it is set to `y`, the notes application calls the calendar application to get a date to add to the note.
 
-To enable tracing in the calendar application, uncomment the following lines in cmd/calendar/main.go:
+To enable tracing in the calendar application:
 
-{{< code-block lang="go" filename="notes/notesHelper.go" disable_copy="true" collapsible="true" >}}
-chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
-	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-{{< /code-block >}}
+1. Uncomment the following lines in cmd/calendar/main.go:
+   {{< code-block lang="go" filename="notes/notesHelper.go" disable_copy="true" collapsible="true" >}}
+   chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
+     "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+   {{< /code-block >}}
 
-{{< code-block lang="go" filename="notes/notesHelper.go" disable_copy="true" collapsible="true" >}}
-tracer.Start()
-	defer tracer.Stop()
-{{< /code-block >}}
+   {{< code-block lang="go" filename="notes/notesHelper.go" disable_copy="true" collapsible="true" >}}
+   tracer.Start()
+      defer tracer.Stop()
+   {{< /code-block >}}
 
-{{< code-block lang="go" filename="notes/notesHelper.go" disable_copy="true" collapsible="true" >}}
-	r.Use(chitrace.Middleware(chitrace.WithServiceName("calendar")))
-{{< /code-block >}}
+   {{< code-block lang="go" filename="notes/notesHelper.go" disable_copy="true" collapsible="true" >}}
+      r.Use(chitrace.Middleware(chitrace.WithServiceName("calendar")))
+   {{< /code-block >}}
 
-1. If the notes application is still running, use make exitNotes to stop it.
-1. Run `make run` to start the sample application.
+1. Open `docker/all-docker-compose.yaml` and uncomment the `calendar` service to set up the Agent host and Unified Service Tags for the app and for Docker:
+   {{< code-block lang="yaml" filename="docker/all-docker-compose.yaml" >}}
+   calendar:
+     container_name: calendar
+     restart: always
+     build:
+       context: ../
+       dockerfile: ../dockerfile.calendar
+     labels:
+       - com.datadoghq.tags.service="calendar"
+       - com.datadoghq.tags.env="dev"
+       - com.datadoghq.tags.version="0.0.1"
+     environment:
+       - DD_SERVICE=calendar
+       - DD_ENV=dev
+       - DD_VERSION=0.0.1
+       - DD_AGENT_HOST=datadog-agent
+     ports:
+       - 9090:9090
+     depends_on:
+       - datadog-agent
+   {{< /code-block >}}
+1. In the `notes` service section, uncomment the `CALENDAR_HOST` environment variable and the `calendar` entry in `depends_on` to make the needed connections between the two apps. Your notes service should look like this:
+   {{< code-block lang="yaml" filename="docker/all-docker-compose.yaml" >}}
+   notes:
+     container_name: notes
+     restart: always
+     build:
+       context: ../
+       dockerfile: ../dockerfile.notes
+     ports:
+       - 8080:8080
+     labels:
+       - com.datadoghq.tags.service="notes"
+       - com.datadoghq.tags.env="dev"
+       - com.datadoghq.tags.version="0.0.1"
+     environment:
+       - DD_SERVICE=notes
+       - DD_ENV=dev
+       - DD_VERSION=0.0.1
+       - DD_AGENT_HOST=datadog-agent
+       - CALENDAR_HOST=calendar
+     depends_on:
+       - calendar
+       - datadog-agent
+   {{< /code-block >}}
+
+1. Stop all running containers:
+   {{< code-block lang="sh" >}}
+   docker-compose -f all-docker-compose.yaml down
+   {{< /code-block >}}
+
+1. Spin up your application containers:
+   {{< code-block lang="sh" >}}
+   docker-compose -f all-docker-compose.yaml build
+   docker-compose -f all-docker-compose.yaml up -d
+   {{< /code-block >}}
+
 1. Send a POST request with the `add_date` parameter:
    {{< code-block lang="go">}}curl -X POST 'localhost:8080/notes?desc=hello_again&add_date=y'{{< /code-block >}}
 
