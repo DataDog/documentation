@@ -43,7 +43,7 @@ Mobile RUM tracking is only run upon user consent. If the end user accepts the R
 You have several options and tools when it comes to collecting and redacting data captured by RUM.
 
 ### Event tracking
-An [event][14] is a user interaction with specific elements of your site or app. Events can be automatically captured via the SDK or sent via custom actions. You can turn off automatic tracking of user interactions and page views to only capture the interaction of your choice. By default, we use target content to generate action names from actions automatically collected by the SDK. You can [explicitly override][5] this behavior with any given name.
+An [event][14] is a user interaction with specific elements of your site or app. Events can be automatically captured via the SDK or sent via custom actions. You can turn off automatic tracking of user interactions and page views to only capture the interaction of your choice. By default, RUM uses target content to generate action names from actions automatically collected by the SDK. You can [explicitly override][5] this behavior with any given name.
 
 The data we track automatically contains primarily technical information, much of which doesn't include personal identifying information. Data that is captured by RUM can be further redacted before it is sent and stored in Datadog through advanced configuration options for the following methods:
 
@@ -72,19 +72,19 @@ Any of this retained data can be extended to a maximum of 90 days at no addition
 Datadog provides role-based access control (RBAC) for managing who sees captured RUM data. Default settings for data access depend on the role a user gets added to. There are three types of Datadog roles available: Administrator, Standard, and Read Only roles. More granular RUM-specific permissions are defined in [Datadog role permissions][10]. For example, you can grant or revoke access to view Session Replays.
 
 ### Data deletion
-If you need to delete data stored by Datadog, for example, if potentially sensitive data has been leaked into RUM events, you can hard-delete data from within a given timeframe. With a hard delete, **all** data is deleted; it cannot be targeted towards a a specific application. If you need any data deleted, reach out to the [Datadog support team][9].
+If you need to delete data stored by Datadog, for example, if potentially sensitive data has been leaked into RUM events, you can hard-delete data from within a given timeframe. With a hard delete, **all** data is deleted; it cannot be targeted to a specific application. If you need any data deleted, reach out to the [Datadog support team][9].
 
 ### Personal and sensitive data removal
 You have some options available for removing Personally Identifiable Information (PII), and sensitive data, including IP addresses and geolocation. Some scenarios where PII could appear in RUM:
 
 - Action names on buttons (for example, "View full credit card number")
-- View names shown in URLs
+- Names shown in URLs
 - Custom tracked events instrumented by the developers of the app
 
 #### Unstructured data
 PII inadvertently included in unstructured data, such as an individual's name in a text box, can only be removed through a data deletion requisition for a specified timeframe.
 
-When it comes to URLs, you have the option to track page views manually in order to remove any PII or use beforeSend to change the URL shape.
+With respect to URLs, you have the option to track page views manually in order to remove any PII or use beforeSend to change the URL text.
 
 You can also transmit all RUM events through your own (proxy) server so that end user devices never directly communicate with Datadog.
 
@@ -93,10 +93,10 @@ When setting up a RUM application, you can choose whether or not you want to inc
 
 {{< img src="data_security/data-security-rum-privacy-compliance-edit-rum-application.png" alt="You can include or exclude geolocation and client IP data from the RUM application setup page" style="width:100%;" >}}
 
-If you choose to collect this data, you can request that it be scrubbed from any future collected data at any time by submitting a support ticket. It is not possible to remove IPs from data collected prior to initiating scrubbing. IP scrubbing occurs at the organization level; this data cannot be removed for specific applications, services, and so on. It is done at the backend level, which means the Browser SDK will still be sending data, but IP addresses will be scrubbed out by our backend pipelines and dropped at processing time.
+If you choose to collect this data, you can request that it be scrubbed from any future collected data by submitting a support ticket at any time. It is not possible to remove IPs from data collected prior to initiating scrubbing. IP scrubbing occurs at the organization level; this data cannot be removed for specific applications, services, and so on. It is performed on the backend, which means the Browser SDK will still be sending data, but IP addresses will be scrubbed by Datadog backend pipelines and dropped at processing time.
 
 #### Geolocation
-In addition to removing client IPs, you can also choose to scrub geolocation (country, city, county), or GeoIP from all future collected data. It is not possible to scrub only GeoIP data without removing client IPs. Geolocation scrubbing occurs at the organization level; this data cannot be removed for specific applications, services, and so on. It is done at the backend level, which means the Browser SDK will still be sending data, but geolocation IP will be scrubbed out by our backend pipelines and dropped at processing time.
+In addition to removing client IPs, you can also choose to scrub geolocation (country, city, county), or GeoIP from all future collected data. It is not possible to scrub only GeoIP data without removing client IPs. As with IP addresses, geolocation scrubbing occurs at the organization level; this data cannot be removed for specific applications, services, and so on. It is done at the backend level, which means the Browser SDK will still be sending data, but geolocation data will be scrubbed out by our backend pipelines and dropped at processing time.
 
 ### Proactively search for sensitive data with Sensitive Data Scanner
 [Sensitive Data Scanner][11] allows you to proactively search and scrub sensitive data upon ingestion by Datadog. RUM events are scanned on the stream before any data is stored within Datadog. The tool has the power to scrub, hash, or partially redact PII data before it is stored. It works by applying out-of-the-box or customer-developed pattern matching rules.
