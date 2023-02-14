@@ -21,7 +21,7 @@ aliases:
   - /tracing/profiler/enabling/dotnet/
 ---
 
-The profiler is shipped within Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to enabling the profiler.
+The profiler is shipped within Datadog tracing libraries. If you are already using [APM to collect traces][5] for your application, you can skip installing the library and go directly to enabling the profiler.
 
 ## Requirements
 
@@ -62,9 +62,9 @@ The following profiling features are available in the following minimum versions
 
 ## Installation
 
-If you are already using Datadog, upgrade your Agent to version 7.20.2+ or 6.20.2+. As the profiler ships together with the tracer (beginning with Tracer v2.8.0), if you already have APM instrumented please move to section <a href="?tab=linux#enabling-the-proflier">Enabling the Profiler</a>.
+If you are already using Datadog, upgrade your Agent to version 7.20.2+ or 6.20.2+. The profiler ships together with the tracing library (beginning with v2.8.0), so if you are already using [APM to collect traces][5] for your application, you can skip installing the library and go directly to [Enabling the profiler](#enabling-the-profiler).
 
-If not please continue in order to install the profiler using the following steps, depending on your operating system.
+Otherwise, install the profiler using the following steps, depending on your operating system.
 
 <div class="alert alert-warning">
   <strong>Note:</strong> Datadog's automatic instrumentation relies on the .NET CLR Profiling API. Since this API allows only one subscriber, run only one APM solution in your application environment.
@@ -129,9 +129,10 @@ To install the .NET Profiler per-application:
 ## Enabling the Profiler
 
 <div class="alert alert-info">
-  <strong>Note:</strong> Datadog does not recommend enabling the profiler at machine-level or for all IIS applications. In the case it is enabled machine-wide, please refer to our <a href="?tab=linux&code-lang=dotnet">Troubleshooting Documentation</a> on how to reduce the overhead related to enabling the profiler for all system applications.
+  <strong>Note:</strong> Datadog does not recommend enabling the profiler at machine-level or for all IIS applications. If you have enabled it machine-wide, see the <a href="/profiler/profiler_troubleshooting/?code-lang=dotnet#enabling-the-profiler-machine-wide">Troubleshooting documentation</a> for information about reducing the overhead related to enabling the profiler for all system applications.
 </div>
 
+{{< tabs >}}
 {{% tab "Linux" %}}
 3. Set the following required environment variables for automatic instrumentation to attach to your application:
 
@@ -384,5 +385,6 @@ The [Getting Started with Profiler][4] guide takes a sample service with a perfo
 [2]: https://app.datadoghq.com/account/settings?agent_version=6#agent
 [3]: /getting_started/tagging/unified_service_tagging
 [4]: /getting_started/profiler/
+[5]: /tracing/trace_collection/
 [12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
 [13]: /profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
