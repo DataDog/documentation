@@ -125,6 +125,7 @@ To install the .NET Profiler per-application:
 {{< /tabs >}}
 
 <br>
+
 ## Enabling the Profiler
 
 <div class="alert alert-info">
