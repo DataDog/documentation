@@ -133,7 +133,7 @@ The Datadog profiler consists of several profiling engines, including CPU, wallc
 {{< tabs >}}
 {{% tab "Datadog" %}}
 
-The Datadog profiler is enabled by default in dd-trace-java versions 1.7.0+. Datadog CPU profiling is scheduled via perf events and is more accurate than JFR CPU profiling. To enable CPU profiling:
+The Datadog profiler is enabled by default in dd-trace-java versions 1.7.0+. Datadog CPU profiling is scheduled through perf events and is more accurate than JFR CPU profiling. To enable CPU profiling:
 
 ```
 export DD_PROFILING_DDPROF_ENABLED=true # this is the default in v1.7.0+
