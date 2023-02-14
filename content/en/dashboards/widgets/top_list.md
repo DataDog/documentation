@@ -22,7 +22,7 @@ The top list visualization enables you to display a list of Tag values like `hos
 
 ## Setup
 
-{{< img src="dashboards/widgets/toplist/toplist_config.png" alt="Top List" style="width:80%;">}}
+{{< img src="dashboards/widgets/toplist/toplist_config.png" alt="Top List setup showing Visual Formatting Rules" style="width:80%;">}}
 
 ### Configuration
 
