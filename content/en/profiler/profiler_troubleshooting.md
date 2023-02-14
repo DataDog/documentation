@@ -369,7 +369,7 @@ Otherwise, turn on [debug mode][1] and [open a support ticket][2] with the debug
 
 ## Reduce Overhead when using the Profiler
 
-### Enabling the Profiler Machine-wide
+### Enabling the profiler machine-wide
 
 Datadog does not recommend enabling the profiler at machine-level or for all IIS application pools, as the profiler has fixed overhead per profiled application. In order to reduce the amount of resources used by the profiler, you can:
 - Increase the allocated resources, such as increasing CPU cores.
