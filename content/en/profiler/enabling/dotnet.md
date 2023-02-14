@@ -129,11 +129,8 @@ To install the .NET Profiler per-application:
 ## Enabling the Profiler
 
 <div class="alert alert-info">
-  <strong>Note:</strong> Datadog does not recommend enabling the profiler at machine-level or for all IIS applications. In the case it is enabled machine-wide, please refer to our <a href="/profiler/profiler_troubleshooting/?tab=linux&code-lang=dotnet">Troubleshooting Documentation</a> on how to reduce the overhead related to enabling the profiler for all system applications.
+  <strong>Note:</strong> Datadog does not recommend enabling the profiler at machine-level or for all IIS applications. In the case it is enabled machine-wide, please refer to our <a href="?tab=linux&code-lang=dotnet">Troubleshooting Documentation</a> on how to reduce the overhead related to enabling the profiler for all system applications.
 </div>
-
-[1]: https://docs.datadoghq.com/profiler/profiler_troubleshooting/?tab=windows&code-lang=dotnet#high-cpu-usage-when-enabling-the-profiler
-{{< tabs >}}
 
 {{% tab "Linux" %}}
 3. Set the following required environment variables for automatic instrumentation to attach to your application:
