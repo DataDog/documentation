@@ -34,7 +34,7 @@ RUM can be configured for compliance with many standards and regulatory framewor
 By default, there are some privacy restrictions in place that protect user data to help comply with regulatory and standards frameworks.
 
 ### Browser RUM use of cookies
-Browser RUM requires **first party cookies** to be enabled on an end user's browser to collect data. If required by the jurisdictions in which you operate, your pages should be configured so that the end user must accept cookies RUM is initialized and begins collecting data.
+Browser RUM requires **first party cookies** to be enabled on an end user's browser to collect data. If required by the jurisdictions in which you operate, your pages should be configured so that the end user must accept cookies before RUM is initialized and begins collecting data.
 
 ### Mobile RUM consent management
 Mobile RUM tracking is only run upon user consent. If the end user accepts the RUM tracking, we track their activity and session experience. If the user declines the RUM tracking, we do not track their activity and session experience.
@@ -63,8 +63,8 @@ After you have configured the event capture, events are stored in Datadog. You c
 
 By default, data retention for production environments is:
 
-- 30 days for sessions, views, actions, errors, and session recordings
-- 15 days for resources and long tasks
+- 30 days for sessions, views, actions, errors, and session recordings.
+- 15 days for resources and long tasks.
 
 Any of this retained data can be extended to a maximum of 90 days at no additional cost by [opening a support ticket][8].
 
@@ -118,7 +118,7 @@ See [privacy options specific to Session Replay][12].
 [8]: /help/
 [9]: /help/
 [10]: /account_management/rbac/permissions/#real-user-monitoring
-[11]: /product/sensitive-data-scanner/
+[11]: /account_management/org_settings/sensitive_data_detection
 [12]: /real_user_monitoring/session_replay/privacy_options
 [13]: https://www.datadoghq.com/privacy/
 [14]: /real_user_monitoring/explorer/search/
