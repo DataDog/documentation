@@ -1381,11 +1381,16 @@ main:
     parent: tracing_dd_libraries
     identifier: tracing_ddlib_dotnet_framework
     weight: 109
+  - name: Injecting Libraries
+    url: tracing/trace_collection/library_injection/
+    parent: tracing_trace_collection
+    identifier: tracing_library_injection
+    weight: 102
   - name: Library Compatibility
     url: tracing/trace_collection/compatibility/
     parent: tracing_trace_collection
     identifier: tracing_compatibility
-    weight: 102
+    weight: 103
   - name: Java
     url: tracing/trace_collection/compatibility/java/
     parent: tracing_compatibility
@@ -1435,7 +1440,7 @@ main:
     url: tracing/trace_collection/library_config/
     parent: tracing_trace_collection
     identifier: tracing_library_config
-    weight: 103
+    weight: 104
   - name: Java
     url: tracing/trace_collection/library_config/java/
     parent: tracing_library_config
@@ -1485,7 +1490,7 @@ main:
     url: tracing/trace_collection/custom_instrumentation/
     parent: tracing_trace_collection
     identifier: tracing_custom_inst
-    weight: 104
+    weight: 105
   - name: Java
     url: tracing/trace_collection/custom_instrumentation/java/
     parent: tracing_custom_inst
@@ -1526,15 +1531,10 @@ main:
     parent: tracing_custom_inst
     identifier: tracing_custom_inst_dotnet
     weight: 108
-  - name: OpenStandards
-    url: tracing/trace_collection/open_standards
-    parent: tracing_trace_collection
-    identifier: tracing_open_standards
-    weight: 105  
-  - name: OpenTelemetry
+  - name: Instrumenting with OpenTelemetry
     url: opentelemetry/otel_tracing/
     parent: tracing_trace_collection
-    identifier: tracing_open_telemetry
+    identifier: tracing_open_standards
     weight: 106
   - name: Java
     url: tracing/trace_collection/open_standards/java/
@@ -1576,26 +1576,16 @@ main:
     parent: tracing_trace_collection
     identifier: tracing_serverless
     weight: 107
-  - name: Admission Controller Injection
-    url: tracing/trace_collection/admission_controller/
-    parent: tracing_trace_collection
-    identifier: tracing_admission_controller
-    weight: 108
-  - name: Injecting Libraries
-    url: tracing/trace_collection/library_injection/
-    parent: tracing_trace_collection
-    identifier: tracing_library_injection
-    weight: 109
   - name: Tracing Proxies
     url: tracing/trace_collection/proxy_setup/
     parent: tracing_trace_collection
     identifier: tracing_proxies
-    weight: 110
+    weight: 108
   - name: Span Tags Semantics
     url: tracing/trace_collection/tracing_naming_convention
     parent: tracing_trace_collection
     identifier: tracing_naming_convention
-    weight: 111
+    weight: 109
   - name: APM Metrics Collection
     url: tracing/metrics/
     parent: tracing

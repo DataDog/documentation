@@ -31,9 +31,19 @@ Read [OpenTelemetry][4] for more information.
 
 You can correlate OpenTelemetry traces and logs so that your application logs monitoring and analysis has the additional context provided by the OpenTelemetry traces. See [Connect OpenTelemetry Traces and Logs][5] for language specific instructions and example code.
 
-## OpenStandards
+## OpenTracing
 
 Datadog recommends you use the OpenTelemetry Collector Datadog exporter or the OTLP Ingest in the Datadog Agent in conjunction with OpenTelemetry tracing clients. However, if that doesn't work for you, each of the supported languages also has support for sending [OpenTracing][6] data to Datadog. Read more about [setting up OpenTracing for each supported language][7]. 
+
+{{< whatsnext desc="Set up your application to send traces using OpenTracing." >}}
+    {{< nextlink href="/tracing/trace_collection/open_standards/java" >}}Java{{< /nextlink >}}
+    {{< nextlink href="/tracing/trace_collection/open_standards/python" >}}Python{{< /nextlink >}}
+    {{< nextlink href="/tracing/trace_collection/open_standards/ruby" >}}Ruby{{< /nextlink >}}
+    {{< nextlink href="/tracing/trace_collection/open_standards/go" >}}Go{{< /nextlink >}}
+    {{< nextlink href="/tracing/trace_collection/open_standards/nodejs" >}}NodeJS{{< /nextlink >}}
+    {{< nextlink href="/tracing/trace_collection/open_standards/php" >}}PHP{{< /nextlink >}}
+    {{< nextlink href="/tracing/trace_collection/open_standards/dotnet" >}}.NET{{< /nextlink >}}
+{{< /whatsnext >}}
 
 ## Further Reading
 

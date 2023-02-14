@@ -72,6 +72,12 @@ receivers:
         static_configs:
         - targets: ['0.0.0.0:8888']
 
+  filelog:
+    include_file_path: true
+    poll_interval: 500ms
+    include:
+      - /var/log/**/*example*/*.log
+
 processors:
   batch:
     send_batch_max_size: 100
@@ -92,6 +98,10 @@ service:
       exporters: [datadog]
     traces:
       receivers: [otlp]
+      processors: [batch]
+      exporters: [datadog]
+    logs:
+      receivers: [otlp, filelog]
       processors: [batch]
       exporters: [datadog]
 {{< /code-block >}}
