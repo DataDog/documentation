@@ -99,24 +99,6 @@ Object-Graph Navigation Language Injection (OGNLi)
 : See [OGNLi in OWASP Top 10][7].
 
 
-## Web development terms
-
-service
-: In ASM, a web application such as an API, microservice, monolith, serverless, or lambda function.
-
-serverless 
-: _also_ Lambda
-: Web applications where the server layer is abstracted to facilitate its operations. Depending on the Cloud providers it can take various forms, such as functions or tasks.
-
-framework
-: A standard way to build and deploy software applications, providing generic functionality that can be extended with user-written code.
-: See [Software framework][9].
-
-dependency
-: A library, often open source, loaded by a web service to perform tasks.
-
-runtime technology
-: An engine that facilitates running (web) applications. For example, .NET, Java, or Ruby.
 
 ## Further reading
 
@@ -130,7 +112,6 @@ runtime technology
 [6]: https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/07-Input_Validation_Testing/11.1-Testing_for_Local_File_Inclusion
 [7]: https://owasp.org/www-project-top-ten/2017/A1_2017-Injection
 [8]: /agent/guide/how_remote_config_works/
-[9]: https://en.wikipedia.org/wiki/Software_framework
 [10]: /security/detection_rules/
 [11]: https://app.datadoghq.com/security/appsec/exclusions
 [12]: /security/application_security/event_rules/#overview
