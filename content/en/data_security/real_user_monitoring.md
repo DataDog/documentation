@@ -56,7 +56,7 @@ The data we track automatically contains primarily technical information, much o
 You can transmit all RUM events through your own [proxy server][15] so that end user devices never directly communicate with Datadog.
 
 ### User identity tracking
-By default, there is **no tracking of users' identity**. Each session has a unique `session.id` tied to it, which anonymizes the data, but allows you to understand trends. You have the option of writing code to capture [user data][6] such as name and email address, then using them to [enrich and modify][7] RUM sessions, but they are not required.
+By default, there is **no tracking of users' identity**. Each session has a unique `session.id` tied to it, which anonymizes the data, but allows you to understand trends. You have the option of writing code to capture [user data][6] such as name and email address, then using that data to [enrich and modify][7] RUM sessions, but this is not required.
 
 ### Data retention
 After you have configured the event capture, events are stored in Datadog. You can decide how long your captured events and properties stay in Datadog.
