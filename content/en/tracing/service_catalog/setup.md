@@ -15,13 +15,11 @@ further_reading:
 
 ## Overview
 
-The Service Catalog displays a list of services. The **Registered** column in the **Ownership** tab indicates that a corresponding service is registered with a green check mark.
+Datadog Service Catalog includes all discovered services from APM, USM, and RUM by default. If you are using any of these products, your catalog is pre-populated with entries. You can add service metadata to these entries through the Datadog UI, [API][1], or use automated pipelines through the [GitHub integration][11] or [Terraform][2].
 
-To update the service definition, use the [Service Definition API][1] or [Terraform][2]. 
+## For services with existing telemetry data (APM/USM/RUM)
 
-## For services that already send APM data
-
-Any service that sends tracing data to Datadog APM is automatically listed in the Service Catalog. Until you register it, it shows a gray check mark when you hover over it.
+Any service that sends tracing data to Datadog APM, USM, or RUM is automatically listed in the Service Catalog. Each unregistered service shows a gray check mark when you hover over it.
 
 To register the service and add ownership information, related links such as runbooks, and links to source code repositories, [update the service definition][1].
 
@@ -89,3 +87,4 @@ For more information, see the [Datadog Provider documentation][9].
 [8]: https://registry.terraform.io/providers/DataDog/datadog/latest/
 [9]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs
 [10]: https://app.datadoghq.com/services
+[11]: https://docs.datadoghq.com/tracing/service_catalog/setup#store-and-edit-service-definitions-in-github
