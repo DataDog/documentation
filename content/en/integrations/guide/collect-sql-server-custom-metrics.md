@@ -9,12 +9,11 @@ further_reading:
   text: "Datadog-MySQL integration"
 ---
 
+This guide explains how to collect custom metrics from SQL Server.
 
+## Custom queries
 
-## Custom Queries
-
-To collect more complex custom metrics with the SQL Server integration, use the `custom_queries` option in the `conf.d/sqlserver.d/conf.yaml` file at the root of your [Agent's configuration directory](/agent/guide/agent-configuration-files/#agent-configuration-directory). See the sample [sqlserver.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example) for more details.
-
+To collect more complex custom metrics with the SQL Server integration, use the `custom_queries` option in the `conf.d/sqlserver.d/conf.yaml` file at the root of your [Agent's configuration directory][5]. See the sample [sqlserver.d/conf.yaml][6] for more details.
 
 ### Configuration
 
@@ -22,12 +21,10 @@ To collect more complex custom metrics with the SQL Server integration, use the 
 
 | Option        | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 |---------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| query         | Yes      | This is the SQL to execute. It can be a simple statement or a multi-line script. All of the rows of the results are evaluated. Use the pipe if you require a multi-line script.                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| columns       | Yes      | This is a list representing each column ordered sequentially from left to right.<br><br>There are 2 required pieces of data:<br>  - **`name`**: This is the suffix to append to the metric_prefix to form the full metric name. If the `type` is specified as `tag`, the column is instead applied as a tag to every metric collected by this query.<br>  - **`type`**: This is the submission method (`gauge`, `count`, `rate`, etc.). This can also be set to `tag` to tag each metric in the row with the name and value (`<name>:<row_value>`) of the item in this column. |
+| query         | Yes      | The SQL to execute. This can be a simple statement or a multi-line script. All rows of the results are evaluated. Use pipe (`|`) if you require a multi-line script.                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| columns       | Yes      | A list representing each column ordered sequentially from left to right.<br><br>There are two required pieces of data:<br>  - **`name`**: The suffix to append to the `metric_prefix` to form the full metric name. If the `type` is specified as `tag`, the column is instead applied as a tag to every metric collected by this query.<br>  - **`type`**: The submission method (`gauge`, `count`, `rate`, etc.). This can also be set to `tag` to tag each metric in the row with the name and value (`<name>:<row_value>`) of the item in this column. |
 | tags          | No       | A list of static tags to apply to each metric.
 
-
-### Notes
 
 - At least one of the items in defined `columns` should be a metric type (`gauge`, `count`, `rate`, etc.).
 - The number of items defined in `columns` must equal the number of columns returned in the query.
@@ -45,9 +42,7 @@ To collect more complex custom metrics with the SQL Server integration, use the 
 
 ### Example
 
-#### Database and table
-
-Below is the `company` table from `testdb` database. The table contains 3 employee records:
+Below is a `company` table from a `testdb` database. The table contains three employee records:
 
 ```text
 testdb=# SELECT * FROM company;
@@ -59,11 +54,7 @@ id| name  | age| address    |salary | entry_date | last_raise_time
 3 | Teddy | 23 | Norway     | 45000 | 1457570120 | 1457570300
 ```
 
-#### From a SQL query to the YAML configuration
-
-The goal is to capture the age and salary of Paul as metric values with their name and address as tags.
-
-SQL query:
+The following SQL query captures the age and salary of Paul as metric values, with Paul's name and address as tags.
 
 ```text
 SELECT age,salary,name,address FROM company WHERE name = 'Paul'
@@ -87,17 +78,17 @@ custom_queries:
       - query:custom
 ```
 
-After updating the SQL Server YAML file, [restart the Datadog Agent](/agent/guide/agent-commands/#restart-the-agent).
+After you update the SQL Server YAML file, [restart the Datadog Agent][7].
 
 #### Validation
 
-To verify the result, search for the metrics using the [Metrics Explorer](/metrics/explorer/):
+To verify your results, search for the metrics using the [Metrics Explorer][8]:
 
-{{< img src="integrations/faq/sql_metric_explorer.png" alt="sql_metric_explorer"  >}}
+{{< img src="integrations/faq/sql_metric_explorer.png" alt="Screenshot of Datadog's Metrics Explorer. On the left, the two items under 'Graph' are 'postgresql.employee_age' and 'postgresql.employee_salary.' On the right are two graphs showing employee age and employee salary."  >}}
 
 #### Debugging
 
-[Run the Agent's status subcommand](/agent/guide/agent-commands/#agent-status-and-information) and look for `sqlserver` under the Checks section:
+[Run the Agent's status subcommand][9] and look for `sqlserver` under the Checks section:
 
 ```text
 sqlserver
@@ -106,7 +97,7 @@ sqlserver
   - Collected 0 metrics, 0 events & 0 service checks
 ```
 
-Additionally, the [Agent's logs](/agent/guide/agent-log-files/) may provide useful information.
+Additionally, the [Agent's logs][10] may provide useful information.
 
 ## Collecting metrics from Performance Counters
 
@@ -297,3 +288,9 @@ If your custom metrics are not appearing in Datadog, check the Agent log file. I
 [2]: https://docs.microsoft.com/en-us/sql/relational-databases/performance-monitor/sql-server-databases-object
 [3]: /metrics/#metric-types
 [4]: /metrics/types/?tab=histogram#metric-types
+[5]: /agent/guide/agent-configuration-files/#agent-configuration-directory
+[6]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
+[7]: /agent/guide/agent-commands/#restart-the-agent
+[8]: /metrics/explorer/
+[9]: /agent/guide/agent-commands/#agent-status-and-information
+[10]: /agent/guide/agent-log-files
