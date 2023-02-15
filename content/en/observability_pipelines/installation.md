@@ -39,32 +39,32 @@ $ DD_API_KEY=<DD_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.
 1. Run the following commands to set up APT to download through HTTPS:
 
     ```
-    $ sudo apt-get update
-    $ sudo apt-get install apt-transport-https curl gnupg
+    sudo apt-get update
+    sudo apt-get install apt-transport-https curl gnupg
     ```
 
 2. Run the following commands to set up the Datadog `deb` repo on your system and create a Datadog archive keyring:
 
     ```
-    $ sudo sh -c "echo 'deb [signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] https://apt.datadoghq.com/ stable observability-pipelines-worker-1' > /etc/apt/sources.list.d/datadog.list"
-    $ sudo touch /usr/share/keyrings/datadog-archive-keyring.gpg
-    $ sudo chmod a+r /usr/share/keyrings/datadog-archive-keyring.gpg
-    $ curl https://keys.datadoghq.com/DATADOG_APT_KEY_CURRENT.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
-    $ curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
-    $ curl https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    sudo sh -c "echo 'deb [signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] https://apt.datadoghq.com/ stable observability-pipelines-worker-1' > /etc/apt/sources.list.d/datadog.list"
+    sudo touch /usr/share/keyrings/datadog-archive-keyring.gpg
+    sudo chmod a+r /usr/share/keyrings/datadog-archive-keyring.gpg
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_CURRENT.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     ```
 
 3. Run the following commands to update your local `apt` repo and install the Worker:
 
     ```
-    $ sudo apt-get update
-    $ sudo apt-get install datadog-observability-pipelines-worker datadog-signing-keys
+    sudo apt-get update
+    sudo apt-get install datadog-observability-pipelines-worker datadog-signing-keys
     ```
 
 4. Start the Worker:
 
     ```
-    $ DD_API_KEY= DD_OP_CONFIG_KEY= datadog-observability-pipelines-worker
+    DD_API_KEY= DD_OP_CONFIG_KEY= datadog-observability-pipelines-worker 
     ```
 
 <!--
