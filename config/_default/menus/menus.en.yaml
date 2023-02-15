@@ -164,6 +164,12 @@ main:
     url: getting_started/learning_center/
     parent: getting_started
     weight: 18
+  - name: Glossary
+    url: glossary/
+    pre: features
+    identifier: glossary
+    parent: essentials_heading
+    weight: 15000
   - name: Agent
     url: agent/
     pre: agent-fill
