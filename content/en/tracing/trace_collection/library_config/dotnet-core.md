@@ -58,7 +58,7 @@ To configure the tracer in application code, create a `TracerSettings` instance 
 using Datadog.Trace;
 using Datadog.Trace.Configuration;
 
-// read default configuration sources (env vars, web.config, datadog.json)
+// read default configuration sources (env vars or datadog.json)
 var settings = TracerSettings.FromDefaultSources();
 
 // change some settings
@@ -69,23 +69,6 @@ settings.Exporter.AgentUri = new Uri("http://localhost:8126/");
 
 // configure the global Tracer settings
 Tracer.Configure(settings);
-```
-
-{{% /tab %}}
-
-{{% tab "appsettings.json" %}}
-
-To configure the tracer using an `appsettings.json` file, use the `<appSettings>` section. For example:
-
-```xml
-<configuration>
-  <appSettings>
-    <add key="DD_TRACE_AGENT_URL" value="http://localhost:8126"/>
-    <add key="DD_ENV" value="prod"/>
-    <add key="DD_SERVICE" value="MyService"/>
-    <add key="DD_VERSION" value="abc123"/>
-  </appSettings>
-</configuration>
 ```
 
 {{% /tab %}}
