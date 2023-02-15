@@ -91,6 +91,10 @@ Intelligent Test Runner is only supported in the following versions and testing 
 * `jest>=24.8.0`
   * Only `jest-circus/runner` is supported as `testRunner`.
   * Only `jsdom` and `node` are supported as test environments.
+* `mocha>=5.2.0`
+
+#### Suite skipping
+Intelligent test runner for Javascript will skip entire _test suites_ (test files) rather than individual tests.
 
 ### .NET
 
