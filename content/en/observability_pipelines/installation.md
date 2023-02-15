@@ -18,10 +18,11 @@ Install the Observability Pipelines Worker with the [Advanced Package Tool][1] (
 
 ## Prerequisites
 
-Before installing, make sure you have:
+Before installing, make sure you:
 
-1. A valid [Datadog API key][5].
-2. An Observability Pipelines Configuration ID.
+1. Are using one of the supported Linux Archs: x86_64 or AMD64
+2. Have a valid [Datadog API key][5].
+3. Have an Observability Pipelines Configuration ID.
 
 ## Installation
 
@@ -45,7 +46,7 @@ $ DD_API_KEY=<DD_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.
 2. Run the following commands to set up the Datadog `deb` repo on your system and create a Datadog archive keyring:
 
     ```
-    $ sudo sh -c "echo 'deb [signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] https://apt.datadoghq.com/ stable 7' > /etc/apt/sources.list.d/datadog.list"
+    $ sudo sh -c "echo 'deb [signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] https://apt.datadoghq.com/ stable observability-pipelines-worker-1' > /etc/apt/sources.list.d/datadog.list"
     $ sudo touch /usr/share/keyrings/datadog-archive-keyring.gpg
     $ sudo chmod a+r /usr/share/keyrings/datadog-archive-keyring.gpg
     $ curl https://keys.datadoghq.com/DATADOG_APT_KEY_CURRENT.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
@@ -57,14 +58,16 @@ $ DD_API_KEY=<DD_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.
 
     ```
     $ sudo apt-get update
-    $ sudo apt-get install datadog-observability-pipelines-worker-1 datadog-signing-keys
+    $ sudo apt-get install datadog-observability-pipelines-worker datadog-signing-keys
     ```
 
 4. Start the Worker:
 
     ```
-    $ sudo systemctl restart datadog-observability-pipelines-worker.service
+    $ DD_API_KEY= DD_OP_CONFIG_KEY= datadog-observability-pipelines-worker
     ```
+
+<!--
 
 ## Commands
 
@@ -77,6 +80,8 @@ $ DD_API_KEY=<DD_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.
 | Status page of the running Worker | `sudo datadog-observability-pipelines-worker status`          |
 | Display command usage             | `sudo datadog-observability-pipelines-worker --help`          |
 | Uninstall the Worker              | `sudo apt remove datadog-observability-pipelines-worker`      |
+
+-->
 
 ## Configuration
 
