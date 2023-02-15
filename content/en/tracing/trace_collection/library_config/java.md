@@ -46,7 +46,7 @@ Your application version (for example, 2.5, 202003181415, 1.3-alpha). Available 
 `dd.logs.injection`
 : **Environment Variable**: `DD_LOGS_INJECTION`<br>
 **Default**: `true`<br>
-Enabled automatic MDC key injection for Datadog trace and span IDs. See [Advanced Usage][2] for details.
+Enabled automatic MDC key injection for Datadog trace and span IDs. See [Advanced Usage][15] for details.
 
 `dd.trace.config`
 : **Environment Variable**: `DD_TRACE_CONFIG`<br>
@@ -432,3 +432,4 @@ If multiple extraction styles are enabled extraction attempt is done on the orde
 [10]: https://github.com/openzipkin/b3-propagation
 [13]: /agent/guide/network/#configure-ports
 [14]: /tracing/configure_data_security/#telemetry-collection
+[15]: /agent/logs/advanced_log_collection

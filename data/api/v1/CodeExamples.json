@@ -238,6 +238,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_109450134",
+      "description": "Create a new dashboard with slo list widget with sort"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_173805046",
       "description": "Create a new dashboard with slo widget"
     },

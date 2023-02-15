@@ -2689,91 +2689,96 @@ main:
     pre: app-sec
     identifier: application_security
     weight: 184000
+  - name: Terms and Concepts
+    url: security/application_security/terms/
+    parent: application_security
+    identifier: appsec_terms
+    weight: 1
   - name: Getting Started
     url: security/application_security/getting_started/
     parent: application_security
     identifier: appsec_getting_started
-    weight: 1
+    weight: 2
   - name: Java
     url: security/application_security/getting_started/java/
     parent: appsec_getting_started
     identifier: appsec_java
-    weight: 101
+    weight: 201
   - name: .NET
     url: security/application_security/getting_started/dotnet/
     parent: appsec_getting_started
     identifier: appsec_dotnet
-    weight: 102
+    weight: 202
   - name: Go
     url: security/application_security/getting_started/go/
     parent: appsec_getting_started
     identifier: appsec_go
-    weight: 103
+    weight: 203
   - name: Ruby
     url: security/application_security/getting_started/ruby/
     parent: appsec_getting_started
     identifier: appsec_ruby
-    weight: 104
+    weight: 204
   - name: PHP
     url: security/application_security/getting_started/php/
     parent: appsec_getting_started
     identifier: appsec_php
-    weight: 105
+    weight: 205
   - name: NodeJS
     url: security/application_security/getting_started/nodejs/
     parent: appsec_getting_started
     identifier: appsec_nodejs
-    weight: 106
+    weight: 206
   - name: Python
     url: security/application_security/getting_started/python/
     parent: appsec_getting_started
     identifier: appsec_python
-    weight: 107
+    weight: 207
   - name: How It Works
     url: security/application_security/how-appsec-works/
     parent: application_security
     identifier: appsec_howitworks
-    weight: 2
+    weight: 3
   - name: Risk Management
     url: security/application_security/risk_management/
     parent: application_security
     identifier: application_risk_management
-    weight: 3
+    weight: 4
   - name: Threat Monitoring and Protection
     url: security/application_security/threats/
     parent: application_security
     identifier: appsec_threats
-    weight: 4
+    weight: 5
   - name: Setup and Configure
     url: security/application_security/threats/setup_and_configure/
     parent: appsec_threats
     identifier: threats_configuration
-    weight: 401
+    weight: 501
   - name: OOTB Rules
     url: security/default_rules/#cat-application-security
     parent: appsec_threats
     identifier: appsec_default_rules
-    weight: 402
+    weight: 502
   - name: Tracking User Activity
     url: security/application_security/threats/add-user-info/
     parent: appsec_threats
     identifier: threats_user_info
-    weight: 403
+    weight: 503
   - name: Custom Detection Rules
     url: security/application_security/threats/custom_rules/
     parent: appsec_threats
     identifier: threats_custom_rules
-    weight: 404
+    weight: 504
   - name: Event Rules
     url: security/application_security/threats/event_rules/
     parent: appsec_threats
     identifier: threats_event_rules
-    weight: 405
+    weight: 505
   - name: Troubleshooting
     url: security/application_security/troubleshooting/
     parent: application_security
     identifier: appsec_troubleshooting
-    weight: 5
+    weight: 6
   - name: Synthetic Monitoring
     url: synthetics/
     pre: synthetics
@@ -6145,8 +6150,7 @@ api:
         - v1
       operationids:
         - SearchSLO
-      unstable:
-        - v1
+      unstable: []
       order: 1
   - name: Check if SLOs can be safely deleted
     url: '#check-if-slos-can-be-safely-deleted'
