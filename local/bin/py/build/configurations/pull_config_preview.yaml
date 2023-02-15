@@ -60,7 +60,7 @@
     contents:
 
     - action: integrations
-      branch: prod
+      branch: david.mindlin/fix-sagemaker-metrics
       globs:
       - integration/*/*_metadata.csv
       - integration/*/manifest.json
