@@ -166,9 +166,9 @@ Below are instructions for deploying a Cloud Run service using standard GCP tool
    Under the **Environment variables** section, ensure that the name is set to `DD_API_KEY`.
 
 ### Custom metrics
-You can submit custom metrics using a [DogStatsD client][7].
+You can submit custom metrics using a [DogStatsD client][7]. For monitoring Cloud Run and other serverless applications, use [distribution][12] metrics.
 
-**Note**: Only `DISTRIBUTION` metrics should be used.
+Distributions provide `avg`, `sum`, `max`, `min`, and `count` aggregations by default. On the Metric Summary page, you can enable percentile aggregations (p50, p75, p90, p95, p99) and also manage tags. To monitor a distribution for a gauge metric type, use `avg` for both the [time and space aggregations][13]. To monitor a distribution for a count metric type, use `sum` for both the time and space aggregations.
 
 ### Advanced options and configurations
 
@@ -204,3 +204,5 @@ You can use the [GCP integration][1] to collect logs. Alternatively, you can set
 [8]: /getting_started/site/
 [9]: /getting_started/tagging/unified_service_tagging/
 [10]: /account_management/api-app-keys/#api-keys
+[12]: /metrics/distributions/
+[13]: /metrics/#time-and-space-aggregation

@@ -13,6 +13,8 @@ assets:
       check: airflow.dagbag_size
       metadata_path: metadata.csv
       prefix: airflow。
+    process_signatures:
+    - airflow
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_name: Airflow
@@ -78,7 +80,7 @@ Datadog Agent はメトリクスだけでなく、Airflow の健全性に関す�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Airflow インテグレーションを適切に動作させるには、以下のステップをすべて実施する必要があります。ステップを開始する前に、StatsD/DogStatsD マッピング機能が含まれる [Datadog Agent][3] (バージョン `6.17 または 7.17` 以降) をインストールしてください。
 

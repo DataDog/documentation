@@ -110,9 +110,11 @@ See [Tracing Ruby Applications][1] for detailed instructions. [Sample code for a
 {{< /programming-lang-wrapper >}}
 
 ### Custom metrics
-You can submit custom metrics using a [DogStatsd client][4].
+You can submit custom metrics using a [DogStatsD client][4].
 
-**Note**: Only `DISTRIBUTION` metrics should be used.
+For monitoring Azure App Service and other serverless applications, use [distribution][8] metrics.
+
+Distributions provide `avg`, `sum`, `max`, `min`, and `count` aggregations by default. On the Metric Summary page, you can enable percentile aggregations (p50, p75, p90, p95, p99) and also manage tags. To monitor a distribution for a gauge metric type, use `avg` for both the [time and space aggregations][9]. To monitor a distribution for a count metric type, use `sum` for both the time and space aggregations.
 
 ### Advanced options and configurations
 
@@ -143,3 +145,5 @@ You can use the [Azure integration][1] to collect logs. Alternatively, you can s
 [4]: /metrics/custom_metrics/dogstatsd_metrics_submission/
 [5]: /getting_started/site/
 [6]: /getting_started/tagging/unified_service_tagging/
+[8]: /metrics/distributions/
+[9]: /metrics/#time-and-space-aggregation

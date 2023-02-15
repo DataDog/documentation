@@ -2871,6 +2871,8 @@ components:
           type: string
         values:
           description: The array of numerical values for one formula or query.
+          example:
+          - 0.5
           items:
             description: An individual value for a given column and group-by.
             example: 0.5
@@ -3295,6 +3297,8 @@ components:
           $ref: '#/components/schemas/EventsQueryGroupBys'
         indexes:
           description: The indexes in which to search.
+          example:
+          - main
           items:
             description: The unique index name.
             example: main
@@ -3346,6 +3350,8 @@ components:
           $ref: '#/components/schemas/EventsQueryGroupBys'
         indexes:
           description: The indexes in which to search.
+          example:
+          - main
           items:
             description: The unique index name.
             example: main
@@ -3695,6 +3701,9 @@ components:
         values:
           description: The array of tag values for each group found for the results
             of the formulas or queries.
+          example:
+          - - production
+          - - staging
           items:
             description: An individual tag value for a given group column.
             items:
@@ -3708,6 +3717,7 @@ components:
       description: List of tags that apply to a single response value.
       items:
         description: A single tag that applies to a single response value.
+        example: env:production
         type: string
       type: array
     HTTPLog:
@@ -7252,13 +7262,15 @@ components:
       type: object
     MetricsDataSource:
       default: metrics
-      description: A data source that is powered by the Metrics backend.
+      description: A data source that is powered by the Metrics platform.
       enum:
       - metrics
+      - cloud_cost
       example: metrics
       type: string
       x-enum-varnames:
       - METRICS
+      - CLOUD_COST
     MetricsScalarQuery:
       description: An individual scalar metrics query.
       properties:
@@ -12693,6 +12705,7 @@ components:
             security_monitoring_rules_read: Read Detection Rules.
             security_monitoring_rules_write: Create and edit Detection Rules.
             security_monitoring_signals_read: View Security Signals.
+            timeseries_query: Query Timeseries data.
             usage_read: View your organization's usage and usage attribution.
             user_access_invite: Invite other users to your organization.
             user_access_manage: Disable users, manage user roles, manage SAML-to-role
@@ -13472,10 +13485,6 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Aggregate pipelines events
       tags:
       - CI Visibility Pipelines
@@ -13554,10 +13563,6 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get a list of pipelines events
       tags:
       - CI Visibility Pipelines
@@ -13598,10 +13603,6 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Search pipelines events
       tags:
       - CI Visibility Pipelines
@@ -13638,10 +13639,6 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Aggregate tests events
       tags:
       - CI Visibility Tests
@@ -13720,10 +13717,6 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get a list of tests events
       tags:
       - CI Visibility Tests
@@ -13764,10 +13757,6 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Search tests events
       tags:
       - CI Visibility Tests
@@ -14842,9 +14831,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: List Cloudflare accounts
       tags:
       - Cloudflare Integration
@@ -14875,9 +14861,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Add Cloudflare account
       tags:
       - Cloudflare Integration
@@ -14920,9 +14903,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Delete Cloudflare account
       tags:
       - Cloudflare Integration
@@ -14954,9 +14934,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Get Cloudflare account
       tags:
       - Cloudflare Integration
@@ -14994,9 +14971,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Update Cloudflare account
       tags:
       - Cloudflare Integration
@@ -15335,9 +15309,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: List Fastly accounts
       tags:
       - Fastly Integration
@@ -15368,9 +15339,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Add Fastly account
       tags:
       - Fastly Integration
@@ -15407,9 +15375,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Delete Fastly account
       tags:
       - Fastly Integration
@@ -15436,9 +15401,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Get Fastly account
       tags:
       - Fastly Integration
@@ -15471,9 +15433,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Update Fastly account
       tags:
       - Fastly Integration
@@ -15502,9 +15461,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: List Fastly services
       tags:
       - Fastly Integration
@@ -15537,9 +15493,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Add Fastly service
       tags:
       - Fastly Integration
@@ -15569,9 +15522,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Delete Fastly service
       tags:
       - Fastly Integration
@@ -15599,9 +15549,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Get Fastly service
       tags:
       - Fastly Integration
@@ -15635,9 +15582,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Update Fastly service
       tags:
       - Fastly Integration
@@ -17853,11 +17797,6 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - monitors_configuration_policy_write
       summary: Create a monitor configuration policy
       tags:
       - Monitors
@@ -17913,11 +17852,6 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - monitors_configuration_policy_write
       summary: Delete a monitor configuration policy
       tags:
       - Monitors
@@ -18012,11 +17946,6 @@ paths:
           description: Unprocessable Entity
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - monitors_configuration_policy_write
       summary: Edit a monitor configuration policy
       tags:
       - Monitors
@@ -18192,6 +18121,11 @@ paths:
           $ref: '#/components/responses/ForbiddenResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - timeseries_query
       summary: Query scalar data across multiple products
       tags:
       - Metrics
@@ -18199,12 +18133,13 @@ paths:
       x-menu-order: 2
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is GA for the metrics data source. Logs
-        is in beta.
+      x-unstable: '**Note**: This endpoint is GA for the metrics and cloud cost data
+        sources. Logs is
 
-        We are gradually onboarding support for more sources. If you have any feedback,
+        in beta. We are gradually onboarding support for more sources. If you have
+        any
 
-        contact [Datadog support](https://docs.datadoghq.com/help/).'
+        feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/query/timeseries:
     post:
       description: 'Query timeseries data across various data sources and
@@ -18232,6 +18167,11 @@ paths:
           $ref: '#/components/responses/ForbiddenResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - timeseries_query
       summary: Query timeseries data across multiple products
       tags:
       - Metrics
@@ -18239,12 +18179,13 @@ paths:
       x-menu-order: 1
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is GA for the metrics data source. Logs
-        is in beta.
+      x-unstable: '**Note**: This endpoint is GA for the metrics and cloud cost data
+        sources. Logs is
 
-        We are gradually onboarding support for more sources. If you have any feedback,
+        in beta. We are gradually onboarding support for more sources. If you have
+        any
 
-        contact [Datadog support](https://docs.datadoghq.com/help/).'
+        feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/roles:
     get:
       description: Returns all roles, including their names and their unique identifiers.

@@ -292,8 +292,14 @@ providers:
 Add the following to your `docker run` command:
 
 ```
+docker run --cgroupns host \
+--pid host \
+-e DD_API_KEY="<DATADOG_API_KEY>" \
+-e DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true \
+-v /var/run/docker.sock:/var/run/docker.sock:ro \
+-v /proc/:/host/proc/:ro \
+-v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
 -v /sys/kernel/debug:/sys/kernel/debug \
--v /:/host/root:ro \
 -v /lib/modules:/lib/modules:ro \
 -v /usr/src:/usr/src:ro \
 -v /var/tmp/datadog-agent/system-probe/build:/var/tmp/datadog-agent/system-probe/build \
@@ -314,7 +320,8 @@ Add the following to your `docker run` command:
 --cap-add=NET_BROADCAST \
 --cap-add=NET_RAW \
 --cap-add=IPC_LOCK \
---cap-add=CHOWN
+--cap-add=CHOWN \
+gcr.io/datadoghq/agent:latest
 ```
 
 For optional HTTPS support, also add:
@@ -336,6 +343,10 @@ services:
     environment:
      - DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED: 'true'
     volumes:
+     - /var/run/docker.sock:/var/run/docker.sock:ro
+     - /proc/:/host/proc/:ro
+     - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+     - /sys/kernel/debug:/sys/kernel/debug
      - /sys/kernel/debug:/sys/kernel/debug
      - /lib/modules:/lib/modules
      - /usr/src:/usr/src
