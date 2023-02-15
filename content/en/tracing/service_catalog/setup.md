@@ -19,7 +19,7 @@ Datadog Service Catalog includes all discovered services from APM, USM, and RUM 
 
 ## For services with existing telemetry data (APM/USM/RUM)
 
-Any service that sends tracing data to Datadog APM, USM, or RUM is automatically listed in the Service Catalog. Until you register it, it shows a gray check mark when you hover over it.
+Any service that sends tracing data to Datadog APM, USM, or RUM is automatically listed in the Service Catalog. Each unregistered service shows a gray check mark when you hover over it.
 
 To register the service and add ownership information, related links such as runbooks, and links to source code repositories, [update the service definition][1].
 
