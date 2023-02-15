@@ -58,6 +58,13 @@ You can download a JSON file containing the definition of a monitor from the mon
 
 [Manage Monitors][11]: Edit, clone, delete, mute, and resolve monitors all in the same place. Focus on high priority alerts by using advanced faceted search. Explore monitor details and alerts over time in the Monitor Status page.
 
+## Control monitor tags with Tag Policies
+
+[Monitor tag policies][14] enforce data validation on tags and tag values on your Datadog monitors. Add one of the following rules to prevent monitors with unexpected tags from being created.
+- Require tags with mandatory values
+- Require tags only
+- Optional tags with mandatory values
+
 ## View and search for monitors on mobile devices
 
 [Mobile-Friendly Monitors on iOS and Android][12]: View, mute, and unmute monitors on any iOS or Android device with the [Datadog Mobile App][1], available on the [Apple App Store][2] and [Google Play Store][3]. Write queries in the search bar to filter monitors in real-time. Use [Monitor Saved Views][13] to access a collection of monitors in a few taps on mobile.
@@ -89,3 +96,4 @@ You can download a JSON file containing the definition of a monitor from the mon
 [11]: /monitors/manage
 [12]: /mobile/?tab=ios#monitors
 [13]: /monitors/manage/search/#saved-view
+[14]: /monitors/settings/
