@@ -19,6 +19,9 @@ further_reading:
     - link: "https://app.datadoghq.com/workflow/blueprints?selected_category=SECURITY"
       tag: "App"
       text: "Automate responses with Workflows security blueprints"
+    - link: "/security/cloud_siem/guide/aws-config-guide-for-cloud-siem/"
+      tag: "Documentation"
+      text: "AWS configuration guide for Cloud SIEM"
     - link: "/security/notifications/variables/"
       tag: "Documentation"
       text: "Learn more about notification variables to customize notifications"
@@ -38,30 +41,30 @@ This guide walks you through best practices for getting started with Cloud SIEM.
 
     Or, [create custom log pipelines][5] to send:
 
-    - [Cloud Audit logs][6]: See the [AWS Configuration Guide][7] for steps on setting up AWS Cloudtrail for Cloud SIEM.
-    - [Identity Provider logs][8]
+    - [Cloud Audit logs][6]
+    - [Identity Provider logs][7]
     - SaaS and Workspace logs
     - Third-party security integrations (for example, AWS GuardDuty)
 
-2. Enable [Cloud SIEM][9].
+2. Enable [Cloud SIEM][8].
 
 ## Phase 2: Signal exploration
 
-1. Review the [out-of-the-box detection rules][10] that begin detecting threats in your environment immediately. Detection rules apply to all processed logs to maximize detection coverage. See the [detection rules][11] documentation for more information.
+1. Review the [out-of-the-box detection rules][9] that begin detecting threats in your environment immediately. Detection rules apply to all processed logs to maximize detection coverage. See the [detection rules][10] documentation for more information.
 
-2. Explore [security signals][12]. When a threat is detected with a detection rule, a security signal is generated. See the [security signals][13] documentation for more information.
+2. Explore [security signals][11]. When a threat is detected with a detection rule, a security signal is generated. See the [security signals][12] documentation for more information.
 
-    - [Set up notification rules][14] to alert when signals are generated. You can alert using Slack, Jira, email, or webhooks. See the [notification rules][15] documentation for more information.
+    - [Set up notification rules][13] to alert when signals are generated. You can alert using Slack, Jira, email, or webhooks. See the [notification rules][14] documentation for more information.
 
 ## Phase 3: Investigation
 
-1. Explore the [Investigator][16] for faster remediation. See the [Investigator][17] documentation for more information.
-2. Use [out-of-the-box-dashboards][18] or [create your own dashboards][19] for investigations, reporting, and monitoring.
+1. Explore the [Investigator][15] for faster remediation. See the [Investigator][16] documentation for more information.
+2. Use [out-of-the-box-dashboards][17] or [create your own dashboards][18] for investigations, reporting, and monitoring.
 
 ## Phase 4: Customization
 
-1. Set up [suppression rules][20] to reduce noise. 
-2. Create [custom detection rules][21]. Review [Best Practices for Creating Detection Rules][22].
+1. Set up [suppression rules][19] to reduce noise. 
+2. Create [custom detection rules][20]. Review [Best Practices for Creating Detection Rules][21].
 
 ## Further Reading
 
@@ -73,19 +76,18 @@ This guide walks you through best practices for getting started with Cloud SIEM.
 [4]: /integrations/
 [5]: /logs/log_configuration/pipelines/
 [6]: https://www.datadoghq.com/blog/monitoring-cloudtrail-logs/
-[7]: /security/cloud_siem/guide/aws-config-guide-for-cloud-siem/
-[8]: https://www.datadoghq.com/blog/how-to-monitor-authentication-logs/
-[9]: https://app.datadoghq.com/security/getting-started
-[10]: /security/default_rules/#cat-cloud-siem-log-detection
-[11]: /security/detection_rules/
-[12]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%28%22Log%20Detection%22%20OR%20%22Signal%20Correlation%22%29&column=time&order=desc&product=siem&view=signal&viz=stream&start=1676321431953&end=1676407831953&paused=false
-[13]: /security/explorer
-[14]: https://app.datadoghq.com/security/configuration/notification-rules
-[15]: /security/notifications/rules/
-[16]: https://app.datadoghq.com/security/investigator/
-[17]: /security/cloud_siem/investigator
-[18]: https://app.datadoghq.com/dashboard/lists/preset/100
-[19]: /dashboards/#overview
-[20]: /security/cloud_siem/log_detection_rules/?tab=threshold#advanced-options
-[21]: /security/cloud_siem/log_detection_rules/
-[22]: https://www.datadoghq.com/blog/writing-datadog-security-detection-rules/
+[7]: https://www.datadoghq.com/blog/how-to-monitor-authentication-logs/
+[8]: https://app.datadoghq.com/security/getting-started
+[9]: /security/default_rules/#cat-cloud-siem-log-detection
+[10]: /security/detection_rules/
+[11]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%28%22Log%20Detection%22%20OR%20%22Signal%20Correlation%22%29&column=time&order=desc&product=siem&view=signal&viz=stream&start=1676321431953&end=1676407831953&paused=false
+[12]: /security/explorer
+[13]: https://app.datadoghq.com/security/configuration/notification-rules
+[14]: /security/notifications/rules/
+[15]: https://app.datadoghq.com/security/investigator/
+[16]: /security/cloud_siem/investigator
+[17]: https://app.datadoghq.com/dashboard/lists/preset/100
+[18]: /dashboards/#overview
+[19]: /security/cloud_siem/log_detection_rules/?tab=threshold#advanced-options
+[20]: /security/cloud_siem/log_detection_rules/
+[21]: https://www.datadoghq.com/blog/writing-datadog-security-detection-rules/
