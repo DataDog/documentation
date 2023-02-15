@@ -73,44 +73,52 @@ Both log and metric probes require the same initial setup:
 1. Click **Create Probe** in the top right, or click the three dot context menu on a service and select **Add a probe for this service**.
 1. If not prefilled, choose a service from the list.
 1. If not prefilled, choose runtime, environment and version.
-1. In the source code, select a class and method or a source file and line where to set the probe.
-  1. If you set up Source Code Integration for your service, when setting line probes you will receive autocomplete suggestions for the source file and you will see the source code of the selected file when choosing the line.
+1. In the source code, specify where to set the probe by selecting either a class and method or a source file and line. 
+   If you set up Source Code Integration for your service, autocomplete shows suggestions for the selecting a file and displays the file's code so you can choose the line.
 
 ### Creating a log probe
 
-A *log probe* will emit a log when it executes.
+A *log probe* emits a log when it executes.
 
-If you enable `Capture method parameters and local variables` on the log probe, it will also capture method arguments, local variables, class fields, the call stack and any exceptions from the execution context and add them to the log event - you can see the captured values in the Datadog UI. Since capturing this data is a more performance intensive operation, it is only enabled on one instance of your service which matches the desired environment and version configured on the probe. Probes with capture are rate limited to execute once every second.
+If you enable `Capture method parameters and local variables` on the log probe, it also captures the following values from the execution context and adds them to the log event:
+- method arguments
+- local variables
+- class fields
+- the call stack
+- exceptions 
+You can see the captured values in the Datadog UI. 
 
-Log probes without extra data capturing are enabled on all service instances that match the desired environment and version. They are rate limited to execute at most 5000 times per second, on each service instance.
+Because capturing this data is performance-intensive, it is enabled on only one instance of your service that matches the probe's environment and version settings. Probes with capture enabled are rate limited to execute once per second.
+
+Log probes without extra data capturing are enabled on all service instances that match the specified environment and version. They are rate limited to execute at most 5000 times per second, on each service instance.
 
 For more information, read [How Dynamic Instrumentation Works][11].
 
 To create a log probe:
 
-1. Complete the generic probe setup (choose service, environment, version and probe location).
+1. Complete the generic probe setup (choose service, environment, version, and probe location).
 1. Select **Log** as the probe type.
 1. Define a log message template. You can use the Dynamic Instrumentation expression language to reference values from the execution context.
-1. Select if you would like to enable extra data capturing from the probe.
-1. (optional) Define a condition using the Dynamic Instrumentation expression language. The log will only be emitted when the expression evaluates to true.
+1. Optionally enable extra data capturing from the probe.
+1. Optionally define a condition using the Dynamic Instrumentation expression language. The log is emitted when the expression evaluates to true.
 
 {{< img src="dynamic_instrumentation/log_probe.png" alt="Creating a Dynamic Instrumentation log probe" >}}
 
 ### Creating a metric probe
 
-A *metric probe* will emit a metric when it executes.
+A *metric probe* emits a metric when it executes.
 
 Metric probes are automatically enabled on all service instances that match the configured environment and version.
-You can use the Dynamic Instrumentation expression language to reference numeric values from the context, such as a variable, class field or an expression that yields a numeric value.
+You can use the Dynamic Instrumentation expression language to reference numeric values from the context, such as a variable, a class field, or an expression that yields a numeric value.
 For more information, read [How Dynamic Instrumentation Works][11].
 
 To create a metric probe:
 
-1. Complete the generic probe setup (choose service, environment, version and probe location).
+1. Complete the generic probe setup (choose service, environment, version, and probe location).
 1. Select **Metric** as the probe type.
-1. Specify a name for the metric. The metric name will be prefixed with `dynamic.instrumentation.metric.probe.`.
-1. Select a metric type (count, gauge or histogram).
-1. Choose the value of the metric using the Debugger expression language. For count metrics this is optional, if omitted every invocation will increase the count by one.
+1. Specify a name for the metric, which will be prefixed with `dynamic.instrumentation.metric.probe.`.
+1. Select a metric type (count, gauge, or histogram).
+1. Choose the value of the metric using the Debugger expression language. For count metrics this is optional, and if you omit it, every invocation increments the count by one.
 
 {{< img src="dynamic_instrumentation/metric_probe.png" alt="Creating a Dynamic Instrumentation metric probe" >}}
 
