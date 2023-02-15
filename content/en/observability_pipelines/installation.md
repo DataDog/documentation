@@ -64,7 +64,7 @@ $ DD_API_KEY=<DD_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.
 4. Start the Worker:
 
     ```
-    DD_API_KEY= DD_OP_CONFIG_KEY= observability-pipelines-worker 
+    DD_API_KEY="<DD_API_KEY>" DD_OP_CONFIG_KEY="<DD_OP_CONFIG_KEY>" observability-pipelines-worker 
     ```
 
 <!--
