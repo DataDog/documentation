@@ -150,7 +150,7 @@ custom_metrics:
     tag_by: db
 ```
 
-The default table from which counters are drawn is the `sys.dm_os_performance_counters` table. The Datadog-SQL server check also supports `sys.dm_os_wait_stats`, `sys.dm_os_memory_clerks`, and `sys.dm_io_virtual_file_stats`.
+The default table from which counters are drawn is the `sys.dm_os_performance_counters` table. The Datadog-SQL Server check also supports `sys.dm_os_wait_stats`, `sys.dm_os_memory_clerks`, and `sys.dm_io_virtual_file_stats`.
 
 To report a metric drawn from one of the additional tables, specify the table in the counter definition with the `table` parameter, as well as the counter columns to be reported with the `columns` parameter:
 
@@ -182,11 +182,11 @@ The above example reports two metrics, `sqlserver.io_file_stats.num_of_reads` an
 
 ## Collecting metrics from a custom procedure (legacy)
 
-This is a legacy method of collecting custom metrics from the database. It is recommended to use the `custom_queries` parameter which requires less setup, provides more flexibility in the types of T-SQL which can be executed, and is easier to debug. Collecting metrics from a custom procedure produces a large amount of custom metrics that may affect your billing.
+This is a legacy method of collecting custom metrics from the database. It is recommended to use the `custom_queries` parameter, which requires less setup, provides more flexibility in the types of T-SQL that can be executed, and is easier to debug. Collecting metrics from a custom procedure produces a large volume of custom metrics that may affect your billing.
 
 ### Setup a stored procedure
 
-A temporary table must be setup to collect the custom metrics for reporting to Datadog. The table needs the following columns:
+You must set up a temporary table to collect the custom metrics for reporting to Datadog. The table needs the following columns:
 
 | Column   | Description                                               |
 |----------|-----------------------------------------------------------|
@@ -265,15 +265,15 @@ You can also specify:
 
 | Parameter                 | Description                                                                               | Default            |
 |---------------------------|-------------------------------------------------------------------------------------------|--------------------|
-| `ignore_missing_database` | If the DB specified doesn't exist on the server then don't do the check.                  | `False`            |
+| `ignore_missing_database` | If the DB specified doesn't exist on the server, then don't do the check.                  | `False`            |
 | `proc_only_if`            | Run this SQL before each call to `stored_procedure`. If it returns 1, call the procedure. |                    |
 | `proc_only_if_database`   | The database to run the `proc_only_if` SQL in.                                            | database attribute |
 
-**Note**: The `proc_only_if` guard condition is useful for HA scenarios where a database can move between servers.
+**Note**: The `proc_only_if` guard condition is useful for high-availability scenarios where a database can move between servers.
 
 ### Troubleshooting
 
-If your custom metrics are not appearing in Datadog, check the Agent log file. If you see the following error: `Could not call procedure <PROCEDURE_NAME>: You must supply -1 parameters for this stored procedure`, it could be one of the following issues:
+If your custom metrics do not appear in Datadog, check the Agent log file. If you see the following error: `Could not call procedure <PROCEDURE_NAME>: You must supply -1 parameters for this stored procedure`, it could be one of the following issues:
 
 * The `<PROCEDURE_NAME>` is typed incorrectly.
 * The database username specified in the configuration may not have permission to run the stored procedure.
