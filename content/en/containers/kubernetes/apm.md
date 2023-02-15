@@ -171,7 +171,7 @@ The Datadog Admission Controller is a component of the Datadog Cluster Agent tha
 Use the Datadog Admission Controller to inject environment variables and mount the necessary volumes on new application pods, automatically configuring pod and Agent trace communication. Learn how to automatically configure your application to submit traces to Datadog Agent by reading the [Injecting Libraries Using Admission Controller][2] documentation.
 
 [1]: /agent/cluster_agent/admission_controller/
-[2]: /tracing/trace_collection/admission_controller/
+[2]: /tracing/trace_collection/library_injections/
 {{% /tab %}}
 
 {{% tab "UDS" %}}
