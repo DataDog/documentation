@@ -118,20 +118,20 @@ Before installing, make sure you have:
 1. Run the following commands to add Datadog Observability Pipelines Worker repository to your Helm repositories: 
 
     ```
-    $ helm repo add datadog https://helm.datadoghq.com
-    $ helm repo update
+    helm repo add datadog https://helm.datadoghq.com
+    helm repo update
     ```
 
 2. Install the [Observability Pipelines Worker][4]:
 
     ```
-    $ helm install opw datadog/observability-pipelines-worker
+    helm install opw datadog/observability-pipelines-worker
     ```
 
     If you want to install the chart with a specific release name, run the following command, replacing <RELEASE_NAME> with the specific release name:
 
     ```
-    $ helm install --name <RELEASE_NAME> \
+    helm install --name <RELEASE_NAME> \
         --set datadog.apiKey=<DD_API_KEY> \
         --set datadog.configKey=<DD_OP_CONFIG_KEY> \
         datadog/observability-pipelines-worker
@@ -140,7 +140,7 @@ Before installing, make sure you have:
     You can set your Datadog site using the `datadog.site` option.
 
     ```
-    $ helm install --name <RELEASE_NAME> \
+    helm install --name <RELEASE_NAME> \
         --set datadog.apiKey=<DD_API_KEY> \
         --set datadog.configKey=<DD_OP_CONFIG_KEY> \
         datadog/observability-pipelines-worker
