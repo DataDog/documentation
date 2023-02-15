@@ -22,6 +22,10 @@ title: CircleCI セキュリティインシデントによる Datadog Agent へ�
         <td>2023 年 1 月 17 日</td>
         <td><a href="/resources/sh/rpm_check.sh"><code>rpm_check</code></a> スクリプト v1.2.0 を更新し、より明確な特定と改善手順を追加しました</td>
     </tr>
+    <tr>
+        <td>2023 年 2 月 3 日</td>
+        <td>どの Agent 5 のバージョンが影響を受けるキーで署名されているかを明確にしました</td>
+    </tr>
 </table>
 </details>
 
@@ -37,7 +41,7 @@ title: CircleCI セキュリティインシデントによる Datadog Agent へ�
 
 RPM の GPG 署名キーはフィンガープリント `60A389A44A0C32BAE3C03F0B069B56F54172A230` で、[私たちの署名キーの場所][2]からアクセス可能です。このキーは、歴史的に以下を署名するために使用されていました。
 
-* Agent 5 リリースと Agent 6 v6.13.0 (`datadog-agent` パッケージ) までのリリース
+* v5.32.8 まで (これを含む) の Agent 5 リリースと v6.13.0 まで (これを含む) の Agent 6 リリース (`datadog-agent` パッケージ)
 * スタンドアロン版 DogStatsD 6 リリースとスタンドアロン版 DogStatsD 7 リリース v7.23.1 (`datadog-dogstatsd` パッケージ) まで
 
 <div class="alert alert-info">
@@ -52,7 +56,7 @@ RPM の GPG 署名キーはフィンガープリント `60A389A44A0C32BAE3C03F0B
    * Agent v5 または v6
    * スタンドアロン版 DogStatsD v6 または v7.23.2 以前
 
-   RPM ベースの Linux ホストでは、以下のシナリオは影響を受ける可能性は**低い**ですが、まだ可能性があります。
+   RPM ベースの Linux ホストでは、以下のシナリオは影響を受ける可能性は**低い**ですが、それでもホストを確認する価値はあります。
    * Agent v7
    * スタンドアロン版 DogStatsD v7.23.2+。
 
