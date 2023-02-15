@@ -92,7 +92,7 @@ function hideNonRegionSpecificTOC(regionSelected=false) {
     const hiddenHeaderIDs = [...hiddenHeaders].map(el => `#${el.id}`)
 
     allTOCItems.forEach(item => {
-        const refID = item.querySelector('a').hash
+        const refID = item.querySelector('a')?.hash
         if(regionSelected){
             // display all items
             item.classList.remove('d-none')
