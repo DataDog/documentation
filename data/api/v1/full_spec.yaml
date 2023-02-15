@@ -9831,6 +9831,11 @@ components:
           description: Widget query.
           example: env:prod AND service:my-app
           type: string
+        sort:
+          description: Options for sorting results.
+          items:
+            $ref: '#/components/schemas/WidgetFieldSort'
+          type: array
       required:
       - query_string
       type: object
