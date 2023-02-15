@@ -11,10 +11,7 @@ further_reading:
 
 ## Overview
 
-Google Cloud Run is a fully managed serverless platform for deploying and scaling container-based applications. Datadog
-provides monitoring and log collection for Cloud Run through the [GCP integration][1]. Datadog also provides a solution,
-now in public beta, for instrumenting your Cloud Run applications with a purpose-built Agent to enable tracing, custom
-metrics, and direct log collection.
+Google Cloud Run is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Cloud Run through the [GCP integration][1]. Datadog also provides a solution, now in public beta, for instrumenting your Cloud Run applications with apurpose-built Agent to enable tracing, custom metrics, and direct log collection.
 
   <div class="alert alert-warning">This feature is in public beta. You can provide feedback through a <a href="https://forms.gle/HSiDGnTPvDvbzDAQA">feedback form</a>, or through your standard support channels. During the beta period, Cloud Run monitoring and APM tracing are available without a direct cost. Existing APM customers may incur increased span ingestion and volume costs. </div>
 
@@ -228,7 +225,7 @@ This command deploys the service and allows any external connection to reach it.
 ```shell
 gcloud run deploy APP_NAME --image=gcr.io/YOUR_PROJECT/APP_NAME \
   --port=80 \
-  --update-env-vars=DD_API_KEY=$(DD_API_KEY) \
+  --update-env-vars=DD_API_KEY=$DD_API_KEY \
   --update-env-vars=DD_TRACE_ENABLED=true \
   --update-env-vars=DD_SITE='datadoghq.com' \
   --allow-unauthenticated
@@ -285,13 +282,7 @@ RUN apt-get update && apt-get install -y ca-certificates
 
 [2]: /tracing/trace_collection/#for-setup-instructions-select-your-language
 
-[3]: https://registry.hub.docker.com/r/datadog/serverless-init
-
 [4]: https://buildpacks.io/docs/tools/pack/
-
-[5]: https://console.cloud.google.com/security/secret-manager
-
-[6]: https://console.cloud.google.com/run
 
 [7]: /metrics/custom_metrics/dogstatsd_metrics_submission/
 
@@ -302,8 +293,6 @@ RUN apt-get update && apt-get install -y ca-certificates
 [12]: /metrics/distributions/
 [13]: /metrics/#time-and-space-aggregation
 [10]: /account_management/api-app-keys/
-
-[11]: https://cloud.google.com/run/docs/deploying.
 
 [12]: https://github.com/DataDog/crpb/tree/main
 
