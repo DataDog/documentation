@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Datadog Service Catalog includes all discovered services from APM, USM, and RUM by default. If you are using any of these products, you will find your catalog is pre-populated with entries. You can add service metadata to these entries effortlessly through the UI, [API][1], or leverage automated pipelines via [GitHub integration][11] or [Terraform][2].
+Datadog Service Catalog includes all discovered services from APM, USM, and RUM by default. If you are using any of these products, your catalog is pre-populated with entries. You can add service metadata to these entries through the Datadog UI, [API][1], or use automated pipelines through the [GitHub integration][11] or [Terraform][2].
 
 ## For services with existing telemetry data (APM/USM/RUM)
 
