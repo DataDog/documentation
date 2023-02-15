@@ -749,9 +749,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
 {{% /tab %}}
 
 {{< /tabs >}}
-{{< site-region region="us">}}
-## Stefon
-{{< /site-region >}}
+
 ## Troubleshooting
 
 Need help? Contact [Datadog support][1].
