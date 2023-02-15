@@ -122,12 +122,12 @@ Datadog has a [dedicated API][7] allowing you to interact with your shared graph
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboard/lists
+[1]: https://app.datadoghq.com/dashboard/lists
 [2]: /dashboards/#timeboards
 [3]: /dashboards/#screenboard
-[4]: /organization-settings/public-sharing/shared-graphs
+[4]: https://app.datadoghq.com/organization-settings/public-sharing/shared-graphs
 [5]: /help/
-[6]: /organization-settings/public-sharing/settings
+[6]: https://app.datadoghq.com/organization-settings/public-sharing/settings
 [7]: /api/v1/embeddable-graphs/
 [8]: /api/v1/embeddable-graphs/#get-all-embeds
 [9]: /api/v1/embeddable-graphs/#create-embed
