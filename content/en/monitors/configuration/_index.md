@@ -261,7 +261,7 @@ Use this section to configure notifications to your team and configure how to se
   - [Configure your notification with Template Variables][8]
   - [Send notifications to your team through email, Slack, PagerDuty, etc.][6]
 
-  For more information on the configuration options for the Notification message, see  [Alerting Notifications][7].
+  For more information on the configuration options for the notification message, see [Alerting Notifications][7].
 
 ### Notification aggregation
 
