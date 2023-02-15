@@ -19,11 +19,11 @@ Google Cloud Run is a fully managed serverless platform for deploying and scalin
 
 ### Prerequisites
 
-Make sure you have a [Datadog API Key][10] and are using a programming language [supported by a Datadog tracing library][2].
+Make sure you have a [Datadog API Key][7] and are using a programming language [supported by a Datadog tracing library][2].
 
 ### Deploy a sample application in one click
 
-To deploy a sample application without the need to follow the rest of the guide, you can use one of [these examples][12]. The installation process asks required details, such as your Datadog API key. Note that these applications send data to the default website `datadoghq.com`.
+To deploy a sample application without the need to follow the rest of the guide, you can use one of [these examples][8]. The installation process asks required details, such as your Datadog API key. Note that these applications send data to the default website `datadoghq.com`.
 
 ### 1. Instrument your application
 
@@ -196,7 +196,7 @@ More details on the [Ruby tracing library][2].
 
 #### 1.b Instrument using buildpack
 
-[`Pack Buildpacks`][4] provide a convenient way to package your container without using a Dockerfile. This example uses the GCP container registry and Datadog serverless buildpack.
+[`Pack Buildpacks`][3] provide a convenient way to package your container without using a Dockerfile. This example uses the GCP container registry and Datadog serverless buildpack.
 
 **Note**: Follow the instructions to install the [tracing library][2] for your language before running the buildpack.
 
@@ -214,7 +214,7 @@ Build your application by running the following command:
 ### 2. Configure your application
 
 Once the container is built and pushed to your registry, the last step is to set the required environment variables for the  Datadog Agent:
-- `DD_API_KEY`: Datadog API key, used to send data to your Datadog account. It should be configured as a [GCP Secret][13] for privacy and safety issue.
+- `DD_API_KEY`: Datadog API key, used to send data to your Datadog account. It should be configured as a [GCP Secret][10] for privacy and safety issue.
 - `DD_SITE`: Datadog endpoint and website. Select your site on the right side of this page. Your site is: {{< region-param key="dd_site" code="true" >}}.
 - `DD_TRACE_ENABLED`: set to `true` to enable tracing
 
@@ -242,28 +242,20 @@ Once the deployment is completed, your metrics and traces are sent to Datadog. I
 
 - **Logs:** If you use the [GCP integration][1], your logs are already being collected. Alternatively, you can set the `DD_LOGS_ENABLED` environment variable to `true` to capture application logs through the serverless instrumentation directly.
 
-- **Custom Metrics:** You can submit custom metrics using a [DogStatsd client][7]. Only `DISTRIBUTION` metrics should be used.
+- **Custom Metrics:** You can submit custom metrics using a [DogStatsd client][4]. For monitoring Cloud Run and other serverless applications, use [distribution][9] metrics. Distributions provide `avg`, `sum`, `max`, `min`, and `count` aggregations by default. On the Metric Summary page, you can enable percentile aggregations (p50, p75, p90, p95, p99) and also manage tags. To monitor a distribution for a gauge metric type, use `avg` for both the [time and space aggregations][11]. To monitor a distribution for a count metric type, use `sum` for both the time and space aggregations.
 
-### Custom metrics
-You can submit custom metrics using a [DogStatsD client][7]. For monitoring Cloud Run and other serverless applications, use [distribution][12] metrics.
-
-Distributions provide `avg`, `sum`, `max`, `min`, and `count` aggregations by default. On the Metric Summary page, you can enable percentile aggregations (p50, p75, p90, p95, p99) and also manage tags. To monitor a distribution for a gauge metric type, use `avg` for both the [time and space aggregations][13]. To monitor a distribution for a count metric type, use `sum` for both the time and space aggregations.
-
-
-### Advanced options and configurations
-
-- **Environment Variables**
+### Environment Variables
 
 | Variable | Description |
 | -------- | ----------- |
-|`DD_API_KEY`| [Datadog API Key][10] - **Required**|
-| `DD_SITE` | [Datadog site][8] - **Required** |
+|`DD_API_KEY`| [Datadog API Key][7] - **Required**|
+| `DD_SITE` | [Datadog site][5] - **Required** |
 | `DD_LOGS_ENABLED` | When true, send logs (stdout and stderr) to Datadog. Defaults to false. |
-| `DD_SERVICE`      | See [Unified Service Tagging][9].                                       |
-| `DD_VERSION`      | See [Unified Service Tagging][9].                                       |
-| `DD_ENV`          | See [Unified Service Tagging][9].                                       |
-| `DD_SOURCE`       | See [Unified Service Tagging][9].                                       |
-| `DD_TAGS`         | See [Unified Service Tagging][9].                                       |
+| `DD_SERVICE`      | See [Unified Service Tagging][6].                                  |
+| `DD_VERSION`      | See [Unified Service Tagging][6].                                  |
+| `DD_ENV`          | See [Unified Service Tagging][6].                                  |
+| `DD_SOURCE`       | See [Unified Service Tagging][6].                                  |
+| `DD_TAGS`         | See [Unified Service Tagging][6].                                  |
 
 ## Troubleshooting
 
@@ -279,21 +271,13 @@ RUN apt-get update && apt-get install -y ca-certificates
 
 
 [1]: /integrations/google_cloud_platform/#log-collection
-
 [2]: /tracing/trace_collection/#for-setup-instructions-select-your-language
-
-[4]: https://buildpacks.io/docs/tools/pack/
-
-[7]: /metrics/custom_metrics/dogstatsd_metrics_submission/
-
-[8]: /getting_started/site/
-
-[9]: /getting_started/tagging/unified_service_tagging/
-[10]: /account_management/api-app-keys/#api-keys
-[12]: /metrics/distributions/
-[13]: /metrics/#time-and-space-aggregation
-[10]: /account_management/api-app-keys/
-
-[12]: https://github.com/DataDog/crpb/tree/main
-
-[13]: https://cloud.google.com/run/docs/configuring/secrets
+[3]: https://buildpacks.io/docs/tools/pack/
+[4]: /metrics/custom_metrics/dogstatsd_metrics_submission/
+[5]: /getting_started/site/
+[6]: /getting_started/tagging/unified_service_tagging/
+[7]: /account_management/api-app-keys/#api-keys
+[8]: https://github.com/DataDog/crpb/tree/main
+[9]: /metrics/distributions/
+[10]: /metrics/#time-and-space-aggregation
+[11]: https://cloud.google.com/run/docs/configuring/secrets

@@ -16,7 +16,7 @@ Azure Container Apps is a fully managed serverless platform for deploying and sc
 
 ### Prerequisites
 
-Make sure you have a [Datadog API Key][10] and are using a programming language [supported by a Datadog tracing library][2].
+Make sure you have a [Datadog API Key][6] and are using a programming language [supported by a Datadog tracing library][2].
 
 ### 1. Instrument using Dockerfile
 
@@ -186,7 +186,7 @@ More details on the [Ruby tracing library][2].
 ### 2. Configure your application
 
 Once the container is built and pushed to your registry, the last step is to set the required environment variables for the  Datadog Agent:
-- `DD_API_KEY`: Datadog API key, used to send data to your Datadog account. It should be configured as a [Azure Secret][13] for privacy and safety issue.
+- `DD_API_KEY`: Datadog API key, used to send data to your Datadog account. It should be configured as a [Azure Secret][7] for privacy and safety issue.
 - `DD_SITE`: Datadog endpoint and website. Select your site on the right side of this page. Your site is: {{< region-param key="dd_site" code="true" >}}.
 - `DD_TRACE_ENABLED`: set to `true` to enable tracing
 
@@ -210,31 +210,24 @@ Once the deployment is completed, your metrics and traces are sent to Datadog. I
 
 ## Additional configurations
 
-**Note**: Only `DISTRIBUTION` metrics should be used.
 - **Advanced Tracing:** The Datadog Agent already provides some basic tracing for popular frameworks. Follow the [advanced tracing guide][2] for more information.
 
 - **Logs:** If you use the [Azure integration][1], your logs are already being collected. Alternatively, you can set the `DD_LOGS_ENABLED` environment variable to `true` to capture application logs through the serverless instrumentation directly.
 
-- **Custom Metrics:** You can submit custom metrics using a [DogStatsd client][7]. Only `DISTRIBUTION` metrics should be used.
-### Custom metrics
-You can submit custom metrics using a [DogStatsD client][4].
+- **Custom Metrics:** You can submit custom metrics using a [DogStatsd client][3]. For monitoring Cloud Run and other serverless applications, use [distribution][8] metrics. Distributions provide `avg`, `sum`, `max`, `min`, and `count` aggregations by default. On the Metric Summary page, you can enable percentile aggregations (p50, p75, p90, p95, p99) and also manage tags. To monitor a distribution for a gauge metric type, use `avg` for both the [time and space aggregations][9]. To monitor a distribution for a count metric type, use `sum` for both the time and space aggregations.
 
-For monitoring Azure App Service and other serverless applications, use [distribution][8] metrics.
+### Environment Variables
 
-Distributions provide `avg`, `sum`, `max`, `min`, and `count` aggregations by default. On the Metric Summary page, you can enable percentile aggregations (p50, p75, p90, p95, p99) and also manage tags. To monitor a distribution for a gauge metric type, use `avg` for both the [time and space aggregations][9]. To monitor a distribution for a count metric type, use `sum` for both the time and space aggregations.
-
-### Advan
-- **Environment Variables**
-
-| Variable          | Description                                                             |
-|-------------------|-------------------------------------------------------------------------|
-| `DD_SITE`         | [Datadog site][8].                                                      |
+| Variable | Description |
+| -------- | ----------- |
+|`DD_API_KEY`| [Datadog API Key][6] - **Required**|
+| `DD_SITE` | [Datadog site][4] - **Required** |
 | `DD_LOGS_ENABLED` | When true, send logs (stdout and stderr) to Datadog. Defaults to false. |
-| `DD_SERVICE`      | See [Unified Service Tagging][9].                                       |
-| `DD_VERSION`      | See [Unified Service Tagging][9].                                       |
-| `DD_ENV`          | See [Unified Service Tagging][9].                                       |
-| `DD_SOURCE`       | See [Unified Service Tagging][9].                                       |
-| `DD_TAGS`         | See [Unified Service Tagging][9].                                       |
+| `DD_SERVICE`      | See [Unified Service Tagging][5].                                       |
+| `DD_VERSION`      | See [Unified Service Tagging][5].                                       |
+| `DD_ENV`          | See [Unified Service Tagging][5].                                       |
+| `DD_SOURCE`       | See [Unified Service Tagging][5].                                       |
+| `DD_TAGS`         | See [Unified Service Tagging][5].                                       |
 
 ## Troubleshooting
 
@@ -250,29 +243,11 @@ RUN apt-get update && apt-get install -y ca-certificates
 
 
 [1]: /integrations/azure/#log-collection
-[2]: /tracing/trace_collection/dd_libraries/
-[3]: https://registry.hub.docker.com/r/datadog/serverless-init
-[4]: /metrics/custom_metrics/dogstatsd_metrics_submission/
-[5]: /getting_started/site/
-[6]: /getting_started/tagging/unified_service_tagging/
-[1]: /integrations/azure/#log-collection
-[2]: /tracing/trace_collection/dd_libraries/
-[3]: https://registry.hub.docker.com/r/datadog/serverless-init
-[4]: /metrics/custom_metrics/dogstatsd_metrics_submission/
-[5]: /getting_started/site/
-[6]: /getting_started/tagging/unified_service_tagging/
+[2]: /tracing/trace_collection/#for-setup-instructions-select-your-language
+[3]: /metrics/custom_metrics/dogstatsd_metrics_submission/
+[4]: /getting_started/site/
+[5]: /getting_started/tagging/unified_service_tagging/
+[6]: /account_management/api-app-keys/
+[7]: https://learn.microsoft.com/en-us/azure/container-apps/manage-secrets
 [8]: /metrics/distributions/
 [9]: /metrics/#time-and-space-aggregation
-[1]: /integrations/azure/?tab=azurecliv20#log-collection
-
-[2]: /tracing/trace_collection/#for-setup-instructions-select-your-language
-
-[7]: /metrics/custom_metrics/dogstatsd_metrics_submission/
-
-[8]: /getting_started/site/
-
-[9]: /getting_started/tagging/unified_service_tagging/
-
-[10]: /account_management/api-app-keys/
-
-[13]: https://learn.microsoft.com/en-us/azure/container-apps/manage-secrets
