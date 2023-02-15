@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-[Universal Service Monitoring][1] discovers services using popular container tags (such as `app`, `short_image`, and `kube_deployment`) and automatically generates entries with them in the [Service Catalog][2]. 
+[Universal Service Monitoring][1] discovers services using popular container tags (such as `app`, `short_image`, and `kube_deployment`) and generates entries in the [Service Catalog][2] for those services. 
 
 You can access request, error, and duration metrics in Datadog for both inbound and outbound traffic on all services discovered with Universal Service Monitoring. These service health metrics that are useful for creating alerts, [tracking deployments][11], and getting started with [service level objectives (SLOs)][3] so you can get broad visibility into all services running on your infrastructure. 
 
@@ -51,7 +51,7 @@ The same translations apply for the `universal.http.server` operation that captu
 
 ## Usage
 
-Navigate to [**APM** > **Service Catalog**][5] and click on a service. The **Performance** tab displays service-level graphs on hits, latency, requests, errors, and more. You can also access these metrics when creating a [monitor](#create-a-monitor) or an [SLO](#create-an-slo), or by looking at a [dashboard](#access-a-defined-dashboard) in the [Service Catalog][2].
+Navigate to [**APM** > **Service Catalog**][5], filter by Universal Service Monitoring telemetry type, and click on a service. The **Performance** tab displays service-level graphs on hits, latency, requests, errors, and more. You can also access these metrics when creating a [monitor](#create-a-monitor) or an [SLO](#create-an-slo), or by looking at a [dashboard](#access-a-defined-dashboard) in the [Service Catalog][2].
 
 ### Create a monitor
 
