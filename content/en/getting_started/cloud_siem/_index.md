@@ -7,8 +7,8 @@ aliases:
     - /security_platform/security_monitoring/
     - /security_platform/security_monitoring/getting_started
     - /security_platform/getting_started/
-    - /security_platform/cloud_siem/getting_started
-    - /security/cloud_siem/getting_started
+    - /security_platform/cloud_siem/getting_started/
+    - /security/cloud_siem/getting_started/
 further_reading:
     - link: "https://learn.datadoghq.com/courses/intro-to-cloud-siem"
       tag: "Learning Center"
@@ -47,7 +47,7 @@ This guide walks you through best practices for getting started with Cloud SIEM.
 
 ## Phase 2: Signal exploration
 
-1. Review the [200+ out-of-the-box detection rules][9] that begin detecting threats in your environment immediately. Detection rules apply to all processed logs to maximize detection coverage. See the [detection rules][10] documentation for more information.
+1. Review the [out-of-the-box detection rules][9] that begin detecting threats in your environment immediately. Detection rules apply to all processed logs to maximize detection coverage. See the [detection rules][10] documentation for more information.
 
 2. Explore [security signals][11]. When a threat is detected with a detection rule, a security signal is generated. See the [security signals][12] documentation for more information.
 
@@ -56,7 +56,7 @@ This guide walks you through best practices for getting started with Cloud SIEM.
 ## Phase 3: Investigation
 
 1. Explore the [Investigator][15] for faster remediation. See the [Investigator][16] documentation for more information.
-2. Use [out-of-the-box-dashboards][17] or [create your own dashboards][18] for faster investigations, reporting, and monitoring.
+2. Use [out-of-the-box-dashboards][17] or [create your own dashboards][18] for investigations, reporting, and monitoring.
 
 ## Phase 4: Customization
 
