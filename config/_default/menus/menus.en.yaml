@@ -6145,8 +6145,7 @@ api:
         - v1
       operationids:
         - SearchSLO
-      unstable:
-        - v1
+      unstable: []
       order: 1
   - name: Check if SLOs can be safely deleted
     url: '#check-if-slos-can-be-safely-deleted'
