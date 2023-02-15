@@ -3610,6 +3610,12 @@ main:
     identifier: coscreen_troubleshooting
     parent: coscreen
     weight: 1
+  - name: Glossary
+    url: glossary/
+    pre: features
+    identifier: glossary
+    parent: essentials_heading
+    weight: 240000
   - name: Account Management
     url: account_management/
     pre: cog-2
