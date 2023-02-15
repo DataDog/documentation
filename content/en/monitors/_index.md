@@ -60,14 +60,14 @@ You can download a JSON file containing the definition of a monitor from the mon
 
 ## Control monitor tags with Tag Policies
 
-[Monitor tag policies][14] enforce data validation on tags and tag values on your Datadog monitors. Add one of the following rules to prevent monitors with unexpected tags from being created.
+[Monitor tag policies][12] enforce data validation on tags and tag values on your Datadog monitors. Add one of the following rules to prevent monitors with unexpected tags from being created.
 - Require tags with mandatory values
 - Require tags only
 - Optional tags with mandatory values
 
 ## View and search for monitors on mobile devices
 
-[Mobile-Friendly Monitors on iOS and Android][12]: View, mute, and unmute monitors on any iOS or Android device with the [Datadog Mobile App][1], available on the [Apple App Store][2] and [Google Play Store][3]. Write queries in the search bar to filter monitors in real-time. Use [Monitor Saved Views][13] to access a collection of monitors in a few taps on mobile.
+[Mobile-Friendly Monitors on iOS and Android][13]: View, mute, and unmute monitors on any iOS or Android device with the [Datadog Mobile App][1], available on the [Apple App Store][2] and [Google Play Store][3]. Write queries in the search bar to filter monitors in real-time. Use [Monitor Saved Views][14] to access a collection of monitors in a few taps on mobile.
 
 {{< img src="monitors/monitors_mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Monitors on Mobile App">}}
 
@@ -94,6 +94,6 @@ You can download a JSON file containing the definition of a monitor from the mon
 [9]: /monitors/notify
 [10]: /monitors/notify/downtimes
 [11]: /monitors/manage
-[12]: /mobile/?tab=ios#monitors
-[13]: /monitors/manage/search/#saved-view
-[14]: /monitors/settings/
+[12]: /monitors/settings/
+[13]: /mobile/?tab=ios#monitors
+[14]: /monitors/manage/search/#saved-view

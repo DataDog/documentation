@@ -44,7 +44,9 @@ Steps to free up disk space:
 
 ### Tags
 
-Add tags to your monitor (optional). Monitor tags are different than metric tags. They are used in the UI to group and search for monitors.
+Add tags to your monitor. Monitor tags are different than metric tags. They are used in the UI to group and search for monitors. If tag policies are configured, the required tags and tag values need to be added. To learn more, see [Tag Policies][6].
+
+{{< img src="monitors/notifications/notifications_add_required_tags.png" alt="Policy tag requirements" style="width:100%;" >}}
 
 ### Renotify
 
@@ -55,7 +57,7 @@ Enable monitor renotification (optional) to remind your team that a problem is n
 Configure the renotify interval, the monitor states from which the monitor renotifies (within `alert`, `no data`, and `warn`) and optionally set a limit to the number of renotification messages sent.
 
 For example, configure the monitor to `stop renotifying after 1 occurrence` to receive a single escalation message after the main alert.
-**Note:** [Attribute and tag variables][6] in the renotification are populated with the data available to the monitor during the time period of the renotification.
+**Note:** [Attribute and tag variables][7] in the renotification are populated with the data available to the monitor during the time period of the renotification.
 
 If renotification is enabled, you are given the option to include an escalation message that is sent if the monitor remains in one of the chosen states for the specified time period.
 
@@ -71,7 +73,7 @@ If you use the `{{#is_renotify}}` block, the original notification message is al
 1. Include only extra details in the `{{#is_renotify}}` block and don't repeat the original message details.
 2. Send the escalation message to a subset of groups.
 
-Learn how to configure your monitors for those use cases in the [example section][7].
+Learn how to configure your monitors for those use cases in the [example section][8].
 
 ### Priority
 
@@ -131,15 +133,15 @@ The options are:
 
 ### Modifications
 
-An [event][8] is created anytime a monitor is created, modified, silenced, or deleted. Set the `Notify` option to notify team members, chat services, and the monitor creator of these events.
+An [event][9] is created anytime a monitor is created, modified, silenced, or deleted. Set the `Notify` option to notify team members, chat services, and the monitor creator of these events.
 
 ### Permissions
 
 All users can read all monitors, regardless of the role they are associated with.
 
-By default, only users attached to roles with the [Monitors Write permission][9] can edit monitors. [Datadog Admin Role and Datadog Standard Role][10] have the Monitors Write permission by default. If your organization uses [Custom Roles][11], other custom roles may have the Monitors Write permission.
+By default, only users attached to roles with the [Monitors Write permission][10] can edit monitors. [Datadog Admin Role and Datadog Standard Role][11] have the Monitors Write permission by default. If your organization uses [Custom Roles][12], other custom roles may have the Monitors Write permission.
 
-You can further restrict your monitor by specifying a list of [roles][12] allowed to edit it. The monitor's creator can always edit the monitor.
+You can further restrict your monitor by specifying a list of [roles][13] allowed to edit it. The monitor's creator can always edit the monitor.
 
   {{< img src="monitors/notifications/monitor_rbac_restricted.jpg" alt="RBAC Restricted Monitor" style="width:90%;" >}}
 
@@ -147,17 +149,17 @@ Editing includes any updates to the monitor configuration, deleting the monitor,
 
 **Note**: The limitations are applied both in the UI and API.
 
-For more information on setting up RBAC for Monitors and migrating monitors from the locked setting to using role restrictions, see [How to set up RBAC for Monitors][13].
+For more information on setting up RBAC for Monitors and migrating monitors from the locked setting to using role restrictions, see [How to set up RBAC for Monitors][14].
 
 ## Test notifications
 
-Test notifications are supported for the [monitor types][14]: host, metric, anomaly, outlier, forecast, logs, rum, apm, integration (check only), process (check only), network (check only), custom check, event, and composite.
+Test notifications are supported for the [monitor types][15]: host, metric, anomaly, outlier, forecast, logs, rum, apm, integration (check only), process (check only), network (check only), custom check, event, and composite.
 
 ### Run the test
 
 1. After defining your monitor, test the notifications with the **Test Notifications** button at the bottom right of the monitor page.
 
-2. From the test notifications pop-up, choose the monitor case to test. You can only test states that are available in the monitor’s configuration for the thresholds specified in the alerting conditions. [Recovery thresholds][15] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
+2. From the test notifications pop-up, choose the monitor case to test. You can only test states that are available in the monitor’s configuration for the thresholds specified in the alerting conditions. [Recovery thresholds][16] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
 
     {{< img src="monitors/notifications/test-notif-select.png" alt="Test the notifications for this monitor" style="width:70%;" >}}
 
@@ -187,13 +189,14 @@ Message variables auto-populate with a randomly selected group based on the scop
 [3]: http://daringfireball.net/projects/markdown/syntax
 [4]: /monitors/notify/variables/
 [5]: /monitors/notify/variables/#conditional-variables
-[6]: /monitors/notify/variables/?tabs=is_alert#attribute-and-tag-variables
-[7]: /monitors/notify/variables/?tab=is_renotify#examples
-[8]: /events/
-[9]: /account_management/rbac/permissions/#monitors
-[10]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
-[11]: /account_management/rbac/?tab=datadogapplication#custom-roles
-[12]: /account_management/rbac/?tab=datadogapplication
-[13]: /monitors/guide/how-to-set-up-rbac-for-monitors/
-[14]: /monitors/types
-[15]: /monitors/guide/recovery-thresholds/
+[6]: /monitors/settings/
+[7]: /monitors/notify/variables/?tabs=is_alert#attribute-and-tag-variables
+[8]: /monitors/notify/variables/?tab=is_renotify#examples
+[9]: /events/
+[10]: /account_management/rbac/permissions/#monitors
+[11]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
+[12]: /account_management/rbac/?tab=datadogapplication#custom-roles
+[13]: /account_management/rbac/?tab=datadogapplication
+[14]: /monitors/guide/how-to-set-up-rbac-for-monitors/
+[15]: /monitors/types
+[16]: /monitors/guide/recovery-thresholds/
