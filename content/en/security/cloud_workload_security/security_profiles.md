@@ -52,29 +52,17 @@ commonality scores explained further
 
 {{< img src="security/cws/security_profiles/security-profile-modeled-activity.png" alt="Cloud Workload Security security profile page" width="50%">}}
 
-placeholder
+Security profile details also appear in the security signal panel. If the security profile matches known workload behavior, a [suppression suggestion](#suppress-signals-based-on-suggestions) is displayed.
 
 {{< img src="security/cws/security_profiles/signal-security-profile.png" alt="Cloud Workload Security security profile page" width="80%">}}
 
-## Suppress signals based on suggested actions
+## Suppress signals based on suggestions
 
-On the Signals page,
+If a signal matches known workload behavior for a security profile, a suppression suggestion is displayed on the security signal side panel. You can view the security profile that triggered the suggestion, and the **X (view activity detail button)** before choosing whether to accept the suggestion.
 
-view security profile
-view activity detail
-suppress signals
+To accept the suggestion, click **Suppress Signals**, then click **Add Suppression to Rule**. This creates a suppression query for the rule that excludes the process from triggering future security signals.
 
-- click suppress signals button to open new dialog box. Create a suppression query
-
-If a suppression isn't generated...
-
-If the signal does not match any known security profile, <-- Maybe should go with "Explore Security Profiles" section...
-
-**Add Suppression to Rule**.
-
-{{< img src="security/cws/security_profiles/suppression-suggestion.png" alt="Cloud Workload Security security profile page" width="80%">}}
-
-Vulnerability information shown in the APM Service Catalog
+{{< img src="security/cws/security_profiles/suppression-suggestion.png" alt="The security signal panel showing a suppression suggestion" width="80%">}}
 
 ## Adjust security profiles settings
 
