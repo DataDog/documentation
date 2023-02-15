@@ -257,7 +257,7 @@ Configure your notification messages to include the information you are most int
 
 ### Message
 
-Use this section to configure notifications to your team and configure how to send these alerts
+Use this section to configure notifications to your team and configure how to send these alerts:
   - [Configure your notification with Template Variables][8]
   - [Send notifications to your team through email, Slack, PagerDuty, etc.][6]
 
@@ -275,7 +275,7 @@ Alerts are grouped automatically based on your selection of the `group by` step 
 
 `Multi Alert` mode applies the alert to each source according to your group parameters. You receive an alert for **each group** that meets the set conditions. For example, you could group a query looking at a capacity metric by `host` and `device` to receive a separate alert for each host device that is running out of space.  
 
-Customize which dimensions trigger alerts to reduce the noise and focus on the queries that matter most to you. If you group your query by `host` and `device` but only want alerts to be sent when the `host` attribute meets the threshold, remove the `device` attribute from your multi alert options and reduce the amount of notifications that are sent.
+Customize which dimensions trigger alerts to reduce the noise and focus on the queries that matter most to you. If you group your query by `host` and `device` but only want alerts to be sent when the `host` attribute meets the threshold, remove the `device` attribute from your multi alert options and reduce the number of notifications that are sent.
 
 **Note**: If your metric is only reporting by `host` with no `device` tag, it is not detected by the monitor. Metrics with both `host` and `device` tags are detected by the monitor. 
 

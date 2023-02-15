@@ -86,7 +86,7 @@ The status graph shows your monitor's status over time, broken out by group. **N
 * The monitor's timeframe is too short for a metric that provides data infrequently.
 * A host's name previously included in the query has changed. Hostname changes age out of the UI within 2 hours.
 
-The status graph shows you the dimensions you configured your alerts, not the dimensions in your monitor query. For example, your monitor query is grouped by `host` and `device`, however you only want to receive alerts for the `host`. The status graph shows the monitor's status grouped by `host`. You can see the `device` subgroups by clicking **View all 1** which opens a panel showing status graphs for each device. For more information on alert groupings, see [Configure Monitors][13].
+The status graph shows you the dimensions you configured for your alerts, not the dimensions in your monitor query. For example: your monitor query is grouped by `host` and `device`, but you only want to receive alerts for the `host`. The status graph shows the monitor's status grouped by `host`. You can see the `device` subgroups by clicking **View all 1** which opens a panel showing status graphs for each device. For more information on alert groupings, see [Configure Monitors][13].
 
 #### Investigate a Monitor in a Notebook
 
