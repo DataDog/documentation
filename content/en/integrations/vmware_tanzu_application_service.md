@@ -28,7 +28,7 @@ further_reading:
 
 ## Overview
 
-Any VMware Tanzu Application Service (formerly known as Pivotal Cloud Foundry, see the [VMware announcement][1]%20is%20now%20VMware%20Tanzu%20Application%20Service.) for more information) deployment can send metrics and events to Datadog. You can track the health and availability of all nodes in the deployment, monitor the jobs they run, collect metrics from the Loggregator Firehose, and more. 
+Any VMware Tanzu Application Service (formerly known as Pivotal Cloud Foundry, see the [VMware announcement][1]%20is%20now%20VMware%20Tanzu%20Application%20Service) for more information) deployment can send metrics and events to Datadog. You can track the health and availability of all nodes in the deployment, monitor the jobs they run, collect metrics from the Loggregator Firehose, and more. 
 
 For the best experience, use this page to automatically set up monitoring through Tanzu Ops Manager for your application on VMware Tanzu Application Service and your VMware Tanzu Application Service cluster. For manual setup steps, see the [VMware Tanzu Application Service Manual Setup Guide][2].
 
