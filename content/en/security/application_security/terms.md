@@ -49,7 +49,7 @@ service
 
 signal
 : A detection of an application attack that impacts your services. Signals identify meaningful threats for you to review, and should be triaged with a high priority.
-: See [Signals Explorer][13] in the app
+: See [Signals Explorer][13] in the app.
 
 software composition analysis (SCA)
 : Comparing the open source libraries loaded by your services to databases of known vulnerabilities. SCA helps you identify vulnerable dependencies, outdated libraries, and licensing issues in the open source libraries that your web services load.
@@ -61,7 +61,7 @@ suspicious request
 : A distributed trace for which security activity has been flagged by event rules. The underlying trace is shared with APM, allowing deeper and faster investigations. 
 
 user attribution
-: A mechanism that maps suspicious requests to known users your systems. 
+: A mechanism that maps suspicious requests to known users in your systems. 
 : See [Tracking User Activity][14].
 
 vulnerability
@@ -82,7 +82,8 @@ Structured Query Language Injection (SQLi, SQL Injection)
 : See [SQL Injection on OWASP][4].
 
 Server-Side Request Forgery (SSRF)
-: A vulnerability where a web application fetches a remote resource without validating the user-supplied URL. It allows an attacker to coerce the application to send a crafted request to an unexpected destination, even when protected by a firewall, VPN, or another type of network access control list (ACL).: See [Server-Side Request Forgery on OWASP][5].
+: A vulnerability where a web application fetches a remote resource without validating the user-supplied URL. It allows an attacker to coerce the application to send a crafted request to an unexpected destination, even when protected by a firewall, VPN, or another type of network access control list (ACL).
+: See [Server-Side Request Forgery on OWASP][5].
 
 Local File Inclusion (LFI)
 : A vulnerability that allows an attacker to include a file locally present on the server during the processing of the request. In most cases this allows the attacker to read sensitive information stored in files on the server. In more severe cases exploitation can lead to cross-site scripting or remote code execution. 
@@ -95,7 +96,7 @@ Remote Code Execution (RCE)
 : A vulnerability that allows an attacker to remotely execute code on a machine.
 
 Object-Graph Navigation Language Injection (OGNLi)
-: A vulnerability that allows an attacker to execute their own OGNL expression in a Java application, most commonly leading to remote code execution
+: A vulnerability that allows an attacker to execute their own OGNL expression in a Java application, most commonly leading to remote code execution.
 : See [OGNLi in OWASP Top 10][7].
 
 
