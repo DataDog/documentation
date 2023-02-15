@@ -532,7 +532,7 @@ The following examples show how to track login events or custom events (using si
 {{% tab "Login success" %}}
 ```php
 <?php
-\datadog\appsec\track_user_login_success_event($id, $exists, ['email' => $email])
+\datadog\appsec\track_user_login_success_event($id, ['email' => $email])
 ?>
 ```
 {{% /tab %}}
@@ -540,7 +540,7 @@ The following examples show how to track login events or custom events (using si
 {{% tab "Login failure" %}}
 ```php
 <?php
-\datadog\appsec\track_user_login_failure_event($id, ['email' => $email])
+\datadog\appsec\track_user_login_failure_event($id, $exists, ['email' => $email])
 ?>
 ```
 {{% /tab %}}
