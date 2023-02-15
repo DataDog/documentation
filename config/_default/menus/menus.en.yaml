@@ -2366,10 +2366,6 @@ main:
     url: logs/log_configuration/rehydrating
     parent: log_configuration
     weight: 209
-  - name: Forwarding
-    url: logs/log_configuration/forwarding_custom_destinations
-    parent: log_configuration
-    weight: 210
   - name: Connect Logs and Traces
     url: tracing/other_telemetry/connect_logs_and_traces/
     parent: log_management
