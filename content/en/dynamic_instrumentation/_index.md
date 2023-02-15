@@ -80,9 +80,9 @@ Both log and metric probes require the same initial setup:
 
 A *log probe* will emit a log when it executes.
 
-Log probes without snapshot capture are enabled on all service instances that match the desired environment and version. They are rate limited to 5000 logs/s.
+If you enable `Capture method parameters and local variables` on the log probe, it will also capture method arguments, local variables, class fields, the call stack and any exceptions from the execution context and add them to the log event - you can see the captured values in the Datadog UI. Since capturing this data is a more performance intensive operation, it is only enabled on one instance of your service which matches the desired environment and version configured on the probe. Probes with capture are rate limited to execute once every second.
 
-If you enable `Capture method parameters and local variables` on the log probe, it will also capture method arguments, local variables, class fields, the call stack and any exceptions from the execution context and add them to the log event - you can see the captured values in the Datadog UI. Since capturing snapshots is a more performance intensive operation, by default it is only enabled on one instance of your service that matches the desired environment and version. Probes with snapshot capture are rate limited to execute once every second.
+Log probes without extra data capturing are enabled on all service instances that match the desired environment and version. They are rate limited to execute at most 5000 times per second, on each service instance.
 
 For more information, read [How Dynamic Instrumentation Works][11].
 
@@ -91,7 +91,7 @@ To create a log probe:
 1. Complete the generic probe setup (choose service, environment, version and probe location).
 1. Select **Log** as the probe type.
 1. Define a log message template. You can use the Dynamic Instrumentation expression language to reference values from the execution context.
-1. Select if you would like to capture snapshots from the probe.
+1. Select if you would like to enable extra data capturing from the probe.
 1. (optional) Define a condition using the Dynamic Instrumentation expression language. The log will only be emitted when the expression evaluates to true.
 
 {{< img src="dynamic_instrumentation/log_probe.png" alt="Creating a Dynamic Instrumentation log probe" >}}

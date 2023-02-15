@@ -15,7 +15,7 @@ You can create *log probes* and *metric probes*.
 
 ### Log probes
 
-Log probes are enabled by default on all service instances that match the desired environment and version. They are rate limited to 5000 logs/s.
+Log probes are enabled by default on all service instances that match the desired environment and version. They are rate limited to execute at most 5000 times per second, on each service instance.
 
 If you enable `Capture method parameters and local variables` on the log probe, Dynamic Instrumentation captures the following data and adds it to the log event:
   - **Method arguments**, **local variables**, and **fields**, with the following limits by default:
@@ -26,7 +26,11 @@ If you enable `Capture method parameters and local variables` on the log probe, 
   - Call **stack trace**.
   - Caught and uncaught **exceptions**.
 
-Since capturing snapshots is a more performance intensive operation, by default it is only enabled on one instance of your service that matches the desired environment and version. Probes with snapshot capture are rate limited to execute once every second.
+Since capturing extra data is a more performance intensive operation, by default it is only enabled on one instance of your service that matches the desired environment and version. Probes with snapshot capture are rate limited to execute once every second.
+
+It's required to set a log message template on every log probe. The template supports embedding expressions inside curly brackets. For example: `User {user.id} purchased {count(products)} products`.
+
+You can also set a condition on a log probe using the [expression language](#expression-language). The expression must evaluate to a boolean, the probe will execute if the expression is true and will not capture or emit any data if the expression is false.
 
 **Note**: The capture limits are configurable and subject to change while Dynamic Instrumentation is in beta.
 
