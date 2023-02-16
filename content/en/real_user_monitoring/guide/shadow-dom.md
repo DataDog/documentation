@@ -8,6 +8,10 @@ further_reading:
   text: 'Learn about Session Replay'
 ---
 
+<div class="alert alert-info">
+Datadog only supports open Shadow DOM at the moment.
+</div>
+
 ## Overview
 
 Shadow DOM helps developers build more modern websites by allowing them to incorporate isolated and reusable components into their code. Often used in order to keep a clean code structure and avoid style clashes, Shadow DOM usage has become more prominent in modern web development practices. 
