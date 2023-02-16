@@ -38,11 +38,7 @@ The **Behavior Commonality** score at the top of the page shows how common the a
 
 {{< img src="security/cws/security_profiles/security-profile.png" alt="CWS security profile details page" width="100%">}}
 
-showing affected services, links to infrastructure, suggested remediation, and links to more information.
-
-commonality scores explained further
-
-{{< img src="security/cws/security_profiles/security-profile-modeled-activity.png" alt="Cloud Workload Security security profile page" width="50%">}}
+When you select a **X**, additional details are displayed on the side panel. This includes a commonality score for **the Y**.
 
 Security profile details also appear in the security signal panel. If the security profile matches known workload behavior, a [suppression suggestion](#suppress-signals-based-on-suggestions) is displayed.
 
