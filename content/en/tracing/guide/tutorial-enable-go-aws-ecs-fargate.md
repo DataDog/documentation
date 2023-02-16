@@ -40,126 +40,354 @@ See [Tracing Go Applications][2] for general comprehensive tracing setup documen
 - Terraform
 - AWS ECS
 - an AWS ECR repository for hosting images
-- An AWS IAM user with `AdministratorAccess` permission. You must add the profile to your local credentials file using the access and secret access keys. For more information, read [Using the AWS credentials file and credential Profiles][20].
+- An AWS IAM user with `AdministratorAccess` permission. You must add the profile to your local credentials file using the access and secret access keys. For more information, read [Configuring the AWS SDK for Go V2][4].
 
 ## Install the sample Go application
 
-Next, install a sample application to trace. The code sample for this tutorial can be found at [github.com/DataDog/apm-tutorial-golang.git][9]. Clone the git repository by running:
+Next, install a sample application to trace. The code sample for this tutorial can be found at [github.com/DataDog/apm-tutorial-golang.git][5]. Clone the git repository by running:
 
 {{< code-block lang="bash" >}}
 git clone https://github.com/DataDog/apm-tutorial-golang.git
 {{< /code-block >}}
 
-Build the sample application using the following command. The command might take a while the first time you run it:
+The repository contains a multi-service Go application pre-configured to run inside Docker containers. The `docker-compose` YAML files to make the containers are located in the `docker` directory. This tutorial uses the `service-docker-compose-ECS.yaml` file, which builds containers for the `notes` and `calendar` service that make up the sample application.
 
-{{< code-block lang="bash" >}}
-make runNotes
-{{< /code-block >}}
+In addition, this tutorial uses several configuration files in the `terraform/Fargate` directory to create the environment to deploy the sample application to ECS with Fargate.
 
-The sample `notes` application is a basic REST API that stores data in an in-memory database. Use `curl` to send a few API requests:
+### Initial ECS setup
 
-`curl localhost:8080/notes`
-: Returns `[]` because there is nothing in the database yet
+The application requires some initial configuration, including adding your AWS profile (already configured with the correct permissions to create an ECS cluster and read from ECR), AWS region, and AWS ECR repository.
 
-`curl -X POST 'localhost:8080/notes?desc=hello'`
-: Adds a note with the description `hello` and an ID value of `1`. Returns `{"id":1,"description":"hello"}`.
+Open `terraform/Fargate/global_constants/variables.tf`. Replace the variable values below with your correct AWS account information:
 
-`curl localhost:8080/notes/1`
-: Returns the note with `id` value of `1`: `{"id":1,"description":"hello"}`
+```tf
+output "aws_profile" {
+    value = "<AWS_PROFILE>"
+    sensitive = true
+}
 
-`curl -X POST 'localhost:8080/notes?desc=otherNote'`
-: Adds a note with the description `otherNote` and an ID value of `2`. Returns `{"id":2,"description":"otherNote"}`
+output "aws_region" {
+    value = "<AWS_REGION>"
+    sensitive = true
+}
 
-`curl localhost:8080/notes`
-: Returns the contents of the database: `[{"id":1,"description":"hello"},{"id";2,"description":"otherNote"}]`
+output "aws_ecr_repository" {
+    value = "<AWS_ECR_REPOSITORY_URL>"
+    sensitive = true
+}
+```
 
-Run more API calls to see the application in action. When you're done, run the following command to exit the application:
+Leave the `datadog_api_key` section commented for now. You'll set up Datadog later in the tutorial.
 
-{{< code-block lang="bash" >}}
-make exitNotes
-{{< /code-block >}}
+### Build and upload the application images
 
-## Install Datadog tracing
+If you're not familiar with Amazon ECR, a registry for container images, it might be helpful to read [Using Amazon ECR with the AWS CLI][6].
 
-Next, install the Go tracer. From your `apm-tutorial-golang` directory, run:
+In the sample project's `/docker` directory, run the following commands:
 
-{{< code-block lang="bash" >}}
-go get gopkg.in/DataDog/dd-trace-go.v1/ddtrace
-{{< /code-block >}}
+1. Authenticate with ECR by supplying your username and password in this command:
+   {{< code-block lang="sh" >}}
+aws ecr get-login-password --region us-east-1 | docker login --username <YOUR_AWS_USER> --password-stdin <USER_CREDENTIALS>{{< /code-block >}}
 
-Now that the tracing library has been added to `go.mod`, enable tracing support.
+2. Build a Docker image for the sample apps, adjusting the platform setting to match yours:
+   {{< code-block lang="sh" >}}
+DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose -f service-docker-compose-ECS.yaml build{{< /code-block >}}
 
-Uncomment the following imports in `apm-tutorial-golang/cmd/calendar/main.go`:
-{{< code-block lang="go" >}}
-	sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
-	chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
-	httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
-	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-{{< /code-block >}}
+3. Tag the containers with the ECR destination:
+   {{< code-block lang="sh" >}}
+docker tag docker_notes:latest <ECR_REGISTRY_URL>:notes
+docker tag docker_calendar:latest <ECR_REGISTRY_URL>:calendar{{< /code-block >}}
 
-In the `main()` function, uncomment the following lines:
+4. Upload the container to the ECR registry:
+   {{< code-block lang="sh" >}}
+docker push <ECR_REGISTRY_URL>:notes
+docker push <ECR_REGISTRY_URL>:calendar{{< /code-block >}}
 
-{{< code-block lang="go" >}}
-tracer.Start()
-defer tracer.Stop()
-{{< /code-block >}}
+Your application (without tracing enabled) is containerized and available for ECS to pull.
 
-{{< code-block lang="go" >}}
-client = httptrace.WrapClient(client, httptrace.RTWithResourceNamer(func(req *http.Request) string {
-		return fmt.Sprintf("%s %s", req.Method, req.URL.Path)
-	}))
-{{< /code-block >}}
+### Deploy the application
 
-{{< code-block lang="go" >}}
-r.Use(chitrace.Middleware(chitrace.WithServiceName("notes")))
-{{< /code-block >}}
+Start the application and send some requests without tracing. After you've seen how the application works, you'll instrument it using the tracing library and Datadog Agent.
 
-In `setupDB()`, uncomment the following lines:
+To start, use a Terraform script to deploy to AWS ECS:
 
-{{< code-block lang="go" >}}
-sqltrace.Register("sqlite3", &sqlite3.SQLiteDriver{}, sqltrace.WithServiceName("db"))
-db, err := sqltrace.Open("sqlite3", "file::memory:?cache=shared")
-{{< /code-block >}}
+1. From the `terraform/Fargate/deployment` directory, run the following commands:
 
-Comment out the following line:
-{{< code-block lang="go" >}}
-db, err := sql.Open("sqlite3", "file::memory:?cache=shared")
-{{< /code-block >}}
+   ```sh
+   terraform init
+   terraform apply
+   terraform state show 'aws_alb.application_load_balancer'
+   ```
 
-Once you've made these changes, run:
-{{< code-block lang="go" >}}
-go mod tidy
-{{< /code-block >}}
+   **Note**: If the `terraform apply` command returns a CIDR block message, the script to obtain your IP address did not work on your local machine. To fix this, set the value manually in the `terraform/Fargate/deployment/security.tf` file. Inside the `ingress` block of the `load_balancer_security_group`, switch which `cidr_blocks` line is commented out and update the now-uncommented example line with your machine's IP4 address.
 
-## Launch the Go application and explore automatic instrumentation
+2. Make note of the DNS name of the load balancer. You'll use that base domain in API calls to the sample app. Wait a few minutes for the instances to start up.
 
-To start generating and collecting traces, launch the application again with `make run`.
+3. Open up another terminal and send API requests to exercise the app. The notes application is a REST API that stores data in an in-memory H2 database running on the same container. Send it a few commands:
 
-Use `curl` to again send requests to the application:
+   `curl -X GET 'BASE_DOMAIN:8080/notes'`
+   : `[]`
 
-`curl localhost:8080/notes`
-: `[]`
+   `curl -X POST 'BASE_DOMAIN:8080/notes?desc=hello'`
+   : `{"id":1,"description":"hello"}`
 
-`curl -X POST 'localhost:8080/notes?desc=hello'`
-: `{"id":1,"description":"hello"}`
+   `curl -X GET 'BASE_DOMAIN:8080/notes?id=1'`
+   : `{"id":1,"description":"hello"}`
 
-`curl localhost:8080/notes/1`
-: `{"id":1,"description":"hello"}`
+   `curl -X GET 'BASE_DOMAIN:8080/notes'`
+   : `[{"id":1,"description":"hello"}]`
 
-`curl localhost:8080/notes`
-: `[{"id":1,"description":"hello"}]`
+   `curl -X PUT 'BASE_DOMAIN:8080/notes?id=1&desc=UpdatedNote'`
+   : `{"id":1,"description":"UpdatedNote"}`
 
-Wait a few moments, and take a look at your Datadog UI. Navigate to [**APM > Traces**][11]. The Traces list shows something like this:
+   `curl -X GET 'BASE_DOMAIN:8080/notes'`
+   : `[{"id":1,"description":"UpdatedNote"}]`
 
-{{< img src="tracing/guide/tutorials/tutorial-go-host-traces.png" alt="Traces view shows trace data coming in from host." style="width:100%;" >}}
+   `curl -X POST 'BASE_DOMAIN:8080/notes?desc=NewestNote&add_date=y'`
+   : `{"id":2,"description":"NewestNote with date 12/02/2022."}`
 
-There are entries for the database (`db`) and the `notes` app. The traces list shows all the spans, when they started, what resource was tracked with the span, and how long it took.
+      This command calls both the `notes` and `calendar` services.
+
+4. After you've seen the application running, run the following command to stop it and clean up the AWS resources so that you can enable tracing:
+   {{< code-block lang="sh" >}}
+terraform destroy{{< /code-block >}}
+
+
+## Enable tracing
+
+Next, configure the Go application to enable tracing.
+
+To enable tracing support:
+
+1. Uncomment the following imports in `apm-tutorial-golang/cmd/calendar/main.go`:
+
+   {{< code-block lang="go" >}}
+     sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
+     chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
+     httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
+     "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+   {{< /code-block >}}
+
+1. In the `main()` function, uncomment the following lines:
+
+   {{< code-block lang="go" >}}
+   tracer.Start()
+   defer tracer.Stop(){{< /code-block >}}
+
+   {{< code-block lang="go" >}}
+   client = httptrace.WrapClient(client, httptrace.RTWithResourceNamer(func(req *http.Request) string {
+      return fmt.Sprintf("%s %s", req.Method, req.URL.Path)
+	})){{< /code-block >}}
+
+   {{< code-block lang="go" >}}
+   r.Use(chitrace.Middleware(chitrace.WithServiceName("notes"))){{< /code-block >}}
+
+1. In `setupDB()`, uncomment the following lines:
+   {{< code-block lang="go" >}}
+   sqltrace.Register("sqlite3", &sqlite3.SQLiteDriver{}, sqltrace.WithServiceName("db"))
+   db, err := sqltrace.Open("sqlite3", "file::memory:?cache=shared"){{< /code-block >}}
+
+   {{< code-block lang="go" >}}
+   db, err := sql.Open("sqlite3", "file::memory:?cache=shared"){{< /code-block >}}
+
+1. The steps above enabled automatic tracing with fully supported libraries. In cases where code doesn't fall under a supported library, you can create spans manually.
+
+   Open `notes/notesController.go`. This example already contains commented-out code that demonstrates the different ways to set up custom tracing on the code.
+
+1. The `makeSpanMiddleware` function in `notes/notesController.go` generates middleware that wraps a request in a span with the supplied name. Uncomment the following lines:
+
+   {{< code-block lang="go" disable_copy="true" collapsible="true" >}}
+     r.Get("/notes", nr.GetAllNotes)                // GET /notes
+     r.Post("/notes", nr.CreateNote)                // POST /notes
+     r.Get("/notes/{noteID}", nr.GetNoteByID)       // GET /notes/123
+     r.Put("/notes/{noteID}", nr.UpdateNoteByID)    // PUT /notes/123
+     r.Delete("/notes/{noteID}", nr.DeleteNoteByID) // DELETE /notes/123{{< /code-block >}}
+
+   {{< code-block lang="go" disable_copy="true" collapsible="true" >}}
+     r.Get("/notes", makeSpanMiddleware("GetAllNotes", nr.GetAllNotes))               // GET /notes
+	  r.Post("/notes", makeSpanMiddleware("CreateNote", nr.CreateNote))                // POST /notes
+	  r.Get("/notes/{noteID}", makeSpanMiddleware("GetNote", nr.GetNoteByID))          // GET /notes/123
+	  r.Put("/notes/{noteID}", makeSpanMiddleware("UpdateNote", nr.UpdateNoteByID))    // PUT /notes/123
+	  r.Delete("/notes/{noteID}", makeSpanMiddleware("DeleteNote", nr.DeleteNoteByID)) // DELETE /notes/123{{< /code-block >}}
+
+   Also remove the comment around the following import:
+
+   {{< code-block lang="go" disable_copy="true" collapsible="true" >}}
+   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"{{< /code-block >}}
+
+1. The `doLongRunningProcess` function creates child spans from a parent context. Remove the comments to enable it:
+   {{< code-block lang="go" filename="notes/notesHelper.go" disable_copy="true" collapsible="true" >}}
+   func doLongRunningProcess(ctx context.Context) {
+    childSpan, ctx := tracer.StartSpanFromContext(ctx, "traceMethod1")
+    childSpan.SetTag(ext.ResourceName, "NotesHelper.doLongRunningProcess")
+    defer childSpan.Finish()
+
+    time.Sleep(300 * time.Millisecond)
+    log.Println("Hello from the long running process in Notes")
+    privateMethod1(ctx)
+  }{{< /code-block >}}
+
+1. The `privateMethod1` function demonstates creating a completely separate service from a context. Remove the comments to enable it:
+
+   {{< code-block lang="go" filename="notes/notesHelper.go" disable_copy="true" collapsible="true" >}}
+   func privateMethod1(ctx context.Context) {
+	   childSpan, _ := tracer.StartSpanFromContext(ctx, "manualSpan1",
+		   tracer.SpanType("web"),
+		   tracer.ServiceName("noteshelper"),
+     )
+	   childSpan.SetTag(ext.ResourceName, "privateMethod1")
+	   defer childSpan.Finish()
+
+     time.Sleep(30 * time.Millisecond)
+     log.Println("Hello from the custom privateMethod1 in Notes")
+   }{{< /code-block >}}
+
+   For more information on custom tracing, see [Go Custom Instrumentation][7].
+
+1. Open `terraform/Fargate/deployment/main.tf`. The sample app already has the base configurations necessary to run the Datadog Agent on ECS Fargate and collect traces: the API key (which you configure in the next step), enabling ECS Fargate, and enabling APM. The definition is provided in both the `notes` task and the `calendar` task.
+
+1. Provide the API key variable with a value. Open `terraform/Fargate/global_constants/variables.tf`, uncomment the `output "datadog_api_key"` section, and provide your organization's Datadog API key.
+
+1. [Universal Service Tags][8] identify traced services across different versions and deployment environments so that they can be correlated within Datadog, and so you can use them to search and filter. The three environment variables used for Unified Service Tagging are `DD_SERVICE`, `DD_ENV`, and `DD_VERSION`. For applications deployed on ECS, these environment variables are set within the task definition for the containers.
+
+   For this tutorial, the `/terraform/Fargate/deployment/main.tf` file already has these environment variables defined for the notes and calendar applications. For example, for `notes`:
+
+   ```yaml
+   {
+    ...
+
+      name : "notes-task",
+      image : "${module.settings.aws_ecr_repository}:notes",
+      essential : true,
+      portMappings : [
+        {
+          containerPort : 8080,
+          hostPort : 8080
+        }
+      ],
+      memory : 512,
+      cpu : 256,
+      environment : [
+        {
+          name : "CALENDAR_HOST",
+          value : "calendar.apmlocalgo"
+        },
+        {
+          name : "DD_SERVICE",
+          value : "notes"
+        },
+        {
+          name : "DD_ENV",
+          value : "dev"
+        },
+        {
+          name : "DD_VERSION",
+          value : "0.0.1"
+        }
+      ],
+      dockerLabels : {
+        "com.datadoghq.tags.service" : "notes",
+        "com.datadoghq.tags.env" : "dev",
+        "com.datadoghq.tags.version" : "0.0.1"
+      },
+    },
+
+    ...
+   ```
+   And for `calendar`:
+
+   ```yaml
+   ...
+
+      name : "calendar-task",
+      image : "${module.settings.aws_ecr_repository}:calendar",
+      essential : true,
+      environment : [
+        {
+          name : "DD_SERVICE",
+          value : "calendar"
+        },
+        {
+          name : "DD_ENV",
+          value : "dev"
+        },
+        {
+          name : "DD_VERSION",
+          value : "0.0.1"
+        }
+      ],
+      dockerLabels : {
+        "com.datadoghq.tags.service" : "calendar",
+        "com.datadoghq.tags.env" : "dev",
+        "com.datadoghq.tags.version" : "0.0.1"
+      },
+    ...
+   ```
+
+   You can also see that Docker labels for the same Universal Service Tags `service`, `env`, and `version` values are set. This allows you also to get Docker metrics once your application is running.
+
+### Rebuild and upload the application image
+
+Rebuild the image with tracing enabled using the [same steps as before](#build-and-upload-the-application-images):
+
+{{< code-block lang="sh" >}}
+aws ecr get-login-password --region us-east-1 | docker login --username <YOUR_AWS_USER> --password-stdin <USER_CREDENTIALS>
+DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose -f service-docker-compose-ECS.yaml build
+docker tag docker_notes:latest <ECR_REGISTRY_URL>:notes
+docker tag docker_calendar:latest <ECR_REGISTRY_URL>:calendar
+docker push <ECR_REGISTRY_URL>:notes
+docker push <ECR_REGISTRY_URL>:calendar{{< /code-block >}}
+
+Your multi-service application with tracing enabled is containerized and available for ECS to pull.
+
+## Launch the app to see traces
+
+Redeploy the application and exercise the API:
+
+1. Redeploy the application to AWS ECS using the [same terraform commands as before](#deploy-the-application), but with the instrumented version of the configuration files. From the `terraform/Fargate/Instrumented` directory, run the following commands:
+
+   ```sh
+   terraform init
+   terraform apply
+   terraform state show 'aws_alb.application_load_balancer'
+   ```
+
+2. Make note of the DNS name of the load balancer. You'll use that base domain in API calls to the sample app.
+
+3. Wait a few minutes for the instances to start up. Wait a few minutes to ensure the containers for the applications are ready. Run some curl commands to exercise the instrumented app:
+
+   `curl -X GET 'BASE_DOMAIN:8080/notes'`
+   : `[]`
+
+   `curl -X POST 'BASE_DOMAIN:8080/notes?desc=hello'`
+   : `{"id":1,"description":"hello"}`
+
+   `curl -X GET 'BASE_DOMAIN:8080/notes?id=1'`
+   : `{"id":1,"description":"hello"}`
+
+   `curl -X GET 'BASE_DOMAIN:8080/notes'`
+   : `[{"id":1,"description":"hello"}]`
+
+   `curl -X PUT 'BASE_DOMAIN:8080/notes?id=1&desc=UpdatedNote'`
+   : `{"id":1,"description":"UpdatedNote"}`
+
+   `curl -X GET 'BASE_DOMAIN:8080/notes'`
+   : `[{"id":1,"description":"hello"}]`
+
+   `curl -X POST 'BASE_DOMAIN:8080/notes?desc=NewestNote&add_date=y'`
+   : `{"id":2,"description":"NewestNote with date 12/02/2022."}`
+   : This command calls both the `notes` and `calendar` services.
+
+4. Wait a few moments, and take a look at your Datadog UI. Navigate to [**APM > Traces**][9]. The Traces list shows something like this:
+   {{< img src="tracing/guide/tutorials/tutorial-go-host-traces.png" alt="Traces view shows trace data coming in from host." style="width:100%;" >}}
+
+   There are entries for the database (`db`) and the `notes` app. The traces list shows all the spans, when they started, what resource was tracked with the span, and how long it took.
 
 If you don't see traces, clear any filter in the **Traces** Search field (sometimes it filters on an environment variable such as `ENV` that you aren't using).
 
 ### Examine a trace
 
-On the Traces page, click on a `POST /notes` trace, and you'll see a flame graph that shows how long each span took and what other spans occurred before a span completed. The bar at the top of the graph is the span you selected on the previous screen (in this case, the initial entry point into the notes application).
+On the Traces page, click on a `POST /notes` trace, to see a flame graph that shows how long each span took and what other spans occurred before a span completed. The bar at the top of the graph is the span you selected on the previous screen (in this case, the initial entry point into the notes application).
 
 The width of a bar indicates how long it took to complete. A bar at a lower depth represents a span that completes during the lifetime of a bar at a higher depth.
 
@@ -171,140 +399,11 @@ A `GET /notes` trace looks something like this:
 
 {{< img src="tracing/guide/tutorials/tutorial-go-host-get-flame.png" alt="A flame graph for a GET trace." style="width:100%;" >}}
 
-## Tracing configuration
+For more information, read [Custom Instrumentation][7].
 
-The tracing library enables the use of tags to help compile and display data accurately in the Datadog dashboard. This is done by enabling a few environment variables when running the application. The project `Makefile` includes the environment variables `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`, which are set to enable [Unified Service Tagging][17]:
+Tracing a single application is a great start, but the real value in tracing is seeing how requests flow through your services. This is called _distributed tracing_. Click the trace for the last API call, the one that added a date to the note, to see a distributed trace between the two services:
 
-{{< code-block lang="go" filename="Makefile" disable_copy="true" collapsible="true" >}}
-run: build
-  DD_TRACE_SAMPLE_RATE=1 DD_SERVICE=notes DD_ENV=dev DD_VERSION=0.0.1 ./cmd/notes/notes &
-{{< /code-block >}}
-
-<div class="alert alert-warning">The <code>Makefile</code> also sets the environment variable <code>DD_TRACE_SAMPLE_RATE</code> to <code>1</code>, which represents a 100% sample rate. The guide sets a 100% sample rate to ensure that all requests to the notes service are sent to the Datadog backend for analysis and display. Avoid changing the sample rate in a production or high-volume environment. Setting a high sample rate in the application overrides the Agent configuration and results in a very large volume of data being sent to Datadog. For most use cases, allow the Agent to automatically determine the sampling rate.</div>
-
-For more information on available configuration options, see [Configuring the Go Tracing Library][14].
-
-### Use automatic tracing libraries
-
-Datadog has several fully supported libraries for Go that allow for automatic tracing when implemented in the code. In the `cmd/notes/main.go` file, you can see the `go-chi`, `sql`, and `http` libraries being aliased to the corresponding Datadog libraries: `chitrace`, `sqltrace`, and `httptrace` respectively:
-
-{{< code-block lang="go" filename="main.go" disable_copy="true" collapsible="true" >}}
-import (
-  ...
-
-  sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
-  chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
-  httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
-  ...
-)
-{{< /code-block >}}
-
-In `cmd/notes/main.go`, the Datadog libraries are initialized with the `WithServiceName` option. For example, the `chitrace` library is initialized as follows:
-
-{{< code-block lang="go" filename="main.go" disable_copy="true" collapsible="true" >}}
-r := chi.NewRouter()
-r.Use(middleware.Logger)
-r.Use(chitrace.Middleware(chitrace.WithServiceName("notes")))
-r.Mount("/", nr.Register())
-{{< /code-block >}}
-
-Using `chitrace.WithServiceName("notes")` ensures that all elements traced by the library fall under the service name `notes`.
-
-The `main.go` file contains more implementation examples for each of these libraries. For an extensive list of libraries, see [Go Compatibility Requirements][16].
-
-### Use custom tracing with context
-
-In cases where code doesn't fall under a supported library, you can create spans manually.
-
-Remove the comments around the `makeSpanMiddleware` function in `notes/notesController.go`. It generates middleware that wraps a request in a span with the supplied name. To use this function, comment out the following lines:
-
-{{< code-block lang="go" disable_copy="true" collapsible="true" >}}
-  r.Get("/notes", nr.GetAllNotes)                // GET /notes
-	r.Post("/notes", nr.CreateNote)                // POST /notes
-	r.Get("/notes/{noteID}", nr.GetNoteByID)       // GET /notes/123
-	r.Put("/notes/{noteID}", nr.UpdateNoteByID)    // PUT /notes/123
-	r.Delete("/notes/{noteID}", nr.DeleteNoteByID) // DELETE /notes/123
-{{< /code-block >}}
-
-Remove the comments around the following lines:
-
-{{< code-block lang="go" disable_copy="true" collapsible="true" >}}
-  r.Get("/notes", makeSpanMiddleware("GetAllNotes", nr.GetAllNotes))               // GET /notes
-	r.Post("/notes", makeSpanMiddleware("CreateNote", nr.CreateNote))                // POST /notes
-	r.Get("/notes/{noteID}", makeSpanMiddleware("GetNote", nr.GetNoteByID))          // GET /notes/123
-	r.Put("/notes/{noteID}", makeSpanMiddleware("UpdateNote", nr.UpdateNoteByID))    // PUT /notes/123
-	r.Delete("/notes/{noteID}", makeSpanMiddleware("DeleteNote", nr.DeleteNoteByID)) // DELETE /notes/123
-{{< /code-block >}}
-
-Also remove the comment around the following import:
-
-{{< code-block lang="go" disable_copy="true" collapsible="true" >}}
-"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-{{< /code-block >}}
-
-There are several examples of custom tracing in the sample application. Here are a couple more examples. Remove the comments to enable these spans:
-
-The `doLongRunningProcess` function creates child spans from a parent context:
-
-{{< code-block lang="go" filename="notes/notesHelper.go" disable_copy="true" collapsible="true" >}}
-func doLongRunningProcess(ctx context.Context) {
-	childSpan, ctx := tracer.StartSpanFromContext(ctx, "traceMethod1")
-	childSpan.SetTag(ext.ResourceName, "NotesHelper.doLongRunningProcess")
-	defer childSpan.Finish()
-
-	time.Sleep(300 * time.Millisecond)
-	log.Println("Hello from the long running process in Notes")
-	privateMethod1(ctx)
-}
-{{< /code-block >}}
-
-The `privateMethod1` function demonstates creating a completely separate service from a context:
-
-{{< code-block lang="go" filename="notes/notesHelper.go" disable_copy="true" collapsible="true" >}}
-func privateMethod1(ctx context.Context) {
-	childSpan, _ := tracer.StartSpanFromContext(ctx, "manualSpan1",
-		tracer.SpanType("web"),
-		tracer.ServiceName("noteshelper"),
-	)
-	childSpan.SetTag(ext.ResourceName, "privateMethod1")
-	defer childSpan.Finish()
-
-	time.Sleep(30 * time.Millisecond)
-	log.Println("Hello from the custom privateMethod1 in Notes")
-}
-{{< /code-block >}}
-
-For more information on custom tracing, see [Go Custom Instrumentation][12].
-
-## Examine distributed traces
-
-Tracing a single application is a great start, but the real value in tracing is seeing how requests flow through your services. This is called _distributed tracing_.
-
-The sample project includes a second application called `calendar` that returns a random date whenever it is invoked. The `POST` endpoint in the notes application has a second query parameter named `add_date`. When it is set to `y`, the notes application calls the calendar application to get a date to add to the note.
-
-To enable tracing in the calendar application, uncomment the following lines in cmd/calendar/main.go:
-
-{{< code-block lang="go" filename="notes/notesHelper.go" disable_copy="true" collapsible="true" >}}
-chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
-	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-{{< /code-block >}}
-
-{{< code-block lang="go" filename="notes/notesHelper.go" disable_copy="true" collapsible="true" >}}
-tracer.Start()
-	defer tracer.Stop()
-{{< /code-block >}}
-
-{{< code-block lang="go" filename="notes/notesHelper.go" disable_copy="true" collapsible="true" >}}
-	r.Use(chitrace.Middleware(chitrace.WithServiceName("calendar")))
-{{< /code-block >}}
-
-1. If the notes application is still running, use make exitNotes to stop it.
-1. Run `make run` to start the sample application.
-1. Send a POST request with the `add_date` parameter:
-   {{< code-block lang="go">}}curl -X POST 'localhost:8080/notes?desc=hello_again&add_date=y'{{< /code-block >}}
-
-1. In the Trace Explorer, click this latest `notes` trace to see a distributed trace between the two services:
-   {{< img src="tracing/guide/tutorials/tutorial-go-host-distributed.png" alt="A flame graph for a distributed trace." style="width:100%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-go-host-distributed.png" alt="A flame graph for a distributed trace." style="width:100%;" >}}
 
 This flame graph combines interactions from multiple applications:
 - The first span is a POST request sent by the user and handled by the `chi` router through the supported `go-chi` library.
@@ -313,9 +412,15 @@ This flame graph combines interactions from multiple applications:
 - Inside the calendar application, a `go-chi` router handles the GET request and the `GetDate` function is manually traced with its own span under the GET request.
 - Finally, the purple `db` call is its own service from the supported `sql` library. It appears at the same level as the `GET /Calendar` request because they are both called by the parent span `CreateNote`.
 
+When you're done exploring, clean up all resources and delete the deployments:
+
+{{< code-block lang="bash" >}}
+terraform destroy
+{{< /code-block >}}
+
 ## Troubleshooting
 
-If you're not receiving traces as expected, set up debug mode for the Go tracer. Read [Enable debug mode][13] to find out more.
+If you're not receiving traces as expected, set up debug mode for the Go tracer. Read [Enable debug mode][10] to find out more.
 
 ## Further reading
 
@@ -324,18 +429,10 @@ If you're not receiving traces as expected, set up debug mode for the Go tracer.
 [1]: /tracing/guide/#enabling-tracing-tutorials
 [2]: /tracing/trace_collection/dd_libraries/go/
 [3]: /account_management/api-app-keys/
-[4]: /tracing/trace_collection/compatibility/go/
-[5]: https://app.datadoghq.com/account/settings#agent/overview
-[6]: /getting_started/site/
-[7]: https://www.baeldung.com/go-instrumentation
-[8]: https://app.datadoghq.com/event/explorer
-[9]: https://github.com/DataDog/apm-tutorial-golang
-[10]: /getting_started/tagging/unified_service_tagging/#non-containerized-environment
-[11]: https://app.datadoghq.com/apm/traces
-[12]: /tracing/trace_collection/custom_instrumentation/go/
-[13]: /tracing/troubleshooting/tracer_debug_logs/?code-lang=go
-[14]: /tracing/trace_collection/library_config/go/
-[15]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=Go
-[16]: /tracing/trace_collection/compatibility/go/#library-compatibility
-[17]: /getting_started/tagging/unified_service_tagging/
-[20]: https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials.html
+[4]: https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/#specifying-credentials
+[5]: https://github.com/DataDog/apm-tutorial-golang
+[6]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/getting-started-cli.html
+[7]: /tracing/trace_collection/custom_instrumentation/go/
+[8]: /getting_started/tagging/unified_service_tagging/
+[9]: https://app.datadoghq.com/apm/traces
+[10]: /tracing/troubleshooting/tracer_debug_logs/?code-lang=go
