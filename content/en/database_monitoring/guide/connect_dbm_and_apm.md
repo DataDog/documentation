@@ -252,19 +252,19 @@ client.query('SELECT $1::text as message', ['Hello world!'], (err, result) => {
 
 ### Attribute Active Database Connections to the Calling APM Services
 
-{{< img src="database_monitoring/*" alt="">}}
+{{< img src="database_monitoring/dbm_apm_active_connections_breakdown.png" alt="View active connections to a database broken down by the APM Service they originate from.">}}
 
 Break down active connections for a given host by the upstream APM services making the requests. You can attribute load on a database to individual services to understand which services are most active on the database. Pivot to the most active upstream service’s service page to continue the investigation.
 
 ### View Query Samples from the Traces of the Calling Requests
 
-{{< img src="database_monitoring/*" alt="">}}
+{{< img src="database_monitoring/dbm_query_sample_trace_preview.png" alt="Preview the sampled APM trace that the query sample being inspected was generated from.">}}
 
 When viewing a Query Sample in Database Monitoring, if the associated trace has been sampled by APM, you can view the DBM Sample in the context of the APM Trace. This allows you to combine DBM telemetry, including the explain plan and historical performance of the query, alongside the lineage of the span within your infrastructure to understand if a change on the database is responsible for poor application performance.  
 
 ### Identify the Downstream Database Hosts of APM Services 
 
-{{< img src="database_monitoring/*" alt="">}}
+{{< img src="database_monitoring/dbm_apm_service_page_db_host_list.png" alt="Visualize the downstream database hosts that your APM Services depend on from the Service Page.">}}
 
 On the APM Service Page, view the direct downstream database dependencies of the service as identified by Database Monitoring. Quickly determine if any hosts have disproportionate load that may be caused by noisy neighbors.  
 
