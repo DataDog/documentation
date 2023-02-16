@@ -114,6 +114,11 @@ Enable the Datadog profiler. Added in version `0.69.0`. See [Enabling the PHP Pr
 **Default**: `1`<br>
 Whether to enable the endpoint data collection in profiles. Added in version `0.79.0`.
 
+`DD_PROFILING_EXPERIMENTAL_ALLOCATION_ENABLED`
+: **INI**: `datadog.profiling.experimental_allocation_enabled`. INI available since `0.84.0`.<br>
+**Default**: `0`<br>
+Enable the experimental allocation size and allocation bytes profile type. Added in version `0.84.0`.
+
 `DD_PROFILING_EXPERIMENTAL_CPU_TIME_ENABLED`
 : **INI**: `datadog.profiling.experimental_cpu_time_enabled`. INI available since `0.82.0`.<br>
 **Default**: `1`<br>
@@ -298,10 +303,15 @@ A comma-separated list of query parameters to be collected as part of the URL. S
 **Default**: `*`<br>
 A comma-separated list of query parameters to be collected as part of the resource URI. Set to empty to prevent collecting any parameters, or `*` to collect all parameters. Added in version `0.74.0`.
 
+`DD_TRACE_CLIENT_IP_ENABLED`
+: **INI**: `datadog.trace.client_ip_enabled`<br>
+**Default**: `false`<br>
+Enables IP collection client side. Added in version `0.84.0`.
+
 `DD_TRACE_CLIENT_IP_HEADER`
 : **INI**: `datadog.trace.client_ip_header`<br>
 **Default**: `null`<br>
-The IP header to be used for client IP collection, for example: `x-forwarded-for`. Added in version `0.76.0`.
+The IP header to be used for client IP collection, for example: `x-forwarded-for`. Added in version `0.84.0` (`0.76.0` when using ASM).
 
 `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP`
 : **INI**: `datadog.trace.obfuscation_query_string_regexp`<br>

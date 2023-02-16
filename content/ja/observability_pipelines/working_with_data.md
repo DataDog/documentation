@@ -17,9 +17,6 @@ further_reading:
 - link: /observability_pipelines/reference/transforms/#metrictolog
   tag: ドキュメント
   text: メトリクスをログイベントに変換する
-- link: https://vector.dev/guides/level-up/csv-enrichment-guide/
-  tag: ドキュメント
-  text: CSV エンリッチメントを使用して、データにさらなるコンテクストを提供する
 - link: /observability_pipelines/production_deployment_overview/integrate_datadog_and_the_observability_pipelines_worker/
   tag: ドキュメント
   text: 観測可能性パイプラインにデータを送信するための Datadog Agent の構成

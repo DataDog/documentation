@@ -585,6 +585,20 @@
     "request_description": "",
     "request_schema_description": "A request wrapper around a single timeseries query to be executed."
   },
+  "DeleteRestrictionPolicy": {
+    "description": "Deletes the restriction policy associated with a specified resource.",
+    "summary": "Delete a restriction policy"
+  },
+  "GetRestrictionPolicy": {
+    "description": "Retrieves the restriction policy associated with a specified resource.",
+    "summary": "Get a restriction policy"
+  },
+  "UpdateRestrictionPolicy": {
+    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Connections: `connection`\n- Dashboards: `dashboard`\n- Notebooks: `notebook`\n- Security Rules: `security-rule`",
+    "summary": "Update a restriction policy",
+    "request_description": "Restriction policy payload",
+    "request_schema_description": "Update request for a restriction policy."
+  },
   "ListRoles": {
     "description": "Returns all roles, including their names and their unique identifiers.",
     "summary": "List roles"

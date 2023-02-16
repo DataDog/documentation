@@ -10,7 +10,7 @@ is_beta: true
 kind: documentation
 title: Intelligent Test Runner
 ---
-{{< callout url="https://app.datadoghq.com/ci/getting-started" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
+{{< callout url="https://app.datadoghq.com/ci/getting-started" >}}
 Intelligent Test Runner for CI Visibility は非公開ベータ版です。CI Visibility の概要のページにあるフォームに記入して、アクセスをリクエストすることができます。
 {{< /callout >}}
 
@@ -79,10 +79,9 @@ Intelligent Test Runner を有効にするには、以下の環境変数の設�
 NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app DD_CIVISIBILITY_AGENTLESS_ENABLED=true DD_API_KEY=$API_KEY DD_CIVISIBILITY_GIT_UPLOAD_ENABLED=true DD_CIVISIBILITY_ITR_ENABLED=true yarn test
 {{< /code-block >}}
 
-**重要**: Intelligent Test Runner は、すべてのテストをスキップすることができます。デフォルトでは、実行するテストがない場合、`jest` は失敗します。`jest` が失敗しないようにするには、`jest` に [`--passWithNoTests`][5] を渡してください。
 
 #### UI アクティベーション
-環境変数の設定に加えて、お客様またはお客様の組織で管理者権限を持つユーザーが、[テストサービス設定][6]ページで Intelligent Test Runner を有効にする必要があります。
+環境変数の設定に加えて、お客様またはお客様の組織で管理者権限を持つユーザーが、[テストサービス設定][5]ページで Intelligent Test Runner を有効にする必要があります。
 
 #### 互換性
 
@@ -120,7 +119,7 @@ Intelligent Test Runner を有効にするには、`dd-trace` ツールのバー
 **デフォルト**: `false`<br/>
 **注**: ベータ版のみ必要
 
-これらの環境変数の設定後、通常通り [dotnet テスト][7]や [VSTest.Console.exe][8] を使ってテストを実行します。
+これらの環境変数の設定後、通常通り [dotnet テスト][6]や [VSTest.Console.exe][7] を使ってテストを実行します。
 
 {{< tabs >}}
 
@@ -131,7 +130,7 @@ Intelligent Test Runner を有効にするには、`dd-trace` ツールのバー
 dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
 {{< /code-block >}}
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "VSTest.Console" %}}
 
@@ -140,17 +139,17 @@ dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
 dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- VSTest.Console.exe {test_assembly}.dll
 {{< /code-block >}}
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
 #### UI アクティベーション
 
-環境変数の設定に加えて、お客様またはお客様の組織で管理者権限を持つユーザーが、[テストサービス設定][6]ページで Intelligent Test Runner を有効にする必要があります。
+環境変数の設定に加えて、お客様またはお客様の組織で管理者権限を持つユーザーが、[テストサービス設定][5]ページで Intelligent Test Runner を有効にする必要があります。
 
 ### Swift
 
-Intelligent Test Runner を有効にするには、`dd-sdk-swift` フレームワークのバージョンが >= 2.2.0-rc.1 である必要があります。また、スキームやテストプランのテスト設定で `Code Coverage` オプションを有効にするか、`swift test` コマンドに `--enable-code-coverage` を追加しなければなりません (SPM ターゲットを使用している場合)。
+Intelligent Test Runner を有効にするには、`dd-sdk-swift` フレームワークのバージョンが >= 2.2.0 である必要があります。また、スキームやテストプランのテスト設定で `Code Coverage` オプションを有効にするか、`swift test` コマンドに `--enable-code-coverage` を追加しなければなりません (SPM ターゲットを使用している場合)。
 
 また、以下の環境変数も設定する必要があります。
 
@@ -174,7 +173,7 @@ Intelligent Test Runner を有効にするには、`dd-sdk-swift` フレーム�
 
 #### UI アクティベーション
 
-環境変数の設定に加えて、お客様またはお客様の組織で管理者権限を持つユーザーが、[テストサービス設定][6]ページで Intelligent Test Runner を有効にする必要があります。
+環境変数の設定に加えて、お客様またはお客様の組織で管理者権限を持つユーザーが、[テストサービス設定][5]ページで Intelligent Test Runner を有効にする必要があります。
 
 ## CI ジョブのセットアップ
 
@@ -184,12 +183,14 @@ shallow clone に代わる効率的な方法として、partial clone (Git v2.27
 
 ## コンフィギュレーション
 
-デフォルトブランチは、無関係なテストのノイズを減らすために、自動的に Intelligent Test Runner の有効化から除外されますが、構成することは可能です。この除外によって影響を受けるテストが見落とされる可能性があるため、Datadog はデフォルトブランチを含めることを推奨しています。
+リポジトリのデフォルトブランチは、自動的に Intelligent Test Runner の有効化から除外されます。上記の制限により、Intelligent Test Runner は実行すべきテストの一部をスキップする可能性があるため、Datadog はデフォルトブランチ (またはリリース元のブランチ) の全てのテストの実行を継続することを推奨しています。
+
+他に除外したいブランチがある場合、Intelligent Test Runner の設定ページから追加することができます。クエリバーは、ワイルドカード文字 `*` をサポートしており、一致するブランチを除外することができます。
 
 {{< img src="continuous_integration/itr_configuration.png" alt="Intelligent Test Runner から除外するブランチを選択" style="width:80%;">}}
 
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -197,7 +198,6 @@ shallow clone に代わる効率的な方法として、partial clone (Git v2.27
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/organization-settings/application-keys
 [4]: /ja/getting_started/site/
-[5]: https://jestjs.io/docs/cli#--passwithnotests
-[6]: https://app.datadoghq.com/ci/settings/test-service
-[7]: https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-test
-[8]: https://docs.microsoft.com/en-us/visualstudio/test/vstest-console-options
+[5]: https://app.datadoghq.com/ci/settings/test-service
+[6]: https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-test
+[7]: https://docs.microsoft.com/en-us/visualstudio/test/vstest-console-options

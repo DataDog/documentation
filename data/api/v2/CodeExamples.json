@@ -434,6 +434,13 @@
       "description": "Update a RUM application returns \"OK\" response"
     }
   ],
+  "UpdateRestrictionPolicy": [
+    {
+      "group": "restriction_policies",
+      "suffix": "",
+      "description": "Update a restriction policy returns \"OK\" response"
+    }
+  ],
   "AddUserToRole": [
     {
       "group": "roles",

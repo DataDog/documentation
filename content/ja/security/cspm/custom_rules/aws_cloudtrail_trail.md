@@ -57,10 +57,6 @@ disable_edit: true
 **タイプ**: `BOOLEAN`<br>
 **プロバイダー名**: `IncludeGlobalServiceEvents`<br>
 **説明**: IAM などの Amazon Web Services グローバルサービスからの Amazon Web Services API コールを含めるには、<b>True</b> に設定します。それ以外は <b>False</b> です。<br>
-## `is_logging`
-**タイプ**: `BOOLEAN`<br>
-**プロバイダー名**: `IsLogging`<br>
-**説明**: CloudTrail トレイルが現在 Amazon Web Services API コールをロギングしているかどうか。<br>
 ## `is_multi_region_trail`
 **タイプ**: `BOOLEAN`<br>
 **プロバイダー名**: `IsMultiRegionTrail`<br>
@@ -71,63 +67,15 @@ disable_edit: true
 **説明**: 組織トレイルであるかどうかを指定します。<br>
 ## `kms_key_id`
 **タイプ**: `STRING`<br>
-**Provider name**: `KmsKeyId`<br>
+**プロバイダー名**: `KmsKeyId`<br>
 **説明**: CloudTrail で配信されるログを暗号化する KMS キー ID を指定します。値は以下のフォーマットで KMS キーに完全指定された ARN です。  <code>arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012</code><br>
-## `latest_cloud_watch_logs_delivery_error`
-**タイプ**: `STRING`<br>
-**プロバイダー名**: `LatestCloudWatchLogsDeliveryError`<br>
-**説明**: CloudWatch Logs にログを配信しようとした際に、CloudTrail が遭遇した CloudWatch Logs のエラーを表示します。<br>
-## `latest_cloud_watch_logs_delivery_time`
-**タイプ**: `TIMESTAMP`<br>
-**プロバイダー名**: `LatestCloudWatchLogsDeliveryTime`<br>
-**説明**: CloudTrail が CloudWatch Logs にログを配信した直近の日時を表示します。<br>
-## `latest_delivery_attempt_succeeded`
-**タイプ**: `STRING`<br>
-**プロバイダー名**: `LatestDeliveryAttemptSucceeded`<br>
-**説明**: このフィールドは使用されなくなりました。<br>
-## `latest_delivery_attempt_time`
-**タイプ**: `STRING`<br>
-**プロバイダー名**: `LatestDeliveryAttemptTime`<br>
-**説明**: このフィールドは使用されなくなりました。<br>
-## `latest_delivery_error`
-**タイプ**: `STRING`<br>
-**プロバイダー名**: `LatestDeliveryError`<br>
-**説明**: 指定したバケットにログファイルを配信しようとした際に、CloudTrail が遭遇した Amazon S3 エラーを表示します。詳細については、Amazon S3 API リファレンスの<a href="https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html">エラーレスポンス</a>を参照してください。  <note> このエラーは、宛先の S3 バケットに問題がある場合にのみ発生し、タイムアウトしたリクエストでは発生しません。問題を解決するには、新しいバケットを作成し、<code>UpdateTrail</code> を呼び出して新しいバケットを指定するか、CloudTrail が再びバケットに書き込めるように、既存のオブジェクトを修正します。 </note><br>
-## `latest_delivery_time`
-**タイプ**: `TIMESTAMP`<br>
-**プロバイダー名**: `LatestDeliveryTime`<br>
-**説明**: CloudTrail が最後にアカウントの Amazon S3 バケットにログファイルを配信した日時を指定します。<br>
-## `latest_digest_delivery_error`
-**タイプ**: `STRING`<br>
-**プロバイダー名**: `LatestDigestDeliveryError`<br>
-**説明**: 指定したバケットにダイジェストファイルを配信しようとした際に、CloudTrail が遭遇した Amazon S3 エラーを表示します。詳細については、Amazon S3 API リファレンスの<a href="https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html">エラーレスポンス</a>を参照してください。  <note> このエラーは、宛先の S3 バケットに問題がある場合にのみ発生し、タイムアウトしたリクエストでは発生しません。問題を解決するには、新しいバケットを作成し、<code>UpdateTrail</code> を呼び出して新しいバケットを指定するか、CloudTrail が再びバケットに書き込めるように、既存のオブジェクトを修正します。 </note><br>
-## `latest_digest_delivery_time`
-**タイプ**: `TIMESTAMP`<br>
-**プロバイダー名**: `LatestDigestDeliveryTime`<br>
-**説明**: CloudTrail が最後にアカウントの Amazon S3 バケットにダイジェストファイルを配信した日時を指定します。<br>
-## `latest_notification_attempt_succeeded`
-**タイプ**: `STRING`<br>
-**プロバイダー名**: `LatestNotificationAttemptSucceeded`<br>
-**説明**: このフィールドは使用されなくなりました。<br>
-## `latest_notification_attempt_time`
-**タイプ**: `STRING`<br>
-**プロバイダー名**: `LatestNotificationAttemptTime`<br>
-**説明**: このフィールドは使用されなくなりました。<br>
-## `latest_notification_error`
-**タイプ**: `STRING`<br>
-**プロバイダー名**: `LatestNotificationError`<br>
-**説明**: 通知を送信しようとしたときに CloudTrail が遭遇した Amazon SNS のエラーを表示します。Amazon SNS エラーの詳細については、<a href="https://docs.aws.amazon.com/sns/latest/dg/welcome.html">Amazon SNS デベロッパーガイド</a>を参照してください。<br>
-## `latest_notification_time`
-**タイプ**: `TIMESTAMP`<br>
-**プロバイダー名**: `LatestNotificationTime`<br>
-**説明**: CloudTrail がアカウントの Amazon S3 バケットに新しいログファイルを書き込んだことを通知する最新の Amazon SNS の日時を指定します。<br>
 ## `log_file_validation_enabled`
 **タイプ**: `BOOLEAN`<br>
 **プロバイダー名**: `LogFileValidationEnabled`<br>
 **説明**: ログファイル検証を有効にするかどうかを指定します。<br>
 ## `name`
 **タイプ**: `STRING`<br>
-**Provider name**: `Name`<br>
+**プロバイダー名**: `Name`<br>
 **説明**: CreateTrail の呼び出しによって設定されたトレイルの名前。最大文字数は 128 文字です。<br>
 ## `s3_bucket_name`
 **タイプ**: `STRING`<br>
@@ -135,7 +83,7 @@ disable_edit: true
 **説明**: CloudTrail がトレイルファイルを配信する Amazon S3 バケットの名前。<a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html">Amazon S3 バケットの命名要件</a>を参照してください。<br>
 ## `s3_key_prefix`
 **タイプ**: `STRING`<br>
-**Provider name**: `S3KeyPrefix`<br>
+**プロバイダー名**: `S3KeyPrefix`<br>
 **説明**: ログファイル配信用に指定したバケット名の後に付く、Amazon S3 キーのプレフィックスを指定します。詳細は、<a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html">CloudTrail ログファイルの検索</a>を参照してください。最大長は 200 文字です。<br>
 ## `sns_topic_arn`
 **タイプ**: `STRING`<br>
@@ -145,25 +93,80 @@ disable_edit: true
 **タイプ**: `STRING`<br>
 **プロバイダー名**: `SnsTopicName`<br>
 **説明**: このフィールドは使用されなくなりました。SnsTopicARN を使用してください。<br>
-## `start_logging_time`
-**タイプ**: `TIMESTAMP`<br>
-**プロバイダー名**: `StartLoggingTime`<br>
-**説明**: CloudTrail が Amazon Web Services アカウントの API コールの記録を開始した直近の日時を指定します。<br>
-## `stop_logging_time`
-**タイプ**: `TIMESTAMP`<br>
-**プロバイダー名**: `StopLoggingTime`<br>
-**説明**: CloudTrail が Amazon Web Services アカウントの API コールの記録を停止した直近の日時を指定します。<br>
 ## `tags`
 **タイプ**: `UNORDERED_LIST_STRING`<br>
-## `time_logging_started`
-**タイプ**: `STRING`<br>
-**プロバイダー名**: `TimeLoggingStarted`<br>
-**説明**: このフィールドは使用されなくなりました。<br>
-## `time_logging_stopped`
-**タイプ**: `STRING`<br>
-**プロバイダー名**: `TimeLoggingStopped`<br>
-**説明**: このフィールドは使用されなくなりました。<br>
 ## `trail_arn`
 **タイプ**: `STRING`<br>
 **プロバイダー名**: `TrailARN`<br>
 **説明**: トレイルの ARN を指定します。トレイル ARN の形式は以下のとおりです。  <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code><br>
+## `trail_status`
+**タイプ**: `STRUCT`<br>
+**プロバイダー名**: `GetTrailStatusResponse`<br>
+   - `is_logging`<br>
+    **タイプ**: `BOOLEAN`<br>
+    **プロバイダー名**: `IsLogging`<br>
+    **説明**: CloudTrail トレイルが現在 Amazon Web Services API コールをロギングしているかどうか。<br>
+   - `latest_cloud_watch_logs_delivery_error`<br>
+    **タイプ**: `STRING`<br>
+    **プロバイダー名**: `LatestCloudWatchLogsDeliveryError`<br>
+    **説明**: CloudWatch Logs にログを配信しようとした際に、CloudTrail が遭遇した CloudWatch Logs のエラーを表示します。<br>
+   - `latest_cloud_watch_logs_delivery_time`<br>
+    **タイプ**: `TIMESTAMP`<br>
+    **プロバイダー名**: `LatestCloudWatchLogsDeliveryTime`<br>
+    **説明**: CloudTrail が CloudWatch Logs にログを配信した直近の日時を表示します。<br>
+   - `latest_delivery_attempt_succeeded`<br>
+    **タイプ**: `STRING`<br>
+    **プロバイダー名**: `LatestDeliveryAttemptSucceeded`<br>
+    **説明**: このフィールドは使用されなくなりました。<br>
+   - `latest_delivery_attempt_time`<br>
+    **タイプ**: `STRING`<br>
+    **プロバイダー名**: `LatestDeliveryAttemptTime`<br>
+    **説明**: このフィールドは使用されなくなりました。<br>
+   - `latest_delivery_error`<br>
+    **タイプ**: `STRING`<br>
+    **プロバイダー名**: `LatestDeliveryError`<br>
+    **説明**: 指定したバケットにログファイルを配信しようとした際に、CloudTrail が遭遇した Amazon S3 エラーを表示します。詳細については、Amazon S3 API リファレンスの<a href="https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html">エラーレスポンス</a>を参照してください。  <note> このエラーは、宛先の S3 バケットに問題がある場合にのみ発生し、タイムアウトしたリクエストでは発生しません。問題を解決するには、新しいバケットを作成し、<code>UpdateTrail</code> を呼び出して新しいバケットを指定するか、CloudTrail が再びバケットに書き込めるように、既存のオブジェクトを修正します。 </note><br>
+   - `latest_delivery_time`<br>
+    **タイプ**: `TIMESTAMP`<br>
+    **プロバイダー名**: `LatestDeliveryTime`<br>
+    **説明**: CloudTrail が最後にアカウントの Amazon S3 バケットにログファイルを配信した日時を指定します。<br>
+   - `latest_digest_delivery_error`<br>
+    **タイプ**: `STRING`<br>
+    **プロバイダー名**: `LatestDigestDeliveryError`<br>
+    **説明**: 指定したバケットにダイジェストファイルを配信しようとした際に、CloudTrail が遭遇した Amazon S3 エラーを表示します。詳細については、Amazon S3 API リファレンスの<a href="https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html">エラーレスポンス</a>を参照してください。  <note> このエラーは、宛先の S3 バケットに問題がある場合にのみ発生し、タイムアウトしたリクエストでは発生しません。問題を解決するには、新しいバケットを作成し、<code>UpdateTrail</code> を呼び出して新しいバケットを指定するか、CloudTrail が再びバケットに書き込めるように、既存のオブジェクトを修正します。 </note><br>
+   - `latest_digest_delivery_time`<br>
+    **タイプ**: `TIMESTAMP`<br>
+    **プロバイダー名**: `LatestDigestDeliveryTime`<br>
+    **説明**: CloudTrail が最後にアカウントの Amazon S3 バケットにダイジェストファイルを配信した日時を指定します。<br>
+   - `latest_notification_attempt_succeeded`<br>
+    **タイプ**: `STRING`<br>
+    **プロバイダー名**: `LatestNotificationAttemptSucceeded`<br>
+    **説明**: このフィールドは使用されなくなりました。<br>
+   - `latest_notification_attempt_time`<br>
+    **タイプ**: `STRING`<br>
+    **プロバイダー名**: `LatestNotificationAttemptTime`<br>
+    **説明**: このフィールドは使用されなくなりました。<br>
+   - `latest_notification_error`<br>
+    **タイプ**: `STRING`<br>
+    **プロバイダー名**: `LatestNotificationError`<br>
+    **説明**: 通知を送信しようとしたときに CloudTrail が遭遇した Amazon SNS のエラーを表示します。Amazon SNS エラーの詳細については、<a href="https://docs.aws.amazon.com/sns/latest/dg/welcome.html">Amazon SNS デベロッパーガイド</a>を参照してください。<br>
+   - `latest_notification_time`<br>
+    **タイプ**: `TIMESTAMP`<br>
+    **プロバイダー名**: `LatestNotificationTime`<br>
+    **説明**: CloudTrail がアカウントの Amazon S3 バケットに新しいログファイルを書き込んだことを通知する最新の Amazon SNS の日時を指定します。<br>
+   - `start_logging_time`<br>
+    **タイプ**: `TIMESTAMP`<br>
+    **プロバイダー名**: `StartLoggingTime`<br>
+    **説明**: CloudTrail が Amazon Web Services アカウントの API コールの記録を開始した直近の日時を指定します。<br>
+   - `stop_logging_time`<br>
+    **タイプ**: `TIMESTAMP`<br>
+    **プロバイダー名**: `StopLoggingTime`<br>
+    **説明**: CloudTrail が Amazon Web Services アカウントの API コールの記録を停止した直近の日時を指定します。<br>
+   - `time_logging_started`<br>
+    **タイプ**: `STRING`<br>
+    **プロバイダー名**: `TimeLoggingStarted`<br>
+    **説明**: このフィールドは使用されなくなりました。<br>
+   - `time_logging_stopped`<br>
+    **タイプ**: `STRING`<br>
+    **プロバイダー名**: `TimeLoggingStopped`<br>
+    **説明**: このフィールドは使用されなくなりました。<br>

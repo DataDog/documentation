@@ -103,6 +103,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_2432046716",
+      "description": "Create a new dashboard with event_stream list_stream widget"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2634813877",
       "description": "Create a new dashboard with event_stream widget"
     },
@@ -230,6 +235,11 @@
       "group": "dashboards",
       "suffix": "_1423904722",
       "description": "Create a new dashboard with slo list widget"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_109450134",
+      "description": "Create a new dashboard with slo list widget with sort"
     },
     {
       "group": "dashboards",

@@ -28,7 +28,6 @@ categories:
 - モニタリング
 - web
 - cloud
-- autodiscovery
 - メトリクス
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/apache-apisix/README.md
@@ -58,7 +57,6 @@ tile:
   - Category::Monitoring
   - Category::Web
   - Category::Cloud
-  - Category::Autodiscovery
   - Category::Metrics
   configuration: README.md#Setup
   description: Datadog-APISIX インテグレーション
@@ -78,7 +76,7 @@ Apache APISIX は動的でリアルタイムな高性能 API ゲートウェイ�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 以下の構成方法に従ってください。
 

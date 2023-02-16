@@ -23,6 +23,7 @@ further_reading:
 - [Notebook](#notebook-events)
 - [OAuth](#oauth-events)
 - [Organization management](#organization-management-events)
+- [Security Notifications](#security-notification-events)
 
 #### Product-Specific Events
 - [Application Performance Monitoring (APM)](#apm-events)
@@ -184,6 +185,11 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [RUM application created][68] | A user created or deleted an application in RUM and the type of the application (Browser, Flutter, IOS, React Native, Android). | `@evt.name:"Real User Monitoring" @asset.type:real_user_monitoring_application @action:(created OR deleted)` |
 | [RUM application modified][69] | A user modified an application in RUM, the new value of the application, and the type of the application (Browser, Flutter, IOS, React Native, Android). | `@evt.name:"Real User Monitoring" @asset.type:real_user_monitoring_application @action:modified` |
 
+### Security Notification events
+| Name                 | Description of audit event                                                       | Query in audit explorer                                           |
+| -------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------|
+| [Token leaked][80] | Datadog has detected leaked Datadog API or Application Key that should be revoked.| `@evt.name:"Security Notification" @asset.type:(api_key OR application_key) @action:notification` |
+
 ### Sensitive Data Scanner events
 | Name | Description of audit event                                          | Query in audit explorer                           |
 | ---- | ------------------------------------------------------------------- | --------------------------------------------------|
@@ -296,3 +302,4 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 [77]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Synthetics%20Monitoring%22%20%40asset.type%3Asynthetics_variable
 [78]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Synthetics%20Monitoring%22%20%40asset.type%3Asynthetics_settings%20%40action%3Amodified
 [79]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Reference%20Tables%22%20%40asset.type%3Areference_table%20%40action%3A%28created%20OR%20deleted%20OR%20modified%29
+[80]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Security%20Notification%22%20%40asset.type%3A%28api_key%20OR%20application_key%29
