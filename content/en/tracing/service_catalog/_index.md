@@ -71,22 +71,6 @@ The **Reliability** tab contains information about the stability of your service
 
 Click the Settings icon on the right hand corner to hide columns from the service list.
 
-
-#### PagerDuty Integration
-You can add PagerDuty metadata to the Service Catalog to complete the Reliability view.
-
-- Set up the PagerDuty integration by following the instructions [on the PagerDuty integration page][3].
-- Get your [API acccess key from PagerDuty][4].
-- Link your PagerDuty service to Service Definition YAML.
-```yaml
-schema-version: v2
-dd-service: product-recommendation-lite
-team: Shopist
-integrations:
-  pagerduty: https://www.pagerduty.com/service-directory/shopping-cart
-tags: []
-```
-
 ### Performance view
 
 The **Performance** tab provides several ways to view how your services are performing and what needs the most attention. Sort the table by clicking columns to reveal services that:
@@ -108,7 +92,7 @@ The **Security tab** provides several ways to assess and improve the security po
 - Expose known security vulnerabilities, including the individual severities.
 - Are receiving the most attack attempts.
 - Are targeted by the most attackers.
-- Have the most severe threats, where the services are impacted by the attacks. 
+- Have the most severe threats, where the services are impacted by the attacks.
 - Are monitored and protected by [Application Security Management][11]
 
 To access additional details describing security vulnerabilities and signals, click on the service row to open a detailed side panel. Alternatively, click on the pop-over **View Service Details** button, which opens the service page, and in turn, its security tab.
@@ -132,11 +116,11 @@ Click **View Related** and select a page from the dropdown menu to navigate into
 
 ## Role based access and permissions
 
-For general information, see [Role Based Access Control][9] and [Role Permissions][10]. 
+For general information, see [Role Based Access Control][9] and [Role Permissions][10].
 ### Read permission
 
 The Service Catalog read permission allows a user to read service catalog data, which enables the following features:
-- Service Catalog list 
+- Service Catalog list
 - Discover UI
 - Service Definition endpoint: `/api/v2/services/definition/<service_name>`
 
@@ -144,7 +128,7 @@ The permission is enabled by default in the **Datadog Read Only Role** and **Dat
 
 ### Write permission
 
-The Service Catalog write permission allows a user to modify service catalog data. The write permission is required for the following features: 
+The Service Catalog write permission allows a user to modify service catalog data. The write permission is required for the following features:
 - Inserting or Updating a Service Definition with the `POST /api/v2/services/definitions` endpoint
 - Deleting a Service Definition with the `DELETE /api/v2/services/definition/<service_name>` endpoint
 - Completing the onboarding process in the Discover Services UI
@@ -157,8 +141,6 @@ The permission is enabled by default in the **Datadog Admin Role** and **Datadog
 
 [1]: https://app.datadoghq.com/services
 [2]: /integrations/github/
-[3]: https://docs.datadoghq.com/integrations/pagerduty/
-[4]: https://support.pagerduty.com/docs/api-access-keys
 [5]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
 [6]: https://www.datadoghq.com/blog/unified-service-tagging/
 [7]: /tracing/service_catalog/service_definition_api/
