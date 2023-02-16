@@ -22,6 +22,7 @@ further_reading:
 {{< nextlink href="/monitors/types/apm" >}}<strong>APM</strong>: Monitor APM metrics or trace queries.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/audit_trail" >}}<strong>Audit Trail</strong>: Alert when a specified type of audit log exceeds a user-defined threshold over a given period of time.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/ci" >}}<strong>CI</strong>: Monitor CI pipelines and tests data gathered by Datadog.{{< /nextlink >}}
+{{< nextlink href="/monitors/types/cloud_cost" >}}<strong>Cloud Cost</strong>: Alert on high cloud costs.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/composite" >}}<strong>Composite</strong>: Alert on an expression combining multiple monitors.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/error_tracking" >}}<strong>Error Tracking</strong>: Monitor issues in your applications gathered by Datadog.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/event" >}}<strong>Event</strong>: Monitor events gathered by Datadog.{{< /nextlink >}}

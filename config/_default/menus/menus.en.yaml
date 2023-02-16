@@ -1128,76 +1128,81 @@ main:
     parent: monitor_types
     identifier: monitor_types_ci
     weight: 206
+  - name: Cloud Cost
+    url: monitors/types/cloud_cost/
+    parent: monitor_types
+    identifier: monitor_types_cloud_cost
+    weight: 207
   - name: Composite
     url: monitors/types/composite/
     parent: monitor_types
     identifier: monitor_types_composite
-    weight: 207
+    weight: 208
   - name: Error Tracking
     url: monitors/types/error_tracking/
     parent: monitor_types
     identifier: monitor_types_error_tracking
-    weight: 208
+    weight: 209
   - name: Event
     url: monitors/types/event/
     parent: monitor_types
     identifier: monitor_types_event
-    weight: 209
+    weight: 210
   - name: Forecast
     url: monitors/types/forecasts/
     parent: monitor_types
     identifier: monitor_types_forecasts
-    weight: 210
+    weight: 211
   - name: Integration
     url: monitors/types/integration/
     parent: monitor_types
     identifier: monitor_types_integration
-    weight: 211
+    weight: 212
   - name: Live Process
     url: monitors/types/process/
     parent: monitor_types
     identifier: monitor_types_process
-    weight: 212
+    weight: 213
   - name: Logs
     url: monitors/types/log/
     parent: monitor_types
     identifier: monitor_types_log
-    weight: 213
+    weight: 214
   - name: Network
     url: monitors/types/network/
     parent: monitor_types
     identifier: monitor_types_network
-    weight: 214
+    weight: 215
   - name: Outlier
     url: monitors/types/outlier/
     parent: monitor_types
     identifier: monitor_types_outlier
-    weight: 215
+    weight: 216
   - name: Process Check
     url: monitors/types/process_check/
     parent: monitor_types
     identifier: monitor_types_process_check
-    weight: 216
+    weight: 217
   - name: Real User Monitoring
     url: monitors/types/real_user_monitoring/
     parent: monitor_types
     identifier: monitor_types_rum
-    weight: 217
+    weight: 218
   - name: Service Check
     url: monitors/types/service_check/
     parent: monitor_types
     identifier: monitor_types_service_check
-    weight: 218
+    weight: 219
   - name: SLO Alerts
     url: monitors/types/slo/
     parent: monitor_types
     identifier: monitor_types_slo
-    weight: 219
+    weight: 220
   - name: Watchdog
     url: monitors/types/watchdog/
     parent: monitor_types
     identifier: monitor_types_watchdog
-    weight: 220
+    weight: 221
   - name: Notifications
     url: monitors/notify/
     parent: alerting
