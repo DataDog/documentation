@@ -23,7 +23,7 @@ Log Forwarding allows you to send logs from Datadog to custom destinations like 
 
 {{< img src="logs/log_configuration/forwarding/forwarding_page.png" alt="The Log Forwarding page, showing custom destinations highlighted. The list of destinations includes Splunk (filtered by service:logs-processing), HTTP Endpoint (filtered by source:okta OR source:paloalto), and Elasticsearch (filtered by team:acme env:prod)." >}}
 
-The following metrics report on logs that have been forwarded successfully, including logs that were dropped and then successfully re-sent. 
+The following metrics report on logs that have been forwarded successfully, including logs that were sent successfully after retries, as well as logs that were dropped.
 
 - datadog.forwarding.logs.bytes
 - datadog.forwarding.logs.count
