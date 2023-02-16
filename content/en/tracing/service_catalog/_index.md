@@ -71,22 +71,6 @@ The **Reliability** tab contains information about the stability of your service
 
 Click the Settings icon on the right hand corner to hide columns from the service list.
 
-
-#### PagerDuty Integration
-You can add PagerDuty metadata to the Service Catalog to complete the Reliability view.
-
-- Set up the PagerDuty integration by following the instructions [on the PagerDuty integration page][3].
-- Get your [API acccess key from PagerDuty][4].
-- Link your PagerDuty service to Service Definition YAML.
-```yaml
-schema-version: v2
-dd-service: product-recommendation-lite
-team: Shopist
-integrations:
-  pagerduty: https://www.pagerduty.com/service-directory/shopping-cart
-tags: []
-```
-
 ### Performance view
 
 The **Performance** tab provides several ways to view how your services are performing and what needs the most attention. Sort the table by clicking columns to reveal services that:
