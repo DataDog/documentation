@@ -92,7 +92,7 @@ The **Security tab** provides several ways to assess and improve the security po
 - Expose known security vulnerabilities, including the individual severities.
 - Are receiving the most attack attempts.
 - Are targeted by the most attackers.
-- Have the most severe threats, where the services are impacted by the attacks. 
+- Have the most severe threats, where the services are impacted by the attacks.
 - Are monitored and protected by [Application Security Management][11]
 
 To access additional details describing security vulnerabilities and signals, click on the service row to open a detailed side panel. Alternatively, click on the pop-over **View Service Details** button, which opens the service page, and in turn, its security tab.
@@ -146,7 +146,7 @@ Integrations
 
 ## Enriching an existing service
 
-If you already use APM to trace your applications, or have RUM or USM enabled, you can directly add metadata about those services. 
+If you already use APM to trace your applications, or have RUM or USM enabled, you can directly add metadata about those services.
 
 Add service ownership information such as the team name, Slack channels, and source code repositories by pushing a YAML file with the POST endpoint to the [Service Definition API][7]. Read [Setting Up Service Catalog][8] for more information.
 
@@ -155,11 +155,11 @@ You can manage your service ownership information with the Service Catalog even 
 
 ## Role based access and permissions
 
-For general information, see [Role Based Access Control][9] and [Role Permissions][10]. 
+For general information, see [Role Based Access Control][9] and [Role Permissions][10].
 ### Read permission
 
 The Service Catalog read permission allows a user to read service catalog data, which enables the following features:
-- Service Catalog list 
+- Service Catalog list
 - Discover UI
 - Service Definition endpoint: `/api/v2/services/definition/<service_name>`
 
@@ -167,7 +167,7 @@ The permission is enabled by default in the **Datadog Read Only Role** and **Dat
 
 ### Write permission
 
-The Service Catalog write permission allows a user to modify service catalog data. The write permission is required for the following features: 
+The Service Catalog write permission allows a user to modify service catalog data. The write permission is required for the following features:
 - Inserting or Updating a Service Definition with the `POST /api/v2/services/definitions` endpoint
 - Deleting a Service Definition with the `DELETE /api/v2/services/definition/<service_name>` endpoint
 - Completing the onboarding process in the Discover Services UI
@@ -180,8 +180,6 @@ The permission is enabled by default in the **Datadog Admin Role** and **Datadog
 
 [1]: https://app.datadoghq.com/services
 [2]: /integrations/github/
-[3]: https://docs.datadoghq.com/integrations/pagerduty/
-[4]: https://support.pagerduty.com/docs/api-access-keys
 [5]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
 [6]: https://www.datadoghq.com/blog/unified-service-tagging/
 [7]: /tracing/service_catalog/service_definition_api/
