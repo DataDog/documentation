@@ -13,9 +13,7 @@ further_reading:
 
 ## Overview
 
-When aggregating indexed logs by **Transactions**, all logs matching your query filter are aggregated into groups according to instances of a **sequence of events**—such as a user session or a request processed across multiple microservices.
-
-{{< img src="logs/explorer/aggregations.jpg" alt="A bar graph displaying logs and the option to group into fields, patterns, and transactions" style="width:100%;" >}}
+Transactions aggregate indexed logs according to instances of a sequence of events, such as a user session or a request processed across multiple microservices.
 
 The transaction aggregation differs from the natural group aggregation, in the sense that resulting aggregates not only include logs matching the query, but also all logs belonging to the related transactions.
 
@@ -27,15 +25,18 @@ Duration
 Maximum Severity
 : Found in logs in the transaction. _This measure is automatically added_.
 
-- Find key items: For any `facet` with string values, calculate specific log information using the `count unique`, `latest`, `earliest`, and `most frequent` operations.
-- Get statistics: For any `measure`, calculate statistical information using the `min`, `max`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, and `pc99` operations.
-- Set start and end conditions: Customize transaction boundaries by specifying the start and end of the transaction using distinct queries.
+Find Key Items
+: For any `facet` with string values, calculate specific log information using the `count unique`, `latest`, `earliest`, and `most frequent` operations.
+
+Get Statistics
+: For any `measure`, calculate statistical information using the `min`, `max`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, and `pc99` operations.
+
+Set Start And End Conditions
+: Customize transaction boundaries by specifying the start and end of the transaction using distinct queries.
 
 For example, an e-commerce website groups logs across various user actions, such as catalog search, add to cart, and checkout, to build a **Transactions** view using a common attribute such as `requestId` or `orderId`.
 
 {{< img src="logs/explorer/aggregations_transactions.jpg" alt="The logs explorer showing logs grouped by transactions" style="width:100%;" >}}
-
-## Visualize logs as transactions
 
 Transactions support the [List Aggregates][1] visualization. Clicking a transaction in the list opens the transaction side panel from which you can:
 

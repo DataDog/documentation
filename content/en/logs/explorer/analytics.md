@@ -27,13 +27,17 @@ Logs can be valuable as individual events, but sometimes valuable information li
     {{< nextlink href="logs/explorer/analytics/transactions" >}}Transactions{{< /nextlink >}}
 {{< /whatsnext >}}
 
+Switch between different aggregations of your queried logs with the logs query editor. The fields you select to group, aggregate, and measure your logs are saved as you switch between different visualizations and aggregation types.
+
+{{< img src="logs/explorer/aggregations.jpg" alt="A bar graph displaying logs and the option to group into fields, patterns, and transactions" style="width:100%;" >}}
+
+You can add [multiple queries](#multiple-queries) to simultaneously analyze different sets of logs, and apply [formulas](#formulas) and [functions](#functions) to your queries for in-depth analysis.
+
 Aggregations are supported for **indexed logs only**. If you need to perform aggregation on non-indexed logs, consider [temporarily disabling exclusion filters][1], generating [log-based metrics][2], and/or running a [rehydration][3] on your archives.
 
 ## Fields
 
 When aggregating indexed logs by **Fields**, all logs matching your query filter are aggregated into groups based on the value of one or multiple log facets. 
-
-{{< img src="logs/explorer/aggregations.jpg" alt="A bar graph displaying logs and the option to group into fields, patterns, and transactions" style="width:100%;" >}}
 
 On top of these aggregates, you can extract the following measures:
 
@@ -43,15 +47,13 @@ On top of these aggregates, you can extract the following measures:
 
 Individual logs with multiple values for a single facet belong to that many aggregates. For instance, a log with the `team:sre` and the `team:marketplace` tags are counted once in the `team:sre` aggregate and once in the `team:marketplace` aggregate.
 
-You can add [multiple queries](#multiple-queries) to simultaneously analyze different sets of logs, and apply [formulas](#formulas) and [functions](#functions) to your queries for in-depth analysis.
-
-## Visualize logs as fields
+## Visualize log groups
 
 The **Fields** aggregation supports one dimension for the [Top List][4] visualization, and up to four dimensions for the [Timeseries][5] and [Table][6] visualizations. 
 
 When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, then according to the third dimension within the top values of the second dimension.
 
-### Multiple queries
+## Multiple queries
 
 Multiple queries are supported in [Timeseries][5] and [Top List][4] visualizations. Add multiple queries by clicking on the `+ Add` button next to the query editor. When you add a new query, it is a copy of the last query and its grouping options:
 
@@ -67,7 +69,7 @@ Display the timeline for one of your queries by selecting that query in the `Tim
 
 {{< img src="logs/explorer/group/query_selector.jpg" alt="The query editor showing the timeline for selector with dropdown options for query A and query B" style="width:100%;" >}}
 
-### Functions
+## Functions
 
 **Note**: Functions are only supported in [Timeseries][5] and [Top List][4] visualizations.
 
@@ -89,7 +91,7 @@ Here is an example of how to apply an [Exclusion function][14] to exclude certai
 
 {{< img src="logs/explorer/group/exclusion_function_logs.jpg" alt="A query with the cutoff min exclusion filter set to 100" style="width:100%;" >}}
 
-### Formulas
+## Formulas
 
 Apply a formula on one or multiple queries by clicking on the `+ Add` button next to the query editor. In the following example, the formula is used to calculate the ratio of the unique number of `Cart Id` in logs for `Merchant Tier: Enterprise` / `Merchant Tier: Premium` customers:
 
