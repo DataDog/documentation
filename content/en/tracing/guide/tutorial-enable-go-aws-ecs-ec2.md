@@ -1,5 +1,5 @@
 ---
-title: Tutorial - Enabling Tracing for a Go Application on AWS ECS with Fargate
+title: Tutorial - Enabling Tracing for a Go Application on AWS ECS with EC2
 kind: guide
 further_reading:
 - link: /tracing/trace_collection/library_config/go/
@@ -24,7 +24,7 @@ further_reading:
 
 ## Overview
 
-This tutorial walks you through the steps for enabling tracing on a sample Go application installed in a cluster on AWS Elastic Container Service (ECS) with Fargate. In this scenario, the Datadog Agent is also installed in the cluster.
+This tutorial walks you through the steps for enabling tracing on a sample Go application installed in a cluster on AWS Elastic Container Service (ECS). In this scenario, the Datadog Agent is also installed in the cluster.
 
 For other scenarios, including on a host, in a container, on other cloud infrastructure, and on applications written in other languages, see the other [Enabling Tracing tutorials][1]. Some of those other tutorials, for example, the ones using containers or EKS, step through the differences seen in Datadog between automatic and custom instrumentation. This tutorial skips right to a fully custom instrumented example.
 
@@ -52,13 +52,11 @@ git clone https://github.com/DataDog/apm-tutorial-golang.git
 
 The repository contains a multi-service Go application pre-configured to run inside Docker containers. The `docker-compose` YAML files to make the containers are located in the `docker` directory. This tutorial uses the `service-docker-compose-ECS.yaml` file, which builds containers for the `notes` and `calendar` service that make up the sample application.
 
-In addition, this tutorial uses several configuration files in the `terraform/Fargate` directory to create the environment to deploy the sample application to ECS with Fargate.
-
 ### Initial ECS setup
 
 The application requires some initial configuration, including adding your AWS profile (already configured with the correct permissions to create an ECS cluster and read from ECR), AWS region, and AWS ECR repository.
 
-Open `terraform/Fargate/global_constants/variables.tf`. Replace the variable values below with your correct AWS account information:
+Open `terraform/EC2/global_constants/variables.tf`. Replace the variable values below with your correct AWS account information:
 
 ```tf
 output "aws_profile" {
@@ -111,7 +109,7 @@ Start the application and send some requests without tracing. After you've seen 
 
 To start, use a Terraform script to deploy to AWS ECS:
 
-1. From the `terraform/Fargate/deployment` directory, run the following commands:
+1. From the `terraform/EC2/deployment` directory, run the following commands:
 
    ```sh
    terraform init
@@ -119,7 +117,7 @@ To start, use a Terraform script to deploy to AWS ECS:
    terraform state show 'aws_alb.application_load_balancer'
    ```
 
-   **Note**: If the `terraform apply` command returns a CIDR block message, the script to obtain your IP address did not work on your local machine. To fix this, set the value manually in the `terraform/Fargate/deployment/security.tf` file. Inside the `ingress` block of the `load_balancer_security_group`, switch which `cidr_blocks` line is commented out and update the now-uncommented example line with your machine's IP4 address.
+   **Note**: If the `terraform apply` command returns a CIDR block message, the script to obtain your IP address did not work on your local machine. To fix this, set the value manually in the `terraform/EC2/deployment/security.tf` file. Inside the `ingress` block of the `load_balancer_security_group`, switch which `cidr_blocks` line is commented out and update the now-uncommented example line with your machine's IP4 address.
 
 2. Make note of the DNS name of the load balancer. You'll use that base domain in API calls to the sample app. Wait a few minutes for the instances to start up.
 
@@ -159,7 +157,7 @@ Next, configure the Go application to enable tracing.
 
 To enable tracing support:
 
-1. Uncomment the following imports in `apm-tutorial-golang/cmd/calendar/main.go`:
+1. Tp enable automatic tracing, uncomment the following imports in `apm-tutorial-golang/cmd/calendar/main.go`:
 
    {{< code-block lang="go" >}}
      sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
@@ -244,13 +242,9 @@ To enable tracing support:
 
    For more information on custom tracing, see [Go Custom Instrumentation][7].
 
-1. Open `terraform/Fargate/deployment/main.tf`. The sample app already has the base configurations necessary to run the Datadog Agent on ECS Fargate and collect traces: the API key (which you configure in the next step), enabling ECS Fargate, and enabling APM. The definition is provided in both the `notes` task and the `calendar` task.
-
-1. Provide the API key variable with a value. Open `terraform/Fargate/global_constants/variables.tf`, uncomment the `output "datadog_api_key"` section, and provide your organization's Datadog API key.
-
 1. [Universal Service Tags][8] identify traced services across different versions and deployment environments so that they can be correlated within Datadog, and so you can use them to search and filter. The three environment variables used for Unified Service Tagging are `DD_SERVICE`, `DD_ENV`, and `DD_VERSION`. For applications deployed on ECS, these environment variables are set within the task definition for the containers.
 
-   For this tutorial, the `/terraform/Fargate/deployment/main.tf` file already has these environment variables defined for the notes and calendar applications. For example, for `notes`:
+   For this tutorial, the `/terraform/EC2/deployment/main.tf` file already has these environment variables defined for the notes and calendar applications. For example, for `notes`:
 
    ```yaml
    {
@@ -340,11 +334,43 @@ docker push <ECR_REGISTRY_URL>:calendar{{< /code-block >}}
 
 Your multi-service application with tracing enabled is containerized and available for ECS to pull.
 
+## Deploy the Agent on ECS
+
+Next, deploy the Datadog Agent to collect the trace data from your instrumented application. For an ECS environment, there is no need to download anything to run the Agent. Instead, follow these steps to create a Datadog Agent task definition, upload the task definition to AWS, and create an Agent service on your cluster using that task definition.
+
+1. Open `terraform/EC2/dd_agent_task_definition.json`, which provides a basic configuration for running the Agent with APM tracing enabled. Provide your Datadog organization API key and Datadog site as appropriate:
+
+   ```yaml
+   ...
+   "environment": [
+     {
+       "name": "DD_API_KEY",
+       "value": "<API_KEY_HERE>"
+     },
+     {
+       "name": "DD_SITE",
+       "value": "datadoghq.com"
+     },
+     ...
+   ```
+
+2. Register the Agent task definition, replacing the profile and region with your information. From the `terraform/EC2` folder, run:
+
+   {{< code-block lang="sh" >}}
+   aws ecs register-task-definition --cli-input-json file://dd_agent_task_definition.json --profile <AWS_PROFILE> --region <AWS_REGION>{{< /code-block >}}
+
+   From the output, take note of the `taskDefinitionArn` value, which is used in the next step.
+
+3. Create the Agent service on the cluster by running this command, supplying the task definition ARN from the previous step, your AWS profile, and AWS region:
+
+   {{< code-block lang="sh" >}}
+   aws ecs create-service --cluster apm-tutorial-ec2-go --task-definition <TASK_DEFINITION_ARN> --launch-type EC2 --scheduling-strategy DAEMON --service-name datadog-agent --profile <PROFILE> --region <AWS_REGION>{{< /code-block >}}
+
 ## Launch the app to see traces
 
 Redeploy the application and exercise the API:
 
-1. Redeploy the application to AWS ECS using the [same terraform commands as before](#deploy-the-application), but with the instrumented version of the configuration files. From the `terraform/Fargate/deployment` directory, run the following commands:
+1. Redeploy the application to AWS ECS using the [same terraform commands as before](#deploy-the-application), but with the instrumented version of the configuration files. From the `terraform/EC2/deployment` directory, run the following commands:
 
    ```sh
    terraform init
