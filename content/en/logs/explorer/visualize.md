@@ -51,7 +51,7 @@ The default **sort** for logs in the list visualization is by timestamp, with th
 
 **Note**: Although any attributes or tags can be added as a column, sorting your table is most reliable if you [declare a facet][1] beforehand. Non-faceted attributes can be added as columns, but it does not produce reliable sorting.
 
-
+[1]: /logs/explorer/facets/
 {{< /site-region >}}
 
 The configuration of the log table is stored alongside other elements of your troubleshooting context in [Saved Views][1].
