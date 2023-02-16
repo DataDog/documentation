@@ -164,6 +164,12 @@ main:
     url: getting_started/learning_center/
     parent: getting_started
     weight: 18
+  - name: Glossary
+    url: glossary/
+    pre: features
+    identifier: glossary
+    parent: essentials_heading
+    weight: 15000
   - name: Agent
     url: agent/
     pre: agent-fill
@@ -347,6 +353,10 @@ main:
   - name: Agent Runtime Configuration
     url: agent/troubleshooting/config
     weight: 1111
+    parent: agent_troubleshooting
+  - name: High CPU or Memory Consumption
+    url: agent/troubleshooting/high_memory_usage/
+    weight: 1112
     parent: agent_troubleshooting
   - name: Guides
     url: agent/guide/
@@ -1287,9 +1297,9 @@ main:
     identifier: workflows_build
     weight: 1
   - name: Authentication
-    url: workflows/setup/
+    url: workflows/access/
     parent: workflows
-    identifier: workflows_setup
+    identifier: workflows_access
     weight: 2
   - name: Trigger Workflows
     url: workflows/trigger/
@@ -1306,10 +1316,10 @@ main:
     parent: workflows_actions_catalog
     identifier: workflows_generic_actions
     weight: 101
-  - name: Service Accounts
-    url: workflows/service_accounts/
+  - name: Connections
+    url: workflows/connections/
     parent: workflows
-    identifier: workflows_service_accounts
+    identifier: workflows_connections
     weight: 5
   - name: APM
     url: tracing/
@@ -1377,11 +1387,16 @@ main:
     parent: tracing_dd_libraries
     identifier: tracing_ddlib_dotnet_framework
     weight: 109
+  - name: Injecting Libraries
+    url: tracing/trace_collection/library_injection/
+    parent: tracing_trace_collection
+    identifier: tracing_library_injection
+    weight: 102
   - name: Library Compatibility
     url: tracing/trace_collection/compatibility/
     parent: tracing_trace_collection
     identifier: tracing_compatibility
-    weight: 102
+    weight: 103
   - name: Java
     url: tracing/trace_collection/compatibility/java/
     parent: tracing_compatibility
@@ -1431,7 +1446,7 @@ main:
     url: tracing/trace_collection/library_config/
     parent: tracing_trace_collection
     identifier: tracing_library_config
-    weight: 103
+    weight: 104
   - name: Java
     url: tracing/trace_collection/library_config/java/
     parent: tracing_library_config
@@ -1481,7 +1496,7 @@ main:
     url: tracing/trace_collection/custom_instrumentation/
     parent: tracing_trace_collection
     identifier: tracing_custom_inst
-    weight: 104
+    weight: 105
   - name: Java
     url: tracing/trace_collection/custom_instrumentation/java/
     parent: tracing_custom_inst
@@ -1526,7 +1541,7 @@ main:
     url: opentelemetry/otel_tracing/
     parent: tracing_trace_collection
     identifier: tracing_open_standards
-    weight: 105
+    weight: 106
   - name: Java
     url: tracing/trace_collection/open_standards/java/
     parent: tracing_open_standards
@@ -1566,11 +1581,6 @@ main:
     url: serverless/distributed_tracing/
     parent: tracing_trace_collection
     identifier: tracing_serverless
-    weight: 106
-  - name: Admission Controller Injection
-    url: tracing/trace_collection/admission_controller/
-    parent: tracing_trace_collection
-    identifier: tracing_admission_controller
     weight: 107
   - name: Tracing Proxies
     url: tracing/trace_collection/proxy_setup/
@@ -2358,6 +2368,10 @@ main:
     url: logs/log_configuration/rehydrating
     parent: log_configuration
     weight: 209
+  - name: Forwarding
+    url: logs/log_configuration/forwarding_custom_destinations/
+    parent: log_configuration
+    weight: 210
   - name: Connect Logs and Traces
     url: tracing/other_telemetry/connect_logs_and_traces/
     parent: log_management
@@ -2384,8 +2398,8 @@ main:
     url: logs/explorer/facets/
     parent: log_explorer
     weight: 504
-  - name: Group
-    url: logs/explorer/group/
+  - name: Analytics
+    url: logs/explorer/analytics/
     parent: log_explorer
     weight: 505
   - name: Visualize
@@ -2685,81 +2699,96 @@ main:
     pre: app-sec
     identifier: application_security
     weight: 184000
+  - name: Terms and Concepts
+    url: security/application_security/terms/
+    parent: application_security
+    identifier: appsec_terms
+    weight: 1
   - name: Getting Started
     url: security/application_security/getting_started/
     parent: application_security
     identifier: appsec_getting_started
-    weight: 1
+    weight: 2
   - name: Java
     url: security/application_security/getting_started/java/
     parent: appsec_getting_started
     identifier: appsec_java
-    weight: 101
+    weight: 201
   - name: .NET
     url: security/application_security/getting_started/dotnet/
     parent: appsec_getting_started
     identifier: appsec_dotnet
-    weight: 102
+    weight: 202
   - name: Go
     url: security/application_security/getting_started/go/
     parent: appsec_getting_started
     identifier: appsec_go
-    weight: 103
+    weight: 203
   - name: Ruby
     url: security/application_security/getting_started/ruby/
     parent: appsec_getting_started
     identifier: appsec_ruby
-    weight: 104
+    weight: 204
   - name: PHP
     url: security/application_security/getting_started/php/
     parent: appsec_getting_started
     identifier: appsec_php
-    weight: 105
+    weight: 205
   - name: NodeJS
     url: security/application_security/getting_started/nodejs/
     parent: appsec_getting_started
     identifier: appsec_nodejs
-    weight: 106
+    weight: 206
   - name: Python
     url: security/application_security/getting_started/python/
     parent: appsec_getting_started
     identifier: appsec_python
-    weight: 107
+    weight: 207
   - name: How It Works
     url: security/application_security/how-appsec-works/
     parent: application_security
     identifier: appsec_howitworks
-    weight: 2
+    weight: 3
+  - name: Risk Management
+    url: security/application_security/risk_management/
+    parent: application_security
+    identifier: application_risk_management
+    weight: 4
+  - name: Threat Monitoring and Protection
+    url: security/application_security/threats/
+    parent: application_security
+    identifier: appsec_threats
+    weight: 5
+  - name: Setup and Configure
+    url: security/application_security/threats/setup_and_configure/
+    parent: appsec_threats
+    identifier: threats_configuration
+    weight: 501
   - name: OOTB Rules
     url: security/default_rules/#cat-application-security
-    parent: application_security
+    parent: appsec_threats
     identifier: appsec_default_rules
-    weight: 3
+    weight: 502
   - name: Tracking User Activity
-    url: security/application_security/add-user-info/
-    parent: application_security
-    identifier: appsec_user_info
-    weight: 4
-  - name: Setup and Configure
-    url: security/application_security/setup_and_configure/
-    parent: application_security
-    identifier: appsec_configuration
-    weight: 5
+    url: security/application_security/threats/add-user-info/
+    parent: appsec_threats
+    identifier: threats_user_info
+    weight: 503
   - name: Custom Detection Rules
-    url: security/application_security/custom_rules/
-    parent: application_security
-    identifier: appsec_custom_rules
-    weight: 6
+    url: security/application_security/threats/custom_rules/
+    parent: appsec_threats
+    identifier: threats_custom_rules
+    weight: 504
   - name: Event Rules
-    url: security/application_security/event_rules/
-    parent: application_security
-    identifier: appsec_event_rules
-    weight: 7
+    url: security/application_security/threats/event_rules/
+    parent: appsec_threats
+    identifier: threats_event_rules
+    weight: 505
   - name: Troubleshooting
-    url: security/application_security/troubleshooting
+    url: security/application_security/troubleshooting/
     parent: application_security
     identifier: appsec_troubleshooting
-    weight: 8
+    weight: 6
   - name: Synthetic Monitoring
     url: synthetics/
     pre: synthetics
@@ -2817,7 +2846,7 @@ main:
     url: synthetics/browser_tests/actions
     parent: synthetics_browser_tests
     weight: 301
-  - name: Test Results and Performance
+  - name: Test Results
     url: synthetics/browser_tests/test_results
     parent: synthetics_browser_tests
     weight: 302
@@ -2855,58 +2884,78 @@ main:
     parent: synthetics_search
     identifier: synthetics_search_saved_views
     weight: 501
+  - name: Explorer
+    url: continuous_testing/explorer/
+    parent: synthetics
+    identifier: synthetics_explorer
+    weight: 6
+  - name: Search Test Batches
+    url: continuous_testing/explorer/search/
+    parent: synthetics_explorer
+    identifier: continuous_testing_explorer_search
+    weight: 601
+  - name: Search Test Runs
+    url: continuous_testing/explorer/search_runs/
+    parent: synthetics_explorer
+    identifier: continuous_testing_explorer_search_runs
+    weight: 602
+  - name: Search Syntax
+    url: continuous_testing/explorer/search_syntax/
+    parent: synthetics_explorer
+    identifier: continuous_testing_explorer_search_syntax
+    weight: 603
   - name: Test Coverage
     url: synthetics/test_coverage
     parent: synthetics
     identifier: synthetics_test_coverage
-    weight: 6
+    weight: 7
   - name: Dashboards
     url: synthetics/dashboards
     parent: synthetics
     identifier: synthetics_dashboards
-    weight: 7
+    weight: 8
   - name: API Test
     url: synthetics/dashboards/api_test
     parent: synthetics_dashboards
     identifier: synthetics_dashboards_api_test
-    weight: 701
+    weight: 801
   - name: Browser Test
     url: synthetics/dashboards/browser_test
     parent: synthetics_dashboards
     identifier: synthetics_dashboards_browser_test
-    weight: 702
+    weight: 802
   - name: Test Summary
     url: synthetics/dashboards/test_summary
     parent: synthetics_dashboards
     identifier: synthetics_dashboards_test_summary
-    weight: 703
+    weight: 803
   - name: APM Integration
     url: synthetics/apm/
     parent: synthetics
     identifier: synthetics_apm
-    weight: 8
+    weight: 9
   - name: Settings
     url: synthetics/settings/
     parent: synthetics
-    weight: 9
+    weight: 10
   - name: Metrics
     url: synthetics/metrics/
     parent: synthetics
-    weight: 10
+    weight: 11
   - name: Data Security
     url: data_security/synthetics/
     parent: synthetics
-    weight: 11
+    weight: 12
   - name: Guides
     url: synthetics/guide/
     parent: synthetics
     identifier: synthetics_guides
-    weight: 12
+    weight: 13
   - name: Troubleshooting
     url: synthetics/troubleshooting/
     parent: synthetics
     identifier: synthetics_troubleshooting
-    weight: 13
+    weight: 14
   - name: Continuous Testing
     url: continuous_testing/
     pre: continuous-testing
@@ -2963,16 +3012,6 @@ main:
     parent: continuous_testing
     identifier: continuous_testing_explorer
     weight: 4
-  - name: Search Test Batches
-    url: continuous_testing/explorer/search/
-    parent: continuous_testing_explorer
-    identifier: continuous_testing_explorer_search
-    weight: 401
-  - name: Search Syntax
-    url: continuous_testing/explorer/search_syntax/
-    parent: continuous_testing_explorer
-    identifier: continuous_testing_explorer_search_syntax
-    weight: 402
   - name: Troubleshooting
     url: continuous_testing/troubleshooting/
     parent: continuous_testing
@@ -3144,11 +3183,16 @@ main:
     parent: rum_flutter
     identifier: rum_flutter_mobile_vitals
     weight: 504
+  - name: OpenTelemetry Support
+    url: real_user_monitoring/flutter/otel_support/
+    parent: rum_flutter
+    identifier: rum_flutter_otel_support
+    weight: 505
   - name: Troubleshooting
     url: real_user_monitoring/flutter/troubleshooting/
     parent: rum_flutter
     identifier: rum_flutter_troubleshooting
-    weight: 505
+    weight: 506
   - name: Session Replay
     url: real_user_monitoring/session_replay/
     parent: rum
@@ -3324,6 +3368,10 @@ main:
     parent: rum
     identifier: rum_guides
     weight: 14
+  - name: Data Security
+    url: data_security/real_user_monitoring/
+    parent: rum
+    weight: 15
   - name: Network Monitoring
     url: network_monitoring/
     pre: network
@@ -3484,7 +3532,7 @@ main:
     url: developers/integrations/oauth_for_integrations
     parent: dev_tools_integrations
     weight: 405
-  - name: Python
+  - name: Install Agent Integration Developer Tool
     url: developers/integrations/python/
     parent: dev_tools_integrations
     weight: 406
@@ -3712,10 +3760,14 @@ main:
     url: data_security/synthetics/
     parent: data_security
     weight: 4
+  - name: Real User Monitoring
+    url: data_security/real_user_monitoring/
+    parent: data_security
+    weight: 5
   - name: Guides
     url: data_security/guide/
     parent: data_security
-    weight: 5
+    weight: 6
   - name: Help
     url: help/
     pre: info-fill
@@ -5052,9 +5104,9 @@ api:
     url: /api/latest/metrics/
     identifier: metrics
     generated: true
-  - name: Timeseries cross product query
-    url: '#timeseries-cross-product-query'
-    identifier: metrics-timeseries-cross-product-query
+  - name: Query timeseries data across multiple products
+    url: '#query-timeseries-data-across-multiple-products'
+    identifier: metrics-query-timeseries-data-across-multiple-products
     parent: metrics
     generated: true
     params:
@@ -5065,9 +5117,9 @@ api:
       unstable:
         - v2
       order: 1
-  - name: Scalar cross product query
-    url: '#scalar-cross-product-query'
-    identifier: metrics-scalar-cross-product-query
+  - name: Query scalar data across multiple products
+    url: '#query-scalar-data-across-multiple-products'
+    identifier: metrics-query-scalar-data-across-multiple-products
     parent: metrics
     generated: true
     params:
@@ -5288,6 +5340,66 @@ api:
     url: /api/latest/monitors/
     identifier: monitors
     generated: true
+  - name: Edit a monitor configuration policy
+    url: '#edit-a-monitor-configuration-policy'
+    identifier: monitors-edit-a-monitor-configuration-policy
+    parent: monitors
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateMonitorConfigPolicy
+      unstable: []
+      order: 12
+  - name: Get a monitor configuration policy
+    url: '#get-a-monitor-configuration-policy'
+    identifier: monitors-get-a-monitor-configuration-policy
+    parent: monitors
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetMonitorConfigPolicy
+      unstable: []
+      order: 9
+  - name: Delete a monitor configuration policy
+    url: '#delete-a-monitor-configuration-policy'
+    identifier: monitors-delete-a-monitor-configuration-policy
+    parent: monitors
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteMonitorConfigPolicy
+      unstable: []
+      order: 13
+  - name: Create a monitor configuration policy
+    url: '#create-a-monitor-configuration-policy'
+    identifier: monitors-create-a-monitor-configuration-policy
+    parent: monitors
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateMonitorConfigPolicy
+      unstable: []
+      order: 11
+  - name: Get all monitor configuration policies
+    url: '#get-all-monitor-configuration-policies'
+    identifier: monitors-get-all-monitor-configuration-policies
+    parent: monitors
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListMonitorConfigPolicies
+      unstable: []
+      order: 10
   - name: Unmute all monitors
     url: '#unmute-all-monitors'
     identifier: monitors-unmute-all-monitors
@@ -6048,8 +6160,7 @@ api:
         - v1
       operationids:
         - SearchSLO
-      unstable:
-        - v1
+      unstable: []
       order: 1
   - name: Check if SLOs can be safely deleted
     url: '#check-if-slos-can-be-safely-deleted'
@@ -7243,18 +7354,6 @@ api:
         - SendInvitations
       unstable: []
       order: 8
-  - name: Create a service account
-    url: '#create-a-service-account'
-    identifier: users-create-a-service-account
-    parent: users
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - CreateServiceAccount
-      unstable: []
-      order: 1
   - name: Update a user
     url: '#update-a-user'
     identifier: users-update-a-user
@@ -9064,6 +9163,18 @@ api:
         - ListServiceAccountApplicationKeys
       unstable: []
       order: 6
+  - name: Create a service account
+    url: '#create-a-service-account'
+    identifier: service-accounts-create-a-service-account
+    parent: service-accounts
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateServiceAccount
+      unstable: []
+      order: 1
   - name: Service Definition
     url: /api/latest/service-definition/
     identifier: service-definition

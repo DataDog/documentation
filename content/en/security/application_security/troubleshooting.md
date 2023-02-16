@@ -150,7 +150,7 @@ done
 
 A few minutes after you enable your application and exercise it, and if it's successful, threat information appears in the [Trace and Signals Explorer][2].
 
-{{< img src="/security_platform/application_security/application-security-signal.png" alt="Security Signal details page showing tags, metrics, suggested next steps, and attacker IP addresses associated with a threat." style="width:100%;" >}}
+{{< img src="/security/application_security/application-security-signal.png" alt="Security Signal details page showing tags, metrics, suggested next steps, and attacker IP addresses associated with a threat." style="width:100%;" >}}
 
 ### Check if required tracer integrations are deactivated
 
@@ -540,6 +540,33 @@ Wait a minute for the agent to forward the traces, then check that the traces sh
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
+
+## No vulnerabilities detected by Risk Management
+
+There are a series of steps that must run successfully for vulnerability information to appear either in the Service Catalog Security View or in the Risk Management Vulnerability Explorer. It is important to check each step when investigating this issue. 
+
+### Confirm ASM is enabled
+
+You can use the metric `datadog.apm.appsec_host` to check if ASM is running.
+
+1. Go to **Metrics > Summary** in Datadog.
+2. Search for the metric `datadog.apm.appsec_host`. If the metric doesn’t exist, then there are no services running ASM. If the metric exists, the services are reported with the metric tags `host` and `service`.
+3. Select the metric, and in the **Tags** section, search for `service` to see which services are running ASM.
+
+If you are not seeing `datadog.apm.appsec_host`, check the [in-app instructions][3] to confirm that all steps for the initial setup are complete.
+
+ASM data is sent with APM traces. See [APM troubleshooting][4] to [confirm APM setup][5] and check for [connection errors][6].
+
+### Confirm tracer versions are updated
+
+See the Application Security [Getting Started][11] to validate you you are using the right version of the tracer. These minimum versions are required to start sending telemetry data that includes library information.
+
+### Ensure the communication of telemetry data
+
+Ensure the `DD_INSTRUMENTATION_TELEMETRY_ENABLED` environment variable (`DD_TRACE_TELEMETRY_ENABLED` for NodeJS) is set to `true`, or the corresponding system property for your language is enabled. For example in Java: `-Ddd.instrumentation.telemetry.enabled=true`
+
+## Need more help?
+
 If you continue to have issues with ASM, contact [Datadog support][1] with the following information:
 
 - Confirmation that the [test attack](#send-a-test-attack-to-your-application) was successfully sent
@@ -559,3 +586,4 @@ If you continue to have issues with ASM, contact [Datadog support][1] with the f
 [8]: /tracing/troubleshooting/tracer_startup_logs/
 [9]: /tracing/glossary/#spans
 [10]: /tracing/troubleshooting/#tracer-debug-logs
+[11]: /security/application_security/getting_started/

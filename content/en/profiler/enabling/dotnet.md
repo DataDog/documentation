@@ -21,7 +21,7 @@ aliases:
   - /tracing/profiler/enabling/dotnet/
 ---
 
-The profiler is shipped within Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to enabling the profiler.
+The profiler is shipped within Datadog tracing libraries. If you are already using [APM to collect traces][5] for your application, you can skip installing the library and go directly to enabling the profiler.
 
 ## Requirements
 
@@ -43,35 +43,33 @@ Supported .NET runtimes (64-bit applications)
 .NET 5<br/>
 .NET 6<br/>
 .NET 7
-<div class="alert alert-warning">
-  <strong>Note:</strong><br />Lock Contention profiling beta is only available for .NET 5+. <br />Allocations profiling beta is only for .NET 6+.<br />Live Heap profiling beta is only for .NET 7+.
-</div>
 
 Supported languages
 : Any language that targets the .NET runtime, such as C#, F#, and Visual Basic.
 
 The following profiling features are available in the following minimum versions of the `dd-trace-dotnet` library:
 
-|      Feature         | Required `dd-trace-dotnet` version          |
-|----------------------|-----------------------------------------|
-| Wall time profiling        |                        |
-| CPU profiling        | 2.15.0+                       |
-| Exceptions profiling        | beta, 2.10.0+                       |
-| Allocations profiling        | beta, 2.18.0+                       |
-| Lock Contention profiling        | beta, 2.18.0+                       |
-| Live heap profiling        | beta, 2.22.0+                       |
-| [Code Hotspots][12]        | 2.7.0+                       |
-| [Endpoint Profiling][13]            | 2.15.0+                       |
+|      Feature         | Required `dd-trace-dotnet` version      | Required .NET Runtime versions        |
+|----------------------|-----------------------------------------|---------------------------------------|
+| Wall time profiling        | 2.7.0+                     |All supported runtime versions.      |
+| CPU profiling        | 2.15.0+                       | All supported runtime versions.      |
+| Exceptions profiling        | beta, 2.10.0+                       | All supported runtime versions.      |
+| Allocations profiling        | beta, 2.18.0+                       | .NET 6+      |
+| Lock Contention profiling        | beta, 2.18.0+                       | .NET 5+      |
+| Live heap profiling        | beta, 2.22.0+                       | .NET 7+      |
+| [Code Hotspots][12]        | 2.7.0+                       | All supported runtime versions.      |
+| [Endpoint Profiling][13]            | 2.15.0+                       | All supported runtime versions.      |
 
 ## Installation
 
+If you are already using Datadog, upgrade your Agent to version 7.20.2+ or 6.20.2+. The profiler ships together with the tracing library (beginning with v2.8.0), so if you are already using [APM to collect traces][5] for your application, you can skip installing the library and go directly to [Enabling the profiler](#enabling-the-profiler).
+
+Otherwise, install the profiler using the following steps, depending on your operating system.
+
 <div class="alert alert-warning">
-  <strong>Note:</strong> Datadog's automatic instrumentation rely on the .NET CLR Profiling API. This API allows only one subscriber (for example, Datadog's .NET Tracer with Profiler enabled). To ensure maximum visibility, run only one APM solution in your application environment.
+  <strong>Note:</strong> Datadog's automatic instrumentation relies on the .NET CLR Profiling API. Since this API allows only one subscriber, run only one APM solution in your application environment.
 </div>
 
-If you are already using Datadog, upgrade your Agent to version [7.20.2][1]+ or [6.20.2][2]+. The profiler ships together with the tracer, so install it using the following steps, depending on your operating system.
-
-**Note:** The profiler ships with the tracer starting with version 2.8.0. If you're using an older version of the tracer, you need to upgrade first.
 
 You can install the Datadog .NET Profiler machine-wide so that all services on the machine can be instrumented, or you can install it on a per-application basis to allow developers to manage the instrumentation through the application's dependencies. To see machine-wide installation instructions, click the **Windows** or **Linux** tab. To see per-application installation instructions, click the **NuGet** tab.
 
@@ -127,12 +125,14 @@ To install the .NET Profiler per-application:
 {{< /tabs >}}
 
 <br>
-<div class="alert alert-warning">
-  <strong>Note:</strong> The following steps include setting environment variables to enable the profiler. Datadog <strong>does not recommend</strong> setting those environment variables at machine-level. If set at machine-level, every .NET application running on the machine is profiled and this incurs a significant overhead on the CPU and memory of your machine.
+
+## Enabling the Profiler
+
+<div class="alert alert-info">
+  <strong>Note:</strong> Datadog does not recommend enabling the profiler at machine-level or for all IIS applications. If you have enabled it machine-wide, see the <a href="/profiler/profiler_troubleshooting/?code-lang=dotnet#enabling-the-profiler-machine-wide">Troubleshooting documentation</a> for information about reducing the overhead related to enabling the profiler for all system applications.
 </div>
 
 {{< tabs >}}
-
 {{% tab "Linux" %}}
 3. Set the following required environment variables for automatic instrumentation to attach to your application:
 
@@ -154,9 +154,12 @@ To install the .NET Profiler per-application:
 [1]: https://app.datadoghq.com/profiling
 {{% /tab %}}
 
-{{% tab "IIS" %}}
+{{% tab "Internet Information Services (IIS)" %}}
+
 3. Set needed environment variables to configure and enable Profiler.
  To enable the Profiler for IIS applications, it is required to set the `DD_PROFILING_ENABLED` environment variable in the Registry under `HKLM\System\CurrentControlSet\Services\WAS` and `HKLM\System\CurrentControlSet\Services\W3SVC` nodes.
+
+   <div class="alert alert-info">Starting v2.14.0, you don't need to set <code>CORECLR_PROFILER</code> or <code>COR_PROFILER</code> if you installed the tracer using the MSI.</div>
 
    **With the Registry Editor:**
 
@@ -165,6 +168,7 @@ To install the .NET Profiler per-application:
    For .NET Core and .NET 5+:
    ```text
    CORECLR_ENABLE_PROFILING=1
+   CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    DD_PROFILING_ENABLED=1
    DD_ENV=production
    DD_VERSION=1.2.3
@@ -175,6 +179,7 @@ To install the .NET Profiler per-application:
    For .NET Framework:
    ```text
    COR_ENABLE_PROFILING=1
+   COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    DD_PROFILING_ENABLED=1
    DD_ENV=production
    DD_VERSION=1.2.3
@@ -202,6 +207,8 @@ To install the .NET Profiler per-application:
 {{% tab "Windows services" %}}
 3. Set needed environment variables to configure and enable Profiler. To enable the Profiler for your service, it is required to set the `DD_PROFILING_ENABLED` environment variable in the Registry key associated to the service. If the profiler is running alone (the tracer is deactivated), you can optionally add the `DD_SERVICE`, `DD_ENV` and `DD_VERSION` environment variables.
 
+   <div class="alert alert-info">Starting v2.14.0, you don't need to set <code>CORECLR_PROFILER</code> or <code>COR_PROFILER</code> if you installed the tracer using the MSI.</div>
+
    **With the Registry Editor:**
 
    In the Registry Editor, create a multi-string value called `Environment` in the  `HKLM\System\CurrentControlSet\Services\MyService` key and set the value data to:
@@ -209,6 +216,7 @@ To install the .NET Profiler per-application:
    For .NET Core and .NET 5+:
    ```text
    CORECLR_ENABLE_PROFILING=1
+   CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    DD_PROFILING_ENABLED=1
    DD_SERVICE=MyService
    DD_ENV=production
@@ -219,6 +227,7 @@ To install the .NET Profiler per-application:
    For .NET Framework:
    ```text
    COR_ENABLE_PROFILING=1
+   COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    DD_PROFILING_ENABLED=1
    DD_SERVICE=MyService
    DD_ENV=production
@@ -232,6 +241,7 @@ To install the .NET Profiler per-application:
    ```powershell
    [string[]] $v = @(
        "CORECLR_ENABLE_PROFILING=1",
+       "CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}",
        "DD_PROFILING_ENABLED=1",
        "DD_SERVICE=MyService",
        "DD_ENV=production",
@@ -244,6 +254,7 @@ To install the .NET Profiler per-application:
    ```powershell
    [string[]] $v = @(
        "COR_ENABLE_PROFILING=1",
+       "COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}",
        "DD_PROFILING_ENABLED=1",
        "DD_SERVICE=MyService",
        "DD_ENV=production",
@@ -257,12 +268,16 @@ To install the .NET Profiler per-application:
 [1]: https://app.datadoghq.com/profiling
 {{% /tab %}}
 
-{{% tab "Windows standalone applications" %}}
+{{% tab "Windows Standalone applications" %}}
+
+   <div class="alert alert-info">Starting v2.14.0, you don't need to set <code>CORECLR_PROFILER</code> or <code>COR_PROFILER</code> if you installed the tracer using the MSI.</div>
+
 3. Set needed environment variables to configure and enable Profiler for a non-service application, such as console, ASP.NET (Core), Windows Forms, or WPF. To enable the Profiler for Standalone applications, it is required to set the `DD_PROFILING_ENABLED` environment variable. If the profiler is running alone (the tracer is deactivated), you can optionally set the `DD_SERVICE`, `DD_ENV` and `DD_VERSION` environment variables. The recommended approach is to create a batch file that sets these and starts the application, and run your application using the batch file.
 
    For .NET Core and .NET 5+:
    ```cmd
    SET CORECLR_ENABLE_PROFILING=1
+   SET CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    SET DD_PROFILING_ENABLED=1
    SET DD_SERVICE=MyService
    SET DD_ENV=production
@@ -274,6 +289,7 @@ To install the .NET Profiler per-application:
    For .NET Framework:
    ```cmd
    SET COR_ENABLE_PROFILING=1
+   SET COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    SET DD_PROFILING_ENABLED=1
    SET DD_SERVICE=MyService
    SET DD_ENV=production
@@ -369,5 +385,6 @@ The [Getting Started with Profiler][4] guide takes a sample service with a perfo
 [2]: https://app.datadoghq.com/account/settings?agent_version=6#agent
 [3]: /getting_started/tagging/unified_service_tagging
 [4]: /getting_started/profiler/
+[5]: /tracing/trace_collection/
 [12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
 [13]: /profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints

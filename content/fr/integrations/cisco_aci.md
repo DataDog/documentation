@@ -23,7 +23,6 @@ author:
   support_email: help@datadoghq.com
 categories:
 - network
-- autodiscovery
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cisco_aci/README.md
 display_on_public_website: true
@@ -50,7 +49,6 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::Network
-  - Category::Autodiscovery
   configuration: README.md#Setup
   description: Surveillez l'utilisation et les performances de Cisco ACI.
   media: []
@@ -69,7 +67,7 @@ Grâce à l'intégration Cisco ACI, vous pouvez :
 - Faire un suivi de la capacité de votre ACI
 - Surveiller les commutateurs et les contrôleurs
 
-## Configuration
+## Implémentation
 
 ### Installation
 

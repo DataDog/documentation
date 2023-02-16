@@ -4,24 +4,33 @@ aliases:
 description: 分散型トレースにより提供された実行コンテキストを利用して、実稼働システムをターゲットとした脅威を監視します。
 disable_sidebar: true
 further_reading:
-- link: /security/application_security/setup_and_configure/#compatibility
-  tag: ドキュメント
-  text: 言語およびフレームワークの互換性に関する詳細
-- link: https://www.datadoghq.com/blog/datadog-application-security/
-  tag: ブログ
-  text: Datadog アプリケーションセキュリティのご紹介
 - link: /security/application_security/how-appsec-works/
   tag: ドキュメント
   text: Application Security Management の仕組み
+- link: /security/application_security/threats/
+  tag: ドキュメント
+  text: Threat Monitoring and Protection
+- link: /security/application_security/risk_management/
+  tag: ドキュメント
+  text: リスク管理
+- link: /security/application_security/setup_and_configure/#compatibility
+  tag: ドキュメント
+  text: 言語およびフレームワークの互換性に関する詳細
 - link: https://www.datadoghq.com/product/security-platform/application-security-monitoring/
   tag: 製品ページ
   text: Datadog の Application Security Management
+- link: https://www.datadoghq.com/blog/datadog-application-security/
+  tag: ブログ
+  text: Datadog アプリケーションセキュリティのご紹介
 - link: https://www.datadoghq.com/blog/secure-serverless-applications-with-datadog-asm/
-  tag: GitHub
+  tag: ブログ
   text: Datadog ASM でサーバーレスアプリケーションのセキュリティを強化する
 - link: https://www.datadoghq.com/blog/securing-cloud-native-applications/
   tag: ブログ
   text: クラウドネイティブ環境におけるアプリケーションセキュリティのベストプラクティス
+- link: https://www.datadoghq.com/blog/apm-security-view/
+  tag: ブログ
+  text: APM セキュリティビューでリスク、脆弱性、攻撃を可視化する
 kind: documentation
 title: Application Security Management
 ---
@@ -38,7 +47,7 @@ ASM では、Datadog の[トレーシングライブラリ][1]と [Datadog Agent
 
 ASM を使用すると、継続的なトレースデータからノイズを取り除き、環境の安全と保護のみに集中できます。
 
-ASM ならワンクリックで攻撃者の IP を一時的または永久にブロックでき、アプリケーションコード内の潜在的な脆弱性を完全に緩和できるまで攻撃を遅らせることができます。ワンクリック IP ブロッキングは非公開ベータ版です。[こちらのフォーム][7]から早期プレビューにアクセスできます。
+ASM ならワンクリックで攻撃者の IP を一時的または永久にブロックでき、アプリケーションコード内の潜在的な脆弱性を完全に緩和できるまで攻撃を遅らせることができます。ワンクリックブロッキングはベータ版です。
 
 ## Datadog に実装されたアプリケーションセキュリティの仕組みの理解
 
@@ -54,6 +63,12 @@ Application Security Management がどのように構成され、トレースデ
 
 [セキュリティシグナルエクスプローラー][6]でセキュリティシグナルをクリックすると、その概要と攻撃緩和の推奨手順を確認できます。同じパネル内で、その関連する攻撃フローがわかるトレースの表示や、さらにコンテキストを取得するための情報をリクエストすることができます。
 
+## アップストリームのオープンソースライブラリや依存関係に潜むリスクの調査
+
+<div class="alert alert-info">Application Security Risk Management はベータ版です。</a></div>
+
+[ASM Risk Management][8] は、既知の脆弱性を持つオープンソースライブラリを使用または依存することで、サービスがリスクにさらされる場合を示しています。発見された脆弱性を調査し、修正アドバイスに従うか、脆弱性の原因を調査することで、ソフトウェアの安全性を確保します。
+
 ## 次のステップ
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -65,3 +80,4 @@ Application Security Management がどのように構成され、トレースデ
 [5]: /ja/security/application_security/getting_started/
 [6]: /ja/security/explorer/
 [7]: https://dashcon.io/appsec
+[8]: /ja/security/application_security/risk_management/

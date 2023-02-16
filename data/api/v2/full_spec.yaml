@@ -2647,6 +2647,10 @@ components:
         public_id:
           description: The organization public ID.
           type: string
+        region:
+          description: The region of the Datadog instance that the organization belongs
+            to.
+          type: string
         total_cost:
           description: The total cost of products for the month.
           format: double
@@ -2852,6 +2856,30 @@ components:
       - INTEGRATION_SCREENBOARD
       - INTEGRATION_TIMEBOARD
       - HOST_TIMEBOARD
+    DataScalarColumn:
+      description: A column containing the numerical results for a formula or query.
+      properties:
+        meta:
+          $ref: '#/components/schemas/ScalarMeta'
+        name:
+          description: The name referencing the formula or query for this column.
+          example: a
+          type: string
+        type:
+          description: The type of column present.
+          example: number
+          type: string
+        values:
+          description: The array of numerical values for one formula or query.
+          example:
+          - 0.5
+          items:
+            description: An individual value for a given column and group-by.
+            example: 0.5
+            format: double
+            type: number
+          type: array
+      type: object
     Event:
       description: The metadata associated with a request.
       properties:
@@ -3269,6 +3297,8 @@ components:
           $ref: '#/components/schemas/EventsQueryGroupBys'
         indexes:
           description: The indexes in which to search.
+          example:
+          - main
           items:
             description: The unique index name.
             example: main
@@ -3320,6 +3350,8 @@ components:
           $ref: '#/components/schemas/EventsQueryGroupBys'
         indexes:
           description: The indexes in which to search.
+          example:
+          - main
           items:
             description: The unique index name.
             example: main
@@ -3655,10 +3687,37 @@ components:
           nullable: true
           type: array
       type: object
+    GroupScalarColumn:
+      description: A column containing the tag keys and values in a group.
+      properties:
+        name:
+          description: The name of the tag key or group.
+          example: env
+          type: string
+        type:
+          description: The type of column present.
+          example: group
+          type: string
+        values:
+          description: The array of tag values for each group found for the results
+            of the formulas or queries.
+          example:
+          - - production
+          - - staging
+          items:
+            description: An individual tag value for a given group column.
+            items:
+              description: One tag value within a values array.
+              example: production
+              type: string
+            type: array
+          type: array
+      type: object
     GroupTags:
       description: List of tags that apply to a single response value.
       items:
         description: A single tag that applies to a single response value.
+        example: env:production
         type: string
       type: array
     HTTPLog:
@@ -7203,13 +7262,15 @@ components:
       type: object
     MetricsDataSource:
       default: metrics
-      description: A data source that is powered by the Metrics backend.
+      description: A data source that is powered by the Metrics platform.
       enum:
       - metrics
+      - cloud_cost
       example: metrics
       type: string
       x-enum-varnames:
       - METRICS
+      - CLOUD_COST
     MetricsScalarQuery:
       description: An individual scalar metrics query.
       properties:
@@ -7222,7 +7283,7 @@ components:
           type: string
         query:
           description: A classic metrics query string.
-          example: avg:system.cpu.user{*}
+          example: avg:system.cpu.user{*} by {env}
           type: string
       required:
       - data_source
@@ -7239,12 +7300,188 @@ components:
           type: string
         query:
           description: A classic metrics query string.
-          example: avg:system.cpu.user{*}
+          example: avg:system.cpu.user{*} by {env}
           type: string
       required:
       - data_source
       - query
       type: object
+    MonitorConfigPolicyAttributeCreateRequest:
+      description: Policy and policy type for a monitor configuration policy.
+      properties:
+        policy:
+          $ref: '#/components/schemas/MonitorConfigPolicyPolicyCreateRequest'
+        policy_type:
+          $ref: '#/components/schemas/MonitorConfigPolicyType'
+      required:
+      - policy_type
+      - policy
+      type: object
+    MonitorConfigPolicyAttributeEditRequest:
+      description: Policy and policy type for a monitor configuration policy.
+      properties:
+        policy:
+          $ref: '#/components/schemas/MonitorConfigPolicyPolicy'
+        policy_type:
+          $ref: '#/components/schemas/MonitorConfigPolicyType'
+      required:
+      - policy_type
+      - policy
+      type: object
+    MonitorConfigPolicyAttributeResponse:
+      description: Policy and policy type for a monitor configuration policy.
+      properties:
+        policy:
+          $ref: '#/components/schemas/MonitorConfigPolicyPolicy'
+        policy_type:
+          $ref: '#/components/schemas/MonitorConfigPolicyType'
+      type: object
+    MonitorConfigPolicyCreateData:
+      description: A monitor configuration policy data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MonitorConfigPolicyAttributeCreateRequest'
+        type:
+          $ref: '#/components/schemas/MonitorConfigPolicyResourceType'
+      required:
+      - type
+      - attributes
+      type: object
+    MonitorConfigPolicyCreateRequest:
+      description: Request for creating a monitor configuration policy.
+      properties:
+        data:
+          $ref: '#/components/schemas/MonitorConfigPolicyCreateData'
+      required:
+      - data
+      type: object
+    MonitorConfigPolicyEditData:
+      description: A monitor configuration policy data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MonitorConfigPolicyAttributeEditRequest'
+        id:
+          description: ID of this monitor configuration policy.
+          example: 00000000-0000-1234-0000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/MonitorConfigPolicyResourceType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    MonitorConfigPolicyEditRequest:
+      description: Request for editing a monitor configuration policy.
+      properties:
+        data:
+          $ref: '#/components/schemas/MonitorConfigPolicyEditData'
+      required:
+      - data
+      type: object
+    MonitorConfigPolicyListResponse:
+      description: Response for retrieving all monitor configuration policies.
+      properties:
+        data:
+          description: An array of monitor configuration policies.
+          items:
+            $ref: '#/components/schemas/MonitorConfigPolicyResponseData'
+          type: array
+      type: object
+    MonitorConfigPolicyPolicy:
+      description: Configuration for the policy.
+      oneOf:
+      - $ref: '#/components/schemas/MonitorConfigPolicyTagPolicy'
+      type: object
+    MonitorConfigPolicyPolicyCreateRequest:
+      description: Configuration for the policy.
+      oneOf:
+      - $ref: '#/components/schemas/MonitorConfigPolicyTagPolicyCreateRequest'
+      type: object
+    MonitorConfigPolicyResourceType:
+      default: monitor-config-policy
+      description: Monitor configuration policy resource type.
+      enum:
+      - monitor-config-policy
+      example: monitor-config-policy
+      type: string
+      x-enum-varnames:
+      - MONITOR_CONFIG_POLICY
+    MonitorConfigPolicyResponse:
+      description: Response for retrieving a monitor configuration policy.
+      properties:
+        data:
+          $ref: '#/components/schemas/MonitorConfigPolicyResponseData'
+      type: object
+    MonitorConfigPolicyResponseData:
+      description: A monitor configuration policy data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MonitorConfigPolicyAttributeResponse'
+        id:
+          description: ID of this monitor configuration policy.
+          example: 00000000-0000-1234-0000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/MonitorConfigPolicyResourceType'
+      type: object
+    MonitorConfigPolicyTagPolicy:
+      description: Tag attributes of a monitor configuration policy.
+      properties:
+        tag_key:
+          description: The key of the tag.
+          example: datacenter
+          maxLength: 255
+          type: string
+        tag_key_required:
+          description: If a tag key is required for monitor creation.
+          example: true
+          type: boolean
+        valid_tag_values:
+          description: Valid values for the tag.
+          example:
+          - prod
+          - staging
+          items:
+            maxLength: 255
+            type: string
+          type: array
+      type: object
+    MonitorConfigPolicyTagPolicyCreateRequest:
+      description: Tag attributes of a monitor configuration policy.
+      properties:
+        tag_key:
+          description: The key of the tag.
+          example: datacenter
+          maxLength: 255
+          type: string
+        tag_key_required:
+          description: If a tag key is required for monitor creation.
+          example: true
+          type: boolean
+        valid_tag_values:
+          description: Valid values for the tag.
+          example:
+          - prod
+          - staging
+          items:
+            maxLength: 255
+            type: string
+          type: array
+      required:
+      - tag_key
+      - tag_key_required
+      - valid_tag_values
+      type: object
+    MonitorConfigPolicyType:
+      default: tag
+      description: The monitor configuration policy type.
+      enum:
+      - tag
+      example: tag
+      type: string
+      x-enum-varnames:
+      - TAG
     MonitorType:
       description: Attributes from the monitor that triggered the event.
       nullable: true
@@ -9270,20 +9507,9 @@ components:
       - SAML_ASSERTION_ATTRIBUTES
     ScalarColumn:
       description: A single column in a scalar query response.
-      properties:
-        unit:
-          description: List of units.
-          items:
-            $ref: '#/components/schemas/Unit'
-          type: array
-        values:
-          description: Array of values for each group-by combination that results
-            from one formula or query.
-          items:
-            description: An individual value for a given column and group-by.
-            format: double
-            type: number
-          type: array
+      oneOf:
+      - $ref: '#/components/schemas/GroupScalarColumn'
+      - $ref: '#/components/schemas/DataScalarColumn'
       type: object
     ScalarFormulaQueryRequest:
       description: A wrapper request around one scalar query to be executed.
@@ -9364,8 +9590,6 @@ components:
           items:
             $ref: '#/components/schemas/ScalarColumn'
           type: array
-        series:
-          $ref: '#/components/schemas/ScalarResponseSeriesList'
       type: object
     ScalarFormulaResponseType:
       default: scalar_response
@@ -9376,6 +9600,23 @@ components:
       type: string
       x-enum-varnames:
       - SCALAR_RESPONSE
+    ScalarMeta:
+      description: Metadata for the resulting numerical values.
+      properties:
+        unit:
+          description: 'Detailed information about the unit.
+
+            First element describes the "primary unit" (for example, `bytes` in `bytes
+            per second`).
+
+            The second element describes the "per unit" (for example, `second` in
+            `bytes per second`).
+
+            If the second element is not present, the API returns null.'
+          items:
+            $ref: '#/components/schemas/Unit'
+          type: array
+      type: object
     ScalarQuery:
       description: An individual scalar query to one of the basic Datadog data sources.
       oneOf:
@@ -9390,12 +9631,6 @@ components:
         type:
           $ref: '#/components/schemas/ScalarFormulaResponseType'
       type: object
-    ScalarResponseSeriesList:
-      description: List of group-by tags for the response. Parallel array to the values
-        in each scalar column.
-      items:
-        $ref: '#/components/schemas/GroupTags'
-      type: array
     SecurityFilter:
       description: The security filter's properties.
       properties:
@@ -9720,6 +9955,7 @@ components:
       - anomaly_detection
       - impossible_travel
       - hardcoded
+      - third_party
       type: string
       x-enum-varnames:
       - THRESHOLD
@@ -9727,6 +9963,7 @@ components:
       - ANOMALY_DETECTION
       - IMPOSSIBLE_TRAVEL
       - HARDCODED
+      - THIRD_PARTY
     SecurityMonitoringRuleEvaluationWindow:
       description: 'A time window is specified to match when at least one of the cases
         matches true. This is a sliding window
@@ -9940,6 +10177,7 @@ components:
       - new_value
       - geo_data
       - event_count
+      - none
       type: string
       x-enum-varnames:
       - COUNT
@@ -9949,6 +10187,7 @@ components:
       - NEW_VALUE
       - GEO_DATA
       - EVENT_COUNT
+      - NONE
     SecurityMonitoringRuleResponse:
       description: Create a new rule.
       oneOf:
@@ -12010,7 +12249,15 @@ components:
           maximum: 2147483647
           type: integer
         unit:
-          description: List of units.
+          description: 'Detailed information about the unit.
+
+            The first element describes the "primary unit" (for example, `bytes` in
+            `bytes per second`).
+
+            The second element describes the "per unit" (for example, `second` in
+            `bytes per second`).
+
+            If the second element is not present, the API returns null.'
           items:
             $ref: '#/components/schemas/Unit'
           type: array
@@ -12032,6 +12279,9 @@ components:
       type: array
     TimeseriesResponseValues:
       description: Array of values for an individual formula or query.
+      example:
+      - 1575317847.0
+      - 0.5
       items:
         description: An individual value for a given time.
         format: double
@@ -12455,6 +12705,7 @@ components:
             security_monitoring_rules_read: Read Detection Rules.
             security_monitoring_rules_write: Create and edit Detection Rules.
             security_monitoring_signals_read: View Security Signals.
+            timeseries_query: Query Timeseries data.
             usage_read: View your organization's usage and usage attribution.
             user_access_invite: Invite other users to your organization.
             user_access_manage: Disable users, manage user roles, manage SAML-to-role
@@ -13234,10 +13485,6 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Aggregate pipelines events
       tags:
       - CI Visibility Pipelines
@@ -13316,10 +13563,6 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get a list of pipelines events
       tags:
       - CI Visibility Pipelines
@@ -13360,10 +13603,6 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Search pipelines events
       tags:
       - CI Visibility Pipelines
@@ -13400,10 +13639,6 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Aggregate tests events
       tags:
       - CI Visibility Tests
@@ -13482,10 +13717,6 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get a list of tests events
       tags:
       - CI Visibility Tests
@@ -13526,10 +13757,6 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Search tests events
       tags:
       - CI Visibility Tests
@@ -14604,9 +14831,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: List Cloudflare accounts
       tags:
       - Cloudflare Integration
@@ -14637,9 +14861,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Add Cloudflare account
       tags:
       - Cloudflare Integration
@@ -14650,7 +14871,7 @@ paths:
           - name: body
             value: "{\n  \"data\": {\n    \"type\": \"cloudflare-accounts\",\n    \"attributes\":
               {\n      \"api_key\": \"6Zm7WEgKzAlCnt_4exfEK0mSoeHHAaDf41O1AAfu\",\n
-              \     \"name\": \"datadog-dev\",\n      \"email\": \"dev@datadog.com\"\n
+              \     \"name\": \"{{ unique_lower_alnum }}\",\n      \"email\": \"dev@datadog.com\"\n
               \   }\n  }\n}"
           step: there is a valid "cloudflare_account" in the system
       x-menu-order: 2
@@ -14682,9 +14903,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Delete Cloudflare account
       tags:
       - Cloudflare Integration
@@ -14716,9 +14934,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Get Cloudflare account
       tags:
       - Cloudflare Integration
@@ -14756,9 +14971,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Update Cloudflare account
       tags:
       - Cloudflare Integration
@@ -15097,9 +15309,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: List Fastly accounts
       tags:
       - Fastly Integration
@@ -15130,9 +15339,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Add Fastly account
       tags:
       - Fastly Integration
@@ -15169,9 +15375,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Delete Fastly account
       tags:
       - Fastly Integration
@@ -15198,9 +15401,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Get Fastly account
       tags:
       - Fastly Integration
@@ -15233,9 +15433,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Update Fastly account
       tags:
       - Fastly Integration
@@ -15264,9 +15461,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: List Fastly services
       tags:
       - Fastly Integration
@@ -15299,9 +15493,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Add Fastly service
       tags:
       - Fastly Integration
@@ -15331,9 +15522,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Delete Fastly service
       tags:
       - Fastly Integration
@@ -15361,9 +15549,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Get Fastly service
       tags:
       - Fastly Integration
@@ -15397,9 +15582,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Update Fastly service
       tags:
       - Fastly Integration
@@ -17554,6 +17736,223 @@ paths:
       x-menu-order: 8
       x-undo:
         type: safe
+  /api/v2/monitor/policy:
+    get:
+      description: Get all monitor configuration policies.
+      operationId: ListMonitorConfigPolicies
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorConfigPolicyListResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitors_read
+      summary: Get all monitor configuration policies
+      tags:
+      - Monitors
+      x-menu-order: 10
+      x-undo:
+        type: safe
+    post:
+      description: Create a monitor configuration policy.
+      operationId: CreateMonitorConfigPolicy
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MonitorConfigPolicyCreateRequest'
+        description: Create a monitor configuration policy request body.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorConfigPolicyResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create a monitor configuration policy
+      tags:
+      - Monitors
+      x-codegen-request-body-name: body
+      x-given:
+        monitor_configuration_policy:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"monitor-config-policy\",\n    \"attributes\":
+              {\n      \"policy_type\": \"tag\",\n      \"policy\": {\n        \"tag_key\":
+              \"dc\", \"tag_key_required\": true, \"valid_tag_values\": [\"prod\",
+              \"staging\"]\n      }\n    }\n  }\n}"
+          step: there is a valid "monitor_configuration_policy" in the system
+      x-menu-order: 11
+      x-undo:
+        operationId: DeleteMonitorConfigPolicy
+        parameters:
+        - name: policy_id
+          source: data.id
+        type: unsafe
+  /api/v2/monitor/policy/{policy_id}:
+    delete:
+      description: Delete a monitor configuration policy.
+      operationId: DeleteMonitorConfigPolicy
+      parameters:
+      - description: ID of the monitor configuration policy.
+        in: path
+        name: policy_id
+        required: true
+        schema:
+          example: 00000000-0000-1234-0000-000000000000
+          type: string
+      responses:
+        '204':
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete a monitor configuration policy
+      tags:
+      - Monitors
+      x-menu-order: 13
+      x-undo:
+        type: idempotent
+    get:
+      description: Get a monitor configuration policy by `policy_id`.
+      operationId: GetMonitorConfigPolicy
+      parameters:
+      - description: ID of the monitor configuration policy.
+        in: path
+        name: policy_id
+        required: true
+        schema:
+          example: 00000000-0000-1234-0000-000000000000
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorConfigPolicyResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitors_read
+      summary: Get a monitor configuration policy
+      tags:
+      - Monitors
+      x-menu-order: 9
+      x-undo:
+        type: safe
+    patch:
+      description: Edit a monitor configuration policy.
+      operationId: UpdateMonitorConfigPolicy
+      parameters:
+      - description: ID of the monitor configuration policy.
+        in: path
+        name: policy_id
+        required: true
+        schema:
+          example: 00000000-0000-1234-0000-000000000000
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MonitorConfigPolicyEditRequest'
+        description: Description of the update.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorConfigPolicyResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Unprocessable Entity
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Edit a monitor configuration policy
+      tags:
+      - Monitors
+      x-codegen-request-body-name: body
+      x-menu-order: 12
+      x-undo:
+        type: idempotent
   /api/v2/permissions:
     get:
       description: Returns a list of all permissions, including name, description,
@@ -17694,8 +18093,10 @@ paths:
         type: safe
   /api/v2/query/scalar:
     post:
-      description: 'The internal endpoint to query scalar/table data for multiple
-        data sources and
+      description: 'Query scalar values (as seen on Query Value, Table and Toplist
+        widgets).
+
+        Multiple data sources are supported with the ability to
 
         process the data using formulas and functions.'
       operationId: QueryScalarData
@@ -17720,23 +18121,28 @@ paths:
           $ref: '#/components/responses/ForbiddenResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Scalar cross product query
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - timeseries_query
+      summary: Query scalar data across multiple products
       tags:
       - Metrics
       x-codegen-request-body-name: body
       x-menu-order: 2
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is GA for the metrics data source. Logs
-        is in beta.
+      x-unstable: '**Note**: This endpoint is GA for the metrics and cloud cost data
+        sources. Logs is
 
-        We are gradually onboarding support for more sources. If you have any feedback,
+        in beta. We are gradually onboarding support for more sources. If you have
+        any
 
-        contact [Datadog support](https://docs.datadoghq.com/help/).'
+        feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/query/timeseries:
     post:
-      description: 'The internal endpoint to query timeseries data for multiple data
-        sources and
+      description: 'Query timeseries data across various data sources and
 
         process the data by applying formulas and functions.'
       operationId: QueryTimeseriesData
@@ -17761,19 +18167,25 @@ paths:
           $ref: '#/components/responses/ForbiddenResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Timeseries cross product query
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - timeseries_query
+      summary: Query timeseries data across multiple products
       tags:
       - Metrics
       x-codegen-request-body-name: body
       x-menu-order: 1
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is GA for the metrics data source. Logs
-        is in beta.
+      x-unstable: '**Note**: This endpoint is GA for the metrics and cloud cost data
+        sources. Logs is
 
-        We are gradually onboarding support for more sources. If you have any feedback,
+        in beta. We are gradually onboarding support for more sources. If you have
+        any
 
-        contact [Datadog support](https://docs.datadoghq.com/help/).'
+        feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/roles:
     get:
       description: Returns all roles, including their names and their unique identifiers.
@@ -20123,7 +20535,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Create a service account
       tags:
-      - Users
+      - Service Accounts
       x-codegen-request-body-name: body
       x-given:
         service_account_user:
@@ -20139,6 +20551,7 @@ paths:
         parameters:
         - name: user_id
           source: data.id
+        tag: Users
         type: unsafe
   /api/v2/service_accounts/{service_account_id}/application_keys:
     get:
@@ -21212,8 +21625,8 @@ paths:
       - description: 'Comma separated list of product families to retrieve. Available
           families are `all`, `analyzed_logs`,
 
-          `application_security`, `audit_logs`, `serverless`, `ci_app`, `cspm`, `custom_events`,
-          `cws`, `dbm`, `fargate`,
+          `application_security`, `audit_logs`, `serverless`, `ci_app`, `cloud_cost_management`,
+          `cspm`, `custom_events`, `cws`, `dbm`, `fargate`,
 
           `infra_hosts`, `incident_management`, `indexed_logs`, `indexed_spans`, `ingested_spans`,
           `iot`,
@@ -22015,6 +22428,20 @@ tags:
     `manage_tags` API methods can only be performed by\na user who has the `Manage
     Tags for Metrics` permission."
   name: Metrics
+- description: '[Monitors](https://docs.datadoghq.com/monitors) allow you to watch
+    a metric or check that you care about and
+
+    notifies your team when a defined threshold has exceeded.
+
+
+    For more information, see [Creating Monitors](https://docs.datadoghq.com/monitors/create/types/)
+    and
+
+    [Tag Policies](https://docs.datadoghq.com/monitors/settings/).'
+  externalDocs:
+    description: Find out more at
+    url: https://docs.datadoghq.com/monitors/create/types/
+  name: Monitors
 - description: 'Configure your [Datadog Opsgenie integration](https://docs.datadoghq.com/integrations/opsgenie/)
 
     directly through the Datadog API.'

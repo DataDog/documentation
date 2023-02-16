@@ -22,7 +22,7 @@ The Datadog Dynamic Instrumentation library is supported in JDK version 8 and ab
 
 ## Installation
 
-1. Install or upgrade your Agent to version [7.41.1][2]+. 
+1. Install or upgrade your Agent to version [7.41.1][2]+.
 2. If you don't already have APM enabled, in your Agent configuration, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
 
 3. Download `dd-java-agent.jar`:
@@ -30,7 +30,7 @@ The Datadog Dynamic Instrumentation library is supported in JDK version 8 and ab
    ```shell
    wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    ```
-   **Note**: Dynamic Instrumentation is available in the `dd-java-agent.jar` library in versions 1.5 and later.
+   **Note**: Dynamic Instrumentation is available in the `dd-java-agent.jar` library in versions 1.8.0 and later.
 
 3. Run your service with Dynamic Instrumentation enabled by setting `-Ddd.dynamic.instrumentation.enabled` flag or `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `dd.service`, `dd.env`, and `dd.version` Unified Service Tags so you can filter and group your probes and target active clients across these dimensions.
    {{< tabs >}}
@@ -44,7 +44,6 @@ java \
     -Ddd.env=<YOUR_ENVIRONMENT> \
     -Ddd.version=<YOUR_VERSION> \
     -Ddd.dynamic.instrumentation.enabled=true \
-    -Ddd.remote_config.enabled=true \
     -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
 ```
 {{% /tab %}}
@@ -55,7 +54,6 @@ export DD_SERVICE=<YOUR_SERVICE>
 export DD_ENV=<YOUR_ENV>
 export DD_VERSION=<YOUR_VERSION>
 export DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
-export DD_REMOTE_CONFIG_ENABLED=true
 java \
     -javaagent:dd-java-agent.jar \
     -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>

@@ -25,6 +25,7 @@ Cloud Security Posture Management (CSPM) comes with more than 400 out-of-the-box
 
 - [CIS AWS Foundations Benchmark v1.3.0*][2]
 - [CIS Azure Foundations Benchmark v1.3.0][3]
+- [CIS GCP Foundations Benchmark v1.3.0][22]
 - [CIS Docker Benchmark v1.2.0][4]
 - [CIS Kubernetes Benchmark v1.5.1**][5]
 - [PCI DSS v3.2.1][6]
@@ -90,3 +91,4 @@ Select a rule to view details about the misconfigured resources, the rule descri
 [19]: /integrations/webhooks/
 [20]: https://app.datadoghq.com/security/compliance/homepage
 [21]: /security/cspm/detection_rules
+[22]: https://www.cisecurity.org/benchmark/google_cloud_computing_platform
