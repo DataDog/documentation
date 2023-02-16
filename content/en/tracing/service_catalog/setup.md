@@ -75,7 +75,7 @@ For more information, see the [Datadog Provider documentation][9].
 
 ## Open-Source Metadata Provider
 
-As an alternative to GitHub integration and Terraform, you can use an open-sourced GitHub Action solution named [Datadog Service Catalog Metadata Provider] [12].  
+As an alternative to the GitHub integration and Terraform, you can use an open-sourced GitHub Action solution named [Datadog Service Catalog Metadata Provider][12].  
 This GitHub Action allows you to register your services with the Service Catalog using a GitHub Action, with full control over when this information is sent to Datadog, and other implement other compliance checks unique to your organization.
 
 
