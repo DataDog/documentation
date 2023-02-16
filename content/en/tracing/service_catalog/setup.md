@@ -73,6 +73,12 @@ The Service Catalog provides a service definition as a Terraform resource. Creat
 
 For more information, see the [Datadog Provider documentation][9].
 
+## Open-Source Metadata Provider
+
+As an alternative to GitHub integration and Terraform, you can use an open-sourced GitHub Action solution named [Datadog Service Catalog Metadata Provider] [12].  
+This GitHub Action allows you to register your services with the Service Catalog using a GitHub Action, with full control over when this information is sent to Datadog, and other implement other compliance checks unique to your organization.
+
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -88,3 +94,4 @@ For more information, see the [Datadog Provider documentation][9].
 [9]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs
 [10]: https://app.datadoghq.com/services
 [11]: https://docs.datadoghq.com/tracing/service_catalog/setup#store-and-edit-service-definitions-in-github
+[12]: https://github.com/marketplace/actions/datadog-service-catalog-metadata-provider
