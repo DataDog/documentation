@@ -105,9 +105,9 @@ You can apply a function to a formula by clicking on the `Σ` icon. Here is an e
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/guide/custom_time_frames
+[1]: /logs/log_configuration/indexes/#switch-off-switch-on
 [2]: /logs/logs_to_metrics
-[3]: /logs/log_configuration/processors/#grok-parser
+[3]: /logs/log_configuration/rehydrating/
 [4]: /logs/explorer/visualize/#top-list
 [5]: /logs/explorer/visualize/#timeseries
 [6]: /logs/explorer/visualize/#nested-tables
