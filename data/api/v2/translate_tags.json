@@ -95,6 +95,10 @@
     "name": "RUM",
     "description": "Search or aggregate your RUM events over HTTP."
   },
+  "restriction-policies": {
+    "name": "Restriction Policies",
+    "description": "A restriction policy defines the access control rules for a resource, mapping a set of relations\n(such as editor and viewer) to a set of allowed principals (such as roles). The restriction policy\ndetermines who is authorized to perform what actions on the resource."
+  },
   "roles": {
     "name": "Roles",
     "description": "The Roles API is used to create and manage Datadog roles, what\n[global permissions](https://docs.datadoghq.com/account_management/rbac/)\nthey grant, and which users belong to them.\n\nPermissions related to specific account assets can be granted to roles\nin the Datadog application without using this API. For example, granting\nread access on a specific log index to a role can be done in Datadog from the\n[Pipelines page](https://app.datadoghq.com/logs/pipelines)."

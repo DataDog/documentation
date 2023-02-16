@@ -8827,6 +8827,46 @@ api:
         - AggregateRUMEvents
       unstable: []
       order: 3
+  - name: Restriction Policies
+    url: /api/latest/restriction-policies/
+    identifier: restriction-policies
+    generated: true
+  - name: Update a restriction policy
+    url: '#update-a-restriction-policy'
+    identifier: restriction-policies-update-a-restriction-policy
+    parent: restriction-policies
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateRestrictionPolicy
+      unstable: []
+      order: 1
+  - name: Get a restriction policy
+    url: '#get-a-restriction-policy'
+    identifier: restriction-policies-get-a-restriction-policy
+    parent: restriction-policies
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetRestrictionPolicy
+      unstable: []
+      order: 2
+  - name: Delete a restriction policy
+    url: '#delete-a-restriction-policy'
+    identifier: restriction-policies-delete-a-restriction-policy
+    parent: restriction-policies
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteRestrictionPolicy
+      unstable: []
+      order: 3
   - name: Roles
     url: /api/latest/roles/
     identifier: roles
