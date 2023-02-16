@@ -130,45 +130,6 @@ Clicking on a service opens a side panel with details including:
 
 Click **View Related** and select a page from the dropdown menu to navigate into related pages in Datadog, such as the APM Service page and service map for this service, or related telemetry data pages, such as Distributed Tracing, Infrastructure, Network Performance, Log Management, RUM, and Continuous Profiler.
 
-## Service definitions
-
-A service is an independent, deployable unit of software. Datadog [Unified Service Tagging][6], and the `DD_SERVICE` tag, provides a standard way to manage and monitor services consistently across multiple telemetry types including infrastructure metrics, logs, and traces. To define a service using additional criteria, you can customize a service definition that fits your architectural style.
-
-Service definitions include the following elements which are all optional (except the service name):
-
-Service name
-: An identifier for the service, unique within Datadog. By default, this is the `DD_SERVICE` value from incoming data.
-
-Team
-: The name of the team responsible for developing and maintaining the service.
-
-Contacts
-: One or more ways to contact the team, such as Slack channels or email addresses.
-
-Links
-: A list of links to important resources for the service, such as runbooks.
-
-Repos
-: A list of source control repositories that contain source code and related files for maintaining, testing, and deploying the service.
-
-Docs
-: Links to documentation for the service.
-
-Tags
-: Like all Datadog tags, these help you find, filter, and group whatever they are applied to, such as service definitions.
-
-Integrations
-: Custom strings to connect integrations such as PagerDuty for identifying the service on-call.
-
-## Enriching an existing service
-
-If you already use APM to trace your applications, or have RUM or USM enabled, you can directly add metadata about those services. 
-
-Add service ownership information such as the team name, Slack channels, and source code repositories by pushing a YAML file with the POST endpoint to the [Service Definition API][7]. Read [Setting Up Service Catalog][8] for more information.
-
-## Registering a new service that has no tracing data
-You can manage your service ownership information with the Service Catalog even if those services are not emitting any Datadog telemetry (such as APM traces) with the [Service Definition API][7]. Specify the service ownership, on-call information, and custom tags in YAML files to reflect this information in the Service Catalog. Read [Setting Up Service Catalog][8] for more information.
-
 ## Role based access and permissions
 
 For general information, see [Role Based Access Control][9] and [Role Permissions][10]. 
