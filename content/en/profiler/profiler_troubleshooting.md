@@ -294,6 +294,18 @@ If you've configured the profiler and don't see profiles in the profile search p
 
    5. Check the other HTTP codes for possible errors such as 403 for invalid API key.
 
+4. For missing CPU or Wall time profiles only, check that the Datadog signal handler for stack walk has not been replaced:
+
+   1. Open the `DD-DotNet-Profiler-Native-<Application Name>-<pid>` log file in the `/var/log/datadog` folder.
+
+   2. Look for these two messages:
+      - `Profiler signal handler was replaced again. It will not be restored: the profiler is disabled.`
+      - `Fail to restore profiler signal handler.`
+
+   3. If one of these messages is present, it means that the application code or a third party code is repeatedly reinstalling its own signal handler over the Datadog signal handler. To avoid any further conflict, the CPU and Wall time profilers are disabled.
+
+   Note that the following message could appear, but it does not impact Datadog profiling: `Profiler signal handler has been replaced. Restoring it.` This indicates only that the Datadog signal handler is reinstalled when it was overwritten.
+
 [1]: /profiler/enabling/dotnet/?tab=linux#configuration
 
 {{% /tab %}}
@@ -355,10 +367,48 @@ Otherwise, turn on [debug mode][1] and [open a support ticket][2] with the debug
 - Application type (for example, Web application running in IIS).
 
 
-## High CPU usage when enabling the profiler
+## Reduce overhead when using the profiler
 
-The profiler has a fixed overhead. The exact value can vary but this fixed cost means that the relative overhead of the profiler can be significant in very small containers. To avoid this situation, the profiler is disabled in containers with less than 1 core.
-You can override the 1 core threshold by setting `DD_PROFILING_MIN_CORES_THRESHOLD` environment variable to a value smaller than 1. For example, a value of `0.5` allows the profiler to run in a container with at least 0.5 cores.
+### Enabling the profiler machine-wide
+
+Datadog does not recommend enabling the profiler at machine-level or for all IIS application pools, as the profiler has fixed overhead per profiled application. In order to reduce the amount of resources used by the profiler, you can:
+- Increase the allocated resources, such as increasing CPU cores.
+- Profile only specific applications by setting environment in batch files instead of directly running the application.
+- Reduce the number of IIS pools being profiled (only possible in IIS 10 or later).
+- Disable wall time profiling with the setting `DD_PROFILING_WALLTIME_ENABLED=0`.
+
+### Linux Containers
+
+The profiler has a fixed overhead. The exact value can vary but this fixed cost means that the relative overhead of the profiler can be significant in very small containers. To avoid this situation, the profiler is disabled in containers with less than one core. You can override the one core threshold by setting the `DD_PROFILING_MIN_CORES_THRESHOLD` environment variable to a value less than one. For example, a value of `0.5` allows the profiler to run in a container with at least 0.5 cores.
+
+### Disabling the profiler
+
+Since APM tracing also relies on the CLR Profiling API, if you want to stop collecting .NET profiles but continue receiving .NET traces, set the following environment variables to disable only profiling.
+
+```
+ DD_PROFILING_ENABLED=0 
+ CORECLR_ENABLE_PROFILING=1
+```
+
+## No CPU or Wall time because the application on Linux is hung
+
+If an application hangs, or otherwise becomes unresponsive on Linux, CPU and Wall time samples are no longer available, follow these steps:
+
+1. Open the `DD-DotNet-Profiler-Native-<Application Name>-<pid>` log file in the `/var/log/datadog/dotnet` folder.
+
+2. Look for `StackSamplerLoopManager::WatcherLoopIteration - Deadlock intervention still in progress for thread ...`. If this message is not present, the rest does not apply.
+
+3. If the message is found, it means that the stack walking mechanism could be deadlocked. To investigate the issue, dump the call stacks of all threads in the application. For example, to do this with the gdb debugger:
+
+   1. Install gdb.
+
+   2. Run the following command:
+      ```
+      gdb -p <process id> -batch -ex "thread apply all bt full" -ex "detach" -ex "quit"
+      ```
+
+   3. Send the resulting output to [Datadog Support][2].
+
 
 [1]: /tracing/troubleshooting/#tracer-debug-logs
 [2]: /help/

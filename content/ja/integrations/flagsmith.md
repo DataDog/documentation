@@ -1,37 +1,61 @@
 ---
+app_id: flagsmith
+app_uuid: 0ad66873-2958-4ca5-ae25-ee893b4c6e31
 assets:
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: true
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: flagsmith.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Flagsmith
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Flagsmith
+  sales_email: support@flagsmith.com
+  support_email: support@flagsmith.com
 categories:
-  - notification
-creates_events: true
-ddtype: crawler
+- notification
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/flagsmith/README.md
-display_name: Flagsmith
+- https://github.com/DataDog/integrations-extras/blob/master/flagsmith/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: flagsmith
-guid: cb56fcff-3c76-4522-9672-1c3d285728f5
 integration_id: flagsmith
 integration_title: Flagsmith
 integration_version: ''
 is_public: true
 kind: インテグレーション
-maintainer: support@flagsmith.com
-manifest_version: 1.0.0
+manifest_version: 2.0.0
 name: flagsmith
+oauth: {}
 public_title: Flagsmith
 short_description: Flagsmith のフラグ変更イベントが Datadog に表示されます
-support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Notification
+  configuration: README.md#Setup
+  description: Flagsmith のフラグ変更イベントが Datadog に表示されます
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Flagsmith
 ---
+
+
+
 ## 概要
 
 [Flagsmith][1] は、Web、モバイル、およびサーバー側のアプリケーション全体の機能管理を容易にします。Datadog Flagsmith インテグレーションにより、Datadog 内でフラグの変更に関する情報を直接表示できるようになります。

@@ -153,19 +153,41 @@ In a Notebook cell, click **Edit** to view the cell configuration in edit mode. 
 
 #### Types of content
 
-Notebooks support visualizations and text cells. Text cells are formatted with [Markdown][5], which enables the use of headings, subheadings, links, images, lists, and code blocks. Notebooks also support diagrams formatted with [MermaidJS][15].
+Notebooks support visualizations and text cells. Text cells are formatted with [Markdown][5], which enables the use of headings, subheadings, links, images, lists, and code blocks. Notebooks also support diagrams formatted with [MermaidJS][6].
 
 Graphs in notebooks support all Datadog data sources: metrics, log events, Indexed Spans, live processes, network traffic, RUM events, profiling metrics, security signals, and more. Graphs are created with the Datadog query editor. Notebooks support:
 
-* [Timeseries][6]
-* [Top List][7]
-* [Table][8]
-* [Heatmap][9]
-* [Distribution][10]
-* [List][11]
-* [Query value][12]
-* [Funnel][13]
-* [Pie][14]
+* [Timeseries][7]
+* [Top List][8]
+* [Table][9]
+* [Heatmap][10]
+* [Distribution][11]
+* [List][12]
+* [Query value][13]
+* [Funnel][14]
+* [Pie][15]
+
+### Limit edit access
+
+By default, all users have full access to notebooks.
+
+Use granular access controls to limit the [roles][16] that may edit a particular notebook:
+1. While viewing a notebook, click on the cog in the upper right. The settings menu opens.
+1. Select **Permissions**.
+1. Click **Restrict Access**.
+1. The dialog box updates to show that members of your organization have **Viewer** access by default.
+1. Use the drop-down to select one or more roles that may edit the notebook.
+1. Click **Add**.
+1. The dialog box updates to show that the role you selected has the **Editor** permission.
+1. Click **Save**
+
+**Note:** To maintain your edit access to the notebook, the system requires you to include at least one role that you are a member of before saving. 
+
+To restore general access to a notebook with restricted access, follow the steps below:
+1. While viewing the notebook, click on the cog in the upper right. The settings menu opens.
+1. Select **Permissions**.
+1. Click **Restore Full Access**.
+1. Click **Save**.
 
 ## Further Reading
 
@@ -176,13 +198,14 @@ Graphs in notebooks support all Datadog data sources: metrics, log events, Index
 [3]: https://app.datadoghq.com/notebook/template-gallery
 [4]: /dashboards/template_variables/
 [5]: https://daringfireball.net/projects/markdown/
-[6]: /dashboards/widgets/timeseries/
-[7]: /dashboards/widgets/top_list/
-[8]: /dashboards/widgets/table/
-[9]: /dashboards/widgets/heat_map/
-[10]: /dashboards/widgets/distribution/
-[11]: /dashboards/widgets/list/
-[12]: /dashboards/widgets/query_value/
-[13]: /dashboards/widgets/funnel/
-[14]: /dashboards/widgets/pie_chart/
-[15]: https://mermaid.js.org/
+[6]: https://mermaid.js.org/
+[7]: /dashboards/widgets/timeseries/
+[8]: /dashboards/widgets/top_list/
+[9]: /dashboards/widgets/table/
+[10]: /dashboards/widgets/heat_map/
+[11]: /dashboards/widgets/distribution/
+[12]: /dashboards/widgets/list/
+[13]: /dashboards/widgets/query_value/
+[14]: /dashboards/widgets/funnel/
+[15]: /dashboards/widgets/pie_chart/
+[16]: /account_management/rbac/

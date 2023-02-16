@@ -25,6 +25,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/span-based-metrics/"
     tag: "Blog"
     text: "Generate span-based metrics to track historical trends in application performance"
+  - link: "https://www.datadoghq.com/blog/apm-security-view/"
+    tag: "Blog"
+    text: "Gain visibility into risks, vulnerabilities, and attacks with APM Security View"
 aliases:
   - /tracing/faq/terminology
   - /tracing/guide/terminology

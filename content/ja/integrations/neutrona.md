@@ -15,7 +15,7 @@ assets:
     source_type_name: Neutrona
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Neutrona
   sales_email: david@neutrona.com
   support_email: david@neutrona.com
 categories:

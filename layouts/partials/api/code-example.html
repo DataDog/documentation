@@ -80,12 +80,12 @@
   <div class="card">
     <div class="card-header p-0">
       <h5 class="m-0">
-        <button class="btn btn-link {{if gt $i 0}}collapsed{{ end}}" data-toggle="collapse" data-target="#{{ $operationid | lower }}-{{ $version }}-request-example-{{ $i }}" aria-expanded="true" aria-controls="collapseOne">
-          {{ $item.description }}
+        <button class="btn btn-link {{if gt $i 0}}collapsed{{ end}}" data-bs-toggle="collapse" data-bs-target="#{{ $operationid | lower }}-{{ $version }}-request-example-{{ $i }}" aria-expanded="true" aria-controls="collapseOne">
+          {{ $item.description }} {{ partial "icon" (dict "name" "up-carrot-normal" "size" "18px") }}
         </button>
       </h5>
     </div>
-    <div id="{{ $operationid | lower }}-{{ $version }}-request-example-{{ $i }}" class="collapse {{if eq $i 0}}show{{ end }}" data-parent="#accordion-{{ $operationid | lower }}-{{ $version }}-{{ $lang.name }}">
+    <div id="{{ $operationid | lower }}-{{ $version }}-request-example-{{ $i }}" class="collapse {{if eq $i 0}}show{{ end }}" data-bs-parent="#accordion-{{ $operationid | lower }}-{{ $version }}-{{ $lang.name }}">
       <div class="card-body p-0 code-snippet">
         <div class="code-button-wrapper position-absolute">
             <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
@@ -117,7 +117,7 @@
                     {{ if gt $fileCount 1 }}
                     <div class="card-header p-0">
                       <h5 class="m-0">
-                        <button class="btn btn-link {{if gt $i 0}}collapsed{{ end}}" data-toggle="collapse" data-target="#{{ $operationid | lower }}-{{ $version }}-request-example-{{ $i }}" aria-expanded="true" aria-controls="collapseOne">
+                        <button class="btn btn-link {{if gt $i 0}}collapsed{{ end}}" data-bs-toggle="collapse" data-bs-target="#{{ $operationid | lower }}-{{ $version }}-request-example-{{ $i }}" aria-expanded="true" aria-controls="collapseOne">
                           {{ $item.description }}
                         </button>
                       </h5>
@@ -131,7 +131,7 @@
                       </h5>
                     </div>
                     {{ end }}
-                    <div id="{{ $operationid | lower }}-{{ $version }}-request-example-{{ $i }}" class="collapse {{if eq $i 0}}show{{ end }}" data-parent="#accordion-{{ $operationid | lower }}-{{ $version }}-{{ $lang.name }}">
+                    <div id="{{ $operationid | lower }}-{{ $version }}-request-example-{{ $i }}" class="collapse {{if eq $i 0}}show{{ end }}" data-bs-parent="#accordion-{{ $operationid | lower }}-{{ $version }}-{{ $lang.name }}">
                       <div class="card-body p-0 code-snippet">
                         <div class="code-button-wrapper position-absolute">
                             <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>

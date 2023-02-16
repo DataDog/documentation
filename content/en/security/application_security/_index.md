@@ -6,24 +6,33 @@ disable_sidebar: true
 aliases:
   - /security_platform/application_security
 further_reading:
-- link: "/security/application_security/setup_and_configure/#compatibility"
-  tag: "Documentation"
-  text: "Learn more about language and framework compatibility"
-- link: "https://www.datadoghq.com/blog/datadog-application-security/"
-  tag: "Blog"
-  text: "Introducing Datadog Application Security"
 - link: "/security/application_security/how-appsec-works/"
   tag: "Documentation"
   text: "How Application Security Management Works"
+- link: "/security/application_security/threats/"
+  tag: "Documentation"
+  text: "Threat Monitoring and Protection"
+- link: "/security/application_security/risk_management/"
+  tag: "Documentation"
+  text: "Risk Management"
+- link: "/security/application_security/setup_and_configure/#compatibility"
+  tag: "Documentation"
+  text: "Learn more about language and framework compatibility"
 - link: "https://www.datadoghq.com/product/security-platform/application-security-monitoring/"
   tag: "Product Page"
   text: "Datadog Application Security Management"
+- link: "https://www.datadoghq.com/blog/datadog-application-security/"
+  tag: "Blog"
+  text: "Introducing Datadog Application Security"
 - link: "https://www.datadoghq.com/blog/secure-serverless-applications-with-datadog-asm/"
   tag: "Blog"
   text: "Secure serverless applications with Datadog ASM"
 - link: "https://www.datadoghq.com/blog/securing-cloud-native-applications/"
   tag: "Blog"
   text: "Best practices for application security in cloud-native environments"
+- link: "https://www.datadoghq.com/blog/apm-security-view/"
+  tag: "Blog"
+  text: "Gain visibility into risks, vulnerabilities, and attacks with APM Security View"
 ---
 
 {{< img src="/security/application_security/app-sec-landing-page.png" alt="A security signal panel in Datadog, which displays attack flows and flame graphs" width="75%">}}
@@ -38,7 +47,7 @@ Once a security signal is triggered, quickly pivot to investigate and protect in
 
 With ASM, you can cut through the noise of continuous trace data to focus on securing and protecting your environment.
 
-Until you fully remediate the potential vulnerabilities in your application code, ASM enables you to slow down attackers by blocking their IPs temporarily or permanently, with a single click. One-click IP blocking is in private beta. Access early preview through [this form][7].
+Until you fully remediate the potential vulnerabilities in your application code, ASM enables you to slow down attackers by blocking their IPs temporarily or permanently, with a single click. One-click blocking is in beta.
 
 ## Understanding how application security is implemented in Datadog
 
@@ -54,6 +63,12 @@ To start configuring your environment to detect and protect threats with ASM, fo
 
 In the [Security Signals Explorer][6], click on any security signal to see what happened and the suggested steps to mitigate the attack. In the same panel, view traces with their correlated attack flow and request information to gain further context.
 
+## Investigate risk introduced in upstream open source libraries and dependencies
+
+<div class="alert alert-info">Application Security Risk Management is in beta.</a></div>
+
+[ASM Risk Management][8] shows you when your services are at risk because they use or have dependencies on open source libraries that have known vulnerabilities. Investigate vulnerability findings and secure your software by following remediation advice or researching the cause of the vulnerability.
+
 ## Next steps
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -65,3 +80,4 @@ In the [Security Signals Explorer][6], click on any security signal to see what 
 [5]: /security/application_security/getting_started/
 [6]: /security/explorer/
 [7]: https://dashcon.io/appsec
+[8]: /security/application_security/risk_management/

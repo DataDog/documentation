@@ -19,6 +19,10 @@
     "name": "Cloud Workload Security",
     "description": "Workload activity security rules for generating events using the Datadog security Agent."
   },
+  "cloudflare-integration": {
+    "name": "Cloudflare Integration",
+    "description": "Configure your Datadog Cloudflare integration directly through the Datadog API."
+  },
   "confluent-cloud": {
     "name": "Confluent Cloud",
     "description": "Configure your Datadog Confluent Cloud integration directly through the Datadog API."
@@ -30,6 +34,10 @@
   "events": {
     "name": "Events",
     "description": "The events service allows you to programmatically post events to the event stream\nand fetch events from the event stream. Events are limited to 4000 characters.\nIf an event is sent out with a message containing more than 4000 characters, only the\nfirst 4000 characters are displayed."
+  },
+  "fastly-integration": {
+    "name": "Fastly Integration",
+    "description": "Configure your Datadog Fastly integration directly through the Datadog API."
   },
   "incident-services": {
     "name": "Incident Services",
@@ -67,6 +75,10 @@
     "name": "Metrics",
     "description": "The metrics endpoint allows you to:\n\n- Post metrics data so it can be graphed on Datadog’s dashboards\n- Query metrics from any time period (timeseries and scalar)\n- Modify tag configurations for metrics\n- View tags and volumes for metrics\n\n**Note**: A graph can only contain a set number of points\nand as the timeframe over which a metric is viewed increases,\naggregation between points occurs to stay below that set number.\n\nThe Post, Patch, and Delete `manage_tags` API methods can only be performed by\na user who has the `Manage Tags for Metrics` permission."
   },
+  "monitors": {
+    "name": "Monitors",
+    "description": "[Monitors](https://docs.datadoghq.com/monitors) allow you to watch a metric or check that you care about and\nnotifies your team when a defined threshold has exceeded.\n\nFor more information, see [Creating Monitors](https://docs.datadoghq.com/monitors/create/types/) and\n[Tag Policies](https://docs.datadoghq.com/monitors/settings/)."
+  },
   "opsgenie-integration": {
     "name": "Opsgenie Integration",
     "description": "Configure your [Datadog Opsgenie integration](https://docs.datadoghq.com/integrations/opsgenie/)\ndirectly through the Datadog API."
@@ -82,6 +94,10 @@
   "rum": {
     "name": "RUM",
     "description": "Search or aggregate your RUM events over HTTP."
+  },
+  "restriction-policies": {
+    "name": "Restriction Policies",
+    "description": "A restriction policy defines the access control rules for a resource, mapping a set of relations\n(such as editor and viewer) to a set of allowed principals (such as roles). The restriction policy\ndetermines who is authorized to perform what actions on the resource."
   },
   "roles": {
     "name": "Roles",

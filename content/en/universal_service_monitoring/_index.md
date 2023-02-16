@@ -1,7 +1,7 @@
 ---
 title: Universal Service Monitoring
 kind: documentation
-aliases: 
+aliases:
 - /tracing/universal_service_monitoring/
 further_reading:
 - link: "https://www.datadoghq.com/blog/universal-service-monitoring-datadog/"
@@ -37,8 +37,10 @@ Required Agent version
 
 Your containerized service must be running on one of the following supported platforms
 : Linux Kernel 4.14 and greater<br/>
-CentOS or RHEL 8.0 and greater<br/>
-IIS on Windows 2012 R2 and greater
+CentOS or RHEL 8.0 and greater
+
+Supported Windows platforms
+: IIS on Windows 2012 R2 and greater
 
 Supported application-layer protocols
 : HTTP<br/>
@@ -50,7 +52,10 @@ If you have feedback about what platforms and protocols you'd like to see suppor
 
 ### Prerequisites
 
-- Your service is running in a container.
+- If on Linux:
+    - Your service is running in a container.
+- If on Windows and using IIS:
+    - Your service is running on a virtual machine.
 - Datadog Agent is installed alongside your service. Installing a tracing library is _not_ required.
 - The `env` tag for [Unified Service Tagging][1] has been applied to your deployment. The `service` and `version` tags are optional.
 
@@ -70,6 +75,14 @@ datadog:
   ...
   serviceMonitoring:
     enabled: true
+```
+
+If your cluster is running Google Container-Optimized OS (COS), add the following to your values file as well:
+
+```
+providers:
+  gke:
+    cos: true
 ```
 
 {{% /tab %}}
@@ -162,7 +175,40 @@ datadog:
              mountPath: /sys/kernel/debug
            - name: sysprobe-socket-dir
              mountPath: /var/run/sysprobe
+           - name: modules
+             mountPath: /lib/modules
+             readOnly: true
+           - name: src
+             mountPath: /usr/src
+             readOnly: true
+           - name: runtime-compiler-output-dir
+             mountPath: /var/tmp/datadog-agent/system-probe/build
+           - name: kernel-headers-download-dir
+             mountPath: /var/tmp/datadog-agent/system-probe/kernel-headers
+             readOnly: false
+           - name: apt-config-dir
+             mountPath: /host/etc/apt
+             readOnly: true
+           - name: yum-repos-dir
+             mountPath: /host/etc/yum.repos.d
+             readOnly: true
+           - name: opensuse-repos-dir
+             mountPath: /host/etc/zypp
+             readOnly: true
+           - name: public-key-dir
+             mountPath: /host/etc/pki
+             readOnly: true
+           - name: yum-vars-dir
+             mountPath: /host/etc/yum/vars
+             readOnly: true
+           - name: dnf-vars-dir
+             mountPath: /host/etc/dnf/vars
+             readOnly: true
+           - name: rhel-subscription-dir
+             mountPath: /host/etc/rhsm
+             readOnly: true
    ```
+
    And add the following volumes to your manifest:
    ```
    volumes:
@@ -171,7 +217,55 @@ datadog:
      - name: debugfs
        hostPath:
          path: /sys/kernel/debug
+     - hostPath:
+         path: /lib/modules
+       name: modules
+     - hostPath:
+         path: /usr/src
+       name: src
+     - hostPath:
+         path: /var/tmp/datadog-agent/system-probe/build
+       name: runtime-compiler-output-dir
+     - hostPath:
+         path: /var/tmp/datadog-agent/system-probe/kernel-headers
+       name: kernel-headers-download-dir
+     - hostPath:
+         path: /etc/apt
+       name: apt-config-dir
+     - hostPath:
+         path: /etc/yum.repos.d
+       name: yum-repos-dir
+     - hostPath:
+         path: /etc/zypp
+       name: opensuse-repos-dir
+     - hostPath:
+         path: /etc/pki
+       name: public-key-dir
+     - hostPath:
+         path: /etc/yum/vars
+       name: yum-vars-dir
+     - hostPath:
+         path: /etc/dnf/vars
+       name: dnf-vars-dir
+     - hostPath:
+         path: /etc/rhsm
+       name: rhel-subscription-dir
+
    ```
+
+    **Note**: If your cluster is running on Google Container-Optimized OS (COS), you will need to remove the `src` mount. In order to do this, remove the following from your container definition:
+   ```
+    - name: src
+      mountPath: /usr/src
+      readOnly: true
+   ```
+    and the following from your manifest:
+   ```
+    - hostPath:
+        path: /usr/src
+      name: src
+   ```
+
 5. For optional HTTPS support, add the following to the `system-probe` container:
 
    ```
@@ -198,7 +292,25 @@ datadog:
 Add the following to your `docker run` command:
 
 ```
+docker run --cgroupns host \
+--pid host \
+-e DD_API_KEY="<DATADOG_API_KEY>" \
+-e DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true \
+-v /var/run/docker.sock:/var/run/docker.sock:ro \
+-v /proc/:/host/proc/:ro \
+-v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
 -v /sys/kernel/debug:/sys/kernel/debug \
+-v /lib/modules:/lib/modules:ro \
+-v /usr/src:/usr/src:ro \
+-v /var/tmp/datadog-agent/system-probe/build:/var/tmp/datadog-agent/system-probe/build \
+-v /var/tmp/datadog-agent/system-probe/kernel-headers:/var/tmp/datadog-agent/system-probe/kernel-headers \
+-v /etc/apt:/host/etc/apt:ro \
+-v /etc/yum.repos.d:/host/etc/yum.repos.d:ro \
+-v /etc/zypp:/host/etc/zypp:ro \
+-v /etc/pki:/host/etc/pki:ro \
+-v /etc/yum/vars:/host/etc/yum/vars:ro \
+-v /etc/dnf/vars:/host/etc/dnf/vars:ro \
+-v /etc/rhsm:/host/etc/rhsm:ro \
 -e DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true \
 --security-opt apparmor:unconfined \
 --cap-add=SYS_ADMIN \
@@ -208,7 +320,8 @@ Add the following to your `docker run` command:
 --cap-add=NET_BROADCAST \
 --cap-add=NET_RAW \
 --cap-add=IPC_LOCK \
---cap-add=CHOWN
+--cap-add=CHOWN \
+gcr.io/datadoghq/agent:latest
 ```
 
 For optional HTTPS support, also add:
@@ -230,7 +343,22 @@ services:
     environment:
      - DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED: 'true'
     volumes:
+     - /var/run/docker.sock:/var/run/docker.sock:ro
+     - /proc/:/host/proc/:ro
+     - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
      - /sys/kernel/debug:/sys/kernel/debug
+     - /sys/kernel/debug:/sys/kernel/debug
+     - /lib/modules:/lib/modules
+     - /usr/src:/usr/src
+     - /var/tmp/datadog-agent/system-probe/build:/var/tmp/datadog-agent/system-probe/build
+     - /var/tmp/datadog-agent/system-probe/kernel-headers:/var/tmp/datadog-agent/system-probe/kernel-headers
+     - /etc/apt:/host/etc/apt
+     - /etc/yum.repos.d:/host/etc/yum.repos.d
+     - /etc/zypp:/host/etc/zypp
+     - /etc/pki:/host/etc/pki
+     - /etc/yum/vars:/host/etc/yum/vars
+     - /etc/dnf/vars:/host/etc/dnf/vars
+     - /etc/rhsm:/host/etc/rhsm
     cap_add:
      - SYS_ADMIN
      - SYS_RESOURCE
@@ -258,6 +386,16 @@ services:
 ```
 
 {{% /tab %}}
+{{% tab "Docker Swarm" %}}
+
+As `Docker Swarm` does not yet support the changing of `security_opt`, the operating system
+must not have a running `apparmor` instance.
+
+If the operating system does not have a running `apparmor` instance, then use the same `docker-compose.yml` file from the `Docker-Compose` [section][1] beside the field `security_opt`.
+
+[1]: /universal_service_monitoring/?tab=dockercompose#enabling-universal-service-monitoring
+
+{{% /tab %}}
 {{% tab "Configuration files (Linux)" %}}
 
 If you are not using Helm Charts or environment variables, set the following in your `system-probe.yaml` file:
@@ -277,11 +415,292 @@ DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true
 ```
 
 {{% /tab %}}
+{{% tab "Chef" %}}
+
+Set the following attributes on your nodes:
+
+```rb
+node["datadog"]["system_probe"]["service_monitoring_enabled"] = true
+```
+
+{{% /tab %}}
+{{% tab "Puppet" %}}
+
+Set `service_monitoring_enabled`:
+
+```conf
+class { 'datadog_agent::system_probe':
+    service_monitoring_enabled => true,
+}
+```
+
+{{% /tab %}}
+{{% tab "Ansible" %}}
+
+Add the following attributes in your playbook:
+
+```yaml
+service_monitoring_config:
+  enabled: true
+```
+
+{{% /tab %}}
+
+{{% tab "ECS" %}}
+
+For ECS, enable USM and the system probe with the following JSON task definition. Deploy the task definition as a [daemon service][1].
+
+```json
+{
+  "containerDefinitions": [
+    {
+      "name": "datadog-agent",
+      "image": "public.ecr.aws/datadog/agent:7",
+      "cpu": 500,
+      "memory": 1024,
+      "essential": true,
+      "mountPoints": [
+        ...
+        {
+          "containerPath": "/sys/kernel/debug",
+          "sourceVolume": "sys_kernel_debug"
+        },
+        {
+          "containerPath": "/host/proc",
+          "sourceVolume": "proc"
+        },
+        {
+          "containerPath": "/var/run/docker.sock",
+          "sourceVolume": "var_run_docker_sock"
+        },
+        {
+          "containerPath": "/host/sys/fs/cgroup",
+          "sourceVolume": "sys_fs_cgroup"
+        },
+        {
+          "readOnly": true,
+          "containerPath": "/var/lib/docker/containers",
+          "sourceVolume": "var_lib_docker_containers"
+        },
+        {
+          "containerPath": "/lib/modules",
+          "sourceVolume": "lib_modules"
+        },
+        {
+          "containerPath": "/usr/src",
+          "sourceVolume": "usr_src"
+        },
+        {
+          "containerPath": "/var/tmp/datadog-agent/system-probe/build",
+          "sourceVolume": "var_tmp_datadog_agent_system_probe_build"
+        },
+        {
+          "containerPath": "/var/tmp/datadog-agent/system-probe/kernel-headers",
+          "sourceVolume": "var_tmp_datadog_agent_system_probe_kernel_headers"
+        },
+        {
+          "containerPath": "/host/etc/apt",
+          "sourceVolume": "etc_apt"
+        },
+        {
+          "containerPath": "/host/etc/yum.repos.d",
+          "sourceVolume": "etc_yum_repos_d"
+        },
+        {
+          "containerPath": "/host/etc/zypp",
+          "sourceVolume": "etc_zypp"
+        },
+        {
+          "containerPath": "/host/etc/pki",
+          "sourceVolume": "etc_pki"
+        },
+        {
+          "containerPath": "/host/etc/yum/vars",
+          "sourceVolume": "etc_yum_vars"
+        },
+        {
+          "containerPath": "/host/etc/dnf/vars",
+          "sourceVolume": "etc_dnf_vars"
+        },
+        {
+          "containerPath": "/host/etc/rhsm",
+          "sourceVolume": "etc_rhsm"
+        }
+      ],
+      "environment": [
+        {
+          "name": "DD_API_KEY",
+          "value": "<YOUR_DATADOG_API_KEY>"
+        },
+        ...
+        {
+          "name": "DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED",
+          "value": "true"
+        }
+      ],
+      "linuxParameters": {
+        "capabilities": {
+          "add": [
+            "SYS_ADMIN",
+            "SYS_RESOURCE",
+            "SYS_PTRACE",
+            "NET_ADMIN",
+            "NET_BROADCAST",
+            "NET_RAW",
+            "IPC_LOCK",
+            "CHOWN"
+          ]
+        }
+      }
+    }
+  ],
+  "requiresCompatibilities": [
+    "EC2"
+  ],
+  "volumes": [
+    ...
+    {
+      "host": {
+        "sourcePath": "/sys/kernel/debug"
+      },
+      "name": "sys_kernel_debug"
+    },
+    {
+      "host": {
+        "sourcePath": "/proc/"
+      },
+      "name": "proc"
+    },
+    {
+      "host": {
+        "sourcePath": "/var/run/docker.sock"
+      },
+      "name": "var_run_docker_sock"
+    },
+    {
+      "host": {
+        "sourcePath": "/sys/fs/cgroup/"
+      },
+      "name": "sys_fs_cgroup"
+    },
+    {
+      "host": {
+        "sourcePath": "/var/lib/docker/containers/"
+      },
+      "name": "var_lib_docker_containers"
+    },
+    {
+      "host": {
+        "sourcePath": "/lib/modules"
+      },
+      "name": "lib_modules"
+    },
+    {
+      "host": {
+        "sourcePath": "/usr/src"
+      },
+      "name": "usr_src"
+    },
+    {
+      "host": {
+        "sourcePath": "/var/tmp/datadog-agent/system-probe/build"
+      },
+      "name": "var_tmp_datadog_agent_system_probe_build"
+    },
+    {
+      "host": {
+        "sourcePath": "/var/tmp/datadog-agent/system-probe/kernel-headers"
+      },
+      "name": "var_tmp_datadog_agent_system_probe_kernel_headers"
+    },
+    {
+      "host": {
+        "sourcePath": "/etc/apt"
+      },
+      "name": "etc_apt"
+    },
+    {
+      "host": {
+        "sourcePath": "/etc/yum.repos.d"
+      },
+      "name": "etc_yum_repos_d"
+    },
+    {
+      "host": {
+        "sourcePath": "/etc/zypp"
+      },
+      "name": "etc_zypp"
+    },
+    {
+      "host": {
+        "sourcePath": "/etc/pki"
+      },
+      "name": "etc_pki"
+    },
+    {
+      "host": {
+        "sourcePath": "/etc/yum/vars"
+      },
+      "name": "etc_yum_vars"
+    },
+    {
+      "host": {
+        "sourcePath": "/etc/dnf/vars"
+      },
+      "name": "etc_dnf_vars"
+    },
+    {
+      "host": {
+        "sourcePath": "/etc/rhsm"
+      },
+      "name": "etc_rhsm"
+    }
+  ],
+  "family": "datadog-agent-task"
+}
+```
+
+If the operating system image is Ubuntu or Debian, add the following after `environment`:
+
+```yaml
+"dockerSecurityOptions": [
+  "apparmor:unconfined"
+]
+```
+
+For optional HTTPS support, also add:
+
+```yaml
+"mountPoints": [
+  ...
+  {
+    "containerPath": "/host/root",
+    "sourceVolume": "host_root"
+  },
+  ...
+]
+...
+"volumes": [
+  ...
+  {
+    "host": {
+      "sourcePath": "/"
+    },
+    "name": "host_root"
+  },
+  ...
+]
+```
+
+
+[1]: /containers/amazon_ecs/?tab=awscli#run-the-agent-as-a-daemon-service
+{{% /tab %}}
+
 {{% tab "Windows" %}}
 
 **For services running on IIS:**
 
-1. Install the [Datadog Agent][1] (version 6.40 or 7.40 and later) with the network driver component enabled. During installation, pass `ADDLOCAL="MainApplication,NPM"` to the `msiexec` command, or select **Network Performance Monitoring** when running the Agent installation through the UI.
+1. Install the [Datadog Agent][1] (version 6.41 or 7.41 and later) with the network driver component enabled. During installation, pass `ADDLOCAL="MainApplication,NPM"` to the `msiexec` command, or select **Network Performance Monitoring** when running the Agent installation through the UI.
 
 2. Edit `C:\ProgramData\Datadog\system-probe.yaml` to set the enabled flag to `true`:
 
@@ -315,7 +734,7 @@ After enabling Universal Service Monitoring, you can:
 
 - Navigate to **APM** > **Service Catalog** or **APM** > **Service Map** to [visualize your services and their dependencies][3].
 
-- Click into specific Service pages to see golden signal metrics (requests, errors, and duration), and correlate these against recent code changes with [Deployment Tracking][2]. 
+- Click into specific Service pages to see golden signal metrics (requests, errors, and duration), and correlate these against recent code changes with [Deployment Tracking][2].
 
 - Create [monitors][4], [dashboards][5], and [SLOs][6] using the `universal.http.*` metrics.
 

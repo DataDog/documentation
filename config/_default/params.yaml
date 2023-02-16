@@ -101,7 +101,6 @@ header_scripts:
   - marketo: false
 
 footer_scripts:
-  - snowplow: false
 
 # Docs allowed regions for redirecting
 allowedRegions:

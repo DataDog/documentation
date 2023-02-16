@@ -26,7 +26,6 @@ author:
 categories:
 - data store
 - log collection
-- autodiscovery
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ibm_db2/README.md
 display_on_public_website: true
@@ -55,7 +54,6 @@ tile:
   - Supported OS::Windows
   - Category::Data Store
   - Category::Log Collection
-  - Category::Autodiscovery
   configuration: README.md#Setup
   description: Surveillez les métriques de tablespace et de pool de mémoires tampon
     ainsi que d'autres métriques depuis votre base de données IBM Db2.
@@ -73,7 +71,7 @@ tile:
 
 Ce check surveille [IBM Db2][2] avec l'Agent Datadog.
 
-## Configuration
+## Implémentation
 
 ### Installation
 
@@ -227,11 +225,11 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 {{< get-metrics-from-git "ibm_db2" >}}
 
 
-### Events
+### Événements
 
 - `ibm_db2.tablespace_state_change` se déclenche à chaque changement d'état d'un tablespace.
 
-### Service Checks
+### Checks de service
 {{< get-service-checks-from-git "ibm_db2" >}}
 
 
@@ -239,7 +237,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 
 Besoin d'aide ? Contactez [l'assistance Datadog][6].
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## Pour aller plus loin
 
 Documentation, liens et articles supplémentaires utiles :
 

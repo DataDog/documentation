@@ -2,18 +2,18 @@
 title: Tracking User Actions
 kind: documentation
 further_reading:
-  - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
-    tag: "Blog"
-    text: "Introducing Datadog Real User Monitoring"
-  - link: "/real_user_monitoring/explorer/"
-    tag: "Documentation"
-    text: "Explore your views within Datadog"
-  - link: "/real_user_monitoring/explorer/visualize/"
-    tag: "Documentation"
-    text: "Apply visualizations on your events"
-  - link: "/real_user_monitoring/dashboards/"
-    tag: "Documentation"
-    text: "Learn about RUM dashboards"
+    - link: 'https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/'
+      tag: 'Blog'
+      text: 'Introducing Datadog Real User Monitoring'
+    - link: '/real_user_monitoring/explorer/'
+      tag: 'Documentation'
+      text: 'Explore your views within Datadog'
+    - link: '/real_user_monitoring/explorer/visualize/'
+      tag: 'Documentation'
+      text: 'Apply visualizations on your events'
+    - link: '/real_user_monitoring/dashboards/'
+      tag: 'Documentation'
+      text: 'Learn about RUM dashboards'
 ---
 
 ## Overview
@@ -74,9 +74,9 @@ For example:
 <a class="btn btn-default" href="#" role="button" data-dd-action-name="Login button">Try it out!</a>
 
 <div class="alert alert-danger" role="alert" data-dd-action-name="Dismiss alert">
-  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-  <span class="sr-only">Error:</span>
-  Enter a valid email address
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    <span class="visually-hidden">Error:</span>
+    Enter a valid email address
 </div>
 ```
 

@@ -125,7 +125,7 @@ If you're using:
 
 #### DogStatsD
 
-If you're using [DogStatsD][8], add in a Host Port mapping for 8125/udp to your Dataog Agent's container definition:
+If you're using [DogStatsD][8], add in a Host Port mapping for 8125/udp to your Datadog Agent's container definition:
 ```json
 "portMappings": [
   {
@@ -136,9 +136,11 @@ If you're using [DogStatsD][8], add in a Host Port mapping for 8125/udp to your 
 ]
 ```
 
-You can also set the environment variable `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` to `true`.
+In addition to this port mapping, set the environment variable `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` to `true`.
 
-For APM and DogStatsD double check the security group settings on your EC2 instances. Make sure these ports are not open to the public. Datadog recommends using the host's private IP to route data from the application containers to the Datadog Agent container.
+This setup allows the DogStatsD traffic to be routed from the application containers, through the host and host port, to the Datadog Agent container. However, the application container must use the host's private IP address for this traffic. This can be enabled by setting the environment variable `DD_AGENT_HOST` to the private IP address of the EC2 instance, which can be retrieved from the Instance Metadata Service (IMDS). Alternatively, this can be set in the code during initialization. The implementation for DogStatsD is the same as for APM, see [configure the Trace Agent endpoint][17] for examples of setting the Agent endpoint.
+
+Ensure that the security group settings on your EC2 instances do not publicly expose the ports for APM and DogStatsD.
 
 #### Process collection
 
@@ -174,7 +176,7 @@ Live Container data is automatically collected by the Datadog Agent container. T
        "environment": [
          (...)
          {
-           "name": "DD_SYSTEM_PROBE_ENABLED",
+           "name": "DD_SYSTEM_PROBE_NETWORK_ENABLED",
            "value": "true"
          }
        ],
@@ -242,6 +244,7 @@ Need help? Contact [Datadog support][11].
 [14]: https://app.datadoghq.com/organization-settings/api-keys
 [15]: https://www.datadoghq.com/blog/amazon-ecs-anywhere-monitoring/
 [16]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data-tutorial.html
+[17]: /containers/amazon_ecs/apm/?tab=ec2metadataendpoint#configure-the-trace-agent-endpoint
 [20]: /resources/json/datadog-agent-ecs.json
 [21]: /resources/json/datadog-agent-ecs1.json
 [22]: /resources/json/datadog-agent-ecs-win.json

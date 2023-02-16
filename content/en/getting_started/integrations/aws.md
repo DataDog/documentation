@@ -74,7 +74,7 @@ Before getting started, ensure you have the following prerequisites:
     * secretsmanager:CreateSecret
     * secretsmanager:GetSecretValue
     * secretsmanager:PutSecretValue
-    * serverless:CreateCloudFormationTemplate
+    * serverlessrepo:CreateCloudFormationTemplate
 
 ## Setup
 

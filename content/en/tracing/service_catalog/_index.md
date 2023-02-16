@@ -16,6 +16,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/manage-service-catalog-categories-with-service-definition-json-schema/"
   tag: "Blog"
   text: "Manage Service Catalog entries with the Service Definition JSON Schema"
+- link: "https://www.datadoghq.com/blog/apm-security-view/"
+  tag: "Blog"
+  text: "Gain visibility into risks, vulnerabilities, and attacks with APM Security View"
 ---
 
 
@@ -37,6 +40,7 @@ The Service Catalog is useful for:
 - Providing engineering leadership with a high-level view of reliability practices across teams and services.
 - Spotting issues like missing SLOs, monitors, or services without ownership.
 - Proactively identifying services exposed to application attacks.
+- Reducing application risks by finding and fixing known security vulnerabilities in the dependencies of your services.
 
 ## Browse the Service Catalog
 
@@ -99,12 +103,15 @@ The **Performance** tab provides several ways to view how your services are perf
 Click the Settings icon on the right hand corner to hide metric columns from the service list.
 
 ### Security view
-The **Security** tab provides several ways to view how your services are targeted by attackers. Sort the table by clicking columns to reveal services that:
+The **Security tab** provides several ways to assess and improve the security posture of your services. This includes understanding the number and severity of known security vulnerabilities in the open source libraries, and viewing how your services are targeted by attackers. Sort the table by clicking columns to reveal services that:
 
+- Expose known security vulnerabilities, including the individual severities.
 - Are receiving the most attack attempts.
 - Are targeted by the most attackers.
 - Have the most severe threats, where the services are impacted by the attacks. 
 - Are monitored and protected by [Application Security Management][11]
+
+To access additional details describing security vulnerabilities and signals, click on the service row to open a detailed side panel. Alternatively, click on the pop-over **View Service Details** button, which opens the service page, and in turn, its security tab.
 
 Click the Settings icon on the right hand corner to hide metric columns from the service list.
 
@@ -115,52 +122,13 @@ Clicking on a service opens a side panel with details including:
 - **Ownership information** from the service definition such as links to team contacts, source code, and supplemental information like documentation and dashboards.
 - **Reliability information** including deployment status, SLOs, ongoing incidents, and error information.
 - **Performance graphs** showing requests, errors, latency, and time spent by downstream services.
-- **Security information** including timeline and type of attacks, identify of attackers, and security threats impacting your services.
+- **Security information** including known vulnerabilities exposed in the service’s libraries, the timeline and type of attacks, identity of attackers, and security threats impacting your services.
 - **Configuration completeness status** for Datadog products that can collect data for the service.
 - **Service definition** in YAML with a link to the service's source code.
 - An interactive service map displaying services upstream and downstream from this service.
 
 
 Click **View Related** and select a page from the dropdown menu to navigate into related pages in Datadog, such as the APM Service page and service map for this service, or related telemetry data pages, such as Distributed Tracing, Infrastructure, Network Performance, Log Management, RUM, and Continuous Profiler.
-
-## Service definitions
-
-A service is an independent, deployable unit of software. Datadog [Unified Service Tagging][6], and the `DD_SERVICE` tag, provides a standard way to manage and monitor services consistently across multiple telemetry types including infrastructure metrics, logs, and traces. To define a service using additional criteria, you can customize a service definition that fits your architectural style.
-
-Service definitions include the following elements which are all optional (except the service name):
-
-Service name
-: An identifier for the service, unique within Datadog. By default, this is the `DD_SERVICE` value from incoming data.
-
-Team
-: The name of the team responsible for developing and maintaining the service.
-
-Contacts
-: One or more ways to contact the team, such as Slack channels or email addresses.
-
-Links
-: A list of links to important resources for the service, such as runbooks.
-
-Repos
-: A list of source control repositories that contain source code and related files for maintaining, testing, and deploying the service.
-
-Docs
-: Links to documentation for the service.
-
-Tags
-: Like all Datadog tags, these help you find, filter, and group whatever they are applied to, such as service definitions.
-
-Integrations
-: Custom strings to connect integrations such as PagerDuty for identifying the service on-call.
-
-## Enriching an existing APM service
-
-If you already use APM to trace your applications, add information about those services. Initially, APM-monitored services listed on the Service Catalog page have a gray check mark.
-
-Add service ownership information such as the team name, Slack channels, and source code repositories by pushing a YAML file with the POST endpoint to the [Service Definition API][7]. Read [Setting Up Service Catalog][8] for more information.
-
-## Registering a new service
-You can manage your service ownership information with the Service Catalog even if those services are not emitting any Datadog telemetry (such as APM traces) with the [Service Definition API][7]. Specify the service ownership, on-call information, and custom tags in YAML files to reflect this information in the Service Catalog. Read [Setting Up Service Catalog][8] for more information.
 
 ## Role based access and permissions
 

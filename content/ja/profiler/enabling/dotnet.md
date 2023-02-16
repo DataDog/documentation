@@ -44,11 +44,18 @@ Windows Server バージョン 2012 以降
 .NET 6<br/>
 .NET 7
 <div class="alert alert-warning">
-  <strong>注:</strong> ロック競合とアロケーションプロファイリングのベータ版は、.NET 5+ でのみ利用可能です。
+  <strong>注:</strong> ロック競合のベータ版は .NET 5+ のみ、アロケーションプロファイリングは .NET 6+ のみです。
 </div>
 
 対応言語
 : C#、F#、Visual Basic など、.NET ランタイムをターゲットとするあらゆる言語。
+
+以下のプロファイリング機能は、`dd-trace-dotnet` ライブラリの以下の最小バージョンで利用可能です。
+
+|      機能         | 必要な `dd-trace-dotnet` のバージョン          |
+|----------------------|-----------------------------------------|
+| [Code Hotspots][12]        | 2.7.0+                       |
+| [Endpoint Profiling][13]            | 2.15.0+                       |
 
 ## APM に Datadog Agent を構成する
 
@@ -355,3 +362,5 @@ IIS 10 以降では、<a href="https://docs.microsoft.com/en-us/iis/get-started/
 [2]: https://app.datadoghq.com/account/settings?agent_version=6#agent
 [3]: /ja/getting_started/tagging/unified_service_tagging
 [4]: /ja/getting_started/profiler/
+[12]: /ja/profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
+[13]: /ja/profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints

@@ -77,11 +77,11 @@ export function setMobileNav () {
     const dataPath = window.location.pathname.slice(1,-1)
     let mobileSelection = ''
     // redirect the AGENT/aggregating agent path to observability_pipelines/integrations/... on mobile nav
-    if(dataPath.includes('observability_pipelines/integrations/integrate_vector_with_datadog')){
+    if(dataPath.includes('observability_pipelines/production_deployment_overview/integrate_datadog_and_the_observability_pipelines_worker')){
         const observabilityPipelineMobile = document.querySelector('#mobile-nav a[data-path$="observability_pipelines"]');
 
         mobileSelection = observabilityPipelineMobile.nextElementSibling.querySelector(
-            'a[data-path*="observability_pipelines/integrations/integrate_vector_with_datadog"]'
+            'a[data-path*="observability_pipelines/production_deployment_overview/integrate_datadog_and_the_observability_pipelines_worker"]'
         );
     }else{
         mobileSelection = document.querySelector(`#mobile-nav a[data-path="${dataPath}"]`) || false

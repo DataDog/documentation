@@ -61,7 +61,7 @@ Usage metrics are estimates of your current Datadog usage in near real-time. The
 
 - Graph your estimated usage.
 - Create monitors around your estimated usage.
-- Get instant alerts of spikes or drops in your usage.
+- Get instant alerts about spikes or drops in your usage.
 - Assess the potential impact of code changes on your usage in near real-time.
 
 Log Management usage metrics come with three tags that can be used for more granular monitoring:

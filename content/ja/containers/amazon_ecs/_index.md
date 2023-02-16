@@ -123,7 +123,7 @@ aws ecs register-task-definition --cli-input-json <path to datadog-agent-ecs.jso
 - ログ管理を使用している場合は、[ログ収集ドキュメント][7]とサンプル [datadog-agent-ecs-logs.json][24] を参照してください。
 
 #### DogStatsD
-[DogStatsD][8] を使用している場合、以下のように Dataog Agent のコンテナ定義に 8125/udp のホストポートマッピングを追加することができます。
+[DogStatsD][8] を使用している場合、以下のように Datadog Agent のコンテナ定義に 8125/udp のホストポートマッピングを追加することができます。
 ```json
 "portMappings": [
   {
@@ -171,7 +171,7 @@ Live Container のデータは、Datadog Agent コンテナによって自動的
        "environment": [
          (...)
          {
-           "name": "DD_SYSTEM_PROBE_ENABLED",
+           "name": "DD_SYSTEM_PROBE_NETWORK_ENABLED",
            "value": "true"
          }
        ],

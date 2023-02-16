@@ -1,16 +1,4 @@
 {
-  "ListAuditLogs": [
-    {
-      "group": "audit",
-      "suffix": "",
-      "description": "Get a list of Audit Logs events returns \"OK\" response"
-    },
-    {
-      "group": "audit",
-      "suffix": "_1275402458",
-      "description": "Get a list of Audit Logs events returns \"OK\" response with pagination"
-    }
-  ],
   "SearchAuditLogs": [
     {
       "group": "audit",
@@ -30,13 +18,6 @@
       "description": "Create an AuthN Mapping returns \"OK\" response"
     }
   ],
-  "DeleteAuthNMapping": [
-    {
-      "group": "authn_mappings",
-      "suffix": "",
-      "description": "Delete an AuthN Mapping returns \"OK\" response"
-    }
-  ],
   "UpdateAuthNMapping": [
     {
       "group": "authn_mappings",
@@ -44,37 +25,11 @@
       "description": "Edit an AuthN Mapping returns \"OK\" response"
     }
   ],
-  "GetAuthNMapping": [
-    {
-      "group": "authn_mappings",
-      "suffix": "",
-      "description": "Get an AuthN Mapping by UUID returns \"OK\" response"
-    }
-  ],
-  "ListAuthNMappings": [
-    {
-      "group": "authn_mappings",
-      "suffix": "",
-      "description": "List all AuthN Mappings returns \"OK\" response"
-    }
-  ],
   "AggregateCIAppPipelineEvents": [
     {
       "group": "ci_visibility_pipelines",
       "suffix": "",
       "description": "Aggregate pipelines events returns \"OK\" response"
-    }
-  ],
-  "ListCIAppPipelineEvents": [
-    {
-      "group": "ci_visibility_pipelines",
-      "suffix": "",
-      "description": "Get a list of pipelines events returns \"OK\" response"
-    },
-    {
-      "group": "ci_visibility_pipelines",
-      "suffix": "_1270618359",
-      "description": "Get a list of pipelines events returns \"OK\" response with pagination"
     }
   ],
   "SearchCIAppPipelineEvents": [
@@ -96,18 +51,6 @@
       "description": "Aggregate tests events returns \"OK\" response"
     }
   ],
-  "ListCIAppTestEvents": [
-    {
-      "group": "ci_visibility_tests",
-      "suffix": "",
-      "description": "Get a list of tests events returns \"OK\" response"
-    },
-    {
-      "group": "ci_visibility_tests",
-      "suffix": "_3852605281",
-      "description": "Get a list of tests events returns \"OK\" response with pagination"
-    }
-  ],
   "SearchCIAppTestEvents": [
     {
       "group": "ci_visibility_tests",
@@ -127,34 +70,6 @@
       "description": "Create a Cloud Workload Security Agent rule returns \"OK\" response"
     }
   ],
-  "DeleteCloudWorkloadSecurityAgentRule": [
-    {
-      "group": "cloud_workload_security",
-      "suffix": "",
-      "description": "Delete a Cloud Workload Security Agent rule returns \"OK\" response"
-    }
-  ],
-  "GetCloudWorkloadSecurityAgentRule": [
-    {
-      "group": "cloud_workload_security",
-      "suffix": "",
-      "description": "Get a Cloud Workload Security Agent rule returns \"OK\" response"
-    }
-  ],
-  "ListCloudWorkloadSecurityAgentRules": [
-    {
-      "group": "cloud_workload_security",
-      "suffix": "",
-      "description": "Get all Cloud Workload Security Agent rules returns \"OK\" response"
-    }
-  ],
-  "DownloadCloudWorkloadPolicyFile": [
-    {
-      "group": "cloud_workload_security",
-      "suffix": "",
-      "description": "Get the latest Cloud Workload Security policy returns \"OK\" response"
-    }
-  ],
   "UpdateCloudWorkloadSecurityAgentRule": [
     {
       "group": "cloud_workload_security",
@@ -162,32 +77,25 @@
       "description": "Update a Cloud Workload Security Agent rule returns \"OK\" response"
     }
   ],
+  "CreateCloudflareAccount": [
+    {
+      "group": "cloudflare_integration",
+      "suffix": "",
+      "description": "Add Cloudflare account returns \"CREATED\" response"
+    }
+  ],
+  "UpdateCloudflareAccount": [
+    {
+      "group": "cloudflare_integration",
+      "suffix": "",
+      "description": "Update Cloudflare account returns \"OK\" response"
+    }
+  ],
   "CreateConfluentResource": [
     {
       "group": "confluent_cloud",
       "suffix": "",
       "description": "Add resource to Confluent account returns \"OK\" response"
-    }
-  ],
-  "DeleteConfluentAccount": [
-    {
-      "group": "confluent_cloud",
-      "suffix": "_2919241291",
-      "description": "Delete resource from Confluent account returns \"OK\" response"
-    }
-  ],
-  "GetConfluentAccount": [
-    {
-      "group": "confluent_cloud",
-      "suffix": "",
-      "description": "Get Confluent account returns \"OK\" response"
-    }
-  ],
-  "ListConfluentAccount": [
-    {
-      "group": "confluent_cloud",
-      "suffix": "",
-      "description": "List Confluent accounts returns \"OK\" response"
     }
   ],
   "UpdateConfluentAccount": [
@@ -221,35 +129,11 @@
       "description": "Delete custom timeboard dashboard from an existing dashboard list returns \"OK\" response"
     }
   ],
-  "GetDashboardListItems": [
-    {
-      "group": "dashboard_lists",
-      "suffix": "",
-      "description": "Get items of a Dashboard List returns \"OK\" response"
-    }
-  ],
   "UpdateDashboardListItems": [
     {
       "group": "dashboard_lists",
       "suffix": "",
       "description": "Update items of a dashboard list returns \"OK\" response"
-    }
-  ],
-  "ListEvents": [
-    {
-      "group": "events",
-      "suffix": "",
-      "description": "Get a list of events returns \"OK\" response"
-    },
-    {
-      "group": "events",
-      "suffix": "_1527584014",
-      "description": "Get a list of events returns \"OK\" response with pagination"
-    },
-    {
-      "group": "events",
-      "suffix": "_2663715109",
-      "description": "Get a quick list of events returns \"OK\" response"
     }
   ],
   "SearchEvents": [
@@ -264,32 +148,25 @@
       "description": "Search events returns \"OK\" response with pagination"
     }
   ],
+  "CreateFastlyAccount": [
+    {
+      "group": "fastly_integration",
+      "suffix": "",
+      "description": "Add Fastly account returns \"CREATED\" response"
+    }
+  ],
+  "UpdateFastlyAccount": [
+    {
+      "group": "fastly_integration",
+      "suffix": "",
+      "description": "Update Fastly account returns \"OK\" response"
+    }
+  ],
   "CreateIncidentService": [
     {
       "group": "incident_services",
       "suffix": "",
       "description": "Create a new incident service returns \"CREATED\" response"
-    }
-  ],
-  "DeleteIncidentService": [
-    {
-      "group": "incident_services",
-      "suffix": "",
-      "description": "Delete an existing incident service returns \"OK\" response"
-    }
-  ],
-  "ListIncidentServices": [
-    {
-      "group": "incident_services",
-      "suffix": "",
-      "description": "Get a list of all incident services returns \"OK\" response"
-    }
-  ],
-  "GetIncidentService": [
-    {
-      "group": "incident_services",
-      "suffix": "",
-      "description": "Get details of an incident service returns \"OK\" response"
     }
   ],
   "UpdateIncidentService": [
@@ -304,27 +181,6 @@
       "group": "incident_teams",
       "suffix": "",
       "description": "Create a new incident team returns \"CREATED\" response"
-    }
-  ],
-  "DeleteIncidentTeam": [
-    {
-      "group": "incident_teams",
-      "suffix": "",
-      "description": "Delete an existing incident team returns \"OK\" response"
-    }
-  ],
-  "ListIncidentTeams": [
-    {
-      "group": "incident_teams",
-      "suffix": "",
-      "description": "Get a list of all incident teams returns \"OK\" response"
-    }
-  ],
-  "GetIncidentTeam": [
-    {
-      "group": "incident_teams",
-      "suffix": "",
-      "description": "Get details of an incident team returns \"OK\" response"
     }
   ],
   "UpdateIncidentTeam": [
@@ -365,46 +221,6 @@
       "description": "Create an incident returns \"CREATED\" response"
     }
   ],
-  "DeleteIncident": [
-    {
-      "group": "incidents",
-      "suffix": "",
-      "description": "Delete an existing incident returns \"OK\" response"
-    }
-  ],
-  "ListIncidents": [
-    {
-      "group": "incidents",
-      "suffix": "",
-      "description": "Get a list of incidents returns \"OK\" response"
-    },
-    {
-      "group": "incidents",
-      "suffix": "_2665616954",
-      "description": "Get a list of incidents returns \"OK\" response with pagination"
-    }
-  ],
-  "ListIncidentAttachments": [
-    {
-      "group": "incidents",
-      "suffix": "_2457735435",
-      "description": "Get incident attachments returns \"OK\" response"
-    }
-  ],
-  "GetIncident": [
-    {
-      "group": "incidents",
-      "suffix": "",
-      "description": "Get the details of an incident returns \"OK\" response"
-    }
-  ],
-  "SearchIncidents": [
-    {
-      "group": "incidents",
-      "suffix": "",
-      "description": "Search for incidents returns \"OK\" response"
-    }
-  ],
   "CreateAPIKey": [
     {
       "group": "key_management",
@@ -422,27 +238,6 @@
       "group": "key_management",
       "suffix": "_3383369233",
       "description": "Create an Application key with scopes for current user returns \"Created\" response"
-    }
-  ],
-  "DeleteAPIKey": [
-    {
-      "group": "key_management",
-      "suffix": "",
-      "description": "Delete an API key returns \"No Content\" response"
-    }
-  ],
-  "DeleteCurrentUserApplicationKey": [
-    {
-      "group": "key_management",
-      "suffix": "_1266687064",
-      "description": "Delete an Application key owned by current user returns \"No Content\" response"
-    }
-  ],
-  "DeleteApplicationKey": [
-    {
-      "group": "key_management",
-      "suffix": "_771691550",
-      "description": "Delete an Application key returns \"No Content\" response"
     }
   ],
   "UpdateAPIKey": [
@@ -466,48 +261,6 @@
       "description": "Edit an application key returns \"OK\" response"
     }
   ],
-  "GetAPIKey": [
-    {
-      "group": "key_management",
-      "suffix": "",
-      "description": "Get API key returns \"OK\" response"
-    }
-  ],
-  "ListAPIKeys": [
-    {
-      "group": "key_management",
-      "suffix": "",
-      "description": "Get all API keys returns \"OK\" response"
-    }
-  ],
-  "ListCurrentUserApplicationKeys": [
-    {
-      "group": "key_management",
-      "suffix": "_1503860964",
-      "description": "Get all Application keys owned by current user returns \"OK\" response"
-    }
-  ],
-  "ListApplicationKeys": [
-    {
-      "group": "key_management",
-      "suffix": "_2237010090",
-      "description": "Get all Application keys returns \"OK\" response"
-    }
-  ],
-  "GetApplicationKey": [
-    {
-      "group": "key_management",
-      "suffix": "",
-      "description": "Get an application key returns \"OK\" response"
-    }
-  ],
-  "GetCurrentUserApplicationKey": [
-    {
-      "group": "key_management",
-      "suffix": "_1060640890",
-      "description": "Get one Application key owned by current user returns \"OK\" response"
-    }
-  ],
   "AggregateLogs": [
     {
       "group": "logs",
@@ -523,18 +276,6 @@
       "group": "logs",
       "suffix": "",
       "description": "Aggregate events returns \"OK\" response"
-    }
-  ],
-  "ListLogsGet": [
-    {
-      "group": "logs",
-      "suffix": "_738202670",
-      "description": "Get a list of logs returns \"OK\" response with pagination"
-    },
-    {
-      "group": "logs",
-      "suffix": "_2034110533",
-      "description": "Get a quick list of logs returns \"OK\" response"
     }
   ],
   "ListLogs": [
@@ -573,27 +314,6 @@
       "description": "Create a log-based metric returns \"OK\" response"
     }
   ],
-  "DeleteLogsMetric": [
-    {
-      "group": "logs_metrics",
-      "suffix": "",
-      "description": "Delete a log-based metric returns \"OK\" response"
-    }
-  ],
-  "GetLogsMetric": [
-    {
-      "group": "logs_metrics",
-      "suffix": "",
-      "description": "Get a log-based metric returns \"OK\" response"
-    }
-  ],
-  "ListLogsMetrics": [
-    {
-      "group": "logs_metrics",
-      "suffix": "",
-      "description": "Get all log-based metrics returns \"OK\" response"
-    }
-  ],
   "UpdateLogsMetric": [
     {
       "group": "logs_metrics",
@@ -620,57 +340,10 @@
       "description": "Create a tag configuration returns \"Created\" response"
     }
   ],
-  "DeleteTagConfiguration": [
-    {
-      "group": "metrics",
-      "suffix": "",
-      "description": "Delete a tag configuration returns \"No Content\" response"
-    }
-  ],
-  "ListTagConfigurations": [
-    {
-      "group": "metrics",
-      "suffix": "_265033704",
-      "description": "Get a list of metrics with a tag filter returns \"Success\" response"
-    },
-    {
-      "group": "metrics",
-      "suffix": "_2739018321",
-      "description": "Get a list of metrics with configured filter returns \"Success\" response"
-    }
-  ],
-  "ListActiveMetricConfigurations": [
-    {
-      "group": "metrics",
-      "suffix": "",
-      "description": "List active tags and aggregations returns \"Success\" response"
-    }
-  ],
-  "ListVolumesByMetricName": [
-    {
-      "group": "metrics",
-      "suffix": "",
-      "description": "List distinct metric volumes by metric name returns \"Success\" response"
-    }
-  ],
-  "ListTagConfigurationByName": [
-    {
-      "group": "metrics",
-      "suffix": "",
-      "description": "List tag configuration by name returns \"Success\" response"
-    }
-  ],
-  "ListTagsByMetricName": [
-    {
-      "group": "metrics",
-      "suffix": "",
-      "description": "List tags by metric name returns \"Success\" response"
-    }
-  ],
   "QueryScalarData": [
     {
       "group": "metrics",
-      "suffix": "",
+      "suffix": "_3112571352",
       "description": "Scalar cross product query returns \"OK\" response"
     }
   ],
@@ -686,17 +359,10 @@
       "description": "Submit metrics with compression returns \"Payload accepted\" response"
     }
   ],
-  "EstimateMetricsOutputSeries": [
-    {
-      "group": "metrics",
-      "suffix": "",
-      "description": "Tag Configuration Cardinality Estimator returns \"Success\" response"
-    }
-  ],
   "QueryTimeseriesData": [
     {
       "group": "metrics",
-      "suffix": "",
+      "suffix": "_301142940",
       "description": "Timeseries cross product query returns \"OK\" response"
     }
   ],
@@ -707,6 +373,20 @@
       "description": "Update a tag configuration returns \"OK\" response"
     }
   ],
+  "CreateMonitorConfigPolicy": [
+    {
+      "group": "monitors",
+      "suffix": "",
+      "description": "Create a monitor configuration policy returns \"OK\" response"
+    }
+  ],
+  "UpdateMonitorConfigPolicy": [
+    {
+      "group": "monitors",
+      "suffix": "",
+      "description": "Edit a monitor configuration policy returns \"OK\" response"
+    }
+  ],
   "CreateOpsgenieService": [
     {
       "group": "opsgenie_integration",
@@ -714,51 +394,11 @@
       "description": "Create a new service object returns \"CREATED\" response"
     }
   ],
-  "DeleteOpsgenieService": [
-    {
-      "group": "opsgenie_integration",
-      "suffix": "",
-      "description": "Delete a single service object returns \"OK\" response"
-    }
-  ],
-  "GetOpsgenieService": [
-    {
-      "group": "opsgenie_integration",
-      "suffix": "",
-      "description": "Get a single service object returns \"OK\" response"
-    }
-  ],
-  "ListOpsgenieServices": [
-    {
-      "group": "opsgenie_integration",
-      "suffix": "",
-      "description": "Get all service objects returns \"OK\" response"
-    }
-  ],
   "UpdateOpsgenieService": [
     {
       "group": "opsgenie_integration",
       "suffix": "",
       "description": "Update a single service object returns \"OK\" response"
-    }
-  ],
-  "UploadIdPMetadata": [
-    {
-      "group": "organizations",
-      "suffix": "",
-      "description": "Upload IdP metadata returns \"OK\" response"
-    }
-  ],
-  "ListProcesses": [
-    {
-      "group": "processes",
-      "suffix": "",
-      "description": "Get all processes returns \"OK\" response"
-    },
-    {
-      "group": "processes",
-      "suffix": "_797840471",
-      "description": "Get all processes returns \"OK\" response with pagination"
     }
   ],
   "AggregateRUMEvents": [
@@ -773,39 +413,6 @@
       "group": "rum",
       "suffix": "",
       "description": "Create a new RUM application returns \"OK\" response"
-    }
-  ],
-  "DeleteRUMApplication": [
-    {
-      "group": "rum",
-      "suffix": "",
-      "description": "Delete a RUM application returns \"No Content\" response"
-    }
-  ],
-  "GetRUMApplication": [
-    {
-      "group": "rum",
-      "suffix": "",
-      "description": "Get a RUM application returns \"OK\" response"
-    }
-  ],
-  "ListRUMEvents": [
-    {
-      "group": "rum",
-      "suffix": "",
-      "description": "Get a list of RUM events returns \"OK\" response"
-    },
-    {
-      "group": "rum",
-      "suffix": "_2680821282",
-      "description": "Get a list of RUM events returns \"OK\" response with pagination"
-    }
-  ],
-  "GetRUMApplications": [
-    {
-      "group": "rum",
-      "suffix": "",
-      "description": "List all the RUM applications returns \"OK\" response"
     }
   ],
   "SearchRUMEvents": [
@@ -825,6 +432,13 @@
       "group": "rum",
       "suffix": "",
       "description": "Update a RUM application returns \"OK\" response"
+    }
+  ],
+  "UpdateRestrictionPolicy": [
+    {
+      "group": "restriction_policies",
+      "suffix": "",
+      "description": "Update a restriction policy returns \"OK\" response"
     }
   ],
   "AddUserToRole": [
@@ -848,53 +462,11 @@
       "description": "Create role returns \"OK\" response"
     }
   ],
-  "DeleteRole": [
-    {
-      "group": "roles",
-      "suffix": "",
-      "description": "Delete role returns \"OK\" response"
-    }
-  ],
-  "GetRole": [
-    {
-      "group": "roles",
-      "suffix": "",
-      "description": "Get a role returns \"OK\" response"
-    }
-  ],
-  "ListRoleUsers": [
-    {
-      "group": "roles",
-      "suffix": "",
-      "description": "Get all users of a role returns \"OK\" response"
-    }
-  ],
   "AddPermissionToRole": [
     {
       "group": "roles",
       "suffix": "",
       "description": "Grant permission to a role returns \"OK\" response"
-    }
-  ],
-  "ListRolePermissions": [
-    {
-      "group": "roles",
-      "suffix": "",
-      "description": "List permissions for a role returns \"OK\" response"
-    }
-  ],
-  "ListPermissions": [
-    {
-      "group": "roles",
-      "suffix": "",
-      "description": "List permissions returns \"OK\" response"
-    }
-  ],
-  "ListRoles": [
-    {
-      "group": "roles",
-      "suffix": "",
-      "description": "List roles returns \"OK\" response"
     }
   ],
   "RemoveUserFromRole": [
@@ -966,72 +538,11 @@
       "description": "Create a security filter returns \"OK\" response"
     }
   ],
-  "DeleteSecurityFilter": [
-    {
-      "group": "security_monitoring",
-      "suffix": "_555029489",
-      "description": "Delete a security filter returns \"No Content\" response"
-    }
-  ],
-  "DeleteSecurityMonitoringRule": [
-    {
-      "group": "security_monitoring",
-      "suffix": "",
-      "description": "Delete an existing rule returns \"OK\" response"
-    }
-  ],
-  "GetSecurityMonitoringRule": [
-    {
-      "group": "security_monitoring",
-      "suffix": "_3370522281",
-      "description": "Get a cloud configuration rule's details returns \"OK\" response"
-    },
-    {
-      "group": "security_monitoring",
-      "suffix": "",
-      "description": "Get a rule's details returns \"OK\" response"
-    }
-  ],
   "SearchSecurityMonitoringSignals": [
     {
       "group": "security_monitoring",
       "suffix": "_1309350146",
       "description": "Get a list of security signals returns \"OK\" response with pagination"
-    }
-  ],
-  "ListSecurityMonitoringSignals": [
-    {
-      "group": "security_monitoring",
-      "suffix": "_3960412991",
-      "description": "Get a quick list of security signals returns \"OK\" response with pagination"
-    }
-  ],
-  "GetSecurityFilter": [
-    {
-      "group": "security_monitoring",
-      "suffix": "",
-      "description": "Get a security filter returns \"OK\" response"
-    }
-  ],
-  "GetSecurityMonitoringSignal": [
-    {
-      "group": "security_monitoring",
-      "suffix": "",
-      "description": "Get a signal's details returns \"OK\" response"
-    }
-  ],
-  "ListSecurityFilters": [
-    {
-      "group": "security_monitoring",
-      "suffix": "",
-      "description": "Get all security filters returns \"OK\" response"
-    }
-  ],
-  "ListSecurityMonitoringRules": [
-    {
-      "group": "security_monitoring",
-      "suffix": "",
-      "description": "List rules returns \"OK\" response"
     }
   ],
   "EditSecurityMonitoringSignalAssignee": [
@@ -1088,20 +599,6 @@
       "description": "Delete Scanning Rule returns \"OK\" response"
     }
   ],
-  "ListScanningGroups": [
-    {
-      "group": "sensitive_data_scanner",
-      "suffix": "",
-      "description": "List Scanning Groups returns \"OK\" response"
-    }
-  ],
-  "ListStandardPatterns": [
-    {
-      "group": "sensitive_data_scanner",
-      "suffix": "",
-      "description": "List standard patterns returns \"OK\" response"
-    }
-  ],
   "ReorderScanningGroups": [
     {
       "group": "sensitive_data_scanner",
@@ -1123,6 +620,13 @@
       "description": "Update Scanning Rule returns \"OK\" response"
     }
   ],
+  "CreateServiceAccount": [
+    {
+      "group": "service_accounts",
+      "suffix": "",
+      "description": "Create a service account returns \"OK\" response"
+    }
+  ],
   "CreateServiceAccountApplicationKey": [
     {
       "group": "service_accounts",
@@ -1135,32 +639,11 @@
       "description": "Create an application key with scopes for this service account returns \"Created\" response"
     }
   ],
-  "DeleteServiceAccountApplicationKey": [
-    {
-      "group": "service_accounts",
-      "suffix": "_992091161",
-      "description": "Delete an app key owned by this service account returns \"No Content\" response"
-    }
-  ],
   "UpdateServiceAccountApplicationKey": [
     {
       "group": "service_accounts",
       "suffix": "_768415790",
       "description": "Edit an app key owned by this service account returns \"OK\" response"
-    }
-  ],
-  "ListServiceAccountApplicationKeys": [
-    {
-      "group": "service_accounts",
-      "suffix": "_1268914341",
-      "description": "Get all app keys owned by this service account returns \"OK\" response"
-    }
-  ],
-  "GetServiceAccountApplicationKey": [
-    {
-      "group": "service_accounts",
-      "suffix": "_819075131",
-      "description": "Get one app key owned by this service account returns \"OK\" response"
     }
   ],
   "CreateOrUpdateServiceDefinitions": [
@@ -1170,123 +653,11 @@
       "description": "Create or update service definition returns \"CREATED\" response"
     }
   ],
-  "DeleteServiceDefinition": [
-    {
-      "group": "service_definition",
-      "suffix": "",
-      "description": "Delete a single service definition returns \"OK\" response"
-    }
-  ],
-  "GetServiceDefinition": [
-    {
-      "group": "service_definition",
-      "suffix": "",
-      "description": "Get a single service definition returns \"OK\" response"
-    }
-  ],
-  "ListServiceDefinitions": [
-    {
-      "group": "service_definition",
-      "suffix": "",
-      "description": "Get all service definitions returns \"OK\" response"
-    }
-  ],
-  "GetCostByOrg": [
-    {
-      "group": "usage_metering",
-      "suffix": "",
-      "description": "Get cost across multi-org account returns \"OK\" response"
-    }
-  ],
-  "GetHistoricalCostByOrg": [
-    {
-      "group": "usage_metering",
-      "suffix": "",
-      "description": "Get historical cost across your account returns \"OK\" response"
-    }
-  ],
-  "GetHourlyUsage": [
-    {
-      "group": "usage_metering",
-      "suffix": "",
-      "description": "Get hourly usage by product family returns \"OK\" response"
-    }
-  ],
-  "GetUsageApplicationSecurityMonitoring": [
-    {
-      "group": "usage_metering",
-      "suffix": "_3959166796",
-      "description": "Get hourly usage for Application Security returns \"OK\" response"
-    }
-  ],
-  "GetUsageLambdaTracedInvocations": [
-    {
-      "group": "usage_metering",
-      "suffix": "_1436752065",
-      "description": "Get hourly usage for Lambda Traced Invocations returns \"OK\" response"
-    }
-  ],
-  "GetUsageObservabilityPipelines": [
-    {
-      "group": "usage_metering",
-      "suffix": "_970725512",
-      "description": "Get hourly usage for Observability Pipelines returns \"OK\" response"
-    }
-  ],
-  "GetEstimatedCostByOrg": [
-    {
-      "group": "usage_metering",
-      "suffix": "_3186693804",
-      "description": "GetEstimatedCostByOrg with start_month returns \"OK\" response"
-    }
-  ],
-  "CreateServiceAccount": [
-    {
-      "group": "users",
-      "suffix": "",
-      "description": "Create a service account returns \"OK\" response"
-    }
-  ],
   "CreateUser": [
     {
       "group": "users",
       "suffix": "",
       "description": "Create a user returns \"OK\" response"
-    }
-  ],
-  "DisableUser": [
-    {
-      "group": "users",
-      "suffix": "",
-      "description": "Disable a user returns \"OK\" response"
-    }
-  ],
-  "GetInvitation": [
-    {
-      "group": "users",
-      "suffix": "",
-      "description": "Get a user invitation returns \"OK\" response"
-    }
-  ],
-  "ListUserPermissions": [
-    {
-      "group": "users",
-      "suffix": "",
-      "description": "Get a user permissions returns \"OK\" response"
-    }
-  ],
-  "GetUser": [
-    {
-      "group": "users",
-      "suffix": "_3047557953",
-      "description": "Get a user returns \"OK\" response"
-    }
-  ],
-  "ListUsers": [
-    {
-      "group": "users",
-      "suffix": "",
-      "description": "List all users returns \"OK\" response"
     }
   ],
   "SendInvitations": [

@@ -71,10 +71,8 @@ receivers:
 
 processors:
   batch:
-    # Datadog APM Intake limit is 3.2MB. Let's make sure the batches do not
-    # go over that.
-    send_batch_max_size: 1000
-    send_batch_size: 100
+    send_batch_max_size: 100
+    send_batch_size: 10
     timeout: 10s
 
 exporters:
@@ -97,7 +95,12 @@ service:
 
 Where `<DD_SITE>` is your site, {{< region-param key="dd_site" code="true" >}}.
 
-The above configuration enables the receiving of OTLP data from OpenTelemetry instrumentation libraries over HTTP and gRPC, and sets up a [batch processor][5], which is mandatory for any non-development environment.
+The above configuration enables the receiving of OTLP data from OpenTelemetry instrumentation libraries over HTTP and gRPC, and sets up a [batch processor][5], which is mandatory for any non-development environment. Note that you may get `413 - Request Entity Too Large` errors if you batch too much telemetry data in the batch processor.
+
+The exact configuration of the batch processor depends on your specific workload as well as the signal types. Datadog intake has different payload size limits for the 3 signal types:
+- Trace intake: 3.2MB
+- Log intake: [5MB uncompressed][15]
+- Metrics V2 intake: [500KB or 5MB after decompression][16]
 
 #### Advanced configuration
 
@@ -419,10 +422,8 @@ To use the OpenTelemetry Operator:
        processors:
          k8sattributes:
          batch:
-           # Datadog APM Intake limit is 3.2MB. Let's make sure the batches do not
-           # go over that.
-           send_batch_max_size: 1000
-           send_batch_size: 100
+           send_batch_max_size: 100
+           send_batch_size: 10
            timeout: 10s
        exporters:
          datadog:
@@ -461,7 +462,9 @@ To use the OpenTelemetry Collector alongside the Datadog Agent:
    # ...
    exporters:
      otlp:
-       endpoint: "${env:HOST_IP}:4317"
+       endpoint: "${HOST_IP}:4317"
+       tls:
+         insecure: true
    # ...
    ```
 
@@ -543,3 +546,5 @@ The OpenTelemetry Collector has [two primary deployment methods][14]: Agent and 
 [8]: /getting_started/tagging/unified_service_tagging/
 [9]: https://opentelemetry.io/docs/reference/specification/resource/sdk/#sdk-provided-resource-attributes
 [14]: https://opentelemetry.io/docs/collector/deployment/
+[15]: https://docs.datadoghq.com/api/latest/logs/
+[16]: https://docs.datadoghq.com/api/latest/metrics/#submit-metrics

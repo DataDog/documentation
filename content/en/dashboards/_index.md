@@ -150,7 +150,7 @@ Use the pop up to restrict access to you, everyone in your organization with you
 
 {{< img src="dashboards/access_popup.png" alt="Dialog box with drop-down menu allowing users to choose a role to access the dashboard." style="width:70%;">}}
 
-Creators are always able to edit the dashboard, but other users who are allowed to edit the dashboard can add or remove any role from the access control list (ACL) as long as the final ACL includes one of their roles. For more information about roles, see the [RBAC documentation][14].
+Any user setting access control rules has to include one or more roles they are a part of to prevent locking an organization out. For more information about roles, see the [RBAC documentation][14].
 
 If the dashboard was created with the deprecated "read only" setting, the access control list pre-populates with a list of roles that have the Access Management (`user_access_manage`) permission.
 
