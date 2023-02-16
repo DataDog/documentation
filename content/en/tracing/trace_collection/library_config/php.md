@@ -455,7 +455,7 @@ You can use the following environment variables to configure injection and extra
 
 The environment variable values are comma-separated lists of header styles enabled for injection or extraction. By default, only the `tracecontext` and `Datadog` injection styles are enabled.
 
-If multiple extraction styles are enabled, the extraction attempt is completed with the following priorities: tracecontext has priority, then datadog, then b3.
+If multiple extraction styles are enabled, the extraction attempt is completed with the following priorities: `tracecontext` has priority, then `Datadog`, then B3.
 
 ## Further Reading
 
