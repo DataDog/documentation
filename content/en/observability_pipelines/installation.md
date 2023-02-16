@@ -3,6 +3,11 @@ title: Installation
 kind: Documentation
 aliases:
     - /observability_pipelines/setup/
+    - /agent/vector_aggregation/
+    - /integrations/observability_pipelines/integrate_vector_with_datadog/
+    - /observability_pipelines/integrate_vector_with_datadog/
+    - /observability_pipelines/integrations/integrate_vector_with_datadog/
+    - /observability_pipelines/production_deployment_overview/integrate_datadog_and_the_observability_pipelines_worker/
 further_reading:
   - link: /observability_pipelines/production_deployment_overview/
     tag: Documentation

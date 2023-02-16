@@ -2485,11 +2485,6 @@ main:
     parent: observability_pipelines_production_deployment_overview
     identifier: observability_pipelines_aggregator_architecture
     weight: 202
-  - name: Integrate Datadog and the Worker
-    url: observability_pipelines/production_deployment_overview/integrate_datadog_and_the_observability_pipelines_worker/
-    parent: observability_pipelines_production_deployment_overview
-    identifier: observability_pipelines_integrate_datadog_and_the_op_worker
-    weight: 203
   - name: Working with Data
     url: observability_pipelines/working_with_data/
     parent: observability_pipelines
