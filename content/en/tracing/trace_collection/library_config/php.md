@@ -323,8 +323,8 @@ Propagation styles to use when injecting tracing headers. If using multiple styl
   - Datadog
 
 `DD_TRACE_PROPAGATION_STYLE_EXTRACT`
-: **INI**: `tracecontext,Datadog,b3multi,B3 single header`<br>
-**Default**: `Datadog,B3,B3 single header`<br>
+: **INI**: `datadog.trace.propagation_style_extract`<br>
+**Default**: `tracecontext,Datadog,b3multi,B3 single header`<br>
 Propagation styles to use when extracting tracing headers. If using multiple styles, comma separate them. The supported styles are:
 
   - [tracecontext][10]
@@ -431,7 +431,7 @@ The Datadog APM Tracer supports [B3][7] and [W3C][10] headers extraction and inj
 
 You can configure injection and extraction styles for distributed headers.
 
-The .NET Tracer supports the following styles:
+The PHP Tracer supports the following styles:
 
 - Datadog: `Datadog`
 - W3C: `tracecontext`
@@ -443,9 +443,9 @@ You can use the following environment variables to configure injection and extra
 - `DD_TRACE_PROPAGATION_STYLE_INJECT=Datadog,tracecontext`
 - `DD_TRACE_PROPAGATION_STYLE_EXTRACT=Datadog,tracecontext`
 
-The environment variable values are comma-separated lists of header styles enabled for injection or extraction. By default, only the `Datadog` injection style is enabled.
+The environment variable values are comma-separated lists of header styles enabled for injection or extraction. By default, only the `tracecontext` and `Datadog` injection styles are enabled.
 
-If multiple extraction styles are enabled, the extraction attempt is completed in order of configured styles, and uses the first successful extracted value.
+If multiple extraction styles are enabled, the extraction attempt is completed with the following priorities: tracecontext has priority, then datadog, then b3.
 
 ## Further Reading
 
