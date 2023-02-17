@@ -18,7 +18,7 @@ Datadog ingests your cloud cost data and transforms it into queryable metrics. I
 {{% tab "AWS" %}}
 
 
-To use AWS Cloud Cost Management, you must have an AWS account with access to Cost and Usage Reports (CURs), and have the AWS integration installed in Datadog. To setup Cloud Cost Management in Datadog, you need to generate a Cost and Usage report.
+To use AWS Cloud Cost Management, you must have an AWS account with access to Cost and Usage Reports (CURs), and have the AWS integration installed in Datadog. To set up Cloud Cost Management in Datadog, you need to generate a Cost and Usage report.
 ### Prerequisite: generate a Cost and Usage Report
 
 Follow AWS instructions for [Creating Cost and Usage Reports][1], and select the following content options for use with Datadog Cloud Cost Management:
@@ -194,14 +194,14 @@ The rule stops executing for each resource, once a first match is found. For exa
 
 To use Azure Cloud Cost Management in Datadog, you must have an Azure account and have the following billing exports set up: **amortized** and **actual exports**. Additionally, Datadog must have permissions to read the exports from the container.
 
-**Note**: If you use the recommended [Datadog Resource method][1] through the Azure portal to set up Datadog, App Registration creation is still required to support Cloud Cost Management.
+**Note**: If you used the recommended [Datadog Resource method][1] through the Azure portal to set up the integration with Datadog, you need to create an App Registration to support Cloud Cost Management. Select a site other than `US3` in the side panel of this page and see [Integrating through the Azure portal][4] for instructions.
 
 ### Schedule exports
 
 1. Navigate to [Exports][2] under Azure portal's *Cost Management + Billing*.
 2. Select the billing scope. **Note:** The scope must be *subscription* or *resource group*.
 3. Once the scope is selected, click **Add**.
-4. Metric should be **Actual Cost (usage and purchases)**.
+4. The metric is **Actual Cost (usage and purchases)**.
 5. Make sure the Export type is `Daily export of month-to-date costs`.
 6. Make sure the File Partitioning is **on**.
 
