@@ -202,10 +202,10 @@ To use Azure Cloud Cost Management in Datadog, you must have an Azure account an
 2. Select the billing scope. **Note:** The scope must be *subscription* or *resource group*.
 3. Once the scope is selected, click **Add**.
 4. Metric should be **Actual Cost (usage and purchases)**.
-5. Make sure the Export type is: "Daily export of month-to-date costs".
+5. Make sure the Export type is `Daily export of month-to-date costs`.
 6. Make sure the File Partitioning is **on**.
 
-Repeat steps 1-6 with export metric type **Amortized Cost (usage and purchases)**. We recommend using the same storage account container.
+Repeat steps one to six with export metric type **Amortized Cost (usage and purchases)**. Datadog recommends using the same storage account container.
 
 ### Provide Datadog access to your data
 
@@ -214,24 +214,25 @@ Repeat steps 1-6 with export metric type **Amortized Cost (usage and purchases)*
     -  Click the Containers tab.
     -  Choose the storage container your bills are in.
 2. Select Access Control (IAM) tab.
-3. Click the Role Assignments tab then click **Add**.  
-4. Choose **Storage Blob Data Reader** and **Cost Management Reader** then click Next.
-5. Assign these permissions to one of the app registrations you have connected with Datadog.
-    - To see which app registrations are connected to Datadog, visit [Datadog's Azure integration][3].
-    -  Click **Select members**, pick the name of the app registration, and click **Select**.
+3. Click the Role Assignments tab, then click **Add**.  
+4. Choose **Storage Blob Data Reader** and **Cost Management Reader**, then click Next.
+5. Assign these permissions to one of the App Registrations you have connected with Datadog.
+    - To see which App Registrations are connected to Datadog, visit [Datadog's Azure integration][3].
+    -  Click **Select members**, pick the name of the App Registration, and click **Select**.
     - Select *review + assign*.
 
-If your exports are in different storage containers, repeat steps 1-6 for the other storage containers.
+If your exports are in different storage containers, repeat steps one to six for the other storage containers.
 
 ### Steps to find the scope ID
 
-From the export, click on the scope link. You will find the id there:
-- If the scope type is Subscription, look for the Subscription ID.
-- If the scope type is Resource Groups, look for the Resource group name.
+From the export, click on the scope link. Select the ID that matches the scope type:
+- If the scope type is *subscription*, use the subscription ID.
+- If the scope type is *resource groups*, use the resource group name.
 
 [1]: https://www.datadoghq.com/blog/azure-datadog-partnership/
 [2]: https://portal.azure.com/#view/Microsoft_Azure_CostManagement/Menu/~/exports
 [3]: https://app.datadoghq.com/integrations/azure
+[4]: https://docs.datadoghq.com/integrations/azure/#integrating-through-the-azure-portal
 {{% /tab %}}
 {{< /tabs >}}
 
