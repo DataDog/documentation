@@ -72,7 +72,7 @@ logs:
       sourcecategory: http_web_access
 ```
 
-To create multiple instances in the same Agent check to monitor two Apache services, create a new instance with a `-` in the `instances` section:
+To create multiple instances in the same Agent check to monitor two Apache services, add additional instances to the `instances` section:
 
 ```yaml
 init_config:
