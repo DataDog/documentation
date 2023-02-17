@@ -237,7 +237,11 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following log service re
 
 ## Log message remapper
 
-Message is a key attribute in Datadog. It is displayed in the message column of the Log Explorer to give context to a log. You can use the search to find a log by log message. Use the log message remapper processor to define one or more attributes as the official log message.
+Message is a key attribute in Datadog. It is displayed in the message column of the Log Explorer to give context to a log. You can use the search to find a log by the log message. 
+
+Use the log message remapper processor to define one or more attributes as the official log message. Define more than one attribute for cases when the attributes might not exist and an alternative is available. For example, if the defined message attributes are `attribute1`, `attribute2`, and `attribute3`, and `attribute1` does not exist, then `attribute2` is used. Similarly, if `attribute2` does not exist, then `attribute3` is used.
+
+To define message attributes, first use the [string builder processor](#string-builder-processor) to create a new string attribute for each of the attributes you want to use. Then, use the log message remapper to remap the string attributes as the message.
 
 **Note**: If multiple log message remapper processors are applied to a given log, only the first one (according to the pipeline order) is taken into account.
 
