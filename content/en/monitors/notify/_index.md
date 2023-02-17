@@ -46,7 +46,7 @@ Steps to free up disk space:
 
 Add tags to your monitor. Monitor tags are different from metric tags. They are used in the UI to group and search for monitors. If tag policies are configured, the required tags and tag values need to be added. To learn more, see [Tag Policies][6].
 
-{{< img src="monitors/notifications/notifications_add_required_tags.png" alt="View of policy tag configuration. Underneath 'Policy tags' are three tags, cost_center, product_id, and env, next to a 'Select value' dropdown." style="width:100%;" >}}
+{{< img src="monitors/notifications/notifications_add_required_tags.png" alt="View of policy tag configuration. Underneath 'Policy tags' are three example tags, cost_center, product_id, and env, next to a 'Select value' dropdown." style="width:100%;" >}}
 
 ### Renotify
 
