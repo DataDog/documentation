@@ -32,19 +32,19 @@ Monitor tag policies allow you to enforce data validation on tags and tag values
 
 ### Require tags with mandatory values
 
-Enforce mandatory tags, select the **Required** check box and specify both the tag key and values. In this example, monitors are required to have the `cost_center` tag. The value must be set to `cc1`, `cc2`, or `cc3`.
+To enforce mandatory tags, select the **Required** check box and specify both the tag key and values. In this example, monitors are required to have the `cost_center` tag. The value must be set to `cc1`, `cc2`, or `cc3`.
 
 {{< img src="monitors/settings/monitor_tag_enforcement_key_and_value.png" alt="The Monitors Settings page displaying a tag policy for a required tag with mandatory values"  >}}
 
 ### Require tags only
 
-Require a tag but allow users to specify their own values. In this example, monitors are required to have the `product_id` tag. The value can be anything specified by the user.
+You can require a tag but allow users to specify their own values. In this example, monitors are required to have the `product_id` tag. The value can be anything specified by the user.
 
 {{< img src="monitors/settings/monitor_tag_enforcement_key_only.png" alt="The Monitors Settings page displaying a tag policy in which only the tag is required"  >}}
 
 ### Optional tag with mandatory values
 
-Make a tag optional but require that monitors with the tag use specific values, enter the values for the tag in the **Values** field. In this example, the `env` tag is optional. However, if a monitor uses this tag, the value must be set to `dev`, `staging`, or `prod`.
+To make a tag optional but require that monitors with the tag use specific values, enter the values for the tag in the **Values** field. In this example, the `env` tag is optional. However, if a monitor uses this tag, the value must be set to `dev`, `staging`, or `prod`.
 
 {{< img src="monitors/settings/monitor_tag_enforcement_optional_key_with_values.png" alt="The Monitors Settings page displaying a tag policy for an optional tag with mandatory values"  >}}
 

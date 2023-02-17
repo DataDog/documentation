@@ -58,7 +58,7 @@ You can download a JSON file containing the definition of a monitor from the mon
 
 [Manage Monitors][11]: Edit, clone, delete, mute, and resolve monitors all in the same place. Focus on high priority alerts by using advanced faceted search. Explore monitor details and alerts over time in the Monitor Status page.
 
-## Control monitor tags with Tag Policies
+## Control monitor tags with tag policies
 
 [Monitor tag policies][12] enforce data validation on tags and tag values on your Datadog monitors. Add one of the following rules to prevent monitors with unexpected tags from being created.
 - Require tags with mandatory values
