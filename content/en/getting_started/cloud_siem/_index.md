@@ -37,9 +37,7 @@ This guide walks you through best practices for getting started with Cloud SIEM.
 
 1. Configure [log ingestion][2] to collect logs from your sources. Review [Best Practices for Log Management][3].
 
-    You can use [out-of-the-box integration pipelines][4] to collect logs for more than {{< translate key="integration_count" >}} integrations. 
-
-    Or, [create custom log pipelines][5] to send:
+    You can use [out-of-the-box integration pipelines][4] to collect logs for more than {{< translate key="integration_count" >}} integrations, or [create custom log pipelines][5] to send:
 
     - [Cloud Audit logs][6]
     - [Identity Provider logs][7]
