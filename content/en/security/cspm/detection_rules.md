@@ -59,6 +59,8 @@ On the [Rules][13] page, select a rule to open its details page. In the **Set se
 
 Alternatively, create [notification rules][21] that span across multiple detection rules based on parameters such as severities, rule types, rule tags, signal attributes, and signal tags. This allows you to avoid having to manually edit notification preferences for individual detection rules.
 
+**Note**: If a misconfiguration is detected for a rule with notifications enabled, the failed finding also appears on the [Signals Explorer][22].
+
 {{< img src="security/cspm/frameworks_and_benchmarks/notification-2.png" alt="The Set severity and notifications section of the rule details page" >}}
 
 ## Create custom rules
@@ -87,3 +89,4 @@ You can create custom rules to extend the rules being applied to your environmen
 [19]: /integrations/webhooks/
 [20]: /security/cspm/custom_rules/
 [21]: /security/notifications/rules/
+[22]: /security/cspm/signals_explorer/

@@ -86,6 +86,8 @@ The status graph shows your monitor's status over time, broken out by group. **N
 * The monitor's timeframe is too short for a metric that provides data infrequently.
 * A host's name previously included in the query has changed. Hostname changes age out of the UI within 2 hours.
 
+The status graph shows you the dimensions you configured for your alerts, not the dimensions in your monitor query. For example: your monitor query is grouped by `host` and `device`, but you only want to receive alerts for the `host`. The status graph shows the monitor's status grouped by `host`. You can see the `device` subgroups by clicking **View all 1** which opens a panel showing status graphs for each device. For more information on alert groupings, see [Configure Monitors][13].
+
 #### Investigate a Monitor in a Notebook
 
 For further investigation into your metrics evolution, click **Open in a notebook** by the status graph. This generates an investigation [notebook][8] with a formatted graph of the monitor query.
@@ -147,3 +149,4 @@ You can obtain a JSON export of any monitor from the monitor's status page. Clic
 [10]: https://app.datadoghq.com/event/explorer
 [11]: /events/
 [12]: https://app.datadoghq.com/monitors#create/import
+[13]: /monitors/configuration/?tab=thresholdalert#notification-aggregation

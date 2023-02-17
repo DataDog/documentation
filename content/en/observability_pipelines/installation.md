@@ -3,6 +3,11 @@ title: Installation
 kind: Documentation
 aliases:
     - /observability_pipelines/setup/
+    - /agent/vector_aggregation/
+    - /integrations/observability_pipelines/integrate_vector_with_datadog/
+    - /observability_pipelines/integrate_vector_with_datadog/
+    - /observability_pipelines/integrations/integrate_vector_with_datadog/
+    - /observability_pipelines/production_deployment_overview/integrate_datadog_and_the_observability_pipelines_worker/
 further_reading:
   - link: /observability_pipelines/production_deployment_overview/
     tag: Documentation
@@ -18,10 +23,11 @@ Install the Observability Pipelines Worker with the [Advanced Package Tool][1] (
 
 ## Prerequisites
 
-Before installing, make sure you have:
+Before installing, make sure you:
 
-1. A valid [Datadog API key][5].
-2. An Observability Pipelines Configuration ID.
+1. Are using one of the supported Linux architectures: x86_64 or AMD64
+2. Have a valid [Datadog API key][5].
+3. Have an Observability Pipelines Configuration ID.
 
 ## Installation
 
@@ -38,33 +44,35 @@ $ DD_API_KEY=<DD_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.
 1. Run the following commands to set up APT to download through HTTPS:
 
     ```
-    $ sudo apt-get update
-    $ sudo apt-get install apt-transport-https curl gnupg
+    sudo apt-get update
+    sudo apt-get install apt-transport-https curl gnupg
     ```
 
 2. Run the following commands to set up the Datadog `deb` repo on your system and create a Datadog archive keyring:
 
     ```
-    $ sudo sh -c "echo 'deb [signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] https://apt.datadoghq.com/ stable 7' > /etc/apt/sources.list.d/datadog.list"
-    $ sudo touch /usr/share/keyrings/datadog-archive-keyring.gpg
-    $ sudo chmod a+r /usr/share/keyrings/datadog-archive-keyring.gpg
-    $ curl https://keys.datadoghq.com/DATADOG_APT_KEY_CURRENT.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
-    $ curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
-    $ curl https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    sudo sh -c "echo 'deb [signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] https://apt.datadoghq.com/ stable observability-pipelines-worker-1' > /etc/apt/sources.list.d/datadog.list"
+    sudo touch /usr/share/keyrings/datadog-archive-keyring.gpg
+    sudo chmod a+r /usr/share/keyrings/datadog-archive-keyring.gpg
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_CURRENT.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     ```
 
 3. Run the following commands to update your local `apt` repo and install the Worker:
 
     ```
-    $ sudo apt-get update
-    $ sudo apt-get install datadog-observability-pipelines-worker-1 datadog-signing-keys
+    sudo apt-get update
+    sudo apt-get install observability-pipelines-worker datadog-signing-keys
     ```
 
 4. Start the Worker:
 
     ```
-    $ sudo systemctl restart datadog-observability-pipelines-worker.service
+    DD_API_KEY=<DD_API_KEY> DD_OP_CONFIG_KEY=<DD_OP_CONFIG_KEY> observability-pipelines-worker 
     ```
+
+<!--
 
 ## Commands
 
@@ -78,9 +86,11 @@ $ DD_API_KEY=<DD_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.
 | Display command usage             | `sudo datadog-observability-pipelines-worker --help`          |
 | Uninstall the Worker              | `sudo apt remove datadog-observability-pipelines-worker`      |
 
+-->
+
 ## Configuration
 
-- The configuration file for the Worker is located at `/etc/datadog-observability-pipelines-worker/observability-pipelines-worker.yaml`.
+- The configuration file for the Worker is located at `/etc/observability-pipelines-worker/observability-pipelines-worker.yaml`.
 - See Configuration Reference for all configuration options.
 - See [Working with Data][6] and Configuration Reference for configuration examples.
 
@@ -113,20 +123,20 @@ Before installing, make sure you have:
 1. Run the following commands to add Datadog Observability Pipelines Worker repository to your Helm repositories: 
 
     ```
-    $ helm repo add datadog https://helm.datadoghq.com
-    $ helm repo update
+    helm repo add datadog https://helm.datadoghq.com
+    helm repo update
     ```
 
 2. Install the [Observability Pipelines Worker][4]:
 
     ```
-    $ helm install opw datadog/observability-pipelines-worker
+    helm install opw datadog/observability-pipelines-worker
     ```
 
     If you want to install the chart with a specific release name, run the following command, replacing <RELEASE_NAME> with the specific release name:
 
     ```
-    $ helm install --name <RELEASE_NAME> \
+    helm install --name <RELEASE_NAME> \
         --set datadog.apiKey=<DD_API_KEY> \
         --set datadog.configKey=<DD_OP_CONFIG_KEY> \
         datadog/observability-pipelines-worker
@@ -135,7 +145,7 @@ Before installing, make sure you have:
     You can set your Datadog site using the `datadog.site` option.
 
     ```
-    $ helm install --name <RELEASE_NAME> \
+    helm install --name <RELEASE_NAME> \
         --set datadog.apiKey=<DD_API_KEY> \
         --set datadog.configKey=<DD_OP_CONFIG_KEY> \
         datadog/observability-pipelines-worker

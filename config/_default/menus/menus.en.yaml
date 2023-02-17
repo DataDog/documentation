@@ -168,6 +168,12 @@ main:
     url: getting_started/learning_center/
     parent: getting_started
     weight: 19
+  - name: Glossary
+    url: glossary/
+    pre: features
+    identifier: glossary
+    parent: essentials_heading
+    weight: 15000
   - name: Agent
     url: agent/
     pre: agent-fill
@@ -1385,11 +1391,16 @@ main:
     parent: tracing_dd_libraries
     identifier: tracing_ddlib_dotnet_framework
     weight: 109
+  - name: Injecting Libraries
+    url: tracing/trace_collection/library_injection/
+    parent: tracing_trace_collection
+    identifier: tracing_library_injection
+    weight: 102
   - name: Library Compatibility
     url: tracing/trace_collection/compatibility/
     parent: tracing_trace_collection
     identifier: tracing_compatibility
-    weight: 102
+    weight: 103
   - name: Java
     url: tracing/trace_collection/compatibility/java/
     parent: tracing_compatibility
@@ -1439,7 +1450,7 @@ main:
     url: tracing/trace_collection/library_config/
     parent: tracing_trace_collection
     identifier: tracing_library_config
-    weight: 103
+    weight: 104
   - name: Java
     url: tracing/trace_collection/library_config/java/
     parent: tracing_library_config
@@ -1489,7 +1500,7 @@ main:
     url: tracing/trace_collection/custom_instrumentation/
     parent: tracing_trace_collection
     identifier: tracing_custom_inst
-    weight: 104
+    weight: 105
   - name: Java
     url: tracing/trace_collection/custom_instrumentation/java/
     parent: tracing_custom_inst
@@ -1534,7 +1545,7 @@ main:
     url: opentelemetry/otel_tracing/
     parent: tracing_trace_collection
     identifier: tracing_open_standards
-    weight: 105
+    weight: 106
   - name: Java
     url: tracing/trace_collection/open_standards/java/
     parent: tracing_open_standards
@@ -1574,11 +1585,6 @@ main:
     url: serverless/distributed_tracing/
     parent: tracing_trace_collection
     identifier: tracing_serverless
-    weight: 106
-  - name: Injecting Libraries
-    url: tracing/trace_collection/library_injection/
-    parent: tracing_trace_collection
-    identifier: tracing_library_injection
     weight: 107
   - name: Tracing Proxies
     url: tracing/trace_collection/proxy_setup/
@@ -2366,6 +2372,10 @@ main:
     url: logs/log_configuration/rehydrating
     parent: log_configuration
     weight: 209
+  - name: Forwarding
+    url: logs/log_configuration/forwarding_custom_destinations/
+    parent: log_configuration
+    weight: 210
   - name: Connect Logs and Traces
     url: tracing/other_telemetry/connect_logs_and_traces/
     parent: log_management
@@ -2396,26 +2406,34 @@ main:
     url: logs/explorer/analytics/
     parent: log_explorer
     weight: 505
+  - name: Patterns
+    url: logs/explorer/analytics/patterns/
+    parent: log_explorer
+    weight: 506
+  - name: Transactions
+    url: logs/explorer/analytics/transactions/
+    parent: log_explorer
+    weight: 507
   - name: Visualize
     url: logs/explorer/visualize/
     parent: log_explorer
-    weight: 506
+    weight: 508
   - name: Log Side Panel
     url: logs/explorer/side_panel/
     parent: log_explorer
-    weight: 507
+    weight: 509
   - name: Export
     url: logs/explorer/export/
     parent: log_explorer
-    weight: 508
+    weight: 510
   - name: Watchdog Insights for Logs
     url: logs/explorer/watchdog_insights/
     parent: log_explorer
-    weight: 509
+    weight: 511
   - name: Saved Views
     url: logs/explorer/saved_views/
     parent: log_explorer
-    weight: 509
+    weight: 512
   - name: Error Tracking
     url: logs/error_tracking/
     parent: log_management
@@ -2479,11 +2497,6 @@ main:
     parent: observability_pipelines_production_deployment_overview
     identifier: observability_pipelines_aggregator_architecture
     weight: 202
-  - name: Integrate Datadog and the Worker
-    url: observability_pipelines/production_deployment_overview/integrate_datadog_and_the_observability_pipelines_worker/
-    parent: observability_pipelines_production_deployment_overview
-    identifier: observability_pipelines_integrate_datadog_and_the_op_worker
-    weight: 203
   - name: Working with Data
     url: observability_pipelines/working_with_data/
     parent: observability_pipelines
@@ -2688,91 +2701,96 @@ main:
     pre: app-sec
     identifier: application_security
     weight: 184000
+  - name: Terms and Concepts
+    url: security/application_security/terms/
+    parent: application_security
+    identifier: appsec_terms
+    weight: 1
   - name: Getting Started
     url: security/application_security/getting_started/
     parent: application_security
     identifier: appsec_getting_started
-    weight: 1
+    weight: 2
   - name: Java
     url: security/application_security/getting_started/java/
     parent: appsec_getting_started
     identifier: appsec_java
-    weight: 101
+    weight: 201
   - name: .NET
     url: security/application_security/getting_started/dotnet/
     parent: appsec_getting_started
     identifier: appsec_dotnet
-    weight: 102
+    weight: 202
   - name: Go
     url: security/application_security/getting_started/go/
     parent: appsec_getting_started
     identifier: appsec_go
-    weight: 103
+    weight: 203
   - name: Ruby
     url: security/application_security/getting_started/ruby/
     parent: appsec_getting_started
     identifier: appsec_ruby
-    weight: 104
+    weight: 204
   - name: PHP
     url: security/application_security/getting_started/php/
     parent: appsec_getting_started
     identifier: appsec_php
-    weight: 105
+    weight: 205
   - name: NodeJS
     url: security/application_security/getting_started/nodejs/
     parent: appsec_getting_started
     identifier: appsec_nodejs
-    weight: 106
+    weight: 206
   - name: Python
     url: security/application_security/getting_started/python/
     parent: appsec_getting_started
     identifier: appsec_python
-    weight: 107
+    weight: 207
   - name: How It Works
     url: security/application_security/how-appsec-works/
     parent: application_security
     identifier: appsec_howitworks
-    weight: 2
+    weight: 3
   - name: Risk Management
     url: security/application_security/risk_management/
     parent: application_security
     identifier: application_risk_management
-    weight: 3
+    weight: 4
   - name: Threat Monitoring and Protection
     url: security/application_security/threats/
     parent: application_security
     identifier: appsec_threats
-    weight: 4
+    weight: 5
   - name: Setup and Configure
     url: security/application_security/threats/setup_and_configure/
     parent: appsec_threats
     identifier: threats_configuration
-    weight: 401
+    weight: 501
   - name: OOTB Rules
     url: security/default_rules/#cat-application-security
     parent: appsec_threats
     identifier: appsec_default_rules
-    weight: 402
+    weight: 502
   - name: Tracking User Activity
     url: security/application_security/threats/add-user-info/
     parent: appsec_threats
     identifier: threats_user_info
-    weight: 403
+    weight: 503
   - name: Custom Detection Rules
     url: security/application_security/threats/custom_rules/
     parent: appsec_threats
     identifier: threats_custom_rules
-    weight: 404
+    weight: 504
   - name: Event Rules
     url: security/application_security/threats/event_rules/
     parent: appsec_threats
     identifier: threats_event_rules
-    weight: 405
+    weight: 505
   - name: Troubleshooting
     url: security/application_security/troubleshooting/
     parent: application_security
     identifier: appsec_troubleshooting
-    weight: 5
+    weight: 6
   - name: Synthetic Monitoring
     url: synthetics/
     pre: synthetics
@@ -3352,6 +3370,10 @@ main:
     parent: rum
     identifier: rum_guides
     weight: 14
+  - name: Data Security
+    url: data_security/real_user_monitoring/
+    parent: rum
+    weight: 15
   - name: Network Monitoring
     url: network_monitoring/
     pre: network
@@ -3740,10 +3762,14 @@ main:
     url: data_security/synthetics/
     parent: data_security
     weight: 4
+  - name: Real User Monitoring
+    url: data_security/real_user_monitoring/
+    parent: data_security
+    weight: 5
   - name: Guides
     url: data_security/guide/
     parent: data_security
-    weight: 5
+    weight: 6
   - name: Help
     url: help/
     pre: info-fill
@@ -6136,8 +6162,7 @@ api:
         - v1
       operationids:
         - SearchSLO
-      unstable:
-        - v1
+      unstable: []
       order: 1
   - name: Check if SLOs can be safely deleted
     url: '#check-if-slos-can-be-safely-deleted'
@@ -6319,6 +6344,30 @@ api:
     url: /api/latest/synthetics/
     identifier: synthetics
     generated: true
+  - name: Save new value for on-demand concurrency cap
+    url: '#save-new-value-for-on-demand-concurrency-cap'
+    identifier: synthetics-save-new-value-for-on-demand-concurrency-cap
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - SetOnDemandConcurrencyCap
+      unstable: []
+      order: 11
+  - name: Get the on-demand concurrency cap
+    url: '#get-the-on-demand-concurrency-cap'
+    identifier: synthetics-get-the-on-demand-concurrency-cap
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetOnDemandConcurrencyCap
+      unstable: []
+      order: 10
   - name: Edit a global variable
     url: '#edit-a-global-variable'
     identifier: synthetics-edit-a-global-variable
@@ -8056,6 +8105,34 @@ api:
         - ListFastlyAccounts
       unstable: []
       order: 1
+  - name: IP Allowlist
+    url: /api/latest/ip-allowlist/
+    identifier: ip-allowlist
+    generated: true
+  - name: Update IP Allowlist
+    url: '#update-ip-allowlist'
+    identifier: ip-allowlist-update-ip-allowlist
+    parent: ip-allowlist
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateIPAllowlist
+      unstable: []
+      order: 2
+  - name: Get IP Allowlist
+    url: '#get-ip-allowlist'
+    identifier: ip-allowlist-get-ip-allowlist
+    parent: ip-allowlist
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetIPAllowlist
+      unstable: []
+      order: 1
   - name: Incident Services
     url: /api/latest/incident-services/
     identifier: incident-services
@@ -8802,6 +8879,46 @@ api:
         - v2
       operationids:
         - AggregateRUMEvents
+      unstable: []
+      order: 3
+  - name: Restriction Policies
+    url: /api/latest/restriction-policies/
+    identifier: restriction-policies
+    generated: true
+  - name: Update a restriction policy
+    url: '#update-a-restriction-policy'
+    identifier: restriction-policies-update-a-restriction-policy
+    parent: restriction-policies
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateRestrictionPolicy
+      unstable: []
+      order: 1
+  - name: Get a restriction policy
+    url: '#get-a-restriction-policy'
+    identifier: restriction-policies-get-a-restriction-policy
+    parent: restriction-policies
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetRestrictionPolicy
+      unstable: []
+      order: 2
+  - name: Delete a restriction policy
+    url: '#delete-a-restriction-policy'
+    identifier: restriction-policies-delete-a-restriction-policy
+    parent: restriction-policies
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteRestrictionPolicy
       unstable: []
       order: 3
   - name: Roles
