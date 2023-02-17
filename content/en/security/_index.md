@@ -32,7 +32,7 @@ further_reading:
     text: "Best practices for network perimeter security in cloud-native environments"
   - link: "https://www.datadoghq.com/blog/securing-data-in-cloud-native-infrastructure/"
     tag: "Blog"
-    text: "Best practices for data security in cloud-native infrastructure" 
+    text: "Best practices for data security in cloud-native infrastructure"
 ---
 
 {{< site-region region="gov" >}}
