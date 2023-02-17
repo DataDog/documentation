@@ -230,7 +230,7 @@ From the export, click on the scope link. Select the ID that matches the scope t
 - If the scope type is *resource groups*, use the resource group name.
 
 [1]: https://www.datadoghq.com/blog/azure-datadog-partnership/
-[2]: https://portal.azure.com/#view/Microsoft_Azure_CostManagement/Menu/~/exports
+[2]: https://portal.azure.com/#view/Microsoft_Azure_GTM/ModernBillingMenuBlade/~/Exports
 [3]: https://app.datadoghq.com/integrations/azure
 [4]: https://docs.datadoghq.com/integrations/azure/#integrating-through-the-azure-portal
 {{% /tab %}}
