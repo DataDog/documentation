@@ -16993,6 +16993,12 @@ components:
           format: int64
           nullable: true
           type: integer
+        session_count_flutter:
+          description: Contains the number of mobile RUM Sessions on Flutter (data
+            available beginning March 1, 2023).
+          format: int64
+          nullable: true
+          type: integer
         session_count_ios:
           description: Contains the number of mobile RUM Sessions on iOS (data available
             beginning December 1, 2020).
@@ -17459,6 +17465,11 @@ components:
             hours in the current date for all organizations.
           format: int64
           type: integer
+        mobile_rum_session_count_flutter_sum:
+          description: Shows the sum of all mobile RUM Sessions on Flutter over all
+            hours in the current date for all organizations.
+          format: int64
+          type: integer
         mobile_rum_session_count_ios_sum:
           description: Shows the sum of all mobile RUM Sessions on iOS over all hours
             in the current date for all organizations.
@@ -17836,6 +17847,11 @@ components:
           type: integer
         mobile_rum_session_count_android_sum:
           description: Shows the sum of all mobile RUM Sessions on Android over all
+            hours in the current date for the given org.
+          format: int64
+          type: integer
+        mobile_rum_session_count_flutter_sum:
+          description: Shows the sum of all mobile RUM Sessions on Flutter over all
             hours in the current date for the given org.
           format: int64
           type: integer
@@ -18253,6 +18269,11 @@ components:
           type: integer
         mobile_rum_session_count_android_agg_sum:
           description: Shows the sum of all mobile RUM Sessions on Android over all
+            hours in the current months for all organizations.
+          format: int64
+          type: integer
+        mobile_rum_session_count_flutter_agg_sum:
+          description: Shows the sum of all mobile RUM Sessions on Flutter over all
             hours in the current months for all organizations.
           format: int64
           type: integer
