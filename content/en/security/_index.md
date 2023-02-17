@@ -18,6 +18,9 @@ further_reading:
   - link: "/security/cloud_workload_security/getting_started"
     tag: "Documentation"
     text: "Uncover kernel-level threats with Cloud Workload Security"
+  - link: "https://securitylabs.datadoghq.com/"
+    tag: "Security Labs"
+    text: "Read about security-related topics on Datadog's Security Labs blog"
   - link: "https://www.datadoghq.com/blog/cyber-attack-simulation-with-stratus-red-team/"
     tag: "Blog"
     text: "Elevate AWS threat detection with Stratus Red Team"
@@ -29,7 +32,7 @@ further_reading:
     text: "Best practices for network perimeter security in cloud-native environments"
   - link: "https://www.datadoghq.com/blog/securing-data-in-cloud-native-infrastructure/"
     tag: "Blog"
-    text: "Best practices for data security in cloud-native infrastructure"
+    text: "Best practices for data security in cloud-native infrastructure" 
 ---
 
 {{< site-region region="gov" >}}
