@@ -146,6 +146,7 @@ The families and usage types:
     * `session_count_android`
     * `session_count_ios`
     * `session_count_reactnative`
+    * `session_count_flutter`
 - **sds**
     * `logs_scanned_bytes`
     * `total_scanned_bytes`
