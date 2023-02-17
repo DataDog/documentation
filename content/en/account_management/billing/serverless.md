@@ -46,14 +46,7 @@ This filter only collects EC2 instances that contain the tag
 
 Datadog provides a [Lambda Extension][14] and multiple different Lambda Layers to trace and monitor your functions based on your runtime. Active functions that are instrumented and monitored with these libraries incur billable usage, including when the AWS integration is disabled.
 
-Datadog provides multiple tools to manage the installation and configuration of these libraries. These can be used to scale and automate installing or managing Datadog's lambda libraries.
-
-- Datadog CLI
-- Serverless Framework
-- AWS SAM
-- AWS CDK
-- Container Image
-- Custom
+Datadog provides multiple tools to manage the installation and configuration of these libraries. These can be used to scale and automate installing or managing Datadog's lambda libraries, which are documented [here].
 
 ## Active functions definition
 
@@ -80,4 +73,5 @@ For more information about billing or your plan and usage contact, contact your 
 [12]: /logs/guide/forwarder/
 [13]: /integrations/amazon_lambda/
 [14]: /serverless/aws_lambda
+[15]: /serverless/installation/
 
