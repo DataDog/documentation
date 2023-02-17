@@ -942,6 +942,16 @@
     "request_description": "Incident Service Payload.",
     "request_schema_description": "Update request with an incident service payload."
   },
+  "GetOnDemandConcurrencyCap": {
+    "description": "Get the on-demand concurrency cap.",
+    "summary": "Get the on-demand concurrency cap"
+  },
+  "SetOnDemandConcurrencyCap": {
+    "description": "Save new value for on-demand concurrency cap.",
+    "summary": "Save new value for on-demand concurrency cap",
+    "request_description": ".",
+    "request_schema_description": "On-demand concurrency cap attributes."
+  },
   "ListIncidentTeams": {
     "description": "Get all incident teams for the requesting user's organization. If the `include[users]` query parameter is provided, the included attribute will contain the users related to these incident teams.",
     "summary": "Get a list of all incident teams"

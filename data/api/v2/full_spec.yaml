@@ -7576,6 +7576,26 @@ components:
       - id
       - type
       type: object
+    OnDemandConcurrencyCap:
+      description: On-demand concurrency cap.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/OnDemandConcurrencyCapAttributes'
+      type: object
+    OnDemandConcurrencyCapAttributes:
+      description: On-demand concurrency cap attributes.
+      properties:
+        on_demand_concurrency_cap:
+          description: Value of the on-demand concurrency cap.
+          format: double
+          type: number
+      type: object
+    OnDemandConcurrencyCapResponse:
+      description: On-demand concurrency cap response.
+      properties:
+        data:
+          $ref: '#/components/schemas/OnDemandConcurrencyCap'
+      type: object
     OpsgenieServiceCreateAttributes:
       description: The Opsgenie service attributes for a create request.
       properties:
@@ -21303,6 +21323,51 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/synthetics/settings/on_demand_concurrency_cap:
+    get:
+      description: Get the on-demand concurrency cap.
+      operationId: GetOnDemandConcurrencyCap
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OnDemandConcurrencyCapResponse'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get the on-demand concurrency cap
+      tags:
+      - Synthetics
+      x-menu-order: 10
+      x-undo:
+        type: safe
+    post:
+      description: Save new value for on-demand concurrency cap.
+      operationId: SetOnDemandConcurrencyCap
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OnDemandConcurrencyCapAttributes'
+        description: .
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OnDemandConcurrencyCapResponse'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Save new value for on-demand concurrency cap
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+      x-menu-order: 11
+      x-undo:
+        type: safe
   /api/v2/teams:
     get:
       description: Get all incident teams for the requesting user's organization.
@@ -22697,6 +22762,13 @@ tags:
   externalDocs:
     url: https://docs.datadoghq.com/tracing/service_catalog/
   name: Service Definition
+- description: "Datadog Synthetics uses simulated user requests and browser rendering
+    to help you ensure uptime,\nidentify regional issues, and track your application
+    performance. Datadog Synthetics tests come in\ntwo different flavors, [API tests](https://docs.datadoghq.com/synthetics/api_tests/)\nand
+    [browser tests](https://docs.datadoghq.com/synthetics/browser_tests). You can
+    use Datadog\u2019s API to\nmanage both test types programmatically.\n\nFor more
+    information about Synthetics, see the [Synthetics overview](https://docs.datadoghq.com/synthetics/)."
+  name: Synthetics
 - description: 'The usage metering API allows you to get hourly, daily, and
 
     monthly usage across multiple facets of Datadog.

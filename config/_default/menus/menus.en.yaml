@@ -6337,6 +6337,30 @@ api:
     url: /api/latest/synthetics/
     identifier: synthetics
     generated: true
+  - name: Save new value for on-demand concurrency cap
+    url: '#save-new-value-for-on-demand-concurrency-cap'
+    identifier: synthetics-save-new-value-for-on-demand-concurrency-cap
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - SetOnDemandConcurrencyCap
+      unstable: []
+      order: 11
+  - name: Get the on-demand concurrency cap
+    url: '#get-the-on-demand-concurrency-cap'
+    identifier: synthetics-get-the-on-demand-concurrency-cap
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetOnDemandConcurrencyCap
+      unstable: []
+      order: 10
   - name: Edit a global variable
     url: '#edit-a-global-variable'
     identifier: synthetics-edit-a-global-variable

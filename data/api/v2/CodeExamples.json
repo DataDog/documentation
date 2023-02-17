@@ -653,6 +653,13 @@
       "description": "Create or update service definition returns \"CREATED\" response"
     }
   ],
+  "SetOnDemandConcurrencyCap": [
+    {
+      "group": "synthetics",
+      "suffix": "_2850884405",
+      "description": "Save on demand concurrency cap"
+    }
+  ],
   "CreateUser": [
     {
       "group": "users",
