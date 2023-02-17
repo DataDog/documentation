@@ -194,7 +194,7 @@ The rule stops executing for each resource, once a first match is found. For exa
 
 To use Azure Cloud Cost Management in Datadog, you must have an Azure account and have the following billing exports set up: **amortized** and **actual exports**. Additionally, Datadog must have permissions to read the exports from the container.
 
-**Note**: If you used the recommended [Datadog Resource method][1] through the Azure portal to set up the integration with Datadog, you need to create an App Registration to support Cloud Cost Management. Select a site other than `US3` in the side panel of this page and see [Integrating through the Azure portal][4] for instructions.
+**Note**: If you used the recommended [Datadog Resource method][1] through the Azure portal to set up the integration with Datadog, you need to create an App Registration to support Cloud Cost Management.
 
 ### Schedule exports
 
@@ -221,7 +221,7 @@ Repeat steps one to six with export metric type **Amortized Cost (usage and purc
     -  Click **Select members**, pick the name of the App Registration, and click **Select**.
     - Select *review + assign*.
 
-If your exports are in different storage containers, repeat steps one to six for the other storage containers.
+If your exports are in different storage containers, repeat steps one to five for the other storage containers.
 
 ### Steps to find the scope ID
 
@@ -232,7 +232,6 @@ From the export, click on the scope link. Select the ID that matches the scope t
 [1]: https://www.datadoghq.com/blog/azure-datadog-partnership/
 [2]: https://portal.azure.com/#view/Microsoft_Azure_GTM/ModernBillingMenuBlade/~/Exports
 [3]: https://app.datadoghq.com/integrations/azure
-[4]: https://docs.datadoghq.com/integrations/azure/#integrating-through-the-azure-portal
 {{% /tab %}}
 {{< /tabs >}}
 
