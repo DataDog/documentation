@@ -25,6 +25,9 @@ further_reading:
     - link: "/security/notifications/variables/"
       tag: "Documentation"
       text: "Learn more about notification variables to customize notifications"
+    - link: "https://securitylabs.datadoghq.com/"
+      tag: "Security Labs"
+      text: "Read about security-related topics on Datadog's Security Labs"
 ---
 
 ## Overview
