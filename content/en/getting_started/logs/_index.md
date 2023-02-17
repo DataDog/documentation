@@ -150,6 +150,6 @@ Once a logging source is configured, and your logs are available in the Log Expl
 [19]: /logs/log_configuration/pipelines/
 [20]: /logs/log_configuration/processors/
 [21]: /logs/log_configuration/
-[22]: /guide/best-practices-for-log-management/
+[22]: /logs/guide/best-practices-for-log-management/
 [23]: /logs/guide/getting-started-lwl/
 [24]: /logs/guide/logs-rbac/
