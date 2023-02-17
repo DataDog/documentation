@@ -72,7 +72,7 @@ $ DD_API_KEY=<DD_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.
     echo "<DD_OP_CONFIG>" > /var/lib/observability-pipelines-worker/observability-pipelines-worker.yaml
     ```
 
-    Where `DD_OP_CONFIG` are the contents of your Observability Pipeline configuration that you create in the [Observability Pipelines UI].
+    Where `DD_OP_CONFIG` are the contents of your Observability Pipeline configuration that you created in the [Observability Pipelines UI].
 
 
 5. Start the Worker:
