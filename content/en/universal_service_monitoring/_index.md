@@ -292,8 +292,14 @@ providers:
 Add the following to your `docker run` command:
 
 ```
+docker run --cgroupns host \
+--pid host \
+-e DD_API_KEY="<DATADOG_API_KEY>" \
+-e DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true \
+-v /var/run/docker.sock:/var/run/docker.sock:ro \
+-v /proc/:/host/proc/:ro \
+-v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
 -v /sys/kernel/debug:/sys/kernel/debug \
--v /:/host/root:ro \
 -v /lib/modules:/lib/modules:ro \
 -v /usr/src:/usr/src:ro \
 -v /var/tmp/datadog-agent/system-probe/build:/var/tmp/datadog-agent/system-probe/build \
@@ -314,7 +320,8 @@ Add the following to your `docker run` command:
 --cap-add=NET_BROADCAST \
 --cap-add=NET_RAW \
 --cap-add=IPC_LOCK \
---cap-add=CHOWN
+--cap-add=CHOWN \
+gcr.io/datadoghq/agent:latest
 ```
 
 For optional HTTPS support, also add:
@@ -336,6 +343,10 @@ services:
     environment:
      - DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED: 'true'
     volumes:
+     - /var/run/docker.sock:/var/run/docker.sock:ro
+     - /proc/:/host/proc/:ro
+     - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+     - /sys/kernel/debug:/sys/kernel/debug
      - /sys/kernel/debug:/sys/kernel/debug
      - /lib/modules:/lib/modules
      - /usr/src:/usr/src
@@ -373,6 +384,16 @@ services:
     volumes:
      - /:/host/root:ro
 ```
+
+{{% /tab %}}
+{{% tab "Docker Swarm" %}}
+
+As `Docker Swarm` does not yet support the changing of `security_opt`, the operating system
+must not have a running `apparmor` instance.
+
+If the operating system does not have a running `apparmor` instance, then use the same `docker-compose.yml` file from the `Docker-Compose` [section][1] beside the field `security_opt`.
+
+[1]: /universal_service_monitoring/?tab=dockercompose#enabling-universal-service-monitoring
 
 {{% /tab %}}
 {{% tab "Configuration files (Linux)" %}}

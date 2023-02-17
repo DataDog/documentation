@@ -585,6 +585,20 @@
     "request_description": "",
     "request_schema_description": "A request wrapper around a single timeseries query to be executed."
   },
+  "DeleteRestrictionPolicy": {
+    "description": "Deletes the restriction policy associated with a specified resource.",
+    "summary": "Delete a restriction policy"
+  },
+  "GetRestrictionPolicy": {
+    "description": "Retrieves the restriction policy associated with a specified resource.",
+    "summary": "Get a restriction policy"
+  },
+  "UpdateRestrictionPolicy": {
+    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Connections: `connection`\n- Dashboards: `dashboard`\n- Notebooks: `notebook`\n- Security Rules: `security-rule`",
+    "summary": "Update a restriction policy",
+    "request_description": "Restriction policy payload",
+    "request_schema_description": "Update request for a restriction policy."
+  },
   "ListRoles": {
     "description": "Returns all roles, including their names and their unique identifiers.",
     "summary": "List roles"
@@ -927,6 +941,16 @@
     "summary": "Update an existing incident service",
     "request_description": "Incident Service Payload.",
     "request_schema_description": "Update request with an incident service payload."
+  },
+  "GetOnDemandConcurrencyCap": {
+    "description": "Get the on-demand concurrency cap.",
+    "summary": "Get the on-demand concurrency cap"
+  },
+  "SetOnDemandConcurrencyCap": {
+    "description": "Save new value for on-demand concurrency cap.",
+    "summary": "Save new value for on-demand concurrency cap",
+    "request_description": ".",
+    "request_schema_description": "On-demand concurrency cap attributes."
   },
   "ListIncidentTeams": {
     "description": "Get all incident teams for the requesting user's organization. If the `include[users]` query parameter is provided, the included attribute will contain the users related to these incident teams.",

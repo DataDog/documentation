@@ -434,6 +434,13 @@
       "description": "Update a RUM application returns \"OK\" response"
     }
   ],
+  "UpdateRestrictionPolicy": [
+    {
+      "group": "restriction_policies",
+      "suffix": "",
+      "description": "Update a restriction policy returns \"OK\" response"
+    }
+  ],
   "AddUserToRole": [
     {
       "group": "roles",
@@ -644,6 +651,13 @@
       "group": "service_definition",
       "suffix": "",
       "description": "Create or update service definition returns \"CREATED\" response"
+    }
+  ],
+  "SetOnDemandConcurrencyCap": [
+    {
+      "group": "synthetics",
+      "suffix": "_2850884405",
+      "description": "Save on demand concurrency cap"
     }
   ],
   "CreateUser": [

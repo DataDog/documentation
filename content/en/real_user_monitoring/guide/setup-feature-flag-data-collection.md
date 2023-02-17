@@ -262,7 +262,7 @@ We currently support integrations with:
              datadogRum
                  .addFeatureFlagEvaluation(
                       impressionData.impression.feature,
-                      impressionData.impression.value
+                      impressionData.impression.treatment
                  );
         },
      },
@@ -310,7 +310,7 @@ We currently support integrations with:
              datadogRum
                  .addFeatureFlagEvaluation(
                       impressionData.impression.feature,
-                      impressionData.impression.value
+                      impressionData.impression.treatment
                  );
         },
      },
@@ -353,7 +353,7 @@ We currently support integrations with:
              datadogRum
                  .addFeatureFlagEvaluation(
                       impressionData.impression.feature,
-                      impressionData.impression.value
+                      impressionData.impression.treatment
                  );
         },
      },

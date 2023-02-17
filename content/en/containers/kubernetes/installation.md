@@ -134,6 +134,10 @@ agent:
 
 where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the group ID owning the Docker or containerd socket.
 
+## Container registries
+
+To modify the container image registry, see the [Changing Container Registry][9] guide.
+
 [1]: https://github.com/DataDog/datadog-operator
 [2]: https://helm.sh
 [3]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
@@ -142,6 +146,7 @@ where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the gro
 [6]: https://app.datadoghq.com/organization-settings/api-keys
 [7]: /agent/guide/operator-advanced
 [8]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.md
+[9]: /agent/guide/changing_container_registry/#kubernetes-with-the-datadog-operator
 {{% /tab %}}
 {{% tab "Helm" %}}
 

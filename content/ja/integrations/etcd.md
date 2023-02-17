@@ -35,7 +35,6 @@ categories:
 - orchestration
 - containers
 - configuration & deployment
-- autodiscovery
 - log collection
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/etcd/README.md
@@ -65,7 +64,6 @@ tile:
   - Category::オーケストレーション
   - Category::コンテナ
   - Category::構成 & デプロイ
-  - Category::オートディスカバリー
   - Category::ログの収集
   configuration: README.md#Setup
   description: 書き込み、更新、削除、ノード間レイテンシー、さまざまな Etcd メトリクスを追跡。
@@ -89,7 +87,7 @@ Etcd のメトリクスを収集して、以下のことができます。
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Etcdチェックは [Datadog Agent][2] パッケージに含まれています。Etcd インスタンスに追加でインストールする必要はありません。
 
