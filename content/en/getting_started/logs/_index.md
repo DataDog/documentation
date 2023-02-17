@@ -118,8 +118,9 @@ Once a logging source is configured, and your logs are available in the Log Expl
 
 ### Guides
 
-* Dive further into [Logging without Limits*][22]
-* Manage sensitive log data with [RBAC settings][23]
+* [Best practices for Log Management][22]
+* Dive further into [Logging without Limits*][23]
+* Manage sensitive log data with [RBAC settings][24]
 
 ## Further reading
 
@@ -149,5 +150,6 @@ Once a logging source is configured, and your logs are available in the Log Expl
 [19]: /logs/log_configuration/pipelines/
 [20]: /logs/log_configuration/processors/
 [21]: /logs/log_configuration/
-[22]: /logs/guide/getting-started-lwl/
-[23]: /logs/guide/logs-rbac/
+[22]: /guide/best-practices-for-log-management/
+[23]: /logs/guide/getting-started-lwl/
+[24]: /logs/guide/logs-rbac/
