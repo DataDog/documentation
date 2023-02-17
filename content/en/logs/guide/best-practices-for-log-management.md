@@ -207,7 +207,7 @@ If you want to see user activities, such as who changed the retention of an inde
 [18]: https://app.datadoghq.com/dash/integration/logs_estimated_usage
 [19]: https://app.datadoghq.com/dashboard/lists?q=Log+Management+-+Estimated+Usage
 [20]: /logs/log_configuration/indexes/#exclusion-filters
-[21]: /logs/explorer/analytics/#patterns
+[21]: /logs/explorer/analytics/patterns
 [22]: /logs/log_configuration/logs_to_metrics/
 [23]: /account_management/org_settings/sensitive_data_detection/
 [24]: https://www.datadoghq.com/pricing/?product=sensitive-data-scanner#sensitive-data-scanner
