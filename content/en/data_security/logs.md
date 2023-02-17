@@ -63,14 +63,22 @@ Datadog allows customers to send logs to PCI DSS compliant Datadog orgs upon req
 2. Contact [Datadog support][2] or your [Customer Success Manager][3] to request that the new org be configured as a PCI-compliant org.
 3. Enable [Audit Trail][4] in the new org. Audit Trail must be enabled and remain enabled for PCI DSS compliance.
 4. Datadog support or Customer Success confirms that the new org is PCI DSS compliant.
-5. Update the Datadog Agents to ship logs to the following dedicated PCI-compliant endpoint: `agent-http-intake-pci.logs.datadoghq.com`
+5. Update the Datadog Agents to send logs to the following dedicated PCI-compliant endpoint: `agent-http-intake-pci.logs.datadoghq.com`. Configure the Agent configuration file to send logs to the following dedicated PCI-compliant endpoint (`agent-http-intake-pci.logs.datadoghq.com`):
+    ```
+    logs_config:
+      logs_dd_url: <http://agent-http-intake-pci.logs.datadoghq.com:443|agent-http-intake-pci.logs.datadoghq.com:443>
+    ```
+    **Note**: The port must be included in the configuration.
 
 If you have any questions about how the Log Management service satisfies the applicable requirements under PCI DSS, contact your account manager.
+
+To enable PCI compliance for APM, see [PCI DSS compliance for APM][5]
 
 [1]: /getting_started/site/
 [2]: /help/
 [3]: mailto:success@datadoghq.com
 [4]: /account_management/audit_trail/#setup
+[5]: /tracing/configure_data_security/#pci-dss-compliance-for-compliance-for-apm
 
 {{< /site-region >}}
 

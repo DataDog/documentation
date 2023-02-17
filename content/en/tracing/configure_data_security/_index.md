@@ -342,7 +342,7 @@ Datadog may gather environmental and diagnostic information about your tracing l
  
 To disable this telemetry collection, set `DD_INSTRUMENTATION_TELEMETRY_ENABLED` environment variable to `false` in your instrumented application.
 
-## PCI compliance for APM
+## PCI DSS compliance for compliance for APM
 
 {{< site-region region="us" >}}
 
@@ -350,10 +350,26 @@ To disable this telemetry collection, set `DD_INSTRUMENTATION_TELEMETRY_ENABLED`
 PCI compliance for APM is only available for new Datadog orgs created in the <a href="/getting_started/site/">US1 site</a>.
 </div>
 
-PCI compliance for APM is available when you create a new Datadog organization. [Audit Trail][1] must be enabled and remain enabled to maintain PCI compliance. Contact [Datadog support][2] to enable PCI-compliant APM.
+PCI compliance for APM is available when you create a new Datadog organization. To set up a PCI-complaint Datadog org, follow these steps:
 
-[1]: /account_management/audit_trail/
+1. Set up a new Datadog org in the [US1 site][1]. PCI DSS compliance is only supported for new orgs created in US1.
+2. Contact [Datadog support][2] or your [Customer Success Manager][3] to request that the new org be configured as a PCI-compliant org.
+3. Enable [Audit Trail][4] in the new org. Audit Trail must be enabled and remain enabled for PCI DSS compliance.
+4. Datadog support or Customer Success confirms that the new org is PCI DSS compliant.
+5. Configure the Agent configuration file to send spans to the dedicated PCI-compliant endpoint (`https://trace-pci.agent.datadoghq.com`):
+    ```
+    apm_config:
+    apm_dd_url: <https://trace-pci.agent.datadoghq.com>
+    ```
+
+To enable PCI compliance for logs, see [PCI DSS compliance for Log Management][5].
+
+[1]: /getting_started/site/
 [2]: /help/
+[3]: mailto:success@datadoghq.com
+[4]: /account_management/audit_trail/
+[5]: /data_security/logs/#pci-dss-compliance-for-log-management
+
 
 {{< /site-region >}}
 
