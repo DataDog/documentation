@@ -3898,6 +3898,104 @@ components:
       - APP_SEC_HOST_COUNT
       - OBSERVABILITY_PIPELINES_BYTES_PROCESSSED
       - LAMBDA_TRACED_INVOCATIONS_COUNT
+    IPAllowlistAttributes:
+      description: Attributes of the IP allowlist.
+      properties:
+        enabled:
+          description: Whether the IP allowlist logic is enabled or not.
+          type: boolean
+        entries:
+          description: Array of entries in the IP allowlist.
+          items:
+            $ref: '#/components/schemas/IPAllowlistEntry'
+          type: array
+      type: object
+    IPAllowlistData:
+      description: IP allowlist data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IPAllowlistAttributes'
+        id:
+          description: The unique identifier of the org.
+          type: string
+        type:
+          $ref: '#/components/schemas/IPAllowlistType'
+      required:
+      - type
+      type: object
+    IPAllowlistEntry:
+      description: IP allowlist entry object.
+      properties:
+        data:
+          $ref: '#/components/schemas/IPAllowlistEntryData'
+      required:
+      - data
+      type: object
+    IPAllowlistEntryAttributes:
+      description: Attributes of the IP allowlist entry.
+      properties:
+        cidr_block:
+          description: The CIDR block describing the IP range of the entry.
+          type: string
+        created_at:
+          description: Creation time of the entry.
+          format: date-time
+          readOnly: true
+          type: string
+        modified_at:
+          description: Time of last entry modification.
+          format: date-time
+          readOnly: true
+          type: string
+        note:
+          description: A note describing the IP allowlist entry.
+          type: string
+      type: object
+    IPAllowlistEntryData:
+      description: Data of the IP allowlist entry object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IPAllowlistEntryAttributes'
+        id:
+          description: The unique identifier of the IP allowlist entry.
+          type: string
+        type:
+          $ref: '#/components/schemas/IPAllowlistEntryType'
+      required:
+      - type
+      type: object
+    IPAllowlistEntryType:
+      default: ip_allowlist_entry
+      description: IP allowlist Entry type.
+      enum:
+      - ip_allowlist_entry
+      example: ip_allowlist_entry
+      type: string
+      x-enum-varnames:
+      - IP_ALLOWLIST_ENTRY
+    IPAllowlistResponse:
+      description: Response containing information about the IP allowlist.
+      properties:
+        data:
+          $ref: '#/components/schemas/IPAllowlistData'
+      type: object
+    IPAllowlistType:
+      default: ip_allowlist
+      description: IP allowlist type.
+      enum:
+      - ip_allowlist
+      example: ip_allowlist
+      type: string
+      x-enum-varnames:
+      - IP_ALLOWLIST
+    IPAllowlistUpdateRequest:
+      description: Update the IP allowlist.
+      properties:
+        data:
+          $ref: '#/components/schemas/IPAllowlistData'
+      required:
+      - data
+      type: object
     IdPMetadataFormData:
       description: The form data submitted to upload IdP metadata
       properties:
@@ -15713,6 +15811,90 @@ paths:
       x-menu-order: 9
       x-undo:
         type: safe
+  /api/v2/ip_allowlist:
+    get:
+      description: Returns the IP allowlist and its enabled or disabled state.
+      operationId: GetIPAllowlist
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IPAllowlistResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_management
+      summary: Get IP Allowlist
+      tags:
+      - IP Allowlist
+      x-menu-order: 1
+      x-undo:
+        type: safe
+    patch:
+      description: Edit the entries in the IP allowlist, and enable or disable it.
+      operationId: UpdateIPAllowlist
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IPAllowlistUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IPAllowlistResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_management
+      summary: Update IP Allowlist
+      tags:
+      - IP Allowlist
+      x-codegen-request-body-name: body
+      x-given:
+        ip_allowlist_empty_disabled:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"enabled\": false,\n
+              \     \"entries\": []\n    },\n    \"type\": \"ip_allowlist\"\n  }\n}"
+          step: the "ip_allowlist_empty_disabled" has no entries and is disabled
+        ip_allowlist_nonempty_disabled:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"enabled\": false,\n
+              \     \"entries\": [\n        {\n          \"data\": {\n            \"attributes\":
+              {\n              \"cidr_block\": \"127.0.0.1\",\n              \"note\":
+              \"{{ unique }}\"\n            },\n            \"type\": \"ip_allowlist_entry\"\n
+              \         }\n        },\n        {\n          \"data\": {\n            \"attributes\":
+              {\n              \"cidr_block\": \"0.0.0.0\",\n              \"note\":
+              \"{{ unique }}\"\n            },\n            \"type\": \"ip_allowlist_entry\"\n
+              \         }\n        }\n      ]\n    },\n    \"type\": \"ip_allowlist\"\n
+              \ }\n}"
+          step: the "ip_allowlist_nonempty_disabled" has two entries and is disabled
+      x-menu-order: 2
+      x-undo:
+        type: idempotent
   /api/v2/logs:
     post:
       description: 'Send your logs to your Datadog platform over HTTP. Limits per
@@ -22628,6 +22810,10 @@ tags:
 - description: Configure your Datadog Fastly integration directly through the Datadog
     API.
   name: Fastly Integration
+- description: 'The IP allowlist API is used to manage the IP addresses that
+
+    can access the Datadog API and UI.'
+  name: IP Allowlist
 - description: Create, update, delete, and retrieve services which can be associated
     with incidents.
   name: Incident Services

@@ -162,6 +162,13 @@
       "description": "Update Fastly account returns \"OK\" response"
     }
   ],
+  "UpdateIPAllowlist": [
+    {
+      "group": "ip_allowlist",
+      "suffix": "",
+      "description": "Update IP Allowlist returns \"OK\" response"
+    }
+  ],
   "CreateIncidentService": [
     {
       "group": "incident_services",

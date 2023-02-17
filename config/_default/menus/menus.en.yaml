@@ -8098,6 +8098,34 @@ api:
         - ListFastlyAccounts
       unstable: []
       order: 1
+  - name: IP Allowlist
+    url: /api/latest/ip-allowlist/
+    identifier: ip-allowlist
+    generated: true
+  - name: Update IP Allowlist
+    url: '#update-ip-allowlist'
+    identifier: ip-allowlist-update-ip-allowlist
+    parent: ip-allowlist
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateIPAllowlist
+      unstable: []
+      order: 2
+  - name: Get IP Allowlist
+    url: '#get-ip-allowlist'
+    identifier: ip-allowlist-get-ip-allowlist
+    parent: ip-allowlist
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetIPAllowlist
+      unstable: []
+      order: 1
   - name: Incident Services
     url: /api/latest/incident-services/
     identifier: incident-services
