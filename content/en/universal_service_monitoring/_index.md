@@ -27,7 +27,6 @@ Universal Service Monitoring (USM) provides visibility into your service health 
 
 {{< img src="universal_service_monitoring/usm-demo.mp4" alt="Video demonstrating Universal Service Monitoring. An overview of a service is accessed by clicking on a service on the Service Map and selecting View service overview." video="true" >}}
 
-
 ## Setup
 
 ### Supported versions and compatibility
@@ -58,8 +57,6 @@ If you have feedback about what platforms and protocols you'd like to see suppor
     - Your service is running on a virtual machine.
 - Datadog Agent is installed alongside your service. Installing a tracing library is _not_ required.
 - The `env` tag for [Unified Service Tagging][1] has been applied to your deployment. The `service` and `version` tags are optional.
-
-
 
 ## Enabling Universal Service Monitoring
 
@@ -163,6 +160,8 @@ providers:
              value: 'true'
            - name: DD_SYSPROBE_SOCKET
              value: /var/run/sysprobe/sysprobe.sock
+           - name: HOST_PROC
+             value: /host/proc
          resources: {}
          volumeMounts:
            - name: procdir
@@ -214,6 +213,9 @@ providers:
    volumes:
      - name: sysprobe-socket-dir
        emptyDir: {}
+     - name: procdir
+       hostPath:
+         path: /proc
      - name: debugfs
        hostPath:
          path: /sys/kernel/debug
@@ -312,6 +314,8 @@ docker run --cgroupns host \
 -v /etc/dnf/vars:/host/etc/dnf/vars:ro \
 -v /etc/rhsm:/host/etc/rhsm:ro \
 -e DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true \
+-e HOST_PROC=/host/root/proc \
+-e HOST_ROOT=/host/root \
 --security-opt apparmor:unconfined \
 --cap-add=SYS_ADMIN \
 --cap-add=SYS_RESOURCE \
@@ -322,12 +326,6 @@ docker run --cgroupns host \
 --cap-add=IPC_LOCK \
 --cap-add=CHOWN \
 gcr.io/datadoghq/agent:latest
-```
-
-For optional HTTPS support, also add:
-```
--e HOST_ROOT=/host/root \
--v /:/host/root:ro
 ```
 
 {{% /tab %}}
@@ -342,6 +340,7 @@ services:
     ...
     environment:
      - DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED: 'true'
+     - HOST_PROC: '/host/proc'
     volumes:
      - /var/run/docker.sock:/var/run/docker.sock:ro
      - /proc/:/host/proc/:ro
