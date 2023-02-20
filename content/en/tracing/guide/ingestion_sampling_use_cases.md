@@ -45,7 +45,7 @@ Ingesting entire transaction traces ensures to keep visibility over the **end-to
 
 Complete traces can be ingested with [head-based sampling][4] mechanisms: the decision of keeping or dropping the trace is taken at the trace creation (trace head), and that this decision is propagated in the request context to downstream callee services.
 
-{{< img src="/tracing/guide/ingestion_sampling_use_cases/head_based_sampling.png" alt="Head-based Sampling" style="width:70%;" >}}
+{{< img src="/tracing/guide/ingestion_sampling_use_cases/head_based_sampling_keep.png" alt="Head-based Sampling" style="width:100%;" >}}
 
 
 To decide which requests to keep and drop, the Datadog Agent computes automatic sampling rates for each service to apply at the root of the trace.
@@ -92,6 +92,53 @@ Traces with error spans are often symptoms of system failures. Keeping a higher 
 
 #### What solutions does Datadog provide ?
 
+In addition to head-based sampled traces, each Agent keeps additional error spans out of the traffic **not captured** by head-based sampling. 
+
+{{< img src="/tracing/guide/ingestion_sampling_use_cases/error_sampling.png" alt="Error Sampling" style="width:100%;" >}}
+
+**Note:** Distributed pieces of the trace chunks might not be ingested as the sampling happens locally at the Datadog Agent level.
+
+#### How to configure error sampling ?
+
+You can configure the number of error chunks per second per Agent that you want to capture by setting the environment variable `DD_APM_ERROR_TPS`.
+
+To ensure to ingest **all errors**, set the Agent parameter to an arbitrary high value. To disable the error sampler, set `DD_APM_ERROR_TPS` to `0`.
+
+## Reducing ingested volumes for high volume services
+
+### Database/cache services make up a large portion of the ingested volume
+
+#### Why ? 
+
+Traced database calls may represent a large amount of ingested data while the application performance metrics (errors, request hits, latency…) are enough to monitor database health.
+
+#### What solutions does Datadog provide ?
+
+In order to reduce the span volume created by tracing database calls, sampling must be configured at the head of the trace. 
+
+Database services are very rarely starting a trace. Most of the time, client database spans are children of an instrumented backend service span. 
+
+To know **which services start traces** where a database is called, leverage the `Top Sampling Decision Makers` top list graph of the ingestion control page [Service Ingestion Summary][7]. Configuring head-based sampling for these specific services will reduce the volume of ingested database spans, while making sure that no incomplete traces are ingested: distributed traces are either kept or dropped altogether.
+
+#### How to configure sampling to drop database spans ?
+
+Refer to the [sampling rule configuration section](#how-to-configure-a-sampling-rule) for more information about sampling rules syntax.
+
+For example, if a backend service `my-service` is calling a postgresql database multiple times per trace, which is creating a lot of unwanted span volume: 
+
+- configure a trace sampling rule for the backend service `my-service`. This will ensure 10% of entire traces are kept, including postgresql spans.
+
+```
+DD_TRACE_SAMPLING_RULES=[{"service": "my-service", "sample_rate": 0.1}]
+```
+
+- _\[Optional\]_ configure a **single span sampling rule** to keep 100% of the spans for the backend service `my-service`, for instance if some [span-based metrics][8] are built on top of `my-service` data.
+
+```
+DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "sample_rate": 1}]
+```
+
+{{< img src="/tracing/guide/ingestion_sampling_use_cases/drop_database_spans.png" alt="Database spans sampling" style="width:100%;" >}}
 
 
 ## Further Reading
@@ -104,3 +151,5 @@ Traces with error spans are often symptoms of system failures. Keeping a higher 
 [4]: /tracing/trace_pipeline/ingestion_mechanisms/#head-based-sampling
 [5]: /tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
 [6]: /tracing/trace_pipeline/ingestion_mechanisms/#in-tracing-libraries-user-defined-rules
+[7]: /tracing/trace_pipeline/ingestion_controls/#service-ingestion-summary
+[8]: /tracing/trace_pipeline/generate_metrics/
