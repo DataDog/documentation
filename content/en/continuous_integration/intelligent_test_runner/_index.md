@@ -87,11 +87,12 @@ In addition to setting the environment variables, you or a user in your organiza
 
 Intelligent Test Runner is only supported in the following versions and testing frameworks:
 
-* `dd-trace>=3.4.0`
 * `jest>=24.8.0`
+  * From `dd-trace>=3.4.0`
   * Only `jest-circus/runner` is supported as `testRunner`.
   * Only `jsdom` and `node` are supported as test environments.
 * `mocha>=5.2.0`
+  * From `dd-trace>=3.9.0`
 
 #### Suite skipping
 Intelligent test runner for Javascript will skip entire _test suites_ (test files) rather than individual tests.
