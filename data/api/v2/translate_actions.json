@@ -345,6 +345,16 @@
     "request_description": "",
     "request_schema_description": "Payload schema for Fastly service requests."
   },
+  "GetIPAllowlist": {
+    "description": "Returns the IP allowlist and its enabled or disabled state.",
+    "summary": "Get IP Allowlist"
+  },
+  "UpdateIPAllowlist": {
+    "description": "Edit the entries in the IP allowlist, and enable or disable it.",
+    "summary": "Update IP Allowlist",
+    "request_description": "",
+    "request_schema_description": "Update the IP allowlist."
+  },
   "SubmitLog": {
     "description": "Send your logs to your Datadog platform over HTTP. Limits per HTTP request are:\n\n- Maximum content size per payload (uncompressed): 5MB\n- Maximum size for a single log: 1MB\n- Maximum array size if sending multiple logs in an array: 1000 entries\n\nAny log exceeding 1MB is accepted and truncated by Datadog:\n- For a single log request, the API truncates the log at 1MB and returns a 2xx.\n- For a multi-logs request, the API processes all logs, truncates only logs larger than 1MB, and returns a 2xx.\n\nDatadog recommends sending your logs compressed.\nAdd the `Content-Encoding: gzip` header to the request when sending compressed logs.\n\nThe status codes answered by the HTTP API are:\n- 202: Accepted: the request has been accepted for processing\n- 400: Bad request (likely an issue in the payload formatting)\n- 401: Unauthorized (likely a missing API Key)\n- 403: Permission issue (likely using an invalid API Key)\n- 408: Request Timeout, request should be retried after some time\n- 413: Payload too large (batch is above 5MB uncompressed)\n- 429: Too Many Requests, request should be retried after some time\n- 500: Internal Server Error, the server encountered an unexpected condition that prevented it from fulfilling the request, request should be retried after some time\n- 503: Service Unavailable, the server is not ready to handle the request probably because it is overloaded, request should be retried after some time",
     "summary": "Send logs",
@@ -541,6 +551,30 @@
     "description": "View distinct metrics volumes for the given metric name.\n\nCustom metrics generated in-app from other products will return `null` for ingested volumes.",
     "summary": "List distinct metric volumes by metric name"
   },
+  "ListMonitorConfigPolicies": {
+    "description": "Get all monitor configuration policies.",
+    "summary": "Get all monitor configuration policies"
+  },
+  "CreateMonitorConfigPolicy": {
+    "description": "Create a monitor configuration policy.",
+    "summary": "Create a monitor configuration policy",
+    "request_description": "Create a monitor configuration policy request body.",
+    "request_schema_description": "Request for creating a monitor configuration policy."
+  },
+  "DeleteMonitorConfigPolicy": {
+    "description": "Delete a monitor configuration policy.",
+    "summary": "Delete a monitor configuration policy"
+  },
+  "GetMonitorConfigPolicy": {
+    "description": "Get a monitor configuration policy by `policy_id`.",
+    "summary": "Get a monitor configuration policy"
+  },
+  "UpdateMonitorConfigPolicy": {
+    "description": "Edit a monitor configuration policy.",
+    "summary": "Edit a monitor configuration policy",
+    "request_description": "Description of the update.",
+    "request_schema_description": "Request for editing a monitor configuration policy."
+  },
   "ListPermissions": {
     "description": "Returns a list of all permissions, including name, description, and ID.",
     "summary": "List permissions"
@@ -550,16 +584,30 @@
     "summary": "Get all processes"
   },
   "QueryScalarData": {
-    "description": "The internal endpoint to query scalar/table data for multiple data sources and\nprocess the data using formulas and functions.",
-    "summary": "Scalar cross product query",
+    "description": "Query scalar values (as seen on Query Value, Table and Toplist widgets).\nMultiple data sources are supported with the ability to\nprocess the data using formulas and functions.",
+    "summary": "Query scalar data across multiple products",
     "request_description": "",
     "request_schema_description": "A wrapper request around one scalar query to be executed."
   },
   "QueryTimeseriesData": {
-    "description": "The internal endpoint to query timeseries data for multiple data sources and\nprocess the data by applying formulas and functions.",
-    "summary": "Timeseries cross product query",
+    "description": "Query timeseries data across various data sources and\nprocess the data by applying formulas and functions.",
+    "summary": "Query timeseries data across multiple products",
     "request_description": "",
     "request_schema_description": "A request wrapper around a single timeseries query to be executed."
+  },
+  "DeleteRestrictionPolicy": {
+    "description": "Deletes the restriction policy associated with a specified resource.",
+    "summary": "Delete a restriction policy"
+  },
+  "GetRestrictionPolicy": {
+    "description": "Retrieves the restriction policy associated with a specified resource.",
+    "summary": "Get a restriction policy"
+  },
+  "UpdateRestrictionPolicy": {
+    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Connections: `connection`\n- Dashboards: `dashboard`\n- Notebooks: `notebook`\n- Security Rules: `security-rule`",
+    "summary": "Update a restriction policy",
+    "request_description": "Restriction policy payload",
+    "request_schema_description": "Update request for a restriction policy."
   },
   "ListRoles": {
     "description": "Returns all roles, including their names and their unique identifiers.",
@@ -903,6 +951,16 @@
     "summary": "Update an existing incident service",
     "request_description": "Incident Service Payload.",
     "request_schema_description": "Update request with an incident service payload."
+  },
+  "GetOnDemandConcurrencyCap": {
+    "description": "Get the on-demand concurrency cap.",
+    "summary": "Get the on-demand concurrency cap"
+  },
+  "SetOnDemandConcurrencyCap": {
+    "description": "Save new value for on-demand concurrency cap.",
+    "summary": "Save new value for on-demand concurrency cap",
+    "request_description": ".",
+    "request_schema_description": "On-demand concurrency cap attributes."
   },
   "ListIncidentTeams": {
     "description": "Get all incident teams for the requesting user's organization. If the `include[users]` query parameter is provided, the included attribute will contain the users related to these incident teams.",

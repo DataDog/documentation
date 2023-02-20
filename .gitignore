@@ -121,6 +121,7 @@ content/en/real_user_monitoring/flutter/setup.md
 content/en/real_user_monitoring/flutter/advanced_configuration.md
 content/en/real_user_monitoring/flutter/data_collected.md
 content/en/real_user_monitoring/flutter/mobile_vitals.md
+content/en/real_user_monitoring/flutter/otel_support.md
 content/en/real_user_monitoring/flutter/troubleshooting.md
 
 # Continuous Testing

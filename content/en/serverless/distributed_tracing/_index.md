@@ -340,7 +340,7 @@ ddlambda.WrapFunction(handler, cfg)
 [3]: /tracing/trace_collection/compatibility/python
 [4]: /tracing/trace_collection/compatibility/nodejs
 [5]: /serverless/installation/
-[6]: /serverless/distributed_tracing/serverless_trace_merging
+[6]: /serverless/distributed_tracing/#trace-merging
 [7]: https://docs.datadoghq.com/help/
 [8]: /tracing/trace_collection/compatibility/ruby
 [9]: /tracing/trace_collection/compatibility/go

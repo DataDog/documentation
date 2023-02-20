@@ -45,14 +45,14 @@ Use template variables and Markdown to [customize notification messages][9]. Edi
 
 ## Review and remediate findings
 
-Investigate details using the [Security Findings Explorer][10]. View detailed information about a resource, such as configuration, detection rules applied to the resource, and tags that provide additional context about who owns the resource and its location within your environment.
+Investigate details using the [Security Findings Explorer][10]. View detailed information about a resource, such as configuration, detection rules applied to the resource, and tags that provide additional context about who owns the resource and its location within your environment.  If a finding does not match your business use case or is an accepted risk, you can [mute the finding][13] up to an indefinite period of time.
 
 {{< img src="security/cspm/security_findings_explorer.png" alt="Cloud Security Posture Management security findings explorer" width="100%">}}
 
 ## Glossary
 
 Security posture score
-: Percentage of your environment that satisfies all of your active Datadog OOTB [Cloud][4] and [Infrastructure][11] detection rules. Formula: `(# of evaluation:pass findings) / (total # of findings)`. Datadog then weighs this formula by severity: low severity detection rules have a weighting of "1" and critical severity detection rules have a weighting of "5". This means critical severity detection rules impact scores five times more than low severity detection rules to put greater emphasis on the detection rules that pose greater security risk. The score is also normalized to treat all all resource types and resource volumes the same (for example, 500 failing containers are weighted the same as three failing S3 buckets in the computed score). This normalization factor allows scores to be comparable across your cloud accounts, without the risk that they are heavily skewed if one account has more containers, or another has fewer storage buckets.
+: Percentage of your environment that satisfies all of your active Datadog OOTB [Cloud][4] and [Infrastructure][11] detection rules. Formula: `(# of evaluation:pass findings) / (total # of findings)`. Datadog then weighs this formula by severity: low severity detection rules have a weighting of "1" and critical severity detection rules have a weighting of "5". This means critical severity detection rules impact scores five times more than low severity detection rules to put greater emphasis on the detection rules that pose greater security risk. The score is also normalized to treat all resource types and resource volumes the same (for example, 500 failing containers are weighted the same as three failing S3 buckets in the computed score). This normalization factor allows scores to be comparable across your cloud accounts, without the risk that they are heavily skewed if one account has more containers, or another has fewer storage buckets.
 
 Requirement
 : A group of controls representing a single technical or operational topic, such as _Access Management_ or _Networking_. The regulatory framework PCI DSS, for example, has [12 requirements][12].
@@ -95,3 +95,4 @@ Framework
 [10]: /security/cspm/findings
 [11]: /security/default_rules/#cat-posture-management-infra
 [12]: https://www.pcisecuritystandards.org/pci_security/maintaining_payment_security
+[13]: /security/cspm/findings#mute-findings

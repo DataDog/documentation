@@ -7,6 +7,9 @@ further_reading:
 - link: "/agent/cluster_agent/troubleshooting/"
   tag: "Documentation"
   text: "Troubleshooting the Datadog Cluster Agent"
+- link: "https://www.datadoghq.com/blog/auto-instrument-kubernetes-tracing-with-datadog/"
+  tag: "Blog"
+  text: "Use library injection to auto-instrument tracing for Kubernetes applications with Datadog APM"
 ---
 
 ## Overview
@@ -192,6 +195,6 @@ Possible options:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://kubernetes.io/blog/2019/03/21/a-guide-to-kubernetes-admission-controllers/
-[2]: /tracing/trace_collection/admission_controller/
+[2]: /tracing/trace_collection/library_injection/
 [3]: https://docs.datadoghq.com/agent/kubernetes/apm/?tab=helm#setup
 [4]: https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters#add_firewall_rules

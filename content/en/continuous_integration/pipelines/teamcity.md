@@ -47,7 +47,7 @@ the VCS Root attached and the [VCS Trigger][13] configured.
 
    These configuration parameters can be added either to TeamCity subprojects
    or to the [TeamCity Root Project][10]. When added to the Root project, they are propagated
-   to all its subprojects. For example, to enable the plugin for all projects, add `datadog.ci.enabled` with the
+   to all its subprojects. For example, to enable the plugin for all projects, add **datadog.ci.enabled** with the
    value `true` to the Root Project. More information on defining configuration parameters
    is available in the [TeamCity Project Hierarchy][9] documentation.
 4. To enable the plugin, click on **Enable uploaded plugins** in the **Administration** -> **Plugins** page.

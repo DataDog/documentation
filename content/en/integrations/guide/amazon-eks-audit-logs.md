@@ -77,7 +77,7 @@ To create a rule, navigate to the in-app [Rule Setup and Configuration][13] page
 [6]: https://console.aws.amazon.com/lambda/home#/functions
 [7]: https://app.datadoghq.com/logs
 [8]: /security/cloud_siem/log_detection_rules/
-[9]: /security/cloud_siem/getting_started#review-detection-rules
+[9]: /getting_started/cloud_siem/#phase-2-signal-exploration
 [10]: https://app.datadoghq.com/security
 [11]: /security/default_rules/#cat-cloud-siem
 [12]: /security/detection_rules/#creating-and-managing-detection-rules

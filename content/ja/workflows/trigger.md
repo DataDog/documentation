@@ -18,9 +18,9 @@ kind: documentation
 title: ワークフローをトリガーする
 ---
 
-{{< beta-callout url="https://forms.gle/VEjerYVQ2QJhauZ57" >}}
+{{< callout url="https://forms.gle/VEjerYVQ2QJhauZ57" >}}
   Workflows は公開ベータ版です。フィードバックや質問がある場合は、<a href="/help">Datadog サポート</a>にご連絡ください。
-{{< /beta-callout >}}
+{{< /callout >}}
 
 ワークフローは、手動でトリガーすることもできますし、定期的なスケジュール、Datadog モニター、セキュリティシグナル通知ルールなど、さまざまな自動化された方法を使用してトリガーすることも可能です。自動ワークフローをトリガーする前に、ワークフローを一意のサービスアカウントと関連付ける必要があります。サービスアカウントの詳細については、[Workflows のサービスアカウント][1]を参照してください。
 

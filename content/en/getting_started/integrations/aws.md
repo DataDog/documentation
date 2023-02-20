@@ -234,7 +234,7 @@ If you encounter any issues, be sure to check out the [Troubleshooting][57] sect
 [47]: /tracing/trace_collection/
 [48]: /tracing/#explore-datadog-apm
 [49]: /watchdog/
-[50]: /security/cloud_siem/getting_started/
+[50]: /getting_started/cloud_siem/
 [51]: /security/default_rules/#cat-log-detection
 [52]: /security/explorer/
 [53]: /security/notifications/rules/

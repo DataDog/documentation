@@ -3,6 +3,7 @@ app_id: sql-server
 app_uuid: bfa2f276-da05-4153-b8d4-48d4e41f5e40
 assets:
   dashboards:
+    SQLServer-AlwaysOn: assets/dashboards/SQLServer-AlwaysOn_dashboard.json
     SQLServer-Overview: assets/dashboards/SQLServer-Overview_dashboard.json
     sqlserver: assets/dashboards/sqlserver_dashboard.json
   integration:
@@ -40,7 +41,7 @@ draft: false
 git_integration_title: sqlserver
 integration_id: sql-server
 integration_title: SQL Server
-integration_version: 9.0.2
+integration_version: 10.1.2
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -82,7 +83,7 @@ SQL Server チェックを使用して、SQL Server インスタンスのパフ�
 
 <div class="alert alert-info">このページでは、SQL Server Agent のインテグレーションについて説明します。SQL Server のデータベースモニタリング製品をお求めの場合は、<a href="https://docs.datadoghq.com/database_monitoring" target="_blank">Datadog データベースモニタリング</a>をご覧ください。</div>
 
-### インストール
+### APM に Datadog Agent を構成する
 
 SQL Server チェックは [Datadog Agent][2] パッケージに含まれています。SQL Server インスタンスに追加でインストールする必要はありません。
 
