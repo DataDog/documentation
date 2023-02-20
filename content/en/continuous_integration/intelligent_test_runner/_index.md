@@ -94,7 +94,7 @@ Intelligent Test Runner is only supported in the following versions and testing 
 
 ### .NET
 
-To enable Intelligent Test Runner, the version of the `dd-trace` tool must be >= 2.16.0 (execute `dd-trace --version` to get the version of the tool) and the following environment variables must be set:
+To enable Intelligent Test Runner, the version of the `dd-trace` tool must be >= 2.22.0 (execute `dd-trace --version` to get the version of the tool) and the following environment variables must be set:
 
 `DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Required)
 : Enables or disables Agentless mode.<br/>
@@ -113,11 +113,6 @@ To enable Intelligent Test Runner, the version of the `dd-trace` tool must be >=
 : The [Datadog site][4] to upload results to.<br/>
 **Default**: `datadoghq.com`<br/>
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
-
-`DD_CIVISIBILITY_ITR_ENABLED=true` (Required)
-: Flag to enable Intelligent Test Runner. <br/>
-**Default**: `false`<br/>
-**Note**: Required only during Beta
 
 After setting these environment variables, run your tests as you normally do by using [dotnet test][6] or [VSTest.Console.exe][7]:
 
