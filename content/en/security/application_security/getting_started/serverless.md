@@ -6,15 +6,21 @@ code_lang: serverless
 type: multi-code-lang
 code_lang_weight: 90
 further_reading:
-    - link: "/security/application_security/add-user-info/"
+    - link: "/security/application_security/how-appsec-works/"
       tag: "Documentation"
-      text: "Adding user information to traces"
+      text: "How Application Security Works"
     - link: "/security/default_rules/#cat-application-security"
       tag: "Documentation"
       text: "OOTB Application Security Management Rules"
     - link: "/security/application_security/troubleshooting"
       tag: "Documentation"
       text: "Troubleshooting Application Security Management"
+    - link: "/security/application_security/threats/"
+      tag: "Documentation"
+      text: "ASM Threat Detection and Protection"
+    - link: "/security/application_security/risk_management/"
+      tag: "Documentation"
+      text: "ASM Risk Management"
 ---
 
 {{< callout url="#" header="ASM support for AWS Lambda is in beta" btn_hidden="true" >}}
@@ -58,25 +64,19 @@ To install and configure the Datadog Serverless plugin:
      environment:
        DD_UNIVERSAL_INSTRUMENATION: true
    ```
-3. Redeploy the function.
-
-4. To see Application Security Management threat detection in action, send known attack patterns to your application. For example, with an HTTP header with value `acunetix-product` to trigger a [security scanner attack][4] attempt:
-   ```sh
-   curl -H 'My-ASM-Test-Header: acunetix-product' https://your-application-url/existing-route
-   ```
+3. Redeploy the function and invoke it. After a few minutes, it appears in [ASM views][3].
 
 [1]: /serverless/serverless_integrations/plugin
 [2]: /serverless/libraries_integrations/extension
 [3]: https://app.datadoghq.com/security/appsec?column=time&order=desc
-[4]: /security/default_rules/security-scan-detected/
 
 {{% /tab %}}
 
 {{% tab "Custom" %}}
 
 1. Install the Datadog tracer:
-   - **Java**: [Configure the layers][1] for your Lambda function using the ARN in one of the following format, depending on where your Lambda is deployed:
-     ```
+   - **Java**: [Configure the layers][1] for your Lambda function using the ARN in one of the following formats, depending on where your Lambda is deployed. Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`:
+     ```sh
      # In AWS commercial regions
      arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:8
      # In AWS GovCloud regions
@@ -86,12 +86,52 @@ To install and configure the Datadog Serverless plugin:
      ```sh
      go get -u github.com/DataDog/datadog-lambda-go
      ```
-   - **.NET**: [Configure the layers][1] for your Lambda function using the ARN in one of the following format, depending on where your Lambda is deployed:
+   - **.NET**: [Configure the layers][1] for your Lambda function using the ARN in one of the following formats, depending on where your Lambda is deployed. Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`:
+     ```sh
+     # x86-based Lambda in AWS commercial regions
+     arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet:6
+     # arm64-based Lambda in AWS commercial regions
+     arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet-ARM:6
+     # x86-based Lambda in AWS GovCloud regions
+     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-dotnet:6
+     # arm64-based Lambda  in AWS GovCloud regions
+     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-dotnet-ARM:6
+     ```
+2. Install the Datadog Lambda Extension by configuring the layers for your Lambda function using the ARN in one of the following formats. Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`:
+   ```sh
+   # x86-based Lambda in AWS commercial regions
+   arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:36
+   # arm64-based Lambda in AWS commercial regions
+   arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension-ARM:36
+   # x86-based Lambda in AWS GovCloud regions
+   arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:36
+   # arm64-based Lambda in AWS GovCloud regions
+   arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:36
+   ```
+
+3. Enable ASM by updating your `serverless.yml` (or whichever way you set environment variables for your function):
+   ```yaml
+   environment:
+     DD_SERVERLESS_APPSEC_ENABLED: true
+   ```
+   For **Go functions only** also add:
+   ```yaml
+   DD_UNIVERSAL_INSTRUMENTATION:
+     environment:
+       DD_UNIVERSAL_INSTRUMENATION: true
+   ```
+3. Redeploy the function and invoke it. After a few minutes, it appears in [ASM views][3].
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+[3]: https://app.datadoghq.com/security/appsec?column=time&order=desc
+
 {{% /tab %}}
 {{< /tabs >}}
 
+To see Application Security Management threat detection in action, send known attack patterns to your application. For example, with an HTTP header with value `acunetix-product` to trigger a [security scanner attack][5] attempt:
+   ```sh
+   curl -H 'My-ASM-Test-Header: acunetix-product' https://your-application-url/existing-route
+   ```
 A few minutes after you enable your application and exercise it, **threat information appears in the [Application Signals Explorer][3]** and **vulnerability information appears in the [Vulnerability Explorer][4]**.
 
 {{< img src="/security/application_security/appsec-getstarted-threat-and-vuln.mp4" alt="Video showing Signals explorer and details, and Vulnerabilities explorer and details." video="true" >}}
@@ -100,3 +140,4 @@ A few minutes after you enable your application and exercise it, **threat inform
 [2]: /serverless/distributed_tracing/?tab=python
 [3]: https://app.datadoghq.com/security/appsec
 [4]: https://app.datadoghq.com/security/appsec/vm/
+[5]: /security/default_rules/security-scan-detected/
