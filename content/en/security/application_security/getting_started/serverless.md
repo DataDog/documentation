@@ -17,10 +17,10 @@ further_reading:
       text: "Troubleshooting Application Security Management"
     - link: "/security/application_security/threats/"
       tag: "Documentation"
-      text: "ASM Threat Detection and Protection"
+      text: "Application Threat Monitoring and Protection"
     - link: "/security/application_security/risk_management/"
       tag: "Documentation"
-      text: "ASM Risk Management"
+      text: "Application Risk Management"
 ---
 
 {{< callout url="#" header="ASM support for AWS Lambda is in beta" btn_hidden="true" >}}
@@ -135,6 +135,10 @@ To see Application Security Management threat detection in action, send known at
 A few minutes after you enable your application and exercise it, **threat information appears in the [Application Signals Explorer][3]** and **vulnerability information appears in the [Vulnerability Explorer][4]**.
 
 {{< img src="/security/application_security/appsec-getstarted-threat-and-vuln.mp4" alt="Video showing Signals explorer and details, and Vulnerabilities explorer and details." video="true" >}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: /serverless/distributed_tracing/?tab=python
