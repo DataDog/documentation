@@ -2739,6 +2739,11 @@ main:
     parent: appsec_getting_started
     identifier: appsec_python
     weight: 207
+  - name: Serverless
+    url: security/application_security/getting_started/serverless/
+    parent: appsec_getting_started
+    identifier: appsec_serverless
+    weight: 208
   - name: How It Works
     url: security/application_security/how-appsec-works/
     parent: application_security

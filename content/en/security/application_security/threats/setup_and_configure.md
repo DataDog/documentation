@@ -27,7 +27,7 @@ further_reading:
 
 ## Compatibility
 
-{{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
+{{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python,serverless" >}}
 
 {{< programming-lang lang="java" >}}
 
@@ -228,6 +228,46 @@ You can monitor application security for Python apps running in Docker, Kubernet
 | Flask                | 0.10                      |
 
 Support for query strings is not available for Flask.
+
+{{< /programming-lang >}}
+
+{{< programming-lang lang="serverless" >}}
+
+<div class="alert alert-info">ASM support for AWS Lambda is in beta. Threat detection is done by using the Lambda extension.<br><br> Don’t see your desired cloud environment? Datadog is continually adding additional support. Fill out this short form to send us details, or contact <a href="/help">Datadog support</a>.</div>
+
+
+### Supported cloud environments
+
+- AWS Lambda (beta)
+
+### Supported languages and their requirements
+
+Node version x.x
+: If you are bundling using webpack or esbuild, [mark the Datadog libraries as external][4].
+
+Python version x.x
+: If your Python Lambda functions are written in [Python 3.6 or less][1], or you previously set up your Lambda functions using the Datadog Forwarder, read [instrumenting using the Datadog Forwarder][2].
+
+Java version x.x
+: To fully instrument your serverless application with distributed tracing, your Java Lambda functions must use the Java 8 Corretto (`java8.al2`) or Java 11 (`java11`) runtimes with at least 1024MB of memory.
+: If you use the Datadog Lambda layers `dd-trace-java:4` (or older) and `Datadog-Extension:24` (or older), follow the instructions in [Upgrade Instrumentation for Java Lambda Functions][3].
+
+Go version x.x
+: If your Go Lambda functions use runtime `go1.x` and you cannot migrate to the `provided.al2` runtime, you must [instrument using the Datadog Forwarder][2] instead.
+
+.NET version x.x
+: 
+
+### ASM capabilities 
+ASM capabilities except the following are available for functions:
+ - IP, user, and suspicious request blocking
+ - 1-Click enabling ASM
+
+
+[1]: https://docs.aws.amazon.com/lambda/latest/dg/runtimes-extensions-api.html
+[2]: /serverless/guide/datadog_forwarder_python
+[3]: /serverless/guide/upgrade_java_instrumentation
+[4]: /serverless/guide/serverless_tracing_and_webpack/
 
 {{< /programming-lang >}}
 
