@@ -270,7 +270,7 @@ The severity decrement is applied to signals with an environment tag starting wi
 
 ## Rule deprecation
 
-Regular audits of all detection rules are performed to maintain high fidelity signal quality.
+Regular audits of all detection rules are performed to maintain high fidelity signal quality. Deprecated rules are replaced with an improved rule.
 
 The rule deprecation process is as follows:
 
