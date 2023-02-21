@@ -738,29 +738,26 @@ After enabling Universal Service Monitoring, you can:
 
 - Create [monitors][4], [dashboards][5], and [SLOs][6] using the `universal.http.*` metrics.
 
-## Features
 
-### Path Exclusion and Replacement
+### Path exclusion and replacement
 
-The following configuration change can make the agent to drop HTTP endpoints by a regex, or to convert the endpoint into a different format.
+Use `http_replace_rules` or `DD_SYSTEM_PROBE_NETWORK_HTTP_REPLACE_RULES` to configure the Agent to drop HTTP endpoints that match a regex, or to convert matching endpoints into a different format.
 
 {{< tabs >}}
 {{% tab "Configuration File" %}}
 
-Add the following to the configuration file of `system-probe`:
+Add the following configuration to the `system-probe`:
 
 ```yaml
 network_config:
   http_replace_rules:
-    - pattern: "<exlusion rule>"
+    - pattern: "<exclusion rule>"
       repl: ""
     - pattern: "<replacement rule>"
       repl: "<new format>"
 ```
 
-For example:
-
-Drop every endpoint starting with `/api/` like `/api/v1/users`. However, it will not ignore `/api` or `/users/api`.
+For example, the following configuration drops endpoints that start with `/api/`, such `/api/v1/users`. However, it does not ignore `/api` or `/users/api`.
 
 ```yaml
 network_config:
@@ -769,7 +766,7 @@ network_config:
       repl: ""
 ```
 
-Replace old endpoint `/api/users` to match a new format of `/api/v1/users`
+The following configuration replaces an endpoint `/api/users` to match a new format of `/api/v1/users`:
 
 ```yaml
 network_config:
