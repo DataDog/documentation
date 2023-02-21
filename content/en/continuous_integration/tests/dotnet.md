@@ -182,7 +182,7 @@ To instrument your benchmark tests you need to:
 
 {{< tabs >}}
 
-{{% tab "Using the `[DatadogDiagnoser]` Attribute" %}}
+{{% tab "Using the [DatadogDiagnoser] Attribute" %}}
 {{< code-block lang="csharp" >}}
 using BenchmarkDotNet.Attributes;
 using Datadog.Trace.BenchmarkDotNet;
