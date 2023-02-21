@@ -53,6 +53,7 @@ For Datadog ASM to be compatible with your Datadog configuration, you must have 
  
 Datadog ASM for serverless provides deep visibility into attackers targeting your functions. With distributed tracing providing a context-rich picture of the attack, you can assess the impact and remediate the threat effectively. 
 
+Read [Getting Started with ASM for Serverless][24] for information on setting it up.
 
 ## Performance
 
@@ -164,3 +165,4 @@ Datadog ASM identifies Log4j Log4Shell attack payloads and provides visibility i
 [21]: /security/application_security/risk_management/
 [22]: /security/application_security/threats/
 [23]: /agent/guide/how_remote_config_works/
+[24]: /security/application_security/getting_started/serverless/

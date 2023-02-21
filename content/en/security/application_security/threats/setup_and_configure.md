@@ -259,7 +259,7 @@ Go version x.x
 : 
 
 ### ASM capabilities 
-ASM capabilities except the following are available for functions:
+The following ASM capabilities are not currently supported for Lambda functions:
  - ASM Risk Management
  - IP, user, and suspicious request blocking
  - 1-Click enabling ASM

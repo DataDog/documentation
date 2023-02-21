@@ -20,11 +20,9 @@ further_reading:
       text: "Application Threat Monitoring and Protection"
 ---
 
-{{< callout url="#" header="ASM support for AWS Lambda is in beta" btn_hidden="true" >}}
-  Threat detection is done by using the Lambda extension.
-{{< /callout >}}
+<div class="alert alert-info">ASM support for AWS Lambda is in beta. Threat detection is done by using the Lambda extension.</div>
 
-You can monitor your functions running in AWS Lambda with Datadog Application Security Management (ASM). 
+You can monitor your functions running in AWS Lambda with Datadog Application Security Management (ASM). See [Setup and Configure][4] for information about what ASM features are supported for serverless functions.
 
 In general, setting up ASM for AWS Lambda involves:
 
@@ -35,7 +33,7 @@ In general, setting up ASM for AWS Lambda involves:
 
 ## Prerequisites
 
-- [Serverless APM][2] is configured to send traces directly to Datadog (can't use X-Ray integration).
+- [Serverless APM][2] is configured on the Lambda function to send traces directly to Datadog (can't use X-Ray integration).
 
 ## Get started
 
@@ -137,7 +135,8 @@ A few minutes after you enable your application and exercise it, **threat inform
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/services?env=prod&hostGroup=%2A&lens=Security
 [2]: /serverless/distributed_tracing/?tab=python
 [3]: https://app.datadoghq.com/security/appsec
+[4]: /security/application_security/threats/setup_and_configuration/?code-lang=serverless
 [5]: /security/default_rules/security-scan-detected/
