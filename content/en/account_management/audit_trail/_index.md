@@ -117,6 +117,24 @@ At any moment, from the default view entry in the Views panel:
 * **Update** your default view with the current parameters.
 * **Reset** your default view to Datadog's defaults for a fresh restart.
 
+### Notable Events
+
+Notable events are a subset of audit events that have potential critical configuration changes, billing impact or security implication as identified by Datadog. This allows org admins to quickly focus on the most important events amongst thousands of events without learning about all the events and their properties.
+
+Events that match the following queries are marked as Notable. This list will evolve over time.
+
+| Description of audit event                                          | Query in audit explorer                           |
+| ------------------------------------------------------------------- | --------------------------------------------------|
+| Changes to Logs2Metrics | `@evt.name:"Log Management" @asset.type:"custom_metrics"` |
+| Changes to Log management index exclusion filters | `@evt.name:"Log Management" @asset.type:"exclusion_filter"` |
+| Changes to Log management indexes | `@evt.name:"Log Management" @asset.type:index` |
+| Changes to APM retention filters | `@evt.name:APM @asset.type:retention_filter` |
+| Changes to APM custom metrics | `@evt.name:APM @asset.type:custom_metrics` |
+| Changes Metrics tags | `@evt.name:Metrics @asset.type:metric @action:(created OR modified)` |
+| Creations and deletion of RUM Applications | `@evt.name:"Real User Monitoring" @asset.type:real_user_monitoring_application @action:(created OR deleted)` |
+| Changes to Sensitive data scanner scanning group | `@evt.name:"Sensitive Data Scanner" @asset.type:sensitive_data_scanner_scanning_group` |
+| Creation or deletion of Synthetic tests | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_test @action:(created OR deleted)` |
+
 ## Create a monitor
 
 To create a monitor on a type of audit trail event or by specificTrail attributes, see the [Audit Trail Monitor documentation][6]. For example, set a monitor that triggers when a specific user logs in, or set a monitor for anytime a dashboard is deleted.
