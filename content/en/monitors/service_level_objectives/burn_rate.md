@@ -72,6 +72,7 @@ For the long window, choose a period of time that an elevated burn rate would ha
 Alternatively, you may think of a burn rate and long window pairing in terms of theoretical error budget consumption:
 
 $$\text"burn rate" = {\text"length of SLO target (in hours) " * \text" percentage of error budget consumed"} / {\text"long window (in hours) " * 100%}$$
+
 For example, for a 7-day SLO, to be alerted if the theoretical error budget consumption is 10% with 1 hour as your long window, the selected burn rate should be:
 
 $$\text"burn rate" = {7 \text"days" * 24 \text"hours" * 10% \text"error budget consumed"} / {1 \text"hour" * 100%} = 16.8$$
@@ -85,8 +86,7 @@ $$\text"burn rate" = {7 \text"days" * 24 \text"hours" * 10% \text"error budget c
 3. Select the **Burn Rate** tab in **Step 1: Setting alerting conditions**
 4. Set an alert to trigger when a certain burn rate is measured during a specific long window:
    * The burn rate value must be in the range of
-     {{< img src="monitors/service_level_objectives/burn-rate-range.jpeg" alt="Burn rate range">}}
-
+     $$0 < \text"burn rate" ≤ 1 / {1 - \text"SLO target"}$$
    * Datadog supports a maximum value of 48 hours for the long window. Your long window must be in the range of `1 hour <= long window <= 48 hours`.
    * The short window is then automatically calculated in the UI as `short window = 1/12 * long window`.
    * You can specify a different short window value using the [API or Terraform](#api-and-terraform), but it must always be less than the long window.
