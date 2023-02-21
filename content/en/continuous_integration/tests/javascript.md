@@ -37,7 +37,7 @@ Supported test frameworks:
 The instrumentation works at runtime, so any transpilers such as TypeScript, Webpack, Babel, or others are supported out of the box.
 
 ### Test suite level visibility compatibility
-[Test suite level visibility][4] is fully supported from `dd-trace>=3.14.0` and `dd-trace>=2.27.0`. Jest, Mocha, Playwright, Cypress and Cucumber are supported.
+[Test suite level visibility][4] is fully supported from `dd-trace>=3.14.0` and `dd-trace>=2.27.0`. Jest, Mocha, Playwright, Cypress, and Cucumber are supported.
 
 * Jest >= 24.8.0
   * From `dd-trace>=3.10.0`.
