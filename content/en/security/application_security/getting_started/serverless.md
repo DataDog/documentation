@@ -18,9 +18,6 @@ further_reading:
     - link: "/security/application_security/threats/"
       tag: "Documentation"
       text: "Application Threat Monitoring and Protection"
-    - link: "/security/application_security/risk_management/"
-      tag: "Documentation"
-      text: "Application Risk Management"
 ---
 
 {{< callout url="#" header="ASM support for AWS Lambda is in beta" btn_hidden="true" >}}
@@ -38,7 +35,7 @@ In general, setting up ASM for AWS Lambda involves:
 
 ## Prerequisites
 
-- [Serverless APM][2] is configured to send traces directly to Datadog (can’t use X-Ray integration) 
+- [Serverless APM][2] is configured to send traces directly to Datadog (can't use X-Ray integration).
 
 ## Get started
 
@@ -132,9 +129,9 @@ To see Application Security Management threat detection in action, send known at
    ```sh
    curl -H 'My-ASM-Test-Header: acunetix-product' https://your-application-url/existing-route
    ```
-A few minutes after you enable your application and exercise it, **threat information appears in the [Application Signals Explorer][3]** and **vulnerability information appears in the [Vulnerability Explorer][4]**.
+A few minutes after you enable your application and exercise it, **threat information appears in the [Application Signals Explorer][3]**.
 
-{{< img src="/security/application_security/appsec-getstarted-threat-and-vuln.mp4" alt="Video showing Signals explorer and details, and Vulnerabilities explorer and details." video="true" >}}
+{{< img src="/security/application_security/application-security-signal.png" alt="Security Signal details page showing tags, metrics, suggested next steps, and attacker IP addresses associated with a threat." style="width:100%;" >}}
 
 ## Further reading
 
@@ -143,5 +140,4 @@ A few minutes after you enable your application and exercise it, **threat inform
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: /serverless/distributed_tracing/?tab=python
 [3]: https://app.datadoghq.com/security/appsec
-[4]: https://app.datadoghq.com/security/appsec/vm/
 [5]: /security/default_rules/security-scan-detected/
