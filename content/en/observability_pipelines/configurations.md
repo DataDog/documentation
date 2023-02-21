@@ -4,6 +4,7 @@ kind: Documentation
 aliases:
   - /integrations/observability_pipelines/vector_configurations/
   - /observability_pipelines/vector_configurations/
+  - /observability_pipelines/reference/
 further_reading:
   - link: /observability_pipelines/working_with_data/
     tag: Documentation
@@ -16,7 +17,7 @@ Observability Pipelines Worker configurations can collect, transform, and route 
 
 ## Set up an example source
 
-[Source components][1] define how the Observability Pipelines Worker collects or receives data from observability data sources. 
+[Source components][1] define how the Observability Pipelines Worker collects or receives data from observability data sources.
 
 Create a YAML configuration file and add the following source example:
 
@@ -114,15 +115,15 @@ transforms:
 
 In this `transforms.remap_syslog` component, the `inputs` option is set to `generate_syslog`, which means it receives events from the previously defined `generate_syslog` source. The transform's component type is `remap`.
 
-The `source` contains the list of remapping transformations to apply to each event that the Observability Pipelines Worker receives. In this example, only one operation, `parse_syslog`, is performed, but multiple operations can be added. 
+The `source` contains the list of remapping transformations to apply to each event that the Observability Pipelines Worker receives. In this example, only one operation, `parse_syslog`, is performed, but multiple operations can be added.
 
-The  `parse_syslog` function receives a single field called `message`, which contains the Syslog event that is generated in the `generate_syslog` source. This function parses the content of the Syslog-formatted message and emits it as a structured event. 
+The  `parse_syslog` function receives a single field called `message`, which contains the Syslog event that is generated in the `generate_syslog` source. This function parses the content of the Syslog-formatted message and emits it as a structured event.
 
 This transform example showcases only a portion of the Observability Pipelines Worker's ability to shape and transform your logs, metrics, and traces. See the [Transforms documentation][2] for all supported transforms, ranging from sampling, filtering, enrichment, and more.
 
 ## Set up an example sink
 
-With the data parsed in the `transform` component, use the following [sink][3] example to route the data to a destination. 
+With the data parsed in the `transform` component, use the following [sink][3] example to route the data to a destination.
 
 {{< tabs >}}
 {{% tab "YAML" %}}
@@ -175,7 +176,7 @@ See the [Sinks documentation][3] for all supported sinks.
 
 ## Put it all together
 
-With these three basic components, a source, transform, and sink, you now have a working Observability Pipelines configuration file. 
+With these three basic components, a source, transform, and sink, you now have a working Observability Pipelines configuration file.
 
 {{< tabs >}}
 {{% tab "YAML" %}}
@@ -273,7 +274,7 @@ Run the following command to compile and run this configuration:
 vector --config ./<configuration_filename>
 ```
 
-If successfully setup, the parsed demo logs are printed in JSON format. 
+If successfully setup, the parsed demo logs are printed in JSON format.
 
 ## Further Reading
 

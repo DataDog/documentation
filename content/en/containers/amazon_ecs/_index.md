@@ -85,7 +85,7 @@ For all of these examples the `DD_API_KEY` environment variable can alternativel
 Once you have your Task Definition file created you can execute the following command to register this in AWS.
 
 ```bash
-aws ecs register-task-definition --cli-input-json <path to datadog-agent-ecs.json>
+aws ecs register-task-definition --cli-input-json file://<path to datadog-agent-ecs.json>
 ```
 {{% /tab %}}
 {{% tab "Web UI" %}}

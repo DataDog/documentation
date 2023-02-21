@@ -120,7 +120,6 @@ Any metric reporting to Datadog is available for monitors. Use the editor and th
 | Define the `from`                 | No       | Everywhere     | `env:prod`        |
 | Specify metric aggregation        | No       | `avg by`       | `sum by`          |
 | Group by                          | No       | Everything     | `host`            |
-| Set the alert grouping            | No       | `Simple Alert` | `Multi Alert`     |
 | Specify monitor query aggregation | No       | `average`      | `sum`             |
 | Select a change type              | No       | `change `      | `% change`        |
 | Evaluation window                 | No       | `5 minutes`    | `1 day`           |
@@ -147,15 +146,6 @@ Any metric reporting to Datadog is available for monitors. Use the editor and th
   - If using a distribution metric with a percentile aggregator, a matching percentile threshold is automatically specified.
   - Defining metrics for monitors is similar to defining metrics for graphs. For details on using the `Advanced...` option, see [Advanced graphing][2].
   - There are different behaviors when utilizing `as_count()`. See [as_count() in Monitor Evaluations][3] for details.
-
-### Alert grouping
-
-Alerts are grouped automatically based on your selection of the `group by` step when defining your metric. If no group is specified, grouping defaults to `Simple Alert`. If groups are selected, grouping defaults to `Multi Alert`.
-
-Simple alerts aggregate over all reporting sources. You receive one alert when the aggregated value meets the set conditions. This works best to monitor a metric from a single host or the sum of a metric across many hosts.
-
-Multi alerts apply the alert to each source according to your group parameters. You receive an alert for each group that meets the set conditions. For example, you could group `system.disk.in_use` by `host` and `device` to receive a separate alert for each host device that is running out of space.
-Note that if your metric is only reporting by `host` with no `device` tag, it would not be detected by a monitor group by both `host` and `device`. [Tag Variables][4] are available for every group evaluated in the multi alert to dynamically fill in notifications with useful context.
 
 ## Set alert conditions
 
@@ -206,7 +196,16 @@ For detailed instructions on the advanced alert options (no data, auto resolve, 
 
 ## Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][7] page.
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][7] and [Monitor configuration][8] pages.
+
+### Alert grouping
+
+Alerts are grouped automatically based on your selection of the `group by` step when defining your metric. If no group is specified, grouping defaults to `Simple Alert`. If groups are selected, grouping defaults to `Multi Alert`.
+
+Simple alerts aggregate over all reporting sources. You receive one alert when the aggregated value meets the set conditions. This works best to monitor a metric from a single host or the sum of a metric across many hosts.
+
+Multi alerts apply the alert to each source according to your group parameters. You receive an alert for each group that meets the set conditions. For example, you could group `system.disk.in_use` by `host` and `device` to receive a separate alert for each host device that is running out of space.
+Note that if your metric is only reporting by `host` with no `device` tag, it would not be detected by a monitor group by both `host` and `device`. [Tag Variables][4] are available for every group evaluated in the multi alert to dynamically fill in notifications with useful context.
 
 ## Further Reading
 
@@ -219,3 +218,4 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 [5]: /monitors/create/configuration/?tab=thresholdalert#evaluation-window
 [6]: /monitors/create/configuration/#advanced-alert-conditions
 [7]: /monitors/notify/
+[8]: /monitors/configuration/?tab=thresholdalert#notify-your-team

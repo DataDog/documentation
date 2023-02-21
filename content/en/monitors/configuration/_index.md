@@ -263,7 +263,7 @@ Use this section to configure notifications to your team and configure how to se
 
   For more information on the configuration options for the notification message, see [Alerting Notifications][7].
 
-### Notification aggregation
+### Alert grouping
 
 Alerts are grouped automatically based on your selection of the `group by` step when defining your query. If the query has no grouping, it defaults to `Simple Alert`. If the query is grouped by any dimension, grouping changes to `Multi Alert`.
 
