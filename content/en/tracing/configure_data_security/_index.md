@@ -355,8 +355,7 @@ PCI compliance for APM is available when you create a new Datadog organization. 
 1. Set up a new Datadog org in the [US1 site][1]. PCI DSS compliance is only supported for new orgs created in US1.
 2. Contact [Datadog support][2] or your [Customer Success Manager][3] to request that the new org be configured as a PCI-compliant org.
 3. Enable [Audit Trail][4] in the new org. Audit Trail must be enabled and remain enabled for PCI DSS compliance.
-4. Datadog support or Customer Success confirms that the new org is PCI DSS compliant.
-5. Configure the Agent configuration file to send spans to the dedicated PCI-compliant endpoint (`https://trace-pci.agent.datadoghq.com`):
+4. After Datadog support or Customer Success confirms that the new org is PCI DSS compliant, configure the Agent configuration file to send spans to the dedicated PCI-compliant endpoint (`https://trace-pci.agent.datadoghq.com`):
     ```
     apm_config:
     apm_dd_url: <https://trace-pci.agent.datadoghq.com>
