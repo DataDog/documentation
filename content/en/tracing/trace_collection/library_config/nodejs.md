@@ -231,7 +231,7 @@ Remote configuration polling interval in seconds.
 
 ### Headers extraction and injection
 
-The Datadog APM Tracer supports [B3][5] and [W3C (TraceParent)][6] headers extraction and injection for distributed tracing.
+The Datadog APM Tracer supports [B3][5] and [W3C (TraceParent)][6] header extraction and injection for distributed tracing.
 
 You can configure injection and extraction styles for distributed headers.
 
