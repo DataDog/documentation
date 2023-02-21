@@ -59,14 +59,14 @@ This line graph plots latency (in milliseconds) experienced by users on the y-ax
 
 #### Additional visualization offerings
 
-Datadog offers a variety of visualization options to help users easily display their metrics. Two visualization offerings that Metrics users often find useful are: 1) Query Value Widgets, and 2) Top List Widgets.
+Datadog offers a variety of visualization options to help users easily graph and display their metrics. Two visualization offerings that Metrics users often find useful are: 1) [Query Value Widgets][23], and 2) [Top List Widgets][24].
 
 Regardless of the type of widget, each metric query consists of the same two evaluation steps to start: 1) time aggregation, 2) space aggregation [(view refresher here)][22].
 
 ###### [Query Value Widget][23]
 - A [Query Value Widget][23] simply reduces the results of those two steps into a single value.
 
-###### [Toplist][24]
+###### [Toplist Value Widget][24]
 - A [Top List Widget][24] returns a single value per group.
 
 Additionally, Datadog has many other types of graphs and widgets for visualizations. You can learn more about them in Datadog's [blog series about metric graphs][6].
