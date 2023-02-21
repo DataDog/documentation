@@ -26,7 +26,7 @@ In order to identify what current ingestion mechanisms are used in your Datadog 
 The table gives insights on ingested volumes **by service:**
 
 The configuration column indicating `CONFIGURED` or `AUTOMATIC` provides a first indication of the current set up : 
-- `AUTOMATIC` if the sampling rate calculated in the Datadog Agent is applied for the traces starting from the service. Read more about the specifics of the Datadog Agent logic in the documentation.
+- `AUTOMATIC` if the sampling rate calculated in the Datadog Agent is applied for the traces starting from the service. Read more about the specifics of the [Datadog Agent logic][5] in the documentation.
 - `CONFIGURED` if a custom sampling rate configured in the tracing library is applied for the traces starting from the service.
 
 Clicking on the various services to view  details as to what are the sampling decision makers in each service, as well as what [ingestion sampling mechanisms][1] are leveraged for ingested spans' services. 
@@ -47,9 +47,11 @@ Complete traces can be ingested with [head-based sampling][4] mechanisms: the de
 
 {{< img src="/tracing/guide/ingestion_sampling_use_cases/head_based_sampling_keep.png" alt="Head-based Sampling" style="width:100%;" >}}
 
+To decide which traces to keep and drop, the Datadog Agent automatically computes sampling rates for each service to apply at the trace creation, based on the application traffic.
+- For low-traffic applications, a sampling rate of 100% is applied
+- For high-traffic applications, a lower sampling rate is applied
 
-To decide which requests to keep and drop, the Datadog Agent computes automatic sampling rates for each service to apply at the root of the trace.
-You can also configure the sampling rate by service: see keep more traces for specific services
+You can also override Agent sampling rate by configuring the sampling rate by service. See how to [keep more traces for specific services](#keep-more-traces-for-some-specific-services--resources-for-better-visibility) for more information.
 
 #### How to configure head-based sampling ?
 
@@ -100,7 +102,7 @@ In addition to head-based sampled traces, each Agent keeps additional error span
 
 #### How to configure error sampling ?
 
-You can configure the number of error chunks per second per Agent that you want to capture by setting the environment variable `DD_APM_ERROR_TPS`.
+You can configure the number of error chunks per second per Agent that you want to capture by setting the environment variable `DD_APM_ERROR_TPS`. The default value is set to `10` errors per second.
 
 To ensure to ingest **all errors**, set the Agent parameter to an arbitrary high value. To disable the error sampler, set `DD_APM_ERROR_TPS` to `0`.
 
