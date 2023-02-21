@@ -70,7 +70,7 @@ Data for suspicious requests is kept for 90 days. The underlying trace data is k
 
 ## Data privacy
 
-There are multiple methods used to avoid your sensitive information being indexed. To take further action, you can set up [custom and static scrubbers][8], and use [exclusion filters][9].
+There are multiple methods used to avoid your sensitive information being indexed. To take further action, you can set up [custom and static scrubbers][8], and use the [passlist][9].
 
 
 **Note:** Datadog ASM does not automatically obfuscate sensitive information or PII. To keep this sensitive data from being sent to Datadog, [configure the Datadog Agent or Tracer for data security][8].
@@ -151,7 +151,7 @@ Datadog ASM identifies Log4j Log4Shell attack payloads and provides visibility i
 [6]: /serverless/installation/java/?tab=serverlessframework
 [7]: /tracing/trace_pipeline/trace_retention/
 [8]: /tracing/configure_data_security/?tab=http
-[9]: /security/cloud_siem/guide/how-to-setup-security-filters-using-cloud-siem-api/
+[9]: /security/application_security/threats/setup_and_configure/#exclude-specific-parameters-from-triggering-detections
 [10]: https://owasp.org/www-project-modsecurity-core-rule-set/
 [11]: /security/default_rules/#cat-application-security
 [12]: /tracing/

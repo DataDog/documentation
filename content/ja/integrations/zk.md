@@ -32,7 +32,6 @@ categories:
 - orchestration
 - notification
 - log collection
-- autodiscovery
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/zk/README.md
 display_on_public_website: true
@@ -59,7 +58,6 @@ tile:
   - Category::オーケストレーション
   - Category::通知
   - Category::ログの収集
-  - Category::オートディスカバリー
   configuration: README.md#Setup
   description: クライアント接続とレイテンシーを追跡し、リクエストの遅延状況を把握。
   media: []
@@ -78,7 +76,7 @@ ZooKeeper チェックは、クライアント接続とレイテンシーの追�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 ZooKeeper チェックは [Datadog Agent][2] パッケージに含まれています。ZooKeeper サーバーに追加でインストールする必要はありません。
 

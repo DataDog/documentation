@@ -27,7 +27,6 @@ categories:
 - 処理
 - メッセージング
 - ログの収集
-- autodiscovery
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/redpanda/README.md
 display_on_public_website: true
@@ -56,7 +55,6 @@ tile:
   - Category::Processing
   - Category::Messaging
   - Category::Log Collection
-  - Category::Autodiscovery
   configuration: README.md#Setup
   description: Redpanda クラスターの全体的な健全性とパフォーマンスを監視します。
   media: []
@@ -74,7 +72,7 @@ Datadog と [Redpanda][1] を接続し、主要なメトリクスを表示した
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 1. [Datadog Agent をダウンロードして起動][2]します。
 2. Redpanda インテグレーションを手動でインストールします。環境に応じた詳細は、[コミュニティインテグレーションを利用する][3]を参照してください。

@@ -115,6 +115,14 @@ The following attributes are related to the geo-location of IP addresses:
 
 In addition to default attributes, you can add user-related data to all RUM event types by [identifying user sessions][5]. This lets you follow the journey of a given user, figure out which users are the most impacted by errors, and monitor performance for your most important users.
 
+### Feature flag attributes
+
+{{< callout btn_hidden="true" header="Join the Feature Flag Tracking Beta!">}}
+Feature Flag Tracking is in private beta. To request access, contact Datadog Support at support@datadoghq.com.
+{{< /callout >}}
+
+You can [enrich your RUM event data with feature flags][16] to get visibility into performance monitoring. This lets you determine which users are shown a specific user experience and if it is negatively affecting the user’s performance. 
+
 ## Event-specific metrics and attributes
 
 ### Session metrics
@@ -277,3 +285,4 @@ Source errors include code-level information about the error. For more informati
 [13]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
 [14]: /real_user_monitoring/browser/tracking_user_actions/?tab=npm#how-action-loading-time-is-calculated
 [15]: /real_user_monitoring/browser/tracking_user_actions/?tab=npm#custom-actions
+[16]: /real_user_monitoring/guide/setup-feature-flag-data-collection

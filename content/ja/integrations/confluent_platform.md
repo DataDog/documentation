@@ -29,7 +29,6 @@ author:
 categories:
 - 処理
 - メッセージング
-- オートディスカバリー
 - ログの収集
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/confluent_platform/README.md
@@ -58,7 +57,6 @@ tile:
   - Supported OS::Windows
   - Category::Processing
   - Category::Messaging
-  - Category::Autodiscovery
   - Category::Log Collection
   configuration: README.md#Setup
   description: Confluent Platform のコンポーネントを監視する。
@@ -87,7 +85,7 @@ tile:
 ## セットアップ
 
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Confluent Platform チェックは [Datadog Agent][1] パッケージに含まれています。Confluent Platform コンポーネントサーバーに追加でインストールする必要はありません。
 

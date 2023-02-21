@@ -31,7 +31,6 @@ author:
 categories:
 - web
 - caching
-- autodiscovery
 - log collection
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/mcache/README.md
@@ -58,7 +57,6 @@ tile:
   - Supported OS::macOS
   - Category::Web
   - Category::キャッシュ
-  - Category::オートディスカバリー
   - Category::ログの収集
   configuration: README.md#Setup
   description: メモリ使用量、ヒット数、ミス数、エビクション数、フィルパーセンテージなどを追跡する。
@@ -76,7 +74,7 @@ Agent の Memcache チェックを使用して、Memcache のメモリ使用量�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Memcache チェックは [Datadog Agent][1] パッケージに含まれています。Memcache サーバーに追加でインストールする必要はありません。
 

@@ -196,6 +196,11 @@ Added in version 1.18.3. Response header support and entries without tag names a
 Added in version `2.19.0`.<br>
 **Default**: `false`<br>
 
+`DD_TRACE_CLIENT_IP_HEADER`
+: The IP header to be used for client IP collection, for example: `x-forwarded-for`. <br>
+Added in version `2.19.0`.<br>
+**Default**: Datadog parses the following: `"x-forwarded-for", "x-real-ip", "client-ip", "x-forwarded", "x-cluster-client-ip", "forwarded-for", "forwarded", "via", "true-client-ip"`. If several are present, none will be reported.<br>
+
 `DD_TAGS`
 : **TracerSettings property**: `GlobalTags`<br>
 If specified, adds all of the specified tags to all generated spans. <br>
@@ -299,8 +304,8 @@ You can configure injection and extraction styles for distributed headers.
 The .NET Tracer supports the following styles:
 
 - Datadog: `Datadog`
+- W3C: `tracecontext` (`W3C` is deprecated)
 - B3 Multi Header: `b3multi` (`B3` is deprecated)
-- W3C (TraceParent): `tracecontext` (`W3C` is deprecated)
 - B3 Single Header: `B3 single header` (`B3SingleHeader` is deprecated)
 
 You can use the following environment variables to configure injection and extraction styles:

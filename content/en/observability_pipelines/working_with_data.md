@@ -19,9 +19,6 @@ further_reading:
   - link: /observability_pipelines/reference/transforms/#metrictolog
     tag: Documentation
     text: Convert metrics to log events
-  - link: /observability_pipelines/production_deployment_overview/integrate_datadog_and_the_observability_pipelines_worker/
-    tag: Documentation
-    text: Configure Datadog Agents to send data to Observability Pipelines
   - link: /observability_pipelines/configurations/
     tag: Documentation
     text: Learn more about Observability Pipelines configurations
