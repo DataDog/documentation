@@ -3776,11 +3776,6 @@ main:
     identifier: help_top_level
     parent: administration_heading
     weight: 240000
-  - name: Aggregating Agents
-    url: observability_pipelines/production_deployment_overview/integrate_datadog_and_the_observability_pipelines_worker/
-    parent: agent
-    identifier: vector_aggregation
-    weight: 13
 api:
   - name: Overview
     url: /api/latest/
