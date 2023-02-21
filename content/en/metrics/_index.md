@@ -57,7 +57,19 @@ Here’s an example of a timeseries visualization:
 
 This line graph plots latency (in milliseconds) experienced by users on the y-axis against time on the x-axis.
 
-Datadog has many other types of graphs and widgets for visualizations. You can learn more about them in Datadog's [blog series about metric graphs][6].
+#### Additional visualization offerings
+
+Datadog offers a variety of visualization options to help users easily display their metrics. Two visualization offerings that Metrics users often find useful are: 1) Query Value Widgets, and 2) Top List Widgets.
+
+Regardless of the type of widget, each metric query consists of the same two evaluation steps to start: 1) time aggregation, 2) space aggregation [(view refresher here)][22].
+
+###### [Query Value Widget][23]
+- A [Query Value Widget][23] simply reduces the results of those two steps into a single value.
+
+###### [Toplist][24]
+- A [Top List Widget][24] returns a single value per group.
+
+Additionally, Datadog has many other types of graphs and widgets for visualizations. You can learn more about them in Datadog's [blog series about metric graphs][6].
 
 ### Submitting metrics to Datadog
 
@@ -186,3 +198,6 @@ Read the [metrics summary documentation][21] for more details.
 [19]: https://app.datadoghq.com/metric/summary
 [20]: /account_management/billing/usage_details/
 [21]: /metrics/summary/
+[22]: https://docs.datadoghq.com/metrics/#anatomy-of-a-metric-query
+[23]: https://docs.datadoghq.com/dashboards/widgets/query_value/
+[24]: https://docs.datadoghq.com/dashboards/widgets/top_list/
