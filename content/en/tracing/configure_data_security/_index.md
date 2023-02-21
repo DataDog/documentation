@@ -347,10 +347,10 @@ To disable this telemetry collection, set `DD_INSTRUMENTATION_TELEMETRY_ENABLED`
 {{< site-region region="us" >}}
 
 <div class="alert alert-warning">
-PCI compliance for APM is only available for new Datadog orgs created in the <a href="/getting_started/site/">US1 site</a>.
+PCI compliance for APM is only available for new Datadog organizations created in the <a href="/getting_started/site/">US1 site</a>.
 </div>
 
-PCI compliance for APM is available when you create a new Datadog organization. To set up a PCI-complaint Datadog org, follow these steps:
+PCI compliance for APM is available when you create a new Datadog organization. To set up a PCI-compliant Datadog org, follow these steps:
 
 1. Set up a new Datadog org in the [US1 site][1]. PCI DSS compliance is only supported for new orgs created in US1.
 2. Contact [Datadog support][2] or your [Customer Success Manager][3] to request that the new org be configured as a PCI-compliant org.
