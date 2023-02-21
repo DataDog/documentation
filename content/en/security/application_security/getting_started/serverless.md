@@ -138,5 +138,5 @@ A few minutes after you enable your application and exercise it, **threat inform
 [1]: https://app.datadoghq.com/services?env=prod&hostGroup=%2A&lens=Security
 [2]: /serverless/distributed_tracing/?tab=python
 [3]: https://app.datadoghq.com/security/appsec
-[4]: /security/application_security/threats/setup_and_configuration/?code-lang=serverless
+[4]: /security/application_security/threats/setup_and_configure/?code-lang=serverless
 [5]: /security/default_rules/security-scan-detected/
