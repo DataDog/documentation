@@ -207,7 +207,7 @@ using BenchmarkDotNet.Running;
 using Datadog.Trace.BenchmarkDotNet;
 
 var config = DefaultConfig.Instance
-    .WithDatadog();
+              .WithDatadog();
 
 BenchmarkRunner.Run<OperationBenchmark>(config);
 {{< /code-block >}}
