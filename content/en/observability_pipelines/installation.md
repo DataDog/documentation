@@ -27,7 +27,7 @@ Before installing, make sure you:
 
 1. Are using one of the supported Linux architectures: x86_64 or AMD64
 2. Have a valid [Datadog API key][5].
-3. Have an Observability Pipelines Configuration ID.
+3. Have an [Observability Pipelines Configuration][7].
 
 ## Installation
 
@@ -66,10 +66,19 @@ $ DD_API_KEY=<DD_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.
     sudo apt-get install observability-pipelines-worker datadog-signing-keys
     ```
 
-4. Start the Worker:
+4. Save your Observability Pipelines configuration:
 
     ```
-    DD_API_KEY=<DD_API_KEY> DD_OP_CONFIG_KEY=<DD_OP_CONFIG_KEY> observability-pipelines-worker 
+    echo "<DD_OP_CONFIG>" > /var/lib/observability-pipelines-worker/observability-pipelines-worker.yaml
+    ```
+
+    Where `DD_OP_CONFIG` is the content of your Observability Pipeline configuration that you created in the [Observability Pipelines UI][7].
+
+
+5. Start the Worker:
+
+    ```
+    DD_API_KEY=<DD_API_KEY> DD_OP_CONFIG_KEY=<DD_OP_CONFIG_KEY> observability-pipelines-worker run /var/lib/observability-pipelines-worker/observability-pipelines-worker.yaml
     ```
 
 <!--
@@ -100,6 +109,7 @@ $ DD_API_KEY=<DD_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.
 [4]: https://linux.org/
 [5]: /account_management/api-app-keys/#api-keys
 [6]: /observability_pipelines/working_with_data/
+[7]: https://app.datadoghq.com/observability-pipelines
 
 {{% /tab %}}
 {{% tab "Helm" %}}
