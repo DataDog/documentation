@@ -43,7 +43,7 @@ Ingesting entire transaction traces ensures to keep visibility over the **end-to
 
 #### What solutions does Datadog provide ?
 
-Complete traces can be ingested with [head-based sampling][4] mechanisms: the decision of keeping or dropping the trace is taken at the trace creation (trace head), and that this decision is propagated in the request context to downstream callee services.
+Complete traces can be ingested with [head-based sampling][4] mechanisms: the decision of keeping or dropping the trace is taken at the trace creation (trace root span), and this decision is propagated in the request context to downstream callee services.
 
 {{< img src="/tracing/guide/ingestion_sampling_use_cases/head_based_sampling_keep.png" alt="Head-based Sampling" style="width:100%;" >}}
 
@@ -56,9 +56,9 @@ You can also configure the sampling rate by service: see keep more traces for sp
 Sampling rates are calculated to target 10 complete traces per second per Agent. You can increase or decrease this target by configuring the Datadog Agent parameter `max_traces_per_second` or the environment variable `DD_APM_MAX_TPS`.
 Read more about this [ingestion mechanisms][5] in the documentation.
 
-**Note:** Changing the Agent configuration will impact the percentage sampling rates applied for all services reporting traces to the Datadog Agent.
+**Note:** Changing an Agent configuration will impact the percentage sampling rates applied for all services reporting traces to this Datadog Agent.
 
-For most scenarios, relying on the Agent-level configuration is enough to stay within the allotted quota and have enough visibility on what’s happening on your applications to make appropriate decisions for your business. 
+For most scenarios, relying on the Agent-level configuration is suited to stay within the allotted quota and have enough visibility on your applications performance and make appropriate decisions for your business. 
 
 ### Keep more traces for some specific services / resources for better visibility
 
