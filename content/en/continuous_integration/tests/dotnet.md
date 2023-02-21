@@ -215,7 +215,7 @@ BenchmarkRunner.Run<OperationBenchmark>(config);
 
 {{< /tabs >}}
 
-3. [Configure your CI provider to report via the Datadog Agent or agentless.][13]
+3. Configure the reporting method as [explained above][13]
 4. Run the benchmark project as you normally do, all benchmark tests will be automatically instrumented.
 
 ### Collecting Git metadata
