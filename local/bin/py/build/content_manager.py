@@ -96,6 +96,7 @@ def download_content_from_external_source(self, content):
     Returns a boolean determining whether pull_config content should be downloaded from cache or external source.
     Content will be pulled from external source if:
         * cache is disabled
+        * this is a local run or master pipeline
         * generated file is not .md (this includes npm-integrations), which is currently unsupported.
     """
     file_name = content.get('options', {}).get('file_name', '')
@@ -104,7 +105,7 @@ def download_content_from_external_source(self, content):
     return (self.cache_enabled == False) \
         or (action == 'npm-integrations') \
         or (file_name != '' and not file_name.endswith('.md')) \
-        or (getenv("CI_COMMIT_REF_NAME") == 'master')
+        or (getenv("CI_COMMIT_REF_NAME") in (None, 'master'))
 
 
 def fetch_sourced_content_from_local_or_upstream(self, github_token, extract_dir):
