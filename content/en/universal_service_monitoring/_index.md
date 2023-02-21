@@ -738,6 +738,53 @@ After enabling Universal Service Monitoring, you can:
 - Create [monitors][4], [dashboards][5], and [SLOs][6] using the `universal.http.*` metrics.
 
 
+### Path exclusion and replacement
+
+Use `http_replace_rules` or `DD_SYSTEM_PROBE_NETWORK_HTTP_REPLACE_RULES` to configure the Agent to drop HTTP endpoints that match a regex, or to convert matching endpoints into a different format.
+
+{{< tabs >}}
+{{% tab "Configuration File" %}}
+
+Add the following configuration to the `system-probe`:
+
+```yaml
+network_config:
+  http_replace_rules:
+    - pattern: "<exclusion rule>"
+      repl: ""
+    - pattern: "<replacement rule>"
+      repl: "<new format>"
+```
+
+For example, the following configuration drops endpoints that start with `/api/`, such `/api/v1/users`. However, it does not ignore `/api` or `/users/api`.
+
+```yaml
+network_config:
+  http_replace_rules:
+    - pattern: "/api/.*"
+      repl: ""
+```
+
+The following configuration replaces an endpoint `/api/users` to match a new format of `/api/v1/users`:
+
+```yaml
+network_config:
+  http_replace_rules:
+    - pattern: "/api/users"
+      repl: "/api/v1/users"
+```
+
+{{% /tab %}}
+{{% tab "Environment Variable" %}}
+Add the following entry:
+
+```shell
+DD_SYSTEM_PROBE_NETWORK_HTTP_REPLACE_RULES=[{"pattern":"<drop regex>","repl":""},{"pattern":"<replace regex>","repl":"<replace pattern>"}]
+```
+{{% /tab %}}
+
+{{< /tabs >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
