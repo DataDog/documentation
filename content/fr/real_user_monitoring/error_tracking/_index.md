@@ -45,7 +45,7 @@ La solution Error Tracking vous permet de :
 
 ## Transférer des rapports de crash
 
-{{< whatsnext desc="Pour bien débuter avec la solution Datadog Error Tracking pour RUM, consultez les instructions d'importation de source maps pour votre framework :" >}}
+{{< whatsnext desc="Pour bien débuter avec la solution Datadog Error Tracking pour RUM, consultez les instructions d'importation de source maps pour votre framework:" >}}
     {{< nextlink href="real_user_monitoring/error_tracking/browser" >}}Browser{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/android" >}}Android{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/ios" >}}iOS{{< /nextlink >}}
