@@ -30,7 +30,7 @@ The table gives insights on ingested volumes *by service*. The Configuration col
 - `AUTOMATIC` if the sampling rate calculated in the Datadog Agent is applied to the traces that start from the service. Read more about the specifics of [Datadog Agent ingestion logic][5].
 - `CONFIGURED` if a custom sampling rate configured in the tracing library is applied to the traces that start from the service.
 
-Click on services to see details about what sampling decision makers are used for each service, as well as what [ingestion sampling mechanisms][1] are leveraged for ingested spans' services. 
+Click on services to see details about what sampling decision makers (for example Agent or tracing library, rules or sample rates) are used for each service, as well as what [ingestion sampling mechanisms][1] are leveraged for ingested spans' services. 
 
 {{< img src="/tracing/guide/ingestion_sampling_use_cases/service_ingestion_summary.png" alt="Service Ingestion Summary" style="width:90%;" >}}
 
