@@ -139,7 +139,7 @@ Events that match the following queries are marked as notable.
 
 ### Inspect Changes (Diff)
 
-Diff view allows customers to compare changes made to configurations in the audit event details panel. This makes it easy to pinpoint changes to Dashboard, Notebook and Monitor configurations which are represented in JSON objects.
+The Inspect Changes (Diff) tab in the audit event details panel compares the configuration changes that were made to what was previously set. It shows the changes made to dashboard, notebook, and monitor configurations, which are represented as JSON objects.
 
 {{< img src="account_management/audit_logs/inspect_changes.png" alt="The audit event side panel showing the changes to a composite monitor configuration, where the text highlighted in green is what was changed and the text highlighted in red is what was removed." style="width:70%;">}}
 
