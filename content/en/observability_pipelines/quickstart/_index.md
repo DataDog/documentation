@@ -28,6 +28,10 @@ Before installing, make sure you have:
 * A valid [Datadog API key](/account_management/api-app-keys/#api-keys).
 * An Observability Pipelines Configuration ID.
 
+You can generate both of these through [the OP UI in your Datadog Account](https://app.datadoghq.com/observability-pipelines/create).
+
+You will also need capacity on your Kubernetes nodes to run the Worker, **which at minimum will require 2 nodes with 1 CPU and 512MB RAM available.** A recommended way to do this is to create a separate node pool for the workers, which is also the recommended configuration for production deployments.
+
 ## Provider-Specific Requirements
 {{< tabs >}}
 {{% tab "AWS EKS" %}}
@@ -64,18 +68,15 @@ The following Helm configurations are pre-assembled for the major cloud provider
 {{% /tab %}}
 {{< /tabs >}}
 
-After downloading the correct Helm chart for your provider, you can install it into your cluster with the following commands:
+After downloading the correct Helm chart for your provider, you should replace the `datadog.apiKey` and `datadog.configKey` values to match your pipeline. Then you can install it into your cluster with the following commands:
 
 ```
 $ helm repo add datadog https://helm.datadoghq.com
 $ helm repo update
 $ helm update --install \
-    --set datadog.apiKey=<DD_API_KEY> \
-    --set datadog.configKey=<DD_OP_CONFIG_KEY> \
-    opw datadog/observability-pipelines-worker
+    opw datadog/observability-pipelines-worker \
+    -f <HELM CHART YOU DOWNLOADED>
 ```
-
-You can get the `DD_API_KEY` and `DD_OP_CONFIG_KEY` values from your pipeline setup page at first setup.
 
 ### Load Balancing
 Our preference is to defer to the load balancers provided by your cloud- they will be higher-performance than anything we could offer ourselves,
