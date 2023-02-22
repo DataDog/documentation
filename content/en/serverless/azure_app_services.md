@@ -339,8 +339,8 @@ Replace `<EXTENSION_VERSION>` with the version of the extension you wish to inst
 
 Many organizations use [Azure Resource Management (ARM) templates][8] to implement the practice of infrastructure-as-code. To build the App Service Extension into these templates, incorporate [Datadog's App Service Extension ARM template][9] into your deployments to add the extension and configure it alongside your App Service resources.
 
-Azure recently added this [documentation][10] (12/27/2022) and it’s effectively using ARM templates as Platform as Code to create the Liftr Datadog Resource.
-One thing you can do is actually use the marketplace to install Datadog Resource and download it as an ARM template to see those parameters (e.g. 'enterpriseAppId','linkingAuthCode', 'linkingClientId'...) that will be specific to you.
+See the [Azure Microsoft.Datadog monitors documentation][10], which shows using ARM templates as Platform as Code to create the Liftr Datadog Resource.
+You can use the marketplace to install the Datadog Resource and download it as an ARM template to see those parameters (such as `enterpriseAppId`, `linkingAuthCode`, and `linkingClientId`) that are specific to you.
 
 [1]: https://docs.microsoft.com/en-us/cli/azure/install-azure-cli
 [2]: https://docs.microsoft.com/en-us/azure/cloud-shell/overview
