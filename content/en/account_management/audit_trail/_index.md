@@ -129,7 +129,7 @@ Events that match the following queries are marked as notable.
 | ------------------------------------------------------------------- | --------------------------------------------------|
 | Changes to Logs2Metrics | `@evt.name:"Log Management" @asset.type:"custom_metrics"` |
 | Changes to Log management index exclusion filters | `@evt.name:"Log Management" @asset.type:"exclusion_filter"` |
-| Changes to Log management indexes | `@evt.name:"Log Management" @asset.type:index` |
+| Changes to Log Management indexes | `@evt.name:"Log Management" @asset.type:index` |
 | Changes to APM retention filters | `@evt.name:APM @asset.type:retention_filter` |
 | Changes to APM custom metrics | `@evt.name:APM @asset.type:custom_metrics` |
 | Changes Metrics tags | `@evt.name:Metrics @asset.type:metric @action:(created OR modified)` |
