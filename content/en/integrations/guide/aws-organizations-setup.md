@@ -124,7 +124,7 @@ The StackSet does not set up log forwarding in the AWS accounts. To set up logs,
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/amazon_web_services/
-[2]: integrations/amazon_web_services/#log-collection
+[2]: /integrations/amazon_web_services/#log-collection
 [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-enable-trusted-access.html
 [4]: /integrations/#cat-aws
 [5]: /security/cspm/getting_started/
