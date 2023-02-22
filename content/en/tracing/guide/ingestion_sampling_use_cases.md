@@ -42,7 +42,7 @@ Ingesting entire transaction traces ensures visibility over the **end-to-end ser
 
 #### Solution: Head-based sampling
 
-Complete traces can be ingested with [head-based sampling][4] mechanisms: the decision of keeping or dropping the trace is taken at the point of trace creation (trace root span), and this decision is propagated in the request context to downstream services.
+Complete traces can be ingested with [head-based sampling][4] mechanisms: the decision to keep or drop the trace is determined from the first span of the trace, the *head*, when the trace is created. This decision is propagated through the request context to downstream services.
 
 {{< img src="/tracing/guide/ingestion_sampling_use_cases/head_based_sampling_keep.png" alt="Head-based Sampling" style="width:100%;" >}}
 
@@ -54,7 +54,9 @@ You can also override the default Agent sampling rate by configuring the samplin
 
 #### Configuring head-based sampling
 
-Default sampling rates are calculated to target 10 complete traces per second per Agent. You can increase or decrease this target by configuring the Datadog Agent parameter `max_traces_per_second` or the environment variable `DD_APM_MAX_TPS`. Read more about [head-based sampling ingestion mechanisms][5].
+Default sampling rates are calculated to target 10 complete traces per service, per second, per Agent. This is a *target* number of traces and is the result of averaging traces over a period of time. It is *not* a hard limit, and traffic spikes can cause significantly more traces to be sent to Datadog for short periods of time. 
+
+You can increase or decrease this target by configuring the Datadog Agent parameter `max_traces_per_second` or the environment variable `DD_APM_MAX_TPS`. Read more about [head-based sampling ingestion mechanisms][5].
 
 **Note:** Changing an Agent configuration impacts the percentage sampling rates for *all services* reporting traces to this Datadog Agent.
 
@@ -124,11 +126,13 @@ For example, if a backend service `my-service` is calling a PostgreSQL database 
   DD_TRACE_SAMPLING_RULES=[{"service": "my-service", "sample_rate": 0.1}]
   ```
 
-- Optionally, configure a **single span sampling rule** to keep 100 percent of the spans for the backend service `my-service`, which will not include any database call spans, in case some [span-based metrics][8] are built on top of `my-service` data:
+- Optionally, if you want to keep all the `my-service` spans, configure a **single span sampling rule** to keep 100 percent of the spans for the backend service `my-service`. This sampling does not ingest any database call spans outside of the 10 percent identified above. 
 
   ```
   DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "sample_rate": 1}]
   ```
+
+  **Note**: [Span-based metrics][8] are not affected by sampling rules.
 
 {{< img src="/tracing/guide/ingestion_sampling_use_cases/drop_database_spans.png" alt="Database spans sampling" style="width:100%;" >}}
 
