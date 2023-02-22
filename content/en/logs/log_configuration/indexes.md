@@ -173,7 +173,7 @@ See [Monitor log usage][20] on how to monitor and alert on your usage.
 [8]: /logs/live_tail/
 [9]: /logs/logs_to_metrics/
 [10]: /logs/archives/
-[11]: https:/app.datadoghq.com/logs/pipelines/indexes
+[11]: https://app.datadoghq.com/logs/pipelines/indexes
 [12]: /logs/search_syntax/
 [13]: /api/v1/logs-indexes/#update-an-index
 [14]: /logs/log_configuration/processors/#user-agent-parser
