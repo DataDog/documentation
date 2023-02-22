@@ -121,6 +121,8 @@ At any moment, from the default view entry in the Views panel:
 
 Notable events are a subset of audit events that have potential critical configuration changes, billing impact or security implication as identified by Datadog. This allows org admins to quickly focus on the most important events amongst thousands of events without learning about all the events and their properties.
 
+{{< img src="account_management/audit_logs/notable_events.png" alt="The audit event facet panel showing notable events checked" style="width:30%;">}}
+
 Events that match the following queries are marked as Notable. This list will evolve over time.
 
 | Description of audit event                                          | Query in audit explorer                           |
@@ -138,6 +140,9 @@ Events that match the following queries are marked as Notable. This list will ev
 ### Diff view
 
 Diff view allows customers to compare changes made to configurations in the audit event details panel. This makes it easy to pinpoint changes to Dashboard, Notebook and Monitor configurations which are represented in JSON objects.
+
+{{< img src="account_management/audit_logs/inspect_changes.png" alt="The audit event side panel showing the changes to a composite monitor configuration, where the text highlighted in green is what was changed and the text highlighted in red is what was removed." style="width:70%;">}}
+
 
 ## Create a monitor
 
