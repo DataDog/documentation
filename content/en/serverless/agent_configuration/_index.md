@@ -38,6 +38,21 @@ The Agent's [main configuration file][1] is `datadog.yaml`. For the Serverless A
 | `DD_LOGS_CONFIG_OPEN_FILES_LIMIT`             | The maximum number of files that can be tailed in parallel. Default is 500.                                                                                                                                                          |
 | `DD_LOGS_CONFIG_FILE_WILDCARD_SELECTION_MODE` | The strategy used to prioritize wildcard matches if they exceed the open file limit. Choices are `by_name` and `by_modification_time`.                                                                                               |
 
+### APM configuration
+
+| Env Variable              | Description                                                                                                                                                                                                                           |
+|---------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `DD_APM_ENABLED`          | Set to true to enable the APM Agent. Default true.                                                                                                                                                                                    |
+| `DD_APM_ENV`              | The environment tag that Traces should be tagged with. If not set the value will be inherited, in order, from the top level "env" config option if set and then from the 'env:' tag if present in the 'tags' top level config option. |
+| `DD_APM_RECEIVER_PORT`    | The port that the trace receiver should listen on. Set to 0 to disable the HTTP receiver. Default: 8126                                                                                                                               |
+| `DD_APM_RECEIVER_SOCKET`  | Accept traces through Unix Domain Sockets. It is off by default. When set, it must point to a valid socket file.                                                                                                                      |
+| `DD_APM_DD_URL`           | Define the endpoint and port to hit when using a proxy for APM. The traces are forwarded in TCP therefore the proxy must be able to handle TCP connections. <ENDPOINT>:<PORT>                                                         |
+| `DD_APM_REPLACE_TAGS`     | Defines a set of rules to replace or remove certain resources, tags containing potentially sensitive [information][3].                                                                                                                |
+| `DD_APM_IGNORE_RESOURCES` | An exclusion list of regular expressions can be provided to disable certain traces based on their resource name all entries must be surrounded by double quotes and separated by commas.                                              |
+| `DD_APM_LOG_FILE`         | The full path to the file where APM-agent logs are written.                                                                                                                                                                           |
+| `DD_APM_LOG_THROTTLING`   | Limits the total number of warnings and errors to 10 for every 10 second interval.                                                                                                                                                    |
+| `DD_APM_CONNECTION_LIMIT` | The APM [connection limit][4] for the Agent.                                                                                                                                                                                          |
+
 ### Advanced networking configuration
 
 | Env Variable             | Description                                                                                                                                                                                                                                                                                                                        |
@@ -54,7 +69,7 @@ The Agent's [main configuration file][1] is `datadog.yaml`. For the Serverless A
 | `DD_PROXY_HTTPS`    | An HTTPS URL to use as a proxy for `https` requests.              |
 | `DD_PROXY_NO_PROXY` | A space-separated list of URLs for which no proxy should be used. |
 
-For more information about proxy settings, see the [Agent v6 Proxy documentation][15].
+For more information about proxy settings, see the [Agent v6 Proxy documentation][6].
 
 ### Optional collection Agents
 
@@ -69,45 +84,43 @@ to enable them:
 
 ### DogStatsD (custom metrics)
 
-Send custom metrics with [the StatsD protocol][20]:
+Send custom metrics with [the StatsD protocol][5]:
 
-| Env Variable                     | Description                                                                                                                                           |
-|----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` | Listen to DogStatsD packets from other containers (required to send custom metrics).                                                                  |
-| `DD_HISTOGRAM_PERCENTILES`       | The histogram percentiles to compute (separated by spaces). The default is `0.95`.                                                                    |
-| `DD_HISTOGRAM_AGGREGATES`        | The histogram aggregates to compute (separated by spaces). The default is "max median avg count".                                                     |
-| `DD_DOGSTATSD_SOCKET`            | Path to the unix socket to listen to. Must be in a `rw` mounted volume.                                                                               |
-| `DD_DOGSTATSD_ORIGIN_DETECTION`  | Enable container detection and tagging for unix socket metrics.                                                                                       |
-| `DD_DOGSTATSD_TAGS`              | Additional tags to append to all metrics, events, and service checks received by this DogStatsD server, for example: `"env:golden group:retrievers"`. |
-| `DD_USE_DOGSTATSD`               | Enable or disable sending custom metrics from the DogStatsD library.                                                                                  |
+| Env Variable                           | Description                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|----------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `DD_DOGSTATSD_NON_LOCAL_TRAFFIC`       | Listen to DogStatsD packets from other containers (required to send custom metrics).                                                                                                                                                                                                                                                                                                                                                                    |
+| `DD_HISTOGRAM_PERCENTILES`             | The histogram percentiles to compute (separated by spaces). The default is `0.95`.                                                                                                                                                                                                                                                                                                                                                                      |
+| `DD_HISTOGRAM_AGGREGATES`              | The histogram aggregates to compute (separated by spaces). The default is "max median avg count".                                                                                                                                                                                                                                                                                                                                                       |
+| `DD_DOGSTATSD_SOCKET`                  | Path to the unix socket to listen to. Must be in a `rw` mounted volume.                                                                                                                                                                                                                                                                                                                                                                                 |
+| `DD_DOGSTATSD_ORIGIN_DETECTION`        | Enable container detection and tagging for unix socket metrics.                                                                                                                                                                                                                                                                                                                                                                                         |
+| `DD_DOGSTATSD_TAGS`                    | Additional tags to append to all metrics, events, and service checks received by this DogStatsD server, for example: `"env:golden group:retrievers"`.                                                                                                                                                                                                                                                                                                   |
+| `DD_USE_DOGSTATSD`                     | Enable or disable sending custom metrics from the DogStatsD library.                                                                                                                                                                                                                                                                                                                                                                                    |
+| `DD_DOGSTATSD_PORT`                    | Override the Agent DogStatsD port.                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| `DD_BIND_HOST`                         | The host to listen on for Dogstatsd and traces. This is ignored by APM when `apm_config.apm_non_local_traffic` is enabled and ignored by DogStatsD when `dogstatsd_non_local_traffic` is enabled. The trace-agent uses this host to send metrics to. The `localhost` default value is invalid in IPv6 environments where dogstatsd listens on "::1". To solve this problem, ensure Dogstatsd is listening on IPv4 by setting this value to "127.0.0.1". |
+| `DD_DOGSTATSD_ORIGIN_DETECTION_CLIENT` | Whether the Agent should use a client-provided container ID to enrich the metrics, events and service checks with container tags. Note: This requires using a client compatible with DogStatsD protocol version 1.2.                                                                                                                                                                                                                                    |
+| `DD_DOGSTATSD_BUFFER_SIZE`             | The buffer size use to receive statsd packets, in bytes.                                                                                                                                                                                                                                                                                                                                                                                                |
+| `DD_DOGSTATSD_STATS_ENABLE`             | Publish DogStatsD's internal stats as Go expvars.|
+| `DD_DOGSTATSD_QUEUE_SIZE`             | Configure the internal queue size of the Dogstatsd server. Reducing the size of this queue will reduce the maximum memory usage of the Dogstatsd server but as a trade-off, it could increase the number of packet drops.|
+| `DD_DOGSTATSD_STATS_BUFFER`             | Set how many items should be in the DogStatsD's stats circular buffer.|
+| `DD_DOGSTATSD_STATS_PORT`             | The port for the go_expvar server.|
+| `DD_DOGSTATSD_SO_RCVBUF`             | The number of bytes allocated to DogStatsD's socket receive buffer (POSIX system only) By default, the system sets this value. If you need to increase the size of this buffer but keep the OS default value the same, you can set DogStatsD's receive buffer size here. The maximum accepted value might change depending on the OS.|
+| `DD_DOGSTATSD_METRICS_STATS_ENABLE`             | Set this parameter to true to have DogStatsD collects basic statistics (count/last seen) about the metrics it processed. Use the Agent command "dogstatsd-stats" to visualize those statistics.|
+| `DD_DOGSTATSD_ENTITY_ID_PRECEDENCE`             | Disable enriching Dogstatsd metrics with tags from "origin detection" when Entity-ID is set.|
+| `DD_DOGSTATSD_NO_AGGREGATION_PIPELINE`             | Enable the no-aggregation pipeline in DogStatsD: a pipeline receiving metrics with timestamp and forwarding them to the intake without extra processing except for tagging.|
+| `DD_DOGSTATSD_NO_AGGREGATION_PIPELINE_BATCH_SIZE`             | How many metrics maximum in payloads sent by the no-aggregation pipeline to the intake.|
+| `DD_STATSD_FORWARD_HOST`             | Forward every packet received by the DogStatsD server to another statsd server. Make sure that forwarded packets are regular statsd packets and not "DogStatsD" packets, as your other statsd server might not be able to handle them.|
+| `DD_STATSD_FORWARD_PORT`             | Port or the "statsd_forward_host" to forward StatsD packet to.|
+| `DD_STATSD_METRIC_NAMESPACE`             | Set a namespace for all StatsD metrics coming from this host. Each metric received is prefixed with the namespace before it's sent to Datadog.|
+| `DD_METADATA_PROVIDERS`             | Metadata providers, add or remove from the list to enable or disable collection. Intervals are expressed in seconds. You can also set a provider's interval to 0 to disable it.|
 
-Learn more about [DogStatsD over Unix Domain Sockets][21].
-
-### Tagging
-
-As a best practice, Datadog recommends using [unified service tagging][22] when assigning tags.
-
-Datadog automatically collects common tags from Docker, Kubernetes, ECS, Swarm, Mesos, Nomad, and Rancher. To extract
-even more tags, use the following options:
-
-| Env Variable                  | Description                                                                                             |
-|-------------------------------|---------------------------------------------------------------------------------------------------------|
-| `DD_CONTAINER_LABELS_AS_TAGS` | Extract container labels. This env is equivalent to the old `DD_DOCKER_LABELS_AS_TAGS` env.             |
-| `DD_CONTAINER_ENV_AS_TAGS`    | Extract container environment variables. This env is equivalent to the old `DD_DOCKER_ENV_AS_TAGS` env. |
-| `DD_COLLECT_EC2_TAGS`         | Extract custom EC2 tags without using the AWS integration.                                              |
-
-See the [Docker Tag Extraction][23] documentation to learn more.
 
 ### Misc
 
 | Env Variable                        | Description                                                                                                                                                                                                                                                                                                                                      |
 |-------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `DD_PROCESS_AGENT_CONTAINER_SOURCE` | Overrides container source auto-detection to force a single source. e.g `"docker"`, `"ecs_fargate"`, `"kubelet"`. This is no longer needed since Agent v7.35.0.                                                                                                                                                                                  |
-| `DD_HEALTH_PORT`                    | Set this to `5555` to expose the Agent health check at port `5555`.                                                                                                                                                                                                                                                                              |
-| `DD_CHECK_RUNNERS`                  | The Agent runs all checks concurrently by default (default value = `4` runners). To run the checks sequentially, set the value to `1`. If you need to run a high number of checks (or slow checks), the `collector-queue` component may fall behind and fail the health check. You can increase the number of runners to run checks in parallel. |
 | `DD_CHECKS_TAG_CARDINALITY`         | Configure the level of granularity of tags to send for checks metrics and events.                                                                                                                                                                                                                                                                |
 | `DD_DOGSTATSD_TAG_CARDINALITY`      | Configure the level of granularity of tags to send for DogStatsD metrics and events.                                                                                                                                                                                                                                                             |
-| `DD_INTERNAL_PROFILING_ENABLED`     | Enable internal profiling for the Agent process. Default: false                                                                                                                                                                                                                                                                                  |
+| `DD_INTERNAL_PROFILING_ENABLED`     | Enable internal profiling for the trace-agent process.                                                                                                                                                                                                                                                                                           |
 
 You can add extra listeners and config providers using the `DD_EXTRA_LISTENERS` and `DD_EXTRA_CONFIG_PROVIDERS`
 environment variables. They are added in addition to the variables defined in the `listeners` and `config_providers`
@@ -116,3 +129,11 @@ section of the `datadog.yaml` configuration file.
 [1]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
 
 [2]: https://docs.datadoghq.com/agent/logs/advanced_log_collection/#global-processing-rules
+
+[3]: https://docs.datadoghq.com/tracing/setup_overview/configure_data_security/#replace-rules-for-tag-filtering
+
+[4]: https://docs.datadoghq.com/tracing/troubleshooting/agent_rate_limits/#max-connection-limit
+
+[5]: /developers/dogstatsd/
+
+[6]: /agent/proxy/#agent-v6
