@@ -58,13 +58,11 @@ When you run a workflow, the service account user resolves the connections defin
 
 #### View service account details
 
-To view a service account's details:
 1. Click the cog (**Settings**) icon.
 1. Select your service account from the drop-down menu.
 
 #### Remove a service account associated with workflow
 
-To remove a service account that is associated with your workflow:
 1. Click the cog (**Settings**) icon.
 1. Select your service account from the drop-down menu.
 1. Click **Remove service account**.
