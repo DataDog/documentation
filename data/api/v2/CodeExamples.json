@@ -162,6 +162,13 @@
       "description": "Update Fastly account returns \"OK\" response"
     }
   ],
+  "UpdateIPAllowlist": [
+    {
+      "group": "ip_allowlist",
+      "suffix": "",
+      "description": "Update IP Allowlist returns \"OK\" response"
+    }
+  ],
   "CreateIncidentService": [
     {
       "group": "incident_services",
@@ -434,6 +441,13 @@
       "description": "Update a RUM application returns \"OK\" response"
     }
   ],
+  "UpdateRestrictionPolicy": [
+    {
+      "group": "restriction_policies",
+      "suffix": "",
+      "description": "Update a restriction policy returns \"OK\" response"
+    }
+  ],
   "AddUserToRole": [
     {
       "group": "roles",
@@ -644,6 +658,13 @@
       "group": "service_definition",
       "suffix": "",
       "description": "Create or update service definition returns \"CREATED\" response"
+    }
+  ],
+  "SetOnDemandConcurrencyCap": [
+    {
+      "group": "synthetics",
+      "suffix": "_2850884405",
+      "description": "Save on demand concurrency cap"
     }
   ],
   "CreateUser": [

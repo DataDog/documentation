@@ -15,7 +15,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-    Quick Graph is currently in beta.
+    RUM Deployment Tracking is currently in beta.
 </div>
 
 
