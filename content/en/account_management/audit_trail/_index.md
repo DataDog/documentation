@@ -137,7 +137,7 @@ Events that match the following queries are marked as notable.
 | Changes to Sensitive data scanner scanning group | `@evt.name:"Sensitive Data Scanner" @asset.type:sensitive_data_scanner_scanning_group` |
 | Creation or deletion of Synthetic tests | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_test @action:(created OR deleted)` |
 
-### Diff view
+### Inspect Changes (Diff)
 
 Diff view allows customers to compare changes made to configurations in the audit event details panel. This makes it easy to pinpoint changes to Dashboard, Notebook and Monitor configurations which are represented in JSON objects.
 
