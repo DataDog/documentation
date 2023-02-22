@@ -21,38 +21,51 @@ further_reading:
 
 A few tools control access and authentication for workflows and their components.
 
-## Service accounts
+## Workflow identity
 
-To add an automated trigger to a workflow, the workflow must have an associated service account. The service account is needed to:
+A workflow can run using the identity of the owner of the workflow, or a service account associated with the workflow. By default, a workflow uses the Datadog user identity of its author.
+
+
+### Claim ownership of a workflow
+
+<div class="alert alert-info">To claim ownership of a workflow, your Datadog user must have the roles and permissions required by the workflow's connections.</div>
+
+
+1. Click the cog (**Settings**) icon. 
+1. Select **Take ownership of workflow**. This option only appears if you are not already the owner of the workflow.
+1. Click **Confirm** to take ownership of the workflow.
+
+### Use a service account
+
+A service account can be associated with a workflow and act as the identity of the workflow when it runs. A service account can:
 - resolve the connections defined in the workflow actions at runtime
 - provide an identity for workflow executions
 - provide an identity for workflow [audit trails][1]
 
 To create a service account for a workflow, you must have either the Datadog admin role, or a custom role with the **Service Account Write** permission. The service account you create adopts your role and permissions. For more information on service accounts and permissions, see [Service accounts][2] or [Role based access control][3].
 
-<div class="alert alert-info">The service account you create allows a workflow to be triggered automatically. However, individual actions in the workflow may require <a href="/workflows/connections/">Connections</a>.</div>
-
-### Associate a service account with a workflow
+#### Associate a service account with a workflow
 
 You can dynamically create a service account for your workflow when you [add an automatic trigger][4].
 
-1. Click the **Create** button. The **Create Service Account** dialog opens.
-1. Use the dropdown to select a role for your service account user.
+1. Click the cog (**Settings**) icon.
+1. Click **Create a service account**.
+1. Select a role for your service account user.
 1. Click **Create** to save the service account.
+1. Save your workflow to apply the changes.  
 
 When you run a workflow, the service account user resolves the connections defined in the workflow actions. Therefore, the service account user needs the `connections_resolve` permission. The Datadog Admin Role and the Datadog Standard Role include the `connections_resolve` permission.
 
-The **Create Service Account** dialog in Workflows populates the service account details as follows:
-- Name: `[WF]: <your-workflow-name>`
-- Email: the email address associated with your Datadog account
+#### View service account details
 
-### View service account details
+1. Click the cog (**Settings**) icon.
+1. Select your service account from the drop-down menu.
 
-To view a service account's details:
-1. On your workflow canvas, click on the automated trigger.
-1. Next to the service account, click **View**.
+#### Remove a service account associated with workflow
 
-{{< img src="workflows/service-account-details1.png" alt="Service account details" style="width:60%;" >}}
+1. Click the cog (**Settings**) icon.
+1. Select your service account from the drop-down menu.
+1. Click **Remove service account**.
 
 ## Action credentials
 
