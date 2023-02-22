@@ -11,6 +11,7 @@ author:
 categories:
 - notification
 - 自動化
+- マーケットプレイス
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -48,6 +49,7 @@ tile:
   - Supported OS::Windows
   - Category::Notification
   - Category::Automation
+  - Category::Marketplace
   - Offering::Software License
   configuration: README.md#Setup
   description: Zebrium は、問題の根本原因をダッシュボードに直接表示します
