@@ -134,7 +134,7 @@ Events that match the following queries are marked as notable.
 | Changes to APM custom metrics | `@evt.name:APM @asset.type:custom_metrics` |
 | Changes to metrics tags | `@evt.name:Metrics @asset.type:metric @action:(created OR modified)` |
 | Creations and deletion of RUM applications | `@evt.name:"Real User Monitoring" @asset.type:real_user_monitoring_application @action:(created OR deleted)` |
-| Changes to Sensitive data scanner scanning group | `@evt.name:"Sensitive Data Scanner" @asset.type:sensitive_data_scanner_scanning_group` |
+| Changes to Sensitive Data Scanner scanning group | `@evt.name:"Sensitive Data Scanner" @asset.type:sensitive_data_scanner_scanning_group` |
 | Creation or deletion of Synthetic tests | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_test @action:(created OR deleted)` |
 
 ### Inspect Changes (Diff)
