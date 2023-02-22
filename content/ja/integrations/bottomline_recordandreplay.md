@@ -24,7 +24,6 @@ author:
   support_email: partner.cfrm@bottomline.com
   vendor_id: bottomline
 categories:
-- マーケットプレイス
 - クラウド
 - モニタリング
 dependencies:
@@ -50,7 +49,6 @@ tile:
   classifier_tags:
   - Supported OS::Linux
   - Supported OS::Windows
-  - Category::Marketplace
   - Category::Cloud
   - Category::Monitoring
   - Offering::Integration
