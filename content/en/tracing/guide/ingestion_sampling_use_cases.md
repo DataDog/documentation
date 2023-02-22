@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-Trace data tends to be repetitive. A problem in your application is rarely identified in a single trace. For high throughput services, particularly for incidents that require your attention, an issue shows symptoms in multiple traces. Consequently, there’s usually no need for you to collect every single trace for a service or endpoint. Datadog APM [ingestion control mechanisms][1] help you keep the visibility that you need to troubleshoot problems while cutting down the noise and managing costs.
+Trace data tends to be repetitive. A problem in your application is rarely identified in a single trace. For high throughput services, particularly for incidents that require your attention, an issue shows symptoms in multiple traces. Consequently, there’s usually no need for you to collect every single trace for a service or endpoint. Datadog APM [ingestion control mechanisms][1] help you keep the visibility that you need to troubleshoot problems, while cutting down the noise and managing costs.
 
 Ingestion mechanisms are controllable from the Datadog Agent and from Datadog tracing libraries. If you are using OpenTelemetry SDKs to instrument your applications, read [Ingestion Sampling with OpenTelemetry][2].
 
@@ -38,44 +38,39 @@ Click on services to see details about what sampling decision makers are used fo
 
 ### Keeping entire transaction traces
 
-#### Why ? 
+Ingesting entire transaction traces ensures visibility over the **end-to-end service request flow** for specific individual requests.
 
-Ingesting entire transaction traces ensures to keep visibility over the **end-to-end service request flow** for specific individual requests.
+#### Solution: Head-based sampling
 
-#### What solutions does Datadog provide ?
-
-Complete traces can be ingested with [head-based sampling][4] mechanisms: the decision of keeping or dropping the trace is taken at the trace creation (trace root span), and this decision is propagated in the request context to downstream callee services.
+Complete traces can be ingested with [head-based sampling][4] mechanisms: the decision of keeping or dropping the trace is taken at the point of trace creation (trace root span), and this decision is propagated in the request context to downstream services.
 
 {{< img src="/tracing/guide/ingestion_sampling_use_cases/head_based_sampling_keep.png" alt="Head-based Sampling" style="width:100%;" >}}
 
-To decide which traces to keep and drop, the Datadog Agent automatically computes sampling rates for each service to apply at the trace creation, based on the application traffic.
-- For low-traffic applications, a sampling rate of 100% is applied
-- For high-traffic applications, a lower sampling rate is applied
+To decide which traces to keep and drop, the Datadog Agent computes default sampling rates for each service to apply at trace creation, based on the application traffic:
+- For low-traffic applications, a sampling rate of 100% is applied.
+- For high-traffic applications, a lower sampling rate is applied with a target of 10 complete traces per second per Agent.
 
-You can also override Agent sampling rate by configuring the sampling rate by service. See how to [keep more traces for specific services](#keep-more-traces-for-some-specific-services--resources-for-better-visibility) for more information.
+You can also override the default Agent sampling rate by configuring the sampling rate by service. See how to [keep more traces for specific services](#keeping-more-traces-for-high-visibility-into-specific-services-or-resources) for more information.
 
-#### How to configure head-based sampling ?
+#### Configuring head-based sampling
 
-Sampling rates are calculated to target 10 complete traces per second per Agent. You can increase or decrease this target by configuring the Datadog Agent parameter `max_traces_per_second` or the environment variable `DD_APM_MAX_TPS`.
-Read more about this [ingestion mechanisms][5] in the documentation.
+Default sampling rates are calculated to target 10 complete traces per second per Agent. You can increase or decrease this target by configuring the Datadog Agent parameter `max_traces_per_second` or the environment variable `DD_APM_MAX_TPS`. Read more about [head-based sampling ingestion mechanisms][5].
 
-**Note:** Changing an Agent configuration will impact the percentage sampling rates applied for all services reporting traces to this Datadog Agent.
+**Note:** Changing an Agent configuration impacts the percentage sampling rates for *all services* reporting traces to this Datadog Agent.
 
-For most scenarios, relying on the Agent-level configuration is suited to stay within the allotted quota and have enough visibility on your applications performance and make appropriate decisions for your business. 
+For most scenarios, relying on the Agent-level configuration is suited to stay within the allotted quota, to have enough visibility into your application's performance, and to make appropriate decisions for your business. 
 
 ### Keeping more traces for high visibility into specific services or resources
 
-#### Why ?
+If some services and requests are critical to your business, you may want to send all related traces to Datadog so that you can look into any of the individual transactions.
 
-If some services and requests are critical to your business, you may want to send all related traces to Datadog to be able to look into any of the individual transactions.
-
-#### What solutions does Datadog provide ?
+#### Solution: Sampling rules
 
 By default, sampling rates are calculated to target 10 traces per second per Datadog Agent. You can override the default calculated sampling rate by configuring **[sampling rules][6]** in the tracing library. 
 
 You can configure sampling rules by service. For traces starting from the service targeted by the sampling rule, the defined percentage sampling rate will be applied instead of the default sampling rate calculated by the Datadog Agent.
 
-#### How to configure a sampling rule ?
+#### Configuring a sampling rule
 
 You can configure sampling rules by setting the environment variable `DD_TRACE_SAMPLING_RULES`. 
 
