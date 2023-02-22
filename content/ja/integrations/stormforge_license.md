@@ -14,6 +14,7 @@ categories:
 - コンテナ
 - コスト管理
 - orchestration
+- マーケットプレイス
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -50,6 +51,7 @@ tile:
   - Category::Containers
   - Category::Cost Management
   - Category::Orchestration
+  - Category::Marketplace
   - Offering::Software License
   configuration: README.md#Setup
   description: 機械学習を用いた Kubernetes リソースのリアルタイム最適化
