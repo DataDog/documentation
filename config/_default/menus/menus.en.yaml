@@ -164,10 +164,14 @@ main:
     url: getting_started/cloud_siem/
     parent: getting_started
     weight: 18
+  - name: Application Security Management
+    url: getting_started/application_security/
+    parent: getting_started
+    weight: 19
   - name: Learning Center
     url: getting_started/learning_center/
     parent: getting_started
-    weight: 19
+    weight: 20
   - name: Glossary
     url: glossary/
     pre: features
@@ -2786,11 +2790,16 @@ main:
     parent: appsec_threats
     identifier: threats_event_rules
     weight: 505
+  - name: Guides
+    url: security/application_security/guide/
+    parent: application_security
+    identifier: appsec_guides
+    weight: 6
   - name: Troubleshooting
     url: security/application_security/troubleshooting/
     parent: application_security
     identifier: appsec_troubleshooting
-    weight: 6
+    weight: 7
   - name: Synthetic Monitoring
     url: synthetics/
     pre: synthetics
