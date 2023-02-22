@@ -206,7 +206,7 @@ az containerapp up \
 
 ### 3. Results
 
-Once the deployment is completed, your metrics and traces are sent to Datadog. In Datadog, navigate to **Infrastructure->Serverless** to see your serverless metrics and traces.
+Once the deployment is completed, your metrics and traces are sent to Datadog. In Datadog, navigate to the [APM Trace Explorer] and search for your Container App by service name, or filter using the facet `origin:containerapp` to see your Azure Container App traces.
 
 ## Additional configurations
 
