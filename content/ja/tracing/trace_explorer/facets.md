@@ -24,8 +24,8 @@ title: スパンファセット
 **注**: [ファセットの作成](#creating-facets)は、[スパンの検索][1]、[スパンからのメトリクス生成][2]、[保持フィルターによるスパンのインデックス化][3]には必要ではありません。これらのコンテキストすべてにおいて、オートコンプリート機能は既存のファセットを使用しますが、入力されるスパンに一致する任意の入力も機能します。
 
 [1]: /ja/tracing/trace_explorer/search
-[2]: /ja/tracing/generate_metrics
-[3]: /ja/tracing/trace_retention/#retention-filters
+[2]: /ja/tracing/trace_pipeline/generate_metrics
+[3]: /ja/tracing/trace_pipeline/trace_retention/#retention-filters
 
 {{< /site-region >}}
 

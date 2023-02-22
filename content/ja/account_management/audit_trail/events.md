@@ -23,6 +23,7 @@ title: 監査証跡イベント
 - [ノートブック](#notebook-events)
 - [OAuth](#oauth-events)
 - [組織管理](#organization-management-events)
+- [セキュリティ通知](#security-notification-events)
 
 #### 製品別イベント
 - [Application Performance Monitoring (APM)](#apm-events)
@@ -184,6 +185,11 @@ title: 監査証跡イベント
 | [RUM アプリケーションの作成][68] | ユーザーが RUM でアプリケーションを作成または削除し、そのアプリケーションの種類 (Browser、Flutter、IOS、React Native、Android)。 | `@evt.name:"Real User Monitoring" @asset.type:real_user_monitoring_application @action:(created OR deleted)` |
 | [RUM アプリケーションの変更][69] | ユーザーが RUM でアプリケーションを変更し、そのアプリケーションの新しい値、およびアプリケーションの種類 (Browser、Flutter、IOS、React Native、Android)。 | `@evt.name:"Real User Monitoring" @asset.type:real_user_monitoring_application @action:modified` |
 
+### セキュリティ通知イベント
+| 名前                 | 監査イベントの説明                                                       | 監査エクスプローラーのクエリ                                           |
+| -------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------|
+| [トークンリーク][80］ | Datadog は、失効させるべき Datadog API またはアプリケーションキーのリークを検出しました。| `@evt.name:"Security Notification" @asset.type:(api_key OR application_key) @action:notification` |
+
 ### 機密データスキャナーイベント
 | 名前 | 監査イベントの説明                                          | 監査エクスプローラーのクエリ                           |
 | ---- | ------------------------------------------------------------------- | --------------------------------------------------|
@@ -296,3 +302,4 @@ title: 監査証跡イベント
 [77]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Synthetics%20Monitoring%22%20%40asset.type%3Asynthetics_variable
 [78]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Synthetics%20Monitoring%22%20%40asset.type%3Asynthetics_settings%20%40action%3Amodified
 [79]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Reference%20Tables%22%20%40asset.type%3Areference_table%20%40action%3A%28created%20OR%20deleted%20OR%20modified%29
+[80]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Security%20Notification%22%20%40asset.type%3A%28api_key%20OR%20application_key%29

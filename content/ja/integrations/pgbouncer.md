@@ -33,7 +33,6 @@ author:
 categories:
 - data store
 - log collection
-- autodiscovery
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/pgbouncer/README.md
 display_on_public_website: true
@@ -59,7 +58,6 @@ tile:
   - Supported OS::macOS
   - Category::データストア
   - Category::ログの収集
-  - Category::オートディスカバリー
   configuration: README.md#Setup
   description: 接続プールメトリクスを追跡し、アプリケーションに出入りするトラフィックを監視
   media: []
@@ -76,7 +74,7 @@ PgBouncer チェックは、接続プールメトリクスを追跡し、アプ�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 PgBouncer チェックは [Datadog Agent][1] パッケージに含まれています。PgBouncer ノードに追加でインストールする必要はありません。
 

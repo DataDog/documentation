@@ -33,8 +33,8 @@ IntelliJ IDEA 用 Datadog プラグインは、リアルタイムの観測可能
 
 ## 要件
 
-- **Datadog アカウント**: このプラグインを使用するには、Datadog のアカウントが必要です。Datadog が初めての方は、[Datadog Web サイト][4]で Datadog の観測可能性ツールの詳細と無料トライアルにサインアップしてください。
-- **Continuous Profiling**: このプラグインでコードレベルの洞察を表示するには、Java サービスにインストルメントされた Continuous Profiler が必要です。詳細については、[Continuous Profiler の概要][3]を参照してください。
+- **Datadog アカウント**: このプラグインを使用するには、Datadog のアカウントが必要です。Datadog が初めての方は、[Datadog Web サイト][3]で Datadog の観測可能性ツールの詳細と無料トライアルにサインアップしてください。
+- **Continuous Profiling**: このプラグインでコードレベルの洞察を表示するには、Java サービスにインストルメントされた Continuous Profiler が必要です。詳細については、[Continuous Profiler の概要][2]を参照してください。
 
 ## セットアップ
 
@@ -47,17 +47,18 @@ IntelliJ IDEA 用 Datadog プラグインは、リアルタイムの観測可能
 
 {{< img src="/developers/ide_integrations/idea/datadog-plugin1.png" alt="Datadog プラグイン" style="width:100%;" >}}
 
-または、[Jetbrains Marketplace][6] からプラグインをインストールすることができます。
+または、[Jetbrains Marketplace][4] からプラグインをインストールすることができます。
+
 <span id="datadog_plugin_install_button"></span>
 
-### Datadog の資格情報を追加する
+### Datadog にログインする
 
-Datadog プラグインをインストールし、IDEA を再起動した後、Datadog で認証するための Datadog API キーとアプリケーションキーを追加します。
+Datadog プラグインをインストールし、IDEA を再起動した後、Datadog にログインします。
 1. IDEA でファイルまたはプロジェクトを開いた状態で、**Datadog** ツールウィンドウをクリックします。
-1. **Add your credentials...** をクリックします。
-1. 名前、[API キーとアプリケーションキー][5]を入力し、サイトを選択します。
+1. **Log in...** をクリックします。
+1. ブラウザで開いたウィンドウで、サイトと組織を選択し、プラットフォームへのアクセスを認可します。
 
-**注**: ほとんどのユーザーにとって、必要なキーのペアは 1 つだけです。複数の組織で複数のキーペアを使用している場合は、正しいペアがアクティブであることを確認してください。IDEA がどのキーを使用しているかを確認するには、**Preferences** -> **Tools** -> **Datadog** をクリックし、どのアカウントがアクティブになっているかを確認します。
+**注**: ほとんどのユーザーにとって、必要なログインは 1 つだけです。複数の組織設定を使用している場合は、正しいアカウントがアクティブであることを確認してください。IDEA がどのログインを使用しているかを確認するには、**Preferences** -> **Tools** -> **Datadog** をクリックし、どのアカウントがアクティブになっているかを確認します。
 
 ### サービスのリンク
 
@@ -141,7 +142,7 @@ Datadog プラットフォームから関連データを提供するには、プ
 
 ## フィードバック
 
-このプラグインについてどう思われますか？私たちの[ディスカッションフォーラム][1]でフィードバックを提供するか、`team-ide-integration@datadoghq.com` にメールを送信してください。
+このプラグインについてどう思われますか？私たちの[ディスカッションフォーラム][5]でフィードバックを提供するか、`team-ide-integration@datadoghq.com` にメールを送信してください。
 
 ## その他の参考資料
 
@@ -154,7 +155,6 @@ Datadog プラットフォームから関連データを提供するには、プ
 </script>
 
 [1]: https://github.com/DataDog/datadog-for-intellij/discussions
-[3]: /ja/getting_started/profiler/
-[4]: https://www.datadoghq.com/
-[5]: /ja/account_management/api-app-keys/
-[6]: https://plugins.jetbrains.com/plugin/19495-datadog
+[2]: /ja/getting_started/profiler/
+[3]: https://www.datadoghq.com/
+[4]: https://plugins.jetbrains.com/plugin/19495-datadog

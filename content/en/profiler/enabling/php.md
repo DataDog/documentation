@@ -64,8 +64,6 @@ To begin profiling applications:
 
 3. Run the installer to install both the tracer and profiler, for example `php datadog-setup.php --enable-profiling`. This script is interactive and asks which of the detected PHP locations it should install to. At the end of the script, it outputs the non-interactive version of the command arguments for future use.
 
-4. Configure the profiler with environment variables. Unlike the tracer the profiler does not support INI settings.
-
    {{< tabs >}}
 {{% tab "CLI" %}}
 
@@ -115,7 +113,7 @@ SetEnv DD_VERSION 1.3.2
 
    See the [configuration docs][4] for more environment variables.
 
-5. A minute or two after receiving a request, profiles appear on the [APM > Profiler page][5].
+4. A minute or two after receiving a request, profiles appear on the [APM > Profiler page][5].
 
 ## Not sure what to do next?
 

@@ -107,7 +107,7 @@ Second primary tags are additional tags that you can use to group and aggregate 
 
 Including metric partitions or grouping variables in service names instead of applying the second primary tag unnecessarily inflates the number of unique services in an account and results in potential delay or data loss.
 
- For example, instead of the service `web-store`, you might decide to name different instances of a service `web-store-us-1`, `web-store-eu-1`, and `web-store-eu2` to see performance metrics for these partitions side-by-side. Datadog recommends implementing the **region value** as a second primary tag.
+ For example, instead of the service `web-store`, you might decide to name different instances of a service `web-store-us-1`, `web-store-eu-1`, and `web-store-eu-2` to see performance metrics for these partitions side-by-side. Datadog recommends implementing the **region value** (`us-1`, `eu-1`, `eu-2`) as a second primary tag.
  
 ## Troubleshooting data requested by Datadog Support
 

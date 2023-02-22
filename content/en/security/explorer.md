@@ -26,7 +26,7 @@ From the [Security Signals Explorer][1], correlate and triage security signals. 
 
 The Security Signals search results are displayed in the Security Signals Table.
 
-{{< img src="security/security_monitoring/explorer/signals_table.png" alt="The Security Signals table showing two account takeover signals" >}}
+{{< img src="security/security_monitoring/explorer/security_signals_table.png" alt="The Security Signals table showing two account takeover signals" >}}
 
 Filter the contents of the table with the list of available facets. Configure the content of your Security Signals Table according to your needs and preferences with the **Options** button in the upper right.
 

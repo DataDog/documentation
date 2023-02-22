@@ -11,13 +11,13 @@ further_reading:
   tag: ドキュメント
   text: Datadog APM 内の Version タグを使用してデプロイを監視する
 kind: ガイド
-private: true
 title: RUM デプロイメント追跡の概要
 ---
 
-{{< callout url="#" btn_hidden="true" >}}
-RUM デプロイメント追跡は、非公開ベータ版です。アクセスのリクエストは、Datadog サポート (support@datadoghq.com) までご連絡ください。
-{{< /callout >}}
+<div class="alert alert-warning">
+    クイックグラフは現在ベータ版です。
+</div>
+
 
 ## 概要
 チームが迅速に反復してコードを展開すると、エラーの急増やページロード時間の低下の原因となった正確な変更を見つけることが困難になることがあります。RUM デプロイメント追跡を使用すると、最近のデプロイメントやリリースがアプリケーション内でパフォーマンスの問題を引き起こしている場合に、その原因を特定することができます。

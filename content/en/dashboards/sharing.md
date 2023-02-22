@@ -90,13 +90,13 @@ To share a graph from a [Timeboard][2] or [Screenboard][3]:
 
 To revoke the keys used to share individual (embedded) graphs:
 
-1. Navigate to [**Integrations -> Embeds**][4] to see a list of all shared graphs.
+1. Navigate to [**Organization Settings -> Public Sharing -> Shared Graphs**][4] to see a list of all shared graphs.
 2. Click on the **Revoke** button next to the graph you want to stop sharing.
 3. The graph is moved to the **Revoked** list.
 
 ### Applying restrictions
 
-You can restrict access on a per IP address basis to your dashboard. Email [Datadog support][5] to enable the IP address include listing feature that allows administrators to provide a list of IP addresses that have access to shared dashboards. Once enabled, manage your restrictions on your organization's [Security][6] page.
+You can restrict access on a per IP address basis to your dashboard. Email [Datadog support][5] to enable the IP address include listing feature that allows administrators to provide a list of IP addresses that have access to shared dashboards. Once enabled, manage your restrictions on your organization's [Public Sharing][6] page.
 
 ### Dark mode
 
@@ -125,9 +125,9 @@ Datadog has a [dedicated API][7] allowing you to interact with your shared graph
 [1]: https://app.datadoghq.com/dashboard/lists
 [2]: /dashboards/#timeboards
 [3]: /dashboards/#screenboard
-[4]: https://app.datadoghq.com/account/settings#embeds
+[4]: https://app.datadoghq.com/organization-settings/public-sharing/shared-graphs
 [5]: /help/
-[6]: https://app.datadoghq.com/account/org_security
+[6]: https://app.datadoghq.com/organization-settings/public-sharing/settings
 [7]: /api/v1/embeddable-graphs/
 [8]: /api/v1/embeddable-graphs/#get-all-embeds
 [9]: /api/v1/embeddable-graphs/#create-embed

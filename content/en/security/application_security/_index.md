@@ -33,6 +33,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/apm-security-view/"
   tag: "Blog"
   text: "Gain visibility into risks, vulnerabilities, and attacks with APM Security View"
+- link: "https://www.datadoghq.com/blog/block-attackers-application-security-management-datadog/"
+  tag: "Blog"
+  text: "Block attackers in your apps and APIs with Datadog Application Security Management"
 ---
 
 {{< img src="/security/application_security/app-sec-landing-page.png" alt="A security signal panel in Datadog, which displays attack flows and flame graphs" width="75%">}}

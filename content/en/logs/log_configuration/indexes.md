@@ -24,7 +24,7 @@ Log Indexes provide fine-grained control over your Log Management budget by allo
 
 {{< img src="logs/indexes/index_details.jpg" alt="index details"  style="width:70%;">}}
 
-You can use indexed logs for [faceted searching][2], [patterns][3], [analytics][4], [dashboarding][5], and [monitoring][6].
+You can use indexed logs for [faceted searching][2], [patterns][3], [analytics][4], and [monitoring][6].
 
 ## Multiple indexes
 
@@ -168,13 +168,12 @@ See [Monitor log usage][20] on how to monitor and alert on your usage.
 [2]: /logs/explorer/#visualization
 [3]: /logs/explorer/patterns/
 [4]: /logs/explorer/analytics/
-[5]: /logs/explorer/analytics/#dashboard
 [6]: /monitors/create/types/log/
 [7]: /logs/explorer/facets/#the-index-facet
 [8]: /logs/live_tail/
 [9]: /logs/logs_to_metrics/
 [10]: /logs/archives/
-[11]: https:/app.datadoghq.com/logs/pipelines/indexes
+[11]: https://app.datadoghq.com/logs/pipelines/indexes
 [12]: /logs/search_syntax/
 [13]: /api/v1/logs-indexes/#update-an-index
 [14]: /logs/log_configuration/processors/#user-agent-parser
