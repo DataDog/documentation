@@ -1,5 +1,5 @@
 ---
-title: Trace Sampling use cases
+title: Trace Sampling Use Cases
 kind: guide
 further_reading:
 - link: "/tracing/guide/trace_ingestion_volume_control/"
@@ -9,27 +9,23 @@ further_reading:
 
 ## Overview
 
-Trace data is very repetitive. A problem in your application is rarely identified in a single trace. 
-For high throughput services, in the case of an incident that would require your attention, the issue will show symptoms in multiple traces. As a result, there’s usually no need for you to collect every single trace of a service / endpoint. 
-In order to optimize visibility into trace data and cut down the noise, Datadog [Ingestion Control Mechanisms][1] helps you keep the visibility that you need to troubleshoot problems while remaining within budget.
+Trace data tends to be repetitive. A problem in your application is rarely identified in a single trace. For high throughput services, particularly for incidents that require your attention, an issue shows symptoms in multiple traces. Consequently, there’s usually no need for you to collect every single trace for a service or endpoint. Datadog APM [ingestion control mechanisms][1] help you keep the visibility that you need to troubleshoot problems while cutting down the noise and managing costs.
 
-This guide helps you understand when and how to use ingestion control configurations depending on the main use cases you might be encountering. 
+This guide helps you understand when and how to use ingestion control configurations depending on the main use cases you might encounter. 
 
-These Ingestion Mechanisms are controllable from the Datadog Agent and from Datadog tracing libraries. If you are using OpenTelemetry SDKs to instrument your applications, you can refer to the dedicated guide on [Ingestion Sampling with OpenTelemetry][2].
+Ingestion mechanisms are controllable from the Datadog Agent and from Datadog tracing libraries. If you are using OpenTelemetry SDKs to instrument your applications, read [Ingestion Sampling with OpenTelemetry][2].
 
 ## Knowing which ingestion mechanisms are used
 
-In order to identify what current ingestion mechanisms are used in your Datadog environment, navigate to  the [Ingestion Control Page][3].
+To identify what ingestion mechanisms are currently used in your Datadog environment, navigate to the [Ingestion Control Page][3].
 
 {{< img src="/tracing/guide/ingestion_sampling_use_cases/ingestion_control_page.png" alt="Ingestion Control Page" style="width:90%;" >}}
 
-The table gives insights on ingested volumes **by service:**
+The table gives insights on ingested volumes *by service*. The Configuration column provides a first indication of the current set up. It shows: 
+- `AUTOMATIC` if the sampling rate calculated in the Datadog Agent is applied to the traces that start from the service. Read more about the specifics of [Datadog Agent ingestion logic][5].
+- `CONFIGURED` if a custom sampling rate configured in the tracing library is applied to the traces that start from the service.
 
-The configuration column indicating `CONFIGURED` or `AUTOMATIC` provides a first indication of the current set up : 
-- `AUTOMATIC` if the sampling rate calculated in the Datadog Agent is applied for the traces starting from the service. Read more about the specifics of the [Datadog Agent logic][5] in the documentation.
-- `CONFIGURED` if a custom sampling rate configured in the tracing library is applied for the traces starting from the service.
-
-Clicking on the various services to view  details as to what are the sampling decision makers in each service, as well as what [ingestion sampling mechanisms][1] are leveraged for ingested spans' services. 
+Click on various services to see details about what sampling decision makers are used for each service, as well as what [ingestion sampling mechanisms][1] are leveraged for ingested spans' services. 
 
 {{< img src="/tracing/guide/ingestion_sampling_use_cases/service_ingestion_summary.png" alt="Service Ingestion Summary" style="width:90%;" >}}
 

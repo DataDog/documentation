@@ -48,7 +48,7 @@ These tutorials walk you through setting up a sample multi-service application w
 {{< whatsnext desc="Ingestion Sampling Configuration" >}}
     {{< nextlink href="/tracing/guide/trace_ingestion_volume_control/" >}}Control span ingestion volume with Ingestion Mechanisms{{< /nextlink >}}
     {{< nextlink href="/opentelemetry/guide/ingestion_sampling_with_opentelemetry/" >}}Ingestion Sampling with OpenTelemetry{{< /nextlink >}}
-    {{< nextlink href="/tracing/guide/ingestion_sampling_use_cases/" >}}Ingestion Sampling use cases Cases{{< /nextlink >}}
+    {{< nextlink href="/tracing/guide/ingestion_sampling_use_cases/" >}}Ingestion Sampling Use Cases{{< /nextlink >}}
 {{< /whatsnext >}}
 <br>
 
