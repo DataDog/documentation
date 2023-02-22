@@ -123,7 +123,7 @@ Notable events are a subset of audit events that show potential critical configu
 
 {{< img src="account_management/audit_logs/notable_events.png" alt="The audit event facet panel showing notable events checked" style="width:30%;">}}
 
-Events that match the following queries are marked as Notable. This list will evolve over time.
+Events that match the following queries are marked as notable.
 
 | Description of audit event                                          | Query in audit explorer                           |
 | ------------------------------------------------------------------- | --------------------------------------------------|
