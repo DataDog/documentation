@@ -119,7 +119,7 @@ At any moment, from the default view entry in the Views panel:
 
 ### Notable Events
 
-Notable events are a subset of audit events that have potential critical configuration changes, billing impact or security implication as identified by Datadog. This allows org admins to quickly focus on the most important events amongst thousands of events without learning about all the events and their properties.
+Notable events are a subset of audit events that show potential critical configuration changes that could impact billing or have security implications as identified by Datadog. This allows org admins to hone in on the most important events out of the many events generated, and without having to learn about all available events and their properties.
 
 {{< img src="account_management/audit_logs/notable_events.png" alt="The audit event facet panel showing notable events checked" style="width:30%;">}}
 
