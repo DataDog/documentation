@@ -2455,16 +2455,21 @@ main:
     identifier: observability_pipelines
     parent: log_management_heading
     weight: 175000
+  - name: Quickstart
+    url: observability_pipelines/quickstart/
+    parent: observability_pipelines
+    identifier: observability_pipelines_quickstart
+    weight: 1
   - name: Installation
     url: observability_pipelines/installation/
     parent: observability_pipelines
     identifier: observability_pipelines_installation
-    weight: 1
+    weight: 2
   - name: Production Deployment Overview
     url: observability_pipelines/production_deployment_overview/
     parent: observability_pipelines
     identifier: observability_pipelines_production_deployment_overview
-    weight: 2
+    weight: 3
   - name: Architecture Design and Principles
     url: observability_pipelines/production_deployment_overview/architecture_design_and_principles/
     parent: observability_pipelines_production_deployment_overview
@@ -2484,17 +2489,17 @@ main:
     url: observability_pipelines/working_with_data/
     parent: observability_pipelines
     identifier: observability_pipelines_working_with_data
-    weight: 3
+    weight: 4
   - name: Reference
     url: observability_pipelines/reference/
     parent: observability_pipelines
     identifier: observability_pipelines_reference
-    weight: 4
+    weight: 5
   - name: Configurations
     url: observability_pipelines/configurations/
     parent: observability_pipelines_reference
     identifier: observability_pipelines_vector_configuration
-    weight: 2
+    weight: 6
   - name: Sources
     url: observability_pipelines/reference/sources/
     parent: observability_pipelines_vector_configuration
@@ -2514,7 +2519,7 @@ main:
     url: observability_pipelines/guide/
     parent: observability_pipelines
     identifier: observability_pipelines_guides
-    weight: 5
+    weight: 7
   - name: Security Overview
     url: security/
     pre: security-platform
