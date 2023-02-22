@@ -59,31 +59,31 @@ This line graph plots latency (in milliseconds) experienced by users on the y-ax
 
 #### Additional visualization offerings
 
-Datadog offers a variety of visualization options to help users easily graph and display their metrics. Two visualization offerings that Metrics users often find useful are: 1) [Query Value Widgets][23], and 2) [Top List Widgets][24].
+Datadog offers a variety of visualization options to help users easily graph and display their metrics. Two visualization offerings that Metrics users often find useful are: 1) [Query Value Widgets][6], and 2) [Top List Widgets][7].
 
-Regardless of the type of widget, each metric query consists of the same two evaluation steps to start: 1) time aggregation, 2) space aggregation [(view refresher here)][22].
+Regardless of the type of widget, each metric query consists of the same two evaluation steps to start: 1) time aggregation, 2) space aggregation [(view refresher here)][8].
 
-###### [Query Value Widget][23]
-- A [Query Value Widget][23] simply reduces the results of those two steps into a single value.
+###### [Query Value Widget][6]
+- A [Query Value Widget][6] simply reduces the results of those two steps into a single value.
 
-###### [Toplist Value Widget][24]
-- A [Top List Widget][24] returns a single value per group.
+###### [Toplist Value Widget][7]
+- A [Top List Widget][7] returns a single value per group.
 
-Additionally, Datadog has many other types of graphs and widgets for visualizations. You can learn more about them in Datadog's [blog series about metric graphs][6].
+Additionally, Datadog has many other types of graphs and widgets for visualizations. You can learn more about them in Datadog's [blog series about metric graphs][9].
 
 ### Submitting metrics to Datadog
 
 Metrics can be sent to Datadog from several places.
 
-- [Datadog-Supported Integrations][7]: Datadog's {{< translate key="integration_count" >}}+ integrations include metrics out of the box. To access these metrics, navigate to the specific integration page for your service and follow the installation instructions there. If you need to monitor an EC2 instance, for example, you would go to the [Amazon EC2 integration documentation][8].
+- [Datadog-Supported Integrations][10]: Datadog's {{< translate key="integration_count" >}}+ integrations include metrics out of the box. To access these metrics, navigate to the specific integration page for your service and follow the installation instructions there. If you need to monitor an EC2 instance, for example, you would go to the [Amazon EC2 integration documentation][11].
 
-- You can generate metrics directly within the Datadog platform. For instance, you can count error status codes appearing in your logs and [store that as a new metric][9] in Datadog.
+- You can generate metrics directly within the Datadog platform. For instance, you can count error status codes appearing in your logs and [store that as a new metric][12] in Datadog.
 
-- Often, you’ll need to track metrics related to your business (for example, number of user logins or signups). In these cases, you can create [custom metrics][10]. Custom metrics can be submitted through the [Agent][11], [DogStatsD][12], or the [HTTP API][13].
+- Often, you’ll need to track metrics related to your business (for example, number of user logins or signups). In these cases, you can create [custom metrics][13]. Custom metrics can be submitted through the [Agent][14], [DogStatsD][15], or the [HTTP API][16].
 
-- Additionally, the [Datadog Agent][14] automatically sends several standard metrics (such as CPU and disk usage).
+- Additionally, the [Datadog Agent][17] automatically sends several standard metrics (such as CPU and disk usage).
 
-For a summary of all metric submission sources and methods, read the [Metrics Types documentation][15].
+For a summary of all metric submission sources and methods, read the [Metrics Types documentation][18].
 
 ## Querying metrics
 
@@ -103,7 +103,7 @@ First, choose the specific metric that you’d like to graph by searching or sel
 
 #### Filter your metric
 
-After selecting a metric, you can filter your query based on tag(s). For instance, you can use `account:prod` to _scope_ your query to include only the metrics from your production hosts. For more information, read the [tagging documentation][16].
+After selecting a metric, you can filter your query based on tag(s). For instance, you can use `account:prod` to _scope_ your query to include only the metrics from your production hosts. For more information, read the [tagging documentation][19].
 
 #### Configure time aggregation
 
@@ -119,7 +119,7 @@ _Grouping_ defines what constitutes a line on the graph. For example, if you hav
 
 #### Apply functions (optional)
 
-You can modify your graph values with mathematical [functions][17]. This can mean performing arithmetic between an integer and a metric (for example, multiplying a metric by 2). Or performing arithmetic between two metrics (for example, creating a new timeseries for the memory utilization rate like this: `jvm.heap_memory / jvm.heap_memory_max`).
+You can modify your graph values with mathematical [functions][20]. This can mean performing arithmetic between an integer and a metric (for example, multiplying a metric by 2). Or performing arithmetic between two metrics (for example, creating a new timeseries for the memory utilization rate like this: `jvm.heap_memory / jvm.heap_memory_max`).
 
 ### Time and space aggregation
 
@@ -155,19 +155,19 @@ A **_gauge_** type takes the last value reported during the interval. This type 
 
 A **_histogram_** reports five different values summarizing the submitted values: the average, count, median, 95th percentile, and max. This produces five different timeseries. This metric type is suitable for things like latency, for which it’s not enough to know the average value. Histograms allow you to understand how your data was spread out without recording every single data point.
 
-A **_distribution_** is similar to a histogram, but it summarizes values submitted during a time interval across all hosts in your environment. You can also choose to report multiple percentiles: p50, p75, p90, p95, and p99. You can learn more about this powerful feature in the [Distributions documentation][18].
+A **_distribution_** is similar to a histogram, but it summarizes values submitted during a time interval across all hosts in your environment. You can also choose to report multiple percentiles: p50, p75, p90, p95, and p99. You can learn more about this powerful feature in the [Distributions documentation][21].
 
-See the [metrics types][15] documentation for more detailed examples of each metric type and submission instructions.
+See the [metrics types][18] documentation for more detailed examples of each metric type and submission instructions.
 
 ### View real-time information about metrics
 
-The [Metrics Summary page][19] displays a list of your metrics reported to Datadog under a specified time frame: the past hour, day, or week. Metrics can be filtered by metric name or tag.
+The [Metrics Summary page][22] displays a list of your metrics reported to Datadog under a specified time frame: the past hour, day, or week. Metrics can be filtered by metric name or tag.
 
 Click on any metric name to display a details sidepanel with more detailed information. The details sidepanel displays key information for a given metric, including its metadata (type, unit, interval), number of distinct metrics, number of reporting hosts, number of tags submitted, and a table containing all tags submitted on a metric. Seeing which tags are being submitted on a metric helps you understand the number of distinct metrics reporting from it, since this number depends on your tag value combinations.
 
-**Note:** The number of distinct metrics reported in the details sidepanel on Metrics Summary does not define your bill. See your [usage details][20] for a precise accounting of your usage over the past month.
+**Note:** The number of distinct metrics reported in the details sidepanel on Metrics Summary does not define your bill. See your [usage details][23] for a precise accounting of your usage over the past month.
 
-Read the [metrics summary documentation][21] for more details.
+Read the [metrics summary documentation][24] for more details.
 
 ## Further reading
 
@@ -182,22 +182,22 @@ Read the [metrics summary documentation][21] for more details.
 [3]: /metrics/explorer/
 [4]: /dashboards/
 [5]: /notebooks/
-[6]: https://www.datadoghq.com/blog/timeseries-metric-graphs-101/
-[7]: /integrations/
-[8]: /integrations/amazon_ec2/
-[9]: /logs/logs_to_metrics/
-[10]: /metrics/custom_metrics/
-[11]: /agent/
-[12]: /metrics/custom_metrics/dogstatsd_metrics_submission/
-[13]: /api/
-[14]: https://docs.datadoghq.com/agent/basic_agent_usage/
-[15]: /metrics/types/
-[16]: /getting_started/tagging/using_tags/
-[17]: /dashboards/functions/
-[18]: /metrics/distributions/
-[19]: https://app.datadoghq.com/metric/summary
-[20]: /account_management/billing/usage_details/
-[21]: /metrics/summary/
-[22]: https://docs.datadoghq.com/metrics/#anatomy-of-a-metric-query
-[23]: https://docs.datadoghq.com/dashboards/widgets/query_value/
-[24]: https://docs.datadoghq.com/dashboards/widgets/top_list/
+[6]: https://docs.datadoghq.com/dashboards/widgets/query_value/
+[7]: https://docs.datadoghq.com/dashboards/widgets/top_list/
+[8]: https://docs.datadoghq.com/metrics/#anatomy-of-a-metric-query
+[9]: https://www.datadoghq.com/blog/timeseries-metric-graphs-101/
+[10]: /integrations/
+[11]: /integrations/amazon_ec2/
+[12]: /logs/logs_to_metrics/
+[13]: /metrics/custom_metrics/
+[14]: /agent/
+[15]: /metrics/custom_metrics/dogstatsd_metrics_submission/
+[16]: /api/
+[17]: https://docs.datadoghq.com/agent/basic_agent_usage/
+[18]: /metrics/types/
+[19]: /getting_started/tagging/using_tags/
+[20]: /dashboards/functions/
+[21]: /metrics/distributions/
+[22]: https://app.datadoghq.com/metric/summary
+[23]: /account_management/billing/usage_details/
+[24]: /metrics/summary/
