@@ -59,6 +59,11 @@ To install and configure the Datadog Serverless plugin:
      environment:
        DD_UNIVERSAL_INSTRUMENATION: true
    ```
+   For **NodeJS or Python functions** also add:
+   ```yaml
+   environment:
+     DD_EXPERIMENTAL_ENABLE_PROXY: true
+   ```
 3. Redeploy the function and invoke it. After a few minutes, it appears in [ASM views][3].
 
 [1]: /serverless/serverless_integrations/plugin
@@ -115,7 +120,12 @@ To install and configure the Datadog Serverless plugin:
      environment:
        DD_UNIVERSAL_INSTRUMENATION: true
    ```
-3. Redeploy the function and invoke it. After a few minutes, it appears in [ASM views][3].
+   For **NodeJS or Python functions** also add:
+   ```yaml
+   environment:
+     DD_EXPERIMENTAL_ENABLE_PROXY: true
+   ```
+4. Redeploy the function and invoke it. After a few minutes, it appears in [ASM views][3].
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [3]: https://app.datadoghq.com/security/appsec?column=time&order=desc
