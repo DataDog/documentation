@@ -43,7 +43,7 @@ The instrumentation works at runtime, so any transpilers such as TypeScript, Web
   * From `dd-trace>=3.10.0`.
   * Only [`jest-circus`][1] is supported as [`testRunner`][3].
 * Mocha >= 5.2.0
-  * From `dd-trace>=3.10.0`.
+  * From `dd-trace>=3.10.0` and `dd-trace>=2.12.0` for 2.x release line.
 * Playwright >= 1.18.0
   * From `dd-trace>=3.13.0` and `dd-trace>=2.26.0` for 2.x release line.
 * Cypress >= 6.7.0
