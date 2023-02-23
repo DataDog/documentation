@@ -55,9 +55,8 @@ To install and configure the Datadog Serverless plugin:
    ```
    For **Go functions only** also add:
    ```yaml
-   DD_UNIVERSAL_INSTRUMENTATION:
-     environment:
-       DD_UNIVERSAL_INSTRUMENATION: true
+   environment:
+     DD_UNIVERSAL_INSTRUMENATION: true
    ```
    For **NodeJS or Python functions** also add:
    ```yaml
@@ -116,9 +115,8 @@ To install and configure the Datadog Serverless plugin:
    ```
    For **Go functions only** also add:
    ```yaml
-   DD_UNIVERSAL_INSTRUMENTATION:
-     environment:
-       DD_UNIVERSAL_INSTRUMENATION: true
+   environment:
+     DD_UNIVERSAL_INSTRUMENATION: true
    ```
    For **NodeJS or Python functions** also add:
    ```yaml
