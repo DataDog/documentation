@@ -252,3 +252,4 @@ RUN apt-get update && apt-get install -y ca-certificates
 [8]: /metrics/distributions/
 [9]: /metrics/#time-and-space-aggregation
 [10]: https://learn.microsoft.com/en-us/azure/container-apps/log-options#diagnostic-settings
+[11]: https://app.datadoghq.com/apm/traces
