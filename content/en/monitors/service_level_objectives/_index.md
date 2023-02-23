@@ -229,7 +229,7 @@ To view, edit, and delete existing status corrections, click on the **Correction
 [2]: /dashboards/widgets/slo/
 [3]: /monitors/service_level_objectives/metric/
 [4]: /monitors/service_level_objectives/monitor/
-[5]: /monitors/create/types/metric/?tab=threshold#alert-grouping
+[5]: /monitors/types/metric/?tab=threshold#alert-grouping
 [6]: /monitors/service_level_objectives/metric/#define-queries
 [7]: /monitors/service_level_objectives/monitor/#set-your-slo-targets
 [8]: /monitors/service_level_objectives/metric/#set-your-slo-targets
@@ -238,7 +238,7 @@ To view, edit, and delete existing status corrections, click on the **Correction
 [11]: https://play.google.com/store/apps/details?id=com.datadog.app
 [12]: /monitors/service_level_objectives/#saved-views
 [13]: /api/v1/events/#query-the-event-stream
-[14]: /monitors/create/types/event/
+[14]: /monitors/types/event/
 [15]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
 [16]: /api/latest/service-level-objective-corrections/
 [17]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/slo_correction

@@ -54,7 +54,7 @@ On each alert evaluation, Datadog calculates the percentage of the series that f
 
 For more detailed information, see the [Anomaly Monitor][1] page.
 
-[1]: /monitors/create/types/anomaly/
+[1]: /monitors/types/anomaly/
 {{% /tab %}}
 {{% tab "Outliers" %}}
 
@@ -64,7 +64,7 @@ On each alert evaluation, Datadog checks whether or not all groups are clustered
 
 For more detailed information, see the [Outlier Monitor][1] page.
 
-[1]: /monitors/create/types/outlier/
+[1]: /monitors/types/outlier/
 {{% /tab %}}
 {{% tab "Forecast" %}}
 
@@ -74,7 +74,7 @@ On each alert evaluation, a forecast alert predicts the future values of the met
 
 For more detailed information, see the [Forecast Monitor][1] page.
 
-[1]: /monitors/create/types/forecasts/
+[1]: /monitors/types/forecasts/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -215,7 +215,7 @@ Note that if your metric is only reporting by `host` with no `device` tag, it wo
 [2]: /dashboards/querying/#advanced-graphing
 [3]: /monitors/guide/as-count-in-monitor-evaluations/
 [4]: /monitors/notify/?tab=is_alert#tag-variables
-[5]: /monitors/create/configuration/?tab=thresholdalert#evaluation-window
-[6]: /monitors/create/configuration/#advanced-alert-conditions
+[5]: /monitors/configuration/?tab=thresholdalert#evaluation-window
+[6]: /monitors/configuration/#advanced-alert-conditions
 [7]: /monitors/notify/
 [8]: /monitors/configuration/?tab=thresholdalert#notify-your-team

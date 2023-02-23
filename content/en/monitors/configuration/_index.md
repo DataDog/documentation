@@ -136,9 +136,9 @@ See the documentation for [process check][1], [integration check][2], and [custo
 
 
 
-[1]: /monitors/create/types/process_check/
-[2]: /monitors/create/types/integration/?tab=checkalert#integration-status
-[3]: /monitors/create/types/custom_check/
+[1]: /monitors/types/process_check/
+[2]: /monitors/types/integration/?tab=checkalert#integration-status
+[3]: /monitors/types/custom_check/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -293,8 +293,8 @@ If you configure tags or dimensions in your query, these values are available fo
 [1]: /monitors/types
 [2]: /monitors/notify/variables/?tab=is_alert#tag-variables
 [3]: /monitors/notify/#renotify
-[4]: /monitors/create/configuration#auto-resolve
-[5]: /monitors/create/configuration/?tabs=othermonitortypes#no-data
+[4]: /monitors/configuration/?tab=thresholdalert#auto-resolve
+[5]: /monitors/configuration/?tabs=othermonitortypes#no-data
 [6]: /monitors/notify/#notify-your-team
 [7]: /monitors/notify/#say-whats-happening
 [8]: /monitors/notify/variables/

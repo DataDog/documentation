@@ -24,7 +24,7 @@ Once [log management is enabled][1] for your organization, you can create a logs
 
 To create a [logs monitor][3] in Datadog, use the main navigation: *Monitors --> New Monitor --> Logs*.
 
-<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 Log monitors per account. If you are encountering this limit, consider using <a href="/monitors/create/configuration/?tab=thresholdalert#alert-grouping">multi alerts</a>, or <a href="/help/">Contact Support</a>.</div>
+<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 Log monitors per account. If you are encountering this limit, consider using <a href="/monitors/configuration/?tab=thresholdalert#alert-grouping">multi alerts</a>, or <a href="/help/">Contact Support</a>.</div>
 
 ### Define the search query
 
@@ -111,5 +111,5 @@ Include a sample of 10 logs in the alert notification:
 [4]: /logs/explorer/search/
 [5]: /logs/explorer/facets/
 [6]: /logs/explorer/facets/#measures
-[7]: /monitors/create/configuration/#advanced-alert-conditions
+[7]: /monitors/configuration/#advanced-alert-conditions
 [8]: /monitors/notify/

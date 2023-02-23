@@ -792,6 +792,6 @@ DD_SYSTEM_PROBE_NETWORK_HTTP_REPLACE_RULES=[{"pattern":"<drop regex>","repl":""}
 [1]: /getting_started/tagging/unified_service_tagging
 [2]: /tracing/services/deployment_tracking/
 [3]: /tracing/service_catalog/
-[4]: /monitors/create/types/apm/?tab=apmmetrics
+[4]: /monitors/types/apm/?tab=apmmetrics
 [5]: /dashboards/
 [6]: /monitors/service_level_objectives/metric/

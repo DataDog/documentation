@@ -126,7 +126,7 @@ Autocomplete based on the content in spans of the current views helps you to def
 
 [1]: /tracing/trace_explorer/query_syntax/
 [2]: /tracing/trace_explorer/group/
-[3]: /monitors/create/types/apm/?tab=analytics
+[3]: /monitors/types/apm/?tab=analytics
 [4]: /dashboards/widgets/
 [5]: /notebooks/
 [6]: /tracing/trace_explorer/

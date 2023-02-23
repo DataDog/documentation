@@ -173,7 +173,7 @@ Datadog Audit Trail comes with an [out-of-the-box dashboard][12] that shows vari
 [3]: https://app.datadoghq.com/event/explorer
 [4]: /logs/explorer/
 [5]: https://docs.datadoghq.com/account_management/rbac/permissions/?tab=ui#general-permissions
-[6]: /monitors/create/types/audit_trail/
+[6]: /monitors/types/audit_trail/
 [7]: /dashboards/
 [8]: /dashboards/widgets/top_list/
 [9]: /dashboards/widgets/timeseries/
