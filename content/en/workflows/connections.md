@@ -55,6 +55,7 @@ Establishing a connection requires the following information:
 - What to connect to (for example, product name, URL)
 - How to authenticate (for example, API key, username/password, oauth)
 
+To create a connection:
 1. Navigate to the [connections list][3].
 1. Click the **New Connection** button in the upper right. The **New Connection** dialog box appears.
 1. Click on an icon to choose an integration schema.
@@ -112,3 +113,5 @@ To connect to an arbitrary service, use the HTTP connection type, and choose fro
 [3]: https://app.datadoghq.com/workflow/connections
 [4]: /workflows/access/#restrict-connection-use
 [6]: /integrations/
+[8]: /workflows/actions_catalog/generic_actions/
+[9]: https://app.datadoghq.com/workflow
