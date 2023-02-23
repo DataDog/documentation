@@ -369,7 +369,7 @@ All other [Datadog Tracer configuration][7] options can also be used.
 
 Datadog uses Git information for visualizing your test results and grouping them by repository, branch, and commit. Git metadata is automatically collected by the test instrumentation from CI provider environment variables and the local `.git` folder in the project path, if available.
 
-From `dd-trace>=3.15.0` and `dd-trace>=2.28.0`, CI Visibility will automatically upload git metadata information (commit history). This metadata will contain file names but no file contents. If you want to opt out of this behavior, you can do so by setting `DD_CIVISIBILITY_GIT_UPLOAD_ENABLED` to `false`.
+From `dd-trace>=3.15.0` and `dd-trace>=2.28.0`, CI Visibility will automatically upload git metadata information (commit history). This metadata will contain file names but no file contents. If you want to opt out of this behavior, you can do so by setting `DD_CIVISIBILITY_GIT_UPLOAD_ENABLED` to `false`. This is not recommended, as features like Intelligent Test Runner and others will not work.
 
 If you are running tests in non-supported CI providers or with no `.git` folder, you can set the Git information manually using environment variables. These environment variables take precedence over any auto-detected information. Set the following environment variables to provide Git information:
 
