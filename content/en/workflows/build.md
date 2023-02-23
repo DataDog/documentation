@@ -151,7 +151,7 @@ All the variables of the Source object are visible in the Context Variables tab.
 
 ## Error handling and fallbacks
 
-You can specify the number of times you want your workflow to retry a step and at what interval, before moving on to an optional fallback step. If no fallback step is provided, the workflow terminates after all retries have been exhausted.
+In the event that a step fails, you can specify the number of times you want your workflow to retry the step and at what interval, before moving on to an optional fallback step. If no fallback step is provided, the workflow terminates after all retries have been exhausted.
 
 To configure error handling for a step:
 1. Click on the step in the workflow canvas.
@@ -164,7 +164,7 @@ To configure error handling for a step:
 
 ### Add a fallback
 
-You can add a downstream workflow step as a fallback by selecting it from the **Fallback** drop-down menu.
+To handle a step failure, you can add a downstream workflow step as a fallback by selecting it from the **Fallback** drop-down menu.
 
 Alternatively, you can create a fallback step that branches from the main workflow tree:
 1. From the **Fallback** drop-down menu, select **Add a new fallback**. The workflow canvas is replaced with a fallback tree.
