@@ -23,13 +23,13 @@ Datadog Service Catalog includes all discovered services from APM, USM, and RUM 
 
 2. Click **Create New Entry**.
 
-3. Specify which service you are adding metadata to. This can be name of a service already listed in the Service Catalog, or it can be the name of a service not sending any data.
+3. Specify which service you are adding metadata to. This can be the name of a service already listed in the Service Catalog, or it can be the name of a service not sending any data.
 
 4. Enter details for Team, On-call, Contacts, Documentation, Code repo, and Other links.
 
 4. Switch to the **Code** view to see the YAML generated for the metadata you've entered.
 
-5. If you have the [Service Catalog Write][13] permission, you can submit the metadata by clicking **Save Entry**, or by running the curl command provided on the **Code** view.
+5. If you have the [Service Catalog Write][13] permission, you can submit the metadata by clicking **Save Entry**, or by running the cURL command provided on the **Code** view.
 
 
 ## Discover services being reported in other Datadog telemetry data
