@@ -3,5 +3,5 @@
 {{ $lang := cond (eq $lang_param ".NET") "dotnet" (lower $lang_param) }}
 
 <div class="js-code-block code-snippet-wrapper" id="{{ $lang }}" data-code-lang-block="{{ $lang }}">
-    testtest{{- .Inner | markdownify -}}
+    {{- .Inner | markdownify -}}
 </div>

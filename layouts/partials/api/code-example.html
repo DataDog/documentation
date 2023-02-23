@@ -99,7 +99,7 @@
 {{ $count := 0 }}
 {{ $file_extension := "sh" }}
 {{ $lang := index $context.Site.Params.code_languages "sh" }}
-<div class="code-snippet-wrapper js-code-block" id="{{ $lang.name }}" data-code-lang-block="{{ $lang.name }}" >
+<div class="code-snippet-wrapper js-code-block" data-code-lang-block="{{ $lang.name }}" >
     <div class="code-snippet">
       <div class="highlight">
         {{ $fileNonExistCount := 0 }}
