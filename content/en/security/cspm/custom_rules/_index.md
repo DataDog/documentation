@@ -45,7 +45,7 @@ To create a rule from scratch:
 1. In Datadog, navigate to [**Security > Posture Management** and click **Detection Rules**][1].
 2. Click **New Rule** in the upper-right.
 3. Select **Cloud Configuration** as the rule type.
-4. Specify the GCP resource types you are writing the rule for.
+4. Specify the cloud resource types you are writing the rule for.
 5. Write the rule logic using [Rego][3], a policy-as-code language, either from scratch or by using the Datadog template. Read [Writing Custom Rules with Rego][4] for more information. Note that you can mark a resource as "pass", "fail", or "skip". If you do not mark a resource, it will be interpreted as "skip".
 
    {{< img src="security/cspm/custom_rules/custom_rules_first_half.png" alt="Custom Rules Steps" width="100%">}}
