@@ -38,7 +38,7 @@ In your first three days with Datadog ASM:
 
 3. **Explore your first suspicious requests.** Go to **[Security --> Application Security][7]** to see suspicious requests listed in ASM.
 
-   - If your client IP is not well-resolved, [configure the client IP header][3].
+   - If the client IP is not well-resolved (for example, if it's showing an internal or proxy IP), [configure the client IP header][3].
 
    - Open the **[Traces][8]** page and click one of the traces for a suspicious request. The Attack Flow diagram helps you understand all the services hit by the attack. Scroll down to the Security section to read about why this request was flagged as suspicious. Read more in [How Application Security Management Works][4].
 
