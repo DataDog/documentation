@@ -14,18 +14,6 @@ podDisruptionBudget:
   enabled: true
   minAvailable: 1
 
-## This requires the `api` block in `customConfig` to be enabled.
-livenessProbe:
-  httpGet:
-    path: /health
-    port: api
-
-## This requires the `api` block in `customConfig` to be enabled.
-readinessProbe:
-  httpGet:
-    path: /health
-    port: api
-
 ## HPA requires at least some resource requests to function, so we
 ## configure a reasonable default here. It is recommended that you
 ## change this to match the actual size of instances that you'll
@@ -80,12 +68,8 @@ persistence:
 ## quickly as possible, as well as providing hooks for your own
 ## processing steps.
 config:
-  ## The API is mostly used for readiness checks by k8s in this
-  ## configuration. It's recommended that you leave this on.
-  api:
-    enabled: true
-    address: 0.0.0.0:8686
-    playground: false
+  data_dir: /var/lib/observability-pipelines-worker
+
   sources:
     datadog_agent:
       address: 0.0.0.0:8282
