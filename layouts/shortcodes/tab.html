@@ -1,3 +1,3 @@
-<div data-lang="{{ replace (.Get 0 | lower | anchorize) "-" "" }}" class="tab-pane fade" role="tabpanel" title="{{ .Get 0 | safeHTML }}">
+<div data-lang="{{ replace (.Get 0 | lower | anchorize) "-" "" }}" class="tab-pane fade" role="tabpanel" id="{{ .Get 0 | lower | safeHTML }}" title="{{ .Get 0 | safeHTML }}">
   {{ .Inner }}
 </div>
