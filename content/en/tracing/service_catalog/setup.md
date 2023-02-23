@@ -17,23 +17,18 @@ further_reading:
 
 Datadog Service Catalog includes all discovered services from APM, USM, and RUM by default. If you are using any of these products, your catalog is pre-populated with entries. You can add service metadata to these entries through the Datadog UI, [API][1], or use automated pipelines through the [GitHub integration][11] or [Terraform][2].
 
-## For services with existing telemetry data (APM/USM/RUM)
+## Add metadata to services
 
-Any service that sends tracing data to Datadog APM, USM, or RUM is automatically listed in the Service Catalog. Each unregistered service shows a gray check mark when you hover over it.
+1. On the [Service Catalog][10] page, click **Setup & Config**. The **Manage Entries** tabs shows you how many services are without metadata.
 
-To register the service and add ownership information, related links such as runbooks, and links to source code repositories, [update the service definition][1].
+2. Click **Create New Entry**.
 
-Navigate to [**APM** > **Service Catalog**][10] and click the [**Setup & Config** tab][3] to get help with forming valid JSON to post with the API.
+3. Specify which service you are adding metadata to. Enter details for Team, On-call, Contacts, Documentation, Code repo, and Other links.
 
-## For all other services you want to catalog
+4. Switch to the **Code** view to see the YAML generated for the metadata you've entered.
 
-If the service, API, or custom library you are interested in is not listed in the **Explore** tab:
 
-1. Navigate to [**APM** > **Service Catalog**][10] and click the [**Setup & Config** tab][3].
 
-2. The **Create New Entry** form helps you generate JSON that you can post to Service Catalog API endpoint. Provide a service name in the `dd-service` field. Fill in ownership, source, and other service information in the Service Definition schema presented. Refer to the [full JSON schema on GitHub][4] for complete details.
-
-3. Click the **Copy** button to copy the generated JSON. Send this as the `body` of a `POST` API call with the [Service Definition API][1].
 
 ## Discover services being reported in other Datadog telemetry data
 
