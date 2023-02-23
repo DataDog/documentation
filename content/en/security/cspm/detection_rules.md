@@ -69,6 +69,19 @@ You can create custom rules to extend the rules being applied to your environmen
 
 <div class="alert alert-warning">Creating and using custom CSPM rules is a beta feature, available for select Amazon Web Services (AWS), Microsoft Azure, and Google Cloud Platform (GCP) cloud resources.</div>
 
+## Rule deprecation
+
+Regular audits of all detection rules are performed to maintain high fidelity signal quality. Deprecated rules are replaced with an improved rule.
+
+The rule deprecation process is as follows:
+
+1. There is a warning with the deprecation date on the rule. In the UI, the warning is shown in the: 
+    - Signal side panel's **Rule Details > Playbook** section 
+    - Findings side panel
+    - [Rule editor][23] for that specific rule 
+2. Once the rule is deprecated, there is a 15 month period before the rule is deleted. This is due to the signal retention period of 15 months. During this time, you can re-enable the rule by [cloning the rule][23] in the UI.
+3. Once the rule is deleted, you can no longer clone and re-enable it.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -90,3 +103,4 @@ You can create custom rules to extend the rules being applied to your environmen
 [20]: /security/cspm/custom_rules/
 [21]: /security/notifications/rules/
 [22]: /security/cspm/signals_explorer/
+[23]: /security/detection_rules/#rule-and-generated-signal-options
