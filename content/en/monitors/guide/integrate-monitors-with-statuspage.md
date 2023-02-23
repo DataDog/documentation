@@ -65,5 +65,5 @@ To create a [metric monitor][8] that triggers on Statuspage alerts:
 [5]: https://app.datadoghq.com/event/explorer
 [6]: /dashboards/guide/custom_time_frames/
 [7]: https://support.atlassian.com/statuspage/docs/get-started-with-email-automation/
-[8]: /monitors/create/types/metric/
+[8]: /monitors/types/metric/
 [9]: https://app.datadoghq.com/monitors/create/metric

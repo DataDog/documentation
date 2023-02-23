@@ -168,7 +168,7 @@ See [Monitor log usage][20] on how to monitor and alert on your usage.
 [2]: /logs/explorer/#visualization
 [3]: /logs/explorer/patterns/
 [4]: /logs/explorer/analytics/
-[6]: /monitors/create/types/log/
+[6]: /monitors/types/log/
 [7]: /logs/explorer/facets/#the-index-facet
 [8]: /logs/live_tail/
 [9]: /logs/logs_to_metrics/

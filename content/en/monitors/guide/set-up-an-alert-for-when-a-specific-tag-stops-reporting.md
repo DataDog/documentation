@@ -25,4 +25,4 @@ Your alert triggers if the tag stops reporting.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /monitors/
-[2]: /monitors/create/types/metric/
+[2]: /monitors/types/metric/

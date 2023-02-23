@@ -166,4 +166,4 @@ You can create monitors from the **Monitors** tab, or click on the Settings icon
 [1]: /logs/log_configuration/processors/#lookup-processor
 [2]: /account_management/audit_trail/
 [3]: /events/
-[4]: /monitors/create/types/event/
+[4]: /monitors/types/event/
