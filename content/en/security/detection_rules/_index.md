@@ -91,6 +91,19 @@ To restore general access to a rule with restricted access, follow the steps bel
 1. Click **Restore Full Access**.
 1. Click **Save**.
 
+## Rule deprecation
+
+Regular audits of all detection rules are performed to maintain high fidelity signal quality. Deprecated rules are replaced with an improved rule.
+
+The rule deprecation process is as follows:
+
+1. There is a warning with the deprecation date on the rule. In the UI, the warning is shown in the: 
+    - Signal side panel's **Rule Details > Playbook** section
+    - Findings side panel (CSPM only)
+    - [Rule editor](#rule-and-generated-signal-options) for that specific rule 
+2. Once the rule is deprecated, there is a 15 month period before the rule is deleted. This is due to the signal retention period of 15 months. During this time, you can re-enable the rule by [cloning the rule](#rule-and-generated-signal-options) in the UI.
+3. Once the rule is deleted, you can no longer clone and re-enable it.
+
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
