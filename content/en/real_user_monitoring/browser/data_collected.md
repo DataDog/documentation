@@ -109,7 +109,7 @@ The following attributes are related to the geo-location of IP addresses:
 | `geo.continent`       | string | Name of the continent (`Europe`, `Australia`, `North America`, `Africa`, `Antarctica`, `South America`, `Oceania`).                    |
 | `geo.city`            | string | The name of the city (for example, `Paris` or `New York`).                                                                                   |
 
-**Note**: By default, Datadog stores the client IP address. If you want to stop collecting IP addresses, [contact Support][4]. This does not impact the collection of geo-location attributes listed above.
+**Note**: By default, Datadog stores the client IP address. Learn more about how to manage automatic user data collection in [Real User Monitoring Data Security][/data_security/real_user_monitoring/#ip-address].
 
 ### User attributes
 
