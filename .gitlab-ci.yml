@@ -89,7 +89,7 @@ before_script:
       when: on_success
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:webops-site-build-brian.deutsch_new_docs_artifact
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:brian.deutsch_new-docs-artifact
   tags:
     - "arch:amd64"
   rules:
