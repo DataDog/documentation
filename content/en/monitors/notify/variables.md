@@ -390,7 +390,7 @@ Use template variables to customize your monitor notifications. The built-in var
 | `{{value}}`                    | The value that breached the alert for metric based query monitors.            |
 | `{{threshold}}`                | The value of the alert threshold set in the monitor's alert conditions.       |
 | `{{warn_threshold}}`           | The value of the warning threshold set in the monitor's alert conditions.     |
-| `{{ok_threshold}}`             | The value that recovered the monitor.                                         |
+| `{{ok_threshold}}`             | The value that recovered the Service Check monitor.                            |
 | `{{comparator}}`               | The relational value set in the monitor's alert conditions.                   |
 | `{{first_triggered_at}}`       | The UTC date and time when the monitor first triggered.                       |
 | `{{first_triggered_at_epoch}}` | The UTC date and time when the monitor first triggered in epoch milliseconds. |
