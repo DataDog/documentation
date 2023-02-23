@@ -20,6 +20,8 @@ further_reading:
 
 ## Overview
 
+**Enable remote config first for the API key
+
 With Cloud Workload Security (CWS) enabled, the Datadog Agent actively monitors system activity and evaluates it against a set of rules to detect suspicious behavior. 
 
 When you upgrade the Datadog Agent you receive bundled CWS Agent rules, which are used in the [default signal rules][1]. You can also write your own custom Agent rules. This guide covers Agent rules, how to create them, and how to use them to generate security signals.

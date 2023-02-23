@@ -71,9 +71,8 @@ The following products and features are supported with Remote Config:
 - Send critical metrics, traces, and logs from your live applications with no code changes.
 
 ### Cloud Workload Security (CWS)
-<div class="alert alert-info">This feature is in private beta.</div>
 
-- **Automatic default agent rule updates**: Automatically receive and update the default Agent rules maintained by Datadog as new Agent detections and enhancements are released. 
+- **Automatic default agent rule updates**: Automatically receive and update the default Agent rules maintained by Datadog as new Agent detections and enhancements are released. See [Getting Started with Cloud Workload Security][9] for more information.
 
 ## Security Considerations
  
@@ -152,7 +151,7 @@ After you perform these steps, your Agent requests its configuration from Datado
 [6]: /tracing/trace_pipeline/ingestion_controls/#managing-ingestion-for-all-services-at-the-agent-level
 [7]: /dynamic_instrumentation/?tab=configurationyaml#enable-remote-configuration
 [8]: /security/application_security/how-appsec-works/#built-in-protection
-
+[9]: /security/cloud_workload_security/getting_started
 
 {{< /site-region >}}
 

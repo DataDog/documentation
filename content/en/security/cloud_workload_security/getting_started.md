@@ -27,7 +27,7 @@ further_reading:
 
 ## Overview
 
-There are four types of monitoring that the Datadog Agent uses for Cloud Workload Security:
+There are four types of monitoring that the Datadog Agent uses for Cloud Workload Security (CWS):
 
 1. **Process Execution Monitoring** to watch process executions for malicious activity on hosts or containers in real-time.
 2. **File Integrity Monitoring** to watch for changes to key files and directories on hosts or containers in real-time.
@@ -47,6 +47,12 @@ There are four types of monitoring that the Datadog Agent uses for Cloud Workloa
   * Custom kernel builds are not supported.
 * For compatibility with a custom Kubernetes network plugin like Cilium or Calico, please see the [Troubleshooting page][3].
 
+### Remote Configuration
+
+[Remote Configuration][4] is a Datadog capability that allows you to remotely configure the behavior of Datadog resources (for example, Agents and tracing libraries) deployed in your infrastructure, for select product features. For CWS, enabling Remote Configuration allows you to receive new and updated Agent rules automatically when they're released.
+
+To use Remote Configuration with CWS, add the Remote Configuration scope to a new or existing API key, and then update your Agent configuration. See the [setup instructions][5] for more information.
+
 ## Installation
 
 {{< tabs >}}
@@ -64,6 +70,17 @@ There are four types of monitoring that the Datadog Agent uses for Cloud Workloa
       securityAgent:
         runtime:
           enabled: true
+
+      agents:
+        containers:
+          agent: 
+            env:
+              - name: DD_REMOTE_CONFIGURATION_ENABLED
+                value: "true"
+          systemProbe:
+            env:
+              - name: DD_RUNTIME_SECURITY_CONFIG_REMOTE_CONFIGURATION_ENABLED
+                value: "true"
 
     # Add this to enable the collection of CWS network events, only for Datadog Agent version 7.36
           network:
@@ -106,6 +123,7 @@ docker run -d --name dd-agent \
   -v /etc/os-release:/etc/os-release \
   -e DD_RUNTIME_SECURITY_CONFIG_ENABLED=true \
   -e DD_RUNTIME_SECURITY_CONFIG_NETWORK_ENABLED=true \ # to enable the collection of CWS network events
+  -e DD_RUNTIME_SECURITY_CONFIG_REMOTE_CONFIGURATION_ENABLED=true \
   -e HOST_ROOT=/host/root \
   -e DD_API_KEY=<API KEY> \
   gcr.io/datadoghq/agent:7
@@ -124,6 +142,7 @@ By default Runtime Security is disabled. To enable it, both the `security-agent.
 
 echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/security-agent.yaml
 echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/system-probe.yaml
+echo "remote_configuration.enabled: true" >> /etc/datadog-agent/system-probe.yaml
 
 systemctl restart datadog-agent
 
@@ -150,6 +169,7 @@ By default Runtime Security is disabled. To enable it, both the `security-agent.
 
 echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/security-agent.yaml
 echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/system-probe.yaml
+echo "remote_configuration.enabled: true" >> /etc/datadog-agent/system-probe.yaml
 
 systemctl restart datadog-agent
 
@@ -174,6 +194,7 @@ By default Runtime Security is disabled. To enable it, both the `security-agent.
 
 echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/security-agent.yaml
 echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/system-probe.yaml
+echo "remote_configuration.enabled: true" >> /etc/datadog-agent/system-probe.yaml
 
 systemctl restart datadog-agent
 
@@ -324,3 +345,5 @@ The following deployment can be used to start the Runtime Security Agent and `sy
 {{< partial name="whats-next/whats-next.html" >}}
 
 [3]: /security/cloud_security_management/troubleshooting
+[4]: /agent/guide/how_remote_config_works
+[5]: /agent/guide/how_remote_config_works/?tab=environmentvariable#enabling-remote-configuration
