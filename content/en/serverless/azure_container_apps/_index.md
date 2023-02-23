@@ -212,7 +212,7 @@ Once the deployment is completed, your metrics and traces are sent to Datadog. I
 
 - **Advanced Tracing:** The Datadog Agent already provides some basic tracing for popular frameworks. Follow the [advanced tracing guide][2] for more information.
 
-- **Logs:** You can set the `DD_LOGS_ENABLED` environment variable to `true` to capture application logs and dispatch them to Datadog through the serverless instrumentation directly. To send logs without direct instrumentation, you can set up central [log collection via the Azure Integration][1], then use the [Diagnostic Settings on the Container App Environment][] to direct the logs to the configured logs pipeline. 
+- **Logs:** You can set the `DD_LOGS_ENABLED` environment variable to `true` to capture application logs and send them to Datadog through the serverless instrumentation directly. To send logs without direct instrumentation, set up central [log collection through the Azure Integration][1], then use the [Diagnostic Settings on the Container App Environment][10] to direct the logs to the configured logs pipeline. 
 
 - **Custom Metrics:** You can submit custom metrics using a [DogStatsd client][3]. For monitoring Cloud Run and other serverless applications, use [distribution][8] metrics. Distributions provide `avg`, `sum`, `max`, `min`, and `count` aggregations by default. On the Metric Summary page, you can enable percentile aggregations (p50, p75, p90, p95, p99) and also manage tags. To monitor a distribution for a gauge metric type, use `avg` for both the [time and space aggregations][9]. To monitor a distribution for a count metric type, use `sum` for both the time and space aggregations.
 
