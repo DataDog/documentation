@@ -125,7 +125,7 @@ Datadog provides logging endpoints for both SSL-encrypted connections and unencr
 
 Use the [site][13] selector dropdown on the right side of the page to see supported endpoints by Datadog site.
 
-{{% site-region region="us" %}}
+{{< site-region region="us" >}}
 
 | Site | Type        | Endpoint                                                                  | Port         | Description                                                                                                                                                                 |
 |------|-------------|---------------------------------------------------------------------------|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -143,9 +143,9 @@ Use the [site][13] selector dropdown on the right side of the page to see suppor
 [1]: /api/latest/logs/#send-logs
 [2]: /agent/logs/#send-logs-over-https
 [3]: /data_security/logs/#pci-dss-compliance-for-log-management
-{{% /site-region %}}
+{{< /site-region >}}
 
-{{% site-region region="eu" %}}
+{{< site-region region="eu" >}}
 
 | Site | Type        | Endpoint                                                                  | Port | Description                                                                                                                                                                 |
 |------|-------------|---------------------------------------------------------------------------|------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -159,9 +159,9 @@ Use the [site][13] selector dropdown on the right side of the page to see suppor
 
 [1]: /api/latest/logs/#send-logs
 [2]: /agent/logs/#send-logs-over-https
-{{% /site-region %}}
+{{< /site-region >}}
 
-{{% site-region region="us3" %}}
+{{< site-region region="us3" >}}
 
 | Site | Type  | Endpoint                                                                  | Port | Description                                                                                                              |
 |------|-------|---------------------------------------------                              |------|--------------------------------------------------------------------------------------------------------------------------|
@@ -173,9 +173,9 @@ Use the [site][13] selector dropdown on the right side of the page to see suppor
 [1]: /api/latest/logs/#send-logs
 [2]: /agent/logs/#send-logs-over-https
 
-{{% /site-region %}}
+{{< /site-region >}}
 
-{{% site-region region="us5" %}}
+{{< site-region region="us5" >}}
 
 | Site | Type  | Endpoint                                                                  | Port | Description                                                                                                              |
 |------|-------|---------------------------------------------------------------------------|------|--------------------------------------------------------------------------------------------------------------------------|
@@ -187,9 +187,9 @@ Use the [site][13] selector dropdown on the right side of the page to see suppor
 [1]: /api/latest/logs/#send-logs
 [2]: /agent/logs/#send-logs-over-https
 
-{{% /site-region %}}
+{{< /site-region >}}
 
-{{% site-region region="gov" %}}
+{{< site-region region="gov" >}}
 
 | Site    | Type  | Endpoint                                                                  | Port | Description                                                                                                              |
 |---------|-------|---------------------------------------------------------------------------|------|--------------------------------------------------------------------------------------------------------------------------|
@@ -201,7 +201,7 @@ Use the [site][13] selector dropdown on the right side of the page to see suppor
 [1]: /api/latest/logs/#send-logs
 [2]: /agent/logs/#send-logs-over-https
 
-{{% /site-region %}}
+{{< /site-region >}}
 
 ### Custom log forwarding
 
@@ -216,7 +216,7 @@ You can send logs to Datadog platform over HTTP. Refer to the [Datadog Log HTTP 
 {{% /tab %}}
 {{% tab "TCP" %}}
 
-{{% site-region region="us" %}}
+{{< site-region region="us" >}}
 
 Test it manually with telnet. You must prefix the log entry with your [Datadog API Key][1] and add a payload.
 
@@ -234,9 +234,9 @@ telnet intake.logs.datadoghq.com 10514
 
 [1]: /account_management/api-app-keys/#api-keys
 
-{{% /site-region %}}
+{{< /site-region >}}
 
-{{% site-region region="eu" %}}
+{{< site-region region="eu" >}}
 
 Test it manually with telnet. You must prefix the log entry with your [Datadog API Key][1] and add a payload.
 
@@ -254,20 +254,20 @@ telnet intake.logs.datadoghq.com 10514
 
 [1]: /account_management/api-app-keys/#api-keys
 
-{{% /site-region %}}
+{{< /site-region >}}
 
-{{% site-region region="us3" %}}
+{{< site-region region="us3" >}}
 The TCP endpoint is not recommended for this site. Contact [support][1] for more information.
 
 [1]: /help
-{{% /site-region %}}
+{{< /site-region >}}
 
-{{% site-region region="gov,us5" %}}
+{{< site-region region="gov,us5" >}}
 
 The TCP endpoint is not supported for this site.
 
 [1]: /help
-{{% /site-region %}}
+{{< /site-region >}}
 
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
