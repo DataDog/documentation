@@ -105,7 +105,8 @@ def download_content_from_external_source(self, content):
     return (self.cache_enabled == False) \
         or (action == 'npm-integrations') \
         or (file_name != '' and not file_name.endswith('.md')) \
-        or (getenv("CI_COMMIT_REF_NAME") in (None, 'master'))
+        or (getenv('CI_COMMIT_REF_NAME') == 'master')
+        # or (getenv("CI_COMMIT_REF_NAME") in (None, 'master'))
 
 
 def fetch_sourced_content_from_local_or_upstream(self, github_token, extract_dir):
@@ -244,7 +245,7 @@ def download_and_extract_cached_files_from_s3():
 
 
 def download_cached_content_into_repo(self):
-    download_and_extract_cached_files_from_s3()
+    # download_and_extract_cached_files_from_s3()
 
     for content in self.list_of_cached_contents:
         action = content.get('action', '')
@@ -271,8 +272,19 @@ def download_cached_content_into_repo(self):
 
     # Integrations are handled separately for now (there is active work underway to improve this)
     if self.cache_enabled:
+        print('Copying integrations from cache...')
         shutil.copytree(f'temp/{self.relative_en_content_path}/integrations', f'{self.relative_en_content_path}/integrations', dirs_exist_ok=True)
         
+        # Copying integrations metrics data
+        if os.path.isdir('temp/data/integrations'):
+            print('Copying integrations metrics data from cache...')
+            shutil.copytree('temp/data/integrations', 'data/integrations', dirs_exist_ok=True)
+
+        if os.path.isdir('temp/data/service_checks'):
+            print('Copying integrations service checks from cache...')
+            shutil.copytree('temp/data/service_checks', 'data/service_checks', dirs_exist_ok=True)
+
+
     # Cleanup temporary dir after cache download complete
-    if os.path.isdir('temp'):
-        shutil.rmtree('temp')
+    # if os.path.isdir('temp'):
+    #     shutil.rmtree('temp')
