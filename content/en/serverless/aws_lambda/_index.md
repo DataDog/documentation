@@ -58,20 +58,9 @@ Easily correlate serverless code, configuration, and deployment changes with met
 
 {{< img src="serverless/serverless_deployment_tracking.jpeg" alt="Datadog Serverless Monitoring" style="width:100%;" >}}
 
-### Securing functions
-
-[Datadog Application Security Management (ASM)][2] provides observability into application-level attacks that aim to exploit code-level vulnerabilities, and into bad actors targeting your systems.
-
-ASM secures functions written in Python, Node, Go, Java, and .NET. Because ASM is built on top of Serverless APM, the setup steps are straightforward, just adding an environment variable.
-
-ASM supports over 130 event rules across major threats such as injection attacks, cross-site scripting, security scanner, local file inclusion, and many more. 
-
-You can [get started managing threats to your functions with ASM][3] today.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /serverless/installation
-[2]: /security/application_security/
-[3]: /security/application_security/getting_started/serverless/
