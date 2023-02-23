@@ -42,7 +42,7 @@ Connections support the following example use cases:
 - The permissions needed are not supported by the integration, such as write permissions on AWS.
 - You want granular access control, for example restricting user access to certain workflows.
 
-## Use connections
+## Work with connections
 
 ### View connections
 
