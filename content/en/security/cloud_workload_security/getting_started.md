@@ -36,7 +36,7 @@ There are four types of monitoring that the Datadog Agent uses for Cloud Workloa
 
 ## Requirements
 
-* Datadog Agent >= 7.27.0 (>= 7.42 is required for remote config)
+* Datadog Agent >= 7.42
 * Data collection is done using eBPF, so Datadog minimally requires platforms that have underlying Linux kernel versions of 4.15.0+ or have eBPF features backported. CWS supports the following Linux distributions:
   * Ubuntu 18.04+
   * Debian 10+
@@ -81,10 +81,6 @@ To use Remote Configuration with CWS, add the Remote Configuration scope to a ne
             env:
               - name: DD_RUNTIME_SECURITY_CONFIG_REMOTE_CONFIGURATION_ENABLED
                 value: "true"
-
-    # Add this to enable the collection of CWS network events, only for Datadog Agent version 7.36
-          network:
-            enabled: true
     ```
 
 3. Restart the Agent.
@@ -148,12 +144,6 @@ systemctl restart datadog-agent
 
 {{< /code-block >}}
 
-For [Datadog Agent][1] version 7.36 only, to enable the collection of CWS network events:
-
-```shell
-echo "runtime_security_config.network.enabled: true" >> /etc/datadog-agent/system-probe.yaml
-```
-
 Once you apply the changes, restart both the Security Agent and the system-probe.
 
 [1]: https://app.datadoghq.com/account/settings#agent/kubernetes
@@ -175,12 +165,6 @@ systemctl restart datadog-agent
 
 {{< /code-block >}}
 
-For [Datadog Agent][1] version 7.36 only, to enable the collection of CWS network events:
-
-```shell
-echo "runtime_security_config.network.enabled: true" >> /etc/datadog-agent/system-probe.yaml
-```
-
 [1]: https://app.datadoghq.com/account/settings#agent/kubernetes
 {{% /tab %}}
 
@@ -199,12 +183,6 @@ echo "remote_configuration.enabled: true" >> /etc/datadog-agent/system-probe.yam
 systemctl restart datadog-agent
 
 {{< /code-block >}}
-
-For [Datadog Agent][1] version 7.36 only, to enable the collection of CWS network events:
-
-```shell
-echo "runtime_security_config.network.enabled: true" >> /etc/datadog-agent/system-probe.yaml
-```
 
 [1]: https://app.datadoghq.com/account/settings#agent/kubernetes
 {{% /tab %}}
