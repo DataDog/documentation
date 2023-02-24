@@ -27,7 +27,7 @@ You can monitor your functions running in AWS Lambda with Datadog Application Se
 In general, setting up ASM for AWS Lambda involves:
 
 1. Identifying functions that are vulnerable or are under attack, which would most benefit from ASM. Find them on [the Security tab of your Service Catalog][1].
-2. Set up ASM instrumentation via the serverless plugin or manually setting the ARN.
+2. Setting up ASM instrumentation by using the [Datadog Serverless Framework plugin][6] or manually setting the ARN.
 3. Enabling the library to collect the application security data from the functions and send it to Datadog.
 4. Triggering security signals in your application and seeing how Datadog displays the resulting information.
 
@@ -40,11 +40,11 @@ In general, setting up ASM for AWS Lambda involves:
 {{< tabs >}}
 {{% tab "Serverless Framework" %}}
 
-The [Datadog Serverless plugin][1] automatically configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
+The [Datadog Serverless Framework plugin][1] automatically configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
 
-To install and configure the Datadog Serverless plugin:
+To install and configure the Datadog Serverless Framework plugin:
 
-1. Install the Datadog Serverless plugin:
+1. Install the Datadog Serverless Framework plugin:
    ```sh
    serverless plugin install --name serverless-plugin-datadog
    ```
@@ -81,7 +81,7 @@ To install and configure the Datadog Serverless plugin:
      # In AWS GovCloud regions
      arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-java:8
      ```
-   - **Go**: The Go tracer doesn't rely on a layer and is a regular Go module. You you can upgrade to its latest version with:
+   - **Go**: The Go tracer doesn't rely on a layer and is a regular Go module. You can upgrade to its latest version with:
      ```sh
      go get -u github.com/DataDog/datadog-lambda-go
      ```
@@ -131,7 +131,7 @@ To install and configure the Datadog Serverless plugin:
 {{% /tab %}}
 {{< /tabs >}}
 
-To see Application Security Management threat detection in action, send known attack patterns to your application. For example, with an HTTP header with value `acunetix-product` to trigger a [security scanner attack][5] attempt:
+To see Application Security Management threat detection in action, send known attack patterns to your application. For example, send an HTTP header with value `acunetix-product` to trigger a [security scanner attack][5] attempt:
    ```sh
    curl -H 'My-ASM-Test-Header: acunetix-product' https://your-application-url/existing-route
    ```
@@ -148,3 +148,4 @@ A few minutes after you enable your application and exercise it, **threat inform
 [3]: https://app.datadoghq.com/security/appsec
 [4]: /security/application_security/threats/setup_and_configure/?code-lang=serverless
 [5]: /security/default_rules/security-scan-detected/
+[6]: /serverless/libraries_integrations/plugin/

@@ -12,9 +12,9 @@ further_reading:
 
 [Datadog Application Security Management (ASM)][2] provides observability into application-level attacks that aim to exploit code-level vulnerabilities, and into bad actors targeting your systems.
 
-ASM secures functions written in Python, Node, Go, Java, and .NET. Because ASM is built on top of Serverless APM, the setup steps are straightforward, just adding an environment variable.
+ASM secures functions written in Python, Node, Go, Java, and .NET. Because ASM is built on top of Serverless APM, you can set it up by adding an environment variable.
 
-ASM supports over 130 event rules across major threats such as injection attacks, cross-site scripting, security scanner, local file inclusion, and many more. 
+ASM supports over 130 event rules across major threats such as injection attacks, cross-site scripting, security scanner, local file inclusion, and more. 
 
 You can [get started managing threats to your functions with ASM][3] today.
 
