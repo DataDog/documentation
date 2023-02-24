@@ -17,7 +17,11 @@ further_reading:
 
 Datadog Service Catalog includes all discovered services from APM, USM, and RUM by default. If you are using any of these products, your catalog is pre-populated with entries. You can add service metadata to these entries through the Datadog UI, [API][1], or use automated pipelines through the [GitHub integration][11] or [Terraform][2].
 
-## Add service definition metadata for services
+## Add service definition metadata
+
+If your service is listed in Service Catalog and already has metadata associated with it, the original source is listed in the **Metadata Source** column. Return to that source to make any updates you need to make.
+
+If the service has not been assigned any metadata, or if the service isn't listed in the Service Catalog yet, you can add it:
 
 1. On the [Service Catalog][10] page, click **Setup & Config**. The **Manage Entries** tabs shows you how many services are without metadata.
 
@@ -27,7 +31,7 @@ Datadog Service Catalog includes all discovered services from APM, USM, and RUM 
 
 4. Enter details for Team, On-call, Contacts, Documentation, Code repo, and Other links.
 
-4. Switch to the **Code** view to see the YAML generated for the metadata you've entered.
+4. Switch to the **Code** view to see the JSON and cURL generated for the metadata you've entered. You can copy this code as a jumping off point for programmatically providing service definitions by API, Terraform, or GitHub, without having to learn the schema for service definitions.
 
 5. If you have the [Service Catalog Write][13] permission, you can submit the metadata by clicking **Save Entry**, or by running the cURL command provided on the **Code** view.
 
