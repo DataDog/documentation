@@ -72,17 +72,17 @@ Before getting started, ensure you have the following prerequisites:
 
 To get started, go to the [AWS Integration configuration page][1] in Datadog and click on **Add AWS Account(s)** -> **Add Multiple AWS Accounts** -> **Cloudformation StackSet**.
 
-On the Datadog console, click **Launch CloudFormation StackSet**. This opens the AWS Console and loads a new CloudFormation StackSet. Keep the default choice of “Service-managed permissions” on AWS.  
+On the Datadog AWS integration configuration page, click **Launch CloudFormation StackSet**. This opens the AWS Console and loads a new CloudFormation StackSet. Keep the default choice of “Service-managed permissions” on AWS.  
   
 Follow the steps below on the AWS console to create and deploy your stackset:
 
 1. **Choose a Template**  
-Copy the Template URL from the Datadog console to use it in the `Specify Template` parameter in the StackSet.
+Copy the Template URL from the Datadog AWS integration configuration page to use it in the `Specify Template` parameter in the StackSet.
 
 
 2. **Specify StackSet details**
-    - Select your Datadog API key on the Datadog console and use it in the `DatadogApiKey` parameter in the StackSet.
-    - Select your Datadog APP key on the Datadog console and use it in the `DatadogAppKey` parameter in the StackSet.
+    - Select your Datadog API key on Datadog AWS integration configuration page and use it in the `DatadogApiKey` parameter in the StackSet.
+    - Select your Datadog APP key on Datadog AWS integration configuration page and use it in the `DatadogAppKey` parameter in the StackSet.
 
     - *Optionally:*
         - Enable [Cloud Security Posture Management][5] (CSPM) to scan your cloud environment, hosts, and containers for misconfigurations and security risks.
@@ -118,6 +118,9 @@ See the [Integrations page][4] for a full listing of the available sub-integrati
 
 The StackSet does not set up log forwarding in the AWS accounts. To set up logs, follow the steps in the [Log Collection][2] guide.
 
+## Uninstall AWS Integration
+
+To uninstall the AWS integration from all AWS accounts and regions in an Organization, you must first delete all StackInstances and then the StackSet. Follow the steps outlined in [AWS docs][7] to delete the created StackInstances and StackSet. 
 
 ## Further Reading
 
@@ -129,3 +132,4 @@ The StackSet does not set up log forwarding in the AWS accounts. To set up logs,
 [4]: /integrations/#cat-aws
 [5]: /security/cspm/getting_started/
 [6]: https://docs.datadoghq.com/cloud_cost_management/?tab=aws
+[7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-delete.html
