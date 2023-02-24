@@ -135,8 +135,11 @@ To enable network performance monitoring with the Datadog Agent, use the followi
 {{< site-region region="us,us3,us5,eu" >}}
 
 6. Optionally, enable additional cloud integrations to allow Network Performance Monitoring to discover cloud-managed entities.
-  * Install the [Azure integration][14] for visibility into Azure load balancers.
-  * Install the [AWS Integration][15] for visibility in AWS Load Balancer. **you must enable ENI and EC2 metric collection**
+      * Install the [Azure integration][1] for visibility into Azure load balancers.
+      * Install the [AWS Integration][2] for visibility in AWS Load Balancer. **you must enable ENI and EC2 metric collection**
+
+  [1]: /integrations/azure
+  [2]: /integrations/amazon_web_services/
 {{< /site-region >}}
 
 ### SELinux-enabled systems
@@ -464,5 +467,3 @@ To set up on AWS ECS, see the [AWS ECS][1] documentation page.
 [11]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md#enabling-system-probe-collection
 [12]: https://github.com/DataDog/chef-datadog
 [13]: https://github.com/DataDog/ansible-datadog/blob/master/README.md#system-probe
-[14]: /integrations/azure
-[15]: /integrations/amazon_web_services/
