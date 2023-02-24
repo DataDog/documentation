@@ -228,7 +228,7 @@ When both the Agent and your services are running on a host, real or virtual, Da
 
 ## Install the language and your app
 
-1. For Java applications, ensure you have a JDK installed, for example:
+1. For Java applications, ensure you have a JDK or JRE installed, for example:
    ```sh
    sudo apt install openjdk-17-jdk -y
    ```
