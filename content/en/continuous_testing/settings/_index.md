@@ -42,7 +42,7 @@ This ensures you can:
 
 ### Estimate parallelization
 
-Click **Estimate Parallelization** to see how many Datadog recommends running in parallel based on your Continuous Testing metrics. 
+Click **Estimate Parallelization** to see how many tests Datadog recommends running in parallel based on your Continuous Testing metrics. 
 
 {{< img src="continuous_testing/estimated_parallelization.png" alt="Completing the Estimate Parallelization wizard in Continuous Testing Settings" style="width:60%;">}}
 
