@@ -30,7 +30,7 @@ In your first three days with Datadog ASM:
 
    {{< img src="getting_started/appsec/gs-appsec-most-exposed.png" alt="Service Catalog Security view sorted by the Suspicious requests column. The web-store service, for example, shows thousands of suspicious requests detected." style="width:100%;" >}}
 
-   This data is collected from APM traces (through Datadog libraries). It provides you with visibility on the services that are seeing the most suspicious traffic.
+   This data is collected from APM traces (through Datadog libraries). It provides you with visibility on the services that are exposed to the most suspicious traffic.
 
 2. **Enable ASM on the most exposed services.** Click `Enable ASM` in the ASM Status column to see the instructions or share them with the service's owner. 
 
@@ -52,7 +52,7 @@ In your first three days with Datadog ASM:
 
 ## Phase 2: Review your first security signals and vulnerabilities
 
-After a few days of usage, you typically get your first security signals. If you have not received your first security signal, you can simulate an attack and trigger a signal by running the following script, customized to hit your application's endpoints:
+After a few days of usage, you typically get your first security signals. If you have not received your first security signal, you can simulate an attack and trigger a signal by running the following script from a terminal:
 
 {{< code-block lang="sh" >}}
 for ((i=1;i<=200;i++)); do
@@ -72,7 +72,7 @@ Over the next few days:
 
 2. **Click a signal to see its details.** The signal details tell you what happened, who the attackers are, and what you should do next. On the Traces tab, you can investigate the traces that generated the signals.
 
-3. **Archive the signal after it's been investigated.** If the signal is a false positive, set up an [exclusion filter][9] to eliminate noisy signal patterns.
+3. **Archive the signal after it's been investigated.** If the signal is a false positive, set up a [passlist entry][9] to eliminate noisy signal patterns.
 
 4. **[Subscribe to the weekly digest][10]** to receive weekly updates on your detected security activity.
 
