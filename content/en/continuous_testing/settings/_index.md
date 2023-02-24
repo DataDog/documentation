@@ -18,6 +18,7 @@ further_reading:
   tag: "Terraform"
   text: "Create and manage tests with Terraform"
 ---
+{{< jqmath-vanilla >}}
 
 ## Overview
 
@@ -31,7 +32,7 @@ By default, all your tests running in CI/CD pipelines run sequentially (one afte
 
 Parallel tests are tests that run simultaneously in your continuous integration and continuous delivery (CI/CD) pipelines. 
 
-{{< img src="continuous_testing/continuous_testing_parallelization.png" alt="Setting parallelization for Continuous Testing" style="width:100%;">}}
+{{< img src="continuous_testing/parallelization_explained.png" alt="A diagram that explains the benefits of parallelization vs. sequential test runs" style="width:100%;">}}
 
 This ensures you can:
 
@@ -39,12 +40,21 @@ This ensures you can:
 * Increase development confidence and speed of delivery
 * Have complete test coverage and reduce the volume of production-breaking bugs from reaching your codebase
 
+### Estimate parallelization
+
+Click **Estimate Parallelization** to see how many Datadog recommends running in parallel based on your Continuous Testing metrics. After specifying the expected duration for testing in your CI pipeline, the **Estimated Parallelization** section calculates how much parallelization you want to set in the **Parallelization preferences** section:
+
+$$\text"estimated parallelization" = {\text"average numbers of tests per CI batch" * \text"average test duration"} / \text"expected duration in your CI pipeline"$$
+
+
 ### Set parallelization
 
 1. Under **Set your preferences**, select the **Parallelization** option. 
 2. Customize the parallelization you need based on how many tests you want to run in parallel.
 3. Click **Save Selection**.
 4. Confirm your selection.
+
+{{< img src="continuous_testing/continuous_testing_parallelization.png" alt="Setting parallelization for Continuous Testing" style="width:100%;">}}
 
 ## Permissions
 
