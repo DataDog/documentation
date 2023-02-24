@@ -20,7 +20,7 @@ As you expand your search filters, the graph above the search bar updates.
 
 1. Construct a search query using the same logic as a DBM Query Samples.
 2. Choose to monitor over a DBM event count or facet.
-    * **Monitor over a DBM event count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of RUM events over a selected time frame, then compares it to the threshold conditions.
+    * **Monitor over a DBM event count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of DBM events over a selected time frame, then compares it to the threshold conditions.
     * **Monitor over a facet**: If you select a facet, the monitor alerts over the `Unique value count` of the facet.
 3. Group DBM events by multiple dimensions (optional). All DBM events matching the query are aggregated into groups based on the value of up to five facets.
 4. Configure the alerting grouping strategy (optional).
