@@ -16,12 +16,11 @@ further_reading:
 
 Observability Pipelines is a control plane that enables you to monitor, build, and manage all of your Observability Pipelines Worker deployments at scale. The Observability Pipelines Worker collects, processes, and routes logs and metrics from any source to any destination.
 
-This guide walks you through a simple deployment of Observability Pipelines to get you up and running with
-Datadog's recommended settings.
+This guide walks you through a simple deployment of Observability Pipelines to get you up and running with Datadog's recommended settings.
 
 ## Assumptions
-* You are already using Datadog and want to use Observability Pipelines.
-* Your services (or at the least, OP) are deployed to a Kubernetes cluster in EKS, AKS, or GKE.
+* You are already using Datadog and want to use Observability Pipelines (OP).
+* Your services are deployed to a Kubernetes cluster in Amazon Elastic Kubernetes Servuce (EKS), Azure Kubernetes Service (AKS), or Google Kubernetes Engine (GKE).
 * You have administrative access to the cluster(s) where the Observability Pipelines Worker is going to be deployed, as well as the workloads that are going to be aggregated.
 
 # Prerequisites
@@ -98,7 +97,7 @@ more flexibility and accuracy than the in-tree controller that AWS provides.
 The sample configurations do not enable the "cross-zone load balancing" feature available in this controller. To enable it, add the following annotation to the `service` block:
 
 ```
-  service.beta.kubernetes.io/aws-load-balancer-attributes: load_balancing.cross_zone.enabled=true
+service.beta.kubernetes.io/aws-load-balancer-attributes: load_balancing.cross_zone.enabled=true
 ```
 
 [See the AWS LB Controller page for more details.](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/guide/service/annotations/#load-balancer-attributes)
@@ -166,7 +165,7 @@ Internally, the Datadog Agent represents log tags as a CSV in a single string. T
 ### Processing metrics
 The provided metrics pipeline does not require additional parsing and re-encoding steps. Similar to the logs pipeline, it tags incoming metrics for traffic accounting purposes. Due to the additional cardinality, this may have cost implications for custom metrics.
 
-## Further reading
 At this point, your environment is configured for Observability Pipelines with data flowing through it. Further configuration is likely required for your specific use case(s), but the tools provided give you a starting point for it.
 
+## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
