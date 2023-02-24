@@ -19,15 +19,15 @@ Datadog Service Catalog includes all discovered services from APM, USM, and RUM 
 
 ## Add service definition metadata
 
-If your service is listed in Service Catalog and already has metadata associated with it, the original source is listed in the **Metadata Source** column. Return to that source to make any updates you need to make.
+If your service is listed in Service Catalog and already has metadata associated with it, the original source is listed in the **Metadata Source** column on the **Ownership** view. Return to that source to make any updates you need to make.
 
-If the service has not been assigned any metadata, or if the service isn't listed in the Service Catalog yet, you can add it:
+If the service has not been assigned any service definition metadata, or if the service isn't listed in the Service Catalog yet, you can add it:
 
 1. On the [Service Catalog][10] page, click **Setup & Config**. The **Manage Entries** tabs shows you how many services are without metadata.
 
 2. Click **Create New Entry**.
 
-3. Specify which service you are adding metadata to. This can be the name of a service already listed in the Service Catalog, or it can be the name of a service not sending any data.
+3. Specify which service you are adding metadata to. This can be the name of a service already listed in the Service Catalog that doesn't have service definition metadata defined for it yet, or it can be the name of a service not sending any data.
 
 4. Enter details for Team, On-call, Contacts, Documentation, Code repo, and Other links.
 
