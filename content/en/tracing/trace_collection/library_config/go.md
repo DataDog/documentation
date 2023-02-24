@@ -115,7 +115,7 @@ Datadog may collect [environmental and diagnostic information about your system]
 
 `DD_TRACE_CLIENT_IP_ENABLED`
 : **Default**: `false` <br>
-Enables client IP collection from relevant IP headers in HTTP request spans.
+Enable client IP collection from relevant IP headers in HTTP request spans.
 Added in version 1.47.0 
 
 ## Configure APM environment name
