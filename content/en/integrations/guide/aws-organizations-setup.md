@@ -1,5 +1,5 @@
 ---
-title: AWS Multi Account setup for AWS Organizations
+title: AWS Integration Multi-Account setup for AWS Organizations
 kind: guide
 description: "Steps for setting up the Datadog AWS Integration for an AWS Organization"
 further_reading:
