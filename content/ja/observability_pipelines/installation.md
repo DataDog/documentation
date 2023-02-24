@@ -1,6 +1,11 @@
 ---
 aliases:
 - /ja/observability_pipelines/setup/
+- /ja/agent/vector_aggregation/
+- /ja/integrations/observability_pipelines/integrate_vector_with_datadog/
+- /ja/observability_pipelines/integrate_vector_with_datadog/
+- /ja/observability_pipelines/integrations/integrate_vector_with_datadog/
+- /ja/observability_pipelines/production_deployment_overview/integrate_datadog_and_the_observability_pipelines_worker/
 further_reading:
 - link: /observability_pipelines/production_deployment_overview/
   tag: ドキュメント
@@ -18,10 +23,11 @@ title: APM に Datadog Agent を構成する
 
 ## 前提条件
 
-インストールする前に、以下があることを確認してください。
+インストールする前に、以下を確認してください。
 
-1. 有効な [Datadog API キー][5]。
-2. 観測可能性パイプラインの構成 ID。
+1. サポートされている Linux アーキテクチャ (x86_64 または AMD64) のいずれかを使用している
+2. 有効な [Datadog API キー][5]がある。
+3. [観測可能性パイプラインの構成][7]がある。
 
 ## APM に Datadog Agent を構成する
 
@@ -38,33 +44,44 @@ $ DD_API_KEY=<DD_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.
 1. 以下のコマンドを実行し、APT が HTTPS でダウンロードするように設定します。
 
     ```
-    $ sudo apt-get update
-    $ sudo apt-get install apt-transport-https curl gnupg
+    sudo apt-get update
+    sudo apt-get install apt-transport-https curl gnupg
     ```
 
 2. 以下のコマンドを実行して、システム上に Datadog の `deb` リポジトリをセットアップし、Datadog のアーカイブキーホルダーを作成します。
 
     ```
-    $ sudo sh -c "echo 'deb [signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] https://apt.datadoghq.com/ stable 7' > /etc/apt/sources.list.d/datadog.list"
-    $ sudo touch /usr/share/keyrings/datadog-archive-keyring.gpg
-    $ sudo chmod a+r /usr/share/keyrings/datadog-archive-keyring.gpg
-    $ curl https://keys.datadoghq.com/DATADOG_APT_KEY_CURRENT.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
-    $ curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
-    $ curl https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    sudo sh -c "echo 'deb [signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] https://apt.datadoghq.com/ stable observability-pipelines-worker-1' > /etc/apt/sources.list.d/datadog.list"
+    sudo touch /usr/share/keyrings/datadog-archive-keyring.gpg
+    sudo chmod a+r /usr/share/keyrings/datadog-archive-keyring.gpg
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_CURRENT.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     ```
 
 3. 以下のコマンドを実行し、ローカルの `apt` リポジトリを更新し、ワーカーをインストールします。
 
     ```
-    $ sudo apt-get update
-    $ sudo apt-get install datadog-observability-pipelines-worker datadog-signing-keys
+    sudo apt-get update
+    sudo apt-get install observability-pipelines-worker datadog-signing-keys
     ```
 
-4. ワーカーを起動します。
+4. 観測可能性パイプラインの構成を保存します。
 
     ```
-    $ sudo systemctl restart datadog-observability-pipelines-worker.service
+    echo "<DD_OP_CONFIG>" > /var/lib/observability-pipelines-worker/observability-pipelines-worker.yaml
     ```
+
+   ここで、`DD_OP_CONFIG` は [観測可能性パイプライン UI][7] で作成した観測可能性パイプラインの構成の内容です。
+
+
+5. ワーカーを起動します。
+
+    ```
+    DD_API_KEY=<DD_API_KEY> DD_OP_CONFIG_KEY=<DD_OP_CONFIG_KEY> observability-pipelines-worker run /var/lib/observability-pipelines-worker/observability-pipelines-worker.yaml
+    ```
+
+<!--
 
 ## コマンド
 
@@ -75,12 +92,14 @@ $ DD_API_KEY=<DD_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.
 | ワーカーを再起動する                | `sudo service datadog-observability-pipelines-worker restart` |
 | ワーカーのステータス              | `sudo service datadog-observability-pipelines-worker status`  |
 | 実行中のワーカーのステータスページ | `sudo datadog-observability-pipelines-worker status`          |
-| コマンドの使用方法の表示             | `sudo datadog-observability-pipelines-worker --help`          |
+| コマンドの使用状況を表示する             | `sudo datadog-observability-pipelines-worker --help`          |
 | ワーカーをアンインストールする              | `sudo apt remove datadog-observability-pipelines-worker`      |
+
+-->
 
 ## コンフィギュレーション
 
-- ワーカーのコンフィギュレーションファイルは `/etc/datadog-observability-pipelines-worker/observability-pipelines-worker.yaml` に格納されています。
+- ワーカーのコンフィギュレーションファイルは `/etc/observability-pipelines-worker/observability-pipelines-worker.yaml` に格納されています。
 - すべての構成オプションについては、構成リファレンスを参照してください。
 - 構成例は、[データを活用する][6]および構成リファレンスを参照してください。
 
@@ -90,6 +109,7 @@ $ DD_API_KEY=<DD_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.
 [4]: https://linux.org/
 [5]: /ja/account_management/api-app-keys/#api-keys
 [6]: /ja/observability_pipelines/working_with_data/
+[7]: https://app.datadoghq.com/observability-pipelines
 
 {{% /tab %}}
 {{% tab "Helm" %}}
@@ -113,20 +133,20 @@ Kubernetes 環境に Helm Chart で観測可能性パイプラインワーカー
 1. 以下のコマンドを実行し、Datadog 観測可能性パイプラインワーカーリポジトリを Helm リポジトリに追加します。
 
     ```
-    $ helm repo add datadog https://helm.datadoghq.com
-    $ helm repo update
+    helm repo add datadog https://helm.datadoghq.com
+    helm repo update
     ```
 
 2. [観測可能性パイプラインワーカー][4]をインストールします。
 
     ```
-    $ helm install opw datadog/observability-pipelines-worker
+    helm install opw datadog/observability-pipelines-worker
     ```
 
    特定のリリース名のチャートをインストールしたい場合は、次のコマンドを実行し、<RELEASE_NAME> を特定のリリース名に置き換えてください。
 
     ```
-    $ helm install --name <RELEASE_NAME> \
+    helm install --name <RELEASE_NAME> \
         --set datadog.apiKey=<DD_API_KEY> \
         --set datadog.configKey=<DD_OP_CONFIG_KEY> \
         datadog/observability-pipelines-worker
@@ -135,7 +155,7 @@ Kubernetes 環境に Helm Chart で観測可能性パイプラインワーカー
    Datadog のサイトは、`datadog.site` オプションで設定できます。
 
     ```
-    $ helm install --name <RELEASE_NAME> \
+    helm install --name <RELEASE_NAME> \
         --set datadog.apiKey=<DD_API_KEY> \
         --set datadog.configKey=<DD_OP_CONFIG_KEY> \
         datadog/observability-pipelines-worker

@@ -138,12 +138,12 @@ The following functions cannot be nested inside calls to the `forecast()` functi
 {{< partial name="whats-next/whats-next.html"  >}}
 
 [1]: https://app.datadoghq.com/monitors#create/forecast
-[2]: /monitors/create/types/metric/#define-the-metric
+[2]: /monitors/types/metric/#define-the-metric
 [3]: /monitors/guide/recovery-thresholds/
 [4]: /monitors/guide/how-to-update-anomaly-monitor-timezone/
 [5]: /dashboards/functions/rollup/
-[6]: /monitors/create/configuration/#advanced-alert-conditions
-[7]: /monitors/create/types/metric/#data-window
+[6]: /monitors/configuration/#advanced-alert-conditions
+[7]: /monitors/types/metric/#data-window
 [8]: /monitors/notify/
 [9]: /api/v1/monitors/#create-a-monitor
 [10]: /monitors/manage/status/#settings

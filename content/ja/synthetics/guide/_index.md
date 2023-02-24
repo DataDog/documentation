@@ -42,10 +42,12 @@ title: Synthetic モニタリングガイド
 
 {{< whatsnext desc="メトリクス:" >}}
     {{< nextlink href="synthetics/guide/monitor-usage/" >}}Synthetic モニタリングでの推定使用量メトリクスの使用{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/using-synthetic-metrics/" >}}Synthetic メトリクスをモニターで使用する{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/api_test_timing_variations/" >}}API テストのタイミングを理解し、ばらつきのトラブルシューティングを行う{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="セキュリティ:" >}}
+{{< whatsnext desc="データセキュリティ:" >}}
+     {{< nextlink href="synthetics/guide/authentication-protocols/" >}}API やマルチステップ API テストでの認証の使用{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/app-that-requires-login/" >}}認証が必要なアプリケーションを監視する{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/browser-tests-totp/" >}}ブラウザテストにおける多要素認証 (MFA) のための TOTP{{< /nextlink >}}
 {{< /whatsnext >}}

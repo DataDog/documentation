@@ -323,19 +323,22 @@ The IP header to be used for client IP collection, for example: `x-forwarded-for
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
 : **INI**: `datadog.trace.propagation_style_inject`<br>
-**Default**: `Datadog`<br>
+**Default**: `tracecontext,Datadog`<br>
 Propagation styles to use when injecting tracing headers. If using multiple styles, comma separate them. The supported styles are:
 
-  - [B3][7]
+
+  - [tracecontext][10]
+  - [b3multi][7]
   - [B3 single header][8]
   - Datadog
 
 `DD_TRACE_PROPAGATION_STYLE_EXTRACT`
 : **INI**: `datadog.trace.propagation_style_extract`<br>
-**Default**: `Datadog,B3,B3 single header`<br>
+**Default**: `tracecontext,Datadog,b3multi,B3 single header`<br>
 Propagation styles to use when extracting tracing headers. If using multiple styles, comma separate them. The supported styles are:
 
-  - [B3][7]
+  - [tracecontext][10]
+  - [b3multi][7]
   - [B3 single header][8]
   - Datadog
 
@@ -432,6 +435,28 @@ Note that `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` applies to only incoming requ
 When [`open_basedir`][9] setting is used, then `/opt/datadog-php` should be added to the list of allowed directories.
 When the application runs in a docker container, the path `/proc/self` should also be added to the list of allowed directories.
 
+### Headers extraction and injection
+
+The Datadog APM Tracer supports [B3][7] and [W3C][10] headers extraction and injection for distributed tracing.
+
+You can configure injection and extraction styles for distributed headers.
+
+The PHP Tracer supports the following styles:
+
+- Datadog: `Datadog`
+- W3C: `tracecontext`
+- B3 Multi Header: `b3multi` (`B3` is deprecated)
+- B3 Single Header: `B3 single header`
+
+You can use the following environment variables to configure injection and extraction styles. For instance:
+
+- `DD_TRACE_PROPAGATION_STYLE_INJECT=Datadog,tracecontext`
+- `DD_TRACE_PROPAGATION_STYLE_EXTRACT=Datadog,tracecontext`
+
+The environment variable values are comma-separated lists of header styles enabled for injection or extraction. By default, only the `tracecontext` and `Datadog` injection styles are enabled.
+
+If multiple extraction styles are enabled, the extraction attempt is completed with the following priorities: `tracecontext` has priority, then `Datadog`, then B3.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -445,4 +470,5 @@ When the application runs in a docker container, the path `/proc/self` should al
 [7]: https://github.com/openzipkin/b3-propagation
 [8]: https://github.com/openzipkin/b3-propagation#single-header
 [9]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir
+[10]: https://www.w3.org/TR/trace-context/#trace-context-http-headers-format
 [13]: /agent/guide/network/#configure-ports
