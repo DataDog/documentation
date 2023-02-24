@@ -2519,7 +2519,7 @@ main:
     url: observability_pipelines/guide/
     parent: observability_pipelines
     identifier: observability_pipelines_guides
-    weight: 7
+    weight: 6
   - name: Security Overview
     url: security/
     pre: security-platform
