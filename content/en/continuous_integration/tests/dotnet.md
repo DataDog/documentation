@@ -177,7 +177,7 @@ To create filters or `group by` fields for these tags, you must first create fac
 
 To instrument your benchmark tests you need to:
 
-1. Add the [`Datadog.Trace.BenchmarkDotNet` NuGet package][12] to your project (eg. using `dotnet add package Datadog.Trace.BenchmarkDotNet`).
+1. Add the [`Datadog.Trace.BenchmarkDotNet` NuGet package][12] to your project (for example, using `dotnet add package Datadog.Trace.BenchmarkDotNet`).
 2. Configure your project to use the `Datadog.Trace.BenchmarkDotNet` exporter using the `DatadogDiagnoser` attribute or the `WithDatadog()` extension method. For example:
 
 {{< tabs >}}
@@ -215,7 +215,7 @@ BenchmarkRunner.Run<OperationBenchmark>(config);
 
 {{< /tabs >}}
 
-3. Configure the reporting method as [explained above][13]
+3. [Configure the reporting method][13].
 4. Run the benchmark project as you normally do, all benchmark tests will be automatically instrumented.
 
 ### Collecting Git metadata
