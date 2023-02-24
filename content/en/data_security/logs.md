@@ -41,7 +41,7 @@ These features are not available to customers who have signed Datadog's BAA:
 * Users cannot request support through chat.
 * Notifications from Log Monitors cannot include log samples.
 * You cannot configure Log Monitors with a `group-by` clause.
-* You cannot [share][6] logs, security signals, or traces from the explorer through web integrations.
+* You cannot [share][5] logs, security signals, or traces from the explorer through web integrations.
 * Security rules cannot include triggering group-by values in notification title.
 * Security rules cannot include message template variables.
 * Security rules cannot be notified by webhooks.
@@ -97,5 +97,4 @@ All log submission endpoints are encrypted. These legacy endpoints are still sup
 [2]: /agent/logs/log_transport
 [3]: /agent/logs/advanced_log_collection/#filter-logs
 [4]: /agent/logs/advanced_log_collection/#scrub-sensitive-data-from-your-logs
-[5]: /logs/logs_to_metrics/
-[6]: /logs/explorer/#share-views
+[5]: /logs/explorer/#share-views
