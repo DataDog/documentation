@@ -176,9 +176,9 @@ Click the **Advanced** option to add queries that will **Only trigger a signal w
 
 ### Trigger
 
-{{< img src="security/security_monitoring/detection_rules/define_rule_case_ordinality.png" alt="The set rule case section showing the default settings" style="width:80%;" >}}
+{{< img src="security/security_monitoring/detection_rules/define_rule_case2.png" alt="The set rule case section showing the default settings" style="width:80%;" >}}
 
-Enable ordinality rule cases if you want to use the `then` operator. An example of an ordinatlity rule case is where a signal is generated if query A occurs and then query B occurs.
+Enable **Create rules cases with the Then operator** if you want to generate a signal for the example, if query A occurs and then query B occurs.
 
 All rule cases are evaluated as case statements. Thus, the first case to match generates the signal. Click and drag your rule cases to manipulate their ordering. An example rules case is `a > 3`. 
 
