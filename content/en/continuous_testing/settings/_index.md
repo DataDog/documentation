@@ -42,10 +42,13 @@ This ensures you can:
 
 ### Estimate parallelization
 
-Click **Estimate Parallelization** to see how many Datadog recommends running in parallel based on your Continuous Testing metrics. After specifying the expected duration for testing in your CI pipeline, the **Estimated Parallelization** section calculates how much parallelization you want to set in the **Parallelization preferences** section:
+Click **Estimate Parallelization** to see how many Datadog recommends running in parallel based on your Continuous Testing metrics. 
+
+{{< img src="continuous_testing/estimated_parallelization.png" alt="Completing the Estimate Parallelization wizard in Continuous Testing Settings" style="width:60%;">}}
+
+After specifying the expected duration for testing in your CI pipeline and, optionally, the average number of tests per CI batch, the **Estimated Parallelization** section calculates the amount of parallelization you want to set:
 
 $$\text"estimated parallelization" = {\text"average numbers of tests per CI batch" * \text"average test duration"} / \text"expected duration in your CI pipeline"$$
-
 
 ### Set parallelization
 
