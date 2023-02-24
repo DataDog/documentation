@@ -322,6 +322,9 @@ Used for Agent services communicating with each other locally within the host on
 8126/tcp
 : Port for the [APM receiver][3]
 
+5012/tcp
+: Port for the APM [go_expvar server][1]
+
 [1]: /integrations/go_expvar/
 [2]: /agent/basic_agent_usage/#gui
 [3]: /tracing/
