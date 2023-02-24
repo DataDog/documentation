@@ -45,5 +45,5 @@ Learn more about [retention filters][7].
 [3]: https://app.datadoghq.com/account/usage
 [4]: https://app.datadoghq.com/monitors#create/metric
 [5]: /monitors/types/apm/?tab=traceanalytics#monitor-creation
-[6]: https://app.datadoghq.com/apm/analytics
+[6]: https://app.datadoghq.com/apm/traces
 [7]: /tracing/trace_pipeline/trace_retention/
