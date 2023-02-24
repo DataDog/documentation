@@ -90,7 +90,7 @@ Copy the Template URL from the Datadog console to use it in the `Specify Templat
 
 
 3. **Configure StackSet options**  
-Use the default option of "Execution configuration" to be set to inactive so the StackSet performs one operation at a time.
+Keep the "Execution configuration" option as `Inactive` so the StackSet performs one operation at a time.
 
 4. **Set deployment options**
     - You can set your “Deployment targets” to either deploy the Datadog integration across an Organization or one or more Organizational Units.
