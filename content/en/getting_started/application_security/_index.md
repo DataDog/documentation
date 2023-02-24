@@ -76,7 +76,7 @@ Over the next few days:
 
 4. **[Subscribe to the weekly digest][10]** to receive weekly updates on your detected security activity.
 
-5. **Set up a [notification rule][12]** to alert you in real-time when attacks require your attention, over email, Slack, or other communication integration. Datadog recommends [setting a notification rule][11] for `Medium` and higher severity signals.
+5. **Set up a [notification rule][12]** to alert you in real-time when attacks require your attention, over email, Slack, or other communication integrations. Datadog recommends [setting a notification rule][11] for `Medium` and higher severity signals.
 
 ## Further reading
 
