@@ -74,9 +74,9 @@ Over the next few days:
 
 3. **Archive the signal after it's been investigated.** If the signal is a false positive, set up an [exclusion filter][9] to eliminate noisy signal patterns.
 
-4. **Set up a [notification][12]** to alert you in real-time when attacks require your attention, over email, Slack, or other communication integration. We recommend setting a [notification rule][11] for `Medium` and higher severity signals.
+4. **[Subscribe to the weekly digest][10]** to receive weekly updates on your detected security activity.
 
-5. **[Subscribe to the weekly digest][10]** to receive weekly reports on your security signals.
+5. **Set up a [notification rule][12]** to alert you in real-time when attacks require your attention, over email, Slack, or other communication integration. We recommend [setting a notification rule][11] for `Medium` and higher severity signals.
 
 ## Further reading
 
@@ -93,4 +93,4 @@ Over the next few days:
 [9]: /security/application_security/threats/setup_and_configure/#exclude-specific-parameters-from-triggering-detections
 [10]: https://app.datadoghq.com/security/appsec/reports-configuration
 [11]: https://app.datadoghq.com/security/configuration/notification-rules
-[12]: /security/notifications/
+[12]: /security/notifications/rules/
