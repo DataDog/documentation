@@ -7,40 +7,18 @@ further_reading:
     text: "Getting Started with CWS"
 ---
 
-Security profiles provide a baseline of a workload's typical behavior in order to surface unusual activity. Each security profile is generated from the merge of multiple activity dumps.
+Security profiles provide a baseline of a workload's typical behavior in order to surface unusual activity. They provide additional workload behavior context when investigating security signals, and are also used to generate [suppression suggestions](#suppress-signals-based-on-suggested-actions) for signals that match known workload behavior.
 
-Generated from multiple activity dumps, they provide additional workload behavior context when investigating security signals. With this information, CWS also generates [suppression suggestions](#suppress-signals-based-on-suggested-actions) for signals that meet the suppression suggestion threshold.
+To generate security profiles, you must [enable activity snapshots][4] in the Agent. Activity snapshots capture all kernel-level activity in your containers in 30 minute intervals.
 
-Security profiles use machine learning algorithms to provide a baseline of the typical behavior found in your workloads in order to surface unusual activity. They provide additional workload behavior context when investigating security signals. With this information, CWS also generates [suppression suggestions](#suppress-signals-based-on-suggested-actions) for signals that meet the suppression suggestion threshold.
-
-Cloud Workload Security (CWS) security profiles uses machine learning algorithms to create security profiles that provide a baseline of the typical behavior found in your workloads in order to surface unusual activity. They provide additional workload behavior context when investigating security signals. With this information, CWS also generates [suppression suggestions](#suppress-signals-based-on-suggested-actions) for signals that meet the suppression suggestion threshold.
-
-To generate security profiles, you must enable activity snapshots in the Agent.
-
-Each security profile is generated from the merge of multiple activity dumps.
-
-CWS automatically generates security profiles
-
-- Allows you to view how common...
-- Generate a baseline of known behavior using a continuous learning model.
-- Search and filter for individual workloads using workload parameters and infrastructure service tags.
-
-auto generated once you have enabled activity dumps in the agent.
-
-Security Profiles provide an opportunity to simplify this process by applying suppressions validated against current workload behavior.
-
-## Security Profiles
-
-Description of security profiles, how they work, how they are generated, etc.
-
-CWS Security Profiles aggregate system calls, network behavior, and file access from many hosts to model what is normal for a specific service. This allows customers to review and validate the behavior of their services. Profiles are designed to surface deviation from known behavior ("anomaly detection") and to facilitate the suppression specific kinds of security signalsvalidated by customers as benign ("agent-side suppression").
+**Question**: I need help describing the steps taken by CWS to generate the security profiles after/while capturing activity snapshots. I also could use some help describing what consistutes a given security profile - image version, multiple security dumps, the role the machine learning model plays in continuously generating the security profile, etc.
 
 ## Machine learning model
 
 Description of machine learning model, how it works, etc.
 
 - How long it takes for a model to go from **Learning** to **Stable**.
-- Does the model run once per security profile?
+- How many times does the model run for each security profile? Every time an activity snapshot is merged into the profile?
 
 ## Explore security profiles
 
@@ -54,7 +32,7 @@ The **Behavior Commonality** score at the top of the page shows how common the a
 
 {{< img src="security/cws/security_profiles/security-profile.png" alt="CWS security profile details page" width="100%">}}
 
-Select a process node to view additional details on the side panel. This includes a commonality score for the process based on the files and requests included in the process activity, and how common they are across all workload instances monitored.
+Select a process node to view additional details on the side panel. This includes a commonality score for the process based on how common the files and requests in the process activity are across all workload instances monitored.
 
 Security profile details also appear in the signal panel in the [Security Signals Explorer][3]. You can use this information to help distinguish between potential threats and normal workload behavior. If the security profile matches known workload behavior, a [suppression suggestion](#suppress-signals-based-on-suggestions) is displayed.
 
@@ -62,7 +40,7 @@ Security profile details also appear in the signal panel in the [Security Signal
 
 ## Suppress signals based on suggestions
 
-If a signal matches known workload behavior for a security profile, a suppression suggestion is displayed on the security signal side panel. You can view the security profile that triggered the suggestion, and the **X (view activity detail button)** before choosing whether to accept the suggestion.
+If a signal matches known workload behavior for a security profile, a suppression suggestion is displayed on the security signal side panel. You can view the corresponding security profile and the process triggering the signal before choosing whether to accept the suggestion.
 
 To accept the suggestion, click **Suppress Signals**, then click **Add Suppression to Rule**. This creates a suppression query for the rule that excludes the process from triggering future security signals.
 
@@ -75,3 +53,4 @@ To accept the suggestion, click **Suppress Signals**, then click **Add Suppressi
 [1]: /security/cloud_workload_security/getting_started
 [2]: https://app.datadoghq.com/security/workload/profiles
 [3]: /security/explorer
+[4]: /security/cloud_workload_security/getting_started
