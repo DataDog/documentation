@@ -25,14 +25,7 @@ further_reading:
   text: "Catch attacks at the network layer with DNS-based threat detection"
 ---
 
-## Overview
-
-There are four types of monitoring that the Datadog Agent uses for Cloud Workload Security:
-
-1. **Process Execution Monitoring** to watch process executions for malicious activity on hosts or containers in real-time.
-2. **File Integrity Monitoring** to watch for changes to key files and directories on hosts or containers in real-time.
-3. **DNS Activity Monitoring** to watch network traffic for malicious activity on hosts and containers in real-time.
-4. **Kernel Activity Monitoring** to watch for Kernel-layer attacks like process hijacking, container breakouts, and more in real-time.
+Cloud Workload Security (CWS) monitors file and process activity across your environment to detect real-time threats to your infrastructure. As part of the Datadog platform, you can combine the real-time threat detection of CWS with metrics, logs, traces, and other telemetry to see the full context surrounding a potential attack on your workloads.
 
 ## Requirements
 
