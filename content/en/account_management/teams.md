@@ -6,7 +6,7 @@ kind: documentation
 ## Overview
 Datadog Teams allow groups of users to organize their team assets within Datadog and automatically filter their Datadog-wide experience to prioritize these assets.
 
-Use Teams to link resources such as dashboards, services, monitors, and incidents to a group of users. You can also add team-specific links to Slack channels, Jira boards, and Github repositories.
+Use Teams to link resources such as dashboards, services, monitors, and incidents to a group of users. You can also add team-specific links to Slack channels, Jira boards, and GitHub repositories.
 
 Team membership is flexible. Users can join teams or be added by an administrator. Users can belong to multiple teams. 
 
@@ -63,15 +63,15 @@ Datadog supports associating the following resources with team handles:
 
 ## Filter
 
-The Team filter tailors user experiences to content associated with their team.
+The team filter tailors user experiences to content associated with their team.
 
-The Team filter appears in two places in each list view: 
+The team filter appears in two places in each list view: 
 - A list of search facets at the top left
 - A search term in the search bar
 
-Enabling a Team filter refines the list of resources based on a user's team memberships or the services owned by their teams. The Team filter provides a global and persistent context that follows a user’s journey across products.
+Enabling a team filter refines the list of resources based on a user's team memberships or the services owned by their teams. The team filter provides a global and persistent context that follows a user’s journey across products.
 
-The table below describes the products in which you can use the Team filter:
+The table below describes the products in which you can use the team filter:
 
 | Product List Page       | Filter basis                                                                     |
 |-------------------------|----------------------------------------------------------------------------------|
@@ -79,7 +79,7 @@ The table below describes the products in which you can use the Team filter:
 | [Service Catalog][3]    | Team handle                                                                      |
 | [Incidents][4]          | Team handle                                                                      |
 | [Monitors][5]           | Team handle                                                                      |
-| [APM Error Tracking][6] | Service owned by Teams (determined by ownership inside the [Service Catalog][3]) |
+| [APM Error Tracking][6] | Service owned by teams (determined by ownership inside the [Service Catalog][3]) |
 
 
 ## Permissions
