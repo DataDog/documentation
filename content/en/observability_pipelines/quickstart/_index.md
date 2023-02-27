@@ -22,6 +22,7 @@ This guide walks you through a simple deployment of Observability Pipelines to g
 * You are already using Datadog and want to use Observability Pipelines (OP).
 * Your services are deployed to a Kubernetes cluster in Amazon Elastic Kubernetes Service (EKS), Azure Kubernetes Service (AKS), or Google Kubernetes Engine (GKE).
 * You have administrative access to the cluster(s) where the Observability Pipelines Worker is going to be deployed, as well as the workloads that are going to be aggregated.
+* You have a common tools or security cluster for your environment to which all other clusters are connected.
 
 # Prerequisites
 Before installing, make sure you have:
@@ -50,11 +51,8 @@ There are no special requirements for Google GKE.
 {{< /tabs >}}
 
 ## Preparing your Environment
-This guide walks you through setting up the following workflow:
+This guide walks you through setting up the following workflow, where the Observability Pipelines aggregator is deployed in the common tools cluster:
 {{< img src="/observability_pipelines/quickstart/dd-pipeline.png" alt="A diagram of a couple of workload clusters sending their data through the Observability Pipelines aggregator." >}}
-
-Most customers have a common tools/security cluster for their environments, which all other clusters are connected to.
-This is a natural spot to deploy OP, as connectivity issues have already been worked out. **Other, more complex setups will be covered in other guides.**
 
 ## Installing the Observability Pipelines Worker
 ### Download the Helm chart
@@ -62,7 +60,6 @@ Download the Helm chart for your cloud provider.
 {{< tabs >}}
 {{% tab "AWS EKS" %}}
 [Helm Chart][1]
-
 
 [1]: /resources/yaml/observability_pipelines/quickstart/aws_eks.yaml
 {{% /tab %}}
