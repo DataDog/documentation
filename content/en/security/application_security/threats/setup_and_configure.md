@@ -251,14 +251,14 @@ Node
 : If you are bundling using webpack or esbuild, [mark the Datadog libraries as external][4].
 
 Python
-: If your Python Lambda functions are written in Python 3.6 or less, or you previously set up your Lambda functions using the Datadog Forwarder, read [instrumenting using the Datadog Forwarder][2].
+: 
 
 Java
 : To fully instrument your serverless application with distributed tracing, your Java Lambda functions must use the Java 8 Corretto (`java8.al2`) or Java 11 (`java11`) runtimes with at least 1024MB of memory.
 : If you use the Datadog Lambda layers `dd-trace-java:4` (or older) and `Datadog-Extension:24` (or older), follow the instructions in [Upgrade Instrumentation for Java Lambda Functions][3].
 
 Go
-: If your Go Lambda functions use runtime `go1.x` and you cannot migrate to the `provided.al2` runtime, you must [instrument using the Datadog Forwarder][2] instead.
+: 
 
 .NET
 : 
