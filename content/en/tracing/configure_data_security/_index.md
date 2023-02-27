@@ -358,7 +358,7 @@ PCI compliance for APM is available when you create a new Datadog organization. 
 4. After Datadog support or Customer Success confirms that the new org is PCI DSS compliant, configure the Agent configuration file to send spans to the dedicated PCI-compliant endpoint (`https://trace-pci.agent.datadoghq.com`):
     ```
     apm_config:
-    apm_dd_url: <https://trace-pci.agent.datadoghq.com>
+      apm_dd_url: <https://trace-pci.agent.datadoghq.com>
     ```
 
 To enable PCI compliance for logs, see [PCI DSS compliance for Log Management][5].
