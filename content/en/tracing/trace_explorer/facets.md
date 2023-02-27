@@ -96,7 +96,7 @@ Use the search facets box on the facet panel to scope the whole facet list and n
 
 ## Creating facets
 
-Creating a facet on a span attribute/tag is **not a mandatory step** to search for spans. Facets are useful if you wish to add a meaningful description to a specific span attribute or if you want the span attribute values to appear on the Facet list on the left-hand side of the span list.
+Creating a facet on a span attribute/tag is not a mandatory step to search for spans. Facets are useful if you wish to add a meaningful description to a specific span attribute, or if you want the span attribute values to appear on the Facet list on the left-hand side of the span list.
 
 ### Creating facets from the trace side panel
 
