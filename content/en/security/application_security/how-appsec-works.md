@@ -49,9 +49,9 @@ For Datadog ASM to be compatible with your Datadog configuration, you must have 
 
 ### Serverless monitoring
 
-<div class="alert alert-info">ASM support for AWS Lambda is in beta. Threat detection is done by using the Lambda extension.</div>
+<div class="alert alert-info">ASM support for AWS Lambda is in beta. Threat detection is done by using Datadog's lambda extension.</div>
  
-Datadog ASM for serverless provides deep visibility into attackers targeting your functions. With distributed tracing providing a context-rich picture of the attack, you can assess the impact and remediate the threat effectively. 
+Datadog ASM for AWS Lambda provides deep visibility into attackers targeting your functions. With distributed tracing providing a context-rich picture of the attack, you can assess the impact and remediate the threat effectively. 
 
 Read [Getting Started with ASM for Serverless][24] for information on setting it up.
 

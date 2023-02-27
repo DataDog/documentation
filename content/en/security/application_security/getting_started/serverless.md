@@ -108,7 +108,7 @@ To install and configure the Datadog Serverless Framework plugin:
    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:36
    ```
 
-3. Enable ASM by updating your `serverless.yml` (or whichever way you set environment variables for your function):
+3. Enable ASM by adding the following environment variables on your function deployment:
    ```yaml
    environment:
      DD_SERVERLESS_APPSEC_ENABLED: true
@@ -134,7 +134,7 @@ To install and configure the Datadog Serverless Framework plugin:
 
 To see Application Security Management threat detection in action, send known attack patterns to your application. For example, send an HTTP header with value `acunetix-product` to trigger a [security scanner attack][5] attempt:
    ```sh
-   curl -H 'My-ASM-Test-Header: acunetix-product' https://your-application-url/existing-route
+   curl -H 'My-ASM-Test-Header: acunetix-product' https://your-function-url/existing-route
    ```
 A few minutes after you enable your application and exercise it, **threat information appears in the [Application Signals Explorer][3]**.
 
