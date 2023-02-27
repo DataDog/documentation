@@ -316,14 +316,14 @@ Used for Agent services communicating with each other locally within the host on
 5002/tcp
 : Port for the [Agent browser GUI][2]
 
+5012/tcp
+: Port for the APM [go_expvar server][1]
+
 8125/udp
 : Port for DogStatsD unless `dogstatsd_non_local_traffic` is set to true. This port is available on localhost: `127.0.0.1`, `::1`, `fe80::1`.
 
 8126/tcp
 : Port for the [APM receiver][3]
-
-5012/tcp
-: Port for the APM [go_expvar server][1]
 
 [1]: /integrations/go_expvar/
 [2]: /agent/basic_agent_usage/#gui
