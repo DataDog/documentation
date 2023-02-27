@@ -40,7 +40,7 @@ Requests and Errors widgets can both be exported to dashboards and monitors.
 
 ## Using version tags for automatic faulty deployment detection
 
-Configuring your services with `version` tag enables [Automatic Faulty Deployment Detection][4]. 
+Configuring your services with the `version` tag enables [Automatic Faulty Deployment Detection][4]. 
 
 You can set up a monitor to get automatically notified on all potentially faulty deployments. To do so, navigate to the New Monitors page and choose Events, and include `tags:deployment_analysis` in the search query defining the monitor.
 
