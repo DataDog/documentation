@@ -27,7 +27,7 @@ further_reading:
 
 ## Overview
 
-On the [Synthetic Monitoring Settings page][1], you can access and control the following topics:
+On the [Synthetic Monitoring & Continuous Testing Settings page][1], you can access and control the following topics:
 
 * [Private Locations](#private-locations)
 * [Global Variables](#global-variables)
