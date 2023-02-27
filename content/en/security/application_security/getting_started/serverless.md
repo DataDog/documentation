@@ -62,6 +62,7 @@ To install and configure the Datadog Serverless Framework plugin:
    ```yaml
    environment:
      DD_EXPERIMENTAL_ENABLE_PROXY: true
+     AWS_LAMBDA_EXEC_WRAPPER: /opt/datadog_wrapper
    ```
 3. Redeploy the function and invoke it. After a few minutes, it appears in [ASM views][3].
 
@@ -122,6 +123,7 @@ To install and configure the Datadog Serverless Framework plugin:
    ```yaml
    environment:
      DD_EXPERIMENTAL_ENABLE_PROXY: true
+     AWS_LAMBDA_EXEC_WRAPPER: /opt/datadog_wrapper
    ```
 4. Redeploy the function and invoke it. After a few minutes, it appears in [ASM views][3].
 
