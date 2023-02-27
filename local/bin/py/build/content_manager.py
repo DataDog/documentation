@@ -102,10 +102,10 @@ def download_content_from_external_source(self, content):
     file_name = content.get('options', {}).get('file_name', '')
     action = content.get('action', '')
 
-    return (self.cache_enabled == False) \
-        or (action == 'npm-integrations') \
-        or (file_name != '' and not file_name.endswith('.md')) \
-        or (getenv('CI_COMMIT_REF_NAME') == 'master')
+    return (self.cache_enabled == False) or (getenv('CI_COMMIT_REF_NAME') == 'master')
+        # or (action == 'npm-integrations') \
+        # or (file_name != '' and not file_name.endswith('.md')) \
+        # or (getenv('CI_COMMIT_REF_NAME') == 'master')
         # or (getenv("CI_COMMIT_REF_NAME") in (None, 'master'))
 
 
@@ -236,7 +236,7 @@ def prepare_content(self, configuration, github_token, extract_dir):
 
 
 def download_and_extract_cached_files_from_s3():
-    s3_url = f'https://origin-static-assets.s3.amazonaws.com/build_artifacts/master/latest-ignored.tar.gz'
+    s3_url = f'https://origin-static-assets.s3.amazonaws.com/build_artifacts/master/latest-cached.tar.gz'
     artifact_download_response = requests.get(s3_url, stream=True)
 
     with tarfile.open(mode='r|gz', fileobj=artifact_download_response.raw) as artifact_tarfile:
@@ -245,18 +245,25 @@ def download_and_extract_cached_files_from_s3():
 
 
 def download_cached_content_into_repo(self):
-    # download_and_extract_cached_files_from_s3()
+    download_and_extract_cached_files_from_s3()
 
     for content in self.list_of_cached_contents:
         action = content.get('action', '')
         destination = ''
 
         if action == 'pull-and-push-file':
-            dest_path = content.get('options', {}).get('dest_path')
-            dest_file_name = content.get('options', {}).get('file_name')
-            full_dest_path = f'{self.relative_en_content_path}{dest_path}{dest_file_name}'
+            dest_path = content.get('options', {}).get('dest_path', '')
+            dest_file_name = content.get('options', {}).get('file_name', '')
+            full_dest_path = ''
 
-            os.makedirs(os.path.dirname(full_dest_path), exist_ok=True)
+            if dest_file_name.endswith('.md'):
+                full_dest_path = f'{self.relative_en_content_path}{dest_path}{dest_file_name}'
+                os.makedirs(os.path.dirname(full_dest_path), exist_ok=True)
+            elif dest_file_name.endswith('.yaml') or dest_file_name.endswith('.json'):
+                full_dest_path = f'data/{dest_file_name}'
+            else:
+                raise ValueError(f'File type unsupported, cannot copy from cache.')
+
             print(f'Copying {full_dest_path} from cache')
             shutil.copy(f'temp/{full_dest_path}', full_dest_path)
         elif action == 'pull-and-push-folder':
@@ -275,14 +282,16 @@ def download_cached_content_into_repo(self):
         print('Copying integrations from cache...')
         shutil.copytree(f'temp/{self.relative_en_content_path}/integrations', f'{self.relative_en_content_path}/integrations', dirs_exist_ok=True)
         
-        # Copying integrations metrics data
+        # Copying integrations metrics, service checks, and npm integrations data
+        print('Copying integrations data from cache...')
         if os.path.isdir('temp/data/integrations'):
-            print('Copying integrations metrics data from cache...')
             shutil.copytree('temp/data/integrations', 'data/integrations', dirs_exist_ok=True)
 
         if os.path.isdir('temp/data/service_checks'):
-            print('Copying integrations service checks from cache...')
             shutil.copytree('temp/data/service_checks', 'data/service_checks', dirs_exist_ok=True)
+
+        if os.path.isdir('temp/data/npm'):
+            shutil.copytree('temp/data/npm', 'data/npm', dirs_exist_ok=True)
 
 
     # Cleanup temporary dir after cache download complete

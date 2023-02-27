@@ -89,7 +89,7 @@ before_script:
       when: on_success
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:webops-site-build-12899749
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:webops-site-build-13672312
   tags:
     - "arch:amd64"
   rules:
@@ -259,6 +259,7 @@ build_live:
     - in-isolation deploy_site
     - in-isolation create_artifact
     - in-isolation create_artifact_ignored
+    - in-isolation create_artifact_cached
     - remove_static_from_repo
   artifacts:
     when: on_success
