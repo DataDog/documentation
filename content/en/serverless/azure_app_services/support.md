@@ -18,7 +18,7 @@ description: "Datadog support for Azure App Services"
         <th>Container</th>
     </tr>
     <tr>
-        <td rowspan="6">
+        <td rowspan="9">
             Windows
         </td>
         <td rowspan="3">
@@ -95,6 +95,165 @@ description: "Datadog support for Azure App Services"
         <td>IM, IL</td>
         <td>n/a</td>
         <td>n/a</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+    </tr>
+    <tr>
+        <td rowspan="3">
+            Web Jobs
+        </td>
+        <td>
+            Standard + Premium
+        </td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>n/a</td>
+        <td>n/a</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+    </tr>
+    <tr>
+        <td>
+            Consumption
+        </td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>n/a</td>
+        <td>n/a</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+    </tr>
+    <tr>
+        <td>
+            App Service Environment (Isolated)
+        </td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>n/a</td>
+        <td>n/a</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+    </tr>
+    <tr>
+        <td rowspan="9">
+            Linux
+        </td>
+        <td rowspan="3">
+            Web/API App
+        </td>
+        <td>
+            Standard + Premium
+        </td>
+        <td>IM, IL, T+, CM+</td>
+        <td>IM, IL, T+, CM+</td>
+        <td>IM, IL, T+, CM+</td>
+        <td>IM, IL, T+, CM+</td>
+        <td>IM, IL, T+, CM+</td>
+        <td>IM, IL, T+, CM+</td>
+        <td>IM, IL, T+, CM+</td>
+    </tr>
+    <tr>
+        <td>
+            Consumption
+        </td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+    </tr>
+    <tr>
+        <td>
+            App Service Environment (Isolated)
+        </td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+    </tr>
+    <tr>
+        <td rowspan="3">
+            Function App
+        </td>
+        <td>
+            Standard + Premium
+        </td>
+        <td>IM, IL, T, CM, P</td>
+        <td>IM, IL, T+, CM+</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+    </tr>
+    <tr>
+        <td>
+            Consumption
+        </td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+    </tr>
+    <tr>
+        <td>
+            App Service Environment (Isolated)
+        </td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+    </tr>
+    <tr>
+        <td rowspan="3">
+            Web Jobs
+        </td>
+        <td>
+            Standard + Premium
+        </td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+    </tr>
+    <tr>
+        <td>
+            Consumption
+        </td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+    </tr>
+    <tr>
+        <td>
+            App Service Environment (Isolated)
+        </td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
         <td>IM, IL</td>
         <td>IM, IL</td>
     </tr>
