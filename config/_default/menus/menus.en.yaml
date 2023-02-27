@@ -944,16 +944,21 @@ main:
     parent: serverless_aws_lambda
     identifier: serverless_aws_lambda_deployment_tracking
     weight: 106
+  - name: Securing Functions
+    url: /serverless/securing_functions
+    parent: serverless_aws_lambda
+    identifier: serverless_aws_lambda_securing_functions
+    weight: 107
   - name: Troubleshooting
     url: serverless/troubleshooting
     parent: serverless_aws_lambda
     identifier: serverless_aws_lambda_troubleshooting
-    weight: 107
+    weight: 108
   - name: Libraries & Integrations
     url: serverless/libraries_integrations
     parent: serverless_aws_lambda
     identifier: libraries_integrations
-    weight: 108
+    weight: 109
   - name: Azure App Service
     url: serverless/azure_app_services
     parent: serverless
@@ -2750,6 +2755,11 @@ main:
     parent: appsec_getting_started
     identifier: appsec_python
     weight: 207
+  - name: Serverless
+    url: security/application_security/getting_started/serverless/
+    parent: appsec_getting_started
+    identifier: appsec_serverless
+    weight: 208
   - name: How It Works
     url: security/application_security/how-appsec-works/
     parent: application_security
