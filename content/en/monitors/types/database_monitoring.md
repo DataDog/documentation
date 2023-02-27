@@ -6,11 +6,11 @@ kind: documentation
 
 ## Overview
 
-Once [Database Monitoring (DBM) is enabled][TODO] for your organization, you can create a DBM monitor to alert you when a specific DBM event type exceeds a predefined threshold over a given period of time.
+Once [Database Monitoring (DBM) is enabled][1] for your organization, you can create a DBM monitor to alert you when a specific DBM event type exceeds a predefined threshold over a given period of time.
 
 ## Create a Database Monitoring monitor
 
-To create a DBM monitor in Datadog, first navigate to [**Monitors** > **New Monitor** > **Database Monitoring**][TODO].
+To create a DBM monitor in Datadog, first navigate to [**Monitors** > **New Monitor** > **Database Monitoring**][2].
 
 <div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 DBM monitors per account. If you are encountering this limit, consider using <a href="/monitors/create/configuration/?tab=thresholdalert#alert-grouping">multi alerts</a>, or <a href="/help/">Contact Support</a>.</div>
 
@@ -44,8 +44,13 @@ When splitting the monitor by any dimension (tag or facet) and using a `below` c
 
 #### Advanced alert conditions
 
-For more information about advanced alert options such as evaluation delay, see [Configure Monitors][6].
+For more information about advanced alert options such as evaluation delay, see [Configure Monitors][3].
 
 ### Notifications
 
-For more information about the **Say what's happening** and **Notify your team** sections, see [Notifications][7].
+For more information about the **Say what's happening** and **Notify your team** sections, see [Notifications][4].
+
+[1]: /database_monitoring/
+[2]: https://app.datadoghq.com/monitors/create/databases
+[3]: /monitors/create/configuration/#advanced-alert-conditions
+[4]: /monitors/notify/
