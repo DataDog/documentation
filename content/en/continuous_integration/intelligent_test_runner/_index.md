@@ -28,7 +28,7 @@ By only running tests on relevant code, when tests fail, it is likely a legitima
 During the beta of Intelligent Test Runner there are certain limitations:
 
 - Some of the environment variables required in the following sections are only required during the beta.
-- Intelligent Test Runner only works without the Datadog Agent. The configuration steps in this page cause the Datadog Library to send data directly to the backend without going through the Agent. If you are currently using the Agent, you will lose correlation with host metrics.
+- Intelligent Test Runner can work Agentless or using the Datadog Agent. The configuration steps in this page are for Agentless. To use ITR with the Datadog Agent, the minimum required versions are v6.40+/v7.40+.
 - There are known limitations in the current implementation of Intelligent Test Runner that can cause it to skip tests that should be run. Intelligent Test Runner is not able to detect:
   - Changes in library dependencies.
   - Changes in compiler options.
