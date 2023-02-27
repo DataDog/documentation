@@ -693,7 +693,7 @@ For optional HTTPS support, also add:
 ```
 
 If you are using load balancers with your services, enable additional cloud integrations to allow Universal Service Monitoring to discover cloud-managed entities.
-* Install the [AWS Integration][2] for visibility in AWS Load Balancer. **you must enable ENI and EC2 metric collection**
+* Install the [AWS Integration][2] for visibility in AWS Load Balancer. You must also enable ENI and EC2 metric collection.
 
 Then, add the following tags to each load balancer:
 ```shell
