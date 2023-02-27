@@ -56,20 +56,20 @@ This guide walks you through setting up the following workflow, where the Observ
 
 ## Installing the Observability Pipelines Worker
 ### Download the Helm chart
-Download the Helm chart for your cloud provider.
+
 {{< tabs >}}
 {{% tab "AWS EKS" %}}
-[Helm Chart][1]
+Download the [Helm chart][1] for AWS EKS. 
 
 [1]: /resources/yaml/observability_pipelines/quickstart/aws_eks.yaml
 {{% /tab %}}
 {{% tab "Azure AKS" %}}
-[Helm Chart][1]
+Download the [Helm chart][1] for Azure AKS. 
 
 [1]: /resources/yaml/observability_pipelines/quickstart/azure_aks.yaml
 {{% /tab %}}
 {{% tab "Google GKE" %}}
-[Helm Chart][1]
+Download the [Helm chart][1] for Google GKE. 
 
 [1]: /resources/yaml/observability_pipelines/quickstart/google_gke.yaml
 {{% /tab %}}
@@ -97,7 +97,7 @@ The provided Helm configuration tries to simplify load balancing, but you must t
 
 {{< tabs >}}
 {{% tab "AWS EKS" %}}
-NLBs provisioned by the [AWS Load Balancer Controller][7] are used. It provides
+NLBs provisioned by the [AWS Load Balancer Controller][1] are used. It provides
 more flexibility and accuracy than the in-tree controller that AWS provides.
 
 The sample configurations do not enable the "cross-zone load balancing" feature available in this controller. To enable it, add the following annotation to the `service` block:
@@ -106,9 +106,10 @@ The sample configurations do not enable the "cross-zone load balancing" feature 
 service.beta.kubernetes.io/aws-load-balancer-attributes: load_balancing.cross_zone.enabled=true
 ```
 
-[See the AWS LB Controller page for more details.][1]
+[See the AWS LB Controller page for more details.][2]
 
-[1]: https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/guide/service/annotations/#load-balancer-attributes
+[1]: https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/
+[2]: https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/guide/service/annotations/#load-balancer-attributes
 {{% /tab %}}
 {{% tab "Azure AKS" %}}
 No special requirements are needed for Azure AKS.
