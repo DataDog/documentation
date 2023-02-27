@@ -122,7 +122,6 @@ build_preview:
     - ./node_modules/.bin/jest --testPathPattern=assets/scripts/tests/
     - yarn run prebuild
     - build_site
-    - in-isolation create_artifact_cached
     # remove service_checks json as we don't need to s3 push that..
     - rm -rf data/service_checks
     - in-isolation deploy_site > logs/deploy.txt
