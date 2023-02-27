@@ -312,17 +312,19 @@ If you've configured the profiler and don't see profiles in the profile search p
 
 {{% tab "Windows" %}}
 
+The default profiler log directory is `%ProgramData%\Datadog .NET Tracer\logs\`. Prior to v2.24, the default directory was `%ProgramData%\Datadog-APM\logs\DotNet`.
+
 1. Check that the Agent is installed and running and is visible in the Windows Services panel.
 
 2. Check that the profiler has been loaded from the loader log:
 
-   1. Open the `dotnet-native-loader-<Application Name>-<pid>` log file in the `%ProgramData%\Datadog-APM\logs\DotNet` folder.
+   1. Open the `dotnet-native-loader-<Application Name>-<pid>` log file from the default log folder.
 
    2. Look for `CorProfiler::Initialize: Continuous Profiler initialized successfully.` near the end. If the `initialized successfully` message is not present, enable debug logs by setting the `DD_TRACE_DEBUG` environment variable for the application.
 
    3. Restart the application.
 
-   4. Open the `dotnet-native-loader-<Application Name>-<pid>` log file in the `%ProgramData%\Datadog-APM\logs\DotNet` folder.
+   4. Open the `dotnet-native-loader-<Application Name>-<pid>` log file from the default log folder.
 
    5. Look for the `#Profiler` entry.
 
@@ -342,7 +344,7 @@ If you've configured the profiler and don't see profiles in the profile search p
 
    1. If debug logs were not enabled in step 2.2, set the `DD_TRACE_DEBUG` environment variable to `true` for the application and restart it.
 
-   2. Open the `DD-DotNet-Profiler-Native-<Application Name>-<pid>` log file in the `%ProgramData%\Datadog-APM\logs\DotNet` folder.
+   2. Open the `DD-DotNet-Profiler-Native-<Application Name>-<pid>` log file from the default log folder.
 
    3. Look for `libddprof error: Failed to send profile.` entries: This message means that it can't contact the agent. Ensure the `DD_TRACE_AGENT_URL` is set to the correct Agent URL. See [Enabling the .NET Profiler-Configuration][1] for more information.
 
