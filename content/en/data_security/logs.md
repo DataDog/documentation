@@ -71,7 +71,7 @@ Datadog allows customers to send logs to PCI DSS compliant Datadog organizations
 
 If you have any questions about how the Log Management service satisfies the applicable requirements under PCI DSS, contact your account manager.
 
-To enable PCI compliance for APM, see [PCI DSS compliance for APM][5]
+To enable PCI compliance for APM, see [PCI DSS compliance for APM][5].
 
 [1]: /getting_started/site/
 [2]: /help/
