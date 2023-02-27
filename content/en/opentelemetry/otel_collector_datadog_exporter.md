@@ -129,7 +129,7 @@ To get better metadata for traces and for smooth integration with Datadog:
 
 ### 4. Configure the logger for your application
 
-{{< img src="logs/log_collection/otel_collector_logs.png" alt="A diagram showing the host, container, or application sending data the filelog receiver in the collector and the Datadog Exporter in the collector sending the data to the Datadog backend" style="width:100%;">}}
+{{< img src="logs/log_collection/otel_collector_logs.png" alt="A diagram showing the host, container, or application sending data to the filelog receiver in the collector and the Datadog Exporter in the collector sending the data to the Datadog backend" style="width:100%;">}}
 
 Since the OpenTelemetry SDKs' logging functionality is not fully supported (see your specific language in the [OpenTelemetry documentation][11] for more information), Datadog recommends using a standard logging library for your application. Follow the language-specific [Log Collection documentation][12] to set up the appropriate logger in your application. Datadog strongly encourages setting up your logging library to output your logs in JSON to avoid the need for [custom parsing rules][13]. 
 
