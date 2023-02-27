@@ -12,7 +12,7 @@ private: true
 The features described on this page are in beta. Contact your Customer Success Manager to learn more about them.
 </div>
 
-This guide assumes that you have configured [Datadog Monitoring][1] and are using [APM][2].
+This guide assumes that you have configured [Database Monitoring][1] and are using [APM][2].
 
 ## Before you begin
 
