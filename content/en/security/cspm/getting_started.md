@@ -104,6 +104,8 @@ Use one of the following methods to enable CSPM for your GCP projects:
 3. On the **Setup & Configuration** > **Cloud Providers** tab, click the **[GCP][4]** tile.
 4. Enable CSPM for your GCP projects by turning on the **CSPM Enabled** toggle.
 
+**Note**: If you do not see any data on the CSPM overview page, you may not have set up your GCP integration correctly. See the [GCP metric collection][2] instructions for more information.
+
 ### GCP integration tile
 
 1. On the GCP integration tile, select a GCP project.

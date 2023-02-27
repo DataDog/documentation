@@ -86,8 +86,8 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 [1]: /integrations/process/
 [2]: https://app.datadoghq.com/monitors#create/process
-[3]: /monitors/create/configuration/#advanced-alert-conditions
-[4]: /monitors/create/configuration/#no-data
-[5]: /monitors/create/configuration/#auto-resolve
-[6]: /monitors/create/configuration/#new-group-delay
+[3]: /monitors/configuration/#advanced-alert-conditions
+[4]: /monitors/configuration/#no-data
+[5]: /monitors/configuration/#auto-resolve
+[6]: /monitors/configuration/#new-group-delay
 [7]: /monitors/notify/

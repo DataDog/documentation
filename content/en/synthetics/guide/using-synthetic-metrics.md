@@ -63,6 +63,6 @@ This guide demonstrates how to set up a metric monitor using a general metric su
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /synthetics/metrics/
-[2]: /monitors/create/types/metric/
+[2]: /monitors/types/metric/
 [3]: /synthetics/guide/synthetic-test-monitors/
 [4]: https://app.datadoghq.com/monitors/create/metric

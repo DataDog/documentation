@@ -136,9 +136,9 @@ See the documentation for [process check][1], [integration check][2], and [custo
 
 
 
-[1]: /monitors/create/types/process_check/
-[2]: /monitors/create/types/integration/?tab=checkalert#integration-status
-[3]: /monitors/create/types/custom_check/
+[1]: /monitors/types/process_check/
+[2]: /monitors/types/integration/?tab=checkalert#integration-status
+[3]: /monitors/types/custom_check/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -263,7 +263,7 @@ Use this section to configure notifications to your team and configure how to se
 
   For more information on the configuration options for the notification message, see [Alerting Notifications][7].
 
-### Notification aggregation
+### Alert grouping
 
 Alerts are grouped automatically based on your selection of the `group by` step when defining your query. If the query has no grouping, it defaults to `Simple Alert`. If the query is grouped by any dimension, grouping changes to `Multi Alert`.
 
@@ -293,8 +293,8 @@ If you configure tags or dimensions in your query, these values are available fo
 [1]: /monitors/types
 [2]: /monitors/notify/variables/?tab=is_alert#tag-variables
 [3]: /monitors/notify/#renotify
-[4]: /monitors/create/configuration#auto-resolve
-[5]: /monitors/create/configuration/?tabs=othermonitortypes#no-data
+[4]: /monitors/configuration/?tab=thresholdalert#auto-resolve
+[5]: /monitors/configuration/?tabs=othermonitortypes#no-data
 [6]: /monitors/notify/#notify-your-team
 [7]: /monitors/notify/#say-whats-happening
 [8]: /monitors/notify/variables/

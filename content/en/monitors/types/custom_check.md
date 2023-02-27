@@ -99,8 +99,8 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 [4]: /api/v1/service-checks/
 [5]: /developers/service_checks/#overview
 [6]: https://app.datadoghq.com/monitors/create/custom
-[7]: /monitors/create/configuration/#advanced-alert-conditions
-[8]: /monitors/create/configuration/#no-data
-[9]: /monitors/create/configuration/#auto-resolve
-[10]: /monitors/create/configuration/#new-group-delay
+[7]: /monitors/configuration/#advanced-alert-conditions
+[8]: /monitors/configuration/#no-data
+[9]: /monitors/configuration/#auto-resolve
+[10]: /monitors/configuration/#new-group-delay
 [11]: /monitors/notify/

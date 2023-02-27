@@ -143,7 +143,7 @@ Read more about ingestion reasons in the [Ingestion Mechanisms documentation][2]
 [3]: /tracing/metrics/metrics_namespace/
 [4]: /opentelemetry/guide/ingestion_sampling_with_opentelemetry/
 [5]: /tracing/trace_pipeline/generate_metrics/
-[6]: /monitors/create/types/apm/?tab=analytics
+[6]: /monitors/types/apm/?tab=analytics
 [7]: /tracing/trace_pipeline/ingestion_mechanisms/#head-based-sampling
 [8]: /tracing/trace_pipeline/metrics/
 [9]: /tracing/trace_pipeline/ingestion_mechanisms/#error-traces

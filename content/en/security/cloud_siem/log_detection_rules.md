@@ -270,8 +270,22 @@ The severity decrement is applied to signals with an environment tag starting wi
 
 {{% cloud-siem-rule-say-whats-happening %}}
 
+## Rule deprecation
+
+Regular audits of all out-of-the-box detection rules are performed to maintain high fidelity signal quality. Deprecated rules are replaced with an improved rule.
+
+The rule deprecation process is as follows:
+
+1. There is a warning with the deprecation date on the rule. In the UI, the warning is shown in the: 
+    - Signal side panel's **Rule Details > Playbook** section 
+    - [Rule editor][4] for that specific rule 
+2. Once the rule is deprecated, there is a 15 month period before the rule is deleted. This is due to the signal retention period of 15 months. During this time, you can re-enable the rule by [cloning the rule][4] in the UI.
+3. Once the rule is deleted, you can no longer clone and re-enable it.
+
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/notifications/variables/
 [2]: /security/notifications/variables/#template-variables
+[3]: /security/default_rules/#cat-cloud-siem-log-detection
+[4]: /security/detection_rules/#rule-and-generated-signal-options

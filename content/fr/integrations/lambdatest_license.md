@@ -12,6 +12,7 @@ categories:
 - issue tracking
 - automation
 - testing
+- marketplace
 - cloud
 - collaboration
 dependencies: []
@@ -48,6 +49,7 @@ tile:
   - Category::Issue Tracking
   - Category::Automation
   - Category::Testing
+  - Category::Marketplace
   - Category::Cloud
   - Category::Collaboration
   configuration: README.md#Setup

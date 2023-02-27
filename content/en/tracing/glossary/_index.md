@@ -200,7 +200,7 @@ When child spans are concurrent, execution time is calculated by dividing the ov
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/create/types/apm/
+[1]: /monitors/types/apm/
 [2]: /developers/guide/data-collection-resolution-retention/
 [3]: /tracing/setup/
 [4]: /tracing/services/services_list/

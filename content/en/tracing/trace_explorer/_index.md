@@ -132,7 +132,7 @@ All spans indexed by custom retention filters (*not* the intelligent retention f
 From the timeseries view, export your query to a [dashboard][1], a [monitor][2] or a [notebook][3] to investigate further or to alert automatically when an aggregate number of spans crosses a specific threshold.
 
 [1]: /dashboards/widgets/timeseries/
-[2]: /monitors/create/types/apm/?tab=analytics
+[2]: /monitors/types/apm/?tab=analytics
 [3]: /notebooks
 {{% /tab %}}
 {{< /tabs >}}

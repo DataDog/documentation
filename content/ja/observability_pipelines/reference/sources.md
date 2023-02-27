@@ -2,7 +2,6 @@
 aliases:
 - /ja/integrations/observability_pipelines/guide/
 - /ja/observability_pipelines/integrations/
-- /ja/observability_pipelines/reference/
 title: ソース
 ---
 

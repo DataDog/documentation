@@ -287,7 +287,7 @@ The .NET Tracer supports the following styles:
 
 - Datadog: `Datadog`
 - B3 Multi Header: `b3multi` (`B3` is deprecated)
-- W3C (TraceParent): `tracecontext` (`W3C` is deprecated)
+- W3C: `tracecontext` (`W3C` is deprecated)
 - B3 Single Header: `B3 single header` (`B3SingleHeader` is deprecated)
 
 You can use the following environment variables to configure injection and extraction styles:

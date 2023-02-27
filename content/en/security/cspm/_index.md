@@ -45,7 +45,7 @@ Use template variables and Markdown to [customize notification messages][9]. Edi
 
 ## Review and remediate findings
 
-Investigate details using the [Security Findings Explorer][10]. View detailed information about a resource, such as configuration, detection rules applied to the resource, and tags that provide additional context about who owns the resource and its location within your environment.  If a finding does not match your business use case or is an accepted risk, you can [mute the finding][13] up to an indefinite period of time.
+Investigate details using the [Security Findings Explorer][10]. View detailed information about a resource, such as configuration, detection rules applied to the resource, and tags that provide additional context about who owns the resource and its location within your environment. If a finding does not match your business use case or is an accepted risk, you can [mute the finding][13] up to an indefinite period of time.
 
 {{< img src="security/cspm/security_findings_explorer.png" alt="Cloud Security Posture Management security findings explorer" width="100%">}}
 
