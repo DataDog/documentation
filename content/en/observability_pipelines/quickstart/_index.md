@@ -20,24 +20,26 @@ This guide walks you through a simple deployment of Observability Pipelines to g
 
 ## Assumptions
 * You are already using Datadog and want to use Observability Pipelines (OP).
-* Your services are deployed to a Kubernetes cluster in Amazon Elastic Kubernetes Servuce (EKS), Azure Kubernetes Service (AKS), or Google Kubernetes Engine (GKE).
+* Your services are deployed to a Kubernetes cluster in Amazon Elastic Kubernetes Service (EKS), Azure Kubernetes Service (AKS), or Google Kubernetes Engine (GKE).
 * You have administrative access to the cluster(s) where the Observability Pipelines Worker is going to be deployed, as well as the workloads that are going to be aggregated.
 
 # Prerequisites
 Before installing, make sure you have:
 
-* A valid [Datadog API key](/account_management/api-app-keys/#api-keys).
+* A valid [Datadog API key][1].
 * An Observability Pipelines Configuration ID.
 
-You can generate both of these in [Observability Pipelines](https://app.datadoghq.com/observability-pipelines/create).
+You can generate both of these in [Observability Pipelines][2].
 
 To run the Worker on your Kubernetes nodes, you need a minimum of two nodes with one CPU and 512MB RAM available. Datadog recommends creating a separate node pool for the workers, which is also the recommended configuration for production deployments.
 
 ## Provider-specific requirements
 {{< tabs >}}
 {{% tab "AWS EKS" %}}
-* The [AWS Load Balancer controller](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html) is required. If you created your Amazon EKS cluster through the UI, then it is probably already installed.
+* The [AWS Load Balancer controller][1] is required. If you created your Amazon EKS cluster through the UI, then it is probably already installed.
 * Datadog recommends using Amazon EKS >= 1.16.
+
+[1]: https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html
 {{% /tab %}}
 {{% tab "Azure AKS" %}}
 There are no special requirements for Azure AKS.
@@ -59,13 +61,20 @@ This is a natural spot to deploy OP, as connectivity issues have already been wo
 Download the Helm chart for your cloud provider.
 {{< tabs >}}
 {{% tab "AWS EKS" %}}
-[Helm Chart](/resources/yaml/observability_pipelines/quickstart/aws_eks.yaml)
+[Helm Chart][1]
+
+
+[1]: /resources/yaml/observability_pipelines/quickstart/aws_eks.yaml
 {{% /tab %}}
 {{% tab "Azure AKS" %}}
-[Helm Chart](/resources/yaml/observability_pipelines/quickstart/azure_aks.yaml)
+[Helm Chart][1]
+
+[1]: /resources/yaml/observability_pipelines/quickstart/azure_aks.yaml
 {{% /tab %}}
 {{% tab "Google GKE" %}}
-[Helm Chart](/resources/yaml/observability_pipelines/quickstart/google_gke.yaml)
+[Helm Chart][1]
+
+[1]: /resources/yaml/observability_pipelines/quickstart/google_gke.yaml
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -91,7 +100,7 @@ The provided Helm configuration tries to simplify load balancing, but you must t
 
 {{< tabs >}}
 {{% tab "AWS EKS" %}}
-NLBs provisioned by the [AWS Load Balancer Controller](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/) are used. It provides
+NLBs provisioned by the [AWS Load Balancer Controller][7] are used. It provides
 more flexibility and accuracy than the in-tree controller that AWS provides.
 
 The sample configurations do not enable the "cross-zone load balancing" feature available in this controller. To enable it, add the following annotation to the `service` block:
@@ -100,7 +109,9 @@ The sample configurations do not enable the "cross-zone load balancing" feature 
 service.beta.kubernetes.io/aws-load-balancer-attributes: load_balancing.cross_zone.enabled=true
 ```
 
-[See the AWS LB Controller page for more details.](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/guide/service/annotations/#load-balancer-attributes)
+[See the AWS LB Controller page for more details.][1]
+
+[1]: https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/guide/service/annotations/#load-balancer-attributes
 {{% /tab %}}
 {{% tab "Azure AKS" %}}
 No special requirements are needed for Azure AKS.
@@ -169,3 +180,7 @@ At this point, your environment is configured for Observability Pipelines with d
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
+
+
+[1]: /account_management/api-app-keys/#api-keys
+[2]: https://app.datadoghq.com/observability-pipelines/create
