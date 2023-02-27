@@ -27,9 +27,8 @@ You can monitor your functions running in AWS Lambda with Datadog Application Se
 In general, setting up ASM for AWS Lambda involves:
 
 1. Identifying functions that are vulnerable or are under attack, which would most benefit from ASM. Find them on [the Security tab of your Service Catalog][1].
-2. Setting up ASM instrumentation by using the [Datadog Serverless Framework plugin][6] or manually setting the ARN.
-3. Enabling the library to collect the application security data from the functions and send it to Datadog.
-4. Triggering security signals in your application and seeing how Datadog displays the resulting information.
+2. Setting up ASM instrumentation by using the [Datadog Serverless Framework plugin][6] or manually setting the different layers.
+3. Triggering security signals in your application and seeing how Datadog displays the resulting information.
 
 ## Prerequisites
 
