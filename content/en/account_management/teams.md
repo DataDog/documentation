@@ -6,7 +6,7 @@ kind: documentation
 ## Overview
 Datadog Teams allow groups of users to organize their team assets within Datadog and automatically filter their Datadog-wide experience to prioritize these assets.
 
-Use Teams to link resources such as dashboards, services, monitors, and incidents to a group of users. You can also add team-specific links to Slack channels, Jira boards, and GitHub repositories.
+Use Teams to link resources such as dashboards, services, monitors, and incidents to a group of users. You can also add team-specific links to Slack channels, Jira boards, GitHub repositories, etc.
 
 Team membership is flexible. Users can join teams or be added by an administrator. Users can belong to multiple teams. 
 
@@ -14,7 +14,7 @@ Team membership is flexible. Users can join teams or be added by an administrato
 
 ### Navigation
 
-To find the [Team directory page][1]: 
+To find the [team directory page][1]:
 
 1. Navigate to **Organization Settings** from your account menu.
 1. Under **Groups**, select **Teams**.
