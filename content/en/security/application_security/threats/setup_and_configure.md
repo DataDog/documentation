@@ -242,8 +242,8 @@ Support for query strings is not available for Flask.
 
 ### Version dependencies
 
-Lambda Extension version: `39`
-Serverless plugin version: `5.19.0`
+- Lambda Extension version: `39`
+- Serverless plugin version: `5.19.0`
 
 ### Supported languages and their requirements
 
