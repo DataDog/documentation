@@ -33,7 +33,7 @@ further_reading:
 
 After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][4].
 
-{{< img src="tracing/dotnet/diagram_docs_net.png" alt=".NET Tracer configuration setting precedence"  >}}
+{{< img src="tracing/dotnet/dotnet_core_configuration.png" alt=".NET Core Tracer configuration setting precedence" style="width:100%" >}}
 
 You can set configuration settings in the .NET Tracer with any of the following methods:
 
@@ -58,7 +58,7 @@ To configure the tracer in application code, create a `TracerSettings` instance 
 using Datadog.Trace;
 using Datadog.Trace.Configuration;
 
-// read default configuration sources (env vars, web.config, datadog.json)
+// read default configuration sources (env vars or datadog.json)
 var settings = TracerSettings.FromDefaultSources();
 
 // change some settings

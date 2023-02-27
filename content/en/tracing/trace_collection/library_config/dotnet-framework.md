@@ -36,9 +36,7 @@ further_reading:
 
 After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][4].
 
-
-{{< img src="tracing/dotnet/diagram_docs_net.png" alt=".NET Tracer configuration setting precedence"  >}}
-
+{{< img src="tracing/dotnet/dotnet_framework_configuration.png" alt=".NET Framework Tracer configuration setting precedence" style="width:100%" >}}
 
 You can set configuration settings in the .NET Tracer with any of the following methods:
 
