@@ -42,15 +42,18 @@ You can [create event rules][5] that define what suspicious behavior looks like 
 
 ## Slow down attacks
 
-<div class="alert alert-info">One-click IP blocking is in beta.</div>
+<div class="alert alert-info"><strong>Beta: IP and user blocking</strong><br>
+If your service is running with <a href="/agent/guide/how_remote_config_works/#enabling-remote-configuration">an Agent with Remote Configuration enabled and a tracing library version that supports it</a>, you can block attackers from the Datadog UI without additional configuration of the Agent or tracing libraries.</div>
 
 Datadog ASM offers built-in protection capabilities to slow down attacks and attackers. 
 
-IP blocking actions are implemented through the [tracing libraries][7], and do not introduce any new dependencies in your stack. IP blocks are saved in the Datadog platform automatically, and securely fetched by the [Datadog Agent][8], deployed in your infrastructure, and applied to your application.
+IP and user blocking actions are implemented through the [tracing libraries][7], and do not introduce any new dependencies in your stack. Blocks are saved in the Datadog platform automatically, and securely fetched by the [Datadog Agent][8], deployed in your infrastructure, and applied to your application.
 
-You can block attackers' IPs that are flagged in ASM Security Signals temporarily or permanently in the Datadog UI. From there, all services already protected by ASM block incoming requests performed by the blocked IP, for the specified duration. All blocked traces are tagged with `security_response.block_ip` and displayed in the [Trace Explorer][9]. Services where ASM is disabled aren't protected.
+You can block attackers that are flagged in ASM Security Signals temporarily or permanently. In the Signals Explorer, click into a signal to see what users and IP addresses are generating the signal, and optionally block them.
 
-{{< img src="/security/application_security/asm-blocking-ui.png" alt="A security signal panel in Datadog ASM, allowing to block the attackers' IPs" width="75%">}}
+{{< img src="/security/application_security/appsec-block-user-ip.png" alt="A security signal panel in Datadog ASM, allowing to block the attackers' IPs" width="75%">}}
+
+From there, all services already protected by ASM block incoming requests performed by the blocked IP or user, for the specified duration. All blocked traces are tagged with `security_response.block_ip` and displayed in the [Trace Explorer][9]. Services where ASM is disabled aren't protected.
 
 {{% asm-protection-page-configuration %}}
 
