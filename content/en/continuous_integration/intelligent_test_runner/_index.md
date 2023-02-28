@@ -45,7 +45,7 @@ Prior to setting up Intelligent Test Runner, you must have finished setting up [
 
 To enable Intelligent Test Runner, the following environment variables need to be set:
 
-`DD_CIVISIBILITY_AGENTLESS_ENABLED=true`
+`DD_CIVISIBILITY_AGENTLESS_ENABLED`
 : Enables or disables Agentless mode.<br/>
 **Default**: `false`<br/>
 
@@ -100,7 +100,7 @@ Intelligent test runner for Javascript skips entire _test suites_ (test files) r
 
 To enable Intelligent Test Runner, the version of the `dd-trace` tool must be >= 2.22.0 (execute `dd-trace --version` to get the version of the tool) and the following environment variables must be set:
 
-`DD_CIVISIBILITY_AGENTLESS_ENABLED=true`
+`DD_CIVISIBILITY_AGENTLESS_ENABLED`
 : Enables or disables Agentless mode.<br/>
 **Default**: `false`<br/>
 
