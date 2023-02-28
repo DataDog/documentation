@@ -123,7 +123,7 @@ build_preview:
     - yarn run prebuild
     - build_site
     # remove service_checks json as we don't need to s3 push that..
-    - rm -rf data/service_checks
+    # - rm -rf data/service_checks
     - in-isolation deploy_site > logs/deploy.txt
     # remove static images so we can skip from artifact passed in gitlab
     - in-isolation create_artifact_cached
