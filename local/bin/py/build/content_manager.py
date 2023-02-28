@@ -215,10 +215,6 @@ def extract_sourced_and_cached_content_from_pull_config(self, configuration):
                 else:
                     output_content = content.get('options', {}).get('output_content', True)
                     
-                    if output_content == False:
-                        print('output_content false!')
-                        print(content)
-                    
                     if output_content != False:
                         self.list_of_cached_contents.append(content)
 
@@ -275,7 +271,7 @@ def download_cached_content_into_repo(self):
             raise ValueError(f'Action {action} unsupported, cannot copy from cache.')
 
         if destination != '':
-            print(f'Copying {self.relative_en_content_path}{destination} directory from cache')
+            print(f'Copying {self.relative_en_content_path}{destination} from cache')
             shutil.copytree(f'temp/{self.relative_en_content_path}{destination}', f'{self.relative_en_content_path}{destination}', dirs_exist_ok=True)
 
     # Integrations are handled separately for now (there is active work underway to improve this)
@@ -285,20 +281,8 @@ def download_cached_content_into_repo(self):
         
         # Copying generated data files
         if os.path.isdir('temp/data'):
+            print('Copying generated data from cache...')
             shutil.copytree('temp/data', 'data', dirs_exist_ok=True)
-
-
-        # Copying integrations metrics, service checks, and npm integrations data
-        # print('Copying integrations data from cache...')
-        # if os.path.isdir('temp/data/integrations'):
-        #     shutil.copytree('temp/data/integrations', 'data/integrations', dirs_exist_ok=True)
-
-        # if os.path.isdir('temp/data/service_checks'):
-        #     shutil.copytree('temp/data/service_checks', 'data/service_checks', dirs_exist_ok=True)
-
-        # if os.path.isdir('temp/data/npm'):
-        #     shutil.copytree('temp/data/npm', 'data/npm', dirs_exist_ok=True)
-
 
     # Cleanup temporary dir after cache download complete
     # if os.path.isdir('temp'):
