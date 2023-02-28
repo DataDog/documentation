@@ -43,7 +43,7 @@ You can [create event rules][5] that define what suspicious behavior looks like 
 ## Slow down attacks
 
 <div class="alert alert-info"><strong>Beta: IP and user blocking</strong><br>
-If your service is running with <a href="/agent/guide/how_remote_config_works/#enabling-remote-configuration">an Agent with Remote Configuration enabled and a tracing library version that supports it</a>, you can block attackers from the Datadog UI without additional configuration of the Agent or tracing libraries.</div>
+If your service is running <a href="/agent/guide/how_remote_config_works/#enabling-remote-configuration">an Agent with Remote Configuration enabled and a tracing library version that supports it</a>, you can block attackers from the Datadog UI without additional configuration of the Agent or tracing libraries.</div>
 
 Datadog ASM offers built-in protection capabilities to slow down attacks and attackers. 
 
