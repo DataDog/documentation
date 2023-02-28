@@ -93,7 +93,7 @@ CSPM は、AWS、Azure、GCP、Docker、Kubernetes などのクラウドプロ�
 
 [Google Cloud Platform インテグレーション][1]のセットアップがまだの場合は、先にセットアップを行い、[メトリクスの収集][2]を有効にするための手順が正常に完了したことを確認してください。
 
-### CCP に対して CSPM を有効にする
+### GCP に対して CSPM を有効にする
 
 次のいずれかの方法で、GCP プロジェクトに対して CSPM を有効にします。
 
@@ -103,6 +103,8 @@ CSPM は、AWS、Azure、GCP、Docker、Kubernetes などのクラウドプロ�
 2. [アプリ内の説明][3]に従い、アカウントに対して CSPM を有効にします。
 3. **Setup & Configuration** > **Cloud Providers** タブで、**[GCP][4]** タイルをクリックします。
 4. **CSPM Enabled** のトグルをオンにして、GCP プロジェクトに対して CSPM を有効にします。
+
+**注**: CSPM の概要ページにデータが表示されない場合、GCP インテグレーションが正しく設定されていない可能性があります。詳しくは、[GCP メトリクスの収集][2]の説明を参照してください。
 
 ### GCP インテグレーションタイル
 
@@ -115,7 +117,7 @@ CSPM は、AWS、Azure、GCP、Docker、Kubernetes などのクラウドプロ�
 [3]: https://app.datadoghq.com/security/configuration
 [4]: https://app.datadoghq.com/security/configuration?sectionId=secureCloudEnvironment&secure-cloud-environment=google-cloud-platform
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "Docker" %}}
 
@@ -130,7 +132,7 @@ CSPM は、AWS、Azure、GCP、Docker、Kubernetes などのクラウドプロ�
 [1]: https://app.datadoghq.com/security/configuration
 [2]: https://app.datadoghq.com/security/configuration?sectionId=secureHostsAndContainers&secure-cloud-environment=google-cloud-platform&secure-hosts-and-containers=docker
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "Kubernetes" %}}
 
