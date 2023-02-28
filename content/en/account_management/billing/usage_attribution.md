@@ -78,22 +78,9 @@ Once the reports start to be generated, they are updated daily and aggregated mo
 
 Monthly data can also be pulled using the tool's public API. For more information, see the [API endpoint documentation][1].
 
+### Hourly usage attribution
 
-{{% site-region region="us,eu" %}}
-### Daily usage attribution
-
-<div class="alert alert-warning">Datadog plans to deprecate daily usage attribution reports on February 1, 2023. As an alternative, use the <a href="/api/latest/usage-metering/#get-hourly-usage-attribution">hourly usage attribution API endpoint</a>.</div>
-
-This section provides daily reports at an hourly granularity to dig into time frames. It also provides a concatenation of all reports during a given month.
-
-- Clicking on a specific time period expands a view on the right where reports can be downloaded as a TSV file.
-- Data can be downloaded daily or at the end of the month.
-
-{{< img src="account_management/billing/usage_attribution/daily-usage-attribution.png" alt="Daily Usage Attribution data" style="width:100%;" >}}
-
-Daily data can also be pulled using the tool's public API. For more information, see the [API endpoint documentation][2].
-
-{{% /site-region %}}
+Hourly data can be pulled using the tool's public API. For more information, see the [API endpoint documentation][2].
 
 ### Interpreting the data
 
@@ -112,7 +99,7 @@ The table below shows a sample daily report for Infra usage by two tags: `app` a
 
 #### Further data analysis
 
-When using multiple tags, both the Daily and Monthly Usage Attribution reports contain data for all possible combinations of those tags, and are suitable to use as base datasets for further data analysis tasks. For instance, you can use grouping or pivoting to produce views focused on a subset of the tags, or to perform aggregations across custom date ranges.
+When using multiple tags, both the Hourly and Monthly Usage Attribution reports contain data for all possible combinations of those tags, and are suitable to use as base datasets for further data analysis tasks. For instance, you can use grouping or pivoting to produce views focused on a subset of the tags, or to perform aggregations across custom date ranges.
 
 ## Tracking usage
 
