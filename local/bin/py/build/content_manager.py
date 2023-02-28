@@ -213,7 +213,14 @@ def extract_sourced_and_cached_content_from_pull_config(self, configuration):
 
                     self.list_of_sourced_contents.append(content_temp)
                 else:
-                    self.list_of_cached_contents.append(content)
+                    output_content = content.get('options', {}).get('output_content', True)
+                    
+                    if output_content == False:
+                        print('output_content false!')
+                        print(content)
+                    
+                    if output_content != False:
+                        self.list_of_cached_contents.append(content)
 
 
 def prepare_content(self, configuration, github_token, extract_dir):
@@ -236,7 +243,7 @@ def prepare_content(self, configuration, github_token, extract_dir):
 
 
 def download_and_extract_cached_files_from_s3():
-    s3_url = f'https://origin-static-assets.s3.amazonaws.com/build_artifacts/master/latest-cached.tar.gz'
+    s3_url = f'https://origin-static-assets.s3.amazonaws.com/build_artifacts/brian.deutsch/image-update/latest-cached.tar.gz'
     artifact_download_response = requests.get(s3_url, stream=True)
 
     with tarfile.open(mode='r|gz', fileobj=artifact_download_response.raw) as artifact_tarfile:
@@ -252,20 +259,14 @@ def download_cached_content_into_repo(self):
         destination = ''
 
         if action == 'pull-and-push-file':
-            dest_path = content.get('options', {}).get('dest_path', '')
-            dest_file_name = content.get('options', {}).get('file_name', '')
-            full_dest_path = ''
+            dest_path = content.get('options', {}).get('dest_path')
+            dest_file_name = content.get('options', {}).get('file_name')
+            full_dest_path = f'{self.relative_en_content_path}{dest_path}{dest_file_name}'
 
             if dest_file_name.endswith('.md'):
-                full_dest_path = f'{self.relative_en_content_path}{dest_path}{dest_file_name}'
                 os.makedirs(os.path.dirname(full_dest_path), exist_ok=True)
-            elif dest_file_name.endswith('.yaml') or dest_file_name.endswith('.json'):
-                full_dest_path = f'data/{dest_file_name}'
-            else:
-                raise ValueError(f'File type unsupported, cannot copy from cache.')
-
-            print(f'Copying {full_dest_path} from cache')
-            shutil.copy(f'temp/{full_dest_path}', full_dest_path)
+                print(f'Copying {full_dest_path} from cache')
+                shutil.copy(f'temp/{full_dest_path}', full_dest_path)
         elif action == 'pull-and-push-folder':
             destination = content.get('options', {}).get('dest_dir', '')
         elif action in ('workflows', 'security-rules'):
@@ -282,16 +283,21 @@ def download_cached_content_into_repo(self):
         print('Copying integrations from cache...')
         shutil.copytree(f'temp/{self.relative_en_content_path}/integrations', f'{self.relative_en_content_path}/integrations', dirs_exist_ok=True)
         
+        # Copying generated data files
+        if os.path.isdir('temp/data'):
+            shutil.copytree('temp/data', 'data', dirs_exist_ok=True)
+
+
         # Copying integrations metrics, service checks, and npm integrations data
-        print('Copying integrations data from cache...')
-        if os.path.isdir('temp/data/integrations'):
-            shutil.copytree('temp/data/integrations', 'data/integrations', dirs_exist_ok=True)
+        # print('Copying integrations data from cache...')
+        # if os.path.isdir('temp/data/integrations'):
+        #     shutil.copytree('temp/data/integrations', 'data/integrations', dirs_exist_ok=True)
 
-        if os.path.isdir('temp/data/service_checks'):
-            shutil.copytree('temp/data/service_checks', 'data/service_checks', dirs_exist_ok=True)
+        # if os.path.isdir('temp/data/service_checks'):
+        #     shutil.copytree('temp/data/service_checks', 'data/service_checks', dirs_exist_ok=True)
 
-        if os.path.isdir('temp/data/npm'):
-            shutil.copytree('temp/data/npm', 'data/npm', dirs_exist_ok=True)
+        # if os.path.isdir('temp/data/npm'):
+        #     shutil.copytree('temp/data/npm', 'data/npm', dirs_exist_ok=True)
 
 
     # Cleanup temporary dir after cache download complete
