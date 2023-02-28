@@ -97,16 +97,8 @@ def download_content_from_external_source(self, content):
     Content will be pulled from external source if:
         * cache is disabled
         * this is a local run or master pipeline
-        * generated file is not .md (this includes npm-integrations), which is currently unsupported.
     """
-    file_name = content.get('options', {}).get('file_name', '')
-    action = content.get('action', '')
-
-    return (self.cache_enabled == False) or (getenv('CI_COMMIT_REF_NAME') == 'master')
-        # or (action == 'npm-integrations') \
-        # or (file_name != '' and not file_name.endswith('.md')) \
-        # or (getenv('CI_COMMIT_REF_NAME') == 'master')
-        # or (getenv("CI_COMMIT_REF_NAME") in (None, 'master'))
+    return (self.cache_enabled == False) or (getenv('CI_COMMIT_REF_NAME') in (None, 'master'))
 
 
 def fetch_sourced_content_from_local_or_upstream(self, github_token, extract_dir):
@@ -239,7 +231,7 @@ def prepare_content(self, configuration, github_token, extract_dir):
 
 
 def download_and_extract_cached_files_from_s3():
-    s3_url = f'https://origin-static-assets.s3.amazonaws.com/build_artifacts/brian.deutsch/image-update/latest-cached.tar.gz'
+    s3_url = f'https://origin-static-assets.s3.amazonaws.com/build_artifacts/master/latest-cached.tar.gz'
     artifact_download_response = requests.get(s3_url, stream=True)
 
     with tarfile.open(mode='r|gz', fileobj=artifact_download_response.raw) as artifact_tarfile:
@@ -285,5 +277,5 @@ def download_cached_content_into_repo(self):
             shutil.copytree('temp/data', 'data', dirs_exist_ok=True)
 
     # Cleanup temporary dir after cache download complete
-    # if os.path.isdir('temp'):
-    #     shutil.rmtree('temp')
+    if os.path.isdir('temp'):
+        shutil.rmtree('temp')

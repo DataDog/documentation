@@ -127,7 +127,7 @@ class Build:
             except Exception as err:
                 print(err)
 
-                # if os.path.isdir('temp'): shutil.rmtree('temp')
+                if os.path.isdir('temp'): shutil.rmtree('temp')
 
                 if not getenv("CI_COMMIT_REF_NAME"):
                     print('Downloading cached content failed, documentation is now in degraded mode.')
