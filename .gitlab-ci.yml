@@ -89,7 +89,7 @@ before_script:
       when: on_success
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:webops-site-build-13686870
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:webops-site-build-brian.deutsch_service_checks
   tags:
     - "arch:amd64"
   rules:
@@ -126,6 +126,7 @@ build_preview:
     - rm -rf data/service_checks
     - in-isolation deploy_site > logs/deploy.txt
     # remove static images so we can skip from artifact passed in gitlab
+    - in-isolation create_artifact_cached
     - remove_static_from_repo
     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_REF_NAME}> is ready for preview. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}| checks running>." "#31b834"
   artifacts:
