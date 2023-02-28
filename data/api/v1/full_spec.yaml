@@ -4297,6 +4297,7 @@ components:
       enum:
       - logs_stream
       - audit_stream
+      - ci_pipeline_stream
       - rum_issue_stream
       - apm_issue_stream
       - logs_pattern_stream
@@ -4307,6 +4308,7 @@ components:
       x-enum-varnames:
       - LOGS_STREAM
       - AUDIT_STREAM
+      - CI_PIPELINE_STREAM
       - RUM_ISSUE_STREAM
       - APM_ISSUE_STREAM
       - LOGS_PATTERN_STREAM
