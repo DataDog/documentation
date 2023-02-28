@@ -1550,7 +1550,7 @@ main:
     parent: tracing_custom_inst
     identifier: tracing_custom_inst_dotnet
     weight: 108
-  - name: Instrumenting with OpenStandards
+  - name: Instrumenting with OpenTelemetry
     url: opentelemetry/otel_tracing/
     parent: tracing_trace_collection
     identifier: tracing_open_standards
