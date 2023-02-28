@@ -64,7 +64,7 @@ That's alot of missing data - check first to see if there is an AWS outage?
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/create/types/composite/
+[1]: /monitors/types/composite/
 [2]: /api/v1/downtimes/
 [3]: /api/v1/downtimes/#cancel-downtimes-by-scope
 [4]: https://app.datadoghq.com/account/settings#integrations/webhooks

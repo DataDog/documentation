@@ -65,7 +65,6 @@ Datadog Agent release numbering follows <a href="https://semver.org/">SemVer</a>
   {{< nextlink href="/agent/troubleshooting">}}<u>Troubleshooting</u>: Find troubleshooting information for the Datadog Agent.{{< /nextlink >}}
   {{< nextlink href="/agent/guide">}}<u>Guides</u>: These are in-depth, step-by-step tutorials for using the Agent.{{< /nextlink >}}
   {{< nextlink href="/agent/security">}}<u>Security</u>: Information on the main security capabilities and features available to customers to ensure their environment is secure.{{< /nextlink >}}
-  {{< nextlink href="/observability_pipelines/guide/configure_observability_pipelines_with_datadog">}}<u>Configure Observability Pipelines with Datadog </u>: Deploy the Observability Pipelines Worker as an aggregator to collect, transform, and route all of your logs, metrics, and traces to any destination.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further Reading

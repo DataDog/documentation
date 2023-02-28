@@ -113,10 +113,10 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 [1]: /integrations/
 [2]: https://app.datadoghq.com/monitors#create/integration
-[3]: /monitors/create/types/metric/
+[3]: /monitors/types/metric/
 [4]: https://app.datadoghq.com/monitors/manage
-[5]: /monitors/create/configuration/#advanced-alert-conditions
-[6]: /monitors/create/configuration/#no-data
-[7]: /monitors/create/configuration/#auto-resolve
-[8]: /monitors/create/configuration/#new-group-delay
+[5]: /monitors/configuration/#advanced-alert-conditions
+[6]: /monitors/configuration/#no-data
+[7]: /monitors/configuration/#auto-resolve
+[8]: /monitors/configuration/#new-group-delay
 [9]: /monitors/notify/

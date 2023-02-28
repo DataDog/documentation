@@ -85,7 +85,7 @@ ECS の Datadog Agent は、ECS クラスター内の各 EC2 インスタンス�
 タスク定義ファイルを作成したら、以下のコマンドを実行して、これを AWS に登録します。
 
 ```bash
-aws ecs register-task-definition --cli-input-json <path to datadog-agent-ecs.json>
+aws ecs register-task-definition --cli-input-json file://<path to datadog-agent-ecs.json>
 ```
 {{% /tab %}}
 {{% tab "Web UI" %}}

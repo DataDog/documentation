@@ -64,5 +64,5 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 [2]: https://app.datadoghq.com/monitors#create/live_process
 [3]: /infrastructure/process/#search-syntax
 [4]: https://app.datadoghq.com/process
-[5]: /monitors/create/configuration/#advanced-alert-conditions
+[5]: /monitors/configuration/#advanced-alert-conditions
 [6]: /monitors/notify/

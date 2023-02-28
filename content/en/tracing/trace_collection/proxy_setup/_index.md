@@ -318,25 +318,29 @@ We'd love to hear about your experience with the new module.
 </div>
 
 ### Module installation
-There is one version of the Datadog Nginx module for each [Nginx Docker image
-tag](https://hub.docker.com/_/nginx/tags). Install the module by downloading the appropriate file from the
-[latest nginx-datadog GitHub release][1] and extracting it into Nginx's
-modules directory.
+There is one version of the Datadog Nginx module for each supported Docker
+image. Install the module by downloading the appropriate file from the
+[latest nginx-datadog GitHub release][1] and extracting it into Nginx's modules
+directory.
 
-For example, if Nginx version 1.23.1 is running on a Debian-based system, then
-the appropriate Nginx image tag is [1.23.1][2]. The corresponding Alpine-based
-image is tagged [1.23.1-alpine][3].
+For example, the module compatible with the Docker image
+[nginx:1.23.2-alpine][3] is included in each release as the file
+`nginx_1.23.2-alpine-ngx_http_datadog_module.so.tgz`. The module compatible with
+the Docker image [amazonlinux:2.0.20230119.1][2] is included in each release as the file
+`amazonlinux_2.0.20230119.1-ngx_http_datadog_module.so.tgz`.
 
 ```bash
 get_latest_release() {
   curl --silent "https://api.github.com/repos/$1/releases/latest" | jq --raw-output .tag_name
 }
-NGINX_IMAGE_TAG=1.23.1
+BASE_IMAGE=nginx:1.23.2-alpine
+BASE_IMAGE_WITHOUT_COLONS=$(echo "$BASE_IMAGE" | tr ':' '_')
 RELEASE_TAG=$(get_latest_release DataDog/nginx-datadog)
-tarball="$NGINX_IMAGE_TAG-ngx_http_datadog_module.so.tgz"
+tarball="nginx_$NGINX_IMAGE_TAG-ngx_http_datadog_module.so.tgz"
 wget "https://github.com/DataDog/nginx-datadog/releases/download/$RELEASE_TAG/$tarball"
 tar -xzf "$tarball" -C /usr/lib/nginx/modules
 rm "$tarball"
+ls -l /usr/lib/nginx/modules/ngx_http_datadog_module.so
 ```
 
 ### Nginx configuration with Datadog module
@@ -351,7 +355,7 @@ for all Nginx locations. Specify custom configuration in a `datadog` JSON block
 within the `http` section of the nginx configuration.
 
 For example, the following Nginx configuration sets the service name to
-`usage-internal-nginx` and the sampling rate to 10%. 
+`usage-internal-nginx` and the sampling rate to 10%.
 
 ```nginx
 load_module modules/ngx_http_datadog_module.so;
@@ -570,8 +574,8 @@ variable. To define sampling rules in the Ingress Controller:
    ```
 
 [1]: https://github.com/DataDog/nginx-datadog/releases/latest
-[2]: https://hub.docker.com/layers/nginx/library/nginx/1.23.1/images/sha256-f26fbadb0acab4a21ecb4e337a326907e61fbec36c9a9b52e725669d99ed1261?context=explore
-[3]: https://hub.docker.com/layers/nginx/library/nginx/1.23.1-alpine/images/sha256-2959a35e1b1e61e2419c01e0e457f75497e02d039360a658b66ff2d4caab19c4?context=explore
+[2]: https://hub.docker.com/layers/library/amazonlinux/2.0.20230119.1/images/sha256-db0bf55c548efbbb167c60ced2eb0ca60769de293667d18b92c0c089b8038279?context=explore
+[3]: https://hub.docker.com/layers/library/nginx/1.23.2-alpine/images/sha256-0f2ab24c6aba5d96fcf6e7a736333f26dca1acf5fa8def4c276f6efc7d56251f?context=explore
 [4]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/Dockerfile
 [5]: https://github.com/opentracing-contrib/nginx-opentracing/releases/latest
 [6]: https://github.com/DataDog/dd-opentracing-cpp/releases/latest

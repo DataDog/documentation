@@ -26,7 +26,7 @@ further_reading:
 - [Security Notifications](#security-notification-events)
 
 #### Product-Specific Events
-- [Application Performance Monitoring (APM)](#apm-events)
+- [Application Performance Monitoring (APM)](#application-performance-monitoring-apm-events)
 - [Application Security Management (ASM)](#application-security-management)
 - [Audit Trail](#audit-trail-events)
 - [CI Visibility](#ci-visibility-events)
@@ -188,7 +188,7 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 ### Security Notification events
 | Name                 | Description of audit event                                                       | Query in audit explorer                                           |
 | -------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------|
-| [Token leaked][80] | Datadog has detected leaked Datadog API or Application Key that should be revoked| `@evt.name:"Security Notification" @asset.type:(api_key OR application_key) @action:notification` |
+| [Token leaked][80] | Datadog has detected leaked Datadog API or Application Key that should be revoked.| `@evt.name:"Security Notification" @asset.type:(api_key OR application_key) @action:notification` |
 
 ### Sensitive Data Scanner events
 | Name | Description of audit event                                          | Query in audit explorer                           |

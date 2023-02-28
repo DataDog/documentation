@@ -93,7 +93,7 @@ Use one of the following methods to enable CSPM for your Azure subscriptions:
 
 If you haven't already, set up the [Google Cloud Platform integration][1] and make sure that you have successfully completed the steps for enabling [metric collection][2].
 
-### Enable CSPM for CCP
+### Enable CSPM for GCP
 
 Use one of the following methods to enable CSPM for your GCP projects:
 
@@ -103,6 +103,8 @@ Use one of the following methods to enable CSPM for your GCP projects:
 2. Follow the [in-app instructions][3] to activate CSPM for your account.
 3. On the **Setup & Configuration** > **Cloud Providers** tab, click the **[GCP][4]** tile.
 4. Enable CSPM for your GCP projects by turning on the **CSPM Enabled** toggle.
+
+**Note**: If you do not see any data on the CSPM overview page, you may not have set up your GCP integration correctly. See the [GCP metric collection][2] instructions for more information.
 
 ### GCP integration tile
 

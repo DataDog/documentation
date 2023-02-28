@@ -36,7 +36,6 @@ author:
 categories:
 - web
 - log collection
-- autodiscovery
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kong/README.md
 display_on_public_website: true
@@ -64,7 +63,6 @@ tile:
   - Supported OS::Windows
   - Category::Web
   - Category::ログの収集
-  - Category::オートディスカバリー
   configuration: README.md#Setup
   description: 合計リクエスト数、応答コード数、クライアント接続数などを追跡
   media: []
@@ -207,7 +205,7 @@ Kong チェックには、イベントは含まれません。
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 - [Datadog インテグレーションを使用した Kong の監視][3]
 

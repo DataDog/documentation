@@ -66,6 +66,6 @@ The `forecast()` function has two parameters:
     {{< nextlink href="/dashboards/functions/timeshift" >}}Timeshift: Shift your metric data point along the timeline. {{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: /monitors/create/types/anomaly/
-[2]: /monitors/create/types/outlier/
-[3]: /monitors/create/types/forecasts/#forecast-algorithms
+[1]: /monitors/types/anomaly/
+[2]: /monitors/types/outlier/
+[3]: /monitors/types/forecasts/#forecast-algorithms

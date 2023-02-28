@@ -18,11 +18,14 @@ further_reading:
 - link: https://www.datadoghq.com/blog/troubleshoot-with-session-replay-developer-tools/
   tag: GitHub
   text: セッションリプレイブラウザ開発ツールによるトラブルシューティング
+- link: https://www.datadoghq.com/blog/correlate-traces-datadog-rum-otel/
+  tag: ブログ
+  text: Datadog RUM イベントと OTel インスツルメンテーションされたアプリケーションのトレースを相関させる
 kind: documentation
 title: RUM とトレースの接続
 ---
 
-{{< img src="real_user_monitoring/connect_rum_and_traces/rum_trace_tab.png" alt="RUM とトレース"  style="width:100%;">}}
+{{< img src="real_user_monitoring/connect_rum_and_traces/rum_trace_tab.png" alt="RUM とトレース" style="width:100%;">}}
 
 ## 概要
 
@@ -213,7 +216,7 @@ RUM は、OpenTelemetry ライブラリを使ってインスツルメントさ�
       - `tracecontext`: [W3C Trace Context](https://www.w3.org/TR/trace-context/) (`traceparent`)
       - `b3`: [B3 シングルヘッダー](https://github.com/openzipkin/b3-propagation#single-header) (`b3`)
       - `b3multi`: [B3 マルチヘッダー](https://github.com/openzipkin/b3-propagation#multiple-headers) (`X-B3-*`)
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "iOS RUM" %}}
 1. 上記に従い、RUM を APM に接続するためのセットアップを行います。

@@ -37,7 +37,6 @@ author:
 categories:
 - processing
 - log collection
-- autodiscovery
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/rabbitmq/README.md
 display_on_public_website: true
@@ -65,7 +64,6 @@ tile:
   - Supported OS::Windows
   - Category::処理
   - Category::ログの収集
-  - Category::オートディスカバリー
   configuration: README.md#Setup
   description: キューサイズ、コンシューマーカウント、未承認メッセージなどを追跡
   media: []
@@ -90,7 +88,7 @@ tile:
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 RabbitMQ チェックは [Datadog Agent][3] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
