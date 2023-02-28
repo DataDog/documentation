@@ -54,7 +54,7 @@ See the list of all hosts in your account from the [Infrastructure List][4]. The
 
 {{< img src="agent/faq/host_aliases.png" alt="Host aliases"  >}}
 
-**Note:** it's NOT possible to search or filter using these aliases, they are only available in the inspect panel mentioned above.
+**Note**: These aliases are not available for searching or filtering. They are available only in the inspect panel mentioned above.
 
 ## Agent versions
 
