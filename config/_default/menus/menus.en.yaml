@@ -3334,6 +3334,11 @@ main:
     parent: rum
     identifier: rum_funnel_analysis
     weight: 11
+  - name: Feature Flag Tracking
+    url: real_user_monitoring/feature_flag_tracking
+    parent: rum
+    identifier: rum_feature_flag_tracking
+    weight: 12
   - name: Generate Metrics
     url: real_user_monitoring/generate_metrics
     parent: rum
