@@ -43,7 +43,7 @@ Feature flags will show up in the context of events where they are evaluated, me
 
 Once you have set up your feature flag data collection, navigate to the [**Feature Flags**][7] tab within RUM or click the [**Feature Flags**][7] tab under **UX Monitoring**
 
-From this view you can investigate any questions you have about your feature flag’s health and usage.
+From this view, you can investigate any questions you have about your feature flag’s health and usage.
 - Monitor the number of users experiencing each variant and see summary statistics of your feature flag
 - Check the status of your feature flag to see if there are any that can be removed for code clean up
 - View which pages your feature flags are being evaluated on
@@ -52,19 +52,19 @@ From this view you can investigate any questions you have about your feature fla
 
 
 ### Search and filter
-Search and filter your feature flags by typing in the search bar. You can also use the faceted search, to narrow down, broaden, and shift your focus on subsets of feature flags you are interested in.
+Search and filter your feature flags by typing in the search bar. You can also use the faceted search to narrow down, broaden, or shift your focus on subsets of feature flags you are interested in.
 
 {{< img src="real_user_monitoring/feature_flag_tracking/feature-flag-list-search-filter.png" alt="Feature Flag list search bar and filtering" style="width:90%;" >}}
 
 ### Feature Flag Status
 There are two possible feature flag statuses:
-- **Inactive**: For the past 2 weeks there have only been feature flag evaluations for your control variant
-- **Out to 100%**: For the past 2 weeks there have only been feature flag evaluations for one of your non-control variants
+- **Inactive**: For the past 2 weeks, there have only been feature flag evaluations for your control variant
+- **Out to 100%**: For the past 2 weeks, there have only been feature flag evaluations for one of your non-control variants
 
 ## Analyze your feature flags
-To get more details about the health and performance of your feature flag, you can click on the flag in the list to navigate to a dedicated feature flag analysis dashboard. The Feature Flag analysis dashboard provides an overview of the performance of your feature flag, showing you information about user sessions, changes in your Core Web Vitals, and error rates. 
+To get more details about the health and performance of your feature flag, you can click the flag in the list to navigate to a dedicated feature flag analysis dashboard. The Feature Flag analysis dashboard provides an overview of the performance of your feature flag, displaying information about user sessions, changes in your Core Web Vitals, and error rates. 
 
-These out of the box graphs are aggregated across your flag variants, making it easy to spot problems in your feature releases before they turn into serious issues. This dashboard provides an easy way to monitor your feature releases and allows you to quickly roll back as soon as you spot an issue so you can avoid negative user experiences. 
+These out-of-the-box graphs are aggregated across your flag variants, making it easy to spot problems in your feature releases before they turn into serious issues. This dashboard provides an easy way to monitor your feature releases and allows you to quickly roll back as soon as you spot an issue so you can avoid negative user experiences. 
 
 {{< img src="real_user_monitoring/feature_flag_tracking/feature-flag-details-page.mp4" alt="Feature Flag details page - Users overview" video=true width=90% >}}
 
@@ -80,7 +80,7 @@ Search through all the data collected by RUM in the [RUM Explorer][8] to surface
 
 You can search your Sessions, Views, or Errors in the RUM Explorer, with the `@feature_flags.{flag_name}` attribute to scope down and focus on events where users were shown a specific user experience.
 
-You can compare important metrics to you and your teams by grouping your query by `@feature_flags.{flag_name}`. For example, if we want to understand how our new checkout flow is affecting the conversion rate from our checkout page to users making a purchase, we can add a "Group by" on our conversion rate graph.
+You can compare important metrics to you and your teams by grouping your query by `@feature_flags.{flag_name}`. For example, if you want to understand how your new checkout flow is affecting the conversion rate from the checkout page to users making a purchase, you can add a "Group by" on the conversion rate graph.
 
 {{< img src="real_user_monitoring/feature_flag_tracking/feature-flag-rum-explorer.png" alt="Feature Flag list search bar and filtering" style="width:90%;" >}}
 
