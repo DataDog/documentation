@@ -21,7 +21,7 @@ To find the [team directory page][1]:
 
 The [Team directory page][1] lists all teams within your organization. Use the **Only My Teams** slider in the upper right to toggle the view between your teams and all teams in the organization.
 
-{{< img src="account_management/teams-directory.png" alt="Organization Settings page, Teams tab, showing a panel highlighting the Caching team" >}}
+{{< img src="account_management/teams-directory.jpg" alt="Organization Settings page, Teams tab, showing a panel highlighting the Caching team" >}}
 
 ### Create team
 
