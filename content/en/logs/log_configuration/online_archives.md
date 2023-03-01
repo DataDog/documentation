@@ -3,6 +3,7 @@ title: Online Archives
 kind: documentation
 description: Cost effective live query capabilities over long term retention of Logs
 is_beta: true
+private: true
 further_reading:
 - link: "/logs/log_configuration/indexes/#indexes-filters"
   tag: "Documentation"
@@ -14,14 +15,6 @@ further_reading:
   tag: "Blog"
   text: "Historical log analysis and investigation with Online Archives"
 ---
-
-{{< site-region region="us3,us5,eu,gov" >}}
-
-Online Archives is only available for AWS hosted Datadog customers (US1) site.
-
-{{< /site-region >}}
-
-{{< site-region region="us" >}}
 
 <div class="alert alert-warning">
 Online Archives is in limited availability. To request access, contact <a href="/help/">Datadog Support</a>.
@@ -92,6 +85,9 @@ Here are examples of different log retention strategies and how to implement the
 
 {{< img src="logs/log_configuration/online_archives/exclusion.png" alt="How to exclude things from the index" style="width:100%;">}}
 
+### Disabling Online Archives
+Select the index where you want to turn off Online Archives and then switch the Online Archives toggle to the OFF position.
+
 **Note:** Index order matters since `team:security` logs go into the first index that matches the index filter in case there are multiple indexes.
 
 [1]: /logs/log_configuration/indexes/#indexes-filters
@@ -99,4 +95,3 @@ Here are examples of different log retention strategies and how to implement the
 [3]: https://app.datadoghq.com/logs/pipelines/indexes
 [4]: https://app.datadoghq.com/logs
 
-{{< /site-region >}}

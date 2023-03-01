@@ -1,25 +1,23 @@
 ---
-title: サービスサマリーウィジェット
-kind: documentation
-description: 選択されたサービスのグラフをスクリーンボードに表示する
-widget_type: trace_service
 aliases:
-  - /ja/graphing/widgets/service_summary/
+- /ja/graphing/widgets/service_summary/
+description: 選択したサービスのグラフをダッシュボードウィジェットに表示します。
 further_reading:
-  - link: /dashboards/screenboards/
-    tag: ドキュメント
-    text: スクリーンボード
-  - link: /dashboards/graphing_json/
-    tag: ドキュメント
-    text: JSON を使用したダッシュボードの構築
+- link: /ja/dashboards/graphing_json/
+  tag: ドキュメント
+  text: JSON を使用したダッシュボードの構築
+kind: documentation
+title: サービスサマリーウィジェット
+widget_type: trace_service
 ---
+
 サービスサマリーは、選択された[サービス][1]のグラフをスクリーンボードに表示します。
 
 {{< img src="dashboards/widgets/service_summary/service_summary.png" alt="サービスサマリー" >}}
 
 ## セットアップ
 
-{{< img src="dashboards/widgets/service_summary/service_summary_setup.png" alt="サービスサマリーのセットアップ"  style="width:80%;">}}
+{{< img src="dashboards/widgets/service_summary/service_summary_setup.png" alt="サービスサマリーのセットアップ" style="width:80%;">}}
 
 ### コンフィギュレーション
 
@@ -31,7 +29,7 @@ further_reading:
     * レイテンシー
     * Breakdown
     * Distribution
-    * Resource
+    * リソース (**注**: このオプションを表示するには、大きなウィジェットサイズを選択する必要があります)
 4. タイムフレーム、およびグラフの表示に使用する列数を選択して、表示設定を行います。
 5. グラフのタイトルを入力します。
 
@@ -47,7 +45,7 @@ further_reading:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/visualization/service/
+[1]: /ja/tracing/services/service_page/
 [2]: /ja/tracing/send_traces/
 [3]: /ja/api/v1/dashboards/
 [4]: /ja/dashboards/graphing_json/widget_json/

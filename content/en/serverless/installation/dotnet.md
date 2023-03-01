@@ -17,7 +17,7 @@ further_reading:
 
 ## Installation
 
-Datadog offers many different ways to enable instrumentation for your serverless applications. Choose a method below that best suits your needs. Datadog generally recommends using the Datadog CLI.
+Datadog offers many different ways to enable instrumentation for your serverless applications. Choose a method below that best suits your needs. Datadog generally recommends using the Datadog CLI. You *must* follow the instructions for "Container Image" if your application is deployed as a container image.
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
@@ -154,10 +154,10 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
     arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
 
     # Use this format for arm64-based Lambda deployed in AWS commercial regions
-    arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-dd-trace-dotnet-ARM:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
+    arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet-ARM:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
 
     # Use this format for x86-based Lambda deployed in AWS GovCloud regions
-    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
+    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
 
     # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-dotnet-ARM:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}

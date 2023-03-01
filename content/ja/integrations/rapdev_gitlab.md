@@ -20,7 +20,7 @@ author:
   homepage: https://www.rapdev.io
   name: RapDev
   sales_email: ddsales@rapdev.io
-  support_email: datadog-engineering@rapdev.io
+  support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
 - マーケットプレイス
@@ -80,6 +80,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: GitLab インテグレーション
+  uninstallation: README.md#Uninstallation
 ---
 
 
@@ -97,7 +98,7 @@ GitLab は、ソフトウェアの開発、セキュリティ、運用の機能�
 
 ## サポート
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
-- サポート: datadog-engineering@rapdev.io
+- サポート: support@rapdev.io
 - セールス: sales@rapdev.io
 - チャット: [rapdev.io](https://www.rapdev.io/#Get-in-touch)
 - 電話: 855-857-0222
@@ -107,6 +108,7 @@ GitLab は、ソフトウェアの開発、セキュリティ、運用の機能�
 *お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら][2]から RapDev へメッセージをお送りいただければ、導入をサポートいたします！*
 
 [1]: https://docs.datadoghq.com/ja/getting_started/agent/
-[2]: mailto:datadog-engineering@rapdev.io
+[2]: mailto:support@rapdev.io
+
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-gitlab" target="_blank">こちらをクリック</a>してください。

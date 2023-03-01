@@ -33,7 +33,7 @@ draft: false
 git_integration_title: teradata
 integration_id: teradata
 integration_title: Teradata
-integration_version: 1.0.1
+integration_version: 1.1.0
 is_public: true
 kind: integration
 manifest_version: 2.0.0
@@ -62,7 +62,9 @@ tile:
 
 ## 概要
 
-このチェックは、Datadog Agent を通じて [Teradata][1] を監視します。
+[Teradata][1] は、マルチクラウドデータプラットフォーム内のエンタープライズレベルのリレーショナルデータベース管理システムです。
+
+このチェックでは、Datadog Agent を通じて Teradata を監視します。Datadog-Teradata インテグレーションを有効にして、Teradata のパフォーマンス、ディスク使用量、リソース消費量を表示します。
 
 ## セットアップ
 

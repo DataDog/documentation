@@ -1,38 +1,61 @@
 ---
+app_id: sigsci
+app_uuid: edc9a664-24f1-45ee-88ad-04e5da064f51
 assets:
   dashboards:
     sigsci: assets/dashboards/overview.json
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: true
+    metrics:
+      check: sigsci.agent.signal
+      metadata_path: metadata.csv
+      prefix: sigsci.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Signal Sciences
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Signal Sciences
+  sales_email: info@signalsciences.com
+  support_email: info@signalsciences.com
 categories:
-  - security
-creates_events: true
-ddtype: crawler
+- security
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/sigsci/README.md
-display_name: Signal Sciences
+- https://github.com/DataDog/integrations-extras/blob/master/sigsci/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: sigsci
-guid: 0c92b7cd-0736-4f9d-82ed-16f1bba8c8d0
 integration_id: sigsci
 integration_title: Signal Sciences
 integration_version: ''
 is_public: true
 kind: インテグレーション
-maintainer: info@signalsciences.com
-manifest_version: 1.0.0
-metric_prefix: sigsci.
-metric_to_check: sigsci.agent.signal
+manifest_version: 2.0.0
 name: sigsci
-public_title: Datadog-Signal Sciences インテグレーション
+oauth: {}
+public_title: Signal Sciences
 short_description: Signal Sciences からデータを収集して異常値を表示し、攻撃を阻止
-support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Security
+  configuration: README.md#Setup
+  description: Signal Sciences からデータを収集して異常値を表示し、攻撃を阻止
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Signal Sciences
 ---
+
 ## 概要
 
 Signal Sciences のメトリクスとイベントを Datadog に送信することで、アプリケーション、API、マイクロサービスなどに対する攻撃や悪用をリアルタイムに監視できます。また、Signal Sciences が正しく機能し、トラフィックを検査していることを確認できます。

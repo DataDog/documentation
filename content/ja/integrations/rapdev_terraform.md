@@ -21,7 +21,7 @@ author:
   homepage: https://www.rapdev.io
   name: RapDev
   sales_email: ddsales@rapdev.io
-  support_email: datadog-engineering@rapdev.io
+  support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
 - マーケットプレイス
@@ -68,6 +68,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Terraform インテグレーション
+  uninstallation: README.md#Uninstallation
 ---
 
 
@@ -83,7 +84,7 @@ Terraform とのインテグレーションにより、組織は Terraform の�
 ## サポート
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 
-- サポート: datadog-engineering@rapdev.io
+- サポート: support@rapdev.io
 - セールス: sales@rapdev.io
 - チャット: [rapdev.io](https://www.rapdev.io/#Get-in-touch)
 - 電話: 855-857-0222
@@ -91,7 +92,7 @@ Terraform とのインテグレーションにより、組織は Terraform の�
 ---
 ボストンより ❤️ を込めて
 
-*お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:datadog-engineering@rapdev.io)から RapDev へメッセージをお送りいただければ、導入をサポートいたします！*
+*お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？RapDev へ[お問い合わせ](mailto:support@rapdev.io)ください！導入のサポートをいたします。*
 
 [1]: https://www.terraform.io/docs/cloud/users-teams-organizations/users.html#api-tokens
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent

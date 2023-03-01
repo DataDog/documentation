@@ -5,7 +5,7 @@ kind: ServiceAccount
 metadata:
   labels:
     app: "datadog"
-    chart: "datadog-2.37.4"
+    chart: "datadog-3.3.1"
     heritage: "Helm"
     release: "datadog"
   name: datadog-cluster-agent
@@ -32,6 +32,44 @@ metadata:
 type: Opaque
 data:
   token: PUT_A_BASE64_ENCODED_RANDOM_STRING_HERE
+---
+# Source: datadog/templates/cluster-agent-confd-configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: datadog-cluster-agent-confd
+  namespace: default
+  labels: {}
+  annotations: {}
+data:
+  kubernetes_state_core.yaml.default: |-
+    init_config:
+    instances:
+      - collectors:
+        - secrets
+        - nodes
+        - pods
+        - services
+        - resourcequotas
+        - replicationcontrollers
+        - limitranges
+        - persistentvolumeclaims
+        - persistentvolumes
+        - namespaces
+        - endpoints
+        - daemonsets
+        - deployments
+        - replicasets
+        - statefulsets
+        - cronjobs
+        - jobs
+        - horizontalpodautoscalers
+        - poddisruptionbudgets
+        - storageclasses
+        - volumeattachments
+        - ingresses
+        labels_as_tags:
+            {}
 ---
 # Source: datadog/templates/install_info-configmap.yaml
 apiVersion: v1
@@ -70,7 +108,7 @@ data:
       max_tracked_connections: 131072
       conntrack_max_state_size: 131072
       enable_runtime_compiler: false
-      enable_kernel_header_download: false
+      enable_kernel_header_download: true
       runtime_compiler_output_dir: /var/tmp/datadog-agent/system-probe/build
       kernel_header_download_dir: /var/tmp/datadog-agent/system-probe/kernel-headers
       apt_config_dir: /host/etc/apt
@@ -92,6 +130,7 @@ data:
       network:
         enabled: false
       activity_dump:
+        enabled: false
         traced_cgroups_count: 0
 ---
 # Source: datadog/templates/system-probe-configmap.yaml
@@ -117,8 +156,10 @@ data:
             "capget",
             "capset",
             "chdir",
+            "chmod",
             "clock_gettime",
             "clone",
+            "clone3",
             "close",
             "connect",
             "copy_file_range",
@@ -132,7 +173,6 @@ data:
             "epoll_ctl_old",
             "epoll_pwait",
             "epoll_wait",
-            "epoll_wait",
             "epoll_wait_old",
             "eventfd",
             "eventfd2",
@@ -140,6 +180,8 @@ data:
             "execveat",
             "exit",
             "exit_group",
+            "faccessat",
+            "faccessat2",
             "fchmod",
             "fchmodat",
             "fchown",
@@ -159,7 +201,9 @@ data:
             "getegid",
             "geteuid",
             "getgid",
+            "getgroups",
             "getpeername",
+            "getpgrp",
             "getpid",
             "getppid",
             "getpriority",
@@ -217,6 +261,7 @@ data:
             "renameat2",
             "restart_syscall",
             "rmdir",
+            "rseq",
             "rt_sigaction",
             "rt_sigpending",
             "rt_sigprocmask",
@@ -242,6 +287,7 @@ data:
             "setgroups32",
             "setitimer",
             "setns",
+            "setpgid",
             "setrlimit",
             "setsid",
             "setsidaccept4",
@@ -255,8 +301,8 @@ data:
             "stat",
             "stat64",
             "statfs",
-            "sysinfo",
             "symlinkat",
+            "sysinfo",
             "tgkill",
             "umask",
             "uname",
@@ -265,10 +311,7 @@ data:
             "wait4",
             "waitid",
             "waitpid",
-            "write",
-            "getgroups",
-            "getpgrp",
-            "setpgid"
+            "write"
           ],
           "action": "SCMP_ACT_ALLOW",
           "args": null
@@ -507,6 +550,88 @@ rules:
       - datadog-cluster-agent
       - hostnetwork
 ---
+# Source: datadog/templates/kube-state-metrics-core-rbac.yaml
+apiVersion: "rbac.authorization.k8s.io/v1"
+kind: ClusterRole
+metadata:
+  labels: {}
+  name: datadog-ksm-core
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - secrets
+      - nodes
+      - pods
+      - services
+      - resourcequotas
+      - replicationcontrollers
+      - limitranges
+      - persistentvolumeclaims
+      - persistentvolumes
+      - namespaces
+      - endpoints
+      - events
+    verbs:
+      - list
+      - watch
+  - apiGroups:
+      - extensions
+    resources:
+      - daemonsets
+      - deployments
+      - replicasets
+    verbs:
+      - list
+      - watch
+  - apiGroups:
+      - apps
+    resources:
+      - statefulsets
+      - daemonsets
+      - deployments
+      - replicasets
+    verbs:
+      - list
+      - watch
+  - apiGroups:
+      - batch
+    resources:
+      - cronjobs
+      - jobs
+    verbs:
+      - list
+      - watch
+  - apiGroups:
+      - autoscaling
+    resources:
+      - horizontalpodautoscalers
+    verbs:
+      - list
+      - watch
+  - apiGroups:
+      - policy
+    resources:
+      - poddisruptionbudgets
+    verbs:
+      - list
+      - watch
+  - apiGroups:
+      - storage.k8s.io
+    resources:
+      - storageclasses
+      - volumeattachments
+    verbs:
+      - list
+      - watch
+  - apiGroups:
+      - networking.k8s.io
+    resources:
+      - ingresses
+    verbs:
+      - list
+      - watch
+---
 # Source: datadog/templates/cluster-agent-rbac.yaml
 apiVersion: "rbac.authorization.k8s.io/v1"
 kind: ClusterRoleBinding
@@ -517,6 +642,21 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
   name: datadog-cluster-agent
+subjects:
+  - kind: ServiceAccount
+    name: datadog-cluster-agent
+    namespace: default
+---
+# Source: datadog/templates/kube-state-metrics-core-rbac.yaml
+apiVersion: "rbac.authorization.k8s.io/v1"
+kind: ClusterRoleBinding
+metadata:
+  labels: {}
+  name: datadog-ksm-core
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: datadog-ksm-core
 subjects:
   - kind: ServiceAccount
     name: datadog-cluster-agent
@@ -574,7 +714,7 @@ metadata:
   namespace: default
   labels:
     app: "datadog"
-    chart: "datadog-2.37.4"
+    chart: "datadog-3.3.1"
     release: "datadog"
     heritage: "Helm"
 spec:
@@ -603,14 +743,13 @@ spec:
       name: datadog
       annotations:
         container.apparmor.security.beta.kubernetes.io/system-probe: unconfined
-        container.seccomp.security.alpha.kubernetes.io/system-probe: localhost/system-probe
     spec:
       securityContext:
         runAsUser: 0
       hostPID: true
       containers:
         - name: agent
-          image: "gcr.io/datadoghq/agent:7.38.2"
+          image: "gcr.io/datadoghq/agent:7.40.1"
           imagePullPolicy: IfNotPresent
           command: ["agent", "run"]
           resources: {}
@@ -664,6 +803,8 @@ spec:
               value: "/var/run/datadog/dsd.socket"
             - name: DD_EXTRA_CONFIG_PROVIDERS
               value: "clusterchecks endpointschecks"
+            - name: DD_IGNORE_AUTOCONF
+              value: "kubernetes_state"
             - name: DD_EXPVAR_PORT
               value: "6000"
           volumeMounts:
@@ -676,6 +817,10 @@ spec:
             - name: tmpdir
               mountPath: /tmp
               readOnly: false
+            - name: os-release-file
+              mountPath: /host/etc/os-release
+              mountPropagation: None
+              readOnly: true
             - name: config
               mountPath: /etc/datadog-agent
             - name: runtimesocketdir
@@ -734,7 +879,7 @@ spec:
             successThreshold: 1
             timeoutSeconds: 5
         - name: trace-agent
-          image: "gcr.io/datadoghq/agent:7.38.2"
+          image: "gcr.io/datadoghq/agent:7.40.1"
           imagePullPolicy: IfNotPresent
           command: ["trace-agent", "-config=/etc/datadog-agent/datadog.yaml"]
           resources: {}
@@ -782,6 +927,14 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /etc/datadog-agent
+            - name: procdir
+              mountPath: /host/proc
+              mountPropagation: None
+              readOnly: true
+            - name: cgroups
+              mountPath: /host/sys/fs/cgroup
+              mountPropagation: None
+              readOnly: true
             - name: logdatadog
               mountPath: /var/log/datadog
             - name: tmpdir
@@ -800,7 +953,7 @@ spec:
               port: 8126
             timeoutSeconds: 5
         - name: process-agent
-          image: "gcr.io/datadoghq/agent:7.38.2"
+          image: "gcr.io/datadoghq/agent:7.40.1"
           imagePullPolicy: IfNotPresent
           command: ["process-agent", "--cfgpath=/etc/datadog-agent/datadog.yaml"]
           resources: {}
@@ -850,6 +1003,10 @@ spec:
             - name: tmpdir
               mountPath: /tmp
               readOnly: false
+            - name: os-release-file
+              mountPath: /host/etc/os-release
+              mountPropagation: None
+              readOnly: true
             - name: runtimesocketdir
               mountPath: /host/var/run
               mountPropagation: None
@@ -875,7 +1032,7 @@ spec:
               mountPath: /etc/datadog-agent/system-probe.yaml
               subPath: system-probe.yaml
         - name: system-probe
-          image: "gcr.io/datadoghq/agent:7.38.2"
+          image: "gcr.io/datadoghq/agent:7.40.1"
           imagePullPolicy: IfNotPresent
           securityContext:
             capabilities:
@@ -889,6 +1046,9 @@ spec:
                 - IPC_LOCK
                 - CHOWN
             privileged: false
+            seccompProfile:
+              type: Localhost
+              localhostProfile: system-probe
           command: ["/opt/datadog-agent/embedded/bin/system-probe", "--config=/etc/datadog-agent/system-probe.yaml"]
           env:
             # Needs to be removed when Agent N-2 is built with Golang 1.17
@@ -928,24 +1088,21 @@ spec:
               mountPath: /host/proc
               mountPropagation: None
               readOnly: true
-            - name: etc-os-release
+            - name: os-release-file
               mountPath: /host/etc/os-release
               mountPropagation: None
               readOnly: true
             - name: etc-redhat-release
               mountPath: /host/etc/redhat-release
-              mountPropagation: None
               readOnly: true
             - name: etc-fedora-release
               mountPath: /host/etc/fedora-release
-              mountPropagation: None
               readOnly: true
             - name: etc-lsb-release
               mountPath: /host/etc/lsb-release
-              mountPropagation: None
               readOnly: true
         - name: security-agent
-          image: "gcr.io/datadoghq/agent:7.38.2"
+          image: "gcr.io/datadoghq/agent:7.40.1"
           imagePullPolicy: IfNotPresent
           securityContext:
             capabilities:
@@ -1003,6 +1160,10 @@ spec:
             - name: dsdsocket
               mountPath: /var/run/datadog
               readOnly: true
+            - name: os-release-file
+              mountPath: /host/etc/os-release
+              mountPropagation: None
+              readOnly: true
             - name: runtimesocketdir
               mountPath: /host/var/run
               mountPropagation: None
@@ -1030,7 +1191,7 @@ spec:
               subPath: system-probe.yaml
       initContainers:
         - name: init-volume
-          image: "gcr.io/datadoghq/agent:7.38.2"
+          image: "gcr.io/datadoghq/agent:7.40.1"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:
@@ -1040,7 +1201,7 @@ spec:
               mountPath: /opt/datadog-agent
           resources: {}
         - name: init-config
-          image: "gcr.io/datadoghq/agent:7.38.2"
+          image: "gcr.io/datadoghq/agent:7.40.1"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:
@@ -1078,7 +1239,7 @@ spec:
               value: "yes"
           resources: {}
         - name: seccomp-setup
-          image: "gcr.io/datadoghq/agent:7.38.2"
+          image: "gcr.io/datadoghq/agent:7.40.1"
           command:
             - cp
             - /etc/config/system-probe-seccomp.json
@@ -1108,7 +1269,7 @@ spec:
           name: cgroups
         - hostPath:
             path: /etc/os-release
-          name: etc-os-release
+          name: os-release-file
         - hostPath:
             path: /etc/redhat-release
           name: etc-redhat-release
@@ -1204,7 +1365,7 @@ spec:
       serviceAccountName: datadog-cluster-agent
       containers:
         - name: cluster-agent
-          image: "gcr.io/datadoghq/cluster-agent:1.22.0"
+          image: "gcr.io/datadoghq/cluster-agent:7.40.1"
           imagePullPolicy: IfNotPresent
           resources: {}
           ports:
@@ -1289,10 +1450,19 @@ spec:
               subPath: install_info
               mountPath: /etc/datadog-agent/install_info
               readOnly: true
+            - name: confd
+              mountPath: /conf.d
+              readOnly: true
       volumes:
         - name: installinfo
           configMap:
             name: datadog-installinfo
+        - name: confd
+          configMap:
+            name: datadog-cluster-agent-confd
+            items:
+              - key: kubernetes_state_core.yaml.default
+                path: kubernetes_state_core.yaml.default
       affinity:
         # Prefer scheduling the cluster agents on different nodes
         # to guarantee that the standby instance can immediately take the lead from a leader running of a faulty node.

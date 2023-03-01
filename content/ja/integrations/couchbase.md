@@ -29,7 +29,6 @@ author:
   support_email: help@datadoghq.com
 categories:
 - data store
-- autodiscovery
 - log collection
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/couchbase/README.md
@@ -38,7 +37,7 @@ draft: false
 git_integration_title: couchbase
 integration_id: couchbase
 integration_title: CouchBase
-integration_version: 2.1.0
+integration_version: 2.2.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -57,7 +56,6 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::データストア
-  - Category::オートディスカバリー
   - Category::ログの収集
   configuration: README.md#Setup
   description: Couchbase のアクティビティとパフォーマンスのメトリクスを追跡およびグラフ化
@@ -85,7 +83,7 @@ tile:
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Couchbase チェックは [Datadog Agent][2] パッケージに含まれています。Couchbase ノードに追加でインストールする必要はありません。
 

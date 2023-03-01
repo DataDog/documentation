@@ -40,10 +40,12 @@ Configuring [SAML (Security Assertion Markup Language)][1] for your Datadog acco
 
 4. Download Datadog's [Service Provider metadata][18] to configure your IdP to recognize Datadog as a Service Provider.
 
-5. After you upload the IdP Meta-data and configure your IdP, enable SAML in Datadog by clicking the **Enable** button.
+5. After you upload the IdP Meta-data and configure your IdP, enable SAML in Datadog by clicking the **Upload and Enable** button.
     {{< img src="account_management/saml/saml_enable.png" alt="saml enable"  >}}
+    
+6. After uploading the IdP metadata, return to the **Login Methods** page and turn SAML `on` by default. 
 
-6. Once SAML is configured in Datadog and your IdP is set up to accept requests from Datadog, users can log in:
+7. Once SAML is configured in Datadog and your IdP is set up to accept requests from Datadog, users can log in:
 
    - **If using SP-initiated login** (Service Provider, or login initiated from Datadog): By using the **Single Sign-on URL** shown in the Status box at the top of the [SAML Configuration page][19]. The **Single Sign-on URL** is also displayed on the [Team page][20]. Loading this URL initiates a SAML authentication against your IdP. **Note**: This URL isn't displayed unless SAML is enabled for your account and you are using SP-initiated login.
     {{< img src="account_management/saml/saml_enabled.png" alt="Saml Enabled"  >}}
@@ -63,7 +65,7 @@ Some important notes on assertions:
 * Datadog specifies `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress` for the format of the **NameIDPolicy** in assertion requests.
 * Assertions must be signed.
 * Assertions can be encrypted, but unencrypted assertions are accepted.
-* Reference [Datadog's SP Metadata][18] for more information.
+* Reference [Datadog's Service Provider metadata][18] for more information. You must be signed in to Datadog to access the file.
 
 Attributes may be included in a SAML Assertion. Datadog looks for three attributes in an `AttributeStatement`:
 
@@ -147,7 +149,7 @@ If you do not use the updated SP Metadata, Datadog is not able to associate the 
 
 ### SAML strict
 
-You can make your organization SAML Strict by disabling other login method types in the the **Login Methods** UI. When this option is configured, all users must, by default, log in with SAML. An existing username/password or Google OAuth login does not work. This ensures that all users with access to Datadog must have valid credentials in your company’s identity provider/directory service to access your Datadog account. Org administrators can set per-user overrides to allow certain users to be SAML Strict exempt.
+You can make your organization SAML Strict by disabling other login method types in the the **Login Methods** UI. When this option is configured, all users must, by default, log in with SAML. An existing username/password or Google OAuth login does not work. This ensures that all users with access to Datadog must have valid credentials in your company’s identity provider/directory service to access your Datadog account. Org administrators can set per-user [overrides][26] to allow certain users to be SAML Strict exempt.
 
 ### Self-updating Datadog SP Metadata
 
@@ -184,3 +186,4 @@ Certain Identity Providers (such as Microsoft's ADFS) can be configured to pull 
 [23]: https://support.okta.com/help/s/article/How-to-View-a-SAML-Response-in-Your-Browser-for-Troubleshooting?language=en_US
 [24]: https://www.samltool.com/validate_response.php
 [25]: /account_management/authn_mapping/
+[26]: /account_management/login_methods/#reviewing-user-overrides

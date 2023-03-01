@@ -1,6 +1,10 @@
 ---
 title: Lambda Function Log Collection Troubleshooting Guide
 kind: documentation
+further_reading:
+    - link: "https://www.datadoghq.com/blog/aws-lambda-telemetry-api/"
+      tag: "Blog"
+      text: "Expanded Datadog Lambda extension capabilities with the AWS Lambda Telemetry API"
 ---
 
 If you don't see logs forwarded from a Datadog forwarder Lambda function in the Log Explorer, follow the troubleshooting steps below. If you continue to have trouble after following these steps, [contact Datadog support][1] for further assistance.
@@ -84,6 +88,11 @@ For CloudWatch log group, you can use the following metrics within the Datadog p
 3. Do you see any errors? Try searching "?ERROR ?Error ?error".
 
 4. Set environment variable "DD_LOG_LEVEL" to "debug" on the forwarder Lambda function to enable the debugging logs for further debugging. The debugging logs are quite verbose; remember to disable it after debugging.
+
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: https://docs.datadoghq.com/help

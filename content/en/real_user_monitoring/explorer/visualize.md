@@ -28,6 +28,12 @@ While you can add attributes and tags in columns, Datadog recommends sorting the
 
 The RUM events table configuration is stored with additional elements of your troubleshooting context in [Saved Views][4].
 
+### List widget
+
+The [List Widget on dashboards][8] shows individual events for a given data source, including RUM data. You can use the list widget to view any RUM events on a dashboard, like all errors on a particular page for example. 
+
+In addition to dashboards, the list widget can be used in Notebooks as well, allowing you to add RUM events as part of reports and investigations. 
+
 ## Timeseries
 
 Visualize the evolution of a single measure (or a [facet][5] unique count of values) over a selected time frame, and optionally, split by an available [facet][5].
@@ -78,20 +84,6 @@ Visualize a single [measure][5] (or a [facet][5] unique count of values) on the 
 
 The RUM Analytics geomap shows the 75th percentile of the **Largest Contentful Paint** over the past day.
 
-## Funnel
-
-Visualize conversion rates across user workflows and end-to-end user journeys.
-
-{{< img src="real_user_monitoring/explorer/visualize/funnel.png" alt="Funnel graph in the RUM Explorer" style="width:90%;">}}
-
-To construct a funnel, select **View** or **Action** and choose a query from the dropdown menu. Click **+** and select another query from the dropdown menu to visualize the funnel. 
-
-{{< img src="real_user_monitoring/explorer/analytics/rum_funnel.mp4" alt="Create a funnel with queries" video="true" width="80%" >}}
-
-The funnel graph displays the sessions for your selected queries out of your total RUM sessions. When you click on the bar graph, a side panel displaying the step's **Overall Conversion Rate**, **Converted Rate**, and **Drop Off Rate** appears. Scroll down to see the step's performance, outstanding issues, and conversion rates by type. 
-
-{{< img src="real_user_monitoring/explorer/visualize/funnel_updated.mp4" alt="Funnel graph in the RUM Explorer" video="true" width="100%" >}}
-
 ## Related events
 
 For all visualizations besides the [funnel](#funnel), select a section of the graph or click on the graph to either zoom in or see a list of events that correspond to your selection.
@@ -111,3 +103,6 @@ For the remaining visualization options, click on the graph and click **View eve
 [3]: /logs/explorer/facets/
 [4]: /real_user_monitoring/explorer/saved_views/
 [5]: /real_user_monitoring/explorer/search#setup-facets-and-measures
+[6]: /notebooks
+[7]: /real_user_monitoring/explorer/export/
+[8]: /dashboards/widgets/list/

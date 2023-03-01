@@ -55,7 +55,7 @@ By providing read access to the Etcd certificates located on the host, the Datad
 
 Custom `values.yaml`:
 
-```
+```yaml
 datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
@@ -93,7 +93,7 @@ agents:
 
 DatadogAgent Kubernetes Resource:
 
-```
+```yaml
 apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
 metadata:
@@ -165,7 +165,7 @@ Secure ports allow authentication and authorization to protect your Control Plan
 
 Custom `values.yaml`:
 
-```
+```yaml
 datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
@@ -219,7 +219,7 @@ agents:
 
 DatadogAgent Kubernetes Resource:
 
-```
+```yaml
 apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
 metadata:
@@ -303,7 +303,7 @@ data:
 - The `ssl_verify` field in the `kube_controller_manager` and `kube_scheduler` configuration needs to be set to `false` when using self-signed certificates.
 - When targeting secure ports, the `bind-address` option in your Controller Manager and Scheduler configuration must be reachable by the Datadog Agent. Example:
 
-```
+```yaml
 apiVersion: kubeadm.k8s.io/v1beta2
 kind: ClusterConfiguration
 controllerManager:
@@ -703,7 +703,7 @@ Deploy the Datadog Agent with manifests based on the following configurations:
 
 Custom `values.yaml`:
 
-```
+```yaml
 datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
@@ -733,7 +733,7 @@ agents:
 
 DatadogAgent Kubernetes Resource:
 
-```
+```yaml
 apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
 metadata:
@@ -820,7 +820,7 @@ The following are examples of how to configure the Datadog Agent with Helm and t
 
 Custom `values.yaml`:
 
-```
+```yaml
 datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
@@ -850,7 +850,7 @@ agents:
 
 DatadogAgent Kubernetes Resource:
 
-```
+```yaml
 apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
 metadata:

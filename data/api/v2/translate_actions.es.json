@@ -324,8 +324,8 @@
     "request_schema_description": "Solicitud de lista de logs."
   },
   "ListTagConfigurations": {
-    "description": "Devuelve todos los nombres de las métricas de recuento/gauge/frecuencia/distribución configuradas,\njunto con los filtros adicionales si así se especifica.",
-    "summary": "Mostrar una lista de configuraciones de etiquetas"
+    "description": "Devuelve todas las métricas (que coincidan con los filtros adicionales, si así se especifica).",
+    "summary": "Ver una lista de métricas"
   },
   "DeleteBulkTagsMetricsConfiguration": {
     "description": "Elimina todas las listas personalizadas de claves de etiqueta consultables correspondientes a un conjunto de métricas de recuento, gauge, frecuencia y distribución existentes.\nPara seleccionar las métricas, hay que indicar un prefijo de nombre de métrica.\nLos resultados pueden enviarse a varias direcciones de correo electrónico, al igual que cuando la operación se realiza mediante la aplicación web de Datadog.\nSolo puede usarse con claves de aplicación de usuarios que tengan permiso para gestionar etiquetas de métricas (`Manage Tags for Metrics`).",
@@ -338,6 +338,10 @@
     "summary": "Configurar etiquetas de varias métricas",
     "request_description": "",
     "request_schema_description": "Objeto de contenedor de una única solicitud de configuración de etiquetas en bloque."
+  },
+  "ListActiveMetricConfigurations": {
+    "description": "Muestra las etiquetas y agregaciones que se buscan de forma activa en los dashboards y monitores de un nombre de métrica concreto.",
+    "summary": "Mostrar etiquetas y agregaciones activas"
   },
   "ListTagsByMetricName": {
     "description": "Muestra los pares clave-valor de etiquetas indexadas correspondientes a un nombre de métrica concreto.",
@@ -691,8 +695,8 @@
     "summary": "Ver el uso por hora según la gama de productos"
   },
   "GetUsageLambdaTracedInvocations": {
-    "description": "Muestra el uso por hora de invocaciones trazadas con funciones lambda.\n**Nota:** Ahora pueden consultarse datos de uso por hora de todos los productos con la [API para ver el uso por hora según la gama de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
-    "summary": "Ver el uso por hora de invocaciones trazadas con funciones lambda"
+    "description": "Muestra el uso por hora de invocaciones rastreadas con funciones lambda.\n**Nota:** Ahora pueden consultarse datos de uso por hora de todos los productos con la [API para ver el uso por hora según la gama de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
+    "summary": "Ver el uso por hora de invocaciones rastreadas con funciones lambda"
   },
   "GetUsageObservabilityPipelines": {
     "description": "Muestra el uso por hora de canalizaciones de observabilidad.\n**Nota:** Ahora pueden consultarse los datos de uso por hora de todos los productos con la [API para ver el uso por hora según la gama de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",

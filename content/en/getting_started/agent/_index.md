@@ -99,19 +99,21 @@ The Agent collects host data every 15 seconds to provide an accurate understandi
 
 ### Installation
 
-In the Datadog UI, go to the [Agent Installation Page][18] for Ubuntu by navigating to **Integrations > Agent** .
+In the Datadog UI, go to the Agent Installation page for Ubuntu by navigating to **Integrations > Agent** and selecting Ubuntu. To install the Datadog Agent on a host, use the one-line install command from that page (example shown below), updated with your [Datadog API key][16].
 
-To install the Datadog Agent on a host, use the [one line install command][19] updated with your [Datadog API key][2]:
+Example Ubuntu one-line install command:
 
 ```shell
-DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
+DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
 ```
+
+Go to the in-app [Agent Installation page][18] for your operating system for the most up-to-date installation instructions.
 
 ### Validation
 
 #### Terminal command
 
-Run the Agent's [status command][20] to verify installation.
+Run the Agent's [status command][19] to verify installation.
 
 ```shell
 sudo datadog-agent status
@@ -152,7 +154,7 @@ The Agent is set up to provide the following service checks:
   - `datadog.agent.check_status`:
     Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, otherwise returns `OK`.
 
-These checks can be used in the Datadog Platform to visualize the Agent status through monitors and dashboards at a quick glance. See [Service Check Overview][21] to learn more.
+These checks can be used in the Datadog Platform to visualize the Agent status through monitors and dashboards at a quick glance. See [Service Check Overview][20] to learn more.
 
 #### Metrics
 
@@ -168,7 +170,7 @@ The Agent's main configuration file is `datadog.yaml`. The required parameters a
 - your [Datadog API key][16], which is used to associate your Agent's data with your organization, and 
 - the Datadog site ({{< region-param key="dd_site" code="true" >}}). 
 
-See the [sample `config_template.yaml` file][22] for all available configuration options.
+See the [sample `config_template.yaml` file][21] for all available configuration options.
 
 You can adjust the Agent configuration files to take advantage of other Datadog features including tags.
 
@@ -176,9 +178,9 @@ You can adjust the Agent configuration files to take advantage of other Datadog 
 
 Tags add an additional layer of metadata to your metrics and events. They allow you to scope and compare your data in Datadog visualizations. When data is sent to Datadog from multiple hosts, tagging this information allows you to scope down to the data you are most interested in visualizing. 
 
-For example, let's say you have data that is collected from different teams and you are only interested in seeing the metrics from team alpha, tagging those specific hosts with either the `team:alpha` or `team:bravo` tag gives you the ability to filter down to the metrics that are tagged with `team:alpha`. See [Getting Started with Tags][23] to learn more about tagging your data.
+For example, let's say you have data that is collected from different teams and you are only interested in seeing the metrics from team alpha, tagging those specific hosts with either the `team:alpha` or `team:bravo` tag gives you the ability to filter down to the metrics that are tagged with `team:alpha`. See [Getting Started with Tags][22] to learn more about tagging your data.
 
-1. Locate your Agent's [main configuration file][24]. For Ubuntu, the file locations is `/etc/datadog-agent/datadog.yaml`.
+1. Locate your Agent's [main configuration file][23]. For Ubuntu, the file locations is `/etc/datadog-agent/datadog.yaml`.
 
 2. In the `datadog.yaml` file, locate the `tags` parameter. Host level tags can be set in the `datadog.yaml` configuration to apply tags on all metrics, traces and logs forwarded from this host.
 
@@ -215,7 +217,7 @@ For example, let's say you have data that is collected from different teams and 
       - test:agent_walkthrough
    ```
 
-4. Restart the Agent by running the Agent’s [restart command][25]. The Ubuntu restart command:
+4. Restart the Agent by running the Agent’s [restart command][24]. The Ubuntu restart command:
 
    ```shell
    sudo service datadog-agent restart
@@ -227,7 +229,7 @@ For example, let's say you have data that is collected from different teams and 
 
 #### Other configuration options
 
-The collection of [logs][26], [traces][19], and [processes][27] data can be enabled through the Agent configuration file. These are not features that are enabled by default. For example, in the configuration file, notice that for the `logs_enabled` parameter, it is set to false.
+The collection of [logs][25], [traces][26], and [processes][27] data can be enabled through the Agent configuration file. These are not features that are enabled by default. For example, in the configuration file, notice that for the `logs_enabled` parameter, it is set to false.
 
 ```yaml
 ##################################
@@ -250,7 +252,7 @@ Throughout your setup, when the documentation refers to the `datadog.yaml` file 
 
 ## Commands
 
-See [Agent Commands][31] to [Start][32], [Stop][33] or [Restart][25] your Agent.
+See [Agent Commands][31] to [Start][32], [Stop][33] or [Restart][24] your Agent.
 
 ## Troubleshooting
 
@@ -292,17 +294,17 @@ For help troubleshooting the Agent:
 [15]: https://www.datadoghq.com
 [16]: https://app.datadoghq.com/organization-settings/api-keys
 [17]: /agent/basic_agent_usage/?tab=agentv6v7
-[18]: https://app.datadoghq.com/account/settings#agent/ubuntu
-[19]: /tracing/
-[20]: /agent/guide/agent-commands/#agent-status-and-information
-[21]: /developers/service_checks/#visualize-your-service-check-in-datadog
-[22]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
-[23]: /getting_started/tagging/
-[24]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[25]: /agent/guide/agent-commands/#restart-the-agent
-[26]: /logs/
+[18]: https://app.datadoghq.com/account/settings#agent/
+[19]: /agent/guide/agent-commands/#agent-status-and-information
+[20]: /developers/service_checks/#visualize-your-service-check-in-datadog
+[21]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
+[22]: /getting_started/tagging/
+[23]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[24]: /agent/guide/agent-commands/#restart-the-agent
+[25]: /logs/
+[26]: /tracing/
 [27]: /infrastructure/process/?tab=linuxwindows#introduction
-[28]: /tracing/trace_collection/open_standards/otlp_ingest_in_the_agent/?tab=host
+[28]: /opentelemetry/otlp_ingest_in_the_agent/?tab=host
 [29]: /agent/logs/advanced_log_collection/
 [30]: /developers/dogstatsd/?tab=hostagent
 [31]: /agent/guide/agent-commands/

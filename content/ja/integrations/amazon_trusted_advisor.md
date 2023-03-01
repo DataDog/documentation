@@ -42,7 +42,7 @@ Amazon Trusted Advisor は、AWS ベストプラクティスに従ってリソ�
 ### メトリクスの収集
 
 1. IAM コンソールで、ポリシードキュメントのフィールドにアクションとして `support:describe*` および `support:refresh*` を追加します。AWS サポート API に関する詳細は、[AWS サポートのアクション、リソース、条件キー][2]を参照してください。
-2. [AWS インテグレーションタイル][3]のメトリクス収集で、`TrustedAdvisor` をオンにします。
+2. [AWS インテグレーションページ][3]で、`Metric Collection` タブの下にある `Trusted Advisor` が有効になっていることを確認します。
 3. [Datadog - Amazon Trusted Advisor インテグレーション][4]をインストールします。
 
 ### ログの収集
@@ -55,7 +55,7 @@ Amazon Trusted Advisor から S3 バケットまたは CloudWatch のいずれ�
 
 #### ログを Datadog に送信する方法
 
-1. [Datadog ログコレクション AWS Lambda 関数][5] をまだ設定していない場合は、設定を行ってください。
+1. [Datadog Forwarder Lambda 関数][5]をまだセットアップしていない場合は、セットアップします。
 2. Lambda 関数がインストールされたら、AWS コンソールから、Amazon Trusted Advisor ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
 
     - [S3 バケットに手動トリガーを追加][6]
@@ -87,9 +87,9 @@ Amazon Trusted Advisor インテグレーションには、サービスのチェ
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssupport.html
-[3]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[4]: https://app.datadoghq.com/account/settings#integrations/amazon-trusted-advisor
-[5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
+[3]: https://app.datadoghq.com/integrations/amazon-web-services
+[4]: https://app.datadoghq.com/integrations/amazon-trusted-advisor
+[5]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
 [6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
 [7]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
 [8]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_trusted_advisor/amazon_trusted_advisor_metadata.csv

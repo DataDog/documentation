@@ -11,12 +11,12 @@ aliases:
 
 ## Definition
 
-Apdex is a numerical measure of user satisfaction with the performance of enterprise applications. It converts many measurements into one number on a uniform scale on the [0;1] interval:
+Apdex is a numerical measure of user satisfaction with the performance of enterprise web applications. It converts many measurements into one number on a uniform scale on the [0;1] interval:
 
 * 0 = no users satisfied
 * 1 = all users satisfied
 
-To define your Apdex, you need to be an administrator of your Datadog account. First define a time threshold—**T**—separating satisfactory response times from unsatisfactory response times from your application or service. With one threshold you can then define three categories:
+To define your Apdex, you need to be an administrator of your Datadog account. First define a time threshold—**T**—separating satisfactory response times from unsatisfactory response times from your web application or service. With one threshold you can then define three categories:
 
 * Satisfied requests have a response time below **T**.
 * Tolerated requests have a response time equal to or above **T** and below or equal to **4T**.
@@ -29,17 +29,17 @@ $$\bo\text"Apdex"=({\bo\text"Satisfied"\text" requests" + {{\bo\text"Tolerated"\
 
 Selecting the correct threshold is important because the Frustrated requests are 4 times slower than "normal". If T=3 the user waits 3 seconds for a page to load but does not tolerate waiting 12 seconds.
 
-Apdex thresholds must be set by admins, per service, before Apdex scores calculated.
+Apdex thresholds must be set by administrators, per service, before Apdex scores calculated.
 
 ## Set your Apdex for your traces
 
-To visualize your application or service Apdex: 
+To visualize your web application or service Apdex: 
 
-1. On your service dashboard, select Apdex instead of latency:
+1. On your web service dashboard, select Apdex instead of latency. If you don't see this option, check that you have selected a web service:
 
    {{< img src="tracing/faq/apdex_selection.png" alt="Apdex Selection"  >}}
 
-2. Use the pencil icon on the top left of your widget to configure your Apdex:
+2. Use the pencil icon on the top left of your widget to configure your Apdex (you must be an administrator to see this icon):
 
    {{< img src="tracing/faq/apdex_edit.png" alt="Apdex Edit"  >}}
 
@@ -57,5 +57,5 @@ To display the Apdex on your [service page][2], select it in the configuration m
 
 {{< img src="tracing/faq/apdex_service_list.png" alt="Apdex Service List"  >}}
 
-[1]: https://www.apdex.org/overview.html
+[1]: https://www.apdex.org/
 [2]: https://app.datadoghq.com/apm/services

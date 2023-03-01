@@ -1,7 +1,6 @@
 ---
 title: Metrics
 kind: documentation
-disable_sidebar: true
 aliases:
   - /graphing/metrics/
   - /metrics/introduction/
@@ -116,7 +115,7 @@ _Time aggregation_ and _space aggregation_ are two important components of any q
 
 #### Time aggregation
 
-Datadog stores a large volume of points, and in most cases it’s not possible to display all of them on a graph. There would be more datapoints than pixels. Datadog uses time aggregation to solve this problem by combining data points into time buckets. For example, when examining four hours, data points are combined into two-minute buckets. This is called a _rollup_. As the time interval you’ve defined for your query increases, the granularity of your data becomes coarser.
+Datadog stores a large volume of points, and in most cases it's not possible to display all of them on a graph. There would be more datapoints than pixels. Datadog uses time aggregation to solve this problem by combining data points into time buckets. For example, when examining four hours, data points are combined into two-minute buckets. This is called a _rollup_. As the time interval you've defined for your query increases, the granularity of your data decreases.
 
 There are five aggregations you can apply to combine your data in each time bucket: sum, min, max, avg, and count.
 

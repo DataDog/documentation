@@ -12,7 +12,7 @@
 
   {{ if (and $outdated (not .Params.placeholder)) }}
     {{ $text := .Site.Params.translate_status_banner | default "" }}
-    <div class="translate_status_banner text-left">
+    <div class="translate_status_banner text-start">
       <a href="{{ range where $dot.Page.Translations "Lang" "en"}}{{ .Permalink }}{{ end }}?lang_pref=en">
         <div class='alert alert-info'>{{ $text }}</div>
       </a>

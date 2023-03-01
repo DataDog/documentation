@@ -24,7 +24,7 @@ author:
   homepage: https://www.rapdev.io
   name: RapDev
   sales_email: ddsales@rapdev.io
-  support_email: datadog-engineering@rapdev.io
+  support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
 - マーケットプレイス
@@ -74,6 +74,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Sophos インテグレーション
+  uninstallation: README.md#Uninstallation
 ---
 
 
@@ -82,7 +83,7 @@ tile:
 
 Sophos インテグレーションは、Sophos が管理するエンドポイント全体の健全性を監視し、管理対象デバイスが健全な状態にあることを確認します。このインテグレーションには、デバイスの健全性を監視するために使用できる複数のメトリクスの概要を提供する 1 つのダッシュボードがあらかじめ組み込まれています。また、Sophos インテグレーションには 2 つのモニターが付属しており、デバイスの健全性が悪くなった場合や、デバイス上の Sophos サービスの 1 つが停止した場合に、アラートを出すことができます。
 
-### モニター
+### アラート設定
 1. 管理対象エンドポイントの健全性が変化した
 2. 管理対象エンドポイントの Sophos サービスが停止している
 
@@ -92,7 +93,7 @@ Sophos インテグレーションは、Sophos が管理するエンドポイン
 ## サポート
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 
-- サポート: datadog-engineering@rapdev.io
+- サポート: support@rapdev.io
 - セールス: sales@rapdev.io
 - チャット: [rapdev.io](https://www.rapdev.io/#Get-in-touch)
 - 電話: 855-857-0222
@@ -100,7 +101,7 @@ Sophos インテグレーションは、Sophos が管理するエンドポイン
 ---
 ボストンより ❤️ を込めて
 
-*お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:datadog-engineering@rapdev.io)から RapDev へメッセージをお送りいただければ、導入をサポートいたします！*
+*お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？RapDev へ[お問い合わせ](mailto:support@rapdev.io)ください！導入のサポートをいたします。*
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [2]: https://github.com/DataDog/integrations-core/blob/master/rapdev_sophos/datadog_checks/rapdev_sophos/data/conf.yaml.example

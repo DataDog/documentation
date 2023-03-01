@@ -8,7 +8,7 @@ The Datadog Partner Network provides many resources for partners. This is a guid
 
 ## Datadog basics
 
-First, head over to the <a href="https://partners.datadoghq.com/" target="_blank">Partner Portal</a>. Log in and click **Training**. Under Sales Certification, click **Get started today**.
+First, head over to the [Partner Portal][1]. Log in and click **Training**. Under Sales Certification, click **Get started today**.
 
 {{<img src="partners/portal_sales_go.png" alt="Partner Portal Sales Certification" style="max-width:734px">}}
 
@@ -52,14 +52,14 @@ This course:
 - Describes customer success 
 - Helps you position individual product offerings
 
-To guide a customer through a successful proof of value engagement, you need deeper product knowledge. Get started with the [Datadog Fundamentals Learning Path][1] offered by the Datadog Learning Center. The Learning Center courses include hands-on labs and deepen your technical understanding of how Datadog works.
+To guide a customer through a successful proof of value engagement, you need deeper product knowledge. Get started with the [Datadog Fundamentals Learning Path][2] offered by the Datadog Learning Center. The Learning Center courses include hands-on labs and deepen your technical understanding of how Datadog works.
 
 ## Pricing
 
 In order to complete your quote, you need pricing basics.
 
-- [Datadog's pricing][2] describes how pricing works, including the units of measurement and the metering approach at Datadog.
-- [Customer plans][3] provides details about standard end-customer pricing options.
+- [Datadog's pricing][3] describes how pricing works, including the units of measurement and the metering approach at Datadog.
+- [Customer plans][4] provides details about standard end-customer pricing options.
 - Finally, to understand discounts offered, check out the Partner Portal pricing tab:
 
 {{<img src="partners/portal_pricing_go.png" alt="Partner Portal Pricing Info" style="max-width:734px">}}
@@ -77,6 +77,7 @@ If you have gone through the recommended training outlined above, you're ready t
 
 Should you have any questions during your journey, contact partner-support@datadoghq.com 
 
-[1]: https://learn.datadoghq.com/bundles/dd-fundamentals
-[2]: /account_management/billing/pricing/
-[3]: https://www.datadoghq.com/pricing/
+[1]: https://partners.datadoghq.com/
+[2]: https://learn.datadoghq.com/bundles/dd-fundamentals
+[3]: /account_management/billing/pricing/
+[4]: https://www.datadoghq.com/pricing/

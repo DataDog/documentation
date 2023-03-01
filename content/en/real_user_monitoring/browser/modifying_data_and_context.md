@@ -22,6 +22,10 @@ further_reading:
   text: "Datadog Standard Attributes"
 ---
 
+{{< callout url="#" btn_hidden="true" header="Join the Feature Flag Tracking Beta!">}}
+To enrich your RUM data with feature flags and get visibility into performance monitoring and behavioral changes, join the <a href="https://docs.datadoghq.com/real_user_monitoring/guide/setup-feature-flag-data-collection/">Feature Flag Tracking</a> private beta. To request access, contact Datadog Support at support@datadoghq.com.
+{{< /callout >}}
+
 ## Overview
 
 There are various ways you can modify the [data collected][1] by RUM, to support your needs for:
@@ -74,15 +78,15 @@ window.DD_RUM &&
 {{% /tab %}}
 {{< /tabs >}}
 
-2. You must start views for each new page or route change (for single-page applications). RUM data is collected when the view starts. Optionally, define the associated view name, service name, and version. 
+2. You must start views for each new page or route change (for single-page applications). RUM data is collected when the view starts. Optionally, define the associated view name, service name, and version.
 
-   - View: Defaults to the page URL path. 
+   - View: Defaults to the page URL path.
    - Service: Defaults to the default service specified when creating your RUM application.
    - Version: Defaults to the default version specified when creating your RUM application.
 
    For more information, see [Setup Browser Monitoring][4].
 
-The following example manually tracks the page views on the `checkout` page in a RUM application. Use `checkout` for the view name and associate the `purchase` service with version `1.2.3`. 
+The following example manually tracks the page views on the `checkout` page in a RUM application. Use `checkout` for the view name and associate the `purchase` service with version `1.2.3`.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -121,7 +125,7 @@ If you are using React, Angular, Vue, or any other frontend framework, Datadog r
 
 ## Enrich and control RUM data
 
-The RUM Browser SDK captures RUM events and populates their main attributes. The `beforeSend` callback function gives you access to every event collected by the RUM Browser SDK before it is sent to Datadog. 
+The RUM Browser SDK captures RUM events and populates their main attributes. The `beforeSend` callback function gives you access to every event collected by the RUM Browser SDK before it is sent to Datadog.
 
 Intercepting the RUM events allows you to:
 
@@ -494,7 +498,7 @@ window.DD_RUM && window.DD_RUM.clearUser()
 
 ## Sampling
 
-By default, no sampling is applied on the number of collected sessions. To apply a relative sampling (in percent) to the number of sessions collected, use the `sampleRate` parameter when initializing RUM. 
+By default, no sampling is applied on the number of collected sessions. To apply a relative sampling (in percent) to the number of sessions collected, use the `sessionSampleRate` parameter when initializing RUM.
 
 The following example collects only 90% of all sessions on a given RUM application:
 
@@ -507,7 +511,7 @@ datadogRum.init({
     applicationId: '<DATADOG_APPLICATION_ID>',
     clientToken: '<DATADOG_CLIENT_TOKEN>',
     site: '<DATADOG_SITE>',
-    sampleRate: 90,
+    sessionSampleRate: 90,
 });
 ```
 {{% /tab %}}
@@ -524,7 +528,7 @@ datadogRum.init({
         clientToken: '<CLIENT_TOKEN>',
         applicationId: '<APPLICATION_ID>',
         site: '<DATADOG_SITE>',
-        sampleRate: 90,
+        sessionSampleRate: 90,
     })
   })
 </script>
@@ -537,7 +541,7 @@ window.DD_RUM &&
         clientToken: '<CLIENT_TOKEN>',
         applicationId: '<APPLICATION_ID>',
         site: '<DATADOG_SITE>',
-        sampleRate: 90,
+        sessionSampleRate: 90,
     });
 ```
 {{% /tab %}}

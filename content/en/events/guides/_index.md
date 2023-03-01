@@ -7,7 +7,7 @@ further_reading:
 - link: "/events/explorer/"
   tag: "Documentation"
   text: "Datadog Events Explorer"
-- link: "/monitors/create/types/event/"
+- link: "/monitors/types/event/"
   tag: "Documentation"
   text: "Event Monitors"
 aliases:

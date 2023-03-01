@@ -20,6 +20,9 @@ further_reading:
 - link: /agent/kubernetes/tag
   tag: ドキュメント
   text: コンテナから送信された全データにタグを割り当て
+- link: https://www.datadoghq.com/blog/monitor-vsphere-tanzu-kubernetes-grid-with-datadog/
+  tag: ブログ
+  text: vSphere 上の Tanzu Kubernetes Grid を監視する
 kind: documentation
 title: Kubernetes ディストリビューション
 ---
@@ -103,12 +106,7 @@ datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
   kubelet:
-    host:
-      valueFrom:
-        fieldRef:
-          fieldPath: spec.nodeName
-    hostCAPath: /etc/kubernetes/certs/kubeletserver.crt
-    tlsVerify: false # Agent 7.35 で必須となりました。注意事項参照。
+    tlsVerify: false # Agent 7.35 で必須になりました。注意事項をご覧ください。
 ```
 
 {{% /tab %}}
@@ -128,11 +126,7 @@ spec:
   agent:
     config:
       kubelet:
-        host:
-          fieldRef:
-            fieldPath: spec.nodeName
-        hostCAPath: /etc/kubernetes/certs/kubeletserver.crt
-        tlsVerify: false # Agent 7.35 で必須となりました。注意事項参照。
+        tlsVerify: false # Agent 7.35 で必須になりました。注意事項をご覧ください。
   clusterAgent:
     image:
       name: "gcr.io/datadoghq/cluster-agent:latest"
@@ -157,6 +151,14 @@ spec:
     - name: DD_KUBELET_TLS_VERIFY
       value: "false"
   ```
+- AKS 上の Admission Controller の関数では、Webhook の照合時にエラーが発生しないように、セレクターの追加を構成する必要があります。
+
+```yaml
+clusterAgent:
+  env:
+    - name: "DD_ADMISSION_CONTROLLER_ADD_AKS_SELECTORS"
+      value: "true"
+```
 
 ## Google Kubernetes Engine (GKE) {#GKE}
 
@@ -171,7 +173,9 @@ GKE は 2 つの異なる運用モードで構成することができます:
 
 Agent 7.26 以降では、GKE 向けの特殊なコンフィギュレーションは不要です (`Docker` または `containerd` をお使いの場合)。
 
-**注**: COS (Container Optimized OS) をお使いの場合、Kernel  ヘッダーがないため eBPF ベースの `OOM Kill` および `TCP Queue Length` チェックはサポートされません。
+**注**: COS (Container Optimized OS) を使用する場合、eBPF ベースの `OOM Kill` と `TCP Queue Length` チェックが Helm チャートのバージョン 3.0.1 以降でサポートされるようになりました。これらのチェックを有効にするには、以下の設定を行います。
+- `datadog.systemProbe.enableDefaultKernelHeadersPaths` を `false` にします。
+- `datadog.systemProbe.enableKernelHeaderDownload` を `true` にします。
 
 ### Autopilot
 

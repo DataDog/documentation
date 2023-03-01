@@ -82,4 +82,4 @@ For more information on creating a service check see [Service Check Monitor][5]
 [2]: https://app.datadoghq.com/dashboard
 [3]: https://app.datadoghq.com/monitors#create/custom
 [4]: /monitors/notify/
-[5]: /monitors/create/types/custom_check/
+[5]: /monitors/types/service_check/

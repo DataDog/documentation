@@ -733,9 +733,11 @@ const descColumn = (key, value) => {
  * @param {boolean} isNested - is this a nested row
  * @param {array} requiredFields - the required fields array of string to check
  * @param {number} level - how deep does the rabbit hole go?
+ * @param {string} parentKey - parent key
+ * @param {boolean} skipAnyKeys - whether to skip <any-key> rows
  * returns html row with nested rows
  */
-const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, parentKey = '') => {
+const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, parentKey = '', skipAnyKeys = false) => {
   let html = '';
   let newRequiredFields;
 
@@ -811,6 +813,18 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
         //   childData = value["oneOf"];
         // }
 
+
+        if (skipAnyKeys && childData) {
+          Object.entries(childData).forEach(([ckey, cvalue]) => {
+            if(ckey === "&lt;any-key&gt;") {
+              delete childData[ckey];
+              if(Object.keys(childData).length === 0) {
+                childData = null;
+              }
+            }
+          });
+        }
+
         const isReadOnly = isReadOnlyRow(value);
 
         // build up row classes
@@ -831,7 +845,7 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
               ${typeColumn(key, value, readOnlyField)}
               ${descColumn(key, value)}
             </div>
-            ${(childData) ? rowRecursive(tableType, childData, true, (newRequiredFields || []), (level + 1), newParentKey) : ''}
+            ${(childData) ? rowRecursive(tableType, childData, true, (newRequiredFields || []), (level + 1), newParentKey, skipAnyKeys) : ''}
           </div>
         </div>
         `.trim();
@@ -842,14 +856,14 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
     return html;
 };
 
-
 /**
  * Takes a application/json schema for request or response and outputs a table
  * @param {string} tableType - 'request' or 'response'
  * @param {object} data - schema object
+ * @param {boolean} skipAnyKeys - whether to skip <any-key>
  * returns html table string
  */
-const schemaTable = (tableType, data) => {
+const schemaTable = (tableType, data, skipAnyKeys = false) => {
   let extraClasses = '';
   let initialData;
   if(data.type === 'array') {
@@ -864,7 +878,12 @@ const schemaTable = (tableType, data) => {
   } else if(data.additionalProperties) {
     initialData = {"&lt;any-key&gt;": data.additionalProperties};
   } else if(data.oneOf && data.oneOf.length > 0) {
-    initialData = data.oneOf[0].properties;
+    // we don't have access to oneOf names in json so lets set them as "Option n"
+    initialData = data.oneOf
+      .map((obj, indx) => {
+        return {[`Option ${indx + 1}`]: data.oneOf[indx]}
+      })
+      .reduce((obj, item) => ({...obj, ...item}), {});
   } else {
     initialData = data.properties;
   }
@@ -877,7 +896,7 @@ const schemaTable = (tableType, data) => {
         </div>
       </div>
     </div>`.trim();
-  return `<div class="${extraClasses}">${(initialData) ? rowRecursive(tableType, initialData, false, data.required || []) : emptyRow}</div>`;
+  return `<div class="${extraClasses}">${(initialData) ? rowRecursive(tableType, initialData, false, data.required || [], 0, '', skipAnyKeys) : emptyRow}</div>`;
 };
 
 /**

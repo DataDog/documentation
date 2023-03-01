@@ -1,63 +1,74 @@
 ---
-title: メトリクスの概要
-kind: documentation
-description: Datadog に報告されるすべてのメトリクスをリストする
 aliases:
-  - /ja/graphing/faq/how-can-i-set-up-custom-units-for-custom-metrics
-  - /ja/graphing/metrics/summary/
+- /ja/graphing/faq/how-can-i-set-up-custom-units-for-custom-metrics
+- /ja/graphing/metrics/summary/
+description: Datadog に報告されるすべてのメトリクスをリストする
 further_reading:
-  - link: /metrics/explorer/
-    tag: ドキュメント
-    text: メトリクスエクスプローラー
-  - link: /metrics/distributions/
-    tag: ドキュメント
-    text: ディストリビューションメトリクス
+- link: /metrics/explorer/
+  tag: ドキュメント
+  text: メトリクスエクスプローラー
+- link: /metrics/distributions/
+  tag: ドキュメント
+  text: ディストリビューションメトリクス
+kind: documentation
+title: メトリクスの概要
 ---
+
 ## 概要
 
 [メトリクスの概要ページ][1]には、過去 1 時間、1 日、または 1 週間の指定されたタイムフレームで Datadog に報告されたメトリクスのリストが表示されます。
 
-**Metric** または **Tag** 検索フィールドを使用して、名前またはタグでメトリクスを検索します。
+**Metric** または **Tag** 検索フィールドを使用して、メトリクス名またはタグでメトリクスを検索します。
 
-{{< img src="metrics/summary/tagexplorer2.gif" alt="タグで絞り込み"  style="width:75%;">}}
+{{< img src="metrics/summary/tag_advancedfiltering.mp4" alt="タグ検索バーに NOT team:* が入力されたメトリクスサマリーページ" video=true style="width:75%;">}}
+
+タグフィルターは、ブーリアンやワイルドカードの構文に対応しており、以下を素早く識別することができます。
+* 特定のタグキーでタグ付けされたメトリクス。例: `team`: `team:*`
+* 特定のタグキーがないメトリクス。例: `team`: `NOT team:*`
+
 
 ## ファセットパネル
 
 検索バーは、メトリクスのリストをフィルタリングするための最も包括的なアクションのセットを提供します。ただし、ファセットは次の方法でメトリクスをすばやくフィルタリングすることもできます。
 * **Configuration** :タグコンフィギュレーションまたは追加のパーセンタイル集計を使用して、メトリクスをすばやく識別します
 * **Metric Type** : ディストリビューションと非ディストリビューション (カウント、ゲージ、レート) をすばやく特定します
+* **Distribution Metric Origin**: ディストリビューションメトリクスがどの製品から発生したかをすばやく特定します (例: ログからメトリクスを生成、スパンからメトリクスを生成、など)。
 
-{{< img src="metrics/summary/facets.jpg" alt="メトリクスファセットパネル"  style="width:75%;">}}
+{{< img src="metrics/summary/facets2.jpg" alt="メトリクスファセットパネル" style="width:75%;">}}
 
 
 ## 複数のメトリクスのコンフィギュレーション
 一度に複数のメトリクスを構成できる 2 つのボタンがあります。
 
-{{< img src="metrics/summary/configurationbuttons.jpg" alt="一括コンフィギュレーションボタン"  style="width:75%;">}}
+{{< img src="metrics/summary/configurationbuttons.jpg" alt="一括コンフィギュレーションボタン" style="width:75%;">}}
 
 * **Calculate Percentiles**: 複数のディストリビューションメトリクスにパーセンタイル集計を追加します。
 
-{{< img src="metrics/summary/bulkpercentiles.jpg" alt="一括パーセンタイル"  style="width:75%;">}}
+{{< img src="metrics/summary/bulkpercentiles.jpg" alt="一括パーセンタイル" style="width:75%;">}}
 
-* **Configure Tags**: 複数のディストリビューションメトリクスにタグを構成します (Metrics without Limits™ ベータユーザーは、カウント、ゲージ、レートでもこの機能を使用できます)。
+* **Configure Tags**: Metrics without Limits™ を使用して、ネームスペースに一致する複数のカスタムメトリクスにタグを構成します
 
-{{< img src="metrics/summary/bulkconfig.gif" alt="一括メトリクスタグコンフィギュレーション"  style="width:75%;">}} 
+{{< img src="metrics/summary/bulkconfig.mp4" alt="一括メトリクスタグコンフィギュレーション" video=true style="width:75%;">}} 
 
 ## メトリクスの詳細サイドパネル
 
 メトリクスのメタデータとタグの詳細については、メトリクス名をクリックして詳細サイドパネルを表示してください。
 
-{{< img src="metrics/summary/metric_panel3.png" alt="メトリクスパネル"  style="width:75%;">}}
+{{< img src="metrics/summary/mwl_sidepanel.jpg" alt="メトリクスパネル" style="width:75%;">}}
 
 ### メトリクス名
 
 [メトリクスエクスプローラー][2]や[ダッシュボード][3]などに表示されるメトリクスの名前です。
 
-### レポートされた個別のメトリクス
+### Ingested Custom Metrics
 
-メトリクス名は、関連するタグ値の組み合わせに応じて、複数の異なるメトリクスを発行する場合があります。この数は、ページで選択したタイムフレームによって異なります。
+メトリクス名は、関連するタグ値の組み合わせによって、複数のインジェストされたカスタムメトリクスを発行することができます。インジェストされたカスタムメトリクスは、元々コードで送信されたすべてのデータを表します。
 
 詳細については、[カスタムメトリクス][4]のドキュメントをご覧ください。
+
+### インデックスされたカスタムメトリクス
+
+インジェストされたカスタムメトリクスとは異なり、インデックスされたカスタムメトリクスは、Datadog プラットフォーム全体でクエリ可能な状態を維持するものを表しています。この数は、パーセンタイル集計の追加や削除、または Metrics without Limits™ の使用によって影響を受ける可能性があります。詳しくは、[Metrics without Limits™][10] のドキュメントを参照してください。<br>
 
 ### ホスト
 
@@ -77,7 +88,9 @@ further_reading:
 
 メトリクスの単位 (バイト、秒、リクエスト、クエリなど) を表示します。詳しくは、[メトリクスの単位][7]のページを参照してください。
 
-カスタムメトリクスを Datadog に送信する場合、メトリクスのグラフの上にマウスを合わせた時に表示される[測定単位][1]が変わる場合があります。**注**: メトリクスのグラフの表示方法は変わりません。元の値の測定単位がマウスを合わせた時に変わるだけです。読みやすい形式になるよう自動的に変更されます。たとえば、バイト (`B`) がキビバイト (`KiB`) の表示に変わる場合があります。
+Datadog にカスタムメトリクスを送信する際、グラフのメトリクスにカーソルを合わせた時に表示される[計測単位][1]を変更することが可能です。
+
+**注**: メトリクスのグラフの表示方法は変わりません。元の値の測定単位がマウスを合わせた時に変わるだけです。読みやすい形式になるよう自動的に変更されます。たとえば、バイト (`B`) がキロバイト (`KiB`) の表示に変わる場合があります。
 
 #### メトリクスタイプ
 
@@ -99,13 +112,14 @@ further_reading:
 
 ### タグテーブル
 
-タグテーブルは、メトリクスのデータでアクティブにレポートしているすべてのタグキーとタグ値を探索するためのさまざまな方法を提供します。
+タグテーブルは、メトリクスのデータでアクティブにレポートしているすべてのタグキーとタグ値を探索するための複数の方法を提供します。
 
 タグテーブルを使用して、次のことを行います。
 
 - **Count 列** (一意のタグ値のカウント) でタグキーを並べ替えます。
 - タグのページ区切りされたテーブルを検索して、特定のタグキーを探します。
 - タグテーブルをダウンロード可能な CSV としてエクスポートします。
+- メトリクスに構成したタグと、メトリクスに元々登録されているタグを切り替えることができます。
 
 特定のタグキーについて、次のことができます。
 
@@ -114,14 +128,48 @@ further_reading:
 - メトリクスエクスプローラーで、タグ `key:value` ペアによってフィルタリングされたこのメトリクスのグラフを開きます。
 - アプリケーション全体でフィルタリングするために、タグ `key:value` をコピーします。
 
-{{< img src="metrics/summary/tags_table.gif" alt="タグテーブル"  style="width:75%;">}}
+{{< img src="metrics/summary/updated_tags_table.mp4" alt="タグテーブル" video=true style="width:75%;">}}
 
 [タグ付けに関する詳しい説明][5]。
+
+## Metrics without Limits\*
+Metrics without Limits\* は、Agent やコードレベルの変更を必要とせずに、カスタムメトリクスのサイズを制御できます。
+
+**注:** Metrics without Limits\* は、カスタムメトリクスでのみ利用可能です。
+
+タグの構成は、メトリクスのタグ一括構成ボタン、またはメトリクスの詳細サイドパネルの **Manage Tags** ボタンで行えます。
+
+{{< img src="metrics/distributions/managetags.png" alt="ディストリビューションでタグを構成する" style="width:80%;">}}
+
+1. **Metrics Summary** テーブルでカスタムディストリビューションのメトリクス名をクリックし、メトリクス詳細のサイドパネルを開きます。
+2. **Manage Tags** ボタンをクリックして、タグコンフィギュレーションモーダルを開きます。
+3. **Custom...** タブをクリックすると、クエリで使用できるようにするタグをカスタマイズすることができます。タグコンフィギュレーションは、保持したいタグの_許可リスト_です。
+4. **Save** を選択する前に、カーディナリティ推定機能で提案した許可リストの効果をプレビューします。
+
+**注**: 許可リストベースのタグのカスタマイズでは、タグの除外はサポートされていません。`!` で始まるタグは追加できません。また、カーディナリティ推定機能では、メトリクスが 48 時間より古いことが要求されます。
+
+### クエリ可能なタグ 
+
+メトリクスが Metrics without Limits\* で構成されると、どのタグが Queryable のままか、つまり _Indexed Custom Metrics_ のボリュームに寄与するタグを表示することができます。また、_Ingested Custom Metrics_ のボリュームに寄与する、最初に送信されインジェストされたすべてのタグにトグルバックすることができます。
+
+### アドバンスドモードでの集計によるメトリクスの最適化
+
+カウント、ゲージ、レートの各メトリクスタイプのカスタムメトリクスでは、Metrics without Limits\* のアドバンスモードでオプションで追加の集計を含めることにより、メトリクスの構成をさらに洗練させることができます。デフォルトでは、Datadog は、構成されたメトリクスのクエリの数学的精度を維持するために、メトリクスのタイプに応じて最も頻繁にクエリされる集計の組み合わせを以下に示すように保存します。
+
+- 構成されたカウント/レートは `SUM` の時間/空間集計でクエリ可能です
+- 構成されたゲージは `AVG` の時間/空間集計ででクエリ可能です
+
+{{< img src="metrics/summary/customize_aggr_docs.jpg" alt="カウント、レート、ゲージに関する集計の精緻化" style="width:80%;">}}
+
+さらに多くの集計が用意されており、お客様にとって価値のある集計となります。Agent やコードレベルの変更なしに、いつでも集計を追加または削除することができます。
+
+**注**: カウント、レート、ゲージのメトリクスを構成し、集計を削除すると、既存のダッシュボードやモニターに影響を与える可能性があります。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[10]:/ja/metrics/metrics-without-limits
 [1]: https://app.datadoghq.com/metric/summary
 [2]: /ja/metrics/explorer/
 [3]: /ja/dashboards/

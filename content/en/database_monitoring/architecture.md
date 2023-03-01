@@ -14,7 +14,9 @@ further_reading:
   text: "Troubleshooting"
 
 ---
-
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
+{{< /site-region >}}
 
 ## Overview
 
@@ -39,7 +41,7 @@ In a self-hosted setup, the Datadog Agent collects system metrics from the opera
 
 * [System metrics collected on Postgres][2]
 * [System metrics collected on MySQL][3]
-* [System metrics collected on SQL Server][15]
+* [System metrics collected on SQL Server][4]
 
 
 For self-hosted setups, you install the Agent directly onto the database host so that you have full visibility into the health of your system running the database process.
@@ -48,14 +50,14 @@ You grant the Agent read-only access to your database, and configure the integra
 
 Instructions for setting up Database Monitoring with a self-hosted provider:
 
-* [Postgres][4]
-* [MySQL][5]
-* [SQL Server][14]
+* [Postgres][5]
+* [MySQL][6]
+* [SQL Server][7]
 
 
 ### Cloud-managed databases
 
-If your setup is cloud-managed (with providers such as [AWS RDS][6] or Aurora, Google Cloud SQL, or Azure), you install the Agent on a separate host and configure it to connect to each managed instance.
+If your setup is cloud-managed (with providers such as [AWS RDS][8] or Aurora, Google Cloud SQL, or Azure), you install the Agent on a separate host and configure it to connect to each managed instance.
 
 Database Monitoring collects system metrics such as CPU, memory, disk usage, logs, and related telemetry directly from the cloud provider using the Datadog integration with that provider.
 
@@ -63,15 +65,15 @@ Database Monitoring collects system metrics such as CPU, memory, disk usage, log
 
 You can install the Agent on any cloud VM (for example, EC2) provided the Agent can connect to your database instances.
 
-If you are not running your own Kubernetes cluster, Datadog recommends using your cloud provider’s orchestration tools. For example, you can use [AWS ECS][7] to host the Datadog Agent, as [the Agent already exists as a Docker container][8].
+If you are not running your own Kubernetes cluster, Datadog recommends using your cloud provider’s orchestration tools. For example, you can use [AWS ECS][9] to host the Datadog Agent, as [the Agent already exists as a Docker container][10].
 
 ### Kubernetes
 
-If you are running your apps on [Kubernetes][9], use the [Datadog Cluster Agent with Database Monitoring][10], which can run [cluster checks][11] across your pods.
+If you are running your apps on [Kubernetes][11], use the [Datadog Cluster Agent with Database Monitoring][12], which can run [cluster checks][13] across your pods.
 
 {{< img src="database_monitoring/dbm_architecture_clusters.png" alt="Database instances in a cloud provider connect to nodes in a Kubernetes cluster, which then connect to the Datadog backend through the internet. The cloud API connects directly to the Datadog AWS integration.">}}
 
-The [Cluster Agent][12] automatically distributes the database instances across a pool of Agents. This ensures that only one instance of each check runs, as opposed to each node-based Agent pod running this corresponding check. The Cluster Agent holds the configurations and dynamically dispatches them to node-based Agents. The Agents on each node connect to the Cluster Agent every 10 seconds and retrieve the configurations to run.
+The [Cluster Agent][14] automatically distributes the database instances across a pool of Agents. This ensures that only one instance of each check runs, as opposed to each node-based Agent pod running this corresponding check. The Cluster Agent holds the configurations and dynamically dispatches them to node-based Agents. The Agents on each node connect to the Cluster Agent every 10 seconds and retrieve the configurations to run.
 
 If an Agent stops reporting, the Cluster Agent removes it from the active pool and dispatches the configurations to other Agents. This ensures one (and only one) instance always runs even as nodes are added and removed from the cluster. This becomes important when you have a large number of database instances ---  the Cluster Agent spreads the cluster checks across the different nodes.
 
@@ -79,7 +81,7 @@ If an Agent stops reporting, the Cluster Agent removes it from the active pool a
 
 #### Aurora
 
-If you are using [Aurora][13], the Agent must be connected to the individual Aurora instance (not the cluster endpoint) because the Agent must connect directly to the host being monitored.
+If you are using [Aurora][15], the Agent must be connected to the individual Aurora instance (not the cluster endpoint) because the Agent must connect directly to the host being monitored.
 
 For monitoring Aurora databases, the Agent should not connect to the database through a proxy, load balancer, connection pooler such as `pgbouncer`, or the Aurora cluster endpoint. Each Datadog Agent must have knowledge of the underlying hostname and should run on a single host for its lifetime, even in cases of failover. Otherwise, the values of metrics become incorrect.
 
@@ -92,15 +94,15 @@ For monitoring Aurora databases, the Agent should not connect to the database th
 [1]: /agent/basic_agent_usage/
 [2]: /integrations/postgres/?tab=host#data-collected
 [3]: /integrations/mysql/?tab=host#data-collected
-[4]: /database_monitoring/setup_postgres/selfhosted/
-[5]: /database_monitoring/setup_mysql/selfhosted/
-[6]: /integrations/amazon_rds/
-[7]: /agent/amazon_ecs/
-[8]: /agent/docker/
-[9]: /agent/kubernetes/integrations/
-[10]: /database_monitoring/setup_postgres/rds/?tab=kubernetes
-[11]: /agent/cluster_agent/clusterchecks/
-[12]: https://www.datadoghq.com/blog/datadog-cluster-agent/
-[13]: /database_monitoring/setup_postgres/aurora/
-[14]: /database_monitoring/setup_sql_server/selfhosted/
-[15]: /integrations/sqlserver/?tabs=host#data-collected
+[4]: /integrations/sqlserver/?tabs=host#data-collected
+[5]: /database_monitoring/setup_postgres/selfhosted/
+[6]: /database_monitoring/setup_mysql/selfhosted/
+[7]: /database_monitoring/setup_sql_server/selfhosted/
+[8]: /integrations/amazon_rds/
+[9]: /agent/amazon_ecs/
+[10]: /agent/docker/
+[11]: /agent/kubernetes/integrations/
+[12]: /database_monitoring/setup_postgres/rds/?tab=kubernetes
+[13]: /agent/cluster_agent/clusterchecks/
+[14]: https://www.datadoghq.com/blog/datadog-cluster-agent/
+[15]: /database_monitoring/setup_postgres/aurora/

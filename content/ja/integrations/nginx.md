@@ -49,7 +49,7 @@ draft: false
 git_integration_title: nginx
 integration_id: nginx
 integration_title: Nginx
-integration_version: 5.3.0
+integration_version: 5.4.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0

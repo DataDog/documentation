@@ -136,7 +136,8 @@ public class DogStatsdClient
 
         using (var dogStatsdService = new DogStatsdService())
         {
-            dogStatsdService.Configure(dogstatsdConfig);
+            if (!dogStatsdService.Configure(dogstatsdConfig))
+                throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
             dogStatsdService.ServiceCheck("Service.check.name", 0, message: "Application is OK.", tags: new[] { "env:dev" });
         }
     }
@@ -171,4 +172,4 @@ After a service check is reported, use it to trigger a [service check monitor][2
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /developers/dogstatsd/
-[2]: /monitors/create/types/custom_check/
+[2]: /monitors/types/service_check/

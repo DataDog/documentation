@@ -74,7 +74,7 @@ Go の Code Hotspots の識別を有効にするには、[サービスのプロ�
 - 全スパンの 100% のホットスポットの情報を取得するために [`profiler.CPUDuration(60*time.Second)`][5] と [`profiler.WithPeriod(60*time.Second)`][6] が [`profiler.Start()`][7] に渡されていること。これらの値は [dd-trace-go][2] バージョン 1.37.0+ でデフォルトで設定されています。
 
 
-**警告:** Go 1.17 以下には、特に CGO を多用する場合に、この機能の精度を低下させる可能性のあるいくつかのバグ ([GH-35057][8]、[GH-48577][9]、[CL-369741][10]、[CL-369983][11] 参照) があります。これらは 1.18 リリースで修正される予定です。
+**注:** この機能は、Go バージョン 1.18 以降で最もよく機能します。Go 1.17 以下にはいくつかのバグがあり、特に CGO を多用する場合、この機能の精度が落ちることがあります ([GH-35057][8]、[GH-48577][9]、[CL-369741][10]、および [CL-369983][11] 参照)。
 
 [1]: /ja/profiler/enabling/go
 [2]: https://github.com/DataDog/dd-trace-go/releases
@@ -148,7 +148,7 @@ Go の Code Hotspots の識別を有効にするには、[サービスのプロ�
 
 ### 前提条件
 
-{{< programming-lang-wrapper langs="python,go,ruby" >}}
+{{< programming-lang-wrapper langs="python,go,ruby,php" >}}
 {{< programming-lang lang="python" >}}
 
 [Python][1] サービスでプロファイリングを有効にすると、エンドポイントプロファイリングがデフォルトで有効になります。この機能を利用するには、 `dd-trace-py` バージョン 0.54.0 またはそれ以上が必要です。
@@ -162,7 +162,7 @@ Go の Code Hotspots の識別を有効にするには、[サービスのプロ�
 - [dd-trace-go][2] のバージョン 1.35.0 以降を使用していること。
 - 環境で [`DD_PROFILING_ENDPOINT_COLLECTION_ENABLED=true`][3] が設定されているか、 [`tracer.WithProfilerEndpoints(true)`][3] オプションが [`tracer.Start()`][4] に渡されていること。このオプションは [dd-trace-go][2] バージョン 1.37.0+ でデフォルトで有効になっています。
 
-**警告:** Go 1.17 以下には、特に CGO を多用する場合に、この機能の精度を低下させる可能性のあるいくつかのバグ ([GH-35057][5]、[GH-48577][6]、[CL-369741][7]、[CL-369983][8] 参照) があります。これらは 1.18 リリースで修正される予定です。
+**注:** この機能は、Go バージョン 1.18 以降で最もよく機能します。Go 1.17 以下にはいくつかのバグがあり、特に CGO を多用する場合、この機能の精度が落ちることがあります ([GH-35057][5]、[GH-48577][6]、[CL-369741][7]、および [CL-369983][8] 参照)。
 
 [1]: /ja/profiler/enabling/go
 [2]: https://github.com/DataDog/dd-trace-go/releases
@@ -179,6 +179,14 @@ Go の Code Hotspots の識別を有効にするには、[サービスのプロ�
 <p></p>
 
 [1]: /ja/profiler/enabling/ruby
+{{< /programming-lang >}}
+{{< programming-lang lang="php" >}}
+
+[PHP][1] サービスでプロファイリングを有効にすると、 エンドポイントプロファイリングがデフォルトで有効になります。これには [`ddtrace`][2] v0.79.0+ が必要です。エンドポイントプロファイリングを無効にするには、環境変数 `DD_PROFILING_ENDPOINT_COLLECTION_ENABLED` を `0`、`no`、`off` あるいは `false` に設定します。
+<p></p>
+
+[1]: /ja/profiler/enabling/php
+[2]: https://github.com/DataDog/dd-trace-php
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 

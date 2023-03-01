@@ -15,7 +15,7 @@ The RUM Browser SDK can be configured to send requests through a proxy. Requests
 
 ## SDK initialization
 
-When you set the `proxyUrl` [initialization parameter][1], all RUM data is sent to the specified URL using the POST method (for example, `https://www.proxy.com/foo`).
+When you set the `proxy` [initialization parameter][1], all RUM data is sent to the specified URL using the POST method (for example, `https://www.proxy.com/foo`).
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -27,7 +27,7 @@ datadogRum.init({
     applicationId: '<DATADOG_APPLICATION_ID>',
     clientToken: '<DATADOG_CLIENT_TOKEN>',
     site: '<DATADOG_SITE>',
-    proxyUrl: '<YOUR_PROXY_URL>',
+    proxy: '<YOUR_PROXY_URL>',
 });
 ```
 
@@ -44,7 +44,7 @@ datadogRum.init({
     DD_RUM.init({
         clientToken: '<CLIENT_TOKEN>',
         applicationId: '<APPLICATION_ID>',
-        proxyUrl: '<YOUR_PROXY_URL>',
+        proxy: '<YOUR_PROXY_URL>',
     })
   })
 </script>
@@ -57,7 +57,7 @@ window.DD_RUM &&
     window.DD_RUM.init({
         clientToken: '<CLIENT_TOKEN>',
         applicationId: '<APPLICATION_ID>',
-        proxyUrl: '<YOUR_PROXY_URL>',
+        proxy: '<YOUR_PROXY_URL>'
     });
 ```
 
@@ -66,47 +66,39 @@ window.DD_RUM &&
 
 ## Proxy setup
 
-When your proxy receives data from the RUM Browser SDK, it must be forwarded to Datadog. The RUM Browser SDK adds the `ddforward` query parameter to all POST requests to your proxy. This query parameter contains the URL where all data must be forwarded to.
+When your proxy receives data from the RUM Browser SDK, it must be forwarded to Datadog. The RUM Browser SDK adds the `ddforward` query parameter to all POST requests to your proxy. This query parameter contains the URL path and parameters that all data must be forwarded to.
 
 To successfully proxy request to Datadog:
 
-1. Add a `X-Forwarded-For` header containing the request client IP address for accurate geoIP.
-2. Forward the request to the URL set in the `ddforward` query parameter using the POST method.
-4. The request body must remain unchanged.
+1. Build the final Datadog intake URL by using:
+    - the Datadog intake origin corresponding to your site. See table below.
+    - the path and parameters provided by `ddforward`.
+2. Add a `X-Forwarded-For` header containing the request client IP address for accurate geoIP.
+3. Forward the request to the Datadog intake URL using the POST method.
+4. Leave the request body unchanged.
 
-Ensure the `ddforward` attribute points to a valid Datadog endpoint for your [Datadog site][2]. Failure to do so may result in an insecure configuration. 
+The site parameter is an SDK [initialization parameter][1]. Datadog intake origins for each site are listed below:
 
-The site parameter is an SDK [initialization parameter][3]. Valid intake URL patterns for each site are listed below:
+| Site    | Site Parameter            | Datadog intake origin                      |
+| ------- | ------------------------- | ------------------------------------------ |
+| US1     | `datadoghq.com` (default) | `https://browser-intake-datadoghq.com`     |
+| US3     | `us3.datadoghq.com`       | `https://browser-intake-us3-datadoghq.com` |
+| US5     | `us5.datadoghq.com`       | `https://browser-intake-us5-datadoghq.com` |
+| EU1     | `datadoghq.eu`            | `https://browser-intake-datadoghq.eu`      |
+| US1-FED | `ddog-gov.com`            | `https://browser-intake-ddog-gov.com`      |
 
-{{< tabs >}}
-{{% tab "Latest version" %}}
+The Datadog intake origin corresponding to your site parameter should be defined in your proxy implementation.
 
-| Site    | Valid intake URL Pattern                       | Site Parameter      |
-|---------|------------------------------------------------|---------------------|
-| US1     | `https://*.browser-intake-datadoghq.com/*`     | `datadoghq.com`     |
-| US3     | `https://*.browser-intake-us3-datadoghq.com/*` | `us3.datadoghq.com` |
-| US5     | `https://*.browser-intake-us5-datadoghq.com/*` | `us5.datadoghq.com` |
-| EU1     | `https://*.browser-intake-datadoghq.eu/*`      | `datadoghq.eu`      |
-| US1-FED | `https://*.browser-intake-ddog-gov.com/*`      | `ddog-gov.com`      |
+## Legacy proxy setups
 
-{{% /tab %}}
-{{% tab "Before `v4`" %}}
+Before Browser SDK v4.34.0, the `proxyUrl` initialization parameter was used and the Datadog intake origin was included in the <code>ddforward</code> attribute. The proxy implementation was in charge of validating this host and failure to do so resulted in various vulnerabilities.
 
-| Site    | Valid intake URL Pattern             | Site Parameter      |
-|---------|--------------------------------------|---------------------|
-| US1     | `https://*.logs.datadoghq.com/*`     | `datadoghq.com`     |
-| US3     | `https://*.logs.us3-datadoghq.com/*` | `us3.datadoghq.com` |
-| EU1     | `https://*.logs.datadoghq.eu/*`      | `datadoghq.eu`      |
-| US1-FED | `https://*.logs.ddog-gov.com/*`      | `ddog-gov.com`      |
+The Datadog intake origin now needs to be defined in your proxy implementation to ensure security.
 
-{{% /tab %}}
-{{< /tabs >}}
-
+<strong>If you are still using a proxy with an older version of the Browser SDK, we recommend upgrading to a newer version of the Browser SDK.</strong>
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/browser/#initialization-parameters
-[2]: /getting_started/site/
-[3]: /real_user_monitoring/browser/#initialization-parameters

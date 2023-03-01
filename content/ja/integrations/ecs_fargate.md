@@ -33,7 +33,7 @@ draft: false
 git_integration_title: ecs_fargate
 integration_id: aws-fargate
 integration_title: Amazon ECS on AWS Fargate
-integration_version: 3.1.1
+integration_version: 3.2.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -131,10 +131,23 @@ Fargate の主要な作業単位はタスクで、これはタスク定義内で
 {{% tab "AWS CLI" %}}
 ##### AWS CLI タスク定義
 
-1. [datadog-agent-ecs-fargate][1] をダウンロードします。**注**: Internet Explorer をお使いの場合は、以下に記載の JSON ファイルを含む gzip ファイルとしてダウンロードされる場合があります。
+1. [datadog-agent-ecs-fargate.json][1] をダウンロードします。**注**: Internet Explorer をお使いの場合は、以下に記載の JSON ファイルを含む gzip ファイルとしてダウンロードされる場合があります。
 2. JSON を `TASK_NAME`、[Datadog API キー][2]、および適切な `DD_SITE` ({{< region-param key="dd_site" code="true" >}}) で更新します。**注**: 環境変数 `ECS_FARGATE` はすでに `"true"` に設定されています。
 3. タスク定義に他のアプリケーションコンテナを追加します。インテグレーションメトリクスの収集の詳細については、[ECS Fargate のインテグレーションセットアップ][3]を参照してください。
-4. 次のコマンドを実行して ECS タスク定義を登録します。
+4. オプション - Agent 健全性チェックを追加します。
+
+    ECS タスク定義に次を追加して、Agent 健全性チェックを作成します。
+
+    ```json
+    "healthCheck": {
+      "retries": 3,
+      "command": ["CMD-SHELL","agent health"],
+      "timeout": 5,
+      "interval": 30,
+      "startPeriod": 15
+    }
+    ```
+5. 次のコマンドを実行して ECS タスク定義を登録します。
 
 ```bash
 aws ecs register-task-definition --cli-input-json file://<ファイルへのパス>/datadog-agent-ecs-fargate.json

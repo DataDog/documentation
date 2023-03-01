@@ -1,39 +1,56 @@
 ---
+app_id: fluxcd
+app_uuid: 11cc5047-83aa-44df-b7ca-9c6e1c32b723
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
-categories:
-- ''
-creates_events: false
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: fluxcd.gotk.suspend.status
+      metadata_path: metadata.csv
+      prefix: fluxcd.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: fluxcd
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: コミュニティ
+  sales_email: melchior.moulin@blablacar.com
+  support_email: melchior.moulin@blablacar.com
+categories: []
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/fluxcd/README.md
-display_name: fluxcd
+display_on_public_website: true
 draft: false
 git_integration_title: fluxcd
-guid: 23df9683-a49e-462e-8fa7-b04e2bfb8361
 integration_id: fluxcd
 integration_title: fluxcd
 integration_version: 0.0.1
 is_public: true
 kind: integration
-maintainer: melchior.moulin@blablacar.com
-manifest_version: 1.0.0
-metric_prefix: fluxcd.
-metric_to_check: fluxcd.gotk.suspend.status
+manifest_version: 2.0.0
 name: fluxcd
+oauth: {}
 public_title: fluxcd
 short_description: Fluxcd の openmetric v2 とのインテグレーション
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  configuration: README.md#Setup
+  description: Fluxcd の openmetric v2 とのインテグレーション
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: fluxcd
 ---
 
 
@@ -99,5 +116,5 @@ fluxcd インテグレーションには、サービスのチェック機能は�
 [5]: https://github.com/DataDog/integrations-extras/blob/master/fluxcd/datadog_checks/fluxcd/data/conf.yaml.example
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-core/blob/master/check/metadata.csv
+[8]: https://github.com/DataDog/integrations-extras/blob/master/fluxcd/metadata.csv
 [9]: https://docs.datadoghq.com/ja/help/

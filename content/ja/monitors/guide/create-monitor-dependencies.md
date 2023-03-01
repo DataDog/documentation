@@ -2,7 +2,7 @@
 aliases:
 - /ja/monitors/faq/can-i-create-monitor-dependencies
 further_reading:
-- link: /monitors/create/
+- link: /monitors/
   tag: ドキュメント
   text: モニターの作成方法
 - link: /monitors/notify/

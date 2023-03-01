@@ -315,6 +315,11 @@ Agentless logging (also known as "direct log submission") supports the following
 
 It does not require modifying your application code, or installing additional dependencies into your application.
 
+<div class="alert alert-warning">
+  <strong>Note:</strong> If you use log4net or NLog, an appender (log4net) or a logger (NLog) must be configured for Agentless logging to be enabled. In those cases, you can either add these extra dependencies, or use <a href="/logs/log_collection/csharp/?tab=log4net#agentless-logging-with-serilog-sink">agentless logging with the Serilog sink</a> instead.
+</div>
+
+
 ### Configure the APM library
 
 Agentless logging is only available when using APM with automatic instrumentation. To get started, instrument your application as described in the following documents:
@@ -365,7 +370,7 @@ You can further customize some aspects of Agentless log collection using the fol
 
 `DD_LOGS_DIRECT_SUBMISSION_TAGS`
 : If specified, adds all of the specified tags to all generated spans. If not provided, will use `DD_TAGS` instead.<br>
-**Example**: `layer:api, team:intake` 
+**Example**: `layer:api, team:intake`
 Note that the delimiter is a comma and a whitespace: `, `.
 
 The following configuration values should generally not be modified, but may be set if required.
@@ -402,7 +407,7 @@ The following configuration values should generally not be modified, but may be 
 
 {{< /site-region >}}
 
-{{< site-region region="us1-fed" >}}
+{{< site-region region="gov" >}}
 
 `DD_LOGS_DIRECT_SUBMISSION_URL`
 : Sets the URL where logs should be submitted. Uses the domain provided in `DD_SITE` by default.<br>
@@ -425,6 +430,20 @@ The following configuration values should generally not be modified, but may be 
 `DD_LOGS_DIRECT_SUBMISSION_BATCH_PERIOD_SECONDS`
 : Sets the time to wait (in seconds) before checking for new logs to send.<br>
 **Default**: `1`
+
+If you are using the `Microsoft.Extensions.Logging` integration, you can filter the logs sent to Datadog using the standard capabilities built-into `ILogger`. Use the key `"Datadog"` to identify the direct-submission provider, and set the minimum log levels for each namespace. For example, adding the following to your `appSettings.json` would prevent sending any logs with a level below `Warning` to Datadog. Introduced in the .NET tracer library v2.20.0.
+
+```json
+{
+  "Logging": {
+    "Datadog": {
+      "LogLevel": {
+        "Microsoft.AspNetCore": "Warning"
+      },
+    }
+  }
+}
+```
 
 ## Agentless logging with Serilog sink
 
@@ -491,7 +510,7 @@ using (var log = new LoggerConfiguration()
 
 {{< /site-region >}}
 
-{{< site-region region="us1-fed" >}}
+{{< site-region region="gov" >}}
 
 ```csharp
 using (var log = new LoggerConfiguration()

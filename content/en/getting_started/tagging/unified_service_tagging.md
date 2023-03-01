@@ -66,7 +66,7 @@ To setup unified service tagging in a containerized environment:
 
 2. If you are using [Docker][2], make sure the Agent can access your container's [Docker socket][7]. This allows the Agent detect the environment variables and map them to the standard tags.
 
-4. Configure your environment based on either full configuration or partial configuration detailed below.
+3. Configure your environment that corresponds to your container orchestration service based on either full configuration or partial configuration as detailed below.
 
 #### Configuration
 

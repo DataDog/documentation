@@ -70,7 +70,9 @@ Don’t see the HTTP endpoints you were expecting on the Service page? In APM, e
 
 ## Resources
 
-Resources represent a particular domain of a customer application. They could typically be an instrumented web endpoint, database query, or background job. For a web service, these resources can be dynamic web endpoints that are grouped by a static span name -  `web.request`. In a database service, these would be database queries with the span name `db.query`. For example the `web-store` service has automatically instrumented resources - web endpoints - which handle checkouts, updating_carts, add_item, etc. Each resource has its own [Resource page][7] with [trace metrics](#trace-metrics) scoped to the specific endpoint. Trace metrics can be used like any other Datadog metric - they are exportable to a dashboard or can be used to create monitors. The Resource page also shows the span summary widget with an aggregate view of [spans](#spans) for all [traces](#trace), latency distribution of requests, and traces which show requests made to this endpoint.
+Resources represent a particular domain of a customer application. They could typically be an instrumented web endpoint, database query, or background job. For a web service, these resources can be dynamic web endpoints that are grouped by a static span name -  `web.request`. In a database service, these would be database queries with the span name `db.query`. For example the `web-store` service has automatically instrumented resources - web endpoints - which handle checkouts, updating carts, adding items, and so on. A Resource name can be the HTTP method and the HTTP route, for example `GET /productpage` or `ShoppingCartController#checkout`. 
+
+Each resource has its own [Resource page][7] with [trace metrics](#trace-metrics) scoped to the specific endpoint. Trace metrics can be used like any other Datadog metric - they are exportable to a dashboard or can be used to create monitors. The Resource page also shows the span summary widget with an aggregate view of [spans](#spans) for all [traces](#trace), latency distribution of requests, and traces which show requests made to this endpoint.
 
 {{< img src="tracing/visualization/resource_page.mp4" video="true" alt="resource page" >}}
 
@@ -107,6 +109,10 @@ For the example below, the **service entry spans** are:
 ## Span summary
 
 The span summary table shows metrics for spans aggregated across all traces, including how often the span shows up among all traces, what percent of traces contain the span, the average duration for the span, and its typical share of total execution time of the requests. This helps you detect N+1 problems in your code so you can improve your application performance.
+
+
+The span summary table is only available for resources containing service entry spans.
+
 
 The span summary table contains the following columns:
 
@@ -178,6 +184,8 @@ After a tag has been added to a span, search and query on the tag in Analytics b
 
 Some [Tracing Application Metrics][15] are tagged with `sublayer_service` and `sublayer_type` so that you can see the execution time for individual services within a trace.
 
+Sublayer metrics are only available if a service has downstream dependencies. 
+
 ## Execution time
 
 Execution time is calculated by adding up the time that a span is active, meaning it has no child spans. For non-concurrent work, this is straightforward. In the following image, the execution time for Span 1 is $\D1 + \D2 + \D3$. The execution time for Spans 2 and 3 are their respective widths.
@@ -192,7 +200,7 @@ When child spans are concurrent, execution time is calculated by dividing the ov
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/create/types/apm/
+[1]: /monitors/types/apm/
 [2]: /developers/guide/data-collection-resolution-retention/
 [3]: /tracing/setup/
 [4]: /tracing/services/services_list/

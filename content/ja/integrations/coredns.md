@@ -29,7 +29,6 @@ author:
 categories:
 - コンテナ
 - ネットワーク
-- オートディスカバリー
 - ログの収集
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/coredns/README.md
@@ -38,7 +37,7 @@ draft: false
 git_integration_title: coredns
 integration_id: coredns
 integration_title: CoreDNS
-integration_version: 2.2.1
+integration_version: 2.3.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -54,7 +53,6 @@ tile:
   - Supported OS::Linux
   - Category::Containers
   - Category::Network
-  - Category::Autodiscovery
   - Category::Log Collection
   configuration: README.md#Setup
   description: CoreDNS は、Kubernetes の DNS メトリクスを収集します。
@@ -72,7 +70,7 @@ CoreDNS からリアルタイムにメトリクスを取得して、DNS エラ�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 CoreDNS チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 

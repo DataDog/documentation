@@ -15,7 +15,7 @@ const initializeAlgoliaIndex = () => {
 }
 
 const getSiteLang = () => {
-    return document.querySelector('html').lang;
+    return document.querySelector('html').lang.toLowerCase() || 'en-us'
 }
 
 const getTitle = (hit) => {
@@ -274,24 +274,24 @@ const renderResults = (query, hits) => {
             let cls = '';
             cleanHandlers();
             html +=
-                '<a class="mr-1 btn btn-sm-tag btn-outline-secondary" href="#" id="btn_prev">Prev</a>';
+                '<a class="me-1 btn btn-sm-tag btn-outline-secondary" href="#" id="btn_prev">Prev</a>';
             if (page_nums[0] > 1) {
                 html +=
-                    '<a class="mr-1 btn btn-sm-tag btn-outline-secondary less" href="#">...</a>';
+                    '<a class="me-1 btn btn-sm-tag btn-outline-secondary less" href="#">...</a>';
             }
             for (let i = 0; i < page_nums.length; i++) {
                 cls =
                     current_page === page_nums[i]
                         ? 'active'
                         : '';
-                html += `<a class="mr-1 page-num btn btn-sm-tag btn-outline-secondary ${cls}" href="#" data-pagenum="${page_nums[i]}">${page_nums[i]}</a>`;
+                html += `<a class="me-1 page-num btn btn-sm-tag btn-outline-secondary ${cls}" href="#" data-pagenum="${page_nums[i]}">${page_nums[i]}</a>`;
             }
             if (page_nums[page_nums.length - 1] < numPages()) {
                 html +=
-                    '<a class="mr-1 btn btn-sm-tag btn-outline-secondary more" href="#">...</a>';
+                    '<a class="me-1 btn btn-sm-tag btn-outline-secondary more" href="#">...</a>';
             }
             html +=
-                '<a class="mr-1 btn btn-sm-tag btn-outline-secondary" href="#" id="btn_next">Next</a>';
+                '<a class="me-1 btn btn-sm-tag btn-outline-secondary" href="#" id="btn_next">Next</a>';
             if (page_navigation) {
                 page_navigation.innerHTML = html;
             }

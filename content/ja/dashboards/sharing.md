@@ -1,24 +1,25 @@
 ---
-title: ダッシュボードの共有
-kind: documentation
 aliases:
-  - /ja/graphing/faq/is-there-a-way-to-share-graphs
-  - /ja/graphing/faq/is-there-a-way-to-share-or-revoke-previously-shared-graphs
-  - /ja/graphing/dashboards/shared_graph/
+- /ja/graphing/faq/is-there-a-way-to-share-graphs
+- /ja/graphing/faq/is-there-a-way-to-share-or-revoke-previously-shared-graphs
+- /ja/graphing/dashboards/shared_graph/
 further_reading:
-  - link: https://www.datadoghq.com/blog/dashboard-sharing/
-    tag: ブログ
-    text: ダッシュボードを組織外の人と安全に共有する
-  - link: /dashboards/
-    tag: ドキュメント
-    text: Datadog でダッシュボードを作成
-  - link: /dashboards/template_variables/
-    tag: ドキュメント
-    text: テンプレート変数を使用してダッシュボードを強化
-  - link: /dashboards/widgets/
-    tag: Documentation
-    text: ダッシュボードのウィジェットについて
+- link: https://www.datadoghq.com/blog/dashboard-sharing/
+  tag: ブログ
+  text: ダッシュボードを組織外の人と安全に共有する
+- link: /dashboards/
+  tag: ドキュメント
+  text: Datadog でダッシュボードを作成
+- link: /dashboards/template_variables/
+  tag: ドキュメント
+  text: テンプレート変数を使用してダッシュボードを強化
+- link: /dashboards/widgets/
+  tag: Documentation
+  text: ダッシュボードのウィジェットについて
+kind: documentation
+title: ダッシュボードの共有
 ---
+
 ## 概要
 
 ダッシュボードやグラフを共有すると、メトリクス、トレース、ログを Datadog の外でビジュアルに表示できます。
@@ -64,6 +65,10 @@ URL またはメールリンクでダッシュボードを共有すると、共�
 3. 右上の設定歯車をクリックします。
 4. **Configure sharing** をクリックします。
 5. **Revoke public URL** をクリックします。
+
+### リフレッシュ間隔
+
+公開共有されているダッシュボードは、30 秒ごとに更新されます。この更新間隔をカスタマイズすることはできません。
 
 ## グラフ
 
@@ -112,13 +117,13 @@ Datadog には、共有グラフ（埋め込み）とやり取りするための
 | [Embed の有効化][11]       | 特定の埋め込みを有効にします。                                             |
 | [Embed の無効化][12]       | 特定の埋め込みを無効にします。                                             |
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/dashboard/lists
-[2]: /ja/dashboards/timeboard/
-[3]: /ja/dashboards/screenboard/
+[2]: /ja/dashboards/#timeboards
+[3]: /ja/dashboards/#screenboard
 [4]: https://app.datadoghq.com/account/settings#embeds
 [5]: /ja/help/
 [6]: https://app.datadoghq.com/account/org_security
