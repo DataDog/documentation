@@ -1,9 +1,8 @@
 ---
 categories:
-  - cloud
-  - google cloud
-  - ログの収集
-ddtype: crawler
+- cloud
+- google cloud
+- ログの収集
 dependencies: []
 description: Google Cloud Tasks のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_tasks/
@@ -21,6 +20,7 @@ public_title: Datadog-Google Cloud Tasks インテグレーション
 short_description: Google Cloud Tasks のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Google Cloud Tasks は、大量の分散タスクの実行、ディスパッチ、配布を管理できるフルマネージド型のサービスです。

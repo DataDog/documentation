@@ -2,12 +2,12 @@
 title: Getting Started with Logs
 kind: documentation
 further_reading:
-    - link: 'https://learn.datadoghq.com/enrol/index.php?id=40'
+    - link: 'https://learn.datadoghq.com/courses/intro-to-log-management'
       tag: 'Learning Center'
       text: 'Introduction to Log Management'
-    - link: 'https://learn.datadoghq.com/enrol/index.php?id=36'
+    - link: 'https://learn.datadoghq.com/courses/going-deeper-with-logs-processing'
       tag: 'Learning Center'
-      text: 'Going Deeper with Logs: Processing'
+      text: 'Going Deeper with Logs Processing'
     - link: '/logs/log_collection/'
       tag: 'Documentation'
       text: 'Log Collection & Integrations'
@@ -118,8 +118,9 @@ Once a logging source is configured, and your logs are available in the Log Expl
 
 ### Guides
 
-* Dive further into [Logging without Limits*][22]
-* Manage sensitive log data with [RBAC settings][23]
+* [Best practices for Log Management][22]
+* Dive further into [Logging without Limits*][23]
+* Manage sensitive log data with [RBAC settings][24]
 
 ## Further reading
 
@@ -129,9 +130,9 @@ Once a logging source is configured, and your logs are available in the Log Expl
 *Logging without Limits is a trademark of Datadog, Inc.
 
 [1]: https://www.datadoghq.com
-[2]: /tracing/connect_logs_and_traces/
+[2]: /tracing/other_telemetry/connect_logs_and_traces/
 [3]: /logs/guide/correlate-logs-with-metrics/
-[4]: /security_platform/cloud_siem/
+[4]: /security/cloud_siem/
 [5]: /getting_started/integrations/
 [6]: /agent/
 [7]: https://github.com/DataDog/datadog-agent/blob/main/docs/agent/changes.md#cli
@@ -149,5 +150,6 @@ Once a logging source is configured, and your logs are available in the Log Expl
 [19]: /logs/log_configuration/pipelines/
 [20]: /logs/log_configuration/processors/
 [21]: /logs/log_configuration/
-[22]: /logs/guide/getting-started-lwl/
-[23]: /logs/guide/logs-rbac/
+[22]: /logs/guide/best-practices-for-log-management/
+[23]: /logs/guide/getting-started-lwl/
+[24]: /logs/guide/logs-rbac/

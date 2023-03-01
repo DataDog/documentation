@@ -25,5 +25,6 @@
   },
   "message": "Test rule",
   "tags": [],
-  "isEnabled": true
+  "isEnabled": true,
+  "type": "log_detection"
 }

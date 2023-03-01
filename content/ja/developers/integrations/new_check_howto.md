@@ -1,107 +1,103 @@
 ---
-title: 新しいインテグレーションの設定
-kind: documentation
 aliases:
-  - /ja/developers/integrations/integration_sdk/
-  - /ja/developers/integrations/testing/
-  - /ja/integrations/datadog_checks_dev/
-  - /ja/guides/new_integration/
+- /ja/developers/integrations/integration_sdk/
+- /ja/developers/integrations/testing/
+- /ja/integrations/datadog_checks_dev/
+- /ja/guides/new_integration/
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/docs/dev/new_check_howto.md
+kind: documentation
+title: Agent インテグレーションの作成
 ---
-Agent ベースのインテグレーションが用意され、コアリポジトリに組み込んで Agent パッケージにバンドルできる状態だと見なされるには、いくつかの前提条件を満たす必要があります。
+## 概要
 
-- 正しい形式と内容の `README.md` ファイル
-- メトリクス収集を検証する一連のテスト
-- 収集されるメトリクスをすべてリストした `metadata.csv` ファイル
-- 完全な `manifest.json` ファイル
-- サービスチェックを収集するインテグレーションの場合は、`service_checks.json` も必要です。
-
-これらの要件は、コードレビュープロセスでチェックリストとして使用されます。このドキュメントでは、新しいインテグレーションの要件と実装の詳細について説明します。
+このガイドでは、`integrations-extras` リポジトリに Datadog Agent インテグレーションを作成する手順を説明します。Agent ベースのインテグレーションを作成する理由については、[独自のソリューションを作成する][1]を参照してください。
 
 ## 前提条件
 
-- システムで Python 3.8 以上を使用できる必要があります。Python 2.7 は任意ですが、推奨されます。
-- フルテストスイートを実行するための Docker。
+必要な Datadog Agent インテグレーション開発ツールは以下の通りです。
 
-一般に、[Python 仮想環境][1]を作成して有効化することで、開発環境を独立させることが推奨されますが、これは必須ではありません。詳細については、[Python 環境のドキュメント][2]を参照してください。
+- Python v3.8、[pipx][2]、Agent Integration Developer Tool (`ddev`) が必要です。インストール方法については、[Datadog Agent Integration Developer Tool のインストール][3]を参照してください。
+- フルテストスイートを実行するための [Docker][4]。
+- git [コマンドライン][5]または [GitHub デスクトップクライアント][19]。
 
-## セットアップ
+## integrations-extra リポジトリのセットアップ
 
-[integrations-extras リポジトリ][3]を複製します。デフォルトでは、このツールは `$HOME/dd/` ディレクトリで作業することを想定しています。ただし、これは任意で、後で構成によって調整できます。
+以下の手順で、インテグレーション開発用のリポジトリをセットアップします。
 
-```shell
-mkdir $HOME/dd && cd $HOME/dd       # 任意
-git clone https://github.com/DataDog/integrations-extras.git
-```
+1. `dd` ディレクトリを作成します。
 
-### 開発ツールキット
+   Datadog Development Toolkit は、`$HOME/dd/` ディレクトリで作業することを想定しています。これは必須ではありませんが、異なるディレクトリで作業する場合は、追加の構成手順が必要です。
 
-総合的な[開発ツールキット][4]には、多数の機能が含まれます。最初に行う作業は次のとおりです。
+   `dd` ディレクトリを作成し、`integrations-extras` リポジトリを複製するには
+   ```
+   mkdir $HOME/dd && cd $HOME/dd
+   ```
 
-```bash
-pip3 install "datadog-checks-dev[cli]"
-```
+1. [`integrations-extras` リポジトリ][6]をフォークします。
 
-このリポジトリを `$HOME/dd/` 以外の場所に複製する場合は、構成ファイルの調整が必要になります。
+1. フォークを `dd` ディレクトリに複製します。
+   ```
+   git clone git@github.com:<YOUR USERNAME>/integrations-extras.git
+   ```
 
-```bash
-ddev config set extras "/path/to/integrations-extras"
-```
+1. 作業するフィーチャーブランチを作成します。
+   ```
+   git switch -c <YOUR INTEGRATION NAME> origin/master
+   ```
 
-主に `integrations-extras` で作業する場合は、それをデフォルトの作業用リポジトリとして設定します。
+## デベロッパーツールの構成
 
-```bash
-ddev config set repo extras
-```
+[Agent Integration Developer Tool][3] がインストールされていると仮定して、`integrations-extras` リポジトリに対してツールを構成します。
 
-**注**: このステップを行わない場合は、コンテキストが正しく `integrations-extras` になるように、すべての呼び出しで `-e` を使用する必要があります。
+1. オプションとして、`integrations-extras` リポジトリが `$HOME/dd/` 以外の場所にある場合は、`ddev` 構成ファイルを調整します。
+   ```
+   ddev config set extras "/path/to/integrations-extras"
+   ```
 
-```bash
-ddev -e COMMAND [OPTIONS]
-```
+1. デフォルトの作業用リポジトリとして `integrations-extras` を設定します。
+   ```
+   ddev config set repo extras
+   ```
 
-## スキャフォールディング
+## インテグレーションを作成する
 
-開発ツールキットの機能に含まれる `create` コマンドは、新しいインテグレーションに必要な基本ファイルとパス構造 (「スキャフォールディング」) を作成します。
+Docker をダウンロードし、適切なバージョンの Python をインストールし、開発環境を準備したら、Agent ベースのインテグレーションの作成を始めることができます。以下の説明では、`Awesome` というインテグレーションのサンプルを使用します。Awesome のコードを参考にするか、Awesome を自分のコードに置き換えてください。
 
-### ドライラン
+### インテグレーションのためのスキャフォールディングを作成する
 
-ディスクに何も書き込まない `-n/--dry-run` フラグを使用して、ドライランを行ってみます。
+`ddev create` コマンドは、新しい Agent ベースのインテグレーションに必要な基本的なファイルとパスの構造 (または "スキャフォールディング") を作成するインタラクティブツールを実行します。
 
-```bash
-ddev create -n Awesome
-```
+1. 最初のインテグレーションディレクトリを作る前に、ディスクに何も書き込まない `-n/--dry-run` フラグを使って、ドライランを試してみてください。
+   ```
+   ddev create -n Awesome
+   ```
 
-これで、ファイルが書き込まれるパスと、パス構造自体が表示されます。ここで確認が必要なのは、出力の _1 行目_のパスが Extras リポジトリと一致していることのみです。
+   このコマンドで、ファイルが書き込まれるパスと、パス構造自体が表示されます。出力の 1 行目のパスが `integrations-extras` リポジトリの場所と一致していることを確認します。
 
-### インタラクティブモード
+1. コマンドを `-n` フラグを付けずに実行します。このツールは、メールと名前の入力を求め、インテグレーションを始めるために必要なファイルを作成します。
+   ```
+   ddev create Awesome
+   ```
 
-インタラクティブモードは、新しいインテグレーションを作成するためのウィザードです。いくつかの質問に答えることで、事前構成された状態でスキャフォールディングが簡易にセットアップされます。
+## Agent チェックを書く
 
-```bash
-ddev create Awesome
-```
+各 Agent ベースのインテグレーションの核となるのは、定期的に情報を収集し Datadog に送信する *Agent チェック*です。チェックは、`AgentCheck` ベースクラスからそのロジックを継承し、以下の要件を持っています。
 
-質問に答えると上のドライランと同じ出力が得られますが、この場合は、新しいインテグレーションのスキャフォールディングが実際に作成されます。
-
-## チェックの書き方
-
-### はじめに
-
-チェックは、次の要件を満たす Python クラスです。
-
-- Agent v7 以降を介して実行されるインテグレーションは、Python 3 互換でなければなりません。ただし、Agent v5 および v6 は引き続き Python 2.7 を使用します。
-- `AgentCheck` から派生されます。
-- `check(self, instance)` というシグニチャを持つメソッドを提供する必要があります。
-
-チェックは、標準 Python パッケージ内の `datadog_checks` ネームスペース以下に置かれるため、コードは `awesome/datadog_checks/awesome` の下に置く必要があります。要件は、パッケージ名とチェック名が同じでなければならないということだけです。パッケージ内の Python モジュールの名前やチェックを実装するクラスの名前に特別の制約はありません。
+- Datadog Agent v7 以降で実行するインテグレーションには、Python 3 との互換性が必要ですが、Agent v5 と v6 では、まだ Python 2.7 を使用しています。
+- チェックは `AgentCheck` から派生している必要があります。
+- チェックは、このシグネチャを持つメソッド `check(self, instance)` を提供しなければなりません。
+- チェックは通常の Python パッケージの中で、`datadog_checks` ネームスペースの下にまとめられています。例えば、Awesome のコードは `awesome/datadog_checks/awesome/` ディレクトリに格納されています。
+- パッケージ名は、チェック名と同じでなければなりません。
+- そのパッケージ内の Python モジュールの名称や、チ ェックを実装するクラスの名称には制限がありません。
 
 ### チェックロジックの実装
 
-Web ページ内の文字列を検索する `awesome.search` という名前のサービスチェックでのみ構成される Agent チェックを作成するとします。このチェックは、文字列が存在する場合は `OK`、ページにアクセスできるが文字列が見つからない場合は `WARNING`、ページにアクセスできない場合は `CRITICAL` という結果になります。Agent チェックでメトリクスを送信する方法については、[メトリクスの送信: カスタム Agent チェック][5]を参照してください。
+Awesome の場合、Agent チェックは `awesome.search` という名前のサービスチェックで構成されており、Web ページ上の文字列を検索します。文字列が存在する場合は `OK`、ページにアクセスできるが文字列が見つからない場合は `WARNING`、ページにアクセスできない場合は `CRITICAL` という結果になります。Agent チェックでメトリクスを送信する方法については、[カスタム Agent チェック][7]を参照してください。
 
 `awesome/datadog_checks/awesome/check.py` のコードは次のようになります。
 
-```python
+{{< code-block lang="python" filename="check.py" collapsible="true" >}}
 import requests
 
 from datadog_checks.base import AgentCheck, ConfigurationError
@@ -134,29 +130,28 @@ class AwesomeCheck(AgentCheck):
             # search_string が見つからなかった場合
             else:
                 self.service_check('awesome.search', self.WARNING)
-```
+{{< /code-block >}}
 
-基本 Python クラスの詳細は、[Python API のドキュメント][6]を参照してください。
+基本 Python クラスの詳細は、[Python チェックの構造][8]を参照してください。
 
-### テストの書き方
+## 検証テストを書く
 
 テストには次の 2 つの基本的なタイプがあります。
 
-- 特定の機能のユニットテスト。
-- `check` メソッドを実行し、適切なメトリクス収集を検証するインテグレーションテスト。
+- [特定の機能のユニットテスト。](#write-a-unit-test)
+- [`check` メソッドを実行し、適切なメトリクス収集を検証するインテグレーションテスト。](#write-an-integration-test)
 
-`integrations-extras` にインテグレーションを追加する場合、テストは_必須_です。テストは [pytest][7] と [tox][8] を使用して実行されます。
+[pytest][9] と [hatch][10] はテストを実行するために使用されます。インテグレーションを `integrations-extras` リポジトリに含めたい場合は、テストが必要です。
 
-詳細については、[Datadog Checks Dev のドキュメント][9]を参照してください。
+### ユニットテストを書く
 
-#### ユニットテスト
+Awesome の `check` メソッドの前半では、2 つの要素をコンフィギュレーションファイルから取得して検証しています。これは、ユニットテストにかける候補として適切です。`awesome/tests/test_awesome.py` ファイルを開き、内容を次に書き換えます。
 
-`check` メソッドの前半では、2 つの要素をコンフィギュレーションファイルから取得して検証しています。これは、ユニットテストにかける候補として適切です。`awesome/tests/test_awesome.py` ファイルを開き、内容を次のように書き換えます。
-
-```python
+{{< code-block lang="python" filename="test_awesome.py" collapsible="true" >}}
 import pytest
 
-# 忘れずにインテグレーションをインポートします
+    # インテグレーションをインポートするのを忘れないでください
+
 from datadog_checks.awesome import AwesomeCheck
 from datadog_checks.base import ConfigurationError
 
@@ -178,23 +173,30 @@ def test_config():
     with pytest.raises(ConfigurationError):
         c.check({'search_string': 'foo'})
 
-    # これでエラーになりません
+    # これは失敗しません
     c.check({'url': 'http://foobar', 'search_string': 'foo'})
+{{< /code-block >}}
+
+`pytest` はマーカーをサポートし、これを使用してテストをカテゴリにグループ化できます。`test_config` が `unit` テストとしてマークされていることに注目してください。
+
+スキャフォールディングは、`awesome/tests` にあるすべてのテストを実行するように設定されています。
+
+テストを実行するには、以下を実行します。
 ```
-
-`pytest` は_マーカー_をサポートし、これを使用してテストをカテゴリにグループ化できます。`test_config` が `unit` テストとしてマークされていることに注目してください。
-
-スキャフォールディングは、`awesome/tests` にあるすべてのテストを実行するようにあらかじめセットアップされています。テストを実行します。
-
-```bash
 ddev test awesome
 ```
 
-#### インテグレーションテストの構築
+### インテグレーションテストを書く
 
-ユニットテストでは収集_ロジック_がチェックされないため、インテグレーションテストを追加しましょう。`docker` を使用して Nginx コンテナをスピンアップし、チェックで Welcome ページを取得します。次のような内容の Compose ファイルを `awesome/tests/docker-compose.yml` として作成します。
+[上記のユニットテスト](#write-a-unit-test)では、コレクションロジックはチェックされません。ロジックをテストするには、インテグレーションテストのための環境を作り、インテグレーションテストを書く必要があります。
 
-```yaml
+#### インテグレーションテスト用の環境を作成する
+
+このツールキットは `docker` を使って Nginx コンテナをスピンアップし、チェックにウェルカムページを取得させることができます。
+
+インテグレーションテスト用の環境を作成するために、`awesome/tests/docker-compose.yml` に以下の内容で docker-compose ファイルを作成します。
+
+{{< code-block lang="yaml" filename="docker-compose.yml" collapsible="true" >}}
 version: "3"
 
 services:
@@ -202,11 +204,12 @@ services:
     image: nginx:stable-alpine
     ports:
       - "8000:80"
-```
 
-ここで、`awesome/tests/conftest.py` ファイルを開き、内容を次のように書き換えます。
+{{< /code-block >}}
 
-```python
+次に、`awesome/tests/conftest.py` ファイルを開き、内容を次に書き換えます。
+
+{{< code-block lang="python" filename="conftest.py" collapsible="true" >}}
 import os
 
 import pytest
@@ -222,11 +225,11 @@ INSTANCE = {'url': URL, 'search_string': SEARCH_STRING}
 def dd_environment():
     compose_file = os.path.join(get_here(), 'docker-compose.yml')
 
-    # これは 3 つのことを行います。
+    # これには 3 つの意味があります。
     #
-    # 1. Compose ファイルで定義されているサービスをスピンアップします
-    # 2. URL にアクセスできるようになるまで待ってから、テストを実行します
-    # 3. テストが終了したら、サービスを終了します
+    # 1. Compose ファイルで定義されたサービスをスピンアップします
+    # 2. テストを実行する前に、URL が利用可能になるまで待ちます
+    # 3. テスト終了後、サービスを撤収します
     with docker_run(compose_file, endpoints=[URL]):
         yield INSTANCE
 
@@ -234,13 +237,13 @@ def dd_environment():
 @pytest.fixture
 def instance():
     return INSTANCE.copy()
-```
+{{< /code-block >}}
 
-#### インテグレーションテスト
+#### インテグレーションテストを追加する
 
-最後に、`awesome/tests/test_awesome.py` ファイルにインテグレーションテストを追加します。
+インテグレーションテストのための環境を整えたら、`awesome/tests/test_awesome.py` ファイルにインテグレーションテストを追加します。
 
-```python
+{{< code-block lang="python" filename="test_awesome.py" collapsible="true" >}}
 @pytest.mark.integration
 @pytest.mark.usefixtures('dd_environment')
 def test_service_check(aggregator, instance):
@@ -254,45 +257,42 @@ def test_service_check(aggregator, instance):
     instance['search_string'] = 'Apache'
     c.check(instance)
     aggregator.assert_service_check('awesome.search', AwesomeCheck.WARNING)
+{{< /code-block >}}
+
+開発をスピードアップするために、`-m/--marker` オプションを使って、インテグレーションテストのみを実行することができます。
+
 ```
-
-迅速に開発するには、`-m/--marker` オプションを使用して、インテグレーションテストのみを実行します。
-
-```bash
 ddev test -m integration awesome
 ```
 
-これでチェックはほぼ完成です。インテグレーション構成を追加して、最後の仕上げを行いましょう。
+インテグレーションはほぼ完了です。次に、必要なチェックアセットを追加します。
 
-### チェックアセットを作成する
+## チェックアセットを作成する
 
-チェックが含まれると見なされるためには、ddev スキャフォールディングによって作成されたアセットのセットにデータを入力する必要があります。
+チェックが `integrations-extras` で考慮されるためには、`ddev` スキャフォールディングによって作成されたアセットのセットにデータを入力する必要があります。
 
 `README.md`
-: これには、チェックのドキュメント、その設定方法、収集するデータなどが含まれます。
+: これには、Agent チェックのドキュメント、その設定方法、収集するデータ、サポート情報が含まれます。
 
 `spec.yaml`
-: これは、`ddev` ツールを使用して `conf.yaml.example` を生成するのに使用されます（下記 "コンフィギュレーションテンプレート" タブ参照）。[詳細はコンフィギュレーション仕様書をご覧ください。][16]
+: これは `ddev` ツールを使用して `conf.yaml.example` を生成するために使用されます (以下の**構成テンプレート**タブを参照してください)。詳しくは、[構成仕様][11]を参照してください。
 
 `conf.yaml.example`
-: これには、Agent チェックのデフォルト（または一例として）のコンフィギュレーションオプションが含まれます。このファイルを手動で編集しないでください！これは `spec.yaml` のコンテンツから生成されます。[そのロジックについては、コンフィギュレーションファイルのリファレンスドキュメントを参照してください。][10]
+: これには、Agent チェックのデフォルト（または一例として）のコンフィギュレーションオプションが含まれます。**このファイルを手動で編集しないでください！**これは `spec.yaml` のコンテンツから生成されます。詳しくは、[コンフィギュレーションファイルのリファレンス][12]を参照してください。
 
 `manifest.json`
-: これには、タイトルやカテゴリなどの Agent チェックのメタデータが含まれます。[詳細については、マニフェストのリファレンスドキュメントを参照してください。][11]
+: タイトルやカテゴリーなど、Agent チェックのメタデータが格納されています。詳しくは、[マニフェストファイルリファレンス][13]を参照してください。
 
 `metadata.csv`
-: これには、Agent チェックによって収集されたすべてのメトリクスのリストが含まれます。[詳細については、メトリクスメタデータのリファレンスドキュメントを参照してください。][12]
+: これには、Agent チェックによって収集されたすべてのメトリクスのリストが含まれます。詳細については、[メトリクスメタデータファイルのリファレンス][14]を参照してください。
 
 `service_check.json`
-: これには、Agent チェックによって収集されたすべてのサービスチェックのリストが含まれます。[詳細については、サービスチェックのリファレンスドキュメントを参照してください。][13]
-
-この例では、これらのファイルは次の形式になります。
+: Agent チェックによって収集されたすべてのサービスチェックのリストが含まれています。詳しくは、[サービスチェックファイルリファレンス][15]を参照してください。
 
 {{< tabs >}}
 {{% tab "Configuration template" %}}
 
-`awesome/assets/configuration/spec.yaml` は、`awesome/datadog_checks/awesome/data/conf.yaml.example` を生成するために使用されます。
-
+この例では、`awesome/assets/configuration/spec.yaml` を使用して `awesome/datadog_checks/awesome/data/conf.yaml.example` を生成すると、以下のような形式になります。
 ```yaml
 name: Awesome
 files:
@@ -327,8 +327,7 @@ files:
 - template: instances/default
 ```
 
-`ddev` を使用して、`conf.yaml.example` を生成します。
-
+`ddev` を使って `conf.yaml.example` を生成するには、以下を実行します。
 ```bash
 ddev validate config --sync awesome
 ```
@@ -336,33 +335,49 @@ ddev validate config --sync awesome
 {{% /tab %}}
 {{% tab "マニフェスト" %}}
 
-Awesome サービスチェックの `awesome/manifest.json`。`guid` は一意 (かつ有効) でなければならないことに注意してください。したがって、この例のものを使用_しない_でください (いずれにしても、ツールによって自動的に生成されます)。
-
+この例では、Awesome サービスチェック用の `awesome/manifest.json` は、以下のような形式になります。
 ```json
 {
-  "display_name": "awesome",
-  "maintainer": "email@example.org",
-  "manifest_version": "1.0.0",
-  "name": "awesome",
-  "metric_prefix": "awesome.",
-  "metric_to_check": "",
-  "creates_events": false,
-  "short_description": "",
-  "guid": "x16b8750-df1e-46c0-839a-2056461b604x",
-  "support": "contrib",
-  "supported_os": ["linux", "mac_os", "windows"],
-  "public_title": "Datadog-awesome Integration",
-  "categories": ["web"],
-  "type": "check",
-  "is_public": false,
-  "integration_id": "awesome",
+  "manifest_version": "2.0.0",
+  "app_uuid": "79eb6e54-2110-4d50-86c3-f7037d1a9daa", // この例の UUID は使用しないでください。UUID は一意で有効なものでなければなりません。
+  "app_id": "awesome",
+  "classifier_tags": [
+    "Supported OS::Linux",
+    "Supported OS::Mac OS",
+    "Supported OS::Windows"
+  ],
+  "display_on_public_website": false,
+  "tile": {
+    "overview": "README.md#Overview",
+    "configuration": "README.md#Setup",
+    "support": "README.md#Support",
+    "changelog": "CHANGELOG.md",
+    "description": "",
+    "title": "Awesome",
+    "media": []
+  },
+  "author": {
+    "support_email": "email@example.org"
+  },
+  "oauth": {},
   "assets": {
-    "dashboards": {
-      "Awesome Overview": "assets/dashboards/overview.json",
-      "Awesome Investigation Dashboard": "assets/dashboards/investigation.json"
-    },
-    "monitors": {},
-    "service_checks": "assets/service_checks.json"
+    "integration": {
+      "source_type_name": "Awesome",
+      "configuration": {
+        "spec": "assets/configuration/spec.yaml"
+      },
+      "events": {
+        "creates_events": false
+      },
+      "metrics": {
+        "prefix": "awesome.",
+        "check": "",
+        "metadata_path": "metadata.csv"
+      },
+      "service_checks": {
+        "metadata_path": "assets/service_checks.json"
+      }
+    }
   }
 }
 ```
@@ -370,13 +385,12 @@ Awesome サービスチェックの `awesome/manifest.json`。`guid` は一意 (
 {{% /tab %}}
 {{% tab "メタデータ" %}}
 
-サンプルインテグレーションはメトリクスを送信しません。この場合、生成された `awesome/metadata.csv` には、CSV 列名を含む行だけが含まれます。
+この例では、Awesome インテグレーションはメトリクスを提供していないので、この場合、生成される `awesome/metadata.csv` には列名を含む行のみが含まれます。
 
 {{% /tab %}}
 {{% tab "サービスチェック" %}}
 
-サンプルインテグレーションはサービスチェックが含まれているため、`awesome/assets/service_checks.json` ファイルに追加する必要があります。
-
+この例では、Awesome インテグレーションにサービスチェックが含まれているので、それを `awesome/assets/service_checks.json` ファイルに追加する必要があります。
 ```json
 [
   {
@@ -394,62 +408,90 @@ Awesome サービスチェックの `awesome/manifest.json`。`guid` は一意 (
 {{% /tab %}}
 {{< /tabs >}}
 
-## ビルド
+## ホイールのビルド
 
-`setup.py` は、Wheel のパッケージ化とビルドを支援する setuptools セットアップスクリプトを提供します。Python パッケージの詳細については、[Python の公式ドキュメント][14]を参照してください。
+`pyproject.toml` ファイルは、ホイールのパッケージ化とビルドに使用されるメタデータを提供します。ホイールはインテグレーションを機能させるために必要なファイルを含んでおり、これにはチェック、構成例ファイル、ホイールのビルド中に生成される成果物が含まれます。
 
-`setup.py` が準備できたら、Wheel を作成します。
+メタデータファイルを含むすべての追加要素は、ホイールに含まれることを意図しておらず、Datadog プラットフォームとエコシステムによって他の場所で使用されます。Python のパッケージングについてより詳しく知りたい場合は、[Python プロジェクトのパッケージング][16]を参照してください。
 
-- `ddev` ツールを使用する (推奨): `ddev release build <INTEGRATION_NAME>`
-- `ddev` ツールを使用しない: `cd <INTEGRATION_DIR> && python setup.py bdist_wheel`
+`pyproject.toml` が準備できたら、Wheel を作成します。
 
-### Wheel の内容
+- (推奨) `ddev` ツールを使用する: `ddev release build <INTEGRATION_NAME>`
+- `ddev` ツールを使用しない: `cd <INTEGRATION_DIR> && pip wheel . --no-deps --wheel-dir dist`
 
-Wheel には、チェック、コンフィギュレーションのサンプルファイル、Wheel のビルド中に生成される成果物など、インテグレーション自体の機能に必要なファイルのみが含まれます。メタデータファイルなどのその他の要素を Wheel に入れることは_できません_。それらの要素は、さらに大きな Datadog プラットフォームおよびエコシステムによって別の場所で使用されます。
+## ホイールのインストール
 
-## インストール
-
-Wheel は、[Agent v6.10.0 以上][15]で提供されている Agent の `integration` コマンドによってインストールされます。このコマンドは、環境に応じて、特定のユーザーとして、または特定の権限で実行する必要があります。
+Wheel は、[Agent v6.10.0 以上][17]で提供されている Agent の `integration` コマンドを使ってインストールされます。このコマンドは、環境に応じて、特定のユーザーとして、または特定の権限で実行する必要があります。
 
 **Linux** (`dd-agent` として)
-
 ```bash
 sudo -u dd-agent datadog-agent integration install -w /path/to/wheel.whl
 ```
 
 **OSX** (管理者として)
-
 ```bash
 sudo datadog-agent integration install -w /path/to/wheel.whl
 ```
 
-**Windows** (シェルセッションが administrator 権限を持っていること)
+**Windows PowerShell** (シェルセッションが administrator 権限を持っていること)
 
-Agent バージョン < 6.11 の場合
+<details>
+  <summary>Agent <code>v6.11</code> 以前</summary>
 
-```ps
-"C:\Program Files\Datadog\Datadog Agent\embedded\agent.exe" integration install -w /path/to/wheel.whl
+  ```ps
+  & "C:\Program Files\Datadog\Datadog Agent\embedded\agent.exe" integration install -w /path/to/wheel.whl
+  ```
+
+</details>
+
+<details open>
+  <summary>Agent<code>v6.12</code> 以降</summary>
+
+  ```ps
+  & "C:\Program Files\Datadog\Datadog Agent\bin\agent.exe" integration install -w /path/to/wheel.whl
+  ```
+</details>
+
+## インテグレーションを公開するためのチェックリストを確認する
+
+Agent ベースのインテグレーションを作成した後、このリストを参照して、インテグレーションに必要なファイルと検証がすべて含まれていることを確認します。
+
+- 正しい形式と内容の `README.md` ファイル。
+- メトリクス収集を検証する一連のテスト。
+- 収集されるメトリクスをすべてリストした `metadata.csv` ファイル。
+- 完全な `manifest.json` ファイル。
+- サービスチェックを収集するインテグレーションの場合は、`service_checks.json` も必要です。
+
+プルリクエストを出す前に、以下のコマンドを実行して、インテグレーションに問題がないことを確認します。
+```
+ddev validate all <INTEGRATION_NAME>
 ```
 
-Agent バージョン >= 6.12 の場合
+プルリクエストを作成すると、自動チェックが実行され、プルリクエストが正常な状態であること、更新に必要なコンテンツがすべて含まれていることが確認されます。
 
-```ps
-"C:\Program Files\Datadog\Datadog Agent\bin\agent.exe" integration install -w /path/to/wheel.whl
-```
+## その他の参考資料
 
-[1]: https://virtualenv.pypa.io/en/stable
-[2]: /ja/developers/integrations/python
-[3]: https://github.com/DataDog/integrations-extras
-[4]: https://github.com/DataDog/integrations-core/tree/master/datadog_checks_dev
-[5]: https://docs.datadoghq.com/ja/metrics/agent_metrics_submission/
-[6]: https://github.com/DataDog/datadog-agent/blob/6.2.x/docs/dev/checks/python/check_api.md
-[7]: https://docs.pytest.org/en/latest
-[8]: https://tox.readthedocs.io/en/latest
-[9]: https://github.com/DataDog/integrations-core/tree/master/datadog_checks_dev#development
-[10]: /ja/developers/integrations/check_references#configuration-file
-[11]: /ja/developers/integrations/check_references#manifest-file
-[12]: /ja/developers/integrations/check_references#metrics-metadata-file
-[13]: /ja/developers/integrations/check_references#service-check-file
-[14]: https://packaging.python.org/tutorials/distributing-packages
-[15]: https://docs.datadoghq.com/ja/agent/
-[16]: https://datadoghq.dev/integrations-core/meta/config-specs/
+お役に立つドキュメント、リンクや記事:
+
+- [API コールによるインテグレーションの管理][18]
+- [Agent ベースのインテグレーション開発のための Python][3]
+
+[1]: https://docs.datadoghq.com/ja/developers/#creating-your-own-solution
+[2]: https://github.com/pypa/pipx
+[3]: /ja/developers/integrations/python/
+[4]: https://docs.docker.com/get-docker/
+[5]: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
+[6]: https://github.com/datadog/integrations-extras
+[7]: /ja/metrics/custom_metrics/agent_metrics_submission/?tab=count
+[8]: https://github.com/DataDog/datadog-agent/blob/6.2.x/docs/dev/checks/python/check_api.md
+[9]: https://docs.pytest.org/en/latest
+[10]: https://github.com/pypa/hatch
+[11]: https://datadoghq.dev/integrations-core/meta/config-specs/
+[12]: /ja/developers/integrations/check_references/#configuration-file
+[13]: /ja/developers/integrations/check_references/#manifest-file
+[14]: /ja/developers/integrations/check_references/#metrics-metadata-file
+[15]: /ja/developers/integrations/check_references/#service-check-file
+[16]: https://packaging.python.org/en/latest/tutorials/packaging-projects/
+[17]: https://docs.datadoghq.com/ja/agent/
+[18]: https://www.datadoghq.com/blog/programmatically-manage-your-datadog-integrations/
+[19]: https://desktop.github.com/

@@ -1,16 +1,17 @@
 ---
-title: コミュニティインテグレーションを使用する
-kind: ガイド
 aliases:
-  - /ja/agent/guide/community-integrations-installation-with-docker-agent
+- /ja/agent/guide/community-integrations-installation-with-docker-agent
 further_reading:
-  - link: /agent/troubleshooting/
-    tag: ドキュメント
-    text: Agent のトラブルシューティング
-  - link: /developers/integrations/new_check_howto
-    tag: ドキュメント
-    text: 新しいインテグレーションの設定
+- link: /agent/troubleshooting/
+  tag: ドキュメント
+  text: Agent のトラブルシューティング
+- link: /developers/integrations/new_check_howto
+  tag: ドキュメント
+  text: 新しいインテグレーションの設定
+kind: ガイド
+title: コミュニティインテグレーションを使用する
 ---
+
 ## 概要
 
 Datadog Agent のコミュニティ開発のインテグレーションは、Datadog の [Integrations-extra][1] GitHub リポジトリに格納されています。これらは Agent にはパッケージ化されていませんが、アドオンとしてインストールできます。
@@ -33,7 +34,7 @@ Agent v7.21 / v6.21 以降の場合:
     ```
     datadog-agent integration install -t datadog-<INTEGRATION_NAME>==<INTEGRATION_VERSION>
     ```
-
+   インテグレーションのバージョンは、インテグレーションの Github リポジトリにあるそれぞれの変更履歴で確認できます
 2. コアの[インテグレーション][1]と同様にインテグレーションを構成します。
 3. [Agent を再起動します][2]。
 
@@ -56,7 +57,7 @@ Docker 内で実行された `agent Integration install` コマンドは、無�
 この新しい Agent イメージを[オートディスカバリー][1]と組み合わせて使用して、`<INTEGRATION_NAME>` を有効にします。
 
 [1]: /ja/agent/autodiscovery/
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "Agent の以前のバージョン" %}}
 
@@ -80,7 +81,7 @@ Agent v7.21 / v6.21 以前の場合:
 
 <br>
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -44,7 +44,7 @@ john connected on 11/08/2017
 これに次のパース規則を使用します。
 
 ```text
-MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):connect_date}
+MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):date}
 ```
 
 処理後は、次のような構造化ログが生成されます。

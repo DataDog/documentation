@@ -43,7 +43,7 @@ The two below parameters can be used to customize DNS resolution on your **API t
 `dnsUseHost`
 : **Type**: Boolean <br>
 **Default**: `true`<br>
-Use host local DNS configuration first (for example, the configuration from your `etc/resolv.conf` file), then DNS servers specified in the `dnsServer` parameter if any.
+Use host local DNS configuration first (for example, the configuration from your `etc/resolv.conf` file), then DNS servers specified in the `dnsServer` parameter.
 
 `dnsServer`
 : **Type**: Array of Strings <br>
@@ -97,19 +97,35 @@ Discard SSL errors when private location is using a proxy to send requests to Da
 **Default**: `10`<br>
 Maximum number of tests executed in parallel.
 
-`enableStatusProbes`
-: **Type**: Boolean <br>
-Enables the readiness and liveness of private location probes. This enables two endpoints: http://127.0.0.1:8080/liveness and http://127.0.0.1:8080/readiness.
-
 `maxTimeout`
 : **Type**: Number <br>
 **Default**: `60000`<br>
 Maximum test execution duration for API tests (in milliseconds).
 
+`enableStatusProbes`
+: **Type**: Boolean <br>
+Enables the readiness and liveness of private location probes. This enables two endpoints: http://127.0.0.1:8080/liveness and http://127.0.0.1:8080/readiness.
+
 `statusProbesPort`
 : **Type**: Number <br>
 **Default**: `8080`<br>
-Overrides the port for the private location status probes. 
+Overrides the port for the private location status probes.
+
+`maxNbRedirects`
+: **Type**: Number <br>
+**Default**: `20`<br>
+Maximum number of redirections for HTTP and WebSocket tests.
+
+`variableOverride`
+: **Type**: String <br>
+Overrides the variables used in tests running on the Private Location. Format: `VARIABLE=value`.
+All variables imported this way are obfuscated.
+
+`environmentVariableOverride`
+: **Type** String <br>
+Overrides variables used in tests running on the Private Location with environment variables. It requires the environment variables to be imported in the containerized environment.
+Example for Docker: `docker run --env VARIABLE gcr.io/datadoghq/synthetics-private-location-worker --environmentVariableOverride VARIABLE`.
+All variables imported this way are obfuscated. 
 
 ## Private root certificates
 

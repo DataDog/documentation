@@ -1,6 +1,8 @@
 ---
 title: Events Explorer
 kind: documentation
+aliases:
+    - /events/stream/
 further_reading:
 - link: "/api/v1/events/"
   tag: "Documentation"
@@ -9,11 +11,6 @@ further_reading:
   tag: "Blog"
   text: "Troubleshoot faster with improved Datadog Events"
 ---
-{{< site-region region="us,eu" >}}
-<div class="alert alert-warning">
-  The Events Explorer is being rolled out to all customers in Q1 2022.
-</div>
-{{< /site-region >}}
 
 {{< img src="events/explorer/events-overview.png" alt="Events Explorer" style="width:100%;" >}}
 
@@ -108,6 +105,25 @@ To create a facet, use the “Add a facet” button in the left side panel.
 
 Once you add the facet, the value of this attribute is stored for all new views, and you can use it in the search bar and facet side-panels. You can also use it to group by in event monitors and graph widgets.
 
+### Reserved attributes
+
+This list describes automatically ingested reserved attributes with events.
+
+| Attribute | Description                                                                                                                                                                                                                                |
+|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `host`    | The name of the originating host as defined in metrics. Datadog automatically retrieves corresponding host tags from the matching host in Datadog and applies them to your events. The Agent sets this value automatically.                          |
+| `source`  | This corresponds to the integration name, or the technology from which the event originated. When it matches an integration name, Datadog automatically installs the corresponding parsers and facets. For example: `nginx`, `postgresql`, and more. |
+| `status`  | This corresponds to the level or severity of an event.      |
+| `service` | The name of the application or service generating the events. |
+| `message` | By default, Datadog ingests the value of the `message` attribute as the body of the event entry. |   
+
+To search a tag that has the same key as a reserved attribute, use the `tags` search syntax. 
+Example: `tags:("status:<status>")`
+
+To create a facet on a tag that has the same key as a reserved attribute:
+1. Use the [Remapper processor][2] to remap the tag to another tag or attribute.
+2. Create a [facet][3] on the new tag/attribute.
+
 ## Notifications
 
 Datadog supports `@notifications` in the messages of events when posted by the API. For example:
@@ -122,9 +138,9 @@ Datadog supports `@notifications` in the messages of events when posted by the A
 : Posts the event or graph to the specified Slack channel.
 
 `@webhook`
-: Alerts or triggers the webhook. See the [blog post on webhooks][2].
+: Alerts or triggers the webhook. See the [blog post on webhooks][4].
 
-See [Notifications][3] to learn more.
+See [Notifications][5] to learn more.
 
 ## Event Analytics
 
@@ -155,5 +171,7 @@ Use the query to control what’s displayed in your Events Analytics:
 
 
 [1]: /logs/explorer/search_syntax/
-[2]: https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio
-[3]: /monitors/notify/
+[2]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#remapper
+[3]: https://docs.datadoghq.com/events/explorer/#create-a-facet
+[4]: https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio
+[5]: /monitors/notify/

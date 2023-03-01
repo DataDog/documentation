@@ -4,7 +4,7 @@ dependencies:
 description: Android アプリケーションからログを収集する。
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
-  tag: Github
+  tag: GitHub
   text: dd-sdk-android ソースコード
 - link: logs/explorer
   tag: ドキュメント

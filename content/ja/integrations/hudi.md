@@ -1,47 +1,70 @@
 ---
+app_id: hudi
+app_uuid: ee9cd120-9667-4a81-a309-c34f5942406a
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Hudi Overview: assets/dashboards/overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: hudi.action.duration
+      metadata_path: metadata.csv
+      prefix: hudi.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Hudi
   logs:
     source: hudi
-  metrics_metadata: metadata.csv
   monitors:
     commit_duration: assets/monitors/commit_duration.json
   saved_views:
     hudi_error_logs: assets/saved_views/error_logs.json
     hudi_overview: assets/saved_views/hudi_overview.json
     hudi_patterns: assets/saved_views/hudi_patterns.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - ログの収集
 - 処理
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/hudi/README.md
-display_name: Hudi
+display_on_public_website: true
 draft: false
 git_integration_title: hudi
-guid: abfa7624-ac5d-4601-b96c-03a2243ff7c7
 integration_id: hudi
 integration_title: Hudi
 integration_version: 2.1.1
 is_public: true
 kind: integration
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: hudi.
-metric_to_check: hudi.action.duration
+manifest_version: 2.0.0
 name: hudi
+oauth: {}
 public_title: Hudi
 short_description: Hudi の構成に関するメトリックスを追跡します。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Log Collection
+  - Category::Processing
+  configuration: README.md#Setup
+  description: Hudi の構成に関するメトリックスを追跡します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Hudi
 ---
 
 

@@ -88,9 +88,7 @@ This list describes automatically ingested reserved attributes with events.
 | `source`  | This corresponds to the integration name, or the technology from which the event originated. When it matches an integration name, Datadog automatically installs the corresponding parsers and facets. For example: `nginx`, `postgresql`, and more. |
 | `status`  | This corresponds to the level or severity of an event.      |
 | `service` | The name of the application or service generating the events. |
-                                                                                                                         |
-| `message` | By default, Datadog ingests the value of the `message` attribute as the body of the event entry. 
-|                     
+| `message` | By default, Datadog ingests the value of the `message` attribute as the body of the event entry. |                     
 
 ## What Changed?
 
@@ -107,10 +105,10 @@ Some status values have changed:
 
 | Legacy status | New status |
 |---------------|------------|
-| success       | OK         |
-| warning       | WARN       |
-| info          | INFO       |
-| error         | ERROR      |
+| success       | ok         |
+| warning       | warn       |
+| info          | info       |
+| error         | error      |
 
 ### Source remapping in queries
 Many Event source names have changed. See the full list of affected [source names][5].

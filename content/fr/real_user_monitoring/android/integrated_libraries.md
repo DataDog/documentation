@@ -3,10 +3,10 @@ dependencies:
 - https://github.com/DataDog/dd-sdk-android/blob/master/docs/integrated_libraries_android.md
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
-  tag: Github
+  tag: GitHub
   text: Code source dd-sdk-android
 - link: /real_user_monitoring
-  tag: Page d'accueil
+  tag: Documentation
   text: Explorer le service RUM de Datadog
 kind: documentation
 title: Bibliothèques Android intégrées

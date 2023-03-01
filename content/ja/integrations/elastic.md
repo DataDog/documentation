@@ -1,15 +1,26 @@
 ---
-aliases:
-- /ja/integrations/elasticsearch
+app_id: elasticsearch
+app_uuid: fc23bf70-2992-4e07-96db-c65c167f25d6
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     elasticsearch: assets/dashboards/overview.json
     elasticsearch_timeboard: assets/dashboards/metrics.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: true
+    metrics:
+      check: elasticsearch.search.query.total
+      metadata_path: metadata.csv
+      prefix: elasticsearch.
+    process_signatures:
+    - java org.elasticsearch.bootstrap.Elasticsearch
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Elasticsearch
   logs:
     source: elasticsearch
-  metrics_metadata: metadata.csv
   monitors:
     '[ElasticSearch] Number of pending tasks is high': assets/monitors/elastic_pending_tasks_high.json
     '[ElasticSearch] Query load is high': assets/monitors/elastic_query_load_high.json
@@ -17,38 +28,47 @@ assets:
     '[ElasticSearch] Unsuccessful requests rate is high': assets/monitors/elastic_requests.json
   saved_views:
     elasticsearch_processes: assets/saved_views/elasticsearch_processes.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - data store
 - log collection
-- autodiscovery
-creates_events: true
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/elastic/README.md
-display_name: Elasticsearch
+display_on_public_website: true
 draft: false
 git_integration_title: elastic
-guid: d91d91bd-4a8e-4489-bfb1-b119d4cc388a
 integration_id: elasticsearch
 integration_title: ElasticSearch
-integration_version: 5.1.1
+integration_version: 5.3.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: elasticsearch.
-metric_to_check: elasticsearch.search.query.total
+manifest_version: 2.0.0
 name: elastic
-process_signatures:
-- java org.elasticsearch.bootstrap.Elasticsearch
-public_title: Datadog-ElasticSearch インテグレーション
+oauth: {}
+public_title: ElasticSearch
 short_description: クラスター全体のステータスから JVM のヒープ使用量まで、すべてを監視
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::データストア
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: クラスター全体のステータスから JVM のヒープ使用量まで、すべてを監視
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: ElasticSearch
 ---
 
 
@@ -63,7 +83,7 @@ Datadog Agent の Elasticsearch チェックは、検索とインデックス化
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Elasticsearch チェックは [Datadog Agent][2] パッケージに含まれています。追加のインストールは必要ありません。
 
@@ -112,8 +132,23 @@ Elasticsearch チェックは [Datadog Agent][2] パッケージに含まれて�
       - AWS Elasticsearch サービスに Agent の Elasticsearch インテグレーションを使用するには、`url` パラメーターを AWS Elasticsearch stats の URL に設定します。
       - Amazon ES コンフィギュレーション API へのすべてのリクエストには、署名が必要です。詳細は、[OpenSearch サービスリクエストの作成と署名][4]を参照してください。
       - `aws` の認証タイプは、[boto3][5] に依存して `.aws/credentials` から自動的に AWS 認証情報を収集します。`conf.yaml` で `auth_type: basic` を使用して、認証情報を `username: <USERNAME>`、`password: <PASSWORD>` で定義します。
+      - 監視するためには、適切な権限を持つユーザーとロール (まだ持っていない場合) を Elasticsearch で作成する必要があります。これは、Elasticsearch が提供する REST API、または Kibana UI を通じて行うことができます。作成したロールに以下のプロパティを含めます。
+        ```json
+        name = "datadog"
+        indices {
+          names = [".monitoring-*", "metricbeat-*"]
+          privileges = ["read", "read_cross_cluster", "monitor"]
+        }
+        cluster = ["monitor"]
+        ```
+        ユーザーにロールを追加します。
+        ```json
+        roles = [<created role>, "monitoring_user"]
+        ```
+        詳しくは、[ロールの作成または更新][6]および[ユーザーの作成または更新][7]を参照してください。
 
-2. [Agent を再起動します][6]。
+
+2. [Agent を再起動します][8]。
 
 ###### カスタムクエリ
 
@@ -145,8 +180,8 @@ custom_queries:
 
 Datadog APM は、Elasticsearch と統合して分散システム全体のトレースを確認します。Datadog Agent v6 以降では、トレースの収集はデフォルトで有効化されています。トレースの収集を開始するには、以下の手順に従います。
 
-1. [Datadog でトレースの収集を有効にします][7]。
-2. [ElasticSearch へのリクエストを作成するアプリケーションをインスツルメントします][8]。
+1. [Datadog でトレースの収集を有効にします][9]。
+2. [ElasticSearch へのリクエストを作成するアプリケーションをインスツルメントします][10]。
 
 ##### ログの収集
 
@@ -158,7 +193,7 @@ _Agent バージョン 6.0 以降で利用可能_
    logs_enabled: true
    ```
 
-2. 検索スローログを収集してスローログのインデックスを作成するには、[Elasticsearch 設定を構成][9]します。デフォルトでは、スローログは有効になっていません。
+2. 検索スローログを収集してスローログのインデックスを作成するには、[Elasticsearch 設定を構成][11]します。デフォルトでは、スローログは有効になっていません。
 
    - 特定のインデックス `<インデックス>` のインデックススローログを構成するには
 
@@ -216,17 +251,19 @@ _Agent バージョン 6.0 以降で利用可能_
 
      `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。
 
-4. [Agent を再起動します][6]。
+4. [Agent を再起動します][8]。
 
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/elastic/datadog_checks/elastic/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments#file-location
 [4]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ac.html#managedomains-signing-service-requests
 [5]: https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html#configuring-credentials
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/ja/tracing/send_traces/
-[8]: https://docs.datadoghq.com/ja/tracing/setup/
-[9]: https://docs.datadoghq.com/ja/integrations/faq/why-isn-t-elasticsearch-sending-all-my-metrics/
+[6]: https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html
+[7]: https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-user.html
+[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[9]: https://docs.datadoghq.com/ja/tracing/send_traces/
+[10]: https://docs.datadoghq.com/ja/tracing/setup/
+[11]: https://docs.datadoghq.com/ja/integrations/faq/why-isn-t-elasticsearch-sending-all-my-metrics/
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -289,6 +326,8 @@ Agent コンテナで必要な環境変数
 
 アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]をポッドアノテーションとして設定します。他にも、[ファイル、ConfigMap、または key-value ストア][2]を使用してテンプレートを構成できます。
 
+**Annotations v1** (Datadog Agent < v7.36 向け)
+
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -308,12 +347,38 @@ spec:
     - name: elasticsearch
 ```
 
+**Annotations v2** (Datadog Agent v7.36+ 向け)
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: elasticsearch
+  annotations:
+    ad.datadoghq.com/elasticsearch.checks: |
+      {
+        "elastic": {
+          "init_config": {},
+          "instances": [
+            {
+              "url": "http://%%host%%:9200"
+            }
+          ]
+        }
+      }
+spec:
+  containers:
+    - name: elasticsearch
+```
+
 ##### ログの収集
 
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][3]を参照してください。
 
 次に、[ログのインテグレーション][4]をポッドアノテーションとして設定します。これは、[ファイル、ConfigMap、または key-value ストア][5]を使用して構成することも可能です。
+
+**Annotations v1/v2**
 
 ```yaml
 apiVersion: v1
@@ -434,8 +499,6 @@ Agent コンテナで必要な環境変数
 - `index_stats` は、**elasticsearch.index.\*** メトリクスを送信します。
 - `pending_task_stats` は、**elasticsearch.pending\_\*** メトリクスを送信します。
 
-バージョン 6.3.0 以降で、すべての `elasticsearch.thread_pool.write.*` メトリクスを収集するには、Elasticsearch 構成で `xpack.monitoring.collection.enabled` 構成を `true` に設定します。[Elasticsearch のリリースノートで Monitoring のセクション][4]を参照してください。
-
 ### メトリクス
 {{< get-metrics-from-git "elastic" >}}
 
@@ -450,19 +513,18 @@ Elasticsearch チェックは、Elasticsearch クラスターの全体的なス�
 
 ## トラブルシューティング
 
-- [Agent が接続できない][5]
-- [Elasticsearch からすべてのメトリクスが送信されないのはなぜですか？][6]
+- [Agent が接続できない][4]
+- [Elasticsearch からすべてのメトリクスが送信されないのはなぜですか？][5]
 
 ## その他の参考資料
 
-- [Elasticsearch のパフォーマンスを監視する方法][7]
+- [Elasticsearch のパフォーマンスを監視する方法][6]
 
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/elastic/images/elasticsearch-dash.png
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[4]: https://www.elastic.co/guide/en/elasticsearch/reference/6.3/release-notes-6.3.0.html
-[5]: https://docs.datadoghq.com/ja/integrations/faq/elastic-agent-can-t-connect/
-[6]: https://docs.datadoghq.com/ja/integrations/faq/why-isn-t-elasticsearch-sending-all-my-metrics/
-[7]: https://www.datadoghq.com/blog/monitor-elasticsearch-performance-metrics
+[4]: https://docs.datadoghq.com/ja/integrations/faq/elastic-agent-can-t-connect/
+[5]: https://docs.datadoghq.com/ja/integrations/faq/why-isn-t-elasticsearch-sending-all-my-metrics/
+[6]: https://www.datadoghq.com/blog/monitor-elasticsearch-performance-metrics

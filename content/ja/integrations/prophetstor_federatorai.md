@@ -1,46 +1,96 @@
 ---
+app_id: prophetstor-federatorai-license
+app_uuid: 965e6142-3b99-4999-a7c6-09a00775e511
 assets:
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: ''
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: federatorai.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Federator.ai.license
 author:
   homepage: https://www.prophetstor.com/
-  name: ProphetStor Data Services, Inc.
+  name: ProphetStor
+  sales_email: dd_subscription@prophetstor.com
+  support_email: support@prophetstor.com
+  vendor_id: prophetstor
 categories:
-  - containers
-  - orchestration
-  - マーケットプレイス
-creates_events: false
-ddtype: check
+- containers
+- orchestration
+- マーケットプレイス
 dependencies: []
-display_name: Federator.ai.license
+display_on_public_website: true
 draft: false
 git_integration_title: prophetstor_federatorai
-guid: 1f828e2b-4558-43f1-914f-92d4e679fb75
 integration_id: prophetstor-federatorai-license
 integration_title: ProphetStor Federator.ai
+integration_version: ''
 is_public: true
 kind: integration
-maintainer: support@prophetstor.com
-manifest_version: 1.0.0
-metric_prefix: federatorai.
-metric_to_check: ''
+legal_terms:
+  eula: assets/eula.pdf
+manifest_version: 2.0.0
 name: prophetstor_federatorai
+oauth: {}
 pricing:
-  - billing_type: flat_fee
-    unit_price: 2000
+- billing_type: flat_fee
+  includes_assets: true
+  product_id: federatorai-license
+  short_description: 月額 2000 ドル
+  unit_price: 2000
 public_title: ProphetStor Federator.ai
 short_description: Kubernetes アプリケーションを最適化するための Federator.ai ライセンス
-support: パートナー
 supported_os:
-  - linux
-terms:
-  eula: assets/eula.pdf
-  legal_email: dd_subscription@prophetstor.com
+- linux
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Category::Containers
+  - Category::Orchestration
+  - Category::Marketplace
+  - Offering::Software License
+  configuration: README.md#Setup
+  description: Kubernetes アプリケーションを最適化するための Federator.ai ライセンス
+  media:
+  - caption: ProphetStor Federator.ai クラスター概要ダッシュボードは、Kubernetes クラスターやノードのリソース使用量の予測価と推奨値、および過去の使用量を表示します。
+    image_url: assets/images/Federator_ai_Datadog_Cluster_Overview.png
+    media_type: image
+  - caption: ProphetStor Federator.ai アプリケーション概要ダッシュボードは、アプリケーションごとに CPU とメモリの使用量の予測値と推奨値を表示します。
+    image_url: assets/images/Federator_ai_Datadog_Application_Overview.png
+    media_type: image
+  - caption: ProphetStor Federator.ai Kafka 概要ダッシュボードは、Kafka のコンシューマーレプリカのオートスケールに関する使用情報と推奨事項を表示します。
+    image_url: assets/images/Federator_ai_Datadog_Kafka_Overview.png
+    media_type: image
+  - caption: ProphetStor Federator.ai コスト分析概要ダッシュボードでは、Kubernetes クラスターの導入コストと、パブリッククラウドのサービスプロバイダーで導入した場合のクラスターコンフィギュレーションや推定コスト/節約額の推奨事項を示します。
+    image_url: assets/images/Federator_ai_Datadog_Cost_Analysis_Overview.png
+    media_type: image
+  - caption: Federator.ai ダッシュボードには、Kubernetes や VM のクラスターやアプリケーションのワークロード予測とリソースの推奨値が表示されます。
+    image_url: assets/images/Federator_ai_Dashboard.png
+    media_type: image
+  - caption: Federator.ai は、クラスター、ノード、ネームスペース、アプリケーション、コントローラーの予測とリソースの推奨値を提供します。
+    image_url: assets/images/Federator_ai_Workload_Prediction.png
+    media_type: image
+  - caption: Federator.ai は、クラスターのワークロード予測に基づいて、異なるパブリッククラウドプロバイダーに対して最もコスト効率の良いクラスターコンフィギュレーションを推奨します。
+    image_url: assets/images/Federator_ai_Multicloud_Cost_Analysis.png
+    media_type: image
+  - caption: Federator.ai は、個々のネームスペースのコスト傾向を分析・予測します。
+    image_url: assets/images/Federator_ai_Cost_Allocation.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: ProphetStor Federator.ai
+  uninstallation: README.md#Uninstallation
 ---
+
+
+
 ## 概要
 
 [ProphetStor Federator.ai][1] は AI ベースのソリューションで、企業が Kubernetes 上のアプリケーションのリソースを管理、最適化、オートスケールする手助けをします。Federator.ai は高度な機械学習アルゴリズムでアプリケーションのワークロードを予測することで、ベストなタイミングで適切な量のリソースをスケーリングし、アプリケーションのパフォーマンスを最適化します。
@@ -60,12 +110,15 @@ ProphetStor Federator.ai ライセンスを使用すると、AI ベースのソ�
 サポートやリクエストについては、[ProphetStor サポート](mailto:support@prophetstor.com)にお問い合わせください。
 
 
-[1]: https://prophetstor.com/federator-ai-2/
-[2]: https://www.youtube.com/watch?v=IooFJnB8bb8&t=1s
+[1]: https://prophetstor.com/federator_ai/
+[2]: https://youtu.be/AeSH8yGGA3Q
 [3]: https://github.com/DataDog/watermarkpodautoscaler
 [4]: https://prophetstor.com/wp-content/uploads/documentation/Federator.ai/Latest%20Version/ProphetStor%20Federator.ai%20Installation%20Guide.pdf
 [5]: images/add_cluster_window.png
 [6]: https://www.datadoghq.com/
 [7]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
 [8]: https://prophetstor.com/wp-content/uploads/documentation/Federator.ai/Latest%20Version/ProphetStor%20Federator.ai%20User%20Guide.pdf
-[9]: https://app.datadoghq.com/account/settings#integrations/federatorai
+[9]: /ja/integrations/federatorai
+
+---
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/prophetstor-federatorai-license" target="_blank">こちらをクリック</a>してください。

@@ -16,13 +16,13 @@ aliases:
     - /serverless/guide/python/
 ---
 
-<div class="alert alert-warning">If your Python Lambda functions are written in <a href="https://docs.aws.amazon.com/lambda/latest/dg/runtimes-extensions-api.html">Python 3.6 or less</a>, or you previously set up your Lambda functions using the Datadog Forwarder, see <a href="/serverless/guide/datadog_forwarder_python">instrumenting using the Datadog Forwarder</a>.</div>
+<div class="alert alert-warning">If your Python Lambda functions are written in <a href="https://docs.aws.amazon.com/lambda/latest/dg/runtimes-extensions-api.html">Python 3.6 or less</a>, or you previously set up your Lambda functions using the Datadog Forwarder, see <a href="/serverless/guide/datadog_forwarder_python">instrumenting using the Datadog Forwarder</a>. Otherwise, follow the instructions in this guide to instrument using the Datadog Lambda Extension.</div>
 
 <div class="alert alert-warning">If your Lambda functions are deployed in VPC without access to the public internet, you can send data either <a href="/agent/guide/private-link/">using AWS PrivateLink</a> for the <code>datadoghq.com</code> <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/proxy/">using a proxy</a> for all other sites.</div>
 
 ## Installation
 
-Datadog offers many different ways to enable instrumentation for your serverless applications. Choose a method below that best suits your needs. Datadog generally recommends using the Datadog CLI.
+Datadog offers many different ways to enable instrumentation for your serverless applications. Choose a method below that best suits your needs. Datadog generally recommends using the Datadog CLI. You *must* follow the instructions for "Container Image" if your application is deployed as a container image.
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
@@ -47,11 +47,11 @@ The Datadog CLI modifies existing Lambda functions' configurations to enable ins
 
 4. Configure the Datadog site
 
-    Specify the [Datadog site][2] where the telemetry should be sent to. The default is `datadoghq.com`.
-
     ```sh
-    export DATADOG_SITE="<DD_SITE>" # such as datadoghq.com, datadoghq.eu or ddog-gov.com
+    export DATADOG_SITE="<DATADOG_SITE>"
     ```
+
+    Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
 
 5. Configure the Datadog API key
 
@@ -81,12 +81,11 @@ The Datadog CLI modifies existing Lambda functions' configurations to enable ins
     - Replace `<functionname>` and `<another_functionname>` with your Lambda function names. Alternatively, you can use `--functions-regex` to automatically instrument multiple functions whose names match the given regular expression.
     - Replace `<aws_region>` with the AWS region name.
 
-    Additional parameters can be found in the [CLI documentation][3].
+    Additional parameters can be found in the [CLI documentation][2].
 
 
 [1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
-[2]: https://docs.datadoghq.com/getting_started/site/
-[3]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
+[2]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
 {{% /tab %}}
 {{% tab "Serverless Framework" %}}
 
@@ -110,15 +109,14 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
     ```
 
     To fill in the placeholders:
-    - Replace `<DATADOG_SITE>` with your [Datadog site][3] to send the telemetry to.
-    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][4] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can instead use `apiKey` and set the Datadog API key in plaintext.
+    - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
+    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can instead use `apiKey` and set the Datadog API key in plaintext.
 
     For more information and additional settings, see the [plugin documentation][1].
 
 [1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
-[3]: https://docs.datadoghq.com/getting_started/site/
-[4]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
 
@@ -139,7 +137,7 @@ The [Datadog CloudFormation macro][1] automatically transforms your SAM applicat
 
 2. Instrument your Lambda functions
 
-    Add the `DatadogServerless` transform **after** the `AWS::Serverless` transform under the `Transform` section in your for SAM `template.yml`.
+    Add the `DatadogServerless` transform **after** the `AWS::Serverless` transform under the `Transform` section in your `template.yml` file for SAM.
 
     ```yaml
     Transform:
@@ -154,8 +152,8 @@ The [Datadog CloudFormation macro][1] automatically transforms your SAM applicat
     ```
 
     To fill in the placeholders:
-    - Replace `<DATADOG_SITE>` with your [Datadog site][4] to send the telemetry to.
-    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][5] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `apiKey` instead and set the Datadog API key in plaintext.
+    - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
+    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][4] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `apiKey` instead and set the Datadog API key in plaintext.
 
     More information and additional parameters can be found in the [macro documentation][1].
 
@@ -163,8 +161,7 @@ The [Datadog CloudFormation macro][1] automatically transforms your SAM applicat
 [1]: https://docs.datadoghq.com/serverless/serverless_integrations/macro
 [2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
-[4]: https://docs.datadoghq.com/getting_started/site/
-[5]: https://app.datadoghq.com/organization-settings/api-keys
+[4]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
 
@@ -193,20 +190,19 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
         python_layer_version={{< latest-lambda-layer-version layer="python" >}},
         extension_layer_version={{< latest-lambda-layer-version layer="extension" >}},
         site="<DATADOG_SITE>",
-        apiKeySecretArn="<DATADOG_API_KEY_SECRET_ARN>",
+        api_key_secret_arn="<DATADOG_API_KEY_SECRET_ARN>",
       )
     datadog.add_lambda_functions([<LAMBDA_FUNCTIONS>])
     ```
 
     To fill in the placeholders:
-    - Replace `<DATADOG_SITE>` with your [Datadog site][2] to send the telemetry to.
-    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `apiKey` instead and set the Datadog API key in plaintext.
+    - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
+    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][2] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `apiKey` instead and set the Datadog API key in plaintext.
 
     More information and additional parameters can be found on the [Datadog CDK documentation][1].
 
 [1]: https://github.com/DataDog/datadog-cdk-constructs
-[2]: https://docs.datadoghq.com/getting_started/site/
-[3]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "Container Image" %}}
 
@@ -240,14 +236,13 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 4. Configure the Datadog site, API key, and tracing
 
     - Set the environment variable `DD_SITE` to {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
-    - Set the environment variable `DD_API_KEY_SECRET_ARN` with the ARN of the AWS secret where your [Datadog API key][4] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
+    - Set the environment variable `DD_API_KEY_SECRET_ARN` with the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
     - Set the environment variable `DD_TRACE_ENABLED` to `true`.
 
 
 [1]: https://gallery.ecr.aws/datadog/lambda-extension
 [2]: https://docs.datadoghq.com/serverless/guide/handler_wrapper
-[3]: https://docs.datadoghq.com/getting_started/site/
-[4]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "Custom" %}}
 
@@ -317,12 +312,12 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 4. Configure the Datadog site, API key, and tracing
 
     - Set the environment variable `DD_SITE` to {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
-    - Set the environment variable `DD_API_KEY_SECRET_ARN` with the ARN of the AWS secret where your [Datadog API key][8] is securely stored. The key needs to be stored as a plaintext string, instead of being inside a json blob. The `secretsmanager:GetSecretValue` permission is required. For quick testings, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
+    - Set the environment variable `DD_API_KEY_SECRET_ARN` with the ARN of the AWS secret where your [Datadog API key][7] is securely stored. The key needs to be stored as a plaintext string, instead of being inside a json blob. The `secretsmanager:GetSecretValue` permission is required. For quick testings, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
     - Set the environment variable `DD_TRACE_ENABLED` to `true`.
 
 5. (AWS Chalice only) Register the middleware
 
-    If you are using [AWS Chalice][9], you must install `datadog-lambda` using `pip`, and register `datadog_lambda_wrapper` as a [middleware][10] in your `app.py`:
+    If you are using [AWS Chalice][8], you must install `datadog-lambda` using `pip`, and register `datadog_lambda_wrapper` as a [middleware][9] in your `app.py`:
     
     ```python
     from chalice import Chalice, ConvertToMiddleware
@@ -344,10 +339,9 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 [4]: https://docs.aws.amazon.com/lambda/latest/dg/python-package.html#python-package-dependencies
 [5]: https://pypi.org/project/datadog-lambda/
 [6]: https://docs.datadoghq.com/serverless/guide/handler_wrapper
-[7]: https://docs.datadoghq.com/getting_started/site/
-[8]: https://app.datadoghq.com/organization-settings/api-keys
-[9]: https://aws.github.io/chalice/
-[10]: https://aws.github.io/chalice/topics/middleware.html
+[7]: https://app.datadoghq.com/organization-settings/api-keys
+[8]: https://aws.github.io/chalice/
+[9]: https://aws.github.io/chalice/topics/middleware.html
 {{% /tab %}}
 {{< /tabs >}}
 

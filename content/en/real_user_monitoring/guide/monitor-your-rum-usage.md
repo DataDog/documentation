@@ -60,7 +60,7 @@ To track the count of sessions priced under a given RUM SKU, navigate to the [Da
 
 ## Alert on unexpected spikes
 
-You can the RUM metric in [anomaly detection monitors][3].
+You can use the RUM metric in [anomaly detection monitors][3].
 
 {{< img src="real_user_monitoring/guide/monitor-your-rum-usage/anomaly-monitor-notification.png" alt="Example notification message in the Anomaly monitor" style="width:90%" >}}
 
@@ -118,6 +118,6 @@ You are notified about the amount of sessions captured in any scope (such as the
 
 [1]: /account_management/billing/usage_metrics/
 [2]: https://app.datadoghq.com/dashboard/lists
-[3]: /monitors/create/types/anomaly/
+[3]: /monitors/types/anomaly/
 [4]: https://app.datadoghq.com/monitors#create/anomaly
 [5]: https://app.datadoghq.com/rum/explorer?query=%40type%3Asession

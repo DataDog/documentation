@@ -59,9 +59,17 @@ When installing the Agent on an AWS host, you might see duplicated hosts on the 
 
 ### EC2 metadata with IMDS v2
 
-In your [Agent configuration][5], if the parameter `ec2_prefer_imdsv2`, is set to `true` (defaults to `false`), the Agent requests EC2 metadata using Instance Metadata Service Version 2 (IMDSv2), which offers additional security for accessing metadata. In some situations, additional configuration may be required in AWS, for example: using a containerized Agent on a plain EC2 instance. See the [Transition to using Instance Metadata Service Version 2][6] documentation for details.
+In some situations, the configuration of EC2's [IMDSv2][5] makes it impossible for the agent to access metadata, leading the Agent to fall back to the `os` hostname provider instead of `aws`, as seen in the output of `agent status`.
 
 In containerized environments the problem might be that you have locked down the EC2 metadata endpoint, by way of assigning IAM roles/credentials to pods running in the Kubernetes cluster. `Kube2IAM` and `kiam` are common tools used to do this. To solve this, update your `Kube2IAM` or `kiam` configuration to allow access to this endpoint.
+
+The AWS API supports disabling IMDSv1, which the Agent uses by default. If this is the case, but IMDSv2 is enabled and accessible, set the parameter `ec2_prefer_imdsv2` to `true` (defaults to `false`) in your [Agent configuration][6]. See the [Transition to using Instance Metadata Service Version 2][7] documentation for details.
+
+IMDSv2, in its default configuration, refuses connections with an IP hop count greater than one, that is, connections that have passed through an IP gateway. This can cause problems when the Agent is running in a container with a network other than the host's network, as the runtime forwards the container's traffic through a virtual IP gateway. This is common in ECS deployments. The following options may remedy this issue:
+
+ * [Increase the maximum hop count to at least `2`][8]. Doing so may have implications for the security of data stored in the IMDS, as it permits containers other than the Agent to access this data as well. 
+ * Use the hostname discovered by cloud-init, by [setting `providers.eks.ec2.useHostnameFromFile` to true][9].
+ * Run the Agent in the host UTS namespace, by [setting `agents.useHostNetwork` to true][10].
 
 ## Tags
 
@@ -73,12 +81,16 @@ If you removed the AWS integration, but continue to run a Datadog Agent on your 
 
 You can verify the integration is enabled by checking the “Apps Running” for that host from the infrastructure list or by checking the metrics summary and creating a notebook scoped to that host.
 
-If you want to permanently remove AWS host tags from a host, you can do this by using the [Remove host tags API endpoint][7].
+If you want to permanently remove AWS host tags from a host, you can do this by using the [Remove host tags API endpoint][11].
 
 [1]: /integrations/amazon_web_services/
-[2]: /integrations/faq/error-datadog-not-authorized-sts-assume-role/#pagetitle
+[2]: /integrations/guide/error-datadog-not-authorized-sts-assume-role/#pagetitle
 [3]: /agent/
 [4]: /help/
-[5]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
-[6]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html#instance-metadata-transition-to-version-2
-[7]: /api/latest/tags/#remove-host-tags
+[5]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html
+[6]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
+[7]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html#instance-metadata-transition-to-version-2
+[8]: https://docs.aws.amazon.com/cli/latest/reference/ec2/modify-instance-metadata-options.html
+[9]: https://github.com/DataDog/helm-charts/blob/58bf52e4e342c79dbec95659458f7de8c5de7e6c/charts/datadog/values.yaml#L1683-L1688
+[10]: https://github.com/DataDog/helm-charts/blob/58bf52e4e342c79dbec95659458f7de8c5de7e6c/charts/datadog/values.yaml#L930-L937
+[11]: /api/latest/tags/#remove-host-tags

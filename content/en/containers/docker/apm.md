@@ -29,6 +29,10 @@ further_reading:
 
 As of Agent 6.0.0, the Trace Agent is enabled by default. If it has been turned off, you can re-enable it in the `gcr.io/datadoghq/agent` container by passing `DD_APM_ENABLED=true` as an environment variable.
 
+The CLI commands on this page are for the Docker runtime. Replace `docker` with `nerdctl` for the containerd runtime, or `podman` for the Podman runtime.
+
+<div class="alert alert-info">If you are collecting traces from a containerized app (your Agent and app running in separate containers), as an alternative to the following instructions, you can automatically inject the tracing library into your application. Read <a href="/tracing/trace_collection/library_injection/?tab=agentandappinseparatecontainers">Injecting Libraries</a> for instructions.</div>
+
 ## Tracing from the host
 
 Tracing is available on port `8126/tcp` from _your host only_ by adding the option `-p 127.0.0.1:8126:8126/tcp` to the `docker run` command.
@@ -42,6 +46,7 @@ For example, the following command allows the Agent to receive traces from your 
 
 ```shell
 docker run -d --cgroupns host \
+              --pid host \
               -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
@@ -103,6 +108,8 @@ As a first step, create a user-defined bridge network:
 docker network create <NETWORK_NAME>
 ```
 
+The CLI commands on this page are for the Docker runtime. Replace `docker` with `nerdctl` for the containerd runtime, or `podman` for the Podman runtime.
+
 Then start the Agent and the application container, connected to the network previously created:
 
 {{< tabs >}}
@@ -113,6 +120,7 @@ Then start the Agent and the application container, connected to the network pre
 docker run -d --name datadog-agent \
               --network <NETWORK_NAME> \
               --cgroupns host \
+              --pid host \
               -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
@@ -137,6 +145,7 @@ Where your `<DATADOG_SITE>` is {{< region-param key="dd_site" code="true" >}} (d
 # Datadog Agent
 docker run -d --name datadog-agent \
               --cgroupns host \
+              --pid host \
               --network "<NETWORK_NAME>" \
               -e DD_API_KEY=<DATADOG_API_KEY> \
               -e DD_APM_ENABLED=true \

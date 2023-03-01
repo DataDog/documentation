@@ -23,7 +23,11 @@ Agent のインストーラーは、デフォルトで新しいアカウント (
 * Remote Desktop Services によるログオンを拒否する
 * サービスとしてのログオン
 
-**重要**: アカウントはインストール中に変更され、ログイン権限を含む特権が制限されるため、「実際の」ユーザーアカウントではなく、Datadog Agent を実行するためだけの専用アカウントであることを確認してください。グループマネージドサービスアカウント (GMSA) を使用して Datadog Agent をインストールすることはできません。
+**重要**: アカウントはインストール中に変更され、ログイン権限を含む特権が制限されるため、「実際の」ユーザーアカウントではなく、Datadog Agent を実行するためだけの専用アカウントであることを確認してください。
+
+**注**: このページのすべてのコマンド例では、置換されるべき変数を示すために `<>` が使用されています。例えば、ユーザーアカウントが `ddagentuser` で、コマンドに `DDAGENTUSER_NAME=<USERNAME>` が含まれている場合、コマンドラインには `DDAGENTUSER_NAME=ddagentuser` と入力する必要があります。
+
+**注**: `7.38.0/6.38.0` リリースから、インストーラーは **Grouped Managed Service Account (gMSA)** の使用をサポートします。Grouped Managed Service Account を指定するには、ユーザー名の最後に **$** を追加します: `<DOMAIN>\<USERNAME>**注**: 7.38.0/6.38.0 リリースから、インストーラーは **Grouped Managed Service Account (gMSA)** の使用をサポートします。Grouped Managed Service Account を指定するには、ユーザー名の最後に **$** を追加します。Grouped Managed Service Account は、インストーラーが作成できないため、インストール前に存在する必要があります。
 
 ## インストール
 
@@ -42,6 +46,8 @@ msiexec /i ddagent.msi DDAGENTUSER_NAME=<USERNAME> DDAGENTUSER_PASSWORD=<PASSWOR
 **注**: MSI インストーラーの制限により、`DDAGENTUSER_PASSWORD` プロパティにセミコロン文字 `;` を含めることができません。
 
 **注**: インストール時に `system` と `winproc` のチェックで権限の問題が発生した場合、`ddagentuser` が Performance Monitoring と Event Log Viewer グループのメンバであることを確認してください。
+
+**注**: インストーラーの UI ではユーザーを指定することができません。コマンドラインを使用して `DDAGENTUSER_NAME` と他のパラメータを渡してください。UI インストールであっても、それらは考慮されます。
 
 ### グループポリシーによるインストール
 

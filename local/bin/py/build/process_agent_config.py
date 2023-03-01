@@ -11,9 +11,9 @@ def format_agent_config_string(string):
     """
     Takes a string from the agent config template and formats it for output in
     agent_config shortcode.
-      - If string contains exactly one '#' and no alphabetic characters, 
+      - If string contains exactly one '#' and no alphabetic characters,
         remove the '#' and any new line characters.
-      - If the string contains exactly one '#' and has alphabetic characters, 
+      - If the string contains exactly one '#' and has alphabetic characters,
         remove the '#' (this represents a config key/value)
     """
     # Match any lines containing strictly one '#' character that can have any
@@ -88,5 +88,6 @@ def process_agent_config(dd_agent_config_string):
         print('An error occurred building agent config data:')
         print(err)
 
-        if getenv("LOCAL") != 'True':
+        if getenv("CI_COMMIT_REF_NAME"):
+            print('\x1b[31mERROR\x1b[0m: Process agent config failed. Aborting')
             sys.exit(1)

@@ -1,0 +1,747 @@
+{
+  "ListAPIKeys": {
+    "description": "Muestra una lista con todas las claves de API disponibles para tu cuenta.",
+    "summary": "Ver todas las claves de API"
+  },
+  "CreateAPIKey": {
+    "description": "Crea una clave de API.",
+    "summary": "Crear una clave de API",
+    "request_description": "",
+    "request_schema_description": "Solicitud usada para crear una clave de API."
+  },
+  "DeleteAPIKey": {
+    "description": "Elimina una clave de API.",
+    "summary": "Eliminar una clave de API"
+  },
+  "GetAPIKey": {
+    "description": "Muestra una clave de API.",
+    "summary": "Ver clave de API"
+  },
+  "UpdateAPIKey": {
+    "description": "Modifica una clave de API.",
+    "summary": "Editar una clave de API",
+    "request_description": "",
+    "request_schema_description": "Solicitud usada para modificar una clave de API."
+  },
+  "ListApplicationKeys": {
+    "description": "Muestra una lista con todas las claves de aplicación disponibles para tu organización.",
+    "summary": "Ver todas las claves de aplicación"
+  },
+  "DeleteApplicationKey": {
+    "description": "Elimina una clave de aplicación.",
+    "summary": "Eliminar una clave de aplicación"
+  },
+  "GetApplicationKey": {
+    "description": "Muestra una clave de aplicación para tu organización.",
+    "summary": "Ver una clave de aplicación"
+  },
+  "UpdateApplicationKey": {
+    "description": "Edita una clave de aplicación.",
+    "summary": "Editar una clave de aplicación",
+    "request_description": "",
+    "request_schema_description": "Solicitud usada para modificar una clave de aplicación."
+  },
+  "ListAuditLogs": {
+    "description": "El endpoint de listas devuelve los eventos que se han ajustado a una consulta de búsqueda de Audit Logs.\n[Los resultados se muestran organizados en páginas][1].\n\nUsa este endpoint para ver los eventos de Audit Logs más recientes.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
+    "summary": "Ver una lista de eventos de Audits Logs"
+  },
+  "SearchAuditLogs": {
+    "description": "El endpoint de listas devuelve los eventos de Audit Logs que se han ajustado a una consulta de búsqueda de Audit.\n[Los resultados se muestran organizados en páginas][1].\n\nUsa este endpoint para hacer búsquedas y filtrados de eventos de Audit Logs complejos.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
+    "summary": "Buscar eventos de Audit Logs",
+    "request_description": "",
+    "request_schema_description": "Solicitud de lista de eventos de Audit Logs."
+  },
+  "ListAuthNMappings": {
+    "description": "Muestra una lista con todos los AuthN Mappings de la organización.",
+    "summary": "Mostrar una lista con todos los AuthN Mappings"
+  },
+  "CreateAuthNMapping": {
+    "description": "Crea un AuthN Mapping.",
+    "summary": "Crear un AuthN Mapping",
+    "request_description": "",
+    "request_schema_description": "Solicitud para crear un AuthN Mapping."
+  },
+  "DeleteAuthNMapping": {
+    "description": "Elimina el AuthN Mapping correspondiente al UUID de AuthN Mapping especificado.",
+    "summary": "Eliminar un AuthN Mapping"
+  },
+  "GetAuthNMapping": {
+    "description": "Muestra el AuthN Mapping correspondiente al UUID de AuthN Mapping especificado.",
+    "summary": "Ver el AuthN Mapping correspondiente a un UUID"
+  },
+  "UpdateAuthNMapping": {
+    "description": "Edita un AuthN Mapping.",
+    "summary": "Editar un AuthN Mapping",
+    "request_description": "",
+    "request_schema_description": "Solicitud para modificar un AuthN Mapping."
+  },
+  "ListCurrentUserApplicationKeys": {
+    "description": "Muestra una lista con todas las claves de aplicación disponibles para el usuario actual.",
+    "summary": "Ver todas las claves de aplicación que pertenecen al usuario actual"
+  },
+  "CreateCurrentUserApplicationKey": {
+    "description": "Crea una clave de aplicación para el usuario actual.",
+    "summary": "Crear una clave de aplicación para el usuario actual",
+    "request_description": "",
+    "request_schema_description": "Solicitud usada para crear una clave de aplicación."
+  },
+  "DeleteCurrentUserApplicationKey": {
+    "description": "Elimina una clave de aplicación que pertenece al usuario actual.",
+    "summary": "Eliminar una clave de aplicación que pertenece al usuario actual"
+  },
+  "GetCurrentUserApplicationKey": {
+    "description": "Muestra una clave de aplicación que pertenece al usuario actual.",
+    "summary": "Ver una clave de aplicación que pertenece al usuario actual"
+  },
+  "UpdateCurrentUserApplicationKey": {
+    "description": "Edita una clave de aplicación que pertenece al usuario actual.",
+    "summary": "Editar una clave de aplicación que pertenece al usuario actual",
+    "request_description": "",
+    "request_schema_description": "Solicitud usada para modificar una clave de aplicación."
+  },
+  "DeleteDashboardListItems": {
+    "description": "Elimina los dashboards de una lista de dashboards existentes.",
+    "summary": "Eliminar elementos de una lista de dashboards",
+    "request_description": "Dashboards que hay que eliminar de la lista de dashboards.",
+    "request_schema_description": "Solicitud con la lista de dashboards que hay que eliminar."
+  },
+  "GetDashboardListItems": {
+    "description": "Recupera las definiciones de los dashboards de la lista.",
+    "summary": "Ver los elementos de una lista de dashboards"
+  },
+  "CreateDashboardListItems": {
+    "description": "Añade dashboards a una lista de dashboards existentes.",
+    "summary": "Añadir elementos a una lista de dashboards",
+    "request_description": "Dashboards que hay que añadir a la lista de dashboards.",
+    "request_schema_description": "Solicitud con la lista de dashboards que hay que añadir."
+  },
+  "UpdateDashboardListItems": {
+    "description": "Modifica los dashboards de una lista de dashboards existentes.",
+    "summary": "Modificar elementos de una lista de dashboards",
+    "request_description": "Dashboards nuevos en la lista de dashboards.",
+    "request_schema_description": "Solicitud con la lista de dashboards que hay que modificar."
+  },
+  "ListEvents": {
+    "description": "El endpoint de listas devuelve los eventos que se han ajustado a una consulta de búsqueda de eventos.\n[Los resultados se organizan en páginas, igual que en los logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUsa este endpoint para ver los eventos más recientes.",
+    "summary": "Ver una lista de eventos"
+  },
+  "SearchEvents": {
+    "description": "El endpoint de listas devuelve los eventos que se han ajustado a una consulta de búsqueda de eventos.\n[Los resultados se organizan en páginas, igual que en los logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUsa este endpoint para hacer búsquedas y filtrados de eventos complejos.",
+    "summary": "Buscar eventos",
+    "request_description": "",
+    "request_schema_description": "Objeto enviado con la solicitud para ver una lista de eventos de tu organización."
+  },
+  "ListIncidents": {
+    "description": "Muestra todas las incidencias de la organización del usuario.",
+    "summary": "Ver una lista de incidencias"
+  },
+  "CreateIncident": {
+    "description": "Crea una incidencia.",
+    "summary": "Crear una incidencia",
+    "request_description": "Carga de la incidencia.",
+    "request_schema_description": "Solicitud de creación de una incidencia."
+  },
+  "DeleteIncident": {
+    "description": "Elimina una incidencia existente en la organización del usuario.",
+    "summary": "Eliminar una incidencia existente"
+  },
+  "GetIncident": {
+    "description": "Muestra los detalles de la incidencia correspondiente al parámetro `incident_id`.",
+    "summary": "Ver los detalles de una incidencia"
+  },
+  "UpdateIncident": {
+    "description": "Modifica una incidencia. Indica únicamente los atributos que deben modificarse, ya que esta solicitud supone una modificación parcial.",
+    "summary": "Modificar una incidencia existente",
+    "request_description": "Carga de la incidencia.",
+    "request_schema_description": "Solicitud de modificación de una incidencia."
+  },
+  "ListOpsgenieServices": {
+    "description": "Muestra una lista con todos los servicios de la integración de Datadog y Opsgenie.",
+    "summary": "Ver todos los objetos de servicio"
+  },
+  "CreateOpsgenieService": {
+    "description": "Crea un objeto de servicio en la integración de Opsgenie.",
+    "summary": "Crear un objeto de servicio",
+    "request_description": "Carga del servicio de Opsgenie.",
+    "request_schema_description": "Solicitud de creación de un servicio de Opsgenie."
+  },
+  "DeleteOpsgenieService": {
+    "description": "Elimina un único objeto de servicio en la integración de Datadog y Opsgenie.",
+    "summary": "Eliminar un único objeto de servicio"
+  },
+  "GetOpsgenieService": {
+    "description": "Muestra un único servicio de la integración de Datadog y Opsgenie.",
+    "summary": "Ver un único objeto de servicio"
+  },
+  "UpdateOpsgenieService": {
+    "description": "Modifica un único objeto de servicio en la integración de Datadog y Opsgenie.",
+    "summary": "Modificar un único objeto de servicio",
+    "request_description": "Carga del servicio de Opsgenie.",
+    "request_schema_description": "Solicitud de modificación de un servicio de Opsgenie."
+  },
+  "SubmitLog": {
+    "description": "Envía tus logs a la plataforma Datadog por HTTP. Estos son los límites por solicitud HTTP:\n\n- Tamaño máximo del contenido por carga (sin comprimir): 5 MB\n- Tamaño máximo del log: 1 MB\n- Tamaño máximo de la matriz (cuando se envían varios logs en una matriz): 1000 entradas\n\nSe aceptan logs de más de 1 MB, pero Datadog los truncará de este modo:\n- En las solicitudes de un solo log, la API trunca el log en 1 MB y devuelve un código 2xx.\n- En las solicitudes de varios logs, la API los procesa todos, trunca solo los que superan 1 MB y devuelve un código 2xx.\n\nDatadog recomienda enviar los logs comprimidos.\nAñade el encabezado `Content-Encoding: gzip` a la solicitud si vas a enviar logs comprimidos.\n\nEstos son los códigos de estado HTTP que devuelve la API:\n- 202: Aceptada (se ha aceptado el procesamiento de la solicitud)\n- 400: Solicitud incorrecta (probablemente se deba al formato de la carga)\n- 401: Sin autorización (probablemente falte una clave de API)\n- 403: Problema de permiso (probablemente se haya usado una clave de API no válida)\n- 408: Se ha agotado el tiempo de espera (la solicitud debe volver a enviarse pasado un tiempo)\n- 413: Carga demasiado elevada (el lote supera los 5 MB sin comprimir)\n- 429: Demasiadas solicitudes (la solicitud debe volver a enviarse pasado un tiempo)\n- 500: Error interno del servidor (el servidor se ha enfrentado a una situación inesperada y no ha podido satisfacer la solicitud; la solicitud debe volver a enviarse pasado un tiempo)\n- 503: Servicio no disponible (el servidor no puede gestionar la solicitud, probablemente porque está sobrecargado; la solicitud debe volver a enviarse pasado un tiempo)",
+    "summary": "Enviar logs",
+    "request_description": "Log que hay que enviar (en formato JSON).",
+    "request_schema_description": "Mensaje del log estructurado."
+  },
+  "AggregateLogs": {
+    "description": "Endpoint de API que se usa para agregar eventos en buckets y procesar métricas y cronologías.",
+    "summary": "Agregar eventos",
+    "request_description": "",
+    "request_schema_description": "Objeto enviado con la solicitud para ver una lista de logs de tu organización."
+  },
+  "GetLogsArchiveOrder": {
+    "description": "Muestra el orden actual de tus archivos.\nEste endpoint no acepta argumentos JSON.",
+    "summary": "Ver el orden de los archivos"
+  },
+  "UpdateLogsArchiveOrder": {
+    "description": "Modifica el orden de tus archivos. Los logs se procesan de manera secuencial, por lo que, al reorganizar los archivos,\nla estructura y el contenido de los datos procesados por otros archivos puede variar.\n\n**Nota**: Si usas el método `PUT`, los archivos se reorganizan aplicando el orden nuevo.",
+    "summary": "Modificar el orden de los archivos",
+    "request_description": "Objeto que contiene la lista de ID de archivo con el nuevo orden.",
+    "request_schema_description": "Lista de ID de archivo ordenada."
+  },
+  "ListLogsArchives": {
+    "description": "Muestra la lista de archivos de logs configurados con sus definiciones.",
+    "summary": "Ver todos los archivos"
+  },
+  "CreateLogsArchive": {
+    "description": "Crea un archivo en tu organización.",
+    "summary": "Crear un archivo",
+    "request_description": "Definición del archivo nuevo.",
+    "request_schema_description": "Archivo de logs."
+  },
+  "DeleteLogsArchive": {
+    "description": "Elimina un archivo concreto de tu organización.",
+    "summary": "Eliminar un archivo"
+  },
+  "GetLogsArchive": {
+    "description": "Muestra un archivo concreto de tu organización.",
+    "summary": "Ver un archivo"
+  },
+  "UpdateLogsArchive": {
+    "description": "Modifica la configuración de un archivo determinado.\n\n**Nota**: Si usas este método, se modifica la configuración de tu archivo **cambiando**\nla configuración establecida por la nueva que se ha enviado a tu organización de Datadog.",
+    "summary": "Modificar un archivo",
+    "request_description": "Nueva definición del archivo.",
+    "request_schema_description": "Archivo de logs."
+  },
+  "RemoveRoleFromArchive": {
+    "description": "Elimina un rol de un archivo. ([API de roles](https://docs.datadoghq.com/api/v2/roles/))",
+    "summary": "Revocar un rol a un archivo",
+    "request_description": "",
+    "request_schema_description": "Relación con el rol."
+  },
+  "ListArchiveReadRoles": {
+    "description": "Devuelve todos los roles de lectura a los que está restringido un archivo.",
+    "summary": "Mostrar una lista con los roles de lectura de un archivo"
+  },
+  "AddReadRoleToArchive": {
+    "description": "Añade un rol de lectura a un archivo. ([API de roles](https://docs.datadoghq.com/api/v2/roles/))",
+    "summary": "Conceder un rol a un archivo",
+    "request_description": "",
+    "request_schema_description": "Relación con el rol."
+  },
+  "ListLogsMetrics": {
+    "description": "Muestra la lista de métricas basadas en logs que se han configurado junto con sus definiciones.",
+    "summary": "Ver todas las métricas basadas en logs"
+  },
+  "CreateLogsMetric": {
+    "description": "Crea una métrica basada en los logs introducidos de tu organización.\nDevuelve el objeto de métrica basada en logs del cuerpo de la solicitud cuando dicha solicitud es satisfactoria.",
+    "summary": "Crear una métrica basada en logs",
+    "request_description": "Definición de la nueva métrica basada en logs.",
+    "request_schema_description": "Cuerpo de la nueva métrica basada en logs."
+  },
+  "DeleteLogsMetric": {
+    "description": "Elimina una métrica basada en logs concreta de tu organización.",
+    "summary": "Eliminar una métrica basada en logs"
+  },
+  "GetLogsMetric": {
+    "description": "Muestra una métrica basada en logs concreta de tu organización.",
+    "summary": "Ver una métrica basada en logs"
+  },
+  "UpdateLogsMetric": {
+    "description": "Modifica una métrica basada en logs concreta de tu organización.\nDevuelve el objeto de métrica basada en logs del cuerpo de la solicitud cuando dicha solicitud es satisfactoria.",
+    "summary": "Modificar una métrica basada en logs",
+    "request_description": "Nueva definición de la métrica basada en logs.",
+    "request_schema_description": "Cuerpo de la nueva métrica basada en logs."
+  },
+  "ListRestrictionQueries": {
+    "description": "Devuelve todas las consultas de restricciones, incluidos nombres e ID.",
+    "summary": "Mostrar una lista de consultas de restricciones"
+  },
+  "CreateRestrictionQuery": {
+    "description": "Crea una consulta de restricciones para tu organización.",
+    "summary": "Crear una consulta de restricciones",
+    "request_description": "",
+    "request_schema_description": "Crea una consulta de restricciones."
+  },
+  "GetRoleRestrictionQuery": {
+    "description": "Muestra la consulta de restricciones de un rol concreto.",
+    "summary": "Ver la consulta de restricciones de un rol concreto"
+  },
+  "ListUserRestrictionQueries": {
+    "description": "Muestra todas las consultas de restricciones de un usuario concreto.",
+    "summary": "Ver todas las consultas de restricciones de un usuario concreto"
+  },
+  "DeleteRestrictionQuery": {
+    "description": "Elimina una consulta de restricciones.",
+    "summary": "Eliminar una consulta de restricciones"
+  },
+  "GetRestrictionQuery": {
+    "description": "Muestra una consulta de restricciones de la organización que se especifica en el parámetro `restriction_query_id` de la consulta.",
+    "summary": "Ver una consulta de restricciones"
+  },
+  "UpdateRestrictionQuery": {
+    "description": "Edita una consulta de restricciones.",
+    "summary": "Modificar una consulta de restricciones",
+    "request_description": "",
+    "request_schema_description": "Modifica una consulta de restricciones."
+  },
+  "RemoveRoleFromRestrictionQuery": {
+    "description": "Elimina un rol de una consulta de restricciones.",
+    "summary": "Revocar un rol a una consulta de restricciones",
+    "request_description": "",
+    "request_schema_description": "Relación con el rol."
+  },
+  "ListRestrictionQueryRoles": {
+    "description": "Devuelve todos los roles que tienen una consulta de restricciones concreta.",
+    "summary": "Mostrar una lista con los roles de una consulta de restricciones"
+  },
+  "AddRoleToRestrictionQuery": {
+    "description": "Añade un rol a una consulta de restricciones.",
+    "summary": "Conceder un rol a una consulta de restricciones",
+    "request_description": "",
+    "request_schema_description": "Relación con el rol."
+  },
+  "ListLogsGet": {
+    "description": "El endpoint de listas devuelve los logs que se han ajustado a una consulta de búsqueda de logs.\n[Los resultados se organizan en páginas][1].\n\nUsa este endpoint para ver los logs más recientes.\n\n**Si estás pensando en archivar los logs de tu organización,\nplantéate usar las funciones de archivado de Datadog y no la API de listas de logs.\nConsulta la [documentación sobre archivado de logs de Datadog][2].**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
+    "summary": "Ver una lista de logs"
+  },
+  "ListLogs": {
+    "description": "El endpoint de listas devuelve los logs que se han ajustado a una consulta de búsqueda de logs.\n[Los resultados se organizan en páginas][1].\n\nUsa este endpoint para hacer búsquedas y filtrados de logs complejos.\n\n**Si estás pensando en archivar los logs de tu organización,\nplantéate usar las funciones de archivado de Datadog y no la API de listas de logs.\nConsulta la [documentación sobre archivado de logs de Datadog][2].**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
+    "summary": "Buscar logs",
+    "request_description": "",
+    "request_schema_description": "Solicitud de lista de logs."
+  },
+  "ListTagConfigurations": {
+    "description": "Devuelve todas las métricas (que coincidan con los filtros adicionales, si así se especifica).",
+    "summary": "Ver una lista de métricas"
+  },
+  "DeleteBulkTagsMetricsConfiguration": {
+    "description": "Elimina todas las listas personalizadas de claves de etiqueta consultables correspondientes a un conjunto de métricas de recuento, gauge, frecuencia y distribución existentes.\nPara seleccionar las métricas, hay que indicar un prefijo de nombre de métrica.\nLos resultados pueden enviarse a varias direcciones de correo electrónico, al igual que cuando la operación se realiza mediante la aplicación web de Datadog.\nSolo puede usarse con claves de aplicación de usuarios que tengan permiso para gestionar etiquetas de métricas (`Manage Tags for Metrics`).",
+    "summary": "Configurar etiquetas de varias métricas",
+    "request_description": "",
+    "request_schema_description": "Objeto de contenedor de una única solicitud de eliminación de etiquetas en bloque."
+  },
+  "CreateBulkTagsMetricsConfiguration": {
+    "description": "Crea y define una lista de claves de etiqueta consultables correspondiente a un conjunto de métricas de recuento, gauge, frecuencia y distribución existentes.\nPara seleccionar las métricas, hay que indicar un prefijo de nombre de métrica. Utiliza el método Delete de esta ruta de la API para eliminar configuraciones de etiquetas.\nLos resultados pueden enviarse a varias direcciones de correo electrónico, al igual que cuando la operación se realiza mediante la aplicación web de Datadog.\nSi hay varias llamadas con la misma métrica, se usa la última configuración que se haya aplicado (es decir, no se sigue el orden de envío).\nComo verás, las llamadas concurrentes no se ordenan de manera determinística.\nSolo puede usarse con claves de aplicación de usuarios que tengan permiso para gestionar etiquetas de métricas (`Manage Tags for Metrics`).",
+    "summary": "Configurar etiquetas de varias métricas",
+    "request_description": "",
+    "request_schema_description": "Objeto de contenedor de una única solicitud de configuración de etiquetas en bloque."
+  },
+  "ListActiveMetricConfigurations": {
+    "description": "Muestra las etiquetas y agregaciones que se buscan de forma activa en los dashboards y monitores de un nombre de métrica concreto.",
+    "summary": "Mostrar etiquetas y agregaciones activas"
+  },
+  "ListTagsByMetricName": {
+    "description": "Muestra los pares clave-valor de etiquetas indexadas correspondientes a un nombre de métrica concreto.",
+    "summary": "Mostrar una lista de etiquetas por nombre de métrica"
+  },
+  "EstimateMetricsOutputSeries": {
+    "description": "Devuelve la cardinalidad estimada de una métrica con una configuración concreta de etiquetas, percentil y número de agregaciones con Metrics without Limits&trade;.",
+    "summary": "Herramienta para estimar la cardinalidad de una configuración de etiquetas"
+  },
+  "DeleteTagConfiguration": {
+    "description": "Elimina la configuración de etiquetas de una métrica. Solo puede usarse con\nclaves de aplicación de usuarios que tengan permiso para gestionar etiquetas de métricas (`Manage Tags for Metrics`).",
+    "summary": "Eliminar una configuración de etiquetas"
+  },
+  "ListTagConfigurationByName": {
+    "description": "Devuelve la configuración de etiquetas de la métrica con el nombre especificado.",
+    "summary": "Mostrar configuración de etiquetas por nombre"
+  },
+  "UpdateTagConfiguration": {
+    "description": "Modifica la configuración de etiquetas de una agregación de métricas o percentiles de una métrica de distribución,\no de una agregación personalizada de métricas de recuento, frecuencia o gauge.\nSolo puede usarse con claves de aplicación de usuarios que tengan permiso para gestionar etiquetas de métricas (`Manage Tags for Metrics`).",
+    "summary": "Modificar una configuración de etiquetas",
+    "request_description": "",
+    "request_schema_description": "Objeto de solicitud con la métrica cuya configuración de etiquetas quieres modificar."
+  },
+  "CreateTagConfiguration": {
+    "description": "Crea y define una lista de claves de etiqueta consultables correspondiente a una métrica de recuento/gauge/frecuencia/distribución.\nSi quieres, puedes incluir agregaciones de percentiles en cualquier métrica de distribución o configurar agregaciones personalizadas\nen cualquier métrica de recuento, frecuencia o gauge.\nSolo puede usarse con claves de aplicación de usuarios que tengan permiso para gestionar etiquetas de métricas (`Manage Tags for Metrics`).",
+    "summary": "Crear una configuración de etiquetas",
+    "request_description": "",
+    "request_schema_description": "Objeto de solicitud con la métrica cuyas etiquetas quieres configurar."
+  },
+  "ListVolumesByMetricName": {
+    "description": "Muestra volúmenes concretos de la métrica con el nombre especificado.\n\nLas métricas personalizadas generadas en la aplicación que provengan de otros productos devolverán el parámetro `null` en los volúmenes introducidos.",
+    "summary": "Mostrar una lista con volúmenes de métrica concretos por nombre de métrica"
+  },
+  "ListPermissions": {
+    "description": "Devuelve una lista con todos los permisos, incluidos el nombre, la descripción y el ID.",
+    "summary": "Mostrar una lista de permisos"
+  },
+  "ListProcesses": {
+    "description": "Muestra todos los procesos de tu organización.",
+    "summary": "Ver todos los procesos"
+  },
+  "ListRoles": {
+    "description": "Devuelve todos los roles, incluidos sus nombres y sus identificadores únicos.",
+    "summary": "Mostrar una lista de roles"
+  },
+  "CreateRole": {
+    "description": "Crea un rol para tu organización.",
+    "summary": "Crear un rol",
+    "request_description": "",
+    "request_schema_description": "Crea un rol."
+  },
+  "DeleteRole": {
+    "description": "Deshabilita un rol.",
+    "summary": "Eliminar un rol"
+  },
+  "GetRole": {
+    "description": "Muestra el rol de la organización correspondiente al parámetro `role_id` especificado.",
+    "summary": "Ver un rol"
+  },
+  "UpdateRole": {
+    "description": "Edita un rol. Solo puede usarse con claves de aplicación que pertenezcan a administradores.",
+    "summary": "Modificar un rol",
+    "request_description": "",
+    "request_schema_description": "Modifica un rol."
+  },
+  "CloneRole": {
+    "description": "Clonar un rol existente",
+    "summary": "Crear un rol clonando uno existente",
+    "request_description": "",
+    "request_schema_description": "Solicitud para crear un rol clonando uno existente."
+  },
+  "RemovePermissionFromRole": {
+    "description": "Quita un permiso a un rol.",
+    "summary": "Revocar permiso",
+    "request_description": "",
+    "request_schema_description": "Relación con un objeto de permisos."
+  },
+  "ListRolePermissions": {
+    "description": "Devuelve una lista con todos los permisos de un único rol.",
+    "summary": "Mostrar una lista con los permisos de un rol"
+  },
+  "AddPermissionToRole": {
+    "description": "Añade un permiso a un rol.",
+    "summary": "Conceder un permiso a un rol",
+    "request_description": "",
+    "request_schema_description": "Relación con un objeto de permisos."
+  },
+  "RemoveUserFromRole": {
+    "description": "Quita un usuario de un rol.",
+    "summary": "Quitar un usuario de un rol",
+    "request_description": "",
+    "request_schema_description": "Relación con el usuario."
+  },
+  "ListRoleUsers": {
+    "description": "Muestra todos los usuarios de un rol.",
+    "summary": "Ver todos los usuarios de un rol"
+  },
+  "AddUserToRole": {
+    "description": "Añade un usuario a un rol.",
+    "summary": "Añadir un usuario a un rol",
+    "request_description": "",
+    "request_schema_description": "Relación con el usuario."
+  },
+  "AggregateRUMEvents": {
+    "description": "Endpoint de API para agregar eventos de RUM en buckets de métricas y cronologías procesadas.",
+    "summary": "Agregar eventos de RUM",
+    "request_description": "",
+    "request_schema_description": "Objeto enviado con la solicitud para ver buckets de agregación de eventos de RUM de tu organización."
+  },
+  "GetRUMApplications": {
+    "description": "Muestra una lista con todas las aplicaciones de RUM de tu organización.",
+    "summary": "Mostrar una lista con todas las aplicaciones de RUM"
+  },
+  "CreateRUMApplication": {
+    "description": "Crea una aplicación de RUM en tu organización.",
+    "summary": "Crear una aplicación de RUM",
+    "request_description": "",
+    "request_schema_description": "Atributos de la solicitud de creación de aplicación de RUM."
+  },
+  "DeleteRUMApplication": {
+    "description": "Elimina una aplicación de RUM existente en tu organización.",
+    "summary": "Eliminar una aplicación de RUM"
+  },
+  "GetRUMApplication": {
+    "description": "Muestra la aplicación de RUM que tiene el ID especificado en tu organización.",
+    "summary": "Ver una aplicación de RUM"
+  },
+  "UpdateRUMApplication": {
+    "description": "Modifica la aplicación de RUM que tiene el ID especificado en tu organización.",
+    "summary": "Modificar una aplicación de RUM",
+    "request_description": "",
+    "request_schema_description": "Solicitud de modificación de aplicación de RUM."
+  },
+  "ListRUMEvents": {
+    "description": "El endpoint de listas devuelve los eventos que se han ajustado a una consulta de búsqueda de RUM.\n[Los resultados se muestran organizados en páginas][1].\n\nUsa este endpoint para ver los eventos de RUM más recientes.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
+    "summary": "Ver una lista de eventos de RUM"
+  },
+  "SearchRUMEvents": {
+    "description": "El endpoint de listas devuelve los eventos de RUM que se han ajustado a una consulta de búsqueda de RUM.\n[Los resultados se muestran organizados en páginas][1].\n\nUsa este endpoint para hacer búsquedas y filtrados de eventos de RUM complejos.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
+    "summary": "Buscar eventos de RUM",
+    "request_description": "",
+    "request_schema_description": "Solicitud de lista de eventos de RUM."
+  },
+  "UploadIdPMetadata": {
+    "description": "Endpoint para cargar metadatos de IdP para la configuración de SAML.\n\nUsa este endpoint para cargar o sustituir metadatos de IdP para la configuración del inicio de sesión basado en SAML.",
+    "summary": "Cargar metadatos de IdP",
+    "request_description": ""
+  },
+  "DownloadCloudWorkloadPolicyFile": {
+    "description": "El endpoint de descargas genera un archivo de políticas de Cloud Workload Security partiendo de las reglas\nde Cloud Workload Security que tienes activas y lo descarga en formato .policy. Después, puedes implementar este archivo\nen tus Agents para cambiar la política que se aplica en tu entorno.",
+    "summary": "Ver la política de Cloud Workload Security más reciente"
+  },
+  "ListCloudWorkloadSecurityAgentRules": {
+    "description": "Muestra la lista de reglas de Agent.",
+    "summary": "Ver todas las reglas de Agent de Cloud Workload Security"
+  },
+  "CreateCloudWorkloadSecurityAgentRule": {
+    "description": "Crea una regla de Agent con los parámetros especificados.",
+    "summary": "Crear una regla de Agent de Cloud Workload Security",
+    "request_description": "Definición de la regla de Agent nueva.",
+    "request_schema_description": "Objeto de solicitud con la regla de Agent que hay que crear."
+  },
+  "DeleteCloudWorkloadSecurityAgentRule": {
+    "description": "Elimina una regla de Agent concreta.",
+    "summary": "Eliminar una regla de Agent de Cloud Workload Security"
+  },
+  "GetCloudWorkloadSecurityAgentRule": {
+    "description": "Muestra los detalles de una regla de Agent concreta.",
+    "summary": "Ver una regla de Agent de Cloud Workload Security"
+  },
+  "UpdateCloudWorkloadSecurityAgentRule": {
+    "description": "Modifica una regla de Agent concreta.\nDevuelve el objeto de regla de Agent cuando la solicitud es satisfactoria.",
+    "summary": "Modificar una regla de Agent de Cloud Workload Security",
+    "request_description": "Definición nueva de la regla de Agent.",
+    "request_schema_description": "Objeto de solicitud que incluye la regla de Agent con los atributos que hay que modificar."
+  },
+  "ListSecurityFilters": {
+    "description": "Muestra la lista de filtros de seguridad configurados con sus definiciones.",
+    "summary": "Ver todos los filtros de seguridad"
+  },
+  "CreateSecurityFilter": {
+    "description": "Crea un filtro de seguridad.\n\nConsulta la [guía de filtros de seguridad](https://docs.datadoghq.com/security_platform/guide/how-to-setup-security-filters-using-security-monitoring-api/)\npara ver más ejemplos.",
+    "summary": "Crear un filtro de seguridad",
+    "request_description": "Definición del filtro de seguridad nuevo.",
+    "request_schema_description": "Objeto de solicitud con el filtro de seguridad que quieres crear."
+  },
+  "DeleteSecurityFilter": {
+    "description": "Elimina un filtro de seguridad concreto.",
+    "summary": "Eliminar un filtro de seguridad"
+  },
+  "GetSecurityFilter": {
+    "description": "Muestra los detalles de un filtro de seguridad concreto.\n\nConsulta la [guía de filtros de seguridad](https://docs.datadoghq.com/security_platform/guide/how-to-setup-security-filters-using-security-monitoring-api/)\npara ver más ejemplos.",
+    "summary": "Ver un filtro de seguridad"
+  },
+  "UpdateSecurityFilter": {
+    "description": "Modifica un filtro de seguridad concreto.\nDevuelve el objeto de filtro de seguridad cuando la solicitud es satisfactoria.",
+    "summary": "Modificar un filtro de seguridad",
+    "request_description": "Definición nueva del filtro de seguridad.",
+    "request_schema_description": "Cuerpo del filtro de seguridad nuevo."
+  },
+  "ListSecurityMonitoringRules": {
+    "description": "Muestra una lista de reglas.",
+    "summary": "Mostrar una lista de reglas"
+  },
+  "CreateSecurityMonitoringRule": {
+    "description": "Crea una regla de detección.",
+    "summary": "Crear una regla de detección",
+    "request_description": "",
+    "request_schema_description": "Crea una regla."
+  },
+  "DeleteSecurityMonitoringRule": {
+    "description": "Elimina una regla existente. Las reglas predeterminadas no se pueden eliminar.",
+    "summary": "Eliminar una regla existente"
+  },
+  "GetSecurityMonitoringRule": {
+    "description": "Muestra los detalles de una regla.",
+    "summary": "Ver los detalles de una regla"
+  },
+  "UpdateSecurityMonitoringRule": {
+    "description": "Modifica una regla existente. Para modificar `cases`, `queries` y `options`, debe incluirse\ntodo el campo. Por ejemplo, para modificar una consulta, deben incluirse todas las consultas.\nLas reglas predeterminadas solo pueden modificarse si se van a habilitar o si se van a cambiar las notificaciones.",
+    "summary": "Modificar una regla existente",
+    "request_description": "",
+    "request_schema_description": "Modifica una regla existente."
+  },
+  "ListSecurityMonitoringSignals": {
+    "description": "El endpoint de listas devuelve las señales de seguridad que se han ajustado a una consulta de búsqueda.\nTanto este endpoint como el endpoint POST sirven para ver una lista de\nseñales de seguridad.",
+    "summary": "Ver una lista breve de señales de seguridad"
+  },
+  "SearchSecurityMonitoringSignals": {
+    "description": "Devuelve las señales de seguridad que se han ajustado a una consulta de búsqueda.\nTanto este endpoint como el endpoint GET sirven para ver una lista de\nseñales de seguridad.",
+    "summary": "Ver una lista de señales de seguridad",
+    "request_description": "",
+    "request_schema_description": "Solicitud de lista de señales de seguridad."
+  },
+  "EditSecurityMonitoringSignalAssignee": {
+    "description": "Modifica el usuario que tiene asignada la evaluación de una señal de seguridad.",
+    "summary": "Modificar el usuario que tiene asignada la evaluación de una señal de seguridad",
+    "request_description": "Atributos que describen la modificación de la señal.",
+    "request_schema_description": "Cuerpo de la solicitud para cambiar el usuario asignado de una señal de monitorización de seguridad concreta."
+  },
+  "EditSecurityMonitoringSignalIncidents": {
+    "description": "Cambia las incidencias relacionadas con una señal de seguridad.",
+    "summary": "Cambiar las incidencias relacionadas con una señal de seguridad",
+    "request_description": "Atributos que describen la modificación de la señal.",
+    "request_schema_description": "Cuerpo de la solicitud para cambiar las incidencias relacionadas con una señal de monitorización de seguridad concreta."
+  },
+  "EditSecurityMonitoringSignalState": {
+    "description": "Cambia el estado que tiene la evaluación de una señal de seguridad.",
+    "summary": "Cambiar el estado que tiene la evaluación de una señal de seguridad",
+    "request_description": "Atributos que describen la modificación de la señal.",
+    "request_schema_description": "Cuerpo de la solicitud para cambiar el estado de una señal de monitorización de seguridad concreta."
+  },
+  "SubmitMetrics": {
+    "description": "El endpoint de métricas te permite publicar datos de cronologías que pueden representarse mediante gráficos en los dashboards de Datadog.\nEl tamaño de carga máximo es de 500 kilobytes (512 000 bytes). Si la carga se comprime, debe ocupar menos de 5 megabytes (5 242 880 bytes) una vez descomprimida.\n\nSi vas a enviar métricas directamente a la API de Datadog sin usar DogStatsD, ten en cuenta estos datos:\n\n- Marca de tiempo: 64 bits\n- Valor: 64 bits\n- Nombres de métrica: 20 bytes\n- Cronología: 50 bytes\n- Carga total: 100 bytes aproximadamente\n\nEl nombre del host se incluye entre los recursos del campo “Recursos”.",
+    "summary": "Enviar métricas",
+    "request_description": "",
+    "request_schema_description": "Carga de las métricas."
+  },
+  "CreateServiceAccount": {
+    "description": "Crea una cuenta de servicio para tu organización.",
+    "summary": "Crear una cuenta de servicio",
+    "request_description": "",
+    "request_schema_description": "Crea una cuenta de servicio."
+  },
+  "ListServiceAccountApplicationKeys": {
+    "description": "Muestra una lista con todas las claves de aplicación disponibles para esta cuenta de servicio.",
+    "summary": "Mostrar una lista de las claves de aplicación para esta cuenta de servicio"
+  },
+  "CreateServiceAccountApplicationKey": {
+    "description": "Crea una clave de aplicación para esta cuenta de servicio.",
+    "summary": "Crear una clave de aplicación para esta cuenta de servicio",
+    "request_description": "",
+    "request_schema_description": "Solicitud usada para crear una clave de aplicación."
+  },
+  "DeleteServiceAccountApplicationKey": {
+    "description": "Elimina una clave de aplicación que pertenezca a esta cuenta de servicio.",
+    "summary": "Eliminar una clave de aplicación de esta cuenta de servicio"
+  },
+  "GetServiceAccountApplicationKey": {
+    "description": "Muestra una clave de aplicación que pertenezca a esta cuenta de servicio.",
+    "summary": "Ver una clave de aplicación de esta cuenta de servicio"
+  },
+  "UpdateServiceAccountApplicationKey": {
+    "description": "Edita una clave de aplicación que pertenezca a esta cuenta de servicio.",
+    "summary": "Editar una clave de aplicación de esta cuenta de servicio",
+    "request_description": "",
+    "request_schema_description": "Solicitud usada para modificar una clave de aplicación."
+  },
+  "ListIncidentServices": {
+    "description": "Muestra todos los servicios de incidencias cargados de la organización del usuario que hace la solicitud. Si se proporciona el parámetro `include[users]` en la consulta, el atributo incluido tendrá los usuarios relacionados con estos servicios de incidencias.",
+    "summary": "Ver una lista con todos los servicios de incidencias"
+  },
+  "CreateIncidentService": {
+    "description": "Crea un servicio de incidencias.",
+    "summary": "Crear un servicio de incidencias",
+    "request_description": "Carga del servicio de incidencias.",
+    "request_schema_description": "Solicitud de creación con la carga de un servicio de incidencias."
+  },
+  "DeleteIncidentService": {
+    "description": "Elimina un servicio de incidencias existente.",
+    "summary": "Eliminar un servicio de incidencias existente"
+  },
+  "GetIncidentService": {
+    "description": "Muestra los detalles de un servicio de incidencias. Si se proporciona el parámetro `include[users]` en la consulta,\nel atributo incluido tendrá los usuarios relacionados con estos servicios de incidencias.",
+    "summary": "Ver los detalles de un servicio de incidencias"
+  },
+  "UpdateIncidentService": {
+    "description": "Modifica un servicio de incidencias existente. Indica únicamente los atributos que deben modificarse, ya que esta solicitud supone una modificación parcial.",
+    "summary": "Modificar un servicio de incidencias existente",
+    "request_description": "Carga del servicio de incidencias.",
+    "request_schema_description": "Solicitud de modificación con la carga de un servicio de incidencias."
+  },
+  "ListIncidentTeams": {
+    "description": "Muestra todos los equipos de incidencias de la organización del usuario que hace la solicitud. Si se proporciona el parámetro `include[users]` en la consulta, el atributo incluido tendrá los usuarios relacionados con estos equipos de incidencias.",
+    "summary": "Ver una lista con todos los equipos de incidencias"
+  },
+  "CreateIncidentTeam": {
+    "description": "Crea un equipo de incidencias.",
+    "summary": "Crear un equipo de incidencias",
+    "request_description": "Carga del equipo de incidencias.",
+    "request_schema_description": "Solicitud de creación con la carga de un equipo de incidencias."
+  },
+  "DeleteIncidentTeam": {
+    "description": "Elimina un equipo de incidencias existente.",
+    "summary": "Eliminar un equipo de incidencias existente"
+  },
+  "GetIncidentTeam": {
+    "description": "Muestra los detalles de un equipo de incidencias. Si se proporciona el parámetro `include[users]` en la consulta,\nel atributo incluido tendrá los usuarios relacionados con estos equipos de incidencias.",
+    "summary": "Ver los detalles de un equipo de incidencias"
+  },
+  "UpdateIncidentTeam": {
+    "description": "Modifica un equipo de incidencias existente. Indica únicamente los atributos que deben modificarse, ya que esta solicitud supone una modificación parcial.",
+    "summary": "Modificar un equipo de incidencias existente",
+    "request_description": "Carga del equipo de incidencias.",
+    "request_schema_description": "Solicitud de modificación con la carga de un equipo de incidencias."
+  },
+  "GetUsageApplicationSecurityMonitoring": {
+    "description": "Muestra el uso por hora de la protección de aplicaciones.\n**Nota:** Ahora pueden consultarse los datos de uso por hora de todos los productos con la [API para ver el uso por hora según la gama de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
+    "summary": "Ver el uso por hora de la protección de aplicaciones"
+  },
+  "GetCostByOrg": {
+    "description": "Muestra el coste de una cuenta multi-organización. Los datos del coste de cada organización al mes están disponibles, como muy tarde, el día 16 del mes siguiente.",
+    "summary": "Ver el coste de una cuenta multi-organización"
+  },
+  "GetEstimatedCostByOrg": {
+    "description": "Muestra el coste estimado de las cuentas formadas por varias organizaciones y por una sola.\nSolo se pueden consultar los datos de coste estimados del mes corriente y del anterior. Para ver datos más antiguos, tienes que usar el endpoint /cost_by_org.",
+    "summary": "Ver el coste estimado de la cuenta"
+  },
+  "GetHourlyUsage": {
+    "description": "Ver el uso por hora según la gama de productos",
+    "summary": "Ver el uso por hora según la gama de productos"
+  },
+  "GetUsageLambdaTracedInvocations": {
+    "description": "Muestra el uso por hora de invocaciones rastreadas con funciones lambda.\n**Nota:** Ahora pueden consultarse datos de uso por hora de todos los productos con la [API para ver el uso por hora según la gama de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
+    "summary": "Ver el uso por hora de invocaciones rastreadas con funciones lambda"
+  },
+  "GetUsageObservabilityPipelines": {
+    "description": "Muestra el uso por hora de canalizaciones de observabilidad.\n**Nota:** Ahora pueden consultarse los datos de uso por hora de todos los productos con la [API para ver el uso por hora según la gama de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
+    "summary": "Ver el uso por hora de canalizaciones de observabilidad"
+  },
+  "SendInvitations": {
+    "description": "Envía por correo electrónico a uno o varios usuarios invitaciones para que se unan a la organización.",
+    "summary": "Enviar invitaciones por correo electrónico",
+    "request_description": "",
+    "request_schema_description": "Objeto para invitar a usuarios a unirse a la organización."
+  },
+  "GetInvitation": {
+    "description": "Devuelve una única invitación de usuario por UUID.",
+    "summary": "Ver una invitación de usuario"
+  },
+  "ListUsers": {
+    "description": "Muestra una lista con todos los usuarios de la organización. En ella se incluyen\ntodos los usuarios, incluso los desactivados y los que no se han verificado.",
+    "summary": "Mostrar una lista con todos los usuarios"
+  },
+  "CreateUser": {
+    "description": "Crea un usuario para tu organización.",
+    "summary": "Crear un usuario",
+    "request_description": "",
+    "request_schema_description": "Crea un usuario."
+  },
+  "DisableUser": {
+    "description": "Deshabilita un usuario. Solo puede usarse con una clave de aplicación\nque pertenezca a un usuario administrador.",
+    "summary": "Deshabilitar un usuario"
+  },
+  "GetUser": {
+    "description": "Muestra el usuario de la organización que corresponde al `user_id` especificado.",
+    "summary": "Ver los detalles de un usuario"
+  },
+  "UpdateUser": {
+    "description": "Edita un usuario. Solo puede usarse con una clave de aplicación\nque pertenezca a un usuario administrador.",
+    "summary": "Modificar un usuario",
+    "request_description": "",
+    "request_schema_description": "Modifica un usuario."
+  },
+  "ListUserOrganizations": {
+    "description": "Muestra la organización de un usuario. Devuelve información sobre el usuario y todas las organizaciones\na las que se ha unido.",
+    "summary": "Ver la organización de un usuario"
+  },
+  "ListUserPermissions": {
+    "description": "Muestra los permisos de un usuario. Devuelve una lista con los permisos que el usuario\ntiene asignados por sus roles.",
+    "summary": "Ver los permisos de un usuario"
+  }
+}

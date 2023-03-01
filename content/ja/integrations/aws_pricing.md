@@ -1,38 +1,61 @@
 ---
+app_id: aws-pricing
+app_uuid: 74fb11c5-4dea-4b17-acac-2c2453ea6331
 assets:
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: aws.pricing.amazonecs
+      metadata_path: metadata.csv
+      prefix: aws.pricing.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: AWS Pricing
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: コミュニティ
+  sales_email: tsein@brightcove.com
+  support_email: tsein@brightcove.com
 categories:
 - aws
 - cloud
 - コスト管理
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/aws_pricing/README.md
-display_name: AWS Pricing
+display_on_public_website: true
 draft: false
 git_integration_title: aws_pricing
-guid: fce760ae-979a-4c35-aa4e-5a05c24e2ce3
 integration_id: aws-pricing
 integration_title: AWS Pricing
 integration_version: 1.0.0
 is_public: true
 kind: インテグレーション
-maintainer: tsein@brightcove.com
-manifest_version: 1.0.0
-metric_prefix: aws.pricing.
-metric_to_check: aws.pricing.amazonecs
+manifest_version: 2.0.0
 name: aws_pricing
-public_title: Datadog-AWS Pricing インテグレーション
+oauth: {}
+public_title: AWS Pricing
 short_description: サービスの AWS Pricing 情報をレートコードごとに収集
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::AWS
+  - Category::Cloud
+  - Category::Cost Management
+  configuration: README.md#Setup
+  description: サービスの AWS Pricing 情報をレートコードごとに収集
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: AWS Pricing
 ---
 
 

@@ -385,10 +385,9 @@ Secrets handle decrypted:
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-Windows の例（管理者の Powershell から）
-
+Windows の例（管理者の PowerShell から）
 ```powershell
-PS C:\> & '%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe' secret
+PS C:\> & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" secret
 === Checking executable rights ===
 Executable path: C:\path\to\you\executable.exe
 Check Rights: OK, the executable has the correct rights
@@ -456,7 +455,7 @@ Agent の外部でテストまたはデバッグするには、Agent の実行�
 #### Linux
 
 ```bash
-sudo su dd-agent - bash -c "echo '{\"version\": \"1.0\", \"secrets\": [\"secret1\", \"secret2\"]}' | /path/to/the/secret_backend_command"
+sudo -u dd-agent bash -c "echo '{\"version\": \"1.0\", \"secrets\": [\"secret1\", \"secret2\"]}' | /path/to/the/secret_backend_command"
 ```
 
 Datadog Agent をインストールすると、`dd-agent` ユーザーが作成されます。
@@ -496,12 +495,12 @@ Agent と同じ条件で実行可能ファイルをテストするには、開�
 これを行うには、次の手順を実行します。
 
 1. `Local Security Policy` の `Local Policies/User Rights Assignement/Deny Log on locally` リストから `ddagentuser` を削除します。
-2. `ddagentuser` に新しいパスワードを設定します（インストール時に生成されたパスワードはどこにも保存されないため）。Powershell で、次を実行します。
+2. `ddagentuser` に新しいパスワードを設定します（インストール時に生成されたパスワードはどこにも保存されないため）。PowerShell で、次を実行します。
     ```powershell
     $user = [ADSI]"WinNT://./ddagentuser";
     $user.SetPassword("a_new_password")
     ```
-3. サービスコントロールマネージャーの `DatadogAgent` サービスで使用されるパスワードを更新します。Powershell で、次を実行します。
+3. サービスコントロールマネージャーの `DatadogAgent` サービスで使用されるパスワードを更新します。PowerShell で、次を実行します。
     ```powershell
     sc.exe config DatadogAgent password= "a_new_password"
     ```

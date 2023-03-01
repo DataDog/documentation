@@ -1,55 +1,72 @@
 ---
-aliases:
-- /ja/integrations/phpfpm
+app_id: php-fpm
+app_uuid: 34faabdb-8545-4a45-a8bd-be0f979e99e7
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     php-fpm: assets/dashboards/php-fpm_dashboard.json
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: php_fpm.processes.total
+      metadata_path: metadata.csv
+      prefix: php_fpm.
+    process_signatures:
+    - php-fpm
+    - 'php-fpm:'
+    - php7.0-fpm
+    - php7.0-fpm start
+    - service php-fpm
+    - php7.0-fpm restart
+    - restart php-fpm
+    - systemctl restart php-fpm.service
+    - php7.0-fpm.service
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: PHP-FPM
   saved_views:
     php-fpm_processes: assets/saved_views/php-fpm_processes.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - web
-- autodiscovery
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/php_fpm/README.md
-display_name: PHP-FPM
+display_on_public_website: true
 draft: false
 git_integration_title: php_fpm
-guid: 47f2c337-83ac-4767-b460-1927d8343764
 integration_id: php-fpm
 integration_title: PHP FPM
-integration_version: 2.1.0
+integration_version: 2.2.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: php_fpm.
-metric_to_check: php_fpm.processes.total
+manifest_version: 2.0.0
 name: php_fpm
-process_signatures:
-- php-fpm
-- 'php-fpm:'
-- php7.0-fpm
-- php7.0-fpm start
-- service php-fpm
-- php7.0-fpm restart
-- restart php-fpm
-- systemctl restart php-fpm.service
-- php7.0-fpm.service
-public_title: Datadog-PHP FPM インテグレーション
+oauth: {}
+public_title: PHP FPM
 short_description: プロセスの状態、低速なリクエスト、受け付けたリクエストを監視.
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Web
+  configuration: README.md#Setup
+  description: プロセスの状態、低速なリクエスト、受け付けたリクエストを監視.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: PHP FPM
 ---
 
 
@@ -62,7 +79,7 @@ PHP-FPM チェックは、FPM プールの状態を監視し、リクエスト�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 PHP-FPM チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 

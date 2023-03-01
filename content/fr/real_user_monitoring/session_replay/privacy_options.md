@@ -39,7 +39,7 @@ datadogRum.init({
     //  env: 'production',
     //  version: '1.0.0',
     sampleRate: 100,
-    replaySampleRate: 100,
+    premiumSampleRate: 100,
     trackInteractions: true,
     defaultPrivacyLevel: 'mask-user-input' | 'mask' | 'allow' 
 });

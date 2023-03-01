@@ -39,6 +39,8 @@ Datadog Agent 6 以降は、コンテナからログを収集します。2 通�
 
 - コンテナがログをファイルに書き込む場合 (ログを `stdout`/`stderr` に部分的にのみ書き込み、ログをファイルに書き込むか、ログをファイルに完全に書き込む)、[カスタムログ収集を使用するホスト Agent](?tab=hostagentwithcustomlogging#installation) のインストールまたは[コンテナ化された Agent](?tab=containerized-agent#installation) のインストール手順に従い、[オートディスカバリーコンフィギュレーションの例があるファイルからのログ収集](?tab=logcollectionfromfile#examples)を確認します。
 
+このページの CLI コマンドは Docker ランタイム用です。containerd ランタイムは `docker` を `nerdctl` に、Podman ランタイムは `podman` に置き換えてください。containerd と Podman のログ収集のサポートは限定的です。
+
 ## インストール
 
 {{< tabs >}}
@@ -51,6 +53,7 @@ Datadog Agent を埋め込みホストを監視する [Docker コンテナ][1] �
 ```shell
 docker run -d --name datadog-agent \
            --cgroupns host \
+           --pid host \
            -e DD_API_KEY=<DATADOG_API_KEY> \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
@@ -68,6 +71,7 @@ docker run -d --name datadog-agent \
 ```shell
 docker run -d --name datadog-agent \
            --cgroupns host \
+           --pid host \
            -e DD_API_KEY=<DATADOG_API_KEY> \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
@@ -84,6 +88,7 @@ Docker Desktop -> Settings -> Resources -> File sharing に `/opt/datadog-agent/
 ```shell
 docker run -d --name datadog-agent \
            --cgroupns host \
+           --pid host \
            -e DD_API_KEY=<DATADOG_API_KEY> \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
@@ -316,7 +321,7 @@ Docker コンテナのログ収集は、Docker ソケット経由の収集の代
 
 バージョン 7.27.0/6.27.0+ では、Docker コンテナログをファイルから収集するように Agent を構成することができます。バージョン 6.33.0+/7.33.0+ では、Agent はデフォルトでファイルから Docker コンテナログを収集します。
 
-ファイルベースの収集では、Docker コンテナログを格納するディレクトリを次の場所で Agent に公開する必要があります: `/var/lib/docker/containers` (Windows では `c:\programdata\docker\containers`)。詳細は、[Docker ログ収集トラブルシューティングガイド][12]を参照してください。
+ファイルベースの収集では、Docker コンテナログを格納するディレクトリを次の場所で Agent に公開する必要があります: `/var/lib/docker/containers` (Windows では `c:\programdata\docker\containers`)。詳細は、[Docker ログ収集トラブルシューティングガイド][10]を参照してください。
 
 **注**:
 - Docker ソケットベースのコンテナログ収集からファイルベースのログ収集に移行すると、新しいコンテナのみがそのファイルから追跡されるようになります。環境変数 `DD_LOGS_CONFIG_DOCKER_CONTAINER_FORCE_USE_FILE` を `true` に設定すると、Agent が全てのコンテナログをファイルから収集するよう強制することができます。Agent がファイルからすべてのコンテナログを収集するように強制すると、既存のコンテナのログが重複することがあります。
@@ -324,7 +329,7 @@ Docker コンテナのログ収集は、Docker ソケット経由の収集の代
 
 ## コンテナを絞り込む
 
-ログの収集元となるコンテナを管理することができます。これは、たとえば Datadog Agent のログを収集しないようにするのに役立ちます。詳細については[コンテナのディスカバリー管理][10]を参照してください。
+ログの収集元となるコンテナを管理することができます。これは、たとえば Datadog Agent のログを収集しないようにするのに役立ちます。詳細については[コンテナのディスカバリー管理][11]を参照してください。
 
 ## 存続期間が短いコンテナ
 
@@ -332,7 +337,7 @@ Docker 環境では、Agent は Docker イベントによりコンテナのア�
 
 Agent v6.14 以降、Agent はすべてのコンテナ（実行中かは問わず）のログを収集します。つまり、直近の 1 秒間に開始し停止した存続期間の短いコンテナのログは、削除されるまで収集されます。
 
-Kubernetes 環境には、[Kubernetes 存続期間が短いコンテナのドキュメント][11]を参照してください。
+Kubernetes 環境には、[Kubernetes 存続期間が短いコンテナのドキュメント][12]を参照してください。
 
 ## その他の参考資料
 
@@ -347,6 +352,6 @@ Kubernetes 環境には、[Kubernetes 存続期間が短いコンテナのドキ
 [7]: /ja/agent/logs/advanced_log_collection/?tab=docker#filter-logs
 [8]: /ja/agent/logs/advanced_log_collection/?tab=docker#scrub-sensitive-data-from-your-logs
 [9]: /ja/agent/logs/advanced_log_collection/?tab=docker#multi-line-aggregation
-[10]: /ja/agent/guide/autodiscovery-management/
-[11]: /ja/agent/kubernetes/log/?tab=daemonset#short-lived-containers
-[12]: /ja/logs/guide/docker-logs-collection-troubleshooting-guide/
+[10]: /ja/logs/guide/docker-logs-collection-troubleshooting-guide/
+[11]: /ja/agent/guide/autodiscovery-management/
+[12]: /ja/agent/kubernetes/log/?tab=daemonset#short-lived-containers

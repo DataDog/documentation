@@ -1,16 +1,15 @@
 ---
 categories:
-  - data store
-  - cloud
-ddtype: crawler
+- data store
+- cloud
 dependencies: []
 description: MongoDB Atlas は、算出メトリクスを Datadog にプッシュして、アラートパフォーマンスを視覚化できます。
 doc_link: https://docs.datadoghq.com/integrations/mongodb_atlas/
 draft: false
 further_reading:
-  - link: https://www.datadoghq.com/blog/monitor-mongodb-atlas-for-government-datadog/
-    tag: ブログ
-    text: Datadog で MongoDB Atlas for Government を監視する
+- link: https://www.datadoghq.com/blog/monitor-mongodb-atlas-for-government-datadog/
+  tag: ブログ
+  text: Datadog で MongoDB Atlas for Government を監視する
 git_integration_title: mongodb_atlas
 has_logo: true
 integration_id: mongodb-atlas
@@ -31,11 +30,8 @@ short_description: MongoDB Atlas は、算出メトリクスを Datadog にプ�
 team: web-integrations
 version: '1.0'
 ---
-## 概要
 
-{{< site-region region="us3" >}}
-**このインテグレーションは、このサイトではサポートされていません。**
-{{< /site-region >}}
+## 概要
 
 MongoDB Atlas は、算出メトリクスを Datadog にプッシュして、以下のことができます。
 
@@ -46,7 +42,7 @@ MongoDB Atlas は、算出メトリクスを Datadog にプッシュして、以
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 MongoDB Atlas インテグレーションは、Atlas ポータルにログインすることによってインストールできます。
 
@@ -73,7 +69,7 @@ MongoDB Atlas インテグレーションには、サービスのチェック機
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

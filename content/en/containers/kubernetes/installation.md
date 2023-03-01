@@ -28,15 +28,24 @@ further_reading:
 
 ## Installation
 
-This page provides instructions on installing the Datadog Agent in a Kubernetes environment through three different methods. Choose the method that best suits your use case:
+This page provides instructions on installing the Datadog Agent in a Kubernetes environment through three different methods. The following methods are supported:
 
-- [Datadog Operator](?tab=operator)
-- [Helm](?tab=helm)
-- [DaemonSet](?tab=daemonset)
+- Datadog Operator
+- Helm chart
+- DaemonSet
 
 For dedicated documentation and examples for major Kubernetes distributions including AWS Elastic Kubernetes Service (EKS), Azure Kubernetes Service (AKS), Google Kubernetes Engine (GKE), Red Hat OpenShift, Rancher, and Oracle Container Engine for Kubernetes (OKE), see [Kubernetes distributions][1].
 
 For dedicated documentation and examples for monitoring the Kubernetes control plane, see [Kubernetes control plane monitoring][2].
+
+### Minimum Agent and Cluster Agent versions
+
+Some features related to later Kubernetes versions require a minimum Datadog Agent version.
+
+| Kubernetes version | Agent version  | Cluster Agent version | Reason                              |
+|--------------------|----------------|-----------------------|---------------------------------------|
+| 1.16.0+            | 7.19.0+        | 1.9.0+                | Kubelet metrics deprecation       |
+| 1.21.0+            | 7.36.0+        | 1.20.0+               | Kubernetes resource deprecation    |
 
 {{< tabs >}}
 {{% tab "Operator" %}}
@@ -125,6 +134,10 @@ agent:
 
 where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the group ID owning the Docker or containerd socket.
 
+## Container registries
+
+To modify the container image registry, see the [Changing Container Registry][9] guide.
+
 [1]: https://github.com/DataDog/datadog-operator
 [2]: https://helm.sh
 [3]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
@@ -133,6 +146,7 @@ where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the gro
 [6]: https://app.datadoghq.com/organization-settings/api-keys
 [7]: /agent/guide/operator-advanced
 [8]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.md
+[9]: /agent/guide/changing_container_registry/#kubernetes-with-the-datadog-operator
 {{% /tab %}}
 {{% tab "Helm" %}}
 
@@ -195,6 +209,21 @@ The Datadog chart has been refactored in v2.0 to regroup the `values.yaml` param
 
 If your current chart version deployed is earlier than `v2.0.0`, follow the [migration guide][11] to map your previous settings with the new fields.
 
+### Kube state metrics core in chart v2.x
+
+In new deployments, Datadog recommends using the newer `kube-state-metrics` core with the following values:
+
+```yaml
+...
+datadog:
+...
+  kubeStateMetricsCore:
+    enabled: true
+...
+```
+
+For details about `kube-state-metrics` core, read the [Kubernetes State Metrics Core documentation][12].
+
 ### Unprivileged
 
 (Optional) To run an unprivileged installation, add the following in the `values.yaml` file:
@@ -220,6 +249,7 @@ where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the gro
 [9]: https://gallery.ecr.aws/datadog/
 [10]: https://hub.docker.com/u/datadog/
 [11]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/docs/Migration_1.x_to_2.x.md
+[12]: /integrations/kubernetes_state_core
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
 
@@ -328,7 +358,7 @@ where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the gro
 [15]: /agent/kubernetes/apm/
 [16]: /infrastructure/process/?tab=kubernetes#installation
 [17]: /network_monitoring/performance/setup/
-[18]: /security/agent/
+[18]: /data_security/agent/
 [19]: https://app.datadoghq.com/organization-settings/api-keys
 [20]: /getting_started/site/
 [21]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard

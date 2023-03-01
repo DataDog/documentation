@@ -1,36 +1,57 @@
 ---
+app_id: tcp-queue-length
+app_uuid: 2c48a360-9fbb-4cd6-9316-0e9afd9926c8
 assets:
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: tcp_queue.read_buffer_max_usage_pct
+      metadata_path: metadata.csv
+      prefix: tcp_queue.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: TCP Queue Length
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
-  - ネットワーク
-creates_events: false
-ddtype: check
+- ネットワーク
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/tcp_queue_length/README.md
-display_name: TCP Queue Length
+- https://github.com/DataDog/integrations-core/blob/master/tcp_queue_length/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: tcp_queue_length
-guid: 0468b098-43bd-4157-8a01-14065cfdcb7b
 integration_id: tcp-queue-length
 integration_title: TCP Queue Length
 integration_version: ''
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: tcp_queue.
-metric_to_check: tcp_queue.read_buffer_max_usage_pct
+manifest_version: 2.0.0
 name: tcp_queue_length
-public_title: Datadog-TCP Queue Length インテグレーション
+oauth: {}
+public_title: TCP Queue Length
 short_description: Datadog で、TCP バッファのサイズを追跡します。
-support: コア
 supported_os:
-  - linux
+- linux
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Category::Network
+  configuration: README.md#Setup
+  description: Datadog で、TCP バッファのサイズを追跡します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: TCP Queue Length
 ---
+
+
+
 ## 概要
 
 このチェックは、Linux TCP によるキューの送受信の使用方法を監視します。キューを送受信する TCP が個々のコンテナに対して満杯の状態であるかどうかを検知できます。

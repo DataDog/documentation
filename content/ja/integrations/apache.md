@@ -1,14 +1,27 @@
 ---
-aliases:
-- /ja/integrations/faq/issues-with-apache-integration/
+app_id: apache
+app_uuid: 8dfc1942-7820-49c7-93c8-5a31579ee52a
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     apache: assets/dashboards/apache_dashboard.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: apache.performance.busy_workers
+      metadata_path: metadata.csv
+      prefix: apache.
+    process_signatures:
+    - httpd
+    - apache
+    - apache2
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Apache
   logs:
     source: apache
-  metrics_metadata: metadata.csv
   monitors:
     '[Apache] Low number of idle workers': assets/recommended_monitors/apache_low_idle_workers.json
     '[Apache] resource utilization': assets/recommended_monitors/high_keep_alive_and_cpu.json
@@ -18,41 +31,47 @@ assets:
     apache_processes: assets/saved_views/apache_processes.json
     bot_errors: assets/saved_views/bot_errors.json
     status_code_overview: assets/saved_views/status_code_overview.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - web
 - log collection
-- autodiscovery
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/apache/README.md
-description: 毎秒のリクエスト数、処理バイト数、ワーカースレッド数、アップタイムなどを追跡
-display_name: Apache
+display_on_public_website: true
 draft: false
 git_integration_title: apache
-guid: cb2b4a06-4ede-465e-9478-a45f8b32058a
 integration_id: apache
 integration_title: Apache
-integration_version: 4.1.0
+integration_version: 4.2.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: apache.
-metric_to_check: apache.performance.busy_workers
-name: Apache
-process_signatures:
-- httpd
-- apache
-- apache2
-public_title: Datadog-Apache インテグレーション
+manifest_version: 2.0.0
+name: apache
+oauth: {}
+public_title: Apache
 short_description: 毎秒のリクエスト数、処理バイト数、ワーカースレッド数、アップタイムなどを追跡
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Web
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: 毎秒のリクエスト数、処理バイト数、ワーカースレッド数、アップタイムなどを追跡
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Apache
 ---
 
 
@@ -65,7 +84,7 @@ Apache チェックは、毎秒のリクエスト数、処理されたバイト�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Apache チェックは [Datadog Agent][2] にパッケージ化されています。Apache のメトリクスとログの収集を開始するには、以下を行います。
 
@@ -174,6 +193,8 @@ LABEL "com.datadoghq.ad.logs"='[{"source": "apache", "service": "<SERVICE_NAME>"
 
 アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]をポッドアノテーションとして設定します。他にも、[ファイル、ConfigMap、または key-value ストア][2]を使用してテンプレートを構成できます。
 
+**Annotations v1** (Datadog Agent < v7.36 向け)
+
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -193,12 +214,38 @@ spec:
     - name: apache
 ```
 
+**Annotations v2** (Datadog Agent v7.36+ 向け)
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: apache
+  annotations:
+    ad.datadoghq.com/apache.checks: |
+      {
+        "apache": {
+          "init_config": {},
+          "instances": [
+            {
+              "apache_status_url": "http://%%host%%/server-status?auto"
+            }
+          ]
+        }
+      }
+spec:
+  containers:
+    - name: apache
+```
+
 ##### ログの収集
 
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][3]を参照してください。
 
 次に、[ログのインテグレーション][4]をポッドアノテーションとして設定します。これは、[ファイル、ConfigMap、または key-value ストア][5]を使用して構成することも可能です。
+
+**Annotations v1/v2**
 
 ```yaml
 apiVersion: v1

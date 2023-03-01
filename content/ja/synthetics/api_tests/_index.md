@@ -1,27 +1,31 @@
 ---
-title: API テスト
-kind: documentation
-description: パブリックサービスと内部サービスのリクエストをシミュレートする
 aliases:
-  - /ja/synthetics/uptime_check
-  - /ja/synthetics/api_test
+- /ja/synthetics/uptime_check
+- /ja/synthetics/api_test
+description: パブリックサービスと内部サービスのリクエストをシミュレートする
 further_reading:
-  - link: https://www.datadoghq.com/blog/introducing-synthetic-monitoring/
-    tag: ブログ
-    text: Datadog Synthetic モニタリングの紹介
-  - link: https://learn.datadoghq.com/course/view.php?id=39
-    tag: ラーニングセンター
-    text: Synthetic テストの紹介
-  - link: /getting_started/synthetics/api_test
-    tag: Documentation
-    text: API テストの概要
-  - link: /synthetics/private_locations
-    tag: Documentation
-    text: 内部エンドポイントで API テストを実行する
-  - link: https://www.datadoghq.com/blog/monitor-apis-with-datadog
-    tag: ブログ
-    text: Datadog SSL、TLS、Multistep API テストを使用してワークフローを監視する
+- link: https://www.datadoghq.com/blog/introducing-synthetic-monitoring/
+  tag: ブログ
+  text: Datadog Synthetic モニタリングの紹介
+- link: https://www.datadoghq.com/blog/monitor-apis-with-datadog
+  tag: ブログ
+  text: Datadog SSL、TLS、Multistep API テストを使用してワークフローを監視する
+- link: https://learn.datadoghq.com/courses/intro-to-synthetic-tests
+  tag: ラーニングセンター
+  text: Synthetic テストの紹介
+- link: /getting_started/synthetics/api_test
+  tag: Documentation
+  text: API テストの概要
+- link: /synthetics/private_locations
+  tag: ドキュメント
+  text: 内部エンドポイントで API テストを実行する
+- link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test
+  tag: Terraform
+  text: Terraform による Synthetic API テストの作成と管理
+kind: documentation
+title: API テスト
 ---
+
 ## 概要
 
 API テストにより、最も重要なサービスを **能動的に監視** し、いつでもどこからでも利用可能にできます。
@@ -41,7 +45,7 @@ API テストは、Datadog [管理ロケーション][3]または[プライベ�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/synthetics/api_tests/http_tests?tab=requestoptions#notify-your-team
-[2]: /ja/synthetics/cicd_testing
+[2]: /ja/synthetics/cicd_integrations
 [3]: /ja/api/v1/synthetics/#get-all-locations-public-and-private
 [4]: /ja/synthetics/private_locations
 [5]: /ja/synthetics/multistep/

@@ -22,11 +22,11 @@ title: フラストレーションシグナル
 
 RUM は 3 種類のフラストレーションシグナルを収集します。
 
-レイジークリック
+レイジクリック
 : 1 秒間のスライディングウィンドウの中で、ユーザーが 3 回以上要素をクリックした場合。
 
 デッドクリック
-: それがインタラクティブであると考えて、ユーザーが静的な要素をクリックした場合。
+: ユーザーが静的な要素をクリックしても、そのページでは何のアクションも起こらないこと。
 
 エラークリック
 : JavaScript のエラーが発生する直前に、ユーザーがある要素をクリックした場合。
@@ -39,12 +39,12 @@ RUM は 3 種類のフラストレーションシグナルを収集します。
 
 ```
 DD_RUM.init({
-  trackInteractions: true,
+  trackUserInteractions: true,
   trackFrustrations: true
 })
 ```
 
-フラストレーションシグナルにはアクションが必須です。`trackFrustrations` を有効にすると、自動的に `trackInteractions` が有効になります。
+フラストレーションシグナルにはアクションが必須です。`trackFrustrations` を有効にすると、自動的に `trackUserInteractions` が有効になります。
 
 ## 使用方法
 
@@ -67,7 +67,7 @@ DD_RUM.init({
 検索クエリにファセットを入力すると、検索が開始されます。利用可能な検索フィールドは以下の通りです。
 
 Frustration Type
-: フラストレーションシグナルを持つアクションを検索します。例えば、レイジークリックがあったアクションを見たい場合、検索クエリに `action.frustration_type:rage_click` を追加します。
+: フラストレーションシグナルを持つアクションを検索します。例えば、レイジクリックがあったアクションを見たい場合、検索クエリに `action.frustration.type:rage_click` を追加します。
 
 Frustration Count
 : 何らかのフラストレーションシグナルが発生したセッションとビューを検索します。例えば、少なくとも 1 つのフラストレーションシグナルが発生したユーザーセッションまたはビューを検索したい場合、検索クエリに `session.frustration.count:>1` または `view.frustration.count:>1` を追加します。
@@ -122,7 +122,7 @@ Frustration Count
 
 ## トラブルシューティング
 
-### ユーザーがキーボードのキー (Delete など) を押したときに、なぜレイジークリックが作成されないのでしょうか？
+### ユーザーがキーボードのキー (Delete など) を押したときに、なぜレイジクリックが作成されないのでしょうか？
 
 フラストレーションシグナルは、キーボードのストロークではなく、マウスのクリックによって発生します。
 
@@ -147,8 +147,8 @@ Frustration Count
 [3]: /ja/real_user_monitoring/dashboards/frustration_signals_dashboard/
 [4]: https://app.datadoghq.com/rum/explorer
 [5]: /ja/dashboards/
-[6]: /ja/monitors/create/
+[6]: /ja/monitors/
 [7]: https://app.datadoghq.com/rum/replay/sessions/
 [8]: /ja/real_user_monitoring/session_replay/
-[9]: /ja/monitors/create/types/real_user_monitoring/
+[9]: /ja/monitors/types/real_user_monitoring/
 [10]: mailto:success@datadoghq.com

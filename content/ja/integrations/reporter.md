@@ -1,44 +1,77 @@
 ---
-"assets":
-  "dashboards":
-    "Reporter": assets/dashboards/reporter_dashboard.json
-  "monitors": {}
-  "saved_views": {}
-  "service_checks": service_checks.json
-"author":
-  "homepage": "https://www.rapdev.io"
-  "name": RapDev.io
-"categories":
+app_id: rapdev-reporter
+app_uuid: debb66b8-6675-4273-85a2-55d806e68e1b
+assets:
+  dashboards:
+    Reporter: assets/dashboards/reporter_dashboard.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: ''
+    service_checks:
+      metadata_path: service_checks.json
+    source_type_name: Reporter
+author:
+  homepage: https://www.rapdev.io
+  name: RapDev
+  sales_email: ddsales@rapdev.io
+  support_email: support@rapdev.io
+  vendor_id: rapdev
+categories:
 - マーケットプレイス
-"creates_events": false
-"ddtype": "crawler"
-"dependencies": []
-"display_name": "Reporter"
-"draft": false
-"git_integration_title": "reporter"
-"guid": "d7478feb-3dc6-4e97-bb55-5c51462d0691"
-"integration_id": "rapdev-reporter"
-"integration_title": "Reporter"
-"integration_version": ""
-"is_public": true
-"kind": "integration"
-"maintainer": "integrations@rapdev.io"
-"manifest_version": "1.0.0"
-"metric_prefix": ""
-"metric_to_check": ""
-"name": "reporter"
-"pricing":
-- "billing_type": flat_fee
-  "unit_price": !!int "1000"
-"public_title": "Reporter"
-"short_description": "Datadog ダッシュボードのメールレポートを生成する"
-"support": "パートナー"
-"supported_os":
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: reporter
+integration_id: rapdev-reporter
+integration_title: Reporter
+integration_version: ''
+is_public: true
+kind: integration
+legal_terms:
+  eula: assets/EULA.pdf
+manifest_version: 2.0.0
+name: reporter
+oauth: {}
+pricing:
+- billing_type: flat_fee
+  includes_assets: true
+  product_id: reporter
+  short_description: このインテグレーションの定額料金
+  unit_price: 1000
+public_title: Reporter
+short_description: Datadog ダッシュボードのメールレポートを生成する
+supported_os:
 - linux
 - windows
-"terms":
-  "eula": assets/EULA.pdf
-  "legal_email": ddsales@rapdev.io
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Category::Marketplace
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Datadog ダッシュボードのメールレポートを生成する
+  media:
+  - caption: レポーターの紹介
+    image_url: images/video.png
+    media_type: ビデオ
+    vimeo_id: 630489700
+  - caption: サンプルのメールレポート
+    image_url: images/3.png
+    media_type: image
+  - caption: レポートコンフィギュレーションページ
+    image_url: images/1.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Reporter
+  uninstallation: README.md#Uninstallation
 ---
 
 
@@ -51,27 +84,18 @@ Datadog Reporter を使用すると、レポートをスケジュールして、
 
 このインテグレーションにより、**Datadog Reporter** と呼ばれる新しいダッシュボードが Datadog インスタンスにセットアップされます。ダッシュボードに移動し、その iFrame から新しいユーザーを作成することで、アプリケーションに直接アクセスできます。*Datadog アカウントは DD Reporter アプリケーションでは機能しません。別のアカウントを登録する必要があります*
 
-### サンプルのメールレポート
-
-{{< img src="marketplace/reporter/images/3.png" alt="スクリーンショット 1" >}}
-
-### レポートコンフィギュレーションページ
-
-{{< img src="marketplace/reporter/images/1.png" alt="スクリーンショット 1" >}}
-
 ## サポート
 
 サポートまたは機能リクエストについては、以下のチャンネルで RapDev.io までお問い合わせください。
 
- - メールアドレス: integrations@rapdev.io 
- - チャット: [RapDev.io/products](https://rapdev.io/products)
+ - メール: support@rapdev.io 
+ - チャット: [rapdev.io](https://www.rapdev.io/#Get-in-touch)
  - 電話: 855-857-0222 
 
 ---
 ボストンより ❤️ を込めて
 
-*お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:integrations@rapdev.io)からメッセージをお送りいただければ、Datadog が導入をサポートいたします！*
+*お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:support@rapdev.io)からメッセージをお送りいただければ、導入をサポートいたします！*
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、[こちらをクリック](https://app.datadoghq.com/marketplace/app/rapdev-reporter/pricing)してください。
-
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-reporter" target="_blank">こちらをクリック</a>してください。

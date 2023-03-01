@@ -15,13 +15,16 @@ further_reading:
 - link: "/synthetics/private_locations"
   tag: "Documentation"
   text: "Run TCP tests on internal hosts"
+- link: "/synthetics/guide/synthetic-test-monitors"
+  tag: "Documentation"
+  text: "Learn about Synthetic test monitors"
 ---
 
 ## Overview
 
 TCP tests allow you to monitor whether or not low-level TCP connections can be established on the ports of given hosts, ensuring the availability of several key services such as `SSH` (22), `SMTP` (25), `DNS` (53), VPN over `HTTPS` (443), and any custom services living on other ports. With built-in response time data, track the performance of your network applications and receive alerts in case of unexpected slowness.
 
-TCP tests can run from both [managed][1] and [private locations][2] depending on your preference for running the test from outside or inside your network. TCP tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][3].
+TCP tests can run from both [managed](#select-locations) and [private locations][1] depending on your preference for running the test from outside or inside your network. TCP tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][2].
 
 ## Configuration
 
@@ -33,7 +36,7 @@ After choosing to create a `TCP` test, define your test's request.
 2. Decide whether or not to **Track number of network hops (TTL)**. This option allows you to assert on the number of network hops and to have access to a TCP Traceroute in your test results.
 3. Specify the amount of time in seconds before the test times out (optional).
 4. **Name** your TCP test.
-5. Add `env` **Tags** as well as any other tag to your TCP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][4].
+5. Add `env` **Tags** as well as any other tag to your TCP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][3].
 
 {{< img src="synthetics/api_tests/tcp_test_config.png" alt="Define TCP connection" style="width:90%;" >}}
 
@@ -59,14 +62,16 @@ If a test contains an assertion on the response body and the timeout limit is re
 
 ### Select locations
 
-Select the **Locations** to run your TCP test from: TCP tests can run from both [managed][1] and [private locations][2] depending on whether you want to launch the connection from outside or inside your network.
+Select the **Locations** to run your TCP test from. TCP tests can run from both managed and [private locations][1] depending on your preference for launching the connection from outside or inside your network.
+
+{{% managed-locations %}} 
 
 ### Specify test frequency
 
 TCP tests can run:
 
 * **On a schedule** to ensure your most important services are always accessible to your users. Select the frequency at which you want Datadog to run your TCP test.
-* [**Within your CI/CD pipelines**][3].
+* [**Within your CI/CD pipelines**][2].
 * **On-demand** to run your tests whenever makes the most sense for your team.
 
 ### Define alert conditions
@@ -86,13 +91,13 @@ Your test can trigger retries `X` times after `Y` ms in case of a failed test re
 
 Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
 
-### Notify your team
+### Configure the test monitor
 
-A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what message to send to your teams.
+A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what to message your teams.
 
-1. [Similar to how you configure monitors][5], select **users and/or services** that should receive notifications either by adding a `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
+1. [Similar to how you configure monitors][4], select **users and/or services** that should receive notifications either by adding a `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
 
-2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][6] and supports the following [conditional variables][7]:
+2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][5] and supports the following [conditional variables][6]:
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -107,13 +112,15 @@ A notification is sent by your test based on the [alerting conditions](#define-a
 
 3. Specify how often you want your test to **re-send the notification message** in case of test failure. To prevent renotification on failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
 
-Click on **Save** to save your test and have Datadog start executing it.
+4. Click **Create** to save your test configuration and monitor.
+
+For more information, see [Using Synthetic Test Monitors][7].
 
 ## Variables
 
 ### Create local variables
 
-You can create local variables by clicking **Create Local Variable** at the top right hand corner of your test configuration form. You can define their values from one of the below available builtins:
+To create a local variable, click **Create a Local Variable** at the top right hand corner. You can select one of the following available builtins:
 
 `{{ numeric(n) }}`
 : Generates a numeric string with `n` digits.
@@ -124,11 +131,16 @@ You can create local variables by clicking **Create Local Variable** at the top 
 `{{ alphanumeric(n) }}`
 : Generates an alphanumeric string with `n` characters.
 
-`{{ date(n, format) }}`
-: Generates a date in one of our accepted formats with a value of the date the test is initiated + `n` days.
+`{{ uuid }}`
+: Generates a version 4 universally unique identifier (UUID).
+
+`{{ date(n unit, format) }}`
+: Generates a date in one of Datadog's accepted formats with a value corresponding to the UTC date the test is initiated at + or - `n` units.
 
 `{{ timestamp(n, unit) }}` 
-: Generates a timestamp in one of our accepted units with a value of the timestamp the test is initiated at +/- `n` chosen unit.
+: Generates a timestamp in one of Datadog's accepted units with a value corresponding to the UTC timestamp the test is initiated at +/- `n` units.
+
+To obfuscate local variable values in test results, select **Hide and obfuscate variable value**. Once you have defined the variable string, click **Add Variable**.
 
 ### Use variables
 
@@ -177,13 +189,13 @@ You can restrict access to a TCP test based on the roles in your organization. W
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /api/v1/synthetics/#get-all-locations-public-and-private
-[2]: /synthetics/private_locations
-[3]: /synthetics/cicd_integrations
-[4]: /synthetics/search/#search
-[5]: /monitors/notify/#notify-your-team
-[6]: https://www.markdownguide.org/basic-syntax/
-[7]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
+[1]: /synthetics/private_locations
+[2]: /synthetics/cicd_integrations
+[3]: /synthetics/search/#search
+[4]: /monitors/notify/#notify-your-team
+[5]: https://www.markdownguide.org/basic-syntax/
+[6]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
+[7]: /synthetics/guide/synthetic-test-monitors
 [8]: /synthetics/settings/#global-variables
 [9]: /account_management/rbac/
 [10]: /account_management/rbac#custom-roles

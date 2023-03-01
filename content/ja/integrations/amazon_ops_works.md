@@ -1,20 +1,20 @@
 ---
 aliases:
-  - /ja/integrations/awsopsworks/
+- /ja/integrations/awsopsworks/
 categories:
-  - cloud
-  - provisioning
-  - aws
-  - log collection
-ddtype: crawler
+- cloud
+- provisioning
+- aws
+- log collection
 dependencies: []
 description: AWS OpsWorks のリソース使用状況を追跡。
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_ops_works/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_ops_works/
 draft: false
 git_integration_title: amazon_ops_works
 has_logo: true
 integration_id: amazon-opsworks
 integration_title: Amazon OpsWorks
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -23,6 +23,7 @@ public_title: Datadog-Amazon OpsWorks インテグレーション
 short_description: AWS OpsWorks のリソース使用状況を追跡。
 version: '1.0'
 ---
+
 ## 概要
 
 AWS OpsWorks は、あらゆる形式と規模のアプリケーションを簡単にデプロイして運用できるようにするアプリケーション管理サービスです。
@@ -37,7 +38,7 @@ AWS OpsWorks は、あらゆる形式と規模のアプリケーションを簡�
 
 ### メトリクスの収集
 
-1. [AWS インテグレーションタイル][2]のメトリクス収集で、`OpsWorks` をオンにします。
+1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `OpsWorks` が有効になっていることを確認します。
 2. [Datadog - AWS OpsWork インテグレーション][3]をインストールします。
 
 ### ログの収集
@@ -62,7 +63,7 @@ Amazon OpsWorks から S3 バケットまたは CloudWatch のいずれかにロ
 {{< get-metrics-from-git "amazon_ops_works" >}}
 
 
-AWS から取得される各メトリクスには、ホスト名やセキュリティグループなど、AWS コンソールに表示されるタグと同じタグが割り当てられます。
+AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
 ### イベント
 
@@ -77,8 +78,8 @@ AWS Ops Works インテグレーションには、サービスのチェック機
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[3]: https://app.datadoghq.com/account/settings#integrations/amazon_ops_works
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
+[3]: https://app.datadoghq.com/integrations/amazon-ops-works
 [4]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
 [5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
 [6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group

@@ -21,8 +21,9 @@ It is recommended that containers are monitored with a single containerized Agen
 
 ### Serverless
 
-Datadog bills based on the sum of AWS Lambda invocations across the month for your accounts. Pro and Enterprise plans include 150,000 Indexed Spans and 5 custom metrics per million invocations. Billing for serverless APM depends on the total number of [Indexed Spans][4] exceeding the bundled quantity submitted to the Datadog APM service at the end of the month. There are no billable [APM Hosts][4] when using serverless.
+Datadog bills based on the average number of functions per hour across the month for your accounts. Every hour, Datadog records the number of functions that were executed one or more times and monitored by your Datadog account. At the end of the month, Datadog charges by calculating the average of the hourly number of functions recorded. Pro and Enterprise plans include five custom metrics per billable function.
 
+Billing for serverless APM is based on the sum of AWS Lambda invocations connected to APM ingested spans in a given month. You will also be billed for the total number of [indexed spans][4] submitted to the Datadog APM service exceeding the bundled quantity at the end of the month. There are no billable [APM Hosts][4] when using serverless.
 
 For more information, see the [Serverless billing page][5] and the [Datadog Pricing page][6].
 
@@ -48,13 +49,25 @@ See [Credit Card Billing][11] for more details.
 
 If you pay by check, ACH, or wire, invoices are emailed to the billing email addresses near the 10th business day of each month. If you need an additional copy, email [Datadog billing][10]. Details on where to remit payment can be found on the invoice.
 
-To change your payment method, contact your [Customer Success][12] Manager.
+### Managing your payment method
 
-### Billing emails
+The [**Payment Method**][12] section contains details on your payment options. 
 
-You can set specific email addresses to receive invoices on the [Billing history][13] page under **Manage Billing Emails**:
+{{< img src="account_management/billing/PaymentMethodOverview.png" alt="Payment method on the Plan page" style="width:80%;" >}}
 
-{{< img src="account_management/billing/billing01.png" alt="Manage Billing Emails" >}}
+**Edit Payment** provides options to manage payment methods. You can edit or remove cards, and request to change your payment method from card to invoice and vice versa. 
+
+{{< img src="account_management/billing/PaymentSettingsDetails.png" alt="Payment settings on the Plan page" style="width:80%;" >}}
+
+### Managing your billing contact details
+
+You can view your billing contact details on the [**Billing Contact Details**][12] section. 
+
+{{< img src="account_management/billing/BillingContactDetailsOverview.png" alt="Billing contact details on the Plan page" style="width:80%;" >}}
+
+Through **Edit Details**, you can add, edit or remove your billing address. You can also set specific email addresses to receive invoices.
+
+{{< img src="account_management/billing/BillingContactDetailsEdit.png" alt="Editing billing contact details on the Plan page" style="width:80%;" >}}
 
 **Note**: The email address does not need to be a team member within Datadog. For example, you could use `invoices@yourcompany.com`.
 
@@ -92,13 +105,12 @@ You can set specific email addresses to receive invoices on the [Billing history
 [1]: https://app.datadoghq.com/account/usage/hourly
 [2]: /infrastructure/
 [3]: /agent/
-[4]: https://docs.datadoghq.com/account_management/billing/pricing/#apm
-[5]: https://docs.datadoghq.com/account_management/billing/serverless
+[4]: /account_management/billing/pricing/#apm
+[5]: /account_management/billing/serverless
 [6]: https://www.datadoghq.com/pricing/?product=serverless#serverless
 [7]: https://www.datadoghq.com/pricing/
 [8]: /account_management/rbac/#datadog-default-roles
 [9]: https://app.datadoghq.com/account/billing_history
 [10]: mailto:billing@datadoghq.com
 [11]: /account_management/billing/credit_card/
-[12]: mailto:success@datadoghq.com
-[13]: https://app.datadoghq.com/billing/history
+[12]: https://app.datadoghq.com/billing/plan

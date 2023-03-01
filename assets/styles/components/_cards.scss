@@ -1,126 +1,35 @@
 .cards-dd:not(.tile-nav) {
-  @include media-breakpoint-up(sm) {
-    .card-deck {
-      justify-content: center;
+    .card-banner {
+        top: 0;
+        right: 0;
+        left: 0;
+        height: 26px;
 
-      .card {
-        margin: 0 1% 2%;
-      }
-    }
-
-    &.col-num-2 {
-      .card-deck {
-        .card {
-          flex: 0 0 48%;
-          
-          &:nth-last-child(-n+2) {
-            margin-bottom: 0;
-          }
+        p {
+            font-size: 16px;
+            line-height: 25px;
         }
-      }
-    }
 
-    &.col-num-3 {
-      .card-deck {
-        .card {
-          flex: 0 0 30%;
-          
-          &:nth-last-child(-n+3) {
-            margin-bottom: 0;
-          }
-        }
-      }
-    }
-
-    &.col-num-4 {
-      .card-deck {
-        .card {
-          flex: 0 0 23%;
-    
-          &:nth-last-child(-n+4) {
-            margin-bottom: 0;
-          }
-        }
-      }
-    }
-
-    &.col-num-5 {
-      .card-deck {
-        .card {
-          flex: 0 0 18%;
-    
-          &:nth-last-child(-n+5) {
-            margin-bottom: 0;
-          }
-        }
-      }
-    }
-  }
-
-  @include media-breakpoint-only(xs) {
-    .card-deck {
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: flex-start;
-
-      .card {
-        flex: 0 0 48%;
-        margin: 0 1% 2%;
-      }
-    }
-  }
-
-  .card-banner {
-    top: 0;
-    right: 0;
-    left: 0;
-    height: 26px;
-    
-    p {
-      font-size: 16px;
-      line-height: 25px;
-    }
-
-    @media only screen and (min-width: 576px) and (max-width: 1200px)  {
-      p {
-        font-size: 13px;
-      }
-    }
-  }
-}
-
-.logs-languages {
-  .cards-dd {
-    @include media-breakpoint-up(sm) {
-      &.col-num-5 {
-        .card-deck {
-          .card {   
-            &:nth-last-child(-n+4) {
-              flex: 0 0 23%;
+        @media only screen and (min-width: 576px) and (max-width: 1200px) {
+            p {
+                font-size: 13px;
             }
-
-            &:nth-child(5) {
-              margin: 0 1% 2%;
-            }
-          }
         }
-      }
     }
-  }
 }
 
 .network-layers {
-  .cards-dd {
-    @include media-breakpoint-up(lg) {
-      .card img {
-        max-width: 80%;
-      }
-    }
+    .cards-dd {
+        @include media-breakpoint-up(lg) {
+            .card img {
+                max-width: 80%;
+            }
+        }
 
-    @include media-breakpoint-up(xl) {
-      .card img {
-        max-width: 50%;
-      }
+        @include media-breakpoint-up(xl) {
+            .card img {
+                max-width: 50%;
+            }
+        }
     }
-  }
 }

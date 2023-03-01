@@ -1,36 +1,57 @@
 ---
+app_id: redis-sentinel
+app_uuid: 207e2b2c-5fad-40a4-a4fc-09f119e142d3
 assets:
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: redis.sentinel.known_sentinels
+      metadata_path: metadata.csv
+      prefix: redis.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Redis Sentinel
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: help@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-- os & system
-creates_events: false
-ddtype: check
+- os system
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/redis_sentinel/README.md
-display_name: Redis Sentinel
+display_on_public_website: true
 draft: false
 git_integration_title: redis_sentinel
-guid: 8efe0a8c-88c6-4a2f-aa04-60d92051c458
 integration_id: redis-sentinel
 integration_title: Redis Sentinel
 integration_version: 1.1.0
 is_public: true
 kind: インテグレーション
-maintainer: '@krasnoukhov'
-manifest_version: 1.0.0
-metric_prefix: redis.
-metric_to_check: redis.sentinel.known_sentinels
+manifest_version: 2.0.0
 name: redis_sentinel
-public_title: Datadog-Redis Sentinel インテグレーション
+oauth: {}
+public_title: Redis Sentinel
 short_description: Redis Sentinel は Redis に高可用性を提供します。
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::OS システム
+  configuration: README.md#Setup
+  description: Redis Sentinel は Redis に高可用性を提供します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Redis Sentinel
 ---
 
 

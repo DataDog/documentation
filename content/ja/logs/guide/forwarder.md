@@ -9,18 +9,18 @@ kind: documentation
 title: Datadog Forwarder
 ---
 
-Datadog Forwarder は、ログ、カスタムメトリクス、トレースを環境から Datadog に送信する AWS Lambda 関数です。Forwarder は次のことができます。
+Datadog Forwarder は、AWS から Datadog にログを送信する AWS Lambda 関数で、具体的には次のようなものです。
 
 - CloudWatch、ELB、S3、CloudTrail、VPC、SNS、CloudFront ログを Datadog に転送する
 - S3 イベントを Datadog に転送する
 - Kinesis データストリームイベントを Datadog に転送する (CloudWatch ログのみがサポートされています)
-- CloudWatch ログを使用して AWS Lambda 関数からカスタムメトリクスを転送する
-- CloudWatch ログを使用して AWS Lambda 関数からトレースを転送する
-- AWS REPORT ログから解析された拡張 Lambda メトリクス (`aws.lambda.enhanced.*`) を生成して送信する: duration、billed_duration、max_memory_used、timeouts、out_of_memory、and estimated_cost
+- AWS Lambda 関数から Datadog にメトリクス、トレース、ログを転送します。**注**: Datadog は、Lambda 関数を監視するために [Datadog Lambda 拡張機能](https://github.com/DataDog/datadog-lambda-extension)を使用することを推奨しています。
 
-Datadog Forwarder で AWS サービスログを送信する方法について、詳細は[こちら](https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/)をご覧ください。
+Datadog Forwarder で AWS サービスログを送信する方法について、詳細は [Datadog Lambda 関数で AWS サービスのログを送信する](https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/)のガイドをお読みください。
 
-## インストール
+Forwarder を使用して AWS Lambda のログから Datadog にメトリクス、トレース、ログを転送しているサーバーレスのお客様には、Lambda の実行環境から直接テレメトリーを収集する [Datadog Lambda 拡張機能への移行](https://docs.datadoghq.com/serverless/guide/extension_motivation/)が推奨されます。Forwarder は引き続き使用可能ですが、セキュリティアップデートのみを受信します。
+
+## APM に Datadog Agent を構成する
 
 Datadog では、[CloudFormation](#cloudformation) を使用して Forwarder を自動的にインストールすることをお勧めします。[Terraform](#terraform) を使用するか、[手動](#manual)でセットアッププロセスを完了することもできます。
 
@@ -33,14 +33,14 @@ Datadog では、[CloudFormation](#cloudformation) を使用して Forwarder を
 
 [![Launch Stack](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home#/stacks/create/review?stackName=datadog-forwarder&templateURL=https://datadog-cloudformation-template.s3.amazonaws.com/aws/forwarder/latest.yaml)
 
-1. 管理者 AWS アカウント/ロールにログインし、上のボタンで CloudFormation Stack をデプロイします。
+1. 管理者 AWS アカウントまたはロールにログインし、上のボタンで CloudFormation Stack をデプロイします。
 2. `DdApiKey` を入力し、適切な `DdSite` を選択します。他のすべてのパラメーターはオプションです。
 3. **Create stack** をクリックし、作成が完了するまで待ちます。
 4. スタックの "Resources" タブで、論理 ID が `Forwarder` のインストール済みの Forwarder Lambda 関数を見つけます。
 5. [インストールされている Forwarder にトリガーを設定します](https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#set-up-triggers)。
 6. 複数の AWS リージョンで運用している場合は、別のリージョンで上記の手順を繰り返します。
 
-**注:** 以前に Datadog の AWS インテグレーションタイルから次の [CloudFormation テンプレート](https://github.com/DataDog/cloudformation-template/tree/master/aws)を使用して AWS インテグレーションを有効にしていた場合は、アカウントには、Datadog Lambda Forwarder 関数が既にプロビジョニングされているはずです。
+**注:** 以前に Datadog の AWS インテグレーションページから次の [CloudFormation テンプレート](https://github.com/DataDog/cloudformation-template/tree/master/aws)を使用して AWS インテグレーションを有効にしていた場合は、アカウントには、Datadog Lambda Forwarder 関数が既にプロビジョニングされているはずです。
 **注:** Datadog Lambda Forwarder 関数のコードブロックは、Lambda レイヤーを通してロジックを実装しているため、空になっています。
 
 <!-- xxz tab xxx -->
@@ -48,7 +48,7 @@ Datadog では、[CloudFormation](#cloudformation) を使用して Forwarder を
 
 ### Terraform
 
-Terraform リソース [aws_cloudformation_stack](https://www.terraform.io/docs/providers/aws/r/cloudformation_stack.html) を、指定されている CloudFormation テンプレートのラッパーとして使用して、Forwarder をインストールします。
+Terraform リソース [aws_cloudformation_stack](https://www.terraform.io/docs/providers/aws/r/cloudformation_stack) を、指定されている CloudFormation テンプレートのラッパーとして使用して、Forwarder をインストールします。
 
 Datadog は、2 つの個別の Terraform コンフィギュレーションを作成することをお勧めします。
 
@@ -91,12 +91,13 @@ resource "aws_cloudformation_stack" "datadog_forwarder" {
   capabilities = ["CAPABILITY_IAM", "CAPABILITY_NAMED_IAM", "CAPABILITY_AUTO_EXPAND"]
   parameters   = {
     DdApiKeySecretArn  = "REPLACE ME WITH THE SECRETS ARN",
-    DdSite             = "{{< region-param key="dd_site" code="true" >}}",
+    DdSite             = "datadoghq.com",
     FunctionName       = "datadog-forwarder"
   }
   template_url = "https://datadog-cloudformation-template.s3.amazonaws.com/aws/forwarder/latest.yaml"
 }
 ```
+注: `DdSite` がサイトと一致していることを確認してください。 有効なオプションについては、https://docs.datadoghq.com/getting_started/site/#access-the-datadog-site の "サイトパラメーター" を参照してください。
 
 <!-- xxz tab xxx -->
 <!-- xxx tab "手動" xxx -->
@@ -105,14 +106,14 @@ resource "aws_cloudformation_stack" "datadog_forwarder" {
 
 指定されている CloudFormation テンプレートを使用して Forwarder をインストールできない場合は、以下の手順に従って Forwarder を手動でインストールできます。テンプレートの機能について改善できる点がございましたら、お気軽に問題やプルリクエストを開いてお知らせください。
 
-1. 最新の[リリース](https://github.com/DataDog/datadog-serverless-functions/releases)から、`aws-dd-forwarder-<VERSION>.zip` を使用して Python 3.7 Lambda 関数を作成します。
+1. 最新の[リリース](https://github.com/DataDog/datadog-serverless-functions/releases)から、`aws-dd-forwarder-<VERSION>.zip` を使用して Python 3.8 Lambda 関数を作成します。
 2. [Datadog API キー](https://app.datadoghq.com/organization-settings/api-keys) を AWS Secrets Manager に保存し、環境変数 `DD_API_KEY_SECRET_ARN` に Lambda 関数のシークレット ARN を設定し、Lambda 実行ロールに `secretsmanager:GetSecretValue` アクセス許可を追加します。
 3. S3 バケットからログを転送する必要がある場合は、`s3:GetObject` アクセス許可を Lambda 実行ロールに追加します。
 4. Forwarder で環境変数 `DD_ENHANCED_METRICS` を `false` に設定します。これにより、Forwarder は拡張メトリクス自体を生成しなくなりますが、他の Lambda からカスタムメトリクスを転送します。
 5. 一部の AWS アカウントは、CloudWatch のロググループが Forwarder を呼び出すことを可能にするリソースベースのポリシーをトリガーが自動的に作成しないよう構成されています。
    Forwarder が CloudWatch のログイベントから呼び出されるために必要なアクセス許可については、[CloudWatchLogPermissions](https://github.com/DataDog/datadog-serverless-functions/blob/029bd46e5c6d4e8b1ae647ed3b4d1917ac3cd793/aws/logs_monitoring/template.yaml#L680) を参照してください。
 
-6. [トリガー](https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#send-aws-service-logs-to-datadog)を構成します。
+6. [トリガー](https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#set-up-triggers)を構成します。
 7. S3 バケットを作成し、環境変数 `DD_S3_BUCKET_NAME` をバケット名に設定します。また、このバケットに `s3:GetObject`、`s3:PutObject`、`s3:DeleteObject` アクセス許可を Lambda 実行ロールに提供します。このバケットは、Lambda タグキャッシュの保存に使用されます。
 
 <!-- xxz tab xxx -->
@@ -124,6 +125,10 @@ resource "aws_cloudformation_stack" "datadog_forwarder" {
 2. CloudFormation スタックの "Resources" タブから実際の Forwarder Lambda 関数を見つけ、そのコンフィギュレーションページに移動します。新しいバージョンで問題が発生し、ロールバックする必要がある場合に備えて、`dd_forwarder_version` タグの値をメモします (例: `3.3.0`)。
 3. テンプレート `https://datadog-cloudformation-template.s3.amazonaws.com/aws/forwarder/latest.yaml` を使用してスタックを更新します。必要に応じて、`latest` を特定のバージョン、たとえば `3.0.2.yaml` に置き換えることもできます。更新を適用する前に、変更セットを確認してください。
 
+### 古いバージョンを 3.49.0 以降にアップグレードする
+
+バージョン 3.49.0 以降、Lambda 関数は **Python 3.8** を必要とするように更新されました。古い Forwarder を 3.49.0 以上にアップグレードする場合、AWS Lambda 関数が Python 3.8 を使用するように構成されていることを確認してください。
+
 ### 古いバージョンを 3.0.0 以降にアップグレードする
 
 バージョン 3.0.0 以降、Forwarder Lambda 関数は CloudFormation によって管理されます。古い Forwarder のインストールを 3.0.0 以降にアップグレードするには、以下の手順に従います。
@@ -134,7 +139,7 @@ resource "aws_cloudformation_stack" "datadog_forwarder" {
 4. 新しい Forwarder が期待どおりに機能していること、つまりエラーなしで定期的に呼び出されることを確認します。
 5. 移行されたトリガー (ソース) からのログが Datadog ログエクスプローラーに表示されていることと、正しく表示されていることを確認します。
 6. すべてのトリガーを新しい Forwarder に移行します。
-   - Datadog にトリガーを[自動的](https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#automatically-setup-triggers)に管理させる場合は、AWS インテグレーションタイルの "Collect Logs" タブで Forwarder Lambda ARN を更新します。
+   - Datadog にトリガーを[自動的](https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#automatically-setup-triggers)に管理させる場合は、AWS インテグレーションページの **Log Collection** タブで Forwarder Lambda ARN を更新します。
    - トリガーを[手動](https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#manually-setup-triggers)で管理していた場合は、手動で (またはスクリプトを使用して) トリガーを移行する必要があります。
 7. 古い Forwarder Lambda 関数の呼び出しカウントがゼロになっていることを確認します。
 8. 安心したら、古い Forwarder Lambda 関数を削除します。
@@ -288,7 +293,9 @@ Datadog Forwarder は Datadog によって署名されています。Forwarder �
 : Datadog Forwarder Lambda 関数のタイムアウト
 
 `ReservedConcurrency`
-: Datadog Forwarder Lambda 関数用に予約されている同時実行数
+: Datadog Forwarder Lambda 関数の予約済み同時実行数。空の場合、予約されていないアカウントの同時実行を使用します。
+最低でも 10 個の予約済み同時実行を使用することをお勧めしますが、このために制限を増やす必要があるかもしれないので、デフォルトは 0 です。
+予約されていないアカウントの同時実行を使用する場合、環境内の他の Lambda 関数を制限することができます。
 
 `LogRetentionInDays`
 : Datadog Forwarder Lambda 関数により生成されたログの CloudWatch ログ保存期間
@@ -359,9 +366,8 @@ Datadog Forwarder は Datadog によって署名されています。Forwarder �
 - Lambda プラットフォームログ: `"(START|END) RequestId:\s` の包含（または除外）。注: 先行する `"` は、 ログメッセージの開始（json blob 内の (`{"message": "START RequestId...."}`)）と一致する必要があります。Datadog では、`REPORT` ログを残すことを推奨しています。これは、サーバーレス関数のビューで呼び出しリストを生成するために使用されるからです。
 - CloudTrail エラーメッセージのみ含める: `errorMessage`
 - HTTP 4XX または 5XX のエラーコードを含むログのみを含める: `\b[4|5][0-9][0-9]\b`
-- `message` フィールドに特定の JSON キー/値ペアを含む CloudWatch ログのみを含める: `\\"awsRegion\\":\\"us-east-1\\"`
-  - CloudWatch ログイベントのメッセージフィールドは文字列としてエンコードされます。`{"awsRegion": "us-east-1"}` は `{\"awsRegion\":\"us-east-1\"}` のようにエンコードされます。
-    そのため提供するパターンには、`\` エスケープ文字が余分に必要です。
+- `message` フィールドに特定の JSON キー/値ペアを含む CloudWatch ログのみを含める: `\"awsRegion\":\"us-east-1\"`
+  - CloudWatch のログイベントのメッセージフィールドは、文字列としてエンコードされています。例えば、`{"awsRegion": "us-east-1"}` は `{\"awsRegion\":\"us-east-1\"}` としてエンコードされます。したがって、提供するパターンには、`\"awsRegion\":\"us-east-1\"` のように `\` エスケープ文字を含める必要があります。
 
 ログに対してさまざまなパターンをテストするには、[デバッグログ](#troubleshooting)をオンにします。
 

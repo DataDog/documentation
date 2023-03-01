@@ -8,7 +8,7 @@ kind: documentation
 Administrators can access the [Usage][1] page by hovering over their username at the bottom left, then navigate to:
 `Plan & Usage`--> `Usage`.
 
-The Usage page shows usage grouped by product category. You can navigate to a product tab to view usage specific to that product category or the "All" tab to view usage of all products. Each tab provides the following information:
+The Usage page shows usage grouped by product category. You can navigate to a product tab to view usage specific to that product category or the "All" tab to view usage for all products. Each tab provides the following information:
 
 * Month-to-Date Summary
 * Overall Usage (current and historical)
@@ -62,19 +62,34 @@ Month-to-date usage of each product is calculated as follows:
 | Incident Management      | Shows number of unique active users to date in the selected month who interacted with incident lifecycle and timelines.     |
 | IoT Devices              | Shows the 99th percentile of all distinct IoT devices over all hours in the current month.                                  |
 
-## Overall usage
 
-This section contains hourly, daily, monthly, and annual usage:
+## Usage trends
 
-{{< img src="account_management/billing/usage-details-v2-03.png" alt="Hourly Usage - All" >}}
+The [Usage Trends][5] section contains product usage graphs displaying summed usage for all organizations across an account. Usage reports are downloadable through the **Download as CSV** button. For each organization, these reports include an hourly breakdown of usage by product. 
 
-In product specific tabs, view your hourly, daily, monthly, and annual usage of the products in that product category. Some products also provide additional detailed breakdowns of usage. For example, in the Infrastructure tab, the breakdown by host type is available.
+{{< img src="account_management/billing/UsageTrendsOverviewAndCSV.png" alt="Usage Trends graphs page in the Datadog application with Download as CSV option highlighted" style="width:100%; align:left" >}}
 
-{{< img src="account_management/billing/usage-details-v2-04.png" alt="Hourly Usage - Infra Hosts" >}}
+For products with subtypes, each category is distinguished on the graph for that product. 
 
-Most accounts have access to the feature Included Lines, which allows you to see how your usage is tracking over the month. The graphs on your Usage page contain an "Included" line that shows commitments per product plus any allowances (such as, custom metrics, containers).
+{{< img src="account_management/billing/UsageGraphsByProductTab.png" alt="Usage summary with infrastructure tab selected and multiple graphs for infrastructure usage subtypes such as infra hosts, agent hosts, and containers" style="width:100%; align:left" >}}
 
-{{< img src="account_management/billing/usage-details-v3-01.png" alt="Usage graph with an Included line" >}}
+More detailed product subtype graphs can be found on each product’s tab.  For example, a breakdown by host type is available on the Infrastructure tab.
+
+{{< img src="account_management/billing/UsageBreakdownByProductSubtype.png" alt="Usage trends section of the Infrastructure tab with Infra Hosts graph containing Agent hosts and AWS hosts, Indexed Logs graph containing Daily Indexed Live Logs and Cumulative Indexed Live Logs" style="width:100%; align:left" >}}
+ 
+Cumulative usage over time is available for sum-based products.
+
+{{< img src="account_management/billing/CumulativeUsageLine.png" alt="Graphs for Ingested Spans and Indexed Spans, each plotting data for the daily and cumulative sums of their respective spans" style="width:100%; align:left" >}}
+
+Time selection contains options to view usage graphs at daily, weekly, monthly or yearly intervals.
+
+{{< img src="account_management/billing/TimeGranularity.png" alt="Time intervals on usage graphs" style="width:100%; align:left" >}}
+
+The dashed `Committed` line shows commitments per product, without any allowances (such as Custom Metrics or Containers). 
+
+{{< img src="account_management/billing/CommittedLine.png" alt="Committed usage line on APM Hosts graph configured with the value 10" style="width:100%; align:left" >}}
+
+ 
 
 ## Top custom metrics
 
@@ -93,16 +108,16 @@ The "All" view provides the following information about all your custom metrics:
 * Average custom metrics per hour
 * Max custom metrics per hour
 * Search for a metric within all your custom metrics
-* This data can be downloaded as a CSV file, with a maximum of 300,000 custom metrics. You can download over 300,000 custom metrics using our [API endpoint][5].
+* This data can be downloaded as a CSV file, with a maximum of 300,000 custom metrics. You can download over 300,000 custom metrics using our [API endpoint][6].
 
 
-For more details on your metrics, navigate to the [Metrics Summary][6] by hovering over the row of the metric you are interested in and clicking on the meter icon that shows up on the right side.
+For more details on your metrics, navigate to the [Metrics Summary][7] by hovering over the row of the metric you are interested in and clicking on the meter icon that shows up on the right side.
 
 {{< img src="account_management/billing/usage-metrics-05.png" alt="Overview of Top Custom Metrics table" >}}
 
 ## Logs usage by index
 
-In the Log Management tab, this table displays your hourly, daily, monthly, and annual indexed log usage by index name and retention period. It also shows the breakdown between live logs and [rehydrated logs][7]. The following information is provided:
+In the Log Management tab, this table displays your hourly, daily, monthly, and annual indexed log usage by index name and retention period. It also shows the breakdown between live logs and [rehydrated logs][8]. The following information is provided:
 
 * Index name
 * Retention period in days
@@ -115,17 +130,18 @@ This data can be downloaded as a CSV file.
 
 ## Troubleshooting
 
-For technical questions, contact [Datadog support][8].
+For technical questions, contact [Datadog support][9].
 
-For billing questions, contact your [Customer Success][9] Manager.
+For billing questions, contact your [Customer Success][10] Manager.
 
 
 [1]: https://app.datadoghq.com/account/usage/hourly
 [2]: https://docs.datadoghq.com/api/latest/usage-metering/#get-usage-across-your-multi-org-account
 [3]: https://docs.datadoghq.com/api/latest/usage-metering/#get-billable-usage-across-your-account
 [4]: /metrics/custom_metrics/
-[5]: https://docs.datadoghq.com/api/latest/usage-metering/#get-all-custom-metrics-by-hourly-average
-[6]: https://docs.datadoghq.com/metrics/summary/#overview
-[7]: https://docs.datadoghq.com/logs/archives/rehydrating/?tab=awss3#overview
-[8]: /help/
-[9]: mailto:success@datadoghq.com
+[5]: https://app.datadoghq.com/billing/usage
+[6]: https://docs.datadoghq.com/api/latest/usage-metering/#get-all-custom-metrics-by-hourly-average
+[7]: https://docs.datadoghq.com/metrics/summary/#overview
+[8]: https://docs.datadoghq.com/logs/archives/rehydrating/?tab=awss3#overview
+[9]: /help/
+[10]: mailto:success@datadoghq.com

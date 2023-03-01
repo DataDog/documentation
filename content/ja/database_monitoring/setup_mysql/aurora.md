@@ -49,11 +49,11 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 {{% tab "MySQL 5.6" %}}
 | パラメーター | 値 | 説明 |
 | --- | --- | --- |
-| `performance_schema` | `ON` | 必須。[パフォーマンススキーマ][1]を有効にします。|
-| <code style="word-break:break-all;">performance_schema_consumer_events_statements_current</code> | `ON` | 必須。現在実行中のクエリのモニタリングを可能にします。|
+| `performance_schema` | `1` | 必須。[パフォーマンススキーマ][1]を有効にします。|
+| <code style="word-break:break-all;">performance_schema_consumer_events_statements_current</code> | `1` | 必須。現在実行中のクエリのモニタリングを可能にします。|
 | <code style="word-break:break-all;">performance-schema-consumer-events-waits-current</code> | `ON` | 必須。待機イベントの収集を有効にします。 |
-| <code style="word-break:break-all;">performance_schema_consumer_events_statements_history</code> | `ON` | オプション。スレッドごとに最近のクエリの履歴を追跡することができます。この機能を有効にすると、頻度の低いクエリの実行情報を取得できる可能性が高まります。|
-| <code style="word-break:break-all;">performance_schema_consumer_events_statements_history_long</code> | `ON` | オプション。すべてのスレッドにおいて、より多くの最近のクエリを追跡することができます。この機能を有効にすると、頻度の低いクエリの実行情報を取得できる可能性が高まります。|
+| <code style="word-break:break-all;">performance_schema_consumer_events_statements_history</code> | `1` | オプション。スレッドごとに最近のクエリの履歴を追跡することができます。この機能を有効にすると、頻度の低いクエリの実行情報を取得できる可能性が高まります。|
+| <code style="word-break:break-all;">performance_schema_consumer_events_statements_history_long</code> | `1` | オプション。すべてのスレッドにおいて、より多くの最近のクエリを追跡することができます。この機能を有効にすると、頻度の低いクエリの実行情報を取得できる可能性が高まります。|
 
 [1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
 {{% /tab %}}
@@ -61,11 +61,11 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 {{% tab "MySQL ≥ 5.7" %}}
 | パラメーター | 値 | 説明 |
 | --- | --- | --- |
-| `performance_schema` | `ON` | 必須。[パフォーマンススキーマ][1]を有効にします。|
-| <code style="word-break:break-all;">performance_schema_consumer_events_statements_current</code> | `ON` | 必須。現在実行中のクエリのモニタリングを可能にします。|
+| `performance_schema` | `1` | 必須。[パフォーマンススキーマ][1]を有効にします。|
+| <code style="word-break:break-all;">performance_schema_consumer_events_statements_current</code> | `1` | 必須。現在実行中のクエリのモニタリングを可能にします。|
 | <code style="word-break:break-all;">performance-schema-consumer-events-waits-current</code> | `ON` | 必須。待機イベントの収集を有効にします。 |
-| <code style="word-break:break-all;">performance_schema_consumer_events_statements_history</code> | `ON` | オプション。スレッドごとに最近のクエリの履歴を追跡することができます。この機能を有効にすると、頻度の低いクエリの実行情報を取得できる可能性が高まります。|
-| <code style="word-break:break-all;">performance_schema_consumer_events_statements_history_long</code> | `ON` | オプション。すべてのスレッドにおいて、より多くの最近のクエリを追跡することができます。この機能を有効にすると、頻度の低いクエリの実行情報を取得できる可能性が高まります。|
+| <code style="word-break:break-all;">performance_schema_consumer_events_statements_history</code> | `1` | オプション。スレッドごとに最近のクエリの履歴を追跡することができます。この機能を有効にすると、頻度の低いクエリの実行情報を取得できる可能性が高まります。|
+| <code style="word-break:break-all;">performance_schema_consumer_events_statements_history_long</code> | `1` | オプション。すべてのスレッドにおいて、より多くの最近のクエリを追跡することができます。この機能を有効にすると、頻度の低いクエリの実行情報を取得できる可能性が高まります。|
 | <code style="word-break:break-all;">performance_schema_max_digest_length</code> | `4096` | `events_statements_*` テーブルの SQL ダイジェストテキストのサイズを増やします。デフォルト値のままにすると、`1024` 文字より長いクエリは収集されません。|
 | <code style="word-break:break-all;">performance_schema_max_sql_text_length</code> | `4096` | <code style="word-break:break-all;">performance_schema_max_digest_length</code> と一致する必要があります。|
 
@@ -253,7 +253,7 @@ instances:
     host: <INSTANCE_ADDRESS>
     port: 3306
     username: datadog
-    password: <UNIQUEPASSWORD" \
+    password: <UNIQUEPASSWORD>" \
   datadog/datadog
 ```
 

@@ -18,7 +18,7 @@ aliases:
 
 ## Submission
 
-After [installing DogStatsD][1], you can emit events to your [Datadog event stream][2] with the following function:
+After [installing DogStatsD][1], you can emit events to your [Datadog event explorer][2] with the following function:
 
 ```text
 event(<title>, <message>, <alert_type>, <aggregation_key>, <source_type_name>, <date_happened>, <priority>, <tags>, <hostname>)
@@ -32,7 +32,7 @@ event(<title>, <message>, <alert_type>, <aggregation_key>, <source_type_name>, <
 | `<message>`          | String          | Yes      | The text body of the event                                                                 |
 | `<alert_type>`       | String          | No       | `error`, `warning`, `success`, or `info` (defaults to `info`)                              |
 | `<aggregation_key>`  | String          | No       | A key to use for aggregating events                                                        |
-| `<source_type_name>` | String          | No       | The source type name                                                                       |
+| `<source_type_name>` | String          | No       | The source type name (defaults to `my_apps`)                                               |
 | `<date_happened>`    | Integer         | No       | The epoch timestamp for the event (defaults to the current time from the DogStatsD server) |
 | `<priority>`         | String          | No       | Specifies the priority of the event (`normal` or `low`)                                    |
 | `<tags>`             | List of strings | No       | A list of tags associated with this event                                                  |
@@ -141,7 +141,8 @@ public class DogStatsdClient
 
         using (var dogStatsdService = new DogStatsdService())	
         {	
-            dogStatsdService.Configure(dogstatsdConfig);	
+            if (!dogStatsdService.Configure(dogstatsdConfig))
+                throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
             dogStatsdService.Event("An error occurred", "Error message", alertType: "error", date_happened='TIMESTAMP', tags: new[] { "env:dev" });	
         }	
     }	

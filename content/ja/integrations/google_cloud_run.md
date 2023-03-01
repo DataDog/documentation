@@ -1,22 +1,22 @@
 ---
 categories:
-  - cloud
-  - オーケストレーション
-  - google cloud
-  - ログの収集
-ddtype: crawler
+- cloud
+- オーケストレーション
+- google cloud
+- ログの収集
 dependencies: []
 description: クラスターからメトリクス、トレース、ログを収集し、Datadog で分析
-doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_run/'
+doc_link: https://docs.datadoghq.com/integrations/google_cloud_run/
 draft: false
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/monitor-google-cloud-run-with-datadog/'
-    tag: ブログ
-    text: Datadog を使用した Google Cloud Run の監視
+- link: https://www.datadoghq.com/blog/monitor-google-cloud-run-with-datadog/
+  tag: ブログ
+  text: Datadog を使用した Google Cloud Run の監視
 git_integration_title: google_cloud_run
 has_logo: true
 integration_id: google-cloud-run
 integration_title: Google Cloud Run
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -25,9 +25,10 @@ public_title: Datadog-Google Cloud Run インテグレーション
 short_description: クラスターからメトリクス、トレース、ログを収集し、Datadog で分析
 version: '1.0'
 ---
+
 ## 概要
 
-Cloud Run は、HTTP リクエストによって呼び出し可能なステートレスコンテナを実行できるマネージド型のコンピューティングプラットフォームです。
+Cloud Run は、HTTP リクエストを使って呼び出し可能なステートレスコンテナを実行できるマネージド型のコンピューティングプラットフォームです。
 
 このインテグレーションを有効にすると、Cloud Run のメトリクス、トレース、ログのすべてを Datadog に表示できます。
 
@@ -46,15 +47,15 @@ GKE 上で Cloud Run をセットアップする場合は、[Google Cloud Platfo
 ### ログの収集
 
 Google Cloud Run は、[監査ログ][3]も公開します。
-Google Cloud Run のログは、Stackdriver を使用して収集され、HTTP プッシュフォワーダーを使用して Cloud Pub/Sub へ送信されます。Cloud Pub/Sub をまだセットアップしていない場合は、[HTTP プッシュフォワーダーを使用してセットアップ][4]してください。
+Google Cloud Run のログは、Google Cloud Logging を使用して収集され、HTTP プッシュフォワーダーを使用して Cloud Pub/Sub へ送信されます。Cloud Pub/Sub をまだセットアップしていない場合は、[HTTP プッシュフォワーダーを使用してセットアップ][4]してください。
 
-これが完了したら、Google Cloud Run のログを Stackdriver から Pub/Sub へエクスポートします。
+これが完了したら、Google Cloud Run のログを Google Cloud Logging から Pub/Sub へエクスポートします。
 
-1. [Stackdriver のページ][5]に移動し、Google Cloud Run のログを絞り込みます。
+1. [Google Cloud Logging のページ][5]に移動し、Google Cloud Run のログを絞り込みます。
 2. **シンクを作成**し、シンクに適宜名前を付けます。
 3. エクスポート先として「Cloud Pub/Sub」を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクト内に配置することもできます。
 
-    {{< img src="integrations/google_cloud_pubsub/creating_sink.png" alt="Google Cloud Pub/Sub ログを Pub Sub へエクスポート" >}}
+    {{< img src="integrations/google_cloud_pubsub/creating_sink2.png" alt="Google Cloud Pub/Sub ログを Pub Sub へエクスポート" >}}
 
 4. **作成**をクリックし、確認メッセージが表示されるまで待ちます。
 

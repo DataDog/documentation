@@ -1,37 +1,54 @@
 ---
+app_id: システム
+app_uuid: 17477b56-4487-4b00-8820-70c6f64ae3c6
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: system.inodes.total
+      metadata_path: metadata.csv
+      prefix: system.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Linux proc extras
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - os & system
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/linux_proc_extras/README.md
-display_name: Linux proc extras
+display_on_public_website: true
 draft: false
 git_integration_title: linux_proc_extras
-guid: 47f243d7-5df4-47b5-9f1a-923b4f7cefe7
 integration_id: システム
 integration_title: Linux Proc Extras
 integration_version: 2.3.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: system.
-metric_to_check: system.inodes.total
+manifest_version: 2.0.0
 name: linux_proc_extras
-public_title: Datadog-Linux Proc Extras インテグレーション
+oauth: {}
+public_title: Linux Proc Extras
 short_description: linux_proc_extras の状態を視覚化および監視。
-support: コア
 supported_os:
 - linux
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Category::OS & System
+  configuration: README.md#Setup
+  description: linux_proc_extras の状態を視覚化および監視。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Linux Proc Extras
 ---
 
 

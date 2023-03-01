@@ -121,6 +121,16 @@
     "request_description": "ダッシュボードリストの新しいダッシュボード。",
     "request_schema_description": "更新するダッシュボードのリストを含むリクエスト。"
   },
+  "ListEvents": {
+    "description": "リストエンドポイントは、イベント検索クエリに一致するイベントを返します。\n[結果は、ログと同様にページ区切りされます](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination)。\n\nこのエンドポイントは、最新のイベントを確認するために使用します。",
+    "summary": "イベントのリストを取得する"
+  },
+  "SearchEvents": {
+    "description": "リストエンドポイントは、イベント検索クエリに一致するイベントを返します。\n[結果は、ログと同様にページ区切りされます](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination)。\n\nこのエンドポイントを使用して、複雑なイベントのフィルタリングと検索を構築します。",
+    "summary": "イベントの検索",
+    "request_description": "",
+    "request_schema_description": "オーガニゼーションからイベントのリストを取得するリクエストと共に送信されたオブジェクト。"
+  },
   "ListIncidents": {
     "description": "ユーザーの組織のすべてのインシデントを取得します。",
     "summary": "インシデントリストを取得"
@@ -145,6 +155,16 @@
     "request_description": "インシデントのペイロード。",
     "request_schema_description": "インシデントのリクエストを更新します。"
   },
+  "ListIncidentAttachments": {
+    "description": "指定されたインシデントのすべての添付ファイルを取得します。",
+    "summary": "添付ファイル一覧の取得"
+  },
+  "UpdateIncidentAttachments": {
+    "description": "特定のインシデントの添付ファイルを作成、更新、および削除するための一括更新エンドポイントです。",
+    "summary": "インシデントの添付ファイルの作成、更新、削除",
+    "request_description": "インシデント添付ファイルペイロード。",
+    "request_schema_description": "インシデントの添付ファイルの更新リクエスト。"
+  },
   "ListOpsgenieServices": {
     "description": "Datadog Opsgenie インテグレーションからすべてのサービスのリストを取得します。",
     "summary": "すべてのサービスオブジェクトを取得する"
@@ -168,6 +188,54 @@
     "summary": "単一のサービスオブジェクトを更新する",
     "request_description": "Opsgenie サービスペイロード。",
     "request_schema_description": "Opsgenie サービスに対するリクエストを更新します。"
+  },
+  "ListConfluentAccount": {
+    "description": "Confluent アカウントを一覧表示します。",
+    "summary": "Confluent アカウントを一覧表示する"
+  },
+  "CreateConfluentAccount": {
+    "description": "Confluent アカウントを作成します。",
+    "summary": "Confluent アカウントを追加する",
+    "request_description": "Confluent ペイロード",
+    "request_schema_description": "Confluent アカウントを追加する際のペイロードスキーマ。"
+  },
+  "DeleteConfluentAccount": {
+    "description": "指定されたアカウント ID の Confluent アカウントを削除します。",
+    "summary": "Confluent アカウントを削除する"
+  },
+  "GetConfluentAccount": {
+    "description": "指定されたアカウント ID の Confluent アカウントを取得します。",
+    "summary": "Confluent アカウントを取得する"
+  },
+  "UpdateConfluentAccount": {
+    "description": "指定されたアカウント ID の Confluent アカウントを更新します。",
+    "summary": "Confluent アカウントを更新する",
+    "request_description": "Confluent ペイロード",
+    "request_schema_description": "Confluent アカウントを更新するための JSON:API リクエスト。"
+  },
+  "ListConfluentResource": {
+    "description": "指定した ID に関連するアカウントの Confluent リソースを取得します。",
+    "summary": "Confluent アカウントリソースを一覧表示する"
+  },
+  "CreateConfluentResource": {
+    "description": "指定した ID に関連するアカウントの Confluent リソースを作成します。",
+    "summary": "Confluent アカウントにリソースを追加する",
+    "request_description": "Confluent ペイロード",
+    "request_schema_description": "Confluent リソースを更新するための JSON:API リクエスト。"
+  },
+  "DeleteConfluentResource": {
+    "description": "指定されたアカウント ID に関連付けられたアカウントの、指定されたリソース ID の Confluent リソースを削除します。",
+    "summary": "Confluent アカウントからリソースを削除する"
+  },
+  "GetConfluentResource": {
+    "description": "指定されたアカウント ID に関連付けられたアカウントの、指定されたリソース ID の Confluent リソースを取得します。",
+    "summary": "Confluent アカウントからリソースを取得する"
+  },
+  "UpdateConfluentResource": {
+    "description": "指定されたアカウント ID に関連付けられたアカウントの、指定されたリソース ID の Confluent リソースを更新します。",
+    "summary": "Confluent アカウントのリソースを更新する",
+    "request_description": "Confluent ペイロード",
+    "request_schema_description": "Confluent リソースを更新するための JSON:API リクエスト。"
   },
   "SubmitLog": {
     "description": "HTTP を使用して Datadog プラットフォームにログを送信します。HTTP リクエストごとの制限は以下のとおりです。\n\n- ペイロードあたりの最大コンテンツサイズ (非圧縮) : 5MB\n- 単一ログの最大サイズ : 1MB\n- アレイで複数のログを送信する場合の最大アレイサイズ : 1000 エントリ\n\n1MB を超えるログは、Datadog によって受け入れられ、切り捨てられます。\n- 単一のログリクエストの場合、API はログを 1MB で切り捨て、2xx を返します.\n- マルチログリクエストの場合、API はすべてのログを処理し、1MB を超えるログのみを切り捨て、2xx を返します。\n\nDatadog では、圧縮されたログを送信することをお勧めしています。\n圧縮されたログを送信するときは、リクエストに `Content-Encoding: gzip` ヘッダーを追加します。\n\nHTTP API により回答されるステータスコード :\n- 202: Accepted: 処理リクエストを受信済み\n- 400: Bad request (ペイロードの形式の問題など)- 401: Unauthorized (API キーの不足など)\n\n- 403: Permission issue (無効な API キーの使用など)\n- 408: Request Timeout (しばらくしてからリクエストを再試行)\n- 413: Payload too large (バッチのサイズが非圧縮で 5MB 以上)\n- 429: Too Many Requests (しばらくしてからリクエストを再試行)\n- 500: Internal Server Error (サーバーがリクエストの遂行を阻む予期せぬ状況がサーバーに発生、しばらくしてからリクエストを再試行)\n- 503: Service Unavailable (おそらく過負荷によりサーバーがリクエストに対応できないため、しばらくしてからリクエストを再試行)",
@@ -314,8 +382,8 @@
     "request_schema_description": "ログリストのリクエスト。"
   },
   "ListTagConfigurations": {
-    "description": "構成済みの count/gauge/rate/distribution メトリクス名をすべて返します\n(指定された場合は追加のフィルターを適用)。",
-    "summary": "タグコンフィギュレーションを一覧表示する"
+    "description": "Metrics Summary ページまたは Metrics without Limits™ で構成可能なすべてのメトリクスを返します (指定された場合は追加のフィルターに一致します)。",
+    "summary": "メトリクスのリストを取得する"
   },
   "DeleteBulkTagsMetricsConfiguration": {
     "description": "既存の count、gauge、rate、distribution メトリクスについて、クエリが可能なタグキーのすべてのカスタムリストを削除します。\nメトリクスは、メトリクス名のプレフィックスを渡すことで選択できます。\nDatadog ウェブアプリでの操作と同様に、結果はアカウントのメールアドレスに送信できます。\n`Manage Tags for Metrics` 権限を持つユーザーが発行したアプリケーションキーのみで使用できます。",
@@ -328,6 +396,10 @@
     "summary": "複数のメトリクスにタグを構成",
     "request_description": "",
     "request_schema_description": "1 回の一括タグコンフィギュレーションリクエストのラッパーオブジェクト。"
+  },
+  "ListActiveMetricConfigurations": {
+    "description": "指定されたメトリクス名に対して、ダッシュボードやモニターでアクティブにクエリされるタグや集計をリストアップします。",
+    "summary": "アクティブなタグと集計をリストアップする"
   },
   "ListTagsByMetricName": {
     "description": "特定のメトリクス名のインデックス付きタグキーと値ペアを表示します。",
@@ -437,6 +509,30 @@
     "request_description": "",
     "request_schema_description": "オーガニゼーションから RUM イベントの集約バケットを取得するリクエストと共に送信されたオブジェクト。"
   },
+  "GetRUMApplications": {
+    "description": "組織内のすべての RUM アプリケーションをリストアップします。",
+    "summary": "すべての RUM アプリケーションをリストアップする"
+  },
+  "CreateRUMApplication": {
+    "description": "組織内で新しい RUM アプリケーションを作成します。",
+    "summary": "新しい RUM アプリケーションを作成する",
+    "request_description": "",
+    "request_schema_description": "RUM アプリケーション作成リクエスト属性。"
+  },
+  "DeleteRUMApplication": {
+    "description": "組織内の既存の RUM アプリケーションを削除します。",
+    "summary": "RUM アプリケーションを削除する"
+  },
+  "GetRUMApplication": {
+    "description": "組織内で指定された ID の RUM アプリケーションを取得します。",
+    "summary": "RUM アプリケーションを取得する"
+  },
+  "UpdateRUMApplication": {
+    "description": "組織内で指定された ID の RUM アプリケーションを更新します。",
+    "summary": "RUM アプリケーションを更新する",
+    "request_description": "",
+    "request_schema_description": "RUM アプリケーション更新リクエスト。"
+  },
   "ListRUMEvents": {
     "description": "リストエンドポイントは、RUM 検索クエリと一致するイベントを返します。\n[結果はページ区切りされます][1]。\n\nこのエンドポイントを使用して、最新の RUM イベントを確認します。\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
     "summary": "RUM イベントのリストを取得"
@@ -538,8 +634,30 @@
     "request_description": "",
     "request_schema_description": "セキュリティシグナルのリストをリクエスト"
   },
+  "GetSecurityMonitoringSignal": {
+    "description": "シグナルの詳細を取得します。",
+    "summary": "シグナルの詳細を取得する"
+  },
+  "EditSecurityMonitoringSignalAssignee": {
+    "description": "セキュリティシグナルのトリアージアサインメントを変更します。",
+    "summary": "セキュリティシグナルのトリアージアサインメントを変更します",
+    "request_description": "シグナルの更新を記述する属性。",
+    "request_schema_description": "所定のセキュリティモニタリングシグナルの割当先を変更するためのリクエスト本文。"
+  },
+  "EditSecurityMonitoringSignalIncidents": {
+    "description": "セキュリティシグナルの関連インシデントを変更します。",
+    "summary": "セキュリティシグナルの関連インシデントを変更する",
+    "request_description": "シグナルの更新を記述する属性。",
+    "request_schema_description": "所定のセキュリティモニタリングシグナルの関連インシデントを変更するためのリクエスト本文。"
+  },
+  "EditSecurityMonitoringSignalState": {
+    "description": "セキュリティシグナルのトリアージ状態を変更します。",
+    "summary": "セキュリティシグナルのトリアージ状態を変更します",
+    "request_description": "シグナルの更新を記述する属性。",
+    "request_schema_description": "所定のセキュリティモニタリングシグナルの状態を変更するためのリクエスト本文。"
+  },
   "SubmitMetrics": {
-    "description": "メトリクスエンドポイントを使用して、Datadog のダッシュボードでグラフ化できる時系列データをポストできます。\nペイロードの上限は 500 キロバイト (512000 バイト) です。非圧縮ペイロードの場合、サイズは 5 メガバイト (5242880 バイト) までとなります。\n\nDogStatsD を使用せず、Datadog API に直接メトリクスを送信する場合は以下の仕様に従ってください。\n\n- タイムスタンプ: 64 ビット\n- 値: 64 ビット\n- メトリクス名: 20 バイト\n- 時系列: 50 バイト\n- 最大ペイロードは約 100 バイトまでです。",
+    "description": "メトリクスエンドポイントを使用して、Datadog のダッシュボードでグラフ化できる時系列データをポストできます。\nペイロードの上限は 500 キロバイト (512000 バイト) です。非圧縮ペイロードの場合、サイズは 5 メガバイト (5242880 バイト) までとなります。\n\nDogStatsD を使用せず、Datadog API に直接メトリクスを送信する場合は以下の仕様に従ってください。\n\n- タイムスタンプ: 64 ビット\n- 値: 64 ビット\n- メトリクス名: 20 バイト\n- 時系列: 50 バイト\n- 最大ペイロードは約 100 バイトまでです。\n\nホスト名は、Resources フィールドのリソースの 1 つです。",
     "summary": "メトリクスを送信する",
     "request_description": "",
     "request_schema_description": "メトリクスのペイロード。"
@@ -584,6 +702,24 @@
     "request_description": "インシデントサービスのペイロード。",
     "request_schema_description": "インシデントサービスペイロードを使用してリクエストを作成します。"
   },
+  "ListServiceDefinitions": {
+    "description": "Datadog サービスカタログからすべてのサービス定義のリストを取得します。",
+    "summary": "すべてのサービス定義を取得する"
+  },
+  "CreateOrUpdateServiceDefinitions": {
+    "description": "Datadog サービスカタログでサービス定義を作成または更新します。",
+    "summary": "サービス定義を作成または更新する",
+    "request_description": "サービス定義 YAML/JSON。",
+    "request_schema_description": "サービス定義のリクエストを作成します。"
+  },
+  "DeleteServiceDefinition": {
+    "description": "Datadog サービスカタログの単一のサービス定義を削除します。",
+    "summary": "単一のサービス定義を削除する"
+  },
+  "GetServiceDefinition": {
+    "description": "Datadog サービスカタログから単一のサービス定義を取得します。",
+    "summary": "単一のサービス定義を取得する"
+  },
   "DeleteIncidentService": {
     "description": "既存のインシデントサービスを削除します。",
     "summary": "既存のインシデントサービスを削除する"
@@ -623,24 +759,32 @@
     "request_schema_description": "インシデントチームペイロードを使用してリクエストを更新します。"
   },
   "GetUsageApplicationSecurityMonitoring": {
-    "description": "アプリケーションセキュリティの 1 時間あたり使用量を取得します。",
-    "summary": "アプリケーションセキュリティの 1 時間あたり使用量の取得"
+    "description": "アプリケーションセキュリティの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
+    "summary": "アプリケーションセキュリティの時間単位使用量の取得"
   },
   "GetCostByOrg": {
-    "description": "マルチオーガニゼーションのアカウントでコストを取得します。ある月の組織別コストデータは、翌月 16 日までに利用可能になります。",
+    "description": "複数組織のアカウントにまたがるコストを取得します。\nある月の組織別コストデータは、翌月 16 日までに利用可能になります。\n**注:** このエンドポイントは非推奨となりました。代わりに新しいエンドポイント [`/historical_cost`](https://docs.datadoghq.com/api/latest/usage-metering/#get-historical-cost-across-your-account) を使用してください。",
     "summary": "マルチオーガニゼーションのアカウントのコストを取得"
   },
   "GetEstimatedCostByOrg": {
-    "description": "マルチオーガニゼーションのアカウントの推定コストを取得します。",
-    "summary": "マルチオーガニゼーションのアカウントの推定コストを取得"
+    "description": "複数組織および単一ルート組織のアカウントにまたがる推定コストを取得します。\n推定コストデータは、当月と前月分のみ利用可能です。\nそれ以前の過去のコストにアクセスするには、`/historical_cost` エンドポイントを使用します。",
+    "summary": "アカウントの推定コストを取得"
+  },
+  "GetHistoricalCostByOrg": {
+    "description": "複数組織および単一ルート組織のアカウントにまたがる過去のコストを取得します。\nある月のコストデータは、翌月 16 日までに利用可能になります。",
+    "summary": "アカウントの過去のコストを取得"
+  },
+  "GetHourlyUsage": {
+    "description": "製品ファミリーの時間単位使用量の取得",
+    "summary": "製品ファミリーの時間単位使用量の取得"
   },
   "GetUsageLambdaTracedInvocations": {
-    "description": "Lambda Traced Invocations の 1 時間あたり使用量を取得します。",
-    "summary": "Lambda Traced Invocations の 1 時間あたり使用量を取得"
+    "description": "Lambda のトレースされた起動の 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[製品ファミリーの時間単位使用量の取得 API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
+    "summary": "Lambda のトレースされた起動の 1 時間単位使用量の取得"
   },
   "GetUsageObservabilityPipelines": {
-    "description": "観測可能性パイプラインの 1 時間あたりの使用量を取得します。",
-    "summary": "Get hourly usage for Observability Pipelines"
+    "description": "観測可能性パイプラインの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[製品ファミリーの時間単位使用量の取得 API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
+    "summary": "観測可能性パイプラインの 1 時間単位使用量の取得"
   },
   "SendInvitations": {
     "description": "組織への参加を招待するメールを 1 人以上のユーザーに送信します。",

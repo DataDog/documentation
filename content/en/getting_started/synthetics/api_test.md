@@ -2,27 +2,30 @@
 title: Getting Started with API Tests
 kind: documentation
 further_reading:
-    - link: 'https://learn.datadoghq.com/course/view.php?id=39'
-      tag: 'Learning Center'
-      text: 'Introduction to Synthetic Tests'
-    - link: '/synthetics/api_tests'
-      tag: 'Documentation'
-      text: 'Learn more about single API tests'
-    - link: '/synthetics/multistep'
-      tag: 'Documentation'
-      text: 'Learn more about multistep API tests'
-    - link: '/getting_started/synthetics/private_location'
-      tag: 'Documentation'
-      text: 'Learn about private locations'
-    - link: '/synthetics/cicd_integrations/'
-      tag: 'Documentation'
-      text: 'Learn how to trigger Synthetic tests from your CI/CD pipeline'
-    - link: '/synthetics/identify_synthetics_bots'
-      tag: 'Documentation'
-      text: 'Learn how to identify Synthetic bots for API tests'
-    - link: '/api/v1/synthetics/#create-a-test'
-      tag: 'API Docs'
-      text: 'Create a Synthetic test programmatically'
+- link: 'https://learn.datadoghq.com/courses/intro-to-synthetic-tests'
+  tag: 'Learning Center'
+  text: 'Introduction to Synthetic Tests'
+- link: '/api/latest/synthetics/#create-an-api-test'
+  tag: 'API'
+  text: 'Create an API test programmatically'
+- link: '/synthetics/api_tests'
+  tag: 'Documentation'
+  text: 'Learn more about single API tests'
+- link: '/synthetics/multistep'
+  tag: 'Documentation'
+  text: 'Learn more about multistep API tests'
+- link: '/getting_started/synthetics/private_location'
+  tag: 'Documentation'
+  text: 'Learn about private locations'
+- link: '/continuous_testing/cicd_integrations/'
+  tag: 'Documentation'
+  text: 'Learn how to trigger Synthetic tests from your CI/CD pipeline'
+- link: '/synthetics/guide/identify_synthetics_bots'
+  tag: 'Documentation'
+  text: 'Learn how to identify Synthetic bots for API tests'
+- link: '/synthetics/guide/synthetic-test-monitors'
+  tag: 'Documentation'
+  text: 'Learn about Synthetic test monitors'
 
 ---
 
@@ -71,17 +74,15 @@ Assertions are fully customizable. To add a custom assertion, click on elements 
 
 ### Select locations 
 
-Select one or more **Managed Locations** or **Private Locations** to run your test from.
+Select one or more **Managed Locations** or **Private Locations** to run your test from. {{% managed-locations %}}
 
-Managed locations allow you to test public-facing websites and endpoints. To test internal applications or simulate user behavior in discrete geographic regions, use [private locations][8] instead.
-
-The Shopist application is publicly available at `https://www.shopist.io/`, so you can pick any managed locations to execute your test from.
+The Shopist application is publicly available at `https://www.shopist.io/`, so you can pick any managed locations to execute your test from. To test internal applications or simulate user behavior in discrete geographic regions, use [private locations][8] instead.
 
 ### Specify test frequency
 
 Select the frequency at which you want your test to execute. You can leave the default frequency of 1 minute.
 
-**Note:** In addition to running your Synthetic test on a schedule, you can trigger them manually or directly from your [CI/CD pipelines][9]. 
+In addition to running your Synthetic test on a schedule, you can trigger them manually or directly from your [CI/CD pipelines][9]. 
 
 ### Define alert conditions
 
@@ -99,11 +100,11 @@ You can also configure your test to only trigger a notification when your endpoi
 An alert is triggered if your test fails for 3 minutes from any 2 of 13 locations
 ```
 
-### Notify your team
+### Configure the test monitor
 
 Design your alert message and add any email address you want your test to send alerts to. You can also use [notifications integrations][10] such as Slack, PagerDuty, Microsoft Teams, and webhooks. In order to trigger a Synthetic alert to these notification tools, you first need to set up the corresponding [integration][11].
 
-When you're ready to run your test, click **Save Test**. 
+When you're ready to save your test configuration and monitor, click **Create**. 
 
 ## Create a multistep API test
 
@@ -142,7 +143,7 @@ To create a new multistep API test, click **New Test** > **[Multistep API test][
     - In the **Response Header,** select `location`.
     - In the **Parsing Regex** field, add a regular expression such as `(?:[^\\/](?!(\\|/)))+$`.
 
-  {{< img src="getting_started/synthetics/multistep-test-extract-variables.png" alt="Extracted variable from response content" style="width:100%;" >}}
+   {{< img src="getting_started/synthetics/multistep-test-extract-variables.png" alt="Extracted variable from response content" style="width:100%;" >}}
 
 8. Click **Save Variable**.
 9. When you're done creating this test step, click **Save Step**.
@@ -188,7 +189,9 @@ To create a new multistep API test, click **New Test** > **[Multistep API test][
 
 {{< img src="getting_started/synthetics/defined-steps.png" alt="Created test steps" style="width:100%;" >}}
 
-You can then configure the rest of your test conditions including test frequency, alerting conditions, and alert message. When you're ready to run your test, click **Save Test**. 
+You can then configure the rest of your test conditions such as test frequency and alerting conditions, and the test monitor. When you're ready to save your test configuration and monitor, click **Create**. 
+
+For more information, see [Using Synthetic Test Monitors][13].
 
 ## Look at test results
 
@@ -198,7 +201,7 @@ To troubleshoot a failed test, scroll down to **Test Results** and click on a fa
 
 {{< img src="getting_started/synthetics/api-test-failure-5.png" alt="API test failure" style="width:100%;">}}
 
-With Datadog's [APM integration with Synthetic Monitoring][13], access the root cause of a failed test run by looking at the trace generated from the test run in the **Traces** tab.
+With Datadog's [APM integration with Synthetic Monitoring][14], access the root cause of a failed test run by looking at the trace generated from the test run in the **Traces** tab.
 
 ## Further Reading
 
@@ -216,4 +219,5 @@ With Datadog's [APM integration with Synthetic Monitoring][13], access the root 
 [10]: /integrations/#cat-notification
 [11]: https://app.datadoghq.com/account/settings
 [12]: https://app.datadoghq.com/synthetics/multi-step/create
-[13]: /synthetics/apm/
+[13]: /synthetics/guide/synthetic-test-monitors
+[14]: /synthetics/apm/

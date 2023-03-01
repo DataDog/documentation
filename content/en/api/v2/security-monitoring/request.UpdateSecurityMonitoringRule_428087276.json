@@ -1,0 +1,27 @@
+{
+  "name": "Example-Update_a_cloud_configuration_rule_s_details_returns_OK_response_cloud_updated",
+  "isEnabled": false,
+  "cases": [
+    {
+      "status": "info",
+      "notifications": []
+    }
+  ],
+  "options": {
+    "complianceRuleOptions": {
+      "resourceType": "gcp_compute_disk",
+      "regoRule": {
+        "policy": "package datadog\n",
+        "resourceTypes": [
+          "gcp_compute_disk"
+        ]
+      }
+    }
+  },
+  "message": "ddd",
+  "tags": [],
+  "complianceSignalOptions": {
+    "userActivationStatus": false,
+    "userGroupByFields": []
+  }
+}

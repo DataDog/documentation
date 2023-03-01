@@ -1,17 +1,18 @@
 ---
-title: Page de statut de l'Agent v6
-kind: guide
 further_reading:
-  - link: /agent/troubleshooting/
-    tag: Documentation
-    text: Dépannage de l'Agent
-  - link: /agent/guide/agent-configuration-files/
-    tag: Guide
-    text: Fichiers de configuration de l'Agent
-  - link: /agent/guide/agent-commands/
-    tag: Guide
-    text: Commandes de l'Agent
+- link: /agent/troubleshooting/
+  tag: Documentation
+  text: Dépannage de l'Agent
+- link: /agent/guide/agent-configuration-files/
+  tag: Guide
+  text: Fichiers de configuration de l'Agent
+- link: /agent/guide/agent-commands/
+  tag: Guide
+  text: Commandes de l'Agent
+kind: guide
+title: Page de statut de l'Agent v6
 ---
+
 La page de statut de l'Agent v6 affiche des informations sur votre Agent en cours d'exécution. Consultez les [commandes de l'Agent][1] pour obtenir la commande de statut pour votre environnement. Les sections ci-dessous fournissent des détails sur le contenu de la page de statut.
 
 **Remarque** : la page de statut peut varier en fonction de la version de l'Agent.
@@ -91,6 +92,7 @@ Cette section affiche une liste des instances de check en cours d'exécution, pa
       Metric Samples: Last Run: 6, Total: 24
       Events: Last Run: 0, Total: 0
       Service Checks: Last Run: 0, Total: 0
+      Histogram Buckets: Last Run: 12, Total: 36
       Average Execution Time : 6ms
 ```
 
@@ -101,8 +103,9 @@ Termes et descriptions :
 | Instance ID            | L'ID de l'instance et le statut du check.                     |
 | Total Runs             | Le nombre total d'exécutions de l'instance.                  |
 | Metric Samples         | Le nombre de métriques récupérées.                                   |
-| Événements                 | Le nombre d'événements déclenchés.                                  |
-| Checks de service         | Le nombre de checks de service signalés.                           |
+| Events                 | Le nombre d'événements déclenchés.                                  |
+| Service Checks         | Le nombre de checks de service signalés.                           |
+| Histogram Buckets      | Le nombre de buckets d'histogram envoyés.                            |
 | Average Execution Time | La durée d'exécution moyenne de l'instance.                      |
 | Last Run               | Le nombre durant la dernière exécution du check.                            |
 | Total                  | Le nombre total depuis le démarrage ou redémarrage de l'Agent le plus récent. |
@@ -205,7 +208,7 @@ Cette section affiche la liste des endpoints utilisés par l'Agent Datadog, par 
       - ab123
 ```
 
-## Agent de logs
+## Logs Agent
 
 Si l'Agent de logs est activé, cette section affiche les informations sur les logs traités et envoyés, par exemple :
 
@@ -237,8 +240,8 @@ Termes et descriptions :
 |----------------------------------------------|-------------------------------------------------------------------------------------------------------|
 | Checks Metric Sample                         | Le nombre total de métriques envoyées des checks vers l'aggregator.                                   |
 | Dogstatsd Metric Sample                      | Le nombre total de métriques envoyées du serveur DogStatsD vers l'aggregator.                         |
-| Event                                        | Le nombre total d'événements envoyés vers l'aggregator.                                                    |
-| Service Check                                | Le nombre total de checks de service envoyés vers l'aggregator.                                            |
+| Événement                                        | Le nombre total d'événements envoyés vers l'aggregator.                                                    |
+| Check de service                                | Le nombre total de checks de service envoyés vers l'aggregator.                                            |
 | Flush                                        | Le nombre de fois que des métriques agrégées ont été transmises au Forwarder pour les envoyer à Datadog.              |
 | Sketches Flushed                             | Le nombre de fois que des métriques de distribution agrégées ont été transmises au Forwarder pour les envoyer à Datadog. |
 | Checks Histogram Bucket Metric Sample        | Le nombre de métriques histogram bucket envoyées depuis les checks à l'Aggregator.                        |

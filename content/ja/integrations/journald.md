@@ -1,40 +1,58 @@
 ---
+app_id: journald
+app_uuid: 2ee4cbe2-2d88-435b-9ed9-dbe07ca1d059
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: journald
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
-  - ログの収集
-creates_events: false
-ddtype: check
+- ログの収集
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/journald/README.md'
-display_name: journald
+- https://github.com/DataDog/integrations-core/blob/master/journald/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: journald
-guid: 845431ef-9092-4254-a188-138fc9273fa5
 integration_id: journald
 integration_title: journald
+integration_version: 1.1.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: journald.
-metric_to_check: ''
+manifest_version: 2.0.0
 name: journald
+oauth: {}
 public_title: journald
 short_description: Datadog を使用して systemd-journald ログを監視します。
-support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: Datadog を使用して systemd-journald ログを監視します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: journald
 ---
+
+
+
 ## 概要
 
 Systemd-journald は、ログデータを収集して保管するシステムサービスです。
@@ -62,7 +80,7 @@ journald チェックは [Datadog Agent][1] パッケージに含まれていま
 
 ホストで実行中の Agent に対してこのチェックを構成するには:
 
-ログの収集を開始するには、[Agent の構成ディレクトリ][4]のルートにある `conf.d/` フォルダーの `journald.d/conf.yaml` ファイルを編集します。
+ログの収集を開始するには、[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `journald.d/conf.yaml` ファイルを編集します。
 
 #### ログの収集
 
@@ -87,20 +105,24 @@ logs:
 [Agent を再起動します][2]。
 
 
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "Containerized" %}}
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][5]のガイドを参照して、次のパラメーターを適用してください。
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
 #### ログの収集
 
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][6]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
 | パラメーター      | 値                                                  |
 | -------------- | ------------------------------------------------------ |
 | `<LOG_CONFIG>` | `{"source": "journald", "service": "<YOUR_APP_NAME>"}` |
 
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=containerinstallation#setup
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -163,6 +185,7 @@ journald には、イベントは含まれません。
 ## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+
 
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [2]: https://app.datadoghq.com/account/settings#agent

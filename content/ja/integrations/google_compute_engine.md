@@ -1,18 +1,18 @@
 ---
 categories:
-  - cloud
-  - os & system
-  - google cloud
-  - log collection
-ddtype: crawler
+- cloud
+- os & system
+- google cloud
+- log collection
 dependencies: []
 description: ビジー状態のインスタンスを追跡し、アカウント使用状況メトリクスを割り当て制限と比較
-doc_link: 'https://docs.datadoghq.com/integrations/google_compute_engine/'
+doc_link: https://docs.datadoghq.com/integrations/google_compute_engine/
 draft: false
 git_integration_title: google_compute_engine
 has_logo: true
 integration_id: google-compute-engine
 integration_title: Google Compute Engine
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -21,6 +21,7 @@ public_title: Datadog-Google Compute Engine インテグレーション
 short_description: ビジー状態のインスタンスを追跡し、アカウント使用状況メトリクスを割り当て制限と比較
 version: '1.0'
 ---
+
 ## 概要
 
 Google Cloud Compute Engine は、Google の革新的なデータセンターと世界規模のファイバーネットワーク内で実行される仮想マシンを提供します。
@@ -44,11 +45,11 @@ Google Compute Engine からメトリクスを取得して、以下のことが�
 
 ### ログの収集
 
-Google Compute Engine のログは Stackdriver により収集され、HTTP プッシュフォワーダーを使用して Cloud Pub/Sub へ送信されます。[HTTP プッシュフォワーダーを使用した Cloud Pub/Sub][2] をまだセットアップしていない場合は、これをセットアップしてください。
+Google Compute Engine のログは Google Cloud Logging により収集され、HTTP プッシュフォワーダーを使用して Cloud Pub/Sub へ送信されます。[HTTP プッシュフォワーダーを使用した Cloud Pub/Sub][2] をまだセットアップしていない場合は、これをセットアップしてください。
 
-これが完了したら、Google Compute Engine のログを Stackdriver から Pub/Sub へエクスポートします。
+これが完了したら、Google Compute Engine のログを Google Cloud Logging から Pub/Sub へエクスポートします。
 
-1. [Stackdriver のページ][3]に移動し、Google Compute Engine のログを絞り込みます。
+1. [Google Cloud Logging のページ][3]に移動し、Google Compute Engine のログを絞り込みます。
 2. **シンクを作成**し、シンクに適宜名前を付けます。
 3. エクスポート先として「Cloud Pub/Sub」を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクト内に配置することもできます。
 
@@ -60,7 +61,7 @@ Google Compute Engine のログは Stackdriver により収集され、HTTP プ�
 
 #### ホスト収集の制限
 
-Datadog を使用して GCE インスタンスの一部のみを監視する場合は、監視対象の GCE インスタンスに `datadog:true` などの GCE ラベルを割り当てます。次に、[Datadog GCP インテグレーションタイル][4]の **Optionally limit metrics collection** テキストボックスで、そのタグを指定します。タグで仮想マシンを絞り込む方法の詳細については、[Google Cloud Platform のドキュメント][5]を参照してください。
+Datadog を使用して GCE インスタンスの一部のみを監視する場合は、監視対象の GCE インスタンスに `datadog:true` などの GCE ラベルを割り当てます。次に、[Datadog GCP インテグレーションタイル][4]の **Optionally limit metrics collection** テキストボックスで、そのタグを指定します。タグで仮想マシンを絞り込む方法の詳細については、[Google Cloud Platform インテグレーションドキュメント][5]を参照してください。
 
 #### GCE オートミュート
 

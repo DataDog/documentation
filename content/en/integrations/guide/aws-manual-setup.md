@@ -36,6 +36,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/announcing-cloud-siem/"
   tag: "Blog"
   text: "Announcing Datadog Security Monitoring"
+- link: "https://www.datadoghq.com/blog/tagging-best-practices/#aws"
+  tag: "Blog"
+  text: "Best practices for tagging your infrastructure and applications"
+
 ---
 
 ## Overview
@@ -45,57 +49,57 @@ Use this guide to manually set up the Datadog [AWS Integration][1].
 {{< tabs >}}
 {{% tab "Role delegation" %}}
 
-Setting up the AWS integration manually involves creating an IAM policy and IAM role in your AWS account, and configuring the role with an AWS External ID generated in your Datadog account. This allows Datadog's AWS account to query AWS APIs on your behalf, and pull data into your Datadog account. The sections below detail the steps for creating each of these components, and then completing the setup in your Datadog account.
+To set up the AWS integration manually, create an IAM policy and IAM role in your AWS account, and configure the role with an AWS External ID generated in your Datadog account. This allows Datadog's AWS account to query AWS APIs on your behalf, and pull data into your Datadog account. The sections below detail the steps for creating each of these components, and then completing the setup in your Datadog account.
 
 ## Setup
 
 ### Generate an external ID
-Generate an External ID in the <a href="https://app.datadoghq.com/account/settings#integrations/amazon_web_services" target="_blank">AWS integration tile</a> on the integrations page. This is used in the trust policy of the AWS IAM role you create for Datadog.
-1. Select the `Configuration` tab, then `Role Delegation`.
-2. Click `Manually`. This creates an AWS External ID which is used for configuration of the AWS IAM role. For more information about the External ID, see the [IAM User Guide][1].
-3. Copy this value to your clipboard or notepad.  
-  **Note: Do not close the integration tile or the Datadog application page**, as this causes the external ID value to reset.
 
-### AWS IAM Policy for Datadog
+1. In the [AWS integration configuration page][1], click **Add AWS Account**, and then select **Manually**.
+2. Select `Role Delegation` for the access type and copy the `AWS External ID`. For more information about the external ID, read the [IAM User Guide][2].  
+  **Note:** The External ID remains available and is not regenerated for 48 hours, unless explicitly changed by a user or another AWS account is added to Datadog during this period. You can return to the **Add New AWS Account** page within that time period to complete the process of adding an account without the External ID changing.
+
+### AWS IAM policy for Datadog
 Create an IAM policy for the Datadog role in your AWS account with the [necessary permissions](#aws-integration-iam-policy) to take advantage of every AWS integration offered by Datadog. As other components are added to an integration, these permissions may change. 
 
-4. Create a new policy in the AWS [IAM Console][2].
-5. Select the `JSON` tab. Paste the [permission policies](#aws-integration-iam-policy) in the textbox. 
-6. Click `Next: Tags` and `Review policy`.
-7. Name the policy `DatadogAWSIntegrationPolicy` or one of your own choosing, and provide an apt description.
-8. Click `Create policy`.
+3. Create a new policy in the AWS [IAM Console][3].
+4. Select the **JSON** tab. Paste the [permission policies](#aws-integration-iam-policy) in the textbox. 
+5. Click **Next: Tags** and **Next: Review**.
+6. Name the policy `DatadogIntegrationPolicy` or one of your own choosing, and provide an apt description.
+7. Click **Create policy**.
 
 ### AWS IAM role for Datadog
 Create an IAM role for Datadog to use the permissions defined in the IAM policy.
 
-9. Create a new role in the AWS [IAM Console][3].
-10. Select `Another AWS account` for the Role Type.
-11. For Account ID, enter `464622532012` (Datadog's account ID). This means that you are granting Datadog access to your AWS data.
-12. Select `Require external ID` and enter the one generated in [AWS External ID](#generate-an-external-id). 
-Ensure to leave **Require MFA** disabled. 
-13. Click `Next`.
-14. If you've already created the policy, search for it on this page and select it. Otherwise, click `Create Policy`, which opens in a new window, and follow the instructions from [AWS IAM Policy for Datadog](#aws-integration-iam-policy). 
-15. Optionally, attach the <a href="https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/SecurityAudit" target="_blank">AWS SecurityAudit Policy</a> to the role if you would like to use Datadog's [Cloud Security Posture Management product][4].
-16. Click `Next: Tags` and `Next: Review`.
-17. Give the role a name such as `DatadogIntegrationRole`, as well as an apt description. 
-18. Click `Create Role`.
+8. Create a new role in the AWS [IAM Console][4].
+9. Select **AWS account** for the trusted entity type, and **Another AWS account**.
+10. Enter `464622532012` as the `Account ID`. This is Datadog's account ID, and grants Datadog access to your AWS data.
+11. Select **Require external ID** and enter the external ID copied in the [Generate an external ID](#generate-an-external-id) section. 
+Ensure to leave `Require MFA` disabled. For more details, see the [How to use an external ID when granting access to your AWS resources to a third party][2] AWS documentation.
+12. Click **Next**.
+13. If you've already created the policy, search for it on this page and select it. Otherwise, click **Create Policy**, which opens in a new window, and follow the instructions from the previous section. 
+14. Optionally, attach the <a href="https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/SecurityAudit" target="_blank">AWS SecurityAudit Policy</a> to the role to use Datadog's [Cloud Security Posture Management product][5] (CSPM).
+15. Click **Next**.
+16. Give the role a name such as `DatadogIntegrationRole`, as well as an apt description. 
+17. Click **Create Role**.
 
 ### Complete the setup in Datadog
 
-19. Returning to the AWS integration tile page in your Datadog account that you had open in another tab, enter your AWS Account ID **without dashes**, for example: `123456789012`. Your Account ID can be found in the ARN of the role created for Datadog.
-20. Enter the name of the created role.  
-**Note:** The role name you enter in the integration tile is case sensitive and must exactly match the role name created on the AWS side.
-21. If there is a [Datadog is not authorized to perform sts:AssumeRole][5] error, make sure your AWS trust policy's `sts:ExternalId:` matches the `AWS External ID` previously created in the integration tile.
-22. Click **Install Integration**.
-23. Wait up to 10 minutes for data to start being collected, and then view the out-of-the-box <a href="https://app.datadoghq.com/screen/integration/7/aws-overview" target="_blank">AWS Overview Dashboard</a> to see metrics sent by your AWS services and infrastructure.
+18. Return to the AWS integration configuration page for manually adding an account in Datadog that you had open in another tab. Click the checkbox to confirm the Datadog IAM role was added to the AWS account.
+19. Enter the account ID **without dashes**, for example: `123456789012`. Your Account ID can be found in the ARN of the role created for Datadog.
+20. Enter the name of the role created in the previous section, and click **Save**.  
+  **Note:** The role name you enter in the integration tile is case sensitive and must exactly match the role name in AWS.
+21. If there is a [Datadog is not authorized to perform sts:AssumeRole][6] error, follow the troubleshooting steps recommended in the UI, or read the [troubleshooting guide][6].
+22. Wait up to 10 minutes for data to start being collected, and then view the out-of-the-box <a href="https://app.datadoghq.com/screen/integration/7/aws-overview" target="_blank">AWS Overview Dashboard</a> to see metrics sent by your AWS services and infrastructure.
 
-[1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html
-[2]: https://console.aws.amazon.com/iam/home#/policies
-[3]: https://console.aws.amazon.com/iam/home#/roles
-[4]: /security_platform/cspm
-[5]: /integrations/faq/error-datadog-not-authorized-sts-assume-role/
+
+[1]: https://app.datadoghq.com/integrations/amazon-web-services
+[2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html
+[3]: https://console.aws.amazon.com/iam/home#/policies
+[4]: https://console.aws.amazon.com/iam/home#/roles
+[5]: /security/cspm
+[6]: /integrations/guide/error-datadog-not-authorized-sts-assume-role/
 {{% /tab %}}
-
 {{% tab "Access keys (GovCloud or China Only)" %}}
 
 ## Setup
@@ -105,21 +109,15 @@ Ensure to leave **Require MFA** disabled.
 1. In your AWS console, create an IAM user to be used by the Datadog integration with the [necessary permissions](#aws-integration-iam-policy).
 2. Generate an access key and secret key for the Datadog integration IAM user.
 
-For more details, see the [How to use an external ID when granting access to your AWS resources to a third party][1] AWS documentation.
-
 ### Datadog
 
-3. Open the [AWS integration tile][2].
+3. In the [AWS integration tile][1], click **Add AWS Account**, and then select **Manually**.
 4. Select the **Access Keys (GovCloud or China Only)** tab.
-5. Enter your `AWS Access Key` and `AWS Secret Key`. Only access and secret keys for GovCloud and China are accepted.
-6. Choose the services to collect metrics from on the left side of the dialog.
-7. Optionally, add tags to all hosts and metrics.
-8. Optionally, monitor a subset of EC2 instances by entering the AWS tags in the textbox `to hosts with tag`. **Note:** This also applies to an instance's attached EBS volumes.
-9. Optionally, monitor a subset of Lambdas by entering the AWS tags in the textbox `to Lambdas with tag`.
-10. Click **Install Integration**.
+5. Enter your `Account ID`, `AWS Access Key` and `AWS Secret Key`. Only access and secret keys for GovCloud and China are accepted.
+6. Click **Save**.
+7. Wait up to 10 minutes for data to start being collected, and then view the out-of-the-box <a href="https://app.datadoghq.com/screen/integration/7/aws-overview" target="_blank">AWS Overview Dashboard</a> to see metrics sent by your AWS services and infrastructure.
 
-[1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+[1]: https://app.datadoghq.com/integrations/amazon-web-services
 {{% /tab %}}
 {{< /tabs >}}
 

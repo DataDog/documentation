@@ -48,7 +48,7 @@ Data collection is done using eBPF, so Datadog minimally requires platforms that
 
 #### Windows OS
 
-Data collection is done using a device driver, and support is available as of Datadog Agent version 7.27.1, for Windows versions 2012 R2 and up.
+Data collection is done using a device driver. Support is available as of Datadog Agent version 7.27.1, for Windows versions 2012 R2 (and equivalent desktop OSs, including Windows 10) and up.
 
 #### macOS
 
@@ -102,17 +102,17 @@ To enable network performance monitoring with the Datadog Agent, use the followi
 2. Copy the system-probe example configuration:
 
     ```shell
-    sudo -u dd-agent cp /etc/datadog-agent/system-probe.yaml.example /etc/datadog-agent/system-probe.yaml
+    sudo -u dd-agent install -m 0640 /etc/datadog-agent/system-probe.yaml.example /etc/datadog-agent/system-probe.yaml
     ```
 
 3. Edit `/etc/datadog-agent/system-probe.yaml` to set the enable flag to `true`:
 
     ```yaml
     network_config:   # use system_probe_config for Agent's older than 7.24.1
-        ## @param enabled - boolean - optional - default: false
-        ## Set to true to enable Network Performance Monitoring.
-        #
-        enabled: true
+      ## @param enabled - boolean - optional - default: false
+      ## Set to true to enable Network Performance Monitoring.
+      #
+      enabled: true
     ```
 
 4. **If you are running an Agent older than v6.18 or 7.18**, manually start the system-probe and enable it to start on boot (since v6.18 and v7.18 the system-probe starts automatically when the Agent is started):
@@ -134,6 +134,16 @@ To enable network performance monitoring with the Datadog Agent, use the followi
 
 
 6. [Optional] If runing on AWS, enable 'standard collection' in your AWS integration for additional visibility  to Elastic Load Balancers, Application Load Balancers, and Network Load Balancers. This feature is not available in the Govcloud region.
+
+{{< site-region region="us,us3,us5,eu" >}}
+
+7. Optionally, enable additional cloud integrations to allow Network Performance Monitoring to discover cloud-managed entities.
+      * Install the [Azure integration][1] for visibility into Azure load balancers.
+      * Install the [AWS Integration][2] for visibility in AWS Load Balancer. **you must enable ENI and EC2 metric collection**
+
+  [1]: /integrations/azure
+  [2]: /integrations/amazon_web_services/
+{{< /site-region >}}
 
 ### SELinux-enabled systems
 
@@ -382,8 +392,9 @@ To enable Network Performance Monitoring in Docker, use the following configurat
 
 ```shell
 $ docker run --cgroupns host \
+--pid host \
 -e DD_API_KEY="<DATADOG_API_KEY>" \
--e DD_SYSTEM_PROBE_ENABLED=true \
+-e DD_SYSTEM_PROBE_NETWORK_ENABLED=true \
 -e DD_PROCESS_AGENT_ENABLED=true \
 -v /var/run/docker.sock:/var/run/docker.sock:ro \
 -v /proc/:/host/proc/:ro \
@@ -412,7 +423,7 @@ services:
   datadog:
     image: "gcr.io/datadoghq/agent:latest"
     environment:
-       DD_SYSTEM_PROBE_ENABLED: 'true'
+       DD_SYSTEM_PROBE_NETWORK_ENABLED: 'true'
        DD_PROCESS_AGENT_ENABLED: 'true'
        DD_API_KEY: '<DATADOG_API_KEY>'
     volumes:

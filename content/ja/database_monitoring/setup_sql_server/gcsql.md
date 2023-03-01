@@ -8,7 +8,7 @@ kind: documentation
 title: Google Cloud SQL マネージド SQL Server のデータベースモニタリングの設定
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
 {{< /site-region >}}
 
@@ -144,7 +144,6 @@ instances:
     tags:  # オプション
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
-
     # プロジェクトとインスタンスを追加した後、CPU、メモリなどの追加のクラウドデータをプルするために Datadog GCP インテグレーションを構成します。
     gcp:
       project_id: '<PROJECT_ID>'
@@ -203,7 +202,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
       "instance_id": "<INSTANCE_ID>"
     }
   }]' \
-  datadoghq/agent:${DD_AGENT_VERSION}
+  gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
 ```
 
 `project_id` と `instance_id` フィールドの設定に関する追加情報は、[SQL Server インテグレーション仕様][3]を参照してください。
@@ -247,6 +246,9 @@ instances:
     password: '<PASSWORD>'
     connector: 'odbc'
     driver: 'FreeTDS'
+    tags:  # オプション
+      - 'service:<CUSTOM_SERVICE>'
+      - 'env:<CUSTOM_ENV>'
     gcp:
       project_id: '<PROJECT_ID>'
       instance_id: '<INSTANCE_ID>' \
@@ -268,6 +270,9 @@ instances:
     password: '<PASSWORD>'
     connector: "odbc"
     driver: "FreeTDS"
+    tags:  # オプション
+      - 'service:<CUSTOM_SERVICE>'
+      - 'env:<CUSTOM_ENV>'
     # プロジェクトとインスタンスを追加した後、CPU、メモリなどの追加のクラウドデータをプルするために Datadog GCP インテグレーションを構成します。
     gcp:
       project_id: '<PROJECT_ID>'
@@ -297,6 +302,7 @@ metadata:
           "password": "<PASSWORD>",
           "connector": "odbc",
           "driver": "FreeTDS",
+          "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"],  # オプション
           "gcp": {
             "project_id": "<PROJECT_ID>",
             "instance_id": "<INSTANCE_ID>"
@@ -324,6 +330,9 @@ Cluster Agent は自動的にこのコンフィギュレーションを登録し
 [5]: /ja/agent/guide/secrets-management
 {{% /tab %}}
 {{< /tabs >}}
+
+## Agent の構成例
+{{% dbm-sqlserver-agent-config-examples %}}
 
 ## Google Cloud SQL インテグレーションをインストールする
 

@@ -1,11 +1,13 @@
 ---
 title: Events Guides
 kind: documentation
+private: true
+disable_toc: true
 further_reading:
 - link: "/events/explorer/"
   tag: "Documentation"
   text: "Datadog Events Explorer"
-- link: "/monitors/create/types/event/"
+- link: "/monitors/types/event/"
   tag: "Documentation"
   text: "Event Monitors"
 aliases:
@@ -19,6 +21,10 @@ An event represents any record of activity noteworthy for engineers (devs, ops, 
     {{< nextlink href="/events/guides/dogstatsd/" >}}DogStatsD{{< /nextlink >}}
     {{< nextlink href="/events/guides/email/" >}}Email{{< /nextlink >}}
     {{< nextlink href="/api/v1/events/#post-an-event" >}}Datadog API{{< /nextlink >}}
+{{< /whatsnext >}}
+
+{{< whatsnext desc="Ensure your events are tagged:">}}
+{{< nextlink href="/events/guides/recommended_event_tags/" >}}Best Practices for Tagging Events{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Other guides:">}}

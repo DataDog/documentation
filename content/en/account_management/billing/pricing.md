@@ -22,7 +22,7 @@ Datadog has many pricing plans to fit your needs. For more information, see the 
 
 ## APM
 
-* If a host (defined in [Infrastructure monitoring](#infrastructure-monitoring)) receives traces from an instrumented application, Datadog counts it as one **APM host**.
+* If an application running on a host (defined in [Infrastructure monitoring](#infrastructure-monitoring)) generates traces and submits them to the Datadog SaaS application, Datadog counts that host as one **APM host**.
   * On a high watermark plan (HWMP), the hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth highest measurement.
   * On a hybrid monthly/hourly plan (MHP), Datadog charges your minimum monthly commitment, and for any host hours above that commitment, Datadog charges an hourly rate.
 * An **Indexed Span** is an individual request against an individual service in your stack. Datadog charges based on the total number of spans indexed by [retention filters][3] within Datadog APM.
@@ -62,7 +62,7 @@ You can put controls in place for both Indexed and Ingested span volumes. For mo
 
 * A **session** is a user journey on your web application. It expires after either 15 minutes of inactivity, or 4 hours of continuous activity.
 
-* Datadog collects all the pages visited by your end users along with the telemetry that matters: resources loading (XHRs, images, CSS files, JS scripts, etc), frontend errors, and long tasks. All of this is included in the user session. Datadog charges per ten thousand (10,000) sessions ingested in the Datadog Real User Monitoring (RUM) service.
+* Datadog collects all the pages visited by your end users along with the telemetry that matters: resources loading (XHRs, images, CSS files, JS scripts, etc), frontend errors, and long tasks. All of this is included in the user session. Datadog charges per one thousand (1,000) sessions ingested in the Datadog Real User Monitoring (RUM) service.
 
 ## Continuous Profiler
 
@@ -92,9 +92,9 @@ Contact [Sales][8] or your [Customer Success][9] Manager to discuss hourly prici
 
 [1]: https://www.datadoghq.com/pricing
 [2]: /metrics/custom_metrics/
-[3]: /tracing/trace_retention/#retention-filters
-[4]: /tracing/trace_ingestion/
-[5]: /tracing/trace_retention/
+[3]: /tracing/trace_pipeline/trace_retention/#retention-filters
+[4]: /tracing/trace_pipeline/ingestion_controls/
+[5]: /tracing/trace_pipeline/trace_retention/
 [6]: /database_monitoring/data_collected/#normalized-queries
 [7]: /help/
 [8]: mailto:sales@datadoghq.com

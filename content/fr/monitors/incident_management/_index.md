@@ -34,7 +34,7 @@ Dans Datadog, les situations suivantes justifient la déclaration d'un incident�
 
 La gestion des incidents ne nécessite aucune installation. Pour consulter vos incidents, accédez à la page [Incidents][1] où vous trouverez tous les incidents en cours. Vous pouvez configurer des champs supplémentaires pour tous les incidents dans les [paramètres d'incident][2].
 
-**Remarque** : consultez la liste de vos incidents depuis l'écran d'accueil de votre appareil mobile et gérez ou créez des incidents grâce à l'[application mobile Datadog][3], disponible sur l'[App Store d'Apple][4] et le [Google Play Store][5].”
+**Remarque** : consultez la liste de vos incidents depuis l'écran d'accueil de votre appareil mobile et gérez ou créez des incidents grâce à l'[application mobile Datadog][3], disponible sur l'[App Store d'Apple][4] et le [Google Play Store][5].
 
 {{< img src="monitors/incidents/incidents-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Incidents sur l'application mobile">}}
 
@@ -65,6 +65,14 @@ Vous pouvez déclarer un incident directement depuis un monitor, en cliquant sur
 Vous pouvez également ajouter un monitor à un incident existant.
 
 {{< img src="monitors/incidents/existing.png" alt="Ajouter un monitor à un incident existant" style="width:80%;">}}
+
+#### Depuis un signal de sécurité
+
+Déclarez un incident directement à partir d'un signal Cloud SIEM ou Cloud Workload Security en cliquant sur les trois petits points en haut à droite du volet latéral, puis sur **Declare incident**.
+
+Déclarez un incident à partir d'un signal Application Security Monitoring en sélectionnant le bouton d'exportation en haut à droite du volet latéral, puis en cliquant sur **Export to incident**.
+
+{{< img src="monitors/incidents/security-signal-incidents.png" alt="Créer un incident depuis un signal de sécurité" style="width:80%;">}}
 
 #### Depuis la page des incidents
 

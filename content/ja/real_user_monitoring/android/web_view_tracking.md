@@ -28,7 +28,7 @@ Real User Monitoring により、Android と Android TV のハイブリッドア
 
 ### 前提条件
 
-モバイル Android および Android TV アプリケーションでレンダリングしたい Web ページを、まず Browser SDK で設定します。詳しくは、[RUM ブラウザモニタリング][1]をご覧ください。
+モバイル Android および Android TV アプリケーションでレンダリングしたい Web ページを、まず RUM Browser SDK で設定します。詳しくは、[RUM ブラウザモニタリング][1]をご覧ください。
 
 ### 既存の SDK のセットアップを更新する
 
@@ -52,11 +52,13 @@ Real User Monitoring により、Android と Android TV のハイブリッドア
     }
    ```
 
-4. SDK を初期化する際に、コンフィギュレーションファイルの `DatadogEventBridge.setup(webView)` を用いて、モバイル Android アプリケーションで追跡したい Web ビューの `DatadogEventBridge` を構成します。
+4. RUM Android SDK を初期化する際に、コンフィギュレーションファイルの `DatadogEventBridge.setup(webView)` を用いて、モバイル Android アプリケーションで追跡したい Web ビューの `DatadogEventBridge` を構成します。
 
 ## Web ビューにアクセスする
 
-Web ビューは、[RUM エクスプローラー][4]にイベントとビューとして表示されます。Android や Android TV のアプリケーションでフィルタリングし、セッションをクリックします。セッションのイベント一覧が表示されたサイドパネルが表示されます。
+Web ビューは、関連する `service` と `source` 属性とともに [RUM エクスプローラー][4]に表示されます。`service` 属性は Web ビューが生成された Web コンポーネントを示し、`source` 属性は Android などのモバイルアプリケーションのプラットフォームを表します。
+
+Android や Android TV のアプリケーションでフィルタリングし、セッションをクリックします。セッションのイベント一覧が表示されたサイドパネルが表示されます。
 
 {{< img src="real_user_monitoring/android/android-webview-tracking.png" alt="RUM エクスプローラーのセッションで取得した Web ビューイベント" style="width:100%;">}}
 

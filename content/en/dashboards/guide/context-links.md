@@ -243,11 +243,11 @@ Remapping the IP address creates a context link that connects your RUM events wi
 [11]: /infrastructure/process/?tab=linuxwindows
 [12]: /tracing/trace_explorer/?tab=listview
 [13]: /real_user_monitoring/explorer/
-[14]: /tracing/profiler/search_profiles/
+[14]: /profiler/search_profiles/
 [15]: /logs/explorer/
 [16]: /dashboards/widgets/
 [17]: /real_user_monitoring/
-[18]: /security_platform/cloud_siem/
+[18]: /security/cloud_siem/
 [19]: /integrations/amazon_ec2/
 [20]: https://aws.amazon.com/console/
 [21]: /logs/

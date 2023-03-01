@@ -40,18 +40,19 @@ Datadog は、サーバーレスフレームワークを使用してサーバー
 | `appKey`                      | Datadog アプリキー。`monitors` フィールドが定義されている場合のみ必要です。また、デプロイ環境で `DATADOG_APP_KEY` 環境変数を設定することも可能です。 |
 | `apiKeySecretArn`             | `apiKey` フィールドを使用する代替です。AWS Secrets Manager に Datadog API キーを保存しているシークレットの ARN です。Lambda の実行ロールに `secretsmanager:GetSecretValue` 権限を追加することを忘れないようにします。 |
 | `apiKMSKey`                   | `apiKey` フィールドを使用する代替です。Datadog API キーは KMS を使用して暗号化されています。Lambda の実行ロールに `kms:Decrypt` 権限を追加することを忘れないようにします。 |
-| `env`                         | Datadog のテレメトリーに、目的の `env` をタグ付けします。 |
-| `service`                     | Datadog のテレメトリーに、目的の `service` をタグ付けします。 |
-| `version`                     | Datadog のテレメトリーに、目的の `version` をタグ付けします。 |
+| `env`                         | `addExtension` と共に設定すると、指定した値を持つすべての Lambda 関数に `DD_ENV` 環境変数が追加されます。それ以外の場合、すべての Lambda 関数に `env` タグが追加され、指定した値が設定されます。デフォルトはサーバーレスデプロイメントの `stage` 値です。 |
+| `service`                     | `addExtension` と共に設定すると、指定した値を持つすべての Lambda 関数に `DD_SERVICE` 環境変数が追加されます。それ以外の場合、すべての Lambda 関数に `service` タグが追加され、指定した値が設定されます。デフォルトはサーバーレスプロジェクトの `service` 値です。
+| `version`                     | `addExtension` と共に設定すると、指定した値を持つすべての Lambda 関数に `DD_VERSION` 環境変数が追加されます。`forwarderArn` と共に設定すると、すべての Lambda 関数に `version` タグが追加され、指定した値が設定されます。 |
+| `tags`                        | 1 つの文字列としての `key`:`value` のペアのカンマ区切りのリスト。`extensionLayerVersion` と共に設定すると、すべての Lambda 関数に `DD_TAGS` 環境変数が追加され、指定した値が設定されます。`forwarderArn` と共に指定すると、プラグインは文字列をパースして、各 `key`:`value` ペアをタグとしてすべての Lambda 関数に設定します。 |
 | `enableXrayTracing`           | Lambda 関数と API Gateway 統合で X-Ray トレーシングを有効にするには、`true` に設定します。デフォルトは `false` です。 |
 | `enableDDTracing`             | Lambda 関数で Datadog トレースを有効にします。デフォルトは `true` です。 |
 | `enableDDLogs`                | Lambda 拡張機能を使用して Datadog のログ収集を有効にします。デフォルトは `true` です。注: この設定は、Datadog Forwarder から送信されるログには影響しません。 |
 | `monitors`                    | 定義すると、Datadog プラグインはデプロイされた関数のモニターを構成します。ご使用の環境で、`DATADOG_API_KEY` および `DATADOG_APP_KEY` を設定する必要があります。モニターの定義方法については、[推奨されるサーバーレスモニターを有効にして構成するには](#to-enable-and-configure-a-recommended-serverless-monitor)を参照してください。 |
 | `captureLambdaPayload`        | Datadog APM のスパンで、Lambda の呼び出しに対する [AWS Lambda のペイロードの入出力をキャプチャ][17]します。デフォルトは `false` です。 |
 | `enableSourceCodeIntegration` | 関数の [Datadog ソースコードインテグレーション][18]を有効にします。デフォルトは `true` です。 |
-| `subscribeToApiGatewayLogs`   | Datadog Forwarder の API Gateway ロググループへの自動サブスクリプションを有効化します。`forwarderArn` の設定が必要です。デフォルトは `true` です。 |
-| `subscribeToHttpApiLogs`      | Datadog Forwarder の HTTP API ロググループへの自動サブスクリプションを有効化します。`forwarderArn` の設定が必要です。デフォルトは `true` です。 |
-| `subscribeToWebsocketLogs`    | Datadog Forwarder の WebSocket ロググループへの自動サブスクリプションを有効化します。`forwarderArn` の設定が必要です。デフォルトは `true` です。 |
+| `uploadGitMetadata`           | ソースコードインテグレーションの一部として、関数の Git メタデータアップロードを有効にします。Datadog Github インテグレーションをインストールしている場合は、これを false に設定すると、Git メタデータのアップロードが不要になります。デフォルトは `true` です。 |
+| `subscribeToAccessLogs`       | Datadog Forwarder の API Gateway アクセスロググループへの自動サブスクリプションを有効化します。`forwarderArn` の設定が必要です。デフォルトは `true` です。 |
+| `subscribeToExecutionLogs`    | Datadog Forwarder の HTTP API と Websocket ロググループへの自動サブスクリプションを有効化します。`forwarderArn` の設定が必要です。デフォルトは `true` です。 |
 | `forwarderArn`                | Lambda または API Gateway のロググループにサブスクライブされる Datadog Forwarder の ARN。 |
 | `addLayers`                   | Datadog Lambda ライブラリをレイヤーとしてインストールするかどうか。デフォルトは `true` です。特定のバージョンの Datadog Lambda ライブラリ ([Python][8] または [Node.js][9]) をインストールできるように Datadog Lambda ライブラリを関数のデプロイパッケージに独自にパッケージ化する場合は、`false` に設定します。 |
 | `addExtension`                | Datadog Lambda 拡張機能をレイヤーとしてインストールするかどうか。デフォルトは `true` です。有効にすると、`apiKey` と `site` を設定する必要があります。 |
@@ -61,7 +62,14 @@ Datadog は、サーバーレスフレームワークを使用してサーバー
 | `failOnError`                 | このプラグインを設定すると、Datadog カスタムモニターの作成または更新が失敗した場合にエラーが生成されます。これは、デプロイ後に発生しますが、`serverless deploy` の結果が 0 以外の終了コードを返す原因になります（ユーザー CI を失敗にするため）。デフォルトは `false` です。 |
 | `integrationTesting`          | インテグレーションテストを実行するときに `true` に設定します。これにより、Forwarder ARN と追加した Datadog モニターの出力リンクの検証要件がバイパスされます。デフォルトは `false` です。 |
 | `logLevel`                    | ログのレベル。拡張ロギングの場合 `DEBUG` に設定します。 |
-
+| `skipCloudformationOutputs`   | スタックに Datadog Cloudformation Outputs を追加するのをスキップしたい場合は、`true` に設定します。これは、スタックの作成に失敗する原因となる 200 の出力制限に遭遇している場合に有効です。 |
+| `enableColdStartTracing`      | コールドスタートトレースを無効にするには、`false` に設定します。NodeJS と Python で使用されます。デフォルトは `true` です。 |
+| `coldStartTraceMinDuration`   | コールドスタートトレースでトレースするモジュールロードイベントの最小継続時間 (ミリ秒) を設定します。数値。デフォルトは `3` です。 |
+| `coldStartTraceSkipLibs`      | オプションで、カンマで区切られたライブラリのリストに対してコールドスタートスパンの作成をスキップすることができます。深さを制限したり、既知のライブラリをスキップするのに便利です。デフォルトはランタイムに依存します。 |
+| `subdomain`                   | 出力されるアプリの URL に使用するオプションのサブドメインを設定します。デフォルトは `app` です。 |
+| `enableProfiling`             | Datadog Continuous Profiler を `true` で有効にします。NodeJS と Python のベータ版でサポートされています。デフォルトは `false` です。 |
+| `encodeAuthorizerContext`     | Lambda オーサライザーで `true` に設定すると、トレースコンテキストがレスポンスにエンコードされて伝搬されます。NodeJS と Python でサポートされています。デフォルトは `true` です。 |
+| `decodeAuthorizerContext`     | Lambda オーサライザーで認可された Lambda に対して `true` を設定すると、エンコードされたトレースコンテキストをパースして使用します (見つかった場合)。NodeJS と Python でサポートされています。デフォルトは `true` です。 |
 上記のパラメーターを使用するには、以下の例のように `custom` > `datadog` セクションを `serverless.yml` に追加します。
 
 ```yaml
@@ -120,8 +128,8 @@ custom:
 | :------------------: | :--------------------------------------------------------------------------------------: | :--------: | :--------------------: |
 |   高いエラー率    |                       `aws.lambda.errors`/`aws.lambda.invocations`                       |   >= 10%   |   `high_error_rate`    |
 |       タイムアウト        |                      `aws.lambda.duration.max`/`aws.lambda.timeout`                      |    >= 1    |       `timeout`        |
-|    Out of Memory     |                           `aws.lambda.enhanced.out_of_memory`                            |    > 0     |    `out_of_memory`     |
-|  High Iterator Age   |                            `aws.lambda.iterator_age.maximum`                             | >= 24 hrs  |  `high_iterator_age`   |
+|    メモリ不足     |                           `aws.lambda.enhanced.out_of_memory`                            |    > 0     |    `out_of_memory`     |
+|  イテレータ経過時間が長い   |                            `aws.lambda.iterator_age.maximum`                             | >= 24 時間  |  `high_iterator_age`   |
 | 高いコールドスタート率 | `aws.lambda.enhanced.invocations(cold_start:true)`/<br>`aws.lambda.enhanced.invocations` |   >= 20%   | `high_cold_start_rate` |
 |    高いスロットル    |                     `aws.lambda.throttles`/`aws.lambda.invocations`                      |   >= 20%   |    `high_throttles`    |
 |    コストの増加    |                           `aws.lambda.enhanced.estimated_cost`                           | &#8593;20% |    `increased_cost`    |
@@ -165,6 +173,7 @@ custom:
             thresholds:
               ok: 0.025
               warning: 0.05
+              critical: 0.1
 ```
 
 ##### モニターを削除するには
@@ -195,15 +204,15 @@ custom:
             thresholds:
               ok: 1
               warning: 2
+              critical: 3
 ```
 
 ## 変更の分割
 
 ### [v5.0.0](https://github.com/DataDog/serverless-plugin-datadog/releases/tag/v5.0.0)
 
-- このプラグインは、Service と ENV のタグの設定を止め、代わりに環境変数を使用します (Datadog 拡張機能と併用する場合)。
-
-v5.0 は、Datadog 拡張機能の v10 以上、および Datadog Forwarder の全バージョンと互換性があります。
+- Datadog 拡張機能と併用することで、Lambda のリソースタグではなく、環境変数を通して `service` と `env` タグを設定するプラグインです。
+- `enableTags` パラメーターは、新しい `service`、`env` パラメーターに置き換わりました。
 
 ### [v4.0.0](https://github.com/DataDog/serverless-plugin-datadog/releases/tag/v4.0.0)
 

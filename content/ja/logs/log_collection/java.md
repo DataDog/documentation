@@ -14,7 +14,7 @@ further_reading:
 - link: /logs/explorer/#visualize
   tag: Documentation
   text: ログ分析の実行
-- link: /tracing/connect_logs_and_traces/java/
+- link: /tracing/other_telemetry/connect_logs_and_traces/java/
   tag: Documentation
   text: ログとトレースの接続
 - link: /logs/faq/log-collection-troubleshooting-guide/
@@ -266,23 +266,29 @@ Logback の JSON 形式のログには、[logstash-logback-encoder][1] を使用
 
 ## Datadog Agent の構成
 
-Agent の `conf.d/` ディレクトリに、以下の内容の `java.yaml` ファイルを作成します。
+[ログ収集が有効][4]になったら、ログファイルを追跡して Datadog に送信する[カスタムログ収集][5]を設定します。
 
-```yaml
-#ログセクション
-logs:
+1. `java.d/` フォルダーを `conf.d/` [Agent 構成ディレクトリ][6]に作成します。
+2. `java.d/` に以下の内容で `conf.yaml` ファイルを作成します。
 
-  - type: file
-    path: "/path/to/your/java/log.log"
-    service: java
-    source: java
-    sourcecategory: sourcecode
-    # 複数行ログで、ログが yyyy-mm-dd 形式の日付で始まる場合は、以下の処理ルールのコメントを解除します。
-    #log_processing_rules:
-    #  - type: multi_line
-    #    name: new_log_start_with_date
-    #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
-```
+    ```yaml
+    #Log section
+    logs:
+
+      - type: file
+        path: "/path/to/your/java/log.log"
+        service: java
+        source: java
+        sourcecategory: sourcecode
+        # For multiline logs, if they start by the date with the format yyyy-mm-dd uncomment the following processing rule
+        #log_processing_rules:
+        #  - type: multi_line
+        #    name: new_log_start_with_date
+        #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
+    ```
+
+3. [Agent を再起動します][7]。
+4. [Agent の status サブコマンド][8]を実行し、`Checks` セクションで `java` を探し、ログが Datadog に正常に送信されることを確認します。
 
 ## エージェントレスのログ収集
 
@@ -327,7 +333,7 @@ SLF4J モジュール [log4j-over-slf4j][1] を Logback とともに使用して
 
 [1]: http://www.slf4j.org/legacy.html#log4j-over-slf4j
 [2]: http://logback.qos.ch/translator/
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "Log4j 2" %}}
 
@@ -361,13 +367,13 @@ Log4j 2 では、リモートホストへのログ記録が可能ですが、ロ
 
 [1]: http://www.slf4j.org/legacy.html#log4j-over-slf4j
 [2]: http://logback.qos.ch/translator
-{{% /tab %}}
+{{< /tabs >}}
 
 {{< /tabs >}}
 
 ### Logback を構成する
 
-[logstash-logback-encoder][4] ログライブラリを Logback と一緒に使用して、ログを Datadog に直接ストリーミングします。
+[logstash-logback-encoder][9] ログライブラリを Logback と一緒に使用して、ログを Datadog に直接ストリーミングします。
 
 1. `logback.xml` ファイルに TCP アペンダーを構成します。この構成では、API キーは環境変数 `DD_API_KEY` から取得されます。あるいは、コンフィギュレーションファイルに直接 API キーを挿入することもできます。
 
@@ -435,7 +441,7 @@ Log4j 2 では、リモートホストへのログ記録が可能ですが、ロ
   サポートされていません。
     {{< /site-region >}}
 
-   **注:** XML コンフィギュレーションで空白が削除されるため、`%mdc{keyThatDoesNotExist}` が追加されます。プレフィックスパラメータの詳細については、[Logback ドキュメント][5]を参照してください。
+   **注:** XML コンフィギュレーションで空白が削除されるため、`%mdc{keyThatDoesNotExist}` が追加されます。プレフィックスパラメータの詳細については、[Logback ドキュメント][10]を参照してください。
 
 2. Logstash エンコーダの依存関係を `pom.xml` ファイルに追加します。
 
@@ -458,7 +464,7 @@ Log4j 2 では、リモートホストへのログ記録が可能ですが、ロ
 
 ### キー値パーサーの使用
 
-[キー値パーサー][6]は、ログイベント内で認識された `<KEY>=<VALUE>` パターンを抽出します。
+[キー値パーサー][11]は、ログイベント内で認識された `<KEY>=<VALUE>` パターンを抽出します。
 
 Java のログイベントを補完するには、コードでメッセージを書き直し、`<キー>=<値>` のシーケンスを挿入します。
 
@@ -511,13 +517,18 @@ logger.info("Emitted 1001 messages during the last 93 seconds");
 
 **注:** MDC は文字列タイプのみを許可するため、数値メトリクスには使用しないでください。
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: http://logback.qos.ch/manual/mdc.html
 [2]: /ja/logs/log_configuration/parsing
-[3]: /ja/tracing/connect_logs_and_traces/java/
-[4]: https://github.com/logstash/logstash-logback-encoder
-[5]: https://github.com/logstash/logstash-logback-encoder#prefixsuffixseparator
-[6]: /ja/logs/log_configuration/parsing/#key-value-or-logfmt
+[3]: /ja/tracing/other_telemetry/connect_logs_and_traces/java/
+[4]: /ja/agent/logs/?tab=tailfiles#activate-log-collection
+[5]: /ja/agent/logs/?tab=tailfiles#custom-log-collection
+[6]: /ja/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[7]: /ja/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
+[8]: /ja/agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information]
+[9]: https://github.com/logstash/logstash-logback-encoder
+[10]: https://github.com/logstash/logstash-logback-encoder#prefixsuffixseparator
+[11]: /ja/logs/log_configuration/parsing/#key-value-or-logfmt

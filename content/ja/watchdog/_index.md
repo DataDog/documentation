@@ -46,17 +46,25 @@ Watchdog は、アプリケーションやインフラストラクチャーの�
 
 Watchdog は、ヒット率が突然急上昇するなど、メトリクスに不規則性がないかを調べます。各不規則性に対して、[Watchdog ページ][11]は Watchdog アラートを表示します。各アラートには、検出されたメトリクスの不規則性のグラフが含まれ、関連する時間枠とエンドポイントまたはエンドポイントに関する詳細な情報を提供します。Watchdog は、Datadog Agent またはインテグレーションによって送信されたデータを自動的に監視します。
 
+メトリクス、ログ、その他のデータの新しいソースに対して、Watchdog は予想される動作のベースラインを確立するために 2 週間のデータを要求します。2 週間未満のデータに基づいて Watchdog が検出した異常には、不正確なものが含まれている可能性があります。
+
 ## サービス一覧画面内の Watchdog
 
-メトリクスに異常が検出された場合、[APM サービス一覧][12]では、その異常が発生しているサービスの横に Watchdog の黄色い双眼鏡アイコンが表示されます。双眼鏡の横の数字は、Watchdog がそのサービス内で認識した問題の数を示しています。
+Watchdog が APM メトリクスに異常を検出すると、[APM サービス一覧][12]の影響を受けるサービスの横にピンク色の Watchdog 双眼鏡のアイコンが表示さ れます。双眼鏡の横の数字は、Watchdog がそのサービス内で検出した問題の数を示しています。
 
-{{< img src="watchdog/service_list.png" alt="Watchdog サービス一覧" style="width:75%;" >}}
+{{< img src="watchdog/service_list.png" alt="APM サービス一覧ページの画面、5 つのサービスが表示されています。Web ストアのサービス名の後にピンクの双眼鏡のアイコンがついています。" style="width:75%;" >}}
 
-特定のサービスで通常と異なる動作が検出された場合、対応する[サービス詳細画面][12]を開くと、ページの中央、アプリケーションパフォーマンスのグラフとレイテンシー分散セクションの間に、その異常に関する Watchdog セクションが表示されます。このセクションには、関連する「Watchdog アラート」が表示されます。
+[サービスページ][13]に移動して、メトリクス異常の詳細を見ることができます。ページの上部には、Watchdog Insights ボックスがあります。Watchdog Insights を使用すると、エラー率やレイテンシーの上昇など、異常な動作に関連するタグ値を発見することができます。
+
+Watchdog のアイコンは、メトリクスグラフにも表示されます。
+
+{{< img src="watchdog/latency_graph.png" alt="サービスのレイテンシー (秒) をY軸に、時間帯を X 軸にとったグラフ。グラフ全体がピンク色で表示され、上部に「May 2: 13:31 Ongoing」と表示されている" style="width:75%;" >}}
+
+双眼鏡のアイコンをクリックすると、詳細が書かれた [Watchdog アラート][14]のカードが表示されます。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
+ご不明な点は [Datadog サポート][15]までお問い合わせください。
 
 ## その他の参考資料
 
@@ -73,5 +81,7 @@ Watchdog は、ヒット率が突然急上昇するなど、メトリクスに�
 [9]: /ja/integrations/amazon_dynamodb/
 [10]: /ja/monitors/
 [11]: https://app.datadoghq.com/watchdog
-[12]: /ja/tracing/visualization/services_list/
-[13]: /ja/help/
+[12]: /ja/tracing/services/services_list/
+[13]: /ja/tracing/services/service_page/#overview
+[14]: /ja/watchdog/alerts#alert-details
+[15]: /ja/help/

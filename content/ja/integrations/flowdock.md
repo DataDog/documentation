@@ -1,16 +1,16 @@
 ---
 categories:
-  - collaboration
-  - notification
-ddtype: crawler
+- collaboration
+- notification
 dependencies: []
 description: Datadog のアラートとグラフをチームのフローに送信。
-doc_link: 'https://docs.datadoghq.com/integrations/flowdock/'
+doc_link: https://docs.datadoghq.com/integrations/flowdock/
 draft: false
 git_integration_title: flowdock
 has_logo: true
-integration_id: flowdock
+integration_id: ''
 integration_title: Flowdock
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -19,6 +19,7 @@ public_title: Datadog-Flowdock インテグレーション
 short_description: Datadog のアラートとグラフをチームのフローに送信。
 version: '1.0'
 ---
+
 {{< img src="integrations/flowdock/flowdock_overview.png" alt="Flowdock の概要" popup="true">}}
 
 ## 概要
@@ -34,7 +35,7 @@ Datadog は、Flowdock のスレッドを利用して、フローに余計な通
 
 ### インストール
 
-Flowdock の統合はたいへん簡単です。Configuration タブで Flowdock にログインするだけで、開いているすべてのフローが取得されるようになります。フローのすべてにポストする必要がない場合は、オートコンプリートリストで表示しないフローを削除できます。これで、ユーザーメッセージまたはモニターで @flowdock ハンドルを使用して、メッセージをフローにポストできます。
+Flowdock を Datadog と統合するには、Flowdock の **Configuration** タブを使用します。開いているすべてのフローが取得されます。フローのすべてにポストする必要がない場合は、オートコンプリートリストで表示しないフローを削除できます。これで、ユーザーメッセージまたはモニターで `@flowdock` ハンドルを使用して、メッセージをフローにポストできます。
 
 ユーザーメッセージとスナップショットはフローのメインスレッドに送られますが、各アラートはそれぞれ独自の Flowdock スレッドにポストされます。これにより、メインスレッドに余計なアラートが紛れ込むことを防ぎ、チームのチャットをクリーンで整理された状態に維持できます。同時に、最近報告されたモニターのステータスは、Inbox ビューでいつでも即座に確認できます。
 

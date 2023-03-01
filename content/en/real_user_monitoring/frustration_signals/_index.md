@@ -26,7 +26,7 @@ Rage Clicks
 : A user clicks on an element more than three times in a one-second sliding window.
 
 Dead Clicks
-: A user clicks on a static element, thinking it is interactive.
+: A user clicks on a static element that produces no action on the page.
 
 Error Clicks
 : A user clicks on an element right before a JavaScript error occurs.
@@ -39,20 +39,20 @@ To start collecting frustration signals, add the following to your SDK configura
 
 ```
 DD_RUM.init({
-  trackInteractions: true,
+  trackUserInteractions: true,
   trackFrustrations: true
 })
 ```
 
-Frustration signals require actions. Enabling `trackFrustrations` automatically enables `trackInteractions`.
+Frustration signals require actions. Enabling `trackFrustrations` automatically enables `trackUserInteractions`.
 
 ## Usage
 
-Frustration signals appear as high-level data points representing sources of user frustration on the [**RUM Applications** page][1]. To display a list of frustration counts in the [RUM Explorer][2], click the **Options** button and add a column for `@session.frustration.count`. 
+Frustration signals appear as high-level data points representing sources of user frustration on the [**RUM Applications** page][1]. To display a list of frustration counts in the [RUM Explorer][2], click the **Options** button and add a column for `@session.frustration.count`.
 
 ### Application list
 
-Hover over the list of browser sessions and click on a session to observe a user's frustrated click behavior. Or, click **Frustrated Sessions** to access sessions with a frustration signal. 
+Hover over the list of browser sessions and click on a session to observe a user's frustrated click behavior. Or, click **Frustrated Sessions** to access sessions with a frustration signal.
 
 ### Explore the frustration signals dashboard
 
@@ -67,7 +67,7 @@ Search through all the data collected by RUM in the [RUM Explorer][4] to surface
 Enter a facet in the search query to start your search. Available search fields include:
 
 Frustration Type
-: Find actions with frustration signals. For example, if you want to see any actions that had a rage click, add `action.frustration_type:rage_click` to the search query.
+: Find actions with frustration signals. For example, if you want to see any actions that had a rage click, add `action.frustration.type:rage_click` to the search query.
 
 Frustration Count
 : Find sessions and views where any frustration signal occurred. For example, if you want to find any user sessions or views with at least one frustration signal, add `session.frustration.count:>1` or `view.frustration.count:>1` to the search query.
@@ -124,7 +124,7 @@ For more information, see the [Real User Monitoring Monitor documentation][9].
 
 ### Why is a rage click not created when a user presses a key (like Delete) on the keyboard?
 
-Frustration signals are generated from mouse clicks, not keyboard strokes. 
+Frustration signals are generated from mouse clicks, not keyboard strokes.
 
 ### Why does the side panel show that a session has a different number of frustration signals than in the event timeline?
 
@@ -147,8 +147,8 @@ To provide feedback or submit a feature request, contact <a href="/help/">Datado
 [3]: /real_user_monitoring/dashboards/frustration_signals_dashboard/
 [4]: https://app.datadoghq.com/rum/explorer
 [5]: /dashboards/
-[6]: /monitors/create/
+[6]: /monitors/
 [7]: https://app.datadoghq.com/rum/replay/sessions/
 [8]: /real_user_monitoring/session_replay/
-[9]: /monitors/create/types/real_user_monitoring/
+[9]: /monitors/types/real_user_monitoring/
 [10]: mailto:success@datadoghq.com

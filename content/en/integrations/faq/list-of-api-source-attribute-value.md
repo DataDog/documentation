@@ -9,7 +9,7 @@ private: true
 
 Post events for specific integrations using the [Events API][1] and the `source_type_name`.
 
-Search for events in the event stream using `sources:<SEARCH_TERM>`.
+Search for events in the event explorer using `sources:<SEARCH_TERM>`.
 
 **Note**: This list includes sources from core Datadog integrations only. Additional sources may come from [community][2] and [Marketplace][3] integrations. 
 
@@ -41,11 +41,14 @@ Search for events in the event stream using `sources:<SEARCH_TERM>`.
 | Amazon Codebuild              | amazon codebuild              | codebuild                  |
 | Amazon Codedeploy             | amazon codedeploy             | codedeploy                 |
 | Amazon Cognito                | amazon cognito                | cognito                    |
+| Amazon Compute Optimizer      | amazon compute optimizer      | amazoncomputeoptimizer     |
+| Amazon Security Lake          | amazon security lake          | amazonsecuritylake         |
 | Amazon Connect                | amazon connect                | awsconnect                 |
 | Amazon Directconnect          | amazon directconnect          | directconnect              |
 | Amazon Dms                    | amazon dms                    | awsdms                     |
 | Amazon Documentdb             | amazon documentdb             | documentdb                 |
 | Amazon Dynamodb               | amazon dynamodb               | dynamodb                   |
+| Amazon Dynamodb Accelerator   | amazon dynamodb accelerator   | dynamodbaccelerator        |
 | Amazon Ebs                    | amazon ebs                    | ebs                        |
 | Amazon Ec2                    | amazon ec2                    | ec2                        |
 | Amazon Ec2 Spot               | amazon ec2 spot               | ec2spot                    |
@@ -56,7 +59,9 @@ Search for events in the event stream using `sources:<SEARCH_TERM>`.
 | Amazon Elastic Transcoder     | amazon elastic transcoder     | elastictranscoder          |
 | Amazon Mediaconnect           | amazon mediaconnect           | mediaconnect               |
 | Amazon Mediaconvert           | amazon mediaconvert           | mediaconvert               |
+| Amazon Medialive              | amazon medialive              | medialive                  |
 | Amazon Mediapackage           | amazon mediapackage           | mediapackage               |
+| Amazon Mediastore             | amazon mediastore             | mediastore                 |
 | Amazon Mediatailor            | amazon mediatailor            | mediatailor                |
 | Amazon Elb                    | amazon elb                    | elb                        |
 | Amazon Emr                    | amazon emr                    | emr                        |
@@ -84,6 +89,7 @@ Search for events in the event stream using `sources:<SEARCH_TERM>`.
 | Amazon Neptune                | amazon neptune                | neptune                    |
 | Amazon Ops Works              | amazon ops works              | opsworks                   |
 | Amazon Polly                  | amazon polly                  | polly                      |
+| Amazon Privatelink            | amazon privatelink            | privatelink                |
 | Amazon Rds                    | amazon rds                    | rds                        |
 | Amazon Rds Proxy              | amazon rds proxy              | rdsproxy                   |
 | Amazon Redshift               | amazon redshift               | redshift                   |
@@ -100,6 +106,8 @@ Search for events in the event stream using `sources:<SEARCH_TERM>`.
 | Amazon Step Functions         | amazon step functions         | stepfunctions              |
 | Amazon Storage Gateway        | amazon storage gateway        | storagegateway             |
 | Amazon Swf                    | amazon swf                    | swf                        |
+| Amazon Textract               | amazon textract               | awstextract                |
+| Amazon Transit Gateway        | amazon transit gateway        | awstransitgateway          |
 | Amazon Translate              | amazon translate              | translate                  |
 | Amazon Trusted Advisor        | amazon trusted advisor        | trustedadvisor             |
 | Amazon Waf                    | amazon waf                    | waf                        |
@@ -116,10 +124,12 @@ Search for events in the event stream using `sources:<SEARCH_TERM>`.
 | Azure App Service Plan        | azure app service plan        | azureappserviceplan        |
 | Azure App Services            | azure app services            | azureappservices           |
 | Azure Application Gateway     | azure application gateway     | azureapplicationgateway    |
+| Azure Arc                     | azure arc                     | azurearc                   |
 | Azure Automation              | azure automation              | azureautomation            |
 | Azure Batch                   | azure batch                   | azurebatch                 |
 | Azure Blob Storage            | azure blob storage            | azureblobstorage           |
 | Azure Cognitive Services      | azure cognitive services      | azurecognitiveservices     |
+| Azure Container Apps          | azure container apps          | azurecontainerapps         |
 | Azure Container Instances     | azure container instances     | azurecontainerinstances    |
 | Azure Container Service       | azure container service       | azurecontainerservice      |
 | Azure Cosmosdb                | azure cosmosdb                | azurecosmosdb              |
@@ -130,6 +140,7 @@ Search for events in the event stream using `sources:<SEARCH_TERM>`.
 | Azure Db For Mariadb          | azure db for mariadb          | azuredbformariadb          |
 | Azure Db For Mysql            | azure db for mysql            | azuredbformysql            |
 | Azure Db For Postgresql       | azure db for postgresql       | azuredbforpostgresql       |
+| Azure Cosmosdb For Postgresql | azure cosmosdb for postgresql | azurecosmosdbforpostgresql |
 | Azure Devops                  | azure devops                  | azuredevops                |
 | Azure Event Grid              | azure event grid              | azureeventgrid             |
 | Azure Event Hub               | azure event hub               | azureeventhub              |
@@ -199,6 +210,7 @@ Search for events in the event stream using `sources:<SEARCH_TERM>`.
 | Go                            | go                            | go                         |
 | Go Expvar                     | go expvar                     | goexpvar                   |
 | Google App Engine             | google app engine             | gae                        |
+| Google Cloud Alloydb          | google cloud alloydb          | gcpalloydb                 |
 | Google Cloud Apis             | google cloud apis             | gcpapis                    |
 | Google Cloud Audit Logs       | google cloud audit logs       | gcpauditlogs               |
 | Google Cloud Big Query        | google cloud big query        | gcpbigquery                |
@@ -230,6 +242,7 @@ Search for events in the event stream using `sources:<SEARCH_TERM>`.
 | Google Cloudsql               | google cloudsql               | gcpcloudsql                |
 | Google Compute Engine         | google compute engine         | gcpcompute                 |
 | Google Container Engine       | google container engine       | gcpcontainer               |
+| Google Eventarc               | google eventarc               | gcpeventarc                |
 | Google Hangouts Chat          | google hangouts chat          | hangouts                   |
 | Google Kubernetes Engine      | google kubernetes engine      | gke                        |
 | Google Workspace Alert Center | google workspace alert center | googleworkspacealertcenter |
@@ -245,6 +258,7 @@ Search for events in the event stream using `sources:<SEARCH_TERM>`.
 | Jira                          | jira                          | jira                       |
 | Jumpcloud                     | jumpcloud                     | jumpcloud                  |
 | Kafka                         | kafka                         | kafka                      |
+| Knative For Anthos            | knative for anthos            | knativeforanthos           |
 | Kong                          | kong                          | kong                       |
 | Kubernetes                    | kubernetes                    | kubernetes                 |
 | Kyoto Tycoon                  | kyoto tycoon                  | kyototycoon                |
@@ -293,7 +307,10 @@ Search for events in the event stream using `sources:<SEARCH_TERM>`.
 | Rollbar                       | rollbar                       | rollbar                    |
 | Ruby                          | ruby                          | ruby                       |
 | Salesforce                    | salesforce                    | salesforce                 |
+| Salesforce Commerce Cloud     | salesforce commerce cloud     | salesforcecommercecloud    |
+| Salesforce Incidents          | salesforce incidents          | salesforceincidents        |
 | Segment                       | segment                       | segment                    |
+| Sendgrid                      | sendgrid                      | sendgrid                   |
 | Sentry                        | sentry                        | sentry                     |
 | Servicenow                    | servicenow                    | servicenow                 |
 | Slack                         | slack                         | slack                      |
@@ -324,6 +341,7 @@ Search for events in the event stream using `sources:<SEARCH_TERM>`.
 | Zabbix                        | zabbix                        | zabbix                     |
 | Zendesk                       | zendesk                       | zendesk                    |
 | Zookeeper                     | zookeeper                     | zookeeper                  |
+| Zscaler                       | zscaler                       | zscaler                    |
 
 
 [1]: /api/latest/events/

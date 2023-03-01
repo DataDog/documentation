@@ -25,7 +25,7 @@ Distributions provide enhanced query functionality and configuration options tha
 
   * **Percentile thresholds on metric monitors**:
   
-    _“Alert me when the p99 of my application’s request latency is greater than 200 ms for the last 5 min.”_
+    _“Alert me when the p95 of my application’s request latency is greater than 200 ms for the last 5 min.”_
 
   * **Threshold Queries**:
   
@@ -58,7 +58,7 @@ You can use percentile aggregations in a variety of other widgets and for alerti
 {{< img src="metrics/distributions/percentile_qvw.jpg" alt="A query value widget displaying a single value (7.33s) for the 99.99 percentile aggregation of a single metric" style="width:80%;">}}
 
 * **Percentile thresholds on metric monitors**
-  _“Alert me when the p99 of my application’s request latency is greater than 200 ms for the last 5 min.”_ 
+  _“Alert me when the p95 of my application’s request latency is greater than 200 ms for the last 5 min.”_ 
 
 {{< img src="metrics/distributions/percentile_monitor.jpg" alt="Percentile threshold being set with a drop down for alert conditions in a monitor " style="width:80%;">}}
 
@@ -101,7 +101,7 @@ To customize tagging:
 {{< img src="metrics/distributions/dist_manage.jpg" alt="Configuring tags on a distribution with the Manage Tags button" style="width:80%;">}}
 
 ## Audit events
-Any tag configuration or percentile aggregation changes create an event in the [event stream][3]. This event explains the change and displays the user that made the change.
+Any tag configuration or percentile aggregation changes create an event in the [event explorer][3]. This event explains the change and displays the user that made the change.
 
 If you created, updated, or removed a tag configuration on a distribution metric, you can see examples with the following event search:
 ```text
@@ -120,4 +120,4 @@ https://app.datadoghq.com/event/stream?tags_execution=and&per_page=30&query=tags
 
 [1]: /metrics/types/
 [2]: https://www.datadoghq.com/blog/engineering/computing-accurate-percentiles-with-ddsketch/
-[3]: https://app.datadoghq.com/event/stream
+[3]: https://app.datadoghq.com/event/explorer

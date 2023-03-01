@@ -44,7 +44,7 @@ john connected on 11/08/2017
 With the following parsing rule:
 
 ```text
-MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):connect_date}
+MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):date}
 ```
 
 After processing, the following structured log is generated:
@@ -181,7 +181,7 @@ Here is a list of all the matchers and filters natively implemented by Datadog:
 `uppercase`
 : Returns the upper-cased string.
 
-`keyvalue([separatorStr[, characterWhiteList[, quotingStr[, delimiter]]]])`
+`keyvalue([separatorStr[, characterAllowList[, quotingStr[, delimiter]]]])`
 : Extracts the key value pattern and returns a JSON object. See the [key-value filter examples](#key-value-or-logfmt).
 
 `xml`
@@ -261,10 +261,10 @@ Some examples demonstrating how to use parsers:
 
 ### Key value or logfmt
 
-This is the key-value core filter: `keyvalue([separatorStr[, characterWhiteList[, quotingStr[, delimiter]]]])` where:
+This is the key-value core filter: `keyvalue([separatorStr[, characterAllowList[, quotingStr[, delimiter]]]])` where:
 
 * `separatorStr`: defines the separator between key and values. Defaults to `=`.
-* `characterWhiteList`: defines extra non-escaped value chars in addition to the default `\\w.\\-_@`. Used only for non-quoted values (for example, `key=@valueStr`).
+* `characterAllowList`: defines extra non-escaped value chars in addition to the default `\\w.\\-_@`. Used only for non-quoted values (for example, `key=@valueStr`).
 * `quotingStr`: defines quotes, replacing the default quotes detection: `<>`, `""`, `''`.
 * `delimiter`: defines the separator between the different key values pairs (for example, `|`is the delimiter in `key1=value1|key2=value2`). Defaults to ` ` (normal space), `,` and `;`.
 
@@ -305,7 +305,7 @@ rule %{data::keyvalue(": ")}
 
 {{< img src="logs/processing/parsing/key_value_parser.png" alt="Key value parser"  style="width:80%;" >}}
 
-If logs contain special characters in an attribute value, such as `/` in a url for instance, add it to the whitelist in the parsing rule:
+If logs contain special characters in an attribute value, such as `/` in a url for instance, add it to the allowlist in the parsing rule:
 
 **Log:**
 
@@ -319,7 +319,7 @@ url=https://app.datadoghq.com/event/stream user=john
 rule %{data::keyvalue("=","/:")}
 ```
 
-{{< img src="logs/processing/parsing/key_value_whitelist.png" alt="Key value whitelist"  style="width:80%;" >}}
+{{< img src="logs/processing/parsing/key_value_allowlist.png" alt="Key value allowlist" style="width:80%;" >}}
 
 Other examples:
 

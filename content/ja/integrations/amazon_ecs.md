@@ -1,27 +1,27 @@
 ---
 aliases:
-  - /ja/integrations/ecs/
+- /ja/integrations/ecs/
 categories:
-  - cloud
-  - containers
-  - aws
-  - log collection
-ddtype: crawler
+- cloud
+- containers
+- aws
+- log collection
 dependencies: []
 description: コンテナ ステータスのモニタリングやリソース使用状況のトラッキングなど。
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_ecs/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_ecs/
 draft: false
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/amazon-ecs-metrics'
-    tag: ブログ
-    text: キー ECS メトリクスの監視
-  - link: 'https://docs.datadoghq.com/integrations/ecs_fargate'
-    tag: Documentation
-    text: ECS Fargate インテグレーション
+- link: https://www.datadoghq.com/blog/amazon-ecs-metrics
+  tag: ブログ
+  text: キー ECS メトリクスの監視
+- link: https://docs.datadoghq.com/integrations/ecs_fargate
+  tag: Documentation
+  text: ECS Fargate インテグレーション
 git_integration_title: amazon_ecs
 has_logo: true
 integration_id: amazon-ecs
 integration_title: Amazon ECS on EC2
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -30,8 +30,9 @@ public_title: Datadog-Amazon ECS on EC2 インテグレーション
 short_description: コンテナ ステータスのモニタリングやリソース使用状況のトラッキングなど。
 version: '1.0'
 ---
+
 <div class="alert alert-warning">
-コンテナ化された Datadog Agent を ECS クラスターにデプロイする方法については、専用の <a href="https://docs.datadoghq.com/agent/amazon_ecs/"><b>Amazon ECS Agent ドキュメント</b></a>を参照してください。
+コンテナ化された Datadog Agent を ECS クラスターにデプロイする方法については、<a href="https://docs.datadoghq.com/agent/amazon_ecs/"><b>Amazon ECS Agent ドキュメント</b></a>を参照してください。
 </div>
 
 ## 概要
@@ -49,11 +50,11 @@ Amazon ECS Datadog インテグレーションを利用し、CloudWatch から E
 ### メトリクスの収集
 
 1. AWS インテグレーションの [ロールの委任設定][1] に関する手順に従います。
-2. [AWS タイル][2]で、IAM ロール名を入力し、**Limit metric collection**の下にある **ECS** ボックスにチェックマークを付けます。
+2. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `ECS` が有効になっていることを確認します。
 
     {{< img src="integrations/amazon_ecs/aws_tile.png" alt="AWS ECS コンフィギュレーション" >}}
 
-メトリクスの収集が有効な場合、ECS メトリクスの詳細を提供する[ダッシュボード][3]をこのインテグレーションで利用できます。[ダッシュボード][4]の詳細をご覧ください。
+メトリクスの収集が有効な場合、ECS メトリクスの詳細を提供する[ダッシュボード][3]をこのインテグレーションで利用できます。詳細は、[Datadog で ECS をモニタリング][4]をご覧ください。
 
 ## 収集データ
 
@@ -63,7 +64,7 @@ Amazon ECS Datadog インテグレーションを利用し、CloudWatch から E
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
-**注**: `ecs.containerinsights.*` をプレフィックスに持つメトリクスは、[AWS CloudWatch エージェント][2]に基づいています。
+**注**: [AWS インテグレーションページ][2]の `Metric Collection` タブで `Collect custom metrics` を有効にすることで、プレフィックスに `ecs.containerinsights.*` を持つメトリクスを収集することができます。
 
 ### イベント
 
@@ -71,7 +72,7 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 
 {{< img src="integrations/amazon_ecs/aws_ecs_events.png" alt="AWS ECS イベント" >}}
 
-ホワイトリストを削除し、Datadog Amazon ECS インテグレーションからすべてのイベントを取得できるようにするには、[Datadog のサポートチーム][6]までお問い合わせください。
+包含リストを削除し、Datadog Amazon ECS インテグレーションからすべてのイベントを取得できるようにするには、[Datadog のサポートチーム][6]までお問い合わせください。
 
 ### サービスのチェック
 {{< get-service-checks-from-git "amazon_ecs" >}}
@@ -82,7 +83,7 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=automaticcloudformation#setup
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/screen/integration/82/aws-ecs
 [4]: https://www.datadoghq.com/blog/monitoring-ecs-with-datadog/#get-comprehensive-visibility-with-datadog-dashboards
 [5]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_ecs/amazon_ecs_metadata.csv

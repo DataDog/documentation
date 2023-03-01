@@ -3,7 +3,7 @@ title: Troubleshoot Database Monitoring setup for MySQL
 kind: documentation
 description: Troubleshoot Database Monitoring setup
 ---
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
@@ -88,6 +88,18 @@ DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true agent check sqlserver -t 2
 
 Some or all queries may not have plans available. This can be due to unsupported query commands, queries made by unsupported client applications, an outdated Agent, or incomplete database setup. Below are possible causes for missing explain plans.
 
+#### Missing event statements consumer {#events-statements-consumer-missing}
+To capture explain plans, you must enable an event statements consumer. You can do this by adding the following option to your configuration files (for example, `mysql.conf`):
+```
+performance-schema-consumer-events-statements-current=ON
+```
+
+Datadog additionally recommends enabling the following:
+```
+performance-schema-consumer-events-statements-history-long=ON
+```
+This option enables the tracking of a larger number of recent queries across all threads. Turning it on increases the likelihood of capturing execution details from infrequent queries.
+
 #### Missing explain plan procedure {#explain-plan-procedure-missing}
 The Agent requires the procedure `datadog.explain_statement(...)` to exist in the `datadog` schema. Read the [setup instructions][1] for details on the creation of the `datadog` schema.
 
@@ -148,7 +160,7 @@ Before following these steps to diagnose missing query metric data, ensure the A
 The Agent requires the `performance_schema` option to be enabled. It is enabled by default by MySQL, but may be disabled in configuration or by your cloud provider. Follow the [setup instructions][1] for enabling it.
 
 #### Google Cloud SQL limitation
-The host is managed by Google Cloud SQL and does not support `performance_schema`. Due to limitations with Google Cloud SQL, Datadog Database Monitoring is [not supported on instances with less than 26GB of RAM][6].
+The host is managed by Google Cloud SQL and does not support `performance_schema`. Due to limitations with Google Cloud SQL, Datadog Database Monitoring is [not supported on instances with less than 16GB of RAM][6].
 
 ### Certain queries are missing
 

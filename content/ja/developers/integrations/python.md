@@ -1,56 +1,178 @@
 ---
-title: Agent インテグレーション開発のための Python
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/docs/dev/python.md
 kind: documentation
+title: Datadog Agent Integration Developer Tool をインストールする
 ---
-
 このドキュメントでは、インタープリターのインストール、必要な依存関係がすべて存在することの確認など、Agent ベースのインテグレーションを開発するための Python 環境の設定方法について説明します。
-
-## Python 2 か Python 3 か
-
-インテグレーションは、Agent の埋め込み Python 環境またはテスト環境のいずれかで動作します。埋め込み環境の現在のバージョンは、[Omnibus コード][1]に記録されています。Agent およびテスト環境は Agent v6 では Python 2 、Agent v7 の場合は Python 3 となります。お使いのインテグレーションが、両方のバージョンとの互換性を有することを確認してください。
 
 ## Python のインストール
 
-Python は多くのオペレーティングシステムにプレインストールされています。ご使用のシステムの Python が古すぎたり、プレインストールされていない場合は、適切なバージョンをインストールする必要があります。オペレーティングシステムへの Python のインストールとそのメンテナンスはこのドキュメントの範囲外ですが、いくつかの参考情報を提供いたします。
+多くのオペレーティングシステムには、Python のプレインストール版が搭載されています。しかし、デフォルトでインストールされている Python のバージョンは、Agent で使用するバージョンよりも古い場合があり、必要なツールや依存関係が不足している場合があります。インテグレーションを実行するために必要なものがすべて揃っていることを確認するために、専用の Python インタプリターをインストールしてください。
 
-### macOS
+{{< tabs >}}
 
-macOS の最新バージョンには Python がプレインストールされています。ただし、Agent で使用されているバージョンより古かったり、必要なツールや依存関係が不足していたりする可能性もあります。そのため、App Store なしで管理できる専用の Python インタープリターを新しくインストールする必要があります。
+{{% tab "MacOS" %}}
+[Homebrew][1] を使って Python 3.8 をインストールします。
 
-以下の選択肢があります。
+1. Homebrew を更新します。
+   ```
+   brew update
+   ```
 
-- [Homebrew][2]: 「[基本の使用手順][3]」ガイドを参照してください。
-- [Miniconda][4]: 「[Conda のインストール][5]」ガイドに従ってください。
+1. Python をインストールします。
+   ```
+   brew install python@3.8
+   ```
 
-システム上でクリーンな Python 環境を維持するには、[環境マネージャー](#仮想環境マネージャー)のインストールをお勧めします。
+1. Homebrew のインストール出力を確認し、インストールスクリプトが推奨する追加のコマンドを実行します。
 
-### Linux
+1. Python のバイナリが `PATH` にインストールされていることと、正しいバージョンがインストールされていることを確認します。
+   ```
+   which python3.8
+   ```
 
-主要な Linux ディストリビューションには、たいてい許容可能なバージョンレベルの Python がプレインストールされています。システム上でのクリーンな Python 環境を維持するには、[環境マネージャー](#仮想環境マネージャー)のインストールをお勧めします。詳細については、ディストリビューションのパッケージ管理ドキュメントを参照してください。
+   お使いの Mac のアーキテクチャに応じて、以下の出力が表示されるはずです。
+   - ARM (M1+) マシン:
+     ```
+     /opt/homebrew/bin/python3.8
+     ```
+   - Intel マシンの MacOS:
+     ```
+     /usr/local/bin/python3.8
+     ```
 
-### Windows
+[1]: https://brew.sh/
+{{< /tabs >}}
 
-Windows には 、通常 Python 環境がありません。[Python 公式ドキュメント][6]に掲載されている、インストールの詳細な手順と、他のドキュメントやツールへのリンクを参照してください。
+{{% tab "Windows" %}}
+1. [Python 3.8 64-bit 実行形式インストーラー][1]をダウンロードし、実行します。
+1. Python を PATH に追加するオプションを選択します。
+1. **Install Now** をクリックします。
+1. インストールが完了したら、マシンを再起動します。
+1. Python のバイナリが `PATH` にインストールされていることを確認します。
+   ```
+   > where python
 
-## 仮想環境マネージャー
+   C:\Users\<USER>\AppData\Local\Programs\Python\Python38\python.exe
+   ```
 
-インテグレーションはそれぞれ独自の依存関係を持ちます。テストを実行したり、収集コードを実行したりしてみるには、それらの依存関係を Python に追加する必要があります。特定のインテグレーションしか使用しないライブラリやパッケージによって Python インストールが汚染されないようにするには、「仮想環境」を使用します。仮想環境は、Python インストールを隔離するための自己完結型のディレクトリツリーです。仮想環境がアクティブな場合は、インストールしたパッケージがすべてこのディレクトリに格納され、システム全体の Python インストールには影響しません。
+[1]: https://www.python.org/downloads/release/python-3810/
+{{< /tabs >}}
 
-### Virtualenv と virtualenvwrapper
+{{% tab "Linux" %}}
+Linux のインストールでは、システムの Python を変更することは避けてください。Datadog は、[pyenv][1] または [miniconda][2] を使用して Python 3.8 をインストールすることを推奨します。
 
-Python 仮想環境の管理には、[Virtualenv][7] の使用をお勧めします。さらに、円滑な処理のために [virtualenvwrapper][8] の使用をお勧めします。Hitchhiker's Guide to Python には、この 2 つのツールのセットアップ方法が[包括的に説明][9]されています。
+[1]: https://github.com/pyenv/pyenv#automatic-installer
+[2]: https://conda.io/projects/conda/en/stable/user-guide/install/linux.html
+{{< /tabs >}}
 
-### Miniconda
+{{< /tabs >}}
 
-Miniconda を使用している場合は、仮想環境を管理するツールが含まれています。詳細については、[公式ガイド][10]を参照してください。
+## pipx のインストール
 
-[1]: https://github.com/DataDog/omnibus-software/blob/master/config/software/python.rb#L21
-[2]: https://brew.sh/#install
-[3]: https://docs.python-guide.org/en/latest/starting/install/osx/#doing-it-right
-[4]: https://repo.continuum.io/miniconda/Miniconda2-latest-MacOSX-x86_64.sh
-[5]: https://docs.conda.io/projects/continuumio-conda/en/latest/user-guide/install/macos.html
-[6]: https://docs.python.org/2.7/using/windows.html
-[7]: https://pypi.python.org/pypi/virtualenv
-[8]: https://virtualenvwrapper.readthedocs.io/en/latest/index.html
-[9]: https://docs.python-guide.org/en/latest/dev/virtualenvs/#lower-level-virtualenv
-[10]: https://conda.io/docs/user-guide/tasks/manage-environments.html
+`pipx` python パッケージは `ddev` コマンドラインツールに必要です。
+
+{{< tabs >}}
+{{% tab "MacOS" %}}
+1. pipx をインストールします。
+   ```
+   brew install pipx
+   ```
+1. Homebrew のインストール出力を確認し、インストールスクリプトが推奨する追加のコマンドを実行します。
+
+1. pipx がインストールされていることを確認します。
+   ```
+   which pipx
+   ```
+
+   お使いの Mac のアーキテクチャに応じて、以下の出力が表示されるはずです。
+   - ARM (M1+) マシン:
+     ```
+     /opt/homebrew/bin/pipx
+     ```
+   - Intel マシンの MacOS:
+     ```
+     /usr/local/bin/pipx
+     ```
+
+{{< /tabs >}}
+
+{{% tab "Windows" %}}
+1. pipx をインストールします。
+   ```
+   python -m pip install pipx
+   ```
+
+1. pipx がインストールされていることを確認します。
+   ```
+   > where pipx
+   C:\Users\<USER>\AppData\Local\Programs\Python\Python38\Scripts\pipx.exe
+   ```
+
+{{< /tabs >}}
+
+{{% tab "Linux" %}}
+1. pipx をインストールします。
+   ```
+   python -m pip install pipx
+   ```
+1. pipx がインストールされていることを確認します。
+   ```
+   pipx --version
+   ```
+{{< /tabs >}}
+{{< /tabs >}}
+
+## Datadog Agent Integration Developer Tool をインストールする
+
+{{< tabs >}}
+{{% tab "MacOS" %}}
+
+1. 以下のコマンドを実行し、出力に表示されている実行ファイルをすべて削除します。
+   ```
+   which -a ddev
+   ```
+
+1. 仮想環境が起動していないことを確認します。
+   1. 次のコマンドを実行します。
+      ```
+      echo $VIRTUAL_ENV
+      ```
+
+   1. コマンドが出力を返した場合、仮想環境は実行されています。仮想環境を終了するには、`deactivate` を実行します。
+
+1. `ddev` をインストールします。
+   <div class="alert alert-warning">このコマンドは <code>sudo</code> で実行しないでください。</a></div>
+
+   - ARM (M1+) マシン:
+     ```
+     pipx install ddev --python /opt/homebrew/bin/python3.8
+     ```
+
+   - Intel マシンの MacOS:
+     ```
+     pipx install ddev --python /usr/local/bin/python3.8
+     ```
+
+1. インストール出力を確認し、インストールスクリプトが推奨する追加のコマンドを実行します。
+
+{{< /tabs >}}
+
+{{% tab "Windows" %}}
+1. `ddev` をインストールするには、以下を実行します。
+   ```
+   pipx install ddev
+   ```
+
+{{< /tabs >}}
+
+{{% tab "Linux" %}}
+1. `ddev` をインストールするには、以下を実行します。
+   <div class="alert alert-warning">このコマンドは `sudo` で実行しないでください。</a></div>
+
+   ```
+   pipx install ddev
+   ```
+{{< /tabs >}}
+{{< /tabs >}}

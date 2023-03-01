@@ -10,6 +10,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/log-file-control-with-logrotate/"
   tag: "Blog"
   text: "How to manage log files using Logrotate"
+- link: "/agent/logs/advanced_log_collection"
+  tag: "Documentation"
+  text: "Advanced log collection configurations"
 - link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Discover how to process your logs"
@@ -41,7 +44,7 @@ Consult the [list of available Datadog log collection endpoints](#logging-endpoi
 {{% tab "Host" %}}
 
 1. Install the [Datadog Agent][1].
-2. To enable log collection, change `logs_enabled:false` to `logs_enabled:true` in your Agent’s main configuration file (`datadog.yaml`). See the [Host Agent Log collection documentation][5] for more information and examples.
+2. To enable log collection, change `logs_enabled: false` to `logs_enabled: true` in your Agent’s main configuration file (`datadog.yaml`). See the [Host Agent Log collection documentation][5] for more information and examples.
 3. Once enabled, the Datadog Agent can be configured to [tail log files or listen for logs sent over UDP/TCP][2], [filter out logs or scrub sensitive data][3], and [aggregate multi-line logs][4].
 
 [1]: https://app.datadoghq.com/account/settings#agent
@@ -54,7 +57,7 @@ Consult the [list of available Datadog log collection endpoints](#logging-endpoi
 {{% tab "Application" %}}
 
 1. Install the [Datadog Agent][1].
-2. To enable log collection, change `logs_enabled:false` to `logs_enabled:true` in your Agent’s main configuration file (`datadog.yaml`). See the [Host Agent Log collection documentation][2] for more information and examples.
+2. To enable log collection, change `logs_enabled: false` to `logs_enabled: true` in your Agent’s main configuration file (`datadog.yaml`). See the [Host Agent Log collection documentation][2] for more information and examples.
 3. Follow your application language installation instructions to configure a logger and start generating logs:
 
 {{< partial name="logs/logs-languages.html" >}}
@@ -127,6 +130,7 @@ Use the [site][13] selector dropdown on the right side of the page to see suppor
 | Site | Type        | Endpoint                                                                  | Port         | Description                                                                                                                                                                 |
 |------|-------------|---------------------------------------------------------------------------|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | US   | HTTPS       | `http-intake.logs.datadoghq.com`                                          | 443   | Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [Logs HTTP API documentation][1].                                                    |
+| US   | HTTPS       | `agent-http-intake-pci.logs.datadoghq.com`                                | 443   | Used by the Agent to send logs over HTTPS to an org with PCI DSS compliance enabled. See [PCI DSS compliance for Log Management][3] for more information.                 |
 | US   | HTTPS       | `agent-http-intake.logs.datadoghq.com`                                    | 443   | Used by the Agent to send logs in JSON format over HTTPS. See the [Host Agent Log collection documentation][2].                                                             |
 | US   | HTTPS       | `lambda-http-intake.logs.datadoghq.com`                                   | 443   | Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS.                                                                                            |
 | US   | HTTPS       | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443   | Used by the Browser SDK to send logs in JSON format over HTTPS.                                                                                                             |
@@ -138,6 +142,7 @@ Use the [site][13] selector dropdown on the right side of the page to see suppor
 
 [1]: /api/latest/logs/#send-logs
 [2]: /agent/logs/#send-logs-over-https
+[3]: /data_security/logs/#pci-dss-compliance-for-log-management
 {{< /site-region >}}
 
 {{< site-region region="eu" >}}
@@ -188,7 +193,7 @@ Use the [site][13] selector dropdown on the right side of the page to see suppor
 
 | Site    | Type  | Endpoint                                                                  | Port | Description                                                                                                              |
 |---------|-------|---------------------------------------------------------------------------|------|--------------------------------------------------------------------------------------------------------------------------|
-| US1-FED | HTTPS | `http-intake.logs.ddog-gov.datadoghq.com`                                 | 443  | Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [Logs HTTP API documentation][1]. |
+| US1-FED | HTTPS | `http-intake.logs.ddog-gov.com`                                          | 443  | Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [Logs HTTP API documentation][1]. |
 | US1-FED | HTTPS | `lambda-http-intake.logs.ddog-gov.datadoghq.com`                          | 443  | Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS.                                         |
 | US1-FED | HTTPS | `agent-http-intake.logs.ddog-gov.datadoghq.com`                           | 443  | Used by the Agent to send logs in JSON format over HTTPS. See the [Host Agent Log collection documentation][2].          |
 | US1-FED | HTTPS | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443  | Used by the Browser SDK to send logs in JSON format over HTTPS.                                                          |
@@ -320,7 +325,7 @@ Once logs are collected and ingested, they are available in **Log Explorer**. Lo
 [3]: /integrations/nxlog/
 [4]: /integrations/fluentd/#log-collection
 [5]: /integrations/logstash/#log-collection
-[6]: /security/logs/#information-security
+[6]: /data_security/logs/#information-security
 [7]: /agent/logs/#send-logs-over-https
 [8]: /api/v1/logs/#send-logs
 [9]: /logs/explorer/facets/

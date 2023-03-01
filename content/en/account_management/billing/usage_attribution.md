@@ -19,20 +19,24 @@ Usage Attribution is an advanced feature included in the Enterprise plan. For al
 Administrators can access the Usage Attribution tab from the Plan & Usage section in Datadog. The Usage Attribution page provides the following information and functionality:
 
 - Lists the existing tag keys that usage is being broken down by and provides the ability to change and add new ones (up to three tag keys).
-- Generates daily `.tsv` (tab separated values) files for most usage types.
+- Generates daily tab separated values (TSV) files for most usage types.
 - Summarizes usage at the end of each month.
-- Surfaces the data both in the UI and as a `.tsv` download.
+- Surfaces the data both in the UI and as a TSV download.
 
-The following usage types are not supported in this tool:
+A number of usage types are not supported in this tool, including:
 
 - Analyzed Logs (Security)
 - Incident Management
+- Network Flows
+- CI Spans
+
+Datadog offers Estimated Usage Attribution values for the following products: 
+
 - Indexed Log Events
 - Ingested Logs
 - Indexed Spans
 - Ingested Spans
-- Network Flows
-- Real User Monitoring
+- Total Real User Monitoring Sessions
 
 ## Getting started
 
@@ -58,7 +62,7 @@ The **Applied Tags** section enables the following:
 
 Once the reports start to be generated, they are updated daily and aggregated monthly in this table.
 
-{{< img src="account_management/billing/usage_attribution/UsageAttributionV2.png" alt="Applied tags in Datadog" style="width:100%;" >}}
+{{< img src="account_management/billing/usage_attribution/Usage-Attribution-v2-Total-Usage.png" alt="Applied tags in Datadog" style="width:100%;" >}}
 
 - Data is shown by all tag keys selected e.g. by app and service. 
 - Data can be shown by specific organization or tag keys by querying on the left-side dropdown. 
@@ -70,20 +74,13 @@ Once the reports start to be generated, they are updated daily and aggregated mo
 - If multi-org is enabled, usage is summarized across all Datadog organizations at the parent account.
 - Previous months' reports are accessible through the time selector.
 - Monthly reports are not generated until the month is over. Each monthly report should appear by the second day of the following month.
-- Reports are downloadable with the **Download as CSV** button. These `.tsv` reports include both usage numbers and percentages, allowing for simplified allocations and chargebacks.
+- Reports are downloadable in TSV format. These TSV reports include both usage numbers and percentages, allowing for simplified allocations and chargebacks.
 
 Monthly data can also be pulled using the tool's public API. For more information, see the [API endpoint documentation][1].
 
-### Daily usage attribution
+### Hourly usage attribution
 
-This section provides daily reports at an hourly granularity to dig into time frames. It also provides a concatenation of all reports during a given month.
-
-- Clicking on a specific time period expands a view on the right where reports can be downloaded as a `.tsv`.
-- Data can be downloaded daily or at the end of the month.
-
-{{< img src="account_management/billing/usage_attribution/daily-usage-attribution.png" alt="Daily Usage Attribution data" style="width:100%;" >}}
-
-Daily data can also be pulled using the tool's public API. For more information, see the [API endpoint documentation][2].
+Hourly data can be pulled using the tool's public API. For more information, see the [API endpoint documentation][2].
 
 ### Interpreting the data
 
@@ -102,7 +99,7 @@ The table below shows a sample daily report for Infra usage by two tags: `app` a
 
 #### Further data analysis
 
-When using multiple tags, both the Daily and Monthly Usage Attribution reports contain data for all possible combinations of those tags, and are suitable to use as base datasets for further data analysis tasks. For instance, you can use grouping or pivoting to produce views focused on a subset of the tags, or to perform aggregations across custom date ranges.
+When using multiple tags, both the Hourly and Monthly Usage Attribution reports contain data for all possible combinations of those tags, and are suitable to use as base datasets for further data analysis tasks. For instance, you can use grouping or pivoting to produce views focused on a subset of the tags, or to perform aggregations across custom date ranges.
 
 ## Tracking usage
 

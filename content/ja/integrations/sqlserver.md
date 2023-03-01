@@ -1,48 +1,72 @@
 ---
+app_id: sql-server
+app_uuid: bfa2f276-da05-4153-b8d4-48d4e41f5e40
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
+    SQLServer-AlwaysOn: assets/dashboards/SQLServer-AlwaysOn_dashboard.json
     SQLServer-Overview: assets/dashboards/SQLServer-Overview_dashboard.json
     sqlserver: assets/dashboards/sqlserver_dashboard.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: sqlserver.stats.connections
+      metadata_path: metadata.csv
+      prefix: sqlserver.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: SQL Server
   logs:
     source: sqlserver
-  metrics_metadata: metadata.csv
   monitors:
     SQLServer ao not healthy: assets/recommended_monitors/sqlserver_ao_not_healthy.json
     SQLServer db not in sync: assets/recommended_monitors/sqlserver_db_not_sync.json
     SQLServer db not online: assets/recommended_monitors/sqlserver_db_not_online.json
     SQLServer high failed auto param: assets/recommended_monitors/sqlserver_high_number_failed_auto_param.json
     SQLServer high processes blocked: assets/recommended_monitors/sqlserver_high_processes_blocked.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - data store
 - log collection
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/sqlserver/README.md
-display_name: SQL Server
+display_on_public_website: true
 draft: false
 git_integration_title: sqlserver
-guid: 635cb962-ee9f-4788-aa55-a7ffb9661498
 integration_id: sql-server
 integration_title: SQL Server
-integration_version: 8.0.0
+integration_version: 10.1.2
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: sqlserver.
-metric_to_check: sqlserver.stats.connections
+manifest_version: 2.0.0
 name: sqlserver
-public_title: Datadog-SQL Server インテグレーション
+oauth: {}
+public_title: SQL Server
 short_description: SQL Server の重要なパフォーマンスメトリクスと健全性メトリクスを収集。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::データストア
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: SQL Server の重要なパフォーマンスメトリクスと健全性メトリクスを収集。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: SQL Server
 ---
 
 
@@ -57,7 +81,9 @@ SQL Server チェックを使用して、SQL Server インスタンスのパフ�
 
 ## セットアップ
 
-### インストール
+<div class="alert alert-info">このページでは、SQL Server Agent のインテグレーションについて説明します。SQL Server のデータベースモニタリング製品をお求めの場合は、<a href="https://docs.datadoghq.com/database_monitoring" target="_blank">Datadog データベースモニタリング</a>をご覧ください。</div>
+
+### APM に Datadog Agent を構成する
 
 SQL Server チェックは [Datadog Agent][2] パッケージに含まれています。SQL Server インスタンスに追加でインストールする必要はありません。
 

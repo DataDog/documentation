@@ -15,7 +15,7 @@ aliases:
     - /serverless/datadog_lambda_library/go/
 ---
 
-<div class="alert alert-warning">If your Go Lambda functions are still using runtime <code>go1.x</code> and you cannot migrate to the <code>provided.al2</code> runtime, you must <a href="https://docs.datadoghq.com/serverless/guide/datadog_forwarder_go">instrument using the Datadog Forwarder</a> instead.</div>
+<div class="alert alert-warning">If your Go Lambda functions are still using runtime <code>go1.x</code> and you cannot migrate to the <code>provided.al2</code> runtime, you must <a href="https://docs.datadoghq.com/serverless/guide/datadog_forwarder_go">instrument using the Datadog Forwarder</a>. Otherwise, follow the instructions in this guide to instrument using the Datadog Lambda Extension.</div>
 
 <div class="alert alert-warning">If your Lambda functions are deployed in a VPC without access to the public internet, you can send data either <a href="/agent/guide/private-link/">using AWS PrivateLink</a> for the <code>datadoghq.com</code> <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/proxy/">using a proxy</a> for all other sites.</div>
 
@@ -54,6 +54,26 @@ For more information and additional settings, see the [plugin documentation][1].
 [3]: https://docs.datadoghq.com/getting_started/site/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
+{{% tab "Container Image" %}}
+
+1. Install the Datadog Lambda Extension
+
+    ```dockerfile
+    COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/. /opt/
+    ```
+
+    Replace `<TAG>` with either a specific version number (for example, `{{< latest-lambda-layer-version layer="extension" >}}`) or with `latest`. You can see a complete list of possible tags in the [Amazon ECR repository][1].
+
+2. Set the required environment variables
+
+    - Set `DD_SITE` to {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
+    - Set `DD_API_KEY_SECRET_ARN` to the ARN of the AWS secret where your [Datadog API key][2] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
+    - Optionally set `DD_UNIVERSAL_INSTRUMENTATION: true` to take advantage of [advanced configurations][3] such as capturing the Lambda request and response payloads and inferring APM spans from incoming Lambda events.
+
+[1]: https://gallery.ecr.aws/datadog/lambda-extension
+[2]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: /serverless/configuration/
+{{% /tab %}}
 {{% tab "Custom" %}}
 ### Install the Datadog Lambda Extension
 
@@ -78,11 +98,10 @@ Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`.
 ### Configure the required environment variables
 
 - Set `DD_SITE` to {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
-- Set `DD_API_KEY_SECRET_ARN` to the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
+- Set `DD_API_KEY_SECRET_ARN` to the ARN of the AWS secret where your [Datadog API key][2] is securely stored. The key needs to be stored as a plaintext string string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
-[2]: https://docs.datadoghq.com/getting_started/site/
-[3]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{< /tabs >}}
 

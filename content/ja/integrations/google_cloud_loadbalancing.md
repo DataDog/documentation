@@ -1,9 +1,8 @@
 ---
 categories:
-  - cloud
-  - google cloud
-  - ログの収集
-ddtype: crawler
+- cloud
+- google cloud
+- ログの収集
 dependencies: []
 description: Google Cloud Load Balancing のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_loadbalancing/
@@ -21,6 +20,7 @@ public_title: Datadog-Google Cloud Load Balancing インテグレーション
 short_description: Google Cloud Load Balancing のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Google Cloud Load Balancing を使用すると、負荷分散されたコンピューティングリソースを単一または複数のリージョンに分配し、高可用性要件を満たすことができます。また、1 つのエニーキャスト IP の背後にリソースを置き、インテリジェントなオートスケーリング機能を使用してリソースをスケーリングできます。

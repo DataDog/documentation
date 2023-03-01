@@ -1,10 +1,9 @@
 ---
 aliases:
-  - /ja/integrations/azure_publicipaddress
+- /ja/integrations/azure_publicipaddress
 categories:
-  - cloud
-  - azure
-ddtype: crawler
+- cloud
+- azure
 dependencies: []
 description: Azure パブリック IP アドレスのキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_public_ip_address/
@@ -22,6 +21,7 @@ public_title: Datadog-Microsoft Azure Public IP Address インテグレーショ
 short_description: Azure パブリック IP アドレスのキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Azure パブリック IP アドレスがリソースに割り当てられると、インターネットとのインバウンド通信およびアウトバウンド接続が可能になります。

@@ -1,10 +1,9 @@
 ---
 aliases:
-  - /ja/integrations/azure_analysisservices
+- /ja/integrations/azure_analysisservices
 categories:
-  - cloud
-  - azure
-ddtype: crawler
+- cloud
+- azure
 dependencies: []
 description: Azure Analysis Services のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_analysis_services/
@@ -22,6 +21,7 @@ public_title: Datadog-Microsoft Azure Analysis Services インテグレーショ
 short_description: Azure Analysis Services のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Azure Analysis Services は、クラウド上でエンタープライズレベルのデータモデル提供する、フルマネージド型の「サービスとしてのプラットフォーム (PaaS)」です。

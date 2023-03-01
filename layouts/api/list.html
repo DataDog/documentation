@@ -3,7 +3,7 @@
     {{ $dot := . }}
 
     {{ with .Content}}
-       <div class="col-12 {{if ne $dot.RelPermalink "/api/latest/scopes/"}}col-lg-9{{ end }} pl-0">
+       <div class="col-12 {{if ne $dot.RelPermalink "/api/latest/scopes/"}}col-lg-9{{ end }} ps-0">
         {{ . }}
        </div>
     {{ end }}
@@ -83,7 +83,7 @@
               {{ $endpoint := partial "api/get-endpoint.html" (dict "lang" $.Page.Lang "operationids" $menuChild.Params.operationids "spec" $adat "generalRegions" $generalRegions ) }}
               {{ $endpointVisibility := partial "api/endpoint-visibility.html" (dict "versionCount" $versionCount "versionNum" $versionNum "menuChild" $menuChild "endpoint" $endpoint) }}
               <li class="nav-item">
-                <a class="nav-link mr-1 {{ if and ($endpointVisibility.isVisibleVersion) (gt (len $menuChild.Params.versions) 1) }}active{{ end }} {{ if and ($endpointVisibility.isVisibleVersion) (eq (len $menuChild.Params.versions) 1) }}disabled{{ end }}" {{- if and (eq (len $menuChild.Params.versions) 1) ($endpoint.action.deprecated | default false) -}}data-toggle="collapse"{{- else -}}data-toggle="tab"{{- end -}} href="#{{ (print $anchorStr "-" $versionNum) | anchorize }}">{{ $versionNum }} ({{ $endpointVisibility.label }})</a>
+                <a class="nav-link me-1 {{ with $endpointVisibility.label }}{{ else }}px-3{{ end }} {{ if and ($endpointVisibility.isVisibleVersion) (gt (len $menuChild.Params.versions) 1) }}active{{ end }} {{ if and ($endpointVisibility.isVisibleVersion) (eq (len $menuChild.Params.versions) 1) }}disabled{{ end }}" {{- if and (eq (len $menuChild.Params.versions) 1) ($endpoint.action.deprecated | default false) -}}data-bs-toggle="collapse"{{- else -}}data-bs-toggle="tab" data-bs-target="#{{ (print $anchorStr "-" $versionNum) | anchorize }}"{{- end -}} href="#{{ (print $anchorStr "-" $versionNum) | anchorize }}">{{ $versionNum }} {{ with $endpointVisibility.label }}({{ . }}){{ end }}</a>
               </li>
             {{ end }}
           </ul>
@@ -103,7 +103,7 @@
       {{ $endpoint := partial "api/get-endpoint.html" (dict "lang" $.Page.Lang "operationids" $menuChild.Params.operationids "spec" $adat "generalRegions" $generalRegions ) }}
       {{ $endpointVisibility := partial "api/endpoint-visibility.html" (dict "versionCount" $versionCount "versionNum" $versionNum "menuChild" $menuChild "endpoint" $endpoint) }}
 
-      <div id="{{ (print $anchorStr "-" $versionNum) | anchorize }}" class="{{- if and (eq (len $menuChild.Params.versions) 1) ($endpoint.action.deprecated | default false) -}}collapse{{- else -}}tab-pane{{- end -}} {{ if $endpointVisibility.isVisibleVersion }}active{{ end }}" role="tabpanel">
+      <div id="{{ (print $anchorStr "-" $versionNum) | anchorize }}" class="{{- if and (eq (len $menuChild.Params.versions) 1) ($endpoint.action.deprecated | default false) -}}collapse{{- else -}}tab-pane{{- end -}} {{ if $endpointVisibility.isVisibleVersion }} active{{ end }}" role="tabpanel">
 
       <!-- for accessing v1/v2 resources from latest -->
       {{ $resourcePage := $dot.Site.GetPage (print "/api/" $versionNum "/" (path.Base $dot.File.Dir) "") }}

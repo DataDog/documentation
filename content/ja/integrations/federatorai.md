@@ -1,43 +1,70 @@
 ---
+app_id: federatorai
+app_uuid: c9192d7c-101d-44b2-8ddf-c5fcbe5c5306
 assets:
   dashboards:
     ProphetStor Federator.ai Application Overview: assets/dashboards/application-overview.json
     ProphetStor Federator.ai Cluster Overview: assets/dashboards/cluster-overview.json
     ProphetStor Federator.ai Cost Analysis Overview: assets/dashboards/cost-analysis-overview.json
+    ProphetStor Federator.ai Cost Management - Cluster: assets/dashboards/cost-management-cluster-overview.json
+    ProphetStor Federator.ai Cost Management - Namespace: assets/dashboards/cost-management-namespace-overview.json
+    ProphetStor Federator.ai Cost Management - Node: assets/dashboards/cost-management-node-overview.json
     ProphetStor Federator.ai Kafka Overview: assets/dashboards/overview.json
-  metrics_metadata: metadata.csv
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: federatorai.integration.status
+      metadata_path: metadata.csv
+      prefix: federatorai.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Federator.ai
   monitors:
     Node CPU Load Prediction in Next 24 Hours is High: assets/recommended_monitors/federatorai_node_cpu_prediction.json
     Node Memory Usage Prediction in Next 24 Hours is High: assets/recommended_monitors/federatorai_node_mem_prediction.json
-  saved_views: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: ProphetStor
+  sales_email: support@prophetstor.com
+  support_email: support@prophetstor.com
 categories:
-  - コンテナ
-  - orchestration
-creates_events: false
-ddtype: crawler
+- コンテナ
+- orchestration
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/federatorai/README.md
-display_name: Federator.ai
+- https://github.com/DataDog/integrations-extras/blob/master/federatorai/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: federatorai
-guid: ec0fd93a-ee4c-4652-9996-cc68cb5a4d45
 integration_id: federatorai
 integration_title: Federator.ai
 integration_version: ''
 is_public: true
 kind: インテグレーション
-maintainer: support@prophetstor.com
-manifest_version: 1.0.0
-metric_prefix: federatorai.
-metric_to_check: federatorai.integration.status
+manifest_version: 2.0.0
 name: federatorai
-public_title: Datadog-Federator.ai インテグレーション
+oauth: {}
+public_title: Federator.ai
 short_description: ProphetStor Federator.ai とのインテグレーションでアプリケーションのパフォーマンスを最適化します
-support: contrib
 supported_os:
-  - linux
+- linux
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Category::Containers
+  - Category::Orchestration
+  configuration: README.md#Setup
+  description: ProphetStor Federator.ai とのインテグレーションでアプリケーションのパフォーマンスを最適化します
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Federator.ai
 ---
+
+
+
 ## 概要
 
 
@@ -152,9 +179,9 @@ Federator.ai について詳しくは、[ProphetStor Federator.ai 機能デモ][
    - この時系列グラフは、コンシューマーの CPU 使用量を示しています。
 
 
-**ProphetStor Federator.ai コスト分析の概要**
+**ProphetStor Federator.ai マルチクラウドコスト分析の概要**
 
-![コスト分析の概要][8]
+![マルチクラウドコスト分析の概要][8]
 
 * 現在のクラスターコストおよび現在のクラスターコンフィギュレーション
    - この表は、クラスターの現在のコストと環境コンフィギュレーションを示しています。

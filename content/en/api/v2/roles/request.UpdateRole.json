@@ -4,6 +4,16 @@
     "type": "roles",
     "attributes": {
       "name": "developers-updated"
+    },
+    "relationships": {
+      "permissions": {
+        "data": [
+          {
+            "id": "f2a8beb4-91f8-962d-b6d9-60215cda2214",
+            "type": "permissions"
+          }
+        ]
+      }
     }
   }
 }

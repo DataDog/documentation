@@ -30,25 +30,44 @@ Configure monitors, notify your teams, and manage alerts at a glance on the Aler
 
 ## Create monitors
 
+To create a monitor in Datadog:
+
+1. Navigate to **Monitors** > **New Monitor**.
+2. Select a monitor type corresponding to the kind of telemetry you want to alert on. See [Monitor Types][4] for the full list.
+3. [Configure Monitors][5]: Alert over metrics, events, logs, integration availability, network endpoints, and more.
+
 {{< img src="/monitors/create.png" alt="Create a monitor" style="width:90%;">}}
 
-[Configure Monitors][4]: Create monitors that look over metrics, events, logs, integration availability, network endpoints, and more.
+To create a monitor programmatically, see the [Datadog API][6] or [community maintained libraries][7].
+
+## Exporting and importing monitors
+
+You can download a JSON file containing the definition of a monitor from the monitor's status page. Click the settings cog (top right) and choose **Export** from the menu.
+
+[Import a JSON monitor definition][8] into Datadog by selecting *Monitors --> New Monitor --> Import* in the main navigation.
 
 ## Notify your teams
 
 {{< img src="/monitors/notify.png" alt="Notify when a monitor is alerting" style="width:90%;">}}
 
-[Monitor Notifications][5]: Set up notifications when creating monitors to keep your team informed of issues. Route the notifications to the correct people, leverage template variables to include details, and attach snapshots when sending the alerts by email or Slack. Create [downtimes][6] to mute alerts during application maintenance.
+[Monitor Notifications][9]: Set up notifications when creating monitors to keep your team informed of issues. Route the notifications to the correct people, leverage template variables to include details, and attach snapshots when sending the alerts by email or Slack. Create [downtimes][10] to mute alerts during application maintenance.
 
 ## Manage monitors
 
 {{< img src="/monitors/manage.png" alt="Manage all monitors alerts" style="width:90%;">}}
 
-[Manage Monitors][7]: Edit, clone, delete, mute, and resolve monitors all in the same place. Focus on high priority alerts by using advanced faceted search. Explore monitor details and alerts over time in the Monitor Status page.
+[Manage Monitors][11]: Edit, clone, delete, mute, and resolve monitors all in the same place. Focus on high priority alerts by using advanced faceted search. Explore monitor details and alerts over time in the Monitor Status page.
+
+## Control monitor tags with tag policies
+
+[Monitor tag policies][12] enforce data validation on tags and tag values on your Datadog monitors. Add one of the following rules to prevent monitors with unexpected tags from being created.
+- Require tags with mandatory values
+- Require tags only
+- Optional tags with mandatory values
 
 ## View and search for monitors on mobile devices
 
-[Mobile-Friendly Monitors on iOS and Android][8]: View, mute, and unmute monitors on any iOS or Android device with the [Datadog Mobile App][1], available on the [Apple App Store][2] and [Google Play Store][3]. Write queries in the search bar to filter monitors in real-time. Use [Monitor Saved Views][9] to access a collection of monitors in a few taps on mobile.
+[Mobile-Friendly Monitors on iOS and Android][13]: View, mute, and unmute monitors on any iOS or Android device with the [Datadog Mobile App][1], available on the [Apple App Store][2] and [Google Play Store][3]. Write queries in the search bar to filter monitors in real-time. Use [Monitor Saved Views][14] to access a collection of monitors in a few taps on mobile.
 
 {{< img src="monitors/monitors_mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Monitors on Mobile App">}}
 
@@ -67,9 +86,14 @@ Configure monitors, notify your teams, and manage alerts at a glance on the Aler
 [1]: /mobile
 [2]: https://apps.apple.com/app/datadog/id1391380318
 [3]: https://play.google.com/store/apps/details?id=com.datadog.app
-[4]: /monitors/create
-[5]: /monitors/notify
-[6]: /monitors/notify/downtimes
-[7]: /monitors/manage
-[8]: /mobile/?tab=ios#monitors
-[9]: /monitors/manage/search/#saved-view
+[4]: /monitors/types/
+[5]: /monitors/configuration
+[6]: /api/latest/monitors/
+[7]: /developers/community/libraries/#managing-monitors
+[8]: https://app.datadoghq.com/monitors#create/import
+[9]: /monitors/notify
+[10]: /monitors/notify/downtimes
+[11]: /monitors/manage
+[12]: /monitors/settings/
+[13]: /mobile/?tab=ios#monitors
+[14]: /monitors/manage/search/#saved-view

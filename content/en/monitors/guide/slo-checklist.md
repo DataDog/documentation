@@ -5,9 +5,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/slo-monitoring-tracking/'
       tag: 'Blog'
       text: 'Track the status and error budget of your SLOs with Datadog'
-    - link: 'https://learn.datadoghq.com/course/view.php?id=34'
+    - link: 'https://learn.datadoghq.com/courses/intro-to-slo'
       tag: 'Learning Center'
-      text: 'Introduction to Service Level Objectives (SLOs)'
+      text: 'Introduction to Service Level Objectives'
 ---
 
 <div class="alert alert-info">
@@ -63,7 +63,7 @@ _Example: the latency of all user requests should be less than 250 ms 99% of the
 
 1. Select a single monitor,
 2. Select multiple monitors (up to 20), or
-3. Select a single multi-alert monitor and pick specific monitor groups (up to 20) to include in
+3. Select a single multi alert monitor and pick specific monitor groups (up to 20) to include in
    the SLO calculation
 
 If you need to create a new monitor go to the [Monitor create][2] page.
@@ -102,6 +102,6 @@ _Example: 99% of requests should complete in less than 250 ms over a 30-day wind
 [2]: https://app.datadoghq.com/monitors#create/metric
 [3]: /metrics
 [4]: /integrations
-[5]: /tracing/generate_metrics/
+[5]: /tracing/trace_pipeline/generate_metrics/
 [6]: /logs/logs_to_metrics/
 [7]: /monitors/service_level_objectives/#searching-and-viewing-slos

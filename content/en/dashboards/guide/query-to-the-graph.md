@@ -166,6 +166,6 @@ Documentation about [StatsD/DogStatsD][10].
 [5]: /dashboards/querying/#rollup-to-aggregate-over-time
 [6]: /dashboards/faq/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs/
 [7]: /dashboards/functions/rollup/
-[8]: /dashboards/faq/i-m-switching-between-the-sum-min-max-avg-aggregators-but-the-values-look-the-same/
+[8]: /metrics/guide/different-aggregators-look-same/
 [9]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing
 [10]: /metrics/custom_metrics/dogstatsd_metrics_submission/

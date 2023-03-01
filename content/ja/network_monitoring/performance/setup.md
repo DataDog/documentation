@@ -1,23 +1,24 @@
 ---
-title: ネットワークパフォーマンスモニタリングのセットアップ
-kind: documentation
-description: Agent を使用したネットワークデータの収集
 aliases:
-  - /ja/network_performance_monitoring/installation/
+- /ja/network_performance_monitoring/installation/
+description: Agent を使用したネットワークデータの収集
 further_reading:
-  - link: https://www.datadoghq.com/blog/network-performance-monitoring
-    tag: ブログ
-    text: ネットワークパフォーマンスモニタリング
-  - link: https://www.datadoghq.com/blog/monitor-containers-with-npm/
-    tag: ブログ
-    text: コンテナとサービスメッシュネットワークを備えた Datadog NPM
-  - link: /network_monitoring/devices
-    tag: Documentation
-    text: ネットワークデバイスモニタリング
-  - link: /dashboards/widgets/network
-    tag: ドキュメント
-    text: ネットワークウィジェット
+- link: https://www.datadoghq.com/blog/network-performance-monitoring
+  tag: ブログ
+  text: ネットワークパフォーマンスモニタリング
+- link: https://www.datadoghq.com/blog/monitor-containers-with-npm/
+  tag: ブログ
+  text: コンテナとサービスメッシュネットワークを備えた Datadog NPM
+- link: /network_monitoring/devices
+  tag: Documentation
+  text: ネットワークデバイスモニタリング
+- link: https://www.datadoghq.com/blog/monitor-consul-with-datadog-npm/
+  tag: ブログ
+  text: Datadog NPM が Consul ネットワーキングに対応
+kind: documentation
+title: ネットワークパフォーマンスモニタリングのセットアップ
 ---
+
 Datadog の ネットワークパフォーマンスモニタリング (NPM) は Datadog 内のサービス、コンテナ、アベイラビリティゾーン、およびその他あらゆるタグ間のネットワークトラフィックを可視化することができます。これは次のような場合に役立ちます。
 
 - 予期しない、または潜在的なサービスの依存関係を特定。
@@ -47,7 +48,7 @@ Datadog の ネットワークパフォーマンスモニタリング (NPM) は 
 
 #### Windows OS
 
-データ収集はデバイスドライバを使用して行われ、Datadog Agent バージョン 7.27.1、Windows バージョン 2012 R2 以降でサポートされます。
+データ収集はデバイスドライバを使用して行われます。Datadog Agent バージョン 7.27.1、Windows バージョン 2012 R2 (および Windows 10 を含む同等のデスクトップ OS) 以降でサポートされます。
 
 #### macOS
 
@@ -67,7 +68,7 @@ Datadog は、Istio 環境のあらゆる側面を監視するため、以下の
 
 - [ログ][8]を使用して、Envoy および Istio の Control Plane の健全性を評価。
 - リクエスト、帯域幅、リソース消費の[メトリクス][8]でサービスメッシュのパフォーマンスを詳しく確認。
-- [APM][9] でメッシュを実行してアプリケーションの分散型トレースの詳細を確認。
+- [APM][9] でメッシュを実行してアプリケーションの分散型トレースを調べます。
 
 NPM は Istio v1.6.4 以降および [Datadog Agent v7.24.1 以降][1] でサポートされています。
 
@@ -101,17 +102,17 @@ Datadog Agent を使用してネットワークパフォーマンスのモニタ
 2. 下記のシステムプローブのコンフィギュレーションの例をコピーします。
 
     ```shell
-    sudo -u dd-agent cp /etc/datadog-agent/system-probe.yaml.example /etc/datadog-agent/system-probe.yaml
+    sudo -u dd-agent install -m 0640 /etc/datadog-agent/system-probe.yaml.example /etc/datadog-agent/system-probe.yaml
     ```
 
 3. `/etc/datadog-agent/system-probe.yaml` を編集し、有効フラグを `true` に設定します。
 
     ```yaml
     network_config:   # use system_probe_config for Agent's older than 7.24.1
-        ## @param enabled - boolean - optional - default: false
-        ## Set to true to enable Network Performance Monitoring.
-        #
-        enabled: true
+      ## @param enabled - boolean - optional - default: false
+      ## Set to true to enable Network Performance Monitoring.
+      #
+      enabled: true
     ```
 
 4. **v6.18 または 7.18 より古い Agent を実行している場合は**、システムプローブを手動で起動しブート時に有効化します (v6.18 および v7.18 以降では、Agent 起動時にシステムプローブが自動的に起動します)。
@@ -130,6 +131,16 @@ Datadog Agent を使用してネットワークパフォーマンスのモニタ
     ```
 
     **注**: システムで `systemctl` コマンドを利用できない場合は、代わりに次のコマンドを実行します: `sudo service datadog-agent restart`。
+
+{{< site-region region="us,us3,us5,eu" >}}
+
+6. オプションで、追加のクラウドインテグレーションを有効にして、ネットワークパフォーマンスモニタリングでクラウド管理型エンティティを検出できるようにします。
+      * Azure ロードバランサーを可視化するには、[Azure インテグレーション][1]をインストールします。
+      * AWS ロードバランサーを可視化するには、[AWS インテグレーション][2]をインストールします。**ENI および EC2 のメトリクス収集を有効にする必要があります**
+
+  [1]: /integrations/azure
+  [2]: /integrations/amazon_web_services/
+{{< /site-region >}}
 
 ### SELinux 対応のシステム
 
@@ -168,13 +179,13 @@ SELinux を有効にしたその他のシステムでネットワークパフォ
 
 お使いのディストリビューション内にこれらのユーティリティが存在しない場合は、現在のディストリビューションで利用可能なユーティリティを使って同じ手順を実行してください。
 
-### Windows システム
 
 [1]: /ja/infrastructure/process/?tab=linuxwindows#installation
 [2]: /ja/agent/guide/agent-commands/#restart-the-agent
 [3]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/selinux/system_probe_policy.te
 {{% /tab %}}
 {{% tab "Agent (Windows)" %}}
+
 Windows のデータ収集は、ネットワークデータ収集用のフィルタードライバに依存します。
 
 Windows ホストのネットワークパフォーマンスモニタリングを有効にするには
@@ -191,7 +202,7 @@ Windows ホストのネットワークパフォーマンスモニタリングを
     ```
 3. [Agent を再起動します][2]。
 
-   PowerShell (`powershell.exe`) の場合:
+   PowerShell (`powershell.exe`) の場合: 
     ```shell
     restart-service -f datadogagent
     ```
@@ -210,7 +221,8 @@ Windows ホストのネットワークパフォーマンスモニタリングを
 Kubernetes で Helm を使用してネットワークパフォーマンスのモニタリングを新規で有効化するには、
 
   ```yaml
-  networkMonitoring:
+  datadog:
+    networkMonitoring:
       enabled: true
   ```
 を values.yaml に追加します。**Helm チャート v2.4.39+ が必要です**。詳細については、[Datadog Helm チャートのドキュメント][1]を参照してください。
@@ -346,20 +358,44 @@ Helm をお使いでない場合は、Kubernetes を使用してネットワー�
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md#enabling-system-probe-collection
 [2]: /resources/yaml/datadog-agent-npm.yaml
-[3]: https://app.datadoghq.com/account/settings#api
+[3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: /ja/agent/kubernetes/
+{{% /tab %}}
+{{% tab "Operator" %}}
+<div class="alert alert-warning">Datadog Operator は公開ベータ版です。フィードバックや質問がございましたら、<a href="/help">Datadog サポートチーム</a>までお寄せください。</div>
+
+[Datadog Operator][1] は Kubernetes や OpenShift にDatadog Agent をデプロイする方法です。カスタムリソースステータスでデプロイ状況、健全性、エラーを報告し、高度なコンフィギュレーションオプションでコンフィギュレーションミスのリスクを抑えます。
+
+Operator でネットワークパフォーマンスのモニタリングを有効化するには、次のコンフィギュレーションを使用します。
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogAgent
+metadata:
+  name: placeholder
+  namespace: placeholder
+spec:
+  # (...)
+  features:
+    networkMonitoring:
+      enabled: true
+```
+
+[1]: https://github.com/DataDog/datadog-operator
 {{% /tab %}}
 {{% tab "Docker" %}}
 
 Docker でネットワークパフォーマンスのモニタリングを有効化するには、コンテナ Agent を起動する際に、次のコンフィギュレーションを使用します。
 
 ```shell
-$ docker run -e DD_API_KEY="<DATADOG_API_キー>" \
--e DD_SYSTEM_PROBE_ENABLED=true \
+$ docker run --cgroupns host \
+--pid host \
+-e DD_API_KEY="<DATADOG_API_KEY>" \
+-e DD_SYSTEM_PROBE_NETWORK_ENABLED=true \
 -e DD_PROCESS_AGENT_ENABLED=true \
-      -v /var/run/docker.sock:/var/run/docker.sock:ro \
-      -v /proc/:/host/proc/:ro \
-      -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+-v /var/run/docker.sock:/var/run/docker.sock:ro \
+-v /proc/:/host/proc/:ro \
+-v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
 -v /sys/kernel/debug:/sys/kernel/debug \
 --security-opt apparmor:unconfined \
 --cap-add=SYS_ADMIN \
@@ -384,7 +420,7 @@ services:
   datadog:
     image: "gcr.io/datadoghq/agent:latest"
     environment:
-       DD_SYSTEM_PROBE_ENABLED: 'true'
+       DD_SYSTEM_PROBE_NETWORK_ENABLED: 'true'
        DD_PROCESS_AGENT_ENABLED: 'true'
        DD_API_KEY: '<DATADOG_API_KEY>'
     volumes:
@@ -405,7 +441,7 @@ services:
     - apparmor:unconfined
 ```
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "ECS" %}}
 AWS ECS での設定については、[AWS ECS][1] ドキュメントページを参照してください。
@@ -421,10 +457,10 @@ AWS ECS での設定については、[AWS ECS][1] ドキュメントページ�
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/ja/network_monitoring/dns/#setup
 [3]: https://www.redhat.com/en/blog/introduction-ebpf-red-hat-enterprise-linux-7
-[4]: /ja/network_monitoring/performance/network_page#dns-resolution
-[5]: https://docs.datadoghq.com/ja/network_monitoring/performance/setup/?tab=agent#windows-systems
-[6]: https://docs.datadoghq.com/ja/integrations/docker_daemon/
-[7]: https://docs.datadoghq.com/ja/agent/kubernetes/
+[4]: /ja/network_monitoring/dns/
+[5]: https://docs.datadoghq.com/ja/agent/docker/
+[6]: https://docs.datadoghq.com/ja/agent/kubernetes/
+[7]: https://docs.datadoghq.com/ja/agent/amazon_ecs
 [8]: https://docs.datadoghq.com/ja/integrations/istio/
 [9]: https://docs.datadoghq.com/ja/tracing/setup_overview/proxy_setup/?tab=istio
 [10]: https://www.datadoghq.com/blog/istio-datadog/

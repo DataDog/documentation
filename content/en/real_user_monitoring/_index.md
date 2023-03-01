@@ -6,36 +6,39 @@ disable_sidebar: true
 aliases:
   - /real_user_monitoring/installation
 further_reading:
-  - link: "https://app.datadoghq.com/release-notes?category=Real%20User%20Monitoring"
-    tag: "Release Notes"
-    text: "Check out the latest Datadog RUM releases! (App login required)."
-  - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
-    tag: "Blog"
-    text: "Introducing Datadog Real User Monitoring"
-  - link: "https://www.datadoghq.com/blog/datadog-mobile-rum/"
-    tag: "Blog"
-    text: "Improve mobile user experience with Datadog Mobile Real User Monitoring"
-  - link: "https://www.datadoghq.com/blog/mobile-monitoring-best-practices/"
-    tag: "Blog"
-    text: "Best practices for monitoring mobile app performance"
-  - link: "https://www.datadoghq.com/blog/error-tracking/"
-    tag: "Blog"
-    text: "Make sense of application issues with Datadog Error Tracking"
-  - link: "https://www.datadoghq.com/blog/unify-apm-rum-datadog/"
-    tag: "Blog"
-    text: "Unify APM and RUM data for full-stack visibility"
-  - link: "https://www.datadoghq.com/blog/datadog-geomaps/"
-    tag: "Blog"
-    text: "Use geomaps to visualize your app data by location"
-  - link: "https://www.datadoghq.com/blog/datadog-rum-react-components/#tune-up-your-react-data-collection"
-    tag: "Blog"
-    text: "Get better RUM data with our custom React components"
-  - link: "/real_user_monitoring/browser/data_collected/"
-    tag: "Documentation"
-    text: "RUM Browser Data Collected"
-  - link: "https://www.datadoghq.com/blog/hybrid-app-monitoring/"
-    tag: "Blog"
-    text: "Monitor your hybrid mobile applications with Datadog"
+- link: "https://app.datadoghq.com/release-notes?category=Real%20User%20Monitoring"
+  tag: "Release Notes"
+  text: "Check out the latest Datadog RUM releases! (App login required)"
+- link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
+  tag: "Blog"
+  text: "Introducing Datadog Real User Monitoring"
+- link: "https://www.datadoghq.com/blog/datadog-mobile-rum/"
+  tag: "Blog"
+  text: "Improve mobile user experience with Datadog Mobile Real User Monitoring"
+- link: "https://www.datadoghq.com/blog/mobile-monitoring-best-practices/"
+  tag: "Blog"
+  text: "Best practices for monitoring mobile app performance"
+- link: "https://www.datadoghq.com/blog/error-tracking/"
+  tag: "Blog"
+  text: "Make sense of application issues with Datadog Error Tracking"
+- link: "https://www.datadoghq.com/blog/unify-apm-rum-datadog/"
+  tag: "Blog"
+  text: "Unify APM and RUM data for full-stack visibility"
+- link: "https://www.datadoghq.com/blog/datadog-geomaps/"
+  tag: "Blog"
+  text: "Use geomaps to visualize your app data by location"
+- link: "https://www.datadoghq.com/blog/datadog-rum-react-components/#tune-up-your-react-data-collection"
+  tag: "Blog"
+  text: "Get better RUM data with our custom React components"
+- link: "https://www.datadoghq.com/blog/hybrid-app-monitoring/"
+  tag: "Blog"
+  text: "Monitor your hybrid mobile applications with Datadog"
+- link: "https://www.datadoghq.com/blog/how-datadogs-tech-solutions-team-rum-session-replay/"
+  tag: "Blog"
+  text: "How Datadog's Technical Solutions team uses RUM, Session Replay, and Error Tracking to resolve customer issues"
+- link: "/real_user_monitoring/browser/data_collected/"
+  tag: "Documentation"
+  text: "RUM Browser Data Collected"
 ---
 
 {{< img src="real_user_monitoring/RUM-perf-dashboard.jpeg" alt="RUM Dashboard" >}}
@@ -48,6 +51,8 @@ Datadog's *Real User Monitoring (RUM)* gives you end-to-end visibility into the 
 * **Error Management**: Monitor the ongoing bugs and issues and track them over time and versions.
 * **Analytics / Usage**: Understand who is using your application (country, device, OS), monitor individual users journeys, and analyze how users interact with your application (most common page visited, clicks, interactions, and feature usage).
 * **Support**: Retrieve all of the information related to one user session to troubleshoot an issue (session duration, pages visited, interactions, resources loaded, and errors).
+
+A user session is a user journey on your web or mobile application lasting up to four hours. A session usually includes page views and associated telemetry. If a user does not interact with an application for 15 minutes, the session is considered complete. A new session starts when the user interacts with the application again. 
 
 ## What is Session Replay?
 
@@ -67,7 +72,7 @@ Select an application type to start collecting RUM data:
 
 ### Out-of-the-box dashboards
 
-Analyze information about your user journeys, performance, network requests, and errors collected automatically with [out-of-the-box RUM dashboards][1].
+Analyze information about your user sessions, performance, mobile applications, frustration signals, network resources, and errors collected automatically with [out-of-the-box RUM dashboards][1].
 
 {{< img src="real_user_monitoring/RUM-session-dashboard.jpeg" alt="RUM dashboard" >}}
 
@@ -109,13 +114,13 @@ Watch [browser recordings][11] of real users interacting with your website and s
 
 Access triggered logs, errors, and performance information when troubleshooting application issues using [Browser Dev Tools][13].
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/dashboards/
 [2]: /real_user_monitoring/explorer/visualize/
-[3]: /monitors/create/types/real_user_monitoring/
+[3]: /monitors/types/real_user_monitoring/
 [4]: /real_user_monitoring/connect_rum_and_traces/
 [5]: /real_user_monitoring/error_tracking/
 [6]: /real_user_monitoring/browser/monitoring_page_performance/#core-web-vitals

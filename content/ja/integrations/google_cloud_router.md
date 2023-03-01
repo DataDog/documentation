@@ -1,9 +1,8 @@
 ---
 categories:
-  - cloud
-  - google cloud
-  - ログの収集
-ddtype: crawler
+- cloud
+- google cloud
+- ログの収集
 dependencies: []
 description: Google Cloud Router のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_router/
@@ -21,6 +20,7 @@ public_title: Datadog-Google Cloud Router インテグレーション
 short_description: Google Cloud Router のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Google Cloud Router では、Border Gateway Protocol (BGP) を使用して、Virtual Private Cloud (VPC) とオンプレミスネットワークの間のルートを動的に交換できます。

@@ -1,9 +1,6 @@
 ---
 title: Reducing Data Related Risks
 kind: documentation
-aliases:
-  - /security/
-  - /security/other/
 further_reading:
 - link: "/data_security/logs/"
   tag: "Documentation"
@@ -14,7 +11,7 @@ further_reading:
 - link: "/data_security/synthetics/"
   tag: "Documentation"
   text: "Synthetic Monitoring Data Security"
-- link: "/tracing/setup_overview/configure_data_security/"
+- link: "/tracing/configure_data_security/"
   tag: "Documentation"
   text: "Tracing Data Security"
 - link: "/real_user_monitoring/browser/modifying_data_and_context/"
@@ -28,7 +25,7 @@ further_reading:
   text: "Sensitive Data Scanner"
 ---
 
-<div class="alert alert-info">This page is about the tools and security for protecting data sent to Datadog. If you're looking for cloud and application security products and features, see the <a href="/security_platform/" target="_blank">Security Platform</a> section.</div>
+<div class="alert alert-info">This page is about the tools and security for protecting data sent to Datadog. If you're looking for cloud and application security products and features, see the <a href="/security/" target="_blank">Security</a> section.</div>
 
 In the normal course of using Datadog as intended, you send data to Datadog. Datadog works together with you to reduce data risk by providing you tools to appropriately limit the data you send and securing data during and after its transmission.
 
@@ -87,7 +84,7 @@ The Datadog tracing libraries are used to instrument your applications, services
 - Application Performance Monitoring (APM)
 - Continuous Profiler
 - CI Visibility
-- Application Security Monitoring
+- Application Security Management
 
 For detailed information about how tracing-library sourced data is managed, default basic security settings, and custom obfuscating, scrubbing, excluding, and modifying of trace-related elements, read [Configuring Agent and Tracer for trace data security][18].
 
@@ -159,11 +156,11 @@ Continuous Integration pipelines and tests
 [15]: /logs/guide/logs-rbac-permissions
 [16]: /infrastructure/process/#process-arguments-scrubbing
 [17]: /infrastructure/livecontainers/configuration/#scrubbing-sensitive-information
-[18]: /tracing/setup_overview/configure_data_security/
+[18]: /tracing/configure_data_security/
 [19]: /serverless/distributed_tracing/collect_lambda_payloads#obfuscating-payload-contents
 [20]: /data_security/synthetics/
 [21]: /real_user_monitoring/browser/modifying_data_and_context/
 [22]: /real_user_monitoring/session_replay/privacy_options
 [23]: /database_monitoring/data_collected/#sensitive-information
 [24]: /getting_started/tagging/
-[25]: /tracing/visualization/
+[25]: /tracing/glossary/

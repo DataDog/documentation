@@ -1,47 +1,63 @@
 {{ $dot := . }}
 <div class="network-layers">
-    <div class="container cards-dd col-num-4">
-        <div class="card-deck">
-            <a class="card" href="/synthetics/api_tests/http_tests">
-                <div class="card-body text-center py-2 px-1">
-                    {{ partial "img.html" (dict "root" . "src" "synthetics/api_tests/http-test1.png" "class" "h-auto mw-50" "alt" "HTTP" "width" "400") }}
-                </div>
-            </a>
-            <a class="card" href="/synthetics/api_tests/ssl_tests">
-                <div class="card-body text-center py-2 px-1">
-                    {{ partial "img.html" (dict "root" . "src" "synthetics/api_tests/ssl-test1.png" "class" "h-auto mw-50" "alt" "SSL" "width" "400") }}
-                </div>
-            </a>
-            <a class="card" href="/synthetics/api_tests/dns_tests">
-                <div class="card-body text-center py-2 px-1">
-                    {{ partial "img.html" (dict "root" . "src" "synthetics/api_tests/dns-test1.png" "class" "h-auto mw-50" "alt" "DNS" "width" "400") }}
-                </div>
-            </a>
-            <a class="card" href="/synthetics/api_tests/websocket_tests">
-                <div class="card-body text-center py-2 px-1">
-                    {{ partial "img.html" (dict "root" . "src" "synthetics/api_tests/websocket-test3.png" "class" "h-auto mw-50" "alt" "WebSocket" "width" "400") }}
-                </div>
-            </a>
-            <a class="card" href="/synthetics/api_tests/tcp_tests">
-                <div class="card-body text-center py-2 px-1">
-                    {{ partial "img.html" (dict "root" . "src" "synthetics/api_tests/tcp-test1.png" "class" "h-auto mw-50" "alt" "TCP" "width" "400") }}
-                </div>
-            </a>
-            <a class="card" href="/synthetics/api_tests/udp_tests">
-                <div class="card-body text-center py-2 px-1">
-                    {{ partial "img.html" (dict "root" . "src" "synthetics/api_tests/udp-test1.png" "class" "h-auto mw-50" "alt" "UDP" "width" "400") }}
-                </div>
-            </a>
-            <a class="card" href="/synthetics/api_tests/icmp_tests">
-                <div class="card-body text-center py-2 px-1">
-                    {{ partial "img.html" (dict "root" . "src" "synthetics/api_tests/icmp-test3.png" "class" "h-auto mw-50" "alt" "ICMP" "width" "400") }}
-                </div>
-            </a>
-            <a class="card" href="/synthetics/api_tests/grpc_tests">
-                <div class="card-body text-center py-2 px-1">
-                    {{ partial "img.html" (dict "root" . "src" "synthetics/api_tests/grpc-test1.png" "class" "h-auto mw-50" "alt" "gRPC Health Check" "width" "400") }}
-                </div>
-            </a>
+    <div class="container cards-dd">
+        <div class="row row-cols-2 row-cols-sm-4 g-2 g-xl-3 justify-content-sm-center">
+            <div class="col">
+                <a class="card h-100" href="/synthetics/api_tests/http_tests">
+                    <div class="card-body text-center py-2 px-1">
+                        {{ partial "img.html" (dict "root" . "src" "synthetics/api_tests/http-test1.png" "class" "h-auto mw-50" "alt" "HTTP" "width" "400") }}
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a class="card h-100" href="/synthetics/api_tests/ssl_tests">
+                    <div class="card-body text-center py-2 px-1">
+                        {{ partial "img.html" (dict "root" . "src" "synthetics/api_tests/ssl-test1.png" "class" "h-auto mw-50" "alt" "SSL" "width" "400") }}
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a class="card h-100" href="/synthetics/api_tests/dns_tests">
+                    <div class="card-body text-center py-2 px-1">
+                        {{ partial "img.html" (dict "root" . "src" "synthetics/api_tests/dns-test1.png" "class" "h-auto mw-50" "alt" "DNS" "width" "400") }}
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a class="card h-100" href="/synthetics/api_tests/websocket_tests">
+                    <div class="card-body text-center py-2 px-1">
+                        {{ partial "img.html" (dict "root" . "src" "synthetics/api_tests/websocket-test1.png" "class" "h-auto mw-50" "alt" "WebSocket" "width" "400") }}
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a class="card h-100" href="/synthetics/api_tests/tcp_tests">
+                    <div class="card-body text-center py-2 px-1">
+                        {{ partial "img.html" (dict "root" . "src" "synthetics/api_tests/tcp-test1.png" "class" "h-auto mw-50" "alt" "TCP" "width" "400") }}
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a class="card h-100" href="/synthetics/api_tests/udp_tests">
+                    <div class="card-body text-center py-2 px-1">
+                        {{ partial "img.html" (dict "root" . "src" "synthetics/api_tests/udp-test1.png" "class" "h-auto mw-50" "alt" "UDP" "width" "400") }}
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a class="card h-100" href="/synthetics/api_tests/icmp_tests">
+                    <div class="card-body text-center py-2 px-1">
+                        {{ partial "img.html" (dict "root" . "src" "synthetics/api_tests/icmp-test1.png" "class" "h-auto mw-50" "alt" "ICMP" "width" "400") }}
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a class="card h-100" href="/synthetics/api_tests/grpc_tests">
+                    <div class="card-body text-center py-2 px-1">
+                        {{ partial "img.html" (dict "root" . "src" "synthetics/api_tests/grpc-test1.png" "class" "h-auto mw-50" "alt" "gRPC" "width" "400") }}
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
 </div>

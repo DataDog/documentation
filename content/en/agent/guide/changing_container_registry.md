@@ -5,7 +5,7 @@ kind: guide
 
 Datadog publishes container images in Google’s gcr.io, AWS’ ECR, and on Docker Hub:
 
-| dockerhub.io                               | grc.io                                              | public.ecr.aws                                            |
+| dockerhub.io                               | gcr.io                                              | public.ecr.aws                                            |
 |--------------------------------------------|-----------------------------------------------------|-----------------------------------------------------------|
 | datadog/agent                              | gcr.io/datadoghq/agent                              | public.ecr.aws/datadog/agent                              |
 | datadog/cluster-agent                      | gcr.io/datadoghq/cluster-agent                      | public.ecr.aws/datadog/cluster-agent                      |
@@ -44,15 +44,15 @@ Change the repository to `gcr.io`:
 ```yaml
 agents:
   image:
-    repository: grc.io/datadoghq/agent  
+    repository: gcr.io/datadoghq/agent  
 
 clusterAgent:
   image:
-    repository: grc.io/datadoghq/cluster-agent
+    repository: gcr.io/datadoghq/cluster-agent
 
 clusterChecksRunner:
   image:
-    repository: grc.io/datadoghq/agent
+    repository: gcr.io/datadoghq/agent
 ```
 
 For more information about using the Datadog Helm chart, see the [Datadog Kubernetes documentation][2] and the example [`values.yaml`][3] file.

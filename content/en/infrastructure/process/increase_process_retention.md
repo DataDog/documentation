@@ -38,13 +38,15 @@ You can generate a new process-based metric directly from queries in the Live Pr
 
 1. **Select tags to filter your query**: The query syntax is the same as for [Live Processes][2]. Only processes matching the scope of your filters are considered for aggregation. Text search filters are supported only on the Live Processes page.
 2. **Select the measure you would like to track**: Enter a measure such as `Total CPU %` to aggregate a numeric value and create its corresponding `count`, `min`, `max`, `sum`, and `avg` aggregated metrics.
-3. **Add tags to `group by`**: Select tags to be added as dimensions to your metrics, so they can be filtered, aggregated, and compared. By default, metrics generated from processes do not have any tags unless explicitly added. Any tag available for Live Processes queries can be used in this field. Process-based metrics are considered [custom metrics][3]. Avoid grouping by unbounded or extremely high cardinality tags like `command` and `user` to avert impacting your billing.
+3. **Add tags to `group by`**: Select tags to be added as dimensions to your metrics, so they can be filtered, aggregated, and compared. By default, metrics generated from processes do not have any tags unless explicitly added. Any tag available for Live Processes queries can be used in this field.
 4. **Name your metric**: Fill in the name of your metric. Process-based metrics always have the prefix _proc._ and suffix _[measure_selection]_.
 5. **Add percentile aggregations**: Select the _Include percentile aggregations_ checkbox to generate p50, p75, p90, p95, and p99 percentiles. Percentile metrics are also considered customer metrics, and billed accordingly.
 
 You can create multiple metrics using the same query by selecting the **Create Another** checkbox at the bottom of the metric creation modal. When selected, the modal remains open after your metric has been created, with the filters and aggregation groups already filled in.
 
 **Note**: Data points for process-based metrics are generated at ten second intervals. There may be up to a 3-minute delay from the moment the metric is created or updated, to the moment the first data point is reported.
+
+<div class="alert alert-warning">Process-based metrics are considered <a href="/metrics/custom_metrics/">custom metrics</a> and billed accordingly. Avoid grouping by unbounded or extremely high cardinality tags like <code>command</code> and <code>user</code> to avoid impacting your billing.</div>
 
 ### Update a process-based metric
 

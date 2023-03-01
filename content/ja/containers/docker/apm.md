@@ -29,6 +29,8 @@ title: Docker アプリケーションのトレース
 
 Agent 6.0.0 では、Trace Agent はデフォルトで有効になっています。オフにした場合は、`gcr.io/datadoghq/agent` コンテナで環境変数として `DD_APM_ENABLED=true` を渡すことで再び有効にすることができます。
 
+このページの CLI コマンドは Docker ランタイム用です。containerd ランタイムは `docker` を `nerdctl` に、Podman ランタイムは `podman` に置き換えてください。
+
 ## ホストからのトレース
 
 `docker run` コマンドにオプション `-p 127.0.0.1:8126:8126/tcp` を追加すると、ポート `8126/tcp` で _自分のホストからのみ_ トレースを利用できます。
@@ -42,6 +44,7 @@ _任意のホスト_ からトレースを利用するには、`-p 8126:8126/tcp
 
 ```shell
 docker run -d --cgroupns host \
+              --pid host \
               -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
@@ -103,6 +106,8 @@ DogStatsD と同様に、[Docker ネットワーク](#docker-network)または [
 docker network create <NETWORK_NAME>
 ```
 
+このページの CLI コマンドは Docker ランタイム用です。containerd ランタイムは `docker` を `nerdctl` に、Podman ランタイムは `podman` に置き換えてください。
+
 次に、先ほど作成したネットワークに接続されている Agent とアプリケーションコンテナを起動します。
 
 {{< tabs >}}
@@ -113,6 +118,7 @@ docker network create <NETWORK_NAME>
 docker run -d --name datadog-agent \
               --network <NETWORK_NAME> \
               --cgroupns host \
+              --pid host \
               -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
@@ -137,6 +143,7 @@ docker run -d --name app \
 # Datadog Agent
 docker run -d --name datadog-agent \
               --cgroupns host \
+              --pid host \
               --network "<NETWORK_NAME>" \
               -e DD_API_KEY=<DATADOG_API_KEY> \
               -e DD_APM_ENABLED=true \

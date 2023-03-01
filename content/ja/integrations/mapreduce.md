@@ -1,43 +1,64 @@
 ---
+app_id: mapreduce
+app_uuid: 25ae6f45-147b-478c-9f0c-5013c3859796
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     mapreduce: assets/dashboards/mapreduce_dashboard.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: mapreduce.job.elapsed_time.max
+      metadata_path: metadata.csv
+      prefix: mapreduce.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: MapReduce
   logs:
     source: mapreduce
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - processing
-- autodiscovery
 - log collection
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/mapreduce/README.md
-display_name: MapReduce
+display_on_public_website: true
 draft: false
 git_integration_title: mapreduce
-guid: 1c143492-84ac-42d2-89d5-a45c718092b0
 integration_id: mapreduce
 integration_title: Map Reduce
-integration_version: 3.1.0
+integration_version: 3.2.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: mapreduce.
-metric_to_check: mapreduce.job.elapsed_time.max
+manifest_version: 2.0.0
 name: mapreduce
-public_title: Datadog-Map Reduce インテグレーション
+oauth: {}
+public_title: Map Reduce
 short_description: マップのステータスと期間を監視し、タスクを削減。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::処理
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: マップのステータスと期間を監視し、タスクを削減。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Map Reduce
 ---
 
 
@@ -53,7 +74,7 @@ mapreduce サービスからメトリクスをリアルタイムに取得して�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Mapreduce チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 

@@ -75,6 +75,38 @@
     "request_description": "",
     "request_schema_description": "Request to update an AuthN Mapping."
   },
+  "AggregateCIAppPipelineEvents": {
+    "description": "The API endpoint to aggregate CI Visibility pipeline events into buckets of computed metrics and timeseries.",
+    "summary": "Aggregate pipelines events",
+    "request_description": "",
+    "request_schema_description": "The object sent with the request to retrieve aggregation buckets of pipeline events from your organization."
+  },
+  "ListCIAppPipelineEvents": {
+    "description": "List endpoint returns CI Visibility pipeline events that match a log search query.\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to see your latest pipeline events.",
+    "summary": "Get a list of pipelines events"
+  },
+  "SearchCIAppPipelineEvents": {
+    "description": "List endpoint returns CI Visibility pipeline events that match a log search query.\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to build complex events filtering and search.",
+    "summary": "Search pipelines events",
+    "request_description": "",
+    "request_schema_description": "The request for a pipelines search."
+  },
+  "AggregateCIAppTestEvents": {
+    "description": "The API endpoint to aggregate CI Visibility test events into buckets of computed metrics and timeseries.",
+    "summary": "Aggregate tests events",
+    "request_description": "",
+    "request_schema_description": "The object sent with the request to retrieve aggregation buckets of test events from your organization."
+  },
+  "ListCIAppTestEvents": {
+    "description": "List endpoint returns CI Visibility test events that match a log search query.\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to see your latest test events.",
+    "summary": "Get a list of tests events"
+  },
+  "SearchCIAppTestEvents": {
+    "description": "List endpoint returns CI Visibility test events that match a log search query.\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to build complex events filtering and search.",
+    "summary": "Search tests events",
+    "request_description": "",
+    "request_schema_description": "The request for a tests search."
+  },
   "ListCurrentUserApplicationKeys": {
     "description": "List all application keys available for current user",
     "summary": "Get all application keys owned by current user"
@@ -121,6 +153,16 @@
     "request_description": "New dashboards of the dashboard list.",
     "request_schema_description": "Request containing the list of dashboards to update to."
   },
+  "ListEvents": {
+    "description": "List endpoint returns events that match an events search query.\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to see your latest events.",
+    "summary": "Get a list of events"
+  },
+  "SearchEvents": {
+    "description": "List endpoint returns events that match an events search query.\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to build complex events filtering and search.",
+    "summary": "Search events",
+    "request_description": "",
+    "request_schema_description": "The object sent with the request to retrieve a list of events from your organization."
+  },
   "ListIncidents": {
     "description": "Get all incidents for the user's organization.",
     "summary": "Get a list of incidents"
@@ -130,6 +172,10 @@
     "summary": "Create an incident",
     "request_description": "Incident payload.",
     "request_schema_description": "Create request for an incident."
+  },
+  "SearchIncidents": {
+    "description": "Search for incidents matching a certain query.",
+    "summary": "Search for incidents"
   },
   "DeleteIncident": {
     "description": "Deletes an existing incident from the users organization.",
@@ -144,6 +190,16 @@
     "summary": "Update an existing incident",
     "request_description": "Incident Payload.",
     "request_schema_description": "Update request for an incident."
+  },
+  "ListIncidentAttachments": {
+    "description": "Get all attachments for a given incident.",
+    "summary": "Get a list of attachments"
+  },
+  "UpdateIncidentAttachments": {
+    "description": "The bulk update endpoint for creating, updating, and deleting attachments for a given incident.",
+    "summary": "Create, update, and delete incident attachments",
+    "request_description": "Incident Attachment Payload.",
+    "request_schema_description": "The update request for an incident's attachments."
   },
   "ListOpsgenieServices": {
     "description": "Get a list of all services from the Datadog Opsgenie integration.",
@@ -169,8 +225,138 @@
     "request_description": "Opsgenie service payload.",
     "request_schema_description": "Update request for an Opsgenie service."
   },
+  "ListCloudflareAccounts": {
+    "description": "List Cloudflare accounts.",
+    "summary": "List Cloudflare accounts"
+  },
+  "CreateCloudflareAccount": {
+    "description": "Create a Cloudflare account.",
+    "summary": "Add Cloudflare account",
+    "request_description": "",
+    "request_schema_description": "Payload schema when adding a Cloudflare account."
+  },
+  "DeleteCloudflareAccount": {
+    "description": "Delete a Cloudflare account.",
+    "summary": "Delete Cloudflare account"
+  },
+  "GetCloudflareAccount": {
+    "description": "Get a Cloudflare account.",
+    "summary": "Get Cloudflare account"
+  },
+  "UpdateCloudflareAccount": {
+    "description": "Update a Cloudflare account.",
+    "summary": "Update Cloudflare account",
+    "request_description": "",
+    "request_schema_description": "Payload schema when updating a Cloudflare account."
+  },
+  "ListConfluentAccount": {
+    "description": "List Confluent accounts.",
+    "summary": "List Confluent accounts"
+  },
+  "CreateConfluentAccount": {
+    "description": "Create a Confluent account.",
+    "summary": "Add Confluent account",
+    "request_description": "Confluent payload",
+    "request_schema_description": "Payload schema when adding a Confluent account."
+  },
+  "DeleteConfluentAccount": {
+    "description": "Delete a Confluent account with the provided account ID.",
+    "summary": "Delete Confluent account"
+  },
+  "GetConfluentAccount": {
+    "description": "Get the Confluent account with the provided account ID.",
+    "summary": "Get Confluent account"
+  },
+  "UpdateConfluentAccount": {
+    "description": "Update the Confluent account with the provided account ID.",
+    "summary": "Update Confluent account",
+    "request_description": "Confluent payload",
+    "request_schema_description": "The JSON:API request for updating a Confluent account."
+  },
+  "ListConfluentResource": {
+    "description": "Get a Confluent resource for the account associated with the provided ID.",
+    "summary": "List Confluent Account resources"
+  },
+  "CreateConfluentResource": {
+    "description": "Create a Confluent resource for the account associated with the provided ID.",
+    "summary": "Add resource to Confluent account",
+    "request_description": "Confluent payload",
+    "request_schema_description": "The JSON:API request for updating a Confluent resource."
+  },
+  "DeleteConfluentResource": {
+    "description": "Delete a Confluent resource with the provided resource id for the account associated with the provided account ID.",
+    "summary": "Delete resource from Confluent account"
+  },
+  "GetConfluentResource": {
+    "description": "Get a Confluent resource with the provided resource id for the account associated with the provided account ID.",
+    "summary": "Get resource from Confluent account"
+  },
+  "UpdateConfluentResource": {
+    "description": "Update a Confluent resource with the provided resource id for the account associated with the provided account ID.",
+    "summary": "Update resource in Confluent account",
+    "request_description": "Confluent payload",
+    "request_schema_description": "The JSON:API request for updating a Confluent resource."
+  },
+  "ListFastlyAccounts": {
+    "description": "List Fastly accounts.",
+    "summary": "List Fastly accounts"
+  },
+  "CreateFastlyAccount": {
+    "description": "Create a Fastly account.",
+    "summary": "Add Fastly account",
+    "request_description": "",
+    "request_schema_description": "Payload schema when adding a Fastly account."
+  },
+  "DeleteFastlyAccount": {
+    "description": "Delete a Fastly account.",
+    "summary": "Delete Fastly account"
+  },
+  "GetFastlyAccount": {
+    "description": "Get a Fastly account.",
+    "summary": "Get Fastly account"
+  },
+  "UpdateFastlyAccount": {
+    "description": "Update a Fastly account.",
+    "summary": "Update Fastly account",
+    "request_description": "",
+    "request_schema_description": "Payload schema when updating a Fastly account."
+  },
+  "ListFastlyServices": {
+    "description": "List Fastly services for an account.",
+    "summary": "List Fastly services"
+  },
+  "CreateFastlyService": {
+    "description": "Create a Fastly service for an account.",
+    "summary": "Add Fastly service",
+    "request_description": "",
+    "request_schema_description": "Payload schema for Fastly service requests."
+  },
+  "DeleteFastlyService": {
+    "description": "Delete a Fastly service for an account.",
+    "summary": "Delete Fastly service"
+  },
+  "GetFastlyService": {
+    "description": "Get a Fastly service for an account.",
+    "summary": "Get Fastly service"
+  },
+  "UpdateFastlyService": {
+    "description": "Update a Fastly service for an account.",
+    "summary": "Update Fastly service",
+    "request_description": "",
+    "request_schema_description": "Payload schema for Fastly service requests."
+  },
+  "GetIPAllowlist": {
+    "description": "Returns the IP allowlist and its enabled or disabled state.",
+    "summary": "Get IP Allowlist"
+  },
+  "UpdateIPAllowlist": {
+    "description": "Edit the entries in the IP allowlist, and enable or disable it.",
+    "summary": "Update IP Allowlist",
+    "request_description": "",
+    "request_schema_description": "Update the IP allowlist."
+  },
   "SubmitLog": {
-    "description": "Send your logs to your Datadog platform over HTTP. Limits per HTTP request are:\n\n- Maximum content size per payload (uncompressed): 5MB\n- Maximum size for a single log: 1MB\n- Maximum array size if sending multiple logs in an array: 1000 entries\n\nAny log exceeding 1MB is accepted and truncated by Datadog:\n- For a single log request, the API truncates the log at 1MB and returns a 2xx.\n- For a multi-logs request, the API processes all logs, truncates only logs larger than 1MB, and returns a 2xx.\n\nDatadog recommends sending your logs compressed.\nAdd the `Content-Encoding: gzip` header to the request when sending compressed logs.\n\nThe status codes answered by the HTTP API are:\n- 202: Accepted: the request has been accepted for processing\n- 400: Bad request (likely an issue in the payload formatting)\n- 401: Unauthorized (likely a missing API Key)\n- 403: Permission issue (likely using an invalid API Key)\n- 408: Request Timeout, request should be retried after some time\n- 413: Payload too large (batch is above 5MB uncompressed)\n- 429: Too Many Requests, request should be retried after some time\n- 500: Internal Server Error, the server encountered an unexpected condition that prevented it from fulfilling the request, request should be retried after some time\n- 503: Service Unavailable, the server is not ready to handle the request probably because it is overloaded, request should be retried after some time",
+    "description": "Send your logs to your Datadog platform over HTTP. Limits per HTTP request are:\n\n- Maximum content size per payload (uncompressed): 5MB\n- Maximum size for a single log: 1MB\n- Maximum array size if sending multiple logs in an array: 1000 entries\n\nAny log exceeding 1MB is accepted and truncated by Datadog:\n- For a single log request, the API truncates the log at 1MB and returns a 2xx.\n- For a multi-logs request, the API processes all logs, truncates only logs larger than 1MB, and returns a 2xx.\n\nDatadog recommends sending your logs compressed.\nAdd the `Content-Encoding: gzip` header to the request when sending compressed logs.\nLog events can be submitted up to 18 hours in the past and 2 hours in the future.\n\nThe status codes answered by the HTTP API are:\n- 202: Accepted: the request has been accepted for processing\n- 400: Bad request (likely an issue in the payload formatting)\n- 401: Unauthorized (likely a missing API Key)\n- 403: Permission issue (likely using an invalid API Key)\n- 408: Request Timeout, request should be retried after some time\n- 413: Payload too large (batch is above 5MB uncompressed)\n- 429: Too Many Requests, request should be retried after some time\n- 500: Internal Server Error, the server encountered an unexpected condition that prevented it from fulfilling the request, request should be retried after some time\n- 503: Service Unavailable, the server is not ready to handle the request probably because it is overloaded, request should be retried after some time",
     "summary": "Send logs",
     "request_description": "Log to send (JSON format).",
     "request_schema_description": "Structured log message."
@@ -314,8 +500,8 @@
     "request_schema_description": "The request for a logs list."
   },
   "ListTagConfigurations": {
-    "description": "Returns all configured count/gauge/rate/distribution metric names\n(with additional filters if specified).",
-    "summary": "List tag configurations"
+    "description": "Returns all metrics that can be configured in the Metrics Summary page or with Metrics without Limits™ (matching additional filters if specified).",
+    "summary": "Get a list of metrics"
   },
   "DeleteBulkTagsMetricsConfiguration": {
     "description": "Delete all custom lists of queryable tag keys for a set of existing count, gauge, rate, and distribution metrics.\nMetrics are selected by passing a metric name prefix.\nResults can be sent to a set of account email addresses, just like the same operation in the Datadog web app.\nCan only be used with application keys of users with the `Manage Tags for Metrics` permission.",
@@ -328,6 +514,10 @@
     "summary": "Configure tags for multiple metrics",
     "request_description": "",
     "request_schema_description": "Wrapper object for a single bulk tag configuration request."
+  },
+  "ListActiveMetricConfigurations": {
+    "description": "List tags and aggregations that are actively queried on dashboards and monitors for a given metric name.",
+    "summary": "List active tags and aggregations"
   },
   "ListTagsByMetricName": {
     "description": "View indexed tag key-value pairs for a given metric name.",
@@ -361,6 +551,30 @@
     "description": "View distinct metrics volumes for the given metric name.\n\nCustom metrics generated in-app from other products will return `null` for ingested volumes.",
     "summary": "List distinct metric volumes by metric name"
   },
+  "ListMonitorConfigPolicies": {
+    "description": "Get all monitor configuration policies.",
+    "summary": "Get all monitor configuration policies"
+  },
+  "CreateMonitorConfigPolicy": {
+    "description": "Create a monitor configuration policy.",
+    "summary": "Create a monitor configuration policy",
+    "request_description": "Create a monitor configuration policy request body.",
+    "request_schema_description": "Request for creating a monitor configuration policy."
+  },
+  "DeleteMonitorConfigPolicy": {
+    "description": "Delete a monitor configuration policy.",
+    "summary": "Delete a monitor configuration policy"
+  },
+  "GetMonitorConfigPolicy": {
+    "description": "Get a monitor configuration policy by `policy_id`.",
+    "summary": "Get a monitor configuration policy"
+  },
+  "UpdateMonitorConfigPolicy": {
+    "description": "Edit a monitor configuration policy.",
+    "summary": "Edit a monitor configuration policy",
+    "request_description": "Description of the update.",
+    "request_schema_description": "Request for editing a monitor configuration policy."
+  },
   "ListPermissions": {
     "description": "Returns a list of all permissions, including name, description, and ID.",
     "summary": "List permissions"
@@ -368,6 +582,32 @@
   "ListProcesses": {
     "description": "Get all processes for your organization.",
     "summary": "Get all processes"
+  },
+  "QueryScalarData": {
+    "description": "Query scalar values (as seen on Query Value, Table and Toplist widgets).\nMultiple data sources are supported with the ability to\nprocess the data using formulas and functions.",
+    "summary": "Query scalar data across multiple products",
+    "request_description": "",
+    "request_schema_description": "A wrapper request around one scalar query to be executed."
+  },
+  "QueryTimeseriesData": {
+    "description": "Query timeseries data across various data sources and\nprocess the data by applying formulas and functions.",
+    "summary": "Query timeseries data across multiple products",
+    "request_description": "",
+    "request_schema_description": "A request wrapper around a single timeseries query to be executed."
+  },
+  "DeleteRestrictionPolicy": {
+    "description": "Deletes the restriction policy associated with a specified resource.",
+    "summary": "Delete a restriction policy"
+  },
+  "GetRestrictionPolicy": {
+    "description": "Retrieves the restriction policy associated with a specified resource.",
+    "summary": "Get a restriction policy"
+  },
+  "UpdateRestrictionPolicy": {
+    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Connections: `connection`\n- Dashboards: `dashboard`\n- Notebooks: `notebook`\n- Security Rules: `security-rule`",
+    "summary": "Update a restriction policy",
+    "request_description": "Restriction policy payload",
+    "request_schema_description": "Update request for a restriction policy."
   },
   "ListRoles": {
     "description": "Returns all roles, including their names and their unique identifiers.",
@@ -437,6 +677,30 @@
     "request_description": "",
     "request_schema_description": "The object sent with the request to retrieve aggregation buckets of RUM events from your organization."
   },
+  "GetRUMApplications": {
+    "description": "List all the RUM applications in your organization.",
+    "summary": "List all the RUM applications"
+  },
+  "CreateRUMApplication": {
+    "description": "Create a new RUM application in your organization.",
+    "summary": "Create a new RUM application",
+    "request_description": "",
+    "request_schema_description": "RUM application creation request attributes."
+  },
+  "DeleteRUMApplication": {
+    "description": "Delete an existing RUM application in your organization.",
+    "summary": "Delete a RUM application"
+  },
+  "GetRUMApplication": {
+    "description": "Get the RUM application with given ID in your organization.",
+    "summary": "Get a RUM application"
+  },
+  "UpdateRUMApplication": {
+    "description": "Update the RUM application with given ID in your organization.",
+    "summary": "Update a RUM application",
+    "request_description": "",
+    "request_schema_description": "RUM application update request."
+  },
   "ListRUMEvents": {
     "description": "List endpoint returns events that match a RUM search query.\n[Results are paginated][1].\n\nUse this endpoint to see your latest RUM events.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
     "summary": "Get a list of RUM events"
@@ -453,7 +717,7 @@
     "request_description": ""
   },
   "DownloadCloudWorkloadPolicyFile": {
-    "description": "The download endpoint generates a Cloud Workload Security policy file from your currently active\nCloud Workload Security rules, and downloads them as a .policy file. This file can then be deployed to\nyour agents to update the policy running in your environment.",
+    "description": "The download endpoint generates a Cloud Workload Security policy file from your currently active\nCloud Workload Security rules, and downloads them as a .policy file. This file can then be deployed to\nyour Agents to update the policy running in your environment.",
     "summary": "Get the latest Cloud Workload Security policy"
   },
   "ListCloudWorkloadSecurityAgentRules": {
@@ -538,8 +802,80 @@
     "request_description": "",
     "request_schema_description": "The request for a security signal list."
   },
+  "GetSecurityMonitoringSignal": {
+    "description": "Get a signal's details.",
+    "summary": "Get a signal's details"
+  },
+  "EditSecurityMonitoringSignalAssignee": {
+    "description": "Modify the triage assignee of a security signal.",
+    "summary": "Modify the triage assignee of a security signal",
+    "request_description": "Attributes describing the signal update.",
+    "request_schema_description": "Request body for changing the assignee of a given security monitoring signal."
+  },
+  "EditSecurityMonitoringSignalIncidents": {
+    "description": "Change the related incidents for a security signal.",
+    "summary": "Change the related incidents of a security signal",
+    "request_description": "Attributes describing the signal update.",
+    "request_schema_description": "Request body for changing the related incidents of a given security monitoring signal."
+  },
+  "EditSecurityMonitoringSignalState": {
+    "description": "Change the triage state of a security signal.",
+    "summary": "Change the triage state of a security signal",
+    "request_description": "Attributes describing the signal update.",
+    "request_schema_description": "Request body for changing the state of a given security monitoring signal."
+  },
+  "ListScanningGroups": {
+    "description": "List all the Scanning groups in your organization.",
+    "summary": "List Scanning Groups"
+  },
+  "ReorderScanningGroups": {
+    "description": "Reorder the list of groups.",
+    "summary": "Reorder Groups",
+    "request_description": "",
+    "request_schema_description": "Group reorder request."
+  },
+  "CreateScanningGroup": {
+    "description": "Create a scanning group.\nThe request MAY include a configuration relationship.\nA rules relationship can be omitted entirely, but if it is included it MUST be\nnull or an empty array (rules cannot be created at the same time).\nThe new group will be ordered last within the configuration.",
+    "summary": "Create Scanning Group",
+    "request_description": "",
+    "request_schema_description": "Create group request."
+  },
+  "DeleteScanningGroup": {
+    "description": "Delete a given group.",
+    "summary": "Delete Scanning Group",
+    "request_description": "",
+    "request_schema_description": "Delete group request."
+  },
+  "UpdateScanningGroup": {
+    "description": "Update a group, including the order of the rules.\nRules within the group are reordered by including a rules relationship. If the rules\nrelationship is present, its data section MUST contain linkages for all of the rules\ncurrently in the group, and MUST NOT contain any others.",
+    "summary": "Update Scanning Group",
+    "request_description": "",
+    "request_schema_description": "Update group request."
+  },
+  "CreateScanningRule": {
+    "description": "Create a scanning rule in a sensitive data scanner group, ordered last.\nThe posted rule MUST include a group relationship.\nIt MUST include either a standard_pattern relationship or a regex attribute, but not both.\nIf included_attributes is empty or missing, we will scan all attributes except\nexcluded_attributes. If both are missing, we will scan the whole event.",
+    "summary": "Create Scanning Rule",
+    "request_description": "",
+    "request_schema_description": "Create rule request."
+  },
+  "DeleteScanningRule": {
+    "description": "Delete a given rule.",
+    "summary": "Delete Scanning Rule",
+    "request_description": "",
+    "request_schema_description": "Delete rule request."
+  },
+  "UpdateScanningRule": {
+    "description": "Update a scanning rule.\nThe request body MUST NOT include a standard_pattern relationship, as that relationship\nis non-editable. Trying to edit the regex attribute of a rule with a standard_pattern\nrelationship will also result in an error.",
+    "summary": "Update Scanning Rule",
+    "request_description": "",
+    "request_schema_description": "Update rule request."
+  },
+  "ListStandardPatterns": {
+    "description": "Returns all standard patterns.",
+    "summary": "List standard patterns"
+  },
   "SubmitMetrics": {
-    "description": "The metrics end-point allows you to post time-series data that can be graphed on Datadog’s dashboards.\nThe maximum payload size is 500 kilobytes (512000 bytes). Compressed payloads must have a decompressed size of less than 5 megabytes (5242880 bytes).\n\nIf you’re submitting metrics directly to the Datadog API without using DogStatsD, expect:\n\n- 64 bits for the timestamp\n- 64 bits for the value\n- 20 bytes for the metric names\n- 50 bytes for the timeseries\n- The full payload is approximately 100 bytes.",
+    "description": "The metrics end-point allows you to post time-series data that can be graphed on Datadog’s dashboards.\nThe maximum payload size is 500 kilobytes (512000 bytes). Compressed payloads must have a decompressed size of less than 5 megabytes (5242880 bytes).\n\nIf you’re submitting metrics directly to the Datadog API without using DogStatsD, expect:\n\n- 64 bits for the timestamp\n- 64 bits for the value\n- 20 bytes for the metric names\n- 50 bytes for the timeseries\n- The full payload is approximately 100 bytes.\n\nHost name is one of the resources in the Resources field.",
     "summary": "Submit metrics",
     "request_description": "",
     "request_schema_description": "The metrics' payload."
@@ -584,6 +920,24 @@
     "request_description": "Incident Service Payload.",
     "request_schema_description": "Create request with an incident service payload."
   },
+  "ListServiceDefinitions": {
+    "description": "Get a list of all service definitions from the Datadog Service Catalog.",
+    "summary": "Get all service definitions"
+  },
+  "CreateOrUpdateServiceDefinitions": {
+    "description": "Create or update service definition in the Datadog Service Catalog.",
+    "summary": "Create or update service definition",
+    "request_description": "Service Definition YAML/JSON.",
+    "request_schema_description": "Create service definitions request."
+  },
+  "DeleteServiceDefinition": {
+    "description": "Delete a single service definition in the Datadog Service Catalog.",
+    "summary": "Delete a single service definition"
+  },
+  "GetServiceDefinition": {
+    "description": "Get a single service definition from the Datadog Service Catalog.",
+    "summary": "Get a single service definition"
+  },
   "DeleteIncidentService": {
     "description": "Deletes an existing incident service.",
     "summary": "Delete an existing incident service"
@@ -597,6 +951,16 @@
     "summary": "Update an existing incident service",
     "request_description": "Incident Service Payload.",
     "request_schema_description": "Update request with an incident service payload."
+  },
+  "GetOnDemandConcurrencyCap": {
+    "description": "Get the on-demand concurrency cap.",
+    "summary": "Get the on-demand concurrency cap"
+  },
+  "SetOnDemandConcurrencyCap": {
+    "description": "Save new value for on-demand concurrency cap.",
+    "summary": "Save new value for on-demand concurrency cap",
+    "request_description": ".",
+    "request_schema_description": "On-demand concurrency cap attributes."
   },
   "ListIncidentTeams": {
     "description": "Get all incident teams for the requesting user's organization. If the `include[users]` query parameter is provided, the included attribute will contain the users related to these incident teams.",
@@ -623,24 +987,32 @@
     "request_schema_description": "Update request with an incident team payload."
   },
   "GetUsageApplicationSecurityMonitoring": {
-    "description": "Get hourly usage for Application Security .",
-    "summary": "Get hourly usage for Application Security"
+    "description": "Get hourly usage for application security .\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
+    "summary": "Get hourly usage for application security"
   },
   "GetCostByOrg": {
-    "description": "Get cost across multi-org account. Cost by org data for a given month becomes available no later than the 16th of the following month.",
+    "description": "Get cost across multi-org account.\nCost by org data for a given month becomes available no later than the 16th of the following month.\n**Note:** This endpoint has been deprecated. Please use the new endpoint\n[`/historical_cost`](https://docs.datadoghq.com/api/latest/usage-metering/#get-historical-cost-across-your-account)\ninstead.",
     "summary": "Get cost across multi-org account"
   },
   "GetEstimatedCostByOrg": {
-    "description": "Get estimated cost across multi-org account.",
-    "summary": "Get estimated cost across multi-org account"
+    "description": "Get estimated cost across multi-org and single root-org accounts.\nEstimated cost data is only available for the current month and previous month\nand is delayed by up to 72 hours from when it was incurred.\nTo access historical costs prior to this, use the `/historical_cost` endpoint.",
+    "summary": "Get estimated cost across your account"
+  },
+  "GetHistoricalCostByOrg": {
+    "description": "Get historical cost across multi-org and single root-org accounts.\nCost data for a given month becomes available no later than the 16th of the following month.",
+    "summary": "Get historical cost across your account"
+  },
+  "GetHourlyUsage": {
+    "description": "Get hourly usage by product family.",
+    "summary": "Get hourly usage by product family"
   },
   "GetUsageLambdaTracedInvocations": {
-    "description": "Get hourly usage for Lambda Traced Invocations.",
-    "summary": "Get hourly usage for Lambda Traced Invocations"
+    "description": "Get hourly usage for lambda traced invocations.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
+    "summary": "Get hourly usage for lambda traced invocations"
   },
   "GetUsageObservabilityPipelines": {
-    "description": "Get hourly usage for Observability Pipelines.",
-    "summary": "Get hourly usage for Observability Pipelines"
+    "description": "Get hourly usage for observability pipelines.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
+    "summary": "Get hourly usage for observability pipelines"
   },
   "SendInvitations": {
     "description": "Sends emails to one or more users inviting them to join the organization.",

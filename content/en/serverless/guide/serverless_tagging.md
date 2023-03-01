@@ -60,5 +60,5 @@ The [Service Map][4] groups services into maps by the `env` tag, and uses the `s
 
 [1]: /getting_started/tagging/unified_service_tagging/#aws-lambda-functions
 [2]: /developers/guide/what-best-practices-are-recommended-for-naming-metrics-and-tags/#rules-and-best-practices-for-naming-tags
-[3]: /tracing/deployment_tracking/
-[4]: /tracing/visualization/services_map/
+[3]: /tracing/services/deployment_tracking/
+[4]: /tracing/services/services_map/

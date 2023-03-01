@@ -6,7 +6,8 @@
         "example": "content-type",
         "name": "PROPERTY",
         "pattern": "content-type",
-        "type": "text"
+        "type": "text",
+        "secure": true
       }
     ],
     "request": {

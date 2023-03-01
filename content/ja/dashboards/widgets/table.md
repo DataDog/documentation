@@ -16,6 +16,8 @@ widget_type: query_table
 
 {{< img src="dashboards/widgets/table/table_widget_1.png" alt="テーブルウィジェット" style="width:80%;">}}
 
+**注:** テーブルウィジェットは数値データのみサポートされます。
+
 ## セットアップ
 
 ### コンフィギュレーション
@@ -61,7 +63,7 @@ widget_type: query_table
 [2]: /ja/logs/search_syntax/
 [3]: /ja/tracing/trace_explorer/query_syntax/
 [4]: /ja/real_user_monitoring/explorer/search_syntax
-[5]: /ja/tracing/profiler/search_profiles
+[5]: /ja/profiler/search_profiles
 [6]: /ja/security_monitoring/explorer/
 [7]: /ja/dashboards/querying/#configuring-an-apm-stats-graph
 [8]: /ja/api/v1/dashboards/

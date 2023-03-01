@@ -1,36 +1,59 @@
 ---
+app_id: bonsai
+app_uuid: ec3141f4-b722-4eaa-be49-47c6eec76da9
 assets:
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: bonsai.req.total
+      metadata_path: metadata.csv
+      prefix: bonsai.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Bonsai
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Bonsai
+  sales_email: dev@onemorecloud.com
+  support_email: dev@onemorecloud.com
 categories:
-  - data store
-creates_events: false
-ddtype: crawler
+- data store
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/bonsai/README.md
-display_name: Bonsai
+- https://github.com/DataDog/integrations-extras/blob/master/bonsai/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: bonsai
-guid: 3c3a1e28-7fd3-443e-a3e1-0c223326a572
 integration_id: bonsai
 integration_title: Bonsai
 integration_version: ''
 is_public: true
 kind: インテグレーション
-maintainer: dev@onemorecloud.com
-manifest_version: 1.0.0
-metric_prefix: bonsai.
-metric_to_check: bonsai.req.total
+manifest_version: 2.0.0
 name: bonsai
-public_title: Datadog-Bonsai インテグレーション
+oauth: {}
+public_title: Bonsai
 short_description: 'Bonsai: マネージド型 Elasticsearch'
-support: contrib
 supported_os:
-  - linux
-  - windows
+- linux
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Category::Data Store
+  configuration: README.md#Setup
+  description: 'Bonsai: マネージド型 Elasticsearch'
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Bonsai
 ---
+
+
+
 ## 概要
 
 Bonsai クラスターのリクエストレベルのメトリクスを追跡すると、以下のことができます。

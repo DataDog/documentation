@@ -1,27 +1,27 @@
 ---
-integration_title: RSS
-name: rss
-kind: インテグレーション
-doclevel: basic
-description: RSS フィードを Datadog イベントストリームに表示
-is_public: true
-public_title: Datadog-RSS インテグレーション
-short_description: Datadog イベントストリームで RSS フィードをキャプチャ
-dependencies:
-  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/rss.md
 categories:
-  - notification
-  - web
-ddtype: crawler
+- notification
+- web
+dependencies:
+- https://github.com/DataDog/documentation/blob/master/content/en/integrations/rss.md
+description: RSS フィードを Datadog イベントエクスプローラーに表示
+doclevel: basic
 integration_id: feed
+integration_title: RSS
+is_public: true
+kind: インテグレーション
+name: rss
+public_title: Datadog-RSS インテグレーション
+short_description: Datadog イベントエクスプローラーで RSS フィードをキャプチャ
 ---
+
 {{< img src="integrations/rss/rss.png" alt="RSS イベント"  >}}
 
 ## 概要
 
 Datadog で RSS フィードのアクティビティをキャプチャして、以下のことができます。
 
-- カスタムソースからストリームにイベントを追加できます。
+- カスタムソースからエクスプローラーにイベントを追加できます。
 - フィードイベントについてチームで議論できます。
 
 ## セットアップ
@@ -39,14 +39,13 @@ Datadog で RSS フィードのアクティビティをキャプチャして、�
 
 ### 検証
 
-Datadog で RSS フィードのアクティビティを表示するには、[Events Stream][1] と [Events Explorer][2] を確認してください。
+Datadog で RSS フィードのアクティビティを表示するには、[イベントエクスプローラー][1]を確認してください。
 
 ## その他の参考資料
 
 ### ドキュメント
 
-- [Datadog のイベントを探索する][3]
+- [Datadog のイベントを探索する][2]
 
-[1]: https://app.datadoghq.com/event/stream
-[2]: https://app.datadoghq.com/event/explorer
-[3]: https://docs.datadoghq.com/ja/events/#exploring-datadog-events
+[1]: https://app.datadoghq.com/event/explorer
+[2]: https://docs.datadoghq.com/ja/events/#exploring-datadog-events

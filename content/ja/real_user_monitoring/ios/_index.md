@@ -12,9 +12,17 @@ further_reading:
 - link: /real_user_monitoring
   tag: ドキュメント
   text: RUM データの調査方法
+- link: /real_user_monitoring/error_tracking/ios/
+  tag: ドキュメント
+  text: iOS のエラーの追跡方法について
+- link: /real_user_monitoring/ios/swiftui/
+  tag: ドキュメント
+  text: SwiftUI アプリケーションのインスツルメンテーションについて
 kind: documentation
-title: RUM iOS モニタリング
+title: RUM iOS と tvOS のモニタリング
 ---
+## 概要
+
 Datadog Real User Monitoring (RUM) を使用すると、アプリケーションの個々のユーザーのリアルタイムパフォーマンスとユーザージャーニーを視覚化して分析できます。
 
 ## セットアップ
@@ -24,7 +32,7 @@ Datadog Real User Monitoring (RUM) を使用すると、アプリケーション
 3. ライブラリを初期化します。
 4. RUM モニター、`DDURLSessionDelegate` を初期化してデータ送信を開始します。
 
-**注:** Datadog iOS SDK に対応するバージョンは iOS v11 以降です。iOS SDK は、tvOS にも対応しています。
+**注:** Datadog iOS SDK に対応するバージョンは iOS v11 以降です。Datadog iOS SDK は、tvOS にも対応しています。
 
 ### SDK を依存関係として宣言
 
@@ -39,16 +47,21 @@ Datadog Real User Monitoring (RUM) を使用すると、アプリケーション
 
 ### UI でアプリケーションの詳細を指定
 
-1. **UX Monitoring** > **RUM Applications** で **New Application** をクリックします。
-2. [Datadog UI][5] で、**Application Type** に `iOS` を選択し、新しいアプリケーション名を入力して一意の Datadog アプリケーション ID とクライアントトークンを生成します。
+1. [**UX Monitoring** > **RUM Applications** > **New Application**][5] へ移動します。
+2. アプリケーションタイプとして `iOS` を選択し、新しいアプリケーション名を入力して一意の Datadog アプリケーション ID とクライアントトークンを生成します。
+3. Web ビューをインスツルメントするには、**Instrument your webviews** トグルをクリックします。詳しくは、[Web ビュー追跡][12]を参照してください。
 
 {{< img src="real_user_monitoring/ios/screenshot_rum.png" alt="RUM イベント階層" style="width:100%;border:none" >}}
 
-データの安全性を確保するため、`dd-sdk-ios` ライブラリの構成に [Datadog API キー][6]を使用しないでください。その代わり、クライアントトークンを使用すると、iOS アプリケーションバイトコード内のクライアント側で API キーが公開されないようにできます。
+データの安全性を確保するため、クライアントトークンを使用する必要があります。`dd-sdk-ios` ライブラリの構成に [Datadog API キー][6]のみを使用した場合、クライアント側で iOS アプリケーションのバイトコード内で公開されます。
 
 クライアントトークンのセットアップについて、詳しくは[クライアントトークンに関するドキュメント][7]を参照してください。
 
 ### ライブラリの初期化
+
+初期化スニペットでは、環境名、サービス名、バージョン番号を設定します。以下の例では、`app-name` がデータを生成するアプリケーションのバリアントを指定します。
+
+詳しくは、[タグの使用方法][11]をご覧ください。
 
 {{< site-region region="us" >}}
 {{< tabs >}}
@@ -67,7 +80,7 @@ Datadog.initialize(
         .set(serviceName: "app-name")
         .set(endpoint: .us1)
         .trackUIKitRUMViews()
-        .trackUIKitActions()
+        .trackUIKitRUMActions()
         .trackURLSession()
         .build()
 )
@@ -108,7 +121,7 @@ Datadog.initialize(
         .set(serviceName: "app-name")
         .set(endpoint: .eu1)
         .trackUIKitRUMViews()
-        .trackUIKitActions()
+        .trackUIKitRUMActions()
         .trackURLSession()
         .build()
 )
@@ -149,7 +162,7 @@ Datadog.initialize(
         .set(serviceName: "app-name")
         .set(endpoint: .us3)
         .trackUIKitRUMViews()
-        .trackUIKitActions()
+        .trackUIKitRUMActions()
         .trackURLSession()
         .build()
 )
@@ -190,7 +203,7 @@ Datadog.initialize(
         .set(serviceName: "app-name")
         .set(endpoint: .us5)
         .trackUIKitRUMViews()
-        .trackUIKitActions()
+        .trackUIKitRUMActions()
         .trackURLSession()
         .build()
 )
@@ -231,7 +244,7 @@ Datadog.initialize(
         .set(serviceName: "app-name")
         .set(endpoint: .us1_fed)
         .trackUIKitRUMViews()
-        .trackUIKitActions()
+        .trackUIKitRUMActions()
         .trackURLSession()
         .build()
 )
@@ -256,7 +269,7 @@ DDConfigurationBuilder *builder = [DDConfiguration builderWithRumApplicationID:@
 {{< /tabs >}}
 {{< /site-region >}}
 
-RUM SDK は、SDK の初期化時に提供されたオプションに従いユーザーセッションを自動的に追跡します。EU ユーザーに対する GDPR コンプライアンスおよびその他の[初期化パラメーター][9]を SDK コンフィギュレーションに追加するには、[トラッキングに関する同意の設定ドキュメント][8]を参照してください。
+RUM iOS SDK は、SDK の初期化時に提供されたオプションに従いユーザーセッションを自動的に追跡します。EU ユーザーに対する GDPR コンプライアンスおよびその他の[初期化パラメーター][9]を SDK コンフィギュレーションに追加するには、[トラッキングに関する同意の設定ドキュメント][8]を参照してください。
 
 ### RUM モニターと `DDURLSessionDelegate` の初期化
 
@@ -300,12 +313,22 @@ NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConf
 {{% /tab %}}
 {{< /tabs >}}
 
-## iOS のクラッシュレポートとエラー追跡
+## バックグラウンドイベントの追跡
 
-iOS のクラッシュレポートとエラー追跡では、問題と最新の利用可能なエラーが表示されます。エラーの詳細と JSON を含む属性を RUM エクスプローラーで表示できます。
-
-<div class="alert alert-info"><p>クラッシュレポートとエラー追跡はベータ版で利用できます。サインアップするには、<a href="https://docs.datadoghq.com/real_user_monitoring/ios/crash_reporting">クラッシュレポート (ベータ版)</a> をご覧ください。</p>
+<div class="alert alert-info"><p>バックグラウンドイベントを追跡すると、セッションが追加され、課金に影響を与える可能性があります。ご質問は、<a href="https://docs.datadoghq.com/help/">Datadog サポートまでお問い合わせ</a>ください。</p>
 </div>
+
+アプリケーションがバックグラウンドにあるとき (例えば、アクティブなビューがないとき)、クラッシュやネットワークリクエストなどのイベントを追跡することができます。
+
+Datadog の構成で、初期化時に以下のスニペットを追加します。
+
+```swift
+.trackBackgroundEvents()
+```
+
+## iOS エラーの追跡
+
+[iOS のクラッシュレポートとエラー追跡][13]では、アプリケーションの問題と最新の利用可能なエラーが表示されます。エラーの詳細と JSON を含む属性を [RUM エクスプローラー][10]で表示できます。
 
 ## その他の参考資料
 
@@ -316,8 +339,12 @@ iOS のクラッシュレポートとエラー追跡では、問題と最新の�
 [2]: https://cocoapods.org/
 [3]: https://swift.org/package-manager/
 [4]: https://github.com/Carthage/Carthage
-[5]: https://app.datadoghq.com/rum/create
+[5]: https://app.datadoghq.com/rum/application/create
 [6]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#api-keys
 [7]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#client-tokens
 [8]: https://docs.datadoghq.com/ja/real_user_monitoring/ios/advanced_configuration/#set-tracking-consent-gdpr-compliance
 [9]: https://docs.datadoghq.com/ja/real_user_monitoring/ios/advanced_configuration/#initialization-parameters
+[10]: https://docs.datadoghq.com/ja/real_user_monitoring/explorer/
+[11]: https://docs.datadoghq.com/ja/getting_started/tagging/using_tags/#rum--session-replay
+[12]: https://docs.datadoghq.com/ja/real_user_monitoring/ios/web_view_tracking/
+[13]: https://docs.datadoghq.com/real_user_monitoring/error_tracking/ios/

@@ -33,14 +33,20 @@ Here's a two-minute video walkthrough:
 
 ### Create
 
-1. After the feature is enabled, see the [New Account Page][3].
-2. Enter the name of the child-organization you wish to create and click the **Create** button. **The child-organization name cannot exceed 32 characters.**
+1. After the feature is enabled, see the [New Organization Page][3].
+2. Enter the name of the child-organization you wish to create. **The child-organization name cannot exceed 32 characters.**
+3. Optionally, invite admin users to your child-organization:
+    - Enter one or more email addresses.
+    - Invited users are assigned the [Datadog Admin role][4]. You can invite more users in
+Organization Settings after creating your organization.
+    - If the user does not have a password, Datadog sends an email invitation with a link to set a password and join the new child-organization.
+4. Click **Create**.
 
-The new child-organization inherits the parent-organization's plan and is added to the parent-organization's billing account. If you want to update the child-organization's billing, [contact your sales representative][4].
+The new child-organization inherits the parent-organization's plan and is added to the parent-organization's billing account. If you want to update the child-organization's billing, [contact your sales representative][5].
 
 ### Content
 
-Onboarding a new sub-organization with a set of baseline dashboards and monitors can be done programmatically with the [Datadog API][5] and tools such as Terraform, see [Managing Datadog with Terraform][6]. Additionally, scripts can be used to backup existing dashboards and [monitors][7] as code.
+Onboarding a new sub-organization with a set of baseline dashboards and monitors can be done programmatically with the [Datadog API][6] and tools such as Terraform, see [Managing Datadog with Terraform][7]. Additionally, scripts can be used to backup existing dashboards and [monitors][8] as code.
 
 ### Custom sub-domains
 
@@ -121,11 +127,11 @@ On the **Individual Organizations** usage tab, you can view the usage of your ch
 
 The default view is the "Billable" view, which shows usage that contributes to your final bill. This view removes child organizations that are not billable such as trial organizations, and other adjustments that provide a more accurate summary of what drives your bill. Switch to the "All" view to see the unadjusted, raw usage of your parent-organization and all child-organizations. Both views can be downloaded as a CSV file.
 
-To view the [Usage Details][8] of a child-organization, you can click on the child-organization's name.
+To view the [Usage Details][9] of a child-organization, you can click on the child-organization's name.
 
 ## Usage attribution
 
-The parent-organization can view the usage of child-organizations by existing tag keys in the [Usage Attribution][9] page. Admins can hover over their username at the bottom left, then navigate to: `Plan & Usage`--> `Usage Attribution`.
+The parent-organization can view the usage of child-organizations by existing tag keys in the [Usage Attribution][10] page. Admins can hover over their username at the bottom left, then navigate to: `Plan & Usage`--> `Usage Attribution`.
 
 When enabled at the parent-organization level, usage attribution shows usage aggregated across all organizations. This can be useful if you would like to attribute the usage of your child-organizations to certain projects, teams, or other groupings.
 
@@ -135,7 +141,7 @@ Functionalities include:
 * Accessing monthly usage in both the UI and as a .tsv download (tab separated values)
 * Accessing daily usage in a .tsv file for most usage types.
 
-{{< img src="account_management/billing/advanced-usage-reporting-03.png" alt="Usage Summary Table" >}}
+{{< img src="account_management/billing/usage_attribution/Usage-Attribution-v2-Total-Usage.png" alt="Applied tags in Datadog" style="width:100%;" >}}
 
 Usage attribution can also be enabled at the child-organization level. When enabled at this level, the tags are only applied to that specific child-organization and can only be viewed in that child-organization. Tags applied at the child-organization level do not rollup and cannot be viewed in the parent-organization.
 
@@ -154,9 +160,10 @@ Usage Attribution is an advanced feature included in the Enterprise plan. For al
 [1]: /account_management/#managing-your-organizations
 [2]: /help/
 [3]: https://app.datadoghq.com/account/new_org
-[4]: mailto:success@datadoghq.com
-[5]: /api/
-[6]: https://www.datadoghq.com/blog/managing-datadog-with-terraform
-[7]: /monitors/manage/
-[8]: /account_management/billing/usage_details/
-[9]: /account_management/billing/usage_attribution/
+[4]: /account_management/rbac/permissions/#advanced-permissions
+[5]: mailto:success@datadoghq.com
+[6]: /api/
+[7]: https://www.datadoghq.com/blog/managing-datadog-with-terraform
+[8]: /monitors/manage/
+[9]: /account_management/billing/usage_details/
+[10]: /account_management/billing/usage_attribution/

@@ -1,42 +1,64 @@
 ---
+app_id: openstack-controller
+app_uuid: f5c2cc69-1efc-40b2-8dcd-61e1215b237d
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     OpenStack Controller Overview: assets/dashboards/openstack-controller.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: openstack.controller
+      metadata_path: metadata.csv
+      prefix: openstack.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Openstack_controller
   logs:
     source: openstack
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - cloud
 - ログの収集
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/openstack_controller/README.md
-display_name: Openstack_controller
+display_on_public_website: true
 draft: false
 git_integration_title: openstack_controller
-guid: 49979592-9096-460a-b086-f173f26c6626
 integration_id: openstack-controller
 integration_title: OpenStack Controller
-integration_version: 2.1.0
+integration_version: 2.1.2
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: openstack.
-metric_to_check: openstack.controller
+manifest_version: 2.0.0
 name: openstack_controller
+oauth: {}
 public_title: OpenStack Controller
 short_description: ハイパーバイザーおよび VM レベルのリソース使用状況と Neutron メトリクスを追跡
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Cloud
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: ハイパーバイザーおよび VM レベルのリソース使用状況と Neutron メトリクスを追跡
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: OpenStack Controller
 ---
 
 

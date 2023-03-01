@@ -2,8 +2,7 @@
 title: Security Guides
 kind: guide
 private: true
-aliases:
-    - /security/guide/
+disable_toc: true
 ---
 
 

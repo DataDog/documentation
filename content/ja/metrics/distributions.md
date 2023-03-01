@@ -101,7 +101,7 @@ DDSketch によって計算されたディストリビューションメトリ�
 {{< img src="metrics/distributions/dist_manage.jpg" alt="Manage Tags ボタンでディストリビューションにタグを構成する" style="width:80%;">}}
 
 ## 監査イベント
-タグコンフィギュレーションまたはパーセンタイル集計の変更があった場合、[イベントストリーム][3]にイベントが作成されます。このイベントでは、変更内容が説明され、変更を行ったユーザーが表示されます。
+タグコンフィギュレーションまたはパーセンタイル集計の変更があった場合、[イベントエクスプローラー][3]にイベントが作成されます。このイベントでは、変更内容が説明され、変更を行ったユーザーが表示されます。
 
 ディストリビューションメトリクスでタグコンフィギュレーションを作成、更新、または削除した場合は、次のイベント検索の例を確認できます。
 ```text
@@ -120,4 +120,4 @@ https://app.datadoghq.com/event/stream?tags_execution=and&per_page=30&query=tags
 
 [1]: /ja/metrics/types/
 [2]: https://www.datadoghq.com/blog/engineering/computing-accurate-percentiles-with-ddsketch/
-[3]: https://app.datadoghq.com/event/stream
+[3]: https://app.datadoghq.com/event/explorer

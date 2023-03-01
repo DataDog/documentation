@@ -1,21 +1,21 @@
 ---
 title: Getting Started with the Continuous Profiler
-kind: Documentation
+kind: documentation
 aliases:
     - /tracing/profiling/intro_to_profiling
     - /tracing/profiler/intro_to_profiling
 further_reading:
-    - link: '/tracing/profiler/'
+    - link: '/profiler/'
       tag: 'Documentation'
       text: 'Continuous Profiler'
-    - link: '/tracing/profiler/enabling/'
+    - link: '/profiler/enabling/'
       tag: 'Documentation'
       text: 'Enabling the Profiler'
-    - link: 'https://learn.datadoghq.com/course/view.php?id=18'
+    - link: 'https://learn.datadoghq.com/courses/intro-to-apm'
       tag: 'Learning Center'
-      text: 'Introduction to Datadog'
+      text: 'Introduction to Application Performance Monitoring'
     - link: 'https://www.datadoghq.com/blog/engineering/how-we-optimized-our-akka-application-using-datadogs-continuous-profiler/'
-      tags: 'Blog'
+      tag: 'Blog'
       text: 'How we optimized our Akka application using Datadog’s Continuous Profiler'
 ---
 
@@ -66,7 +66,7 @@ docker-compose up -d
 After the containers are built and running, the "toolbox" container is available to explore:
 
 ```
-docker exec -it dd-continuous-profiler-example_toolbox_1 bash
+docker exec -it dd-continuous-profiler-example-toolbox-1 bash
 ```
 
 Use the API with:
@@ -107,47 +107,47 @@ Percentage of the requests served within a certain time (ms)
 
 Use the [Profile Search][6] to find the profile covering the time period for which you generated traffic. It may take a minute or so to load. The profile that includes the load test has a higher CPU usage:
 
-{{< img src="tracing/profiling/intro_to_profiling/list.png" alt="List of profiles" style="width:80%;">}}
+{{< img src="profiler/intro_to_profiling/list.png" alt="List of profiles" style="width:80%;">}}
 
 When you open it, the visualization of the profile looks similar to this:
 
-{{< img src="tracing/profiling/intro_to_profiling/flame_graph.png" alt="Flame graph">}}
+{{< img src="profiler/intro_to_profiling/flame_graph.png" alt="Flame graph">}}
 
 This is a flame graph. The most important things it shows are how much CPU each method used (since this is a CPU profile) and how each method was called. For example, reading from the second row from the top, you see that `Thread.run()` called `QueuedThreadPool$2.run()` (amongst other things), which called `QueuedThreadPool.runjob(Runnable)`, which called `ReservedTheadExecutor$ReservedThread.run()`, and so on.
 
-Zooming in to one area on the bottom of the flame graph, a tooltip shows that roughly 390ms (0.90%) of CPU time was spent within this `parse()` function:
+Zooming in to one area on the bottom of the flame graph, a tooltip shows that roughly 309ms (0.90%) of CPU time was spent within this `parse()` function:
 
-{{< img src="tracing/profiling/intro_to_profiling/flame_graph_parse.png" alt="Flame graph parse() frame">}}
+{{< img src="profiler/intro_to_profiling/flame_graph_parse.png" alt="Flame graph parse() frame">}}
 
 `String.length()` is directly below the `parse()` function, which means that `parse()` calls it. Hover over `String.length()`, to see it took about 112ms of CPU time:
 
-{{< img src="tracing/profiling/intro_to_profiling/flame_graph_length.png" alt="Flame graph String.length() frame">}}
+{{< img src="profiler/intro_to_profiling/flame_graph_length.png" alt="Flame graph String.length() frame">}}
 
-That means 278 milliseconds were spent directly in `parse()`: 390ms - 112ms. That's visually represented by the part of the `parse()` box that doesn't have anything below it.
+That means 197 milliseconds were spent directly in `parse()`: 309ms - 112ms. That's visually represented by the part of the `parse()` box that doesn't have anything below it.
 
 It's worth calling out that the flame graph _does not_ represent the progression of time. Looking at this part of the profile, `Gson$1.write()` didn't run before `TypeAdapters$16.write()` but it may not have run after it either.
 
-{{< img src="tracing/profiling/intro_to_profiling/flame_graph_write.png" alt="Flame graph section with write() frames next to each other">}}
+{{< img src="profiler/intro_to_profiling/flame_graph_write.png" alt="Flame graph section with write() frames next to each other">}}
 
  They could have been running concurrently, or the program could have run several calls of one, then several calls of the other, and kept switching back and forth. The flame graph merges together all the times that a program was running the same series of functions so you can tell at a glance which parts of the code were using the most CPU without tons of tiny boxes showing each time a function was called.
 
 Zoom back out to see that about 87% of CPU usage was within the `replyJSON()` method. Below that, the graph shows `replyJSON()` and the methods it calls eventually branch into four main code paths ("stack traces") that run functions pertaining to sorting and date parsing:
 
-{{< img src="tracing/profiling/intro_to_profiling/flame_graph_replyjson_arrows.png" alt="Flame graph with arrows pointing at stack traces below replyJSON()">}}
+{{< img src="profiler/intro_to_profiling/flame_graph_replyjson_arrows.png" alt="Flame graph with arrows pointing at stack traces below replyJSON()">}}
 
 Also, you can see a part of the CPU profile that looks like this:
 
-{{< img src="tracing/profiling/intro_to_profiling/flame_graph_gc.png" alt="Flame graph showing GC (garbage collection)" style="width:80%;">}}
+{{< img src="profiler/intro_to_profiling/flame_graph_gc.png" alt="Flame graph showing GC (garbage collection)" style="width:80%;">}}
 
 ### Profile types
 
 Almost 6% of CPU time was spent in garbage collection, which suggests it may be producing a lot of garbage. So, review the **Allocated Memory** profile type:
 
-{{< img src="tracing/profiling/intro_to_profiling/types.png" alt="Profile type selector" style="width:60%;">}}
+{{< img src="profiler/intro_to_profiling/types.png" alt="Profile type selector" style="width:60%;">}}
 
 On an Allocated Memory profile, the size of the boxes shows how much memory each function allocated, and the call stack that led to the function doing the allocating. Here you can see that during this one minute profile, the `replyJSON()` method and other methods that it called, allocated 17.47 GiB, mostly related to the same date parsing code seen in the CPU profile above:
 
-{{< img src="tracing/profiling/intro_to_profiling/alloc_flame_graph_replyjson_arrows.png" alt="Flame graph of allocation profile with arrows pointing at stack traces below replyJSON()">}}
+{{< img src="profiler/intro_to_profiling/alloc_flame_graph_replyjson_arrows.png" alt="Flame graph of allocation profile with arrows pointing at stack traces below replyJSON()">}}
 
 ## Remediation
 
@@ -155,7 +155,7 @@ On an Allocated Memory profile, the size of the boxes shows how much memory each
 
 Review the code and see what's going on. By looking at the CPU flame graph, you can see that expensive code paths go through a Lambda on line 66, which calls `LocalDate.parse()`:
 
-{{< img src="tracing/profiling/intro_to_profiling/flame_graph_sort_lambda.png" alt="Flame graph with mouse over sort lambda">}}
+{{< img src="profiler/intro_to_profiling/flame_graph_sort_lambda.png" alt="Flame graph with mouse over sort lambda">}}
 
 That corresponds to this part of code in [`dd-continuous-profiler-example`][7], where it calls to `LocalDate.parse()`:
 
@@ -198,7 +198,7 @@ docker-compose up -d
 To test the results, generate traffic again:
 
 ```shell
-docker exec -it dd-continuous-profiler-example_toolbox_1 bash
+docker exec -it dd-continuous-profiler-example-toolbox-1 bash
 ab -c 10 -t 20 http://movies-api-java:8080/movies?q=the
 ```
 
@@ -222,7 +222,7 @@ p99 went from 795ms to 218ms, and overall, this is four to six times faster than
 
 Locate the [profile](#read-the-profile) containing the new load test and look at the CPU profile. The `replyJSON` parts of the flame graph are a much smaller percentage of the total CPU usage than the previous load test:
 
-{{< img src="tracing/profiling/intro_to_profiling/flame_graph_optimized_replyjson.png" alt="Flame graph with the optimized replyJSON() stack traces">}}
+{{< img src="profiler/intro_to_profiling/flame_graph_optimized_replyjson.png" alt="Flame graph with the optimized replyJSON() stack traces">}}
 
 ### Clean up
 
@@ -254,4 +254,4 @@ This guide only skimmed the surface of profiling, but it should give you a sense
 [5]: https://httpd.apache.org/docs/2.4/programs/ab.html
 [6]: https://app.datadoghq.com/profiling?query=env%3Aexample%20service%3Amovies-api-java
 [7]: https://github.com/DataDog/dd-continuous-profiler-example/blob/25819b58c46227ce9a3722fa971702fd5589984f/java/src/main/java/movies/Server.java#L66
-[8]: /tracing/profiler/enabling/
+[8]: /profiler/enabling/

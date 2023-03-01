@@ -200,23 +200,18 @@ If you are upgrading from 0.3.x to 1.4.x and you wish to use the `dd-trace-java`
 
 ```
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:4
-````
+```
 
-
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [2]: /serverless/forwarder/
 [3]: /serverless/enhanced_lambda_metrics
 [4]: https://img.shields.io/maven-central/v/com.datadoghq/datadog-lambda-java
 [5]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 [6]: /serverless/insights#cold-starts
-[7]: /monitors/create/types/metric/?tab=threshold#overview
+[7]: /monitors/types/metric/?tab=threshold#overview
 [8]: /getting_started/tagging/unified_service_tagging/#aws-lambda-functions
 [9]: https://app.datadoghq.com/functions
 [10]: /serverless/custom_metrics?tab=java
-[11]: /tracing/connect_logs_and_traces/java/
+[11]: /tracing/other_telemetry/connect_logs_and_traces/java/
 [12]: https://www.datadoghq.com/log4j-vulnerability/
 [13]: https://github.com/DataDog/datadog-lambda-java/releases

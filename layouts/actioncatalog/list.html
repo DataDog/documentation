@@ -1,0 +1,29 @@
+
+{{ define "main" }}
+{{ $dot := . }}
+{{ $scratch := .Scratch }}
+
+<!-- From data file -->
+{{ $list := sort .Pages }}
+
+<!-- build filters -->
+{{ $.Scratch.Set "filters" (slice)}}
+{{ range $index, $element := $list }}
+    {{ range $e := $element.Params.rule_category }}
+        {{ if not (in ($.Scratch.Get "filters") ($e | lower)) }}
+            {{ $.Scratch.Add "filters" ($e | lower) }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+
+<h1 id="pagetitle">{{ .Title }}</h1>
+
+{{ .Content }}
+<form id="rules">
+  {{- with $list -}}
+      {{- if isset (index . 0).Params "bundle_title" -}}
+        {{- partial "grouped-item-listings.html" ( dict "context" $dot "filters" (sort ($.Scratch.Get "filters")) "listgroups" ($list.GroupByParam "bundle_title") ) -}}
+      {{- end -}}
+  {{- end -}}
+</form>
+{{ end }}

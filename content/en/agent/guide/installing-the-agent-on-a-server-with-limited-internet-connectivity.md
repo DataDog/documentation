@@ -25,14 +25,14 @@ For servers with no direct internet access, the Agent can be configured to route
 
 If the target system is blocked from accessing the package repository directly, download the package from the repository using another server, then transfer it over to the target system for a local install.
 
-The RPM packages for Agent 6 are available at [https://yum.datadoghq.com/stable/6/x86_64/][3], for Agent 7 at [https://yum.datadoghq.com/stable/7/x86_64/][4], and DEB packages are available at [https://apt.datadoghq.com/pool/d/da/][5].
+The RPM packages for Agent 6 are available at [https://yum.datadoghq.com/stable/6/][3], for Agent 7 at [https://yum.datadoghq.com/stable/7/][4], and DEB packages are available at [https://apt.datadoghq.com/pool/d/da/][5].
 
 **Note**: The package bundles all resources necessary to run the Agent and checks (whether the integration is enabled or not). In terms of hard requirements, Python 2.7+ and sysstat are required; other dependencies are mandatory depending on what checks are enabled.
 
 Once the package has been transferred to the target system, it can be installed locally by using the appropriate package manager command. For yum, the command would follow the pattern:  
 
 ```bash
-sudo yum localinstall datadog-agent-<AGENT_VERSION>-1.x86_64.rpm
+sudo yum localinstall datadog-agent-<AGENT_VERSION>-1.<CPU_ARCHITECTURE>.rpm
 ```
 
 To install a deb file in the current director for Debian based distributions:
@@ -55,8 +55,8 @@ Then, [start the Agent][7] using the appropriate command for your system.
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: /agent/proxy
-[3]: https://yum.datadoghq.com/stable/6/x86_64
-[4]: https://yum.datadoghq.com/stable/7/x86_64
+[3]: https://yum.datadoghq.com/stable/6
+[4]: https://yum.datadoghq.com/stable/7
 [5]: https://apt.datadoghq.com/pool/d/da
 [6]: https://app.datadoghq.com/organization-settings/api-keys
 [7]: /agent/guide/agent-commands/#start-the-agent

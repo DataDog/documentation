@@ -1,37 +1,64 @@
 ---
+app_id: buddy
+app_uuid: f9d740e2-31b5-427c-a65b-41984656cc73
 assets:
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: buddy.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Buddy
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Buddy
+  sales_email: support@buddy.works
+  support_email: support@buddy.works
 categories:
-  - web
-creates_events: false
-ddtype: crawler
+- web
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/buddy/README.md'
-display_name: Buddy
+- https://github.com/DataDog/integrations-extras/blob/master/buddy/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: buddy
-guid: 7b131269-e2ba-4279-b9dd-82e85764d389
 integration_id: buddy
 integration_title: Buddy
+integration_version: ''
 is_public: true
 kind: インテグレーション
-maintainer: support@buddy.works
-manifest_version: 1.0.0
+manifest_version: 2.0.0
 name: buddy
-public_title: Datadog-Buddy インテグレーション
+oauth: {}
+public_title: Buddy
 short_description: Web 開発者向けのワンクリック自動配信および作業中 Web サイトのプレビュー機能。
-support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Web
+  configuration: README.md#Setup
+  description: Web 開発者向けのワンクリック自動配信および作業中 Web サイトのプレビュー機能。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Buddy
 ---
+
+
+
 ## 概要
 
-このインテグレーションを有効化すると、以下のことができます。
+このインテグレーションを有効にすると、
 
 - デプロイに関するイベントを Datadog に送信できます。
 - デプロイの詳細を Datadog のメトリクスと関連付けることができます。
@@ -82,7 +109,7 @@ Buddy チェックには、サービスのチェック機能は含まれませ�
 ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/buddy/images/datadog-integration.png
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.buddy.works/login
 [4]: https://buddy.works/knowledge/deployments/what-parameters-buddy-use
 [5]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/buddy/images/snapshot.png

@@ -1,10 +1,9 @@
 ---
 aliases:
-  - /ja/integrations/azure_appserviceplan
+- /ja/integrations/azure_appserviceplan
 categories:
-  - cloud
-  - azure
-ddtype: crawler
+- cloud
+- azure
 dependencies: []
 description: Azure App Service Plan のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_app_service_plan/
@@ -22,6 +21,7 @@ public_title: Datadog-Microsoft Azure App Service Plan インテグレーショ�
 short_description: Azure App Service Plan のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Azure App Service Plan は、1 つの Web アプリを実行するためのコンピューティングリソース一式を定義します。これらのコンピューティングリソースは、従来の Web ホスティングのサーバーファームに相当します。

@@ -1,89 +1,119 @@
 ---
+app_id: rapdev-zoom
+app_uuid: a79217b7-6499-4de5-8ebd-73a91d227644
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     RapDev Zoom Call Quality: assets/dashboards/rapdev_zoom_meeting_quality.json
     RapDev Zoom Geolocation Overview: assets/dashboards/rapdev_zoom_geo_overview.json
     RapDev Zoom Overview: assets/dashboards/rapdev_zoom_overview.json
     RapDev Zoom Rooms Dashboard: assets/dashboards/rapdev_zoom_rooms_dashboard.json
     RapDev Zoom User Details: assets/dashboards/rapdev_zoom_user_details.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: rapdev.zoom.meetings.count
+      metadata_path: metadata.csv
+      prefix: rapdev.zoom.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: RapDev Zoom
   logs: {}
-  metrics_metadata: metadata.csv
   monitors:
     Zoom API Limit Was Encountered: assets/monitors/zoom_api_rate_limit.json
     Zoom Room's Component is Offline or Not Working Properly: assets/monitors/zoom_room_component_has_problem.json
     Zoom Room's Health is in Warning or Critical State: assets/monitors/zoom_room_has_problem.json
-  saved_views: {}
-  service_checks: assets/service_checks.json
 author:
   homepage: https://www.rapdev.io
-  name: RapDev.io
+  name: RapDev
+  sales_email: ddsales@rapdev.io
+  support_email: support@rapdev.io
+  vendor_id: rapdev
 categories:
-  - マーケットプレイス
-  - cloud
-  - コラボレーション
-  - メッセージング
-  - モニタリング
-creates_events: false
-ddtype: crawler
+- マーケットプレイス
+- cloud
+- コラボレーション
+- メッセージング
+- モニタリング
 dependencies: []
-display_name: RapDev Zoom
+display_on_public_website: true
 draft: false
 git_integration_title: rapdev_zoom
-guid: a0a0380a-42b7-4977-92fc-a65c8d904b8d
 integration_id: rapdev-zoom
-integration_title: RapDev Zoom
+integration_title: Zoom
 integration_version: ''
 is_public: true
 kind: integration
-maintainer: integrations@rapdev.io
-manifest_version: 1.0.0
-metric_prefix: rapdev.zoom.
-metric_to_check: rapdev.zoom.meetings.count
-name: rapdev_zoom
-pricing:
-  - billing_type: tag_count
-    metric: datadog.marketplace.rapdev.zoom
-    tag: zoom_user_email
-    unit_label: Zoom 登録ユーザー
-    unit_price: 1
-public_title: RapDev Zoom
-short_description: Zoom アカウントを監視し、ライセンスを最適化します。
-support: パートナー
-supported_os:
-  - linux
-  - mac_os
-  - windows
-terms:
+legal_terms:
   eula: assets/EULA.pdf
-  legal_email: ddsales@rapdev.io
+manifest_version: 2.0.0
+name: rapdev_zoom
+oauth: {}
+pricing:
+- billing_type: tag_count
+  includes_assets: true
+  metric: datadog.marketplace.rapdev.zoom
+  product_id: zoom
+  short_description: ユーザー 1 人あたりの単価
+  tag: zoom_user_email
+  unit_label: Zoom 登録ユーザー
+  unit_price: 1
+public_title: Zoom インテグレーション
+short_description: Zoom アカウントを監視し、ライセンスを最適化します
+supported_os:
+- linux
+- mac os
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Mac OS
+  - Supported OS::Windows
+  - Category::Marketplace
+  - Category::Cloud
+  - Category::Collaboration
+  - Category::Messaging
+  - Category::Monitoring
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Zoom アカウントを監視し、ライセンスを最適化します
+  media:
+  - caption: ミーティング概要
+    image_url: images/meetings.png
+    media_type: image
+  - caption: Zoom Rooms ダッシュボード
+    image_url: images/rooms.png
+    media_type: image
+  - caption: ミーティング品質概要
+    image_url: images/meeting_quality.png
+    media_type: image
+  - caption: ユーザー詳細ダッシュボード
+    image_url: images/user_details.png
+    media_type: image
+  - caption: ジオロケーション概要
+    image_url: images/geo.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Zoom インテグレーション
+  uninstallation: README.md#Uninstallation
 ---
+
+
+
 ## 概要
 
 Zoom インテグレーションにより、ミーティング、Rooms、ユーザー、ネットワーク分析、そしてジオロケーションの概要を監視することで、世界中のあらゆる場所で勤務する従業員に最適な利用体験を提供することができます。インテグレーションには、完全カスタマイズが可能な 4 つのダッシュボードが事前構築されており、重要な情報を表面化できます。さらに、エンジニア、IT責任者、マネージャー、そして管理職レベルのすべてのユーザーに普遍的に利用価値のあるビジュアルを提供するよう設計されています。
 
-### ミーティング概要
-{{< img src="marketplace/rapdev_zoom/images/meetings.png" alt="スクリーンショット1" >}}
-
-### Zoom Rooms ダッシュボード
-{{< img src="marketplace/rapdev_zoom/images/rooms.png" alt="スクリーンショット1" >}}
-
-### ミーティング品質概要
-{{< img src="marketplace/rapdev_zoom/images/meeting_quality.png" alt="スクリーンショット1" >}}
-
-### ユーザー詳細ダッシュボード
-{{< img src="marketplace/rapdev_zoom/images/user_details.png" alt="スクリーンショット1" >}}
-
-### ジオロケーション概要
-{{< img src="marketplace/rapdev_zoom/images/geo.png" alt="スクリーンショット1" >}}
-
-### モニター
+### アラート設定
 
 1. Zoom Room に問題があります
 2. Zoom Room のコンポーネントに問題があります
 
-### ダッシュボード
+### ダッシュボード  
 
 1. RapDev Zoom ミーティング概要
 2. RapDev Zoom Rooms ダッシュボード
@@ -94,20 +124,20 @@ Zoom インテグレーションにより、ミーティング、Rooms、ユー�
 ## サポート
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 
-- サポート: integrations@rapdev.io
+- サポート: support@rapdev.io
 - セールス: sales@rapdev.io
-- チャット: RapDev.io/products
+- チャット: [rapdev.io](https://www.rapdev.io/#Get-in-touch)
 - 電話: 855-857-0222
 
 ---
 ボストンより ❤️ を込めて
 
-*お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？RapDev へ[お問い合わせ](mailto:integrations@rapdev.io)ください！導入のサポートをいたします。*
-
----
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、[こちらをクリック][4]してください。
+*お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？RapDev へ[お問い合わせ](mailto:support@rapdev.io)ください！導入のサポートをいたします。*
 
 [1]: https://marketplace.zoom.us/
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[4]: https://app.datadoghq.com/marketplace/app/rapdev-zoom/pricing
+
+
+---
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-zoom" target="_blank">こちらをクリック</a>してください。

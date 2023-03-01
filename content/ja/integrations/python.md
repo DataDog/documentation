@@ -1,23 +1,23 @@
 ---
 categories:
-  - languages
-  - log collection
-ddtype: ライブラリ
+- languages
+- log collection
 dependencies: []
 description: Python アプリケーションからメトリクス、トレース、ログを収集。
 doc_link: https://docs.datadoghq.com/integrations/python/
 draft: false
 further_reading:
-  - link: https://www.datadoghq.com/blog/tracing-async-python-code/
-    tag: ブログ
-    text: Datadog APM による非同期 Python のトレーシング
-  - link: https://www.datadoghq.com/blog/python-logging-best-practices/
-    tag: ブログ
-    text: Python ログの収集、カスタマイズ、一元化方法
+- link: https://www.datadoghq.com/blog/tracing-async-python-code/
+  tag: ブログ
+  text: Datadog APM による非同期 Python のトレーシング
+- link: https://www.datadoghq.com/blog/python-logging-best-practices/
+  tag: ブログ
+  text: Python ログの収集、カスタマイズ、一元化方法
 git_integration_title: python
 has_logo: true
 integration_id: python
 integration_title: Python
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -26,6 +26,7 @@ public_title: Datadog-Python インテグレーション
 short_description: Python アプリケーションからメトリクス、トレース、ログを収集。
 version: '1.0'
 ---
+
 ## 概要
 
 Python インテグレーションを利用して、Python アプリケーションのログ、トレース、カスタムメトリクスを収集および監視できます。

@@ -62,7 +62,7 @@ EVENTS_SCHEMA = {
 }
 ```
 
-See the [Event stream documentation][2] for more details about the query syntax.
+See the [Event Explorer documentation][2] for more details about the query syntax.
 
 ### Examples
 

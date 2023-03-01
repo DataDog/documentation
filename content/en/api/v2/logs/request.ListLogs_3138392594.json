@@ -1,0 +1,16 @@
+{
+  "filter": {
+    "from": "now-15m",
+    "indexes": [
+      "main"
+    ],
+    "to": "now"
+  },
+  "options": {
+    "timezone": "GMT"
+  },
+  "page": {
+    "limit": 2
+  },
+  "sort": "timestamp"
+}
