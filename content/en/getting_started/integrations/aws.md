@@ -48,30 +48,55 @@ Before getting started, ensure you have the following prerequisites:
 1. An [AWS][7] account. Your AWS user needs the following IAM permissions to successfully run the CloudFormation template:
 
     * cloudformation:CreateStack
+    * cloudformation:CreateUploadBucket
+    * cloudformation:DeleteStack
+    * cloudformation:DescribeStacks
+    * cloudformation:DescribeStackEvents
+    * cloudformation:GetStackPolicy
+    * cloudformation:GetTemplateSummary
+    * cloudformation:ListStacks
+    * cloudformation:ListStackResources
     * ec2:DescribeSecurityGroups
     * ec2:DescribeSubnets
     * ec2:DescribeVpcs
     * iam:AttachRolePolicy
     * iam:CreatePolicy
     * iam:CreateRole
+    * iam:DeleteRole
+    * iam:DeleteRolePolicy
+    * iam:DetachRolePolicy
+    * iam:GetRole
+    * iam:GetRolePolicy
     * iam:PassRole
     * iam:PutRolePolicy
     * iam:UpdateAssumeRolePolicy
     * kms:Decrypt
     * lambda:AddPermission
     * lambda:CreateFunction
+    * lambda:DeleteFunction
     * lambda:GetCodeSigningConfig
     * lambda:GetFunction
     * lambda:GetFunctionCodeSigningConfig
+    * lambda:GetLayerVersion
     * lambda:InvokeFunction
     * lambda:PutFunctionConcurrency
+    * lambda:RemovePermission
+    * lambda:TagResource
     * logs:CreateLogGroup
+    * logs:DeleteLogGroup
     * logs:DescribeLogGroups
     * logs:PutRetentionPolicy
     * s3:CreateBucket
+    * s3:DeleteBucket
+    * s3:DeleteBucketPolicy
+    * s3:GetEncryptionConfiguration
     * s3:GetObject
     * s3:GetObjectVersion
+    * s3:PutBucketPolicy
+    * s3:PutBucketPublicAccessBlock
+    * s3:PutEncryptionConfiguration
     * secretsmanager:CreateSecret
+    * secretsmanager:DeleteSecret
     * secretsmanager:GetSecretValue
     * secretsmanager:PutSecretValue
     * serverlessrepo:CreateCloudFormationTemplate
