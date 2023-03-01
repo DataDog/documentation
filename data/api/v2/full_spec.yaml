@@ -10448,12 +10448,14 @@ components:
       - infrastructure_configuration
       - workload_security
       - cloud_configuration
+      - application_security
       type: string
       x-enum-varnames:
       - LOG_DETECTION
       - INFRASTRUCTURE_CONFIGURATION
       - WORKLOAD_SECURITY
       - CLOUD_CONFIGURATION
+      - APPLICATION_SECURITY
     SecurityMonitoringRuleUpdatePayload:
       description: Update an existing rule.
       properties:
