@@ -28,8 +28,7 @@ The [Team directory page][1] lists all teams within your organization. Use the *
 1. On the [Team directory page][1], click **New Team** at the upper right.
 1. Choose a **Team Name**.
 1. The **Handle** populates based on your team name.
-1. Optionally, choose an **Avatar Color**.
-1. Provide an optional **Summary**.
+1. Provide an optional **Description**.
 1. Use the drop-down to select team members.
 1. Click **Create**.
 
@@ -42,7 +41,7 @@ The [Team directory page][1] lists all teams within your organization. Use the *
 
 ## Team handle
 
-A team handle links teams to Datadog resources. Team handles appear in search bars and facets in the format `team:<team-name>`. 
+A team handle links teams to Datadog resources. Team handles appear in search bars and facets in the format `team:<team-handle>` or `teams:<team-handle>`. 
 
 To find a team handle:
 1. Click the team's name in the Team directory page. A side panel appears with team details.
@@ -80,11 +79,12 @@ The table below describes the products in which you can use the team filter:
 | [Incidents][4]          | Team handle                                                                      |
 | [Monitors][5]           | Team handle                                                                      |
 | [APM Error Tracking][6] | Service owned by teams (determined by ownership inside the [Service Catalog][3]) |
+| [Logs Error Tracking][7] | Service owned by teams (determined by ownership inside the [Service Catalog][3]) |
 
 
 ## Permissions
 
-Any user in a role with the Teams Manage permission can create teams, rename teams, delete teams, and change team handles.
+Any user in a role with the Teams Manage permission can create teams, rename teams, delete teams, and change team handles. Users with `user_access_manage` can add, remove, and promote team members and managers.
 
 ### Team membership
 
@@ -104,3 +104,4 @@ Users with the `user_access_manage` permission can set default rules on who can 
 [4]: https://app.datadoghq.com/incidents
 [5]: https://app.datadoghq.com/monitors/manage
 [6]: https://app.datadoghq.com/apm/error-tracking
+[7]: https://app.datadoghq.com/logs/error-tracking
