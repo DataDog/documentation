@@ -48,9 +48,10 @@ You can add OpsGenie metadata to a service so that the Service Catalog displays 
 
 1. If you have not already done so, set up the [Datadog OpsGenie integration][12].
 2. Get your OpsGenie API access key as described in their [API Key Management][13] documentation. This API key requires **configuration access** and **read** access rights.
-3. Add an account in the **Accounts** section on the [integration tile][14], paste your OpsGenie API access key, and select the region for your OpsGenie account. 
-   
-   {{< img src="tracing/service_catalog/create_account.png" alt="The Create New Account workflow in the OpsGenie integration tile" style="width:80%;" >}}
+3. Add an account in the **Accounts** section at the bottom of the [integration tile][14], paste your OpsGenie API access key, and select the region for your OpsGenie account.
+
+   {{< img src="tracing/service_catalog/create_account1.png" alt="The Create New Account workflow in the OpsGenie integration tile" style="width:80%;" >}}
+   {{< img src="tracing/service_catalog/create_account2.png" alt="The Create New Account workflow in the OpsGenie integration tile" style="width:80%;" >}}
 
 4. Update the service definition with the OpsGenie information to link your OpsGenie service with your Datadog service. For example, pass in the following `integrations` configuration lines within the full [service definition][5]:
 

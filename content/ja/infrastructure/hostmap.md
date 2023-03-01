@@ -1,17 +1,18 @@
 ---
-title: Host Map
-kind: documentation
 aliases:
-  - /ja/graphing/infrastructure/hostmap/
-  - /ja/guides/hostmap
+- /ja/graphing/infrastructure/hostmap/
+- /ja/guides/hostmap
 further_reading:
-  - link: /infrastructure/livecontainers/
-    tag: グラフ
-    text: 環境内のすべてのコンテナのリアルタイム表示
-  - link: /infrastructure/process/
-    tag: グラフ
-    text: システムのあらゆるレベルの事象の把握
+- link: /infrastructure/livecontainers/
+  tag: グラフ
+  text: 環境内のすべてのコンテナのリアルタイム表示
+- link: /infrastructure/process/
+  tag: グラフ
+  text: システムのあらゆるレベルの事象の把握
+kind: documentation
+title: Host Map
 ---
+
 ## 概要
 
 ホストマップは、複数のホストを 1 画面にビジュアルに表示します。色と図形を使用してメトリクスをわかりやすく表現できます。  
@@ -67,23 +68,15 @@ Datadog Agent では、ホストメタデータおよびアプリケーション
 
 ### 図形と色
 
-デフォルトでは、各ホストの色はそのホストの CPU 使用率を表すように設定されており、緑 (0% 使用) からオレンジ (100% 使用) の範囲で表示されます。`Color by` セレクターで別のメトリクスを選択できます。
+デフォルトでは、各ホストの色はそのホストの CPU 使用率を表すように設定されており、緑 (0% 使用) からオレンジ (100% 使用) の範囲で表示されます。`Fill by` セレクターで別のメトリクスを選択できます。
 
 ホストマップでは、六角形のサイズで追加のオプションメトリクスを示すこともできます。その際、`Size by` セレクターを使用します。
-
-下のスクリーンショットでは、六角形のサイズが 15 分間の平均負荷を示します。この値は、コア数が違ってもマシンの作業負荷を比較できるように正規化されています。
-
-{{< img src="infrastructure/hostmap/hostmappart2image4.png" alt="色および大きさで区別された Datadog ホストマップ" style="width:80%;">}}
 
 **注**: 「% CPU utilized」メトリクスは、Datadog Agent からレポートされているか、AWS または vSphere から直接レポートされているかにかかわらず、最も信頼性が高い最新の CPU 使用率の計測値を使用します。
 
 ### Agent がインストールされていないホストのホストマップ表示
 
 デフォルトでは、選択されたメトリクスをレポートしているホストだけがホストマップに表示されます。これを使用して、グリッド内の個別の六角形の色またはサイズを設定できます。
-
-選択されたメトリクスをレポートしていないホストをホストマップに表示することもできます。それには、マップの右上にある歯車アイコンを選択し、Host Map 設定の「Show hosts with no metrics」を有効にします。
-
-{{< img src="infrastructure/hostmap/host_no_metrics.png" alt="Agent なしのホスト" style="width:50%;">}}
 
 ### データの鮮度と意味
 
@@ -123,7 +116,7 @@ AWS の費用を削減したいのであれば、高価なインスタンスが�
 
 {{< img src="infrastructure/hostmap/hostmappart1image6.png" alt="Datadog ホストマップ - 2 つのイメージグループ" style="width:80%;">}}
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

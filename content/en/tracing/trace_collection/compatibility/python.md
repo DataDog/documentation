@@ -16,7 +16,7 @@ further_reading:
 
 ## Releases
 
-The Python APM Client library follows a [versioning policy][1] that specifies the support level for the different versions of the library and Python runtime. 
+The Python APM Client library follows a [versioning policy][1] that specifies the support level for the different versions of the library and Python runtime.
 
 Two release branches are supported:
 
@@ -29,9 +29,9 @@ And the library supports the following runtimes:
 
 | OS      | CPU                   | Runtime | Runtime version | Support ddtrace versions |
 |---------|-----------------------|---------|-----------------|--------------------------|
-| Linux   | x86-64, i686, AArch64 | CPython | 2.7, 3.5-3.10   | `<2`                     |
-| MacOS   | Intel, Apple Silicon  | CPython | 2.7, 3.5-3.10   | `<2`                     |
-| Windows | 64bit, 32bit          | CPython | 2.7, 3.5-3.10   | `<2`                     |
+| Linux   | x86-64, i686, AArch64 | CPython | 2.7, 3.5-3.11   | `<2`                     |
+| MacOS   | Intel, Apple Silicon  | CPython | 2.7, 3.5-3.11   | `<2`                     |
+| Windows | 64bit, 32bit          | CPython | 2.7, 3.5-3.11   | `<2`                     |
 
 ## Integrations
 
@@ -53,6 +53,7 @@ The `ddtrace` library includes support for a number of web frameworks, including
 | [Falcon][8]               | >= 1.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#falcon  |
 | [Flask][9]                | >= 0.10           | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#flask   |
 | [FastAPI][10]              | >= 0.51           | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#fastapi |
+| [Gunicorn][61]            | >= 20.0.04        | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#gunicorn |
 | [Molten][11]               | >= 0.7.0          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#molten  |
 | [Pylons][12]              | >= 0.9.6          | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#pylons  |
 | [Pyramid][13]             | >= 1.7            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#pyramid |
@@ -181,3 +182,4 @@ The `ddtrace` library includes support for the following libraries:
 [58]: https://requests.readthedocs.io/en/master/
 [59]: https://urllib3.readthedocs.io/en/stable/
 [60]: https://graphql-core-3.readthedocs.io/en/latest/intro.html
+[61]: https://gunicorn.org/

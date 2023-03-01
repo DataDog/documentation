@@ -15,6 +15,12 @@ further_reading:
 - link: "/monitors/manage/status/"
   tag: "Documentation"
   text: "Check your monitor status"
+- link: "https://www.datadoghq.com/blog/configure-pipeline-alerts-with-ci-monitors/"
+  tag: "Blog"
+  text: "Configure pipeline alerts with Datadog CI monitors"
+- link: "https://www.datadoghq.com/blog/configure-pipeline-alerts-with-ci-monitors/"
+  tag: "Blog"
+  text: "Configure pipeline alerts with Datadog CI monitors"
 ---
 
 {{< site-region region="gov" >}}
@@ -50,13 +56,13 @@ Choose between a **Pipelines** or a **Tests** monitor:
 3. Choose to monitor over a CI Pipeline event count, facet, or measure:
     * **CI Pipeline event count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of CI Pipeline events over a selected time frame, then compares it to the threshold conditions.
     * **Dimension**: Select dimension (qualitative facet) to alert over the `Unique value count` of the facet.
-    * **Measure**: Select measure (quantitative facet) to alert over the numerical value of the CI Pipeline facet (similar to a metric monitor). Select the aggregation (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
+    * **Measure**: Select measure (quantitative facet) to alert over the numerical value of the CI Pipeline measure (similar to a metric monitor). Select the aggregation (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
 4. Group CI Pipeline events by multiple dimensions (optional):
     * All CI Pipeline events matching the query are aggregated into groups based on the value of up to four facets.
 5. Configure the alerting grouping strategy (optional):
    * If the query has a `group by`, multi alerts apply the alert to each source according to your group parameters. An alerting event is generated for each group that meets the set conditions. For example, you could group a query by `@ci.pipeline.name` to receive a separate alert for each CI Pipeline name when the number of errors is high.
 
-{{< img src="monitors/monitor_types/ci_pipelines/define-the-search-query.png" alt="A query for CI Status:Error that is being set to group by Pipeline Name" style="width:100%;" >}}
+{{< img src="monitors/monitor_types/ci_pipelines/define-the-search-query.png" alt="A query for CI Status:Error that is being set to group by Test Name" style="width:100%;" >}}
 
 #### Using formulas and functions
 
@@ -77,7 +83,7 @@ The following example is of a pipeline error rate monitor using a formula that c
 1. Common monitor types: (optional) Provides a template query for each of the **New Flaky Test**, **Test Failures**, and **Test Performance** common monitor types, which you can then customize. Learn more about this feature by reading [Track new flaky tests](#track-new-flaky-tests).
 2. Construct a search query using the same logic as a CI Test explorer search. For example, you can search failed tests for the `main` branch of the `myapp` test service using the following query: `@test.status:fail @git.branch:main @test.service:myapp`.
 3. Choose to monitor over a CI Test event count, facet, or measure:
-    * **CI Test event count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of CI Pipeline events over a selected time frame, then compares it to the threshold conditions.
+    * **CI Test event count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of CI Pipeline test events over a selected time frame, then compares it to the threshold conditions.
     * **Dimension**: Select dimension (qualitative facet) to alert over the `Unique value count` of the facet.
     * **Measure**: Select measure (quantitative facet) to alert over the numerical value of the CI Pipeline facet (similar to a metric monitor). Select the aggregation (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
 4. Group CI Test events by multiple dimensions (optional):
@@ -140,6 +146,31 @@ For detailed instructions on the advanced alert options (such as evaluation dela
 
 For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][4] page.
 
+#### Samples and breaching values top list
+
+When a CI Test or Pipeline monitor is triggered, samples or values can be added to the notification message.
+
+| Monitor Setup                    | Can be added to notification message |
+|----------------------------------|--------------------------------------|
+| Ungrouped Simple-Alert count     | Up to 10 samples.                    |
+| Grouped Simple-Alert count       | Up to 10 facet or measure values.    |
+| Grouped Multi-Alert count        | Up to 10 samples.                    |
+| Ungrouped Simple-Alert measure   | Up to 10 samples.                    |
+| Grouped Simple-Alert measure     | Up to 10 facet or measure values.    |
+| Grouped Multi-Alert measure        | Up to 10 facet or measure values.    |
+
+These are available for notifications sent to Slack, Jira, webhooks, Microsoft Teams, Pagerduty, and email. **Note**: Samples are not displayed for recovery notifications.
+
+To disable samples, uncheck the box at the bottom of the **Say what's happening** section. The text next to the box is based on your monitor's grouping (as stated above).
+
+#### Sample examples
+
+Include a table of CI Test 10 samples in the alert notification:
+{{< img src="monitors/monitor_types/ci_tests/10_ci_tests_samples.png" alt="Top 10 CI Test samples"  style="width:60%;" >}}
+
+Include a table of CI Pipeline 10 samples in the alert notification:
+{{< img src="monitors/monitor_types/ci_pipelines/10_ci_pipelines_samples.png" alt="Top 10 CI Pipeline samples" style="width:60%;" >}}
+
 #### Notifications behavior when there is no data
 
 A monitor that uses an event count for its evaluation query will resolve after the specified evaluation period with no data, triggering a notification. For example, a monitor configured to alert on the number of pipeline errors with an evaluation window of five minutes will automatically resolve after five minutes without any pipeline executions.
@@ -159,10 +190,16 @@ The `duration` metric can be used to identify pipeline and test performance regr
 ### Track new flaky tests
 Test monitors have the `New Flaky Test`, `Test Failures`, and `Test Performance` common monitor types for simple monitor setup. This monitor sends alerts when new flaky tests are added to your codebase. The query is grouped by `Test Full Name` so you don't get alerted on the same new flaky test more than once.
 
+A test run is marked as `flaky` if it exhibits flakiness within the same commit after some retries. If it exhibits flakiness multiple times (because multiple retries were executed), the `is_flaky` tag is added to the first test run that is detected as flaky.
+
+A test run is marked as `new flaky` if that particular test has not been detected to be flaky within the same branch or default branch. Only the first test run that is detected as new flaky is marked with the `is_new_flaky` tag (regardless of the number of retries).
+
+For more information on flaky tests, see the [flaky test management guide][6].
+
 {{< img src="ci/flaky_test_monitor.png" alt="CI flaky test monitor" style="width:100%;">}}
 
 ### Maintain code coverage percentage
-[Custom metrics][5], such as code coverage percentage, can be created and used within monitors. The monitor below sends alerts when code coverage dips below a certain percentage, which can help with maintaining test performance over time. 
+[Custom metrics][5], such as code coverage percentage, can be created and used within monitors. The monitor below sends alerts when code coverage dips below a certain percentage, which can help with maintaining test performance over time.
 
 {{< img src="ci/codecoveragepct_monitor_light.png" alt="CI flaky test monitor" style="width:100%;">}}
 
@@ -174,6 +211,7 @@ Test monitors have the `New Flaky Test`, `Test Failures`, and `Test Performance`
 
 [1]: /continuous_integration/
 [2]: https://app.datadoghq.com/monitors/create/ci-pipelines
-[3]: /monitors/create/configuration/#advanced-alert-conditions
+[3]: /monitors/configuration/#advanced-alert-conditions
 [4]: /monitors/notify/
 [5]: https://docs.datadoghq.com/continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
+[6]: https://docs.datadoghq.com/continuous_integration/guides/flaky_test_management/

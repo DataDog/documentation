@@ -27,6 +27,10 @@ package.json              @DataDog/corpweb @DataDog/documentation
 # Partners
 /content/en/partners/                                   @KateYoak @DataDog/documentation
 
+# Marketplace
+/content/en/developers/marketplace/                     @Datadog/marketplace-product-management @DataDog/documentation
+/layouts/shortcodes/integration-assets.md               @Datadog/marketplace-product-management @DataDog/documentation
+
 # Websites
 .github/workflows                                       @DataDog/corpweb
 .gitlab-ci.yml                                          @DataDog/corpweb
@@ -35,3 +39,6 @@ translate.yaml                                          @DataDog/corpweb
 .translate                                              @DataDog/corpweb
 docker-compose-docs.yml                                 @DataDog/corpweb
 .htmltest.yml                                           @DataDog/corpweb
+
+# Cloud Cost Management
+documentation/content/en/cloud_cost_management/_index.md         @DataDog/cloud-cost-management-visibility

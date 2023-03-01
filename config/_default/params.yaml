@@ -69,7 +69,9 @@ code_language_ids:
     java: Java
     cpp: 'C++'
     php: PHP
-    nodejs: NodeJS
+    nodejs: "Node.js"
+    NodeJS: "Node.js"
+    "Node.js": "Node.js"
     python-legacy: Python [legacy]
     python: Python
     ruby-legacy: Ruby [legacy]
@@ -87,6 +89,7 @@ code_language_ids:
     linux: Linux
     opentelemetry: OpenTelemetry
     ddprof: "Rust/C/C++"
+    serverless: "Serverless"
 
 branch: ""
 
@@ -99,11 +102,10 @@ header_scripts:
   - marketo: false
 
 footer_scripts:
-  - snowplow: false
 
 # Docs allowed regions for redirecting
 allowedRegions:
-  - name: US
+  - name: US1
     value: us
     weight: 10
     domain: datadoghq.com

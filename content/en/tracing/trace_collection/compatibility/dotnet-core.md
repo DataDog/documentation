@@ -89,7 +89,7 @@ Don’t see your desired frameworks? Datadog is continually adding additional su
 
 ## End of life .NET Core versions
 
-The .NET Tracer works on .NET Core 2.0, 2.1, 2.2, and 3.0, but these versions reached their end of life and are no longer supported by Microsoft. See [Microsoft's support policy][3] for more details. Datadog recommends using the latest patch version of .NET Core 3.1, .NET 5, or .NET 6. Older versions of .NET Core may encounter the following runtime issues when enabling automatic instrumentation:
+The .NET Tracer works on .NET Core 2.0, 2.1, 2.2, and 3.0, but these versions reached their end of life and are no longer supported by Microsoft. See [Microsoft's support policy][3] for more details. Datadog recommends using the latest patch version of .NET Core 3.1, .NET 5, .NET 6, or .NET 7. Older versions of .NET Core may encounter the following runtime issues when enabling automatic instrumentation:
 
 | Issue                                         | Affected .NET Core Versions               | Solution                                                               | More information                        |
 |-----------------------------------------------|-------------------------------------------|------------------------------------------------------------------------|-----------------------------------------|

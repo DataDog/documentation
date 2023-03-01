@@ -18,7 +18,7 @@ assets:
     source_type_name: NS1
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: NS1
   sales_email: zjohnson@ns1.com
   support_email: zjohnson@ns1.com
 categories:

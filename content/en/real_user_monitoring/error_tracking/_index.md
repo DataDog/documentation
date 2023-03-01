@@ -12,14 +12,22 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/how-datadogs-tech-solutions-team-rum-session-replay/"
   tag: "Blog"
   text: "How Datadog's Technical Solutions team uses RUM, Session Replay, and Error Tracking to resolve customer issues"
+- link: "https://www.datadoghq.com/blog/error-tracking-logs/"
+  tag: "Blog"
+  text: "Track and triage errors in your logs with Datadog Error Tracking"
 - link: "/real_user_monitoring/error_tracking/explorer"
   tag: "Documentation"
   text: "Learn about the Error Tracking Explorer"
+- link: "/monitors/types/error_tracking/"
+  tag: "Documentation"
+  text: "Create an Error Tracking monitor"
 ---
 
 ## Overview
 
 It is critical for your system's health to consistently monitor the errors collected by Datadog. When there are many individual error events, it becomes hard to prioritize errors for troubleshooting. By tracking, triaging, and debugging crashes, you can minimize the impact of fatal errors on your web and mobile applications' user experience.
+
+Once you have set up RUM for **Web and Mobile Apps** error tracking, the issue list populates with cards. You can view open, ignored, or all issues, sort issues by volume or age, and filter issues by all custom and default facets on your web and mobile applications.
 
 {{< img src="real_user_monitoring/error_tracking/page.png" alt="The Error Tracking Explorer for RUM displaying issues from your web and mobile application's crash reports" style="width:100%;" >}}
 

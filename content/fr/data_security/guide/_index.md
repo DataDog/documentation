@@ -1,6 +1,5 @@
 ---
-aliases:
-- /fr/security/guide/
+disable_toc: true
 kind: guide
 private: true
 title: Guides sur la sécurité

@@ -12,7 +12,7 @@ further_reading:
 - link: https://github.com/DataDog/dd-trace-go/tree/v1
   tag: GitHub
   text: ソースコード
-- link: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
+- link: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
   tag: GoDoc
   text: パッケージページ
 - link: /tracing/glossary/
@@ -112,4 +112,4 @@ Datadog には、一連のライブラリとフレームワークをインスツ
 [1]: /ja/tracing/compatibility_requirements/go
 [2]: https://app.datadoghq.com/apm/service-setup
 [3]: /ja/tracing/trace_collection/library_config/go/
-[4]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
+[4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace

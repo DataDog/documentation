@@ -74,6 +74,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: OpsBridge インテグレーション
+  uninstallation: README.md#Uninstallation
 ---
 
 

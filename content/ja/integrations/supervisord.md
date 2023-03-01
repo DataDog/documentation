@@ -28,7 +28,6 @@ author:
   support_email: help@datadoghq.com
 categories:
 - os & system
-- autodiscovery
 - log collection
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/supervisord/README.md
@@ -56,7 +55,6 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::OS とシステム
-  - Category::オートディスカバリー
   - Category::ログの収集
   configuration: README.md#Setup
   description: Supervisor 管理プロセスのステータス、アップタイム、数を監視。
@@ -76,7 +74,7 @@ tile:
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Supervisor チェックは [Datadog Agent][2] パッケージに含まれています。Supervisor が実行されているサーバーに追加でインストールする必要はありません。
 

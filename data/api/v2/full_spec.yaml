@@ -159,6 +159,20 @@ components:
       required: true
       schema:
         type: string
+    FastlyAccountID:
+      description: Fastly Account id.
+      in: path
+      name: account_id
+      required: true
+      schema:
+        type: string
+    FastlyServiceID:
+      description: Fastly Service ID.
+      in: path
+      name: service_id
+      required: true
+      schema:
+        type: string
     IncidentAttachmentFilterQueryParameter:
       description: Specifies which types of attachments are included in the response.
       explode: false
@@ -197,6 +211,44 @@ components:
         items:
           $ref: '#/components/schemas/IncidentRelatedObject'
         type: array
+    IncidentSearchIncludeQueryParameter:
+      description: Specifies which types of related objects should be included in
+        the response.
+      in: query
+      name: include
+      required: false
+      schema:
+        $ref: '#/components/schemas/IncidentRelatedObject'
+    IncidentSearchQueryQueryParameter:
+      description: 'Specifies which incidents should be returned. After entering a
+        search query in your [Incidents page][1],
+
+        use the query parameter value in the URL of the page as the value for this
+        parameter.
+
+
+        The query can contain any number of incident facets joined by `ANDs`, along
+        with multiple values for each of
+
+        those facets joined by `OR`s, for instance: `query="state:active AND severity:(SEV-2
+        OR SEV-1)"`.
+
+
+        [1]: https://app.datadoghq.com/incidents'
+      explode: false
+      in: query
+      name: query
+      required: true
+      schema:
+        type: string
+    IncidentSearchSortQueryParameter:
+      description: Specifies the order of returned incidents.
+      explode: false
+      in: query
+      name: sort
+      required: false
+      schema:
+        $ref: '#/components/schemas/IncidentSearchSortOrder'
     IncidentServiceIDPathParameter:
       description: The ID of the incident service.
       in: path
@@ -286,7 +338,7 @@ components:
         format: int64
         type: integer
     PageSize:
-      description: Size for a given page.
+      description: Size for a given page. The maximum allowed value is 5000.
       in: query
       name: page[size]
       required: false
@@ -295,6 +347,15 @@ components:
         example: 10
         format: int64
         type: integer
+    ResourceID:
+      description: 'Identifier, formatted as `type:id`. Supported types: `connection`,
+        `dashboard`, `notebook`, `security-rule`.'
+      example: dashboard:abc-def-ghi
+      in: path
+      name: resource_id
+      required: true
+      schema:
+        type: string
     RestrictionQueryID:
       description: The ID of the restriction query.
       in: path
@@ -331,6 +392,20 @@ components:
       schema:
         type: string
     SecurityMonitoringRuleID:
+      description: The ID of the rule.
+      in: path
+      name: rule_id
+      required: true
+      schema:
+        type: string
+    SensitiveDataScannerGroupID:
+      description: The ID of a group of rules.
+      in: path
+      name: group_id
+      required: true
+      schema:
+        type: string
+    SensitiveDataScannerRuleID:
       description: The ID of the rule.
       in: path
       name: rule_id
@@ -1392,7 +1467,7 @@ components:
         links:
           $ref: '#/components/schemas/CIAppResponseLinks'
         meta:
-          $ref: '#/components/schemas/CIAppResponseMetadata'
+          $ref: '#/components/schemas/CIAppResponseMetadataWithPagination'
       type: object
     CIAppPipelinesAggregateRequest:
       description: The object sent with the request to retrieve aggregation buckets
@@ -1413,8 +1488,6 @@ components:
           type: array
         options:
           $ref: '#/components/schemas/CIAppQueryOptions'
-        page:
-          $ref: '#/components/schemas/CIAppQueryPageOptions'
       type: object
     CIAppPipelinesAggregationBucketsResponse:
       description: The query results.
@@ -1441,7 +1514,6 @@ components:
         by:
           additionalProperties:
             description: The values for each group-by.
-            type: string
           description: The key-value pairs for each group-by.
           example:
             '@ci.provider.name': gitlab
@@ -1538,6 +1610,29 @@ components:
           type: string
       type: object
     CIAppResponseMetadata:
+      description: The metadata associated with a request.
+      properties:
+        elapsed:
+          description: The time elapsed in milliseconds.
+          example: 132
+          format: int64
+          type: integer
+        request_id:
+          description: The identifier of the request.
+          example: MWlFUjVaWGZTTTZPYzM0VXp1OXU2d3xLSVpEMjZKQ0VKUTI0dEYtM3RSOFVR
+          type: string
+        status:
+          $ref: '#/components/schemas/CIAppResponseStatus'
+        warnings:
+          description: 'A list of warnings (non-fatal errors) encountered. Partial
+            results may return if
+
+            warnings are present in the response.'
+          items:
+            $ref: '#/components/schemas/CIAppWarning'
+          type: array
+      type: object
+    CIAppResponseMetadataWithPagination:
       description: The metadata associated with a request.
       properties:
         elapsed:
@@ -1645,7 +1740,7 @@ components:
         links:
           $ref: '#/components/schemas/CIAppResponseLinks'
         meta:
-          $ref: '#/components/schemas/CIAppResponseMetadata'
+          $ref: '#/components/schemas/CIAppResponseMetadataWithPagination'
       type: object
     CIAppTestsAggregateRequest:
       description: The object sent with the request to retrieve aggregation buckets
@@ -1666,8 +1761,6 @@ components:
           type: array
         options:
           $ref: '#/components/schemas/CIAppQueryOptions'
-        page:
-          $ref: '#/components/schemas/CIAppQueryPageOptions'
       type: object
     CIAppTestsAggregationBucketsResponse:
       description: The query results.
@@ -1694,7 +1787,6 @@ components:
         by:
           additionalProperties:
             description: The values for each group-by.
-            type: string
           description: The key-value pairs for each group-by.
           example:
             '@test.service': web-ui-tests
@@ -1782,6 +1874,158 @@ components:
           example: infra_host
           type: string
       type: object
+    CloudConfigurationComplianceRuleOptions:
+      description: 'Options for cloud_configuration rules.
+
+        Fields `resourceType` and `regoRule` are mandatory when managing custom `cloud_configuration`
+        rules.
+
+        '
+      properties:
+        complexRule:
+          description: 'Whether the rule is a complex one.
+
+            Must be set to true if `regoRule.resourceTypes` contains more than one
+            item. Defaults to false.
+
+            '
+          type: boolean
+        regoRule:
+          $ref: '#/components/schemas/CloudConfigurationRegoRule'
+        resourceType:
+          description: 'Main resource type to be checked by the rule. It should be
+            specified again in `regoRule.resourceTypes`.
+
+            '
+          example: aws_acm
+          type: string
+      type: object
+    CloudConfigurationRegoRule:
+      description: Rule details.
+      properties:
+        policy:
+          description: 'The policy written in `rego`, see: https://www.openpolicyagent.org/docs/latest/policy-language/'
+          example: "package datadog\n\nimport data.datadog.output as dd_output\nimport
+            future.keywords.contains\nimport future.keywords.if\nimport future.keywords.in\n\neval(resource)
+            = \"skip\" if {\n  # Logic that evaluates to true if the resource should
+            be skipped\n  true\n} else = \"pass\" {\n  # Logic that evaluates to true
+            if the resource is compliant\n  true\n} else = \"fail\" {\n  # Logic that
+            evaluates to true if the resource is not compliant\n  true\n}\n\n# This
+            part remains unchanged for all rules\nresults contains result if {\n  some
+            resource in input.resources[input.main_resource_type]\n  result := dd_output.format(resource,
+            eval(resource))\n}\n"
+          type: string
+        resourceTypes:
+          description: List of resource types that will be evaluated upon. Must have
+            at least one element.
+          example:
+          - gcp_iam_service_account
+          - gcp_iam_policy
+          items:
+            type: string
+          type: array
+      required:
+      - policy
+      - resourceTypes
+      type: object
+    CloudConfigurationRuleCaseCreate:
+      description: Description of signals.
+      properties:
+        notifications:
+          description: Notification targets for each rule case.
+          items:
+            description: Notification.
+            type: string
+          type: array
+        status:
+          $ref: '#/components/schemas/SecurityMonitoringRuleSeverity'
+      required:
+      - status
+      type: object
+    CloudConfigurationRuleComplianceSignalOptions:
+      description: How to generate compliance signals. Useful for cloud_configuration
+        rules only.
+      properties:
+        userActivationStatus:
+          description: Whether signals will be sent.
+          type: boolean
+        userGroupByFields:
+          description: Fields to use to group findings by when sending signals.
+          items:
+            type: string
+          type: array
+      type: object
+    CloudConfigurationRuleCreatePayload:
+      description: Create a new cloud configuration rule.
+      properties:
+        cases:
+          description: 'Description of generated findings and signals (severity and
+            channels to be notified in case of a signal). Must contain exactly one
+            item.
+
+            '
+          items:
+            $ref: '#/components/schemas/CloudConfigurationRuleCaseCreate'
+          type: array
+        complianceSignalOptions:
+          $ref: '#/components/schemas/CloudConfigurationRuleComplianceSignalOptions'
+        isEnabled:
+          description: Whether the rule is enabled.
+          example: true
+          type: boolean
+        message:
+          description: Message in markdown format for generated findings and signals.
+          example: '#Description
+
+            Explanation of the rule.
+
+
+            #Remediation
+
+            How to fix the security issue.
+
+            '
+          type: string
+        name:
+          description: The name of the rule.
+          example: My security monitoring rule.
+          type: string
+        options:
+          $ref: '#/components/schemas/CloudConfigurationRuleOptions'
+        tags:
+          description: Tags for generated findings and signals.
+          example:
+          - env:prod
+          - team:security
+          items:
+            description: Tag.
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/CloudConfigurationRuleType'
+      required:
+      - name
+      - isEnabled
+      - options
+      - complianceSignalOptions
+      - cases
+      - message
+      type: object
+    CloudConfigurationRuleOptions:
+      description: Options on cloud configuration rules.
+      properties:
+        complianceRuleOptions:
+          $ref: '#/components/schemas/CloudConfigurationComplianceRuleOptions'
+      required:
+      - complianceRuleOptions
+      type: object
+    CloudConfigurationRuleType:
+      description: The rule type.
+      enum:
+      - cloud_configuration
+      type: string
+      x-enum-varnames:
+      - CLOUD_CONFIGURATION
     CloudWorkloadSecurityAgentRuleAttributes:
       description: A Cloud Workload Security Agent rule returned by the API.
       properties:
@@ -1965,6 +2209,130 @@ components:
           description: A list of Agent rules objects.
           items:
             $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleData'
+          type: array
+      type: object
+    CloudflareAccountCreateRequest:
+      description: Payload schema when adding a Cloudflare account.
+      properties:
+        data:
+          $ref: '#/components/schemas/CloudflareAccountCreateRequestData'
+      required:
+      - data
+      type: object
+    CloudflareAccountCreateRequestAttributes:
+      description: Attributes object for creating a Cloudflare account.
+      properties:
+        api_key:
+          description: The API key (or token) for the Cloudflare account.
+          example: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3
+          type: string
+        email:
+          description: The email associated with the Cloudflare account. If an API
+            key is provided (and not a token), this field is also required.
+          example: test-email@example.com
+          type: string
+        name:
+          description: The name of the Cloudflare account.
+          example: test-name
+          type: string
+      required:
+      - api_key
+      - name
+      type: object
+    CloudflareAccountCreateRequestData:
+      description: Data object for creating a Cloudflare account.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CloudflareAccountCreateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/CloudflareAccountType'
+      required:
+      - attributes
+      - type
+      type: object
+    CloudflareAccountResponse:
+      description: The expected response schema when getting a Cloudflare account.
+      properties:
+        data:
+          $ref: '#/components/schemas/CloudflareAccountResponseData'
+      type: object
+    CloudflareAccountResponseAttributes:
+      description: Attributes object of a Cloudflare account.
+      properties:
+        email:
+          description: The email associated with the Cloudflare account.
+          example: test-email@example.com
+          type: string
+        name:
+          description: The name of the Cloudflare account.
+          example: test-name
+          type: string
+      required:
+      - name
+      type: object
+    CloudflareAccountResponseData:
+      description: Data object of a Cloudflare account.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CloudflareAccountResponseAttributes'
+        id:
+          description: The ID of the Cloudflare account, a hash of the account name.
+          example: c1a8e059bfd1e911cf10b626340c9a54
+          type: string
+        type:
+          $ref: '#/components/schemas/CloudflareAccountType'
+      required:
+      - attributes
+      - id
+      - type
+      type: object
+    CloudflareAccountType:
+      default: cloudflare-accounts
+      description: The JSON:API type for this API. Should always be `cloudflare-accounts`.
+      enum:
+      - cloudflare-accounts
+      example: cloudflare-accounts
+      type: string
+      x-enum-varnames:
+      - CLOUDFLARE_ACCOUNTS
+    CloudflareAccountUpdateRequest:
+      description: Payload schema when updating a Cloudflare account.
+      properties:
+        data:
+          $ref: '#/components/schemas/CloudflareAccountUpdateRequestData'
+      required:
+      - data
+      type: object
+    CloudflareAccountUpdateRequestAttributes:
+      description: Attributes object for updating a Cloudflare account.
+      properties:
+        api_key:
+          description: The API key of the Cloudflare account.
+          example: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3
+          type: string
+        email:
+          description: The email associated with the Cloudflare account. If an API
+            key is provided (and not a token), this field is also required.
+          example: test-email@example.com
+          type: string
+      required:
+      - api_key
+      type: object
+    CloudflareAccountUpdateRequestData:
+      description: Data object for updating a Cloudflare account.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CloudflareAccountUpdateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/CloudflareAccountType'
+      type: object
+    CloudflareAccountsResponse:
+      description: The expected response schema when getting Cloudflare accounts.
+      properties:
+        data:
+          description: The JSON:API data schema.
+          items:
+            $ref: '#/components/schemas/CloudflareAccountResponseData'
           type: array
       type: object
     ConfluentAccountCreateRequest:
@@ -2288,6 +2656,10 @@ components:
         public_id:
           description: The organization public ID.
           type: string
+        region:
+          description: The region of the Datadog instance that the organization belongs
+            to.
+          type: string
         total_cost:
           description: The total cost of products for the month.
           format: double
@@ -2493,6 +2865,30 @@ components:
       - INTEGRATION_SCREENBOARD
       - INTEGRATION_TIMEBOARD
       - HOST_TIMEBOARD
+    DataScalarColumn:
+      description: A column containing the numerical results for a formula or query.
+      properties:
+        meta:
+          $ref: '#/components/schemas/ScalarMeta'
+        name:
+          description: The name referencing the formula or query for this column.
+          example: a
+          type: string
+        type:
+          description: The type of column present.
+          example: number
+          type: string
+        values:
+          description: The array of numerical values for one formula or query.
+          example:
+          - 0.5
+          items:
+            description: An individual value for a given column and group-by.
+            example: 0.5
+            format: double
+            type: number
+          type: array
+      type: object
     Event:
       description: The metadata associated with a request.
       properties:
@@ -2680,6 +3076,97 @@ components:
       type: string
       x-enum-varnames:
       - EVENT
+    EventsAggregation:
+      default: count
+      description: The type of aggregation that can be performed on events-based queries.
+      enum:
+      - count
+      - cardinality
+      - pc75
+      - pc90
+      - pc95
+      - pc98
+      - pc99
+      - sum
+      - min
+      - max
+      - avg
+      example: count
+      type: string
+      x-enum-varnames:
+      - COUNT
+      - CARDINALITY
+      - PC75
+      - PC90
+      - PC95
+      - PC98
+      - PC99
+      - SUM
+      - MIN
+      - MAX
+      - AVG
+    EventsCompute:
+      description: The instructions for what to compute for this query.
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/EventsAggregation'
+        interval:
+          description: Interval for compute in milliseconds.
+          example: 60000
+          format: int64
+          type: integer
+        metric:
+          description: The "measure" attribute on which to perform the computation.
+          type: string
+      required:
+      - aggregation
+      type: object
+    EventsDataSource:
+      default: logs
+      description: A data source that is powered by the Events Platform.
+      enum:
+      - logs
+      - rum
+      example: logs
+      type: string
+      x-enum-varnames:
+      - LOGS
+      - RUM
+    EventsGroupBy:
+      description: A dimension on which to split a query's results.
+      properties:
+        facet:
+          description: The facet by which to split groups.
+          example: '@error.type'
+          type: string
+        limit:
+          description: The maximum number of groups to return.
+          example: 10
+          format: int32
+          maximum: 2147483647
+          type: integer
+        sort:
+          $ref: '#/components/schemas/EventsGroupBySort'
+      required:
+      - facet
+      type: object
+    EventsGroupBySort:
+      description: The dimension by which to sort a query's results.
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/EventsAggregation'
+        metric:
+          description: Metric whose calculated value should be used to define the
+            sort order of a query's results.
+          example: '@duration'
+          type: string
+        order:
+          $ref: '#/components/schemas/QuerySortOrder'
+        type:
+          $ref: '#/components/schemas/EventsSortType'
+      required:
+      - aggregation
+      type: object
     EventsListRequest:
       description: The object sent with the request to retrieve a list of events from
         your organization.
@@ -2739,6 +3226,11 @@ components:
           example: now
           type: string
       type: object
+    EventsQueryGroupBys:
+      description: The list of facets on which to split results.
+      items:
+        $ref: '#/components/schemas/EventsGroupBy'
+      type: array
     EventsQueryOptions:
       description: 'The global query options that are used. Either provide a timezone
         or a time offset but not both,
@@ -2805,6 +3297,41 @@ components:
           example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
           type: string
       type: object
+    EventsScalarQuery:
+      description: An individual scalar events query.
+      properties:
+        compute:
+          $ref: '#/components/schemas/EventsCompute'
+        data_source:
+          $ref: '#/components/schemas/EventsDataSource'
+        group_by:
+          $ref: '#/components/schemas/EventsQueryGroupBys'
+        indexes:
+          description: The indexes in which to search.
+          example:
+          - main
+          items:
+            description: The unique index name.
+            example: main
+            type: string
+          type: array
+        name:
+          description: The variable name for use in formulas.
+          type: string
+        search:
+          $ref: '#/components/schemas/EventsSearch'
+      required:
+      - data_source
+      - compute
+      type: object
+    EventsSearch:
+      description: Configuration of the search/filter for an events query.
+      properties:
+        query:
+          description: The search/filter string for an events query.
+          example: status:warn service:foo
+          type: string
+      type: object
     EventsSort:
       description: The sort parameters when querying events.
       enum:
@@ -2814,6 +3341,42 @@ components:
       x-enum-varnames:
       - TIMESTAMP_ASCENDING
       - TIMESTAMP_DESCENDING
+    EventsSortType:
+      description: The type of sort to use on the calculated value.
+      enum:
+      - alphabetical
+      - measure
+      type: string
+      x-enum-varnames:
+      - ALPHABETICAL
+      - MEASURE
+    EventsTimeseriesQuery:
+      description: An individual timeseries events query.
+      properties:
+        compute:
+          $ref: '#/components/schemas/EventsCompute'
+        data_source:
+          $ref: '#/components/schemas/EventsDataSource'
+        group_by:
+          $ref: '#/components/schemas/EventsQueryGroupBys'
+        indexes:
+          description: The indexes in which to search.
+          example:
+          - main
+          items:
+            description: The unique index name.
+            example: main
+            type: string
+          type: array
+        name:
+          description: The variable name for use in formulas.
+          type: string
+        search:
+          $ref: '#/components/schemas/EventsSearch'
+      required:
+      - data_source
+      - compute
+      type: object
     EventsWarning:
       description: A warning message indicating something is wrong with the query.
       properties:
@@ -2830,6 +3393,214 @@ components:
           example: One or several indexes are missing or invalid. Results hold data
             from the other indexes.
           type: string
+      type: object
+    FastlyAccounResponseAttributes:
+      description: Attributes object of a Fastly account.
+      properties:
+        name:
+          description: The name of the Fastly account.
+          example: test-name
+          type: string
+        services:
+          description: A list of services belonging to the parent account.
+          items:
+            $ref: '#/components/schemas/FastlyService'
+          type: array
+      required:
+      - name
+      type: object
+    FastlyAccountCreateRequest:
+      description: Payload schema when adding a Fastly account.
+      properties:
+        data:
+          $ref: '#/components/schemas/FastlyAccountCreateRequestData'
+      required:
+      - data
+      type: object
+    FastlyAccountCreateRequestAttributes:
+      description: Attributes object for creating a Fastly account.
+      properties:
+        api_key:
+          description: The API key for the Fastly account.
+          example: ABCDEFG123
+          type: string
+        name:
+          description: The name of the Fastly account.
+          example: test-name
+          type: string
+        services:
+          description: A list of services belonging to the parent account.
+          items:
+            $ref: '#/components/schemas/FastlyService'
+          type: array
+      required:
+      - api_key
+      - name
+      type: object
+    FastlyAccountCreateRequestData:
+      description: Data object for creating a Fastly account.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FastlyAccountCreateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/FastlyAccountType'
+      required:
+      - attributes
+      - type
+      type: object
+    FastlyAccountResponse:
+      description: The expected response schema when getting a Fastly account.
+      properties:
+        data:
+          $ref: '#/components/schemas/FastlyAccountResponseData'
+      type: object
+    FastlyAccountResponseData:
+      description: Data object of a Fastly account.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FastlyAccounResponseAttributes'
+        id:
+          description: The ID of the Fastly account, a hash of the account name.
+          example: abc123
+          type: string
+        type:
+          $ref: '#/components/schemas/FastlyAccountType'
+      required:
+      - attributes
+      - id
+      - type
+      type: object
+    FastlyAccountType:
+      default: fastly-accounts
+      description: The JSON:API type for this API. Should always be `fastly-accounts`.
+      enum:
+      - fastly-accounts
+      example: fastly-accounts
+      type: string
+      x-enum-varnames:
+      - FASTLY_ACCOUNTS
+    FastlyAccountUpdateRequest:
+      description: Payload schema when updating a Fastly account.
+      properties:
+        data:
+          $ref: '#/components/schemas/FastlyAccountUpdateRequestData'
+      required:
+      - data
+      type: object
+    FastlyAccountUpdateRequestAttributes:
+      description: Attributes object for updating a Fastly account.
+      properties:
+        api_key:
+          description: The API key of the Fastly account.
+          example: ABCDEFG123
+          type: string
+      type: object
+    FastlyAccountUpdateRequestData:
+      description: Data object for updating a Fastly account.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FastlyAccountUpdateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/FastlyAccountType'
+      type: object
+    FastlyAccountsResponse:
+      description: The expected response schema when getting Fastly accounts.
+      properties:
+        data:
+          description: The JSON:API data schema.
+          items:
+            $ref: '#/components/schemas/FastlyAccountResponseData'
+          type: array
+      type: object
+    FastlyService:
+      description: The schema representation of a Fastly service.
+      properties:
+        id:
+          description: The id of the Fastly service
+          example: 6abc7de6893AbcDe9fghIj
+          type: string
+        tags:
+          description: A list of tags for the Fastly service.
+          example:
+          - myTag
+          - myTag2:myValue
+          items:
+            type: string
+          type: array
+      required:
+      - id
+      type: object
+    FastlyServiceAttributes:
+      description: Attributes object for Fastly service requests.
+      properties:
+        tags:
+          description: A list of tags for the Fastly service.
+          example:
+          - myTag
+          - myTag2:myValue
+          items:
+            type: string
+          type: array
+      type: object
+    FastlyServiceData:
+      description: Data object for Fastly service requests.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FastlyServiceAttributes'
+        id:
+          description: The ID of the Fastly service.
+          example: abc123
+          type: string
+        type:
+          $ref: '#/components/schemas/FastlyServiceType'
+      required:
+      - id
+      - type
+      type: object
+    FastlyServiceRequest:
+      description: Payload schema for Fastly service requests.
+      properties:
+        data:
+          $ref: '#/components/schemas/FastlyServiceData'
+      required:
+      - data
+      type: object
+    FastlyServiceResponse:
+      description: The expected response schema when getting a Fastly service.
+      properties:
+        data:
+          $ref: '#/components/schemas/FastlyServiceData'
+      type: object
+    FastlyServiceType:
+      default: fastly-services
+      description: The JSON:API type for this API. Should always be `fastly-services`.
+      enum:
+      - fastly-services
+      example: fastly-services
+      type: string
+      x-enum-varnames:
+      - FASTLY_SERVICES
+    FastlyServicesResponse:
+      description: The expected response schema when getting Fastly services.
+      properties:
+        data:
+          description: The JSON:API data schema.
+          items:
+            $ref: '#/components/schemas/FastlyServiceResponse'
+          type: array
+      type: object
+    FormulaLimit:
+      description: Message for specifying limits to the number of values returned
+        by a query.
+      properties:
+        count:
+          description: The number of results to which to limit.
+          example: 10
+          format: int32
+          maximum: 2147483647
+          type: integer
+        order:
+          $ref: '#/components/schemas/QuerySortOrder'
       type: object
     FullAPIKey:
       description: Datadog API key.
@@ -2927,6 +3698,39 @@ components:
           nullable: true
           type: array
       type: object
+    GroupScalarColumn:
+      description: A column containing the tag keys and values in a group.
+      properties:
+        name:
+          description: The name of the tag key or group.
+          example: env
+          type: string
+        type:
+          description: The type of column present.
+          example: group
+          type: string
+        values:
+          description: The array of tag values for each group found for the results
+            of the formulas or queries.
+          example:
+          - - production
+          - - staging
+          items:
+            description: An individual tag value for a given group column.
+            items:
+              description: One tag value within a values array.
+              example: production
+              type: string
+            type: array
+          type: array
+      type: object
+    GroupTags:
+      description: List of tags that apply to a single response value.
+      items:
+        description: A single tag that applies to a single response value.
+        example: env:production
+        type: string
+      type: array
     HTTPLog:
       description: Structured log message.
       items:
@@ -3094,6 +3898,104 @@ components:
       - APP_SEC_HOST_COUNT
       - OBSERVABILITY_PIPELINES_BYTES_PROCESSSED
       - LAMBDA_TRACED_INVOCATIONS_COUNT
+    IPAllowlistAttributes:
+      description: Attributes of the IP allowlist.
+      properties:
+        enabled:
+          description: Whether the IP allowlist logic is enabled or not.
+          type: boolean
+        entries:
+          description: Array of entries in the IP allowlist.
+          items:
+            $ref: '#/components/schemas/IPAllowlistEntry'
+          type: array
+      type: object
+    IPAllowlistData:
+      description: IP allowlist data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IPAllowlistAttributes'
+        id:
+          description: The unique identifier of the org.
+          type: string
+        type:
+          $ref: '#/components/schemas/IPAllowlistType'
+      required:
+      - type
+      type: object
+    IPAllowlistEntry:
+      description: IP allowlist entry object.
+      properties:
+        data:
+          $ref: '#/components/schemas/IPAllowlistEntryData'
+      required:
+      - data
+      type: object
+    IPAllowlistEntryAttributes:
+      description: Attributes of the IP allowlist entry.
+      properties:
+        cidr_block:
+          description: The CIDR block describing the IP range of the entry.
+          type: string
+        created_at:
+          description: Creation time of the entry.
+          format: date-time
+          readOnly: true
+          type: string
+        modified_at:
+          description: Time of last entry modification.
+          format: date-time
+          readOnly: true
+          type: string
+        note:
+          description: A note describing the IP allowlist entry.
+          type: string
+      type: object
+    IPAllowlistEntryData:
+      description: Data of the IP allowlist entry object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IPAllowlistEntryAttributes'
+        id:
+          description: The unique identifier of the IP allowlist entry.
+          type: string
+        type:
+          $ref: '#/components/schemas/IPAllowlistEntryType'
+      required:
+      - type
+      type: object
+    IPAllowlistEntryType:
+      default: ip_allowlist_entry
+      description: IP allowlist Entry type.
+      enum:
+      - ip_allowlist_entry
+      example: ip_allowlist_entry
+      type: string
+      x-enum-varnames:
+      - IP_ALLOWLIST_ENTRY
+    IPAllowlistResponse:
+      description: Response containing information about the IP allowlist.
+      properties:
+        data:
+          $ref: '#/components/schemas/IPAllowlistData'
+      type: object
+    IPAllowlistType:
+      default: ip_allowlist
+      description: IP allowlist type.
+      enum:
+      - ip_allowlist
+      example: ip_allowlist
+      type: string
+      x-enum-varnames:
+      - IP_ALLOWLIST
+    IPAllowlistUpdateRequest:
+      description: Update the IP allowlist.
+      properties:
+        data:
+          $ref: '#/components/schemas/IPAllowlistData'
+      required:
+      - data
+      type: object
     IdPMetadataFormData:
       description: The form data submitted to upload IdP metadata
       properties:
@@ -3691,6 +4593,220 @@ components:
         last_modified_by_user:
           $ref: '#/components/schemas/RelationshipToUser'
       type: object
+    IncidentSearchResponse:
+      description: Response with incidents and facets.
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentSearchResponseData'
+        included:
+          description: Included related resources that the user requested.
+          items:
+            $ref: '#/components/schemas/IncidentResponseIncludedItem'
+          readOnly: true
+          type: array
+      required:
+      - data
+      type: object
+    IncidentSearchResponseAttributes:
+      description: Attributes returned by an incident search.
+      properties:
+        facets:
+          $ref: '#/components/schemas/IncidentSearchResponseFacetsData'
+        incidents:
+          description: Incidents returned by the search.
+          items:
+            $ref: '#/components/schemas/IncidentSearchResponseIncidentsData'
+          type: array
+        total:
+          description: Number of incidents returned by the search.
+          example: 10
+          format: int32
+          maximum: 2147483647
+          type: integer
+      required:
+      - facets
+      - incidents
+      - total
+      type: object
+    IncidentSearchResponseData:
+      description: Data returned by an incident search.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentSearchResponseAttributes'
+        type:
+          $ref: '#/components/schemas/IncidentSearchResultsType'
+      type: object
+    IncidentSearchResponseFacetCount:
+      description: Count of the facet value appearing in search results.
+      example: 5
+      format: int32
+      maximum: 2147483647
+      type: integer
+    IncidentSearchResponseFacetsData:
+      description: Facet data for incidents returned by a search query.
+      properties:
+        commander:
+          description: Facet data for incident commander users.
+          items:
+            $ref: '#/components/schemas/IncidentSearchResponseUserFacetData'
+          type: array
+        created_by:
+          description: Facet data for incident creator users.
+          items:
+            $ref: '#/components/schemas/IncidentSearchResponseUserFacetData'
+          type: array
+        fields:
+          description: Facet data for incident property fields.
+          items:
+            $ref: '#/components/schemas/IncidentSearchResponsePropertyFieldFacetData'
+          type: array
+        impact:
+          description: Facet data for incident impact attributes.
+          items:
+            $ref: '#/components/schemas/IncidentSearchResponseFieldFacetData'
+          type: array
+        last_modified_by:
+          description: Facet data for incident last modified by users.
+          items:
+            $ref: '#/components/schemas/IncidentSearchResponseUserFacetData'
+          type: array
+        postmortem:
+          description: Facet data for incident postmortem existence.
+          items:
+            $ref: '#/components/schemas/IncidentSearchResponseFieldFacetData'
+          type: array
+        responder:
+          description: Facet data for incident responder users.
+          items:
+            $ref: '#/components/schemas/IncidentSearchResponseUserFacetData'
+          type: array
+        severity:
+          description: Facet data for incident severity attributes.
+          items:
+            $ref: '#/components/schemas/IncidentSearchResponseFieldFacetData'
+          type: array
+        state:
+          description: Facet data for incident state attributes.
+          items:
+            $ref: '#/components/schemas/IncidentSearchResponseFieldFacetData'
+          type: array
+        time_to_repair:
+          description: Facet data for incident time to repair metrics.
+          items:
+            $ref: '#/components/schemas/IncidentSearchResponseNumericFacetData'
+          type: array
+        time_to_resolve:
+          description: Facet data for incident time to resolve metrics.
+          items:
+            $ref: '#/components/schemas/IncidentSearchResponseNumericFacetData'
+          type: array
+      type: object
+    IncidentSearchResponseFieldFacetData:
+      description: Facet value and number of occurrences for a property field of an
+        incident.
+      properties:
+        count:
+          $ref: '#/components/schemas/IncidentSearchResponseFacetCount'
+        name:
+          description: The facet value appearing in search results.
+          example: SEV-2
+          type: string
+      type: object
+    IncidentSearchResponseIncidentsData:
+      description: Incident returned by the search.
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentResponseData'
+      required:
+      - data
+      type: object
+    IncidentSearchResponseNumericFacetData:
+      description: Facet data numeric attributes of an incident.
+      properties:
+        aggregates:
+          $ref: '#/components/schemas/IncidentSearchResponseNumericFacetDataAggregates'
+        name:
+          description: Name of the incident property field.
+          example: time_to_repair
+          type: string
+      required:
+      - name
+      - aggregates
+      type: object
+    IncidentSearchResponseNumericFacetDataAggregates:
+      description: Aggregate information for numeric incident data.
+      properties:
+        max:
+          description: Maximum value of the numeric aggregates.
+          example: 1234.0
+          format: double
+          nullable: true
+          type: number
+        min:
+          description: Minimum value of the numeric aggregates.
+          example: 20.0
+          format: double
+          nullable: true
+          type: number
+      type: object
+    IncidentSearchResponsePropertyFieldFacetData:
+      description: Facet data for the incident property fields.
+      properties:
+        aggregates:
+          $ref: '#/components/schemas/IncidentSearchResponseNumericFacetDataAggregates'
+        facets:
+          description: Facet data for the property field of an incident.
+          items:
+            $ref: '#/components/schemas/IncidentSearchResponseFieldFacetData'
+          type: array
+        name:
+          description: Name of the incident property field.
+          example: Severity
+          type: string
+      required:
+      - facets
+      - name
+      type: object
+    IncidentSearchResponseUserFacetData:
+      description: Facet data for user attributes of an incident.
+      properties:
+        count:
+          $ref: '#/components/schemas/IncidentSearchResponseFacetCount'
+        email:
+          description: Email of the user.
+          example: datadog.user@example.com
+          type: string
+        handle:
+          description: Handle of the user.
+          example: '@datadog.user@example.com'
+          type: string
+        name:
+          description: Name of the user.
+          example: Datadog User
+          type: string
+        uuid:
+          description: ID of the user.
+          example: 773b045d-ccf8-4808-bd3b-955ef6a8c940
+          type: string
+      type: object
+    IncidentSearchResultsType:
+      default: incidents_search_results
+      description: Incident search result type.
+      enum:
+      - incidents_search_results
+      example: incidents_search_results
+      type: string
+      x-enum-varnames:
+      - INCIDENTS_SEARCH_RESULTS
+    IncidentSearchSortOrder:
+      description: The ways searched incidents can be sorted.
+      enum:
+      - created
+      - -created
+      type: string
+      x-enum-varnames:
+      - CREATED_ASCENDING
+      - CREATED_DESCENDING
     IncidentServiceCreateAttributes:
       description: The incident service's attributes for a create request.
       properties:
@@ -4351,7 +5467,6 @@ components:
         by:
           additionalProperties:
             description: The values for each group by
-            type: string
           description: The key, value pairs for each group by
           example:
             '@state': success
@@ -6221,6 +7336,31 @@ components:
           $ref: '#/components/schemas/MetricVolumes'
       readOnly: true
       type: object
+    MetricsAggregator:
+      default: avg
+      description: The type of aggregation that can be performed on metrics queries.
+      enum:
+      - avg
+      - min
+      - max
+      - sum
+      - last
+      - percentile
+      - mean
+      - l2norm
+      - area
+      example: avg
+      type: string
+      x-enum-varnames:
+      - AVG
+      - MIN
+      - MAX
+      - SUM
+      - LAST
+      - PERCENTILE
+      - MEAN
+      - L2NORM
+      - AREA
     MetricsAndMetricTagConfigurations:
       description: Object for a metrics and metric tag configurations.
       oneOf:
@@ -6237,6 +7377,228 @@ components:
           type: array
       readOnly: true
       type: object
+    MetricsDataSource:
+      default: metrics
+      description: A data source that is powered by the Metrics platform.
+      enum:
+      - metrics
+      - cloud_cost
+      example: metrics
+      type: string
+      x-enum-varnames:
+      - METRICS
+      - CLOUD_COST
+    MetricsScalarQuery:
+      description: An individual scalar metrics query.
+      properties:
+        aggregator:
+          $ref: '#/components/schemas/MetricsAggregator'
+        data_source:
+          $ref: '#/components/schemas/MetricsDataSource'
+        name:
+          description: The variable name for use in formulas.
+          type: string
+        query:
+          description: A classic metrics query string.
+          example: avg:system.cpu.user{*} by {env}
+          type: string
+      required:
+      - data_source
+      - query
+      - aggregator
+      type: object
+    MetricsTimeseriesQuery:
+      description: An individual timeseries metrics query.
+      properties:
+        data_source:
+          $ref: '#/components/schemas/MetricsDataSource'
+        name:
+          description: The variable name for use in formulas.
+          type: string
+        query:
+          description: A classic metrics query string.
+          example: avg:system.cpu.user{*} by {env}
+          type: string
+      required:
+      - data_source
+      - query
+      type: object
+    MonitorConfigPolicyAttributeCreateRequest:
+      description: Policy and policy type for a monitor configuration policy.
+      properties:
+        policy:
+          $ref: '#/components/schemas/MonitorConfigPolicyPolicyCreateRequest'
+        policy_type:
+          $ref: '#/components/schemas/MonitorConfigPolicyType'
+      required:
+      - policy_type
+      - policy
+      type: object
+    MonitorConfigPolicyAttributeEditRequest:
+      description: Policy and policy type for a monitor configuration policy.
+      properties:
+        policy:
+          $ref: '#/components/schemas/MonitorConfigPolicyPolicy'
+        policy_type:
+          $ref: '#/components/schemas/MonitorConfigPolicyType'
+      required:
+      - policy_type
+      - policy
+      type: object
+    MonitorConfigPolicyAttributeResponse:
+      description: Policy and policy type for a monitor configuration policy.
+      properties:
+        policy:
+          $ref: '#/components/schemas/MonitorConfigPolicyPolicy'
+        policy_type:
+          $ref: '#/components/schemas/MonitorConfigPolicyType'
+      type: object
+    MonitorConfigPolicyCreateData:
+      description: A monitor configuration policy data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MonitorConfigPolicyAttributeCreateRequest'
+        type:
+          $ref: '#/components/schemas/MonitorConfigPolicyResourceType'
+      required:
+      - type
+      - attributes
+      type: object
+    MonitorConfigPolicyCreateRequest:
+      description: Request for creating a monitor configuration policy.
+      properties:
+        data:
+          $ref: '#/components/schemas/MonitorConfigPolicyCreateData'
+      required:
+      - data
+      type: object
+    MonitorConfigPolicyEditData:
+      description: A monitor configuration policy data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MonitorConfigPolicyAttributeEditRequest'
+        id:
+          description: ID of this monitor configuration policy.
+          example: 00000000-0000-1234-0000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/MonitorConfigPolicyResourceType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    MonitorConfigPolicyEditRequest:
+      description: Request for editing a monitor configuration policy.
+      properties:
+        data:
+          $ref: '#/components/schemas/MonitorConfigPolicyEditData'
+      required:
+      - data
+      type: object
+    MonitorConfigPolicyListResponse:
+      description: Response for retrieving all monitor configuration policies.
+      properties:
+        data:
+          description: An array of monitor configuration policies.
+          items:
+            $ref: '#/components/schemas/MonitorConfigPolicyResponseData'
+          type: array
+      type: object
+    MonitorConfigPolicyPolicy:
+      description: Configuration for the policy.
+      oneOf:
+      - $ref: '#/components/schemas/MonitorConfigPolicyTagPolicy'
+      type: object
+    MonitorConfigPolicyPolicyCreateRequest:
+      description: Configuration for the policy.
+      oneOf:
+      - $ref: '#/components/schemas/MonitorConfigPolicyTagPolicyCreateRequest'
+      type: object
+    MonitorConfigPolicyResourceType:
+      default: monitor-config-policy
+      description: Monitor configuration policy resource type.
+      enum:
+      - monitor-config-policy
+      example: monitor-config-policy
+      type: string
+      x-enum-varnames:
+      - MONITOR_CONFIG_POLICY
+    MonitorConfigPolicyResponse:
+      description: Response for retrieving a monitor configuration policy.
+      properties:
+        data:
+          $ref: '#/components/schemas/MonitorConfigPolicyResponseData'
+      type: object
+    MonitorConfigPolicyResponseData:
+      description: A monitor configuration policy data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MonitorConfigPolicyAttributeResponse'
+        id:
+          description: ID of this monitor configuration policy.
+          example: 00000000-0000-1234-0000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/MonitorConfigPolicyResourceType'
+      type: object
+    MonitorConfigPolicyTagPolicy:
+      description: Tag attributes of a monitor configuration policy.
+      properties:
+        tag_key:
+          description: The key of the tag.
+          example: datacenter
+          maxLength: 255
+          type: string
+        tag_key_required:
+          description: If a tag key is required for monitor creation.
+          example: true
+          type: boolean
+        valid_tag_values:
+          description: Valid values for the tag.
+          example:
+          - prod
+          - staging
+          items:
+            maxLength: 255
+            type: string
+          type: array
+      type: object
+    MonitorConfigPolicyTagPolicyCreateRequest:
+      description: Tag attributes of a monitor configuration policy.
+      properties:
+        tag_key:
+          description: The key of the tag.
+          example: datacenter
+          maxLength: 255
+          type: string
+        tag_key_required:
+          description: If a tag key is required for monitor creation.
+          example: true
+          type: boolean
+        valid_tag_values:
+          description: Valid values for the tag.
+          example:
+          - prod
+          - staging
+          items:
+            maxLength: 255
+            type: string
+          type: array
+      required:
+      - tag_key
+      - tag_key_required
+      - valid_tag_values
+      type: object
+    MonitorConfigPolicyType:
+      default: tag
+      description: The monitor configuration policy type.
+      enum:
+      - tag
+      example: tag
+      type: string
+      x-enum-varnames:
+      - TAG
     MonitorType:
       description: Attributes from the monitor that triggered the event.
       nullable: true
@@ -6311,6 +7673,26 @@ components:
       required:
       - id
       - type
+      type: object
+    OnDemandConcurrencyCap:
+      description: On-demand concurrency cap.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/OnDemandConcurrencyCapAttributes'
+      type: object
+    OnDemandConcurrencyCapAttributes:
+      description: On-demand concurrency cap attributes.
+      properties:
+        on_demand_concurrency_cap:
+          description: Value of the on-demand concurrency cap.
+          format: double
+          type: number
+      type: object
+    OnDemandConcurrencyCapResponse:
+      description: On-demand concurrency cap response.
+      properties:
+        data:
+          $ref: '#/components/schemas/OnDemandConcurrencyCap'
       type: object
     OpsgenieServiceCreateAttributes:
       description: The Opsgenie service attributes for a create request.
@@ -6785,6 +8167,19 @@ components:
       type: string
       x-enum-varnames:
       - PROCESS
+    QueryFormula:
+      description: A formula for calculation based on one or more queries.
+      properties:
+        formula:
+          description: Formula string, referencing one or more queries with their
+            name property.
+          example: a+b
+          type: string
+        limit:
+          $ref: '#/components/schemas/FormulaLimit'
+      required:
+      - formula
+      type: object
     QuerySortOrder:
       default: desc
       description: Direction of sort.
@@ -6949,6 +8344,10 @@ components:
           description: ID of the RUM application.
           example: abcd1234-0000-0000-abcd-1234abcd5678
           type: string
+        client_token:
+          description: Client token of the RUM application.
+          example: abcd1234efgh5678ijkl90abcd1234efgh0
+          type: string
         created_at:
           description: Timestamp in ms of the creation date.
           example: 1659479836169
@@ -6959,9 +8358,12 @@ components:
           example: john.doe
           type: string
         hash:
-          description: Client token of the RUM application.
-          example: abcd1234efgh5678ijkl90abcd1234efgh0
+          description: Hash of the RUM application. Optional.
           type: string
+        is_active:
+          description: Indicates if the RUM application is active.
+          example: true
+          type: boolean
         name:
           description: Name of the RUM application.
           example: my_rum_application
@@ -6988,6 +8390,7 @@ components:
           type: string
       required:
       - application_id
+      - client_token
       - created_at
       - created_by_handle
       - name
@@ -7039,6 +8442,83 @@ components:
       type: string
       x-enum-varnames:
       - RUM_APPLICATION_CREATE
+    RUMApplicationList:
+      description: RUM application list.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RUMApplicationListAttributes'
+        type:
+          $ref: '#/components/schemas/RUMApplicationListType'
+      required:
+      - attributes
+      - type
+      type: object
+    RUMApplicationListAttributes:
+      description: RUM application list attributes.
+      properties:
+        application_id:
+          description: ID of the RUM application.
+          example: abcd1234-0000-0000-abcd-1234abcd5678
+          type: string
+        created_at:
+          description: Timestamp in ms of the creation date.
+          example: 1659479836169
+          format: int64
+          type: integer
+        created_by_handle:
+          description: Handle of the creator user.
+          example: john.doe
+          type: string
+        hash:
+          description: Hash of the RUM application. Optional.
+          type: string
+        is_active:
+          description: Indicates if the RUM application is active.
+          example: true
+          type: boolean
+        name:
+          description: Name of the RUM application.
+          example: my_rum_application
+          type: string
+        org_id:
+          description: Org ID of the RUM application.
+          example: 999
+          format: int32
+          maximum: 2147483647
+          type: integer
+        type:
+          description: Type of the RUM application. Supported values are `browser`,
+            `ios`, `android`, `react-native`, `flutter`.
+          example: browser
+          type: string
+        updated_at:
+          description: Timestamp in ms of the last update date.
+          example: 1659479836169
+          format: int64
+          type: integer
+        updated_by_handle:
+          description: Handle of the updater user.
+          example: jane.doe
+          type: string
+      required:
+      - application_id
+      - created_at
+      - created_by_handle
+      - name
+      - org_id
+      - type
+      - updated_at
+      - updated_by_handle
+      type: object
+    RUMApplicationListType:
+      default: rum_application
+      description: RUM application list type.
+      enum:
+      - rum_application
+      example: rum_application
+      type: string
+      x-enum-varnames:
+      - RUM_APPLICATION
     RUMApplicationResponse:
       description: RUM application response.
       properties:
@@ -7105,7 +8585,7 @@ components:
         data:
           description: RUM applications array response.
           items:
-            $ref: '#/components/schemas/RUMApplication'
+            $ref: '#/components/schemas/RUMApplicationList'
           type: array
       type: object
     RUMBucketResponse:
@@ -7703,6 +9183,91 @@ components:
         page:
           $ref: '#/components/schemas/Pagination'
       type: object
+    RestrictionPolicy:
+      description: Restriction policy object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RestrictionPolicyAttributes'
+        id:
+          description: The identifier, always equivalent to the value specified in
+            the `resource_id` path parameter.
+          example: dashboard:abc-def-ghi
+          type: string
+        type:
+          $ref: '#/components/schemas/RestrictionPolicyType'
+      required:
+      - type
+      - id
+      - attributes
+      type: object
+    RestrictionPolicyAttributes:
+      description: Restriction policy attributes.
+      example:
+        bindings: []
+      properties:
+        bindings:
+          description: An array of bindings.
+          items:
+            $ref: '#/components/schemas/RestrictionPolicyBinding'
+          type: array
+      required:
+      - bindings
+      type: object
+    RestrictionPolicyBinding:
+      description: Specifies which principals are associated with a relation.
+      properties:
+        principals:
+          description: 'An array of principals. A principal is a subject or group
+            of subjects.
+
+            Each principal is formatted as `type:id`. Supported types: `role` and
+            `org`.
+
+            The org ID can be obtained through the api/v2/current_user API.'
+          example:
+          - role:00000000-0000-1111-0000-000000000000
+          items:
+            description: 'Subject or group of subjects. Each principal is formatted
+              as `type:id`.
+
+              Supported types: `role` and `org`.
+
+              The org ID can be obtained through the api/v2/current_user API.'
+            type: string
+          type: array
+        relation:
+          description: The role/level of access.
+          example: editor
+          type: string
+      required:
+      - relation
+      - principals
+      type: object
+    RestrictionPolicyResponse:
+      description: Response containing information about a single restriction policy.
+      properties:
+        data:
+          $ref: '#/components/schemas/RestrictionPolicy'
+      required:
+      - data
+      type: object
+    RestrictionPolicyType:
+      default: restriction_policy
+      description: Restriction policy type.
+      enum:
+      - restriction_policy
+      example: restriction_policy
+      type: string
+      x-enum-varnames:
+      - RESTRICTION_POLICY
+    RestrictionPolicyUpdateRequest:
+      description: Update request for a restriction policy.
+      properties:
+        data:
+          $ref: '#/components/schemas/RestrictionPolicy'
+      required:
+      - data
+      type: object
     RestrictionQueryAttributes:
       description: Attributes of the restriction query.
       properties:
@@ -8162,6 +9727,132 @@ components:
       type: string
       x-enum-varnames:
       - SAML_ASSERTION_ATTRIBUTES
+    ScalarColumn:
+      description: A single column in a scalar query response.
+      oneOf:
+      - $ref: '#/components/schemas/GroupScalarColumn'
+      - $ref: '#/components/schemas/DataScalarColumn'
+      type: object
+    ScalarFormulaQueryRequest:
+      description: A wrapper request around one scalar query to be executed.
+      properties:
+        data:
+          $ref: '#/components/schemas/ScalarFormulaRequest'
+      required:
+      - data
+      type: object
+    ScalarFormulaQueryResponse:
+      description: A message containing one or more responses to scalar queries.
+      properties:
+        data:
+          $ref: '#/components/schemas/ScalarResponse'
+        errors:
+          description: An error generated when processing a request.
+          type: string
+      type: object
+    ScalarFormulaRequest:
+      description: A single scalar query to be executed.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ScalarFormulaRequestAttributes'
+        type:
+          $ref: '#/components/schemas/ScalarFormulaRequestType'
+      required:
+      - type
+      - attributes
+      type: object
+    ScalarFormulaRequestAttributes:
+      description: The object describing a scalar formula request.
+      properties:
+        formulas:
+          description: List of formulas to be calculated and returned as responses.
+          items:
+            $ref: '#/components/schemas/QueryFormula'
+          type: array
+        from:
+          description: Start date (inclusive) of the query in milliseconds since the
+            Unix epoch.
+          example: 1568899800000
+          format: int64
+          type: integer
+        queries:
+          $ref: '#/components/schemas/ScalarFormulaRequestQueries'
+        to:
+          description: End date (exclusive) of the query in milliseconds since the
+            Unix epoch.
+          example: 1568923200000
+          format: int64
+          type: integer
+      required:
+      - to
+      - from
+      - queries
+      type: object
+    ScalarFormulaRequestQueries:
+      description: List of queries to be run and used as inputs to the formulas.
+      items:
+        $ref: '#/components/schemas/ScalarQuery'
+      type: array
+    ScalarFormulaRequestType:
+      default: scalar_request
+      description: The type of the resource. The value should always be scalar_request.
+      enum:
+      - scalar_request
+      example: scalar_request
+      type: string
+      x-enum-varnames:
+      - SCALAR_REQUEST
+    ScalarFormulaResponseAtrributes:
+      description: The object describing a scalar response.
+      properties:
+        columns:
+          description: List of response columns, each corresponding to an individual
+            formula or query in the request and with values in parallel arrays matching
+            the series list.
+          items:
+            $ref: '#/components/schemas/ScalarColumn'
+          type: array
+      type: object
+    ScalarFormulaResponseType:
+      default: scalar_response
+      description: The type of the resource. The value should always be scalar_response.
+      enum:
+      - scalar_response
+      example: scalar_response
+      type: string
+      x-enum-varnames:
+      - SCALAR_RESPONSE
+    ScalarMeta:
+      description: Metadata for the resulting numerical values.
+      properties:
+        unit:
+          description: 'Detailed information about the unit.
+
+            First element describes the "primary unit" (for example, `bytes` in `bytes
+            per second`).
+
+            The second element describes the "per unit" (for example, `second` in
+            `bytes per second`).
+
+            If the second element is not present, the API returns null.'
+          items:
+            $ref: '#/components/schemas/Unit'
+          type: array
+      type: object
+    ScalarQuery:
+      description: An individual scalar query to one of the basic Datadog data sources.
+      oneOf:
+      - $ref: '#/components/schemas/MetricsScalarQuery'
+      - $ref: '#/components/schemas/EventsScalarQuery'
+      type: object
+    ScalarResponse:
+      description: A message containing the response to a scalar query.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ScalarFormulaResponseAtrributes'
+        type:
+          $ref: '#/components/schemas/ScalarFormulaResponseType'
+      type: object
     SecurityFilter:
       description: The security filter's properties.
       properties:
@@ -8465,6 +10156,7 @@ components:
       oneOf:
       - $ref: '#/components/schemas/SecurityMonitoringStandardRuleCreatePayload'
       - $ref: '#/components/schemas/SecurityMonitoringSignalRuleCreatePayload'
+      - $ref: '#/components/schemas/CloudConfigurationRuleCreatePayload'
       type: object
     SecurityMonitoringRuleDecreaseCriticalityBasedOnEnv:
       description: 'If true, signals in non-production environments have a lower severity
@@ -8485,6 +10177,7 @@ components:
       - anomaly_detection
       - impossible_travel
       - hardcoded
+      - third_party
       type: string
       x-enum-varnames:
       - THRESHOLD
@@ -8492,6 +10185,7 @@ components:
       - ANOMALY_DETECTION
       - IMPOSSIBLE_TRAVEL
       - HARDCODED
+      - THIRD_PARTY
     SecurityMonitoringRuleEvaluationWindow:
       description: 'A time window is specified to match when at least one of the cases
         matches true. This is a sliding window
@@ -8670,6 +10364,8 @@ components:
     SecurityMonitoringRuleOptions:
       description: Options on rules.
       properties:
+        complianceRuleOptions:
+          $ref: '#/components/schemas/CloudConfigurationComplianceRuleOptions'
         decreaseCriticalityBasedOnEnv:
           $ref: '#/components/schemas/SecurityMonitoringRuleDecreaseCriticalityBasedOnEnv'
         detectionMethod:
@@ -8703,6 +10399,7 @@ components:
       - new_value
       - geo_data
       - event_count
+      - none
       type: string
       x-enum-varnames:
       - COUNT
@@ -8712,6 +10409,7 @@ components:
       - NEW_VALUE
       - GEO_DATA
       - EVENT_COUNT
+      - NONE
     SecurityMonitoringRuleResponse:
       description: Create a new rule.
       oneOf:
@@ -8750,12 +10448,14 @@ components:
       - infrastructure_configuration
       - workload_security
       - cloud_configuration
+      - application_security
       type: string
       x-enum-varnames:
       - LOG_DETECTION
       - INFRASTRUCTURE_CONFIGURATION
       - WORKLOAD_SECURITY
       - CLOUD_CONFIGURATION
+      - APPLICATION_SECURITY
     SecurityMonitoringRuleUpdatePayload:
       description: Update an existing rule.
       properties:
@@ -8764,6 +10464,8 @@ components:
           items:
             $ref: '#/components/schemas/SecurityMonitoringRuleCase'
           type: array
+        complianceSignalOptions:
+          $ref: '#/components/schemas/CloudConfigurationRuleComplianceSignalOptions'
         filters:
           description: Additional queries to filter matched events before they are
             processed.
@@ -9083,6 +10785,10 @@ components:
           type: integer
         creationAuthorId:
           description: User ID of the user who created the rule.
+          format: int64
+          type: integer
+        deprecationDate:
+          description: When the rule will be deprecated, timestamp in milliseconds.
           format: int64
           type: integer
         filters:
@@ -9444,12 +11150,18 @@ components:
           items:
             $ref: '#/components/schemas/SecurityMonitoringRuleCase'
           type: array
+        complianceSignalOptions:
+          $ref: '#/components/schemas/CloudConfigurationRuleComplianceSignalOptions'
         createdAt:
           description: When the rule was created, timestamp in milliseconds.
           format: int64
           type: integer
         creationAuthorId:
           description: User ID of the user who created the rule.
+          format: int64
+          type: integer
+        deprecationDate:
+          description: When the rule will be deprecated, timestamp in milliseconds.
           format: int64
           type: integer
         filters:
@@ -9523,6 +11235,604 @@ components:
       required:
       - uuid
       type: object
+    SensitiveDataScannerConfigRequest:
+      description: Group reorder request.
+      properties:
+        data:
+          $ref: '#/components/schemas/SensitiveDataScannerReorderConfig'
+        meta:
+          $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
+      required:
+      - data
+      - meta
+      type: object
+    SensitiveDataScannerConfiguration:
+      description: A Sensitive Data Scanner configuration.
+      properties:
+        id:
+          description: ID of the configuration.
+          type: string
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerConfigurationType'
+      type: object
+    SensitiveDataScannerConfigurationData:
+      description: A Sensitive Data Scanner configuration data.
+      properties:
+        data:
+          $ref: '#/components/schemas/SensitiveDataScannerConfiguration'
+      type: object
+    SensitiveDataScannerConfigurationRelationships:
+      description: Relationships of the configuration.
+      properties:
+        groups:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupList'
+      type: object
+    SensitiveDataScannerConfigurationType:
+      default: sensitive_data_scanner_configuration
+      description: Sensitive Data Scanner configuration type.
+      enum:
+      - sensitive_data_scanner_configuration
+      example: sensitive_data_scanner_configuration
+      type: string
+      x-enum-varnames:
+      - SENSITIVE_DATA_SCANNER_CONFIGURATIONS
+    SensitiveDataScannerCreateGroupResponse:
+      description: Create group response.
+      properties:
+        data:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupResponse'
+        meta:
+          $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
+      type: object
+    SensitiveDataScannerCreateRuleResponse:
+      description: Create rule response.
+      properties:
+        data:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleResponse'
+        meta:
+          $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
+      type: object
+    SensitiveDataScannerFilter:
+      description: Filter for the Scanning Group.
+      properties:
+        query:
+          description: Query to filter the events.
+          type: string
+      type: object
+    SensitiveDataScannerGetConfigIncludedArray:
+      description: Included objects from relationships.
+      items:
+        $ref: '#/components/schemas/SensitiveDataScannerGetConfigIncludedItem'
+      type: array
+    SensitiveDataScannerGetConfigIncludedItem:
+      description: An object related to the configuration.
+      oneOf:
+      - $ref: '#/components/schemas/SensitiveDataScannerRuleIncludedItem'
+      - $ref: '#/components/schemas/SensitiveDataScannerGroupIncludedItem'
+      type: object
+    SensitiveDataScannerGetConfigResponse:
+      description: Get all groups response.
+      properties:
+        data:
+          $ref: '#/components/schemas/SensitiveDataScannerGetConfigResponseData'
+        included:
+          $ref: '#/components/schemas/SensitiveDataScannerGetConfigIncludedArray'
+        meta:
+          $ref: '#/components/schemas/SensitiveDataScannerMeta'
+      type: object
+    SensitiveDataScannerGetConfigResponseData:
+      description: Response data related to the scanning groups.
+      properties:
+        id:
+          description: ID of the configuration.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/SensitiveDataScannerConfigurationRelationships'
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerConfigurationType'
+      type: object
+    SensitiveDataScannerGroup:
+      description: A scanning group.
+      properties:
+        id:
+          description: ID of the group.
+          type: string
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupType'
+      type: object
+    SensitiveDataScannerGroupAttributes:
+      description: Attributes of the Sensitive Data Scanner group.
+      properties:
+        description:
+          description: Description of the group.
+          type: string
+        filter:
+          $ref: '#/components/schemas/SensitiveDataScannerFilter'
+        is_enabled:
+          description: Whether or not the group is enabled.
+          type: boolean
+        name:
+          description: Name of the group.
+          type: string
+        product_list:
+          description: List of products the scanning group applies.
+          items:
+            $ref: '#/components/schemas/SensitiveDataScannerProduct'
+          type: array
+      type: object
+    SensitiveDataScannerGroupCreate:
+      description: Data related to the creation of a group.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupAttributes'
+        relationships:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupRelationships'
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupType'
+      required:
+      - type
+      - attributes
+      type: object
+    SensitiveDataScannerGroupCreateRequest:
+      description: Create group request.
+      properties:
+        data:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupCreate'
+        meta:
+          $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
+      type: object
+    SensitiveDataScannerGroupData:
+      description: A scanning group data.
+      properties:
+        data:
+          $ref: '#/components/schemas/SensitiveDataScannerGroup'
+      type: object
+    SensitiveDataScannerGroupDeleteRequest:
+      description: Delete group request.
+      properties:
+        meta:
+          $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
+      required:
+      - meta
+      type: object
+    SensitiveDataScannerGroupDeleteResponse:
+      description: Delete group response.
+      properties:
+        meta:
+          $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
+      type: object
+    SensitiveDataScannerGroupIncludedItem:
+      description: A Scanning Group included item.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupAttributes'
+        id:
+          description: ID of the group.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupRelationships'
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupType'
+      type: object
+    SensitiveDataScannerGroupItem:
+      description: Data related to a Sensitive Data Scanner Group.
+      properties:
+        id:
+          description: ID of the group.
+          type: string
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupType'
+      type: object
+    SensitiveDataScannerGroupList:
+      description: List of groups, ordered.
+      properties:
+        data:
+          description: List of groups. The order is important.
+          items:
+            $ref: '#/components/schemas/SensitiveDataScannerGroupItem'
+          type: array
+      type: object
+    SensitiveDataScannerGroupRelationships:
+      description: Relationships of the group.
+      properties:
+        configuration:
+          $ref: '#/components/schemas/SensitiveDataScannerConfigurationData'
+        rules:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleData'
+      type: object
+    SensitiveDataScannerGroupResponse:
+      description: Response data related to the creation of a group.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupAttributes'
+        id:
+          description: ID of the group.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupRelationships'
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupType'
+      type: object
+    SensitiveDataScannerGroupType:
+      default: sensitive_data_scanner_group
+      description: Sensitive Data Scanner group type.
+      enum:
+      - sensitive_data_scanner_group
+      example: sensitive_data_scanner_group
+      type: string
+      x-enum-varnames:
+      - SENSITIVE_DATA_SCANNER_GROUP
+    SensitiveDataScannerGroupUpdate:
+      description: Data related to the update of a group.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupAttributes'
+        id:
+          description: ID of the group.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupRelationships'
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupType'
+      type: object
+    SensitiveDataScannerGroupUpdateRequest:
+      description: Update group request.
+      properties:
+        data:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupUpdate'
+        meta:
+          $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
+      required:
+      - data
+      - meta
+      type: object
+    SensitiveDataScannerGroupUpdateResponse:
+      description: Update group response.
+      properties:
+        meta:
+          $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
+      type: object
+    SensitiveDataScannerMeta:
+      description: Meta response containing information about the API.
+      properties:
+        count_limit:
+          description: Maximum number of scanning rules allowed for the org.
+          format: int64
+          type: integer
+        group_count_limit:
+          description: Maximum number of scanning groups allowed for the org.
+          format: int64
+          type: integer
+        has_highlight_enabled:
+          description: Whether or not scanned events are highlighted in Logs or RUM
+            for the org.
+          type: boolean
+        is_pci_compliant:
+          description: Whether or not the org is compliant to the payment card industry
+            standard.
+          type: boolean
+        version:
+          description: Version of the API.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+      type: object
+    SensitiveDataScannerMetaVersionOnly:
+      description: Meta payload containing information about the API.
+      properties:
+        version:
+          description: Version of the API (optional).
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+      type: object
+    SensitiveDataScannerProduct:
+      default: logs
+      description: Datadog product onto which Sensitive Data Scanner can be activated.
+      enum:
+      - logs
+      - rum
+      - events
+      - apm
+      type: string
+      x-enum-varnames:
+      - LOGS
+      - RUM
+      - EVENTS
+      - APM
+    SensitiveDataScannerReorderConfig:
+      description: Data related to the reordering of scanning groups.
+      properties:
+        id:
+          description: ID of the configuration.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/SensitiveDataScannerConfigurationRelationships'
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerConfigurationType'
+      type: object
+    SensitiveDataScannerReorderGroupsResponse:
+      description: Group reorder response.
+      properties:
+        meta:
+          $ref: '#/components/schemas/SensitiveDataScannerMeta'
+      type: object
+    SensitiveDataScannerRule:
+      description: Rule item included in the group.
+      properties:
+        id:
+          description: ID of the rule.
+          type: string
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleType'
+      type: object
+    SensitiveDataScannerRuleAttributes:
+      description: Attributes of the Sensitive Data Scanner rule.
+      properties:
+        description:
+          description: Description of the rule.
+          type: string
+        excluded_namespaces:
+          description: Attributes excluded from the scan. If namespaces is provided,
+            it has to be a sub-path of the namespaces array.
+          example:
+          - admin.name
+          items:
+            type: string
+          type: array
+        is_enabled:
+          description: Whether or not the rule is enabled.
+          type: boolean
+        name:
+          description: Name of the rule.
+          type: string
+        namespaces:
+          description: 'Attributes included in the scan. If namespaces is empty or
+            missing, all attributes except excluded_namespaces are scanned.
+
+            If both are missing the whole event is scanned.'
+          example:
+          - admin
+          items:
+            type: string
+          type: array
+        pattern:
+          description: Not included if there is a relationship to a standard pattern.
+          type: string
+        tags:
+          description: List of tags.
+          items:
+            type: string
+          type: array
+        text_replacement:
+          $ref: '#/components/schemas/SensitiveDataScannerTextReplacement'
+      type: object
+    SensitiveDataScannerRuleCreate:
+      description: Data related to the creation of a rule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleAttributes'
+        relationships:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleRelationships'
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleType'
+      required:
+      - type
+      - attributes
+      - relationships
+      type: object
+    SensitiveDataScannerRuleCreateRequest:
+      description: Create rule request.
+      properties:
+        data:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleCreate'
+        meta:
+          $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
+      required:
+      - data
+      - meta
+      type: object
+    SensitiveDataScannerRuleData:
+      description: Rules included in the group.
+      properties:
+        data:
+          description: Rules included in the group. The order is important.
+          items:
+            $ref: '#/components/schemas/SensitiveDataScannerRule'
+          type: array
+      type: object
+    SensitiveDataScannerRuleDeleteRequest:
+      description: Delete rule request.
+      properties:
+        meta:
+          $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
+      required:
+      - meta
+      type: object
+    SensitiveDataScannerRuleDeleteResponse:
+      description: Delete rule response.
+      properties:
+        meta:
+          $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
+      type: object
+    SensitiveDataScannerRuleIncludedItem:
+      description: A Scanning Rule included item.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleAttributes'
+        id:
+          description: ID of the rule.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleRelationships'
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleType'
+      type: object
+    SensitiveDataScannerRuleRelationships:
+      description: Relationships of a scanning rule.
+      properties:
+        group:
+          $ref: '#/components/schemas/SensitiveDataScannerGroupData'
+        standard_pattern:
+          $ref: '#/components/schemas/SensitiveDataScannerStandardPatternData'
+      type: object
+    SensitiveDataScannerRuleResponse:
+      description: Response data related to the creation of a rule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleAttributes'
+        id:
+          description: ID of the rule.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleRelationships'
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleType'
+      type: object
+    SensitiveDataScannerRuleType:
+      default: sensitive_data_scanner_rule
+      description: Sensitive Data Scanner rule type.
+      enum:
+      - sensitive_data_scanner_rule
+      example: sensitive_data_scanner_rule
+      type: string
+      x-enum-varnames:
+      - SENSITIVE_DATA_SCANNER_RULE
+    SensitiveDataScannerRuleUpdate:
+      description: Data related to the update of a rule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleAttributes'
+        id:
+          description: ID of the rule.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleRelationships'
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleType'
+      type: object
+    SensitiveDataScannerRuleUpdateRequest:
+      description: Update rule request.
+      properties:
+        data:
+          $ref: '#/components/schemas/SensitiveDataScannerRuleUpdate'
+        meta:
+          $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
+      required:
+      - data
+      - meta
+      type: object
+    SensitiveDataScannerRuleUpdateResponse:
+      description: Update rule response.
+      properties:
+        meta:
+          $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
+      type: object
+    SensitiveDataScannerStandardPattern:
+      description: Data containing the standard pattern id.
+      properties:
+        id:
+          description: ID of the standard pattern.
+          type: string
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerStandardPatternType'
+      type: object
+    SensitiveDataScannerStandardPatternAttributes:
+      description: Attributes of the Sensitive Data Scanner standard pattern.
+      properties:
+        name:
+          description: Name of the standard pattern.
+          type: string
+        pattern:
+          description: Regex to match.
+          type: string
+        tags:
+          description: List of tags.
+          items:
+            type: string
+          type: array
+      type: object
+    SensitiveDataScannerStandardPatternData:
+      description: A standard pattern.
+      properties:
+        data:
+          $ref: '#/components/schemas/SensitiveDataScannerStandardPattern'
+      type: object
+    SensitiveDataScannerStandardPatternType:
+      default: sensitive_data_scanner_standard_pattern
+      description: Sensitive Data Scanner standard pattern type.
+      enum:
+      - sensitive_data_scanner_standard_pattern
+      example: sensitive_data_scanner_standard_pattern
+      type: string
+      x-enum-varnames:
+      - SENSITIVE_DATA_SCANNER_STANDARD_PATTERN
+    SensitiveDataScannerStandardPatternsResponse:
+      description: List Standard patterns response.
+      items:
+        $ref: '#/components/schemas/SensitiveDataScannerStandardPatternsResponseItem'
+      type: array
+    SensitiveDataScannerStandardPatternsResponseData:
+      description: List Standard patterns response data.
+      properties:
+        data:
+          $ref: '#/components/schemas/SensitiveDataScannerStandardPatternsResponse'
+      type: object
+    SensitiveDataScannerStandardPatternsResponseItem:
+      description: Standard pattern item.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SensitiveDataScannerStandardPatternAttributes'
+        id:
+          description: ID of the standard pattern.
+          type: string
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerStandardPatternType'
+      type: object
+    SensitiveDataScannerTextReplacement:
+      description: Object describing how the scanned event will be replaced.
+      properties:
+        number_of_chars:
+          description: 'Required if type == ''partial_replacement_from_beginning''
+
+            or ''partial_replacement_from_end''. It must be > 0.'
+          format: int64
+          minimum: 0
+          type: integer
+        replacement_string:
+          description: Required if type == 'replacement_string'.
+          type: string
+        type:
+          $ref: '#/components/schemas/SensitiveDataScannerTextReplacementType'
+      type: object
+    SensitiveDataScannerTextReplacementType:
+      default: none
+      description: 'Type of the replacement text. None means no replacement.
+
+        hash means the data will be stubbed. replacement_string means that
+
+        one can chose a text to replace the data. partial_replacement_from_beginning
+
+        allows a user to partially replace the data from the beginning, and
+
+        partial_replacement_from_end on the other hand, allows to replace data from
+
+        the end.'
+      enum:
+      - none
+      - hash
+      - replacement_string
+      - partial_replacement_from_beginning
+      - partial_replacement_from_end
+      type: string
+      x-enum-varnames:
+      - NONE
+      - HASH
+      - REPLACEMENT_STRING
+      - PARTIAL_REPLACEMENT_FROM_BEGINNING
+      - PARTIAL_REPLACEMENT_FROM_END
     ServiceAccountCreateAttributes:
       description: Attributes of the created user.
       properties:
@@ -10035,11 +12345,212 @@ components:
         description: Tag associated with your event.
         type: string
       type: array
+    TimeseriesFormulaQueryRequest:
+      description: A request wrapper around a single timeseries query to be executed.
+      properties:
+        data:
+          $ref: '#/components/schemas/TimeseriesFormulaRequest'
+      required:
+      - data
+      type: object
+    TimeseriesFormulaQueryResponse:
+      description: A message containing one response to a timeseries query made with
+        timeseries formula query request.
+      properties:
+        data:
+          $ref: '#/components/schemas/TimeseriesResponse'
+        errors:
+          description: The error generated by the request.
+          type: string
+      type: object
+    TimeseriesFormulaRequest:
+      description: A single timeseries query to be executed.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/TimeseriesFormulaRequestAttributes'
+        type:
+          $ref: '#/components/schemas/TimeseriesFormulaRequestType'
+      required:
+      - type
+      - attributes
+      type: object
+    TimeseriesFormulaRequestAttributes:
+      description: The object describing a timeseries formula request.
+      properties:
+        formulas:
+          description: List of formulas to be calculated and returned as responses.
+          items:
+            $ref: '#/components/schemas/QueryFormula'
+          type: array
+        from:
+          description: Start date (inclusive) of the query in milliseconds since the
+            Unix epoch.
+          example: 1568899800000
+          format: int64
+          type: integer
+        interval:
+          description: 'A time interval in milliseconds.
+
+            May be overridden by a larger interval if the query would result in
+
+            too many points for the specified timeframe.
+
+            Defaults to a reasonable interval for the given timeframe.'
+          example: 5000
+          format: int64
+          type: integer
+        queries:
+          $ref: '#/components/schemas/TimeseriesFormulaRequestQueries'
+        to:
+          description: End date (exclusive) of the query in milliseconds since the
+            Unix epoch.
+          example: 1568923200000
+          format: int64
+          type: integer
+      required:
+      - to
+      - from
+      - queries
+      type: object
+    TimeseriesFormulaRequestQueries:
+      description: List of queries to be run and used as inputs to the formulas.
+      items:
+        $ref: '#/components/schemas/TimeseriesQuery'
+      type: array
+    TimeseriesFormulaRequestType:
+      default: timeseries_request
+      description: The type of the resource. The value should always be timeseries_request.
+      enum:
+      - timeseries_request
+      example: timeseries_request
+      type: string
+      x-enum-varnames:
+      - TIMESERIES_REQUEST
+    TimeseriesFormulaResponseType:
+      default: timeseries_response
+      description: The type of the resource. The value should always be timeseries_response.
+      enum:
+      - timeseries_response
+      example: timeseries_response
+      type: string
+      x-enum-varnames:
+      - TIMESERIES_RESPONSE
+    TimeseriesQuery:
+      description: An individual timeseries query to one of the basic Datadog data
+        sources.
+      oneOf:
+      - $ref: '#/components/schemas/MetricsTimeseriesQuery'
+      - $ref: '#/components/schemas/EventsTimeseriesQuery'
+      type: object
+    TimeseriesResponse:
+      description: A message containing the response to a timeseries query.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/TimeseriesResponseAttributes'
+        type:
+          $ref: '#/components/schemas/TimeseriesFormulaResponseType'
+      type: object
+    TimeseriesResponseAttributes:
+      description: The object describing a timeseries response.
+      properties:
+        series:
+          $ref: '#/components/schemas/TimeseriesResponseSeriesList'
+        times:
+          $ref: '#/components/schemas/TimeseriesResponseTimes'
+        values:
+          $ref: '#/components/schemas/TimeseriesResponseValuesList'
+      type: object
+    TimeseriesResponseSeries:
+      description: ''
+      properties:
+        group_tags:
+          $ref: '#/components/schemas/GroupTags'
+        query_index:
+          description: The index of the query in the "formulas" array (or "queries"
+            array if no "formulas" was specified).
+          example: 0
+          format: int32
+          maximum: 2147483647
+          type: integer
+        unit:
+          description: 'Detailed information about the unit.
+
+            The first element describes the "primary unit" (for example, `bytes` in
+            `bytes per second`).
+
+            The second element describes the "per unit" (for example, `second` in
+            `bytes per second`).
+
+            If the second element is not present, the API returns null.'
+          items:
+            $ref: '#/components/schemas/Unit'
+          type: array
+      type: object
+    TimeseriesResponseSeriesList:
+      description: Array of response series. The index here corresponds to the index
+        in the `formulas` or `queries` array from the request.
+      items:
+        $ref: '#/components/schemas/TimeseriesResponseSeries'
+      type: array
+    TimeseriesResponseTimes:
+      description: Array of times, 1-1 match with individual values arrays.
+      items:
+        description: Start date (inclusive) of the query in seconds since the Unix
+          epoch.
+        example: 1568899800000
+        format: int64
+        type: integer
+      type: array
+    TimeseriesResponseValues:
+      description: Array of values for an individual formula or query.
+      example:
+      - 1575317847.0
+      - 0.5
+      items:
+        description: An individual value for a given time.
+        format: double
+        nullable: true
+        type: number
+      type: array
+    TimeseriesResponseValuesList:
+      description: Array of value-arrays. The index here corresponds to the index
+        in the `formulas` or `queries` array from the request.
+      items:
+        $ref: '#/components/schemas/TimeseriesResponseValues'
+      type: array
     TimestampEventAttribute:
       description: Timestamp of your event.
       example: '2019-01-02T09:42:36.320Z'
       format: date-time
       type: string
+    Unit:
+      description: Object containing the metric unit family, scale factor, name, and
+        short name.
+      nullable: true
+      properties:
+        family:
+          description: Unit family, allows for conversion between units of the same
+            family, for scaling.
+          example: time
+          type: string
+        name:
+          description: Unit name
+          example: minute
+          type: string
+        plural:
+          description: Plural form of the unit name.
+          example: minutes
+          type: string
+        scale_factor:
+          description: Factor for scaling between units of the same family.
+          example: 60.0
+          format: double
+          type: number
+        short_name:
+          description: Abbreviation of the unit.
+          example: min
+          type: string
+      type: object
     UsageApplicationSecurityMonitoringResponse:
       description: Application Security Monitoring usage response.
       properties:
@@ -10409,12 +12920,16 @@ components:
             incident_settings_write: Configure Incidents settings.
             incident_write: Create, view, and manage incidents in Datadog.
             metrics_read: View custom metrics.
+            monitors_downtime: Set downtimes to suppress alerts from any monitor in
+              an organization. The ability to write monitors is not required to set
+              downtimes.
             monitors_read: View monitors.
             security_monitoring_filters_read: Read Security Filters.
             security_monitoring_filters_write: Create, edit, and delete Security Filters.
             security_monitoring_rules_read: Read Detection Rules.
             security_monitoring_rules_write: Create and edit Detection Rules.
             security_monitoring_signals_read: View Security Signals.
+            timeseries_query: Query Timeseries data.
             usage_read: View your organization's usage and usage attribution.
             user_access_invite: Invite other users to your organization.
             user_access_manage: Disable users, manage user roles, manage SAML-to-role
@@ -11194,10 +13709,6 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Aggregate pipelines events
       tags:
       - CI Visibility Pipelines
@@ -11276,10 +13787,6 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get a list of pipelines events
       tags:
       - CI Visibility Pipelines
@@ -11320,10 +13827,6 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Search pipelines events
       tags:
       - CI Visibility Pipelines
@@ -11360,10 +13863,6 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Aggregate tests events
       tags:
       - CI Visibility Tests
@@ -11442,10 +13941,6 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get a list of tests events
       tags:
       - CI Visibility Tests
@@ -11486,10 +13981,6 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Search tests events
       tags:
       - CI Visibility Tests
@@ -12146,6 +14637,45 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/incidents/search:
+    get:
+      description: Search for incidents matching a certain query.
+      operationId: SearchIncidents
+      parameters:
+      - $ref: '#/components/parameters/IncidentSearchIncludeQueryParameter'
+      - $ref: '#/components/parameters/IncidentSearchQueryQueryParameter'
+      - $ref: '#/components/parameters/IncidentSearchSortQueryParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentSearchResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_read
+      summary: Search for incidents
+      tags:
+      - Incidents
+      x-menu-order: 6
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/incidents/{incident_id}:
     delete:
       description: Deletes an existing incident from the users organization.
@@ -12295,7 +14825,7 @@ paths:
       summary: Get a list of attachments
       tags:
       - Incidents
-      x-menu-order: 6
+      x-menu-order: 7
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -12347,7 +14877,7 @@ paths:
               \         \"title\": \"Important Doc\"\n        }\n      },\n      \"type\":
               \"incident_attachments\"\n    }\n  ]\n}"
           step: the "incident" has an "incident_attachment"
-      x-menu-order: 7
+      x-menu-order: 8
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -12502,6 +15032,172 @@ paths:
       summary: Update a single service object
       tags:
       - Opsgenie Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      x-undo:
+        type: idempotent
+  /api/v2/integrations/cloudflare/accounts:
+    get:
+      description: List Cloudflare accounts.
+      operationId: ListCloudflareAccounts
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudflareAccountsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List Cloudflare accounts
+      tags:
+      - Cloudflare Integration
+      x-menu-order: 1
+      x-undo:
+        type: safe
+    post:
+      description: Create a Cloudflare account.
+      operationId: CreateCloudflareAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CloudflareAccountCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudflareAccountResponse'
+          description: CREATED
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Add Cloudflare account
+      tags:
+      - Cloudflare Integration
+      x-codegen-request-body-name: body
+      x-given:
+        cloudflare_account:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"cloudflare-accounts\",\n    \"attributes\":
+              {\n      \"api_key\": \"6Zm7WEgKzAlCnt_4exfEK0mSoeHHAaDf41O1AAfu\",\n
+              \     \"name\": \"{{ unique_lower_alnum }}\",\n      \"email\": \"dev@datadog.com\"\n
+              \   }\n  }\n}"
+          step: there is a valid "cloudflare_account" in the system
+      x-menu-order: 2
+      x-undo:
+        operationId: DeleteCloudflareAccount
+        parameters:
+        - name: account_id
+          source: data.id
+        type: unsafe
+  /api/v2/integrations/cloudflare/accounts/{account_id}:
+    delete:
+      description: Delete a Cloudflare account.
+      operationId: DeleteCloudflareAccount
+      parameters:
+      - description: None
+        in: path
+        name: account_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete Cloudflare account
+      tags:
+      - Cloudflare Integration
+      x-menu-order: 5
+      x-undo:
+        type: idempotent
+    get:
+      description: Get a Cloudflare account.
+      operationId: GetCloudflareAccount
+      parameters:
+      - description: None
+        in: path
+        name: account_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudflareAccountResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get Cloudflare account
+      tags:
+      - Cloudflare Integration
+      x-menu-order: 3
+      x-undo:
+        type: safe
+    patch:
+      description: Update a Cloudflare account.
+      operationId: UpdateCloudflareAccount
+      parameters:
+      - description: None
+        in: path
+        name: account_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CloudflareAccountUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudflareAccountResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update Cloudflare account
+      tags:
+      - Cloudflare Integration
       x-codegen-request-body-name: body
       x-menu-order: 4
       x-undo:
@@ -12818,6 +15514,389 @@ paths:
         - STANDARD
       x-undo:
         type: idempotent
+  /api/v2/integrations/fastly/accounts:
+    get:
+      description: List Fastly accounts.
+      operationId: ListFastlyAccounts
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FastlyAccountsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List Fastly accounts
+      tags:
+      - Fastly Integration
+      x-menu-order: 1
+      x-undo:
+        type: safe
+    post:
+      description: Create a Fastly account.
+      operationId: CreateFastlyAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FastlyAccountCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FastlyAccountResponse'
+          description: CREATED
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Add Fastly account
+      tags:
+      - Fastly Integration
+      x-codegen-request-body-name: body
+      x-given:
+        fastly_account:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"fastly-accounts\",\n    \"attributes\":
+              {\n      \"api_key\": \"{{ unique_alnum }}\",\n      \"name\": \"test-name\",\n
+              \     \"services\": []\n    }\n  }\n}"
+          step: there is a valid "fastly_account" in the system
+      x-menu-order: 2
+      x-undo:
+        operationId: DeleteFastlyAccount
+        parameters:
+        - name: account_id
+          source: data.id
+        type: unsafe
+  /api/v2/integrations/fastly/accounts/{account_id}:
+    delete:
+      description: Delete a Fastly account.
+      operationId: DeleteFastlyAccount
+      parameters:
+      - $ref: '#/components/parameters/FastlyAccountID'
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete Fastly account
+      tags:
+      - Fastly Integration
+      x-menu-order: 5
+      x-undo:
+        type: idempotent
+    get:
+      description: Get a Fastly account.
+      operationId: GetFastlyAccount
+      parameters:
+      - $ref: '#/components/parameters/FastlyAccountID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FastlyAccountResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get Fastly account
+      tags:
+      - Fastly Integration
+      x-menu-order: 3
+      x-undo:
+        type: safe
+    patch:
+      description: Update a Fastly account.
+      operationId: UpdateFastlyAccount
+      parameters:
+      - $ref: '#/components/parameters/FastlyAccountID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FastlyAccountUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FastlyAccountResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update Fastly account
+      tags:
+      - Fastly Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      x-undo:
+        type: idempotent
+  /api/v2/integrations/fastly/accounts/{account_id}/services:
+    get:
+      description: List Fastly services for an account.
+      operationId: ListFastlyServices
+      parameters:
+      - $ref: '#/components/parameters/FastlyAccountID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FastlyServicesResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List Fastly services
+      tags:
+      - Fastly Integration
+      x-menu-order: 6
+      x-undo:
+        type: safe
+    post:
+      description: Create a Fastly service for an account.
+      operationId: CreateFastlyService
+      parameters:
+      - $ref: '#/components/parameters/FastlyAccountID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FastlyServiceRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FastlyServiceResponse'
+          description: CREATED
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Add Fastly service
+      tags:
+      - Fastly Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 7
+      x-undo:
+        operationId: DeleteFastlyService
+        parameters:
+        - name: account_id
+          source: data.id
+        type: unsafe
+  /api/v2/integrations/fastly/accounts/{account_id}/services/{service_id}:
+    delete:
+      description: Delete a Fastly service for an account.
+      operationId: DeleteFastlyService
+      parameters:
+      - $ref: '#/components/parameters/FastlyAccountID'
+      - $ref: '#/components/parameters/FastlyServiceID'
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete Fastly service
+      tags:
+      - Fastly Integration
+      x-menu-order: 10
+      x-undo:
+        type: safe
+    get:
+      description: Get a Fastly service for an account.
+      operationId: GetFastlyService
+      parameters:
+      - $ref: '#/components/parameters/FastlyAccountID'
+      - $ref: '#/components/parameters/FastlyServiceID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FastlyServiceResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get Fastly service
+      tags:
+      - Fastly Integration
+      x-menu-order: 8
+      x-undo:
+        type: safe
+    patch:
+      description: Update a Fastly service for an account.
+      operationId: UpdateFastlyService
+      parameters:
+      - $ref: '#/components/parameters/FastlyAccountID'
+      - $ref: '#/components/parameters/FastlyServiceID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FastlyServiceRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FastlyServiceResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update Fastly service
+      tags:
+      - Fastly Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 9
+      x-undo:
+        type: safe
+  /api/v2/ip_allowlist:
+    get:
+      description: Returns the IP allowlist and its enabled or disabled state.
+      operationId: GetIPAllowlist
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IPAllowlistResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_management
+      summary: Get IP Allowlist
+      tags:
+      - IP Allowlist
+      x-menu-order: 1
+      x-undo:
+        type: safe
+    patch:
+      description: Edit the entries in the IP allowlist, and enable or disable it.
+      operationId: UpdateIPAllowlist
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IPAllowlistUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IPAllowlistResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_management
+      summary: Update IP Allowlist
+      tags:
+      - IP Allowlist
+      x-codegen-request-body-name: body
+      x-given:
+        ip_allowlist_empty_disabled:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"enabled\": false,\n
+              \     \"entries\": []\n    },\n    \"type\": \"ip_allowlist\"\n  }\n}"
+          step: the "ip_allowlist_empty_disabled" has no entries and is disabled
+        ip_allowlist_nonempty_disabled:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"enabled\": false,\n
+              \     \"entries\": [\n        {\n          \"data\": {\n            \"attributes\":
+              {\n              \"cidr_block\": \"127.0.0.1\",\n              \"note\":
+              \"{{ unique }}\"\n            },\n            \"type\": \"ip_allowlist_entry\"\n
+              \         }\n        },\n        {\n          \"data\": {\n            \"attributes\":
+              {\n              \"cidr_block\": \"0.0.0.0\",\n              \"note\":
+              \"{{ unique }}\"\n            },\n            \"type\": \"ip_allowlist_entry\"\n
+              \         }\n        }\n      ]\n    },\n    \"type\": \"ip_allowlist\"\n
+              \ }\n}"
+          step: the "ip_allowlist_nonempty_disabled" has two entries and is disabled
+      x-menu-order: 2
+      x-undo:
+        type: idempotent
   /api/v2/logs:
     post:
       description: 'Send your logs to your Datadog platform over HTTP. Limits per
@@ -12844,6 +15923,9 @@ paths:
 
         Add the `Content-Encoding: gzip` header to the request when sending compressed
         logs.
+
+        Log events can be submitted up to 18 hours in the past and 2 hours in the
+        future.
 
 
         The status codes answered by the HTTP API are:
@@ -14965,6 +18047,223 @@ paths:
       x-menu-order: 8
       x-undo:
         type: safe
+  /api/v2/monitor/policy:
+    get:
+      description: Get all monitor configuration policies.
+      operationId: ListMonitorConfigPolicies
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorConfigPolicyListResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitors_read
+      summary: Get all monitor configuration policies
+      tags:
+      - Monitors
+      x-menu-order: 10
+      x-undo:
+        type: safe
+    post:
+      description: Create a monitor configuration policy.
+      operationId: CreateMonitorConfigPolicy
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MonitorConfigPolicyCreateRequest'
+        description: Create a monitor configuration policy request body.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorConfigPolicyResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create a monitor configuration policy
+      tags:
+      - Monitors
+      x-codegen-request-body-name: body
+      x-given:
+        monitor_configuration_policy:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"monitor-config-policy\",\n    \"attributes\":
+              {\n      \"policy_type\": \"tag\",\n      \"policy\": {\n        \"tag_key\":
+              \"dc\", \"tag_key_required\": true, \"valid_tag_values\": [\"prod\",
+              \"staging\"]\n      }\n    }\n  }\n}"
+          step: there is a valid "monitor_configuration_policy" in the system
+      x-menu-order: 11
+      x-undo:
+        operationId: DeleteMonitorConfigPolicy
+        parameters:
+        - name: policy_id
+          source: data.id
+        type: unsafe
+  /api/v2/monitor/policy/{policy_id}:
+    delete:
+      description: Delete a monitor configuration policy.
+      operationId: DeleteMonitorConfigPolicy
+      parameters:
+      - description: ID of the monitor configuration policy.
+        in: path
+        name: policy_id
+        required: true
+        schema:
+          example: 00000000-0000-1234-0000-000000000000
+          type: string
+      responses:
+        '204':
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete a monitor configuration policy
+      tags:
+      - Monitors
+      x-menu-order: 13
+      x-undo:
+        type: idempotent
+    get:
+      description: Get a monitor configuration policy by `policy_id`.
+      operationId: GetMonitorConfigPolicy
+      parameters:
+      - description: ID of the monitor configuration policy.
+        in: path
+        name: policy_id
+        required: true
+        schema:
+          example: 00000000-0000-1234-0000-000000000000
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorConfigPolicyResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitors_read
+      summary: Get a monitor configuration policy
+      tags:
+      - Monitors
+      x-menu-order: 9
+      x-undo:
+        type: safe
+    patch:
+      description: Edit a monitor configuration policy.
+      operationId: UpdateMonitorConfigPolicy
+      parameters:
+      - description: ID of the monitor configuration policy.
+        in: path
+        name: policy_id
+        required: true
+        schema:
+          example: 00000000-0000-1234-0000-000000000000
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MonitorConfigPolicyEditRequest'
+        description: Description of the update.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorConfigPolicyResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Unprocessable Entity
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Edit a monitor configuration policy
+      tags:
+      - Monitors
+      x-codegen-request-body-name: body
+      x-menu-order: 12
+      x-undo:
+        type: idempotent
   /api/v2/permissions:
     get:
       description: Returns a list of all permissions, including name, description,
@@ -15103,6 +18402,200 @@ paths:
         resultsPath: data
       x-undo:
         type: safe
+  /api/v2/query/scalar:
+    post:
+      description: 'Query scalar values (as seen on Query Value, Table and Toplist
+        widgets).
+
+        Multiple data sources are supported with the ability to
+
+        process the data using formulas and functions.'
+      operationId: QueryScalarData
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScalarFormulaQueryRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScalarFormulaQueryResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - timeseries_query
+      summary: Query scalar data across multiple products
+      tags:
+      - Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is GA for the metrics, real user monitoring
+        (RUM) and cloud cost data sources.
+
+        Support for logs is in beta. We are gradually onboarding support for more
+        sources. If you have any
+
+        feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/query/timeseries:
+    post:
+      description: 'Query timeseries data across various data sources and
+
+        process the data by applying formulas and functions.'
+      operationId: QueryTimeseriesData
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TimeseriesFormulaQueryRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeseriesFormulaQueryResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - timeseries_query
+      summary: Query timeseries data across multiple products
+      tags:
+      - Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 1
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is GA for the metrics, real user monitoring
+        (RUM) and cloud cost data sources.
+
+        Support for logs is in beta. We are gradually onboarding support for more
+        sources. If you have any
+
+        feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/restriction_policy/{resource_id}:
+    delete:
+      description: Deletes the restriction policy associated with a specified resource.
+      operationId: DeleteRestrictionPolicy
+      parameters:
+      - $ref: '#/components/parameters/ResourceID'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Delete a restriction policy
+      tags:
+      - Restriction Policies
+      x-menu-order: 3
+      x-undo:
+        type: idempotent
+    get:
+      description: Retrieves the restriction policy associated with a specified resource.
+      operationId: GetRestrictionPolicy
+      parameters:
+      - $ref: '#/components/parameters/ResourceID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestrictionPolicyResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Get a restriction policy
+      tags:
+      - Restriction Policies
+      x-menu-order: 2
+      x-undo:
+        type: safe
+    post:
+      description: 'Updates the restriction policy associated with a resource.
+
+
+        #### Supported resources
+
+        Restriction policies can be applied to the following resources:
+
+        - Connections: `connection`
+
+        - Dashboards: `dashboard`
+
+        - Notebooks: `notebook`
+
+        - Security Rules: `security-rule`'
+      operationId: UpdateRestrictionPolicy
+      parameters:
+      - $ref: '#/components/parameters/ResourceID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestrictionPolicyUpdateRequest'
+        description: Restriction policy payload
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestrictionPolicyResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Update a restriction policy
+      tags:
+      - Restriction Policies
+      x-codegen-request-body-name: body
+      x-menu-order: 1
+      x-undo:
+        type: idempotent
   /api/v2/roles:
     get:
       description: Returns all roles, including their names and their unique identifiers.
@@ -16494,6 +19987,20 @@ paths:
       - Security Monitoring
       x-codegen-request-body-name: body
       x-given:
+        cloud_configuration_rule:
+          parameters:
+          - name: body
+            value: "{\n  \"name\": \"{{ unique }}_cloud\",\n  \"tags\": [\"a:tag\"],\n
+              \ \"type\": \"cloud_configuration\",\n  \"isEnabled\": false,\n  \"message\":
+              \"Cloud configuration rule\",\n  \"options\": {\n    \"complianceRuleOptions\":
+              {\n      \"resourceType\": \"gcp_compute_disk\",\n      \"regoRule\":
+              {\n        \"policy\": \"package datadog\\n\",\n        \"resourceTypes\":
+              [\n          \"gcp_compute_disk\"\n        ]\n      },\n      \"complexRule\":
+              false\n    }\n  },\n  \"complianceSignalOptions\": {\n    \"userActivationStatus\":
+              true,\n    \"userGroupByFields\": [\"@account_id\"]\n  },\n  \"cases\":
+              [\n    {\n      \"status\": \"info\",\n      \"notifications\": [\"channel\"]\n
+              \   }\n  ]\n}"
+          step: there is a valid "cloud_configuration_rule" in the system
         security_rule:
           parameters:
           - name: body
@@ -16923,6 +20430,414 @@ paths:
       x-menu-order: 10
       x-undo:
         type: idempotent
+  /api/v2/sensitive-data-scanner/config:
+    get:
+      description: List all the Scanning groups in your organization.
+      operationId: ListScanningGroups
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensitiveDataScannerGetConfigResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List Scanning Groups
+      tags:
+      - Sensitive Data Scanner
+      x-given:
+        configuration:
+          step: a valid "configuration" in the system
+      x-menu-order: 1
+      x-undo:
+        type: safe
+    patch:
+      description: Reorder the list of groups.
+      operationId: ReorderScanningGroups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SensitiveDataScannerConfigRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensitiveDataScannerReorderGroupsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Reorder Groups
+      tags:
+      - Sensitive Data Scanner
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      x-undo:
+        type: idempotent
+  /api/v2/sensitive-data-scanner/config/groups:
+    post:
+      description: 'Create a scanning group.
+
+        The request MAY include a configuration relationship.
+
+        A rules relationship can be omitted entirely, but if it is included it MUST
+        be
+
+        null or an empty array (rules cannot be created at the same time).
+
+        The new group will be ordered last within the configuration.'
+      operationId: CreateScanningGroup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SensitiveDataScannerGroupCreateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensitiveDataScannerCreateGroupResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create Scanning Group
+      tags:
+      - Sensitive Data Scanner
+      x-codegen-request-body-name: body
+      x-given:
+        group:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"sensitive_data_scanner_group\",\n
+              \   \"attributes\": {\n      \"name\": \"my-test-group\",\n      \"is_enabled\":
+              false,\n      \"product_list\": [\n          \"logs\"\n      ],\n      \"filter\":
+              {\n          \"query\": \"*\"\n      }\n    },\n    \"relationships\":
+              {\n      \"configuration\": {\n        \"data\": {\n          \"id\":
+              \"{{ configuration.data.id }}\",\n          \"type\": \"{{ configuration.data.type
+              }}\"\n        }\n      },\n      \"rules\": {\n          \"data\": []\n
+              \     }\n    }\n  },\n  \"meta\": {}\n}"
+          step: there is a valid "scanning_group" in the system
+      x-menu-order: 4
+      x-undo:
+        operationId: DeleteScanningGroup
+        parameters:
+        - name: group_id
+          source: data.id
+        - name: body
+          template: "{\n  \"meta\": {}\n}"
+        type: unsafe
+  /api/v2/sensitive-data-scanner/config/groups/{group_id}:
+    delete:
+      description: Delete a given group.
+      operationId: DeleteScanningGroup
+      parameters:
+      - $ref: '#/components/parameters/SensitiveDataScannerGroupID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SensitiveDataScannerGroupDeleteRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensitiveDataScannerGroupDeleteResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete Scanning Group
+      tags:
+      - Sensitive Data Scanner
+      x-codegen-request-body-name: body
+      x-menu-order: 6
+      x-undo:
+        type: idempotent
+    patch:
+      description: 'Update a group, including the order of the rules.
+
+        Rules within the group are reordered by including a rules relationship. If
+        the rules
+
+        relationship is present, its data section MUST contain linkages for all of
+        the rules
+
+        currently in the group, and MUST NOT contain any others.'
+      operationId: UpdateScanningGroup
+      parameters:
+      - $ref: '#/components/parameters/SensitiveDataScannerGroupID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SensitiveDataScannerGroupUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensitiveDataScannerGroupUpdateResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update Scanning Group
+      tags:
+      - Sensitive Data Scanner
+      x-codegen-request-body-name: body
+      x-menu-order: 5
+      x-undo:
+        type: idempotent
+  /api/v2/sensitive-data-scanner/config/rules:
+    post:
+      description: 'Create a scanning rule in a sensitive data scanner group, ordered
+        last.
+
+        The posted rule MUST include a group relationship.
+
+        It MUST include either a standard_pattern relationship or a regex attribute,
+        but not both.
+
+        If included_attributes is empty or missing, we will scan all attributes except
+
+        excluded_attributes. If both are missing, we will scan the whole event.'
+      operationId: CreateScanningRule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SensitiveDataScannerRuleCreateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensitiveDataScannerCreateRuleResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create Scanning Rule
+      tags:
+      - Sensitive Data Scanner
+      x-codegen-request-body-name: body
+      x-given:
+        rule:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"sensitive_data_scanner_rule\",\n
+              \   \"attributes\": {\n      \"name\": \"{{ unique }}\",\n      \"pattern\":
+              \"pattern\",\n      \"namespaces\": [\"admin.email\"],\n      \"text_replacement\":
+              {\n        \"type\": \"none\"\n      },\n      \"tags\":[\n        \"sensitive_data:true\"\n
+              \     ],\n      \"is_enabled\":true\n    },\n    \"relationships\":
+              {\n      \"group\": {\n        \"data\": {\n          \"id\": \"{{ group.data.id
+              }}\",\n          \"type\": \"{{ group.data.type }}\"\n        }\n      }\n
+              \   }\n  },\n  \"meta\": {}\n}"
+          step: the "scanning_group" has a "scanning_rule"
+      x-menu-order: 7
+      x-undo:
+        operationId: DeleteScanningRule
+        parameters:
+        - name: rule_id
+          source: data.id
+        - name: body
+          template: "{\n  \"meta\": {}\n}"
+        type: unsafe
+  /api/v2/sensitive-data-scanner/config/rules/{rule_id}:
+    delete:
+      description: Delete a given rule.
+      operationId: DeleteScanningRule
+      parameters:
+      - $ref: '#/components/parameters/SensitiveDataScannerRuleID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SensitiveDataScannerRuleDeleteRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensitiveDataScannerRuleDeleteResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete Scanning Rule
+      tags:
+      - Sensitive Data Scanner
+      x-codegen-request-body-name: body
+      x-menu-order: 9
+      x-undo:
+        type: idempotent
+    patch:
+      description: 'Update a scanning rule.
+
+        The request body MUST NOT include a standard_pattern relationship, as that
+        relationship
+
+        is non-editable. Trying to edit the regex attribute of a rule with a standard_pattern
+
+        relationship will also result in an error.'
+      operationId: UpdateScanningRule
+      parameters:
+      - $ref: '#/components/parameters/SensitiveDataScannerRuleID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SensitiveDataScannerRuleUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensitiveDataScannerRuleUpdateResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update Scanning Rule
+      tags:
+      - Sensitive Data Scanner
+      x-codegen-request-body-name: body
+      x-menu-order: 8
+      x-undo:
+        type: idempotent
+  /api/v2/sensitive-data-scanner/config/standard-patterns:
+    get:
+      description: Returns all standard patterns.
+      operationId: ListStandardPatterns
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensitiveDataScannerStandardPatternsResponseData'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List standard patterns
+      tags:
+      - Sensitive Data Scanner
+      x-menu-order: 3
+      x-undo:
+        type: safe
   /api/v2/series:
     post:
       description: "The metrics end-point allows you to post time-series data that
@@ -17030,7 +20945,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Create a service account
       tags:
-      - Users
+      - Service Accounts
       x-codegen-request-body-name: body
       x-given:
         service_account_user:
@@ -17046,6 +20961,7 @@ paths:
         parameters:
         - name: user_id
           source: data.id
+        tag: Users
         type: unsafe
   /api/v2/service_accounts/{service_account_id}/application_keys:
     get:
@@ -17594,6 +21510,51 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/synthetics/settings/on_demand_concurrency_cap:
+    get:
+      description: Get the on-demand concurrency cap.
+      operationId: GetOnDemandConcurrencyCap
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OnDemandConcurrencyCapResponse'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get the on-demand concurrency cap
+      tags:
+      - Synthetics
+      x-menu-order: 10
+      x-undo:
+        type: safe
+    post:
+      description: Save new value for on-demand concurrency cap.
+      operationId: SetOnDemandConcurrencyCap
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OnDemandConcurrencyCapAttributes'
+        description: .
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OnDemandConcurrencyCapResponse'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Save new value for on-demand concurrency cap
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+      x-menu-order: 11
+      x-undo:
+        type: safe
   /api/v2/teams:
     get:
       description: Get all incident teams for the requesting user's organization.
@@ -18119,8 +22080,8 @@ paths:
       - description: 'Comma separated list of product families to retrieve. Available
           families are `all`, `analyzed_logs`,
 
-          `application_security`, `audit_logs`, `serverless`, `ci_app`, `cspm`, `custom_events`,
-          `cws`, `dbm`, `fargate`,
+          `application_security`, `audit_logs`, `serverless`, `ci_app`, `cloud_cost_management`,
+          `cspm`, `custom_events`, `cws`, `dbm`, `fargate`,
 
           `infra_hosts`, `incident_management`, `indexed_logs`, `indexed_spans`, `ingested_spans`,
           `iot`,
@@ -18130,7 +22091,8 @@ paths:
           `online_archive`, `profiling`, `rum`, `rum_browser_sessions`, `rum_mobile_sessions`,
           `sds`, `snmp`,
 
-          `synthetics_api`, `synthetics_browser`, and `timeseries`.'
+          `synthetics_api`, `synthetics_browser`, `synthetics_parallel_testing`, and
+          `timeseries`.'
         in: query
         name: filter[product_families]
         required: true
@@ -18828,6 +22790,9 @@ tags:
 - description: Workload activity security rules for generating events using the Datadog
     security Agent.
   name: Cloud Workload Security
+- description: Configure your Datadog Cloudflare integration directly through the
+    Datadog API.
+  name: Cloudflare Integration
 - description: Configure your Datadog Confluent Cloud integration directly through
     the Datadog API.
   name: Confluent Cloud
@@ -18847,6 +22812,13 @@ tags:
 
     first 4000 characters are displayed.'
   name: Events
+- description: Configure your Datadog Fastly integration directly through the Datadog
+    API.
+  name: Fastly Integration
+- description: 'The IP allowlist API is used to manage the IP addresses that
+
+    can access the Datadog API and UI.'
+  name: IP Allowlist
 - description: Create, update, delete, and retrieve services which can be associated
     with incidents.
   name: Incident Services
@@ -18907,13 +22879,28 @@ tags:
     with this endpoint."
   name: Logs Restriction Queries
 - description: "The metrics endpoint allows you to:\n\n- Post metrics data so it can
-    be graphed on Datadog\u2019s dashboards\n- Query metrics from any time period\n-
-    Modify tag configurations for metrics\n- View tags and volumes for metrics\n\n**Note**:
-    A graph can only contain a set number of points\nand as the timeframe over which
-    a metric is viewed increases,\naggregation between points occurs to stay below
-    that set number.\n\nThe Post, Patch, and Delete `manage_tags` API methods can
-    only be performed by\na user who has the `Manage Tags for Metrics` permission."
+    be graphed on Datadog\u2019s dashboards\n- Query metrics from any time period
+    (timeseries and scalar)\n- Modify tag configurations for metrics\n- View tags
+    and volumes for metrics\n\n**Note**: A graph can only contain a set number of
+    points\nand as the timeframe over which a metric is viewed increases,\naggregation
+    between points occurs to stay below that set number.\n\nThe Post, Patch, and Delete
+    `manage_tags` API methods can only be performed by\na user who has the `Manage
+    Tags for Metrics` permission."
   name: Metrics
+- description: '[Monitors](https://docs.datadoghq.com/monitors) allow you to watch
+    a metric or check that you care about and
+
+    notifies your team when a defined threshold has exceeded.
+
+
+    For more information, see [Creating Monitors](https://docs.datadoghq.com/monitors/create/types/)
+    and
+
+    [Tag Policies](https://docs.datadoghq.com/monitors/settings/).'
+  externalDocs:
+    description: Find out more at
+    url: https://docs.datadoghq.com/monitors/create/types/
+  name: Monitors
 - description: 'Configure your [Datadog Opsgenie integration](https://docs.datadoghq.com/integrations/opsgenie/)
 
     directly through the Datadog API.'
@@ -18930,6 +22917,14 @@ tags:
   name: Processes
 - description: Search or aggregate your RUM events over HTTP.
   name: RUM
+- description: 'A restriction policy defines the access control rules for a resource,
+    mapping a set of relations
+
+    (such as editor and viewer) to a set of allowed principals (such as roles). The
+    restriction policy
+
+    determines who is authorized to perform what actions on the resource.'
+  name: Restriction Policies
 - description: 'The Roles API is used to create and manage Datadog roles, what
 
     [global permissions](https://docs.datadoghq.com/account_management/rbac/)
@@ -18949,12 +22944,22 @@ tags:
 
     signals.'
   name: Security Monitoring
+- description: Create, update, delete, and retrieve sensitive data scanner groups
+    and rules.
+  name: Sensitive Data Scanner
 - description: Create, edit, and disable service accounts.
   name: Service Accounts
 - description: API to create, update, retrieve and delete service definitions.
   externalDocs:
     url: https://docs.datadoghq.com/tracing/service_catalog/
   name: Service Definition
+- description: "Datadog Synthetics uses simulated user requests and browser rendering
+    to help you ensure uptime,\nidentify regional issues, and track your application
+    performance. Datadog Synthetics tests come in\ntwo different flavors, [API tests](https://docs.datadoghq.com/synthetics/api_tests/)\nand
+    [browser tests](https://docs.datadoghq.com/synthetics/browser_tests). You can
+    use Datadog\u2019s API to\nmanage both test types programmatically.\n\nFor more
+    information about Synthetics, see the [Synthetics overview](https://docs.datadoghq.com/synthetics/)."
+  name: Synthetics
 - description: 'The usage metering API allows you to get hourly, daily, and
 
     monthly usage across multiple facets of Datadog.

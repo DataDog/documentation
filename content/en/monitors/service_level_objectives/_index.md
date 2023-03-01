@@ -9,9 +9,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/slo-monitoring-tracking/"
   tag: "Blog"
   text: "Track the status and error budget of your SLOs with Datadog"
-- link: "https://learn.datadoghq.com/course/view.php?id=34"
+- link: "https://learn.datadoghq.com/courses/intro-to-slo"
   tag: "Learning Center"
-  text: "Introduction to Service Level Objectives (SLOs)"
+  text: "Introduction to Service Level Objectives"
 - link: "https://www.datadoghq.com/blog/service-page/"
   tag: "Blog"
   text: "Service Telemetry, Error Tracking, SLOs and more"
@@ -21,6 +21,8 @@ further_reading:
 ---
 
 {{< vimeo 382481078 >}}
+
+{{< jqmath-vanilla >}}
 
 <br />
 
@@ -50,8 +52,8 @@ You can use Datadog’s [Service Level Objectives status page][1] to create new 
 ### Configuration
 
 1. On the [SLO status page][1], select **New SLO +**.
-2. Define the source for your SLOs. SLO types are [Metric-based][3] and [Monitor-based][4].
-3. Set up to three SLO targets. Each target consists of a target percentage and a rolling time window. Available time windows are: 7 days, 30 days, and 90 days. It is recommended that you make the SLO target percentage stricter than the target percentages stipulated in your SLAs.
+2. Define the source for your SLO. You can create an SLO from [metrics][3] or [monitors][4].
+3. Set a target and a rolling time window (past 7, 30, or 90 days) for the SLO. Datadog recommends you make the target stricter than your stipulated SLAs. If you configure more than one time window, select one to be the primary time window. This time window is displayed on SLO lists. By default, the shortest time window is selected. 
 4. Finally, give the SLO a title, describe it in more detail or add links in the description, add tags, and save it.
 
 After you set up the SLO, select it from the [Service Level Objectives list view][1] to open the details side panel. The side panel displays the overall status percentage and remaining error budget for each of the SLO's targets, as well as status bars (monitor-based SLOs) or bar graphs (metric-based SLOs) of the SLI's history. If you created a grouped monitor-based SLO using one [multi alert monitor][5] or a grouped metric-based SLO using the [`sum by` clause][6], the status percentage and remaining error budget for each individual group is displayed in addition to the overall status percentage and remaining error budget.
@@ -59,7 +61,8 @@ After you set up the SLO, select it from the [Service Level Objectives list view
 **Example:** If you create a monitor-based SLO to track latency per availability-zone, the status percentages and remaining error budget for the overall SLO and for each individual availability-zone that the SLO is tracking are displayed.
 
 **Note:** The remaining error budget is displayed as a percentage and is calculated using the following formula:
-{{< img src="monitors/service_level_objectives/error_budget_remaining.jpeg" alt="Remaining error budget formula" >}}
+
+$$\text"error budget remaining" = 100 * {\text"current status" - \text" target"} / { 100 - \text"target"}$$
 
 ### Setting SLO targets
 
@@ -81,6 +84,8 @@ To edit an SLO, hover over the SLO's row in the list view and click the edit pen
 
 The [Service Level Objectives status page][1] lets you run an advanced search of all SLOs so you can find, view, edit, clone or delete SLOs from the search results.
 
+{{< img src="monitors/service_level_objectives/slo_status_page.png" alt="SLO status page showing faceted search and calendar Weekly view" style="width:100%;" >}}
+
 Advanced search lets you query SLOs by any combination of SLO attributes:
 
 * `name` and `description` - text search
@@ -90,6 +95,8 @@ Advanced search lets you query SLOs by any combination of SLO attributes:
 * `tags` - datacenter, env, service, team, etc.
 
 To run a search, use the facet checkboxes on the left and the search bar at the top. When you check the boxes, the search bar updates with the equivalent query. Likewise, when you modify the search bar query (or write one from scratch), the checkboxes update to reflect the change. Query results update in real-time as you edit the query; there's no 'Search' button to click.
+
+Switch between the **Primary**, **Weekly**, and **Monthly** options to view SLO statuses by calendar weeks and months over 13 months.
 
 To edit an individual SLO, hover over it and use the buttons that appear at the right of its row: **Edit**, **Clone**, **Delete**. To see more details on an SLO, click its table row to open its details side panel.
 
@@ -229,7 +236,7 @@ To view, edit, and delete existing status corrections, click on the **Correction
 [2]: /dashboards/widgets/slo/
 [3]: /monitors/service_level_objectives/metric/
 [4]: /monitors/service_level_objectives/monitor/
-[5]: /monitors/create/types/metric/?tab=threshold#alert-grouping
+[5]: /monitors/types/metric/?tab=threshold#alert-grouping
 [6]: /monitors/service_level_objectives/metric/#define-queries
 [7]: /monitors/service_level_objectives/monitor/#set-your-slo-targets
 [8]: /monitors/service_level_objectives/metric/#set-your-slo-targets
@@ -238,7 +245,7 @@ To view, edit, and delete existing status corrections, click on the **Correction
 [11]: https://play.google.com/store/apps/details?id=com.datadog.app
 [12]: /monitors/service_level_objectives/#saved-views
 [13]: /api/v1/events/#query-the-event-stream
-[14]: /monitors/create/types/event/
+[14]: /monitors/types/event/
 [15]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
 [16]: /api/latest/service-level-objective-corrections/
 [17]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/slo_correction

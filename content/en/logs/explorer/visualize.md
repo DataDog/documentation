@@ -43,7 +43,7 @@ The default **sort** for logs in the list visualization is by timestamp, with th
 
 **Note**: Sorting your table according to a specific field requires that you [declare a facet][1] beforehand.
 
-
+[1]: /logs/explorer/facets/
 {{< /site-region >}}
 
 {{< site-region region="us,eu" >}}
@@ -51,10 +51,10 @@ The default **sort** for logs in the list visualization is by timestamp, with th
 
 **Note**: Although any attributes or tags can be added as a column, sorting your table is most reliable if you [declare a facet][1] beforehand. Non-faceted attributes can be added as columns, but it does not produce reliable sorting.
 
-
+[1]: /logs/explorer/facets/
 {{< /site-region >}}
 
-The configuration of the log table is stored alongside other elements of your troubleshooting context in [Saved Views][2].
+The configuration of the log table is stored alongside other elements of your troubleshooting context in [Saved Views][1].
 
 ### List aggregates of logs
 
@@ -67,7 +67,7 @@ Results are sorted according to:
 
 ## Timeseries
 
-Visualize the evolution of a single [measure][3] (or a [facet][3] unique count of values) over a selected time frame, and (optionally) split by up to three available [facets][3].
+Visualize the evolution of a single [measure][2] (or a [facet][2] unique count of values) over a selected time frame, and (optionally) split by up to three available [facets][2].
 
 The following Timeseries log analytics shows the evolution of the **top 50 URL Paths** according to the 95th percentile of **duration** over the last 15 minutes.
 
@@ -77,7 +77,7 @@ Choose additional display options for timeseries: the **roll-up interval**, whet
 
 ## Top list
 
-Visualize the top values from a [facet][3] according to the chosen [measure][3].
+Visualize the top values from a [facet][2] according to the chosen [measure][2].
 
 For example, the following top list shows the **top 15 Customers** on a merchant website according to the number of **unique sessions** they had over the last day.
 
@@ -85,7 +85,7 @@ For example, the following top list shows the **top 15 Customers** on a merchant
 
 ## Nested tables
 
-Visualize the top values from up to three [facets][3] according to a chosen [measure][3] (the first measure you choose in the list), and display the value of additional measures for elements appearing in this table. Update a search query or examine the logs corresponding to either dimension.
+Visualize the top values from up to three [facets][2] according to a chosen [measure][2] (the first measure you choose in the list), and display the value of additional measures for elements appearing in this table. Update a search query or examine the logs corresponding to either dimension.
 
 - When there are multiple measures, the top or bottom list is determined according to the first measure.
 - The subtotal may differ from the actual sum of values in a group, since only a subset (top or bottom) is displayed. Events with a null or empty value for this dimension are not displayed as a sub-group.
@@ -114,6 +114,6 @@ The following tree map shows the percentage breakdown by **service**.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/explorer/facets/
-[2]: /logs/explorer/saved_views/
-[3]: /logs/search-syntax
+
+[1]: /logs/explorer/saved_views/
+[2]: /logs/search-syntax

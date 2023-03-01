@@ -84,6 +84,9 @@ Agent を SQL Server ホストに直接インストールすることをお勧�
 {{% /tab %}}
 {{< /tabs >}}
 
+## Agent の構成例
+{{% dbm-sqlserver-agent-config-examples %}}
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

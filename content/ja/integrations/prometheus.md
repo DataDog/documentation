@@ -3,7 +3,8 @@ app_id: prometheus
 app_uuid: b978d452-7008-49d0-bb87-62d8639b2205
 assets:
   integration:
-    configuration: {}
+    configuration:
+      spec: assets/configuration/spec.yaml
     events:
       creates_events: false
     service_checks:

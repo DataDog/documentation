@@ -227,6 +227,9 @@ This is the escalation message @dev-team@company.com
 {{% /tab %}}
 {{< /tabs >}}
 
+If you configure a conditional block for a state transition into `alert` or `warning` conditions with an **@-notifications** handle, it is recommended to configure a corresponding `recovery` condition in order for a recovery notification to be sent to the handle.
+
+**Note**: Any text or notification handle placed **outside** the configured conditional variables is invoked with every monitor state transition. Any text or notification handle placed **inside** of configured conditional variables is only invoked if the monitor state transition matches its condition.
 
 ## Attribute and tag variables
 
@@ -560,10 +563,10 @@ If your alert message includes information that needs to be encoded in a URL (fo
 https://app.datadoghq.com/apm/services/{{urlencode "service.name"}}
 ```
 
-[1]: /monitors/create/configuration/#alert-grouping
-[2]: /monitors/create/types/log/
-[3]: /monitors/create/types/apm/?tab=analytics
-[4]: /monitors/create/types/real_user_monitoring/
-[5]: /monitors/create/types/ci/
+[1]: /monitors/configuration/#alert-grouping
+[2]: /monitors/types/log/
+[3]: /monitors/types/apm/?tab=analytics
+[4]: /monitors/types/real_user_monitoring/
+[5]: /monitors/types/ci/
 [6]: /monitors/guide/template-variable-evaluation/
 [7]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones

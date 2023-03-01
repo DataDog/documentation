@@ -10,11 +10,11 @@ aliases:
 
 Use [Incident Settings][1] to customize aspects of the Incident Management experience for your entire organization. The individual settings are categorized and divided into different sub-sections. The main categories are: General, Notifications, and Remediation.
 
-## General
+## Core
 
-### Information
+### General
 
-The Information subsection of Incident Settings is used to define your organization's severity levels and status levels, and to declare incident helper text.
+The General subsection of Incident Settings is used to define your organization's severity levels and status levels, and to declare incident helper text.
 
 {{< img src="monitors/incidents/severity_settings.jpeg" alt="Incident Severity Level Settings" style="width:80%;">}}
 
@@ -78,6 +78,29 @@ In addition to the five default fields and the fields based on metric tags, you 
 4. *Number*: A text area that only accepts digits and a single period as input. Values are entered by a responder on a per-incident basis.
 
 *Single-Select*, *Multi-Select*, and *Number* custom fields are searchable facets in the [Incident Homepage][4] and [Incident Management Analytics][2] for easy filtering of incidents. *Number* fields are measures in Incident Management Analytics that can be graphed and visualized in [Dashboards][13] and [Notebooks][11].
+
+### Responder types
+
+<div class="alert alert-warning">
+This feature is in open beta.
+</div>
+
+{{< img src="monitors/incidents/responder_types_settings.png" alt="The settings section dedicated to creating custom responder types" style="width:80%;">}}
+
+The responder types settings provide you with the ability to create custom roles to [assign to your incident responders][16] and to specify if those roles are meant to be held by one person or multiple people per incident. These roles are unrelated to the [Role Based Access Control (RBAC)][15] system. Responder types allow your responders to understand what their responsibilities are in an incident based on the definitions of your own incident response process. By default there are two roles:
+
+1. `Incident Commander` - The individual responsible for leading the response team 
+2. `Responder` - An individual that actively contributes to investigating an incident and resolving its underlying issue
+
+**Note:** The `Incident Commander` responder type appears in Incident Settings so that you may customize its description. `Incident Commander` cannot be deleted as a responder type, nor can its name or status as a `One person role` be changed. The `Responder` role is a generic fallback role if a responder is not otherwise assigned a different role, and does not appear in Incident Settings.
+
+To create a custom responder type:
+
+1. Click the **+ Add Responder Type** button below the table.
+2. Give your new responder type a name.
+3. Choose if the responder type is a `One person role` or a `Multi person role`. A `One person role` can be held by a single person per incident, while a `Multi person role` can be held by an unlimited number of people per incident.
+4. Give the responder type a description. This description appears in the UI for selecting a role to assign to your teammates.
+5. Click **Save**.
 
 ### Integrations
 
@@ -177,3 +200,5 @@ To create a postmortem template:
 [12]: /monitors/incident_management/incident_details/#overview-section
 [13]: /dashboards/
 [14]: /mobile/
+[15]: /account_management/rbac/?tab=datadogapplication#pagetitle
+[16]: /monitors/incident_management/incident_details/#response-team-section

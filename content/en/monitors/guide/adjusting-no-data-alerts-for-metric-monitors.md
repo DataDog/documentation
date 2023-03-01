@@ -35,9 +35,9 @@ Contact [us][6] should you experience any issues.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/create/types/metric/
+[1]: /monitors/types/metric/
 [2]: /integrations/amazon_web_services/
-[3]: /monitors/create/types/metric/?tab=threshold#advanced-alert-conditions
+[3]: /monitors/types/metric/?tab=threshold#advanced-alert-conditions
 [4]: /integrations/guide/cloud-metric-delay/
 [5]: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
 [6]: /help/

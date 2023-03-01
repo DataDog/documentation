@@ -9,7 +9,6 @@ author:
   support_email: contact@gofirefly.io
   vendor_id: firefly
 categories:
-- autodiscovery
 - 自動化
 - クラウド
 - google cloud
@@ -44,7 +43,6 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Autodiscovery
   - Category::Automation
   - Category::Cloud
   - Category::Google Cloud
@@ -75,6 +73,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Firefly
+  uninstallation: README.md#Uninstallation
 ---
 
 

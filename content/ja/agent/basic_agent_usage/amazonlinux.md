@@ -11,6 +11,12 @@ further_reading:
 - link: /tracing/
   tag: Documentation
   text: トレースの収集
+- link: /agent/basic_agent_usage/#agent-architecture
+  tag: Documentation
+  text: Agent のアーキテクチャを詳しく見る
+- link: /agent/guide/network#configure-ports
+  tag: Documentation
+  text: インバウンドポートの構成
 kind: documentation
 platform: Amazon Linux
 title: Amazon Linux 用 Agent の基本的な使用方法

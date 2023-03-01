@@ -39,7 +39,7 @@ further_reading:
 The [GitHub Actions][1] integration uses a private [GitHub App][2] to collect workflow information. If you already have an app, you can
 skip to the next section.
 
-1. Go to the [GitHub Apps Integration tile][3].
+1. Go to the [GitHub integration tile][3].
 2. Click **Link GitHub Account**.
 3. Follow the instructions to configure the integration for a personal or organization account.
 4. In **Edit Permissions**, grant `Actions: Read` access.
@@ -101,7 +101,7 @@ workflow job and workflow run events. To remove the events:
 
 [1]: https://docs.github.com/actions
 [2]: https://docs.github.com/developers/apps/getting-started-with-apps/about-apps
-[3]: https://app.datadoghq.com/account/settings#integrations/github-apps
+[3]: https://app.datadoghq.com/integrations/github/
 [4]: https://app.datadoghq.com/ci/setup/pipeline?provider=github
 [5]: https://docs.datadoghq.com/logs/
 [6]: https://app.datadoghq.com/ci/settings

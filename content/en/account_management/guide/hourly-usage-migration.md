@@ -43,6 +43,8 @@ The families and usage types:
     * `ci_test_indexed_spans`
     * `ci_visibility_pipeline_committers`
     * `ci_visibility_test_committers`
+- **cloud_cost_management**
+    * `host_count`
 - **cspm**
     * `aas_host_count`
     * `azure_host_count`
@@ -144,6 +146,7 @@ The families and usage types:
     * `session_count_android`
     * `session_count_ios`
     * `session_count_reactnative`
+    * `session_count_flutter`
 - **sds**
     * `logs_scanned_bytes`
     * `total_scanned_bytes`

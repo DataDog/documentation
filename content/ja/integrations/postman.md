@@ -17,7 +17,7 @@ assets:
     source_type_name: Postman
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Postman
   sales_email: integrations-partnerships@postman.com
   support_email: integrations-partnerships@postman.com
 categories: []

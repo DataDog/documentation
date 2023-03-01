@@ -1,6 +1,6 @@
 ---
 further_reading:
-- link: /monitors/create/
+- link: /monitors/
   tag: Documentation
   text: Créer des monitors
 - link: /monitors/notify/
@@ -9,10 +9,6 @@ further_reading:
 kind: documentation
 title: Politiques de tagging de monitor
 ---
-
-{{< beta-callout url="#" btn_hidden="true" >}}
-La fonctionnalité Politiques de tagging de monitor est en version bêta privée. Pour en bénéficier, contactez l'assistance à l'adresse support@datadoghq.com.
-{{< /beta-callout >}}
 
 Les politiques de tagging de monitor vous permettent d'imposer la présence de certains tags et de certaines valeurs de tag sur vos monitors Datadog. Cette fonctionnalité est idéale pour optimiser l'attribution tout en faisant en sorte que les alertes passent par les systèmes et les workflows adéquats en vue de leur triage et de leur traitement.
 
@@ -53,7 +49,7 @@ Pour configurer des politiques de tagging de monitor, vous devez disposer d'un r
 
 Pour en savoir plus, consultez les sections [Contrôle d'accès à base de rôles (RBAC)][2] et [Autorisations des rôles Datadog][3].
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 

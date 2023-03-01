@@ -1,17 +1,17 @@
 ---
 further_reading:
-- link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
-  tag: ブログ
-  text: Datadog リアルユーザーモニタリングのご紹介
-- link: /real_user_monitoring/explorer/
-  tag: ドキュメント
-  text: Datadog でビューを検索する
-- link: /real_user_monitoring/explorer/visualize/
-  tag: Documentation
-  text: イベントへの視覚化の適用
-- link: /real_user_monitoring/dashboards/
-  tag: Documentation
-  text: RUM ダッシュボードについて
+    - link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
+      tag: ブログ
+      text: Datadog リアルユーザーモニタリングのご紹介
+    - link: /real_user_monitoring/explorer/
+      tag: ドキュメント
+      text: Datadog でビューを検索する
+    - link: /real_user_monitoring/explorer/visualize/
+      tag: Documentation
+      text: イベントへの視覚化の適用
+    - link: /real_user_monitoring/dashboards/
+      tag: Documentation
+      text: RUM ダッシュボードについて
 kind: documentation
 title: ユーザーアクションの追跡
 ---
@@ -22,9 +22,9 @@ title: ユーザーアクションの追跡
 
 以下の目的を達成できます。
 
-* キーとなるインタラクションの実行（**カートへ追加**ボタンのクリックなど）を把握
-* 機能の適応を数値化
-* 特定のブラウザエラーにつながるステップを認識
+-   キーとなるインタラクションの実行（**カートへ追加**ボタンのクリックなど）を把握
+-   機能の適応を数値化
+-   特定のブラウザエラーにつながるステップを認識
 
 ## 収集する情報の管理
 
@@ -36,20 +36,20 @@ Datadog に送信する情報を制御するには、[アクション名を手�
 
 RUM ブラウザ SDK は自動的にクリックを追跡します。**以下のすべて**の条件が満たされると、クリックアクションが作成されます。
 
-* クリックに続くアクティビティが検出されます。詳しくは[ページアクティビティの計算方法][2]をご覧ください。
-* クリックによって新規ページの読み込みは開始しない。この場合、Datadog ブラウザ SDK で別の RUM ビューイベントが生成されます。
-* アクションの名前を計算することができます。詳しくは、[クリックアクションの名前を宣言する](#declare-a-name-for-click-actions)を参照してください。
+-   クリックに続くアクティビティが検出されます。詳しくは[ページアクティビティの計算方法][2]をご覧ください。
+-   クリックによって新規ページの読み込みは開始しない。この場合、Datadog ブラウザ SDK で別の RUM ビューイベントが生成されます。
+-   アクションの名前を計算することができます。詳しくは、[クリックアクションの名前を宣言する](#declare-a-name-for-click-actions)を参照してください。
 
 ## アクションタイミングメトリクス
 
 すべての RUM イベントタイプのデフォルト属性については、[RUM ブラウザのデータ収集][3]を参照してください。
 
-| メトリクス    | タイプ   | 説明              |
-|--------------|--------|--------------------------|
-| `action.loading_time` | 数値（ns） | アクションのロード時間。  |
-| `action.long_task.count`        | 数値      | このアクションについて収集されたすべてのロングタスクの数。 |
-| `action.resource.count`         | 数値      | このアクションについて収集されたすべてのリソースの数。 |
-| `action.error.count`      | 数値      | このアクションについて収集されたすべてのエラーの数。|
+| メトリクス               | タイプ     | 説明                                                       |
+| ------------------------ | ---------- | ---------------------------------------------------------- |
+| `action.loading_time`    | 数値（ns） | アクションのロード時間。                                   |
+| `action.long_task.count` | 数値       | このアクションについて収集されたすべてのロングタスクの数。 |
+| `action.resource.count`  | 数値       | このアクションについて収集されたすべてのリソースの数。     |
+| `action.error.count`     | 数値       | このアクションについて収集されたすべてのエラーの数。       |
 
 Datadog Browser SDK for RUM は、クリックごとにページのアクティビティを監視することで、アクションのロード時間を計算します。ページにアクティビティがなくなると、アクションは完了したとみなされます。詳細については、[ページアクティビティの計算方法][2]を参照してください。
 
@@ -57,12 +57,12 @@ Datadog Browser SDK for RUM は、クリックごとにページのアクティ�
 
 ## アクションの属性
 
-| 属性    | タイプ   | 説明              |
-|--------------|--------|--------------------------|
-| `action.id` | 文字列 | ユーザーアクションの UUID。 |
-| `action.type` | 文字列 | ユーザーアクションのタイプ。カスタムユーザーアクションの場合、`custom` に設定されます。 |
-| `action.target.name` | 文字列 | ユーザーが操作したエレメント。自動収集されたアクションのみ対象。 |
-| `action.name` | 文字列 | 作成されたユーザーフレンドリーな名称 (`Click on #checkout` など)。カスタムユーザーアクションの場合は、API コールで提供されたアクション名。 |
+| 属性                 | タイプ | 説明                                                                                                                                       |
+| -------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `action.id`          | 文字列 | ユーザーアクションの UUID。                                                                                                                |
+| `action.type`        | 文字列 | ユーザーアクションのタイプ。カスタムユーザーアクションの場合、`custom` に設定されます。                                                    |
+| `action.target.name` | 文字列 | ユーザーが操作したエレメント。自動収集されたアクションのみ対象。                                                                           |
+| `action.name`        | 文字列 | 作成されたユーザーフレンドリーな名称 (`Click on #checkout` など)。カスタムユーザーアクションの場合は、API コールで提供されたアクション名。 |
 
 ## クリックアクションの名前を宣言する
 
@@ -74,9 +74,9 @@ Datadog Browser SDK for RUM は、クリックアクションの命名にさま�
 <a class="btn btn-default" href="#" role="button" data-dd-action-name="Login button">Try it out!</a>
 
 <div class="alert alert-danger" role="alert" data-dd-action-name="Dismiss alert">
-  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-  <span class="sr-only">Error:</span>
-  Enter a valid email address
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    <span class="visually-hidden">Error:</span>
+    Enter a valid email address
 </div>
 ```
 
@@ -86,12 +86,12 @@ Datadog Browser SDK for RUM は、クリックアクションの命名にさま�
 
 ```html
 <script>
-  DD_RUM.init({
+    DD_RUM.init({
+      ...
+      trackInteractions: true,
+      actionNameAttribute: 'data-custom-name',
     ...
-    trackInteractions: true,
-    actionNameAttribute: 'data-custom-name',
-  ...
-  })
+    })
 </script>
 
 <a class="btn btn-default" href="#" role="button" data-custom-name="Login button">Try it out!</a>

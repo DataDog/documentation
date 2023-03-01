@@ -101,7 +101,7 @@ data/workflows/:
 derefs: $(DEREFS)
 
 .SECONDEXPANSION:
-$(DEREFS): %.json : integrations_data/extracted/dd-source/domains/workflow/actionplatform/runner/bundles/$$(basename $$(notdir $$@))/manifest.json | data/workflows/
+$(DEREFS): %.json : integrations_data/extracted/dd-source/domains/workflow/actionplatform/apps/wf-actions-worker/src/runner/bundles/$$(basename $$(notdir $$@))/manifest.json | data/workflows/
 	@node ./assets/scripts/workflow-process.js $< $@
 
 # builds permissions json from rbac
@@ -115,7 +115,7 @@ placeholders:
 
 # create the virtual environment
 hugpython: local/etc/requirements3.txt
-	@${PY3} -m venv --clear $@ && . $@/bin/activate && $@/bin/pip install -r $<
+	@${PY3} -m venv --clear $@ && . $@/bin/activate && $@/bin/pip install --upgrade pip wheel && $@/bin/pip install -r $<
 
 update_pre_build:
 	@. hugpython/bin/activate && GITHUB_TOKEN=$(GITHUB_TOKEN) CONFIGURATION_FILE=$(CONFIGURATION_FILE) ./local/bin/py/build/update_pre_build.py

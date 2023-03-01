@@ -166,7 +166,7 @@ The [Datadog Mobile App][23], available on the [Apple App Store][24] and [Google
 [18]: /real_user_monitoring/
 [19]: /real_user_monitoring/session_replay/
 [20]: /serverless
-[21]: /security_platform/cloud_siem/
+[21]: /security/cloud_siem/
 [22]: /synthetics/
 [23]: /mobile/
 [24]: https://apps.apple.com/app/datadog/id1391380318

@@ -20,7 +20,7 @@ assets:
     source: opa
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: コミュニティ
   sales_email: ara.pulido@datadoghq.com
   support_email: ara.pulido@datadoghq.com
 categories:

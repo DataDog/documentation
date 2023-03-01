@@ -25,7 +25,7 @@ You can move directly from span information to profiling data on the Code Hotspo
 
 ### Prerequisites
 
-{{< programming-lang-wrapper langs="java,python,go,ruby,.NET,php" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby,dotnet,php" >}}
 {{< programming-lang lang="java" >}}
 Code Hotspots identification is enabled by default when you [turn on profiling for your Java service][1]. For manually instrumented code, continuous profiler requires scope activation of spans:
 
@@ -41,8 +41,8 @@ try (final Scope scope = tracer.activateSpan(span)) { // mandatory for Datadog c
 ```
 
 Requires:
-- OpenJDK 11 or greater and `dd-trace-java` version 0.65.0 or greater; or
-- OpenJDK 8: 8u282 or greater and `dd-trace-java` version 0.77.0 or greater.
+- OpenJDK 11+ and `dd-trace-java` version 0.65.0+; or
+- OpenJDK 8: 8u282+ and `dd-trace-java` version 0.77.0+.
 
 [1]: /profiler/enabling/java
 {{< /programming-lang >}}
@@ -50,7 +50,7 @@ Requires:
 
 Code Hotspots identification is enabled by default when you [turn on profiling for your Python service][1].
 
-Requires `dd-trace-py` version 0.44.0 or greater.
+Requires `dd-trace-py` version 0.44.0+.
 
 [1]: /profiler/enabling/python
 {{< /programming-lang >}}
@@ -58,7 +58,7 @@ Requires `dd-trace-py` version 0.44.0 or greater.
 
 Code Hotspots identification is enabled by default when you [turn on profiling for your Ruby service][1].
 
-Requires `dd-trace-rb` version 0.49.0 or greater.
+Requires `dd-trace-rb` version 0.49.0+.
 
 [1]: /profiler/enabling/ruby
 {{< /programming-lang >}}
@@ -66,7 +66,7 @@ Requires `dd-trace-rb` version 0.49.0 or greater.
 
 Code Hotspots identification is enabled by default [turn on profiling for your Go service][1].
 
-Require `dd-trace-go` version 1.37.0 or greater.
+Require `dd-trace-go` version 1.37.0+.
 
 **Note:** This feature works best with Go version 1.18 or newer. Go 1.17 and below have several bugs (see [GH-35057][2], [GH-48577][3], [CL-369741][4], and [CL-369983][5]) that can reduce the accuracy of this feature, especially when using a lot of CGO.
 
@@ -76,11 +76,11 @@ Require `dd-trace-go` version 1.37.0 or greater.
 [4]: https://go-review.googlesource.com/c/go/+/369741/
 [5]: https://go-review.googlesource.com/c/go/+/369983/
 {{< /programming-lang >}}
-{{< programming-lang lang=".NET" >}}
+{{< programming-lang lang="dotnet" >}}
 
 Code Hotspots identification is enabled by default when you [turn on profiling for your .NET service][1].
 
-Requires `dd-trace-dotnet` version 2.7.0 or greater.
+Requires `dd-trace-dotnet` version 2.7.0+.
 
 [1]: /profiler/enabling/dotnet
 {{< /programming-lang >}}
@@ -88,7 +88,7 @@ Requires `dd-trace-dotnet` version 2.7.0 or greater.
 
 Code Hotspots identification is enabled by default when you [turn on profiling for your PHP service][1].
 
-Requires `dd-trace-php` version 0.71 or greater.
+Requires `dd-trace-php` version 0.71+.
 
 [1]: /profiler/enabling/php
 {{< /programming-lang >}}
@@ -137,19 +137,19 @@ Click the **Span/Trace/Full profile** selector to define the scope of the data:
 
 ### Prerequisites
 
-{{< programming-lang-wrapper langs="python,go,ruby,.NET,php" >}}
+{{< programming-lang-wrapper langs="python,go,ruby,dotnet,php" >}}
 {{< programming-lang lang="python" >}}
 
 Endpoint profiling is enabled by default when you [turn on profiling for your Python service][1].
 
-Requires `dd-trace-py` version 0.54.0 or greater.
+Requires `dd-trace-py` version 0.54.0+.
 
 [1]: /profiler/enabling/python
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 Endpoint profiling is enabled by default when you [turn on profiling for your Go service][1].
 
-Requires `dd-trace-go` version 1.37.0 or greater.
+Requires `dd-trace-go` version 1.37.0+.
 
 **Note:** This feature works best with Go version 1.18 or newer. Go 1.17 and below have several bugs (see [GH-35057][2], [GH-48577][3], [CL-369741][4], and [CL-369983][5]) that can reduce the accuracy of this feature, especially when using a lot of CGO.
 
@@ -163,15 +163,15 @@ Requires `dd-trace-go` version 1.37.0 or greater.
 
 Endpoint profiling is enabled by default when you [turn on profiling for your Ruby service][1].
 
-Requires `dd-trace-rb` version 0.54.0 or greater.
+Requires `dd-trace-rb` version 0.54.0+.
 
 [1]: /profiler/enabling/ruby
 {{< /programming-lang >}}
-{{< programming-lang lang=".NET" >}}
+{{< programming-lang lang="dotnet" >}}
 
 Endpoint profiling is enabled by default when you [turn on profiling for your .NET service][1].
 
-Requires `dd-trace-dotnet` version 2.15.0 or greater.
+Requires `dd-trace-dotnet` version 2.15.0+.
 
 [1]: /profiler/enabling/dotnet
 {{< /programming-lang >}}
@@ -179,7 +179,7 @@ Requires `dd-trace-dotnet` version 2.15.0 or greater.
 
 Endpoint profiling is enabled by default when you [turn on profiling for your PHP service][1].
 
-Requires `dd-trace-php` version 0.79.0 or greater.
+Requires `dd-trace-php` version 0.79.0+.
 
 [1]: /profiler/enabling/php
 {{< /programming-lang >}}

@@ -23,8 +23,6 @@ title: Amazon RDS 上の SQL Server のデータベースモニタリングの�
 2. [Agent をインストールする](#install-the-agent)
 3. [RDS インテグレーションをインストールする](#install-the-rds-integration)
 
-**AlwaysOn ユーザーの場合**、Agent は別のサーバーにインストールし、リスナーエンドポイントを介してクラスターに接続する必要があります。これは、Availability Group (AG) のセカンダリレプリカに関する情報がプライマリレプリカから収集されるからです。さらに、この方法で Agent をインストールすると、フェイルオーバー時に Agent を稼働させ続けることができます。
-
 ## はじめに
 
 サポートされている SQL Server バージョン
@@ -65,6 +63,8 @@ CREATE USER datadog FOR LOGIN datadog;
 
 AWS はホストへの直接アクセスを許可しないため、Datadog Agent は SQL Server ホストと通信可能な別のホストにインストールする必要があります。Agent のインストールと実行には、いくつかのオプションがあります。
 
+**AlwaysOn ユーザーの場合**、Agent は別のサーバーにインストールし、リスナーエンドポイントを介してクラスターに接続する必要があります。これは、Availability Group (AG) のセカンダリレプリカに関する情報がプライマリレプリカから収集されるからです。さらに、この方法で Agent をインストールすると、フェイルオーバー時に Agent を稼働させ続けることができます。
+
 {{< tabs >}}
 {{% tab "Windows Host" %}}
 {{% dbm-sqlserver-agent-setup-windows %}}
@@ -79,6 +79,9 @@ AWS はホストへの直接アクセスを許可しないため、Datadog Agent
 {{% dbm-sqlserver-agent-setup-kubernetes %}}
 {{% /tab %}}
 {{< /tabs >}}
+
+## Agent の構成例
+{{% dbm-sqlserver-agent-config-examples %}}
 
 ## RDS インテグレーションをインストールする
 

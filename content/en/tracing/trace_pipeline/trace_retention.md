@@ -65,9 +65,9 @@ The `Spans Indexed` column for each retention filter is powered by the `datadog.
 
 ### Datadog intelligent retention filter
 
-The intelligent retention filter is always active for your services, and it keeps a proportion of traces to help you monitor the health of your applications. 
+The Datadog intelligent retention filter is always active for your services, and it keeps a proportion of traces to help you monitor the health of your applications. 
 
-For 30 days, intelligent retention retains:
+It scans through the **service entry spans** and retains for 30 days:
 
  - A representative selection of errors, ensuring error diversity (for example, response code 400s, 500s).
  - High latency in the `p75`, `p90`, and `p95` percentiles.

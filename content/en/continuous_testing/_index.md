@@ -19,6 +19,9 @@ further_reading:
 - link: 'https://www.datadoghq.com/blog/release-confidently-with-datadog-continuous-testing/'
   tag: 'blog'
   text: 'Use Datadog Continuous Testing to release with confidence'
+- link: 'https://www.datadoghq.com/blog/best-practices-datadog-continuous-testing/'
+  tag: 'blog'
+  text: 'Best practices for continuous testing with Datadog'
 ---
 
 <div class="alert alert-info">This page is about running Continuous Testing tests in your CI/CD pipelines. If you want to view CI/CD metrics and dashboards, see the <a href="/continuous_integration/" target="_blank">CI Visibility documentation.</a></div>
@@ -40,17 +43,25 @@ Instead of having to implement test code, you can build software using [Syntheti
 
 ## Increase efficiency through seamless integrations
 
-Fast-track your application development by testing and troubleshooting in one platform. Use integrations with CI providers such as [GitHub][5], [GitLab][6], [Jenkins][7], [CircleCI][8], and [Azure DevOps][9], and collaboration tools such as Slack or Jira to merge workflows and prevent context switching. 
+Fast-track your application development by testing and troubleshooting in one platform. Select from the following types of CI providers and collaboration tools such as Slack or Jira to merge workflows and avoid context switching. 
+
+{{< partial name="continuous_testing/ct-getting-started.html" >}}
+
+</br>
 
 You can use the [Datadog Terraform provider][10] to control test creation and state management. Leverage your Synthetic tests as [integration and end-to-end tests][11] for your staging, pre-prod, and canary deployments, or run them directly in your [CI pipelines][11].
 
 ## Accelerate troubleshooting
 
-Performing tests in a unified monitoring platform helps you to quickly find the root cause of failed test runs and reduce MTTR. You can obtain the full context for troubleshooting—without switching between tools— through correlated metrics, traces, and logs surfaced by the Datadog [APM integration][12]. 
+Performing tests in a unified monitoring platform helps you quickly find the root cause of failed test runs and reduce MTTR. You can obtain the full context for troubleshooting—without switching between tools—through correlated metrics, traces, and logs surfaced by the Datadog [APM integration][12] by looking at executed jobs the [Continuous Testing Explorer][11]. 
 
 {{< img src="continuous_testing/open_sidepanel.png" alt="CI batches in the Continuous Testing Explorer" style="width:100%;">}}
 
-Explore browser tests running in a CI pipeline and troubleshoot failing test results by looking at executed jobs in the [Continuous Testing Explorer][13].
+## Use the Synthetic Monitoring & Continuous Testing Explorer
+
+Create [search queries and visualizations][11] for your Synthetic test runs or batches of tests running in CI/CD pipelines. 
+
+{{< img src="continuous_testing/explorer_ci_batches.png" alt="Continuous Testing Explorer" style="width:100%;">}}
 
 ## Ready to start?
 
@@ -64,11 +75,6 @@ Once you have configured some [Synthetic tests][4], see the documentation for yo
 [2]: /synthetics/browser_tests
 [3]: /continuous_testing/settings
 [4]: /synthetics/
-[5]: /continuous_testing/cicd_integrations/github_actions
-[6]: /continuous_testing/cicd_integrations/gitlab
-[7]: /continuous_testing/cicd_integrations/jenkins
-[8]: /continuous_testing/cicd_integrations/circleci_orb
-[9]: /continuous_testing/cicd_integrations/azure_devops_extension
 [10]: https://registry.terraform.io/providers/DataDog/datadog/latest/
 [11]: /continuous_testing/explorer
 [12]: /synthetics/apm/

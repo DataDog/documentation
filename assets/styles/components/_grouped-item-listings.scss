@@ -1,18 +1,31 @@
 .grouped-item-search {
+  z-index: 1;
+
   &:focus {
     box-shadow: 4px 4px 12px rgba(0,0,0,0.3);
     border: 1px solid transparent;
   }
 }
 
+.js-group {
+  &:before {
+    content: ' ';
+    display: block;
+    height: 100px;
+    visibility: hidden;
+    margin-top: -100px;
+    pointer-events: none;
+  }
+}
+
 .js-group-header {
   transition: box-shadow 0.125s;
   position: relative;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.25); 
-  margin-bottom: 9px; 
-  border-radius: 4px; 
-  cursor: pointer; 
-  overflow: hidden; 
+  box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+  margin-bottom: 9px;
+  border-radius: 4px;
+  cursor: pointer;
+  overflow: hidden;
   height: 28px;
 
   .group-header-text {
@@ -20,7 +33,7 @@
   }
 
   &:hover {
-    box-shadow: 0 2px 3px rgba(0,0,0,0.3); 
+    box-shadow: 0 2px 3px rgba(0,0,0,0.3);
   }
   &.active + div {
     display: block !important;

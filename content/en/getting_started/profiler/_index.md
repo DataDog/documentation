@@ -1,6 +1,6 @@
 ---
 title: Getting Started with the Continuous Profiler
-kind: Documentation
+kind: documentation
 aliases:
     - /tracing/profiling/intro_to_profiling
     - /tracing/profiler/intro_to_profiling
@@ -11,11 +11,11 @@ further_reading:
     - link: '/profiler/enabling/'
       tag: 'Documentation'
       text: 'Enabling the Profiler'
-    - link: 'https://learn.datadoghq.com/course/view.php?id=18'
+    - link: 'https://learn.datadoghq.com/courses/intro-to-apm'
       tag: 'Learning Center'
-      text: 'Introduction to Datadog'
+      text: 'Introduction to Application Performance Monitoring'
     - link: 'https://www.datadoghq.com/blog/engineering/how-we-optimized-our-akka-application-using-datadogs-continuous-profiler/'
-      tags: 'Blog'
+      tag: 'Blog'
       text: 'How we optimized our Akka application using Datadog’s Continuous Profiler'
 ---
 
@@ -66,7 +66,7 @@ docker-compose up -d
 After the containers are built and running, the "toolbox" container is available to explore:
 
 ```
-docker exec -it dd-continuous-profiler-example_toolbox_1 bash
+docker exec -it dd-continuous-profiler-example-toolbox-1 bash
 ```
 
 Use the API with:
@@ -198,7 +198,7 @@ docker-compose up -d
 To test the results, generate traffic again:
 
 ```shell
-docker exec -it dd-continuous-profiler-example_toolbox_1 bash
+docker exec -it dd-continuous-profiler-example-toolbox-1 bash
 ab -c 10 -t 20 http://movies-api-java:8080/movies?q=the
 ```
 

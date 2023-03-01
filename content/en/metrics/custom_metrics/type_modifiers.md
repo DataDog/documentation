@@ -55,7 +55,7 @@ Depending on the metric type you applied them to, the behavior differs:
 
 **Note**: There is no normalization on tiny intervals (when no time aggregation occurs), thus the raw metric value counts are returned.
 
-[1]: /dashboards/faq/interpolation-the-fill-modifier-explained/
+[1]: /metrics/guide/interpolation-the-fill-modifier-explained/
 {{% /tab %}}
 {{% tab "RATE" %}}
 
@@ -67,7 +67,7 @@ Depending on the metric type you applied them to, the behavior differs:
   * Disables any [interpolation][1].
   * Sets the time aggregator to `SUM`.
 
-[1]: /dashboards/faq/interpolation-the-fill-modifier-explained/
+[1]: /metrics/guide/interpolation-the-fill-modifier-explained/
 {{% /tab %}}
 {{% tab "GAUGE" %}}
 

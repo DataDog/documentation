@@ -1,9 +1,10 @@
 ---
-title: Agent 構成ファイル
-kind: ガイド
 aliases:
-  - /ja/agent/faq/agent-configuration-files
+- /ja/agent/faq/agent-configuration-files
+kind: ガイド
+title: Agent 構成ファイル
 ---
+
 ## Agent のメイン構成ファイル
 
 Agent v6 の構成ファイルは、**YAML** を使用することで、複雑な構成に対するサポートを強化しています。また、チェックも YAML 構成ファイルを使用するため、一貫性のある構成エクスペリエンスが提供されます。このため、`datadog.conf` (v5) に代わって `datadog.yaml` (v6) が使用されます。
@@ -15,16 +16,8 @@ Agent v6 の構成ファイルは、**YAML** を使用することで、複雑�
 |:-------------------------------------|:-------------------------------------|
 | AIX                                  | `/etc/datadog-agent/datadog.yaml`    |
 | Linux                                | `/etc/datadog-agent/datadog.yaml`    |
-| CentOS                               | `/etc/datadog-agent/datadog.yaml`    |
-| Debian                               | `/etc/datadog-agent/datadog.yaml`    |
-| Fedora                               | `/etc/datadog-agent/datadog.yaml`    |
 | macOS                                | `~/.datadog-agent/datadog.yaml`      |
-| RedHat                               | `/etc/datadog-agent/datadog.yaml`    |
-| Source                               | `/etc/datadog-agent/datadog.yaml`    |
-| Suse                                 | `/etc/datadog-agent/datadog.yaml`    |
-| Ubuntu                               | `/etc/datadog-agent/datadog.yaml`    |
 | Windows Server 2008/Vista 以降 | `%ProgramData%\Datadog\datadog.yaml` |
-| Windows Server 2003/XP 以前     | サポートされないプラットフォーム               |
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
@@ -32,21 +25,14 @@ Agent v6 の構成ファイルは、**YAML** を使用することで、複雑�
 | プラットフォーム                             | コマンド                                                                    |
 |:-------------------------------------|:---------------------------------------------------------------------------|
 | Linux                                | `/etc/dd-agent/datadog.conf`                                               |
-| CentOS                               | `/etc/dd-agent/datadog.conf`                                               |
-| Debian                               | `/etc/dd-agent/datadog.conf`                                               |
-| Fedora                               | `/etc/dd-agent/datadog.conf`                                               |
-| macOS                                | `~/.datadog-agent/datadog.conf`                                            |
-| RedHat                               | `/etc/dd-agent/datadog.conf`                                               |
-| Source                               | `/etc/dd-agent/datadog.conf`                                               |
-| Suse                                 | `/etc/dd-agent/datadog.conf`                                               |
-| Ubuntu                               | `/etc/dd-agent/datadog.conf`                                               |
+| macOS                                | `~/.datadog-agent/datadog.conf`                                            |                                       |
 | Windows Server 2008/Vista 以降 | `%ProgramData%\Datadog\datadog.conf`                                       |
 | Windows Server 2003/XP 以前     | `\\Documents and Settings\All Users\Application Data\Datadog\datadog.conf` |
 
 {{% /tab %}}
 {{< /tabs >}}
 
-**注**: [`datadog.yaml` ファイルの完全なサンプルは、`datadog-agent` GitHub リポジトリにあります][1]。
+使用可能なすべての構成オプションの詳細については、[サンプル `config_template.yaml` ファイル][2]を参照してください。
 
 ## Agent の構成ディレクトリ
 
@@ -64,7 +50,7 @@ Datadog Agent の以前のリリースでは、構成ファイルは `/dd-agent/
 | Fedora                               | `/etc/datadog-agent/conf.d/`   |
 | macOS                                | `~/.datadog-agent/conf.d/`     |
 | RedHat                               | `/etc/datadog-agent/conf.d/`   |
-| Source                               | `/etc/datadog-agent/conf.d/`   |
+| ソース                               | `/etc/datadog-agent/conf.d/`   |
 | Suse                                 | `/etc/datadog-agent/conf.d/`   |
 | Ubuntu                               | `/etc/datadog-agent/conf.d/`   |
 | Windows Server 2008/Vista 以降 | `%ProgramData%\Datadog\conf.d` |
@@ -116,7 +102,7 @@ Datadog Agent の以前のリリースでは、構成ファイルは `/dd-agent/
 
 ## JMX 構成ファイル
 
-JMX Agent チェックには、独自の構成フォルダーに追加の `metrics.yaml` ファイルがあります。これは、Datadog Agent がデフォルトで収集するすべての Bean のリストです。これにより、[Docker ラベルまたは k8s アノテーション][2]によってチェックを構成する際に、すべての Bean を手動でリストする必要がなくなります。
+JMX Agent チェックには、独自の構成フォルダーに追加の `metrics.yaml` ファイルがあります。これは、Datadog Agent がデフォルトで収集するすべての Bean のリストです。これにより、[Docker ラベルまたは k8s アノテーション][1]によってチェックを構成する際に、すべての Bean を手動でリストする必要がなくなります。
 
-[1]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
-[2]: /ja/agent/kubernetes/integrations/#configuration
+[1]: /ja/agent/kubernetes/integrations/#configuration
+[2]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml

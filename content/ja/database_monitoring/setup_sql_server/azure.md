@@ -54,6 +54,8 @@ CREATE USER datadog FOR LOGIN datadog;
 
 Datadog Agent を構成する場合、特定の Azure SQL DB サーバーにあるアプリケーションデータベースごとに 1 つのチェックインスタンスを指定します。`master` やその他の[システムデータベース][2]は含めないでください。各データベースは分離された計算環境で実行されているため、Datadog Agent は Azure SQL DB の各アプリケーションデータベースに直接接続する必要があります。これは、`database_autodiscovery` が Azure SQL DB では機能しないことも意味するので、有効化してはいけません。
 
+**注:** Azure SQL Database は、分離されたネットワークでデータベースをデプロイし、各データベースは単一のホストとして扱われます。つまり、Azure SQL Database をエラスティックプールで実行した場合、プール内の各データベースは個別のホストとして扱われます。
+
 ```yaml
 init_config:
 instances:
@@ -393,6 +395,9 @@ Cluster Agent は自動的にこのコンフィギュレーションを登録し
 [5]: /ja/agent/guide/secrets-management
 {{% /tab %}}
 {{< /tabs >}}
+
+## Agent の構成例
+{{% dbm-sqlserver-agent-config-examples %}}
 
 ## Azure インテグレーションをインストールする
 

@@ -7,5 +7,5 @@
     A few minutes after you enable your application and exercise it, **threat information appears in the [Application Trace and Signals Explorer][201] in Datadog**.
 
 [201]: https://app.datadoghq.com/security/appsec
-[202]: /security_platform/default_rules/#cat-application-security
-[203]: /security_platform/default_rules/security-scan-detected/
+[202]: /security/default_rules/#cat-application-security
+[203]: /security/default_rules/security-scan-detected/

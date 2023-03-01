@@ -75,6 +75,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: SAP BusinessObjects
+  uninstallation: README.md#Uninstallation
 ---
 
 
