@@ -75,9 +75,67 @@ There are four types of monitoring that the Datadog Agent uses for Cloud Workloa
 
 
 [1]: https://app.datadoghq.com/account/settings#agent/kubernetes
-[2]: https://docs.datadoghq.com/integrations/kubernetes_audit_logs/
+[2]: /integrations/kubernetes_audit_logs/
 {{% /tab %}}
 
+{{% tab "Kubernetes (DaemonSet)" %}}
+1. If you installed the Datadog Agent as a DaemonSet with a manual [manifest][1], then you can add the following lines to activate CWS module:
+
+   ```yaml
+    containers:
+      - image: 'datadog/agent:latest-jmx'
+        ...
+        securityContext:
+          capabilities:
+            add:
+              - SYS_ADMIN
+              - SYS_RESOURCE
+              - SYS_PTRACE
+              - NET_ADMIN
+              - IPC_LOCK
+        env:
+          - name: DD_SYSTEM_PROBE_ENABLED
+            value: "true"
+          - name: DD_RUNTIME_SECURITY_CONFIG_ENABLED
+            value: "true"
+          - name: HOST_ROOT
+            value: "/host/root"
+          - name: HOST_ETC
+            value: "/host/root/etc"
+        volumeMounts:
+          - name: passwd
+            mountPath: /etc/passwd
+            readOnly: true
+          - name: group
+            mountPath: /etc/group
+            readOnly: true
+          - name: root
+            mountPath: /host/root
+            readOnly: true
+          - name: os-release
+            mountPath: /host/etc/os-release
+    ...            
+    volumes:
+      - name: passwd
+        hostPath:
+          path: /etc/passwd
+      - name: group
+        hostPath:
+          path: /etc/group
+      - name: root
+        hostPath:
+          path: /
+      - name: os-release
+        hostPath:
+          path: /etc/os-release            
+   ```
+
+2. Apply the modified file and make sure Datadog Agent pods are restarting correctly.
+3. **Optional, if Cloud SIEM is checked** Follow [these instructions][2] to collect audit logs for Kubernetes.
+
+[1]: /agent/kubernetes/?tab=daemonset
+[2]: /integrations/kubernetes_audit_logs/
+{{% /tab %}}
 {{% tab "Docker" %}}
 
 The following command can be used to start the Runtime Security Agent and `system-probe` in a Docker environment:
