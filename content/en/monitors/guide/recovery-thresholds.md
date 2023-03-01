@@ -2,7 +2,7 @@
 title: Recovery thresholds
 kind: guide
 further_reading:
-- link: "/monitors/create/types/metric/"
+- link: "/monitors/types/metric/"
   tag: "Documentation"
   text: "Metric monitor"
 aliases:

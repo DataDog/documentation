@@ -21,6 +21,7 @@ Widgets are building blocks for your dashboards. They are categorized into three
     {{< nextlink href="/dashboards/widgets/distribution" >}}Distribution{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/event_stream" >}}Event Stream{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/event_timeline" >}}Event Timeline{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/funnel" >}}Funnel{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/geomap" >}}Geomap{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/heat_map" >}}Heat Map{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/hostmap" >}}Hostmap{{< /nextlink >}}
@@ -33,6 +34,7 @@ Widgets are building blocks for your dashboards. They are categorized into three
     {{< nextlink href="/dashboards/widgets/treemap" >}}Treemap{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/timeseries" >}}Timeseries{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/top_list" >}}Top List{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/topology_map" >}}Topology Map{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Summary widgets to display Synthetic Monitoring information: ">}}
@@ -42,7 +44,6 @@ Widgets are building blocks for your dashboards. They are categorized into three
     {{< nextlink href="/dashboards/widgets/monitor_summary" >}}Monitor Summary{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/slo" >}}Service Level Objective (SLO) Summary{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/slo_list" >}}Service Level Objective (SLO) List{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/service_map" >}}Service Map{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/service_summary" >}}Service Summary{{< /nextlink >}}
 {{< /whatsnext >}}
 

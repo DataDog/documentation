@@ -32,7 +32,7 @@ Windows プライベートロケーションベータ版への追加をご希望
 プライベートロケーションから、**内部用アプリケーションの監視や、パブリックインターネットから接続できないプライベートエンドポイントの監視**を行えます。これは以下にも使用できます。
 
 * ビジネスでミッションクリティカルな領域に、**カスタム Synthetic ロケーションを作成します**。
-* [Synthetics および CI/CD][1] を使用して本番環境に新機能をリリースする前に、**内部 CI 環境でアプリケーションパフォーマンスを確認します**。
+* [Continuous Testing および CI/CD][1] を使用して本番環境に新機能をリリースする前に、**内部 CI 環境でアプリケーションパフォーマンスを確認します**。
 * 内部ネットワークの内外両方から**アプリケーションのパフォーマンスを比較します**。
 
 プライベートロケーションは、プライベートネットワーク内のどこにでもインストールできる Docker コンテナとして提供されます。作成してインストールしたら、通常の管理ロケーションと同じように、[Synthetic テスト][2]をプライベートロケーションに割り当てることができます。
@@ -80,6 +80,16 @@ Windows プライベートロケーションベータ版への追加をご希望
 | ポート | エンドポイント                                                                                             | 説明                                                                                                                             |
 | ---- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
 | 443  | `intake.synthetics.us3.datadoghq.com` | [AWS Signature Version 4 プロトコル][1]に基づく社内プロトコルを使用して、テストコンフィギュレーションをプルし、テスト結果を Datadog にプッシュするためにプライベートロケーションで使用されます。 |
+
+[1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+
+{{< /site-region >}}
+
+{{< site-region region="us5" >}}
+
+| ポート | エンドポイント                                                                                             | 説明                                                                                                                             |
+| ---- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| 443  | `intake.synthetics.us5.datadoghq.com` | [AWS Signature Version 4 プロトコル][1]に基づく社内プロトコルを使用して、テストコンフィギュレーションをプルし、テスト結果を Datadog にプッシュするためにプライベートロケーションで使用されます。 |
 
 [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 
@@ -177,7 +187,7 @@ docker run --rm -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetic
 
 [1]: https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities
 
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "Docker Compose" %}}
 
@@ -201,7 +211,7 @@ docker run --rm -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetic
 
 [1]: https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities
 
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "Kubernetes Deployment" %}}
 
@@ -283,7 +293,7 @@ OpenShift の場合、プライベートロケーションを `anyuid` SCC で�
 [2]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
 [3]: https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/#define-container-environment-variables-using-secret-data
 
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "ECS" %}}
 
@@ -321,7 +331,7 @@ OpenShift の場合、プライベートロケーションを `anyuid` SCC で�
 
 [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_LinuxParameters.html
 
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "Fargate" %}}
 
@@ -411,7 +421,7 @@ Datadog は既に Kubernetes および AWS と統合されているため、す�
 
 [1]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
 
-{{% /tab %}}
+{{< /tabs >}}
 
 {{< /tabs >}}
 
@@ -436,7 +446,7 @@ healthcheck:
   start_period: 30s
 ```
 
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "Kubernetes Deployment" %}}
 
@@ -457,7 +467,7 @@ readinessProbe:
     port: 8080
 ```
 
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "Helm Chart" %}}
 
@@ -478,7 +488,7 @@ readinessProbe:
     port: 8080
 ```
 
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "ECS" %}}
 
@@ -494,7 +504,7 @@ readinessProbe:
 }
 ```
 
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "Fargate" %}}
 
@@ -510,7 +520,7 @@ readinessProbe:
 }
 ```
 
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "EKS" %}}
 
@@ -531,7 +541,7 @@ readinessProbe:
     port: 8080
 ```
 
-{{% /tab %}}
+{{< /tabs >}}
 
 {{< /tabs >}}
 
@@ -558,7 +568,7 @@ healthcheck:
   start_period: 30s
 ```
 
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "Kubernetes Deployment" %}}
 
@@ -575,7 +585,7 @@ livenessProbe:
   failureThreshold: 3
 ```
 
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "Helm Chart" %}}
 
@@ -592,7 +602,7 @@ livenessProbe:
   failureThreshold: 3
 ```
 
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "ECS" %}}
 
@@ -608,7 +618,7 @@ livenessProbe:
 }
 ```
 
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "Fargate" %}}
 
@@ -624,7 +634,7 @@ livenessProbe:
 }
 ```
 
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "EKS" %}}
 
@@ -641,7 +651,7 @@ livenessProbe:
   failureThreshold: 3
 ```
 
-{{% /tab %}}
+{{< /tabs >}}
 
 {{< /tabs >}}
 
@@ -677,6 +687,8 @@ API、マルチステップ API、またはブラウザテストを作成し、�
 
 詳しくは、[プライベートロケーションのディメンション][18]を参照してください。
 
+プライベートロケーションを Continuous Testing に使用するには、`concurrency` パラメーターに値を設定し、並列化を制御してください。詳しくは、[Continuous Testing][23] を参照してください。
+
 ## プライベートロケーションを監視する
 
 最初はプライベートロケーションから実行するテストの数と種類に見合ったリソースを追加しますが、プライベートロケーションの規模を縮小すべきか拡大すべきかを知る最も簡単な方法は、厳密にモニターすることです。[プライベートロケーションモニタリング][19]は、すぐに使えるメトリクスやモニターと同様に、プライベートロケーションのパフォーマンスや状態に関する洞察を提供します。
@@ -691,11 +703,11 @@ Datadog Admin ロールおよび Datadog Standard ロール][20]を持つユー�
 
 [カスタムロール機能][21]を使用している場合、ユーザーを `synthetics_private_location_read` と `synthetics_private_location_write` 権限を含むカスタムロールに追加してください。
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/synthetics/cicd_integrations
+[1]: /ja/continuous_testing/cicd_integrations
 [2]: /ja/synthetics/
 [3]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/synthetics-private-location-worker?pli=1
 [4]: https://docs.docker.com/engine/install/
@@ -717,3 +729,4 @@ Datadog Admin ロールおよび Datadog Standard ロール][20]を持つユー�
 [20]: /ja/account_management/rbac/permissions
 [21]: /ja/account_management/rbac#custom-roles
 [22]: https://app.datadoghq.com/synthetics/settings/private-locations
+[23]: /ja/continuous_testing/cicd_integrations/configuration

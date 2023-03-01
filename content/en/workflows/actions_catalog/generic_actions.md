@@ -10,15 +10,15 @@ further_reading:
   text: "Learn about integrations"
 ---
 
-{{< beta-callout url="https://forms.gle/VEjerYVQ2QJhauZ57" >}}
+{{< callout url="https://forms.gle/VEjerYVQ2QJhauZ57" >}}
   Workflows are in public beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.
-{{< /beta-callout >}}
+{{< /callout >}}
 
-Generic actions are workflow actions which are not associated with a Datadog integration or resource. These actions allow you to implement custom logic within your workflow such as branching the workflow based on a condition, making a custom HTTP request, or transforming data and objects with code. As with all workflow actions, you can use the [context variables][5] tab to access any values available in the workflow context.
+Generic actions are workflow actions which are not associated with a Datadog integration or resource. These actions allow you to implement custom logic within your workflow such as branching the workflow based on a condition, making a custom HTTP request, or transforming data and objects with code. As with all workflow actions, you can use the [context variables][1] tab to access any values available in the workflow context.
 
 ## HTTP
 
-Use the HTTP action to make a request to any custom endpoint. You can control the request method and its contents, how it is authenticated and processed, and how it should respond to scenarios like expired certificates or redirects.
+Use the HTTP action to make a request to any custom endpoint. You can control the request method and its contents, how it is authenticated and processed, and how it should respond to scenarios like expired certificates or redirects. If you need to add Datadog IP address ranges to your allowlist so that the HTTP action works as expected, use the IPs listed in the `webhooks` object. See the [IP Ranges page][2] for details. 
 
 Begin by specifying the request method and any necessary [authentication][3]. Read the sections below for further information about the available configuration tabs. Optionally, the request can wait on conditions that you specify in the **Conditional wait** section, and retry itself at a given interval if the condition is not satisfied.
 
@@ -30,7 +30,7 @@ Enter any desired headers, cookies, and a comma-delineated list of any status co
 
 ### Request Body
 
-If the request has a body, use the `Request Body` tab to configure its content and format. Add inputs to the request body from the workflow context with [context variables][5] in the `Request Body` field, or interpolate them into `Name` and `Value` pairs for the `multipart/form-data` body type. The `Body Type` dropdown allows the following options:
+If the request has a body, use the `Request Body` tab to configure its content and format. Add inputs to the request body from the workflow context with [context variables][1] in the `Request Body` field, or interpolate them into `Name` and `Value` pairs for the `multipart/form-data` body type. The `Body Type` dropdown allows the following options:
 
   - `application/json`
   - `text/plain`
@@ -87,8 +87,7 @@ Pause the execution of the workflow for a duration specified in seconds.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/
-[2]: https://app.datadoghq.com/workflow
-[3]: /workflows/setup/
+[1]: /workflows/build/#context-variables
+[2]: https://docs.datadoghq.com/api/latest/ip-ranges/#list-ip-ranges
+[3]: /workflows/access/
 [4]: https://lodash.com/
-[5]: /workflows/build/#context-variables

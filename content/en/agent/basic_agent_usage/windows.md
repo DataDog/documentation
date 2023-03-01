@@ -15,6 +15,12 @@ further_reading:
 - link: "/tracing/"
   tag: "Documentation"
   text: "Collect your traces"
+- link: "/agent/basic_agent_usage/#agent-architecture"
+  tag: "Documentation"
+  text: "Find out more about the Agent's architecture"
+- link: "/agent/guide/network#configure-ports"
+  tag: "Documentation"
+  text: "Configure inbound ports"
 ---
 
 ## Setup
@@ -34,13 +40,17 @@ If installing the Datadog Agent on a domain environment, see the [installation r
 {{< tabs >}}
 {{% tab "GUI" %}}
 
-1. Download the [Datadog Agent installer][1].
+1. Download the [Datadog Agent installer][1] to install the latest version of the Agent.
+
+   <div class="alert alert-info">If you need to install a specific version of the Agent, see the <a href="https://s3.amazonaws.com/ddagent-windows-stable/installers.json">installer list</a>.</div>
+
 2. Run the installer (as **Administrator**) by opening `datadog-agent-7-latest.amd64.msi`.
 3. Follow the prompts, accept the license agreement, and enter your [Datadog API key][2].
 4. When the install finishes, you are given the option to launch the Datadog Agent Manager.
 
 [1]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi
 [2]: https://app.datadoghq.com/organization-settings/api-keys
+
 {{% /tab %}}
 {{% tab "Command line" %}}
 
@@ -140,10 +150,7 @@ The execution of the Agent is controlled by the Windows Service Control Manager.
 | help            | Gets help about any command.                                                     |
 | hostname        | Prints the hostname used by the Agent.                                           |
 | import          | Imports and converts configuration files from previous versions of the Agent.    |
-| installservice  | Installs the Agent within the service control manager.                           |
 | launch-gui      | Starts the Datadog Agent Manager.                                                |
-| regimport       | Import the registry settings into `datadog.yaml`.                                |
-| remove-service  | Removes the Agent from the service control manager.                              |
 | restart-service | Restarts the Agent within the service control manager.                           |
 | run             | Starts the Agent.                                                                |
 | start           | Starts the Agent. (Being deprecated, but accepted. Use `run` as an alternative.) |

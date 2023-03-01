@@ -102,6 +102,7 @@ spec:
 | cronjob               | kube_cronjob                |
 | daemonset             | kube_daemon_set             |
 | deployment            | kube_deployment             |
+| hpa                   | horizontalpodautoscaler     |
 | image                 | image_name                  |
 | job                   | kube_job                    |
 | job_name              | kube_job                    |
@@ -548,7 +549,7 @@ Cluster Agent コンテナ内で [Cluster Agent の `status` サブコマンド�
 
 ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

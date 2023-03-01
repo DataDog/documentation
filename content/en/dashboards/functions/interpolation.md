@@ -36,7 +36,7 @@ The `default_zero()` function fills empty time intervals using the value 0 or, i
 The `default_zero()` function is intended to address the following use cases (though it may also work for other use cases):
 
 - Aligning gauges as 0 when performing arithmetic on sparse metrics (note: `COUNT` or `RATE` type metrics queried `as_count()` or `as_rate()` are _always_ aligned as 0, so using `default_zero()` does not change how they are aligned; it only affects `GAUGE` type metrics).
-- Resolving monitors from a no-data condition. This works for both simple and multi-alerts, but the value 0 must not cause the monitor to trigger. For example, this would not work for a monitor with the query `avg(last_10m):avg:system.cpu.idle{*} < 10` because this monitor triggers (instead of resolving) when it evaluates to 0. Avoid using this function for error rate monitors with `as_count()` queries. See the [as_count() in Monitor Evaluations guide][3] for more details.
+- Resolving monitors from a no-data condition. This works for both simple and multi alerts, but the value 0 must not cause the monitor to trigger. For example, this would not work for a monitor with the query `avg(last_10m):avg:system.cpu.idle{*} < 10` because this monitor triggers (instead of resolving) when it evaluates to 0. Avoid using this function for error rate monitors with `as_count()` queries. See the [as_count() in Monitor Evaluations guide][3] for more details.
 - Filling in empty intervals in sparse (but nonempty) series for visual reasons or to affect the min/max/average of a timeseries in a monitor evaluation. If the evaluation window doesn't contain any points of data, `default_zero()` has no effect.
 - Showing the value 0 on the timeseries widget when there is no data.
 
@@ -101,7 +101,7 @@ default_zero(avg:custom_metric{*})
     {{< nextlink href="/dashboards/functions/timeshift" >}}Timeshift: Shift your metric data point along the timeline. {{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: /dashboards/faq/interpolation-the-fill-modifier-explained/
+[1]: /metrics/guide/interpolation-the-fill-modifier-explained/
 [2]: /getting_started/from_the_query_to_the_graph/#proceed-to-space-aggregation
 [3]: /monitors/guide/as-count-in-monitor-evaluations/
 [4]: /metrics/

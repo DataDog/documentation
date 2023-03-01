@@ -18,7 +18,7 @@ title: Browser RUM および Browser RUM & セッションリプレイのサン�
 
 ## セットアップ
 
-`sessionReplaySampleRate` パラメーターには、`sampleRate` に対するパーセンテージを指定します。
+`sessionReplaySampleRate` パラメーターには、`sessionSampleRate` に対するパーセンテージを指定します。
 
 この機能を使用するには、Datadog ブラウザ SDK v3.0.0+ が必要です。
 
@@ -33,13 +33,26 @@ Datadog ブラウザ SDK v4.20.0 では、<code>sessionReplaySampleRate</code> �
 
 セッションの追跡方法を制御するために、2 つの初期化パラメーターが利用可能です。
 
-- `sampleRate` は、追跡されるセッション全体の割合を制御します。デフォルトは `100%` で、すべてのセッションが追跡されます。
+- `sessionSampleRate` は、追跡されるセッション全体の割合を制御します。デフォルトは `100%` で、すべてのセッションが追跡されます。
 - `sessionReplaySampleRate` は、全体のサンプルレートの**後に**適用され、Browser RUM & セッションリプレイとして追跡されるセッションの割合を制御します。デフォルトは `100%` で、すべてのセッションがデフォルトで Browser RUM & セッションリプレイとして追跡されます。
 
 セッションの 100% を Browser RUM として追跡する場合
 
 <details open>
   <summary>最新バージョン</summary>
+
+```
+datadogRum.init({
+    ....
+    sessionSampleRate: 100,
+    sessionReplaySampleRate: 0
+});
+```
+
+</details>
+
+<details>
+  <summary><code>v4.30.0</code> より前</summary>
 
 ```
 datadogRum.init({
@@ -85,6 +98,19 @@ datadogRum.init({
 ```
 datadogRum.init({
     ....
+    sessionSampleRate: 100,
+    sessionReplaySampleRate: 100
+});
+```
+
+</details>
+
+<details>
+  <summary><code>v4.30.0</code> より前</summary>
+
+```
+datadogRum.init({
+    ....
     sampleRate: 100,
     sessionReplaySampleRate: 100
 });
@@ -123,10 +149,23 @@ datadogRum.init({
 
 {{< img src="real_user_monitoring/browser/example-initialization-snippet.mp4" alt="カスタムパーセンテージを使用したブラウザアプリケーションの初期化スニペット例" video="true" width="100%" >}}
 
-`sampleRate` を 60、`sessionReplaySampleRate` を 50 に設定すると、40% のセッションがドロップされ、30% のセッションが Browser RUM として、30% のセッションが Browser RUM & セッションリプレイとして収集されるようになります。
+`sessionSampleRate` を 60、`sessionReplaySampleRate` を 50 に設定すると、40% のセッションがドロップされ、30% のセッションが Browser RUM として、30% のセッションが Browser RUM & セッションリプレイとして収集されるようになります。
 
 <details open>
   <summary>最新バージョン</summary>
+
+```
+datadogRum.init({
+    ....
+    sessionSampleRate: 60,
+    sessionReplaySampleRate: 50
+});
+```
+
+</details>
+
+<details>
+  <summary><code>v4.30.0</code> より前</summary>
 
 ```
 datadogRum.init({

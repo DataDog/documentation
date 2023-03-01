@@ -32,6 +32,8 @@ A single OTLP metric may be mapped to several Datadog metrics with a suffix indi
 
 **Note**: OpenTelemetry provides metric API instruments (`Gauge`, `Counter`, `UpDownCounter`, `Histogram`, and so on), whose measurements can be exported as OTLP metrics (Sum, Gauge, Histogram). Other sources for OTLP metrics are possible. Applications and libraries may provide customization into the OTLP metrics they produce. Read the documentation of your OpenTelemetry SDK or OTLP-producing application to understand the OTLP metrics produced and how to customize them.
 
+**Note**: OpenTelemetry protocol supports two ways of representing metrics in time: [Cumulative and Delta temporality][2], affecting the metrics described below. Set the temporality preference of the OTel implementation to **DELTA**, because setting it to CUMULATIVE may discard some data points during application (or collector) startup.  
+
 ## Metric types
 
 ### Mapping
@@ -214,3 +216,4 @@ Suppose you are submitting a legacy OTLP Summary metric, `request.response_time.
 
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor#resource-detection-processor
+[2]: https://opentelemetry.io/docs/reference/specification/metrics/data-model/#temporality

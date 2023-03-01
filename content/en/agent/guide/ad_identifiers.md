@@ -20,7 +20,7 @@ Autodiscovery container identifiers, or `ad_identifiers`, allow you to apply an 
 
 To apply the following Autodiscovery configuration template to a given container, use the **container short image** name as the `<INTEGRATION_AUTODISCOVERY_IDENTIFIER>`:
 
-```text
+```yaml
 ad_identifiers:
   <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
 
@@ -68,7 +68,7 @@ ad_identifiers:
 
 To apply different Autodiscovery configuration templates to containers running the same image, use a custom value `<INTEGRATION_AUTODISCOVERY_IDENTIFIER>` and apply it with the `com.datadoghq.ad.check.id` label to identify your container. Using the following configuration file:
 
-```text
+```yaml
 ad_identifiers:
   <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
 
@@ -85,7 +85,7 @@ To enable it for a container:
 {{% tab "Docker" %}}
 Add the following label to apply this Autodiscovery configuration template to a specific container for docker.
 
-```text
+```yaml
 com.datadoghq.ad.check.id: <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
 ```
 **Note**: The `com.datadoghq.ad.check.id` label takes precedence over the image/name.
@@ -101,8 +101,6 @@ ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check.id: <INTEGRATION_AUTODISCOVERY_IDE
 **Note**: This annotations is only application from version `6.25.0` and `7.25.0` onwards. The `ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check.id` label takes precedence over the image/name.
 {{% /tab %}}
 {{< /tabs >}}
-
-
 
 ## Further Reading
 

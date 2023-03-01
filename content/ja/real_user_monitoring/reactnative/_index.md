@@ -44,8 +44,9 @@ yarn add @datadog/mobile-react-native
 1. [Datadog アプリ][1]で、**UX Monitoring** > **RUM Applications** > **New Application** へ移動します。
 2. アプリケーションタイプとして `react-native` を選択します。
 3. アプリケーション名を入力して一意の Datadog アプリケーション ID とクライアントトークンを生成します。
+4. クライアント IP またはジオロケーションデータの自動ユーザーデータ収集を無効にするには、これらの設定のチェックボックスをオフにします。
 
-{{< img src="real_user_monitoring/react_native/image_reactnative.png" alt="Datadog ワークフローで RUM アプリケーションを作成" style="width:90%;">}}
+   {{< img src="real_user_monitoring/react_native/reactnative_setup.png" alt="Datadog で React Native の RUM アプリケーションを作成する" style="width:90%;">}}
 
 データの安全性を確保するため、クライアントトークンを使用する必要があります。`@datadog/mobile-react-native` ライブラリの構成に [Datadog API キー][3]のみを使用した場合、クライアント側で React Native アプリケーションのコード内で公開されます。
 
@@ -384,7 +385,7 @@ end
 
 詳細については、[Apache ライセンス、v2.0][9]を参照
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

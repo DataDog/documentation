@@ -63,7 +63,7 @@ def make_sandwich_request(request):
 API details for the decorator can be found for `ddtrace.Tracer.wrap()` [here][1].
 
 
-[1]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.Tracer.wrap
+[1]: https://ddtrace.readthedocs.io/en/stable/api.html#ddtrace.Tracer.wrap
 {{% /tab %}}
 {{% tab "Context Manager" %}}
 
@@ -211,14 +211,44 @@ span.finish()
 {{% /tab %}}
 {{< /tabs >}}
 
+## Trace context propagation for distributed tracing
+
+The Datadog APM tracer supports extraction and injection of [B3][2] and [W3C][3] headers for distributed tracing.
+
+Distributed headers injection and extraction is controlled by
+configuring injection and extraction styles. Supported styles are:
+`tracecontext`, `Datadog`, `B3` and `B3 single header`.
+
+- Configure injection styles using the `DD_PROPAGATION_STYLE_INJECT=tracecontext,B3` environment variable.
+- Configure extraction styles using the `DD_PROPAGATION_STYLE_EXTRACT=tracecontext,B3` environment variable.
+- Configure both injection and extraction styles using the `DD_TRACE_PROPAGATION_STYLE=tracecontext,B3` environment variable.
+
+The values of these environment variables are comma-separated lists of
+header styles enabled for injection or extraction. By default,
+the `tracecontext,Datadog` styles are enabled.
+
+To disable trace context propagation, set the value of the environment variables to `none`.
+- Disable injection styles using the `DD_PROPAGATION_STYLE_INJECT=none` environment variable.
+- Disable extraction styles using the `DD_PROPAGATION_STYLE_EXTRACT=none` environment variable.
+- Disable all trace context propagation (both inject and extract) using the `DD_PROPAGATION_STYLE=none` environment variable.
+
+If multiple environment variables are set, `DD_PROPAGATION_STYLE_INJECT` and `DD_PROPAGATION_STYLE_EXTRACT`
+override any value provided in `DD_TRACE_PROPAGATION_STYLE`.
+
+If multiple extraction styles are enabled, extraction attempts are made
+in the order that those styles are specified. The first successfully
+extracted value is used.
+
 ## Resource filtering
 
-Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][2] page or in [Ignoring Unwanted Resources][3].
+Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog. This and other security and fine-tuning configurations can be found on the [Security][4] page or in [Ignoring Unwanted Resources][5].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/compatibility_requirements/python
-[2]: /tracing/security
-[3]: /tracing/guide/ignoring_apm_resources/
+[2]: https://github.com/openzipkin/b3-propagation
+[3]: https://github.com/w3c/trace-context
+[4]: /tracing/security
+[5]: /tracing/guide/ignoring_apm_resources/

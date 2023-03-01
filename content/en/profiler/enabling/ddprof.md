@@ -1,5 +1,5 @@
 ---
-title: Enabling the Profiler for Compiled Languages
+title: Enabling the Native Profiler for Compiled Languages
 kind: Documentation
 code_lang: ddprof
 type: multi-code-lang
@@ -17,15 +17,16 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-The profiler for compiled languages, <code>ddprof</code> is in public beta. Datadog recommends evaluating the profiler in a non-sensitive environment before deploying in production.
+<code>ddprof</code> is in beta. Datadog recommends evaluating the profiler in a non-sensitive environment before deploying in production.
 </div>
 
-The Datadog Continuous Profiler for compiled languages (`ddprof`) uses OS level APIs to collect profiling data. It is ideally suited for applications written in compiled languages, such as C, C++, or Rust.
+The native profiler for compiled languages (`ddprof`) uses OS level APIs to collect profiling data. It is ideally suited for applications written in compiled languages, such as C, C++, or Rust.
+Profiles sent from `ddprof` show up under the _native_ runtime in the Datadog web app.
 
 ## Requirements
 
 Supported operating systems
-: Linux kernel v4.17+, glibc 2.18+ or musl libc
+: Linux (glibc or musl)
 
 Supported architecture
 : `amd64` or `arm64` processors
@@ -45,11 +46,11 @@ The profiler can be used either as a standalone executable or as a library. Skip
 
 ### Standalone
 
-1. Download the latest [`ddprof` release][2] for your Linux distribution. For example, here is one way to pull the `v0.9.3` release for an `amd64` (also known as `x86_64`) platform:
+1. Download the latest [`ddprof` release][2]. For example, here is one way to pull the `v0.10.1` release for an `amd64` (also known as `x86_64`) platform:
 
    ```bash
-   curl -L -o ddprof-x86_64-linux-gnu.tar.xz https://github.com/DataDog/ddprof/releases/download/v0.9.3/ddprof-0.9.3-amd64-unknown-linux-gnu.tar.xz
-   tar xvf ddprof-x86_64-linux-gnu.tar.xz
+   curl -L -o ddprof-amd64-linux.tar.xz https://github.com/DataDog/ddprof/releases/download/v0.10.1/ddprof-0.10.1-amd64-linux.tar.xz
+   tar xvf ddprof-amd64-linux.tar.xz
    mv ddprof/bin/ddprof INSTALLATION_TARGET
    ```
 
@@ -112,8 +113,8 @@ The library exposes a C API.
 1. Download a release of [ddprof][2] with library support (v0.8.0 or later) and extract the tarball. For example:
 
    ```bash
-   curl -L -o ddprof-x86_64-linux-gnu.tar.xz https://github.com/DataDog/ddprof/releases/download/v0.9.3/ddprof-0.9.3-amd64-unknown-linux-gnu.tar.xz
-   tar xvf ddprof-x86_64-linux-gnu.tar.xz --directory /tmp
+   curl -L -o ddprof-amd64-linux.tar.xz https://github.com/DataDog/ddprof/releases/download/v0.10.1/ddprof-0.10.1-amd64-linux.tar.xz
+   tar xvf ddprof-amd64-linux.tar.xz --directory /tmp
    ```
 
 2. In your code, start the profiler using the `ddprof_start_profiling()` interface, defined in the `_dd_profiling.h_` header provided by the release. The profiler stops automatically when your program closes. To stop the profiler manually, use `ddprof_stop_profiling(ms)` with the `ms` parameter indicating the maximum block time of the function in milliseconds. Here is a standalone example (`profiler_demo.c`) in C:
@@ -250,5 +251,5 @@ The [Getting Started with Profiler][6] guide takes a sample service with a perfo
 [2]: https://github.com/DataDog/ddprof/releases
 [3]: https://app.datadoghq.com/profiling
 [4]: /getting_started/tagging/unified_service_tagging
-[5]: https://github.com/DataDog/ddprof/blob/v0.9.3/docs/Commands.md
+[5]: https://github.com/DataDog/ddprof/blob/v0.10.1/docs/Commands.md
 [6]: /getting_started/profiler/

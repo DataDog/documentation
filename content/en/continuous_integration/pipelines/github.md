@@ -23,11 +23,14 @@ further_reading:
 {{< /site-region >}}
 
 ## Compatibility
+- **Supported GitHub versions**:
+  - GitHub.com (SaaS)
+  - GitHub Enterprise Server (GHES) 3.5.0 or newer
+- **Partial pipelines**: View partially retried and downstream pipeline executions
 
-Supported GitHub versions:
-* GitHub.com (SaaS)
-* GitHub Enterprise Server (GHES) 3.5.0 or above
+- **Logs correlation**: Correlate pipeline spans to logs and [enable job log collection][10]
 
+- **Custom tags and metrics at runtime**: Configure custom tags and metrics at runtime for pipeline spans
 
 ## Configuring the Datadog integration
 
@@ -36,7 +39,7 @@ Supported GitHub versions:
 The [GitHub Actions][1] integration uses a private [GitHub App][2] to collect workflow information. If you already have an app, you can
 skip to the next section.
 
-1. Go to the [GitHub Apps Integration tile][3].
+1. Go to the [GitHub integration tile][3].
 2. Click **Link GitHub Account**.
 3. Follow the instructions to configure the integration for a personal or organization account.
 4. In **Edit Permissions**, grant `Actions: Read` access.
@@ -98,10 +101,11 @@ workflow job and workflow run events. To remove the events:
 
 [1]: https://docs.github.com/actions
 [2]: https://docs.github.com/developers/apps/getting-started-with-apps/about-apps
-[3]: https://app.datadoghq.com/account/settings#integrations/github-apps
+[3]: https://app.datadoghq.com/integrations/github/
 [4]: https://app.datadoghq.com/ci/setup/pipeline?provider=github
 [5]: https://docs.datadoghq.com/logs/
 [6]: https://app.datadoghq.com/ci/settings
 [7]: https://app.datadoghq.com/ci/pipelines
 [8]: https://app.datadoghq.com/ci/pipeline-executions
 [9]: https://github.com/settings/apps
+[10]: https://docs.datadoghq.com/continuous_integration/pipelines/github/#enable-log-collection

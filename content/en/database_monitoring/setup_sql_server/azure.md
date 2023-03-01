@@ -56,6 +56,8 @@ CREATE USER datadog FOR LOGIN datadog;
 
 When configuring the Datadog Agent, specify one check instance for each application database located on a given Azure SQL DB server. Do not include `master` and other [system databases][2]. The Datadog Agent must connect directly to each application database in Azure SQL DB because each database is running in an isolated compute environment. This also means that `database_autodiscovery` does not work for Azure SQL DB, so it should not be enabled.
 
+**Note:** Azure SQL Database deploys a database in an isolated network; each database is treated as a single host. This means that if you run Azure SQL Database in an elastic pool, each database in the pool is treated as a separate host.
+
 ```yaml
 init_config:
 instances:
@@ -134,7 +136,7 @@ instances:
     password: '<PASSWORD>'
     connector: adodbapi
     adoprovider: MSOLEDBSQL
-    tags:  # optional
+    tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
     # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
@@ -207,10 +209,9 @@ instances:
     password: '<PASSWORD>'
     connector: odbc
     driver: '<Driver from the `odbcinst.ini` file>'
-    tags:  # optional
+    tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
-
     # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
@@ -268,7 +269,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
       "name": "<YOUR_INSTANCE_NAME>"
     }
   }]' \
-  datadoghq/agent:${DD_AGENT_VERSION}
+  gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
 ```
 
 See the [SQL Server integration spec][3] for additional information on setting `deployment_type` and `name` fields.
@@ -312,6 +313,10 @@ instances:
     password: '<PASSWORD>'
     connector: 'odbc'
     driver: 'FreeTDS'
+    include_ao_metrics: true  # Optional: For AlwaysOn users
+    tags:  # Optional
+      - 'service:<CUSTOM_SERVICE>'
+      - 'env:<CUSTOM_ENV>'
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
       name: '<YOUR_INSTANCE_NAME>' \
@@ -332,6 +337,9 @@ instances:
     password: '<PASSWORD>'
     connector: "odbc"
     driver: "FreeTDS"
+    tags:  # Optional
+      - 'service:<CUSTOM_SERVICE>'
+      - 'env:<CUSTOM_ENV>'
     # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
@@ -360,6 +368,7 @@ metadata:
           "password": "<PASSWORD>",
           "connector": "odbc",
           "driver": "FreeTDS",
+          "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"],  # Optional
           "azure": {
             "deployment_type": "<DEPLOYMENT_TYPE>",
             "name": "<YOUR_INSTANCE_NAME>"
@@ -388,6 +397,9 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 [5]: /agent/guide/secrets-management
 {{% /tab %}}
 {{< /tabs >}}
+
+## Example Agent Configurations
+{{% dbm-sqlserver-agent-config-examples %}}
 
 ## Install the Azure integration
 

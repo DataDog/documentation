@@ -27,7 +27,7 @@ further_reading:
 
 ## Overview
 
-On the [Synthetic Monitoring Settings page][1], you can access and control the following topics:
+On the [Synthetic Monitoring & Continuous Testing Settings page][1], you can access and control the following topics:
 
 * [Private Locations](#private-locations)
 * [Global Variables](#global-variables)
@@ -109,7 +109,7 @@ To generate and use a TOTP in your tests, create a global variable where you ent
 
 {{< img src="synthetics/guide/browser-tests-totp/new-variable-totp.png" alt="Create a MFA token" style="width:100%;" >}}
 
-**Note**: For more information about TOTP-based MFA in a browser test, see the [TOTP guide][1].
+For more information about TOTP-based MFA in a browser test, see [TOTPs For Multi-Factor Authentication (MFA) In Browser Tests][1].
 
 [1]: /synthetics/guide/browser-tests-totp
 {{% /tab %}}
@@ -118,7 +118,7 @@ To generate and use a TOTP in your tests, create a global variable where you ent
 
 Once created, global variables can be used in all Synthetic tests. To import your global variables into your test, click **+ Variables**, type `{{` in a field you want to add the variable, and select your global variable. 
 
-For more information, see the [HTTP test][7], [Multistep API test][8], [Browser test configuration][9], and [Steps documentation][10].
+For more information, see the [HTTP test][8], [Multistep API test][9], [Browser test configuration][10], and [Steps documentation][16].
 
 ### Permissions
 
@@ -133,20 +133,6 @@ You can restrict access to a global variable based on the roles in your organiza
 {{< img src="synthetics/settings/restrict_access.png" alt="Restrict access to a global variable" style="width:100%;" >}}
 
 ## Default settings
-
-{{< img src="synthetics/settings/default_settings.png" alt="Default Settings page" style="width:100%;">}}
-
-### Enforced tags
-
-<div class="alert alert-warning">
-Tag enforcement is an advanced feature included in the Enterprise plan. For all other plans, contact your account representative or <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> to request this feature.
-</div>
-
-Allow selected tags on your Synthetics tests to be enforced by clicking **Enforce tags for usage attributions on all tests**. 
-
-You can break down cost and usage attributes by services, applications, or teams. Usage attribution tags can take up to fifteen minutes to propagate. For more information, see [Usage Attribution][13].
-
-When you are done enforcing tags, click **Save Enforced Tags**.
 
 ### Default locations
 
@@ -164,6 +150,12 @@ Your options for browsers include Google Chrome, Firefox, and Microsoft Edge. Yo
 
 When you are done selecting browsers and devices, click **Save Default Browsers & Devices**.
 
+### Default tags
+
+Choose or add the default tags for your [API test][4], [multistep API test][5], or [browser test][6] details.
+
+When you are done selecting related tags, click **Save Default Tags**.
+
 ### Permissions
 
 By default, only users with the [Datadog Admin and Datadog Standard roles][11] can access the Synthetic Monitoring **Default Settings** page. To get access to the **Default Settings** page, upgrade your user to one of those two [default roles][11]. 
@@ -180,9 +172,9 @@ Allow URLs to add APM integration headers to those URLs. Datadog's APM integrati
 
 Define which endpoints you want to send the APM headers to by entering a URL in the **Value** field. If the endpoint is being traced and is allowed, your browser test results are automatically tied to its corresponding trace.
 
-Use `*` to allow wider domain names. For example, adding `https://*.datadoghq.com/*` allows everything on `https://datadoghq.com/`.
+Use `*` to allow wider domain names. For example, adding `https://*.datadoghq.com/*` allows everything on `https://datadoghq.com/`. When you are done adding URLs, click **Save APM Integration Settings**. 
 
-When you are done adding URLs, click **Save APM Integration Settings**.
+For more information, see [Connect Synthetics and APM Traces][15].
 
 ### Synthetic data collection and RUM applications
 
@@ -216,3 +208,5 @@ If you are using the [custom role feature][12], add your user to any custom role
 [12]: /account_management/rbac/?tab=datadogapplication#custom-role
 [13]: /account_management/billing/usage_attribution
 [14]: /synthetics/guide/explore-rum-through-synthetics/
+[15]: /synthetics/apm/#prerequisites
+[16]: /synthetics/browser_tests/actions/#use-variables

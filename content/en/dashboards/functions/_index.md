@@ -19,22 +19,25 @@ aliases:
   - /getting_started/from_the_query_to_the_graph
   - /graphing/miscellaneous/from_the_query_to_the_graph
   - /graphing/functions/
+further_reading:
+- link: "/metrics/#querying-metrics"
+  tag: "Documentation"
+  text: "Querying metrics"
 ---
 
 ## Overview
 
-Functions can be applied to your queries by clicking `+` icon in the graphing editor. Most of the functions are applied as the last step (after [time][1] and [space aggregation][2]).
+Functions can modify how the results of a metric query are returned for visualizations. Most functions are applied after the results of the metric query are returned, but functions can also change the parameters before the query is made. 
 
-{{< img src="dashboards/functions/addingfunctions.png" alt="Add function" style="width:75%;" >}}
+For example, the Rollup function changes the time aggregation of a query before the results are returned. Alternatively, arithmetic functions apply changes to the returned results of the metric query. See the [Metrics][3] page to learn more about querying metrics. To learn more about the different functions, see the [function types](#function-types).
 
-Here is an example of how to apply an Exclusion function to exclude certain values of your metric.
+## Add a function
 
-{{< img src="dashboards/functions/exclusion_example.png" alt="Exclusion example with top list" style="width:75%;" >}}
+Functions can be applied to your queries by clicking the Add Function `Σ` icon in the graphing editor. Most of the functions are applied after [time][1] and [space aggregation][2].
 
-Here is an example of how to apply a timeshift function on your error logs to compare current data with data from one week before.
+{{< img src="dashboards/functions/sigmaaddingfunctions.png" alt="Capital Sigma symbol for Add Function" style="width:100%;" >}}
 
-{{< img src="dashboards/functions/timeshift_example.png" alt="Timeshift example with Logs" style="width:75%;" >}}
-
+## Function types
 
 {{< whatsnext desc="Choose a type of function:" >}}
     {{< nextlink href="/dashboards/functions/algorithms" >}}Algorithmic: Implement anomaly or outlier detection.{{< /nextlink >}}
@@ -51,6 +54,10 @@ Here is an example of how to apply a timeshift function on your error logs to co
     {{< nextlink href="/dashboards/functions/beta" >}}Beta: Compute the rolling average of a metric.{{< /nextlink >}}
 {{< /whatsnext >}}
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /metrics/#time-aggregation
 [2]: /metrics/#space-aggregation
+[3]: /metrics/#anatomy-of-a-metric-query

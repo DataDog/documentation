@@ -15,6 +15,9 @@ further_reading:
 - link: "/agent/guide/agent-configuration-files/"
   tag: "FAQ"
   text: "Location of all Agent configuration files"
+- link: "https://www.datadoghq.com/blog/engineering/performance-improvements-in-the-datadog-agent-metrics-pipeline/"
+  tag: "Blog"
+  text: "Performance Improvements in the Datadog Agent Metrics Pipeline"
 ---
 
 {{< partial name="platforms/platforms.html" links="platforms" >}}
@@ -38,9 +41,9 @@ On Windows the services are listed as:
 
 | Service               | Description             |
 |-----------------------|-------------------------|
-| DatadogAgent          | “Datadog Agent”         |
-| datadog-trace-agent   | “Datadog Trace Agent”   |
-| datadog-process-agent | "Datadog Process Agent” |
+| DatadogAgent          | "Datadog Agent"         |
+| datadog-trace-agent   | "Datadog Trace Agent"   |
+| datadog-process-agent | "Datadog Process Agent" |
 
 By default the Agent binds 3 [ports][3] on Linux and 4 on Windows and OSX:
 
@@ -51,9 +54,11 @@ By default the Agent binds 3 [ports][3] on Linux and 4 on Windows and OSX:
 | 5002 | Serves the GUI server on Windows and OSX.                                                   |
 | 8125 | Used for the DogStatsD server to receive external metrics.                                  |
 
+For information on configuring the ports, see [Network Traffic][4].
+
 ### Collector
 
-The collector gathers all standard metrics every 15 seconds. Agent v6 embeds a Python 2.7 interpreter to run integrations and [custom checks][4].
+The collector gathers all standard metrics every 15 seconds. Agent v6 embeds a Python 2.7 interpreter to run integrations and [custom checks][5].
 
 ### Forwarder
 
@@ -61,14 +66,15 @@ The Agent forwarder send metrics over HTTPS to Datadog. Buffering prevents netwo
 
 ### DogStatsD
 
-In v6, DogStatsD is a Golang implementation of [Etsy's StatsD][5] metric aggregation daemon. It is used to receive and roll up arbitrary metrics over UDP or Unix socket, thus allowing custom code to be instrumented without adding latency. Learn more about [DogStatsD][6].
+In v6, DogStatsD is a Golang implementation of [Etsy's StatsD][6] metric aggregation daemon. It is used to receive and roll up arbitrary metrics over UDP or Unix socket, thus allowing custom code to be instrumented without adding latency. Learn more about [DogStatsD][7].
 
 [1]: /metrics/custom_metrics/dogstatsd_metrics_submission/#metrics
 [2]: /tracing/guide/terminology/
 [3]: /agent/guide/network/#open-ports
-[4]: /developers/custom_checks/write_agent_check/
-[5]: https://github.com/etsy/statsd
-[6]: /metrics/custom_metrics/dogstatsd_metrics_submission/
+[4]: /agent/guide/network#configure-ports
+[5]: /developers/custom_checks/write_agent_check/
+[6]: https://github.com/etsy/statsd
+[7]: /metrics/custom_metrics/dogstatsd_metrics_submission/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -149,7 +155,7 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 | [macOS][9]                               | macOS 10.12+ in Agent < 6.35.0/7.35.0, macOS 10.13+ in Agent < 7.39.0, macOS 10.14+ in Agent 7.39.0+ |
 | [Windows Server][10]                     | Windows Server 2008 R2+ (including Server Core)           |
 | [Windows][10]                            | Windows 7+                                                |
-| [Windows Azure Stack HCI OS][10]         | All Versions                                              |
+| [Azure Stack HCI OS][10]                 | All Versions                                              |
 
 | Platform (64-bit Arm v8)                 | Supported versions                                        |
 |------------------------------------------|-----------------------------------------------------------|
@@ -163,7 +169,7 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 | [macOS][9]                               | macOS 11.0+                                               |
 
 
-**Notes**: 
+**Notes**:
 - [Source][11] install may work on operating systems not listed here and is supported on a best effort basis.
 - Datadog Agent v6+ supports Windows Server 2008 R2 with the most recent Windows updates installed. There is also a [known issue with clock drift and Go][12] that affects Windows Server 2008 R2.
 
@@ -240,10 +246,7 @@ With Agent v6+, the command line interface is based on subcommands. To run a sub
 | `help`            | Help about any command.                                                     |
 | `hostname`        | Print the hostname used by the Agent.                                       |
 | `import`          | Import and convert configuration files from previous versions of the Agent. |
-| `installservice`  | Install the Agent within the service control manager.                       |
 | `launch-gui`      | Start the Datadog Agent GUI.                                                |
-| `regimport`       | Import the registry settings into `datadog.yaml`.                           |
-| `remove-service`  | Remove the Agent from the service control manager.                          |
 | `restart`         | [Restart the Agent][2].                                                     |
 | `restart-service` | Restart the Agent within the service control manager.                       |
 | `start`           | [Start the Agent][3].                                                       |

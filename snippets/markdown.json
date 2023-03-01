@@ -1,5 +1,21 @@
 {
-	"Region selector":{
+	"Expander":{
+    "prefix": ";;expander",
+    "body": [
+      "<details>",
+      "<summary>Add summary here</summary>",
+      "Full description goes here",
+      "</details>",
+      "",
+      "<details open>",
+      "<summary>Add another summary here</summary>",
+      "Full description goes here",
+      "</details>"
+    ],
+    "description": "Expanding model"
+  },
+
+  "Region selector":{
 		"prefix": ";;region",
 		"body": [
 			"{{< site-region region=\"us,us3,us5,eu,gov\" >}}",
@@ -7,7 +23,7 @@
 		],
 		"description": "Site region shortcode"
 	},
-	
+
 	"Frontmatter":{
 		"prefix": ";;frontmatter",
 		"body": [
@@ -25,7 +41,7 @@
 		],
 		"description": "Frontmatter"
 	},
-	
+
 	"Further reading footer": {
 		"prefix": ";;further",
 		"body": [
@@ -34,7 +50,7 @@
 			"{{< partial name=\"whats-next/whats-next.html\" >}}"
 		]
 	},
-	
+
 	"Further reading footer - integrations": {
 	"prefix": ";;further",
 	"body": [
@@ -44,7 +60,7 @@
 		"- [First link][1]"
 	]
 	},
-	
+
 	"Alert box":{
 		"prefix": ";;alert",
 		"body": [
@@ -52,17 +68,17 @@
 		],
 		"description": "Alert box with choice of info, danger, or warning"
 	},
-	
-	"Beta callout":{
-		"prefix": ";;beta",
+
+	"Callout":{
+		"prefix": ";;callout",
 		"body": [
-			"{{< beta-callout url=\"https://google.com\" d-toggle=\"modal\" d_target=\"#signupModal\" custom_class=\"sign-up-trigger\">}}",
+			"{{< callout url=\"https://google.com\" d_toggle=\"modal\" d_target=\"#signupModal\" custom_class=\"sign-up-trigger\" btn_hidden=\"false\" header=\"Join the Beta!\">}}",
 			"Datadog Apps is currently in beta, but you can easily request access! Use this form to submit your request today. Once approved, you can start getting creative and develop your App for you, your organization, or for publishing to the entire Datadog community alongside our other great Datadog Apps!",
-			  "{{< /beta-callout >}}"
+			  "{{< /callout >}}"
 		],
-		"description": "Beta callout with all parameters"
+		"description": "A callout with all parameters"
 	},
-	
+
 	"Integration count":{
 		"prefix": ";;integration",
 		"body": [
@@ -70,23 +86,23 @@
 		],
 		"description": "Integration count"
 	},
-	
+
 	"Tabs":{
 		"prefix": ";;tab",
 		"body": [
 			"{{< tabs >}}",
-			"{{< tab \"${1}\" >}}",
+			"{{% tab \"${1}\" %}}",
 			"",
-			"{{< /tab >}}",
+			"{{% /tab %}}",
 			"",
-			"{{< tab \"${2}\" >}}",
+			"{{% tab \"${2}\" %}}",
 			"",
-			"{{< /tab >}}",
+			"{{% /tab %}}",
 			"{{< /tabs >}}"
 		],
 		"description": "Tabs"
 	},
-	
+
 	"Tabs - integrations":{
 		"prefix": ";;tab",
 		"body": [
@@ -102,7 +118,7 @@
 		],
 		"description": "Tabs - integrations"
 	},
-	
+
 	"Programming language":{
 		"prefix": ";;lang",
 		"body": [
@@ -112,23 +128,21 @@
 			"",
 			"{{< /programming-lang >}}",
 			"{{< /programming-lang-wrapper >}}"
-			
 		],
 		"description": "Programming language"
 	},
-	
+
 	"Table":{
 		"prefix": ";;table",
 		"body": [
 			"|      | Required    | Description |",
 			"| ---  | ----------- | ----------- |",
 			"|${1}|${2}|${3}|"
-			
 		],
 		"description": "Table"
 	},
-	
-	"Description list":{
+
+	"Definition list":{
 		"prefix": ";;list",
 		"body": [
 			"Service",
@@ -142,12 +156,11 @@
 			"`clusterChecksRunner.affinity.podAffinity.preferredDuringSchedulingIgnoredDuringExecution`",
 			": Required. A list of node selector terms. The terms are ORed.",
 			"`site`",
-			": Set the site of the Datadog intake for Agent data:  {{< region-param key=\"dd_site\" code=\"true\" >}}. Defaults to `datadoghq.com`."			
+			": Set the site of the Datadog intake for Agent data:  {{< region-param key=\"dd_site\" code=\"true\" >}}. Defaults to `datadoghq.com`."
 		],
 		"description": "Description list"
 	},
-	
-	
+
 	"Agent config":{
 		"prefix": ";;agent",
 		"body": [
@@ -155,7 +168,7 @@
 		],
 		"description": "Description list"
 	},
-	
+
 	"Reuse":{
 		"prefix": ";;reuse",
 		"body": [
@@ -163,7 +176,7 @@
 		],
 		"description": "General reuse shortcode"
 	},
-	
+
 	"Code block":{
 		"prefix": ";;code",
 		"body": [
@@ -178,14 +191,14 @@
 		],
 		"description": "Code block"
 	},
-	
+
 	"Check mark":{
 		"prefix": ";;check",
 		"body": [
 			"{{< X >}}"
 		],
 		"description": "Check mark"
-	}, 
+	},
 
 	"Image": {
 		"prefix": ";;image",
@@ -198,7 +211,7 @@
 	"Video": {
 		"prefix": ";;video",
 		"body": [
-			"{{< img src=\"path/to/your/image-name-here.png\" alt=\"Your image description\" video=\"true\" >}}"
+			"{{< img src=\"path/to/your/image-name-here.png\" alt=\"Your image description\" video=true >}}"
 		],
 		"description": "Video short-code"
 	}

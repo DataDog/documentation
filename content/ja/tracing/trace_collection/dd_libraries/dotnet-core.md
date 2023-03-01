@@ -60,7 +60,7 @@ Datadog の .NET Framework ライブラリとプロセッサアーキテクチ�
 ## インストールと利用開始
 
 <div class="alert alert-info">
-  <div class="alert-info">Datadog は、最高の体験を得るために、Datadog アプリの<a href="https://app.datadoghq.com/apm/docs">クイックスタートの説明書</a>に従うことをお勧めします。これには以下が含まれます。<br/>
+  <div class="alert-info">Datadog は、最高の体験を得るために、Datadog アプリの<a href="https://app.datadoghq.com/apm/service-setup">クイックスタートの説明書</a>に従うことをお勧めします。これには以下が含まれます。<br/>
     <div>- デプロイメント構成 (ホスト、Docker、Kubernetes、または Amazon ECS) に合わせたステップバイステップの説明。</div>
     <div>- <code>サービス</code>タグ、<code>環境</code>タグ、<code>バージョン</code>タグを動的に設定する。</div>
     <div>- セットアップ時にトレースの 100% インジェストとログへのトレース ID インジェクションを有効にする。</div>

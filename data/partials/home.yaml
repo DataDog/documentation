@@ -28,6 +28,10 @@ nav_sections:
         link: integrations/
         icon: integrations
         desc: Gather data about your applications, services, and systems
+      - title: OpenTelemetry
+        link: opentelemetry/
+        icon: open-telemetry
+        desc: Pipe your OpenTelemetry metrics, logs, and traces into Datadog
       - title: Dashboards
         link: dashboards/
         icon: dashboard
@@ -61,7 +65,7 @@ nav_sections:
         icon: log
         desc: Process, monitor, and archive your ingested logs
       - title: Security
-        link: security_platform/
+        link: security/
         icon: security-platform
         desc: Detect threats and misconfigurations in your applications and infrastructure
       - title: Synthetic Monitoring
@@ -104,6 +108,10 @@ nav_sections:
         link: observability_pipelines/
         icon: pipelines
         desc: Manage and monitor your telemetry pipelines
+      - title: Universal Service Monitoring
+        link: universal_service_monitoring/
+        icon: usm
+        desc: Discover, map, and monitor services without changing code
   - nav_section:
     - name: 'Configuration'
     - navtiles:

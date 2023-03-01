@@ -31,9 +31,10 @@ When you share a dashboard by URL or email link, the shared page shows live, rea
 
 To share an entire dashboard publicly, generate a URL:
 
-1. On the dashboard's page, click the settings cog in the upper right.
-2. Select **Generate public URL**.
-3. Under **Time & Variable Settings**, configure your desired options for the time frame and whether users can change it, as well which tags are visible for selectable template variables.
+
+1. On the dashboard's page, click the export icon in the upper right.
+2. Select **Generate public URL**, which opens up a *Sharing: On* popup modal.
+3. Under **Time & Variable Settings**, configure your desired options for the time frame and whether users can change it, as well as which tags are visible for selectable template variables.
 4. Copy the URL and click **Done**.
 
 **Note**: Widgets based on APM traces queries do not display data on public dashboards. The Log Stream widget doesn't show data either, but other log-based queries do.
@@ -42,11 +43,11 @@ To share an entire dashboard publicly, generate a URL:
 
  To authorize one or more specific email addresses to view a dashboard page:
 
-1. On the dashboard's page, click the settings cog in the upper right.
-2. Select **Generate public URL**.
+1. On the dashboard's page, click the export icon in the upper right.
+2. Select **Generate public URL**, which opens up a *Sharing: On* popup modal.
 3. Select **Only specified people** for indicating who can access this dashboard.
 4. Input the email addresses for people you would like to share your dashboard with.
-5. Under **Time & Variable Settings**, configure your desired options for the time frame and whether users can change it, as well which tags are visible for selectable template variables.
+5. Under **Time & Variable Settings**, configure your desired options for the time frame and whether users can change it, as well as which tags are visible for selectable template variables.
 6. (Optional) Copy the URL to share; the specified email addresses also receive an email with the link.
 7. Click **Done**.
 
@@ -62,9 +63,9 @@ To revoke a shared dashboard:
 
 1. Navigate to the [Dashboard List][1].
 2. Select the dashboard you want to revoke access to.
-3. Click on the settings cog in the upper right.
-4. Click **Configure sharing**.
-5. Click **Revoke public URL**.
+3. Click on the export icon in the upper right.
+4. Click **Configure public URL**.
+5. Click **Revoke URL**.
 
 ### Refresh interval
 
@@ -89,13 +90,13 @@ To share a graph from a [Timeboard][2] or [Screenboard][3]:
 
 To revoke the keys used to share individual (embedded) graphs:
 
-1. Navigate to [**Integrations -> Embeds**][4] to see a list of all shared graphs.
+1. Navigate to [**Organization Settings -> Public Sharing -> Shared Graphs**][4] to see a list of all shared graphs.
 2. Click on the **Revoke** button next to the graph you want to stop sharing.
 3. The graph is moved to the **Revoked** list.
 
 ### Applying restrictions
 
-You can restrict access on a per IP address basis to your dashboard. Email [Datadog support][5] to enable the IP address include listing feature that allows administrators to provide a list of IP addresses that have access to shared dashboards. Once enabled, manage your restrictions on your organization's [Security][6] page.
+You can restrict access on a per IP address basis to your dashboard. Email [Datadog support][5] to enable the IP address include listing feature that allows administrators to provide a list of IP addresses that have access to shared dashboards. Once enabled, manage your restrictions on your organization's [Public Sharing][6] page.
 
 ### Dark mode
 
@@ -124,9 +125,9 @@ Datadog has a [dedicated API][7] allowing you to interact with your shared graph
 [1]: https://app.datadoghq.com/dashboard/lists
 [2]: /dashboards/#timeboards
 [3]: /dashboards/#screenboard
-[4]: https://app.datadoghq.com/account/settings#embeds
+[4]: https://app.datadoghq.com/organization-settings/public-sharing/shared-graphs
 [5]: /help/
-[6]: https://app.datadoghq.com/account/org_security
+[6]: https://app.datadoghq.com/organization-settings/public-sharing/settings
 [7]: /api/v1/embeddable-graphs/
 [8]: /api/v1/embeddable-graphs/#get-all-embeds
 [9]: /api/v1/embeddable-graphs/#create-embed

@@ -21,12 +21,28 @@ further_reading:
 
 ## Compatibility
 
-Supported GitLab versions:
-* GitLab.com (SaaS)
-* GitLab >= 14.1 (self-hosted)
+- **Supported GitLab versions**:
+  - GitLab.com (SaaS)
+  - GitLab >= 14.1 (self-hosted)
+  - GitLab >= 13.7.0 (self-hosted) by enabling the `datadog_ci_integration` feature flag
 
-Other supported versions with additional configuration:
-* GitLab >= 13.7.0 (self-hosted), by enabling the `datadog_ci_integration` feature flag.
+- **Partial pipelines**: View [partially retried][11] and downstream pipeline executions
+
+- **Manual steps**: View manually triggered pipelines
+
+- **Queue time**: View amount of time pipeline jobs wait in the queue before processing
+
+- **Logs correlation**: Correlate pipeline spans to logs and [enable job log collection][12]
+
+- **Infrastructure metric correlation**: Correlate pipelines to [infrastructure host metrics][14] for self-hosted GitLab runners
+
+- **Custom spans**: Configure custom spans
+
+- **Custom pre-defined tags**: Configure [custom tags][10] and metrics at runtime
+
+- **Parameters**: Set custom `env` or `service` [parameters][13]
+
+- **Pipeline failure reasons**: Identify pipeline failure reasons from [error messages][15]
 
 ## Configuring the Datadog integration
 
@@ -141,6 +157,25 @@ After the integration is successfully configured, the [Pipelines][4] and [Pipeli
 
 **Note**: The Pipelines page shows data for only the default branch of each repository.
 
+### Partial and downstream pipelines
+
+In the **Pipeline Executions** page, you can use the filters below in the search bar:
+
+`Downstream Pipeline`
+: Possible values: `true`, `false`
+
+`Manually Triggered`
+: Possible values: `true`, `false`
+
+`Partial Pipeline`
+: Possible values: `retry`, `paused`, `resumed`
+
+{{< img src="ci/partial_retries_search_tags.png" alt="The Pipeline executions page with Partial Pipeline:retry entered in the search query" style="width:100%;">}}
+
+These filters can also be applied through the facet panel on the left hand side of the page.
+{{< img src="ci/partial_retries_facet_panel.png" alt="The facet panel with Partial Pipeline facet expanded and the value Retry selected, the Partial Retry facet expanded and the value true selected" style="width:40%;">}}
+
+
 ### Infrastructure metric correlation
 
 If you are using self-hosted GitLab runners, you can correlate jobs with the infrastructure that is running them.
@@ -225,3 +260,9 @@ Log files larger than 1GiB are truncated.
 [7]: https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage
 [8]: https://docs.gitlab.com/ee/administration/feature_flags.html
 [9]: /logs/
+[10]: http://docs.datadoghq.com/continuous_integration/pipelines/gitlab/?tab=gitlabcom#setting-custom-tags
+[11]: http://docs.datadoghq.com/continuous_integration/pipelines/gitlab/?tab=gitlabcom#partial-and-downstream-pipelines
+[12]: http://docs.datadoghq.com/continuous_integration/pipelines/gitlab/?tab=gitlabcom#enable-job-log-collection-beta
+[13]: http://docs.datadoghq.com/continuous_integration/pipelines/gitlab/?tab=gitlabcom#integrating-through-webhooks
+[14]: http://docs.datadoghq.com/continuous_integration/pipelines/gitlab/?tab=gitlabcom#infrastructure-metric-correlation
+[15]: https://docs.datadoghq.com/continuous_integration/pipelines/gitlab/?tab=gitlabcom#error-messages-for-pipeline-failures

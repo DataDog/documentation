@@ -4,13 +4,13 @@ kind: documentation
 is_beta: true
 disable_toc: false
 further_reading:
-- link: "/workflows/service_accounts/"
+- link: "/workflows/access/#service-accounts/"
   tag: "Documentation"
   text: "Find out more about Service Accounts for workflows"
 - link: "dashboards"
   tag: "Documentation"
   text: "Find out more about setting up a dashboard"
-- link: "security_platform/explorer"
+- link: "security/explorer"
   tag: "Documentation"
   text: "Find out more about Security Signals"
 - link: "monitors"
@@ -18,11 +18,13 @@ further_reading:
   text: "Find out more about Monitors"
 ---
 
-{{< beta-callout url="https://forms.gle/VEjerYVQ2QJhauZ57" >}}
+{{< callout url="https://forms.gle/VEjerYVQ2QJhauZ57" >}}
   Workflows are in public beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.
-{{< /beta-callout >}}
+{{< /callout >}}
 
-You can trigger a workflow manually, or using a variety of automated methods such as a recurring schedule, a Datadog Monitor, or a Security Signal Notification Rule. Before you can trigger an automatic workflow, you must associate the workflow with a unique service account. For more information on service accounts, see [Service accounts for Workflows][1].
+You can trigger a workflow manually or automatically.
+
+A workflow can either run with the identity of the user who owns it, or with the identity of a service account associated to the Workflow. For more information on service accounts, see [Service accounts for Workflows][1].
 
 ## Manually trigger a workflow
 
@@ -37,21 +39,20 @@ To trigger a workflow from a Dashboard, add the **Run Workflow** widget:
 1. From your Dashboard, click **Add Widget**.
 1. Search for `workflows` and add the **Run Workflow** widget.
 1. Under **Select the workflow**, find your workflow in the dropdown menu.
-1. Enter a title for the widget and click **Save**
+1. Map dashboard template variables to workflow input parameters. This allows the values of your dashboard template variables to be mapped directly to the input parameters when you run the workflow.
+1. Enter a title for the widget and click **Save**.
 
-{{< img src="workflows/trigger-from-dashboard.png" alt="Click Run Workflow to trigger a workflow from Dashboard widget." >}}
+{{< img src="workflows/trigger-from-dashboard2.png" alt="Click Run Workflow to trigger a workflow from Dashboard widget." >}}
 
 To run the workflow:
 1. Click **Run Workflow** on your dashboard widget.
-1. Under **Execution parameters**, enter the required trigger variables for your workflow.
+1. Under **Execution parameters**, any template variables you mapped to workflow inputs are automatically populated. Enter the values for any unmapped execution parameters, or edit the existing values if needed.
 1. Click **Run** to run the workflow.
 
 ## Trigger a workflow from a Monitor
 
 To trigger a workflow from a Monitor:
 1. On the workflow canvas, click **Add an Automated Trigger** and select **@mention**.
-1. Click **Create** to create a service account. For more information, see [Service Accounts for Workflows][1].
-1. Next to **@workflow-**, enter a mention name for the trigger. Your mention name must be unique.
 1. Save your Workflow.
 1. Navigate to the [**Monitors** page][2] in Datadog.
 1. Find the monitor you'd like to use to trigger the workflow and edit it, or create a new monitor.
@@ -70,7 +71,6 @@ You can set up a workflow to trigger every time a Security Signal Notification R
 
 To trigger a workflow from a Notification Rule:
 1. On the workflow canvas, click **Add an Automated Trigger** and select **@mention**.
-1. Click **Create** to create a service account. For more information, see [Service Accounts for Workflows][1].
 1. Next to **@workflow-**, enter a mention name for the trigger. Your mention name must be unique.
 1. Save your Workflow.
 1. From the [Setup & Configuration][3] page, find the Detection Rule you'd like to use to trigger your workflow, or create a new rule.
@@ -90,10 +90,20 @@ To schedule a workflow run:
 1. (Optional) Enter a description for the workflow in the **Memo** field.
 1. Click **Save**.
 
+## Debug a workflow
+
+After you trigger a workflow, the workflow page switches to the **Debug** view. You can also manually toggle between the **Build** and **Debug** views.
+
+Use the **Debug** view to watch the progress of a triggered workflow, or debug a failed step. Clicking on a failed step gives you the inputs, outputs, and execution context for the step, as well as the associated error message. The example below shows a failed GitHub team membership step. The error message shows that the step failed due to missing permissions:
+
+{{< img src="workflows/failed-step2.png" alt="A workflow with a failed step." >}}
+
+The initial **Debug** view for a workflow provides a panel with the list of previous workflow executions and whether each execution succeeded or failed. Failures include a link to the failed workflow step. Click on a workflow execution in the list to inspect it. You can return to the initial execution history at any time by clicking on the workflow canvas.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /workflows/service_accounts/
+[1]: /workflows/access/#service-accounts
 [2]: https://app.datadoghq.com/monitors/manage
 [3]: https://app.datadoghq.com/security/configuration/rules

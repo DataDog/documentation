@@ -391,7 +391,8 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 ### Validate
 
 [Run the Agent's status subcommand][9] and look for `postgres` under the Checks section. Or visit the [Databases][10] page to get started!
-
+## Example Agent Configurations
+{{% dbm-postgres-agent-config-examples %}}
 ## Install the RDS Integration
 
 To collect more comprehensive database metrics from AWS, install the [RDS integration][11] (optional).

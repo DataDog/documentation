@@ -30,9 +30,9 @@ To learn about default and custom roles in Datadog, read the [Role Based Access 
 
 #### SAML Group Mappings
 
-When enabled, users logging in with SAML to your Datadog account are stripped of their current roles and reassigned to new roles based on the details in their SAML assertion passed on from your Identity Provider and the mappings you've created.
+When enabled, users logging in with SAML to your Datadog account are permanently stripped of their current roles and reassigned to new roles. The SAML assertion passed on from the Identity Provider and the mappings you create determine each user's new roles.
 
-Users who log in with SAML and do not have the values that map to a Datadog role are stripped of all roles and are not allowed to log in.
+Users who log in with SAML and do not have values that map to a Datadog role are permanently stripped of all roles. That user may no longer log in.
 To learn how to create and set mappings, read the [Mapping SAML attributes documentation][5].
 
 ##### SAML settings
@@ -51,11 +51,11 @@ You can filter application keys by name, ID, or owner, or click the **Only My Ke
 
 #### Client Tokens
 
-Client tokens are used to send events and logs from your user’s web and mobile applications. They are unique to your organization. Deleting a client token that is linked to a RUM Application causes your RUM Application to stop reporting. The [process to create client tokens][8] is similar to that for API and application keys.
+Client tokens are used to send events and logs from your user's web and mobile applications. They are unique to your organization. Deleting a client token that is linked to a RUM Application causes your RUM Application to stop reporting. The [process to create client tokens][8] is similar to that for API and application keys.
 
 #### Events API Emails
 
-If your application does not have an existing Datadog integration, and you don’t want to create a custom Agent check, you can send events with email. To learn how to set up events API emails, read the [Events with email guide][9].
+If your application does not have an existing Datadog integration, and you don't want to create a custom Agent check, you can send events with email. To learn how to set up events API emails, read the [Events with email guide][9].
 
 ### Security
 
@@ -84,8 +84,19 @@ The [**OAuth Apps**][10] page allows you to view or manage OAuth applications in
 #### Rename organization
 
 To rename your organization, click the **Edit** button in the **Preferences** tab of **Organization Settings**, enter the new name, then click the **Save** button.
+**Note**: Your organization name must not exceed 32 characters.
 
-**Note: Your organization name may not exceed 32 characters.**
+#### Out-of-contract retention periods for log indexes
+
+Users with `Org Management` permission can enable the out-of-contract retention periods feature for log indexes.
+
+{{< img src="account_management/out-of-contract-retention.png" alt="The out-of-contract retention periods for log indexes setting showing enabled." style="width:70%;" >}}
+
+When enabled, users with `Modify Index` permission can choose any of the 3-, 7-, 15-, 30-, 45-, and 60-day retention periods, even if it is not in the contract. This can be useful when troubleshooting a potential long standing issue or meeting compliance requirements for which customers need a higher retention period that is not part of the current contract.
+
+**Note**: Using out-of-contract retention periods incur on-demand charges. If an out-of-contract retention period is often used, Datadog recommends that customers contact their account manager to have it added to their contract.
+
+
 
 
 ## Further reading

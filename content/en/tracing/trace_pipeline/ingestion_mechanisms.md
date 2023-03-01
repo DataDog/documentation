@@ -68,16 +68,16 @@ The configuration can be set by environment variables or directly in the code:
 
 {{< tabs >}}
 {{% tab "Java" %}}
-For Java applications, set a global sampling rate in the library using the `DD_TRACE_SAMPLE_RATE` environment variable. Set by-service sampling rates with the `DD_TRACE_SAMPLING_SERVICE_RULES` environment variable.
+For Java applications, set a global sampling rate in the library using the `DD_TRACE_SAMPLE_RATE` environment variable. Set by-service sampling rates with the `DD_TRACE_SAMPLING_RULES` environment variable.
 
 For example, to send 20% of the traces for the service named `my-service`:
 
 ```
 # using system property
-java -Ddd.trace.sampling.service.rules=my-service:0.2 -javaagent:dd-java-agent.jar -jar my-app.jar
+java -Ddd.trace.sampling.rules='[{\"service\": \"my-service\", \"sample_rate\":0.2}]' -javaagent:dd-java-agent.jar -jar my-app.jar
 
 # using environment variables
-export DD_TRACE_SAMPLING_SERVICE_RULES=my-service:0.2
+export DD_TRACE_SAMPLING_RULES=[{"service": "my-service", "sample_rate": 0.2}]
 ```
 
 The service name value is case sensitive and must match the case of the actual service name.
@@ -136,7 +136,7 @@ Read more about sampling controls in the [Go tracing library documentation][1].
 
 [1]: /tracing/trace_collection/dd_libraries/go
 {{% /tab %}}
-{{% tab "NodeJS" %}}
+{{% tab "Node.js" %}}
 For Node.js applications, set a global sampling rate in the library using the `DD_TRACE_SAMPLE_RATE` environment variable.
 
 You can also set by-service sampling rates. For instance, to send 50% of the traces for the service named `my-service` and 10% for the rest of the traces:
@@ -156,7 +156,7 @@ tracer.init({
 
 Configure a rate limit by setting the environment variable `DD_TRACE_RATE_LIMIT` to a number of traces per second per service instance. If no `DD_TRACE_RATE_LIMIT` value is set, a limit of 100 traces per second is applied.
 
-Read more about sampling controls in the [NodeJS tracing library documentation][1].
+Read more about sampling controls in the [Node.js tracing library documentation][1].
 
 [1]: /tracing/trace_collection/dd_libraries/nodejs
 {{% /tab %}}
@@ -231,9 +231,19 @@ With Agent version 7.33 and forward, you can configure the error sampler in the 
 @env DD_APM_ERROR_TPS - integer - optional - default: 10
 ```
 
-**Note**: Set the parameter to `0` to disable the error sampler.
+**Notes**: 
+1. Set the parameter to `0` to disable the error sampler.
+2. The error sampler captures local traces with error spans at the Agent level. If the trace is distributed, there is no guarantee that the complete trace is sent to Datadog.
+3. By default, spans dropped by tracing library rules or custom logic such as `manual.drop` are **excluded** under the error sampler.
 
-**Note**: The error sampler captures local traces with error spans at the Agent level. If the trace is distributed, there is no way to guarantee that the complete trace will be sent to Datadog.
+#### Datadog Agent 6/7.41.0 and higher
+
+To override the default behavior so that spans dropped by the tracing library rules or custom logic such as `manual.drop` are **included** by the error sampler, enable the feature with: `DD_APM_FEATURES=error_rare_sample_tracer_drop` in the Datadog Agent (or the dedicated Trace Agent container within the Datadog Agent pod in Kubernetes).
+
+
+#### Datadog Agent 6/7.33 to 6/7.40.x
+
+Error sampling default behavior can't be changed for these Agent versions. Upgrade the Datadog Agent to Datadog Agent 6/7.41.0 and higher.
 
 
 ### Rare traces
@@ -241,106 +251,473 @@ With Agent version 7.33 and forward, you can configure the error sampler in the 
 
 The rare sampler sends a set of rare spans to Datadog. It catches combinations of `env`, `service`, `name`, `resource`, `error.type`, and `http.status` up to 5 traces per second (per Agent). It ensures visibility on low traffic resources when the head-based sampling rate is low.
 
-In Agent version 7.33 and forward, you can disable the rare sampler in the Agent main configuration file (`datadog.yaml`) or with an environment variable:
+**Note**: The rare sampler captures local traces at the Agent level. If the trace is distributed, there is no way to guarantee that the complete trace will be sent to Datadog.
+
+#### Datadog Agent 6/7.41.0 and higher
+
+By default, the rare sampler is **not enabled**.
+
+**Note**: When **enabled**, spans dropped by tracing library rules or custom logic such as `manual.drop` are **excluded** under this sampler.
+
+To configure the rare sampler, update the `apm_config.enable_rare_sampler` setting in the Agent main configuration file (`datadog.yaml`) or with the environment variable `DD_APM_ENABLE_RARE_SAMPLER`:
+
+```
+@params apm_config.enable_rare_sampler - boolean - optional - default: false
+@env DD_APM_ENABLE_RARE_SAMPLER - boolean - optional - default: false
+```
+
+To evaluate spans dropped by tracing library rules or custom logic such as `manual.drop`,
+ enable the feature with: `DD_APM_FEATURES=error_rare_sample_tracer_drop` in the Trace Agent.
+
+
+#### Datadog Agent 6/7.33 to 6/7.40.x
+
+By default, the rare sampler is enabled.
+
+**Note**: When **enabled**, spans dropped by tracing library rules or custom logic such as `manual.drop` **are excluded** under this sampler. To include these spans in this logic, upgrade to Datadog Agent 6.41.0/7.41.0 or higher.
+
+To change the default rare sampler settings, update the `apm_config.disable_rare_sampler` setting in the Agent main configuration file (`datadog.yaml`) or with the environment variable `DD_APM_DISABLE_RARE_SAMPLER`:
 
 ```
 @params apm_config.disable_rare_sampler - boolean - optional - default: false
 @env DD_APM_DISABLE_RARE_SAMPLER - boolean - optional - default: false
 ```
 
-**Note**: The rare sampler captures local traces at the Agent level. If the trace is distributed, there is no way to guarantee that the complete trace will be sent to Datadog.
-
 ## Force keep and drop
 `ingestion_reason: manual`
 
 The head-based sampling mechanism can be overridden at the tracing library level. For example, if you need to monitor a critical transaction, you can force the associated trace to be kept. On the other hand, for unnecessary or repetitive information like health checks, you can force the trace to be dropped.
 
-- Set `ManualKeep` on a span to indicate that it and all child spans should be ingested. The resulting trace might appear incomplete in the UI if the span in question is not the root span of the trace.
+- Set Manual Keep on a span to indicate that it and all child spans should be ingested. The resulting trace might appear incomplete in the UI if the span in question is not the root span of the trace.
+
+- Set Manual Drop on a span to make sure that **no** child span is ingested. [Error and rare samplers](#error-and-rare-traces) will be ignored in the Agent.
+
+{{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php,cpp" >}}
+{{< programming-lang lang="java" >}}
+
+Manually keep a trace:
+
+```java
+import datadog.trace.api.DDTags;
+import io.opentracing.Span;
+import datadog.trace.api.Trace;
+import io.opentracing.util.GlobalTracer;
+
+public class MyClass {
+    @Trace
+    public static void myMethod() {
+        // grab the active span out of the traced method
+        Span span = GlobalTracer.get().activeSpan();
+        // Always keep the trace
+        span.setTag(DDTags.MANUAL_KEEP, true);
+        // method impl follows
+    }
+}
 ```
-// in dd-trace-go
-span.SetTag(ext.ManualKeep, true)
+
+Manually drop a trace:
+
+```java
+import datadog.trace.api.DDTags;
+import io.opentracing.Span;
+import datadog.trace.api.Trace;
+import io.opentracing.util.GlobalTracer;
+
+public class MyClass {
+    @Trace
+    public static void myMethod() {
+        // grab the active span out of the traced method
+        Span span = GlobalTracer.get().activeSpan();
+        // Always Drop the trace
+        span.setTag(DDTags.MANUAL_DROP, true);
+        // method impl follows
+    }
+}
 ```
-- Set ManualDrop to make sure that **no** child span is ingested. [Error and rare samplers](#error-and-rare-traces) will be ignored in the Agent.
+
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
+
+Manually keep a trace:
+
+```python
+from ddtrace import tracer
+from ddtrace.constants import MANUAL_DROP_KEY, MANUAL_KEEP_KEY
+
+@tracer.wrap()
+def handler():
+    span = tracer.current_span()
+    # Always Keep the Trace
+    span.set_tag(MANUAL_KEEP_KEY)
+    # method impl follows
 ```
-span.SetTag(ext.ManualDrop, true)
+
+Manually drop a trace:
+
+```python
+from ddtrace import tracer
+from ddtrace.constants import MANUAL_DROP_KEY, MANUAL_KEEP_KEY
+
+@tracer.wrap()
+def handler():
+    span = tracer.current_span()
+    # Always Drop the Trace
+    span.set_tag(MANUAL_DROP_KEY)
+    # method impl follows
 ```
 
-## Single spans (App Analytics)
-`ingestion_reason: analytic`
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
 
-<div class="alert alert-warning">
-On October 20, 2020, App Analytics was replaced by Tracing without Limits. This is a deprecated mechanism with configuration information relevant to legacy App Analytics. Instead, use new configuration options <a href="#head-based-sampling">head-based sampling</a> to have full control over your data ingestion.
-</div>
+Manually keep a trace:
 
-If you need to sample a specific span, but don't need the full trace to be available, tracers allow a sampling rate to be configured for a single span. This span will be ingested at no less than the configured rate, even when the enclosing trace is dropped.
+```ruby
+Datadog::Tracing.trace(name, options) do |span, trace|
+  trace.keep! # Affects the active trace
+  # Method implementation follows
+end
+```
 
-### In the tracing libraries
+Manually drop a trace:
 
-To use the analytics mechanism, enable it either by an environment variable or in the code. Also, define a sampling rate to be applied to all `analytics_enabled` spans:
+```ruby
+Datadog::Tracing.trace(name, options) do |span, trace|
+  trace.reject! # Affects the active trace
+  # Method implementation follows
+end
+```
+
+{{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
+
+Manually keep a trace:
+
+```Go
+package main
+
+import (
+    "log"
+    "net/http"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+)
+
+func handler(w http.ResponseWriter, r *http.Request) {
+    // Create a span for a web request at the /posts URL.
+    span := tracer.StartSpan("web.request", tracer.ResourceName("/posts"))
+    defer span.Finish()
+
+    // Always keep this trace:
+    span.SetTag(ext.ManualKeep, true)
+    //method impl follows
+
+}
+```
+
+Manually drop a trace:
+
+```Go
+package main
+
+import (
+    "log"
+    "net/http"
+
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+)
+
+func handler(w http.ResponseWriter, r *http.Request) {
+    // Create a span for a web request at the /posts URL.
+    span := tracer.StartSpan("web.request", tracer.ResourceName("/posts"))
+    defer span.Finish()
+
+    // Always drop this trace:
+    span.SetTag(ext.ManualDrop, true)
+    //method impl follows
+}
+```
+
+{{< /programming-lang >}}
+{{< programming-lang lang="nodejs" >}}
+
+Manually keep a trace:
+
+```js
+const tracer = require('dd-trace')
+const tags = require('dd-trace/ext/tags')
+
+const span = tracer.startSpan('web.request')
+
+// Always keep the trace
+span.setTag(tags.MANUAL_KEEP)
+//method impl follows
+
+```
+
+Manually drop a trace:
+
+```js
+const tracer = require('dd-trace')
+const tags = require('dd-trace/ext/tags')
+
+const span = tracer.startSpan('web.request')
+
+// Always drop the trace
+span.setTag(tags.MANUAL_DROP)
+//method impl follows
+
+```
+
+{{< /programming-lang >}}
+{{< programming-lang lang=".NET" >}}
+
+Manually keep a trace:
+
+```cs
+using Datadog.Trace;
+
+using(var scope = Tracer.Instance.StartActive("my-operation"))
+{
+    var span = scope.Span;
+
+    // Always keep this trace
+    span.SetTag(Datadog.Trace.Tags.ManualKeep, "true");
+    //method impl follows
+}
+```
+
+Manually drop a trace:
+
+```cs
+using Datadog.Trace;
+
+using(var scope = Tracer.Instance.StartActive("my-operation"))
+{
+    var span = scope.Span;
+
+    // Always drop this trace
+    span.SetTag(Datadog.Trace.Tags.ManualDrop, "true");
+    //method impl follows
+}
+```
+
+{{< /programming-lang >}}
+{{< programming-lang lang="php" >}}
+
+
+Manually keep a trace:
+
+```php
+<?php
+  $tracer = \DDTrace\GlobalTracer::get();
+  $span = $tracer->getActiveSpan();
+
+  if (null !== $span) {
+    // Always keep this trace
+    $span->setTag(\DDTrace\Tag::MANUAL_KEEP, true);
+  }
+?>
+```
+
+Manually drop a trace:
+
+```php
+<?php
+  $tracer = \DDTrace\GlobalTracer::get();
+  $span = $tracer->getActiveSpan();
+
+  if (null !== $span) {
+    // Always drop this trace
+    $span->setTag(\DDTrace\Tag::MANUAL_DROP, true);
+  }
+?>
+```
+
+{{< /programming-lang >}}
+{{< programming-lang lang="cpp" >}}
+
+Manually keep a trace:
+
+```cpp
+...
+#include <datadog/tags.h>
+...
+
+auto tracer = ...
+auto span = tracer->StartSpan("operation_name");
+// Always keep this trace
+span->SetTag(datadog::tags::manual_keep, {});
+//method impl follows
+```
+
+Manually drop a trace:
+
+```cpp
+...
+#include <datadog/tags.h>
+...
+
+auto tracer = ...
+auto another_span = tracer->StartSpan("operation_name");
+// Always drop this trace
+
+another_span->SetTag(datadog::tags::manual_drop, {});
+//method impl follows
+```
+
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
+
+Manual trace keeping should happen before context propagation. If it is kept after context propagation, the system can’t ensure that the entire trace is kept across services. Manual trace keep is set at tracing client location, so the trace can still be dropped by Agent or server location based on sampling rules.
+
+
+## Single spans
+`ingestion_reason: single_span`
+
+If you need to sample a specific span, but don’t need the full trace to be available, tracing libraries allow you to set a sampling rate to be configured for a single span.
+
+For example, if you are building [metrics from spans][6] to monitor specific services, you can configure span sampling rules to ensure that these metrics are based on 100% of the application traffic, without having to ingest 100% of traces for all the requests flowing through the service.
+
 
 {{< tabs >}}
-{{% tab "Environment variables" %}}
+{{% tab "Java" %}}
+Starting in tracing library version [version 1.7.0][1], for Java applications, set by-service and by-operation name **span** sampling rules with the `DD_SPAN_SAMPLING_RULES` environment variable.
+
+For example, to collect 100% of the spans from the service named `my-service`, for the operation `http.request`, up to 50 spans per second:
 
 ```
-@env  DD_TRACE_ANALYTICS_ENABLED - boolean - optional false
+@env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
 ```
+
+Read more about sampling controls in the [Java tracing library documentation][2].
+
+[1]: https://github.com/DataDog/dd-trace-java/releases/tag/v1.7.0
+[2]: /tracing/trace_collection/dd_libraries/java
 {{% /tab %}}
-{{% tab "Code API" %}}
+{{% tab "Python" %}}
+Starting from version [v1.4.0][1], for Python applications, set by-service and by-operation name **span** sampling rules with the `DD_SPAN_SAMPLING_RULES` environment variable.
+
+For example, to collect `100%` of the spans from the service named `my-service`, for the operation `http.request`, up to `50` spans per second:
 
 ```
-// in dd-trace-go
-// set analytics_enabled by default
-tracerconfig.WithAnalytics(on bool)
-// set raw sampling rate to apply on all analytics_enabled spans
-tracerconfig.SetAnalyticsRate(0.4)
+@env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
 ```
 
+
+Read more about sampling controls in the [Python tracing library documentation][2].
+
+[1]: https://github.com/DataDog/dd-trace-py/releases/tag/v1.4.0
+[2]: /tracing/trace_collection/dd_libraries/python
+{{% /tab %}}
+{{% tab "Ruby" %}}
+Starting from version [v1.5.0][1], for Ruby applications, set by-service and by-operation name **span** sampling rules with the `DD_SPAN_SAMPLING_RULES` environment variable.
+
+For example, to collect `100%` of the spans from the service named `my-service`, for the operation `http.request`, up to `50` spans per second:
+
+```
+@env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
+```
+
+Read more about sampling controls in the [Ruby tracing library documentation][2].
+
+[1]: https://github.com/DataDog/dd-trace-rb/releases/tag/v1.5.0
+[2]: /tracing/trace_collection/dd_libraries/ruby#sampling
+{{% /tab %}}
+{{% tab "Go" %}}
+Starting from version [v1.41.0][1], for Go applications, set by-service and by-operation name **span** sampling rules with the `DD_SPAN_SAMPLING_RULES` environment variable.
+
+For example, to collect `100%` of the spans from the service named `my-service`, for the operation `http.request`, up to `50` spans per second:
+
+```
+@env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
+```
+
+Read more about sampling controls in the [Go tracing library documentation][2].
+
+[1]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.41.0
+[2]: /tracing/trace_collection/dd_libraries/go
+{{% /tab %}}
+{{% tab "Node.js" %}}
+For Node.js applications, set by-service and by-operation name **span** sampling rules with the `DD_SPAN_SAMPLING_RULES` environment variable.
+
+For example, to collect `100%` of the spans from the service named `my-service`, for the operation `http.request`, up to `50` spans per second:
+
+```
+@env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
+```
+
+Read more about sampling controls in the [Node.js tracing library documentation][1].
+
+[1]: /tracing/trace_collection/dd_libraries/nodejs
+{{% /tab %}}
+{{% tab "PHP" %}}
+Starting from version [v0.77.0][1], for PHP applications, set by-service and by-operation name **span** sampling rules with the `DD_SPAN_SAMPLING_RULES` environment variable.
+
+For example, to collect `100%` of the spans from the service named `my-service`, for the operation `http.request`, up to `50` spans per second:
+
+```
+@env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
+```
+
+Read more about sampling controls in the [PHP tracing library documentation][2].
+
+[1]: https://github.com/DataDog/dd-trace-php/releases/tag/0.77.0
+[2]: /tracing/trace_collection/dd_libraries/php
+{{% /tab %}}
+{{% tab "C++" %}}
+Starting from version [v1.3.3][1], for C++ applications, set by-service and by-operation name **span** sampling rules with the `DD_SPAN_SAMPLING_RULES` environment variable.
+
+For example, to collect `100%` of the spans from the service named `my-service`, for the operation `http.request`, up to `50` spans per second:
+
+```
+@env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
+```
+
+[1]: https://github.com/DataDog/dd-opentracing-cpp/releases/tag/v1.3.3
+{{% /tab %}}
+{{% tab ".NET" %}}
+Starting from version [v2.18.0][1], for .NET applications, set by-service and by-operation name **span** sampling rules with the `DD_SPAN_SAMPLING_RULES` environment variable.
+
+For example, to collect `100%` of the spans from the service named `my-service`, for the operation `http.request`, up to `50` spans per second:
+
+```
+@env DD_SPAN_SAMPLING_RULES='[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]'
+```
+
+Read more about sampling controls in the [.NET tracing library documentation][2].
+
+[1]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.18.0
+[2]: /tracing/trace_collection/dd_libraries/dotnet-core
 {{% /tab %}}
 {{< /tabs >}}
 
-Tag any single span with `analytics_enabled:true`. In addition, specify a sampling rate to be associated with the span:
-```
-// in dd-trace-go
-// make a span analytics_enabled
-span.SetTag(ext.AnalyticsEvent, true)
-// make a span analytics_enabled with a rate of 0.5
-s := tracer.StartSpan("redis.cmd", AnalyticsRate(0.5))
-```
-
-### In the Agent
-
-In the Agent, an additional rate limiter is set to 200 spans per second. If the limit is reached, some spans are dropped and not forwarded to Datadog.
-
-Set the rate in the Agent main configuration file (`datadog.yaml`) or as an environment variable:
-```
-@param max_events_per_second - integer - optional 200
-@env DD_APM_MAX_EPS - integer - optional 200
-```
+<div class="alert alert-warning"> The <a href="/tracing/legacy_app_analytics/">App Analytics</a> mechanism is fully deprecated. To ingest single spans without the complete trace, use the <a href="/tracing/trace_pipeline/ingestion_mechanisms#single-spans">Single Span sampling</a> configuration. To ingest complete traces, use <a href="/tracing/trace_pipeline/ingestion_mechanisms#head-based-sampling">Head-Based sampling</a> configurations.</div>
 
 ## Product ingested spans
 
 ### RUM Traces
 `ingestion_reason:rum`
 
-A request from a web or mobile application generates a trace when the backend services are instrumented. [The APM integration with Real User Monitoring][6] links web and mobile application requests to their corresponding backend traces so you can see your full frontend and backend data through one lens.
+A request from a web or mobile application generates a trace when the backend services are instrumented. [The APM integration with Real User Monitoring][7] links web and mobile application requests to their corresponding backend traces so you can see your full frontend and backend data through one lens.
 
-Starting in version `4.10.0` of the RUM browser SDK , you can control ingested volumes and keep a sampling of the backend traces by configuring the `tracingSampleRate` initialization parameter.  Set `tracingSampleRate` to a number between `0` and `100`.
-If no `tracingSampleRate` value is set, a default of 100% of the traces coming from the browser requests are sent to Datadog.
+Beginning with version `4.30.0` of the RUM browser SDK, you can control ingested volumes and keep a sampling of the backend traces by configuring the `traceSampleRate` initialization parameter.  Set `traceSampleRate` to a number between `0` and `100`.
+If no `traceSampleRate` value is set, a default of 100% of the traces coming from the browser requests are sent to Datadog.
 
 Similarly, control the trace sampling rate in other SDKs by using similar parameters:
 
-| SDK         | Parameter             | Minimum version   |
-|-------------|-----------------------|-------------------|
-| Browser     | `tracingSampleRate`   | [v4.10.0][7]      |
-| iOS         | `tracingSamplingRate` | [1.11.0][8]       |
-| Android     | `traceSamplingRate`   | [1.13.0][9]       |
-| Flutter     | `tracingSamplingRate` | [1.0.0-beta.2][10] |
-| React Native | `tracingSamplingRate` | [1.0.0-rc6][11]   |
+| SDK         | Parameter             | Minimum version    |
+|-------------|-----------------------|--------------------|
+| Browser     | `traceSampleRate`     | [v4.30.0][8]       |
+| iOS         | `tracingSamplingRate` | [1.11.0][9] _Sampling rate is reported in the Ingestion Control Page since [1.13.0][16]_ |
+| Android     | `traceSamplingRate`   | [1.13.0][10] _Sampling rate is reported in the Ingestion Control Page since [1.15.0][17]_ |
+| Flutter     | `tracingSamplingRate` | [1.0.0][11] |
+| React Native | `tracingSamplingRate` | [1.0.0][12] _Sampling rate is reported in the Ingestion Control Page since [1.2.0][18]_  |
 
 ### Synthetic traces
 `ingestion_reason:synthetics` and `ingestion_reason:synthetics-browser`
 
-HTTP and browser tests generate traces when the backend services are instrumented. [The APM integration with Synthetic Testing][12] links your synthetic tests with the corresponding backend traces. Navigate from a test run that failed to the root cause of the issue by looking at the trace generated by that test run.
+HTTP and browser tests generate traces when the backend services are instrumented. [The APM integration with Synthetic Testing][13] links your synthetic tests with the corresponding backend traces. Navigate from a test run that failed to the root cause of the issue by looking at the trace generated by that test run.
 
 By default, 100% of synthetic HTTP and browser tests generate backend traces.
 
@@ -350,8 +727,8 @@ Some additional ingestion reasons are attributed to spans that are generated by 
 
 | Product    | Ingestion Reason                    | Ingestion Mechanism Description |
 |------------|-------------------------------------|---------------------------------|
-| Serverless | `lambda` and `xray`                   | Your traces received from the [Serverless applications][13] traced with Datadog Tracing Libraries or the AWS X-Ray integration. |
-| Application Security Management     | `appsec`                            | Traces ingested from Datadog tracing libraries and flagged by [ASM][14] as a threat. |
+| Serverless | `lambda` and `xray`                   | Your traces received from the [Serverless applications][14] traced with Datadog Tracing Libraries or the AWS X-Ray integration. |
+| Application Security Management     | `appsec`                            | Traces ingested from Datadog tracing libraries and flagged by [ASM][15] as a threat. |
 
 
 ## Further Reading
@@ -363,12 +740,16 @@ Some additional ingestion reasons are attributed to spans that are generated by 
 [3]: https://app.datadoghq.com/dash/integration/apm_ingestion_reasons
 [4]: /tracing/glossary/#trace-root-span
 [5]: /tracing/trace_pipeline/ingestion_controls/
-[6]: /real_user_monitoring/connect_rum_and_traces/
-[7]: https://github.com/DataDog/browser-sdk/releases/tag/v4.10.0
-[8]: https://github.com/DataDog/dd-sdk-ios/releases/tag/1.11.0
-[9]: https://github.com/DataDog/dd-sdk-android/releases/tag/1.13.0
-[10]: https://github.com/DataDog/dd-sdk-flutter/releases/tag/datadog_tracking_http_client%2Fv1.0.0-beta.2
-[11]: https://github.com/DataDog/dd-sdk-reactnative/releases/tag/1.0.0-rc6
-[12]: /synthetics/apm/
-[13]: /serverless/distributed_tracing/
-[14]: /security_platform/application_security/
+[6]: /tracing/trace_pipeline/generate_metrics/
+[7]: /real_user_monitoring/connect_rum_and_traces/
+[8]: https://github.com/DataDog/browser-sdk/releases/tag/v4.30.0
+[9]: https://github.com/DataDog/dd-sdk-ios/releases/tag/1.11.0
+[10]: https://github.com/DataDog/dd-sdk-android/releases/tag/1.13.0
+[11]: https://github.com/DataDog/dd-sdk-flutter/releases/tag/datadog_flutter_plugin%2Fv1.0.0
+[12]: https://github.com/DataDog/dd-sdk-reactnative/releases/tag/1.0.0
+[13]: /synthetics/apm/
+[14]: /serverless/distributed_tracing/
+[15]: /security/application_security/
+[16]: https://github.com/DataDog/dd-sdk-ios/releases/tag/1.13.0
+[17]: https://github.com/DataDog/dd-sdk-android/releases/tag/1.15.0
+[18]: https://github.com/DataDog/dd-sdk-reactnative/releases/tag/1.2.0

@@ -4,7 +4,7 @@ kind: documentation
 aliases:
     - /logs/log_configuration/sensitive_data_detection
 further_reading:
-    - link: "/security/logs/"
+    - link: "/data_security/logs/"
       tag: "Documentation"
       text: "Security"
     - link: "/logs/explorer/"
@@ -37,6 +37,23 @@ Sensitive Data Scanner can be found under [Organization Settings][1].
 - **Define Scanning Groups:** A scanning group determines what data to scan. It consists of a query filter and a set of toggles to enable scanning for Logs, APM, RUM, and/or Events. See the [Log Search Syntax][2] documentation to learn more about query filters.
 - **Define Scanning Rules:** A scanning rule determines what sensitive information to match within the data.  Within a scanning group, add predefined scanning rules from Datadog's Scanning Rule Library or create your own rules from scratch to scan using custom regex patterns.
 
+Sensitive Data Scanner supports Perl Compatible RegEx (PCRE), but the following patterns are not supported:
+  - Backreferences and capturing sub-expressions (lookarounds)
+  - Arbitrary zero-width assertions
+  - Subroutine references and recursive patterns
+  - Conditional patterns
+  - Backtracking control verbs
+  - The \C "single-byte" directive (which breaks UTF-8 sequences)
+  - The \R newline match
+  - The \K start of match reset directive
+  - Callouts and embedded code
+  - Atomic grouping and possessive quantifiers
+
+**Note:**
+- Any rules that you add or update only affect data coming into Datadog after the rule was defined.
+- Sensitive Data Scanner does not affect any rules you define on the Datadog Agent directly.
+- To turn off Sensitive Data Scanner entirely, set the toggle to **off** for each Scanning Group and Scanning Rule so that they are disabled.
+
 ### Custom Scanning Rules
 
 - **Define pattern:** Specify the regex pattern to be used for matching against events. Test with sample data to verify that your regex pattern is valid.
@@ -54,7 +71,7 @@ The Scanning Rule Library contains an evergrowing collection of predefined rules
 
 ### Permissions
 
-By default, users with the Datadog Admin role have access to view and define the scanning rules. To allow other user access, grant the permission for Data Scanner under **Access Management**. See the [Custom RBAC documentation][3] for details on Roles and Permissions.
+By default, users with the Datadog Admin role have access to view and define the scanning rules. To allow other user access, grant read or write permissions for Data Scanner under **Compliance**. See the [Custom RBAC documentation][3] for details on Roles and Permissions.
 
 {{< img src="logs/sensitive_data_scanner/scanner_permission.png" alt="Permissions for Sensitive Data Scanner" style="width:90%;">}}
 
@@ -69,11 +86,6 @@ When Sensitive Data Scanner is enabled, an out-of-the-box [dashboard][4] summari
 {{<img src="account_management/sensitive_data_scanner/sdslight.png" alt="Sensitive Data Scanner Overview dashboard" style="width:70%;">}}
 
 To access this dashboard, go to **Dashboards > Dashboards List** and search for `Sensitive Data Scanner Overview`.
-
-**Note:**
-- Any rules that you add or update only affect data coming into Datadog after the rule was defined.
-- Sensitive Data Scanner does not affect any rules you define on the Datadog Agent directly.
-- To turn off Sensitive Data Scanner entirely, disable each Scanning Group and Scanning Rule by setting the toggle to the **off** state.
 
 ## Further Reading
 

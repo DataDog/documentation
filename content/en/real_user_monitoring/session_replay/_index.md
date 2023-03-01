@@ -30,7 +30,7 @@ Datadog then rebuilds the web page and re-applies the recorded events at the app
 
 The Session Replay recorder supports all browsers supported by the RUM Browser SDK with the exception of IE11. For more information, see the [browser support table][3].
 
-To reduce Session Replay's network impact and ensure the Session Replay recorder has minimal overhead on your application's performance, Datadog compresses the data prior to sending it. Datadog also reduces the load on a browser’s UI thread by delegating most of the CPU-intensive work (such as compression) to a background service worker. The expected network bandwidth impact is less than 100kB/min.
+To reduce Session Replay's network impact and ensure the Session Replay recorder has minimal overhead on your application's performance, Datadog compresses the data prior to sending it. Datadog also reduces the load on a browser’s UI thread by delegating most of the CPU-intensive work (such as compression) to a dedicated web worker. The expected network bandwidth impact is less than 100kB/min.
 
 ## Setup
 
@@ -54,11 +54,11 @@ datadogRum.init({
     //  service: 'my-web-application',
     //  env: 'production',
     //  version: '1.0.0',
-    sampleRate: 100,
+    sessionSampleRate: 100,
     sessionReplaySampleRate: 100,
     trackResources: true,
     trackLongTasks: true,
-    trackInteractions: true
+    trackUserInteractions: true
 });
 
 datadogRum.startSessionReplayRecording();

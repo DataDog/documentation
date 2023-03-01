@@ -9,19 +9,17 @@ Containers are supported in Pro and Enterprise plans. Depending on your plan, yo
 
 Additional containers are billed at an [additional cost][1] per container per hour. In addition, you can purchase prepaid containers. Contact [Sales][2] or your [Customer Success][3] Manager to discuss containers for your account.
 
-**Note**: The Agent is monitored by default. This counts towards your billing. To exclude the Agent container, or any other containers, see [Exclude Containers][4].
-
 ### Kubernetes
 
 Kubernetes creates pause containers (requires Agent v5.8+) to acquire the respective pod’s IP address and set up the network namespace for all other containers that join that pod. Datadog excludes all pause containers from your quota and does not charge for them (requires Agent v7.20+ for AWS EKS pause container exclusion). 
 
 ### Fargate
 
-Fargate is charged based on the concurrent number of tasks. For pricing, see the [Infrastructure][5] section on the pricing page.
+Fargate is charged based on the concurrent number of tasks. For pricing, see the [Infrastructure][4] section on the pricing page.
 
 ### GKE Autopilot
 
-Billing of [GKE Autopilot][6] environments is the same as that of [GKE Standard][7].
+Billing of [GKE Autopilot][5] environments is the same as that of [GKE Standard][6].
 
 ## Frequently asked questions
 
@@ -43,7 +41,7 @@ The on-demand calculations are performed using the allotment that is based on th
 
 **Are Datadog Agent containers counted against the allocation?**
 
-Yes.
+No.
 
 **Are containers belonging to pods in constant `CrashLoopBackoff` counted?**
 
@@ -52,15 +50,14 @@ If a container in the pod is running for over ten seconds, it is counted against
 
 ## Troubleshooting
 
-For technical questions, contact [Datadog support][8].
+For technical questions, contact [Datadog support][7].
 
 For billing questions, contact your [Customer Success][3] Manager.
 
 [1]: https://www.datadoghq.com/pricing/#tab-faq-infrastructure
 [2]: mailto:sales@datadoghq.com
 [3]: mailto:success@datadoghq.com
-[4]: /agent/guide/autodiscovery-management/?tab=containerizedagent#exclude-containers
-[5]: https://www.datadoghq.com/pricing/#section-infra
-[6]: /agent/kubernetes/distributions/?tab=helm#autopilot
-[7]: /integrations/google_kubernetes_engine/
-[8]: /help/
+[4]: https://www.datadoghq.com/pricing/#section-infra
+[5]: /agent/kubernetes/distributions/?tab=helm#autopilot
+[6]: /integrations/google_kubernetes_engine/
+[7]: /help/

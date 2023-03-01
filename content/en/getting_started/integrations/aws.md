@@ -23,7 +23,7 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/amazon-ecs-anywhere-monitoring/'
       tag: 'Blog'
       text: 'Monitor Amazon ECS Anywhere with Datadog'
-    - link: 'integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/??tab=cloudformation'
+    - link: '/integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/?tab=cloudformation'
       tag: 'Documentation'
       text: 'AWS CloudWatch Metric Streams with Kinesis Data Firehose'
     - link: 'https://www.datadoghq.com/blog/monitor-aws-graviton3-with-datadog/'
@@ -48,37 +48,62 @@ Before getting started, ensure you have the following prerequisites:
 1. An [AWS][7] account. Your AWS user needs the following IAM permissions to successfully run the CloudFormation template:
 
     * cloudformation:CreateStack
+    * cloudformation:CreateUploadBucket
+    * cloudformation:DeleteStack
+    * cloudformation:DescribeStacks
+    * cloudformation:DescribeStackEvents
+    * cloudformation:GetStackPolicy
+    * cloudformation:GetTemplateSummary
+    * cloudformation:ListStacks
+    * cloudformation:ListStackResources
     * ec2:DescribeSecurityGroups
     * ec2:DescribeSubnets
     * ec2:DescribeVpcs
     * iam:AttachRolePolicy
     * iam:CreatePolicy
     * iam:CreateRole
+    * iam:DeleteRole
+    * iam:DeleteRolePolicy
+    * iam:DetachRolePolicy
+    * iam:GetRole
+    * iam:GetRolePolicy
     * iam:PassRole
     * iam:PutRolePolicy
     * iam:UpdateAssumeRolePolicy
     * kms:Decrypt
     * lambda:AddPermission
     * lambda:CreateFunction
+    * lambda:DeleteFunction
     * lambda:GetCodeSigningConfig
     * lambda:GetFunction
     * lambda:GetFunctionCodeSigningConfig
+    * lambda:GetLayerVersion
     * lambda:InvokeFunction
     * lambda:PutFunctionConcurrency
+    * lambda:RemovePermission
+    * lambda:TagResource
     * logs:CreateLogGroup
+    * logs:DeleteLogGroup
     * logs:DescribeLogGroups
     * logs:PutRetentionPolicy
     * s3:CreateBucket
+    * s3:DeleteBucket
+    * s3:DeleteBucketPolicy
+    * s3:GetEncryptionConfiguration
     * s3:GetObject
     * s3:GetObjectVersion
+    * s3:PutBucketPolicy
+    * s3:PutBucketPublicAccessBlock
+    * s3:PutEncryptionConfiguration
     * secretsmanager:CreateSecret
+    * secretsmanager:DeleteSecret
     * secretsmanager:GetSecretValue
     * secretsmanager:PutSecretValue
-    * serverless:CreateCloudFormationTemplate
+    * serverlessrepo:CreateCloudFormationTemplate
 
 ## Setup
 
-2. Go to the the [AWS integration configuration page][8] in Datadog and click **Add AWS Account**.
+2. Go to the [AWS integration configuration page][8] in Datadog and click **Add AWS Account**.
 
 3. Configure the integration's settings under the **Automatically using CloudFormation** option.  
     a. Select the AWS regions to integrate with.  
@@ -223,7 +248,7 @@ If you encounter any issues, be sure to check out the [Troubleshooting][57] sect
 [36]: /dashboards/#overview
 [37]: /dashboards/functions/
 [38]: /dashboards/correlations/
-[39]: /monitors/create/#monitor-types
+[39]: /monitors/types
 [40]: /monitors/notify/
 [41]: /integrations/#cat-notification
 [42]: /serverless
@@ -234,13 +259,13 @@ If you encounter any issues, be sure to check out the [Troubleshooting][57] sect
 [47]: /tracing/trace_collection/
 [48]: /tracing/#explore-datadog-apm
 [49]: /watchdog/
-[50]: /security_platform/cloud_siem/getting_started/
-[51]: /security_platform/default_rules/#cat-log-detection
-[52]: /security_platform/explorer/
-[53]: /security_platform/notifications/rules/
-[54]: /security_platform/cspm/getting_started/
-[55]: /security_platform/default_rules/#cat-posture-management-cloud
-[56]: /security_platform/default_rules/#cat-posture-management-infra
+[50]: /getting_started/cloud_siem/
+[51]: /security/default_rules/#cat-log-detection
+[52]: /security/explorer/
+[53]: /security/notifications/rules/
+[54]: /security/cspm/getting_started/
+[55]: /security/default_rules/#cat-posture-management-cloud
+[56]: /security/default_rules/#cat-posture-management-infra
 [57]: /integrations/amazon_web_services/?tab=roledelegation#troubleshooting
 [58]: https://app.datadoghq.com/organization-settings/api-keys
 [59]: /integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/??tab=cloudformation

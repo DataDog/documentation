@@ -21,7 +21,7 @@
   "integrations": {
     "opsgenie": {
       "region": "US",
-      "service-id": "123e4567-e89b-12d3-a456-426614174000"
+      "service-url": "https://my-org.opsgenie.com/service/123e4567-e89b-12d3-a456-426614174000"
     },
     "pagerduty": "https://my-org.pagerduty.com/service-directory/PMyService"
   },

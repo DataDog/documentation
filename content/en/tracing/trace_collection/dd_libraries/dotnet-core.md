@@ -49,17 +49,19 @@ further_reading:
 
 ### Supported .NET Core runtimes
 
-The .NET Tracer supports instrumentation on .NET Core 2.1, 3.1, .NET 5, and .NET 6.
+The .NET Tracer supports instrumentation on .NET Core 2.1, 3.1, .NET 5, .NET 6, and .NET 7.
 
 For a full list of Datadog’s .NET Core library and processor architecture support (including legacy and maintenance versions), see [Compatibility Requirements][1].
 
 ## Installation and getting started
 
 <div class="alert alert-info">
-  <div class="alert-info">Datadog recommends you follow the <a href="https://app.datadoghq.com/apm/docs">Quickstart instructions</a> in the Datadog app for the best experience, including:<br/>
+  <div class="alert-info">
+    <div><strong>Datadog recommends you follow the <a href="https://app.datadoghq.com/apm/service-setup">Quickstart instructions</a></strong> in the Datadog app for the best experience, including:</div>
     <div>- Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).</div>
     <div>- Dynamically set <code>service</code>, <code>env</code>, and <code>version</code> tags.</div>
-    <div>- Enable ingesting 100% of traces and Trace ID injection into logs during setup.</div>
+    <div>- Enable ingesting 100% of traces and Trace ID injection into logs during setup.</div><br/>
+    <div>Also, to set up Datadog APM in AWS Lambda, see <strong><a href="/tracing/serverless_functions/">Tracing Serverless Functions</a></strong>, in Azure App Service, see <strong><a href="/serverless/azure_app_services/">Tracing Azure App Service</a></strong>.</div>
   </div>
 </div>
 
@@ -109,20 +111,6 @@ For more information on how to configure these settings, see [Configuration](#co
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 
-{{% tab "AWS Lambda" %}}
-
-To set up Datadog APM in AWS Lambda, see [Tracing Serverless Functions][1].
-
-[1]: /tracing/serverless_functions/
-{{% /tab %}}
-
-{{% tab "Azure App Service" %}}
-
-To set up Datadog APM in Azure App Service, see [Tracing Azure App Service Extension][1].
-
-[1]: /serverless/azure_app_services/
-{{% /tab %}}
-
 {{% tab "Other Environments" %}}
 
 Tracing is available for other environments, including [Heroku][1], [Cloud Foundry][2], and [AWS Elastic Beanstalk][3].
@@ -141,6 +129,8 @@ For all other environments, see the [Integrations documentation][4] for that env
 
 ### Install the tracer
 
+<div class="alert alert-info">If you are collecting traces from a Kubernetes application, or from an application on a Linux host or container, as an alternative to the following instructions, you can inject the tracing library into your application. Read <a href="/tracing/trace_collection/library_injection">Injecting Libraries</a> for instructions.</div>
+
 You can install the Datadog .NET Tracer machine-wide so that all services on the machine are instrumented, or you can install it on a per-application basis to allow developers to manage the instrumentation through the application’s dependencies. To see machine-wide installation instructions, click the Windows or Linux tab. To see per-application installation instructions, click the NuGet tab.
 
 {{< tabs >}}
@@ -153,6 +143,7 @@ To install the .NET Tracer machine-wide:
 
 2. Run the .NET Tracer MSI installer with administrator privileges.
 
+You can also script the MSI setup by running the following in PowerShell: `RUN Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-apm.msi'`
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
 {{% /tab %}}
@@ -210,11 +201,16 @@ For information about the different methods for setting environment variables, s
 
 1. The .NET Tracer MSI installer adds all required environment variables. There are no environment variables you need to configure.
 
+   <div class="alert alert-warning">
+     <strong>Note:</strong> You must set the <strong>.NET CLR version</strong> for the application pool to <strong>No Managed Code</strong> as recommended by <a href='https://learn.microsoft.com/aspnet/core/host-and-deploy/iis/advanced#create-the-iis-site'> Microsoft</a>.
+   </div>
+
 2. To automatically instrument applications hosted in IIS, completely stop and start IIS by running the following commands as an administrator:
 
    ```cmd
    net stop /y was
    net start w3svc
+   # Also, start any other services that were stopped when WAS was shut down.
    ```
 
    <div class="alert alert-warning">
@@ -224,10 +220,13 @@ For information about the different methods for setting environment variables, s
 
 #### Services not in IIS
 
+<div class="alert alert-info">Starting v2.14.0, you don't need to set <code>CORECLR_PROFILER</code> if you installed the tracer using the MSI.</div>
+
 1. Set the following required environment variables for automatic instrumentation to attach to your application:
 
    ```
    CORECLR_ENABLE_PROFILING=1
+   CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    ```
 2. For standalone applications and Windows services, manually restart the application.
 
@@ -328,6 +327,8 @@ To attach automatic instrumentation to your service, you must set the required e
 
 #### Windows services
 
+<div class="alert alert-info">Starting v2.14.0, you don't need to set <code>CORECLR_PROFILER</code> if you installed the tracer using the MSI.</div>
+
 {{< tabs >}}
 
 {{% tab "Registry Editor" %}}
@@ -336,6 +337,7 @@ In the Registry Editor, create a multi-string value called `Environment` in the 
 
 ```text
 CORECLR_ENABLE_PROFILING=1
+CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 ```
 
 {{< img src="tracing/setup/dotnet/RegistryEditorCore.png" alt="Using the Registry Editor to create environment variables for a Windows service" >}}
@@ -345,7 +347,7 @@ CORECLR_ENABLE_PROFILING=1
 {{% tab "PowerShell" %}}
 
 ```powershell
-[string[]] $v = @("CORECLR_ENABLE_PROFILING=1")
+[string[]] $v = @("CORECLR_ENABLE_PROFILING=1", "CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}")
 Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<SERVICE NAME> -Name Environment -Value $v
 ```
 {{% /tab %}}
@@ -359,6 +361,8 @@ To automatically instrument a console application, set the environment variables
 ```bat
 rem Set environment variables
 SET CORECLR_ENABLE_PROFILING=1
+rem Unless v2.14.0+ and you installed the tracer with the MSI
+SET CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 
 rem Start application
 dotnet.exe example.dll

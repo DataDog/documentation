@@ -1,19 +1,13 @@
 ---
 title: Connect to Datadog over AWS PrivateLink
 kind: guide
-further_reading:
-    - link: 'agent/logs'
-      tag: 'Documentation'
-      text: 'Enable log collection with the Agent.'
-    - link: '/integrations/amazon_web_services/#set-up-the-datadog-lambda-function'
-      tag: 'Documentation'
-      text: 'Collect logs from your AWS services'
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Datadog PrivateLink does not support the Datadog for Government site.</div>
+{{< site-region region="us3,us5,eu,gov" >}}
+<div class="alert alert-warning">Datadog PrivateLink does not support the selected Datadog site.</div>
 {{< /site-region >}}
 
+{{< site-region region="us" >}}
 This guide walks you through how to configure [AWS PrivateLink][1] for use with Datadog.
 
 ## Overview
@@ -84,7 +78,7 @@ However, to route traffic to Datadog's PrivateLink offering in `us-east-1` from 
     ```
 
     This configuration is required when sending logs to Datadog with AWS PrivateLink and the Datadog Agent, and is not required for the Lambda Extension. For more details, see [Agent log collection][3].
-    
+
 12. If your Lambda Extension loads the Datadog API Key from AWS Secrets Manager using the ARN specified by the environment variable `DD_API_KEY_SECRET_ARN`, you need to [create a VPC endpoint for Secrets Manager][4].
 
 13. [Restart your Agent][5] to send data to Datadog through AWS PrivateLink.
@@ -136,7 +130,7 @@ However, to route traffic to Datadog's PrivateLink offering in `us-east-1` from 
 
 8. Click on the VPC endpoint ID to check its status.
 9. Wait for the status to move from _Pending_ to _Available_. This can take up to 10 minutes.
-10. Once this is created, route traffic from another region to send the data to Datadog using private link. For more information, see the [Work With VPC Peering connections][2] AWS documentation. 
+10. After creating the endpoint, use VPC peering to make the PrivateLink endpoint available in another region to send telemetry to Datadog over PrivateLink. For more information, read the [Work With VPC Peering connections][10] page in AWS.
 
 {{< img src="agent/guide/private_link/vpc_status.png" alt="VPC status" style="width:80%;" >}}
 
@@ -171,7 +165,9 @@ This returns `metrics.agent.datadoghq.com`, the private hosted zone name that yo
 
 2. Within each new Route53 private hosted zone, create an A record with the same name. Toggle the **Alias** option, then under **Route traffic to**, choose **Alias to VPC endpoint**, **us-east-1**, and enter the DNS name of the VPC endpoint associated with the DNS name.
 
-    **Note**: To retrieve your DNS name, see the [View endpoint service private DNS name configuration documentation.][2]
+   **Notes**:
+      - To retrieve your DNS name, see the [View endpoint service private DNS name configuration documentation.][2]
+      - The Agent sends telemetry to versioned endpoints, for example, `<version>-app.agent.datadoghq.com` which resolves to `metrics.agent.datadoghq.com` through a CNAME alias. Therefore, you only need to set up a private hosted zone for `metrics.agent.datadoghq.com`.
 
 {{< img src="agent/guide/private_link/create-an-a-record.png" alt="Create an A record" style="width:90%;" >}}
 
@@ -205,17 +201,17 @@ The VPCs with Private Hosted Zone (PHZ) attached need to have a couple of settin
 
     ```yaml
     logs_config:
-        use_http: true
+        force_use_http: true
     ```
 
     If you are using the container Agent, set the following environment variable instead:
 
     ```
-    DD_LOGS_CONFIG_USE_HTTP=true
+    DD_LOGS_CONFIG_FORCE_USE_HTTP=true
     ```
 
     This configuration is required when sending logs to Datadog with AWS PrivateLink and the Datadog Agent, and is not required for the Lambda Extension. For more details, see [Agent log collection][8].
-    
+
 2. If your Lambda Extension loads the Datadog API Key from AWS Secrets Manager using the ARN specified by the environment variable `DD_API_KEY_SECRET_ARN`, you need to [create a VPC endpoint for Secrets Manager][9].
 
 3. [Restart the Agent][6].
@@ -230,13 +226,20 @@ The VPCs with Private Hosted Zone (PHZ) attached need to have a couple of settin
 [7]: /agent/guide/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [8]: https://docs.datadoghq.com/agent/logs/?tab=tailexistingfiles#send-logs-over-https
 [9]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/vpc-endpoint-overview.html
+[10]: https://docs.aws.amazon.com/vpc/latest/peering/working-with-vpc-peering.html
 {{% /tab %}}
 {{< /tabs >}}
 
 
 ## Further Reading
 
-{{< partial name="whats-next/whats-next.html" >}}
+Additional helpful documentation, links, and articles:
+
+- [Enable log collection with the Agent][3]
+- [Collect logs from your AWS services][4]
 
 [1]: https://aws.amazon.com/privatelink/
 [2]: https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html
+[3]: /agent/logs
+[4]: /integrations/amazon_web_services/#log-collection
+{{< /site-region >}}

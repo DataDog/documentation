@@ -27,7 +27,6 @@ categories:
 - 処理
 - メッセージング
 - ログの収集
-- オートディスカバリー
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ibm_mq/README.md
 display_on_public_website: true
@@ -35,7 +34,7 @@ draft: false
 git_integration_title: ibm_mq
 integration_id: ibm-mq
 integration_title: IBM MQ
-integration_version: 3.22.1
+integration_version: 4.0.3
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -56,7 +55,6 @@ tile:
   - Category::Processing
   - Category::Messaging
   - Category::Log Collection
-  - Category::Autodiscovery
   configuration: README.md#Setup
   description: IBM MQ はメッセージキューです
   media: []
@@ -69,11 +67,11 @@ tile:
 
 ## 概要
 
-このチェックは [IBM MQ][1] バージョン 8 から 9.0 を監視します。
+このチェックは [IBM MQ][1] バージョン 9.1 以降を監視します。
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 IBM MQ チェックは [Datadog Agent][2] パッケージに含まれています。
 
@@ -81,12 +79,11 @@ IBM MQ チェックを使用するには、[IBM MQ Client][3] 9.1+ がインス�
 
 #### Linux の場合
 
-`LD_LIBRARY_PATH` と `C_INCLUDE_PATH` を更新して、ライブラリの場所を含めます。(これらの 2 つの環境変数がまだ存在しない場合は作成します。) 
-例えば、`/opt` にインストールした場合:
+ライブラリの場所を含めるために `LD_LIBRARY_PATH` を更新してください。この環境変数がまだ存在しない場合は作成してください。
+例えば、クライアントを `/opt` の下にインストールした場合
 
 ```text
 export LD_LIBRARY_PATH=/opt/mqm/lib64:/opt/mqm/lib:$LD_LIBRARY_PATH
-export C_INCLUDE_PATH=/opt/mqm/inc:$C_INCLUDE_PATH
 ```
 
 **注**: Agent v6 以上は、`upstart`、`systemd`、または `launchd` を使用して datadog-agent サービスをオーケストレーションします。場合によっては、サービス構成ファイルに環境変数を追加する必要があります。サービス構成ファイルのデフォルトの場所は、以下の通りです。

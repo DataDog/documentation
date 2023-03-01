@@ -25,7 +25,7 @@ assets:
 author:
   homepage: https://www.rapdev.io
   name: RapDev
-  sales_email: sales@rapdev.io
+  sales_email: ddsales@rapdev.io
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
@@ -84,13 +84,14 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: MaxDB インテグレーション
+  uninstallation: README.md#Uninstallation
 ---
 
 ## 概要
 
 MaxDB インテグレーションは MaxDB インスタンスのデータ、ログ領域、ボリューム、キャッシュ、セッション、ロック、その他のメトリクスを監視し、データベースが正常に稼働していることを確認します。このインテグレーションで利用可能なダッシュボードは、データベースおよびデータベースホストでフィルタリングすることができます。MaxDB インテグレーションにはまた、データベースの総合的な健全性に関連する共通のメトリクスのモニターも搭載されています。
 
-### モニター
+### アラート設定
 1. MaxDB 接続チェック
 2. MaxDB ステート
 3. MaxDB データボリューム使用量

@@ -23,23 +23,25 @@ The Java Datadog Trace library is open source - view the [GitHub repository][1] 
 
 The Java Tracer supports automatic instrumentation for the following Oracle JDK and OpenJDK JVM runtimes.
 
-| JVM versions | Operating Systems                                                             | Support level             | Tracer version |
-| -------------| ----------------------------------------------------------------------------- | ------------------------- | -------------- |
-| 18 to 19     | Windows (x86, x86-64)<br>Linux (x86, x86-, arm64)<br>Mac (x86, x86-64, arm64) | [Beta](#support-beta)     | Latest         |
-| 7 to 17      | Windows (x86, x86-64)<br>Linux (x86, x86-64)<br>Mac (x86, x86-64)             | [GA](#support-ga)         | Latest         |
-| 7 to 17      | Linux (arm64)<br>Mac (arm64)                                                  | [Beta](#support-beta)     | Latest         |
+| JVM versions | Operating Systems                                                               | Support level                       | Tracer version |
+| -------------| ------------------------------------------------------------------------------- | ----------------------------------- | -------------- |
+| 18 to 19     | Windows (x86, x86-64)<br>Linux (x86, x86-64, arm64)<br>Mac (x86, x86-64, arm64) | [Beta](#levels-of-support)               | Latest         |
+| 8 to 17      | Windows (x86, x86-64)<br>Linux (x86, x86-64)<br>Mac (x86, x86-64)               | [GA](#levels-of-support)                   | Latest         |
+| 8 to 17      | Linux (arm64)<br>Mac (arm64)                                                    | [Beta](#levels-of-support)               | Latest         |
+| 7            | Windows (x86, x86-64)<br>Linux (x86, x86-64)<br>Mac (x86, x86-64)               | [Maintenance](#levels-of-support) | v0             |
+| 7            | Linux (arm64)<br>Mac (arm64)                                                    | [End-of-life](#levels-of-support)         | v0             |
 
 Datadog does not officially support any early-access versions of Java.
 
 ### Levels of support
 
-| **Level**                                              | **Support provided**                                                                                                                       |
-|--------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
-| <span id="support-unsupported">Unsupported</span>      |  No implementation. Contact [Datadog support][2] for special requests.                                                                   |
+| **Level**                                              | **Support provided**                                                                                                                                |
+|--------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
+| <span id="support-unsupported">Unsupported</span>      |  No implementation. Contact [Datadog support][2] for special requests.                                                                              |
 | <span id="support-beta">Beta</span>                    |  Initial implementation. May not yet contain all features. Support for new features and bug and security fixes are provided on a best-effort basis. |
-| <span id="support-ga">General Availability (GA)</span> |  Full implementation of all features. Full support for new features and bug and security fixes.                                                 |
-| <span id="support-maintenance">Maintenance</span>      |  Full implementation of existing features. Does not receive new features. Support for bug and security fixes only.                           |
-| <span id="support-eol">End-of-life (EOL)</span>        |  No support.                                                                                                                               |
+| <span id="support-ga">General Availability (GA)</span> |  Full implementation of all features. Full support for new features and bug and security fixes.                                                     |
+| <span id="support-maintenance">Maintenance</span>      |  Full implementation of existing features. Does not receive new features. Support for bug and security fixes only.                                  |
+| <span id="support-eol">End-of-life (EOL)</span>        |  No support.                                                                                                                                        |
 
 ## Integrations
 
@@ -75,13 +77,14 @@ Beta integrations are disabled by default but can be enabled individually:
 | Ratpack                 | 1.5+       | Fully Supported | `ratpack`                                      |
 | Restlet HTTP Server     | 2.2 - 2.4  | Fully Supported | `restlet-http`.                                |
 | Spark Java              | 2.3+       | [Beta][3]       | `sparkjava` (requires `jetty`)                 |
+| Spring Boot             | 1.5        | Fully Supported | `spring-web` or `spring-webflux`               |
 | Spring Web (MVC)        | 4.0+       | Fully Supported | `spring-web`                                   |
 | Spring WebFlux          | 5.0+       | Fully Supported | `spring-webflux`                               |
 | Tomcat                  | 5.5+       | Fully Supported | `tomcat`                                       |
 | Vert.x                  | 3.4-3.9.x  | Fully Supported | `vertx`, `vertx-3.4`                           |
 
 **Note**: Many application servers are Servlet compatible and are automatically covered by that instrumentation, such as Websphere, Weblogic, and JBoss.
-Also, frameworks like Spring Boot inherently work because it usually uses a supported embedded application server (Tomcat/Jetty/Netty).
+Also, frameworks like Spring Boot (version 3) inherently work because they usually use a supported embedded application server, such as Tomcat, Jetty, or Netty.
 
 **Integrations Disabled By Default**
 
@@ -116,7 +119,7 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 | AWS Java SDK             | 1.11+, 2.2+ | Fully Supported | `aws-sdk`                                      |
 | Commons HTTP Client      | 2.0+        | Fully Supported | `commons-http-client`                          |
 | Google HTTP Client       | 1.19.0+     | Fully Supported | `google-http-client`                           |
-| Grizzly HTTP Client      | 1.9+        | [Beta][4]         | `grizzly-client`                               |
+| Grizzly HTTP Client      | 1.9+        | [Beta][4]       | `grizzly-client`                               |
 | gRPC                     | 1.5+        | Fully Supported | `grpc`, `grpc-client`, `grpc-server`           |
 | HttpURLConnection        | all         | Fully Supported | `httpurlconnection`, `urlconnection`           |
 | Kafka-Clients            | 0.11+       | Fully Supported | `kafka`                                        |
@@ -126,11 +129,11 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 | Jersey Client            | 1.9-2.29    | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-client`             |
 | JMS                      | 1 and 2     | Fully Supported | `jms`, `jms-1`, `jms-2`                        |
 | Netty HTTP Client        | 4.0+        | Fully Supported | `netty`, `netty-4.0`, `netty-4.1`              |
-| Ning HTTP Client         | 1.9.0+      | [Beta][4]         | `ning`                                         |
+| Ning HTTP Client         | 1.9.0+      | [Beta][4]       | `ning`                                         |
 | OkHTTP                   | 2.2+        | Fully Supported | `okhttp`, `okhttp-2`,`okhttp-3`                |
 | Play WSClient            | 1.0+        | Fully Supported | `play-ws`                                      |
 | Rabbit AMQP              | 2.7+        | Fully Supported | `amqp`, `rabbitmq`                             |
-| Spring SessionAwareMessageListener              | 3.1+        | Fully Supported | `spring-jms-3.1`                             |
+| Spring SessionAwareMessageListener     | 3.1+            | Fully Supported | `spring-jms-3.1`             |
 | Spring WebClient         | 5.0+        | Fully Supported | `spring-webflux`, `spring-webflux-client`      |
 
 **Kafka Note**: Datadog's Kafka integration works with Kafka version `0.11+`, which supports the Header API. This API is used to inject and extract trace context. If you are running a mixed version environment, the Kafka broker can incorrectly report the newer version of Kafka. This causes an issue when the tracer tries to inject headers that are not supported by the local producer. Additionally, older consumers are unable to consume the message because of the presence of headers. To prevent these issues, if you are running a mixed version Kafka environment with versions older than 0.11, disable context propagation with the environment variable: `DD_KAFKA_CLIENT_PROPAGATION_ENABLED=false`.
@@ -160,7 +163,8 @@ Don't see your desired networking framework? Datadog is continually adding addit
 | Jedis                   | 1.4+     | Fully Supported | `jedis`, `redis`                                                                         |
 | Lettuce                 | 4.0+     | Fully Supported | `lettuce`, `lettuce-4-async`, `lettuce-5-rx`                                             |
 | MongoDB                 | 3.0-4.0+ | Fully Supported | `mongo`                                                                                  |
-| RediScala               | 1.5+     | Fully Supported | `rediscala`, `redis`                                                                     |
+| RediScala | 1.5+     | Fully Supported | `rediscala`, `redis`                                                                     |
+| Redisson | 2.x-3.x      | Fully Supported | `redisson`, `redis`                                                                     |
 | SpyMemcached            | 2.12+    | Fully Supported | `spymemcached`                                                                           |
 | Vert.x Cassandra Client | 3.9		 | Fully Supported | `cassandra`																			  |
 | Vert.x Redis Client     | 3.9      | Fully Supported | `vertx-redis-client`                                                                     |
@@ -198,6 +202,7 @@ Don't see your desired datastores? Datadog is continually adding additional supp
 | ----------------- | -------- | --------------- | ---------------------------------------------- |
 | Datanucleus JDO   | 4.0+     | Fully Supported | `datanucleus`                                  |
 | Dropwizard Views  | 0.7+     | Fully Supported | `dropwizard`, `dropwizard-view`                |
+| GraphQL         | 14.0+     | Fully Supported | `graphql-java`                  |
 | Hibernate         | 3.5+     | Fully Supported | `hibernate`, `hibernate-core`                  |
 | Hystrix           | 1.4+     | Fully Supported | `hystrix`                                      |
 | JSP Rendering     | 2.3+     | Fully Supported | `jsp`, `jsp-render`, `jsp-compile`             |

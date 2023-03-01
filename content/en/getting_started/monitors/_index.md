@@ -7,7 +7,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitoring-101-alerting/"
   tag: "Blog"
   text: "Monitoring 101: Alerting on what matters"
-- link: "/monitors/create/types/metric/"
+- link: "/monitors/types/metric/"
   tag: "Documentation"
   text: "Metric Monitors"
 - link: "/monitors/notify/"
@@ -97,13 +97,13 @@ You can view Monitor Saved Views from your mobile home screen or view and mute m
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/create/types/metric/
+[1]: /monitors/types/metric/
 [2]: https://www.datadoghq.com
 [3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://app.datadoghq.com/infrastructure
 [5]: https://app.datadoghq.com/monitors#create/metric
 [6]: /integrations/disk/
-[7]: /monitors/create/types/metric/?tab=threshold#set-alert-conditions
+[7]: /monitors/types/metric/?tab=threshold#set-alert-conditions
 [8]: /monitors/notify/#conditional-variables
 [9]: /account_management/rbac/
 [10]: /mobile/

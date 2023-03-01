@@ -8,7 +8,7 @@ further_reading:
 - link: "https://github.com/DataDog/dd-trace-go/tree/v1"
   tag: "GitHub"
   text: "Source code"
-- link: "https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
+- link: "https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
   tag: "GoDoc"
   text: "Package page"
 - link: "/tracing/glossary/"
@@ -62,11 +62,11 @@ Override the default trace Agent host address for trace submission.
 
 `DD_TRACE_AGENT_PORT`
 : **Default**: `8126` <br>
-Override the default trace Agent port for Datadog trace submission.
+Overrides the default trace Agent port for Datadog trace submission. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then the library configuration `DD_DOGSTATSD_PORT` must match it.
 
 `DD_DOGSTATSD_PORT`
 : **Default**: `8125` <br>
-Override the default trace Agent port for DogStatsD metric submission.
+Overrides the default trace Agent port for DogStatsD metric submission. If the [Agent configuration][13] sets `dogstatsd_port` or `DD_DOGSTATSD_PORT` to something other than the default `8125`, then the library configuration `DD_DOGSTATSD_PORT` must match it.
 
 `DD_TRACE_SAMPLING_RULES`
 : **Default**: `nil`<br>
@@ -78,6 +78,13 @@ For more information, see [Ingestion Mechanisms][4].<br>
 
 `DD_TRACE_SAMPLE_RATE`
 : Enable ingestion rate control.
+
+`DD_SPAN_SAMPLING_RULES`
+: **Default**: `nil`<br>
+A JSON array of objects. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive).
+For more information, see [Ingestion Mechanisms][5].<br>
+**Example:**<br>
+  - Set the span sample rate to 50% for the service `my-service` and operation name `http.request`, up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`
 
 `DD_TRACE_RATE_LIMIT`
 : Maximum number of spans to sample per-second, per-Go process. Defaults to 100 when DD_TRACE_SAMPLE_RATE is set. Otherwise, delegates rate limiting to the Datadog Agent.
@@ -104,27 +111,40 @@ Dynamically rename services through configuration. Services can be separated by 
 
 `DD_INSTRUMENTATION_TELEMETRY_ENABLED`
 : **Default**: `false` <br>
-Datadog may collect [environmental and diagnostic information about your system][5] to improve the product. When false, this telemetry data will not be collected.
+Datadog may collect [environmental and diagnostic information about your system][6] to improve the product. When false, this telemetry data will not be collected.
 
+`DD_TRACE_CLIENT_IP_ENABLED`
+: **Default**: `false` <br>
+Enable client IP collection from relevant IP headers in HTTP request spans.
+Added in version 1.47.0 
 
 ## Configure APM environment name
 
-The [APM environment name][6] may be configured [in the Agent][7] or using the [WithEnv][3] start option of the tracer.
+The [APM environment name][7] may be configured [in the Agent][8] or using the [WithEnv][3] start option of the tracer.
 
-## B3 headers extraction and injection
+## Trace context propagation for distributed tracing
 
-The Datadog APM tracer supports [B3 headers extraction][8] and injection for distributed tracing.
+The Datadog APM tracer supports extraction and injection of [B3][9] and [W3C][14] headers for distributed tracing.
 
 Distributed headers injection and extraction is controlled by
-configuring injection/extraction styles. Two styles are
-supported: `Datadog` and `B3`.
+configuring injection/extraction styles. Supported styles are:
+`tracecontext`, `Datadog`, [`B3`][9], and `B3 single header`.
 
-- Configure injection styles using the `DD_PROPAGATION_STYLE_INJECT=Datadog,B3` environment variable
-- Configure extraction styles using the `DD_PROPAGATION_STYLE_EXTRACT=Datadog,B3` environment variable
+- Configure injection styles using the `DD_PROPAGATION_STYLE_INJECT=tracecontext,B3` environment variable.
+- Configure extraction styles using the `DD_PROPAGATION_STYLE_EXTRACT=tracecontext,B3` environment variable.
+- Configure both injection and extraction styles using the `DD_TRACE_PROPAGATION_STYLE=tracecontext,B3` environment variable.
 
 The values of these environment variables are comma-separated lists of
-header styles enabled for injection or extraction. By default, only
-the `Datadog` extraction style is enabled.
+header styles enabled for injection or extraction. By default,
+the `tracecontext,Datadog` styles are enabled.
+
+To disable trace context propagation, set the value of the environment variables to `none`.
+- Disable injection styles using the `DD_PROPAGATION_STYLE_INJECT=none` environment variable.
+- Disable extraction styles using the `DD_PROPAGATION_STYLE_EXTRACT=none` environment variable.
+- Disable all trace context propagation (both inject and extract) using the `DD_PROPAGATION_STYLE=none` environment variable.
+
+If multiple environment variables are set, `DD_PROPAGATION_STYLE_INJECT` and `DD_PROPAGATION_STYLE_EXTRACT`
+override any value provided in `DD_PROPAGATION_STYLE`.
 
 If multiple extraction styles are enabled, extraction attempts are made
 in the order that those styles are specified. The first successfully
@@ -136,9 +156,12 @@ extracted value is used.
 
 [1]: /tracing/trace_collection/dd_libraries/go
 [2]: /getting_started/tagging/unified_service_tagging
-[3]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartOption
-[4]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=go#pagetitle
-[5]: /tracing/configure_data_security#telemetry-collection
-[6]: /tracing/advanced/setting_primary_tags_to_scope/#environment
-[7]: /getting_started/tracing/#environment-name
-[8]: https://github.com/openzipkin/b3-propagation
+[3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartOption
+[4]: /tracing/trace_pipeline/ingestion_mechanisms/
+[5]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=go#pagetitle
+[6]: /tracing/configure_data_security#telemetry-collection
+[7]: /tracing/advanced/setting_primary_tags_to_scope/#environment
+[8]: /getting_started/tracing/#environment-name
+[9]: https://github.com/openzipkin/b3-propagation
+[13]: /agent/guide/network/#configure-ports
+[14]: https://github.com/w3c/trace-context

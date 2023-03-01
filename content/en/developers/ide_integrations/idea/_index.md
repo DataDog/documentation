@@ -12,9 +12,9 @@ further_reading:
   text: "Getting started with Continuous Profiler."
 ---
 
-{{< beta-callout url="#" btn_hidden="true">}}
+{{< callout url="#" btn_hidden="true">}}
   The Datadog plugin for IntelliJ IDEA is in public beta. It is intended for Java developers who use the <a href="https://docs.datadoghq.com/profiler/#pagetitle">Continuous Profiler</a> for their Java services. If the plugin stops working unexpectedly, check for plugin updates or <a href=#feedback>reach out to the team</a>.
-{{< /beta-callout >}}
+{{< /callout >}}
 
 ## Overview
 
@@ -33,8 +33,8 @@ In addition to code highlighting, you can use the Datadog plugin for Intellij ID
 
 ## Requirements
 
-- **A Datadog account**: The plugin requires a Datadog account. If you're new to Datadog, go to the [Datadog website][4] to learn more about Datadog's observability tools and sign up for a free trial.
-- **Continuous Profiling**: To display code-level insights, the plugin requires Continuous Profiling instrumented on your Java Services. For more information, see [Getting Started with the Continuous Profiler][3].
+- **A Datadog account**: The plugin requires a Datadog account. If you're new to Datadog, go to the [Datadog website][3] to learn more about Datadog's observability tools and sign up for a free trial.
+- **Continuous Profiling**: To display code-level insights, the plugin requires Continuous Profiling instrumented on your Java Services. For more information, see [Getting Started with the Continuous Profiler][2].
 
 ## Setup
 
@@ -47,14 +47,18 @@ In addition to code highlighting, you can use the Datadog plugin for Intellij ID
 
 {{< img src="/developers/ide_integrations/idea/datadog-plugin1.png" alt="The Datadog plugin" style="width:100%;" >}}
 
-### Add Datadog credentials
+Alternatively, you can install the plugin from the [Jetbrains Marketplace][4].
 
-After installing the Datadog plugin and restarting IDEA, add your Datadog API and application keys to authenticate with Datadog:
+<span id="datadog_plugin_install_button"></span>
+
+### Log in to Datadog
+
+After installing the Datadog plugin and restarting IDEA, log in to Datadog:
 1. With a file or project open in IDEA, click the **Datadog** tool window.
-1. Click **Add your credentials...**.
-1. Enter your name, [API key and application key][5], and select a site.
+1. Click **Log in...**.
+1. In the browser window that opens, select your site and organization, then authorize access to the platform.
 
-**Note**: For most users, one pair of keys is all that is required. If you're using a multi-org setup with multiple key pairs, check to ensure that the correct pair is active. To find out which key IDEA is using, click **Preferences** -> **Tools** -> **Datadog** and check which account is active.
+**Note**: For most users, one login is all that is required. If you're using a multi-org setup, check to ensure that the correct account is active. To find out which login IDEA is using, click **Preferences** -> **Tools** -> **Datadog**, and check which account is active.
 
 ### Link a service
 
@@ -138,13 +142,19 @@ The active Profiling tab also affects the IDEA project tree view, which is annot
 
 ## Feedback
 
-Let us know what you think about the plugin! Provide feedback on our [discussion forum][1], or send an e-mail to `team-ide-integration@datadoghq.com`.
+Let us know what you think about the plugin! Provide feedback on our [discussion forum][5], or send an e-mail to `team-ide-integration@datadoghq.com`.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+<script src="https://plugins.jetbrains.com/assets/scripts/mp-widget.js"></script>
+<script>
+  // Please, replace #yourelement with a real element id on your webpage
+  MarketplaceWidget.setupMarketplaceWidget('install', 19495, "#datadog_plugin_install_button");
+</script>
+
 [1]: https://github.com/DataDog/datadog-for-intellij/discussions
-[3]: /getting_started/profiler/
-[4]: https://www.datadoghq.com/
-[5]: /account_management/api-app-keys/
+[2]: /getting_started/profiler/
+[3]: https://www.datadoghq.com/
+[4]: https://plugins.jetbrains.com/plugin/19495-datadog

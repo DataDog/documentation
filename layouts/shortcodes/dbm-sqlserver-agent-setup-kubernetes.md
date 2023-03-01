@@ -22,7 +22,11 @@ instances:
     username: datadog
     password: '<PASSWORD>'
     connector: 'odbc'
-    driver: 'FreeTDS'\
+    driver: 'FreeTDS'
+    include_ao_metrics: true  # Optional: For AlwaysOn users
+    tags:  # Optional
+      - 'service:<CUSTOM_SERVICE>'
+      - 'env:<CUSTOM_ENV>'\
   datadog/datadog"
 ```
 
@@ -39,8 +43,12 @@ instances:
     port: <SQL_PORT>
     username: datadog
     password: '<PASSWORD>'
-    connector: "odbc"
-    driver: "FreeTDS"
+    connector: 'odbc'
+    driver: 'FreeTDS'
+    include_ao_metrics: true  # Optional: For AlwaysOn users
+    tags:  # Optional
+      - 'service:<CUSTOM_SERVICE>'
+      - 'env:<CUSTOM_ENV>
 ```
 
 ### Configure with Kubernetes service annotations
@@ -65,7 +73,9 @@ metadata:
           "username": "datadog",
           "password": "<PASSWORD>",
           "connector": "odbc",
-          "driver": "FreeTDS"
+          "driver": "FreeTDS",
+          "include_ao_metrics": true,  # Optional: For AlwaysOn users
+          "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"]  # Optional
         }
       ]
 spec:

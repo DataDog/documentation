@@ -7,10 +7,10 @@ further_reading:
   text: Alert on no change in value
 - link: "https://docs.datadoghq.com/monitors/guide/set-up-an-alert-for-when-a-specific-tag-stops-reporting/"
   tag: "Guide"
-  text: Set up an alert for when a specific tag stops reporting  
+  text: Set up an alert for when a specific tag stops reporting
 - link: "https://docs.datadoghq.com/monitors/guide/prevent-alerts-from-monitors-that-were-in-downtime/"
   tag: "Guide"
-  text: Prevent alerts from monitors that were in downtime    
+  text: Prevent alerts from monitors that were in downtime
 - link: "https://www.datadoghq.com/blog/datadog-recommended-monitors/"
   tag: "Blog"
   text: Enable preconfigured alerts with recommended monitors
@@ -19,7 +19,7 @@ further_reading:
   text: Monitor alerts and events with OpsGenie and Datadog
 - link: "https://www.datadoghq.com/blog/set-and-monitor-slas/"
   tag: "Blog"
-  text: Monitoring services and setting SLAs with Datadog   
+  text: Monitoring services and setting SLAs with Datadog
 ---
 
 ## Overview
@@ -46,19 +46,19 @@ If your monitor’s state or status is not what you expect, confirm the behavior
 
 ### Alert conditions
 
-Unexpected monitor behavior can sometimes be the result of misconfigured [alert conditions][5], which vary by [monitor type][6]. If your monitor query uses the `as_count()` function, check the [`as_count()` in Monitor Evaluations][7] guide. 
+Unexpected monitor behavior can sometimes be the result of misconfigured [alert conditions][5], which vary by [monitor type][6]. If your monitor query uses the `as_count()` function, check the [`as_count()` in Monitor Evaluations][7] guide.
 
 If using recovery thresholds, check the conditions listed in the [recovery thresholds guide][8] to see if the behavior is expected.
 
 ### Monitor status and groups
 
-For both monitor evaluations and state, status is tracked by group. 
+For both monitor evaluations and state, status is tracked by group.
 
-For a multi-alert monitor, a group is a set of tags with one value for each grouping key (for example, `env:dev, host:myhost` for a monitor grouped by `env` and `host`). For a simple alert, there is only one group (`*`), representing everything within the monitor's scope. 
+For a multi alert monitor, a group is a set of tags with one value for each grouping key (for example, `env:dev, host:myhost` for a monitor grouped by `env` and `host`). For a simple alert, there is only one group (`*`), representing everything within the monitor's scope.
 
 By default, Datadog keeps monitor groups available in the UI for 24 hours, or 48 hours for host monitors, unless the query is changed. See [Monitor settings changes not taking effect][9] for more information.
 
-If you anticipate creating new monitor groups within the scope of your multi-alert monitors, you may want to configure a delay for the evaluation of these new groups. This can help you avoid alerts from the expected behavior of new groups, such as high resource usage associated with the creation of a new container. Read [new group delay][10] for more information.
+If you anticipate creating new monitor groups within the scope of your multi alert monitors, you may want to configure a delay for the evaluation of these new groups. This can help you avoid alerts from the expected behavior of new groups, such as high resource usage associated with the creation of a new container. Read [new group delay][10] for more information.
 
 If your monitor queries for crawler-based cloud metrics, use an [evaluation delay][11] to ensure that the metrics have arrived before the monitor evaluates. Read [cloud metric delay][12] for more information about cloud integration crawler schedules.
 
@@ -66,7 +66,7 @@ If your monitor queries for crawler-based cloud metrics, use an [evaluation dela
 
 If your monitor is behaving as expected, but producing unwanted notifications, there are multiple options to reduce or suppress notifications:
 
-- For monitors that rapidly change between states, read [reduce alert flapping][13] for ways to minimize alert fatigue. 
+- For monitors that rapidly change between states, read [reduce alert flapping][13] for ways to minimize alert fatigue.
 - For alerts which are expected or are otherwise not useful for your organization, use [Downtimes][14] to suppress unwanted notifications.
 - To control alert routing, use [template variables][15] and the separation of **warning** or **alert** states with [conditional variables][16].
 
@@ -84,17 +84,17 @@ Due to an [Opsgenie feature][19], Opsgenie will discard what is seen as a duplic
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/create/configuration/?tabs=thresholdalert#no-data
+[1]: /monitors/configuration/?tabs=thresholdalert#no-data
 [2]: /monitors/manage/status/#history
 [3]: /monitors/guide/monitor-arithmetic-and-sparse-metrics/
-[4]: /monitors/create/configuration/?tabs=thresholdalert#auto-resolve
-[5]: /monitors/create/configuration/?tabs=thresholdalert#set-alert-conditions
-[6]: /monitors/create/#monitor-types
+[4]: /monitors/configuration/?tabs=thresholdalert#auto-resolve
+[5]: /monitors/configuration/?tabs=thresholdalert#set-alert-conditions
+[6]: /monitors/types
 [7]: /monitors/guide/as-count-in-monitor-evaluations/
 [8]: /monitors/guide/recovery-thresholds/#behavior
 [9]: /monitors/guide/why-did-my-monitor-settings-change-not-take-effect
-[10]: /monitors/create/configuration/?tabs=thresholdalert#new-group-delay
-[11]: /monitors/create/configuration/?tabs=thresholdalert#evaluation-delay
+[10]: /monitors/configuration/?tabs=thresholdalert#new-group-delay
+[11]: /monitors/configuration/?tabs=thresholdalert#evaluation-delay
 [12]: /integrations/faq/cloud-metric-delay/
 [13]: /monitors/guide/reduce-alert-flapping/
 [14]: /monitors/guide/suppress-alert-with-downtimes/

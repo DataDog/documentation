@@ -36,7 +36,7 @@ npm install -g @datadog/datadog-ci
 
 <div class="alert alert-warning"><strong>Note</strong>: The standalone binaries are in <strong>beta</strong> and their stability is not guaranteed.</div>
 
-If installing NodeJS in the CI is an issue, standalone binaries are provided with [Datadog CI releases][4]. Only _linux-x64_, _darwin-x64_ (MacOS) and _win-x64_ (Windows) are supported. To install, run the following from your terminal:
+If installing Node.js in the CI is an issue, standalone binaries are provided with [Datadog CI releases][4]. Only _linux-x64_, _darwin-x64_ (MacOS) and _win-x64_ (Windows) are supported. To install, run the following from your terminal:
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -97,7 +97,78 @@ DD_ENV=ci DATADOG_API_KEY=&lt;api_key&gt; DATADOG_SITE={{< region-param key="dd_
 </code>
 </pre>
 
-**Note:** Reports larger than 250 MiB may not be process completely resulting in missing tests or logs. For the best experience ensure that the reports are under 250 MiB.
+<div class="alert alert-warning">Make sure that this command runs in your CI even when your tests have failed. Usually, when tests fail, the CI job aborts execution, and the upload command does not run.</div>
+
+{{< tabs >}}
+
+{{% tab "GitHub Actions" %}}
+Use the [Status check functions][1]:
+
+{{< code-block lang="yaml" >}}
+steps:
+  - name: Run tests
+    run: ./run-tests.sh
+  - name: Upload test results to Datadog
+    if: always()
+    run: datadog-ci junit upload --service service_name ./junit.xml
+{{< /code-block >}}
+
+[1]: https://docs.github.com/en/actions/learn-github-actions/expressions#always
+{{% /tab %}}
+
+{{% tab "GitLab" %}}
+Use the [`after_script` section][1]:
+
+{{< code-block lang="yaml" >}}
+test:
+  stage: test
+  script:
+    - ./run-tests.sh
+  after_script:
+    - datadog-ci junit upload --service service_name ./junit.xml
+{{< /code-block >}}
+
+[1]: https://docs.gitlab.com/ee/ci/yaml/#after_script
+{{% /tab %}}
+
+{{% tab "Jenkins" %}}
+Use the [`post` section][1]:
+
+{{< code-block lang="groovy" >}}
+pipeline {
+  agent any
+  stages {
+    stage('Run tests') {
+      steps {
+        sh './run-tests.sh'
+      }
+      post {
+        always {
+          sh 'datadog-ci junit upload --service service_name ./junit.xml'
+        }
+      }
+    }
+  }
+}
+{{< /code-block >}}
+
+[1]: https://www.jenkins.io/doc/book/pipeline/syntax/#post
+{{% /tab %}}
+
+{{% tab "Bash" %}}
+If your CI system allows sub-shells:
+
+{{< code-block lang="bash" >}}
+$(./run-tests.sh); export tests_exit_code=$?
+datadog-ci junit upload --service service_name ./junit.xml
+if [ $tests_exit_code -ne 0 ]; then exit $tests_exit_code; fi
+{{< /code-block >}}
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
+**Note:** Reports larger than 250 MiB may not be processed completely, resulting in missing tests or logs. For the best experience ensure that the reports are under 250 MiB.
 
 ## Configuration settings
 
@@ -119,6 +190,13 @@ This is the full list of options available when using the `datadog-ci junit uplo
 **Default**: (none)<br/>
 **Example**: `team:backend`<br/>
 **Note**: Tags specified using `--tags` and with the `DD_TAGS` environment variable are merged. If the same key appears in both `--tags` and `DD_TAGS`, the value in the environment variable `DD_TAGS` takes precedence.
+
+`--xpath-tag`
+: Key and xpath expression in the form `key=expression`. These provide a way to customize tags for test in the file (the `--xpath-tag` parameter can be specified multiple times).<br/>
+See [Providing metadata with XPath expressions][9] for more details on the supported expressions.<br/>
+**Default**: (none)<br/>
+**Example**: `test.suite=/testcase/@classname`<br/>
+**Note**: Tags specified using `--xpath-tag` and with `--tags` or `DD_TAGS` environment variable are merged. xpath-tag gets the highest precedence, as the value is usually different for each test.
 
 `--logs` **(beta)**
 : Enable forwarding content from the XML reports as [Logs][6]. The content inside `<system-out>`, `<system-err>`, and `<failure>` is collected as logs. Logs from elements inside a `<testcase>` are automatically connected to the test.<br/>
@@ -251,9 +329,109 @@ For mobile apps (Swift, Android):
 **Examples**: `iPhone 12 Pro Simulator`, `iPhone 13 (QA team)`
 
 
+## Providing metadata with XPath expressions
+
+In addition to the `--tags` CLI parameter and the `DD_TAGS` environment variable, which apply custom tags globally to all tests included the uploaded XML report, the `--xpath-tag` parameter provides custom rules to add tags from different attributes within the XML to each test.
+
+The parameter provided must have the format `key=expression`, where `key` is the name of the custom tag to be added and `expression` is a valid [XPath][10] expression within the ones supported.
+
+While XPath syntax is used for familiarity, only the following expressions are supported:
+
+
+`/testcase/@attribute-name`
+: The XML attribute from `<testcase attribute-name="value">`.
+
+`/testcase/../@attribute-name`
+: The XML attribute from the parent `<testsuite attribute-name="value">` of the current `<testcase>`.
+
+`/testcase/..//property[@name='property-name']`
+: The `value` attribute from the `<property name="property-name" value="value">` inside the parent `<testsuite>` of the current `<testcase>`.
+
+`/testcase//property[@name='property-name']`
+: The `value` attribute from the `<property name="property-name" value="value">` inside the current `<testcase>`.
+
+Examples:
+
+{{< tabs >}}
+
+{{% tab "Test suite from @classname" %}}
+By default, the `test.suite` tag of the tests is read from `<testsuite name="suite name">`. However, some plugins might report a better value in `<testcase classname="TestSuite">`.
+
+To change `test.suite` tags from `value 1`, `value 2` to `SomeTestSuiteClass`, `OtherTestSuiteClass`:
+
+{{< code-block lang="xml" >}}
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite tests="1" failures="0" time="0.030000" name="value 1">
+    <testcase classname="SomeTestSuiteClass" name="test_something" time="0.030000"></testcase>
+  </testsuite>
+  <testsuite tests="1" failures="0" time="0.021300" name="value 2">
+    <testcase classname="OtherTestSuiteClass" name="test_something" time="0.021300"></testcase>
+  </testsuite>
+</testsuites>
+{{< /code-block >}}
+
+{{< code-block lang="bash" >}}
+datadog-ci junit upload --service service_name \
+  --xpath-tag test.suite=/testcase/@classname ./junit.xml
+{{< /code-block >}}
+
+{{% /tab %}}
+
+{{% tab "Tag from attribute" %}}
+To add `custom_tag` to each test with values `value 1`, `value 2`:
+
+{{< code-block lang="xml" >}}
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite tests="1" failures="0" time="0.020000" name="SomeTestSuiteClass">
+    <testcase name="test_something" time="0.010000" attr="value 1"></testcase>
+    <testcase name="test_other" time="0.010000" attr="value 2"></testcase>
+  </testsuite>
+</testsuites>
+{{< /code-block >}}
+
+{{< code-block lang="bash" >}}
+datadog-ci junit upload --service service_name \
+  --xpath-tag custom_tag=/testcase/@attr ./junit.xml
+{{< /code-block >}}
+
+{{% /tab %}}
+
+{{% tab "Tag from testsuite property" %}}
+To add `custom_tag` to each test with values `value 1`, `value 2`:
+
+{{< code-block lang="xml" >}}
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite tests="1" failures="0" time="0.030000" name="SomeTestSuiteClass">
+    <properties>
+      <property name="prop" value="value 1"></property>
+    </properties>
+    <testcase name="test_something" time="0.030000" attr="value 1"></testcase>
+  </testsuite>
+  <testsuite tests="1" failures="0" time="0.021300" name="OtherTestSuiteClass">
+    <properties>
+      <property name="prop" value="value 1"></property>
+    </properties>
+    <testcase name="test_something" time="0.021300" attr="value 1"></testcase>
+  </testsuite>
+</testsuites>
+{{< /code-block >}}
+
+{{< code-block lang="bash" >}}
+datadog-ci junit upload --service service_name \
+  --xpath-tag custom_tag=/testcase/..//property[@name=\'prop\'] ./junit.xml
+{{< /code-block >}}
+
+**Note:** The name must be in quotes. Bash requires quotes to be escaped using a backslash, for example `[@name='prop']` must be entered as `[@name=\'prop\'].
+{{% /tab %}}
+
+{{< /tabs >}}
+
 ## Providing metadata through `<property>` elements
 
-In addition to the `--tags` CLI parameter and the `DD_TAGS` environment variable, which apply custom tags globally to all tests included the uploaded XML report, you can provide additional tags to specific tests by including `<property name="dd_tags[key]" value="value">` elements within the `<testsuite>` or `<testcase>` elements. If you add these tags to a `<testcase>` element, they are stored in its test span. If you add the tags to a `<testsuite>` element, they are stored in all of that suite's test spans.
+Another way to provide additional tags to specific tests is including `<property name="dd_tags[key]" value="value">` elements within the `<testsuite>` or `<testcase>` elements. If you add these tags to a `<testcase>` element, they are stored in its test span. If you add the tags to a `<testsuite>` element, they are stored in all of that suite's test spans.
 
 To be processed, the `name` attribute in the `<property>` element must have the format `dd_tags[key]`, where `key` is the name of the custom tag to be added. Other properties are ignored.
 
@@ -300,3 +478,5 @@ To be processed, the `name` attribute in the `<property>` element must have the 
 [6]: /logs/
 [7]: /getting_started/site/
 [8]: https://git-scm.com/downloads
+[9]: #providing-metadata-with-xpath-expressions
+[10]: https://www.w3schools.com/xml/xpath_syntax.asp

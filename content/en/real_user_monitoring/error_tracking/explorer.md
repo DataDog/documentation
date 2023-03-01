@@ -58,4 +58,4 @@ Each event generated is tagged with the version, the service, and the environmen
 
 
 [1]: /events
-[2]: /monitors/create/types/event/
+[2]: /monitors/types/event/

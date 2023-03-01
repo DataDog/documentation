@@ -65,7 +65,6 @@ Datadog Agent release numbering follows <a href="https://semver.org/">SemVer</a>
   {{< nextlink href="/agent/troubleshooting">}}<u>Troubleshooting</u>: Find troubleshooting information for the Datadog Agent.{{< /nextlink >}}
   {{< nextlink href="/agent/guide">}}<u>Guides</u>: These are in-depth, step-by-step tutorials for using the Agent.{{< /nextlink >}}
   {{< nextlink href="/agent/security">}}<u>Security</u>: Information on the main security capabilities and features available to customers to ensure their environment is secure.{{< /nextlink >}}
-  {{< nextlink href="/observability_pipelines/integrations/integrate_vector_with_datadog">}}<u>Integrate Vector with Datadog</u>: Configure the Datadog Agent to send data to Vector, a tool for building observability pipelines.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further Reading

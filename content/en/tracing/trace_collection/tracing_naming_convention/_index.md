@@ -117,8 +117,8 @@ The following span tags can be used to describe errors associated with spans:
 
 | **Name**    | **Type** | **Description**                                                  |
 |-----------------|----------|------------------------------------------------------------------|
-| `error.message` | `string` | The error type or kind (or code in some cases).                  |
-| `error.type`    | `string` | A concise, human-readable, one-line message explaining the event. |
+| `error.type` | `string` | The error type or kind (or code in some cases).                  |
+| `error.message`    | `string` | A concise, human-readable, one-line message explaining the event. |
 | `error.stack`   | `string` | The stack trace or the complementary information about the error. |
 
 ## Further reading

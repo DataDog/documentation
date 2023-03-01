@@ -17,7 +17,7 @@ assets:
     source_type_name: Altostra
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Altostra
   sales_email: support@altostra.com
   support_email: support@altostra.com
 categories:

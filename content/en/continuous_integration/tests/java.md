@@ -23,7 +23,7 @@ further_reading:
 
 Supported test frameworks:
 * JUnit >= 4.10 and >= 5.3
-  * Also includes any test framework based on JUnit, such as Spock Framework and Cucumber-Junit
+  * Also includes any test framework based on JUnit, such as Spock Framework and Cucumber-Junit. **Note**: Only Cucumber v1, which uses JUnit 4, is supported.
 * TestNG >= 6.4
 
 ## Configuring reporting method
@@ -122,6 +122,107 @@ dependencies {
 
 [1]: https://mvnrepository.com/artifact/com.datadoghq/dd-java-agent
 [2]: https://img.shields.io/maven-central/v/com.datadoghq/dd-java-agent?style=flat-square
+{{% /tab %}}
+{{< /tabs >}}
+
+### Installing the Java compiler plugin
+
+The Java compiler plugin works in combination with the tracer, providing it with additional source code information.
+Installing the plugin is an optional step that improves performance and accuracy of certain CI visibility features.
+
+The plugin works with the standard `javac` compiler (Eclipse JDT compiler is not supported).
+
+If the configuration is successful, you should see the line `DatadogCompilerPlugin initialized` in your compiler's output.
+
+{{< tabs >}}
+{{% tab "Maven" %}}
+
+Include the snippets below in the relevant sections of the same Maven profile that you have added to your root `pom.xml` for the tracer config.
+Replace `$VERSION` with the latest version of the artifacts accessible from the [Maven Repository][1] (without the preceding `v`): ![Maven Central][2]
+
+{{< code-block lang="xml" filename="pom.xml" >}}
+<dependency>
+    <groupId>com.datadoghq</groupId>
+    <artifactId>dd-javac-plugin-client</artifactId>
+    <version>$VERSION</version>
+</dependency>
+{{< /code-block >}}
+
+{{< code-block lang="xml" filename="pom.xml" >}}
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.5</version>
+            <configuration>
+                <annotationProcessorPaths>
+                    <annotationProcessorPath>
+                        <groupId>com.datadoghq</groupId>
+                        <artifactId>dd-javac-plugin</artifactId>
+                        <version>$VERSION</version>
+                    </annotationProcessorPath>
+                </annotationProcessorPaths>
+                <compilerArgs>
+                    <arg>-Xplugin:DatadogCompilerPlugin</arg>
+                </compilerArgs>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
+{{< /code-block >}}
+
+Maven compiler plugin supports [annotationProcessorPaths][3] property starting with version 3.5. If you absolutely must use an older version, declare Datadog compiler plugin as a regular dependency in your project.
+
+Additionally, if you are using JDK 16 or newer, add the following lines to the [.mvn/jvm.config][4] file in your project base directory:
+
+{{< code-block lang="properties" filename=".mvn/jvm.config" >}}
+--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED
+--add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED
+--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED
+--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED
+{{< /code-block >}}
+
+[1]: https://mvnrepository.com/artifact/com.datadoghq/dd-javac-plugin
+[2]: https://img.shields.io/maven-central/v/com.datadoghq/dd-javac-plugin?style=flat-square
+[3]: https://maven.apache.org/plugins/maven-compiler-plugin/compile-mojo.html#annotationProcessorPaths
+[4]: https://maven.apache.org/configure.html#mvn-jvm-config-file
+
+{{% /tab %}}
+{{% tab "Gradle" %}}
+
+Add plugin-client JAR to the project's classpath, add plugin JAR to the compiler's annotation processor path, and pass the plugin argument to the tasks that compile Java classes.
+
+Replace `$VERSION` with the latest version of the artifacts accessible from the [Maven Repository][1] (without the preceding `v`): ![Maven Central][2]
+
+{{< code-block lang="groovy" filename="build.gradle" >}}
+if (project.hasProperty("dd-civisibility")) {
+    dependencies {
+        implementation 'com.datadoghq:dd-javac-plugin-client:$VERSION'
+        annotationProcessor 'com.datadoghq:dd-javac-plugin:$VERSION'
+        testAnnotationProcessor 'com.datadoghq:dd-javac-plugin:$VERSION'
+    }
+
+    tasks.withType(JavaCompile).configureEach {
+        options.compilerArgs.add('-Xplugin:DatadogCompilerPlugin')
+    }
+}
+{{< /code-block >}}
+
+Additionally, if you are using JDK 16 or newer, add the following lines to your [gradle.properties][3] file:
+
+{{< code-block lang="properties" filename="gradle.properties" >}}
+org.gradle.jvmargs=\
+--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED  \
+--add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED \
+--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED \
+--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED
+{{< /code-block >}}
+
+[1]: https://mvnrepository.com/artifact/com.datadoghq/dd-javac-plugin
+[2]: https://img.shields.io/maven-central/v/com.datadoghq/dd-javac-plugin?style=flat-square
+[3]: https://docs.gradle.org/current/userguide/build_environment.html#sec:gradle_configuration_properties
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -289,6 +390,15 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 `DD_GIT_COMMIT_COMMITTER_DATE`
 : Commit committer date in ISO 8601 format.<br/>
 **Example**: `2021-03-12T16:00:28Z`
+
+## Information collected
+
+When CI Visibility is enabled, the following data is collected from your project:
+
+* Test names and durations.
+* Predefined environment variables set by CI providers.
+* Git commit history including the hash, message, author information, and files changed (without file contents).
+* Information from the CODEOWNERS file.
 
 ## Troubleshooting
 

@@ -79,7 +79,8 @@ On the backend, Datadog creates and adds the following span tags to spans after 
 | **Name**                   | **Remap from**                                      |
 |----------------------------|-----------------------------------------------------|
 | `network.host.ip`          | `tcp.local.address` - Node.js                       |
-| `network.destination.port` | `grpc.port` - Python<br>`tcp.remote.port` - Node.js |
+| `network.destination.ip`   | `out.host` - All languages  |
+| `network.destination.port` | `grpc.port` - Python<br>`tcp.remote.port` - Node.js<br>`out.port` - All languages  |
 
 #### HTTP requests
 
@@ -94,7 +95,7 @@ On the backend, Datadog creates and adds the following span tags to spans after 
 | **Name**                         | **Remap from**                                                                                                                                                                                                                  |
 |----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `db.system`                      | `db.type` - Java, Python, Node.js, Go<br>`active_record.db.vendor` - Ruby<br>`sequel.db.vendor` - Ruby                                                                                                                          |
-| `db.instance`                    | `mongodb.db` - Python, sql.db - Python                                                                                                                                                                                          |
+| `db.instance`                    | `mongodb.db` - Python<br> `sql.db` - Python<br> `db.name` - All languages                                           |
 | `db.statement`                   | `cassandra.query` - Go<br>`consul.command` - Python<br>`memcached.query` - Python<br>`mongodb.query` - Python, .NET, Go<br>`redis.command` - Python<br>`redis.raw_command` - Python<br>`sql.query` - Python, PHP, Node.js, Java |
 | `db.row_count`                   | `cassandra.row_count` - Python<br>`db.rowcount` - Python, PHP<br>`mongodb.rows` - Python<br>`sql.rows` - Python                                                                                                                 |
 | `db.cassandra.cluster`           | `cassandra.cluster` - Python, Go                                                                                                                                                                                                |
@@ -137,6 +138,11 @@ On the backend, Datadog creates and adds the following span tags to spans after 
 | `rpc.grpc.request.metadata.*`  | `grpc.request.metadata.*` - Python, Node.js<br>`rpc.grpc.request.metadata` - Go                         |
 | `rpc.grpc.response.metadata.*` | `grpc.response.metadata.*` - Python, Node.js        
 
+#### Errors
+
+| **Name**                       | **Remap from**                                                                                          |
+|--------------------------------|---------------------------------------------------------------------------------------------------------|
+| `error.message`                  | `error.msg` - All languages                      |
 
 ### Ignoring based on resources
 

@@ -31,12 +31,17 @@ Supported platforms:
 
 **Note**: If you are using Swift Concurrency, you need Xcode >= 13.2 for precise span representation of asynchronous tasks.
 
+### Test suite level visibility compatibility
+[Test suite level visibility][1] is only supported from `dd-sdk-swift-testing>=2.1.0`.
+
 ## Installing the Swift testing SDK
 
 There are three ways you can install the testing framework:
 
 {{< tabs >}}
 {{% tab "Swift Package Manager" %}}
+
+### Using Xcode Project
 
 1. Add `dd-sdk-swift-testing` package to your project. It is located at [`https://github.com/DataDog/dd-sdk-swift-testing`][1].
 
@@ -48,6 +53,21 @@ There are three ways you can install the testing framework:
 {{< img src="continuous_integration/swift_link2.png" alt="Swift Linking SPM" >}}
 
 3. If you run UITests, also link the app running the tests with this library.
+
+### Using Swift Package Project
+
+1. Add `dd-sdk-swift-testing` to your package dependencies array, for example:
+
+{{< code-block lang="swift" >}}
+.package(url: "https://github.com/DataDog/dd-sdk-swift-testing.git", from: "2.2.0")
+{{< /code-block >}}
+
+2. To add the testing framework to your testing targets' dependencies, add the following line to your test targets dependencies array:
+{{< code-block lang="swift" >}}
+.product(name: "DatadogSDKTesting", package: "dd-sdk-swift-testing")
+{{< /code-block >}}
+
+3. If you run UITests, also add the dependency to your applications running the tests.
 
 
 [1]: https://github.com/DataDog/dd-sdk-swift-testing
@@ -82,13 +102,22 @@ end
 
 [1]: https://github.com/DataDog/dd-sdk-swift-testing/releases
 {{% /tab %}}
+{{% tab "GitHub Actions" %}}
+
+If you use GitHub, you can use the [Swift test action][1] from GitHub Marketplace to automatically configure and run your tests. By default, the rest of the configuration described on this page can be skipped (except the configuration of the action itself), but you can use the configuration environment variables for disabling or configuring additional functionality.
+
+Compared to other methods, such as Cocoapods and Framework linking, the Swift test action option may be less flexible to configure and run, but requires no code changes.
+
+[1]: https://github.com/marketplace/actions/swift-test-action-for-datadog
+{{% /tab %}}
 {{< /tabs >}}
 <div class="alert alert-warning"><strong>Note</strong>: This framework is useful only for testing and should only be linked with the application when running tests. Do not distribute the framework to your users. </div>
-
 
 ## Instrumenting your tests
 
 ### Configuring Datadog
+
+#### Using Xcode Project
 
 To enable testing instrumentation, add the following environment variables to your test target or in the `Info.plist` file as [described below](#using-infoplist-for-configuration). You **must** select your main target in `Expand variables based on` or `Target for Variable Expansion` if you are using test plans:
 
@@ -98,6 +127,21 @@ To enable testing instrumentation, add the following environment variables to yo
 
 For UITests, environment variables need to be set only in the test target, because the framework automatically injects these values to the application.
 
+#### Using Swift Package Project
+
+To enable testing instrumentation, you must set the following environment variables to your commandline execution for the tests. You can alternatively set them in the environment before running the tests or you can prepend them to the command:
+
+<pre>
+<code>
+DD_TEST_RUNNER=1 DD_API_KEY=<your API_KEY> DD_APPLICATION_KEY=<your APPLICATION_KEY> DD_SITE=us1 SRCROOT=$PWD swift test ...
+
+or
+
+DD_TEST_RUNNER=1 DD_API_KEY=<your API_KEY> DD_APPLICATION_KEY=<your APPLICATION_KEY> DD_SITE=us1 SRCROOT=$PWD xcodebuild test -scheme ...
+</code>
+</pre>
+
+
 Set all these variables in your test target:
 
 `DD_TEST_RUNNER`
@@ -106,7 +150,11 @@ Set all these variables in your test target:
 **Recommended**: `$(DD_TEST_RUNNER)`
 
 `DD_API_KEY`
-: The [Datadog API key][1] used to upload the test results.<br/>
+: The [Datadog API key][2] used to upload the test results.<br/>
+**Default**: `(empty)`
+
+`DD_APPLICATION_KEY`
+: The [Datadog Application key][5] used to upload the test results.<br/>
 **Default**: `(empty)`
 
 `DD_SERVICE`
@@ -121,7 +169,7 @@ Set all these variables in your test target:
 **Examples**: `ci`, `local`
 
 `SRCROOT`
-: The path to the project SRCROOT environment variable. Use `$(SRCROOT)` for the value, because it is automatically set by Xcode.<br/>
+: The path to the project location. If using Xcode, use `$(SRCROOT)` for the value, because it is automatically set by it.<br/>
 **Default**: `(empty)`<br/>
 **Recommended**: `$(SRCROOT)`<br/>
 **Example**: `/Users/ci/source/MyApp`
@@ -129,7 +177,7 @@ Set all these variables in your test target:
 Additionally, configure the Datadog site to use the selected one ({{< region-param key="dd_site_name" >}}):
 
 `DD_SITE` (Required)
-: The [Datadog site][2] to upload results to.<br/>
+: The [Datadog site][3] to upload results to.<br/>
 **Default**: `datadoghq.com`<br/>
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
 
@@ -205,7 +253,7 @@ For UITests, both the test target and the application running from the UITests m
 
 ### RUM Integration
 
-If the application being tested is instrumented using RUM, your UI tests results and their generated RUM sessions are automatically linked. Learn more about RUM in the [RUM iOS Integration][3] guide. An iOS RUM version >= 1.10 is needed.
+If the application being tested is instrumented using RUM, your UI tests results and their generated RUM sessions are automatically linked. Learn more about RUM in the [RUM iOS Integration][4] guide. An iOS RUM version >= 1.10 is needed.
 
 
 ## Additional optional configuration
@@ -231,6 +279,9 @@ The framework enables auto-instrumentation of all supported libraries, but in so
 
 `DD_DISABLE_RUM_INTEGRATION`
 : Disables integration with RUM Sessions (Boolean)
+
+`DD_DISABLE_SOURCE_LOCATION`
+: Disables test source code location and Codeowners (Boolean)
 
 `DD_DISABLE_CRASH_HANDLER`
 : Disables crash handling and reporting. (Boolean)
@@ -261,6 +312,12 @@ For Network auto-instrumentation, you can configure these additional settings:
 `DD_ENABLE_NETWORK_CALL_STACK_SYMBOLICATED`
 : Shows the call stack information with not only the method name, but also the precise file and line information. May impact your tests' performance (Boolean)
 
+### Infrastructure test correlation
+
+If you are running tests in your own infrastructure (macOS or simulator tests), you can correlate your tests with your infrastructure metrics by installing the Datadog Agent and setting the following:
+
+`DD_CIVISIBILITY_REPORT_HOSTNAME`
+: Reports the hostname of the machine launching the tests (Boolean)
 
 You can also disable or enable specific auto-instrumentation in some of the tests from Swift or Objective-C by importing the module `DatadogSDKTesting` and using the class: `DDInstrumentationControl`.
 
@@ -288,7 +345,7 @@ DD_TAGS=key1:$FOO-v1 // expected: key1:BAR-v1
 
 **Note**: Using OpenTelemetry is only supported for Swift.
 
-Datadog Swift testing framework uses [OpenTelemetry][4] as the tracing technology under the hood. You can access the OpenTelemetry tracer using `DDInstrumentationControl.openTelemetryTracer` and use any OpenTelemetry API. For example, to add a tag or attribute:
+Datadog Swift testing framework uses [OpenTelemetry][6] as the tracing technology under the hood. You can access the OpenTelemetry tracer using `DDInstrumentationControl.openTelemetryTracer` and use any OpenTelemetry API. For example, to add a tag or attribute:
 
 {{< code-block lang="swift" >}}
 import DatadogSDKTesting
@@ -703,11 +760,48 @@ module.end()
 
 Always call `module.end()` at the end so that all the test info is flushed to Datadog.
 
+## Best practices
+
+Follow these practices to take full advantage of the testing framework and CI Visibility.
+
+### Generate symbols file when building
+
+Build your code in Xcode using `DWARF with dSYM File` (or `-Xswiftc -debug-info-format=dwarf` if building with `swift`)
+
+The testing framework uses symbol files for some of its functionality, including: symbolicating crashes, reporting test source location, and reporting code owners. It automatically generates the symbol file when debug symbols are embedded in the binaries, but it can take some extra time to load.
+
+### Disable sandbox for UI Tests on macOS
+
+In some Xcode versions, UI Test bundles are built with a sandbox by default. The settings that come with a sandbox prevent the testing framework from being run by some system commands with `xcrun`, so you need to disable it.
+
+Disable the sandbox by adding Entitlements to the UI Test runner bundle, then adding `App Sandbox = NO` to them. You can also create an `.entitlement` file and add it to the Signing Build Settings. This file should should include the following content:
+
+{{< code-block lang="xml" >}}
+<key>com.apple.security.app-sandbox</key>
+ <false/>
+{{< /code-block >}}
+
+## Information collected
+
+When CI Visibility is enabled, the following data is collected from your project:
+
+* Test names and durations.
+* Predefined environment variables set by CI providers.
+* Git commit history including the hash, message, author information, and files changed (without file contents).
+* Information from the CODEOWNERS file.
+
+In addition to that, if [Intelligent Test Runner][7] is enabled, the following data is collected from your project:
+
+* Code coverage information, including file names and line numbers covered by each test.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: /getting_started/site/
-[3]: /continuous_integration/guides/rum_swift_integration
-[4]: https://opentelemetry.io/
+[1]: /continuous_integration/tests/#test-suite-level-visibility
+[2]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: /getting_started/site/
+[4]: /continuous_integration/guides/rum_swift_integration
+[5]: https://app.datadoghq.com/organization-settings/application-keys
+[6]: https://opentelemetry.io/
+[7]: /continuous_integration/intelligent_test_runner/

@@ -17,7 +17,7 @@ title: Instrumentar aplicaciones .NET serverless
 
 ## Instalación
 
-Datadog te permite habilitar la Instrumentación de tus aplicaciones serverless de muchas formas diferentes. Elige el método que más te convenga de todos los que te presentamos a continuación. Por norma general, Datadog recomienda usar Datadog CLI.
+Datadog te permite habilitar la instrumentación de tus aplicaciones serverless de muchas formas diferentes. Elige el método que más te convenga de todos los que te presentamos a continuación. Por norma general, Datadog recomienda usar Datadog CLI.
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
@@ -30,7 +30,7 @@ Datadog CLI modifica la configuración de las funciones lambda existentes para h
     npm install -g @datadog/datadog-ci
     ```
 
-2. Si es la primera vez que usas la monitorización serverless de Datadog, inicia Datadog CLI en modo interactivo para recibir instrucciones sobre cómo realizar la primera instalación. Esto te permitirá entrar en materia rápidamente y saltarte los demás pasos. Si deseas instalar Datadog de forma permanente en tus aplicaciones de producción, omite ese paso y dirígete directamente a los siguientes para ejecutar el comando de Datadog CLI en tus canalizaciones CI/CD _después_ de haber efectuado la implementación de la forma tradicional.
+2. Si es la primera vez que usas la monitorización serverless de Datadog, inicia Datadog CLI en modo interactivo para recibir instrucciones sobre cómo realizar la primera instalación. Esto te permitirá entrar en materia rápidamente y saltarte los demás pasos. Si deseas instalar Datadog de forma permanente en tus aplicaciones de producción, omite ese paso y dirígete directamente a los siguientes para ejecutar el comando de Datadog CLI en tus pipelines CI/CD _después_ de haber efectuado la implementación de la forma tradicional.
 
     ```sh
     datadog-ci lambda instrument -i
@@ -64,7 +64,7 @@ Datadog CLI modifica la configuración de las funciones lambda existentes para h
 
 6. Instrumenta tus funciones lambda
 
-    **Nota**: Antes de nada, instrumenta tus funciones lambda en un entorno de desarrollo o ensayo. Si el resultado de la instrumentación no es satisfactorio, ejecuta `uninstrument` con los mismos argumentos para revertir los cambios.
+    **Nota**: Antes de nada, instrumenta tus funciones lambda en un entorno de desarrollo o staging. Si el resultado de la instrumentación no es satisfactorio, ejecuta `uninstrument` con los mismos argumentos para revertir los cambios.
 
     Para instrumentar tus funciones lambda, ejecuta el siguiente comando.
 
@@ -72,7 +72,7 @@ Datadog CLI modifica la configuración de las funciones lambda existentes para h
     datadog-ci lambda instrument -f <functionname> -f <another_functionname> -r <aws_region> -v {{< latest-lambda-layer-version layer="dd-trace-dotnet" >}} -e {{< latest-lambda-layer-version layer="extension" >}}
     ```
 
-    Para rellenar los marcadores de posición:
+    Para rellenar los parámetros:
     - Reemplaza `<functionname>` y `<another_functionname>` por los nombres de tus funciones lambda. Otra posibilidad es usar `--functions-regex` para instrumentar automáticamente varias funciones cuyos nombres coincidan con la expresión regular facilitada.
     - Reemplaza `<aws_region>` por el nombre de la región de AWS.
 
@@ -102,7 +102,7 @@ Para instalar y configurar el plugin serverless de Datadog, sigue estos pasos:
         apiKeySecretArn: <DATADOG_API_KEY_SECRET_ARN>
     ```
 
-    Para rellenar los marcadores de posición:
+    Para rellenar los parámetros:
     - Reemplaza `<DATADOG_SITE>` por {{< region-param key="dd_site" code="true" >}} [asegúrate de que has seleccionado el sitio (SITE) correcto a la derecha].
     - Reemplaza `<DATADOG_API_KEY_SECRET_ARN>` por el ARN del secreto de AWS siempre que tu [clave de API de Datadog][3] se haya almacenado de forma segura. La clave tiene que almacenarse en una cadena de texto sin formato (no en un blob JSON). El permiso `secretsmanager:GetSecretValue` es obligatorio. Para agilizar la prueba, puedes usar `apiKey` y configurar la clave de API de Datadog en texto sin formato.
 
@@ -199,12 +199,12 @@ Para instalar y configurar el plugin serverless de Datadog, sigue estos pasos:
 ## ¿Qué toca hacer ahora?
 
 - Ya puedes consultar las métricas, logs y trazas en la [Página principal serverless][1].
-- Envía una [métrica personalizada][2] o [tramo de APM][3] para monitorizar tu lógica empresarial.
+- Envía una [métrica personalizada][2] o [tramo de APM][3] para monitorizar tu lógica de negocio.
 - Consulta la [guía sobre cómo solucionar los problemas][4] si necesitas ayuda para recopilar la telemetría.
 - Consulta la [configuración avanzada][5] para:
     - conectar tu telemetría mediante el uso de tags,
     - recopilar la telemetría de Amazon API Gateway, Amazon SQS, etc.,
-    - capturar las cargas de solicitud y respuesta de Lambda,
+    - capturar las cargas útiles de solicitud y respuesta de Lambda,
     - vincular los errores de tus funciones lambda con tu código fuente,
     - filtrar o borrar información confidencial procedente de logs o trazas.
 

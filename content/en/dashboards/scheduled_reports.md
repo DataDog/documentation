@@ -25,7 +25,7 @@ Scheduled dashboard reports automatically send a visual summary of a dashboard t
 
 ## Schedule a report
 
-Create a new report from any dashboard with a grid-based or automatic layout. Click on the dashboard’s cog icon and select **Schedule a Report**.
+Create a new report from any dashboard with a grid-based or automatic layout. Click on the dashboard’s export icon and select **Schedule a Report**.
 
 The following widget types are supported:
 
