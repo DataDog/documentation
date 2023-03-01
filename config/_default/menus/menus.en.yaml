@@ -3023,11 +3023,16 @@ main:
     parent: continuous_testing
     identifier: continuous_testing_explorer
     weight: 4
+  - name: Metrics
+    url: synthetics/metrics/
+    parent: continuous_testing
+    identifier: continuous_testing_metrics
+    weight: 5
   - name: Troubleshooting
     url: continuous_testing/troubleshooting/
     parent: continuous_testing
     identifier: continuous_testing_troubleshooting
-    weight: 5
+    weight: 6
   - name: RUM & Session Replay
     url: real_user_monitoring/
     pre: rum
