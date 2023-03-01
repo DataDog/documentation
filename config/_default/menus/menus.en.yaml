@@ -2669,10 +2669,10 @@ main:
     parent: csm
     identifier: cloud_workload_security
     weight: 2
-  - name: Getting Started
-    url: security/cloud_workload_security/getting_started
+  - name: Setup
+    url: security/cloud_workload_security/setup
     parent: cloud_workload_security
-    identifier: cws_getting_started
+    identifier: cws_setup
     weight: 201
   - name: Managing Detection Rules
     url: security/cloud_workload_security/workload_security_rules
