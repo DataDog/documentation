@@ -96,7 +96,7 @@ title: スパンファセット
 
 ## ファセットの作成
 
-新しいファセットを作成するのではなく、既存のファセットを再利用することを習慣にすると良いでしょう。類似した性質の情報に単一のファセットを使用すると、チーム間のコラボレーションが促されます。
+スパン属性/タグにファセットを作成することは、スパンを検索するための必須の手順ではありません。ファセットは、特定のスパン属性に意味のある説明を追加したい場合や、スパン属性の値をスパン リストの左側にあるファセット リストに表示させたい場合に便利です。
 
 ### トレースサイドパネルからのファセット作成
 
@@ -126,7 +126,7 @@ title: スパンファセット
 
 [1]: /ja/tracing/trace_explorer/query_syntax/
 [2]: /ja/tracing/trace_explorer/group/
-[3]: /ja/monitors/create/types/apm/?tab=analytics
+[3]: /ja/monitors/types/apm/?tab=analytics
 [4]: /ja/dashboards/widgets/
 [5]: /ja/notebooks/
 [6]: /ja/tracing/trace_explorer/
