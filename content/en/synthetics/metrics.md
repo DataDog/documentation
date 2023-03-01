@@ -22,7 +22,7 @@ Metrics starting with:
 
 * `synthetics.test_runs` come from all your Synthetic tests
 * `datadog.estimated_usage.synthetics.*` return relevant usage data from your Synthetic tests
-* `synthetics.on_demand` return parallelization levels for [Continuous Testing](#continuous-testing)
+* `synthetics.on_demand` return relevant usage data for [Continuous Testing](#continuous-testing)
 
 Metrics starting with:
 
@@ -88,7 +88,7 @@ For more information on API test timings, read the guide on [API Test Timings an
 
 {{< get-metrics-from-git "synthetics" "synthetics.pl.worker" >}}
 
-### Continuous testing
+### Continuous Testing
 
 {{< get-metrics-from-git "synthetics" "synthetics.on_demand.concurrency" >}}
 
