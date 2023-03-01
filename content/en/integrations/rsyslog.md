@@ -52,7 +52,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
    $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - - %msg%\n"
 
    ruleset(name="infiles") {
-   action(type="omfwd" protocol="tcp" target="intake.logs.{{< region-param key="dd_site" code="true" >}}" port="10516" template="DatadogFormat"
+     action(type="omfwd" protocol="tcp" target="intake.logs.{{< region-param key="dd_site" >}}" port="10516" template="DatadogFormat")
    }
    ```
 {{< /site-region >}}
@@ -70,7 +70,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
    # include the omhttp module
    module(load="omhttp")
 
-   ruleset(name="infiles") { action(type="omhttp" server="http-intake.logs.{{< region-param key="dd_site" code="true" >}}" serverport="443" restpath="api/v2/logs" template="test_template" httpheaders=["DD-API-KEY: <API_KEY>", "Content-Type: application/json"])}
+   ruleset(name="infiles") { action(type="omhttp" server="http-intake.logs.{{< region-param key="dd_site" >}}" serverport="443" restpath="api/v2/logs" template="test_template" httpheaders=["DD-API-KEY: <API_KEY>", "Content-Type: application/json"])}
    ```
 {{< /site-region >}}
 

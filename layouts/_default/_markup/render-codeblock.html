@@ -1,0 +1,10 @@
+{{/* make sure that region-param short code output is unescaped */}}
+{{- $content := replaceRE `&lt;span class=&#34;(.*)&#34; data-region-param=&#34;(.*)&#34;&gt;&lt;/span&gt;` "<span class=\"$1\" data-region-param=\"$2\"></span>" .Inner -}}
+
+{{ $class := .Attributes.class | default ""    }}
+{{ $lang  := .Attributes.lang  | default .Type }}
+{{ if transform.CanHighlight $lang }}
+<div class="{{ $class }}">{{ highlight $content $lang | safeHTML }}</div>
+{{else}}
+<pre><code class="{{ $class }}">{{ $content | safeHTML }}</code></pre>
+{{end}}
