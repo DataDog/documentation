@@ -4,7 +4,7 @@ kind: documentation
 aliases:
   - /security_platform/cloud_workload_security/workload_security_rules
 further_reading:
-- link: "/security/cloud_workload_security/getting_started"
+- link: "/security/cloud_workload_security/setup"
   tag: "Documentation"
   text: "Get Started with Cloud Workload Security"
 - link: "/security/cloud_workload_security/agent_expressions"

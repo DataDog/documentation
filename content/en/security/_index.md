@@ -15,7 +15,7 @@ further_reading:
   - link: "/security/cspm/getting_started"
     tag: "Documentation"
     text: "Start tracking misconfigurations with Cloud Security Posture Management"
-  - link: "/security/cloud_workload_security/getting_started"
+  - link: "/security/cloud_workload_security/setup"
     tag: "Documentation"
     text: "Uncover kernel-level threats with Cloud Workload Security"
   - link: "https://securitylabs.datadoghq.com/"
