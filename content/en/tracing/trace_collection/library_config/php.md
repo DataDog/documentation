@@ -105,19 +105,29 @@ Whether to enable distributed tracing.
 Set an application’s environment, for example: `prod`, `pre-prod`, `stage`. Added in version `0.47.0`.
 
 `DD_PROFILING_ENABLED`
-: **INI**: Not available<br>
+: **INI**: `datadog.profiling.enabled`. INI available since `0.82.0`.<br>
+**Default**: `1`<br>
+Enable the Datadog profiler. Added in version `0.69.0`. See [Enabling the PHP Profiler][4]. For version `0.81.0` and below it defaulted to `0`.
+
+`DD_PROFILING_ENDPOINT_COLLECTION_ENABLED`
+: **INI**: `datadog.profiling.endpoint_collection_enabled`. INI available since `0.82.0`.<br>
+**Default**: `1`<br>
+Whether to enable the endpoint data collection in profiles. Added in version `0.79.0`.
+
+`DD_PROFILING_EXPERIMENTAL_ALLOCATION_ENABLED`
+: **INI**: `datadog.profiling.experimental_allocation_enabled`. INI available since `0.84.0`.<br>
 **Default**: `0`<br>
-Enable the Datadog profiler. Added in version `0.69.0`. See [Enabling the PHP Profiler][4].
+Enable the experimental allocation size and allocation bytes profile type. Added in version `0.84.0`.
 
 `DD_PROFILING_EXPERIMENTAL_CPU_TIME_ENABLED`
-: **INI**: Not available<br>
+: **INI**: `datadog.profiling.experimental_cpu_time_enabled`. INI available since `0.82.0`.<br>
 **Default**: `1`<br>
 Enable the experimental CPU profile type. Added in version `0.69.0`. For version `0.76` and below it defaulted to `0`.
 
 `DD_PROFILING_LOG_LEVEL`
-: **INI**: Not available<br>
+: **INI**: `datadog.profiling.log_level`. INI available since `0.82.0`.<br>
 **Default**: `off`<br>
-Set the profiler's log level. Acceptable values are `off`, `error`, `warn`, `info`, and `debug`. The profiler's logs are written to the standard error stream of the process. Added in version `0.69.0`.
+Set the profiler's log level. Acceptable values are `off`, `error`, `warn`, `info`, `debug`, and `trace`. The profiler's logs are written to the standard error stream of the process. Added in version `0.69.0`.
 
 `DD_PRIORITY_SAMPLING`
 : **INI**: `datadog.priority_sampling`<br>
@@ -152,7 +162,7 @@ IPC-based configurable circuit breaker max consecutive failures.
 `DD_TRACE_AGENT_PORT`
 : **INI**: `datadog.trace.agent_port`<br>
 **Default**: `8126`<br>
-The Agent port number.
+The Agent port number. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it.
 
 `DD_TRACE_AGENT_TIMEOUT`
 : **INI**: `datadog.trace.agent_timeout`<br>
@@ -162,7 +172,7 @@ The Agent request transfer timeout (in milliseconds).
 `DD_TRACE_AGENT_URL`
 : **INI**: `datadog.trace.agent_url`<br>
 **Default**: `null`<br>
-The Agent URL; takes precedence over `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`; for example: `https://localhost:8126`. Added in version `0.47.1`.
+The Agent URL; takes precedence over `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`; for example: `https://localhost:8126`. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it. Added in version `0.47.1`.
 
 `DD_TRACE_AUTO_FLUSH_ENABLED`
 : **INI**: `datadog.trace.auto_flush_enabled`<br>
@@ -178,6 +188,11 @@ Enable tracing of PHP scripts from the CLI. See [Tracing CLI scripts](#tracing-c
 : **INI**: `datadog.trace.debug`<br>
 **Default**: `0`<br>
 Enable debug mode. When `1`, log messages are sent to the device or file set in the `error_log` INI setting. The actual value of `error_log` might be different than the output of `php -i` as it can be overwritten in the PHP-FPM/Apache configuration files.
+
+`DD_TRACE_FORKED_PROCESS`
+: **INI**: `datadog.trace.forked_process`<br>
+**Default**: `1`<br>
+Indicates whether to trace a forked process. Set to `1` to trace forked processes, or to `0` to disable tracing in forked processes. If set to `0`, you can still manually re-enable a process' trace in code with `ini_set("datadog.trace.enabled", "1");`, but it will be presented as a fresh trace. Forked process traces are shown as whole distributed traces only when both `DD_TRACE_FORKED_PROCESS` and `DD_DISTRIBUTED_TRACING` are configured to `1` (on).
 
 `DD_TRACE_ENABLED`
 : **INI**: `datadog.trace.enabled`<br>
@@ -248,12 +263,25 @@ The sampling rate for the traces (defaults to: between `0.0` and `1.0`). For ver
 `DD_TRACE_SAMPLING_RULES`
 : **INI**: `datadog.trace.sampling_rules`<br>
 **Default**: `null`<br>
-A JSON encoded string to configure the sampling rate. Examples: Set the sample rate to 20%: `'[{"sample_rate": 0.2}]'`. Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'` (see [Integration names](#integration-names)). Note that the JSON object **must** be included in single quotes (`'`) to avoid problems with escaping of the double quote (`"`) character.|
+A JSON encoded string to configure the sampling rate. Examples: Set the sample rate to 20%: `'[{"sample_rate": 0.2}]'`. Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'` (see [Integration names](#integration-names)). The JSON object **must** be surrounded by single quotes (`'`) to avoid problems with escaping of the double quote (`"`) character.
+
+`DD_TRACE_RATE_LIMIT`
+: **INI**: `datadog.trace.rate_limit`<br>
+**Default**: `0`<br>
+Maximum number of spans to sample per second. All processes in an Apache or FPM pool share the same limiter. When unset (0) rate limiting is delegated to the Datadog Agent.
 
 `DD_TRACE_SPANS_LIMIT`
-: **INI**: `datadog.trace.spans_limit`
+: **INI**: `datadog.trace.spans_limit`<br>
 **Default**: `1000`<br>
 The maximum number of spans that are generated within one trace. If the maximum number of spans is reached, then spans are no longer generated. If the limit is increased, then the amount of memory that is used by a pending trace will increase and might reach the PHP maximum amount of allowed memory. The maximum amount of allowed memory can be increased with the PHP INI system setting `memory_limit`.
+
+`DD_SPAN_SAMPLING_RULES`
+: **INI**: `datadog.span_sampling_rules`<br>
+**Default**: `null`<br>
+A JSON encoded string to configure the sampling rate. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive). <br>
+**Example**: Set the span sample rate to 50% for the service 'my-service' and operation name 'http.request', up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`. The JSON object **must** be surrounded by single quotes (`'`) to avoid problems with escaping of the double quote (`"`) character.<br>
+For more information, see [Ingestion Mechanisms][6].<br>
+
 
 `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED`
 : **INI**: `datadog.trace.url_as_resource_names_enabled`<br>
@@ -270,19 +298,24 @@ Set an application’s version in traces and logs, for example: `1.2.3`, `6c44da
 **Default**: `*`<br>
 A comma-separated list of query parameters to be collected as part of the URL. Set to empty to prevent collecting any parameters, or `*` to collect all parameters. Added in version `0.74.0`.
 
-`DD_TRACE_CLIENT_IP_HEADER_DISABLED`
-: **INI**: `datadog.trace.client_ip_header_disabled`<br>
-**Default**: `0`<br>
-Disable client IP collection from relevant IP headers. Added in version `0.76.0`.
+`DD_TRACE_RESOURCE_URI_QUERY_PARAM_ALLOWED`
+: **INI**: `datadog.trace.resource_uri_query_param_allowed`<br>
+**Default**: `*`<br>
+A comma-separated list of query parameters to be collected as part of the resource URI. Set to empty to prevent collecting any parameters, or `*` to collect all parameters. Added in version `0.74.0`.
+
+`DD_TRACE_CLIENT_IP_ENABLED`
+: **INI**: `datadog.trace.client_ip_enabled`<br>
+**Default**: `false`<br>
+Enables IP collection client side. Added in version `0.84.0`.
 
 `DD_TRACE_CLIENT_IP_HEADER`
 : **INI**: `datadog.trace.client_ip_header`<br>
 **Default**: `null`<br>
-The IP header to be used for client IP collection, for example: `x-forwarded-for`. Added in version `0.76.0`.
+The IP header to be used for client IP collection, for example: `x-forwarded-for`. Added in version `0.84.0` (`0.76.0` when using ASM).
 
 `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP`
 : **INI**: `datadog.trace.obfuscation_query_string_regexp`<br>
-**Default**: 
+**Default**:
   ```
   (?i)(?:p(?:ass)?w(?:or)?d|pass(?:_?phrase)?|secret|(?:api_?|private_?|public_?|access_?|secret_?)key(?:_?id)?|token|consumer_?(?:id|key|secret)|sign(?:ed|ature)?|auth(?:entication|orization)?)(?:(?:\s|%20)*(?:=|%3D)[^&]+|(?:"|%22)(?:\s|%20)*(?::|%3A)(?:\s|%20)*(?:"|%22)(?:%2[^2]|%[^2]|[^"%])+(?:"|%22))|bearer(?:\s|%20)+[a-z0-9\._\-]|token(?::|%3A)[a-z0-9]{13}|gh[opsu]_[0-9a-zA-Z]{36}|ey[I-L](?:[\w=-]|%3D)+\.ey[I-L](?:[\w=-]|%3D)+(?:\.(?:[\w.+\/=-]|%3D|%2F|%2B)+)?|[\-]{5}BEGIN(?:[a-z\s]|%20)+PRIVATE(?:\s|%20)KEY[\-]{5}[^\-]+[\-]{5}END(?:[a-z\s]|%20)+PRIVATE(?:\s|%20)KEY|ssh-rsa(?:\s|%20)*(?:[a-z0-9\/\.+]|%2F|%5C|%2B){100,}
   ```
@@ -290,19 +323,22 @@ The IP header to be used for client IP collection, for example: `x-forwarded-for
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
 : **INI**: `datadog.trace.propagation_style_inject`<br>
-**Default**: `Datadog`<br>
+**Default**: `tracecontext,Datadog`<br>
 Propagation styles to use when injecting tracing headers. If using multiple styles, comma separate them. The supported styles are:
 
-  - [B3][7]
+
+  - [tracecontext][10]
+  - [b3multi][7]
   - [B3 single header][8]
   - Datadog
 
 `DD_TRACE_PROPAGATION_STYLE_EXTRACT`
 : **INI**: `datadog.trace.propagation_style_extract`<br>
-**Default**: `Datadog,B3,B3 single header`<br>
+**Default**: `tracecontext,Datadog,b3multi,B3 single header`<br>
 Propagation styles to use when extracting tracing headers. If using multiple styles, comma separate them. The supported styles are:
 
-  - [B3][7]
+  - [tracecontext][10]
+  - [b3multi][7]
   - [B3 single header][8]
   - Datadog
 
@@ -396,8 +432,30 @@ Note that `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` applies to only incoming requ
 
 ### `open_basedir` restrictions
 
-When [`open_basedir`][6] setting is used, then `/opt/datadog-php` should be added to the list of allowed directories.
+When [`open_basedir`][9] setting is used, then `/opt/datadog-php` should be added to the list of allowed directories.
 When the application runs in a docker container, the path `/proc/self` should also be added to the list of allowed directories.
+
+### Headers extraction and injection
+
+The Datadog APM Tracer supports [B3][7] and [W3C][10] headers extraction and injection for distributed tracing.
+
+You can configure injection and extraction styles for distributed headers.
+
+The PHP Tracer supports the following styles:
+
+- Datadog: `Datadog`
+- W3C: `tracecontext`
+- B3 Multi Header: `b3multi` (`B3` is deprecated)
+- B3 Single Header: `B3 single header`
+
+You can use the following environment variables to configure injection and extraction styles. For instance:
+
+- `DD_TRACE_PROPAGATION_STYLE_INJECT=Datadog,tracecontext`
+- `DD_TRACE_PROPAGATION_STYLE_EXTRACT=Datadog,tracecontext`
+
+The environment variable values are comma-separated lists of header styles enabled for injection or extraction. By default, only the `tracecontext` and `Datadog` injection styles are enabled.
+
+If multiple extraction styles are enabled, the extraction attempt is completed with the following priorities: `tracecontext` has priority, then `Datadog`, then B3.
 
 ## Further Reading
 
@@ -408,6 +466,9 @@ When the application runs in a docker container, the path `/proc/self` should al
 [3]: /tracing/setup/nginx/#nginx-and-fastcgi
 [4]: /profiler/enabling/php/
 [5]: https://github.com/mind04/mod-ruid2
-[6]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir
+[6]: /tracing/trace_pipeline/ingestion_mechanisms/
 [7]: https://github.com/openzipkin/b3-propagation
 [8]: https://github.com/openzipkin/b3-propagation#single-header
+[9]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir
+[10]: https://www.w3.org/TR/trace-context/#trace-context-http-headers-format
+[13]: /agent/guide/network/#configure-ports

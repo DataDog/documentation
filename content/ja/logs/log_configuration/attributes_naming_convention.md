@@ -82,7 +82,8 @@ title: 属性とエイリアス設定
 
 デフォルトの標準属性リストは機能領域に分かれています。
 
-- [ネットワーク/通信](#network)
+- [ネットワーク/通信](#web-access)
+- [ジオロケーション](#geolocation)
 - [HTTP リクエスト](#http-requests)
 - [ソースコード](#source-code)
 - [データベース](#database)
@@ -90,6 +91,7 @@ title: 属性とエイリアス設定
 - [ユーザー関連の属性](#user-related-attributes)
 - [Syslog およびログシッパー](#syslog-and-log-shippers)
 - [DNS](#dns)
+- [イベント](#events)
 
 #### Web アクセス
 

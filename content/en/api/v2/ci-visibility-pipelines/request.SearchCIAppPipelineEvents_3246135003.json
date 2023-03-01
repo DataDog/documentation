@@ -1,0 +1,13 @@
+{
+  "filter": {
+    "from": "now-30s",
+    "to": "now"
+  },
+  "options": {
+    "timezone": "GMT"
+  },
+  "page": {
+    "limit": 2
+  },
+  "sort": "timestamp"
+}

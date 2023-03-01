@@ -16,7 +16,7 @@ assets:
     source_type_name: Neo4j
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Neo4j
   sales_email: neo4j-cloud@neotechnology.com
   support_email: neo4j-cloud@neotechnology.com
 categories:
@@ -31,7 +31,7 @@ integration_title: Neo4j
 integration_version: 2.0.1
 is_public: true
 kind: integration
-manifest_version: 2.0.1
+manifest_version: 2.0.0
 name: neo4j
 oauth: {}
 public_title: Neo4j

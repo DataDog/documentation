@@ -26,12 +26,15 @@ further_reading:
 - link: https://www.datadoghq.com/blog/azure-service-health-monitoring-datadog/
   tag: ブログ
   text: Azure Service の健全性イベントを Datadog で監視
-- link: https://docs.datadoghq.com/integrations/guide/azure-portal/
-  tag: Documentation
-  text: Azure ポータルの Datadog
+- link: https://www.datadoghq.com/blog/azure-container-apps/
+  tag: ブログ
+  text: Datadog で Azure コンテナアプリを監視する
 - link: https://www.datadoghq.com/blog/azure-government-monitoring-datadog/
   tag: ブログ
   text: Datadog で Azure Government を監視する
+- link: https://docs.datadoghq.com/integrations/guide/azure-portal/
+  tag: Documentation
+  text: Azure ポータルの Datadog
 - link: https://docs.datadoghq.com/agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
   tag: Documentation
   text: クラウドインスタンスに Datadog Agent をインストールするメリットは何ですか？
@@ -122,7 +125,7 @@ Datadog の Azure インテグレーションは、<a href="https://docs.microso
 
 {{< site-region region="us,eu,gov,us5" >}}
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Azure CLI ツールまたは Azure ポータルを使用して、Microsoft Azure アカウントを Datadog と統合します。このインテグレーション方法は、すべての Azure クラウド (パブリック、中国、ドイツ、政府) で自動的に機能します。
 
@@ -444,7 +447,7 @@ Azure プラットフォームログ (リソースログを含む) を送信す�
 [2]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/eventhub_log_forwarder/activity_logs_deploy.ps1
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/eventhub_log_forwarder/resource_deploy.ps1
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "手動インストール" %}}
 
@@ -462,7 +465,7 @@ Azure から Datadog にログを送信するには、以下の手順に従っ�
 
 以下の手順に従って、新しいネームスペースを作成するか、既存のネームスペースに新しいイベントハブを追加します。
 
-1. Azure ポータルで、**Event Hubs** 概要に移動し、**Add** をクリックします。
+1. Azure ポータルで、**Event Hubs** 概要に移動し、**Create** をクリックします。
 2. 名前、価格帯、サブスクリプション、リソースグループを入力します。
 3. 場所を選択します。**注**: Event Hub とログの送信元となるリソースは同じ場所になければなりません。アクティビティログや他のアカウント全体のログソースは、その限りではありません。
 4. スループット単位、アベイラビリティーゾーン、および自動インフレに必要なオプションを選択します。
@@ -481,21 +484,22 @@ Datadog-Azure [関数を Event Hub トリガー][2]でセットアップし、Da
 
 新しい関数アプリを作成するか、既存の関数アプリを使用して、次のセクションにスキップします。
 
-1. Azure ポータルで、**Function Apps** > **Functions** と移動し、**Add** をクリックします。
-2. サブスクリプション、リソースグループ、地域を選択し、関数の名前を入力します。
-3. **Publish to Code, Runtime stack to Node.js, and Version to 12 LTS** を選択します。
-4. **Next:Hosting** をクリックします。
-5. ストレージアカウント、オペレーティングシステム、プランタイプを選択します。
-6. 確認し、新しい関数アプリを作成します。
-7. デプロイが完了するのを待ちます。
+1. Azure ポータルで、**Function Apps** 概要に移動し、**Create** をクリックします。
+2. サブスクリプション、リソースグループ、地域を選択し、関数アプリの名前を入力します。
+3. **Publish to Code, Runtime stack to Node.js, and Version to 16 LTS** を選択します。
+4. オペレーティングシステムとプランタイプを選択します。
+5. **Next:Hosting** をクリックします。
+6. ストレージアカウントを選択します。
+7. 確認し、新しい関数アプリを作成します。
+8. デプロイが完了するのを待ちます。
 
 イベントハブトリガーテンプレートを使用して、関数アプリに新しい関数を追加します。
 
 1. 関数アプリリストから新規/既存の関数アプリを選択します。
-2. 関数メニューから **Functions** を選択し、**Add** をクリックします。
-3. テンプレートメニューから [Azure イベントハブトリガー][2]を選択し、**New** をクリックします。
-4. イベントハブ接続用のネームスペースとイベントハブを選択し、**OK** をクリックします。
-5. **Create Function** をクリックします。
+2. 関数メニューから **Functions** を選択し、**Create** をクリックします。
+3. テンプレートメニューから [Azure イベントハブトリガー][2]を選択します。
+4. **Event Hub connection** で、ネームスペースとイベントハブを選択します。
+5. **作成**をクリックします。
 
 イベントハブトリガーを Datadog にポイントします。
 
@@ -543,7 +547,7 @@ Datadog-Azure [関数を Event Hub トリガー][2]でセットアップし、Da
 [3]: https://docs.microsoft.com/en-us/azure/azure-monitor/platform/diagnostic-settings
 [4]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/activity_logs_monitoring/index.js
 [5]: https://app.datadoghq.com/logs
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "Blob Storage" %}}
 
@@ -557,19 +561,20 @@ Datadog-Azure [関数を Event Hub トリガー][2]でセットアップし、Da
 
 Azure 関数に精通していない場合は、[Azure Portal で初めての関数を作成する][7]を参照してください。
 
-1. [Azure ポータル][2]で、**Function Apps** > **Functions** と移動し、**Add** をクリックします。
-2. サブスクリプション、リソースグループ、地域を選択し、関数の名前を入力します。
-3. **Publish Code** とランタイムスタック **Node.js** を選択します。
-4. **Next:Hosting** をクリックします。
-5. ストレージアカウントとプランの種類を選択し、オペレーティングシステム **Windows** を選択します。
-6. 確認し、新しい関数を **Create** します。
-7. デプロイが完了したら、関数アプリリストから新しい関数を選択します。
-8. 関数を**ポータル内**で作成し、Blog Storage トリガーテンプレート (**More templates…**から選択) を使用することを選択します。必要に応じて、`Microsoft.Azure.WebJobs.Extensions.EventHubs` 拡張をインストールします。
-9. **Storage account connection** を選択するか追加し、**Create** を作成します。
-10. `index.js` ファイルを作成し、[Datadog-Azure 関数コード][8]を追加します (`<DATADOG_API_KEY>` はご使用の [Datadog API キー][9]に置き換えます)。
-11. 関数を保存します。
-12. **統合**で、**BLOB パラメーター名**を `blobContent` に設定し、**保存**をクリックします。
-13. [Datadog ログエクスプローラー][10]でログをチェックして、正しくセットアップできたことを確認します。
+1. [Azure ポータル][2]で、**Function Apps** 概要に移動し、**Create** をクリックします。
+2. サブスクリプション、リソースグループ、地域を選択し、関数アプリの名前を入力します。
+3. **Publish to Code, Runtime stack to Node.js, and Version to 16 LTS** を選択します。
+4. オペレーティングシステム **Windows** とプランタイプを選択します。
+5. **Next:Hosting** をクリックします。
+6. ストレージアカウントを選択します。
+7. 確認し、新しい関数を **Create** します。
+8. デプロイが完了したら、関数アプリリストから新しい関数を選択します。
+9. 関数を**ポータル内**で作成し、Blog Storage トリガーテンプレート (**More templates…**から選択) を使用することを選択します。必要に応じて、`Microsoft.Azure.WebJobs.Extensions.EventHubs` 拡張をインストールします。
+10. **Storage account connection** を選択するか追加し、**Create** を作成します。
+11. `index.js` ファイルを作成し、[Datadog-Azure 関数コード][8]を追加します (`<DATADOG_API_KEY>` はご使用の [Datadog API キー][9]に置き換えます)。
+12. 関数を保存します。
+13. **統合**で、**BLOB パラメーター名**を `blobContent` に設定し、**保存**をクリックします。
+14. [Datadog ログエクスプローラー][10]でログをチェックして、正しくセットアップできたことを確認します。
 
 
 [1]: https://azure.microsoft.com/en-us/services/storage/blobs/
@@ -688,7 +693,7 @@ oauth フローが完了したら、Datadog オーガニゼーション名が正
 
 [1]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/overview#resource-groups
 [2]: https://docs.datadoghq.com/ja/getting_started/site/
-{{% /tab %}}
+{{< /tabs >}}
 
 {{< /tabs >}}
 
@@ -871,7 +876,7 @@ Azure インテグレーションメトリクス、イベント、およびサ�
 
 さらにヘルプが必要な場合は、[Datadog サポート][50]までお問い合わせください。
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

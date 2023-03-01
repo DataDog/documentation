@@ -117,18 +117,26 @@ If most of your service ingestion volume is due to decisions taken by upstream s
 
 For further investigations, use the [APM Trace - Estimated Usage Dashboard][12], which provides global ingestion information as well as breakdown graphs by `service`, `env` and `ingestion reason`.
 
+### Agent and tracing library versions
+
+See the **Datadog Agent and tracing library versions** your service is using. Compare the versions in use to the latest released versions to make sure you are running recent and up-to-date Agents and libraries.
+
+{{< img src="tracing/trace_indexing_and_ingestion/agent_tracer_version.png" style="width:90%;" alt="Agent and tracing library versions" >}}
+
+**Note**: You need to upgrade the Agent to v6.34 or v7.34 for the version information to be reported.
+
 ### Configure the service ingestion rate
 
 Click **Manage Ingestion Rate** to get instructions on how to configure your service ingestion rate.
 
 {{< img src="tracing/trace_indexing_and_ingestion/service_ingestion_rate_config.png" style="width:100%;" alt="Change the Service Ingestion Rate" >}}
 
-To specify that a specific percentage of a service's traffic should be sent, add an environment variable or a generated code snippet to your tracer configuration for that service.
+To specify a specific percentage of a service's traffic to be sent, add an environment variable or a generated code snippet to your tracing library configuration for that service.
 
 1. Select the service you want to change the ingested span percent for.
 2. Choose the service language.
 3. Choose the desired ingestion percentage.
-4. Apply the appropriate configuration generated from these choices to the indicated service and redeploy the service.
+4. Apply the appropriate configuration generated from these choices to the indicated service and redeploy the service. **Note**: The service name value is case sensitive. It should match the case of your service name.
 5. Confirm on the Ingestion Control Page that your new percentage has been applied by looking at the Traffic Breakdown column, which surfaces the sampling rate applied. The ingestion reason for the service is shown as `ingestion_reason:rule`.
 
 

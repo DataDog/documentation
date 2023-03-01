@@ -16,16 +16,17 @@ title: Configuration des live containers
 
 L'Agent Datadog et l'Agent de cluster peuvent être configurés afin de récupérer des ressources Kubernetes pour des [live containers][1]. Une telle configuration vous permet de surveiller l'état de vos pods, déploiements et autres entités Kubernetes dans un espace de nommage ou une zone de disponibilité spécifique. Cela vous permet également de consulter les spécifications de ressources pour les échecs de pods d'un déploiement ou encore de mettre en corrélation l'activité d'un nœud avec les logs associés.
 
-Avant d'effectuer les configurations ci-dessous pour les ressources Kubernetes des live containers, il est nécessaire d'installer au minimum la [version 7.27.0 de l'Agent][2] ainsi que la [version 1.11.0 de l'Agent de cluster][3].
+La récupération des ressources Kubernetes pour les live containers requiert au minimum la **version 7.27.0 de l'Agent** et la **version 1.11.0 de l'Agent de cluster**. Pour les versions antérieures de l'Agent Datadog et de l'Agent de cluster, consultez la section [Configuration des live containers pour les anciennes versions des Agents][4].
+
+Remarque : pour Kubernetes 1.25 et les versions ultérieures, la version minimale requise de l'Agent de cluster est la 7.40.0.
 
 {{< tabs >}}
 {{% tab "Helm" %}}
 
 Si vous utilisez le [chart Helm Datadog][1] officiel :
 
-- Utilisez au minimum la version 2.10.0 du chart.
-  **Remarque** : assurez-vous que la version minimale ou une version ultérieure de l'Agent et de l'Agent de cluster est codée en dur dans le fichier [values.yaml][2] de votre chart Helm.
-- Vérifiez que l'Agent de processus est activé. Pour ce faire, modifiez le fichier `datadog-values.yaml` afin d'inclure ce qui suit :
+- Utilisez au minimum la version 2.10.0 du chart. Assurez-vous que les versions de l'Agent et de l'Agent de cluster sont codées en dur, avec les versions minimales requises, dans le fichier [values.yaml][3] de votre chart Helm.
+- Activez l'Agent de processus. Pour ce faire, modifiez le fichier `datadog-values.yaml` afin d'inclure ce qui suit :
 
     ```yaml
     datadog:
@@ -33,6 +34,7 @@ Si vous utilisez le [chart Helm Datadog][1] officiel :
         processAgent:
             enabled: true
     ```
+
 - Déployez une nouvelle version.
 
 Dans certaines configurations, il arrive que l'Agent de processus et l'Agent de cluster ne parviennent pas à détecter automatiquement un nom de cluster Kubernetes. Lorsque c'est le cas, la fonctionnalité ne démarre pas et l'avertissement suivant s'affiche dans le log de l'Agent de cluster : `Orchestrator explorer enabled but no cluster name set: disabling`. Vous devez alors définir `datadog.clusterName` sur le nom de votre cluster dans [values.yaml][2].
@@ -82,6 +84,8 @@ La version 1.11.0 ou une version ultérieure de l'[Agent de cluster][1] est requ
         resources:
         - deployments
         - replicasets
+        - daemonsets
+        - statefulsets
         verbs:
         - list
         - get
@@ -95,8 +99,16 @@ La version 1.11.0 ou une version ultérieure de l'[Agent de cluster][1] est requ
         - list
         - get
         - watch
+      - apiGroups:
+       - networking.k8s.io
+       resources:
+       - ingresses
+       verbs:
+       - list
+       - watch
       ...
     ```
+
     Ces autorisations sont requises pour créer une ConfigMap `datadog-cluster-id` dans le même espace de nommage que le DaemonSet de l'Agent et le déploiement de l'Agent de cluster, mais également pour recueillir les ressources Kubernetes prises en charge.
 
     Si la ConfigMap `cluster-id` n'est pas créée par l'Agent de cluster, le pod de l'Agent ne peut pas recueillir de ressources. Pour y remédier, modifiez les autorisations de l'Agent de cluster et redémarrez son pod afin qu'il puisse créer la ConfigMap, puis redémarrez le pod de l'Agent.
@@ -108,23 +120,21 @@ La version 1.11.0 ou une version ultérieure de l'[Agent de cluster][1] est requ
       value: "true"
     ```
 
-Dans certaines configurations, il arrive que l'Agent de processus et l'Agent de cluster ne parviennent pas à détecter automatiquement un nom de cluster Kubernetes. Lorsque c'est le cas, la fonctionnalité ne démarre pas et l'avertissement suivant s'affiche dans le log de l'Agent de cluster : `Orchestrator explorer enabled but no cluster name set: disabling`. Vous devez alors définir ajouter les options suivantes dans la section `env` de l'Agent de cluster et de l'Agent de processus :
+Dans certaines configurations, il arrive que l'Agent de processus et l'Agent de cluster ne parviennent pas à détecter automatiquement un nom de cluster Kubernetes. Lorsque c'est le cas, la fonctionnalité ne démarre pas et l'avertissement suivant s'affiche dans le log de l'Agent de cluster : `Orchestrator explorer enabled but no cluster name set: disabling`. Ajoutez alors les options suivantes dans la section `env` de l'Agent de cluster et de l'Agent de processus :
 
   ```yaml
   - name: DD_CLUSTER_NAME
     value: "<NOM_CLUSTER>"
   ```
 
-[1]: /fr/agent/cluster_agent/
-[2]: /fr/agent/cluster_agent/setup/
 {{% /tab %}}
 {{< /tabs >}}
 
 ### Matrice de compatibilité de la collecte de ressources
 
-Le tableau suivant présente la liste des ressources recueillies et des versions minimales de l'Agent, l'Agent de cluster et du chart Helm requises pour la collecte.
+Le tableau suivant présente la liste des ressources recueillies et les versions minimales de l'Agent, de l'Agent de cluster et du chart Helm requises pour la collecte.
 
-| Ressource | Version minimale de l'Agent | Version minimale de l'Agent de cluster | Version minimale du chart Helm |
+| Ressource | Version minimale de l'Agent | Version minimale de l'Agent de cluster* | Version minimale du chart Helm |
 |---|---|---|---|
 | ClusterRoleBindings | 7.27.0 | 1.19.0 | 2.30.9 |
 | ClusterRoles | 7.27.0 | 1.19.0 | 2.30.9 |
@@ -132,6 +142,7 @@ Le tableau suivant présente la liste des ressources recueillies et des versions
 | CronJobs | 7.27.0 | 1.13.1 | 2.15.5 |
 | DaemonSets | 7.27.0 | 1.14.0 | 2.16.3 |
 | Déploiements | 7.27.0 | 1.11.0 | 2.10.0 |
+| Ingresses | 7.27.0 | 1.22.0 | 2.30.7 |
 | Tâches | 7.27.0 | 1.13.1 | 2.15.5 |
 | Nœuds | 7.27.0 | 1.11.0 | 2.10.0 |
 | PersistentVolumes | 7.27.0 | 1.18.0 | 2.30.4 |
@@ -144,100 +155,7 @@ Le tableau suivant présente la liste des ressources recueillies et des versions
 | Services | 7.27.0 | 1.11.0 | 2.10.0 |
 | Statefulsets | 7.27.0 | 1.15.0 | 2.20.1 |
 
-### Instructions pour les versions précédentes de l'Agent et de l'Agent de cluster
-
-La vue des ressources Kubernetes pour les live containers nécessitait auparavant au minimum la [version 7.21.1 de l'Agent][2] et la [version 1.9.0 de l'Agent de cluster][3]. Les versions minimales ont cependant été mises à jour. Pour ces anciennes versions, la configuration de DaemonSet impliquait un processus légèrement différent. Par souci de commodité, les instructions sur ce processus sont indiquées ci-dessous.
-
-{{< tabs >}}
-{{% tab "Helm" %}}
-
-Si vous utilisez le [chart Helm Datadog][1] officiel :
-
-- Utilisez une version du chart ultérieure à 2.10.0 et antérieure à 2.4.5. SI vous utilisez la version 2.10.0 ou une version ultérieure, consultez plutôt les [dernières instructions de configuration][2].
-  **Remarque** : assurez-vous que les versions de l'Agent et de l'Agent de cluster sont codées en dur, avec les versions minimales requises, dans le fichier [values.yaml][3] de votre chart Helm.
-- Définissez `datadog.orchestratorExplorer.enabled` sur `true` dans [values.yaml][3].
-- Déployez une nouvelle version.
-
-Dans certaines configurations, il arrive que l'Agent de processus et l'Agent de cluster ne parviennent pas à détecter automatiquement un nom de cluster Kubernetes. Lorsque c'est le cas, la fonctionnalité ne démarre pas et l'avertissement suivant s'affiche dans le log de l'Agent de cluster : `Orchestrator explorer enabled but no cluster name set: disabling`. Vous devez alors définir `datadog.clusterName` sur le nom de votre cluster dans [values.yaml][3].
-
-[1]: https://github.com/DataDog/helm-charts
-[2]: /fr/infrastructure/livecontainers/#configuration
-[3]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
-{{% /tab %}}
-{{% tab "DaemonSet" %}}
-
-L'Agent de cluster doit être en cours d'exécution et l'Agent doit pouvoir communiquer avec celui-ci. Consultez la section [Configuration de l'Agent de cluster][1] pour en savoir plus.
-
-1. Définissez le conteneur de l'Agent de cluster à l'aide de la variable d'environnement suivante :
-
-    ```yaml
-      - name: DD_ORCHESTRATOR_EXPLORER_ENABLED
-        value: "true"
-    ```
-
-2. Définissez le ClusterRole de l'Agent de cluster à l'aide des autorisations RBAC suivantes.
-
-    **Remarque** : pour les apiGroups `apps`, les live containers ont besoin d'autorisations
-    pour recueillir des ressources Kubernetes de base (`pods`, `services`, `nodes`, etc.).
-    Elles devraient déjà se trouver dans le RBAC si vous avez suivi la [documentation relative à la configuration de l'Agent de cluster][1]. Si elles sont absentes, prenez soin de les ajouter (après `deployments`, `replicasets`) :
-
-    ```yaml
-      ClusterRole:
-      - apiGroups:  # To create the datadog-cluster-id ConfigMap
-        - ""
-        resources:
-        - configmaps
-        verbs:
-        - create
-        - get
-        - update
-      ...
-      - apiGroups:  # Required to get the kube-system namespace UID and generate a cluster ID
-        - ""
-        resources:
-        - namespaces
-        verbs:
-        - get
-      ...
-      - apiGroups:  # To collect new resource types
-        - "apps"
-        resources:
-        - deployments
-        - replicasets
-        - daemonsets
-        - statefulsets
-        verbs:
-        - list
-        - get
-        - watch
-    ```
-
-    Ces autorisations sont requises pour créer une ConfigMap `datadog-cluster-id` dans le même espace de nommage que le DaemonSet de l'Agent et le déploiement de l'Agent de cluster, mais également pour recueillir les déploiements et les ReplicaSets.
-
-    Si la ConfigMap `cluster-id` n'est pas créée par l'Agent de cluster, le pod de l'Agent n'est pas initié et génère le statut `CreateContainerConfigError`. Si le pod de l'Agent est bloqué par l'absence de la ConfigMap, modifiez les autorisations de l'Agent de cluster et redémarrez ses pods pour permettre la création de la ConfigMap. Le pod de l'Agent récupérera automatiquement un statut normal.
-
-3. L'Agent de processus, qui s'exécute dans le DaemonSet de l'Agent, doit être activé et en cours d'exécution. La collecte de processus ne doit pas forcément être en cours. Les options suivantes doivent également être configurées :
-
-    ```yaml
-    - name: DD_ORCHESTRATOR_EXPLORER_ENABLED
-      value: "true"
-    - name: DD_ORCHESTRATOR_CLUSTER_ID
-      valueFrom:
-        configMapKeyRef:
-          name: datadog-cluster-id
-          key: id
-    ```
-
-Dans certaines configurations, il arrive que l'Agent de processus et l'Agent de cluster ne parviennent pas à détecter automatiquement un nom de cluster Kubernetes. Lorsque c'est le cas, la fonctionnalité ne démarre pas et l'avertissement suivant s'affiche dans le log de l'Agent de cluster : `Orchestrator explorer enabled but no cluster name set: disabling`. Vous devez alors définir ajouter les options suivantes dans la section `env` de l'Agent de cluster et de l'Agent de processus :
-
-  ```yaml
-  - name: DD_CLUSTER_NAME
-    value: "<NOM_CLUSTER>"
-  ```
-
-[1]: /fr/agent/cluster_agent/setup/
-{{% /tab %}}
-{{< /tabs >}}
+**Remarque** : pour Kubernetes 1.25 et les versions ultérieures, la version minimale requise de l'Agent de cluster est la 7.40.0.
 
 ### Ajouter des tags personnalisés aux ressources
 
@@ -247,11 +165,10 @@ Des tags supplémentaires sont ajoutés via la variable d'environnement `DD_ORCH
 
 **Remarque** : ces tags s'affichent uniquement dans la vue des ressources Kubernetes.
 
-
 {{< tabs >}}
 {{% tab "Helm" %}}
 
-SI vous utilisez le chart Helm officiel, ajoutez la variable d'environnement à l'Agent de processus et à l'Agent de cluster en définissant respectivement `agents.containers.processAgent.env` et `clusterAgent.env` dans [values.yaml][1].
+Si vous utilisez le chart Helm officiel, ajoutez la variable d'environnement à l'Agent de processus et à l'Agent de cluster en définissant `agents.containers.processAgent.env` et `clusterAgent.env` dans [values.yaml][1].
 
 ```yaml
   agents:
@@ -266,10 +183,8 @@ SI vous utilisez le chart Helm officiel, ajoutez la variable d'environnement à 
         value: "tag1:value1 tag2:value2"
 ```
 
-
 Déployez ensuite une nouvelle version.
 
-[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
 
@@ -287,8 +202,8 @@ Définissez la variable d'environnement sur les conteneurs de l'Agent de process
 
 Il est possible d'inclure et/ou d'exclure des conteneurs pour la collecte en temps réel :
 
-* Pour exclure des conteneurs, passez la variable d'environnement `DD_CONTAINER_EXCLUDE` ou ajoutez `container_exclude:` dans le fichier de configuration principal `datadog.yaml`.
-* Pour inclure des conteneurs, passez la variable d'environnement `DD_CONTAINER_INCLUDE` ou ajoutez `container_include:` dans le fichier de configuration principal `datadog.yaml`.
+- Pour exclure des conteneurs, passez la variable d'environnement `DD_CONTAINER_EXCLUDE` ou ajoutez `container_exclude:` dans le fichier de configuration principal `datadog.yaml`.
+- Pour inclure des conteneurs, passez la variable d'environnement `DD_CONTAINER_INCLUDE` ou ajoutez `container_include:` dans le fichier de configuration principal `datadog.yaml`.
 
 Ces deux arguments ont pour valeur un **nom d'image**. Les expressions régulières sont également prises en charge.
 
@@ -347,6 +262,4 @@ Les chemins contenant des termes sensibles ne sont toutefois pas modifiés. Par 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/infrastructure/livecontainers/configuration
-[2]: /fr/tagging/assigning_tags?tab=agentv6v7#host-tags
-[3]: /fr/getting_started/tagging/
+[4]: /fr/infrastructure/livecontainers/legacy

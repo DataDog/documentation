@@ -1,0 +1,59 @@
+{{ define "main" }}
+    {{ $headless := .Site.GetPage "/glossary/terms" }}
+    {{ $headless_term_pages := $headless.Resources.ByType "page" }}
+    {{ $letters := slice }}
+
+    <div class="glossary-main">
+        <h1 class="pb-0">{{ .Title }}</h1>
+        <div class="row">
+            <div class="col-10 col-md-12 order-md-1 mt-5">
+                {{ .Content }}
+                {{ range $headless_term_pages }}
+                    {{ $first_char := substr .Title 0 1 | upper }}
+                    {{ $curr_letter := $.Scratch.Get "curr_letter" }}
+
+                    {{ if ne $first_char $curr_letter }}
+                        {{ $.Scratch.Set "curr_letter" $first_char }}
+                        {{ $letters = $letters | append $first_char }}
+                        <h2 id="{{ $first_char | anchorize }}" class="mb-3">{{ $first_char }}</h2>
+                    {{ end }}
+
+                    <h4 id="{{ anchorize .Params.Title }}" class="font-24-28">
+                        {{ .Params.Title }}
+                    </h4>
+
+                    {{ with .Params.related_terms }}
+                        <p class="fst-italic mb-0">
+                            {{ $len := len . }}
+
+                            Related terms:
+                            {{ range $index, $related_term := . }}
+                                <a href="/glossary/#{{ anchorize $related_term }}">{{ $related_term }}</a>
+                                {{ if ne $index (sub $len 1) }}, {{ end }}
+                            {{ end }}
+                        </p>
+                    {{ end }}
+
+                    {{ with .Params.synonyms }}
+                        <p class="fst-italic">
+                            Synonyms: {{ delimit . ", " }}
+                        </p>
+                    {{ end }}
+
+                    <p>{{ .Content | safeHTML }}</p>
+                {{ end }}
+            </div>
+
+            <!-- ID is scrollspy target -->
+            <nav id="glossary-nav">
+                <ul class="nav js-glossary-nav col-2 col-md-12 d-flex align-items-end">
+                    {{ range $letters }}
+                        <li class="nav-item">
+                            <a class="nav-link btn font-14-19" role='button' href='#{{ . | lower }}'>{{ . }}</a>
+                        </li>
+                    {{ end }}
+                </ul>
+            </nav>
+        </div>
+    </div>
+{{ end }}

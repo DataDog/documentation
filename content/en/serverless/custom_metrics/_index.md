@@ -1,5 +1,5 @@
 ---
-title: Custom Metrics from Serverless Applications
+title: Custom Metrics from AWS Lambda Serverless Applications
 kind: documentation
 ---
 
@@ -189,7 +189,8 @@ namespace Example
             StatsdServerName = "127.0.0.1",
             StatsdPort = 8125,
         };
-        DogStatsd.Configure(dogstatsdConfig);
+        if (!DogStatsd.Configure(dogstatsdConfig))
+            throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
     }
 
     public Stream MyHandler(Stream stream)
@@ -263,9 +264,9 @@ async function myHandler(event, context) {
     sendDistributionMetricWithDate(
         'coffee_house.order_value', // Metric name
         12.45,                      // Metric value
-        'product:latte',            // First tag
-        'order:online'              // Second tag
         new Date(Date.now()),       // date
+        'product:latte',            // First tag
+        'order:online',             // Second tag
     );
 }
 ```

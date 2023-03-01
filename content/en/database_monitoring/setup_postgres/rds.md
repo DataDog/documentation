@@ -8,7 +8,7 @@ further_reading:
   text: "Basic Postgres Integration"
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
@@ -80,7 +80,7 @@ CREATE SCHEMA datadog;
 GRANT USAGE ON SCHEMA datadog TO datadog;
 GRANT USAGE ON SCHEMA public TO datadog;
 GRANT pg_monitor TO datadog;
-CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
+CREATE EXTENSION IF NOT EXISTS pg_stat_statements schema public;
 ```
 
 {{% /tab %}}
@@ -390,6 +390,9 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 ### Validate
 
 [Run the Agent's status subcommand][9] and look for `postgres` under the Checks section. Or visit the [Databases][10] page to get started!
+
+## Example Agent Configurations
+{{% dbm-postgres-agent-config-examples %}}
 
 ## Install the RDS Integration
 

@@ -39,7 +39,7 @@ AWS Billing を使用すると、CloudWatch の使用量を含む AWS インフ�
 
 ### メトリクスの収集
 
-1. [AWS インテグレーションタイル][2]のメトリクス収集で、`Billing` をオンにします。
+1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `Billing` が有効になっていることを確認します。
 2. AWS 請求のメトリクスを収集するには、次のアクセス許可を [Datadog IAM ポリシー][3]に追加します。詳細については、AWS ウェブサイト上の [AWS 予算ポリシー][4]を参照してください。
 
     | AWS アクセス許可       | 説明                      |
@@ -112,11 +112,11 @@ AWS Billing インテグレーションには、サービスのチェック機�
 **注**: AWS の請求メトリクスは、Datadog によって 4 時間ないしは 8 時間ごとに収集されます。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/cost-management/latest/userguide/security-iam.html
 [5]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html#turning_on_billing_metrics
-[6]: https://app.datadoghq.com/account/settings#integrations/amazon_billing
+[6]: https://app.datadoghq.com/integrations/amazon-billing
 [7]: https://console.aws.amazon.com/billing/home?#/createbudget
 [8]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
 [9]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets

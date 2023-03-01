@@ -15,7 +15,7 @@ further_reading:
   tag: Blog
   text: Comment nous avons contribué à élargir les possibilités de Kubernetes State Metrics
 has_logo: true
-integration_id: kubernetes_state_core
+integration_id: kube-state-metrics
 integration_title: Kubernetes State Metrics Core
 is_public: true
 kind: integration

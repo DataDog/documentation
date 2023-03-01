@@ -22,6 +22,9 @@ further_reading:
     - link: '/agent/kubernetes/tag'
       tag: 'Documentation'
       text: 'Assign tags to all data emitted by a container'
+    - link: 'https://www.datadoghq.com/blog/monitor-vsphere-tanzu-kubernetes-grid-with-datadog/'
+      tag: 'Blog'
+      text: 'Monitor Tanzu Kubernetes Grid on vSphere'
 ---
 
 ## Overview
@@ -103,11 +106,6 @@ datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
   kubelet:
-    host:
-      valueFrom:
-        fieldRef:
-          fieldPath: spec.nodeName
-    hostCAPath: /etc/kubernetes/certs/kubeletserver.crt
     tlsVerify: false # Required as of Agent 7.35. See Notes.
 ```
 
@@ -128,10 +126,6 @@ spec:
   agent:
     config:
       kubelet:
-        host:
-          fieldRef:
-            fieldPath: spec.nodeName
-        hostCAPath: /etc/kubernetes/certs/kubeletserver.crt
         tlsVerify: false # Required as of Agent 7.35. See Notes.
   clusterAgent:
     image:
@@ -157,6 +151,14 @@ spec:
     - name: DD_KUBELET_TLS_VERIFY
       value: "false"
   ```
+- Admission Controller functionality on AKS requires configuring the add selectors to prevent an error on reconciling the webhook: 
+
+```yaml
+clusterAgent:
+  env:
+    - name: "DD_ADMISSION_CONTROLLER_ADD_AKS_SELECTORS"
+      value: "true"
+```
 
 ## Google Kubernetes Engine (GKE) {#GKE}
 
@@ -171,9 +173,8 @@ Depending on the operation mode of your cluster, the Datadog Agent needs to be c
 
 Since Agent 7.26, no specific configuration is required for GKE (whether you run `Docker` or `containerd`).
 
-**Note**: When using COS (Container Optimized OS), the eBPF-based `OOM Kill` and `TCP Queue Length` checks are supported starting from the version 3.0.1 of the Helm chart. To enable these checks, configure the following settings:
+**Note**: When using COS (Container Optimized OS), the eBPF-based `OOM Kill` and `TCP Queue Length` checks are supported starting from the version 3.0.1 of the Helm chart. To enable these checks, configure the following setting:
 - `datadog.systemProbe.enableDefaultKernelHeadersPaths` to `false`.
-- `datadog.systemProbe.enableKernelHeaderDownload` to `true`.
 
 ### Autopilot
 

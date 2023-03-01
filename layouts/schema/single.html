@@ -1,0 +1,51 @@
+{{ define "main" }}
+{{- $dot := . -}}
+<!-- Grab all files from the custom_rules directory-->
+{{ $filepath := printf "content/en/security/cspm/custom_rules/" }}
+{{ $files := readDir $filepath }}
+<!-- check to ensure file exist-->
+{{ if (fileExists $filepath)}}
+
+  <!-- Page Title -->
+  <h1 id="pagetitle">
+    {{ .Title }}
+  </h1>
+
+  <!-- Page Content-->
+  {{ with .Content }}{{ . }}{{ end }}
+  <!-- Build The Nav-->
+  <!-- Loop over the array of sections  -->
+  {{ range $key, $value := .Params.list_section}}
+  <!-- Extract the key (section name) and value (section description) from each item -->
+    <!-- Set the lowercase key to a variable to use in the findRE function -->
+    {{ $lowerKey := $key | lower}}
+    <!-- Add the Section Title   -->
+    <h2 id="{{ $key | anchorize }}">{{ $key | upper }}</h2>
+    <!-- Add the Section Description   -->
+    <p>{{ $value  | markdownify }}</p>
+
+    <!-- Loop over the file names and display with links -->
+    <div class="whatsnext mb-3">
+      <!-- For each section, loop over and display the links that include the key. ex: AWS, GCP...   -->
+      {{ range $files }}
+      {{ if (findRE $lowerKey .Name) }}
+      <div class="list-group">
+        <a class="list-group-item list-group-item-action list-group-item-white  d-flex justify-content-between align-items-center" href='/security/cspm/custom_rules/{{ strings.TrimSuffix ".md" .Name }}/'>
+          <span class="w-100 d-flex justify-content-between">
+              <span class="text">
+                <code>{{ strings.TrimSuffix ".md" .Name }}</code>
+              </span>
+          </span>
+          {{- partial "img.html" (dict "root" $dot "src" "icons/list-group-whats-next-arrow-1.png" "class" "img-fluid static" "alt" "more") -}}
+          {{- partial "img.html" (dict "root" $dot "src" "icons/list-group-whats-next-arrow-2.png" "class" "img-fluid hover" "alt" "more" "disable_lazy" "true") -}}
+        </a>
+      </div>
+      {{ end }}
+      {{ end }}
+    </div>
+  {{ end }}
+
+{{ end }}
+
+{{ end }}
+

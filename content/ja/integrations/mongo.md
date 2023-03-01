@@ -36,7 +36,6 @@ author:
 categories:
 - data store
 - log collection
-- autodiscovery
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/mongo/README.md
 display_on_public_website: true
@@ -44,7 +43,7 @@ draft: false
 git_integration_title: mongo
 integration_id: mongodb
 integration_title: MongoDB
-integration_version: 4.0.2
+integration_version: 4.3.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -64,7 +63,6 @@ tile:
   - Supported OS::Windows
   - Category::データストア
   - Category::ログの収集
-  - Category::オートディスカバリー
   configuration: README.md#Setup
   description: 読み取り/書き込みのパフォーマンス、最も使用されたレプリカ、収集メトリクスなどを追跡。
   media: []
@@ -90,7 +88,7 @@ MongoDB を Datadog に接続して、以下のことができます。
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 MongoDB チェックは [Datadog Agent][2] パッケージに含まれています。追加でインストールする必要はありません。
 
@@ -130,8 +128,8 @@ db.createUser({
 ##### Agent の構成
 使用可能なすべての mongo メトリクスを収集するには、できれば同じノードで実行している単一の Agent だけが必要です。コンフィギュレーションオプションについては、以下を参照してください。
 {{% /tab %}}
-{{% tab "ReplicaSet" %}}
-#### ReplicaSet
+{{% tab "レプリカセット" %}}
+#### レプリカセット
 
 このインテグレーションを MongoDB レプリカセット用に構成するには
 
@@ -159,10 +157,36 @@ db.createUser({
 ```
 
 ##### Agent の構成
-メンバーごとに 1 つのチェックインスタンスを構成する必要があります。コンフィギュレーションオプションについては、以下を参照してください。
-**注**: [MongoDB ドキュメント][1]に記載されているように、アービターノードのモニタリングはリモートではサポートされていません。ただし、アービターノードのステータス変更は、プライマリに接続されている Agent によって報告されます。
 
-[1]: https://docs.mongodb.com/manual/core/replica-set-arbiter/#authentication
+MongoDB レプリカセットの各ホストに Datadog Agent をインストールし、そのホスト (`localhost`) 上のレプリカに接続するように Agent を構成します。各ホストで Agent を実行することで、レイテンシーと実行時間が短縮され、ホストに障害が発生した場合でもデータが接続されるようになります。
+
+例えば、プライマリノードで、
+
+```yaml
+init_config:
+instances:
+  - hosts:
+      - mongo-primary:27017
+```
+
+セカンダリノードで、
+
+```yaml
+init_config:
+instances:
+  - hosts:
+      - mongo-secondary:27017
+```
+
+ターシャリノードで、
+
+```yaml
+init_config:
+instances:
+  - hosts:
+      - mongo-tertiary:27017
+```
+
 {{% /tab %}}
 {{% tab "シャード" %}}
 #### シャード

@@ -5,7 +5,7 @@ kind: documentation
 title: Configuration de MySQL
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">La solution Database Monitoring n'est pas prise en charge pour ce site.</div>
 {{< /site-region >}}
 
@@ -15,7 +15,7 @@ title: Configuration de MySQL
 |--|------------|---------|------------|------------------|---------|
 | MySQL 5.6 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |
 | MySQL 5.7 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| MySQL 8.0 | {{< X >}} | {{< X >}} |   | {{< X >}} | {{< X >}} |
+| MySQL 8.0 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 
 Pour obtenir les instructions de configuration, sélectionnez votre type d'hébergement :
 

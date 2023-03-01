@@ -18,7 +18,7 @@ assets:
     source_type_name: speedtest
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: コミュニティ
   sales_email: cody.lee@datadoghq.com
   support_email: cody.lee@datadoghq.com
 categories:

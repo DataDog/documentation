@@ -33,7 +33,7 @@ further_reading:
 
 After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][4].
 
-{{< img src="tracing/dotnet/diagram_docs_net.png" alt=".NET Tracer configuration setting precedence"  >}}
+{{< img src="tracing/dotnet/dotnet_core_configuration.png" alt=".NET Core Tracer configuration setting precedence" style="width:100%" >}}
 
 You can set configuration settings in the .NET Tracer with any of the following methods:
 
@@ -58,7 +58,7 @@ To configure the tracer in application code, create a `TracerSettings` instance 
 using Datadog.Trace;
 using Datadog.Trace.Configuration;
 
-// read default configuration sources (env vars, web.config, datadog.json)
+// read default configuration sources (env vars or datadog.json)
 var settings = TracerSettings.FromDefaultSources();
 
 // change some settings
@@ -120,7 +120,7 @@ The following configuration variables are available for both automatic and custo
 
 `DD_TRACE_AGENT_URL`
 : **TracerSettings property**: `Exporter.AgentUri`<br>
-Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. <br>
+Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it.<br>
 It can contain a Unix path to a socket by prefixing the path with `unix://`. <br>
 **Default**: `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>` if they are set, `unix:///var/run/datadog/apm.socket` if the file exists, or `http://localhost:8126`.
 
@@ -129,7 +129,7 @@ It can contain a Unix path to a socket by prefixing the path with `unix://`. <br
 **Default**: `localhost`
 
 `DD_TRACE_AGENT_PORT`
-: Sets the TCP port where the Agent is listening for connections. Use `DD_TRACE_AGENT_URL`, which has precedence over this parameter. <br>
+: Sets the TCP port where the Agent is listening for connections. Use `DD_TRACE_AGENT_URL`, which has precedence over this parameter. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it.<br>
 **Default**: `8126`
 
 `DD_TRACE_SAMPLE_RATE`
@@ -150,7 +150,12 @@ For more information, see [Ingestion Mechanisms][11].<br>
 `DD_TRACE_RATE_LIMIT`
 : **TracerSettings property**: `MaxTracesSubmittedPerSecond` <br>
 The number of traces allowed to be submitted per second (deprecates `DD_MAX_TRACES_PER_SECOND`). <br>
-**Default**: `100` when `DD_TRACE_SAMPLE_RATE` is set. Otherwise, delegates rate limiting to the Datadog Agent. <br>
+**Default**: `100` when `DD_TRACE_SAMPLE_RATE` is set. Otherwise, delegates rate limiting to the Datadog Agent.
+
+`DD_SPAN_SAMPLING_RULES`
+: **Default**: `null`<br>
+A JSON array of objects. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive). For more information, see [Ingestion Mechanisms][1].<br>
+**Example**: Set the span sample rate to 50% for the service `my-service` and operation name `http.request`, up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`
 
 `DD_TRACE_GLOBAL_TAGS`
 : **TracerSettings property**: `GlobalTags`<br>
@@ -162,9 +167,20 @@ If specified, adds all of the specified tags to all generated spans.
 
 `DD_TRACE_HEADER_TAGS`
 : **TracerSettings property**:`HeaderTags` <br>
-Accepts a map of case-insensitive header keys to tag names and automatically applies matching header values as tags on root spans. Also accepts entries without a specified tag name. <br>
+Accepts a comma-separated list of key-value pairs of case-insensitive header keys to tag names, and automatically applies matching header values as tags on root spans. Also accepts entries without a specified tag name. <br>
 **Example**: `CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name`<br>
 Added in version 1.18.3. Response header support and entries without tag names added in version 1.26.0.
+
+`DD_TRACE_CLIENT_IP_ENABLED`
+: Enables client IP collection from relevant IP headers.<br>
+Added in version `2.19.0`.<br>
+**Default**: `false`<br>
+
+`DD_TRACE_CLIENT_IP_HEADER`
+: The IP header to be used for client IP collection, for example: `x-forwarded-for`. <br>
+Added in version `2.19.0`.<br>
+**Default**: Datadog parses the following: `"x-forwarded-for", "x-real-ip", "client-ip", "x-forwarded", "x-cluster-client-ip", "forwarded-for", "forwarded", "via", "true-client-ip"`. If several are present, none will be reported.<br>
+
 
 `DD_TAGS`
 : **TracerSettings property**: `GlobalTags`<br>
@@ -181,7 +197,7 @@ Note that the delimiter is a comma and a space: `, `.
 : Sets rate limiting for log messages. If set, unique log lines are written once per `x` seconds. For example, to log a given message once per 60 seconds, set to `60`. Setting to `0` disables log rate limiting. Added in version 1.24.0. Disabled by default.
 
 `DD_TRACE_SERVICE_MAPPING`
-: Rename services using configuration. Accepts a map of service name keys to rename, and the name to use instead, in the format `[from-key]:[to-name]`. <br>
+: Rename services using configuration. Accepts a comma-separated list of key-value pairs of service name keys to rename, and the name to use instead, in the format `[from-key]:[to-name]`. <br>
 **Example**: `mysql:main-mysql-db, mongodb:offsite-mongodb-service`<br>
 The `from-key` value is specific to the integration type, and should exclude the application name prefix. For example, to rename `my-application-sql-server` to `main-db`, use `sql-server:main-db`. Added in version 1.23.0
 
@@ -229,7 +245,7 @@ Wildcard support `[*]` added in version 2.7.0.
 : Alters the behavior of the Kafka consumer span<br>
 **Default**: `true`<br>
 When set to `true`, the consumer span is created when a message is consumed and closed before consuming the next message. The span duration is representative of the computation between one message consumption and the next. Use this setting when message consumption is performed in a loop.<br>
-When set to `false`, the consumer span is created when a message is consumed and immediately closed. Use this setting when a message is not processed completely before consuming the next one, or when multiple messages are consumed at once.
+When set to `false`, the consumer span is created when a message is consumed and immediately closed. Use this setting when a message is not processed completely before consuming the next one, or when multiple messages are consumed at once. When you set this parameter to `false`, consumer spans are closed right away. If you have child spans to trace, you must extract the context manually. Read [Headers extraction and injection][12] for more details.
 
 #### Automatic instrumentation integration configuration
 
@@ -270,14 +286,14 @@ You can configure injection and extraction styles for distributed headers.
 The .NET Tracer supports the following styles:
 
 - Datadog: `Datadog`
-- B3: `B3`
-- W3C: `W3C`
-- B3 Single Header: `B3SingleHeader` or `B3 single header`
+- B3 Multi Header: `b3multi` (`B3` is deprecated)
+- W3C: `tracecontext` (`W3C` is deprecated)
+- B3 Single Header: `B3 single header` (`B3SingleHeader` is deprecated)
 
 You can use the following environment variables to configure injection and extraction styles:
 
-- `DD_PROPAGATION_STYLE_INJECT=Datadog, B3, W3C`
-- `DD_PROPAGATION_STYLE_EXTRACT=Datadog, B3, W3C`
+- `DD_TRACE_PROPAGATION_STYLE_INJECT=Datadog, b3multi, tracecontext`
+- `DD_TRACE_PROPAGATION_STYLE_EXTRACT=Datadog, b3multi, tracecontext`
 
 The environment variable values are comma-separated lists of header styles enabled for injection or extraction. By default, only the `Datadog` injection style is enabled.
 
@@ -287,7 +303,7 @@ If multiple extraction styles are enabled, the extraction attempt is completed i
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
+[1]: /tracing/trace_pipeline/ingestion_mechanisms/
 [4]: /getting_started/tagging/unified_service_tagging/
 [5]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel#trace_id-option
 [6]: /tracing/trace_collection/compatibility/dotnet-core#integrations
@@ -296,3 +312,5 @@ If multiple extraction styles are enabled, the extraction attempt is completed i
 [9]: https://github.com/openzipkin/b3-propagation
 [10]: https://www.w3.org/TR/trace-context/#traceparent-header
 [11]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=net#pagetitle
+[12]: /tracing/trace_collection/custom_instrumentation/dotnet/#headers-extraction-and-injection
+[13]: /agent/guide/network/#configure-ports

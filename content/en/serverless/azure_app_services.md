@@ -131,19 +131,16 @@ Writing custom metrics and checks in Azure App Service is similar to the process
 To send metrics use this code:
 
 ```csharp
-try
-{
 // Configure your DogStatsd client and configure any tags
-DogStatsd.Configure(new StatsdConfig() { ConstantTags = new[] { "app:sample.mvc.aspnetcore" } });
-}
-catch (Exception ex)
+if (!DogStatsd.Configure(new StatsdConfig() { ConstantTags = new[] { "app:sample.mvc.aspnetcore" } }))
 {
-// An exception is thrown by the Configure call if the necessary environment variables are not present.
-// These environment variables are present in Azure App Service, but
-// need to be set in order to test your custom metrics: DD_API_KEY:{api_key}, DD_AGENT_HOST:localhost
-// Ignore or log the exception as it suits you
-Console.WriteLine(ex);
+    // `Configure` returns false if the necessary environment variables are not present.
+    // These environment variables are present in Azure App Service, but
+    // need to be set in order to test your custom metrics: DD_API_KEY:{api_key}, DD_AGENT_HOST:localhost
+    // Ignore or log the error as it suits you
+    Console.WriteLine("Cannot initialize DogstatsD.");
 }
+
 // Send a metric
 DogStatsd.Increment("sample.startup");
 ```
@@ -342,6 +339,9 @@ Replace `<EXTENSION_VERSION>` with the version of the extension you wish to inst
 
 Many organizations use [Azure Resource Management (ARM) templates][8] to implement the practice of infrastructure-as-code. To build the App Service Extension into these templates, incorporate [Datadog's App Service Extension ARM template][9] into your deployments to add the extension and configure it alongside your App Service resources.
 
+See the [Azure Microsoft.Datadog monitors documentation][10], which shows using ARM templates as Platform as Code to create the Liftr Datadog Resource.
+You can use the marketplace to install the Datadog Resource and download it as an ARM template to see those parameters (such as `enterpriseAppId`, `linkingAuthCode`, and `linkingClientId`) that are specific to you.
+
 [1]: https://docs.microsoft.com/en-us/cli/azure/install-azure-cli
 [2]: https://docs.microsoft.com/en-us/azure/cloud-shell/overview
 [3]: https://docs.microsoft.com/en-us/azure/app-service/deploy-configure-credentials
@@ -351,6 +351,7 @@ Many organizations use [Azure Resource Management (ARM) templates][8] to impleme
 [7]: /getting_started/site/
 [8]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/overview
 [9]: https://github.com/DataDog/datadog-aas-extension/tree/master/ARM
+[10]: https://learn.microsoft.com/en-us/azure/templates/microsoft.datadog/monitors?pivots=deployment-language-arm-template
 {{% /tab %}}
 {{% tab "Java" %}}
 

@@ -11,6 +11,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/
   tag: ブログ
   text: Datadog Audit Trail で、チーム全体のコンプライアンス、ガバナンス、透明性を構築します
+- link: https://www.datadoghq.com/blog/audit-trail-best-practices/
+  tag: ブログ
+  text: 監査証跡で重要な Datadog のアセットと構成を監視する
 kind: documentation
 title: Datadog Audit Trail（監査証跡）
 ---
@@ -41,17 +44,15 @@ title: Datadog Audit Trail（監査証跡）
 
 Datadog 監査証跡を有効にするには、[オーガニゼーションの設定][2]で *Security* の *Audit Trail Settings* を選択し、**Enable** ボタンをクリックします。
 
-{{< img src="account_management/audit_logs/audit_enable.png" alt="Datadog の監査証跡設定" style="width:100%;">}}
+{{< img src="account_management/audit_logs/audit_trail_settings.png" alt="監査証跡の設定ページで無効になっている様子" style="width:85%;">}}
+
+監査証跡を有効にした人を確認するには
+1. [イベントエクスプローラー][3]に移動します。
+2. 検索バーに `Datadog Audit Trail was enabled by` と入力します。イベントをキャプチャするために、より広い時間範囲を選択する必要がある場合があります。
+3.  "A user enabled Datadog Audit Trail" というタイトルの最新イベントには、最後に監査証跡を有効にしたのが誰であるかが表示されます。
 
 ## コンフィギュレーション
 
-### イベントタイプ
-
-イベントタイプとは、監査イベントの集合です。たとえば、Authentication のイベントタイプには認証に関するすべてのイベントが含まれ、Dashboards のイベントタイプにはダッシュボード製品とのインタラクションに関するすべてのイベントが含まれます。イベントタイプを有効にするには、[オーガニゼーションの設定][2]で *Audit Trail Settings* セクションに移動し、関連するイベントタイプのトグルボタンをオンにします。
-
-{{< img src="account_management/audit_logs/audit_toggles.png" alt="Datadog の監査証跡イベントタイプの設定" style="width:50%;">}}
-
-各種イベントの一覧は、[監査証跡イベント][3]を参照してください。
 
 ### アーカイブ
 
@@ -81,23 +82,85 @@ Datadog 監査証跡を有効にするには、[オーガニゼーションの�
 
 {{< img src="account_management/audit_logs/attributes.png" alt="組織設定メニューの監査証跡" style="width:50%;">}}
 
+
+### 保存済みビュー
+
+効率的なトラブルシューティングには、探索を可能にする適切なスコープにデータがあり、意味のある情報を表示する視覚化オプションにアクセスでき、分析を可能にする関連ファセットがリストされていることが必要です。トラブルシューティングはコンテキストに依存するため、保存ビューを使用すると、あなたとチームメイトが異なるトラブルシューティングコンテキスト間で簡単に切り替えられるようになります。保存ビューは、監査証跡エクスプローラーの左上隅からアクセスできます。
+
+デフォルトのビュー以外のすべての保存ビューは、組織全体で共有されます。
+
+* **インテグレーション保存ビュー**は、監査証跡と同時に提供されます。これらのビューは読み取り専用で、Datadog のロゴが表示されます。
+* **カスタム保存ビュー** は、ユーザーにより作成されます。組織内のユーザーが誰でも編集でき（[読み取り専用ユーザー][5]を除く）、作成したユーザーのアバターで識別されます。エクスプローラーの既存のコンテンツからカスタム保存ビューを新規作成するには、**Save** ボタンをクリックします。
+
+Views パネルの保存ビューエントリからは、いつでも以下のアクションが可能です。
+
+* 保存ビューを**ロード**または**リロード** 
+* 現在のビューのコンフィギュレーションで保存ビューを**更新**。
+* 保存ビューの**名前を変更**または**削除**。
+* ショートリンクを使用して保存ビューを**共有**。
+* 保存ビューに**スター**を付けて、保存ビューリストの先頭に表示。ナビゲーションメニューから直接アクセス可能になります。
+
+**注**: インテグレーションの保存ビューおよび[読み取り専用ユーザー][5]には、アクションの更新、名前変更、および削除は無効になっています。
+
+
+### デフォルトのビュー
+
+{{< img src="logs/explorer/saved_views/default.png" alt="デフォルトビュー" style="width:50%;" >}}
+
+デフォルトビュー機能では、監査証跡エクスプローラーを最初に開いたときに常に表示されるクエリやフィルターのデフォルトセットを設定することができます。デフォルトビューに戻るには、Views パネルを開き、リロードボタンをクリックします。
+
+既存の監査証跡エクスプローラーのビューは、デフォルトの保存ビューです。この構成は、自身のみがアクセスおよび閲覧可能であり、この構成を更新しても、組織には何の影響も与えません。UI で何らかのアクションを実行するか、別の構成を埋め込んだ監査証跡エクスプローラーのリンクを開くことで、デフォルトの保存ビューを**一時的**にオーバーライドすることができます。
+
+Views パネルのデフォルト保存ビューエントリからは、いつでも以下のアクションが可能です。
+
+* エントリをクリックして、デフォルトビューを**リロード**。
+* 現在のパラメーターでデフォルトビューを**更新**。
+* デフォルトビューを Datadog のデフォルトに**リセット**して再起動。
+
+### 注目イベント
+
+注目イベントとは、監査イベントのサブセットで、Datadog が特定した、請求に影響を与える可能性のある、またはセキュリティに影響を与える可能性のある重要な構成変更を示すものです。これにより、組織管理者は、生成された多くのイベントの中から最も重要なイベントに絞り込むことができ、利用可能なすべてのイベントとそのプロパティについて学習する必要がありません。
+
+{{< img src="account_management/audit_logs/notable_events.png" alt="監査イベントのファセットパネルで、チェックした注目イベントが表示される" style="width:30%;">}}
+
+以下のクエリにマッチするイベントは、注目イベントとしてマークされます。
+
+| 監査イベントの説明                                          | 監査エクスプローラーのクエリ                           |
+| ------------------------------------------------------------------- | --------------------------------------------------|
+| ログベースメトリクスの変更 | `@evt.name:"Log Management" @asset.type:"custom_metrics"` |
+| ログ管理インデックスの除外フィルターの変更 | `@evt.name:"Log Management" @asset.type:"exclusion_filter"` |
+| ログ管理インデックスの変更 | `@evt.name:"Log Management" @asset.type:index` |
+| APM 保持フィルターの変更 | `@evt.name:APM @asset.type:retention_filter` |
+| APM カスタムメトリクスの変更 | `@evt.name:APM @asset.type:custom_metrics` |
+| メトリクスタグの変更 | `@evt.name:Metrics @asset.type:metric @action:(created OR modified)` |
+| RUM アプリケーションの作成と削除 | `@evt.name:"Real User Monitoring" @asset.type:real_user_monitoring_application @action:(created OR deleted)` |
+| 機密データスキャナーのスキャングループの変更 | `@evt.name:"Sensitive Data Scanner" @asset.type:sensitive_data_scanner_scanning_group` |
+| Synthetic テストの作成または削除 | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_test @action:(created OR deleted)` |
+
+### Inspect Changes (Diff)
+
+監査イベントの詳細パネルにある Inspect Changes (Diff) タブは、行われた構成変更と以前に設定されたものを比較します。ダッシュボード、ノートブック、およびモニターの構成に加えられた変更が表示され、JSON オブジェクトとして表されます。
+
+{{< img src="account_management/audit_logs/inspect_changes.png" alt="監査イベント側のパネルで、複合条件モニター構成の変更を表示。緑でハイライトされたテキストが変更されたもので、赤でハイライトされたテキストは削除されたものです。" style="width:70%;">}}
+
+
 ## モニターの作成
 
-監査証跡イベントの特定のタイプや証跡の属性別にモニターを作成するには、[監査証跡モニターに関するドキュメント][5]をご参照ください。例: 特定のユーザーログが発生したときにトリガーするモニターを設定、ダッシュボードが削除されたとき用のモニターを設定など。
+監査証跡イベントの特定のタイプや証跡の属性別にモニターを作成するには、[監査証跡モニターに関するドキュメント][6]をご参照ください。例: 特定のユーザーログが発生したときにトリガーするモニターを設定、ダッシュボードが削除されたとき用のモニターを設定など。
 
 ## ダッシュボードやグラフの作成
 
 ダッシュボードを使用すると、監査証跡イベントに視覚的なコンテキストを追加できます。監査ダッシュボードを作成するには:
 
-1. Datadog で[新しいダッシュボード][6]を作成します。
-2. 視覚化を選択します。監査イベントを[トップリスト][7]、[時系列][8]、[リスト][9]で視覚化することができます。
-3. [データのグラフを作成][10]: 編集で、データソースとして *Audit Events* を選択し、クエリを作成します。監査イベントはカウント別に絞り込まれ、ファセット別にグループ化できます。ファセットと上限を選択します。
+1. Datadog で[新しいダッシュボード][7]を作成します。
+2. 視覚化を選択します。監査イベントを[トップリスト][8]、[時系列][9]、[リスト][10]で視覚化することができます。
+3. [データのグラフを作成][11]: 編集で、データソースとして *Audit Events* を選択し、クエリを作成します。監査イベントはカウント別に絞り込まれ、ファセット別にグループ化できます。ファセットと上限を選択します。
 {{< img src="account_management/audit_logs/audit_graphing.png" alt="監査証跡をデータソースとして設定しデータからグラフを作成" style="width:100%;">}}
 4. 表示設定を完了してグラフにタイトルを付けます。*Save* ボタンをクリックしてダッシュボードを作成します。
 
 ## すぐに使えるダッシュボード
 
-Datadog 監査証跡には、インデックス保持の変更、ログパイプラインの変更、ダッシュボードの変更など、さまざまな監査イベントを表示する[すぐに使えるダッシュボード][11]が付属しています。このダッシュボードを複製して、監査ニーズに合わせてクエリや視覚化をカスタマイズすることができます。
+Datadog 監査証跡には、インデックス保持の変更、ログパイプラインの変更、ダッシュボードの変更など、さまざまな監査イベントを表示する[すぐに使えるダッシュボード][12]が付属しています。このダッシュボードを複製して、監査ニーズに合わせてクエリや視覚化をカスタマイズすることができます。
 
 {{< img src="account_management/audit_logs/audit_dashboard.png" alt="監査証跡ダッシュボード" style="width:100%;">}}
 
@@ -107,12 +170,13 @@ Datadog 監査証跡には、インデックス保持の変更、ログパイプ
 
 [1]: https://app.datadoghq.com/audit-trail
 [2]: https://app.datadoghq.com/organization-settings/
-[3]: /ja/account_management/audit_trail/events/
+[3]: https://app.datadoghq.com/event/explorer
 [4]: /ja/logs/explorer/
-[5]: /ja/monitors/create/types/audit_trail/
-[6]: /ja/dashboards/
-[7]: /ja/dashboards/widgets/top_list/
-[8]: /ja/dashboards/widgets/timeseries/
-[9]: /ja/dashboards/widgets/list/
-[10]: /ja/dashboards/querying/#choose-the-metric-to-graph/
-[11]: https://app.datadoghq.com/dash/integration/30691/datadog-audit-trail-overview?from_ts=1652452436351&to_ts=1655130836351&live=true
+[5]: https://docs.datadoghq.com/ja/account_management/rbac/permissions/?tab=ui#general-permissions
+[6]: /ja/monitors/types/audit_trail/
+[7]: /ja/dashboards/
+[8]: /ja/dashboards/widgets/top_list/
+[9]: /ja/dashboards/widgets/timeseries/
+[10]: /ja/dashboards/widgets/list/
+[11]: /ja/dashboards/querying/#choose-the-metric-to-graph/
+[12]: https://app.datadoghq.com/dash/integration/30691/datadog-audit-trail-overview?from_ts=1652452436351&to_ts=1655130836351&live=true

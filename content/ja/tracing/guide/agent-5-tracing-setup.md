@@ -58,7 +58,7 @@ Datadog Agent では、インフラストラクチャーの監視と APM コン�
 | `apm_enabled`           | `DD_APM_ENABLED`           | 値を `true`. に設定すると、Datadog Agent はトレースメトリクスを受け付けます。デフォルトの値は `true` です。                                                            |
 | `receiver_port`         | `DD_RECEIVER_PORT`         | Datadog Agent のトレースレシーバーがリスニングするポート。デフォルト値は `8126` です。                                                                  |
 | `connection_limit`      | `DD_CONNECTION_LIMIT`      | 1 回 30 秒のリース期間で許可するクライアント接続のユニーク数。デフォルト値は `2000` です。                                                 |
-| `resource`              | `DD_IGNORE_RESOURCE`       | トレースをリソース名でフィルタリングするための正規表現ブラックリスト。                                                                                  |
+| `resource`              | `DD_IGNORE_RESOURCE`       | トレースをリソース名でフィルタリングするための正規表現の除外リスト。                                                                                  |
 
 Datadog Agent の詳細については、[専用ドキュメントページ][9]または [`datadog.conf.example` ファイル][10]を参照してください。
 

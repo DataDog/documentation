@@ -1,6 +1,6 @@
 ---
 further_reading:
-- link: /monitors/create/
+- link: /monitors/
   tag: ドキュメント
   text: モニターの作成方法
 - link: /monitors/notify/

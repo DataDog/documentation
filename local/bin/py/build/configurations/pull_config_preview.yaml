@@ -102,6 +102,18 @@
       - "*/README.md"
       - "*/datadog_checks/*/__about__.py"
 
+  - repo_name: integrations-internal-core
+    contents:
+
+    - action: integrations
+      branch: main
+      globs:
+      - "*/metadata.csv"
+      - "*/manifest.json"
+      - "*/assets/service_checks.json"
+      - "*/README.md"
+      - "*/datadog_checks/*/__about__.py"
+
   - repo_name: marketplace
     contents:
 
@@ -217,6 +229,7 @@
           - /tracing/setup_overview/ruby/
           - /agent/apm/ruby/
           - /tracing/setup_overview/setup/ruby
+          - /tracing/trace_collection/ruby
 
   - repo_name: datadog-serverless-functions
     contents:
@@ -278,6 +291,33 @@
           aliases:
             - /serverless/datadog_lambda_library/
             - /serverless/serverless_integrations/cli/
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'src/commands/synthetics/README.md'
+      options:
+        dest_path: '/continuous_testing/cicd_integrations/'
+        file_name: 'configuration.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/datadog-ci/blob/master/src/commands/synthetics/README.md"]
+          title: Continuous Testing and CI/CD Configuration
+          kind: documentation
+          description: Configure Continuous Testing to run tests in your CI/CD pipelines.
+          aliases:
+            - /synthetics/cicd_integrations/configuration
+          further_reading:
+          - link: "https://www.datadoghq.com/blog/datadog-github-action-synthetics-ci-visibility/"
+            tag: "Blog"
+            text: "Use Datadog's GitHub Action to add continuous testing to workflows"
+          - link: "/continuous_testing/cicd_integrations"
+            tag: "Documentation"
+            text: "Learn about Continuous Testing and CI/CD"
+          - link: "/continuous_testing/explorer"
+            tag: "Documentation"
+            text: "Learn about the CI Results Explorer"
+          - link: "/continuous_testing/testing_tunnel"
+            tag: "Documentation"
+            text: "Learn about the Testing Tunnel"
 
   - repo_name: datadog-cdk-constructs
     contents:
@@ -317,13 +357,15 @@
       globs:
       - 'README.md'
       options:
-        dest_path: '/synthetics/cicd_integrations/'
+        dest_path: '/continuous_testing/cicd_integrations/'
         file_name: 'azure_devops_extension.md'
         front_matters:
           dependencies: ["https://github.com/DataDog/datadog-ci-azure-devops/blob/main/README.md"]
-          title: Synthetics and Datadog CI Azure DevOps Extension
+          title: Continuous Testing and Datadog CI Azure DevOps Extension
           kind: documentation
           description: Use the Synthetics and Datadog CI extension to create tasks that you can use in a CI pipeline.
+          aliases:
+            - /synthetics/cicd_integrations/azure_devops_extension
 
   - repo_name: synthetics-ci-github-action
     contents:
@@ -332,12 +374,14 @@
       globs:
       - 'README.md'
       options:
-        dest_path: '/synthetics/cicd_integrations/'
+        dest_path: '/continuous_testing/cicd_integrations/'
         file_name: 'github_actions.md'
         front_matters:
           dependencies: ["https://github.com/DataDog/synthetics-ci-github-action/blob/main/README.md"]
-          title: Synthetics and CI GitHub Actions
+          title: Continuous Testing and GitHub Actions
           kind: documentation
+          aliases:
+            - /synthetics/cicd_integrations/github_actions
 
   - repo_name: synthetics-ci-orb
     contents:
@@ -346,12 +390,14 @@
       globs:
       - 'README.md'
       options:
-        dest_path: '/synthetics/cicd_integrations/'
+        dest_path: '/continuous_testing/cicd_integrations/'
         file_name: 'circleci_orb.md'
         front_matters:
           dependencies: ["https://github.com/DataDog/synthetics-ci-orb/blob/main/README.md"]
-          title: Synthetics CI CircleCI Orb
+          title: Continuous Testing and CircleCI Orb
           kind: documentation
+          aliases:
+            - /synthetics/cicd_integrations/circleci_orb
 
   - repo_name: dd-sdk-android
     contents:
@@ -674,7 +720,7 @@
             - link: "real_user_monitoring/explorer/"
               tag: "Documentation"
               text: "Learn how to explore your RUM data"
-    
+
     - action: pull-and-push-file
       branch: master
       globs:
@@ -699,7 +745,7 @@
             - link: "real_user_monitoring/error_tracking/"
               tag: "Documentation"
               text: "Learn about Error Tracking"
-    
+
     - action: pull-and-push-file
       branch: master
       globs:
@@ -738,12 +784,31 @@
             - link: "https://github.com/DataDog/dd-sdk-reactnative"
               tag: "GitHub"
               text: "dd-sdk-reactnative Source code"
-            - link: "real_user_monitoring/explorer/"
-              tag: "Documentation"
-              text: "Learn how to explore your RUM data"
             - link: "https://www.datadoghq.com/blog/react-native-monitoring/"
               tag: "Blog"
               text: "Monitor React Native applications"
+            - link: "real_user_monitoring/explorer/"
+              tag: "Documentation"
+              text: "Learn how to explore your RUM data"
+    - action: pull-and-push-file
+      branch: main
+      globs:
+      - 'docs/advanced_configuration.md'
+      options:
+        dest_path: '/real_user_monitoring/reactnative/'
+        file_name: 'advanced_configuration.md'
+        front_matters:
+          title: RUM React Native Advanced Configuration
+          kind: documentation
+          description: Learn about advanced configuration options for your React Native setup.
+          dependencies: ["https://github.com/DataDog/dd-sdk-reactnative/blob/main/docs/advanced_configuration.md"]
+          further_reading:
+            - link: "https://github.com/DataDog/dd-sdk-reactnative"
+              tag: "GitHub"
+              text: "dd-sdk-reactnative Source code"
+            - link: "real_user_monitoring/reactnative/"
+              tag: "Documentation"
+              text: "Learn about React Native Monitoring"
     - action: pull-and-push-file
       branch: main
       globs:
@@ -762,10 +827,10 @@
               text: "dd-sdk-reactnative Source code"
             - link: "https://www.datadoghq.com/blog/react-native-monitoring/"
               tag: "Blog"
-              text: "Monitor your React Native applications" 
+              text: "Monitor your React Native applications"
             - link: "real_user_monitoring/explorer/"
               tag: "Documentation"
-              text: "Learn how to explore your RUM data"  
+              text: "Learn how to explore your RUM data"
     - action: pull-and-push-file
       branch: main
       globs:
@@ -807,6 +872,27 @@
             - link: "real_user_monitoring/explorer/"
               tag: "Documentation"
               text: "Learn how to explore your RUM data"
+
+    - action: pull-and-push-file
+      branch: main
+      globs:
+      - 'docs/codepush.md'
+      options:
+        dest_path: '/real_user_monitoring/reactnative/'
+        file_name: 'codepush.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/dd-sdk-reactnative/blob/main/docs/codepush.md"]
+          title: CodePush
+          kind: documentation
+          description: 'Learn how to use a client-side React Native module to interact with Appcenter Codepush and Datadog.'
+          further_reading:
+            - link: 'https://github.com/DataDog/dd-sdk-reactnative'
+              tag: 'GitHub'
+              text: 'dd-sdk-reactnative Source code'
+            - link: 'real_user_monitoring/reactnative/'
+              tag: 'Documentation'
+              text: "Learn about React Native Monitoring"
+
     - action: pull-and-push-file
       branch: main
       globs:
@@ -850,8 +936,11 @@
               text: "dd-sdk-reactnative Source code"
             - link: "real_user_monitoring/error_tracking/"
               tag: "Documentation"
-              text: "Learn about Error Tracking"  
-          
+              text: "Learn about Error Tracking"
+            - link: "https://www.datadoghq.com/blog/rum-now-offers-react-native-crash-reporting-and-error-tracking/"
+              tag: "Blog"
+              text: "RUM now offers React Native Crash Reporting and Error Tracking"
+
   - repo_name: dd-sdk-flutter
     contents:
     - action: pull-and-push-file
@@ -980,6 +1069,28 @@
     - action: pull-and-push-file
       branch: main
       globs:
+      - 'packages/datadog_flutter_plugin/doc/rum/otel_support.md'
+      options:
+        dest_path: '/real_user_monitoring/flutter/'
+        file_name: 'otel_support.md'
+        front_matters:
+          title: OpenTelemetry Support
+          kind: documentation
+          description: "Learn about using OpenTelemetry with RUM Flutter."
+          dependencies: ["https://github.com/DataDog/dd-sdk-flutter/blob/main/packages/datadog_flutter_plugin/doc/rum/otel_support.md"]
+          further_reading:
+            - link: "https://www.datadoghq.com/blog/monitor-flutter-application-performance-with-mobile-rum/"
+              tag: "Blog"
+              text: "Monitor Flutter application performance with Datadog Mobile RUM"
+            - link: "https://github.com/DataDog/dd-sdk-flutter"
+              tag: "GitHub"
+              text: "dd-sdk-flutter Source code"
+            - link: "real_user_monitoring/explorer/"
+              tag: "Documentation"
+              text: "Learn how to explore your RUM data"
+    - action: pull-and-push-file
+      branch: main
+      globs:
       - 'packages/datadog_flutter_plugin/doc/troubleshooting.md'
       options:
         dest_path: '/real_user_monitoring/flutter/'
@@ -1044,7 +1155,19 @@
         - "application-security/*.json"
         - "application-security/*.md"
       options:
-        dest_path: '/security_platform/default_rules/'
+        dest_path: '/security/default_rules/'
+
+  - repo_name: infrastructure-resources
+    contents:
+    - action: pull-and-push-folder
+      branch: prod
+      globs:
+        - "generated/md/external/*.md"
+      options:
+        dest_dir: '/security/cspm/custom_rules/'
+        path_to_remove: 'generated/md/external/'
+        front_matters:
+          disable_edit: true
 
   - repo_name: apps
     contents:
@@ -1073,5 +1196,18 @@
       - 'docs/cloud-workload-security/agent_expressions.md'
       - 'docs/cloud-workload-security/backend.md'
       options:
-        dest_dir: '/security_platform/cloud_workload_security/'
+        dest_dir: '/security/cloud_workload_security/'
         path_to_remove: 'docs/cloud-workload-security/'
+
+  - repo_name: dd-source
+    contents:
+    - action: workflows
+      branch: main
+      globs:
+        - "domains/workflow/actionplatform/apps/tools/manifest_generator/manifest.schema.json"
+        - "domains/workflow/actionplatform/apps/wf-actions-worker/src/runner/bundles/com.datadoghq.*/manifest.json"
+      options:
+        dest_path: '/workflows/actions_catalog/'
+        bundle_excludes:
+          - "com.datadoghq.test"
+          - "com.datadoghq.sample"

@@ -28,3 +28,8 @@
   ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#632CA6', endColorstr='#c900d2',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
+
+@mixin font-size-line-height($font-size, $line-height) {
+  font-size: $font-size !important;
+  line-height: $line-height !important;
+}

@@ -17,7 +17,7 @@ further_reading:
 - link: '/synthetics/private_locations'
   tag: 'Documentation'
   text: 'Learn more about private locations'
-- link: '/synthetics/cicd_integrations'
+- link: '/continuous_testing/cicd_integrations'
   tag: 'Documentation'
   text: 'Learn about running Synthetic tests in a CI pipeline'
 ---

@@ -1,20 +1,21 @@
 ---
-title: JMX を使用したオートディスカバリー
-kind: ガイド
 further_reading:
-  - link: /agent/kubernetes/integrations/
-    tag: ドキュメント
-    text: オートディスカバリーのインテグレーションテンプレートの作成とロード
-  - link: /agent/guide/ad_identifiers/
-    tag: ドキュメント
-    text: コンテナと該当するインテグレーションテンプレートとの対応
-  - link: /agent/guide/autodiscovery-management/
-    tag: ドキュメント
-    text: Agent オートディスカバリーに含めるコンテナの管理
-  - link: /agent/kubernetes/tag/
-    tag: ドキュメント
-    text: アプリケーションのタグの動的割り当てと収集
+- link: /agent/kubernetes/integrations/
+  tag: ドキュメント
+  text: オートディスカバリーのインテグレーションテンプレートの作成とロード
+- link: /agent/guide/ad_identifiers/
+  tag: ドキュメント
+  text: コンテナと該当するインテグレーションテンプレートとの対応
+- link: /agent/guide/autodiscovery-management/
+  tag: ドキュメント
+  text: Agent オートディスカバリーに含めるコンテナの管理
+- link: /agent/kubernetes/tag/
+  tag: ドキュメント
+  text: アプリケーションのタグの動的割り当てと収集
+kind: ガイド
+title: JMX を使用したオートディスカバリー
 ---
+
 インテグレーションオートディスカバリーアノテーションを活用するか、オートディスカバリーコンテナ識別子を使用して、Kubernetes のポッドから JMX アプリケーションのメトリクスを収集します。オートディスカバリーアノテーションは、Datadog-JMX インテグレーションを構成するための推奨される方法です。コンフィギュレーションパラメーターのセットが長すぎてアノテーションに収まらない場合は、[オートディスカバリーコンテナ識別子](#autodiscovery-container-identifiers)メソッドを使用します。
 
 ## オートディスカバリーアノテーション
@@ -139,14 +140,14 @@ Agent がクラスターで実行されており、JMX メトリクスを収集�
     | [confluent_platform][7] | [metrics.yaml][8]  | [conf.yaml.example][9] |
     | [hive][10]              | [metrics.yaml][11] | [conf.yaml.example][12] |
     | [jboss_wildfly][13]     | [metrics.yaml][14] | [conf.yaml.example][15] |
-    | [kafka][29]             | [metrics.yaml][17] | [conf.yaml.example][18] |
+    | [kafka][16]             | [metrics.yaml][17] | [conf.yaml.example][18] |
     | [solr][19]              | [metrics.yaml][20] | [conf.yaml.example][21] |
     | [presto][22]            | [metrics.yaml][23] | [conf.yaml.example][24] |
-    | [tomcat][16]            | [metrics.yaml][25] | [conf.yaml.example][26] |
+    | [tomcat][25]            | [metrics.yaml][26] | [conf.yaml.example][27] |
 
 3. `conf.yaml.example` ファイルの名前を `conf.yaml` に変更します。
 
-4. Agent オートディスカバリーロジックに適合するように、`conf.yaml` のパラメーター値を置き換えます。コンフィギュレーションファイルにはデフォルトでホストパラメーター値があり、代わりに[オートディスカバリーテンプレート変数][27]ロジックを使用します。次の Tomcat チェックの例では、`host` パラメーター値が `localhost` から `%%host%%` に変更されています。
+4. Agent オートディスカバリーロジックに適合するように、`conf.yaml` のパラメーター値を置き換えます。コンフィギュレーションファイルにはデフォルトでホストパラメーター値があり、代わりに[オートディスカバリーテンプレート変数][28]ロジックを使用します。次の Tomcat チェックの例では、`host` パラメーター値が `localhost` から `%%host%%` に変更されています。
 
     ```yaml
     init_config:
@@ -184,7 +185,7 @@ Agent がクラスターで実行されており、JMX メトリクスを収集�
         # (...)
     ```
 
-    **注**: 上記の例ではカスタム `ad_identifers` 値を使用していますが、必要に応じて、[コンテナショートイメージ][28]を `ad_identifiers` として指定できます。
+    **注**: 上記の例ではカスタム `ad_identifers` 値を使用していますが、必要に応じて、[コンテナショートイメージ][29]を `ad_identifiers` として指定できます。
 
 6. `conf.d/<INTEGRATION_NAME>.d/` フォルダーの Agent にコンフィギュレーションファイル (`conf.yaml` と `metrics.yaml`) をマウントします。
 
@@ -213,7 +214,7 @@ Agent がクラスターで実行されており、JMX メトリクスを収集�
 [13]: /ja/integrations/jboss_wildfly/
 [14]: https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/datadog_checks/jboss_wildfly/data/metrics.yaml
 [15]: https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/datadog_checks/jboss_wildfly/data/conf.yaml.example
-[16]: /ja/integrations/tomcat/
+[16]: /ja/integrations/kafka/
 [17]: https://github.com/DataDog/integrations-core/blob/master/kafka/datadog_checks/kafka/data/metrics.yaml
 [18]: https://github.com/DataDog/integrations-core/blob/master/kafka/datadog_checks/kafka/data/conf.yaml.example
 [19]: /ja/integrations/solr/
@@ -222,11 +223,11 @@ Agent がクラスターで実行されており、JMX メトリクスを収集�
 [22]: /ja/integrations/presto/
 [23]: https://github.com/DataDog/integrations-core/blob/master/presto/datadog_checks/presto/data/metrics.yaml
 [24]: https://github.com/DataDog/integrations-core/blob/master/presto/datadog_checks/presto/data/conf.yaml.example
-[25]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/metrics.yaml
-[26]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/conf.yaml.example
-[27]: /ja/agent/faq/template_variables/
-[28]: /ja/agent/guide/ad_identifiers/#short-image-container-identifiers
-[29]: /ja/integrations/kafka/
+[25]: /ja/integrations/tomcat/
+[26]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/metrics.yaml
+[27]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/conf.yaml.example
+[28]: /ja/agent/faq/template_variables/
+[29]: /ja/agent/guide/ad_identifiers/#short-image-container-identifiers
 {{% /tab %}}
 {{% tab "ホスト Agent" %}}
 

@@ -1,6 +1,6 @@
 ---
 title: Getting Started with the Continuous Profiler
-kind: Documentation
+kind: documentation
 aliases:
     - /tracing/profiling/intro_to_profiling
     - /tracing/profiler/intro_to_profiling
@@ -11,11 +11,11 @@ further_reading:
     - link: '/profiler/enabling/'
       tag: 'Documentation'
       text: 'Enabling the Profiler'
-    - link: 'https://learn.datadoghq.com/course/view.php?id=18'
+    - link: 'https://learn.datadoghq.com/courses/intro-to-apm'
       tag: 'Learning Center'
-      text: 'Introduction to Datadog'
+      text: 'Introduction to Application Performance Monitoring'
     - link: 'https://www.datadoghq.com/blog/engineering/how-we-optimized-our-akka-application-using-datadogs-continuous-profiler/'
-      tags: 'Blog'
+      tag: 'Blog'
       text: 'How we optimized our Akka application using Datadog’s Continuous Profiler'
 ---
 
@@ -66,7 +66,7 @@ docker-compose up -d
 After the containers are built and running, the "toolbox" container is available to explore:
 
 ```
-docker exec -it dd-continuous-profiler-example_toolbox_1 bash
+docker exec -it dd-continuous-profiler-example-toolbox-1 bash
 ```
 
 Use the API with:
@@ -115,7 +115,7 @@ When you open it, the visualization of the profile looks similar to this:
 
 This is a flame graph. The most important things it shows are how much CPU each method used (since this is a CPU profile) and how each method was called. For example, reading from the second row from the top, you see that `Thread.run()` called `QueuedThreadPool$2.run()` (amongst other things), which called `QueuedThreadPool.runjob(Runnable)`, which called `ReservedTheadExecutor$ReservedThread.run()`, and so on.
 
-Zooming in to one area on the bottom of the flame graph, a tooltip shows that roughly 390ms (0.90%) of CPU time was spent within this `parse()` function:
+Zooming in to one area on the bottom of the flame graph, a tooltip shows that roughly 309ms (0.90%) of CPU time was spent within this `parse()` function:
 
 {{< img src="profiler/intro_to_profiling/flame_graph_parse.png" alt="Flame graph parse() frame">}}
 
@@ -123,7 +123,7 @@ Zooming in to one area on the bottom of the flame graph, a tooltip shows that ro
 
 {{< img src="profiler/intro_to_profiling/flame_graph_length.png" alt="Flame graph String.length() frame">}}
 
-That means 278 milliseconds were spent directly in `parse()`: 390ms - 112ms. That's visually represented by the part of the `parse()` box that doesn't have anything below it.
+That means 197 milliseconds were spent directly in `parse()`: 309ms - 112ms. That's visually represented by the part of the `parse()` box that doesn't have anything below it.
 
 It's worth calling out that the flame graph _does not_ represent the progression of time. Looking at this part of the profile, `Gson$1.write()` didn't run before `TypeAdapters$16.write()` but it may not have run after it either.
 
@@ -198,7 +198,7 @@ docker-compose up -d
 To test the results, generate traffic again:
 
 ```shell
-docker exec -it dd-continuous-profiler-example_toolbox_1 bash
+docker exec -it dd-continuous-profiler-example-toolbox-1 bash
 ab -c 10 -t 20 http://movies-api-java:8080/movies?q=the
 ```
 

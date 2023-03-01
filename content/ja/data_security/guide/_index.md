@@ -1,6 +1,5 @@
 ---
-aliases:
-- /ja/security/guide/
+disable_toc: true
 kind: ガイド
 private: true
 title: セキュリティガイド

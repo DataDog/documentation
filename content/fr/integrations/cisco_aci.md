@@ -1,41 +1,64 @@
 ---
+app_id: cisco-aci
+app_uuid: fab40264-45aa-434b-9f9f-dc0ab609dd49
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     cisco_aci: assets/dashboards/cisco_aci_dashboard.json
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: true
+    metrics:
+      check: cisco_aci.fabric.node.health.cur
+      metadata_path: metadata.csv
+      prefix: cisco_aci.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Cisco ACI
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-  - network
-  - autodiscovery
-creates_events: true
-ddtype: check
+- network
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/cisco_aci/README.md'
-display_name: Cisco ACI
+- https://github.com/DataDog/integrations-core/blob/master/cisco_aci/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: cisco_aci
-guid: 8a20f56b-2e25-4a0b-a252-f5187dddeeef
 integration_id: cisco-aci
 integration_title: CiscoACI
+integration_version: 2.2.1
 is_public: true
 kind: integration
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: cisco_aci.
-metric_to_check: cisco_aci.fabric.node.health.cur
+manifest_version: 2.0.0
 name: cisco_aci
-public_title: "Intégration Datadog/Cisco\_ACI"
-short_description: "Surveillez l'utilisation et les performances de Cisco\_ACI."
-support: core
+oauth: {}
+public_title: CiscoACI
+short_description: Surveillez l'utilisation et les performances de Cisco ACI.
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Network
+  configuration: README.md#Setup
+  description: Surveillez l'utilisation et les performances de Cisco ACI.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: CiscoACI
 ---
+
+
+
 ## Présentation
 
 Grâce à l'intégration Cisco ACI, vous pouvez :
@@ -44,7 +67,7 @@ Grâce à l'intégration Cisco ACI, vous pouvez :
 - Faire un suivi de la capacité de votre ACI
 - Surveiller les commutateurs et les contrôleurs
 
-## Configuration
+## Implémentation
 
 ### Installation
 
@@ -90,7 +113,7 @@ Pour configurer ce check lorsque l'Agent est exécuté sur un host :
         #   - <TENANT_2>
    ```
 
-   *Remarque* : assurez-vous de spécifier les tenants pour que l'intégration recueille les métriques à partir de vos applications, EPG, etc.
+   *Remarque* : assurez-vous de spécifier les locataires pour que l'intégration recueille les métriques à partir de vos applications, EPG, etc.
 
 2. [Redémarrez l'Agent][3] pour commencer à envoyer vos métriques Cisco ACI à Datadog.
 
@@ -129,11 +152,18 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 Le check Cisco ACI envoie les défaillances de locataire sous la forme d'événements.
 
 ### Checks de service
+{{< get-service-checks-from-git "cisco_aci" >}}
 
-**cisco_aci.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'API Cisco ACI pour recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
+
+### Métriques `cisco_aci.tenant.*` manquantes
+S'il vous manque des métriques `cisco_aci.tenant.*`, vous pouvez exécuter le script `test/cisco_aci_query.py` pour interroger manuellement l'endpoint du locataire.
+
+Remplacez les valeurs `apic_url`, `apic_username` et `apic_password` par celles de votre configuration, puis saisissez l'URL du locataire pour `apic_url`.
+
+Vérifiez que la sortie obtenue après avoir utilisé cURL sur l'endpoint correspond à l'une des métriques recueillies dans `datadog_checks/cisco_aci/aci_metrics.py`. Si aucune des statistiques ne correspond, cela signifie que l'endpoint ne génère pas de statistiques pouvant être recueillies par l'intégration. 
+
 
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
 

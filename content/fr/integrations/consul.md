@@ -35,7 +35,6 @@ categories:
 - configuration & deployment
 - notification
 - log collection
-- autodiscovery
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/consul/README.md
 display_on_public_website: true
@@ -43,7 +42,7 @@ draft: false
 git_integration_title: consul
 integration_id: consul
 integration_title: Consul
-integration_version: 2.1.0
+integration_version: 2.2.0
 is_public: true
 kind: integration
 manifest_version: 2.0.0
@@ -62,12 +61,11 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Conteneurs
+  - Category::Containers
   - Category::Orchestration
-  - Category::Configuration et déploiement
+  - Category::Configuration & Deployment
   - Category::Notification
-  - Category::Collecte de logs
-  - Category::Autodiscovery
+  - Category::Log Collection
   configuration: README.md#Setup
   description: Recevez des alertes en fonction des checks de santé Consul, visualisez
     les mappages entre services et nœuds, et plus encore.
@@ -92,7 +90,7 @@ L'Agent Datadog recueille de nombreuses métriques sur les nœuds Consul, notamm
 
 L'Agent _Consul_ peut fournir davantage de métriques par l'intermédiaire de DogStatsD. Ces métriques sont davantage orientées sur la santé interne de Consul, et non sur celle des services qui dépendent de Consul. Elles concernent :
 
-- Les événements Serf et les bagottements de membre
+- Les événements Serf et les bagotements de membre
 - Le protocole Raft
 - Les performances DNS
 
@@ -100,7 +98,7 @@ Et bien plus encore.
 
 Enfin, en plus des métriques, l'Agent Datadog envoie également un check de service pour chaque check de santé de Consul, ainsi qu'un événement après chaque nouvelle élection de leader.
 
-## Configuration
+## Implémentation
 
 ### Installation
 

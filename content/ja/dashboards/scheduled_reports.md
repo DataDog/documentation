@@ -38,9 +38,11 @@ title: スケジュールされたレポート
 - [Notes and Links][7]
 - [Query Value][8]
 - [Scatter Plot][9]
-- [Table][10]
-- [Timeseries][11]
-- [Top List][12]
+- [SLO サマリー][10]
+- [SLO リスト][11]
+- [テーブル][12]
+- [時系列][3]
+- [トップリスト][14]
 
 ### スケジュールの設定
 
@@ -75,11 +77,15 @@ title: スケジュールされたレポート
 
 レポートを作成できるのは、**Dashboard Report Write** 権限を持つユーザーのみです。この権限は、Admins ではデフォルトでオンに、その他のすべてのロールではオフに設定されています。
 
-レポートで生成される画像は、粒度の細かい読み取り制限に関係なく、すべてのデータを表示します。レポートの権限は、データの詳細な読み取り制限を持たないユーザーに限定することをお勧めします。ユーザーに **Dashboard Report Write** 権限を付与するには、**Dashboards Report Write** 権限をオンにした新しいロールを作成し、そのユーザーをこのロールに割り当てます。または、このユーザーに **Admin** ロールを割り当ててください。ロールと権限の管理の詳細については、[アカウント管理に関するドキュメント][13]をお読みください。
+レポートで生成される画像は、粒度の細かい読み取り制限に関係なく、すべてのデータを表示します。Datadog では、レポートの権限は、データの詳細な読み取り制限を持たないユーザーに限定することをお勧めします。ユーザーに **Dashboard Report Write** 権限を付与するには、**Dashboards Report Write** 権限をオンにした新しいロールを作成し、そのユーザーをこのロールに割り当てます。または、このユーザーに **Admin** ロールを割り当ててください。ロールと権限の管理については、[ユーザー管理][13]を参照してください。
 
 {{< img src="dashboards/scheduled_reports/dashboard_permissions.png" alt="組織の設定ページ内にある個々のユーザーの権限のスクリーンショット。ダッシュボードセクションの下にあるダッシュボードレポートの書き込み権限が強調表示されている" style="width:100%;" >}}
 
-## その他の参考資料
+Admin ロールまたは **Org Management** 権限を持つユーザーは、**Organization Settings** の [Public Sharing][16] にある **Settings** タブから、アカウントのスケジュールレポート機能を有効または無効にすることができます。
+
+{{< img src="dashboards/scheduled_reports/report_management.png" alt="Datadog の Organization Settings 内の Public Sharing の Settings タブにある Report Management 設定が Enabled になっている" style="width:100%;" >}}
+
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -92,7 +98,10 @@ title: スケジュールされたレポート
 [7]: /ja/dashboards/widgets/note/
 [8]: /ja/dashboards/widgets/query_value/
 [9]: /ja/dashboards/widgets/scatter_plot/
-[10]: /ja/dashboards/widgets/table/
-[11]: /ja/dashboards/widgets/timeseries/
-[12]: /ja/dashboards/widgets/top_list/
-[13]: /ja/account_management/users/#edit-a-user-s-roles
+[10]: /ja/dashboards/widgets/slo/
+[11]: /ja/dashboards/widgets/slo_list/
+[12]: /ja/dashboards/widgets/table/
+[13]: /ja/dashboards/widgets/timeseries/
+[14]: /ja/dashboards/widgets/top_list/
+[15]: /ja/account_management/users/#edit-a-users-roles
+[16]: /ja/account_management/org_settings/#public-sharing

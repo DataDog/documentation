@@ -103,6 +103,7 @@ Here is the mapping between deprecated tags and the official tags that have repl
 | cronjob               | kube_cronjob                |
 | daemonset             | kube_daemon_set             |
 | deployment            | kube_deployment             |
+| hpa                   | horizontalpodautoscaler     |
 | image                 | image_name                  |
 | job                   | kube_job                    |
 | job_name              | kube_job                    |
@@ -134,6 +135,9 @@ The Kubernetes State Metrics Core check is not backward compatible, be sure to r
 
 `kube_job`
 : In `kubernetes_state`, the `kube_job` tag value is the `CronJob` name if the `Job` had `CronJob` as an owner, otherwise it is the `Job` name. In `kubernetes_state_core`, the `kube_job` tag value is always the `Job` name, and a new `kube_cronjob` tag key is added with the `CronJob` name as the tag value. When migrating to `kubernetes_state_core`, it's recommended to use the new tag or `kube_job:foo*`, where `foo` is the `CronJob` name, for query filters.
+
+`kubernetes_state.job.succeeded`
+: In `kubernetes_state`, the `kuberenetes.job.succeeded` was `count` type. In `kubernetes_state_core` it is `gauge` type. 
 
 {{< tabs >}}
 {{% tab "Helm" %}}

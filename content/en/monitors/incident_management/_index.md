@@ -69,7 +69,7 @@ You can also add a monitor to an existing incident.
 
 Declare an incident directly from a Cloud SIEM or Cloud Workload Security signal by clicking the kebab button on the top right of the side panel, and clicking **Declare incident**.
 
-Declare an incident from an Application Security Monitoring signal by selecting the export button on the top right of the side panel, and clicking **Export to incident**.
+Declare an incident from an Application Security Management signal by selecting the export button on the top right of the side panel, and clicking **Export to incident**.
 
 {{< img src="monitors/incidents/security-signal-incidents.png" alt="Create an incident from a security signal" style="width:80%;">}}
 
@@ -190,13 +190,13 @@ For more information about Incident Management graphs, see [Incident Management 
 
 In addition to integrating with [Slack][7], Incident Management also integrates with:
 
-- [PagerDuty][13] to send incident notifications to PagerDuty.
-- [Jira][14] to create a Jira ticket for an incident.
-- [Webhooks][15] to send incident notifications using webhooks (for example, [sending SMS to Twilio][16]).
+- [PagerDuty][13] and [OpsGenie][14] to send incident notifications to your on-call engineers.
+- [Jira][15] to create a Jira ticket for an incident.
+- [Webhooks][16] to send incident notifications using webhooks (for example, [sending SMS to Twilio][17]).
 
 ## Ready to try it out?
 
-Work through an example workflow in the [Getting Started with Incident Management][17] guide.
+Work through an example workflow in the [Getting Started with Incident Management][18] guide.
 
 ## Further Reading
 
@@ -215,7 +215,8 @@ Work through an example workflow in the [Getting Started with Incident Managemen
 [11]: https://app.datadoghq.com/incidents/settings#Property-Fields
 [12]: /monitors/incident_management/analytics/#overview
 [13]: /integrations/pagerduty/
-[14]: /integrations/jira/
-[15]: /integrations/webhooks/
-[16]: /integrations/webhooks/#sending-sms-through-twilio
-[17]: /getting_started/incident_management
+[14]: /integrations/opsgenie/
+[15]: /integrations/jira/
+[16]: /integrations/webhooks/
+[17]: /integrations/webhooks/#sending-sms-through-twilio
+[18]: /getting_started/incident_management

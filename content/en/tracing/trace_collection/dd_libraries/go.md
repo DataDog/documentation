@@ -15,7 +15,7 @@ further_reading:
 - link: "https://github.com/DataDog/dd-trace-go/tree/v1"
   tag: "GitHub"
   text: "Source code"
-- link: "https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
+- link: "https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
   tag: "GoDoc"
   text: "Package page"
 - link: "/tracing/glossary/"
@@ -31,7 +31,7 @@ The Go Tracer requires Go `1.17+` and Datadog Agent `>= 5.21.1`. For a full list
 
 ### Follow the in-app documentation (recommended)
 
-Follow the [Quickstart instructions][7] within the Datadog app for the best experience, including:
+Follow the [Quickstart instructions][2] within the Datadog app for the best experience, including:
 
 - Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
 - Dynamically set `service`, `env`, and `version` tags.
@@ -82,14 +82,13 @@ To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] d
 {{% /tab %}}
 {{% tab "Other Environments" %}}
 
-Tracing is available for a number of other environments, such as  [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3], and [Azure App Service][4].
+Tracing is available for a number of other environments, such as  [Heroku][1], [Cloud Foundry][2], and [AWS Elastic Beanstalk][3].
 
 For other environments, please refer to the [Integrations][5] documentation for that environment and [contact support][6] if you are encountering any setup issues.
 
 [1]: /agent/basic_agent_usage/heroku/#installation
 [2]: /integrations/cloud_foundry/#trace-collection
 [3]: /integrations/amazon_elasticbeanstalk/
-[4]: /infrastructure/serverless/azure_app_services/#overview
 [5]: /integrations/
 [6]: /help/
 {{% /tab %}}
@@ -101,19 +100,15 @@ Datadog has a series of pluggable packages which provide out-of-the-box support 
 
 ## Library configuration
 
-If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][8] for details.
+If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][3] for details.
 
-For configuration instructions and details about using the API, see the Datadog [API documentation][2].
+For configuration instructions and details about using the API, see the Datadog [API documentation][4].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/compatibility_requirements/go
-[2]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
-[3]: /tracing/glossary/
-[4]: https://github.com/DataDog/dd-trace-go/tree/v1#contributing
-[5]: https://github.com/DataDog/dd-trace-go/tree/v1/MIGRATING.md
-[6]: /profiler/enabling/?code-lang=go
-[7]: https://app.datadoghq.com/apm/docs
-[8]: /tracing/trace_collection/library_config/go/
+[2]: https://app.datadoghq.com/apm/service-setup
+[3]: /tracing/trace_collection/library_config/go/
+[4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace

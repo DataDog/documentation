@@ -1,8 +1,6 @@
 ---
 title: Deprecation notice for TLS version < 1.2
 kind: guide
-aliases:
-    - /security/guide/tls_deprecation_1_2/
 ---
 
 

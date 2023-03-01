@@ -8,7 +8,7 @@ title: Tracer Startup Logs
 ---
 ## 起動ログ
 
-トレーサー起動ログは、起動時に取得可能なすべての情報を取得し、`DATADOG TRACER CONFIGURATION` または `DATADOG TRACER DIAGNOSTICS` として記録し、ログ内の検索を簡素化することができます。
+トレーサー起動ログは、起動時に取得可能なすべての情報を取得し、`DATADOG TRACER CONFIGURATION`、`DATADOG TRACER DIAGNOSTICS`、または `DATADOG CONFIGURATION` として記録し、ログ内の検索を簡素化することができます。
 
 言語によっては、言語の慣習や `Stdout` やそれに相当するものにアクセスする安全性に応じて、別のファイルにログを記録するものもあります。そのような場合、ログの場所は以下の言語タブに記されています。いくつかの言語では、診断エントリをログに残しません。
 

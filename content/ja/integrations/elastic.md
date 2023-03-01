@@ -36,7 +36,6 @@ author:
 categories:
 - data store
 - log collection
-- autodiscovery
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/elastic/README.md
 display_on_public_website: true
@@ -44,7 +43,7 @@ draft: false
 git_integration_title: elastic
 integration_id: elasticsearch
 integration_title: ElasticSearch
-integration_version: 5.2.0
+integration_version: 5.3.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -64,7 +63,6 @@ tile:
   - Supported OS::Windows
   - Category::データストア
   - Category::ログの収集
-  - Category::オートディスカバリー
   configuration: README.md#Setup
   description: クラスター全体のステータスから JVM のヒープ使用量まで、すべてを監視
   media: []
@@ -85,7 +83,7 @@ Datadog Agent の Elasticsearch チェックは、検索とインデックス化
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Elasticsearch チェックは [Datadog Agent][2] パッケージに含まれています。追加のインストールは必要ありません。
 

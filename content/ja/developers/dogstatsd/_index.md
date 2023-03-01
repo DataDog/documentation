@@ -86,6 +86,7 @@ DogStatsD は、Agent v6 以上の UDP ポート `8125` でデフォルトで有
 
 ```shell
 docker run -d --cgroupns host \
+              --pid host \
               -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
@@ -116,6 +117,8 @@ StatsD メトリクスの収集を開始するには、DogStatsD ポートをホ
    これによりアプリケーションは、実行中のノードのポート `8125` で DogStatsD でメトリクスを送信できるようになります。
 
    **注**: `hostPort` 機能には、Calico、Canal、Flannel などの [CNI 仕様][2]に準拠したネットワークプロバイダーが必要です。非 CNI ネットワークプロバイダーの回避策を含む詳細については、Kubernetes のドキュメントを参照してください: [HostPort サービスが機能しない][3]。
+
+   **注**: Operator をデプロイする場合は、`agent.config.hostPort` でホストポートを構成してください。
 
 2. DogStatsD 非ローカルトラフィックを有効にして StatsD データ収集を許可し、`datadog-agent.yaml` マニフェストで `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` を `true` に設定します。
 
@@ -347,7 +350,7 @@ if err != nil {
 
 
 
-[1]: https://godoc.org/github.com/DataDog/datadog-go/v5/statsd
+[1]: https://pkg.go.dev/github.com/DataDog/datadog-go/v5/statsd
 {{< /programming-lang >}}
 
 {{< programming-lang lang="java" >}}
@@ -481,7 +484,7 @@ Go クライアントには、クライアントの動作を設定するため�
 利用可能なすべてのオプションについては、[Datadog の GoDoc][1] を参照してください。
 
 
-[1]: https://godoc.org/github.com/DataDog/datadog-go/v5/statsd#Option
+[1]: https://pkg.go.dev/github.com/DataDog/datadog-go/v5/statsd#Option
 {{< /programming-lang >}}
 {{< programming-lang lang="java" >}}
 

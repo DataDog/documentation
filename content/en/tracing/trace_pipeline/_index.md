@@ -25,7 +25,7 @@ Set up tracing to gain end-to-end visibility into your applications with fine-gr
 
 The [Ingestion Control page][3] overviews ingestion volumes and configuration settings across your services.
 
-{{< img src="tracing/trace_indexing_and_ingestion/ingestion_control_page.png" style="width:100%;" alt="Ingestion Control Page Overview" >}}
+{{< img src="tracing/trace_indexing_and_ingestion/ingestion_controls_page.png" style="width:100%;" alt="Ingestion Control Page Overview" >}}
 
 ## Generating metrics from spans
 

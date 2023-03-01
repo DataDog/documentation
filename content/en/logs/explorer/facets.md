@@ -199,6 +199,8 @@ The index facet is a specific facet that appears only if your organization has [
 
 As a matter of good practice, always consider using an existing facet rather than creating a new one (see the [alias facets](#alias-facets) section). Using a unique facet for information of a similar nature fosters cross-team collaboration.
 
+To create a facet on an array of JSON objects, first use a [grok parser][28] to extract the attribute and then create a facet for that attribute.
+
 **Note**: Once a facet is created, its content is populated **for all new logs** flowing in **either** index. For an optimal usage of the Log Management solution, Datadog recommends using at most 1000 facets.
 
 #### Log side panel
@@ -268,7 +270,7 @@ To delete a facet, follow these steps:
 [1]: /logs/search_syntax/
 [2]: /logs/explorer/patterns/
 [3]: /logs/explorer/analytics/
-[4]: /monitors/create/types/log/
+[4]: /monitors/types/log/
 [5]: /dashboards/widgets/
 [6]: /notebooks/
 [15]: /logs/log_configuration/rehydrating
@@ -283,3 +285,4 @@ To delete a facet, follow these steps:
 [25]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
 [26]: /logs/log_configuration/attributes_naming_convention
 [27]: /logs/indexes/#indexes
+[28]: /logs/log_configuration/parsing/?tab=matchers#nested-json

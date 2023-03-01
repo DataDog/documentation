@@ -16,16 +16,17 @@ title: ライブコンテナの構成
 
 Datadog Agent と Cluster Agent は、[ライブコンテナ][1]の Kubernetes リソースを取得するように構成できます。この機能により、特定のネームスペースまたはアベイラビリティーゾーンのポッド、デプロイメント、その他の Kubernetes の概念の状態を監視したり、デプロイメント内で失敗したポッドのリソース仕様を確認したり、ノードアクティビティを関係するログに関連付けたりすることが可能になります。
 
-ライブコンテナの Kubernetes リソースには、以下を構成する前に [Agent バージョン >= 7.27.0][2] および [Cluster Agent バージョン >= 1.11.0][3] が必要です。
+ライブコンテナの Kubernetes リソースには、**Agent バージョン >= 7.27.0** および **Cluster Agent バージョン >= 1.11.0** が必要です。Datadog Agent と Cluster Agent の旧バージョンについては、[ライブコンテナのレガシー構成][4]を参照してください。
+
+注: Kubernetes バージョン 1.25 以上の場合、必要な最小限の Cluster Agent のバージョンは 7.40.0 です。
 
 {{< tabs >}}
 {{% tab "Helm" %}}
 
 公式の [Datadog Helm チャート][1]を使用している場合、
 
-- バージョン 2.10.0 以降のチャートを使用します。
-  **注**: Agent および Cluster Agent のバージョンが、Helm チャート [values.yaml][2] ファイルで必要最低限以上のバージョンでハードコードされるようにしてください。
-- Process Agent が有効になっていることを確認してください。これを行うには、`datadog-values.yaml` ファイルを変更して次の値を含めるようにします。
+- チャートバージョン >= 2.10.0 を使用します。Agent および Cluster Agent のバージョンが、Helm チャート [values.yaml][2] ファイルで必要最低限以上のバージョンでハードコードされるようにしてください。
+- Process Agent を有効にします。これを行うには、`datadog-values.yaml` ファイルを変更して次の値を含めるようにします。
 
     ```yaml
     datadog:
@@ -33,6 +34,7 @@ Datadog Agent と Cluster Agent は、[ライブコンテナ][1]の Kubernetes �
         processAgent:
             enabled: true
     ```
+
 - 新しいリリースをデプロイします。
 
 一部のセットアップでは、Process Agent と Cluster Agent で Kubernetes クラスター名が自動検出されません。この場合、機能は起動せず、Cluster Agent ログで以下のような警告が表示されます。`Orchestrator explorer enabled but no cluster name set: disabling`。この場合、`datadog.clusterName` を [values.yaml][2] でクラスター名に設定する必要があります。
@@ -82,6 +84,8 @@ Datadog Agent と Cluster Agent は、[ライブコンテナ][1]の Kubernetes �
         resources:
         - deployments
         - replicasets
+        - daemonsets
+        - statefulsets
         verbs:
         - list
         - get
@@ -95,8 +99,35 @@ Datadog Agent と Cluster Agent は、[ライブコンテナ][1]の Kubernetes �
         - list
         - get
         - watch
+      - apiGroups:
+        - ""
+        resources:
+        - serviceaccounts
+        verbs:
+        - list
+        - get
+        - watch
+      - apiGroups:
+        - rbac.authorization.k8s.io
+        resources:
+        - roles
+        - rolebindings
+        - clusterroles
+        - clusterrolebindings
+        verbs:
+        - list
+        - get
+        - watch
+      - apiGroups:
+       - networking.k8s.io
+       resources:
+       - ingresses
+       verbs:
+       - list
+       - watch
       ...
     ```
+
     これらのアクセス許可は、Agent DaemonSet や Cluster Agent Deployment と同じネームスペースに `datadog-cluster-id` ConfigMap を作成したり、サポート対象の Kubernetes リソースを収集するために必要です。
 
    Cluster Agent により `cluster-id` ConfigMap が作成されない場合、Agent ポッドはリソースを収集することができません。この場合は Cluster Agent のアクセス許可を更新し、ポッドを再起動して ConfigMap を作成した後、Agent ポッドを再起動します。
@@ -108,15 +139,16 @@ Datadog Agent と Cluster Agent は、[ライブコンテナ][1]の Kubernetes �
       value: "true"
     ```
 
-一部のセットアップでは、Process Agent と Cluster Agent で Kubernetes クラスター名が自動検出されません。この場合、機能は起動せず、Cluster Agent ログで以下のような警告が表示されます。`Orchestrator explorer enabled but no cluster name set: disabling`。この場合、Cluster Agent と Process Agent の両方の `env` セクションに以下のオプションを追加する必要があります。
+一部のセットアップでは、Process Agent と Cluster Agent で Kubernetes クラスター名が自動検出されません。この場合、機能は起動せず、Cluster Agent ログで以下のような警告が表示されます。`Orchestrator explorer enabled but no cluster name set: disabling`。この場合、Cluster Agent と Process Agent の両方の `env` セクションに以下のオプションを追加します。
 
   ```yaml
   - name: DD_CLUSTER_NAME
     value: "<YOUR_CLUSTER_NAME>"
   ```
 
-[1]: /ja/agent/cluster_agent/
-[2]: /ja/agent/cluster_agent/setup/
+  [1]: /containers/cluster_agent/
+  [2]: /containers/cluster_agent/setup/?tab=daemonset#pagetitle
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -124,7 +156,7 @@ Datadog Agent と Cluster Agent は、[ライブコンテナ][1]の Kubernetes �
 
 次の表は、収集されたリソースと、それぞれに対する最低限の Agent、Cluster Agent、Helm チャートのバージョンをリストで示したものです。
 
-| Resource | 最低限必要な Agent のバージョン | 最低限必要な Cluster Agent のバージョン | 最低限必要な Helm チャートのバージョン |
+| Resource | 最低限必要な Agent のバージョン | 最低限必要な Cluster Agent のバージョン* | 最低限必要な Helm チャートのバージョン |
 |---|---|---|---|
 | ClusterRoleBindings | 7.27.0 | 1.19.0 | 2.30.9 |
 | ClusterRoles | 7.27.0 | 1.19.0 | 2.30.9 |
@@ -134,6 +166,7 @@ Datadog Agent と Cluster Agent は、[ライブコンテナ][1]の Kubernetes �
 | デプロイ | 7.27.0 | 1.11.0 | 2.10.0 |
 | Ingresses | 7.27.0 | 1.22.0 | 2.30.7 |
 | ジョブ | 7.27.0 | 1.13.1 | 2.15.5 |
+| ネームスペース | 7.27.0 | 7.41.0 | 2.30.9 |
 | ノード | 7.27.0 | 1.11.0 | 2.10.0 |
 | PersistentVolumes | 7.27.0 | 1.18.0 | 2.30.4 |
 | PersistentVolumeClaims | 7.27.0 | 1.18.0 | 2.30.4 |
@@ -145,107 +178,7 @@ Datadog Agent と Cluster Agent は、[ライブコンテナ][1]の Kubernetes �
 | サービス | 7.27.0 | 1.11.0 | 2.10.0 |
 | Statefulsets | 7.27.0 | 1.15.0 | 2.20.1 |
 
-### 以前の Agent および Cluster Agent バージョン向けの手順
-
-ライブコンテナの Kubernetes リソースビューでは、最低限必要なバージョンが更新される前は、[Agent バージョン >= 7.21.1][2]および[Cluster Agent バージョン >= 1.9.0][3]が必要でした。これらの古いバージョンでは DaemonSetのコンフィギュレーションが若干異なっていたため、完全な手順が必要な場合は以下をご参照ください。
-
-{{< tabs >}}
-{{% tab "Helm" %}}
-
-公式の [Datadog Helm チャート][1]を使用している場合、
-
-- チャートのバージョンは 2.4.5 以上、2.10.0 以前を使用してください。チャートバージョン 2.10.0 以降をお使いの場合は、[最新のコンフィギュレーション手順][2]を参照してください。
-  **注**: Agent および Cluster Agent のバージョンが、Helm チャート [values.yaml][3] ファイルで必要最低限以上のバージョンでハードコードされるようにしてください。
-- [values.yaml][3] で `datadog.orchestratorExplorer.enabled` を `true` に設定します
-- 新しいリリースをデプロイします。
-
-一部のセットアップでは、Process Agent と Cluster Agent で Kubernetes クラスター名が自動検出されません。この場合、機能は起動せず、Cluster Agent ログで以下のような警告が表示されます。`Orchestrator explorer enabled but no cluster name set: disabling`。この場合、`datadog.clusterName` を [values.yaml][3] でクラスター名に設定する必要があります。
-
-[1]: https://github.com/DataDog/helm-charts
-[2]: /ja/infrastructure/livecontainers/#configuration
-[3]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
-{{% /tab %}}
-{{% tab "DaemonSet" %}}
-
-Cluster Agent が動作していて、Agent が通信可能である必要があります。コンフィギュレーションについては、[Cluster Agent のセットアップ][1]を参照してください。
-
-1. 以下の環境変数を使用して、Cluster Agent コンテナを設定します。
-
-    ```yaml
-      - name: DD_ORCHESTRATOR_EXPLORER_ENABLED
-        value: "true"
-    ```
-
-2. 以下の RBAC アクセス許可を使用して、Cluster Agent ClusterRole を設定します。
-
-    **注**:  `apps` apiGroups の場合は、ライブコンテナに
-    一般的な Kubernetes リソース (`pods`、`services`、`nodes` など) を収集する権限が必要です。
-   これは、[Cluster Agent のセットアップ][1]に従っていれば、すでに RBAC にあります。ない場合は、追加されていることを確認してください (`deployments`、`replicasets` の後):
-
-    ```yaml
-      ClusterRole:
-      - apiGroups:  # To create the datadog-cluster-id ConfigMap
-        - ""
-        resources:
-        - configmaps
-        verbs:
-        - create
-        - get
-        - update
-      ...
-      - apiGroups:  # Required to get the kube-system namespace UID and generate a cluster ID
-        - ""
-        resources:
-        - namespaces
-        verbs:
-        - get
-      ...
-      - apiGroups:  # To collect new resource types
-        - "apps"
-        resources:
-        - deployments
-        - replicasets
-        - daemonsets
-        - statefulsets
-        verbs:
-        - list
-        - get
-        - watch
-     - apiGroups:
-       - networking.k8s.io
-       resources:
-       - ingresses
-       verbs:
-       - list
-       - watch
-    ```
-
-    これらのアクセス許可は、Agent DaemonSet や Cluster Agent Deployment と同じネームスペースに `datadog-cluster-id` ConfigMap を作成したり、デプロイや ReplicaSets を収集するために必要です。
-
-    Cluster Agent により `cluster-id` ConfigMap が作成されない場合、Agent ポッドは起動せず、`CreateContainerConfigError` ステータスに陥ります。この ConfigMap が存在しないために Agent ポッドが動かない場合は、Cluster Agent アクセス許可を更新しポッドを再起動して ConfigMap を作成すると、Agent ポッドは自動的に回復します。
-
-3. Agent DaemonSet で実行される Process Agent は、有効かつ実行中（プロセス収集を実行する必要はありません）であり、かつ以下のオプションで構成されている必要があります。
-
-    ```yaml
-    - name: DD_ORCHESTRATOR_EXPLORER_ENABLED
-      value: "true"
-    - name: DD_ORCHESTRATOR_CLUSTER_ID
-      valueFrom:
-        configMapKeyRef:
-          name: datadog-cluster-id
-          key: id
-    ```
-
-一部のセットアップでは、Process Agent と Cluster Agent で Kubernetes クラスター名が自動検出されません。この場合、機能は起動せず、Cluster Agent ログで以下のような警告が表示されます。`Orchestrator explorer enabled but no cluster name set: disabling`。この場合、Cluster Agent と Process Agent の両方の `env` セクションに以下のオプションを追加する必要があります。
-
-  ```yaml
-  - name: DD_CLUSTER_NAME
-    value: "<YOUR_CLUSTER_NAME>"
-  ```
-
-[1]: /ja/agent/cluster_agent/setup/
-{{% /tab %}}
-{{< /tabs >}}
+**注**: Kubernetes バージョン 1.25 以上の場合、必要な最小限の Cluster Agent のバージョンは 7.40.0 です。
 
 ### カスタムタグをリソースに追加
 
@@ -255,11 +188,10 @@ Cluster Agent が動作していて、Agent が通信可能である必要があ
 
 **注**: これらのタグは、Kubernetes リソースビューでのみ表示されます。
 
-
 {{< tabs >}}
 {{% tab "Helm" %}}
 
-公式の Helm チャートを使用している場合、[values.yaml][1] にそれぞれ `agents.containers.processAgent.env` および `clusterAgent.env` を設定して Process Agent と Cluster Agent の両方に環境変数を追加します。
+公式の Helm チャートを使用している場合、[values.yaml][1] に `agents.containers.processAgent.env` および `clusterAgent.env` を設定して Process Agent と Cluster Agent の両方に環境変数を追加します。
 
 ```yaml
   agents:
@@ -274,10 +206,8 @@ Cluster Agent が動作していて、Agent が通信可能である必要があ
         value: "tag1:value1 tag2:value2"
 ```
 
-
 次に、新しいリリースをデプロイします。
 
-[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
 
@@ -295,8 +225,8 @@ Process Agent と Cluster Agent の両コンテナに環境変数を設定しま
 
 コンテナは、リアルタイム収集の対象に入れたり、除外したりすることができます。
 
-* メインコンフィギュレーションファイル  `datadog.yaml` に環境変数 `DD_CONTAINER_EXCLUDE` を渡すか、`container_exclude:` を追加することで、コンテナを対象から除外することができます。
-* メインコンフィギュレーションファイル `datadog.yaml` に環境変数 `DD_CONTAINER_INCLUDE` を渡すか、`container_include:` を追加することで、コンテナを対象に入れることができます。
+- メインコンフィギュレーションファイル  `datadog.yaml` に環境変数 `DD_CONTAINER_EXCLUDE` を渡すか、`container_exclude:` を追加することで、コンテナを対象から除外することができます。
+- メインコンフィギュレーションファイル `datadog.yaml` に環境変数 `DD_CONTAINER_INCLUDE` を渡すか、`container_include:` を追加することで、コンテナを対象に入れることができます。
 
 どちらの引数も値は**イメージ名**になります。正規表現もサポートされています。
 
@@ -349,12 +279,11 @@ password: <MY_PASSWORD>
 password::::== <MY_PASSWORD>
 ```
 
-ただし、センシティブワードを含むパスのスクラビングは行いません。例えば、`secret` がセンシティブワードであっても、 `/etc/vaultd/secret/haproxy-crt.pem` を `/etc/vaultd/******/haproxy-crt.pem` に上書きすることはありません。
+ただし、スクラバーはセンシティブワードを含むパスのスクラビングは行いません。例えば、`secret` がセンシティブワードであっても、 `/etc/vaultd/secret/haproxy-crt.pem` を `/etc/vaultd/******/haproxy-crt.pem` に上書きすることはありません。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/infrastructure/livecontainers/configuration
-[2]: /ja/tagging/assigning_tags?tab=agentv6v7#host-tags
-[3]: /ja/getting_started/tagging/
+[1]: /ja/infrastructure/livecontainers/#overview
+[4]: /ja/infrastructure/livecontainers/legacy

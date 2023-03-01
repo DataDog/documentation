@@ -2,7 +2,7 @@
 title: Prevent alerts from Monitors that were in downtime
 kind: guide
 further_reading:
-- link: "/monitors/create/"
+- link: "/monitors/"
   tag: "Documentation"
   text: "Learn how to create a monitor"
 - link: "/monitors/notify/"

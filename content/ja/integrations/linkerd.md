@@ -32,7 +32,7 @@ draft: false
 git_integration_title: linkerd
 integration_id: linkerd
 integration_title: Linkerd
-integration_version: 3.2.1
+integration_version: 3.3.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0

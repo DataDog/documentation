@@ -27,6 +27,8 @@ Real User Monitoring (RUM) では、Datadog RUM SDK を使用してブラウザ�
 
 RUM ベースのカスタムメトリクスは、RUM イベントのセットからデータを要約するためのコスト効率の良いオプションです。最大 15 か月間の RUM データの傾向や異常を詳細に視覚化することができます。
 
+**請求について:** RUM イベントから生成されたメトリクスは、[カスタムメトリクス][5]として請求されます。
+
 ## RUM ベースのカスタムメトリクスを作成する
 
 RUM イベントデータからカスタムメトリクスを作成するには、[**UX Monitoring** > **Generate Metrics**][3] に移動して **+ New Metric** をクリックします。
@@ -49,7 +51,7 @@ RUM イベントデータからカスタムメトリクスを作成するには�
 
 5. グループ化するパスを **group by** の横のドロップダウンメニューから選択します。メトリクスのタグ名は、元の属性またはタグ名から `@` を除いたものです。デフォルトでは、RUM イベントから生成されたカスタムメトリクスには、明示的に追加されない限りタグは含まれません。RUM イベントに存在する `@error.source` や `env` などの属性またはタグのディメンションを使用して、メトリクスタグを作成することができます。
 
-   <div class="alert alert-warning">RUM-based custom metrics are considered as <a href="/metrics/custom_metrics/">custom metrics</a>. Datadog recommends avoiding grouping by unbounded or extremely high cardinality attributes such as timestamps, user IDs, request IDs, and session IDs. For more information, see <a href="/data_security/logs/">Log Management Data Security</a>.
+   <div class="alert alert-warning">RUM-based custom metrics are considered as <a href="/metrics/custom_metrics/">custom metrics</a> and billed accordingly. Avoid grouping by unbounded or extremely high cardinality attributes such as timestamps, user IDs, request IDs, and session IDs.
    </div>
 
 6. セッションとビューで作成されたカスタムメトリクスの場合、セッションとビューのマッチング基準を設定するために、**The active session/view starts matching the query** (アクティブなセッション/ビューがクエリにマッチし始める) または **The session/view becomes inactive or is completed** (セッション/ビューが非アクティブになるか完了する) を選択します。詳細については、[セッションとビューに RUM ベースのメトリクスを追加する](#add-a-rum-based-metric-on-sessions-and-views)を参照してください。
@@ -100,7 +102,7 @@ RUM ベースのカスタムメトリクスは、以下のアクションに使�
 - [予測モニター][14]で、あるメトリクスが将来的にしきい値を超えると予測された場合にアラートをトリガーする
 - [メトリクスベースの SLO][15] を作成し、チームや組織のユーザー中心のパフォーマンス目標を追跡する
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

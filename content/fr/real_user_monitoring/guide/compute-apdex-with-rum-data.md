@@ -87,7 +87,7 @@ Cliquez sur l'icône Copier située sur la droite pour copier le JSON du graphiq
             "queries": [
                 {
                     "search": {
-                        "query": "@type:view @Largest @view.largest_contentful_paint:<2000000000"
+                        "query": "@type:view @view.largest_contentful_paint:<2000000000"
                     },
                     "data_source": "rum",
                     "compute": {

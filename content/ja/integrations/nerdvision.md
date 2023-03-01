@@ -88,6 +88,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: NerdVision
+  uninstallation: README.md#Uninstallation
 ---
 
 

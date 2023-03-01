@@ -18,9 +18,14 @@ further_reading:
 
 The [Metrics Summary page][1] displays a list of your metrics reported to Datadog under a specified time frame: the past hour, day, or week. 
 
-Search your metrics by name or tag using the **Metric** or **Tag** search fields:
+Search your metrics by metric name or tag using the **Metric** or **Tag** search fields:
 
-{{< img src="metrics/summary/tagexplorer2.mp4" alt="Filter by Tag" video=true style="width:75%;">}}
+{{< img src="metrics/summary/tag_advancedfiltering.mp4" alt="The metrics summary page with NOT team:* entered in the Tag search bar" video=true style="width:75%;">}}
+
+Tag filtering supports boolean and wildcard syntax so that you can quickly identify: 
+* Metrics that are tagged with a particular tag key, for example, `team`: `team:*`
+* Metrics that are missing a particular tag key, for example, `team`: `NOT team:*`
+
 
 ## Facet panel
 
@@ -127,10 +132,10 @@ For any particular tag key, you can:
 
 [Learn more about tagging][5].
 
-## Metrics without Limits\*
-Metrics without Limits\* provides you control over the size of your custom metrics without requiring any agent or code-level changes. 
+## Metrics without Limits™
+Metrics without Limits™ provides you control over the size of your custom metrics without requiring any agent or code-level changes. 
 
-**Note:** Metrics without Limits\* is only available for custom metrics.
+**Note:** Metrics without Limits™ is only available for custom metrics.
 
 You can configure tags using the bulk metric tag configuration button or the **Manage Tags** button in a metric's details side panel. 
 
@@ -145,11 +150,11 @@ You can configure tags using the bulk metric tag configuration button or the **M
 
 ### Queryable tags 
 
-Once your metric has been configured with Metrics without Limits\*, you can view which tags remain Queryable -- ultimately those that contribute to _Indexed Custom Metrics_ volume. And you can toggle back to all originally submitted and ingested tags that contribute to your _Ingested Custom Metrics_ volume. 
+Once your metric has been configured with Metrics without Limits™, you can view which tags remain Queryable -- ultimately those that contribute to _Indexed Custom Metrics_ volume. And you can toggle back to all originally submitted and ingested tags that contribute to your _Ingested Custom Metrics_ volume. 
 
 ### Optimize your metric with aggregations in Advanced Mode
 
-For custom metrics of the count, gauge, or rate metric type, you can further refine your metric's configurations by optionally including additional aggregations with the advanced mode of Metrics without Limits\*. By default, Datadog stores the most frequently queried aggregation combination depending on the metric's type to preserve the mathematical accuracy of your configured metric's query as listed below: 
+For custom metrics of the count, gauge, or rate metric type, you can further refine your metric's configurations by optionally including additional aggregations with the advanced mode of Metrics without Limits™. By default, Datadog stores the most frequently queried aggregation combination depending on the metric's type to preserve the mathematical accuracy of your configured metric's query as listed below: 
 
 - Configured counts/rates are queryable with time/space aggregations of `SUM`
 - Configured gauges are queryable in time/space aggregations of `AVG`

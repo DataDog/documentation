@@ -4,4 +4,5 @@
 GITHUB_TOKEN := ${github_personal_token}
 DATADOG_API_KEY := false
 DATADOG_APP_KEY := false
+FULL_BUILD := false
 CONFIGURATION_FILE := "./local/bin/py/build/configurations/pull_config_preview.yaml"

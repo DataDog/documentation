@@ -148,7 +148,7 @@ span.setTag('span.type', 'web')
 span.finish();
 ```
 
-For more information, see [Setting up NodeJS and OpenTracing][1].
+For more information, see [Setting up Node.js and OpenTracing][1].
 
 
 [1]: /tracing/trace_collection/open_standards/nodejs/#opentracing

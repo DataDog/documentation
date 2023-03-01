@@ -65,6 +65,8 @@ tile:
   - Category::Automation
   - Category::Notification
   - Category::Monitoring
+  - Offering::Software License
+  - Offering::Integration
   configuration: README.md#Setup
   description: 高度なセルフサービス AI 駆動の可観測性プラットフォーム
   media:
@@ -80,6 +82,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Moogsoft
+  uninstallation: README.md#Uninstallation
 ---
 
 

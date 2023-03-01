@@ -38,14 +38,13 @@ If your service starts answering slower or in an unexpected way (such as an unex
 
 API tests run from Datadog [managed locations][3] or [private locations][4], allowing **internal and external coverage** of your systems.
 
-**Note**: API tests are single requests executed against your services. If you want to monitor sophisticated business transactions at the API level or endpoints that require authentication, chain your requests with [multistep API tests][5].
-
+**Note:** API tests are single requests executed against your services. If you want to monitor sophisticated business transactions at the API level or endpoints that require authentication, chain your requests with [multistep API tests][5].
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /synthetics/api_tests/http_tests?tab=requestoptions#notify-your-team
-[2]: /synthetics/cicd_integrations
-[3]: /api/v1/synthetics/#get-all-locations-public-and-private
+[2]: /continuous_testing/cicd_integrations
+[3]: /synthetics/api_tests/http_tests/#select-locations
 [4]: /synthetics/private_locations
 [5]: /synthetics/multistep/

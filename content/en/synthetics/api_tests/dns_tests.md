@@ -27,7 +27,7 @@ further_reading:
 
 DNS tests allow you to proactively monitor the resolvability and lookup times of your DNS records using any nameserver. If resolution is unexpectedly slow or a DNS server answers with unexpected A, AAAA, CNAME, TXT, or MX entries, Datadog sends you an alert with details on the failure, allowing you to quickly pinpoint the root cause of the issue and fix it.
 
-DNS tests can run from both [managed][1] and [private locations][2] depending on your preference for running the test from outside or inside your network. DNS tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][3].
+DNS tests can run from both [managed](#select-locations) and [private locations][1] depending on your preference for running the test from outside or inside your network. DNS tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][2].
 
 ## Configuration
 
@@ -40,7 +40,7 @@ After choosing to create a `DNS` test, define your test's request.
 3. Specify your DNS Server **Port** (optional). If not specified, the DNS Server port defaults to 53.
 4. Specify the amount of time in seconds before the test times out (optional).
 5. **Name** your DNS test.
-6. Add `env` **Tags** as well as any other tag to your DNS test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][4].
+6. Add `env` **Tags** as well as any other tag to your DNS test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][3].
 
 {{< img src="synthetics/api_tests/dns_test_config_new.png" alt="Define DNS query" style="width:90%;" >}}
 
@@ -53,8 +53,8 @@ Assertions define what an expected test result is. After you click **Test URL**,
 | Type                | Record type                                                     | Operator                                           | Value type                 |
 |---------------------|-----------------------------------------------------------------|----------------------------------------------------|----------------------------|
 | response time       |                                                                 | `is less than`                                     | _Integer (ms)_             |
-| every available record        | of type A, of type AAAA, of type CNAME, of type MX, of type NS, of type TXT | `is`, `contains`, <br> `matches`, `does not match` | _String_ <br> _[Regex][5]_ |
-| at least one record | of type A, of type AAAA, of type CNAME, of type MX, of type NS, of type TXT | `is`, `contains`, <br> `matches`, `does not match` | _String_ <br> _[Regex][5]_ |
+| every available record        | of type A, of type AAAA, of type CNAME, of type MX, of type NS, of type TXT | `is`, `contains`, <br> `matches`, `does not match` | _String_ <br> _[Regex][4]_ |
+| at least one record | of type A, of type AAAA, of type CNAME, of type MX, of type NS, of type TXT | `is`, `contains`, <br> `matches`, `does not match` | _String_ <br> _[Regex][4]_ |
 
 You can create up to 20 assertions per API test by clicking **New Assertion** or by clicking directly on the response preview:
 
@@ -68,14 +68,16 @@ If a test contains an assertion on the response body and the timeout limit is re
 
 ### Select locations
 
-Select the **Locations** to run your DNS test from: DNS tests can run from [managed][1] and [private locations][2] depending on whether you are willing to monitor a public or a private domain.
+Select the **Locations** to run your DNS test from. DNS tests can run from both managed and [private locations][1] depending on your preference for monitoring a public or private domain.
+
+{{% managed-locations %}} 
 
 ### Specify test frequency
 
 DNS tests can run:
 
 * **On a schedule** to ensure your most important services are always accessible to your users. Select the frequency at which you want Datadog to run your DNS test.
-* [**Within your CI/CD pipelines**][3].
+* [**Within your CI/CD pipelines**][2].
 * **On-demand** to run your tests whenever makes the most sense for your team.
 
 ### Define alert conditions
@@ -99,9 +101,9 @@ Location uptime is computed on a per-evaluation basis (whether the last test res
 
 A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what to message your teams.
 
-1. [Similar to how you configure monitors][6], select **users and/or services** that should receive notifications either by adding a `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
+1. [Similar to how you configure monitors][5], select **users and/or services** that should receive notifications either by adding a `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
 
-2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][7] and supports the following [conditional variables][8]:
+2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][6] and supports the following [conditional variables][7]:
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -118,7 +120,7 @@ A notification is sent by your test based on the [alerting conditions](#define-a
 
 4. Click **Create** to save your test configuration and monitor.
 
-For more information, see [Using Synthetic Test Monitors][9].
+For more information, see [Using Synthetic Test Monitors][8].
 
 ## Variables
 
@@ -135,6 +137,9 @@ To create a local variable, click **Create a Local Variable** at the top right h
 `{{ alphanumeric(n) }}`
 : Generates an alphanumeric string with `n` characters.
 
+`{{ uuid }}`
+: Generates a version 4 universally unique identifier (UUID).
+
 `{{ date(n unit, format) }}`
 : Generates a date in one of Datadog's accepted formats with a value corresponding to the UTC date the test is initiated at + or - `n` units.
 
@@ -145,7 +150,7 @@ To obfuscate local variable values in test results, select **Hide and obfuscate 
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][10] in the URL, advanced options, and assertions of your HTTP tests.
+You can use the [global variables defined in the `Settings`][9] in the URL, advanced options, and assertions of your HTTP tests.
 
 To display your list of variables, type `{{` in your desired field:
 
@@ -174,13 +179,13 @@ These reasons include the following:
 
 ## Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][11] can create, edit, and delete Synthetic DNS tests. To get create, edit, and delete access to Synthetic DNS tests, upgrade your user to one of those two [default roles][11].
+By default, only users with the [Datadog Admin and Datadog Standard roles][10] can create, edit, and delete Synthetic DNS tests. To get create, edit, and delete access to Synthetic DNS tests, upgrade your user to one of those two [default roles][10].
 
-If you are using the [custom role feature][12], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
+If you are using the [custom role feature][11], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
 
 ### Restrict access
 
-Access restriction is available for customers using [custom roles][13] on their accounts.
+Access restriction is available for customers using [custom roles][12] on their accounts.
 
 You can restrict access to a DNS test based on the roles in your organization. When creating a DNS test, choose which roles (in addition to your user) can read and write your test. 
 
@@ -190,16 +195,15 @@ You can restrict access to a DNS test based on the roles in your organization. W
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /api/v1/synthetics/#get-all-locations-public-and-private
-[2]: /synthetics/private_locations
-[3]: /synthetics/cicd_integrations
-[4]: /synthetics/search/#search
-[5]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[6]: /monitors/notify/#notify-your-team
-[7]: https://www.markdownguide.org/basic-syntax/
-[8]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
-[9]: /synthetics/guide/synthetic-test-monitors
-[10]: /synthetics/settings/#global-variables
-[11]: /account_management/rbac/
-[12]: /account_management/rbac#custom-roles
-[13]: /account_management/rbac/#create-a-custom-role
+[1]: /synthetics/private_locations
+[2]: /synthetics/cicd_integrations
+[3]: /synthetics/search/#search
+[4]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[5]: /monitors/notify/#notify-your-team
+[6]: https://www.markdownguide.org/basic-syntax/
+[7]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
+[8]: /synthetics/guide/synthetic-test-monitors
+[9]: /synthetics/settings/#global-variables
+[10]: /account_management/rbac/
+[11]: /account_management/rbac#custom-roles
+[12]: /account_management/rbac/#create-a-custom-role
