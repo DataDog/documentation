@@ -7,7 +7,7 @@ further_reading:
   - link: "https://app.datadoghq.com/release-notes?category=Security%20%26%20Compliance"
     tag: "Release Notes"
     text: "See What's New in Datadog Security Compliance"
-  - link: "/security/cspm/getting_started"
+  - link: "/security/cspm/setup"
     tag: "Documentation"
     text: "Start tracking misconfigurations with Cloud Security Posture Management"
   - link: "/security/cloud_workload_security/setup"

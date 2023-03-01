@@ -4,7 +4,7 @@ kind: documentation
 aliases:
   - /security_platform/cspm/frameworks_and_benchmarks
 further_reading:
-- link: "security/cspm/getting_started"
+- link: "security/cspm/setup"
   tag: "Documentation"
   text: "Getting started with CSPM"
 - link: "security/default_rules"

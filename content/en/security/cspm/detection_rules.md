@@ -5,7 +5,7 @@ aliases:
   - /security_platform/cspm/configuration_rules
   - /security/cspm/configuration_rules
 further_reading:
-  - link: "/security/cspm/getting_started"
+  - link: "/security/cspm/setup"
     tag: "Documentation"
     text: Getting Started with CSPM
   - link: "/security/cspm/custom_rules/"

@@ -2629,10 +2629,10 @@ main:
     parent: csm
     identifier: cspm
     weight: 1
-  - name: Getting Started
-    url: security/cspm/getting_started
+  - name: Setup
+    url: security/cspm/setup
     parent: cspm
-    identifier: cspm_getting_started
+    identifier: cspm_setup
     weight: 101
   - name: Detection Rules
     url: security/cspm/detection_rules

@@ -263,7 +263,7 @@ If you encounter any issues, be sure to check out the [Troubleshooting][57] sect
 [51]: /security/default_rules/#cat-log-detection
 [52]: /security/explorer/
 [53]: /security/notifications/rules/
-[54]: /security/cspm/getting_started/
+[54]: /security/cspm/setup/
 [55]: /security/default_rules/#cat-posture-management-cloud
 [56]: /security/default_rules/#cat-posture-management-infra
 [57]: /integrations/amazon_web_services/?tab=roledelegation#troubleshooting

@@ -12,7 +12,7 @@ further_reading:
   - link: "/getting_started/cloud_siem"
     tag: "Documentation"
     text: "Begin detecting threats with Cloud SIEM"
-  - link: "/security/cspm/getting_started"
+  - link: "/security/cspm/setup"
     tag: "Documentation"
     text: "Start tracking misconfigurations with Cloud Security Posture Management"
   - link: "/security/cloud_workload_security/setup"
