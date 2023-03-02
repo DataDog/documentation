@@ -93,6 +93,8 @@ The available library versions are listed in each container registry.
 
 **Note**: If you already have an application instrumented using version X of the library, and then use library injection to instrument using version Y of the same tracer library, the tracer does not break. Rather, the library version loaded first is used. Because library injection happens at the admission controller level prior to runtime, it takes precedent over manually configured libraries.
 
+INSERT LINK TO VARIOUS REPOS FOR TRACING CLIENT
+
 <div class="alert alert-warning"><strong>Note</strong>: Using the <code>latest</code> tag is supported, but use it with caution because major library releases can introduce breaking changes.</div>
 
 For example:
@@ -109,7 +111,7 @@ template:
     labels:
         admission.datadoghq.com/enabled: "true" # Enable Admission Controller to mutate new pods in this deployment
     annotations:
-        admission.datadoghq.com/java-lib.version: "v0.114.0" # Enable Java instrumentation (version 0.114.0) injection
+        admission.datadoghq.com/java-lib.version: "v1.10.0" # Enable Java instrumentation (version 1.10.0) injection
   containers:
   -  ...
 ```
@@ -150,7 +152,7 @@ template:
         tags.datadoghq.com/version: "1.1" # Unified service tag - Pod Version tag
         admission.datadoghq.com/enabled: "true" # Enable Admission Controller to mutate new pods part of this deployment
     annotations:
-        admission.datadoghq.com/java-lib.version: "v0.114.0" # Enable Java instrumentation (version 0.114.0) injection
+        admission.datadoghq.com/java-lib.version: "v1.10.0" # Enable Java instrumentation (version 1.10.0) injection
   containers:
   -  ...
 ```
