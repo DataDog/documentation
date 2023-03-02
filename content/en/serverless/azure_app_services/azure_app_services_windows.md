@@ -89,7 +89,8 @@ For example:
     - Set `DD_ENV` to group your traces and custom statistics.
     - Set `DD_SERVICE` to specify a service name (defaults to your app name).
     - Set `DD_LOGS_INJECTION:true` for correlation with application logs from your app.
-    - See a full list of [optional configuration variables][5].
+    - Set `DD_PROFILING_ENABLED:true` to enable .NET [Continuous Profiler][5].
+    - See a full list of [optional configuration variables][6].
 6. Click **Save** (this restarts your application).
 7. <div class="alert alert-warning">[REQUIRED] Stop your application by clicking <u>Stop</u>.</div>
 8. Go to the Azure extensions page and select the Datadog APM extension.
@@ -101,8 +102,8 @@ For example:
 ### Application logging
 
 You can send logs from your application in Azure App Service to Datadog in one of the following ways:
-1. [Agentless logging with automatic instrumentation][6]
-2. [Agentless logging with the Serilog sink][7]
+1. [Agentless logging with automatic instrumentation][7]
+2. [Agentless logging with the Serilog sink][8]
 
 Both methods allow trace ID injection, making it possible to connect logs and traces in Datadog. To enable trace ID injection with the extension, add the application setting `DD_LOGS_INJECTION:true`.
 
@@ -114,12 +115,12 @@ The Azure App Service extension includes an instance of [DogStatsD][8] (Datadog'
 
 Writing custom metrics and checks in Azure App Service is similar to the process for doing so with an application on a host running the Datadog Agent. To submit custom metrics to Datadog from Azure App Service using the extension:
 
-1. Add the [DogStatsD NuGet package][9] to your Visual Studio project.
+1. Add the [DogStatsD NuGet package][10] to your Visual Studio project.
 2. Initialize DogStatsD and write custom metrics in your application.
 3. Deploy your code to Azure App Service.
 4. Install the Datadog App Service extension.
 
-**Note**: Unlike the [standard DogStatsD config process][10], there is no need to set ports or a server name when initializing the DogStatsD configuration. There are ambient environment variables in Azure App Service that determine how the metrics are sent (requires v6.0.0+ of the DogStatsD client).
+**Note**: Unlike the [standard DogStatsD config process][11], there is no need to set ports or a server name when initializing the DogStatsD configuration. There are ambient environment variables in Azure App Service that determine how the metrics are sent (requires v6.0.0+ of the DogStatsD client).
 
 To send metrics use this code:
 
@@ -141,22 +142,23 @@ DogStatsd.Increment("sample.startup");
 **Note**: To send only custom metrics (while disabling tracing) set the following variables in your application's config:
   - Set `DD_TRACE_ENABLED` to `false`.
   - Set `DD_AAS_ENABLE_CUSTOM_METRICS` to `true`.
-Learn more about [custom metrics][11].
+Learn more about [custom metrics][12].
 
 
 [1]: /integrations/azure
 [2]: /tracing/setup/dotnet/
 [3]: https://portal.azure.com/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
-[5]: /tracing/trace_collection/library_config/dotnet-framework/#additional-optional-configuration
-[6]: /logs/log_collection/csharp/#agentless-logging-with-apm
-[7]: /logs/log_collection/csharp/#agentless-logging-with-serilog-sink
-[8]: /developers/dogstatsd
-[9]: https://www.nuget.org/packages/DogStatsD-CSharp-Client
-[10]: /developers/dogstatsd/?tab=net#code
-[11]: /metrics/
-[12]: /integrations/guide/azure-portal/#app-service-extension
-[13]: /integrations/guide/azure-portal/
+[5]: /profiler/
+[6]: /tracing/trace_collection/library_config/dotnet-framework/#additional-optional-configuration
+[7]: /logs/log_collection/csharp/#agentless-logging-with-apm
+[8]: /logs/log_collection/csharp/#agentless-logging-with-serilog-sink
+[9]: /developers/dogstatsd
+[10]: https://www.nuget.org/packages/DogStatsD-CSharp-Client
+[11]: /developers/dogstatsd/?tab=net#code
+[12]: /metrics/
+[13]: /integrations/guide/azure-portal/#app-service-extension
+[14]: /integrations/guide/azure-portal/
 {{% /tab %}}
 {{% tab "Java" %}}
 ### Requirements

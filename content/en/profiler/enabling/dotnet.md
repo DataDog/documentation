@@ -123,6 +123,18 @@ To install the .NET Profiler per-application:
 [1]: https://www.nuget.org/packages/Datadog.Trace.Bundle
 {{% /tab %}}
 
+{{% tab "Azure App Service" %}}
+
+<div class="alert alert-warning">
+  <strong>Note:</strong> Only webapps are supported. Functions are not supported.
+</div>
+
+To install the .NET Profiler per-webapp:
+1. Install the Azure App Service [Datadog APM Extension][1] to your webapp.
+
+[1]: /serverless/azure_app_services/?tab=net#installation
+{{% /tab %}}
+
 {{< /tabs >}}
 
 <br>
@@ -341,6 +353,13 @@ To install the .NET Profiler per-application:
 4. For standalone applications, manually restart the application.
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/NugetDeployment
+{{% /tab %}}
+
+{{% tab "Azure App Service" %}}
+
+2. Follow these [installation guidelines][1] to set `DD_PROFILING_ENABLED:true` to enable the profiler
+
+[1]: /serverless/azure_app_services/?tab=net#installation
 {{% /tab %}}
 
 {{< /tabs >}}
