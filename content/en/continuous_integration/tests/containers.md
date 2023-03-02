@@ -206,6 +206,7 @@ Additionally, you need to pass in the environment variables required to configur
 - `GIT_COMMIT`
 - `GIT_BRANCH`
 - `DD_CUSTOM_TRACE_ID` (custom variable set by the [Jenkins Datadog Plugin][2])
+- `DD_CUSTOM_PARENT_ID` (idem)
 
 [Full list of build environment variables provided by Jenkins][1]
 
