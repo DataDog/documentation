@@ -1,28 +1,46 @@
 ---
-title: APM トラブルシューティング
-kind: documentation
+aliases:
+- /ja/tracing/faq/my-trace-agent-log-renders-empty-service-error/
 further_reading:
-  - link: /tracing/troubleshooting/tracer_startup_logs/
-    tag: Documentation
-    text: Datadog トレーサー起動ログ
-  - link: /tracing/troubleshooting/tracer_debug_logs/
-    tag: Documentation
-    text: Datadog トレーサーデバッグログ
-  - link: /tracing/troubleshooting/agent_apm_metrics/
-    tag: Documentation
-    text: Datadog Agent によって送信された APM メトリクス
+- link: /tracing/troubleshooting/connection_errors
+  tag: Documentation
+  text: 接続エラー
+- link: /tracing/troubleshooting/tracer_startup_logs/
+  tag: Documentation
+  text: Datadog トレーサー起動ログ
+- link: /tracing/troubleshooting/tracer_debug_logs/
+  tag: Documentation
+  text: Datadog トレーサーデバッグログ
+- link: /tracing/troubleshooting/agent_apm_metrics/
+  tag: ドキュメント
+  text: Datadog Agent によって送信された APM メトリクス
+kind: documentation
+title: APM トラブルシューティング
 ---
+
 Datadog APM で予期しない動作が発生した場合に、ご自分で確認できるよくある問題を本ガイドでいくつかご紹介します。問題が解決しない場合は、[Datadog サポート][1] にお問い合わせください。また、各リリースには改善と修正が含まれているため、使用する Datadog トレースライブラリの最新バージョンに定期的に更新することをお勧めします。
+
+## トラブルシューティングパイプライン
+
+APM データを Datadog に送信する際には、以下のコンポーネントが関与します。
+
+{{< img src="tracing/troubleshooting/troubleshooting_pipeline_info_1.png" alt="APM トラブルシューティングパイプライン">}}
+
+トレース (JSON データタイプ) と [Tracing Application Metrics][2] はアプリケーションから生成され、バックエンドに移動する前に Datadog Agent に送信されます。パイプラインの各セクションで、異なるトラブルシューティング情報を収集することができます。重要なのは、Tracer のデバッグログは、アプリケーションのログに書き込まれますが、これは Datadog Agent のフレアとは別のコンポーネントであることです。これらの項目についての詳細は、以下の [Datadog サポートから要求されたデータのトラブルシューティング](#troubleshooting-data-requested-by-datadog-support)で確認することができます。
 
 ## APM のセットアップと APM ステータスの確認
 
-起動時、Datadog トレースライブラリは、JSON オブジェクトに適用された設定を反映するログおよび発生したエラーを出力します。それには、対応する言語で Agent に到達できるかも含まれます。一部の言語では、この起動ログが環境変数 `DD_TRACE_STARTUP_LOGS=true` で有効化されている必要があります。起動ログについて、詳しくはトラブルシューティング[関連ページ][2]を参照してください。
+起動時、Datadog トレースライブラリは、JSON オブジェクトに適用された設定を反映するログおよび発生したエラーを出力します。それには、対応する言語で Agent に到達できるかも含まれます。一部の言語では、この起動ログが環境変数 `DD_TRACE_STARTUP_LOGS=true` で有効化されている必要があります。起動ログについて、詳しくはトラブルシューティング[関連ページ][3]を参照してください。
+
+## 接続エラー
+
+トラブルの一般的な原因は、インスツルメントされたアプリケーションが Datadog Agent と通信できないことです。こうした問題を見つけて修正する方法については、[接続エラー][4]を参照してください。
 
 ## トレーサーのデバッグログ
 
 Datadog トレーサーの詳細をすべて取得するには、`DD_TRACE_DEBUG` 環境変数を使いトレーサーのデバッグモードを有効にします。独自の調査のために有効にしたり、Datadog サポートもトリアージ目的で推奨していることを理由に、有効にしたりできます。ただし、ログのオーバーヘッドが発生するため、デバッグモードを有効のままにはしないでください。
 
-これらのログは、インスツルメンテーションエラーやインテグレーション固有のエラーを明らかにすることができます。デバッグログの有効化と取得に関する詳細は、[デバッグモードのトラブルシューティングページ][3]を参照してください。
+これらのログは、インスツルメンテーションエラーやインテグレーション固有のエラーを明らかにすることができます。デバッグログの有効化と取得に関する詳細は、[デバッグモードのトラブルシューティングページ][5]を参照してください。
 
 ## データボリュームガイドライン
 
@@ -32,16 +50,16 @@ Datadog では、以下の文字列が指定された文字数を超えた場合
 
 | 名前         | 文字 |
 |--------------|------------|
-| [サービス][4]    |  100       |
+| [サービス][6]    |  100       |
 | オペレーション    |  100       |
 | type         |  100       |
-| [リソース][5]   |  5000      |
-| [タグキー][6]    |  200       |
-| [タグの値][6]  |  5000      |
+| [リソース][7]   |  5000      |
+| [タグキー][8]    |  200       |
+| [タグの値][8]  |  5000      |
 
-また、スパンに存在する[スパンタグ][6]の数が、250 以上にならないようにしてください。
+また、スパンに存在する[スパンタグ][8]の数が、250 以上にならないようにしてください。
 
-指定された 10 分間に、Datadog では以下の組み合わせが許容されます。より大きなボリュームに対応するには、特定のユースケースについて[サポート][1]までお問い合わせください。
+指定された 40 分間に、Datadog では以下の組み合わせが許容されます。より大きなボリュームに対応するには、特定のユースケースについて[サポート][1]までお問い合わせください。
 
 - 環境とサービスの一意な組み合わせ1000件
 - 環境当たり30件の一意のホストグループ
@@ -51,35 +69,35 @@ Datadog では、以下の文字列が指定された文字数を超えた場合
 
 ## APM レート制限
 
-Datadog Agent ログで、レート制限や 1 秒あたりの最大イベント数に関するエラーメッセージが表示される場合、[以下の手順][7]に従い制限を変更します。ご不明な点は、[サポートチーム][1]までお問い合わせください。
+Datadog Agent ログで、レート制限や 1 秒あたりの最大イベント数に関するエラーメッセージが表示される場合、[以下の手順][9]に従い制限を変更します。ご不明な点は、Datadog [サポートチーム][1]までお問い合わせください。
 
 ## スパンの修正、破棄、難読化
 
-Datadog Agent またはトレースクライアント (一部の言語のみ) 内で構成可能なヘルスチェック、またその他不要なトラフィックに関連する機密データのスクラブやトレースの破棄に関しては数々のコンフィギュレーションオプションが用意されています。利用可能なオプションについては、ドキュメントの[セキュリティと Agent のカスタマイズ][8]ページを参照してください。本文では代表的な例をご紹介していますが、これらのオプションをお使いの環境に適用する際にサポートが必要な場合は、希望される結果の詳細を添えて [Datadog サポート][1]までお問い合わせください。
+Datadog Agent またはトレースクライアント (一部の言語のみ) 内で構成可能なヘルスチェック、またその他不要なトラフィックに関連する機密データのスクラブやトレースの破棄に関しては数々のコンフィギュレーションオプションが用意されています。利用可能なオプションについては、[セキュリティと Agent のカスタマイズ][10]を参照してください。本文では代表的な例をご紹介していますが、これらのオプションをお使いの環境に適用する際にサポートが必要な場合は、[Datadog サポート][1]までお問い合わせください。
 
 ## Datadog サポートが収集するトラブルシューティングのデータ
 
 [サポートチケット][1]を作成する際、下記のような情報が必要となる場合がございます。
 
-1. **問題を確認することはできますか？たとえば、トレース (推奨) やスクリーンショットへのリンクを提供し、何が起こるかをお聞かせください。**
+1. **問題を確認することはできますか？たとえば、トレース (推奨) やスクリーンショットへのリンクを提供し、何が起こるかサポートまでお聞かせください。**
 
-   これにより、サポートチームはエラーを確認し、そのテスト環境で問題の再現を試みることができます。
+   これにより、サポートチームはエラーを確認し、Datadog のテスト環境で問題の再現を試みることができます。
 
 2. **[トレーサー起動ログ](#confirm-apm-setup-and-agent-status)**
 
-    起動ログにより、トレーサーの設定ミスやトレーサーがDatadog Agent と通信できていないことが分かります。トレーサーが参照するコンフィギュレーションとアプリケーションやコンテナ内の設定を比べることで、設定が正しく適用されていない箇所を特定できます。
+    起動ログにより、トレーサーの設定ミスやトレーサーがDatadog Agent と通信できていないことが分かります。トレーサーが参照するコンフィギュレーションとアプリケーションやコンテナ内の設定を比べることで、サポートは設定が正しく適用されていない箇所を特定できます。
 
 3. **[トレーサーデバッグログ](#tracer-debug-logs)**
 
     トレーサーのデバッグログは起動ログよりさらに深く掘り下げ、トラフィックがアプリケーションを通過するまでチェックしがたい方法でインテグレーションが正しくインスツルメントされているか判断するのに役立ちます。デバッグログはトレーサーが作成するスパンの内容を確認したり、スパンを Agent に送信する際に接続に問題がある場合エラーを表面化させることもできます。トレーサーのデバッグログは、トレーサーの微妙な動作を確認するのに最も有益で信頼性の高いツールです。
 
-4. **これらのログで探している情報に応じて、[デバッグまたはトレースモード][10]中にトレースが Agent に送信された期間の代表的なログサンプルをキャプチャする [Agent フレア][9] (ログおよび構成のスナップショット)**
+4. **これらのログで探している情報に応じて、[デバッグまたはトレースモード][12]中にトレースが Datadog Agent に送信された期間の代表的なログサンプルをキャプチャする [Datadog Agent フレア][11] (ログおよび構成のスナップショット)**
 
-    Agent フレアにより Datadog Agent 内で起きていることや、トレースが Agent 内で拒否または不正な形式にされているかを確認できます。これはトレースが Agent に到達していない場合は役に立ちませんが、問題の原因やメトリクスの不一致を特定することはできます。
+   Datadog Agent フレアにより Datadog Agent 内で起きていること (例えば、トレースが拒否または不正な形式にされているか) を確認できます。これはトレースが Datadog Agent に到達していない場合は役に立ちませんが、問題の原因やメトリクスの不一致を特定することはできます。
 
-    ログのレベルを `debug` または `trace` モードに調節する場合は、この操作によりログの量が劇的に増加し、システムリソースの消費量 (主に長期的なストレージスペースの増加) が見込まれることを考慮してください。この操作は一時的なトラブルシューティング目的のみで行い、完了後はレベルを `info` に戻すことを推奨します。 
+    ログのレベルを `debug` または `trace` モードに調節する場合は、この操作によりログの量が劇的に増加し、システムリソースの消費量 (主に長期的なストレージスペースの増加) が見込まれることを考慮してください。Datadog は、この操作は一時的なトラブルシューティング目的のみで行い、完了後はレベルを `info` に戻すことを推奨します。 
 
-    **注**: Agent v7.19+ および Datadog Helm チャートの[最新版][7]、または Datadog Agent とトレース Agent が別コンテナにある状況で DaemonSet をご利用の場合は、トレース Agent からフレアを取得するために `datadog.yaml` に `log_level: DEBUG` または `log_level: TRACE` を設定した状態で以下のコマンドを実行する必要があります。
+    **注**: Datadog Agent v7.19+ および Datadog Helm チャートの[最新版][9]、または Datadog Agent とトレース Agent が別コンテナにある状況で DaemonSet をご利用の場合は、トレース Agent からフレアを取得するために `datadog.yaml` に `log_level: DEBUG` または `log_level: TRACE` を設定した状態で以下のコマンドを実行する必要があります。
 
     {{< code-block lang="bash" filename="trace-agent.sh" >}}
 kubectl exec -it <agent-pod-name> -c trace-agent -- agent flare <case-id> --local
@@ -87,32 +105,36 @@ kubectl exec -it <agent-pod-name> -c trace-agent -- agent flare <case-id> --loca
 
 5. **環境の詳細**
 
-    アプリケーションのデプロイ方法を知ることで、トレーサーと Agent 間の通信の問題や設定ミスにおけるありがちな問題を特定することができます。問題が複雑な場合は、Kubernetes マニフェストや ECS タスク定義などを参照していただく場合もあります。
+    アプリケーションのデプロイ方法を知ることで、サポートチームはトレーサーと Agent 間の通信の問題や設定ミスにおけるありがちな問題を特定することができます。問題が複雑な場合は、Kubernetes マニフェストや ECS タスク定義などを参照していただく場合もあります。
 
-6. **トレーサーコンフィギュレーション、[カスタムインスツルメンテーション][11]、スパンタグの追加など、トレーシングライブラリを使用して書かれたカスタムコード**
+6. **トレーサーコンフィギュレーション、[カスタムインスツルメンテーション][13]、スパンタグの追加など、トレーシングライブラリを使用して書かれたカスタムコード**
 
-    カスタムインスツルメンテーションは、とても強力なツールになりますが、Datadog でトレースを視覚化する際に意図しない副作用を生み出す可能性もあるため、質問することで疑問を取り除きます。また、自動インスツルメンテーションおよびコンフィギュレーションをお願いすることで、トレーサーの起動ログとデバッグログで表示されるものと一致するかも確認できます。
+   カスタムインスツルメンテーションは強力なツールですが、Datadog 内のトレース可視化に意図しない副作用を与える可能性があります。 
+
+   さらに、自動インスツルメンテーションとコンフィギュレーションを尋ねることで、Datadog はトレーサのスタートアップとデバッグログの両方に表示されているものと一致するかどうかを確認することができます。
 
 7. **次のバージョン:**
    * **インスツルメントされたアプリケーションの構築に使用されるプログラミング言語、フレームワーク、依存関係**
    * **Datadog トレーサー**
    * **Datadog Agent**
 
-    使用するバージョンを知ることで、インテグレーションが [互換性要件][12]でサポートされていることを確認したり、既知の問題をチェックしたり、トレーサーや言語のバージョンに問題がある場合はその更新をお勧めすることができます。
+    使用するバージョンを知ることで、インテグレーションが [互換性要件][14]でサポートされていることを確認したり、既知の問題をチェックしたり、トレーサーや言語のバージョンに問題がある場合はその更新をお勧めすることができます。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/help/
-[2]: /ja/tracing/troubleshooting/tracer_startup_logs/
-[3]: /ja/tracing/troubleshooting/tracer_debug_logs/
-[4]: /ja/tracing/visualization/#services
-[5]: /ja/tracing/visualization/#resources
-[6]: /ja/tracing/visualization/#span-tags
-[7]: /ja/tracing/troubleshooting/agent_rate_limits
-[8]: /ja/tracing/custom_instrumentation/agent_customization
-[9]: /ja/agent/troubleshooting/send_a_flare/?tab=agentv6v7
-[10]: /ja/agent/troubleshooting/debug_mode/?tab=agentv6v7
-[11]: /ja/tracing/custom_instrumentation/
-[12]: /ja/tracing/compatibility_requirements/
+[2]: /ja/tracing/guide/metrics_namespace/
+[3]: /ja/tracing/troubleshooting/tracer_startup_logs/
+[4]: /ja/tracing/troubleshooting/connection_errors/
+[5]: /ja/tracing/troubleshooting/tracer_debug_logs/
+[6]: /ja/tracing/visualization/#services
+[7]: /ja/tracing/visualization/#resources
+[8]: /ja/tracing/visualization/#span-tags
+[9]: /ja/tracing/troubleshooting/agent_rate_limits
+[10]: /ja/tracing/custom_instrumentation/agent_customization
+[11]: /ja/agent/troubleshooting/send_a_flare/?tab=agentv6v7
+[12]: /ja/agent/troubleshooting/debug_mode/?tab=agentv6v7
+[13]: /ja/tracing/custom_instrumentation/
+[14]: /ja/tracing/compatibility_requirements/

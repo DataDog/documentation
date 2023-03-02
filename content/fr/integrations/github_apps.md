@@ -1,28 +1,29 @@
 ---
 categories:
-  - source control
+- source control
 dependencies: []
 description: Associez GitHub à Datadog pour enrichir vos problèmes et pull requests.
 doc_link: https://docs.datadoghq.com/integrations/github_apps/
 draft: false
 further_reading:
-  - link: https://docs.datadoghq.com/integrations/guide/source-code-integration/
-    tag: Guide
-    text: Intégration du code source de Datadog
+- link: https://docs.datadoghq.com/integrations/guide/source-code-integration/
+  tag: Guide
+  text: Intégration du code source de Datadog
 git_integration_title: github_apps
 has_logo: true
 integration_id: ''
-integration_title: "GitHub\_Apps"
+integration_title: GitHub Apps
 integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: github_apps
-public_title: "Intégration Datadog/GitHub\_Apps"
+public_title: Intégration Datadog/GitHub Apps
 short_description: Associer GitHub à Datadog
 type: ''
 version: '1.0'
 ---
+
 ## Présentation
 
 Associez Datadog à GitHub Apps pour activer les autorisations pour vos référentiels et consulter des extraits de code dans vos erreurs. Vous pouvez également afficher des liens vers les pull requests et problèmes GitHub dans des notebooks et chronologies d'incident de Datadog. 
@@ -40,6 +41,7 @@ Si vous êtes administrateur de votre organisation GitHub, vous pouvez configure
 1. Dans le carré d'intégration GitHub Apps, accédez à l'onglet **Configuration**.
 2. Cliquez sur **Link GitHub Account** pour créer une application GitHub.
 3. Dans **Configure**, sélectionnez **Organization** et puis saisissez un nom pour votre organisation, ou sélectionnez **Personal Account**.
+Vous avez la possibilité de spécifier l'URL de l'instance de votre serveur GitHub Enterprise (version 2.22 ou supérieur).
 4. Dans **Edit Permissions**, activez les autorisations de lecture Datadog pour les problèmes, pull requests et contenus. Vous devez sélectionner au moins une autorisation.
 5. Cliquez sur **Create App in GitHub**. Vous êtes alors invité à saisir un nom d'application GitHub dans GitHub.
 6. Saisissez un nom d'application GitHub dans le champ correspondant, puis cliquez sur **Create GitHub App**.

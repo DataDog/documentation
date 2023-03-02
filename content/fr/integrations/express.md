@@ -1,28 +1,34 @@
 ---
 aliases:
-  - /fr/integrations/expressjs/
+- /fr/integrations/expressjs/
 categories:
-  - web
+- web
 ddtype: library
 dependencies: []
-description: Surveillez les délais de réponse globaux et les taux de requête par code de réponse.
-doc_link: 'https://docs.datadoghq.com/integrations/express/'
+description: Surveillez les délais de réponse globaux et les taux de requête par code
+  de réponse.
+doc_link: https://docs.datadoghq.com/integrations/express/
 draft: false
 git_integration_title: express
 has_logo: true
 integration_id: express
 integration_title: ExpressJS
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: express
 public_title: Intégration Datadog/ExpressJS
-short_description: Surveillez les délais de réponse globaux et les taux de requête par code de réponse.
+short_description: Surveillez les délais de réponse globaux et les taux de requête
+  par code de réponse.
 version: '1.0'
 ---
+
 {{< img src="integrations/expressjs/expressjs_graph.png" alt="graphique ExpressJS" popup="true">}}
 
 ## Présentation
+
+<div class="alert alert-danger">L'intégration Express est obsolète et est remplacée par l'APM Datadog. L'APM Datadog génère les mêmes <a href="https://docs.datadoghq.com/tracing/runtime_metrics/nodejs/">métriques</a> que l'intégration Express et offre de nombreuses autres fonctionnalités et intégrations. Datadog vous conseille vivement de passer à l'<a href="https://docs.datadoghq.com/tracing/connect_logs_and_traces/nodejs/">APM</a>, étant donné que l'intégration Express ne recevra plus aucune mise à jour.</div>
 
 Ajoutez le [middleware connect-datadog][1] de Datadog à votre application pour :
 
@@ -33,9 +39,9 @@ Ajoutez le [middleware connect-datadog][1] de Datadog à votre application pour�
 
 L'intégration Express doit accéder au serveur DogStatsD de l'Agent Datadog pour transmettre les métriques recueillies à Datadog.
 
-[Après avoir installé l'Agent sur votre host][2], consultez la [documentation sur la configuration de DogStatsD][3] pour l'activer.
+Après avoir [installé l'Agent][2] sur votre host, consultez la [documentation sur la configuration de DogStatsD][3] pour l'activer.
 
-### Configuration
+### Procédure à suivre
 
 1. Installez le middleware :
 
@@ -53,7 +59,7 @@ L'intégration Express doit accéder au serveur DogStatsD de l'Agent Datadog pou
 
     var connect_datadog = require('connect-datadog')(dd_options);
 
-    // Add your other middlewares
+    // Add your other middleware
     app.use(...);
 
     // Add the datadog-middleware before your router

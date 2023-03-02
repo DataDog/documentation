@@ -1,39 +1,62 @@
 ---
+app_id: cacti
+app_uuid: b18f92f2-2aa5-435e-b04e-84ce3538fa2d
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: cacti.rrd.count
+      metadata_path: metadata.csv
+      prefix: cacti.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Cacti
   logs:
     source: cacti
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-  - monitoring
-  - log collection
-creates_events: false
-ddtype: check
+- monitoring
+- log collection
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/cacti/README.md'
-display_name: Cacti
+- https://github.com/DataDog/integrations-core/blob/master/cacti/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: cacti
-guid: 566466b0-1422-44ef-b14f-493a64e7b58a
 integration_id: cacti
 integration_title: Cacti
+integration_version: 1.11.1
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: cacti.
-metric_to_check: cacti.rrd.count
+manifest_version: 2.0.0
 name: cacti
-public_title: Datadog-Cacti インテグレーション
+oauth: {}
+public_title: Cacti
 short_description: Cacti RRD を Datadog に転送して豊富なアラート機能や美しいグラフを活用。
-support: コア
 supported_os:
-  - linux
+- linux
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Category::Monitoring
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: Cacti RRD を Datadog に転送して豊富なアラート機能や美しいグラフを活用。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Cacti
 ---
+
+
+
 ## 概要
 
 Cacti からメトリクスをリアルタイムに取得すると、以下のことができます。
@@ -66,7 +89,7 @@ sudo yum install rrdtool-devel
 
 #### Python バインディング
 
-次に、以下のコマンドを使用して、`rrdtool` Python パッケージを Agent に追加します。
+以下のコマンドを使用して、`rrdtool` Python パッケージを Agent に追加します。
 
 ```shell
 sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install rrdtool
@@ -192,7 +215,7 @@ Cacti チェックには、サービスのチェック機能は含まれませ�
 
 このインテグレーションが使用する Python ライブラリは、状況によってはメモリリークが発生することがあります。これが発生する場合は、1 つの回避策として、rrdtool の代わりに [python-rrdtool][6] パッケージをインストールしてください。この古いパッケージはメンテナンスされておらず、このインテグレーションでは公式にサポートされていませんが、メモリに関する問題の解決に利用できます。
 
-このメモリリークの問題を追跡する [GitHub イシュー][7]がオープンされています。
+このメモリリークの問題を追跡する [Github イシュー][7]がオープンされています。
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

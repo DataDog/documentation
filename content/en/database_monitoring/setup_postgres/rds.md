@@ -8,7 +8,7 @@ further_reading:
   text: "Basic Postgres Integration"
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
@@ -24,10 +24,10 @@ The Agent collects telemetry directly from the database by logging in as a read-
 ## Before you begin
 
 Supported PostgreSQL versions
-: 9.6, 10, 11, 12, 13
+: 9.6, 10, 11, 12, 13, 14
 
 Supported Agent versions
-: 7.33.0+
+: 7.36.1+
 
 Performance impact
 : The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. <br/><br/>
@@ -45,10 +45,11 @@ Configure the following [parameters][3] in the [DB parameter group][4] and then 
 
 | Parameter | Value | Description |
 | --- | --- | --- |
-| `shared_preload_libraries` | `pg_stat_statements` | Required for `postgresql.queries.*` metrics. Enables collection of query metrics via the the [pg_stat_statements][5] extension. |
+| `shared_preload_libraries` | `pg_stat_statements` | Required for `postgresql.queries.*` metrics. Enables collection of query metrics using the [pg_stat_statements][5] extension. |
 | `track_activity_query_size` | `4096` | Required for collection of larger queries. Increases the size of SQL text in `pg_stat_activity` and `pg_stat_statements`. If left at the default value then queries longer than `1024` characters will not be collected. |
 | `pg_stat_statements.track` | `ALL` | Optional. Enables tracking of statements within stored procedures and functions. |
 | `pg_stat_statements.max` | `10000` | Optional. Increases the number of normalized queries tracked in `pg_stat_statements`. This setting is recommended for high-volume databases that see many different types of queries from many different clients. |
+| `track_io_timing` | `1` | Optional. Enables collection of block read and write times for queries. |
 
 
 ## Grant the Agent access
@@ -79,7 +80,7 @@ CREATE SCHEMA datadog;
 GRANT USAGE ON SCHEMA datadog TO datadog;
 GRANT USAGE ON SCHEMA public TO datadog;
 GRANT pg_monitor TO datadog;
-CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
+CREATE EXTENSION IF NOT EXISTS pg_stat_statements schema public;
 ```
 
 {{% /tab %}}
@@ -116,14 +117,21 @@ SECURITY DEFINER;
 Create the function **in every database** to enable the Agent to collect explain plans.
 
 ```SQL
-CREATE OR REPLACE FUNCTION datadog.explain_statement (
-   l_query text,
-   out explain JSON
+CREATE OR REPLACE FUNCTION datadog.explain_statement(
+   l_query TEXT,
+   OUT explain JSON
 )
 RETURNS SETOF JSON AS
 $$
+DECLARE
+curs REFCURSOR;
+plan JSON;
+
 BEGIN
-   RETURN QUERY EXECUTE 'EXPLAIN (FORMAT JSON) ' || l_query;
+   OPEN curs FOR EXECUTE pg_catalog.concat('EXPLAIN (FORMAT JSON) ', l_query);
+   FETCH curs INTO plan;
+   CLOSE curs;
+   RETURN QUERY SELECT plan;
 END;
 $$
 LANGUAGE 'plpgsql'
@@ -192,6 +200,8 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
        port: 5432
        username: datadog
        password: '<PASSWORD>'
+       tags:
+         - "dbinstanceidentifier:<DB_INSTANCE_NAME>"
        ## Required for Postgres 9.6: Uncomment these lines to use the functions created in the setup
        # pg_stat_statements_view: datadog.pg_stat_statements()
        # pg_stat_activity_view: datadog.pg_stat_activity()
@@ -216,7 +226,7 @@ Get up and running quickly by executing the following command to run the agent f
 
 ```bash
 export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-export DD_AGENT_VERSION=7.32.0
+export DD_AGENT_VERSION=7.36.1
 
 docker run -e "DD_API_KEY=${DD_API_KEY}" \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -227,7 +237,8 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
     "host": "<AWS_INSTANCE_ENDPOINT>",
     "port": 5432,
     "username": "datadog",
-    "password": "<UNIQUEPASSWORD>"
+    "password": "<UNIQUEPASSWORD>",
+    "tags": "dbinstanceidentifier:<DB_INSTANCE_NAME>"
   }]' \
   gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
 ```
@@ -244,11 +255,11 @@ pg_stat_activity_view: datadog.pg_stat_activity()
 Labels can also be specified in a `Dockerfile`, so you can build and deploy a custom agent without changing any infrastructure configuration:
 
 ```Dockerfile
-FROM gcr.io/datadoghq/agent:7.32.0
+FROM gcr.io/datadoghq/agent:7.36.1
 
 LABEL "com.datadoghq.ad.check_names"='["postgres"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "port": 5432,"username": "datadog","password": "<UNIQUEPASSWORD>"}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "port": 5432,"username": "datadog","password": "<UNIQUEPASSWORD>","tags": "dbinstanceidentifier:<DB_INSTANCE_NAME>"}]'
 ```
 
 For Postgres 9.6, add the following settings to the instance config where host and port are specified:
@@ -282,6 +293,7 @@ helm repo update
 helm install <RELEASE_NAME> \
   --set 'datadog.apiKey=<DATADOG_API_KEY>' \
   --set 'clusterAgent.enabled=true' \
+  --set 'clusterChecksRunner.enabled=true' \
   --set "clusterAgent.confd.postgres\.yaml=cluster_check: true
 init_config:
 instances:
@@ -289,7 +301,9 @@ instances:
     host: <INSTANCE_ADDRESS>
     port: 5432
     username: datadog
-    password: <UNIQUEPASSWORD" \
+    password: <UNIQUEPASSWORD>
+    tags:
+      - dbinstanceidentifier:<DB_INSTANCE_NAME>" \
   datadog/datadog
 ```
 
@@ -313,6 +327,8 @@ instances:
     port: 5432
     username: datadog
     password: '<PASSWORD>'
+    tags:
+      - dbinstanceidentifier:<DB_INSTANCE_NAME>
     ## Required: For Postgres 9.6, uncomment these lines to use the functions created in the setup
     # pg_stat_statements_view: datadog.pg_stat_statements()
     # pg_stat_activity_view: datadog.pg_stat_activity()
@@ -341,7 +357,8 @@ metadata:
           "host": "<AWS_INSTANCE_ENDPOINT>",
           "port": 5432,
           "username": "datadog",
-          "password": "<UNIQUEPASSWORD>"
+          "password": "<UNIQUEPASSWORD>",
+          "tags": "dbinstanceidentifier:<DB_INSTANCE_NAME>"
         }
       ]
 spec:
@@ -373,6 +390,9 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 ### Validate
 
 [Run the Agent's status subcommand][9] and look for `postgres` under the Checks section. Or visit the [Databases][10] page to get started!
+
+## Example Agent Configurations
+{{% dbm-postgres-agent-config-examples %}}
 
 ## Install the RDS Integration
 

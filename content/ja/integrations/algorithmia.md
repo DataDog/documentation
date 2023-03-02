@@ -1,38 +1,57 @@
 ---
-"assets":
-  "dashboards":
-    "Algorithmia": assets/dashboards/algorithmia.json
-  "logs": {}
-  "metrics_metadata": metadata.csv
-  "monitors":
-    "Algorithmia": assets/monitors/algorithm_duration.json
-  "saved_views": {}
-  "service_checks": assets/service_checks.json
-"categories":
+app_id: algorithmia
+app_uuid: 09ef6f74-1555-4082-a69e-b5cf21ec4512
+assets:
+  dashboards:
+    Algorithmia: assets/dashboards/algorithmia.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: algorithmia.duration_milliseconds
+      metadata_path: metadata.csv
+      prefix: algorithmia.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Algorithmia
+  monitors:
+    Algorithmia: assets/monitors/algorithm_duration.json
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Algorithmia
+  sales_email: support@algorithmia.io
+  support_email: support@algorithmia.io
+categories:
 - モニタリング
-"creates_events": false
-"ddtype": "crawler"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/algorithmia/README.md"
-"display_name": "Algorithmia"
-"draft": false
-"git_integration_title": "algorithmia"
-"guid": "bb9defff-03ae-4a22-93a7-6db498d37cd7"
-"integration_id": "algorithmia"
-"integration_title": "Algorithmia"
-"integration_version": ""
-"is_public": true
-"kind": "インテグレーション"
-"maintainer": "support@algorithmia.io"
-"manifest_version": "1.0.0"
-"metric_prefix": "algorithmia."
-"metric_to_check": "algorithmia.duration_milliseconds"
-"name": "algorithmia"
-"public_title": "Datadog-Algorithmia インテグレーション"
-"short_description": "本番環境の機械学習モデルのメトリクスを監視"
-"support": "contrib"
-"supported_os":
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/algorithmia/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: algorithmia
+integration_id: algorithmia
+integration_title: Algorithmia
+integration_version: ''
+is_public: true
+kind: インテグレーション
+manifest_version: 2.0.0
+name: algorithmia
+oauth: {}
+public_title: Algorithmia
+short_description: 本番環境の機械学習モデルのメトリクスを監視
+supported_os:
 - linux
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Category::Monitoring
+  configuration: README.md#Setup
+  description: 本番環境の機械学習モデルのメトリクスを監視
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Algorithmia
 ---
 
 
@@ -60,8 +79,7 @@ Algorithmia Enterprise の機能のひとつである Algorithmia Insights は�
 1. Algorithmia インスタンスから、Algorithmia Insights を構成して
    Kafka Broker (Algorithmia の外部) へ接続します。
 
-2. 詳しくは、
-   [Algorithmia インテグレーションレポジトリのドキュメント][3]を参照
+2. [Algorithmia インテグレーションリポジトリ][3]をご覧ください
    して、このインテグレーションに使用される Datadog のメッセージ転送サービスをインストール、構成、起動してください。
    Kafka トピックからのメトリクスが
    Datadog のメトリクス API へ転送されます。
@@ -90,7 +108,7 @@ Algorithmia Enterprise の機能のひとつである Algorithmia Insights は�
 ご使用の機械学習フレームワークおよびユースケースによりますが、
 scikit-learn の回帰モデルからの予測可能性、TensorFlow の画像認識における
 信頼度スコア、または受信した API リクエストの入力データなどの値が
-含まれます。また、このインテグレーションで提供されるメッセージ転送
+含まれます。**注**: このインテグレーションで提供されるメッセージ転送
 スクリプトには、Datadog でユーザー定義のメトリクスに `algorithmia.` の
 プレフィックスが追加されます。
 
@@ -117,4 +135,3 @@ Algorithmia チェックには、イベントは含まれません。
 [3]: https://github.com/algorithmiaio/integrations
 [4]: https://github.com/DataDog/integrations-extras/blob/master/algorithmia/metadata.csv
 [5]: https://algorithmia.com/contact
-

@@ -13,7 +13,7 @@ further_reading:
     text: Container map
   - link: /infrastructure/process/
     tag: Documentation
-    text: Surveillance des Live Processes
+    text: Surveillance des live processes
 ---
 ## Présentation
 

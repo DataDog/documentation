@@ -1,44 +1,70 @@
 ---
+app_id: hivemq
+app_uuid: ba1769d1-c71b-4cf1-8169-8ce3b66629dd
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     HiveMQ: assets/dashboards/hivemq.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: hivemq.messages.queued.count
+      metadata_path: metadata.csv
+      prefix: hivemq.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: HiveMQ
   logs:
     source: hivemq
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
-  - メッセージング
-  - 処理
-  - ログの収集
-creates_events: false
-ddtype: check
+- メッセージング
+- 処理
+- ログの収集
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/hivemq/README.md'
-display_name: HiveMQ
+- https://github.com/DataDog/integrations-core/blob/master/hivemq/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: hivemq
-guid: 905e4d87-2777-4253-ad44-f91ee66ad888
 integration_id: hivemq
 integration_title: HiveMQ
+integration_version: 1.6.1
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: hivemq.
-metric_to_check: hivemq.messages.queued.count
+manifest_version: 2.0.0
 name: hivemq
-public_title: Datadog-HiveMQ インテグレーション
+oauth: {}
+public_title: HiveMQ
 short_description: HiveMQ クラスターを監視します。
-support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Messaging
+  - Category::Processing
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: HiveMQ クラスターを監視します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: HiveMQ
 ---
+
+
+
 ## 概要
 
 [HiveMQ][1] は、接続された IoT デバイスと行き来するデータの高速で効率的かつ信頼性の高い移動のために設計された MQTT ベースのメッセージングプラットフォームです。MQTT 3.1、3.1.1、5.0 に準拠したブローカーです。
@@ -157,5 +183,5 @@ JMXFetch
 
 
 [1]: https://www.hivemq.com/hivemq/
-[2]: https://docs.datadoghq.com/ja/agent/
+[2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/ja/help

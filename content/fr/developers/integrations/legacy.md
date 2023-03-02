@@ -1,20 +1,22 @@
 ---
-title: Ancien Agent v5
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/docs/dev/legacy.md
 kind: documentation
+title: Ancien Agent v5
 ---
-Cette documentation explique comment créer un check de l'Agent pour l'Agent Datadog v5, qui a été remplacé par l'Agent v6. Il est encore possible d'écrire vos propres checks locaux pour la v5, mais aucune nouvelle intégration ne sera envisagée en amont. Pour en savoir plus sur la création d'intégrations pour l'Agent v6, [reportez-vous à la documentation sur la création d'un check de l'agent pour l'Agent Datadog v6][1].
+Cette documentation explique comment créer un check d'Agent pour l'Agent Datadog v5, qui a été remplacé par l'Agent v6. Il est encore possible d'écrire vos propres checks locaux pour la v5, mais aucune nouvelle intégration n'est envisagée en amont. Pour en savoir plus sur la création d'intégrations pour l'Agent v6, consultez la section [Créer une intégration][1].
 
-## Exigences
+## Prérequis
 
-Vous devez disposer d'un environnement [Ruby][2] fonctionnel. Pour en savoir plus sur l'installation de Ruby, consultez la [documentation sur l'installation de Ruby][3].
+Vous devez disposer d'un environnement [Ruby][2] fonctionnel. Pour en savoir plus sur l'installation de Ruby, consultez la [section dédiée][3].
 
 Vous devez également disposer de [Wget][4]. Wget est déjà installé sur la plupart des systèmes Linux. Utilisez [Homebrew][5] sur Mac ou [Chocolatey][6] sur Windows.
 
-## Implémentation
+## Configuration
 
 [Un gem][7] et un ensemble de scripts sont mis à votre disposition pour faciliter l'implémentation, le développement et le contrôle de votre check. Pour commencer :
 
-1. Dupliquez le [référentiel integrations-extras][8] sur GitHub et clonez le référentiel dans votre environnement de développement.
+1. Dupliquez le [référentiel integrations-extras][8] sur Github et clonez le référentiel dans votre environnement de développement.
 2. Exécutez `gem install bundler`
 3. Exécutez `bundle install`
 
@@ -26,7 +28,7 @@ Une fois les gems Ruby requis installés par Bundler, créez un environnement Py
 
 ## Créer une intégration
 
-Utilisez rake pour générer le squelette d'une nouvelle intégration en exécutant `rake generate:skeleton[my_integration]`, où _my_integration_ est le nom de votre nouvelle intégration (remarque : mettez ce nom entre crochets).
+Utilisez rake pour générer le squelette d'une nouvelle intégration en exécutant `rake generate:skeleton[my_integration]`, où _my_integration_ désigne le nom de votre nouvelle intégration (remarque : mettez ce nom entre crochets).
 
 Un nouveau répertoire appelé `my_integration` est alors créé : celui-ci contient tous les fichiers requis pour votre nouvelle intégration. Une entrée pour votre nouvelle intégration est également créée dans les fichiers d'intégration continue `.travis.yml` et `circle.yml` pour veiller à ce que vos tests soient exécutés chaque fois qu'un nouveau build est créé.
 
@@ -52,7 +54,7 @@ Le fichier README doit contenir les sections suivantes :
 
 #### `check.py`
 
-Le fichier où réside la logique de fonctionnement de votre check. La fonction skeleton crée une classe Integration réutilisable pour votre intégration, y compris une méthode `check` où doit figurer la logique de votre check.
+Le fichier où réside la logique de fonctionnement de votre check. La fonction skeleton crée une classe integration réutilisable pour votre intégration, y compris une méthode `check` où doit figurer la logique de votre check.
 
 Par exemple :
 
@@ -80,7 +82,7 @@ class MyIntegrationCheck(AgentCheck):
     })
 ```
 
-Pour en savoir plus sur l'écriture de checks et l'envoi de métriques à l'Agent Datadog, reportez-vous au [guide Écrire un check de l'Agent][11].
+Pour en savoir plus sur la création d'intégrations et l'envoi de métriques avec l'Agent Datadog, consultez la section [Présentation des intégrations basées sur l'Agent][11].
 
 Si vous devez importer des bibliothèques tierces, ajoutez-les au fichier `requirements.txt`.
 
@@ -107,13 +109,13 @@ namespace :ci do
       $(docker run -p 80:80 --name my_int_container -d my_docker)
 ```
 
-Pour en savoir plus sur l'écriture de tests d'intégration, consultez [la documentation dans le référentiel de l'Agent Datadog][12]. Reportez-vous également à la [bibliothèque courante ci][13] pour les fonctions d'aide comme `install_requirements` et `sleep_for`.
+Pour en savoir plus sur la création de tests d'intégration, consultez la documentation dans le [référentiel de l'Agent Datadog][12]. Reportez-vous également à la [bibliothèque ci common][13] pour découvrir les fonctions d'aide, comme `install_requirements` et `sleep_for`.
 
-Remarque sur la terminologie utilisée : vous avez peut-être remarqué la variable `flavor` dans ce fichier et d'autres sections de test. *Flavor* est un terme utilisé pour dénoter les variations du logiciel intégré, généralement ses versions. Cela vous permet d'écrire un ensemble de tests unique pour cibler différentes *flavors*, variantes ou versions du logiciel que vous intégrez.
+**Remarque** : vous avez peut-être remarqué la variable `flavor` dans ce fichier et d'autres sections de test. Le terme _flavor_ est utilisé pour dénoter les variations du logiciel intégré, généralement ses versions. Cela vous permet d'écrire un ensemble de tests unique pour cibler différentes _flavors_, variantes ou versions du logiciel que vous intégrez.
 
 #### `conf.yaml.example`
 
-Pour installer votre intégration, les utilisateurs doivent configurer l'intégration pour leurs instances spécifiques. Pour ce faire, ils doivent copier le fichier `conf.yaml.example` que vous fournissez dans le répertoire `conf.d` de leur Agent, puis mettre à jour ce fichier avec les informations spécifiques à leur instance.
+Pour installer votre intégration, vous devez la configurer pour vos instances spécifiques. Pour ce faire, copiez le fichier `conf.yaml.example` dans le répertoire `conf.d` de votre Agent, puis modifiez ce fichier en indiquant les informations spécifiques à votre instance.
 
 Votre fichier `conf.yaml.example` doit contenir deux sections :
 
@@ -126,16 +128,16 @@ Ce fichier JSON fournit des métadonnées sur votre intégration et doit inclure
 
 - **`maintainer`** : permet de spécifier une adresse e-mail valide à laquelle vous pouvez être contacté à propos de cette intégration.
 - **`manifest_version`** : la version de ce fichier de manifeste.
-- **`max_agent_version`** : la version maximale de l'Agent Datadog compatible avec votre intégration. Nous faisons tout notre possible pour maintenir la compatibilité des intégrations à chaque nouvelle version majeure. Nous vous conseillons donc de laisser la valeur générée automatiquement. Si votre intégration ne fonctionne plus avec une nouvelle version de l'Agent Datadog, modifiez cette valeur et [créez un ticket sur le projet de l'Agent Datadog][14].
+- **`max_agent_version`** : la version maximale de l'Agent Datadog compatible avec votre intégration. Datadog s'efforce de maintenir la compatibilité des intégrations à chaque nouvelle version majeure. Il est donc conseillé de laisser la valeur générée automatiquement. Si votre intégration ne fonctionne plus avec une nouvelle version de l'Agent Datadog, modifiez cette valeur et [créez un ticket sur le projet de l'Agent Datadog][14].
 - **`min_agent_version`** : la version minimum de l'Agent Datadog compatible avec votre intégration.
 - **`name`** : le nom de votre intégration.
 - **`short_description`** : permet d'indiquer une brève description de votre intégration.
 - **`support`** : étant donné qu'il s'agit d'une intégration maintenue par la communauté, doit être défini sur « contrib ». Spécifiez une autre valeur uniquement si l'équipe Datadog vous demande de le faire.
 - **`version`** : la version actuelle de votre intégration.
-- **`is_public`** : booléen défini sur true si votre intégration est publique
-- **`has_logo`** : booléen défini sur true si un logo pour cette intégration est présent dans `/src/images/integrations_logo`
+- **`is_public`** : un booléen défini sur true si votre intégration est publique
+- **`has_logo`** : un booléen défini sur true si un logo pour cette intégration est présent dans `/src/images/integrations_logo`
 - **`type`** : **check**
-- **`categories`** : les catégories à utiliser pour trier votre intégration. [Les catégories actuelles se trouvent sur la page de documentation des intégrations][15]
+- **`categories`** : les catégories permettant de classifier votre [intégration][15] dans la documentation Datadog.
 
 Consultez l'une des intégrations existantes [pour découvrir un exemple de fichier manifeste][16].
 
@@ -145,7 +147,7 @@ Le fichier de métadonnées CSV contient une liste des métriques fournies par v
 
 Le fichier CSV doit inclure une ligne d'en-tête et les colonnes suivantes :
 
-**`metric_name`** (obligatoire) : le nom de la métrique tel qu'il doit apparaître dans l'application Web Datadog lors de la création de dashboards ou de monitors. Généralement, le nom est une combinaison du fournisseur, du service et de la métrique (p. ex.  `aws.ec2.disk_write_ops`) ou de l'application, de la fonction de l'application et de la métrique (p. ex. `apache.net.request_per_s`). Les différents éléments doivent être séparés par des points.
+**`metric_name`** (obligatoire) : le nom de la métrique tel qu'il doit apparaître sur le site Datadog lors de la création de dashboards ou de monitors. Généralement, le nom est une combinaison du fournisseur, du service et de la métrique (comme `aws.ec2.disk_write_ops`) ou de l'application, de la fonction de l'application et de la métrique (comme `apache.net.request_per_s`). Les différents éléments doivent être séparés par des points.
 
 **`metric_type`** (obligatoire) : le type de métrique envoyé. Cela affecte la manière dont l'application Web Datadog traite et affiche vos données. Valeurs possibles : `count`, `gauge` ou `rate`.
 
@@ -182,19 +184,21 @@ Si le nom de l'unité n'est pas énuméré ci-dessus, laissez cette valeur vide.
   - `0` indique qu'aucune valeur n'est privilégiée. Exemples : `rabbitmq.queue.messages` et `postgresql.rows_inserted`, pour lesquelles aucune valeur ne fait l'objet d'une préférence particulière (ou la préférence dépend des objectifs opérationnels du système).
   - `1` indique que des valeurs plus grandes sont meilleures. Exemples : `mesos.stats.uptime_secs` et `mysql.performance.key_cache_utilization`, pour lesquelles une disponibilité supérieure ou un plus grand nombre de hits de cache sont à privilégier.
 
-**`integration`** (obligatoire) : doit correspondre au nom de votre intégration (p. ex. « my_integration »).
+**`integration`** (obligatoire) : doit correspondre au nom de votre intégration, par exemple « my_integration ».
 
 **`short_name`** : une version plus naturelle et abréviée du nom de la métrique. Par exemple, `postgresql.index_blocks_read` peut être défini sur `idx blks read`. La clarté et la facilité d'interprétation prévalent sur la brièveté. Ne copiez pas  le nom de l'intégration. Si vous ne trouvez pas de `short_name` plus court et plus simple à comprendre que le `metric_name`, laissez ce champ vide.
 
+**`curated_metric`** : indique les métriques d'une intégration pertinentes pour un type donné. Types acceptés : `cpu` et `memory`. Ces métriques sont placées plus haut que les autres métriques dans l'interface.
+
 #### `requirements.txt`
 
-Si votre intégration nécessite des bibliothèques Python supplémentaires, vous pouvez les énumérer ici. Elles seront automatiquement installées via pip lorsque des utilisateurs se serviront de votre intégration.
+Si votre intégration nécessite des bibliothèques Python supplémentaires, énumérez-les dans le fichier `requirements.txt`.  Elles sont automatiquement installées via pip lorsque des utilisateurs se servent de votre intégration.
 
 #### `test_my_integration.py`
 
 Les tests d'intégration permettent de s'assurer que l'Agent Datadog reçoit et enregistre correctement les métriques provenant du logiciel que vous intégrez.
 
-Bien qu'il ne soit pas nécessaire de créer un test pour chaque métrique recueillie par votre intégration, nous vous conseillons fortement d'en couvrir autant que possible. Exécutez la méthode `self.coverage_report()` dans votre test pour obtenir la liste des métriques couvertes.
+Bien qu'il ne soit pas nécessaire de prévoir un test pour chaque métrique recueillie par votre intégration, Datadog vous conseille fortement d'en couvrir autant que possible. Exécutez la méthode `self.coverage_report()` dans votre test pour obtenir la liste des métriques couvertes.
 
 Exemple de fichier `test_my_integration.py` :
 
@@ -216,7 +220,7 @@ Pour en savoir plus sur les tests et les méthodes de test disponibles, reportez
 
 ## Bibliothèques
 
-L'[Agent Datadog][19] fournit un certain nombre de bibliothèques utiles dans le [répertoire `utils`][20]. Ces bibliothèques peuvent vous aider à développer votre intégration, et nous vous encourageons à les utiliser. Sachez néanmoins qu'elles ne sont plus localisées au même endroit dans la version 6.0 de l'Agent Datadog.
+L'[Agent Datadog][19] fournit plusieurs bibliothèques utiles dans le [répertoire `utils`][20]. Ces bibliothèques peuvent vous aider à développer votre intégration. Sachez néanmoins que leur emplacement a été modifié avec la v6 de l'Agent Datadog.
 
 ## Tester votre intégration
 
@@ -224,12 +228,12 @@ Utilisez les commandes suivantes pour tester votre code durant le développement
 
 - `rake lint` : faire un Lint de votre code pour détecter les erreurs potentielles.
 - `rake ci:run[my_integration]` : exécuter les tests que vous avez écrits dans votre fichier `test_my_integration.py` et qui ont l'annotation `@attr(requires='my_integration')`.
-- `rake ci:run[default]` : exécuter les tests que vous avez écrits dans votre fichier `test_my_integration.py` (sans l'annotation `@attr(requires='my_integration')`), en plus de quelques tests génériques que nous avons écrits.
+- `rake ci:run[default]` : exécuter les tests que vous avez écrits dans votre fichier `test_my_integration.py` (sans l'annotation `@attr(requires='my_integration')`), en plus de quelques tests génériques.
 
 Travis CI exécute automatiquement des tests lorsque vous créez une pull request. Avant de créer une pull request, assurez-vous que vos tests couvrent le maximum de code possible et qu'ils ont tous réussi.
 
 Ajoutez l'annotation `@attr(requires='my_integration')` aux méthodes ou aux classes de test qui nécessitent un environnement de test Docker complet (voir la section suivante).
-N'ajoutez pas cette annotation à vos tests d'unité et de simulation ; ces derniers doivent être exécutés via la commande `rake ci:run[default]` sur Travis CI.
+N'ajoutez pas cette annotation à vos tests d'unité et de simulation ; ces derniers doivent être exécutés avec la commande `rake ci:run[default]` sur Travis CI.
 
 Pour exécuter rapidement vos tests d'unité et de simulation, plutôt que de lancer tous les tests avec `rake ci:run[default]`, utilisez :
 
@@ -240,24 +244,24 @@ $ bundle exec rake exec["nosetests my_integration/test/test_*.py -A 'not require
 
 ### Environnements de test Docker
 
-Datadog utilise des conteneurs Docker pour les environnements de test, et nous vous encourageons fortement à en faire de même. Les conteneurs sont légers, faciles à gérer et fournissent des environnements uniformes et normalisés pour chaque exécution de test.
+Datadog utilise des conteneurs Docker pour les environnements de test. Il s'agit de l'approche recommandée. Les conteneurs sont légers, faciles à gérer et fournissent des environnements uniformes et normalisés pour chaque exécution de test.
 
-Par exemple, dans notre intégration MySQL, le [fichier `ci/mysql.rake`][21] utilise le [conteneur MySQL officiel][22] et implique quatre tâches principales :
+Par exemple, dans l'intégration Datadog/MySQL, le [fichier `ci/mysql.rake`][21] utilise le [conteneur MySQL officiel][22] et implique quatre tâches principales :
 
-1. `before_install` : avant de démarrer notre nouvel environnement de test Docker, nous devons vérifier que les environnements de test Docker précédents sont arrêtés et supprimés.
+1. `before_install` : avant de démarrer le nouvel environnement de test Docker, un contrôle est effectué pour vérifier que les environnements de test Docker précédents sont arrêtés et supprimés.
 2. `install` : la tâche install lance le `run` Docker, qui démarre le serveur de test MySQL.
-3. `before_script` : cette tâche vérifie d'abord que le serveur MySQL fonctionne, puis se connecte au serveur pour effectuer des tâches de configuration. Nous vous conseillons fortement de placer les tâches de configuration dans le fichier `test_integration.py` lorsque cela est possible. Nous savons toutefois que dans certains cas, l'implémentation et la configuration doivent être réalisées avant l'exécution du script de test Python.
+3. `before_script` : cette tâche vérifie d'abord que le serveur MySQL fonctionne, puis se connecte au serveur pour effectuer des tâches de configuration. Placez les tâches de configuration dans votre fichier `test_integration.py`, tant que cela est possible. En effet, dans certains cas, l'implémentation et la configuration doivent être réalisées avant l'exécution du script de test Python.
 4. `cleanup` : une fois les tests terminés, l'environnement de test Docker est arrêté et supprimé.
 
-### Installer votre intégration en local
+### Installation de votre intégration en local
 
-Une fois votre intégration ajoutée au référentiel `integrations-extras`, nous générons des paquets permettant aux utilisateurs d'installer facilement votre intégration. Toutefois, il peut être préférable d'installer l'intégration en local avant de merger son code.
+Une fois votre intégration ajoutée au référentiel `integrations-extras`, Datadog génère des packages permettant aux utilisateurs d'installer facilement votre intégration. Toutefois, il peut être préférable d'installer l'intégration en local avant de merger son code.
 
 Pour exécuter votre intégration en local, copiez d'abord votre fichier `check.py` dans le répertoire `checks.d` de l'Agent Datadog et renommez-le `my_integration.py` (utilisez le nom réel de votre intégration).
 
 Copiez ensuite votre fichier `conf.yaml.example` dans le répertoire `conf.d` de l'Agent Datadog et renommez-le `my_integration.yaml` (utilisez de nouveau le nom réel de votre intégration).
 
-Consultez le guide relatif aux checks de l'Agent pour en savoir plus sur l'[arborescence de dossiers de l'Agent Datadog][11].
+Consultez la section [Créer une intégration][1] pour en savoir plus sur l'arborescence de dossiers de l'Agent Datadog.
 
 ### Nettoyage final
 
@@ -265,16 +269,16 @@ Une fois votre intégration créée, exécutez `rake clean_env` pour supprimer l
 
 ## Envoyer votre intégration
 
-Une fois le développement de votre intégration terminé, créez une [pull request][23] pour que Datadog examine votre intégration. Après avoir passé en revue votre code, nous approuverons votre pull request ou nous vous communiquerons les changements à effectuer pour qu'elle soit approuvée.
+Une fois le développement de votre intégration terminé, créez une [pull request][23] pour que Datadog examine votre intégration. Après avoir passé en revue votre intégration, Datadog approuve votre pull request et intègre son code, ou vous communique les changements à effectuer pour qu'elle soit approuvée.
 
 ### Considérations supplémentaires
 
-Nous avons nous aussi été confrontés à un certain nombre de défis durant le développement de nos intégrations. Lorsque vous écrivez vos tests, considérez ces quelques points :
+Tenez compte des éléments suivants lors de l'écriture de tests :
 
-* Testez des clusters entiers. Il est souvent plus facile de tester des instances uniques de votre programme, mais les tests sont plus utiles lorsqu'ils reflètent des situations courantes. Par exemple, les utilisateurs de MongoDB font souvent appel au sharding et aux replica sets : [nos tests ont donc été écrits en conséquence][24].
-* Pensez à générer des métriques calculées en plus des métriques brutes. À titre d'exemple, les requêtes de base de données les plus lentes sont souvent les moins fréquemment exécutées : il peut donc être utile de calculer les centiles. Notre intégration MySQL comprend une métrique calculée qui évalue le [95e centile du temps d'exécution des requêtes][2].
+* Testez des clusters entiers. Il est souvent plus facile de tester des instances uniques de votre programme, mais les tests sont plus utiles lorsqu'ils reflètent des situations courantes. Par exemple, les utilisateurs de MongoDB font souvent appel au sharding et aux replica sets : les [tests][24] ont donc été écrits en conséquence.
+* Pensez à générer des métriques calculées en plus des métriques brutes. À titre d'exemple, les requêtes de base de données les plus lentes sont souvent les moins fréquemment exécutées : il peut donc être utile de calculer les centiles. Ainsi, l'intégration Datadog/MySQL propose une métrique calculée qui évalue le [95e centile du temps d'exécution des requêtes][2].
 
-[1]: /fr/developers/integrations/new_check_howto
+[1]: https://docs.datadoghq.com/fr/developers/integrations/new_check_howto
 [2]: https://www.ruby-lang.org
 [3]: https://www.ruby-lang.org/en/documentation/installation
 [4]: https://www.gnu.org/software/wget
@@ -284,7 +288,7 @@ Nous avons nous aussi été confrontés à un certain nombre de défis durant le
 [8]: https://github.com/DataDog/integrations-extras
 [9]: https://virtualenv.pypa.io/en/stable
 [10]: /fr/developers/integrations/#new-integration-documentation
-[11]: https://docs.datadoghq.com/fr/developers/agent_checks/
+[11]: https://docs.datadoghq.com/fr/developers/integrations/
 [12]: https://github.com/DataDog/dd-agent/blob/master/tests/README.md#integration-tests
 [13]: https://github.com/DataDog/dd-agent/blob/master/ci/common.rb
 [14]: https://github.com/DataDog/dd-agent/blob/master/CONTRIBUTING.md#submitting-issues

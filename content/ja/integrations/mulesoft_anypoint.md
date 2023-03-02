@@ -1,4 +1,6 @@
 ---
+app_id: ioconnect-mulesoft-anypoint
+app_uuid: fdb057e7-9be6-459f-ab3e-e745766e9158
 assets:
   dashboards:
     'IO Connect Development: Optimizations': assets/dashboards/development_optimizations.json
@@ -6,7 +8,17 @@ assets:
     'IO Connect Operations: APIs': assets/dashboards/operations_apis.json
     'IO Connect Operations: Infrastructure': assets/dashboards/operations_infrastructure.json
     'IO Connect Operations: Resources allocation': assets/dashboards/operations_resources_allocation_and_usage.json
-  metrics_metadata: metadata.csv
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: ioconnect.mulesoft.anypoint.access_management.organization.entitlements.vcores_production.assigned
+      metadata_path: metadata.csv
+      prefix: ioconnect.mulesoft.anypoint.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: IO Connect MuleSoft Anypoint
   monitors:
     Servers status: assets/monitors/server_disconnected_monitor.json
     '[CloudHub] Apps status': assets/monitors/cloudhub_app_stopped_monitor.json
@@ -17,48 +29,87 @@ assets:
     '[On-Prem] Apps status': assets/monitors/onpremise_app_stopped_monitor.json
     '[On-Prem] CPU load': assets/monitors/onpremise_cpu_load_monitor.json
     '[On-Prem] Memory usage': assets/monitors/onpremise_memory_usage_monitor.json
-  saved_views: {}
-  service_checks: assets/service_checks.json
 author:
-  homepage: 'https://www.ioconnectservices.com/'
+  homepage: https://www.ioconnectservices.com/
   name: IO Connect Services
+  sales_email: dmi@ioconnectservices.com
+  support_email: support_ddp@ioconnectservices.com
+  vendor_id: ioconnect
 categories:
-  - マーケットプレイス
-  - cloud
-  - コラボレーション
-creates_events: false
-ddtype: check
+- マーケットプレイス
+- cloud
+- コラボレーション
 dependencies: []
-display_name: IO Connect MuleSoft Anypoint
+display_on_public_website: true
 draft: false
 git_integration_title: mulesoft_anypoint
-guid: dd29d25b-8c20-4b11-b24f-91a2adbc8f73
 integration_id: ioconnect-mulesoft-anypoint
 integration_title: Mule®
+integration_version: ''
 is_public: true
 kind: integration
-maintainer: support_ddp@ioconnectservices.com
-manifest_version: 1.0.0
-metric_prefix: ioconnect.mulesoft.anypoint.
-metric_to_check: ioconnect.mulesoft.anypoint.access_management.organization.entitlements.vcores_production.assigned
-name: mulesoft_anypoint
-pricing:
-  - billing_type: tag_count
-    metric: datadog.marketplace.ioconnect.mulesoft_anypoint
-    tag: vcoreid
-    unit_label: プロダクション vCore
-    unit_price: 200
-public_title: Mule® インテグレーション
-short_description: MuleSoft 製品からメトリクスを収集し、Datadog にアップロードします。
-support: パートナー
-supported_os:
-  - linux
-  - mac_os
-  - windows
-terms:
+legal_terms:
   eula: assets/EULA - IO Connect Services.pdf
-  legal_email: dmi@ioconnectservices.com
+manifest_version: 2.0.0
+name: mulesoft_anypoint
+oauth: {}
+pricing:
+- billing_type: tag_count
+  includes_assets: true
+  metric: datadog.marketplace.ioconnect.mulesoft_anypoint
+  product_id: mulesoft-anypoint
+  short_description: プロダクション vCore 単価
+  tag: vcoreid
+  unit_label: プロダクション vCore
+  unit_price: 200
+public_title: Mule® インテグレーション
+short_description: MuleSoft 製品からメトリクスを収集し、Datadog にアップロードします
+supported_os:
+- linux
+- mac os
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Mac OS
+  - Supported OS::Windows
+  - Category::Marketplace
+  - Category::Cloud
+  - Category::Collaboration
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: MuleSoft 製品からメトリクスを収集し、Datadog にアップロードします
+  media:
+  - caption: 'オペレーション: API ダッシュボード'
+    image_url: images/dmi_ops_apis.png
+    media_type: image
+  - caption: 'オペレーション: インフラストラクチャーダッシュボード'
+    image_url: images/dmi_ops_infra.png
+    media_type: image
+  - caption: 'オペレーション: リソース配分と使用状況のダッシュボード'
+    image_url: images/dmi_ops_allocation.png
+    media_type: image
+  - caption: '開発: 最適化ダッシュボード'
+    image_url: images/dmi_dev_optimization.png
+    media_type: image
+  - caption: 'エグゼクティブ: コスト最適化ダッシュボード'
+    image_url: images/dmi_exec_cost_optimization.png
+    media_type: image
+  - caption: Datadog Connector for Mule 4
+    image_url: images/dmi_mule_connector.png
+    media_type: image
+  - caption: Datadog APM
+    image_url: images/dmi_apm_traces.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Mule® インテグレーション
+  uninstallation: README.md#Uninstallation
 ---
+
+
+
 ## 概要
 
 Datadog Mule® インテグレーションは、MuleSoft 製品からメトリクスを収集し、Datadog にアップロードする Agent ベースのインテグレーションです。
@@ -77,7 +128,7 @@ Datadog Mule® インテグレーションは、MuleSoft 製品からメトリ�
 
 {{< img src="marketplace/mulesoft_anypoint/images/dmi_ops_infra.png" alt="オペレーション: インフラストラクチャーダッシュボード" >}}
 
-{{< img src="marketplace/mulesoft_anypoint/images/dmi_ops_apis.png" alt="オペレーション: インフラストラクチャーダッシュボード" >}}
+{{< img src="marketplace/mulesoft_anypoint/images/dmi_ops_apis.png" alt="オペレーション: API ダッシュボード" >}}
 
 {{< img src="marketplace/mulesoft_anypoint/images/dmi_ops_allocation.png" alt="オペレーション: リソースの割り当てと使用状況のダッシュボード" >}}
 
@@ -114,11 +165,7 @@ Datadog APM トレースを備えた Mule 4 用の Datadog コネクタを使え
 
 スパンを使用して、フロー内の操作のパフォーマンスを必要に応じて詳細に測定します。
 
-{{< img src="marketplace/mulesoft_anypoint/images/dmi_apm_trace.png" alt="Datadog APM" >}}
-
 また、トランザクション内で生成されたログを 1 つのトレースに関連付けて、パフォーマンスの最適化またはトラブルシューティングの範囲を絞り込みます。
-
-{{< img src="marketplace/mulesoft_anypoint/images/dmi_apm_logs.png" alt="Datadog APM" >}}
 
 ### **トラブルシューティング**
 
@@ -143,19 +190,13 @@ Datadog Mule® インテグレーションには、イベントは含まれま�
 
 ## サポート
 
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、[こちらをクリック][13]してください。
-
 サポートが必要な場合は、IO Connect Services ([support_ddp@ioconnectservices.com][9]) までお問い合わせください。
-
-## エンドユーザーライセンス契約
-
-エンドユーザーライセンス契約のコピーは、ファイル [EULA - IO Connect Services.pdf][10] にあります。
 
 ## IO Connect Services について
 
 IO Connect Services は、情報技術コンサルティングサービスを専門とする企業です。私たちの業務は、クラウドテクノロジー、システムインテグレーション、ビッグデータ、サイバーセキュリティ、ソフトウェアエンジニアリングです。北米、ヨーロッパ、ラテンアメリカの全域でサービスを提供しています。本社はニューヨークの大都市圏にあり、メキシコのグアダラハラとスペインのマドリッドにもオフィスがあります。
 
-[https://www.ioconnectservices.com][11] をご覧ください。
+[https://www.ioconnectservices.com][10] をご覧ください。
 
 [1]: https://www.ioconnectservices.com
 [2]: https://docs.datadoghq.com/ja/agent/autodiscovery/integrations
@@ -166,7 +207,7 @@ IO Connect Services は、情報技術コンサルティングサービスを専
 [7]: https://docs.datadoghq.com/ja/developers/integrations/new_check_howto/?tab=configurationfile#installing
 [8]: https://docs.datadoghq.com/ja/developers/guide/custom-python-package/?tab=linux
 [9]: mailto:support_ddp@ioconnectservices.com
-[10]: assets/EULA%20-%20IO%20Connect%20Services.pdf
-[11]: https://www.ioconnectservices.com
-[12]: mailto:dmi@ioconnectservices.com
-[13]: https://app.datadoghq.com/marketplace/app/ioconnect-mulesoft-anypoint/pricing
+[10]: https://www.ioconnectservices.com
+
+---
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/ioconnect-mulesoft-anypoint" target="_blank">こちらをクリック</a>してください。

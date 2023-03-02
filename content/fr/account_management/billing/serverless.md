@@ -1,14 +1,13 @@
 ---
-title: Facturation des fonctions sans serveur
 kind: documentation
+title: Facturation des fonctions sans serveur
 ---
+
 ## Présentation
 
 Achetez des appels de fonction sans serveur avec les [offres Pro et Enterprise de Datadog][1]. La facturation Datadog repose sur la somme d'appels Lambda AWS sur un mois pour l'ensemble de vos comptes. Les offres Pro et Enterprise prévoient 150 000 spans indexées et 5 métriques custom par million d'appels facturés. Contactez le [service commercial][2] ou votre [chargé de compte][3] pour en savoir plus sur l'ajout de fonctions sans serveur pour votre compte.
 
 **Remarque :** si vous utilisez un ancien modèle de facturation pour la surveillance de fonctions sans serveur Datadog, et souhaitez migrer vers une facturation basée sur les appels, contactez votre [chargé de compte][3].
-
-**Remarque :** les spans indexées étaient auparavant désignées par le terme de « spans analysées ». Le changement de dénomination a eu lieu à l'occasion du lancement de Tracing Without Limits le 20 octobre 2020.
 
 ## Appels de fonction sans serveur
 
@@ -21,6 +20,8 @@ Pour en savoir plus sur le tarif des fonctions sans serveur, consultez la [page 
 Vous pouvez surveiller le nombre d'appels de fonction sans serveur facturables de votre compte en consultant la [page Datadog Usage][4]. Vous pouvez consulter le résumé du mois en cours, ainsi que l'évolution de l'utilisation.
 
 Pour contrôler le nombre de fonctions dont les appels sont surveillés par Datadog, excluez des fonctions spécifiques en appliquant un tri par tag dans [l'interface](#interface) ou à l'aide de l'[API](#api).
+
+**Remarque** : il peut s'écouler un certain temps avant que les fonctions exclues disparaissent des pages [Serverless][8] et [Usage][4] Datadog. Testez les règles de filtrage en consultant la métrique [`aws.lambda.invocations`][9] des fonctions filtrées. Lorsque Datadog interrompt la surveillance d'une fonction, la valeur de `aws.lambda.invocations` atteint 0.
 
 ### Interface
 
@@ -49,3 +50,5 @@ Pour toute question concernant la facturation, contactez votre [chargé de compt
 [5]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [6]: /fr/api/latest/aws-integration/#set-an-aws-tag-filter
 [7]: /fr/help/
+[8]: https://app.datadoghq.com/functions
+[9]: https://app.datadoghq.com/metric/explorer?exp_metric=aws.lambda.invocations&exp_group=functionname&exp_agg=sum

@@ -1,31 +1,35 @@
 ---
-title: ロールベースのアクセス制御
-kind: documentation
 aliases:
-  - /ja/guides/rbac
-  - /ja/account_management/rbac/role_api
-  - /ja/account_management/users/default_roles
-  - /ja/account_management/users/custom_roles
-  - /ja/account_management/rbac/log_management
+- /ja/guides/rbac
+- /ja/account_management/rbac/role_api
+- /ja/account_management/users/default_roles
+- /ja/account_management/users/custom_roles
+- /ja/account_management/rbac/log_management
 further_reading:
-  - link: /api/v2/roles/
-    tag: Documentation
-    text: Roles API を使用してロールとアクセス許可を管理する
-  - link: /api/v2/roles/#list-permissions
-    tag: Documentation
-    text: Permission API を使用してアクセス許可を管理する
-  - link: /account_management/rbac/permissions
-    tag: ドキュメント
-    text: 利用可能なアクセス許可の一覧。
-  - link: /account_management/saml/
-    tag: Documentation
-    text: SAML を使用したシングルサインオンを有効にする
+- link: /api/v2/roles/
+  tag: Documentation
+  text: Roles API を使用してロールとアクセス許可を管理する
+- link: /api/v2/roles/#list-permissions
+  tag: Documentation
+  text: Permission API を使用してアクセス許可を管理する
+- link: /account_management/rbac/permissions
+  tag: ドキュメント
+  text: 利用可能なアクセス許可の一覧
+- link: /account_management/saml/
+  tag: Documentation
+  text: SAML を使用したシングルサインオンを有効にする
+- link: https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/
+  tag: ブログ
+  text: Datadog Audit Trail で、チーム全体のコンプライアンス、ガバナンス、透明性を構築します
+kind: documentation
+title: ロールベースのアクセス制御
 ---
+
 ロールによりユーザーを分類し、各ユーザーが読み取ることができるデータや変更できるアカウントアセットなど、アカウントのアクセス許可を定義します。Datadog ではデフォルトで 3 つのロールを提供していますが、[カスタムロール](#カスタムロール)を作成すると、ユーザーとアクセス許可のマッピングをより適切に定義できます。
 
 ロールにアクセス許可を付与することで、ロールに関連付けられているユーザーはアクセス許可を受け取ります。複数のロールに関連付けられているユーザーは、それぞれのロールに付与されているすべてのアクセス許可を受け取ります。ユーザーに関連付けられたロールが増えるほど、Datadog アカウント内で持つアクセス権も増えます。
 
-**注** SAML ID プロバイダーを使用する場合、認証のためにそれを Datadog と統合でき、ID 属性を Datadog のデフォルトロールとカスタムロールにマップできます。詳細については、[SAML を使用したシングルサインオン][1]を参照してください。
+**注**: SAML ID プロバイダーを使用する場合、認証のためにそれを Datadog と統合でき、ID 属性を Datadog のデフォルトロールとカスタムロールにマップできます。詳細については、[SAML を使用したシングルサインオン][1]を参照してください。
 
 ## Datadog のデフォルトのロール
 
@@ -40,15 +44,20 @@ Datadog 読み取り専用ロール
 
 ## カスタムロール
 
-<div class="alert alert-warning">
-カスタムロールの作成と変更は、オプトイン Enterprise 機能です。ご使用のアカウントでこの機能を有効にしたい場合は、<a href="/help">Datadog のサポートチームにお問い合わせください</a>。
-</div>
+カスタムロール機能を使用すると、オーガニゼーションで一意の権限セットを持つ新規ロールを作成できます。Datadog サイト、[Datadog Role API][6]、または SAML から直接カスタムロールを管理できます。下記からロールの作成、更新、削除方法をご確認ください。利用可能なアクセス許可の詳細については、[Datadog ロールのアクセス許可][7]を参照してください。Datadog でロールを作成または編集できるのは、ユーザーアクセス管理のアクセス許可を持つユーザーのみです。
 
-Datadog アプリケーション、[Datadog ロール API][6]、または SAML から直接カスタムロールを管理できます。下記からロールの作成、更新、削除方法をご確認ください。利用可能なアクセス許可の詳細については、[Datadog ロールのアクセス許可][7]ドキュメントを参照してください。Datadog でロールを作成または編集できるのは、Access Management アクセス許可を持つユーザーのみです。
+### カスタムロールを有効にする
+
+1. [Organization Settings][8] に移動します。
+2. ページ左側の **Roles** を選択します。
+3. 右上のギアアイコンをクリックすると、Custom Roles のポップアップウィンドウが開きます。
+4. Custom Roles で **Enable** をクリックします。
+
+{{< img src="account_management/rbac/enable_custom_roles.png" alt="Custom Roles ポップアップウィンドウの Enable ボタン" style="width:90%;">}}
+
+代替として、POST 呼び出しを [Create Role API エンドポイント][9]宛てにすると、自動的にオーガニゼーションに対するカスタムロールが有効になります。
 
 ### カスタムロールを作成する
-
-次の手順でカスタムロールを作成します。
 
 {{< tabs >}}
 {{% tab "Datadog application" %}}
@@ -58,11 +67,9 @@ Datadog アプリケーション、[Datadog ロール API][6]、または SAML �
 1. [Datadog Roles ページ][1]に移動します。
 2. ページ右上隅 **New Role** を選択します。
 3. ロールに名前を付けます。
-4. 任意 - ロールにアクセス許可セットを割り当てます。利用可能なアクセス許可の詳細については、[Datadog ロールのアクセス許可][2]ドキュメントを参照してください。
+4. ロールにアクセス許可セットを割り当てます。利用可能なアクセス許可の詳細については、[Datadog ロールのアクセス許可][2]を参照してください。
 
-{{< img src="account_management/rbac/create_role.png" alt="カスタムロールの作成" style="width:90%;">}}
-
-ロールを作成したら、[このロールを既存のユーザーに追加][3]できます。
+ロールを作成したら、[既存のユーザーに追加][3]できます。
 
 
 [1]: https://app.datadoghq.com/access/roles
@@ -71,10 +78,10 @@ Datadog アプリケーション、[Datadog ロール API][6]、または SAML �
 {{% /tab %}}
 {{% tab "API" %}}
 
-[Datadog ロール作成 API のドキュメント][1]で、ロールの作成方法の例をご紹介しています。
+[ロールの作成 API リファレンス][1]で、ロールの作成方法の例をご紹介しています。
 
 
-[1]: /ja/api/v2/roles/#create-role
+[1]: /ja/api/latest/roles/#create-role
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -87,10 +94,9 @@ Datadog アプリケーション、[Datadog ロール API][6]、または SAML �
 
 1. [Datadog Roles ページ][1]に移動します。
 2. 変更するロールの編集ボタンを選択します。
-3. ロールのアクセス許可セットを変更します。利用可能なアクセス許可の詳細については、[Datadog ロールのアクセス許可][2]ドキュメントを参照してください。
+3. ロールのアクセス許可セットを変更します。利用可能なアクセス許可の詳細については、[ロールのアクセス許可][2]を参照してください。
 4. 変更を保存します。
 
-{{< img src="account_management/rbac/edit_role.png" alt="ロールの編集" style="width:90%;">}}
 
 ロールが変更されると、そのロールを持つすべてのユーザーのアクセス許可が更新されます。
 
@@ -100,10 +106,36 @@ Datadog アプリケーション、[Datadog ロール API][6]、または SAML �
 {{% /tab %}}
 {{% tab "API" %}}
 
-[Datadog ロール作成 API のドキュメント][1]で、ロールの更新方法の例をご紹介しています。
+[ロールの更新 API リファレンス][1]で、ロールの更新方法の例をご紹介しています。
 
 
-[1]: /ja/api/v2/roles/#update-a-role
+[1]: /ja/api/latest/roles/#update-a-role
+{{% /tab %}}
+{{< /tabs >}}
+
+### ロールの複製
+
+{{< tabs >}}
+{{% tab "Datadog application" %}}
+
+既存ロールのクローンを作成するには:
+
+1. [Datadog Roles ページ][1]に移動します。
+2. クローンを作成するロールの上にカーソルを合わせます。右側にボタン群が表示されます。
+3. クローンを作成するロールのクローンボタンを選択します。
+4. オプションで、ロールの名前または権限を変更します。
+5. 下の **Save** ボタンをクリックします。
+
+{{< img src="account_management/rbac/clone_role.png" alt="クローンボタンがハイライトされた 2 つのロールのリスト" style="width:90%;">}}
+
+
+[1]: https://app.datadoghq.com/access/roles
+{{% /tab %}}
+{{% tab "API" %}}
+
+[ロールのクローン作成 API リファレンス][1]で、ロールのクローン作成方法の例をご紹介しています。
+
+[1]: /ja/api/latest/roles/#create-a-new-role-by-cloning-an-existing-role
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -115,30 +147,41 @@ Datadog アプリケーション、[Datadog ロール API][6]、または SAML �
 カスタムロールを削除するには
 
 1. [Datadog Roles ページ][1]に移動します。
-2. 削除するロールの削除ボタンを選択します。
-3. 決定を確認します。
+2. 削除するロールの上にカーソルを合わせます。右側にボタン群が表示されます。
+3. 削除するロールの削除ボタンを選択します。
+4. 決定を確認します。
 
-{{< img src="account_management/rbac/delete_role.png" alt="ロールの削除" style="width:90%;">}}
 
-{{< img src="account_management/users/delete_role_confirmation.png" alt="ロールの削除" style="width:90%;">}}
-
-ロールが削除されると、そのロールを持つすべてのユーザーのアクセス許可が更新されます。ロールのないユーザーは Datadog を効果的に使用できませんが、それでも制限されたアクセス権を持つことができます。ユーザーが組織へのアクセスを必要としない場合は、ユーザーがロールを持っているか、無効になっていることを必ず確認する必要があります。
+ロールが削除されると、このロールを持つすべてのユーザーのアクセス許可が更新されます。ロールのないユーザーは、Datadog を効率的に使用できませんが、制限付きのアクセスを保持します。
 
 
 [1]: https://app.datadoghq.com/access/roles
 {{% /tab %}}
 {{% tab "API" %}}
 
-[Datadog ロール作成 API のドキュメント][1]で、ロールの削除方法の例をご紹介しています。
+[ロールの削除 API リファレンス][1]で、ロールの削除方法の例をご紹介しています。
 
 
-[1]: /ja/api/v2/roles/#delete-role
+[1]: /ja/api/latest/roles/#delete-role
 {{% /tab %}}
 {{< /tabs >}}
 
+### ロールテンプレートの適用
+
+Datadog サイトでロールを作成または更新する際、Datadog ロールテンプレートを使用すると、ロールに既定のアクセス許可を適用できます。
+
+1. New Role または Edit Role ページで、右側の **Show Role Templates** ボタンをクリックします。
+2. ロールテンプレートのドロップダウンメニューが表示されます。
+3. メニューから、ロールに適用するアクセス許可のロールテンプレートを選択します。
+4. **Apply** ボタンをクリックします。
+4. オプションで、ロールにさらに変更を加えます。
+5. **Save** ボタンをクリックします。
+
+{{< img src="account_management/rbac/role_templates.png" alt="Datadog 請求管理者ロールが選択されたロールテンプレートのドロップダウンメニュー" style="width:90%;">}}
+
 ## ダッシュボードおよびモニターへのアクセスを制限
 
-RBAC ロールをセットアップしたら、ユーザーロール別にダッシュボードおよびモニターへのアクセスを制限できます。詳しくは、[ダッシュボードのアクセス許可ドキュメント][8]および[モニターのアクセス許可ドキュメント][9]を参照してください。
+RBAC ロールをセットアップしたら、ユーザーロール別にダッシュボード、モニター、Synthetic テストへのアクセスを制限できます。詳しくは、[ダッシュボードのアクセス許可][10]、[モニターのアクセス許可][11]、[Synthetics のアクセス許可][12]を参照してください。
 
 ## その他の参考資料
 
@@ -151,5 +194,8 @@ RBAC ロールをセットアップしたら、ユーザーロール別にダッ
 [5]: /ja/notebooks/
 [6]: /ja/api/v2/roles/
 [7]: /ja/account_management/rbac/permissions/
-[8]: /ja/dashboards/#restrict-access
-[9]: /ja/getting_started/monitors/#restrict-access
+[8]: https://app.datadoghq.com/organization-settings/
+[9]: /ja/api/latest/roles/#create-role
+[10]: /ja/dashboards/#permissions
+[11]: /ja/monitors/notify/#permissions
+[12]: /ja/synthetics/browser_tests/#permissions

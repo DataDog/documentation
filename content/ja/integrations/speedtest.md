@@ -1,72 +1,97 @@
 ---
+app_id: speedtest
+app_uuid: 550862f8-f1d1-4924-b802-185b865e09a4
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Speedtest: assets/dashboards/speedtest.json
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: speedtest.download.bandwidth
+      metadata_path: metadata.csv
+      prefix: speedtest.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: speedtest
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: コミュニティ
+  sales_email: cody.lee@datadoghq.com
+  support_email: cody.lee@datadoghq.com
 categories:
-  - isp
-  - ネットワーク
-creates_events: false
-ddtype: check
+- isp
+- ネットワーク
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/speedtest/README.md
-display_name: speedtest
+- https://github.com/DataDog/integrations-extras/blob/master/speedtest/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: speedtest
-guid: 4bf81e32-170a-44f3-868d-1683ef39464f
 integration_id: speedtest
 integration_title: speedtest
+integration_version: 1.0.0
 is_public: true
 kind: integration
-maintainer: cody.lee@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: speedtest.
-metric_to_check: speedtest.download.bandwidth
+manifest_version: 2.0.0
 name: speedtest
-public_title: Datadog-speedtest インテグレーション
+oauth: {}
+public_title: speedtest
 short_description: speedtest-cli を使用して Speedtest の結果を実行します
-support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - カテゴリ::ISP
+  - Category::Network
+  configuration: README.md#Setup
+  description: speedtest-cli を使用して Speedtest の結果を実行します
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: speedtest
 ---
+
+
+
 ## 概要
 
 このチェックは、Datadog Agent を通じて [Speedtest][1] を監視します。
 
 ## セットアップ
 
-ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
+Speedtest チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
 ### インストール
 
-Agent v6.8 以降を使用している場合は、以下の手順に従って、ホストに Speedtest チェックをインストールしてください。[バージョン 6.8 以前の Agent][4] または [Docker Agent][5] でチェックをインストールする場合は、[コミュニティインテグレーションのインストール][3]に関する Agent のガイドを参照してください。
+Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Speedtest チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 
-1. [Datadog Agent をダウンロードして起動][6]します。
-2. 次のコマンドを実行して、Agent でインテグレーション Wheel をインストールします。
+1. 以下のコマンドを実行して、Agent インテグレーションをインストールします。
 
    ```shell
    datadog-agent integration install -t datadog-speedtest==<INTEGRATION_VERSION>
    ```
-3. [他のパッケージ化されたインテグレーション][7]と同様にインテグレーションを構成します。
 
-注: すべてのホストについて、ホストに [Speedtest CLI][1] をインストールし、使用前に Datadog Agent ユーザー (例: `sudo -u dd-agent speedtest`) として契約に同意する必要があります。
+2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
+
+**注**: すべてのホストについて、[Speedtest CLI][1] をインストールし、使用前に Datadog Agent ユーザー (例: `sudo -u dd-agent speedtest`) として契約に同意する必要があります。
 
 ### コンフィギュレーション
 
-1. Speedtest のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `speedtest.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[speedtest.d/conf.yaml のサンプル][8]を参照してください。
+1. Speedtest のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `speedtest.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[speedtest.d/conf.yaml のサンプル][5]を参照してください。
 
-2. [Agent を再起動します][9]。
+2. [Agent を再起動します][6]。
 
 ### 検証
 
-[Agent の statusサブコマンドを実行][10]し、Checks セクションで `speedtest` を探します。
+[Agent の statusサブコマンド][7]を実行し、Checks セクションで `speedtest` を探します。
 
 ## 収集データ
 
@@ -76,7 +101,7 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
 
 ### イベント
 
-Speedtest には、イベントは含まれません。
+Speedtest チェックには、イベントは含まれません。
 
 ### サービスのチェック
 {{< get-service-checks-from-git "speedtest" >}}
@@ -84,19 +109,16 @@ Speedtest には、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
 
 [1]: https://www.speedtest.net/apps/cli
-[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[3]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/
-[4]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
-[5]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/?tab=docker
-[6]: https://app.datadoghq.com/account/settings#agent
-[7]: https://docs.datadoghq.com/ja/getting_started/integrations/
-[8]: https://github.com/DataDog/integrations-extras/blob/master/speedtest/datadog_checks/speedtest/data/conf.yaml.example
-[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[11]: https://github.com/DataDog/integrations-extras/blob/master/speedtest/metadata.csv
-[12]: https://github.com/DataDog/integrations-extras/blob/master/speedtest/assets/service_checks.json
-[13]: https://docs.datadoghq.com/ja/help/
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
+[4]: https://docs.datadoghq.com/ja/getting_started/integrations/
+[5]: https://github.com/DataDog/integrations-extras/blob/master/speedtest/datadog_checks/speedtest/data/conf.yaml.example
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://github.com/DataDog/integrations-extras/blob/master/speedtest/metadata.csv
+[9]: https://github.com/DataDog/integrations-extras/blob/master/speedtest/assets/service_checks.json
+[10]: https://docs.datadoghq.com/ja/help/

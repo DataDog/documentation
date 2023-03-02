@@ -9,7 +9,7 @@ further_reading:
 
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
@@ -27,7 +27,7 @@ Supported MySQL versions
 : 5.6, 5.7, or 8.0+
 
 Supported Agent versions
-: 7.33.0+
+: 7.36.1+
 
 Performance impact
 : The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. <br/><br/>
@@ -51,6 +51,7 @@ To collect query metrics, samples, and explain plans, enable the [MySQL Performa
 | `max_digest_length` | `4096` | Required for collection of larger queries. If left at the default value then queries longer than `1024` characters will not be collected. |
 | <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Must match `max_digest_length`. |
 | `performance-schema-consumer-events-statements-current` | `ON` | Required. Enables monitoring of currently running queries. |
+| `performance-schema-consumer-events-waits-current` | `ON` | Required. Enables the collection of wait events. |
 | `performance-schema-consumer-events-statements-history-long` | `ON` | Recommended. Enables tracking of a larger number of recent queries across all threads. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
 | `performance-schema-consumer-events-statements-history` | `ON` | Optional. Enables tracking recent query history per thread. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
 {{% /tab %}}
@@ -63,6 +64,7 @@ To collect query metrics, samples, and explain plans, enable the [MySQL Performa
 | <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Must match `max_digest_length`. |
 | <code style="word-break:break-all;">`performance_schema_max_sql_text_length`</code> | `4096` | Must match `max_digest_length`. |
 | `performance-schema-consumer-events-statements-current` | `ON` | Required. Enables monitoring of currently running queries. |
+| `performance-schema-consumer-events-waits-current` | `ON` | Required. Enables the collection of wait events. |
 | `performance-schema-consumer-events-statements-history-long` | `ON` | Recommended. Enables tracking of a larger number of recent queries across all threads. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
 | `performance-schema-consumer-events-statements-history` | `ON` | Optional. Enables tracking recent query history per thread. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
 {{% /tab %}}
@@ -145,7 +147,7 @@ GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 ```
 
 ### Runtime setup consumers
-Datadog recommends that you create the following procedure to give the Agent the ability to enable `performance_schema.events_statements_*` consumers at runtime.
+Datadog recommends that you create the following procedure to give the Agent the ability to enable `performance_schema.events_*` consumers at runtime.
 
 ```SQL
 DELIMITER $$
@@ -153,6 +155,7 @@ CREATE PROCEDURE datadog.enable_events_statements_consumers()
     SQL SECURITY DEFINER
 BEGIN
     UPDATE performance_schema.setup_consumers SET enabled='YES' WHERE name LIKE 'events_statements_%';
+    UPDATE performance_schema.setup_consumers SET enabled='YES' WHERE name = 'events_waits_current';
 END $$
 DELIMITER ;
 GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog@'%';
@@ -277,6 +280,9 @@ In addition to telemetry collected from the database by the Agent, you can also 
 ## Validate
 
 [Run the Agent's status subcommand][10] and look for `mysql` under the Checks section. Or visit the [Databases][11] page to get started!
+
+## Example Agent Configurations
+{{% dbm-mysql-agent-config-examples %}}
 
 ## Troubleshooting
 

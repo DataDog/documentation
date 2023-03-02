@@ -1,56 +1,80 @@
 ---
+app_id: pgbouncer
+app_uuid: 8aabdf7d-2d07-4d77-a76e-0ade64d8e70f
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     pgbouncer: assets/dashboards/pgbouncer_dashboard.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: pgbouncer.pools.sv_idle
+      metadata_path: metadata.csv
+      prefix: pgbouncer.
+    process_signatures:
+    - pgbouncer
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: PGBouncer
   logs:
     source: pgbouncer
-  metrics_metadata: metadata.csv
-  monitors: {}
   saved_views:
     error_warning_status: assets/saved_views/error_warning_status.json
     instance_overview: assets/saved_views/instance_overview.json
     pgbouncer_processes: assets/saved_views/pgbouncer_processes.json
     user_overview: assets/saved_views/user_overview.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-  - data store
-  - log collection
-  - autodiscovery
-creates_events: false
-ddtype: check
+- data store
+- log collection
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/pgbouncer/README.md'
-display_name: PGBouncer
+- https://github.com/DataDog/integrations-core/blob/master/pgbouncer/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: pgbouncer
-guid: 51386802-4502-4991-b592-27eff1ca111c
 integration_id: pgbouncer
 integration_title: PGBouncer
+integration_version: 4.3.1
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: pgbouncer.
-metric_to_check: pgbouncer.pools.sv_idle
+manifest_version: 2.0.0
 name: pgbouncer
-process_signatures:
-  - pgbouncer
-public_title: Datadog-PGBouncer インテグレーション
+oauth: {}
+public_title: PGBouncer
 short_description: 接続プールメトリクスを追跡し、アプリケーションに出入りするトラフィックを監視
-support: コア
 supported_os:
-  - linux
-  - mac_os
+- linux
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Category::データストア
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: 接続プールメトリクスを追跡し、アプリケーションに出入りするトラフィックを監視
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: PGBouncer
 ---
+
+
+
 ## 概要
 
 PgBouncer チェックは、接続プールメトリクスを追跡し、アプリケーションに出入りするトラフィックの監視を可能にします。
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 PgBouncer チェックは [Datadog Agent][1] パッケージに含まれています。PgBouncer ノードに追加でインストールする必要はありません。
 
@@ -102,7 +126,7 @@ PgBouncer チェックは [Datadog Agent][1] パッケージに含まれてい�
      - database_url: "postgresql://datadog:<PASSWORD>@<HOSTNAME>:<PORT>/<DATABASE_URL>?sslmode=require"
    ```
 
-   **注**: PgBouncer のインスタンスに SSL サポートがない場合は、`sslmode=require` を `sslmode=allow` と置換してサーバーエラーを防ぎます。SSL サポートに関する詳細は、[Postgres ドキュメント][3]を参照してください。
+   **注**: PgBouncer のインスタンスに SSL サポートがない場合は、`sslmode=require` を `sslmode=allow` と置換してサーバーエラーを防ぎます。詳細は、[SSL サポート][3]の Postgres ドキュメントを参照してください。
 
 2. [Agent を再起動します][4]。
 
@@ -154,7 +178,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
 | パラメーター      | 値                                           |
 | -------------- | ----------------------------------------------- |
@@ -182,13 +206,13 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 PgBouncer チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "pgbouncer" >}}
 
-**pgbouncer.can_connect**:<br>
-Agent が PgBouncer に接続してメトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+
 
 
 [1]: https://app.datadoghq.com/account/settings#agent

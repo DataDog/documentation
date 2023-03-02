@@ -12,19 +12,15 @@ aliases:
 
 First, [uninstall Agent v7 from your system][1].
 
-Then, if you followed the instructions to [upgrade from v6 to v7][2], run the Agent installation command with the environment variable `DD_AGENT_MAJOR_VERSION=6` in order to downgrade your Agent from version 7 to version 6:
+Then, if you followed the instructions to [upgrade from v6 to v7][2], run the following Agent installation command in order to downgrade your Agent from version 7 to version 6:
 
-| Platform     | Command                                                                                                                                                                   |
-|--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Amazon Linux | `DD_AGENT_MAJOR_VERSION=6 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
-| CentOS       | `DD_AGENT_MAJOR_VERSION=6 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
-| Debian       | `DD_AGENT_MAJOR_VERSION=6 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
-| Fedora       | `DD_AGENT_MAJOR_VERSION=6 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
-| Red Hat      | `DD_AGENT_MAJOR_VERSION=6 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
-| Ubuntu       | `DD_AGENT_MAJOR_VERSION=6 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
-| SUSE         | `DD_AGENT_MAJOR_VERSION=6 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
+```shell
+DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent6.sh)"
+```
 
-[1]: /agent/faq/how-do-i-uninstall-the-agent/
+The command works on all supported versions of Amazon Linux, CentOS, Debian, Fedora, Red Hat, Ubuntu, and SUSE.
+
+[1]: /agent/guide/how-do-i-uninstall-the-agent/
 [2]: /agent/versions/upgrade_to_agent_v6/
 {{% /tab %}}
 {{% tab "Windows" %}}
@@ -37,7 +33,7 @@ Then, if you followed the instructions to [upgrade from v6 to v7][2], run the Ag
 
 **Note**: Links to all available versions of the Windows Installer are [provided in JSON format][4].
 
-[1]: /agent/faq/how-do-i-uninstall-the-agent/
+[1]: /agent/guide/how-do-i-uninstall-the-agent/
 [2]: https://ddagent-windows-stable.s3.amazonaws.com/datadog-agent-6-latest.amd64.msi
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://s3.amazonaws.com/ddagent-windows-stable/installers.json
@@ -52,7 +48,7 @@ Then, if you followed the instructions to [upgrade from v6 to v7][2], run the Ag
 DD_AGENT_MAJOR_VERSION=6 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_mac_os.sh)"
 ```
 
-[1]: /agent/faq/how-do-i-uninstall-the-agent/
+[1]: /agent/guide/how-do-i-uninstall-the-agent/
 [2]: /agent/versions/upgrade_to_agent_v6/
 {{% /tab %}}
 {{< /tabs >}}
@@ -134,7 +130,7 @@ This guide assumes you upgraded to the Agent v6 using the [upgrade guide][1]. If
 
     ```shell
     rm /etc/yum.repos.d/datadog-beta.repo
-    [ ! -f /etc/yum.repos.d/datadog.repo ] && echo -e '[datadog]\nname = Datadog, Inc.\nbaseurl = https://yum.datadoghq.com/rpm/x86_64/   \nenabled=1\ngpgcheck=1\nrepo_gpgcheck=1\npriority=1\ngpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public\n       https://keys.datadoghq.com/DATADOG_RPM_KEY.public\n       https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public\n       https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public' | sudo tee /etc/yum.repos.d/datadog.repo
+    [ ! -f /etc/yum.repos.d/datadog.repo ] && echo -e '[datadog]\nname = Datadog, Inc.\nbaseurl = https://yum.datadoghq.com/rpm/x86_64/   \nenabled=1\ngpgcheck=1\nrepo_gpgcheck=1\npriority=1\ngpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public\n       https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public\n       https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public' | sudo tee /etc/yum.repos.d/datadog.repo
     ```
 
     **Note**: due to a [bug in dnf][1], use `repo_gpgcheck=0` instead of `repo_gpgcheck=1` on RHEL/CentOS 8.1.

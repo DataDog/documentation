@@ -1,17 +1,14 @@
 ---
 title: Service Summary Widget
 kind: documentation
-description: "Displays the graphs of a chosen service in your screenboard."
+description: "Displays the graphs of a chosen service in a dashboard widget."
 widget_type: "trace_service"
 aliases:
     - /graphing/widgets/service_summary/
 further_reading:
-- link: "/dashboards/screenboards/"
-  tag: "Documentation"
-  text: "Screenboard"
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
-  text: "Building Dashboard using JSON"
+  text: "Building Dashboards using JSON"
 ---
 
 The service summary displays the graphs of a chosen [service][1] in your screenboard.
@@ -32,7 +29,7 @@ The service summary displays the graphs of a chosen [service][1] in your screenb
     * Latency
     * Breakdown
     * Distribution
-    * Resource
+    * Resource (**Note**: You need to select the large widget size to see this option.)
 4. Choose your display preference by selecting a timeframe and the number of column to display your graphs across.
 5. Enter a title for your graph.
 
@@ -48,7 +45,7 @@ The dedicated [widget JSON schema definition][4] for the service summary widget 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/visualization/service/
+[1]: /tracing/services/service_page/
 [2]: /tracing/send_traces/
 [3]: /api/v1/dashboards/
 [4]: /dashboards/graphing_json/widget_json/

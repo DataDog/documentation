@@ -1,22 +1,23 @@
 ---
-title: ログ収集のトラブルシューティングガイド
-kind: ガイド
 aliases:
-  - /ja/logs/faq/log-collection-troubleshooting-guide
+- /ja/logs/faq/log-collection-troubleshooting-guide
 further_reading:
-  - link: /logs/log_collection/
-    tag: Documentation
-    text: ログの収集方法
-  - link: /logs/explorer/
-    tag: Documentation
-    text: ログの調査方法
-  - link: /logs/faq/why-do-my-logs-not-have-the-expected-timestamp/
-    tag: FAQ
-    text: あるはずのタイムスタンプがログに含まれないのはなぜですか
-  - link: /logs/faq/why-do-my-logs-show-up-with-an-info-status-even-for-warnings-or-errors/
-    tag: FAQ
-    text: 警告またはエラーのログが Info ステータスで表示されるのはなぜですか
+- link: /logs/log_collection/
+  tag: Documentation
+  text: ログの収集方法
+- link: /logs/explorer/
+  tag: Documentation
+  text: ログの調査方法
+- link: /logs/guide//logs-not-showing-expected-timestamp/
+  tag: ガイド
+  text: あるはずのタイムスタンプがログに含まれないのはなぜですか
+- link: /logs/guide/logs-show-info-status-for-warnings-or-errors/
+  tag: ガイド
+  text: 警告またはエラーのログが Info ステータスで表示されるのはなぜですか
+kind: ガイド
+title: ログ収集のトラブルシューティングガイド
 ---
+
 `dd-agent` でログコレクターから[新しいログを Datadog に送信][1]する際に、よく障害となる問題がいくつかあります。新しいログを Datadog に送信する際に問題が発生した場合は、このページに挙げられたトラブルシューティングをお役立てください。それでも問題が解決しない場合は、[ Datadog サポート][2]までお問い合わせください。
 
 ## Agent を再起動します。
@@ -42,7 +43,7 @@ Datadog Agent は、ポート 10516 から TCP で Datadog にログを送信し
 
 ```yaml
 logs_config:
-  use_http: true
+  force_use_http: true
 ```
 
 詳細については、[HTTPS ログ転送セクション][4]をご参照ください。
@@ -57,41 +58,157 @@ Datadog Agent は、ログの収集 (ログの追跡またはリスニング) �
 
 ## ログファイル追跡のアクセス許可の問題
 
-`datadog-agent` はルートとして実行されません (一般的なベストプラクティスとしても、ルートとして実行することはお勧めしていません)。このため、(カスタムログまたはインテグレーションの) ログファイルを追跡するように `datadog-agent` を構成する場合は、追跡して収集するログファイルへの読み取りアクセス権を `datadog-agent` ユーザーが持つことを特に注意して確認する必要があります。
+Datadog Agent は、ルートとして実行されません (一般的なベストプラクティスとして、ルートとして実行することは推奨されません)。カスタムログやインテグレーション用のログファイルを追跡するように Agent を構成する場合、Agent のユーザーがログファイルへの正しいアクセス権を持っていることを確認するために、特別な注意を払う必要があります。
 
-そのような場合、[Agent のステータス][5] に次のようなエラーメッセージが表示されます。
+オペレーティングシステムごとのデフォルトの Agent ユーザー:
+| オペレーティングシステム | デフォルトの Agent ユーザー |
+| ---------------  | ------------------ |
+| Linux | `datadog-agent` |
+| MacOS | `datadog-agent` |
+| Windows | `ddagentuser` |
 
-```text
-==========
-Logs Agent
-==========
+Agent に正しい権限がない場合、[Agent のステータス][5]を確認すると、以下のエラーメッセージのいずれかが表示される場合があります。
+- The file does not exist. (ファイルが存在しません。)
+- Access is denied. (アクセスが拒否されました。)
+- Could not find any file matching pattern `<path/to/filename>`, check that all its subdirectories are executable. (パターン `<path/to/filename>` に一致するファイルが見つかりませんでした。そのサブディレクトリがすべて実行可能かどうか確認してください。)
 
-  test
-  ----
-    Type: file
-    Path: /var/log/application/error.log
-    Status: Error: file /var/log/application/error.log does not exist
-```
+エラーを修正するには、Datadog Agent ユーザーにログファイルおよびサブディレクトリへの読み取り、書き込み、実行権限を与えます。
 
-ファイルアクセス許可の詳細情報を取得するには、`namei` コマンドを実行します。
+{{< tabs >}}
+{{% tab "Linux と MacOS" %}}
+1. ファイルアクセス許可の詳細情報を取得するには、`namei` コマンドを実行します。
+   ```
+   > namei -m /path/to/log/file
+   ```
 
-```text
-> namei -m /var/log/application/error.log
-> f: /var/log/application/error.log
- drwxr-xr-x /
- drwxr-xr-x var
- drwxrwxr-x log
- drw-r--r-- application
- -rw-r----- error.log
-```
+   次の例では、Agent ユーザーは `application` ディレクトリに対する `execute` 権限、または `error.log` ファイルに対する読み取り権限を持っていません。
 
-この例の場合、`application` ディレクトリが実行可能ディレクトリではないため、Agent はファイルをリストできません。さらに、Agent には `error.log` ファイルに対する読み取りアクセス許可がありません。
-[chmod コマンド][6]を使用して、不足しているアクセス許可を追加してください。
+   ```
+   > namei -m /var/log/application/error.log
+   > f: /var/log/application/
+   drwxr-xr-x /
+   drwxr-xr-x var
+   drwxrwxr-x log
+   drw-r--r-- application
+   -rw-r----- error.log
+   ```
 
-{{< img src="logs/agent-log-permission-ok.png" alt="アクセス許可 OK"  style="width:70%;">}}
+1. ログフォルダとその子フォルダを読み取り可能にします。
 
-**注**: 読み取りアクセス許可を追加する際は、ログローテーション構成でそれらのアクセス許可が正しく設定されていることを確認してください。そうでない場合、次のログローテーションで、Datadog Agent が読み取りアクセス許可を失う可能性があります。
-Agent がファイルへの読み取りアクセス許可を持つようにするには、ログローテーション構成でそれらのファイルのアクセス許可を `644` に設定します。
+   ```bash
+   sudo chmod o+rx /path/to/logs
+   ```
+
+**注**: これらの権限は、ログローテーション構成で正しく設定されていることを確認してください。そうしないと、次のログローテーション時に、Datadog Agent の読み取り権限が失われる可能性があります。Agent がファイルへの読み取りアクセス権を持つように、ログローテーション構成で権限を `644` として設定します。
+
+{{< /tabs >}}
+
+{{% tab "Windows (cmd)" %}}
+1. ファイルの権限についてのより詳しい情報を得るには、ログフォルダ上で `icacls` コマンドを使用します。
+   ```
+   icacls path/to/logs/file /t
+   ```
+   `/t` フラグは、ファイルとサブフォルダに対して再帰的にコマンドを実行します。
+
+   以下の例では、`test` ディレクトリとその子ディレクトリは `ddagentuser` からはアクセスできないようになっています。
+
+   ```powershell
+   PS C:\Users\Administrator> icacls C:\test\ /t
+   C:\test\ NT AUTHORITY\SYSTEM:(OI)(CI)(F)
+          BUILTIN\Administrators:(OI)(CI)(F)
+          CREATOR OWNER:(OI)(CI)(IO)(F)
+
+   C:\test\file.log NT AUTHORITY\SYSTEM:(F)
+          BUILTIN\Administrators:(F)
+
+   C:\test\file2.log NT AUTHORITY\SYSTEM:(F)
+          BUILTIN\Administrators:(F)
+   ```
+
+1. `icacls` コマンドを使用して、`ddagentuser` に必要な権限を与えます (引用符を含めてください)。
+   ```
+   icacls "path\to\folder" /grant "ddagentuser:(OI)(CI)(RX)" /t
+   ```
+
+   アプリケーションがログローテーションを使用する場合、`(OI)` と `(CI)` の継承権は、今後ディレクトリに作成されるログファイルが親フォルダの権限を継承することを確実にします。
+
+1. もう一度 `icacls` を実行して、`ddagentuser` が正しい権限を持っていることを確認します。
+   ```powershell
+   icacls path/to/logs/file /t
+   ```
+
+   以下の例では、ファイルの権限に `ddagentuser` が記載されています。
+   ```powershell
+   PS C:\Users\Administrator> icacls C:\test\ /t
+   C:\test\ EC2-ABCD\ddagentuser:(OI)(CI)(RX)
+          NT AUTHORITY\SYSTEM:(OI)(CI)(F)
+          BUILTIN\Administrators:(OI)(CI)(F)
+          CREATOR OWNER:(OI)(CI)(IO)(F)
+
+   C:\test\file.log NT AUTHORITY\SYSTEM:(F)
+                  BUILTIN\Administrators:(F)
+                  EC2-ABCD\ddagentuser:(RX)
+
+   C:\test\file2.log NT AUTHORITY\SYSTEM:(F)
+                  BUILTIN\Administrators:(F)
+                  EC2-ABCD\ddagentuser:(RX)
+   Successfully processed 3 files; Failed processing 0 files
+   ```
+
+1. Agent サービスを再起動し、ステータスを確認し、問題が解決しているかどうかを確認します。
+
+   ```powershell
+   & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" restart-service
+   & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" status
+   ```
+
+{{< /tabs >}}
+
+{{% tab "Windows (PowerShell)" %}}
+
+1. ファイルの ACL 権限を取得します。
+   ```powershell
+   PS C:\Users\Administrator> get-acl C:\app\logs | fl
+
+   Path   : Microsoft.PowerShell.Core\FileSystem::C:\app\logs
+   Owner  : BUILTIN\Administrators
+   Group  : EC2-ABCD\None
+   Access : NT AUTHORITY\SYSTEM Allow  FullControl
+            BUILTIN\Administrators Allow  FullControl
+   ...
+   ```
+   この例では、`application` ディレクトリは Agent によって実行可能ではありません。
+
+1. この PowerShell スクリプトを実行し、`ddagentuser` に読み取り権限と実行権限を与えます。
+   ```powershell
+   $acl = Get-Acl <path\to\logs\folder>
+   $AccessRule = New-Object System.Security.AccessControl.FileSystemAccessRule("ddagentuser","ReadAndExecute","Allow")
+   $acl.SetAccessRule($AccessRule)
+   $acl | Set-Acl <path\to\logs\folder>
+   ```
+
+1. ファイルの ACL 権限を再度取得し、`ddagentuser` が正しい権限を持っているかどうかを確認します。
+   ```powershell
+   PS C:\Users\Administrator> get-acl C:\app\logs | fl
+   Path   : Microsoft.PowerShell.Core\FileSystem::C:\app\logs
+   Owner  : BUILTIN\Administrators
+   Group  : EC2-ABCD\None
+   Access : EC2-ABCD\ddagentuser Allow  ReadAndExecute, Synchronize
+            NT AUTHORITY\SYSTEM Allow  FullControl
+            BUILTIN\Administrators Allow  FullControl
+   ...
+   ```
+
+1. Agent サービスを再起動し、ステータスを確認し、問題が解決しているかどうかを確認します。
+   ```powershell
+   & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" restart-service
+   & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" status
+   ```
+
+
+{{< /tabs >}}
+
+{{< /tabs >}}
 
 ## アクセス許可の問題と Journald
 
@@ -140,7 +257,6 @@ sudo cat /var/log/datadog/agent.log | grep ERROR
 [3]: /ja/agent/guide/agent-commands/#restart-the-agent
 [4]: /ja/agent/logs/log_transport?tab=https#enforce-a-specific-transport
 [5]: /ja/agent/guide/agent-commands/#agent-status-and-information
-[6]: https://en.wikipedia.org/wiki/Chmod
 [7]: /ja/integrations/journald/
 [8]: https://codebeautify.org/yaml-validator
 [9]: /ja/logs/guide/docker-logs-collection-troubleshooting-guide/

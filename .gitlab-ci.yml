@@ -10,14 +10,24 @@ variables:
   ARTIFACT_RESOURCE: "public"
   LIVE_DOMAIN: "https://docs.datadoghq.com/"
   PREVIEW_DOMAIN: "https://docs-staging.datadoghq.com/"
+  KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: documentation
+  KUBERNETES_CPU_REQUEST: 8
+  KUBERNETES_MEMORY_REQUEST: 16Gi
+  KUBERNETES_MEMORY_LIMIT: 16Gi
   # datadog-ci
   DATADOG_SITE: 'datadoghq.com'
   DATADOG_SUBDOMAIN: 'dd-corpsite'
   FORCE_COLOR: '1'
   GIT_DEPTH: 50
+  DEFAULT_TAGS: "environment:${CI_ENVIRONMENT_NAME},job_name:${CI_JOB_NAME},job_stage:${CI_JOB_STAGE},project_name:${CI_PROJECT_NAME},docker_image:${CI_REGISTRY_IMAGE},pipeline_id:${CI_PIPELINE_ID},service:gitlab"
+
   # gitlab checkout
   DOCS_REPO_NAME: documentation
   REPO_URL: "https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.ddbuild.io/DataDog/${DOCS_REPO_NAME}.git"
+  # yarn/node cache dirs
+  YARN_CACHE_FOLDER: "${CI_PROJECT_DIR}/.yarn/cache/"
+  PREVIEW_PATTERN: '/.+?\/[a-zA-Z0-9_-]+/'
+
 
 # ================== copy scripts =============== #
 before_script:
@@ -26,52 +36,77 @@ before_script:
   - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers so they are available in the container
   - "[ -f /etc/profile ] && source /etc/profile" # for golang on path
   - mkdir -p logs
+  # set common env variables for this shell
+  - export GITHUB_TOKEN=$(get_secret 'github_token')
+  - export DATADOG_API_KEY=$(get_secret 'dd-api-key')
+  - export DATADOG_APP_KEY=$(get_secret 'dd-app-key')
+  - export BRANCH=${CI_COMMIT_REF_NAME}
+  - git config --global url."https://${GITHUB_TOKEN}@github.com/DataDog".insteadOf https://github.com/DataDog
+  - type build_dogrc &>/dev/null && build_dogrc || echo "build_dogrc not found." # create .dogrc for metrics, events submission
 
-cache: &cache
-  key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR
-  paths:
-    - node_modules/
-    - tmp/.htmltest/
 
+# set policy for the common case
+# yarn cache is used in a lot but only built during build job so lets default to pull and explicit push in build job
+.yarn_cache: &yarn_cache
+  - key:
+      files:
+        - yarn.lock
+    paths:
+      - package.json
+      - yarn.lock
+      - ${YARN_CACHE_FOLDER}
+    policy: pull
+
+.yarn_cache_pull_push: &yarn_cache_pull_push
+  - key:
+      files:
+        - yarn.lock
+    paths:
+      - package.json
+      - yarn.lock
+      - ${YARN_CACHE_FOLDER}
+    policy: pull-push
+
+# ==================== rules ==================== #
+.preview_rules: &preview_rules
+  rules:
+    - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_BRANCH =~ $PREVIEW_PATTERN
+      when: on_success
+
+.preview_manual_rules: &preview_manual_rules
+  rules:
+    - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_BRANCH =~ $PREVIEW_PATTERN
+      when: manual
+
+.live_rules: &live_rules
+  rules:
+    - if: $CI_COMMIT_REF_NAME == "master"
+      when: on_success
+
+.live_schedule_rules: &live_schedule_rules
+  rules:
+    - if: $CI_COMMIT_REF_NAME == "master" && $CI_PIPELINE_SOURCE == "schedule"
+      when: on_success
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:master
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:webops-site-build-13719083
   tags:
-    - "runner:main"
-  except:
-    - tags
-  only:
-    - branches
+    - "arch:amd64"
+  rules:
+    - if: $CI_COMMIT_TAG != null # Variable exists on tag workflows
+      when: never
+    - if: $CI_COMMIT_BRANCH != null # Variable doesnt exists on merge request pipelines or tag pipelines.
+      when: on_success
 
-# ================== Install Node Dependencies ================== #
-install_dependencies:
-  <<: *base_template
-  stage: bootstrap
-  cache:
-    <<: *cache
-  variables:
-    GIT_STRATEGY: none
-  script:
-    - git version
-    - git clone --branch $CI_COMMIT_REF_NAME --depth 1 --filter=blob:none --no-checkout $REPO_URL sparse-docs
-    - cd sparse-docs && git sparse-checkout init --cone && git sparse-checkout set local && git checkout $CI_COMMIT_REF_NAME && cd ..
-    - mkdir -p ./local/bin/sh && cp --remove-destination ./sparse-docs/local/bin/sh/preinstall.sh ./local/bin/sh/preinstall.sh
-    - cp --remove-destination ./sparse-docs/package.json ./package.json
-    - cp --remove-destination ./sparse-docs/yarn.lock ./yarn.lock
-    - yarn install --link-duplicates --frozen-lockfile --cache-folder .yarn
-    - rm -rf ./sparse-docs # cleanup runner
-  only:
-    changes:
-      - yarn.lock
 
 # ================== preview ================== #
 # If the branch has a name of <slack-user>/<feature-name> then ci builds a preview site
 build_preview:
   <<: *base_template
+  <<: *preview_rules
   stage: build
   cache:
-    <<: *cache
-    policy: pull
+    - *yarn_cache_pull_push
   environment: "preview"
   variables:
     URL: ${PREVIEW_DOMAIN}
@@ -80,18 +115,16 @@ build_preview:
     CONFIGURATION_FILE: "./local/bin/py/build/configurations/pull_config_preview.yaml"
     LOCAL: "False"
   script:
-    - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
+    - dog --config "$HOME/.dogrc" event post "documentation build ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" --alert_type "info" --tags="${DEFAULT_TAGS}"
     - touch Makefile.config
-    - make BRANCH=${CI_COMMIT_REF_NAME} examples
-    - sync_integration_descriptions
-    - ./local/bin/py/build/pull_rbac.py $(get_secret 'dd_api_key') $(get_secret 'dd-app-key')
-    #- sync_integration_descriptions_cached
-    - placehold_translations
-    - update_preview_baseurl
-    - yarn run build:preview
+    - make dependencies
+    - make config
+    - ./node_modules/.bin/jest --testPathPattern=assets/scripts/tests/
+    - yarn run prebuild
+    - build_site
     # remove service_checks json as we don't need to s3 push that..
     - rm -rf data/service_checks
-    - in-isolation deploy_preview > logs/deploy.txt
+    - in-isolation deploy_site > logs/deploy.txt
     # remove static images so we can skip from artifact passed in gitlab
     - remove_static_from_repo
     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_REF_NAME}> is ready for preview. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}| checks running>." "#31b834"
@@ -103,49 +136,11 @@ build_preview:
       - .vale.ini
       - .htmltest.yml
       - ./logs
-  only:
-    - /.+?\/[a-zA-Z0-9_-]+/
   interruptible: true
-
-# build_preview_legacy:
-#   <<: *base_template
-#   stage: build
-#   environment: "preview"
-#   variables:
-#     URL: ${PREVIEW_DOMAIN}
-#     CONFIG: ${PREVIEW_CONFIG}
-#     MESSAGE: ":gift_heart: Your preview site is available!\nNow running tests..."
-#     CONFIGURATION_FILE: "./local/bin/py/build/configurations/pull_config_preview.yaml"
-#     LOCAL: "False"
-#   script:
-#     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
-#     - version_static_assets
-#     - touch Makefile.config
-#     - make clean-examples
-#     - make examples
-#     - sync_integration_descriptions
-#     #- sync_integration_descriptions_cached
-#     - placehold_translations
-#     - update_preview_baseurl
-#     - build_hugo_site_new
-#     - in-isolation deploy_preview
-#     - collect_static_assets
-#     # remove service_checks json as we don't need to s3 push that..
-#     - rm -rf data/service_checks
-#     - push_site_to_s3
-#     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_REF_NAME}> is ready for preview. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}| checks running>." "#31b834"
-#     #- remove_static_from_repo
-#     #- create_artifact
-#     #- create_artifact_untracked
-#   artifacts:
-#     paths:
-#       - ${ARTIFACT_RESOURCE}
-#       - ./integrations_data
-#   only:
-#     - /.+?\/[a-zA-Z0-9_-]+/
 
 link_checks_preview:
   <<: *base_template
+  <<: *preview_rules
   stage: post-deploy
   cache: {}
   environment: "preview"
@@ -153,7 +148,7 @@ link_checks_preview:
     URL: ${PREVIEW_DOMAIN}
     GIT_STRATEGY: none
   script:
-    - post_dd_event "documentation htmltest ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
+    - dog --config "$HOME/.dogrc" event post "documentation htmltest ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" --alert_type "info" --tags="${DEFAULT_TAGS}"
     - find ./public -name "*.html" -exec sed -i -e "s#https://docs-staging.datadoghq.com/$CI_COMMIT_REF_NAME/#/#g" {} +
     - find ./public -name "*.html" -exec sed -i -e "s#/api/v1/#/api/latest/#g" {} +
     - find ./public -name "*.html" -exec sed -i -e "s#/api/v2/#/api/latest/#g" {} +
@@ -162,99 +157,91 @@ link_checks_preview:
     - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers
     - RESULT="⛈ htmltest result; the following issues were found:\n$(tail -n +2 ./tmp/.htmltest/htmltest.log)\n--------------------" # output all but first line
     - if grep -q "not exist" tmp/.htmltest/htmltest.log; then notify_slack "${RESULT}" "#31b834"; fi
-  only:
-    - /.+?\/[a-zA-Z0-9_-]+/
   artifacts:
     paths:
       - ./tmp/.htmltest
   interruptible: true
 
 missing_tms_preview:
-  image:
-    name: 486234852809.dkr.ecr.us-east-1.amazonaws.com/vale:v4036929-ee9929a-2.9.1
-    entrypoint: [ "" ]
-  tags: ["runner:main"]
+  <<: *base_template
+  <<: *preview_rules
   stage: post-deploy
-  cache: {}
   environment: "preview"
+  allow_failure: true
+  cache: {}
   variables:
     GIT_STRATEGY: none
   dependencies:
     - build_preview
   script:
-    # remove dirs we don't need to scan
-    - rm -rf ./public/fr ./public/ja ./public/api/v1/ ./public/api/v2/
-    - GOMAXPROCS=$(nproc --all) vale --glob='*.{html}' ./public
-  only:
-    - /.+?\/[a-zA-Z0-9_-]+/
+    - check_missing_tms
   interruptible: true
 
 index_algolia_preview:
+  <<: *preview_manual_rules
   image:
-    name: 486234852809.dkr.ecr.us-east-1.amazonaws.com/docsearch-scraper:v2978988-4692ed5-0.8
+    name: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:docsearch-scraper-latest
     entrypoint: [""] # force an empty entrypoint (see https://gitlab.com/gitlab-org/gitlab-runner/issues/2692)
-  tags: ["runner:main"]
+  tags: ["arch:amd64"]
   stage: post-deploy
-  cache:
-    <<: *cache
-    policy: pull
+  allow_failure: true
+  cache: []
   environment: "preview"
-  timeout: 1h 30m
+  timeout: 2h 30m
+  before_script:
+    - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers
   script:
     - |-
-        echo APPLICATION_ID=$(get_secret 'ci.documentation.algolia_docsearch_application_id') > .env
-        echo API_KEY=$(get_secret 'ci.documentation.algolia_docsearch_api_key') >> .env
-        export DISPLAY=:99
-        Xvfb :99 -ac &
-        echo "n" | docsearch run ./local/etc/algolia/docs_datadoghq_preview.json
+      echo APPLICATION_ID=$(get_secret 'ci.documentation.algolia_preview_application_id') > .env
+      echo API_KEY=$(get_secret 'ci.documentation.algolia_preview_api_key') >> .env
+      export DISPLAY=:99
+      Xvfb :99 -ac &
+      echo "n" | docsearch run ./local/etc/algolia/docs_datadoghq_preview.json
   dependencies:
     - build_preview
-  when: manual
-  only:
-    - /.+?\/[a-zA-Z0-9_-]+/
   interruptible: true
 
 replica_algolia_preview:
   <<: *base_template
+  <<: *preview_manual_rules
+  allow_failure: true
   stage: post-deploy
   cache:
-    <<: *cache
-    policy: pull
+    - *yarn_cache
   environment: "preview"
   script:
-    - ALGOLIA_APP_ID=$(get_secret 'algolia_docsearch_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_docsearch_api_key') yarn run algolia:config
+    - yarn install --immutable
+    - ALGOLIA_APP_ID=$(get_secret 'algolia_preview_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_preview_api_key') yarn run algolia:config
   dependencies:
     - build_preview
-  when: manual
-  only:
-    - /.+?\/[a-zA-Z0-9_-]+/
   interruptible: true
 
 sourcemaps_preview:
   <<: *base_template
+  <<: *preview_rules
   stage: post-deploy
   cache:
-    <<: *cache
-    policy: pull
+    - *yarn_cache
   environment: "preview"
   script:
-    - yarn run build:webpack:preview -- --devtool source-map
-    - DATADOG_API_KEY="$(get_secret 'dd_synthetic_api_key_prod')" ./node_modules/.bin/datadog-ci sourcemaps upload ./public/static --service docs --minified-path-prefix "https://docs-staging.datadoghq.com/${CI_COMMIT_REF_NAME}/static/" --release-version "${CI_COMMIT_SHORT_SHA}"
+    - yarn install --immutable
+    # Rename any js.map files to include SHA if correlating JS file is fingerprinted.  Hugo's asset build system seems to lose the fingerprint value when generating source maps.
+    - find ./public -type f -name "*.*.js" -exec bash -c 'x={}; hash=$(basename $x | cut -d '.' -f 2); map=${x/$hash./}.map; mv $map ${map/.js/.$hash.js}' \;
+    - DATADOG_API_KEY="$(get_secret 'dd-api-key')" ./node_modules/.bin/datadog-ci sourcemaps upload ./public/static --service docs --minified-path-prefix "https://docs-staging.datadoghq.com/${CI_COMMIT_REF_NAME}/static/" --release-version "${CI_COMMIT_SHORT_SHA}"
   dependencies:
     - build_preview
   allow_failure: true
-  only:
-    - /.+?\/[a-zA-Z0-9_-]+/
   interruptible: true
 
 # ================== live ================== #
 build_live:
   <<: *base_template
+  <<: *live_rules
   stage: build
   cache:
-    <<: *cache
-    policy: pull
+    - *yarn_cache_pull_push
   environment: "live"
+  retry: 1
   variables:
     CONFIG: ${LIVE_CONFIG}
     URL: ${LIVE_DOMAIN}
@@ -262,19 +249,17 @@ build_live:
     CONFIGURATION_FILE: "./local/bin/py/build/configurations/pull_config.yaml"
     LOCAL: "False"
   script:
-    - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
+    - dog --config "$HOME/.dogrc" event post "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" --alert_type "info" --tags="${DEFAULT_TAGS}"
     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_SHA:0:8}> sent to gitlab for production deployment. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}|details>" "#FFD700"
     - touch Makefile.config
     - make clean-examples
-    - make examples
-    - sync_integration_descriptions
-    - sync_integration_metrics
-    - ./local/bin/py/build/pull_rbac.py $(get_secret 'dd_api_key') $(get_secret 'dd-app-key')
-    - placehold_translations
-    - yarn run build:live
-    - in-isolation deploy_live
-    - create_artifact
-    - create_artifact_untracked
+    - make dependencies
+    - yarn run prebuild
+    - build_site
+    - in-isolation deploy_site
+    - in-isolation create_artifact
+    - in-isolation create_artifact_ignored
+    - in-isolation create_artifact_cached
     - remove_static_from_repo
   artifacts:
     when: on_success
@@ -284,26 +269,10 @@ build_live:
       - content/en
       - .htmltest.yml
     expire_in: 1 week
-  only:
-    - master
-
-
-index_internal_doc:
-  stage: post-deploy
-  cache: {}
-  environment: "live"
-  image: registry.ddbuild.io/datadoc/webapp:prod-released
-  dependencies:
-    - build_live
-  only:
-    - master
-  except: [ tags, schedules ]
-  tags: ["runner:main"]
-  script:
-    - INDEXING_SERVICE=https://datadoc.ddbuild.io index-repository hugo https://docs.datadoghq.com/ "Datadog" "Public Documentation" --source_folder=content/en --tags="team:Documentation,source:hugo-website,visibility:public,github-repository:documentation"
 
 test_live_link_checks:
   <<: *base_template
+  <<: *live_rules
   stage: post-deploy
   cache: {}
   environment: "live"
@@ -311,7 +280,7 @@ test_live_link_checks:
     URL: ${LIVE_DOMAIN}
     GIT_STRATEGY: none
   script:
-    - post_dd_event "documentation htmltest ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
+    - dog --config "$HOME/.dogrc" event post "documentation htmltest ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" --alert_type "info" --tags="${DEFAULT_TAGS}"
     - find ./public -name "*.html" -exec sed -i -e "s#https://docs.datadoghq.com/#/#g" {} +
     - find ./public -name "*.html" -exec sed -i -e "s#/api/v1/#/api/latest/#g" {} +
     - find ./public -name "*.html" -exec sed -i -e "s#/api/v2/#/api/latest/#g" {} +
@@ -320,23 +289,21 @@ test_live_link_checks:
     - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers
     - RESULT="⛈ htmltest result; the following issues were found:\n$(tail -n +2 ./tmp/.htmltest/htmltest.log)\n--------------------" # output all but first line
     - if grep -q "not exist" tmp/.htmltest/htmltest.log; then notify_slack "${RESULT}" "#31b834"; fi
-  only:
-    - master
   artifacts:
     paths:
       - ./tmp/.htmltest
 
 index_algolia:
+  <<: *live_schedule_rules
   image:
-    name: 486234852809.dkr.ecr.us-east-1.amazonaws.com/docsearch-scraper:v2978988-4692ed5-0.8
+    name: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:docsearch-scraper-latest
     entrypoint: [ "" ] # force an empty entrypoint (see https://gitlab.com/gitlab-org/gitlab-runner/issues/2692)
-  tags: ["runner:main"]
+  tags: ["arch:amd64"]
+  before_script:
+    - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers
   stage: post-deploy
-  cache:
-    <<: *cache
-    policy: pull
   environment: "live"
-  timeout: 1h 30m
+  timeout: 2h 30m
   script:
     - |-
       echo APPLICATION_ID=$(get_secret 'ci.documentation.algolia_docsearch_application_id') > .env
@@ -346,90 +313,64 @@ index_algolia:
       echo "n" | docsearch run ./local/etc/algolia/docs_datadoghq.json
   dependencies:
     - build_live
-  only:
-    - schedules
 
 replica_algolia:
   <<: *base_template
+  <<: *live_schedule_rules
   stage: post-deploy
   cache:
-    <<: *cache
-    policy: pull
+    - *yarn_cache
   environment: "live"
   script:
+    - yarn install --immutable
     - ALGOLIA_APP_ID=$(get_secret 'algolia_docsearch_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_docsearch_api_key') yarn run algolia:config
   dependencies:
     - build_live
-  only:
-    - schedules
 
 sourcemaps_live:
   <<: *base_template
+  <<: *live_rules
   stage: post-deploy
   cache:
-    <<: *cache
-    policy: pull
+    - *yarn_cache
   environment: "live"
   script:
-    - yarn run build:webpack -- --devtool source-map
-    - DATADOG_API_KEY="$(get_secret 'dd_synthetic_api_key_prod')" ./node_modules/.bin/datadog-ci sourcemaps upload ./public/static --service docs --minified-path-prefix "https://docs.datadoghq.com/static/" --release-version "${CI_COMMIT_SHORT_SHA}"
+    - yarn install --immutable
+    # Rename any js.map files to include SHA if correlating JS file is fingerprinted. Hugo's asset build system seems to lose the fingerprint value when generating source maps.
+    - find ./public -type f -name "*.*.js" -exec bash -c 'x={}; hash=$(basename $x | cut -d '.' -f 2); map=${x/$hash./}.map; mv $map ${map/.js/.$hash.js}' \;
+    - DATADOG_API_KEY="$(get_secret 'dd-api-key')" ./node_modules/.bin/datadog-ci sourcemaps upload ./public/static --service docs --minified-path-prefix "https://docs.datadoghq.com/static/" --release-version "${CI_COMMIT_SHORT_SHA}"
   dependencies:
     - build_live
   allow_failure: true
-  only:
-    - master
 
 evaluate_missing_metrics:
   <<: *base_template
   stage: post-deploy
+  allow_failure: true
   cache: {}
   environment: "live"
   script:
-    - chmod +x ./local/bin/py/missing_metrics.py && ./local/bin/py/missing_metrics.py -k $(get_secret 'dd-demo-api-key') -p $(get_secret 'dd-demo-app-key') -a $(get_secret 'dd_api_key') -b $(get_secret 'dd-app-key')
-  when: manual
-  only:
-    - master
+    - chmod +x ./local/bin/py/missing_metrics.py && ./local/bin/py/missing_metrics.py -k $(get_secret 'dd-demo-api-key') -p $(get_secret 'dd-demo-app-key') -a $(get_secret 'dd-api-key') -b $(get_secret 'dd-app-key')
+  rules:
+    - if: $CI_COMMIT_REF_NAME == "master"
+      when: manual
 
-
-manage_translations:on-schedule:
+# Uploads git ignored source (EN) files to Transifex as part of the nightly build.
+# The translation syncing pipeline is triggered by github webhook, but these files are not in git.
+# This allows some dynamically built content (such as integrations) to be localized automatically.
+manage_ignored_translations:on-schedule:
   <<: *base_template
+  <<: *live_schedule_rules
   stage: post-deploy
   cache: {}
   environment: "live"
-  variables:
-    URL: ${PREVIEW_DOMAIN}
-    CONFIG: ${PREVIEW_CONFIG}
   script:
-    - |-
-      if [[ $(date +%u) -lt 6 ]]; then
-        nodenv shell 14.16.0
-        [ -d ./node_modules ] && rm -rf ./node_modules
-        yarn add https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/translate-v1.0.42.tgz
-        DATADOG_API_KEY="$(get_secret 'dd_synthetic_api_key_prod')" manage_translations "${APIKEY}";
-      fi
-      chmod +x ./local/bin/py/translate_metrics.py && ./local/bin/py/translate_metrics.py -k "${APIKEY}" -a $(get_secret 'dd_api_key')
-  artifacts:
-    paths:
-      - translate-debug.log
-  only:
-    - schedules
-
-
-
-#push_translations:
-#  <<: *base_template
-#  stage: post-deploy
-#  environment: "live"
-#  script:
-#    - push_changed_translations
-#  only:
-#    - master
-#  except:
-#    - triggers
-#    - schedules
+    - echo "Downloading ignored translation source files..."
+    - manage_ignored_translation_files
 
 test_missing_tms_live:
   <<: *base_template
+  <<: *live_rules
   stage: post-deploy
   cache: {}
   environment: "live"
@@ -439,57 +380,41 @@ test_missing_tms_live:
     - build_live
   script:
     - check_missing_tms
-  only:
-    - master
 
 test_pa11y:
   <<: *base_template
+  <<: *live_schedule_rules
   stage: post-deploy
   cache:
-    <<: *cache
-    policy: pull
+    - *yarn_cache
   environment: "live"
   dependencies:
     - build_live
   script:
-    - node ./local/bin/js/pa11y.js --env live --dd_api_key $(get_secret 'dd_api_key')
-  only:
-    - schedules
-
-#rollback_live:
-#  <<: *base_template
-#  stage: cleanup
-#  environment: "live"
-#  when: on_failure
-#  script:
-#    - rollback_env
-#  only:
-#    - master
+    - yarn install --immutable
+    - node ./local/bin/js/pa11y.js --env live --dd_api_key $(get_secret 'dd-api-key')
 
 tag_successful_live_pipeline:
   <<: *base_template
+  <<: *live_rules
   stage: cleanup
   cache: {}
   environment: "live"
   when: on_success
   script:
     - tag_successful_pipeline
-  only:
-    - master
 
 post_success_event_to_dd_live:
   <<: *base_template
+  <<: *live_rules
   stage: cleanup
   cache: {}
   environment: "live"
   variables:
     GIT_STRATEGY: none
-  when: on_success
   script:
-    - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} succeeded" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "success"
-    - post_dd_metric "documentation.pipeline.completed" "1" "" "success"
-  only:
-    - master
+    - dog --config "$HOME/.dogrc" event post "documentation deploy ${CI_COMMIT_REF_NAME} succeeded" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" --alert_type "info" --tags="${DEFAULT_TAGS}"
+    - dog --config "$HOME/.dogrc" metric post "documentation.pipeline.completed" "1" --tags="${DEFAULT_TAGS},step_status:success"
 
 post_failure_event_to_dd_live:
   <<: *base_template
@@ -498,9 +423,9 @@ post_failure_event_to_dd_live:
   environment: "live"
   variables:
     GIT_STRATEGY: none
-  when: on_failure
   script:
-    - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} failed" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "error"
-    - post_dd_metric "documentation.pipeline.completed" "0" "" "failure"
-  only:
-    - master
+    - dog --config "$HOME/.dogrc" event post "documentation deploy ${CI_COMMIT_REF_NAME} failed" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" --alert_type "error" --tags="${DEFAULT_TAGS},step_status:failure"
+    - dog --config "$HOME/.dogrc" metric post "documentation.pipeline.completed" "0" --tags="${DEFAULT_TAGS},step_status:failure"
+  rules:
+    - if: $CI_COMMIT_REF_NAME == "master"
+      when: on_failure

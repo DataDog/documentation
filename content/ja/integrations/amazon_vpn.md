@@ -1,9 +1,8 @@
 ---
 categories:
-  - cloud
-  - aws
-  - ログの収集
-ddtype: crawler
+- cloud
+- aws
+- ログの収集
 dependencies: []
 description: Amazon VPN のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_vpn/
@@ -21,6 +20,7 @@ public_title: Datadog-Amazon VPN インテグレーション
 short_description: Amazon VPN のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Amazon Virtual Private Network (VPN) を使用すると、ユーザーネットワークまたはデバイスから AWS グローバルネットワークへの安全なプライベートトンネルを確立できます。
@@ -35,7 +35,7 @@ Amazon Virtual Private Network (VPN) を使用すると、ユーザーネット�
 
 ### メトリクスの収集
 
-1. [AWS インテグレーションタイル][2]のメトリクス収集で、`VPN` をオンにします。
+1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `VPN` が有効になっていることを確認します。
 2. [Datadog - Amazon VPN インテグレーション][3]をインストールします。
 
 ### ログの収集
@@ -73,8 +73,8 @@ Amazon VPN インテグレーションには、サービスのチェック機能
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[3]: https://app.datadoghq.com/account/settings#integrations/amazon-vpn
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
+[3]: https://app.datadoghq.com/integrations/amazon-vpn
 [4]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
 [5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
 [6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group

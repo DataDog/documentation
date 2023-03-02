@@ -77,6 +77,10 @@ public class BackupLedger {
     for (Transaction transaction : transactions) {
       // Use `GlobalTracer` to trace blocks of inline code
       Tracer tracer = GlobalTracer.get();
+      // Note: The scope in the try with resource block below
+      // will be automatically closed at the end of the code block.
+      // If you do not use a try with resource statement, you need
+      // to call scope.close().
       try (Scope scope = tracer.buildSpan("BackupLedger.persist").startActive(true)) {
         // Add custom metadata to the span
         scope.span().setTag("transaction.id", transaction.getId());
@@ -149,10 +153,10 @@ require 'ddtrace'
 class BackupLedger
 
   def write(transactions)
-    # Use global `Datadog.tracer.trace` to trace blocks of inline code
-    Datadog.tracer.trace('BackupLedger.write') do |method_span|
+    # Use global `Datadog::Tracing.trace` to trace blocks of inline code
+    Datadog::Tracing.trace('BackupLedger.write') do |method_span|
       transactions.each do |transaction|
-        Datadog.tracer.trace('BackupLedger.persist') do |span|
+        Datadog::Tracing.trace('BackupLedger.persist') do |span|
           # Add custom metadata to the "persist_transaction" span
           span.set_tag('transaction.id', transaction.id)
           ledger[transaction.id] = transaction
@@ -365,5 +369,5 @@ You've now successfully added custom spans to your codebase, making them availab
 
 [1]: https://app.datadoghq.com/apm/services
 [2]: https://bojanv91.github.io/posts/2018/06/select-n-1-problem
-[3]: https://app.datadoghq.com/apm/search/analytics
+[3]: https://app.datadoghq.com/apm/analytics
 [4]: /tracing/guide/add_span_md_and_graph_it/

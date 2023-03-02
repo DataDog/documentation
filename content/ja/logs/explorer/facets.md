@@ -1,24 +1,25 @@
 ---
-title: ログファセット
-kind: documentation
-description: ログファセットとファセットパネル
 aliases:
-  - /ja/logs/facets
+- /ja/logs/facets
+description: ログファセットとファセットパネル
 further_reading:
-  - link: logs/explorer/analytics
-    tag: ドキュメント
-    text: ログ分析の実行
-  - link: logs/explorer/patterns
-    tag: ドキュメント
-    text: ログ内のパターン検出
-  - link: logs/processing
-    tag: ドキュメント
-    text: ログの処理方法
-  - link: logs/explorer/saved_views
-    tag: ドキュメント
-    text: ログエクスプローラーの自動構成
+- link: logs/explorer/analytics
+  tag: ドキュメント
+  text: ログ分析の実行
+- link: logs/explorer/patterns
+  tag: ドキュメント
+  text: ログ内のパターン検出
+- link: /logs/log_configuration/processors
+  tag: ドキュメント
+  text: ログの処理方法
+- link: logs/explorer/saved_views
+  tag: ドキュメント
+  text: ログエクスプローラーの自動構成
+kind: documentation
+title: ログファセット
 ---
-{{< img src="logs/explorer/facet/facets_in_explorer.gif" alt="エクスプローラーファセットのファセット" style="width:100%;">}}
+
+{{< img src="logs/explorer/facet/facets_in_explorer.mp4" alt="エクスプローラーファセットのファセット" video=true style="width:100%;">}}
 
 ## 概要
 
@@ -30,16 +31,64 @@ further_reading:
 
 ファセットを使用すると、[ログモニター][4]のログ、[ダッシュボード][5]のログウィジェット、[ノートブック][6]を操作することもできます。
 
-**注**: [ログ処理][7]、[ライブテイル検索][8]、[アーカイブ][9]転送、リハイドレート、またはログからの[メトリクス生成][10]をサポートするためのファセットは必要ありません。また、フィルターを使用して[パイプライン][11]および[インデックス][12]にログをルーティングするためのファセットや、[除外フィルター][13]を使用してインデックスからログを除外またはサンプリングするためのファセットも必要ありません。これらすべてのコンテキストで、オートコンプリート機能は既存のファセットに依存しますが、入力ログに一致する入力はすべて機能します。
+{{< site-region region="gov,us3,us5" >}}
+
+**注**: [ログ処理][1]、[ライブテイル検索][2]、[アーカイブ][3]転送、リハイドレート、またはログからの[メトリクス生成][4]をサポートするためのファセットは必要ありません。また、フィルターを使用して[パイプライン][5]および[インデックス][6]にログをルーティングするためのファセットや、[除外フィルター][7]を使用してインデックスからログを除外またはサンプリングするためのファセットも必要ありません。
+
+これらすべてのコンテキストで、オートコンプリート機能は既存のファセットに依存しますが、入力ログに一致する入力はすべて機能します。
+
+[1]: /ja/logs/log_configuration/processors
+[2]: /ja/logs/live_tail/
+[3]: /ja/logs/archives/
+[4]: /ja/logs/logs_to_metrics/
+[5]: /ja/logs/log_configuration/pipelines
+[6]: /ja/logs/indexes/#indexes-filters
+[7]: /ja/logs/indexes/#exclusion-filters
+
+{{< /site-region >}}
+
+{{< site-region region="us,eu" >}}
+
+**注**: [ログ処理][1]、[ライブテイル検索][2]、[ログエクスプローラー検索][8]、ログからの[メトリクス生成][4]、[アーカイブ][3]転送、または[リハイドレート][9]をサポートするためのファセットは必要ありません。また、フィルターを使用して[パイプライン][5]および[インデックス][6]にログをルーティングするためのファセットや、[除外フィルター][7]を使用してインデックスからログを除外またはサンプリングするためのファセットも必要ありません。
+
+これらすべてのコンテキストで、オートコンプリート機能は既存のファセットに依存しますが、入力ログに一致する入力はすべて機能します。
+
+[1]: /ja/logs/log_configuration/processors
+[2]: /ja/logs/live_tail/
+[3]: /ja/logs/archives/
+[4]: /ja/logs/logs_to_metrics/
+[5]: /ja/logs/log_configuration/pipelines
+[6]: /ja/logs/indexes/#indexes-filters
+[7]: /ja/logs/indexes/#exclusion-filters
+[8]: /ja/logs/log_configuration/attributes_naming_convention/#standard-attributes
+[9]: /ja/logs/archives/rehydrating/
+
+{{< /site-region >}}
 
 ### 定性的ファセット
+
 #### ディメンション
 
 次が必要な場合は、定性的ファセットを使用します。
 
-- 特定の値に対してログを**フィルタリング**する。たとえば、`environment` [タグ][14]のファセットを作成して、トラブルシューティングを開発、ステージング、または本番環境にまで絞り込みます。
-- 値の**相対的なインサイトを取得**する。たとえば、`http.network.client.geoip.country.iso_code` のファセットを作成して、[NGINX][15] ウェブアクセスログの 5XX エラーの数ごとに最も影響を受ける上位の国を確認し、Datadog [GeoIP Processor][16] で加工します。
-- **一意の値をカウント**する。たとえば、[Kong][17] ログから `user.email` のファセットを作成して、ウェブサイトに毎日接続しているユーザー数を把握します。
+- 値の**相対的なインサイトを取得**する。たとえば、`http.network.client.geoip.country.iso_code` のファセットを作成して、[NGINX][16] ウェブアクセスログの 5XX エラーの数ごとに最も影響を受ける上位の国を確認し、Datadog [GeoIP Processor][17] で加工します。<br/><br/>
+
+- **一意の値をカウント**する。たとえば、[Kong][18] ログから `user.email` のファセットを作成して、ウェブサイトに毎日接続しているユーザー数を把握します。
+
+{{< site-region region="gov,us3,us5" >}}
+- 特定の値に対してログを**フィルタリング**する。たとえば、`environment` [タグ][1]のファセットを作成して、トラブルシューティングを開発、ステージング、または本番環境にまで絞り込みます。
+
+[1]: /ja/getting_started/tagging/assigning_tags/
+
+{{< /site-region >}}
+{{< site-region region="us,eu" >}}
+- 特定の値に対してログを頻繁に**フィルタリング**する。たとえば、`environment` [タグ][1]のファセットを作成して、トラブルシューティングを開発、ステージング、または本番環境にまで絞り込みます。
+
+**注**: 属性の値に対してフィルタリングするためのファセットの作成は必須ではありませんが、調査でよく使用する属性に対し定義しておくと、解決の時間を削減できます。
+
+[1]: /ja/getting_started/tagging/assigning_tags/
+
+{{< /site-region >}}
 
 #### 種類
 
@@ -50,9 +99,9 @@ further_reading:
 
 次が必要な場合は、メジャーを使用します。
 
-- 複数のログから**値を集計**する。たとえば、マップサーバーの [Varnish キャッシュ][18]が提供するタイルのサイズのメジャーを作成し、1 日の**平均**スループット、またはリクエストされたタイルサイズの**合計**ごとに最上位の参照元を追跡します。
-- ログを**範囲フィルター**する。たとえば、[Ansible][19] タスクの実行時間のメジャーを作成し、10 秒以上かかった実行が最も多いサーバーのリストを確認します。
-- その値に対して**ログを並べ替える**。たとえば、[Python][20] マイクロサービスで実行された支払い額のメジャーを作成します。その後、最も金額の高いログから順に、すべてのログを検索できます。
+- 複数のログから**値を集計**する。たとえば、マップサーバーの [Varnish キャッシュ][20]が提供するタイルのサイズのメジャーを作成し、1 日の**平均**スループット、またはリクエストされたタイルサイズの**合計**ごとに最上位の参照元を追跡します。
+- ログを**範囲フィルター**する。たとえば、[Ansible][21] タスクの実行時間のメジャーを作成し、10 秒以上かかった実行が最も多いサーバーのリストを確認します。
+- その値に対して**ログを並べ替える**。たとえば、[Python][22] マイクロサービスで実行された支払い額のメジャーを作成します。その後、最も金額の高いログから順に、すべてのログを検索できます。
 
 #### 種類
 
@@ -69,12 +118,12 @@ further_reading:
 
 単位は、フィールドではなく、メジャー自体のプロパティです。たとえば、ナノ秒単位の `duration` メジャーを考えてみます。`duration:1000` が 1000 ミリ秒を表す `service:A` からのログと、`duration:500` が 500 マイクロ秒を表す `service:B` からの他のログがあるとします。
 
-1. [算術演算プロセッサー][21]で流入するすべてのログの期間をナノ秒にスケーリングします。`service:A` のログには `*1000000` 乗数を使用し、`service:B` のログには `*1000` 乗数を使用します。
+1. [算術演算プロセッサー][23]で流入するすべてのログの期間をナノ秒にスケーリングします。`service:A` のログには `*1000000` 乗数を使用し、`service:B` のログには `*1000` 乗数を使用します。
 2. `duration:>20ms`（[検索構文][1]を参照）を使用して、両方のサービスから一度に一貫してログにクエリを実行し、最大 `1 min` の集計結果を確認します。
 
 ## ファセットパネル
 
-検索バーを使うと、包括的かつインタラクティブにデータを分類することができます。ただし、ほとんどの場合は、ファセットパネルを使った方がよりわかりやすくデータに移動できます。ファセットを開くと、現在のクエリのスコープのコンテンツのサマリーが表示されます
+検索バーを使うと、包括的かつインタラクティブにデータをフィルタリングしグループ化することができます。ただし、ほとんどの場合は、ファセットパネルを使った方がよりわかりやすくデータに移動できます。ファセットを開くと、現在のクエリのスコープのコンテンツのサマリーが表示されます
 
 **ファセット（定性的）**には、一意の値の上位リストと、それぞれに一致するログの数が用意されています。
 
@@ -104,7 +153,7 @@ further_reading:
 
 #### 非表示のファセットとチームメイト
 
-ファセットの非表示は、自身のトラブルシューティングコンテキストに固有の操作で、[保存ビュー][22]を更新しない限り、チームメイトのビューには影響を与えません。非表示のファセットは、保存ビューに保存されたコンテキストの一部です。
+ファセットの非表示は、自身のトラブルシューティングコンテキストに固有の操作で、[保存ビュー][24]を更新しない限り、チームメイトのビューには影響を与えません。非表示のファセットは、保存ビューに保存されたコンテキストの一部です。
 
 ### ファセットをグループ化
 
@@ -136,19 +185,21 @@ further_reading:
 
 ### すぐに使えるファセット
 
-`Host`、`Service`、`URL Path`、`Duration` などの最も一般的なファセットは、ログがログインデックスに流れたらすぐに使用してトラブルシューティングを開始できます。
+`Host` や `Service` などの最も一般的なファセットはすぐに使用できるため、ログがログインデックスに流れたら即座にトラブルシューティングを開始できます。
 
-[予約済み属性][23]およびほとんどの[標準属性][24]のファセットがデフォルトで使用可能です。
+[予約済み属性][25]およびほとんどの[標準属性][26]のファセットがデフォルトで使用可能です。
 
 ### インデックスファセット
 
-インデックスファセットは、組織に[複数のインデックス][25]がある場合や、アクティブな[履歴ビュー][26]がある場合にのみ表示される特定のファセットです。クエリのスコープをインデックスのサブセットに絞り込む場合は、このファセットを使用します。
+インデックスファセットは、組織に[複数のインデックス][27]がある場合や、アクティブな[履歴ビュー][15]がある場合にのみ表示される特定のファセットです。クエリのスコープをインデックスのサブセットに絞り込む場合は、このファセットを使用します。
 
 {{< img src="logs/explorer/facet/index_facet_.png" alt="ファセットを作成" style="width:30%;">}}
 
 ### ファセットを作成
 
 新しいファセットを作成するのではなく、常に既存のファセットを使用することを習慣にすると良いでしょう（[ファセットのエイリアス設定](#alias-facets)セクションを参照）。類似した性質の情報に一意のファセットを使用すると、チーム間のコラボレーションが促されます。
+
+JSON オブジェクトの配列にファセットを作成するには、まず [grok パーサー][28]を使って属性を抽出し、その属性のファセットを作成します。
 
 **注**: ファセットが作成されると、そのコンテンツは**どちらか**のインデックスに流れる**すべての新しいログに対して**入力されます。ログ管理ソリューションを最適な形で利用するため、Datadog では最大 1000 ファセットで使用することをおすすめしています。
 
@@ -178,7 +229,7 @@ further_reading:
 
 ### エイリアスが設定されたファセット
 
-一意のファセットで類似するコンテンツを収集すると、チーム間の分析が可能になり、チーム間のトラブルシューティングが容易になります。[命名規則][24]を参照してください。
+一意のファセットで類似するコンテンツを収集すると、チーム間の分析が可能になり、チーム間のトラブルシューティングが容易になります。[命名規則][26]を参照してください。
 
 オプションとしてエイリアス設定を使用すると、一貫性のない命名規則に依存するチームをスムーズに再編成できます。エイリアス設定を使用すると、組織に出現する標準ファセットを使用してそれらすべてを使用できます。
 
@@ -191,7 +242,7 @@ _エイリアス設定された_ファセットを_標準_ファセットにエ�
 - ユーザーは、トラブルシューティングにエイリアス設定されたファセットと標準ファセットのどちらかを使用できます。多様で、場合によっては異種のソースから流れるコンテンツの相関が容易になる標準ファセットの方が好ましいかもしれません。
 - ユーザーは、エイリアス設定されたファセットの代わりに標準ファセットを使用するように促されます。
 
-ファセットを標準ファセットにエイリアス設定するには、ファセットメニューの `Alias to...` アクション項目を選択します。組織に存在するすべての[標準][27]ファセットから宛先ファセットを選択します。
+ファセットを標準ファセットにエイリアス設定するには、ファセットメニューの `Alias to...` アクション項目を選択します。組織に存在するすべての[標準][14]ファセットから宛先ファセットを選択します。
 
 {{< img src="logs/explorer/facet/alias_modal.png" alt="エイリアスモーダル" style="width:30%;">}}
 
@@ -201,34 +252,37 @@ _エイリアス設定された_ファセットを_標準_ファセットにエ�
 
 {{< img src="logs/explorer/facet/alias_facet_from_attribute.png" alt="属性からファセットをエイリアス設定する" style="width:30%;">}}
 
-## その他の参考資料
+## ファセットを削除する
+
+<div class="alert alert-danger">インデックス、モニター、ダッシュボード、制限クエリ、または他のチームで使用されているファセットを削除すると、構成が壊れることがあります。</div>
+
+ファセットを削除するには、次の手順に従います。
+
+- ファセットパネルの上部にある **Showing xx of xx** をクリックします。
+- ファセットを検索します。
+- ファセットの鉛筆アイコンをクリックします。
+- **Delete** をクリックします。
+
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/logs/search_syntax/
 [2]: /ja/logs/explorer/patterns/
 [3]: /ja/logs/explorer/analytics/
-[4]: /ja/monitors/monitor_types/log/
+[4]: /ja/monitors/create/types/log/
 [5]: /ja/dashboards/widgets/
 [6]: /ja/notebooks/
-[7]: /ja/logs/processing/processors/
-[8]: /ja/logs/live_tail/
-[9]: /ja/logs/archives/
-[10]: /ja/logs/logs_to_metrics/
-[11]: /ja/logs/processing/pipelines/
-[12]: /ja/logs/indexes/#indexes-filters
-[13]: /ja/logs/indexes/#exclusion-filters
-[14]: /ja/getting_started/tagging/assigning_tags/
-[15]: /ja/integrations/nginx/
-[16]: /ja/logs/processing/processors/?tab=ui#geoip-parser
-[17]: /ja/integrations/kong/
-[18]: /ja/integrations/varnish/
-[19]: /ja/integrations/ansible/
-[20]: /ja/integrations/python/
-[21]: /ja/logs/processing/processors/?tab=ui#arithmetic-processor
-[22]: /ja/logs/explorer/saved_views/
-[23]: /ja/logs/processing/attributes_naming_convention/#reserved-attributes
-[24]: /ja/logs/processing/attributes_naming_convention/
-[25]: /ja/logs/indexes/#indexes
-[26]: /ja/logs/archives/rehydrating/
-[27]: /ja/logs/processing/attributes_naming_convention/#standard-attribute-list
+[15]: /ja/logs/log_configuration/rehydrating
+[16]: /ja/integrations/nginx/
+[17]: /ja/logs/log_configuration/processors/#geoip-parser
+[18]: /ja/integrations/kong/
+[20]: /ja/integrations/varnish/
+[21]: /ja/integrations/ansible/
+[22]: /ja/integrations/python/
+[23]: /ja/logs/log_configuration/processors/#arithmetic-processor
+[24]: /ja/logs/explorer/saved_views/
+[25]: /ja/logs/log_configuration/attributes_naming_convention/#reserved-attributes
+[26]: /ja/logs/log_configuration/attributes_naming_convention
+[27]: /ja/logs/indexes/#indexes
+[28]: /ja/logs/log_configuration/parsing/?tab=matchers#nested-json

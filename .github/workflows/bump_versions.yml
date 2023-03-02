@@ -3,13 +3,18 @@ on:
     # At 08:00 on every day-of-week from Monday through Friday.
     - cron: '0 8 * * 1-5'
 
+permissions: {}
 jobs:
   sdk-versions:
+    permissions:
+      contents: write # for git push
+      pull-requests: write # to create pull request
+
     runs-on: ubuntu-latest
     steps:
       - id: set-versions
         name: Load latest SDK versions
-        uses: actions/github-script@v4
+        uses: actions/github-script@v6
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           result-encoding: string
@@ -22,7 +27,7 @@ jobs:
               'datadog-api-client-typescript'
             ]
             const versions = await Promise.all(clients.map(async (repo) => {
-              const releases = await github.repos.listReleases({
+              const releases = await github.rest.repos.listReleases({
                 owner: 'DataDog',
                 repo: repo
               })
@@ -30,7 +35,7 @@ jobs:
             }))
             console.log(versions)
             return JSON.stringify(versions)
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Write version
         run: |-
           echo '${{steps.set-versions.outputs.result}}' | jq > ./data/sdk_versions.json
@@ -39,19 +44,19 @@ jobs:
           git config user.email packages@datadoghq.com
           git add .
           git commit -m "Bump SDK"
-          git push -f origin HEAD:refs/heads/sdk-versions
-      - uses: actions/github-script@v4
+          git push -f origin HEAD:refs/heads/sdk/versions
+      - uses: actions/github-script@v6
         name: Propose change with latest versions
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           result-encoding: string
           script: |
-            await github.pulls.create({
+            await github.rest.pulls.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
               title: "[SDK] new versions are available",
               body: "SSID",
-              head: "sdk-versions",
+              head: "sdk/versions",
               base: "master",
               maintainer_can_modify: true
             })

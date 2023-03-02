@@ -1,0 +1,12 @@
+{
+  "description": "Test Example-Create_a_private_location_returns_OK_response description",
+  "metadata": {
+    "restricted_roles": [
+      "string"
+    ]
+  },
+  "name": "Example-Create_a_private_location_returns_OK_response",
+  "tags": [
+    "test:examplecreateaprivatelocationreturnsokresponse"
+  ]
+}

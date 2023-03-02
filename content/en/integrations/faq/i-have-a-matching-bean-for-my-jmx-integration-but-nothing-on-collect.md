@@ -9,7 +9,7 @@ Trouble setting up your JMX integration ? Here are a few great articles to get y
 * [View jmx data in jConsole and set up your jmx.yaml to collect them][2]
 * [jmx.yaml error: Include Section][3]
 * [Collecting Composite type JMX attributes][4]
-* [How to run JMX commands in Windows?][5]
+* [Running JMX commands in Windows][5]
 
 If everything is set up properly as described in the above articles, *and* your metric appears in the [Agent log file][6] (but *not* in the [status command][1]), then there is probably an issue with the `metric_type` that you're using.
 
@@ -84,7 +84,7 @@ Reach out to [Datadog Support team][7] if you are still having issues.
 [1]: /integrations/faq/troubleshooting-jmx-integrations/
 [2]: /integrations/faq/view-jmx-data-in-jconsole-and-set-up-your-jmx-yaml-to-collect-them/
 [3]: /integrations/faq/jmx-yaml-error-include-section/
-[4]: /integrations/faq/collecting-composite-type-jmx-attributes/
-[5]: /integrations/faq/how-to-run-jmx-commands-in-windows/
+[4]: /integrations/guide/collecting-composite-type-jmx-attributes/
+[5]: /integrations/guide/running-jmx-commands-in-windows/
 [6]: /agent/guide/agent-log-files/
 [7]: /help/

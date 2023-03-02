@@ -1,23 +1,28 @@
 ---
 categories:
-  - exceptions
+- exceptions
 ddtype: crawler
 dependencies: []
-description: 'Affichez, recherchez et échangez sur des exceptions Honeybadger dans votre flux d''événements.'
-doc_link: 'https://docs.datadoghq.com/integrations/honeybadger/'
+description: Affichez, recherchez et échangez sur des exceptions Honeybadger dans
+  votre flux d'événements.
+doc_link: https://docs.datadoghq.com/integrations/honeybadger/
 draft: false
 git_integration_title: honeybadger
 has_logo: true
 integration_id: honeybadger
 integration_title: Honeybadger
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: honeybadger
 public_title: Intégration Datadog/Honeybadger
-short_description: 'Affichez, recherchez et échangez sur des exceptions Honeybadger dans votre flux d''événements.'
+short_description: Affichez, recherchez et échangez sur des exceptions Honeybadger
+  dans votre flux d'événements.
+team: web-integrations
 version: '1.0'
 ---
+
 {{< img src="integrations/honeybadger/honeybadgerevent.png" alt="Événement Honeybadger" popup="true">}}
 
 ## Présentation
@@ -62,6 +67,6 @@ L'intégration Honeybadger n'inclut aucun check de service.
 Besoin d'aide ? Contactez [l'assistance Datadog][4].
 
 [1]: https://app.honeybadger.io/users/sign_in
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/account/settings#integrations/honeybadger
 [4]: https://docs.datadoghq.com/fr/help/

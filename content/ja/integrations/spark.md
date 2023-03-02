@@ -1,43 +1,70 @@
 ---
+app_id: spark
+app_uuid: 5cb22455-9ae2-44ee-ae05-ec21c27b3292
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     spark: assets/dashboards/spark_dashboard.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: spark.job.count
+      metadata_path: metadata.csv
+      prefix: spark.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Spark
   logs:
     source: spark
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-  - processing
-  - log collection
-  - autodiscovery
-creates_events: false
-ddtype: check
+- processing
+- log collection
+- autodiscovery
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/spark/README.md
-display_name: Spark
+- https://github.com/DataDog/integrations-core/blob/master/spark/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: spark
-guid: f7a5a40f-f73c-465a-be8f-b2b371c706a2
 integration_id: spark
 integration_title: Spark
+integration_version: 3.1.1
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: spark.
-metric_to_check: spark.job.count
+manifest_version: 2.0.0
 name: spark
-public_title: Datadog-Spark インテグレーション
+oauth: {}
+public_title: Spark
 short_description: タスクの失敗率、シャッフルされたバイト数などを追跡します。
-support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::処理
+  - Category::ログの収集
+  - Category::オートディスカバリー
+  configuration: README.md#Setup
+  description: タスクの失敗率、シャッフルされたバイト数などを追跡します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Spark
 ---
+
+
+
 ![Spark のグラフ][1]
 
 ## 概要
@@ -132,7 +159,7 @@ Spark チェックは [Datadog Agent][3] パッケージに含まれています
 
 3. [Agent を再起動します][5]。
 
-Docker 環境でログを収集する Agent を構成する追加の情報に関しては、[Datadog ドキュメント][6]を参照してください。
+Docker 環境のログを有効にするには、[Docker ログ収集][6]を参照してください。
 
 ### 検証
 
@@ -162,7 +189,11 @@ Agent v5 の場合は、[各 EMR ノードに正しい値が指定][10]された
 
 Agent v6/7 の場合は、[各 EMR ノードに正しい値が指定][10]された `/etc/datadog-agent/conf.d/spark.d/conf.yaml` 構成ファイルを作成します。
 
-## その他の参考資料
+### チェックは成功したが、メトリクスは収集されない
+
+Spark インテグレーションは、実行中のアプリに関するメトリクスのみを収集します。現在実行中のアプリがない場合、チェックはヘルスチェックを送信するだけです。
+
+## {{< partial name="whats-next/whats-next.html" >}}
 
 お役に立つドキュメント、リンクや記事:
 

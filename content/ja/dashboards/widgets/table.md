@@ -1,31 +1,28 @@
 ---
-title: テーブルウィジェット
-kind: documentation
-widget_type: query_table
 aliases:
-  - /ja/graphing/widgets/table/
+- /ja/graphing/widgets/table/
 further_reading:
-  - link: /ja/dashboards/timeboards/
-    tag: ドキュメント
-    text: Timeboards
-  - link: /ja/dashboards/screenboards/
-    tag: ドキュメント
-    text: スクリーンボード
-  - link: /ja/dashboards/graphing_json/
-    tag: ドキュメント
-    text: JSON を使用したダッシュボードの構築
+- link: /ja/dashboards/graphing_json/
+  tag: ドキュメント
+  text: JSON を使用したダッシュボードの構築
+kind: documentation
+title: テーブルウィジェット
+widget_type: query_table
 ---
+
 ## 概要
 
 テーブルはダッシュボードで可視化することが可能です。タグキーでグループ化された集計データを列で表示します。たとえば、`system.cpu.system` と `system.cpu.user` が `service` でグループ化されます。
 
 {{< img src="dashboards/widgets/table/table_widget_1.png" alt="テーブルウィジェット" style="width:80%;">}}
 
+**注:** テーブルウィジェットは数値データのみサポートされます。
+
 ## セットアップ
 
 ### コンフィギュレーション
 
-* グラフを作成するデータを選択します (必要に応じて列を追加してください)。
+* グラフ化するデータを選択します (必要に応じて **+ Add Query** および **+ Add Formula** ボタンを使用して列を追加します)。
   * メトリクス: メトリクスクエリの構成については、[グラフ作成方法に関するドキュメント][1]を参照してください。
   * ログイベント: ログイベントクエリの構成については、[ログ検索に関するドキュメント][2]を参照してください。
   * Indexed Span: Indexed Span クエリの構成については、[Indexed Span ドキュメント][3]を参照してください。
@@ -41,7 +38,6 @@ further_reading:
   * 各列のセルの値に応じて、条件付き書式 (**バー/数字** と **色** の両方) を構成します。
   * 検索バーを表示するかどうかを構成します。デフォルトは **Auto** で、ウィジェットの大きさに応じて検索バーを表示します。つまり、画面が小さい場合はウィジェット上のデータの表示を優先し、検索バーは非表示になります（全画面モードになると表示されます）。
 
-{{< img src="dashboards/widgets/table/table_setup_1.png" alt="テーブルの設定" style="width:80%;">}}
 
 ## API
 
@@ -66,8 +62,8 @@ further_reading:
 [1]: /ja/dashboards/querying/#configuring-a-graph
 [2]: /ja/logs/search_syntax/
 [3]: /ja/tracing/trace_explorer/query_syntax/
-[4]: /ja/real_user_monitoring/explorer/search/#search-syntax
-[5]: /ja/tracing/profiler/search_profiles
+[4]: /ja/real_user_monitoring/explorer/search_syntax
+[5]: /ja/profiler/search_profiles
 [6]: /ja/security_monitoring/explorer/
 [7]: /ja/dashboards/querying/#configuring-an-apm-stats-graph
 [8]: /ja/api/v1/dashboards/

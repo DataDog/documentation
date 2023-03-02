@@ -1,11 +1,10 @@
 ---
-title: Consulter les données d'utilisation de l'APM et configurer des alertes
 kind: documentation
+title: Consulter les données d'utilisation de l'APM et configurer des alertes
 ---
-Datadog propose différentes offres tarifaires selon vos besoins. Pour en savoir plus, consultez la page des [Tarifs][1].
-Consultez la page [Tarification de l'APM][2] pour comprendre comment l'APM et le tracing distribué sont facturés.
 
-**Remarque :** les spans indexées étaient auparavant désignées par le terme de « spans analysées ». Le changement de dénomination a eu lieu à l'occasion du lancement de Tracing Without Limits le 20 octobre 2020.
+Datadog propose différentes offres tarifaires selon vos besoins. Pour en savoir plus, consultez la page des [Tarifs][1].
+Consultez la page [Tarification d'APM][2] pour comprendre comment l'APM et le tracing distribué sont facturés.
 
 ## Informations sur l'utilisation de l'APM
 
@@ -13,13 +12,13 @@ Si vous êtes administrateur, vous pouvez consulter les informations relatives �
 
 | Métrique         | Description                                                                              |
 |----------------|------------------------------------------------------------------------------------------|
-| Hosts APM      | Affiche le nombre total de hosts d'APM distincts au 99e centile pour toutes les heures du mois actuel. |
-| Spans indexées | Affiche la somme de toutes les spans indexées pour toutes les heures du mois actuel.         |
+| Hosts d'APM      | Affiche le nombre total de hosts d'APM distincts au 99e centile pour toutes les heures du mois actuel. |
+| Indexed Spans | Affiche la somme de toutes les spans indexées pour toutes les heures du mois actuel.         |
 | Fargate Tasks  | Affiche le nombre total moyen de tâches Fargate pour toutes les heures du mois actuel.              |
 
 ## Définir une alerte pour un host d'APM
 
-Pour être notifié lorsqu'un déploiement de code accroît le nombre de hosts qui envoient des traces, configurez un monitor sur le nombre de hosts d'APM. Vous recevrez alors une notification dès que le nombre de hosts au sein de votre infrastructure augmente de manière imprévue, peu importe le contexte défini (`prod`, `availability-zone`, etc.) :
+Pour être notifié lorsqu'un déploiement de code accroît le nombre de hosts qui envoient des traces, configurez un monitor sur le nombre de hosts APM. Vous recevrez alors une notification dès que le nombre de hosts au sein de votre infrastructure augmente de manière imprévue, peu importe la portée définie (`prod`, `availability-zone`, etc.) :
 
 {{< img src="tracing/faq/apm_host_monitor.mp4" alt="Vue Analytics" video="true" style="width:90%;">}}
 
@@ -47,4 +46,4 @@ En savoir plus sur les [filtres de rétention][7].
 [4]: https://app.datadoghq.com/monitors#create/metric
 [5]: /fr/monitors/create/types/apm/?tab=traceanalytics#monitor-creation
 [6]: https://app.datadoghq.com/apm/analytics
-[7]: /fr/tracing/trace_retention_and_ingestion/
+[7]: /fr/tracing/trace_retention/

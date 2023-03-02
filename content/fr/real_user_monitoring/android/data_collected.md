@@ -1,24 +1,30 @@
 ---
 dependencies:
-  - https://github.com/DataDog/dd-sdk-android/blob/master/docs/mobile_data_collected.md
+- https://github.com/DataDog/dd-sdk-android/blob/master/docs/mobile_data_collected.md
 further_reading:
-  - link: https://github.com/DataDog/dd-sdk-android
-    tag: Github
-    text: Code source dd-sdk-android
-  - link: /real_user_monitoring
-    tag: Page d'accueil
-    text: Explorer le service RUM de Datadog
+- link: https://github.com/DataDog/dd-sdk-android
+  tag: GitHub
+  text: Code source dd-sdk-android
+- link: /real_user_monitoring
+  tag: Documentation
+  text: Explorer le service RUM de Datadog
 kind: documentation
 title: Données RUM recueillies (Android)
 ---
-Le SDK Real User Monitoring Datadog génère six types d'événements :
+## Présentation
+
+Le SDK RUM Android génère des événements auxquels des métriques et attributs sont associés. Les métriques sont des valeurs quantifiables servant à effectuer des mesures associées à un événement. Les attributs sont des valeurs non quantifiables servant à filtrer les données de métriques dans les analyses.
+
+Chaque événement RUM contient tous les [attributs par défaut](#attributs-par-defaut), comme le type d'appareil (`device.type`) et des informations sur l'utilisateur telles que son nom (`usr.name`) et son pays (`geo.country`).
+
+Il existe d'autres [métriques et attributs propres à un type d'événement donné](#metriques-et-attributs-specifiques-a-un-evenement). Par exemple, la métrique `view.time_spent` est associée aux événements de type  « vue » et l'attribut `resource.method` aux événements de type « ressource ».
 
 | Type d'événement     | Rétention | Description                                                                                                                                                                                                                                                   |
 |----------------|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Session  | 30 jours   | Une session représente le parcours d'un utilisateur réel sur votre application mobile. Elle débute lorsque l'utilisateur lance l'application et se poursuit tant qu'il reste actif. Lors du parcours de l'utilisateur, tous les événements RUM générés au sein de la session partagent le même attribut `session.id`.  |
-| Vue     | 30 jours   | Une vue représente un écran unique (ou un segment d'écran) de votre application mobile. Les `ViewControllers` individuels sont considérés comme des vues distinctes. Tant qu'un utilisateur reste sur une vue, des attributs d'événement RUM (Erreurs, Ressources, Actions) sont joints à la vue, avec un `view.id` unique.                     |
-| Ressource  | 15 jours   | Une ressource représente les requêtes réseau envoyées par votre application mobile à des hosts internes, des API, des fournisseurs tiers et des bibliothèques. Toutes les requêtes générées lors d'une session utilisateur sont jointes à la vue, avec un `resource.id` unique.                                                                                           |
-| Erreur     | 30 jours   | Une erreur représente une exception ou une défaillance générée par l'application mobile et jointe à la vue à son origine.                                                                                                                                            |
+| Session  | 30 jours   | Une session représente le parcours d'un utilisateur réel sur votre application mobile. Elle débute lorsque l'utilisateur lance l'application et se poursuit tant qu'il reste actif. Lors du parcours de l'utilisateur, tous les événements RUM générés au sein de la session partagent le même attribut `session.id`. **Remarque** : la session se réinitialise après 15 minutes d'inactivité. Si l'application est arrêtée par le système d'exploitation, vous pouvez réinitialiser la session pendant que l'application est exécutée en arrière-plan. |
+| Vue     | 30 jours   | Une vue représente un écran unique (ou un segment d'écran) de votre application mobile. Une vue est lancée et mise en pause lorsque les rappels `viewDidAppear(animated:)` et `viewDidDisappear(animated:)` sont effectués sur la classe `UIViewController`. Chaque `ViewController` est considéré comme une vue distincte. Tant que l'utilisateur reste sur une vue, des attributs d'événement RUM (Erreurs, Ressources et Actions) sont joints à la vue, avec un `view.id` unique.                     |
+| Ressource  | 15 jours   | Une ressource représente les requêtes réseau envoyées par votre application mobile à des hosts first party, des API et des fournisseurs tiers. Toutes les requêtes générées lors d'une session utilisateur sont jointes à la vue, avec un `resource.id` unique.                                                                                           |
+| Error     | 30 jours   | Une erreur représente une exception ou une défaillance générée par l'application mobile et jointe à la vue à son origine.                                                                                                                                            |
 | Action    | 30 jours   | Une action représente l'activité utilisateur dans votre application mobile (lancement de l'application, toucher, balayage, retour, etc.). Chaque action possède un `action.id` unique associé à la vue à son origine.                                                                                                                                              |
 | Tâche longue | 15 jours | Un événement de tâche longue est généré lorsqu'une tâche bloque dans l'application le thread principal pendant une durée supérieure au seuil défini. |
 
@@ -35,7 +41,7 @@ La solution RUM recueille [automatiquement][1] des attributs communs pour tous l
 
 | Nom de l'attribut   | Type   | Description                 |
 |------------------|--------|-----------------------------|
-| `date` | nombre entier  | Début de l'événement en millisecondes (format epoch). |
+| `date` | nombre entier  | Le début de l'événement en millisecondes (format epoch). |
 | `type`     | chaîne | Le type de l'événement (par exemple, `view` ou `resource`).             |
 | `service` | chaîne | Le [nom de service unifié][4] de cette application utilisé pour corréler les sessions utilisateur. |
 | `application.id` | chaîne | L'ID d'application Datadog. |
@@ -74,12 +80,11 @@ Les attributs suivants sont liés à la géolocalisation des adresses IP :
 | Nom complet                                    | Type   | Description                                                                                                                          |
 |:--------------------------------------------|:-------|:-------------------------------------------------------------------------------------------------------------------------------------|
 | `geo.country`         | chaîne | Le nom du pays.                                                                                                                 |
-| `geo.country_iso_code`     | chaîne | Le code ISO du pays (par exemple, `US` pour les États-Unis `FR` pour la France).                                                  |
+| `geo.country_iso_code`     | chaîne | Le code ISO du pays (par exemple, `US` pour les États-Unis ou `FR` pour la France).                                                  |
 | `geo.country_subdivision`     | chaîne | Le nom du premier niveau de division du pays (par exemple, `California` aux États-Unis ou le département de la `Sarthe` en France). |
-| `geo.country_subdivision_iso_code` | chaîne | Le code ISO du premier niveau de division du pays (par exemple, `CA` aux États-Unis ou le département `SA` en France).    |
 | `geo.continent_code`       | chaîne | Le code ISO du continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA` ou `OC`).                                                                 |
-| `geo.continent`       | chaîne | Le nom du continent (`Europe`, `Australia`, `North America`, `Africa`, `Antartica`, `South America` ou `Oceania`).                    |
-| `geo.city`            | chaîne | Le nom de la ville (par exemple, `Paris`, `New York`).                                                                                   |
+| `geo.continent`       | chaîne | Le nom du continent (`Europe`, `Australia`, `North America`, `Africa`, `Antarctica`, `South America` ou `Oceania`).                    |
+| `geo.city`            | chaîne | Le nom de la ville (par exemple, `San Francisco`, `Paris` ou `New York`).                                                                                   |
 
 
 ### Attributs utilisateur globaux
@@ -93,12 +98,9 @@ Vous pouvez activer la [surveillance des informations utilisateur][5] de façon 
 | `usr.email` | chaîne | L'adresse e-mail de l'utilisateur. |
 
 
-## Attributs spécifiques à un événement
+## Métriques et attributs spécifiques à un événement
 
 Les métriques sont des valeurs quantifiables servant à effectuer des mesures associées à un événement. Les attributs sont des valeurs non quantifiables servant à filtrer les données de métriques dans les analyses.
-
-{{< tabs >}}
-{{% tab "Session" %}}
 
 ### Métriques des sessions
 
@@ -117,17 +119,13 @@ Les métriques sont des valeurs quantifiables servant à effectuer des mesures a
 |--------------------------------|--------|----------------------------------------------------------------------------------------------------------------|
 | `session.id` | chaîne | L'identifiant unique de la session. |
 | `session.type` | chaîne | Le type de la session (`user`). |
-| `session.is_active` | chaîne | Le statut d'activité de la session. |
+| `session.is_active` | booléen | Indique si la session est actuellement active. Une session prend fin lorsqu'un utilisateur quitte l'application ou ferme la fenêtre du navigateur. Elle expire après 4 heures ou 15 minutes d'inactivité. |
 | `session.initial_view.url` | chaîne | L'URL de la vue initiale de la session. |
 | `session.initial_view.name` | chaîne | Le nom de la vue initiale de la session. |
 | `session.last_view.url` | chaîne | L'URL de la dernière vue de la session. |
 | `session.last_view.name` | chaîne | Le nom de la dernière vue de la session. |
 | `session.ip` | chaîne | L'adresse IP de la session extraite à partir de la connexion TCP de l'admission. |
 | `session.useragent` | chaîne | Les informations de l'Agent utilisateur système interprétant les informations de l'appareil.  |
-
-
-{{% /tab %}}
-{{% tab "Vue" %}}
 
 ### Métriques des vues
 
@@ -136,8 +134,7 @@ Les événements RUM de type Action, Erreur, Ressource et Tâche longue contienn
 
 | Métrique                              | Type        | Description                                                                                          |
 |----------------------------------------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `view.time_spent`                             | nombre (ns) | Temps passé sur la vue.                                    |
-| `view.loading_time`                             | nombre (ns) |  | Durée de chargement de la vue (en ns).
+| `view.time_spent`                             | nombre (ns) | Le temps passé sur la vue.                                    |
 | `view.long_task.count`        | nombre      | Nombre total de tâches longues recueillies pour cette vue.                                |
 | `view.error.count`            | nombre      | Nombre total d'erreurs recueillies pour cette vue.                                    |
 | `view.resource.count`         | nombre      | Nombre total de ressources recueillies pour cette vue.                                 |
@@ -148,13 +145,9 @@ Les événements RUM de type Action, Erreur, Ressource et Tâche longue contienn
 
 | Nom de l'attribut                 | Type   | Description                                                                                                    |
 |--------------------------------|--------|----------------------------------------------------------------------------------------------------------------|
-| `view.id`                      | chaîne | ID unique de la vue initiale correspondant à la event.view.                                                                      |
+| `view.id`                      | chaîne | L'ID unique de la vue initiale correspondant à l'événement.                                                                      |
 | `view.url`                     | chaîne | URL de la classe `UIViewController` correspondant à l'événement.                                                           |
 | `view.name` | chaîne | Nom personnalisable de la vue correspondant à l'événement. |                                                                                 
-
-
-{{% /tab %}}
-{{% tab "Ressource" %}}
 
 ### Métriques des ressources
 
@@ -167,30 +160,25 @@ Les événements RUM de type Action, Erreur, Ressource et Tâche longue contienn
 | `resource.ssl.duration`        | nombre (ns)    | Durée d'établissement de la liaison TLS. Si la dernière requête ne suit pas le protocole HTTPS, cette métrique n'apparaît pas (connectEnd - secureConnectionStart). |
 | `resource.dns.duration`        | nombre (ns)    | Durée de résolution du nom DNS de la dernière requête (domainLookupEnd - domainLookupStart).                                               |
 | `resource.redirect.duration`   | nombre (ns)    | Temps passé sur les requêtes HTTP ultérieures (redirectEnd - redirectStart).                                                                      |
-| `resource.first_byte.duration` | nombre (ns)    | Temps passé avant la réception du premier octet de la réponse (responseStart - RequestStart).                                           |
-| `resource.download.duration`   | nombre (ns)    | Durée du téléchargement de la réponse (responseEnd - responseStart).                                                                         |
+| `resource.first_byte.duration` | nombre (ns)    | Temps écoulé avant la réception du premier octet de la réponse (responseStart - RequestStart).                                           |
+| `resource.download.duration`   | nombre (ns)    | Durée de téléchargement de la réponse (responseEnd - responseStart).                                                                         |
 
 ### Attributs des ressources
 
 | Attribut                      | Type   | Description                                                                             |
 |--------------------------------|--------|-----------------------------------------------------------------------------------------|
 | `resource.id`                | chaîne |  L'identifiant unique de la ressource.      |
-| `resource.type`                | chaîne | Le type de ressource à recueillir (par exemple, `xhr`, `image`, `font`, `css`, `js`).          |
-| `resource.method`                | chaîne | La méthode HTTP (par exemple, `POST`, `GET` `PATCH`, `DELETE`).           |
+| `resource.type`                | chaîne | Le type de ressource à recueillir (par exemple, `xhr`, `image`, `font`, `css` ou `js`).          |
+| `resource.method`                | chaîne | La méthode HTTP (par exemple, `POST`, `GET` `PATCH` ou `DELETE`).           |
 | `resource.status_code`             | nombre | Le code de statut de la réponse.                                                               |
 | `resource.url`              | chaîne | L'URL de la ressource.                             |
 | `resource.provider.name`      | chaîne | Le nom du fournisseur de ressources. Valeur par défaut : `unknown`.                     |
 | `resource.provider.domain`      | chaîne | Le domaine du fournisseur de ressources.                                            |
 | `resource.provider.type`  | chaîne | Le type de fournisseur de ressources (par exemple, `first-party`, `cdn`, `ad` ou `analytics`).              |
 
-
-
-{{% /tab %}}
-{{% tab "Erreur" %}}
+### Attributs d'erreur
 
 Les erreurs frontend sont recueillies par le service Real User Monitoring (RUM). Le message d'erreur et la stack trace sont inclus lorsque cela est possible.
-
-### Attributs d'erreur
 
 | Attribut       | Type   | Description                                                       |
 |-----------------|--------|-------------------------------------------------------------------|
@@ -201,7 +189,7 @@ Les erreurs frontend sont recueillies par le service Real User Monitoring (RUM).
 | `error.issue_id`   | chaîne | La stack trace ou toutes informations complémentaires relatives à l'erreur.     |
 
 
-#### Erreurs réseau
+### Erreurs réseau
 
 Les erreurs réseau comprennent des informations sur la requête HTTP ayant échoué. Les facettes suivantes sont également recueillies :
 
@@ -213,11 +201,6 @@ Les erreurs réseau comprennent des informations sur la requête HTTP ayant éch
 | `error.resource.provider.name`      | chaîne | Le nom du fournisseur de ressources. Valeur par défaut : `unknown`.                                            |
 | `error.resource.provider.domain`      | chaîne | Le domaine du fournisseur de ressources.                                            |
 | `error.resource.provider.type`      | chaîne | Le type de fournisseur de ressources (par exemple, `first-party`, `cdn`, `ad` ou `analytics`).                                            |
-
-
-{{% /tab %}}
-{{% tab "Action utilisateur" %}}
-
 
 ### Métriques de durée des actions
 
@@ -233,23 +216,21 @@ Les erreurs réseau comprennent des informations sur la requête HTTP ayant éch
 | Attribut    | Type   | Description              |
 |--------------|--------|--------------------------|
 | `action.id` | chaîne | UUID de l'action utilisateur. |
-| `action.type` | chaîne | Type de l'action utilisateur (`tap`, `application_start`). |
+| `action.type` | chaîne | Le type de l'action utilisateur (par exemple, `tap` ou `application_start`). |
 | `action.name` | chaîne | Nom de l'action utilisateur. |
 | `action.target.name` | chaîne | Élément avec lequel l'utilisateur a interagi. Uniquement pour les actions recueillies automatiquement. |
 
+## Stockage des données
 
-{{% /tab %}}
-{{< /tabs >}}
-
-
+Avant que les données ne soient importées dans Datadog, elles sont stockées en clair dans le répertoire cache de votre application. Ce répertoire est protégé par le [bac à sable d'applications Android][6]. Ainsi, sur la plupart des appareils, ces données ne peuvent pas être lues par d'autres applications. Toutefois, si l'appareil mobile est en mode root, ou si l'intégrité du kernel Linux a été compromise, il est possible que les données stockées soient lisibles.
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
-[1]: /fr/real_user_monitoring/android/advanced_configuration/#automatically-track-views
-[2]: /fr/real_user_monitoring/android/advanced_configuration/#enrich-user-sessions
-[3]: /fr/real_user_monitoring/android/advanced_configuration/#track-custom-global-attributes
-[4]: /fr/getting_started/tagging/unified_service_tagging/
-[5]: /fr/real_user_monitoring/android/advanced_configuration/#track-user-sessions
+[1]: https://docs.datadoghq.com/fr/real_user_monitoring/android/advanced_configuration/#automatically-track-views
+[2]: https://docs.datadoghq.com/fr/real_user_monitoring/android/advanced_configuration/#enrich-user-sessions
+[3]: https://docs.datadoghq.com/fr/real_user_monitoring/android/advanced_configuration/#track-custom-global-attributes
+[4]: https://docs.datadoghq.com/fr/getting_started/tagging/unified_service_tagging/
+[5]: https://docs.datadoghq.com/fr/real_user_monitoring/android/advanced_configuration/#track-user-sessions
+[6]: https://source.android.com/security/app-sandbox

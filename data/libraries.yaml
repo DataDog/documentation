@@ -253,6 +253,12 @@ Classic:
       official: true
       authors: Datadog
   - Swift:
+    - name: Swift-Dogstatsd
+      link: https://github.com/datadog/swift-dogstatsd/
+      dogstatsd: true
+      official: true
+      authors: Datadog
+  - Swift:
     - name: SwiftDog
       link: https://github.com/jaronoff97/SwiftDog
       api: true

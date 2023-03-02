@@ -28,4 +28,4 @@ You can manually append the `.rollup()` function to your query to adjust the met
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /metrics/type_modifiers/
+[1]: /metrics/custom_metrics/type_modifiers/

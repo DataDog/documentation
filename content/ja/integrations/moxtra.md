@@ -1,7 +1,6 @@
 ---
 categories:
-  - Collaboration
-ddtype: crawler
+- Collaboration
 dependencies: []
 description: Datadog アラートとグラフを Moxtra に送信。
 doc_link: https://docs.datadoghq.com/integrations/moxtra/
@@ -10,6 +9,7 @@ git_integration_title: moxtra
 has_logo: true
 integration_id: moxtra
 integration_title: Moxtra
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -18,6 +18,7 @@ public_title: Datadog-Moxtra インテグレーション
 short_description: Datadog アラートとグラフを Moxtra に送信。
 version: '1.0'
 ---
+
 ## 概要
 
 Moxtra は、出先でもデスクでも作業を可能にする埋め込み可能なマルチレイヤークラウドコラボレーションサービスを提供します。

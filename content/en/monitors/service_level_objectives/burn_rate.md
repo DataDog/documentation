@@ -5,10 +5,6 @@ description: "Use Monitors to alert off of the burn rate of an SLO"
 ---
 {{< jqmath-vanilla >}}
 
-<div class="alert alert-warning">
-This feature is in open beta. Email <a href="mailto:slo-help@datadoghq.com">slo-help@datadoghq.com</a> to ask questions or to provide feedback on this feature.
-</div>
-
 ## Overview
 
 SLO burn rate alerts notify you when the rate of consumption of your SLO error budget has exceeded your specified threshold and is sustained for a specific period of time. For example, you can set an alert if a burn rate of 14.4 or more is measured for the past hour over the past 5 minutes for your SLO’s 30-day target. And you can set it to optionally warn you for a slightly lower threshold than you would want an alert, for example if a burn rate of 7.2 or more is observed.
@@ -27,32 +23,34 @@ $${\text"length of SLO target" \text" (7, 30 or 90 days)"} / \text"burn rate" = 
 
 A burn rate alert will use the recent “error rate” in its calculation to measure the observed burn rate. Note that “error rate” means the ratio of bad behavior over total behavior during a *given period*:
 
-{{< img src="monitors/service_level_objectives/error-rate-definition.jpeg" alt="Error rate definition">}}
+$$\text"error rate" = 1 - {\text"good behavior during time period" / \text"total behavior during time period"}$$
 
 The units of “behavior” will differ depending on the type of SLO. Metric-based SLOs track the number of occurrences of something (like number of successful or failed requests), while monitor-based SLOs track amounts of time (like downtime and uptime of monitors).
 
 When you set a target for your SLO (like 99.9%), your error budget is the amount of unreliability you’re allowed to have:
 
-{{< img src="monitors/service_level_objectives/error-budget-definition.jpeg" alt="Error budget definition">}}
+$$\text"error budget" = 100% - \text"SLO Target"$$
 
 In other words, your error budget (in fractional form) is the ideal error rate you should be maintaining. So, a burn rate can alternatively be interpreted as a multiplier of your ideal error rate. For example, for a 99.9% SLO over 30 days, if the SLO is experiencing a burn rate of 10 that means the error budget is on pace to be completely depleted in 3 days and that the observed error rate is 10 times the ideal error rate: 
-{{< img src="monitors/service_level_objectives/observed-error-rate-example.jpeg" alt="Observed error rate example">}}
+
+$$(\text"burn rate")  (\text"ideal error rate") = \text"observed error rate"$$
+$$(10)(0.001) = 0.01$$
 
 Ideally, you should always try to maintain a burn rate of 1 over the course of your SLO’s target (as you invest in evolving your application with new features). However, in practice, your burn rate will fluctuate as issues or incidents cause your burn rate to increase rapidly until the issue is resolved. Therefore, alerting on burn rates allows you to be proactively notified when an issue is consuming your error budget at an elevated rate that could potentially cause you to miss your SLO target.
 
 When you configure a burn rate alert, you specify the burn rate threshold alongside a “long alerting window” and “short alerting window” over which the observed burn rate will be measured. The long alerting window is specified in hours and ensures the monitor measures the burn rate over a period long enough to correspond to a significant issue. This prevents the monitor from triggering flaky alerts due to minor issues. The short alerting window is specified in minutes. It ensures the monitor recovers quickly after the actual issue is over by checking if the recent burn rate is still above the threshold. Google recommends the short window to be 1/12 of the long window. However, you will be able to customize the short window programmatically in Datadog through the API or with Terraform. Here is the full formula for how the burn rate alert evaluates:
 
-{{< img src="monitors/service_level_objectives/burn-rate-alert-formula.jpeg" alt="Burn Rate Alert formula">}}
+$$(\text"long window error rate" / {1 - \text"SLO target"} ≥ \text"burn rate threshold") ∧ (\text"short window error rate" / {1 - \text"SLO target"} ≥ \text"burn rate threshold") = \text"ALERT"$$
 
 ## Maximum burn rate values
 
 As noted above, you can use this formula to evaluate the observed burn rate for both the long window and short window: 
 
-{{< img src="monitors/service_level_objectives/observed-error-rate.jpeg" alt="Observed error rate">}}
+$$\text"error rate" / {1 - \text"SLO target"}$$
 
 The maximum error rate that you can ever observe is 1 (for example, when 100% of the total behavior is bad behavior during the given time period). This means that there is a maximum possible burn rate value that you can use in your burn rate alerts: 
 
-{{< img src="monitors/service_level_objectives/max-burn-rate.jpeg" alt="Max burn rate">}}
+$$\text"max burn rate" = 1 / {1 - \text"SLO target"}$$
 
 The lower your SLO target, the lower your maximum possible burn rate value. If you were to attempt to set a burn rate threshold higher than this value, it would be impossible for the alert to trigger. If you set a burn rate alert’s condition to a value higher than the maximum determined by the above formula, you’re telling the burn rate alert to notify you when your SLO is seeing an error rate greater than 100% (which is impossible). So, to avoid unhelpful alerts from being accidentally created, Datadog blocks the creation of burn rate alerts that set a burn rate value beyond their maximum.
 
@@ -64,8 +62,7 @@ Picking burn rate values to alert off of depends on the target and time window y
 
 For the burn rate threshold, recall the previous relationship:
 
-{{< img src="monitors/service_level_objectives/time-to-depletion.jpeg" alt="Time to depletion formula">}}
-
+$$\text"length of SLO target (7, 30, or 90 days)" / \text"burn rate" = \text"time until error budget is fully consumed"$$
 Solve for burn rate and pick a time until the error budget is fully consumed that would qualify as a significant issue. 
 
 For the long window, choose a period of time that an elevated burn rate would have to be sustained to indicate a real issue rather than a minor transient issue. The higher the burn rate you select, the smaller a long window you should pair it with (so that high severity issues are caught sooner).
@@ -74,11 +71,11 @@ For the long window, choose a period of time that an elevated burn rate would ha
 
 Alternatively, you may think of a burn rate and long window pairing in terms of theoretical error budget consumption:
 
-{{< img src="monitors/service_level_objectives/burn-rate-approach-2.jpeg" alt="Burn rate approach # 2 formula">}}
+$$\text"burn rate" = {\text"length of SLO target (in hours) " * \text" percentage of error budget consumed"} / {\text"long window (in hours) " * 100%}$$
 
 For example, for a 7-day SLO, to be alerted if the theoretical error budget consumption is 10% with 1 hour as your long window, the selected burn rate should be:
 
-{{< img src="monitors/service_level_objectives/burn-rate-approach-2-example.jpeg" alt="Burn rate approach # 2 formula example">}}
+$$\text"burn rate" = {7 \text"days" * 24 \text"hours" * 10% \text"error budget consumed"} / {1 \text"hour" * 100%} = 16.8$$
 
 **Note:** For metric-based SLOs, the relationship in Approach #2 extrapolates the total number of occurrences contained in the long window out to the full length of the SLO target. In practice, the error budget consumption observed won’t correspond exactly to this relationship, as the total occurrences tracked by the metric-based SLO in a rolling window will likely differ throughout the day. A burn rate alert is meant to predict significant amounts of error budget consumption before they occur. For monitor-based SLOs, theoretical error budget consumption and actual error budget consumption are equal because time always moves at a constant rate . For example, 60 minutes of monitor data is aways contained in the 1 hour window.
 
@@ -88,10 +85,10 @@ For example, for a 7-day SLO, to be alerted if the theoretical error budget cons
 2. Create a new SLO or edit an existing one, then click the **Save and Set Alert** button. For existing SLOs, you can also click the **Set up Alerts** button in the SLO detail side panel to take you directly to the alert configuration.
 3. Select the **Burn Rate** tab in **Step 1: Setting alerting conditions**
 4. Set an alert to trigger when a certain burn rate is measured during a specific long window:
-   * The burn rate value must be in the range
-     {{< img src="monitors/service_level_objectives/burn-rate-range.jpeg" alt="Burn rate range">}}
-   * The long window value is limited to: `1 hour <= long window <= 48 hours`.
-   * In the UI the short window is automatically calculated as: `short window = 1/12 * long window`.
+   * The burn rate value must be in the range of
+     $$0 < \text"burn rate" ≤ 1 / {1 - \text"SLO target"}$$
+   * Datadog supports a maximum value of 48 hours for the long window. Your long window must be in the range of `1 hour <= long window <= 48 hours`.
+   * The short window is then automatically calculated in the UI as `short window = 1/12 * long window`.
    * You can specify a different short window value using the [API or Terraform](#api-and-terraform), but it must always be less than the long window.
 5. Add [Notification information][4] into the **Say what’s happening** and **Notify your team** sections.
 6. Click the **Save and Exit** button on the SLO configuration page.
@@ -151,21 +148,17 @@ resource "datadog_monitor" "metric-based-slo" {
     EOT
 
     message = "Example monitor message"
-    monitor_thresholds = {
+    monitor_thresholds {
       critical = 14.4
     }
     tags = ["foo:bar", "baz"]
 }
 ```
 
-## Beta restrictions
-
-- Alerting is available only for metric-based SLOs or for monitor-based SLOs that are only composed of Metric Monitor types (Metric, Integration, APM Metric, Anomaly, Forecast, or Outlier Monitors).
-- The alert status of an SLO monitor is available in the **Alerts** tab in the SLO’s detail panel or the [Manage Monitors][6] page.
 
 [1]: /monitors/service_level_objectives/metric/
 [2]: /monitors/service_level_objectives/monitor/
 [3]: https://sre.google/workbook/alerting-on-slos/
 [4]: https://app.datadoghq.com/slo
 [5]: /api/v1/monitors/#create-a-monitor
-[6]: https://www.terraform.io/docs/providers/datadog/r/monitor.html
+[6]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/monitor

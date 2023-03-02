@@ -1,9 +1,10 @@
 ---
 categories:
-  - configuration & deployment
+- configuration & deployment
 dependencies:
-  - https://github.com/jenkinsci/datadog-plugin/blob/master/README.md
-description: Transmettez automatiquement vos métriques, événements et checks de service Jenkins à Datadog. to Datadog.
+- https://github.com/jenkinsci/datadog-plugin/blob/master/README.md
+description: Transmettez automatiquement vos métriques, événements et checks de service
+  Jenkins à Datadog. to Datadog.
 doc_link: https://docs.datadoghq.com/integrations/jenkins/
 git_integration_title: jenkins
 has_logo: true
@@ -12,7 +13,8 @@ is_public: true
 kind: integration
 name: jenkins
 public_title: Intégration Datadog/Jenkins
-short_description: Transmettez automatiquement vos métriques, événements et checks de service Jenkins à Datadog. checks to Datadog.
+short_description: Transmettez automatiquement vos métriques, événements et checks
+  de service Jenkins à Datadog. checks to Datadog.
 ---
 Ce plug-in Jenkins transmet automatiquement des métriques, des événements et des checks de service à un compte Datadog.
 
@@ -24,7 +26,7 @@ Ce plug-in Jenkins transmet automatiquement des métriques, des événements et 
 
 ### Installation
 
-_Ce plug-in nécessite [Jenkins 2.164.1][2]._
+_Ce plug-in nécessite [Jenkins 2.303.3][2]._
 
 _Pour les anciennes versions de Jenkins (c'est-à-dire 1.632+), vous trouverez la version 1.2.0 du plug-in [ici](https://updates.jenkins.io/download/plugins/datadog/)._
 
@@ -377,7 +379,7 @@ Tout d'abord, **merci** de contribuer à ce projet.
 Lisez les [règles de contribution][11] (en anglais) avant d'envoyer un problème ou une pull request. Consultez le [document relatif au développement][12] (en anglais) pour obtenir des conseils et faire tourner un environnement de développement local rapide.
 
 [1]: https://plugins.jenkins.io/datadog
-[2]: http://updates.jenkins-ci.org/download/war/1.632/jenkins.war
+[2]: http://updates.jenkins-ci.org/download/war/2.303.3/jenkins.war
 [3]: https://wiki.jenkins-ci.org/display/JENKINS/Plugins#Plugins-Howtoinstallplugins
 [4]: https://app.datadoghq.com/account/settings#api
 [5]: https://github.com/jenkinsci/docker

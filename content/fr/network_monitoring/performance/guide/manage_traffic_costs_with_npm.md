@@ -10,7 +10,7 @@ La solution Network Performance Monitoring (NPM) vous permet d'effectuer un suiv
 
 ## Utilisation par l'équipe Datadog
 
-Lorsque Datadog a migré vers Kubernetes, comme on pouvait s'y attendre, il a été bien plus simple et rapide de migrer les services sans état par rapport aux services avec état (comme Kafka). Cette différence a généré un téraoctet de nouveau trafic d'une zone de disponibilité à une autre entre les services avec état (tous situés dans une seule zone de disponibilité) et les services sans état (répartis dans plusieurs zones de disponibilité). Par conséquent, cela a entraîné une augmentation conséquente et imprévue de nos coûts relatifs au cloud. Nous nous sommes servis de notre propre solution NPM pour ce qui causait ce problème, à savoir une stratégie de migration imparfaite donnant lieu à des communications réseau inefficaces et onéreuses. En partitionnant nos services avec état, nous sommes parvenus à réduire de façon significative les coûts de notre trafic cloud.
+Lorsque Datadog a migré vers Kubernetes, comme on pouvait s'y attendre, il a été bien plus simple et rapide de migrer les services sans état par rapport aux services avec état (comme Kafka). Cette différence a généré un téraoctet de nouveau trafic d'une zone de disponibilité à une autre entre les services avec état (tous situés dans une seule zone de disponibilité) et les services sans état (répartis dans plusieurs zones de disponibilité). Par conséquent, cela a entraîné une augmentation conséquente et imprévue de nos coûts relatifs au cloud. Nous nous sommes servis de notre propre solution NPM pour identifier ce qui causait ce problème, à savoir une stratégie de migration imparfaite donnant lieu à des communications réseau inefficaces et onéreuses. En partitionnant nos services avec état, nous sommes parvenus à réduire de façon significative les coûts du trafic cloud.
 
 ## Marché à suivre pour gérer les coûts du trafic
 
@@ -42,7 +42,7 @@ ou encore surveiller les sorties de votre propre équipe.
 
 ## Visualisation des coûts liés au trafic
 
-Vous pouvez visualiser le trafic entre plusieurs zones de disponibilité et le trafic au sein d'une même zone de disponibilité à l'aide de la map réseau. Les équipes Datadog se servent de cette vue pour vérifier qu'il n'y a pas de communication entre les zones de disponibilité en Europe et aux États-Unis, pour garantir le respect du RGPD et pour protéger les données des clients.
+Vous pouvez visualiser le trafic entre plusieurs zones de disponibilité et le trafic au sein d'une même zone de disponibilité à l'aide de la Network Map. Les équipes Datadog se servent de cette vue pour vérifier qu'il n'y a pas de communication entre les zones de disponibilité en Europe et aux États-Unis, pour garantir le respect du RGPD et pour protéger les données des clients.
 Trafic entre plusieurs zones de disponibilité :
 {{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/cross-az-traffic.png" alt="Trafic entre plusieurs zones de disponibilité">}}
 Trafic au sein d'une zone de disponibilité d'un service à un autre :
@@ -55,10 +55,10 @@ Vous pouvez modifier vos préférences à l'aide du bouton **Filter traffic**. P
 
 ## Représentation graphique des coûts liés au trafic
 
-Nous vous recommandons de surveiller l'évolution des métriques de volume du trafic dans des dashboards et des notebooks. Il est possible de représenter dans un graphique le trafic entre deux endpoints à l'aide des mêmes requêtes que sur la page Network. Vous pouvez également créer un **Widget Série temporelle** et sélectionner la source **Network Traffic** dans le menu déroulant.
+Datadog recommande de surveiller l'évolution des métriques de volume du trafic dans des dashboards et des notebooks. Il est possible de représenter le trafic entre deux endpoints à l'aide des mêmes requêtes que sur la page Network. Pour y parvenir, créez un **widget Série temporelle** et sélectionnez la source **Network Traffic** dans le menu déroulant.
 
 {{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/timeseries.png" alt="Créer une série temporelle">}}
 
-Grâce aux dashboards et aux notebooks, vous pouvez facilement partager vos découvertes avec votre équipe.
+Partagez ensuite vos résultats et les éventuels problèmes identifiés avec vos collègues à l'aide de dashboards et de notebooks.
 
 {{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/network-traffic.png" alt="Afficher votre trafic réseau">}}

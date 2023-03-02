@@ -8,18 +8,18 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - os & system
+- os & system
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/directory/README.md
+- https://github.com/DataDog/integrations-core/blob/master/directory/README.md
 display_name: Directory
 draft: false
 git_integration_title: directory
 guid: 0c38c4ef-5266-4667-9fb1-de8f2b73708a
 integration_id: system
 integration_title: Directory
-integration_version: 1.11.1
+integration_version: 1.13.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -28,13 +28,17 @@ metric_prefix: system.
 metric_to_check: system.disk.directory.file.bytes
 name: directory
 public_title: Intégration Datadog/Directory
-short_description: L'intégration Directory transmet des métriques sur des fichiers pour un répertoire donné.
+short_description: L'intégration Directory transmet des métriques sur des fichiers
+  pour un répertoire donné.
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 Capturez des métriques à partir des répertoires et des fichiers de votre choix. L'Agent recueille les éléments suivants :

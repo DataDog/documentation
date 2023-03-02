@@ -6,6 +6,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/database-performance-monitoring-datadog"
   tag: "Blog"
   text: "Monitor and visualize database performance"
+- link: "https://www.datadoghq.com/blog/sql-server-and-azure-managed-services-database-monitoring/"
+  tag: "Blog"
+  text: "Monitor SQL Server and Azure managed databases with Datadog DBM"
 - link: "/database_monitoring/data_collected/"
   tag: "Documentation"
   text: "Data Collected"
@@ -14,27 +17,31 @@ further_reading:
   text: "Troubleshooting"
 
 ---
-
-{{< img src="database_monitoring/dbm-main.png" alt="Database Monitoring" style="width:100%;">}}
-
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
+
+{{< img src="database_monitoring/dbm-main.png" alt="Database Monitoring" style="width:100%;">}}
 
 Datadog Database Monitoring provides deep visibility into databases across all of your hosts. Dig into historical query performance metrics, explain plans, and host-level metrics all in one place, to understand the health and performance of your databases and troubleshoot issues as they arise.
 
 ## Getting started
 
-Datadog Database Monitoring supports self-hosted and managed cloud versions of **Postgres** and **MySQL**. To get started with Datadog Database Monitoring, configure your database and install the Datadog Agent. For setup instructions, select your database technology:
+Datadog Database Monitoring supports self-hosted and managed cloud versions of **Postgres**, **MySQL**, and **SQL Server**. To get started with Datadog Database Monitoring, configure your database and install the Datadog Agent. For setup instructions, select your database technology:
 
-### Self-hosted databases
+### Postgres
 
-{{< partial name="dbm/dbm-getting-started" >}}
+{{< partial name="dbm/dbm-setup-postgres" >}}
 <p></p>
 
-### Managed databases
+### MySQL
 
-{{< partial name="dbm/dbm-getting-started-managed" >}}
+{{< partial name="dbm/dbm-setup-mysql" >}}
+<p></p>
+
+### SQL Server
+
+{{< partial name="dbm/dbm-setup-sql-server" >}}
 <p></p>
 
 ## Explore Datadog Database Monitoring

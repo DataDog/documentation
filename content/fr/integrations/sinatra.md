@@ -1,25 +1,26 @@
 ---
-title: Sinatra
-name: Sinatra
-kind: integration
-description: Recueillez des logs d'application Sinatra.
-short_description: Recueillez des logs d'application Sinatra.
-categories:
-  - log collection
 aliases:
-  - /fr/logs/log_collection/nxlog
+- /fr/logs/log_collection/nxlog
+categories:
+- log collection
+dependencies:
+- https://github.com/DataDog/documentation/blob/master/content/en/integrations/sinatra.md
+description: Recueillez des logs d'application Sinatra.
 has_logo: true
+integration_id: sinatra
 integration_title: Sinatra
 is_public: true
+kind: integration
+name: Sinatra
 public_title: Intégration Datadog/Sinatra
-dependencies:
-  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/sinatra.md'
+short_description: Recueillez des logs d'application Sinatra.
 supported_os:
-  - linux
-  - mac_os
-  - windows
-integration_id: sinatra
+- linux
+- mac_os
+- windows
+title: Sinatra
 ---
+
 ## Présentation
 
 Cette intégration vous permet de recueillir les logs d'accès Web pour vos applications [Sinatra][1] afin de surveiller les éléments suivants :
@@ -57,8 +58,6 @@ get '/' do
 end
 ```
 
-Pour en savoir plus, consultez la [documentation relative aux recettes Rack][6] (en anglais).
-
 Ce logger utilise le format Apache Access commun et génère des logs au format suivant :
 
 ```text
@@ -76,7 +75,7 @@ _Disponible à partir des versions > 6.0 de l'Agent_
     logs_enabled: true
     ```
 
-2. Ajoutez ce bloc de configuration à votre fichier `sinatra.d/conf.yaml` à la racine du [répertoire de configuration de votre Agent][7] pour commencer à recueillir vos logs d'application Sinatra :
+2. Ajoutez ce bloc de configuration à votre fichier `sinatra.d/conf.yaml` à la racine du [répertoire de configuration de votre Agent][6] pour commencer à recueillir vos logs d'application Sinatra :
 
     ```yaml
     logs:
@@ -88,13 +87,12 @@ _Disponible à partir des versions > 6.0 de l'Agent_
 
       Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement.
 
-3. [Redémarrez l'Agent][8].
+3. [Redémarrez l'Agent][7].
 
 [1]: http://sinatrarb.com
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: http://sinatrarb.com/intro.html#Logging
 [4]: http://rack.github.io
 [5]: https://www.rubydoc.info/github/rack/rack/Rack/CommonLogger
-[6]: http://recipes.sinatrarb.com/p/middleware/rack_commonlogger
-[7]: /fr/agent/guide/agent-configuration-files/#agent-configuration-directory
-[8]: /fr/agent/guide/agent-commands/#restart-the-agent
+[6]: /fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[7]: /fr/agent/guide/agent-commands/#restart-the-agent

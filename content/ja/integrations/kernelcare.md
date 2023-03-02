@@ -1,40 +1,64 @@
 ---
+app_id: kernelcare
+app_uuid: 7bfd2b8a-d461-4890-aeba-f1e9eab617c7
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: kernelcare.uptodate
+      metadata_path: metadata.csv
+      prefix: kernelcare.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: KernelCare
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: schvaliuk@cloudlinux.com
+  support_email: schvaliuk@cloudlinux.com
 categories:
-  - security
-  - OS & システム
-creates_events: false
-ddtype: check
+- security
+- os system
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/kernelcare/README.md'
-display_name: KernelCare
+- https://github.com/DataDog/integrations-extras/blob/master/kernelcare/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: kernelcare
-guid: 8b35942d-40cd-4c86-b584-af1837ea67ca
 integration_id: kernelcare
 integration_title: KernelCare
+integration_version: 1.0.0
 is_public: true
 kind: integration
-maintainer: schvaliuk@cloudlinux.com
-manifest_version: 1.0.0
-metric_prefix: kernelcare.
-metric_to_check: kernelcare.uptodate
+manifest_version: 2.0.0
 name: kernelcare
-public_title: Datadog-KernelCare インテグレーション
+oauth: {}
+public_title: KernelCare
 short_description: KernelCare サーバーのアクティビティとステータスメトリクスを監視します。
-support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Security
+  - Category::OS System
+  configuration: README.md#Setup
+  description: KernelCare サーバーのアクティビティとステータスメトリクスを監視します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: KernelCare
 ---
+
+
+
 ## 概要
 
 [KernelCare][1] は、Linux カーネルの脆弱性に対して、再起動することなく自動的にセキュリティパッチを適用するライブパッチシステムです。過去 6 年、Dell やZoom を始めとする企業の 50 万台以上のサーバーで利用されています。RHEL、CentOS、Amazon Linux、Ubuntu など主要な Linux ディストリビューションで動作し、一般的な脆弱性スキャナー、クラウドモニタリングツール、パッチ管理ソリューションと相互運用します。
@@ -43,29 +67,29 @@ supported_os:
 
 ## セットアップ
 
-ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
+Kernelcare チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
 ### インストール
 
-Agent v6.8 以降を使用している場合は、以下の手順に従って、ホストに Kernelcare チェックをインストールしてください。[バージョン 6.8 以前の Agent][4] または [Docker Agent][5] でチェックをインストールする場合は、[コミュニティインテグレーションのインストール][3]に関する Agent のガイドを参照してください。
+Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Kernelcare チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 
-1. [Datadog Agent をダウンロードして起動][6]します。
-2. 次のコマンドを実行して、Agent でインテグレーション Wheel をインストールします。
+1. 以下のコマンドを実行して、Agent インテグレーションをインストールします。
 
    ```shell
    datadog-agent integration install -t datadog-kernelcare==<INTEGRATION_VERSION>
    ```
 
-3. [他のパッケージ化されたインテグレーション][7]と同様にインテグレーションを構成します。
+2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
+
 ### コンフィギュレーション
 
-1. KernelCare のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `kernelcare.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[kernelcare.d/conf.yaml のサンプル][8]を参照してください。
+1. KernelCare のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `kernelcare.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[kernelcare.d/conf.yaml のサンプル][5]を参照してください。
 
-2. [Agent を再起動します][9]。
+2. [Agent を再起動します][6]。
 
 ### 検証
 
-[Agent の status サブコマンドを実行][10]し、Checks セクションで `kernelcare` を探します。
+[Agent の status サブコマンド][7]を実行し、Checks セクションで `kernelcare` を探します。
 
 ## 収集データ
 
@@ -75,7 +99,7 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
 
 ### イベント
 
-KernelCare には、イベントは含まれません。
+Kernelcare インテグレーションには、イベントは含まれません。
 
 ### サービスのチェック
 {{< get-service-checks-from-git "kernelcare" >}}
@@ -83,19 +107,16 @@ KernelCare には、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
 
 [1]: https://www.kernelcare.com
-[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[3]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/
-[4]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
-[5]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/?tab=docker
-[6]: https://app.datadoghq.com/account/settings#agent
-[7]: https://docs.datadoghq.com/ja/getting_started/integrations/
-[8]: https://github.com/DataDog/integrations-extras/blob/master/kernelcare/datadog_checks/kernelcare/data/conf.yaml.example
-[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[11]: https://github.com/DataDog/integrations-extras/blob/master/kernelcare/metadata.csv
-[12]: https://github.com/DataDog/integrations-extras/blob/master/kernelcare/assets/service_checks.json
-[13]: https://docs.datadoghq.com/ja/help/
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
+[4]: https://docs.datadoghq.com/ja/getting_started/integrations/
+[5]: https://github.com/DataDog/integrations-extras/blob/master/kernelcare/datadog_checks/kernelcare/data/conf.yaml.example
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://github.com/DataDog/integrations-extras/blob/master/kernelcare/metadata.csv
+[9]: https://github.com/DataDog/integrations-extras/blob/master/kernelcare/assets/service_checks.json
+[10]: https://docs.datadoghq.com/ja/help/

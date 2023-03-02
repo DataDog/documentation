@@ -1,23 +1,24 @@
 ---
-title: Pipelines
-kind: documentation
-description: Parser vos logs à l'aide du processeur Grok
 aliases:
-  - /fr/logs/processing/pipelines/
+- /fr/logs/processing/pipelines/
+description: Parser vos logs à l'aide du processeur Grok
 further_reading:
-  - link: /logs/log_configuration/processors
-    tag: Documentation
-    text: Consulter la liste complète des processeurs disponibles
-  - link: /logs/logging_without_limits/
-    tag: Documentation
-    text: Logging without Limits*
-  - link: /logs/explorer/
-    tag: Documentation
-    text: Apprendre à explorer vos logs
-  - link: https://learn.datadoghq.com/course/view.php?id=10
-    tag: Centre d'apprentissage
-    text: Aller plus loin avec les logs grâce au parsing
+- link: /logs/log_configuration/processors
+  tag: Documentation
+  text: Consulter la liste complète des processeurs disponibles
+- link: /logs/logging_without_limits/
+  tag: Documentation
+  text: Logging without Limits*
+- link: /logs/explorer/
+  tag: Documentation
+  text: Apprendre à explorer vos logs
+- link: https://learn.datadoghq.com/courses/going-deeper-with-logs-processing
+  tag: Centre d'apprentissage
+  text: Des analyses plus poussées grâce au traitement des logs
+kind: documentation
+title: Pipelines
 ---
+
 ## Présentation
 
 Datadog [parse][1] automatiquement les logs JSON. Lorsque les logs ne sont pas au format JSON, vous pouvez enrichir leurs données brutes en les faisant passer par un pipeline de traitement. Les pipelines traitent la grande majorité des formats de logs et les convertissent en un format commun dans Datadog. La mise en œuvre de pipelines de logs et d'une stratégie de traitement vous permet également de bénéficier d'une [convention de nommage des attributs][2] à l'échelle de votre organisation.
@@ -26,8 +27,7 @@ Avec les pipelines, les logs sont assemblés de façon séquentielle via des [pr
 
 Les pipelines et les processeurs peuvent être appliqués à tout type de log. Vous n'avez pas besoin de modifier la configuration de votre journalisation ni de déployer des modifications dans les règles de traitement côté serveur. Vous pouvez gérer l'ensemble des paramètres depuis la [page de configuration des pipelines][5].
 
-**Remarque** : pour une utilisation optimale de la solution Log Management, Datadog recommande d'utiliser au maximum 20 processeurs par pipeline et 10 règles de parsing dans un processeur Grok. 
-Datadog se réserve le droit de désactiver les règles de parsing, les processeurs ou les pipelines peu optimisés qui pourraient avoir une incidence sur les performances du service de Datadog.
+**Remarque** : pour une utilisation optimale de la solution Log Management, Datadog recommande d'utiliser au maximum 20 processeurs par pipeline et 10 règles de parsing dans un [processeur Grok][6]. Datadog se réserve le droit de désactiver les règles de parsing, les processeurs ou les pipelines peu optimisés qui pourraient avoir une incidence sur les performances du service de Datadog.
 
 ## Prétraitement
 
@@ -35,7 +35,7 @@ Le prétraitement des logs JSON intervient avant le traitement par le pipeline. 
 
 Le prétraitement des logs JSON inclut une configuration par défaut qui prend en charge les redirecteurs de log standard. Pour modifier cette configuration afin de l'adapter à une stratégie de transmission des logs personnalisée ou spécifique, procédez comme suit :
 
-1. Accédez à la section [Pipelines][6] de l'application Datadog, puis sélectionnez [Preprocessing for JSON logs][7].
+1. Accédez à la section [Pipelines][7] de l'application Datadog, puis sélectionnez [Preprocessing for JSON logs][8].
 
     **Remarque** : le prétraitement des logs JSON est le seul moyen de définir l'un de vos attributs de log en tant que `host` pour vos logs.
 
@@ -145,20 +145,23 @@ Par défaut, [les traceurs de Datadog peuvent automatiquement injecter les ID de
 Vous pouvez préciser des attributs alternatifs à utiliser comme source pour l'ID de trace d'un log en définissant un [processeur de remappage d'ID de trace][2].
 
 
-[1]: /fr/tracing/connect_logs_and_traces/
-[2]: /fr/logs/log_configuration/#trace-remapper
+[1]: /fr/tracing/other_telemetry/connect_logs_and_traces/
+[2]: /fr/logs/log_configuration/processors/#trace-remapper
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Créer un pipeline
 
-1. Accédez à la section [Pipelines][6] de l'application Datadog.
+1. Accédez à la section [Pipelines][7] de l'application Datadog.
 2. Sélectionnez **New Pipeline**.
 3. Sélectionnez un log dans l'aperçu Live Tail pour appliquer un filtre, ou utilisez votre propre filtre. Choisissez un filtre dans le menu déroulant ou créez votre propre requête de filtre avec l'icône **</>**. Les filtres vous permettent de limiter les types de logs qui passent par un pipeline.
 
     **Remarque** : les filtres de pipeline sont appliqués avant tout traitement par les processeurs du pipeline. Par conséquent, vous ne pouvez pas appliquer un filtre basé sur un attribut qui est extrait dans le pipeline.
 
-4. Attribuez un nom à votre pipeline, puis cliquez sur **Save**.
+4. Donnez un nom à votre pipeline.
+5. (Facultatif) Accordez un accès en modification aux processeurs dans le pipeline.
+6. (Facultatif) Ajoutez des tags et une description au pipeline. La description peut être utilisée pour indiquer l'objectif du pipeline et l'équipe qui en est propriétaire.
+7. Sélectionnez **Save**.
 
 Voici un exemple de log converti par un pipeline :
 
@@ -182,19 +185,19 @@ Consultez l'exemple de logs ELB ci-dessous :
 
 ### Bibliothèque de pipelines d'intégration
 
-Pour afficher la liste complète des pipelines d'intégration proposés par Datadog, consultez la [bibliothèque de pipelines d'intégration][6]. Elle précise également comment Datadog traite les différents formats de log par défaut.
+Pour afficher la liste complète des pipelines d'intégration proposés par Datadog, consultez la [bibliothèque de pipelines d'intégration][7]. Cette bibliothèque indique également comment Datadog traite les différents formats de log par défaut.
 
-{{< img src="logs/processing/pipelines/integration-pipeline-library.gif" alt="Bibliothèque de pipelines d'intégration" style="width:80%;">}}
+{{< img src="logs/processing/pipelines/integration-pipeline-library.mp4" alt="Bibliothèque de pipelines d'intégration" video=true style="width:80%;">}}
 
-Pour utiliser un pipeline d'intégration, nous vous conseillons d'installer l'intégration en configurant la `source` de logs correspondante. Lorsque Datadog reçoit le premier log avec cette source, l'installation se déclenche automatiquement et le pipeline d'intégration est ajouté à la liste des pipelines de traitement. Pour configurer la source de logs, consultez la [documentation de l'intégration][8] correspondante.
+Pour utiliser un pipeline d'intégration, Datadog vous conseille d'installer l'intégration en configurant la `source` de logs correspondante. Lorsque Datadog reçoit le premier log avec cette source, l'installation se déclenche automatiquement et le pipeline d'intégration est ajouté à la liste des pipelines de traitement. Pour configurer la source de logs, consultez la [documentation de l'intégration][9] correspondante.
 
 Il est également possible de copier un pipeline d'intégration à l'aide du bouton Clone.
 
-{{< img src="logs/processing/pipelines/clone-pipeline-from-library.gif" alt="Cloner un pipeline à partir de la bibliothèque" style="width:80%;">}}
+{{< img src="logs/processing/pipelines/clone-pipeline-from-library.mp4" alt="Cloner un pipeline à partir de la bibliothèque" video=true style="width:80%;">}}
 
 ## Ajouter un processeur ou un pipeline imbriqué
 
-1. Accédez à la section [Pipelines][6] de l'application Datadog.
+1. Accédez à la section [Pipelines][7] de l'application Datadog.
 2. Passez le curseur sur un pipeline, puis cliquez sur la flèche en regard du pipeline pour développer la section relative aux processeurs pipelines imbriqués.
 3. Sélectionnez **Add Processor** ou **Add Nested Pipeline**.
 
@@ -214,6 +217,22 @@ Il est possible de déplacer un pipeline vers un autre pipeline pour le transfor
 
 {{< img src="logs/processing/pipelines/move_to_pipeline.mp4" alt="Faire glisser et déposer des pipelines imbriqués" video="true"  width="80%" >}}
 
+## Gérer vos pipelines
+
+Déterminez à quel moment un pipeline ou un processeur a été modifié pour la dernière fois et l'utilisateur qui est à l'origine de la modification en utilisant les informations sur les modifications du pipeline. Filtrez vos pipelines à l'aide de ces informations et d'autres propriétés utilisables comme facettes, par exemple si le pipeline est activé ou en lecture seule.
+
+{{< img src="logs/processing/pipelines/log_pipeline_management.png" alt="Comment gérer vos pipelines avec la recherche à facettes, les informations sur les modifications de pipeline et la fenêtre de réorganisation" style="width:50%;">}}
+
+Réorganisez vos pipelines avec précision à l'aide de l'option `Move to` dans le volet d'options glissant. Faites défiler l'écran, puis cliquez sur la position exacte vers laquelle déplacer le pipeline sélectionné à l'aide de la fenêtre `Move to`. Il n'est pas possible de déplacer des pipelines vers d'autres pipelines en lecture seule. Les pipelines contenant des pipelines imbriqués peuvent uniquement être déplacés vers une position supérieure. Ils ne peuvent pas être déplacés vers d'autres pipelines.
+
+{{< img src="logs/processing/pipelines/log_pipeline_move_to.png" alt="Comment réorganiser vos pipelines avec précision à l'aide de la fenêtre Move to" style="width:50%;">}}
+
+## Métriques d'estimation d'utilisation
+
+Les métriques d'estimation d'utilisation fournissent des données propres à un pipeline. Elles indiquent le volume et le nombre de logs ingérés et modifiés par chaque pipeline. Vous disposez également d'un lien vers le [dashboard d'estimation de l'utilisation des logs][10] prêt à l'emploi pour chaque pipeline. Ce dashboard présente les métriques d'utilisation d'un pipeline à l'aide de graphiques détaillés.
+
+{{< img src="logs/processing/pipelines/log_pipeline_statistics.png" alt="Comment consulter une vue d'ensemble des métriques d'utilisation de vos pipelines" style="width:50%;">}}
+
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -226,6 +245,8 @@ Il est possible de déplacer un pipeline vers un autre pipeline pour le transfor
 [3]: /fr/logs/log_configuration/processors/
 [4]: /fr/logs/explorer/facets/
 [5]: https://app.datadoghq.com/logs/pipelines
-[6]: https://app.datadoghq.com/logs/pipelines/pipeline/library
-[7]: https://app.datadoghq.com/logs/pipelines/remapping
-[8]: /fr/integrations/#cat-log-collection
+[6]: /fr/logs/log_configuration/processors/?tab=ui#grok-parser
+[7]: https://app.datadoghq.com/logs/pipelines/pipeline/library
+[8]: https://app.datadoghq.com/logs/pipelines/remapping
+[9]: /fr/integrations/#cat-log-collection
+[10]: https://app.datadoghq.com/dash/integration/logs_estimated_usage

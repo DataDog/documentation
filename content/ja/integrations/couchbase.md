@@ -1,46 +1,72 @@
 ---
+app_id: couchbase
+app_uuid: e7fac1cd-65ba-4a58-af73-ee5f160cc6f9
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     couchbase: assets/dashboards/couchbase_dashboard.json
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: couchbase.ram.used
+      metadata_path: metadata.csv
+      prefix: couchbase.
+    process_signatures:
+    - beam.smp couchbase
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Couchbase
+  logs:
+    source: couchdb
   saved_views:
     couchbase_processes: assets/saved_views/couchbase_processes.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-  - data store
-  - autodiscovery
-  - log collection
-creates_events: false
-ddtype: check
+- data store
+- log collection
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/couchbase/README.md'
-display_name: Couchbase
+- https://github.com/DataDog/integrations-core/blob/master/couchbase/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: couchbase
-guid: ba7ce7de-4fcb-4418-8c90-329baa6a5d59
 integration_id: couchbase
 integration_title: CouchBase
+integration_version: 2.2.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: couchbase.
-metric_to_check: couchbase.ram.used
+manifest_version: 2.0.0
 name: couchbase
-process_signatures:
-  - beam.smp couchbase
-public_title: Datadog-CouchBase インテグレーション
+oauth: {}
+public_title: CouchBase
 short_description: Couchbase のアクティビティとパフォーマンスのメトリクスを追跡およびグラフ化
-support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::データストア
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: Couchbase のアクティビティとパフォーマンスのメトリクスを追跡およびグラフ化
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: CouchBase
 ---
+
+
+
 ![Couchbase 読み取りバイト数][1]
 
 ## 概要
@@ -57,7 +83,7 @@ supported_os:
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Couchbase チェックは [Datadog Agent][2] パッケージに含まれています。Couchbase ノードに追加でインストールする必要はありません。
 
@@ -85,6 +111,29 @@ Couchbase チェックは [Datadog Agent][2] パッケージに含まれてい�
    ```
 
 2. [Agent を再起動します][3]。
+
+#### ログの収集
+
+_Agent バージョン 6.0 以降で利用可能_
+
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` でこれを有効にする必要があります。
+
+   ```yaml
+   logs_enabled: true
+   ```
+
+2. Couchbase のログの収集を開始するには、次の構成ブロックを `couchbase.d/conf.yaml` ファイルに追加します。
+
+   ```yaml
+   logs:
+     - type: file
+       path: /opt/couchbase/var/lib/couchbase/logs/couchdb.log
+       source: couchdb
+   ```
+
+    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。使用可能なすべての構成オプションの詳細については、[サンプル couchbase.d/conf.yaml][2] を参照してください。
+
+3. [Agent を再起動します][3]。
 
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/couchbase/datadog_checks/couchbase/data/conf.yaml.example

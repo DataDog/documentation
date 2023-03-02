@@ -5,12 +5,9 @@ description: "Display a filtered log stream in your Datadog dashboards."
 aliases:
     - /graphing/widgets/log_stream/
 further_reading:
-- link: "/dashboards/screenboards/"
-  tag: "Documentation"
-  text: "Screenboard"
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
-  text: "Building Dashboard using JSON"
+  text: "Building Dashboards using JSON"
 ---
 
 The Log Stream displays a log flow matching the defined query:

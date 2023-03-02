@@ -1,51 +1,74 @@
 ---
+app_id: voltdb
+app_uuid: 4ea56824-28da-4beb-8937-c45ef32fdb7f
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     VoltDB - Overview: assets/dashboards/voltdb_overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: voltdb.cpu.percent_used
+      metadata_path: metadata.csv
+      prefix: voltdb.
+    process_signatures:
+    - voltdb
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: VoltDB
   logs:
     source: voltdb
-  metrics_metadata: metadata.csv
   monitors:
     CPU load: assets/monitors/cpu_load.json
   saved_views:
     voltdb_processes: assets/saved_views/voltdb_processes.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
-  - data store
-  - ログの収集
-creates_events: false
-ddtype: check
+- data store
+- ログの収集
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/voltdb/README.md
-display_name: VoltDB
+- https://github.com/DataDog/integrations-core/blob/master/voltdb/README.md
+display_on_public_website: true
 draft: false
-further_reading:
-  - link: https://www.datadoghq.com/blog/monitor-voltdb-with-datadog/
-    tag: ブログ
-    text: Datadog を使用した VoltDB の監視
 git_integration_title: voltdb
-guid: 15abd7c6-1845-405a-8627-f83be1e48b11
 integration_id: voltdb
 integration_title: VoltDB
+integration_version: 2.1.2
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: voltdb.
-metric_to_check: voltdb.cpu.percent_used
+manifest_version: 2.0.0
 name: voltdb
-process_signatures:
-  - voltdb
+oauth: {}
 public_title: VoltDB
 short_description: ステータスやパフォーマンスなどのメトリクスを VoltDB クラスターから収集します。
-support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Data Store
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: ステータスやパフォーマンスなどのメトリクスを VoltDB クラスターから収集します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: VoltDB
 ---
+
+
+
 ## 概要
 
 このチェックは、Datadog Agent を通じて [VoltDB][1] を監視します。
@@ -54,16 +77,16 @@ supported_os:
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-**注**: このチェックは、クラスター当たり 1 つの Agent に構成される必要があります。複数ホストに及ぶクラスターを監視する場合は、各ホストに 1 つの Agent をインストールできます。ただし、メトリクスが重複してしまうため、1 つ以上のホストで VoltDB インテグレーションを有効にしないでください。
+**注**: このチェックは、クラスター当たり 1 つの Agent に構成される必要があります。複数ホストに及ぶクラスターを監視する場合は、各ホストに 1 つの Agent をインストールします。ただし、メトリクスが重複してしまうため、1 つ以上のホストで VoltDB インテグレーションを有効にしないでください。
 
 ### インストール
 
-VoltDB チェックは [Datadog Agent][2] パッケージに含まれています。
+VoltDB チェックは [Datadog Agent][3] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
 ### コンフィギュレーション
 
-1. VoltDB `deployment.xml` ファイルを編集し、`datadog-agent` ユーザーを追加します。特別なロールは必要ないため、組み込みの `user` ロールを割り当てます。
+1. VoltDB `deployment.xml` ファイルを編集し、`datadog-agent` ユーザーを追加します。**注**: 特別なロールは必要ないため、組み込みの `user` ロールを割り当てます。
 
     ```xml
     <users>
@@ -72,7 +95,7 @@ VoltDB チェックは [Datadog Agent][2] パッケージに含まれていま�
     </users>
     ```
 
-2. VoltDB のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `voltdb.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル voltdb.d/conf.yaml][3] を参照してください。
+2. VoltDB のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `voltdb.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル voltdb.d/conf.yaml][4] を参照してください。
 
     ```yaml
     init_config:
@@ -83,11 +106,11 @@ VoltDB チェックは [Datadog Agent][2] パッケージに含まれていま�
         password: "<PASSWORD>"
     ```
 
-3. [Agent を再起動します][4]。
+3. [Agent を再起動します][5]。
 
 #### TLS サポート
 
-[TLS/SSL][5] がクライアントの HTTP ポートで有効になっている場合:
+[TLS/SSL][6] がクライアントの HTTP ポートで有効になっている場合:
 
 1. CA 証明書ファイルを PEM フォーマットでエクスポートします。
 
@@ -122,7 +145,7 @@ VoltDB チェックは [Datadog Agent][2] パッケージに含まれていま�
       tls_ca_cert: /path/to/voltdb-ca.pem
     ```
 
-3. [Agent を再起動します][4]。
+3. [Agent を再起動します][5]。
 
 #### ログの収集
 
@@ -141,15 +164,15 @@ VoltDB チェックは [Datadog Agent][2] パッケージに含まれていま�
         source: voltdb
     ```
 
-  `path` の値を環境に合わせて変更します。使用可能なすべてのコンフィギュレーションオプションについては、[`voltdb.d/conf.yaml` ファイルのサンプル][3]を参照してください。
+  `path` の値を環境に合わせて変更します。使用可能なすべてのコンフィギュレーションオプションについては、[`voltdb.d/conf.yaml` ファイルのサンプル][4]を参照してください。
 
-  3. [Agent を再起動します][4]。
+  3. [Agent を再起動します][5]。
 
-  Kubernetes 環境でログを収集する Agent を構成する追加の情報に関しては、[Datadog ドキュメント][6]を参照してください。
+  Kubernetes 環境のログを有効にするには、[Kubernetes ログ収集][7]を参照してください。
 
 ### 検証
 
-[Agent のステータスサブコマンドを実行][7]し、Checks セクションで `voltdb` を検索します。
+[Agent のステータスサブコマンドを実行][8]し、Checks セクションで `voltdb` を検索します。
 
 ## 収集データ
 
@@ -167,7 +190,7 @@ VoltDB チェックは [Datadog Agent][2] パッケージに含まれていま�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 
 ## その他の参考資料
 
@@ -175,11 +198,12 @@ VoltDB チェックは [Datadog Agent][2] パッケージに含まれていま�
 
 [1]: https://voltdb.com
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[3]: https://github.com/DataDog/integrations-core/blob/master/voltdb/datadog_checks/voltdb/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: https://docs.voltdb.com/UsingVoltDB/SecuritySSL.php
-[6]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-core/blob/master/voltdb/metadata.csv
-[9]: https://github.com/DataDog/integrations-core/blob/master/voltdb/assets/service_checks.json
-[10]: https://docs.datadoghq.com/ja/help/
+[3]: https://app.datadoghq.com/account/settings#agent
+[4]: https://github.com/DataDog/integrations-core/blob/master/voltdb/datadog_checks/voltdb/data/conf.yaml.example
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[6]: https://docs.voltdb.com/UsingVoltDB/SecuritySSL.php
+[7]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
+[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[9]: https://github.com/DataDog/integrations-core/blob/master/voltdb/metadata.csv
+[10]: https://github.com/DataDog/integrations-core/blob/master/voltdb/assets/service_checks.json
+[11]: https://docs.datadoghq.com/ja/help/

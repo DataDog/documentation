@@ -7,7 +7,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitoring-101-alerting/"
   tag: "Blog"
   text: "Monitoring 101: Alerting on what matters"
-- link: "/monitors/create/types/metric/"
+- link: "/monitors/types/metric/"
   tag: "Documentation"
   text: "Metric Monitors"
 - link: "/monitors/notify/"
@@ -45,7 +45,7 @@ According to the [Disk integration documentation][6], `system.disk.in_use` is *t
 
 To alert on low disk space, the monitor should trigger when the metric is `above` the threshold. The threshold values are based on your preference. For this metric, values between `0` and `1` are appropriate:
 
-{{< img src="getting_started/application/alert_thresholds.png" alt="alert setup"  >}}
+{{< img src="getting_started/application/monitor_configuration.png" alt="Metric monitor configuration settings within the Create Monitor page, with Multi Alert selected and configured to alert on the average of the query over the last 5 minutes for each host and device reporting the metric. The Set alert conditions section is configured to trigger when the evaluated value is above the threshold for any host or device, with the Alert threshold set at 0.9, the Warning threshold set at 0.8, and the monitor configured not to notify if data is missing"  >}}
 
 For this example, the other settings in this section are left on the defaults. For more details, see the [Metric Monitors][7] documentation.
 
@@ -81,23 +81,31 @@ Use this section to send notifications to your team through Email, Slack, PagerD
 
 Removing the `@notification` from either section removes it from both sections.
 
-### Restrict access
+### Permissions
 
-<div class="alert alert-warning">
-RBAC restrict access to monitors is in beta. To request access, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.</div>
+{{< img src="getting_started/monitors/monitor_rbac_restricted.jpg" alt="RBAC Restricted Monitor" style="width:90%;" >}}
 
-Use this section to restrict access to you, everyone in your org with your role, or to specific roles in your org. For more information about roles, see the [RBAC][9] documentation.
+Use this option to restrict the editing of your monitor to its creator and to specific roles in your org. For more information about roles, see [Role Based Access Control][9].
+
+## View Monitors and Triage Alerts on Mobile
+
+You can view Monitor Saved Views from your mobile home screen or view and mute monitors by downloading the [Datadog Mobile App][10], available on the [Apple App Store][11] and [Google Play Store][12]. This helps with triaging when you are away from your laptop or desktop.
+
+{{< img src="monitors/monitors_mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Incidents on Mobile App">}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/create/types/metric/
+[1]: /monitors/types/metric/
 [2]: https://www.datadoghq.com
 [3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://app.datadoghq.com/infrastructure
 [5]: https://app.datadoghq.com/monitors#create/metric
 [6]: /integrations/disk/
-[7]: /monitors/create/types/metric/?tab=threshold#set-alert-conditions
+[7]: /monitors/types/metric/?tab=threshold#set-alert-conditions
 [8]: /monitors/notify/#conditional-variables
 [9]: /account_management/rbac/
+[10]: /mobile/
+[11]: https://apps.apple.com/app/datadog/id1391380318
+[12]: https://play.google.com/store/apps/details?id=com.datadog.app

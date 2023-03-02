@@ -1,16 +1,17 @@
 ---
-title: インテグレーション入門
-kind: documentation
 aliases:
-  - /ja/getting_started/integrations
+- /ja/getting_started/integrations
 further_reading:
-  - link: 'https://learn.datadoghq.com/'
-    tag: ラーニングセンター
-    text: Datadog 入門
-  - link: /integrations/
-    tag: インテグレーション
-    text: Datadog の全インテグレーション一覧
+- link: https://learn.datadoghq.com/
+  tag: ラーニングセンター
+  text: Datadog 入門
+- link: /integrations/
+  tag: インテグレーション
+  text: Datadog の全インテグレーション一覧
+kind: documentation
+title: インテグレーション入門
 ---
+
 ここでは、インテグレーションの使用方法について説明します。新しいインテグレーションの構築方法については、[新しいインテグレーションの作成][1]ページをご参照ください。
 
 インテグレーションとは、最上位レベルにおいては、通常個別に検討される要素から統合されたシステムを構築することをいいます。Datadog では、インテグレーションを利用することで、インフラストラクチャーからすべてのメトリクスとログを収集して、統合システムを全体として把握することができます。1 つひとつの要素はもちろん、個々の要素が全体にどのように影響を与えているかも確認できます。
@@ -47,7 +48,7 @@ Datadog Agent パッケージには、Datadog が公式にサポートしてい�
 2. 新しく作成された構成ファイル内の必須パラメーターを環境に応じた値で更新します。
 3. [Datadog Agent を再起動][21]します。
 
-**メモ**: すべての構成ファイルは、[パラメーターの説明][22]に記載されている形式に従います。
+**注**: すべての構成ファイルは、[@param 仕様][22]に記載されている形式に従います。
 
 以下に、[apache インテグレーション][23]からメトリクスとログを収集するために必要な最小の `conf.yaml` 構成ファイルの例を示します。
 
@@ -84,7 +85,7 @@ instances:
 
 #### 収集間隔
 
-Datadog の標準インテグレーションのデフォルトの収集間隔は 15 秒です。収集間隔を変更するには、パラメーター `min_collection_interval` を使用します。詳細は、[開発者用ドキュメント][24]を参照してください。
+Datadog の標準インテグレーションのデフォルトの収集間隔は 15 秒です。収集間隔を変更するには、パラメーター `min_collection_interval` を使用します。詳細は、[収集間隔の更新][24]を参照してください。
 
 ### タグ付け
 
@@ -94,11 +95,20 @@ Datadog の標準インテグレーションのデフォルトの収集間隔は
 
 たとえば、コンフィギュレーションファイルで `service` を設定することは、個別の独立したシステムを監視するために推奨される [Agent 設定][26]となります。
 
-環境をよりよく統合するために、Agent で `env` タグを構成することもお勧めします。統合サービスタグ付けの詳細については、専用の[統合サービスタグ付け][12]のドキュメントを参照してください。
+環境をよりよく統合するために、Agent で `env` タグを構成することもお勧めします。詳細については、[統合サービスタグ付け][27]を参照してください。
+
+デフォルトでは、インテグレーションによってレポートされるメトリクスには、環境から自動検出されたタグが含まれます。例えば、コンテナ内で実行される Redis チェックによってレポートされるメトリクスは、`image_name` のような、コンテナを参照するタグを含みます。この動作を無効にするには、`ignore_autodiscovery_tags` パラメーターを `true` に設定します。
+```yaml
+init_config:
+
+ignore_autodiscovery_tags: true
+
+# 残りの構成はここ
+```
 
 ### 検証
 
-Agent とインテグレーションのコンフィギュレーションを検証するには、[Agent の `status` サブコマンドを実行][27]し、Checks セクションで新しいコンフィギュレーションを見つけます。
+Agent とインテグレーションのコンフィギュレーションを検証するには、[Agent の `status` サブコマンドを実行][28]し、Checks セクションで新しいコンフィギュレーションを見つけます。
 
 ## 複数インテグレーションのインストール
 
@@ -106,7 +116,7 @@ Agent とインテグレーションのコンフィギュレーションを検�
 
 ## 自動検出インテグレーション
 
-[プロセス収集][28]を設定すると、Datadog はホストで実行されているテクノロジーを自動検出します。これにより、こうしたテクノロジーの監視に役立つ Datadog インテグレーションが識別されます。この自動検出されたインテグレーションは、[インテグレーション検索][2]に表示されます。
+[プロセス収集][29]を設定すると、Datadog はホストで実行されているテクノロジーを自動検出します。これにより、こうしたテクノロジーの監視に役立つ Datadog インテグレーションが識別されます。この自動検出されたインテグレーションは、[インテグレーション検索][2]に表示されます。
 
 {{< img src="getting_started/integrations/ad_integrations.png" alt="自動検出されたインテグレーション" >}}
 
@@ -119,53 +129,54 @@ Agent とインテグレーションのコンフィギュレーションを検�
 
 ## セキュリティ対策
 
-Datadog がユーザーデータを取り扱う方法など、セキュリティ上の注意事項については、[セキュリティガイド][29]を参照してください。
+Datadog がユーザーデータを取り扱う方法など、セキュリティ上の注意事項については、[セキュリティガイド][30]を参照してください。
 
 ## 次のステップ
 
-これでインテグレーションの設定は完了です。アプリケーションによって Datadog に送信される[すべてのメトリクスの調査][30]を開始できます。また、そのメトリクスを使用して[ダッシュボード][31]や[アラート][32]をセットアップし、データを監視できます。
+最初のインテグレーションの設定が完了したら、アプリケーションによって Datadog に送信される[すべてのメトリクスを調査][31]します。また、そのメトリクスを使用して[ダッシュボード][32]や[アラート][33]をセットアップし、データを監視できます。
 
-[ログ管理][33]、[APM][34]、[Synthetic の監視][35] の各ソリューションも参照してください。
+Datadog [ログ管理][34]、[APM][35]、[Synthetic の監視][36] の各ソリューションも参照してください。
 
 ## トラブルシューティング
 
-インテグレーションのトラブルシューティングでは、最初に、コードエディターでプラグインを使用するか、さまざまなオンラインツールのいずれかを使用して、YAML が有効であることを確認します。次に、[Agent のトラブルシューティング][36]の手順をすべて実行します。
+インテグレーションのトラブルシューティングでは、最初に、コードエディターでプラグインを使用するか、さまざまなオンラインツールのいずれかを使用して、YAML が有効であることを確認します。次に、[Agent のトラブルシューティング][37]の手順をすべて実行します。
 
-引き続き問題が発生する場合は、[Datadog のサポートチーム][37]までお問い合わせください。
+引き続き問題が発生する場合は、[Datadog サポート][38]までお問い合わせください。
 
 ## 重要な用語
 
 `conf.yaml`
-: `conf.yaml` を作成する場所は、[Agent のコンフィギュレーションディレクトリ][38]のルートにある `conf.d/<INTEGRATION_NAME>.d` フォルダーです。このファイルを使用して、インテグレーションの設定を行うほか、インテグレーションからシステムへの接続を行います。
+: `conf.yaml` を作成する場所は、[Agent のコンフィギュレーションディレクトリ][39]のルートにある `conf.d/<INTEGRATION_NAME>.d` フォルダーです。このファイルを使用して、インテグレーションの設定を行うほか、インテグレーションからシステムへの接続を行います。
 
 custom check
-: 固有のシステムを監視する必要がある場合、またはインテグレーションから既に送信されたメトリクスを拡張したい場合は、メトリクスを定義して Datadog に送信する[カスタムチェック][10]を作成できます。ただし、一般に利用可能なアプリケーション、公開サービス、オープンソースプロジェクトなどを監視したい場合でも、そのためのインテグレーションがまだ用意されていなければ、カスタムチェックではなく、[新しいインテグレーションの構築][1]をご検討ください。
+: 固有のシステムを監視する必要がある場合、またはインテグレーションから既に送信されたメトリクスを拡張したい場合は、メトリクスを定義して Datadog に送信する[カスタムチェック][10]を作成できます。ただし、一般に利用可能なアプリケーション、公開サービス、オープンソースプロジェクトなどを監視したい場合でも、そのインテグレーションが用意されていなければ、カスタムチェックではなく、[新しいインテグレーションの構築][1]をご検討ください。
 
 `datadog.yaml`
-: メインの構成ファイルです。このファイルで、Agent 全体が自身のインテグレーションやユーザーのシステムとやり取りする方法を定義します。このファイルを使用して、API キー、プロキシ、ホストタグなどのグローバル設定を更新します。
+: メインのコンフィギュレーションファイルです。このファイルで、Agent 全体が自身のインテグレーションやユーザーのシステムとやり取りする方法を定義します。このファイルを使用して、API キー、プロキシ、ホストタグなどのグローバル設定を更新します。
+
 event
-: イベントは、システムに関する情報メッセージです。これを[イベントストリーム][39]で使用して、イベントに対するモニターを作成できます。
+: イベントは、システムに関する情報メッセージです。これを[イベントエクスプローラー][40]で使用して、イベントに対するモニターを作成できます。
 
 instance
-: 監視対象が何であれ、そのインスタンスを `conf.yaml` ファイルで定義し、マップします。たとえば、[`http_check` インテグレーション][40]の場合は、アップタイムやダウンタイムを監視する HTTP エンドポイントのインスタンスに関連付けられた名前を定義します。同じインテグレーションで**複数のインスタンス**を監視できます。それには、`conf.yaml` ファイルでそれぞれのインスタンスを定義します。
+: 監視対象が何であれ、そのインスタンスを `conf.yaml` ファイルで定義し、マップします。たとえば、[`http_check` インテグレーション][41]の場合は、アップタイムやダウンタイムを監視する HTTP エンドポイントのインスタンスに関連付けられた名前を定義します。同じインテグレーションで**複数のインスタンス**を監視できます。それには、`conf.yaml` ファイルでそれぞれのインスタンスを定義します。
 
 `<INTEGRATION_NAME>.d`
 : 構成が複雑な場合は、それを複数の `YAML` ファイルに分割した後、それらのファイルをすべて `<INTEGRATION_NAME>.d` フォルダーに格納して構成を定義することができます。Agent は、`<INTEGRATION_NAME>.d` フォルダー内の有効な `YAML` ファイルをすべて読み込みます。
 
 logging
-: 監視対象のシステムにログがある場合は、Datadog に送信するログをカスタマイズしたり、Datadog の[ログ管理ソリューション][33]を使用してログを管理および分析することができます。
+: 監視対象のシステムにログがある場合は、[ログ管理ソリューション][34]を使用して Datadog に送信するログをカスタマイズします。
 
 `metadata.csv`
 : 各インテグレーションによって収集されたメトリクスをリスト化して格納するファイルです。
 
 metrics
-: 各インテグレーションによってシステムから収集されるデータのリストです。各インテグレーションのメトリクスは、そのインテグレーションの `metadata.csv` ファイルにあります。メトリクスの詳細については、「開発ツール」の[メトリクス][41]のページを参照してください。[カスタムメトリクス][42]を設定することもできます。インテグレーションでそのまま使用できるメトリクスが提供されていない場合は、通常、カスタムメトリクスを追加します。
+: 各インテグレーションによってシステムから収集されるデータのリストです。各インテグレーションのメトリクスは、そのインテグレーションの `metadata.csv` ファイルにあります。メトリクスの詳細については、「開発ツール」の[メトリクス][42]のページを参照してください。[カスタムメトリクス][43]を設定することもできます。インテグレーションでそのまま使用できるメトリクスが提供されていない場合は、通常、カスタムメトリクスを追加します。
 
 parameters
 : `conf.yaml` ファイルのパラメーターを使用することで、インテグレーションデータソースと Agent の間のアクセスを制御できます。各インテグレーションの `conf.yaml.example` ファイルには、必須パラメーターと任意パラメーターのすべてがリストされています。
 
 service check
-: サービスチェックは、サービスの稼働時間の状況を追跡するために使用される一種のモニターです。詳細については、[サービスチェックガイド][43]をご参照ください。
+: サービスチェックは、サービスの稼働時間の状況を追跡するために使用される一種のモニターです。詳細については、[サービスチェックガイド][44]をご参照ください。
 
 tagging
 : [タグ][25]を使用すると、メトリクスをカスタマイズし、ご自身に最適な形で絞り込んで表示できます。
@@ -190,30 +201,31 @@ tagging
 [14]: /ja/agent/guide/integration-management/
 [15]: https://app.datadoghq.com/account/settings#agent
 [16]: /ja/account_management/api-app-keys/
-[17]: https://app.datadoghq.com/account/settings#api
+[17]: https://app.datadoghq.com/organization-settings/api-keys
 [18]: /ja/integrations/
 [19]: https://app.datadoghq.com/account/settings#agent/docker
 [20]: https://app.datadoghq.com/account/settings#agent/kubernetes
 [21]: /ja/agent/guide/agent-commands/#restart-the-agent
-[22]: /ja/developers/integrations/new_check_howto/#param-specification
+[22]: /ja/developers/integrations/check_references/#param-specification
 [23]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
-[24]: /ja/developers/custom_checks/write_agent_check/#collection-interval
+[24]: /ja/developers/custom_checks/write_agent_check/#updating-the-collection-interval
 [25]: /ja/getting_started/tagging/
 [26]: /ja/getting_started/agent/#setup
-[27]: /ja/agent/guide/agent-commands/#agent-status-and-information
-[28]: /ja/infrastructure/process/
-[29]: /ja/security/
-[30]: /ja/metrics/explorer/
-[31]: /ja/dashboards/
-[32]: /ja/monitors/
-[33]: /ja/logs/
-[34]: /ja/tracing/
-[35]: /ja/synthetics/
-[36]: /ja/agent/troubleshooting/
-[37]: /ja/help/
-[38]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[39]: https://app.datadoghq.com/event/stream
-[40]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example#L13
-[41]: /ja/metrics/
-[42]: /ja/metrics/custom_metrics/
-[43]: /ja/monitors/guide/visualize-your-service-check-in-the-datadog-ui/
+[27]: /ja/getting_started/tagging/unified_service_tagging/
+[28]: /ja/agent/guide/agent-commands/#agent-status-and-information
+[29]: /ja/infrastructure/process/
+[30]: /ja/security/
+[31]: /ja/metrics/explorer/
+[32]: /ja/dashboards/
+[33]: /ja/monitors/
+[34]: /ja/logs/
+[35]: /ja/tracing/
+[36]: /ja/synthetics/
+[37]: /ja/agent/troubleshooting/
+[38]: /ja/help/
+[39]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[40]: https://app.datadoghq.com/event/explorer
+[41]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example#L13
+[42]: /ja/metrics/
+[43]: /ja/metrics/custom_metrics/
+[44]: /ja/monitors/guide/visualize-your-service-check-in-the-datadog-ui/

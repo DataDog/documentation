@@ -21,17 +21,47 @@ To enable debug mode for the Datadog Java Tracer, set the flag `-Ddd.trace.debug
 
 **Note**: Datadog Java Tracer implements SL4J SimpleLogger, so [all of its settings can be applied][1], for example, logging to a dedicated log file: 
 ```
--Ddatadog.slf4j.simpleLogger.logFile=<NEW_LOG_FILE_PATH>`
+-Ddatadog.slf4j.simpleLogger.logFile=<NEW_LOG_FILE_PATH>
 ```
 
 
-[1]: https://www.slf4j.org/api/org/slf4j/impl/SimpleLogger.html
+[1]: https://www.slf4j.org/api/org/slf4j/simple/SimpleLogger.html
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python" >}}
 
-To enable debug mode for the Datadog Python Tracer, set the environment variable `DD_TRACE_DEBUG=true` when using `ddtrace-run`.
-<p></p>
+The steps for enabling debug mode in the Datadog Python Tracer depends on the version of the tracer your application is using. Choose the scenario that applies:
+
+### Scenario 1: ddtrace version 1.3.2 or higher
+
+1. To enable debug mode: `DD_TRACE_DEBUG=true`
+
+2. To route debug logs to a log file, set `DD_TRACE_LOG_FILE` with a filename that tracer logs should be written to, relative to the current working directory. For example, `DD_TRACE_LOG_FILE=ddtrace_logs.log`. 
+   By default, the file size is 15728640 bytes (about 15MB) and one backup log file is created. To increase the default log file size, specify the size in bytes with the `DD_TRACE_LOG_FILE_SIZE_BYTES` setting.
+
+3. To route logs to the console, for **Python 2** applications, configure `logging.basicConfig()` or similar. Logs are automatically sent to the console for **Python 3** applications. 
+
+
+### Scenario 2: ddtrace version 1.0.x to 1.2.x
+
+1. To enable debug mode: `DD_TRACE_DEBUG=true`
+
+2. To route logs to the console, for **Python 2 or Python 3** applications, configure `logging.basicConfig()` or use `DD_CALL_BASIC_CONFIG=true`.
+
+### Scenario 3: ddtrace version 0.x
+
+1. To enable debug mode: `DD_TRACE_DEBUG=true`
+
+2. To route logs to the console, for **Python 2 or Python 3** applications, configure `logging.basicConfig()` or use `DD_CALL_BASIC_CONFIG=true`.
+
+### Scenario 4: Configuring debug logging in the application code with the standard logging library
+
+For any version of ddtrace, rather than setting the `DD_TRACE_DEBUG` tracer environment variable, you can enable debug logging in the application code by using the `logging` standard library directly:
+
+```
+log = logging.getLogger("ddtrace.tracer")
+log.setLevel(logging.DEBUG)
+```
 
 {{< /programming-lang >}}
 
@@ -50,10 +80,10 @@ You can override the default logger and replace it with a custom one by using th
 ```ruby
 f = File.new("<FILENAME>.log", "w+")           # Log messages should go there
 Datadog.configure do |c|
-  c.tracer log: Logger.new(f)                 # Overriding the default tracer
+  c.logger.instance = Logger.new(f)                 # Overriding the default tracer
 end
 
-Datadog::Tracer.log.info { "this is typically called by tracing code" }
+Datadog::Tracing.logger.info { "this is typically called by tracing code" }
 ```
 
 See [the API documentation][1] for more details.
@@ -108,20 +138,19 @@ const tracer = require('dd-trace').init({
 
 Then check the Agent logs to see if there is more info about your issue:
 
-* If the trace was sent to the Agent properly, you should see `Response from the Agent: OK` log entries. This indicates that the tracer is working properly, so the problem may be with the Agent itself. Refer to the [Agent troubleshooting guide][2] for more information.
+* If the trace was sent to the Agent properly, you should see `Response from the Agent: OK` log entries. This indicates that the tracer is working properly, so the problem may be with the Agent itself. Refer to the [Agent troubleshooting guide][1] for more information.
 
-* If an error was reported by the Agent (or the Agent could not be reached), you will see `Error from the Agent` log entries. In this case, validate your network configuration to ensure the Agent can be reached. If you are confident the network is functional and that the error is coming from the Agent, refer to the [Agent troubleshooting guide][2].
+* If an error was reported by the Agent (or the Agent could not be reached), you will see `Error from the Agent` log entries. In this case, validate your network configuration to ensure the Agent can be reached. If you are confident the network is functional and that the error is coming from the Agent, refer to the [Agent troubleshooting guide][1].
 
-If neither of these log entries is present, then no request was sent to the Agent, which means that the tracer is not instrumenting your application. In this case, [contact Datadog support][3] and provide the relevant log entries with [a flare][4].
+If neither of these log entries is present, then no request was sent to the Agent, which means that the tracer is not instrumenting your application. In this case, [contact Datadog support][2] and provide the relevant log entries with [a flare][3].
 
-For more tracer settings, check out the [API documentation][5].
+For more tracer settings, check out the [API documentation][4].
 
 
-[1]: https://datadog.github.io/dd-trace-js/Tracer.html#init
-[2]: /agent/troubleshooting/
-[3]: /help/
-[4]: /agent/troubleshooting/#send-a-flare
-[5]: https://datadog.github.io/dd-trace-js/#tracer-settings
+[1]: /agent/troubleshooting/
+[2]: /help/
+[3]: /agent/troubleshooting/#send-a-flare
+[4]: https://datadog.github.io/dd-trace-js/#tracer-settings
 {{< /programming-lang >}}
 
 {{< programming-lang lang=".NET" >}}
@@ -220,45 +249,32 @@ If there are errors that you don't understand, or if traces are reported as flus
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-For more visibility, include `DD_LOGGING_RATE_LIMIT=0`.
+Logs generated by the Python Tracer have the logging handler name `ddtrace`. 
 
 **Traces were generated:**
 
 ```shell
-<YYYY-MM-DD> 16:01:11,280 DEBUG [ddtrace.tracer] [tracer.py:470] - writing 8 spans (enabled:True)
+<YYYY-MM-DD> 19:51:22,262 DEBUG [ddtrace.internal.processor.trace] [trace.py:211] - trace <TRACE ID> has 8 spans, 7 finished
 ```
 
 **Span generated by the Python tracer:**
 
 ```text
-<YYYY-MM-DD> 16:01:11,280 DEBUG [ddtrace.tracer] [tracer.py:472] -
-      name flask.request
-        id <span id>
-  trace_id <trace id>
- parent_id <parent id>
-   service flask
-  resource GET /
-      type http
-     start <start time>
-       end <end time>
-  duration 0.004759s
-     error 0
-      tags
-           flask.endpoint:index
-           flask.url_rule:/
-           flask.version:1.1.1
-           http.method:GET
-           http.status_code:200
-           http.url:http://0.0.0.0:5050/
-           system.pid:25985
-
+<YYYY-MM-DD> 19:51:22,251 DEBUG [ddtrace.tracer] [tracer.py:715] - finishing span name='flask.process_response' id=<SPAN ID> trace_id=<TRACE ID>  parent_id=<PARENT ID> service='flask' resource='flask.process_response' type=None start=1655495482.2478693 end=1655495482.2479873 duration=0.000118125 error=0 tags={} metrics={} (enabled:True)
+0.0:5050/
 ```
 
 
 **Traces were sent to the Datadog Agent:**
 
-```shell
-<YYYY-MM-DD> 16:01:11,637 DEBUG [ddtrace.api] [api.py:236] - reported 1 traces in 0.00207s
+```text
+<YYYY-MM-DD> 19:59:19,657 DEBUG [ddtrace.internal.writer] [writer.py:405] - sent 1.57KB in 0.02605s to http://localhost:8126/v0.4/traces
+```
+
+**Traces failed to be sent to the Datadog Agent:**
+
+```text
+<YYYY-MM-DD> 19:51:23,249 ERROR [ddtrace.internal.writer] [writer.py:567] - failed to send traces to Datadog Agent at http://localhost:8126/v0.4/traces
 ```
 
 {{< /programming-lang >}}

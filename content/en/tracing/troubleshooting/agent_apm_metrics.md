@@ -12,7 +12,7 @@ Find below the list of out-of-the-box tracing metrics sent by the Datadog Agent 
 
 `datadog.trace_agent.cpu_percent`
 : **Type**: Gauge<br>
-CPU usage (in cores), for example, 50 (half a core), 200 (two cores), 250 (2.5 cores)
+CPU usage in terms of percentage of a core. For example, a value of `50` is half a core, or `200` is two cores.
 
 `datadog.trace_agent.events.max_eps.current_rate`
 : **Type**: Gauge<br>
@@ -88,15 +88,15 @@ Number of payloads rejected by the receiver because of the sampling.
 
 `datadog.trace_agent.receiver.spans_dropped`
 : **Type**: Count<br>
-Total bytes of payloads dropped by the Agent.
+Number of spans dropped by the Agent.
 
 `datadog.trace_agent.receiver.spans_filtered`
 : **Type**: Count<br>
-Total bytes of payloads filtered by the Agent
+Number of spans filtered by the Agent.
 
 `datadog.trace_agent.receiver.spans_received`
 : **Type**: Count<br>
-Total bytes of payloads received by the Agent.
+Total number of spans received by the Agent.
 
 `datadog.trace_agent.receiver.tcp_connections`
 : **Type**: Count<br>
@@ -109,10 +109,6 @@ Number of traces received and accepted.
 `datadog.trace_agent.receiver.traces_bytes`
 : **Type**: Count<br>
 Total bytes of payloads accepted by the Agent.
-
-`datadog.trace_agent.receiver.traces_dropped`
-: **Type**: Count<br>
-Traces dropped due to normalization errors.
 
 `datadog.trace_agent.receiver.traces_filtered`
 : **Type**: Count<br>

@@ -12,7 +12,9 @@
 @import 'base/mixins';
 @import 'base/colors';
 @import 'base/typography';
+@import 'base/spacing';
 @import 'base/helpers';
+$baseImgURL: '{{.Site.Params.img_url}}';
 
 // vendor
 @import 'vendor/chroma-styles';
@@ -33,7 +35,8 @@
 @import "pages/search";
 @import "pages/404";
 @import "pages/home";
-@import "pages/security_monitoring";
+@import "pages/glossary";
+@import "pages/reference";
 
 // Components
 @import 'base/iconfont'; // imported from websites-modules
@@ -57,6 +60,7 @@
 @import 'components/whats-next';
 @import 'components/schema-table';
 @import 'components/tab-toggle';
+@import 'components/grouped-item-listings';
 
 @import 'components/main-nav'; // imported from websites-modules
 @import 'components/mobile-nav'; // imported from websites-modules

@@ -1,8 +1,7 @@
 ---
 categories:
-  - collaboration
-  - notification
-ddtype: crawler
+- collaboration
+- notification
 dependencies: []
 description: Datadog のアラートとグラフをチームの DingTalk Group に送信
 doc_link: https://docs.datadoghq.com/integrations/dingtalk/
@@ -20,6 +19,7 @@ public_title: Datadog-DingTalk インテグレーション
 short_description: Datadog のアラートとグラフをチームの DingTalk Group に送信
 version: '1.0'
 ---
+
 ## 概要
 
 DingTalk と統合して、以下のことができます。

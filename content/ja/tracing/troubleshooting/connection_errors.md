@@ -1,9 +1,10 @@
 ---
-title: APM 接続エラー
-kind: ドキュメント
 aliases:
-  - /ja/tracing/faq/why-am-i-getting-errno-111-connection-refused-errors-in-my-application-logs/
+- /ja/tracing/faq/why-am-i-getting-errno-111-connection-refused-errors-in-my-application-logs/
+kind: ドキュメント
+title: APM 接続エラー
 ---
+
 トレーシングライブラリを搭載したアプリケーションが Datadog Agent に到達できない場合は、アプリケーションログと一緒に表示される[トレーサー起動ログ][1]や[トレーサーデバッグログ][2]に接続エラーがないかを確認してください。
 
 ## APM 接続の問題を示唆するエラー
@@ -210,8 +211,8 @@ Datadog Agent が APM をリッスンしていない旨が表示された場合�
 | [AWS EKS on Fargate][9] | `DD_AGENT_HOST` は設定しないこと |
 | [AWS Elastic Beanstalk - 単一コンテナ][10] | ゲートウェイの IP (通常は `172.17.0.1`) |
 | [AWS Elastic Beanstalk - 複数コンテナ][11] | Datadog Agent のコンテナ名を示すリンク |
-| [Kubernetes][12] | [`status.hostIP`][13] を手動または [Admission Controller][14] 経由で追加 |
-| [AWS EKS (Fargate 以外)][15] | [`status.hostIP`][13] を手動または [Admission Controller][14] 経由で追加 |
+| [Kubernetes][12] | 1) [Unix ドメインソケット][20]、2) [`status.hostIP`][13] を手動で追加、3) [Admission Controller][14] 経由 |
+| [AWS EKS (Fargate 以外)][15] | 1) [Unix ドメインソケット][20]、2) [`status.hostIP`][13] を手動で追加、3) [Admission Controller][14] 経由 |
 | [Datadog Agent およびアプリケーションの Docker コンテナ][16] | Datadog Agent コンテナ |
 
 
@@ -259,7 +260,7 @@ APM Agent
 [3]: /ja/agent/guide/agent-commands/#agent-information
 [4]: /ja/help/
 [5]: /ja/agent/troubleshooting/send_a_flare/
-[6]: https://app.datadoghq.com/apm/docs
+[6]: https://app.datadoghq.com/apm/service-setup
 [7]: /ja/agent/amazon_ecs/apm/?tab=ec2metadataendpoint
 [8]: /ja/integrations/ecs_fargate/#trace-collection
 [9]: /ja/integrations/eks_fargate/#traces-collection
@@ -273,3 +274,4 @@ APM Agent
 [17]: /ja/tracing/setup_overview/setup/php/?tab=containers#apache
 [18]: /ja/tracing/setup_overview/setup/php/?tab=containers#nginx
 [19]: /ja/agent/troubleshooting/send_a_flare/?tab=agentv6v7#trace-agent
+[20]: /ja/containers/kubernetes/apm/?tabs=daemonsetuds#configure-the-datadog-agent-to-accept-traces

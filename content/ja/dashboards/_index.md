@@ -1,65 +1,116 @@
 ---
-title: ダッシュボード
-kind: documentation
 aliases:
-  - /ja/guides/templating/
-  - /ja/graphing/dashboards/
-  - /ja/guides/graphing
-  - /ja/graphing/miscellaneous/metrics_arithmetic
-  - /ja/graphing/faq/is-there-a-way-for-me-to-set-the-maximum-and-minimum-values-on-the-y-axis-of-a-graph
-  - /ja/graphing/faq/is-it-possible-to-adjust-the-y-axis-for-my-graphs
-  - /ja/graphing/
+- /ja/guides/templating/
+- /ja/graphing/dashboards/
+- /ja/guides/graphing
+- /ja/graphing/miscellaneous/metrics_arithmetic
+- /ja/graphing/faq/is-there-a-way-for-me-to-set-the-maximum-and-minimum-values-on-the-y-axis-of-a-graph
+- /ja/graphing/faq/is-it-possible-to-adjust-the-y-axis-for-my-graphs
+- /ja/graphing/
+- /ja/dashboards/dashboards/
+- /ja/dashboards/screenboards/
+- /ja/dashboards/timeboards/
 description: データを可視化して詳細な情報を把握
 further_reading:
-  - link: /dashboards/template_variables/
-    tag: ドキュメント
-    text: テンプレート変数を使用してダッシュボードを強化
-  - link: 'https://www.datadoghq.com/blog/template-variable-associated-values/'
-    tag: ブログ
-    text: 関連するテンプレート変数を使用してダッシュボードを調整
-  - link: /dashboards/sharing/
-    tag: ドキュメント
-    text: Datadogの外部でグラフを共有
-  - link: /dashboards/widgets/
-    tag: Documentation
-    text: ダッシュボードで利用可能なすべてのウィジェット
-  - link: '/mobile/#dashboards'
-    tag: Documentation
-    text: ダッシュボードをモバイルアプリで確認
-  - link: 'https://www.datadoghq.com/blog/datadog-clipboard/'
-    tag: ブログ
-    text: ダッシュボードウィジェットをクリップボードに追加する
-  - link: 'https://www.datadoghq.com/blog/datadog-dashboards/'
-    tag: ブログ
-    text: 新しい Datadog ダッシュボードエクスペリエンス
+- link: https://app.datadoghq.com/release-notes?category=Dashboards
+  tag: リリースノート
+  text: Datadog ダッシュボードの最新リリースをチェック！ (アプリログインが必要です)。
+- link: /dashboards/template_variables/
+  tag: ドキュメント
+  text: テンプレート変数を使用してダッシュボードを強化
+- link: https://www.datadoghq.com/blog/template-variable-associated-values/
+  tag: ブログ
+  text: 関連するテンプレート変数を使用してダッシュボードを調整
+- link: /dashboards/sharing/
+  tag: Documentation
+  text: Datadogの外部でグラフを共有
+- link: /dashboards/widgets/
+  tag: Documentation
+  text: ダッシュボードで利用可能なすべてのウィジェット
+- link: /mobile/#dashboards
+  tag: ドキュメント
+  text: ダッシュボードをモバイルアプリで確認
+- link: https://www.datadoghq.com/blog/datadog-clipboard/
+  tag: ブログ
+  text: ダッシュボードウィジェットをクリップボードに追加する
+- link: https://www.datadoghq.com/blog/datadog-dashboards/
+  tag: ブログ
+  text: 新しい Datadog ダッシュボードエクスペリエンス
+- link: https://datadoghq.dev/integrations-core/guidelines/dashboards/#best-practices
+  tag: 開発者向けドキュメント
+  text: 優れたインテグレーションダッシュボードを作成する
+kind: documentation
+title: ダッシュボード
 ---
+
 ## 概要
 
 ダッシュボードは、重要なパフォーマンスメトリクスを視覚的に追跡、分析、表示できる Datadog のツールです。ここでインフラストラクチャーの状態を監視します。
 
+**注**: ダッシュボードの表示には [Datadog モバイルアプリ][1]を使用します。[Apple App Store][2] および [Google Play Store][3] で入手可能です。
+
 ## 新しいダッシュボード
 
-ダッシュボードを作成するには、[ダッシュボードリストページ][1]の **+New Dashboard** をクリックするか、ナビゲーションメニューから **New Dashboard** をクリックします。ダッシュボード名を入力し、レイアウトオプションを選択します。
+ダッシュボードを作成するには、[ダッシュボードリスト][1]ページの **+New Dashboard** をクリックするか、ナビゲーションメニューから **New Dashboard** をクリックします。ダッシュボード名を入力し、レイアウトオプションを選択します。
 
-{{< img src="dashboards/create-dashboard.png" alt="新しいダッシュボードの追加"  style="width:70%;">}}
+{{< img src="dashboards/create-dashboard.png" alt="新しいダッシュボードの追加" style="width:70%;">}}
 
 ### ダッシュボード  
-[ダッシュボード][2]は、画像、グラフ、ログなどのさまざまなオブジェクトを含めることができる次世代のグリッドベースのレイアウト上にあります。これは通常、ステータスボードやストーリーテリングビューとして使用され、リアルタイムで更新され、過去の定点を表すことができます。また、デバッグにも適しています。
+ダッシュボードは、画像、グラフ、ログなどのさまざまなオブジェクトを含めることができるグリッドベースのレイアウト上にあります。これは通常、ステータスボードやストーリーテリングビューとして使用され、リアルタイムで更新され、過去の定点を表すことができます。また、デバッグにも適しています。
 
 ### タイムボード
-[タイムボード][3]は、ダッシュボード全体を定刻またはリアルタイムで自動レイアウトにより表示します。通常、トラブルシューティング、共同作業、一般データの調査に使用します。
+タイムボードでは、ダッシュボード全体を定刻またはリアルタイムで自動レイアウトにより表示します。通常、トラブルシューティング、共同作業、一般データの調査に使用します。
 
 ### スクリーンボード
-[スクリーンボード][4]は自由形式のレイアウトのダッシュボードで、画像やグラフ、ログなど、様々なオブジェクトを含めることができます。リアルタイムに更新されたり、過去の定点を示すステータスボードやストーリーテリングビューとして使われるのが一般的です。
+スクリーンボードは自由形式のレイアウトのダッシュボードで、画像やグラフ、ログなど、様々なオブジェクトを含めることができます。リアルタイムに更新されたり、過去の定点を示すステータスボードやストーリーテリングビューとして使われるのが一般的です。
 
 ## ダッシュボードの構成
 
+### グラフメニュー
+
+ダッシュボードグラフをクリックするとオプションメニューが開きます。
+
+| オプション                 | 説明                                                   |
+|------------------------|---------------------------------------------------------------|
+| スナップショットを送信          | グラフのスナップショットを作成および送信します。                     |
+| 相関関係のあるメトリクスを検索| APM サービス、インテグレーション、ダッシュボードの相関関係を検索します。 |
+| View in full screen    | グラフを[全画面モード][4]で表示します。                     |
+| カーソルをロック            | ページに配置されたカーソルをロックします。                         |
+| View related processes | グラフ参照範囲の[ライブプロセス][5]ページへジャンプします。   |
+| View related hosts     | グラフ参照範囲の[ホストマップ][6]ページへジャンプします。         |
+| View related logs      | グラフ参照範囲の[ログエクスプローラー][7]ページへジャンプします。     |
+| 関連トレースを表示    | グラフ参照範囲の[トレース][8]パネルに入力します。           |
+| 関連プロファイルを表示  | グラフ参照範囲の[プロファイリング][9]ページへジャンプします。        |
+
 ### グローバルタイムセレクター
+
 グローバルタイムセレクターを使うには、1 つ以上の時間ベースのウィジェットが `Global Time` を使うように設定されている必要があります。**Set display preferences** でウィジェットのエディターで選択するか、またはウィジェットを追加します (グローバルタイムはデフォルトの時間設定です)。
 
-グローバルタイムセレクターは、同一のダッシュボード上で `Global Time` オプションを使用するすべてのウィジェットに対して同一のタイムフレームを設定します。過去の移動ウィンドウ (`Past 1 Hour`、`Past 1 Day` など) を選択するか、固定期間を選択します。固定期間は、`Select from calendar…` オプションを使用します。または、[カスタムタイムフレームを入力][5]します。移動ウィンドウを選択した場合、ウィジェットはタイムウィンドウに沿って移動します。
+グローバルタイムセレクターは、同一のダッシュボード上で `Global Time` オプションを使用するすべてのウィジェットに対して同一のタイムフレームを設定します。過去の移動ウィンドウ (`Past 1 Hour`、`Past 1 Day` など) を選択するか、固定期間を選択します。固定期間は、`Select from calendar...` オプションを使用します。または、[カスタムタイムフレームを入力][10]します。移動ウィンドウを選択した場合、ウィジェットはタイムウィンドウに沿って移動します。
 
 グローバルタイムにリンクされていないウィジェットは、グローバルウィンドウに適用されたローカルタイムフレームに対応するデータを表示します。たとえば、グローバルタイムセレクターが 2019 年 1 月 1 日から 2019 年 1 月 2 日に設定されている場合、ローカルタイムフレームが `Past 1 Minute` に設定されているウィジェットには、2019 年 1 月 2 日の午後 11 時 59 分からの最後の 1 分が表示されます。
+
+#### リフレッシュレート
+
+プライベートダッシュボードのリフレッシュレートは、表示している時間枠によって異なります。時間枠が短ければ短いほど、データの更新頻度は高くなります。公開共有ダッシュボードは、選択した時間枠に関係なく、30 秒ごとに更新されます。
+
+| 時間枠   | リフレッシュレート |
+|--------------|--------------|
+| 1 分     | 10 秒   |
+| 2 分    | 10 秒   |
+| 5 分    | 10 秒   |
+| 10 分   | 10 秒   |
+| 30 分   | 20 秒   |
+| 1 時間       | 20 秒   |
+| 3 時間      | 1 分     |
+| 4 時間      | 1 分     |
+| 1 日        | 3 分     |
+| 2 日       | 10 分    |
+| 1 週間       | 1 時間       |
+| 1 か月      | 1 時間       |
+| 3 か月     | 1 時間       |
+| 6 か月     | 1 時間       |
+| 1 年       | 1 時間       |
 
 ### TV モード
 
@@ -69,7 +120,7 @@ further_reading:
 
 #### パブリック URL を生成
 
-パブリック URL を生成することでダッシュボードを外部ユーザーと共有します。詳しくは、[ダッシュボードの共有][6]を参照してください。
+パブリック URL を生成することでダッシュボードを外部ユーザーと共有します。詳しくは、[ダッシュボードの共有][11]を参照してください。
 
 #### UTC 時間を表示
 
@@ -77,11 +128,11 @@ UTC 時間とデフォルトのタイムゾーンを切り替えます。
 
 #### 通知
 
-ダッシュボードで通知が有効になると、[イベントストリーム][7]でイベントが作成されます。このイベントでは、テキストの変更、ウィジェットの変更、ダッシュボードの複製、ダッシュボードの削除に関する情報が、アクションを実行したユーザーの名前とともに表示されます。
+ダッシュボードで通知が有効になると、[イベントエクスプローラー][12]でイベントが作成されます。このイベントでは、テキストの変更、ウィジェットの変更、ダッシュボードの複製、ダッシュボードの削除に関する情報が、アクションを実行したユーザーの名前とともに表示されます。
 
 また、通知を有効にした個々のユーザーにはメールアラートが送信されます。管理権限の有無にかかわらず、組織内のすべてのユーザーは、登録すればダッシュボードの変更通知を受信することができます。
 
-通知が有効になっているダッシュボードの変更イベントは、検索することでイベントストリームで確認できます:
+通知が有効になっているダッシュボードの変更イベントは、検索することでイベントエクスプローラーで確認できます:
 
 ```text
 tags:audit,dash
@@ -91,10 +142,25 @@ tags:audit,dash
 
 #### アクセス許可
 
-ダッシュボードでは、作成者または[管理者][8]は読み取り専用モードを有効にできます。この場合、非管理者によるダッシュボードの編集はすべて無効になります。
+ダッシュボードの上部で、設定をクリックし、*Permissions* を選択します。
 
-読み取り専用モードでも、非管理ユーザーがダッシュボードの複製、タイルの再配置、タイルのスナップショット、タイルの全画面表示を行うことは可能です。ただし、非管理ユーザーによるタイルの再配置は永続化されません。
+{{< img src="dashboards/dashboard-menu-permissions.png" alt="ダッシュボードの設定メニュー" style="width:50%;">}}
 
+ポップアップを使用して、自分、自分のロールを持つ組織内の全員、または組織内の特定のロールにアクセスを制限することができます。
+
+{{< img src="dashboards/dashboard-role-restrictions.png" alt="設定におけるロールの制限" style="width:70%;">}}
+
+作成者は常にダッシュボードを編集することができますが、ダッシュボードの編集を許可されている他のユーザーは、最終的な ACL に自分のロールのいずれかが含まれている限り、アクセス制御リスト (ACL) から任意のロールを追加または削除することができます。ロールの詳細については、[RBAC ドキュメント][13]を参照してください。
+
+ダッシュボードが非推奨の「読み取り専用」設定で作成された場合、アクセス制御リストにはアクセス管理 (`user_access_manage`) 権限を持つロールのリストが事前に入力されます。
+
+Terraform で Dashboards を管理する場合、最新バージョンの Datadog Terraform プロバイダーを使用して、ダッシュボードを編集できるロールを制御することができます。詳細については、[Terraform ダッシュボードロール制限ガイド][14]を参照してください。
+
+#### 高密度モード
+
+高密度モードでは、ウィジェットの密度を高めるために、ダッシュボードにグループウィジェットが並べて表示されます。このモードは、グループウィジェットを使用するダッシュボードの大画面でデフォルトでオンになります。
+
+{{< img src="dashboards/high-density-mode.png" alt="高密度モードディスプレイ" style="width:90%;">}}
 #### ダッシュボードを複製
 
 このオプションを使うと、ダッシュボード全体を新しいダッシュボードにコピーできます。このとき、複製に名前を付けるよう求められます。
@@ -109,8 +175,6 @@ tags:audit,dash
 | Import&nbsp;dashboard&nbsp;JSON | JSON をダッシュボードに貼り付ける、またはインポートします。このオプションを選択すると、ダッシュボードのすべてのコンテンツが上書きされます。JSON がすでにクリップボードにある場合は、`Ctrl V` (Mac の場合は `Cmd V`) を使用します。 |
 | Export&nbsp;dashboard&nbsp;JSON | ダッシュボードの JSON を含む JSON ファイルをダウンロードします。                                                                                                                |
 
-{{< img src="dashboards/copy_dashboard.png" alt="ダッシュボードのコピー"  style="width:30%;">}}
-
 #### ダッシュボードを削除
 
 このオプションを使うと、ダッシュボードを完全に削除できます。このとき、削除の確認を求められます。
@@ -123,9 +187,7 @@ tags:audit,dash
 
 ## ダッシュボードリスト
 
-[ダッシュボードのリスト][1] ページで、ダッシュボードやリストを検索、表示、作成します。デフォルトでは、Datadog にログインした際のランディングページになっています。組織で使用するデフォルトを変更するには、[Datadog サポート][9]までお問い合わせください。
-
-{{< img src="dashboards/dashboard_list2.png" alt="ダッシュボードリストページ"  >}}
+[Dashboard List][15] ページでダッシュボードやリストを検索、表示、作成することができます。
 
 ### 新しいリスト
 
@@ -135,7 +197,7 @@ tags:audit,dash
 
 ダッシュボードをリストに追加するには、メインのダッシュボードリストで、対応するチェックボックスをオンにします。次に、ダッシュボードリストの右上にある *Add to List* ボタンをクリックします。
 
-{{< img src="dashboards/dash_to_list.png" alt="ダッシュボードをリストに追加"  style="width:70%;">}}
+{{< img src="dashboards/dash_to_list.png" alt="ダッシュボードをリストに追加" style="width:100%;">}}
 
 ### リスト
 
@@ -154,8 +216,16 @@ Preset lists (プリセットリスト) は、Datadog でデフォルトのダ�
 | All Custom               | 組織アカウント内のチームメンバーによって作成されたカスタムダッシュボード。 |
 | All Hosts                | ホストを追加すると Datadog で自動作成されるダッシュボード。              |
 | All Integrations         | インテグレーションを設置すると Datadog で自動作成されるダッシュボード。  |
-| Created By You           | 現在ログイン中のユーザーにより作成されたカスタムダッシュボード。                |
-| Frequently Viewed By You | 現在ログイン中のユーザーが頻繁に表示するすべてのダッシュボード。         |
+| All Shared               | 認証済みまたは公開リンクの共有が有効になっているダッシュボード。             |
+| Created By You           | 現在のユーザーにより作成されたカスタムダッシュボード。                            |
+| Frequently Viewed By You | 現在のユーザーが頻繁に表示するすべてのダッシュボード。                     |
+| Recently Deleted         | 過去 30 日以内に削除されたダッシュボード。                               |
+
+#### 削除されたダッシュボードの復元
+
+削除されたダッシュボードを復元するには、プリセットの **Recently Deleted** リストを使用します。リストから、復元するすべてのダッシュボードを選択し、**Restore to** をクリックします。ダッシュボードを復元する特定のリストを選択するか、カスタムリストなしで復元する場合は **All Custom** を選択します。**Recently Deleted** にあるダッシュボードは、30 日後に完全に削除されます。
+
+{{< img src="dashboards/recently_deleted.png" alt="削除したダッシュボードの復元" style="width:100%;">}}
 
 #### 共有、編集可能リスト
 
@@ -167,7 +237,7 @@ Preset lists (プリセットリスト) は、Datadog でデフォルトのダ�
 
 | 列     | 説明                                                                              |
 |------------|------------------------------------------------------------------------------------------|
-| スター       | 現在ログイン中のユーザーがスターを付けたすべてのダッシュボード。                                  |
+| スター       | 現在のユーザーがスターを付けたすべてのダッシュボード。                                              |
 | アイコン       | ダッシュボードの種類 (タイムボードまたはスクリーンボード) を示すアイコン。                     |
 | 名前       | カスタムダッシュボードまたはプリセットダッシュボードの名前。                                              |
 | Modified   | カスタムダッシュボードの最終更新日。                                            |
@@ -180,26 +250,41 @@ Preset lists (プリセットリスト) は、Datadog でデフォルトのダ�
 
 **注**: 公開ダッシュボード URL のトラフィックは、人気度に反映されません。
 
+## モバイルデバイスでダッシュボードを表示する
 
+[Apple App Store][2] や [Google Play Store][3] で提供されている [Datadog モバイルアプリ][1]を利用すると、モバイルフレンドリーなフォーマットでダッシュボードを表示することができます。
 
-### アクセス制限
+ダッシュボードページでは、すべてのダッシュボードを表示、検索し、Datadog Web アプリで設定したものと同じテンプレート変数を使用してそれらをフィルタリングできます。個々のダッシュボードをクリックして表示します。テンプレート変数の保存済みビューを使用して、ダッシュボードをすばやくフィルタリングします。テンプレート変数の保存済みビューの詳細については、[ダッシュボードの保存済みビュー][16]を参照してください。個々のダッシュボードをクリックして表示します。
 
-<div class="alert alert-warning">
-RBAC のダッシュボードへのアクセス制限は、現在ベータ版です。アクセスをリクエストするには、<a href="https://docs.datadoghq.com/help/">Datadog サポート</a>までお問い合わせください。</div>
+**注**: ダッシュボードの設定や編集を行うには、Datadog のブラウザ UI にログインする必要があります。
 
-ダッシュボード全体の設定モーダルをクリックし、*Permissions* を選択します。ポップアップを使用して、あなた、あなたのロールを持つ組織内の全員、または組織の特定のロールへのアクセスを制限します。ロールに関する詳細は、[RBAC][9] ドキュメントを参照してください。
+{{< img src="dashboards/dashboards-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS と Android のダッシュボード">}}
 
-## その他の参考資料
+## モバイルホーム画面のダッシュボードを作成する
+
+[Apple App Store][2] や [Google Play Store][3] で提供されている [Datadog モバイルアプリ][1]には、モバイルホーム画面のウィジェットも装備されています。これらのウィジェットを利用することで、モバイルアプリを開くことなく、サービスの健全性やインフラストラクチャーを監視することができます。
+
+SLO、モニター、オープンインシデントのウィジェットを、他の開発ツールやコラボレーションツールと一緒にモバイルのホーム画面に追加して、トリアージとインシデント管理のワークフローを最適化することができます。
+
+{{< img src="dashboards/dashboards-widget-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS と Android のウィジェット">}}
+
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/dashboard/lists
-[2]: /ja/dashboards/dashboards
-[3]: /ja/dashboards/timeboards
-[4]: /ja/dashboards/screenboards
-[5]: /ja/dashboards/guide/custom_time_frames/
-[6]: /ja/dashboards/sharing/#dashboards
-[7]: /ja/events/
-[8]: /ja/account_management/users/default_roles/
-[9]: /ja/help/
-[10]: /ja/account_management/rbac/
+[1]: /ja/mobile/
+[2]: https://apps.apple.com/app/datadog/id1391380318
+[3]: https://play.google.com/store/apps/details?id=com.datadog.app
+[4]: /ja/dashboards/widgets/#full-screen
+[5]: https://app.datadoghq.com/process
+[6]: https://app.datadoghq.com/infrastructure/map
+[7]: https://app.datadoghq.com/logs
+[8]: /ja/tracing/
+[9]: /ja/profiler/
+[10]: /ja/dashboards/guide/custom_time_frames/
+[11]: /ja/dashboards/sharing/#dashboards
+[12]: /ja/events/
+[13]: /ja/account_management/rbac/
+[14]: /ja/dashboards/guide/how-to-use-terraform-to-restrict-dashboard-edit/
+[15]: https://app.datadoghq.com/dashboard/lists
+[16]: /ja/dashboards/template_variables/#saved-views

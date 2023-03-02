@@ -265,7 +265,7 @@ Le filtre key/value correspond à `keyvalue([separatorStr[, characterWhiteList[,
 * `separatorStr` définit le séparateur entre la clé et les valeurs. Par défaut, `=`.
 * `characterWhiteList` définit des caractères supplémentaires non échappés en plus de la valeur par défaut `\\w.\\-_@`. Uniquement utilisé pour les valeurs sans guillemets (par exemple, `key=@valueStr`).
 * `quotingStr` : définit des guillemets, ce qui remplace la détection de guillemets par défaut : `<>`, `""`, `''`.
-* `delimiter` définit le séparateur entre les différentes paires key/value (par exemple, `|` est le délimiteur dans `key1=value1|key2=value2`). Par défaut, ` ` (espace normale), `,` et `;`.
+* `delimiter` définit le séparateur entre les différentes paires key/value (par exemple, `|` est le délimiteur dans `key1=value1|key2=value2`). Valeur par défaut : ` ` (espace normale), `,` et `;`.
 
 Utilisez des filtres tels que **keyvalue** pour mapper plus facilement des chaînes à des attributs au format keyvalue ou logfmt :
 
@@ -358,7 +358,7 @@ Le filtre key/value met toujours en correspondance des entrées sans guillemet, 
 **Remarques** :
 
 * Les valeurs vides (`key=`) ou `null` (`key=null`) ne sont pas affichées dans la sortie JSON.
-* Si vous définissez un filtre *keyvalue* sur un objet `data` et que ce filtre n'est pas mis en correspondance, un JSON vide `{}` est renvoyé (par exemple, entrée : `key:=valueStr`, règle de parsing : `rule_test %{data::keyvalue("=")}`, sortie : `{}`).
+* Si vous définissez un filtre *keyvalue* sur un objet `data` et qu'aucune valeur ne correspond au filtre, un JSON vide `{}` est renvoyé (par exemple, entrée : `key:=valueStr`, règle de parsing : `rule_test %{data::keyvalue("=")}`, sortie : `{}`).
 * Si vous définissez `""` en tant que `quotingStr`, la configuration par défaut des guillemets est conservée.
 
 ### Parser des dates

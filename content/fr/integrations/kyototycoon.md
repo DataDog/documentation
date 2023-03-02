@@ -12,18 +12,19 @@ assets:
     kyoto-tycoon_processes: assets/saved_views/kyoto-tycoon_processes.json
   service_checks: assets/service_checks.json
 categories:
-  - data store
-  - log collection
+- data store
+- log collection
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/kyototycoon/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/kyototycoon/README.md
 display_name: Kyoto Tycoon
 draft: false
 git_integration_title: kyototycoon
 guid: 2661668b-d804-4c8d-96a7-8019525add8c
 integration_id: kyoto-tycoon
 integration_title: Kyoto Tycoon
+integration_version: 2.1.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -32,15 +33,19 @@ metric_prefix: kyototycoon.
 metric_to_check: kyototycoon.records
 name: kyototycoon
 process_signatures:
-  - ktserver
-public_title: "Intégration Datadog/Kyoto\_Tycoon"
-short_description: 'Surveillez les opérations get, set et delete et mesurez le délai de réplication.'
+- ktserver
+public_title: Intégration Datadog/Kyoto Tycoon
+short_description: Surveillez les opérations get, set et delete et mesurez le délai
+  de réplication.
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 Le check KyotoTycoon de l'Agent surveille les opérations get, set et delete et vous permet de mesurer le délai de réplication.
@@ -103,13 +108,13 @@ Le check KyotoTycoon est inclus avec le package de l'[Agent Datadog][1] : vous 
 Le check Kyoto Tycoon n'inclut aucun événement.
 
 ### Checks de service
+{{< get-service-checks-from-git "kyototycoon" >}}
 
-**kyototycoon.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à Kyoto Tycoon pour recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][7].
+Besoin d'aide ? Contactez [l'assistance Datadog][8].
+
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
@@ -117,4 +122,5 @@ Besoin d'aide ? Contactez [l'assistance Datadog][7].
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://github.com/DataDog/integrations-core/blob/master/kyototycoon/metadata.csv
-[7]: https://docs.datadoghq.com/fr/help/
+[7]: https://github.com/DataDog/integrations-core/blob/master/kyototycoon/assets/service_checks.json
+[8]: https://docs.datadoghq.com/fr/help/

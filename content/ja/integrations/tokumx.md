@@ -1,44 +1,67 @@
 ---
+app_id: tokumx
+app_uuid: 8169c714-555c-4e00-9be0-c6604cf1e858
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     tokumx: assets/dashboards/tokumx_dashboard.json
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: true
+    metrics:
+      check: tokumx.uptime
+      metadata_path: metadata.csv
+      prefix: tokumx.
+    process_signatures: []
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: TokuMX
   saved_views:
     tokumx_processes: assets/saved_views/tokumx_processes.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-  - data store
-  - autodiscovery
-creates_events: true
-ddtype: check
+- data store
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/tokumx/README.md
-display_name: TokuMX
+- https://github.com/DataDog/integrations-core/blob/master/tokumx/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: tokumx
-guid: 7785939b-bfb6-4d3e-acc2-94c1f5fb33e7
 integration_id: tokumx
 integration_title: TokuMX
+integration_version: 3.2.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: tokumx.
-metric_to_check: tokumx.uptime
+manifest_version: 2.0.0
 name: tokumx
-process_signatures: []
-public_title: Datadog-TokuMX インテグレーション
+oauth: {}
+public_title: TokuMX
 short_description: OpCounter、レプリケーションラグ、キャッシュテーブルサイズなどのメトリクスを追跡。
-support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::データストア
+  configuration: README.md#Setup
+  description: OpCounter、レプリケーションラグ、キャッシュテーブルサイズなどのメトリクスを追跡。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: TokuMX
 ---
+
+
+
 ## 概要
 
 このチェックは、以下を含む TokuMX メトリクスを収集します。
@@ -49,9 +72,9 @@ supported_os:
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
-TokuMX チェックは、Agent バージョン 6.x 以前の [Datadog Agent][1] パッケージに含まれています。TokuMX サーバーに追加でインストールする必要はありません。
+TokuMX チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
 ### コンフィギュレーション
 
@@ -90,7 +113,7 @@ TokuMX チェックは、Agent バージョン 6.x 以前の [Datadog Agent][1] 
    echo -e "\033[0;31mdatadog user - Missing\033[0m"
    ```
 
-MongoDB でのユーザーの作成と管理の詳細については、[MongoDB のドキュメント][2]を参照してください。
+MongoDB でのユーザーの作成と管理の詳細については、[MongoDB Security のドキュメント][2]を参照してください。
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -161,7 +184,7 @@ MongoDB でのユーザーの作成と管理の詳細については、[MongoDB 
 
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://www.mongodb.org/display/DOCS/Security+and+Authentication
+[2]: https://docs.mongodb.com/manual/security/
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/help/
 [5]: https://www.datadoghq.com/blog/monitor-key-tokumx-metrics-mongodb-applications

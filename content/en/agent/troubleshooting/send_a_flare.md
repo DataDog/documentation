@@ -28,7 +28,7 @@ If you don't have a case ID, just enter your email address used to login in Data
 | Platform   | Command                                                 |
 |------------|---------------------------------------------------------|
 | AIX        | `datadog-agent flare <CASE_ID>`                         |
-| Docker     | `docker exec -it datadog-agent agent flare <CASE_ID>`   |
+| Docker     | `docker exec -it dd-agent agent flare <CASE_ID>`        |
 | macOS      | `datadog-agent flare <CASE_ID>` or via the [web GUI][1] |
 | CentOS     | `sudo datadog-agent flare <CASE_ID>`                    |
 | Debian     | `sudo datadog-agent flare <CASE_ID>`                    |
@@ -100,7 +100,7 @@ aws ecs execute-command --cluster <CLUSTER_NAME> \
 
 [1]: /agent/basic_agent_usage/#gui
 [2]: /agent/basic_agent_usage/windows/#agent-v6
-[3]: /agent/faq/heroku-troubleshooting/#send-a-flare
+[3]: /agent/guide/heroku-troubleshooting/#send-a-flare
 [4]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/CHANGELOG.md
 [5]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec.html
 {{% /tab %}}
@@ -127,9 +127,10 @@ aws ecs execute-command --cluster <CLUSTER_NAME> \
 
 {{% tab "Cluster Agent" %}}
 
-| Platform   | Command                                                             |
-|------------|---------------------------------------------------------------------|
-| Kubernetes | `kubectl exec <POD_NAME> -it datadog-cluster-agent flare <CASE_ID>` |
+| Platform      | Command                                                                     |
+|---------------|-----------------------------------------------------------------------------|
+| Kubernetes    | `kubectl exec <CLUSTER_POD_NAME> -it datadog-cluster-agent flare <CASE_ID>` |
+| Cloud Foundry | `/var/vcap/packages/datadog-cluster-agent/datadog-cluster-agent-cloudfoundry flare -c /var/vcap/jobs/datadog-cluster-agent/config <CASE_ID>` |
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -142,7 +143,7 @@ Manually obtain this file and provide it to support if there are any issues with
 ### Kubernetes
 To obtain the archive file in Kubernetes, use the kubectl command:
 ```
-kubectl cp datadog-<pod-name>:/tmp/datadog-agent-<date-of-the-flare>.zip flare.zip
+kubectl cp datadog-<pod-name>:tmp/datadog-agent-<date-of-the-flare>.zip flare.zip -c agent
 ```
 
 ## Further Reading

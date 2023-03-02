@@ -1,22 +1,28 @@
 ---
-title: Collecte de logs avec Ruby
-kind: documentation
 aliases:
-  - /fr/logs/languages/ruby
+- /fr/logs/languages/ruby
 further_reading:
-  - link: https://github.com/roidrage/lograge
-    tag: Github
-    text: Documentation Lograge
-  - link: /logs/log_configuration/processors
-    tag: Documentation
-    text: Apprendre à traiter vos logs
-  - link: /logs/faq/log-collection-troubleshooting-guide/
-    tag: FAQ
-    text: Dépannage pour la collecte de logs
+- link: https://github.com/roidrage/lograge
+  tag: Github
+  text: Documentation Lograge
+- link: /logs/log_configuration/processors
+  tag: Documentation
+  text: Apprendre à traiter vos logs
+- link: /logs/faq/log-collection-troubleshooting-guide/
+  tag: FAQ
+  text: Dépannage pour la collecte de logs
+- link: https://www.datadoghq.com/blog/managing-rails-application-logs/
+  tag: Blog
+  text: Comment recueillir, personnaliser et gérer les logs d'applications Rails
+kind: documentation
+title: Collecte de logs avec Ruby
 ---
-Pour envoyer vos logs à Datadog, nous vous conseillons d'activer la journalisation au sein d'un fichier avec [`lograge`][1], puis de suivre ce fichier avec l'Agent Datadog. Lorsque vous configurez la journalisation avec Ruby, assurez-vous de penser aux [attributs réservés][2].
 
-Au lieu d'obtenir un log Rail comme ceci :
+## Présentation
+
+Pour envoyer vos logs à Datadog, activez la journalisation au sein d'un fichier avec [`lograge`][1] et suivez ce fichier avec l'Agent Datadog. Lorsque vous configurez la journalisation avec Ruby, veillez à ne pas oublier les [attributs réservés][2].
+
+Au lieu d'obtenir un log Rails comme celui-ci :
 
 ```text
 Started GET "/" for 127.0.0.1 at 2012-03-10 14:28:14 +0100
@@ -29,7 +35,7 @@ Processing by HomeController#index as HTML
 Completed 200 OK in 79ms (Views: 78.8ms | ActiveRecord: 0.0ms)
 ```
 
-Après formatage avec lograge, on obtient une seule ligne de log comportant toutes les informations importantes au format JSON, comme ceci :
+Vous obtenez une entrée de log avec les informations suivantes au format JSON :
 
 ```json
 {
@@ -50,15 +56,15 @@ Après formatage avec lograge, on obtient une seule ligne de log comportant tout
 
 ## Configuration
 
-Cette section décrit les étapes de configuration minimales requises pour transmettre les logs de votre application Rails à Datadog. Une version plus approfondie de cette configuration est disponible dans notre article de blog [How to collect, customize, and manage Rails application logs][3] (en anglais).
+Cette section décrit les étapes de configuration minimales requises pour transmettre les logs de votre application Rails à Datadog. Une version plus approfondie de cette configuration est disponible dans l'article [Comment recueillir, personnaliser et gérer les logs d'une application Rails][3] (en anglais).
 
-1. **Ajoutez le GEM lograge à votre projet** :
+1. Ajoutez le gem Lograge à votre projet :
 
     ```ruby
     gem 'lograge'
     ```
 
-2. **Configurez Lograge**. Dans votre fichier de configuration, choisissez ces paramètres :
+2. Configurez Lograge. Dans votre fichier de configuration, définissez ce qui suit :
 
     ```ruby
     # Lograge config
@@ -81,9 +87,9 @@ Cette section décrit les étapes de configuration minimales requises pour trans
     end
     ```
 
-    **Remarque** : vous pouvez également demander à Lograge d'ajouter des informations contextuelles à vos logs. Consultez la documentation officielle si cela vous intéresse : [documentation Lograge][4]
+    **Remarque** : vous pouvez également demander à Lograge d'ajouter des informations contextuelles à vos logs. Consultez la [documentation Lograge][4] (en anglais) pour en savoir plus.
 
-3. **Configurez votre Agent Datadog**. Créez un fichier `ruby.d/conf.yaml` dans votre dossier `conf.d/` avec le contenu suivant :
+3. Configurez votre Agent Datadog. Créez un fichier `ruby.d/conf.yaml` dans votre dossier `conf.d/` avec le contenu suivant :
 
     ```yaml
       logs:
@@ -108,21 +114,22 @@ Cette section décrit les étapes de configuration minimales requises pour trans
 
 ### Associer vos logs à vos traces
 
-Si l'APM est activée pour cette application, vous pouvez améliorer la corrélation entre vos logs et vos traces d'application [en suivant les instructions de journalisation Ruby pour l'APM][7] afin d'ajouter automatiquement des identifiants de trace et de span à vos logs.
+Si l'APM est activée pour cette application, vous pouvez améliorer la corrélation entre les traces et les logs d'application en [suivant les instructions de journalisation Ruby pour l'APM][7] afin d'ajouter automatiquement des identifiants de trace et de span à vos logs.
 
 ### Conseils pour la journalisation dans votre application
 
-Maintenant que votre configuration de journalisation envoie du contenu JSON valide, vous pouvez l'exploiter autant que bon vous semble.
+Maintenant que votre configuration de journalisation envoie du contenu JSON valide, vous pouvez l'exploiter autant que nécessaire.
 
-Nous vous conseillons d'ajouter un maximum de contexte (utilisateur, session, action, métriques, etc.) à chaque ligne de log que vous envoyez.
-Pour ce faire, au lieu de loguer de simples messages textuels, vous pouvez loguer des hashes, comme dans l'exemple suivant :
+Durant la journalisation, ajoutez le plus de contexte possible (utilisateur, session, action et métriques).
+
+Au lieu d'enregistrer de simples messages dans des chaînes, utilisez les hashs de log comme dans l'exemple suivant :
 
 ```ruby
 my_hash = {'user' => '1234', 'button_name'=>'save','message' => 'User 1234 clicked on button saved'};
 logger.info(my_hash);
 ```
 
-Le hash sera converti au format JSON et vous pourrez alors analyser l'utilisateur `user` et le nom du bouton `button_name` :
+Le hash est converti en contenu JSON. Vous pouvez alors analyser l'utilisateur `user` et le nom de bouton `button_name` :
 
 ```json
 {
@@ -139,14 +146,11 @@ Le hash sera converti au format JSON et vous pourrez alors analyser l'utilisateu
 
 ### Configuration de journalisation suggérée pour RocketPants
 
-Dans le fichier `config/initializers/lograge_rocketpants.rb` (variable selon votre projet) :
+Dans le fichier `config/initializers/lograge_rocketpants.rb` (le chemin varie en fonction de votre projet), configurez Lograge de façon à prendre en charge les contrôleurs `rocket_pants` :
 
 ```ruby
-# Configuration de Lograge pour le faire fonctionner avec les contrôleurs de rocket_pants
-#
 # Tiré de :
 #   https://github.com/Sutto/rocket_pants/issues/111
-#
 app = Rails.application
 if app.config.lograge.enabled
   ActiveSupport::LogSubscriber.log_subscribers.each do |subscriber|
@@ -161,7 +165,7 @@ end
 
 ### Configuration de journalisation suggérée pour Grape
 
-Ajoutez le GEM grape_logging :
+Ajoutez le gem `grape_logging` :
 
 ```ruby
 gem 'grape_logging'

@@ -1,12 +1,15 @@
 ---
-title: RUM エラーダッシュボード
-kind: documentation
 further_reading:
-  - link: /real_user_monitoring/explorer
-    tag: ドキュメント
-    text: Datadog でビューを検索する
+- link: /real_user_monitoring/explorer
+  tag: ドキュメント
+  text: RUM エクスプローラーについて
+kind: documentation
+title: RUM エラーダッシュボード
 ---
-エラーダッシュボードから、アプリケーションのエラーに関するインサイトを入手できます。ダッシュボードは 2 つのセクションに分かれています。
+
+## 概要
+
+エラーダッシュボードから、アプリケーションのエラーに関するインサイトを入手できます。以下が表示されます。
 
 - **General errors**:
     フロントエンドエラーによって重大な影響を受けているページ、ブラウザー、国を可視化します。
@@ -15,7 +18,7 @@ further_reading:
 
 {{< img src="real_user_monitoring/dashboards/errors_dashboard.png" alt="エラーダッシュボード" >}}
 
-表示される情報に関する詳細は、[RUM データ収集のドキュメント][1]を参照してください。
+表示されるデータの詳細については、[RUM ブラウザデータ収集][1]を参照してください。
 
 ## その他の参考資料
 

@@ -6,11 +6,11 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - network
+- network
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/tcp_queue_length/README.md
+- https://github.com/DataDog/integrations-core/blob/master/tcp_queue_length/README.md
 display_name: Longueur de file d'attente TCP
 draft: false
 git_integration_title: tcp_queue_length
@@ -29,8 +29,11 @@ public_title: Intégration Datadog/Longueur de file d'attente TCP
 short_description: Suivez la taille de vos buffers TCP avec Datadog.
 support: core
 supported_os:
-  - linux
+- linux
 ---
+
+
+
 ## Présentation
 
 Ce check surveille l'utilisation des files d'attente de réception et d'envoi TCP Linux. Il peut détecter lorsqu'une file d'attente de réception ou d'envoi TCP est pleine pour des conteneurs spécifiques.
@@ -75,8 +78,7 @@ system_probe_config:
 
 ### Configuration avec Helm
 
-Avec le [chart Helm Datadog][3], nous devons vérifier que `system-probe` est activé en définissant `datadog.systemProbe.enabled` sur `true` dans le fichier `values.yaml`.
-Le check peut ensuite être activé en définissant le paramètre `datadog.systemProbe.enableTCPQueueLength`.
+Avec le [chart Helm Datadog][3], `system-probe` doit être activé en définissant `datadog.systemProbe.enabled` sur `true` dans le fichier `values.yaml`. Le check peut ensuite être activé en définissant le paramètre `datadog.systemProbe.enableTCPQueueLength`.
 
 ### Validation
 

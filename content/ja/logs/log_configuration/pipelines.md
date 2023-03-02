@@ -1,23 +1,24 @@
 ---
-title: パイプライン
-kind: documentation
-description: Grok プロセッサーを使用してログをパースする
 aliases:
-  - /ja/logs/processing/pipelines/
+- /ja/logs/processing/pipelines/
+description: Grok プロセッサーを使用してログをパースする
 further_reading:
-  - link: /logs/log_configuration/processors
-    tag: ドキュメント
-    text: 使用可能なプロセッサーのリスト
-  - link: /logs/logging_without_limits/
-    tag: ドキュメント
-    text: Logging without Limits*
-  - link: /logs/explorer/
-    tag: ドキュメント
-    text: ログの調査方法
-  - link: https://learn.datadoghq.com/course/view.php?id=10
-    tag: ラーニングセンター
-    text: ログを極める パース
+- link: /logs/log_configuration/processors
+  tag: ドキュメント
+  text: 使用可能なプロセッサーのリスト
+- link: /logs/logging_without_limits/
+  tag: ドキュメント
+  text: Logging without Limits*
+- link: /logs/explorer/
+  tag: ドキュメント
+  text: ログの調査方法
+- link: https://learn.datadoghq.com/courses/going-deeper-with-logs-processing
+  tag: ラーニングセンター
+  text: ログ処理を極める
+kind: documentation
+title: パイプライン
 ---
+
 ## 概要
 
 Datadog は自動的に JSON 形式のログを[パースします][1]。ログが JSON 形式でない場合、生のログを処理パイプラインに送信して値を追加することができます。パイプラインは、ログを広範囲の形式から取得し Datadog で一般的に使用される形式に変換します。ログパイプラインの実装と処理戦略は、組織に[属性の命名習慣][2]を導入するため、有意義です。
@@ -26,7 +27,7 @@ Datadog は自動的に JSON 形式のログを[パースします][1]。ログ�
 
 パイプラインおよびプロセッサーは、あらゆるタイプのログに適用できます。ロギングコンフィギュレーションを変更したり、サーバー側の処理ルールに変更をデプロイする必要もありません。すべての処理は、[パイプラインコンフィギュレーションページ][5]で構成できます。
 
-**注**: ログ管理ソリューションを最適にご利用いただくため、Datadog では Grok プロセッサ内でパイプラインごとに最大 20 件のプロセッサーおよび 10 個のパース規則を使用することをおすすめします。Datadog はサービスのパフォーマンスに悪影響を与える可能性のあるパース規則、プロセッサー、パイプラインを無効化する権利を有しています。
+**注**: ログ管理ソリューションを最適にご利用いただくため、Datadog では [Grok プロセッサ][6]内でパイプラインごとに最大 20 件のプロセッサーおよび 10 個のパース規則を使用することをおすすめします。Datadog はサービスのパフォーマンスに悪影響を与える可能性のあるパース規則、プロセッサー、パイプラインを無効化する権利を有しています。
 
 ## 前処理
 
@@ -34,7 +35,7 @@ JSON ログの前処理は、ログがパイプライン処理に入る前に発
 
 JSON ログ前処理は、デフォルトで標準ログフォワーダーに機能するよう構成されています。このコンフィギュレーションは、カスタムまたは特定のログ転送方法に合わせて編集することが可能です。
 
-1. Datadog アプリで [Pipelines][6] に移動し、[Preprocessing for JSON logs][7] を選択します。
+1. Datadog アプリで [Pipelines][7] に移動し、[Preprocessing for JSON logs][8] を選択します。
 
     **注:** JSON ログの前処理は、ログ属性の 1 つをログの `host` として定義する唯一の方法です。
 
@@ -144,20 +145,23 @@ Datadog Agent または RFC5424 形式を使用すると、自動的にログに
 [トレース ID リマッパープロセッサー][2]を設定し、別の属性を指定してログのトレース ID のソースとして使用します。
 
 
-[1]: /ja/tracing/connect_logs_and_traces/
-[2]: /ja/logs/log_configuration/#trace-remapper
+[1]: /ja/tracing/other_telemetry/connect_logs_and_traces/
+[2]: /ja/logs/log_configuration/processors/#trace-remapper
 {{% /tab %}}
 {{< /tabs >}}
 
 ## パイプラインを作成する
 
-1. Datadog アプリで [Pipelines][6] に移動します。
+1. Datadog アプリで [Pipelines][7] に移動します。
 2. **New Pipeline** を選択します。
 3. Live tail プレビューからフィルターを適用するログを選択、または独自のフィルターを適用します。ドロップダウンメニューから選択、または **</>** アイコンを選択して独自のフィルタークエリを作成します。フィルターを使用すると、パイプラインを適用するログの種類を制限できます。
 
     **注**: パイプラインフィルターはパイプラインのプロセッサーの前に適用されます。このため、パイプライン自体で抽出される属性で絞り込みを行うことはできません。
 
-4. パイプラインに名前を付け、**Save** を押します。
+4. パイプラインに名前を付けます。
+5. (オプション) パイプライン内のプロセッサに編集アクセスを許可します。
+6. (オプション) パイプラインにタグと説明を追加します。説明には、パイプラインの目的や、どのチームが所有しているかを記載することができます。
+7. **Save** を押します。
 
 パイプラインにより返還されたログの例:
 
@@ -181,19 +185,19 @@ Datadog Agent または RFC5424 形式を使用すると、自動的にログに
 
 ### インテグレーションパイプラインライブラリ
 
-Datadog で利用可能なインテグレーションパイプラインの一覧については、[インテグレーションパイプラインライブラリ][6]をご覧ください。パイプラインライブラリにて、Datadog がデフォルトで各ログフォーマットを処理する方法をご確認いただけます。
+Datadog で利用可能なインテグレーションパイプラインの一覧については、[インテグレーションパイプラインライブラリ][7]をご覧ください。パイプラインライブラリにて、Datadog がデフォルトで各ログフォーマットを処理する方法をご確認いただけます。
 
-{{< img src="logs/processing/pipelines/integration-pipeline-library.gif" alt="インテグレーションパイプラインライブラリ" style="width:80%;">}}
+{{< img src="logs/processing/pipelines/integration-pipeline-library.mp4" alt="インテグレーションパイプラインライブラリ" video=true style="width:80%;">}}
 
-インテグレーションパイプラインを使用する場合、Datadog は対応するログの `source` を構成し、インテグレーションをインストールすることを推奨しています。Datadog がこのソースから初回のログを受信すると、インストールが自動でトリガーされ、インテグレーションパイプラインが処理対象のパイプラインリストに追加されます。ログソースの構成については、対応する[インテグレーションのドキュメント][8]を参照してください。
+インテグレーションパイプラインを使用する場合、Datadog は対応するログの `source` を構成し、インテグレーションをインストールすることを推奨しています。Datadog がこのソースから初回のログを受信すると、インストールが自動でトリガーされ、インテグレーションパイプラインが処理対象のパイプラインリストに追加されます。ログソースの構成については、対応する[インテグレーションのドキュメント][9]を参照してください。
 
 Clone ボタンをクリックしてインテグレーションパイプラインをコピーすることもできます。
 
-{{< img src="logs/processing/pipelines/clone-pipeline-from-library.gif" alt="ライブラリからパイプラインを複製" style="width:80%;">}}
+{{< img src="logs/processing/pipelines/clone-pipeline-from-library.mp4" alt="ライブラリからパイプラインを複製" video=true style="width:80%;">}}
 
 ## プロセッサーまたはネストされたパイプラインを追加
 
-1. Datadog アプリで [Pipelines][6] に移動します。
+1. Datadog アプリで [Pipelines][7] に移動します。
 2. パイプラインにカーソルを合わせ、表示される矢印をクリックしてプロセッサーおよびネストされたパイプラインを展開します。
 3. **Add Processor** または **Add Nested Pipeline** を選択します。
 
@@ -213,6 +217,22 @@ Clone ボタンをクリックしてインテグレーションパイプライ�
 
 {{< img src="logs/processing/pipelines/move_to_pipeline.mp4" alt="ネストされたパイプラインをドラッグアンドドロップ" video="true"  width="80%" >}}
 
+## パイプラインの管理
+
+パイプラインの変更情報を使って、パイプラインやプロセッサの最後の変更がいつ行われたのか、どのユーザーが変更したのかを特定します。パイプラインが有効か読み取り専用かなど、他のファセット化されたプロパティと同様に、この変更情報を使用してパイプラインをフィルタリングします。
+
+{{< img src="logs/processing/pipelines/log_pipeline_management.png" alt="ファセット検索、パイプラインの修正情報、並べ替えモーダルによるパイプラインの管理方法" style="width:50%;">}}
+
+スライドオプションパネルの `Move to` オプションでパイプラインを正確に並べ替えることができます。スクロールして、選択したパイプラインを移動させる正確な位置を `Move to` モーダルを使ってクリックします。パイプラインは、他の読み取り専用パイプラインの中に移動することはできません。ネストされたパイプラインを含むパイプラインは、他のトップレベルの位置にのみ移動することができます。他のパイプラインの中に移動することはできません。
+
+{{< img src="logs/processing/pipelines/log_pipeline_move_to.png" alt="モーダルへの移動を利用してパイプラインを正確に並べ替える方法" style="width:50%;">}}
+
+## 推定使用量メトリクス
+
+パイプラインごとに推定された使用量メトリクス、具体的には、各パイプラインで取り込まれ、変更されたログの量と件数が表示されます。また、各パイプラインからすぐに使える [Logs Estimated Usage Dashboard][10] へのリンクがあり、そのパイプラインの使用量メトリクスをより詳細なグラフで表示することが可能です。
+
+{{< img src="logs/processing/pipelines/log_pipeline_statistics.png" alt="パイプラインの使用量メトリクスを素早く確認する方法" style="width:50%;">}}
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -225,6 +245,8 @@ Clone ボタンをクリックしてインテグレーションパイプライ�
 [3]: /ja/logs/log_configuration/processors/
 [4]: /ja/logs/explorer/facets/
 [5]: https://app.datadoghq.com/logs/pipelines
-[6]: https://app.datadoghq.com/logs/pipelines/pipeline/library
-[7]: https://app.datadoghq.com/logs/pipelines/remapping
-[8]: /ja/integrations/#cat-log-collection
+[6]: /ja/logs/log_configuration/processors/?tab=ui#grok-parser
+[7]: https://app.datadoghq.com/logs/pipelines/pipeline/library
+[8]: https://app.datadoghq.com/logs/pipelines/remapping
+[9]: /ja/integrations/#cat-log-collection
+[10]: https://app.datadoghq.com/dash/integration/logs_estimated_usage

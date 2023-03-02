@@ -2,24 +2,24 @@
 title: Getting Started with Dashboards
 kind: documentation
 further_reading:
-- link: "https://www.datadoghq.com/blog/dashboard-sharing/"
-  tag: "Blog"
-  text: "Share dashboards securely with anyone outside of your organization"
-- link: "https://www.datadoghq.com/blog/template-variable-associated-values/"
-  tag: "Blog"
-  text: "Use associated template variables to refine your dashboards"
-- link: "https://learn.datadoghq.com/enrol/index.php?id=8"
-  tag: "Learning"
-  text: "Self-paced online learning: Building Better Dashboards"
-- link: "/dashboards/"
-  tag: "Documentation"
-  text: "Dashboards basics"
-- link: "/notebooks/"
-  tag: "Documentation"
-  text: "Tell a story about data with Notebooks"
-- link: "/monitors/"
-  tag: "Documentation"
-  text: "Monitors, SLOs, notifications, downtimes, and incidents"
+  - link: "https://www.datadoghq.com/blog/dashboard-sharing/"
+    tag: "Blog"
+    text: "Share dashboards securely with anyone outside of your organization"
+  - link: "https://www.datadoghq.com/blog/template-variable-associated-values/"
+    tag: "Blog"
+    text: "Use associated template variables to refine your dashboards"
+  - link: "https://learn.datadoghq.com/courses/building-better-dashboards"
+    tag: "Learning Center"
+    text: "Building Better Dashboards"
+  - link: "/dashboards/"
+    tag: "Documentation"
+    text: "Dashboards basics"
+  - link: "/notebooks/"
+    tag: "Documentation"
+    text: "Tell a story about data with notebooks"
+  - link: "/monitors/"
+    tag: "Documentation"
+    text: "Monitors, SLOs, notifications, downtimes, and incidents"
 ---
 
 ## Overview
@@ -54,8 +54,8 @@ Datadog provides many out-of-the-box dashboards for features and integrations. F
 
 A common way to start a dashboard is by encountering a similar dashboard already in use, and adjusting it to suit your needs. If you find a dashboard that answers many of the questions you want your dashboard to answer: 
 
-1. Clone it by opening the dashboard and selecting **Clone dashboard** from the Settings menu (the gear icon on the right-hand side). This creates an unlinked copy of the dashboard; changes you make in the new copy don't affect the source widget.
-    {{< img src="getting_started/dashboards/cloning_dashboard.mp4" alt="Cloning a dashboard" video=true >}}
+1. Clone it by opening the dashboard and selecting **Clone dashboard** from the Settings menu (the export icon on the right-hand side). This creates an unlinked copy of the dashboard; changes you make in the new copy don't affect the source widget.
+  {{< img src="/getting_started/dashboards/clone_dashboard.png" alt="Clone dashboard option in the dropdown menu" style="width:100%;" >}}
 2. Edit the clone by opening it and clicking **Edit widgets**. 
 3. Delete widgets you don't need by selecting **Delete** from the widget's Settings menu.
 4. Move things around to suit your needs. Groups and individual widgets can be dragged and dropped into new locations in the dashboard.
@@ -118,6 +118,14 @@ Every dashboard has a JSON representation that you can copy or export from the S
 
 Because all widgets and dashboards are represented as JSON, you can programmatically generate them by using the [Dashboards API][14], which is useful if you want to generate a Dashboard every time your team starts a new project or encounters an incident, or formalizes an SLO, for example.
 
+### View Dashboards from the Datadog Mobile App
+
+View your dashboards on your mobile device with the [Datadog Mobile App][15], available on the [Apple App Store][16] and [Google Play Store][17]. 
+
+The mobile app enables you to view and search all of the dashboards that you have access to in your Datadog organization, and filter them using the same template variables used in the Datadog web app.
+
+{{< img src="dashboards/dashboards-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Dashboards on iOS and Android">}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -133,6 +141,9 @@ Because all widgets and dashboards are represented as JSON, you can programmatic
 [9]: /dashboards/template_variables/
 [10]: /dashboards/
 [11]: /dashboards/widgets/timeseries/
-[12]: https://learn.datadoghq.com/enrol/index.php?id=8
+[12]: https://learn.datadoghq.com/courses/building-better-dashboards/
 [13]: /integrations/slack/
 [14]: /api/v1/dashboards/
+[15]: /mobile/
+[16]: https://apps.apple.com/app/datadog/id1391380318
+[17]: https://play.google.com/store/apps/details?id=com.datadog.app

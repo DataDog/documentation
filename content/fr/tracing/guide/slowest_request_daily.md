@@ -13,7 +13,7 @@ further_reading:
     text: Créer un dashboard pour suivre et corréler les métriques APM
   - link: /tracing/guide/add_span_md_and_graph_it/
     tag: "7\_minutes"
-    text: Ajouter des tags de span et filtrer les données de performance de votre application
+    text: Ajouter des tags de span et filtrer ou regrouper les données de performance de votre application
   - link: /tracing/guide/
     tag: ''
     text: Tous les guides
@@ -22,7 +22,7 @@ _Temps de lecture : 3 minutes_
 
 {{< img src="tracing/guide/slowest_request_daily/slowest_trace_1.mp4" video="true" alt="Identifier la trace la plus lente et trouver ses métriques de host" style="width:90%;">}}
 
-Avec l'APM Datadog, vous pouvez facilement examiner les performances de vos endpoints, identifier les requêtes lentes et trouver l'origine des problèmes de latence. Cet exemple permet d'identifier la [trace][1] la plus lente de la journée pour un endpoint de paiement d'une plateforme e-commerce et d'attribuer l'origine de ce ralentissement à une charge processeur élevée.
+Avec l'APM Datadog, vous pouvez examiner les performances de vos endpoints, identifier les requêtes lentes et trouver l'origine des problèmes de latence. Cet exemple permet d'identifier la [trace][1] la plus lente de la journée pour un endpoint de paiement d'une plateforme e-commerce et d'attribuer l'origine de ce ralentissement à une charge processeur élevée.
 
 1. **Ouvrez la [page Services][2]**.
 
@@ -41,11 +41,11 @@ Avec l'APM Datadog, vous pouvez facilement examiner les performances de vos endp
 
     La page [Ressource][4] affiche les métriques de haut niveau sur cette ressource, telles que le débit, la latence et le taux d'erreur, ainsi que la répartition de la latence en fonction des différents services en aval de la ressource. De plus, elle affiche les [traces][1] spécifiques qui traversent la ressource et une vue agrégée des [spans][5] qui composent ces traces.
 
-    {{< img src="tracing/guide/slowest_request_daily/slowest_trace_3.png" alt="Identifier la trace la plus lente et identifier le goulot d'étranglement à son origine" style="width:90%;">}}
+     {{< img src="tracing/guide/slowest_request_daily/slowest_trace_3.png" alt="Identifier la trace la plus lente et identifier le goulot d'étranglement à son origine" style="width:90%;">}}
 
 4. Définissez le filtre d'intervalle sur `1d One Day`. Faites défiler la page vers le bas jusqu'au tableau des traces et **filtrez-le par durée**. Ensuite, passez votre curseur sur la première trace dans le tableau et cliquez sur **View Trace**
 
-    Le Flamegraph et des informations connexes apparaissent alors. C'est ici que vous pouvez consulter la durée de chaque étape dans la trace et vérifier la présence d'anomalies. Cela facilite l'identification des composants lents ou à l'origine d'un grande nombre d'erreurs. Vous pouvez agrandir, faire défiler et explorer le Flamegraph comme bon vous semble. Les métadonnées, les logs et les informations sur le host associés s'affichent sous le Flamegraph.
+    Le Flamegraph et des informations connexes apparaissent alors. C'est ici que vous pouvez consulter la durée de chaque étape dans la trace et vérifier la présence d'anomalies. Cela facilite l'identification des composants lents ou à l'origine d'un grand nombre d'erreurs. Vous pouvez agrandir, faire défiler et explorer le Flamegraph comme bon vous semble. Les métadonnées, les logs et les informations sur le host associés s'affichent sous le Flamegraph.
 
     Le Flamegraph est idéal pour identifier précisément quelle partie de votre stack est à l'origine d'erreurs ou d'une latence élevée. Les erreurs sont surlignées en rouge, et la durée est représentée par la longueur horizontale de la span. Les spans les plus longues sont donc les plus lentes. Consultez le [guide sur la Vue Trace][6] pour en savoir plus sur l'utilisation du Flamegraph.
 

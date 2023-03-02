@@ -1,5 +1,5 @@
 ---
-title: TOTPs For Multi-Factor Authentication (MFA) in Browser Test
+title: TOTPs For Multi-Factor Authentication (MFA) In Browser Tests
 kind: guide
 further_reading:
    - link: 'https://www.datadoghq.com/blog/mfa-synthetic-testing-datadog/'
@@ -35,19 +35,21 @@ RBAC restrict access to global variables is in beta. To request access, contact 
 
 {{< img src="synthetics/guide/browser-tests-totp/new-variable-totp.png" alt="Create a MFA token" style="width:100%;" >}}
 
-## TOTP in Synthetic tests
-You can use the secret key or QR code stored in a global variable across all your Synthetic tests. When creating a browser or API test, inject the TOTP generated from the secret key or QR code stored in the global variable to verify your application’s authentication workflow.
+## Use TOTP in your Synthetic tests
+You can use the secret key or QR code stored in a global variable across all your Synthetic tests. When creating a [browser test][2], inject the TOTP generated from the secret key or QR code stored in the global variable to verify your application’s authentication workflow.
 
-To use TOTP in your browser tests:
+{{< img src="synthetics/guide/browser-tests-totp/mfa-token-totp.mp4" alt="Recording a TOTP validation" video="true" >}}
+
+To use TOTP in your [browser tests][2]:
+
 1. Import your global variable.
 2. When recording your test, click the **Hand** icon to generate a TOTP. 
 3. In your test browser application, click in a field to paste the TOTP. Injecting the computed code into your test creates another test step. 
 4. After recording your test steps, click **Save & Launch Test**.
-
-{{< img src="synthetics/guide/browser-tests-totp/mfa-token-totp.mp4" alt="Recording a TOTP validation" video="true" >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/rbac/?tab=datadogapplication#custom-roles
+[2]: /synthetics/browser_tests/

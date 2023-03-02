@@ -1,10 +1,9 @@
 ---
 aliases:
-  - /ja/integrations/azure_keyvault
+- /ja/integrations/azure_keyvault
 categories:
-  - cloud
-  - azure
-ddtype: crawler
+- cloud
+- azure
 dependencies: []
 description: Azure Key Vault のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_key_vault/
@@ -22,6 +21,7 @@ public_title: Datadog-Microsoft Azure Key Vault インテグレーション
 short_description: Azure Key Vault のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Azure Key Vault は、クラウドアプリケーションおよびサービスが使用する暗号化キーとシークレットを保護および管理するために使用されます。

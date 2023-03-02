@@ -1,64 +1,89 @@
 ---
+app_id: ibm-mq
+app_uuid: d29a1df9-6038-41f5-b017-82bf45f58767
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     IBM MQ: assets/dashboards/overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: ibm_mq.queue.usage
+      metadata_path: metadata.csv
+      prefix: ibm_mq.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: IBM MQ
   logs:
     source: ibm_mq
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
-  - 処理
-  - メッセージング
-  - ログの収集
-  - オートディスカバリー
-creates_events: false
-ddtype: check
+- 処理
+- メッセージング
+- ログの収集
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/ibm_mq/README.md'
-display_name: IBM MQ
+- https://github.com/DataDog/integrations-core/blob/master/ibm_mq/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: ibm_mq
-guid: 873153b6-5184-438a-8a32-1e2d2e490dde
 integration_id: ibm-mq
 integration_title: IBM MQ
+integration_version: 4.0.3
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: ibm_mq.
-metric_to_check: ibm_mq.queue.usage
+manifest_version: 2.0.0
 name: ibm_mq
-public_title: Datadog-IBM MQ インテグレーション
+oauth: {}
+public_title: IBM MQ
 short_description: IBM MQ はメッセージキューです
-support: コア
 supported_os:
-  - linux
-  - mac_os
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Processing
+  - Category::Messaging
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: IBM MQ はメッセージキューです
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: IBM MQ
 ---
+
+
+
 ## 概要
 
-このチェックは [IBM MQ][1] バージョン 5 から 9.0 を監視します。
+このチェックは [IBM MQ][1] バージョン 9.1 以降を監視します。
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 IBM MQ チェックは [Datadog Agent][2] パッケージに含まれています。
 
-IBM MQ チェックを使用するには、次を行う必要があります。
+IBM MQ チェックを使用するには、[IBM MQ Client][3] 9.1+ がインストールされていることを確認する必要があります (互換バージョンの IBM MQ サーバーが Agent ホストにインストールされている場合を除きます)。現在、IBM MQ チェックは、z/OS 上の IBM MQ サーバーへの接続をサポートしていません。
 
-1. [IBM MQ クライアント][3] 9.1 以上がインストールされていることを確認します (IBM MQ サーバーがインストールされていない場合)。
-2. ライブラリの場所を指定する LD_LIBRARY_PATH と C_INCLUDE_PATH を更新します。
+#### Linux の場合
 
-例:
+ライブラリの場所を含めるために `LD_LIBRARY_PATH` を更新してください。この環境変数がまだ存在しない場合は作成してください。
+例えば、クライアントを `/opt` の下にインストールした場合
 
 ```text
 export LD_LIBRARY_PATH=/opt/mqm/lib64:/opt/mqm/lib:$LD_LIBRARY_PATH
-export C_INCLUDE_PATH=/opt/mqm/inc
-
 ```
 
 **注**: Agent v6 以上は、`upstart`、`systemd`、または `launchd` を使用して datadog-agent サービスをオーケストレーションします。場合によっては、サービス構成ファイルに環境変数を追加する必要があります。サービス構成ファイルのデフォルトの場所は、以下の通りです。
@@ -170,11 +195,16 @@ sudo sh -c "echo /opt/mqm/lib > /etc/ld.so.conf.d/mqm.conf"
 sudo ldconfig
 ```
 
-#### アクセス許可と認証
+#### Windows の場合
 
-IBM MQ でアクセス許可をセットアップする方法はいくつかあります。実際のセットアップの動作に応じて、MQ 内に読み取り専用アクセス許可を持つ `datadog` ユーザーを作成します。
+IBM MQ のデータディレクトリに `mqclient.ini` というファイルがあります。通常は `C:\ProgramData\IBM\MQ` です。
+環境変数 `MQ_FILE_PATH` を構成し、データディレクトリを指すようにします。
 
-**注**: "Queue Monitoring" を有効にして、少なくとも "Medium" に設定する必要があります。これは、MQ UI または mqsc コマンドを使用して実行できます。
+### アクセス許可と認証
+
+IBM MQ で権限を設定する方法はたくさんあります。セットアップの方法にもよりますが、MQ 内に `datadog` ユーザーを作成して、読み取り専用権限と、オプションで `+chg` 権限を設定します。`chg` 権限は、[リセットキュー統計][5] (`MQCMD_RESET_Q_STATS`) のメトリクスを収集するために必要です。これらのメトリクスを収集したくない場合は、構成で `collect_reset_queue_metrics` を無効にできます。リセットキュー統計のパフォーマンスデータを収集すると、パフォーマンスデータもリセットされます。
+
+**注**: MQ サーバーで "Queue Monitoring" を有効にして、少なくとも "Medium" に設定する必要があります。これは、サーバーのホストで MQ UI または `mqsc` コマンドを使用して実行できます。
 
 ```text
 > /opt/mqm/bin/runmqsc
@@ -204,14 +234,15 @@ All valid MQSC commands were processed.
 ##### メトリクスの収集
 
 1. IBM MQ のパフォーマンスデータを収集するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `ibm_mq.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル ibm_mq.d/conf.yaml][1] を参照してください。
-   IBM MQ を構成するオプションはいくつかあり、使用方法によって構成は変わります。
+   IBM MQ を構成するオプションはいくつもあり、使用方法によって構成は変わります。
 
    - `channel`: IBM MQ チャンネル
    - `queue_manager`: 指定されたキューマネージャー
    - `host`: IBM MQ が実行されているホスト
    - `port`: IBM MQ が公開しているポート
+   - `convert_endianness`: MQ サーバーが AIX または IBM i で動作している場合、これを有効にする必要があります
 
-    ユーザー名とパスワードのセットアップを使用している場合、`username` と `password` を設定できます。ユーザー名が設定されていない場合、Agent プロセスの所有者が使用されます（例: `dd-agent`）。
+    ユーザー名とパスワードのセットアップを使用している場合、`username` と `password` を設定できます。ユーザー名が設定されていない場合、Agent プロセスの所有者 (`dd-agent`) が使用されます。
 
     **注**: このチェックは、`queues` パラメーターで設定したキューのみを監視します
 
@@ -270,7 +301,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
 | パラメーター      | 値                                                                                                                                                              |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -283,7 +314,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 ### 検証
 
-[Agent の status サブコマンドを実行][5]し、Checks セクションで `ibm_mq` を探します。
+[Agent の status サブコマンドを実行][6]し、Checks セクションで `ibm_mq` を探します。
 
 ## 収集データ
 
@@ -291,42 +322,64 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 {{< get-metrics-from-git "ibm_mq" >}}
 
 
-### サービスのチェック
-
-**ibm_mq.can_connect**:<br/>
-何らかの理由で Agent が MQ サーバーに接続できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
-**ibm_mq.queue_manager**:<br/>
-Agent がキューマネージャーから統計を取得できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
-**ibm_mq.queue**:<br/>
-Agent がキュー統計を取得できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
-**ibm_mq.channel**:<br/>
-Agent がチャンネル統計を取得できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
-**ibm_mq.channel.status**:<br/>
-ステータスが INACTIVE/STOPPED/STOPPING の場合は、`CRITICAL` を返します。ステータスが RUNNING の場合は、`OK` を返します。ステータスが RUNNING になると推定される場合は、`WARNING` を返します。
-
 ### イベント
 
 IBM MQ には、イベントは含まれません。
 
+### サービスのチェック
+{{< get-service-checks-from-git "ibm_mq" >}}
+
+
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+### リセットキュー統計 MQRC_NOT_AUTHORIZED 権限の警告
+以下の警告が表示される場合
+
+```
+Warning: Error getting pcf queue reset metrics for SAMPLE.QUEUE.1: MQI Error. Comp: 2, Reason 2035: FAILED: MQRC_NOT_AUTHORIZED
+```
+
+これは、`datadog` ユーザーがリセットキューのメトリクスを収集するための `+chg` 権限を持っていないことが原因です。これを解決するには、`datadog` ユーザーに `+chg` 権限を与えて [`setmqaut`][7] キューのリセットメトリクスを収集するか、あるいは `collect_reset_queue_metrics` を無効にしてください。
+```yaml
+    collect_reset_queue_metrics: false
+```
+
+### 高いリソース利用率
+IBM MQ チェックはサーバー上でクエリを実行しますが、これらのクエリが高価になり、チェックに劣化をもたらすことがあります。
+
+チェックの実行に時間がかかったり、ホスト上で多くのリソースを消費していることが確認された場合、以下を試してチェックの範囲を縮小できる可能性があります。
+
+* `auto_discover_queues` を使用している場合は、代わりに `queue_patterns` や `queue_regex` を使用して、特定のキューのみを検出するようにしてください。これは、システムが動的なキューを生成している場合に特に有効です。
+* `queue_patterns` や `queue_regex` を使用してキューを自動検出する場合は、パターンや正規表現を絞り込んで、より少ないキューにしかマッチしないようにしてみてください。
+* チャンネル数が多すぎる場合は `auto_discover_channels` を無効にしてください。
+* `collect_statistics_metrics` を無効にします。
+
+### ログのエラー
+* `Unpack for type ((67108864,)) not implemented`: このようなエラーが発生し、MQ サーバーが IBM OS で動作している場合は、`convert_endianness` を有効にして Agent を再起動します。
+
+### ログに表示される警告
+* `Error getting [...]: MQI Error. Comp: 2, Reason 2085: FAILED: MQRC_UNKNOWN_OBJECT_NAME`: このようなメッセージが表示される場合、インテグレーションが存在しないキューからメトリクスを収集しようとしていることが原因です。これは、構成ミスか、`auto_discover_queues` を使用している場合、インテグレーションが[ダイナミックキュー][8]を発見して、メトリクスを収集しようとしたときに、そのキューがもはや存在しないことが原因です。この場合、より厳格な `queue_patterns` や `queue_regex` を指定して問題を軽減するか、あるいは警告を無視することができます。 
+
+
+### その他
+
+ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+
 
 ## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 
-- [Datadog を使用した IBM MQ メトリクスおよびログの監視][7]
+- [Datadog を使用した IBM MQ メトリクスおよびログの監視][10]
 
 
 [1]: https://www.ibm.com/products/mq
 [2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://developer.ibm.com/messaging/mq-downloads
+[3]: https://www.ibm.com/support/pages/mqc9-ibm-mq-9-clients
 [4]: https://developer.apple.com/library/archive/documentation/Security/Conceptual/System_Integrity_Protection_Guide/RuntimeProtections/RuntimeProtections.html#//apple_ref/doc/uid/TP40016462-CH3-SW1
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[6]: https://docs.datadoghq.com/ja/help/
-[7]: https://www.datadoghq.com/blog/monitor-ibmmq-with-datadog
+[5]: https://www.ibm.com/docs/en/ibm-mq/9.1?topic=formats-reset-queue-statistics
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[7]: https://www.ibm.com/docs/en/ibm-mq/9.2?topic=reference-setmqaut-grant-revoke-authority
+[8]: https://www.ibm.com/docs/en/ibm-mq/9.2?topic=queues-dynamic-model
+[9]: https://docs.datadoghq.com/ja/help/
+[10]: https://www.datadoghq.com/blog/monitor-ibmmq-with-datadog

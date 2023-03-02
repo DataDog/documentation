@@ -1,28 +1,29 @@
 ---
-title: ウェブサービスの最も遅いエンドポイントで最も遅いトレースをデバッグする
-kind: ガイド
 further_reading:
-  - link: /tracing/guide/alert_anomalies_p99_database/
-    tag: 3 分
-    text: データベースサービスの異常な p99 レイテンシーに関するアラート
-  - link: /tracing/guide/week_over_week_p50_comparison/
-    tag: 2 分
-    text: サービスのレイテンシーを前週と比較する
-  - link: /tracing/guide/apm_dashboard/
-    tag: 4 分
-    text: ダッシュボードを作成して、APM メトリクスを追跡、関連付ける
-  - link: /tracing/guide/add_span_md_and_graph_it/
-    tag: 7 分
-    text: スパンタグを追加し、アプリケーションのパフォーマンスを分類する
-  - link: /tracing/guide/
-    tag: ''
-    text: すべてのガイド
+- link: /tracing/guide/alert_anomalies_p99_database/
+  tag: 3 分
+  text: データベースサービスの異常な p99 レイテンシーに関するアラート
+- link: /tracing/guide/week_over_week_p50_comparison/
+  tag: 2 分
+  text: サービスのレイテンシーを前週と比較する
+- link: /tracing/guide/apm_dashboard/
+  tag: 4 分
+  text: ダッシュボードを作成して、APM メトリクスを追跡、関連付ける
+- link: /tracing/guide/add_span_md_and_graph_it/
+  tag: 7 分
+  text: スパンタグを追加し、アプリケーションのパフォーマンスをフィルタリングし、グループ化する
+- link: /tracing/guide/
+  tag: ''
+  text: すべてのガイド
+kind: ガイド
+title: ウェブサービスの最も遅いエンドポイントで最も遅いトレースをデバッグする
 ---
+
 _所要時間 3 分_
 
 {{< img src="tracing/guide/slowest_request_daily/slowest_trace_1.mp4" video="true" alt="最も遅いトレースを特定し、そのホストメトリクスを解明する"  style="width:90%;">}}
 
-Datadog APM を使用すると、エンドポイントのパフォーマンスを簡単に調査して遅いリクエストを特定し、レイテンシー問題の根本原因を調査できます。上記の例では、E コマースチェックポイントのエンドポイントについて、1 日のうちで最も遅い[トレース][1]と、CPU 使用率が高いためにそのトレースが遅くなっている様子を示しています。
+Datadog APM を使用すると、エンドポイントのパフォーマンスを調査して遅いリクエストを特定し、レイテンシー問題の根本原因を調査できます。上記の例では、E コマースチェックポイントのエンドポイントについて、1 日のうちで最も遅い[トレース][1]と、CPU 使用率が高いためにそのトレースが遅くなっている様子を示しています。
 
 1. **[Services ページ][2]を開きます**。
 
@@ -41,17 +42,17 @@ Datadog APM を使用すると、エンドポイントのパフォーマンス�
 
     [Resource][4] ページには、スループット、レイテンシー、エラー率、リソースからの各ダウンストリームサービスにかかった時間の内訳など、このリソースに関する上位のメトリクスが表示されます。また、リソースをパススルーする特定の[トレース][1]や、このトレースを構成する[スパン][5]の集計ビューも確認できます。
 
-     {{< img src="tracing/guide/slowest_request_daily/slowest_trace_3.png" alt="最も遅いトレースを特定し、その原因となっているボトルネックを解明する"  style="width:90%;">}}
+     {{< img src="tracing/guide/slowest_request_daily/slowest_trace_3.png" alt="最も遅いトレースを特定し、その原因となっているボトルネックを解明する" style="width:90%;">}}
 
 4. 時間フィルターを `1d One Day` に設定します。トレース表までスクロールダウンし、**期間で並べ替え**、表の一番上のトレースにマウスを合わせ **View Trace をクリックします**。
 
     これはフレームグラフと関連情報です。トレースの各ステップの時間と、エラーの有無を確認でき、遅いコンポーネントやエラーを起こしやすいコンポーネントを特定するのに便利です。フレームグラフでは、拡大、スクロール、調査が可能です。フレームグラフの下には、関連するメタデータ、ログ、ホストの情報が表示されます。
 
-    フレームグラフは、エラーが発生しているスタックや、非常に遅いスタックを正確に特定するのに最適です。エラーは赤くハイライト表示され、時間は横向きスパンで表されます。つまり、非常に長いスパンが遅いスタックということになります。フレームグラフの活用については、[トレースビューガイド][6]を参照してください。
+    フレームグラフは、エラーが発生しているスタックや、遅いスタックを正確に特定するのに最適です。エラーは赤くハイライト表示され、時間は横向きスパンで表されます。つまり、長いスパンが最も遅いスタックということになります。フレームグラフの活用については、[トレースビューガイド][6]を参照してください。
 
     また、フレームグラフの下には、すべてのタグ ([カスタムタグ][7]を含む) が表示されます。ここから、関連するログ ([ログをトレースに接続][8]してある場合) を確認したり、CPU の使用率やメモリの使用量など、ホストレベルの情報を確認したりできます。
 
-    {{< img src="tracing/guide/slowest_request_daily/slowest_trace_4.png" alt="最も遅いトレースを特定し、その原因となっているボトルネックを解明する"  style="width:90%;">}}
+    {{< img src="tracing/guide/slowest_request_daily/slowest_trace_4.png" alt="最も遅いトレースを特定し、その原因となっているボトルネックを解明する" style="width:90%;">}}
 
 5. **Host タブをクリックして開き**、リクエストがヒットしていた間の下層のホストの CPU とメモリのパフォーマンスを調査します。
 6. **Open Host Dashboard をクリックして**、ホストに関するすべての関連データを表示します。
@@ -63,11 +64,11 @@ Datadog APM では、インフラストラクチャーメトリクスやログ�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/visualization/#trace
+[1]: /ja/tracing/glossary/#trace
 [2]: https://app.datadoghq.com/apm/services
-[3]: /ja/tracing/visualization/#services
-[4]: /ja/tracing/visualization/#resources
-[5]: /ja/tracing/visualization/#spans
-[6]: /ja/tracing/visualization/trace/?tab=spanmetadata
+[3]: /ja/tracing/glossary/#services
+[4]: /ja/tracing/glossary/#resources
+[5]: /ja/tracing/glossary/#spans
+[6]: /ja/tracing/trace_explorer/trace_view/?tab=spanmetadata
 [7]: /ja/tracing/guide/adding_metadata_to_spans/
-[8]: /ja/tracing/connect_logs_and_traces/
+[8]: /ja/tracing/other_telemetry/connect_logs_and_traces/

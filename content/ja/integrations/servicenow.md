@@ -1,27 +1,30 @@
 ---
 categories:
-  - issue tracking
-  - notification
-ddtype: crawler
+- issue tracking
+- notification
 dependencies: []
 description: Datadog アラートからチケットを自動的に生成および更新
-doc_link: 'https://docs.datadoghq.com/integrations/servicenow/'
+doc_link: https://docs.datadoghq.com/integrations/servicenow/
 draft: false
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/create-servicenow-tickets-from-datadog-alerts/'
-    tag: ブログ
-    text: Datadog アラートからの ServiceNow チケットの作成
+- link: https://www.datadoghq.com/blog/create-servicenow-tickets-from-datadog-alerts/
+  tag: ブログ
+  text: Datadog アラートからの ServiceNow チケットの作成
 git_integration_title: servicenow
 has_logo: true
+integration_id: ''
 integration_title: ServiceNow
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
 name: servicenow
 public_title: Datadog-ServiceNow インテグレーション
 short_description: Datadog アラートからチケットを自動的に生成および更新
+team: web-integrations
 version: '1.0'
 ---
+
 ## 概要
 
 ServiceNow は、企業のエンタープライズレベルの IT プロセスを 1 か所で記録、追跡、管理するための IT サービス管理プラットフォームです。
@@ -39,7 +42,7 @@ Datadog は、以下の ServiceNow ツールと統合されます。
 
 ## CMDB のセットアップ
 
-### サービスグラフコネクタを構成する
+### コンフィギュレーション
 
 [Datadog 用サービスグラフコネクタ][1]により、Datadog によって検出された新しいリソースの CMDB に、サーバーとデータベースの構成アイテム (CI) が自動的に入力されます。サービスグラフコネクタは ServiceNow [ストア][2]から入手可能です。
 
@@ -58,37 +61,20 @@ Datadog は、以下の ServiceNow ツールと統合されます。
 
 モジュールを使用するには、まず、ServiceNow インスタンスに最新の [Datadog 更新セット][3]をインストールし、Datadog で ServiceNow インテグレーションタイルを構成します。
 
-1. [最新の Datadog 更新セットのインストール](#install-the-datadog-update-set)
+1. [最新の Datadog Update Set のインストール](#install-the-datadog-update-set)
 1. [Datadog アカウントのアクセス許可の設定](#permissions)
-1. [ITOM および ITSM での使用手順](#configuring-for-use-with-itom-and-itsm-modules)
+1. [ITOM と ITSM での使用手順](#configuring-datadog-for-use-with-itom-and-itsm-modules)
 
-### Datadog 更新セットのインストール
+### Datadog Update Set のインストール
 
 ServiceNow で以下を実行します。
 
-- **Update Set (更新セット)** を検索します。
-- メニューで、**取得された更新セット**を見つけます。
-- `Datadog-SNow_Update_Set_vX.X.X.xml` ファイルを手動でインポートします。
+1. **Update Set** を検索し、左側のメニューで **Retrieved Update Sets** を探します。
+2. 提供された [`Datadog-SNow_Update_Set_vX.X.X.xml`][3] ファイルを手動でインポートします。
+3. XML ファイルをアップロードすると、Update Set の状態が `Loaded` と表示されます。更新セットの名前をクリックして、コードをプレビューし、システムへコミットします。
+4. Update Set をプレビューしてエラーがないことを確認します。その後、**Commit Update Set** を選択してアプリケーションをお使いのシステムにマージします。
 
-提供されている [Datadog XML 更新セット][3]をインポートします。
-
-{{< img src="integrations/servicenow/servicenow-import-update-set.png" alt="servicenow インテグレーション" >}}
-
-XML ファイルをアップロードすると、状態が `Loaded` と表示されます。更新セットの名前をクリックして、コードをプレビューし、システムへコミットします。
-
-{{< img src="integrations/servicenow/servicenow-loaded-update-set.png" alt="servicenow インテグレーション" >}}
-
-更新セットをプレビューしてエラーがないことを確認します。
-
-{{< img src="integrations/servicenow/servicenow-preview-update-set.png" alt="servicenow インテグレーション" >}}
-
-**Commit Update Set** を選択して、アプリケーションをシステムにマージします。
-
-{{< img src="integrations/servicenow/servicenow-commit-update-set.png" alt="servicenow インテグレーション" >}}
-
-これで、ナビゲーションメニューで **Datadog** を検索すると、テーブルが表示されるようになります。
-
-{{< img src="integrations/servicenow/servicenow-datadog-tables.png" alt="servicenow インテグレーション" >}}
+設定完了後、ナビゲーションメニューで **Datadog** を検索すると、テーブルが表示されます。
 
 ### アクセス許可
 
@@ -102,24 +88,25 @@ XML ファイルをアップロードすると、状態が `Loaded` と表示さ
 
 ### ITOM および ITSM モジュールで使用するために Datadog を構成する
 
-Datadog で @servicenow を使用する通知は、ServiceNow タイルで選択された中間テーブルに入力されます。以下の手順は、Datadog インテグレーションページで ServiceNow タイルを既にセットアップしていることを前提としています。それが完了したら、以下を行います。
+Datadog で `@servicenow-<INSTANCE_NAME>` を使用する通知は、ServiceNow タイルで選択された中間テーブルに入力されます。以下の手順は、Datadog インテグレーションページで ServiceNow タイルを既にセットアップしていることを前提としています。それが完了したら、以下を行います。
 
 1. ドロップダウンから、ドロップダウンから通知を送信する中間テーブルを選択します。
-1. インテグレーションが正しくセットアップされているかを検証するには、モニターまたはイベント通知に `@servicenow` を追加します。未加工のデータが中間テーブルの行に挿入され、作成したマッピングと変換で指定されている ServiceNow テーブルに転送されます。
+1. インテグレーションが正しくセットアップされているかを検証するには、モニターまたはイベント通知に `@servicenow-<INSTANCE_NAME>` を追加します。未加工のデータが中間テーブルの行に挿入され、作成したマッピングと変換で指定されている ServiceNow テーブルに転送されます。
 1. [変換マップを使用](#customize-data-with-transform-maps)して、テーブルに送信されるデータのフォーマットをカスタマイズします。
-1. [Datadog で ServiceNow インテグレーションタイルを構成します](#configure-the-servicenow-tile-in-datadog)
+1. [Datadog での ServiceNow インテグレーションタイルの構成](#configure-the-servicenow-tile-in-datadog-for-itomitsm)
 
 {{< img src="integrations/servicenow/servicenow-configuration.png" alt="servicenow インテグレーション" >}}
 
 ### ITOM/ITSM 対応 Datadog で ServiceNow タイルを構成する
 
 1. Datadog で Integrations ページの [ServiceNow インテグレーションタイル][4]に移動します。
+1. `Add New Instance` をクリックします。
 1. ServiceNow ドメインのサブドメインであるインスタンス名、`<インスタンス>.service-now.com` を追加します。
-1. ServiceNow インスタンスのユーザー名とパスワードを追加します。ITSM または ITOM モジュールを使用していて、通知を中間テーブルに送信したい場合は、ドロップダウンから選択できます。
+1. ServiceNow インスタンスのユーザー名とパスワードを追加します。
 
 **注**: Datadog のためだけに ServiceNow で制限ユーザーを作成できます。
 
-{{< img src="integrations/servicenow/servicenow-configuration.png" alt="servicenow インテグレーション" >}}
+{{< img src="integrations/servicenow/servicenow-configuration-new-instance.png" alt="servicenow インテグレーション新規インスタンス" >}}
 
 ### 変換マップを使用してデータをカスタマイズする
 
@@ -146,9 +133,9 @@ ServiceNow のテーブルにイベントが表示されず、代わりに
 
 ## ナレッジベース
 
-### Datadog インポートホストの AutoFlush ルール
+### Datadog インポートホストのオートフラッシュルール
 
-インポートセットテーブル `x_datad_datadog_import_host` が蓄積する行が増えすぎることを防ぐために、最後の 24 時間のデータのみを保持する AutoFlush ルールがテーブルクリーナーツールに追加されました。このコンフィギュレーション設定は、必要に応じて、フィルターナビゲーターで `sys_auto_flush_list.do` に移動し、`x_datad_datadog_import_host` テーブルのルールに入ることで変更できます。必要に応じて `Age in seconds` フィールドを更新できます。
+インポートセットテーブル `x_datad_datadog_import_host` が蓄積する行が増えすぎることを防ぐために、最後の 24 時間のデータのみを保持するオートフラッシュルールがテーブルクリーナーツールに追加されました。このコンフィギュレーション設定は、必要に応じて、フィルターナビゲーターで `sys_auto_flush_list.do` に移動し、`x_datad_datadog_import_host` テーブルのルールに入ることで変更できます。必要に応じて `Age in seconds` フィールドを更新できます。
 
 {{< img src="integrations/servicenow/servicenow-cmdb-autoflush-rule.png" alt="インテグレーション構成設定" >}}
 
@@ -162,7 +149,17 @@ ServiceNow が Datadog アカウントに接続されると、受信したアラ
 
 アラートの本文やフィールドマッピングで変数を使用して、ServiceNow にイベントの詳細を挿入することができます。たとえば、タイトルと重大度を該当する ServiceNow フィールドに含めたり、ServiceNow のチケットから Datadog 内の特定のインシデントに戻るリンクを入れたりすることができます。
 
+{{< img src="integrations/servicenow/servicenow-variables-form.png" alt="ServiceNow 変数入力フォーム" >}}
+
 {{< img src="integrations/servicenow/servicenow-variables.png" alt="ServiceNow 変数" >}}
+
+### インシデント優先度のフィールドマッピング
+
+ServiceNow インシデントの `priority` フィールドは読み取り専用で、[優先度ルックアップ規則][6]を使用してのみ更新することができます。
+
+ServiceNow のインシデント優先度を計算するために、モニターで `Impact` と `Urgency` を定義します。
+
+{{< img src="integrations/servicenow/servicenow-priority-field-mapping.png" alt="ServiceNow 優先度フィールドマッピング" >}}
 
 ### サポート解決ワークフローの自動化
 
@@ -172,9 +169,7 @@ ServiceNow が Datadog アカウントに接続されると、受信したアラ
 
 ### カスタムマッピングの定義
 
-たとえば、**Datadog Incident Tables** をクリックしてレコードの下部に移動すると、関連付けられている変換マップへのリンクが表示されます。
-
-{{< img src="integrations/servicenow/servicenow-datadog-incident-table.png" alt="servicenow インテグレーション" >}}
+テーブルの 1 つ、例えば **Datadog Incident Tables** をクリックし、レコードの一番下までスクロールすると、関連付けられている変換マップへのリンクが表示されます。
 
 ### マッピングの確認
 
@@ -228,8 +223,9 @@ answer = (function transformEntry(source)
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://store.servicenow.com/sn_appstore_store.do#!/store/application/26b85b762f6a1010b6a0d49df699b6fe/1.0.4?referer=%2Fstore%2Fsearch%3Flistingtype%3Dallintegrations%25253Bancillary_app%25253Bcertified_apps%25253Bcontent%25253Bindustry_solution%25253Boem%25253Butility%26q%3Ddatadog&sl=sh
+[1]: https://store.servicenow.com/sn_appstore_store.do#!/store/application/26b85b762f6a1010b6a0d49df699b6fe
 [2]: https://store.servicenow.com/
-[3]: https://s3.amazonaws.com/dd-servicenow-update-sets/Datadog-SNow_Update_Set_v2.2.2.xml
+[3]: https://docs.datadoghq.com/resources/xml/Datadog-SNow_Update_Set.xml
 [4]: https://app.datadoghq.com/account/settings#integrations/servicenow
 [5]: https://docs.datadoghq.com/ja/help/
+[6]: https://docs.servicenow.com/en-US/bundle/sandiego-it-service-management/page/product/incident-management/task/def-prio-lookup-rules.html

@@ -1,7 +1,15 @@
 {
+  "audit": {
+    "name": "Audit",
+    "description": "Recherchez des événements de log d'audit via HTTP."
+  },
+  "authn-mappings": {
+    "name": "Mappages d'authentification",
+    "description": "L'[API de mappage d'authentification](https://docs.datadoghq.com/account_management/authn_mapping/?tab=exemple) permet de mapper automatiquement des groupes d'utilisateurs à des rôles Datadog à l'aide des attributs envoyés par les fournisseurs d'identité."
+  },
   "cloud-workload-security": {
     "name": "Cloud Workload Security",
-    "description": "Surveillez les activités des fichiers et processus dans les charges de travail à l'aide des signaux de sécurité générés."
+    "description": "Règles de sécurité sur l'activité des workloads permettant de générer des événements à l'aide de l'Agent de sécurité Datadog."
   },
   "dashboard-lists": {
     "name": "Listes de dashboards",
@@ -29,7 +37,7 @@
   },
   "logs-archives": {
     "name": "Archives de logs",
-    "description": "Les archives permettent de transférer tous les logs ingérés vers un système de stockage sur le cloud.\n\nConsultez la [page Archives](https://app.datadoghq.com/logs/pipelines/archives) pour obtenir la liste des archives actuellement configurées dans notre interface utilisateur."
+    "description": "Les archives permettent de transférer tous les logs ingérés vers un système de stockage sur le cloud.\n\nConsultez la [page Archives](https://app.datadoghq.com/logs/pipelines/archives) pour obtenir la liste des archives actuellement configurées dans l'interface Web."
   },
   "logs-metrics": {
     "name": "Métriques de logs",
@@ -43,9 +51,17 @@
     "name": "Métriques",
     "description": "Les endpoints de métriques vous permettent :\n\n- D'envoyer des données de métriques afin de les représenter graphiquement sur les dashboards de Datadog\n- D'interroger vos métriques sur l'intervalle de votre choix\n- De modifier les configurations de tags pour les métriques\n- De visualiser les tags et les volumes pour les métriques\n\n**Remarque** : un graphique ne peut contenir qu'un nombre défini de points. Lorsque l'intervalle d'affichage d'une métrique augmente, les points sont agrégés afin de ne pas dépasser ce nombre.\nLes méthodes Post, Patch et Delete de l'API `manage_tags` peuvent uniquement être utilisées par un utilisateur qui dispose de l'autorisation `Manage Tags for Metrics`."
   },
+  "organizations": {
+    "name": "Organisations",
+    "description": "Créez, modifiez et gérez vos organisations. En savoir plus sur les [comptes multi-org](https://docs.datadoghq.com/account_management/multi_organization)."
+  },
   "processes": {
     "name": "Processus",
     "description": "L'API de processus vous permet d'interroger les données de processus pour votre organisation."
+  },
+  "rum": {
+    "name": "RUM",
+    "description": "Recherchez ou agrégez vos événements RUM via HTTP."
   },
   "roles": {
     "name": "Rôles",
@@ -58,6 +74,10 @@
   "service-accounts": {
     "name": "Comptes de service",
     "description": "Créez, modifiez et désactivez des comptes de service."
+  },
+  "usage-metering": {
+    "name": "Mesure de l'utilisation",
+    "description": "L'API de mesure de l'utilisation vous permet de récupérer des informations sur l'utilisation horaire, journalière et mensuelle de nombreuses facettes de Datadog. Tous les clients Pro et Enterprise peuvent utiliser cette API. Seules les [organisations de niveau parent](https://docs.datadoghq.com/account_management/multi_organization/) peuvent l'utiliser.\n\n**Remarque** : les données d'utilisation peuvent accuser d'un retard de 72 heures après leur collecte. Elles sont conservées pendant 15 mois.\n\nVous pouvez récupérer jusqu'à 24 heures de données d'utilisation horaire pour plusieurs organisations et jusqu'à deux mois de données d'utilisation horaire pour une seule organisation via une seule requête."
   },
   "users": {
     "name": "Utilisateurs",

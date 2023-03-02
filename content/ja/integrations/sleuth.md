@@ -1,41 +1,64 @@
 ---
-"assets":
-  "configuration":
-    "spec": assets/configuration/spec.yaml
-  "dashboards": {}
-  "monitors": {}
-  "saved_views": {}
-  "service_checks": assets/service_checks.json
-"categories":
+app_id: sleuth
+app_uuid: 7923b3ef-2436-4315-bf2e-7631a6975886
+assets:
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: sleuth.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Sleuth
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Sleuth
+  sales_email: support@sleuth.io
+  support_email: support@sleuth.io
+categories:
 - orchestration
 - 問題追跡
 - コラボレーション
 - ソースコントロール
-"creates_events": false
-"ddtype": "crawler"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/sleuth/README.md"
-"display_name": "Sleuth"
-"draft": false
-"git_integration_title": "sleuth"
-"guid": "294cd3d0-1412-475a-9c85-d8369719b805"
-"integration_id": "sleuth"
-"integration_title": "Sleuth"
-"integration_version": ""
-"is_public": true
-"kind": "インテグレーション"
-"maintainer": "support@sleuth.io"
-"manifest_version": "1.0.0"
-"metric_prefix": "sleuth."
-"metric_to_check": ""
-"name": "sleuth"
-"public_title": "Datadog-Sleuth インテグレーション"
-"short_description": "Sleuth Deployment Tracker"
-"support": "contrib"
-"supported_os":
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/sleuth/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: sleuth
+integration_id: sleuth
+integration_title: Sleuth
+integration_version: ''
+is_public: true
+kind: インテグレーション
+manifest_version: 2.0.0
+name: sleuth
+oauth: {}
+public_title: Sleuth
+short_description: Sleuth Deployment Tracker
+supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Orchestration
+  - Category::Issue Tracking
+  - Category::Collaboration
+  - カテゴリ::ソースコントロール
+  configuration: README.md#Setup
+  description: Sleuth Deployment Tracker
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Sleuth
 ---
 
 ## 概要
@@ -57,7 +80,7 @@ Datadog インテグレーションを追加するには
 
 ![][2]
 
-> Datadog インテグレーションが成功すると、**Datadog is connected** というメッセージが表示されます。
+> Datadog インテグレーションのインストールが完了すると、**Datadog is connected** というメッセージが表示されます。
 
 ![][3]
 
@@ -65,15 +88,15 @@ Datadog インテグレーションを追加するには
 
 Datadog Sleuth インテグレーションは、Sleuth アカウントからのみインストールされます。Sleuth で Datadog API とアプリケーションキーを指定する以外に、Datadog アカウントから行う必要がある設定や追加の構成はありません。
 
-### 構成
+### コンフィギュレーション
 
-* **Add metric** ドロップダウンをクリックし、受信した Datadog アプリケーションメトリクスを処理する Sleuth プロジェクトを選択します。Sleuth 組織内のすべてのプロジェクトがドロップダウンに表示されます。
+- **Add metric** ドロップダウンをクリックし、受信した Datadog メトリクスを処理する Sleuth プロジェクトを選択します。Sleuth 組織内のすべてのプロジェクトがドロップダウンに表示されます。
 
 ![][4]
 
 > インテグレーションは Sleuth 組織レベルで行われ、その組織内のすべてのプロジェクトで使用できます。インテグレーションの個々の設定は、プロジェクトレベルで行われます。
 
-以上で、Sleuth はデプロイで Datadog メトリクスの表示を開始します。Sleuth のデプロイカードでメトリクスがどのように伝達されるかについて詳しくは、[**ダッシュボード**][5]を参照してください。
+コンフィギュレーションが完了すると、Sleuth はデプロイで Datadog メトリクスを表示します。Sleuth のデプロイカードでメトリクスがどのように伝達されるかについて詳しくは、[**ダッシュボード**][5]を参照してください。
 
 
 ## 収集データ
@@ -96,9 +119,14 @@ Sleuth インテグレーションには、イベントは含まれません。
 2. Datadog インテグレーションカードで、**disable** をクリックします。
 
 Datadog インテグレーションが切断され、その組織内のプロジェクトで使用できなくなります。Datadog インテグレーションに加えたプロジェクトレベルの変更はすべて失われます。
+
+## トラブルシューティング
+
+ご不明な点は、このインテグレーションの[メインテナー][6]までお問い合わせください。
+
 [1]: https://app.sleuth.io/accounts/login/
 [2]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/sleuth/images/datadog-integration-api-key.png
 [3]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/sleuth/images/datadog-integration.png
 [4]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/sleuth/images/datadog-enabled-metric-pick.png
 [5]: https://help.sleuth.io/dashboard
-
+[6]: https://github.com/DataDog/integrations-extras/blob/master/sleuth/manifest.json

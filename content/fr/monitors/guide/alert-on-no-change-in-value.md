@@ -1,16 +1,17 @@
 ---
-title: Alerte en cas d'absence de changement d'une valeur
-kind: guide
 aliases:
-  - /fr/monitors/faq/how-can-i-configure-a-metric-monitor-to-alert-on-no-change-in-value
+- /fr/monitors/faq/how-can-i-configure-a-metric-monitor-to-alert-on-no-change-in-value
 further_reading:
-  - link: /monitors/create/types/
-    tag: Documentation
-    text: Apprendre à créer un monitor
-  - link: /monitors/notify/
-    tag: Documentation
-    text: Configurer les notifications de vos monitors
+- link: /monitors/
+  tag: Documentation
+  text: Apprendre à créer un monitor
+- link: /monitors/notify/
+  tag: Documentation
+  text: Configurer les notifications de vos monitors
+kind: guide
+title: Alerte en cas d'absence de changement d'une valeur
 ---
+
 Pour déclencher une alerte lorsque la valeur d'une métrique ne change pas au cours d'une période donnée, commencez par utiliser une fonction `diff()` sur votre requête. Vous obtiendrez ainsi les valeurs delta des points de données consécutifs.
 
 * `diff(avg:system.mem.free{*})`
@@ -40,4 +41,4 @@ D'autres [conditions et options d'alerte][2] peuvent être définies selon vos p
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/api/
-[2]: /fr/monitors/create/types/#define-the-conditions
+[2]: /fr/monitors/create/configuration/

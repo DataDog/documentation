@@ -5,11 +5,11 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - monitoring
+- monitoring
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/portworx/README.md
+- https://github.com/DataDog/integrations-extras/blob/master/portworx/README.md
 display_name: Portworx
 draft: false
 git_integration_title: portworx
@@ -28,8 +28,11 @@ public_title: Intégration Datadog/Portworx
 short_description: Recueillez des métriques runtime à partir d'une instance Portworx.
 support: contrib
 supported_os:
-  - linux
+- linux
 ---
+
+
+
 ## Présentation
 
 Recueillez des métriques à partir du service Portworx en temps réel pour :
@@ -100,7 +103,10 @@ Vérifiez que le paramètre `url` dans `portworx.yaml` est correctement configur
 
 ## Pour aller plus loin
 
-Consultez [notre blog][9] pour en savoir plus sur la surveillance d'infrastructure et sur toutes les autres intégrations disponibles.
+Documentation, liens et articles supplémentaires utiles :
+
+- [Surveillance de stockage en conteneurs sur plusieurs clouds avec Portworx et Datadog][9]
+
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/fr/agent/guide/use-community-integrations/
@@ -110,4 +116,4 @@ Consultez [notre blog][9] pour en savoir plus sur la surveillance d'infrastructu
 [6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [7]: https://docs.datadoghq.com/fr/agent/faq/agent-status-and-information/
 [8]: https://github.com/DataDog/integrations-extras/blob/master/portworx/metadata.csv
-[9]: https://www.datadoghq.com/blog
+[9]: https://www.datadoghq.com/blog/portworx-integration/

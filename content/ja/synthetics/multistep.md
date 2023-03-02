@@ -1,148 +1,169 @@
 ---
-title: Multistep API テスト
-kind: documentation
-description: リクエストをチェーンして主要なサービスで高度なトランザクションを監視する
+description: リクエストをチェーンして主要なサービスで高度なトランザクションを監視します。
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/monitor-apis-with-datadog/'
-    tag: ブログ
-    text: Datadog マルチステップ API テストでワークフローを監視する
-  - link: 'https://learn.datadoghq.com/course/view.php?id=39'
-    tag: ラーニングセンター
-    text: Synthetic テストの紹介
-  - link: /getting_started/synthetics/api_test
-    tag: Documentation
-    text: API テストの概要
-  - link: /synthetics/private_locations
-    tag: Documentation
-    text: 内部エンドポイントで Multistep API テストを実行する
+- link: https://www.datadoghq.com/blog/monitor-apis-with-datadog/
+  tag: ブログ
+  text: Datadog マルチステップ API テストでワークフローを監視する
+- link: https://learn.datadoghq.com/courses/intro-to-synthetic-tests
+  tag: ラーニングセンター
+  text: Synthetic テストの紹介
+- link: /getting_started/synthetics/api_test
+  tag: Documentation
+  text: API テストの概要
+- link: /synthetics/private_locations
+  tag: Documentation
+  text: 内部エンドポイントで Multistep API テストを実行する
+- link: /synthetics/guide/synthetic-test-monitors
+  tag: ドキュメント
+  text: Synthetic テストモニターについて
+- link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test
+  tag: Terraform
+  text: Terraform による Synthetic Multistep API テストの作成と管理
+kind: documentation
+title: Multistep API テスト
 ---
+
 ## 概要
 
-Multistep API テストを使用すると、**[HTTP テスト][1]**をチェーンして、主要なサービスの高度なジャーニーがいつでもどこからでも利用できることを事前に監視できます。
+Multistep API テストは、一度に複数の [HTTP リクエスト][1]を連鎖させ、主要サービスの洗練されたジャーニーをいつでも、どこからでもプロアクティブに監視・確認できるようにするものです。サービスに対して単一のリクエストを実行したい場合は、[API テスト][2]を活用してください。
+
+以下を実現できます。
 
 * 認証を必要とする API エンドポイントで HTTP リクエストを実行します (たとえば、トークンを介して)
 * API レベルで主要なビジネストランザクションを監視します
-* エンドツーエンドのモバイルアプリケーションのジャーニーなどをシミュレートします
+* エンドツーエンドのモバイルアプリケーションのジャーニーをシミュレートします
 
-{{< img src="synthetics/api_tests/ms_overview.png" alt="Multistep API テストの概要" style="width:90%;" >}}
+{{< img src="synthetics/multistep_tests/multistep_test_steps.png" alt="マルチステップ API テストの複数のテストステップ" style="width:90%;" >}}
 
-サービスの 1 つが応答遅延を起こしたり、予期しない方法 (たとえば、予期しない応答本文、ステータスコードなど) で応答を開始した場合、テストは[**チームに警告する**][2]、[**CI パイプラインをブロックする**][3]、または[**障害のあるデプロイをロールバックする**][3]ことができます。
+サービスの 1 つが応答遅延を起こしたり、予期しない方法 (たとえば、予期しない応答本文やステータスコード) で応答を開始した場合、テストは[**チームに警告する**][3]、[**CI パイプラインをブロックする**][4]、または[**障害のあるデプロイをロールバックする**][4]ことができます。
 
-Multistep API テストは、Datadog [管理ロケーション][4]および[プライベートロケーション][5]から実行できるため、外部と内部の両方で**システムを完全にカバー**できます。
-
-**注**: Multistep API テストを使用すると、1 つのテストで複数の HTTP リクエストをリンクできます。サービスに対する単一のリクエストを実行する場合は、[API テスト][6]を利用できます。
+Multistep API テストは、Datadog [管理ロケーション][5]および[プライベートロケーション][6]から実行できるため、外部と内部の両方で**システムを完全にカバー**できます。
 
 ## コンフィギュレーション
 
 ### テストに名前を付けてタグを付ける
 
-1. Multistep API テストに**名前**を付けます。
-2. Multistep API テストに `env` **タグ**とその他のタグを追加します。次に、これらのタグを使用して、[Synthetic Monitoring ホームページ][7]で Synthetic テストをすばやくフィルタリングできます。
+1. Multistep API テストに名前を付けます。
+2. Multistep API テストに `env` などのタグを追加します。これらのタグを使用して、[Synthetic Monitoring ホームページ][7]で Synthetic テストをすばやくフィルタリングできます。
 
 ### ロケーションを選択する
 
-Multistep API テストを実行する**ロケーション**を選択します。Multistep API テストは、ネットワークの外部または内部のどちらからテストを実行するかによって、[管理ロケーション][4]と[プライベートロケーション][5]の両方から実行できます。
+Multistep API テストの**ロケーション**を選択します。Multistep API テストは、ネットワークの外部または内部のどちらからテストを実行するかの好みによって、[管理ロケーション][5]と[プライベートロケーション][6]の両方から実行できます。
 
-### リクエストを定義する
+### ステップを定義する
 
-**Create Your First Request** を押して、テストのリクエストの設計を開始します。
+HTTP リクエストのステップを作成するには、**Create Your First Step** をクリックします。
 
-{{< img src="synthetics/api_tests/create_request.png" alt="Multistep API テストリクエストを作成する"  style="width:90%;" >}}
+{{< img src="synthetics/api_tests/ms_create_request.png" alt="Multistep API テストリクエストを作成する" style="width:90%;" >}}
 
-**注:** デフォルトでは、最大 10 個のステップを作成できます。<a href="https://docs.datadoghq.com/help/">Datadog サポートチーム</a>に連絡して増やしてください。
+デフォルトでは、最大 10 個のテストステップを作成することができます。この制限を増やすには、<a href="https://docs.datadoghq.com/help/">Datadog サポート</a>に連絡してください。
 
 #### リクエストを定義する
-
-{{< img src="synthetics/api_tests/ms_define_request.png" alt="Multistep API テストのリクエストを定義する" style="width:90%;" >}}
 
 1. ステップに**名前**を付けます。
 2. **HTTP Method** を選択し、クエリする **URL** を指定します。使用可能なメソッドは、`GET`、`POST`、`PATCH`、`PUT`、`HEAD`、`DELETE`、`OPTIONS` です。`http` と `https` の両方の URL がサポートされています。
 3. **Advanced Options** を使用して HTTP リクエストを加工します (オプション)。
 
-  {{< tabs >}}
+   {{< tabs >}}
 
-  {{% tab "リクエストオプション" %}}
+   {{% tab "リクエストオプション" %}}
 
-  * **Follow redirects**: チェックマークを付けると、リクエストを実行するときに HTTP テストで最大 10 個のリダイレクトをフォローします。
-  * **Request headers**: HTTP リクエストに追加するヘッダーを定義します。デフォルトのヘッダー (たとえば、`user-agent` ヘッダー) をオーバーライドすることもできます。
-  * **Cookies**: HTTP リクエストに追加するクッキーを定義します。`<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>` の形式を使用して複数のクッキーを設定します。
-  * **HTTP Basic Auth**: HTTP 基本認証資格情報を追加します。
+   * **Follow redirects**: チェックマークを付けると、リクエストを実行するときに HTTP テストで最大 10 個のリダイレクトをフォローします。
+   * **Ignore server certificate error**: チェックマークを付けると、SSL 証明書の検証時にエラーが発生した場合でも、HTTP テストが接続を続行します。
+   * **Request headers**: HTTP リクエストに追加するヘッダーを定義します。デフォルトのヘッダー (たとえば、`user-agent` ヘッダー) をオーバーライドすることもできます。
+   * **Cookies**: HTTP リクエストに追加するクッキーを定義します。`<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>` の形式を使用して複数のクッキーを設定します。
 
-  {{% /tab %}}
+   {{% /tab %}}
 
-  {{% tab "リクエスト本文" %}}
+   {{% tab "認証" %}}
 
-  * **Body type**: HTTP リクエストに追加するリクエスト本文のタイプ (`text/plain`、`application/json`、`text/xml`、`text/html`、または `None`) を選択します。
-  * **Request body**: HTTP リクエスト本文のコンテンツを追加します。**注**: リクエスト本文は最大サイズ 50 キロバイトに制限されています。
+   * **Client certificate**: クライアント証明書と関連する秘密キーをアップロードして、mTLS を介して認証します。
+   * **HTTP Basic Auth**: HTTP 基本認証資格情報を追加します。
+   * **Digest Auth**: ダイジェスト認証の資格情報を追加します。
+   * **NTLM**: NTLM 認証の資格情報を追加します。NTLMv2 と NTLMv1 の両方をサポートします。
+   * **AWS Signature v4**: Access Key ID と Secret Access Key を入力します。Datadog は、リクエストの署名を生成します。このオプションは、SigV4 の基本的な実装を使用します。AWS S3 などの特定の署名はそのままではサポートされていません。
+   AWS S3 バケットへの "Single Chunk" 転送リクエストでは、リクエストの本文を sha256 エンコードした `x-amz-content-sha256` をヘッダーとして追加します (本文が空の場合: `x-amz-content-sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`)。
+   * **OAuth 2.0**: クライアント資格情報またはリソース所有者のパスワードのどちらかを付与するかを選択し、アクセストークンの URL を入力します。選択内容に応じて、クライアント ID とシークレット、またはユーザー名とパスワードを入力します。ドロップダウンメニューから、API トークンを基本認証ヘッダーとして送信するか、クライアント資格情報を本文に送信するかを選択します。オプションで、オーディエンス、リソース、スコープなどの追加情報を提供できます (**Resource Owner Password** を選択した場合は、クライアント ID とシークレットも提供します)。
 
-  {{% /tab %}}
+   {{< /tabs >}}
 
-  {{% tab "証明書" %}}
+   {{% tab "クエリパラメーター" %}}
 
-  * **Ignore server certificate error**: チェックマークを付けると、SSL 証明書の検証時にエラーが発生した場合でも、HTTP テストが接続を続行します。
-  * **Client certificate**: クライアント証明書と関連する秘密キーをアップロードして、mTLS を介して認証します。
+   * **Encode parameters**: エンコーディングが必要なクエリパラメーターの名前と値を追加します。
 
-  {{% /tab %}}
+   {{< /tabs >}}
 
-  {{% tab "プロキシ" %}}
+   {{% tab "リクエスト本文" %}}
 
-  * **Proxy URL**: HTTP リクエストが通過する必要があるプロキシの URL (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`) を指定します。
-  * **Proxy Header**: プロキシへの HTTP リクエストに含めるヘッダーを追加します。
+   * **Body type**: HTTP リクエストに追加するリクエスト本文のタイプ (`text/plain`、`application/json`、`text/xml`、`text/html`、`application/x-www-form-urlencoded`、`GraphQL`、または `None`) を選択します。
+   * **Request body**: HTTP リクエスト本文のコンテンツを追加します。リクエスト本文は最大サイズ 50 キロバイトに制限されています。
 
-  {{% /tab %}}
+   {{< /tabs >}}
 
-  {{% tab "Privacy" %}}
+   {{% tab "プロキシ" %}}
 
-  * **Do not save response body**: レスポンスの本文が実行時に保存されないようにするには、このオプションを選択します。テスト結果に機密データを含めたくない場合に有用です。障害発生時のトラブルシューティングに影響を及ぼす可能性があるため、慎重に使用してください。セキュリティに関する詳細は、[こちら][1]でご確認ください。
+   * **Proxy URL**: HTTP リクエストが通過する必要があるプロキシの URL (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`) を指定します。
+   * **Proxy Header**: プロキシへの HTTP リクエストに含めるヘッダーを追加します。
 
+   {{< /tabs >}}
 
-[1]: /ja/security/synthetics
-  {{% /tab %}}
+   {{% tab "Privacy" %}}
 
-  {{< /tabs >}}
+   * **Do not save response body**: レスポンスの本文が実行時に保存されないようにするには、このオプションを選択します。これは、テスト結果に機密データが表示されないようにするために役立ちますが、障害のトラブルシューティングが困難になる可能性があります。セキュリティに関する推奨事項については、[Synthetic モニタリングデータセキュリティ][1]を参照してください。
+
+[1]: /ja/data_security/synthetics
+   {{% /tab %}}
+
+   {{< /tabs >}}
 
 **Test URL** をクリックして、リクエストのコンフィギュレーションをテストします。応答プレビューが表示されます。
 
+{{< img src="synthetics/api_tests/ms_define_request.png" alt="Multistep API テストのリクエストを定義する" style="width:90%;" >}}
+
 #### アサーションの追加
 
-アサーションは、期待されるテスト結果が何であるかを定義します。`Test URL` を押すと、`response time`、`status code`、`header`、`content-type` の基本的なアサーションが、取得された応答に基づいて追加されます。Multistep API テストでは、アサーションはオプションです。
+アサーションは、期待されるテスト結果が何であるかを定義します。**Test URL** をクリックすると、`response time`、`status code`、`header`、`content-type` の基本的なアサーションが、取得された応答に基づいて追加されます。マルチステップ API テストでは、アサーションはオプションです。
 
 | タイプ          | 演算子                                                                                               | 値の型                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| 本文          | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`、<br> [`jsonpath`][8] | _String_ <br> _[Regex][9]_ <br> _String_、_[Regex][9]_ |
-| ヘッダー        | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`                       | _String_ <br> _[Regex][9]                                      |
+| 本文          | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`、<br> [`jsonpath`][8]、[`xpath`][9] | _String_ <br> _[Regex][10]_ <br> _String_、_[Regex][10]_ |
+| ヘッダー        | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`                       | _String_ <br> _[Regex][10]_                                      |
 | response time | `is less than`                                                                                         | 整数 (ms)                                                  |
 | ステータスコード   | `is`、`is not`                                                                                         | 整数                                                      |
 
-**注**: HTTP テストでは、`br`、`deflate`、`gzip`、`identity` の `content-encoding` ヘッダーを使用して本文の圧縮を解除することが可能です。
+HTTP テストでは、`br`、`deflate`、`gzip`、`identity` の `content-encoding` ヘッダーを使用して本文を解凍することが可能です。
+
+- テストがレスポンス本文にアサーションを含まない場合、本文のペイロードはドロップし、Synthetics Worker で設定されたタイムアウト制限内でリクエストに関連するレスポンスタイムを返します。
+
+- テストがレスポンス本文に対するアサーションを含み、タイムアウトの制限に達した場合、`Assertions on the body/response cannot be run beyond this limit` というエラーが表示されます。
+
+{{< img src="synthetics/api_tests/ms_assertions.png" alt="Multistep API テストが成功または失敗するためのアサーションを定義する" style="width:90%;" >}}
 
 **New Assertion** をクリックするか、応答プレビューを直接クリックすることで、ステップごとに最大 20 個のアサーションを作成できます。
 
-{{< img src="synthetics/api_tests/assertions.png" alt="Multistep API テストのアサーションを定義する" style="width:90%;" >}}
+#### 実行パラメーターの追加
 
-##### 失敗動作
+**Continue with test if this step fails** をクリックすると、ステップに失敗しても次のステップに進むことができます。こうすることで、テストが後始末をすることができます。例えば、あるテストでは、リソースを作成し、そのリソースに対していくつかのアクションを実行し、そのリソースを削除して終了することができます。
 
-`Continue with test if this step fails` (このステップが失敗した場合にテストを続行する) 設定により、ステップが失敗した場合でも、マルチステップ API テストを後続のステップに進めることができます。これは、テストが自動的にクリーンアップできることを確認するのに特に役立ちます。たとえば、テストでは、最初にリソースを作成し、そのリソースに対していくつかのアクションを実行し、そのリソースの削除で終了する場合があります。中間ステップの 1 つが失敗した場合でも、テストの最後にリソースを削除して、誤検知の生成を回避する必要があります。これは、すべての中間ステップで `Continue with test if this step fails` (このステップが失敗した場合にテストを続行する) を使用して行うことができます。
+中間ステップの 1 つが失敗した場合、テスト終了時にリソースが削除され、誤検出が発生しないようにするため、すべての中間ステップでこの設定を有効にしたいと思います。
 
-また、中間ステップで `Consider entire test as failed if this step fails` (このステップが失敗した場合、テスト全体を失敗と見なす) 設定をアクティブにして、エンドポイントの 1 つが期待どおりに応答しない場合でも、テスト全体でアラートが生成されるようにする必要があります。
-
-同様に、マルチステップ API テストがさまざまなエンドポイントで実行される場合、2 つの失敗動作設定により、1 つまたは複数の API エンドポイントで問題が発生した場合でも、テストがすべてのリクエストを確実に実行できるようになります。
+このテストでは、エンドポイントが期待通りに応答しない場合、アラートが生成されます。テストが失敗した場合、Y ミリ秒後に X 回再試行することができます。再試行の間隔は、警告の感性に合うようにカスタマイズしてください。
 
 #### 応答から変数を抽出する
 
-オプションで、応答ヘッダーまたは本文をパースすることにより、HTTP リクエストの応答から変数を抽出することもできます。変数の値は、HTTP リクエストステップが実行されるたびに更新されます。
+オプションで、応答ヘッダーまたは本文をパースすることにより、HTTP リクエストの応答から変数を抽出します。変数の値は、HTTP リクエストステップが実行されるたびに更新されます。
 
-変数をパースするには
+変数のパースを開始するには、**Extract a variable from response content** をクリックします。
 
 1. **Variable Name** を入力します。変数名に使用できるのは大文字、数字、アンダースコアのみです。また、3 文字以上にする必要があります。
-2. 変数を応答ヘッダーから抽出するか、本文から抽出するか決定します。
+2. 変数をレスポンスのヘッダーから抽出するか、本文から抽出するか決定します。
 
-    * **応答ヘッダー**から値を抽出: HTTP リクエストの応答ヘッダー全体を変数値に使用するか、[正規表現][9]によりパースします。
-    * **応答本文**から値を抽出: HTTP リクエストの応答本文全体を変数値に使用し、[正規表現][9]または [JSONPath][8] によりパースします。
+   * **応答ヘッダー**から値を抽出: HTTP リクエストの応答ヘッダー全体を変数値に使用するか、[`regex`][10] によりパースします。
+   * **応答本文**から値を抽出: HTTP リクエストの応答本文全体を変数値に使用するか、[`regex`][10]、[`JSONPath`][8] または [`XPath`][9] によりパースします。
 
 {{< img src="synthetics/api_tests/ms_extract_variable.png" alt="Multistep API テストで HTTP リクエストから変数を抽出する" style="width:90%;" >}}
 
-作成されたこの変数は、Multistep API テストの次の手順で使用できます。
+1 つのテストステップにつき最大 10 個の変数を抽出することができます。一度作成すると、この変数はマルチステップ API テストの次のステップで使用することができます。詳しくは、[変数の使用](#use-variables)を参照してください。
 
 ### テストの頻度を指定する
 
@@ -150,9 +171,9 @@ Multistep API テストは次の頻度で実行できます。
 
 * **On a schedule**: 最も重要なエンドポイントにユーザーが常にアクセスできるようにします。Datadog で Multistep API テストを実行する頻度を選択します。
 
-{{< img src="synthetics/api_tests/schedule.png" alt="スケジュールどおりに API テストを実行する"  style="width:90%;" >}}
+{{< img src="synthetics/api_tests/schedule.png" alt="スケジュールどおりに API テストを実行する" style="width:90%;" >}}
 
-* [**Within your CI/CD pipelines**][3]: 欠陥のあるコードがカスタマーエクスペリエンスに影響を与える可能性があることを恐れずに出荷を開始します。
+* [**Within your CI/CD pipelines**][4]: 欠陥のあるコードがカスタマーエクスペリエンスに影響を与える可能性があることを恐れずに出荷を開始します。
 * **On-demand**: チームにとって最も意味のあるときにいつでもテストを実行します。
 
 ### アラート条件を定義する
@@ -168,12 +189,11 @@ Multistep API テストは次の頻度で実行できます。
 
 #### 高速再試行
 
-テスト結果が失敗した場合、テストによって再試行をトリガーすることができます。デフォルトでは、再試行は最初に失敗したテスト結果の 300 ミリ秒後に実行されます。この間隔は [API][10] を介して構成できます。
-
+テストが失敗した場合、`Y` ミリ秒後に `X` 回再試行することができます。再試行の間隔は、警告の感性に合うようにカスタマイズしてください。
 
 ロケーションのアップタイムは、評価ごとに計算されます (評価前の最後のテスト結果がアップかダウンか)。合計アップタイムは、構成されたアラート条件に基づいて計算されます。送信される通知は、合計アップタイムに基づきます。
 
-### チームへの通知
+### テストモニターを構成する
 
 以前に定義された[アラート条件](#define-alert-conditions)に基づいて、テストによって通知が送信されます。このセクションを使用して、チームに送信するメッセージの方法と内容を定義します。
 
@@ -189,20 +209,19 @@ Multistep API テストは次の頻度で実行できます。
     | `{{^is_recovery}}`         |テストがアラートから回復しない限り表示します。                           |
 
 3. テストが失敗した場合に、テストで**通知メッセージを再送信する**頻度を指定します。テストの失敗を再通知しない場合は、`Never renotify if the monitor has not been resolved` オプションを使用してください。
+4. **Create** をクリックすると、テストの構成とモニターが保存されます。
 
-**Save** をクリックしてテストを保存し、Datadog にテストの実行を開始させます。
+詳しくは、[Synthetic テストモニターの使用][14]をご覧ください。
 
 ## 変数
 
+### 変数の抽出
+
+ローカル変数の作成に加えて、マルチステップ API テストの[任意のステップから変数を抽出](#extract-variables-from-the-response)し、[後続のステップで値を再挿入する](#use-variables)ことが可能です。
+
 ### ローカル変数を作成する
 
-#### 抽出された変数
-
-[Multistep API テストの任意のステップから変数を抽出](#extract-variables-from-the-response)してから、テストの[後続のステップでその値を再挿入](#use-variables)することができます。
-
-#### パターンからの変数
-
-テストコンフィギュレーションフォームの右上隅にある **Create Local Variable** をクリックすると、ローカル変数を作成できます。以下の利用可能なビルトインのいずれかから値を定義できます。
+ローカル変数を作成するには、右上の **Create Local Variable** をクリックします。以下の利用可能なビルトインのいずれかから選択することができます。
 
 `{{ numeric(n) }}`
 : `n` 桁の数字列を生成します。
@@ -213,15 +232,18 @@ Multistep API テストは次の頻度で実行できます。
 `{{ alphanumeric(n) }}`
 : `n` 文字の英数字文字列を生成します。
 
-`{{ date(n, format) }}`
-: テストが開始された日付 + `n` 日の値を使用して、許容される形式のいずれかで日付を生成します。
+`{{ date(n unit, format) }}` 
+: テストが + または - `n` 単位で開始された UTC 日付に対応する値を使用して、Datadog の許容される形式のいずれかで日付を生成します。
 
 `{{ timestamp(n, unit) }}` 
-: テストが +/- `n` 選択単位で開始されたタイムスタンプの値を使用して、許容される単位のいずれかでタイムスタンプを生成します。
+: テストが + または - `n` 単位で開始された UTC タイムスタンプに対応する値を使用して、Datadog の許容される単位のいずれかでタイムスタンプを生成します。
+
+テスト結果のローカル変数値を難読化するには、**Hide and obfuscate variable value** を選択します。変数文字列を定義したら、**Add Variable** をクリックします。
 
 ### 変数を使用する
 
-HTTP テストの URL、高度なオプション、アサーションで、[`Settings` で定義されたグローバル変数][14]と[ローカルで定義された変数](#create-local-variables)を使用できます。
+HTTP テストの URL、高度なオプション、およびアサーションで、[`Settings` で定義されたグローバル変数][15]と[ローカルで定義された変数](#create-local-variables)を使用できます。
+
 変数のリストを表示するには、目的のフィールドに `{{` と入力します。
 
 {{< img src="synthetics/api_tests/use_variable.mp4" alt="Multistep API テストでの変数の使用" video="true" width="90%" >}}
@@ -230,40 +252,64 @@ HTTP テストの URL、高度なオプション、アサーションで、[`Set
 
 ステップが 1 つまたは複数のアサーションを満たさない場合、またはステップのリクエストが時期尚早に失敗した場合、テストは `FAILED` と見なされます。場合によっては、エンドポイントに対してアサーションをテストできずにテストが実際に失敗することがあります。これらの理由には次のものがあります。
 
+`CONNREFUSED`
+: ターゲットマシーンが積極的に拒否したため、接続できませんでした。
 
 `CONNRESET`
 : 接続がリモートサーバーによって突然閉じられました。Web サーバーにエラーが発生した、応答中にシステムが停止した、Web サーバーへの接続が失われた、などの原因が考えられます。
 
 `DNS`
-: テスト URL に対応する DNS エントリが見つかりませんでした。テスト URL の構成の誤り、DNS エントリの構成の誤りなどの原因が考えられます。
+: テスト URL に対応する DNS エントリが見つかりませんでした。テスト URL の構成の誤りまたは DNS エントリの構成の誤りの原因が考えられます。
 
 `INVALID_REQUEST` 
 : テストのコンフィギュレーションが無効です (URL に入力ミスがあるなど)。
 
 `SSL`
-: SSL 接続を実行できませんでした。[詳細については、個別のエラーページを参照してください][15]。
+: SSL 接続を実行できませんでした。[詳細については、個別のエラーページを参照してください][16]。
 
 `TIMEOUT`
 : リクエストを一定時間内に完了できなかったことを示します。`TIMEOUT` には 2 種類あります。
-  - `TIMEOUT: The request couldn’t be completed in a reasonable time.` は、タイムアウトが TCP ソケットの接続レベルで発生したことを示します。
-  - `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` は、タイムアウトがリクエストの実行全体 (TCP ソケット接続、データ転送、アサーション) で発生したことを示します。
+  - `TIMEOUT: The request couldn’t be completed in a reasonable time.`  は、リクエストの持続時間がテスト定義のタイムアウト (デフォルトは 60 秒に設定されています) に当たったことを示します。
+  各リクエストについて、ネットワークウォーターフォールに表示されるのは、リクエストの完了したステージのみです。例えば、`Total response time` だけが表示されている場合、DNS の解決中にタイムアウトが発生したことになります。
+  - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.`  は、リクエストとアサーションの時間が最大時間 (60.5s) に達したことを示しています。
 
-## その他の参考資料
+`MALFORMED_RESPONSE` 
+: リモートサーバーが HTTP 仕様に準拠していないペイロードで応答しました。
+
+## アクセス許可
+
+デフォルトでは、[Datadog 管理者および Datadog 標準ロール][17]を持つユーザーのみが、Synthetic Multistep API テストを作成、編集、削除できます。Synthetic Multistep API テストの作成、編集、削除アクセスを取得するには、ユーザーをこれら 2 つの[デフォルトのロール][17]のいずれかにアップグレードします。
+
+[カスタムロール機能][18]を使用している場合は、Synthetic Monitoring の `synthetics_read` および `synthetics_write` 権限を含むカスタムロールにユーザーを追加します。
+
+### アクセス制限
+
+アカウントに[カスタムロール][19]を使用しているお客様は、アクセス制限が利用可能です。
+
+組織内の役割に基づいて、Multistep API テストへのアクセスを制限することができます。Multistep API テストを作成する際に、(ユーザーのほかに) どのロールがテストの読み取りと書き込みを行えるかを選択します。
+
+{{< img src="synthetics/settings/restrict_access.png" alt="テストのアクセス許可の設定" style="width:70%;" >}}
+
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/synthetics/api_tests/http_tests
-[2]: /ja/synthetics/api_tests/http_tests?tab=requestoptions#notify-your-team
-[3]: /ja/synthetics/ci
-[4]: /ja/api/v1/synthetics/#get-all-locations-public-and-private
-[5]: /ja/synthetics/private_locations
-[6]: /ja/synthetics/api_tests/
+[2]: /ja/synthetics/api_tests/
+[3]: /ja/synthetics/api_tests/http_tests?tab=requestoptions#notify-your-team
+[4]: /ja/synthetics/cicd_integrations
+[5]: /ja/api/v1/synthetics/#get-all-locations-public-and-private
+[6]: /ja/synthetics/private_locations
 [7]: /ja/synthetics/search/#search
 [8]: https://restfulapi.net/json-jsonpath/
-[9]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[10]: /ja/api/v1/synthetics/#create-a-test
-[11]: /ja/monitors/notifications/?tab=is_alert#notification
+[9]: https://www.w3schools.com/xml/xpath_syntax.asp
+[10]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[11]: /ja/monitors/notify/?tab=is_alert#notification
 [12]: http://daringfireball.net/projects/markdown/syntax
-[13]: /ja/monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
-[14]: /ja/synthetics/settings/#global-variables
-[15]: /ja/synthetics/api_tests/errors/#ssl-errors
+[13]: /ja/monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
+[14]: /ja/synthetics/guide/synthetic-test-monitors
+[15]: /ja/synthetics/settings/#global-variables
+[16]: /ja/synthetics/api_tests/errors/#ssl-errors
+[17]: /ja/account_management/rbac/
+[18]: /ja/account_management/rbac#custom-roles
+[19]: /ja/account_management/rbac/#create-a-custom-role

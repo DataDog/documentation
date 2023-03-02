@@ -1,54 +1,79 @@
 ---
+app_id: openstack-controller
+app_uuid: f5c2cc69-1efc-40b2-8dcd-61e1215b237d
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    OpenStack Controller Overview: assets/dashboards/openstack-controller.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: openstack.controller
+      metadata_path: metadata.csv
+      prefix: openstack.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Openstack_controller
   logs:
     source: openstack
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
-  - cloud
-  - ログの収集
-creates_events: false
-ddtype: check
+- cloud
+- ログの収集
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/openstack_controller/README.md'
-display_name: Openstack_controller
+- https://github.com/DataDog/integrations-core/blob/master/openstack_controller/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: openstack_controller
-guid: 49979592-9096-460a-b086-f173f26c6626
 integration_id: openstack-controller
-integration_title: Openstack コントローラー
+integration_title: OpenStack Controller
+integration_version: 2.1.2
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: openstack.
-metric_to_check: openstack.controller
+manifest_version: 2.0.0
 name: openstack_controller
-public_title: Openstack コントローラー
+oauth: {}
+public_title: OpenStack Controller
 short_description: ハイパーバイザーおよび VM レベルのリソース使用状況と Neutron メトリクスを追跡
-support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Cloud
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: ハイパーバイザーおよび VM レベルのリソース使用状況と Neutron メトリクスを追跡
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: OpenStack Controller
 ---
-<div class="alert alert-warning">
-<b>重要</b>: このインテグレーションは、OpenStack バージョン 13 以降 (コンテナ化 OpenStack) にのみ適用されます。OpenStack v12 以前 (非コンテナ化 OpenStack) からメトリクスを収集する場合は、<a href="https://docs.datadoghq.com/integrations/openstack/">OpenStack インテグレーション</a>をご利用ください。
-</div>
+
+
 
 ## 概要
 
-このチェックは、コントローラーノードから [OpenStack][1] を監視します。
+**注**: このインテグレーションは、OpenStack v13+ (コンテナ化された OpenStack) にのみ適用されます。OpenStack v12 以下 (コンテナ化されていない OpenStack) からメトリクスを収集する場合は、[OpenStack インテグレーション][1]を使用してください。
+
+このチェックは、コントローラーノードから [OpenStack][2] を監視します。
 
 ## セットアップ
 
 ### インストール
 
-OpenStack Controller チェックは [Datadog Agent][2] パッケージに含まれているため、サーバーに追加でインストールする必要はありません。
+OpenStack Controller チェックは [Datadog Agent][3] パッケージに含まれているため、サーバーに追加でインストールする必要はありません。
 
 ### コンフィギュレーション
 
@@ -60,7 +85,7 @@ OpenStack Controller インテグレーションは、すべてのコンピュ�
 
 #### Agent の構成
 
-1. OpenStack Controller のパフォーマンスデータの収集を開始するには、Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `openstack_controller.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル openstack_controller.d/conf.yaml][2] を参照してください。
+1. OpenStack Controller のパフォーマンスデータの収集を開始するには、Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `openstack_controller.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル openstack_controller.d/conf.yaml][4] を参照してください。
 
    ```yaml
    init_config:
@@ -86,7 +111,7 @@ OpenStack Controller インテグレーションは、すべてのコンピュ�
            id: "<DOMAIN_ID>"
    ```
 
-2. [Agent を再起動します][3]。
+2. [Agent を再起動します][5]。
 
 ##### ログの収集
 
@@ -105,12 +130,12 @@ OpenStack Controller インテグレーションは、すべてのコンピュ�
        source: openstack
    ```
 
-    `path` パラメーターの値を変更し、環境に合わせて構成します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル openstack_controller.d/conf.yaml][2] を参照してください。
+    `path` パラメーターの値を変更し、環境に合わせて構成します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル openstack_controller.d/conf.yaml][4] を参照してください。
 
 
 ### 検証
 
-[Agent の `status` サブコマンドを実行][4]し、Checks セクションで `openstack_controller` を探します。
+[Agent の `status` サブコマンドを実行][6]し、Checks セクションで `openstack_controller` を探します。
 
 ## 収集データ
 
@@ -118,34 +143,25 @@ OpenStack Controller インテグレーションは、すべてのコンピュ�
 {{< get-metrics-from-git "openstack_controller" >}}
 
 
-### サービスのチェック
-
-**openstack.neutron.api.up**:<br>
-Agent が Neutron API をクエリできない場合は `CRITICAL` を、Keystone API に問題がある場合は `UNKNOWN` を返します。それ以外の場合は、`OK` を返します。
-
-**openstack.nova.api.up**:<br>
-Agent が Nova API をクエリできない場合は `CRITICAL` を、Keystone API に問題がある場合は `UNKNOWN` を返します。それ以外の場合は、`OK` を返します。
-
-**openstack.keystone.api.up**:<br>
-Agent が Keystone API をクエリできない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
-**openstack.nova.hypervisor.up**:<br>
-Agent がハイパーバイザーの状態を取得できない場合は `UNKNOWN`、ハイパーバイザーがダウンしている場合は `CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
-**openstack.neutron.network.up**:<br>
-ネットワークがダウンしている場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
 ### イベント
 
 OpenStack Controller には、イベントは含まれません。
 
+### サービスのチェック
+{{< get-service-checks-from-git "openstack_controller" >}}
+
+
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
-[1]: https://www.openstack.org
-[2]: https://github.com/DataDog/integrations-core/blob/master/openstack_controller/datadog_checks/openstack_controller/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[5]: https://github.com/DataDog/integrations-core/blob/master/openstack_controller/metadata.csv
-[6]: https://docs.datadoghq.com/ja/help/
+
+[1]: https://docs.datadoghq.com/ja/integrations/openstack/
+[2]: https://www.openstack.org
+[3]: https://app.datadoghq.com/account/settings#agent
+[4]: https://github.com/DataDog/integrations-core/blob/master/openstack_controller/datadog_checks/openstack_controller/data/conf.yaml.example
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[7]: https://github.com/DataDog/integrations-core/blob/master/openstack_controller/metadata.csv
+[8]: https://github.com/DataDog/integrations-core/blob/master/openstack_controller/assets/service_checks.json
+[9]: https://docs.datadoghq.com/ja/help/

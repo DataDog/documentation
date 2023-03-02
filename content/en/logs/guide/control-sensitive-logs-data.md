@@ -13,7 +13,9 @@ further_reading:
   - link: /agent/guide/autodiscovery-management/
     tag: Documentation
     text: "Exclude containers from Log Collection with Autodiscovery"
-
+  - link: "https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/"
+    tag: "Blog"
+    text: "Build compliance, governance, and transparency across your teams with Datadog Audit Trail"
 ---
 
 ## Overview
@@ -127,8 +129,8 @@ If you have a specific compliance questions or need help, contact Datadog [suppo
 [7]: /logs/indexes#exclusion-filters
 [8]: /logs/archives
 [9]: /logs/logs_to_metrics/
-[10]: /monitors/create/types/log/
-[11]: /monitors/create/types/log/#notifications
+[10]: /monitors/types/log/
+[11]: /monitors/types/log/#notifications
 [12]: /logs/explorer/live_tail/
 [13]: /agent/
 [14]: /agent/logs/advanced_log_collection/?tab=configurationfile#scrub-sensitive-data-from-your-logs

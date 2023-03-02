@@ -44,7 +44,7 @@ get_latest_release() {
 DD_OPENTRACING_CPP_VERSION="$(get_latest_release DataDog/dd-opentracing-cpp)"
 ```
 
-Github からレート制限のメッセージが表示された場合は、数分間待ってからもう一度コマンドを実行してください。アップデートが完了したら、正しく実行されたことを C++ のバージョンをチェックして確認します。
+GitHub からレート制限のメッセージが表示された場合は、数分間待ってからもう一度コマンドを実行してください。アップデートが完了したら、正しく実行されたことを C++ のバージョンをチェックして確認します。
 
 ```shell
 echo $DD_OPENTRACING_CPP_VERSION

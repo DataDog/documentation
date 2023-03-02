@@ -1,51 +1,79 @@
 ---
-"assets":
-  "configuration":
-    "spec": assets/configuration/spec.yaml
-  "dashboards":
-    "RapDev Validator Dashboard": assets/dashboards/rapdev_validator_dashboard.json
-  "logs": {}
-  "metrics_metadata": metadata.csv
-  "monitors":
-    "Host has non-compliant value for tag key": assets/monitors/host_non_compliant_value.json
-    "Host is missing required tag key": assets/monitors/host_missing_tag_key.json
-  "saved_views": {}
-  "service_checks": assets/service_checks.json
-"author":
-  "homepage": "https://www.rapdev.io"
-  "name": RapDev.io
-"categories":
-- ""
-"creates_events": false
-"ddtype": "check"
-"dependencies": []
-"display_name": "RapDev Validator"
-"draft": false
-"git_integration_title": "rapdev_validator"
-"guid": "368ebcdb-5d45-4dfd-87d6-913d6c997534"
-"integration_id": "rapdev-validator"
-"integration_title": "RapDev Validator"
-"is_public": true
-"kind": "integration"
-"maintainer": "integrations@rapdev.io"
-"manifest_version": "1.0.0"
-"metric_prefix": "rapdev.validator."
-"metric_to_check": "rapdev.validator.agent.installed"
-"metrics_metadata": "metadata.csv"
-"name": "rapdev_validator"
-"pricing":
-- "billing_type": flat_fee
-  "unit_price": !!int "500"
-"public_title": "RapDev Validator"
-"short_description": "モニタータグを検証し、DD 環境での Agent コンプライアンスを確保します。"
-"support": "パートナー"
-"supported_os":
+app_id: rapdev-validator
+app_uuid: d66f715a-4218-40f0-af35-a147c45c1d11
+assets:
+  dashboards:
+    RapDev Validator Dashboard: assets/dashboards/rapdev_validator_dashboard.json
+    RapDev Validator Host Dashboard: assets/dashboards/host_dashboard.json
+    RapDev Validator Synthetic Dashboard: assets/dashboards/synthetic_dashboard.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: rapdev.validator.agent.installed
+      metadata_path: metadata.csv
+      prefix: rapdev.validator.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: RapDev Validator
+  logs: {}
+  monitors:
+    Host has non-compliant value for tag key: assets/monitors/host_non_compliant_value.json
+    Host is missing required tag key: assets/monitors/host_missing_tag_key.json
+author:
+  homepage: https://www.rapdev.io
+  name: RapDev
+  sales_email: ddsales@rapdev.io
+  support_email: support@rapdev.io
+  vendor_id: rapdev
+categories:
+- マーケットプレイス
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: rapdev_validator
+integration_id: rapdev-validator
+integration_title: Tag Validator
+integration_version: ''
+is_public: true
+kind: integration
+legal_terms:
+  eula: assets/EULA.pdf
+manifest_version: 2.0.0
+name: rapdev_validator
+oauth: {}
+pricing:
+- billing_type: flat_fee
+  includes_assets: true
+  product_id: validator
+  short_description: このインテグレーションの定額料金
+  unit_price: 500
+public_title: Tag Validator
+short_description: モニタータグを検証し、DD 環境での Agent コンプライアンスを確保します
+supported_os:
 - linux
-- mac_os
+- mac os
 - windows
-"terms":
-  "eula": assets/EULA.pdf
-  "legal_email": ddsales@rapdev.io
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Mac OS
+  - Supported OS::Windows
+  - Category::Marketplace
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: モニタータグを検証し、DD 環境での Agent コンプライアンスを確保します
+  media:
+  - caption: Validator ダッシュボード
+    image_url: images/validator.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Tag Validator
+  uninstallation: README.md#Uninstallation
 ---
 
 
@@ -53,28 +81,24 @@
 ## 概要
 RapDev Validator は、Datadog 環境でのタグモニタリングと Agent のコンプライアンス問題を解決するのに役立ちます。インテグレーションはタグキーのリストと、お使いの環境のタグ付け戦略に基づく許容値を受け取り、それらをメトリクスおよびサービスチェックとして Datadog インスタンスに報告します。このようにして、お使いの環境内のホストに正しいタグが割り当てられているかを表示することができます。
 
-### Validator ダッシュボード
-{{< img src="marketplace/rapdev_validator/images/validator.png" alt="スクリーンショット 1" >}}
-
 ### ダッシュボード  
 1. RapDev Validator ダッシュボード
 
-### モニター
+### アラート設定
 1. ホストに必要なタグキーが割り当てられていない
 2. ホストのタグキーに非準拠の値が割り当てられている
 
 ## サポート
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 
-- メール: integrations@rapdev.io
-- チャット: RapDev.io/products
+- メール: support@rapdev.io
+- チャット: [rapdev.io](https://www.rapdev.io/#Get-in-touch)
 - 電話: 855-857-0222
 
 ---
 ボストンより ❤️ を込めて
 
-*お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:integrations@rapdev.io)からメッセージをお送りいただければ、導入をサポートいたします！*
+*お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:support@rapdev.io)からメッセージをお送りいただければ、導入をサポートいたします！*
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、[こちらをクリック](https://app.datadoghq.com/marketplace/app/rapdev-nutanix/pricing) してください。
-
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-validator" target="_blank">こちらをクリック</a>してください。

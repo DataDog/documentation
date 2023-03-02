@@ -1,21 +1,21 @@
 ---
 aliases:
-  - /ja/integrations/awscloudfront/
+- /ja/integrations/awscloudfront/
 categories:
-  - cloud
-  - caching
-  - web
-  - aws
-  - log collection
-ddtype: crawler
+- cloud
+- caching
+- web
+- aws
+- log collection
 dependencies: []
 description: エラー率、リクエストカウント数、ダウンロードバイト数、アップロードバイト数を追跡。
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_cloudfront/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_cloudfront/
 draft: false
 git_integration_title: amazon_cloudfront
 has_logo: true
 integration_id: amazon-cloudfront
 integration_title: Amazon CloudFront
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -24,6 +24,7 @@ public_title: Datadog-Amazon CloudFront インテグレーション
 short_description: エラー率、リクエストカウント数、ダウンロードバイト数、アップロードバイト数を追跡。
 version: '1.0'
 ---
+
 ## 概要
 
 Amazon CloudFront は、Web サイト、API、ビデオコンテンツなどの Web 資産の配信を高速化するグローバルなコンテンツ配信ネットワーク (CDN) サービスです。
@@ -38,7 +39,7 @@ Amazon CloudFront は、Web サイト、API、ビデオコンテンツなどの 
 
 ### メトリクスの収集
 
-1. [AWS インテグレーションタイル][2]のメトリクス収集で、`CloudFront` をオンにします。
+1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `CloudFront` が有効になっていることを確認します。
 2. [Datadog - AWS CloudFront インテグレーション][3]をインストールします。
 3. 任意: [CloudFront ディストリビューションの追加メトリクス][4] を有効化すると、CloudFront トラフィックのパフォーマンスの可視性を高めることができます。
 
@@ -51,25 +52,25 @@ Amazon CloudFront は、Web サイト、API、ビデオコンテンツなどの 
 
 ディストリビューションで CloudFront ログを有効にする際は、CloudFront がログファイルを格納するために使用する Amazon S3 バケットを指定します。Amazon S3 を発信元として使用する場合、Datadog ではログファイルに同じバケットを使用しないことをお勧めしています。別のバケットを使用することで、メンテナンスを簡略化できます。
 
-{{< img src="integrations/amazon_cloudfront/cloudfront_logging_1.png" alt="Cloudfront ロギング 1" popup="true" style="width:70%;">}}
-
-{{< img src="integrations/amazon_cloudfront/cloudfront_logging_2.png" alt="Cloudfront ロギング 2" popup="true" style="width:70%;">}}
-
 **重要**: 複数のディストリビューションのログファイルは同じバケットに格納してください。ログを有効にする場合は、[どのログファイルがどのディストリビューションに関連付けられているかを追跡できるように][1]、`cloudfront` をファイル名のプレフィックスとして指定します。
 
 #### ログを Datadog に送信する方法
 
-1. [Datadog ログコレクション AWS Lambda 関数][2]をまだセットアップしていない場合は、セットアップします。
-2. Lambda 関数がインストールされたら、AWS コンソールで Lambda のトリガーリストの S3 をクリックして、 Cloudfront ログを含む S3 バケットに手動でトリガーを追加します。
-   {{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="S3 トリガーコンフィギュレーション" popup="true" style="width:70%;">}}
-   Cloudfront ログを含む S3 バケットを選択してトリガーを構成し、イベントタイプを `Object Created (All)` に変更して、Add ボタンをクリックします。
-   {{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="S3 Lambda トリガーコンフィギュレーション" popup="true" style="width:70%;">}}
+1. AWS アカウントで [Datadog Forwarder Lambda 関数][2] をまだセットアップしていない場合は、セットアップします。
+2. 設定したら、Datadog Forwarder Lambda 関数に移動します。Function Overview セクションで、**Add Trigger** をクリックします。
+3. Trigger Configuration で **S3** トリガーを選択します。
+4. CloudFront のログが格納されている S3 バケットを選択します。
+5. イベントの種類は `All object create events` のままにしておきます。
+6. **Add** をクリックすると、Lambda にトリガーが追加されます。
 
-完了したら、[Datadog Log セクション][3]に移動し、ログを確認します。
+[ログエクスプローラー][3]に移動して、ログを確認します。
+
+AWS Services のログを収集する方法については、[Datadog Lambda 関数で AWS Services のログを送信する][4]を参照してください。
 
 [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html#access-logs-choosing-s3-bucket
-[2]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#create-a-new-lambda-function
+[2]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
 [3]: https://app.datadoghq.com/logs
+[4]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
 {{% /tab %}}
 {{% tab "Real-Time Logs" %}}
 
@@ -81,7 +82,9 @@ Amazon CloudFront は、Web サイト、API、ビデオコンテンツなどの 
 
 {{< img src="integrations/amazon_cloudfront/cloudfront_logging_3.png" alt="Cloudfront ロギング 3" popup="true" style="width:70%;">}}
 
-このデフォルトのコンフィギュレーションを維持し、以下のカスタムパースルールを追加して、すべてのフィールドが有効な状態でログを自動的に処理することをおすすめします。
+Datadog は、このデフォルトのコンフィギュレーションを維持し、以下のカスタムパースルールを追加して、すべてのフィールドが有効な状態でログを自動的に処理することをおすすめします。
+
+[Pipelines ページ][1]に移動し、AWS CloudFront を検索し、[grok parser processor を作成または編集][7]し、*Advanced Settings* に以下のヘルパールールを追加します。
 
 {{< code-block lang="java" >}}
       real_time_logs (%{number:timestamp:scale(1000)}|%{number:timestamp})\s+%{_client_ip}\s+%{_time_to_first_byte}\s+%{_status_code}\s+%{_bytes_write}\s+%{_method}\s+%{regex("[a-z]*"):http.url_details.scheme}\s+%{notSpace:http.url_details.host:nullIf("-")}\s+%{notSpace:http.url_details.path:nullIf("-")}\s+%{_bytes_read}\s+%{notSpace:cloudfront.edge-location:nullIf("-")}\s+%{_request_id}\s+%{_ident}\s+%{_duration}\s+%{_version}\s+IPv%{integer:network.client.ip_version}\s+%{_user_agent}\s+%{_referer}\s+%{notSpace:cloudfront.cookie}\s+(%{notSpace:http.url_details.queryString:querystring}|%{notSpace:http.url_details.queryString:nullIf("-")})\s+%{notSpace:cloudfront.edge-response-result-type:nullIf("-")}\s+%{_x_forwarded_for}\s+%{_ssl_protocol}\s+%{_ssl_cipher}\s+%{notSpace:cloudfront.edge-result-type:nullIf("-")}\s+%{_fle_encrypted_fields}\s+%{_fle_status}\s+%{_sc_content_type}\s+%{_sc_content_len}\s+%{_sc_range_start}\s+%{_sc_range_end}\s+%{_client_port}\s+%{_x_edge_detailed_result_type}\s+%{notSpace:network.client.country:nullIf("-")}\s+%{notSpace:accept-encoding:nullIf("-")}\s+%{notSpace:accept:nullIf("-")}\s+%{notSpace:cache-behavior-path-pattern:nullIf("-")}\s+%{notSpace:headers:nullIf("-")}\s+%{notSpace:header-names:nullIf("-")}\s+%{integer:headers-count}.*
@@ -120,8 +123,8 @@ AWS Cloudfront インテグレーションには、サービスのチェック�
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[3]: https://app.datadoghq.com/account/settings#integrations/amazon_cloudfront
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
+[3]: https://app.datadoghq.com/integrations/amazon-cloudfront
 [4]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/viewing-cloudfront-metrics.html
 [5]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_cloudfront/amazon_cloudfront_metadata.csv
 [6]: https://docs.datadoghq.com/ja/help/

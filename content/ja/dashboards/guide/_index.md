@@ -1,13 +1,23 @@
 ---
-title: グラフ作成ガイド
+aliases:
+- /ja/graphing/guide/
+- /ja/faq/treemap-graph-visualization-can-i-use-this-elsewhere/
+disable_toc: true
 kind: ガイド
 private: true
-aliases:
-  - /ja/graphing/guide/
+title: グラフ作成ガイド
 ---
-{{< whatsnext desc="全般ガイド:" >}}
-    {{< nextlink href="dashboards/guide/how-to-graph-percentiles-in-datadog" >}}Datadog のパーセンタイルグラフ作成{{< /nextlink >}}
-    {{< nextlink href="dashboards/guide/query-to-the-graph" >}}クエリからグラフまで{{< /nextlink >}}
+
+{{< whatsnext desc="一般ガイド:" >}}
+    {{< nextlink href="dashboards/guide/maintain-relevant-dashboards" >}}関連するダッシュボードを維持するためのベストプラクティス{{< /nextlink >}} 
+    {{< nextlink href="dashboards/guide/how-to-graph-percentiles-in-datadog" >}}Datadog でのパーセンタイルのグラフ化{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/query-to-the-graph" >}}グラフへのクエリ{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/quick-graphs" >}}クイックグラフ{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/context-links" >}}コンテキストリンク{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/how-to-use-terraform-to-restrict-dashboards" >}}Terraform を使ってダッシュボードの編集を制限する{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/embeddable-graphs-with-template-variables" >}}テンプレート変数による埋め込み可能なグラフ{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/unable-to-iframe" >}}特定の HTTPS URL を iFrame で表示できないのはなぜですか？{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/powerpacks-best-practices" >}}パワーパックのベストプラクティス{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="非推奨の API:" >}}

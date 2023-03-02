@@ -19,7 +19,7 @@ Les emplacements privés fournissent un ensemble de [métriques][1] prêtes à l
 
 {{<img src="synthetics/private_locations/pl_monitoring_table.png" alt="Tableau de surveillance des emplacements privés" style="width:100%;">}}
 
-L'onglet **Private Locations** de la page [**Synthetic Settings**][2] présente vos emplacements privés, leur statut de transmission ainsi que le statut de leurs monitors.
+L'onglet **Private Locations** de la page [**Synthetics Settings**][2] présente vos emplacements privés, leur statut de transmission ainsi que le statut de leurs monitors.
 
 Lorsque vous cliquez sur un emplacement privé, un volet s'affiche. Il contient des informations sur la **santé** et les **métadonnées** de l'emplacement. Le tableau de l'onglet **Health** affiche tous les workers transmettant des données, ainsi que la version de l'image qu'ils exécutent. Vous pouvez ainsi visualiser le nombre de conteneurs à récupérer pour la nouvelle version de l'image.
 

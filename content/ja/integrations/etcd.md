@@ -1,53 +1,80 @@
 ---
+app_id: etcd
+app_uuid: 7f16875b-4aa8-44e3-adff-63622c234253
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Etcd Overview: assets/dashboards/etcd_overview.json
     etcd-Screenboard: assets/dashboards/etcd_2_overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check:
+      - etcd.store.watchers
+      - etcd.server.has_leader
+      metadata_path: metadata.csv
+      prefix: etcd.
+    process_signatures:
+    - etcd
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: etcd
   logs:
     source: etcd
-  metrics_metadata: metadata.csv
-  monitors: {}
   saved_views:
     etcd_overview: assets/saved_views/etcd_overview.json
     etcd_processes: assets/saved_views/etcd_processes.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-  - orchestration
-  - containers
-  - configuration & deployment
-  - autodiscovery
-  - log collection
-creates_events: false
-ddtype: check
+- orchestration
+- containers
+- configuration & deployment
+- log collection
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/etcd/README.md'
-display_name: etcd
+- https://github.com/DataDog/integrations-core/blob/master/etcd/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: etcd
-guid: a1cfafdb-5d88-4ae1-acdc-6356df755b73
 integration_id: etcd
 integration_title: etcd
+integration_version: 3.3.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: etcd.
-metric_to_check:
-  - etcd.store.watchers
-  - etcd.server.has_leader
+manifest_version: 2.0.0
 name: etcd
-process_signatures:
-  - etcd
-public_title: Datadog-etcd インテグレーション
+oauth: {}
+public_title: etcd
 short_description: 書き込み、更新、削除、ノード間レイテンシー、さまざまな Etcd メトリクスを追跡。
-support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::オーケストレーション
+  - Category::コンテナ
+  - Category::構成 & デプロイ
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: 書き込み、更新、削除、ノード間レイテンシー、さまざまな Etcd メトリクスを追跡。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: etcd
 ---
+
+
+
 ![Etcd ダッシュボード][1]
 
 ## 概要
@@ -60,7 +87,7 @@ Etcd のメトリクスを収集して、以下のことができます。
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Etcdチェックは [Datadog Agent][2] パッケージに含まれています。Etcd インスタンスに追加でインストールする必要はありません。
 
@@ -157,11 +184,13 @@ Etcd チェックには、イベントは含まれません。
 
 ## その他の参考資料
 
-Etcd のインテグレーションをより便利に行う方法 (または理由) について理解するには、Datadog の[ブログ記事][5]を参照してください。
+- [Kubernetes Control Plane モニタリング][5]
+- [etcd のパフォーマンスを監視し、一貫した Docker の構成を確保する][6]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/etcd/images/etcd_dashboard.png
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/help/
-[5]: https://www.datadoghq.com/blog/monitor-etcd-performance
+[5]: https://docs.datadoghq.com/ja/agent/kubernetes/control_plane/?tab=helm
+[6]: https://www.datadoghq.com/blog/monitor-etcd-performance

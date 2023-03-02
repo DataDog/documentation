@@ -19,19 +19,19 @@ aliases:
  - /tracing/app_analytics/analytics
  - /tracing/trace_search_and_analytics/query_syntax
 further_reading:
-- link: "/tracing/setup/"
+- link: "/tracing/trace_collection/"
   tag: "Documentation"
   text: "Learn how to setup APM tracing with your application"
-- link: "/tracing/visualization/trace/"
+- link: "/tracing/trace_explorer/trace_view/"
   tag: "Documentation"
   text: "Understand how to read a Datadog Trace"
-- link: "/tracing/visualization/services_list/"
+- link: "/tracing/services/services_list/"
   tag: "Documentation"
   text: "Discover the list of services reporting to Datadog"
-- link: "/tracing/visualization/service/"
+- link: "/tracing/services/service_page/"
   tag: "Documentation"
   text: "Learn more about services in Datadog"
-- link: "/tracing/visualization/resource/"
+- link: "/tracing/services/resource_page/"
   tag: "Documentation"
   text: "Dive into your resource performance and traces"
 ---
@@ -144,10 +144,6 @@ Click on any trace to see more details about it:
 To add more Trace details to the list, click the **Options** button and select any Facets you want to see:
 
 {{< img src="tracing/app_analytics/search/trace_list_with_column.png" alt="Trace list with columns"  style="width:80%;">}}
-
-Origin resource is a default column that shows the resource at the root of the given trace. To add origin service or origin operation name, click the **Options** button and select `@trace.origin.operation_name` or `@trace.origin.service`.
-
-{{< img src="tracing/app_analytics/search/trace_origin_column.png" alt="Trace list with origin columns"  style="width:80%;">}}
 
 ### Multi-line display
 
@@ -305,15 +301,15 @@ Export [Analytics][4] from the trace search or build them directly in your [Dash
 [2]: /getting_started/tagging/#tags-best-practices
 [3]: /dashboards/guide/custom_time_frames/
 [4]: /tracing/trace_search_and_analytics/
-[5]: /tracing/visualization/#apm-event
-[6]: /tracing/visualization/#services
-[7]: /tracing/trace_retention/#retention-filters
+[5]: /tracing/glossary/#apm-event
+[6]: /tracing/glossary/#services
+[7]: /tracing/trace_pipeline/trace_retention/#retention-filters
 [8]: /tracing/trace_search_and_analytics/query_syntax/#facets
 [9]: /tracing/trace_search_and_analytics/query_syntax/#measures
-[10]: /tracing/visualization/#trace
-[11]: /monitors/create/types/apm/
-[12]: /dashboards/timeboard/
+[10]: /tracing/glossary/#trace
+[11]: /monitors/types/apm/
+[12]: /dashboards/#timeboards
 [13]: /help/
-[14]: /tracing/visualization/#indexed-span
+[14]: /tracing/glossary/#indexed-span
 [15]: /dashboards/
 [16]: /dashboards/widgets/timeseries/

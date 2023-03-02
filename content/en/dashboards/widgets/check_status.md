@@ -5,15 +5,9 @@ description: "Graph the current status or number of results for any check perfor
 aliases:
     - /graphing/widgets/check_status/
 further_reading:
-- link: "/dashboards/screenboards/"
-  tag: "Documentation"
-  text: "Screenboard"
-- link: "/dashboards/timeboards/"
-  tag: "Documentation"
-  text: "Timeboards"
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
-  text: "Building Dashboard using JSON"
+  text: "Building Dashboards using JSON"
 ---
 
 Check status shows the current status or number of results for any check performed:

@@ -1,46 +1,72 @@
 ---
+app_id: kyoto-tycoon
+app_uuid: 5cc7578e-8f8e-43c3-890a-4360581634e7
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     kyototycoon: assets/dashboards/kyototycoon_dashboard.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: kyototycoon.records
+      metadata_path: metadata.csv
+      prefix: kyototycoon.
+    process_signatures:
+    - ktserver
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Kyoto Tycoon
   logs:
     source: kyototycoon
-  metrics_metadata: metadata.csv
-  monitors: {}
   saved_views:
     kyoto-tycoon_processes: assets/saved_views/kyoto-tycoon_processes.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-  - data store
-  - log collection
-creates_events: false
-ddtype: check
+- data store
+- log collection
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/kyototycoon/README.md'
-display_name: Kyoto Tycoon
+- https://github.com/DataDog/integrations-core/blob/master/kyototycoon/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: kyototycoon
-guid: 2661668b-d804-4c8d-96a7-8019525add8c
 integration_id: kyoto-tycoon
 integration_title: Kyoto Tycoon
+integration_version: 2.2.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: kyototycoon.
-metric_to_check: kyototycoon.records
+manifest_version: 2.0.0
 name: kyototycoon
-process_signatures:
-  - ktserver
-public_title: Datadog-Kyoto Tycoon インテグレーション
+oauth: {}
+public_title: Kyoto Tycoon
 short_description: 取得/設定/削除操作の追跡とレプリケーションラグの監視。
-support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::データストア
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: 取得/設定/削除操作の追跡とレプリケーションラグの監視。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Kyoto Tycoon
 ---
+
+
+
 ## 概要
 
 Agent の KyotoTycoon チェックは、取得/設定/削除の操作を追跡し、レプリケーションラグを監視します。
@@ -103,13 +129,13 @@ KyotoTycoon チェックは [Datadog Agent][1] パッケージに含まれてい
 KyotoTycoon チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "kyototycoon" >}}
 
-**kyototycoon.can_connect**:<br>
-Agent が KyotoTycoon に接続してメトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
@@ -117,4 +143,5 @@ Agent が KyotoTycoon に接続してメトリクスを収集できない場合�
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://github.com/DataDog/integrations-core/blob/master/kyototycoon/metadata.csv
-[7]: https://docs.datadoghq.com/ja/help/
+[7]: https://github.com/DataDog/integrations-core/blob/master/kyototycoon/assets/service_checks.json
+[8]: https://docs.datadoghq.com/ja/help/

@@ -25,7 +25,7 @@ To create a custom Agent check, start by installing the [Datadog Agent][1].
 ### Configuration
 
 1. Change to the `conf.d` directory on your system. For more information about where to find the `conf.d` directory, see [the Agent configuration settings][2] for your operating system.
-2. In the `conf.d` directory, create a new config file for your new Agent check. Name the file `checkvalue.yaml`.
+2. In the `conf.d` directory, create a new config file for your new Agent check. Name the file `custom_checkvalue.yaml`.
 3. Edit the file to include the following:
   ```yaml
     init_config:
@@ -33,7 +33,7 @@ To create a custom Agent check, start by installing the [Datadog Agent][1].
     instances:
       [{}]
   ```
-4. Create a new check file in the `checks.d` directory. Name the file `checkvalue.py`.
+4. Create a new check file in the `checks.d` directory. Name the file `custom_checkvalue.py`.
 5. Edit the file to include the following:
   ```python
     from checks import AgentCheck
@@ -43,7 +43,7 @@ To create a custom Agent check, start by installing the [Datadog Agent][1].
   ```
 6. [Restart the Agent][3]. Within a minute, you should see a new metric show up in the [Metric Summary][4] called `hello.world`.
 
-**Note**: The names of the configuration and check files must match. If your check is called `checkvalue.py`, your configuration file *must* be named `checkvalue.yaml`.
+**Note**: The names of the configuration and check files must match. If your check is called `custom_checkvalue.py`, your configuration file *must* be named `custom_checkvalue.yaml`.
 
 ### Results
 
@@ -53,7 +53,7 @@ Within a minute, you should see a new metric show up in the [Metric Summary][4] 
 
 ### Updating the collection interval
 
-To change the collection interval of your check, use `min_collection_interval` in your `checkvalue.yaml` file. The default value is `15`. For Agent v6, the `min_collection_interval` must be added at an instance level and configured individually per instance. For example:
+To change the collection interval of your check, use `min_collection_interval` in your `custom_checkvalue.yaml` file. The default value is `15`. For Agent v6, the `min_collection_interval` must be added at an instance level and configured individually per instance. For example:
 
 ```yaml
 init_config:
@@ -115,7 +115,7 @@ class LSCheck(AgentCheck):
 
 A common use case for writing a custom Agent check is that you might want to send Datadog metrics from your load balancer. First, follow the steps in [Configuration](#configuration). Then, follow these steps to expand the files to send data from your load balancer:
 
-1. Replace the code in checkvalue.py with the following (replacing the value of `lburl` with the address of your load balancer):
+1. Replace the code in `custom_checkvalue.py` with the following (replacing the value of `lburl` with the address of your load balancer):
   ```python
     import urllib2
     import simplejson
@@ -131,7 +131,7 @@ A common use case for writing a custom Agent check is that you might want to sen
 
         self.gauge('coreapp.update.value', data["value"])
   ```
-2. Update the `checkvalue.yaml` file (replacing `ipaddress` with your load balancer's IP address):
+2. Update the `custom_checkvalue.yaml` file (replacing `ipaddress` with your load balancer's IP address):
   ```yaml
     init_config:
 

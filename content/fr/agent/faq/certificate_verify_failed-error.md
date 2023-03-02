@@ -1,7 +1,8 @@
 ---
-title: Erreur CERTIFICATE_VERIFY_FAILED
 kind: faq
+title: Erreur CERTIFICATE_VERIFY_FAILED
 ---
+
 ### Que s'est-il passé ?
 
 Samedi 30 mai 2020 à 10 h 48 UTC, un certificat racine SSL utilisé pour effectuer la signature croisée de certains certificats Datadog a expiré, entraînant alors une perte de connectivité de certains de vos Agents avec les endpoints Datadog. Ce certificat racine étant intégré à certaines versions de l'Agent, une action de votre part est nécessaire pour rétablir la connectivité.
@@ -12,20 +13,14 @@ Les versions de l'Agent concernées sont celles comprises entre la 3.6.x et la 5
 
 Les versions 6.x et 7.x de l'Agent ne sont pas affectées et ne nécessitent aucune mise à jour.
 
-### Récupérer la liste des hosts exécutant une version de l'Agent affectée
-
-Utilisez la [liste des versions d'Agent][1] dans l'IU Datadog pour voir le hostname, la version de l'Agent en cours d'exécution, et le statut de cet host.
-
-**Remarque** : le script Python précédemment conseillé qui interroge votre compte Datadog pour récupérer les hosts exécutant une version affectée de l'Agent est obsolète. Il a été remplacé par la liste disponible dans l'application.
-
 ### Résoudre le problème en installant l'Agent 5.32.7
 
 Si vous utilisez l'Agent 5.x sur un host 64 bits, Datadog vous conseille de passer à l'Agent 5.32.7+. L'Agent continuera ainsi à fonctionner dans un vaste nombre de scénarios sans modification majeure.
 
 Centos/Red Hat : `sudo yum check-update && sudo yum install datadog-agent`
 Debian/Ubuntu : `sudo apt-get update && sudo apt-get install datadog-agent`
-Windows (à partir des versions > 5.12.0) : téléchargez le [programme d'installation de l'Agent][2] Datadog. `start /wait msiexec /qn /i ddagent-cli-latest.msi`
-D'autres plateformes et options de gestion de la configuration sont détaillées [sur la page d'installation de l'Agent][3].
+Windows (à partir des versions 5.12.0+) : téléchargez le [programme d'installation de l'Agent][1] Datadog avec `start /wait msiexec /qn /i ddagent-cli-latest.msi`
+D'autres plateformes et options de gestion de la configuration sont détaillées [sur la page d'installation de l'Agent][2].
 
 Le dernier Agent compatible avec les systèmes 32 bits est la version 5.10.1. Suivez les instructions `Résoudre le problème sans mettre à jour l'Agent` pour les hosts 32 bits.
 
@@ -80,7 +75,7 @@ Après la suppression du fichier, redémarrez le service Datadog à partir du ge
 
 ### Résoudre le problème en installant l'Agent 6 ou 7
 
-Vous pouvez passer à l'[Agent 7][4] ou l'[Agent 6][5] pour résoudre ce problème. Assurez-vous toutefois de *consulter le CHANGELOG de l'Agent pour obtenir la liste des changements non rétrocompatibles dans l'Agent 6 ou 7.*
+Vous pouvez passer à l'[Agent 7][3] ou l'[Agent 6][4] pour résoudre ce problème. Assurez-vous toutefois de *consulter le CHANGELOG de l'Agent afin d'obtenir la liste des changements non rétrocompatibles pour l'Agent 6 ou 7.*
 
 ### Mettre à niveau l'Agent après la suppression du certificat
 
@@ -115,8 +110,7 @@ restart-service -Force datadogagent
   Après la mise à jour de `datadog.conf`, redémarrez le service Datadog à partir du gestionnaire de services Windows.
 
 
-[1]: https://app.datadoghq.com/agent-versions
-[2]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-latest.msi
-[3]: https://app.datadoghq.com/account/settings?agent_version=5#agent
-[4]: /fr/agent/versions/upgrade_to_agent_v7/?tab=linux#from-agent-v5-to-agent-v7
-[5]: /fr/agent/versions/upgrade_to_agent_v6/?tab=linux
+[1]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-latest.msi
+[2]: https://app.datadoghq.com/account/settings?agent_version=5#agent
+[3]: /fr/agent/versions/upgrade_to_agent_v7/?tab=linux#from-agent-v5-to-agent-v7
+[4]: /fr/agent/versions/upgrade_to_agent_v6/?tab=linux

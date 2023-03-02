@@ -1,19 +1,19 @@
 ---
 aliases:
-  - /ja/integrations/awsworkspaces/
+- /ja/integrations/awsworkspaces/
 categories:
-  - cloud
-  - aws
-  - log collection
-ddtype: crawler
+- cloud
+- aws
+- log collection
 dependencies: []
-description: 失敗した接続、セッションのレイテンシー、正常に動作していないワークスペースなどを追跡します。
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_workspaces/'
+description: 失敗した接続、セッションのレイテンシー、正常に動作していないワークスペースなどを追跡。
+doc_link: https://docs.datadoghq.com/integrations/amazon_workspaces/
 draft: false
 git_integration_title: amazon_workspaces
 has_logo: true
 integration_id: amazon-workspaces
 integration_title: AWS Workspaces
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -22,6 +22,7 @@ public_title: Datadog-AWS Workspaces インテグレーション
 short_description: 失敗した接続、セッションのレイテンシー、正常に動作していないワークスペースなどを追跡。
 version: '1.0'
 ---
+
 ## 概要
 
 Amazon WorkSpaces は、AWS クラウド上で実行されるフルマネージド型のセキュアなデスクトップコンピューティングサービスです。
@@ -36,7 +37,7 @@ Amazon WorkSpaces は、AWS クラウド上で実行されるフルマネージ�
 
 ### メトリクスの収集
 
-1. [AWS インテグレーションタイル][2]のメトリクス収集で、`WorkSpaces` をオンにします。
+1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `WorkSpaces` が有効になっていることを確認します。
 2. [Datadog - Amazon WorkSpaces インテグレーション][3]をインストールします。
 
 ### ログの収集
@@ -61,7 +62,7 @@ Amazon WorkSpaces から S3 バケットまたは CloudWatch のいずれかに�
 {{< get-metrics-from-git "amazon_workspaces" >}}
 
 
-AWS から取得される各メトリクスには、ホスト名やセキュリティグループなど、AWS コンソールに表示されるタグと同じタグが割り当てられます。
+AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
 ### イベント
 
@@ -76,8 +77,8 @@ AWS WorkSpaces インテグレーションには、サービスのチェック�
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[3]: https://app.datadoghq.com/account/settings#integrations/amazon-workspaces
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
+[3]: https://app.datadoghq.com/integrations/amazon-workspaces
 [4]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
 [5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
 [6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group

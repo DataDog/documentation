@@ -1,20 +1,16 @@
 ---
-title: Widget Graphique des alertes
-kind: documentation
-description: Créez un graphique illustrant l'état actuel de tous les monitors définis sur votre système.
 aliases:
-  - /fr/graphing/widgets/alert_graph/
+- /fr/graphing/widgets/alert_graph/
+description: Créez un graphique illustrant l'état actuel de tous les monitors définis
+  sur votre système.
 further_reading:
-  - link: /dashboards/screenboards/
-    tag: Documentation
-    text: Screenboard
-  - link: /dashboards/timeboards/
-    tag: Documentation
-    text: Timeboards
-  - link: /dashboards/graphing_json/
-    tag: Documentation
-    text: Créer des dashboards avec JSON
+- link: /dashboards/graphing_json/
+  tag: Documentation
+  text: Créer des dashboards avec JSON
+kind: documentation
+title: Widget Graphique des alertes
 ---
+
 Les graphiques d'alertes sont des graphiques de séries temporelles affichant l'état actuel de la plupart des monitors définis sur votre système :
 
 {{< img src="dashboards/widgets/alert_graph/alert_graph.png" alt="Graphique d'alerte" >}}

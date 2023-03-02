@@ -5,12 +5,12 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - security
-  - log collection
+- security
+- log collection
 creates_events: false
 ddtype: crawler
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/lacework/README.md
+- https://github.com/DataDog/integrations-extras/blob/master/lacework/README.md
 display_name: Lacework
 draft: false
 git_integration_title: lacework
@@ -26,13 +26,17 @@ metric_prefix: lacework.
 metric_to_check: ''
 name: lacework
 public_title: Intégration Datadog/Lacework
-short_description: Lacework est une plateforme de sécurité pour tous vos environnements cloud.
+short_description: Lacework est une plateforme de sécurité pour tous vos environnements
+  cloud.
 support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 Utilisez l'intégration Datadog/Lacework pour transmettre vos logs et événements Lacework à Datadog.
@@ -66,7 +70,7 @@ La configuration s'effectue en intégralité sur le dashboard de Lacework. Des i
 
 ### Métriques
 
-L'intégration Lacework n'inclut aucune métrique.
+L'intégration Lacework ne recueille aucune métrique.
 
 ### Checks de service
 
@@ -74,11 +78,11 @@ L'intégration Lacework n'inclut aucun check de service.
 
 ### Collecte de logs
 
-Lacework peut être configuré pour envoyer des logs.
+L'intégration Lacework peut être configurée pour envoyer des logs.
 
 ### Événements
 
-Lacework peut être configuré pour envoyer des événements.
+L'intégration Lacework peut être configurée pour envoyer des événements.
 
 ## Dépannage
 

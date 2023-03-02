@@ -4,26 +4,28 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards:
     couchbase: assets/dashboards/couchbase_dashboard.json
-  logs: {}
+  logs:
+    source: couchdb
   metrics_metadata: metadata.csv
   monitors: {}
   saved_views:
     couchbase_processes: assets/saved_views/couchbase_processes.json
   service_checks: assets/service_checks.json
 categories:
-  - data store
-  - autodiscovery
-  - log collection
+- data store
+- autodiscovery
+- log collection
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/couchbase/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/couchbase/README.md
 display_name: Couchbase
 draft: false
 git_integration_title: couchbase
 guid: ba7ce7de-4fcb-4418-8c90-329baa6a5d59
 integration_id: couchbase
 integration_title: CouchBase
+integration_version: 2.1.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -32,15 +34,19 @@ metric_prefix: couchbase.
 metric_to_check: couchbase.ram.used
 name: couchbase
 process_signatures:
-  - beam.smp couchbase
+- beam.smp couchbase
 public_title: Intégration Datadog/CouchBase
-short_description: Surveillez et représentez graphiquement vos métriques de performance et d'activité Couchbase.
+short_description: Surveillez et représentez graphiquement vos métriques de performance
+  et d'activité Couchbase.
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ![Octets Couchbase lus][1]
 
 ## Présentation
@@ -86,6 +92,29 @@ Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
 2. [Redémarrez l'Agent][3].
 
+#### Collecte de logs
+
+_Disponible à partir des versions > 6.0 de l'Agent_
+
+1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
+
+   ```yaml
+   logs_enabled: true
+   ```
+
+2. Ajoutez ce bloc de configuration à votre fichier `couchbase.d/conf.yaml` pour commencer à recueillir vos logs Couchbase :
+
+   ```yaml
+   logs:
+     - type: file
+       path: /opt/couchbase/var/lib/couchbase/logs/couchdb.log
+       source: couchdb
+   ```
+
+    Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement. Consultez le [fichier d'exemple couchbase.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
+
+3. [Redémarrez l'Agent][3].
+
 [1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/couchbase/datadog_checks/couchbase/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
@@ -123,17 +152,8 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 Le check Couchbase envoie un événement à Datadog à chaque rééquilibrage de cluster.
 
 ### Checks de service
+{{< get-service-checks-from-git "couchbase" >}}
 
-**couchbase.can_connect** :<br>
-Renvoie `Critical` si l'Agent ne parvient pas à se connecter à Couchbase pour recueillir des métriques.
-
-**couchbase.by_node.cluster_membership** :<br>
-Renvoie `Critical` si le nœud est basculé.
-Renvoie `Warning` si le nœud est ajouté au cluster mais attend un rééquilibrage.
-Renvoie `Ok` pour les autres cas.
-
-**couchbase.by_node.health** :<br>
-Renvoie `Critical` si le nœud n'est pas sain. Si ce n'est pas le cas, renvoie `Ok`.
 
 ## Dépannage
 

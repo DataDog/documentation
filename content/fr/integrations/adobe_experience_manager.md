@@ -1,30 +1,38 @@
 ---
-title: Adobe Experience Manager
-name: adobe_experience_manager
-kind: integration
-description: 'Recueillez des logs Adobe Experience Manager pour suivre les erreurs, obtenir des délais de réponse et surveiller les pages Web dont les performances sont faibles.'
-short_description: 'Recueillez des logs pour suivre les erreurs, obtenir des délais de réponse, etc.'
-dependencies:
-  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/adobe_experience_manager.md'
-categories:
-  - log collection
-doc_link: /integrations/adobe_experience_manager/
 aliases:
-  - /fr/logs/log_collection/adobe_experience_manager
+- /fr/logs/log_collection/adobe_experience_manager
+categories:
+- log collection
+dependencies:
+- https://github.com/DataDog/documentation/blob/master/content/en/integrations/adobe_experience_manager.md
+description: Recueillez des logs Adobe Experience Manager pour suivre les erreurs,
+  obtenir des délais de réponse et surveiller les pages Web dont les performances
+  sont faibles.
+doc_link: /integrations/adobe_experience_manager/
+further_reading:
+- link: logs/
+  tag: Documentation
+  text: Log Management
 has_logo: true
+integration_id: adobe
 integration_title: Adobe Experience Manager
 is_public: true
+kind: integration
+name: adobe_experience_manager
 public_title: Datadog/Adobe Experience Manager
+short_description: Recueillez des logs pour suivre les erreurs, obtenir des délais
+  de réponse, etc.
 supported_os:
-  - linux
-  - mac_os
-  - windows
-further_reading:
-  - link: logs/
-    tag: Documentation
-    text: Log Management
-integration_id: adobe
+- linux
+- mac_os
+- windows
+title: Adobe Experience Manager
 ---
+
+{{< site-region region="us3" >}}
+<div class="alert alert-warning">L'intégration Adobe Experience Manager n'est pas disponible pour le site Datadog que vous avez sélectionné ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 ## Présentation
 
 Recueillez des logs Adobe Experience Manager pour suivre les erreurs, obtenir des délais de réponse et surveiller les pages Web dont les performances sont faibles.

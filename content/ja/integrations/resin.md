@@ -1,39 +1,64 @@
 ---
+app_id: resin
+app_uuid: ff99886d-87b7-407a-aa90-7bea5ca27564
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: resin.thread_pool.thread_count
+      metadata_path: metadata.csv
+      prefix: resin.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Resin
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: コミュニティ
+  sales_email: brent@bmontague.com
+  support_email: brent@bmontague.com
 categories:
-  - web
-  - ログの収集
-creates_events: false
-ddtype: check
+- web
+- ログの収集
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/resin/README.md
-display_name: Resin
+- https://github.com/DataDog/integrations-extras/blob/master/resin/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: resin
-guid: f7b4c3db-5e56-4ab7-bef7-9d4a347daaee
 integration_id: resin
 integration_title: Resin
+integration_version: 1.0.0
 is_public: true
 kind: integration
-maintainer: brent@bmontague.com
-manifest_version: 1.0.0
-metric_prefix: resin.
-metric_to_check: resin.thread_pool.thread_count
+manifest_version: 2.0.0
 name: resin
-public_title: Datadog-Resin インテグレーション
+oauth: {}
+public_title: Resin
 short_description: Resin 内のスレッドプールと接続プールの設定を追跡
-support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Web
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: Resin 内のスレッドプールと接続プールの設定を追跡
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Resin
 ---
+
+
+
 ## 概要
 
 このチェックは、Datadog Agent を通じて [Resin][1] を監視します。
@@ -42,8 +67,7 @@ supported_os:
 
 ### インストール
 
-Resin チェックは [Datadog Agent][2] パッケージに含まれていないため、
-お客様自身でインストールする必要があります。
+Resin チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
 ### コンフィギュレーション
 
@@ -56,7 +80,7 @@ Resin チェックは [Datadog Agent][2] パッケージに含まれていない
 </server-default>
 ```
 
-2. Resin のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `resin.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[resin.d/conf.yaml のサンプル][2] を参照してください。
+2. Resin のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `resin.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[resin.d/conf.yaml の例][2] を参照してください。
 
 3. [Agent を再起動します][4]。
 
@@ -66,7 +90,7 @@ Resin チェックは [Datadog Agent][2] パッケージに含まれていない
 
 ### ログの収集
 
-Linux プラットフォームの場合は、`/etc/datadog-agent/datadog.yaml` で Datadog Agent のログ収集を有効にします。その他のプラットフォームの場合は、[Agent コンフィギュレーションファイルガイド][6] を参照し、コンフィギュレーションファイルの場所を調べてください。
+Linux プラットフォームの場合は、`/etc/datadog-agent/datadog.yaml` で Datadog Agent のログ収集を有効にします。その他のプラットフォームの場合は、[Agent コンフィギュレーションファイルガイド][6]を参照し、コンフィギュレーションファイルの場所を調べてください。
 
 ```yaml
 logs_enabled: true
@@ -100,7 +124,7 @@ Resin には、イベントは含まれません。
 
 
 [1]: https://caucho.com/
-[2]: https://github.com/DataDog/integrations-core/blob/master/resin/datadog_checks/resin/data/conf.yaml.example
+[2]: https://github.com/DataDog/integrations-extras/blob/master/resin/datadog_checks/resin/data/conf.yaml.example
 [3]: https://www.caucho.com/resin-4.0/admin/cluster-server.xtp#JVMparameters:settingtheJVMcommandline
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information

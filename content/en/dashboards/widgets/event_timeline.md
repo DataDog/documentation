@@ -5,15 +5,12 @@ description: "Display your Event Stream Timeline in a widget."
 aliases:
     - /graphing/widgets/event_timeline/
 further_reading:
-- link: "/dashboards/screenboards/"
-  tag: "Documentation"
-  text: "Screenboard"
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
-  text: "Building Dashboard using JSON"
+  text: "Building Dashboards using JSON"
 ---
 
-The event timeline is a widget version of the timeline that appears at the top of the [Event Stream view][1]:
+The event timeline is a widget version of the timeline that appears at the top of the [Event Explorer view][1]:
 
 {{< img src="dashboards/widgets/event_timeline/event_timeline.png" alt="Event timeline example"  >}}
 
@@ -38,7 +35,7 @@ Optionally define its size and alignment.
 
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][2] for additional reference.
+This widget can be used with the [Dashboards API][2].
 
 The dedicated [widget JSON schema definition][3] for the event timeline widget is:
 
@@ -49,5 +46,5 @@ The dedicated [widget JSON schema definition][3] for the event timeline widget i
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /events/
-[2]: /api/v1/dashboards/
+[2]: /api/latest/dashboards/
 [3]: /dashboards/graphing_json/widget_json/

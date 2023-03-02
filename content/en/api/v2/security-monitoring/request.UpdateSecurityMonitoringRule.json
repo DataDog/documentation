@@ -1,0 +1,29 @@
+{
+  "name": "Example-Update_an_existing_rule_returns_OK_response-Updated",
+  "queries": [
+    {
+      "query": "@test:true",
+      "aggregation": "count",
+      "groupByFields": [],
+      "distinctFields": [],
+      "metrics": []
+    }
+  ],
+  "filters": [],
+  "cases": [
+    {
+      "name": "",
+      "status": "info",
+      "condition": "a > 0",
+      "notifications": []
+    }
+  ],
+  "options": {
+    "evaluationWindow": 900,
+    "keepAlive": 3600,
+    "maxSignalDuration": 86400
+  },
+  "message": "Test rule",
+  "tags": [],
+  "isEnabled": true
+}

@@ -1,23 +1,24 @@
 ---
-title: スパンタグを追加し、アプリケーションのパフォーマンスを分類する
-kind: ガイド
 further_reading:
-  - link: /tracing/guide/alert_anomalies_p99_database/
-    tag: 3 分
-    text: データベースサービスの異常な p99 レイテンシーに関するアラート
-  - link: /tracing/guide/week_over_week_p50_comparison/
-    tag: 2 分
-    text: サービスのレイテンシーを前週と比較する
-  - link: /tracing/guide/apm_dashboard/
-    tag: 4 分
-    text: ダッシュボードを作成して、APM メトリクスを追跡、関連付ける
-  - link: /tracing/guide/slowest_request_daily/
-    tag: 3 分
-    text: ウェブサービスの最も遅いエンドポイントで最も遅いトレースをデバッグする
-  - link: /tracing/guide/
-    tag: ''
-    text: すべてのガイド
+- link: /tracing/guide/alert_anomalies_p99_database/
+  tag: 3 分
+  text: データベースサービスの異常な p99 レイテンシーに関するアラート
+- link: /tracing/guide/week_over_week_p50_comparison/
+  tag: 2 分
+  text: サービスのレイテンシーを前週と比較する
+- link: /tracing/guide/apm_dashboard/
+  tag: 4 分
+  text: ダッシュボードを作成して、APM メトリクスを追跡、関連付ける
+- link: /tracing/guide/slowest_request_daily/
+  tag: 3 分
+  text: ウェブサービスの最も遅いエンドポイントで最も遅いトレースをデバッグする
+- link: /tracing/guide/
+  tag: ''
+  text: すべてのガイド
+kind: ガイド
+title: スパンタグを追加し、アプリケーションのパフォーマンスをフィルタリングし、グループ化する
 ---
+
 _所要時間 7 分_
 
 {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_6.mp4" alt="分析ビュー" video="true"  style="width:90%;">}}
@@ -91,10 +92,8 @@ require 'ddtrace'
 class ShoppingCartController < ApplicationController
   # GET /shopping_cart
   def index
-    # アクティブスパンを取得
-    current_span = Datadog.tracer.active_span
-    # customer_id -> 254889
-    current_span.set_tag('customer.id', params.permit([:customer_id])) unless current_span.nil?
+    #アクティブスパンを取得し、customer_id -> 254889 を設定します
+    Datadog::Tracing.active_span&.set_tag('customer.id', params.permit([:customer_id]))
 
     # [...]
   end
@@ -244,7 +243,7 @@ Datadog の UI では、タグを使用してスパンレベルのメタデー�
 
 ## カスタムスパンタグを Analytics で活用する
 
-4) **[トレース検索ページ][6]**に移動します。
+4) **[トレースエクスプローラーページ][6]**に移動します。
 
 トレース検索ページでは、関心のある特定の[トレース][1]とインデックス化スパンを特定できます。ここでは、時間によってデフォルトタグ (`Env`、`Service`、`Resource` など、[さまざまなタグ][7]) にフィルターをかけることができます。
 
@@ -262,7 +261,7 @@ Datadog の UI では、タグを使用してスパンレベルのメタデー�
 
 6) **[Analytics][8] ページに移動します**。
 
-Analytics は、クエリを作成し無限濃度でトレースの調査を実施できる視覚的ツールです。ファセットを使用して、クエリにフィルターとスコープを設定します。詳細については、[トレース検索と Analytics の概要][9]をご確認ください。
+Analytics は、クエリを作成し無限濃度でトレースの調査を実施できる視覚的ツールです。ファセットを使用して、クエリにフィルターとスコープを設定します。詳細については、[トレースエクスプローラーの概要][9]をご確認ください。
 
 7) サービスファセット一覧で作業中の**サービスを選択**し、ファセットのステータスで **Error を選択**したら、group by フィールドで **`customer_id`** (またはスパンに追加した他のタグ) を選択します。
 
@@ -287,8 +286,8 @@ Analytics は、クエリを作成し無限濃度でトレースの調査を実�
 [3]: /ja/tracing/visualization/#span-tags
 [4]: /ja/tracing/visualization/#resources
 [5]: /ja/tracing/visualization/#services
-[6]: https://app.datadoghq.com/apm/search
-[7]: /ja/tracing/trace_search_and_analytics/#live-search-for-15-minutes
+[6]: https://app.datadoghq.com/apm/traces
+[7]: /ja/tracing/trace_explorer/#live-search-for-15-minutes
 [8]: https://app.datadoghq.com/apm/analytics
-[9]: /ja/tracing/trace_search_and_analytics/query_syntax/
+[9]: /ja/tracing/trace_explorer/query_syntax/
 [10]: /ja/tracing/guide/alert_anomalies_p99_database/

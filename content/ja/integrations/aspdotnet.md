@@ -1,40 +1,66 @@
 ---
+app_id: aspdotnet
+app_uuid: 7d801e88-1fad-433e-81d9-07449fd45e13
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     ASP.NET - Overview: assets/dashboards/overview.json
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: aspdotnet.request.wait_time
+      metadata_path: metadata.csv
+      prefix: aspdotnet.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: ASP.NET
+  logs:
+    source: iis
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-  - web
-  - languages
-  - log collection
-creates_events: false
-ddtype: check
+- web
+- languages
+- log collection
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/aspdotnet/README.md'
-display_name: ASP.NET
+- https://github.com/DataDog/integrations-core/blob/master/aspdotnet/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: aspdotnet
-guid: 475b0c6c-02e5-49ef-806b-9fab377f0839
 integration_id: aspdotnet
 integration_title: ASP.NET
+integration_version: 1.12.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: aspdotnet.
-metric_to_check: aspdotnet.request.wait_time
+manifest_version: 2.0.0
 name: aspdotnet
-public_title: Datadog-ASP.NET インテグレーション
+oauth: {}
+public_title: ASP.NET
 short_description: ASP.NET サービスのメトリクスをリアルタイムに追跡。
-support: コア
 supported_os:
-  - windows
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Windows
+  - Category::Web
+  - Category::言語
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: ASP.NET サービスのメトリクスをリアルタイムに追跡。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: ASP.NET
 ---
+
+
+
 ## 概要
 
 ASP.NET からメトリクスをリアルタイムに取得すると、以下のことができます。
@@ -54,14 +80,17 @@ ASP.NET チェックは [Datadog Agent][1] パッケージに含まれていま�
 
 2. [Agent を再起動します][4]。
 
+**注**: このチェックのバージョン 1.9.0 以降では、メトリクスの収集に新しい実装を使用し、これには Python 3 が必要です。Python 3 の使用が不可能なホストの場合や、このチェックのレガシーバージョンを使用する場合は、以下の[コンフィグ][5]を参照してください。
+
 #### ログの収集
-ASP.NET は IIS ロギングを使用します。ASP.NET リクエストおよび失敗に関するログを表示するには、[IIS のセットアップ手順][5]に従います。
+
+ASP.NET は IIS ロギングを使用します。ASP.NET リクエストおよび失敗に関するログを表示するには、[IIS のセットアップ手順][6]に従います。
 
 ASP.NET アプリケーションに関する未処理の 500 レベルの例外およびイベントは、Windows Application EventLog を使用して表示できます。
 
 ### 検証
 
-[Agent の `status` サブコマンドを実行][6]し、Checks セクションで `aspdotnet` を探します。
+[Agent の `status` サブコマンドを実行][7]し、Checks セクションで `aspdotnet` を探します。
 
 ## 収集データ
 
@@ -79,13 +108,14 @@ ASP.NET チェックには、サービスのチェック機能は含まれませ
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: https://github.com/DataDog/integrations-core/blob/master/aspdotnet/datadog_checks/aspdotnet/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/ja/integrations/iis/?tab=host#setup
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[7]: https://github.com/DataDog/integrations-core/blob/master/aspdotnet/metadata.csv
-[8]: https://docs.datadoghq.com/ja/help/
+[5]: https://github.com/DataDog/integrations-core/blob/7.33.x/aspdotnet/datadog_checks/aspdotnet/data/conf.yaml.example
+[6]: https://docs.datadoghq.com/ja/integrations/iis/?tab=host#setup
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://github.com/DataDog/integrations-core/blob/master/aspdotnet/metadata.csv
+[9]: https://docs.datadoghq.com/ja/help/

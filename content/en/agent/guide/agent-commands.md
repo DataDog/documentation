@@ -137,12 +137,14 @@ List of commands to display the status of the Datadog Agent:
 | AIX             | `lssrc -s datadog-agent`                                                      |
 | Linux           | See the [Agent documentation][1] for your OS.                                 |
 | Docker (Debian) | `sudo docker exec -it <CONTAINER_NAME> s6-svstat /var/run/s6/services/agent/` |
-| Kubernetes      | `kubectl exec -it <POD_NAME> s6-svstat /var/run/s6/services/agent/`           |
+| Kubernetes      | `kubectl exec -it <POD_NAME> -- s6-svstat /var/run/s6/services/agent/`        |
 | macOS           | `launchctl list com.datadoghq.agent` *or* through the systray app             |
 | Source          | `sudo service datadog-agent status`                                           |
+| Windows         | See the [Windows Agent documentation][2].                                     |
 
 
 [1]: /agent/
+[2]: /agent/basic_agent_usage/windows/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -150,7 +152,7 @@ List of commands to display the status of the Datadog Agent:
 |-----------------|--------------------------------------------------------------------------|
 | Linux           | `sudo service datadog-agent status`                                      |
 | Docker (Debian) | `sudo docker exec -it <CONTAINER_NAME> /etc/init.d/datadog-agent status` |
-| Kubernetes      | `kubectl exec -it <POD_NAME> /etc/init.d/datadog-agent status`           |
+| Kubernetes      | `kubectl exec -it <POD_NAME> -- /etc/init.d/datadog-agent status`        |
 | macOS           | `datadog-agent status`                                                   |
 | Source          | `sudo ~/.datadog-agent/bin/agent status`                                 |
 | Windows         | See the [Windows Agent documentation][1].                                |
@@ -178,7 +180,7 @@ List of commands to display the status of your Datadog Agent and enabled integra
 | AIX        | `datadog-agent status`                               |
 | Linux      | `sudo datadog-agent status`                          |
 | Docker     | `sudo docker exec -it <CONTAINER_NAME> agent status` |
-| Kubernetes | `kubectl exec -it <POD_NAME> agent status`           |
+| Kubernetes | `kubectl exec -it <POD_NAME> -- agent status`        |
 | macOS      | `datadog-agent status` or through the [web GUI][1]   |
 | Source     | `sudo datadog-agent status`                          |
 | Windows    | See the [Windows Agent documentation][2].            |
@@ -206,7 +208,7 @@ Running Checks
 |------------|------------------------------------------------------------------------|
 | Linux      | `sudo service datadog-agent info`                                      |
 | Docker     | `sudo docker exec -it <CONTAINER_NAME> /etc/init.d/datadog-agent info` |
-| Kubernetes | `kubectl exec -it <POD_NAME> /etc/init.d/datadog-agent info`           |
+| Kubernetes | `kubectl exec -it <POD_NAME> -- /etc/init.d/datadog-agent info`        |
 | macOS      | `datadog-agent info`                                                   |
 | Source     | `sudo ~/.datadog-agent/bin/info`                                       |
 | Windows    | See the [Windows Agent documentation][1].                              |
@@ -264,13 +266,11 @@ Some options have flags and options detailed under `--help`. For example, use he
 | `help`            | Help about any command.                                                     |
 | `hostname`        | Print the hostname used by the Agent.                                       |
 | `import`          | Import and convert configuration files from previous versions of the Agent. |
-| `installservice`  | Install the Agent within the service control manager. Windows only.         |
 | `jmx`             | JMX troubleshooting.                                                        |
 | `launch-gui`      | Start the Datadog Agent GUI.                                                |
-| `regimport`       | Import the registry settings into `datadog.yaml`. Windows only. Deprecated since 7.27.0             |
-| `remove-service`  | Remove the Agent from the service control manager. Windows only.            |
 | `restart-service` | Restart the Agent within the service control manager. Windows only.         |
 | `start-service`   | Start the Agent within the service control manager. Windows only.           |
+| `stream-logs`     | Stream the logs being processed by a running agent.                         |
 | `stopservice`     | Stop the Agent within the service control manager. Windows only.            |
 | `version`         | Print version info.                                                         |
 

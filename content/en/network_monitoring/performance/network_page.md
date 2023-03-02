@@ -33,7 +33,9 @@ The next example shows all aggregate connections from IP addresses representing 
 
 You can set the timeframe over which traffic is aggregated using the time selector at the top right of the page:
 
-{{< img src="network_performance_monitoring/network_page/npm_timeframe.png" alt="Time frame NPM"  style="width:30%;">}} 
+{{< img src="network_performance_monitoring/network_page/npm_timeframe.png" alt="Time frame NPM"  style="width:30%;">}}
+
+Tags from Datadog integrations or Unified Service Tagging can be used for aggregating and filtering automatically. See [custom facets](#custom-facets), below, for other tags. You can also select "Popular Tags" to aggregate on, using a combination of `service`, `kube_service`, `short_image`, `container_name`, and other common tags.
 
 ### Facet panels
 
@@ -79,7 +81,7 @@ Your network metrics are displayed through the graphs and the associated table. 
 
 Values displayed might be different for `sent_metric(source to destination)` and `received_metric(destination to source)` if there is a large number of packet drops. In this case, if the `destination` sends a lot of bytes to the `source`, the aggregate connections that originate at `destination` include those bytes, but the aggregate connections that originate at `source` do not see them as received.
 
-**Note**: The default collection interval is five minutes and retention is seven days.
+**Note:** Data is collected every 30 seconds, aggregated in five minute buckets, and retained for 14 days.
 
 ### Metrics
 
@@ -106,7 +108,7 @@ TCP is a connection-oriented protocol that guarantees in-order delivery of packe
 
 ### Cloud service autodetection
 
-If you're relying on managed cloud services like S3 or Kinesis, you can monitor the performance of traffic to those services from your internal applications. Scope your view to a particular AWS or GCP dependency to pinpoint latency, assess database performance, and visualize your network more completely. 
+If you're relying on managed cloud services like S3 or Kinesis, you can monitor the performance of traffic to those services from your internal applications. Scope your view to a particular AWS or GCP dependency to pinpoint latency, assess database performance, and visualize your network more completely.
 
 {{< img src="network_performance_monitoring/network_page/cloud-service-hero-docs.png" alt="Cloud Service Map" >}}
 
@@ -114,11 +116,11 @@ For instance, you can
 
 - visualize data flow from your internal Kubernetes cluster to `service:aws.s3` in the [Network Map][2]
 - pivot to the [Network Page](#table) to isolate which pods are establishing the most connections to that service, and
-- validate that their request are successful by analyzing S3 performance metrics, which are correlated with traffic perfromance directly in the sidepanel for a given dependency, under the *Integration Metrics* tab. 
+- validate that their request are successful by analyzing S3 performance metrics, which are correlated with traffic perfromance directly in the sidepanel for a given dependency, under the *Integration Metrics* tab.
 
-NPM automatically maps 
+NPM automatically maps
 
-- network calls to S3 (which can broken down by `s3_bucket`), RDS (which can be broken down by `rds_instance_type`), Kinesis, ELB, Elasticache, and other [AWS services][3]. 
+- network calls to S3 (which can broken down by `s3_bucket`), RDS (which can be broken down by `rds_instance_type`), Kinesis, ELB, Elasticache, and other [AWS services][3].
 - API calls to AppEngine, Google DNS, Gmail, and other [GCP services][4].
 
 To monitor other endpoints where an Agent cannot be installed (such as public APIs), group the destination in the Network Overview by the [`domain` tag](#domain-resolution).
@@ -174,7 +176,7 @@ The network table breaks down the _Volume_, _Throughput_, _TCP Retransmits_, _Ro
 
 You can configure the columns in your table using the `Customize` button at the top right of the table.
 
-Congifure the traffic shown with the `Filter Traffic` button.
+Configure the traffic shown with the `Filter Traffic` button.
 
 {{< img src="network_performance_monitoring/network_page/filter_traffic_toggles_v2.png" alt="Flow Details"  style="width:80%;">}}
 

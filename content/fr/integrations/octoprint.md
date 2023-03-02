@@ -47,10 +47,13 @@ Suivez les instructions ci-dessous pour installer et configurer ce check lorsque
 
 ### Installation
 
-Pour installer le check OctoPrint sur votre host, procédez comme suit :
+Pour installer le check OctoPrint sur votre host, exécutez ce qui suit :
 
-1. Exécutez `sudo -u dd-agent -- datadog-agent integration install datadog-octoprint==<VERSION>`.
-    - La version actuelle est `1.0.0`. Vous pouvez vérifier la dernière version dans `./datadog_checks/octoprint/__about__.py`.
+```shell
+sudo -u dd-agent -- datadog-agent integration install datadog-octoprint==<VERSION>
+```
+
+**Remarque** : la `VERSION` est indiquée en haut de cette page.
 
 #### Installation depuis les sources (facultatif)
 
@@ -90,7 +93,7 @@ L'un ou l'ensemble de ces logs peuvent être changés ou supprimés en modifiant
 
 #### Processing de logs
 
-OctoPrint utilise son propre format de log (et non un format objet). Pour tirer le meilleur parti des logs, il est donc nécessaire de créer un pipeline de traitement de logs avec des règles de parsing. Exemple :
+OctoPrint utilise son propre format de log (et non un format objet). Pour utiliser ces logs, créez un pipeline de traitement de logs avec des règles de parsing. Exemple :
 
 1. Pipeline principal : « OctoPrint »
     1. Sous-pipeline 1 : « OctoPrint Print Job »

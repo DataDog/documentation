@@ -11,19 +11,20 @@ assets:
     nagios_processes: assets/saved_views/nagios_processes.json
   service_checks: assets/service_checks.json
 categories:
-  - monitoring
-  - notification
-  - log collection
+- monitoring
+- notification
+- log collection
 creates_events: true
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/nagios/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/nagios/README.md
 display_name: Nagios
 draft: false
 git_integration_title: nagios
 guid: f7629918-751c-4a05-87e7-0e3de34e51e7
 integration_id: nagios
 integration_title: Nagios
+integration_version: 1.11.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -32,20 +33,31 @@ metric_prefix: nagios.
 metric_to_check: nagios.host.rta
 name: nagios
 process_signatures:
-  - nagios
+- nagios
 public_title: Intégration Datadog/Nagios
-short_description: 'Envoyez des bagotements de service, des alertes de host et plus encore à votre flux d''événement Datadog.'
+short_description: Envoyez des bagotements de service, des alertes de host et plus
+  encore à votre flux d'événement Datadog.
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 Envoyez des événements depuis votre infrastructure surveillée par Nagios à Datadog afin de créer des alertes enrichies et de corréler facilement les événements de Nagios avec les métriques de votre infrastructure surveillée par Datadog.
 
-Ce check surveille les logs de votre serveur Nagios et envoie des événements à votre flux d'événements Datadog. Vous pouvez ainsi surveiller les bagottements de service, les changements d'état de host, les checks de service passif, les downtimes des services et de hosts, et plus encore. Ce check peut également envoyer des données de performance Nagios à Datadog sous forme de métriques.
+Ce check surveille les logs de votre serveur Nagios et envoie des événements sur les éléments suivants à votre flux d'événements Datadog :
+
+- Bagottements de service
+- Changements d'état de host
+- Checks de service passifs
+- Downtimes de hosts et de services
+
+Ce check peut également envoyer des données de performance Nagios à Datadog sous la forme de métriques. 
 
 ## Configuration
 
@@ -53,9 +65,9 @@ Ce check surveille les logs de votre serveur Nagios et envoie des événements �
 
 Le check Nagios est inclus avec le package de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur vos serveurs Nagios.
 
-### Configuration
+### Procédure à suivre
 
-Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour la configuration dans un environnement conteneurisé.
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -73,7 +85,7 @@ Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 [1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/nagios/datadog_checks/nagios/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: https://docs.datadoghq.com/fr/metrics/custom_metrics/
+[4]: https://docs.datadoghq.com/fr/developers/metrics/custom_metrics/
 [5]: https://docs.datadoghq.com/fr/account_management/billing/custom_metrics/
 {{% /tab %}}
 {{% tab "Environnement conteneurisé" %}}

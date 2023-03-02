@@ -1,20 +1,21 @@
 ---
-title: Variables d'environnement de l'Agent
-kind: guide
 further_reading:
-  - link: /agent/docker/#variables-d-environnement
-    tag: Documentation
-    text: Variables d'environnement de l'Agent Docker
-  - link: /agent/docker/apm/#variables-d-environnement-de-l-agent-apm-docker
-    tag: Documentation
-    text: Variables d'environnement de l'Agent APM
-  - link: /logs/log_collection/#collecte-de-logs-de-conteneur
-    tag: Documentation
-    text: Collecte de logs de conteneur
-  - link: /agent/proxy/#variables-d-environnement
-    tag: Documentation
-    text: Variables d'environnement de proxy
+- link: /agent/docker/#variables-d-environnement
+  tag: Documentation
+  text: Variables d'environnement de l'Agent Docker
+- link: /agent/docker/apm/#variables-d-environnement-de-l-agent-apm-docker
+  tag: Documentation
+  text: Variables d'environnement de l'Agent APM
+- link: /logs/log_collection/#collecte-de-logs-de-conteneur
+  tag: Documentation
+  text: Collecte de logs de conteneur
+- link: /agent/proxy/#variables-d-environnement
+  tag: Documentation
+  text: Variables d'environnement de proxy
+kind: guide
+title: Variables d'environnement de l'Agent
 ---
+
 <div class="alert alert-warning">
 Si vous utilisez l'Agent v5, référez-vous au <a href="https://github.com/DataDog/docker-dd-agent#environment-variables">référentiel GitHub de l'Agent Docker</a>.
 </div>
@@ -50,9 +51,9 @@ Dans la plupart des cas, les règles suivantes doivent être respectées :
 
 * Les options de configuration imbriquées dont les clés sont **définies par l'utilisateur** doivent être au format JSON :
    ```yaml
-      docker_env_as_tags:
+      container_env_as_tags:
         ENVVAR_NAME: tag_name
-      # DD_DOCKER_ENV_AS_TAGS='{"ENVVAR_NAME": "tag_name"}'
+      # DD_CONTAINER_ENV_AS_TAGS='{"ENVVAR_NAME": "tag_name"}'
    ```
 
 **Remarque** : lorsque vous spécifiez une option imbriquée avec une variable d'environnement, _toutes_ les options imbriquées spécifiées sous l'option de configuration sont ignorées. L'option de configuration `proxy` fait toutefois exception à cette règle. Consultez la [documentation relative au proxy de l'Agent][3] pour en savoir plus.

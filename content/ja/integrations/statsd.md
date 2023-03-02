@@ -1,42 +1,66 @@
 ---
+app_id: statsd
+app_uuid: 847f92f2-77e2-4429-844f-50f4d9c8097f
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: statsd.counters.count
+      metadata_path: metadata.csv
+      prefix: statsd.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: StatsD
   logs:
     source: statsd
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-  - monitoring
-  - autodiscovery
-  - log collection
-creates_events: false
-ddtype: check
+- monitoring
+- log collection
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/statsd/README.md
-display_name: StatsD
+- https://github.com/DataDog/integrations-core/blob/master/statsd/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: statsd
-guid: 4830acf3-626b-42ff-a1db-3f37babd0ae6
 integration_id: statsd
 integration_title: StatsD
+integration_version: 1.10.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: statsd.
-metric_to_check: statsd.counters.count
+manifest_version: 2.0.0
 name: statsd
-public_title: Datadog-StatsD インテグレーション
+oauth: {}
+public_title: StatsD
 short_description: StatsD サーバーの可用性を監視し、メトリクスカウントを追跡。
-support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::モニタリング
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: StatsD サーバーの可用性を監視し、メトリクスカウントを追跡。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: StatsD
 ---
+
+
+
 ## 概要
 
 このチェックは、Datadog 以外の StatsD サーバーの可用性とアップタイムを監視します。また、StatsD が受け取ったメトリクス数をメトリクスタイプ別に追跡します。
@@ -45,7 +69,7 @@ supported_os:
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 StatsD チェックは [Datadog Agent][1] パッケージに含まれています。StatsD を実行するサーバーに追加でインストールする必要はありません。
 
@@ -114,7 +138,7 @@ StatsD チェックは [Datadog Agent][1] パッケージに含まれていま�
 
 ### 検証
 
-[Agent の `status` サブコマンドを実行][4]し、Checks セクションで `statsd` を探します。
+[Agent の status サブコマンド][4]を実行し、Checks セクションで `statsd` を探します。
 
 ## 収集データ
 
@@ -136,9 +160,11 @@ StatsD チェックには、イベントは含まれません。
 
 ## その他の参考資料
 
-StatsD およびその動作の詳細については、[StatsD に関するブログ記事][6]を参照してください。
+お役に立つドキュメント、リンクや記事:
 
-Datadog を使用して StatsD メトリクスをカウントグラフで視覚化する方法 (またはその理由) について理解するには、Datadog の[一連のブログ記事][7]を参照してください。
+- [StatsD とは何か、そしてどのように役立つのか][6]
+- [Counts Graphing による StatsD メトリクスの可視化][7]
+
 
 
 [1]: https://app.datadoghq.com/account/settings#agent

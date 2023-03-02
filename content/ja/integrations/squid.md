@@ -1,50 +1,75 @@
 ---
+app_id: squid
+app_uuid: de18c581-69ee-48cf-ba23-7794bfb7a4bd
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: squid.cachemgr.cpu_time
+      metadata_path: metadata.csv
+      prefix: squid.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Squid
   logs:
     source: squid
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-  - web
-  - caching
-  - log collection
-  - autodiscovery
-creates_events: false
-ddtype: check
+- web
+- caching
+- log collection
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/squid/README.md
-display_name: Squid
+- https://github.com/DataDog/integrations-core/blob/master/squid/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: squid
-guid: e7d4b233-b32a-46f9-8cb2-c582ee8fd251
 integration_id: squid
 integration_title: Squid
+integration_version: 2.2.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: squid.
-metric_to_check: squid.cachemgr.cpu_time
+manifest_version: 2.0.0
 name: squid
-public_title: Datadog-Squid インテグレーション
+oauth: {}
+public_title: Squid
 short_description: Datadog を使用した Squid キャッシュサーバーのメトリクスの追跡
-support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Web
+  - Category::キャッシュ
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: Datadog を使用した Squid キャッシュサーバーのメトリクスの追跡
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Squid
 ---
+
+
+
 ## 概要
 
 このチェックは、Datadog Agent を通してキャッシュマネージャーから取得された [Squid][1] メトリクスを監視します。
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Agent の Squid チェックは [Datadog Agent][2] パッケージに含まれています。Squid サーバーに追加でインストールする必要はありません。
 
@@ -113,7 +138,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
 | パラメーター      | 値                                               |
 | -------------- | --------------------------------------------------- |

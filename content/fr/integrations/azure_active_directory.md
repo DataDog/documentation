@@ -8,19 +8,20 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - azure
-  - log collection
-  - security
+- azure
+- log collection
+- security
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/azure_active_directory/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/azure_active_directory/README.md
 display_name: Azure Active Directory
 draft: false
 git_integration_title: azure_active_directory
 guid: 1f6dbea8-db4a-4b0e-bfe8-f69efb3e877b
 integration_id: azure-active-directory
 integration_title: Azure Active Directory
+integration_version: ''
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -28,14 +29,17 @@ manifest_version: 1.0.0
 metric_prefix: azure_active_directory.
 metric_to_check: ''
 name: azure_active_directory
-public_title: "Intégration Datadog/Azure\_Active\_Directory"
+public_title: Intégration Datadog/Azure Active Directory
 short_description: Analysez vos logs d'activité Azure Active Directory
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 Azure Active Directory est une offre Active Directory hébergée sur le cloud, proposée par Microsoft Azure.
@@ -78,7 +82,7 @@ Pour en savoir plus sur la configuration, regardez le [tutoriel Azure][3].
 
 ## Données collectées
 
-### Logs
+#### Collecte de logs
 
 Cette intégration vous permet de configurer l'ingestion de logs pour les logs d'activité Azure Active Directory.
 

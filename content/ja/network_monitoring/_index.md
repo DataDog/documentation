@@ -1,18 +1,24 @@
 ---
-title: ネットワークモニタリング
-kind: documentation
-disable_sidebar: true
 description: Datadog ネットワークモニタリング製品を見る
+disable_sidebar: true
 further_reading:
-  - link: "https://www.datadoghq.com/blog/network-performance-monitoring"
-    tag: ブログ
-    text: Datadog ネットワークパフォーマンスモニタリングのご紹介
-  - link: "https://www.datadoghq.com/blog/monitor-dns-with-datadog/"
-    tag: ブログ
-    text: Datadog での DNS モニタリング
-  - link: "https://www.datadoghq.com/blog/datacenter-monitoring-dashboards/"
-    tag: ブログ
-    text: Datadog でデータセンターおよびネットワークデバイスを監視
+- link: https://app.datadoghq.com/release-notes?category=Network%20Monitoring
+  tag: リリースノート
+  text: Datadog Network Monitoring の最新リリースをチェック！ (アプリログインが必要です)。
+- link: https://www.datadoghq.com/blog/network-performance-monitoring
+  tag: ブログ
+  text: Datadog ネットワークパフォーマンスモニタリングのご紹介
+- link: https://www.datadoghq.com/blog/monitor-dns-with-datadog/
+  tag: ブログ
+  text: Datadog での DNS モニタリング
+- link: https://www.datadoghq.com/blog/datacenter-monitoring-dashboards/
+  tag: ブログ
+  text: Datadog でデータセンターおよびネットワークデバイスを監視
+- link: https://www.datadoghq.com/blog/monitor-cilium-cni-with-datadog/
+  tag: ブログ
+  text: Datadog で Cilium が管理するインフラストラクチャーを監視する
+kind: documentation
+title: ネットワークモニタリング
 ---
 
 {{< whatsnext desc="このセクションには、次のトピックが含まれています。">}}

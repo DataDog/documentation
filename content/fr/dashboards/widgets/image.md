@@ -1,17 +1,15 @@
 ---
-title: Widget Image
-kind: documentation
-description: Ajoutez une image ou un gif à vos dashboards Datadog.
 aliases:
-  - /fr/graphing/widgets/image/
+- /fr/graphing/widgets/image/
+description: Ajoutez une image ou un gif à vos dashboards Datadog.
 further_reading:
-  - link: /dashboards/screenboards/
-    tag: Documentation
-    text: Screenboard
-  - link: /dashboards/graphing_json/
-    tag: Documentation
-    text: Créer des dashboards avec JSON
+- link: /dashboards/graphing_json/
+  tag: Documentation
+  text: Créer des dashboards avec JSON
+kind: documentation
+title: Widget Image
 ---
+
 Le widget Image vous permet d'intégrer une image à votre dashboard. Une image désigne un fichier PNG, JPG ou GIF animé accessible depuis une URL :
 
 {{< img src="dashboards/widgets/image/image.mp4" alt="Image" video="true" style="width:80%;" >}}

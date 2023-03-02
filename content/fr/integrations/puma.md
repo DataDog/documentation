@@ -8,18 +8,18 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - web
+- web
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/puma/README.md
+- https://github.com/DataDog/integrations-extras/blob/master/puma/README.md
 display_name: Puma
 draft: false
 git_integration_title: puma
 guid: 93264c0f-a4d1-447d-81b6-bee3eb891df3
 integration_id: puma
 integration_title: Puma
-integration_version: 1.1.0
+integration_version: 1.2.0
 is_public: true
 kind: integration
 maintainer: justin.morris@ferocia.com.au
@@ -31,10 +31,13 @@ public_title: Intégration Datadog/Puma
 short_description: Un serveur Web rapide et concurrent pour Ruby et Rack
 support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 Ce check permet de surveiller [Puma][1] avec l'Agent Datadog. Il utilise l'endpoint de métriques Puma fourni par le serveur de [contrôle/statut][2].
@@ -63,7 +66,7 @@ Pour l'Agent v7.21+/6.21+, suivez les instructions ci-dessous afin d'installer l
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][8] et cherchez `puma` dans la section Checks.
+Lancez la [sous-commande status de l'Agent][8] et cherchez `puma` dans la section Checks.
 
 ## Données collectées
 

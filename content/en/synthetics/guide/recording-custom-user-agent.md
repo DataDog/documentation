@@ -1,5 +1,5 @@
 ---
-title: Record steps with a custom User-Agent
+title: Record Steps With A Custom User-Agent
 kind: documentation
 description: Record browser test steps with a custom User-Agent string 
 further_reading:
@@ -10,6 +10,8 @@ further_reading:
   tag: "Documentation"
   text: "Configure advanced options for steps"
 ---
+
+## Overview
 
 Some implementations lead applications to render a certain way only when using a specific `User-Agent` string (for example, when using a mobile `User-Agent`). In these cases, you need to set the `User-Agent` header to a custom string to be able to record your browser tests' steps in your application. To do so:
 

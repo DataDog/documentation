@@ -1,10 +1,9 @@
 ---
 aliases:
-  - /ja/integrations/sumologic/
+- /ja/integrations/sumologic/
 categories:
-  - monitoring
-  - notification
-ddtype: crawler
+- monitoring
+- notification
 dependencies: []
 description: Sumo Logic から Datadog にログを送信。Datadog 通知を Sumo Logic に送信。
 doc_link: https://docs.datadoghq.com/integrations/sumologic/
@@ -13,6 +12,7 @@ git_integration_title: sumo_logic
 has_logo: true
 integration_id: ''
 integration_title: Sumo Logic
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -21,6 +21,7 @@ public_title: Datadog-Sumo Logic インテグレーション
 short_description: Sumo Logic から Datadog にログを送信。Datadog 通知を Sumo Logic に送信。
 version: '1.0'
 ---
+
 ## 概要
 
 Datadog と Sumo Logic は双方向に統合されます。Sumo Logic のログデータを Datadog のイベントストリームに転送することも、Sumo Logic を Datadog アラートおよびイベントの通知チャンネルとして使用することもできます。つまり、サービス間で相互に通知を行うことができます。
@@ -37,7 +38,7 @@ Datadog と Sumo Logic は双方向に統合されます。Sumo Logic のログ�
 4. **Hosted Collector** を選択します。
 5. 名前を入力し、説明、カテゴリ、タイムゾーンを任意に入力します。**Save** をクリックします。
 6. Cloud APIs 下の **HTTP** をクリックします。コレクターに関する情報をフォームに正しく入力します。**Save** をクリックします。
-7. 次のダイアログに表示される URL をコピーします。この URL は、後でもう一度必要になります。
+7. 次のダイアログで指定された URL をコピーします。
 8. Datadog で [Sumo Logic インテグレーション設定][1]画面に移動します。
 9. コレクターに割り当てる名前と、前の手順でコピーした URL を入力します。
 10. 次回、Datadog から Sumo Logic にメッセージを送信する際は、**@sumologic-{YOUR COLLECTOR NAME}** を使用します。
@@ -58,6 +59,6 @@ Datadog と Sumo Logic は双方向に統合されます。Sumo Logic のログ�
 7. **Test Connection** をクリックします。イベントストリームに以下のような新しい項目が表示されます。{{< img src="integrations/summologic/integrations-sumo-event.png" alt="テストイベント" popup="true">}}
 8. 正しい情報が表示されている場合は、**Save** をクリックします。
 9. Sumo Logic で、検索を保存し、その検索のスケジュールを選択します。
-10. **Alert Type** には Webhook を選択します。Webhook のリストから新しい Datadog 接続を選択します。ペイロードを任意にカスタマイズします。結果の数が 1 以上である場合にのみ通知が送信されるように、**Alert Condition** を変更できます。 {{< img src="integrations/summologic/integrations-sumo-savesearch.png" alt="ホスト済コレクション" popup="true">}}
+10. **Alert Type** には Webhook を選択します。Webhook のリストから新しい Datadog 接続を選択します。ペイロードを任意にカスタマイズし、結果の数が 1 以上である場合にのみ通知が送信されるように、**Alert Condition** を変更します。 {{< img src="integrations/summologic/integrations-sumo-savesearch.png" alt="ホスト済コレクション" popup="true">}}
 
 [1]: https://app.datadoghq.com/account/settings#integrations/sumo_logic

@@ -41,7 +41,7 @@ L'intégration Datadog/Botprise vous permet d'envoyer des événements généré
 
 ## Configuration
 
-Pour utiliser l'intégration Datadog/Botprise, vous devez être un client de Botprise. Pour en savoir plus sur Botprise, consultez le site [https://www.botprise.com/][10].
+Pour utiliser l'intégration Datadog/Botprise, vous devez être un client de Botprise. Pour en savoir plus sur Botprise, consultez le site [https://www.botprise.com/][1].
 
 ### Installation
 

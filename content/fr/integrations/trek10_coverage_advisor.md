@@ -1,73 +1,76 @@
 ---
-"app_id": "trek10-coverage-advisor"
-"app_uuid": "2faacd70-a192-4a28-8b36-e55298d7b3b4"
-"assets":
-  "integration":
-    "configuration": {}
-    "events":
-      "creates_events": true
-    "metrics":
-      "check": trek10.coverage.aws_metric_count
-      "metadata_path": metadata.csv
-      "prefix": trek10.coverage
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_name": AWS Coverage Advisor par Trek10
-  "monitors":
-    "Trek10 AWS Coverage Advisor - New Unmonited Metric Available": assets/monitors/monitor_new.json
-    "Trek10 AWS Coverage Advisor - New Unmonitored Metric Discovered": assets/monitors/monitor_existing.json
-"author":
-  "homepage": "https://www.trek10.com"
-  "name": Trek10
-  "sales_email": signup-trek10-coverage-advisor@trek10.com
-  "support_email": trek10-coverage-advisor@trek10.com
-  "vendor_id": trek10
-"categories":
+app_id: trek10-coverage-advisor
+app_uuid: 2faacd70-a192-4a28-8b36-e55298d7b3b4
+assets:
+  integration:
+    configuration: {}
+    events:
+      creates_events: true
+    metrics:
+      check: trek10.coverage.aws_metric_count
+      metadata_path: metadata.csv
+      prefix: trek10.coverage
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: AWS Coverage Advisor par Trek10
+  monitors:
+    Trek10 AWS Coverage Advisor - New Unmonited Metric Available: assets/monitors/monitor_new.json
+    Trek10 AWS Coverage Advisor - New Unmonitored Metric Discovered: assets/monitors/monitor_existing.json
+author:
+  homepage: https://www.trek10.com
+  name: Trek10
+  sales_email: signup-trek10-coverage-advisor@trek10.com
+  support_email: trek10-coverage-advisor@trek10.com
+  vendor_id: trek10
+categories:
 - marketplace
 - aws
-"classifier_tags":
-- "Supported OS::Linux"
-- "Supported OS::Mac OS"
-- "Supported OS::Windows"
-- "Category::Marketplace"
-- "Category::AWS"
-- "Offering::Integration"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "trek10_coverage_advisor"
-"integration_id": "trek10-coverage-advisor"
-"integration_title": "AWS Coverage Advisor par Trek10"
-"integration_version": ""
-"is_public": true
-"kind": "integration"
-"legal_terms":
-  "eula": assets/eula.pdf
-"manifest_version": "2.0.0"
-"name": "trek10_coverage_advisor"
-"oauth": {}
-"pricing":
-- "billing_type": flat_fee
-  "includes_assets": true
-  "product_id": coverage-advisor
-  "short_description": Tarif fixe pour AWS Coverage Advisor par Trek10
-  "unit_price": !!int "100"
-"public_title": "AWS Coverage Advisor par Trek10"
-"short_description": "Vérifie que vous surveillez les métriques AWS clés parmi plus de 120 métriques différentes"
-"supported_os":
+classifier_tags:
+- Supported OS::Linux
+- Supported OS::Mac OS
+- Supported OS::Windows
+- Category::Marketplace
+- Category::AWS
+- Offering::Integration
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: trek10_coverage_advisor
+integration_id: trek10-coverage-advisor
+integration_title: AWS Coverage Advisor par Trek10
+integration_version: ''
+is_public: true
+kind: integration
+legal_terms:
+  eula: assets/eula.pdf
+manifest_version: 2.0.0
+name: trek10_coverage_advisor
+oauth: {}
+pricing:
+- billing_type: flat_fee
+  includes_assets: true
+  product_id: coverage-advisor
+  short_description: Tarif fixe pour AWS Coverage Advisor par Trek10
+  unit_price: 100
+public_title: AWS Coverage Advisor par Trek10
+short_description: Vérifie que vous surveillez les métriques AWS clés parmi plus de
+  120 métriques différentes
+supported_os:
 - linux
 - mac os
 - windows
-"tile":
-  "configuration": "README.md#Setup"
-  "description": Vérifie que vous surveillez les métriques AWS clés parmi plus de 120 métriques différentes
-  "media":
-  - "caption": Dashboard Trek10
-    "image_url": images/1600px-900px_maindashview_trek10_DDG_image.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": AWS Coverage Advisor par Trek10
+tile:
+  changelog: CHANGELOG.md
+  configuration: README.md#Setup
+  description: Vérifie que vous surveillez les métriques AWS clés parmi plus de 120 métriques
+    différentes
+  media:
+  - caption: Dashboard Trek10
+    image_url: images/1600px-900px_maindashview_trek10_DDG_image.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: AWS Coverage Advisor par Trek10
 ---
 
 
@@ -114,11 +117,3 @@ Cette intégration est principalement utilisée pour identifier rapidement les m
 
 ---
  Cette application est disponible sur le Marketplace et développée par un partenaire de Datadog. [Cliquez ici](https://app.datadoghq.com/marketplace/app/trek10-coverage-advisor/pricing) pour l'acheter.
-
-
-
-
-
-
-
-

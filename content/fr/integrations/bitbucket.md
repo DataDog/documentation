@@ -1,17 +1,19 @@
 ---
 categories:
-  - Source Control
-  - Collaboration
-  - issue tracking
+- Source Control
+- Collaboration
+- issue tracking
 ddtype: crawler
 dependencies: []
-description: Visualisez les commits et les pull requests qui affectent les performances de l'ensemble de vos services.
+description: Visualisez les commits et les pull requests qui affectent les performances
+  de l'ensemble de vos services.
 doc_link: https://docs.datadoghq.com/integrations/bitbucket/
 draft: false
 further_reading:
-  - link: https://www.datadoghq.com/blog/understand-code-changes-impact-system-performance-bitbucket-datadog/
-    tag: Blog
-    text: "Bitbucket et Datadog\_: découvrez l'impact des changements de code sur votre infrastructure"
+- link: https://www.datadoghq.com/blog/understand-code-changes-impact-system-performance-bitbucket-datadog/
+  tag: Blog
+  text: 'Bitbucket et Datadog : découvrez l''impact des changements de code sur votre
+    infrastructure'
 git_integration_title: bitbucket
 has_logo: true
 integration_id: bitbucket
@@ -22,9 +24,12 @@ kind: integration
 manifest_version: '1.0'
 name: bitbucket
 public_title: Intégration Datadog/Bitbucket
-short_description: Visualisez l'impact des commits et des pull requests sur les performances de vos services.
+short_description: Visualisez l'impact des commits et des pull requests sur les performances
+  de vos services.
+team: web-integrations
 version: '1.0'
 ---
+
 {{< img src="integrations/bitbucket/integrations-bitbucket.gif" alt="intégrations bitbucket" popup="true">}}
 
 ## Présentation
@@ -53,7 +58,7 @@ Consultez la documentation de Bitbucket relative à la [gestion des webhooks][1]
 https://app.datadoghq.com/intake/webhook/bitbucket?api_key=<VOTRE_CLÉ_API_DATADOG>
 ```
 
-### Configuration
+### Procédure à suivre
 
 L'[intégration Bitbucket][2] se configure par l'intermédiaire du carré d'intégration.
 

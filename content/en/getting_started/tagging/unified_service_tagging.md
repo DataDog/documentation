@@ -16,13 +16,14 @@ further_reading:
 ---
 
 ## Overview
-Unified service tagging ties Datadog telemetry together through the use of three [reserved tags][1]: `env`, `service`, and `version`.
 
-With these three tags you can:
+Unified service tagging ties Datadog telemetry together through using three [reserved tags][1]: `env`, `service`, and `version`.
+
+With these three tags, you can:
 
 - Identify deployment impact with trace and container metrics filtered by version
 - Navigate seamlessly across traces, metrics, and logs with consistent tags
-- View service data based on environment or version in a unified fashion within the Datadog site
+- View service data based on environment or version in a unified fashion
 
 {{< img src="tagging/unified_service_tagging/overview.mp4" alt="Unified Service Tagging" video=true >}}
 
@@ -50,7 +51,7 @@ With these three tags you can:
 
 ## Configuration
 
-To begin configuration of unified service tagging, choose your environment:
+To start configuring unified service tagging, choose your environment:
 
 - [Containerized](#containerized-environment)
 - [Non-Containerized](#non-containerized-environment)
@@ -65,12 +66,14 @@ To setup unified service tagging in a containerized environment:
 
 2. If you are using [Docker][2], make sure the Agent can access your container's [Docker socket][7]. This allows the Agent detect the environment variables and map them to the standard tags.
 
-4. Configure your environment based on either full configuration or partial configuration detailed below.
+3. Configure your environment that corresponds to your container orchestration service based on either full configuration or partial configuration as detailed below.
 
 #### Configuration
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
+
+If you deployed the Datadog Cluster Agent with [Admission Controller][1] enabled, the Admission Controller mutates the pod manifests and injects all required environment variables (based on configured mutation conditions). In that case, manual configuration of `DD_` environment variables in pod manifests is unnecessary. For more information, see the [Admission Controller documentation][1].
 
 ##### Full configuration
 
@@ -122,7 +125,7 @@ template:
       tags.datadoghq.com/service: "<SERVICE>"
       tags.datadoghq.com/version: "<VERSION>"
 ```
-These labels cover pod-level Kubernetes CPU, memory, network, and disk metrics, and can be used for injecting `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` into your service's container through [Kubernetes's downward API][1].
+These labels cover pod-level Kubernetes CPU, memory, network, and disk metrics, and can be used for injecting `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` into your service's container through [Kubernetes's downward API][2].
 
 If you have multiple containers per pod, you can specify standard labels by container:
 
@@ -134,9 +137,9 @@ tags.datadoghq.com/<container-name>.version
 
 ###### State metrics
 
-To configure [Kubernetes State Metrics][2]:
+To configure [Kubernetes State Metrics][3]:
 
-1. Set `join_standard_tags` to `true` in your [configuration file][3].
+1. Set `join_standard_tags` to `true` in your configuration file. See this [example configuration file][4] for the setting location.
 
 2. Add the same standard labels to the collection of labels for the parent resource, for example: `Deployment`.
 
@@ -159,7 +162,7 @@ To configure [Kubernetes State Metrics][2]:
 
 ###### APM tracer and StatsD client
 
-To configure [APM tracer][4] and [StatsD client][5] environment variables, use the [Kubernetes's downward API][1] in the format below:
+To configure [APM tracer][5] and [StatsD client][6] environment variables, use the [Kubernetes's downward API][2] in the format below:
 
 ```yaml
 containers:
@@ -179,17 +182,19 @@ containers:
               fieldPath: metadata.labels['tags.datadoghq.com/version']
 ```
 
-[1]: https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/#capabilities-of-the-downward-api
-[2]: /agent/kubernetes/data_collected/#kube-state-metrics
-[3]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example#L70
-[4]: /tracing/send_traces/
-[5]: /integrations/statsd/
+
+[1]: /agent/cluster_agent/admission_controller/
+[2]: https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/#capabilities-of-the-downward-api
+[3]: /agent/kubernetes/data_collected/#kube-state-metrics
+[4]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example
+[5]: /tracing/send_traces/
+[6]: /integrations/statsd/
 {{% /tab %}}
 
 {{% tab "Docker" %}}
 ##### Full configuration
 
-Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables and corresponding Docker labels for your container to your get the full range of unified service tagging.
+Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables and corresponding Docker labels for your container to get the full range of unified service tagging.
 
 The values for `service` and `version` can be provided in the Dockerfile:
 
@@ -252,13 +257,12 @@ Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables and corre
     "name": "DD_VERSION",
     "value": "<VERSION>"
   }
-
+],
 "dockerLabels": {
   "com.datadoghq.tags.env": "<ENV>",
   "com.datadoghq.tags.service": "<SERVICE>",
   "com.datadoghq.tags.version": "<VERSION>"
-  }
-]
+}
 ```
 
 ##### Partial configuration
@@ -278,74 +282,95 @@ If your service has no need for the Datadog environment variables (for example, 
 
 ### Non-containerized environment
 
-Depending on how you build and deploy your services' binaries or executables, you may have several options available for setting environment variables. Since you may run one or more services per host, it is recommended that these environment variables be scoped to a single process.
+Depending on how you build and deploy your services' binaries or executables, you may have several options available for setting environment variables. Since you may run one or more services per host, Datadog recommends scoping these environment variables to a single process.
 
-To form a single point of configuration for all telemetry emitted directly from your service's runtime for [traces][8], [logs][9], and [StatsD metrics][10], you can either:
+To form a single point of configuration for all telemetry emitted directly from your services' runtime for [traces][8], [logs][9], [RUM resources][10], [Synthetics tests][11], [StatsD metrics][12], or system metrics, either:
 
 1. Export the environment variables in the command for your executable:
+   
+   ```
+   DD_ENV=<env> DD_SERVICE=<service> DD_VERSION=<version> /bin/my-service
+   ```
 
-    `DD_ENV=<env> DD_SERVICE=<service> DD_VERSION=<version> /bin/my-service`
+2. Or use [Chef][13], [Ansible][14], or another orchestration tool to populate a service's systemd or initd configuration file with the `DD` environment variables. When the service process starts, it has access to those variables.
 
-2. Or use [Chef][11], [Ansible][12], or another orchestration tool to populate a service's systemd or initd configuration file with the `DD` environment variables. That way when the service process is started it has access to those variables.
+   {{< tabs >}}
+   {{% tab "Traces" %}}
 
-{{< tabs >}}
-{{% tab "Traces" %}}
+   When configuring your traces for unified service tagging:
 
-When configuring your traces for unified service tagging:
+   1. Configure the [APM Tracer][1] with `DD_ENV` to keep the definition of `env` closer to the application that is generating the traces. This method allows the `env` tag to be sourced automatically from a tag in the span metadata.
 
-1. Configure the [APM Tracer][1] with `DD_ENV` to keep the definition of `env` closer to the application that is generating the traces. This method allows the `env` tag to be sourced automatically from a tag in the span metadata.
+   2. Configure spans with `DD_VERSION` to add version to all spans that fall under the service that belongs to the tracer (generally `DD_SERVICE`). This means that if your service creates spans with the name of an external service, those spans do not receive `version` as a tag.
 
-2. Configure spans with `DD_VERSION` to add version to all spans that fall under the service that belongs to the tracer (generally `DD_SERVICE`). This means that if your service creates spans with the name of an external service, those spans do not receive `version` as a tag.
+      As long as version is present in spans, it is added to trace metrics generated from those spans. The version can be added manually in-code or automatically by the APM Tracer. When configured, these are used by the APM and [DogStatsD clients][2] to tag trace data and StatsD metrics with `env`, `service`, and `version`. If enabled, the APM tracer also injects the values of these variables into your logs.
 
-    As long as version is present in spans, it is added to trace metrics generated from those spans. The version can be added manually in-code or automatically by the APM Tracer. When configured, these are used by the APM and [DogStatsD clients][2] to tag trace data and StatsD metrics with `env`, `service`, and `version`. If enabled, the APM tracer also injects the values of these variables into your logs.
-
-    **Note**: There can only be **one service per span**. Trace metrics generally have a single service as well. However, if you have a different service defined in your hosts' tags, that configured service tag shows up on all trace metrics emitted from that host.
+      **Note**: There can only be **one service per span**. Trace metrics generally have a single service as well. However, if you have a different service defined in your hosts' tags, that configured service tag shows up on all trace metrics emitted from that host.
 
 [1]: /tracing/setup/
 [2]: /developers/dogstatsd/
-{{% /tab %}}
+   {{% /tab %}}
 
-{{% tab "Logs" %}}
+   {{% tab "Logs" %}}
 
-If you're using [connected logs and traces][1], enable automatic logs injection if supported for your APM Tracer. Then, the APM Tracer automatically injects `env`, `service`, and `version` into your logs, therefore eliminating manual configuration for those fields elsewhere.
+   If you're using [connected logs and traces][1], enable automatic logs injection if supported for your APM Tracer. Then, the APM Tracer automatically injects `env`, `service`, and `version` into your logs, therefore eliminating manual configuration for those fields elsewhere.
 
-**Note**: The PHP Tracer does not support configuration of unified service tagging for logs.
+   **Note**: The PHP Tracer does not support configuration of unified service tagging for logs.
 
-[1]: /tracing/connect_logs_and_traces/
-{{% /tab %}}
+[1]: /tracing/other_telemetry/connect_logs_and_traces/
+   {{% /tab %}}
 
-{{% tab "Custom Metrics" %}}
+   {{% tab "RUM & Session Replay" %}}
 
-Tags are added in an append-only fashion for [custom statsd metrics][1]. For example, if you have two different values for `env`, the metrics are tagged with both environments. There is no order in which one tag overrides another of the same name.
+   If you're using [connected RUM and traces][1], specify the browser application in the `service` field, define the environment in the `env` field, and list the versions in the `version` field of your initialization file. 
 
-If your service has access to `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`, then the DogStatsD client automatically adds the corresponding tags to your custom metrics.
+   When you [create a RUM application][2], confirm the `env` and `service` names.
 
-**Note**: The Datadog DogStatsD clients for .NET and PHP do not yet support this functionality.
+
+[1]: /real_user_monitoring/connect_rum_and_traces/
+[2]: /real_user_monitoring/browser/#setup
+   {{% /tab %}}
+
+   {{% tab "Synthetics" %}}
+
+   If you're using [connected Synthetic browser tests and traces][1], specify a URL to send headers to under the **APM Integration for Browser Tests** section of the [Integration Settings page][2]. 
+
+   You can use `*` for wildcards, for example: `https://*.datadoghq.com`.
+
+[1]: /synthetics/apm/
+[2]: https://app.datadoghq.com/synthetics/settings/integrations
+   {{% /tab %}}
+
+   {{% tab "Custom Metrics" %}}
+
+   Tags are added in an append-only fashion for [custom StatsD metrics][1]. For example, if you have two different values for `env`, the metrics are tagged with both environments. There is no order in which one tag overrides another of the same name.
+
+   If your service has access to `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`, then the DogStatsD client automatically adds the corresponding tags to your custom metrics.
+
+   **Note**: The Datadog DogStatsD clients for .NET and PHP do not support this functionality.
 
 [1]: /metrics/
-{{% /tab %}}
+   {{% /tab %}}
 
-{{% tab "System Metrics" %}}
+   {{% tab "System Metrics" %}}
 
-`env` and `service` can also be added to your infrastructure metrics.
+   You can add `env` and `service` tags to your infrastructure metrics. In non-containerized contexts, tagging for service metrics is configured at the Agent level.
 
-The tagging configuration for service metrics lives closer to the Agent in non-containerized contexts.
-Given that this configuration does not change for each invocation of a service's process, adding `version`
-to the configuration is not recommended.
+   Because this configuration does not change for each invocation of a service's process, adding `version` is not recommended.
 
-##### Single service per host
+#### Single service per host
 
 Set the following configuration in the Agent's [main configuration file][1]:
 
 ```yaml
 env: <ENV>
 tags:
-    - service:<SERVICE>
+  - service:<SERVICE>
 ```
 
 This setup guarantees consistent tagging of `env` and `service` for all data emitted by the Agent.
 
-##### Multiple services per host
+#### Multiple services per host
 
 Set the following configuration in the Agent's [main configuration file][1]:
 
@@ -353,7 +378,7 @@ Set the following configuration in the Agent's [main configuration file][1]:
 env: <ENV>
 ```
 
-To get unique `service` tags on CPU, memory, and disk I/O metrics at the process level, you can configure a [process check][2]:
+To get unique `service` tags on CPU, memory, and disk I/O metrics at the process level, configure a [process check][2] in the Agent's configuration folder (for example, in the `conf.d` folder under `process.d/conf.yaml`):
 
 ```yaml
 init_config:
@@ -372,131 +397,15 @@ instances:
 
 [1]: /agent/guide/agent-configuration-files
 [2]: /integrations/process
-{{% /tab %}}
-{{< /tabs >}}
+    {{% /tab %}}
+    {{< /tabs >}}
 
 ### Serverless environment
 
-#### AWS Lambda functions
-
-Depending on how you build and deploy your AWS Lambda-based serverless applications, you may have several options available for applying the `env`, `service` and `version` tags to metrics, traces and logs.
-
-*Note*: These tags are specified through AWS resource tags instead of environment variables.
-
-{{< tabs >}}
-
-{{% tab "Serverless Framework" %}}
-
-Tag your Lambda functions using the [tags][1] option:
-
-```yaml
-# serverless.yml
-service: service-name
-provider:
-  name: aws
-  # to apply the tags to all functions
-  tags:
-    env: "<ENV>"
-    service: "<SERVICE>"
-    version: "<VERSION>"
-
-functions:
-  hello:
-    # this function will inherit the service level tags config above
-    handler: handler.hello
-  world:
-    # this function will overwrite the tags
-    handler: handler.users
-    tags:
-      env: "<ENV>"
-      service: "<SERVICE>"
-      version: "<VERSION>"
-```
-
-If you have installed the [Datadog serverless plugin][2], the plugin automatically tags the Lambda functions with the `service` and `env` tags using the `service` and `stage` values from the serverless application definition, unless a `service` or `env` tag already exists.
-
-[1]: https://www.serverless.com/framework/docs/providers/aws/guide/functions#tags
-[2]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
-{{% /tab %}}
-
-{{% tab "AWS SAM" %}}
-
-Tag your Lambda functions using the [Tags][1] option:
-
-```yaml
-AWSTemplateFormatVersion: '2010-09-09'
-Transform: AWS::Serverless-2016-10-31
-Resources:
-  MyLambdaFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      Tags:
-        env: "<ENV>"
-        service: "<SERVICE>"
-        version: "<VERSION>"
-```
-
-If you have installed the [Datadog serverless macro][2], you can also specify a `service` and `env` tag as parameters:
-
-```yaml
-Transform:
-  - AWS::Serverless-2016-10-31
-  - Name: DatadogServerless
-    Parameters:
-      service: "<SERVICE>"
-      env: "<ENV>"
-```
-
-
-[1]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-function.html#sam-function-tags
-[2]: https://docs.datadoghq.com/serverless/serverless_integrations/macro
-{{% /tab %}}
-
-{{% tab "AWS CDK" %}}
-
-Tag your app, stack, or individual Lambda functions using the [Tags class][1]. If you have installed the [Datadog serverless macro][2], you can also specify a `service` and `env` tag as parameters:
-
-```javascript
-import * as cdk from "@aws-cdk/core";
-
-class CdkStack extends cdk.Stack {
-  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
-    super(scope, id, props);
-    this.addTransform("DatadogServerless");
-
-    new cdk.CfnMapping(this, "Datadog", {
-      mapping: {
-        Parameters: {
-          service: "<SERVICE>",
-          env: "<ENV>",
-        },
-      },
-    });
-  }
-}
-```
-
-
-[1]: https://docs.aws.amazon.com/cdk/latest/guide/tagging.html
-[2]: https://docs.datadoghq.com/serverless/serverless_integrations/macro
-{{% /tab %}}
-
-{{% tab "Custom" %}}
-
-Apply the `env`, `service` and `version` tags following the AWS instructions for [Tagging Lambda Functions][1].
-
-
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-tags.html
-{{% /tab %}}
-
-{{< /tabs >}}
-
-Ensure the `DdFetchLambdaTags` option is set to `true` on the CloudFormation stack for your [Datadog Forwarder][13]. This option defaults to `true` since version `3.19.0`.
-
+For more information about AWS Lambda functions, see [how to connect your Lambda telemetry using tags][15].
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /getting_started/tagging/
 [2]: /agent/docker/integrations/?tab=docker
@@ -507,7 +416,9 @@ Ensure the `DdFetchLambdaTags` option is set to `true` on the CloudFormation sta
 [7]: /agent/docker/?tab=standard#optional-collection-agents
 [8]: /getting_started/tracing/
 [9]: /getting_started/logs/
-[10]: /integrations/statsd/
-[11]: https://www.chef.io/
-[12]: https://www.ansible.com/
-[13]: /serverless/forwarder/
+[10]: /real_user_monitoring/connect_rum_and_traces/
+[11]: /getting_started/synthetics/
+[12]: /integrations/statsd/
+[13]: https://www.chef.io/
+[14]: https://www.ansible.com/
+[15]: /serverless/configuration/#connect-telemetry-using-tags

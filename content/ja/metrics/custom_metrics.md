@@ -1,22 +1,26 @@
 ---
-title: カスタムメトリクス
-kind: documentation
 aliases:
-  - /ja/guides/metrics/
-  - /ja/metrictypes/
-  - /ja/units/
-  - /ja/metrics/datagram_shell
-  - /ja/metrics/custom_metrics/
-  - /ja/getting_started/custom_metrics
-  - /ja/metrics/
+- /ja/guides/metrics/
+- /ja/metrictypes/
+- /ja/units/
+- /ja/developers/metrics/datagram_shell
+- /ja/developers/metrics/custom_metrics/
+- /ja/getting_started/custom_metrics
+- /ja/developers/metrics/
 further_reading:
-  - link: /developers/dogstatsd/
-    tag: ドキュメント
-    text: DogStatsD について
-  - link: /developers/community/libraries/
-    tag: ドキュメント
-    text: 公式/コミュニティ作成の API および DogStatsD クライアントライブラリ
+- link: /developers/dogstatsd/
+  tag: ドキュメント
+  text: DogStatsD について
+- link: /developers/community/libraries/
+  tag: ドキュメント
+  text: 公式/コミュニティ作成の API および DogStatsD クライアントライブラリ
+- link: https://www.datadoghq.com/blog/metrics-without-limits/
+  tag: ブログ
+  text: Metrics without Limits™ でカスタムメトリクスのボリュームをダイナミックにコントロール
+kind: documentation
+title: カスタムメトリクス
 ---
+
 ## 概要
 
 メトリクスが [{{< translate key="integration_count" >}} 種以上の Datadog インテグレーション][1]以外から送信された場合、そのメトリクスはカスタムメトリクス<sup>[(1)][2]</sup>とみなされます。カスタムメトリクスを使うと、訪問者数、カスタムバケットの平均サイズ、リクエストレイテンシー、カスタムアルゴリズムのパフォーマンス分布など、アプリケーションの KPI を追跡することができます。
@@ -27,15 +31,15 @@ further_reading:
 
 ## カスタムメトリクスのプロパティ
 
-Datadog のカスタムメトリクスには、以下のプロパティがあります。Datadog 内でメトリクスをグラフ化する方法については、[メトリクスの概要のドキュメント][7]を参照してください。
+Datadog のカスタムメトリクスには、以下のプロパティがあります。Datadog 内でメトリクスをグラフ化する方法については、[メトリクスの概要][7]をお読みください。
 
 | プロパティ         | 説明                                                                                                                                                  |
 |------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `<METRIC_NAME>`  | [メトリクスの名前](#naming-custom-metrics)。                                                                                                                  |
-| `<METRIC_VALUE>` | メトリクスの値。**注**: メトリクス値は 32 ビットである必要があります。                                                                                                                                 |
+| `<METRIC_VALUE>` | メトリクスの値。**注**: メトリクスの値は 32 ビットである必要があります。値は日付またはタイムスタンプを反映できません。                                                                                                                                |
 | `<タイムスタンプ>`    | メトリクスの値に関連付けられたタイムスタンプ。**注**: メトリクスのタイムスタンプは、未来は 10 分、過去は 1 時間を超えることはできません。 |
 | `<タグ>`         | メトリクスに関連付けられているタグセット。                                                                                                                 |
-| `<METRIC_TYPE>`  | メトリクスのタイプ。[メトリクスのタイプのドキュメント][8]を参照してください。                                                                                             |
+| `<METRIC_TYPE>`  | メトリクスのタイプ。[メトリクスのタイプ][8]をお読みください。                                                                                             |
 | `<INTERVAL>`     | メトリクスの `<TYPE>` が [RATE][9] または [COUNT][10] の場合は、その[間隔][11]を定義します。                                                       |
 
 ### カスタムメトリクスの名前
@@ -53,9 +57,9 @@ Datadog のカスタムメトリクスには、以下のプロパティがあり
 ## カスタムメトリクスの送信
 
 {{< whatsnext desc="メトリクスを Datadog に送信する方法は複数あります。">}}
-    {{< nextlink href="/metrics/agent_metrics_submission" >}}カスタム Agent チェック{{< /nextlink >}}
-    {{< nextlink href="/metrics/dogstatsd_metrics_submission" >}}DogStatsD{{< /nextlink >}}
-    {{< nextlink href="/metrics/powershell_metrics_submission" >}}PowerShell{{< /nextlink >}}
+    {{< nextlink href="/metrics/custom_metrics/agent_metrics_submission" >}}カスタム Agent チェック{{< /nextlink >}}
+    {{< nextlink href="/metrics/custom_metrics/dogstatsd_metrics_submission" >}}DogStatsD{{< /nextlink >}}
+    {{< nextlink href="/metrics/custom_metrics/powershell_metrics_submission" >}}PowerShell{{< /nextlink >}}
     {{< nextlink href="/serverless/custom_metrics" >}}AWS Lambda{{< /nextlink >}}
     {{< nextlink href="/api/v1/metrics/#submit-metrics" >}}Datadog の HTTP API{{< /nextlink >}}
     {{< nextlink href="/logs/log_configuration/logs_to_metrics/#generate-a-log-based-metric" >}}ログベースのメトリクスを生成する{{< /nextlink >}}
@@ -75,8 +79,8 @@ Datadog のカスタムメトリクスには、以下のプロパティがあり
 
 [1]: /ja/integrations/
 [2]: /ja/account_management/billing/custom_metrics/#standard-integrations
-[3]: /ja/metrics/dogstatsd_metrics_submission/
-[4]: /ja/metrics/agent_metrics_submission/
+[3]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/
+[4]: /ja/metrics/custom_metrics/agent_metrics_submission/
 [5]: https://app.datadoghq.com/account/usage/hourly
 [6]: /ja/account_management/billing/custom_metrics/#counting-custom-metrics
 [7]: /ja/metrics

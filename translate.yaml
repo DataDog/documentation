@@ -1,35 +1,20 @@
 ---
-enabled: true
-enabled_send: true
-enabled_receive: true
-transifex:
-  org: 'datadog'
-  project_slug: 'documentation_loc'
-  user: 'api'
-sources:
-- src: "content/en/**/*.md"
-  dst: "content/{lang}/**/*.md"
-- src: "data/api/**/translate_actions.json"
-  dst: "data/api/**/translate_actions.{lang}.json"
-- src: "data/api/**/translate_tags.json"
-  dst: "data/api/**/translate_tags.{lang}.json"
-- src: "data/partials/*.yaml"
-  dst: "*.{lang}.yaml"
-- src: "i18n/en.json"
-  dst: "{lang}.json"
-- src: "config/_default/params.en.yaml"
-  dst: "config/_default/params.{lang}.yaml"
-- src: "config/_default/menus/menus.en.yaml"
-  dst: "config/_default/menus/menus.{lang}.yaml"
-- src: "content/en/agent/faq/agent_v6_changes.md"
-  dst: "content/{lang}/agent/faq/agent_v6_changes.md"
-- src: "content/en/agent/faq/certificate_verify_failed-error.md"
-  dst: "content/{lang}/agent/faq/certificate_verify_failed-error.md"
+# New params
+receive_enabled: true
+sync_enabled: true
 
+# if true, no github or transifex api writes will happen.
+# instead logs will be created to simulate results.
+sync_dry_run_enabled: false
+
+# These files will be ignored or deleted when syncing with Transifex.
 ignores:
   - "content/en/**/faq/!(agent_v6_changes|certificate_verify_failed-error).md"
-  - "content/en/security_platform/default_rules/*.md"
-  - "content/en/security_monitoring/default_rules/*.md"
+  - "content/en/security/default_rules/*.md"
+  - "content/en/integrations/rapdev_services.md"
+  - "content/en/workflows/actions_catalog/*.md"
+  - "content/en/api/v1/**/*.md"
+  - "content/en/api/v2/**/*.md"
   - "**/*.fr.md"
   - "**/*.fr.yaml"
   - "**/*.fr.json"
@@ -38,26 +23,28 @@ ignores:
   - "**/*.ja.yaml"
   - "**/*.ja.json"
   - "**/ja.json"
-filters:
-- src: "data/integrations/*.yaml"
-  template: ".translate/templates/integrations.yaml"
-langs:
-- lang_country: "fr_FR"
-  lang: "fr"
-- lang_country: "ja"
-  lang: "ja"
-github:
-  org: 'DataDog'
-  repo: 'documentation'
-  branch_from: 'master'
-  commit_message: 'Adding translations'
-  pr_to: 'master'
-  pr_title: 'Translation PR'
-  pr_body: 'This is an automated PR created by the scheduled translation task pulling the latest translated files'
-  pr_labels:
-    - "Translation"
-  pr_preview_base_url: "https://docs-staging.datadoghq.com"
-reviewers:
-  - name: 'David Jones'
-    github_user: 'davidejones'
-    slack_user: 'david.jones'
+
+# These files will be uploaded to Transifex for translation when syncing.
+sources:
+- src: "content/en/**/*.md"
+  dst: "content/{lang}/**/*.md"
+- src: "data/api/**/translate_actions.json"
+  dst: "data/api/**/translate_actions.{lang}.json"
+- src: "data/api/**/translate_tags.json"
+  dst: "data/api/**/translate_tags.{lang}.json"
+- src: "data/partials/*.yaml"
+  dst: "data/partials/*.{lang}.yaml"
+- src: "i18n/en.json"
+  dst: "i18n/{lang}.json"
+- src: "config/_default/params.en.yaml"
+  dst: "config/_default/params.{lang}.yaml"
+- src: "config/_default/menus/menus.en.yaml"
+  dst: "config/_default/menus/menus.{lang}.yaml"
+- src: "content/en/agent/faq/agent_v6_changes.md"
+  dst: "content/{lang}/agent/faq/agent_v6_changes.md"
+- src: "content/en/agent/faq/certificate_verify_failed-error.md"
+  dst: "content/{lang}/agent/faq/certificate_verify_failed-error.md"
+- src: "content/en/workflows/actions_catalog/_index.md"
+  dst: "content/{lang}/workflows/actions_catalog/_index.md"
+- src: "content/en/workflows/actions_catalog/generic_actions.md"
+  dst: "content/{lang}/workflows/actions_catalog/generic_actions.md"

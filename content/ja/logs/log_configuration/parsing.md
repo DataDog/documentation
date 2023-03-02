@@ -1,30 +1,31 @@
 ---
-title: パース
-kind: documentation
-description: Grok プロセッサーを使用してログをパースする
 aliases:
-  - /ja/logs/parsing/
-  - /ja/logs/processing/parsing
+- /ja/logs/parsing/
+- /ja/logs/processing/parsing
+description: Grok プロセッサーを使用してログをパースする
 further_reading:
-  - link: /logs/log_configuration/processors
-    tag: ドキュメント
-    text: ログの処理方法
-  - link: /logs/faq/how-to-investigate-a-log-parsing-issue/
-    tag: よくあるご質問
-    text: ログのパースに関する問題を調査する方法
-  - link: /logs/guide/log-parsing-best-practice/
-    tag: よくあるご質問
-    text: ログのパース - ベストプラクティス
-  - link: /logs/logging_without_limits/
-    tag: ドキュメント
-    text: Datadog でインデックス化するログの量を制御する
+- link: /logs/log_configuration/processors
+  tag: ドキュメント
+  text: ログの処理方法
+- link: /logs/faq/how-to-investigate-a-log-parsing-issue/
+  tag: よくあるご質問
+  text: ログのパースに関する問題を調査する方法
+- link: /logs/guide/log-parsing-best-practice/
+  tag: よくあるご質問
+  text: ログのパース - ベストプラクティス
+- link: /logs/logging_without_limits/
+  tag: ドキュメント
+  text: Datadog でインデックス化するログの量を制御する
+kind: documentation
+title: パース
 ---
+
 ## 概要
 
 Datadog は JSON 形式のログを自動的にパースしますが、その他の形式の場合は、Grok パーサーを利用してログを補完できます。
 Grok 構文は、標準の正規表現より簡単にログをパースする方法を提供します。Grok パーサーにより、半構造化されたテキストメッセージから属性を抽出できます。
 
-Grok には再利用可能なパターンが付属しており、整数、IP アドレス、ホスト名などをパースするために使用できます。
+Grok には、整数、IP アドレス、ホスト名などをパースするための再利用可能なパターンが付属しています。これらの値は文字列として grok パーサーに送られなければなりません。
 
 パース規則は、`%{MATCHER:EXTRACT:FILTER}` 構文を使用して記述できます。
 
@@ -43,7 +44,7 @@ john connected on 11/08/2017
 これに次のパース規則を使用します。
 
 ```text
-MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):connect_date}
+MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):date}
 ```
 
 処理後は、次のような構造化ログが生成されます。
@@ -169,7 +170,7 @@ MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):connect_date}
 : User-Agent をパースして、Agent によって表されるデバイス、OS、ブラウザを含む JSON オブジェクトを返します。[ユーザーエージェントプロセッサーを参照してください][1]。
 
 `querystring`
-: 一致する URL クエリ文字列内のすべての key-value ペアを抽出します (例: `?productId=superproduct&amp;promotionCode=superpromo`)。
+: 一致する URL クエリ文字列内のすべての key-value ペアを抽出します (例: `?productId=superproduct&promotionCode=superpromo`)。
 
 `decodeuricomponent`
 : URI コンポーネントをデコードします。たとえば、'%2Fservice%2Ftest' は '/service/test' に変換されます。
@@ -193,7 +194,7 @@ MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):connect_date}
 : 抽出された数値を指定された factor で乗算します。
 
 `array([[openCloseStr, ] separator][, subRuleOrFilter)`
-: 文字列トークンシーケンスをパースして配列として返します。
+: 文字列トークンシーケンスをパースして配列として返します。[配列へのリスト](#list-to-array)の例を参照してください。
 
 `url`
 : URL をパースし、トークン化されたすべてのメンバー (ドメイン、クエリパラメーター、ポートなど) を 1 つの JSON オブジェクトとして返します。[URL のパース方法を参照してください][2]。
@@ -473,7 +474,7 @@ MyParsingRule %{regex("[a-z]*"):user.firstname}_%{regex("[a-zA-Z0-9]*"):user.id}
 
 ### リストから配列へ
 
-`array` マッチャーを使い、リストを 1 つの属性の配列に抽出します。
+リストを 1 つの属性の配列に取り出すには `array([[openCloseStr, ] separator][, subRuleOrFilter)` フィルターを使用します。`subRuleOrFilter` はオプションで、これらの[フィルター][4]を受け入れることができます。
 
 **ログの例**
 
@@ -484,11 +485,10 @@ MyParsingRule %{regex("[a-z]*"):user.firstname}_%{regex("[a-zA-Z0-9]*"):user.id}
 **規則の例**
 
 ```text
-myParsingRule ユーザー %{data:users:array(“[]“,”,“)} がデータベースに追加されました
+myParsingRule Users %{data:users:array("[]",",")} have been added to the database
 ```
 
 {{< img src="logs/processing/parsing/array_parsing.png" alt="パース例 6"  style="width:80%;" >}}
-
 
 **ログの例**
 
@@ -500,6 +500,12 @@ myParsingRule ユーザー %{data:users:array(“[]“,”,“)} がデータベ
 
 ```text
 myParsingRule ユーザー %{data:users:array("{}","-")} がデータベースに追加されました
+```
+
+**`subRuleOrFilter` を使用したルール**:
+
+```text
+myParsingRule Users %{data:users:array("{}","-", uppercase)} have been added to the database
 ```
 
 ### GLog 形式
@@ -640,3 +646,4 @@ myParsingRule %{data:user:csv("first_name,name,st_nb,st_name,city")}
 [1]: https://github.com/google/re2/wiki/Syntax
 [2]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 [3]: /ja/logs/log_configuration/processors/#log-date-remapper
+[4]: /ja/logs/log_configuration/parsing/?tab=filters&tabs=filters#matcher-and-filter

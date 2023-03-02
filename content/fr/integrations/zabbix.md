@@ -1,40 +1,66 @@
 ---
+app_id: zabbix
+app_uuid: 9b7022c4-95c7-4872-83b6-7eaba2cc9d88
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: zabbix.system.uptime
+      metadata_path: metadata.csv
+      prefix: zabbix.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Zabbix
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Communauté
+  sales_email: KosukeKamiya@users.noreply.github.com
+  support_email: KosukeKamiya@users.noreply.github.com
 categories:
-  - network
-  - monitoring
-creates_events: false
-ddtype: check
+- network
+- monitoring
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/zabbix/README.md'
-display_name: Zabbix
+- https://github.com/DataDog/integrations-extras/blob/master/zabbix/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: zabbix
-guid: bf1fa08e-3df3-40b7-ab1d-1ba685c3057d
 integration_id: zabbix
 integration_title: zabbix
+integration_version: 1.1.1
 is_public: true
 kind: integration
-maintainer: KosukeKamiya@users.noreply.github.com
-manifest_version: 1.0.0
-metric_prefix: zabbix.
-metric_to_check: zabbix.system.uptime
+manifest_version: 2.0.0
 name: zabbix
+oauth: {}
 public_title: zabbix
-short_description: Recueillez l'historique des éléments via l'API Zabbix et envoyez-les à Datadog en tant que métriques.
-support: contrib
+short_description: Recueillez l'historique des éléments via l'API Zabbix et envoyez-les
+  à Datadog en tant que métriques.
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Network
+  - Category::Monitoring
+  configuration: README.md#Setup
+  description: Recueillez l'historique des éléments via l'API Zabbix et envoyez-les
+    à Datadog en tant que métriques.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: zabbix
 ---
+
+
+
 ## Présentation
 
 Connectez-vous à Zabbix pour :
@@ -44,33 +70,49 @@ Connectez-vous à Zabbix pour :
 
 ## Configuration
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host.
+Le check Zabbix n'est pas inclus avec le package de l'[Agent Datadog][2] : vous devez donc l'installer.
 
 ### Installation
 
-Si vous utilisez la version 6.8 ou une version ultérieure de l'Agent, suivez les instructions ci-dessous pour installer le check Zabbix sur votre host. Consultez le guide relatif à l'[installation d'intégrations développées par la communauté][2] pour installer des checks avec une [version < 6.8 de l'Agent][3] ou avec l'[Agent Docker][4] :
+Pour l'Agent v7.21+/6.21+, suivez les instructions ci-dessous afin d'installer le check Zabbix sur votre host. Consultez la section [Utiliser les intégrations de la communauté][3] pour effectuer une installation avec l'Agent Docker ou avec des versions antérieures de l'Agent.
 
-1. [Téléchargez et lancez l'Agent Datadog][5].
-2. Exécutez la commande suivante pour installer le wheel de l'intégration à l'aide de l'Agent :
+1. Exécutez la commande suivante pour installer l'intégration de l'Agent :
 
    ```shell
    datadog-agent integration install -t datadog-zabbix==<INTEGRATION_VERSION>
    ```
-3. Configurez votre intégration comme [n'importe quelle autre intégration fournie avec l'Agent][5].
 
+2. Configurez votre intégration comme une [intégration][4] de base.
 
 ### Configuration
 
-1. Modifiez le fichier `zabbix.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance Zabbix. Consultez le [fichier d'exemple zabbix.d/conf.yaml][6] pour découvrir toutes les options de configuration disponibles.
+1. Assurez-vous que le fuseau d'horaire de votre serveur Zabbix est défini sur UTC. Pour en savoir plus sur les fuseaux horaires de Zabbix, consultez la [documentation Zabbix][5] (en anglais).
 
-2. [Redémarrez l'Agent][7].
+2. Modifiez le fichier `zabbix.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance Zabbix. Consultez le [fichier d'exemple zabbix.d/conf.yaml][6] pour découvrir toutes les options de configuration disponibles.
+
+3. [Redémarrez l'Agent][7].
 
 #### Collecte d'événements
 
 ##### Créer un type de support Datadog
 
 1. Accédez à *Administration > Media Types > Create Media Type*.
-2. Ajoutez la clé d'API Datadog en tant que paramètre, puis les template variables Zabbix suivantes en tant que paramètres : {ALERT.MESSAGE}, {ALERT.SUBJECT}, {EVENT.DATE}, {EVENT.NAME}, {EVENT.NSEVERITY}, {EVENT.TAGSJSON}, {EVENT.TIME}, {EVENT.VALUE}, {ITEM.NAME}.
+2. Ajoutez des paramètres au webhook à l'aide des template variables Zabbix. Ajoutez votre api_key Datadog et les template variables Zabbix suivantes sous forme de paramètres :
+
+| Paramètre            | Valeur                                |
+| -------------------- | ------------------------------------ |
+| `api_key`            | `Votre clé d'API Datadog`               |
+| `event_date`         | `{EVENT.DATE}`                       |
+| `event_name`         | `{EVENT.NAME}`                       |
+| `event_nseverity`    | `{EVENT.NSEVERITY}`                  |
+| `event_tags`         | `{EVENT.TAGSJSON}`                   |
+| `event_time`         | `{EVENT.TIME}`                       |
+| `event_value`        | `{EVENT.VALUE}`                      |
+| `item_name`          | `{ITEM.NAME}`                        |
+| `alert_message`      | `{ALERT.MESSAGE}`                    |
+| `alert_subject`      | `{ALERT.SUBJECT}`                    |
+
+
 3. Définissez **Name** sur `Datadog`, **Type** sur `Webhook` et **Script** sur le code suivant :
 ``` 
     try {
@@ -112,7 +154,7 @@ Si vous utilisez la version 6.8 ou une version ultérieure de l'Agent, suivez l
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][8] et cherchez `zabbix` dans la section Checks.
+Lancez la [sous-commande status de l'Agent][8] et cherchez `zabbix` dans la section Checks.
 
 ## Données collectées
 
@@ -120,25 +162,27 @@ Si vous utilisez la version 6.8 ou une version ultérieure de l'Agent, suivez l
 {{< get-metrics-from-git "zabbix" >}}
 
 
-### Checks de service
-
-`zabbix.can_connect` : renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'API Zabbix. Si ce n'est pas le cas, renvoie OK.
-
 ### Événements
 
 Les alertes Zabbix sont recueillies en tant qu'événements dans le flux d'événements Datadog.
 
+### Checks de service
+{{< get-service-checks-from-git "zabbix" >}}
+
+
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][10].
+Besoin d'aide ? Contactez [l'assistance Datadog][11].
+
 
 [1]: https://www.zabbix.com/
-[2]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/
-[3]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
-[4]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=docker
-[5]: https://docs.datadoghq.com/fr/getting_started/integrations/
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://docs.datadoghq.com/fr/agent/guide/use-community-integrations/
+[4]: https://docs.datadoghq.com/fr/getting_started/integrations/
+[5]: https://www.zabbix.com/documentation/current/en/manual/web_interface/time_zone
 [6]: https://github.com/DataDog/integrations-extras/blob/master/zabbix/datadog_checks/zabbix/data/conf.yaml.example
 [7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [9]: https://github.com/DataDog/integrations-extras/blob/master/zabbix/metadata.csv
-[10]: https://docs.datadoghq.com/fr/help/
+[10]: https://github.com/DataDog/integrations-extras/blob/master/zabbix/assets/service_checks.json
+[11]: https://docs.datadoghq.com/fr/help/

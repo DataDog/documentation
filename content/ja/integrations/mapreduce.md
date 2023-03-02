@@ -1,43 +1,68 @@
 ---
+app_id: mapreduce
+app_uuid: 25ae6f45-147b-478c-9f0c-5013c3859796
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     mapreduce: assets/dashboards/mapreduce_dashboard.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: mapreduce.job.elapsed_time.max
+      metadata_path: metadata.csv
+      prefix: mapreduce.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: MapReduce
   logs:
     source: mapreduce
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-  - processing
-  - autodiscovery
-  - log collection
-creates_events: false
-ddtype: check
+- processing
+- log collection
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/mapreduce/README.md'
-display_name: MapReduce
+- https://github.com/DataDog/integrations-core/blob/master/mapreduce/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: mapreduce
-guid: 1c143492-84ac-42d2-89d5-a45c718092b0
 integration_id: mapreduce
 integration_title: Map Reduce
+integration_version: 3.2.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: mapreduce.
-metric_to_check: mapreduce.job.elapsed_time.max
+manifest_version: 2.0.0
 name: mapreduce
-public_title: Datadog-Map Reduce インテグレーション
+oauth: {}
+public_title: Map Reduce
 short_description: マップのステータスと期間を監視し、タスクを削減。
-support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::処理
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: マップのステータスと期間を監視し、タスクを削減。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Map Reduce
 ---
+
+
+
 ![MapReduce ダッシュボード][1]
 
 ## 概要
@@ -49,7 +74,7 @@ mapreduce サービスからメトリクスをリアルタイムに取得して�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Mapreduce チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
@@ -65,22 +90,6 @@ Mapreduce チェックは [Datadog Agent][2] パッケージに含まれてい�
 1. サーバーとポートを指定し、監視するマスターを設定するには、[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `mapreduce.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル mapreduce.d/conf.yaml][2] を参照してください。
 
 2. [Agent を再起動します][3]。
-
-[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[2]: https://github.com/DataDog/integrations-core/blob/master/mapreduce/datadog_checks/mapreduce/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#restart-the-agent
-{{% /tab %}}
-{{% tab "Containerized" %}}
-
-#### コンテナ化
-
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
-
-| パラメーター            | 値                                                                                         |
-| -------------------- | --------------------------------------------------------------------------------------------- |
-| `<インテグレーション名>` | `mapreduce`                                                                                   |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                                                                                 |
-| `<インスタンスコンフィギュレーション>`  | `{"resourcemanager_uri": "https://%%host%%:8088", "cluster_name":"<MAPREDUCE_CLUSTER_NAME>"}` |
 
 ##### ログの収集
 
@@ -107,18 +116,41 @@ Mapreduce チェックは [Datadog Agent][2] パッケージに含まれてい�
 
 3. [Agent を再起動します][3]。
 
-Docker 環境でログを収集する Agent を構成する追加の情報に関しては、[Datadog ドキュメント][4]を参照してください。
-
-[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/mapreduce/datadog_checks/mapreduce/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#restart-the-agent
-[4]: https://docs.datadoghq.com/ja/agent/docker/log/
+{{% /tab %}}
+{{% tab "Containerized" %}}
+
+#### コンテナ化
+
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
+
+| パラメーター            | 値                                                                                         |
+| -------------------- | --------------------------------------------------------------------------------------------- |
+| `<インテグレーション名>` | `mapreduce`                                                                                   |
+| `<初期コンフィギュレーション>`      | 空白または `{}`                                                                                 |
+| `<インスタンスコンフィギュレーション>`  | `{"resourcemanager_uri": "https://%%host%%:8088", "cluster_name":"<MAPREDUCE_CLUSTER_NAME>"}` |
+
+##### ログの収集
+
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Docker ログ収集][2]を参照してください。
+
+次に、[ログインテグレーション][3]を Docker ラベルとして設定します。
+
+```yaml
+LABEL "com.datadoghq.ad.logs"='[{"source": "mapreduce", "service": "<SERVICE_NAME>"}]'
+```
+
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/docker/log/
+[3]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
 {{% /tab %}}
 {{< /tabs >}}
 
 ### 検証
 
-[Agent の `status` サブコマンドを実行][3]し、Checks セクションで `mapreduce` を検索します。
+[Agent の status サブコマンド][3]を実行し、Checks セクションで `mapreduce` を検索します。
 
 ## 収集データ
 

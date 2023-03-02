@@ -1,44 +1,70 @@
 ---
+app_id: proxysql
+app_uuid: aadfa11b-3de5-4827-9cdd-888c4e9587d0
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     ProxySQL Overview: assets/dashboards/overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: proxysql.active_transactions
+      metadata_path: metadata.csv
+      prefix: proxysql.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: ProxySQL
   logs:
     source: proxysql
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
-  - data store
-  - ログの収集
-  - キャッシュ
-creates_events: false
-ddtype: check
+- data store
+- ログの収集
+- キャッシュ
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/proxysql/README.md
-display_name: ProxySQL
+- https://github.com/DataDog/integrations-core/blob/master/proxysql/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: proxysql
-guid: 8d759c9d-eb9e-4c78-9f26-1c2c844233a5
 integration_id: proxysql
 integration_title: ProxySQL
+integration_version: 4.0.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: proxysql.
-metric_to_check: proxysql.active_transactions
+manifest_version: 2.0.0
 name: proxysql
-public_title: Datadog-ProxySQL インテグレーション
+oauth: {}
+public_title: ProxySQL
 short_description: ProxySQLメトリクスとログを収集。
-support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Data Store
+  - Category::Log Collection
+  - Category::Caching
+  configuration: README.md#Setup
+  description: ProxySQLメトリクスとログを収集。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: ProxySQL
 ---
+
+
+
 ## 概要
 
 このチェックは、Datadog Agent を通じて [ProxySQL][1] を監視します。
@@ -127,7 +153,7 @@ ProxySQL インテグレーションは [Datadog Agent][3] パッケージに含
 
 ##### ログの収集
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
 | パラメーター      | 値                                     |
 |----------------|-------------------------------------------|
@@ -164,6 +190,6 @@ ProxySQL チェックにはイベントは含まれません。
 
 [1]: https://proxysql.com/
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[3]: https://docs.datadoghq.com/ja/agent/
+[3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [5]: https://docs.datadoghq.com/ja/help

@@ -3,12 +3,15 @@ title: Incident Management
 kind: documentation
 description: Create and manage incidents
 further_reading:
-- link: "dashboards/querying/#incident-management-analytics"
-  tag: "Documentation"
-  text: "Incident Management Analytics"
-- link: 'https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/'
-  tag: 'Blog'
-  text: 'Best practices for writing incident postmortems'
+  - link: "https://app.datadoghq.com/release-notes?category=Incident%20Management"
+    tag: "Release Notes"
+    text: "Check out the latest Incident Management releases! (App login required)."
+  - link: "dashboards/querying/#incident-management-analytics"
+    tag: "Documentation"
+    text: "Incident Management Analytics"
+  - link: 'https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/'
+    tag: 'Blog'
+    text: 'Best practices for writing incident postmortems'
 ---
 
 {{< site-region region="gov" >}}
@@ -30,7 +33,9 @@ In the Datadog paradigm, any of the following are appropriate situations for dec
 
 Incident Management requires no installation. To view your incidents, go to the [Incidents][1] page to see a feed of all ongoing incidents. You can configure additional fields that appear for all incidents in [Incident Settings][2].
 
-**Note**: Manage and create incidents with the [Datadog Mobile App][3], available on the [Apple App Store][4] and [Google Play Store][5].
+**Note**: View your Incidents list from your mobile device home screen and manage/create incidents by downloading the [Datadog Mobile App][3], available on the [Apple App Store][4] and [Google Play Store][5].
+
+{{< img src="monitors/incidents/incidents-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Incidents on Mobile App">}}
 
 ### Creating an incident
 
@@ -59,6 +64,14 @@ You can declare an incident directly from a monitor by clicking **Declare incide
 You can also add a monitor to an existing incident.
 
 {{< img src="monitors/incidents/existing.png" alt="Add a monitor to an existing incident" style="width:80%;">}}
+
+#### From a Security Signal
+
+Declare an incident directly from a Cloud SIEM or Cloud Workload Security signal by clicking the kebab button on the top right of the side panel, and clicking **Declare incident**.
+
+Declare an incident from an Application Security Management signal by selecting the export button on the top right of the side panel, and clicking **Export to incident**.
+
+{{< img src="monitors/incidents/security-signal-incidents.png" alt="Create an incident from a security signal" style="width:80%;">}}
 
 #### From the Incidents page
 
@@ -177,13 +190,13 @@ For more information about Incident Management graphs, see [Incident Management 
 
 In addition to integrating with [Slack][7], Incident Management also integrates with:
 
-- [PagerDuty][13] to send incident notifications to PagerDuty.
-- [Jira][14] to create a Jira ticket for an incident.
-- [Webhooks][15] to send incident notifications using webhooks (for example, [sending SMS to Twilio][16]).
+- [PagerDuty][13] and [OpsGenie][14] to send incident notifications to your on-call engineers.
+- [Jira][15] to create a Jira ticket for an incident.
+- [Webhooks][16] to send incident notifications using webhooks (for example, [sending SMS to Twilio][17]).
 
 ## Ready to try it out?
 
-Work through an example workflow in the [Getting Started with Incident Management][17] guide.
+Work through an example workflow in the [Getting Started with Incident Management][18] guide.
 
 ## Further Reading
 
@@ -202,7 +215,8 @@ Work through an example workflow in the [Getting Started with Incident Managemen
 [11]: https://app.datadoghq.com/incidents/settings#Property-Fields
 [12]: /monitors/incident_management/analytics/#overview
 [13]: /integrations/pagerduty/
-[14]: /integrations/jira/
-[15]: /integrations/webhooks/
-[16]: /integrations/webhooks/#sending-sms-through-twilio
-[17]: /getting_started/incident_management
+[14]: /integrations/opsgenie/
+[15]: /integrations/jira/
+[16]: /integrations/webhooks/
+[17]: /integrations/webhooks/#sending-sms-through-twilio
+[18]: /getting_started/incident_management

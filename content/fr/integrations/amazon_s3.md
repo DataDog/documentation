@@ -1,28 +1,32 @@
 ---
 aliases:
-  - /fr/integrations/awss3/
+- /fr/integrations/awss3/
 categories:
-  - cloud
-  - data store
-  - aws
-  - os & system
-  - log collection
-ddtype: crawler
+- cloud
+- data store
+- aws
+- os & system
+- log collection
 dependencies: []
-description: 'Surveillez la latence des requêtes, le nombre de requêtes par type, la taille des compartiments et plus encore.'
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_s3/'
+description: Surveillez la latence des requêtes, le nombre de requêtes par type, la
+  taille des compartiments et plus encore.
+doc_link: https://docs.datadoghq.com/integrations/amazon_s3/
 draft: false
 git_integration_title: amazon_s3
 has_logo: true
+integration_id: amazon-s3
 integration_title: Amazon S3
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_s3
-public_title: "Intégration Datadog/Amazon\_S3"
-short_description: 'Surveillez la latence des requêtes, le nombre de requêtes par type, la taille des compartiments et plus encore.'
+public_title: Intégration Datadog/Amazon S3
+short_description: Surveillez la latence des requêtes, le nombre de requêtes par type,
+  la taille des compartiments et plus encore.
 version: '1.0'
 ---
+
 {{< img src="integrations/amazon_s3/s3_db_screenshot.png" alt="Dashboard S3" popup="true">}}
 
 ## Présentation
@@ -39,13 +43,13 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 #### Collecte de métriques
 
-1. Dans le [carré d'intégration AWS][2], assurez-vous que l'option `S3` est cochée dans la section concernant la collecte des métriques.
+1. Sur la [page de l'intégration AWS][2], vérifiez que `S3` est activé dans l'onglet `Metric Collection`.
 2. Ajoutez ces autorisations à votre [stratégie IAM Datadog][3] afin de recueillir des métriques d'Amazon S3 :
 
     - `s3:ListAllMyBuckets` : utilisé pour répertorier les compartiments disponibles.
     - `s3:GetBucketTagging` : utilisé pour récupérer les tags personnalisés du compartiment.
 
-    Pour en savoir plus sur les stratégies S3, consultez [la documentation disponible sur le site d'AWS][4].
+    Pour en savoir plus, consultez la section relative aux [stratégies S3][4] de la documentation AWS.
 
 3. Installez l'[intégration Datadog/AWS S3][5].
 4. (facultatif) Pour rassembler des **métriques de demandes**, [activez les métriques de demandes][6] pour vos compartiments Amazon S3 depuis la console AWS.
@@ -54,33 +58,34 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 #### Activer les logs d'accès S3
 
-Sélectionnez le compartiment S3 et cliquez sur l'onglet *properties* :
+1. Accédez au compartiment S3.
+2. Cliquez sur **Properties**.
+3. Accédez à la section Services Access Logging et cliquez sur **Edit**.
+4. Sélectionnez **Enable**.
+5. Sélectionnez le compartiment S3 vers lequel envoyer les logs.
 
-{{< img src="integrations/amazon_s3/selecting_s3_bucket.png" alt="Sélection compartiment S3" popup="true" style="width:70%;">}}
-
-Cliquez ensuite sur *Server access logging* et choisissez *enable* :
-
-{{< img src="integrations/amazon_s3/server_access_logging.png" alt="Server access logging S3" popup="true" style="width:70%;">}}
-
-Sélectionnez ensuite le compartiment s3 dans lequel les logs doivent être rédigés. Pour obtenir plus d'informations, consultez la [documentation dédiée à AWS S3][7].
+ Pour en savoir plus, consultez la page [Activation de la journalisation des accès au serveur Amazon S3][7].
 
 #### Envoyer des logs à Datadog
 
-1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][8].
+1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda du Forwarder Datadog][8] dans votre compte AWS. 
 2. Une fois la fonction Lambda installée, vous pouvez recueillir vos logs d'accès S3 de deux façons :
 
-    - Solution automatique : nous gérons les logs d'accès S3 si vous nous accordez les autorisations nécessaires. [Consultez le principal service Web d'Amazon pour configurer la collecte de logs automatique][9].
-    - Solution manuelle : ajoutez manuellement un déclencheur sur le compartiment s3 qui contient vos logs d'accès S3 dans la console AWS.
+    - Solution automatique : les logs S3 sont automatiquement gérés si vous accordez les autorisations nécessaires à Datadog. Consultez la section [Configurer automatiquement des déclencheurs][9] pour en savoir plus sur la configuration de la collecte automatique des logs sur la fonction Lambda du Forwarder Datadog.
+    - Solution manuelle : dans la console AWS, ajoutez un déclencheur sur le compartiment S3 qui contient vos logs d'accès S3. Consultez les [étapes de l'installation manuelle](#etapes-de-l-installation-manuelle).
 
 #### Étapes de l'installation manuelle
 
-1. Si vous ne l'avez pas déjà fait, configurez [la fonction Lambda de collecte de logs AWS avec Datadog][10].
-2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 contenant vos logs S3 dans la console AWS. Dans votre Lambda, cliquez sur S3 dans la liste des déclencheurs :
-   {{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="Configuration déclencheur S3" popup="true" style="width:70%;">}}
-   Configurez votre déclencheur en choisissant le compartiment S3 qui contient vos logs S3 et remplacez le type d'événement par `Object Created (All)`. Cliquez ensuite sur le bouton Add.
-   {{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="Configuration déclencheur Lambda S3" popup="true" style="width:70%;">}}
+1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda du Forwarder Datadog][8] dans votre compte AWS.
+2. Une fois la fonction Lambda configurée, accédez-y. Dans la section Function Overview, cliquez sur **Add Trigger**.
+3. Sélectionnez le déclencheur **S3** pour la Trigger Configuration.
+4. Sélectionnez le compartiment S3 où se trouvent vos logs S3.
+5. Ne changez pas le type d'événements `All object create events`.
+6. Cliquez sur **Add** pour ajouter le déclencheur à votre fonction Lambda.
 
-Accédez ensuite à la [section Log de Datadog][11] pour commencer à explorer vos logs !
+Accédez au [Log Explorer][10] pour commencer à explorer vos logs.
+
+Pour en savoir plus sur la collecte de logs de service AWS, consultez la section [Envoyer des logs de service AWS avec la fonction Lambda Datadog][11].
 
 ## Données collectées
 
@@ -88,7 +93,7 @@ Accédez ensuite à la [section Log de Datadog][11] pour commencer à explorer v
 {{< get-metrics-from-git "amazon_s3" >}}
 
 
-Chacune des métriques récupérées à partir d'AWS se verra assigner les mêmes tags que ceux qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le hostname et les groupes de sécurité.
+Chacune des métriques récupérées à partir d'AWS se voit assigner les mêmes tags que ceux qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le hostname et les groupes de sécurité.
 
 ### Événements
 
@@ -102,18 +107,19 @@ L'intégration AWS S3 n'inclut aucun check de service.
 
 ### Log chiffré CloudTrail
 
-Si vos données de logs AWS CloudTrail sont chiffrées par KMS dans votre AWS S3, autorisez le rôle Datadog à déchiffrer les données de logs Cloudtrail avec la stratégie suivante : `kms:Decrypt`. [En savoir plus sur votre stratégie de chiffrement/déchiffrement KMS][13].
+Si vos données de logs AWS CloudTrail sont chiffrées par KMS dans votre AWS S3, autorisez le rôle Datadog à déchiffrer les données de logs CloudTrail avec la stratégie suivante : `kms:Decrypt`. [En savoir plus sur votre stratégie de chiffrement/déchiffrement KMS][13].
+
 
 [1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
-[4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_s3.html
-[5]: https://app.datadoghq.com/account/settings#integrations/amazon_s3
+[4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-overview.html
+[5]: https://app.datadoghq.com/integrations/amazon-s3
 [6]: http://docs.aws.amazon.com/AmazonS3/latest/dev/cloudwatch-monitoring.html
 [7]: https://docs.aws.amazon.com/AmazonS3/latest/user-guide/server-access-logging.html
-[8]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#create-a-new-lambda-function
+[8]: https://docs.datadoghq.com/fr/logs/guide/forwarder/
 [9]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#log-collection
-[10]: /fr/integrations/amazon_web_services/#create-a-new-lambda-function
-[11]: https://app.datadoghq.com/logs
+[10]: https://app.datadoghq.com/logs
+[11]: https://docs.datadoghq.com/fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
 [12]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_s3/amazon_s3_metadata.csv
 [13]: https://docs.aws.amazon.com/kms/latest/developerguide/iam-policies.html#iam-policy-example-encrypt-decrypt-one-account

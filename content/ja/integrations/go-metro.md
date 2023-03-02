@@ -1,42 +1,63 @@
 ---
+app_id: go-metro
+app_uuid: 77c9906a-9579-4014-95c3-42b4536dc17d
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: system.net.tcp.rtt
+      metadata_path: metadata.csv
+      prefix: system.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Go-Metro
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-  - languages
-creates_events: false
-ddtype: check
+- languages
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/go-metro/README.md'
-display_name: Go-Metro
+- https://github.com/DataDog/integrations-core/blob/master/go-metro/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: go-metro
-guid: 6d00688b-32b1-4755-98cd-44bd1bd40428
 integration_id: go-metro
 integration_title: Go-Metro
+integration_version: ''
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: system.
-metric_to_check: system.net.tcp.rtt
+manifest_version: 2.0.0
 name: go-metro
-public_title: Datadog-Go-Metro インテグレーション
+oauth: {}
+public_title: Go-Metro
 short_description: ホスト間の TCP RTT を受動的に計算
-support: コア
 supported_os:
-  - linux
+- linux
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Category::言語
+  configuration: README.md#Setup
+  description: ホスト間の TCP RTT を受動的に計算
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Go-Metro
 ---
+
+
+
 ## 概要
 
 TCP RTT チェックは、Agent が実行されているホストと Agent の通信相手のホストの間のラウンドトリップ回数を報告します。このチェックは受動的で、チェックの外部から送信されて受信したパケットの RTT 回数のみを報告します。チェック自身はパケットを送信しません。
 
-このチェックは、64 ビットの DEB および RPM Datadog Agent v5 パッケージにのみ付属しています。現在、このチェックは Datadog Agent v6 では**使用できません**。
+このチェックは、64 ビットの DEB および RPM Datadog Agent v5 パッケージにのみ付属しています。このチェックは Datadog Agent v6 では**使用できません**。
 
 ## セットアップ
 
@@ -90,7 +111,7 @@ instances:
       - app.datadoghq.com
 ```
 
-*注*: go-metro を権限のない状態で実行するには、バイナリで CAP_NET_RAW 機能を設定する必要があります。
+*注*: go-metro を権限のない状態で実行するには、バイナリで `CAP_NET_RAW` 機能を設定する必要があります。
 ```
 # 必要なライブラリをインストール
 $ sudo apt-get install libcap  # Debian
@@ -102,21 +123,15 @@ $ sudo yum install compat-libcap1  # Redhat の代替
 $ sudo setcap cap_net_raw+ep /opt/datadog-agent/bin/go-metro
 ```
 
-製品ごとにパッケージの名称が異なるため、上記の説明に従っても
-上手く操作できない場合には、`apt-cache search libcap` もしくは `yum search libcap` を発行してください。
-バイナリを提供するパッケージのショートリストが表示されます。
-サポートが必要な場合は、お気軽にお問い合わせください。
+ディストリビューションによってパッケージ名が異なるため、上記の手順がうまくいかない場合は、`apt-cache search libcap` または `yum search libcap` を実行して、バイナリを提供するパッケージのショートリストを入手してください。サポートが必要な場合は、[Datadog サポート][4]に連絡してください。
 
-また、go-metro は独自のファイルにログを記録することにご注意ください。ログは `/var/log/datadog/go-metro.log` にあります。
-さらに、go-metro はスタンドアロンで機能するため、現状では Agent の情報ページには表示 *されません*。
+**注**: go-metro は独自のファイルにログを記録することにご注意ください。ログは `/var/log/datadog/go-metro.log` にあります。さらに、go-metro はスタンドアロンで機能するため、Agent の情報ページには表示されません。
 
-最後に、go-metro バイナリは、Datadog Agent の 64-ビット RPM と DEB 製品のみに同梱されているため
-パッケージ化されたバージョンでのみ使用できます
-(つまり、go-metro は現在ソースインストールや 32-ビットパッケージでは利用できません)。
+最後に、go-metro バイナリは、Datadog Agent の 64-ビット RPM と DEB 製品のみに同梱されているためパッケージ化されたバージョンでのみ使用できます。つまり、go-metro はソースインストールや 32-ビットパッケージでは利用できません。
 
 ### 検証
 
-チェックが正しく実行されているかを検証するには、Datadog インターフェイスに表示される `system.net.tcp.rtt` メトリクスを確認します。また、[Agent の `status` サブコマンドを実行][4]すると、以下のような表示になります。
+チェックが正しく実行されているかを検証するには、Datadog インターフェイスに表示される `system.net.tcp.rtt` メトリクスを確認します。また、[Agent の `status` サブコマンドを実行][5]すると、以下のような表示になります。
 
 ```text
  datadog-agent.service - "Datadog Agent"
@@ -153,11 +168,11 @@ Go-metro チェックには、サービスのチェック機能は含まれま�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [2]: https://github.com/DataDog/go-metro
 [3]: https://github.com/DataDog/integrations-core/blob/master/go-metro/conf.yaml.example
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[5]: https://github.com/DataDog/integrations-core/blob/master/go-metro/metadata.csv
-[6]: https://docs.datadoghq.com/ja/help/
+[4]: https://docs.datadoghq.com/ja/help/
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://github.com/DataDog/integrations-core/blob/master/go-metro/metadata.csv

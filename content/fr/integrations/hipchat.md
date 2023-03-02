@@ -1,21 +1,27 @@
 ---
 categories:
-  - Collaboration
+- Collaboration
 ddtype: crawler
 dependencies: []
-description: Envoyez des alertes et des graphiques Datadog à la room HipChat de votre équipe.
-doc_link: 'https://docs.datadoghq.com/integrations/hipchat/'
+description: Envoyez des alertes et des graphiques Datadog à la room HipChat de votre
+  équipe.
+doc_link: https://docs.datadoghq.com/integrations/hipchat/
+draft: false
 git_integration_title: hipchat
 has_logo: true
+integration_id: ''
 integration_title: HipChat
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: hipchat
 public_title: Intégration Datadog/HipChat
-short_description: Envoyez des alertes et des graphiques Datadog à la room HipChat de votre équipe.
+short_description: Envoyez des alertes et des graphiques Datadog à la room HipChat
+  de votre équipe.
 version: '1.0'
 ---
+
 {{< img src="integrations/hipchat/hipchat_graph.png" alt="Graphique HipChat" popup="true">}}
 
 ## Présentation
@@ -25,7 +31,7 @@ L'intégration HipChat permet à Datadog d'envoyer des notifications à votre ro
 - des messages et des graphiques lors du déclenchement de vos monitors Datadog ;
 - des messages concernant l'activité du flux d'événements (à savoir, les commentaires de vos collègues).
 
-## Implémentation
+## Configuration
 
 ### Configuration
 
@@ -44,7 +50,7 @@ Si vous utilisez un token HipChat API V1 et que votre handle de conversation con
 
 #### Serveur HipChat
 
-Si vous hébergez votre propre serveur HipChat, saisissez le hostname du serveur dans le [carré Datadog/Hipchat][3]. Le serveur doit être accessible à partir d'Internet.
+Si vous hébergez votre propre serveur HipChat, saisissez le hostname du serveur dans le [carré Datadog/Hipchat][2]. Le serveur doit être accessible à partir d'Internet.
 
 Cochez la case **Ignore SSL** UNIQUEMENT si le certificat de votre serveur HipChat est auto-signé.
 
@@ -66,9 +72,8 @@ L'intégration HipChat n'inclut aucun check de service.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][4].
+Besoin d'aide ? Contactez [l'assistance Datadog][3].
 
 [1]: https://www.hipchat.com/admin/api
 [2]: https://app.datadoghq.com/account/settings#integrations/hipchat
-[3]: https://app.datadoghq.com/account/settings#integrations/hipchat
-[4]: https://docs.datadoghq.com/fr/help
+[3]: https://docs.datadoghq.com/fr/help/

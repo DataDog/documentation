@@ -1,44 +1,73 @@
 ---
-"assets":
-  "dashboards": {}
-  "metrics_metadata": metadata.csv
-  "monitors": {}
-  "service_checks": assets/service_checks.json
-"author":
-  "homepage": "https://www.rapdev.io"
-  "name": RapDev.io
-"categories":
+app_id: rapdev-solaris-agent
+app_uuid: a994f2cf-1f77-4e74-803d-fb833455e224
+assets:
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: datadog.marketplace.rapdev.solaris_agent
+      metadata_path: metadata.csv
+      prefix: rapdev.solaris_agent.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: RapDev Solaris Agent
+author:
+  homepage: https://www.rapdev.io
+  name: RapDev
+  sales_email: ddsales@rapdev.io
+  support_email: support@rapdev.io
+  vendor_id: rapdev
+categories:
 - マーケットプレイス
-"creates_events": false
-"ddtype": "check"
-"dependencies": []
-"display_name": "RapDev Solaris Agent"
-"draft": false
-"git_integration_title": "rapdev_solaris_agent"
-"guid": "3717994a-49c4-4693-902a-85c8123b699c"
-"integration_id": "rapdev-solaris-agent"
-"integration_title": "RapDev Solaris Agent"
-"integration_version": ""
-"is_public": true
-"kind": "integration"
-"maintainer": "integrations@rapdev.io"
-"manifest_version": "1.0.0"
-"metric_prefix": "rapdev.solaris_agent."
-"metric_to_check": "datadog.marketplace.rapdev.solaris_agent"
-"name": "rapdev_solaris_agent"
-"pricing":
-- "billing_type": tag_count
-  "metric": datadog.marketplace.rapdev.solaris_agent
-  "tag": ホスト
-  "unit_label": Solaris Agent
-  "unit_price": !!float "40.0"
-"public_title": "RapDev Solaris Agent"
-"short_description": "sparc と i86pc の両方の Solaris 10 および 11 のメトリクスを提供するシステム Agent"
-"support": "パートナー"
-"supported_os": []
-"terms":
-  "eula": assets/EULA.pdf
-  "legal_email": ddsales@rapdev.io
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: rapdev_solaris_agent
+integration_id: rapdev-solaris-agent
+integration_title: Solaris Agent
+integration_version: ''
+is_public: true
+kind: integration
+legal_terms:
+  eula: assets/EULA.pdf
+manifest_version: 2.0.0
+name: rapdev_solaris_agent
+oauth: {}
+pricing:
+- billing_type: tag_count
+  includes_assets: true
+  metric: datadog.marketplace.rapdev.solaris_agent
+  product_id: solaris-agent
+  short_description: ホスト 1 個あたりの単価
+  tag: ホスト
+  unit_label: Solaris Agent
+  unit_price: 40
+public_title: Solaris Agent
+short_description: sparc と i86pc の Solaris 10 および 11 のメトリクスを提供する Agent
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Marketplace
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: sparc と i86pc の Solaris 10 および 11 のメトリクスを提供する Agent
+  media:
+  - caption: インフラストラクチャーリスト
+    image_url: images/1.png
+    media_type: image
+  - caption: ホストインフラストラクチャーの詳細
+    image_url: images/2.png
+    media_type: image
+  - caption: ホストメトリクス
+    image_url: images/3.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Solaris Agent
+  uninstallation: README.md#Uninstallation
 ---
 
 
@@ -48,29 +77,20 @@ Solaris Agent を使用すると、Datadog 内の Solaris システムメトリ�
 
 Solaris Agent は、Datadog インフラストラクチャーリストをサポートするために必要なホストメタデータを提供し、組織が他のサポートされている Datadog ホストオペレーティングシステムと同様の Solaris ホストシステムで作業できるようにします。
 
-Solaris Agent は、ネイティブ Agent と同じ URL とポートを使用します。Solaris Agent は現在、コアインフラストラクチャーメトリクスとログ追跡をサポートしています。Agent チェック、インテグレーション、またはサービスチェックはサポートしていません。
-
-### インフラストラクチャーリストの Solaris Agent
-
-{{< img src="marketplace/rapdev_solaris_agent/images/1.png" alt="スクリーンショット 1" >}}
-
-{{< img src="marketplace/rapdev_solaris_agent/images/2.png" alt="スクリーンショット 2" >}}
-
-{{< img src="marketplace/rapdev_solaris_agent/images/3.png" alt="スクリーンショット 3" >}}
+Solaris Agent は、ネイティブ Agent と同じ URL とポートを使用します。Solaris Agent は、コアインフラストラクチャーメトリクス、プロセスチェック、ログ追跡をサポートしています。カスタム Agent チェック、インテグレーション、またはサービスチェックはサポートしていません。
 
 ## サポート
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 
- - メール: integrations@rapdev.io 
- - チャット: [RapDev.io/products](https://rapdev.io/products)
+ - メール: support@rapdev.io 
+ - チャット: [rapdev.io](https://www.rapdev.io/#Get-in-touch)
  - 電話: 855-857-0222 
 
 ---
 ボストンより ❤️ を込めて
 
-*お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:integrations@rapdev.io)からメッセージをお送りいただければ、導入をサポートいたします！*
+*お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:support@rapdev.io)からメッセージをお送りいただければ、導入をサポートいたします！*
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、[こちらをクリック](https://app.datadoghq.com/marketplace/app/rapdev-solaris-agent/pricing)してください。
-
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-solaris-agent" target="_blank">こちらをクリック</a>してください。

@@ -16,7 +16,7 @@ further_reading:
 
 Datadog Logging without Limits* は、ログの取り込みとインデックス作成を切り離します。[ログコンフィギュレーションセクション][1]から、インデックスを作成して保持するログ、またはアーカイブするログを選択し、トップレベルで設定とコントロールを管理します。
 
-{{< img src="logs/log_configuration_overview.gif" alt="Datadog アプリのログコンフィギュレーションセクション">}}
+{{< img src="logs/log_configuration_overview.mp4" alt="Datadog アプリのログコンフィギュレーションセクション" video=true >}}
 
 ## コンフィギュレーションオプション
 

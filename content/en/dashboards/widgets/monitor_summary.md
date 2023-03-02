@@ -6,12 +6,9 @@ widget_type: "manage_status"
 aliases:
     - /graphing/widgets/monitor_summary/
 further_reading:
-- link: "/dashboards/screenboards/"
-  tag: "Documentation"
-  text: "Screenboard"
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
-  text: "Building Dashboard using JSON"
+  text: "Building Dashboards using JSON"
 ---
 
 The monitor summary widget displays a summary view of all your Datadog monitors, or a subset based on a query.
@@ -25,22 +22,42 @@ The monitor summary widget displays a summary view of all your Datadog monitors,
 ### Configuration
 
 1. Select one of the three summary types: `Monitor`, `Group` or `Combined`
-    - The `Monitor` summary type lists statuses and names of monitors matching the [monitor query][1]. Multi-alert monitors have only one row in the results list and their status is the multi-alert monitor’s overall status. The Status Counts are the number of matching monitors with each status type.
+    - The `Monitor` summary type lists statuses and names of monitors matching the [monitor query][1]. Multi alert monitors have only one row in the results list and their status is the multi alert monitor’s overall status. The Status Counts are the number of matching monitors with each status type.
 
     {{< img src="dashboards/widgets/monitor_summary/monitor_summary_type.png" alt="monitor summary type" style="width:80%;">}}
 
-    - The `Group` summary type lists statuses, names, and groups of monitors matching the monitor query. Multi-alert monitors are broken into several rows in the results list and correspond to each group and that group’s specific status in the multi-alert monitor. The `Group` summary type also supports `group` and `group_status` facets in its monitor query similar to the [Triggered Monitors][2] page. The Status Counts are the number of matching monitor groups with each status type.
+    - The `Group` summary type lists statuses, names, and groups of monitors matching the monitor query. Multi alert monitors are broken into several rows in the results list and correspond to each group and that group’s specific status in the multi alert monitor. The `Group` summary type also supports `group` and `group_status` facets in its monitor query similar to the [Triggered Monitors][2] page. The Status Counts are the number of matching monitor groups with each status type.
 
     {{< img src="dashboards/widgets/monitor_summary/group_summary_type.png" alt="group summary type" style="width:80%;">}}
 
-    - The `Combined` summary type lists the number of group statuses and names of the monitors matching the monitor query. Multi-alert monitors have only one row in the results list like in the `Monitor` summary type but the groups column displays the number of groups in each status type instead of the monitor’s overall status. Similar to the `Group` summary type, the `Combined` summary type also supports the `group` and `group_status` facets in its monitor query. The Status Counts still show the count of overall monitor statuses like in the `Monitor` summary type.
+    - The `Combined` summary type lists the number of group statuses and names of the monitors matching the monitor query. Multi alert monitors have only one row in the results list like in the `Monitor` summary type but the groups column displays the number of groups in each status type instead of the monitor’s overall status. Similar to the `Group` summary type, the `Combined` summary type also supports the `group` and `group_status` facets in its monitor query. The Status Counts still show the count of overall monitor statuses like in the `Monitor` summary type.
 
     {{< img src="dashboards/widgets/monitor_summary/combined_summary_type.png" alt="combined summary type" style="width:80%;">}}
 
 2. Enter a monitor query to display the monitor summary widget over a subset of your monitors.
-    - If you have template variables created in your dashboard and wish to include them in your monitor query, type the dollar sign `$` in the search bar followed by the name of the template variable. When `$` is typed in the search bar, an autocomplete list of the template variables available in your current dashboard appears for you to select your desired template variable.
 
     **Note** In addition to the facets listed in the link above, the `Group` and `Combined` summary types also support the `group` and `group_status` facets for group-level searching, similar to the [Triggered Monitors][2] page.
+
+#### Template variables
+
+To use template variables created in your dashboard in the monitor summary search query, follow the same query format as the Manage Monitor page.
+
+**Example**
+
+1. Filtering on Monitor `scope` with a `$service` template variable.
+
+   To leverage `scope` in the manage or triggered monitor page, you have to do `scope:service:web-store`.
+   Therefore in the widget you have to do `scope:$service` to then apply the template variable value to the widget.
+
+   {{< img src="dashboards/widgets/monitor_summary/templatevariable-example-scope.png" alt="Scope Template variable" style="width:80%;">}}
+
+
+2. Filtering on Monitor `group` with a `$env` template variable.
+
+   To leverage `group` in the manage or triggered monitor page, you have to do `group:env:prod`.
+   Therefore in the widget you have to do `group:$env` to then apply the template variable value to the widget.
+
+   {{< img src="dashboards/widgets/monitor_summary/templatevariable-example-group.png" alt="Group Template variable" style="width:80%;">}}
 
 ## Options
 

@@ -1,5 +1,5 @@
 ---
-title: デプロイ追跡
+title: サーバーレスアプリケーションのためのデプロイメントトラッキング
 kind: documentation
 further_reading:
   - link: /serverless/distributed_tracing
@@ -37,4 +37,3 @@ cloudtrail:LookupEvents
 
 [1]: https://app.datadoghq.com/functions
 [2]: /ja/integrations/amazon_web_services/#setup
-[3]: /ja/help/

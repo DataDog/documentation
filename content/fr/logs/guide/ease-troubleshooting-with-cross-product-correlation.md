@@ -1,7 +1,8 @@
 ---
-title: Diagnostics simplifiés grâce à la mise en corrélation entre produits
 kind: guide
+title: Diagnostics simplifiés grâce à la mise en corrélation entre produits
 ---
+
 ## Présentation
 
 Le [tagging de service unifié][1] permet d'effectuer une mise en corrélation globale. Toutefois, pour résoudre un problème, il est parfois nécessaire de commencer par analyser un simple log, une trace précise, une certaine vue ou un test Synthetic. La mise en corrélation des logs, traces et vues avec d'autres données vous offre le contexte dont vous avez besoin pour identifier l'impact métier de votre problème et comprendre son origine en quelques clics.
@@ -24,7 +25,7 @@ Ce guide présente les étapes à suivre pour mettre en corrélation les donnée
 
 ## Corréler des logs côté serveur avec des traces
 
-Lorsque vos utilisateurs rencontrent des erreurs ou souffrent d'une latence élevée dans votre application, il peut s'avérer utile d'étudier en détail les logs d'une requête problématique afin d'identifier clairement l'origine de l'erreur. En visualisant tous les logs associés à une requête donnée, vous bénéficiez d'informations détaillées de bout en bout, ce qui accélère le diagnostic du problème.
+Lorsque vos utilisateurs rencontrent des erreurs ou souffrent d'une latence élevée dans votre application, il peut s'avérer utile de consulter certains logs d'une requête problématique afin d'identifier clairement l'origine de l'erreur. En visualisant tous les logs associés à une requête donnée, vous bénéficiez d'informations détaillées de bout en bout, ce qui accélère le diagnostic du problème.
 
 La mise en corrélation de vos logs avec vos traces réduit la nécessité d'employer [des stratégies d'échantillonnage agressives, sans perdre la cohérence au niveau des entités][2], grâce à l'identifiant `trace_id`.
 
@@ -53,12 +54,11 @@ Les logs de proxy contiennent davantage d'informations que les logs d'applicatio
 
 Le traceur d'une application génère par défaut des ID de trace. Ce comportement peut être modifié en injectant `x-datadog-trace-id` dans les en-têtes de requêtes HTTP.
 
-{{< tabs >}}
-{{% tab "NGINX" %}}
+#### NGINX
 
 ##### Configurer OpenTracing
 
-Suivez les instructions pour [intégrer le tracing NGINX][1].
+Suivez les instructions pour [intégrer le tracing NGINX][5].
 
 ##### Injecter l'ID des traces dans les logs
 
@@ -78,7 +78,7 @@ http {
 
 1. Dupliquez le pipeline NGINX.
 
-2. Personnalisez le premier [parser grok][2] :
+2. Personnalisez le premier [parser grok][6] :
    - Dans **Parsing rules**, remplacez la première règle de parsing par :
    ```text
    access.common %{_client_ip} %{_ident} %{_trace_id} %{_auth} \[%{_date_access}\] "(?>%{_method} |)%{_url}(?> %{_version}|)" %{_status_code} (?>%{_bytes_written}|-)
@@ -88,13 +88,7 @@ http {
    _trace_id %{notSpace:dd.trace_id:nullIf("-")}
    ```
 
-3. Ajoutez un [remapper d'ID de trace][3] sur l'attribut `dd.trace_id`.
-
-[1]:/fr/tracing/setup_overview/proxy_setup/?tab=nginx
-[2]:/fr/logs/processing/processors/?tab=ui#grok-parser
-[3]:/fr/logs/processing/processors/?tab=ui#trace-remapper
-{{% /tab %}}
-{{< /tabs >}}
+3. Ajoutez un [remapper d'ID de trace][7] sur l'attribut `dd.trace_id`.
 
 ### Corréler des logs de base de données
 
@@ -106,14 +100,13 @@ Par exemple, les requêtes lentes en production peuvent difficilement être repr
 
 #### Comment ?
 
-{{< tabs >}}
-{{% tab "PostgreSQL" %}}
+#### PostgreSQL
 
 ##### Enrichir vos logs de base de données
 
-Par défaut, les logs PostgreSQL ne sont pas détaillés. Suivez les instructions de [ce guide][1] pour les enrichir.
+Par défaut, les logs PostgreSQL ne sont pas détaillés. Suivez les instructions de [ce guide][8] pour les enrichir.
 
-L'analyse de requêtes lentes nécessite un plan d'exécution détaillé. Pour obtenir les résultats du plan d'exécution, modifiez `/etc/postgresql/<VERSION>/main/postgresql.conf` en indiquant ce qui suit :
+Pour gérer au mieux les requêtes lentes, il est conseillé de journaliser automatiquement les plans d'exécution des déclarations lentes, afin de ne pas avoir à exécuter manuellement `EXPLAIN`. Pour exécuter `EXPLAIN` automatiquement, modifiez le fichier `/etc/postgresql/<VERSION>/main/postgresql.conf` en indiquant ce qui suit :
 
 ```conf
 session_preload_libraries = 'auto_explain'
@@ -122,22 +115,22 @@ auto_explain.log_min_duration = '500ms'
 
 Les requêtes de plus de 500 ms enregistrent leur plan d'exécution.
 
-**Remarque** : `auto_explain.log_analyze = 'true'` fournit encore plus d'informations, mais réduit considérablement les performances. Pour en savoir plus, consultez la [documentation officielle][2].
+**Remarque** : `auto_explain.log_analyze = 'true'` fournit encore plus d'informations, mais réduit considérablement les performances. Pour en savoir plus, consultez la [documentation officielle][9] (en anglais).
 
 ##### Injecter trace_id dans vos logs de base de données
 
-Vous pouvez injecter `trace_id` dans la plupart de vos logs de base de données avec des [commentaires SQL][3]. Voici un exemple avec Flask et SQLAlchemy :
+Vous pouvez injecter `trace_id` dans la plupart de vos logs de base de données avec des [commentaires SQL][10]. Voici un exemple avec Flask et SQLAlchemy :
 
 ```python
 if os.environ.get('DD_LOGS_INJECTION') == 'true':
-    from ddtrace.helpers import get_correlation_ids
+    from ddtrace import tracer
     from sqlalchemy.engine import Engine
     from sqlalchemy import event
 
     @event.listens_for(Engine, "before_cursor_execute", retval=True)
     def comment_sql_calls(conn, cursor, statement, parameters, context, executemany):
-        trace_id, span_id = get_correlation_ids()
-        statement = f"{statement} -- dd.trace_id=<{trace_id or 0}>"
+        trace_ctx = tracer.get_log_correlation_context()
+        statement = f"{statement} -- dd.trace_id=<{trace_ctx['trace_id']}>"
         return statement, parameters
 ```
 
@@ -145,24 +138,16 @@ if os.environ.get('DD_LOGS_INJECTION') == 'true':
 
 Dupliquez et personnalisez le pipeline PostgreSQL :
 
-1. Ajoutez un nouveau [parser grok][4] :
+1. Ajoutez un nouveau [parser grok][6] :
    ```text
    extract_trace %{data}\s+--\s+dd.trace_id=<%{notSpace:dd.trace_id}>\s+%{data}
    ```
 
-2. Ajoutez un [remapper d'ID de trace][5] sur l'attribut `dd.trace_id`.
+2. Ajoutez un [remapper d'ID de trace][7] sur l'attribut `dd.trace_id`.
 
 Voici un exemple de plan d'exécution de requête lente provenant d'une trace lente :
 
 {{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/slow-query-root-cause.png" alt="Corrélation des logs de requête lente" style="width:80%;" >}}
-
-[1]: /fr/integrations/postgres/?tab=host#log-collection
-[2]: https://www.postgresql.org/docs/13/auto-explain.html
-[3]: https://www.postgresql.org/docs/13/sql-syntax-lexical.html#SQL-SYNTAX-COMMENTS
-[4]: /fr/logs/processing/processors/?tab=ui#grok-parser
-[5]: /fr/logs/processing/processors/?tab=ui#trace-remapper
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Corréler des produits frontend
 
@@ -170,7 +155,7 @@ Voici un exemple de plan d'exécution de requête lente provenant d'une trace le
 
 #### Pourquoi ?
 
-Les [logs Browser][5] au sein d'un événement RUM fournissent plus de contexte et de renseignements sur un problème. Dans l'exemple ci-dessous, les logs Browser indiquent qu'un ID utilisateur non valide est à l'origine de la requête problématique.
+Les [logs Browser][11] au sein d'un événement RUM fournissent plus de contexte et de renseignements sur un problème. Dans l'exemple ci-dessous, les logs Browser indiquent qu'un ID utilisateur non valide est à l'origine de la requête problématique.
 
 {{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/browser-logs-in-rum.png" alt="Logs Browser dans une action RUM" style="width:80%;" >}}
 
@@ -178,7 +163,7 @@ La mise en corrélation de vos logs Browser avec la solution RUM réduit la néc
 
 #### Comment ?
 
-Les logs Browser et les événements RUM sont automatiquement corrélés, tel qu'expliqué dans la [FAQ sur la facturation RUM][6]. Pour bénéficier de cette corrélation, les [configurations des SDK de la solution RUM et des logs doivent être similaires][7].
+Les logs Browser et les événements RUM sont automatiquement mis en corrélation, tel qu'expliqué dans la [FAQ sur la facturation RUM][12]. Pour bénéficier de cette corrélation, les [configurations des SDK de la solution RUM et des logs doivent être similaires][13].
 
 ## Corréler des expériences utilisateur avec un comportement de serveur
 
@@ -186,7 +171,7 @@ Habituellement, la surveillance du frontend et celle du backend se font de faço
 
 Cette section vous présente les étapes à suivre pour activer ce type de corrélation :
 
-* [Mettre en corrélation des vues RUM avec des traces](#mettre-en-correlation-des-vues-rum-avec-des-traces)
+* [Corréler des vues RUM avec des traces](#correler-des-vues-rum-avec-des-traces)
 * [Tirer profit de la mise en corrélation des traces pour diagnostiquer des tests Synthetic](#tirer-profit-de-la-mise-en-correlation-des-traces-pour-diagnostiquer-des-tests-synthetic)
 
 ### Corréler des vues RUM avec des traces
@@ -202,7 +187,7 @@ Tirez profit des corrélations RUM pour :
 
 #### Comment ?
 
-Suivez les instructions de la section [Associer RUM à vos traces][8]. Les informations sur les vues RUM figurent dans la [vue Trace][9], tandis que les informations sur les traces se trouvent dans la [vue Session][10].
+Suivez les instructions de la section [Associer RUM à vos traces][14]. Les informations sur les vues RUM figurent dans la [vue Trace][15], tandis que les informations sur les traces se trouvent dans la [vue Session][16].
 
 {{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/trace-details-rum.png" alt="Informations RUM dans une trace" style="width:80%;" >}}
 
@@ -218,21 +203,28 @@ L'intégration de l'APM avec la surveillance Synthetic vous permet d'identifier 
 
 {{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/synthetic-trace-root-cause.png" alt="Origine d'un échec de test Synthetic" style="width:80%;" >}}
 
-En accédant à des données réseau (grâce à votre test), à des informations sur le backend, l'infrastructure et les logs (grâce à votre trace), ainsi qu'à des événements RUM (pour les [tests Browser][11] uniquement), vous avez la possibilité d'analyser en détail le comportement de votre application, tel que constaté par vos utilisateurs.
+En accédant à des données réseau (grâce à votre test), à des informations sur le backend, l'infrastructure et les logs (grâce à votre trace), ainsi qu'à des événements RUM (pour les [tests Browser][17] uniquement), vous avez la possibilité d'analyser en détail le comportement de votre application, tel que constaté par vos utilisateurs.
 
 #### Comment ?
 
-Pour tirer profit de cette fonctionnalité, suivez les instructions de la documentation relative à l'[activation de l'intégration de l'APM dans les réglages Synthetic][12].
+Pour tirer profit de cette fonctionnalité, suivez les instructions de la documentation relative à l'[activation de l'intégration de l'APM dans les réglages Synthetic][18].
+
 
 [1]: /fr/getting_started/tagging/unified_service_tagging
 [2]: /fr/logs/indexes/#sampling-consistently-with-higher-level-entities
 [3]: /fr/tracing/connect_logs_and_traces
 [4]: /fr/tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
-[5]: /fr/logs/log_collection/javascript/
-[6]: /fr/account_management/billing/rum/#can-i-view-logs-from-the-browser-collector-in-rum
-[7]: /fr/real_user_monitoring/browser/#initialization-parameters
-[8]: /fr/real_user_monitoring/connect_rum_and_traces
-[9]: https://app.datadoghq.com/apm/traces
-[10]: https://app.datadoghq.com/rum/explorer
-[11]: /fr/synthetics/browser_tests/
-[12]: /fr/synthetics/apm
+[5]: /fr/tracing/setup_overview/proxy_setup/?tab=nginx
+[6]: /fr/logs/log_configuration/processors/#grok-parser
+[7]: /fr/logs/log_configuration/processors/#trace-remapper
+[8]: /fr/integrations/postgres/?tab=host#log-collection
+[9]: https://www.postgresql.org/docs/13/auto-explain.html
+[10]: https://www.postgresql.org/docs/13/sql-syntax-lexical.html#SQL-SYNTAX-COMMENTS
+[11]: /fr/logs/log_collection/javascript/
+[12]: /fr/account_management/billing/rum/#can-i-view-logs-from-the-browser-collector-in-rum
+[13]: /fr/real_user_monitoring/browser/#initialization-parameters
+[14]: /fr/real_user_monitoring/connect_rum_and_traces
+[15]: https://app.datadoghq.com/apm/traces
+[16]: https://app.datadoghq.com/rum/explorer
+[17]: /fr/synthetics/browser_tests/
+[18]: /fr/synthetics/apm

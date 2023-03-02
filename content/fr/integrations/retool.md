@@ -38,7 +38,7 @@ supported_os:
 ## Présentation
 La surveillance et les analyses permettent de mettre en lumière des informations clés, mais les développeurs doivent souvent basculer entre plusieurs outils cloisonnés et propriétaires différents pour prend les mesures qui s'imposent, ce qui les empêche d'intervenir efficacement lorsqu'un problème est détecté.
 
-Retool aide les développeurs à créer des applications sur mesure qui s'intègrent directement à un dashboard Datadog, leur permettant ainsi de prendre des mesures et d'automatiser leurs processus sans jamais quitter Datadog.
+Retool aide les développeurs à créer des applications sur mesure qui s'intègrent directement à un dashboard Datadog, afin de prendre des mesures et d'automatiser des processus sans jamais quitter Datadog.
 
 ![Screenshot1][1]
 
@@ -46,7 +46,7 @@ Retool aide les développeurs à créer des applications sur mesure qui s'intèg
 L'application Retool intégrée de Datadog pour la gestion d'Elasticsearch tire parti de votre visibilité existante sur les métriques et les logs clés d'Elasticsearch tout en vous offrant la possibilité de gérer vos clusters, vos comptes et plus encore directement depuis le dashboard Datadog.
 
 ### Dashboards
-Retool a mis au point une application intégrée pour la gestion d'Elasticsearch. Vous étiez déjà en mesure de surveiller les métriques, les traces et les logs d'Elasticsearch depuis Datadog ; désormais, grâce à notre application intégrée, vous pouvez prendre les mesures nécessaires en fonction de ces données directement depuis le dashboard Datadog. Les actions pouvant être effectuées comprennent :
+Retool a mis au point une application intégrée pour la gestion d'Elasticsearch. Vous étiez déjà en mesure de surveiller les métriques, les traces et les logs d'Elasticsearch depuis Datadog ; désormais, grâce à notre application intégrée, vous pouvez prendre les mesures nécessaires en fonction de ces données directement depuis le dashboard Datadog. Cette application vous permet notamment d'accomplir ce qui suit :
 
 - Ajouter un nouvel index avec des partitions et des réplicas
 - Gérer les nœuds en modifiant le routage des partitions et en excluant des index
@@ -55,9 +55,9 @@ Retool a mis au point une application intégrée pour la gestion d'Elasticsearch
 ## Configuration
 L'intégration Retool est fournie avec un dashboard prêt à l'emploi, qui vous proposera de vous connecter à Retool ou de créer un compte via un iframe.
 
-Vous serez invité à vous connecter à votre cluster ElasticSearch avec une chaîne de connexion. Cette application sera automatiquement ajoutée à votre instance. Ensuite, cliquez sur « Resources » dans la barre de navigation et créez une ressource Datadog (en ajoutant votre clé d'API et votre clé d'application). Enfin, connectez votre ressource Datadog aux deux requêtes Datadog en la sélectionnant dans la liste déroulante de l'éditeur de requêtes.
+Vous êtes invité à vous connecter à votre cluster ElasticSearch avec une chaîne de connexion. Cette application est automatiquement ajoutée à votre instance. Ensuite, cliquez sur « Resources » dans la barre de navigation et créez une ressource Datadog (en ajoutant votre clé d'API et votre clé d'application). Enfin, connectez votre ressource Datadog aux deux requêtes Datadog en la sélectionnant dans la liste déroulante de l'éditeur de requêtes.
 
-C'est tout ! Retournez sur Datadog pour voir l'application en cours d'exécution dans votre dashboard. Vous pouvez la modifier à tout moment afin de l'adapter à vos processus DevOps.
+Retournez sur Datadog pour voir l'application en cours d'exécution dans votre dashboard. Vous pouvez la modifier à tout moment afin de l'adapter à vos processus DevOps.
 
 ## Données collectées
 

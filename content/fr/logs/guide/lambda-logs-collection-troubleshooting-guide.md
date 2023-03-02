@@ -1,7 +1,8 @@
 ---
-title: Guide de dépannage pour la collecte de logs de la fonction Lambda
 kind: documentation
+title: Guide de dépannage pour la collecte de logs de la fonction Lambda
 ---
+
 Si vous ne voyez aucun log transmis depuis une fonction Lambda du Forwarder Datadog dans le Log Explorer, suivez les étapes de dépannage ci-dessous. Si vous avez suivi ces instructions mais que vos problèmes persistent, [contactez l'assistance Datadog][1] pour obtenir de l'aide.
 
 ## Vos logs sont-ils envoyés à Datadog ?
@@ -62,8 +63,6 @@ La fonction Lambda du Forwarder doit inclure des déclencheurs (CloudWatch Logs 
    ```
 
 4. Définissez des déclencheurs [automatiquement][7] ou [manuellement][8].
-
-Remarque : AWS ne permet pas à plus d'une ressource d'être abonnée à une source de log. Si une autre ressource est déjà abonnée à votre source de log source, vous devez d'abord supprimer cet abonnement.
 
 Pour le groupe de logs CloudWatch, vous pouvez utiliser les métriques suivantes dans la plateforme Datadog pour confirmer si les logs sont envoyés depuis le groupe de logs vers la fonction Lambda du Forwarder. Utilisez le tag `log_group` pour filtrer les données lorsque vous consultez les métriques.
 

@@ -13,7 +13,7 @@ start = end - 3600
 query = 'system.cpu.idle{*}'  # Enter the metric you want, see your list here: https://app.datadoghq.com/metric/summary.
                               # Optionally, enter your host to filter the data, see here: https://app.datadoghq.com/infrastructure
 
-results = api.Metric.query(start=start - 3600, end=end, query=query)
+results = api.Metric.query(start=start, end=end, query=query)
 
 with open("output.json", "w") as f:
   dump(results, f)

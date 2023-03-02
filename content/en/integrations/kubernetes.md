@@ -22,7 +22,6 @@ categories:
   - orchestration
   - log collection
 doc_link: /integrations/kubernetes/
-ddtype: check
 integration_id: "kubernetes"
 further_reading:
   - link: "https://www.datadoghq.com/blog/debug-kubernetes-pending-pods/"

@@ -14,6 +14,12 @@ further_reading:
 - link: "/tracing/"
   tag: "Documentation"
   text: "Collect your traces"
+- link: "/agent/basic_agent_usage/#agent-architecture"
+  tag: "Documentation"
+  text: "Find out more about the Agent's architecture"
+- link: "/agent/guide/network#configure-ports"
+  tag: "Documentation"
+  text: "Configure inbound ports"
 ---
 
 ## Overview
@@ -22,7 +28,9 @@ This page outlines the basic features of the Datadog Agent for Red Hat. If you h
 
 Packages are available for 64-bit x86 and Arm v8 architectures. For other architectures, use the source install.
 
-**Note**: RedHat/CentOS 6 and above are supported. Since Agent 6.33.0/7.33.0, AlmaLinux/Rocky 8 and above are supported. 
+**Notes**:
+- On the 64-bit x86 architecture, RedHat/CentOS 6 and above are supported. Since Agent 6.33.0/7.33.0, AlmaLinux/Rocky 8 and above are supported.
+- On the 64-bit Arm v8 architecture, RedHat/CentOS 8 and above are supported. Since Agent 6.33.0/7.33.0, AlmaLinux/Rocky 8 and above are supported.
 
 ## Commands
 
@@ -71,15 +79,21 @@ In Agent v6 and v7, the service manager provided by the operating system is resp
 | Display command usage              | `sudo service datadog-agent`                      |
 | Run a check                        | `sudo -u dd-agent -- dd-agent check <CHECK_NAME>` |
 
+{{% /tab %}}
+
+{{< /tabs >}}
+
 **Note**: If the `service` wrapper is not available on your system, use:
 
 * On `upstart`-based systems: `sudo start/stop/restart/status datadog-agent`
 * On `systemd`-based systems: `sudo systemctl start/stop/restart/status datadog-agent`
+* On `initctl`-based systems: `sudo initctl start/stop/restart/status datadog-agent`
 
 [Learn more about Service lifecycle commands][2]
 
-{{% /tab %}}
-{{< /tabs >}}
+
+
+
 
 ## Configuration
 

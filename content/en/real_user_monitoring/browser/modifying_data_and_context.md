@@ -14,13 +14,19 @@ further_reading:
 - link: "/real_user_monitoring/explorer/"
   tag: "Documentation"
   text: "Explore your views within Datadog"
-- link: "/real_user_monitoring/explorer/analytics/"
+- link: "/real_user_monitoring/explorer/visualize/"
   tag: "Documentation"
-  text: "Build analytics upon your events"
+  text: "Apply visualizations on your events"
 - link: "/logs/log_configuration/attributes_naming_convention"
   tag: "Documentation"
   text: "Datadog Standard Attributes"
 ---
+
+{{< callout url="#" btn_hidden="true" header="Join the Feature Flag Tracking Beta!">}}
+To enrich your RUM data with feature flags and get visibility into performance monitoring and behavioral changes, join the <a href="https://docs.datadoghq.com/real_user_monitoring/guide/setup-feature-flag-data-collection/">Feature Flag Tracking</a> private beta. To request access, contact Datadog Support at support@datadoghq.com.
+{{< /callout >}}
+
+## Overview
 
 There are various ways you can modify the [data collected][1] by RUM, to support your needs for:
 
@@ -31,14 +37,14 @@ There are various ways you can modify the [data collected][1] by RUM, to support
 
 ## Override default RUM view names
 
-The RUM SDK automatically generates a [view event][2] for each new page visited by your users, or when the page URL is changed (for single page applications). A view name is computed from the current page URL, where variable alphanumeric IDs are removed automatically—for example, "/dashboard/1234" becomes "/dashboard/?".
+The RUM Browser SDK automatically generates a [view event][2] for each new page visited by your users, or when the page URL is changed (for single-page applications). A view name is computed from the current page URL, where variable alphanumeric IDs are removed automatically. For example, `/dashboard/1234` becomes `/dashboard/?`.
 
-Starting with [version 2.17.0][3], you may specify your own view names by tracking view events manually with the `trackViewsManually` option:
+Starting with [version 2.17.0][3], you can add view names and assign them to a dedicated service owned by a team by tracking view events manually with the `trackViewsManually` option:
 
-1. Set up `trackViewsManually` to true when initializing RUM.
+1. Set `trackViewsManually` to true when initializing the RUM Browser SDK.
+
 {{< tabs >}}
 {{% tab "NPM" %}}
-
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
@@ -72,40 +78,62 @@ window.DD_RUM &&
 {{% /tab %}}
 {{< /tabs >}}
 
-2. You **must** start views for each new page or route change (for single page applications). You can optionally define the associated view name, which defaults to the page URL path. No RUM data is collected until the view is started.
+2. You must start views for each new page or route change (for single-page applications). RUM data is collected when the view starts. Optionally, define the associated view name, service name, and version.
+
+   - View: Defaults to the page URL path.
+   - Service: Defaults to the default service specified when creating your RUM application.
+   - Version: Defaults to the default version specified when creating your RUM application.
+
+   For more information, see [Setup Browser Monitoring][4].
+
+The following example manually tracks the page views on the `checkout` page in a RUM application. Use `checkout` for the view name and associate the `purchase` service with version `1.2.3`.
+
 {{< tabs >}}
 {{% tab "NPM" %}}
 ```javascript
-datadogRum.startView('checkout')
+datadogRum.startView({
+  name: 'checkout',
+  service: 'purchase',
+  version: '1.2.3'
+})
 ```
 
 {{% /tab %}}
 {{% tab "CDN async" %}}
 ```javascript
 DD_RUM.onReady(function() {
-    DD_RUM.startView('checkout')
+    DD_RUM.startView({
+      name: 'checkout',
+      service: 'purchase',
+      version: '1.2.3'
+    })
 })
 ```
 {{% /tab %}}
 {{% tab "CDN sync" %}}
-
 ```javascript
-window.DD_RUM && window.DD_RUM.startView('checkout')
+window.DD_RUM && window.DD_RUM.startView({
+  name: 'checkout',
+  service: 'purchase',
+  version: '1.2.3'
+})
 ```
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: If you are using React, Angular, Vue or any other frontend framework, Datadog recommends implementing the `startView` logic at the framework router level.
+If you are using React, Angular, Vue, or any other frontend framework, Datadog recommends implementing the `startView` logic at the framework router level.
 
 ## Enrich and control RUM data
 
-The RUM SDK captures RUM events and populates their main attributes. The `beforeSend` callback function gives you access to every event collected by the RUM SDK before they are sent to Datadog. Intercepting the RUM events allows you to:
+The RUM Browser SDK captures RUM events and populates their main attributes. The `beforeSend` callback function gives you access to every event collected by the RUM Browser SDK before it is sent to Datadog.
+
+Intercepting the RUM events allows you to:
 
 - Enrich your RUM events with additional context attributes
 - Modify your RUM events to alter their content or redact sensitive sequences (see [list of editable properties](#modify-the-content-of-a-rum-event))
 - Discard selected RUM events
 
-Starting with [version 2.13.0][4], `beforeSend` takes two arguments: the `event` generated by the RUM SDK, and the `context` that triggered the creation of the RUM event.
+Starting with [version 2.13.0][5], `beforeSend` takes two arguments: the `event` generated by the RUM Browser SDK, and the `context` that triggered the creation of the RUM event.
 
 ```javascript
 function beforeSend(event, context)
@@ -115,23 +143,22 @@ The potential `context` values are:
 
 | RUM event type   | Context                   |
 |------------------|---------------------------|
-| View             | [Location][5]                  |
-| Action           | [Event][6]                     |
-| Resource (XHR)   | [XMLHttpRequest][7] and [PerformanceResourceTiming][8]            |
-| Resource (Fetch) | [Request][9], [Response][10], and [PerformanceResourceTiming][8]      |
-| Resource (Other) | [PerformanceResourceTiming][8] |
-| Error            | [Error][11]                     |
-| Long Task        | [PerformanceLongTaskTiming][12] |
+| View             | [Location][6]                  |
+| Action           | [Event][7]                     |
+| Resource (XHR)   | [XMLHttpRequest][8] and [PerformanceResourceTiming][9]            |
+| Resource (Fetch) | [Request][10], [Response][11], and [PerformanceResourceTiming][9]      |
+| Resource (Other) | [PerformanceResourceTiming][9] |
+| Error            | [Error][12]                     |
+| Long Task        | [PerformanceLongTaskTiming][13] |
 
-Learn more in the [Enrich and control RUM data guide][13].
+For more information, see the [Enrich and control RUM data guide][14].
 
 ### Enrich RUM events
 
-Along with attributes added with the [global context API](#global-context), you can add more context attributes to the event. For example, tag your RUM resource events with data extracted from a fetch response object:
+Along with attributes added with the [Global Context API](#global-context), you can add additional context attributes to the event. For example, tag your RUM resource events with data extracted from a fetch response object:
 
 {{< tabs >}}
 {{% tab "NPM" %}}
-
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
@@ -180,17 +207,19 @@ window.DD_RUM &&
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: The RUM SDK ignores:
-- Attributes added outside of `event.context`.
-- Modifications made to a RUM view event context.
+If a user belongs to multiple teams, add additional key-value pairs in your calls to the Global Context API.
+
+The RUM Browser SDK ignores:
+
+- Attributes added outside of `event.context`
+- Modifications made to a RUM view event context
 
 ### Modify the content of a RUM event
 
-For example, redact email addresses from your web application URLs:
+For example, to redact email addresses from your web application URLs:
 
 {{< tabs >}}
 {{% tab "NPM" %}}
-
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
@@ -203,7 +232,6 @@ datadogRum.init({
     ...
 });
 ```
-
 {{% /tab %}}
 {{% tab "CDN async" %}}
 ```javascript
@@ -220,7 +248,6 @@ DD_RUM.onReady(function() {
 ```
 {{% /tab %}}
 {{% tab "CDN sync" %}}
-
 ```javascript
 window.DD_RUM &&
     window.DD_RUM.init({
@@ -232,7 +259,6 @@ window.DD_RUM &&
         ...
     });
 ```
-
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -247,9 +273,9 @@ You can update the following event properties:
 |   `error.stack `        |   String  |   The stack trace or complementary information about the error.                                     |
 |   `error.resource.url`  |   String  |   The resource URL that triggered the error.                                                        |
 |   `resource.url`        |   String  |   The resource URL.                                                                                 |
-|   `context`        |   Object  |   Attributes added via the [global context API](#global-context) or when generating events manually (for example, `addError` and `addAction`). RUM view events `context` is read-only.                                                                                 |
+|   `context`        |   Object  |   Attributes added with the [Global Context API](#global-context) or when generating events manually (for example, `addError` and `addAction`). RUM view events `context` is read-only.                                                                                 |
 
-**Note**: The RUM SDK ignores modifications made to event properties not listed above. Find out about all event properties on the [Browser SDK repository][14].
+The RUM Browser SDK ignores modifications made to event properties not listed above. For more information about event properties, see the [RUM Browser SDK GitHub repository][15].
 
 ### Discard a RUM event
 
@@ -272,7 +298,6 @@ datadogRum.init({
     ...
 });
 ```
-
 {{% /tab %}}
 {{% tab "CDN async" %}}
 ```javascript
@@ -291,7 +316,6 @@ DD_RUM.onReady(function() {
 ```
 {{% /tab %}}
 {{% tab "CDN sync" %}}
-
 ```javascript
 window.DD_RUM &&
     window.DD_RUM.init({
@@ -305,11 +329,10 @@ window.DD_RUM &&
         ...
     });
 ```
-
 {{% /tab %}}
 {{< /tabs >}}
 
-## Identify user sessions
+## User session
 
 Adding user information to your RUM sessions can help you:
 * Follow the journey of a given user
@@ -318,7 +341,7 @@ Adding user information to your RUM sessions can help you:
 
 {{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in RUM UI"  >}}
 
-The following attributes are **optional** but it is recommended to provide **at least one** of them:
+The following attributes are optional but Datadog recommends providing at least one of them:
 
 | Attribute  | Type | Description                                                                                              |
 |------------|------|----------------------------------------------------------------------------------------------------|
@@ -326,9 +349,13 @@ The following attributes are **optional** but it is recommended to provide **at 
 | `usr.name`  | String | User friendly name, displayed by default in the RUM UI.                                                  |
 | `usr.email` | String | User email, displayed in the RUM UI if the user name is not present. It is also used to fetch Gravatars. |
 
-**Note**: Increase your filtering capabilities by adding extra attributes on top of the recommended ones. For instance, add information about the user plan, or which user group they belong to.
+Increase your filtering capabilities by adding extra attributes on top of the recommended ones. For instance, add information about the user plan, or which user group they belong to.
 
-To identify user sessions, use the `setUser` API:
+When making changes to the user session object, all RUM events collected after the change contain the updated information.
+
+### Identify user session
+
+`datadogRum.setUser(<USER_CONFIG_OBJECT>)`
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -341,7 +368,6 @@ datadogRum.setUser({
     ...
 })
 ```
-
 {{% /tab %}}
 {{% tab "CDN async" %}}
 ```javascript
@@ -357,7 +383,6 @@ DD_RUM.onReady(function() {
 ```
 {{% /tab %}}
 {{% tab "CDN sync" %}}
-
 ```javascript
 window.DD_RUM && window.DD_RUM.setUser({
     id: '1234',
@@ -371,40 +396,114 @@ window.DD_RUM && window.DD_RUM.setUser({
 {{% /tab %}}
 {{< /tabs >}}
 
-### Remove the user identification
+### Access user session
 
-Clear a previously set user with the `removeUser` API. All RUM events collected afterwards will not contain user information.
+`datadogRum.getUser()`
 
 {{< tabs >}}
 {{% tab "NPM" %}}
 ```javascript
-datadogRum.removeUser()
+datadogRum.getUser()
 ```
-
 {{% /tab %}}
 {{% tab "CDN async" %}}
 ```javascript
 DD_RUM.onReady(function() {
-    DD_RUM.removeUser()
+    DD_RUM.getUser()
 })
 ```
 {{% /tab %}}
 {{% tab "CDN sync" %}}
-
 ```javascript
-window.DD_RUM && window.DD_RUM.removeUser()
+window.DD_RUM && window.DD_RUM.getUser()
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Sampling
+### Add/Override user session property
 
-By default, no sampling is applied on the number of collected sessions. To apply a relative sampling (in percent) to the number of sessions collected, use the `sampleRate` parameter when initializing RUM. The following example collects only 90% of all sessions on a given RUM application:
+`datadogRum.setUserProperty('<USER_KEY>', <USER_VALUE>)`
 
 {{< tabs >}}
 {{% tab "NPM" %}}
+```javascript
+datadogRum.setUserProperty('name', 'John Doe')
+```
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+DD_RUM.onReady(function() {
+    DD_RUM.setUserProperty('name', 'John Doe')
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+```javascript
+window.DD_RUM && window.DD_RUM.setUserProperty('name', 'John Doe')
+```
 
+{{% /tab %}}
+{{< /tabs >}}
+
+### Remove user session property
+
+`datadogRum.removeUserProperty('<USER_KEY>')`
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+datadogRum.removeUserProperty('name')
+```
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+DD_RUM.onReady(function() {
+    DD_RUM.removeUserProperty('name')
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+```javascript
+window.DD_RUM && window.DD_RUM.removeUserProperty('name')
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+### Clear user session property
+
+`datadogRum.clearUser()`
+
+<div class="alert alert-info">The RUM Browser SDK v4.17.0 introduced `clearUser` and deprecated `removeUser`</div>
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+datadogRum.clearUser()
+```
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+DD_RUM.onReady(function() {
+    DD_RUM.clearUser()
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+```javascript
+window.DD_RUM && window.DD_RUM.clearUser()
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+## Sampling
+
+By default, no sampling is applied on the number of collected sessions. To apply a relative sampling (in percent) to the number of sessions collected, use the `sessionSampleRate` parameter when initializing RUM.
+
+The following example collects only 90% of all sessions on a given RUM application:
+
+{{< tabs >}}
+{{% tab "NPM" %}}
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
@@ -412,13 +511,12 @@ datadogRum.init({
     applicationId: '<DATADOG_APPLICATION_ID>',
     clientToken: '<DATADOG_CLIENT_TOKEN>',
     site: '<DATADOG_SITE>',
-    sampleRate: 90,
+    sessionSampleRate: 90,
 });
 ```
-
 {{% /tab %}}
 {{% tab "CDN async" %}}
-```html
+```javascript
 <script>
  (function(h,o,u,n,d) {
    h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
@@ -430,60 +528,58 @@ datadogRum.init({
         clientToken: '<CLIENT_TOKEN>',
         applicationId: '<APPLICATION_ID>',
         site: '<DATADOG_SITE>',
-        sampleRate: 90,
+        sessionSampleRate: 90,
     })
   })
 </script>
 ```
 {{% /tab %}}
 {{% tab "CDN sync" %}}
-
 ```javascript
 window.DD_RUM &&
     window.DD_RUM.init({
         clientToken: '<CLIENT_TOKEN>',
         applicationId: '<APPLICATION_ID>',
         site: '<DATADOG_SITE>',
-        sampleRate: 90,
+        sessionSampleRate: 90,
     });
 ```
-
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: For a sampled out session, all page views and associated telemetry for that session are not collected.
+For a sampled out session, all page views and associated telemetry for that session are not collected.
 
 ## Global context
 
-### Add global context
+### Add global context property
 
-Once RUM is initialized, add extra context to all RUM events collected from your application with the `addRumGlobalContext(key: string, value: any)` API:
+After RUM is initialized, add extra context to all RUM events collected from your application with the `setGlobalContextProperty(key: string, value: any)` API:
+
+<div class="alert alert-info">The RUM Browser SDK v4.17.0 introduced `setGlobalContextProperty` and deprecated `addRumGlobalContext`</div>
 
 {{< tabs >}}
 {{% tab "NPM" %}}
-
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
-datadogRum.addRumGlobalContext('<CONTEXT_KEY>', <CONTEXT_VALUE>);
+datadogRum.setGlobalContextProperty('<CONTEXT_KEY>', <CONTEXT_VALUE>);
 
 // Code example
-datadogRum.addRumGlobalContext('activity', {
+datadogRum.setGlobalContextProperty('activity', {
     hasPaid: true,
     amount: 23.42
 });
 ```
-
 {{% /tab %}}
 {{% tab "CDN async" %}}
 ```javascript
 DD_RUM.onReady(function() {
-    DD_RUM.addRumGlobalContext('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
+    DD_RUM.setGlobalContextProperty('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
 })
 
 // Code example
 DD_RUM.onReady(function() {
-    DD_RUM.addRumGlobalContext('activity', {
+    DD_RUM.setGlobalContextProperty('activity', {
         hasPaid: true,
         amount: 23.42
     });
@@ -491,122 +587,63 @@ DD_RUM.onReady(function() {
 ```
 {{% /tab %}}
 {{% tab "CDN sync" %}}
-
 ```javascript
-window.DD_RUM && window.DD_RUM.addRumGlobalContext('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
+window.DD_RUM && window.DD_RUM.setGlobalContextProperty('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
 
 // Code example
-window.DD_RUM && window.DD_RUM.addRumGlobalContext('activity', {
+window.DD_RUM && window.DD_RUM.setGlobalContextProperty('activity', {
     hasPaid: true,
     amount: 23.42
 });
 ```
-
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: Follow the [Datadog naming convention][15] for a better correlation of your data across the product.
+Follow the [Datadog naming convention][16] for a better correlation of your data across the product.
+
+### Remove global context property
+
+You can remove a previously defined global context property.
+
+<div class="alert alert-info">The RUM Browser SDK v4.17.0 introduced `removeGlobalContextProperty` and deprecated `removeRumGlobalContext`</div>
+
+Follow the [Datadog naming convention][16] for a better correlation of your data across the product.
 
 ### Replace global context
 
-Once RUM is initialized, replace the default context for all your RUM events with the `setRumGlobalContext(context: Context)` API:
+Replace the default context for all your RUM events with the `setGlobalContext(context: Context)` API:
 
-{{< tabs >}}
-{{% tab "NPM" %}}
+<div class="alert alert-info">The RUM Browser SDK v4.17.0 introduced `setGlobalContext` and deprecated `setRumGlobalContext`</div>
 
-```javascript
-import { datadogRum } from '@datadog/browser-rum';
+Follow the [Datadog naming convention][16] for a better correlation of your data across the product.
 
-datadogRum.setRumGlobalContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
+### Clear global context
 
-// Code example
-datadogRum.setRumGlobalContext({
-    codeVersion: 34,
-});
-```
-
-{{% /tab %}}
-{{% tab "CDN async" %}}
-```javascript
-DD_RUM.onReady(function() {
-    DD_RUM.setRumGlobalContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
-})
-
-// Code example
-DD_RUM.onReady(function() {
-    DD_RUM.setRumGlobalContext({
-        codeVersion: 34,
-    })
-})
-```
-{{% /tab %}}
-{{% tab "CDN sync" %}}
-
-```javascript
-window.DD_RUM &&
-    DD_RUM.setRumGlobalContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
-
-// Code example
-window.DD_RUM &&
-    DD_RUM.setRumGlobalContext({
-        codeVersion: 34,
-    });
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-**Note**: Follow the [Datadog naming convention][15] for a better correlation of your data across the product.
+You can clear the global context by using `clearGlobalContext`.
 
 ### Read global context
 
-Once RUM is initialized, read the global context with the `getRumGlobalContext()` API:
+Once RUM is initialized, read the global context with the `getGlobalContext()` API:
 
-{{< tabs >}}
-{{% tab "NPM" %}}
-
-```javascript
-import { datadogRum } from '@datadog/browser-rum';
-
-const context = datadogRum.getRumGlobalContext();
-```
-
-{{% /tab %}}
-{{% tab "CDN async" %}}
-```javascript
-DD_RUM.onReady(function() {
-  var context = DD_RUM.getRumGlobalContext();
-});
-```
-{{% /tab %}}
-{{% tab "CDN sync" %}}
-
-```javascript
-var context = window.DD_RUM && DD_RUM.getRumGlobalContext();
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-
+<div class="alert alert-info">The RUM Browser SDK v4.17.0 introduced `getGlobalContext` and deprecated `getRumGlobalContext`</div>
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /real_user_monitoring/browser/data_collected/
 [2]: /real_user_monitoring/browser/monitoring_page_performance/
 [3]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2170
-[4]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2130
-[5]: https://developer.mozilla.org/en-US/docs/Web/API/Location
-[6]: https://developer.mozilla.org/en-US/docs/Web/API/Event
-[7]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
-[8]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
-[9]: https://developer.mozilla.org/en-US/docs/Web/API/Request
-[10]: https://developer.mozilla.org/en-US/docs/Web/API/Response
-[11]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
-[12]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceLongTaskTiming
-[13]: /real_user_monitoring/guide/enrich-and-control-rum-data
-[14]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum-core/src/rumEvent.types.ts
-[15]: /logs/log_configuration/attributes_naming_convention/#user-related-attributes
+[4]: /real_user_monitoring/browser/#setup
+[5]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2130
+[6]: https://developer.mozilla.org/en-US/docs/Web/API/Location
+[7]: https://developer.mozilla.org/en-US/docs/Web/API/Event
+[8]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
+[9]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
+[10]: https://developer.mozilla.org/en-US/docs/Web/API/Request
+[11]: https://developer.mozilla.org/en-US/docs/Web/API/Response
+[12]: https://developer.mozilla.org/en-US/docs/Web//Reference/Global_Objects/Error
+[13]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceLongTaskTiming
+[14]: /real_user_monitoring/guide/enrich-and-control-rum-data
+[15]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum-core/src/rumEvent.types.ts
+[16]: /logs/log_configuration/attributes_naming_convention/#user-related-attributes

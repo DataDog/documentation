@@ -1,23 +1,27 @@
 ---
-"categories":
-- "monitoring"
-- "notification"
-"ddtype": "crawler"
-"dependencies": []
-"description": "Enregistrez des événements à partir de Splunk pour les superposer sur des graphiques de métriques clés."
-"doc_link": "https://docs.datadoghq.com/integrations/splunk/"
-"draft": false
-"git_integration_title": "splunk"
-"has_logo": true
-"integration_id": ""
-"integration_title": "Splunk"
-"is_public": true
-"kind": "integration"
-"manifest_version": "1.0"
-"name": "splunk"
-"public_title": "Intégration Datadog/Splunk"
-"short_description": "Enregistrez des événements à partir de Splunk pour les superposer sur des graphiques de métriques clés."
-"version": "1.0"
+categories:
+- monitoring
+- notification
+ddtype: crawler
+dependencies: []
+description: Enregistrez des événements à partir de Splunk pour les superposer sur
+  des graphiques de métriques clés.
+doc_link: https://docs.datadoghq.com/integrations/splunk/
+draft: false
+git_integration_title: splunk
+has_logo: true
+integration_id: ''
+integration_title: Splunk
+integration_version: ''
+is_public: true
+kind: integration
+manifest_version: '1.0'
+name: splunk
+public_title: Intégration Datadog/Splunk
+short_description: Enregistrez des événements à partir de Splunk pour les superposer
+  sur des graphiques de métriques clés.
+team: web-integrations
+version: '1.0'
 ---
 
 ## Présentation
@@ -58,11 +62,11 @@ Une fois le script en place, créez un rapport ou accédez à un rapport existan
 
 ## Dépannage
 
-Si vous voyez un code d'erreur à chaque exécution runshellscript dans splunkd.log, essayez d'ajouter `> dog_splunk_trace.txt 2>&1` à la fin de la dernière commande. Ceci créera un fichier `$SPLUNK_HOME/etc/apps/search/bin/dog_splunk_trace.txt`, qui contiendra de plus ample détails sur le problème.
+Si vous voyez un code d'erreur à chaque exécution de `runshellscript` dans `splunkd.log`, essayez d'ajouter `> dog_splunk_trace.txt 2>&1` à la fin de la dernière commande. Cela crée un fichier `$SPLUNK_HOME/etc/apps/search/bin/dog_splunk_trace.txt` contenant de plus amples détails sur le problème.
 
-Si le contenu du fichier de trace ressemble à l'aide à l'utilisation de la commande `dog` suivi de `dog: error: unrecognized arguments: OR failed OR severe`, vous devez sans doute ajouter des apostrophes autour de \$SPLUNK_ARG_3 à la dernière ligne.
+Si le fichier de trace contient des explications quant à l'utilisation de la commande `dog`, suivies de `dog: error: unrecognized arguments: OR failed OR severe`, ajoutez des apostrophes autour de `\$SPLUNK_ARG_3` à la dernière ligne.
 
-Si le fichier de trace contient un Traceback qui se termine par `pkg_resources.DistributionNotFound` ou une valeur semblable, ajoutez 3 unsets en haut de votre script dog-splunk.sh pour qu'il ressemble à ceci :
+Si le fichier de trace contient un Traceback qui se termine par `pkg_resources.DistributionNotFound` ou une valeur semblable, ajoutez trois `unset` en haut de votre script `dog-splunk.sh` :
 
 ```bash
 #!/bin/bash
@@ -103,6 +107,5 @@ Vous pouvez modifier le texte de ces événements en utilisant par exemple le co
 
 _Cette documentation a été vérifiée le 28 octobre 2015 avec l'[AMI Splunk Enterprise sur AWS][2]_
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://aws.amazon.com/marketplace/pp/B00PUXWXNE/ref=sp_mpg_product_title?ie=UTF8&sr=0-3
-

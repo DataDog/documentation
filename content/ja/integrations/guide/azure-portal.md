@@ -1,14 +1,15 @@
 ---
-title: Azure Portal の Datadog
-kind: ガイド
 further_reading:
-  - link: /integrations/azure/
-    tag: ドキュメント
-    text: Azure インテグレーション
-  - link: https://www.datadoghq.com/blog/azure-datadog-partnership
-    tag: ブログ
-    text: Microsoft とのパートナーシップにより、Datadog を Azure Portal でネイティブに利用可能に
+- link: /integrations/azure/
+  tag: ドキュメント
+  text: Azure インテグレーション
+- link: https://www.datadoghq.com/blog/azure-datadog-partnership
+  tag: ブログ
+  text: Microsoft とのパートナーシップにより、Datadog を Azure Portal でネイティブに利用可能に
+kind: ガイド
+title: Azure Portal の Datadog
 ---
+
 <div class="alert alert-warning">
   このガイドは、Azure で US3 を使用している Datadog のお客様を対象としています。
 </div>
@@ -92,7 +93,65 @@ Datadog の請求プランを変更するには、概要ページで "Change Pla
 ## Datadog org configurations
 ### Metrics and logs
 
-左側のサイドバーで "Metrics and logs" を選択して、メトリクスとログのコンフィギュレーションルールを変更します。[メトリクスとログのコンフィギュレーション][3]については、Azure のドキュメントを参照してください。
+左サイドバーの “Metrics and logs” を選択すると、メトリクスとログの構成ルールを変更することができます。リソースが追加されたり、タグが変更されたりすると、すべてのルールがサブスクリプション全体に動的に適用されます。
+
+メトリクスまたはログの構成設定の変更は、数分以内に有効になります。
+
+#### メトリクスの収集
+デフォルトでは、Datadog はサブスクリプション内のすべての Azure リソースのメトリクスを自動的に収集します。
+
+オプションで、リソースにアタッチされた Azure タグを使用して、Azure VM および App Service Plans のメトリクス収集を制限します。
+
+##### メトリクスの送信のタグルール
+
+ * 仮想マシン、仮想マシンのスケーリングセット、`include` タグの付いた App Service Plans は Datadog にメトリクスを送信します。
+ * 仮想マシン、仮想マシンのスケーリングセット、`exclude` タグの付いた App Service Plans は Datadog にメトリクスを送信しません。
+ * 包含および除外ルールの間で競合がある場合は、除外が優先されます。
+ * 他のリソースタイプのメトリクス収集を制限するオプションはありません。
+
+#### ログの収集
+
+Datadog リソースを使用して Azure から Datadog に出力できるログは 3 種類あります。
+
+1. [アクティビティログ](#activity-logs)
+2. [リソースログ](#resource-logs)
+3. [Azure Active Directory ログ](#azure-active-directory-logs)
+
+##### アクティビティログ
+
+サブスクリプションレベルのログは、[コントロールプレーン][3]におけるリソースの運用に関するインサイトを提供します。アクティビティログを使用して、書き込み作業の何、誰、いつを決定します (PUT、POST、DELETE)。
+
+サブスクリプションレベルのログを Datadog に送信するには、"Send subscription activity logs" を選択します。このオプションを有効にしない場合、サブスクリプションレベルのログは Datadog に送信されません。
+
+##### リソースログ
+
+Azure リソースログは、[データプレーン][3]における Azure リソースの運用に関するインサイトを提供します。たとえば、Key Vault からシークレットを取得する、データベースへのリクエストを作成する、などはデータプレーンの運用です。リソースログのコンテンツは、Azure のサービスおよびリソースタイプにより異なります。
+
+Azure リソースログを Datadog に送信するには、"Send Azure resource logs for all defined resources" を選択します。Azure リソースログの種類は、[Azure 監視リソースログのカテゴリー][4]に一覧があります。このオプションが有効な場合、サブスクリプションで作成された新しいリソースを含むすべてのリソースログが Datadog に送信されます。
+
+オプションで、Azure リソースタグを使用して Datadog にログを送信する Azure リソースを絞り込むことができます。
+
+###### ログ送信のタグルール
+
+* `include` タグのある Azure リソースは Datadog にログを送信します。
+* `exclude` タグのある Azure リソースは Datadog にログを送信しません。
+* 包含および除外ルールの間で競合がある場合は、除外が優先されます。
+
+例えば、以下のスクリーンショットは、`Datadog = True` でタグ付けされた仮想マシン、仮想マシンのスケールセット、アプリのサービスプランだけが Datadog にメトリクスを送信するタグルールを示しています。`Datadog = True` のタグが付けられたリソース (すべてのタイプ) は、Datadog にログを送信します。
+
+{{< img src="integrations/guide/azure_portal/metrics-and-logs-tag-rules.png" alt="仮想マシン、仮想マシンのスケールセット、アプリのサービスプランに Datadog=true というメトリクスのタグルールが設定されているスクリーンショット。ログセクションにも Datadog=true のタグルールが構成されています" responsive="true" style="width:100%;">}}
+
+##### Azure Active Directory ログ
+
+Azure Active Directory (Azure AD) のログには、特定のテナントのサインインアクティビティの履歴と、Azure AD で行われた変更の監査証跡が含まれています。Azure AD ログを送信するには
+
+1. Azure の Azure Active Directory に移動し、左側のナビゲーションバーから **Diagnostic Settings** を選択します。
+2. **Add diagnostic setting** をクリックします。
+3. Datadog に送信するログカテゴリーを選択します。Datadog は全てのカテゴリーを送信することを推奨しています。
+4. **Destination details** で、**Send to a partner solution** を選択します。
+5. サブスクリプションを選択します。**Destination** ドロップダウンで Datadog リソースを選択します。
+
+テナントからのすべての Azure AD ログは、選択した Datadog リソースにリンクされている Datadog 組織に送信されます。同じ Datadog 組織にサブスクリプションをリンクしている複数の Datadog リソースがある場合、どの Datadog リソースが選択されているかは関係ありません。この設定は、Azure テナントごとに 1 回だけ行う必要があります。
 
 ### Monitored resources
 
@@ -105,8 +164,8 @@ Datadog の請求プランを変更するには、概要ページで "Change Pla
 | 理由                                    | 説明                                                                                                             |
 |-------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
 | Resource doesn't support sending logs     | Datadog にログを送信するように構成できるのは、モニタリングログカテゴリを持つリソースタイプのみです。                           |
-| Limit of five diagnostic settings reached | 各 Azure リソースには、最大 5 つの診断設定を設定できます。詳細については、[診断設定][4]を参照してください。 |
-| エラー                                     | リソースは Datadog にログを送信するように構成されていますが、エラーによってブロックされています。                                         |
+| Limit of five diagnostic settings reached | 各 Azure リソースには、最大 5 つの診断設定を設定できます。詳細については、[診断設定][5]を参照してください。 |
+| Error                                     | リソースは Datadog にログを送信するように構成されていますが、エラーによってブロックされています。                                         |
 | Logs not configured                       | Datadog にログを送信するように構成されているのは、適切なリソースタグを持つ Azure リソースのみです。                             |
 | Region not supported                      | Azure リソースは、Datadog へのログの送信をサポートしていないリージョンにあります。                                         |
 | Datadog Agent not configured              | Datadog Agent がインストールされていない仮想マシンは、Datadog にログを発行しません。                                        |
@@ -152,7 +211,7 @@ Agent が別の方法でインストールされた場合、Datadog リソース
 
 #### Install
 
-[Datadog 拡張機能][5]をインストールするには、適切なアプリを選択し、"Install Extension" をクリックします。ポータルで、拡張機能をインストールすることの確認が求められます。"OK" を選択してインストールを開始します。これにより、アプリが再起動し、次の設定が追加されます。
+[Datadog 拡張機能][6]をインストールするには、適切なアプリを選択し、"Install Extension" をクリックします。ポータルで、拡張機能をインストールすることの確認が求められます。"OK" を選択してインストールを開始します。これにより、アプリが再起動し、次の設定が追加されます。
 
 - `DD_API_KEY:<DEFAULT_API_KEY>`
 - `DD_SITE:us3.datadoghq.com`
@@ -160,7 +219,7 @@ Agent が別の方法でインストールされた場合、Datadog リソース
 
 Agent がインストールされてプロビジョニングされるまで、Azure はステータスを `Installing` (インストール中) と表示します。 Datadog Agent がインストールされると、ステータスが `Installed` (インストール済み) に変わります。
 
-**注**: [サポートされているランタイム][6]でアプリに拡張機能を追加していることを確認してください。Datadog リソースは、アプリのリストを制限またはフィルタリングしません。
+**注**: [サポートされているランタイム][7]でアプリに拡張機能を追加していることを確認してください。Datadog リソースは、アプリのリストを制限またはフィルタリングしません。
 
 #### アンインストール
 
@@ -185,14 +244,26 @@ Azure ポータルは、API キーの読み取り専用ビューを提供しま�
 
 Azure Datadog インテグレーションにより、Datadog Agent を VM またはアプリサービスにインストールできます。デフォルトのキーが選択されていない場合、Datadog Agent のインストールは失敗します。
 
-## その他の参考資料
+### クラウドセキュリティポスチャ管理
+
+左サイドバーの `Cloud Security Posture Management` を選択し、[Cloud Security Posture Management][8] の構成を行います。
+
+デフォルトでは、CSPM は有効になっていません。CSPM を有効にするには、`Enable Datadog Cloud Security Posture Management` を選択し、**Save** をクリックします。これにより、Datadog リソースに関連するすべてのサブスクリプションに対して Datadog CSPM が有効になります。
+
+無効にする場合は、チェックを外して **Save** をクリックします。
+
+{{< img src="integrations/guide/azure_portal/enable-CSPM.png" alt="Settings タブで Cloud Security Posture Management を選択した Azure Portal のページ" responsive="true" style="width:100%;">}}
+
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /ja/integrations/azure/#create-datadog-resource
+[1]: https://docs.datadoghq.com/ja/integrations/azure/?tab=link&site=us3#create-datadog-resource
 [2]: https://docs.microsoft.com/en-us/cli/azure/datadog?view=azure-cli-latest
-[3]: /ja/integrations/azure/#metrics-and-logs
-[4]: https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings
-[5]: /ja/serverless/azure_app_services
-[6]: /ja/serverless/azure_app_services/#requirements
+[3]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/control-plane-and-data-plane
+[4]: https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/resource-logs-categories
+[5]: https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings
+[6]: /ja/serverless/azure_app_services
+[7]: /ja/serverless/azure_app_services/#requirements
+[8]: /ja/security_platform/cspm/

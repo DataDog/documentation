@@ -2,25 +2,27 @@
 title: RUM Resources Dashboard
 kind: documentation
 further_reading:
-    - link: '/real_user_monitoring/explorer'
-      tag: 'Documentation'
-      text: 'Explore your views within Datadog'
+- link: '/real_user_monitoring/explorer'
+  tag: 'Documentation'
+  text: 'Learn about the RUM Explorer'
 ---
 
-The resources dashboard provides insights about your applications’ resources. It is separated in four sections:
+## Overview
+
+The resources dashboard provides insights about your applications’ resources. It shows:
 
 - **Resources overview**:
     Visualize which resources are being loaded the most, their associated status code, and their size split by resource type.
 - **First party resources**:
-    Get insight about your first party resources. For more information about resources categorization, visit the [resources documentation][1].
+    Get insight about your first-party resources. For more information about resources categorization, see the [Resources documentation][1].
 - **Third party resources**:
-    Get insight about your third party resources. For more information about resources categorization, visit the [resources documentation][1].
+    Get insight about your third-party resources. For more information about resources categorization, see the [Resources documentation][1].
 - **Resource load timings**:
-    Monitor the trends of [Resource Timings][2] collected from the browser API.
+    Monitor the trends in [resource timings][2] collected by the Browser SDK.
 
 {{< img src="real_user_monitoring/dashboards/resources_dashboard.png" alt="Resource Dashboard" >}}
 
-For more information about the information displayed, check the [RUM Data Collected documentation][3]
+For more information about the data displayed, see [RUM Browser Data Collected][3].
 
 ## Further Reading
 

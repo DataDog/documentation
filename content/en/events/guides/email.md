@@ -6,7 +6,7 @@ aliases:
     - /guides/eventsemail
 ---
 
-If your application does not have an existing [Datadog integration][1], and you don't want to create a [custom Agent check][2], you can send events with email.
+If your application does not have an existing [Datadog integration][1], and you don't want to create a [custom Agent check][2], you can send events with email. This can also be done with messages published to an Amazon SNS topic; read the [Create Datadog Events from Amazon SNS Emails][6] guide for more information.
 
 ## Setup
 
@@ -16,8 +16,7 @@ Before you can send events with email, you need a dedicated email address from D
 2. From the **Account** menu at the bottom left, select **Organization Settings**.
 3. Click the **Events API emails** tab.
 4. Choose the format for your messages from the **Format** dropdown (`Plain text` or `JSON`).
-5. Click the **Create API email** button.
-6. See the [APIs page][5] for your results.
+5. Click the **Create Email** button.
 
 The **Events API emails** section displays all the emails available for your applications and who created them.
 
@@ -82,12 +81,12 @@ The subject of the email becomes the title of the event and the body of the emai
 
 ### Markdown
 
-Datadog event text supports [Markdown][4] but embedding HTML in Markdown is not supported. To use Markdown in the event text, start the text block with `%%% \n` and end the text block with `\n %%%`:
+Datadog event text supports [Markdown][5] but embedding HTML in Markdown is not supported. To use Markdown in the event text, start the text block with `%%% \n` and end the text block with `\n %%%`:
 
 ```json
 {
   "title": "Did you hear the news today?",
-  "text": "%%% \n [an example link](http://catchpoint.com/session_id \"Title\") \n %%%",
+  "text": "%%% \n [an example link](http://example.com/session_id \"Title\") \n %%%",
   "priority": "normal",
   "tags": ["environment:test"],
   "alert_type": "info"
@@ -98,14 +97,14 @@ If you are embedding a link in a Markdown block, make sure the URL is encoded pr
 
 ```text
 # Not encoded
-http://catchpoint.com/session_id:123456
+http://example.com/session_id:123456
 
 # Encoded
-http://catchpoint.com/session_id%3A123456
+http://example.com/session_id%3A123456
 ```
 
 [1]: /integrations/
 [2]: /agent/agent_checks/
 [3]: https://app.datadoghq.com
-[4]: http://daringfireball.net/projects/markdown/syntax#lin
-[5]: https://app.datadoghq.com/account/settings#api
+[5]: http://daringfireball.net/projects/markdown/syntax#lin
+[6]: /integrations/guide/events-from-sns-emails/

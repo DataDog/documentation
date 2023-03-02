@@ -1,20 +1,29 @@
 ---
-title: ネットワークデバイスモニタリング
-kind: documentation
-disable_sidebar: true
-description: ルーター、スイッチ、サーバー、ファイアウォールなどのネットワーク接続デバイスを可視化。
 aliases:
-    - /ja/network_performance_monitoring/devices/
+- /ja/network_performance_monitoring/devices/
+description: ルーター、スイッチ、サーバー、ファイアウォールなどのネットワーク接続デバイスを可視化。
+disable_sidebar: true
 further_reading:
-    - link: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
-      tag: ブログ
-      text: Datadog での SNMP モニタリング
-    - link: https://www.datadoghq.com/blog/monitor-meraki/
-      tag: ブログ
-      text: Datadog で Cisco Meraki を監視する
-    - link: https://www.datadoghq.com/blog/datacenter-monitoring-dashboards/
-      tag: ブログ
-      text: Datadog でデータセンターおよびネットワークデバイスを監視
+- link: https://www.datadoghq.com/knowledge-center/network-monitoring/snmp-monitoring/
+  tag: ナレッジセンター
+  text: SNMP モニタリングの概要
+- link: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
+  tag: ブログ
+  text: Datadog での SNMP モニタリング
+- link: https://www.datadoghq.com/blog/monitor-meraki/
+  tag: ブログ
+  text: Datadog で Cisco Meraki を監視する
+- link: https://www.datadoghq.com/blog/datacenter-monitoring-dashboards/
+  tag: ブログ
+  text: Datadog でデータセンターおよびネットワークデバイスを監視
+- link: https://www.datadoghq.com/blog/network-device-monitoring/
+  tag: ブログ
+  text: ネットワークデバイスモニタリングの紹介
+- link: https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/
+  tag: ブログ
+  text: SNMP トラップによるネットワークパフォーマンスの問題の監視と診断
+kind: documentation
+title: ネットワークデバイスモニタリング
 ---
 
 ## 概要
@@ -23,16 +32,17 @@ further_reading:
 
 <br/>
 
-ネットワークデバイスモニタリングは、ルーター、スイッチ、ファイアウォールなどのオンプレミスおよびバーチャルのネットワークデバイスを可視化するように設計されています。任意のネットワーク上のデバイスを自動的に検出し、帯域幅使用率、送信されたバイト数、デバイスのアップ/ダウンなどのメトリクスを迅速に収集します。
+ネットワークデバイスモニタリングは、ルーター、スイッチ、ファイアウォールなどのオンプレミスおよびバーチャルのネットワークデバイスを可視化します。任意のネットワーク上のデバイスを自動的に検出し、帯域幅使用率、送信されたバイト数、デバイスのアップ/ダウンなどのメトリクスを迅速に収集します。
 
 ## はじめに
 
-1. Datadog Agent をインストールします。
+1. Datadog Agent をインストールします (通常、監視対象デバイスではないサーバーにインストールします)。
 2. [個々のデバイスの監視][1]または[デバイスのオートディスカバリー][2]のいずれかで、SNMP インテグレーションを構成します。
-3. Datadog のすぐに使えるダッシュボードで収集されたメトリクスを表示します。
+3. ネットワークデバイスの探索ページで、ネットワークインフラストラクチャー全体の監視を開始します。
+4. Datadog のすぐに使えるダッシュボードで収集されたメトリクスを表示します。
     - [監視対象のデバイス一覧][3]
     - [すべてのインターフェイスのパフォーマンス全体][4]
-4. [SNMP メトリクス][5]の積極的な監視で問題が発生する前に把握します。
+5. [SNMP メトリクス][5]の積極的な監視で問題が発生する前に把握します。
 
 ## サポートされるデバイス
 

@@ -1,24 +1,28 @@
 ---
 categories:
-  - monitoring
-  - notification
+- monitoring
+- notification
 ddtype: crawler
 dependencies: []
-description: Consultez les alertes Opsmatic et validez-les dans votre flux d'événements Datadog.
-doc_link: 'https://docs.datadoghq.com/integrations/opsmatic/'
+description: Consultez les alertes Opsmatic et validez-les dans votre flux d'événements
+  Datadog.
+doc_link: https://docs.datadoghq.com/integrations/opsmatic/
 draft: false
 git_integration_title: opsmatic
 has_logo: true
 integration_id: opsmatic
 integration_title: Opsmatic
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: opsmatic
 public_title: Intégration Datadog/Opsmatic
-short_description: Consultez les alertes Opsmatic et validez-les dans votre flux d'événements Datadog.
+short_description: Consultez les alertes Opsmatic et validez-les dans votre flux d'événements
+  Datadog.
 version: '1.0'
 ---
+
 ## Présentation
 
 Associez Opsmatic à Datadog pour :

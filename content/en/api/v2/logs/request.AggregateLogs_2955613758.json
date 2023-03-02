@@ -1,0 +1,30 @@
+{
+  "compute": [
+    {
+      "aggregation": "count",
+      "interval": "5m",
+      "type": "timeseries"
+    }
+  ],
+  "filter": {
+    "from": "now-15m",
+    "indexes": [
+      "main"
+    ],
+    "query": "*",
+    "to": "now"
+  },
+  "group_by": [
+    {
+      "facet": "host",
+      "missing": "miss",
+      "sort": {
+        "type": "measure",
+        "order": "asc",
+        "aggregation": "pc90",
+        "metric": "@duration"
+      },
+      "total": "recall"
+    }
+  ]
+}

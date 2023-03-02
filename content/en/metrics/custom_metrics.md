@@ -9,6 +9,7 @@ aliases:
   - /developers/metrics/custom_metrics/
   - /getting_started/custom_metrics
   - /developers/metrics/
+  - /metrics/guide/tag-configuration-cardinality-estimation-tool/
 further_reading:
 - link: "/developers/dogstatsd/"
   tag: "Documentation"
@@ -27,7 +28,7 @@ If a metric is not submitted from one of the [more than {{< translate key="integ
 
 A custom metric is identified by **a unique combination of a metric's name and tag values (including the host tag)**. In general, any metric you send using [DogStatsD][3] or through a [custom Agent Check][4] is a custom metric.
 
-**Note**: Users with the Datadog Admin roles can see the monthly average number of custom metrics per hour and the top 500 custom metrics for their account in the [usage details page][5]. Learn more about [how custom metrics are counted][6].
+**Note**: Users with the Datadog Admin role or `usage_read` permission can see the monthly average number of custom metrics per hour and the top 5000 custom metrics for their account in the [usage details page][5]. Learn more about [how custom metrics are counted][6].
 
 ## Custom metrics properties
 
@@ -57,13 +58,14 @@ The following custom metric naming convention must be followed:
 ## Submitting custom metrics
 
 {{< whatsnext desc="There are multiple ways to send metrics to Datadog:">}}
-    {{< nextlink href="/metrics/agent_metrics_submission" >}}Custom Agent check{{< /nextlink >}}
-    {{< nextlink href="/metrics/dogstatsd_metrics_submission" >}}DogStatsD{{< /nextlink >}}
-    {{< nextlink href="/metrics/powershell_metrics_submission" >}}PowerShell{{< /nextlink >}}
+    {{< nextlink href="/metrics/custom_metrics/agent_metrics_submission" >}}Custom Agent check{{< /nextlink >}}
+    {{< nextlink href="/metrics/custom_metrics/dogstatsd_metrics_submission" >}}DogStatsD{{< /nextlink >}}
+    {{< nextlink href="/metrics/custom_metrics/powershell_metrics_submission" >}}PowerShell{{< /nextlink >}}
     {{< nextlink href="/serverless/custom_metrics" >}}AWS Lambda{{< /nextlink >}}
     {{< nextlink href="/api/v1/metrics/#submit-metrics" >}}Datadog's HTTP API{{< /nextlink >}}
     {{< nextlink href="/logs/log_configuration/logs_to_metrics/#generate-a-log-based-metric" >}}Generate Log-based metrics{{< /nextlink >}}
     {{< nextlink href="/tracing/generate_metrics/" >}}Generate APM span-based metrics{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/generate_metrics/" >}}Generate RUM event-based metrics{{< /nextlink >}}
     {{< nextlink href="/infrastructure/process/increase_process_retention/#generate-a-process-based-metric" >}}Generate live process-based metrics{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -79,8 +81,8 @@ You can also use one of the [Datadog official and community contributed API and 
 
 [1]: /integrations/
 [2]: /account_management/billing/custom_metrics/#standard-integrations
-[3]: /metrics/dogstatsd_metrics_submission/
-[4]: /metrics/agent_metrics_submission/
+[3]: /metrics/custom_metrics/dogstatsd_metrics_submission/
+[4]: /metrics/custom_metrics/agent_metrics_submission/
 [5]: https://app.datadoghq.com/account/usage/hourly
 [6]: /account_management/billing/custom_metrics/#counting-custom-metrics
 [7]: /metrics

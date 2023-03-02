@@ -1,22 +1,30 @@
 ---
 aliases:
-  - /ja/integrations/aws/
-  - /ja/logs/aws
-  - /ja/integrations/faq/revoking-aws-keys-and-enabling-role-delegation-for-the-datadog-aws-integration/
-  - /ja/integrations/faq/additional-aws-metrics-min-max-sum
-  - /ja/integrations/faq/why-am-i-only-seeing-the-average-values-of-my-custom-aws-cloudwatch-metrics/
+- /ja/integrations/aws/
+- /ja/logs/aws
+- /ja/integrations/faq/revoking-aws-keys-and-enabling-role-delegation-for-the-datadog-aws-integration/
+- /ja/integrations/faq/additional-aws-metrics-min-max-sum
+- /ja/integrations/faq/why-am-i-only-seeing-the-average-values-of-my-custom-aws-cloudwatch-metrics/
 categories:
-  - cloud
-  - aws
-  - log collection
-ddtype: crawler
+- cloud
+- aws
+- log collection
 dependencies: []
 description: AWS サービスを Datadog と統合。
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_web_services/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_web_services/
 draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/monitor-aws-control-plane-api-usage-metrics/
+  tag: ブログ
+  text: Datadog で AWS コントロールプレーン API の使用量メトリクスを監視する
+- link: https://www.datadoghq.com/blog/aws-reinvent-2022-recap/
+  tag: ブログ
+  text: AWS re:Invent 2022 のハイライト
 git_integration_title: amazon_web_services
 has_logo: true
+integration_id: amazon-web-services
 integration_title: AWS
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -25,89 +33,21 @@ public_title: Datadog-AWS インテグレーション
 short_description: AWS サービスを Datadog と統合。
 version: '1.0'
 ---
+
 ## 概要
 
 Amazon Web Services (AWS) を接続すると、次のことができるようになります。
 
-- AWS ステータスの自動更新をストリームに表示する
+- イベントエクスプローラーで AWS ステータスの自動更新を確認する
 - Agent をインストールすることなく、EC2 ホストの CloudWatch メトリクスを取得する
-- EC2 ホストを EC2 固有の情報にタグ付けする (アベイラビリティー ゾーンなど)
+- EC2 ホストに EC2 固有の情報をタグ付けする
 - EC2 のスケジュール設定されたメンテナンス イベントをストリームに表示する
 - その他のさまざまな AWS 製品から CloudWatch メトリクスとイベントを収集する
+- イベントエクスプローラーで CloudWatch アラームを確認する
 
-<div class="alert alert-warning">
-Datadog の Amazon インテグレーションは、<a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html">CloudWatch からすべてのメトリクス</a> を収集するように構築されています。Datadog では継続的にドキュメントを更新してすべてのサブインテグレーションを表示できるように努めていますが、新しいメトリクスやサービスがクラウドサービスから次々にリリースされるため、インテグレーション一覧が追い付かないことがあります。
-</div>
+AWS インテグレーションをすぐに使い始めるには、[AWS スタートガイド][1]をご確認ください。
 
-| インテグレーション                             | 説明                                                                            |
-| --------------------------------------- | -------------------------------------------------------------------------------------- |
-| [API Gateway][1]                        | API の作成、公開、管理、セキュリティ保護                                             |
-| [Appstream][2]                          | AWS 上のフルマネージド型のアプリケーションストリーミング                                             |
-| [AppSync][3]                            | リアルタイムのデータ同期機能とオフラインのプログラミング機能を備えた GraphQL サービス |
-| [Athena][4]                             | サーバーレスのインタラクティブなクエリサービス                                                   |
-| [Autoscaling][5]                        | EC2 容量のスケーリング                                                                     |
-| [料金][6]                            | 請求と予算                                                                    |
-| [CloudFront][7]                         | ローカルのコンテンツ配信ネットワーク                                                         |
-| [Cloudhsm][8]                           | マネージド型のハードウェアセキュリティモジュール (HSM)                                                 |
-| [CloudSearch][9]                        | ログファイルおよび AWS API 呼び出しへのアクセス                                                  |
-| [CloudTrail][10]                        | ログファイルおよび AWS API 呼び出しへのアクセス                                                  |
-| [CodeBuild][11]                         | フルマネージド型のビルドサービス                                                            |
-| [CodeDeploy][12]                        | コードデプロイの自動化                                                              |
-| [Cognito][13]                           | セキュリティ保護されたユーザーのサインアップとサインイン                                                        |
-| [Connect][14]                           | セルフサービス型のクラウドベースコンタクトセンターサービス                                     |
-| [Direct Connect][15]                    | AWS への専用ネットワーク接続                                                    |
-| [DMS][16]                               | データベース移行サービス                                                             |
-| [DocumentDB][17]                        | MongoDB 互換データベース                                                            |
-| [Dynamo DB][18]                         | NoSQL データベース                                                                         |
-| [EBS (Elastic Block Store)][19]         | 永続的なブロックレベルのストレージボリューム                                                 |
-| [EC2 (Elastic Cloud Compute)][20]       | クラウドのサイズ変更可能なコンピュート容量                                                |
-| [EC2 スポット][21]                          | 未使用の EC2 容量の活用                                                  |
-| [ECS (Elastic Container Service)][22]   | Docker コンテナをサポートするコンテナ管理サービス                           |
-| [EFS (Elastic File System)][23]         | 共有ファイルストレージ                                                                    |
-| [EKS][24]                               | Kubernetes 用の Elastic Container Service                                               |
-| [Elastic Transcoder][25]                | クラウドでのメディアおよびビデオコード変換                                               |
-| [ElastiCache][26]                       | クラウドのインメモリキャッシュ                                                           |
-| [Elastic Beanstalk][27]                 | Web アプリケーションとサービスのデプロイとスケーリングを行うサービス                        |
-| [ELB (Elastic Load Balancing)][28]      | 着信アプリケーショントラフィックを複数の Amazon EC2 インスタンス間で分散          |
-| [EMR (Elastic Map Reduce)][29]          | Hadoop を使用するデータ処理                                                           |
-| [ES (Elasticsearch)][30]                | Elasticsearch クラスターのデプロイ、操作、スケーリング                                      |
-| [Firehose][31]                          | ストリーミングデータの取得とロード                                                        |
-| [Gamelift][32]                          | 専用ゲームサーバーホスティング                                                          |
-| [Glue][33]                              | 分析のためのデータの抽出、変換、ロード                                        |
-| [GuardDuty][34]                         | インテリジェントな脅威の検出                                                           |
-| [Health][35]                            | AWS のリソース、サービス、アカウントの状態の可視化                |
-| [Inspector][36]                         | 自動化されたセキュリティ評価                                                          |
-| [IoT (モノのインターネット)][37]          | クラウドサービスへの IOT デバイスの接続                                                |
-| [Kinesis][38]                           | 大規模な分散データストリームをリアルタイムに処理するサービス                    |
-| [KMS (Key Management Service)][39]      | 暗号キーの作成と制御                                                     |
-| [Lambda][40]                            | サーバーレスコンピューティング                                                                   |
-| [Lex][41]                               | 会話ボットの構築                                                                |
-| [Machine Learning][42]                  | 機械学習モデルの作成                                                         |
-| [MediaConnect][43]                      | ライブビデオの転送                                                               |
-| [MediaConvert][44]                      | 放送およびマルチ画面配信のためのビデオ処理                                |
-| [MediaPackage][45]                      | インターネット配信のためのビデオの準備と保護                               |
-| [MediaTailor][46]                       | スケーラブルなサーバー側広告挿入                                                      |
-| [MQ][47]                                | ActiveMQ 向けのマネージド型メッセージブローカー                                                    |
-| [Managed Streaming for Kafka][48]       | Apache Kafka を使用してストリーミングデータを処理するアプリケーションの構築と実行             |
-| [NAT ゲートウェイ][49]                       | プライベートサブネット内のインスタンスをインターネットまたは他の AWS サービスに接続可能  |
-| [Neptune][50]                           | クラウド向けに構築された高速・高信頼性のグラフデータベース                                      |
-| [OpsWorks][51]                          | 構成管理                                                               |
-| [Polly][52]                             | テキスト読み上げサービス                                                                    |
-| [RDS (Relational Database Service)][53] | クラウドのリレーショナルデータベース                                                       |
-| [Redshift][54]                          | データウェアハウスソリューション                                                                |
-| [Rekognition][55]                       | アプリケーション向けのイメージおよびビデオ分析                                              |
-| [Route 53][56]                          | DNS とトラフィック管理と可用性のモニタリング                                |
-| [S3 (Simple Storage Service)][57]       | 高可用性・スケーラブルなクラウドストレージサービス                                    |
-| [SageMaker][58]                         | 機械学習モデルおよびアルゴリズム                                                 |
-| [SES (Simple Email Service)][59]        | 費用効率の高いアウトバウンド専用のメール送信サービス                                    |
-| [SNS (Simple Notification System)][60]  | アラートと通知                                                               |
-| [SQS (Simple Queue Service)][61]        | メッセージキューサービス                                                                |
-| [Storage Gateway][62]                   | ハイブリッドクラウドストレージ                                                                   |
-| [SWF (Simple Workflow Service)][63]     | クラウドワークフロー管理                                                              |
-| [VPC (Virtual Private Cloud)][64]       | 仮想ネットワーク内での AWS リソースの起動                                            |
-| [Web Application Firewall (WAF)][65]    | 一般的な Web エクスプロイトからの Web アプリケーションの保護                                      |
-| [Workspaces][66]                        | セキュアなデスクトップコンピューティングサービス                                                       |
-| [X-Ray][67]                             | 分散アプリケーションのトレーシング                                                   |
+Datadog の Amazon Web Services インテグレーションは、[90 以上の AWS サービス][3]のログ、イベント、[CloudWatch からの全メトリクス][2]を収集します。
 
 ## セットアップ
 
@@ -115,223 +55,80 @@ Datadog の Amazon インテグレーションは、<a href="https://docs.aws.am
 <div class="alert alert-warning">AWS のロール委任は、Datadog for Government site でサポートされていません。<a href="?tab=accesskeysgovcloudorchinaonly#setup">アクセスキー</a>を使用する必要があります。</div>
 {{< /site-region >}}
 
-以下のいずれかの方法を使用して AWS アカウントを Datadog に統合し、メトリクス、トレース、ログを収集します。
+以下のいずれかの方法を使用して AWS アカウントを Datadog に統合し、メトリクス、イベント、タグ、ログを収集します。
 
-- [ロールの委任 (自動)](?tab=roledelegation#automatic---cloudformation): CloudFormation テンプレートを使用して、必要な AWS ロールを自動的に設定します（推奨）。
-- [ロールの委任 (手動)](?tab=roledelegation#manual): 必要なロールを手動で作成し、必要な資格情報を該当フォームにコピーします。
-- [アクセスキー](?tab=accesskeysgovcloudorchinaonly#setup): GovCloud または中国のみで使用
+### 自動
 
-{{< tabs >}}
-{{% tab "Role delegation" %}}
+  * **CloudFormation (手早く始めるには最適)**  
+    CloudFormation で AWS インテグレーションを設定するには、[AWS スタートガイド][1]を参照してください。
 
-必要となる AWS ロールのセットアップ方法を選択してください。CloudFormation を推奨します。
+  * **Terraform**  
+    AWS と Terraform のインテグレーションを設定するには、[AWS と Terraform のインテグレーション][4]を参照してください。
 
-### 自動 - CloudFormation
-
-1. [Datadog AWS インテグレーションタイル][1] を開きます。**Install** ボタンをクリックし、このインテグレーションをインストールします。
-2. _Configuration_ タブで **Automatically Using CloudFormation** を選択します。既に AWS アカウントがアタッチされている場合は、まず **Add another account** をクリックしてください。
-4. AWS コンソールにログインします。
-5. CloudFormation ページでスタックを新規作成し、[Datadog API キー][2]を入力します。
-6. Update the [Datadog AWS インテグレーション タイル][1]を、CloudFormation のスタック作成に使用した [IAM ロール名とアカウント ID][3] で更新します。
+  * **Control Tower**  
+    [Control Tower Account Factory][5] で新規に AWS アカウントをプロビジョニングする際の AWS インテグレーション設定は、[Control Tower セットアップガイド][6]をご覧ください。
 
 ### 手動
 
-#### AWS
+   * **ロールの委任**  
+     AWS インテグレーションをロールの委任で手動設定する場合は、[手動設定ガイド][7]を参照してください。
 
-1. AWS [IAM コンソール][4]で新しいロールを作成します。
-2. ロールタイプで、`Another AWS account` を選択します。
-3. アカウント ID で、`464622532012` (Datadog のアカウント ID) を入力します。これは、Datadog に AWS データへの読み取り専用アクセスを許可することを意味します。
-4. `Require external ID` を選択し、[AWS インテグレーションタイル][5]で生成された ID を入力します。**Require MFA** は無効のままにしておきます。_外部 ID の詳細については、[IAM ユーザーガイドのこのドキュメント][5]を参照してください_。
-5. `Next: Permissions` をクリックします。
-6. 既にポリシーを作成してある場合は、このページで検索して選択し、ステップ 12 に進んでください。そうでない場合は、`Create Policy` をクリックします。新しいウィンドウが開きます。
-7. `JSON` タブを選択します。Datadog が提供する各 AWS インテグレーションを利用するには、テキストボックスの下にある[ポリシー スニペット](#datadog-aws-iam-policy)を使用します。これらのアクセス許可は、他のコンポーネントがインテグレーションに追加されると変更される場合があります。
-8. `Review policy` をクリックします。
-9. ポリシーに `DatadogAWSIntegrationPolicy`、または自分が選択した名前を付け、適切な説明を入力します。
-10. `Create policy` をクリックします。これで、このウィンドウを閉じることができます。
-11. "Create role" ウィンドウに戻り、ポリシーのリストを更新し、作成したポリシーを選択します。
-12. `Next: Review` をクリックします。
-13. ロールに `DatadogAWSIntegrationRole` などの名前を付け、適切な説明を入力します。`Create Role` をクリックします。
+   * **アクセスキー (GovCloud または中国のみ)**  
+     アクセスキーによる AWS インテグレーションを設定する場合は、[手動設定ガイド][8]を参照してください。
 
-**補足**: Terraform を使用する場合は、[Terraform との AWS インテグレーション][6]を利用して Datadog IAM ポリシーをセットアップします。
-
-#### Datadog
-
-1. [AWS インテグレーション タイル][1]を開きます。
-2. **Role Delegation** タブを選択して **Manually** を選択します。
-3. AWS アカウント ID を**ダッシュなしで**入力します（例、`123456789012`）。アカウント ID は、[AWS インテグレーションのインストール](#installation)中に作成されるロールの ARN にあります。
-4. 作成されたロールの名前を入力します。**注:** インテグレーションタイルに入力する名前は大文字と小文字が区別され、AWS 側で作成されるロール名と完全に一致する必要があります。
-5. ダイアログの左側で、メトリクスを収集するサービスを選択します。
-6. オプションで、すべてのホストやメトリクスにタグを追加します。
-7. オプションで、`to hosts with tag` テキストボックスに AWS タグを入力して、EC2 インスタンスのサブセットを監視します。**注:** インスタンスに接続された EBS ボリュームにも適用されます。
-8. オプションで、`to Lambdas with tag` テキストボックスに AWS タグを入力して、Lambdas のサブセットを監視します。
-9. **Install Integration** をクリックします。
-
-#### Datadog AWS IAM ポリシー
-
-以下に記載されているアクセス許可はポリシー ドキュメントに含まれているもので、`List*` や `Get*` などのワイルドカードを使用しています。厳密なポリシーが必要な場合は、記載されているとおりの完全なアクション名を使用し、必要なサービスの Amazon API ドキュメントを参照してください。
-
-##### すべてのアクセス許可
-すべてのアクセス許可を付与したくない場合は、既存ポリシーのうち少なくとも **AmazonEC2ReadOnlyAccess** および **CloudWatchReadOnlyAccess** を使用してください。アクセス許可の詳細については、[主要なアクセス許可](#主要なアクセス許可) セクションをご覧ください。
-
-```json
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Action": [
-                "apigateway:GET",
-                "autoscaling:Describe*",
-                "budgets:ViewBudget",
-                "cloudfront:GetDistributionConfig",
-                "cloudfront:ListDistributions",
-                "cloudtrail:DescribeTrails",
-                "cloudtrail:GetTrailStatus",
-                "cloudtrail:LookupEvents",
-                "cloudwatch:Describe*",
-                "cloudwatch:Get*",
-                "cloudwatch:List*",
-                "codedeploy:List*",
-                "codedeploy:BatchGet*",
-                "directconnect:Describe*",
-                "dynamodb:List*",
-                "dynamodb:Describe*",
-                "ec2:Describe*",
-                "ecs:Describe*",
-                "ecs:List*",
-                "elasticache:Describe*",
-                "elasticache:List*",
-                "elasticfilesystem:DescribeFileSystems",
-                "elasticfilesystem:DescribeTags",
-                "elasticfilesystem:DescribeAccessPoints",
-                "elasticloadbalancing:Describe*",
-                "elasticmapreduce:List*",
-                "elasticmapreduce:Describe*",
-                "es:ListTags",
-                "es:ListDomainNames",
-                "es:DescribeElasticsearchDomains",
-                "health:DescribeEvents",
-                "health:DescribeEventDetails",
-                "health:DescribeAffectedEntities",
-                "kinesis:List*",
-                "kinesis:Describe*",
-                "lambda:AddPermission",
-                "lambda:GetPolicy",
-                "lambda:List*",
-                "lambda:RemovePermission",
-                "logs:DeleteSubscriptionFilter",
-                "logs:DescribeLogGroups",
-                "logs:DescribeLogStreams",
-                "logs:DescribeSubscriptionFilters",
-                "logs:FilterLogEvents",
-                "logs:PutSubscriptionFilter",
-                "logs:TestMetricFilter",
-                "rds:Describe*",
-                "rds:List*",
-                "redshift:DescribeClusters",
-                "redshift:DescribeLoggingStatus",
-                "route53:List*",
-                "s3:GetBucketLogging",
-                "s3:GetBucketLocation",
-                "s3:GetBucketNotification",
-                "s3:GetBucketTagging",
-                "s3:ListAllMyBuckets",
-                "s3:PutBucketNotification",
-                "ses:Get*",
-                "sns:List*",
-                "sns:Publish",
-                "sqs:ListQueues",
-                "states:ListStateMachines",
-                "states:DescribeStateMachine",
-                "support:*",
-                "tag:GetResources",
-                "tag:GetTagKeys",
-                "tag:GetTagValues",
-                "xray:BatchGetTraces",
-                "xray:GetTraceSummaries"
-            ],
-            "Effect": "Allow",
-            "Resource": "*"
-        }
-    ]
-}
-```
-
-##### 主要なアクセス許可
-
-コア Datadog AWS インテグレーションは、AWS CloudWatch からデータを取得します。少なくとも、ポリシー ドキュメントで次のアクションを許可する必要があります。
-
-```json
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Action": [
-                "cloudwatch:Get*",
-                "cloudwatch:List*",
-                "ec2:Describe*",
-                "support:*",
-                "tag:GetResources",
-                "tag:GetTagKeys",
-                "tag:GetTagValues"
-            ],
-            "Effect": "Allow",
-            "Resource": "*"
-        }
-    ]
-}
-```
-
-| AWS アクセス許可             | 説明                                                                                  |
-| -------------------------- | -------------------------------------------------------------------------------------------- |
-| `cloudwatch:ListMetrics`   | 使用可能な CloudWatch メトリクスをリスト化します。                                                       |
-| `cloudwatch:GetMetricData` | 特定のメトリクスのデータ ポイントを取得します。                                                        |
-| `support:*`:               | サービスの制限に関するメトリクスを追加します。<br>[AWS の制限][7]のためフル アクセスが必要です。 |
-| `tag:getResources`         | リソース タイプ別にカスタム タグを取得します。                                                            |
-| `tag:getTagKeys`           | AWS アカウント内のリージョン別にタグ キーを取得します。                                                |
-| `tag:getTagValues`         | AWS アカウント内のリージョン別にタグ値を取得します。                                              |
-
-Resource Group Tagging API の主な用途は、カスタムタグの収集に必要な API 呼び出しの数を減らすことです。詳細については、AWS Web サイトの[タグ ポリシー][8]ドキュメントを参照してください。
-
-[1]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[2]: https://app.datadoghq.com/account/settings#api
-[3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/console_account-alias.html
-[4]: https://console.aws.amazon.com/iam/home#/roles
-[5]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html
-[6]: https://docs.datadoghq.com/ja/integrations/faq/aws-integration-with-terraform
-[7]: https://docs.aws.amazon.com/awssupport/latest/user/Welcome.html#trustedadvisorsection
-[8]: http://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/Welcome.html
-{{% /tab %}}
-{{% tab "Access keys (GovCloud or China Only)" %}}
-
-#### AWS
-
-1. AWS コンソールで、Datadog インテグレーションで使用される IAM ユーザーをセットアップします。
-2. Datadog インテグレーション IAM ユーザー用のアクセスキーとシークレットキーを生成します。
-
-詳細は、[AWS ドキュメント][1]をご参照ください。
-
-#### Datadog
-
-1. [AWS インテグレーションタイル][2]を開きます。**Install** ボタンをクリックし、このインテグレーションをインストールします。
-2. **Access Keys (GovCloud or China Only)** タブを選択します。
-3. `AWS アクセスキー` と `AWS シークレットキー` を入力します。GovCloud および中国用のアクセスキーとシークレットキーのみが許可されます。
-4. ダイアログの左側で、メトリクスを収集するサービスを選択します。
-5. オプションで、すべてのホストやメトリクスにタグを追加します。
-6. オプションで、`to hosts with tag` テキストボックスに AWS タグを入力して、EC2 インスタンスのサブセットを監視します。**注:** インスタンスに接続された EBS ボリュームにも適用されます。
-7. オプションで、`to Lambdas with tag` テキストボックスに AWS タグを入力して、Lambdas のサブセットを監視します。
-8. **Install Integration** をクリックします。
-
-[1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-{{% /tab %}}
-{{< /tabs >}}
+{{% aws-permissions %}}
 
 ## ログの収集
 
 AWSサービスログを Datadog に送信する方法はいくつかあります。
 
-- [Kinesis Firehose destination][68]: Kinesis Firehose 配信ストリームで Datadog の宛先を使用して、ログを Datadog に転送します。CloudWatch から非常に大量のログを送信するには、このアプローチを使用することをお勧めします。
-- [Forwarder Lambda 関数][69]: S3 バケットまたは CloudWatch ロググループにサブスクライブする Datadog Forwarder Lambda 関数をデプロイし、ログを Datadog に転送します。Lambda 関数からログを介して非同期でトレース、拡張カスタムメトリクス、またはカスタムメトリクスを送信するには、このアプローチを使用する**必要があります**。また、S3 またはデータを Kinesis に直接ストリーミングできないその他のリソースからログを送信する場合は、このアプローチを使用することをお勧めします。
+- [Kinesis Firehose destination][9]: Kinesis Firehose 配信ストリームで Datadog の宛先を使用して、ログを Datadog に転送します。CloudWatch から非常に大量のログを送信する際は、このアプローチを使用することが推奨されます。
+- [Forwarder Lambda 関数][10]: S3 バケットまたは CloudWatch ロググループにサブスクライブする Datadog Forwarder Lambda 関数をデプロイし、ログを Datadog に転送します。また、S3 またはデータを Kinesis に直接ストリーミングできないその他のリソースからログを送信する場合、Datadog ではこのアプローチを使用することをお勧めしています。
+
+## メトリクスの収集
+
+メトリクスを Datadog に送信する方法は 2 つあります。
+
+- [メトリクスのポーリング][11]: AWS インテグレーションで利用できる API ポーリングです。CloudWatch API をメトリクス別にクロールしてデータを取得し、Datadog に送信します。新しいメトリクスの取得は平均 10 分毎に行われます。
+- [Kinesis Firehose でのメトリクスストリーム][12]: Amazon CloudWatch Metric Streams と Amazon Kinesis Data Firehose を使用してメトリクスを確認します。**注**: このメソッドには 2 - 3 分のレイテンシーがあり、別途設定が必要となります。
+
+## リソース収集
+
+一部の Datadog 製品は、AWS リソース (S3 バケット、RDS スナップショット、CloudFront ディストリビューションなど) の構成方法に関する情報を活用します。Datadog は、AWS アカウントに対して読み取り専用の API 呼び出しを行うことにより、この情報を収集します。
+
+### クラウドセキュリティポスチャ管理
+
+#### セットアップ
+
+お使いの AWS アカウントで AWS インテグレーションの設定を行っていない場合は、上記の[設定プロセス][13]を完了させます。クラウドセキュリティポスチャ管理が有効化されていることを適宜ご確認ください。
+
+**注:** この機能を使用するには、AWS インテグレーションに**ロールの委任**を設定する必要があります。
+
+既存の AWS インテグレーションに Cloud Security Posture Management を追加するには、以下の手順でリソース収集を有効にしてください。
+
+1. 自動**または**手動手順で Datadog IAM ロールに必要な権限を提供します。
+
+   **自動** - CloudFormation テンプレートを更新します。
+   a. CloudFormation コンソールで Datadog インテグレーションのインストールに使用した主要なスタックを探し、`Update` を選択します。
+   b. `Replace current template` を選択します。
+   c. `Amazon S3 URL` を選択して `https://datadog-cloudformation-template.s3.amazonaws.com/aws/main.yaml` を入力し、`Next` をクリックします。
+   d. `CloudSecurityPostureManagementPermissions` を `true` に設定し、`Next` をクリックします。`Review` ページに到達するまでその他の既存のパラメーターは変更しないでください。ここで変更点をプレビューおよび確認します。
+   e. 下部にある 2 つの確認ボックスをオンにし、`Update stack` をクリックします。
+
+   **手動** - [AWS が管理する `SecurityAudit` ポリシー][14]を Datadog AWS IAM ロールにアタッチします。このポリシーは [AWS コンソール][14]にあります。
+
+2. [Datadog AWS インテグレーションページ][15]で、以下の手順で設定を完了させます。または、[Update an AWS Integration][7] API エンドポイントを利用することも可能です。
+
+   1. リソース収集を有効化したい AWS アカウントをクリックします。
+   2. そのアカウントの **Resource collection** タブに移動し、`Cloud Security Posture Management Collection` を有効にします。
+   3. ページの右下にある `Save` をクリックします。
+
+## アラームの収集
+
+AWS CloudWatch アラームを Datadog イベントエクスプローラーに送信する方法は 2 つあります。
+
+- アラームポーリング: アラームポーリングは AWS インテグレーションですぐに使用でき、[DescribeAlarmHistory][16] API を介してメトリクスアラームをフェッチします。この方法に従うと、イベントソース `Amazon Web Services` の下にアラームが分類されます。**注**: クローラーは複合アラームを収集しません。
+- SNS トピック: アラームを SNS トピックにサブスクライブしてから、SNS メッセージを Datadog に転送することで、イベントエクスプローラー内のすべての AWS CloudWatch アラームを確認できます。Datadog でイベントとして SNS メッセージを受信する方法については、[SNS メッセージの受信][17]を参照してください。この方法に従うと、イベントソース `Amazon SNS` の下にアラームが分類されます。
 
 ## 収集データ
 
@@ -341,153 +138,123 @@ AWSサービスログを Datadog に送信する方法はいくつかありま�
 
 ### イベント
 
-AWS のイベントは、AWS サービス ベースごとに収集されます。収集されるイベントの詳細については、各 AWS サービスの文書を参照してください。
+AWS からのイベントは、AWS サービス単位で収集されます。収集されるイベントの詳細については、[お使いの AWS サービスのドキュメント][3]を参照してください。
 
 ### タグ
 
-AWS インテグレーションから以下のタグが収集されます。**注**: 一部のタグは、特定のメトリクスにのみ表示されます。
+AWS インテグレーションにより以下のタグが収集されます。**注**: 一部のタグは、特定のメトリクスにのみ表示されます。
 
 | インテグレーション            | Datadog タグキー                                                                                                                                                                                              |
 |------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | すべて                    | `region`                                                                                                                                                                                                      |
-| [API Gateway][1]      | `apiid`、apiname`、`method`、`resource`、`stage`                                                                                                                                                             |
-| [Auto Scaling][5]    | `autoscalinggroupname`、`autoscaling_group`                                                                                                                                                                   |
-| [料金][6]          | `account_id`、`budget_name`、`budget_type`、`currency`、`servicename`、`time_unit`                                                                                                                            |
-| [CloudFront][7]       | `distributionid`                                                                                                                                                                                              |
-| [CodeBuild][11]              | `project_name`                                                                                                                                                                                                |
-| [CodeDeploy][12]       | `application`、`creator`、`deployment_config`、`deployment_group`、`deployment_option`、`deployment_type`、`status`                                                                                           |
-| [DirectConnect][15]    | `connectionid`                                                                                                                                                                                                |
-| [DynamoDB][18]         | `globalsecondaryindexname`、`operation`、`streamlabel`、`tablename`                                                                                                                                           |
-| [EBS][19]              | `volumeid`、`volume-name`、`volume-type`                                                                                                                                                                      |
-| [EC2][20]              | `autoscaling_group`、`availability-zone`、`image`、`instance-id`、`instance-type`、`kernel`、`name`、`security_group_name`                                                                                    |
-| [ECS][22]              | `clustername`、`servicename`、`instance_id`                                                                                                                                                                   |
-| [EFS][24]              | `filesystemid`                                                                                                                                                                                                |
-| [ElastiCache][]      | `cachenodeid`、`cache_node_type`、`cacheclusterid`、`cluster_name`、`engine`、`engine_version`、`prefered_availability-zone`、`replication_group`                                                             |
-| [ElasticBeanstalk][27] | `environmentname`、`enviromentid`                                                                                                                                                                             |
-| [ELB][28]              | `availability-zone`、`hostname`、`loadbalancername`、`name`、`targetgroup`                                                                                                                                    |
-| [EMR][29]              | `cluster_name`、`jobflowid`                                                                                                                                                                                   |
-| [ES][30]               | `dedicated_master_enabled`、`ebs_enabled`、`elasticsearch_version`、`instance_type`、`zone_awareness_enabled`                                                                                                 |
-| [Firehose][31]         | `deliverystreamname`                                                                                                                                                                                          |
-| [Health][35]           | `event_category`、`status`、`service`                                                                                                                                                                         |
-| [IoT][37]              | `actiontype`、`protocol`、`rulename`                                                                                                                                                                          |
-| [Kinesis][38]          | `streamname`、`name`、`state`                                                                                                                                                                                 |
-| [KMS][39]              | `keyid`                                                                                                                                                                                                       |
-| [Lambda][40]           | `functionname`、`resource`、`executedversion`、`memorysize`、`runtime`                                                                                                                                        |
-| [Machine Learning][42] | `mlmodelid`、`requestmode`                                                                                                                                                                                    |
-| [MQ][47]               | `broker`、`queue`、`topic`                                                                                                                                                                                    |
-| [OpsWorks][51]         | `stackid`、`layerid`、`instanceid`                                                                                                                                                                            |
-| [Polly][52]            | `operation`                                                                                                                                                                                                   |
-| [RDS][53]              | `auto_minor_version_upgrade`、`dbinstanceclass`、`dbclusteridentifier`、`dbinstanceidentifier`、`dbname`、`engine`、`engineversion`、`hostname`、`name`、`publicly_accessible`、`secondary_availability-zone` |
-| [Redshift][54]       | `clusteridentifier`、`latency`、`nodeid`、`service_class`、`stage`、`wlmid`                                                                                                                                   |
-| [Route 53][56]        | `healthcheckid`                                                                                                                                                                                               |
-| [S3][57]             | `bucketname`、`filterid`、`storagetype`                                                                                                                                                                       |
-| [SES][59]             | タグキーは AWS でカスタム設定されます。                                                                                                                                                                               |
-| [SNS][60]              | `topicname`                                                                                                                                                                                                   |
-| [SQS][61]              | `queuename`                                                                                                                                                                                                   |
-| [VPC][64]              | `nategatewayid`、`vpnid`、`tunnelipaddress`                                                                                                                                                                   |
-| [WorkSpaces][66]       | `directoryid`、`workspaceid`                                                                                                                                                                                  |
+| [API Gateway][19]      | `apiid`、apiname`、`method`、`resource`、`stage`                                                                                                                                                             |
+| [App Runner][20]      | `instance`、`serviceid`、`servicename`                                                                                                                                                                       |
+| [Auto Scaling][21]    | `autoscalinggroupname`、`autoscaling_group`                                                                                                                                                                   |
+| [Billing][22]          | `account_id`、`budget_name`、`budget_type`、`currency`、`servicename`、`time_unit`                                                                                                                            |
+| [CloudFront][23]       | `distributionid`                                                                                                                                                                                              |
+| [CodeBuild][24]              | `project_name`                                                                                                                                                                                                |
+| [CodeDeploy][25]       | `application`、`creator`、`deployment_config`、`deployment_group`、`deployment_option`、`deployment_type`、`status`                                                                                           |
+| [DirectConnect][26]    | `connectionid`                                                                                                                                                                                                |
+| [DynamoDB][27]         | `globalsecondaryindexname`、`operation`、`streamlabel`、`tablename`                                                                                                                                           |
+| [EBS][28]              | `volumeid`、`volume-name`、`volume-type`                                                                                                                                                                      |
+| [EC2][29]              | `autoscaling_group`、`availability-zone`、`image`、`instance-id`、`instance-type`、`kernel`、`name`、`security_group_name`                                                                                    |
+| [ECS][30]              | `clustername`、`servicename`、`instance_id`                                                                                                                                                                   |
+| [EFS][31]              | `filesystemid`                                                                                                                                                                                                |
+| [ElastiCache][32]      | `cachenodeid`、`cache_node_type`、`cacheclusterid`、`cluster_name`、`engine`、`engine_version`、`preferred_availability-zone`、`replication_group`                                                             |
+| [ElasticBeanstalk][33] | `environmentname`、`enviromentid`                                                                                                                                                                             |
+| [ELB][34]              | `availability-zone`、`hostname`、`loadbalancername`、`name`、`targetgroup`                                                                                                                                    |
+| [EMR][35]              | `cluster_name`、`jobflowid`                                                                                                                                                                                   |
+| [ES][36]               | `dedicated_master_enabled`、`ebs_enabled`、`elasticsearch_version`、`instance_type`、`zone_awareness_enabled`                                                                                                 |
+| [Firehose][37]         | `deliverystreamname`                                                                                                                                                                                          |
+| [FSx][38]             | `filesystemid`、`filesystemtype`                                                                                                                                                                               |
+| [Health][39]           | `event_category`、`status`、`service`                                                                                                                                                                         |
+| [IoT][40]              | `actiontype`、`protocol`、`rulename`                                                                                                                                                                          |
+| [Kinesis][41]          | `streamname`、`name`、`state`                                                                                                                                                                                 |
+| [KMS][42]              | `keyid`                                                                                                                                                                                                       |
+| [Lambda][43]           | `functionname`、`resource`、`executedversion`、`memorysize`、`runtime`                                                                                                                                        |
+| [機械学習][44] | `mlmodelid`、`requestmode`                                                                                                                                                                                    |
+| [MQ][45]               | `broker`、`queue`、`topic`                                                                                                                                                                                    |
+| [OpsWorks][46]         | `stackid`、`layerid`、`instanceid`                                                                                                                                                                            |
+| [Polly][47]            | `operation`                                                                                                                                                                                                   |
+| [RDS][48]              | `auto_minor_version_upgrade`、`dbinstanceclass`、`dbclusteridentifier`、`dbinstanceidentifier`、`dbname`、`engine`、`engineversion`、`hostname`、`name`、`publicly_accessible`、`secondary_availability-zone` |
+| [RDS Proxy][49]       | `proxyname`、`target`、`targetgroup`、`targetrole`                                                                                                                                                                                                  |
+| [Redshift][50]       | `clusteridentifier`、`latency`、`nodeid`、`service_class`、`stage`、`wlmid`                                                                                                                                   |
+| [Route 53][51]        | `healthcheckid`                                                                                                                                                                                               |
+| [S3][52]             | `bucketname`、`filterid`、`storagetype`                                                                                                                                                                       |
+| [SES][53]             | タグキーは AWS でカスタム設定されます。                                                                                                                                                                               |
+| [SNS][54]              | `topicname`                                                                                                                                                                                                   |
+| [SQS][55]              | `queuename`                                                                                                                                                                                                   |
+| [VPC][56]              | `nategatewayid`、`vpnid`、`tunnelipaddress`                                                                                                                                                                   |
+| [WorkSpaces][57]       | `directoryid`、`workspaceid`                                                                                                                                                                                  |
+
+### サービスのチェック
+{{< get-service-checks-from-git "amazon_web_services" >}}
+
 
 ## トラブルシューティング
 
-### CloudWatch と Datadog でデータの不一致があるように見える
+AWS インテグレーションに関する問題解決は、[AWS インテグレーションのトラブルシューティングガイド][59]をご参照ください。
 
-以下の 2 つの重要な区別に注意する必要があります。
+## その他の参考資料
 
-1. AWS のカウンターで「sum」に設定されているグラフでは、「1minute」に示される値は、その時点までの 1 分間の発生数の合計、つまり 1 分あたりのレートです。Datadog は、AWS で選択された時間フレームに関係なく 1 秒の値あたりに正規化された AWS の未加工データを表示します。そのため、Datadog で示される値が小さく感じられることがあります。
-2. 全体を通じて、AWS での最小/最大/平均は、Datadog とは異なる意味を持ちます。AWS では、平均レイテンシー、最小レイテンシー、最大レイテンシーは、AWS が収集する 3 つの独自のメトリクスです。Datadog が AWS CloudWatch からメトリクスを取得するとき、平均レイテンシーは ELB ごとに 1 つの時系列として受信されます。Datadog 内で「min」、「max」、「avg」を選択している場合は、複数の時系列の組み合わせ方法を制御していることになります。たとえば、フィルターなしで `system.cpu.idle` をリクエストすると、そのメトリクスを報告する系列がホストごとに 1 つずつ返され、それらの系列を結合してグラフ化する必要があります。一方、1 つのホストから `system.cpu.idle` をリクエストした場合、集計は不要で、平均と最大を切り替えても結果は同じです。
+{{< partial name="whats-next/whats-next.html" >}}
 
-### メトリクスの遅延
-
-AWS インテグレーションを使用している場合、Datadog は CloudWatch API からメトリクスを取得します。API に関していくつかの制約が存在するため、AWS のメトリクスにわずかな遅延が見られる場合があります。
-
-そもそも、CloudWatch API で提供されるのは、データを取得するためのメトリクス別のクロールだけです。CloudWatch API にはレート制限があり、認証証明書、リージョン、サービスの組み合わせに基づいて変化します。アカウント レベルにより、AWS で使用できるメトリクスは異なります。たとえば、AWS 上で詳細なメトリクスに対して支払いを行うと、短時間で入手できるようになります。この詳細なメトリクスのサービスのレベルは粒度にも適用され、一部のメトリクスは 1 分ごと、それ以外は 5 分ごとに使用可能になります。
-
-Datadog には、状況に応じてアカウント内の特定のメトリクスに優先順位をつけ、すばやく取り込む機能があります。詳細は、[Datadog サポート][71]までお問い合わせください。
-
-遅延をほぼゼロでメトリクスを取得するには、ホストに Datadog Agent をインストールします。詳細については、Datadog のブログ投稿「[Don't fear the Agent: Agent-based monitoring（Agent は難しくない: Agent ベースの監視）][72]」を参照してください。
-
-### メトリクスがない
-
-CloudWatch の API は、データポイントとメトリクスのみを返します。そのため、たとえば、ELB に接続されているインスタンスがない場合は、Datadog でこの ELB に関連するメトリクスは表示されないことが予想されます。
-
-### aws.elb.healthy_host_count のカウントに誤りがある
-
-ELB でクロスゾーン負荷分散オプションを有効にすると、この ELB に接続されているすべてのインスタンスは、すべてのアベイラビリティー ゾーンの一部であると見なされます (CloudWatch 側)。そのため、1a に 2 個、ab に 3 個のインスタンスがある場合、メトリクスはアベイラビリティー ゾーンごとに 5 つのインスタンスが表示されます。
-このカウンターは直感的でないので、新しいメトリクス **aws.elb.healthy_host_count_deduped** と **aws.elb.un_healthy_host_count_deduped** を追加しています。これは、このクロスゾーン負荷分散オプションが有効かどうかに関係なく、アベイラビリティー ゾーンごとに正常または正常でないインスタンスのカウントを表示します。
-
-### Agent のインストール時にホストが重複する
-
-AWS ホストに Agent をインストールし、Agent の構成でホスト名を手動で設定した場合、インフラ ページにホストが数時間、重複して表示されることがあります。この 2 番目のホストは数時間で消え、請求には影響しません。
-
-[1]: https://docs.datadoghq.com/ja/integrations/amazon_api_gateway/
-[2]: https://docs.datadoghq.com/ja/integrations/amazon_appstream/
-[3]: https://docs.datadoghq.com/ja/integrations/amazon_appsync/
-[4]: https://docs.datadoghq.com/ja/integrations/amazon_athena/
-[5]: https://docs.datadoghq.com/ja/integrations/amazon_auto_scaling/
-[6]: https://docs.datadoghq.com/ja/integrations/amazon_billing/
-[7]: https://docs.datadoghq.com/ja/integrations/amazon_cloudfront/
-[8]: https://docs.datadoghq.com/ja/integrations/amazon_cloudhsm/
-[9]: https://docs.datadoghq.com/ja/integrations/amazon_cloudsearch/
-[10]: https://docs.datadoghq.com/ja/integrations/amazon_cloudtrail/
-[11]: https://docs.datadoghq.com/ja/integrations/amazon_codebuild/
-[12]: https://docs.datadoghq.com/ja/integrations/amazon_codedeploy/
-[13]: https://docs.datadoghq.com/ja/integrations/amazon_cognito/
-[14]: https://docs.datadoghq.com/ja/integrations/amazon_connect/
-[15]: https://docs.datadoghq.com/ja/integrations/amazon_directconnect/
-[16]: https://docs.datadoghq.com/ja/integrations/amazon_dms/
-[17]: https://docs.datadoghq.com/ja/integrations/amazon_documentdb/
-[18]: https://docs.datadoghq.com/ja/integrations/amazon_dynamodb/
-[19]: https://docs.datadoghq.com/ja/integrations/amazon_ebs/
-[20]: https://docs.datadoghq.com/ja/integrations/amazon_ec2/
-[21]: https://docs.datadoghq.com/ja/integrations/amazon_ec2_spot/
-[22]: https://docs.datadoghq.com/ja/integrations/amazon_ecs/
-[23]: https://docs.datadoghq.com/ja/integrations/amazon_efs/
-[24]: https://docs.datadoghq.com/ja/integrations/amazon_eks/
-[25]: https://docs.datadoghq.com/ja/integrations/amazon_elastic_transcoder/
-[26]: https://docs.datadoghq.com/ja/integrations/amazon_elasticache/
-[27]: https://docs.datadoghq.com/ja/integrations/amazon_elasticbeanstalk/
-[28]: https://docs.datadoghq.com/ja/integrations/amazon_elb/
-[29]: https://docs.datadoghq.com/ja/integrations/amazon_emr/
-[30]: https://docs.datadoghq.com/ja/integrations/amazon_es/
-[31]: https://docs.datadoghq.com/ja/integrations/amazon_firehose/
-[32]: https://docs.datadoghq.com/ja/integrations/amazon_gamelift/
-[33]: https://docs.datadoghq.com/ja/integrations/amazon_glue/
-[34]: https://docs.datadoghq.com/ja/integrations/amazon_guardduty/
-[35]: https://docs.datadoghq.com/ja/integrations/amazon_health/
-[36]: https://docs.datadoghq.com/ja/integrations/amazon_inspector/
-[37]: https://docs.datadoghq.com/ja/integrations/amazon_iot/
-[38]: https://docs.datadoghq.com/ja/integrations/amazon_kinesis/
-[39]: https://docs.datadoghq.com/ja/integrations/amazon_kms/
-[40]: https://docs.datadoghq.com/ja/integrations/amazon_lambda/
-[41]: https://docs.datadoghq.com/ja/integrations/amazon_lex/
-[42]: https://docs.datadoghq.com/ja/integrations/amazon_machine_learning/
-[43]: https://docs.datadoghq.com/ja/integrations/amazon_mediaconnect/
-[44]: https://docs.datadoghq.com/ja/integrations/amazon_mediaconvert/
-[45]: https://docs.datadoghq.com/ja/integrations/amazon_mediapackage/
-[46]: https://docs.datadoghq.com/ja/integrations/amazon_mediatailor/
-[47]: https://docs.datadoghq.com/ja/integrations/amazon_mq/
-[48]: https://docs.datadoghq.com/ja/integrations/amazon_msk/
-[49]: https://docs.datadoghq.com/ja/integrations/amazon_nat_gateway/
-[50]: https://docs.datadoghq.com/ja/integrations/amazon_neptune/
-[51]: https://docs.datadoghq.com/ja/integrations/amazon_ops_works/
-[52]: https://docs.datadoghq.com/ja/integrations/amazon_polly/
-[53]: https://docs.datadoghq.com/ja/integrations/amazon_rds/
-[54]: https://docs.datadoghq.com/ja/integrations/amazon_redshift/
-[55]: https://docs.datadoghq.com/ja/integrations/amazon_rekognition/
-[56]: https://docs.datadoghq.com/ja/integrations/amazon_route53/
-[57]: https://docs.datadoghq.com/ja/integrations/amazon_s3/
-[58]: https://docs.datadoghq.com/ja/integrations/amazon_sagemaker/
-[59]: https://docs.datadoghq.com/ja/integrations/amazon_ses/
-[60]: https://docs.datadoghq.com/ja/integrations/amazon_sns/
-[61]: https://docs.datadoghq.com/ja/integrations/amazon_sqs/
-[62]: https://docs.datadoghq.com/ja/integrations/amazon_storage_gateway/
-[63]: https://docs.datadoghq.com/ja/integrations/amazon_swf/
-[64]: https://docs.datadoghq.com/ja/integrations/amazon_vpc/
-[65]: https://docs.datadoghq.com/ja/integrations/amazon_waf/
-[66]: https://docs.datadoghq.com/ja/integrations/amazon_workspaces/
-[67]: https://docs.datadoghq.com/ja/integrations/amazon_xray/
-[68]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/
-[69]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
-[70]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_web_services/amazon_web_services_metadata.csv
-[71]: https://docs.datadoghq.com/ja/help/
-[72]: http://www.datadoghq.com/blog/dont-fear-the-agent
+[1]: https://docs.datadoghq.com/ja/getting_started/integrations/aws/
+[2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html
+[3]: https://docs.datadoghq.com/ja/integrations/#cat-aws
+[4]: https://docs.datadoghq.com/ja/integrations/guide/aws-terraform-setup
+[5]: https://docs.aws.amazon.com/controltower/latest/userguide/account-factory.html
+[6]: https://aws.amazon.com/blogs/awsmarketplace/deploy-datadogs-aws-integration-accounts-aws-control-tower-account-factory-customization/
+[7]: https://docs.datadoghq.com/ja/integrations/guide/aws-manual-setup/
+[8]: https://docs.datadoghq.com/ja/integrations/guide/aws-manual-setup/?tab=accesskeysgovcloudorchinaonly
+[9]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/
+[10]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
+[11]: https://docs.datadoghq.com/ja/integrations/guide/cloud-metric-delay/#aws
+[12]: https://docs.datadoghq.com/ja/integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/
+[13]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=roledelegation#setup
+[14]: https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/SecurityAudit
+[15]: https://app.datadoghq.com/integrations/amazon-web-services
+[16]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeAlarmHistory.html#API_DescribeAlarmHistory_RequestParameters
+[17]: https://docs.datadoghq.com/ja/integrations/amazon_sns/#receive-sns-messages
+[18]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_web_services/amazon_web_services_metadata.csv
+[19]: https://docs.datadoghq.com/ja/integrations/amazon_api_gateway/
+[20]: https://docs.datadoghq.com/ja/integrations/amazon_app_runner
+[21]: https://docs.datadoghq.com/ja/integrations/amazon_auto_scaling/
+[22]: https://docs.datadoghq.com/ja/integrations/amazon_billing/
+[23]: https://docs.datadoghq.com/ja/integrations/amazon_cloudfront/
+[24]: https://docs.datadoghq.com/ja/integrations/amazon_codebuild/
+[25]: https://docs.datadoghq.com/ja/integrations/amazon_codedeploy/
+[26]: https://docs.datadoghq.com/ja/integrations/amazon_directconnect/
+[27]: https://docs.datadoghq.com/ja/integrations/amazon_dynamodb/
+[28]: https://docs.datadoghq.com/ja/integrations/amazon_ebs/
+[29]: https://docs.datadoghq.com/ja/integrations/amazon_ec2/
+[30]: https://docs.datadoghq.com/ja/integrations/amazon_ecs/
+[31]: https://docs.datadoghq.com/ja/integrations/amazon_eks/
+[32]: https://docs.datadoghq.com/ja/integrations/amazon_elasticache/
+[33]: https://docs.datadoghq.com/ja/integrations/amazon_elasticbeanstalk/
+[34]: https://docs.datadoghq.com/ja/integrations/amazon_elb/
+[35]: https://docs.datadoghq.com/ja/integrations/amazon_emr/
+[36]: https://docs.datadoghq.com/ja/integrations/amazon_es/
+[37]: https://docs.datadoghq.com/ja/integrations/amazon_firehose/
+[38]: https://docs.datadoghq.com/ja/integrations/amazon_fsx/
+[39]: https://docs.datadoghq.com/ja/integrations/amazon_health/
+[40]: https://docs.datadoghq.com/ja/integrations/amazon_iot/
+[41]: https://docs.datadoghq.com/ja/integrations/amazon_kinesis/
+[42]: https://docs.datadoghq.com/ja/integrations/amazon_kms/
+[43]: https://docs.datadoghq.com/ja/integrations/amazon_lambda/
+[44]: https://docs.datadoghq.com/ja/integrations/amazon_machine_learning/
+[45]: https://docs.datadoghq.com/ja/integrations/amazon_mq/
+[46]: https://docs.datadoghq.com/ja/integrations/amazon_ops_works/
+[47]: https://docs.datadoghq.com/ja/integrations/amazon_polly/
+[48]: https://docs.datadoghq.com/ja/integrations/amazon_rds/
+[49]: https://docs.datadoghq.com/ja/integrations/amazon_rds_proxy/
+[50]: https://docs.datadoghq.com/ja/integrations/amazon_redshift/
+[51]: https://docs.datadoghq.com/ja/integrations/amazon_route53/
+[52]: https://docs.datadoghq.com/ja/integrations/amazon_s3/
+[53]: https://docs.datadoghq.com/ja/integrations/amazon_ses/
+[54]: https://docs.datadoghq.com/ja/integrations/amazon_sns/
+[55]: https://docs.datadoghq.com/ja/integrations/amazon_sqs/
+[56]: https://docs.datadoghq.com/ja/integrations/amazon_vpc/
+[57]: https://docs.datadoghq.com/ja/integrations/amazon_workspaces/
+[58]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_web_services/service_checks.json
+[59]: https://docs.datadoghq.com/ja/integrations/guide/aws-integration-troubleshooting/

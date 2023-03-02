@@ -1,36 +1,63 @@
 ---
+app_id: gremlin
+app_uuid: 451a4863-1767-4c11-8831-d196ae4643d0
 assets:
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: true
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: gremlin.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Gremlin
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Gremlin
+  sales_email: support@gremlin.com
+  support_email: support@gremlin.com
 categories:
-  - コラボレーション
-  - 問題追跡
-creates_events: true
-ddtype: crawler
+- コラボレーション
+- 問題追跡
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/gremlin/README.md
-display_name: Gremlin
+- https://github.com/DataDog/integrations-extras/blob/master/gremlin/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: gremlin
-guid: 087cb38a-d119-4db6-8c54-30700fc1f355
 integration_id: gremlin
 integration_title: Gremlin
 integration_version: ''
 is_public: true
 kind: インテグレーション
-maintainer: support@gremlin.com
-manifest_version: 1.0.0
+manifest_version: 2.0.0
 name: gremlin
-public_title: Datadog-Gremlin インテグレーション
+oauth: {}
+public_title: Gremlin
 short_description: Gremlin で発生したイベントを Datadog に送信
-support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Collaboration
+  - Category::Issue Tracking
+  configuration: README.md#Setup
+  description: Gremlin で発生したイベントを Datadog に送信
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Gremlin
 ---
+
+
+
 ## 概要
 
 Gremlin の攻撃の表示、再実行、停止を Datadog から直接行うことができます。
@@ -72,11 +99,13 @@ Gremlin インテグレーションには、サービスのチェック機能は
 
 ## その他の参考資料
 
-インフラストラクチャーの監視の詳細および Datadog の全インテグレーションについては、[ブログ記事][6]を参照してください。
+お役に立つドキュメント、リンクや記事:
+
+- [Gremlin が Datadog を使用して自社の Chaos Engineering サービスを監視する方法][6]
 
 [1]: https://docs.datadoghq.com/ja/getting_started/#events
 [2]: https://app.datadoghq.com/event/stream
 [3]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/gremlin/images/events-overlay.png
 [4]: https://app.gremlin.com/settings/integrations
 [5]: https://docs.datadoghq.com/ja/help/
-[6]: https://www.datadoghq.com/blog
+[6]: https://www.datadoghq.com/blog/gremlin-datadog/

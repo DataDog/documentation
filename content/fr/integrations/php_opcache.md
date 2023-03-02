@@ -10,17 +10,17 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - ''
+- ''
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/php_opcache/README.md
-display_name: "PHP\_OPcache"
+- https://github.com/DataDog/integrations-extras/blob/master/php_opcache/README.md
+display_name: PHP OPcache
 draft: false
 git_integration_title: php_opcache
 guid: 323518fd-be8d-4b5e-b35d-829107a1c416
 integration_id: php-opcache
-integration_title: "PHP\_OPcache"
+integration_title: PHP OPcache
 integration_version: 0.0.1
 is_public: true
 kind: integration
@@ -29,14 +29,17 @@ manifest_version: 1.0.0
 metric_prefix: php_opcache.
 metric_to_check: php_opcache.memory_usage.used_memory
 name: php_opcache
-public_title: "Intégration Datadog/PHP\_OPcache"
-short_description: "Surveillez le système de cache du bytecode PHP\_OPcache."
+public_title: Intégration Datadog/PHP OPcache
+short_description: Surveillez le système de cache du bytecode PHP OPcache.
 support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 Ce check permet de surveiller [PHP OPcache][1] avec l'Agent Datadog.
@@ -68,9 +71,9 @@ Puisqu'OPcache n'expose pas les métriques par défaut, cette intégration inclu
 ```
 /opt/datadog-agent/embedded/lib/python3.8/site-packages/datadog_checks/php_opcache/assets/exporter/opcache-dd-handler.php
 ```
-Vous pouvez télécharger [ici][5] l'outil d'exportation.
+Vous pouvez télécharger l'outil d'exportation depuis le référentiel [integrations-extras][5] de Datadog.
 
-Lorsque vous configurez votre Agent (avec le paramètre `instances` décrit ci-dessous), vous pouvez appeler l'outil d'exportation en utilisant directement ce nom de fichier. Il est également possible de configurer un alias pour celui-ci sur votre serveur Web. SI vous utilisez Apache, voici un exemple d'alias dans le fichier de configuration du serveur Web :
+Lors de la [configuration](#configuration) de votre Agent, appelez l'outil d'exportation en utilisant directement ce nom de fichier, ou configurez un alias pour celui-ci sur votre serveur Web. SI vous utilisez Apache, voici un exemple d'alias dans le fichier de configuration du serveur Web :
 
 ```
 Alias /opcache-status /opt/datadog-agent/embedded/lib/python3.8/site-packages/datadog_checks/php_opcache/assets/exporter/opcache-dd-handler.php

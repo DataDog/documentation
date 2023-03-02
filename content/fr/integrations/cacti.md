@@ -9,18 +9,19 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - monitoring
-  - log collection
+- monitoring
+- log collection
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/cacti/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/cacti/README.md
 display_name: Cacti
 draft: false
 git_integration_title: cacti
 guid: 566466b0-1422-44ef-b14f-493a64e7b58a
 integration_id: cacti
 integration_title: Cacti
+integration_version: 1.11.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -29,11 +30,15 @@ metric_prefix: cacti.
 metric_to_check: cacti.rrd.count
 name: cacti
 public_title: Intégration Datadog/Cacti
-short_description: Transmettez vos données RRD Cacti à Datadog pour recevoir des alertes détaillées et créer de superbes graphiques.
+short_description: Transmettez vos données RRD Cacti à Datadog pour recevoir des alertes
+  détaillées et créer de superbes graphiques.
 support: core
 supported_os:
-  - linux
+- linux
 ---
+
+
+
 ## Présentation
 
 Recueillez des métriques de Cacti en temps réel pour :
@@ -48,9 +53,9 @@ Recueillez des métriques de Cacti en temps réel pour :
 Le check Cacti est inclus avec le package de l'[Agent Datadog][1]. Pour commencer à rassembler des métriques, vous devez d'abord :
 
 1. Installer les bibliothèques et en-têtes `librrd`
-2. Installer les liaisons python vers `rrdtool`
+2. Installer les liaisons Python vers `rrdtool`
 
-#### Bibliothèques et en-têtes librrd
+#### En-têtes et bibliothèques
 
 Sur Debian/Ubuntu :
 
@@ -66,7 +71,7 @@ sudo yum install rrdtool-devel
 
 #### Liaisons Python
 
-Ajoutez maintenant le paquet Python `rrdtool` dans l'Agent avec la commande suivante :
+Ajoutez le package Python `rrdtool` à l'Agent avec la commande suivante :
 
 ```shell
 sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install rrdtool
@@ -192,7 +197,7 @@ Le check Cacti n'inclut aucun check de service.
 
 La bibliothèque Python utilisée par cette intégration provoque des fuites de mémoire dans certaines circonstances. Si vous rencontrez ce problème, vous pouvez installer le paquet [python-rrdtool][6] au lieu de rrdtool. Cet ancien paquet n'est plus mis à jour et n'est pas officiellement pris en charge par cette intégration, mais il a permis à d'autres utilisateurs de résoudre ce problème de mémoire.
 
-Un [ticket GitHub][7] a été ouvert afin de suivre cette fuite de mémoire.
+Un [ticket Github][7] a été ouvert afin de suivre cette fuite de mémoire.
 
 Besoin d'aide ? Contactez [l'assistance Datadog][8].
 

@@ -1,17 +1,17 @@
 ---
 categories:
-  - cloud
-  - azure
-  - log collection
-ddtype: crawler
+- cloud
+- azure
+- log collection
 dependencies: []
 description: 受送信バイト数、ディスク操作数、CPU 使用率など、セット別メトリクスを追跡。
-doc_link: 'https://docs.datadoghq.com/integrations/azure_vm_scale_set/'
+doc_link: https://docs.datadoghq.com/integrations/azure_vm_scale_set/
 draft: false
 git_integration_title: azure_vm_scale_set
 has_logo: true
 integration_id: azure-vm-scale-set
 integration_title: Microsoft Azure VM Scale Set
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -20,6 +20,7 @@ public_title: Datadog-Microsoft Azure VM Scale Set インテグレーション
 short_description: 受送信バイト数、ディスク操作数、CPU 使用率など、セット別バイトを追跡。
 version: '1.0'
 ---
+
 {{< img src="integrations/azure_vm_scale_set/azure_vm_scale_set_dashboard.png" alt="Azure VM Scale Set ダッシュボード" popup="true">}}
 
 ## 概要
@@ -35,7 +36,7 @@ Azure Virtual Machine Scale Set からメトリクスを取得すると、以下
 
 ### インストール
 
-インテグレーションメトリクスは、[Microsoft Azure インテグレーション][1]に含まれています。Datadog Agent 経由でメトリクスを収集する場合は、[Agent のデプロイ方法][2]の手順に従ってください。
+インテグレーションメトリクスは、[Microsoft Azure インテグレーション][1]に含まれています。Datadog Agent でメトリクスを収集する場合は、[Agent のデプロイ方法][2]の手順に従ってください。
 
 ### ログの収集
 

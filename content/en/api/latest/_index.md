@@ -19,9 +19,9 @@ The Datadog API is an HTTP REST API. The API uses resource-oriented URLs to call
 
 ### Getting started
 
-Authenticate to the API with an [API key][1], and depending on the endpoint, an [Application key][2].
+Authenticate to the API with an [API key][1] using the header `DD-API-KEY`. For some endpoints, you also need an [Application key][2], which uses the header `DD-APPLICATION-KEY`.
 
-To try out the API [![Run in Postman][3]](https://app.getpostman.com/run-collection/7274195-66ef21d8-e159-4d7d-8ded-c511e1abe189?action=collection%2Ffork&collection-url=entityId%3D7274195-66ef21d8-e159-4d7d-8ded-c511e1abe189%26entityType%3Dcollection%26workspaceId%3Dbf049f54-c695-4e91-b879-0cad1854bafa#?env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBpX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJhcHBsaWNhdGlvbl9rZXkiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9XQ==)
+To try out the API [![Run in Postman][3]](https://app.getpostman.com/run-collection/20651290-82933796-e990-4769-afaf-35ef378f8699?action=collection%2Ffork&collection-url=entityId%3D20651290-82933796-e990-4769-afaf-35ef378f8699%26entityType%3Dcollection%26workspaceId%3Dbf049f54-c695-4e91-b879-0cad1854bafa#?env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBpX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiIiwic2Vzc2lvbkluZGV4IjowfSx7ImtleSI6ImFwcGxpY2F0aW9uX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiIiwic2Vzc2lvbkluZGV4IjoxfV0=)
 
 [Using the API][4] is a guide to the endpoints.
 
@@ -53,12 +53,11 @@ compile "com.datadoghq:datadog-api-client:{{< sdk-version "datadog-api-client-ja
 #### Usage
 
 ```java
-import com.datadog.api.<VERSION>.client.ApiClient;
-import com.datadog.api.<VERSION>.client.ApiException;
-import com.datadog.api.<VERSION>.client.Configuration;
-import com.datadog.api.v2.client.auth.*;
-import com.datadog.api.v2.client.model.*;
+import com.datadog.api.client.ApiClient;
+import com.datadog.api.client.ApiException;
+import com.datadog.api.client.Configuration;
 import com.datadog.api.<VERSION>.client.api.*;
+import com.datadog.api.<VERSION>.client.model.*;
 ```
 **Note**: Replace `<VERSION>` with v1 or v2, depending on which endpoints you want to use.
 
@@ -157,13 +156,16 @@ require 'datadog_api_client'
 {{< programming-lang lang="go" >}}
 #### Installation
 ```sh
-go get github.com/DataDog/datadog-api-client-go
+go mod init main && go get github.com/DataDog/datadog-api-client-go/v2/api/datadog
 ```
 #### Usage
 ```go
-import "github.com/DataDog/datadog-api-client-go/api/<VERSION>/datadog"
+import (
+        "github.com/DataDog/datadog-api-client-go/v2/api/datadog"
+        "github.com/DataDog/datadog-api-client-go/v2/api/datadog<VERSION>"
+)
 ```
- **Note**: Replace `<VERSION>` with v1 or v2, depending on which endpoints you want to use.
+ **Note**: Replace `<VERSION>` with `V1` or `V2`, depending on which endpoints you want to use.
 {{< /programming-lang >}}
 
 {{< programming-lang lang="typescript" >}}

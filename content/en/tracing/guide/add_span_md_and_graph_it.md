@@ -92,10 +92,8 @@ require 'ddtrace'
 class ShoppingCartController < ApplicationController
   # GET /shopping_cart
   def index
-    # Get the active span
-    current_span = Datadog.tracer.active_span
-    # customer_id -> 254889
-    current_span.set_tag('customer.id', params.permit([:customer_id])) unless current_span.nil?
+    # Get the active span and set customer_id -> 254889
+    Datadog::Tracing.active_span&.set_tag('customer.id', params.permit([:customer_id]))
 
     # [...]
   end
@@ -202,16 +200,14 @@ The Datadog UI uses tags to set span level metadata. Custom tags may be set for 
 <?php
   namespace App\Http\Controllers;
 
-  use DDTrace\GlobalTracer;
-
   class ShoppingCartController extends Controller
   {
       public shoppingCartAction (Request $request) {
           // Get the currently active span
-          $span = GlobalTracer::get()->getActiveSpan();
+          $span = \DDTrace\active_span();
           if (null !== $span) {
               // customer_id -> 254889
-              $span->setTag('customer_id', $request->get('customer_id'));
+              $span->meta['customer_id'] = $request->get('customer_id');
           }
 
           // [...]
@@ -283,12 +279,12 @@ Finally, you can also see all the traces relevant to your query by clicking the 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/visualization/#trace
-[2]: /tracing/visualization/#spans
-[3]: /tracing/visualization/#span-tags
-[4]: /tracing/visualization/#resources
-[5]: /tracing/visualization/#services
-[6]: https://app.datadoghq.com/apm/search
+[1]: /tracing/glossary/#trace
+[2]: /tracing/glossary/#spans
+[3]: /tracing/glossary/#span-tags
+[4]: /tracing/glossary/#resources
+[5]: /tracing/glossary/#services
+[6]: https://app.datadoghq.com/apm/traces
 [7]: /tracing/trace_explorer/#live-search-for-15-minutes
 [8]: https://app.datadoghq.com/apm/analytics
 [9]: /tracing/trace_explorer/query_syntax/

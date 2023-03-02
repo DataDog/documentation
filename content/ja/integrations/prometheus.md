@@ -1,35 +1,58 @@
 ---
+app_id: prometheus
+app_uuid: b978d452-7008-49d0-bb87-62d8639b2205
 assets:
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Prometheus
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-  - monitoring
-creates_events: false
-ddtype: check
+- monitoring
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/prometheus/README.md
-display_name: Prometheus
+- https://github.com/DataDog/integrations-core/blob/master/prometheus/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: prometheus
-guid: 58e75868-0933-407b-aaa5-469c252bdb2b
 integration_id: prometheus
-integration_title: Prometheus
+integration_title: Prometheus (レガシー)
+integration_version: 3.4.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
+manifest_version: 2.0.0
 name: prometheus
-public_title: Datadog-Prometheus インテグレーション
+oauth: {}
+public_title: Prometheus (レガシー)
 short_description: Prometheus は時系列メトリクスデータ向けのオープンソース監視システムです
-support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::モニタリング
+  configuration: README.md#Setup
+  description: Prometheus は時系列メトリクスデータ向けのオープンソース監視システムです
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Prometheus (レガシー)
 ---
+
+
+
 ## 概要
 
 Prometheus に接続して:
@@ -50,7 +73,7 @@ Prometheus に接続して:
 
 ### インストール
 
-Prometheus チェックは、Agent のバージョン 6.1.0 以降にパッケージ化されています。
+Prometheus チェックは、[Datadog Agent][4] のバージョン 6.1.0 以降にパッケージ化されています。
 
 ### コンフィギュレーション
 
@@ -66,15 +89,15 @@ Prometheus チェックは、Agent のバージョン 6.1.0 以降にパッケ�
 
 メトリクスをリストする際は、`- <METRIC_NAME>*` のようにワイルドカード `*` を使用して、一致するすべてのメトリクスを取得できます。**注:** 大量のカスタムメトリクスが送信される可能性があるため、ワイルドカードの使用には注意が必要です。
 
-より高度な設定 (ssl、labels joining、custom tags など) が[サンプル prometheus.d/conf.yaml][4] に記載されています
+より高度な設定 (ssl、labels joining、custom tags など) が[サンプル prometheus.d/conf.yaml][5] に記載されています
 
-このインテグレーションは性格上、極めて多くのカスタムメトリクスが Datadog に送信される可能性があります。構成の誤りや入力の変化があった場合に送信されるメトリクスの最大数をユーザーが制御できるように、このチェックには 2000 メトリクスというデフォルトの制限があります。必要な場合は、`prometheus.d/conf.yaml` ファイルで `max_returned_metrics` オプションを設定することで、この制限を増やすことができます。
+このインテグレーションは性格上、極めて多くのカスタムメトリクスが Datadog に送信される可能性があります。ユーザーは、構成の誤りや入力の変化があった場合に送信されるメトリクスの最大数を制御できます。このチェックには 2000 メトリクスというデフォルトの制限があります。必要な場合は、`prometheus.d/conf.yaml` ファイルで `max_returned_metrics` オプションを設定することで、この制限を増やすことができます。
 
 `send_monotonic_counter: True` の場合、Agent は、それらの値の差分を送信し、アプリ内タイプはカウントに設定されます (これはデフォルトの動作です)。`send_monotonic_counter: False` の場合、Agent は、単調増加する値をそのまま送信し、アプリ内タイプはゲージに設定されます。
 
 ### 検証
 
-[Agent の `status` サブコマンドを実行][5]し、Checks セクションで `prometheus` を探します。
+[Agent の `status` サブコマンドを実行][6]し、Checks セクションで `prometheus` を探します。
 
 ## 収集データ
 
@@ -93,7 +116,7 @@ Prometheus Alertmanager アラートは、Webhook コンフィギュレーショ
 Prometheus チェックには、サービスのチェック機能は含まれません。
 
 ## Prometheus Alertmanager
-イベントストリームで Prometheus Alertmanager アラートを送信します。
+Prometheus Alertmanager のアラートをイベントストリームで送信します。ネイティブでは、Alertmanager は構成された Webhook にすべてのアラートを同時に送信します。Datadog でアラートを見るには、Alertmanager のインスタンスがアラートを 1 つずつ送信するように構成する必要があります。`route` の下に group-by パラメーターを追加して、アラートルールの実際の名前でアラートをグループ化させることができます。
 
 ### セットアップ
 1. Alertmanager コンフィギュレーションファイル `alertmanager.yml` を編集して、以下を含めます。
@@ -103,7 +126,16 @@ receivers:
   webhook_configs: 
   - send_resolved: true
     url: https://app.datadoghq.com/intake/webhook/prometheus?api_key=<DATADOG_API_KEY>
+route:
+  group_by: ['alertname']
+  group_wait: 10s
+  group_interval: 5m
+  receiver: datadog
+  repeat_interval: 3h
 ```
+
+**注**: このエンドポイントは、一度にペイロード内の 1 つのイベントのみを受け入れます。
+
 2. Prometheus および Alertmanager サービスを再起動します。
 ```
 sudo systemctl restart prometheus.service alertmanager.service
@@ -111,21 +143,21 @@ sudo systemctl restart prometheus.service alertmanager.service
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
 
 ## その他の参考資料
 
-- [Datadog Agent 6 用の Prometheus サポートの導入][7]
-- [Prometheus チェックの構成][8]
-- [カスタム Prometheus チェックの書き方][9]
-- [Prometheus Alertmanager ドキュメント] [11]
+- [Datadog Agent 6 用の Prometheus サポートの導入][8]
+- [Prometheus チェックの構成][9]
+- [カスタム Prometheus チェックの書き方][10]
 
 [1]: https://docs.datadoghq.com/ja/integrations/openmetrics/
 [2]: https://docs.datadoghq.com/ja/getting_started/integrations/prometheus/
 [3]: https://docs.datadoghq.com/ja/getting_started/integrations/prometheus?tab=docker#configuration
-[4]: https://github.com/DataDog/integrations-core/blob/master/prometheus/datadog_checks/prometheus/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[6]: https://docs.datadoghq.com/ja/help/
-[7]: https://www.datadoghq.com/blog/monitor-prometheus-metrics
-[8]: https://docs.datadoghq.com/ja/agent/prometheus/
-[9]: https://docs.datadoghq.com/ja/developers/prometheus/
+[4]: https://app.datadoghq.com/account/settings#agent
+[5]: https://github.com/DataDog/integrations-core/blob/master/prometheus/datadog_checks/prometheus/data/conf.yaml.example
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[7]: https://docs.datadoghq.com/ja/help/
+[8]: https://www.datadoghq.com/blog/monitor-prometheus-metrics
+[9]: https://docs.datadoghq.com/ja/agent/prometheus/
+[10]: https://docs.datadoghq.com/ja/developers/prometheus/

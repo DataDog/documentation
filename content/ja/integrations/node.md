@@ -1,25 +1,25 @@
 ---
 aliases:
-  - /ja/integrations/nodejs/
+- /ja/integrations/nodejs/
 categories:
-  - languages
-  - log collection
-ddtype: ライブラリ
+- languages
+- log collection
 dependencies: []
 description: Node.js サービスから DogStatsD または Datadog API 経由でカスタムメトリクスを送信。
 doc_link: https://docs.datadoghq.com/integrations/nodejs/
 draft: false
 further_reading:
-  - link: https://www.datadoghq.com/blog/node-logging-best-practices/
-    tag: ブログ
-    text: Node.js ログを収集、カスタマイズ、一元化する方法
-  - link: https://www.datadoghq.com/blog/node-monitoring-apm/
-    tag: ブログ
-    text: Datadog APM と分散型トレーシングを使用した Node.js の監視。
+- link: https://www.datadoghq.com/blog/node-logging-best-practices/
+  tag: ブログ
+  text: Node.js ログを収集、カスタマイズ、一元化する方法
+- link: https://www.datadoghq.com/blog/node-monitoring-apm/
+  tag: ブログ
+  text: Datadog APM と分散型トレーシングを使用した Node.js の監視。
 git_integration_title: node
 has_logo: true
 integration_id: node
 integration_title: NodeJS
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -28,6 +28,7 @@ public_title: Datadog-NodeJS インテグレーション
 short_description: Node.js サービスから DogStatsD または Datadog API 経由でカスタムメトリクスを送信。
 version: '1.0'
 ---
+
 ## 概要
 
 Node.js インテグレーションを利用して、Node.js アプリケーションのログ、トレース、カスタムメトリクスを収集および監視できます。
@@ -40,7 +41,7 @@ Node.js インテグレーションを使用すると、数行のコードのイ
 
 インスツルメンテーションは、Node.js 用のオープンソース DogStatsD クライアントである [hot-shots][1] を使用して実装できます。
 
-Node.js インテグレーションの詳細については、こちらの[メトリクスの送信に関するガイド][2]を参照してください。
+Node.js インテグレーションの詳細については、[メトリクスの送信に関するガイド][2]を参照してください。
 
 1. npm を使用して hot-shots をインストールします。
 

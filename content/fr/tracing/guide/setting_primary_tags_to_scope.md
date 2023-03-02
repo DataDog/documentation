@@ -1,22 +1,23 @@
 ---
-title: Configurer les tags primaires
-kind: documentation
 aliases:
-  - /fr/tracing/advanced/setting_primary_tags_to_scope/
+- /fr/tracing/advanced/setting_primary_tags_to_scope/
 further_reading:
-  - link: /tracing/connect_logs_and_traces/
-    tags: Enrichir vos traces
-    text: Associer vos logs à vos traces
-  - link: /tracing/manual_instrumentation/
-    tags: Enrichir vos traces
-    text: Instrumenter vos applications manuellement pour créer des traces
-  - link: /tracing/opentracing/
-    tags: Enrichir vos traces
-    text: Implémenter Opentracing dans vos applications
-  - link: /tracing/visualization/
-    tag: Utiliser l'UI de l'APM
-    text: Explorer vos services, ressources et traces
+- link: /tracing/connect_logs_and_traces/
+  tags: Enrichir vos traces
+  text: Associer vos logs à vos traces
+- link: /tracing/manual_instrumentation/
+  tags: Enrichir vos traces
+  text: Instrumenter vos applications manuellement pour créer des traces
+- link: /tracing/opentracing/
+  tags: Enrichir vos traces
+  text: Implémenter Opentracing dans vos applications
+- link: /tracing/visualization/
+  tag: Utiliser l'UI de l'APM
+  text: Explorer vos services, ressources et traces
+kind: documentation
+title: Configurer les tags primaires
 ---
+
 ## Définition
 
 Vous avez la possibilité de filtrer l'intégralité des données associées à une application APM Datadog selon plusieurs dimensions. Ces dimensions comprennent les statistiques agrégées (telles que le nombre de requêtes/seconde, la latence, le taux d'erreur ou le score Apdex) et les [traces][1] visibles. Elles se configurent à l'aide de tags primaires, qui offrent une visibilité encore plus détaillée sur le comportement de votre application. Les tags primaires peuvent être utilisés pour un environnement, une zone de disponibilité, un datacenter, etc.
@@ -85,6 +86,9 @@ Si vous modifiez un tag primaire défini, prenez en compte ce qui suit :
 ### Afficher des données selon un tag primaire
 
 Les tags primaires apparaissent en haut des pages APM. Utilisez ces sélecteurs pour filtrer les données affichées sur la page actuelle. Pour afficher les données sans tag primaire, choisissez `<NOM_TAG>:*` dans la liste déroulante.
+
+{{< img src="tracing/guide/setting_primary_tags/second-primary-tag-dropdown.png" alt="Le menu déroulant affichant des options de sélection de contexte avec le deuxième tag primaire"  style="width:90%;">}}
+
 
 ## Pour aller plus loin
 

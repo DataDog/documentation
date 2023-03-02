@@ -49,12 +49,21 @@
         {{ if (hasPrefix $v.metric_name $m) }}
 
           {{ if not (hasPrefix $v.metric_name "aws.stream") }}
-          <tr>
-            <td>
-            <strong>{{$v.metric_name}}</strong><br>({{$v.metric_type}})</td>
-            <td>{{$v.description | safeHTML }}{{if $v.unit_name}}<br><em>Shown as {{$v.unit_name}}</em>{{end}}
-            </td>
-          </tr>
+            {{ $description := replace $v.description "<error_type>" "&#60;error_type&#62;" }}
+              <tr>
+                <td>
+                  <strong>{{ $v.metric_name }}</strong>
+                  <br>
+                  ({{ $v.metric_type }})
+                </td>
+                <td>
+                  {{ $description | safeHTML }}
+                  {{ with $v.unit_name }}
+                    <br>
+                    <em>Shown as {{ . }}</em>
+                  {{ end }}
+                </td>
+              </tr>
           {{ end }}
 
         {{ end }}
@@ -71,14 +80,25 @@
 
 <table class="table table-vertical-mobile table-metrics">
   <tbody>
-  {{ range $k, $v := (index $data $integration) }}
-    {{ if not (hasPrefix $v.metric_name "aws.stream") }}
-      <tr>
-        <td>
-        <strong>{{$v.metric_name}}</strong><br>({{$v.metric_type}})</td>
-        <td>{{$v.description | safeHTML }}{{if $v.unit_name}}<br><em>Shown as {{$v.unit_name}}</em>{{end}}
-        </td>
-      </tr>
+  {{ range $int_name, $obj := $data }}
+    {{ range $k, $v := $obj }}
+      {{ if not (hasPrefix $v.metric_name "aws.stream") }}
+        {{ $description := replace $v.description "<error_type>" "&#60;error_type&#62;" }}
+          <tr>
+            <td>
+              <strong>{{ $v.metric_name }}</strong>
+              <br>
+              ({{ $v.metric_type }})
+            </td>
+            <td>
+              {{ $description | safeHTML }}
+              {{ with $v.unit_name }}
+                <br>
+                <em>Shown as {{ . }}</em>
+              {{ end }}
+            </td>
+          </tr>
+      {{ end }}
     {{ end }}
   {{ end }}
   </tbody>

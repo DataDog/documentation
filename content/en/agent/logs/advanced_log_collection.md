@@ -1,5 +1,5 @@
 ---
-title: Advanced Log Collection
+title: Advanced Log Collection Configurations
 kind: documentation
 description: Use the Datadog Agent to collect your logs and send them to Datadog
 further_reading:
@@ -26,7 +26,7 @@ Customize your log collection configuration:
 * [Aggregate multi-line logs](#multi-line-aggregation)
 * [Copy commonly used examples](#commonly-used-log-processing-rules)
 * [Use wildcards to monitor directories](#tail-directories-by-using-wildcards)
-* [Specify log file encodings](#logfile-encodings)
+* [Specify log file encodings](#log-file-encodings)
 * [Define global processing rules](#global-processing-rules)
 
 **Note**: If you set up multiple processing rules, they are applied sequentially and each rule is applied on the result of the previous one.
@@ -66,7 +66,7 @@ logs:
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-In a Docker environment, use the label `com.datadoghq.ad.logs` on your container to specify the `log_processing_rules`, for example:
+In a Docker environment, use the label `com.datadoghq.ad.logs` on the **container sending the logs you want to filter** in order to specify the `log_processing_rules`, for example:
 
 ```yaml
  labels:
@@ -183,7 +183,7 @@ logs:
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-In a Docker environment, use the label `com.datadoghq.ad.logs` on your container to specify the `log_processing_rules`, for example:
+In a Docker environment, use the label `com.datadoghq.ad.logs` on the **container sending the logs you want to filter** in order to specify the `log_processing_rules`, for example:
 
 ```yaml
  labels:
@@ -445,11 +445,7 @@ More examples:
 | {"date": "2018-01-02"    | `\{"date": "\d{4}-\d{2}-\d{2}`                |
 
 ### Automatic multi-line aggregation
-With Agent 7.32+ `auto_multi_line_detection` can be enabled which allows the Agent to detect [common multi-line patterns][2] automatically. 
-
-<div class="alert alert-warning">
-Automatic Multi-line aggregation is in public beta.
-</div>
+With Agent 7.37+, `auto_multi_line_detection` can be enabled, which allows the Agent to detect [common multi-line patterns][2] automatically. 
 
 Enable `auto_multi_line_detection` globally in the `datadog.yaml` file:
 
@@ -529,7 +525,7 @@ logs_config:
   auto_multi_line_detection: true
   auto_multi_line_extra_patterns:
    - \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
-   - [A-Za-z_]+ \d+, \d+ \d+:\d+:\d+ (AM|PM)
+   - '[A-Za-z_]+ \d+, \d+ \d+:\d+:\d+ (AM|PM)'
 ```
 
 With this feature enabled, when a new log file is opened the Agent tries to detect a pattern. During this process the logs are sent as single lines. After the detection threshold is met, all future logs for that source are aggregated with the detected pattern, or as single lines if no pattern is found. Detection takes at most 30 seconds or the first 500 logs (whichever comes first).
@@ -571,6 +567,17 @@ logs:
 The example above matches `/var/log/myapp/log/myfile.log` and excludes `/var/log/myapp/log/debug.log` and `/var/log/myapp/log/trace.log`.
 
 **Note**: The Agent requires read and execute permissions on a directory to list all the available files in it.
+
+## Tail most recently modified files first
+**Note:** This feature is in public beta.
+
+When prioritizing files to tail, the Datadog Agent sorts the filenames in the directory path by reverse lexicographic order. To sort files based on file modification time, set the configuration option `logs_config.file_wildcard_selection_mode` to the value `by_modification_time`.
+
+This option is helpful when the number of total log file matches exceeds `logs_config.open_files_limit`. Using `by_modification_time` ensures that the most recently updated files are tailed first in the defined directory path.
+
+To restore default behavior, set the configuration option `logs_config.file_wildcard_selection_mode` to the value`by_name`.
+
+This feature requires Agent version 7.40.0 or above.
 
 ## Log file encodings
 
@@ -650,7 +657,7 @@ All the logs collected by the Datadog Agent are impacted by the global processin
 *Logging without Limits is a trademark of Datadog, Inc.
 
 [1]: https://golang.org/pkg/regexp/syntax/
-[2]: https://github.com/DataDog/datadog-agent/blob/main/pkg/logs/decoder/auto_multiline_handler.go#L195
+[2]: https://github.com/DataDog/datadog-agent/blob/a27c16c05da0cf7b09d5a5075ca568fdae1b4ee0/pkg/logs/internal/decoder/auto_multiline_handler.go#L187
 [3]: /agent/faq/commonly-used-log-processing-rules
 [4]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [5]: /agent/guide/agent-commands/#agent-information

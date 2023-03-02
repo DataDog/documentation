@@ -1,44 +1,68 @@
 ---
+app_id: riak-cs
+app_uuid: 29e6a2b4-7f3a-4243-8e10-d065147c3da0
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     riakcs: assets/dashboards/riakcs_dashboard.json
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: riakcs.bucket_list_pool.workers
+      metadata_path: metadata.csv
+      prefix: riakcs.
+    process_signatures:
+    - riak-cs start
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: RiakCS
   saved_views:
     riak-cs_processes: assets/saved_views/riak-cs_processes.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-  - data store
-creates_events: false
-ddtype: check
+- data store
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/riakcs/README.md
-display_name: RiakCS
+- https://github.com/DataDog/integrations-core/blob/master/riakcs/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: riakcs
-guid: 55ba6b94-8eeb-486b-aa94-6366a044fdf0
 integration_id: riak-cs
 integration_title: Riak CS
+integration_version: 2.9.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: riakcs.
-metric_to_check: riakcs.bucket_list_pool.workers
+manifest_version: 2.0.0
 name: riakcs
-process_signatures:
-  - riak-cs start
-public_title: Datadog-Riak CS インテグレーション
+oauth: {}
+public_title: Riak CS
 short_description: GET、PUT、DELETE などの速度と平均レイテンシーを追跡。
-support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::データストア
+  configuration: README.md#Setup
+  description: GET、PUT、DELETE などの速度と平均レイテンシーを追跡。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Riak CS
 ---
+
+
+
 ![RiakCS ダッシュボード][1]
 
 ## 概要
@@ -56,7 +80,7 @@ RiakCS チェックは [Datadog Agent][2] パッケージに含まれていま�
 
 ### コンフィギュレーション
 
-1. [Agent のコンフィギュレーションディレクトリ][3]のルートにある `conf.d/` フォルダーの `riak.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル riakcs.d/conf.yaml][4] を参照してください。
+1. [Agent のコンフィギュレーションディレクトリ][3]のルートにある `conf.d/` フォルダーの `riakcs.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル riakcs.d/conf.yaml][4] を参照してください。
 
    ```yaml
    init_config:
@@ -92,14 +116,13 @@ RiakCS チェックは [Datadog Agent][2] パッケージに含まれていま�
 - _time_error_\*
 - \_time_100
 
-これらの除外されたメトリクスと、他の多くのメトリクス (1000 以上のメトリクスを選択可能) を任意に追加できます。それには、
-`riakcs.d/conf.yaml` 構成ファイルの `instance_config` で `metrics` キーを使用してメトリクスを指定します。この値はメトリクス名のリストです。
+除外されたメトリクスや追加のメトリクス (1000 以上) は、`instance_config`の `metrics` キーを使って `riakcs.d/conf.yaml` コンフィギュレーションファイルに追加することができます。値はメトリクス名のリストである必要があります。
 
-詳しくは[使用可能なメトリクスの一覧][8]をご確認ください。
+[利用可能なメトリクスの全リスト][8]を参照してください。
 
 ### イベント
 
-RiackCS チェックには、イベントは含まれません。
+RiakCS チェックには、イベントは含まれません。
 
 ### サービスのチェック
 {{< get-service-checks-from-git "riakcs" >}}
@@ -111,7 +134,9 @@ RiackCS チェックには、イベントは含まれません。
 
 ## その他の参考資料
 
-Riak CS のパフォーマンスと可用性を監視する方法 (または理由) について理解するには、Datadog の[一連のブログ記事][11]を参照してください。
+お役に立つドキュメント、リンクや記事:
+
+- [Riak CS のパフォーマンスと可用性を監視][11]
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/riakcs/images/riakcs_dashboard.png
 [2]: https://app.datadoghq.com/account/settings#agent

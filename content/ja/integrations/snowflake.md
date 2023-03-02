@@ -1,49 +1,77 @@
 ---
+app_id: snowflake
+app_uuid: 23e9084d-5801-4a71-88fe-f62b7c1bb289
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Snowflake: assets/dashboards/snowflake.json
-  metrics_metadata: metadata.csv
+    Snowflake Organization Metrics: assets/dashboards/organization_metrics.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: snowflake.storage.storage_bytes.total
+      metadata_path: metadata.csv
+      prefix: snowflake.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Snowflake
   monitors:
     Snowflake failed logins: assets/recommended_monitors/snowflake_failed_logins.json
-  saved_views: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
-  - cloud
-  - data store
-  - コスト管理
-creates_events: false
-ddtype: check
+- cloud
+- data store
+- コスト管理
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/snowflake/README.md
-display_name: Snowflake
+- https://github.com/DataDog/integrations-core/blob/master/snowflake/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: snowflake
-guid: 4813a514-e9a4-4f28-9b83-b4221b51b18b
 integration_id: snowflake
 integration_title: Snowflake
+integration_version: 4.5.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: snowflake.
-metric_to_check: snowflake.storage.storage_bytes.total
+manifest_version: 2.0.0
 name: snowflake
-public_title: Datadog-Snowflake インテグレーション
+oauth: {}
+public_title: Snowflake
 short_description: クレジットの使用状況、ストレージ、クエリ、ユーザー履歴などの主要なメトリクスを監視します。
-support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Cloud
+  - Category::Data Store
+  - Category::Cost Management
+  configuration: README.md#Setup
+  description: クレジットの使用状況、ストレージ、クエリ、ユーザー履歴などの主要なメトリクスを監視します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Snowflake
 ---
+
+
+
 ## 概要
 
 このチェックは、Datadog Agent を通じて [Snowflake][1] を監視します。Snowflake は SaaS 分析データウェアハウスであり、完全にクラウドインフラストラクチャー上で実行されます。
 このインテグレーションにより、クレジットの使用状況、請求、ストレージ、クエリメトリクスなどが監視されます。
 
-<div class="alert alert-info"><bold>注: メトリクスは Snowflake へのクエリを介して収集されます。Datadog インテグレーションによるクエリは、Snowflake によって課金されます。</bold></div>
+<div class="alert alert-info"><bold>注</bold>: メトリクスは Snowflake へのクエリとともに収集されます。Datadog インテグレーションによるクエリは、Snowflake によって課金されます。</div>
 
 ## セットアップ
 
@@ -52,9 +80,8 @@ supported_os:
 ### インストール
 
 Snowflake チェックは [Datadog Agent][2] パッケージに含まれています。
-サーバーに追加でインストールする必要はありません。
 
-**注**: 現在、Python 2 を使用している Datadog Agent 6 の MacOS では Snowflake チェックをご利用いただけません。
+**注**: Python 2 を使用する Datadog Agent v6 では、Snowflake チェックは利用できません。Agent v6 で Snowflake を使用するには、[Datadog Agent v6 で Python 3 を使用する][3]を参照するか、Agent v7 にアップグレードしてください。
 
 <div class="alert alert-warning"><code>v7.23.0</code> でインテグレーションを構成している場合は、バージョンを <code>2.0.1</code> にアップグレードして最新機能をご利用ください。
 下記の<a href=https://docs.datadoghq.com/agent/guide/integration-management/#install>コマンド</a>を使用してインテグレーションをアップグレードできます。<br>
@@ -69,8 +96,8 @@ datadog-agent integration install datadog-snowflake==2.0.1
 
 1. Snowflake を監視するための Datadog 固有のロールとユーザーを作成します。Snowflake で、以下を実行して、ACCOUNT_USAGE スキーマにアクセスできるカスタムロールを作成します。
 
-   注: デフォルトでは、このインテグレーションは `SNOWFLAKE` データベースと `ACCOUNT_USAGE` スキーマを監視します。
-   このデータベースはデフォルトで使用でき、表示できるのは `ACCOUNTADMIN` ロールまたは [ACCOUNTADMIN によって付与されたロール][3]のユーザーのみです。
+   注: デフォルトでは、このインテグレーションは `SNOWFLAKE` データベースと `ACCOUNT_USAGE` スキーマを監視します。`ORGANIZATION_USAGE` スキーマを監視する方法については、"組織データの収集” を参照してください。
+   このデータベースはデフォルトで使用でき、表示できるのは `ACCOUNTADMIN` ロールまたは [ACCOUNTADMIN によって付与されたロール][4]のユーザーのみです。
 
 
     ```text
@@ -105,7 +132,7 @@ datadog-agent integration install datadog-snowflake==2.0.1
     ```
 
 
-2. Snowflake のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `snowflake.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル snowflake.d/conf.yaml][4] を参照してください。
+2. Snowflake のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `snowflake.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル snowflake.d/conf.yaml][5] を参照してください。
 
     ```yaml
         ## @param account - string - required
@@ -134,12 +161,12 @@ datadog-agent integration install datadog-snowflake==2.0.1
         #
         role: <ROLE>
 
-        ## @param min_collection_interval - number - optional - default: 3600
+        ## @param min_collection_interval - number - optional - default: 15
         ## This changes the collection interval of the check. For more information, see:
         ## https://docs.datadoghq.com/developers/write_agent_check/#collection-interval
         ##
         ## NOTE: Most Snowflake ACCOUNT_USAGE views are populated on an hourly basis,
-        ## so to minimize unnecessary queries the `min_collection_interval` defaults to 1 hour.
+        ## so to minimize unnecessary queries, set the `min_collection_interval` to 1 hour.
         #
         min_collection_interval: 3600
 
@@ -149,26 +176,101 @@ datadog-agent integration install datadog-snowflake==2.0.1
         # disable_generic_tags: true
     ```
 
-    <div class="alert alert-info">By default, the <code>min_collection_interval</code> is 1 hour. 
+    <div class="alert alert-info">In the default `conf.yaml`, the <code>min_collection_interval</code> is 1 hour. 
     Snowflake metrics are aggregated by day, you can increase the interval to reduce the number of queries.<br>
     <bold>Note</bold>: Snowflake ACCOUNT_USAGE views have a <a href="https://docs.snowflake.com/en/sql-reference/account-usage.html#data-latency">known latency</a> of 45 minutes to 3 hours.</div>
 
-3. [Agent を再起動します][5]。
+3. [Agent を再起動します][6]。
+
+#### 組織データの収集
+
+デフォルトでは、このインテグレーションは `ACCOUNT_USAGE` スキーマを監視しますが、代わりに組織レベルのメトリクスを監視するように設定することができます。
+
+組織メトリクスを収集するには、インテグレーションの構成でスキーマフィールドを `ORGANIZATION_USAGE` に変更し、`min_collection_interval` を 43200 に増やします。ほとんどの組織クエリのレイテンシーが最大 24 時間であるため、これにより Snowflake へのクエリ数を減らすことができます。
+
+注: 組織のメトリクスを監視するには、`user` が `ORGADMIN` ロールである必要があります。
+
+  ```yaml
+      - schema: ORGANIZATION_USAGE
+        min_collection_interval: 43200
+  ```
+
+デフォルトでは、一部の組織メトリクスのみが有効になっています。利用可能なすべての組織メトリクスを収集するには、`metric_groups` 構成オプションを使用します。
+
+  ```yaml
+      metric_groups:
+        - snowflake.organization.warehouse
+        - snowflake.organization.currency
+        - snowflake.organization.credit
+        - snowflake.organization.storage
+        - snowflake.organization.contracts
+        - snowflake.organization.balance
+        - snowflake.organization.rate
+        - snowflake.organization.data_transfer
+  ```
+
+さらに、アカウントと組織の両方のメトリクスを同時に監視することができます。
+
+  ```yaml
+      instances:
+      - account: example-inc
+        username: DATADOG_ORG_ADMIN
+        password: '<PASSWORD>'
+        role: SYSADMIN
+        schema: ORGANIZATION_USAGE
+        database: SNOWFLAKE
+        min_collection_interval: 43200
+
+      - account: example-inc
+        username: DATADOG_ACCOUNT_ADMIN
+        password: '<PASSWORD>'
+        role: DATADOG_ADMIN
+        schema: ACCOUNT_USAGE
+        database: SNOWFLAKE
+        min_collection_interval: 3600
+  ```
+
+#### 複数環境のデータ収集
+
+複数の Snowflake 環境のデータを収集したい場合は、`snowflake.d/conf.yaml` ファイルに各環境をインスタンスとして追加します。例えば、`DATADOG_SYSADMIN` と `DATADOG_USER` という 2 つのユーザーのデータを収集する必要がある場合:
+
+```yaml
+instances:
+  - account: example-inc
+    username: DATADOG_SYSADMIN
+    password: '<PASSWORD>'
+    role: SYSADMIN
+    database: EXAMPLE-INC
+
+  - account: example-inc
+    username: DATADOG_USER
+    password: '<PASSWORD>'
+    role: DATADOG_USER
+    database: EXAMPLE-INC
+```
 
 #### プロキシのコンフィギュレーション
 
-Snowflake は、[プロキシコンフィギュレーションの環境変数][6]を設定することをお勧めします。
+Snowflake は、[プロキシコンフィギュレーションの環境変数][7]を設定することをお勧めします。
 
-[snowflake.d/conf.yaml][4] の `init_config` の下に `proxy_host`、`proxy_port`、`proxy_user`、`proxy_password` を設定することもできます。
+[snowflake.d/conf.yaml][5] の `init_config` の下に `proxy_host`、`proxy_port`、`proxy_user`、`proxy_password` を設定することもできます。
 
-**注**: Snowflake は、プロキシコンフィギュレーションを自動的にフォーマットし、[標準プロキシ環境変数][7]を設定します。
+**注**: Snowflake は、プロキシコンフィギュレーションを自動的にフォーマットし、[標準プロキシ環境変数][8]を設定します。
 これらの変数は、Docker、ECS、Kubernetes などのオーケストレーターを含むインテグレーションからのすべてのリクエストにも影響を与えます。
+
+#### Snowflake 構成へのプライベート接続
+
+Snowflake で[プライベート接続][9] ([AWS PrivateLink][10] など) が有効な場合、`account` 構成オプションを以下の形式に更新することで Snowflake とのインテグレーションを構成することが可能です。
+
+  ```yaml
+        - account: <ACCOUNT>.<REGION_ID>.privatelink
+  ```
 
 ### Snowflake カスタムクエリ
 
 Snowflake インテグレーションは、カスタムクエリに対応しています。デフォルトで、インテグレーションは共有 `SNOWFLAKE` データベースと `ACCOUNT_USAGE` スキーマに接続します。
 
-カスタムクエリを別のスキーマまたはデータベースで実行する場合は、別のインスタンスを[サンプル snowflake.d/conf.yaml][4] に追加して `database` および `schema` オプションを指定します。
+カスタムクエリを別のスキーマまたはデータベースで実行するには、別のインスタンスを[サンプル snowflake.d/conf.yaml][5] に追加して `database` および `schema` オプションを指定します。
 ユーザーとロールには、指定したデータベースまたはスキーマへのアクセス権があることを確認します。
 
 #### コンフィギュレーションオプション
@@ -201,7 +303,7 @@ custom_queries:
 ```
 
 #### 例
-以下は、データベース、スキーマ、ウェアハウス名でタグ付けされた [`QUERY_HISTORY` ビュー][8]ですべてのクエリをカウントするクエリの例です。
+以下は、データベース、スキーマ、ウェアハウス名でタグ付けされた [`QUERY_HISTORY` ビュー][11]ですべてのクエリをカウントするクエリの例です。
 
 ```TEXT
 select count(*), DATABASE_NAME, SCHEMA_NAME, WAREHOUSE_NAME from QUERY_HISTORY group by 2, 3, 4;
@@ -229,16 +331,21 @@ custom_queries:
 
 ##### 検証
 
-結果を確認するには、[メトリクスの概要][9]を使用してメトリクスを検索します。
+結果を確認するには、[メトリクスの概要][12]を使用してメトリクスを検索します。
 
-![Snowflake メトリクスの概要][10]
+![Snowflake メトリクスの概要][13]
 
 
 ### 検証
 
-[Agent の status サブコマンドを実行][11]し、Checks セクションで `snowflake` を探します。
+[Agent の status サブコマンドを実行][14]し、Checks セクションで `snowflake` を探します。
 
 ## 収集データ
+
+<div class="alert alert-info"><bold>注</bold>: デフォルトでは、以下のメトリクスグループのメトリクスのみが有効になっています。<code>snowflake.query.*</code>、<code>snowflake.billing.*</code>、<code>snowflake.storage.*</code>、<code>snowflake.logins.*</code>
+
+他のメトリクスグループのメトリクスを収集する場合は、<a href="https://github.com/DataDog/integrations-core/blob/master/snowflake/datadog_checks/snowflake/data/conf.yaml.example"></a>でこのインテグレーションのコンフィグファイル例を参照してください。
+</div>
 
 ### メトリクス
 {{< get-metrics-from-git "snowflake" >}}
@@ -254,20 +361,30 @@ Snowflake には、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][14]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][17]までお問合せください。
+
+## その他の参考資料
+
+お役に立つドキュメント、リンクや記事:
+
+- [Datadog で Snowflake を監視する][18]
 
 
 [1]: https://www.snowflake.com/
-[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[3]: https://docs.snowflake.com/en/sql-reference/account-usage.html#enabling-account-usage-for-other-roles
-[4]: https://github.com/DataDog/integrations-core/blob/master/snowflake/datadog_checks/snowflake/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.snowflake.com/en/user-guide/python-connector-example.html#using-a-proxy-server
-[7]: https://github.com/snowflakedb/snowflake-connector-python/blob/d6df58f1c338b255393571a08a1f9f3a71d8f7b6/src/snowflake/connector/proxy.py#L40-L41
-[8]: https://docs.snowflake.com/en/sql-reference/account-usage/query_history.html
-[9]: https://docs.datadoghq.com/ja/metrics/summary/
-[10]: https://raw.githubusercontent.com/DataDog/integrations-core/master/snowflake/images/custom_query.png
-[11]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[12]: https://github.com/DataDog/integrations-core/blob/master/snowflake/metadata.csv
-[13]: https://github.com/DataDog/integrations-core/blob/master/snowflake/assets/service_checks.json
-[14]: https://docs.datadoghq.com/ja/help/
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-v6-python-3/?tab=hostagent
+[4]: https://docs.snowflake.com/en/sql-reference/account-usage.html#enabling-account-usage-for-other-roles
+[5]: https://github.com/DataDog/integrations-core/blob/master/snowflake/datadog_checks/snowflake/data/conf.yaml.example
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: https://docs.snowflake.com/en/user-guide/python-connector-example.html#using-a-proxy-server
+[8]: https://github.com/snowflakedb/snowflake-connector-python/blob/d6df58f1c338b255393571a08a1f9f3a71d8f7b6/src/snowflake/connector/proxy.py#L40-L41
+[9]: https://docs.snowflake.com/en/user-guide/private-snowflake-service.html
+[10]: https://docs.snowflake.com/en/user-guide/admin-security-privatelink.html
+[11]: https://docs.snowflake.com/en/sql-reference/account-usage/query_history.html
+[12]: https://docs.datadoghq.com/ja/metrics/summary/
+[13]: https://raw.githubusercontent.com/DataDog/integrations-core/master/snowflake/images/custom_query.png
+[14]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[15]: https://github.com/DataDog/integrations-core/blob/master/snowflake/metadata.csv
+[16]: https://github.com/DataDog/integrations-core/blob/master/snowflake/assets/service_checks.json
+[17]: https://docs.datadoghq.com/ja/help/
+[18]: https://www.datadoghq.com/blog/snowflake-monitoring-datadog/

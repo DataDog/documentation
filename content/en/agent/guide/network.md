@@ -7,7 +7,7 @@ aliases:
     - /agent/network
     - /agent/faq/network
 further_reading:
-    - link: 'logs/'
+    - link: '/logs/'
       tag: 'Documentation'
       text: 'Collect your logs'
     - link: '/infrastructure/process'
@@ -31,39 +31,127 @@ All Agent traffic is sent over SSL. The destination is dependent on the Datadog 
 [APM][1]
 : `trace.agent.`{{< region-param key="dd_site" code="true" >}}
 
-[Database Monitoring][2]
-: `dbm-metrics-intake.`{{< region-param key="dd_site" code="true" >}}<br>
-`dbquery-intake.`{{< region-param key="dd_site" code="true" >}}
-
 [Live Containers][3] & [Live Process][4]
 : `process.`{{< region-param key="dd_site" code="true" >}}
 
-[Logs][5] & [HIPAA logs][6]
-: TCP: `{{< region-param key="tcp_endpoint" code="true" >}}`<br>
-HTTP: `{{< region-param key="agent_http_endpoint" code="true" >}}`<br>
-Other: See [logs endpoints][7]
+[Network Device Monitoring][10]
+: `ndm-intake.`{{< region-param key="dd_site" code="true" >}}<br>
+`snmp-traps-intake.`{{< region-param key="dd_site" code="true" >}}<br>
+`ndmflow-intake.`{{< region-param key="dd_site" code="true" >}}
 
-[HIPAA logs legacy][6]
-: `tcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}<br>
-`lambda-tcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}<br>
-`gcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}<br>
-`http-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
 
-[Orchestrator][8]
+[Orchestrator][5]
 : `orchestrator.`{{< region-param key="dd_site" code="true" >}}
 
-[Real User Monitoring (RUM)][9]
+[Profiling][7]
+: `intake.profile.`{{< region-param key="dd_site" code="true" >}}
+
+[Real User Monitoring (RUM)][6]
 : `rum.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}}<br>
 `session-replay.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}}
 
-[Profiling][10]
-: `intake.profile.`{{< region-param key="dd_site" code="true" >}}
-
-[Synthetics private location][11]
+[Synthetics private location][8]
 : Worker v>=1.5.0 `intake.synthetics.`{{< region-param key="dd_site" code="true" >}} is the only endpoint to configure.<br>
 API test results for worker v>0.1.6 `intake.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
 Browser test results for worker v>0.2.0 `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
 API test results for worker v<0.1.5 `api.`{{< region-param key="dd_site" code="true" >}}
+
+{{< site-region region="us,eu,us3,us5" >}}
+[Database Monitoring][2]
+: `dbm-metrics-intake.`{{< region-param key="dd_site" code="true" >}}<br>
+`dbquery-intake.`{{< region-param key="dd_site" code="true" >}}
+
+[2]: /database_monitoring/
+{{< /site-region >}}
+
+{{< site-region region="us" >}}
+
+[Logs][1] & [HIPAA logs][2]
+: TCP: `agent-intake.logs.datadoghq.com`<br>
+HTTP: `agent-http-intake.logs.datadoghq.com`<br>
+Other: See [logs endpoints][3]
+
+[HIPAA logs legacy][2]
+: `tcp-encrypted-intake.logs.datadoghq.com`<br>
+`lambda-tcp-encrypted-intake.logs.datadoghq.com`<br>
+`gcp-encrypted-intake.logs.datadoghq.com`<br>
+`http-encrypted-intake.logs.datadoghq.com`
+
+[1]: /logs/
+[2]: /data_security/logs/#hipaa-enabled-customers
+[3]: /logs/log_collection/#logging-endpoints
+
+{{< /site-region >}}
+
+{{< site-region region="eu" >}}
+
+[Logs][1] & [HIPAA logs][2]
+: TCP: `agent-intake.logs.datadoghq.eu`<br>
+HTTP: `agent-http-intake.logs.datadoghq.eu`<br>
+Other: See [logs endpoints][3]
+
+[HIPAA logs legacy][2]
+: `tcp-encrypted-intake.logs.datadoghq.eu`<br>
+`lambda-tcp-encrypted-intake.logs.datadoghq.eu`<br>
+`gcp-encrypted-intake.logs.datadoghq.eu`<br>
+`http-encrypted-intake.logs.datadoghq.eu`
+
+[1]: /logs/
+[2]: /data_security/logs/#hipaa-enabled-customers
+[3]: /logs/log_collection/#logging-endpoints
+
+{{< /site-region >}}
+
+{{< site-region region="us3" >}}
+
+[Logs][1] & [HIPAA logs][2]
+: HTTP: `agent-http-intake.logs.us3.datadoghq.com`<br>
+Other: See [logs endpoints][3]
+
+[HIPAA logs legacy][2]
+: `lambda-tcp-encrypted-intake.logs.us3.datadoghq.com`<br>
+`gcp-encrypted-intake.logs.us3.datadoghq.com`<br>
+`http-encrypted-intake.logs.us3.datadoghq.com`
+
+[1]: /logs/
+[2]: /data_security/logs/#hipaa-enabled-customers
+[3]: /logs/log_collection/#logging-endpoints
+
+{{< /site-region >}}
+
+{{< site-region region="us5" >}}
+
+[Logs][1] & [HIPAA logs][2]
+: HTTP: `agent-http-intake.logs.us5.datadoghq.com`<br>
+Other: See [logs endpoints][3]
+
+[HIPAA logs legacy][2]
+: `lambda-tcp-encrypted-intake.logs.us5.datadoghq.com`<br>
+`gcp-encrypted-intake.logs.us5.datadoghq.com`<br>
+`http-encrypted-intake.logs.us5.datadoghq.com`
+
+[1]: /logs/
+[2]: /data_security/logs/#hipaa-enabled-customers
+[3]: /logs/log_collection/#logging-endpoints
+
+{{< /site-region >}}
+
+{{< site-region region="gov" >}}
+
+[Logs][1] & [HIPAA logs][2]
+: HTTP: `agent-http-intake.logs.ddog-gov.com`<br>
+Other: See [logs endpoints][3]
+
+[HIPAA logs legacy][2]
+: `lambda-tcp-encrypted-intake.logs.ddog-gov.com`<br>
+`gcp-encrypted-intake.logs.ddog-gov.com`<br>
+`http-encrypted-intake.logs.ddog-gov.com`
+
+[1]: /logs/
+[2]: /data_security/logs/#hipaa-enabled-customers
+[3]: /logs/log_collection/#logging-endpoints
+
+{{< /site-region >}}
 
 All other Agent data
 : `<VERSION>-app.agent.`{{< region-param key="dd_site" code="true" >}}<br>
@@ -78,24 +166,25 @@ The information is structured as JSON following this schema:
 
 {{< code-block lang="text" disable_copy="true" >}}
 {
-    "version": 1,                       // <-- incremented every time this information is changed
-    "modified": "YYYY-MM-DD-HH-MM-SS",  // <-- timestamp of the last modification
-    "agents": {                         // <-- the IPs used by the Agent to submit metrics to Datadog
-        "prefixes_ipv4": [              // <-- list of IPv4 CIDR blocks
+    "version": 1,                          // <-- incremented every time this information is changed
+    "modified": "YYYY-MM-DD-HH-MM-SS",     // <-- timestamp of the last modification
+    "agents": {                            // <-- the IPs used by the Agent to submit metrics to Datadog
+        "prefixes_ipv4": [                 // <-- list of IPv4 CIDR blocks
             "a.b.c.d/x",
             ...
         ],
-        "prefixes_ipv6": [              // <-- list of IPv6 CIDR blocks
+        "prefixes_ipv6": [                 // <-- list of IPv6 CIDR blocks
             ...
         ]
     },
-    "api": {...},                       // <-- same for non-critical Agent functionality (querying information from API)
-    "apm": {...},                       // <-- same structure as "agents" but IPs used for the APM Agent data
-    "logs": {...},                      // <-- same for the logs Agent data
-    "process": {...},                   // <-- same for the process Agent data
-    "orchestrator": {...},              // <-- same for the process Agent data
-    "synthetics": {...},                // <-- not used for Agent traffic (Datadog source IPs of bots for synthetic tests)
-    "webhooks": {...}                   // <-- not used for Agent traffic (Datadog source IPs delivering webhooks)
+    "api": {...},                          // <-- same for non-critical Agent functionality (querying information from API)
+    "apm": {...},                          // <-- same structure as "agents" but IPs used for the APM Agent data
+    "logs": {...},                         // <-- same for the logs Agent data
+    "process": {...},                      // <-- same for the process Agent data
+    "orchestrator": {...},                 // <-- same for the process Agent data
+    "synthetics": {...},                   // <-- not used for Agent traffic (Datadog source IPs of bots for synthetic tests)
+    "synthetics-private-locations": {...}, // <-- not used for Agent traffic (Datadog intake IPs for synthetics private locations)
+    "webhooks": {...}                      // <-- not used for Agent traffic (Datadog source IPs delivering webhooks)
 }
 {{< /code-block >}}
 
@@ -112,14 +201,17 @@ Add all of the `ip-ranges` to your inclusion list. While only a subset are activ
 
 <div class="alert alert-warning">
 All outbound traffic is sent over SSL through TCP / UDP.
+<br><br>
+Ensure the Agent is only accessible by your applications or trusted network sources using a firewall rule or similar network restriction. Untrusted access can allow malicious actors to perform several invasive actions, including but not limited to writing traces and metrics to your Datadog account, or obtaining information about your configuration and services.
 </div>
 
 Open the following ports to benefit from all the **Agent** functionalities:
-
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
 #### Outbound
+
+{{< site-region region="us" >}}
 
 443/tcp
 : Port for most Agent data (Metrics, APM, Live Processes/Containers)
@@ -128,7 +220,13 @@ Open the following ports to benefit from all the **Agent** functionalities:
 : Port for NTP ([more details on the importance of NTP][1]).<br>
 See [default NTP targets][2].
 
-{{< region-param key="tcp_endpoint_port_ssl" >}}/tcp
+6062/tcp
+: Port for the debug endpoints for the Process Agent.
+
+6162/tcp
+: Port for configuring runtime settings for the Process Agent.
+
+10516/tcp
 : Port for log collection over TCP.<br>
 See [logs endpoints][3] for other connection types.
 
@@ -138,32 +236,98 @@ See [logs endpoints][3] for other connection types.
 10250/tcp
 : Port for the [Kubernetes HTTPS Kubelet][4]
 
-#### Inbound
+[1]: /agent/faq/network-time-protocol-ntp-offset-issues/
+[2]: /integrations/ntp/#overview
+[3]: /logs/log_collection/#logging-endpoints
+[4]: /agent/basic_agent_usage/kubernetes/
 
-Used for Agent services communicating with each other locally within the host only.
+{{< /site-region >}}
 
-5000/tcp
-: Port for the [go_expvar server][5]
+{{< site-region region="eu" >}}
 
-5001/tcp
-: Port the IPC API listens to
+443/tcp
+: Port for most Agent data (Metrics, APM, Live Processes/Containers)
 
-5002/tcp
-: Port for the [Agent browser GUI][6]
+123/udp
+: Port for NTP ([more details on the importance of NTP][1]).<br>
+See [default NTP targets][2].
 
-8125/udp
-: Port for DogStatsD unless `dogstatsd_non_local_traffic` is set to true. This port is available on localhost: `127.0.0.1`, `::1`, `fe80::1`.
+443/tcp
+: Port for log collection over TCP.<br>
+See [logs endpoints][3] for other connection types.
 
-8126/tcp
-: Port for the [APM receiver][7]
+6062/tcp
+: Port for the debug endpoints for the Process Agent.
+
+6162/tcp
+: Port for configuring runtime settings for the Process Agent.
+
+10255/tcp
+: Port for the [Kubernetes HTTP Kubelet][4]
+
+10250/tcp
+: Port for the [Kubernetes HTTPS Kubelet][4]
 
 [1]: /agent/faq/network-time-protocol-ntp-offset-issues/
 [2]: /integrations/ntp/#overview
 [3]: /logs/log_collection/#logging-endpoints
 [4]: /agent/basic_agent_usage/kubernetes/
-[5]: /integrations/go_expvar/
-[6]: /agent/basic_agent_usage/#gui
-[7]: /tracing/
+
+{{< /site-region >}}
+
+{{< site-region region="us3,us5,gov" >}}
+
+443/tcp
+: Port for most Agent data (Metrics, APM, Live Processes/Containers)
+
+123/udp
+: Port for NTP ([more details on the importance of NTP][1]).<br>
+See [default NTP targets][2].
+
+6062/tcp
+: Port for the debug endpoints for the Process Agent.
+
+6162/tcp
+: Port for configuring runtime settings for the Process Agent.
+
+10255/tcp
+: Port for the [Kubernetes HTTP Kubelet][4]
+
+10250/tcp
+: Port for the [Kubernetes HTTPS Kubelet][4]
+
+[1]: /agent/faq/network-time-protocol-ntp-offset-issues/
+[2]: /integrations/ntp/#overview
+[3]: /logs/log_collection/#logging-endpoints
+[4]: /agent/basic_agent_usage/kubernetes/
+
+{{< /site-region >}}
+
+#### Inbound
+
+Used for Agent services communicating with each other locally within the host only.
+
+5000/tcp
+: Port for the [go_expvar server][1]
+
+5001/tcp
+: Port the IPC API listens to
+
+5002/tcp
+: Port for the [Agent browser GUI][2]
+
+5012/tcp
+: Port for the APM [go_expvar server][1]
+
+8125/udp
+: Port for DogStatsD unless `dogstatsd_non_local_traffic` is set to true. This port is available on localhost: `127.0.0.1`, `::1`, `fe80::1`.
+
+8126/tcp
+: Port for the [APM receiver][3]
+
+[1]: /integrations/go_expvar/
+[2]: /agent/basic_agent_usage/#gui
+[3]: /tracing/
 {{% /tab %}}
 {{% tab "Agent v5 & v4" %}}
 
@@ -175,6 +339,13 @@ Used for Agent services communicating with each other locally within the host on
 123/udp
 : Port for NTP ([more details on the importance of NTP][1]).<br>
 See [default NTP targets][2].
+
+6062/tcp
+: Port for the debug endpoints for the Process Agent.
+
+6162/tcp
+: Port for configuring runtime settings for the Process Agent.
+
 #### Inbound
 
 8125/udp
@@ -195,9 +366,61 @@ See [default NTP targets][2].
 {{% /tab %}}
 {{< /tabs >}}
 
+## Configure ports
+
+If you need to change an inbound port because the default port is already in use by an existing service on your network, edit the `datadog.yaml` configuration file. You can find most of the ports in the **Advanced Configuration** section of the file:
+
+{{< code-block lang="yaml" filename="datadog.yaml" disable_copy="true" collapsible="true" >}}
+## @param expvar_port - integer - optional - default: 5000
+## @env DD_EXPVAR_PORT - integer - optional - default: 5000
+## The port for the go_expvar server.
+#
+# expvar_port: 5000
+
+## @param cmd_port - integer - optional - default: 5001
+## @env DD_CMD_PORT - integer - optional - default: 5001
+## The port on which the IPC api listens.
+#
+# cmd_port: 5001
+
+## @param GUI_port - integer - optional
+## @env DD_GUI_PORT - integer - optional
+## The port for the browser GUI to be served.
+## Setting 'GUI_port: -1' turns off the GUI completely
+## Default is:
+##  * Windows & macOS : `5002`
+##  * Linux: `-1`
+##
+#
+# GUI_port: <GUI_PORT>
+
+{{< /code-block >}}
+
+The APM receiver and the DogStatsD ports are located in the **Trace Collection Configuration** and **DogStatsD Configuration** sections of the `datadog.yaml` configuration file, respectively:
+
+{{< code-block lang="yaml" filename="datadog.yaml" disable_copy="true" collapsible="true" >}}
+## @param dogstatsd_port - integer - optional - default: 8125
+## @env DD_DOGSTATSD_PORT - integer - optional - default: 8125
+## Override the Agent DogStatsD port.
+## Note: Make sure your client is sending to the same UDP port.
+#
+# dogstatsd_port: 8125
+
+[...]
+
+## @param receiver_port - integer - optional - default: 8126
+## @env DD_APM_RECEIVER_PORT - integer - optional - default: 8126
+## The port that the trace receiver should listen on.
+## Set to 0 to disable the HTTP receiver.
+#
+# receiver_port: 8126
+{{< /code-block >}}
+
+<div class="alert alert-warning">If you change the DogStatsD port or APM receiver port value here, you must also change the APM tracing library configuration for the corresponding port. See the information about configuring ports in the <a href="/tracing/trace_collection/library_config/">Library Configuration docs for your language</a>.</div>
+
 ## Using proxies
 
-For a detailed configuration guide on proxy setup, see [Agent Proxy Configuration][12].
+For a detailed configuration guide on proxy setup, see [Agent Proxy Configuration][9].
 
 ## Data buffering
 
@@ -218,11 +441,9 @@ To avoid running out of storage space, the Agent stores the metrics on disk only
 [2]: /database_monitoring/
 [3]: /infrastructure/livecontainers/
 [4]: /infrastructure/process/
-[5]: /logs/
-[6]: /security/logs/#hipaa-enabled-customers
-[7]: /logs/log_collection/#logging-endpoints
-[8]: /infrastructure/livecontainers/#kubernetes-resources-1
-[9]: /real_user_monitoring/
-[10]: /tracing/profiler/
-[11]: /synthetics/private_locations
-[12]: /agent/proxy/
+[5]: /infrastructure/livecontainers/#kubernetes-resources-1
+[6]: /real_user_monitoring/
+[7]: /profiler/
+[8]: /synthetics/private_locations
+[9]: /agent/proxy/
+[10]: /network_monitoring/devices

@@ -32,14 +32,14 @@ There are two types of terms:
 
 * A **sequence** is a group of words surrounded by double quotes, such as `"hello dolly"`.
 
-To combine multiple terms into a complex query, you can use any of the following Boolean operators:
+To combine multiple terms into a complex query, you can use any of the following case sensitive Boolean operators:
 
 |              |                                                                                                        |                              |
 |--------------|--------------------------------------------------------------------------------------------------------|------------------------------|
 | **Operator** | **Description**                                                                                        | **Example**                  |
 | `AND`        | **Intersection**: both terms are in the selected events (if nothing is added, AND is taken by default) | authentication AND failure   |
 | `OR`         | **Union**: either term is contained in the selected events                                             | authentication OR password   |
-| `-`          | **Exclusion**: the following term is NOT in the event                                                  | authentication AND -password |
+| `-`          | **Exclusion**: the following term is NOT in the event (apply to each individual raw text search)                                                  | authentication AND -password |
 
 ## Autocomplete
 
@@ -68,8 +68,8 @@ For instance, if your attribute name is **url** and you want to filter on the **
 1. Facet searches are case sensitive. Use free text search to get case insensitive results. Another option is to use the lowercase filter with your Grok parser while parsing to get case insensitive results during search.
 
 2. Searching for a facet value that contains special characters requires escaping or double quotes.
-For example, for a facet `my_facet` with the value `hello:world`, search using: `@my_facet:hello\:world` or `@my_facet:"hello:world"`.
-To match a single special character or space, use the `?` wildcard. For example, for a facet `my_facet` with the value `hello world`, search using: `@my_facet:hello?world`.
+    - For example, for a facet `my_facet` with the value `hello:world`, search using: `@my_facet:hello\:world` or `@my_facet:"hello:world"`.
+    - To match a single special character or space, use the `?` wildcard. For example, for a facet `my_facet` with the value `hello world`, search using: `@my_facet:hello?world`.
 
 [1]: /logs/explorer/facets/
 
@@ -91,8 +91,8 @@ For instance, if your attribute name is **url** and you want to filter on the **
 2. Attributes searches are case sensitive. Use free text search to get case insensitive results. Another option is to use the `lowercase` filter with your Grok parser while parsing to get case insensitive results during search.
 
 3. Searching for an attribute value that contains special characters requires escaping or double quotes.
-For example, for an attribute `my_attribute` with the value `hello:world`, search using: `@my_attribute:hello\:world` or `@my_attribute:"hello:world"`.
-To match a single special character or space, use the `?` wildcard. For example, for an attribute `my_attribute` with the value `hello world`, search using: `@my_attribute:hello?world`.
+    - For example, for an attribute `my_attribute` with the value `hello:world`, search using: `@my_attribute:hello\:world` or `@my_attribute:"hello:world"`.
+    - To match a single special character or space, use the `?` wildcard. For example, for an attribute `my_attribute` with the value `hello world`, search using: `@my_attribute:hello?world`.
 {{< /site-region >}}
 
 Examples:
@@ -180,8 +180,6 @@ If your tags don't follow [tags best practices][5] and don't use the `key:value`
 
 ## Arrays
 
-You can add facets on arrays of strings or numbers. All values included in the array become listed in the facet and can be used to search the logs.
-
 In the below example, clicking on the `Peter` value in the facet returns all the logs that contains a `users.names` attribute, whose value is either `Peter` or an array that contains `Peter`:
 
 {{< img src="logs/explorer/search/array_search.png" alt="Array and Facets" style="width:80%;">}}
@@ -190,7 +188,7 @@ In the below example, clicking on the `Peter` value in the facet returns all the
 
 **Note**: Search can also be used on non-faceted array attributes using an equivalent syntax.
 
-In the following example, CloudWatch logs for Windows contain an array of JSON objects under `@Event.EventData.Data`.
+In the following example, CloudWatch logs for Windows contain an array of JSON objects under `@Event.EventData.Data`. You cannot create a facet on array of JSON objects, but you can search using the following syntax.
 
 * `@Event.EventData.Data.Name:ObjectServer` matches all logs with the key `Name` and value `ObjectServer`.
 

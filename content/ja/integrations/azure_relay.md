@@ -1,8 +1,7 @@
 ---
 categories:
-  - cloud
-  - azure
-ddtype: crawler
+- cloud
+- azure
 dependencies: []
 description: Azure Relay のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_relay/
@@ -20,6 +19,7 @@ public_title: Datadog-Microsoft Azure Relay インテグレーション
 short_description: Azure Relay のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Azure Relay サービスを使用すると、ファイアウォールでポートを解放したり企業ネットワークインフラストラクチャーの内部に及んだりするような変更を加える必要なく、企業ネットワーク内で実行されているサービスをパブリッククラウドに安全に公開することができます。

@@ -9,17 +9,18 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - monitoring
+- monitoring
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/pulsar/README.md'
+- https://github.com/DataDog/integrations-extras/blob/master/pulsar/README.md
 display_name: pulsar
 draft: false
 git_integration_title: pulsar
 guid: 799b35dd-d481-4d71-825e-83c92a5227c4
 integration_id: pulsar
 integration_title: Pulsar
+integration_version: 0.0.1
 is_public: true
 kind: integration
 maintainer: ming.luo@kesque.com
@@ -28,20 +29,23 @@ metric_prefix: kesque.pulsar.
 metric_to_check: kesque.pulsar.consumer.available_permits
 name: pulsar
 public_title: Pulsar
-short_description: "Métriques Apache\_Pulsar"
+short_description: Métriques Apache Pulsar
 support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 Ce check permet de surveiller [Pulsar][1] avec l'Agent Datadog.
 
 ## Configuration
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à des environnements conteneurisés.
 
 ### Installation
 
@@ -79,7 +83,7 @@ Pour installer le check Pulsar sur votre host :
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][7] et cherchez `pulsar` dans la section Checks.
+Lancez la [sous-commande status de l'Agent][7] et cherchez `pulsar` dans la section Checks.
 
 ## Données collectées
 

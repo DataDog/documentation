@@ -1,41 +1,66 @@
 ---
+app_id: cisco-aci
+app_uuid: fab40264-45aa-434b-9f9f-dc0ab609dd49
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     cisco_aci: assets/dashboards/cisco_aci_dashboard.json
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: true
+    metrics:
+      check: cisco_aci.fabric.node.health.cur
+      metadata_path: metadata.csv
+      prefix: cisco_aci.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Cisco ACI
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-  - network
-  - autodiscovery
-creates_events: true
-ddtype: check
+- network
+- autodiscovery
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/cisco_aci/README.md'
-display_name: Cisco ACI
+- https://github.com/DataDog/integrations-core/blob/master/cisco_aci/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: cisco_aci
-guid: 8a20f56b-2e25-4a0b-a252-f5187dddeeef
 integration_id: cisco-aci
 integration_title: CiscoACI
+integration_version: 2.2.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: cisco_aci.
-metric_to_check: cisco_aci.fabric.node.health.cur
+manifest_version: 2.0.0
 name: cisco_aci
-public_title: Datadog-CiscoACI インテグレーション
+oauth: {}
+public_title: CiscoACI
 short_description: Cisco ACI のパフォーマンスと使用状況を追跡。
-support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::ネットワーク
+  - Category::Autodiscovery
+  configuration: README.md#Setup
+  description: Cisco ACI のパフォーマンスと使用状況を追跡。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: CiscoACI
 ---
+
+
+
 ## 概要
 
 Cisco ACI インテグレーションを使用すると、以下のことが可能です。
@@ -133,6 +158,14 @@ Cisco ACI チェックはテナントの障害をイベントとして送信し�
 
 
 ## トラブルシューティング
+
+### `cisco_aci.tenant.*` メトリクスの欠落
+もし `cisco_aci.tenant.*` メトリクスがない場合は、`test/cisco_aci_query.py` スクリプトを実行して、テナントエンドポイントに手動でクエリを実行することが可能です。
+
+`apic_url`、`apic_username`、`apic_password` を構成情報に変更し、`apic_url` にテナント URL を入力します。
+
+エンドポイントを cURL して得られた出力が `datadog_checks/cisco_aci/aci_metrics.py` で収集されたメトリクスのいずれかと一致するか確認します。どの統計も一致しない場合、これは、統合が収集できる統計情報をエンドポイントが発信していないことを意味します。
+
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

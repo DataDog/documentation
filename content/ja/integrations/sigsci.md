@@ -1,38 +1,61 @@
 ---
+app_id: sigsci
+app_uuid: edc9a664-24f1-45ee-88ad-04e5da064f51
 assets:
   dashboards:
     sigsci: assets/dashboards/overview.json
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: true
+    metrics:
+      check: sigsci.agent.signal
+      metadata_path: metadata.csv
+      prefix: sigsci.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Signal Sciences
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Signal Sciences
+  sales_email: info@signalsciences.com
+  support_email: info@signalsciences.com
 categories:
-  - security
-creates_events: true
-ddtype: crawler
+- security
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/sigsci/README.md
-display_name: Signal Sciences
+- https://github.com/DataDog/integrations-extras/blob/master/sigsci/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: sigsci
-guid: 0c92b7cd-0736-4f9d-82ed-16f1bba8c8d0
 integration_id: sigsci
 integration_title: Signal Sciences
 integration_version: ''
 is_public: true
 kind: インテグレーション
-maintainer: info@signalsciences.com
-manifest_version: 1.0.0
-metric_prefix: sigsci.
-metric_to_check: sigsci.agent.signal
+manifest_version: 2.0.0
 name: sigsci
-public_title: Datadog-Signal Sciences インテグレーション
+oauth: {}
+public_title: Signal Sciences
 short_description: Signal Sciences からデータを収集して異常値を表示し、攻撃を阻止
-support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Security
+  configuration: README.md#Setup
+  description: Signal Sciences からデータを収集して異常値を表示し、攻撃を阻止
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Signal Sciences
 ---
+
 ## 概要
 
 Signal Sciences のメトリクスとイベントを Datadog に送信することで、アプリケーション、API、マイクロサービスなどに対する攻撃や悪用をリアルタイムに監視できます。また、Signal Sciences が正しく機能し、トラフィックを検査していることを確認できます。
@@ -70,7 +93,7 @@ Signal Sciences からメトリクスとイベントをリアルタイムに取�
 
 ## セットアップ
 
-Signal Sciences-Datadog インテグレーションを使用するには、Signal Sciences ユーザーである必要があります。Signal Sciences の詳細については、<https://www.signalsciences.com> にアクセスしてください。
+Signal Sciences-Datadog インテグレーションを使用するには、Signal Sciences ユーザーである必要があります。Signal Sciences の詳細については、<https://www.signalsciences.com> を参照してください。
 
 ### コンフィギュレーション
 
@@ -114,10 +137,7 @@ Signal Sciences-Datadog インテグレーションを使用するには、Signa
 
 4. **Add** をクリックします。
 
-**詳細情報**
-
-- [こちらのビデオ][7]で、エージェントのコンフィギュレーションと Datadog の設定について説明しています。
-- [Signal Sciences ドキュメント][8]で、詳細を確認
+詳細については、[Datadog Signal Sciences インテグレーション][7]を参照してください。
 
 ## 収集データ
 
@@ -127,7 +147,7 @@ Signal Sciences-Datadog インテグレーションを使用するには、Signa
 
 ### イベント
 
-すべての Signal Sciences イベントが [Datadog のイベントストリーム][10]に送信されます。
+すべての Signal Sciences イベントが [Datadog のイベントストリーム][9]に送信されます
 
 ### サービスのチェック
 
@@ -135,13 +155,13 @@ Signal Sciences インテグレーションには、サービスのチェック�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
 ## その他の参考資料
 
-アプリケーションセキュリティ、DevOps、SecOps、およびすべての操作については、[Signal Sciences ブログ][12]を参照してください。
+お役に立つドキュメント、リンクや記事:
 
-Signal Sciences のサブスクリプションなしで、アプリケーション、API、マイクロサービスなどに対する攻撃をリアルタイムに表示できる無料サービス Signal Sciences-Datadog Monitoring に登録できます。[登録ページ][13]にアクセスしてください。
+- [Signal Sciences のブログ][11]
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/sigsci/images/datadog-sigsci-dashboard.png
 [2]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/sigsci/images/datadog-sigsci-security.png
@@ -149,10 +169,8 @@ Signal Sciences のサブスクリプションなしで、アプリケーショ�
 [4]: https://docs.datadoghq.com/ja/agent/kubernetes/dogstatsd/
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: https://dashboard.signalsciences.net
-[7]: https://player.vimeo.com/video/347360711
-[8]: https://docs.signalsciences.net/integrations/datadog/
-[9]: https://github.com/DataDog/integrations-extras/blob/master/sigsci/metadata.csv
-[10]: https://docs.datadoghq.com/ja/events/
-[11]: https://docs.datadoghq.com/ja/help/
-[12]: https://labs.signalsciences.com
-[13]: https://info.signalsciences.com/datadog-security
+[7]: https://docs.signalsciences.net/integrations/datadog/
+[8]: https://github.com/DataDog/integrations-extras/blob/master/sigsci/metadata.csv
+[9]: https://docs.datadoghq.com/ja/events/
+[10]: https://docs.datadoghq.com/ja/help/
+[11]: https://www.signalsciences.com/blog/

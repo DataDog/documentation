@@ -1,45 +1,69 @@
 ---
+app_id: external-dns
+app_uuid: b41539a6-8222-4d6e-92f9-0a9f8496acdd
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: external_dns.source.endpoints.total
+      metadata_path: metadata.csv
+      prefix: external_dns.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: 外部 DNS
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
-  - web
-  - ネットワーク
-creates_events: false
-ddtype: check
+- web
+- ネットワーク
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/external_dns/README.md'
-display_name: 外部 DNS
+- https://github.com/DataDog/integrations-core/blob/master/external_dns/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: external_dns
-guid: 31eb63d5-15eb-42b3-912d-f8de47ea252a
 integration_id: external-dns
 integration_title: 外部 DNS
+integration_version: 2.3.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: external_dns.
-metric_to_check: external_dns.source.endpoints.total
+manifest_version: 2.0.0
 name: external_dns
-public_title: Datadog-外部 DNS インテグレーション
+oauth: {}
+public_title: 外部 DNS
 short_description: 外部 DNS のすべてのメトリクスを Datadog で追跡
-support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Web
+  - Category::Network
+  configuration: README.md#Setup
+  description: 外部 DNS のすべてのメトリクスを Datadog で追跡
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: 外部 DNS
 ---
+
+
+
 ## 概要
 
 外部 DNS サーバーからメトリクスをリアルタイムに取得して、Kubernetes の外部 DNS Prometheus アドオンで収集した DNS メトリクスを視覚化および監視できます。
 
-外部 DNS の詳細については、[GitHub リポジトリ][1]を参照してください。
+外部 DNS の詳細については、[Github リポジトリ][1]を参照してください。
 
 ## セットアップ
 

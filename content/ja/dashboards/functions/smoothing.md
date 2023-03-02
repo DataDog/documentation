@@ -1,9 +1,10 @@
 ---
-title: スムーシング
-kind: documentation
 aliases:
-  - /ja/graphing/functions/smoothing/
+- /ja/graphing/functions/smoothing/
+kind: documentation
+title: スムーシング
 ---
+
 ## 自動スムーズ
 
 | 関数       | 説明                                                           | 例                        |
@@ -49,6 +50,14 @@ aliases:
 メトリクス `10 + x%10 {*}` は、10 から 1 ずつ増え、データポイントが 10 個になると 10 に戻ります。これに対して、`ewma5(10 + x%10 {*})` は次のようなグラフになります。
 
 {{< img src="dashboards/functions/smoothing/ewma5.png" alt="EWMA5" style="width:80%;">}}
+
+### Ewma 7
+
+| 関数   | 説明                                                         | 例                    |
+| :----      | :-------                                                            | :---------                 |
+| `ewma_7()` | 7 スパンの指数加重移動平均を計算します。 | `ewma_7(<METRIC_NAME>{*})` |
+
+注: スパン値はデータポイントの数です。したがって、`ewma_7()` は、最後の 7 つのデータポイントを使用して平均を計算します。
 
 ### EWMA 10
 

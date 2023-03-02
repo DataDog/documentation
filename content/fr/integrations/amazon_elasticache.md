@@ -1,41 +1,45 @@
 ---
 aliases:
-  - /fr/integrations/awselasticache/
-  - /fr/integrations/elasticache/
+- /fr/integrations/awselasticache/
+- /fr/integrations/elasticache/
 categories:
-  - cloud
-  - caching
-  - aws
-  - log collection
+- cloud
+- caching
+- aws
+- log collection
 ddtype: crawler
 dependencies: []
-description: "Surveillez des métriques clés d'Amazon\_ElastiCache."
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_elasticache/'
+description: Surveillez des métriques clés d'Amazon ElastiCache.
+doc_link: https://docs.datadoghq.com/integrations/amazon_elasticache/
+draft: false
 git_integration_title: amazon_elasticache
 has_logo: true
+integration_id: amazon-elasticache
 integration_title: Amazon ElastiCache
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_elasticache
-public_title: "Intégration Datadog/Amazon\_ElastiCache"
-short_description: "Surveillez des métriques clés d'Amazon\_ElastiCache."
+public_title: Intégration Datadog/Amazon ElastiCache
+short_description: Surveillez des métriques clés d'Amazon ElastiCache.
 version: '1.0'
 ---
+
 {{< img src="integrations/awselasticache/elasticache-memcached.png" alt="Dashboard par défaut ElastiCache Memcached" popup="true">}}
 
 ## Présentation
 
-Pour savoir comment surveiller les métriques de performance ElastiCache (que vous utilisiez Redis ou Memcached), consultez [notre série d'articles à ce sujet][1]. Vous y trouverez des informations supplémentaires sur les principales métriques de performance, ainsi que des conseils pour les recueillir, et découvrirez comment [Coursera][2] surveille ElastiCache à l'aide de Datadog.
+Consultez [Surveiller les métriques de performance ElastiCache avec Redis ou Memcached][1] pour obtenir des informations supplémentaires sur les principales métriques de performance ainsi que des conseils pour les recueillir, et découvrez comment [Coursera][2] surveille ElastiCache à l'aide de Datadog.
 
-## Implémentation
+## Configuration
 
 Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon Web Services][3].
 
 ### Installation sans l'Agent Datadog
 
 1. Dans le [carré d'intégration AWS][4], assurez-vous que l'option `ElastiCache` est cochée dans la section concernant la collecte des métriques.
-2. Ajoutez les autorisations suivantes à votre [stratégie IAM Datadog][5] afin de recueillir des métriques Amazon ElastiCache. Pour en savoir plus sur les stratégies ElastiCache, consultez [la documentation du site Web d'AWS][6].
+2. Ajoutez les autorisations suivantes à votre [stratégie IAM Datadog][5] afin de recueillir des métriques Amazon ElastiCache. Pour en savoir plus, consultez la section relative aux [stratégies ElastiCache][6] de la documentation AWS.
 
     | Autorisation AWS                      | Description                                                           |
     | ----------------------------------- | --------------------------------------------------------------------- |
@@ -71,7 +75,7 @@ Cliquez ensuite sur le lien du « node » pour accéder à son URL d'endpoint�
 
 {{< img src="integrations/awselasticache/elasticache3.png" alt="Lien node dans la console AWS" >}}
 
-Notez l'URL de l'endpoint (p. ex., **replica-001.xxxx.use1.cache.amazonaws.com**) et le `cacheclusterid` (p. ex., **replica-001**). Ces valeurs sont requises pour configurer l'Agent et créer des graphiques et dashboards.
+Notez l'URL de l'endpoint (par exemple, **replica-001.xxxx.use1.cache.amazonaws.com**) et le `cacheclusterid` (par exemple, **replica-001**). Ces valeurs sont requises pour configurer l'Agent et créer des graphiques et dashboards.
 
 ##### Configurer l'Agent
 
@@ -91,11 +95,11 @@ instances:
 
 Redémarrez ensuite l'Agent : `sudo /etc/init.d/datadog-agent restart` (sous Linux).
 
-##### Visualiser conjointement les métriques ElastiCache et Redis/Memcached
+##### Visualiser plusieurs métriques en même temps
 
-Après quelques minutes, les métriques ElastiCache et Redis/Memcached apparaissent dans Datadog et peuvent être utilisées pour les représentations graphiques, les processus de surveillance, etc.
+Après quelques minutes, les métriques ElastiCache et les métriques Redis ou Memcached apparaissent dans Datadog et peuvent être utilisées pour les représentations graphiques, les processus de surveillance, etc.
 
-Voici un exemple de configuration d'un graphique. L'objectif de celui-ci consiste à combiner les métriques de correspondance dans le cache d'ElastiCache avec des métriques de latence natives de Redis grâce au tag `cacheclusterid` **replicaa-001**.
+Voici un exemple de configuration d'un graphique. L'objectif de celui-ci consiste à combiner les métriques d'accès au cache d'ElastiCache avec des métriques de latence natives de Redis grâce au tag `cacheclusterid` **replicaa-001**.
 
 {{< img src="integrations/awselasticache/elasticache4.png" alt="Métriques Cache et ElastiCache" >}}
 
@@ -123,18 +127,17 @@ Besoin d'aide ? Contactez [l'assistance Datadog][10].
 
 ## Pour aller plus loin
 
-- [Surveiller les métriques de performance ElastiCache avec Redis ou Memcached][11]  
-- [Recueillir des métriques ElastiCache et ses métriques Redis/Memcached][12]  
+- [Surveiller les métriques de performance ElastiCache avec Redis ou Memcached][1]
+- [Recueillir des métriques ElastiCache et ses métriques Redis/Memcached][11]
 
 [1]: https://www.datadoghq.com/blog/monitoring-elasticache-performance-metrics-with-redis-or-memcached
 [2]: https://www.coursera.org
-[3]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
+[3]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
 [4]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [5]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
-[6]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_elasticache.html
+[6]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/IAM.html
 [7]: https://app.datadoghq.com/account/settings#integrations/amazon_elasticache
 [8]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [9]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_elasticache/amazon_elasticache_metadata.csv
-[10]: https://docs.datadoghq.com/fr/help
-[11]: https://www.datadoghq.com/blog/monitoring-elasticache-performance-metrics-with-redis-or-memcached
-[12]: https://www.datadoghq.com/blog/collecting-elasticache-metrics-its-redis-memcached-metrics
+[10]: https://docs.datadoghq.com/fr/help/
+[11]: https://www.datadoghq.com/blog/collecting-elasticache-metrics-its-redis-memcached-metrics

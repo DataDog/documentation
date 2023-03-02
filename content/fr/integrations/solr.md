@@ -12,19 +12,20 @@ assets:
     solr_processes: assets/saved_views/solr_processes.json
   service_checks: assets/service_checks.json
 categories:
-  - data store
-  - autodiscovery
-  - log collection
+- data store
+- autodiscovery
+- log collection
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/solr/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/solr/README.md
 display_name: Solr
 draft: false
 git_integration_title: solr
 guid: 0235124a-0207-44dd-aede-f578a6d46b26
 integration_id: solr
 integration_title: Solr
+integration_version: 1.11.1
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -33,15 +34,19 @@ metric_prefix: solr.
 metric_to_check: solr.searcher.numdocs
 name: solr
 process_signatures:
-  - solr start
+- solr start
 public_title: Intégration Datadog/Solr
-short_description: 'Surveillez les taux de requêtes, les erreurs des gestionnaires, les miss et expulsions du cache, et plus encore.'
+short_description: Surveillez les taux de requêtes, les erreurs des gestionnaires,
+  les miss et expulsions du cache, et plus encore.
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ![Graphique Solr][1]
 
 ## Présentation
@@ -213,7 +218,7 @@ Pour les environnements conteneurisés, consultez le guide [Autodiscovery avec J
 
 4. [Redémarrez l'Agent][6].
 
-Consultez la [documentation de Datadog][7] pour découvrir comment configurer l'Agent afin de recueillir les logs dans un environnement Docker.
+Pour activer les logs pour les environnements Kubernetes, consultez la section [Collecte de logs Kubernetes][7].
 
 [1]: https://docs.datadoghq.com/fr/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
 [2]: https://lucene.apache.org/solr/guide/configuring-logging.html#permanent-logging-settings
@@ -240,9 +245,8 @@ Consultez la [documentation de Datadog][7] pour découvrir comment configurer l'
 Le check Solr n'inclut aucun événement.
 
 ### Checks de service
+{{< get-service-checks-from-git "solr" >}}
 
-**solr.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'instance SolR qu'il surveille et à y recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 

@@ -1,25 +1,26 @@
 ---
-title: Python ログ収集
-kind: documentation
 aliases:
-  - /ja/logs/languages/python
+- /ja/logs/languages/python
 further_reading:
-  - link: https://www.datadoghq.com/blog/python-logging-best-practices/
-    tag: ブログ
-    text: Python ログの収集、カスタマイズ、一元化方法
-  - link: /logs/log_configuration/processors
-    tag: Documentation
-    text: ログの処理方法
-  - link: /logs/log_configuration/parsing
-    tag: Documentation
-    text: パースの詳細
-  - link: /logs/explorer/
-    tag: Documentation
-    text: ログの調査方法
-  - link: /logs/faq/log-collection-troubleshooting-guide/
-    tag: FAQ
-    text: ログ収集のトラブルシューティングガイド
+- link: https://www.datadoghq.com/blog/python-logging-best-practices/
+  tag: ブログ
+  text: Python ログの収集、カスタマイズ、一元化方法
+- link: /logs/log_configuration/processors
+  tag: Documentation
+  text: ログの処理方法
+- link: /logs/log_configuration/parsing
+  tag: Documentation
+  text: パースの詳細
+- link: /logs/explorer/
+  tag: Documentation
+  text: ログの調査方法
+- link: /logs/faq/log-collection-troubleshooting-guide/
+  tag: FAQ
+  text: ログ収集のトラブルシューティングガイド
+kind: documentation
+title: Python ログ収集
 ---
+
 ## 概要
 
 任意の Python ロガーを使用して、ホスト上のファイルにログを記録します。次に、Datadog Agent でファイルを監視して、ログを Datadog に送信します。
@@ -107,31 +108,16 @@ logger.setLevel(logging.INFO)
 logger.info('Sign up', extra={'referral_code': '52d6ce'})
 ```
 
-[ハンドラーが構成される][2]と、ログファイルには次のログレコード (インライン) が含まれます。
+ログファイルには次のログレコード (インライン) が含まれます。
 
 ```json
 {
-  "threadName": "MainThread",
-  "name": "root",
-  "thread": 140735202359648,
-  "created": 1336281068.506248,
-  "process": 41937,
-  "processName": "MainProcess",
-  "relativeCreated": 9.100914001464844,
-  "module": "tests",
-  "funcName": "testFormatKeys",
-  "levelno": 20,
-  "msecs": 506.24799728393555,
-  "pathname": "tests/tests.py",
-  "lineno": 60,
-  "asctime": ["12-05-05 22:11:08,506248"],
-  "message": "testing logging format",
-  "filename": "tests.py",
-  "levelname": "INFO",
-  "special": "value",
-  "run": 12
+  "message": "Sign up",
+  "referral_code": "52d6ce"
 }
 ```
+
+ハンドラーの構成については、[Python-json-logger][2] のドキュメントを参照してください。
 
 [1]: https://github.com/madzak/python-json-logger
 [2]: https://github.com/madzak/python-json-logger#customizing-fields

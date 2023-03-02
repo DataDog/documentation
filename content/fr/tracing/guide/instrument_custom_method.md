@@ -1,20 +1,23 @@
 ---
-title: Instrumenter une méthode personnalisée pour analyser en détail votre logique opérationnelle
-kind: guide
 further_reading:
-  - link: /tracing/guide/alert_anomalies_p99_database/
-    tag: "3\_minutes"
-    text: Être alerté en cas de latence au 99e centile anormale pour un service de base de données
-  - link: /tracing/guide/week_over_week_p50_comparison/
-    tag: "2\_minutes"
-    text: Comparer la latence d'un service avec celle de la semaine précédente
-  - link: /tracing/guide/slowest_request_daily/
-    tag: "3\_minutes"
-    text: Débuguer la trace la plus lente sur l'endpoint le plus lent d'un service web
-  - link: /tracing/guide/
-    tag: ''
-    text: Tous les guides
+- link: /tracing/guide/alert_anomalies_p99_database/
+  tag: 3 minutes
+  text: Être alerté en cas de latence au 99e centile anormale pour un service de base
+    de données
+- link: /tracing/guide/week_over_week_p50_comparison/
+  tag: 2 minutes
+  text: Comparer la latence d'un service avec celle de la semaine précédente
+- link: /tracing/guide/slowest_request_daily/
+  tag: 3 minutes
+  text: Débuguer la trace la plus lente sur l'endpoint le plus lent d'un service web
+- link: /tracing/guide/
+  tag: ''
+  text: Tous les guides
+kind: guide
+title: Instrumenter une méthode personnalisée pour analyser en détail votre logique
+  opérationnelle
 ---
+
 _Temps de lecture : 8 minutes_
 
 {{< img src="tracing/guide/custom_span/custom_span_1.png" alt="Vue Analytics"  style="width:90%;">}}
@@ -148,11 +151,11 @@ require 'ddtrace'
 class BackupLedger
 
   def write(transactions)
-    # Utiliser la méthode globale `Datadog.tracer.trace` pour tracer directement des blocs de code
-    Datadog.tracer.trace('BackupLedger.write') do |method_span|
+    # Utiliser la méthode globale `Datadog::Tracing.trace` pour tracer directement des blocs de code
+    Datadog::Tracing.trace('BackupLedger.write') do |method_span|
       transactions.each do |transaction|
-        Datadog.tracer.trace('BackupLedger.persist') do |span|
-          # Ajouter des métadonnées personnalisées à la span persist_transaction
+        Datadog::Tracing.trace('BackupLedger.persist') do |span|
+          # Ajouter des métadonnées personnalisées à la span "persist_transaction" span
           span.set_tag('transaction.id', transaction.id)
           ledger[transaction.id] = transaction
         end
@@ -364,5 +367,5 @@ Vous avez maintenant réussi à ajouter des spans personnalisées à votre code,
 
 [1]: https://app.datadoghq.com/apm/services
 [2]: https://bojanv91.github.io/posts/2018/06/select-n-1-problem
-[3]: https://app.datadoghq.com/apm/search/analytics
+[3]: https://app.datadoghq.com/apm/analytics
 [4]: /fr/tracing/guide/add_span_md_and_graph_it/

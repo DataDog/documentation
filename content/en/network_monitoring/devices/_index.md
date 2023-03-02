@@ -21,6 +21,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/network-device-monitoring/'
       tag: 'Blog'
       text: 'Introducing Network Device Monitoring'
+    - link: 'https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/'
+      tag: 'Blog'
+      text: 'Monitor and diagnose network performance issues with SNMP Traps'
 ---
 
 ## Overview
@@ -81,9 +84,9 @@ The following vendor devices are supported with dedicated profiles. If a vendor/
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /network_monitoring/devices/setup/#monitoring-individual-devices
-[2]: /network_monitoring/devices/setup/#autodiscovery
+[1]: /network_monitoring/devices/snmp_metrics/#monitoring-individual-devices
+[2]: /network_monitoring/devices/snmp_metrics/#autodiscovery
 [3]: https://app.datadoghq.com/dash/integration/30409/datacenter-overview
 [4]: https://app.datadoghq.com/dash/integration/30417/interface-performance
-[5]: /monitors/create/types/metric/
+[5]: /monitors/types/metric/
 [6]: /network_monitoring/devices/troubleshooting#what-do-i-do-if-datadog-supports-a-vendor-or-device-type-but-my-specific-model-isnt-supported

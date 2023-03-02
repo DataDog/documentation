@@ -22,7 +22,7 @@ further_reading:
 
 Configure your Datadog account to forward all the logs ingested - whether [indexed][1] or not - to a cloud storage system of your own. Keep your logs in a storage-optimized archive for longer periods of time and meet compliance requirements while also keeping auditability for ad hoc investigations, with [Rehydration][2].
 
-{{< img src="logs/archives/log_archives_s3_multiple.png" alt="Archive page view"  style="width:75%;">}}
+{{< img src="logs/archives/log_archives_s3_multiple.png" alt="Archive page view" style="width:75%;">}}
 
 This guide shows you how to set up an archive for forwarding ingested logs to your own cloud-hosted storage bucket:
 
@@ -57,13 +57,15 @@ If not already configured, set up the [AWS integration][1] for the AWS account t
 
 Set up the [Azure integration][1] within the subscription that holds your new storage account, if you haven't already. This involves [creating an app registration that Datadog can use][2] to integrate with.
 
+**Note:** Archiving to Azure ChinaCloud is not supported.
+
 [1]: https://app.datadoghq.com/account/settings#integrations/azure
 [2]: /integrations/azure/?tab=azurecliv20#integrating-through-the-azure-portal
 {{% /tab %}}
 
 {{% tab "Google Cloud Storage" %}}
 
-Set up the [GCP integration][1] for the project that holds your GCS storage bucket, if you haven’t already. This involves [creating a GCP service account that Datadog can use][2] to integrate with.
+Set up the [GCP integration][1] for the project that holds your GCS storage bucket, if you haven't already. This involves [creating a GCP service account that Datadog can use][2] to integrate with.
 
 [1]: https://app.datadoghq.com/account/settings#integrations/google-cloud-platform
 [2]: /integrations/google_cloud_platform/?tab=datadogussite#setup
@@ -82,14 +84,18 @@ Go into your [AWS console][1] and [create an S3 bucket][2] to send your archives
 - Do not make your bucket publicly readable.
 - Do not set [Object Lock][3] because the last data needs to be rewritten in some rare cases (typically a timeout).
 
+- For [US1, US3, and US5 sites][4], see [AWS Pricing][5] for inter-region data transfer fees and how cloud storage costs may be impacted. Consider creating your storage bucket in `us-east-1` to manage your inter-region data transfer fees.
+
 [1]: https://s3.console.aws.amazon.com/s3
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html
 [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock-overview.html
+[4]: /getting_started/site/
+[5]: https://aws.amazon.com/s3/pricing/
 {{% /tab %}}
 
 {{% tab "Azure Storage" %}}
 
-* Go to your [Azure Portal][1] and [create a storage account][2] to send your archives to. Give your storage account a name, any account kind, and select the **hot** access tier.
+* Go to your [Azure Portal][1] and [create a storage account][2] to send your archives to. Give your storage account a name, any account kind, and select the **hot** or **cool** access tier.
 * Create a **container** service into that storage account. Take note of the container name as you will need to add this in the Datadog Archive Page.
 
 **Note:** Do not set [immutability policies][3] because the last data needs to be rewritten in some rare cases (typically a timeout).
@@ -116,47 +122,50 @@ Go to your [GCP account][1] and [create a GCS bucket][2] to send your archives t
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
-Add the following two permission statements to your IAM policies attached to the role for the AWS Integration. Edit the bucket names and, if desired, specify the paths that contain your log archives. 
+1. [Create a policy][1] with the following two permission statements:  
 
-**Notes**:
-
-* The `GetObject` and `ListBucket` permissions allow for [rehydrating from archives][1].
-* The `PutObject` permission is sufficient for uploading archives.
-
-
-```json
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "DatadogUploadAndRehydrateLogArchives",
-      "Effect": "Allow",
-      "Action": ["s3:PutObject", "s3:GetObject"],
-       "Principal": {
-          "AWS": "arn:aws:iam::MY_AWS_ACCOUNTID:role/<MY_ROLE_NAME>"
+   ```json
+   {
+     "Version": "2012-10-17",
+     "Statement": [
+       {
+         "Sid": "DatadogUploadAndRehydrateLogArchives",
+         "Effect": "Allow",
+         "Action": ["s3:PutObject", "s3:GetObject"],
+         "Resource": [
+           "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*",
+           "arn:aws:s3:::<MY_BUCKET_NAME_2_/_MY_OPTIONAL_BUCKET_PATH_2>/*"
+         ]
        },
-      "Resource": [
-        "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*",
-        "arn:aws:s3:::<MY_BUCKET_NAME_2_/_MY_OPTIONAL_BUCKET_PATH_2>/*"
-      ]
-    },
-    {
-      "Sid": "DatadogRehydrateLogArchivesListBucket",
-      "Effect": "Allow",
-      "Action": "s3:ListBucket",
-      "Principal": {
-          "AWS": "arn:aws:iam::MY_AWS_ACCOUNTID:role/<MY_ROLE_NAME>"
-       },
-      "Resource": [
-        "arn:aws:s3:::<MY_BUCKET_NAME_1>",
-        "arn:aws:s3:::<MY_BUCKET_NAME_2>"
-      ]
-    }
-  ]
-}
-```
+       {
+         "Sid": "DatadogRehydrateLogArchivesListBucket",
+         "Effect": "Allow",
+         "Action": "s3:ListBucket",
+         "Resource": [
+           "arn:aws:s3:::<MY_BUCKET_NAME_1>",
+           "arn:aws:s3:::<MY_BUCKET_NAME_2>"
+         ]
+       }
+     ]
+   }
+   ```
+     * The `GetObject` and `ListBucket` permissions allow for [rehydrating from archives][2].
+     * The `PutObject` permission is sufficient for uploading archives.
 
-[1]: /logs/archives/rehydrating/
+2. Edit the bucket names.
+3. Optionally, specify the paths that contain your log archives.
+4. Attach the new policy to the Datadog integration role.  
+    a. Navigate to **Roles** in the AWS IAM console.  
+    b. Locate the role used by the Datadog integration. By default it is named **DatadogIntegrationRole**, but the name may vary if your organization has renamed it. Click the role name to open the role summary page.  
+    c. Click **Add permissions**, and then **Attach policies**.  
+    d. Enter the name of the policy created above.  
+    e. Click **Attach policies**.  
+
+**Note**: Ensure that the resource value under the `s3:PutObject` and `s3:GetObject` actions ends with `/*` because these permissions are applied to objects within the buckets. 
+ 
+
+[1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
+[2]: /logs/archives/rehydrating/
 {{% /tab %}}
 {{% tab "Azure Storage" %}}
 
@@ -186,9 +195,11 @@ Add the role under **Storage** called **Storage Object Admin**.
 
 ### Route your logs to a bucket
 
-Go to the [Archives page][4] in the Datadog app and select the **Add a new archive** option at the bottom.
+Add webhook IPs from the [IP ranges list][4] to the allowlist. Go to the [Archives page][5] in the Datadog app and select the **Add a new archive** option at the bottom.
 
-**Note**: Only Datadog users with [logs_write_archive permission][3] can complete this and the following step.
+**Notes:** 
+* Only Datadog users with [logs_write_archive permission][3] can complete this and the following step.  
+* Archiving logs to Azure Blob Storage requires an App Registration. See instructions [on the Azure integration page][6], and set the "site" on the right-hand side of the documentation page to "US." App Registration(s) created for archiving purposes only need the "Storage Blob Data Contributor" role. If your storage bucket is in a subscription being monitored through a Datadog Resource, a warning is displayed about the App Registration being redundant. You can ignore this warning.
 
 {{< tabs >}}
 {{% tab "AWS S3" %}}
@@ -233,9 +244,9 @@ By default:
 
 Use this optional configuration step to assign roles on that archive and restrict who can:
 
-* Edit that archive configuration. See the [logs_write_archive][5] permission.
-* Rehydrate from that archive. See the [logs_read_archives][6] and [logs_write_historical_view][7].
-* Access rehydrated logs in case you use the legacy [read_index_data permission][8].
+* Edit that archive configuration. See the [logs_write_archive][7] permission.
+* Rehydrate from that archive. See the [logs_read_archives][8] and [logs_write_historical_view][9].
+* Access rehydrated logs in case you use the legacy [read_index_data permission][10].
 
 {{< img src="logs/archives/archive_restriction.png" alt="Restrict access to Archives and Rehydrated logs"  style="width:75%;">}}
 
@@ -244,7 +255,7 @@ Use this optional configuration step to assign roles on that archive and restric
 Use this optional configuration step to:
 
 * Include all log tags in your archives (activated by default on all new archives). **Note**: This increases the size of resulting archives.
-* Add tags on rehydrated logs according to your Restriction Queries policy. See [logs_read_data][9] permission.
+* Add tags on rehydrated logs according to your Restriction Queries policy. See [logs_read_data][11] permission.
 
 {{< img src="logs/archives/tags_in_out.png" alt="Configure Archive Tags"  style="width:75%;">}}
 
@@ -263,12 +274,29 @@ For Archives with a maximum scan size defined, all users need to estimate the sc
 
 You can [set a lifecycle configuration on your S3 bucket][1] to automatically transition your log archives to optimal storage classes.
 
-[Rehydration][2] supports all storage classes except for Glacier and Glacier Deep Archive. If you wish to rehydrate from archives in the Glacier or Glacier Deep Archive storage classes, you must first move them to a different storage class.
+[Rehydration][2] only supports the following storage classes:
+
+* S3 Standard
+* S3 Standard-IA
+* S3 One Zone-IA
+* S3 Glacier Instant Retrieval
+
+If you wish to rehydrate from archives in another storage class, you must first move them to one of the supported storage classes above.
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-set-lifecycle-configuration-intro.html
 [2]: /logs/archives/rehydrating/
 {{% /tab %}}
+{{% tab "Azure Storage" %}}
 
+Archiving and [Rehydration][1] only supports the following access tiers:
+
+- Hot access tier
+- Cool access tier
+
+If you wish to rehydrate from archives in another access tier, you must first move them to one of the supported tiers above.
+
+[1]: /logs/archives/rehydrating/
+{{% /tab %}}
 {{< /tabs >}}
 
 #### Server side encryption (SSE)
@@ -344,9 +372,11 @@ Alternatively, Datadog supports server side encryption with a CMK from [AWS KMS]
 
 3. Go to the **Properties** tab in your S3 bucket and select **Default Encryption**. Choose the "AWS-KMS" option, select your CMK ARN, and save.
 
+For any changes to existing KSM keys, reach out to [Datadog support][3] for further assistance
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/default-bucket-encryption.html
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
+[3]: /help/
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -355,11 +385,13 @@ Alternatively, Datadog supports server side encryption with a CMK from [AWS KMS]
 
 Once your archive settings are successfully configured in your Datadog account, your processing pipelines begin to enrich all logs ingested into Datadog. These logs are subsequently forwarded to your archive.
 
-However, after creating or updating your archive configurations, it can take several minutes before the next archive upload is attempted. Logs are uploaded to the archive every 15 minutes, so **check back on your storage bucket in 15 minutes** to make sure the archives are successfully being uploaded from your Datadog account. After that, if the archive is still in a pending state, check your inclusion filters to make sure the query is valid and matches log events in [live tail][10].
+However, after creating or updating your archive configurations, it can take several minutes before the next archive upload is attempted. The frequency at which archives are uploaded can vary. **Check back on your storage bucket in 15 minutes** to make sure the archives are successfully being uploaded from your Datadog account. After that, if the archive is still in a pending state, check your inclusion filters to make sure the query is valid and matches log events in [live tail][12].
 
-If Datadog detects a broken configuration, the corresponding archive is highlighted in the configuration page. Click on the error icon to see the actions to take to resolve the issue.
+When Datadog fails to upload logs to an external archive, due to unintentional changes in settings or permissions, the corresponding Log Archive is highlighted in the configuration page. Hover over the archive to view the error details and the actions to take to resolve the issue.
 
-{{< img src="logs/archives/archive_validation.png" alt="Check that your archives are properly set up."  style="width:75%;">}}
+In addition, an event is generated, visible in the [Events Explorer][13]. Build a monitor on such events to detect and remediate failures quickly.
+
+{{< img src="logs/archives/archive_errors.png" alt="Check that your archives are properly set up."  style="width:75%;">}}
 
 ## Multiple archives
 
@@ -410,10 +442,13 @@ Within the zipped JSON file, each event’s content is formatted as follows:
 [1]: /logs/indexes/#exclusion-filters
 [2]: /logs/archives/rehydrating/
 [3]: /account_management/rbac/permissions/?tab=ui#logs_write_archives
-[4]: https://app.datadoghq.com/logs/pipelines/archives
-[5]: /account_management/rbac/permissions#logs_write_archives
-[6]: /account_management/rbac/permissions#logs_read_archives
-[7]: /account_management/rbac/permissions#logs_write_historical_view
-[8]: /account_management/rbac/permissions#logs_read_index_data
-[9]: /account_management/rbac/permissions#logs_read_data
-[10]: /logs/explorer/live_tail/
+[4]: https://ip-ranges.datadoghq.com/
+[5]: https://app.datadoghq.com/logs/pipelines/archives
+[6]: /integrations/azure/
+[7]: /account_management/rbac/permissions#logs_write_archives
+[8]: /account_management/rbac/permissions#logs_read_archives
+[9]: /account_management/rbac/permissions#logs_write_historical_view
+[10]: /account_management/rbac/permissions#logs_read_index_data
+[11]: /account_management/rbac/permissions#logs_read_data
+[12]: /logs/explorer/live_tail/
+[13]: /events/explorer/

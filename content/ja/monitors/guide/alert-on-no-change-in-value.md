@@ -1,16 +1,17 @@
 ---
-title: 値に変化がない場合のアラート
-kind: ガイド
 aliases:
-  - /ja/monitors/faq/how-can-i-configure-a-metric-monitor-to-alert-on-no-change-in-value
+- /ja/monitors/faq/how-can-i-configure-a-metric-monitor-to-alert-on-no-change-in-value
 further_reading:
-  - link: /monitors/create/types/
-    tag: Documentation
-    text: モニターの作成方法
-  - link: /monitors/notify/
-    tag: Documentation
-    text: モニター通知の設定
+- link: /monitors/
+  tag: Documentation
+  text: モニターの作成方法
+- link: /monitors/notify/
+  tag: Documentation
+  text: モニター通知の設定
+kind: ガイド
+title: 値に変化がない場合のアラート
 ---
+
 メトリクス値が設定された期間にわたって変化しないときにアラートをトリガーする簡単な方法は、クエリで `diff()` 関数を使用して開始することです。これにより、連続するデータポイントからデルタ値が生成されます。
 
 * `diff(avg:system.mem.free{*})`
@@ -40,4 +41,4 @@ further_reading:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/api/
-[2]: /ja/monitors/create/types/#define-the-conditions
+[2]: /ja/monitors/create/configuration/

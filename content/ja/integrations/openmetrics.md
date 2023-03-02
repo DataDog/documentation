@@ -1,49 +1,69 @@
 ---
+app_id: openmetrics
+app_uuid: 302b841e-8270-4ecd-948e-f16317a316bc
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: OpenMetrics
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
-  - モニター
-  - オートディスカバリー
-creates_events: false
-ddtype: check
+- モニター
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/openmetrics/README.md'
-display_name: OpenMetrics
+- https://github.com/DataDog/integrations-core/blob/master/openmetrics/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: openmetrics
-guid: 3f67af75-6987-468c-99b3-5001ba5ab414
 integration_id: openmetrics
 integration_title: OpenMetrics
+integration_version: 2.3.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
+manifest_version: 2.0.0
 name: openmetrics
-public_title: Datadog-OpenMetrics インテグレーション
+oauth: {}
+public_title: OpenMetrics
 short_description: OpenMetrics はメトリクスデータを公開するためのオープンな標準
-support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Monitoring
+  configuration: README.md#Setup
+  description: OpenMetrics はメトリクスデータを公開するためのオープンな標準
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: OpenMetrics
 ---
+
+
+
 ## 概要
 
 任意の OpenMetrics エンドポイントからカスタムメトリクスを抽出します。
 
-<div class="alert alert-warning">All the metrics retrieved by this integration are considered <a href="https://docs.datadoghq.com/metrics/custom_metrics">custom metrics</a>.</div>
+<div class="alert alert-warning">All the metrics retrieved by this integration are considered <a href="https://docs.datadoghq.com/developers/metrics/custom_metrics">custom metrics</a>.</div>
 
 ## セットアップ
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照してこの手順を行ってください。
 
-### インストール
+### APM に Datadog Agent を構成する
 
 OpenMetrics チェックは、[Datadog Agent のバージョン 6.6.0 以降][2]にパッケージ化されています。
 
@@ -55,15 +75,21 @@ OpenMetrics チェックは、[Datadog Agent のバージョン 6.6.0 以降][2]
 
 | パラメーター        | 説明                                                                                                                                                                                                                                                              |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `openmetrics_endpoint` | Prometheus がアプリケーションメトリクスを公開する URL（一意でなければなりません）。                                                                                                                                                                                       |
+| `openmetrics_endpoint` | OpenMetrics がアプリケーションメトリクスを公開する URL（一意でなければなりません）。                                                                                                                         |
 | `namespace`      | すべてのメトリクスの先頭に追加するネームスペース。                                                                                                                                                                                                                                 |
-| `metrics`        | カスタムメトリクスとして取得するメトリクスのリスト。各メトリクスを `metric_name` または `metric_name: renamed` としてリストに追加して、名前を変更します。一致するすべてのメトリクスを取得するには、ワイルドカードとして `*`（`metric*`）を使用します。**注**: ワイルドカードは、多くのカスタムメトリクスを送信する可能性があります。 |
+| `metrics`        | カスタムメトリクスとして取得するメトリクスのリスト。各メトリクスを `metric_name` または `metric_name: renamed` としてリストに追加して、名前を変更します。メトリクスは正規表現として解釈されます。一致するすべてのメトリクスを取得するには、ワイルドカードとして `.*`（`metric.*`）を使用します。**注**: 正規表現は、多くのカスタムメトリクスを送信する可能性があります。 |
 
-その他の構成については、[Prometheus および OpenMetrics メトリクスの収集][5]を参照してください。
+**注**: これは Datadog Agent バージョン 7.32.0 時点の新しいデフォルトの OpenMetrics チェックの例です。以前にこのインテグレーションを実装したことがある場合は、[レガシーの例][5]を参照してください。
+
+**注**: Datadog Agent v7.32.0 から、[OpenMetrics 仕様標準][6]に準拠し、`_total` で終わるカウンター名は、サフィックス `_total` を除いて指定する必要があります。例えば、`promhttp_metric_handler_requests_total` を収集するには、メトリクス名 `promhttp_metric_handler_requests` を指定します。これにより、メトリクス名に `.count` を付加した `promhttp_metric_handler_requests.count` が Datadog に送信されます。
+
+**注**: このチェックは、1 インスタンスあたり 2000 メトリクスの制限があります。返されたメトリクスの数は、Datadog Agent の [status コマンド][7]を実行した際に表示されます。構成を編集することで、関心のあるメトリクスを指定することができます。収集するメトリクスのカスタマイズ方法については、[Prometheus および OpenMetrics メトリクスの収集][8]で詳しく説明しています。より多くのメトリクスを監視する必要がある場合は、[Datadog サポート][9]にお問い合わせください。
+
+その他のコンフィギュレーションについては、[Prometheus および OpenMetrics メトリクスの収集][8]を参照してください。
 
 ### 検証
 
-[Agent の status サブコマンドを実行][6]し、Checks セクションで `openmetrics` を探します。
+[Agent の status サブコマンドを実行][7]し、Checks セクションで `openmetrics` を探します。
 
 ## 収集データ
 
@@ -81,19 +107,27 @@ OpenMetrics チェックには、サービスのチェック機能は含まれ�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+### 高いカスタムメトリクスの課金
+
+OpenMetrics の構成において、`metrics` オプションに一般的なワイルドカード値を使用すると、カスタムメトリクスの課金に大きな影響を及ぼします。
+
+Datadog では、より正確な収集のために、特定のメトリクス名またはメトリクス名の部分一致を使用することを推奨しています。
+
+ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
 ## その他の参考資料
 
-- [OpenMetrics チェックの構成][8]
-- [カスタム OpenMetrics チェックの書き方][9]
+- [OpenMetrics チェックの構成][10]
+- [カスタム OpenMetrics チェックの書き方][11]
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [2]: https://docs.datadoghq.com/ja/getting_started/integrations/prometheus/?tab=docker#configuration
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/ja/getting_started/integrations/prometheus/
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[7]: https://docs.datadoghq.com/ja/help/
-[8]: https://docs.datadoghq.com/ja/agent/openmetrics/
-[9]: https://docs.datadoghq.com/ja/developers/openmetrics/
+[5]: https://github.com/DataDog/integrations-core/blob/7.30.x/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
+[6]: https://github.com/OpenObservability/OpenMetrics/blob/main/specification/OpenMetrics.md#suffixes
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://docs.datadoghq.com/ja/getting_started/integrations/prometheus/
+[9]: https://docs.datadoghq.com/ja/help/
+[10]: https://docs.datadoghq.com/ja/agent/openmetrics/
+[11]: https://docs.datadoghq.com/ja/developers/openmetrics/

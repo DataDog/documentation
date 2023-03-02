@@ -1,31 +1,37 @@
 ---
 categories:
-  - notification
-  - monitoring
+- notification
+- monitoring
 ddtype: crawler
 dependencies: []
-description: Utilisez VictorOps comme canal de notification pour les alertes et les événements Datadog.
-doc_link: 'https://docs.datadoghq.com/integrations/victorops/'
+description: Utilisez VictorOps comme canal de notification pour les alertes et les
+  événements Datadog.
+doc_link: https://docs.datadoghq.com/integrations/victorops/
+draft: false
 git_integration_title: victorops
 has_logo: true
+integration_id: victorops
 integration_title: VictorOps
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: victorops
 public_title: Intégration Datadog/VictorOps
-short_description: Utilisez VictorOps comme canal de notification pour les alertes et les événements Datadog.
+short_description: Utilisez VictorOps comme canal de notification pour les alertes
+  et les événements Datadog.
 version: '1.0'
 ---
+
 ## Présentation
 
 Utilisez l'intégration Datadog/VictorOps pour envoyer des alertes Datadog à VictorOps et bénéficier d'un contrôle précis des processus d'acheminement et de réaffectation. Accédez plus rapidement aux détails des problèmes et réduisez leur délai de résolution en créant des alertes contenant **@victorops** :
 
 - Depuis votre flux d'événements
 - En prenant un snapshot
-- Lorsqu'une alerte sur une métrique est déclenchée
+- Lorsqu'une alerte de métrique est déclenchée
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -56,17 +62,14 @@ Besoin d'aide ? Contactez [l'assistance Datadog][1].
 
 ### Base de connaissances
 
-#### Clés d'acheminement VictorOps
+#### Clés d'acheminement
 
-Envoyez directement des alertes à certains utilisateurs de VictorOps.
-Répertoriez toutes les clés d'acheminement à utiliser sur Datadog. Si aucune n'est définie, VictorOps enverra l'alerte au groupe par défaut.
-
-Vous serez alors en mesure de choisir l'endpoint VictorOps qui recevra l'alerte à l'aide de @victorops.
+Pour envoyer des alertes à des utilisateurs VictorOps spécifiques, ajoutez toutes vos clés d'acheminement dans Datadog. Si aucune clé n'est configurée, VictorOps envoie les alertes au groupe par défaut. Utilisez ensuite la syntaxe `@victorops` pour choisir l'endpoint VictorOps qui recevra les alertes.
 
 Les caractères spéciaux ne sont pas autorisés dans les noms. Les lettres majuscules/minuscules, les chiffres et les caractères '\_' and '-' sont autorisés.
 
 ### Choisir un endpoint personnalisé
 
-Si ce champ est vide, l'endpoint par défaut sera 'https://alert.victorops.com/integrations/datadog/20140523/alert'.
+Si ce champ est vide, l'endpoint est défini par défaut sur 'https://alert.victorops.com/integrations/datadog/20140523/alert'.
 
 [1]: https://docs.datadoghq.com/fr/help/

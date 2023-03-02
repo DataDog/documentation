@@ -1,5 +1,5 @@
 ---
-title: Using the Datadog Forwarder - Go
+title: Instrumenting Go Serverless Applications Using the Datadog Forwarder
 kind: guide
 ---
 ## Overview

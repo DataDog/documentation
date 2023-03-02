@@ -1,5 +1,5 @@
 ---
-title: Using the Datadog Forwarder - Node
+title: Instrumenting Node.js Serverless Applications Using the Datadog Forwarder
 kind: guide
 ---
 
@@ -261,10 +261,10 @@ arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
 arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<VERSION>
 ```
 
-The available `RUNTIME` options are `Node10-x` and `Node12-x`. The latest `VERSION` is `{{< latest-lambda-layer-version layer="node" >}}`. For example:
+The available `RUNTIME` options are `Node12-x`, `Node14-x`, and `Node16-x`. The latest `VERSION` is `{{< latest-lambda-layer-version layer="node" >}}`. For example:
 
 ```
-arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Node12-x:{{< latest-lambda-layer-version layer="node" >}}
+arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Node16-x:{{< latest-lambda-layer-version layer="node" >}}
 ```
 
 If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][2] before you can add the Datadog Lambda library as a layer.

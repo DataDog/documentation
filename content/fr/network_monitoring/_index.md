@@ -1,18 +1,22 @@
 ---
-title: Surveillance réseau
-kind: documentation
-disable_sidebar: true
 description: Explorer les produits de surveillance réseau Datadog
+disable_sidebar: true
 further_reading:
-  - link: "https://www.datadoghq.com/blog/network-performance-monitoring"
-    tag: Blog
-    text: Présentation de la solution Network Performance Monitoring Datadog
-  - link: "https://www.datadoghq.com/blog/monitor-dns-with-datadog/"
-    tag: Blog
-    text: Surveiller la résolution DNS avec Datadog
-  - link: "https://www.datadoghq.com/blog/datacenter-monitoring-dashboards/"
-    tag: Blog
-    text: Surveiller des datacenters et des périphériques réseau avec Datadog
+- link: https://app.datadoghq.com/release-notes?category=Network%20Monitoring
+  tag: Notes de version
+  text: Découvrez les dernières versions de la surveillance réseau Datadog (connexion
+    à l'application requise).
+- link: https://www.datadoghq.com/blog/network-performance-monitoring
+  tag: Blog
+  text: Présentation de la solution Network Performance Monitoring Datadog
+- link: https://www.datadoghq.com/blog/monitor-dns-with-datadog/
+  tag: Blog
+  text: Surveiller le DNS avec Datadog
+- link: https://www.datadoghq.com/blog/datacenter-monitoring-dashboards/
+  tag: Blog
+  text: Surveiller des datacenters et des périphériques réseau avec Datadog
+kind: documentation
+title: Surveillance réseau
 ---
 
 {{< whatsnext desc="Cette section aborde les sujets suivants :">}}

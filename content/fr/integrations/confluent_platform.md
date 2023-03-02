@@ -7,24 +7,27 @@ assets:
   logs:
     source: confluent_platform
   metrics_metadata: metadata.csv
-  monitors: {}
+  monitors:
+    '[Confluent Platform] Unclean leader election': assets/monitors/unclean_leader_election.json
+    '[Confluent Platform] Unused topic partition': assets/monitors/unused_partition.json
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - processing
-  - messaging
-  - autodiscovery
-  - log collection
+- processing
+- messaging
+- autodiscovery
+- log collection
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/confluent_platform/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/confluent_platform/README.md
 display_name: Confluent Platform
 draft: false
 git_integration_title: confluent_platform
 guid: 8e4a6d7e-44bc-440c-aafa-a0f98df87cc0
 integration_id: confluent-platform
 integration_title: Confluent Platform
+integration_version: 1.8.1
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -33,13 +36,16 @@ metric_prefix: confluent.
 metric_to_check: confluent.kafka.producer.outgoing_byte_rate
 name: confluent_platform
 public_title: Intégration Datadog/Confluent Platform
-short_description: "Surveillez des composants de Confluent\_Platform."
+short_description: Surveillez des composants de Confluent Platform.
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 Ce check permet de surveiller des composants de Confluent Platform et de Kafka avec l'Agent Datadog.
@@ -89,7 +95,7 @@ Le check Confluent Platform est inclus avec le package de l'[Agent Datadog][1].
 
 ##### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
@@ -144,18 +150,18 @@ Pour les environnements conteneurisés, consultez le guide [Autodiscovery avec J
 {{< get-metrics-from-git "confluent_platform" >}}
 
 
-### Checks de service
-
-**confluentplatform.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter au composant Confluent Platform/Kafka qu'il surveille et à y recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
-
 ### Événements
 
 Le check Confluent Platform n'inclut aucun événement.
 
+### Checks de service
+{{< get-service-checks-from-git "confluent_platform" >}}
+
+
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][9].
+Besoin d'aide ? Contactez [l'assistance Datadog][10].
+
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://github.com/DataDog/jmxfetch
@@ -165,4 +171,5 @@ Besoin d'aide ? Contactez [l'assistance Datadog][9].
 [6]: https://github.com/DataDog/integrations-core/blob/master/confluent_platform/metadata.csv
 [7]: https://docs.datadoghq.com/fr/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
 [8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[9]: https://docs.datadoghq.com/fr/help/
+[9]: https://github.com/DataDog/integrations-core/blob/master/confluent_platform/assets/service_checks.json
+[10]: https://docs.datadoghq.com/fr/help/

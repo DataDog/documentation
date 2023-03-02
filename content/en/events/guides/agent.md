@@ -103,10 +103,6 @@ This is an example of using a custom Agent check to send one event periodically.
         (...)
     ```
 
-7. Finally, go to your [Datadog Event stream][5] to see your events:
-
-{{< img src="developers/events/agent_check/event_stream_example.png" alt="Event stream example" style="width:80%;">}}
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -116,4 +112,3 @@ This is an example of using a custom Agent check to send one event periodically.
 [2]: /agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: /agent/guide/agent-commands/#restart-the-agent
 [4]: /agent/guide/agent-commands/#agent-information
-[5]: https://app.datadoghq.com/event/stream

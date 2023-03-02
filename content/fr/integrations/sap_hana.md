@@ -9,17 +9,18 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - data store
+- data store
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/sap_hana/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/sap_hana/README.md
 display_name: SAP HANA
 draft: false
 git_integration_title: sap_hana
 guid: 85dace7c-baf5-4bcc-9fbb-4d3a6b841359
 integration_id: sap-hana
 integration_title: SAP HANA
+integration_version: 2.1.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -28,13 +29,17 @@ metric_prefix: sap_hana.
 metric_to_check: sap_hana.uptime
 name: sap_hana
 public_title: Intégration Datadog/SAP HANA
-short_description: 'Surveillez les métriques relatives à la mémoire, au réseau, aux volumes et à d''autres éléments de votre système SAP HANA.'
+short_description: Surveillez les métriques relatives à la mémoire, au réseau, aux
+  volumes et à d'autres éléments de votre système SAP HANA.
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 Ce check permet de surveiller [SAP HANA][1] 2.0 SPS 2 avec l'Agent Datadog.
@@ -43,13 +48,26 @@ Ce check permet de surveiller [SAP HANA][1] 2.0 SPS 2 avec l'Agent Datadog.
 
 ### Installation
 
-Le check SAP HANA est inclus avec le package de l'[Agent Datadog][2].
+Le check SAP HANA est inclus avec le package de l'[Agent Datadog][2]. Pour utiliser cette intégration, vous devez installer manuellement la bibliothèque [hdbcli][3].
+
+
+Pour Unix :
+
+```text
+/opt/datadog-agent/embedded/bin/pip install hdbcli==2.10.15
+```
+
+Pour Windows :
+
+```text
+"C:\Program Files\Datadog\Datadog Agent\embedded<VERSION_MAJEURE_PYTHON>\python.exe" -m pip install hdbcli==2.10.15
+```
 
 #### Préparer HANA
 
 Pour interroger certaines vues, vous devez accorder des autorisations spécifiques à l'utilisateur de surveillance HANA de votre choix. Pour en savoir plus, consultez la section [Accorder des autorisations](#accorder-des-autorisations).
 
-Pour découvrir comment configurer le numéro de port pour les bases de données locataire, multi-locataires et système HANA, consultez la [section de la documentation SAP relative aux connexions][3] (en anglais).
+Pour découvrir comment configurer le numéro de port pour les bases de données locataire, multi-locataires et système HANA, consultez la [section de la documentation SAP relative aux connexions][4] (en anglais).
 
 ##### Créer l'utilisateur
 
@@ -73,7 +91,7 @@ Pour découvrir comment configurer le numéro de port pour les bases de données
 
 ##### Accorder des autorisations
 
-1. Exécute la commande suivante pour créer un rôle de surveillance (du nom de `DD_MONITOR` pour les exemples ci-dessous) :
+1. Exécutez la commande suivante pour créer un rôle de surveillance (du nom de `DD_MONITOR` pour les exemples ci-dessous) :
 
    ```shell
    CREATE ROLE DD_MONITOR;
@@ -107,15 +125,15 @@ Pour découvrir comment configurer le numéro de port pour les bases de données
    GRANT DD_MONITOR TO <USER>;
    ```
 
-### Configuration
+### Procédure à suivre
 
-1. Modifiez le fichier `sap_hana.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance sap_hana. Consultez le [fichier d'exemple sap_hana.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `sap_hana.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance sap_hana. Consultez le [fichier d'exemple sap_hana.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
 
-2. [Redémarrez l'Agent][5].
+2. [Redémarrez l'Agent][6].
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][6] et cherchez `sap_hana` dans la section Checks.
+Lancez la [sous-commande status de l'Agent][7] et cherchez `sap_hana` dans la section Checks.
 
 ## Données collectées
 
@@ -123,27 +141,26 @@ Pour découvrir comment configurer le numéro de port pour les bases de données
 {{< get-metrics-from-git "sap_hana" >}}
 
 
-### Checks de service
-
-**sap_hana.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'instance SAP HANA qu'il surveille. Si ce n'est pas le cas, renvoie `OK`.
-
-**sap_hana.status** :<br>
-Renvoie `OK` si la base de données SAP HANA surveillée est disponible. Si ce n'est pas le cas, renvoie `CRITICAL`.
-
 ### Événements
 
 SAP HANA n'inclut aucun événement.
 
+### Checks de service
+{{< get-service-checks-from-git "sap_hana" >}}
+
+
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][8].
+Besoin d'aide ? Contactez [l'assistance Datadog][10].
+
 
 [1]: https://www.sap.com/products/hana.html
-[2]: https://docs.datadoghq.com/fr/agent/
-[3]: https://help.sap.com/viewer/0eec0d68141541d1b07893a39944924e/2.0.02/en-US/d12c86af7cb442d1b9f8520e2aba7758.html
-[4]: https://github.com/DataDog/integrations-core/blob/master/sap_hana/datadog_checks/sap_hana/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-restart-the-agent
-[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[7]: https://github.com/DataDog/integrations-core/blob/master/sap_hana/metadata.csv
-[8]: https://docs.datadoghq.com/fr/help/
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://pypi.org/project/hdbcli/
+[4]: https://help.sap.com/viewer/0eec0d68141541d1b07893a39944924e/2.0.02/en-US/d12c86af7cb442d1b9f8520e2aba7758.html
+[5]: https://github.com/DataDog/integrations-core/blob/master/sap_hana/datadog_checks/sap_hana/data/conf.yaml.example
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-restart-the-agent
+[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://github.com/DataDog/integrations-core/blob/master/sap_hana/metadata.csv
+[9]: https://github.com/DataDog/integrations-core/blob/master/sap_hana/assets/service_checks.json
+[10]: https://docs.datadoghq.com/fr/help/

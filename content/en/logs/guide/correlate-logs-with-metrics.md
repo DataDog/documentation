@@ -59,5 +59,5 @@ To correlate logs and metrics on the [Metrics Explorer][7] page:
 [3]: /metrics/explorer/
 [4]: https://app.datadoghq.com/logs
 [5]: https://app.datadoghq.com/dashboard/lists
-[6]: /dashboards/timeboards/#graph-menu
+[6]: /dashboards/#graph-menu
 [7]: https://app.datadoghq.com/metric/explorer

@@ -1,21 +1,26 @@
 ---
-title: リソースパフォーマンスの監視
-kind: documentation
 further_reading:
-  - link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
-    tag: ブログ
-    text: リアルユーザーモニタリング
-  - link: /real_user_monitoring/explorer/
-    tag: Documentation
-    text: Datadog でビューを検索する
-  - link: /real_user_monitoring/explorer/analytics/
-    tag: Documentation
-    text: イベントに関する分析論を組み立てる
-  - link: /real_user_monitoring/dashboards/
-    tag: Documentation
-    text: RUM ダッシュボード
+- link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
+  tag: ブログ
+  text: リアルユーザーモニタリング
+- link: /real_user_monitoring/explorer/
+  tag: Documentation
+  text: Datadog でビューを検索する
+- link: /real_user_monitoring/explorer/visualize/
+  tag: Documentation
+  text: イベントへの視覚化の適用
+- link: /real_user_monitoring/dashboards/
+  tag: Documentation
+  text: RUM ダッシュボード
+kind: documentation
+title: リソースパフォーマンスの監視
 ---
-RUM SDK は、すべての RUM ビュー (ページの読み込み) のリソースとアセットを収集します。[XMLHttpRequest][1] (XHR) と Fetch リクエストだけでなく、画像、CSS ファイル、JavaScript アセット、フォントファイルも収集します。RUM リソースイベントは、詳細なタイミングとメタデータとともに、それぞれに対して生成されます。
+
+{{< callout btn_hidden="true" header="機能フラグ追跡のベータ版に参加しよう！">}}
+機能フラグで RUM データを補強し、パフォーマンス監視を可視化。<a href="https://docs.datadoghq.com/real_user_monitoring/guide/setup-feature-flag-data-collection/">機能フラグ追跡</a>は非公開ベータ版です。アクセス権をリクエストするには、Datadog サポート (support@datadoghq.com) までご連絡ください。
+{{< /callout >}}
+
+RUM ブラウザ SDK は、すべての RUM ビュー (ページの読み込み) のリソースとアセットを収集します。[XMLHttpRequest][1] (XHR) と Fetch リクエストだけでなく、画像、CSS ファイル、JavaScript アセット、フォントファイルも収集します。RUM リソースイベントは、詳細なタイミングとメタデータとともに、それぞれに対して生成されます。
 
 RUM リソースは、収集時にアクティブな RUM ビューに関連するすべてのコンテキストから継承します。
 

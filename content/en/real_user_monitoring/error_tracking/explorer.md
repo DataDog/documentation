@@ -2,6 +2,7 @@
 title: RUM Error Tracking Explorer
 kind: documentation
 beta: true
+private: true
 ---
 
 {{< img src="real_user_monitoring/error_tracking/explorer.png" alt="Error Tracking Explorer"  >}}
@@ -57,4 +58,4 @@ Each event generated is tagged with the version, the service, and the environmen
 
 
 [1]: /events
-[2]: /monitors/create/types/event/
+[2]: /monitors/types/event/

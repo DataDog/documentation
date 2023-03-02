@@ -14,6 +14,9 @@ further_reading:
 - link: "/infrastructure/process/"
   tag: "Documentation"
   text: "Understand what is going on at any level of your system"
+- link: "https://www.datadoghq.com/blog/monitor-kubernetes-anomalies/"
+  tag: "Blog"
+  text: "Expedite infrastructure investigations with Kubernetes Anomalies"
 ---
 
 ## Overview

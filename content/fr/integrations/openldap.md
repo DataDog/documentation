@@ -3,26 +3,28 @@ aliases: []
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    OpenLDAP Overview: assets/dashboards/openldap_overview.json
   logs:
     source: openldap
   metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - data store
-  - log collection
-  - autodiscovery
+- data store
+- log collection
+- autodiscovery
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/openldap/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/openldap/README.md
 display_name: OpenLDAP
 draft: false
 git_integration_title: openldap
 guid: ec61c06d-a870-4183-8a27-c66db1fc47cc
 integration_id: openldap
 integration_title: OpenLDAP
+integration_version: 1.10.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -31,13 +33,17 @@ metric_prefix: openldap.
 metric_to_check: openldap.connections.current
 name: openldap
 public_title: Intégration Datadog/OpenLDAP
-short_description: Recueillez des métriques à partir de votre serveur OpenLDAP à l'aide du backend cn=monitor.
+short_description: Recueillez des métriques à partir de votre serveur OpenLDAP à l'aide
+  du backend cn=monitor.
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 Utilisez l'intégration OpenLDAP pour recueillir des métriques à partir du backend `cn=Monitor` de vos serveurs OpenLDAP.
@@ -104,10 +110,8 @@ Si le backend `cn=Monitor` n'est pas configuré sur votre serveur, suivez ces é
 
 #### Configurer l'intégration OpenLDAP
 
-#{{< tabs >}}
+{{< tabs >}}
 {{% tab "Host" %}}
-#{{% /tab %}}
-{{% tab "Environnement conteneurisé" %}}
 
 #### Host
 
@@ -142,7 +146,7 @@ Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
 ###### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
@@ -167,6 +171,33 @@ _Disponible à partir des versions > 6.0 de l'Agent_
 [1]: https://github.com/DataDog/integrations-core/blob/master/openldap/datadog_checks/openldap/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
+
+#### Environnement conteneurisé
+
+###### Collecte de métriques
+
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+
+| Paramètre            | Valeur                                                                                           |
+| -------------------- | ----------------------------------------------------------------------------------------------- |
+| `<NOM_INTÉGRATION>` | `openldap`                                                                                      |
+| `<CONFIG_INIT>`      | vide ou `{}`                                                                                   |
+| `<CONFIG_INSTANCE>`  | `{"url":"ldaps://%%host%%:636","username":"<NOM_DISTINCT_UTILISATEUR>","password":"<MOTDEPASSE>"}` |
+
+###### Collecte de logs
+
+_Disponible à partir des versions > 6.0 de l'Agent_
+
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs Kubernetes][2].
+
+| Paramètre      | Valeur                                                 |
+| -------------- | ----------------------------------------------------- |
+| `<CONFIG_LOG>` | `{"source": "openldap", "service": "<NOM_SERVICE>"}` |
+
+[1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Validation
@@ -188,13 +219,13 @@ Ce check est compatible avec toutes les principales plateformes.
 Le check OpenLDAP n'inclut aucun événement.
 
 ### Checks de service
+{{< get-service-checks-from-git "openldap" >}}
 
-**openldap.can_connect** :<br>
-Renvoie `CRITICAL` si l'intégration ne parvient pas à se connecter au serveur OpenLDAP à surveiller. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
+
 
 
 [1]: https://app.datadoghq.com/account/settings#agent

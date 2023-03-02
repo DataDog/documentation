@@ -10,20 +10,21 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - cloud
-  - web
-  - log collection
-  - autodiscovery
+- cloud
+- web
+- log collection
+- autodiscovery
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/envoy/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/envoy/README.md
 display_name: Envoy
 draft: false
 git_integration_title: envoy
 guid: 007f4e6c-ac88-411e-ad81-f0272539b5ff
 integration_id: envoy
 integration_title: Envoy
+integration_version: 2.1.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -35,10 +36,13 @@ public_title: Intégration Datadog/Envoy
 short_description: Envoy est un proxy de périmètre et de service open source.
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 Ce check recueille les métriques d'observation système distribuées d'[Envoy][1].
@@ -49,9 +53,14 @@ Ce check recueille les métriques d'observation système distribuées d'[Envoy][
 
 Le check Envoy est inclus avec le package de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur votre serveur.
 
-#### Via Istio
+#### Istio
 
-Si vous utilisez Envoy avec [Istio][3], vous devez définir le [proxyAdminPort][5] d'Istio pour accéder à l'[endpoint admin][4] d'Envoy.
+Si vous utilisez Envoy avec [Istio][3], configurez l'intégration Envoy afin de recueillir des métriques à partir de l'endpoint de métriques proxy Istio.
+
+```yaml
+instances:
+  - openmetrics_endpoint: localhost:15090/stats/prometheus
+```
 
 #### Standard
 
@@ -72,9 +81,9 @@ admin:
 
 ##### Endpoint stats sécurisé
 
-Créez un écouteur/vhost qui redirige vers l'endpoint administrateur (Envoy se connecte à lui-même), mais qui ne comporte qu'un chemin pour `/stats` ; les autres chemins génèrent une réponse statique ou une erreur. Cela permet également de réaliser une intégration adéquate aux filtres L3 pour l'authentification, par exemple.
+Créez un écouteur/vhost qui redirige vers [l'endpoint administrateur][4] (Envoy se connecte à lui-même), mais qui ne comporte qu'une route pour `/stats` ; les autres routes génèrent une réponse statique ou une erreur. Cela permet également de réaliser une intégration adéquate aux filtres L3 pour l'authentification, par exemple.
 
-Voici un exemple de configuration (à partir de [ce gist][6]) :
+L'exemple de configuration suivant provient de [envoy_secured_stats_config.json][5] :
 
 ```yaml
 admin:
@@ -122,7 +131,7 @@ static_resources:
             port_value: 8001
 ```
 
-### Configuration
+### Procédure à suivre
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -139,48 +148,19 @@ Pour configurer ce check lorsque l'Agent est exécuté sur un host :
     init_config:
 
     instances:
-      ## @param stats_url - string - required
-      ## The admin endpoint to connect to. It must be accessible:
-      ## https://www.envoyproxy.io/docs/envoy/latest/operations/admin
-      ## Add a `?usedonly` on the end if you wish to ignore
-      ## unused metrics instead of reporting them as `0`.
-      #
-      - stats_url: http://localhost:80/stats
+        ## @param openmetrics_endpoint - string - required
+        ## The URL exposing metrics in the OpenMetrics format.
+        #
+      - openmetrics_endpoint: http://localhost:8001/stats/prometheus
+
     ```
 
 2. Vérifiez si l'Agent Datadog peut accéder à l'[endpoint admin][3] d'Envoy.
 3. [Redémarrez l'Agent][4].
 
-###### Filtrer les métriques
-
-Les métriques peuvent être filtrées grâce à l'expression régulière `metric_whitelist` ou `metric_blacklist`. Si les deux paramètres sont utilisés, la liste d'inclusion (whitelist) est alors d'abord appliquée, puis la liste d'exclusion (blacklist) est appliquée sur les résultats.
-
-Le filtrage a lieu avant l'extraction des tags. Vous pouvez donc utiliser certains tags pour choisir de conserver ou d'ignorer certaines métriques. La liste exhaustive de toutes les métriques et de tous les tags est disponible sur [metrics.py][5]. Voici un exemple d'ajout de tags pour les métriques Envoy.
-
-```python
-...
-'cluster.grpc.success': {
-    'tags': (
-        ('<NOM_CLUSTER>', ),
-        ('<SERVICE_GRPC>', '<MÉTHODE_GRPC>', ),
-        (),
-    ),
-    ...
-},
-...
-```
-
-Voici `3` séquences de tags : `('<NOM_CLUSTER>')`, `('<SERVICE_GRPC>', '<MÉTHODE_GRPC>')` et `()` vide. Le nombre de séquences correspond exactement au nombre de sections de métriques. Pour cette métrique, il y a `3` sections : `cluster`, `grpc` et `success`. Envoy sépare chaque élément avec le caractère `.`. Le nom final de la métrique est donc :
-
-`cluster.<NOM_CLUSTER>.grpc.<SERVICE_GRPC>.<MÉTHODE_GRPC>.success`
-
-Si seuls le nom de cluster et le service gRPC vous intéressent, ajoutez le code suivant à votre liste d'inclusion :
-
-`^cluster\.<NOM_CLUSTER>\.grpc\.<SERVICE_GRPC>\.`
-
 ##### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
@@ -204,7 +184,6 @@ _Disponible à partir des versions > 6.0 de l'Agent_
 [2]: https://github.com/DataDog/integrations-core/blob/master/envoy/datadog_checks/envoy/data/conf.yaml.example
 [3]: https://www.envoyproxy.io/docs/envoy/latest/operations/admin
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: https://github.com/DataDog/integrations-core/blob/master/envoy/datadog_checks/envoy/metrics.py
 {{% /tab %}}
 {{% tab "Environnement conteneurisé" %}}
 
@@ -218,26 +197,29 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 | -------------------- | ------------------------------------------- |
 | `<NOM_INTÉGRATION>` | `envoy`                                     |
 | `<CONFIG_INIT>`      | vide ou `{}`                               |
-| `<CONFIG_INSTANCE>`  | `{"stats_url": "http://%%host%%:80/stats"}` |
+| `<CONFIG_INSTANCE>`  | `{"openmetrics_endpoint": "http://%%host%%:80/stats/prometheus"}` |
+ **Remarque** : la version actuelle du check (1.26.0+) utilise [OpenMetrics][2] pour la collecte de métriques, ce qui nécessite Python 3. Pour les hosts ne pouvant pas utiliser Python 3, ou si vous souhaitez utiliser une ancienne version de ce check, consultez [cette configuration][3].
 
 ##### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][2].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs Kubernetes][4].
 
 | Paramètre      | Valeur                                              |
 | -------------- | -------------------------------------------------- |
 | `<CONFIG_LOG>` | `{"source": "envoy", "service": "<NOM_SERVICE>"}` |
 
 [1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
+[2]: https://docs.datadoghq.com/fr/integrations/openmetrics/
+[3]: https://github.com/DataDog/integrations-core/blob/7.33.x/envoy/datadog_checks/envoy/data/conf.yaml.example
+[4]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
 {{% /tab %}}
 {{< /tabs >}}
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][7] et recherchez `envoy` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][6] et cherchez `envoy` dans la section Checks.
 
 ## Données collectées
 
@@ -245,28 +227,33 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 {{< get-metrics-from-git "envoy" >}}
 
 
-Consultez [metrics.py][8] pour y découvrir la liste des tags envoyés par chaque métrique.
+Consultez [metrics.py][7] pour y découvrir la liste des tags envoyés par chaque métrique.
 
 ### Événements
 
 Le check Envoy n'inclut aucun événement.
 
 ### Checks de service
+{{< get-service-checks-from-git "envoy" >}}
 
-**envoy.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à Envoy pour recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][9].
+### Problèmes courants
+
+#### Impossible d'atteindre l'endpoint `/server_info`
+- Si l'endpoint n'est pas disponible dans votre environnement Envoy, désactivez l'option `collect_server_info` dans votre configuration Envoy afin de réduire le volume des logs d'erreur.
+
+**Remarque** : aucune donnée sur la version d'Envoy n'est recueillie.
+
+Besoin d'aide ? Contactez [l'assistance Datadog][8].
 
 
 [1]: https://www.envoyproxy.io
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://istio.io
 [4]: https://www.envoyproxy.io/docs/envoy/latest/operations/admin
-[5]: https://istio.io/docs/reference/config
-[6]: https://gist.github.com/ofek/6051508cd0dfa98fc6c13153b647c6f8
-[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-core/blob/master/envoy/datadog_checks/envoy/metrics.py
-[9]: https://docs.datadoghq.com/fr/help/
+[5]: https://gist.github.com/ofek/6051508cd0dfa98fc6c13153b647c6f8
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[7]: https://github.com/DataDog/integrations-core/blob/master/envoy/datadog_checks/envoy/metrics.py
+[8]: https://docs.datadoghq.com/fr/help/

@@ -1,12 +1,15 @@
 ---
-title: RUM パフォーマンス概要ダッシュボード
-kind: documentation
 further_reading:
-  - link: /real_user_monitoring/explorer
-    tag: ドキュメント
-    text: Datadog でビューを検索する
+- link: /real_user_monitoring/explorer
+  tag: ドキュメント
+  text: RUM エクスプローラーについて
+kind: documentation
+title: RUM パフォーマンス概要ダッシュボード
 ---
-パフォーマンスの概要ダッシュボードで、RUM アプリケーションの全体像を把握できます。ダッシュボードは 3 つのセクションに分かれています。
+
+## 概要
+
+パフォーマンスの概要ダッシュボードで、RUM アプリケーションの全体像を把握できます。以下が表示されます。
 
 - **パフォーマンスメトリクス**:
     すべてのビューで、Loading Time、First Contentful Paint、DOM Content Loaded、Load Event の 4 つのブラウザメトリクスが強調表示されます。これらのメトリクスのそれぞれについて、中央値、75 パーセンタイル、90 パーセンタイルがウィジェットで表示されます。
@@ -15,9 +18,9 @@ further_reading:
 - **ページビューの詳細**:
     各セグメントに関連するロード時間とトラフィックの性質を分析します。
 
-{{< img src="real_user_monitoring/dashboards/performance_overview.png" alt="パフォーマンス概要ダッシュボード" >}}
+{{< img src="real_user_monitoring/dashboards/performance_overview.png" alt="すぐに使える RUM パフォーマンス概要ダッシュボード" style="width:100%" >}}
 
-表示される情報に関する詳細は、[RUM データ収集のドキュメント][1]を参照してください。
+表示されるデータの詳細については、[RUM ブラウザデータ収集][1]を参照してください。
 
 ## その他の参考資料
 

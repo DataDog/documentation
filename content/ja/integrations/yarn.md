@@ -1,44 +1,69 @@
 ---
+app_id: yarn
+app_uuid: 427f8f08-00a1-455a-a0e5-9b2ec7ffb0a5
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     hadoop: assets/dashboards/hadoop_dashboard.json
     yarn: assets/dashboards/yarn_dashboard.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: yarn.metrics.total_mb
+      metadata_path: metadata.csv
+      prefix: yarn.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Yarn
   logs:
     source: yarn
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-  - processing
-  - autodiscovery
-  - log collection
-creates_events: false
-ddtype: check
+- processing
+- log collection
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/yarn/README.md
-display_name: Yarn
+- https://github.com/DataDog/integrations-core/blob/master/yarn/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: yarn
-guid: 3223c2e3-29dd-4cfb-82a2-51b951c648eb
 integration_id: yarn
 integration_title: Yarn
+integration_version: 4.3.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: yarn.
-metric_to_check: yarn.metrics.total_mb
+manifest_version: 2.0.0
 name: yarn
-public_title: Datadog-Yarn インテグレーション
+oauth: {}
+public_title: Yarn
 short_description: クラスター全体の健全性メトリクスを収集し、アプリケーションの進捗状況を追跡。
-support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::処理
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: クラスター全体の健全性メトリクスを収集し、アプリケーションの進捗状況を追跡。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Yarn
 ---
+
+
+
 ![Hadoop Yarn][1]
 
 ## 概要
@@ -55,7 +80,7 @@ supported_os:
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 YARN チェックは [Datadog Agent][2] パッケージに含まれています。YARN ResourceManager に追加でインストールする必要はありません。
 
@@ -138,18 +163,18 @@ YARN チェックは [Datadog Agent][2] パッケージに含まれています�
 
 3. [Agent を再起動します][3]。
 
-Docker 環境でログを収集する Agent を構成する追加の情報に関しては、[Datadog ドキュメント][4]を参照してください。
+Docker 環境のログを有効にするには、[Docker ログ収集][4]を参照してください。
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [2]: https://github.com/DataDog/integrations-core/blob/master/yarn/datadog_checks/yarn/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: 
+[4]: https://docs.datadoghq.com/ja/agent/docker/log/
 {{% /tab %}}
 {{< /tabs >}}
 
 ### 検証
 
-[Agent の `status` サブコマンドを実行][3]し、Checks セクションで `yarn` を探します。
+[Agent の status サブコマンド][3]を実行し、Checks セクションで `yarn` を探します。
 
 ## 収集データ
 

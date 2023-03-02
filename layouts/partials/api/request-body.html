@@ -4,6 +4,8 @@
 {{ $operationid := .operationid }}
 {{ $resourcePage := .resourcePage }}
 {{ $translate_action := .translate_action }}
+{{ $version := .version }}
+{{ $codeExampleLookup := (index (index $context.Site.Data.api $version) "CodeExamples") }}
 {{ $s := newScratch }}
 
 {{ if $body }}
@@ -60,21 +62,21 @@
 
                       <ul class="nav nav-tabs border-none response-toggle">
                           <li class="nav-item">
-                              <a class="nav-link mr-1  js-model-link active" href="#" data-toggle="tab">{{ i18n "model" }}</a>
+                              <a class="nav-link me-1  js-model-link active" href="#" data-bs-toggle="tab">{{ i18n "model" }}</a>
                           </li>
                           <li class="nav-item">
-                              <a class="nav-link mr-1  js-example-link"  href="#" data-toggle="tab">{{ i18n "example" }}</a>
+                              <a class="nav-link me-1  js-example-link"  href="#" data-bs-toggle="tab">{{ i18n "example" }}</a>
                           </li>
                       </ul>
 
                       <div class="tab-content">
-                          <div role="tabpanel" class="tab-pane active js-tab-model" id="{{ $operationid }}-request-model">
+                          <div role="tabpanel" class="tab-pane active js-tab-model" id="{{ $operationid | lower }}-request-model">
 
                               {{ if in $html "schema-table" }}
                                   {{ $html | safeHTML }}
                               {{ else }}
                                   <div class="table-request schema-table row {{ if not (in $html "js-collapse-trigger") }}has-no-expands{{ end }} {{ if (in $html "hide-table") }}d-none{{ end }}">
-                                    <p class="expand-all js-expand-all text-primary">Expand All</p>
+                                    <p class="expand-all js-expand-all text-primary text-end">Expand All</p>
                                     <div class="col-12">
                                       <div class="row table-header">
                                         <div class="col-4 column">
@@ -93,13 +95,52 @@
                               {{ end }}
 
                           </div>
-                          <div role="tabpanel" class="tab-pane js-tab-example" id="{{ $operationid }}-request-example">
+                          <div role="tabpanel" class="tab-pane js-tab-example" id="{{ $operationid | lower }}-{{ $version }}-request-example">
                               <div class="code-snippet-wrapper">
                                   <div class="code-snippet">
-                                      <div class="code-button-wrapper position-absolute">
-                                          <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
-                                      </div>
-                                      {{ print $json | safeHTML }}
+
+                                      {{ $fileNonExistCount := 0 }}
+                                      {{ $fileCount := 0 }}
+                                      {{ with (index $codeExampleLookup $operationid) }}
+                                        {{ $fileCount = len . }}
+                                        <div class="example-accordion" id="accordion-{{ $operationid | lower }}-{{ $version }}-json">
+
+                                        {{ range $i, $item := . | first 3 }}
+
+                                            {{ with $resourcePage.Resources.Match (printf "request.%s%s.json" $operationid $item.suffix ) }}
+                                            <div class="card">
+                                              {{ if gt $fileCount 1 }}
+                                              <div class="card-header p-0">
+                                                <h5 class="m-0">
+                                                  <button class="btn btn-link {{if gt $i 0}}collapsed{{ end}}" data-bs-toggle="collapse" data-bs-target="#{{ $operationid | lower }}-{{ $version }}-request-example-{{ $i }}" aria-expanded="true" aria-controls="collapseOne">
+                                                    {{ $item.description }}
+                                                  </button>
+                                                </h5>
+                                              </div>
+                                              {{ end }}
+                                              <div id="{{ $operationid | lower }}-{{ $version }}-request-example-{{ $i }}" class="collapse {{if eq $i 0}}show{{ end }}" data-bs-parent="#accordion-{{ $operationid | lower }}-{{ $version }}-json">
+                                                <div class="card-body p-0 code-snippet">
+                                                    <div class="code-button-wrapper position-absolute">
+                                                        <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
+                                                    </div>
+                                                    {{ range . }}
+                                                      {{ (highlight (.Content) "json" "") }}
+                                                    {{ end }}
+                                                </div>
+                                              </div>
+                                            </div>
+                                            {{ else }}
+                                              {{ $fileNonExistCount = add $fileNonExistCount 1 }}
+                                            {{ end }}
+                                        {{ end }}
+
+                                        </div>
+                                      {{ end }}
+
+                                      {{ if or (eq $fileNonExistCount $fileCount) (not (index $codeExampleLookup $operationid)) }}
+                                          {{ print $json | safeHTML }}
+                                      {{ end }}
+
                                   </div>
                               </div>
                           </div>

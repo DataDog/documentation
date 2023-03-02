@@ -1,15 +1,16 @@
 ---
 categories:
-  - Collaboration
+- Collaboration
 ddtype: crawler
 dependencies: []
 description: Envoyez des alertes et des graphiques Datadog à Moxtra.
-doc_link: 'https://docs.datadoghq.com/integrations/moxtra/'
+doc_link: https://docs.datadoghq.com/integrations/moxtra/
 draft: false
 git_integration_title: moxtra
 has_logo: true
 integration_id: moxtra
 integration_title: Moxtra
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
@@ -18,6 +19,7 @@ public_title: Intégration Datadog/Moxtra
 short_description: Envoyez des alertes et des graphiques Datadog à Moxtra.
 version: '1.0'
 ---
+
 ## Présentation
 
 Moxtra fournit un service de collaboration dans le cloud multicouches et intégrable qui permet à ses utilisateurs de travailler à leurs bureaux ou pendant leurs déplacements.

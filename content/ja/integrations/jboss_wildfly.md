@@ -1,50 +1,75 @@
 ---
+app_id: jboss-wildfly
+app_uuid: 4ad5a2e9-106b-43a2-820a-f146c7effffe
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     JBoss WildFly: assets/dashboards/jboss_wildfly.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: jboss.jdbc_connections.count
+      metadata_path: metadata.csv
+      prefix: jboss.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: JBoss/WildFly
   logs:
     source: jboss_wildfly
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
-  - web
-  - ログの収集
-  - オートディスカバリー
-creates_events: false
-ddtype: check
+- web
+- ログの収集
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/README.md'
-display_name: JBoss/WildFly
+- https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: jboss_wildfly
-guid: ff99b3d2-9c14-4cdf-b869-7b8b1cbf0716
 integration_id: jboss-wildfly
 integration_title: JBoss/WildFly
+integration_version: 2.0.1
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: jboss.
-metric_to_check: jboss.jdbc_connections.count
+manifest_version: 2.0.0
 name: jboss_wildfly
-public_title: Datadog-JBoss/WildFly インテグレーション
+oauth: {}
+public_title: JBoss/WildFly
 short_description: JBoss および WildFly アプリケーションからさまざまな JMX メトリクスを収集
-support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Web
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: JBoss および WildFly アプリケーションからさまざまな JMX メトリクスを収集
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: JBoss/WildFly
 ---
+
+
+
 ## 概要
 
 このチェックは [JBoss][1] および [WildFly][2] アプリケーションを監視します。
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 JBoss/WildFly チェックは [Datadog Agent][3] パッケージに含まれています。JBoss/WildFly ホストに追加でインストールする必要はありません。
 
@@ -112,7 +137,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
 | パラメーター      | 値                                                      |
 | -------------- | ---------------------------------------------------------- |
@@ -138,13 +163,13 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 JBoss/WildFly インテグレーションには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "jboss_wildfly" >}}
 
-**jboss.can_connect**:<br>
-Agent が監視対象の JBoss/WildFly インスタンスに接続できず、メトリクスを収集できない場合は、`CRITICAL` が返されます。そうでない場合は `OK` が返されます。
 
 ## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+
 
 
 [1]: https://developers.redhat.com/products/eap/overview

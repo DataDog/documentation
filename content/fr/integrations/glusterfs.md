@@ -13,18 +13,19 @@ assets:
     glusterfs_processes: assets/saved_views/glusterfs_processes.json
   service_checks: assets/service_checks.json
 categories:
-  - data store
-  - log collection
+- data store
+- log collection
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/glusterfs/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/glusterfs/README.md
 display_name: GlusterFS
 draft: false
 git_integration_title: glusterfs
 guid: 1cb9a21c-8cc4-4727-a4b1-ab7015c7ae24
 integration_id: glusterfs
 integration_title: Red Hat Gluster Storage
+integration_version: 1.5.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -33,14 +34,18 @@ metric_prefix: glusterfs.
 metric_to_check: glusterfs.cluster.nodes.count
 name: GlusterFS
 process_signatures:
-  - glusterd
-  - gluster
+- glusterd
+- gluster
 public_title: Red Hat Gluster Storage
-short_description: 'Surveillez les métriques GlusterFS concernant les nœuds du cluster, le volume et le statut des briques.'
+short_description: Surveillez les métriques GlusterFS concernant les nœuds du cluster,
+  le volume et le statut des briques.
 support: core
 supported_os:
-  - linux
+- linux
 ---
+
+
+
 ## Présentation
 
 Ce check permet de surveiller la santé du cluster, le volume et le statut des briques de [Red Hat Gluster Storage][1] avec l'Agent Datadog.
@@ -48,16 +53,15 @@ Cette intégration GlusterFS est compatible avec les versions de GlusterFS open 
 
 ## Configuration
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à des environnements conteneurisés.
 
 ### Installation
 
-Le check GlusterFS est inclus avec le package de l'[Agent Datadog][2].
-Vous n'avez rien d'autre à installer sur votre serveur.
+Le check GlusterFS est inclus avec le package de l'[Agent Datadog][3]. Vous n'avez rien d'autre à installer sur votre serveur.
 
 ### Configuration
 
-1. Modifiez le fichier `glusterfs.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance GlusterFS. Consultez le [fichier d'exemple glusterfs.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `glusterfs.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance GlusterFS. Consultez le [fichier d'exemple glusterfs.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
 
    ```yaml
    init_config:
@@ -82,7 +86,7 @@ Vous n'avez rien d'autre à installer sur votre serveur.
         min_collection_interval: 60
    ```
 
-   **REMARQUE** : par défaut, [`gstatus`][4] appelle la commande `gluster` en interne, ce qui nécessite une exécution en tant que superuser. Ajoutez une ligne semblable à ce qui suit dans votre fichier `sudoers` :
+   **REMARQUE** : par défaut, [`gstatus`][5] appelle la commande `gluster` en interne, ce qui nécessite une exécution en tant que superuser. Ajoutez une ligne semblable à ce qui suit dans votre fichier `sudoers` :
 
    ```text
     dd-agent ALL=(ALL) NOPASSWD:/path/to/your/gstatus
@@ -90,7 +94,7 @@ Vous n'avez rien d'autre à installer sur votre serveur.
 
    Si votre environnement GlusterFS ne nécessite pas de root, définissez l'option de configuration `use_sudo` sur `false`.
 
-2. [Redémarrez l'Agent][5].
+2. [Redémarrez l'Agent][6].
 
 #### Collecte de logs
 
@@ -113,16 +117,15 @@ Vous n'avez rien d'autre à installer sur votre serveur.
         source: glusterfs
     ```
 
+  Modifiez la valeur du paramètre `path` en fonction de votre environnement. Consultez le [fichier d'exemple conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
 
-  Modifiez la valeur du paramètre `path` en fonction de votre environnement. Consultez le [fichier d'exemple conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
+  3. [Redémarrez l'Agent][6].
 
-  3. [Redémarrez l'Agent][5].
-
-  Consultez la [documentation de Datadog][6] pour découvrir comment configurer l'Agent afin de recueillir les logs dans un environnement Kubernetes.
+Pour découvrir comment configurer l'Agent afin de recueillir des logs dans des environnements Kubernetes, consultez la section [Collecte de logs Kubernetes][7].
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][7] et cherchez `glusterfs` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][8] et cherchez `glusterfs` dans la section Checks.
 
 ## Données collectées
 
@@ -130,31 +133,27 @@ Vous n'avez rien d'autre à installer sur votre serveur.
 {{< get-metrics-from-git "glusterfs" >}}
 
 
-### Checks de service
-
-**glusterfs.brick.health** :<br>
-Renvoie `CRITICAL` si le sous-volume possède le statut « degraded » ou renvoie `OK` pour le statut « up ».
-
-**glusterfs.volume.health** :<br>
-Renvoie `CRITICAL` si le volume possède le statut « degraded » ou renvoie `OK` pour le statut « up ».
-
-**glusterfs.cluster.health** :<br>
-Renvoie `CRITICAL` si le cluster possède le statut « degraded ». Si ce n'est pas le cas, renvoie `OK`.
-
 ### Événements
 
 GlusterFS n'inclut aucun événement.
 
+### Checks de service
+{{< get-service-checks-from-git "glusterfs" >}}
+
+
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][9].
+Besoin d'aide ? Contactez [l'assistance Datadog][11].
+
 
 [1]: https://www.redhat.com/en/technologies/storage/gluster
 [2]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
-[3]: https://github.com/DataDog/integrations-core/blob/master/glusterfs/datadog_checks/glusterfs/data/conf.yaml.example
-[4]: https://github.com/gluster/gstatus#install
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: 
-[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-core/blob/master/glusterfs/metadata.csv
-[9]: https://docs.datadoghq.com/fr/help/
+[3]: https://app.datadoghq.com/account/settings#agent
+[4]: https://github.com/DataDog/integrations-core/blob/master/glusterfs/datadog_checks/glusterfs/data/conf.yaml.example
+[5]: https://github.com/gluster/gstatus#install
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
+[8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[9]: https://github.com/DataDog/integrations-core/blob/master/glusterfs/metadata.csv
+[10]: https://github.com/DataDog/integrations-core/blob/master/glusterfs/assets/service_checks.json
+[11]: https://docs.datadoghq.com/fr/help/

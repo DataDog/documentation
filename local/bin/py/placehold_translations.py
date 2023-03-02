@@ -163,4 +163,9 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    # if in gitlab we need to exit with failure
+    # if in local we skip building the placeholders
+    if os.getenv("CI_COMMIT_REF_NAME"):
+        main()
+    else:
+        print('\x1b[32mINFO\x1b[0m: Skipping placeholders locally')

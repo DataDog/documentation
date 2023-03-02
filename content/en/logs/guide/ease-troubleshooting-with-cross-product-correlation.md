@@ -1,15 +1,28 @@
 ---
-title: Ease troubleshooting with cross product correlation
+title: Ease Troubleshooting With Cross-Product Correlation
 kind: guide
+further_reading:
+- link: '/getting_started/tagging/unified_service_tagging/'
+  tag: 'Documentation'
+  text: 'Learn about Unified Service Tagging'
+- link: '/tracing/other_telemetry/connect_logs_and_traces'
+  tag: 'Documentation'
+  text: 'Connect Logs and Traces'
+- link: '/real_user_monitoring/connect_rum_and_traces/'
+  tag: 'Documentation'
+  text: 'Connect RUM & Session Replay and Traces'
+- link: '/synthetics/apm/'
+  tag: 'Documentation'
+  text: 'Connect Synthetic Tests and Traces'
 ---
 
 ## Overview
 
-[Unified service tagging][1] permits high level correlation capabilities. However, there are times when the starting point of your investigation is a single log, trace, view or Synthetic test. Correlating logs, traces, and views with other data gives context to help estimate business impact and find the root cause of an issue in a few clicks.
+[Unified service tagging][1] enables high-level correlation capabilities. There may be times when the starting point of your investigation is a single log, trace, view, or Synthetic test. Correlating logs, traces, and views with other data provides helpful context in estimating business impact and identifying the root cause of an issue in quickly.
 
-{{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/full-stack-cover.png" alt="Full stack correlation" style="width:80%;" >}}
+{{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/full-stack-cover.png" alt="Full stack correlation" style="width:100%;" >}}
 
-This guide walks you through the steps to correlate your full stack data:
+This guide walks you through how to correlate your full stack data. Depending on your use case, you may skip certain steps below. Steps that are dependent on others are explicitly stated.
 
 1. [Correlate server-side logs with traces](#correlate-server-side-logs-with-traces)
    * [Correlate application logs](#correlate-application-logs)
@@ -20,8 +33,6 @@ This guide walks you through the steps to correlate your full stack data:
 3. [Correlate user experience with server behavior](#correlate-user-experience-with-server-behavior)
    * [Correlate RUM views with traces](#correlate-rum-views-with-traces)
    * [Leverage trace correlation to troubleshoot Synthetic tests](#leverage-trace-correlation-to-troubleshoot-synthetic-tests)
-
-**Note**: Depending on your use case, you may skip certain steps below. Steps that are dependent on others are explicitly stated.
 
 ## Correlate server-side logs with traces
 
@@ -123,14 +134,14 @@ Inject `trace_id` into most of your database logs with [SQL comments][10]. Here 
 
 ```python
 if os.environ.get('DD_LOGS_INJECTION') == 'true':
-    from ddtrace.helpers import get_correlation_ids
+    from ddtrace import tracer
     from sqlalchemy.engine import Engine
     from sqlalchemy import event
 
     @event.listens_for(Engine, "before_cursor_execute", retval=True)
     def comment_sql_calls(conn, cursor, statement, parameters, context, executemany):
-        trace_id, span_id = get_correlation_ids()
-        statement = f"{statement} -- dd.trace_id=<{trace_id or 0}>"
+        trace_ctx = tracer.get_log_correlation_context()
+        statement = f"{statement} -- dd.trace_id=<{trace_ctx['trace_id']}>"
         return statement, parameters
 ```
 
@@ -147,84 +158,88 @@ Clone and customize the PostgreSQL pipeline:
 
 Here is an example of a slow query execution plan from a slow trace:
 
-{{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/slow-query-root-cause.png" alt="Slow query logs correlation" style="width:80%;" >}}
+{{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/slow-query-root-cause.png" alt="Slow query logs correlation" style="width:100%;" >}}
 
 ## Correlate frontend products
 
-### Correlate browser logs with RUM
+### Correlate browser logs with RUM & Session Replay
 
 #### Why?
 
-[Browser logs][11] inside a RUM event give context and insight into an issue. As in the example below, browser logs indicate that the bad query root cause is an invalid user ID.
+[Browser logs][11] inside a RUM event give context and insight into an issue. In the following example, browser logs indicate that the root cause of the bad query is an invalid user ID.
 
-{{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/browser-logs-in-rum.png" alt="Browser logs in a RUM action" style="width:80%;" >}}
+{{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/browser-logs-in-rum.png" alt="Browser logs in a RUM action" style="width:100%;" >}}
 
 Correlating your browser logs with RUM also eases [aggressive sampling strategy without losing entity-level consistency][2] with the use of attributes like `session_id` and `view.id`.
 
 #### How?
 
-Browser logs and RUM events are automatically correlated as explained in the [RUM billing FAQ][12]. [Matching configuration between RUM and logs SDK][13] is required.
+Browser logs and RUM events are automatically correlated. For more information, see [RUM & Session Replay Billing][12]. You must [match configurations between the RUM Browser SDK and Logs SDK][13].
 
 ## Correlate user experience with server behavior
 
-Traditional backend and frontend monitoring are siloed and require separate workflows to troubleshoot across your stack. Datadog full stack correlations lets you identify a root cause (whether it comes from a browser issue or a database downtime) and estimate user impact.
+Traditional backend and frontend monitoring are siloed and may require separate workflows to troubleshoot across a stack. Datadog's full stack correlations allow you to identify a root cause—whether it comes from a browser issue or a database downtime—and estimate the user impact.
 
-This section walks you through the steps to enable these types of correlations:
+This section walks you through how to enable these correlations:
 
 * [Correlate RUM views with traces](#correlate-rum-views-with-traces)
-* [Leverage the trace correlation to troubleshoot Synthetic tests](#leverage-trace-correlation-to-troubleshoot-synthetic-tests).
+* [Leverage the trace correlation to troubleshoot Synthetic tests](#leverage-trace-correlation-to-troubleshoot-synthetic-tests)
 
 ### Correlate RUM views with traces
 
 #### Why?
 
-APM and RUM together let you see your full frontend and backend data through one lens.
+The APM integration with RUM & Session Replay allows you to see your frontend and backend data in one lens, in addition to:
 
-Use the RUM correlation to:
-
-* Quickly pinpoint issues anywhere in your stack including frontend
+* Quickly pinpoint issues anywhere in your stack, including the frontend
 * Fully understand what your users are experiencing
 
 #### How?
 
-Follow the [connect RUM and Traces][14] documentation. RUM view information is available in the [Trace view][15] and trace information is available in the [Session view][16].
+You can access RUM views in the [Trace Explorer][14] and APM traces in the [RUM Explorer][15]. For more information, see [Connect RUM and Traces][16]. 
 
-{{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/trace-details-rum.png" alt="RUM information in a trace" style="width:80%;" >}}
+{{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/trace-details-rum.png" alt="RUM information in a trace" style="width:100%;" >}}
 
-**Note**: There is no direct correlation between RUM views and server logs. You can still see a RUM event from a log and logs from a RUM event by looking at Trace previews.
+There is no direct correlation between RUM views and server logs. To see RUM events in a log and logs in a RUM event, click in the **Traces** tab. 
 
-{{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/rum-action-server-logs.png" alt="Logs in a RUM action trace preview" style="width:80%;" >}}
+{{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/rum-action-server-logs.png" alt="Logs in a RUM action trace preview" style="width:100%;" >}}
 
 ### Leverage trace correlation to troubleshoot Synthetic tests
 
 #### Why?
 
-The APM integration with Synthetic Monitoring allows you to go from a test run that has failed to the root cause of the issue by looking at the trace generated by the test.
+The APM integration with Synthetic Monitoring allows you to navigate from a failed test run to the root cause of the issue with the trace generated by the test.
 
-{{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/synthetic-trace-root-cause.png" alt="Root cause of a synthetic test fail" style="width:80%;" >}}
+{{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/synthetic-trace-root-cause.png" alt="Root cause of a synthetic test fail" style="width:100%;" >}}
 
-Having network-related specifics, thanks to your test, as well as backend, infrastructure, log information (thanks to your trace), and RUM events (for [browser tests][17] only) allows you to access a new level of detail about the way your application is behaving and how it is experienced by your users.
+Having network-related specifics from your test, in addition to backend, infrastructure, and log information from your trace, and RUM events (for [browser tests][17] only) allows you to access additional details about your application's behavior and user experience.
 
 #### How?
 
-For this feature, follow the [enable APM integration on Synthetic settings][18] documentation.
+After enabling APM on your application's endpoint, you can access APM traces in the [Synthetic Monitoring homepage][18]. 
 
+For more information, see [Connect Synthetic Tests and Traces][19].
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /getting_started/tagging/unified_service_tagging
 [2]: /logs/indexes/#sampling-consistently-with-higher-level-entities
-[3]: /tracing/connect_logs_and_traces
+[3]: /tracing/other_telemetry/connect_logs_and_traces
 [4]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
-[5]: /tracing/setup_overview/proxy_setup/?tab=nginx
+[5]: /tracing/trace_collection/proxy_setup/?tab=nginx
 [6]: /logs/log_configuration/processors/#grok-parser
 [7]: /logs/log_configuration/processors/#trace-remapper
 [8]: /integrations/postgres/?tab=host#log-collection
 [9]: https://www.postgresql.org/docs/13/auto-explain.html
 [10]: https://www.postgresql.org/docs/13/sql-syntax-lexical.html#SQL-SYNTAX-COMMENTS
 [11]: /logs/log_collection/javascript/
-[12]: /account_management/billing/rum/#can-i-view-logs-from-the-browser-collector-in-rum
+[12]: /account_management/billing/rum/#how-do-you-view-logs-from-the-browser-collector-in-rum
 [13]: /real_user_monitoring/browser/#initialization-parameters
-[14]: /real_user_monitoring/connect_rum_and_traces
-[15]: https://app.datadoghq.com/apm/traces
-[16]: https://app.datadoghq.com/rum/explorer
+[14]: https://app.datadoghq.com/apm/traces
+[15]: https://app.datadoghq.com/rum/explorer
+[16]: /real_user_monitoring/connect_rum_and_traces
 [17]: /synthetics/browser_tests/
-[18]: /synthetics/apm
+[18]: https://app.datadoghq.com/synthetics/tests
+[19]: /synthetics/apm

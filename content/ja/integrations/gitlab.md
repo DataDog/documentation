@@ -1,60 +1,87 @@
 ---
+app_id: gitlab
+app_uuid: 3d165411-7734-4f72-b39a-f222add296b2
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Gitlab Overview: assets/dashboards/overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check:
+      - gitlab.process_max_fds
+      - gitlab.ruby.process_start_time_seconds
+      metadata_path: metadata.csv
+      prefix: gitlab.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Gitlab
   logs:
     source: gitlab
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-  - collaboration
-  - source control
-  - issue tracking
-  - log collection
-  - autodiscovery
-creates_events: false
-ddtype: check
+- collaboration
+- source control
+- issue tracking
+- log collection
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/gitlab/README.md'
-display_name: Gitlab
+- https://github.com/DataDog/integrations-core/blob/master/gitlab/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: gitlab
-guid: 1cab328c-5560-4737-ad06-92ebc54af901
 integration_id: gitlab
-integration_title: Gitlab
+integration_title: GitLab
+integration_version: 5.3.2
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: gitlab.
-metric_to_check:
-  - gitlab.process_max_fds
-  - gitlab.ruby.process_start_time_seconds
+manifest_version: 2.0.0
 name: gitlab
-public_title: Datadog-Gitlab インテグレーション
-short_description: Datadog ですべての Gitlab メトリクスを追跡
-support: コア
+oauth: {}
+public_title: GitLab
+short_description: Datadog ですべての GitLab メトリクスを追跡します。
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::コラボレーション
+  - Category::ソースコントロール
+  - Category::問題の追跡
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: Datadog ですべての GitLab メトリクスを追跡します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: GitLab
 ---
+
+
+
 ## 概要
 
 このインテグレーションを使用して
 
-- Gitlab 経由で Prometheus から収集されたメトリクスを視覚化および監視できます。
+- Gitlab を使って Prometheus から収集されたメトリクスを視覚化および監視できます。
 
-Gitlab および Prometheus とのインテグレーションの詳細については、[Gitlab のドキュメント][1]を参照してください。
+詳しくは、[Prometheus による GitLab の監視][1]をご覧ください。
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
-Gitlab チェックは [Datadog Agent][2] パッケージに含まれています。Gitlab サーバーに追加でインストールする必要はありません。
+GitLab チェックは [Datadog Agent][2] パッケージに含まれています。GitLab サーバーに追加でインストールする必要はありません。
 
 ### コンフィギュレーション
 
@@ -67,20 +94,20 @@ Gitlab チェックは [Datadog Agent][2] パッケージに含まれていま�
 
 ##### メトリクスの収集
 
-1. Gitlab のメトリクス [エンドポイント][2] を指定するには、[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `gitlab.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル gitlab.d/conf.yaml][3] を参照してください。
+1. GitLab のメトリクス [エンドポイント][2] を指定するには、[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `gitlab.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル gitlab.d/conf.yaml][3] を参照してください。
 
-2. Gitlab の設定ページで、`Enable Prometheus Metrics` のオプションが有効になっていることを確認します。これには、管理者アクセスが必要です。メトリクスの収集を有効化する方法について、詳しくは [Gitlab ドキュメント][4]を参照してください。
+2. GitLab の設定ページで、オプション `Enable Prometheus Metrics` が有効になっていることを確認します (管理者権限が必要です)。メトリクスの収集を有効にする方法については、[GitLab Prometheus メトリクス][4]を参照してください。
 
 3. `/etc/gitlab/gitlab.rb` を更新して次の行を含めることで、監視エンドポイントへのアクセスを許可します。
 
     ```
     gitlab_rails['monitoring_whitelist'] = ['127.0.0.0/8', '192.168.0.1']
     ```
-    **注** 保存して Gitlab を再起動すると変更を確認できます。
+    **注** 保存して GitLab を再起動すると変更を確認できます。
 
 4. [Agent を再起動します][5]。
 
-**注**: [gitlab/metrics.py][6] のメトリクスはデフォルトで収集されます。`init_config` の `allowed_metrics` コンフィギュレーションオプションは特定のレガシーメトリクスを収集します。Gitlab インスタンスのバージョンやコンフィギュレーションによっては、収集されないメトリクスもあります。メトリクスの収集に関する詳細については、[Gitlab のドキュメント][4]を参照してください。
+**注**: [gitlab/metrics.py][6] のメトリクスはデフォルトで収集されます。`init_config` の `allowed_metrics` コンフィギュレーションオプションは特定のレガシーメトリクスを収集します。GitLab インスタンスのバージョンやコンフィギュレーションによっては、収集されないメトリクスもあります。メトリクスの収集に関する詳細については、[GitLab Prometheus メトリクス][4]を参照してください。
 
 
 ##### ログの収集
@@ -91,7 +118,7 @@ Gitlab チェックは [Datadog Agent][2] パッケージに含まれていま�
    logs_enabled: true
    ```
 
-2. 次に、下部にある `logs` 行のコメントを解除して、`gitlab.d/conf.yaml` を編集します。ログの `path` を Gitlab ログファイルの正しいパスで更新してください。
+2. 次に、下部にある `logs` 行のコメントを解除して、`gitlab.d/conf.yaml` を編集します。ログの `path` を GitLab ログファイルの正しいパスで更新してください。
 
    ```yaml
      logs:
@@ -134,7 +161,7 @@ Gitlab チェックは [Datadog Agent][2] パッケージに含まれていま�
 
 ##### ログの収集
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
 | パラメーター      | 値                                       |
 | -------------- | ------------------------------------------- |
@@ -157,7 +184,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 ### イベント
 
-Gitlab チェックには、イベントは含まれません。
+GitLab チェックには、イベントは含まれません。
 
 ### サービスのチェック
 {{< get-service-checks-from-git "gitlab" >}}
@@ -170,33 +197,30 @@ Gitlab チェックには、イベントは含まれません。
 
 
 
-## Gitlab Runner インテグレーション
+## GitLab Runner インテグレーション
 
 ## 概要
 
 このインテグレーションを使用して
 
-- Gitlab Runners 経由で Prometheus から収集されたメトリクスを視覚化および監視できます。
-- Gitlab Runner が Gitlab に接続できるかどうかを検証できます。
+- GitLab Runners を使って Prometheus から収集されたメトリクスを視覚化および監視できます。
+- GitLab Runner が GitLab に接続できるかどうかを検証できます。
 
-Gitlab Runner および Prometheus とのインテグレーションの詳細については、
-[Gitlab Runner のドキュメント][5]を参照してください。
+GitLab Runner と Prometheus とのインテグレーションについては、[GitLab Runner ドキュメント][5]を参照してください。
 
 ## セットアップ
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][6]のガイドを参照してこの手順を行ってください。
 
-### インストール
+### APM に Datadog Agent を構成する
 
-Gitlab Runner チェックは [Datadog Agent][2] パッケージに含まれています。Gitlab サーバーに追加でインストールする必要はありません。
+GitLab Runner チェックは [Datadog Agent][2] パッケージに含まれています。GitLab サーバーに追加でインストールする必要はありません。
 
 ### コンフィギュレーション
 
-Runner の Prometheus メトリクスエンドポイントおよびサービスチェックを持つ Gitlab マスターを指定するには、[Agent のコンフィギュレーションディレクトリ][7]のルートにある `conf.d/` フォルダーの `gitlab_runner.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル gitlab_runner.d/conf.yaml][8] を参照してください。
+Runner の Prometheus メトリクスエンドポイントおよびサービスチェックを持つ GitLab マスターを指定するには、[Agent のコンフィギュレーションディレクトリ][7]のルートにある `conf.d/` フォルダーの `gitlab_runner.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル gitlab_runner.d/conf.yaml][8] を参照してください。
 
-**注**: `init_config` セクションの `allowed_metrics` 項目を使用すると、抽出するメトリクスを指定できます。
-
-**備考**: 一部のメトリクスは `rate` (`ci_runner_errors`) として報告されます。
+`init_config` セクションの `allowed_metrics` 項目で、抽出するメトリクスを指定することができます。いくつかのメトリクスは `rate` として報告されるべきです (例: `ci_runner_errors`)。
 
 ### 検証
 
@@ -211,7 +235,7 @@ Runner の Prometheus メトリクスエンドポイントおよびサービス�
 ### ログの収集
 
 
-1. `gitlab_runner` [コンフィギュレーションファイル][9]で、ログフォーマットを `json` に変更します (_Gitlab Runner のバージョン 11.4.0 以降で利用可能_) :
+1. `gitlab_runner` [コンフィギュレーションファイル][9]で、ログフォーマットを `json` に変更します (_GitLab Runner のバージョン 11.4.0 以降で利用可能_) :
    ```toml
    log_format = "json"
    ```
@@ -227,7 +251,7 @@ Runner の Prometheus メトリクスエンドポイントおよびサービス�
    usermod -a -G systemd-journal dd-agent
    ```
 
-4. Gitlab Runner のログの収集を開始するには、次の構成ブロックを `gitlab_runner.d/conf.yaml` ファイルに追加します。
+4. GitLab Runner のログの収集を開始するには、次の構成ブロックを `gitlab_runner.d/conf.yaml` ファイルに追加します。
 
    ```yaml
    logs:
@@ -241,12 +265,11 @@ Runner の Prometheus メトリクスエンドポイントおよびサービス�
 
 ### イベント
 
-Gitlab Runner チェックには、イベントは含まれません。
+GitLab Runner チェックには、イベントは含まれません。
 
 ### サービスのチェック
 
-Gitlab Runner チェックは、Runner が Gitlab マスターと通信できるかを確認するサービスのチェック機能、およびローカルの Prometheus エンドポイントが
-使用可能かを確認するサービスのチェック機能を提供します。
+GitLab Runner チェックは、Runner が GitLab マスターと通信できるかを確認するサービスのチェック機能、およびローカルの Prometheus エンドポイントが使用可能かを確認するサービスのチェック機能を提供します。
 
 ## トラブルシューティング
 
@@ -257,7 +280,7 @@ Gitlab Runner チェックは、Runner が Gitlab マスターと通信できる
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/help/
-[5]: https://docs.gitlab.com/runner/monitoring/README.html
+[5]: https://docs.gitlab.com/runner/monitoring/
 [6]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [8]: https://github.com/DataDog/integrations-core/blob/master/gitlab_runner/datadog_checks/gitlab_runner/data/conf.yaml.example

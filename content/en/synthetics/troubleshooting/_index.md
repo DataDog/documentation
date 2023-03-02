@@ -14,6 +14,8 @@ further_reading:
   text: "Configure an API Test"
 ---
 
+## Overview
+
 If you experience issues setting up or configuring Datadog Synthetic Monitoring, use this page to start troubleshooting. If you continue to have trouble, [contact Datadog Support][1].
 
 ## API tests
@@ -98,6 +100,10 @@ To fix it, go edit your recording, open the advanced options of the step that is
 
 {{< img src="synthetics/fix_user_locator.mp4" alt="Fixing User Locator error" video="true" width="100%" >}}
 
+#### I am having issues with a CSS pointer property
+
+Automated browsers do not support emulating the CSS `pointer` media feature. Browser tests have `pointer: none` for all tests and devices (laptop, tablet, or mobile).
+
 ## API and browser tests
 
 ### Unauthorized errors
@@ -137,6 +143,10 @@ This could uncover a resource exhaustion issue on your private location workers.
 
 This could uncover a resource exhaustion issue on your private locations workers. Make sure your private location containers are provisioned with [sufficient CPU resources][13].
 
+### My browser tests are taking too long to run
+
+Confirm you are not seeing [out of memory issues][14] with your private location deployments. If you have tried scaling your container instances following the [dimensioning guidelines][15] already, reach out to [Datadog Support][1].
+
 ### `TIMEOUT` errors appear in API tests executed from my private location
 
 This might mean your private location is unable to reach the endpoint your API test is set to run on. Confirm that the private location is installed in the same network as the endpoint you are willing to test. You can also try to run your test on different endpoints to see if you get the same `TIMEOUT` error or not.
@@ -145,17 +155,9 @@ This might mean your private location is unable to reach the endpoint your API t
 
 ### The `invalid mount config for type "bind": source path must be a directory` error appears when attempting to run a private location
 
-This occurs when you attempt to mount a single file in a Windows-based container, which is not supported. For more information, see the [Docker mount volume documentation][14]. Ensure that the source of the bind mount is a local directory.
+This occurs when you attempt to mount a single file in a Windows-based container, which is not supported. For more information, see the [Docker mount volume documentation][16]. Ensure that the source of the bind mount is a local directory.
 
-## Synthetics and CI/CD
-
-## CI Results Explorer
-
-### CI metadata does not appear in the CI Results Explorer
-
-Check whether you are using API endpoints to trigger your CI/CD test runs. To have your CI Results Explorer populate with CI metadata, you must use the [NPM package][15].
-
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -172,5 +174,6 @@ Check whether you are using API endpoints to trigger your CI/CD test runs. To ha
 [11]: https://ip-ranges.datadoghq.com/synthetics.json
 [12]: /synthetics/api_tests/?tab=httptest#notify-your-team
 [13]: /synthetics/private_locations#private-location-total-hardware-requirements
-[14]: https://docs.docker.com/engine/reference/commandline/run/#mount-volume--v---read-only
-[15]: /synthetics/cicd_integrations#use-the-cli
+[14]: https://docs.docker.com/config/containers/resource_constraints/
+[15]: /synthetics/private_locations/dimensioning#define-your-total-hardware-requirements
+[16]: https://docs.docker.com/engine/reference/commandline/run/#mount-volume--v---read-only

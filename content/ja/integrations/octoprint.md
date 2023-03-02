@@ -1,41 +1,64 @@
 ---
+app_id: octoprint
+app_uuid: f076efc3-c1c7-4e0a-b0dc-92870d655211
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     OctoPrint Overview: assets/dashboards/octoprint_overview.json
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: octoprint.printer_state
+      metadata_path: metadata.csv
+      prefix: octoprint.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: OctoPrint
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: コミュニティ
+  sales_email: gwaldo@gmail.com
+  support_email: gwaldo@gmail.com
 categories:
-  - web
-  - orchestration
-  - ログの収集
-creates_events: false
-ddtype: check
+- web
+- orchestration
+- ログの収集
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/octoprint/README.md
-display_name: OctoPrint
+- https://github.com/DataDog/integrations-extras/blob/master/octoprint/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: octoprint
-guid: 77844a89-7202-4f8b-a0fb-642904eb9513
 integration_id: octoprint
 integration_title: Datadog OctoPrint
+integration_version: 1.0.0
 is_public: true
 kind: integration
-maintainer: gwaldo@gmail.com
-manifest_version: 1.0.0
-metric_prefix: octoprint.
-metric_to_check: octoprint.printer_state
+manifest_version: 2.0.0
 name: octoprint
-public_title: Datadog OctoPrint インテグレーション
+oauth: {}
+public_title: Datadog OctoPrint
 short_description: 3D プリンターを管理する Web インターフェイス、OctoPrint を監視
-support: contrib
 supported_os:
-  - linux
+- linux
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Category::Web
+  - Category::Orchestration
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: 3D プリンターを管理する Web インターフェイス、OctoPrint を監視
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Datadog OctoPrint
 ---
+
+
+
 ## 概要
 
 このチェックは、Datadog Agent を通じて [OctoPrint][1] を監視します。
@@ -46,11 +69,13 @@ supported_os:
 
 ### インストール
 
-OctoPrint チェックをホストにインストールするには
+以下を実行して OctoPrint チェックをホストにインストールするには
 
-1. `sudo -u dd-agent -- datadog-agent integration install datadog-octoprint==<VERSION>`を実行します
-    - 現在のバージョンは `1.0.0` です。これは `./datadog_checks/octoprint/__about__.py` で検証可能です。
+```shell
+sudo -u dd-agent -- datadog-agent integration install datadog-octoprint==<VERSION>
+```
 
+**注**: このページの一番上に `VERSION` が記載されています。
 
 #### ソースからインストール (オプション)
 
@@ -76,7 +101,7 @@ OctoPrint チェックをホストにインストールするには
 
 [Agent の status サブコマンドを実行][7]し、Checks セクションで `octoprint` を探します。
 
-### ログ
+### ログ管理
 
 デフォルトでは、このインテグレーションは、Raspberry Pi から OctoPrint  を実行するように予め構成された [OctoPi][8] イメージを使うことを想定しています。
 
@@ -90,7 +115,7 @@ OctoPrint チェックをホストにインストールするには
 
 #### ログ処理
 
-OctoPrint は独自のログ形式（オブジェクト形式ではない）を使用するため、ログを活用するにはパース規則を使用してログ処理パイプラインを作成する必要があります。たとえば、
+OctoPrint は独自のログ形式（オブジェクト形式ではない）を使用します。ログを活用するにはパース規則を使用してログ処理パイプラインを作成します。たとえば、
 
 1. メインパイプライン: "OctoPrint"
     1. サブパイプライン 1: "OctoPrint 印刷ジョブ"

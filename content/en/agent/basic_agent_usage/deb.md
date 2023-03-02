@@ -16,6 +16,12 @@ further_reading:
 - link: "/tracing/"
   tag: "Documentation"
   text: "Collect your traces"
+- link: "/agent/basic_agent_usage/#agent-architecture"
+  tag: "Documentation"
+  text: "Find out more about the Agent's architecture"
+- link: "/agent/guide/network#configure-ports"
+  tag: "Documentation"
+  text: "Configure inbound ports"
 ---
 
 ## Overview
@@ -24,7 +30,9 @@ This page outlines the basic features of the Datadog Agent for Debian. If you ha
 
 Packages are available for 64-bit x86 and Arm v8 architectures. For other architectures, use the source install.
 
-**Note**: Debian 7 (wheezy) and above is supported. SysVinit is supported in Agent v6.6.0+.
+**Notes**:
+- On the 64-bit x86 architecture, Debian 7 (wheezy) and above are supported in Agent < 6.36.0/7.36.0. Debian 8 (jessie) and above are supported in Agent >= 6.36.0/7.36.0. SysVinit is supported in Agent v6.6.0+.
+- On the 64-bit Arm v8 architecture, Debian 9 (stretch) and above are supported.
 
 ## Commands
 

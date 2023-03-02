@@ -8,18 +8,18 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - data store
+- data store
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/eventstore/README.md
-display_name: "Event\_Store"
+- https://github.com/DataDog/integrations-extras/blob/master/eventstore/README.md
+display_name: Event Store
 draft: false
 git_integration_title: eventstore
 guid: 4BEB8E51-E7DA-4145-B780-E3B3A6A8CD60
 integration_id: eventstore
-integration_title: "Event\_Store"
-integration_version: 1.1.0
+integration_title: Event Store
+integration_version: 2.0.0
 is_public: true
 kind: integration
 maintainer: '@xorima'
@@ -27,14 +27,17 @@ manifest_version: 1.0.0
 metric_prefix: eventstore.
 metric_to_check: eventstore.proc.mem
 name: eventstore
-public_title: "Intégration Datadog/Event\_Store"
-short_description: "Recueille des métriques d'Event\_Store"
+public_title: Intégration Datadog/Event Store
+short_description: Recueille des métriques d'Event Store
 support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 Recueillez des métriques d'Event Store en temps réel pour :

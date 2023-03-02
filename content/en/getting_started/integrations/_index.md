@@ -2,17 +2,19 @@
 title: Introduction to Integrations
 kind: documentation
 aliases:
-    - '/getting_started/integrations'
+    - /getting_started/integrations
 further_reading:
-    - link: 'https://learn.datadoghq.com/'
-      tag: 'Learning Center'
-      text: 'Introduction to Datadog'
-    - link: '/integrations/'
-      tag: 'Integrations'
-      text: "Datadog's full list of integrations"
+  - link: 'https://learn.datadoghq.com/courses/intro-to-integrations'
+    tag: 'Learning Center'
+    text: 'Introduction to Integrations'
+  - link: '/integrations/'
+    tag: 'Documentation'
+    text: 'See a list of Datadog integrations'
 ---
 
-This is a guide for using integrations, if you are looking for information about building a new integration, see the [Create a new integration][1] page.
+## Overview
+
+This is a guide for using integrations. If you are looking for information about building a new integration, see the [Create a new integration][1] page.
 
 An integration, at the highest level, is when you assemble a unified system from units that are usually considered separately. At Datadog, you can use integrations to bring together all of the metrics and logs from your infrastructure and gain insight into the unified system as a whole—you can see pieces individually and also how individual pieces are impacting the whole.
 
@@ -28,7 +30,7 @@ You can also build a [custom check][10] to define and send metrics to Datadog fr
 
 ## Setting up an integration
 
-The Datadog Agent package includes integrations officially supported by Datadog, in [integrations core][11]. To use those integrations, download the Datadog Agent. Community-based integrations are in [integrations extras][12], and to use those, you need to download the [developer toolkit][13]. For more information on installing or managing these integrations, see the [integrations management guide][14].
+The Datadog Agent package includes integrations officially supported by Datadog, in [integrations core][11]. To use those integrations, download the Datadog Agent. Community-based integrations are in [integrations extras][12]. For more information on installing or managing these integrations, see the [integrations management guide][14].
 
 ### API and application keys
 
@@ -70,7 +72,7 @@ logs:
       sourcecategory: http_web_access
 ```
 
-To create multiple instances in the same Agent check to monitor two Apache services, create a new instance with a `-` in the `instances` section:
+To monitor multiple Apache instances in the same Agent check, add additional instances to the `instances` section:
 
 ```yaml
 init_config:
@@ -96,6 +98,15 @@ If you define tags in the `datadog.yaml` file, the tags are applied to all of yo
 For example, setting `service` in your config file is the recommended [Agent setup][26] for monitoring separate, independent systems.
 
 To better unify your environment, it is also recommended to configure the `env` tag in the Agent. To learn more, see [Unified Service Tagging][27].
+
+By default, the metrics reported by integrations include tags autodiscovered from the environment. For example, the metrics reported by a Redis check that runs inside a container include tags that refer to the container, such as `image_name`. You can turn this behavior off by setting the `ignore_autodiscovery_tags` parameter to `true`:
+```yaml
+init_config:
+
+ignore_autodiscovery_tags: true
+
+# Rest of the config here
+```
 
 ### Validation
 
@@ -146,7 +157,7 @@ custom check
 : This is the main configuration file where you're defining how the Agent as a whole interacts with its own integrations and with your system. Use this file to update API keys, proxies, host tags, and other global settings.
 
 event
-: Events are informational messages about your system that are consumed by [the events stream][40] so that you can build monitors on them.
+: Events are informational messages about your system that are consumed by [the events explorer][40] so that you can build monitors on them.
 
 instance
 : You define and map the instance of whatever you are monitoring in the `conf.yaml` file. For example, in the [`http_check` integration][41], you're defining the name associated with the instance of the HTTP endpoint you are monitoring up and downtime. You can monitor **multiple instances** in the same integration, and you do that by defining all of the instances in the `conf.yaml` file.
@@ -161,10 +172,10 @@ logging
 : The file that lists and stores the metrics collected by each integration.
 
 metrics
-: The list of what is collected from your system by each integration. You can find the metrics for each integration in that integrations `metadata.csv` file. For more information about metrics, see the [Metrics][42] developer page. You can also set up [custom metrics][43], so if the integration doesn't offer a metric out of the box, you can usually add it.
+: The list of what is collected from your system by each integration. You can find the metrics for each integration in that integration's `metadata.csv` file. For more information about metrics, see the [Metrics][42] developer page. You can also set up [custom metrics][43], so if the integration doesn't offer a metric out of the box, you can usually add it.
 
 parameters
-: Use the parameters in the `conf.yaml` file to control accesses between your integration data source and the Agent. The individual integrations `conf.yaml.example` file has all of the required and not required parameters listed. 
+: Use the parameters in the `conf.yaml` file to control accesses between your integration data source and the Agent. The individual integrations `conf.yaml.example` file has all of the required and not required parameters listed.
 
 service check
 : Service checks are a type of monitor used to track the uptime status of the service. For more information, see the [Service checks guide][44].
@@ -188,7 +199,6 @@ tagging
 [10]: /developers/custom_checks/write_agent_check/
 [11]: https://github.com/DataDog/integrations-core
 [12]: https://github.com/DataDog/integrations-extras
-[13]: /developers/integrations/new_check_howto/#developer-toolkit
 [14]: /agent/guide/integration-management/
 [15]: https://app.datadoghq.com/account/settings#agent
 [16]: /account_management/api-app-keys/
@@ -205,7 +215,7 @@ tagging
 [27]: /getting_started/tagging/unified_service_tagging/
 [28]: /agent/guide/agent-commands/#agent-status-and-information
 [29]: /infrastructure/process/
-[30]: /security/
+[30]: /data_security/
 [31]: /metrics/explorer/
 [32]: /dashboards/
 [33]: /monitors/
@@ -215,7 +225,7 @@ tagging
 [37]: /agent/troubleshooting/
 [38]: /help/
 [39]: /agent/guide/agent-configuration-files/#agent-configuration-directory
-[40]: https://app.datadoghq.com/event/stream
+[40]: https://app.datadoghq.com/event/explorer
 [41]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example#L13
 [42]: /metrics/
 [43]: /metrics/custom_metrics/

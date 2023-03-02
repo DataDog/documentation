@@ -4,7 +4,7 @@ kind: faq
 ---
 
 <div class="alert alert-warning">
-This page pertains to the 2019 key rotation. For the 2022 key rotation, consult the <a href="/agent/faq/linux-agent-2022-key-rotation">2022 Linux Agent Key Rotation</a> documentation.
+This page pertains to the 2019 key rotation. For the 2022 key rotation, consult the <a href="/agent/guide/linux-agent-2022-key-rotation">2022 Linux Agent Key Rotation</a> documentation.
 </div>
 
 
@@ -96,7 +96,6 @@ repo_gpgcheck=1
 gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
        https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
        https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
-       https://keys.datadoghq.com/DATADOG_RPM_KEY.public
 ```
 
 {{% /tab %}}

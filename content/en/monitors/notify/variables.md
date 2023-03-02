@@ -3,7 +3,7 @@ title: Variables
 kind: documentation
 description: "Use variables to customize your monitor notifications"
 further_reading:
-- link: "/monitors/create/"
+- link: "/monitors/"
   tag: "Documentation"
   text: "Create monitors"
 - link: "/monitors/notify/"
@@ -159,6 +159,31 @@ To notify your dev team if a triggering host has the name `production`, use the 
 {{/is_exact_match}}
 ```
 
+The `is_exact_match` condition also supports matching multiple strings:
+
+```text
+{{#is_exact_match "host.name" "production" "staging"}}
+  This displays if the host that triggered the alert is exactly
+  named production or staging. @dev-team@company.com
+{{/is_exact_match}}
+```
+
+The `is_exact_match` conditional variable also supports [`{{value}}` template variables](#template-variables):
+
+```text
+{{#is_exact_match "value" "<VALUE>"}}
+  This displays if the value that breached the threshold of the monitor is exactly <VALUE>.
+{{/is_exact_match}}
+```
+
+To notify your dev team if the value that breached the threshold of your monitor is 5, use the following:
+
+```text
+{{#is_exact_match "value" "5"}}
+  This displays if the value that breached the threshold of the monitor is 5. @dev-team@company.com
+{{/is_exact_match}}
+```
+
 {{% /tab %}}
 {{% tab "is_renotify" %}}
 
@@ -202,14 +227,17 @@ This is the escalation message @dev-team@company.com
 {{% /tab %}}
 {{< /tabs >}}
 
+If you configure a conditional block for a state transition into `alert` or `warning` conditions with an **@-notifications** handle, it is recommended to configure a corresponding `recovery` condition in order for a recovery notification to be sent to the handle.
+
+**Note**: Any text or notification handle placed **outside** the configured conditional variables is invoked with every monitor state transition. Any text or notification handle placed **inside** of configured conditional variables is only invoked if the monitor state transition matches its condition.
 
 ## Attribute and tag variables
 
 Use attribute and tag variables to render alert messages that are customized, informative, and specific to help people quickly understand the nature of the alert.
 
-### Multi-alert variables
+### Multi alert variables
 
-Configure multi-alert variables in [multi-alert monitors][1] based on the dimension selected in the multi-alert group box. Enrich the notification to dynamically include the value associated with the group by dimension in each alert.
+Configure multi alert variables in [multi alert monitors][1] based on the dimension selected in the multi alert group box. Enrich the notification to dynamically include the value associated with the group by dimension in each alert.
 
 {{< tabs >}}
 {{% tab "Group by tag" %}}
@@ -224,7 +252,7 @@ This renders the `value` associated with the `key` in each alert notification. I
 
 **Example**: If your monitor triggers an alert for each `env`, then the variable `{{env.name}}` is available in your notification message.
 
-{{< img src="monitors/notifications/multi_alert_variable.png" alt="Multi-alert variable syntax" style="width:90%;">}}
+{{< img src="monitors/notifications/multi_alert_variable.png" alt="Multi alert variable syntax" style="width:90%;">}}
 
 #### Query group by host
 
@@ -262,7 +290,7 @@ Log monitors, Trace Analytics monitors, RUM monitors and Event monitors can use 
 {{ @facet_key.name }}
 ```
 
-**Example**: To include group-specific information in a multi-alert log monitor group by `@machine_id`:
+**Example**: To include group-specific information in a multi alert log monitor group by `@machine_id`:
 
 ```text
 This alert was triggered on {{ @machine_id.name }}
@@ -279,15 +307,17 @@ If your facet has periods, use brackets around the facet, for example:
 
 ### Matching attribute/tag variables
 
-_Available for [Log monitors][2], [Trace Analytics monitors][3] (APM) and [RUM monitors][4]_
+_Available for [Log monitors][2], [Trace Analytics monitors][3] (APM), [RUM monitors][4] and [CI monitors][5]_
 
-To include **any** attribute or tag from a log, a trace span, or a RUM event matching the monitor query, use the following variables:
+To include **any** attribute or tag from a log, a trace span, a RUM event, a CI pipeline, or a CI test event matching the monitor query, use the following variables:
 
-| Monitor type    | Variable syntax                                         |
-|-----------------|---------------------------------------------------------|
-| Log             |  `{{log.attributes.key}}` or `{{log.tags.key}}`          |
-| Trace Analytics |  `{{span.attributes.key}}` or `{{span.tags.key}}`        |
-| RUM             |  `{{rum.attributes.key}}` or `{{rum.tags.key}}`          |
+| Monitor type    | Variable syntax                                  |
+|-----------------|--------------------------------------------------|
+| Log             | `{{log.attributes.key}}` or `{{log.tags.key}}`   |
+| Trace Analytics | `{{span.attributes.key}}` or `{{span.tags.key}}` |
+| RUM             | `{{rum.attributes.key}}` or `{{rum.tags.key}}`   |
+| CI Pipeline     | `{{cipipeline.attributes.key}}`                  |
+| CI Test         | `{{citest.attributes.key}}`                      |
 
 For any `key:value` pair, the variable `{{log.tags.key}}` renders `value` in the alert message.
 
@@ -304,6 +334,8 @@ For any `key:value` pair, the variable `{{log.tags.key}}` renders `value` in the
 The message renders the `error.message` attribute of a chosen log matching the query, **if the attribute exists**.
 
 <div class="alert alert-info"><strong>Note</strong>: If the selected event does not contain the attribute or the tag key, the variable renders empty in the notification message. To avoid missing notifications, do not use these variables for routing notification with <code>{{#is_match}}</code> handles.</div>
+
+If a monitor uses Formulas & Functions in its queries, the values are resolved with events that are extracted from the first query.
 
 #### Reserved attributes
 
@@ -327,13 +359,21 @@ For check monitor variables (custom check and integration check), the variable `
 
 ### Composite monitor variables
 
-Composite monitors can access the value associated with the sub-monitors at the time the alert triggers.
+Composite monitors can access the value and status associated with the sub-monitors at the time the alert triggers.
 
 For example, if your composite monitor has sub-monitor `a`, you can include the value of `a` with:
 
 ```text
 {{ a.value }}
 ```
+
+To retrieve the status of the sub-monitor `a` use:
+
+```text
+{{ a.status }}
+```
+
+Possible values for the status are: `OK`, `Alert`, `Warn`, and `No Data`.
 
 Composite monitors also support tag variables in the same way as their underlying monitors. They follow the same format as other monitors, provided the underlying monitors are grouped by the same tag/facet.
 
@@ -360,7 +400,7 @@ Use template variables to customize your monitor notifications. The built-in var
 
 ### Evaluation
 
-Template variables that return numerical values support operations and functions, which allow you to perform mathematical operations or formatting changes to the value. For full details, see [Template Variable Evaluation][5].
+Template variables that return numerical values support operations and functions, which allow you to perform mathematical operations or formatting changes to the value. For full details, see [Template Variable Evaluation][6].
 
 ### Local time
 
@@ -372,13 +412,13 @@ For example, to add the last triggered time of the monitor in the Tokyo time zon
 ```
 
 The result is displayed in the ISO 8601 format: `yyyy-MM-dd HH:mm:ss±HH:mm`, for example `2021-05-31 23:43:27+09:00`.
-See the [list of tz database time zones][6], particularly the TZ database name column, to see the list of available time zone values.
+See the [list of tz database time zones][7], particularly the TZ database name column, to see the list of available time zone values.
 
 ## Advanced
 
 ### Dynamic handles
 
-Use [tag variables](#attribute-and-tag-variables) to dynamically build notification handles and route notifications to the right team or service based on the type of issue detected by your monitor. 
+Use [tag variables](#attribute-and-tag-variables) to dynamically build notification handles and route notifications to the right team or service based on the type of issue detected by your monitor.
 
 **Example**: If your monitor queries a metric and groups it by a `service` tag, you can have your notifications routed to different Slack channels depending on the failing service:
 
@@ -453,7 +493,7 @@ The monitors link is customizable with additional parameters. The most common ar
 
 
 
-[1]: /monitors/create/types/
+[1]: /monitors/types
 {{% /tab %}}
 {{% tab "Logs" %}}
 
@@ -513,9 +553,20 @@ If `host.name` matches `<HOST_NAME>`, the template outputs:
 {{ .matched }} the host name
 ```
 
-[1]: /monitors/create/configuration/#alert-grouping
-[2]: /monitors/create/types/log/
-[3]: /monitors/create/types/apm/?tab=analytics
-[4]: /monitors/create/types/real_user_monitoring/
-[5]: /monitors/guide/template-variable-evaluation/
-[6]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+### URL Encode
+
+If your alert message includes information that needs to be encoded in a URL (for example, for redirections), use the `{{ urlencode "<variable>"}}` syntax.
+
+**Example**: If your monitor message includes a URL to the APM services page filtered to a specific service, use the `service` [tag variable](#attribute-and-tag-variables) and add the `{{ urlencode "<variable>"}}` syntax to the URL:
+
+```
+https://app.datadoghq.com/apm/services/{{urlencode "service.name"}}
+```
+
+[1]: /monitors/configuration/#alert-grouping
+[2]: /monitors/types/log/
+[3]: /monitors/types/apm/?tab=analytics
+[4]: /monitors/types/real_user_monitoring/
+[5]: /monitors/types/ci/
+[6]: /monitors/guide/template-variable-evaluation/
+[7]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones

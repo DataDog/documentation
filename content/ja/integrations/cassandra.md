@@ -1,51 +1,78 @@
 ---
+app_id: cassandra
+app_uuid: a930364f-ac97-4483-92d6-5a982da7b1c0
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     cassandra-overview: assets/dashboards/cassandra_overview.json
     cassandra-overview-screenboard: assets/dashboards/cassandra_overview_screenboard.json
     cassandra-read: assets/dashboards/cassandra_read.json
     cassandra-sstables: assets/dashboards/cassandra_sstable.json
     cassandra-write: assets/dashboards/cassandra_write.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: cassandra.load.count
+      metadata_path: metadata.csv
+      prefix: cassandra.
+    process_signatures:
+    - java org.apache.cassandra.service.CassandraDaemon
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Cassandra
   logs:
     source: cassandra
-  metrics_metadata: metadata.csv
-  monitors: {}
   saved_views:
     cassandra_processes: assets/saved_views/cassandra_processes.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-  - data store
-  - log collection
-  - autodiscovery
-creates_events: false
-ddtype: check
+- data store
+- log collection
+- autodiscovery
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/cassandra/README.md'
-display_name: Cassandra
+- https://github.com/DataDog/integrations-core/blob/master/cassandra/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: cassandra
-guid: 03ba454d-425c-4f61-9e9c-54682c3ebce5
 integration_id: cassandra
 integration_title: Cassandra
+integration_version: 1.16.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: cassandra.
-metric_to_check: cassandra.load.count
+manifest_version: 2.0.0
 name: cassandra
-process_signatures:
-  - java org.apache.cassandra.service.CassandraDaemon
-public_title: Datadog-Cassandra インテグレーション
+oauth: {}
+public_title: Cassandra
 short_description: クラスターのパフォーマンス、容量、全体的な健全性などを追跡
-support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::データストア
+  - Category::ログの収集
+  - Category::オートディスカバリー
+  configuration: README.md#Setup
+  description: クラスターのパフォーマンス、容量、全体的な健全性などを追跡
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Cassandra
 ---
+
+
+
 ![Cassandra のデフォルトのダッシュボード][1]
 
 ## 概要
@@ -61,7 +88,7 @@ Cassandra からメトリクスをリアルタイムに取得すると、以下�
 
 Cassandra チェックは [Datadog Agent][2] パッケージに含まれています。Cassandra ノードに追加でインストールする必要はありません。このインテグレーションには、Oracle の JDK を使用することをお勧めします。
 
-**注**: このチェックでは、インスタンスあたりのメトリクス数が 350 に制限されています。返されたメトリクスの数は、情報ページに表示されます。以下で説明する構成を編集することで、関心があるメトリクスを指定できます。収集するメトリクスをカスタマイズする方法については、[JMX チェックのドキュメント][3]で詳細な手順を参照してください。制限以上のメトリクスを監視する必要がある場合は、[Datadog のサポートチーム][4]までお問い合わせください。
+**注**: このチェックでは、インスタンスあたりのメトリクス数が 350 に制限されています。返されたメトリクスの数は、情報ページに表示されます。以下で説明する構成を編集することで、関心があるメトリクスを指定できます。収集するメトリクスをカスタマイズする方法については、[JMX のドキュメント][3]で詳細な手順を参照してください。制限以上のメトリクスを監視する必要がある場合は、[Datadog のサポートチーム][4]までお問い合わせください。
 
 ### コンフィギュレーション
 
@@ -123,13 +150,13 @@ _Agent バージョン 6.0 以降で利用可能_
 
 ##### メトリクスの収集
 
-コンテナ環境の場合は、[JMX を使用したオートディスカバリー][2]のガイドを参照してください。
+コンテナ環境については、[JMX によるオートディスカバリー][2]ガイドを参照してください。これには、オートディスカバリーによりクラスター上で [Agent イメージを更新する][3]ことが含まれます。
 
 ##### ログの収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][3]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][4]を参照してください。
 
 | パラメーター      | 値                                                  |
 | -------------- | ------------------------------------------------------ |
@@ -137,7 +164,8 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [2]: https://docs.datadoghq.com/ja/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
-[3]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
+[3]: https://docs.datadoghq.com/ja/agent/guide/autodiscovery-with-jmx/?tab=containeragent#autodiscovery-annotations
+[4]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
 {{% /tab %}}
 {{< /tabs >}}
 

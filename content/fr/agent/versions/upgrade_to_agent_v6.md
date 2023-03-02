@@ -1,10 +1,11 @@
 ---
-title: "Upgrade vers l'Agent\_v6 de Datadog"
-kind: documentation
 aliases:
-  - /fr/agent/faq/upgrade-to-agent-v6
-  - /fr/agent/guide/upgrade-to-agent-v6
+- /fr/agent/faq/upgrade-to-agent-v6
+- /fr/agent/guide/upgrade-to-agent-v6
+kind: documentation
+title: Upgrade vers l'Agent v6 de Datadog
 ---
+
 <div class="alert alert-info">
 L'Agent v7 est disponible. <a href="/agent/versions/upgrade_to_agent_v7">Passez à la dernière version</a> pour profiter des nouvelles fonctionnalités.
 </div>
@@ -20,27 +21,7 @@ Si l'Agent v5 est déjà installé, un script est disponible pour installer ou 
 
 Le programme d'installation de l'Agent v6 peut automatiquement convertir les configurations v5 lors de l'upgrade :
 
-
-
-Amazon Linux 
-: `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"`
-
-CentOS       
-: `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"`
-
-Debian       
-: `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"`
-
-Fedora       
-: `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"`
-
-Red Hat      
-: `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"`
-
-Ubuntu       
-: `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"`
-
-SUSE         
+La commande suivante fonctionne sous Amazon Linux, CentOS, Debian, Fedora, Red Hat, Ubuntu et SUSE :
 : `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"`
 
 **Remarque** : le processus d'importation n'importe pas automatiquement les checks **custom** de l'Agent. Ce comportement est délibéré : nous ne pouvons par garantir la compatibilité totale et immédiate de ces checks.

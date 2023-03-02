@@ -16,7 +16,8 @@ has_logo: true
 integration_title: Kubernetes State Metrics Core
 is_public: true
 public_title: Datadog-Kubernetes State Metrics Core Integration
-integration_id: "kubernetes_state_core"
+# forcing integration_id to kube-state-metrics so it loads kubernetes svg
+integration_id: "kube-state-metrics"
 further_reading:
     - link: "https://www.datadoghq.com/blog/engineering/our-journey-taking-kubernetes-state-metrics-to-the-next-level/"
       tag: "Blog"
@@ -53,13 +54,11 @@ The Kubernetes State Metrics Core check is included in the [Datadog Cluster Agen
 
 In your Helm `values.yaml`, add the following:
 
-```
-...
+```yaml
 datadog:
-...
+  # (...)
   kubeStateMetricsCore:
     enabled: true
-...
 ```
 
 {{% /tab %}}
@@ -67,7 +66,7 @@ datadog:
 
 To enable the `kubernetes_state_core` check, the setting `spec.features.kubeStateMetricsCore.enabled` must be set to `true` in the DatadogAgent resource:
 
-```
+```yaml
 apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
 metadata:
@@ -79,7 +78,7 @@ spec:
   features:
     kubeStateMetricsCore:
       enabled: true
-  # ...
+  # (...)
 ```
 
 Note: Datadog Operator v0.7.0 or greater is required.
@@ -104,6 +103,7 @@ Here is the mapping between deprecated tags and the official tags that have repl
 | cronjob               | kube_cronjob                |
 | daemonset             | kube_daemon_set             |
 | deployment            | kube_deployment             |
+| hpa                   | horizontalpodautoscaler     |
 | image                 | image_name                  |
 | job                   | kube_job                    |
 | job_name              | kube_job                    |
@@ -133,6 +133,12 @@ The Kubernetes State Metrics Core check is not backward compatible, be sure to r
 `kubernetes_state.container.waiting` and `kubernetes_state.container.status_report.count.waiting`
 : These metrics no longer emit a 0 value if no pods are waiting. They only report non-zero values.
 
+`kube_job`
+: In `kubernetes_state`, the `kube_job` tag value is the `CronJob` name if the `Job` had `CronJob` as an owner, otherwise it is the `Job` name. In `kubernetes_state_core`, the `kube_job` tag value is always the `Job` name, and a new `kube_cronjob` tag key is added with the `CronJob` name as the tag value. When migrating to `kubernetes_state_core`, it's recommended to use the new tag or `kube_job:foo*`, where `foo` is the `CronJob` name, for query filters.
+
+`kubernetes_state.job.succeeded`
+: In `kubernetes_state`, the `kuberenetes.job.succeeded` was `count` type. In `kubernetes_state_core` it is `gauge` type. 
+
 {{< tabs >}}
 {{% tab "Helm" %}}
 
@@ -144,12 +150,10 @@ If you still want to enable both checks simultaneously for the migration phase, 
 
 The Kubernetes State Metrics Core check does not require deploying `kube-state-metrics` in your cluster anymore, you can disable deploying `kube-state-metrics` as part of the Datadog Helm Chart. To do this, add the following in your Helm `values.yaml`:
 
-```
-...
+```yaml
 datadog:
-...
+  # (...)
   kubeStateMetricsEnabled: false
-...
 ```
 
 {{% /tab %}}
@@ -289,12 +293,6 @@ datadog:
 
 `kubernetes_state.container.waiting`
 : Describes whether the container is in a waiting state. Tags:`kube_namespace` `pod_name` `kube_container_name` (`env` `service` `version` from standard labels).
-
-`kubernetes_state.container.status_report.count.waiting`
-: Describes the reason the container is in a waiting state. Tags:`kube_namespace` `pod_name` `kube_container_name` `reason` (`env` `service` `version` from standard labels).
-
-`kubernetes_state.container.status_report.count.terminated`
-: Describes the reason the container is in a terminated state. Tags:`kube_namespace` `pod_name` `kube_container_name` `reason` (`env` `service` `version` from standard labels).
 
 `kubernetes_state.container.status_report.count.waiting`
 : Describes the reason the container is in a waiting state. Tags:`kube_namespace` `pod_name` `kube_container_name` `reason` (`env` `service` `version` from standard labels).
@@ -522,6 +520,9 @@ datadog:
 The Kubernetes State Metrics Core check does not include any events.
 
 ### Service Checks
+
+`kubernetes_state.cronjob.complete`
+: Whether the last job of the cronjob is failed or not. Tags:`kube_cronjob` `kube_namespace` (`env` `service` `version` from standard labels).
 
 `kubernetes_state.cronjob.on_schedule_check`
 : Alert if the cronjob's next schedule is in the past. Tags:`kube_cronjob` `kube_namespace` (`env` `service` `version` from standard labels).

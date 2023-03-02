@@ -66,10 +66,6 @@ In addition to the official Ansible integration, the [monitoring section][23] of
 
 Enclave delivers your metrics to a Datadog account. [Consult the dedicated Aptible help center to learn how][25].
 
-### Auth0
-
-The [Auth0 extension][26] takes your Auth0 logs and ships them to Datadog.
-
 ### CLI management
 
 A [set of tools][27] to backup/restore dashboards and monitors, and configure users through a command line interface.
@@ -82,94 +78,90 @@ Publish Consul service counts into Datadog from [DogStatsD][1] with the [Consul 
 
 Scale up auto-scale groups based on the results of a Datadog query with [Dogscaler][29].
 
-### Dynatrace
-
-This [plugin][30] sends any Dynatrace measure from a chart to Datadog.
-
 ### FreeSwitch
 
-This is for a [FreeSwitch ESL][31] application to export statistics to Datadog using the DogStatsD API and is written by [WiMacTel][32].
+This is for a [FreeSwitch ESL][30] application to export statistics to Datadog using the DogStatsD API and is written by [WiMacTel][31].
 
 ### Google Analytics
 
-You can get data into Datadog from Google Analytics using the Datadog API with the [Google Analytics library][33] from [Bithaus][34].
+You can get data into Datadog from Google Analytics using the Datadog API with the [Google Analytics library][32] from [Bithaus][33].
 
 ### Heroku
 
-Heroku emits dyno metrics through logs. To convert these logs into metrics and send them to Datadog, use one of the following log drains. To send your Heroku logs to Datadog, see [Collect Heroku logs][35].
+Heroku emits dyno metrics through logs. To convert these logs into metrics and send them to Datadog, use one of the following log drains. To send your Heroku logs to Datadog, see [Collect Heroku logs][34].
 
-* [Heroku Datadog Log Drain][36] written in Nodejs by [Oz][37].
-* [Heroku Datadog Log Drain][38] written in Go by [Apiary][39].
+* [Heroku Datadog Log Drain][35] written in Nodejs by [Oz][36].
+* [Heroku Datadog Log Drain][37] written in Go by [Apiary][38].
 
 ### Jira
 
-A [tool][40] to poll data from Jira and upload it as metrics to Datadog.
+A [tool][39] to poll data from Jira and upload it as metrics to Datadog.
 
 ### K6
 
-K6, a load and performance regression testing tool developed by Load Impact, can send test results to Datadog using [DogStatsD][1]. To enable this feature, see [the tutorial][41].
+K6, a load and performance regression testing tool developed by Load Impact, can send test results to Datadog using [DogStatsD][1]. To enable this feature, see [the tutorial][40].
 
 ### LaunchDarkly
 
-A [LaunchDarkly][42] webhook handler that records changes as Datadog events.
+A [LaunchDarkly][41] webhook handler that records changes as Datadog events.
 
 ### Logstash output
 
-* [Logstash output for Datadog][43]
-* [Logstash output for DogStatsD][44]
+* [Logstash output for Datadog][42]
+* [Logstash output for DogStatsD][43]
 
 ### Moogsoft
 
-A Moogsoft [listener][45] that ingests Datadog notifications.
+A Moogsoft [listener][44] that ingests Datadog notifications.
 
 ### NGINX LUA
 
-* Emit [custom metrics][46] directly from NGINX configurations using the [nginx_lua_datadog][47] module in your LUA scripts.
-* [lua-resty-dogstatsd][48] is an extension developed by [mediba inc][49] (forked by [Dailymotion][50]). It enables emitting metrics, events, and service checks through the [DogStatsD][1] protocol. `lua-resty-dogstatsd` is released as GPLv3 and relies on the Nginx cosocket API.
+* Emit [custom metrics][45] directly from NGINX configurations using the [nginx_lua_datadog][46] module in your LUA scripts.
+* [lua-resty-dogstatsd][47] is an extension developed by [mediba inc][48] (forked by [Dailymotion][49]). It enables emitting metrics, events, and service checks through the [DogStatsD][1] protocol. `lua-resty-dogstatsd` is released as GPLv3 and relies on the Nginx cosocket API.
 
 ### OpenVPN
 
-* Send OpenVPN [bandwidth usage][51] and the count of active connections to Datadog.
-* Send OpenVPN [licensing information][52] to Datadog.
+* Send OpenVPN [bandwidth usage][50] and the count of active connections to Datadog.
+* Send OpenVPN [licensing information][51] to Datadog.
 
 ### Phusion Passenger
 
-Send health metrics from Phusion's Passenger server using the [passenger-datadog-monitor][53] written by [Stevenson Jean-Pierre][54]
+Send health metrics from Phusion's Passenger server using the [passenger-datadog-monitor][52] written by [Stevenson Jean-Pierre][53]
 
 ### Pid-stats
 
-This [library][55] allows you to generate process information from StatsD, given pid files. It was created by [GitterHQ][56].
+This [library][54] allows you to generate process information from StatsD, given pid files. It was created by [GitterHQ][55].
 
 ### SaltStack
 
-* [Datadog SaltStack Formula][57]
-* [Datadog SaltStack][58] written by [Luca Cipriani][59].
+* [Datadog SaltStack Formula][56]
+* [Datadog SaltStack][57] written by [Luca Cipriani][58].
 
 ### Sensu
 
-Use these Sensu [handlers][60] to automatically send both metrics and events to Datadog.
+Use these Sensu [handlers][59] to automatically send both metrics and events to Datadog.
 
 ### StackStorm
 
-This StackStorm Datadog [integration pack][61] supplies action integration for Datadog.
+This StackStorm Datadog [integration pack][60] supplies action integration for Datadog.
 
 ### Winston
 
-A Winston Datadog [transport][62].
+A Winston Datadog [transport][61].
 
 ## Community Agent ports
 
 ### FreeBSD
 
-[FreeBSD dd-agent port][63]
+[FreeBSD dd-agent port][62]
 
 ### NixOS
 
-[dd-agent nixpkg][64]
+[dd-agent nixpkg][63]
 
-If you've written a Datadog library and would like to add it to this page, send an email to [opensource@datadoghq.com][65].
+If you've written a Datadog library and would like to add it to this page, send an email to [opensource@datadoghq.com][64].
 
-[1]: /metrics/dogstatsd_metrics_submission/
+[1]: /metrics/custom_metrics/dogstatsd_metrics_submission/
 [2]: /tracing/
 [3]: /serverless/
 [4]: /api/
@@ -194,43 +186,41 @@ If you've written a Datadog library and would like to add it to this page, send 
 [23]: https://docs.ansible.com/ansible/2.9/modules/list_of_monitoring_modules.html
 [24]: https://github.com/ansible/ansible-modules-extras
 [25]: https://www.aptible.com/documentation/enclave/reference/metrics/metric-drains/datadog.html
-[26]: https://github.com/BetaProjectWave/auth0-logs-to-datadog
 [27]: https://github.com/keirans/datadog-management
 [28]: https://github.com/zendesk/consul2dogstats
 [29]: https://github.com/cvent/dogscaler
-[30]: https://github.com/Dynatrace/Dynatrace-AppMon-Datadog-Plugin
-[31]: https://github.com/wimactel/FreeSwitch-DataDog-Metrics
-[32]: https://github.com/wimactel
-[33]: https://github.com/bithauschile/datadog-ga
-[34]: https://blog.bithaus.cl/2016/04/20/realtime-google-analytics-metrics-in-datadog
-[35]: /logs/guide/collect-heroku-logs/
-[36]: https://github.com/ozinc/heroku-datadog-drain
-[37]: https://web.oz.com/
-[38]: https://github.com/apiaryio/heroku-datadog-drain-golang
-[39]: https://apiary.io
-[40]: https://github.com/evernote/jiradog
-[41]: https://blog.loadimpact.com/how-to-send-k6-metrics-to-datadog
-[42]: https://github.com/meetup/launch-dogly
-[43]: https://www.elastic.co/guide/en/logstash/current/plugins-outputs-datadog.html
-[44]: https://github.com/brigade/logstash-output-dogstatsd
-[45]: https://docs.moogsoft.com/AIOps.6.2.0/Datadog-Solution-Pak_13737047.html
-[46]: /metrics/custom_metrics/
-[47]: https://github.com/simplifi/ngx_lua_datadog
-[48]: https://github.com/dailymotion/lua-resty-dogstatsd
-[49]: http://www.mediba.jp
-[50]: https://www.dailymotion.com/us
-[51]: https://github.com/byronwolfman/dd-openvpn
-[52]: https://github.com/denniswebb/datadog-openvpn
-[53]: https://github.com/Sjeanpierre/passenger-datadog-monitor
-[54]: https://github.com/Sjeanpierre
-[55]: https://github.com/gitterHQ/pid-stats
-[56]: https://github.com/gitterHQ
-[57]: https://github.com/DataDog/datadog-formula
-[58]: https://gist.github.com/mastrolinux/6175280
-[59]: https://gist.github.com/mastrolinux
-[60]: https://github.com/sensu-plugins/sensu-plugins-datadog
-[61]: https://github.com/StackStorm-Exchange/stackstorm-datadog
-[62]: https://github.com/sparkida/winston-datadog
-[63]: https://github.com/urosgruber/dd-agent-FreeBSD
-[64]: https://github.com/NixOS/nixpkgs/tree/master/pkgs/tools/networking/dd-agent
-[65]: mailto:opensource@datadoghq.com
+[30]: https://github.com/wimactel/FreeSwitch-DataDog-Metrics
+[31]: https://github.com/wimactel
+[32]: https://github.com/bithauschile/datadog-ga
+[33]: https://blog.bithaus.cl/2016/04/20/realtime-google-analytics-metrics-in-datadog
+[34]: /logs/guide/collect-heroku-logs/
+[35]: https://github.com/ozinc/heroku-datadog-drain
+[36]: https://web.oz.com/
+[37]: https://github.com/apiaryio/heroku-datadog-drain-golang
+[38]: https://apiary.io
+[39]: https://github.com/evernote/jiradog
+[40]: https://blog.loadimpact.com/how-to-send-k6-metrics-to-datadog
+[41]: https://github.com/meetup/launch-dogly
+[42]: https://www.elastic.co/guide/en/logstash/current/plugins-outputs-datadog.html
+[43]: https://github.com/brigade/logstash-output-dogstatsd
+[44]: https://docs.moogsoft.com/AIOps.6.2.0/Datadog-Solution-Pak_13737047.html
+[45]: /metrics/custom_metrics/
+[46]: https://github.com/simplifi/ngx_lua_datadog
+[47]: https://github.com/dailymotion/lua-resty-dogstatsd
+[48]: http://www.mediba.jp
+[49]: https://www.dailymotion.com/us
+[50]: https://github.com/byronwolfman/dd-openvpn
+[51]: https://github.com/denniswebb/datadog-openvpn
+[52]: https://github.com/Sjeanpierre/passenger-datadog-monitor
+[53]: https://github.com/Sjeanpierre
+[54]: https://github.com/gitterHQ/pid-stats
+[55]: https://github.com/gitterHQ
+[56]: https://github.com/DataDog/datadog-formula
+[57]: https://gist.github.com/mastrolinux/6175280
+[58]: https://gist.github.com/mastrolinux
+[59]: https://github.com/sensu-plugins/sensu-plugins-datadog
+[60]: https://github.com/StackStorm-Exchange/stackstorm-datadog
+[61]: https://github.com/sparkida/winston-datadog
+[62]: https://github.com/urosgruber/dd-agent-FreeBSD
+[63]: https://github.com/NixOS/nixpkgs/tree/master/pkgs/tools/networking/dd-agent
+[64]: mailto:opensource@datadoghq.com

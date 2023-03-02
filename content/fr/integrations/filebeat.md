@@ -65,7 +65,7 @@ Pour l'Agent v7.21+/6.21+, suivez les instructions ci-dessous afin d'installer l
 
 ## Validation
 
-[Lancez la sous-commande `status` de l'Agent][7] et cherchez `filebeat` dans la section Checks.
+Lancez la [sous-commande status de l'Agent][7] et cherchez `filebeat` dans la section Checks.
 
 ## Données collectées
 

@@ -70,15 +70,18 @@ Agent v6 & v7 では、オペレーティングシステムから提供される
 | コマンドの使用方法の表示              | `sudo service datadog-agent`                      |
 | チェックの実行                        | `sudo -u dd-agent -- dd-agent check <CHECK_NAME>` |
 
+{{% /tab %}}
+{{< /tabs >}}
+
 **注**: ご使用のシステムで `service` ラッパーを使用できない場合は、以下を使用してください。
 
 * `upstart` ベースのシステムの場合: `sudo start/stop/restart/status datadog-agent`
 * `systemd` ベースのシステムの場合: `sudo systemctl start/stop/restart/status datadog-agent`
+* `initctl` ベースのシステムの場合: `sudo initctl start/stop/restart/status datadog-agent`
 
 [サービスライフサイクルコマンドについては、こちらを参照してください][2]。
 
-{{% /tab %}}
-{{< /tabs >}}
+
 
 ## コンフィギュレーション
 

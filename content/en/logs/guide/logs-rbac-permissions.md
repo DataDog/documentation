@@ -110,25 +110,22 @@ Assign the role(s) in the modal of a specific pipeline.
 
 1. [Get the Roles ID][1] of the role you want to assign to specific pipelines.
 2. [Get the Permission ID][2] for the `logs_write_processors` permission API for your region.
-3. [Get the Pipeline ID(s)][3] of the pipeline(s) you want to assign this role on.
-4. Grant permission to that role with the following call:
+3. Grant permission to that role with the following call:
 
 ```sh
 curl -X POST \
-        https://app.datadoghq.com/api/v1/role/<ROLE_UUID>/permission/<PERMISSION_UUID> \
+        https://app.datadoghq.com/api/v2/roles/<ROLE_UUID>/permissions \
         -H "Content-Type: application/json" \
         -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
         -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
         -d '{
-                "scope": {
-                    "pipelines": [ "<PIPELINE-X_ID>", "<PIPELINE-Y_ID>"]
-                }
+                "id": "<PERMISSION_UUID>",
+                "type": "permissions"
             }'
 ```
 
 [1]: /api/v2/roles/#list-roles
 [2]: /api/v2/roles/#list-permissions
-[3]: /api/v1/logs-pipelines/#get-all-pipelines
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -199,7 +196,7 @@ For `service:ci-cd` logs that are rehydrated from the `Prod Archive`, note the f
 
 ### Removed: `logs_public_config_api`
 
-Datadog has removed the `logs_public_config_api` permission. 
+Datadog has removed the `logs_public_config_api` permission.
 
 Five separate permissions control the ability to view, create, or modify log configuration through the Datadog API:
 * [`logs_generate_metrics`](#logs_generate_metrics)
@@ -254,7 +251,7 @@ Create a new restriction query defining its query filter. The new query appears 
 
 Pick the role wherever it stands, and assign it to the intended restriction query.
 
-*Note*: Keep in mind that a role can be assigned no more than one restriction query. Meaning, when you assign a role to a restriction query, it loses connection to the restriction query it was already attached to.
+**Note**: Keep in mind that a role can be assigned no more than one restriction query. Meaning, when you assign a role to a restriction query, it loses connection to the restriction query it was already attached to.
 
 {{< img src="account_management/rbac/logs_rq-assign_roles.mp4" alt="Assign a role to Restriction Query" video=true style="width:70%;">}}
 
@@ -318,26 +315,23 @@ Grant this role access to the index in [Configuration page][1].
 
 * [Get the Roles ID][1] of the role you want to assign to specific pipelines.
 * [Get the Permission ID][2] for the `logs_write_processors` permission API for your region.
-* [Get the Index ID(s)][3] of the pipeline(s) you want to assign this role on.
 * Grant permission to that role with the following call:
 
 ```bash
 curl -X POST \
-        https://app.datadoghq.com/api/v1/role/<ROLE_UUID>/permission/<PERMISSION_UUID> \
+        https://app.datadoghq.com/api/v2/roles/<ROLE_UUID>/permissions \
         -H "Content-Type: application/json" \
         -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
         -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
         -d '{
-                "scope": {
-                    "indexes": ["<INDEX-1_ID>",["<INDEX-2_ID>"]
-                }
+                "id": "<PERMISSION_UUID>",
+                "type": "permissions"
             }'
 ```
 
 
 [1]: /api/v2/roles/#list-roles
 [2]: /api/v2/roles/#list-permissions
-[3]: /api/v1/logs-indexes/#get-all-indexes
 {{% /tab %}}
 {{< /tabs >}}
 

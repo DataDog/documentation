@@ -1,30 +1,35 @@
 ---
 title: Using Tags
 kind: documentation
+description: Learn how to use tags in Datadog products.
 aliases:
 - /tagging/using_tags/
 further_reading:
+- link: "https://www.datadoghq.com/blog/tagging-best-practices/"
+  tag: "Blog"
+  text: "Best practices for tagging your infrastructure and applications"
 - link: "/getting_started/tagging/"
   tag: "Documentation"
   text: "Getting started with tags"
 - link: "/getting_started/tagging/assigning_tags/"
   tag: "Documentation"
   text: "Learn how to assign tags"
-- link: "https://www.datadoghq.com/blog/tagging-best-practices/"
-  tag: "Blog"
-  text: "Best practices for tagging your infrastructure and applications"
 ---
 
-After [assigning tags][1], start using them to filter and group your data in your Datadog platform. Tags can be used to include or exclude data. When including or excluding multiple tags:
+## Overview
+
+After [assigning tags][1], start using them to filter and group your data in your Datadog platform. Tags can be used to include or exclude data.
+
+When including or excluding multiple tags:
 
 * Include uses `AND` logic
 * Exclude uses `OR` logic
 
 ## Events
 
-The [Events stream][2] shows the events from your environment over a specified time period. Use tags to filter the events list and focus on a subset of events. Enter `tags:` followed by a tag to see all the events coming from a host, [integration][3], or service with that tag. In the example below, `tags:service:coffee-house` is used to search for the tag `service:coffee-house`. To search multiple tags inclusively, separate each tag with OR: `tags:service:coffee-house OR host:coffeehouseprod`. To search multiple tags exclusively, separate each tag using commas: `tags:service:coffee-house,host:coffeehouseprod.`
+The [Events Explorer][2] shows the events from your environment over a specified time period. Use tags to filter the events list and focus on a subset of events. Enter `tags:` followed by a tag to see all the events coming from a host, [integration][3], or service with that tag. For example, use `tags:service:coffee-house` to search for the tag `service:coffee-house`.
 
-{{< img src="tagging/using_tags/eventtags.png" alt="Events List and Tags" style="width:80%;">}}
+To search multiple tags inclusively, use parentheses and separate each tag with OR: `tags:(service:coffee-house OR host:coffeehouseprod)`. To search multiple tags exclusively, separate each tag with AND: `tags:(service:coffee-house AND host:coffeehouseprod)`.
 
 ## Dashboards
 
@@ -55,7 +60,7 @@ To create an aggregated group using tags, enter the key part of the tag in the *
 
 {{< img src="tagging/using_tags/dashboardtags.png" alt="Tags in Dashboards avg by text box" style="width:80%;">}}
 
-Tags can also be used to overlay events on the dashboard. This works the same way as in the [Events Stream][2].
+Tags can also be used to overlay events on the dashboard. This works the same way as in the [Events Explorer][2].
 Enter `tags:` followed by the tag. The matching events are overlaid as vertical bars on the graph. The example below uses `tags:service:coffee-house`.
 
 {{< img src="tagging/using_tags/dashboardeventtags.png" alt="Event Overlays in Dashboards" style="width:80%;">}}
@@ -130,9 +135,11 @@ Here are the filter and group by text boxes on the Live Processes page:
 {{< tabs >}}
 {{% tab "Manage Monitors" %}}
 
-To filter monitors by [assigned tags][1], use the search bar or facet checkboxes. The search bar format is `tag:<KEY>:<VALUE>`, for example `tag:service:coffee-house`. To exclude monitors with a specific tag from your search, use `-`, for example `tag:-service:coffee-house`. **Note**: Monitor tags are different and separate from metric tags.
+To filter monitors by [assigned tags][1], use the search bar or facet checkboxes. The search bar format is `tag:<KEY>:<VALUE>`, for example: `tag:service:coffee-house`. To exclude monitors with a specific tag from your search, use `-`, for example: `tag:-service:coffee-house`.
 
 {{< img src="tagging/using_tags/managemonitorstags.png" alt="Manage Monitors Tags" style="width:80%;">}}
+
+Monitor tags are different and separate from metric tags.
 
 [1]: /getting_started/tagging/assigning_tags/
 {{% /tab %}}
@@ -145,11 +152,9 @@ When creating a [monitor][1], use metric tags in the:
 
 * **excluding** text box to remove the corresponding metrics from the monitor scope.
 
-* **avg by** text box to transform the monitor into a multi-alert monitor on each tag value.
+* **avg by** text box to transform the monitor into a multi alert monitor on each tag value.
 
-{{< img src="tagging/using_tags/newmonitortags.png" alt="New Monitor Tags" style="width:80%;">}}
-
-[1]: /monitors/create/types/
+[1]: /monitors/types
 {{% /tab %}}
 {{% tab "Manage Downtime" %}}
 
@@ -232,14 +237,14 @@ Read more about [Creating and managing labels][2] in the Google Cloud documentat
 ## APM
 
 {{< tabs >}}
-{{% tab "Analytics" %}}
+{{% tab "Trace Explorer" %}}
 
-For [Trace Search][1], filter traces with tags using the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`, for example `service:coffee-house`. For advanced search, see the [trace search][2] page.
+In the [Trace Explorer][1], you can filter traces with tags using the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`, for example: `service:coffee-house`. For advanced search, see [Query Syntax][2].
 
-{{< img src="tagging/using_tags/tracesearchtags.png" alt="Trace Search Tags" style="width:80%;">}}
+{{< img src="tagging/using_tags/trace_explorer.png" alt="Trace Explorer Tags" style="width:80%;">}}
 
-[1]: /tracing/app_analytics/search/
-[2]: /tracing/app_analytics/search/#search-bar
+[1]: /tracing/trace_explorer/search/
+[2]: /tracing/trace_explorer/query_syntax/
 {{% /tab %}}
 {{% tab "Service Map" %}}
 
@@ -268,7 +273,7 @@ To exclude tags, use `</>` to edit the text then add the tag in the form `!<KEY>
 
 ## Logs
 
-For Logs [Search][10], [Analytics][11], [Patterns][12], and [Live Tail][13] filter logs with tags using the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`, for example `service:coffee-house`. For advanced search, see the [log search][10] page.
+For Logs [Search][10], [Analytics][11], [Patterns][12], and [Live Tail][13], filter logs with tags using the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`, for example: `service:coffee-house`. For advanced search, see [Search Logs][10].
 
 {{< tabs >}}
 {{% tab "Search" %}}
@@ -278,7 +283,7 @@ For Logs [Search][10], [Analytics][11], [Patterns][12], and [Live Tail][13] filt
 {{% /tab %}}
 {{% tab "Analytics" %}}
 
-{{< img src="tagging/using_tags/loganalyticstags.png" alt="Log Analytics Tabs" style="width:80%;">}}
+{{< img src="tagging/using_tags/loganalyticstags.png" alt="Log Analytics Tags" style="width:80%;">}}
 
 {{% /tab %}}
 {{% tab "Patterns" %}}
@@ -297,15 +302,54 @@ Additionally, tags are used to filter a logs [Pipeline][14]. In the example belo
 
 {{< img src="tagging/using_tags/logpipelinetags.png" alt="Pipeline Tags" style="width:80%;">}}
 
+## RUM & Session Replay
+
+The [RUM Explorer][15] visualizes events from your environment over a specified time period.
+
+To filter RUM event data by tags, use the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`, for example: `service:shopist`. For advanced search, see [Search RUM Events][16].
+
+{{< img src="tagging/using_tags/rumtags.png" alt="RUM Tags" style="width:80%;">}}
+
+## Synthetics
+
+{{< tabs >}}
+{{% tab "Synthetic Tests" %}}
+
+The [Synthetic Tests][1] page lists your Synthetic tests.
+
+To filter tests by tags, use the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`. For example: `tag:mini-website`. For advanced search, see [Search and Manage Synthetic Tests][2].
+
+{{< img src="tagging/using_tags/syntheticstags.png" alt="Synthetics Tags" style="width:80%;">}}
+
+
+[1]: https://app.datadoghq.com/synthetics/tests
+[2]: /synthetics/search/
+{{% /tab %}}
+{{% tab "Explorer" %}}
+
+The [Synthetic Monitoring & Continuous Testing Explorer][1] displays your test runs and batches of runs in a [CI pipeline][2].
+
+To filter test runs by tags, use the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`. For example: `@ci.provider.name:github`. For advanced search, see [Search Test Batches][3].
+
+{{< img src="tagging/using_tags/syntheticscitags.png" alt="Synthetics and CI Tags" style="width:80%;">}}
+
+
+[1]: https://app.datadoghq.com/synthetics/explorer/
+[2]: /continuous_testing/cicd_integrations
+[3]: /continuous_testing/explorer/search/
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Service level objectives
 
 {{< tabs >}}
 {{% tab "Manage SLOs" %}}
 
-To filter SLOs by [assigned tags][1], use the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`, for example `journey:add_item`. To exclude SLOs with a specific tag from your search, use `-`, for example `-journey:add_item`. **Note**: SLO tags are different and separate from metric or monitor tags used in the underlying metrics or monitors of an SLO.
+To filter SLOs by [assigned tags][1], use the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`, for example: `journey:add_item`. To exclude SLOs with a specific tag from your search, use `-`, for example: `-journey:add_item`.
 
 {{< img src="tagging/using_tags/manage_slo_tags.png" alt="SLO Tags" style="width:80%;">}}
+
+SLO tags are different and separate from metric or monitor tags used in the underlying metrics or monitors of an SLO.
 
 [1]: /getting_started/tagging/assigning_tags/?tab=servicelevelobjectives#ui
 {{% /tab %}}
@@ -334,29 +378,31 @@ When creating a [monitor-based SLO][1] using a single [grouped monitor][2], use 
 
 ## Developers
 
-Tags can be used in various ways with the [API][15]. See the list below for links to those sections:
+Tags can be used in various ways with the [API][17].
 
-* [Schedule monitor downtime][16]
-* [Query the event stream][17]
-* [Search hosts][18]
-* Integrations for [AWS][19] and [Google Cloud][20]
-* [Querying timeseries points][21]
-* [Get all monitor details][22]
-* [Mute a monitor][23]
-* [Monitors search][22]
-* [Monitors group search][22]
-* [Create a Screenboard][24]
-* [Create a Timeboard][24]
-* [Create a SLO][25]
-* [Get a SLO's details][26]
-* [Update a SLO][27]
+See this list for links to respective sections:
+
+* [Schedule monitor downtime][18]
+* [Query the event explorer][19]
+* [Search hosts][20]
+* Integrations for [AWS][21] and [Google Cloud][22]
+* [Querying timeseries points][23]
+* [Get all monitor details][24]
+* [Mute a monitor][25]
+* [Monitors search][24]
+* [Monitors group search][24]
+* [Create a Screenboard][26]
+* [Create a Timeboard][26]
+* [Create a SLO][27]
+* [Get a SLO's details][28]
+* [Update a SLO][29]
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /getting_started/tagging/assigning_tags/
-[2]: /events/
+[2]: /events/explorer
 [3]: /integrations/
 [4]: /infrastructure/hostmap/
 [5]: /infrastructure/
@@ -369,16 +415,18 @@ Tags can be used in various ways with the [API][15]. See the list below for link
 [12]: /logs/explorer/patterns/
 [13]: /logs/live_tail/
 [14]: /logs/log_configuration/pipelines
-[15]: /api/
-[16]: /api/v1/downtimes/#schedule-a-downtime
-[17]: /api/v1/events/#query-the-event-stream
-[18]: /api/v1/hosts/
-[19]: /api/v1/aws-integration/
-[20]: /api/v1/gcp-integration/
-[21]: /api/v1/metrics/#query-timeseries-points
-[22]: /api/v1/monitors/#get-all-monitor-details
-[23]: /api/v1/monitors/#mute-a-monitor
-[24]: /api/v1/dashboards/#create-a-new-dashboard
-[25]: /api/v1/service-level-objectives/#create-a-slo-object
-[26]: /api/v1/service-level-objectives/#get-a-slos-details
-[27]: /api/v1/service-level-objectives/#update-a-slo
+[15]: /real_user_monitoring/explorer/
+[16]: /real_user_monitoring/explorer/search/
+[17]: /api/
+[18]: /api/v1/downtimes/#schedule-a-downtime
+[19]: /api/v1/events/#query-the-event-stream
+[20]: /api/v1/hosts/
+[21]: /api/v1/aws-integration/
+[22]: /api/v1/gcp-integration/
+[23]: /api/v1/metrics/#query-timeseries-points
+[24]: /api/v1/monitors/#get-all-monitor-details
+[25]: /api/v1/monitors/#mute-a-monitor
+[26]: /api/v1/dashboards/#create-a-new-dashboard
+[27]: /api/v1/service-level-objectives/#create-a-slo-object
+[28]: /api/v1/service-level-objectives/#get-a-slos-details
+[29]: /api/v1/service-level-objectives/#update-a-slo

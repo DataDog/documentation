@@ -72,7 +72,7 @@ $ddpurple: #632ca6;
         min-height: 500px;
 
         @include media-breakpoint-up(md) {
-            height: 550px;
+            height: 600px;
         }
 
         @include media-breakpoint-up(lg) {
@@ -80,7 +80,7 @@ $ddpurple: #632ca6;
         }
 
         @include media-breakpoint-up(xl) {
-            height: 300px;
+            height: 600px;
         }
     }
 
@@ -106,7 +106,7 @@ $ddpurple: #632ca6;
     }
 
     .chroma {
-        max-height: 300px;
+        max-height: 350px;
         overflow-wrap: break-word;
         white-space: inherit;
     }
@@ -227,4 +227,33 @@ $ddpurple: #632ca6;
             padding-bottom: 24px;
         }
     }
+
+    #accordion .btn,
+    .example-accordion .btn,
+    .code-snippet-wrapper button:disabled,
+    .code-snippet-wrapper button[disabled] {
+      font-weight: bold;
+      color: #632ca6;
+      width: 100%;
+      justify-content: space-between;
+      display: flex;
+      text-align: left;
+      gap: 35px;
+    }
+    #accordion .btn.collapsed,
+    .example-accordion .btn.collapsed {
+      color: #666;
+      & i {
+        transform: rotate(180deg);
+      }
+    }
+    #accordion pre,
+    .example-accordion pre {
+      border-bottom: 3px solid rgba(119,0,255,.3);
+    }
+    .code-snippet-wrapper button:disabled,
+    .code-snippet-wrapper button[disabled], {
+      opacity:1;
+    }
+
 }

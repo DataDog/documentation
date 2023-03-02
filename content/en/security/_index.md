@@ -1,75 +1,91 @@
 ---
-title: Categories of Data
+title: Datadog Security
 kind: documentation
+aliases:
+  - compliance_monitoring
+  - cloud_siem
+  - security_platform
 further_reading:
-- link: "/security/tracing/"
-  tag: "Documentation"
-  text: "APM Security"
-- link: "/security/logs/"
-  tag: "Documentation"
-  text: "Logs Security"
-- link: "/security/agent/"
-  tag: "Documentation"
-  text: "Agent Security"
-- link: "/security/synthetics/"
-  tag: "Documentation"
-  text: "Synthetic Monitoring Security"
-- link: "/security/other/"
-  tag: "Documentation"
-  text: "Additional Security Considerations"
+  - link: "https://app.datadoghq.com/release-notes?category=Security%20%26%20Compliance"
+    tag: "Release Notes"
+    text: "Check out the latest Datadog Security releases! (App login required)."
+  - link: "/getting_started/cloud_siem"
+    tag: "Documentation"
+    text: "Begin detecting threats with Cloud SIEM"
+  - link: "/security/cspm/getting_started"
+    tag: "Documentation"
+    text: "Start tracking misconfigurations with Cloud Security Posture Management"
+  - link: "/security/cloud_workload_security/getting_started"
+    tag: "Documentation"
+    text: "Uncover kernel-level threats with Cloud Workload Security"
+  - link: "https://securitylabs.datadoghq.com/"
+    tag: "Security Labs"
+    text: "Read about security-related topics on Datadog's Security Labs blog"
+  - link: "https://www.datadoghq.com/blog/cyber-attack-simulation-with-stratus-red-team/"
+    tag: "Blog"
+    text: "Elevate AWS threat detection with Stratus Red Team"
+  - link: "https://www.datadoghq.com/blog/kubernetes-security-best-practices/"
+    tag: "Blog"
+    text: "Best practices for securing Kubernetes applications"
+  - link: "https://www.datadoghq.com/blog/securing-cloud-native-infrastructure-network-perimeter/"
+    tag: "Blog"
+    text: "Best practices for network perimeter security in cloud-native environments"
+  - link: "https://www.datadoghq.com/blog/securing-data-in-cloud-native-infrastructure/"
+    tag: "Blog"
+    text: "Best practices for data security in cloud-native infrastructure"
 ---
 
-<div class="alert alert-info">This page is about the security of Datadog; if you're looking for the Cloud SIEM product, see the <a href="/security_platform/cloud_siem" target="_blank">Cloud SIEM section</a>.</div>
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">
+Cloud Security Posture Management is not currently available in US1-FED.
+</div>
+{{< /site-region >}}
 
-Datadog allows customers to submit data in multiple ways, including from the [Agent][1], the [public API][2], and [integrations][3]. This article describes the main categories of data which might be submitted by customers to Datadog as part of the intended use of its product, and highlights scenarios where submitted data may contain personal data. Read the [security page][4] and [privacy policy][5] for more information.
+## Overview
 
-## Metadata
+Bring speed and scale to your production security operations. Datadog Security delivers real-time threat detection, and continuous configuration audits across applications, hosts, containers, and cloud infrastructure. Coupled with the greater Datadog observability platform, Datadog Security brings unprecedented integration between security and operations aligned to your organizations shared goals.
 
-Metadata consist primarily of [tags][6], which are typically formatted in the `key:value` (for example, `env:prod`) format. Metadata enables customer data such as Infrastructure Metrics, APM, and Logs to be filtered and grouped. Metadata should not contain personal data as part of the intended use of the service.
+Datadog Security includes [Application Security Management](#application-security-management), [Cloud SIEM](#cloud-siem), [Cloud Security Posture Management (CSPM)](#cloud-security-posture-management), and [Cloud Workload Security (CWS)](#cloud-workload-security).
 
-## Infrastructure metrics
+{{< vimeo 669874306 >}}
+</br>
 
-Infrastructure Metrics consist of timeseries for given metric names, associated with Metadata, used to populate graphs. Metric names and timeseries should not contain personal data as part of the intended use of the service.
+## Application Security Management
 
-## APM
+[Application Security Management][1] (ASM) provides observability into application-level attacks that aim to exploit code-level vulnerabilities, such as Server-Side-Request-Forgery (SSRF), SQL injection, Log4Shell, and Reflected Cross-Site-Scripting (XSS). ASM leverages [Datadog APM][2], the [Datadog Agent][3], and in-app detection rules to detect threats in your application environment.
 
-APM data consists of four levels of granularity: Services, Resources, Traces, and Spans. See [Getting Started with APM][7] for an explanation about each. Services and Resources should not contain personal data as part of the intended use of the service. If needed, customers should leverage certain Agent features to restrict personal data before transmitting Traces and Spans to Datadog. See the [APM Security][8] page for more information.
+{{< img src="/security/application_security/app-sec-landing-page.png" alt="A security signal panel in Datadog, which displays attack flows and flame graphs" width="75%">}}
 
-## Database monitoring
+## Cloud SIEM
 
-Database Monitoring data consists of metrics and samples collected by the Agent and used to track historical performance of normalized queries. The granularity of this data is defined by its normalized query signature and unique host identifier. Database Monitoring data should not contain personal data. All query parameters are obfuscated and discarded from collected samples before being transmitted to Datadog. 
+[Cloud SIEM][4] (Security Information and Event Management) detects real-time threats to your application and infrastructure, like a targeted attack, an IP communicating with your systems which matches a threat intel list, or an insecure configuration. Cloud SIEM is powered by [Datadog Log Management][5]. With these areas combined, you can [automate remediation of threats detected by Datadog Cloud SIEM][6] to speed up your threat-response workflow.
 
-## Logs
+{{< img src="security/security_monitoring/cloud_siem_homepage.png" alt="The Cloud SIEM home page showing the Security Overview section with widgets for important signals, suspicious actors, impacted resources, threat intel, and signal trends" width="100%">}}
 
-Logs consist of messages collected [by the Agent or by integrations][9], and associated with optional Metadata. Log files are immutable records of computer events about an operating system, application, or user activities, which form an audit trail. These records may be used to assist in detecting security violations, performance problems, and flaws in applications. If needed, customers should leverage certain Agent features to restrict personal data before transmitting Logs to Datadog. See the [Logs Security][10] page for more information.
+## Cloud Security Posture Management
 
-## Processes
+[Cloud Security Posture Management (CSPM)][7] tracks the security hygiene and compliance posture of your production environment, can automate audit evidence collection, and catch misconfigurations that leave your organization vulnerable to attacks. See security posture scores across your infrastructure and trace each score back to the applicable benchmark or framework criteria.
 
-[Processes][11] consist of metrics and data from the `proc` filesystem, which acts as an interface to internal data structures in the kernel. Process data may contain the process command (including its path and arguments), the associated username, the ID of the process and its parent, the process state, and the working directory. Process data may also be associated with optional Metadata. Processes should not contain personal data as part of the intended use of the service. See the [Additional Security Considerations][12] page for more information.
+{{< img src="security/cspm_overview.png" alt="Cloud Security Posture Management scores in Datadog" width="100%">}}
 
-## Monitors and alerts
+## Cloud Workload Security
 
-[Monitors and Alerts][13] are defined by customers to monitor the state of their infrastructure and applications based on the data they submit to Datadog. Monitors and Alerts are associated with optional Metadata. A Monitor might trigger an Alert when certain conditions occur, such as a metric reaching a threshold, in order to track critical changes and notify team members as needed. Monitors should not contain personal data as part of the intended use of the service.
+[Cloud Workload Security (CWS)][8] monitors file and process activity across your environment to detect threats to your infrastructure, like AWS EC2 instances, and workloads, like Kubernetes clusters, in real time at the kernel level. Cloud Workload Security uses the unified Datadog Agent, so if you’re already using Datadog to monitor your environment, there’s no need to provision additional resources.
 
-## Events and comments
+{{< img src="security/cws_overview.png" alt="Cloud Workload Security coverage views in Datadog" width="100%">}}
 
-[Events][14] are aggregated from multiple sources into a consolidated Event stream, including triggered monitors, Events submitted by integrations, Events submitted by the application itself, Comments and annotations from users, and Events and Comments submitted through the API. Events and Comments are associated with optional Metadata. Events and Comments should not contain personal data as part of the intended use of the service.
+To get started with Datadog Security, navigate to the [Setup & Configuration][9] section in the Datadog app, which has detailed information for single or multi-configuration, or follow the getting started sections below to learn more about each area of the platform.
 
-### Further Reading
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/
-[2]: /api/
-[3]: /integrations/
-[4]: https://www.datadoghq.com/security
-[5]: https://www.datadoghq.com/legal/privacy
-[6]: /getting_started/tagging/
-[7]: /tracing/visualization/
-[8]: /security/tracing/
-[9]: /logs/log_collection/
-[10]: /security/logs/
-[11]: /infrastructure/process/
-[12]: /security/other/
-[13]: /monitors/
-[14]: /events/
+[1]: /security/application_security/
+[2]: /tracing/
+[3]: /agent/
+[4]: /security/cloud_siem
+[5]: /logs/
+[6]: https://www.datadoghq.com/blog/automated-vulnerability-remediation-datadog/
+[7]: /security/cspm/
+[8]: /security/cloud_workload_security/
+[9]: https://app.datadoghq.com/security/configuration

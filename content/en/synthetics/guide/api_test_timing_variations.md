@@ -1,5 +1,5 @@
 ---
-title: Understanding API Test Timings and Troubleshooting Variations
+title: Understanding API Test Timings And Troubleshooting Variations
 kind: documentation
 description: Understanding API test timings and troubleshooting their variations
 aliases:

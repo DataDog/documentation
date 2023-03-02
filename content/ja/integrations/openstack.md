@@ -1,54 +1,77 @@
 ---
+app_id: openstack
+app_uuid: 38f1f51e-9f6a-49fc-84d5-358bde9e3782
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
-    OpenStack Controller Overview: assets/dashboards/openstack-controller.json
     openstack: assets/dashboards/openstack_dashboard.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: openstack.nova.hypervisor_load.1
+      metadata_path: metadata.csv
+      prefix: openstack.
+    process_signatures:
+    - stack.sh
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: OpenStack
   logs:
     source: openstack
-  metrics_metadata: metadata.csv
-  monitors: {}
   saved_views:
     openstack_processes: assets/saved_views/openstack_processes.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-  - cloud
-  - log collection
-creates_events: false
-ddtype: check
+- cloud
+- log collection
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/openstack/README.md
-display_name: OpenStack
+- https://github.com/DataDog/integrations-core/blob/master/openstack/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: openstack
-guid: 944452d0-208e-4d1c-8adb-495f517ce2c2
 integration_id: openstack
-integration_title: OpenStack
+integration_title: OpenStack (レガシー)
+integration_version: 1.13.1
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: openstack.
-metric_to_check: openstack.nova.hypervisor_load.1
+manifest_version: 2.0.0
 name: openstack
-process_signatures:
-  - stack.sh
-public_title: Datadog-OpenStack インテグレーション
+oauth: {}
+public_title: OpenStack (レガシー)
 short_description: ハイパーバイザーおよび VM レベルのリソース使用状況と Neutron メトリクスを追跡
-support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::クラウド
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: ハイパーバイザーおよび VM レベルのリソース使用状況と Neutron メトリクスを追跡
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: OpenStack (レガシー)
 ---
-<div class="alert alert-warning">
-<b>重要</b>: このインテグレーションは、OpenStack バージョン 12 以前（非コンテナ化 OpenStack）にのみ適用されます。OpenStack v13 以降（コンテナ化OpenStack）からのメトリクスを収集する場合は、<a href="https://docs.datadoghq.com/integrations/openstack_controller/">OpenStack コントローラーインテグレーション</a>をご利用ください。
-</div>
+
+
 
 ![OpenStack のデフォルトのダッシュボード][1]
 
 ## 概要
+
+**注**: このインテグレーションは、OpenStack v12 以下 (コンテナ化されていないOpenStack) にのみ適用されます。OpenStack v13+ (コンテナ化された OpenStack) からメトリクスを収集する場合は、[OpenStack Controller インテグレーション][2]を使用してください。
 
 OpenStack サービスからメトリクスをリアルタイムに取得して、以下のことができます。
 
@@ -59,7 +82,7 @@ OpenStack サービスからメトリクスをリアルタイムに取得して�
 
 ### インストール
 
-OpenStack メトリクスをキャプチャするには、ハイパーバイザーを実行しているホストに [Agent をインストール][2]します。
+OpenStack メトリクスをキャプチャするには、ハイパーバイザーを実行しているホストに [Agent をインストール][3]します。
 
 ### コンフィギュレーション
 
@@ -122,7 +145,7 @@ openstack role add datadog_monitoring \
 
 #### Agent の構成
 
-1. Datadog Agent が Keystone サーバーに接続するように構成し、監視するプロジェクトを個別に指定します。以下の構成で [Agent の構成ディレクトリ][3]のルートにある `conf.d/` フォルダーの `openstack.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル openstack.d/conf.yaml][4] を参照してください。
+1. Datadog Agent が Keystone サーバーに接続するように構成し、監視するプロジェクトを個別に指定します。以下の構成で [Agent の構成ディレクトリ][4]のルートにある `conf.d/` フォルダーの `openstack.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル openstack.d/conf.yaml][5] を参照してください。
 
    ```yaml
    init_config:
@@ -155,7 +178,7 @@ openstack role add datadog_monitoring \
            id: "<DOMAINE_ID>"
    ```
 
-2. [Agent を再起動します][5]。
+2. [Agent を再起動します][6]。
 
 ##### ログの収集
 
@@ -174,12 +197,12 @@ openstack role add datadog_monitoring \
        source: openstack
    ```
 
-    `path` パラメーターの値を変更し、環境に合わせて構成します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル openstack.d/conf.yaml][4] を参照してください。
+    `path` パラメーターの値を変更し、環境に合わせて構成します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル openstack.d/conf.yaml][5] を参照してください。
 
 
 ### 検証
 
-[Agent の `status` サブコマンドを実行][6]し、Checks セクションで `openstack` を探します。
+[Agent の status サブコマンド][7]を実行し、Checks セクションで `openstack` を探します。
 
 ## 収集データ
 
@@ -197,26 +220,26 @@ OpenStack チェックには、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
 ## その他の参考資料
 
-Nova OpenStack コンピューティングモジュールを Datadog と統合する方法 (または理由) について理解するには、Datadog の[一連のブログ記事][10]を参照してください。
+お役に立つドキュメント、リンクや記事:
 
-Datadog の以下のブログ記事も参照してください。
-
-- [開発/テスト用の 2 つのコマンドを使用した OpenStack のインストール][11]
-- [OpenStack: ホストアグリゲート、フレーバー、アベイラビリティーゾーン][12]
+- [OpenStack Nova の監視][11]
+- [開発/テスト用の 2 つのコマンドを使用した OpenStack のインストール][12]
+- [OpenStack: ホストアグリゲート、フレーバー、アベイラビリティーゾーン][13]
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/openstack/images/openstack_dashboard.png
-[2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[4]: https://github.com/DataDog/integrations-core/blob/master/openstack/datadog_checks/openstack/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[7]: https://github.com/DataDog/integrations-core/blob/master/openstack/metadata.csv
-[8]: https://github.com/DataDog/integrations-core/blob/master/openstack/assets/service_checks.json
-[9]: https://docs.datadoghq.com/ja/help/
-[10]: https://www.datadoghq.com/blog/openstack-monitoring-nova
-[11]: https://www.datadoghq.com/blog/install-openstack-in-two-commands
-[12]: https://www.datadoghq.com/blog/openstack-host-aggregates-flavors-availability-zones
+[2]: https://docs.datadoghq.com/ja/integrations/openstack_controller
+[3]: https://app.datadoghq.com/account/settings#agent
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[5]: https://github.com/DataDog/integrations-core/blob/master/openstack/datadog_checks/openstack/data/conf.yaml.example
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://github.com/DataDog/integrations-core/blob/master/openstack/metadata.csv
+[9]: https://github.com/DataDog/integrations-core/blob/master/openstack/assets/service_checks.json
+[10]: https://docs.datadoghq.com/ja/help/
+[11]: https://www.datadoghq.com/blog/openstack-monitoring-nova
+[12]: https://www.datadoghq.com/blog/install-openstack-in-two-commands
+[13]: https://www.datadoghq.com/blog/openstack-host-aggregates-flavors-availability-zones

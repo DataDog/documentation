@@ -8,27 +8,25 @@ aliases:
     - /tracing/getting_further/trace_sampling_and_storage
     - /tracing/guide/trace_sampling_and_storage/
 further_reading:
-- link: "/tracing/setup/"
+- link: "/tracing/trace_collection/"
   tag: "Documentation"
   text: "Learn how to setup APM tracing with your application"
-- link: "/tracing/visualization/services_list/"
+- link: "/tracing/services/services_list/"
   tag: "Documentation"
   text: "Discover the list of services reporting to Datadog"
-- link: "/tracing/visualization/service/"
+- link: "/tracing/services/service_page/"
   tag: "Documentation"
   text: "Learn more about services in Datadog"
-- link: "/tracing/visualization/resource/"
+- link: "/tracing/services/resource_page/"
   tag: "Documentation"
   text: "Dive into your resource performance and traces"
-- link: "/tracing/visualization/trace/"
+- link: "/tracing/trace_explorer/trace_view/"
   tag: "Documentation"
   text: "Understand how to read a Datadog Trace"
 ---
 
 <div class="alert alert-danger">
-On October 20, 2020, App Analytics was replaced by Tracing without Limits. This is a deprecated page with configuration information relevant to legacy App Analytics, useful for troubleshooting or modifying some old setups. Now, instead, use Tracing without Limits™ to have full control over your <a href="https://docs.datadoghq.com/tracing/trace_retention_and_ingestion">data ingestion and trace retention</a> with no sampling.
-<br>
-Migrate to <a href="https://docs.datadoghq.com/tracing/trace_retention_and_ingestion"> Trace Retention and Ingestion </a> to use the new functionality.
+This page describes deprecated features with configuration information relevant to legacy App Analytics, useful for troubleshooting or modifying some old setups. To have full control over your traces, use <a href="/tracing/trace_ingestion">ingestion controls</a> and <a href="/tracing/trace_retention">retention filters</a> instead.
 </div>
 
 ## Trace sampling
@@ -174,21 +172,20 @@ def handler():
 Manually keep a trace:
 
 ```ruby
-Datadog.tracer.trace(name, options) do |span|
+Datadog::Tracing.trace(name, options) do |span|
+  Datadog::Tracing.keep! # Affects the active span
 
-  # Always Keep the Trace
-  span.set_tag(Datadog::Ext::ManualTracing::TAG_KEEP, true)
-  # method impl follows
+  # Method implementation follows
 end
 ```
 
 Manually drop a trace:
 
 ```ruby
-Datadog.tracer.trace(name, options) do |span|
-  # Always Drop the Trace
-  span.set_tag(Datadog::Ext::ManualTracing::TAG_DROP, true)
-  # method impl follows
+Datadog::Tracing.trace(name, options) do |span|
+  Datadog::Tracing.reject! # Affects the active span
+
+  # Method implementation follows
 end
 ```
 
@@ -388,7 +385,7 @@ Individual traces are stored for 15 days. This means that all **sampled** traces
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/visualization/#trace
+[1]: /tracing/glossary/#trace
 [2]: /tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm/
 [3]: /tracing/app_analytics/#span-filtering
-[4]: /security/tracing/#resource-filtering
+[4]: /tracing/configure_data_security/#exclude-resources-from-being-collected

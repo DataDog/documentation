@@ -1,39 +1,63 @@
 ---
+app_id: auth0
+app_uuid: 0c91d12e-f01e-47d9-8a07-4dba1cde4b67
 assets:
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: auth0.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Auth0
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Auth0
+  sales_email: help@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-  - ログの収集
-  - セキュリティ
-creates_events: false
-ddtype: crawler
+- ログの収集
+- セキュリティ
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/auth0/README.md
-display_name: Auth0
+- https://github.com/DataDog/integrations-extras/blob/master/auth0/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: auth0
-guid: 9308a35c-219e-4d24-ac11-af2511e5041a
 integration_id: auth0
 integration_title: Auth0
 integration_version: ''
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: auth0.
-metric_to_check: ''
+manifest_version: 2.0.0
 name: auth0
-public_title: Datadog-Auth0 インテグレーション
+oauth: {}
+public_title: Auth0
 short_description: Auth0 イベントを表示し、分析します。
-support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Log Collection
+  - Category::Security
+  configuration: README.md#Setup
+  description: Auth0 イベントを表示し、分析します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Auth0
 ---
+
+
+
 ## 概要
 
 Auth0 は、開発者や企業がアプリケーションを安全に保つために必要なビルディングブロックを提供する、開発チーム向けの認証プラットフォームです。
@@ -71,7 +95,7 @@ ID 情報を使って、セキュリティやパフォーマンスのインシ�
     | 設定          | 説明                                                |
     | ---------------- | ---------------------------------------------------------- |
     | `API Key`        | [Datadog API キー][2]を入力します。                           |
-    | `Region`         | Datadog EU サイト（app.datadoghq.eu）の場合は `EU` を、それ以外の場合は `GLOBAL` を入力します。   |
+    | `Region`           | ご使用の [Datadog サイト][3]。たとえば、app.datadoghq.eu の場合は `EU`、app.datadoghq.com の場合は `US1`、us3.datadoghq.com の場合は `US3`。 |
 
 
 6. Save をクリックします。
@@ -88,7 +112,8 @@ ID 情報を使って、セキュリティやパフォーマンスのインシ�
 ## 収集データ
 
 ### ログの収集
-Auth0 のログが収集され、Datadog に送信されます。送信されるログのタイプについては、[こちら][3]の説明を参照してください。
+
+Auth0 のログが収集され、Datadog に送信されます。送信されるログのタイプについては、[ログのイベントタイプコード][4]を参照してください。
 
 ### メトリクス
 
@@ -104,11 +129,12 @@ auth0 には、イベントは含まれません。
 
 ## トラブルシューティング
 
-ヘルプが必要な場合は、[Datadog サポート][4]までお問い合せください。
-このインテグレーションの詳細は、Datadog の[ブログ記事][5]でご確認いただけます。
+ヘルプが必要な場合は、[Datadog サポート][5]までお問い合せください。
+このインテグレーションの詳細は、Datadog の[ブログ記事][6]でご確認いただけます。
 
 [1]: https://manage.auth0.com
 [2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: https://auth0.com/docs/logs/references/log-event-type-codes
-[4]: https://docs.datadoghq.com/ja/help/
-[5]: https://www.datadoghq.com/blog/monitor-auth0-with-datadog/
+[3]: https://docs.datadoghq.com/ja/getting_started/site/
+[4]: https://auth0.com/docs/logs/references/log-event-type-codes
+[5]: https://docs.datadoghq.com/ja/help/
+[6]: https://www.datadoghq.com/blog/monitor-auth0-with-datadog/

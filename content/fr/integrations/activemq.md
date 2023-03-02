@@ -15,39 +15,44 @@ assets:
     activemq_processes: assets/saved_views/activemq_processes.json
   service_checks: assets/service_checks.json
 categories:
-  - log collection
-  - processing
-  - messaging
-  - autodiscovery
+- log collection
+- processing
+- messaging
+- autodiscovery
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/activemq/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/activemq/README.md
 display_name: ActiveMQ
 draft: false
 git_integration_title: activemq
 guid: 496df16d-5ad0-438c-aa2a-b8ba8ee3ae05
 integration_id: activemq
 integration_title: ActiveMQ
+integration_version: 2.3.1
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: activemq.
 metric_to_check:
-  - activemq.queue.size
-  - activemq.artemis.queue.message_count
+- activemq.queue.size
+- activemq.artemis.queue.message_count
 name: activemq
 process_signatures:
-  - activemq
+- activemq
 public_title: Intégration Datadog/ActiveMQ
-short_description: 'Recueillez des métriques sur les agents, les files d''attente, les producteurs, les consommateurs, et plus encore.'
+short_description: Recueillez des métriques sur les agents, les files d'attente, les
+  producteurs, les consommateurs, et plus encore.
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 Le check ActiveMQ recueille des métriques sur les agents, les files d'attente, les producteurs, les consommateurs, et plus encore.
@@ -62,7 +67,7 @@ Le check ActiveMQ recueille des métriques sur les agents, les files d'attente, 
 
 Le check ActiveMQ de l'Agent est inclus avec le package de l'[Agent Datadog][3] : vous n'avez donc rien d'autre à installer sur vos nœuds ActiveMQ.
 
-Le check recueille des métriques via JMX, une JVM est donc nécessaire sur chaque nœud pour que l'Agent puisse faire un fork de [jmxfetch][4]. Nous vous conseillons d'utiliser une JVM fournie par Oracle.
+Le check recueille des métriques par l'intermédiaire de JMX. Une JVM est donc nécessaire sur chaque nœud pour que l'Agent puisse faire un fork de [jmxfetch][4]. Datadog recommande d'utiliser une JVM fournie par Oracle.
 
 ### Configuration
 
@@ -141,14 +146,14 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 _Disponible à partir des versions > 6.0 de l'Agent_
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][2].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs Kubernetes][2].
 
 | Paramètre      | Valeur                                                  |
 | -------------- | ------------------------------------------------------ |
 | `<CONFIG_LOG>` | `{"source": "activemq", "service": "<VOTRE_NOM_APPLICATION>"}` |
 
 [1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/fr/agent/kubernetes/log/?tab=containerinstallation#setup
+[2]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -160,16 +165,15 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 
 ### Métriques
 {{< get-metrics-from-git "activemq" >}}
-  Les noms des métriques associées à ActiveMQ Artemis comportent l'indicateur `artemis`. Toutes les autres métriques transmises correspondent à la version classique d'ActiveMQ.
+ Les noms des métriques associées à ActiveMQ Artemis comportent l'indicateur `artemis`. Toutes les autres métriques transmises correspondent à la version classique d'ActiveMQ.
 
 ### Événements
 
 Le check ActiveMQ n'inclut aucun événement.
 
 ### Checks de service
+{{< get-service-checks-from-git "activemq" >}}
 
-**activemq.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'instance ActiveMQ qu'il surveille et à y recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 
@@ -200,9 +204,9 @@ Recueillez des métriques d'ActiveMQ XML en temps réel pour :
 
 Le check ActiveMQ XML est inclus avec le package de l'[Agent Datadog][3] : vous n'avez donc rien d'autre à installer sur vos serveurs.
 
-### Configuration
+### Procédure à suivre
 
-Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour la configuration dans un environnement conteneurisé.
 
 <!-- xxx tabs xxx -->
 <!-- xxx tab "Host" xxx -->
@@ -288,7 +292,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][6].
 [8]: https://www.datadoghq.com/blog/monitor-activemq-metrics-performance
 [9]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [10]: https://github.com/DataDog/integrations-core/blob/master/activemq_xml/datadog_checks/activemq_xml/data/conf.yaml.example
-[11]: https://docs.datadoghq.com/fr/metrics/custom_metrics/
+[11]: https://docs.datadoghq.com/fr/developers/metrics/custom_metrics/
 [12]: https://docs.datadoghq.com/fr/account_management/billing/custom_metrics/
 [13]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [14]: https://docs.datadoghq.com/fr/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent

@@ -84,7 +84,7 @@ To remedy, specify the correct partition for your topic. This correlates to this
 
 ### Partition context limitation
 
-The number of partition contexts collection is limited to 200. If you require more contexts, contact [Datadog support][11].
+The number of partition contexts collection is limited to 500. If you require more contexts, contact [Datadog support][11].
 
 [1]: https://kafka.apache.org
 [2]: https://sookocheff.com/post/kafka/kafka-in-a-nutshell

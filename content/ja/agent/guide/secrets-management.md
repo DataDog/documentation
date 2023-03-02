@@ -1,14 +1,17 @@
 ---
-title: 機密情報管理
-kind: documentation
+aliases:
+- /ja/agent/faq/kubernetes-secrets
 further_reading:
-  - link: /agent/autodiscovery/
-    tag: ドキュメント
-    text: オートディスカバリー
+- link: /agent/autodiscovery/
+  tag: ドキュメント
+  text: オートディスカバリー
+kind: documentation
+title: 機密情報管理
 ---
+
 Agent の構成ファイルにプレーンテキストでシークレットを保存したくない場合は、シークレット管理パッケージを使用できます。
 
-Agent は、`secrets` パッケージを利用してユーザー指定の実行可能ファイルを呼び出し、シークレットの取得と復号化を処理できます。その後、シークレットは Agent によってメモリにロードされます。このアプローチにより、ユーザーはシークレット管理バックエンド（HashiCorp Vault や AWS Secrets Manager など）に依存し、好みの認証方法を選択してイニシャルトラストを確立できます。
+Agent は、`secrets` パッケージを利用してユーザー指定の実行可能ファイルを呼び出し、シークレットの取得と復号化を処理できます。その後、シークレットは Agent によってメモリにロードされます。このアプローチにより、ユーザーはシークレット管理バックエンド（HashiCorp Vault や AWS Secrets Manager など）に依存し、好みの認証方法を選択してイニシャルトラストを確立できます。Agent のコンテナデプロイには、この実行ファイルに使用する [Helper Scripts](#helper-scripts-for-autodiscovery) があらかじめパッケージされているため、便利です。
 
 バージョン 6.12 以降、シークレット管理パッケージは、メトリクス、APM、プロセスモニタリングのために Linux で、メトリクスと APM のために Windows で一般に利用可能です。
 
@@ -69,7 +72,7 @@ instances:
 
 シークレットを取得するには、シークレット管理バックエンドに対してシークレットを認証してフェッチできる実行可能ファイルを提供する必要があります。
 
-Agent はメモリ内にシークレットを内部的にキャッシュして、呼び出しの回数を減らします（たとえば、コンテナ化された環境で役立ちます）。Agent は、シークレットがまだメモリにロードされていないシークレットハンドルを少なくとも 1 つ含むチェック構成ファイルにアクセスするたびに実行可能ファイルを呼び出します。特に、既にメモリにロードされているシークレットは、実行可能ファイルへの追加の呼び出しをトリガーしません。具体的には、Agent は起動時にシークレットハンドルを含むファイルごとにユーザー提供の実行可能ファイルを 1 回呼び出し、Agent またはインスタンスが再起動された場合、または Agent がシークレットハンドルを含む新しいチェックを動的にロードした場合（オートディスカバリー経由など）、後で実行可能ファイルに対する追加の呼び出しを行う可能性があるということです。
+Agent はメモリ内にシークレットを内部的にキャッシュして、呼び出しの回数を減らします（たとえば、コンテナ化された環境で役立ちます）。Agent は、シークレットがまだメモリにロードされていないシークレットハンドルを少なくとも 1 つ含むチェック構成ファイルにアクセスするたびに実行可能ファイルを呼び出します。特に、既にメモリにロードされているシークレットは、実行可能ファイルへの追加の呼び出しをトリガーしません。具体的には、Agent は起動時にシークレットハンドルを含むファイルごとにユーザー提供の実行可能ファイルを 1 回呼び出し、Agent またはインスタンスが再起動された場合、または Agent がシークレットハンドルを含む新しいチェックを動的にロードした場合（オートディスカバリーからなど）、後で実行可能ファイルに対する追加の呼び出しを行う可能性があるということです。
 
 APM とプロセスモニタリングは独自のプロセス/サービスで実行され、プロセスはメモリを共有しないため、それぞれがシークレットをロード/復号化できる必要があります。したがって、`datadog.yaml` にシークレットが含まれている場合、各プロセスが実行可能ファイルを 1 回呼び出すことがあります。たとえば、APM とプロセスモニタリングを有効にして `datadog.yaml` ファイルに `api_key` をシークレットとして格納すると、シークレットバックエンドへの呼び出しが 3 回行われる可能性があります。
 
@@ -82,12 +85,12 @@ APM とプロセスモニタリングは独自のプロセス/サービスで実
 * ユーザーが Agent を再構築せずに任意のシークレット管理バックエンドを自由かつ柔軟に使用できる。
 * 各ユーザーが Agent から自分のシークレット管理バックエンドまでのイニシャルトラスト問題を解決できる。これは、各ユーザーの好みの認証方法を活用し、継続的なインテグレーションワークフローに適合する形で発生します。
 
-#### 構成
+#### コンフィギュレーション
 
 `datadog.yaml` で次の変数を設定します。
 
-```text
-secret_backend_command: <実行可能ファイルのパス>
+```yaml
+secret_backend_command: <EXECUTABLE_PATH>
 ```
 
 #### Agent のセキュリティ要件
@@ -125,7 +128,7 @@ Windows では、`secret_backend_command` として設定される実行可能�
 
 実行可能ファイルの終了コードが `0` 以外の場合、現在復号化されているインテグレーション構成はエラーと見なされ、ドロップされます。
 
-**入力**:
+##### API 入力例
 
 実行可能ファイルは、取得するシークレットのリストを含む JSON ペイロードを標準入力から受信します。
 
@@ -136,7 +139,7 @@ Windows では、`secret_backend_command` として設定される実行可能�
 * `version`: フォーマットバージョン（現在は 1.0）を含む文字列です。
 * `secrets`: 文字列のリストです。各文字列は、取得するシークレットに対応する構成からのハンドルです。
 
-**出力**:
+##### API 出力例
 
 実行可能ファイルは、取得したシークレットを含む JSON ペイロードを標準出力に出力することが期待されます。
 
@@ -152,7 +155,7 @@ Windows では、`secret_backend_command` として設定される実行可能�
 * `value`: 文字列。チェック構成で使用される実際のシークレット値（エラーの場合は null にできます）。
 * `error`: 文字列。必要に応じて、エラーメッセージ。エラーが null 以外の場合、このハンドルを使用するインテグレーション構成はエラーと見なされ、ドロップされます。
 
-**例**:
+##### 実行ファイル例
 
 以下は、すべてのシークレットの先頭に `decrypted_` を付けたダミーの Go プログラムです。
 
@@ -215,55 +218,137 @@ instances:
     password: decrypted_db_prod_password
 ```
 
-### オートディスカバリーのヘルパースクリプト
+## オートディスカバリーのヘルパースクリプト
 
 多くの Datadog インテグレーションは、メトリクスを取得するために資格情報を必要とします。[オートディスカバリーテンプレート][1]にこれらの資格情報を直接入力しないように、機密情報管理を使用し、資格情報をテンプレートと切り離すことができます。
 
-[スクリプト][2]は Docker イメージ（`/readsecret.py`）として入手できます。
+バージョン 7.32.0 からは、Agent のコンテナイメージに `/readsecret_multiple_providers.sh` という[ヘルパースクリプト][2]が用意され、Kubernetes Secrets に加えて、ファイルからシークレットを取得するために使用することができるようになりました。以前のバージョンで提供されていた 2 つのスクリプト (`readsecret.sh` と `readsecret.py`) もサポートされていますが、ファイルからしか読み込むことができません。
 
-#### スクリプトの使用
+### 複数のシークレットプロバイダーから読み込むためのスクリプト
 
-スクリプトにはフォルダを引数として渡す必要があります。シークレットのハンドルは、このフォルダに対する相対的なファイル名として識別されます。機密情報の漏えいを避けるために、スクリプトはルートフォルダ以外に置かれたすべてのファイルへのアクセスを（シンボリックリンクのターゲットを含む）拒否します。
+#### 複数プロバイダーの利用
+スクリプト `readsecret_multiple_providers.sh` は、Kubernetes Secrets と同様に、両方のファイルから読み取るために使用できます。これらの Secret は `ENC[provider@some/path]` という形式である必要があります。例:
 
-このスクリプトは [OpenShift の制限付き SCC オペレーション][3]との互換性を持たないため、Agent を `root` ユーザーとして実行する必要があります。
+| プロバイダー               | 形式                                           |
+|------------------------|--------------------------------------------------|
+| ファイルからの読み込み        | `ENC[file@/path/to/file]`                        |
+| Kubernetes Secrets     | `ENC[k8s_secret@some_namespace/some_name/a_key]` |
 
-バージョン 6.10.0 から、構成値に含まれる `ENC[]` トークンを環境変数として渡せるようになりました。以前のバージョンでは、`datadog.yaml` やオートディスカバリーテンプレートに含まれる `ENC[]` トークン以外はサポートされませんでした。
+{{< tabs >}}
+{{% tab "Helm" %}}
 
-#### セットアップの例
+この実行ファイルを Helm チャートで使用するには、次のように設定します。
+```yaml
+datadog:
+  [...]
+  secretBackend:
+    command: "/readsecret_multiple_providers.sh"
+```
+
+{{% /tab %}}
+{{% tab "DaemonSet" %}}
+
+この実行ファイルを使用するには、環境変数 `DD_SECRET_BACKEND_COMMAND` を以下のように設定します。
+```
+DD_SECRET_BACKEND_COMMAND=/readsecret_multiple_providers.sh
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+#### ファイルからの読み込み例
+Agent は、指定されたファイルを指定されたパスから相対的に読み込むことができます。このファイルは、[Kubernetes Secrets](#kubernetes-secrets)、[Docker Swarm Secrets](#docker-swarm-secrets)、または他のカスタムメソッドから持ってくることができます。
+
+Agent コンテナにファイル `/etc/secret-volume/password` があり、その内容が平文のパスワードである場合、`ENC[file@/etc/secret-volume/password]` という表記でこれを参照することができます。
+
+##### Kubernetes Secrets
+Kubernetes は、ポッド内の [Secret をファイルとして公開する][3]ことをサポートしています。例を考えてみましょう。`Secret: test-secret` という Secret は、`db_prod_password: example` というデータを持っています。この Secret は、以下のような構成で Agent コンテナにマウントされています。
+```yaml
+  containers:
+    - name: agent
+      #(...)
+      volumeMounts:
+        - name: secret-volume
+          mountPath: /etc/secret-volume
+  #(...)
+  volumes:
+    - name: secret-volume
+      secret:
+        secretName: test-secret
+```
+この例では、Agent コンテナに `/etc/secret-volume/db_prod_password` というファイルがあり、`example` というコンテンツが含まれています。これは構成内で `ENC[file@/etc/secret-volume/db_prod_password]` を使って参照されます。
+
+**注:**
+- Secret はマウントされるポッドと同じネームスペースに存在する必要があります。
+- このスクリプトは、機密性の高い `/var/run/secrets/kubernetes.io/serviceaccount/token` を含むすべてのサブフォルダにアクセスすることが可能です。そのため、Datadog では `/var/run/secrets` の代わりに専用フォルダを使用することを推奨しています。
 
 ##### Docker Swarm のシークレット
+[Docker swarm シークレット][4]は `/run/secrets` フォルダにマウントされます。例えば、Docker シークレットの `db_prod_passsword` は Agent コンテナ内の `/run/secrets/db_prod_password` に格納されます。これを構成から参照するには、`ENC[file@/run/secrets/db_prod_password]` とします。
 
-[Docker シークレット][4]は `/run/secrets` フォルダ内でマウントされます。以下の環境変数を Agent コンテナに渡してください。
+#### Kubernetes Secret の読み込み例
+以下の設定により、Agent は自身のネームスペースと*他の*ネームスペースの両方で Kubernetes Secrets を直接読み取ることができます。これを行うには、Agent  の `ServiceAccount` に適切な `Roles` と `RoleBindings` の権限が付与されている必要があることに注意してください。
+
+`Secret: database-secret` が `Namespace: database` に存在し、データ `password: example` を含む場合、これは構成内で `ENC[k8s_secret@database/database-secret/password]` と共に参照されます。この設定により、Agent は Kubernetes から直接この Secret を取得するため、Agent と異なるネームスペースに存在する Secret を参照する際に便利な場合があります。
+
+これには、Agent のサービスアカウントに手動で付与される追加の権限が必要です。たとえば、次のような  RBAC  ポリシーを考えてみましょう。
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: datadog-secret-reader
+  namespace: database
+rules:
+  - apiGroups: [""]
+    resources: ["secrets"]
+    resourceNames: ["database-secret"]
+    verbs: ["get", "watch", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: datadog-read-secrets
+  namespace: example
+subjects:
+  - kind: ServiceAccount
+    name: datadog-agent
+    apiGroup: ""
+    namespace: default
+roleRef:
+  kind: Role
+  name: datadog-secret-reader
+  apiGroup: ""
+```
+この `Role` は `Namespace: database` 内の `Secret: database-secret` にアクセスできるようにします。`RoleBinding` はこの権限を `Namespace: default` 内の `ServiceAccount: datadog-agent` に紐付けます。これは、クラスターにデプロイされたリソースに対して、手動で追加する必要があります。
+
+これらの権限に加えて、Kubernetes Secrets プロバイダーを使用する場合は、スクリプトで複数のプロバイダーから読み込めるようにする必要があります: `"/readsecret_multiple_providers.sh"`。
+
+### (レガシー) ファイルからの読み込みスクリプト
+Datadog Agent v7.32 は `readsecret_multiple_providers.sh` スクリプトを導入しました。Datadog は Agent v6.12 の `/readsecret.py` と `/readsecret.sh` の代わりにこのスクリプトを使用することを推奨しています。なお、ファイルを読み込むための `/readsecret.py` と `/readsecret.sh` はまだ Agent に含まれており、サポートされています。
+
+#### 使用方法
+これらのスクリプトは、引数として渡されるフォルダを必要とします。シークレットハンドルは、このフォルダからの相対的なファイル名として解釈されます。機密情報の漏洩を防ぐため、指定されたルートフォルダ外のファイルへのアクセスは拒否されます (シンボリックリンクターゲットを含む)。
+
+これらのスクリプトは [OpenShift の制限付き SCC オペレーション][5]との互換性を持たないため、Agent を `root` ユーザーとして実行する必要があります。
+
+##### Docker
+[Docker Swarm シークレット][4]は `/run/secrets` フォルダにマウントされています。これらは、以下の環境変数を Agent コンテナに渡すことで読み込むことができます。
 
 ```
 DD_SECRET_BACKEND_COMMAND=/readsecret.py
 DD_SECRET_BACKEND_ARGUMENTS=/run/secrets
 ```
 
-`db_prod_password` のシークレット値を使用するには、`/run/secrets/db_prod_password` ファイルで公開してから、テンプレートの `ENC[db_prod_password]` に挿入します。
+このセットアップでは、Datadog Agent は `/run/secrets` ディレクトリにあるすべてのシークレットファイルを読み取ります。例えば、`ENC[password]` という構成は、Agent に `/run/secrets/password` ファイルを探させることになります。
 
-##### Kubernetes のシークレット
-
-Kubernetes では、ポッド内で[シークレットをファイルとして公開する][5]ことができます。
-
-シークレットが `/etc/secret-volume` 内でマウントされている場合は、以下の環境変数を使用してください。
+##### Kubernetes
+Kubernetes は、ポッド内の [Secrets をファイルとして公開する][3]ことをサポートしています。例えば、Secrets が `/etc/secret-volume` にマウントされている場合、以下の環境変数を使用します。
 
 ```
 DD_SECRET_BACKEND_COMMAND=/readsecret.py
 DD_SECRET_BACKEND_ARGUMENTS=/etc/secret-volume
 ```
 
-**注**: Datadog Cluster Agent は Datadog Agent とは異なるコマンドを使用します:
-
-```
-DD_SECRET_BACKEND_COMMAND=/readsecret.sh
-DD_SECRET_BACKEND_ARGUMENTS=/etc/secret-volume
-```
-Datadog Cluster Agent はまた、シークレットヘルパーのコマンドも異なるものを使用します。Node Agent で使用する `agent secret` の代わりに、Cluster Agent では `cluster-agent secret-helper` が用いられます。
-
-この例のようにリンクさせると、パスワードフィールドが `/etc/secret-volume/password` ファイルに格納され、`ENC[password]` トークンを介してアクセス可能になります。
-
-**注**: `/var/run/secrets` ではなく、専用のフォルダを使用することをお勧めします。そうすれば、すべてのサブフォルダに（機密性の高い `/var/run/secrets/kubernetes.io/serviceaccount/token` ファイルを含む）スクリプトからアクセスできます。
+このセットアップでは、Datadog Agent は `/etc/secret-volume` ディレクトリにあるすべてのシークレットファイルを読み取ります。例えば、`ENC[password]` という構成は、Agent に `/etc/secret-volume/password` ファイルを探させることになります。
 
 ## トラブルシューティング
 
@@ -272,6 +357,9 @@ Datadog Cluster Agent はまた、シークレットヘルパーのコマンド�
 Agent CLI の `secret` コマンドは、セットアップに関連するエラーが表示します。たとえば、実行可能ファイルの権限が正しくない場合などです。また、見つかったすべてのハンドルとそれらの場所もリストされます。
 
 Linux では、コマンドは実行可能ファイルのファイルモード、所有者、グループを出力します。Windows では、ACL 権限がリストされます。
+
+{{< tabs >}}
+{{% tab "Linux" %}}
 
 Linux の例
 
@@ -294,10 +382,12 @@ Secrets handle decrypted:
 - db_prod_password: from postgres.yaml
 ```
 
-Windows の例（管理者の Powershell から）
+{{% /tab %}}
+{{% tab "Windows" %}}
 
+Windows の例（管理者の PowerShell から）
 ```powershell
-PS C:\> & '%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe' secret
+PS C:\> & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" secret
 === Checking executable rights ===
 Executable path: C:\path\to\you\executable.exe
 Check Rights: OK, the executable has the correct rights
@@ -324,6 +414,10 @@ Secrets handle decrypted:
 - db_prod_password: from sqlserver.yaml
 ```
 
+{{% /tab %}}
+{{< /tabs >}}
+
+
 ### シークレットが挿入された後の構成の表示
 
 `configcheck` コマンドを使うと、チェックの構成がどのように解決されるかを素早く確認できます。
@@ -336,7 +430,7 @@ Source: File Configuration Provider
 Instance 1:
 host: <decrypted_host>
 port: <decrypted_port>
-password: <decrypted_password>
+password: <obfuscated_password>
 ~
 ===
 
@@ -345,7 +439,7 @@ Source: File Configuration Provider
 Instance 1:
 host: <decrypted_host2>
 port: <decrypted_port2>
-password: <decrypted_password2>
+password: <obfuscated_password2>
 ~
 ===
 ```
@@ -356,14 +450,19 @@ password: <decrypted_password2>
 
 Agent の外部でテストまたはデバッグするには、Agent の実行方法を模倣できます。
 
+{{< tabs >}}
+{{% tab "Linux" %}}
 #### Linux
 
 ```bash
-sudo su dd-agent - bash -c "echo '{\"version\": \"1.0\", \"secrets\": [\"secret1\", \"secret2\"]}' | /path/to/the/secret_backend_command"
+sudo -u dd-agent bash -c "echo '{\"version\": \"1.0\", \"secrets\": [\"secret1\", \"secret2\"]}' | /path/to/the/secret_backend_command"
 ```
 
 Datadog Agent をインストールすると、`dd-agent` ユーザーが作成されます。
 
+
+{{% /tab %}}
+{{% tab "Windows" %}}
 #### Windows
 
 ##### 権限関連のエラー
@@ -396,24 +495,21 @@ Agent と同じ条件で実行可能ファイルをテストするには、開�
 これを行うには、次の手順を実行します。
 
 1. `Local Security Policy` の `Local Policies/User Rights Assignement/Deny Log on locally` リストから `ddagentuser` を削除します。
-2. `ddagentuser` に新しいパスワードを設定します（インストール時に生成されたパスワードはどこにも保存されないため）。Powershell で、次を実行します。
-
-  ```powershell
-  $user = [ADSI]"WinNT://./ddagentuser";
-  $user.SetPassword("a_new_password")
-  ```
-
-3. サービスコントロールマネージャーの `DatadogAgent` サービスで使用されるパスワードを更新します。Powershell で、次を実行します。
-
-  ```powershell
-  sc.exe config DatadogAgent password= "a_new_password"
-  ```
+2. `ddagentuser` に新しいパスワードを設定します（インストール時に生成されたパスワードはどこにも保存されないため）。PowerShell で、次を実行します。
+    ```powershell
+    $user = [ADSI]"WinNT://./ddagentuser";
+    $user.SetPassword("a_new_password")
+    ```
+3. サービスコントロールマネージャーの `DatadogAgent` サービスで使用されるパスワードを更新します。PowerShell で、次を実行します。
+    ```powershell
+    sc.exe config DatadogAgent password= "a_new_password"
+    ```
 
 これで、`ddagentuser` としてログインして実行可能ファイルをテストできます。Datadog には、実行可能ファイルを別のユーザーとしてテストするのに役立つ [Powershell スクリプト][7]があります。これはユーザーコンテキストを切り替え、Agent が実行可能ファイルを実行する方法を模倣します。
 
 使用方法の例
 
-```text
+```powershell
 .\secrets_tester.ps1 -user ddagentuser -password a_new_password -executable C:\path\to\your\executable.exe -payload '{"version": "1.0", "secrets": ["secret_ID_1", "secret_ID_2"]}'
 Creating new Process with C:\path\to\your\executable.exe
 Waiting a second for the process to be up and running
@@ -426,6 +522,10 @@ exit code:
 0
 ```
 
+{{% /tab %}}
+{{< /tabs >}}
+
+
 ### Agent が起動を拒否した場合
 
 Agent が起動時に最初に行うことは、`datadog.yaml` をロードし、その中のシークレットを復号化することです。これは、ロギングを設定する前に行われます。これは、Windows のようなプラットフォームでは、`datadog.yaml` の読み込み時に発生するエラーはログに書き込まれず、`stderr` に書き込まれることを意味します。これは、シークレット用に Agent に提供された実行可能ファイルがエラーを返したときに発生する可能性があります。
@@ -435,14 +535,30 @@ Agent が起動時に最初に行うことは、`datadog.yaml` をロードし�
 * `stderr` を表示できるように、Agent を手動で起動してみます。
 * `datadog.yaml` からシークレットを削除し、最初にチェック構成ファイルでシークレットをテストします。
 
+### Kubernetes の権限のテスト
+Kubernetes から直接 Secrets を読み込む場合、`kubectl auth` コマンドで権限をダブルチェックすることができます。一般的な形は以下のとおりです。
+
+```
+kubectl auth can-i get secret/<SECRET_NAME> -n <SECRET_NAMESPACE> --as system:serviceaccount:<AGENT_NAMESPACE>:<AGENT_SERVICE_ACCOUNT>
+```
+
+先ほどの [Kubernetes Secrets 例](#read-from-kubernetes-secret-example)で、Secret `Secret:database-secret` が `Namespace: database` に存在し、サービスアカウント `ServiceAccount:datadog-agent` が `Namespace: default` に存在していると考えてみましょう。
+
+この場合、以下のコマンドを使用します。
+
+```
+kubectl auth can-i get secret/database-secret -n database --as system:serviceaccount:default:datadog-agent
+```
+
+このコマンドは、Agent がこの Secret を閲覧するための権限が有効であるかどうかを返します。
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/agent/kubernetes/integrations/
-[2]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/agent/secrets-helper/readsecret.py
-[3]: https://github.com/DataDog/datadog-agent/blob/6.4.x/Dockerfiles/agent/OPENSHIFT.md#restricted-scc-operations
+[2]: https://github.com/DataDog/datadog-agent/blob/main/Dockerfiles/agent/secrets-helper/readsecret_multiple_providers.sh
+[3]: https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/#create-a-pod-that-has-access-to-the-secret-data-through-a-volume
 [4]: https://docs.docker.com/engine/swarm/secrets/
-[5]: https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/#create-a-pod-that-has-access-to-the-secret-data-through-a-volume
+[5]: https://github.com/DataDog/datadog-agent/blob/6.4.x/Dockerfiles/agent/OPENSHIFT.md#restricted-scc-operations
 [6]: /ja/agent/guide/agent-commands/#restart-the-agent
-[7]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets_scripts/secrets_tester.ps1

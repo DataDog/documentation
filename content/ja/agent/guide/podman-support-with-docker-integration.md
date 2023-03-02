@@ -1,7 +1,8 @@
 ---
-title: Podman コンテナランタイムとの Docker インテグレーションの使用
 kind: documentation
+title: Podman コンテナランタイムとの Docker インテグレーションの使用
 ---
+
 Podman は、Linux システムで OCI コンテナを開発、管理、実行するためのデーモンレスコンテナエンジンです。詳細については、[https://podman.io/][1] をご覧ください。
 
 Podman は、Docker と互換性のある CLI インターフェイスとソケットを提供する、Docker の代替製品です。この特異性により、Podman コンテナで Datadog Agent Docker インテグレーションを使用できます。
@@ -14,7 +15,7 @@ Podman は、Docker と互換性のある CLI インターフェイスとソケ�
 
 ## podman コンテナとしての Agent のデプロイ
 
-Agent を Podman コンテナとしてデプロイするために実行するコマンドは、[Docker][3] で使用されるコマンドと非常によく似ています。
+Agent を Podman コンテナとしてデプロイするために実行するコマンドは、[Docker][3] で使用されるコマンドと似ています。
 
 ```
 $ podman run -d --name dd-agent \
@@ -31,7 +32,8 @@ $ podman run -d --name dd-agent \
 * `-v /run/podman/podman.sock:/run/podman/podman.sock:ro` を使用して、Docker ソケットの代わりに Podman ソケットをマウントします。
 * `-e DOCKER_HOST=unix:///run/podman/podman.sock` を使用して、Podman ソケットとの Agent 通信を構成します。
 
-
+Podman をデーモンレスモードで動かす場合、これらのオプションの代わりに、Podman のデータベースがあるディレクトリをマウントする必要があります、デフォルトでは `/var/lib/containers` になります。
+* `-v /var/lib/containers/:/var/lib/containers/`.
 
 ## 既知の制限
 
@@ -40,5 +42,5 @@ $ podman run -d --name dd-agent \
 
 
 [1]: https://podman.io/
-[2]: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/building_running_and_managing_containers/assembly_using-the-container-tools-api_using-the-container-tools-cli
+[2]: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/building_running_and_managing_containers/index
 [3]: /ja/agent/docker

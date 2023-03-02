@@ -1,0 +1,683 @@
+{
+  "ListAPIKeys": {
+    "description": "계정에서 사용할 수 있는 API 키 전체의 목록을 표시합니다.",
+    "summary": "API 키 전체 불러오기"
+  },
+  "CreateAPIKey": {
+    "description": "API 키를 생성합니다.",
+    "summary": "API 키 생성",
+    "request_description": "",
+    "request_schema_description": "API 키 생성 시 사용한 리퀘스트."
+  },
+  "DeleteAPIKey": {
+    "description": "API 키를 삭제합니다.",
+    "summary": "API 키 삭제"
+  },
+  "GetAPIKey": {
+    "description": "API 키를 불러옵니다.",
+    "summary": "API 키 불러오기"
+  },
+  "UpdateAPIKey": {
+    "description": "API 키를 업데이트합니다.",
+    "summary": "API 키 편집",
+    "request_description": "",
+    "request_schema_description": "API 키 업데이트 시 사용한 리퀘스트."
+  },
+  "ListApplicationKeys": {
+    "description": "소속 조직에서 사용할 수 있는 애플리케이션 키 전체 목록 표시",
+    "summary": "애플리케이션 키 전체 불러오기"
+  },
+  "DeleteApplicationKey": {
+    "description": "애플리케이션 키 삭제",
+    "summary": "애플리케이션 키 삭제"
+  },
+  "GetApplicationKey": {
+    "description": "소속 조직에서 사용할 수 있는 애플리케이션 키를 불러옵니다.",
+    "summary": "애플리케이션 키 불러오기"
+  },
+  "UpdateApplicationKey": {
+    "description": "애플리케이션 키 편집",
+    "summary": "애플리케이션 키 편집",
+    "request_description": "",
+    "request_schema_description": "애플리케이션 키 업데이트 시 사용한 리퀘스트."
+  },
+  "ListAuditLogs": {
+    "description": "감사 로그 검색 쿼리와 일치하는 엔드포인트 리턴 이벤트 목록을 표시합니다.\n[결과를 페이지별로 표시됩니다][1].\n\n이 엔드포인트를 사용해 최근 감사 로그 이벤트를 확인하세요.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
+    "summary": "감사 로그 이벤트 목록 불러오기"
+  },
+  "SearchAuditLogs": {
+    "description": "감사 검색 쿼리와 일치하는 엔드포인트 리턴 감사 로그 이벤트 목록을 표시합니다.\n[결과를 페이지별로 표시됩니다][1].\n\n이 엔드포인트를 사용해 복합 감사 로그 이벤트 필터링과 검색을 수행하세요.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
+    "summary": "감사 로그 이벤트 검색",
+    "request_description": "",
+    "request_schema_description": "감사 로그 이벤트 목록 리퀘스트."
+  },
+  "ListAuthNMappings": {
+    "description": "소속 조직 내 AuthN Mapping 전체의 목록을 표시합니다.",
+    "summary": "AuthN Mappings 전체 목록 표시"
+  },
+  "CreateAuthNMapping": {
+    "description": "AuthN Mapping을 생성합니다.",
+    "summary": "AuthN Mapping 생성",
+    "request_description": "",
+    "request_schema_description": "AuthN Mapping 생성을 위한 리퀘스트."
+  },
+  "DeleteAuthNMapping": {
+    "description": "AuthN Mapping UUID로 특정된 AuthN Mapping을 삭제합니다.",
+    "summary": "AuthN Mapping 삭제"
+  },
+  "GetAuthNMapping": {
+    "description": "AuthN Mapping UUID로 특정된 AuthN Mapping을 불러옵니다.",
+    "summary": "UUID로 AuthN Mapping 불러오기"
+  },
+  "UpdateAuthNMapping": {
+    "description": "AuthN Mapping을 편집합니다.",
+    "summary": "AuthN Mapping 편집",
+    "request_description": "",
+    "request_schema_description": "AuthN Mapping 업데이트를 위한 리퀘스트."
+  },
+  "ListCurrentUserApplicationKeys": {
+    "description": "현재 사용자가 사용할 수 있는 애플리케이션 키 전체의 목록 표시",
+    "summary": "현재 사용자가 소유한 애플리케이션 키를 전체 불러오기"
+  },
+  "CreateCurrentUserApplicationKey": {
+    "description": "현재 사용자용 애플리케이션 키 생성",
+    "summary": "현재 사용자용 애플리케이션 키 생성",
+    "request_description": "",
+    "request_schema_description": "애플리케이션 키 생성 시 사용한 리퀘스트."
+  },
+  "DeleteCurrentUserApplicationKey": {
+    "description": "현재 사용자가 소유한 애플리케이션 키 삭제",
+    "summary": "현재 사용자가 소유한 애플리케이션 키 삭제"
+  },
+  "GetCurrentUserApplicationKey": {
+    "description": "현재 사용자가 소유한 애플리케이션 키 불러오기",
+    "summary": "현재 사용자가 소유한 애플리케이션 키 불러오기"
+  },
+  "UpdateCurrentUserApplicationKey": {
+    "description": "현재 사용자가 소유한 애플리케이션 키 편집",
+    "summary": "현재 사용자가 소유한 애플리케이션 키 편집",
+    "request_description": "",
+    "request_schema_description": "애플리케이션 키 업데이트 시 사용한 리퀘스트."
+  },
+  "DeleteDashboardListItems": {
+    "description": "기존 대시보드 목록에서 대시보드 삭제",
+    "summary": "대시보드 목록에서 항목 삭제",
+    "request_description": "대시보드 목록에서 삭제할 대시보드.",
+    "request_schema_description": "삭제할 대시보드 목록을 포함한 리퀘스트."
+  },
+  "GetDashboardListItems": {
+    "description": "대시보드 목록의 대시보드 정의 불러오기.",
+    "summary": "대시보드 목록 항목 불러오기"
+  },
+  "CreateDashboardListItems": {
+    "description": "기존 대시보드 목록으로 대시보드 추가",
+    "summary": "대시보드 목록에 항목 추가",
+    "request_description": "대시보드 목록에 추가할 대시보드.",
+    "request_schema_description": "추가할 대시보드 목록을 포함한 리퀘스트."
+  },
+  "UpdateDashboardListItems": {
+    "description": "기존 대시보드 목록의 대시보드 업데이트",
+    "summary": "대시보드 목록 항목 업데이트",
+    "request_description": "대시보드 목록의 새 대시보드.",
+    "request_schema_description": "업데이트할 대시보드 목록을 포함한 리퀘스트."
+  },
+  "ListIncidents": {
+    "description": "사용자 조직의 인시던트 전체를 불러옵니다.",
+    "summary": "인시던트 목록 불러오기"
+  },
+  "CreateIncident": {
+    "description": "인시던트를 생성합니다.",
+    "summary": "인시던트 생성",
+    "request_description": "인시던트 페이로드.",
+    "request_schema_description": "인시던트용 리퀘스트를 생성합니다."
+  },
+  "DeleteIncident": {
+    "description": "사용자 조직에서 기존 인시던트를 삭제합니다.",
+    "summary": "기존 인시던트 삭제"
+  },
+  "GetIncident": {
+    "description": "`incident_id`로 인시던트 상세 정보를 불러옵니다.",
+    "summary": "인시던트 정보 불러오기"
+  },
+  "UpdateIncident": {
+    "description": "인시던트를 업데이트합니다. 본 리퀘스트는 부분 업데이트이므로, 업데이트해야 하는 속성만을 알려줍니다.",
+    "summary": "기존 인시던트 업데이트",
+    "request_description": "인시던트 페이로드.",
+    "request_schema_description": "인시던트 리퀘스트를 업데이트합니다."
+  },
+  "ListOpsgenieServices": {
+    "description": "Datadog Opsgenie 통합의 전체 서비스 목록을 불러옵니다.",
+    "summary": "전체 서비스 객체 불러오기"
+  },
+  "CreateOpsgenieService": {
+    "description": "Opsgenie 통합 내 신규 서비스 객체를 생성합니다.",
+    "summary": "신규 서비스 객체 생성",
+    "request_description": "Opsgenie 서비스 페이로드",
+    "request_schema_description": "Opsgenie 서비스에 대한 리퀘스트를 생성합니다."
+  },
+  "DeleteOpsgenieService": {
+    "description": "Datadog Opsgenie 통합의 단일 서비스 객체를 삭제합니다.",
+    "summary": "단일 서비스 객체 삭제"
+  },
+  "GetOpsgenieService": {
+    "description": "Datadog Opsgenie 통합의 단일 서비스를 불러옵니다.",
+    "summary": "단일 서비스 객체 불러오기"
+  },
+  "UpdateOpsgenieService": {
+    "description": "Datadog Opsgenie 통합의 단일 서비스 객체를 업데이트합니다.",
+    "summary": "단일 서비스 객체 업데이트",
+    "request_description": "Opsgenie 서비스 페이로드.",
+    "request_schema_description": "Opsgenie 서비스에 대한 리퀘스트를 업데이트합니다."
+  },
+  "SubmitLog": {
+    "description": "HTTP를 통해 Datadog 플랫폼으로 로그를 전송합니다. HTTP 요청마다 적용되는 제한 사항은 다음과 같습니다.\n\n- 페이로드별 최대 콘텐츠 크기(압축하지 않은 상태에서): 5MB\n- 로그 하나의 최대 크기: 1MB\n- 여러 개의 로그를 배열(array)로 전송하는 경우 배열의 최대 길이: 1000엔트리\n\n1MB를 초과하는 로그의 경우, Datadog에서 수신하여 다음과 같이 길이를 줄입니다.\n- 단일 로그 리퀘스트: API에서 로그를 1MB 크기로 줄이고 2xx를 리턴합니다.\n- 멀티 로그 리퀘스트: API에서 모든 로그를 처리하며 1MB보다 큰 로그만을 줄이고 2xx를 리턴합니다.\n\nDatadog에서는 로그를 압축하여 보내주시기를 권장합니다.\n압축된 로그를 전송할 때 리퀘스트에 `Content-Encoding: gzip` 헤더를 추가해주세요.\n\nHTTP API에서 응답하는 상태 코드는 다음과 같습니다.\n- 202: Accepted(접수 완료): 리퀘스트가 처리용으로 접수되었습니다\n- 400: Bad request(리퀘스트 오류): 페이로드 포맷 정의 시 문제가 발생했을 가능성이 있습니다\n- 401: Unauthorized(승인 불가): API 키가 누락되었을 가능성이 있습니다\n- 403: Permission issue(권한 허용 오류): 유효하지 않은 API Key를 사용했을 가능성이 있습니다\n- 408: Request Timeout(리퀘스트 기한 초과): 잠시 후 리퀘스트를 재시도해주세요\n- 413: Payload too large(페이로드 용량 제한 초과): 배치가 압축하지 않은 상태에서 5MB보다 큽니다\n- 429: Too Many Requests(리퀘스트 횟수 제한 초과): 잠시 후 리퀘스트를 재시도해주세요\n- 500: Internal Server Error(내부 서버 오류): 서버에서 예상하지 못한 상황이 발생해 요청 사항을 처리하지 못했습니다, 잠시 후 리퀘스트를 재시도해주세요\n- 503: Service Unavailable(서비스 불가): 서버가 과부하 등의 원인으로 인하여 요청 사항을 처리할 준비가 되지 않았습니다, 잠시 후 리퀘스트를 재시도해주세요",
+    "summary": "로그 전송",
+    "request_description": "전송할 로그(JSON 포맷).",
+    "request_schema_description": "구조화된 로그 메시지."
+  },
+  "AggregateLogs": {
+    "description": "이벤트를 버킷으로 집계하고 메트릭과 시계열을 계산하는 API 엔드포인트.",
+    "summary": "이벤트 집계",
+    "request_description": "",
+    "request_schema_description": "소속 조직에서 로그 목록을 가져오기 위한 리퀘스트와 함께 전송한 객체."
+  },
+  "GetLogsArchiveOrder": {
+    "description": "아카이브의 현재 순서를 불러옵니다.\n이 엔드포인트에는 JSON 선언이 없습니다.",
+    "summary": "아카이브 순서 불러오기"
+  },
+  "UpdateLogsArchiveOrder": {
+    "description": "아카이브 순서를 업데이트합니다. 로그를 연속 처리하므로, 아카이브 순서를 재지정하면 다른 아카이브에서 처리한\n데이터 구조와 콘텐츠가 달라질 수 있습니다.\n\n**참조**: `PUT` 메서드를 사용하면 현재 순서를 새 순서로 대체하여 아카이브 순서를\n업데이트할 수 있습니다.",
+    "summary": "아카이브 순서 업데이트",
+    "request_description": "새로 순서가 지정된 아카이브 ID의 목록을 포함한 객체.",
+    "request_schema_description": "아카이브 ID의 순서 지정 목록."
+  },
+  "ListLogsArchives": {
+    "description": "설정 완료된 로그 아카이브 목록과 정의를 불러옵니다.",
+    "summary": "아카이브 전체 불러오기"
+  },
+  "CreateLogsArchive": {
+    "description": "소속 조직 내 아카이브를 생성합니다.",
+    "summary": "아카이브 생성",
+    "request_description": "새로운 아카이브의 정의.",
+    "request_schema_description": "로그 아카이브."
+  },
+  "DeleteLogsArchive": {
+    "description": "소속 조직에서 지정된 아카이브를 삭제합니다.",
+    "summary": "아카이브 삭제"
+  },
+  "GetLogsArchive": {
+    "description": "소속 조직에서 특정 아카이브를 불러옵니다.",
+    "summary": "아카이브 불러오기"
+  },
+  "UpdateLogsArchive": {
+    "description": "지정된 아카이브 설정을 업데이트합니다.\n\n**참조**: 본 메서드를 사용해 아카이브 설정을 업데이트하면 현재 설정을\nDatadog 조직으로 전송된 새 설정으로 **대체합니다**.",
+    "summary": "아카이브 업데이트",
+    "request_description": "아카이브의 새로운 정의.",
+    "request_schema_description": "로그 아카이브."
+  },
+  "RemoveRoleFromArchive": {
+    "description": "아카이브에서 역할을 삭제합니다. ([Roles API](https://docs.datadoghq.com/api/v2/roles/))",
+    "summary": "아카이브에서 역할 권한 취소",
+    "request_description": "",
+    "request_schema_description": "역할과의 관계."
+  },
+  "ListArchiveReadRoles": {
+    "description": "지정된 아카이브의 제한된 읽기 역할 전체를 리턴합니다.",
+    "summary": "아카이브의 읽기 역할 목록 표시"
+  },
+  "AddReadRoleToArchive": {
+    "description": "아카이브에 읽기 역할을 추가합니다. ([Roles API](https://docs.datadoghq.com/api/v2/roles/))",
+    "summary": "아카이브 역할 부여",
+    "request_description": "",
+    "request_schema_description": "역할과의 관계."
+  },
+  "ListLogsMetrics": {
+    "description": "설정 완료된 로그 기반 메트릭 목록과 정의를 불러옵니다.",
+    "summary": "전체 로그 기반 메트릭 불러오기"
+  },
+  "CreateLogsMetric": {
+    "description": "소속 조직에서 수집된(ingested) 로그를 기반으로 메트릭을 생성합니다.\n리퀘스트 성공 시, 리퀘스트 본문에서 로그 기반 메트릭 객체를 리턴합니다.",
+    "summary": "로그 기반 메트릭 생성",
+    "request_description": "새로운 로그 기반 메트릭의 정의.",
+    "request_schema_description": "새로운 로그 기반 메트릭 본문."
+  },
+  "DeleteLogsMetric": {
+    "description": "소속 조직에서 특정 로그 기반 메트릭을 삭제합니다.",
+    "summary": "로그 기반 메트릭 삭제"
+  },
+  "GetLogsMetric": {
+    "description": "소속 조직에서 특정 로그 기반 메트릭을 불러옵니다.",
+    "summary": "로그 기반 메트릭 불러오기"
+  },
+  "UpdateLogsMetric": {
+    "description": "소속 조직에서 특정 로그 기반 메트릭을 업데이트합니다.\n리퀘스트 성공 시, 리퀘스트 본문에서 로그 기반 메트릭 객체를 리턴합니다.",
+    "summary": "로그 기반 메트릭 업데이트",
+    "request_description": "로그 기반 메트릭의 새로운 정의.",
+    "request_schema_description": "새로운 로그 기반 메트릭 본문."
+  },
+  "ListRestrictionQueries": {
+    "description": "제한 쿼리 전체를(쿼리 이름과 ID 포함) 리턴합니다.",
+    "summary": "제한 쿼리 목록 표시"
+  },
+  "CreateRestrictionQuery": {
+    "description": "소속 조직에 적용할 새로운 제한 쿼리를 생성합니다.",
+    "summary": "제한 쿼리 생성",
+    "request_description": "",
+    "request_schema_description": "제한 쿼리를 생성합니다."
+  },
+  "GetRoleRestrictionQuery": {
+    "description": "지정된 역할의 제한 쿼리를 불러옵니다.",
+    "summary": "지정된 역할의 제한 쿼리 불러오기"
+  },
+  "ListUserRestrictionQueries": {
+    "description": "지정된 사용자의 제한 쿼리 전체를 불러옵니다.",
+    "summary": "지정된 사용자의 제한 쿼리 전체 불러오기"
+  },
+  "DeleteRestrictionQuery": {
+    "description": "제한 쿼리를 삭제합니다.",
+    "summary": "제한 쿼리 삭제"
+  },
+  "GetRestrictionQuery": {
+    "description": "제한 쿼리의 `restriction_query_id`로 특정된 조직 내 제한 쿼리를 불러옵니다.",
+    "summary": "제한 쿼리 불러오기"
+  },
+  "UpdateRestrictionQuery": {
+    "description": "제한 쿼리를 편집합니다.",
+    "summary": "제한 쿼리 업데이트",
+    "request_description": "",
+    "request_schema_description": "제한 쿼리를 업데이트합니다."
+  },
+  "RemoveRoleFromRestrictionQuery": {
+    "description": "제한 쿼리에서 역할을 삭제합니다.",
+    "summary": "제한 쿼리 역할 권한 취소",
+    "request_description": "",
+    "request_schema_description": "역할과의 관계."
+  },
+  "ListRestrictionQueryRoles": {
+    "description": "지정된 제한 쿼리의 모든 역할을 리턴합니다.",
+    "summary": "제한 쿼리 역할 목록 표시"
+  },
+  "AddRoleToRestrictionQuery": {
+    "description": "제한 쿼리에 역할을 추가합니다.",
+    "summary": "제한 쿼리 역할 부여",
+    "request_description": "",
+    "request_schema_description": "역할과의 관계."
+  },
+  "ListLogsGet": {
+    "description": "로그 검색 쿼리와 일치하는 엔드포인트 리턴 로그 목록을 표시합니다.\n[결과는 페이지별로 표시됩니다][1].\n\n이 엔드포인트를 사용해 최신 로그를 확인하세요.\n\n**소속 조직에서 로그를 아카이빙할 계획인 경우,\n로그 목록 API 대신 Datadog 아카이브 기능을 사용해보세요.\n[Datadog 로그 아카이브 설명서][2]를 참조하시기 바랍니다.**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
+    "summary": "로그 목록 불러오기"
+  },
+  "ListLogs": {
+    "description": "로그 검색 쿼리와 일치하는 엔드포인트 리턴 로그 목록을 표시합니다.\n[결과는 페이지별로 표시됩니다][1].\n\n이 엔드포인트를 사용해 복합 로그 필터링 및 검색을 수행하세요.\n\n**소속 조직에서 로그를 아카이빙할 계획인 경우,\n로그 목록 API 대신 Datadog 아카이브 기능을 사용해보세요.\n[Datadog 로그 아카이브 설명서][2]를 참조하시기 바랍니다.**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
+    "summary": "로그 검색",
+    "request_description": "",
+    "request_schema_description": "로그 목록 리퀘스트."
+  },
+  "ListTagConfigurations": {
+    "description": "설정 완료된 count/gauge/rate/distribution 메트릭 이름 전체와\n(특정된 경우) 추가 필터를 리턴합니다.",
+    "summary": "목록 태그 설정"
+  },
+  "DeleteBulkTagsMetricsConfiguration": {
+    "description": "기존 count, gauge, rate, distribution 메트릭에 대하여 쿼리 가능한 태그 키의 커스텀 목록을 전부 삭제합니다.\n메트릭은 메트릭 이름 프리픽스(접두어)를 전달하여 선택할 수 있습니다.\nDatadog 웹 앱을 사용할 때와 마찬가지로, 결과를 계정의 이메일 주소로 보낼 수 있습니다.\n`Manage Tags for Metrics` 권한을 가진 사용자의 애플리케이션 키로만 사용할 수 있습니다.",
+    "summary": "여러 메트릭의 태그 설정",
+    "request_description": "",
+    "request_schema_description": "1회 일괄 태그 삭제 리퀘스트 래퍼 객체."
+  },
+  "CreateBulkTagsMetricsConfiguration": {
+    "description": "기존 count, gauge, rate, distribution 메트릭에 대하여 쿼리 가능한 태그 키의 목록을 생성하고 정의합니다.\n메트릭은 메트릭 이름 프리픽스(접두어)를 전달하여 선택할 수 있습니다. 태그 설정을 삭제하려면 해당 API 경로 Delete(삭제) 메서드를 사용하세요.\nDatadog 웹 앱을 사용할 때와 마찬가지로, 결과를 계정의 이메일 주소로 보낼 수 있습니다.\n여러 건의 호출에 동일한 메트릭이 포함되는 경우, 마지막에 적용된 설정을 사용합니다(제출한 순서가 아님에 유의하시기 바랍니다).\n동시에 실행되는 호출의 결정론적 순서를 예상하지 마세요.\n`Manage Tags for Metrics` 권한을 가진 사용자의 애플리케이션 키로만 사용할 수 있습니다.",
+    "summary": "여러 메트릭의 태그 설정",
+    "request_description": "",
+    "request_schema_description": "1회 일괄 태그 설정 리퀘스트 래퍼 객체."
+  },
+  "ListTagsByMetricName": {
+    "description": "지정된 메트릭 이름의 인덱스 태그 키-값 페어를 확인합니다.",
+    "summary": "메트릭 이름 기준의 태그 목록 표시"
+  },
+  "EstimateMetricsOutputSeries": {
+    "description": "Metrics without Limits&trade;(제한없는 메트릭 수집)를 사용하여 지정된 태그, 백분위수, 집계 수 설정과 메트릭의 추정 카디널리티를 리턴합니다.",
+    "summary": "태그 설정 카디널리티 추정"
+  },
+  "DeleteTagConfiguration": {
+    "description": "메트릭의 태그 설정을 삭제합니다. `Manage Tags for Metrics` 권한을\n가진 사용자의 애플리케이션 키로만 사용할 수 있습니다.",
+    "summary": "태그 설정 삭제"
+  },
+  "ListTagConfigurationByName": {
+    "description": "지정된 메트릭 이름의 태그 설정을 리턴합니다.",
+    "summary": "이름 기준으로 태그 설정 목록 표시"
+  },
+  "UpdateTagConfiguration": {
+    "description": "메트릭, distribution 메트릭 백분위수 집계 또는 기존 count, gauge, rate, 메트릭의 커스텀 집계\n태그 설정을 업데이트합니다.\n`Manage Tags for Metrics` 권한을 가진 사용자의 애플리케이션 키로만 사용할 수 있습니다.",
+    "summary": "태그 설정 업데이트",
+    "request_description": "",
+    "request_schema_description": "태그 설정을 편집하고자 하는 메트릭을 포함하는 리퀘스트 객체."
+  },
+  "CreateTagConfiguration": {
+    "description": "기존 count, gauge, rate, distribution 메트릭에 대하여 쿼리 가능한 태그 키의 목록을 생성하고 정의합니다.\n선택 사항으로 distribution 메트릭의 백분위수 집계를 포함하거나 기존 count, gauge, rate, 메트릭의 커스텀 집계를\n설정합니다.\n`Manage Tags for Metrics` 권한을 가진 사용자의 애플리케이션 키로만 사용할 수 있습니다.",
+    "summary": "태그 설정 생성",
+    "request_description": "",
+    "request_schema_description": "태그를 설정하고자 하는 메트릭이 포함된 리퀘스트 객체."
+  },
+  "ListVolumesByMetricName": {
+    "description": "지정된 메트릭 이름에 대한 개별 메트릭 볼륨을 표시합니다.\n\n다른 제품의 앱 내에서 생성된 커스텀 메트릭은 수집된(ingested) 볼륨에 대해 `null`을 리턴합니다.",
+    "summary": "메트릭 이름 기준으로 개별 메트릭 볼륨 목록 표시"
+  },
+  "ListPermissions": {
+    "description": "이름, 설명, ID를 포함하여 권한 전체의 목록을 리턴합니다.",
+    "summary": "권한 목록 표시"
+  },
+  "ListProcesses": {
+    "description": "소속 조직의 프로세스 전체를 불러옵니다.",
+    "summary": "프로세스 전체 불러오기"
+  },
+  "ListRoles": {
+    "description": "역할 전체와 각각의 이름, 고유 식별자를 리턴합니다.",
+    "summary": "역할 목록 표시"
+  },
+  "CreateRole": {
+    "description": "소속 조직의 새로운 역할을 생성합니다.",
+    "summary": "역할 생성",
+    "request_description": "",
+    "request_schema_description": "역할을 생성합니다."
+  },
+  "DeleteRole": {
+    "description": "역할을 비활성화합니다.",
+    "summary": "역할 삭제"
+  },
+  "GetRole": {
+    "description": "역할의 `role_id`로 특정된 조직 내 역할을 불러옵니다.",
+    "summary": "역할 불러오기"
+  },
+  "UpdateRole": {
+    "description": "역할을 편집합니다. 관리자에게 할당된 애플리케이션 키가 있어야 사용 가능합니다.",
+    "summary": "역할 업데이트",
+    "request_description": "",
+    "request_schema_description": "역할을 업데이트합니다."
+  },
+  "CloneRole": {
+    "description": "기존 역할 복제",
+    "summary": "기존 역할을 복제하여 새 역할 생성",
+    "request_description": "",
+    "request_schema_description": "기존 역할을 복제하여 새로운 역할을 생성하는 리퀘스트."
+  },
+  "RemovePermissionFromRole": {
+    "description": "역할에서 권한을 삭제합니다.",
+    "summary": "권한 취소",
+    "request_description": "",
+    "request_schema_description": "권한 객체와의 관계."
+  },
+  "ListRolePermissions": {
+    "description": "하나의 역할이 가진 권한 전체의 목록을 리턴합니다.",
+    "summary": "역할 권한 목록 표시"
+  },
+  "AddPermissionToRole": {
+    "description": "역할에 권한을 추가합니다.",
+    "summary": "역할 권한 부여",
+    "request_description": "",
+    "request_schema_description": "권한 객체와의 관계."
+  },
+  "RemoveUserFromRole": {
+    "description": "역할에서 사용자를 삭제합니다.",
+    "summary": "역할에서 사용자 삭제",
+    "request_description": "",
+    "request_schema_description": "사용자와의 관계."
+  },
+  "ListRoleUsers": {
+    "description": "역할의 전체 사용자를 불러옵니다.",
+    "summary": "역할의 사용자 전체 불러오기"
+  },
+  "AddUserToRole": {
+    "description": "역할에 사용자를 추가합니다.",
+    "summary": "역할에 사용자 추가",
+    "request_description": "",
+    "request_schema_description": "사용자와의 관계."
+  },
+  "AggregateRUMEvents": {
+    "description": "RUM 이벤트를 계산된 메트릭과 시계열의 버킷으로 집계하는 API 엔드포인트.",
+    "summary": "RUM 이벤트 집계",
+    "request_description": "",
+    "request_schema_description": "소속 조직에서 집계된 RUM 이벤트 버킷을 가져오기 위한 리퀘스트와 함께 전송된 객체."
+  },
+  "ListRUMEvents": {
+    "description": "RUM 검색 쿼리와 일치하는 엔드포인트 리턴 이벤트 목록을 표시합니다.\n[결과를 페이지별로 표시됩니다][1].\n\n이 엔드포인트를 사용해 최근 RUM 이벤트를 확인하세요.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
+    "summary": "RUM 이벤트 목록 불러오기"
+  },
+  "SearchRUMEvents": {
+    "description": "RUM 검색 쿼리와 일치하는 엔드포인트 리턴 RUM 이벤트 목록을 표시합니다.\n[결과를 페이지별로 표시됩니다][1].\n\n이 엔드포인트를 사용해 복합 RUM 이벤트 필터링과 검색을 수행하세요.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
+    "summary": "RUM 이벤트 검색",
+    "request_description": "",
+    "request_schema_description": "RUM 이벤트 목록 리퀘스트."
+  },
+  "UploadIdPMetadata": {
+    "description": "SAML 설정용 IdP 메타데이터 업로드를 위한 엔드포인트.\n\n이 엔드포인트를 사용해 SAML 로그인 설정용 IdP 메타데이터를 업로그하거나 대체하세요.",
+    "summary": "IdP 메타데이터 업로드",
+    "request_description": ""
+  },
+  "DownloadCloudWorkloadPolicyFile": {
+    "description": "다운로드 엔드포인트는 현재 유효한 Cloud Workload Security 규칙에서 Cloud Workload Security\n정책 파일을 생성하고, .policy 파일로 다운로드합니다. 이 파일을 에이전트로 배포하여 환경에서\n실행 중인 정책을 업데이트할 수 있습니다.",
+    "summary": "최신 Cloud Workload Security 정책 불러오기"
+  },
+  "ListCloudWorkloadSecurityAgentRules": {
+    "description": "Agent 규칙 목록을 불러옵니다.",
+    "summary": "Cloud Workload Security Agent 규칙 전체 불러오기"
+  },
+  "CreateCloudWorkloadSecurityAgentRule": {
+    "description": "지정된 파라미터로 새 Agent 규칙을 생성합니다.",
+    "summary": "Cloud Workload Security Agent 규칙 생성",
+    "request_description": "새로운 Agent 규칙의 정의.",
+    "request_schema_description": "생성할 Agent 규칙을 포함하는 객체 리퀘스트."
+  },
+  "DeleteCloudWorkloadSecurityAgentRule": {
+    "description": "특정 Agent 규칙을 삭제합니다.",
+    "summary": "Cloud Workload Security Agent 규칙 삭제"
+  },
+  "GetCloudWorkloadSecurityAgentRule": {
+    "description": "특정 Agent 규칙의 상세 정보를 불러옵니다.",
+    "summary": "Cloud Workload Security Agent 규칙 불러오기"
+  },
+  "UpdateCloudWorkloadSecurityAgentRule": {
+    "description": "특정 Agent 규칙을 업데이트합니다.\n리퀘스트 성공 시 Agent 규칙 객체를 리턴합니다.",
+    "summary": "Cloud Workload Security Agent 규칙 업데이트",
+    "request_description": "Agent 규칙의 새로운 정의.",
+    "request_schema_description": "Agent 규칙과 업데이트할 속성을 포함하는 객체 리퀘스트."
+  },
+  "ListSecurityFilters": {
+    "description": "설정 완료된 보안 필터 목록과 정의를 불러옵니다.",
+    "summary": "보안 필터 전체 불러오기"
+  },
+  "CreateSecurityFilter": {
+    "description": "보안 필터를 생성합니다.\n\n더 많은 사례는 [보안 필터 가이드](https://docs.datadoghq.com/security_platform/guide/how-to-setup-security-filters-using-security-monitoring-api/)\n에서 확인하실 수 있습니다.",
+    "summary": "보안 필터 생성",
+    "request_description": "새로운 보안 필터의 정의.",
+    "request_schema_description": "생성할 보안 필터를 포함하는 객체 리퀘스트."
+  },
+  "DeleteSecurityFilter": {
+    "description": "특정 보안 필터를 삭제합니다.",
+    "summary": "보안 필터 삭제"
+  },
+  "GetSecurityFilter": {
+    "description": "특정 보안 필터의 상세 정보를 불러옵니다.\n\n더 많은 사례는 [보안 필터 가이드](https://docs.datadoghq.com/security_platform/guide/how-to-setup-security-filters-using-security-monitoring-api/)\n에서 확인하실 수 있습니다.",
+    "summary": "보안 필터 불러오기"
+  },
+  "UpdateSecurityFilter": {
+    "description": "특정 보안 필터를 업데이트합니다.\n리퀘스트 성공 시 보안 필터 객체를 리턴합니다.",
+    "summary": "보안 필터 업데이트",
+    "request_description": "보안 필터의 새로운 정의.",
+    "request_schema_description": "새로운 보안 필터 본문."
+  },
+  "ListSecurityMonitoringRules": {
+    "description": "규칙 목록을 표시합니다.",
+    "summary": "규칙 목록 표시"
+  },
+  "CreateSecurityMonitoringRule": {
+    "description": "탐지 규칙을 생성합니다.",
+    "summary": "탐지 규칙 생성",
+    "request_description": "",
+    "request_schema_description": "새로운 규칙을 생성합니다."
+  },
+  "DeleteSecurityMonitoringRule": {
+    "description": "기존 규칙을 삭제합니다. 기본 규칙은 삭제할 수 없습니다.",
+    "summary": "기존 규칙 삭제"
+  },
+  "GetSecurityMonitoringRule": {
+    "description": "규칙 상세 정보를 불러옵니다.",
+    "summary": "규칙 정보 불러오기"
+  },
+  "UpdateSecurityMonitoringRule": {
+    "description": "기존 규칙을 업데이트합니다. `cases`, `queries`, `options` 업데이트 시, 전체 필드를\n포함해야 합니다. 예를 들어 쿼리 하나를 변경하려면 모든 쿼리를 포함해야 합니다.\n기본 규칙은 활성화하고 알림을 변경하는 용도로만 업데이트 가능합니다.",
+    "summary": "기존 규칙 업데이트",
+    "request_description": "",
+    "request_schema_description": "기존 규칙을 업데이트합니다."
+  },
+  "ListSecurityMonitoringSignals": {
+    "description": "목록 엔드포인트는 검색 쿼리와 일치하는 보안 시그널을 리턴합니다.\n이 엔드포인트와 POST 엔드포인트는 보안 시그널 목록을 표시할 때 교차 사용 가능합니다.",
+    "summary": "보안 시그널의 간단 목록 불러오기"
+  },
+  "SearchSecurityMonitoringSignals": {
+    "description": "검색 쿼리와 일치하는 보안 시그널을 리턴합니다.\n이 엔드포인트와 GET 엔드포인트는 보안 시그널 목록을 표시할 때\n교차 사용 가능합니다.",
+    "summary": "보안 시그널 목록 불러오기",
+    "request_description": "",
+    "request_schema_description": "보안 시그널 목록 리퀘스트."
+  },
+  "SubmitMetrics": {
+    "description": "메트릭 엔드포인트를 활용하면 Datadog의 대시보드에서 그래프로 나타낼 수 있는 시계열 데이터를 게시할 수 있습니다.\n최대 페이로드 크기는 500KB(512000바이트)입니다. 압축된 페이로드의 경우, 압축하지 않은 상태에서 5MB(5242880 바이트)보다 작아야 합니다.\n\nDogStatsD를 사용하지 않고 Datadog API로 바로 메트릭을 제출하는 경우 다음의 기준이 적용된다는 점에 유의하세요.\n\n- 타임스탬프: 64비트\n- 값: 64비트\n- 메트릭 이름: 20바이트\n- 시계열: 50바이트\n- 전체 페이로드: 약 100바이트.",
+    "summary": "메트릭 제출",
+    "request_description": "",
+    "request_schema_description": "메트릭의 페이로드."
+  },
+  "CreateServiceAccount": {
+    "description": "소속 조직용 서비스 계정을 생성합니다.",
+    "summary": "서비스 계정 생성",
+    "request_description": "",
+    "request_schema_description": "서비스 계정을 생성합니다."
+  },
+  "ListServiceAccountApplicationKeys": {
+    "description": "본 서비스 계정에서 사용할 수 있는 애플리케이션 키 전체의 목록을 표시합니다.",
+    "summary": "본 서비스 계정용 애플리케이션 키 목록 표시"
+  },
+  "CreateServiceAccountApplicationKey": {
+    "description": "본 서비스 계정용 애플리케이션 키를 생성합니다.",
+    "summary": "본 서비스 계정용 애플리케이션 키 생성",
+    "request_description": "",
+    "request_schema_description": "애플리케이션 키 생성 시 사용한 리퀘스트."
+  },
+  "DeleteServiceAccountApplicationKey": {
+    "description": "본 서비스 계정에서 소유한 애플리케이션 키를 삭제합니다.",
+    "summary": "본 서비스 계정용 애플리케이션 키 삭제"
+  },
+  "GetServiceAccountApplicationKey": {
+    "description": "본 서비스 계정에서 소유한 애플리케이션 키를 불러옵니다.",
+    "summary": "본 서비스 계정용 애플리케이션 키 불러오기"
+  },
+  "UpdateServiceAccountApplicationKey": {
+    "description": "본 서비스 계정에서 소유한 애플리케이션 키를 편집합니다.",
+    "summary": "본 서비스 계정용 애플리케이션 키 편집",
+    "request_description": "",
+    "request_schema_description": "애플리케이션 키 업데이트 시 사용한 리퀘스트."
+  },
+  "ListIncidentServices": {
+    "description": "요청한(즉, 리퀘스트를 보낸) 사용자의 조직에 대하여 업로드된 인시던트 서비스 전체를 불러옵니다. `include[users]` 쿼리 파라미터를 아는 경우, 내포된 속성(attribute)은 인시던트 서비스와 관련된 사용자를 포함합니다.",
+    "summary": "인시던트 서비스 전체 목록 불러오기"
+  },
+  "CreateIncidentService": {
+    "description": "새로운 인시던트 서비스를 생성합니다.",
+    "summary": "새로운 인시던트 서비스 생성",
+    "request_description": "인시던트 서비스 페이로드.",
+    "request_schema_description": "인시던트 서비스 페이로드 리퀘스트를 생성합니다."
+  },
+  "DeleteIncidentService": {
+    "description": "기존 인시던트 서비스를 삭제합니다.",
+    "summary": "기존 인시던트 서비스 삭제"
+  },
+  "GetIncidentService": {
+    "description": "인시던트 서비스의 상세 정보를 불러옵니다. `include[users]` 쿼리 파라미터를 아는 경우,\n내포된 속성(attribute)은 인시던트 서비스와 관련된 사용자를 포함합니다.",
+    "summary": "인시던트 정보 불러오기"
+  },
+  "UpdateIncidentService": {
+    "description": "기존 인시던트 서비스를 업데이트합니다. 본 리퀘스트는 부분 업데이트이므로, 업데이트해야 하는 속성만을 알려줍니다.",
+    "summary": "기존 인시던트 서비스 업데이트",
+    "request_description": "인시던트 서비스 페이로드.",
+    "request_schema_description": "인시던트 서비스 페이로드로 리퀘스트를 업데이트합니다."
+  },
+  "ListIncidentTeams": {
+    "description": "요청한(즉, 리퀘스트를 보낸) 사용자의 조직에 대하여 전체 인시던트 팀을 불러옵니다. `include[users]` 쿼리 파라미터를 아는 경우, 내포된 속성(attribute)은 인시던트 팀과 관련된 사용자를 포함합니다.",
+    "summary": "전체 인시던트 팀 목록 불러오기"
+  },
+  "CreateIncidentTeam": {
+    "description": "새로운 인시던트 팀을 생성합니다.",
+    "summary": "새로운 인시던트 팀 생성",
+    "request_description": "인시던트 팀 페이로드.",
+    "request_schema_description": "인시던트 팀 페이로드로 리퀘스트를 생성합니다."
+  },
+  "DeleteIncidentTeam": {
+    "description": "기존 인시던트 팀을 삭제합니다.",
+    "summary": "기존 인시던트 팀 삭제"
+  },
+  "GetIncidentTeam": {
+    "description": "인시던트 팀의 상세 정보를 불러옵니다. `include[users]` 쿼리 파라미터를 아는 경우,\n내포된 속성(attribute)은 인시던트 서비스와 관련된 팀을 포함합니다.",
+    "summary": "인시던트 팀 불러오기"
+  },
+  "UpdateIncidentTeam": {
+    "description": "기존 인시던트 팀을 업데이트합니다. 본 리퀘스트는 부분 업데이트이므로, 업데이트해야 하는 속성만을 알려줍니다.",
+    "summary": "기존 인시던트 팀 업데이트",
+    "request_description": "인시던트 팀 페이로드.",
+    "request_schema_description": "인시던트 팀 페이로드로 리퀘스트를 업데이트합니다."
+  },
+  "GetUsageApplicationSecurityMonitoring": {
+    "description": "Application Security의 시간별 사용량을 불러옵니다.",
+    "summary": "Application Security 시간별 사용량 불러오기"
+  },
+  "GetCostByOrg": {
+    "description": "멀티-org 계정의 비용을 불러옵니다. 지정된 달의 org(조직) 데이터별 비용은 다음달 16일 이전에 조회 가능해집니다.",
+    "summary": "멀티-org 계정 비용 불러오기"
+  },
+  "GetUsageLambdaTracedInvocations": {
+    "description": "Lambda Traced Invocations의 시간별 사용량을 불러옵니다.",
+    "summary": "Lambda Traced Invocations 시간별 사용량 불러오기"
+  },
+  "GetUsageObservabilityPipelines": {
+    "description": "Observability Pipelines의 시간별 사용량을 불러옵니다.",
+    "summary": "Observability Pipelines 시간별 사용량 불러오기"
+  },
+  "SendInvitations": {
+    "description": "한 명 이상의 사용자에게 조직으로 초대하는 이메일을 보냅니다.",
+    "summary": "초대 이메일 발송",
+    "request_description": "",
+    "request_schema_description": "사용자를 조직으로 초대하는 객체."
+  },
+  "GetInvitation": {
+    "description": "UUID를 기준으로 단일 사용자 초대를 리턴합니다.",
+    "summary": "사용자 초대 불러오기"
+  },
+  "ListUsers": {
+    "description": "조직 내 사용자 전체의 목록을 불러옵니다. 목록에는\n비활성화 상태이거나 인증되지 않은 사용자까지 모두 포함됩니다.",
+    "summary": "사용자 전체 목록 표시"
+  },
+  "CreateUser": {
+    "description": "조직의 사용자를 생성합니다.",
+    "summary": "사용자 생성",
+    "request_description": "",
+    "request_schema_description": "사용자를 생성합니다."
+  },
+  "DisableUser": {
+    "description": "사용자를 비활성화합니다. 관리자에게 할당된 애플리케이션 키가 있어야\n사용 가능합니다.",
+    "summary": "사용자 비활성화"
+  },
+  "GetUser": {
+    "description": "사용자의 `user_id`로 특정된 조직 내 사용자를 불러옵니다.",
+    "summary": "사용자 정보 불러오기"
+  },
+  "UpdateUser": {
+    "description": "사용자를 편집합니다. 관리자에게 할당된 애플리케이션 키가 있어야\n사용 가능합니다.",
+    "summary": "사용자 업데이트",
+    "request_description": "",
+    "request_schema_description": "사용자를 업데이트합니다."
+  },
+  "ListUserOrganizations": {
+    "description": "사용자 조직을 불러옵니다. 사용자 정보와 해당 사용자가 소속된\n조직 전체를 리턴합니다.",
+    "summary": "사용자 조직 불러오기"
+  },
+  "ListUserPermissions": {
+    "description": "사용자 권한 허용 세트를 불러옵니다. 지정된 사용자 역할에 따라\n허용된 사용자의 권한 목록을 리턴합니다.",
+    "summary": "사용자 권한 불러오기"
+  }
+}

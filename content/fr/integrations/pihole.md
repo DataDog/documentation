@@ -8,12 +8,12 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - network
-  - log collection
+- network
+- log collection
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/pihole/README.md
+- https://github.com/DataDog/integrations-extras/blob/master/pihole/README.md
 display_name: pihole
 draft: false
 git_integration_title: pihole
@@ -32,10 +32,13 @@ public_title: Intégration Datadog/Pi-hole
 short_description: Intégration pour recueillir les métriques Pi-hole par défaut
 support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 Ce check permet de surveiller [Pi-hole][1] avec l'Agent Datadog.
@@ -64,7 +67,7 @@ Pour l'Agent v7.21+/6.21+, suivez les instructions ci-dessous afin d'installer l
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][7] et cherchez `pihole` dans la section Checks.
+Lancez la [sous-commande status de l'Agent][7] et cherchez `pihole` dans la section Checks.
 
 ### Collecte de logs
 

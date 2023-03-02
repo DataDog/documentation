@@ -1,51 +1,75 @@
 ---
-aliases: []
+app_id: openldap
+app_uuid: ea3487c9-2c55-417c-bed5-17a42bdf71cf
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     OpenLDAP Overview: assets/dashboards/openldap_overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: openldap.connections.current
+      metadata_path: metadata.csv
+      prefix: openldap.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: OpenLDAP
   logs:
     source: openldap
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
-  - data store
-  - ログの収集
-  - オートディスカバリー
-creates_events: false
-ddtype: check
+- data store
+- ログの収集
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/openldap/README.md'
-display_name: OpenLDAP
+- https://github.com/DataDog/integrations-core/blob/master/openldap/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: openldap
-guid: ec61c06d-a870-4183-8a27-c66db1fc47cc
 integration_id: openldap
 integration_title: OpenLDAP
+integration_version: 1.10.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: openldap.
-metric_to_check: openldap.connections.current
+manifest_version: 2.0.0
 name: openldap
-public_title: Datadog-OpenLDAP インテグレーション
+oauth: {}
+public_title: OpenLDAP
 short_description: cn=monitor バックエンドを使用して OpenLDAP サーバーからメトリクスを収集
-support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Data Store
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: cn=monitor バックエンドを使用して OpenLDAP サーバーからメトリクスを収集
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: OpenLDAP
 ---
+
+
+
 ## 概要
 
 OpenLDAP インテグレーションを使用すると、OpenLDAP サーバーの `cn=Monitor` バックエンドからメトリクスを取得できます。
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 OpenLDAP インテグレーションは Agent とパッケージ化されています。OpenLDAP メトリクスの収集を開始するには、以下を実行します。
 
@@ -184,7 +208,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
 | パラメーター      | 値                                                 |
 | -------------- | ----------------------------------------------------- |
@@ -214,13 +238,13 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 openldap チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "openldap" >}}
 
-**openldap.can_connect**:<br>
-インテグレーションが監視対象の OpenLDAP サーバーにバインドできない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+
 
 
 [1]: https://app.datadoghq.com/account/settings#agent

@@ -1,7 +1,8 @@
 ---
-title: Guide de dépannage pour la collecte de logs Docker
 kind: documentation
+title: Guide de dépannage pour la collecte de logs Docker
 ---
+
 Plusieurs problèmes courants peuvent survenir lors de l'envoi de nouveaux logs de conteneur à Datadog via l'Agent de conteneur ou un Agent de host installé en local. Ce guide a été conçu pour vous aider à les dépanner. Si vous ne parvenez pas à résoudre votre problème, [contactez notre équipe d'assistance][1] pour obtenir de l'aide.
 
 ## Vérifier le statut de l'Agent
@@ -30,7 +31,7 @@ Plusieurs problèmes courants peuvent survenir lors de l'envoi de nouveaux logs 
 
 3. Si le statut de votre Agent de logging ne ressemble pas à celui de l'exemple ci-dessus, consultez les conseils de dépannage sur cette page.
 
-4. Si le statut est semblable à celui de l'exemple ci-dessus mais que vous ne recevez toujours aucun log, consultez la section [Statut sans erreur](statut-sans-erreur).
+4. Si le statut est semblable à celui de l'exemple ci-dessus mais que vous ne recevez toujours aucun log, consultez la section [Statut sans erreur](#statut-sans-erreur).
 
 ## Logs Agent
 
@@ -71,6 +72,10 @@ Cela signifie que les logs sont activés, mais que les conteneurs à partir desq
 
 ## Problèmes liés à la collecte de logs Docker depuis un fichier
 
+Les versions 6.33.0/7.33.0 et versions ultérieures de l'Agent recueillent par défaut les logs Docker à partir des fichiers de log stockés sur le disque, tant que l'Agent parvient à accéder à ces fichiers. Pour désactiver cette collecte, définissez `DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE` sur `false`.
+
+Si l'Agent ne parvient pas à accéder au chemin des fichiers de log, il suit les conteneurs à partir du socket Docker. Si l'Agent a déjà recueilli des logs à partir d'un conteneur spécifique à l'aide du socket Docker, il continue à utiliser cette approche (même après un redémarrage) pour éviter d'envoyer des logs en double. Pour obliger l'Agent à recueillir des logs à partir de fichiers, définissez `DD_LOGS_CONFIG_DOCKER_CONTAINER_FORCE_USE_FILE` sur `true`. Lorsque ce paramètre est défini, il est possible que des logs s'affichent en double dans Datadog.
+
 Si vous recueillez les logs de conteneurs Docker depuis un fichier et que l'Agent n'a pas d'accès en lecture au répertoire qui contient ces logs (`/var/lib/docker/containers` sous Linux), alors l'Agent essaie de les recueillir depuis le socket Docker. Dans certains cas, l'Agent Datadog peut ne pas réussir à recueillir les logs depuis un fichier. Pour diagnostiquer le problème, consultez le statut de l'Agent de logs et recherchez une entrée pour un type de fichier affichant une erreur semblable à celle-ci :
 
 ```text
@@ -84,7 +89,7 @@ Ce statut signifie que l'Agent ne parvient pas à trouver un fichier de logs pou
 
 Si les logs sont bien recueillis mais que des lignes individuelles sont fractionnées, vérifiez que le daemon Docker utilise le [pilote de logging JSON](#vos-conteneurs-n-utilisent-pas-le-pilote-de-logging-json).
 
-La collecte de logs depuis un fichier est activée lorsque la variable d'environnement `DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE` est définie sur `true`. Toutefois, il arrive que les logs de certains conteneurs soient toujours recueillis depuis le socket Docker même lorsque ce paramètre est défini. Seuls les conteneurs lancés après l'activation de l'option verront leurs logs recueillis depuis un fichier. Ce problème se présente généralement lorsque l'Agent Datadog est mis à jour depuis une version qui ne proposait pas cette fonctionnalité. Si vous le souhaitez, vous pouvez forcer le recueil des logs depuis un fichier pour tous les conteneurs (y compris les plus anciens) en définissant la variable d'environnement `DD_LOGS_CONFIG_DOCKER_CONTAINER_FORCE_USE_FILE` sur `true`. Il est possible que certains logs soit recueillis en double durant la période de transition.
+**Remarque :** lorsque vous installez l'Agent sur le host, il n'est pas autorisé à accéder à `/var/lib/docker/containers`. Par conséquent, avec une telle installation, l'Agent recueille les logs à partir du socket Docker.
 
 
 ### Statut pending

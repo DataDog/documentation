@@ -1,50 +1,73 @@
 ---
-aliases:
-  - /ja/integrations/zookeeper
+app_id: zookeeper
+app_uuid: 01aee33c-0c85-4800-ab79-c02a25da04fa
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     zookeeper: assets/dashboards/zookeeper_dashboard.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: zookeeper.connections
+      metadata_path: metadata.csv
+      prefix: zookeeper.
+    process_signatures:
+    - zkServer.sh start
+    - java zoo.cfg
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: ZooKeeper
   logs:
     source: zookeeper
-  metrics_metadata: metadata.csv
-  monitors: {}
   saved_views:
     zookeeper_processes: assets/saved_views/zookeeper_processes.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-  - orchestration
-  - notification
-  - log collection
-  - autodiscovery
-creates_events: false
-ddtype: check
+- orchestration
+- notification
+- log collection
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/zk/README.md
-display_name: ZooKeeper
+- https://github.com/DataDog/integrations-core/blob/master/zk/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: zk
-guid: 5519c110-5183-438e-85ad-63678c072ac7
 integration_id: zookeeper
 integration_title: ZooKeeper
+integration_version: 4.2.1
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: zookeeper.
-metric_to_check: zookeeper.connections
+manifest_version: 2.0.0
 name: zk
-process_signatures:
-  - zkServer.sh start
-  - java zoo.cfg
-public_title: Datadog-ZooKeeper インテグレーション
+oauth: {}
+public_title: ZooKeeper
 short_description: クライアント接続とレイテンシーを追跡し、リクエストの遅延状況を把握。
-support: コア
 supported_os:
-  - linux
-  - mac_os
+- linux
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Category::オーケストレーション
+  - Category::通知
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: クライアント接続とレイテンシーを追跡し、リクエストの遅延状況を把握。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: ZooKeeper
 ---
+
+
+
 ![ZooKeeper ダッシュボード][1]
 
 ## 概要
@@ -53,15 +76,15 @@ ZooKeeper チェックは、クライアント接続とレイテンシーの追�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 ZooKeeper チェックは [Datadog Agent][2] パッケージに含まれています。ZooKeeper サーバーに追加でインストールする必要はありません。
 
 ### コンフィギュレーション
 
-#### ZooKeeper のホワイトリスト
+#### 包含リスト
 
-バージョン 3.5 以降、ZooKeeper で [4 文字コマンド][4]をホワイトリストに登録する `4lw.commands.whitelist` パラメーターを利用できるようになりました ([ZooKeeper のドキュメント][3]を参照してください)。デフォルトでは、`srvr` だけがホワイトリストに登録されています。このインテグレーションは `stat` および `mntr` コマンドに基づいているため、これらのコマンドを ホワイトリストに登録してください。
+バージョン 3.5 以降、ZooKeeper には `4lw.commands.whitelist` パラメーターが追加されました。[4 文字コマンド][4]を許可する例については、[ZooKeeper クラスターオプション][3]を参照してください。デフォルトでは、`srvr` だけがホワイトリストに登録されています。インテグレーションはこれらのコマンドに基づいて行われるので、`stat` と `mntr` をホワイトリストに追加してください。
 
 #### SSL の有効化
 
@@ -76,7 +99,7 @@ ZooKeeper で SSL の設定が完了すると、SSL を使用して Datadog Agen
 - `client_truststore.jks`
 - `client_keystore.jks`
 
-次の手順もまた、両サイドの `keystore` ファイルと `truststore` ファイルが、互いの証明書およびエイリアスの `server_cert` と `client_cert` を持っていると仮定しています。つまり、Java ZooKeeper クライアントがすでに ZooKeeper サーバーに接続できる状態です。
+また、両サイドの `keystore` ファイルと `truststore` ファイルが、互いの証明書およびエイリアスの `server_cert` と `client_cert` を持っているとします。つまり、Java ZooKeeper クライアントがすでに ZooKeeper サーバーに接続できる状態です。
 秘密キーにパスワードが設定されている場合は、コンフィグオプション `tls_private_key_password` の `config.yaml` ファイルにこのパスワードが含まれていることを確認してください。
 
 JKS ファイルを PEM ファイルに変換するには
@@ -179,7 +202,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
 | パラメーター      | 値                                           |
 | -------------- | ----------------------------------------------- |

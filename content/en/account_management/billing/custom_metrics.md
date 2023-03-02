@@ -3,13 +3,17 @@ title: Custom Metrics Billing
 kind: documentation
 aliases:
     - /integrations/faq/what-standard-integrations-emit-custom-metrics/
+further_reading:
+  - link: "/observability_pipelines/guide/custom-metrics-governance"
+    tag: "Documentation"
+    text: "Use Observability Pipelines to govern custom metrics"
 ---
 
 If a metric is not submitted from one of the [more than {{< translate key="integration_count" >}} Datadog integrations][1] it's considered a [custom metric][2]<sup>[(1)](#standard-integrations)</sup>.
 
-**A custom metric is uniquely identified by a combination of a metric name and tag values (including the host tag)**.
+**A custom metric is uniquely identified by a combination of a metric name and tag values (including the host tag)**. In general, any metric you send using [DogStatsD][25] or through a [custom Agent Check][26] is a custom metric.
 
-Your monthly billable volume for custom metrics (reflected on the Usage page) is calculated from the average number of distinct custom metrics over all hours in the current month.
+Your monthly billable count for custom metrics (reflected on the Usage page) is calculated by taking the total of all distinct custom metrics for each hour in a given month, and dividing it by the number of hours in the month to compute a monthly average value.
 
 Metrics without Limits™ users see monthly billable volumes for _ingested_ and _indexed_ custom metrics on their Usage page. Learn more about ingested and indexed custom metrics and [Metrics without Limits™][3]. 
 
@@ -81,7 +85,7 @@ Custom metrics volumes can be impacted by configuring tags and aggregations usin
 **Note: Only configured metrics contribute to your Ingested custom metrics volume.** If a metric is not configured with Metrics without Limits™, you're only charged for its indexed custom metrics volume.
 
 #### When are you charged for ingested vs indexed custom metrics?
-For metrics not configured with Metrics without Limits™, you pay for for indexed custom metrics.
+For metrics not configured with Metrics without Limits™, you pay for indexed custom metrics.
 
 |                                      | Indexed Custom Metrics<br>(based on monthly average number of Custom Metrics per hour)                                        |
 |--------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
@@ -305,7 +309,7 @@ The following standard integrations can potentially emit custom metrics.
 | Type of integrations                           | Integrations                                                                       |
 |------------------------------------------------|------------------------------------------------------------------------------------|
 | Limited to 350 custom metrics by default.      | [ActiveMQ XML][11] / [Go-Expvar][12] / [Java-JMX][13]                              |
-| No default limit on custom metrics collection. | [Nagios][14] /[PDH Check][15] /[Prometheus][16] /[Windows Services][17] /[WMI][18] |
+| No default limit on custom metrics collection. | [Nagios][14] /[PDH Check][15] /[OpenMetrics][16] /[Windows Services][17] /[WMI][18] /[Prometheus][27] |
 | Can be configured to collect custom metrics.   | [MySQL][19] /[Oracle][20] /[Postgres][21] /[SQL Server][22]                        |
 | Custom metrics sent from cloud integrations    | [AWS][23]                                                                          |
 
@@ -315,6 +319,9 @@ For technical questions, contact [Datadog support][24].
 
 For billing questions, contact your [Customer Success][10] Manager.
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/
 [2]: /metrics/custom_metrics/
@@ -331,12 +338,15 @@ For billing questions, contact your [Customer Success][10] Manager.
 [13]: /integrations/java/
 [14]: /integrations/nagios/
 [15]: /integrations/pdh_check/
-[16]: /integrations/prometheus/
-[17]: /integrations/snmp/
-[18]: /integrations/windows_service/
-[19]: /integrations/wmi_check/
-[20]: /integrations/mysql/
-[21]: /integrations/oracle/
-[22]: /integrations/postgres/
-[23]: /integrations/sqlserver/
-[24]: /integrations/amazon_web_services/
+[16]: /integrations/openmetrics/
+[17]: /integrations/windows_service/
+[18]: /integrations/wmi_check/
+[19]: /integrations/mysql/
+[20]: /integrations/oracle/
+[21]: /integrations/postgres/
+[22]: /integrations/sqlserver/
+[23]: /integrations/amazon_web_services/
+[24]: /help/
+[25]: /metrics/custom_metrics/dogstatsd_metrics_submission/
+[26]: /metrics/custom_metrics/agent_metrics_submission/
+[27]: /integrations/prometheus

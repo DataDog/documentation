@@ -45,9 +45,9 @@ et où chaque span est un dictionnaire avec un `trace_id`, `span_id`, `resource`
 |------------|---------|---------------------------------------|
 | `duration`   | int64   | La durée de la requête en nanosecondes. |
 | `error`      | int32   | Définissez cette valeur sur 1 pour indiquer si une erreur s'est produite. Si une erreur se produit, les informations supplémentaires telles que le message d'erreur, le type et les informations de pile doivent être spécifiées dans la propriété meta. |
-| `meta`       | objet  | Un ensemble de métadonnées key-value. Les clés et les valeurs doivent être des chaînes. |
-| - `<any-key>` | chaîne | Propriétés supplémentaires pour les métadonnées key-value. |
-| metrics    | objet  | Un ensemble de métadonnées key-value. Les clés doivent être des chaînes et les valeurs doivent être des nombres flottants codés sur 64 bits. |
+| `meta`       | objet  | Un ensemble de métadonnées key/value. Les clés et les valeurs doivent être des chaînes. |
+| - `<any-key>` | chaîne | Propriétés supplémentaires pour les métadonnées key/value. |
+| metrics    | objet  | Un ensemble de métadonnées key/value. Les clés doivent être des chaînes et les valeurs doivent être des nombres flottants codés sur 64 bits. |
 | - `<any-key>` | double | Propriétés supplémentaires pour les métriques key-value. |
 | name       | chaîne  | Le nom de la span. Le nom de la span ne doit pas dépasser 100 caractères. |
 | `parent_id`  | int64   | L'ID entier de la span parent. |

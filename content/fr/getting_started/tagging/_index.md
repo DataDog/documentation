@@ -1,25 +1,26 @@
 ---
-title: Débuter avec les tags
-kind: documentation
-description: Apprenez à assigner et utiliser des tags dans Datadog.
 aliases:
-  - /fr/getting_started/getting_started_with_tags
-  - /fr/guides/getting_started/tagging/
-  - /fr/developers/getting_started/tagging/
-  - /fr/tagging
-  - /fr/guides/tagging/
-  - /fr/faq/when-i-query-can-i-use-wildcards-in-metric-names-and-events/
+- /fr/getting_started/getting_started_with_tags
+- /fr/guides/getting_started/tagging/
+- /fr/developers/getting_started/tagging/
+- /fr/tagging
+- /fr/guides/tagging/
+- /fr/faq/when-i-query-can-i-use-wildcards-in-metric-names-and-events/
+description: Apprenez à assigner et utiliser des tags dans Datadog.
 further_reading:
-  - link: /getting_started/tagging/assigning_tags/
-    tag: Documentation
-    text: Apprendre à assigner des tags
-  - link: /getting_started/tagging/unified_service_tagging/
-    tag: Documentation
-    text: Configurer le tagging de service unifié
-  - link: /getting_started/tagging/using_tags/
-    tag: Documentation
-    text: Découvrir comment utiliser des tags dans l'application Datadog
+- link: /getting_started/tagging/assigning_tags/
+  tag: Documentation
+  text: Apprendre à assigner des tags
+- link: /getting_started/tagging/unified_service_tagging/
+  tag: Documentation
+  text: Configurer le tagging de service unifié
+- link: /getting_started/tagging/using_tags/
+  tag: Documentation
+  text: Découvrir comment utiliser des tags dans l'application Datadog
+kind: documentation
+title: Débuter avec les tags
 ---
+
 ## Introduction
 
 Les tags sont conçus pour ajouter des caractéristiques aux données de télémétrie Datadog, afin de pouvoir les filtrer, les agréger et les comparer au sein de visualisations Datadog. Lorsque vous [utilisez des tags][1], vous pouvez observer les performances globales de plusieurs hosts et même affiner davantage les résultats selon des éléments spécifiques. En somme, les tags constituent un moyen d'observer des points de données agrégées.
@@ -60,7 +61,7 @@ Voici quelques exigences en ce qui concerne l'utilisation de tags dans Datadog 
 
 2. Les tags peuvent comporter **jusqu'à 200 caractères** et prennent en charge la norme Unicode (qui inclut la plupart des jeux de caractères, y compris les langues comme le japonais).
 3. Les tags sont convertis en minuscules. Les tags `CamelCase` ne sont donc pas recommandés. Les intégrations reposant sur une authentification (crawler) convertissent les tags au format camel case en ajoutant des underscores. Par exemple, `TestTag` devient `test_tag`. **Remarque** : les tags `host` and `device` ne sont jamais convertis.
-4. Un tag peut être au format `value` ou `<KEY>:<VALUE>`. Pour un fonctionnement optimal, **Datadog recommande de créer des tags au format `<KEY>:<VALUE>`.** `env`, `instance`, et `name` sont des clés de tag couramment utilisées. La clé précède toujours le caractère « : » de la définition globale du tag. Exemple :
+4. Un tag peut être au format `valeur` ou `<KEY>:<VALUE>`. Les clés de tag `env`, `instance` et `name` sont couramment utilisées. La clé précède toujours le caractère « : » de la définition globale du tag. Exemple :
 
     | Tag                | Clé           | Valeur          |
     | ------------------ | ------------- | -------------- |
@@ -99,7 +100,7 @@ Datadog vous conseille d'utiliser le tagging de service unifié lorsque vous ass
 | [Monitors][13]       | Créer et gérer des monitors ou gérer des downtimes                                             |
 | [Métriques][14]        | Filtrer et regrouper des données avec le Metrics Explorer                                                        |
 | [Intégrations][15]   | Définir des limites facultatives pour AWS, Google Cloud et Azure                                        |
-| [APM][16]            | Filtrer les données Analytics ou accéder facilement à d'autres sections avec la Service map                                 |
+| [APM][16]            | Filtrer les données Analytics ou accéder à d'autres sections avec la Service Map                                 |
 | [Notebooks][17]      | Filtrer et regrouper des métriques sur des graphiques                                                               |
 | [Logs][18]           | Filtrer la recherche de logs, les analyses, les patterns, le live tailing et les pipelines                                |
 | [SLO][19]           | Rechercher des SLO ainsi que des SLO groupés basés sur des métriques ou sur des monitors.                           |

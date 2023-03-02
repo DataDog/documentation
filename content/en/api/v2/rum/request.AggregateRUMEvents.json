@@ -1,0 +1,27 @@
+{
+  "compute": [
+    {
+      "aggregation": "pc90",
+      "metric": "@view.time_spent",
+      "type": "total"
+    }
+  ],
+  "filter": {
+    "from": "now-15m",
+    "query": "@type:view AND @session.type:user",
+    "to": "now"
+  },
+  "group_by": [
+    {
+      "facet": "@view.time_spent",
+      "limit": 10,
+      "total": false
+    }
+  ],
+  "options": {
+    "timezone": "GMT"
+  },
+  "page": {
+    "limit": 25
+  }
+}

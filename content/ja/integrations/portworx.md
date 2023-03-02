@@ -1,34 +1,57 @@
 ---
+app_id: portworx
+app_uuid: e682ab93-39cd-403b-a16f-8082961bc081
 assets:
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: portworx.cluster.cpu_percent
+      metadata_path: metadata.csv
+      prefix: portworx.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Portworx
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Portworx
+  sales_email: paul@portworx.com
+  support_email: paul@portworx.com
 categories:
-  - モニター
-creates_events: false
-ddtype: check
+- モニター
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/portworx/README.md'
-display_name: Portworx
+- https://github.com/DataDog/integrations-extras/blob/master/portworx/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: portworx
-guid: 858a4b03-3f75-4019-8ba8-46b00d5aeb46
 integration_id: portworx
 integration_title: Portworx
+integration_version: 1.0.0
 is_public: true
 kind: インテグレーション
-maintainer: paul@portworx.com
-manifest_version: 1.0.0
-metric_prefix: portworx.
-metric_to_check: portworx.cluster.cpu_percent
+manifest_version: 2.0.0
 name: portworx
-public_title: Datadog-Portworx インテグレーション
+oauth: {}
+public_title: Portworx
 short_description: Portworx インスタンスからランタイムメトリクスを収集
-support: contrib
 supported_os:
-  - linux
+- linux
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Category::Monitoring
+  configuration: README.md#Setup
+  description: Portworx インスタンスからランタイムメトリクスを収集
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Portworx
 ---
+
+
+
 ## 概要
 
 Portworx サービスからメトリクスをリアルタイムに取得して、以下のことができます。
@@ -38,22 +61,23 @@ Portworx サービスからメトリクスをリアルタイムに取得して�
 
 ## セットアップ
 
+Portworx チェックは [Datadog Agent][1] パッケージに含まれていないため、お客様自身でインストールする必要があります。
+
 ### インストール
 
-Agent v6.8 以降を使用している場合は、以下の手順に従って、ホストに Portworx チェックをインストールしてください。[バージョン 6.8 以前の Agent][2] または [Docker Agent][3] でチェックをインストールする場合は、[コミュニティインテグレーションのインストール][1]に関する Agent のガイドを参照してください。
+Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Portworx チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 
-1. [Datadog Agent をダウンロードして起動][4]します。
-2. 次のコマンドを実行して、Agent でインテグレーション Wheel をインストールします。
+1. 以下のコマンドを実行して、Agent インテグレーションをインストールします。
 
    ```shell
    datadog-agent integration install -t datadog-portworx==<INTEGRATION_VERSION>
    ```
 
-3. [他のパッケージ化されたインテグレーション][5]と同様にインテグレーションを構成します。
+2. コアの[インテグレーション][3]と同様にインテグレーションを構成します。
 
 ### コンフィギュレーション
 
-1. Portworx の[メトリクス](#metrics)を収集するには、[Agent のコンフィギュレーションディレクトリ][6]のルートにある `conf.d/` フォルダーの `portworx.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル portworx.d/conf.yaml][7] を参照してください。
+1. Portworx の[メトリクス](#metrics)を収集するには、[Agent のコンフィギュレーションディレクトリ][4]のルートにある `conf.d/` フォルダーの `portworx.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル portworx.d/conf.yaml][5] を参照してください。
 
     ```yaml
     init_config:
@@ -63,11 +87,11 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
      - prometheus_endpoint: http://localhost:9001/metrics
     ```
 
-2. [Agent を再起動します][8]。
+2. [Agent を再起動します][6]。
 
 ### 検証
 
-[Agent の `info` サブコマンドを実行すると][9]、以下のような内容が表示されます。
+[Agent の `info` サブコマンドを実行すると][7]、以下のような内容が表示されます。
 
 ## 互換性
 
@@ -98,16 +122,17 @@ Portworx チェックには、イベントは含まれません。
 
 ## その他の参考資料
 
-インフラストラクチャーの監視の詳細および Datadog の全インテグレーションについては、[ブログ記事][11]を参照してください。
+お役に立つドキュメント、リンクや記事:
 
-[1]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/
-[2]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
-[3]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/?tab=docker
-[4]: https://app.datadoghq.com/account/settings#agent
-[5]: https://docs.datadoghq.com/ja/getting_started/integrations/
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[7]: https://github.com/DataDog/integrations-extras/blob/master/portworx/datadog_checks/portworx/data/conf.yaml.example
-[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[9]: https://docs.datadoghq.com/ja/agent/faq/agent-status-and-information/
-[10]: https://github.com/DataDog/integrations-extras/blob/master/portworx/metadata.csv
-[11]: https://www.datadoghq.com/blog
+- [Portworx および Datadog でマルチクラウドコンテナストレージをモニタリング][9]
+
+
+[1]: https://app.datadoghq.com/account/settings#agent
+[2]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
+[3]: https://docs.datadoghq.com/ja/getting_started/integrations/
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[5]: https://github.com/DataDog/integrations-extras/blob/master/portworx/datadog_checks/portworx/data/conf.yaml.example
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/ja/agent/faq/agent-status-and-information/
+[8]: https://github.com/DataDog/integrations-extras/blob/master/portworx/metadata.csv
+[9]: https://www.datadoghq.com/blog/portworx-integration/

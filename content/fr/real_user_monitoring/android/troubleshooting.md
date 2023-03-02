@@ -1,13 +1,13 @@
 ---
 dependencies:
-  - https://github.com/DataDog/dd-sdk-android/blob/master/docs/troubleshooting_android.md
+- https://github.com/DataDog/dd-sdk-android/blob/master/docs/troubleshooting_android.md
 further_reading:
-  - link: https://github.com/DataDog/dd-sdk-android
-    tag: Github
-    text: Code source dd-sdk-android
-  - link: /real_user_monitoring
-    tag: Page d'accueil
-    text: Explorer le service RUM de Datadog
+- link: https://github.com/DataDog/dd-sdk-android
+  tag: GitHub
+  text: Code source dd-sdk-android
+- link: /real_user_monitoring
+  tag: Documentation
+  text: Explorer le service RUM de Datadog
 kind: documentation
 title: Dépannage
 ---
@@ -43,25 +43,13 @@ Pour mettre à jour le consentement au suivi une fois le SDK lancé, effectuez l
 - Si vous la remplacez par `TrackingConsent.GRANTED` : le SDK envoie tous les lots de données actuels, ainsi que toutes les données ultérieures, directement au endpoint de collecte de données.
 - Si vous la remplacez par `TrackingConsent.NOT_GRANTED` : le SDK supprime tous les lots de données et ne recueille plus aucune donnée par la suite.
 
-## Échantillonner des sessions RUM
-
-Pour contrôler les données que votre application envoie au service RUM de Datadog, vous pouvez spécifier un taux d'échantillonnage pour les sessions RUM lors de l'[initialisation du RumMonitor][1]. Ce taux est défini sous forme de pourcentage entre 0 et 100.
-
-```kotlin
-val monitor = RumMonitor.Builder()
-        // Ici, 75 % des sessions RUM sont envoyées à Datadog
-        .sampleRumSessions(75.0f)
-        .build()
-GlobalRum.registerIfAbsent(monitor)
-```
-
 ## Envoi de données lorsque l'appareil est hors ligne
 
-La fonction RUM s'assure de recueillir les données même lorsque l'appareil de l'utilisateur est hors ligne. Lorsque la connexion réseau est mauvaise ou que la batterie de l'appareil est trop faible, tous les événements RUM sont d'abord stockés  en local sur l'appareil sous forme groupée. Chaque groupe de logs respecte les spécifications d'admission. Ils sont envoyés dès que le réseau est disponible, et dès que la batterie est suffisamment élevée pour que le SDK Datadog n'affecte pas l'expérience de l'utilisateur final. Si le réseau n'est pas disponible alors que votre application s'exécute au premier plan, ou si l'envoi des données échoue, le groupe de logs est conservé jusqu'à ce qu'il puisse être envoyé.
+La fonction RUM s'assure de recueillir les données même lorsque l'appareil de l'utilisateur est hors ligne. Lorsque la connexion réseau est mauvaise ou que la batterie de l'appareil est trop faible, tous les événements RUM sont d'abord stockés en local sur l'appareil sous forme groupée.
 
-Cela signifie que même si les utilisateurs ouvrent votre application en étant hors ligne, aucune donnée ne sera perdue.
+Chaque groupe de logs respecte les spécifications d'admission. Ils sont envoyés dès que le réseau est disponible, et dès que la batterie est suffisamment élevée pour que le SDK Datadog n'affecte pas l'expérience de l'utilisateur final. Si le réseau n'est pas disponible alors que votre application s'exécute au premier plan, ou si l'envoi des données échoue, le groupe de logs est conservé jusqu'à ce qu'il puisse être envoyé.
 
-**Remarque** : les données stockées sont automatiquement supprimées si elles sont trop anciennes pour limiter l'espace utilisé par le SDK.
+Ainsi, même si les utilisateurs ouvrent votre application sans être connectés à Internet, aucune donnée n'est perdue. Pour veiller à ce que le SDK n'utilise pas trop d'espace disque, les données sur le disque sont automatiquement supprimées après une certaine durée.
 
 ## Migration vers la version 1.0.0
 
@@ -83,23 +71,22 @@ After
 ```java
 Datadog.initialize(context, "my-api-key");
 
-// …
+// ...
 
 logger = new Logger.Builder()
         .setNetworkInfoEnabled(true)
-        .setServiceName("android-sample-java") // Définit le nom du service
-        .setLoggerName("my_logger") // Définit le nom du logger (au sein du service)
+        .setServiceName("android-sample-java") // Définir le nom du service
+        .setLoggerName("my_logger") // Définir le nom du logger (dans le service)
         .setLogcatLogsEnabled(true)
         .build();
 ```
 
 
-### Attributs
+### Attributes
 
 Dans les anciennes versions, l'ajout ou la suppression d'un attribut se faisait avec les méthodes `Logger.addField()` et `Logger.removeField()`. Ces méthodes ont été renommées par souci de cohérence et s'intitulent désormais `Logger.addAttribute()` et `Logger.removeAttribute()`. Leur comportement reste le même.
 
 
 ## Pour aller plus loin
-{{< partial name="whats-next/whats-next.html" >}}
 
-[1]:/fr/real_user_monitoring/android/
+{{< partial name="whats-next/whats-next.html" >}}

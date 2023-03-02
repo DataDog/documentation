@@ -1,37 +1,38 @@
 ---
-"assets":
-  "dashboards":
-    "Algorithmia": assets/dashboards/algorithmia.json
-  "logs": {}
-  "metrics_metadata": metadata.csv
-  "monitors":
-    "Algorithmia": assets/monitors/algorithm_duration.json
-  "saved_views": {}
-  "service_checks": assets/service_checks.json
-"categories":
+assets:
+  dashboards:
+    Algorithmia: assets/dashboards/algorithmia.json
+  logs: {}
+  metrics_metadata: metadata.csv
+  monitors:
+    Algorithmia: assets/monitors/algorithm_duration.json
+  saved_views: {}
+  service_checks: assets/service_checks.json
+categories:
 - monitoring
-"creates_events": false
-"ddtype": "crawler"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/algorithmia/README.md"
-"display_name": "Algorithmia"
-"draft": false
-"git_integration_title": "algorithmia"
-"guid": "bb9defff-03ae-4a22-93a7-6db498d37cd7"
-"integration_id": "algorithmia"
-"integration_title": "Algorithmia"
-"integration_version": ""
-"is_public": true
-"kind": "integration"
-"maintainer": "support@algorithmia.io"
-"manifest_version": "1.0.0"
-"metric_prefix": "algorithmia."
-"metric_to_check": "algorithmia.duration_milliseconds"
-"name": "algorithmia"
-"public_title": "Intégration Datadog/Algorithmia "
-"short_description": "Surveillez des métriques liées à vos modèles d'apprentissage automatique en production"
-"support": "contrib"
-"supported_os":
+creates_events: false
+ddtype: crawler
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/algorithmia/README.md
+display_name: Algorithmia
+draft: false
+git_integration_title: algorithmia
+guid: bb9defff-03ae-4a22-93a7-6db498d37cd7
+integration_id: algorithmia
+integration_title: Algorithmia
+integration_version: ''
+is_public: true
+kind: integration
+maintainer: support@algorithmia.io
+manifest_version: 1.0.0
+metric_prefix: algorithmia.
+metric_to_check: algorithmia.duration_milliseconds
+name: algorithmia
+public_title: 'Intégration Datadog/Algorithmia '
+short_description: Surveillez des métriques liées à vos modèles d'apprentissage automatique
+  en production
+support: contrib
+supported_os:
 - linux
 ---
 
@@ -52,10 +53,9 @@ Cette intégration vous permet de diffuser, depuis Algorithmia vers Kafka puis v
 1. À partir de votre instance Algorithmia, configurez Algorithmia Insights pour qu'il se connecte à
    un broker Kafka (externe à Algorithmia).
 
-2. Référez-vous à la
-   [documentation dans le référentiel des intégrations Algorithmia][3]
+2. Consultez le [référentiel integrations d'Algorithmia][3]. 
    pour installer, configurer et lancer le service de transfert de message Datadog utilisé
-   dans cette intégration, qui transférera les métriques d'une rubrique Kafka vers
+   dans cette intégration. Celui-ci transfère les métriques d'une rubrique Kafka vers
    l'API des métriques dans Datadog.
 
 
@@ -72,7 +72,7 @@ Cette intégration diffuse des métriques d'Algorithmia lorsqu'un modèle sur le
 
 La métrique `duration_milliseconds` est l'une des métriques opérationnelles qui est incluse dans la charge utile par défaut d'Algorithmia. Pour vous aider à vous lancer, cette intégration intègre également un dashboard et un monitor pour cette métrique par défaut.
 
-Il est également possible de recueillir des métriques liées à des inférences, définies par l'utilisateur et spécifiées dans Algorithmia par le développeur de l'algorithme. Les métriques définies par l'utilisateur dépendent de votre framework d'apprentissage automatique et de vos cas d'utilisation spécifiques, mais elles peuvent inclure des valeurs comment les probabilités de prédiction d'un modèle de régression dans scikit-learn, les scores de confiance d'un classificateur d'images dans TensorFlow ou des données d'entrée issues de requêtes d'API entrantes. Notez que le script de transfert de message fourni dans cette intégration applique le préfixe `algorithmia.` aux métriques définies par l'utilisateur dans Datadog.
+Il est également possible de recueillir des métriques supplémentaires liées à des inférences, définies par l'utilisateur et spécifiées dans Algorithmia par le développeur de l'algorithme. Les métriques définies par l'utilisateur dépendent de votre framework d'apprentissage automatique et de vos cas d'utilisation spécifiques. Elles peuvent inclure des valeurs comme les probabilités de prédiction d'un modèle de régression dans scikit-learn, les scores de confiance d'un classificateur d'images dans TensorFlow ou des données d'entrée issues de requêtes d'API entrantes. **Remarque** : le script de transfert de message fourni dans cette intégration applique le préfixe `algorithmia.` aux métriques définies par l'utilisateur dans Datadog.
 
 ## Données collectées
 
@@ -97,4 +97,3 @@ Besoin d'aide ? Contactez [l'assistance Algorithmia][5].
 [3]: https://github.com/algorithmiaio/integrations
 [4]: https://github.com/DataDog/integrations-extras/blob/master/algorithmia/metadata.csv
 [5]: https://algorithmia.com/contact
-

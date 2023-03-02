@@ -1,76 +1,92 @@
 ---
-title: Recherche RUM
-kind: documentation
 further_reading:
-  - link: /real_user_monitoring/explorer/analytics/
-    tag: Documentation
-    text: Générez des analyses à partir de vos événements.
+- link: /real_user_monitoring/explorer/group/
+  tag: Documentation
+  text: Regrouper des événements RUM interrogés
+- link: /real_user_monitoring/explorer/visualize/
+  tag: Documentation
+  text: Appliquer des visualisations sur vos événements
+kind: documentation
+title: Rechercher des événements RUM
 ---
-## Syntaxe de recherche
 
-Une requête est composée de termes et d'opérateurs.
+## Présentation
 
-Il existe deux types de termes :
+Lorsque vous appliquez un intervalle en haut à droite de la vue RUM Explorer, vous pouvez accéder à des événements possédant des paires `key:value` ainsi qu'à la fonctionnalité de recherche en texte intégral.
 
-* Un **terme unique** est un mot unique comme `test` ou `hello`.
+## Types d'événements
 
-* Une **séquence** est un groupe de mots entre guillemets, comme `hello dolly`.
+Bien que la solution RUM enregistre automatiquement des événements, vous pouvez également capturer vos propres événements. Tous les événements personnalisés et capturés automatiquement se voient attribuer l'un des six types d'événements pour les applications [Browser][1], [iOS][2], [Android][3] et [React Native][4]. Ils sont également indexés, afin que vous puissiez les rechercher.
 
-Pour combiner plusieurs termes dans une requête complexe, vous pouvez utiliser l'un des opérateurs booléens suivants :
+| Type d'événement | Rétention | Description                                                                                                                                                                                                                                                               |
+|------------|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Session    | 30 jours   | Une session utilisateur débute lorsqu'un utilisateur commence à parcourir l'application Web. Une session inclut des informations générales sur l'utilisateur (comme son navigateur, son appareil ou sa géolocalisation). Elle agrège tous les événements RUM recueillis lors du parcours utilisateur en appliquant un attribut `session.id` unique. |
+| Vue       | 30 jours   | Un événement de type Vue est généré à chaque fois qu'un utilisateur consulte une page de l'application Web. Tant que l'utilisateur reste sur la même page, les événements de type Ressource, Tâche longue, Erreur et Action sont associés à cette vue RUM via l'attribut `view.id`.                                   |
+| Action     | 30 jours   | Les événements RUM de type Action enregistrent les interactions effectuées durant chaque parcours utilisateur et peuvent être envoyés manuellement pour surveiller des actions utilisateur personnalisées.                                                                                                                                                  |
+| Erreur      | 30 jours   | La fonction RUM recueille toutes les erreurs frontend émises par le navigateur.                                                                                                                                                                                                                 |
+| Ressource   | 15 jours   | Un événement de type Ressource est généré pour les images, XHR, Fetch, CSS ou bibliothèques JS chargés sur une page Web. Celui-ci contient des informations détaillées sur le temps de chargement.                                                                                                                          |
+| Tâche longue  | 15 jours   | Un événement de type Tâche longue est généré à chaque fois qu'une tâche du navigateur bloque le thread principal pendant plus de 50 ms.                                                                                                                                                                |
 
-| **Opérateur** | **Description**                                                                                       |
-|--------------|-------------------------------------------------------------------------------------------------------|
-| `AND`        | **Intersection** : les deux termes figurent dans les vues sélectionnées (si aucun opérateur n'est ajouté, AND est utilisé par défaut). |
-| `OR`         | **Union** : un des deux termes figure dans les vues sélectionnées.                                             |
-| `-`          | **Exclusion** : le terme suivant ne figure PAS dans les vues sélectionnées.                                                  |
+Pour recherche des événements RUM, sélectionnez un type d'événements depuis le menu déroulant situé à gauche de la barre de recherche.
 
-### Saisie automatique
+{{< img src="real_user_monitoring/explorer/search/rum_explorer_search.png" alt="RUM Explorer" style="width:100%;">}}
 
-Utilisez la fonctionnalité de saisie automatique de la barre de recherche pour compléter votre requête en utilisant des valeurs existantes :
+## Requête de recherche
 
-{{< img src="real_user_monitoring/explorer/search/search_bar_autocomplete.png" alt="Saisie automatiquement dans la barre de recherche"  style="width:60%;">}}
+Pour appliquer un filtre basé sur les sessions générées par les utilisateurs réels d'une certaine application au cours des dernières 24 heures, créez une requête personnalisée, par exemple `@application.id:Shopist @session.type:user`, et définissez l'intervalle sur `1d`.
 
-## Recherche à facettes
+### Syntaxe de recherche
 
-Pour effectuer une recherche en fonction d'un attribut spécifique, [ajoutez-le comme facette][1] puis utilisez `@` pour indiquer que vous faites une recherche à partir d'une facette.
+Pour en savoir plus sur la recherche d'événements RUM et l'utilisation d'intervalles, consultez les sections [Syntaxe de recherche][5] et [Intervalles personnalisés][6].
 
-Par exemple, si le nom de votre facette est **url** et que vous souhaitez filtrer les résultats en fonction de la valeur *www.datadoghq.com*, saisissez :
+## Configurer des facettes et des mesures
 
-`@url:www.datadoghq.com`
+Tous les événements RUM contiennent des attributs, qui sont automatiquement recueillis par les SDK RUM, ainsi que vos attributs personnalisés, qui sont indiqués dans le [volet latéral des événements][7].
 
-### Échappement de caractères spéciaux
+Bien que la plupart des attributs recueillis automatiquement soient indexés et possèdent une facette, ce n'est par défaut pas le cas pour les attributs d'événement personnalisés. Pour indexer ces attributs, créez une facette ou une mesure, afin de pouvoir les utiliser facilement dans vos recherches et vos [visualisations][8].
 
-**Remarque** : lorsque vous effectuez une recherche en fonction d'une valeur de facette qui contient des caractères spéciaux, vous devez utiliser des caractères d'échappement ou des guillemets. Les caractères suivants sont considérés comme spéciaux : `?`, `>`, `<`, `:`, `=`,`"`, `~`, `/` et `\`. Ils requièrent par conséquent le caractère d'échappement `\`.
+### Facettes
 
-La même logique s'applique aux espaces dans les noms des facettes de vues. Les facettes de vues ne sont pas supposées contenir d'espaces, mais si elles en ont, les espaces doivent être précédées d'un caractère d'échappement. Si un attribut est appelé `user.first name`, effectuez une recherche en fonction de cet attribut en ajoutant un caractère d'échappement devant l'espace : `@user.first\ name:mavaleur`
+Une facette présente tous les membres distincts d'un attribut ou d'un tag, en plus de proposer des analyses de base, comme le nombre d'événements RUM représentés. Les facettes vous permettent d'effectuer des pivotements ou de filtrer vos ensembles de données en fonction d'un attribut donné. Pour appliquer un filtre dans la barre de recherche, sélectionnez une valeur.
 
-### Wildcards
+{{< img src="real_user_monitoring/explorer/rum_explorer_1.png" alt="Liste des facettes à gauche de la liste des événements" style="width:90%;">}}
 
-Afin d'effectuer une recherche avec un wildcard correspondant à plusieurs caractères, utilisez le symbole `*`. Par exemple, `@http.url:https:\/\/*` renvoie toutes les vues dont l'URL commence par `https://`.
+Pour créer une facette, cliquez sur un attribut dans le [volet latéral des événements][7].
 
-### Valeurs numériques
+{{< img src="real_user_monitoring/explorer/create_facet.png" alt="Créer une facette" style="width:40%;">}}
 
-Utilisez les caractères `<`,`>`, `<=` ou `>=` pour effectuer une recherche avec des attributs numériques. Par exemple, pour récupérer toutes les vues dont la durée est supérieure à 100 ns :
+La valeur de cet attribut est stockée pour l'ensemble des nouvelles vues. Vous pouvez utiliser l'attribut dans la barre de recherche, le volet des **facettes** et vos [visualisations][8].
 
-`@duration:>100`
+### Mesures
 
-Vous pouvez effectuer une recherche d'attribut numérique dans un intervalle spécifique. Par exemple, pour récupérer toutes les vues dont la durée est comprise entre 100 ns et 300 ns :
+Une mesure est un attribut doté d'une valeur numérique contenue dans vos événements RUM.
 
-`@duration:[100 TO 300]`
+Pour créer une mesure, cliquez sur un attribut numérique dans le [volet latéral des événements][7].
 
-## Exemples
+{{< img src="real_user_monitoring/explorer/create_measure.png" alt="Créer une mesure" style="width:40%;">}}
 
-`@http.url_details.path:"/api/v1/test"`
-: Recherche toutes les vues contenant `/api/v1/test` dans l'attribut `http.url_details.path`.
+La valeur de cet attribut est stockée pour l'ensemble des nouveaux événements RUM. Vous pouvez utiliser l'attribut dans la barre de recherche, le volet des **facettes** et vos [visualisations][8].
 
-`@http.url:\/api\/v1\/*`
-: Recherche toutes les vues dont la valeur de l'attribut `http.url` commence par `/api/v1/`.
+{{< img src="real_user_monitoring/explorer/edit_measure.png" alt="Modifier une mesure" style="width:40%;">}}
 
-`@duration:[100 TO 300] @http.url_details.path:\/api\/v1\/*`
-: Recherche toutes les vues dont la `duration` est comprise entre 100 et 300 ns et dont la valeur de l'attribut `http.url_details.path` commence par `/api/v1/`.
+Chaque mesure possède une unité qui est affichée dans une colonne du [RUM Explorer][9] et de [vos visualisations][8]. 
+
+## Rechercher des facettes
+
+Pour rechercher un attribut spécifique, [ajoutez-le comme facette](#facettes), puis saisissez `@` dans votre requête de recherche pour indiquer que vous recherchez une facette.
+
+Par exemple, si le nom de votre facette est **url** et que vous souhaitez filtrer les résultats en fonction de la valeur `www.datadoghq.com`, saisissez `@url:www.datadoghq.com`.
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/real_user_monitoring/explorer/#setup---facets--measures
+[1]: /fr/real_user_monitoring/browser/data_collected/
+[2]: /fr/real_user_monitoring/android/data_collected/
+[3]: /fr/real_user_monitoring/ios/data_collected/
+[4]: /fr/real_user_monitoring/reactnative/
+[5]: /fr/real_user_monitoring/explorer/search_syntax/
+[6]: /fr/dashboards/guide/custom_time_frames
+[7]: /fr/real_user_monitoring/explorer/events/
+[8]: /fr/real_user_monitoring/explorer/visualize#timeseries
+[9]: /fr/real_user_monitoring/explorer/

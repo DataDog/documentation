@@ -1,27 +1,30 @@
 ---
 aliases:
-  - /fr/integrations/awsstoragegateway/
+- /fr/integrations/awsstoragegateway/
 categories:
-  - cloud
-  - data store
-  - aws
-  - log collection
+- cloud
+- data store
+- aws
+- log collection
 ddtype: crawler
 dependencies: []
-description: "Surveillez des métriques clés d'AWS\_Storage\_Gateway."
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_storage_gateway/'
+description: Surveillez des métriques clés d'AWS Storage Gateway.
+doc_link: https://docs.datadoghq.com/integrations/amazon_storage_gateway/
 draft: false
 git_integration_title: amazon_storage_gateway
 has_logo: true
+integration_id: amazon-storage-gateway
 integration_title: Amazon Storage Gateway
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_storage_gateway
-public_title: "Intégration Datadog/Amazon\_Storage\_Gateway"
-short_description: "Surveillez des métriques clés d'AWS\_Storage\_Gateway."
+public_title: Intégration Datadog/Amazon Storage Gateway
+short_description: Surveillez des métriques clés d'AWS Storage Gateway.
 version: '1.0'
 ---
+
 ## Présentation
 
 AWS Storage Gateway offre une intégration transparente et sécurisée entre l'environnement informatique d'une organisation et l'infrastructure de stockage d'AWS.
@@ -43,17 +46,17 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 #### Activer le logging
 
-Configurez Amazon Storage Gateway de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers Cloudwatch.
+Configurez Amazon Storage Gateway de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers CloudWatch.
 
 **Remarque** : si vous envoyez vos logs vers un compartiment S3, assurez-vous que `amazon_storage_gateway` est défini en tant que _Target prefix_.
 
 #### Envoyer des logs à Datadog
 
 1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][4].
-2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou sur le groupe de logs Cloudwatch qui contient vos logs Amazon Storage Gateway dans la console AWS :
+2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou sur le groupe de logs CloudWatch qui contient vos logs Amazon Storage Gateway dans la console AWS :
 
     - [Ajouter un déclencheur manuel sur le compartiment S3][5]
-    - [Ajouter un déclencheur manuel sur le groupe de logs Cloudwatch][6]
+    - [Ajouter un déclencheur manuel sur le groupe de logs CloudWatch][6]
 
 ## Données collectées
 
@@ -61,7 +64,7 @@ Configurez Amazon Storage Gateway de façon à ce que ses logs soient envoyés v
 {{< get-metrics-from-git "amazon_storage_gateway" >}}
 
 
-Chacune des métriques récupérées à partir d'AWS se verra assigner les mêmes tags que ceux qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le hostname et les groupes de sécurité.
+Chacune des métriques récupérées à partir d'AWS se voit assigner les mêmes tags que ceux qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le hostname et les groupes de sécurité.
 
 ### Événements
 

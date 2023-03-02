@@ -1,14 +1,18 @@
 ---
-title: Suivi des erreurs
-kind: documentation
 further_reading:
-  - link: /tracing/error_tracking/explorer
-    tag: Documentation
-    text: Explorateur de suivi des erreurs
-  - link: https://app.datadoghq.com/apm/error-tracking
-    tag: Interface
-    text: Suivi des erreurs
+- link: /tracing/error_tracking/explorer
+  tag: Documentation
+  text: Explorateur de suivi des erreurs
+- link: https://app.datadoghq.com/apm/error-tracking
+  tag: Interface
+  text: Suivi des erreurs
+- link: https://www.datadoghq.com/blog/service-page/
+  tag: Blog
+  text: Télémétrie sur les services, suivi des erreurs, SLO et plus encore
+kind: documentation
+title: Suivi des erreurs
 ---
+
 {{< img src="tracing/error_tracking/explorer_with_backend_issues.png" alt="Page de suivi des erreurs"  >}}
 
 

@@ -1,49 +1,70 @@
 ---
-aliases:
-  - /ja/logs/log_collection/fluentd
+app_id: fluentd
+app_uuid: c725a834-feee-481d-94f0-afe95f39d0b1
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     fluentd: assets/dashboards/fluentd_dashboard.json
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: fluentd.buffer_queue_length
+      metadata_path: metadata.csv
+      prefix: fluentd.
+    process_signatures:
+    - td-agent
+    - fluentd
+    - ruby td-agent
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: fluentd
   saved_views:
     fluentd_processes: assets/saved_views/fluentd_processes.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-  - log collection
-  - autodiscovery
-creates_events: false
-ddtype: check
+- log collection
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/fluentd/README.md'
-display_name: fluentd
+- https://github.com/DataDog/integrations-core/blob/master/fluentd/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: fluentd
-guid: 68100352-b993-43e6-9dc8-5ecd498e160b
 integration_id: fluentd
 integration_title: FluentD
+integration_version: 2.2.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: fluentd.
-metric_to_check: fluentd.buffer_queue_length
+manifest_version: 2.0.0
 name: fluentd
-process_signatures:
-  - td-agent
-  - fluentd
-  - ruby td-agent
-public_title: Datadog-FluentD インテグレーション
+oauth: {}
+public_title: FluentD
 short_description: 有効化した各 FluentD プラグインのバッファキューと再試行回数を監視。
-support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: 有効化した各 FluentD プラグインのバッファキューと再試行回数を監視。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: FluentD
 ---
+
+
+
 ![Fluentd ダッシュボード][1]
 
 ## 概要
@@ -55,7 +76,7 @@ Fluentd からメトリクスを取得して、以下のことができます。
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Fluentd チェックは [Datadog Agent][2] パッケージに含まれています。Fluentd サーバーに追加でインストールする必要はありません。
 
@@ -176,7 +197,7 @@ Datadog で[インテグレーションの自動セットアップ][7]をトリ�
 - `kubernetes.pod_name`
 - `docker.container_id`
 
-Datadog Agent は Docker と Kubernetes のメタデータを自動的に収集しますが、FluentD では、そのためのプラグインが必要です。このメタデータの収集には、[fluent-plugin-kubernetes_metadata_filter][10] を使用することをお勧めします。
+Datadog Agent は Docker と Kubernetes のメタデータを自動的に収集しますが、FluentD では、そのためのプラグインが必要です。このメタデータの収集には、[fluent-plugin-kubernetes_metadata_filter][10] を使用することを Datadog はお勧めします。
 
 構成例:
 

@@ -10,19 +10,20 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - web
-  - log collection
-  - autodiscovery
+- web
+- log collection
+- autodiscovery
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/hive/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/hive/README.md
 display_name: Hive
 draft: false
 git_integration_title: hive
 guid: 3faee302-f293-45de-9eb8-ba6b7fa052a3
 integration_id: hive
 integration_title: Hive
+integration_version: 1.8.1
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -31,13 +32,16 @@ metric_prefix: hive.
 metric_to_check: hive.server.memory.total.used
 name: hive
 public_title: Intégration Datadog/Hive
-short_description: "Recueille diverses métriques JMX fournies par HiveServer2 et Hive\_MetaStore"
+short_description: Recueille diverses métriques JMX fournies par HiveServer2 et Hive MetaStore
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 Ce check surveille deux composants de [Hive][1] : Hive Metastore et HiveServer2.
@@ -82,7 +86,7 @@ Le check Hive est inclus avec le package de l'[Agent Datadog][2]. Vous n'avez do
 
 Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour la configuration dans un environnement conteneurisé.
 
 ##### Collecte de métriques
 
@@ -95,7 +99,7 @@ Suivez les instructions ci-dessous pour installer et configurer ce check lorsque
 
 ##### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
@@ -138,9 +142,9 @@ Pour recueillir des métriques avec l'intégration Datadog/Hive, consultez le gu
 
 ##### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][3].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs Kubernetes][3].
 
 | Paramètre      | Valeur                                                                                                                                                             |
 | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -162,14 +166,13 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 {{< get-metrics-from-git "hive" >}}
 
 
-### Checks de service
-
- **hive.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'instance HiveServer2 ou Hive Metastore qu'il surveille et à y recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
-
 ### Événements
 
 Le check Hive n'inclut aucun événement.
+
+### Checks de service
+{{< get-service-checks-from-git "hive" >}}
+
 
 ## Dépannage
 
@@ -177,7 +180,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
 
 [1]: https://cwiki.apache.org/confluence/display/Hive/Home
-[2]: https://docs.datadoghq.com/fr/agent/
+[2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://cwiki.apache.org/confluence/display/Hive/Configuration+Properties#ConfigurationProperties-Metrics
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [5]: https://docs.datadoghq.com/fr/help/

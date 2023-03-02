@@ -1,51 +1,73 @@
 ---
-aliases:
-  - /ja/integrations/httpcheck
+app_id: ネットワーク
+app_uuid: 3773283a-494f-497a-98cc-804520634a7a
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: network.http.response_time
+      metadata_path: metadata.csv
+      prefix: network.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: HTTP
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-  - web
-  - network
-creates_events: false
-ddtype: check
+- web
+- network
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/http_check/README.md'
-display_name: HTTP
+- https://github.com/DataDog/integrations-core/blob/master/http_check/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: http_check
-guid: eb133a1f-697c-4143-bad3-10e72541fa9c
 integration_id: ネットワーク
 integration_title: HTTP チェック
+integration_version: 8.1.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: network.
-metric_to_check: network.http.response_time
+manifest_version: 2.0.0
 name: http_check
-public_title: Datadog-HTTP チェックインテグレーション
+oauth: {}
+public_title: HTTP チェック
 short_description: レスポンス状況が悪い HTTP サービスや、SSL 証明書の期限切れが近い HTTP サービスを監視します
-support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Web
+  - Category::Network
+  configuration: README.md#Setup
+  description: レスポンス状況が悪い HTTP サービスや、SSL 証明書の期限切れが近い HTTP サービスを監視します
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: HTTP チェック
 ---
+
+
+
 ## 概要
 
-ローカルまたはリモート HTTP エンドポイントの上/下ステータスを監視します。HTTP チェックでは、レスポンス」がないことを示すコード (404) の検出、期限切れが近い SSL 証明書の特定、特定のテキストの応答の検索など、さまざまなことができます。また、HTTP 応答時間をメトリクスとして送信します。
+ローカルまたはリモート HTTP エンドポイントの上・下ステータスを監視します。HTTP チェックでは、レスポンス」がないことを示すコード (404 など) の検出、期限切れが近い SSL 証明書の特定、特定のテキストの応答の検索など、さまざまなことができます。また、HTTP 応答時間をメトリクスとして送信します。
 
 ## セットアップ
 
 ### インストール
 
-HTTP チェックは [Datadog Agent][1] パッケージに含まれているので、HTTP サイトを調査するサーバーに追加で何かをインストールする必要はありません。メトリクス指向チェックの多くは監視対象サービスと同じホストで実行することが最適な実行方法ですが、このステータス指向チェックは、監視対象のサイトを実行していないホストから実行することが望ましい場合があります。
+HTTP チェックは、[Datadog Agent][1] のパッケージに含まれています。サーバーに追加でインストールする必要はありません。多くのメトリクス指向のチェックは、監視するサービスと同じホストで実行するのが最適ですが、このステータス指向のチェックは、監視するサイトを実行していないホストから実行したい場合があります。
 
 ### コンフィギュレーション
 
@@ -62,7 +84,7 @@ instances:
     url: http://staging.example.com/
 ```
 
-HTTP チェックには一般的なチェックよりも多くの構成オプションがあり、上に示されているものはその一部です。多くのオプションはオプトインなので、必要なオプションを構成しない限り、Agent は SSL の有効性をチェックしません。ただし、期限切れが近い SSL 証明書のチェックはデフォルトで**実行されます**。
+HTTP チェックには一般的なチェックよりも多くの構成オプションがあります。多くのオプションはオプトインで、例えば、必要なオプションを構成しない限り、Agent は SSL の有効性をチェックしません。ただし、期限切れが近い SSL 証明書のチェックはデフォルトで実行されます。
 
 このチェックは、Agent コレクターを実行するたびに実行され、デフォルトでは 15 秒ごとです。このチェックのカスタム実行頻度を設定するには、カスタムチェックドキュメントの[コレクション間隔][4]セクションを参照してください。
 
@@ -85,7 +107,7 @@ HTTP チェックには一般的なチェックよりも多くの構成オプシ
 | `tls_verify`                     | `url` に到達した時に、サービスの TLS 証明書を検証するように指示します。                                                                                                                                                          |
 | `tls_ignore_warning`             | `tls_verify` を `true` に設定すると、SSL 接続からのすべてのセキュリティ警告が無効になります。                                                                                                                                                     |
 | `tls_ca_cert`                    | この設定を使用すると、`init_config` で指定されているデフォルトの証明書パスを上書きできます。                                                                                                                                                   |
-| `check_certificate_expiration`   | `check_certificate_expiration` が有効な場合、サービスチェックは、SSL 証明書の有効期限をチェックします。これにより、`tls_verify` 設定の値に関係なく SSL 証明書が検証されます。 |
+| `check_certificate_expiration`   | `check_certificate_expiration` が有効な場合、サービスチェックは、SSL 証明書の有効期限をチェックします。**注**: これにより、`tls_verify` 設定の値に関係なく SSL 証明書が検証されます。 |
 | `days_warning` と `days_critical` | `check_certificate_expiration` を有効にすると、指定された日数内に SSL 証明書の有効期限が存在する場合に、これらの設定によって警告または重要なアラートが発生します。                                                                |
 | `ssl_server_name`                | `check_certificate_expiration` を有効にすると、この設定により、接続するサービスのホスト名が指定され、check_hostname が有効になっていると一致するホストが上書きされます。                                                      |
 | `check_hostname`                 | `true` に設定すると、チェックした `url` ホスト名が SSL 証明書のホスト名と異なる場合に、警告をログに記録します。                                                                                                                           |
@@ -115,9 +137,11 @@ HTTP チェックにはイベントは含まれません。
 
 `http.ssl_cert` を無効にするには、`check_certificate_expiration` を false に設定します。
 
+**注:** これらのサービスチェックにアラートを設定するには、[ネットワークモニター][11]を作成します。
+
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
@@ -129,4 +153,5 @@ HTTP チェックにはイベントは含まれません。
 [8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [9]: https://github.com/DataDog/integrations-core/blob/master/http_check/metadata.csv
 [10]: https://github.com/DataDog/integrations-core/blob/master/http_check/assets/service_checks.json
-[11]: https://docs.datadoghq.com/ja/help/
+[11]: https://docs.datadoghq.com/ja/monitors/monitor_types/network/?tab=checkalert
+[12]: https://docs.datadoghq.com/ja/help/

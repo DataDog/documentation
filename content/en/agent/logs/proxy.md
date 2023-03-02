@@ -108,7 +108,7 @@ defaults
     option  redispatch
     timeout client 5s
     timeout server 5s
-    timeout connect 5
+    timeout connect 5s
 # This declares a view into HAProxy statistics, on port 3833
 # You do not need credentials to view this page and you can
 # turn it off once you are done with setup.
@@ -147,8 +147,10 @@ backend datadog-logs
 ```
 
 **Note**: Download the certificate with the following command:
-        * `sudo apt-get install ca-certificates` (Debian, Ubuntu)
-        * `yum install ca-certificates` (CentOS, Redhat)
+
+* `sudo apt-get install ca-certificates` (Debian, Ubuntu)
+* `yum install ca-certificates` (CentOS, Redhat)
+        
 If successful, the file will be located at `/etc/ssl/certs/ca-bundle.crt` for CentOS, Redhat.
 
 Once the HAProxy configuration is in place, you can reload it or restart HAProxy. **It is recommended to have a `cron` job that reloads HAProxy every 10 minutes** (for example, `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.com` fails over to another IP.
@@ -207,7 +209,12 @@ backend datadog-logs
     server datadog agent-intake.logs.datadoghq.eu:443 ssl verify required ca-file /etc/ssl/certs/ca-bundle.crt check port 443
 ```
 
-Download the certificate with the following command: `sudo apt-get install ca-certificates` (Debian, Ubuntu) or `yum install ca-certificates` (CentOS, Redhat). If successful, the file will be located at `/etc/ssl/certs/ca-bundle.crt` for CentOS, Redhat.
+Download the certificate with the following command: 
+
+* `sudo apt-get install ca-certificates` (Debian, Ubuntu)
+* `yum install ca-certificates` (CentOS, Redhat) 
+ 
+If successful, the file will be located at `/etc/ssl/certs/ca-bundle.crt` for CentOS, Redhat.
 
 Once the HAProxy configuration is in place, you can reload it or restart HAProxy. **It is recommended to have a `cron` job that reloads HAProxy every 10 minutes** (for example, `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.eu` fails over to another IP.
 

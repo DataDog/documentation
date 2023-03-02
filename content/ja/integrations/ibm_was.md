@@ -1,44 +1,72 @@
 ---
+app_id: ibm-was
+app_uuid: c4c79ae5-b702-415c-bc76-a7b71efd43d8
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     IBM_WAS: assets/dashboards/overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: ibm_was.can_connect
+      metadata_path: metadata.csv
+      prefix: ibm_was.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: IBM WAS
   logs:
     source: ibm_was
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
-  - web
-  - OS & システム
-  - ログの収集
-  - オートディスカバリー
-creates_events: false
-ddtype: check
+- web
+- OS & システム
+- ログの収集
+- オートディスカバリー
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/ibm_was/README.md'
-display_name: IBM WAS
+- https://github.com/DataDog/integrations-core/blob/master/ibm_was/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: ibm_was
-guid: ba177bb7-1bad-4ea8-ac59-1bc8a016f4f7
 integration_id: ibm-was
 integration_title: IBM WAS
+integration_version: 2.3.1
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: ibm_was.
-metric_to_check: ibm_was.can_connect
+manifest_version: 2.0.0
 name: ibm_was
-public_title: Datadog-IBM WAS インテグレーション
+oauth: {}
+public_title: IBM WAS
 short_description: IBM Websphere Application Server は Java アプリケーションをホストするフレームワークです
-support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Web
+  - Category::OS & System
+  - Category::Log Collection
+  - Category::Autodiscovery
+  configuration: README.md#Setup
+  description: IBM Websphere Application Server は Java アプリケーションをホストするフレームワークです
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: IBM WAS
 ---
+
+
+
 ## 概要
 
 このチェックは、Datadog Agent を通じて [IBM Websphere Application Server (WAS)][1] を監視します。このチェックは IBM WAS バージョン >=  8.5.5 をサポートします。
@@ -63,9 +91,9 @@ IBM WAS チェックは [Datadog Agent][4] パッケージに含まれていま�
 
 **注**: バージョン 6.1 から PerfServlet を動作させるには、アプリケーションセキュリティを有効にする必要があります。
 
-### 現在モニターされている統計セットの変更
+### モニターされている統計セットの変更
 
-デフォルトでは、アプリケーションサーバーは "基本" 監視用に構成されています。JVM、JDBC 接続、およびサーブレット接続を完全に可視化するには、現在モニターされているアプリケーションサーバーの統計セットを "基本" から "すべて" に変更します。
+デフォルトでは、アプリケーションサーバーは "基本" 監視用に構成されています。JVM、JDBC 接続、およびサーブレット接続を可視化するには、モニターされているアプリケーションサーバーの統計セットを "基本" から "すべて" に変更します。
 
 この設定は、Websphere 管理コンソールの `Application servers >  <YOUR_APP_SERVER> > Performance Monitoring Infrastructure (PMI)` にあります。
 
@@ -129,7 +157,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
 | パラメーター      | 値                                                |
 | -------------- | ---------------------------------------------------- |

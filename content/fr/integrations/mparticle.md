@@ -1,23 +1,27 @@
 ---
 categories:
-  - web
+- web
 ddtype: crawler
 dependencies: []
-description: Surveillez les crashs d'applications et recueillez des métriques détaillées sur les performances d'exécution.
-doc_link: 'https://docs.datadoghq.com/integrations/mparticle/'
+description: Surveillez les crashs d'applications et recueillez des métriques détaillées
+  sur les performances d'exécution.
+doc_link: https://docs.datadoghq.com/integrations/mparticle/
 draft: false
 git_integration_title: mparticle
 has_logo: true
 integration_id: mparticle
 integration_title: mParticle
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: mparticle
 public_title: Intégration Datadog/mParticle
-short_description: Surveillez les crashs d'applications et recueillez des métriques détaillées sur les performances d'exécution.
+short_description: Surveillez les crashs d'applications et recueillez des métriques
+  détaillées sur les performances d'exécution.
 version: '1.0'
 ---
+
 ## Présentation
 
 mParticle vous permet d'obtenir des données détaillées sur les performances d'exécution de vos applications mobiles. Le SDK mParticle recueille automatiquement des données de performances d'exécution détaillées telles que la charge CPU, l'empreinte mémoire et le niveau de batterie. Connectez mParticle à Datadog pour visualiser les informations suivantes en temps réel sur votre dashboard Datadog :
@@ -60,5 +64,5 @@ Besoin d'aide ? Contactez [l'assistance Datadog][5].
 [1]: https://www.datadoghq.com/blog/track-detailed-run-time-performance-data-with-mparticle-and-datadog/
 [2]: https://docs.mparticle.com/integrations/datadog/event/
 [3]: https://app.mparticle.com/login?return=
-[4]: https://app.datadoghq.com/account/settings#api
+[4]: https://app.datadoghq.com/organization-settings/api-keys
 [5]: https://docs.datadoghq.com/fr/help/

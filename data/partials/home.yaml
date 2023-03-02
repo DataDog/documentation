@@ -7,7 +7,7 @@ guides:
     link_text: Getting Started with the Agent
     link: getting_started/agent/
   - title: Set Up Integrations
-    desc: Gather metrics, traces, and logs with over 500 built-in integrations to send to Datadog.
+    desc: Gather metrics, traces, and logs with over 600 built-in integrations to send to Datadog.
     link_text: Getting Started with Integrations
     link: getting_started/integrations/
   - title: Get Started in App
@@ -28,6 +28,10 @@ nav_sections:
         link: integrations/
         icon: integrations
         desc: Gather data about your applications, services, and systems
+      - title: OpenTelemetry
+        link: opentelemetry/
+        icon: open-telemetry
+        desc: Pipe your OpenTelemetry metrics, logs, and traces into Datadog
       - title: Dashboards
         link: dashboards/
         icon: dashboard
@@ -48,22 +52,30 @@ nav_sections:
         link: monitors/
         icon: monitor
         desc: Create, edit, and manage your monitors and notifications
-      - title: APM & Continuous Profiler
+      - title: APM
         link: tracing/
         icon: apm
         desc: Explore out-of-the-box performance dashboards and distributed traces
+      - title: Continuous Profiler
+        link: profiler/
+        icon: profiling-1
+        desc: Compare performance snapshots and investigate bottlenecks
       - title: Log Management
         link: logs/
         icon: log
-        desc: Process, monitor, and archive your ingested logs 
-      - title: Security Platform
-        link: security_platform/
+        desc: Process, monitor, and archive your ingested logs
+      - title: Security
+        link: security/
         icon: security-platform
         desc: Detect threats and misconfigurations in your applications and infrastructure
       - title: Synthetic Monitoring
         link: synthetics/
         icon: synthetics
         desc: Ensure uptime, flag regional issues, and test application performance
+      - title: Continuous Testing
+        link: continuous_testing/
+        icon: continuous-testing
+        desc: Perform codeless integration and end-to-end testing with CI/CD providers
       - title: RUM & Session Replay
         link: real_user_monitoring/
         icon: rum
@@ -83,7 +95,7 @@ nav_sections:
       - title: Datadog Watchdog
         link: watchdog/
         icon: watchdog
-        desc: Observe trends and patterns in your APM and infrastructure metrics
+        desc: Detect and surface application and infrastructure anomalies
       - title: CI Visibility
         link: continuous_integration/
         icon: ci
@@ -92,6 +104,14 @@ nav_sections:
         link: database_monitoring/
         icon: database-2
         desc: Explore enriched dashboards, query metrics, and query samples
+      - title: Observability Pipelines
+        link: observability_pipelines/
+        icon: pipelines
+        desc: Manage and monitor your telemetry pipelines
+      - title: Universal Service Monitoring
+        link: universal_service_monitoring/
+        icon: usm
+        desc: Discover, map, and monitor services without changing code
   - nav_section:
     - name: 'Configuration'
     - navtiles:
@@ -103,8 +123,8 @@ nav_sections:
         link: account_management/
         icon: cog-2
         desc: Access org-based settings and billing
-      - title: Security
-        link: security/
+      - title: Data Security
+        link: data_security/
         icon: security-lock
         desc: Learn how Datadog protects your data
       - title: Developers

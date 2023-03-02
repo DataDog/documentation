@@ -46,7 +46,7 @@ Cette intégration permet de s'assurer que chaque modification des paramètres d
     ![Événement Datadog][7] 
 4. Accédez à l'onglet [integrations][8] du dashboard ConfigCat.
 5. Cliquez sur le bouton _CONNECT_ de Datadog, et entrez votre clé d'API Datadog.
-6. C'est tout ! Modifiez vos feature flags comme bon vous semble et vérifiez vos Événements dans Datadog.
+6. C'est tout ! Modifiez vos feature flags comme bon vous semble et vérifiez vos événements dans Datadog.
 
 
 ### Désinstallation
@@ -74,7 +74,7 @@ L'intégration ConfigCat n'inclut aucun check de service.
 
 ## Dépannage
 
-Besoin d'aide ? Consultez la [documentation de ConfigCat][10] ou contactez l'[assistance ConfigCat][11].
+Besoin d'aide ? Consultez la [documentation ConfigCat][10] (en anglais) ou contactez l'[assistance ConfigCat][11].
 
 [1]: https://configcat.com
 [2]: https://app.configcat.com

@@ -1,14 +1,15 @@
 ---
-title: コンテナディスカバリー管理
-kind: ガイド
 aliases:
-  - /ja/agent/autodiscovery/management
-  - /ja/agent/kubernetes/management
+- /ja/agent/autodiscovery/management
+- /ja/agent/kubernetes/management
 further_reading:
-  - link: /agent/kubernetes/integrations/
-    tag: ドキュメント
-    text: オートディスカバリーのインテグレーションテンプレートの作成とロード
+- link: /agent/kubernetes/integrations/
+  tag: ドキュメント
+  text: オートディスカバリーのインテグレーションテンプレートの作成とロード
+kind: ガイド
+title: コンテナディスカバリー管理
 ---
+
 Datadog Agent は、利用可能なすべてのコンテナを自動検出する設定になっています。検出パラメーターを制限したりデータの収集をコンテナのサブセットのみに制限するには、それぞれのコンフィギュレーションで取り扱いを設定します。
 
 **注**: `kubernetes.containers.running`、`kubernetes.pods.running`、`docker.containers.running`、`.stopped`、`.running.total`、`.stopped.total` の各メトリクスは、この設定の影響を受けず、常にすべてのコンテナを対象とします。
@@ -19,7 +20,7 @@ Agent をホスト上のバイナリとして実行する場合は、[Agent](?ta
 
 `name`、`image`、`kube_namespace` に基づく除外ルールで Agent のオートディスカバリー境界からのコンテナを除外し、そこから **NO DATA** を集めます。コンテナと除外ルールが一致すると、最初に包含ルールに一致しない限り含まれることはありません。
 
-**注**: 除外条件は正規表現をサポートし、カンマ区切り文字列のリストとして定義されます。
+**注**: 除外条件は正規表現をサポートし、スペース区切り文字列のリストとして定義されます。
 
 **注**: 各コンテナを除外するには、`name:.*`、`image:.*`、`kube_namespace:.*` を使用できます。`name:`、`image:`、または `kube_namespace:` のプレフィックスなしで `.*` を構成しても機能しません。
 
@@ -139,12 +140,12 @@ container_exclude: [kube_namespace:<NAMESPACE>]
 
 `name` または `image` に基づく包含ルールで` Agent のオートディスカバリー境界からのコンテナを含め、そのコンテナから**のみ**のデータを集めます。コンテナと包含ルールが一致すると、常にオートディスカバリー境界に含まれることになります。
 
-**注**: 包含ルールは正規表現をサポートし、カンマ区切り文字列のリストとして定義されます。
+**注**: 包含ルールは正規表現をサポートし、スペース区切り文字列のリストとして定義されます。
 
 {{< tabs >}}
 {{% tab "Containerized Agent" %}}
 
-**Agent v7.20 以前**でオートディスカバリーから**画像** `<IMAGE_NAME>`を持つ特定のDockerコンテナを含めるには、次の環境変数を Datadog Agent に追加します。
+**Agent v7.20 以降**でオートディスカバリーから**画像** `<IMAGE_NAME>`を持つ特定のDockerコンテナを含めるには、次の環境変数を Datadog Agent に追加します。
 
 ```shell
 DD_CONTAINER_INCLUDE = "image:<IMAGE_NAME>"
@@ -158,7 +159,7 @@ DD_AC_INCLUDE = "image:<IMAGE_NAME>"
 
 **注**: `DD_AC_INCLUDE` は **Agent v7.20 以降では推奨されません**。
 
-**Agent v7.20 以前**でオートディスカバリーから**名前** `<NAME>`を持つ特定のDockerコンテナを含めるには、次の環境変数を Datadog Agent に追加します。
+**Agent v7.20 以降**でオートディスカバリーから**名前** `<NAME>`を持つ特定のDockerコンテナを含めるには、次の環境変数を Datadog Agent に追加します。
 
 ```shell
 DD_CONTAINER_INCLUDE = "name:<NAME>"

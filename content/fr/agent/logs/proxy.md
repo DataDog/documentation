@@ -1,17 +1,18 @@
 ---
-title: Agent avec un proxy TCP pour l'envoi de logs
-kind: documentation
 further_reading:
-  - link: /logs/
-    tag: Documentation
-    text: Recueillir vos logs
-  - link: /infrastructure/process/
-    tag: Documentation
-    text: Recueillir vos processus
-  - link: /tracing/
-    tag: Documentation
-    text: Recueillir vos traces
+- link: /logs/
+  tag: Documentation
+  text: Recueillir vos logs
+- link: /infrastructure/process/
+  tag: Documentation
+  text: Recueillir vos processus
+- link: /tracing/
+  tag: Documentation
+  text: Recueillir vos traces
+kind: documentation
+title: Agent avec un proxy TCP pour l'envoi de logs
 ---
+
 ## Présentation
 
 La collecte de logs nécessite la version >= 6.0 de l'Agent Datadog. Les versions antérieures de l'Agent n'incluent pas l'interface `Log collection`.
@@ -146,8 +147,10 @@ backend datadog-logs
 ```
 
 **Remarque** : téléchargez le certificat avec la commande suivante :
-        * `sudo apt-get install ca-certificates` (Debian, Ubuntu)
-        * `yum install ca-certificates` (CentOS, Redhat)
+
+* `sudo apt-get install ca-certificates` (Debian, Ubuntu)
+* `yum install ca-certificates` (CentOS, Redhat)
+
 Si le téléchargement fonctionne, le fichier est stocké à l'emplacement suivant pour CentOS et Redhat : `/etc/ssl/certs/ca-bundle.crt`.
 
 Une fois la configuration de HAProxy effectuée, vous pouvez recharger ou redémarrer le service. **Nous vous conseillons de configurer une tâche `cron` qui recharge HAProxy toutes les 10 minutes** (par exemple avec la commande `service haproxy reload`) pour forcer l'actualisation du cache DNS de HAProxy si `app.datadoghq.com` bascule vers une autre IP.
@@ -206,7 +209,12 @@ backend datadog-logs
     server datadog agent-intake.logs.datadoghq.eu:443 ssl verify required ca-file /etc/ssl/certs/ca-bundle.crt check port 443
 ```
 
-Téléchargez le certificat à l'aide de la commande `sudo apt-get install ca-certificates` (Debian ou Ubuntu) ou `yum install ca-certificates` (CentOS ou Redhat). Si la commande n'échoue pas, le fichier est téléchargé à l'emplacement `/etc/ssl/certs/ca-bundle.crt` (Centos ou Redhat).
+Téléchargez le certificat avec la commande suivante :
+
+* `sudo apt-get install ca-certificates` (Debian, Ubuntu)
+* `yum install ca-certificates` (CentOS, Redhat) 
+
+Si le téléchargement fonctionne, le fichier est stocké à l'emplacement suivant pour CentOS et Redhat : `/etc/ssl/certs/ca-bundle.crt`.
 
 Une fois la configuration de HAProxy effectuée, vous pouvez recharger ou redémarrer le service. **Nous vous conseillons de configurer une tâche `cron` qui recharge HAProxy toutes les 10 minutes** (par exemple avec la commande `service haproxy reload`) pour forcer l'actualisation du cache DNS de HAProxy si `app.datadoghq.eu` bascule vers une autre IP.
 

@@ -1,37 +1,61 @@
 ---
+app_id: concourse-ci
+app_uuid: eb83d03f-e1d6-4718-8e54-922f4d2528b1
 assets:
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: concourse.ci.goroutines
+      metadata_path: metadata.csv
+      prefix: concourse.ci.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Concourse CI
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: コミュニティ
+  sales_email: help@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-  - コラボレーション
-creates_events: false
-ddtype: crawler
+- コラボレーション
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/concourse_ci/README.md
-display_name: Concourse CI
+- https://github.com/DataDog/integrations-extras/blob/master/concourse_ci/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: concourse_ci
-guid: 054cc9fb-01c4-4f05-98b5-fae828746787
 integration_id: concourse-ci
 integration_title: Concourse-CI
 integration_version: ''
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: concourse.ci.
-metric_to_check: concourse.ci.goroutines
+manifest_version: 2.0.0
 name: concourse_ci
-public_title: Datadog-Concourse-CI インテグレーション
+oauth: {}
+public_title: Concourse-CI
 short_description: Concourse CI から送信されるメトリクスを収集
-support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Collaboration
+  configuration: README.md#Setup
+  description: Concourse CI から送信されるメトリクスを収集
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Concourse-CI
 ---
+
+
+
 ## 概要
 
 Concourse CI で Datadog メトリクスエミッターを構成すると、以下のことができます。
@@ -51,7 +75,7 @@ Concourse CI には Datadog メトリクスエミッターが付属していま�
 
 ### メトリクスエミッターオプション
 
-詳細については、Concourse CI の[ドキュメント][4]を参照してください。
+詳しくは、Concourse CI のドキュメントの [Configuring Metrics][4] を参照してください。
 
 ```text
 Metric Emitter (Datadog):

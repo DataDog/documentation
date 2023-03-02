@@ -1,9 +1,9 @@
 {
-  "Validate": [
+  "UpdateAWSAccount": [
     {
-      "group": "authentication",
+      "group": "aws_integration",
       "suffix": "",
-      "description": "Validate API key returns \"OK\" response"
+      "description": "Update an AWS integration returns \"OK\" response"
     }
   ],
   "CreateDashboardList": [
@@ -11,27 +11,6 @@
       "group": "dashboard_lists",
       "suffix": "",
       "description": "Create a dashboard list returns \"OK\" response"
-    }
-  ],
-  "DeleteDashboardList": [
-    {
-      "group": "dashboard_lists",
-      "suffix": "",
-      "description": "Delete a dashboard list returns \"OK\" response"
-    }
-  ],
-  "GetDashboardList": [
-    {
-      "group": "dashboard_lists",
-      "suffix": "",
-      "description": "Get a dashboard list returns \"OK\" response"
-    }
-  ],
-  "ListDashboardLists": [
-    {
-      "group": "dashboard_lists",
-      "suffix": "",
-      "description": "Get all dashboard lists returns \"OK\" response"
     }
   ],
   "UpdateDashboardList": [
@@ -42,6 +21,21 @@
     }
   ],
   "CreateDashboard": [
+    {
+      "group": "dashboards",
+      "suffix": "_1442588603",
+      "description": "Create a distribution widget using a histogram request containing a formulas and functions APM Stats query"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_3882428227",
+      "description": "Create a distribution widget using a histogram request containing a formulas and functions events query"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_252716965",
+      "description": "Create a distribution widget using a histogram request containing a formulas and functions metrics query"
+    },
     {
       "group": "dashboards",
       "suffix": "",
@@ -61,6 +55,11 @@
       "group": "dashboards",
       "suffix": "_2644712913",
       "description": "Create a new dashboard with a query value widget using the percentile aggregator"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_765140092",
+      "description": "Create a new dashboard with a query value widget using timeseries background"
     },
     {
       "group": "dashboards",
@@ -89,6 +88,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_4026341408",
+      "description": "Create a new dashboard with apm_issue_stream list_stream widget"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2607944105",
       "description": "Create a new dashboard with check_status widget"
     },
@@ -96,6 +100,11 @@
       "group": "dashboards",
       "suffix": "_803346562",
       "description": "Create a new dashboard with distribution widget and apm stats data"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_2432046716",
+      "description": "Create a new dashboard with event_stream list_stream widget"
     },
     {
       "group": "dashboards",
@@ -159,8 +168,33 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_3669695268",
+      "description": "Create a new dashboard with logs query table widget and storage parameter"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_1039800684",
+      "description": "Create a new dashboard with logs_pattern_stream list_stream widget"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_3117424216",
+      "description": "Create a new dashboard with logs_stream list_stream widget and storage parameter"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_2843286292",
+      "description": "Create a new dashboard with logs_transaction_stream list_stream widget"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2917274132",
       "description": "Create a new dashboard with manage_status widget"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_1094917386",
+      "description": "Create a new dashboard with manage_status widget and show_priority parameter"
     },
     {
       "group": "dashboards",
@@ -179,6 +213,16 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_4076476470",
+      "description": "Create a new dashboard with rum_issue_stream list_stream widget"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_2610827685",
+      "description": "Create a new dashboard with run-workflow widget"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2342457693",
       "description": "Create a new dashboard with scatterplot widget"
     },
@@ -186,6 +230,16 @@
       "group": "dashboards",
       "suffix": "_2034634967",
       "description": "Create a new dashboard with servicemap widget"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_1423904722",
+      "description": "Create a new dashboard with slo list widget"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_109450134",
+      "description": "Create a new dashboard with slo list widget with sort"
     },
     {
       "group": "dashboards",
@@ -199,6 +253,21 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_858397694",
+      "description": "Create a new dashboard with template variable defaults returns \"OK\" response"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_2850365602",
+      "description": "Create a new dashboard with template variable presets using values returns \"OK\" response"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_41622531",
+      "description": "Create a new dashboard with timeseries widget and formula style attributes"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_3982498788",
       "description": "Create a new dashboard with timeseries widget containing style attributes"
     },
@@ -209,8 +278,18 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_2652180930",
+      "description": "Create a new dashboard with topology_map widget"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2921337351",
       "description": "Create a new dashboard with trace_service widget"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_1307120899",
+      "description": "Create a new timeseries widget with ci_tests data source"
     }
   ],
   "DeleteDashboards": [
@@ -220,30 +299,18 @@
       "description": "Delete dashboards returns \"No Content\" response"
     }
   ],
-  "GetDashboard": [
-    {
-      "group": "dashboards",
-      "suffix": "_4262333854",
-      "description": "Get a dashboard returns 'author_name'"
-    }
-  ],
-  "ListDashboards": [
+  "RestoreDashboards": [
     {
       "group": "dashboards",
       "suffix": "",
-      "description": "Get all dashboards returns \"OK\" response"
-    },
-    {
-      "group": "dashboards",
-      "suffix": "_1773932563",
-      "description": "Get deleted dashboards returns \"OK\" response"
+      "description": "Restore deleted dashboards returns \"No Content\" response"
     }
   ],
-  "CancelDowntime": [
+  "UpdateDashboard": [
     {
-      "group": "downtimes",
+      "group": "dashboards",
       "suffix": "",
-      "description": "Cancel a downtime returns \"OK\" response"
+      "description": "Update a dashboard returns \"OK\" response"
     }
   ],
   "CancelDowntimesByScope": [
@@ -251,13 +318,6 @@
       "group": "downtimes",
       "suffix": "",
       "description": "Cancel downtimes by scope returns \"OK\" response"
-    }
-  ],
-  "GetDowntime": [
-    {
-      "group": "downtimes",
-      "suffix": "",
-      "description": "Get a downtime returns \"OK\" response"
     }
   ],
   "CreateDowntime": [
@@ -306,28 +366,11 @@
       "description": "Post an event with a long title returns \"OK\" response"
     }
   ],
-  "ListHosts": [
+  "ListLogs": [
     {
-      "group": "hosts",
-      "suffix": "",
-      "description": "Get all hosts for your organization returns \"OK\" response"
-    },
-    {
-      "group": "hosts",
-      "suffix": "_347346033",
-      "description": "Get all hosts with metadata deserializes successfully"
-    },
-    {
-      "group": "hosts",
-      "suffix": "_2975406675",
-      "description": "Get all hosts with metadata for your organization returns \"OK\" response"
-    }
-  ],
-  "GetIPRanges": [
-    {
-      "group": "ip_ranges",
-      "suffix": "",
-      "description": "List IP Ranges returns \"OK\" response"
+      "group": "logs",
+      "suffix": "_235998668",
+      "description": "Search test logs returns \"OK\" response"
     }
   ],
   "SubmitLog": [
@@ -347,11 +390,16 @@
       "description": "Send logs returns \"Response from server (always 200 empty JSON).\" response"
     }
   ],
-  "QueryMetrics": [
+  "SubmitDistributionPoints": [
+    {
+      "group": "metrics",
+      "suffix": "_3109558960",
+      "description": "Submit deflate distribution points returns \"Payload accepted\" response"
+    },
     {
       "group": "metrics",
       "suffix": "",
-      "description": "Query timeseries points returns \"OK\" response"
+      "description": "Submit distribution points returns \"Payload accepted\" response"
     }
   ],
   "SubmitMetrics": [
@@ -366,13 +414,6 @@
       "description": "Submit metrics returns \"Payload accepted\" response"
     }
   ],
-  "CheckCanDeleteMonitor": [
-    {
-      "group": "monitors",
-      "suffix": "",
-      "description": "Check if a monitor can be deleted returns \"OK\" response"
-    }
-  ],
   "CreateMonitor": [
     {
       "group": "monitors",
@@ -381,20 +422,38 @@
     },
     {
       "group": "monitors",
+      "suffix": "_3824294658",
+      "description": "Create a ci-pipelines formula and functions monitor returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
       "suffix": "_3790803616",
       "description": "Create a ci-pipelines monitor returns \"OK\" response"
     },
     {
       "group": "monitors",
-      "suffix": "",
-      "description": "Create a monitor returns \"OK\" response"
-    }
-  ],
-  "DeleteMonitor": [
+      "suffix": "_1969035628",
+      "description": "Create a ci-tests formula and functions monitor returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_2520912138",
+      "description": "Create a ci-tests monitor returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_2012680290",
+      "description": "Create a metric monitor returns \"OK\" response"
+    },
     {
       "group": "monitors",
       "suffix": "",
-      "description": "Delete a monitor returns \"OK\" response"
+      "description": "Create a monitor returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_440013737",
+      "description": "Create an Error Tracking monitor returns \"OK\" response"
     }
   ],
   "UpdateMonitor": [
@@ -404,44 +463,23 @@
       "description": "Edit a monitor returns \"OK\" response"
     }
   ],
-  "GetMonitor": [
-    {
-      "group": "monitors",
-      "suffix": "",
-      "description": "Get a monitor's details returns \"OK\" response"
-    },
-    {
-      "group": "monitors",
-      "suffix": "_3691711704",
-      "description": "Get a synthetics monitor's details"
-    }
-  ],
-  "ListMonitors": [
-    {
-      "group": "monitors",
-      "suffix": "",
-      "description": "Get all monitor details returns \"OK\" response"
-    }
-  ],
-  "SearchMonitorGroups": [
-    {
-      "group": "monitors",
-      "suffix": "",
-      "description": "Monitors group search returns \"OK\" response"
-    }
-  ],
-  "SearchMonitors": [
-    {
-      "group": "monitors",
-      "suffix": "",
-      "description": "Monitors search returns \"OK\" response"
-    }
-  ],
   "ValidateMonitor": [
     {
       "group": "monitors",
       "suffix": "",
       "description": "Validate a monitor returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_4247196452",
+      "description": "Validate a multi-alert monitor returns \"OK\" response"
+    }
+  ],
+  "ValidateExistingMonitor": [
+    {
+      "group": "monitors",
+      "suffix": "",
+      "description": "Validate an existing monitor returns \"OK\" response"
     }
   ],
   "CreateNotebook": [
@@ -451,32 +489,32 @@
       "description": "Create a notebook returns \"OK\" response"
     }
   ],
-  "DeleteNotebook": [
-    {
-      "group": "notebooks",
-      "suffix": "",
-      "description": "Delete a notebook returns \"OK\" response"
-    }
-  ],
-  "GetNotebook": [
-    {
-      "group": "notebooks",
-      "suffix": "",
-      "description": "Get a notebook returns \"OK\" response"
-    }
-  ],
-  "ListNotebooks": [
-    {
-      "group": "notebooks",
-      "suffix": "",
-      "description": "Get all notebooks returns \"OK\" response"
-    }
-  ],
   "UpdateNotebook": [
     {
       "group": "notebooks",
       "suffix": "",
       "description": "Update a notebook returns \"OK\" response"
+    }
+  ],
+  "AddSecurityMonitoringSignalToIncident": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Add a security signal to an incident returns \"OK\" response"
+    }
+  ],
+  "EditSecurityMonitoringSignalState": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Change the triage state of a security signal returns \"OK\" response"
+    }
+  ],
+  "EditSecurityMonitoringSignalAssignee": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Modify the triage assignee of a security signal returns \"OK\" response"
     }
   ],
   "SubmitServiceCheck": [
@@ -498,20 +536,6 @@
       "description": "Create an SLO correction with rrule returns \"OK\" response"
     }
   ],
-  "ListSLOCorrection": [
-    {
-      "group": "service_level_objective_corrections",
-      "suffix": "",
-      "description": "Get all SLO corrections returns \"OK\" response"
-    }
-  ],
-  "GetSLOCorrection": [
-    {
-      "group": "service_level_objective_corrections",
-      "suffix": "",
-      "description": "Get an SLO correction for an SLO returns \"OK\" response"
-    }
-  ],
   "UpdateSLOCorrection": [
     {
       "group": "service_level_objective_corrections",
@@ -526,46 +550,64 @@
       "description": "Create an SLO object returns \"OK\" response"
     }
   ],
-  "DeleteSLO": [
+  "UpdateSLO": [
     {
       "group": "service_level_objectives",
       "suffix": "",
-      "description": "Delete an SLO returns \"OK\" response"
-    }
-  ],
-  "GetSLOCorrections": [
-    {
-      "group": "service_level_objectives",
-      "suffix": "",
-      "description": "Get Corrections For an SLO returns \"OK\" response"
-    }
-  ],
-  "GetGraphSnapshot": [
-    {
-      "group": "snapshots",
-      "suffix": "",
-      "description": "Take graph snapshots returns \"OK\" response"
-    }
-  ],
-  "ListTests": [
-    {
-      "group": "synthetics",
-      "suffix": "_2779190961",
-      "description": "Client is resilient to enum and oneOf deserialization errors"
+      "description": "Update an SLO returns \"OK\" response"
     }
   ],
   "CreateSyntheticsBrowserTest": [
     {
       "group": "synthetics",
+      "suffix": "_2932742688",
+      "description": "Create a browser test returns \"OK - Returns saved rumSettings.\" response"
+    },
+    {
+      "group": "synthetics",
       "suffix": "",
       "description": "Create a browser test returns \"OK - Returns the created test details.\" response"
+    },
+    {
+      "group": "synthetics",
+      "suffix": "_397420811",
+      "description": "Create a browser test with advanced scheduling options returns \"OK - Returns the created test details.\" response"
+    }
+  ],
+  "CreateGlobalVariable": [
+    {
+      "group": "synthetics",
+      "suffix": "_1068962881",
+      "description": "Create a global variable from test returns \"OK\" response"
+    }
+  ],
+  "CreatePrivateLocation": [
+    {
+      "group": "synthetics",
+      "suffix": "",
+      "description": "Create a private location returns \"OK\" response"
     }
   ],
   "CreateSyntheticsAPITest": [
     {
       "group": "synthetics",
-      "suffix": "",
-      "description": "Create an API test returns \"OK - Returns the created test details.\" response"
+      "suffix": "_1402674167",
+      "description": "Create an API GRPC test returns \"OK - Returns the created test details.\" response"
+    },
+    {
+      "group": "synthetics",
+      "suffix": "_1487281163",
+      "description": "Create an API HTTP test returns \"OK - Returns the created test details.\" response"
+    },
+    {
+      "group": "synthetics",
+      "suffix": "_960766374",
+      "description": "Create an API HTTP with oauth-rop test returns \"OK - Returns the created test details.\" response"
+    },
+    {
+      "group": "synthetics",
+      "suffix": "_1072503741",
+      "description": "Create an API SSL test returns \"OK - Returns the created test details.\" response"
     },
     {
       "group": "synthetics",
@@ -590,95 +632,11 @@
       "description": "Edit an API test returns \"OK\" response"
     }
   ],
-  "GetAPITestResult": [
-    {
-      "group": "synthetics",
-      "suffix": "_1321866518",
-      "description": "Get an API test result returns result with failure object"
-    }
-  ],
   "TriggerTests": [
     {
       "group": "synthetics",
       "suffix": "",
       "description": "Trigger Synthetics tests returns \"OK\" response"
-    }
-  ],
-  "GetHourlyUsageAttribution": [
-    {
-      "group": "usage_metering",
-      "suffix": "",
-      "description": "Get Hourly Usage Attribution returns \"OK\" response"
-    }
-  ],
-  "GetMonthlyUsageAttribution": [
-    {
-      "group": "usage_metering",
-      "suffix": "",
-      "description": "Get Monthly Usage Attribution returns \"OK\" response"
-    }
-  ],
-  "GetUsageAttribution": [
-    {
-      "group": "usage_metering",
-      "suffix": "",
-      "description": "Get Usage Attribution returns \"OK\" response"
-    }
-  ],
-  "GetUsageCloudSecurityPostureManagement": [
-    {
-      "group": "usage_metering",
-      "suffix": "",
-      "description": "Get hourly usage for CSPM returns \"OK\" response"
-    }
-  ],
-  "GetUsageInternetOfThings": [
-    {
-      "group": "usage_metering",
-      "suffix": "",
-      "description": "Get hourly usage for IoT returns \"OK\" response"
-    }
-  ],
-  "GetUsageSNMP": [
-    {
-      "group": "usage_metering",
-      "suffix": "",
-      "description": "Get hourly usage for SNMP devices returns \"OK\" response"
-    }
-  ],
-  "GetUsageAnalyzedLogs": [
-    {
-      "group": "usage_metering",
-      "suffix": "",
-      "description": "Get hourly usage for analyzed logs returns \"OK\" response"
-    }
-  ],
-  "GetIncidentManagement": [
-    {
-      "group": "usage_metering",
-      "suffix": "",
-      "description": "Get hourly usage for incident management returns \"OK\" response"
-    }
-  ],
-  "GetUsageIndexedSpans": [
-    {
-      "group": "usage_metering",
-      "suffix": "",
-      "description": "Get hourly usage for indexed spans returns \"OK\" response"
-    }
-  ],
-  "GetIngestedSpans": [
-    {
-      "group": "usage_metering",
-      "suffix": "",
-      "description": "Get hourly usage for ingested spans returns \"OK\" response"
-    }
-  ],
-  "GetUsageProfiling": [
-    {
-      "group": "usage_metering",
-      "suffix": "",
-      "description": "Get hourly usage for profiled hosts returns \"OK\" response"
     }
   ],
   "CreateWebhooksIntegrationCustomVariable": [
@@ -693,27 +651,6 @@
       "group": "webhooks_integration",
       "suffix": "",
       "description": "Create a webhooks integration returns \"OK\" response"
-    }
-  ],
-  "DeleteWebhooksIntegrationCustomVariable": [
-    {
-      "group": "webhooks_integration",
-      "suffix": "",
-      "description": "Delete a custom variable returns \"OK\" response"
-    }
-  ],
-  "DeleteWebhooksIntegration": [
-    {
-      "group": "webhooks_integration",
-      "suffix": "",
-      "description": "Delete a webhook returns \"OK\" response"
-    }
-  ],
-  "GetWebhooksIntegration": [
-    {
-      "group": "webhooks_integration",
-      "suffix": "",
-      "description": "Get a webhook integration returns \"OK\" response"
     }
   ],
   "UpdateWebhooksIntegrationCustomVariable": [

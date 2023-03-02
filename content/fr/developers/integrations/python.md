@@ -1,8 +1,9 @@
 ---
-title: Environnement Python pour le développement d'intégrations avec l'Agent
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/docs/dev/python.md
 kind: documentation
+title: Environnement Python pour le développement d'intégrations avec l'Agent
 ---
-
 Ce document aborde la configuration d'un environnement Python permettant de travailler sur des intégrations basées sur l'Agent, y compris l'installation de l'interpréteur et la vérification de la présence de toutes les dépendances requises.
 
 ## Python 2 ou 3
@@ -26,23 +27,23 @@ Nous vous conseillons d'installer un [gestionnaire d'environnement](#gestionnair
 
 ### Linux
 
-Toutes les distributions populaires de Linux sont livrées avec Python pré-installé, et probablement avec une version suffisamment récente. Nous vous conseillons d'installer un [gestionnaire d'environnement](#gestionnaire-d-environnement-virtuel) pour ne pas altérer l'installation système de Python. Consultez la documentation relative à la gestion de paquet de votre distribution pour en savoir plus.
+Python est pré-installé sur toutes les distributions populaires de Linux, avec probablement une version suffisamment récente. Il est conseillé d'installer un [gestionnaire d'environnement](#gestionnaire-d-environnement-virtuel) pour ne pas altérer l'installation système de Python. Consultez la documentation relative à la gestion de package de votre distribution pour en savoir plus.
 
 ### Windows
 
-Windows ne dispose généralement pas d'un environnement Python. La [documentation Python officielle][6] contient des instructions d'installation détaillées et des liens vers des outils et des articles supplémentaires.
+Windows ne dispose généralement pas d'un environnement Python. Consultez la section [Utiliser Python sur Windows][6] pour obtenir des instructions d'installation détaillées ainsi que des liens vers des outils et des articles supplémentaires.
 
 ## Gestionnaire d'environnement virtuel
 
 Chaque intégration possède son propre ensemble de dépendances qui doit être ajouté à Python pour exécuter les tests ou tout simplement pour tester le code de collecte. Pour éviter d’encombrer votre installation Python avec des bibliothèques et des paquets qui utilisés par une seule intégration, utilisez un « environnement virtuel ». Un environnement virtuel est une arborescence de répertoire autonome qui contient une installation Python isolée. Lorsqu'un environnement virtuel est actif, chaque paquet que vous installez est stocké dans ce répertoire sans affecter la globalité de l'installation Python.
 
-### Virtualenv et Virtualenvwrapper
+### Virtualenv et virtualenvwrapper
 
 Datadog recommande l'utilisation de [Virtualenv][7] pour gérer les environnements virtuels Python et de [virtualenvwrapper][8] pour faciliter le processus. Vous trouverez un [guide complet][9] dans le Hitchhiker's Guide to Python (en anglais), qui explique comment configurer ces deux outils.
 
 ### Miniconda
 
-Miniconda intègre un outil de gestion des environnements virtuels. Consultez le [guide officiel][10] pour en savoir plus.
+Miniconda intègre un outil de gestion des environnements virtuels. Consultez la section [Gestion des environnements][10] (en anglais) pour en savoir plus.
 
 [1]: https://github.com/DataDog/omnibus-software/blob/master/config/software/python.rb#L21
 [2]: https://brew.sh/#install

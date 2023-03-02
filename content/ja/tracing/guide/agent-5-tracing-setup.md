@@ -1,13 +1,14 @@
 ---
-title: APM & Continuous Profiler と Agent v5
+aliases:
+- /ja/tracing/faq/agent-5-tracing-setup
 kind: ガイド
 private: true
-aliases:
-  - /ja/tracing/faq/agent-5-tracing-setup
+title: APM & Continuous Profiler と Agent v5
 ---
+
 ## はじめに
 
-APM は、Linux および Docker の Agent 用のワンラインインストーラーの一環として Datadog Agent バージョン 5.11 以降でご利用可能です。[Mac][1] ユーザーおよび [Windows][2] ユーザーは、別のインストールプロセスにより APM Agent (トレース Agent) を手動でインストールする必要があります。
+APM は、Linux および Docker の Agent 用の 1 行のインストールコマンドの一環として Datadog Agent バージョン 5.11 以降でご利用可能です。[Mac][1] ユーザーおよび [Windows][2] ユーザーは、別のインストールプロセスにより APM Agent (別名トレース Agent) を手動でインストールする必要があります。
 
 Agent は、[Datadog Agent コンフィギュレーションファイル][3]に次のパラメーターを記述することで有効化できます。
 
@@ -57,7 +58,7 @@ Datadog Agent では、インフラストラクチャーの監視と APM コン�
 | `apm_enabled`           | `DD_APM_ENABLED`           | 値を `true`. に設定すると、Datadog Agent はトレースメトリクスを受け付けます。デフォルトの値は `true` です。                                                            |
 | `receiver_port`         | `DD_RECEIVER_PORT`         | Datadog Agent のトレースレシーバーがリスニングするポート。デフォルト値は `8126` です。                                                                  |
 | `connection_limit`      | `DD_CONNECTION_LIMIT`      | 1 回 30 秒のリース期間で許可するクライアント接続のユニーク数。デフォルト値は `2000` です。                                                 |
-| `resource`              | `DD_IGNORE_RESOURCE`       | トレースをリソース名でフィルタリングするための正規表現ブラックリスト。                                                                                  |
+| `resource`              | `DD_IGNORE_RESOURCE`       | トレースをリソース名でフィルタリングするための正規表現の除外リスト。                                                                                  |
 
 Datadog Agent の詳細については、[専用ドキュメントページ][9]または [`datadog.conf.example` ファイル][10]を参照してください。
 
@@ -72,7 +73,7 @@ Datadog Agent の詳細については、[専用ドキュメントページ][9]�
 [1]: https://github.com/DataDog/datadog-agent/tree/main/docs/trace-agent#run-on-macos
 [2]: https://github.com/DataDog/datadog-agent/tree/main/docs/trace-agent#run-on-windows
 [3]: /ja/agent/faq/where-is-the-configuration-file-for-the-agent/
-[4]: /ja/tracing/visualization/#trace-metrics
+[4]: /ja/tracing/glossary/#trace-metrics
 [5]: https://app.datadoghq.com/account/settings#agent
 [6]: https://gcr.io/datadoghq/docker-dd-agent
 [7]: /ja/tracing/docker/

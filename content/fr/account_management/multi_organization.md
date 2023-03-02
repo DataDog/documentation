@@ -1,22 +1,23 @@
 ---
-title: Gestion des comptes multi-organisations
-kind: documentation
 aliases:
-  - /fr/guides/multiaccountorg
-  - /fr/account_management/mult_account
-  - /fr/account_management/faq/what-data-from-my-sub-organizations-can-i-see-in-my-parent-account
-  - /fr/account_management/multi_organisations
+- /fr/guides/multiaccountorg
+- /fr/account_management/mult_account
+- /fr/account_management/faq/what-data-from-my-sub-organizations-can-i-see-in-my-parent-account
+- /fr/account_management/multi_organisations
 further_reading:
-  - link: /account_management/saml/
-    tag: Documentation
-    text: Configurer SAML pour votre compte Datadog
-  - link: /account_management/billing/usage_details
-    tag: Documentation
-    text: En savoir plus sur les détails d'utilisation
-  - link: /account_management/billing/usage_attribution
-    tag: Documentation
-    text: Configurer l'attribution de l'utilisation
+- link: /account_management/saml/
+  tag: Documentation
+  text: Configurer SAML pour votre compte Datadog
+- link: /account_management/billing/usage_details
+  tag: Documentation
+  text: En savoir plus sur les détails d'utilisation
+- link: /account_management/billing/usage_attribution
+  tag: Documentation
+  text: Configurer l'attribution de l'utilisation
+kind: documentation
+title: Gestion des comptes multi-organisations
 ---
+
 Il est possible de gérer plusieurs organisations enfant à partir d'un compte d'organisation parent. Cette fonctionnalité sert généralement aux prestataires de services gérés qui possèdent des clients qui ne doivent pas accéder aux données des autres clients. Les utilisateurs peuvent être ajoutés à l'organisation parent ou à plusieurs organisations enfant et passer d'une organisation à une autre depuis le [menu des paramètres du compte utilisateur][1]. L'organisation parent peut consulter l'utilisation de chaque organisation enfant, ce qui lui permet de suivre les tendances d'utilisation.
 
 Les paramètres du compte, tels que les adresses IP autorisées, ne sont pas transmis par l'organisation parent à l'organisation enfant.
@@ -39,7 +40,7 @@ La nouvelle organisation enfant hérite de la formule de l'organisation parent e
 
 ### Contenu
 
-Vous pouvez programmer l'intégration d'une nouvelle sous-organisation à un ensemble de monitors et de dashboards de référence avec [l'API Datadog][5], ou avec des outils comme Terraform. Consultez notre article de blog [Gérer Datadog avec Terraform][6] (en anglais) pour en savoir plus. En outre, vous pouvez utiliser des scripts pour sauvegarder vos [dashboards][7] et [monitors][8] existants sous forme de code.
+Vous pouvez programmer l'intégration d'une nouvelle sous-organisation à un ensemble de monitors et de dashboards de référence avec [l'API Datadog][5], ou avec des outils comme Terraform. Consultez notre article de blog [Gérer Datadog avec Terraform][6] (en anglais) pour en savoir plus. En outre, vous pouvez utiliser des scripts pour sauvegarder vos dashboards et [monitors][7] existants sous forme de code.
 
 ### Sous-domaines personnalisés
 
@@ -61,14 +62,30 @@ Pour configurer le protocole SAML pour plusieurs organisations :
 2. Invitez des utilisateurs SAML.
 3. Connectez-vous en tant qu'utilisateur SAML et configurez SAML.
 
+### Organisations parent en SAML strict
+
+Dans certains cas, il peut arriver que vous n'ayez pas accès à une organisation enfant qui vient d'être créée. Lorsqu'une organisation impose que les utilisateurs se connectent via SAML, il est possible qu'aucun mot de passe ne soit défini pour les comptes utilisateur. Étant donné que les organisations enfant n'héritent pas des paramètres SAML de leurs parents, la connexion à l'organisation enfant nécessite un mot de passe qui n'existe pas.
+
+Pour être en mesure de vous connecter à une organisation enfant créée à partir d'une organisation parent en SAML strict, suivez les étapes ci-dessous dans l'organisation parent :
+1. Cliquez sur **Organization Settings** depuis le menu Account de la barre de navigation en bas à gauche, ou sélectionnez **Organization Settings** depuis la liste déroulante en haut de la page Personal Settings.
+2. Dans le menu de gauche, sélectionnez **Users**.
+3. Sélectionnez votre profil utilisateur.
+4. Activez l'option **Override Default Login Methods**.
+5. Sous **Select user's login methods**, cochez la case **Password**.
+6. Assurez-vous qu'un mot de passe est défini pour votre compte. Si vous avez besoin d'aide pour définir un mot de passe, contactez l'[assistance Datadog][2].
+
+Après avoir suivi les étapes ci-dessus, vous serez en mesure de vous connecter au compte parent à l'aide d'une adresse e-mail et d'un mot de passe. Une fois votre organisation enfant créée, vous pourrez également vous y connecter avec ces mêmes identifiants.
+
+Si vous avez déjà créé l'organisation enfant et que vous ne pouvez pas vous connecter, cette procédure vous permettra de remédier au problème.
+
 ## Utilisation pour plusieurs organisations
 
-L'organisation parent peut consulter l'utilisation totale et l'utilisation facturée de toutes ses organisations (parent et enfant) en survolant son nom d'utilisateur en bas à gauche, puis en accédant à : `Plan & Usage`--> `Multi-Org Usage`.
+L'organisation parent peut consulter l'utilisation totale et l'utilisation facturée de toutes ses organisations (parent et enfant) en survolant son nom d'utilisateur en bas à gauche, puis en accédant à **Plan & Usage** > **Usage**.
 
-La page Multi-Org Usage indique l'utilisation globale de l'organisation parent et de toutes ses organisations enfant. Elle comprend deux onglets :
+La page Usage indique l'utilisation globale de l'organisation parent et de toutes ses organisations enfant. Elle comprend deux onglets :
 
 * Overall
-* Individual Organization
+* Individual Organizations
 
 ### Utilisation globale
 
@@ -88,7 +105,7 @@ Vous pouvez filtrer les données de ces deux sections en cliquant sur les sous-o
 
 * Le nom de l'index
 * L'organisation
-* La période de rétention en jours
+* Période de rétention en jours
 * Le nombre de logs indexés, réparti entre les logs actuels et les logs réintégrés
 * Le pourcentage de contribution de l'index à l'utilisation globale des logs indexés
 
@@ -98,17 +115,17 @@ Ces données peuvent être téléchargées sous forme de fichier CSV.
 
 ### Utilisation de chaque organisation
 
-Vous pouvez consulter depuis l'onglet Individual Organization l'utilisation de vos organisations enfant, que ce soit en unités absolues ou sous la forme d'un pourcentage de l'utilisation totale.
+Vous pouvez consulter l'utilisation de vos organisations enfant depuis l'onglet **Individual Organizations**, que ce soit en unités absolues ou sous la forme d'un pourcentage de l'utilisation totale.
 
 {{< img src="account_management/multi-org-percent-billable-v2.png" alt="Utilisation individuelle en pourcentage" >}}
 
 Par défaut, la vue Billable est sélectionnée. Elle indique l'utilisation prise en compte dans votre facture finale. Cette vue n'affiche pas les organisations enfant qui ne sont pas facturables, notamment les organisations en version d'essai, et tient compte d'autres ajustements permettant d'établir un descriptif plus précis des frais comptabilisés votre facture. Basculez sur la vue All pour afficher l'utilisation brute et non ajustée de votre organisation parent et de toutes vos organisations enfant. Vous pouvez télécharger les données de ces deux vues sous forme de fichier CSV.
 
-Pour consulter les [détails d'utilisation][9] d'une organisation enfant, cliquez sur son nom.
+Pour consulter les [détails d'utilisation][8] d'une organisation enfant, cliquez sur son nom.
 
 ## Attribution de l'utilisation
 
-L'organisation parent peut consulter l'utilisation des organisations enfant en fonction des clés de tag existantes sur la page [Usage Attribution][10]. Les administrateurs peuvent survoler leur nom d'utilisateur en bas à gauche, puis accéder à : `Plan & Usage`--> `Usage Attribution`.
+L'organisation parent peut consulter l'utilisation des organisations enfant en fonction des clés de tag existantes sur la page [Usage Attribution][9]. Les administrateurs peuvent survoler leur nom d'utilisateur en bas à gauche, puis accéder à : `Plan & Usage`--> `Usage Attribution`.
 
 Lorsqu'elle est activée au niveau de l'organisation parent, l'attribution de l'utilisation indique l'utilisation globale par toutes les organisations. Ces informations peuvent s'avérer utiles si vous souhaitez attribuer l'utilisation de vos organisations enfant à des projets, équipes ou autres groupes spécifiques.
 
@@ -125,10 +142,8 @@ La fonction d'attribution de l'utilisation peut également être activée au niv
 Remarque : les types d'utilisations suivants ne sont pas pris en charge par cet outil.
 
 * Événements de log indexés
-* Ingested Logs
-* Indexed Spans
-
-**Remarque :** les spans indexées étaient auparavant désignées par le terme de « spans analysées ». Le changement de dénomination a eu lieu à l'occasion du lancement de Tracing Without Limits le 20 octobre 2020.
+* Logs ingérés
+* Spans indexées (conservées par des filtres de rétention)
 
 L'attribution de l'utilisation est une fonction avancée incluse dans la formule Enterprise. Pour toutes les autres formules, contactez votre chargé de compte ou envoyez un e-mail à <a href="mailto:success@datadoghq.com">success@datadoghq.com</a>.
 
@@ -142,7 +157,6 @@ L'attribution de l'utilisation est une fonction avancée incluse dans la formule
 [4]: mailto:success@datadoghq.com
 [5]: /fr/api/
 [6]: https://www.datadoghq.com/blog/managing-datadog-with-terraform
-[7]: /fr/dashboards/screenboards/#backup-my-screenboard
-[8]: /fr/monitors/manage/
-[9]: /fr/account_management/billing/usage_details/
-[10]: /fr/account_management/billing/usage_attribution/
+[7]: /fr/monitors/manage/
+[8]: /fr/account_management/billing/usage_details/
+[9]: /fr/account_management/billing/usage_attribution/

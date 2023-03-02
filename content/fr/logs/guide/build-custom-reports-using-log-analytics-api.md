@@ -1,17 +1,19 @@
 ---
-title: Créer des rapports personnalisés à l'aide de l'API Log Analytics
-kind: guide
 further_reading:
-  - link: /logs/explorer/analytics/?tab=serietemporelle#presentation
-    tag: Documentation
-    text: En savoir plus sur Log Analytics
-  - link: /api/v2/logs/#agreger-des-evenements
-    tag: Documentation
-    text: Syntaxe de l'API Log Analytics
-  - link: /logs/guide/collect-multiple-logs-with-pagination/?tab=v1api
-    tag: Documentation
-    text: Collecter plusieurs logs avec la Pagination
+- link: /logs/explorer/analytics/?tab=serietemporelle#presentation
+  tag: Documentation
+  text: En savoir plus sur Log Analytics
+- link: /api/v2/logs/#agreger-des-evenements
+  tag: Documentation
+  text: Syntaxe de l'API Log Analytics
+- link: /logs/guide/collect-multiple-logs-with-pagination/?tab=v1api
+  tag: Documentation
+  text: Collecter plusieurs logs avec la Pagination
+kind: guide
+title: Créer des rapports personnalisés à l'aide de l'API Log Analytics
 ---
+
+
 ## Présentation
 
 Utilisez l'[API Log Analytics][1] pour créer rapidement des rapports et des dashboards personnalisés pour votre équipe en combinant les informations de votre entreprise et d'autres services avec vos données de log.
@@ -26,13 +28,9 @@ Les exemples suivants sont abordés dans ce guide :
 
 ## Prérequis
 
-Ce guide décrit l'utilisation de l'API : vous aurez donc besoin d'obtenir une clé d'API et une clé application auprès d'un administrateur. Elles sont disponibles sur la [page des clés d'API de votre compte Datadog][2].
+- Pour utiliser l'API Log Analytics, vous devez disposer d'une [clé d'API][2] et d'une [clé d'application][3]. L'utilisateur qui a créé la clé d'application doit disposer de l'autorisation appropriée pour accéder aux données. Pour utiliser les exemples ci-dessous, remplacez respectivement `<CLÉ_API_DATADOG>` et `<CLÉ_APPLICATION_DATADOG>` par votre clé d'API Datadog et votre clé d'application Datadog.
 
-Tout au long de cet article, vous devez remplacer chaque occurrence de `<CLÉ_API_DATADOG>` et `<CLÉ_APPLICATION_DATADOG>` par vos clés d'API et d'application Datadog, respectivement.
-
-Ce guide suppose également que vous avez accès à un terminal avec `CURL`. 
-
-**Remarques :** si vous utilisez le site européen de Datadog, utilisez https://api.datadoghq.eu/api/ comme endpoint.
+- Ce guide suppose également que vous avez accès à un terminal avec `curl`.
 
 ## Exemples
 
@@ -694,7 +692,7 @@ L'appel d'API suivant crée un tableau `table` affichant la répartition de vos 
 **Appel d'API :**
 
 ```bash
-curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "Content-Type: application/json" -H "DD-API-KEY: <CLÉ_API_DATADOG>" -H "DD-APPLICATION-KEY: <CLÉ_APP_DATADOG>" --data-raw '{
+curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "Content-Type: application/json" -H "DD-API-KEY: <CLÉ_API_DATADOG>" -H "DD-APPLICATION-KEY: <CLÉ_APPLICATION_DATADOG>" --data-raw '{
    "compute":[
    {
        "type":"total",
@@ -778,7 +776,7 @@ Pour paginer le prochain ensemble de résultats et y accéder, utilisez l'option
 
 **Appel d'API :**
 ```bash
-curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "Content-Type: application/json" -H "DD-API-KEY: <CLÉ_API_DATADOG>" -H "DD-APPLICATION-KEY: <CLÉ_APP_DATADOG>" --data-raw '{
+curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "Content-Type: application/json" -H "DD-API-KEY: <CLÉ_API_DATADOG>" -H "DD-APPLICATION-KEY: <CLÉ_APPLICATION_DATADOG>" --data-raw '{
    "compute":[
    {
        "type":"total",
@@ -868,4 +866,5 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/fr/api/v2/logs/
-[2]: https://docs.datadoghq.com/fr/api/v1/authentication/
+[2]: /fr/account_management/api-app-keys/#api-keys
+[3]: /fr/account_management/api-app-keys/#application-keys

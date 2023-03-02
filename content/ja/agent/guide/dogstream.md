@@ -1,10 +1,11 @@
 ---
-title: Dogstream
+aliases:
+- /ja/agent/faq/dogstream
 kind: ガイド
 private: true
-aliases:
-  - /ja/agent/faq/dogstream
+title: Dogstream
 ---
+
 <div class="alert alert-danger">
 これは、Agent 5 の非推奨の機能です。新機能のリリースは中止されました。
 <br>
@@ -154,7 +155,7 @@ dogstreams: /path/to/mylogfile.log:/path/to/mylogparser.py:my_log_parser
 2016-05-28 18:35:31.164705|Crash_Report|Windows95|A terrible crash happened!|A crash was reported on Joe M's computer|LotusNotes,Outlook,InternetExplorer
 ```
 
-次のようにログパーサーを設定して、Datadog の[イベントストリーム][4]内に、このログデータから取得したイベントを作成できます。
+次のようにログパーサーを設定して、Datadog の[イベントエクスプローラー][4]内に、このログデータから取得したイベントを作成できます。
 
 ```python
 
@@ -237,7 +238,7 @@ dogstreams: /Users/Documents/Parser/test.log:/Users/Documents/Parser/myparser.py
 
 ## トラブルシューティング
 
-バグが発生した場合、ログパーサーからのトレースバックを確認できることがたいへん重要です。それには、[Agent ログ][6]を "DEBUG" レベルに設定して Agent を実行します。Agent のログレベルを設定するには、`datadog.conf` で、[この行][7]のコメントを解除して編集した後、[Agent を再起動][8]します。適切に設定すると、カスタムログパーサーのエラーから生成されたトレースバックを `collector.log` ファイルで確認できます。通常、トレースバックには "checks.collector(datadog.py:278) | Error while parsing line" のような文字列が含まれます。(エラーを生成する [Agent コードサンプル][9]もご参照ください)。
+バグが発生した場合、ログパーサーからのトレースバックを確認できることが重要です。それには、[Agent ログ][6]を "DEBUG" レベルに設定して Agent を実行します。Agent のログレベルを設定するには、`datadog.conf` で、[この行][7]のコメントを解除して編集した後、[Agent を再起動][8]します。適切に設定すると、カスタムログパーサーのエラーから生成されたトレースバックを `collector.log` ファイルで確認できます。通常、トレースバックには "checks.collector(datadog.py:278) | Error while parsing line" のような文字列が含まれます。(エラーを生成する [Agent コードサンプル][9]もご参照ください)。
 
 **注**: カスタムログパーサーに変更を加えた場合は必ず、[Agent を再起動][8]して、変更を有効にしてください。
 

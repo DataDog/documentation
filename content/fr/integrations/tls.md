@@ -9,20 +9,20 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - network
-  - web
-  - autodiscovery
+- network
+- web
+- autodiscovery
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/tls/README.md
+- https://github.com/DataDog/integrations-core/blob/master/tls/README.md
 display_name: TLS
 draft: false
 git_integration_title: tls
 guid: 4e27a211-a034-42dd-9939-9ef967b1da50
 integration_id: tls
 integration_title: TLS
-integration_version: 2.6.0
+integration_version: 2.8.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -31,13 +31,17 @@ metric_prefix: tls.
 metric_to_check: tls.seconds_left
 name: tls
 public_title: Intégration Datadog/TLS
-short_description: Surveillez les versions du protocole TLS, l'expiration et la validité des certificats, etc.
+short_description: Surveillez les versions du protocole TLS, l'expiration et la validité
+  des certificats, etc.
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 Ce check permet de surveiller les versions du protocole [TLS][1], l'expiration et la validité des certificats, etc.

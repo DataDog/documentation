@@ -5,7 +5,7 @@ further_reading:
   - link: '/tracing/'
     tag: 'Documentation'
     text: 'Learn about Datadog APM tracing'
-  - link: '/tracing/visualization/'
+  - link: '/tracing/glossary/'
     tag: 'Documentation'
     text: 'APM Terminology and Overview'
 aliases:

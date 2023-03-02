@@ -11,18 +11,18 @@ assets:
     riak-cs_processes: assets/saved_views/riak-cs_processes.json
   service_checks: assets/service_checks.json
 categories:
-  - data store
+- data store
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/riakcs/README.md
+- https://github.com/DataDog/integrations-core/blob/master/riakcs/README.md
 display_name: RiakCS
 draft: false
 git_integration_title: riakcs
 guid: 55ba6b94-8eeb-486b-aa94-6366a044fdf0
 integration_id: riak-cs
 integration_title: Riak CS
-integration_version: 2.7.0
+integration_version: 2.9.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -31,15 +31,19 @@ metric_prefix: riakcs.
 metric_to_check: riakcs.bucket_list_pool.workers
 name: riakcs
 process_signatures:
-  - riak-cs start
-public_title: "Intégration Datadog/Riak\_CS"
-short_description: Suivez la fréquence et la latence moyenne des opérations GET, PUT et DELETE, ainsi que d'autres opérations.
+- riak-cs start
+public_title: Intégration Datadog/Riak CS
+short_description: Suivez la fréquence et la latence moyenne des opérations GET, PUT
+  et DELETE, ainsi que d'autres opérations.
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ![Dashboard Riak CS][1]
 
 ## Présentation
@@ -57,7 +61,7 @@ Le check RiakCS est inclus avec le package de l'[Agent Datadog][2] : vous n'ave
 
 ### Configuration
 
-1. Modifiez le fichier `riakcs.yamld/conf.` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3]. Consultez le [fichier d'exemple riakcs.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles :
+1. Modifiez le fichier `riakcs.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3]. Consultez le [fichier d'exemple riakcs.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles :
 
    ```yaml
    init_config:
@@ -93,10 +97,9 @@ Le check RiakCS est inclus avec le package de l'[Agent Datadog][2] : vous n'ave
 - _time_error_\*
 - \_time_100
 
-Toutes ces métriques exclues ainsi que de nombreuses autres (plus de 1 000 métriques au choix) peuvent être ajoutées en les spécifiant dans le
-fichier de configuration `riakcs.d/conf.yaml` avec la clé `metrics` dans `instance_config` ; la valeur doit être une liste de noms de métriques.
+Il est possible d'ajouter toutes les métriques exclues ainsi que plus de 1 000 métriques supplémentaires au fichier de configuration `riakcs.d/conf.yaml` à l'aide de la clé `metrics` dans `instance_config`. La valeur de cette clé doit être définie sur une liste de noms de métrique.
 
-[Consultez la liste complète des métriques disponibles][8].
+Consultez la [liste complète des métriques disponibles][8].
 
 ### Événements
 
@@ -112,7 +115,9 @@ Besoin d'aide ? Contactez [l'assistance Datadog][10].
 
 ## Pour aller plus loin
 
-Pour mieux comprendre comment (ou pourquoi) surveiller la disponibilité et les performances de Riak CS avec Datadog, lisez notre [série d'articles de blog][11] à ce sujet.
+Documentation, liens et articles supplémentaires utiles :
+
+- [Surveiller les performances et la disponibilité de Riak CS][11]
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/riakcs/images/riakcs_dashboard.png
 [2]: https://app.datadoghq.com/account/settings#agent

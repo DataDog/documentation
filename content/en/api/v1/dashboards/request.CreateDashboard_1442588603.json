@@ -1,0 +1,55 @@
+{
+  "title": "Example-Create_a_distribution_widget_using_a_histogram_request_containing_a_formulas_and_functions_APM_Stats",
+  "description": "",
+  "widgets": [
+    {
+      "definition": {
+        "title": "APM Stats - Request latency HOP",
+        "title_size": "16",
+        "title_align": "left",
+        "show_legend": false,
+        "type": "distribution",
+        "xaxis": {
+          "max": "auto",
+          "include_zero": true,
+          "scale": "linear",
+          "min": "auto"
+        },
+        "yaxis": {
+          "max": "auto",
+          "include_zero": true,
+          "scale": "linear",
+          "min": "auto"
+        },
+        "requests": [
+          {
+            "query": {
+              "primary_tag_value": "*",
+              "stat": "latency_distribution",
+              "data_source": "apm_resource_stats",
+              "name": "query1",
+              "service": "azure-bill-import",
+              "group_by": [
+                "resource_name"
+              ],
+              "env": "staging",
+              "primary_tag_name": "datacenter",
+              "operation_name": "universal.http.client"
+            },
+            "request_type": "histogram",
+            "style": {
+              "palette": "dog_classic"
+            }
+          }
+        ]
+      },
+      "layout": {
+        "x": 8,
+        "y": 0,
+        "width": 4,
+        "height": 2
+      }
+    }
+  ],
+  "layout_type": "ordered"
+}

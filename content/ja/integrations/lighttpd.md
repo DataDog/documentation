@@ -1,47 +1,72 @@
 ---
+app_id: lighttpd
+app_uuid: 3d7ace6a-9efd-4d21-b4e6-a9956512a875
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     lighttpd: assets/dashboards/lighttpd_dashboard.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: lighttpd.performance.uptime
+      metadata_path: metadata.csv
+      prefix: lighttpd.
+    process_signatures:
+    - lighttpd
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Lighttpd
   logs:
     source: lighttpd
-  metrics_metadata: metadata.csv
-  monitors: {}
   saved_views:
     lighttpd_processes: assets/saved_views/lighttpd_processes.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-  - web
-  - autodiscovery
-  - log collection
-creates_events: false
-ddtype: check
+- web
+- log collection
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/lighttpd/README.md'
-display_name: Lighttpd
+- https://github.com/DataDog/integrations-core/blob/master/lighttpd/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: lighttpd
-guid: 01dcfe7a-7a56-4388-a388-799ee6daaaab
 integration_id: lighttpd
 integration_title: Lighttpd
+integration_version: 3.2.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: lighttpd.
-metric_to_check: lighttpd.performance.uptime
+manifest_version: 2.0.0
 name: lighttpd
-process_signatures:
-  - lighttpd
-public_title: Datadog-Lighttpd インテグレーション
+oauth: {}
+public_title: Lighttpd
 short_description: アップタイム、処理バイト数、毎秒のリクエスト数、応答コードなどを追跡。
-support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Web
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: アップタイム、処理バイト数、毎秒のリクエスト数、応答コードなどを追跡。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Lighttpd
 ---
+
+
+
 ![Lighttpd ダッシュボード][1]
 
 ## 概要
@@ -50,7 +75,7 @@ Agent の lighttpd チェックは、アップタイム、処理バイト数、�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Lighttpd チェックは [Datadog Agent][2] パッケージに含まれています。Lighttpd サーバーに追加でインストールする必要はありません。
 
@@ -145,7 +170,8 @@ Lighttpd チェックには、イベントは含まれません。
 
 ## その他の参考資料
 
-Lighttpd Web サーバーのメトリクスを監視する方法 (または理由) について理解するには、Datadog の[ブログ記事][7]を参照してください。
+- [Datadog で Lighttpd の Web サーバーメトリクスを監視します][7]。
+
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/lighttpd/images/lighttpddashboard.png

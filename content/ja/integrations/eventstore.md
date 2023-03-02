@@ -1,39 +1,62 @@
 ---
-aliases: []
+app_id: eventstore
+app_uuid: b0c2527f-671e-4a98-aa74-807d7f1826e3
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: eventstore.proc.mem
+      metadata_path: metadata.csv
+      prefix: eventstore.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Eventstore
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: コミュニティ
+  sales_email: help@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-  - data store
-creates_events: false
-ddtype: check
+- data store
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/eventstore/README.md'
-display_name: Eventstore
+- https://github.com/DataDog/integrations-extras/blob/master/eventstore/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: eventstore
-guid: 4BEB8E51-E7DA-4145-B780-E3B3A6A8CD60
 integration_id: eventstore
 integration_title: Eventstore
+integration_version: 2.0.0
 is_public: true
 kind: インテグレーション
-maintainer: '@xorima'
-manifest_version: 1.0.0
-metric_prefix: eventstore.
-metric_to_check: eventstore.proc.mem
+manifest_version: 2.0.0
 name: eventstore
-public_title: Datadog-Eventstore インテグレーション
+oauth: {}
+public_title: Eventstore
 short_description: Eventstore のメトリクスを収集
-support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Data Store
+  configuration: README.md#Setup
+  description: Eventstore のメトリクスを収集
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Eventstore
 ---
+
+
+
 ## 概要
 
 EventStore からメトリクスをリアルタイムに取得して、以下のことができます。
@@ -43,29 +66,30 @@ EventStore からメトリクスをリアルタイムに取得して、以下の
 
 ## セットアップ
 
+EventStore チェックは [Datadog Agent][1] パッケージに含まれていないため、お客様自身でインストールする必要があります。
+
 ### インストール
 
-Agent v6.8 以降を使用している場合は、以下の手順に従って、ホストに EventStore チェックをインストールしてください。[バージョン 6.8 以前の Agent][2] または [Docker Agent][3] でチェックをインストールする場合は、[コミュニティインテグレーションのインストール][1]に関する Agent のガイドを参照してください。
+Agent v7.21 / v6.21 以降の場合は、下記の手順に従い EventStore チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][2]をご参照ください。
 
-1. [Datadog Agent をダウンロードして起動][4]します。
-2. 次のコマンドを実行して、Agent でインテグレーション Wheel をインストールします。
+1. 以下のコマンドを実行して、Agent インテグレーションをインストールします。
 
    ```shell
    datadog-agent integration install -t datadog-eventstore==<INTEGRATION_VERSION>
    ```
 
-3. [他のパッケージ化されたインテグレーション][5]と同様にインテグレーションを構成します。
+2. コアの[インテグレーション][3]と同様にインテグレーションを構成します。
 
 ### コンフィギュレーション
 
-1. EventStore の[メトリクス](#metrics)の収集を開始するには、[Agent のコンフィギュレーションディレクトリ][6]のルートにある `conf.d/` フォルダーの `eventstore.d/conf.yaml` ファイルを編集します。
-   使用可能なすべてのコンフィギュレーションオプションについては、[サンプル eventstore.d/conf.yaml][7] を参照してください。
+1. EventStore の[メトリクス](#metrics)の収集を開始するには、[Agent のコンフィギュレーションディレクトリ][4]のルートにある `conf.d/` フォルダーの `eventstore.d/conf.yaml` ファイルを編集します。
+   使用可能なすべてのコンフィギュレーションオプションについては、[サンプル eventstore.d/conf.yaml][5] を参照してください。
 
-2. [Agent を再起動します][8]。
+2. [Agent を再起動します][6]。
 
 ### 検証
 
-[Agent の status サブコマンドを実行][9]し、Checks セクションで `eventstore` を探します。
+[Agent の status サブコマンドを実行][7]し、Checks セクションで `eventstore` を探します。
 
 ## 互換性
 
@@ -87,16 +111,14 @@ eventstore チェックには、サービスのチェック機能は含まれま
 
 ## トラブルシューティング
 
-ご不明な点は、このインテグレーションの[メインテナー][11]までお問い合わせください。
+ご不明な点は、このインテグレーションの[メインテナー][9]までお問い合わせください。
 
-[1]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/
-[2]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
-[3]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/?tab=docker
-[4]: https://app.datadoghq.com/account/settings#agent
-[5]: https://docs.datadoghq.com/ja/getting_started/integrations/
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[7]: https://github.com/DataDog/integrations-extras/blob/master/eventstore/datadog_checks/eventstore/data/conf.yaml.example
-[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-restart-the-agent
-[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
-[10]: https://github.com/DataDog/integrations-extras/blob/master/eventstore/metadata.csv
-[11]: https://github.com/DataDog/integrations-extras/blob/master/eventstore/manifest.json
+[1]: https://app.datadoghq.com/account/settings#agent
+[2]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
+[3]: https://docs.datadoghq.com/ja/getting_started/integrations/
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[5]: https://github.com/DataDog/integrations-extras/blob/master/eventstore/datadog_checks/eventstore/data/conf.yaml.example
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-restart-the-agent
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
+[8]: https://github.com/DataDog/integrations-extras/blob/master/eventstore/metadata.csv
+[9]: https://github.com/DataDog/integrations-extras/blob/master/eventstore/manifest.json

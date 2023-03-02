@@ -10,19 +10,20 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - processing
-  - log collection
-  - autodiscovery
+- processing
+- log collection
+- autodiscovery
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/ambari/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/ambari/README.md
 display_name: Ambari
 draft: false
 git_integration_title: ambari
 guid: 4f518f2c-cfa7-4763-ac33-b1c8846eb738
 integration_id: ambari
 integration_title: Ambari
+integration_version: 3.1.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -31,12 +32,16 @@ metric_prefix: ambari.
 metric_to_check: ambari.cpu.cpu_user
 name: ambari
 public_title: Intégration Datadog/Ambari
-short_description: Recueillez des métriques par host ou par service pour tous vos clusters gérés avec Ambari
+short_description: Recueillez des métriques par host ou par service pour tous vos
+  clusters gérés avec Ambari
 support: core
 supported_os:
-  - linux
-  - mac_os
+- linux
+- mac_os
 ---
+
+
+
 ## Présentation
 
 Ce check permet de surveiller [Ambari][1] avec l'Agent Datadog.
@@ -74,7 +79,7 @@ Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
 ##### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
@@ -119,9 +124,9 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 ##### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][2].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs Kubernetes][2].
 
 | Paramètre      | Valeur                                                                                                                                                                                             |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -142,37 +147,33 @@ Cette intégration recueille les métriques système suivantes pour chaque host 
 
 - boottime
 - cpu
-- disk
-- memory
-- load
-- network
-- process
+- disque
+- mémoire
+- chargement
+- réseau
+- processus
 
-Si la collecte de métriques de service est activée avec `collect_service_metrics`, cette intégration recueille les métriques présentant des en-têtes sur liste blanche pour chaque composant de service faisant partie de la liste d'inclusion.
+Si la collecte de métriques de service est activée avec `collect_service_metrics`, cette intégration recueille les métriques présentant des en-têtes figurant dans la liste d'inclusion pour chaque composant de service inclus.
 
 ### Métriques
 {{< get-metrics-from-git "ambari" >}}
 
 
-### Checks de service
-
-**ambari.can_connect** :<br>
-Renvoie `OK` si le cluster est accessible. Si ce n'est pas le cas, renvoie `CRITICAL`.
-
-**ambari.state** :<br>
-Renvoie `OK` si le service est installé ou en cours d'exécution, `WARNING` si le service est en cours d'arrêt ou de désinstallation
-ou `CRITICAL` si le service est désinstallé ou arrêté.
-
 ### Événements
 
 Ambari n'inclut aucun événement.
+
+### Checks de service
+{{< get-service-checks-from-git "ambari" >}}
+
 
 ## Dépannage
 
 Besoin d'aide ? Contactez [l'assistance Datadog][4].
 
 
+
 [1]: https://ambari.apache.org
-[2]: https://docs.datadoghq.com/fr/agent/
+[2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/fr/help/

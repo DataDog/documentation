@@ -1,20 +1,21 @@
 ---
-title: Agent のログファイル
-kind: ガイド
 aliases:
-  - /ja/agent/faq/agent-log-files
+- /ja/agent/faq/agent-log-files
 further_reading:
-  - link: /agent/troubleshooting/
-    tag: Documentation
-    text: Agent のトラブルシューティング
-  - link: /agent/guide/agent-configuration-files/
-    tag: FAQ
-    text: Agent 構成ファイル
-  - link: /agent/guide/agent-commands/
-    tag: FAQ
-    text: Agent のコマンド
+- link: /agent/troubleshooting/
+  tag: Documentation
+  text: Agent のトラブルシューティング
+- link: /agent/guide/agent-configuration-files/
+  tag: FAQ
+  text: Agent 構成ファイル
+- link: /agent/guide/agent-commands/
+  tag: FAQ
+  text: Agent のコマンド
+kind: ガイド
+title: Agent のログファイル
 ---
-Datadog Agent は 10 MB ごとにログロールオーバーを行います。ロールオーバーが発生すると、バックアップ (`agent.log.1`) が 1 つ保管されます。以前のバックアップが存在する場合は、ロールオーバーによって上書きされます。
+
+Datadog Agent は、デフォルトで 10MB ごとにログのロールオーバーを行います。ロールオーバーが発生すると、1 つのバックアップ (`agent.log.1`) が保存されます。以前のバックアップが存在する場合、ロールオーバー中に上書きされます。1 つのログファイルの最大サイズと保持するバックアップファイルの最大数を設定するには、[Agent メインコンフィギュレーションファイル][1]で `log_file_max_size` (デフォルト: 10485760 バイト) と `log_file_max_rolls` (デフォルト: 1) を使用します。
 
 ## Agent のログディレクトリ
 
@@ -24,7 +25,7 @@ Datadog Agent は 10 MB ごとにログロールオーバーを行います。�
 | プラットフォーム                              | コマンド                       |
 |---------------------------------------|-------------------------------|
 | Linux                                 | `/var/log/datadog/`           |
-| macOS、Agent v7.28+ および v6.28+        | `/opt/datadog-agent/log`      |
+| macOS、Agent v7.28+ および v6.28+        | `/opt/datadog-agent/logs`      |
 | macOS、6.28.0/7.28.0 以前の Agent | `/var/log/datadog`            |
 | Windows Server 2008/Vista 以降  | `C:\ProgramData\Datadog\logs` |
 | Windows Server 2003/XP 以前      | サポートされないプラットフォーム        |
@@ -52,6 +53,7 @@ Datadog Agent は 10 MB ごとにログロールオーバーを行います。�
 * `agent.log`
 * `process-agent.log`
 * `trace-agent.log`
+* `system-probe.log`
 * `jmxfetch.log` for Agent >= 7.24.0/6.24.0
 
 {{% /tab %}}
@@ -69,10 +71,12 @@ Datadog Agent は 10 MB ごとにログロールオーバーを行います。�
 
 | プラットフォーム                             | 場所とファイル名        |
 |--------------------------------------|-------------------------------|
-| Linux                                | `$pwd/ddagent-install.log`    |
+| Linux                                | `$(pwd)/ddagent-install.log`    |
 | macOS                                | `/tmp/dd_agent.log`           |
 | Windows                              | `%TEMP%\MSI*.LOG`             |
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file

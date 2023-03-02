@@ -38,7 +38,7 @@ Les logs qui indiquent l'identité de l'utilisateur (John Doe), le résultat de
 
 ### Enregistrer les authentifications dans un format standard analysable
 
-Vérifiez que votre application rédige des logs au format key-value avec le séparateur `=`. Ce format permet à un parser key-value, tel que le [parser Grok][3] de Datadog, de les traiter. Prenons l'exemple d'un log au format suivant :
+Vérifiez que votre application rédige des logs au format key/value avec le séparateur `=`. Ce format permet à un parser key/value, tel que le [parser Grok][3] de Datadog, de les traiter. Prenons l'exemple d'un log au format suivant :
 
 {{< code-block lang="bash" >}}
 INFO 2020-01-01 12:00:01 usr.id="John Doe" evt.category=authentication evt.name="google oauth" evt.outcome=success network.client.ip=1.2.3.4
@@ -74,7 +74,7 @@ Il est important d'utiliser une [convention de nommage standard][4] pour les att
 
 Lorsque vous mettez en place un format unique pour tous vos logs d'authentification, vous pouvez utiliser les attributs de log afin de filtrer et d'organiser efficacement vos données de log dans Datadog. Par exemple, avec les attributs standard, vous pouvez découvrir les utilisateurs (`usr.id`) qui possèdent le plus grand nombre d'échecs de connexion (`evt.outcome:failure`).
 
-Le format key-value facilite également l'ajout d'attributs personnalisés dans les logs. Vous pouvez ainsi ajouter, par exemple, un score [reCAPTCHA v3][9] afin d'identifier les activités provenant potentiellement de robots. Utilisez des guillemets autour des valeurs d'attribut qui peuvent contenir des espaces. Ainsi, vous enregistrez toute la valeur et pouvez la parser.
+Le format key/value facilite également l'ajout d'attributs personnalisés dans les logs. Vous pouvez ainsi ajouter, par exemple, un score [reCAPTCHA v3][9] afin d'identifier les activités provenant potentiellement de robots. Utilisez des guillemets autour des valeurs d'attribut qui peuvent contenir des espaces. Ainsi, vous enregistrez toute la valeur et pouvez la parser.
 
 ## Détecter et surveiller les menaces de sécurité
 

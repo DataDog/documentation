@@ -1,25 +1,27 @@
 ---
 categories:
-  - log collection
-  - security
+- log collection
+- security
 ddtype: crawler
 dependencies: []
-description: "Centre d'alerte Google\_Workspace"
+description: Recueille des logs à partir du centre d'aide Google Workspace.
 doc_link: https://docs.datadoghq.com/integrations/google_workspace_alert_center/
 draft: false
 git_integration_title: google_workspace_alert_center
 has_logo: true
 integration_id: ''
-integration_title: "Centre d'alerte Google\_Workspace"
+integration_title: Centre d'alerte Google Workspace
 integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: google_workspace_alert_center
-public_title: "Centre d'alerte Google\_Workspace"
-short_description: "Recueille des logs à partir du centre d'aide Google\_Workspace."
+public_title: Centre d'alerte Google Workspace
+short_description: Recueille des logs à partir du centre d'aide Google Workspace.
+team: web-integrations
 version: '1.0'
 ---
+
 ## Présentation
 
 Le centre d'alerte offre une vue d'ensemble exhaustive des notifications, alertes et actions essentielles liées à la sécurité pour l'ensemble de la solution Google Workspace. Intégrez le centre d'alerte Google Workspace à Datadog pour :
@@ -46,7 +48,7 @@ L'intégration Centre d'alerte Google Workspace de Datadog utilise des comptes 
 
 Si vous souhaitez surveiller plusieurs projets, vous pouvez répéter le processus ci-dessus de façon à utiliser plusieurs comptes de service.
 
-### Configuration
+### Procédure à suivre
 
 Vous avez la possibilité de fournir des tags pour chaque projet. Ces tags sont alors ajoutés à chaque événement de log du projet en question dans Datadog.
 

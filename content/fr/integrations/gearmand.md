@@ -1,6 +1,6 @@
 ---
 aliases:
-  - /fr/integrations/gearman
+- /fr/integrations/gearman
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
@@ -14,19 +14,20 @@ assets:
     gearman_processes: assets/saved_views/gearman_processes.json
   service_checks: assets/service_checks.json
 categories:
-  - processing
-  - autodiscovery
-  - log collection
+- processing
+- autodiscovery
+- log collection
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/gearmand/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/gearmand/README.md
 display_name: Gearman
 draft: false
 git_integration_title: gearmand
 guid: bdd65394-92ff-4d51-bbe3-ba732663fdb2
 integration_id: gearman
 integration_title: Gearman
+integration_version: 2.3.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -35,15 +36,19 @@ metric_prefix: gearman.
 metric_to_check: gearman.unique_tasks
 name: gearmand
 process_signatures:
-  - gearmand
-  - gearman
+- gearmand
+- gearman
 public_title: Intégration Datadog/Gearman
-short_description: 'Surveillez le nombre de jobs en attente ou en cours d''exécution, que ce soit par tâche ou au total.'
+short_description: Surveillez le nombre de jobs en attente ou en cours d'exécution,
+  que ce soit par tâche ou au total.
 support: core
 supported_os:
-  - linux
-  - mac_os
+- linux
+- mac_os
 ---
+
+
+
 ## Présentation
 
 Recueillez des métriques de Gearman pour :
@@ -120,7 +125,7 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 3. [Redémarrez l'Agent][3].
 
-Consultez la [documentation de Datadog][4] pour découvrir comment configurer l'Agent afin de recueillir les logs dans un environnement Kubernetes.
+Consultez la section [Collecte de logs Kubernetes][4] pour découvrir comment configurer l'Agent afin de recueillir des logs dans des environnements Kubernetes.
 
 ### Validation
 
@@ -134,12 +139,11 @@ Consultez la [documentation de Datadog][4] pour découvrir comment configurer l'
 
 ### Événements
 
-Le check Gearmand n'inclut aucun événement.
+Le check Gearman n'inclut aucun événement.
 
 ### Checks de service
+{{< get-service-checks-from-git "gearmand" >}}
 
-**gearman.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à Gearman pour recueillir des métriques.
 
 ## Dépannage
 

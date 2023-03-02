@@ -21,16 +21,16 @@ author:
   sales_email: sales@launchdarkly.com
   support_email: support@launchdarkly.com
 categories:
-  - notification
+- notification
 classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Mac OS
-  - Supported OS::Windows
-  - Category::Notification
-  - Offering::UI Extension
-  - Offering::Integration
+- Supported OS::Linux
+- Supported OS::Mac OS
+- Supported OS::Windows
+- Category::Notification
+- Offering::UI Extension
+- Offering::Integration
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/launchdarkly/README.md
+- https://github.com/DataDog/integrations-extras/blob/master/launchdarkly/README.md
 display_on_public_website: true
 draft: false
 git_integration_title: launchdarkly
@@ -43,29 +43,37 @@ manifest_version: 2.0.0
 name: launchdarkly
 oauth: {}
 public_title: LaunchDarkly
-short_description: Contrôlez en toute confiance la publication de vos fonctionnalités et les changements d'infrastructure.
+short_description: Contrôlez en toute confiance la publication de vos fonctionnalités
+  et les changements d'infrastructure.
 supported_os:
-  - linux
-  - mac os
-  - windows
+- linux
+- mac os
+- windows
 tile:
+  changelog: CHANGELOG.md
   configuration: README.md#Setup
-  description: Contrôlez en toute confiance la publication de vos fonctionnalités et les changements d'infrastructure.
+  description: Contrôlez en toute confiance la publication de vos fonctionnalités
+    et les changements d'infrastructure.
   media:
-    - caption: Une courte présentation de LaunchDarkly.
-      image_url: images/video-thumbnail.png
-      media_type: video
-      vimeo_id: 637675972
-    - caption: Le dashboard LaunchDarkly configuré avec le widget de flags LaunchDarkly et l'intégration d'événements.
-      image_url: images/dashboard.png
-      media_type: image
-    - caption: Le dashboard LaunchDarkly avec le volet latéral relatif aux changements de flag.
-      image_url: images/toggle-flag.png
-      media_type: image
+  - caption: Une courte présentation de LaunchDarkly.
+    image_url: images/video-thumbnail.png
+    media_type: video
+    vimeo_id: 637675972
+  - caption: Le dashboard LaunchDarkly configuré avec le widget de flags LaunchDarkly
+      et l'intégration d'événements.
+    image_url: images/dashboard.png
+    media_type: image
+  - caption: Le dashboard LaunchDarkly avec le volet latéral relatif aux changements
+      de flag.
+    image_url: images/toggle-flag.png
+    media_type: image
   overview: README.md#Overview
   support: README.md#Support
   title: LaunchDarkly
 ---
+
+
+
 ## Présentation
 
 LaunchDarkly propose les intégrations suivantes pour la plateforme Datadog :

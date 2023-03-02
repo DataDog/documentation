@@ -1,0 +1,11 @@
+{
+  "data": {
+    "attributes": {
+      "name": "fake-opsgenie-service-name--updated",
+      "opsgenie_api_key": "00000000-0000-0000-0000-000000000000",
+      "region": "eu"
+    },
+    "id": "596da4af-0563-4097-90ff-07230c3f9db3",
+    "type": "opsgenie-service"
+  }
+}

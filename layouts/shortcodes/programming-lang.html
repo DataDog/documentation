@@ -1,4 +1,6 @@
-{{ $lang := (.Get ("lang")) }}
+<!-- Normalize lang param, these are curated manually and may be inconsistent -->
+{{ $lang_param := (.Get ("lang")) }}
+{{ $lang := cond (eq $lang_param ".NET") "dotnet" (lower $lang_param) }}
 
 <div class="js-code-block code-snippet-wrapper" data-code-lang-block="{{ $lang }}">
     {{- .Inner | markdownify -}}

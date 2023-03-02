@@ -8,7 +8,8 @@ To search your monitors, construct a query using the facet panel on the left and
 
 ## Search bar
 
-Use simple text to search across all monitor titles and notification messages. For example, a search of `postgresql` returns all monitors with `postgresql` anywhere in the title or notification message.
+Use simple text to search across all monitor titles and notification messages. For example, a search of `*postgresql*` returns all monitors with `postgresql` anywhere in the title or 
+notification message.
 
 To limit the search, specify the field name:
 
@@ -93,4 +94,4 @@ From the default view entry in the Views panel:
 [1]: /monitors/manage/status/#properties
 [2]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#query-string-syntax
 [3]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#_fuzziness
-[4]: /monitors/create/types/
+[4]: /monitors/

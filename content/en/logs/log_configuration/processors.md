@@ -237,7 +237,11 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following log service re
 
 ## Log message remapper
 
-Message is a key attribute in Datadog. It is displayed in the message column of the Log Explorer to give context to a log. You can use the search to find a log by log message. Use the log message remapper processor to define one or more attributes as the official log message.
+`message` is a key attribute in Datadog. Its value is displayed in the **Content** column of the Log Explorer to provide context on the log. You can use the search bar to find a log by the log message. 
+
+Use the log message remapper processor to define one or more attributes as the official log message. Define more than one attribute for cases where the attributes might not exist and an alternative is available. For example, if the defined message attributes are `attribute1`, `attribute2`, and `attribute3`, and `attribute1` does not exist, then `attribute2` is used. Similarly, if `attribute2` does not exist, then `attribute3` is used.
+
+To define message attributes, first use the [string builder processor](#string-builder-processor) to create a new string attribute for each of the attributes you want to use. Then, use the log message remapper to remap the string attributes as the message.
 
 **Note**: If multiple log message remapper processors are applied to a given log, only the first one (according to the pipeline order) is taken into account.
 
@@ -650,7 +654,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following geoIP parser J
 
 ## Lookup processor
 
-Use the lookup processor to define a mapping between a log attribute and a human readable value saved in an [Enrichment Table (beta)][7] or the processors mapping table.
+Use the lookup processor to define a mapping between a log attribute and a human readable value saved in a [Reference Table (beta)][7] or the processors mapping table.
 
 For example, you can use the lookup processor to map an internal service ID into a human readable service name.
 
@@ -668,9 +672,9 @@ The lookup processor performs the following actions:
   * If it does, creates the target attribute with the corresponding value in the table.
   * Optionally, if it does not find the value in the mapping table, creates a target attribute with the filled default value.
 
-You can fill the mapping table by selecting an enrichment table or manually by entering a list of `source_key,target_value` pairs, or uploading a CSV file.
+You can fill the mapping table by selecting a Reference Table, by manually entering a list of `source_key,target_value` pairs, or by uploading a CSV file.
 
-The size limit for the mapping table is 100Kb. This limit applies across all Lookup Processors on the platform, however, Enrichment tables support larger file sizes.
+The size limit for the mapping table is 100Kb. This limit applies across all Lookup Processors on the platform, however, Reference Tables support larger file sizes.
 
 {{% /tab %}}
 {{% tab "API" %}}
@@ -757,5 +761,5 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following trace remapper
 [4]: https://en.wikipedia.org/wiki/Syslog#Severity_level
 [5]: /logs/log_collection/?tab=host#attributes-and-tags
 [6]: /logs/search_syntax/
-[7]: /logs/guide/enrichment-tables/
-[8]: /tracing/connect_logs_and_traces/
+[7]: /integrations/guide/reference-tables/
+[8]: /tracing/other_telemetry/connect_logs_and_traces/

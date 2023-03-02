@@ -1,39 +1,63 @@
 ---
+app_id: rundeck
+app_uuid: beb808d2-cc12-4bc5-8ff7-b63552b35e0a
 assets:
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: rundeck.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Rundeck
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Rundeck
+  sales_email: forrest@rundeck.com
+  support_email: forrest@rundeck.com
 categories:
-  - orchestration
-  - notification
-creates_events: false
-ddtype: crawler
+- orchestration
+- notification
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/rundeck/README.md
-display_name: Rundeck
+- https://github.com/DataDog/integrations-extras/blob/master/rundeck/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: rundeck
-guid: 2e3492d3-14fd-409d-b339-fb1bc14d7db9
 integration_id: rundeck
 integration_title: Rundeck
 integration_version: ''
 is_public: true
 kind: インテグレーション
-maintainer: forrest@rundeck.com
-manifest_version: 1.0.0
-metric_prefix: rundeck.
-metric_to_check: ''
-name: Rundeck
-public_title: Datadog-Rundeck インテグレーション
+manifest_version: 2.0.0
+name: rundeck
+oauth: {}
+public_title: Rundeck
 short_description: Rundeck の Webhook を使用して修復アクションを自動化
-support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Orchestration
+  - Category::Notification
+  configuration: README.md#Setup
+  description: Rundeck の Webhook を使用して修復アクションを自動化
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Rundeck
 ---
+
+
+
 ## 概要
 
 Rundeck のワークフロー自動化機能は Datadog の通知と併せて使える便利な拡張機能です。問題の診断を助けるだけでなく、オプションでそれらを修復することができます。
@@ -61,7 +85,7 @@ Datadog アラートを使ってトリガーしたい Rundeck ジョブを最低
 
 1. Rundeck プロジェクト内でナビゲーションの **Webhooks** オプションをクリックします。
 2. **Add** をクリックします。
-3. Webhook に名前を設定します。(例: *Datadog-Restart Service*)
+3. Webhook に名前を設定します。(例: `Datadog-Restart Service`)
 4. **Choose Webhook Plugin** ボタンをクリックして **Run Job** を選択します。
 5. Webhook がトリガーされたら実行したいジョブを選択します。
 6. [オプション] **Options** の行に次のテキストを入力します:
@@ -91,7 +115,6 @@ Datadog アラートを使ってトリガーしたい Rundeck ジョブを最低
 `@webhook-Rundeck_Restart_Service` の受信者を追加して、このインテグレーションを Datadog 内の任意の通知に追加します。ここでの名前は、ステップ 4a で設定した Webhook 名によって異なります。モニターからアラートがトリガーされると、Webhook が関連するジョブを実行します。
 
 場合に応じて、Advanced Run Job などのその他プラグインも利用可能です。
-
 
 ## 収集データ
 

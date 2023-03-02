@@ -1,40 +1,46 @@
 ---
-title: Surveillance DNS
-kind: documentation
-description: Diagnostiquer et débuguer les problèmes de serveur DNS
 aliases:
-  - /fr/network_performance_monitoring/network_table
-  - /fr/network_performance_monitoring/dns_monitoring
+- /fr/network_performance_monitoring/network_table
+- /fr/network_performance_monitoring/dns_monitoring
+description: Diagnostiquer et débuguer les problèmes de serveur DNS
 further_reading:
-  - link: https://www.datadoghq.com/blog/monitor-dns-with-datadog/
-    tag: Blog
-    text: Surveiller le DNS avec Datadog
-  - link: https://www.datadoghq.com/blog/monitor-coredns-with-datadog/
-    tag: Blog
-    text: Surveiller CoreDNS avec Datadog
-  - link: /network_monitoring/performance/network_page
-    tag: Documentation
-    text: Explorez les données de votre réseau qui transitent entre chaque source et destination.
-  - link: https://www.datadoghq.com/blog/dns-resolution-datadog/
-    tag: Blog
-    text: Utilisez la résolution DNS pour surveiller les endpoints externes et les endpoints cloud
+- link: https://www.datadoghq.com/blog/monitor-dns-with-datadog/
+  tag: Blog
+  text: Surveiller le DNS avec Datadog
+- link: https://www.datadoghq.com/blog/monitor-coredns-with-datadog/
+  tag: Blog
+  text: Surveiller CoreDNS avec Datadog
+- link: /network_monitoring/performance/network_page
+  tag: Documentation
+  text: Explorez les données de votre réseau qui transitent entre chaque source et
+    destination.
+- link: https://www.datadoghq.com/blog/dns-resolution-datadog/
+  tag: Blog
+  text: Utilisez la résolution DNS pour surveiller les endpoints externes et les endpoints
+    cloud
+kind: documentation
+title: Surveillance DNS
 ---
+
 {{< img src="network_performance_monitoring/dns_default.png" alt="Surveillance DNS" >}}
+
+<div class="alert alert-info">
+Installez la version 7.33 de l'Agent pour activer la surveillance DNS.
+</div>
 
 La surveillance DNS offre une vue d'ensemble des performances de vos serveurs DNS afin d'identifier les problèmes de DNS côté serveur et côté client. En recueillant et en affichant les métriques de DNS liées aux flux sur votre réseau, cette page permet de déterminer :
 
 * Les pods ou les services à l'origine des requêtes DNS et les serveurs qui reçoivent ces requêtes.
 * Les endpoints qui émettent le plus de requêtes ou associés aux taux de requêtes les plus élevés.
 * Si le temps de réponse d'un serveur DNS face aux requêtes a augmenté de façon progressive ou abrupte.
-* Les serveurs DNS associés à un taux d'erreur élevé et le type des erreurs générées.
+* Les serveurs DNS associés à un taux d'erreurs élevé et le type d'erreurs émises.
+* Les domaines résolus.
 
 ## Configuration
 
 Pour utiliser la surveillance DNS, vous devez d'abord [configurer la solution Network Performance Monitoring][1]. Assurez-vous également que vous utilisez la dernière version de l'Agent, ou a minima l'Agent v7.23+ pour Linux et l'Agent v7.28+ pour Windows Server. Une fois l'installation effectuée, un onglet DNS apparaît dans la section Network Performance Monitoring.
 
-Si vous utilisez [Kubernetes sur Helm][2], pour activer la surveillance DNS, vous devez définir `collectDNSStats:` sur `true` dans le fichier [values.yaml][3].
-
-Vous cherchez plutôt à utiliser la solution Network Device Monitoring ? Consultez les [instructions de configuration de NPM][4].
+Vous cherchez plutôt à utiliser la solution Network Device Monitoring ? Consultez les [instructions de configuration de NDM][2].
 
 ## Requêtes
 
@@ -50,6 +56,7 @@ Afin de rechercher un serveur DNS spécifique, filtrez la barre de recherche de 
 * `host` : Le hostname du serveur DNS.
 * `service` : Le service exécuté sur le serveur DNS.
 * `IP` : L'adresse IP du serveur DNS.
+* `dns_query` : **nécessite la version 7.33+ de l'Agent**. Le domaine interrogé.
 
 Cet exemple montre tous les flux entre les pods dans la zone de disponibilité de l'environnement de production et les hosts qui reçoivent les requêtes DNS :
 
@@ -59,7 +66,7 @@ Cet exemple montre tous les flux entre les pods dans la zone de disponibilité d
 
 Vos métriques de DNS sont affichées dans les graphiques et le tableau associé. 
 
-**Remarque :** l'intervalle de collecte par défaut est de cinq minutes, et la durée de rétention est de sept jours.
+**Remarque** : les données sont recueillies toutes les 30 secondes, agrégées dans des compartiments de 5 minutes et conservées pendant 14 jours.
 
 Les métriques de DNS suivantes sont disponibles :
 
@@ -81,7 +88,7 @@ Le tableau Network affiche les métriques ci-dessous pour chaque dépendance _so
 
 Pour configurer les colonnes de votre tableau, utilisez le bouton **Customize** en haut à droite.
 
-Pour affiner le trafic affiché dans votre vue, utilisez les [options][5] **Filter Traffic**.
+Pour affiner le trafic affiché dans votre vue, utilisez les [options][3] **Filter Traffic**.
 
 ## Volet latéral
 
@@ -99,7 +106,5 @@ Le volet latéral fournit des données de télémétrie contextuelle pour vous a
 
 
 [1]: /fr/network_monitoring/performance/
-[2]: /fr/agent/kubernetes/?tab=helm
-[3]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml#L299-L300
-[4]: /fr/network_monitoring/devices/setup?tab=snmpv2
-[5]: /fr/network_monitoring/performance/network_page#table
+[2]: /fr/network_monitoring/devices/setup?tab=snmpv2
+[3]: /fr/network_monitoring/performance/network_page#table

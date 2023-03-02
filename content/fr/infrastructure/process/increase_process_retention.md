@@ -16,7 +16,7 @@ further_reading:
 ---
 ## Présentation
 
-Étant donné que les données Live Processes sont stockées pendant 36 heures, vous pouvez générer des métriques de distribution globales et en centiles à partir de vos processus pour surveiller votre consommation de ressources sur le long terme. Comme les autres métriques Datadog, les métriques basées sur les processus sont stockées pendant 15 mois. Vous pouvez ainsi facilement effectuer les actions suivantes :
+Étant donné que les données des live processes sont stockées pendant 36 heures, vous pouvez générer des métriques de distribution globales et en centiles à partir de vos processus pour surveiller votre consommation de ressources sur le long terme. Comme les autres métriques Datadog, les métriques basées sur les processus sont stockées pendant 15 mois. Vous pouvez ainsi facilement effectuer les actions suivantes :
 
 - Débuguer les problèmes d'infrastructure passés et actuels
 - Identifier les tendances de consommation des ressources pour vos charges de travail critiques
@@ -35,7 +35,7 @@ Vous pouvez générer une nouvelle métrique basée sur des processus directemen
 
 {{< img src="infrastructure/process/process2metrics_create.png" alt="Créer une métrique basée sur des processus" style="width:80%;">}}
 
-1. **Sélectionnez des tags pour filtrer votre requête** : la syntaxe de la requête est la même que pour les [Live Processes][2]. Seuls les processus qui correspondent au contexte de vos filtres sont pris en compte pour l'agrégation. Les filtres de recherche textuelle sont uniquement pris en charge sur la page Live Processes.
+1. **Sélectionnez des tags pour filtrer votre requête** : la syntaxe de la requête est la même que pour les [live processes][2]. Seuls les processus qui correspondent au contexte de vos filtres sont pris en compte pour l'agrégation. Les filtres de recherche textuelle sont uniquement pris en charge sur la page Live Processes.
 2. **Choisissez la mesure à surveiller** : saisissez une mesure, telle que `Total CPU %`, pour agréger une valeur numérique et créer ses métriques agrégées `count`, `min`, `max`, `sum` et `avg` correspondantes.
 3. **Ajoutez des tags dans le champ `group by`** : sélectionnez des tags à ajouter sous forme de dimensions à vos métriques pour qu'elles puissent être filtrées, agrégées et comparées. Par défaut, les métriques générées à partir de processus ne sont associées à aucun tag, sauf si vous avez explicitement choisi d'en ajouter. Tous les tags disponibles pour les requêtes Live Processes peuvent être utilisés dans ce champ. Les métriques basées sur des processus sont considérées comme des [métriques custom][3]. Évitez donc de les regrouper en fonction de tags sans restriction ou présentant une cardinalité extrêmement élevée, tels que `command` et `user`, pour empêcher toute hausse conséquente de vos coûts.
 4. **Donnez un nom à votre métrique** : renseignez le nom de votre métrique. Les métriques basées sur des processus ont toujours le préfixe _proc._ et le suffixe _[mesure_sélectionnée]_.

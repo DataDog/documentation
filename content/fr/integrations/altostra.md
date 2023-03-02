@@ -8,15 +8,14 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - automation
-  - aws
-  - cloud
-  - configuration & deployment
-  - log collection
+- automation
+- cloud
+- configuration & deployment
+- log collection
 creates_events: false
 ddtype: crawler
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/altostra/README.md
+- https://github.com/DataDog/integrations-extras/blob/master/altostra/README.md
 display_name: Altostra
 draft: false
 git_integration_title: altostra
@@ -32,13 +31,17 @@ metric_prefix: altostra.
 metric_to_check: ''
 name: altostra
 public_title: Intégration Datadog/Altostra
-short_description: Envoyer automatiquement vos logs d'application cloud depuis Altostra vers Datadog
+short_description: Envoyer automatiquement vos logs d'application cloud depuis Altostra
+  vers Datadog
 support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 Altostra est une solution qui s'intègre aux services de cloud computing afin de fournir à vos équipes de développement des workflows de bout en bout.
@@ -51,7 +54,7 @@ Grâce à l'intégration Datadog/Altostra, vous pouvez instrumenter automatiquem
 
 L'intégration Datadog/Altostra est proposée par défaut. Aucune installation n'est requise.
 
-### Configuration
+### Procédure à suivre
 
 L'intégration Datadog est disponible dans la console Web Altostra, dans la section [Integrations][1] des paramètres de votre compte.
 

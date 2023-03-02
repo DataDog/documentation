@@ -2,9 +2,9 @@
 title: Alert on No Change in value
 kind: guide
 aliases:
-  - monitors/faq/how-can-i-configure-a-metric-monitor-to-alert-on-no-change-in-value
+  - /monitors/faq/how-can-i-configure-a-metric-monitor-to-alert-on-no-change-in-value
 further_reading:
-- link: "/monitors/create/types/"
+- link: "/monitors/"
   tag: "Documentation"
   text: "Learn how to create a monitor"
 - link: "/monitors/notify/"
@@ -20,9 +20,9 @@ Next, apply the abs() function to take the absolute value of these deltas.
 
 * `abs(diff(avg:system.mem.free{*}))`
 
-These functions can be applied to your query in the UI, via the "+" button.
+These functions can be applied to your query in the UI.
 
-{{< img src="monitors/faq/new_query_ui_monitors.png" alt="new_query_ui_monitors"  >}}
+{{< img src="monitors/guide/alert_value_difference.png" alt="Apply diff function through Sigma icon > Rate > Value difference" >}}
 
 Alternatively, your complex query can be manually entered in the 'edit monitor' UI, via the Source tab (or applied programmatically via the [API][1]). See image below.
 
@@ -41,4 +41,4 @@ Other [alert conditions/options][2] can be set to preference. Your monitor's UI 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /api/
-[2]: /monitors/create/types/#define-the-conditions
+[2]: /monitors/configuration/

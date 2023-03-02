@@ -9,7 +9,7 @@ further_reading:
 
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
@@ -28,7 +28,7 @@ Supported MySQL versions
 : 5.6, 5.7, or 8.0+
 
 Supported Agent versions
-: 7.33.0+
+: 7.36.1+
 
 Performance impact
 : The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. <br/><br/>
@@ -142,7 +142,7 @@ GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 ```
 
 ### Runtime setup consumers
-With RDS, performance schema consumers can't be enabled permanently in a configuration. Create the following procedure to give the Agent the ability to enable `performance_schema.events_statements_*` consumers at runtime.
+With RDS, performance schema consumers can't be enabled permanently in a configuration. Create the following procedure to give the Agent the ability to enable `performance_schema.events_*` consumers at runtime.
 
 ```SQL
 DELIMITER $$
@@ -150,6 +150,7 @@ CREATE PROCEDURE datadog.enable_events_statements_consumers()
     SQL SECURITY DEFINER
 BEGIN
     UPDATE performance_schema.setup_consumers SET enabled='YES' WHERE name LIKE 'events_statements_%';
+    UPDATE performance_schema.setup_consumers SET enabled='YES' WHERE name = 'events_waits_current';
 END $$
 DELIMITER ;
 GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog@'%';
@@ -200,7 +201,7 @@ Get up and running quickly by executing the following command to run the agent f
 
 ```bash
 export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-export DD_AGENT_VERSION=7.32.0
+export DD_AGENT_VERSION=7.36.1
 
 docker run -e "DD_API_KEY=${DD_API_KEY}" \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -221,7 +222,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
 Labels can also be specified in a `Dockerfile`, so you can build and deploy a custom agent without changing any infrastructure configuration:
 
 ```Dockerfile
-FROM gcr.io/datadoghq/agent:7.32.0
+FROM gcr.io/datadoghq/agent:7.36.1
 
 LABEL "com.datadoghq.ad.check_names"='["mysql"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
@@ -326,6 +327,9 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 ### Validate
 
 [Run the Agent's status subcommand][6] and look for `mysql` under the Checks section. Or visit the [Databases][7] page to get started!
+
+## Example Agent Configurations
+{{% dbm-mysql-agent-config-examples %}}
 
 ## Install the RDS Integration
 

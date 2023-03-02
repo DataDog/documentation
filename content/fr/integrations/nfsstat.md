@@ -9,18 +9,19 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - os & system
-  - log collection
+- os & system
+- log collection
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/nfsstat/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/nfsstat/README.md
 display_name: Nfsstat
 draft: false
 git_integration_title: nfsstat
 guid: 9f2fe3a7-ae19-4da9-a253-ae817a5557ab
 integration_id: system
 integration_title: Nfsstat
+integration_version: 1.11.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -32,8 +33,11 @@ public_title: Intégration Datadog/Nfsstat
 short_description: nfsstat récupère des métriques nfsiostat-sysstat.
 support: core
 supported_os:
-  - linux
+- linux
 ---
+
+
+
 ## Présentation
 
 L'intégration NFS recueille les métriques concernant les points de montage sur le client NFS. Elle repose sur l'outil `nfsiostat`, qui permet d'afficher les [statistiques][1] par montage du client NFS.
@@ -48,7 +52,7 @@ Le check NFSstat est inclus avec le package de l'[Agent Datadog][2] : vous n'av
 
 ### Configuration
 
-Modifiez le fichier `nfsstat.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3], afin de spécifier votre script binaire nfsiostat. Vous pouvez également utiliser le script fourni avec le programme d'installation du binaire. Consultez le [fichier d'exemple nfsstat.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
+Modifiez le fichier `nfsstat.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3]. Pointez vers votre script binaire nfsiostat ou utilisez le script fourni avec le programme d'installation du binaire. Consultez le [fichier d'exemple nfsstat.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
 
 ### Collecte de logs
 
@@ -83,7 +87,7 @@ Modifiez le fichier `nfsstat.d/conf.yaml` dans le dossier `conf.d/` à la racine
 
 
 ### Événements
-Le check Nfststat n'inclut aucun événement.
+Le check Nfsstat n'inclut aucun événement.
 
 ### Checks de service
 Le check Nfststat n'inclut aucun check de service.
@@ -93,7 +97,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][8].
 
 ## Pour aller plus loin
 
-* [Créer un monitor réseau sur un check HTTP][9]
+- [Créer un monitor réseau sur un check HTTP][9]
 
 [1]: http://man7.org/linux/man-pages/man8/nfsiostat.8.html
 [2]: https://app.datadoghq.com/account/settings#agent

@@ -1,35 +1,35 @@
 ---
-"assets":
-  "dashboards": {}
-  "logs": {}
-  "metrics_metadata": metadata.csv
-  "monitors": {}
-  "saved_views": {}
-  "service_checks": assets/service_checks.json
-"categories":
-- ""
-"creates_events": true
-"ddtype": "crawler"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/statsig/README.md"
-"display_name": "Statsig"
-"draft": false
-"git_integration_title": "statsig"
-"guid": "f22e08ca-b524-45ad-815c-9ad654015158"
-"integration_id": "statsig"
-"integration_title": "Statsig"
-"integration_version": ""
-"is_public": true
-"kind": "integration"
-"maintainer": "support@statsig.com"
-"manifest_version": "1.0.0"
-"metric_prefix": "statsig."
-"metric_to_check": "statsig.log_event.count"
-"name": "statsig"
-"public_title": "Statsig"
-"short_description": "Surveiller les changements Statsig depuis Datadog"
-"support": "contrib"
-"supported_os":
+assets:
+  dashboards: {}
+  logs: {}
+  metrics_metadata: metadata.csv
+  monitors: {}
+  saved_views: {}
+  service_checks: assets/service_checks.json
+categories:
+- ''
+creates_events: true
+ddtype: crawler
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/statsig/README.md
+display_name: Statsig
+draft: false
+git_integration_title: statsig
+guid: f22e08ca-b524-45ad-815c-9ad654015158
+integration_id: statsig
+integration_title: Statsig
+integration_version: ''
+is_public: true
+kind: integration
+maintainer: support@statsig.com
+manifest_version: 1.0.0
+metric_prefix: statsig.
+metric_to_check: statsig.log_event.count
+name: statsig
+public_title: Statsig
+short_description: Surveiller les changements Statsig depuis Datadog
+support: contrib
+supported_os:
 - linux
 - mac_os
 - windows
@@ -72,16 +72,16 @@ L'intégration Statsig envoie des événements de changement de configuration su
 
 ## Dépannage
 
-Besoin d'aide ? Contactez l'assistance Statsig à l'adresse support@statsig.com ou sur [ce site][3].
+Besoin d'aide ? Contactez l'[assistance Statsid][3] ou consultez le [site Web Statsig][4].
 
 ## Pour aller plus loin
 
 Documentation, liens et articles supplémentaires utiles :
 
-- [Surveiller vos publications de fonctionnalité avec la solution Statsig, disponible dans le Marketplace Datadog][4]
+- [Surveiller vos lancements de nouvelles fonctionnalités avec la solution Statsig, disponible dans le Marketplace Datadog][5]
 
 [1]: https://console.statsig.com/integrations
 [2]: https://github.com/DataDog/integrations-extras/blob/master/statsig/metadata.csv
-[3]: https://www.statsig.com/contact
-[4]: https://www.datadoghq.com/blog/feature-monitoring-statsig-datadog-marketplace/
-
+[3]: mailto:support@statsig.com
+[4]: https://www.statsig.com/contact
+[5]: https://www.datadoghq.com/blog/feature-monitoring-statsig-datadog-marketplace/

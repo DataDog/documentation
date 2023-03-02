@@ -1,51 +1,75 @@
 ---
-aliases:
-  - /ja/integrations/powerdns
+app_id: powerdns
+app_uuid: 44e491e1-f7c3-447a-b597-e740196479e0
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     powerdns: assets/dashboards/powerdns_dashboard.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: powerdns.recursor.questions
+      metadata_path: metadata.csv
+      prefix: powerdns.
+    process_signatures:
+    - pdns_server
+    - systemctl start pdns@
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: PowerDNS Recursor
   logs:
     source: powerdns
-  metrics_metadata: metadata.csv
-  monitors: {}
   saved_views:
     powerdns_processes: assets/saved_views/powerdns_processes.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-  - web
-  - network
-  - autodiscovery
-  - log collection
-creates_events: false
-ddtype: check
+- web
+- network
+- log collection
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/powerdns_recursor/README.md
-display_name: PowerDNS Recursor
+- https://github.com/DataDog/integrations-core/blob/master/powerdns_recursor/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: powerdns_recursor
-guid: ae533b67-a2af-45ce-8e23-235acb3a3893
 integration_id: powerdns
 integration_title: Power DNS Recursor
+integration_version: 2.2.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: powerdns.
-metric_to_check: powerdns.recursor.questions
+manifest_version: 2.0.0
 name: powerdns_recursor
-process_signatures:
-  - pdns_server
-  - systemctl start pdns@
-public_title: Datadog-Power DNS Recursor インテグレーション
+oauth: {}
+public_title: Power DNS Recursor
 short_description: PowerDNS Recursor の異常な送受信トラフィックを常に監視。
-support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Web
+  - Category::ネットワーク
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: PowerDNS Recursor の異常な送受信トラフィックを常に監視。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Power DNS Recursor
 ---
+
+
+
 ## 概要
 
 PowerDNS Recursor のパフォーマンスを追跡し、異常または注意が必要なトラフィックを監視します。この Agent チェックでは、Recursor から以下のような多様なメトリクスを収集することができます。
@@ -60,7 +84,7 @@ PowerDNS Recursor のパフォーマンスを追跡し、異常または注意�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 PowerDNS Recursor チェックは [Datadog Agent][1] パッケージに含まれています。Recursor に追加でインストールする必要はありません。
 
@@ -68,14 +92,14 @@ PowerDNS Recursor チェックは [Datadog Agent][1] パッケージに含まれ
 
 #### PowerDNS の準備
 
-このチェックは、PowerDNS Recursor の統計 API からパフォーマンス統計を収集します。4.1 より前のバージョンの pdns_recursor は、デフォルトで統計 API が有効ではありません。古いバージョンを実行している場合は、Recursor 構成ファイル (たとえば `/etc/powerdns/recursor.conf`) に次の行を追加して有効にしてください。
+このチェックは、PowerDNS Recursor の統計 API を使ってパフォーマンス統計を収集します。4.1 より前のバージョンの pdns_recursor は、デフォルトで統計 API が有効ではありません。古いバージョンを実行している場合は、Recursor 構成ファイル (たとえば `/etc/powerdns/recursor.conf`) に次の行を追加して有効にしてください。
 
 ```conf
 webserver=yes
-api-key=changeme             # only available since ver 4.0
-webserver-readonly=yes       # default no
-#webserver-port=8081         # default 8082
-#webserver-address=0.0.0.0   # default 127.0.0.1
+api-key=changeme             # v4.0 以降でのみ使用可能
+webserver-readonly=yes       # デフォルトは no
+#webserver-port=8081         # デフォルトは 8082
+#webserver-address=0.0.0.0   # デフォルトは 127.0.0.1
 ```
 
 pdns_recursor 3.x を実行している場合は、これらのオプション名の前に `experimental-` を付けてください。たとえば、`experimental-webserver=yes` とします。
@@ -173,7 +197,7 @@ Recursor を再起動すると、統計 API が有効になります。
 
 ##### ログの収集
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
 | パラメーター      | 値                                     |
 |----------------|-------------------------------------------|

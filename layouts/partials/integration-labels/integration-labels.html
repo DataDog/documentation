@@ -1,30 +1,5 @@
 {{ $dot := . }}
 
-{{ if .Params.ddtype }}
-<div class="row integration-labels">
-    {{ if eq .Params.ddtype "check" }}
-        <div class="agent col-12">
-            {{ partial "img.html" (dict "root" . "src" "icons/check_agent.png" "class" "static" "alt" "Agent Check" "width" "21") }}<span>{{ i18n "agent_check" }}</span>
-        </div>
-    {{ end }}
-    {{ if eq .Params.ddtype "statsd" }}
-        <div class="statsd col-12 ">
-            {{ partial "img.html" (dict "root" . "src" "icons/check_statsd.png" "class" "static" "alt" "StatsD Check" "width" "21") }}<span>{{ i18n "statsd_check" }}</span>
-        </div>
-    {{ end }}
-    {{ if eq .Params.ddtype "crawler" }}
-        <div class="crawler col-12">
-            {{ partial "img.html" (dict "root" . "src" "icons/check_crawler.png" "class" "static" "alt" "Crawler" "width" "21") }}<span>{{ i18n "crawler" }}</span>
-        </div>
-    {{ end }}
-    {{ if eq .Params.ddtype "library" }}
-        <div class="library col-12">
-            {{ partial "img.html" (dict "root" . "src" "icons/check_library.png" "class" "static" "alt" "Library" "width" "21") }}<span>{{ i18n "library_check" }}</span>
-        </div>
-    {{ end }}
-</div>
-{{ end }}
-
 {{ if .Params.is_beta }}
     <div class="row">
         <div class="beta col-12">
@@ -44,7 +19,7 @@
                             {{ partial "img.html" (dict "root" $dot "src" "os-linux.png" "class" "static" "alt" "Linux" "width" "24") }}
                         </span>
                     {{ end }}
-                    {{ if (or (eq . "mac_os") (eq . "mac os")) }}
+                    {{ if (or (eq . "mac_os") (eq . "mac os") (eq . "macos")) }}
                         <span>
                             {{ partial "img.html" (dict "root" $dot "src" "os-macos.png" "class" "static" "alt" "Mac OS" "width" "24") }}
                         </span>

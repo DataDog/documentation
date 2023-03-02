@@ -8,15 +8,15 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - automation
-  - orchestration
-  - notification
-  - collaboration
-  - security
+- automation
+- orchestration
+- notification
+- collaboration
+- security
 creates_events: true
 ddtype: crawler
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/torq/README.md
+- https://github.com/DataDog/integrations-extras/blob/master/torq/README.md
 display_name: Torq
 draft: false
 git_integration_title: torq
@@ -32,13 +32,17 @@ metric_prefix: torq.
 metric_to_check: ''
 name: torq
 public_title: Intégration Datadog/Torq
-short_description: Automatisation sans code pour vos équipes chargées de la sécurité et des opérations
+short_description: Automatisation sans code pour vos équipes chargées de la sécurité
+  et des opérations
 support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 L'intégration [Torq][1] vous permet de déclencher des workflows en réponse à une alerte Datadog afin d'enrichir ces alertes. Les événements résultant de vos workflows Torq peuvent ensuite être directement renvoyés vers votre flux d'événements Datadog et vers un dashboard Torq dédié.

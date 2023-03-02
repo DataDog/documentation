@@ -1,23 +1,26 @@
 ---
-title: Ajouter des tags de span et filtrer les données de performance de votre application
-kind: guide
 further_reading:
-  - link: /tracing/guide/alert_anomalies_p99_database/
-    tag: "3\_minutes"
-    text: Être alerté en cas de latence au 99e centile anormale pour un service de base de données
-  - link: /tracing/guide/week_over_week_p50_comparison/
-    tag: "2\_minutes"
-    text: Comparer la latence d'un service avec celle de la semaine précédente
-  - link: /tracing/guide/apm_dashboard/
-    tag: "4\_minutes"
-    text: Créer un dashboard pour suivre et corréler les métriques APM
-  - link: /tracing/guide/slowest_request_daily/
-    tag: "3\_minutes"
-    text: Débuguer la trace la plus lente sur l'endpoint le plus lent d'un service web
-  - link: /tracing/guide/
-    tag: ''
-    text: Tous les guides
+- link: /tracing/guide/alert_anomalies_p99_database/
+  tag: 3 minutes
+  text: Être alerté en cas de latence au 99e centile anormale pour un service de base
+    de données
+- link: /tracing/guide/week_over_week_p50_comparison/
+  tag: 2 minutes
+  text: Comparer la latence d'un service avec celle de la semaine précédente
+- link: /tracing/guide/apm_dashboard/
+  tag: 4 minutes
+  text: Créer un dashboard pour suivre et corréler les métriques APM
+- link: /tracing/guide/slowest_request_daily/
+  tag: 3 minutes
+  text: Débuguer la trace la plus lente sur l'endpoint le plus lent d'un service web
+- link: /tracing/guide/
+  tag: ''
+  text: Tous les guides
+kind: guide
+title: Ajouter des tags de span et filtrer ou regrouper les données de performance
+  de votre application
 ---
+
 _Temps de lecture : 7 minutes_
 
 {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_6.mp4" alt="Vue Analytics" video="true"  style="width:90%;">}}
@@ -91,10 +94,8 @@ require 'ddtrace'
 class ShoppingCartController < ApplicationController
   # GET /shopping_cart
   def index
-    # Get the active span
-    current_span = Datadog.tracer.active_span
-    # customer_id -> 254889
-    current_span.set_tag('customer.id', params.permit([:customer_id])) unless current_span.nil?
+    # Récupérer la span active et définir customer_id -> 254889
+    Datadog::Tracing.active_span&.set_tag('customer.id', params.permit([:customer_id]))
 
     # [...]
   end
@@ -201,16 +202,14 @@ L'interface utilisateur de Datadog utilise les tags pour définir des métadonn�
 <?php
   namespace App\Http\Controllers;
 
-  use DDTrace\GlobalTracer;
-
   class ShoppingCartController extends Controller
   {
       public shoppingCartAction (Request $request) {
           // Récupérer la span active
-          $span = GlobalTracer::get()->getActiveSpan();
+          $span = \DDTrace\active_span();
           if (null !== $span) {
               // customer_id -> 254889
-              $span->setTag('customer_id', $request->get('customer_id'));
+              $span->meta['customer_id'] = $request->get('customer_id');
           }
 
           // [...]
@@ -230,7 +229,7 @@ L'interface utilisateur de Datadog utilise les tags pour définir des métadonn�
 
 {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_3.png" alt="Page Ressource" style="width:90%;">}}
 
-Le tableau des traces affiche la distribution de la latence globale pour l'ensemble des traces incluses dans le contexte actuel (service, ressource et intervalle) ainsi que les liens vers les traces individuelles. Vous pouvez trier ce tableau par durée ou par code d'erreur pour identifier facilement les opérations ayant généré une erreur ou les possibilités d'optimisation.
+Le tableau des traces affiche la distribution de la latence globale pour l'ensemble des traces incluses dans le contexte actuel (service, ressource et intervalle) ainsi que les liens vers les traces individuelles. Vous pouvez trier ce tableau par durée ou par code d'erreur pour identifier les opérations ayant généré une erreur ou encore des possibilités d'optimisation.
 
 3) **Cliquez sur l'une de vos traces.**
 
@@ -244,25 +243,25 @@ La partie inférieure de cette vue comprend des informations supplémentaires su
 
 ## Exploiter vos tags de span personnalisés avec Analytics
 
-4) **Accédez à la [page Trace Search][6]**.
+4) **Accédez à la [page Trace Explorer][6]**.
 
 La page Trace Search vous permet d'identifier les [traces][1] et les spans indexées spécifiques qui vous intéressent. Depuis cette vue, vous pouvez filtrer un ensemble de tags par défaut (tels que `Env`,` Service`, `Resource` et [bien d'autres][7]) en appliquant un intervalle.
 
-5) **Trouvez une trace qui possède le nouveau tag**. Pour ce faire, utilisez l'explorateur de facettes sur la gauche. Recherchez le nom de la ressource que vous avez définie au début de ce guide, puis cliquez sur l'une des lignes que vous voyez à cet endroit.
+5) **Trouvez une trace qui possède le nouveau tag**. Pour ce faire, utilisez le Facet Explorer sur la gauche. Recherchez le nom de la ressource que vous avez définie au début de ce guide, puis cliquez sur l'une des lignes que vous voyez à cet endroit.
 
 6) **Trouvez le nouveau tag que vous avez ajouté à la trace**. Cliquez dessus et sélectionnez **Create facet** pour `@[nom de votre facette]` (dans notre exemple, il s'agit de customer_id)
 
 {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_5.png" alt="Menu Créer une facette" style="width:90%;">}}
 
-Vous pouvez désormais spécifier le nom d'affichage de votre facette ainsi que son emplacement dans l'explorateur de facettes.
+Vous pouvez désormais spécifier le nom d'affichage de votre facette ainsi que son emplacement dans le Facet Explorer.
 
 {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_8.png" alt="Fenêtre Créer une facette" style="width:60%;">}}
 
-La facette que vous avez créée devrait maintenant apparaître dans l'explorateur de facettes. Utilisez la case `Search facets` pour la retrouver facilement.
+La facette que vous avez créée devrait maintenant apparaître dans le Facet Explorer. Utilisez la case `Search facets` pour la retrouver facilement.
 
 6) **Accédez à la page [Analytics][8].**
 
-La page Analytics est un outil de création de requêtes visuel qui vous permet d'inspecter vos traces sans aucune limite de cardinalité. Il s'appuie sur les facettes pour filtrer et définir le contexte de la requête. Pour plus d'informations, consultez la section [Recherche et analyse de traces][9].
+La page Analytics propose un outil visuel de création de requêtes qui vous permet d'inspecter vos traces sans aucune limite de cardinalité. Cet outil s'appuie sur les facettes pour filtrer et définir le contexte de la requête. Pour en savoir plus, consultez la [présentation du Trace Explorer][9].
 
 7) **Choisissez le service** sur lequel vous avez travaillé dans la liste des facettes de service, **sélectionnez Error** dans la liste des statuts et **sélectionnez `customer_id** (ou tout autre tag que vous avez ajouté à vos spans) dans le champ group by.
 
@@ -282,13 +281,13 @@ Enfin, vous pouvez également afficher l'ensemble des traces associées à votre
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/tracing/visualization/#trace
-[2]: /fr/tracing/visualization/#spans
-[3]: /fr/tracing/visualization/#span-tags
-[4]: /fr/tracing/visualization/#resources
-[5]: /fr/tracing/visualization/#services
-[6]: https://app.datadoghq.com/apm/search
-[7]: /fr/tracing/trace_search_and_analytics/#live-search-for-15-minutes
+[1]: /fr/tracing/glossary/#trace
+[2]: /fr/tracing/glossary/#spans
+[3]: /fr/tracing/glossary/#span-tags
+[4]: /fr/tracing/glossary/#resources
+[5]: /fr/tracing/glossary/#services
+[6]: https://app.datadoghq.com/apm/traces
+[7]: /fr/tracing/trace_explorer/#live-search-for-15-minutes
 [8]: https://app.datadoghq.com/apm/analytics
-[9]: /fr/tracing/trace_search_and_analytics/query_syntax/
+[9]: /fr/tracing/trace_explorer/query_syntax/
 [10]: /fr/tracing/guide/alert_anomalies_p99_database/

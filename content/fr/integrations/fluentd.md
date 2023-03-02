@@ -1,6 +1,6 @@
 ---
 aliases:
-  - /fr/logs/log_collection/fluentd
+- /fr/logs/log_collection/fluentd
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
@@ -13,18 +13,19 @@ assets:
     fluentd_processes: assets/saved_views/fluentd_processes.json
   service_checks: assets/service_checks.json
 categories:
-  - log collection
-  - autodiscovery
+- log collection
+- autodiscovery
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/fluentd/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/fluentd/README.md
 display_name: fluentd
 draft: false
 git_integration_title: fluentd
 guid: 68100352-b993-43e6-9dc8-5ecd498e160b
 integration_id: fluentd
 integration_title: FluentD
+integration_version: 2.1.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -33,17 +34,21 @@ metric_prefix: fluentd.
 metric_to_check: fluentd.buffer_queue_length
 name: fluentd
 process_signatures:
-  - td-agent
-  - fluentd
-  - ruby td-agent
+- td-agent
+- fluentd
+- ruby td-agent
 public_title: Intégration Datadog/Fluentd
-short_description: Gérez les files d'attente de mise en mémoire tampon et le nombre de nouvelles tentatives pour chaque plug-in Fluentd que vous avez activé.
+short_description: Gérez les files d'attente de mise en mémoire tampon et le nombre
+  de nouvelles tentatives pour chaque plug-in Fluentd que vous avez activé.
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ![Dashboard Fluentd][1]
 
 ## Présentation
@@ -176,7 +181,7 @@ Si vos logs contiennent un ou plusieurs des attributs suivants, ces attributs so
 - `kubernetes.pod_name`
 - `docker.container_id`
 
-Bien que l'Agent Datadog recueille automatiquement les métadonnées Docker et Kubernetes, FluentD doit utiliser un plug-in pour y parvenir. Nous vous conseillons d'utiliser [fluent-plugin-kubernetes_metadata_filter][10] pour recueillir ces métadonnées.
+Bien que l'Agent Datadog recueille automatiquement les métadonnées Docker et Kubernetes, FluentD doit utiliser un plug-in pour y parvenir. Datadog vous conseille d'utiliser [fluent-plugin-kubernetes_metadata_filter][10] pour recueillir ces métadonnées.
 
 Exemple de configuration :
 
@@ -231,9 +236,8 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 Le check Fluentd n'inclut aucun événement.
 
 ### Checks de service
+{{< get-service-checks-from-git "fluentd" >}}
 
-**fluentd.is_ok** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à Fluentd pour recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 

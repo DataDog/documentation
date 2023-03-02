@@ -1,6 +1,6 @@
 {
   "integration_count": {
-    "other": "500"
+    "other": "600"
   },
 
   "beta_sentence": {
@@ -48,15 +48,15 @@
   },
 
   "email_support_sentence": {
-    "other": "You can contact our Support Team by visiting <a href=\"http://help.datadoghq.com\" target=\"_blank\" rel=\"noopener\">Datadog's Support Website</a>. (all sites)."
+    "other": "You can contact our Support Team by visiting <a href=\"http://help.datadoghq.com\" target=\"_blank\" rel=\"noopener\">Datadog's Support Website</a>. (all sites). <br><br> For details on how to log into the Support Website, see <a href=\"https://docs.datadoghq.com/account_management/faq/access-your-support-ticket\" target=\"_blank\"> Access Your Support Ticket</a>."
   },
 
   "live_chat_support_sentence": {
-    "other": "Chat with the Datadog Support Team Monday 10:00 AET (Australian Eastern Time) through Friday 17:00 PT (Pacific Time) with in-app chat."
+    "other": "Chat with the Datadog Support Team Monday through Friday from 10:00 to 19:00 ET (Eastern Time) using in-app chat."
   },
 
   "event_stream_support_sentence": {
-    "other": "Contact Datadog team members or chat with our community on <a href=\"http://chat.datadoghq.com/\" target=\"_blank\" rel=\"noopener\">Datadog's public Slack</a>."
+    "other": "The <a href=\"http://chat.datadoghq.com/\" target=\"_blank\" rel=\"noopener\">Slack Community program</a> is a network built by Datadog users for Datadog users to help each other find answers to questions or to share product tips and tricks."
   },
 
   "agent_started_sentence": {
@@ -316,6 +316,8 @@
   },
   "beta_check":{
     "other": "Beta"
+  },
+  "learn_more": {
+    "other": "Learn More"
   }
-
 }

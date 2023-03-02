@@ -16,19 +16,20 @@ assets:
     cassandra_processes: assets/saved_views/cassandra_processes.json
   service_checks: assets/service_checks.json
 categories:
-  - data store
-  - log collection
-  - autodiscovery
+- data store
+- log collection
+- autodiscovery
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/cassandra/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/cassandra/README.md
 display_name: Cassandra
 draft: false
 git_integration_title: cassandra
 guid: 03ba454d-425c-4f61-9e9c-54682c3ebce5
 integration_id: cassandra
 integration_title: Cassandra
+integration_version: 1.15.1
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -37,15 +38,19 @@ metric_prefix: cassandra.
 metric_to_check: cassandra.load.count
 name: cassandra
 process_signatures:
-  - java org.apache.cassandra.service.CassandraDaemon
+- java org.apache.cassandra.service.CassandraDaemon
 public_title: Intégration Datadog/Cassandra
-short_description: 'Surveillez les performances des clusters, leur capacité, leur santé globale, et bien plus encore.'
+short_description: Surveillez les performances des clusters, leur capacité, leur santé
+  globale, et bien plus encore.
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ![dashboard par défaut de Cassandra][1]
 
 ## Présentation
@@ -61,11 +66,11 @@ Recueillez des métriques de Cassandra en temps réel pour :
 
 Le check Cassandra est inclus avec le package de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos nœuds Cassandra. Nous vous conseillons d'utiliser le JDK d'Oracle pour cette intégration.
 
-**Remarque** : ce check prévoit une limite de 350 métriques par instance. Le nombre de métriques renvoyées est indiqué dans la page d'information. Vous pouvez choisir des métriques pertinentes en modifiant la configuration ci-dessous. Pour découvrir comment modifier la liste des métriques à recueillir, consultez la [documentation relative aux checks JMX][3] afin d'obtenir des instructions détaillées. Si vous souhaitez surveiller plus de 350 métriques, contactez [l'assistance Datadog][4].
+**Remarque** : ce check prévoit une limite de 350 métriques par instance. Le nombre de métriques renvoyées est indiqué dans la page d'information. Vous pouvez choisir des métriques pertinentes en modifiant la configuration ci-dessous. Pour découvrir comment modifier la liste des métriques à recueillir, consultez la [section JMX][3] afin d'obtenir des instructions détaillées. Si vous souhaitez surveiller plus de 350 métriques, contactez l'[assistance Datadog][4].
 
 ### Configuration
 
-Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour la configuration dans un environnement conteneurisé.
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -123,13 +128,13 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 ##### Collecte de métriques
 
-Pour les environnements conteneurisés, consultez le guide [Autodiscovery avec JMX][2].
+Pour les environnements conteneurisés, consultez le guide [Autodiscovery avec JMX][2]. Celui-ci explique notamment comment [mettre à jour l'image de votre Agent][3] sur vos clusters à l'aide d'Autodiscovery.
 
 ##### Collecte de logs
 
 _Disponible à partir des versions > 6.0 de l'Agent_
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][3].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][4].
 
 | Paramètre      | Valeur                                                  |
 | -------------- | ------------------------------------------------------ |
@@ -137,7 +142,8 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 
 [1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
 [2]: https://docs.datadoghq.com/fr/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
-[3]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
+[3]: https://docs.datadoghq.com/fr/agent/guide/autodiscovery-with-jmx/?tab=containeragent#autodiscovery-annotations
+[4]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -156,9 +162,8 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 Le check Cassandra n'inclut aucun événement.
 
 ### Checks de service
+{{< get-service-checks-from-git "cassandra" >}}
 
-**cassandra.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'instance Cassandra qu'il surveille et à y recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 
@@ -173,7 +178,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][4].
 
 
 
-## Check de l'Agent : Cassandra Nodetool
+## Intégration Cassandra Nodetool
 
 ![Dashboard par défaut Cassandra][9]
 
@@ -187,7 +192,7 @@ Ce check permet de recueillir des métriques pour votre cluster Cassandra qui ne
 
 Le check Cassandra Nodetool est inclus avec le package de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos nœuds Cassandra.
 
-### Configuration
+### Procédure à suivre
 
 1. Modifiez le fichier `cassandra_nodetool.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][11]. Consultez le [fichier d'exemple cassandra_nodetool.d/conf.yaml][12] pour découvrir toutes les options de configuration disponibles :
 
@@ -225,9 +230,8 @@ Les logs Cassandra Nodetool sont recueillis par l'intégration Cassandra. Consu
 Le check Cassandra_nodetool n'inclut aucun événement.
 
 ### Checks de service
+{{< get-service-checks-from-git "cassandra_nodetool" >}}
 
-**cassandra.nodetool.node_up**:<br>
-L'Agent envoie ce check de service pour chaque nœud du cluster surveillé. Renvoie `CRITICAL` si le nœud n'est pas disponible. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 

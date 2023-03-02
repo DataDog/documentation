@@ -1,10 +1,10 @@
 ---
-title: Python ベースのチェックから SNMP Core チェック (Go) への移行
-kind: ガイド
 further_reading:
 - link: network_monitoring/devices/setup
   tag: ドキュメント
   text: NDM のセットアップに関する詳細
+kind: ガイド
+title: Python ベースのチェックから SNMP Core チェック (Go) への移行
 ---
 
 ## 概要
@@ -47,7 +47,7 @@ snmp_listener:
   workers: 100              # デバイスの検出に同時に使用されるワーカー数
   discovery_interval: 3600  # 秒数
   configs:
-    - network: 1.2.3.4/24   # CIDR 表記。/24 ブロック以下を推奨
+    - network: 1.2.3.4/24   # CIDR 表記。Datadog は /24 ブロック以下を推奨
       version: 2
       port: 161
       community: ***
@@ -74,7 +74,7 @@ snmp_listener:
   workers: 100              # デバイスの検出に同時に使用されるワーカー数
   discovery_interval: 3600  # 各オートディスカバリー間のインターバル（秒）
   configs:
-    - network: 1.2.3.4/24   # CIDR 表記。/24 ブロック以下を推奨
+    - network: 1.2.3.4/24   # CIDR 表記。Datadog は /24 ブロック以下を推奨
       snmp_version: 3
       user: "user"
       authProtocol: "fakeAuth"
@@ -126,7 +126,7 @@ snmp_listener:
 {{< code-block lang="yaml" filename="scalar_symbols.yaml" >}}
 metrics:
   - MIB: HOST-RESOURCES-MIB
-  symbol: hrSystemUptime
+    symbol: hrSystemUptime
 {{< /code-block >}}
 
 **Agent 7.27.0 の場合:**
@@ -134,9 +134,9 @@ metrics:
 {{< code-block lang="yaml" filename="scalar_symbols_7_27.yaml" >}}
 metrics:
   - MIB: HOST-RESOURCES-MIB
-  symbol:
-    OID: 1.3.6.1.2.1.25.1.1.0
-    name: hrSystemUptime
+    symbol:
+      OID: 1.3.6.1.2.1.25.1.1.0
+      name: hrSystemUptime
 {{< /code-block >}}
 
 #### テーブルシンボル
@@ -146,14 +146,14 @@ metrics:
 {{< code-block lang="yaml" filename="table_symbols.yaml" >}}
 
 metrics:
-  -MIB: HOST-RESOURCES-MIB
-  table: hrStorageTable
-  symbols:
-    - hrStorageAllocationUnits
-    - hrStoageSize
-  metrics_tags:
-    - tag: storagedec
-      column: hrStorageDescr
+  - MIB: HOST-RESOURCES-MIB
+    table: hrStorageTable
+    symbols:
+      - hrStorageAllocationUnits
+      - hrStoageSize
+    metrics_tags:
+      - tag: storagedec
+        column: hrStorageDescr
 
 {{< /code-block >}}
 
@@ -162,20 +162,20 @@ metrics:
 
 {{< code-block lang="yaml" filename="table_symbols_7_27.yaml" >}}
 metrics:
-  -MIB: HOST-RESOURCES-MIB
-  table:
-    OID: 1.3.6.1.2.1.25.2.3
-    name: hrStorageTable
-  symbols:
-    - OID: 1.3.6.1.2.1.25.2.3.1.4
-      name: hrStorageAllocationUnits
-    - OID: 1.3.6.1.2.1.25.2.3.1.5
-      name: hrStoageSize
-  metrics_tags:
-    - tag: storagedec
-      column:
-        OID: 1.3.6.1.2.1.25.2.3.1.3
-        name: hrStorageDescr
+  - MIB: HOST-RESOURCES-MIB
+    table:
+      OID: 1.3.6.1.2.1.25.2.3
+      name: hrStorageTable
+    symbols:
+      - OID: 1.3.6.1.2.1.25.2.3.1.4
+        name: hrStorageAllocationUnits
+      - OID: 1.3.6.1.2.1.25.2.3.1.5
+        name: hrStoageSize
+    metrics_tags:
+      - tag: storagedec
+        column:
+          OID: 1.3.6.1.2.1.25.2.3.1.3
+          name: hrStorageDescr
 {{< /code-block >}}
 
 

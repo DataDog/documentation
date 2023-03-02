@@ -3,6 +3,7 @@ title: Online Archives
 kind: documentation
 description: Cost effective live query capabilities over long term retention of Logs
 is_beta: true
+private: true
 further_reading:
 - link: "/logs/log_configuration/indexes/#indexes-filters"
   tag: "Documentation"
@@ -14,12 +15,6 @@ further_reading:
   tag: "Blog"
   text: "Historical log analysis and investigation with Online Archives"
 ---
-
-{{< site-region region="us3,us5,eu,gov" >}}
-
-Online Archives is only available for AWS hosted Datadog customers (US1) site.
-
-{{< /site-region >}}
 
 <div class="alert alert-warning">
 Online Archives is in limited availability. To request access, contact <a href="/help/">Datadog Support</a>.
@@ -49,11 +44,16 @@ Configure Online Archives in the [Logs Index Configuration][3] page:
 
 ## Searching in Online Archives
 
-Select Online Archives from the dropdown in the Logs Explorer to begin searching in Online Archives instead of indexes. Find this dropdown next to the time picker.
+Select Online Archives from the dropdown in the Logs Explorer to begin searching in Online Archives instead of indexes. Find this dropdown next to the time picker. You can adjust the time picker by selecting pre-set options, up to 3 months, or by selecting the calendar view to search further back in time.
+
 
 {{< img src="logs/log_configuration/online_archives/searching.png" alt="How to search your online archive" style="width:100%;">}}
 
 [Search][4] by typing in queries in the search bar or by selecting the relevant facet in the facet panel.
+
+**Notes**: 
+- You cannot export online archive logs to Dashboards, Notebooks, or Monitors.
+- The Transactions and Patterns view is not available for Online Archives.
 
 ## Analytics in Online Archives
 
@@ -85,11 +85,13 @@ Here are examples of different log retention strategies and how to implement the
 
 {{< img src="logs/log_configuration/online_archives/exclusion.png" alt="How to exclude things from the index" style="width:100%;">}}
 
-**Note:** Index order matters since `team:security` logs go into the first index that matches the index filter in case there are multiple indexes.
+### Disabling Online Archives
+Select the index where you want to turn off Online Archives and then switch the Online Archives toggle to the OFF position.
 
-**Note:** Dashboards, Log Monitors, Patterns and Transactions are not available in Online Archives.
+**Note:** Index order matters since `team:security` logs go into the first index that matches the index filter in case there are multiple indexes.
 
 [1]: /logs/log_configuration/indexes/#indexes-filters
 [2]: /logs/log_configuration/indexes/#exclusion-filters
 [3]: https://app.datadoghq.com/logs/pipelines/indexes
 [4]: https://app.datadoghq.com/logs
+

@@ -1,22 +1,23 @@
 ---
-title: Trafic réseau
-kind: guide
 aliases:
-  - /fr/account_management/faq/what-are-the-required-ip-s-and-ports-i-need-open-to-connect-to-the-datadog-service
-  - /fr/account_management/faq/can-i-whitelist-the-ip-addresses-for-data-coming-from-datadog-via-webhook-and-integrations
-  - /fr/agent/network
-  - /fr/agent/faq/network
+- /fr/account_management/faq/what-are-the-required-ip-s-and-ports-i-need-open-to-connect-to-the-datadog-service
+- /fr/account_management/faq/can-i-whitelist-the-ip-addresses-for-data-coming-from-datadog-via-webhook-and-integrations
+- /fr/agent/network
+- /fr/agent/faq/network
 further_reading:
-  - link: logs/
-    tag: Documentation
-    text: Recueillir vos logs
-  - link: /infrastructure/process
-    tag: Documentation
-    text: Recueillir vos processus
-  - link: tracing
-    tag: Documentation
-    text: Recueillir vos traces
+- link: logs/
+  tag: Documentation
+  text: Recueillir vos logs
+- link: /infrastructure/process
+  tag: Documentation
+  text: Recueillir vos processus
+- link: tracing
+  tag: Documentation
+  text: Recueillir vos traces
+kind: guide
+title: Trafic réseau
 ---
+
 <div class="alert alert-warning">
 Le trafic est toujours généré par l'Agent et envoyé à Datadog. Aucune session n'est jamais initiée par Datadog et transmise à l'Agent.
 </div>
@@ -30,38 +31,126 @@ L'intégralité du trafic de l'Agent est envoyé via SSL. La destination dépend
 [APM][1]
 : `trace.agent.`{{< region-param key="dd_site" code="true" >}}
 
+[Live Containers][3] & [Live Process][4]
+: `process.`{{< region-param key="dd_site" code="true" >}}
+
+[Network Device Monitoring][10]
+: `ndm-intake.`{{< region-param key="dd_site" code="true" >}}
+: `snmp-traps-intake.`{{< region-param key="dd_site" code="true" >}}
+
+
+[Orchestrator][5]
+: `orchestrator.`{{< region-param key="dd_site" code="true" >}}
+
+[Profiling][7]
+: `intake.profile.`{{< region-param key="dd_site" code="true" >}}
+
+[Real User Monitoring (RUM)][6]
+: `rum.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}}<br>
+`session-replay.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}}
+
+[Emplacement privé Synthetic][8]
+: Worker v>=1.5.0 : `intake.synthetics.`{{< region-param key="dd_site" code="true" >}} est le seul endpoint à configurer.<br>
+Résultats des tests API pour worker v>0.1.6 : `intake.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
+Résultats des tests Browser pour worker v>0.2.0 : `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
+Résultats des tests API pour worker v<0.1.5 : `api.`{{< region-param key="dd_site" code="true" >}}
+
+{{< site-region region="us,eu,us3" >}}
 [Database Monitoring][2]
 : `dbm-metrics-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `dbquery-intake.`{{< region-param key="dd_site" code="true" >}}
 
-[Live Containers][3] & [Live Process][4]
-: `process.`{{< region-param key="dd_site" code="true" >}}
+[2]: /fr/database_monitoring/
+{{< /site-region >}}
 
-[Logs][5] et [logs HIPAA][6]
-: TCP: `{{< region-param key="tcp_endpoint" code="true" >}}`<br>
-HTTP: `{{< region-param key="http_endpoint" code="true" >}}`<br>
-Autres : Voir [endpoints de logs][7]
+{{< site-region region="us" >}}
 
-[Logs HIPAA (obsolète)][6]
-: `tcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}<br>
-`lambda-tcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}<br>
-`gcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}<br>
-`http-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
+[Logs][1] et [logs HIPAA][2]
+: TCP : `agent-intake.logs.datadoghq.com`<br>
+HTTP : `agent-http-intake.logs.datadoghq.com`<br>
+Autre : voir les [endpoints pour les logs][3]
 
-[Orchestrateur][8]
-: `orchestrator.`{{< region-param key="dd_site" code="true" >}}
+[Logs HIPAA (obsolète)][2]
+: `tcp-encrypted-intake.logs.datadoghq.com`<br>
+`lambda-tcp-encrypted-intake.logs.datadoghq.com`<br>
+`gcp-encrypted-intake.logs.datadoghq.com`<br>
+`http-encrypted-intake.logs.datadoghq.com`
 
-[Real User Monitoring (RUM)][9]
-: `rum-http-intake.logs.`{{< region-param key="dd_site" code="true" >}}
+[1]: /fr/logs/
+[2]: /fr/security/logs/#hipaa-enabled-customers
+[3]: /fr/logs/log_collection/#logging-endpoints
 
-[Profiling][10]
-: `intake.profile.`{{< region-param key="dd_site" code="true" >}}
+{{< /site-region >}}
 
-[Emplacement privé Synthetic][11]
-: Worker v>=1.5.0 `intake.synthetics.`{{< region-param key="dd_site" code="true" >}} est le seul endpoint à configurer.<br>
-Résultats des tests API pour worker v>0.1.6 `intake.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
-Résultats des tests Browser pour worker v>0.2.0 `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
-Résultats des tests API pour worker v<0.1.5 `api.`{{< region-param key="dd_site" code="true" >}}
+{{< site-region region="eu" >}}
+
+[Logs][1] et [logs HIPAA][2]
+: TCP : `agent-intake.logs.datadoghq.eu`<br>
+HTTP : `agent-http-intake.logs.datadoghq.eu`<br>
+Autre : voir les [endpoints pour les logs][3]
+
+[Logs HIPAA (obsolète)][2]
+: `tcp-encrypted-intake.logs.datadoghq.eu`<br>
+`lambda-tcp-encrypted-intake.logs.datadoghq.eu`<br>
+`gcp-encrypted-intake.logs.datadoghq.eu`<br>
+`http-encrypted-intake.logs.datadoghq.eu`
+
+[1]: /fr/logs/
+[2]: /fr/security/logs/#hipaa-enabled-customers
+[3]: /fr/logs/log_collection/#logging-endpoints
+
+{{< /site-region >}}
+
+{{< site-region region="us3" >}}
+
+[Logs][1] et [logs HIPAA][2]
+: HTTP : `agent-http-intake.logs.us3.datadoghq.com`<br>
+Autre : voir les [endpoints pour les logs][3]
+
+[Logs HIPAA (obsolète)][2]
+: `lambda-tcp-encrypted-intake.logs.us3.datadoghq.com`<br>
+`gcp-encrypted-intake.logs.us3.datadoghq.com`<br>
+`http-encrypted-intake.logs.us3.datadoghq.com`
+
+[1]: /fr/logs/
+[2]: /fr/security/logs/#hipaa-enabled-customers
+[3]: /fr/logs/log_collection/#logging-endpoints
+
+{{< /site-region >}}
+
+{{< site-region region="us5" >}}
+
+[Logs][1] et [logs HIPAA][2]
+: HTTP : `agent-http-intake.logs.us5.datadoghq.com`<br>
+Autre : voir les [endpoints pour les logs][3]
+
+[Logs HIPAA (obsolète)][2]
+: `lambda-tcp-encrypted-intake.logs.us5.datadoghq.com`<br>
+`gcp-encrypted-intake.logs.us5.datadoghq.com`<br>
+`http-encrypted-intake.logs.us5.datadoghq.com`
+
+[1]: /fr/logs/
+[2]: /fr/security/logs/#hipaa-enabled-customers
+[3]: /fr/logs/log_collection/#logging-endpoints
+
+{{< /site-region >}}
+
+{{< site-region region="gov" >}}
+
+[Logs][1] et [logs HIPAA][2]
+: HTTP : `agent-http-intake.logs.ddog-gov.com`<br>
+Autre : voir les [endpoints pour les logs][3]
+
+[Logs HIPAA (obsolète)][2]
+: `lambda-tcp-encrypted-intake.logs.ddog-gov.com`<br>
+`gcp-encrypted-intake.logs.ddog-gov.com`<br>
+`http-encrypted-intake.logs.ddog-gov.com`
+
+[1]: /fr/logs/
+[2]: /fr/security/logs/#hipaa-enabled-customers
+[3]: /fr/logs/log_collection/#logging-endpoints
+
+{{< /site-region >}}
 
 Toutes les autres données de l'Agent
 : `<VERSION>-app.agent.`{{< region-param key="dd_site" code="true" >}}<br>
@@ -76,24 +165,25 @@ Les informations sont structurées au format JSON selon le schéma suivant :
 
 {{< code-block lang="text" disable_copy="true" >}}
 {
-    "version": 1,                       // <-- valeur incrémentée chaque fois que cette information est modifiée
-    "modified": "YYYY-MM-DD-HH-MM-SS",  // <-- timestamp de la dernière modification
-    "agents": {                         // <-- adresses IP utilisées par l'Agent pour envoyer des métriques à Datadog
-        "prefixes_ipv4": [              // <-- liste des blocs CIDR IPv4
+    "version": 1,                          // <-- valeur incrémentée chaque fois que cette information est modifiée
+    "modified": "YYYY-MM-DD-HH-MM-SS",     // <-- timestamp de la dernière modification
+    "agents": {                            // <-- adresses IP utilisées par l'Agent pour envoyer des métriques à Datadog
+        "prefixes_ipv4": [                 // <-- liste des blocs CIDR IPv4
             "a.b.c.d/x",
             ...
         ],
-        "prefixes_ipv6": [              // <-- liste des blocs CIDR IPv6
+        "prefixes_ipv6": [                 // <-- liste des blocs CIDR IPv6
             ...
         ]
     },
-    "api": {...},                       // <-- même chose, mais pour une fonctionnalité non essentielle de l'Agent (demande d'informations à partir de l'API)
-    "apm": {...},                       // <-- même structure que « agents », mais il s'agit des adresses IP utilisées pour les données de l'Agent APM
-    "logs": {...},                      // <-- même chose, mais pour les données de l'Agent de log
-    "process": {...},                   // <-- même chose, mais pour les données de l'Agent de processus
-    "orchestrator": {...},              // <-- même chose, mais pour les données de l'Agent de processus
-    "synthetics": {...},                // <-- non utilisé pour le trafic de l'Agent (adresses IP sources de Datadog pour les bots utilisés pour les tests Synthetic)
-    "webhooks": {...}                   // <-- non utilisé pour le trafic de l'Agent (adresses IP sources de Datadog pour les webhooks)
+    "api": {...},                          // <-- même chose, mais pour une fonctionnalité non essentielle de l'Agent (demande d'informations à partir de l'API)
+    "apm": {...},                          // <-- même structure que « agents », mais il s'agit des adresses IP utilisées pour les données de l'Agent APM
+    "logs": {...},                         // <-- même chose, mais pour les données de l'Agent de log
+    "process": {...},                      // <-- même chose, mais pour les données de l'Agent de processus
+    "orchestrator": {...},                 // <-- même chose, mais pour les données de l'Orchestrator
+    "synthetics": {...},                   // <-- non utilisé pour le trafic de l'Agent (adresses IP sources de Datadog pour les bots utilisés pour les tests Synthetic)
+    "synthetics-private-locations": {...}, // <--  non utilisé pour le trafic de l'Agent (adresses IP d'admission des emplacements privés Synthetics)
+    "webhooks": {...}                      // <-- non utilisé pour le trafic de l'Agent (adresses IP Datadog transmettant les webhooks)
 }
 {{< /code-block >}}
 
@@ -119,16 +209,24 @@ Ouvrez les ports suivants pour profiter de toutes les fonctionnalités de l'**Ag
 
 #### Trafic sortant
 
+{{< site-region region="us" >}}
+
 443/tcp
-: Port utilisé pour la plupart des données de l'Agent (métriques, APM, Live Processes/Containers)
+: Port utilisé pour la plupart des données de l'Agent (métriques, APM, live processes/containers)
 
 123/udp
-: Port utilisé pour le NTP ([en savoir plus sur l'importance du NTP][1]).<br>
-Voir les [cibles NTP par défaut][2].
+: Port utilisé pour le NTP ([en savoir plus sur l'importance du NTP][1])<br>
+Voir les [cibles NTP par défaut][2]
 
-{{< region-param key="tcp_endpoint_port_ssl" >}}/tcp
-: Port utilisé pour la collecte de logs via TCP.<br>
-Voir les [endpoints de logs][3] pour les autres types de connexion.
+6062/tcp
+: Port utilisé pour les endpoints de debugging de l'Agent de processus
+
+6162/tcp
+: Port utilisé pour la configuration des paramètres de runtime de l'Agent de processus
+
+10516/tcp
+: Port utilisé pour la collecte de logs via TCP<br>
+Consultez les [endpoints pour les logs][3] pour découvrir d'autres types de connexions.
 
 10255/tcp
 : Port utilisé pour le [kubelet HTTP Kubernetes][4]
@@ -136,43 +234,113 @@ Voir les [endpoints de logs][3] pour les autres types de connexion.
 10250/tcp
 : Port utilisé pour le [kubelet HTTPS Kubernetes][4]
 
+[1]: /fr/agent/faq/network-time-protocol-ntp-offset-issues/
+[2]: /fr/integrations/ntp/#overview
+[3]: /fr/logs/log_collection/#logging-endpoints
+[4]: /fr/agent/basic_agent_usage/kubernetes/
+
+{{< /site-region >}}
+
+{{< site-region region="eu" >}}
+
+443/tcp
+: Port utilisé pour la plupart des données de l'Agent (métriques, APM, live processes/containers)
+
+123/udp
+: Port utilisé pour le NTP ([en savoir plus sur l'importance du NTP][1])<br>
+Voir les [cibles NTP par défaut][2]
+
+443/tcp
+: Port utilisé pour la collecte de logs via TCP<br>
+Consultez les [endpoints pour les logs][3] pour découvrir d'autres types de connexions.
+
+6062/tcp
+: Port utilisé pour les endpoints de debugging de l'Agent de processus
+
+6162/tcp
+: Port utilisé pour la configuration des paramètres de runtime de l'Agent de processus
+
+10255/tcp
+: Port utilisé pour le [kubelet HTTP Kubernetes][4]
+
+10250/tcp
+: Port utilisé pour le [kubelet HTTPS Kubernetes][4]
+
+[1]: /fr/agent/faq/network-time-protocol-ntp-offset-issues/
+[2]: /fr/integrations/ntp/#overview
+[3]: /fr/logs/log_collection/#logging-endpoints
+[4]: /fr/agent/basic_agent_usage/kubernetes/
+
+{{< /site-region >}}
+
+{{< site-region region="us3,us5,gov" >}}
+
+443/tcp
+: Port utilisé pour la plupart des données de l'Agent (métriques, APM, live processes/containers)
+
+123/udp
+: Port utilisé pour le NTP ([en savoir plus sur l'importance du NTP][1])<br>
+Voir les [cibles NTP par défaut][2]
+
+6062/tcp
+: Port utilisé pour les endpoints de debugging de l'Agent de processus
+
+6162/tcp
+: Port utilisé pour la configuration des paramètres de runtime de l'Agent de processus
+
+10255/tcp
+: Port utilisé pour le [kubelet HTTP Kubernetes][4]
+
+10250/tcp
+: Port utilisé pour le [kubelet HTTPS Kubernetes][4]
+
+[1]: /fr/agent/faq/network-time-protocol-ntp-offset-issues/
+[2]: /fr/integrations/ntp/#overview
+[3]: /fr/logs/log_collection/#logging-endpoints
+[4]: /fr/agent/basic_agent_usage/kubernetes/
+
+{{< /site-region >}}
+
 #### Trafic entrant
 
-Ports utilisés pour les services de l'Agent qui communiquent entre eux en local au sein du host uniquement.
+Ports utilisés pour les services de l'Agent qui communiquent entre eux en local au sein du host uniquement
 
 5000/tcp
-: Port utilisé pour le [serveur go_expvar][5]
+: Port utilisé pour le [serveur go_expvar][1]
 
 5001/tcp
 : Port sur lequel l'API IPC écoute le trafic
 
 5002/tcp
-: Port utilisé pour [accéder à l'interface graphique de l'Agent depuis le navigateur][6]
+: Port utilisé pour [accéder à l'interface graphique de l'Agent depuis le navigateur][2]
 
 8125/udp
 : Port utilisé pour DogStatsD, sauf si `dogstatsd_non_local_traffic` est défini sur true. Ce port est disponible sur localhost : `127.0.0.1`, `::1`, `fe80::1`.
 
 8126/tcp
-: Port utilisé pour le [récepteur de l'APM][7]
+: Port utilisé pour le [récepteur APM][3]
 
-[1]: /fr/agent/faq/network-time-protocol-ntp-offset-issues/
-[2]: /fr/integrations/ntp/#overview
-[3]: /fr/logs/log_collection/#datadog-logs-endpoints
-[4]: /fr/agent/basic_agent_usage/kubernetes/
-[5]: /fr/integrations/go_expvar/
-[6]: /fr/agent/basic_agent_usage/#gui
-[7]: /fr/tracing/
+[1]: /fr/integrations/go_expvar/
+[2]: /fr/agent/basic_agent_usage/#gui
+[3]: /fr/tracing/
 {{% /tab %}}
 {{% tab "Agent v5 et v4" %}}
 
 #### Trafic sortant
 
 443/tcp
-: Port utilisé pour la plupart des données de l'Agent (métriques, APM, Live Processes/Containers)
+: Port utilisé pour la plupart des données de l'Agent (métriques, APM, live processes/containers)
 
 123/udp
 : Port utilisé pour le NTP ([en savoir plus sur l'importance du NTP][1]).<br>
 Voir les [cibles NTP par défaut][2].
+
+6062/tcp
+: Port utilisé pour les endpoints de debugging de l'Agent de processus
+
+6162/tcp
+: Port utilisé pour la configuration des paramètres de runtime de l'Agent de processus
+
 #### Trafic entrant
 
 8125/udp
@@ -195,7 +363,7 @@ Voir les [cibles NTP par défaut][2].
 
 ## Utilisation d'un proxy
 
-Pour obtenir des instructions détaillées sur la configuration d'un proxy, consultez la [section dédiée][12].
+Pour obtenir des instructions détaillées sur la configuration d'un proxy, consultez la section [Configuration de l'Agent pour un proxy][9].
 
 ## Mise en mémoire tampon des données
 
@@ -216,11 +384,9 @@ Pour veiller à ne pas utiliser tout l'espace de stockage, l'Agent stocke les m�
 [2]: /fr/database_monitoring/
 [3]: /fr/infrastructure/livecontainers/
 [4]: /fr/infrastructure/process/
-[5]: /fr/logs/
-[6]: /fr/security/logs/#hipaa-enabled-customers
-[7]: /fr/logs/log_collection/#datadog-logs-endpoints
-[8]: /fr/infrastructure/livecontainers/#kubernetes-resources-1
-[9]: /fr/real_user_monitoring/
-[10]: /fr/tracing/profiler/
-[11]: /fr/synthetics/private_locations
-[12]: /fr/agent/proxy/
+[5]: /fr/infrastructure/livecontainers/#kubernetes-resources-1
+[6]: /fr/real_user_monitoring/
+[7]: /fr/profiler/
+[8]: /fr/synthetics/private_locations
+[9]: /fr/agent/proxy/
+[10]: /fr/network_monitoring/devices

@@ -1,19 +1,20 @@
 ---
-title: Débuter avec les monitors
-kind: documentation
 aliases:
-  - /fr/getting_started/application/monitors
+- /fr/getting_started/application/monitors
 further_reading:
-  - link: https://www.datadoghq.com/blog/monitoring-101-alerting/
-    tag: Blog
-    text: "Monitoring 101\_: définir des alertes pertinentes"
-  - link: /monitors/create/types/metric/
-    tag: Documentation
-    text: Monitors de métrique
-  - link: /monitors/notify/
-    tag: Documentation
-    text: Notifications de monitor
+- link: https://www.datadoghq.com/blog/monitoring-101-alerting/
+  tag: Blog
+  text: 'Monitoring 101 : définir des alertes pertinentes'
+- link: /monitors/create/types/metric/
+  tag: Documentation
+  text: Monitors de métrique
+- link: /monitors/notify/
+  tag: Documentation
+  text: Notifications de monitor
+kind: documentation
+title: Débuter avec les monitors
 ---
+
 ## Présentation
 
 Les [monitors de métrique][1] vous permettent de définir des alertes et de recevoir des notifications lorsqu'une métrique spécifique passe au-dessus ou en dessous d'un certain seuil. Cette page décrit la marche à suivre pour configurer un monitor de métrique chargé de vous alerter en cas d'espace disque faible.
@@ -80,12 +81,17 @@ Utilisez cette section pour envoyer des notifications à votre équipe par e-mai
 
 Si la `@notification` est supprimée de l'une de ces deux sections, elle est également supprimée de l'autre section.
 
-### Restreindre l'accès
+### Autorisations
 
-<div class="alert alert-warning">
-La fonctionnalité de restriction d'accès RBAC aux monitors est disponible en version bêta. Pour en bénéficier, contactez <a href="https://docs.datadoghq.com/help/">l'assistance Datadog</a>.</div>
+{{< img src="getting_started/monitors/monitor_rbac_restricted.jpg" alt="Monitor avec restriction RBAC" style="width:90%;" >}}
 
-Cette section vous permet de restreindre l'accès aux monitors de façon à ce qu'ils soient uniquement accessibles par tous les utilisateurs de votre organisation ayant votre rôle, les utilisateurs de certains rôles ou uniquement vous-même. Pour en savoir plus sur les rôles, consultez la documentation relative au [RBAC][9].
+Utilisez cette option pour faire en sorte que seul le créateur de votre monitor ainsi que certains rôles spécifiques puissent le modifier. Pour en savoir plus sur les rôles, consultez la section [Contrôle d'accès à base de rôles (RBAC)][9].
+
+## Visualiser les monitors et les alertes de triage sur mobile
+
+Vous pouvez consulter vos vues enregistrées de monitors et consulter ou désactiver des monitors avec l'[application mobile Datadog][10], disponible sur l'[App Store d'Apple][11] et le [Google Play Store][12]. Vous pourrez ainsi procéder au triage des alertes même lorsque vous n'avez pas accès à votre ordinateur.
+
+{{< img src="monitors/monitors_mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Incidents sur l'application mobiles">}}
 
 ## Pour aller plus loin
 
@@ -100,3 +106,6 @@ Cette section vous permet de restreindre l'accès aux monitors de façon à ce q
 [7]: /fr/monitors/create/types/metric/?tab=threshold#set-alert-conditions
 [8]: /fr/monitors/notify/#conditional-variables
 [9]: /fr/account_management/rbac/
+[10]: /fr/mobile/
+[11]: https://apps.apple.com/app/datadog/id1391380318
+[12]: https://play.google.com/store/apps/details?id=com.datadog.app

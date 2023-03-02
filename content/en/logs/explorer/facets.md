@@ -185,7 +185,7 @@ You may wish to keep the non-standard _aliased_ version of the facet if you are 
 
 ### Out-of-the-box facets
 
-Most common facets such as `Host`, `Service`, `URL Path`, or `Duration` come out-of-the-box to start troubleshooting right away once your logs are flowing into log indexes.
+Most common facets such as `Host` and `Service` come out-of-the-box, so you can start troubleshooting right away once your logs are flowing into log indexes.
 
 Facets on [Reserved Attributes][25] and most [Standard Attributes][26] are available by default.
 
@@ -198,6 +198,8 @@ The index facet is a specific facet that appears only if your organization has [
 ### Create facets
 
 As a matter of good practice, always consider using an existing facet rather than creating a new one (see the [alias facets](#alias-facets) section). Using a unique facet for information of a similar nature fosters cross-team collaboration.
+
+To create a facet on an array of JSON objects, first use a [grok parser][28] to extract the attribute and then create a facet for that attribute.
 
 **Note**: Once a facet is created, its content is populated **for all new logs** flowing in **either** index. For an optimal usage of the Log Management solution, Datadog recommends using at most 1000 facets.
 
@@ -250,6 +252,17 @@ This is the best option if you onboard logs flowing from new sources. Rather tha
 
 {{< img src="logs/explorer/facet/alias_facet_from_attribute.png" alt="Alias facet from attribute" style="width:30%;">}}
 
+## Delete a facet
+
+<div class="alert alert-danger">Deleting a facet that is being used in indexes, monitors, dashboards, restriction queries, or by other teams can cause configurations to break.</div>
+
+To delete a facet, follow these steps:
+
+- Click **Showing xx of xx** at the top of the facet panel.
+- Search for your facet.
+- Click the pencil icon for your facet.
+- Click **Delete**.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -257,7 +270,7 @@ This is the best option if you onboard logs flowing from new sources. Rather tha
 [1]: /logs/search_syntax/
 [2]: /logs/explorer/patterns/
 [3]: /logs/explorer/analytics/
-[4]: /monitors/create/types/log/
+[4]: /monitors/types/log/
 [5]: /dashboards/widgets/
 [6]: /notebooks/
 [15]: /logs/log_configuration/rehydrating
@@ -272,3 +285,4 @@ This is the best option if you onboard logs flowing from new sources. Rather tha
 [25]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
 [26]: /logs/log_configuration/attributes_naming_convention
 [27]: /logs/indexes/#indexes
+[28]: /logs/log_configuration/parsing/?tab=matchers#nested-json

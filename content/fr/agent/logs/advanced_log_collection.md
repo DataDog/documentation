@@ -1,31 +1,33 @@
 ---
-title: Collecte de logs avancée
-kind: documentation
 description: Utiliser l'Agent Datadog pour recueillir vos logs et les envoyer à Datadog
 further_reading:
-  - link: /logs/log_configuration/processors
-    tag: Documentation
-    text: Découvrir comment traiter vos logs
-  - link: /logs/log_configuration/parsing
-    tag: Documentation
-    text: En savoir plus sur le parsing
-  - link: /logs/live_tail/
-    tag: Documentation
-    text: "Fonctionnalité Live\_Tail de Datadog"
-  - link: /logs/explorer/
-    tag: Documentation
-    text: Découvrir comment explorer vos logs
-  - link: /logs/logging_without_limits/
-    tag: Documentation
-    text: Logging without Limits*
+- link: /logs/log_configuration/processors
+  tag: Documentation
+  text: Découvrir comment traiter vos logs
+- link: /logs/log_configuration/parsing
+  tag: Documentation
+  text: En savoir plus sur le parsing
+- link: /logs/live_tail/
+  tag: Documentation
+  text: Fonctionnalité Live Tail de Datadog
+- link: /logs/explorer/
+  tag: Documentation
+  text: Découvrir comment explorer vos logs
+- link: /logs/logging_without_limits/
+  tag: Documentation
+  text: Logging without Limits*
+kind: documentation
+title: Collecte de logs avancée
 ---
-Appliquez des règles de traitement de logs aux configurations de collecte de logs spécifiques pour :
 
+Personnalisez votre configuration de collecte de logs :
 * [Filtrer les logs](#filtrer-les-logs)
 * [Nettoyer les données sensibles de vos logs](#nettoyer-les-donnees-sensibles-de-vos-logs)
-* [Effectuer une agrégation multiligne](#effectuer-une-agregation-multiligne)
-* [Suivre des répertoires à l'aide de wildcards](#suivre-des-repertoires-a-l-aide-de-wildcards)
-* [Encoder des logs au format UTF-16](#encoder-des-logs-au-format-utf-16)
+* [Agréger des logs multiligne](#agregation-multiligne)
+* [Copier des exemples de règles de traitement de logs couramment utilisées](#regles-de-traitement-de-logs-couramment-utilisees)
+* [Utiliser des wildcards pour effectuer le suivi de répertoires](#suivre-des-repertoires-a-l-aide-de-wildcards)
+* [Spécifier des encodages de fichiers de log](#encodages-de-fichiers-de-log)
+* [Définir des règles globales de traitement](#regles-globales-de-traitement)
 
 **Remarque** : si vous configurez plusieurs règles de traitement, celles-ci sont appliquées de façon séquentielle et chaque règle est appliquée au résultat de la précédente.
 
@@ -39,7 +41,7 @@ Pour envoyer uniquement un sous-ensemble spécifique de logs à Datadog, utilise
 
 ### Exclude at match
 
-| Paramètre          | Rôle                                                                                        |
+| Paramètre          | Description                                                                                        |
 |--------------------|----------------------------------------------------------------------------------------------------|
 | `exclude_at_match` | Si l'expression spécifiée est incluse dans le message, le log est exclu et n'est pas envoyé à Datadog. |
 
@@ -125,7 +127,7 @@ spec:
 
 ### Include at match
 
-| Paramètre          | Rôle                                                                       |
+| Paramètre          | Description                                                                       |
 |--------------------|-----------------------------------------------------------------------------------|
 | `include_at_match` | Seuls les logs avec un message qui contient l'expression spécifiée sont envoyés à Datadog. Si plusieurs règles `include_at_match` sont définies, toutes les expressions doivent être présentes dans le log pour que ce dernier soit inclus. |
 
@@ -442,9 +444,99 @@ Exemples supplémentaires :
 | 2020-10-27 05:10:49.657  | `\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{3}` |
 | {"date": "2018-01-02"    | `\{"date": "\d{4}-\d{2}-\d{2}`                |
 
+### Agrégation multiligne automatique
+Depuis la version 7.37 de l'Agent, vous pouvez activer `auto_multi_line_detection` afin que l'Agent détecte automatiquement [les patterns multilignes courants][2].
+
+Activez `auto_multi_line_detection` de façon globale dans le fichier `datadog.yaml` :
+
+```yaml
+logs_config:
+  auto_multi_line_detection: true
+```
+
+Pour les déploiements conteneurisés, vous pouvez activer `auto_multi_line_detection` avec la variable d'environnement `DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION=true`.
+
+Il est également possible d'activer ou de désactiver cette option (en ignorant la configuration globale) dans chaque configuration de log :
+
+{{< tabs >}}
+{{% tab "Fichier de configuration" %}}
+
+```yaml
+logs:
+  - type: file
+    path: /my/test/file.log
+    service: testApp
+    source: java
+    auto_multi_line_detection: true
+```
+
+{{% /tab %}}
+{{% tab "Docker" %}}
+
+Dans un environnement Docker, utilisez l'étiquette `com.datadoghq.ad.logs` sur votre conteneur pour indiquer les `log_processing_rules`, par exemple :
+
+```yaml
+ labels:
+    com.datadoghq.ad.logs: >-
+      [{
+        "source": "java",
+        "service": "testApp",
+        "auto_multi_line_detection": true
+      }]
+```
+
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+```yaml
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: testApp
+spec:
+  selector:
+    matchLabels:
+      app: testApp
+  template:
+    metadata:
+      annotations:
+        ad.datadoghq.com/testApp.logs: >-
+          [{
+            "source": "java",
+            "service": "testApp",
+            "auto_multi_line_detection": true
+          }]
+      labels:
+        app: testApp
+      name: testApp
+    spec:
+      containers:
+        - name: testApp
+          image: testApp:latest
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+La détection multiligne automatique se base sur une liste d'expressions régulières courantes pour essayer de trouver des correspondances avec des logs. Si la liste intégrée ne contient pas assez d'expressions, vous pouvez ajouter des patterns personnalisés dans le fichier `datadog.yaml` :
+
+```yaml
+logs_config:
+  auto_multi_line_detection: true
+  auto_multi_line_extra_patterns:
+   - \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
+   - [A-Za-z_]+ \d+, \d+ \d+:\d+:\d+ (AM|PM)
+```
+
+Lorsque cette fonctionnalité est activée, l'Agent essaie de détecter un pattern à chaque ouverture d'un nouveau fichier de log. Durant cette étape, les logs sont envoyés sous la forme de lignes uniques. Une fois le seuil de détection atteint, tous les logs ultérieurs provenant de cette source sont agrégés avec le pattern détecté (ou sous la forme de lignes uniques si aucun pattern n'est détecté). La détection s'arrête après 30 secondes ou après les 500 premiers logs (selon la première occurrence).
+
+**Remarque** : si vous pouvez modifier le pattern utilisé pour nommer le log renouvelé, vérifiez que le fichier renouvelé remplace le fichier précédemment actif du même nom. L'Agent réutilise un pattern qui a été détecté sur le nouveau fichier, afin d'éviter d'effectuer une nouvelle fois la détection.
+
+La détection multlligne automatique identifie les logs qui commencent par les formats de date/heure suivants et les respectent : RFC3339, ANSIC, format de dates Unix, format de date Ruby, RFC822, RFC822Z, RFC850, RFC1123, RFC1123Z, RFC3339Nano et le format de date SimpleFormatter des logs Java par défaut.
+
 ## Règles de traitement de log couramment utilisées
 
-Consultez la section [FAQ sur les règles de traitement des logs couramment utilisées][2] pour obtenir une liste d'exemples.
+Consultez la section [FAQ sur les règles de traitement des logs couramment utilisées][3] pour obtenir une liste d'exemples.
 
 ## Suivre des répertoires à l'aide de wildcards
 
@@ -472,13 +564,18 @@ logs:
     source: go
 ```
 
-L'exemple ci-dessus permet de surveiller `/var/log/myapp/log/myfile.log`, mais `/var/log/myapp/log/debug.log` et `/var/log/myapp/log/trace.log` seront toujours exclus.
+L'exemple ci-dessus permet de surveiller `/var/log/myapp/log/myfile.log` et d'exclure `/var/log/myapp/log/debug.log` et `/var/log/myapp/log/trace.log`.
 
 **Remarque** : l'Agent nécessite les autorisations de lecture et d'exécution pour un répertoire afin d'énumérer tous les fichiers qui y figurent.
 
-## Encoder des logs au format UTF-16
+## Encodages de fichiers de log
 
-Si des logs d'applications sont rédigés au format UTF-16, depuis l'Agent Datadog **v6.23/v7.23**, les utilisateurs peuvent les encoder afin qu'ils soient parsés comme prévu dans le [Log Explorer][2]. Utilisez le paramètre `encoding` dans la section de configuration des logs. Définissez-le sur `utf-16-le` pour le format little-endian UTF16 et sur `utf-16-be` pour le format big-endian UTF16. Toutes les autres valeurs seront ignorées et l'Agent lira le fichier en assumant un format UTF8.
+Par défaut, l'Agent Datadog part du principe que les logs sont basés sur un encodage UTF-8. Si les logs de votre application utiliser un autre encodage, définissez le paramètre `encoding` dans la configuration de vos logs.
+
+La liste suivante répertorie les valeurs d'encodage prises en charge. Si vous définissez une valeur non prise en charge, l'Agent l'ignore et lit le fichier comme s'il était encodé en UTF-8.
+ * `utf-16-le` :  UTF-16 little-endian (Agent Datadog **v6.23/v7.23**)
+ * `utf-16-be` : UTF-16 big-endian (Agent Datadog **v6.23/v7.23**)
+ * `shift-jis` : Shift-JIS (Agent Datadog **v6.34/v7.34**)
 
 Exemple de configuration :
 
@@ -549,7 +646,7 @@ Ces règles globales de traitement s'appliquent à tous les logs recueillis par 
 *Logging without Limits est une marque déposée de Datadog, Inc.
 
 [1]: https://golang.org/pkg/regexp/syntax/
-[2]: /fr/agent/faq/commonly-used-log-processing-rules
-[3]: https://docs.datadoghq.com/fr/logs/explorer/#overview
+[2]: https://github.com/DataDog/datadog-agent/blob/a27c16c05da0cf7b09d5a5075ca568fdae1b4ee0/pkg/logs/internal/decoder/auto_multiline_handler.go#L187
+[3]: /fr/agent/faq/commonly-used-log-processing-rules
 [4]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
 [5]: /fr/agent/guide/agent-commands/#agent-information

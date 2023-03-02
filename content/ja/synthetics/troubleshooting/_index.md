@@ -1,23 +1,26 @@
 ---
-title: Synthetic モニタリングのトラブルシューティング
-kind: documentation
 description: Synthetic モニタリングでよくある問題のトラブルシューティング。
 further_reading:
-  - link: /synthetics/
-    tag: ドキュメント
-    text: Synthetic テストの管理
-  - link: /synthetics/browser_tests/
-    tag: ドキュメント
-    text: ブラウザテストの設定
-  - link: /synthetics/api_tests/
-    tag: ドキュメント
-    text: APIテストの設定
+- link: /synthetics/
+  tag: ドキュメント
+  text: Synthetic テストの管理
+- link: /synthetics/browser_tests/
+  tag: ドキュメント
+  text: ブラウザテストの設定
+- link: /synthetics/api_tests/
+  tag: ドキュメント
+  text: APIテストの設定
+kind: documentation
+title: Synthetic モニタリングのトラブルシューティング
 ---
-Datadog Synthetic モニタリングのセットアップや構成で問題が発生した場合は、こちらの情報を参考にしてトラブルシューティングをお試しください。問題が解決されない場合は、[Datadog のサポートチームまでお問い合わせ][1]ください。
+
+## 概要
+
+Datadog Synthetic モニタリングのセットアップや構成で問題が発生した場合は、こちらのページを参考にしてトラブルシューティングをお試しください。問題が解決されない場合は、[Datadog サポートまでお問い合わせ][1]ください。
 
 ## API テスト
 
-### ネットワーク時間にバリエーションが見られます
+### ネットワークのタイミングが一様ではない
 
 API テストの[時間メトリクス][2]に急激な上昇や全体的な増加がある場合、リクエストにボトルネックまたは遅延があることを示しています。詳しくは、[API テストの時間とバリエーション][3]のガイドを参照してください。
 
@@ -25,17 +28,17 @@ API テストの[時間メトリクス][2]に急激な上昇や全体的な増�
 
 ### 記録
 
-#### ウェブサイトが iframe で読み込まれません
+#### ウェブサイトが iframe で読み込まれない
 
 [Datadog 拡張機能][4]をダウンロードすると、ブラウザテストのレコーダーの右側にある iframe でウェブサイトを確認できなくなり、`Your website does not support being loaded through an iframe.` (このウェブサイトは iframe 経由の読み込みをサポートしていません) と表示されます。この場合、アプリケーションの設定で iframe での表示が抑制されている場合があります。**Open in Popup** をクリックしてウェブサイトをポップアップで開き、その際のジャーニーを記録してください。
 
-#### 一部のアプリケーションは iframe に読み込まれますが、読み込まれないものもあります
+#### 一部のアプリケーションは iframe に読み込まれるが、読み込まれないものがある
 
 これは、アプリケーションと環境によって制限が異なることを意味します。そのため、一部は iframe で視覚化されますが、表示されないものもあります。
 
-#### iframe の上部に「We've detected HTTP requests that are not supported inside the iframe, you may need to record in a popup (iframe 内でサポートされていない HTTP リクエストを検知したため、ポップアップで記録を行う必要があります)」と表示されます
+#### iframe の上部に「We've detected HTTP requests that are not supported inside the iframe, you may need to record in a popup (iframe 内でサポートされていない HTTP リクエストを検知したため、ポップアップで記録を行う必要があります)」と表示される
 
-これは `http` ページで手順を記録しようとしている場合に主に発生します。iframe レコーダーでは `https` のみサポートされています。ページをポップアップとして開くか、URL を `https` に変更してページの記録を開始してください。
+これは `http` ページでステップを記録しようとしている場合に主に発生します。iframe レコーダーでは `https` のみサポートされています。ページをポップアップとして開くか、URL を `https` に変更してページの記録を開始してください。
 
 {{< img src="synthetics/http_iframe.png" alt="HTTP を iframe で開いた場合" style="width:100%;" >}}
 
@@ -43,54 +46,63 @@ API テストの[時間メトリクス][2]に急激な上昇や全体的な増�
 
 [Datadog 拡張機能][4]をダウンロードすると、ブラウザテストのレコーダーの右側にある iframe でウェブサイトを確認できなくなります。さらに、ウェブサイトを iframe およびポップアップで開いても、ステップを記録できなくなります。
 
-{{< img src="synthetics/recording_iframe.mp4" alt="ブラウザテストのステップの記録に関する問題" video="true"  width="100%" >}}
+{{< img src="synthetics/recording_iframe.mp4" alt="ブラウザテストのステップの記録に関する問題" video="true" width="100%" >}}
 
 このような場合は、`On specific sites` セクションでウェブサイトを指定するか、`On all sites` にトグルボタンを変更して、意図したウェブサイトのデータの読み取りおよび変更の許可を [Datadog 拡張機能][5]に付与してください。
 
-{{< img src="synthetics/extension.mp4" alt="拡張機能にすべてのサイトのデータ読み取りを許可" video="true"  width="100%" >}}
+{{< img src="synthetics/extension.mp4" alt="拡張機能にすべてのサイトのデータ読み取りを許可" video="true" width="100%" >}}
 
 #### アプリケーションで手順を記録することができません
 
-Chrome ブラウザに、拡張機能を使用して通常の手順で記録を行うことを抑制するポリシーが適用されている場合があります。詳細を確認するには `chrome://policy` を開き、[`ExtensionSettings`][6] のような拡張機能関連の設定がないかを確認してください。
+Chrome ブラウザに、拡張機能が正常に記録できないようにするポリシーがある可能性があります。
 
-#### レコーダーにログインページが表示されません。なぜですか？
+確認するには、`chrome://policy` へ移動して [`ExtensionSettings`][6] のような拡張機能に関する設定を探します。
+
+#### レコーダーにログインページが表示されない
 
 デフォルトでは、レコーダーの iframe/ポップアップは独自のブラウザを使用します。これは、すでにアプリケーションにログインしている場合、iframe/ポップアップがログイン後のページを直接表示する可能性があるため、最初にログアウトせずにログイン手順を記録できないということです。
 
 アプリケーションからログアウトせずに手順を記録できるようにするには、レコーダーの**シークレットモード**を利用します。
 
-{{< img src="synthetics/incognito_mode.mp4" alt="シークレットモードのブラウザテストの使用" video="true"  width="100%" >}}
+{{< img src="synthetics/incognito_mode.mp4" alt="シークレットモードのブラウザテストの使用" video="true" width="100%" >}}
 
-**シークレットモードでポップアップを開く**と、独自のブラウザのメインセッションとユーザーデータから完全に分離されたセッションで、テストコンフィギュレーションに設定された開始 URL からテストの記録を開始できます。
+**シークレットモードでポップアップウィンドウを開く**と、独自のブラウザのメインセッションとユーザーデータから完全に分離されたセッションで、テストコンフィギュレーションに設定された開始 URL からテストの記録を開始できます。
 
-新しく開いたシークレットポップアップは、以前のブラウザ履歴 (Cookie やローカルデータなど) をすべて無視します。その結果、アカウントから自動的にログアウトされ、初めてウェブサイトにアクセスした場合と同じようにログイン手順の記録を開始できます。
+このシークレットポップアップウィンドウは、以前のブラウザ履歴 (Cookie やローカルデータなど) を無視します。アカウントから自動的にログアウトされ、初めてウェブサイトにアクセスした場合と同じようにログイン手順の記録を開始できます。
 
 ### テスト結果
 
 #### Mobile Small またはタブレットブラウザテストの結果が失敗し続けます
 
-ウェブサイトが **レスポンシブ**手法を使用している場合、その DOM はテストを実行するデバイスに応じて大きく異なる可能性があります。`Laptop Large` から実行する場合特定の DOM を使用する場合もあり、`Tablet` または `Mobile Small` から実行する場合とは全く別のアーキテクチャとなる可能性があります。
-これは、`Laptop Large` ビューポートから記録されるステップが `Mobile Small` からアクセスする同じウェブサイトに適用で着ない可能性があり、`Mobile Small` のテスト結果が失敗する原因となります。
+ウェブサイトに**レスポンシブ**技術を使用している場合、その DOM はテストを実行するデバイスにより大きく異なります。`Laptop Large` から実行するときは特定の DOM を使用し、`Tablet` または `Mobile Small` から実行する場合は別のアーキテクチャになります。
+
+つまり、`Laptop Large` のビューポートから記録されたステップは `Mobile Small` からアクセスされた同じウェブサイトには適用されず、`Mobile Small` のテスト結果が失敗となることがあります。
 
 {{< img src="synthetics/device_failures.png" alt="モバイルタブレットデバイスの失敗" style="width:100%;" >}}
 
-このような場合、Datadog では記録されたステップがランタイム時にテストが設定されたビューポートと一致する、 **個別の `Mobile Small` または `Tablet` 固有のテスト** の作成を推奨しています。
-`Mobile Small` または `Tablet` ビューポートでステップを記録するには、**記録開始**ボタンを押す前にレコーダードロップダウンで`Mobile Small` または `Tablet` を選択します。
+このような場合のため、Datadog では、ランタイムでテストが設定されたビューポートと記録されたステップが一致する、**`Mobile Small` または `Tablet` に特定の別々のテスト**を作成することをおすすめしています。
+
+`Mobile Small` または `Tablet` ビューポートでステップを記録するには、**Start Recording** ボタンを押す前にレコーダーのドロップダウンで `Mobile Small` または `Tablet` を選択します。
 
 {{< img src="synthetics/record_device.png" alt="モバイルタブレットでの記録ステップ" style="width:100%;" >}}
 
 さらに、Datadog のテストブラウザは**ヘッドレス**で実行されるため、ブラウザテストがサポートしない機能があります。たとえば、ブラウザテストは `touch` をサポートしないため、ウェブサイトがモバイルデザインで表示されるべきかを `touch` で検出することはできません。
 
-#### ブラウザテストに `None or multiple elements detected` のステップ警告が表示される
+#### ブラウザテストで `None or multiple elements detected` というステップの警告が表示される
 
 ブラウザテストのステップに `None or multiple elements detected` のステップ警告が表示されています。
 
 {{< img src="synthetics/step_warning.png" alt="ユーザーのロケーターのステップ警告" style="width:100%;" >}}
 
-これは、このステップに定義されたユーザーロケーターが複数要素を対象としているか、何も対象としていないことを意味するもので、ブラウザテストでテストされるべき要素が不明になってしまっています。   
-修正するには、記録を編集し、問題のあるステップの高度な設定を開いてステップでテストしているページへ移動し、`Test` をクリックします。これにより、配置された要素をハイライトまたはエラーメッセージを印刷できます。次に、ユーザーロケーターをページの単一要素と一致するよう修正します。
+これは、このステップに定義されたユーザーロケーターが、複数の要素を対象としているか、いずれの要素も対象としていないため、ブラウザテストで対応する必要のある要素が不明であるという意味です。
 
-{{< img src="synthetics/fix_user_locator.mp4" alt="ユーザーロケーターのエラーを修正" video="true"  width="100%" >}}
+この問題を修正するには、問題のあるステップの詳細オプションを開き、テストするステップのページで `Test` をクリックします。これにより、要素がハイライトされるかエラーメッセージが印刷されます。次に、ページの単一要素に一致するようユーザーロケーターを修正できます。
+
+{{< img src="synthetics/fix_user_locator.mp4" alt="ユーザーロケーターのエラーを修正" video="true" width="100%" >}}
+
+#### CSS のポインタープロパティで問題が発生している
+
+自動化されたブラウザは、CSS の `pointer` メディア機能をエミュレートすることをサポートしていません。ブラウザテストでは、すべてのテストとデバイス (ラップトップ、タブレット、モバイル) で `pointer: none` が使用されます。
 
 ## API およびブラウザのテスト
 
@@ -119,7 +131,7 @@ Synthetic テストによって返された `403 Forbidden` エラーが確認�
 
 ## プライベートロケーション
 
-### 時々、プライベートロケーションのコンテナが、強制終了された `OOM` を取得します。
+### 時々、プライベートロケーションのコンテナが、強制終了された `OOM` を取得する
 
 強制終了された `Out Of Memory` を取得するプライベートロケーションのコンテナは、通常、プライベートロケーションワーカーのリソース消費の問題を明らかにします。プライベートロケーションのコンテナが、[十分なメモリリソース][13]でプロビジョニングされていることを確認してください。
 
@@ -131,17 +143,25 @@ Synthetic テストによって返された `403 Forbidden` エラーが確認�
 
 これにより、プライベートロケーションワーカーのリソース消費の問題が明らかになることがあります。プライベートロケーションのコンテナが、[十分な CPU リソース][13]でプロビジョニングされていることを確認してください。
 
-### プライベートロケーションから実行される API テストに `TIMEOUT` エラーが表示されます
+### ブラウザテストの実行に時間がかかりすぎる
+
+プライベートロケーションのデプロイメントで、[メモリ不足の問題][14]が発生していないことを確認します。[ディメンショニングガイドライン][15]に従ってコンテナインスタンスのスケーリングを既に試した場合は、[Datadog サポート][1]に連絡してください。
+
+### プライベートロケーションから実行される API テストに `TIMEOUT` エラーが表示される
 
 API テストの実行が設定されているエンドポイントに、プライベートロケーションが到達できていない可能性があります。テストするエンドポイントと同じネットワークにプライベートロケーションがインストールされていることを確認してください。別のエンドポイントでテストを実行し、同じ `TIMEOUT` エラーが表示されるかどうか試してみることも可能です。
 
-{{< img src="synthetics/timeout.png" alt="プライベートロケーションがタイムアウトした API テスト" style="width:100%;" >}}
+{{< img src="synthetics/timeout.png" alt="プライベートロケーションがタイムアウトした API テスト" style="width:70%;" >}}
 
-## CI/CD テスト
+### プライベートロケーションのテストを実行しようとすると、`invalid mount config for type "bind": source path must be a directory` というエラーが表示される
 
-### CI Results Explorer に CI メタデータが表示されません
+これは、Windows ベースのコンテナで単一ファイルをマウントしようとする（非対応）と、発生します。詳しくは、[Docker マウントボリュームのドキュメント][16]をご参照ください。バインドマウントのソースがローカルディレクトリであることをご確認ください。
 
-API エンドポイントを使用して CI/CD テストの実行をトリガーしているかどうかを確認します。CI Results Explorer に CI メタデータを入力するには、[NPM パッケージ][14]を使用する必要があります。
+## Synthetics と CI/CD
+
+### CI Results Explorer に CI メタデータが表示されない
+
+API エンドポイントを使用して CI/CD テストの実行をトリガーしているかどうかを確認します。CI Results Explorer に CI メタデータを入力するには、[NPM パッケージ][17]を使用する必要があります。
 
 ## その他の参考資料
 
@@ -160,4 +180,7 @@ API エンドポイントを使用して CI/CD テストの実行をトリガー
 [11]: https://ip-ranges.datadoghq.com/synthetics.json
 [12]: /ja/synthetics/api_tests/?tab=httptest#notify-your-team
 [13]: /ja/synthetics/private_locations#private-location-total-hardware-requirements
-[14]: /ja/synthetics/cicd_testing/?tab=apitest#cli-usage
+[14]: https://docs.docker.com/config/containers/resource_constraints/
+[15]: /ja/synthetics/private_locations/dimensioning#define-your-total-hardware-requirements
+[16]: https://docs.docker.com/engine/reference/commandline/run/#mount-volume--v---read-only
+[17]: /ja/synthetics/cicd_integrations#use-the-cli

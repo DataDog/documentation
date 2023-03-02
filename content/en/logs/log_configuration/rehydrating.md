@@ -48,7 +48,7 @@ By creating historical views with specific queries (for example, over one or mor
 #### Notify
 
 Events are triggered automatically when a rehydration starts and finishes.
-These events are available in your [Events stream][7].
+These events are available in your [Events Explorer][7].
 
 During the creation of a historical view, you can use the built-in template variables to customize the notification triggered at the end of the rehydration:
 
@@ -75,6 +75,14 @@ Alternatively, find the historical view from the Log Explorer directly from the 
 
 {{< img src="logs/archives/log_archives_historical_index_selector.png" alt="Log Explorer" width="75%">}}
 
+### Canceling ongoing historical views
+
+Cancel ongoing Rehydrations directly in the Rehydrate from Archives page to avoid starting Rehydrations with the incorrect time range or when you accidentally make typos in your indexing query.
+
+The logs already indexed will remain queryable until the end of the retention period selected for that historical view, and all the logs already scanned and indexed will still be billed.
+
+{{< img src="logs/archives/log_archives_cancel_ongoing_rehydration.png" alt="Canceling Ongoing Rehydrations" width="75%" >}}
+
 ### Deleting historical views
 
 Historical views stay in Datadog until they have exceeded the selected retention period, or you can opt to delete them sooner if you no longer need the view. You can mark a historical view to be deleted by selecting and confirming the delete icon at the far right of the historical view.
@@ -85,7 +93,7 @@ One hour later, the historical view is definitively deleted; until that time, th
 
 ### Viewing deleted historical views
 
-View deleted historical views for up to 90 days in the past using the `View` dropdown menu:
+View deleted historical views for up to 1 year in the past using the `View` dropdown menu:
 
 {{< img src="logs/archives/log_archives_deleted_rehydrations.png" alt="Deleting Historical Views" width="75%" >}}
 

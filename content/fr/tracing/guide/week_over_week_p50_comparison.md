@@ -13,7 +13,7 @@ further_reading:
     text: Débuguer la trace la plus lente sur l'endpoint le plus lent d'un service web
   - link: /tracing/guide/add_span_md_and_graph_it/
     tag: "7\_minutes"
-    text: Ajouter des tags de span et filtrer les données de performance de votre application
+    text: Ajouter des tags de span et filtrer ou regrouper les données de performance de votre application
   - link: /tracing/guide/
     tag: ''
     text: Tous les guides
@@ -29,7 +29,7 @@ Datadog peut vous montrer l'évolution de la latence de votre application dans l
     Cette page affiche la liste de tous les [services][2] instrumentés disponibles dans l'APM Datadog. Vous pouvez rechercher vos services par mots clés, les filtrer par tag `env` et définir la chronologie.
 2. **Recherchez et ouvrez un service pertinent et actif**.
 
-    Cet exemple s'intéresse au service web-store, car il s'agit d'un service stable et que nous souhaitons vérifier l'absence de problèmes durant le mois passé.
+    Cet exemple repose sur le service web-store, car il s'agit d'un service stable. Il permet de vérifier l'absence de problèmes durant le mois passé.
 
     {{< img src="tracing/guide/week_over_week_p50_comparison/wow_p50_comp_2.png" alt="comparaison 2" style="width:90%;">}}
 

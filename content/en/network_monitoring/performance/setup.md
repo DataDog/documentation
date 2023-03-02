@@ -48,7 +48,7 @@ Data collection is done using eBPF, so Datadog minimally requires platforms that
 
 #### Windows OS
 
-Data collection is done using a device driver, and support is available as of Datadog Agent version 7.27.1, for Windows versions 2012 R2 and up.
+Data collection is done using a device driver. Support is available as of Datadog Agent version 7.27.1, for Windows versions 2012 R2 (and equivalent desktop OSs, including Windows 10) and up.
 
 #### macOS
 
@@ -90,7 +90,7 @@ Network Performance Monitoring supports use of the following provisioning system
 
 ## Setup
 
-Given this tool's focus and strength is in analyzing traffic _between_ network endpoints and mapping network dependencies, it is recommended to install it on a meaningful subset of your infrastructure and a **_minimum of 2 hosts_** to maximize value. 
+Given this tool's focus and strength is in analyzing traffic _between_ network endpoints and mapping network dependencies, it is recommended to install it on a meaningful subset of your infrastructure and a **_minimum of 2 hosts_** to maximize value.
 
 {{< tabs >}}
 {{% tab "Agent (Linux)" %}}
@@ -102,17 +102,17 @@ To enable network performance monitoring with the Datadog Agent, use the followi
 2. Copy the system-probe example configuration:
 
     ```shell
-    sudo -u dd-agent cp /etc/datadog-agent/system-probe.yaml.example /etc/datadog-agent/system-probe.yaml
+    sudo -u dd-agent install -m 0640 /etc/datadog-agent/system-probe.yaml.example /etc/datadog-agent/system-probe.yaml
     ```
 
 3. Edit `/etc/datadog-agent/system-probe.yaml` to set the enable flag to `true`:
 
     ```yaml
     network_config:   # use system_probe_config for Agent's older than 7.24.1
-        ## @param enabled - boolean - optional - default: false
-        ## Set to true to enable Network Performance Monitoring.
-        #
-        enabled: true
+      ## @param enabled - boolean - optional - default: false
+      ## Set to true to enable Network Performance Monitoring.
+      #
+      enabled: true
     ```
 
 4. **If you are running an Agent older than v6.18 or 7.18**, manually start the system-probe and enable it to start on boot (since v6.18 and v7.18 the system-probe starts automatically when the Agent is started):
@@ -131,6 +131,16 @@ To enable network performance monitoring with the Datadog Agent, use the followi
     ```
 
     **Note**: If the `systemctl` command is not available on your system, run the following command instead: `sudo service datadog-agent restart`
+
+{{< site-region region="us,us3,us5,eu" >}}
+
+6. Optionally, enable additional cloud integrations to allow Network Performance Monitoring to discover cloud-managed entities.
+      * Install the [Azure integration][1] for visibility into Azure load balancers.
+      * Install the [AWS Integration][2] for visibility in AWS Load Balancer. **you must enable ENI and EC2 metric collection**
+
+  [1]: /integrations/azure
+  [2]: /integrations/amazon_web_services/
+{{< /site-region >}}
 
 ### SELinux-enabled systems
 
@@ -200,7 +210,7 @@ To enable Network Performance Monitoring for Windows hosts:
     ```shell
     net /y stop datadogagent && net start datadogagent
     ```
-**Note**: Network Performance Monitoring monitors Windows hosts only, and not Windows containers. 
+**Note**: Network Performance Monitoring monitors Windows hosts only, and not Windows containers.
 
 
 [1]: /agent/basic_agent_usage/windows/?tab=commandline
@@ -378,12 +388,14 @@ spec:
 To enable Network Performance Monitoring in Docker, use the following configuration when starting the container Agent:
 
 ```shell
-$ docker run -e DD_API_KEY="<DATADOG_API_KEY>" \
--e DD_SYSTEM_PROBE_ENABLED=true \
+$ docker run --cgroupns host \
+--pid host \
+-e DD_API_KEY="<DATADOG_API_KEY>" \
+-e DD_SYSTEM_PROBE_NETWORK_ENABLED=true \
 -e DD_PROCESS_AGENT_ENABLED=true \
-      -v /var/run/docker.sock:/var/run/docker.sock:ro \
-      -v /proc/:/host/proc/:ro \
-      -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+-v /var/run/docker.sock:/var/run/docker.sock:ro \
+-v /proc/:/host/proc/:ro \
+-v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
 -v /sys/kernel/debug:/sys/kernel/debug \
 --security-opt apparmor:unconfined \
 --cap-add=SYS_ADMIN \
@@ -408,7 +420,7 @@ services:
   datadog:
     image: "gcr.io/datadoghq/agent:latest"
     environment:
-       DD_SYSTEM_PROBE_ENABLED: 'true'
+       DD_SYSTEM_PROBE_NETWORK_ENABLED: 'true'
        DD_PROCESS_AGENT_ENABLED: 'true'
        DD_API_KEY: '<DATADOG_API_KEY>'
     volumes:
@@ -445,10 +457,10 @@ To set up on AWS ECS, see the [AWS ECS][1] documentation page.
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/network_monitoring/dns/#setup
 [3]: https://www.redhat.com/en/blog/introduction-ebpf-red-hat-enterprise-linux-7
-[4]: /network_monitoring/performance/network_page#dns-resolution
-[5]: https://docs.datadoghq.com/network_monitoring/performance/setup/?tab=agent#windows-systems
-[6]: https://docs.datadoghq.com/integrations/docker_daemon/
-[7]: https://docs.datadoghq.com/agent/kubernetes/
+[4]: /network_monitoring/dns/
+[5]: https://docs.datadoghq.com/agent/docker/
+[6]: https://docs.datadoghq.com/agent/kubernetes/
+[7]: https://docs.datadoghq.com/agent/amazon_ecs
 [8]: https://docs.datadoghq.com/integrations/istio/
 [9]: https://docs.datadoghq.com/tracing/setup_overview/proxy_setup/?tab=istio
 [10]: https://www.datadoghq.com/blog/istio-datadog/

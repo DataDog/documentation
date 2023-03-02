@@ -1,31 +1,32 @@
 ---
-title: Java ログ収集
-kind: documentation
 aliases:
-  - /ja/logs/languages/java
+- /ja/logs/languages/java
 further_reading:
-  - link: /logs/log_configuration/processors
-    tag: Documentation
-    text: ログの処理方法
-  - link: /logs/log_configuration/parsing
-    tag: Documentation
-    text: パースの詳細
-  - link: /logs/explorer/
-    tag: Documentation
-    text: ログの調査方法
-  - link: /logs/explorer/#visualize
-    tag: Documentation
-    text: ログ分析の実行
-  - link: /tracing/connect_logs_and_traces/java/
-    tag: Documentation
-    text: ログとトレースの接続
-  - link: /logs/faq/log-collection-troubleshooting-guide/
-    tag: よくあるご質問
-    text: ログ収集のトラブルシューティングガイド
-  - link: https://www.datadoghq.com/blog/java-logging-guide/
-    tag: ブログ
-    text: Java ログの収集、カスタマイズ、標準化方法
+- link: /logs/log_configuration/processors
+  tag: Documentation
+  text: ログの処理方法
+- link: /logs/log_configuration/parsing
+  tag: Documentation
+  text: パースの詳細
+- link: /logs/explorer/
+  tag: Documentation
+  text: ログの調査方法
+- link: /logs/explorer/#visualize
+  tag: Documentation
+  text: ログ分析の実行
+- link: /tracing/other_telemetry/connect_logs_and_traces/java/
+  tag: Documentation
+  text: ログとトレースの接続
+- link: /logs/faq/log-collection-troubleshooting-guide/
+  tag: よくあるご質問
+  text: ログ収集のトラブルシューティングガイド
+- link: https://www.datadoghq.com/blog/java-logging-guide/
+  tag: ブログ
+  text: Java ログの収集、カスタマイズ、標準化方法
+kind: documentation
+title: Java ログ収集
 ---
+
 一般的な Java ログのスタックトレースは複数の行に分割されているため、元のログイベントに関連付けることが困難です。
 
 ```java
@@ -243,7 +244,7 @@ Logback の JSON 形式のログには、[logstash-logback-encoder][1] を使用
     <immediateFlush>true</immediateFlush>
 
     <encoder>
-      <pattern>Logback %d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n</pattern>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n</pattern>
     </encoder>
   </appender>
 
@@ -265,23 +266,29 @@ Logback の JSON 形式のログには、[logstash-logback-encoder][1] を使用
 
 ## Datadog Agent の構成
 
-Agent の `conf.d/` ディレクトリに、以下の内容の `java.yaml` ファイルを作成します。
+[ログ収集が有効][4]になったら、ログファイルを追跡して Datadog に送信する[カスタムログ収集][5]を設定します。
 
-```yaml
-#ログセクション
-logs:
+1. `java.d/` フォルダーを `conf.d/` [Agent 構成ディレクトリ][6]に作成します。
+2. `java.d/` に以下の内容で `conf.yaml` ファイルを作成します。
 
-  - type: file
-    path: "/path/to/your/java/log.log"
-    service: java
-    source: java
-    sourcecategory: sourcecode
-    # 複数行ログで、ログが yyyy-mm-dd 形式の日付で始まる場合は、以下の処理ルールのコメントを解除します。
-    #log_processing_rules:
-    #  - type: multi_line
-    #    name: new_log_start_with_date
-    #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
-```
+    ```yaml
+    #Log section
+    logs:
+
+      - type: file
+        path: "/path/to/your/java/log.log"
+        service: java
+        source: java
+        sourcecategory: sourcecode
+        # For multiline logs, if they start by the date with the format yyyy-mm-dd uncomment the following processing rule
+        #log_processing_rules:
+        #  - type: multi_line
+        #    name: new_log_start_with_date
+        #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
+    ```
+
+3. [Agent を再起動します][7]。
+4. [Agent の status サブコマンド][8]を実行し、`Checks` セクションで `java` を探し、ログが Datadog に正常に送信されることを確認します。
 
 ## エージェントレスのログ収集
 
@@ -294,7 +301,7 @@ logs:
 
 ### Java ロギングライブラリから Logback へのブリッジ
 
-最も一般的なログライブラリは、Logback にブリッジできます。
+まだ Logback を使用していない場合、ほとんどの一般的なログライブラリは Logback にブリッジすることができます。
 
 {{< tabs >}}
 {{% tab "Log4j" %}}
@@ -326,7 +333,7 @@ SLF4J モジュール [log4j-over-slf4j][1] を Logback とともに使用して
 
 [1]: http://www.slf4j.org/legacy.html#log4j-over-slf4j
 [2]: http://logback.qos.ch/translator/
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "Log4j 2" %}}
 
@@ -340,15 +347,16 @@ Log4j 2 では、リモートホストへのログ記録が可能ですが、ロ
         <version>2.17.0</version>
     </dependency>
     <dependency>
-        <groupId>net.logstash.logback</groupId>
-        <artifactId>logstash-logback-encoder</artifactId>
-        <version>6.6</version>
-    </dependency>
-    <dependency>
         <groupId>ch.qos.logback</groupId>
         <artifactId>logback-classic</artifactId>
         <version>1.2.9</version>
     </dependency>
+    <dependency>
+        <groupId>net.logstash.logback</groupId>
+        <artifactId>logstash-logback-encoder</artifactId>
+        <version>6.6</version>
+    </dependency>
+
     ```
 2. Logback を構成します。
 
@@ -359,17 +367,17 @@ Log4j 2 では、リモートホストへのログ記録が可能ですが、ロ
 
 [1]: http://www.slf4j.org/legacy.html#log4j-over-slf4j
 [2]: http://logback.qos.ch/translator
-{{% /tab %}}
+{{< /tabs >}}
 
 {{< /tabs >}}
 
 ### Logback を構成する
 
-[logstash-logback-encoder][4] ログライブラリを Logback と一緒に使用して、ログを直接ストリーミングします。
+[logstash-logback-encoder][9] ログライブラリを Logback と一緒に使用して、ログを Datadog に直接ストリーミングします。
 
-1. `logback.xml` ファイルで TCP アペンダーを構成し、`<API_KEY>` を Datadog API キー値に置き換えます。
+1. `logback.xml` ファイルに TCP アペンダーを構成します。この構成では、API キーは環境変数 `DD_API_KEY` から取得されます。あるいは、コンフィギュレーションファイルに直接 API キーを挿入することもできます。
 
-    {{< site-region region="us" >}}
+    {{< site-region region="us,us3,us5" >}}
 
   ```xml
   <configuration>
@@ -378,16 +386,16 @@ Log4j 2 では、リモートホストへのログ記録が可能ですが、ロ
       <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
     </appender>
     <appender name="JSON_TCP" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-      <remoteHost>intake.logs.datadoghq.com</remoteHost>
-      <port>10514</port>
+      <destination>intake.logs.datadoghq.com:10516</destination>
       <keepAliveDuration>20 seconds</keepAliveDuration>
       <encoder class="net.logstash.logback.encoder.LogstashEncoder">
           <prefix class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
               <layout class="ch.qos.logback.classic.PatternLayout">
-                  <pattern><API_KEY> %mdc{keyThatDoesNotExist}</pattern>
+                  <pattern>${DD_API_KEY} %mdc{keyThatDoesNotExist}</pattern>
               </layout>
             </prefix>
       </encoder>
+      <ssl />
     </appender>
 
     <root level="DEBUG">
@@ -408,16 +416,16 @@ Log4j 2 では、リモートホストへのログ記録が可能ですが、ロ
       <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
     </appender>
     <appender name="JSON_TCP" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-      <remoteHost>tcp-intake.logs.datadoghq.eu</remoteHost>
-      <port>1883</port>
+      <destination>tcp-intake.logs.datadoghq.eu:443</destination>
       <keepAliveDuration>20 seconds</keepAliveDuration>
       <encoder class="net.logstash.logback.encoder.LogstashEncoder">
           <prefix class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
               <layout class="ch.qos.logback.classic.PatternLayout">
-                  <pattern><API_KEY> %mdc{keyThatDoesNotExist}</pattern>
+                  <pattern>${DD_API_KEY} %mdc{keyThatDoesNotExist}</pattern>
               </layout>
             </prefix>
       </encoder>
+      <ssl />
     </appender>
 
     <root level="DEBUG">
@@ -429,14 +437,11 @@ Log4j 2 では、リモートホストへのログ記録が可能ですが、ロ
 
     {{< /site-region >}}
 
-    {{< site-region region="us3" >}}
-  サポートされていません。
-    {{< /site-region >}}
     {{< site-region region="gov" >}}
   サポートされていません。
     {{< /site-region >}}
 
-   **注:** XML コンフィギュレーションで空白が削除されるため、`%mdc{keyThatDoesNotExist}` が追加されます。プレフィックスパラメータの詳細については、[Logback ドキュメント][5]を参照してください。
+   **注:** XML コンフィギュレーションで空白が削除されるため、`%mdc{keyThatDoesNotExist}` が追加されます。プレフィックスパラメータの詳細については、[Logback ドキュメント][10]を参照してください。
 
 2. Logstash エンコーダの依存関係を `pom.xml` ファイルに追加します。
 
@@ -459,7 +464,7 @@ Log4j 2 では、リモートホストへのログ記録が可能ですが、ロ
 
 ### キー値パーサーの使用
 
-[キー値パーサー][6]は、ログイベント内で認識された `<KEY>=<VALUE>` パターンを抽出します。
+[キー値パーサー][11]は、ログイベント内で認識された `<KEY>=<VALUE>` パターンを抽出します。
 
 Java のログイベントを補完するには、コードでメッセージを書き直し、`<キー>=<値>` のシーケンスを挿入します。
 
@@ -512,13 +517,18 @@ logger.info("Emitted 1001 messages during the last 93 seconds");
 
 **注:** MDC は文字列タイプのみを許可するため、数値メトリクスには使用しないでください。
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: http://logback.qos.ch/manual/mdc.html
 [2]: /ja/logs/log_configuration/parsing
-[3]: /ja/tracing/connect_logs_and_traces/java/
-[4]: https://github.com/logstash/logstash-logback-encoder
-[5]: https://github.com/logstash/logstash-logback-encoder#prefixsuffix
-[6]: /ja/logs/log_configuration/parsing/#key-value-or-logfmt
+[3]: /ja/tracing/other_telemetry/connect_logs_and_traces/java/
+[4]: /ja/agent/logs/?tab=tailfiles#activate-log-collection
+[5]: /ja/agent/logs/?tab=tailfiles#custom-log-collection
+[6]: /ja/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[7]: /ja/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
+[8]: /ja/agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information]
+[9]: https://github.com/logstash/logstash-logback-encoder
+[10]: https://github.com/logstash/logstash-logback-encoder#prefixsuffixseparator
+[11]: /ja/logs/log_configuration/parsing/#key-value-or-logfmt

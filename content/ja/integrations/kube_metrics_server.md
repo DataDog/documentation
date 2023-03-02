@@ -1,39 +1,66 @@
 ---
+app_id: kube-metrics-server
+app_uuid: df9c9e3c-368a-4472-b0cb-b32f1066a2f5
 assets:
   dashboards:
     Kubernetes Metrics Server - Overview: assets/dashboards/overview.json
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: kube_metrics_server.process.open_fds
+      metadata_path: metadata.csv
+      prefix: kube_metrics_server.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Kube メトリクスサーバー
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
-  - orchestration
-  - コンテナ
-creates_events: false
-ddtype: check
+- orchestration
+- コンテナ
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/kube_metrics_server/README.md
-display_name: Kube メトリクスサーバー
+- https://github.com/DataDog/integrations-core/blob/master/kube_metrics_server/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: kube_metrics_server
-guid: 7a477937-4db8-4277-bd58-9e56ac064185
 integration_id: kube-metrics-server
 integration_title: Kubernetes Metrics Server
+integration_version: 3.0.0
 is_public: true
 kind: integration
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: kube_metrics_server.
-metric_to_check: kube_metrics_server.process.open_fds
+manifest_version: 2.0.0
 name: kube_metrics_server
-public_title: Datadog-Kubernetes Metrics Server インテグレーション
+oauth: {}
+public_title: Kubernetes Metrics Server
 short_description: Kubernetes Metrics Server の監視
-support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Orchestration
+  - Category::Containers
+  configuration: README.md#Setup
+  description: Kubernetes Metrics Server の監視
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Kubernetes Metrics Server
 ---
+
+
+
 ## 概要
 
 このチェックは、Kubernetes Control Plane によって使用されるコンポーネントである [Kube_metrics_server][1] v0.3.0+ を監視します。
@@ -111,7 +138,7 @@ kube_metrics_server には、イベントは含まれません。
 
 
 [1]: https://github.com/kubernetes-incubator/metrics-server
-[2]: https://github.com/DataDog/integrations-core/blob/master/kube_metrics_server/datadog_checks/kube_metrics_server/data/conf.yaml.example
+[2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [5]: https://docs.datadoghq.com/ja/help/

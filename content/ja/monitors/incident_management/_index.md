@@ -1,8 +1,19 @@
 ---
-title: インシデント管理
-kind: documentation
 description: インシデントの作成と管理
+further_reading:
+- link: https://app.datadoghq.com/release-notes?category=Incident%20Management
+  tag: リリースノート
+  text: Incident Management の最新リリースをチェック！ (アプリログインが必要です)。
+- link: dashboards/querying/#incident-management-analytics
+  tag: ドキュメント
+  text: インシデント管理分析
+- link: https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/
+  tag: ブログ
+  text: インシデントの事後分析を作成するためのベストプラクティス
+kind: documentation
+title: インシデント管理
 ---
+
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Datadog for Government site では、インシデント管理をご利用いただけません。</div>
 {{< /site-region >}}
@@ -21,6 +32,10 @@ Datadog パラダイムでは、次のいずれかがインシデントを宣言
 ## 使用方法
 
 インシデント管理にインストールは必要ありません。インシデントを表示するには、[Incidents][1] ページに移動して、すべての進行中インシデントのフィードを確認します。[Incident Settings][2] で、すべてのインシデントに表示される追加フィールドを構成できます。
+
+**注**: [Apple App Store][4] および [Google Play Store][5] で入手できる [Datadog モバイルアプリ][3]をダウンロードして、モバイルデバイスのホーム画面からインシデント一覧を表示し、インシデントを管理/作成することができます。
+
+{{< img src="monitors/incidents/incidents-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="モバイルアプリでのインシデント">}}
 
 ### インシデントの作成
 
@@ -50,19 +65,33 @@ Datadog クリップボードから複数のモニターとグラフを収集し
 
 {{< img src="monitors/incidents/existing.png" alt="既存のインシデントにモニターを追加" style="width:80%;">}}
 
-#### インシデントページから作成
+#### セキュリティシグナルから
 
-[インシデント UI][1] で **New Incident** ボタンをクリックし、インシデントを作成します。
+サイドパネルの右上にあるケバブボタンをクリックし、**Declare incident** をクリックして、Cloud SIEM または Cloud Workload Security のシグナルから直接インシデントを宣言することができます。
+
+サイドパネルの右上にあるエクスポートボタンを選択し、**Export to incident** をクリックして、アプリケーションセキュリティモニタリングのシグナルからインシデントを宣言します。
+
+{{< img src="monitors/incidents/security-signal-incidents.png" alt="セキュリティシグナルからインシデントを作成" style="width:80%;">}}
+
+#### Incidents ページから作成
+
+[Datadog UI][1] で **New Incident** をクリックし、インシデントを作成します。
+
+{{< img src="monitors/incidents/incident_declaration_modal.jpeg" alt="インシデント宣言モーダル" style="width:80%;">}}
+
+インシデント作成モーダルは、オーガニゼーションで使用されている重大度とステータスのヘルパーテキストと説明を含む折りたたみ可能なサイドパネルをレスポンダーに提供します。ヘルパーのテキストと説明は、[Incident Settings][6] でカスタマイズできます。
+
+{{< img src="monitors/incidents/incident_information_settings.jpeg" alt="インシデント情報の設定" style="width:80%;">}}
 
 #### Slack から作成
 
-[Datadog インテグレーションを Slack で有効化][3]すると、どの Slack チャンネルからでもスラッシュコマンド `/datadog incident` を使用して新しいインシデントを宣言できます。
+[Datadog インテグレーションを Slack で有効化][7]すると、どの Slack チャンネルからでもスラッシュコマンド `/datadog incident` を使用して新しいインシデントを宣言できます。
 
 作成モーダルで、説明タイトル (Title) に入力し、カスタマーへの影響 (Yes、No、Unknown) を選択して、重大度 (Severity) を (Unknown または 1～5) から選択します。
 
 インシデントを宣言しているユーザーが Slack を Datadog アカウントと接続済みの場合、デフォルトではそのユーザーがインシデント調査責任者 (IC) になります。IC は、必要に応じて後からアプリ内で変更できます。インシデントを宣言しているユーザーが Datadog アカウントを所有していない場合、IC は一般の `Slack app user` に割り当てられ、アプリ内の別の IC に割り当てることができます。
 
-Datadog Slack アプリの使用については、[こちら][4]を確認してください。
+Datadog Slack アプリの使用については、[こちら][8]を確認してください。
 
 {{< img src="monitors/incidents/from-slack.png" alt="Slack からインシデントを作成" style="width:60%;">}}
 
@@ -70,9 +99,11 @@ Datadog Slack アプリの使用については、[こちら][4]を確認して�
 
 Slack でインシデントを宣言すると、インシデントチャネルが生成されます。
 
-Datadog Slack インテグレーションについては、[ドキュメント][3]を参照してください。
+Datadog Slack インテグレーションについては、[ドキュメント][7]を参照してください。
 
-Slack をご利用の EU 外のお客様は、Datadog Slack アプリに[ベータアクセスでサインアップ][5]してください。Slack をご利用の EU 内のお客様は、support@datadoghq.com にメールを送信して、Slack アプリに関する最新情報を入手してください。
+{{< site-region region="eu" >}}
+Slack をご利用の {{< region-param key="dd_site_name" >}} のお客様は、https://help.datadoghq.com/ でチケットを提出して、Slack アプリに関する最新情報を入手してください。
+{{< /site-region >}}
 
 ### インシデントの説明
 
@@ -103,9 +134,9 @@ Slack をご利用の EU 外のお客様は、Datadog Slack アプリに[ベー�
 
 ### インシデントとインシデントタイムラインの更新
 
-インシデントのステータスは、インシデントの[概要ページ][1]、または、専用のインシデントチャネルの Slack から直接更新できます。Slack からインシデントを更新するには、スラッシュコマンド `/datadog incident update` を使用して、更新モーダルをプルアップします。
+インシデントのステータスは、インシデントの概要ページ、または、専用のインシデントチャネルの Slack から直接更新できます。その Slack チャネルからインシデントを更新するには、スラッシュコマンド `/datadog incident update` を使用して、更新モーダルを開きます。
 
-また、影響セクションを更新して、顧客への影響の有無、インシデントタイムライン、アクティブ/非アクティブを指定できます。このセクションでは、影響範囲の説明の入力も求められます。
+影響セクションを更新し、顧客への影響、影響の開始と終了時刻、およびインシデントがまだアクティブであるかどうかを指定します。また、このセクションには、完了する影響範囲の記述が必要です。
 
 インシデントのヘッダーには、インシデントの状況、重大度、タイムスタンプ、影響、期間のほか、インシデントに対応した人物が表示されます。また、対応者に最新情報を通知することもできます。Datadog Slack アプリを使用していない場合は、チャット、ビデオ会議、事後分析 (追加されている場合) 用のリンクが用意されています。
 
@@ -130,39 +161,62 @@ Slack をご利用の EU 外のお客様は、Datadog Slack アプリに[ベー�
 
 #### 評価フィールド
 
-評価フィールドは、インシデントごとに定義できるメタデータとコンテキストから成ります。このフィールドは[key:value メトリクスタグ][6]になっており、設定でフィールドキーを追加すると、概要ページでインシデントの影響を評価する際に、値を利用できるようになります。例えば、「アプリケーション」フィールドを追加できます。次のフィールドはすべてのインシデントの評価に利用できます。
+評価フィールドは、インシデントごとに定義できるメタデータとコンテキストから成ります。このフィールドは [key:value メトリクスタグ][9]になっており、設定でフィールドキーを追加すると、概要ページでインシデントの影響を評価する際に、値を利用できるようになります。例えば、「アプリケーション」フィールドを追加できます。次のフィールドはすべてのインシデントの評価に利用できます。
 
 * **Root Cause**: このテキストフィールドには、インシデントの根本原因の説明、トリガー、要因を入力できます。
 * **Detection Method**: デフォルトの選択肢「Customer、Employee、Monitor、Other、Unknown」から、インシデントがどのように検出されたか指定します。
-* **Services**: APM を構成済みの場合は、インシデント評価に APM サービスを利用できます。APM サービスの構成については、[ドキュメント][7]を参照してください。
+* **Services**: APM を構成済みの場合は、インシデント評価に APM サービスを利用できます。APM サービスの構成については、[ドキュメント][10]を参照してください。
     * Datadog APM を使用していない場合は、サービス名を CSV ファイルでアップロードできます。CSV ファイルでアップロードされた値は、インシデント管理のインシデント評価にのみ使用できます。
     * Datadog は、大文字と小文字を区別しないことによるサービス名の重複を排除します。そのため、"My Service" や "my service" といった名前を使用している場合、手動で追加した名前のみが表示されます。
     * Datadog は、手動でアップロードしたリストを優先して APM サービス名をオーバーライドします。
     * 利用しているサービスが APM サービスで、過去 7 日間にメトリクスが何もポストされていない場合、検索結果には表示されません。
     * Datadog 製品をさらに統合すると、サービスへの影響をより正確に評価できます。サービスのプロパティフィールドは、Datadog APM を使用しているカスタマーの APM サービスが自動的に入力されます。
-* **Teams**: アップロードした CSV ファイルから入力されます。CSV ファイルでアップロードされた値は、インシデント管理のインシデント評価にのみ使用できます。
+* **Teams**: [プロパティフィールド][11]のインシデント設定で定義されています。CSV ファイルからチームのリストをアップロードします。CSV を介してアップロードされた値は、インシデント評価の目的でインシデント管理内でのみ使用できます。
+
+## 収集データ
+
+インシデント管理は、次の分析メジャーを収集します。
+
+* インシデント数
+* 顧客への影響期間
+* ステータスアクティブ期間
+* ステータス安定期間
+* 修理までの時間 (顧客への影響の終了時間 - 作成された時間)
+* 解決までの時間 (解決された時間 - 作成された時間)
+
+インシデント管理グラフの詳細については、[インシデント管理分析][12]を参照してください。
 
 ## インテグレーション
 
-[Slack][3] との統合に加えて、Incident Management は以下とも統合されます。
+[Slack][7] との統合に加えて、インシデント管理は以下とも統合されます。
 
-- [PagerDuty][8] は、インシデント通知を PagerDuty に送信します。
-- [Jira][9] は、インシデントの Jira チケットを作成します。
-- [Webhook][10] は、Webhook を使用してインシデント通知を送信します (たとえば、[SMS を Twilio に送信][11])。
+- [PagerDuty][13] と [OpsGenie][14] は、オンコールエンジニアにインシデント通知を送信します。
+- [Jira][15] は、インシデントの Jira チケットを作成します。
+- [Webhook][16] は、Webhook を使用してインシデント通知を送信します (たとえば、[SMS を Twilio に送信][17])。
 
 ## 準備はいいですか？
 
-[Incident Management 入門][12]ガイドのワークフロー例を実行してください。
+[Incident Management 入門][18]ガイドのワークフロー例を実行してください。
+
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/incidents
 [2]: https://app.datadoghq.com/incidents/settings
-[3]: /ja/integrations/slack/?tab=slackapplicationbeta#using-the-slack-app
-[4]: /ja/integrations/slack/
-[5]: https://app.datadoghq.com/incidents/ddslackapp
-[6]: /ja/getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments#overview
-[7]: /ja/tracing/#2-instrument-your-application
-[8]: /ja/integrations/pagerduty/
-[9]: /ja/integrations/jira/
-[10]: /ja/integrations/webhooks/
-[11]: /ja/integrations/webhooks/#sending-sms-through-twilio
-[12]: /ja/getting_started/incident_management
+[3]: /ja/mobile
+[4]: https://apps.apple.com/app/datadog/id1391380318
+[5]: https://play.google.com/store/apps/details?id=com.datadog.app
+[6]: /ja/monitors/incident_management/incident_settings#information
+[7]: /ja/integrations/slack/?tab=slackapplicationbeta#using-the-slack-app
+[8]: /ja/integrations/slack/
+[9]: /ja/getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments#overview
+[10]: /ja/tracing/#2-instrument-your-application
+[11]: https://app.datadoghq.com/incidents/settings#Property-Fields
+[12]: /ja/monitors/incident_management/analytics/#overview
+[13]: /ja/integrations/pagerduty/
+[14]: /ja/integrations/opsgenie/
+[15]: /ja/integrations/jira/
+[16]: /ja/integrations/webhooks/
+[17]: /ja/integrations/webhooks/#sending-sms-through-twilio
+[18]: /ja/getting_started/incident_management

@@ -1,15 +1,16 @@
 ---
-title: タイムボード API
-kind: ガイド
 aliases:
-  - /ja/graphing/faq/timeboard-api-doc
-  - /ja/graphing/guide/timeboard-api-doc
+- /ja/graphing/faq/timeboard-api-doc
+- /ja/graphing/guide/timeboard-api-doc
+kind: ガイド
+title: タイムボード API
 ---
+
 <div class="alert alert-danger">
 このエンドポイントは旧バージョンです。代わりに、<a href="https://docs.datadoghq.com/api/v1/dashboards/">新しいダッシュボードエンドポイント</a>を使用してください。
 </div>
 
-`Timeboard` エンドポイントを使用すると、タイムボードをプログラムで作成、更新、削除、およびクエリできます。[タイムボードの詳細については、こちらを参照してください][1]。
+`Timeboard` エンドポイントを使用すると、タイムボードをプログラムで作成、更新、削除、およびクエリできます。
 
 ## タイムボードの作成
 
@@ -172,7 +173,7 @@ curl  -X POST -H "Content-type: application/json" \
     * **`title`** [必須]:
         グラフの名前。
     * **`definition`** [必須]:
-    グラフの定義。グラフの詳細は、[グラフガイド][1]を参照してください。例:
+    グラフの定義です。例:
     `{"requests": [{"q": "system.cpu.idle{*} by {host}"}`
 
 * **`template_variables`** [オプション、デフォルト = **None**]:
@@ -313,7 +314,7 @@ curl  -X PUT -H "Content-type: application/json" \
 
 ## タイムボードの削除
 
-既存の[タイムボード][1]を削除します。
+既存のタイムボードを削除します。
 このエンドポイントは、JSON 引数を受け取りません。
 
 ### シグニチャ
@@ -504,7 +505,7 @@ curl "https://api.datadoghq.com/api/v1/dash/${dash_id}?api_key=${api_key}&applic
 
 ## すべてのタイムボードの取得
 
-[タイムボード][1]の定義をすべて取得します。
+タイムボードの定義をすべて取得します。
 
 ### シグニチャ
 
@@ -559,5 +560,3 @@ curl "https://api.datadoghq.com/api/v1/dash?api_key=${api_key}&application_key=$
 
 {{% /tab %}}
 {{< /tabs >}}
-
-[1]: /ja/dashboards/timeboard/

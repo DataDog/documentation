@@ -4,15 +4,24 @@ kind: Documentation
 description: "Configure your Datadog Agent to gather logs from your host, containers & services."
 disable_sidebar: true
 aliases:
-    - /guides/logs/
-    - /logs/logging_without_limits
+  - /guides/logs/
+  - /logs/logging_without_limits
 further_reading:
-- link: "/logs/log_collection/"
-  tag: "Documentation"
-  text: "Starting collecting your logs"
-- link: "https://learn.datadoghq.com"
-  tag: "Learning Center"
-  text: "Learn more about Datadog Log Management"
+  - link: "https://app.datadoghq.com/release-notes?category=Log%20Management"
+    tag: "Release Notes"
+    text: "Check out the latest Datadog Log Management releases (App login required)"
+  - link: "/logs/log_collection/"
+    tag: "Documentation"
+    text: "Starting collecting your logs"
+  - link: "https://learn.datadoghq.com/courses/intro-to-log-management"
+    tag: "Learning Center"
+    text: "Introduction to Log Management"
+  - link: "https://www.datadoghq.com/blog/accelerate-incident-investigations-with-log-anomaly-detection/"
+    tag: "Blog"
+    text: "Accelerate Incident Investigations with Log Anomaly Detection"
+  - link: "https://www.datadoghq.com/blog/monitor-iot-devices-at-scale-with-log-management/"
+    tag: "Blog"
+    text: "Monitor your IoT devices at scale with Datadog Log Management"
 ---
 
 ## Overview
@@ -41,7 +50,7 @@ Once your logs are ingested, process and enrich all your logs with pipelines and
 
 {{< img src="/logs/connect.png" alt="Correlate logs with metrics or traces" style="width:80%;">}}
 
-Leverage the pillars of observability by connecting logs your logs to metrics and traces:
+Leverage the pillars of observability by connecting your logs to metrics and traces:
 
 - [Connect your logs and traces][5] to gain observability into your applications.
 - [Correlate logs and metrics][6] to gain context of an issue and map it throughout your service.
@@ -65,10 +74,10 @@ Start exploring your ingested logs in the [Log Explorer][1].
 \*Logging without Limits is a trademark of Datadog, Inc.
 
 [1]: /logs/explorer/
-[2]: /security_platform/cloud_siem/
+[2]: /security/cloud_siem/
 [3]: /logs/log_collection/
 [4]: /logs/log_configuration/
-[5]: /tracing/connect_logs_and_traces/
+[5]: /tracing/other_telemetry/connect_logs_and_traces/
 [6]: /logs/guide/correlate-logs-with-metrics/
 [7]: /logs/explorer/search_syntax/
 [8]: /logs/live_tail/

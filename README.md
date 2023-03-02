@@ -6,13 +6,13 @@ Built with [hugo][1], a static website generation tool.
 
 ### Installation
 
-1. [Install node / npm][2]
+1. [Install Node / npm][2] (node `>=14.16.0`)
 
 2. [Install Python3][3] (you can also use [pyenv][4])
 
-3. [Install hugo][12]
+3. [Install hugo][13]
 
-4. [Install Go][13] (at minimum, `go version` 1.12)
+4. [Install Go][14] (at minimum, `go version` 1.12)
 
 5. Install yarn: `npm install -g yarn`
 
@@ -26,35 +26,22 @@ If you are a Datadog employee, add your [GitHub personal token][6]
 
 To run the documentation site locally, execute:
 
-| Command                   | Description                                                                                                                                                                                                                             |
-|---------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `make start-no-pre-build` | Build the lightweight version of the documentation with no extra content                                                                                                                                                                |
-| `make start`              | Build the full documentation with all extra content (integrations, extra pulled files, localized content, etc). Only useful if you have a GitHub personal token setup in your `Makefile.config` or the extra content is available locally. If you are working with local content, the repo must be downloaded to the same folder as the documentation repo. |
+| Command                   | Description                                                                                                                                                                                                                                |
+|---------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `make start-no-pre-build` | Build the lightweight version of the documentation with no extra content                                                                                                                                                                   |
+| `make start`*             | Build the full documentation with all extra content (integrations, extra pulled files, localized content, etc). Only useful if you have a GitHub personal token setup in your `Makefile.config` or the extra content is available locally. |
+| `make start-docker`       | Build the documentation using the docker image. For more information see [Docker Development][16].                                                                                                                                         |
 
 **Documentation is then available at `http://localhost:1313`**
 
+**NOTE**: `make start` attempts to pull all dependent repos from their origins or a local cache. The order it attempts to retrieve is:
+  * One directory above where this repo is cloned.
+  * `integrations_data`: A local pull of all dependent repos from the last successful build
+  * If neither of the above exist, an attempt is made to pull dependent repos from upstream.
+
+If you'd like to re-pull dependencies, run `make clean-all` and then try your `make` command again.
+
 To learn more about how the documentation is built, refer to the [Documentation Build Wiki][7].
-
-### Makefile
-
-To use the Makefile, create a Makefile.config. See the instructions at the top of the [Makefile.config.example][5].
-
-After you have a config file, run `make help` to see options:
-
-```text
-clean-all                 Clean everything.
-clean-build               Remove build artifacts.
-clean-exe                 Remove execs.
-clean-integrations        Remove built integrations files.
-clean-node                Remove node_modules.
-clean-virt                Remove python virtual env.
-clean                     Clean all make installs.
-hugpython                 Build virtualenv used for tests.
-source-helpers            Source the helper functions used to build, test, deploy.
-start-no-pre-build        Build the documentation without automatically pulled content.
-start                     Build the documentation with all external content.
-stop                      Stop wepack watch/hugo server.
-```
 
 ## Working on Docs
 
@@ -64,7 +51,7 @@ stop                      Stop wepack watch/hugo server.
 * Name your branch `<SLACK_HANDLE>/<FEATURE_NAME>` if you would like to create a preview site and run tests.
 * When you are ready to commit, create a new pull request to master from your branch.
 * Consult our [contributing guidelines][8], and the [Documentation Build Wiki][7].
-* Use GitHub's [draft pull request][14] feature and appropriate labels such as "Do Not Merge" or "Work in Progress" until your PR is ready to be merged and live on production.
+* Use GitHub's [draft pull request][15] feature and appropriate labels such as "Do Not Merge" or "Work in Progress" until your PR is ready to be merged and live on production.
 
 ### Outside Contributors
 
@@ -90,6 +77,32 @@ Within 10 minutes of merging to master, it deploys automatically.
 
 [See the dedicated doc page][11].
 
+## Docker development
+
+Prerequsites:
+- Running Monterey OSX
+- [Docker Desktop][12] >= 4.7.1 is installed
+- At least 6GB of RAM is dedicated towards Docker for Mac
+  1. Open the Docker for Mac app dashboard
+  2. Click the gear icon
+  3. Click Resources
+  4. The memory slider should be set to 6GB
+- VirtioFS is enabled
+  1. Open the Docker for Mac app dashboard
+  2. Click the gear icon
+  3. Click Experimental Features
+  4. Click Enable VirtioFS accelerated directory sharing
+  5. Click Apply & Restart
+
+### How to run documentation inside a Docker container
+1. Go to project root
+2. Make a copy of `Makefile.config.example` called `Makefile.config`
+3. Enter value for `GITHUB_TOKEN`
+4. Set `FULL_BUILD` to true to build the full documentation with all extra content
+5. Run `make start-docker`
+
+To stop the app, hit Ctrl-C or run `make stop-docker`
+
 [1]: https://gohugo.io
 [2]: https://nodejs.org/en/download/package-manager
 [3]: https://www.python.org/downloads
@@ -101,6 +114,8 @@ Within 10 minutes of merging to master, it deploys automatically.
 [9]: https://github.com/yuin/goldmark
 [10]: https://spec.commonmark.org/0.29/
 [11]: https://docs.datadoghq.com/developers/integrations
-[12]: https://gohugo.io/getting-started/installing/
-[13]: https://golang.org/doc/install
-[14]: https://github.blog/2019-02-14-introducing-draft-pull-requests/
+[12]: https://www.docker.com/products/docker-desktop/
+[13]: https://gohugo.io/getting-started/installing/
+[14]: https://golang.org/doc/install
+[15]: https://github.blog/2019-02-14-introducing-draft-pull-requests/
+[16]: https://github.com/DataDog/documentation/blob/master/README.md#docker-development

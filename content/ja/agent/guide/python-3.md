@@ -58,7 +58,7 @@ W:  9, 8: division w/o __future__ statement (old-division)
 
 ```bash
 $ python2 -m pylint -sn --py3k ~/dev/my-check.py
-$
+$ 
 ```
 
 `pylint` は Python 3 インタープリターのコード実行を妨げる問題を検知するものの、論理的な妥当性は確認できません。コードを変更したら、必ずチェックを実行し、アウトプットを検証してください。

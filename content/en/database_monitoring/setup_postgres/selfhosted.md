@@ -9,7 +9,7 @@ further_reading:
 
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
@@ -24,13 +24,13 @@ The Agent collects telemetry directly from the database by logging in as a read-
 ## Before you begin
 
 Supported PostgreSQL versions
-: 9.6, 10, 11, 12, 13
+: 9.6, 10, 11, 12, 13, 14
 
 Prerequisites
 : Postgres additional supplied modules must be installed. For most installations, this is included by default but less conventional installations might require an additional installation of your version of [the `postgresql-contrib` package][1].
 
 Supported Agent versions
-: 7.33.0+
+: 7.36.1+
 
 Performance impact
 : The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. <br/><br/>
@@ -48,10 +48,11 @@ Configure the following [parameters][4] in the `postgresql.conf` file and then *
 
 | Parameter | Value | Description |
 | --- | --- | --- |
-| `shared_preload_libraries` | `pg_stat_statements` | Required for `postgresql.queries.*` metrics. Enables collection of query metrics via the the [pg_stat_statements][5] extension. |
+| `shared_preload_libraries` | `pg_stat_statements` | Required for `postgresql.queries.*` metrics. Enables collection of query metrics using the [pg_stat_statements][5] extension. |
 | `track_activity_query_size` | `4096` | Required for collection of larger queries. Increases the size of SQL text in `pg_stat_activity` and `pg_stat_statements`. If left at the default value then queries longer than `1024` characters will not be collected. |
 | `pg_stat_statements.track` | `ALL` | Optional. Enables tracking of statements within stored procedures and functions. |
 | `pg_stat_statements.max` | `10000` | Optional. Increases the number of normalized queries tracked in `pg_stat_statements`. This setting is recommended for high-volume databases that see many different types of queries from many different clients. |
+| `track_io_timing` | `on` | Optional. Enables collection of block read and write times for queries. |
 
 ## Grant the Agent access
 
@@ -118,14 +119,21 @@ SECURITY DEFINER;
 Create the function **in every database** to enable the Agent to collect explain plans.
 
 ```SQL
-CREATE OR REPLACE FUNCTION datadog.explain_statement (
-   l_query text,
-   out explain JSON
+CREATE OR REPLACE FUNCTION datadog.explain_statement(
+   l_query TEXT,
+   OUT explain JSON
 )
 RETURNS SETOF JSON AS
 $$
+DECLARE
+curs REFCURSOR;
+plan JSON;
+
 BEGIN
-   RETURN QUERY EXECUTE 'EXPLAIN (FORMAT JSON) ' || l_query;
+   OPEN curs FOR EXECUTE pg_catalog.concat('EXPLAIN (FORMAT JSON) ', l_query);
+   FETCH curs INTO plan;
+   CLOSE curs;
+   RETURN QUERY SELECT plan;
 END;
 $$
 LANGUAGE 'plpgsql'
@@ -239,7 +247,7 @@ PostgreSQL default logging is to `stderr`, and logs do not include detailed info
    ```
 2. To gather detailed duration metrics and make them searchable in the Datadog interface, they should be configured inline with the statement themselves. See below for the recommended configuration differences from above and note that both `log_statement` and `log_duration` options are commented out. See discussion on this topic [here][12].
 
- This config logs all statements, but to reduce the output to those which have a certain duration, set the `log_min_duration_statement` value to the desired minimum duration in milliseconds (check that logging the full SQL statement complies with your organization's privacy requirements):
+   This config logs all statements, but to reduce the output to those which have a certain duration, set the `log_min_duration_statement` value to the desired minimum duration in milliseconds (check that logging the full SQL statement complies with your organization's privacy requirements):
    ```conf
      log_min_duration_statement = 0    # -1 is disabled, 0 logs all statements
                                        # and their durations, > 0 logs only
@@ -265,12 +273,15 @@ PostgreSQL default logging is to `stderr`, and logs do not include detailed info
        #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
        #    name: new_log_start_with_date
    ```
-      Change the `service` and `path` parameter values to configure for your environment. See the [sample postgres.d/conf.yaml][9] for all available configuration options.
+   Change the `service` and `path` parameter values to configure for your environment. See the [sample postgres.d/conf.yaml][9] for all available configuration options.
 5. [Restart the Agent][10].
 
 ### Validate
 
 [Run the Agent's status subcommand][13] and look for `postgres` under the Checks section. Or visit the [Databases][14] page to get started!
+
+## Example Agent Configurations
+{{% dbm-postgres-agent-config-examples %}}
 
 ## Troubleshooting
 

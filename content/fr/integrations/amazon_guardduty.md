@@ -1,24 +1,24 @@
 ---
 categories:
-  - cloud
-  - aws
-  - log collection
-  - security
-ddtype: crawler
+- cloud
+- aws
+- log collection
+- security
+dependencies:
+- https://github.com/DataDog/documentation/blob/master/content/en/integrations/amazon_guardduty.md
 description: Rassemblez vos logs AWS GuardDuty.
 doc_link: /integrations/amazon_guardduty/
 has_logo: true
-dependencies:
-  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/amazon_guardduty.md
-integration_title: "AWS\_GuardDuty"
+integration_id: amazon-guardduty
+integration_title: AWS GuardDuty
 is_public: true
 kind: integration
 name: amazon_guardduty
-public_title: "Intégration Datadog/AWS\_GuardDuty"
+public_title: Intégration Datadog/AWS GuardDuty
 short_description: Rassemblez vos logs AWS GuardDuty.
 version: '1.0'
-integration_id: amazon-guardduty
 ---
+
 ## Présentation
 
 Datadog s'intègre à AWS GuardDuty par l'intermédiaire d'une fonction Lambda qui transmet les résultats de GuardDuty à la solution Log Management de Datadog.
@@ -51,5 +51,5 @@ Datadog s'intègre à AWS GuardDuty par l'intermédiaire d'une fonction Lambda 
 
 3. Accédez ensuite à la [section Logs de Datadog][2] pour commencer à explorer vos logs.
 
-[1]: /fr/integrations/amazon_web_services/#create-a-new-lambda-function
+[1]: /fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
 [2]: https://app.datadoghq.com/logs

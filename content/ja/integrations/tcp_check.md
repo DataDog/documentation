@@ -1,43 +1,64 @@
 ---
-aliases:
-  - /ja/guides/network_checks
-  - /ja/integrations/tcpcheck
+app_id: システム
+app_uuid: a675760c-00f7-4bf3-bd0e-c7edfb0e7e82
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: network.tcp.can_connect
+      metadata_path: metadata.csv
+      prefix: network.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: TCP
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-  - network
-  - web
-creates_events: false
-ddtype: check
+- network
+- web
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/tcp_check/README.md'
-display_name: TCP
+- https://github.com/DataDog/integrations-core/blob/master/tcp_check/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: tcp_check
-guid: c514029e-0ed8-4c9f-abe5-2fd4096726ba
 integration_id: システム
 integration_title: TCP チェック
+integration_version: 4.6.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: network.
-metric_to_check: network.tcp.can_connect
+manifest_version: 2.0.0
 name: tcp_check
-public_title: Datadog-TCP チェックインテグレーション
+oauth: {}
+public_title: TCP チェック
 short_description: リモートホストへの TCP 接続を監視
-support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Network
+  - Category::Web
+  configuration: README.md#Setup
+  description: リモートホストへの TCP 接続を監視
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: TCP チェック
 ---
+
+
+
 ![ネットワークのグラフ][1]
 
 ## 概要
@@ -48,7 +69,9 @@ supported_os:
 
 ### インストール
 
-TCP チェックは [Datadog Agent][2] パッケージに含まれているため、TCP ポートを調査するホストに追加で何かをインストールする必要はありません。メトリクス指向チェックの多くは監視対象サービスと同じホストで実行することが最適な実行方法ですが、リモート接続をテストする場合などに、監視対象の TCP サービスを実行していないホストからこのチェックを実行する方が望ましい場合があります。
+TCP チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
+
+多くのメトリクスチェックは、監視するサービスと同じホストで実行するのが最適です。しかし、このチェックの場合は、リモート接続をテストするために、監視する TCP サービスを実行していないホストから実行することをお勧めします。
 
 ### コンフィギュレーション
 
@@ -73,11 +96,11 @@ instances:
 
 構成オプション
 
-- `name` (必須) - サービスの名前。これは、タグ `instance:<name>` で指定します。注: このタグでは、すべてのスペースおよびダッシュがアンダースコアに変換されます。
+- `name` (必須) - サービスの名前。これは、タグ `instance:<name>` で指定します。**注**: すべてのスペースまたはダッシュはアンダースコアに変換されます。
 - `host` (必須) - チェックするホスト。これは、タグ `url:<host>:<port>` で指定します。
 - `port` (必須) - チェックするポート。これは、タグ `url:<host>:<port>` で指定します。
 - `timeout` (オプション) - チェックのタイムアウト。デフォルトは 10 秒です。
-- `collect_response_time` (オプション) - デフォルトは false。このオプションを true に設定しなかった場合、応答時間メトリクスは収集されません。これを true に設定した場合は、メトリクス `network.tcp.response_time` が返されます。
+- `collect_response_time` (オプション) - デフォルトは false で、この場合、応答時間メトリクスは収集されません。これを true に設定した場合は、メトリクス `network.tcp.response_time` が返されます。
 - `tags` (オプション) - メトリクスに割り当てるタグ。
 
 [Agent を再起動][3]すると、Datadog への TCP サービスチェックと応答時間の送信が開始されます。
@@ -120,13 +143,15 @@ TCP チェックには、イベントは含まれません。
 {{< get-service-checks-from-git "tcp_check" >}}
 
 
+**注:** このサービスチェックにアラートを設定するには、[ネットワークモニター][4]を作成します。
+
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
-
+ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/tcp_check/images/netgraphs.png
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[4]: https://docs.datadoghq.com/ja/help/
+[4]: https://docs.datadoghq.com/ja/monitors/monitor_types/network/?tab=checkalert
+[5]: https://docs.datadoghq.com/ja/help/

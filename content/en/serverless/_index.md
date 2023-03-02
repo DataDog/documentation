@@ -9,87 +9,45 @@ aliases:
   - /tracing/serverless_functions/datadog_apm
   - /integrations/amazon_lambda/docs.datadoghq.com/serverless/
 further_reading:
+- link: "https://app.datadoghq.com/release-notes?category=Serverless"
+  tag: "Release Notes"
+  text: "Check out the latest Serverless releases! (App login required)."
 - link: "https://www.datadoghq.com/state-of-serverless"
   tag: "Blog"
   text: "The State of Serverless"
-- link: "/integrations/amazon_xray/"
+- link: "/serverless/installation/"
   tag: "Documentation"
-  text: "AWS X-Ray Integration"
-- link: "/integrations/amazon_lambda/"
-  tag: "Documentation"
-  text: "AWS Lambda Integration"
-- link: "https://www.datadoghq.com/blog/monitoring-lambda-containers/"
+  text: "Installing Serverless monitoring"
+- link: "https://www.datadoghq.com/blog/azure-container-apps/"
   tag: "Blog"
-  text: "Monitor AWS Lambda functions deployed using container images"
-- link: "https://www.datadoghq.com/blog/manage-serverless-logs-datadog/"
-  tag: "Blog"
-  text: "Best practices for collecting and managing serverless logs"
-- link: "https://www.datadoghq.com/blog/aws-serverless-application-design/"
-  tag: "Blog"
-  text: "Designing production-ready AWS serverless applications"
-- link: "https://www.datadoghq.com/blog/well-architected-serverless-applications-best-practices/"
-  tag: "Blog"
-  text: "Best practices for building serverless applications that follow AWS's Well-Architected Framework"
+  text: "Monitor Azure Container Apps with Datadog"
 ---
 
 {{< vimeo 543362476 >}}
 
+<br/>
  
 <div class="alert alert-info">Make sure to check out discussions going on in the <a href="https://datadoghq.slack.com/archives/CFDPB83M4">#serverless</a> channel in the <a href="https://chat.datadoghq.com/">Datadog Slack community</a>.</div>
 
 [Datadog Serverless Monitoring][1] provides full visibility into all of the managed services that power your serverless applications by bringing together real-time metrics, logs and traces from your serverless compute as well as related fully-managed APIs, queues, streams and data stores.
 
-The following section outlines Datadog's solution for monitoring AWS serverless applications and Lambda functions. You can also learn more about support for monitoring [Azure serverless][7] and [Google serverless][8] applications.
+Datadog provides solutions for monitoring [AWS Lambda](#aws-lambda), [Azure App Service](#azure-app-service), [Azure Container Apps](#azure-container-apps), and [Google Cloud Run](#google-cloud-run).
 
-## Quick start
+### AWS Lambda
 
-If you are new to Datadog, you can get started by [signing up for a Datadog account][5], then following the instructions for [installing Datadog's Lambda Extension][6]. These steps configure your Lambda functions to send real-time metrics, logs, and traces to Datadog:
+[Serverless Monitoring for AWS Lambda][2] enables you to correlate high-level metrics from AWS resources with those of Lambda functions, so you can quickly spot issues and start your investigation.
 
-{{< img src="serverless/aws-fully-managed-services-serverless-monitoring-hero.png" alt="Datadog Serverless Monitoring"  style="width:100%;" >}}
+[Enhanced Lambda metrics][3], which appear in Datadog with the prefix `aws.lambda.enhanced`, are available at second granularity and in near real time. You can use enhanced Lambda metrics for alerts or SLOs on cold starts, estimated AWS costs, timeouts, out-of-memory errors, and memory usage across all of your Lambda functions.
 
-## Installation instructions
+With [Distributed Tracing][4], you can connect your serverless traces to metrics for a context-rich picture of your application's performance. The Datadog Python, Node.js, Ruby, Go, Java, and .NET tracing libraries support distributed tracing for AWS Lambda.
 
-For more detailed installation instructions, select the Lambda runtime below for instructions to instrument your serverless application:
-
-{{< partial name="serverless/getting-started-languages.html" >}}
-
-## Explore Datadog Serverless Monitoring
-
-### Monitor your entire serverless stack in the Serverless view
-
-The Serverless view enables you to correlate high-level metrics from AWS resources with those of Lambda functions, so you can quickly spot issues and start your investigation. 
-
-By default, the Serverless view groups your serverless resources by service to help you visualize how each part of your application is performing. For each service, you can see the functions that belong to it, along with the resources (Amazon API Gateway, SNS, SQS, DynamoDB, S3, EventBridge, Kinesis) that invoked them.
-
-{{< img src="serverless/serverless-view-hero.jpeg" alt="Datadog Serverless Monitoring"  style="width:100%;" >}}
-
-### Resolve AWS Lambda function failures faster by monitoring invocation payloads
-
-Datadog automatically collects function requests and responses for all of your function invocations, providing key information that can help troubleshoot issues. For example, if you’re notified that one of your Lambda functions is experiencing failures, you can analyze relevant request payloads to check for missing parameters, mistyped resource addresses, or other misconfigurations that may be behind the failures.
-
-By identifying misconfigurations in failing requests, you can more easily reproduce issues in your development environment—and then run tests to verify your bug fixes.
-
-{{< img src="serverless/lambda_payload_hero.jpeg" alt="Datadog Serverless Monitoring"  style="width:100%;" >}}
-
-### Real-time metrics for alerting on issues across your Lambda function environment
-
-Datadog's enhanced Lambda metrics, which appear in Datadog with the prefix `aws.lambda.enhanced`, are available at second granularity and in near real time. You can use enhanced Lambda metrics for alerts or SLOs on cold starts, estimated AWS costs, timeouts, out-of-memory errors, and memory usage across all of your Lambda functions. This enables you to view performance issues in your serverless environments as they occur and troubleshoot without delay. 
-
-{{< img src="serverless/serverless_enhanced_metrics.jpeg" alt="Datadog Serverless Monitoring"  style="width:100%;" >}}
-
-### Monitor serverless configuration changes with deployment tracking
-
-Easily correlate serverless code, configuration, and deployment changes with metrics, traces, and logs from your functions for real-time insight into how these changes may affect the health and performance of your applications.
-
-{{< img src="serverless/serverless_deployment_tracking.jpeg" alt="Datadog Serverless Monitoring"  style="width:100%;" >}}
-
-## Other serverless clouds
+[Deployment Tracking][5] helps you to correlate serverless code, configuration, and deployment changes with metrics, traces, and logs from your functions for real-time insight into how these changes may affect the health and performance of your applications.
 
 ### Azure App Service
 
-The Datadog extension for Azure App Service provides tracing capabilities for Azure Web Apps. 
+The [Datadog extension for Azure App Service][6] provides tracing capabilities for Azure Web Apps. 
 
-Use the [Azure App Service view][2] to:
+Use the [Azure App Service view][7] to:
 
 - Quickly identify apps with high latency or errors
 
@@ -99,21 +57,32 @@ Use the [Azure App Service view][2] to:
 
 - Map the apps running on your App Service Plans to identify apps that may be impacting costs or performance
 
-The Datadog extension for Azure App Service provides tracing capabilities for Azure Web Apps. For more information about setting up tracing in Azure, see the [Azure App Service Extension documentation][3].
+The Datadog extension for Azure App Service provides tracing capabilities for Azure Web Apps. For more information about setting up tracing in Azure, see [Azure App Service][6].
 
-### Google Cloud Functions
+### Azure Container Apps
 
-Google Cloud Functions is a lightweight, event-based, asynchronous compute solution that allows you to create small, single-purpose functions. To monitor serverless functions running on Google Cloud Platform, enable the [Google Cloud Platform integration][4].
+Azure Container Apps is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Container Apps through the [Azure integration][8]. 
+
+Datadog also provides a solution, now in beta, for [instrumenting your Container Apps applications][9] with a purpose-built Agent to enable tracing, custom metrics, and direct log collection.
+
+### Google Cloud Run
+
+Google Cloud Run is a lightweight, event-based, asynchronous compute solution that allows you to create small, single-purpose functions. To monitor serverless functions running on Google Cloud Platform, enable the [Google Cloud Platform integration][10].
+
+Datadog also provides a solution, now in public beta, for [instrumenting your Cloud Run applications][11] with a purpose-built Agent to enable tracing, custom metrics, and direct log collection.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: http://app.datadoghq.com/functions
-[2]: https://app.datadoghq.com/functions?cloud=azure&config_serverless-azure-app=true&group=service
-[3]: /infrastructure/serverless/azure_app_services/#overview
-[4]: /integrations/google_cloud_platform/
-[5]: https://app.datadoghq.com/signup/
-[6]: https://app.datadoghq.com/signup/agent#lambda
-[7]: /serverless/#azure-app-service
-[8]: /serverless/#google-cloud-functions
+[2]: /serverless/aws_lambda
+[3]: /serverless/enhanced_lambda_metrics
+[4]: /serverless/distributed_tracing
+[5]: /serverless/deployment_tracking
+[6]: /infrastructure/serverless/azure_app_services/#overview
+[7]: https://app.datadoghq.com/functions?cloud=azure&config_serverless-azure-app=true&group=service
+[8]: /integrations/azure/#log-collection
+[9]: /serverless/azure_container_apps
+[10]: /integrations/google_cloud_platform/
+[11]: /serverless/google_cloud_run

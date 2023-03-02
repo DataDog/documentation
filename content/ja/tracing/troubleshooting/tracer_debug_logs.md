@@ -1,10 +1,15 @@
 ---
-title: トレーサーデバッグログ
+further_reading:
+- link: /tracing/troubleshooting/connection_errors/
+  tag: ドキュメント
+  text: APM 接続エラーのトラブルシューティング
 kind: Documentation
+title: トレーサーデバッグログ
 ---
+
 ## デバッグモードを有効にする
 
-Datadog デバッグ設定を使用して、問題を診断したり、トレースデータを監査したりできます。ロガーに送信されるイベントの数が増えるため、実稼働システムでデバッグモードを有効にすることはお勧めできません。デバッグ目的でのみ慎重に使用してください。
+Datadog デバッグ設定を使用して、問題を診断したり、トレースデータを監査したりできます。ロガーに送信されるイベントの数が増えるため、実稼働システムでデバッグモードを有効にすることはお勧めできません。デバッグモードはデバッグ目的でのみ使用してください。
 
 <mrk mid="28" mtype="seg"/><mrk mid="29" mtype="seg"/>
 
@@ -16,7 +21,7 @@ Datadog Java トレーサーのデバッグモードを有効にするには、J
 
 **注**: Datadog Java トレーサーは SL4J SimpleLogger を実装するため、[そのすべての設定を適用できます][1]。例えば、専用のログファイルにロギングするには次のようにします。
 ```
--Ddatadog.slf4j.simpleLogger.logFile=<NEW_LOG_FILE_PATH>`
+-Ddatadog.slf4j.simpleLogger.logFile=<NEW_LOG_FILE_PATH>
 ```
 
 
@@ -25,20 +30,44 @@ Datadog Java トレーサーのデバッグモードを有効にするには、J
 
 {{< programming-lang lang="python" >}}
 
-Datadog Python トレーサーのデバッグモードを有効にするには、`ddtrace-run` を使用するときに環境変数 `DATADOG_TRACE_DEBUG=true` を設定します。
-<p></p>
+Datadog Python Tracer のデバッグモードを有効にする手順は、アプリケーションが使用しているトレーサーのバージョンに依存します。該当するシナリオを選択してください。
+
+### シナリオ 1: ddtrace バージョン 1.3.2 以上
+
+1. デバッグモードを有効にするには: `DD_TRACE_DEBUG=true`
+
+2. デバッグログをログファイルにルーティングするには、 `DD_TRACE_LOG_FILE` にトレーサーのログを書き込むファイル名を、現在の作業ディレクトリからの相対パスで設定します。例えば、`DD_TRACE_LOG_FILE=ddtrace_logs.log` とします。
+   デフォルトでは、ファイルサイズは 15728640 バイト (約 15MB) で、1 つのバックアップログファイルが作成されます。デフォルトのログファイルのサイズを大きくするには、`DD_TRACE_LOG_FILE_SIZE_BYTES` の設定でサイズをバイト単位で指定します。
+
+3. ログをコンソールにルーティングするには、**Python 2** アプリケーションでは、 `logging.basicConfig()` 等を構成してください。**Python 3** のアプリケーションでは、ログは自動的にコンソールに送られます。
+
+
+### シナリオ 2: ddtrace バージョン 1.0.x〜1.2.x
+
+1. デバッグモードを有効にするには: `DD_TRACE_DEBUG=true`
+
+2. **Python 2 または Python 3** アプリケーションでログをコンソールにルーティングするには、`logging.basicConfig()` を構成するか、`DD_CALL_BASIC_CONFIG=true` を使用します。
+
+### シナリオ 3: ddtrace バージョン 0.x
+
+1. デバッグモードを有効にするには: `DD_TRACE_DEBUG=true`
+
+2. **Python 2 または Python 3** アプリケーションでログをコンソールにルーティングするには、`logging.basicConfig()` を構成するか、`DD_CALL_BASIC_CONFIG=true` を使用します。
+
+### シナリオ 4: 標準のロギングライブラリを使用した、アプリケーションコードでのデバッグログの構成
+
+どのバージョンの ddtrace でも、トレーサー環境変数 `DD_TRACE_DEBUG` を設定する代わりに、標準ライブラリ `logging` を直接使用して、アプリケーションコード内でデバッグログを有効にすることができます。
+
+```
+log = logging.getLogger("ddtrace.tracer")
+log.setLevel(logging.DEBUG)
+```
 
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby" >}}
 
-Datadog Rubyトレーサーのデバッグモードを有効にするには、トレーサー初期化構成で `debug` オプションを `true` に設定します。
-
-```ruby
-Datadog.configure do |c|
-  c.tracer debug: true
-end
-```
+Datadog Ruby トレーサーのデバッグモードを有効にするには、環境変数 `DD_TRACE_DEBUG=true` を設定します。
 
 **アプリケーションログ**
 
@@ -48,18 +77,14 @@ Datadog クライアントのログメッセージは、他のメッセージと
 
 トレーサーの `log` 属性を使用し、デフォルトロガーを上書きしてカスタムロガーに置き換えることができます。
 
-<mrk mid="45" mtype="seg">
-
 ```ruby
-f = File.new(&quot;&lt;FILENAME&gt;.log&quot;, &quot;w+&quot;)           # ログメッセージが書き込まれる場所
+f = File.new("<FILENAME>.log", "w+")           # ログメッセージが書き込まれる場所
 Datadog.configure do |c|
-  c.tracer log:</mrk> <mrk mid="46" mtype="seg">Logger.new(f)                 # デフォルトのトレーサーの上書き
+  c.logger.instance = Logger.new(f)                 # デフォルトのトレーサーのオーバーライド
 end
 
-Datadog::Tracer.log.info { &quot;this is typically called by tracing code&quot; }
+Datadog::Tracing.logger.info { "this is typically called by tracing code" }
 ```
-
-</mrk>
 
 詳細については、[API に関するドキュメント][1]を参照してください。
 
@@ -86,58 +111,46 @@ func main() {
 
 {{< programming-lang lang="nodejs" >}}
 
-Datadog Node.js トレーサーのデバッグモードを有効にするには、`init` 中にそれを有効にします。
+Datadog Node.js トレーサーのデバッグモードを有効にするには、環境変数 `DD_TRACE_DEBUG=true` を使用します。
 
-```javascript
-const tracer = require('dd-trace').init({
-  debug: true
-})
-```
+**注:** 2.X 以下のバージョンでは、トレーサーの初期化時にデバッグモードをプログラム的に有効にすることができましたが、これはもうサポートされていません。
 
 **アプリケーションログ**
 
-デフォルトでは、このライブラリからのログは無効です。ログに送信するデバッグ情報やエラーを取得するには、[init()][1] メソッドで `debug` オプションを `true` に設定します。
-
-トレーサーは、デバッグ情報を `console.log()` と `console.error()` に記録します。この動作は、カスタムロガーをトレーサーに渡すことで変更できます。ロガーは、それぞれメッセージとエラーを処理するための `debug()` メソッドと `error()` メソッドを含む必要があります。
+デバッグモード中、トレーサーは、デバッグ情報を `console.log()` と `console.error()` に記録します。この動作は、カスタムロガーをトレーサーに渡すことで変更できます。ロガーは、それぞれメッセージとエラーを処理するための `debug()` メソッドと `error()` メソッドを含む必要があります。
 
 例:
-
-<mrk mid="59" mtype="seg">
 
 ```javascript
 const bunyan = require('bunyan')
 const logger = bunyan.createLogger({
-  name:</mrk> <mrk mid="60" mtype="seg">'dd-trace',
-  level:</mrk> <mrk mid="61" mtype="seg">'trace'
+  name: 'dd-trace',
+  level: 'trace'
 })
 
 const tracer = require('dd-trace').init({
-  logger:</mrk> <mrk mid="62" mtype="seg">{
-    debug: message =&gt; logger.trace(message),
-    error: err =&gt; logger.error(err)
-  },
-  debug: true
+  logger: {
+    debug: message => logger.trace(message),
+    error: err => logger.error(err)
+  }
 })
 ```
 
-</mrk>
-
 次に、Agent ログをチェックして、問題に関する詳細情報があるか確認します。
 
-* トレースが Agent に問題なく送信されると、ログエントリ、`Response from the Agent: OK` が表示されます。これにより、トレーサーが正常に機能していることと、問題が Agent 自体にあることが分かります。詳細は、[Agent トラブルシューティングガイド][2]を参照してください。
+* トレースが Agent に問題なく送信されると、ログエントリ、`Response from the Agent: OK` が表示されます。これにより、トレーサーが正常に機能していることと、問題が Agent 自体にあることが分かります。詳細は、[Agent トラブルシューティングガイド][1]を参照してください。
 
-* Agent からエラーが報告された場合 (または、Agent に到達できなかった場合)、`Error from the Agent` ログエントリが表示されます。この場合、ネットワーク構成を検証して、Agent に確実に到達できるようにします。ネットワークが機能していて、エラーが Agent から送信されたと確信できる場合は、[Agent トラブルシューティングガイド][2]を参照してください。
+* Agent からエラーが報告された場合 (または、Agent に到達できなかった場合)、`Error from the Agent` ログエントリが表示されます。この場合、ネットワーク構成を検証して、Agent に確実に到達できるようにします。ネットワークが機能していて、エラーが Agent から送信されたと確信できる場合は、[Agent トラブルシューティングガイド][1]を参照してください。
 
-<mrk mid="71" mtype="seg"/><mrk mid="72" mtype="seg"/>
+これらのログエントリのいずれも存在しない場合、Agent にリクエストが送信されていないことになり、トレーサーがアプリケーションをインスツルメントしていないことを意味します。この場合、[Datadog サポートに連絡][2]して、関連するログエントリを[フレア][3]で提供してください。
 
-トレーサー設定の詳細については、[API ドキュメント][5] を参照してください。
+トレーサー設定の詳細については、[API ドキュメント][4]を参照してください。
 
 
-[1]: https://datadog.github.io/dd-trace-js/Tracer.html#init
-[2]: /ja/agent/troubleshooting/
-[3]: /ja/help/
-[4]: /ja/agent/troubleshooting/#send-a-flare
-[5]: https://datadog.github.io/dd-trace-js/#tracer-settings
+[1]: /ja/agent/troubleshooting/
+[2]: /ja/help/
+[3]: /ja/agent/troubleshooting/#send-a-flare
+[4]: https://datadog.github.io/dd-trace-js/#tracer-settings
 {{< /programming-lang >}}
 
 {{< programming-lang lang=".NET" >}}
@@ -158,6 +171,7 @@ GlobalSettings.SetDebugEnabled(true);
 |----------|-------------------------------------------|
 | Windows  | `%ProgramData%\Datadog .NET Tracer\logs\` |
 | Linux    | `/var/log/datadog/dotnet/`                |
+| Azure App Service | `%AzureAppServiceHomeDirectory%\LogFiles\datadog`|
 
 **注**: Linux では、デバッグモードを有効にする前にログディレクトリを作成する必要があります。
 
@@ -235,45 +249,32 @@ make install
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-さらに表示するには、`DD_LOGGING_RATE_LIMIT=0` を含めます。
+Python トレーサーが生成するログは、ロギングハンドラ名 `ddtrace` を持ちます。
 
 **トレースが生成されました:**
 
 ```shell
-<YYYY-MM-DD> 16:01:11,280 DEBUG [ddtrace.tracer] [tracer.py:470] - writing 8 spans (enabled:True)
+<YYYY-MM-DD> 19:51:22,262 DEBUG [ddtrace.internal.processor.trace] [trace.py:211] - trace <TRACE ID> has 8 spans, 7 finished
 ```
 
 **Python トレーサーによって生成されたスパン:**
 
 ```text
-<YYYY-MM-DD> 16:01:11,280 DEBUG [ddtrace.tracer] [tracer.py:472] -
-      name flask.request
-        id <スパン id>
-  trace_id <トレース id>
- parent_id <親 id>
-   service flask
-  resource GET /
-      type http
-     start <開始時間>
-       end <終了時間>
-  duration 0.004759s
-     error 0
-      tags
-           flask.endpoint:index
-           flask.url_rule:/
-           flask.version:1.1.1
-           http.method:GET
-           http.status_code:200
-           http.url:http://0.0.0.0:5050/
-           system.pid:25985
-
+<YYYY-MM-DD> 19:51:22,251 DEBUG [ddtrace.tracer] [tracer.py:715] - finishing span name='flask.process_response' id=<SPAN ID> trace_id=<TRACE ID>  parent_id=<PARENT ID> service='flask' resource='flask.process_response' type=None start=1655495482.2478693 end=1655495482.2479873 duration=0.000118125 error=0 tags={} metrics={} (enabled:True)
+0.0:5050/
 ```
 
 
 **トレースが Datadog Agent に送信されました:**
 
-```shell
-<YYYY-MM-DD> 16:01:11,637 DEBUG [ddtrace.api] [api.py:236] - reported 1 traces in 0.00207s
+```text
+<YYYY-MM-DD> 19:59:19,657 DEBUG [ddtrace.internal.writer] [writer.py:405] - sent 1.57KB in 0.02605s to http://localhost:8126/v0.4/traces
+```
+
+**Datadog Agent へのトレース送信に失敗した:**
+
+```text
+<YYYY-MM-DD> 19:51:23,249 ERROR [ddtrace.internal.writer] [writer.py:567] - failed to send traces to Datadog Agent at http://localhost:8126/v0.4/traces
 ```
 
 {{< /programming-lang >}}
@@ -413,6 +414,10 @@ YYYY-MM-DD HH:MM:SS.<整数> +00:00 [ERR] An error occurred while sending traces
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}
+
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/help/
 [2]: /ja/agent/troubleshooting/#send-a-flare

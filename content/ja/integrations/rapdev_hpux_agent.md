@@ -1,44 +1,73 @@
 ---
-"assets":
-  "dashboards": {}
-  "metrics_metadata": metadata.csv
-  "monitors": {}
-  "service_checks": assets/service_checks.json
-"author":
-  "homepage": "https://www.rapdev.io"
-  "name": RapDev.io
-"categories":
+app_id: rapdev-hpux-agent
+app_uuid: 5e611b0d-a099-4823-a4ba-e42b1012b3b5
+assets:
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: datadog.marketplace.rapdev.hpux_agent
+      metadata_path: metadata.csv
+      prefix: rapdev.hpux_agent.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: RapDev Solaris Agent
+author:
+  homepage: https://www.rapdev.io
+  name: RapDev
+  sales_email: ddsales@rapdev.io
+  support_email: support@rapdev.io
+  vendor_id: rapdev
+categories:
 - マーケットプレイス
-"creates_events": false
-"ddtype": "check"
-"dependencies": []
-"display_name": "RapDev Solaris Agent"
-"draft": false
-"git_integration_title": "rapdev_hpux_agent"
-"guid": "34529abf8-de7a-461e-83ef-0272a07d1ab8"
-"integration_id": "rapdev-hpux-agent"
-"integration_title": "RapDev Solaris Agent"
-"integration_version": ""
-"is_public": true
-"kind": "integration"
-"maintainer": "integrations@rapdev.io"
-"manifest_version": "1.0.0"
-"metric_prefix": "rapdev.hpux_agent."
-"metric_to_check": "datadog.marketplace.rapdev.hpux_agent"
-"name": "rapdev_hpux_agent"
-"pricing":
-- "billing_type": tag_count
-  "metric": datadog.marketplace.rapdev.hpux_agent
-  "tag": ホスト
-  "unit_label": HP-UX Agent
-  "unit_price": !!float "40.0"
-"public_title": "RapDev Solaris Agent"
-"short_description": "hppa と itanium の両方の HP-UX 11.31 メトリクスを提供するシステム Agent"
-"support": "パートナー"
-"supported_os": []
-"terms":
-  "eula": assets/EULA.pdf
-  "legal_email": ddsales@rapdev.io
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: rapdev_hpux_agent
+integration_id: rapdev-hpux-agent
+integration_title: HP-UX Agent
+integration_version: ''
+is_public: true
+kind: integration
+legal_terms:
+  eula: assets/EULA.pdf
+manifest_version: 2.0.0
+name: rapdev_hpux_agent
+oauth: {}
+pricing:
+- billing_type: tag_count
+  includes_assets: true
+  metric: datadog.marketplace.rapdev.hpux_agent
+  product_id: hpux-agent
+  short_description: ホスト 1 個あたりの単価
+  tag: ホスト
+  unit_label: HP-UX Agent
+  unit_price: 40
+public_title: HP-UX Agent
+short_description: hppa および itanium の HP-UX 11.31 メトリクスを提供するシステム Agent
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Marketplace
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: hppa および itanium の HP-UX 11.31 メトリクスを提供するシステム Agent
+  media:
+  - caption: インフラストラクチャーリスト
+    image_url: images/1.png
+    media_type: image
+  - caption: ホストメトリクス
+    image_url: images/2.png
+    media_type: image
+  - caption: ログ
+    image_url: images/3.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: HP-UX Agent
+  uninstallation: README.md#Uninstallation
 ---
 
 
@@ -48,29 +77,20 @@ HP-UX Agent を使用すると、Datadog 内のシステムメトリクスを収
 
 HP-UX Agent は、Datadog インフラストラクチャーリストをサポートするために必要なホストメタデータを提供し、組織が他のサポートされている Datadog ホストオペレーティングシステムと同様の HP-UX ホストシステムで作業できるようにします。
 
-HP-UX Agent は、ネイティブ Agent と同じ URL とポートを使用します。HP-UX Agent は現在、コアインフラストラクチャーメトリクスとログ追跡をサポートしています。Agent チェック、インテグレーション、またはサービスチェックはサポートしていません。
-
-### HP-UX Agent のスクリーンショット
-
-{{< img src="marketplace/rapdev_hpux_agent/images/1.png" alt="スクリーンショット 1" >}}
-
-{{< img src="marketplace/rapdev_hpux_agent/images/2.png" alt="スクリーンショット 2" >}}
-
-{{< img src="marketplace/rapdev_hpux_agent/images/3.png" alt="スクリーンショット 3" >}}
+HP-UX Agent は、ネイティブ Agent と同じ URL とポートを使用します。HP-UX Agent は現在、コアインフラストラクチャーメトリクス、プロセスチェック、ログ追跡をサポートしています。カスタム Agent チェック、インテグレーション、またはサービスチェックはサポートしていません。
 
 ## サポート
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 
- - メール: integrations@rapdev.io 
- - チャット: [RapDev.io/products](https://rapdev.io/products)
+ - メール: support@rapdev.io 
+ - チャット: [rapdev.io](https://www.rapdev.io/#Get-in-touch)
  - 電話: 855-857-0222 
 
 ---
 ボストンより ❤️ を込めて
 
-*お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:integrations@rapdev.io)からメッセージをお送りいただければ、導入をサポートいたします！*
+*お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:support@rapdev.io)からメッセージをお送りいただければ、導入をサポートいたします！*
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、[こちらをクリック](https://app.datadoghq.com/marketplace/app/rapdev-hpux-agent/pricing) してください。
-
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-hpux-agent" target="_blank">こちらをクリック</a>してください。

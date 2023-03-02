@@ -1,39 +1,62 @@
 ---
+app_id: システム
+app_uuid: 43bff15c-c943-4153-a0dc-25bb557ac763
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: system.processes.cpu.pct
+      metadata_path: metadata.csv
+      prefix: system.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: プロセス
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-  - os & system
-creates_events: false
-ddtype: check
+- os & system
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/process/README.md
-display_name: プロセス
+- https://github.com/DataDog/integrations-core/blob/master/process/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: プロセス
-guid: 1675eced-b435-464a-8f84-f65e438f838e
 integration_id: システム
 integration_title: プロセス
+integration_version: 2.3.2
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: system.
-metric_to_check: system.processes.cpu.pct
+manifest_version: 2.0.0
 name: プロセス
-public_title: Datadog-Processes インテグレーション
+oauth: {}
+public_title: プロセス
 short_description: 実行中のプロセスのメトリクスをキャプチャし、ステータスを監視します。
-support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::OS & System
+  configuration: README.md#Setup
+  description: 実行中のプロセスのメトリクスをキャプチャし、ステータスを監視します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: プロセス
 ---
+
+
+
 ## 概要
 
 プロセスチェックを使用して、以下のことができます。
@@ -45,53 +68,54 @@ supported_os:
 
 ### インストール
 
-プロセスチェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
+プロセスチェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
 ### コンフィギュレーション
 
 他のチェックとは異なり、デフォルトのプロセスチェックは、特に役立つ監視を行いません。どのプロセスをどのように監視するかを構成する必要があります。
 
-1. 標準的なデフォルトのチェックコンフィギュレーションはありませんが、以下に SSH/SSHD 処理を監視する `process.d/conf.yaml` の例を示します。使用可能なすべての構成オプションの詳細については、[サンプル process.d/conf.yaml][2] を参照してください。
 
-  ```yaml
+1. 標準的なデフォルトのチェックコンフィギュレーションはありませんが、以下に SSH/SSHD 処理を監視する `process.d/conf.yaml` の例を示します。使用可能なすべての構成オプションの詳細については、[サンプル process.d/conf.yaml][3] を参照してください。
+
+```yaml
   init_config:
 
   instances:
 
-  ## @param name - string - required
-  ## Used to uniquely identify your metrics as they are tagged with this name in Datadog.
+  ## @param name - 文字列 - 必須
+  ## Datadog でこの名前でタグされるため、メトリクスを一意に識別するために使用されます。
   #
         - name: ssh
 
-  ## @param search_string - list of strings - optional
-  ## If one of the elements in the list matches, it returns the count of
-  ## all the processes that match the string exactly by default. Change this behavior with the
-  ## parameter `exact_match: false`.
+  ## @param search_string - 文字列のリスト - オプション
+  ## リスト内の要素の 1 つが一致したら、文字列に完全一致する
+  ## すべてのプロセス数をデフォルトで返します。この動作は、パラメーター
+  ## `exact_match: false` で変更します。
   ##
-  ## Note: One and only one of search_string, pid or pid_file must be specified per instance.
+  ## 注: search_string、pid、または pid_file のうち 1 つのみをインスタンスごとに正確に指定する必要があります。
   #
           search_string:
             - ssh
             - sshd
-   ```
+```
 
-   プロセスメトリクスによっては、Datadog コレクターを監視対象プロセスと同じユーザーとして実行するか、特権的なアクセスを取得する必要があります。前者のオプションが望ましくなく、Datadog Collector を `root` として実行することを避けるには、`try_sudo` オプションを使用して、プロセスチェックが `sudo` を使用してこのメトリクスを収集するようにします。現時点では、Unix プラットフォームの `open_file_descriptors` メトリクスだけがこの設定を利用しています。注: これが動作するには、適切な sudoers ルールを構成する必要があります。
+    プロセスメトリクスによっては、Datadog コレクターを監視対象プロセスと同じユーザーとして実行するか、特権的なアクセスを取得する必要があります。前者のオプションが望ましくなく、Datadog Collector を `root` として実行することを避けるには、`try_sudo` オプションを使用して、プロセスチェックが `sudo` を使用してこのメトリクスを収集するようにします。現時点では、Unix プラットフォームの `open_file_descriptors` メトリクスだけがこの設定を利用しています。注: これが動作するには、適切な sudoers ルールを構成する必要があります。
 
    ```text
    dd-agent ALL=NOPASSWD: /bin/ls /proc/*/fd/
    ```
 
-2. [Agent を再起動します][3]。
+2. [Agent を再起動します][4]。
 
 ### 検証
 
-[Agent の `status` サブコマンドを実行][4]し、Checks セクションで `process` を探します。
+[Agent の status サブコマンド][5]を実行し、Checks セクションで `process` を探します。
 
 ### メトリクスに関するメモ
 
 **注**: Linux または OSX では一部のメトリクスは使用できません。
 
-- Agent が読み取るファイル (`/proc//io`) はプロセスのオーナーのみ読み取り可能であるため、Process I/O メトリクスは Linux または OSX では使用**できません**。詳しくは、[Agent FAQ をご参照ください][5]。
+- Agent が読み取るファイル (`/proc//io`) はプロセスのオーナーのみ読み取り可能であるため、Process I/O メトリクスは Linux または OSX では使用**できません**。詳しくは、[Agent FAQ をご参照ください][6]。
 - `system.cpu.iowait` は、Windows では使用できません。
 
 すべてのメトリクスは process.yaml で構成された `instance` ごとに収集され、`process_name:<instance_name>` のタグが付きます。
@@ -117,18 +141,19 @@ supported_os:
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
 ## その他の参考資料
 
-プロセスのリソース消費を監視する方法 (または理由) について理解するには、この[ブログ記事][9]を参照してください。
+プロセスのリソース消費を監視する方法 (または理由) について理解するには、この[ブログ記事][10]を参照してください。
 
 [1]: https://docs.datadoghq.com/ja/monitors/create/types/process_check/?tab=checkalert
-[2]: https://github.com/DataDog/integrations-core/blob/master/process/datadog_checks/process/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[5]: https://docs.datadoghq.com/ja/agent/faq/why-don-t-i-see-the-system-processes-open-file-descriptors-metric/
-[6]: https://github.com/DataDog/integrations-core/blob/master/process/metadata.csv
-[7]: https://github.com/DataDog/integrations-core/blob/master/process/assets/service_checks.json
-[8]: https://docs.datadoghq.com/ja/help/
-[9]: https://www.datadoghq.com/blog/process-check-monitoring
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://github.com/DataDog/integrations-core/blob/master/process/datadog_checks/process/data/conf.yaml.example
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/ja/agent/faq/why-don-t-i-see-the-system-processes-open-file-descriptors-metric/
+[7]: https://github.com/DataDog/integrations-core/blob/master/process/metadata.csv
+[8]: https://github.com/DataDog/integrations-core/blob/master/process/assets/service_checks.json
+[9]: https://docs.datadoghq.com/ja/help/
+[10]: https://www.datadoghq.com/blog/process-check-monitoring
