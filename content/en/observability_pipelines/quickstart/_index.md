@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-Observability Pipelines is a control plane that enables you to monitor, build, and manage all of your Observability Pipelines Worker deployments at scale. The Observability Pipelines Worker collects, processes, and routes logs and metrics from any source to any destination.
+In Datadog, you can build, and manage all of your Observability Pipelines Worker deployments at scale. The Observability Pipelines Worker collects, processes, and routes logs and metrics from any source to any destination.
 
 This guide walks you through a simple deployment of Observability Pipelines to get you up and running with Datadog's recommended settings.
 
