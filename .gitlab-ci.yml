@@ -263,6 +263,7 @@ build_live:
     - in-isolation create_artifact_ignored
     - in-isolation create_artifact_cached
     - remove_static_from_repo
+    - ci_pass_step "${CI_PROJECT_NAME}-${CI_JOB_NAME}" # run at completion of job, if job fails at any point prior this won't run
   artifacts:
     when: on_success
     paths:
