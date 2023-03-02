@@ -46,7 +46,7 @@ further_reading:
 
 This guide provides an overview of the process for setting up the [AWS Integration](https://docs.datadoghq.com/integrations/amazon_web_services/) with multiple accounts within an AWS Organization.
 
-The Cloudformation StackSet template provided by Datadog automates the creation of the required IAM role and associated policies in every AWS account under an Organization or Organizational Unit (OU), and configures the accounts within Datadog, eliminating the need for manual setup. Once set up, the integration automatically starts collecting AWS metrics & events for you to start monitoring your infrastructure.
+The Cloudformation StackSet template provided by Datadog automates the creation of the required IAM role and associated policies in every AWS account under an Organization or Organizational Unit (OU), and configures the accounts within Datadog, eliminating the need for manual setup. Once set up, the integration automatically starts collecting AWS metrics and events for you to start monitoring your infrastructure.
 
 The Datadog Cloudformation StackSet performs the following steps:
 
