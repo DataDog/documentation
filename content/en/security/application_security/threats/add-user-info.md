@@ -266,8 +266,9 @@ Monitor authenticated requests by adding user information to the trace with the 
 This example shows how to set user monitoring tags and enable user blocking capability:
 
 ```python
-from ddtrace.appsec.trace_utils import is_user_blocked
+from ddtrace.appsec.trace_utils import should_block_user
 from ddtrace.appsec.trace_utils import block_request
+from ddtrace.appsec.trace_utils import block_request_if_user_blocked
 from ddtrace.contrib.trace_utils import set_user
 from ddtrace import tracer
 # Call set_user() to trace the currently authenticated user id
@@ -275,8 +276,11 @@ user_id = "some_user_id"
 set_user(tracer, user_id, name="John", email="test@test.com", scope="some_scope",
          role="manager", session_id="session_id", propagate=True)
 # Call is_user_blocked() to possibly block the authenticated user when in the denylist
-if is_user_blocked(user_id):
-    block_current_request()
+if should_block_user(user_id):
+    block_request()
+# Also the utility function that checks and blocks if needed:
+block_request_if_user_blocked(tracer, user_id)
+    block_request()
 ```
 
 {{< /programming-lang >}}
