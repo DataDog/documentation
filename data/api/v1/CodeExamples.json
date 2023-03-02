@@ -288,6 +288,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_2800096921",
+      "description": "Create a new timeseries widget with ci_pipelines data source"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_1307120899",
       "description": "Create a new timeseries widget with ci_tests data source"
     }
