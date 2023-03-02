@@ -1,40 +1,60 @@
 ---
+app_id: kernelcare
+app_uuid: 7bfd2b8a-d461-4890-aeba-f1e9eab617c7
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: kernelcare.uptodate
+      metadata_path: metadata.csv
+      prefix: kernelcare.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: KernelCare
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: schvaliuk@cloudlinux.com
+  support_email: schvaliuk@cloudlinux.com
 categories:
 - security
-- OS & システム
-creates_events: false
-ddtype: check
+- os system
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/kernelcare/README.md
-display_name: KernelCare
+display_on_public_website: true
 draft: false
 git_integration_title: kernelcare
-guid: 8b35942d-40cd-4c86-b584-af1837ea67ca
 integration_id: kernelcare
 integration_title: KernelCare
 integration_version: 1.0.0
 is_public: true
 kind: integration
-maintainer: schvaliuk@cloudlinux.com
-manifest_version: 1.0.0
-metric_prefix: kernelcare.
-metric_to_check: kernelcare.uptodate
+manifest_version: 2.0.0
 name: kernelcare
-public_title: Datadog-KernelCare インテグレーション
+oauth: {}
+public_title: KernelCare
 short_description: KernelCare サーバーのアクティビティとステータスメトリクスを監視します。
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Security
+  - Category::OS System
+  configuration: README.md#Setup
+  description: KernelCare サーバーのアクティビティとステータスメトリクスを監視します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: KernelCare
 ---
 
 

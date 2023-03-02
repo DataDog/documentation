@@ -156,3 +156,6 @@ Datadog Marketplace を通じた Hardware Sentry のサブスクリプション�
 * パッチ
 
 ご契約後、お客様の組織に *Sentry Desk* のアカウント管理のための招待状が届きます。
+
+---
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/hardware-sentry" target="_blank">こちらをクリック</a>してください。

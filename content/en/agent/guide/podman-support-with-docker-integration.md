@@ -28,11 +28,12 @@ $ podman run -d --name dd-agent \
     gcr.io/datadoghq/agent:latest
 ```
 
-The two importants differences are:
+The two important differences are:
 * `-v /run/podman/podman.sock:/run/podman/podman.sock:ro` to mount the Podman socket instead of the Docker socket.
 * `-e DOCKER_HOST=unix:///run/podman/podman.sock` to configure the Agent communication with the Podman socket.
 
-
+When running Podman in daemonless mode, instead of these options, you must mount the directory where the Podman database is located, which is `/var/lib/containers` by default:
+* `-v /var/lib/containers/:/var/lib/containers/`.
 
 ## Known limitations
 

@@ -1,11 +1,12 @@
 import { initializeIntegrations } from './components/integrations';
-import { initializeSecurityRules } from './components/security-rules';
+import { initializeGroupedListings } from './components/grouped-item-listings';
 import { updateTOC, buildTOCMap, onScroll, closeMobileTOC } from './components/table-of-contents';
 import initCodeTabs from './components/codetabs';
 import configDocs from './config/config-docs';
 import { loadPage } from './components/async-loading';
 import { updateMainContentAnchors, gtag } from './helpers/helpers';
 import { getQueryParameterByName } from './helpers/browser';
+import {setMobileNav, closeMobileNav} from './components/mobile-nav'
 
 const { env } = document.documentElement.dataset;
 const { gaTag } = configDocs[env];
@@ -82,8 +83,8 @@ $(document).ready(function () {
     buildTOCMap();
     onScroll();
 
-    if (document.body.classList.value.includes('security_platform')) {
-        initializeSecurityRules();
+    if (document.querySelector('.js-group-header')) {
+        initializeGroupedListings();
     }
 
     if (document.body.classList.value.includes('integrations')) {
@@ -161,6 +162,15 @@ function getPathElement(event = null) {
         );
     }
 
+    // redirect support. if agent/aggregating agents is selected, highlight `observability_pipelines/production_deployment_overview/integrate_datadog_and_the_observability_pipelines_worker` in the sidenav.
+    if (path.includes('observability_pipelines/production_deployment_overview/integrate_datadog_and_the_observability_pipelines_worker')) {
+        const observabilityPipelineEl = document.querySelector('.side .nav-top-level > [data-path*="observability_pipelines"]');
+        sideNavPathElement = observabilityPipelineEl.nextElementSibling.querySelector(
+            '[data-path*="observability_pipelines/production_deployment_overview/integrate_datadog_and_the_observability_pipelines_worker"]'
+        );
+        mobileNavPathElement = sideNavPathElement;
+    }
+
     // if on a detailed integration page then make sure integrations is highlighted in nav
     if (document.getElementsByClassName('integration-labels').length) {
         sideNavPathElement = document.querySelector(
@@ -172,7 +182,7 @@ function getPathElement(event = null) {
     }
 
     // if security rules section that has links to hashes, #cat-workload-security etc. try and highlight correct sidenav
-    if (path.includes('security_platform/default_rules')) {
+    if (path.includes('security/default_rules')) {
         const ref = ((event) ? event.target.href : window.location.hash) || window.location.hash;
         if(ref) {
           sideNavPathElement = document.querySelector(
@@ -184,9 +194,18 @@ function getPathElement(event = null) {
         }
     }
 
+    if (path.includes('workflows/actions_catalog')) {
+      const workflowsEl = document.querySelector('.side .nav-top-level > [data-path*="workflows"]');
+      sideNavPathElement = workflowsEl.nextElementSibling.querySelector(
+          '[data-path*="workflows/actions_catalog"]'
+      );
+      mobileNavPathElement = sideNavPathElement;
+    }
+
     if (sideNavPathElement) {
         sideNavPathElement.classList.add('active');
         hasParentLi(sideNavPathElement);
+        scrollActiveNavItemToTop()
     }
 
     if (mobileNavPathElement) {
@@ -211,8 +230,9 @@ function closeNav(){
 
 function updateSidebar(event) {
     closeNav();
+    closeMobileNav();
     getPathElement(event);
-
+    setMobileNav();
     const isLi = event.target.nodeName === 'LI';
 
     if (isLi) {
@@ -369,6 +389,7 @@ window.addEventListener('click', (event) => {
 
 window.onload = function () {
     getPathElement();
+    setMobileNav();
 };
 
 // remove branch name from path
@@ -405,3 +426,24 @@ window.addEventListener(
     false
 );
 
+
+
+function scrollActiveNavItemToTop(){
+    // Scroll the open top level left nav item into view below Docs search input
+    if (document.querySelector('.sidenav:not(.sidenav-api)')) {
+        const headerHeight = document.querySelector('body .main-nav').style.height;
+        const padding = 200;
+        const maxHeight = document.documentElement.clientHeight - headerHeight - padding
+
+        // set max height of side nav.
+        document.querySelector('.sidenav-nav').style.maxHeight = `${maxHeight}px`
+
+        const leftSideNav = document.querySelector('.sidenav:not(.sidenav-api) .sidenav-nav');
+        const sideNavActiveMenuItem = leftSideNav.querySelector('li.open');
+
+        if (sideNavActiveMenuItem) {
+            const distanceToTop = sideNavActiveMenuItem.offsetTop;
+            leftSideNav.scrollTop = distanceToTop - 100;
+        }
+    }
+}

@@ -1,35 +1,55 @@
 ---
+app_id: systemd
+app_uuid: a18dccd2-35c0-40e2-9c0a-7a01a5daf5f3
 assets:
   dashboards:
     Systemd Overview: assets/dashboards/overview.json
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: systemd.units_by_state
+      metadata_path: metadata.csv
+      prefix: systemd.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Systemd
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - OS & システム
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/systemd/README.md
-display_name: Systemd
+display_on_public_website: true
 draft: false
 git_integration_title: systemd
-guid: acd470e7-5413-4deb-95fc-4b034d904691
 integration_id: systemd
 integration_title: Systemd
 integration_version: ''
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: systemd.
-metric_to_check: systemd.units_by_state
+manifest_version: 2.0.0
 name: systemd
-public_title: Systemd インテグレーション
+oauth: {}
+public_title: Systemd
 short_description: Systemd および Systemd によって管理されるユニットに関するメトリクスを取得
-support: コア
 supported_os:
 - linux
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Category::OS & System
+  configuration: README.md#Setup
+  description: Systemd および Systemd によって管理されるユニットに関するメトリクスを取得
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Systemd
 ---
 
 

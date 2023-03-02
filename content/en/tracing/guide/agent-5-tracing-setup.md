@@ -8,7 +8,7 @@ aliases:
 
 ## Getting started
 
-APM is available with Datadog Agent versions 5.11+ as part of the one line install for the Linux and Docker Agents. [Mac][1] and [Windows][2] users must perform a manual install of the APM Agent (aka Trace Agent) via a separate install process.
+APM is available with Datadog Agent versions 5.11+ as part of the one-line installation command for the Linux and Docker Agents. [Mac][1] and [Windows][2] users must perform a manual installation of the APM Agent (also known as Trace Agent) through a separate installation process.
 
 The Agent can be enabled by including the following in your [Datadog Agent configuration file][3]:
 
@@ -58,7 +58,7 @@ Additionally, some configuration options may be set as environment variables. No
 | `apm_enabled`           | `DD_APM_ENABLED`           | The Datadog Agent accepts trace metrics when the value is set to `true`. The default value is `true`.                                                            |
 | `receiver_port`         | `DD_RECEIVER_PORT`         | The port that the Datadog Agent's trace receiver should listen on. The default value is `8126`.                                                                  |
 | `connection_limit`      | `DD_CONNECTION_LIMIT`      | The number of unique client connections to allow during one 30 second lease period. The default value is `2000`.                                                 |
-| `resource`              | `DD_IGNORE_RESOURCE`       | A blacklist of regular expressions to filter out traces by their resource name.                                                                                  |
+| `resource`              | `DD_IGNORE_RESOURCE`       | An exclude list of regular expressions to filter out traces by their resource name.                                                                                  |
 
 For more information about the Datadog Agent, see the [dedicated doc page][9] or refer to the [`datadog.conf.example` file][10].
 

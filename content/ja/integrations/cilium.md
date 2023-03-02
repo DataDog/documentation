@@ -1,43 +1,66 @@
 ---
+app_id: cilium
+app_uuid: 791bc8e8-1a70-465a-b423-709b6af4e6e5
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Cilium Overview: assets/dashboards/overview.json
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: cilium.endpoint.state
+      metadata_path: metadata.csv
+      prefix: cilium.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Cilium
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - コンテナ
 - ネットワーク
 - security
 - ログの収集
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cilium/README.md
-display_name: Cilium
+display_on_public_website: true
 draft: false
 git_integration_title: cilium
-guid: 1d9db288-4678-4ede-9ba0-8b04a8ae31c2
 integration_id: cilium
 integration_title: Cilium
-integration_version: 2.2.0
+integration_version: 2.3.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: cilium.
-metric_to_check: cilium.endpoint.state
+manifest_version: 2.0.0
 name: cilium
-public_title: Datadog-Cilium インテグレーション
+oauth: {}
+public_title: Cilium
 short_description: Agent のメトリクスと、クラスター全体のオペレーターメトリクスをポッドごとに収集
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Containers
+  - Category::Network
+  - Category::Security
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: Agent のメトリクスと、クラスター全体のオペレーターメトリクスをポッドごとに収集
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Cilium
 ---
 
 

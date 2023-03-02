@@ -7,9 +7,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/slo-monitoring-tracking/
   tag: ブログ
   text: Datadog で SLO のステータスとエラーバジェットを追跡する
-- link: https://learn.datadoghq.com/course/view.php?id=34
+- link: https://learn.datadoghq.com/courses/intro-to-slo
   tag: ラーニングセンター
-  text: サービスレベル目標 (SLO) について
+  text: サービスレベル目標入門
 - link: https://www.datadoghq.com/blog/service-page/
   tag: ブログ
   text: サービステレメトリー、エラー追跡、SLO など
@@ -21,6 +21,8 @@ title: サービスレベル目標
 ---
 
 {{< vimeo 382481078 >}}
+
+{{< jqmath-vanilla >}}
 
 <br />
 
@@ -49,8 +51,8 @@ Datadog の[サービスレベル目標ステータスページ][1]を使用し�
 ### コンフィギュレーション
 
 1. [SLO ステータスページ][1]で **New SLO +** を選択します。
-2. SLO のソースを定義します。SLO の種類には、[メトリクスベース][3]と[モニターベース][4]があります。
-3. 最大 3 つの SLO ターゲットをセットアップします。それぞれのターゲットはターゲット割合とローリングタイムウィンドウから成ります。利用可能なタイムウィンドウは、7 日、30 日、90 日です。SLO のターゲット割合を SLA で指定するターゲット割合より厳し目に設定することが推奨されます。
+2. SLO のソースを定義します。SLO は、[メトリクス][3]または[モニター][4]から作成することができます。
+3. SLO のターゲットとローリング期間 (7 日、30 日、90 日経過後) を設定します。Datadog では、SLO のターゲットを SLA で指定した値より厳し目に設定することを推奨しています。期間を複数設定する場合は、プライマリに設定する期間を 1 つ選択します。この期間が SLO 一覧に表示されます。デフォルトでは、最も短い期間が選択されます。
 4. 最後に、SLO にタイトルを付け詳細を入力するか、説明にリンクを足しタグを追加して保存します。
 
 SLO を設定したら、[サービスレベル目標リストビュー][1]から SLO を選択して、詳細サイドパネルを開きます。サイドパネルには、SLO の各ターゲットの全体的なステータスのパーセンテージと残りのエラーバジェット、および SLI の履歴のステータスバー (モニターベースの SLO) または棒グラフ (メトリクスベースの SLO) が表示されます。1 つの[マルチアラートモニター][5]を使用してグループ化されたモニターベースの SLO を作成した場合、または [`sum by` 句][6]を使用してグループ化されたメトリクスベースの SLO を作成した場合、全体的なステータスのパーセンテージと残りのエラーバジェットに加えて、個々のグループのステータスのパーセンテージと残りのエラーバジェットが表示されます。
@@ -58,7 +60,8 @@ SLO を設定したら、[サービスレベル目標リストビュー][1]か�
 **例:** アベイラビリティーゾーンごとにレイテンシを追跡するためにモニターベースの SLO 作成すると、全体的な SLO と SLO が追跡している個々のアベイラビリティーゾーンのステータス割合とエラーバジェットの残量が表示されます。
 
 **注:** エラーバジェットの残りはパーセンテージで表示され、次の式で計算されます。
-{{< img src="monitors/service_level_objectives/error_budget_remaining.jpeg" alt="エラーバジェットの残りの式" >}}
+
+$$\text"エラーバジェットの残り" = 100 * {\text"現在のステータス" - \text" ターゲット"} / { 100 - \text"ターゲット"}$$
 
 ### SLO ターゲットの設定
 
@@ -80,6 +83,8 @@ SLO を編集するには、リストビューで SLO の行にカーソルを�
 
 [サービスレベル目標ステータスページ][1]では、すべての SLO に対し高度な検索を実行して、検索結果から SLO を検索、表示、編集、複製、削除できます。
 
+{{< img src="monitors/service_level_objectives/slo_status_page.png" alt="ファセット検索とカレンダーの週次ビューが表示されている SLO ステータスのページ" style="width:100%;" >}}
+
 高度な検索を使用し、SLO の属性をどれでも組み合わせて SLO をクエリできます。
 
 * `name` および `description` - テキスト検索
@@ -89,6 +94,8 @@ SLO を編集するには、リストビューで SLO の行にカーソルを�
 * `tags` - datacenter、env、service、team, など。
 
 検索を実行するには、左側のファセットチェックボックスと上部の検索バーを使用します。ボックスをチェックすると、それに合わせて検索バーのクエリが更新されます。同様に、検索バーのクエリを変更 (あるいは新規入力) すると、ボックスのチェックが更新されます。クエリ結果はクエリの変更に合わせてリアルタイムで更新されます。'検索'ボタンはありません。
+
+SLO のステータスを暦週または暦月単位で 13 か月間分表示するには、**Primary**、**Weekly**、**Monthly** のオプションを切り替えます。
 
 個々の SLO を編集するには、SLO の上にカーソルを置き、その行の右側に表示される **Edit**、**Clone**、**Delete** ボタンを使用します。SLO の内容を詳しく確認するには、その行をクリックしてサイドパネルを開きます。
 
@@ -164,25 +171,28 @@ SLO 監査イベントの全リストを取得するには、イベントエク�
 
 {{< img src="monitors/service_level_objectives/slo-audit-events.png" alt="SLO 監査イベント"  >}}
 
-SLO のコンフィギュレーションをプロアクティブに管理するには、特定のタグに対応するイベントが発生したときに通知するよう[イベントモニター][14]を設定します。
-
 たとえば、特定の SLO コンフィギュレーションが変更されたときに通知を受信するには、タグ `audit,slo_id:<SLO ID>` に対して `[SLO Modified]` テキストを追跡するようイベントモニターをセットします。
 
 {{< img src="monitors/service_level_objectives/slo-event-monitor.png" alt="SLO イベントモニター"  >}}
 
 ## SLO ウィジェット
 
+SLO のコンフィギュレーションをプロアクティブに管理するには、特定のタグに対応するイベントが発生したときに通知するよう[イベントモニター][14]を設定します。
+
 SLO を作成した後に、SLO サマリーダッシュボードウィジェットを使用して、SLO のステータスをダッシュボードメトリクス、ログ、APM データと合わせて表示することが可能です。SLO ウィジェットについて詳しくは、[SLO ウィジェットのドキュメント][2]ページを参照してください。
 
 ## SLO ステータスの修正
 
-ステータス修正により、SLO がステータスおよびエラーバジェットの計算から除外する計画保守などの期間を指定できます。
+ステータス修正により、SLO ステータスとエラーバジェットの計算から特定の期間を除外することができます。こうすることで、以下のことが可能になります。
+- 定期メンテナンスなど、想定されるダウンタイムによるエラー予算の枯渇を防ぐ
+- SLO に準拠することを期待されていない非営業時間は無視する
+- デプロイメントによる一時的な問題が、SLO に悪影響を与えないようにする
 
-SLO の修正ウィンドウを作成すると、指定した期間が SLO の計算から削除されます。
-- モニターベースの SLO の場合、修正ウィンドウの時間はカウントされません。
+修正を適用すると、指定した期間が SLO の計算から外れます。
+- モニターベースの SLO の場合、修正時間ウィンドウはカウントされません。
 - メトリクスベースの SLO の場合、修正ウィンドウ内のすべての良好イベントと不良イベントはカウントされません。
 
-臨機応変に対応するための 1 回限りの修正と、定期的に発生する予測可能な修正を作成するオプションがあります。1 回限りの修正には開始時刻と終了時刻が必要であり、定期的な修正には開始時刻、期間、間隔が必要です。定期的な修正は、[iCalendar RFC 5545 の RRULE 仕様][15]に基づいています。定期的な修正の終了日の指定は、修正を無期限に繰り返す必要がある場合にオプションで指定できます。
+臨機応変に対応するための 1 回限りの修正と、定期的に発生する予測可能な修正を作成するオプションがあります。1 回限りの修正には開始時刻と終了時刻が必要であり、定期的な修正には開始時刻、期間、間隔が必要です。定期的な修正は、[iCalendar RFC 5545 の RRULE 仕様][15]に基づいています。サポートされているルールは `FREQ`、`INTERVAL`、`COUNT` および `UNTIL` です。定期的な修正の終了日の指定は、修正を無期限に繰り返す必要がある場合にオプションで指定できます。
 
 どちらのタイプの修正でも、修正を行う理由を示す修正カテゴリーを選択する必要があります。選択可能なカテゴリーは、`Scheduled Maintenance` (定期メンテナンス)、`Outside Business Hours` (営業時間外)、`Deployment` (デプロイ)、`Other`(その他)です。必要であれば、説明文を追加することができます。
 
@@ -225,7 +235,7 @@ UI で SLO ステータス修正にアクセスするには
 [2]: /ja/dashboards/widgets/slo/
 [3]: /ja/monitors/service_level_objectives/metric/
 [4]: /ja/monitors/service_level_objectives/monitor/
-[5]: /ja/monitors/create/types/metric/?tab=threshold#alert-grouping
+[5]: /ja/monitors/types/metric/?tab=threshold#alert-grouping
 [6]: /ja/monitors/service_level_objectives/metric/#define-queries
 [7]: /ja/monitors/service_level_objectives/monitor/#set-your-slo-targets
 [8]: /ja/monitors/service_level_objectives/metric/#set-your-slo-targets
@@ -234,7 +244,7 @@ UI で SLO ステータス修正にアクセスするには
 [11]: https://play.google.com/store/apps/details?id=com.datadog.app
 [12]: /ja/monitors/service_level_objectives/#saved-views
 [13]: /ja/api/v1/events/#query-the-event-stream
-[14]: /ja/monitors/create/types/event/
+[14]: /ja/monitors/types/event/
 [15]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
 [16]: /ja/api/latest/service-level-objective-corrections/
 [17]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/slo_correction

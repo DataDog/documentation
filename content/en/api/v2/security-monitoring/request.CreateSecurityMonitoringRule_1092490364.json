@@ -1,0 +1,35 @@
+{
+  "type": "cloud_configuration",
+  "name": "Example-Create_a_cloud_configuration_rule_returns_OK_response_cloud",
+  "isEnabled": false,
+  "cases": [
+    {
+      "status": "info",
+      "notifications": [
+        "channel"
+      ]
+    }
+  ],
+  "options": {
+    "complianceRuleOptions": {
+      "resourceType": "gcp_compute_disk",
+      "complexRule": false,
+      "regoRule": {
+        "policy": "package datadog\n",
+        "resourceTypes": [
+          "gcp_compute_disk"
+        ]
+      }
+    }
+  },
+  "message": "ddd",
+  "tags": [
+    "my:tag"
+  ],
+  "complianceSignalOptions": {
+    "userActivationStatus": true,
+    "userGroupByFields": [
+      "@account_id"
+    ]
+  }
+}

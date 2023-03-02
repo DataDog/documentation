@@ -1,31 +1,32 @@
 ---
-title: Utilisation basique de l'Agent pour SUSE
+aliases:
+- /fr/guides/basic_agent_usage/suse/
+further_reading:
+- link: /logs/
+  tag: Documentation
+  text: Recueillir vos logs
+- link: /infrastructure/process/
+  tag: Documentation
+  text: Recueillir vos processus
+- link: /tracing/
+  tag: Documentation
+  text: Recueillir vos traces
 kind: documentation
 platform: SUSE
-aliases:
-  - /fr/guides/basic_agent_usage/suse/
-further_reading:
-  - link: /logs/
-    tag: Documentation
-    text: Recueillir vos logs
-  - link: /infrastructure/process/
-    tag: Documentation
-    text: Recueillir vos processus
-  - link: /tracing/
-    tag: Documentation
-    text: Recueillir vos traces
+title: Utilisation basique de l'Agent pour SUSE
 ---
+
 ## Présentation
 
 Cette page présente les fonctionnalités de base de l'Agent Datadog pour SUSE. Si vous n'avez pas encore installé l'Agent, vous trouverez des instructions dans la documentation relative à l'[intégration de l'Agent Datadog][1].
 
-Les paquets sont disponibles en versions pour architectures x86 64 bits et Arm v8. Pour toute autre architecture, utilisez l'installation depuis les sources.
+Les packages sont disponibles pour les architectures x86 64 bits. Pour toute autre architecture, utilisez l'installation depuis les sources.
 
-**Remarque** : les versions 11 SP4 et ultérieures de SUSE sont prises en charge.
+**Remarque** : SUSE 11 SP4 et les versions ultérieures sont pris en charge par les versions de l'Agent antérieures à la v6.33.0/7.33.0. SLES 12 et les versions ultérieures et OpenSUSE 15 et les versions ultérieures sont pris en charge par l'Agent v6.33.0+/7.33.0+.
 
 ## Commandes
 
-Dans les Agents v6 et v7, le gestionnaire de service fourni par le système d'exploitation est responsable du cycle de vie de l'Agent, tandis que les autres commandes doivent être exécutées directement via le binaire de l'Agent. Dans l'Agent v5, presque tout se fait par l'intermédiaire du gestionnaire de service.
+Avec les Agents v6 et v7, le gestionnaire de service fourni par le système d'exploitation est responsable du cycle de vie de l'Agent, tandis que les autres commandes doivent être exécutées directement via le binaire de l'Agent. Avec l'Agent v5, la grande majorité des opérations passent par le gestionnaire de service.
 
 {{< tabs >}}
 {{% tab "Agents v6 et v7" %}}
@@ -110,7 +111,7 @@ Fichiers de configuration pour les [intégrations][1] :
 
 ## Dépannage
 
-[Consultez la documentation relative au dépannage de l'Agent][3].
+Consultez la [documentation relative au dépannage de l'Agent][3].
 
 ## Utilisation de l'Agent intégré
 

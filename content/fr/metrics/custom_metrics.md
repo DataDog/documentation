@@ -58,14 +58,14 @@ La convention de nommage suivante s'applique aux métriques custom :
 ## Envoi de métriques custom
 
 {{< whatsnext desc="Il existe plusieurs façons d'envoyer des métriques à Datadog :">}}
-    {{< nextlink href="/metrics/agent_metrics_submission" >}}Check d'Agent custom{{< /nextlink >}}
-    {{< nextlink href="/metrics/dogstatsd_metrics_submission" >}}DogStatsD{{< /nextlink >}}
-    {{< nextlink href="/metrics/powershell_metrics_submission" >}}PowerShell{{< /nextlink >}}
+    {{< nextlink href="/metrics/custom_metrics/agent_metrics_submission" >}}Check d'Agent custom{{< /nextlink >}}
+    {{< nextlink href="/metrics/custom_metrics/dogstatsd_metrics_submission" >}}DogStatsD{{< /nextlink >}}
+    {{< nextlink href="/metrics/custom_metrics/powershell_metrics_submission" >}}PowerShell{{< /nextlink >}}
     {{< nextlink href="/serverless/custom_metrics" >}}AWS Lambda{{< /nextlink >}}
-    {{< nextlink href="/api/v1/metrics/#envoyer-des-metriques" >}}API HTTP Datadog{{< /nextlink >}}
+    {{< nextlink href="/api/v1/metrics/#submit-metrics" >}}API HTTP Datadog{{< /nextlink >}}
     {{< nextlink href="/logs/log_configuration/logs_to_metrics/#generer-une-metrique-basee-sur-des-logs" >}}Générer des métriques basées sur des logs{{< /nextlink >}}
-    {{< nextlink href="/tracing/generate_metrics/" >}}Générer des métriques APM basées sur des spans{{< /nextlink >}}
-    {{< nextlink href="/infrastructure/process/increase_process_retention/#generate-a-process-based-metric" >}}Générer des métriques en temps réel basées sur des processus{{< /nextlink >}}
+    {{< nextlink href="/tracing/generate_metrics/" >}}Générer des métriques basées sur des spans APM{{< /nextlink >}}
+    {{< nextlink href="/infrastructure/process/increase_process_retention/#generer-une-metrique-basee-sur-des-processus" >}}Générer des métriques basées sur des live processes{{< /nextlink >}}
 {{< /whatsnext >}}
 
 Vous pouvez également utiliser l'une des [bibliothèques client de Datadog et sa communauté pour DogStatsD et les API][12] afin d'envoyer vos métriques custom.
@@ -80,8 +80,8 @@ Vous pouvez également utiliser l'une des [bibliothèques client de Datadog et s
 
 [1]: /fr/integrations/
 [2]: /fr/account_management/billing/custom_metrics/#standard-integrations
-[3]: /fr/metrics/dogstatsd_metrics_submission/
-[4]: /fr/metrics/agent_metrics_submission/
+[3]: /fr/metrics/custom_metrics/dogstatsd_metrics_submission/
+[4]: /fr/metrics/custom_metrics/agent_metrics_submission/
 [5]: https://app.datadoghq.com/account/usage/hourly
 [6]: /fr/account_management/billing/custom_metrics/#counting-custom-metrics
 [7]: /fr/metrics

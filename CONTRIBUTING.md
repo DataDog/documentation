@@ -62,7 +62,7 @@ Avoid using passive voice in favor of active voice. If you think your sentence i
 
 ### Inclusive language
 
-Use inclusive language unless you are referencing third-party technologies such as Redis' master/slave nodes. The Datadog docs follow the inclusive language best practices described in the [Terminology, Power and Inclusive Language](https://tools.ietf.org/id/draft-knodel-terminology-02.html) document from the Center for Democracy & Technology.
+Use inclusive language unless you are referencing third-party technologies such as Redis' master/slave nodes. The Datadog docs follow the inclusive language best practices described in the [Terminology, Power and Inclusive Language](https://datatracker.ietf.org/doc/draft-knodel-terminology) document from the Center for Democracy & Technology.
 - **Recommended**: "Primary/secondary, disallowlist/allowlist"
 - **Not recommended**: "Master/slave, blacklist/whitelist"
 
@@ -198,5 +198,5 @@ Use text formatting to clarify and enhance content.
 [3]: https://tools.ietf.org/html/rfc2606
 [4]: https://github.com/DataDog/gobwords/wiki/Style-guide
 [5]: https://github.com/DataDog/documentation/wiki/Translations-Overview
-[6]: https://github.com/DataDog/documentation/wiki/Import-an-Image
+[6]: https://github.com/DataDog/documentation/wiki/Import-an-Image-or-a-mp4-video
 [7]: https://docs.datadoghq.com/

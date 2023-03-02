@@ -1,42 +1,67 @@
 ---
+app_id: jmeter
+app_uuid: be62a333-998e-4fea-b0e4-dd4a45b859b4
 assets:
   dashboards:
     JMeter Overview: assets/dashboards/JMeterOverview.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: jmeter.responses_count
+      metadata_path: metadata.csv
+      prefix: jmeter.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: JMeter
   logs:
     source: jmeter
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
-  - ログの収集
-  - テスト
-creates_events: false
-ddtype: check
+- ログの収集
+- テスト
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/jmeter/README.md
-display_name: JMeter
+- https://github.com/DataDog/integrations-core/blob/master/jmeter/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: jmeter
-guid: 73e25799-9bc1-413b-a5f3-989a7c5bd554
 integration_id: jmeter
 integration_title: JMeter
 integration_version: ''
 is_public: true
 kind: integration
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: jmeter.
-metric_to_check: jmeter.responses_count
+manifest_version: 2.0.0
 name: jmeter
+oauth: {}
 public_title: JMeter
 short_description: Apache JMeter 用 Datadog プラグイン
-support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Log Collection
+  - Category::Testing
+  configuration: README.md#Setup
+  description: Apache JMeter 用 Datadog プラグイン
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: JMeter
 ---
+
+
+
 ## 概要
 
 Datadog Backend Listener for Apache JMeter は、テスト結果を Datadog プラットフォームに送信するために使用される、オープンソースの JMeter プラグインです。これにより、レイテンシー、送受信されるバイト数などのテストメトリクスをリアルタイムで報告できます。また、完全なテスト結果をログエントリとして Datadog へ送信することも可能です。

@@ -11,6 +11,7 @@ assets:
     MQ Message Manager: assets/dashboards/MQ_Message_Manager.json
     MQ Storage Manager: assets/dashboards/MQ_Storage_Manager.json
     z/OS Connect Metrics: assets/dashboards/z_OS_Connect_Metrics.json
+    z/OS Infrastructure: assets/dashboards/z_OS_Infrastructure.json
   integration:
     configuration: {}
     events:
@@ -250,21 +251,16 @@ z/IRIS トレースでは、以下のメインフレームシステムがサポ�
 
 お探しのメトリクスはこれではありませんか？あなたの組織にとって重要な機能をお探しですか？機能のご要望は [info@mainstorconcept.com](mailto:info@mainstorconcept.com) までお送りください。
 
-### 地域別パートナー
+### 民間企業による製品提供
 
-北米に拠点を置く企業は、当社のパートナーである SEA にお問い合わせください。
-* メール: [SEA- Software Engineering of America](mailto:support@seasoft.com)
-* 電話: (800) 272-7322 (音声フリーダイヤル)
-* 電話: 516-328-7000
-
-その他の地域はお問い合わせください。
-* メール: [mainstorconcept GmbH](mailto:sales@mainstorconcept.com)
+* メール: [mainstorconcept GmbH](mailto:ziris@mainstorconcept.com)
 * 電話: +49 721 7907610
 
 ## サポート
 
-z/IRIS に関するご質問は、[サポートリクエスト](https://service.mainstorconcept.com/mscportal/login)を開くか、[support@mainstorconcept.com](mailto:support@mainstorconcept.com) にご連絡ください。
+試用版およびライセンスをお持ちのお客様は、[サポートをリクエストする](https://service.mainstorconcept.com/mscportal/login)か、または [support@mainstorconcept.com](mailto:support@mainstorconcept.com) にご連絡ください。
 
-デモをご希望の方は、[sales@mainstorconcept.com](mailto:sales@mainstorconcept.com) までご連絡ください。
+チーム向けの z/IRIS のデモをご希望の場合、または Datadog を使用した z/IRIS の機能についてご質問がある場合は、[ziris@mainstorconcept.com](mailto:ziris@mainstorconcept.com) までお問い合わせください。
 
-北米地域のローカルサポートをお探しの場合は、パートナーである [SEA- Software Engineering of America](mailto:support@seasoft.com) にメールまたは電話 (800) 272-7322 でお問い合わせください。
+---
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/mainstorconcept-ziris" target="_blank">こちらをクリック</a>してください。

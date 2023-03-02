@@ -19,6 +19,8 @@ title: Agent チェックのステータス
 
 **注**: 以下の例の `<CHECK_NAME>` を Agent チェックに置き換えます。例: `activemq`、`ceph`、または `elastic`。[インテグレーションのドキュメント][1]を確認して、Agent チェック名を確認します。
 
+**注**: トラブルシューティング中に一時的にサービスチェックを無効にするには、`/conf.d/<CHECK_NAME>.d/conf.yaml` の名前を `.yaml` または `.yml` ファイル拡張子以外のもの、例えば `conf.yaml.disable` に変更します。
+
 ## Linux
 
 Agent チェックをテストするには、次を実行します。
@@ -61,18 +63,17 @@ sudo -u dd-agent dd-agent check <チェック名> --check-rate
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
-適切な `<CHECK_NAME>` で次のスクリプトを実行します。
+**管理者特権** (管理者として実行) の PowerShell コマンドラインから、適切な `<CHECK_NAME>` を指定して、以下のスクリプトを実行します。
 
 Agent バージョン >= 6.12 の場合
 
 ```powershell
-%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe check <チェック名>
+& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" check <CHECK_NAME>
 ```
 
 Agent バージョン < 6.11 の場合
-
 ```powershell
-%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe check <チェック名>
+& "$env:ProgramFiles\Datadog\Datadog Agent\embedded\agent.exe" check <CHECK_NAME>
 ```
 
 {{% /tab %}}
@@ -90,14 +91,14 @@ run_check('<チェック名>')
 {{% /tab %}}
 {{% tab "Agent v>=5.12" %}}
 
-適切な `<CHECK_NAME>` で次のスクリプトを実行します。
+**管理者特権** (管理者として実行) の PowerShell コマンドラインから、適切な `<CHECK_NAME>` を指定して、以下のスクリプトを実行します。
 
 `<INSTALL_DIR>/embedded/python.exe <INSTALL_DIR>agent/agent.py check <CHECK_NAME>`
 
 たとえば、ディスクチェックを実行するには、次を実行します。
 
 ```powershell
-C:\Program' 'Files\Datadog\Datadog' 'Agent\embedded\python.exe C:\Program' 'Files\Datadog\Datadog' 'Agent\agent\agent.py check disk
+& "$env:ProgramFiles\Datadog\Datadog Agent\embedded\python.exe" "$env:ProgramFiles\Datadog\Datadog Agent\agent\agent.py" check disk
 ```
 
 {{% /tab %}}

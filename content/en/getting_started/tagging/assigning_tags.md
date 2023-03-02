@@ -265,7 +265,7 @@ The span metadata above is invalid since the value of `key` cannot reference a s
 {{< tabs >}}
 {{% tab "Host Map" %}}
 
-Assign host tags in the UI using the [Host Map page][1]. Click on any hexagon (host) to show the host overlay on the bottom of the page. Then, under the *User* section, click the **Edit Tags** button. Enter the tags as a comma separated list, then click **Save Tags**. **Note**: Changes to metric tags made with the UI may take up to 30 minutes to apply.
+Assign host tags in the UI using the [Host Map page][1]. Click on any hexagon (host) to show the host overlay on the bottom of the page. Then, under the *User* section, click the **Edit Tags** button. Enter the tags as a comma separated list, then click **Save Tags**. Changes made to host tags in the UI may take up to five minutes to apply.
 
 {{< img src="tagging/assigning_tags/hostmapuitags.png" alt="Host Map Tags" style="width:80%;">}}
 
@@ -273,7 +273,7 @@ Assign host tags in the UI using the [Host Map page][1]. Click on any hexagon (h
 {{% /tab %}}
 {{% tab "Infrastructure List" %}}
 
-Assign host tags in the UI using the [Infrastructure List page][1]. Click on any host to show the host overlay on the right of the page. Then, under the *User* section, click the **Edit Tags** button. Enter the tags as a comma separated list, then click **Save Tags**. **Note**: Changes to metric tags made with the UI may take up to 30 minutes to apply.
+Assign host tags in the UI using the [Infrastructure List page][1]. Click on any host to show the host overlay on the right of the page. Then, under the *User* section, click the **Edit Tags** button. Enter the tags as a comma separated list, then click **Save Tags**. Changes made to host tags in the UI may take up to five minutes to apply. Once you have added tags, ensure they are visible in the UI before attempting to add more tags.
 
 {{< img src="tagging/assigning_tags/hostuitags.png" alt="Infrastructure List Tags" style="width:80%;">}}
 

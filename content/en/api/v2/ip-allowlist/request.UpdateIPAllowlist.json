@@ -1,0 +1,19 @@
+{
+  "data": {
+    "attributes": {
+      "entries": [
+        {
+          "data": {
+            "attributes": {
+              "note": "Example-Update_IP_Allowlist_returns_OK_response",
+              "cidr_block": "127.0.0.1"
+            },
+            "type": "ip_allowlist_entry"
+          }
+        }
+      ],
+      "enabled": false
+    },
+    "type": "ip_allowlist"
+  }
+}

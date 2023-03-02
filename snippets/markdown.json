@@ -1,15 +1,31 @@
 {
-	"Region selector":{
-		"prefix": "region",
+	"Expander":{
+    "prefix": ";;expander",
+    "body": [
+      "<details>",
+      "<summary>Add summary here</summary>",
+      "Full description goes here",
+      "</details>",
+      "",
+      "<details open>",
+      "<summary>Add another summary here</summary>",
+      "Full description goes here",
+      "</details>"
+    ],
+    "description": "Expanding model"
+  },
+
+  "Region selector":{
+		"prefix": ";;region",
 		"body": [
 			"{{< site-region region=\"us,us3,us5,eu,gov\" >}}",
 			"{{< /site-region >}}"
 		],
 		"description": "Site region shortcode"
 	},
-	
+
 	"Frontmatter":{
-		"prefix": "frontmatter",
+		"prefix": ";;frontmatter",
 		"body": [
 			"---",
 			"title: Doc Title",
@@ -25,18 +41,18 @@
 		],
 		"description": "Frontmatter"
 	},
-	
+
 	"Further reading footer": {
-		"prefix": "further",
+		"prefix": ";;further",
 		"body": [
 			"## Further reading",
 			"",
 			"{{< partial name=\"whats-next/whats-next.html\" >}}"
 		]
 	},
-	
+
 	"Further reading footer - integrations": {
-	"prefix": "further",
+	"prefix": ";;further",
 	"body": [
 		"## Further reading",
 		"",
@@ -44,35 +60,35 @@
 		"- [First link][1]"
 	]
 	},
-	
+
 	"Alert box":{
-		"prefix": "alert",
+		"prefix": ";;alert",
 		"body": [
 			"<div class=\"alert alert-${1|info,danger,warning|}\">Text containing an <a href=\"https://google.com\">HTML link.</a></div>"
 		],
 		"description": "Alert box with choice of info, danger, or warning"
 	},
-	
-	"Beta callout":{
-		"prefix": "beta",
+
+	"Callout":{
+		"prefix": ";;callout",
 		"body": [
-			"{{< beta-callout url=\"https://google.com\" d-toggle=\"modal\" d_target=\"#signupModal\" custom_class=\"sign-up-trigger\">}}",
+			"{{< callout url=\"https://google.com\" d_toggle=\"modal\" d_target=\"#signupModal\" custom_class=\"sign-up-trigger\" btn_hidden=\"false\" header=\"Join the Beta!\">}}",
 			"Datadog Apps is currently in beta, but you can easily request access! Use this form to submit your request today. Once approved, you can start getting creative and develop your App for you, your organization, or for publishing to the entire Datadog community alongside our other great Datadog Apps!",
-			  "{{< /beta-callout >}}"
+			  "{{< /callout >}}"
 		],
-		"description": "Beta callout with all parameters"
+		"description": "A callout with all parameters"
 	},
-	
+
 	"Integration count":{
-		"prefix": "integration",
+		"prefix": ";;integration",
 		"body": [
 			"{{< translate key=\"integration_count\" >}}"
 		],
 		"description": "Integration count"
 	},
-	
+
 	"Tabs":{
-		"prefix": "tab",
+		"prefix": ";;tab",
 		"body": [
 			"{{< tabs >}}",
 			"{{% tab \"${1}\" %}}",
@@ -86,9 +102,9 @@
 		],
 		"description": "Tabs"
 	},
-	
+
 	"Tabs - integrations":{
-		"prefix": "tab",
+		"prefix": ";;tab",
 		"body": [
 			"<!-- xxx tabs xxx -->",
 			"<!-- xxx tab \"${1}\" xxx -->",
@@ -102,9 +118,9 @@
 		],
 		"description": "Tabs - integrations"
 	},
-	
+
 	"Programming language":{
-		"prefix": "lang",
+		"prefix": ";;lang",
 		"body": [
 			"{{< programming-lang-wrapper langs=\"python\" >}}",
 			"",
@@ -112,24 +128,22 @@
 			"",
 			"{{< /programming-lang >}}",
 			"{{< /programming-lang-wrapper >}}"
-			
 		],
 		"description": "Programming language"
 	},
-	
+
 	"Table":{
-		"prefix": "table",
+		"prefix": ";;table",
 		"body": [
 			"|      | Required    | Description |",
 			"| ---  | ----------- | ----------- |",
 			"|${1}|${2}|${3}|"
-			
 		],
 		"description": "Table"
 	},
-	
-	"Description list":{
-		"prefix": "list",
+
+	"Definition list":{
+		"prefix": ";;list",
 		"body": [
 			"Service",
 			"",
@@ -142,30 +156,29 @@
 			"`clusterChecksRunner.affinity.podAffinity.preferredDuringSchedulingIgnoredDuringExecution`",
 			": Required. A list of node selector terms. The terms are ORed.",
 			"`site`",
-			": Set the site of the Datadog intake for Agent data:  {{< region-param key=\"dd_site\" code=\"true\" >}}. Defaults to `datadoghq.com`."			
+			": Set the site of the Datadog intake for Agent data:  {{< region-param key=\"dd_site\" code=\"true\" >}}. Defaults to `datadoghq.com`."
 		],
 		"description": "Description list"
 	},
-	
-	
+
 	"Agent config":{
-		"prefix": "agent",
+		"prefix": ";;agent",
 		"body": [
 			"{{< agent-config type=\"${1|basic configuration,advanced configuration,log collection configuration,trace collection configuration,process collection configuration,system probe configuration,dogstatsd configuration,jmx configuration,logging configuration,autoconfig configuration,container autodiscovery configuration,cluster check configuration,container detection,docker tag extraction,kubernetes tag extraction,ecs integration configuration,cri integration configuration,containerd integration configuration,kubernetes kubelet connectivity configuration,kubernetes apiserver integration configuration|}\" filename=\"datadog.yaml\" collapsible=\"true\" disable_copy=\"true\">}}"
 		],
 		"description": "Description list"
 	},
-	
+
 	"Reuse":{
-		"prefix": "reuse",
+		"prefix": ";;reuse",
 		"body": [
 			"{{% reuse/prodname/reuse_filename %}}"
 		],
 		"description": "General reuse shortcode"
 	},
-	
+
 	"Code block":{
-		"prefix": "code",
+		"prefix": ";;code",
 		"body": [
 			"{{< code-block lang=\"java\" filename=\"block.java\" disable_copy=\"true\" collapsible=\"true\" >}}",
 			"import com.datadoge.docs.SweetCodeBlock;",
@@ -178,12 +191,28 @@
 		],
 		"description": "Code block"
 	},
-	
+
 	"Check mark":{
-		"prefix": "check",
+		"prefix": ";;check",
 		"body": [
 			"{{< X >}}"
 		],
 		"description": "Check mark"
+	},
+
+	"Image": {
+		"prefix": ";;image",
+		"body": [
+			"{{< img src=\"path/to/your/image-name-here.png\" alt=\"Your image description\" style=\"width:100%;\" >}}"
+		],
+		"description": "Image short-code"
+	},
+
+	"Video": {
+		"prefix": ";;video",
+		"body": [
+			"{{< img src=\"path/to/your/image-name-here.png\" alt=\"Your image description\" video=true >}}"
+		],
+		"description": "Video short-code"
 	}
 }

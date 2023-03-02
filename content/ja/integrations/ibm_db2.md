@@ -34,7 +34,7 @@ draft: false
 git_integration_title: ibm_db2
 integration_id: ibm-db2
 integration_title: IBM Db2
-integration_version: 1.11.0
+integration_version: 1.11.2
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -84,7 +84,7 @@ IBM Db2 チェックは [Datadog Agent][3] パッケージに含まれていま�
 ##### Unix
 
 ```text
-/opt/datadog-agent/embedded/bin/pip install ibm_db==3.0.1
+sudo -Hu dd-agent /opt/datadog-agent/embedded/bin/pip install ibm_db==3.0.1
 ```
 
 ##### Windows

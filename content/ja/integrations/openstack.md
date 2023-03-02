@@ -1,45 +1,68 @@
 ---
+app_id: openstack
+app_uuid: 38f1f51e-9f6a-49fc-84d5-358bde9e3782
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     openstack: assets/dashboards/openstack_dashboard.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: openstack.nova.hypervisor_load.1
+      metadata_path: metadata.csv
+      prefix: openstack.
+    process_signatures:
+    - stack.sh
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: OpenStack
   logs:
     source: openstack
-  metrics_metadata: metadata.csv
-  monitors: {}
   saved_views:
     openstack_processes: assets/saved_views/openstack_processes.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - cloud
 - log collection
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/openstack/README.md
-display_name: OpenStack
+display_on_public_website: true
 draft: false
 git_integration_title: openstack
-guid: 944452d0-208e-4d1c-8adb-495f517ce2c2
 integration_id: openstack
 integration_title: OpenStack (レガシー)
-integration_version: 1.13.0
+integration_version: 1.13.1
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: openstack.
-metric_to_check: openstack.nova.hypervisor_load.1
+manifest_version: 2.0.0
 name: openstack
-process_signatures:
-- stack.sh
+oauth: {}
 public_title: OpenStack (レガシー)
 short_description: ハイパーバイザーおよび VM レベルのリソース使用状況と Neutron メトリクスを追跡
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::クラウド
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: ハイパーバイザーおよび VM レベルのリソース使用状況と Neutron メトリクスを追跡
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: OpenStack (レガシー)
 ---
 
 

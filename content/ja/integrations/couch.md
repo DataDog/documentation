@@ -1,51 +1,73 @@
 ---
-aliases:
-- /ja/integrations/couchdb
+app_id: couchdb
+app_uuid: 0a7006e2-c76d-4ef0-8af7-347bad2db768
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
-    couchdb: assets/dashboards/overview.json
+    couchdb: assets/dashboards/CouchDB-overview_dashboard.json
+    couchdb-v1: assets/dashboards/CouchDBv1-overview_dashboard.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check:
+      - couchdb.couchdb.request_time.n
+      - couchdb.couchdb.request_time
+      metadata_path: metadata.csv
+      prefix: couch.
+    process_signatures:
+    - couchjs
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: CouchDB
   logs:
     source: couchdb
-  metrics_metadata: metadata.csv
-  monitors: {}
   saved_views:
     couchdb_processes: assets/saved_views/couchdb_processes.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - data store
 - log collection
 - autodiscovery
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/couch/README.md
-description: Apache CouchDB は、MapReduce 方式で JavaScript を使用してクエリおよびインデックスを作成できるドキュメント指向のデータベースです。
-display_name: CouchDB
+display_on_public_website: true
 draft: false
 git_integration_title: couch
-guid: 9e7ed68c-669a-40f0-8564-548d49aa8098
 integration_id: couchdb
 integration_title: CouchDB
-integration_version: 5.1.0
+integration_version: 5.2.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: couch.
-metric_to_check:
-- couchdb.couchdb.request_time.n
-- couchdb.couchdb.request_time
+manifest_version: 2.0.0
 name: couch
-process_signatures:
-- couchjs
-public_title: CouchDB インテグレーション
+oauth: {}
+public_title: CouchDB
 short_description: CouchDB のアクティビティとパフォーマンスのメトリクスを追跡およびグラフ化
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::データストア
+  - Category::ログの収集
+  - Category::オートディスカバリー
+  configuration: README.md#Setup
+  description: CouchDB のアクティビティとパフォーマンスのメトリクスを追跡およびグラフ化
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: CouchDB
 ---
 
 

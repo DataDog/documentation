@@ -1,5 +1,4 @@
 ---
-beta: true
 dependencies:
 - https://github.com/DataDog/dd-sdk-reactnative/blob/main/docs/expo_development.md
 description: Expo と Expo Go を使用して React Native プロジェクトを Datadog で監視します。
@@ -15,13 +14,102 @@ title: Expo
 ---
 ## 概要
 
-RUM React Native SDK は、Expo および Expo Go をサポートしています。最小サポートバージョンは [**@datadog/dd-sdk-reactnative:1.0.0-rc9**][1] です。
+RUM React Native SDK は Expo と Expo Go をサポートしています。使用するには、`expo-datadog` と `@datadog/mobile-react-native` をインストールします。
 
-Datadog では、最小バージョンとして **Expo SDK 45** を使用することを推奨しています。
+`expo-datadog` は SDK 45 から Expo をサポートしており、プラグインのバージョンは Expo のバージョンに従います。例えば、Expo SDK 45 を使用している場合は、`expo-datadog` のバージョン `45.x.x` を使用します。Datadog では、最小バージョンとして **Expo SDK 45** を使用することを推奨しており、それ以前のバージョンでは手動による手順が必要になる場合があります。
 
 ## セットアップ
 
-構成プラグインは必要ありません。はじめに、[React Native モニタリング][2]をご覧ください。
+NPM でインストールするには、以下を実行します。
+
+```sh
+npm install expo-datadog @datadog/mobile-react-native
+```
+
+Yarn でインストールするには、以下を実行します。
+
+```sh
+yarn add expo-datadog @datadog/mobile-react-native
+```
+
+## 使用方法
+
+`app.json` ファイルにあるプラグインに `expo-datadog` を追加します。
+
+```json
+{
+    "expo": {
+        "plugins": ["expo-datadog"]
+    }
+}
+```
+
+`eas secret:create` を実行して、`DATADOG_API_KEY` を Datadog API キーに、`DATADOG_SITE` を Datadog サイトのホスト (例: `datadoghq.com`) に設定します。
+
+### アプリケーションのコンテキストでライブラリを初期化
+
+初期化ファイルに以下のコードスニペットを追加します。
+
+```js
+import { DdSdkReactNative, DdSdkReactNativeConfiguration } from 'expo-datadog';
+
+const config = new DdSdkReactNativeConfiguration(
+    '<CLIENT_TOKEN>',
+    '<ENVIRONMENT_NAME>',
+    '<RUM_APPLICATION_ID>',
+    true, // ボタンをタップするなどのユーザーインタラクションを追跡します。'accessibilityLabel' 要素プロパティを使用してタップアクションに名前を付けることができます。それ以外の場合は、要素タイプが報告されます。
+    true, // XHR リソースを追跡します。
+    true // エラーを追跡します。
+);
+// オプション: Datadog の Web サイトを選択します (“US1"、”US3"、”US5"、EU1"、または "US1_FED")。デフォルトは "US1 "です。
+config.site = 'US1';
+// オプション: ネイティブクラッシュレポートを有効または無効にします。
+config.nativeCrashReportEnabled = true;
+// オプション: RUM セッションのサンプル。例: セッションの 80％ が Datadog に送信されます。デフォルトは 100% です。
+config.sessionSamplingRate = 80;
+// オプション: アプリとバックエンド間のネットワークコールのサンプルトレーシングインテグレーション。例: インスツルメンテーションされたバックエンドへのコールの 80％ が RUM ビューから APM ビューにリンクされています。デフォルトは 20% です。
+// バックエンドでトレースを有効にするには、バックエンドのホストを指定する必要があります。
+config.resourceTracingSamplingRate = 80;
+config.firstPartyHosts = ['example.com']; // 'example.com' と 'api.example.com' のようなサブドメインにマッチします。
+// オプション: Datadog SDK に、提供されたレベル以上の内部ログを印刷させます。デフォルトは undefined で、これはログを出力しないことを意味します。
+config.verbosity = SdkVerbosity.WARN;
+
+await DdSdkReactNative.initialize(config);
+
+// Datadog SDK が初期化されると、RUM ダッシュボードでデータを見るために、ビュー追跡をセットアップする必要があります。
+```
+
+### 構成プラグインの追加
+
+<div class="alert alert-info"><p>クラッシュレポートを有効にしていない場合は、この手順をスキップすることができます。<p></div>
+
+`app.json` ファイルにあるプラグインに `expo-datadog` を追加します。
+
+```json
+{
+    "expo": {
+        "plugins": ["expo-datadog"]
+    }
+}
+```
+
+このプラグインは、EAS のビルドごとに、dSYM、ソースマップ、Proguard マッピングファイルのアップロードを行います。
+
+開発依存として `@datadog/datadog-ci` を追加します。このパッケージには、ソースマップをアップロードするためのスクリプトが含まれています。NPM でインストールすることができます。
+
+```sh
+npm install @datadog/datadog-ci --save-dev
+```
+
+または、Yarn でインストールすることができます。
+
+```sh
+yarn add -D @datadog/datadog-ci
+```
+
+`eas secret:create` を実行して、`DATADOG_API_KEY` を Datadog API キーに設定します。
+
+Expo のクラッシュの追跡については、[Expo のクラッシュレポートとエラーの追跡][6]を参照してください。
 
 ## Expo Go
 
@@ -45,12 +133,7 @@ Expo Go で、(含まれていない) いくつかのネイティブコードが
 // Datadog はこの方法を推奨していませんので、代わりに Expo 開発ビルドへの移行を検討してください。
 // このファイルは公式にはメンテナンスされておらず、新しいリリースに対応していない可能性があります。
 
-import {
-    DdLogs,
-    DdTrace,
-    DdRum,
-    DdSdkReactNative
-} from '@datadog/mobile-react-native';
+import { DdLogs, DdTrace, DdRum, DdSdkReactNative } from 'expo-datadog';
 
 if (__DEV__) {
     const emptyAsyncFunction = () => new Promise<void>(resolve => resolve());
@@ -80,11 +163,11 @@ if (__DEV__) {
 }
 ```
 
-そして、SDK を初期化する前にインポートしてください。
+そして、Datadog React Native SDK を初期化する前にインポートしてください。
 
 ```typescript
 import './mockDatadog';
-import { DdSdkReactNative } from '@datadog/mobile-react-native';
+import { DdSdkReactNative } from 'expo-datadog';
 
 const config = new DdSdkReactNativeConfiguration(/* your config */);
 DdSdkReactNative.initialize(config);
@@ -99,3 +182,4 @@ DdSdkReactNative.initialize(config);
 [3]: https://docs.expo.dev/development/introduction/
 [4]: https://docs.expo.dev/workflow/customizing/#releasing-apps-with-custom-native-code-to
 [5]: https://docs.expo.dev/development/getting-started/
+[6]: https://docs.datadoghq.com/ja/real_user_monitoring/error_tracking/expo/

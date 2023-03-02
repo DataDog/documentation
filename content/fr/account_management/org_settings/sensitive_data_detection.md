@@ -36,7 +36,7 @@ Le scanner de données sensibles est accessible depuis les [paramètres d'organi
 
 ### Configuration
 
-- **Définissez des groupes d'analyse** : un groupe d'analyse est composé d'une requête de filtre définissant les types de logs à analyser, ainsi que d'un ensemble de règles d'analyse indiquant les types de données sensibles à analyser au sein de ces logs. Consultez la section [Syntaxe de recherche de logs][2] pour en savoir plus sur les requêtes de filtre.
+- **Définissez des groupes d'analyse** : un groupe d'analyse est composé d'un filtre de requête définissant les types de logs à analyser, ainsi que d'un ensemble de règles d'analyse indiquant les types de données sensibles à analyser au sein de ces logs. Consultez la section [Syntaxe de recherche de logs][2] pour en savoir plus sur les filtres de requête.
 - **Définissez des règles d'analyse** : ajoutez à un groupe d'analyse des règles d'analyse prédéfinies depuis la bibliothèque de règles d'analyse Datadog. Vous avez également la possibilité de créer de toutes pièces vos propres règles afin de baser votre analyse sur des patterns d'expressions régulières.
 
 ### Règles d'analyse personnalisées

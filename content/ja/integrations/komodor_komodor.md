@@ -83,3 +83,5 @@ Komodor では、お客様の成功に必要なツールと情報の提供をお
 
 
 [1]: https://app.datadoghq.com/account/settings#integrations/komodor
+---
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/komodor-komodor" target="_blank">こちらをクリック</a>してください。

@@ -1,51 +1,76 @@
 ---
+app_id: consul
+app_uuid: d0b52e9d-6594-4ff5-9b66-800943f75756
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     consul: assets/dashboards/consul_dashboard.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: true
+    metrics:
+      check: consul.peers
+      metadata_path: metadata.csv
+      prefix: consul.
+    process_signatures:
+    - consul agent
+    - consul_agent
+    - consul-agent
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Consul
   logs:
     source: consul
-  metrics_metadata: metadata.csv
-  monitors: {}
   saved_views:
     consul_processes: assets/saved_views/consul_processes.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - containers
 - orchestration
 - configuration & deployment
 - notification
 - log collection
-- autodiscovery
-creates_events: true
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/consul/README.md
-display_name: Consul
+display_on_public_website: true
 draft: false
 git_integration_title: consul
-guid: ec1e9fac-a339-49a3-b501-60656d2a5671
 integration_id: consul
 integration_title: Consul
-integration_version: 2.1.0
+integration_version: 2.2.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: consul.
-metric_to_check: consul.peers
+manifest_version: 2.0.0
 name: consul
-process_signatures:
-- consul agent
-- consul_agent
-- consul-agent
-public_title: Consul インテグレーション
+oauth: {}
+public_title: Consul
 short_description: Consul 健全性チェックのアラート、サービス/ノードマッピングの表示、その他
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::コンテナ
+  - Category::オーケストレーション
+  - Category::構成 & デプロイ
+  - Category::通知
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: Consul 健全性チェックのアラート、サービス/ノードマッピングの表示、その他
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Consul
 ---
 
 
@@ -73,7 +98,7 @@ _Consul_ Agent は DogStatsD を使ってさらに多くのメトリクスを提
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Datadog Agent の Consul チェックは [Datadog Agent][2] パッケージに含まれています。Consul ノードに追加でインストールする必要はありません。
 

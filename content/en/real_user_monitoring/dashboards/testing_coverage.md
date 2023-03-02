@@ -9,6 +9,9 @@ further_reading:
 - link: '/synthetics/browser_tests'
   tag: 'Documentation'
   text: 'Learn about Synthetic browser tests'
+- link: 'https://www.datadoghq.com/blog/test-coverage-monitoring-datadog/'
+  tag: 'Blog'
+  text: 'Track your test coverage with RUM and Synthetic Monitoring'
 ---
 
 ## Overview

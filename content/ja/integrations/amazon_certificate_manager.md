@@ -35,7 +35,7 @@ AWS Certificate Manager を使用すると、SSL/TLS 証明書をプロビジョ
 
 ### メトリクスの収集
 
-1. [AWS インテグレーションタイル][2]のメトリクス収集で、`CertificateManager` をオンにします。
+1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `CertificateManager` が有効になっていることを確認します。
 2. [Datadog - AWS Certificate Manager インテグレーション][3]をインストールします。
 
 ## 収集データ
@@ -57,7 +57,7 @@ AWS Certificate Manager インテグレーションには、サービスのチ�
 ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[3]: https://app.datadoghq.com/account/settings#integrations/amazon-certificate-manager
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
+[3]: https://app.datadoghq.com/integrations/amazon-certificate-manager
 [4]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_certificate_manager/amazon_certificate_manager_metadata.csv
 [5]: https://docs.datadoghq.com/ja/help/

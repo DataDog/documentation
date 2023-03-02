@@ -1,52 +1,76 @@
 ---
+app_id: activemq
+app_uuid: ab0b15e8-b7ae-4570-bde2-433a079cdb83
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     activemq: assets/dashboards/activemq_dashboard.json
     artemis: assets/dashboards/artemis_dashboard.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check:
+      - activemq.queue.size
+      - activemq.artemis.queue.message_count
+      metadata_path: metadata.csv
+      prefix: activemq.
+    process_signatures:
+    - activemq
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: ActiveMQ
   logs:
     source: activemq
-  metrics_metadata: metadata.csv
   monitors:
     '[ActiveMQ Artemis] High disk store usage': assets/recommended_monitors/activemq_artemis_high_disk_store.json
     '[ActiveMQ Artemis] High unrouted messages': assets/recommended_monitors/activemq_artemis_unrouted_messages.json
   saved_views:
     activemq_processes: assets/saved_views/activemq_processes.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - log collection
 - processing
 - messaging
-- autodiscovery
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/activemq/README.md
-display_name: ActiveMQ
+display_on_public_website: true
 draft: false
 git_integration_title: activemq
-guid: 496df16d-5ad0-438c-aa2a-b8ba8ee3ae05
 integration_id: activemq
 integration_title: ActiveMQ
 integration_version: 2.3.1
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: activemq.
-metric_to_check:
-- activemq.queue.size
-- activemq.artemis.queue.message_count
+manifest_version: 2.0.0
 name: activemq
-process_signatures:
-- activemq
-public_title: ActiveMQ インテグレーション
+oauth: {}
+public_title: ActiveMQ
 short_description: ブローカーとキュー、プロデューサーとコンシューマーなどのメトリクスを収集。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::ログの収集
+  - Category::処理
+  - Category::メッセージング
+  configuration: README.md#Setup
+  description: ブローカーとキュー、プロデューサーとコンシューマーなどのメトリクスを収集。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: ActiveMQ
 ---
 
 
@@ -61,7 +85,7 @@ ActiveMQ チェックは、ブローカーとキュー、プロデューサー�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Agent の ActiveMQ チェックは [Datadog Agent][3] パッケージに含まれています。ActiveMQ ノードに追加でインストールする必要はありません。
 
@@ -198,7 +222,7 @@ ActiveMQ XML からメトリクスをリアルタイムに取得すると、以�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 ActiveMQ XML チェックは [Datadog Agent][3] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 

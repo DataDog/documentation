@@ -35,7 +35,7 @@ Amazon FSx は、Windows File Server または Lustre にスケーラブルな�
 
 ### メトリクスの収集
 
-1. [AWS インテグレーションタイル][2]のメトリクス収集で、`FSx` をオンにします。
+1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `FSx` が有効になっていることを確認します。
 2. AWS FSx のメトリクスを収集するために、以下のアクセス許可を [Datadog IAM ポリシー][3]に追加します。
 
     | AWS アクセス許可                          | 説明                                                                                                                                                                                                                                             |
@@ -84,9 +84,9 @@ Amazon FSx インテグレーションには、サービスのチェック機能
 ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
-[4]: https://app.datadoghq.com/account/settings#integrations/amazon-fsx
+[4]: https://app.datadoghq.com/integrations/amazon-fsx
 [5]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/file-access-auditing.html#faa-log-destinations
 [6]: https://app.datadoghq.com/logs
 [7]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/?tab=kinesisfirehosedeliverystream

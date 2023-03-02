@@ -9,6 +9,9 @@ further_reading:
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboards using JSON"
+- link: "https://www.datadoghq.com/blog/visualize-behavior-datadog-heatmaps/"
+  tag: "Blog"
+  text: "Visualize user behavior with Datadog Heatmaps"
 ---
 
 The heat map visualization shows metrics aggregated across many tags, such as *hosts*. The more hosts that have a particular value, the darker that square is.

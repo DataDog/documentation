@@ -56,6 +56,8 @@ The logs surface as Insights in the Log Explorer, matching the search context an
 
 Click on a specific insight to see the full description of the detected anomaly as well as the list of patterns contributing to it.
 
+Anomalies that Watchdog determines to be particularly severe are also surfaced in the [Watchdog alerts feed][6]. Set up a [Watchdog logs monitor][7] to be notified whenever Watchdog finds one of these anomalies.
+
 For more information about searching logs in the Log Explorer, see [Log Search Syntax][2] and [Custom Time Frames][3].
 
 ### Error Outliers
@@ -93,4 +95,6 @@ In the **full side panel** view, you can see:
 [2]: /logs/search-syntax
 [3]: /dashboards/guide/custom_time_frames
 [4]: /logs/explorer/facets/
-[5]: /logs/explorer/group/#patterns
+[5]: /logs/explorer/analytics/patterns
+[6]: https://app.datadoghq.com/watchdog
+[7]: /monitors/types/watchdog/

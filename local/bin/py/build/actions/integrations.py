@@ -101,6 +101,9 @@ class Integrations:
             r"(\S*FROM_DISPLAY_NAME\s*=\s*\{)(.*?)\}",
             re.DOTALL,
         )
+        self.regex_site_region = re.compile(
+            r"\{\{< ([\/]?site-region.*) >\}\}", re.MULTILINE
+        )
         self.datafile_json = []
         self.integration_mutations = integration_mutations
         self.initial_integration_files = glob.glob(
@@ -366,6 +369,12 @@ class Integrations:
         new_file_name = "{}{}.yaml".format(
             self.data_integrations_dir, key_name
         )
+        # if md already exists likely collision
+        if exists("{}{}.md".format(self.content_integrations_dir, key_name)):
+            collision_name = self.get_collision_alternate_name(file_name)
+            new_file_name = "{}{}.yaml".format(
+                self.data_integrations_dir, collision_name
+            )
         self.metric_csv_to_yaml(key_name, file_name, new_file_name)
 
     def process_integration_manifest(self, file_name):
@@ -424,10 +433,16 @@ class Integrations:
             key_name = basename(
                 dirname(normpath(file_name))
             )
-
         new_file_name = "{}{}.json".format(
             self.data_service_checks_dir, key_name
         )
+
+        # if md already exists likely collision
+        if exists("{}{}.md".format(self.content_integrations_dir, key_name)):
+            collision_name = self.get_collision_alternate_name(file_name)
+            new_file_name = "{}{}.json".format(
+                self.data_service_checks_dir, collision_name
+            )
 
         shutil.copy(
             file_name,
@@ -603,9 +618,25 @@ class Integrations:
         The build should fail if we found any sections that should not be displayed in Docs.
         Current exclude list: ["Setup", "Pricing", "Tiered Pricing"]
         """
-        setup_header_markdown_regex = r"(#{1,6})(\s*)(Setup|Pricing|Tiered Pricing)"
+        setup_header_markdown_regex = r"(#{1,6})(\s*)(Setup|Pricing|Tiered Pricing|Uninstallation)"
         matches = re.search(setup_header_markdown_regex, markdown_string, re.MULTILINE | re.IGNORECASE)
         return matches == None
+
+    def get_collision_alternate_name(self, file_name):
+        dir_path = dirname(normpath(file_name))
+        dir_name = basename(dir_path)
+        dir_path = dir_path.replace('/assets', '') if dir_path.endswith('assets') else dir_path
+        collision_name = dir_name
+        manifest_json_path = f'{dir_path}/manifest.json'
+        manifest_json = {}
+
+        if exists(manifest_json_path):
+            with open(manifest_json_path) as fp:
+                manifest_json = json.load(fp)
+                integration_id = manifest_json.get("integration_id", "") or manifest_json.get('app_id', "") or ""
+                collision_name = integration_id.replace('-', '_') or manifest_json.get("name", "") or dir_name
+
+        return collision_name
 
     def process_integration_readme(self, file_name, marketplace=False):
         """
@@ -695,7 +726,8 @@ class Integrations:
                 markdown_string = f"{markdown_string}\n{purchase_copy}"
                 markdown_with_replaced_images = self.replace_image_src(markdown_string, basename(dirname(file_name)))
                 markdown_setup_removed = self.remove_markdown_section(markdown_with_replaced_images, '## Setup')
-                updated_markdown = self.remove_h3_markdown_section(markdown_setup_removed, '### Pricing')
+                markdown_uninstall_removed = self.remove_markdown_section(markdown_setup_removed, '## Uninstallation')
+                updated_markdown = self.remove_h3_markdown_section(markdown_uninstall_removed, '### Pricing')
                 is_marketplace_integration_markdown_valid = self.validate_marketplace_integration_markdown(updated_markdown)
 
                 if not is_marketplace_integration_markdown_valid:
@@ -741,22 +773,8 @@ class Integrations:
             result = re.sub(
                 self.regex_partial_close, "", result, 0
             )
-
-        if metrics_exist:
             result = re.sub(
-                self.regex_metrics,
-                r'\1{{< get-metrics-from-git "%s" >}}\n\3\4'
-                % format(title),
-                result,
-                0,
-            )
-        if service_check_exist:
-            result = re.sub(
-                self.regex_service_check,
-                r'\1{{< get-service-checks-from-git "%s" >}}\n\3\4'
-                % format(title),
-                result,
-                0,
+                self.regex_site_region, r"{{% \1 %}}", result, 0   
             )
 
         # if __init__.py exists lets grab the integration id
@@ -781,10 +799,32 @@ class Integrations:
                 if matches:
                     integration_version = matches.group(1)
 
+        # determine new name is collision
+        if exist_collision:
+            collision_name = self.get_collision_alternate_name(file_name)
+            print(f"{file_name} {collision_name}")
+
+        if metrics_exist:
+            result = re.sub(
+                self.regex_metrics,
+                r'\1{{< get-metrics-from-git "%s" >}}\n\3\4'
+                % format(title if not exist_collision else collision_name),
+                result,
+                0,
+            )
+        if service_check_exist:
+            result = re.sub(
+                self.regex_service_check,
+                r'\1{{< get-service-checks-from-git "%s" >}}\n\3\4'
+                % format(title if not exist_collision else collision_name),
+                result,
+                0,
+            )
+
         if not exist_already and no_integration_issue:
+            out_name = self.content_integrations_dir + new_file_name
             # let's only write out file.md if it's going to be public
             if manifest_json.get("is_public", False):
-                out_name = self.content_integrations_dir + new_file_name
 
                 # let's make relative app links to integrations tile absolute
                 regex = r"(?<!https://app.datadoghq.com)(/account/settings#integrations[^.)\s]*)"
@@ -795,14 +835,13 @@ class Integrations:
                 # if the same integration exists in multiple locations try name md file differently
                 # integration_id.md -> name.md -> original_collision_name.md
                 if exist_collision:
-                    f_name = integration_id.replace('-', '_') or manifest_json.get("name", "") or new_file_name
-                    manifest_json["name"] = f_name
-                    f_name = f_name if f_name.endswith('.md') else f_name + ".md"
-                    out_name = self.content_integrations_dir + f_name
+                    manifest_json["name"] = collision_name
+                    collision_name = collision_name if collision_name.endswith('.md') else collision_name + ".md"
+                    out_name = self.content_integrations_dir + collision_name
                     print("\x1b[33mWARNING\x1b[0m: Collision, duplicate integration {} trying as {}".format(
-                        new_file_name, f_name))
+                        new_file_name, collision_name))
                     result = self.add_integration_frontmatter(
-                        f_name, result, dependencies, integration_id, integration_version, manifest_json
+                        collision_name, result, dependencies, integration_id, integration_version, manifest_json
                     )
                 else:
                     result = self.add_integration_frontmatter(
@@ -817,6 +856,10 @@ class Integrations:
                     final_text = format_link_file(out_name, regex_skip_sections_start, regex_skip_sections_end)
                     with open(out_name, 'w') as final_file:
                         final_file.write(final_text)
+            else:
+                if exists(out_name):
+                    print(f"removing {integration_name} due to is_public/display_on_public_websites flag, {out_name}")
+                    remove(out_name)
 
     def add_integration_frontmatter(
         self, file_name, content, dependencies=[], integration_id="", integration_version="", manifest_json=None

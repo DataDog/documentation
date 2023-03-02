@@ -1,39 +1,58 @@
 ---
-aliases:
-- /ja/logs/log_collection/logstash
+app_id: logstash
+app_uuid: efcb18d9-2789-4481-bd4b-ff5a4c058dc3
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: true
+    metrics:
+      check: logstash.process.cpu.percent
+      metadata_path: metadata.csv
+      prefix: logstash.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Logstash
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: ervansetiawan@gmail.com
+  support_email: ervansetiawan@gmail.com
 categories:
 - log collection
-creates_events: true
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/logstash/README.md
-display_name: Logstash
+display_on_public_website: true
 draft: false
 git_integration_title: logstash
-guid: 9d110885-cbdf-44e5-83b8-7a6514724e98
 integration_id: logstash
 integration_title: Logstash
 integration_version: 1.1.0
 is_public: true
 kind: インテグレーション
-maintainer: ervansetiawan@gmail.com
-manifest_version: 1.0.0
-metric_prefix: logstash.
-metric_to_check: logstash.process.cpu.percent
+manifest_version: 2.0.0
 name: logstash
+oauth: {}
 public_title: Logstash
 short_description: Logstash インスタンスからランタイムメトリクスを収集して監視
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: Logstash インスタンスからランタイムメトリクスを収集して監視
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Logstash
 ---
 
 

@@ -38,7 +38,7 @@ Amazon DynamoDB は、AWS ポートフォリオに含まれる、フルマネー
 
 ### メトリクスの収集
 
-1. [AWS インテグレーションタイル][2]のメトリクス収集で、`DynamoDB` をオンにします。
+1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `DynamoDB` が有効になっていることを確認します。
 2. Amazon DynamoDB のメトリクスを収集するために、次のアクセス許可を [Datadog IAM ポリシー][3]に追加します。
 
     - `dynamodb:ListTables`: 使用できる DynamoDB テーブルをリストするために使用されます。
@@ -89,10 +89,10 @@ AWS DynamoDB インテグレーションには、サービスのチェック機�
 ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/authentication-and-access-control.html
-[5]: https://app.datadoghq.com/account/settings#integrations/amazon_dynamodb
+[5]: https://app.datadoghq.com/integrations/amazon-dynamodb
 [6]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-create-and-update-a-trail.html
 [7]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
 [8]: https://app.datadoghq.com/logs

@@ -21,54 +21,19 @@ further_reading:
 ---
 ## Compatibility requirements
 
-The Java Tracing Library supports all JVMs on all platforms version 7 and higher. To utilize tracing with the [Continuous Profiler][1], OpenJDK 11+, Oracle Java 11+, OpenJDK 8 for most vendors (version 8u262+) and Zulu Java 8+ (minor version 1.8.0_212+) are supported. Starting in version 8u272+, the Continuous Profiler supports all vendors.
+The latest Java Tracer supports all JVMs version 8 and higher. For additional information about JVM versions below 8, read [Supported JVM runtimes][10].
 
-All JVM-based languages, such as Scala (versions 2.10.x - 2.13.x), Groovy, Kotlin, and Clojure are supported in the Java tracer and profiler. For a full list of supported libraries, visit the [Compatibility Requirements][2] page.
-
-When you set up tracing, you're also setting up Continuous Profiler, and you need only [enable Profiler][1] to start receiving profiling data from your app.
+For a full list of Datadog’s Java version and framework support (including legacy and maintenance versions), read [Compatibility Requirements][1].
 
 ## Installation and getting started
 
 ### Follow the in-app documentation (recommended)
 
-Follow the [Quickstart instructions][3] within the Datadog app for the best experience, including:
+Follow the [Quickstart instructions][2] within the Datadog app for the best experience, including:
 
 - Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
 - Dynamically set `service`, `env`, and `version` tags.
 - Enable the Continuous Profiler, ingesting 100% of traces, and Trace ID injection into logs during setup.
-
-### Java installation
-
-Otherwise, to begin tracing your applications:
-
-1. Download `dd-java-agent.jar` that contains the latest Agent class files:
-
-   ```shell
-   wget -O dd-java-agent.jar https://dtdg.co/latest-java-tracer
-   ```
-   To access a specific tracer version, visit Datadog's [Maven repository][4].
-
-2. To run your app from an IDE, Maven or Gradle application script, or `java -jar` command, with the Continuous Profiler, deployment tracking, logs injection (if you are sending logs to Datadog), and trace volume control, add the `-javaagent` JVM argument and the following configuration options, as applicable:
-
-    ```text
-    java -javaagent:/path/to/dd-java-agent.jar -Ddd.profiling.enabled=true -XX:FlightRecorderOptions=stackdepth=256 -Ddd.logs.injection=true -Ddd.service=my-app -Ddd.env=staging -jar path/to/your/app.jar -Ddd.version=1.0
-    ```
-
-    **Note:** Enabling profiling may impact your bill depending on your APM bundle. See the [pricing page][5] for more information.
-
-| Environment Variable      | System Property                     | Description|
-| --------- | --------------------------------- | ------------ |
-| `DD_ENV`      | `dd.env`                  | Your application environment (`production`, `staging`, etc.) |
-| `DD_SERVICE`   | `dd.service`     | The name of a set of processes that do the same job. Used for grouping stats for your application. |
-| `DD_VERSION` | `dd.version` |  Your application version (for example, `2.5`, `202003181415`, `1.3-alpha`, etc.) |
-| `DD_PROFILING_ENABLED`      | `dd.profiling.enabled`          | Enable the [Continous Profiler][6] |
-| `DD_LOGS_INJECTION`   | `dd.logs.injection`     | Enable automatic MDC key injection for Datadog trace and span IDs. See [Advanced Usage][7] for details. |
-| `DD_TRACE_SAMPLE_RATE` | `dd.trace.sample.rate` |   Set a sampling rate at the root of the trace for all services.     |
-| `DD_TRACE_SAMPLING_SERVICE_RULES` | `dd.trace.sampling.service.rules` |   Set a sampling rate at the root of the trace for services that match the specified rule.    |
-
-Additional [configuration options](#configuration) are described below.
-
-3. Ensure the Datadog Agent is configured for APM and reachable from your application from the environment specific instructions [below](#configure-the-datadog-agent-for-apm).
 
 ### Configure the Datadog Agent for APM
 
@@ -91,6 +56,7 @@ Install and configure the Datadog Agent to receive traces from your instrumented
    ```
    DD_TRACE_AGENT_URL=http://custom-hostname:1234
    DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket
+
    ```
 
    ```bash
@@ -136,6 +102,43 @@ For other environments, please refer to the [Integrations][5] documentation for 
 [6]: /help/
 {{% /tab %}}
 {{< /tabs >}}
+
+### Instrument Your Application
+
+<div class="alert alert-info">If you are collecting traces from a Kubernetes application, or from an application on a Linux host or container, as an alternative to the following instructions, you can inject the tracing library into your application. Read <a href="/tracing/trace_collection/library_injection">Injecting Libraries</a> for instructions.</div>
+
+After the agent is installed, to begin tracing your applications:
+
+1. Download `dd-java-agent.jar` that contains the latest tracer class files, to a folder that is accessible by your Datadog user:
+
+   ```shell
+   wget -O dd-java-agent.jar https://dtdg.co/latest-java-tracer
+   ```
+
+   **Note:** To download a specific major version, use the `https://dtdg.co/java-tracer-vX` link instead, where `vX` is the desired version.
+   For example, use `https://dtdg.co/java-tracer-v0` for the latest version 0.
+   Alternatively, see Datadog's [Maven repository][3] for any specific version.
+
+2. To run your app from an IDE, Maven or Gradle application script, or `java -jar` command, with the Continuous Profiler, deployment tracking, and logs injection (if you are sending logs to Datadog), add the `-javaagent` JVM argument and the following configuration options, as applicable:
+
+    ```text
+    java -javaagent:/path/to/dd-java-agent.jar -Ddd.profiling.enabled=true -XX:FlightRecorderOptions=stackdepth=256 -Ddd.logs.injection=true -Ddd.service=my-app -Ddd.env=staging -Ddd.version=1.0 -jar path/to/your/app.jar
+    ```
+
+    **Note:** Enabling profiling may impact your bill depending on your APM bundle. See the [pricing page][4] for more information.
+
+| Environment Variable      | System Property                     | Description|
+| --------- | --------------------------------- | ------------ |
+| `DD_ENV`      | `dd.env`                  | Your application environment (`production`, `staging`, etc.) |
+| `DD_SERVICE`   | `dd.service`     | The name of a set of processes that do the same job. Used for grouping stats for your application. |
+| `DD_VERSION` | `dd.version` |  Your application version (for example, `2.5`, `202003181415`, `1.3-alpha`, etc.) |
+| `DD_PROFILING_ENABLED`      | `dd.profiling.enabled`          | Enable the [Continous Profiler][5] |
+| `DD_LOGS_INJECTION`   | `dd.logs.injection`     | Enable automatic MDC key injection for Datadog trace and span IDs. See [Advanced Usage][6] for details. |
+| `DD_TRACE_SAMPLE_RATE` | `dd.trace.sample.rate` |   Set a sampling rate at the root of the trace for all services.     |
+| `DD_TRACE_SAMPLING_RULES` | `dd.trace.sampling.rules` |   Set a sampling rate at the root of the trace for services that match the specified rule.    |
+
+Additional [configuration options](#configuration) are described below.
+
 
 ### Add the Java Tracer to the JVM
 
@@ -242,13 +245,15 @@ For additional details and options, see the [WebSphere docs][1].
    java -javaagent:/path/to/dd-java-agent.jar -jar my_app.jar
    ```
 
-     For more information, see the [Oracle documentation][8].
+     For more information, see the [Oracle documentation][7].
 
 - Never add `dd-java-agent` to your classpath. It can cause unexpected behavior.
 
 ## Automatic instrumentation
 
-Automatic instrumentation for Java uses the `java-agent` instrumentation capabilities [provided by the JVM][9]. When a `java-agent` is registered, it can modify class files at load time.
+Automatic instrumentation for Java uses the `java-agent` instrumentation capabilities [provided by the JVM][8]. When a `java-agent` is registered, it can modify class files at load time.
+
+**Note:** Classes loaded with remote ClassLoader are not instrumented automatically.
 
 Instrumentation may come from auto-instrumentation, the OpenTracing API, or a mixture of both. Instrumentation generally captures the following info:
 
@@ -259,67 +264,20 @@ Instrumentation may come from auto-instrumentation, the OpenTracing API, or a mi
 
 ## Configuration
 
-If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][10] for details.
-
-
-## Trace reporting
-
-To report a trace to Datadog the following happens:
-
-- Trace completes
-- Trace is pushed to an asynchronous queue of traces
-    - Queue is size-bound and doesn't grow past a set limit of 7000 traces
-    - Once the size limit is reached, traces are discarded
-    - A count of the total traces is captured to ensure accurate throughput
-- In a separate reporting thread, the trace queue is flushed, traces are encoded with MessagePack, and then sent to the Datadog Agent using http
-- Queue flushing happens on a schedule of once per second
-
-To see the actual code, documentation, and usage examples for any of the libraries and frameworks that Datadog supports, check the full list of auto-instrumented components for Java applications in the [Integrations](#integrations) section.
-
-### Trace annotation
-
-Add the `dd-trace-api` dependency to your project. For Maven, add this to `pom.xml`:
-
-```xml
-<dependency>
-    <groupId>com.datadoghq</groupId>
-    <artifactId>dd-trace-api</artifactId>
-    <version>{version}</version>
-</dependency>
-```
-
-For Gradle, add:
-
-```gradle
-implementation 'com.datadoghq:dd-trace-api:{version}'
-```
-
-Now add `@Trace` to methods to have them be traced when running with `dd-java-agent.jar`. If the Agent is not attached, this annotation does not affect your application.
-
-`@Trace` annotations have the default operation name `trace.annotation`, while the method traced has the resource by default.
-
-## Performance
-
-Java APM has minimal impact on the overhead of an application:
-
-- No collections maintained by Java APM grow unbounded in memory
-- Reporting traces does not block the application thread
-- Java APM loads additional classes for trace collection and library instrumentation
-
-
+If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][9] for details.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /tracing/profiler/enabling/?code-lang=java
-[2]: /tracing/compatibility_requirements/java
-[3]: https://app.datadoghq.com/apm/docs
-[4]: https://repo1.maven.org/maven2/com/datadoghq/dd-java-agent
-[5]: /account_management/billing/apm_tracing_profiler/
-[6]: /tracing/profiler/
-[7]: /tracing/other_telemetry/connect_logs_and_traces/java/
-[8]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
-[9]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
-[10]: /tracing/trace_collection/library_config/java/
+[1]: /tracing/compatibility_requirements/java
+[2]: https://app.datadoghq.com/apm/service-setup
+[3]: https://repo1.maven.org/maven2/com/datadoghq/dd-java-agent
+[4]: /account_management/billing/apm_tracing_profiler/
+[5]: /profiler/
+[6]: /tracing/other_telemetry/connect_logs_and_traces/java/
+[7]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
+[8]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
+[9]: /tracing/trace_collection/library_config/java/
+[10]: /tracing/trace_collection/compatibility/java/#supported-jvm-runtimes

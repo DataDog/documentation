@@ -1,7 +1,7 @@
 ---
-title: NodeJS Compatibility Requirements
+title: Node.js Compatibility Requirements
 kind: documentation
-description: 'Compatibility Requirements for the NodeJS tracer'
+description: 'Compatibility Requirements for the Node.js tracer'
 aliases:
   - /tracing/compatibility_requirements/nodejs
   - /tracing/setup_overview/compatibility_requirements/nodejs
@@ -48,6 +48,21 @@ For the best level of support, always run the latest LTS release of Node.js, and
 
 For more information about Node.js release, see the [official Node.js documentation][4].
 
+### Operating system support
+
+The following operating systems are officially supported by `dd-trace`. Any operating system not listed is still likely to work, but with some features missing, for example ASM, profiling, and runtime metrics. Generally speaking, operating systems that are actively maintained at the time of initial release for a major version are supported.
+
+| dd-trace Version    | Operating System      | Architectures         | Minimum Versions                         |
+| ------------------- | --------------------- | --------------------- | ---------------------------------------- |
+| 3.x                 | Linux (glibc)         | arm, arm64, x64       | CentOS 7, Debian 9, RHEL 7, Ubuntu 14.04 |
+|                     | Linux (musl)          | arm, arm64, x64       | Alpine 3.13                              |
+|                     | macOS                 | arm64, x64            | Catalina (10.15)                         |
+|                     | Windows               | ia32, x64             | Windows 8.1, Windows Server 2012         |
+| 2.x                 | Linux (glibc)         | arm, arm64, ia32, x64 | CentOS 7, Debian 9, RHEL 7, Ubuntu 14.04 |
+|                     | Linux (musl)          | arm, arm64, ia32, x64 | Alpine 3.10                              |
+|                     | macOS                 | arm64, x64            | Yosemite (10.10)                         |
+|                     | Windows               | ia32, x64             | Windows 8.1, Windows Server 2012         |
+
 ## Supported integrations
 
 APM provides out-of-the-box instrumentation for many popular frameworks and libraries by using a plugin system. To request support for a module that is not listed, contact our awesome [support team][3].
@@ -91,6 +106,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 | [elasticsearch][30]    | `>=10`   | Fully supported | Supports `@elastic/elasticsearch` versions `>=5` |
 | [ioredis][31]          | `>=2`    | Fully supported |                                                  |
 | [knex][32]             | `>=0.8`  | Fully supported | This integration is only for context propagation |
+| [mariadb][63]          | `>=3`    | Fully supported |                                                  |
 | [memcached][33]        | `>=2.2`  | Fully supported |                                                  |
 | [mongodb-core][34]     | `>=2`    | Fully supported | Supports Mongoose                                |
 | [mysql][35]            | `>=2`    | Fully supported |                                                  |
@@ -212,3 +228,4 @@ For additional information or to discuss [leave a comment on this github issue][
 [60]: https://nodejs.org/api/async_hooks.html
 [61]: https://www.meteor.com/
 [62]: https://github.com/DataDog/dd-trace-js/issues/1229
+[63]: https://github.com/mariadb-corporation/mariadb-connector-nodejs

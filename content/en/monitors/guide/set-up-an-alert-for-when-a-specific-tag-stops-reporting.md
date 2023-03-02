@@ -2,7 +2,7 @@
 title: Set up an alert for when a specific tag stops reporting
 kind: guide
 further_reading:
-- link: "/monitors/create/"
+- link: "/monitors/"
   tag: "Documentation"
   text: "Learn how to create a monitor"
 - link: "/monitors/notify/"
@@ -25,4 +25,4 @@ Your alert triggers if the tag stops reporting.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /monitors/
-[2]: /monitors/create/types/metric/
+[2]: /monitors/types/metric/

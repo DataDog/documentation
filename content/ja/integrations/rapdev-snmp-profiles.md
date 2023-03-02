@@ -7,6 +7,7 @@ assets:
     RapDev APC UPS Dashboard: assets/dashboards/rapdev_apc_ups_dashboard.json
     RapDev Arista Switch Dashboard: assets/dashboards/rapdev_arista_switch_dashboard.json
     RapDev Aruba Switch Dashboard: assets/dashboards/rapdev_aruba_switch_dashboard.json
+    RapDev AudioCodes Controller: assets/dashboards/rapdev_audiocodes_controller.json
     RapDev AudioCodes Controller Virtual Edition: assets/dashboards/rapdev_audiocodes_controller_virtual_edition.json
     RapDev Barracuda CloudGen Firewall Dashboard: assets/dashboards/rapdev_barracuda_cloudgen_firewall_dashboard.json
     RapDev Bluecoat SG Dashboard: assets/dashboards/rapdev_bluecoat_sg_dashboard.json
@@ -51,7 +52,7 @@ assets:
     events:
       creates_events: false
     metrics:
-      check: ''
+      check: snmp.devices_monitored
       metadata_path: metadata.csv
       prefix: snmp.
     service_checks:
@@ -85,7 +86,7 @@ author:
   homepage: https://www.rapdev.io
   name: RapDev
   sales_email: ddsales@rapdev.io
-  support_email: datadog-engineering@rapdev.io
+  support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
 - マーケットプレイス
@@ -156,6 +157,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: SNMP プロファイル
+  uninstallation: README.md#Uninstallation
 ---
 
 
@@ -220,14 +222,14 @@ RapDev SNMP プロファイルパッケージは 150 以上のデバイスプロ
 ## サポート
 サポートまたは機能リクエストについては、以下のチャンネルで RapDev.io までお問い合わせください。
 
- - メール: datadog-engineering@rapdev.io 
+ - メール: support@rapdev.io 
  - チャット: [rapdev.io](https://www.rapdev.io/#Get-in-touch)
  - 電話: 855-857-0222 
 
 ---
 ボストンより ❤️ を込めて
 
-*お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:datadog-engineering@rapdev.io)からメッセージをお送りいただければ、導入をサポートいたします！*
+*お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:support@rapdev.io)からメッセージをお送りいただければ、導入をサポートいたします！*
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、[こちらをクリック](https://app.datadoghq.com/marketplace/app/rapdev-snmp-profiles/pricing)してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-snmp-profiles" target="_blank">こちらをクリック</a>してください。

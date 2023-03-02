@@ -7,7 +7,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitoring-101-alerting/"
   tag: "Blog"
   text: "Monitoring 101: Alerting on what matters"
-- link: "/monitors/create/types/metric/"
+- link: "/monitors/types/metric/"
   tag: "Documentation"
   text: "Metric Monitors"
 - link: "/monitors/notify/"
@@ -45,7 +45,7 @@ According to the [Disk integration documentation][6], `system.disk.in_use` is *t
 
 To alert on low disk space, the monitor should trigger when the metric is `above` the threshold. The threshold values are based on your preference. For this metric, values between `0` and `1` are appropriate:
 
-{{< img src="getting_started/application/alert_thresholds.png" alt="alert setup"  >}}
+{{< img src="getting_started/application/monitor_configuration.png" alt="Metric monitor configuration settings within the Create Monitor page, with Multi Alert selected and configured to alert on the average of the query over the last 5 minutes for each host and device reporting the metric. The Set alert conditions section is configured to trigger when the evaluated value is above the threshold for any host or device, with the Alert threshold set at 0.9, the Warning threshold set at 0.8, and the monitor configured not to notify if data is missing"  >}}
 
 For this example, the other settings in this section are left on the defaults. For more details, see the [Metric Monitors][7] documentation.
 
@@ -97,13 +97,13 @@ You can view Monitor Saved Views from your mobile home screen or view and mute m
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/create/types/metric/
+[1]: /monitors/types/metric/
 [2]: https://www.datadoghq.com
 [3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://app.datadoghq.com/infrastructure
 [5]: https://app.datadoghq.com/monitors#create/metric
 [6]: /integrations/disk/
-[7]: /monitors/create/types/metric/?tab=threshold#set-alert-conditions
+[7]: /monitors/types/metric/?tab=threshold#set-alert-conditions
 [8]: /monitors/notify/#conditional-variables
 [9]: /account_management/rbac/
 [10]: /mobile/

@@ -1,11 +1,12 @@
 ---
-title: Windows 用 Datadog Agent Manager
-kind: ガイド
 further_reading:
-  - link: /agent/basic_agent_usage/windows/
-    tag: ドキュメント
-    text: Windows Agent の基本的なエージェントの利用方法
+- link: /agent/basic_agent_usage/windows/
+  tag: ドキュメント
+  text: Windows Agent の基本的なエージェントの利用方法
+kind: ガイド
+title: Windows 用 Datadog Agent Manager
 ---
+
 ## 概要
 
 Datadog Agent Manager GUI はブラウザベースです。GUI が実行されるポートは `datadog.yaml` ファイルで構成できます。ポートを `-1` に設定すると、GUI が無効になります。 デフォルトでは、Windows と Mac ではポート 5002 で有効になっており、Linux では無効になっています。
@@ -40,10 +41,9 @@ Windows のスタートメニューから
 * Datadog Agent Manager を右クリックします。
 * `Run as Administrator` を選びます。
 
-管理者特権の Powershell プロンプトから
-
+管理者特権の PowerShell プロンプトから
 ```powershell
-& "%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" launch-gui
+& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" launch-gui
 ```
 
 Datadog Agent Manager がデフォルトのウェブブラウザで起動します。ウェブアドレスは `http://127.0.0.1:5002` です。

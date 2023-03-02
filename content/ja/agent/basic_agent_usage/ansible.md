@@ -49,7 +49,7 @@ Datadog Agent をホストにデプロイするには、Datadog のロールと 
 | `datadog_disable_untracked_checks`         | `datadog_checks` および `datadog_additional_checks` に存在しないすべてのチェックを削除するには `true` に設定します。                                                                                                                                                                                                                                                                |
 | `datadog_additional_checks`                | `datadog_disable_untracked_checks` が `true` に設定されている場合に削除されない、その他のチェックの一覧。                                                                                                                                                                                                                                                             |
 | `datadog_disable_default_checks`           | すべてのデフォルトチェックを削除するには、`true` に設定します。                                                                                                                                                                                                                                                                                                                        |
-| `datadog_config`                           | メインの Agent コンフィギュレーションの設定。<br> - Agent v6 および v7 では `/etc/datadog-agent/datadog.yaml` <br> - Agent v5 では `/etc/dd-agent/datadog.conf`（`[Main]` セクションの下）                                                                                                                                                                        |
+| `datadog_config`                           | Datadog Agent の構成を設定します。このロールは、[オペレーティングシステムに基づいた正しい場所](https://docs.datadoghq.com/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file)に構成を書き込みます。構成オプションの完全なリストは、[datadog-agent GitHub リポジトリにある `datadog.yaml` テンプレートファイル](https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml)を参照してください。 |
 | `datadog_config_ex`                        | （任意）`/etc/dd-agent/datadog.conf` に追加する INI セクション（Agent v5 のみ）。                                                                                                                                                                                                                                                                               |
 | `datadog_apt_repo`                         | デフォルトの Datadog `apt` リポジトリをオーバーライドします。リポジトリのメタデータが Datadog の署名キーで署名されている場合は、`signed-by` オプションを使用してください: `deb [signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] https://yourrepo`                                                                                                                          |
 | `datadog_apt_cache_valid_time`             | デフォルトの apt キャッシュの有効期限を上書きします（デフォルトでは 1 時間）。                                                                                                                                                                                                                                                                                               |
@@ -202,6 +202,8 @@ datadog_config:
 
 [Cloud Workload Security][8] は `runtime_security_config` 変数の下で構成されます。その下にネストされる変数はすべて、`runtime_security_config` セクションの `system-probe.yaml` および `security-agent.yaml` に書き込まれます。
 
+[Universal Service Monitoring][17] (USM) は `service_monitoring_config` 変数で構成されます。その下にネストされた変数は `system-probe.yaml` の `service_monitoring_config` セクションに書き込まれます。
+
 **Windows をご利用の方へのご注意**: NPM は Agent v6.27+ と v7.27+ で Windows 上でサポートされています。NPM はオプションコンポーネントとして出荷され、Agent のインストールまたはアップグレード時に `network_config.enabled` が true に設定された場合にのみインストールされます。このため、Agent を同時にアップグレードしない限り、既存のインストールでは NPM コンポーネントをインストールするために一旦 Agent をアンインストールして再インストールする必要があるかもしれません。
 
 #### 構成サンプル
@@ -215,6 +217,8 @@ datadog_config:
 system_probe_config:
   sysprobe_socket: /opt/datadog-agent/run/sysprobe.sock
 network_config:
+  enabled: true
+service_monitoring_config:
   enabled: true
 runtime_security_config:
   enabled: true
@@ -256,7 +260,7 @@ datadog_config_ex:
 
 これにより、ホストが複数の OS で稼働している場合に、バージョンを指定することが可能になります。以下に例を示します。
 
-| 指定された内容                            | インストール     | システム                |
+| 指定された内容                            | インストール     | System                |
 |-------------------------------------|--------------|-----------------------|
 | `datadog_agent_version: 7.16.0`     | `1:7.16.0-1` | Debian および SUSE ベース |
 | `datadog_agent_version: 7.16.0`     | `7.16.0-1`   | RedHat ベース          |
@@ -610,6 +614,19 @@ Agent バージョン `6.14.0` と `6.14.1` には、Windows における重大�
 
 詳しくは、[Windows における Datadog Agent 6.14.0 および 6.14.1 のアンインストーラに含まれる重大なバグ][11]を参照してください。
 
+### Ubuntu 20.04 が service_facts で壊れる
+
+Ubuntu 20.04 で `service_facts` モジュールを実行すると、以下のエラーが発生します。
+
+```
+localhost | FAILED! => {
+    "changed": false,
+    "msg": "Malformed output discovered from systemd list-unit-files: accounts-daemon.service                    enabled         enabled      "
+}
+```
+
+この問題を解決するには、[Ansible を `v2.9.8` 以上にアップデートしてください][16]。
+
 [1]: https://galaxy.ansible.com/Datadog/datadog
 [2]: https://github.com/DataDog/ansible-datadog
 [3]: https://docs.datadoghq.com/ja/agent/autodiscovery
@@ -625,3 +642,5 @@ Agent バージョン `6.14.0` と `6.14.1` には、Windows における重大�
 [13]: https://github.com/DataDog/ansible-datadog/blob/main/tasks/agent-linux.yml
 [14]: https://github.com/DataDog/ansible-datadog/blob/main/tasks/agent-win.yml
 [15]: https://www.datadoghq.com/blog/datadog-marketplace/
+[16]: https://github.com/ansible/ansible/blob/stable-2.9/changelogs/CHANGELOG-v2.9.rst#id61
+[17]: https://docs.datadoghq.com/ja/tracing/universal_service_monitoring/?tab=configurationfiles#enabling-universal-service-monitoring

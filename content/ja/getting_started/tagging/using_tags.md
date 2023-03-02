@@ -1,21 +1,26 @@
 ---
 aliases:
 - /ja/tagging/using_tags/
+description: Datadog 製品でのタグの使用方法について説明します。
 further_reading:
+- link: https://www.datadoghq.com/blog/tagging-best-practices/
+  tag: ブログ
+  text: インフラストラクチャーとアプリケーションにタグを付けるためのベストプラクティス
 - link: /getting_started/tagging/
   tag: Documentation
   text: タグの概要
 - link: /getting_started/tagging/assigning_tags/
-  tag: Documentation
+  tag: ドキュメント
   text: タグの割り当て方法
-- link: https://www.datadoghq.com/blog/tagging-best-practices/
-  tag: ブログ
-  text: インフラストラクチャーとアプリケーションにタグを付けるためのベストプラクティス
 kind: ドキュメント
 title: タグの使用方法
 ---
 
-[タグの割り当て][1]後に、Datadog プラットフォームでタグを使用してデータの絞り込みおよびグループ化を開始します。タグを使用して、データを含めたり除外したりできます。複数のタグを含めたり除外したりする場合:
+## 概要
+
+[タグの割り当て][1]後に、Datadog プラットフォームでタグを使用してデータの絞り込みおよびグループ化を開始します。タグを使用して、データを含めたり除外したりできます。
+
+複数のタグを含めたり除外したりする場合:
 
 * 含めるには `AND` ロジックを使用します
 * 除外するには `OR` ロジックを使用します
@@ -26,7 +31,7 @@ title: タグの使用方法
 
 複数のタグを包括的に検索する場合は、括弧を使用し、各タグを OR で区切ってください: `tags:(service:coffee-house OR host:coffeehouseprod)`。複数のタグを排他的に検索するには、各タグを AND で区切ってください: `tags:(service:coffee-house AND host:coffeehouseprod)`。
 
-## ダッシュボード
+## ダッシュボード  
 
 {{< tabs >}}
 {{% tab "Assignment" %}}
@@ -87,7 +92,7 @@ title: タグの使用方法
 {{% /tab %}}
 {{< /tabs >}}
 
-## Infrastructure
+## インフラストラクチャー
 
 [ホストマップ][4]、[インフラストラクチャーリスト][5]、[コンテナ][6]、[処理][7]を絞り込むには、ページ上部にある **Filter by** テキストボックスにタグを入力します。ホストとコンテナは **Group by** テキストボックスを使い、タグキーでグループ化できます。グループボックスに `service` と入力すると、各サービスがグループの見出しとして表示されます。
 
@@ -125,7 +130,7 @@ title: タグの使用方法
 {{% /tab %}}
 {{< /tabs >}}
 
-## モニター
+## アラート設定
 
 {{< tabs >}}
 {{% tab "Manage Monitors" %}}
@@ -148,8 +153,6 @@ title: タグの使用方法
 * 対応するメトリクスをモニター範囲から削除する **excluding** テキストボックス。
 
 * モニターを各タグ値で複数警告モニターに変換する **avg by** テキストボックス。
-
-{{< img src="tagging/using_tags/newmonitortags.png" alt="新しいモニタータグ" style="width:80%;">}}
 
 [1]: /ja/monitors/create/#monitor-types
 {{% /tab %}}
@@ -307,6 +310,36 @@ RUM のイベントデータをタグでフィルターするには、検索バ�
 
 {{< img src="tagging/using_tags/rumtags.png" alt="RUM タグ" style="width:80%;">}}
 
+## Synthetics
+
+{{< tabs >}}
+{{% tab "Synthetic テスト" %}}
+
+[Synthetic Tests][1] ページでは、Synthetic テストの一覧が表示されます。
+
+テストをタグでフィルターするには、検索バーまたはファセットチェックボックスを使用します。検索バーのフォーマットは `<KEY>:<VALUE>` で、例えば `tag:mini-website` のようになります。詳細な検索については、[Synthetic テストの検索と管理][2]を参照してください。
+
+{{< img src="tagging/using_tags/syntheticstags.png" alt="Synthetics タグ" style="width:80%;">}}
+
+
+[1]: https://app.datadoghq.com/synthetics/tests
+[2]: /ja/synthetics/search/
+{{% /tab %}}
+{{% tab "CI Results Explorer" %}}
+
+[CI Results Explorer][1] は、[CI パイプライン][2]で実行されているブラウザテスト結果を表示します。
+
+テスト実行をタグでフィルターするには、検索バーまたはファセットチェックボックスを使用します。検索バーのフォーマットは `<KEY>:<VALUE>` で、例えば `@ci.provider.name:github` のようになります。詳細な検索については、[Synthetic テストの検索と管理][3]を参照してください。
+
+{{< img src="tagging/using_tags/syntheticscitags.png" alt="Synthetics と CI タグ" style="width:80%;">}}
+
+
+[1]: https://app.datadoghq.com/synthetics/explorer/ci
+[2]: /ja/synthetics/cicd_integrations
+[3]: /ja/synthetics/search/
+{{% /tab %}}
+{{< /tabs >}}
+
 ## サービスレベル目標
 
 {{< tabs >}}
@@ -345,7 +378,9 @@ SLO タグは、SLO の基礎となるメトリクスまたはモニターで使
 
 ## 開発者
 
-[API][17] では、タグはさまざまな方法で使用できます。これらのセクションへのリンクは、以下のリストを参照してください。
+タグは [API][17] でさまざまな使い方ができます。
+
+各セクションへのリンクはこのリストをご覧ください。
 
 * [モニターのダウンタイムのスケジューリング][18]
 * [イベントエクスプローラーのクエリ][19]

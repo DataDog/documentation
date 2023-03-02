@@ -1,21 +1,30 @@
 ---
-title: Datadog の開始
-kind: documentation
 further_reading:
-  - link: https://learn.datadoghq.com/course/view.php?id=2
-    tag: ラーニングセンター
-    text: Datadog 入門
-  - link: https://www.datadoghq.com/blog/datadog-quick-nav-menu/
-    tag: ブログ
-    text: Datadog クイックナビメニューのご紹介
+- link: https://learn.datadoghq.com/courses/dd-101-dev
+  tag: ラーニングセンター
+  text: 'Datadog の基本: 開発者'
+- link: https://learn.datadoghq.com/courses/dd-101-sre
+  tag: ラーニングセンター
+  text: 'Datadog の基本: サイト信頼性エンジニア'
+- link: https://www.datadoghq.com/blog/datadog-quick-nav-menu/
+  tag: ブログ
+  text: Datadog クイックナビメニューのご紹介
+- link: https://www.datadoghq.com/blog/engineering/druids-the-design-system-that-powers-datadog/
+  tag: GitHub
+  text: Datadog を支えるデザインシステム、DRUIDS
+kind: documentation
+title: Datadog の開始
 ---
-このページでは、[Datadog サイト][1]の機能に関するハイレベルな概要を説明します。
 
-**注**: Datadog サイトのナビゲーションは、ブラウザの幅に基づいて切り替わります。3 種類のナビゲーションを利用でき、ナビゲーションタイプを変更するにはブラウザの幅を調節します。
+## 概要
+
+このページでは、[Datadog サイト][1]で利用可能な機能の概要を説明します。
+
+Datadog サイトのナビゲーションは、ブラウザの幅に応じて変化します。最大で 3 種類のナビゲーションを用意することができます。ナビゲーションの種類を変更するには、ブラウザの幅を調節してください。
 
 ## インテグレーション
 
-{{< img src="getting_started/integrations.png" alt="インテグレーション"  >}}
+{{< img src="getting_started/integrations.png" alt="インテグレーション" >}}
 
 - Datadog では、{{< translate key="integration_count" >}} 個以上のインテグレーションが[公式にリストされています][2]。
 - [Datadog API の使用][3]によるカスタムインテグレーションも使用可能です。
@@ -24,19 +33,19 @@ further_reading:
 
 ## ログ管理
 
-{{< img src="getting_started/logs.png" alt="ログ"  >}}
+{{< img src="getting_started/logs.png" alt="ログ" >}}
 
 [Datadog ログ管理][5]を使用すると、アプリケーションとインフラストラクチャーによって生成されたすべてのログを送信して処理できます。インデックスを作成せずに、Live Tail を使用してリアルタイムにログを観察できます。アプリケーションとインフラストラクチャーからすべてのログを取り込み、フィルターを使用して動的にインデックス化するものを決定し、それらをアーカイブに保存できます。
 
 ## APM & Continuous Profiler
 
-{{< img src="getting_started/apm.png" alt="APM ダッシュボード"  >}}
+{{< img src="getting_started/apm.png" alt="APM ダッシュボード" >}}
 
 [Datadog Application Performance Monitoring][6]（APM またはトレース）を利用すると、ログやインフラストラクチャーの監視と合わせて、リクエストの量やレイテンシーなどの重要なメトリクスを監視するために自動生成されたダッシュボードから、個々のリクエストの詳細なトレースに至るまで、アプリケーションのパフォーマンスを深く理解することができます。アプリケーションに対してリクエストが行われると、Datadog は分散システム全体でトレースを確認できるため、このリクエストに対して何が起こっているかについての体系的なデータを表示できます。
 
 ## インフラストラクチャー
 
-{{< img src="getting_started/infrastructure.png" alt="インフラストラクチャー"  >}}
+{{< img src="getting_started/infrastructure.png" alt="インフラストラクチャー" >}}
 
 - すべてのマシンは[インフラストラクチャー リスト][7]に表示されます。
 - 各マシンに適用されたタグを確認できます。タグ付けによって各マシンの目的を示すことができます。
@@ -44,7 +53,7 @@ further_reading:
 
 ## ホストマップ
 
-{{< img src="getting_started/hostmap-overview.png" alt="ホストマップの概要"  >}}
+{{< img src="getting_started/hostmap-overview.png" alt="ホストマップの概要" >}}
 
 [ホストマップ][9]は、インフラストラクチャーメニューにある機能です。この機能を使用すると、以下のことができます。
 
@@ -57,27 +66,26 @@ further_reading:
 
 ## イベント
 
-{{< img src="getting_started/event_stream.png" alt="イベントストリーム"  >}}
+{{< img src="events/explorer/events-overview.png" alt="イベントエクスプローラー" style="width:100%;" >}}
 
-[イベントストリーム][10]には、ブログと同じルールが適用されます。つまり、
+[イベントエクスプローラー][10]には、インフラストラクチャーやサービスによって生成された最新のイベントが表示されます。
 
-- ストリーム内のイベントにコメントできます。
-- [チーム][11]メンバーが分散していても、調査内容をまとめて管理できます。
-- イベントを `user`、`source`、`tag`、`host`、`status`、`priority`、`incident` で[絞り込む][12]ことができます。
+イベントには以下のようなものがあります。
 
-各インシデントに対して次の操作が可能です。
+- コードのデプロイ
+- サービスヘルスの変更
+- コンフィギュレーション変更
+- モニタリングアラート
 
-- 優先度の増減
-- コメント
-- 類似のインシデントを表示
-- メールを受信する[チームメンバーに @ で通知][13]
-- `@support-datadog` で[サポート依頼][14]
+イベントエクスプローラーは、Agent とインストールされたインテグレーションによって収集されたイベントを自動的に収集します。
 
-{{< img src="getting_started/event_stream_event.png" alt="イベントストリームのイベント" style="width:70%;">}}
+また、Datadog API、カスタム Agent チェック、DogStatsD、Event email API を使用して、独自のカスタムイベントを送信することも可能です。
 
-## ダッシュボード
+イベントエクスプローラーでは、ファセットや検索クエリでイベントをフィルタリングします。イベントを属性でグループ化またはフィルタリングし、[イベント分析][11]でグラフィカルに表現します。
 
-{{< img src="getting_started/dashboard.png" alt="ダッシュボード"  >}}
+## ダッシュボード  
+
+{{< img src="getting_started/dashboard.png" alt="ダッシュボード" >}}
 
 [ダッシュボード][12]には、リアルタイムのパフォーマンスメトリクスがグラフで表示されます。
 
@@ -90,12 +98,12 @@ further_reading:
 - グラフのスナップショットをストリームに表示して共有できます。
 - グラフを iframe に埋め込むことができます。これにより、自社のデータやその他の情報へのアクセス権を付与しなくても、サードパーティにライブグラフを提供することができます。
 
-## モニター
+## アラート設定
 
 [モニター][16]は、メトリクスのしきい値、インテグレーションの有無、ネットワークエンドポイントなどに基づいて、アラートと通知を提供します。
 
 - Datadog に報告される任意のメトリクスを使用できます。
-- マルチアラートをセットアップ (デバイスごと、ホストごとなど) できます。
+- デバイス、ホストなどによるマルチアラートの設定
 - アラートメッセージで `@` を使用することで適切な相手に通知を届けることができます。
 - ダウンタイムをスケジューリングすると、システムシャットダウン時やオフラインメンテナンス時などに通知を停止できます。
 
@@ -103,29 +111,39 @@ further_reading:
 
 ## ネットワークパフォーマンスモニタリング
 
-{{< img src="getting_started/npm.png" alt="npm"  >}}
+{{< img src="getting_started/npm.png" alt="NPM" >}}
 
 Datadog [Network Performance Monitoring][17] (NPM) を使用すると、コンテナからホスト、サービス、アベイラビリティーゾーンまで、Datadog のタグ付きオブジェクト全体のネットワークトラフィックを可視化できます。データセンターからチーム、個々のコンテナまで、何でもグループ化します。タグを使用して、送信元と宛先でトラフィックをフィルタリングします。次に、フィルターはフローに集約され、それぞれがカスタマイズ可能なネットワークページとネットワークマップを通じて、1 つの送信元と 1 つの宛先間のトラフィックを示します。各フローには、スループット、帯域幅、再送信数、および IP、ポート、PID レベルまでの送信元/宛先情報などのネットワークメトリクスが含まれます。次に、トラフィック量や TCP 再送信などの主要なメトリクスを報告します。
 
-## リアルユーザーモニタリング
+## RUM & セッションリプレイ
 
-{{< img src="getting_started/rum.png" alt="rum"  >}}
+{{< img src="getting_started/rum.png" alt="RUM" >}}
 
-Datadog [リアルユーザーモニタリング][18] (RUM) を使用すると、個々のユーザーのリアルタイムのアクティビティとエクスペリエンスを視覚化および分析し、ビジネス上の影響が最も大きい機能のエンジニアリング作業を優先することができます。
-ロード時間、フロントエンドエラー、ページの依存関係を視覚化し、ビジネスメトリクスとアプリケーションメトリクスを関連付けることができるため、単一のダッシュボードでアプリケーション、インフラストラクチャー、ビジネスメトリクスを使って迅速にトラブルシューティングできます。
+Datadog [Real User Monitoring][18] (RUM) は、ユーザーの活動や体験をリアルタイムに視覚化し、分析することが可能です。[セッションリプレイ][19]を使用すると、ユーザーの Web ブラウジングセッションをキャプチャして表示し、ユーザーの行動をよりよく理解することができます。RUM エクスプローラーでは、ロードタイム、フロントエンドエラー、ページの依存関係を視覚化できるだけでなく、ビジネスとアプリケーションのメトリクスを関連付け、アプリケーション、インフラストラクチャー、ビジネスのメトリクスの問題を 1 つのダッシュボードでトラブルシューティングすることができます。
 
 ## サーバーレス
 
-[サーバーレス][19]では、すべてのコンピューティングリソースをクラウドプロバイダーが管理し、ユーザーはイベント駆動型コードを記述したら、それをクラウドプロバイダーにアップロードして使用できます。Datadog Serverless は、サーバーレスアプリケーションを実行している AWS Lambda 関数からのメトリクス、トレース、ログを 1 つのビューにまとめて表示します。このため、エラー、高レイテンシー、またはコールドスタートを生成している関数に絞り込むことにより、パフォーマンスを最適化できます。
+[サーバーレス][20]では、すべてのコンピューティングリソースをクラウドプロバイダーが管理し、ユーザーはイベント駆動型コードを記述したら、それをクラウドプロバイダーにアップロードして使用できます。Datadog Serverless は、サーバーレスアプリケーションを実行している AWS Lambda 関数からのメトリクス、トレース、ログを 1 つのビューにまとめて表示します。このため、エラー、高レイテンシー、またはコールドスタートを生成している関数に絞り込むことにより、パフォーマンスを最適化できます。
 
-## セキュリティモニタリング
+## Cloud SIEM
 
 {{< img src="getting_started/security.png" alt="セキュリティ" >}}
 
-Datadog [セキュリティモニタリング][20]は、アプリケーションやインフラストラクチャーに対する脅威を自動検出します。たとえば、標的型攻撃、脅威のインテルリストに一致するシステムと通信する IP、安全でないコンフィギュレーションなどがあります。こうした脅威は、Datadog でセキュリティシグナルとして表面化され、セキュリティエクスプローラーで相関およびトリアージできます。
+Datadog [Cloud SIEM][21] (Security Information and Event Management) は、アプリケーションやインフラストラクチャーに対する脅威を自動検出します。たとえば、標的型攻撃、脅威のインテルリストに一致するシステムと通信する IP、安全でないコンフィギュレーションなどがあります。こうした脅威は、Datadog でセキュリティシグナルとして表面化され、セキュリティエクスプローラーで相関およびトリアージできます。
 
-## その他の参考資料
+## Synthetic モニタリング
 
+{{< img src="getting_started/synthetics.png" alt="Synthetics" >}}
+
+Datadog [Synthetic Monitoring][22] では、API やブラウザのテストを作成・実行し、アプリケーション上のユーザートランザクションを積極的にシミュレートし、システム層全体の内部および外部ネットワークエンドポイントを監視することができます。エラーの検出、回帰の特定、ロールバックの自動化により、本番環境での問題の顕在化を防止することができます。
+
+## モバイル版 Datadog
+
+[Apple App Store][24] と [Google Play Store][25] で提供されている [Datadog モバイルアプリ][23]は、オンコールエンジニアやビジネスユーザーが、ラップトップを開かずにサービスの状態をフォローし、問題を迅速にトリアージするための重要なデータを提供します。組織のダッシュボード、モニター、インシデント、SLO などに、モバイルデバイスから直接アクセスできます。
+
+{{< img src="getting_started/application/mobile-app-store-screens.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS 向けモバイルアプリ">}}
+
+## {{< partial name="whats-next/whats-next.html" >}}
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com
@@ -138,13 +156,18 @@ Datadog [セキュリティモニタリング][20]は、アプリケーション
 [8]: /ja/getting_started/tagging/
 [9]: /ja/infrastructure/hostmap/
 [10]: /ja/events/
-[11]: /ja/account_management/users/
-[12]: https://www.datadoghq.com/blog/filter-datadog-events-stream-pinpoint-events-infrastructure
-[13]: /ja/events/#@-notifications
-[14]: /ja/help/
-[15]: /ja/dashboards/
-[16]: /ja/dashboards/screenboard/
-[17]: /ja/dashboards/functions/
-[18]: https://www.datadoghq.com/blog/rank-filter-performance-monitoring-metrics-top-function
-[19]: /ja/monitors/
-[20]: /ja/network_monitoring/performance
+[11]: /ja/events/explorer/#event-analytics
+[12]: /ja/dashboards/
+[13]: /ja/dashboards/#screenboards
+[14]: /ja/dashboards/functions/arithmetic/
+[15]: /ja/dashboards/functions/
+[16]: /ja/monitors/
+[17]: /ja/network_monitoring/performance/
+[18]: /ja/real_user_monitoring/
+[19]: /ja/real_user_monitoring/session_replay/
+[20]: /ja/serverless
+[21]: /ja/security_platform/cloud_siem/
+[22]: /ja/synthetics/
+[23]: /ja/mobile/
+[24]: https://apps.apple.com/app/datadog/id1391380318
+[25]: https://play.google.com/store/apps/details?id=com.datadog.app

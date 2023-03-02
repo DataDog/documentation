@@ -5,7 +5,7 @@ description: "See the list of all your checks reporting to Datadog."
 aliases:
 - /monitors/check_summary/
 further_reading:
-- link: "/monitors/create/"
+- link: "/monitors/"
   tag: "Documentation"
   text: "Learn how to create a monitor"
 - link: "/monitors/notify/"

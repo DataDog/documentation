@@ -26,8 +26,8 @@ Mathematically, the difference between the metric and the center of the range (6
 
 A range is defined by `x > a > y` with `a` being the metric in question. 
 
-- To be notified if the value is inside the range, the monitor condition should be: `abs((x-y/2) - a) - (x-y)/2 > 0`.
-- To be notified if the value is outside the range, the monitor condition should be: `(x-y)/2 - abs((x-y/2) - a) > 0`.
+- To be notified if the value is outside the range, the monitor condition should be: `abs(x - (x-y)/2 - a) - (x-y)/2 > 0`.
+- To be notified if the value is inside the range, the monitor condition should be: `(x-y)/2 - abs(x - (x-y)/2 - a) > 0`.
 
 ## Troubleshooting
 

@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-After [assigning tags][1], start using them to filter and group your data in your Datadog platform. Tags can be used to include or exclude data. 
+After [assigning tags][1], start using them to filter and group your data in your Datadog platform. Tags can be used to include or exclude data.
 
 When including or excluding multiple tags:
 
@@ -135,7 +135,7 @@ Here are the filter and group by text boxes on the Live Processes page:
 {{< tabs >}}
 {{% tab "Manage Monitors" %}}
 
-To filter monitors by [assigned tags][1], use the search bar or facet checkboxes. The search bar format is `tag:<KEY>:<VALUE>`, for example: `tag:service:coffee-house`. To exclude monitors with a specific tag from your search, use `-`, for example: `tag:-service:coffee-house`. 
+To filter monitors by [assigned tags][1], use the search bar or facet checkboxes. The search bar format is `tag:<KEY>:<VALUE>`, for example: `tag:service:coffee-house`. To exclude monitors with a specific tag from your search, use `-`, for example: `tag:-service:coffee-house`.
 
 {{< img src="tagging/using_tags/managemonitorstags.png" alt="Manage Monitors Tags" style="width:80%;">}}
 
@@ -152,11 +152,9 @@ When creating a [monitor][1], use metric tags in the:
 
 * **excluding** text box to remove the corresponding metrics from the monitor scope.
 
-* **avg by** text box to transform the monitor into a multi-alert monitor on each tag value.
+* **avg by** text box to transform the monitor into a multi alert monitor on each tag value.
 
-{{< img src="tagging/using_tags/newmonitortags.png" alt="New Monitor Tags" style="width:80%;">}}
-
-[1]: /monitors/create/#monitor-types
+[1]: /monitors/types
 {{% /tab %}}
 {{% tab "Manage Downtime" %}}
 
@@ -239,14 +237,14 @@ Read more about [Creating and managing labels][2] in the Google Cloud documentat
 ## APM
 
 {{< tabs >}}
-{{% tab "Analytics" %}}
+{{% tab "Trace Explorer" %}}
 
-For [Trace Search][1], filter traces with tags using the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`, for example: `service:coffee-house`. For advanced search, see the [trace search][2] page.
+In the [Trace Explorer][1], you can filter traces with tags using the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`, for example: `service:coffee-house`. For advanced search, see [Query Syntax][2].
 
-{{< img src="tagging/using_tags/tracesearchtags.png" alt="Trace Search Tags" style="width:80%;">}}
+{{< img src="tagging/using_tags/trace_explorer.png" alt="Trace Explorer Tags" style="width:80%;">}}
 
-[1]: /tracing/app_analytics/search/
-[2]: /tracing/app_analytics/search/#search-bar
+[1]: /tracing/trace_explorer/search/
+[2]: /tracing/trace_explorer/query_syntax/
 {{% /tab %}}
 {{% tab "Service Map" %}}
 
@@ -285,7 +283,7 @@ For Logs [Search][10], [Analytics][11], [Patterns][12], and [Live Tail][13], fil
 {{% /tab %}}
 {{% tab "Analytics" %}}
 
-{{< img src="tagging/using_tags/loganalyticstags.png" alt="Log Analytics Tabs" style="width:80%;">}}
+{{< img src="tagging/using_tags/loganalyticstags.png" alt="Log Analytics Tags" style="width:80%;">}}
 
 {{% /tab %}}
 {{% tab "Patterns" %}}
@@ -306,7 +304,7 @@ Additionally, tags are used to filter a logs [Pipeline][14]. In the example belo
 
 ## RUM & Session Replay
 
-The [RUM Explorer][15] visualizes events from your environment over a specified time period. 
+The [RUM Explorer][15] visualizes events from your environment over a specified time period.
 
 To filter RUM event data by tags, use the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`, for example: `service:shopist`. For advanced search, see [Search RUM Events][16].
 
@@ -317,7 +315,7 @@ To filter RUM event data by tags, use the search bar or facet checkboxes. The se
 {{< tabs >}}
 {{% tab "Synthetic Tests" %}}
 
-The [Synthetic Tests][1] page lists your Synthetic tests. 
+The [Synthetic Tests][1] page lists your Synthetic tests.
 
 To filter tests by tags, use the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`. For example: `tag:mini-website`. For advanced search, see [Search and Manage Synthetic Tests][2].
 
@@ -327,18 +325,18 @@ To filter tests by tags, use the search bar or facet checkboxes. The search bar 
 [1]: https://app.datadoghq.com/synthetics/tests
 [2]: /synthetics/search/
 {{% /tab %}}
-{{% tab "CI Results Explorer" %}}
+{{% tab "Explorer" %}}
 
-The [CI Results Explorer][1] displays your browser test results running in a [CI pipeline][2]. 
+The [Synthetic Monitoring & Continuous Testing Explorer][1] displays your test runs and batches of runs in a [CI pipeline][2].
 
-To filter test runs by tags, use the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`. For example: `@ci.provider.name:github`. For advanced search, see [Search and Manage Synthetic Tests][3].
+To filter test runs by tags, use the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`. For example: `@ci.provider.name:github`. For advanced search, see [Search Test Batches][3].
 
 {{< img src="tagging/using_tags/syntheticscitags.png" alt="Synthetics and CI Tags" style="width:80%;">}}
 
 
-[1]: https://app.datadoghq.com/synthetics/explorer/ci
-[2]: /synthetics/cicd_integrations
-[3]: /synthetics/search/
+[1]: https://app.datadoghq.com/synthetics/explorer/
+[2]: /continuous_testing/cicd_integrations
+[3]: /continuous_testing/explorer/search/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -347,7 +345,7 @@ To filter test runs by tags, use the search bar or facet checkboxes. The search 
 {{< tabs >}}
 {{% tab "Manage SLOs" %}}
 
-To filter SLOs by [assigned tags][1], use the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`, for example: `journey:add_item`. To exclude SLOs with a specific tag from your search, use `-`, for example: `-journey:add_item`. 
+To filter SLOs by [assigned tags][1], use the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`, for example: `journey:add_item`. To exclude SLOs with a specific tag from your search, use `-`, for example: `-journey:add_item`.
 
 {{< img src="tagging/using_tags/manage_slo_tags.png" alt="SLO Tags" style="width:80%;">}}
 
@@ -380,7 +378,7 @@ When creating a [monitor-based SLO][1] using a single [grouped monitor][2], use 
 
 ## Developers
 
-Tags can be used in various ways with the [API][17]. 
+Tags can be used in various ways with the [API][17].
 
 See this list for links to respective sections:
 

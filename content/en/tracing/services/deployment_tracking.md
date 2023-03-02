@@ -38,6 +38,13 @@ You can scope the errors widget to:
 
 Requests and Errors widgets can both be exported to dashboards and monitors.
 
+## Using version tags for automatic faulty deployment detection
+
+Configuring your services with the `version` tag enables [Automatic Faulty Deployment Detection][4]. 
+
+You can set up a monitor to get automatically notified on all potentially faulty deployments. To do so, navigate to the New Monitors page and choose Events, and include `tags:deployment_analysis` in the search query defining the monitor.
+
+
 ## Versions deployed
 
 A service configured with `version` tags has a version section on its Service page, below the main service health graphs. The version section shows all versions of the service that were active during the selected time interval, with active services at the top.
@@ -173,9 +180,55 @@ You can search for profiles that correspond to a particular version. You can als
 
 {{< img src="tracing/deployment_tracking/VersionProfiler.png" alt="Filter Profiles by Version"  style="width:100%;">}}
 
+<br>
+
+## The time between deployments metric
+
+Every time a new deployment of a service is detected, Deployment Tracking calculates a value for the `time_between_deployments` metric, calculated as the duration in seconds between the new deployment and the deployment of the most recent version prior to that. 
+
+### Metric definition
+
+`datadog.service.time_between_deployments{env, service, second_primary_tag}`
+: **Prerequisite:** This metric exists for any APM service with version tagging enabled through [Unified Service Tagging][1].<br>
+**Description:** The time in seconds elapsed between a deployment of a service and the deployment of the most recent version prior to that.<br>
+**Metric type:** [Distribution][2]<br>
+**Tags:** The metric is tagged with the service's `env`, `service`, and [second primary tag][3].
+
+### Examples
+
+If you have a service that deploys version A at time = 0 and version B at time = 10, then the value of the metric `datadog.service.time_between_deployments` is 10:
+
+Time = 0
+: `{service: foo, env: prod, cluster-name: dev-shopist, version: A}`
+
+Time = 10
+: `{service: foo, env: prod, cluster_name: dev-shopist, version: B}`
+
+Time between deployments
+: `datadog.service.time_between_deployments{env: prod, cluster_name: dev-shopist} = 10`
+
+
+If you deploy version X at time = 20 on cluster `dev-shopist`, version Y at time = 30 on cluster `us-staging`, and version Y again at time = 45 on cluster `dev-shopist`, the `max` value of the metric `datadog.service.time_between_deployments` for any cluster is 25 (the time of the most recent Y minus the last X): 
+
+Time = 20
+: `{service: foo, env: staging, cluster-name: dev-shopist, version: X}`
+
+Time = 30
+: `{service: foo, env: staging, cluster-name: us-staging, version: Y}`
+
+Time = 45
+: `{service: foo, env: dev-shopist, cluster-name: us-staging, version: Y}`
+
+Max time between deployments:
+: `max:datadog.service.time_between_deployments{env: staging, cluster-name: *} = 25`
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: /getting_started/tagging/unified_service_tagging/
+[2]: /metrics/types/?tab=distribution#metric-types
+[3]: /tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
+[4]: /watchdog/faulty_deployment_detection/

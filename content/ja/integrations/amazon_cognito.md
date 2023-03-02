@@ -35,7 +35,7 @@ Amazon Cognito は、ユーザーの一意 ID の作成、ID プロバイダー�
 
 ### メトリクスの収集
 
-1. [AWS インテグレーションタイル][2]のメトリクス収集で、`Cognito` をオンにします。
+1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `Cognito` が有効になっていることを確認します。
 2. [Datadog - Amazon Cognito インテグレーション][3]をインストールします。
 
 **注**: AWS で Advanced Security を有効にする必要があります。[User Pool に Advanced Security][4] を追加するには、AWS のドキュメントを参照してください。
@@ -77,8 +77,8 @@ Amazon Cognito インテグレーションには、サービスのチェック�
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[3]: https://app.datadoghq.com/account/settings#integrations/amazon-cognito
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
+[3]: https://app.datadoghq.com/integrations/amazon-cognito
 [4]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html
 [5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
 [6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets

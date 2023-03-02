@@ -33,7 +33,7 @@ Le tableau ci-dessous synthétise la collecte, la résolution et la rétention d
 |Infrastructure      |Métriques custom (check d'Agent)                  |Agent Datadog et check custom d'Agent                                                            |15 secondes           |1 seconde             |15 mois                                                                                   |
 |Infrastructure      |Métriques custom (API)                          |Envoi POST directement vers l'API Datadog                                                                |En temps réel            |1 seconde             |15 mois                                                                                   |
 |Infrastructure      |Métriques custom (StatsD)                       |Agent Datadog (collecteur StatsD intégré)                                                     |15 secondes           |1 seconde             |15 mois                                                                                   |
-|Infrastructure      |Événements                                        |Agent Datadog, intégrations ou API                                                           |En temps réel            |1 seconde             |13 mois                                                                                   |
+|Infrastructure      |Événements                                        |Agent Datadog, intégrations ou API                                                           |En temps réel            |1 seconde             |15 mois                                                                                   |
 |Infrastructure      |Live containers                               |Agent Datadog et intégration Docker activée ou Agent de conteneur Datadog                         |2 secondes            |1 seconde             |36 heures                                                                                    |
 |Infrastructure      |Live processes                                |Agent Datadog et Agent de processus                                                                 |2 secondes            |1 seconde             |36 heures                                                                                    |
 |Infrastructure      |Network Performance Monitoring                |System Probe                                                                                  |30 secondes           |1 minute                |14 jours                                                                                     |
@@ -51,6 +51,6 @@ Le tableau ci-dessous synthétise la collecte, la résolution et la rétention d
 
 
 [1]: /fr/tracing/guide/trace_sampling_and_storage/?tab=java#trace-storage
-[2]: /fr/integrations/faq/cloud-metric-delay/#faster-metrics
+[2]: /fr/integrations/guide/cloud-metric-delay/#faster-metrics
 [3]: /fr/synthetics/cicd_integrations#use-the-api
 [4]: /fr/synthetics/cicd_integrations#use-the-cli

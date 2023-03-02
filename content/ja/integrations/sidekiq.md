@@ -1,41 +1,62 @@
 ---
+app_id: sidekiq
+app_uuid: c42a2d39-16db-4256-a6fb-287602ec4661
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Sidekiq Overview: assets/dashboards/overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: sidekiq.jobs.count
+      metadata_path: metadata.csv
+      prefix: sidekiq.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Sidekiq
   logs:
     source: sidekiq
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - ログの収集
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/sidekiq/README.md
-display_name: Sidekiq
+display_on_public_website: true
 draft: false
 git_integration_title: sidekiq
-guid: b4bc604c-73a5-4bd8-8dfe-3f80fc19976b
 integration_id: sidekiq
 integration_title: Sidekiq
 integration_version: 1.3.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: sidekiq.
-metric_to_check: sidekiq.jobs.count
+manifest_version: 2.0.0
 name: sidekiq
-public_title: Sidekiq インテグレーション
+oauth: {}
+public_title: Sidekiq
 short_description: Sidekiq ジョブ、キュー、バッチに関するメトリクスを追跡します。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: Sidekiq ジョブ、キュー、バッチに関するメトリクスを追跡します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Sidekiq
 ---
 
 
@@ -109,6 +130,8 @@ Sidekiq インテグレーションは [Datadog Agent][4] にパッケージ化�
            tags:
              worker: "$1"
     ```
+
+   これらのパラメーターは、Datadog Agent に `DD_DOGSTATSD_MAPPER_PROFILES` 環境変数を追加することで設定することも可能です。
 
 4. [Agent を再起動します][8]。
 

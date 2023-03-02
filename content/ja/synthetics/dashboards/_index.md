@@ -15,19 +15,20 @@ title: Synthetics ダッシュボード
 
 Synthetics テストを作成すると、Datadog は[データを収集][1]し、スタック、ブラウザアプリケーション、またはテスト全体のパフォーマンス、プライベートロケーション、イベントに関するダッシュボードを生成します。
 
-Synthetics ダッシュボードにアクセスするには、[**Dashboard List**][2] の検索クエリで `Synthetics` をフィルターにかけるか、または [Synthetic モニタリング ホームページ ][5]の [**Dashboards**][3] でドロップダウンメニューをクリックしてください。
+Synthetics ダッシュボードにアクセスするには、[**Dashboard List**][2] の検索クエリで `Synthetics` をフィルターにかけるか、または [Synthetic モニタリング ホームページ ][4]の [**Dashboards**][3] でドロップダウンメニューをクリックしてください。
 
 {{< img src="synthetics/dashboards/synthetic_tests_dashboards.png" alt="Synthetic モニタリングダッシュボード" style="width:100%;">}}
 
 {{< whatsnext desc="すぐに使える Synthetics ダッシュボードには、以下のようなものが用意されています。" >}}
   {{< nextlink href="/synthetics/dashboards/api_test" >}}<u>API Test Performance</u>: エンドポイントやサービスを監視します。 {{< /nextlink >}}
   {{< nextlink href="/synthetics/dashboards/browser_test" >}}<u>Browser Test Performance</u>: ブラウザテストの Web パフォーマンス、サードパーティプロバイダーに関する洞察、コア Web バイタルを表示します。 {{< /nextlink >}}
+  {{< nextlink href="/synthetics/dashboards/testing_coverage" >}}<u>Testing Coverage</u>: ブラウザテストのアプリケーションカバレッジを評価し、RUM と Synthetic のデータを使用して追跡するアプリケーションの人気要素を特定します。 {{< /nextlink >}}
   {{< nextlink href="/synthetics/dashboards/test_summary" >}}<u>Test Summary</u>: 地域、環境、チームごとの Synthetic テストに関する洞察を見ることができます。 {{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Synthetics ダッシュボードの操作
 
-[ダッシュボード][4]を複製し、テンプレート変数を使ってチーム、環境、地域ごとにカスタマイズすることが可能です。
+[ダッシュボード][5]を複製し、テンプレート変数を使ってチーム、環境、地域ごとにカスタマイズすることが可能です。
 
 ### テンプレート変数
 
@@ -50,5 +51,5 @@ Synthetics ダッシュボードを複製するには、**Settings** アイコ�
 [1]: /ja/synthetics/metrics/
 [2]: https://app.datadoghq.com/dashboard/lists
 [3]: https://app.datadoghq.com/synthetics/tests/
-[4]: /ja/dashboards/
-[5]: https://app.datadoghq.com/synthetics/tests
+[4]: https://app.datadoghq.com/synthetics/tests
+[5]: /ja/dashboards/

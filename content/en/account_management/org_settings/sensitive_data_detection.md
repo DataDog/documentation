@@ -1,11 +1,10 @@
 ---
 title: Sensitive Data Scanner
 kind: documentation
-beta: true
 aliases:
     - /logs/log_configuration/sensitive_data_detection
 further_reading:
-    - link: "/security/logs/"
+    - link: "/data_security/logs/"
       tag: "Documentation"
       text: "Security"
     - link: "/logs/explorer/"
@@ -21,7 +20,7 @@ further_reading:
 
 ## Overview
 
-Sensitive data, such as credit card numbers, bank routing numbers, and API keys are often exposed unintentionally in application logs and trace events, which can expose your organization to financial and privacy risks.
+Sensitive data, such as credit card numbers, bank routing numbers, and API keys are often exposed unintentionally in application logs, APM spans, and RUM events, which can expose your organization to financial and privacy risks.
 
 Often, businesses are required to identify, remediate, and prevent the exposure of such sensitive data within their logs due to organizational policies, compliance requirements, industry regulations, and privacy concerns. This is especially true within industries such as banking, financial services, healthcare, and insurance.
 
@@ -35,14 +34,31 @@ Sensitive Data Scanner can be found under [Organization Settings][1].
 
 ### Setup
 
-- **Define Scanning Groups:** A scanning group consists of a query filter indicating which kinds of logs to scan, and a set of scanning rules indicating specific types of sensitive data to scan for within those logs. See the [Log Search Syntax][2] documentation to learn more about query filters.
-- **Define Scanning Rules:** Within a scanning group, add predefined scanning rules from Datadog's Scanning Rule Library or create your own rules from scratch to scan using custom regex patterns.
+- **Define Scanning Groups:** A scanning group determines what data to scan. It consists of a query filter and a set of toggles to enable scanning for Logs, APM, RUM, and/or Events. See the [Log Search Syntax][2] documentation to learn more about query filters.
+- **Define Scanning Rules:** A scanning rule determines what sensitive information to match within the data.  Within a scanning group, add predefined scanning rules from Datadog's Scanning Rule Library or create your own rules from scratch to scan using custom regex patterns.
+
+Sensitive Data Scanner supports Perl Compatible RegEx (PCRE), but the following patterns are not supported:
+  - Backreferences and capturing sub-expressions (lookarounds)
+  - Arbitrary zero-width assertions
+  - Subroutine references and recursive patterns
+  - Conditional patterns
+  - Backtracking control verbs
+  - The \C "single-byte" directive (which breaks UTF-8 sequences)
+  - The \R newline match
+  - The \K start of match reset directive
+  - Callouts and embedded code
+  - Atomic grouping and possessive quantifiers
+
+**Note:**
+- Any rules that you add or update only affect data coming into Datadog after the rule was defined.
+- Sensitive Data Scanner does not affect any rules you define on the Datadog Agent directly.
+- To turn off Sensitive Data Scanner entirely, set the toggle to **off** for each Scanning Group and Scanning Rule so that they are disabled.
 
 ### Custom Scanning Rules
 
-- **Define pattern:** Specify the regex pattern to be used for matching against log events. Test with sample data to verify that your regex pattern is valid.
-- **Define scope:** Specify whether you want to scan the entire log event or just specific log attributes. You can also choose to exclude specific attributes from the scan.
-- **Add tags:** Specify the tags you want to associate with log events where the values match the specified regex pattern. Datadog recommends using `sensitive_data` and `sensitive_data_category` tags. These tags can then be used in searches, dashboards, and monitors.
+- **Define pattern:** Specify the regex pattern to be used for matching against events. Test with sample data to verify that your regex pattern is valid.
+- **Define scope:** Specify whether you want to scan the entire event or just specific attributes. You can also choose to exclude specific attributes from the scan.
+- **Add tags:** Specify the tags you want to associate with events where the values match the specified regex pattern. Datadog recommends using `sensitive_data` and `sensitive_data_category` tags. These tags can then be used in searches, dashboards, and monitors.
 - **Process matching values:** Optionally, specify whether you want to redact, partially redact, or hash matching values. When redacting, specify placeholder text to replace the matching values with. When partially redacting, specify the position (start/end) and length (# of characters) to redact within matching values. Redaction, partial redaction, and hashing are all irreversible actions.
 - **Name the rule:** Provide a human-readable name for the rule.
 
@@ -55,13 +71,13 @@ The Scanning Rule Library contains an evergrowing collection of predefined rules
 
 ### Permissions
 
-By default, users with the Datadog Admin role have access to view and define the scanning rules. To allow other user access, grant the permission for Data Scanner under **Access Management**. See the [Custom RBAC documentation][3] for details on Roles and Permissions.
+By default, users with the Datadog Admin role have access to view and define the scanning rules. To allow other user access, grant read or write permissions for Data Scanner under **Compliance**. See the [Custom RBAC documentation][3] for details on Roles and Permissions.
 
 {{< img src="logs/sensitive_data_scanner/scanner_permission.png" alt="Permissions for Sensitive Data Scanner" style="width:90%;">}}
 
 ### Using tags with Query based RBAC
 
-Control who can access log events containing sensitive data. Use tags added by Sensitive Data Scanner to build queries with RBAC and restrict access to specific individuals or teams until the data ages out after the retention period.
+Control who can access events containing sensitive data. Use tags added by Sensitive Data Scanner to build queries with RBAC and restrict access to specific individuals or teams until the data ages out after the retention period.
 
 ### Out-of-the-box dashboard
 
@@ -70,11 +86,6 @@ When Sensitive Data Scanner is enabled, an out-of-the-box [dashboard][4] summari
 {{<img src="account_management/sensitive_data_scanner/sdslight.png" alt="Sensitive Data Scanner Overview dashboard" style="width:70%;">}}
 
 To access this dashboard, go to **Dashboards > Dashboards List** and search for `Sensitive Data Scanner Overview`.
-
-**Note:**
-- Any rules that you add or update only affect data coming into Datadog after the rule was defined.
-- Sensitive Data Scanner does not affect any rules you define on the Datadog Agent directly.
-- To turn off Sensitive Data Scanner entirely, disable each Scanning Group and Scanning Rule by setting the toggle to the **off** state.
 
 ## Further Reading
 

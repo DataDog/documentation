@@ -1,25 +1,27 @@
 ---
-title: Explorer les métriques de requête
-kind: documentation
-description: Explorer et analyser vos métriques de performance sur les bases de données et requêtes
+description: Explorer et analyser vos métriques de performance sur les bases de données
+  et requêtes
 further_reading:
-  - link: /database_monitoring/
-    tag: Documentation
-    text: Database Monitoring
-  - link: /integrations/postgres/
-    tag: Documentation
-    text: Intégration Postgres
-  - link: /integrations/mysql/
-    tag: Documentation
-    text: Intégration MySQL
-  - link: /database_monitoring/data_collected/
-    tag: Documentation
-    text: Données collectées
-  - link: /database_monitoring/troubleshooting/
-    tag: Documentation
-    text: Dépannage
+- link: /database_monitoring/
+  tag: Documentation
+  text: Database Monitoring
+- link: /integrations/postgres/
+  tag: Documentation
+  text: Intégration Postgres
+- link: /integrations/mysql/
+  tag: Documentation
+  text: Intégration MySQL
+- link: /database_monitoring/data_collected/
+  tag: Documentation
+  text: Données collectées
+- link: /database_monitoring/troubleshooting/
+  tag: Documentation
+  text: Dépannage
+kind: documentation
+title: Explorer les métriques de requête
 ---
-{{< site-region region="us5,gov" >}}
+
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">La solution Database Monitoring n'est pas prise en charge pour ce site.</div>
 {{< /site-region >}}
 
@@ -55,7 +57,7 @@ Sélectionnez ou supprimez des facettes afin d'afficher les requêtes qui vous i
 
 ### Filtrer la vue Query Metrics pour afficher une seule requête
 
-Si vous souhaitez filtrer le contenu de la vue Query Metrics afin d'afficher une seule requête normalisée, appliquez le filtre `query_signature` au lieu de `query`. Les noms de tag sont tronqués après le 200e caractère. De plus, puisque les requêtes peuvent être longues, les tags `query` correspondants ne sont pas forcément uniques. La valeur `query_signature` correspond à un hachage d'une requête normalisée et est utilisée comme ID unique de cette dernière.
+Si vous souhaitez filtrer le contenu de la vue Query Metrics afin d'afficher une seule [requête normalisée][4], appliquez le filtre `query_signature` au lieu de `query`. Les noms de tag sont tronqués après le 200e caractère. De plus, puisque les requêtes peuvent être longues, les tags `query` correspondants ne sont pas forcément uniques. La valeur `query_signature` correspond à un hachage d'une requête normalisée et est utilisée comme ID unique de cette dernière.
 
 Pour filtrer la vue sur une requête précise sans rechercher la valeur de la signature de cette requête, cliquez sur la requête dans la liste pour ouvrir la [page Query Details](#page-query-details). Cliquez ensuite sur **Filter to This Query**. Un filtre basé sur la facette `query_signature` est alors appliqué à la page Query Metrics.
 
@@ -75,7 +77,7 @@ Les vues Database Monitoring affichent principalement les métriques suivantes�
 
 ## Page Query Details
 
-Lorsque vous cliquez sur une requête dans la liste Query Metrics, la page Query Details associée à cette requête s'ouvre. L'intégralité du texte de la requête normalisée et la liste de tous les tags associés à la requête sont affichés en haut de la page. La liste de tags rassemble tous les tags provenant de chaque host sur lequel la requête s'exécute. Parcourez la liste pour découvrir différentes informations, comme le serveur sur lequel la requête s'exécute :
+Lorsque vous cliquez sur une requête dans la liste Query Metrics, la page Query Details associée à cette requête s'ouvre. L'intégralité du texte de la [requête normalisée][4] et la liste de tous les tags associés à la requête sont affichés en haut de la page. La liste de tags rassemble tous les tags provenant de chaque host sur lequel la requête s'exécute. Parcourez la liste pour découvrir différentes informations, comme le serveur sur lequel la requête s'exécute :
 
 {{< img src="database_monitoring/dbm_qd_tags.png" alt="Liste de tags pour une requête" style="width:100%;">}}
 
@@ -101,9 +103,9 @@ Datadog recueille régulièrement des plans d'exécution. Une requête donnée p
 
 {{< img src="database_monitoring/dbm_qd_explain_plans.png" alt="Informations sur les plans d'exécution d'une requête" style="width:100%;">}}
 
-Sélectionnez un plan pour afficher des métriques sur les coûts ou le JSON associé. Cliquez sur **View All Samples for This Plan** pour accéder à la vue Query Samples afin de découvrir [les échantillons associés à la requête][4].
+Sélectionnez un plan pour afficher des métriques sur les coûts ou le JSON associé. Cliquez sur **View All Samples for This Plan** pour accéder à la vue Query Samples afin de découvrir [les échantillons associés à la requête][5].
 
-Pour diverses raisons, concernant notamment le type de requête ou les différents paramètres de configuration, les requêtes ne possèdent pas toutes des plans d'exécution. Consultez la section sur le [dépannage][5] pour en savoir plus.
+Pour diverses raisons, concernant notamment le type de requête ou les différents paramètres de configuration, les requêtes ne possèdent pas toutes des plans d'exécution. Consultez la section sur le [dépannage][6] pour en savoir plus.
 
 ### Onglet Hosts Running This Query
 
@@ -122,5 +124,6 @@ Pour accéder rapidement à des dashboards contenant des visualisations sur les 
 [1]: https://app.datadoghq.com/databases
 [2]: /fr/database_monitoring/data_collected/#which-queries-are-tracked
 [3]: /fr/database_monitoring/query_samples/
-[4]: /fr/database_monitoring/query_samples/#sample-details
-[5]: /fr/database_monitoring/troubleshooting/#queries-are-missing-explain-plans
+[4]: /fr/database_monitoring/data_collected/#normalized-queries
+[5]: /fr/database_monitoring/query_samples/#sample-details
+[6]: /fr/database_monitoring/troubleshooting/#queries-are-missing-explain-plans

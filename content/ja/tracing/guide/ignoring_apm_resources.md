@@ -29,13 +29,13 @@ Datadog に送信したくないトレースのセットをプログラムで特
 
 フィルタータグオプションでは、文字列の完全一致が必要です。正規表現により除外したい場合は、「[リソースに基づいて無視する](#ignoring-based-on-resources)」を参照してください。
 
-環境変数を使って、必要とするスパンタグや拒否するスパンタグを指定することができます。
+環境変数のキーと値をカンマで区切ったリストを使って、必要とするスパンタグや拒否するスパンタグを指定することができます。
 
 `DD_APM_FILTER_TAGS_REQUIRE`
-: 指定されたスパンのタグと値が完全に一致するルートスパンを持つトレースのみを収集します。このルールに一致しない場合、トレースは無視されます。例えば、`DD_APM_FILTER_TAGS_REJECT=key:value` です。
+: 指定されたスパンのタグと値が完全に一致するルートスパンを持つトレースのみを収集します。このルールに一致しない場合、トレースは無視されます。例えば、`DD_APM_FILTER_TAGS_REQUIRE=key1:value1,key2:value2` です。
 
 `DD_APM_FILTER_TAGS_REJECT`
-: 指定されたスパンのタグと値が完全に一致するルートスパンを持つトレースを拒否します。このルールに一致した場合、トレースは無視されます。例えば、`DD_APM_FILTER_TAGS_REJECT=key:value` です。
+: 指定されたスパンのタグと値が完全に一致するルートスパンを持つトレースを拒否します。このルールに一致した場合、トレースは無視されます。例えば、`DD_APM_FILTER_TAGS_REJECT=key1:value1,key2:value2` です。
 
 または、Agent のコンフィギュレーションファイルでこれらを設定することもできます。
 
@@ -43,7 +43,7 @@ Datadog に送信したくないトレースのセットをプログラムで特
 apm_config:
   filter_tags:
     require: ["db:sql", "db.instance:mysql"]
-    reject: ["outcome:success"]
+    reject: ["outcome:success", "key2:value2"]
 {{< /code-block >}}
 
 たとえば、`http.url` がこのエンドポイントに一致するヘルスチェックを無視するには次のようにします。
@@ -54,12 +54,98 @@ apm_config:
     reject: ["http.url:http://localhost:5050/healthcheck"]
 {{< /code-block >}}
 
-<div class="alert alert-warning"><strong>注</strong>: このようにトレースをフィルタリングすると、<a href="/tracing/guide/metrics_namespace/">トレースメトリクス</a>からこれらのリクエストが削除されます。トレースメトリクスに影響を与えずに取り込み量を削減する方法については、<a href="/tracing/trace_ingestion/ingestion_controls">取り込みコントロール</a>を参照してください。</div>
+この方法でトレースをフィルターすると、[トレースメトリクス][3]からこれらのリクエストが削除されます。トレースメトリクスに影響を与えずに取り込みを減らす方法については、[Ingestion Controls][4] を参照してください。
 
+バックエンドでは、Datadog は取り込み後に以下のスパンタグを作成し、スパンに追加します。これらのタグは、Datadog Agent レベルでトレースをドロップするために使用することはできません。
+
+
+| 名前                                    | 説明                                      |
+|-----------------------------------------|--------------------------------------------------|
+| `http.path_group`                       | `http.url` タグからの完全な URL パス。        |
+| `http.url_details.host`                 | `http.url` タグのホスト名部分。      |
+| `http.url_details.path`                 | HTTP リクエスト行で渡された完全なリクエスト対象、またはそれに相当するもの。 |
+| `http.url_details.scheme`               | `http.url` タグからのリクエストスキーム。       |
+| `http.url_details.queryString`          | `http.url` タグからのクエリ文字列部分。 |
+| `http.url_details.port`                 | `http.url` タグからの HTTP ポート。            |
+| `http.useragent_details.os.family`      | User-Agent によって報告された OS ファミリー。         |
+| `http.useragent_details.browser.family` | User-Agent によって報告されたブラウザファミリー。    |
+| `http.useragent_details.device.family`  | User-Agent によって報告されたデバイスファミリー。     |
+
+<div class="alert alert-warning"><strong>注</strong>: 2022 年 10 月 1 日以降、Datadog バックエンドは、取り込まれたすべてのスパンについてトレーサー間で<a href="/tracing/trace_collection/tracing_naming_convention">スパンタグのセマンティクス</a>を適用するためにリマッピングを適用します。Datadog Agent レベルでタグに基づいてスパンをドロップしたい場合、<strong>Remap from</strong> 列でタグを使用します。</div>
+
+#### ネットワーク通信
+
+| **名前**                   | **Remap from**                                      |
+|----------------------------|-----------------------------------------------------|
+| `network.host.ip`          | `tcp.local.address` - Node.js                       |
+| `network.destination.ip`   | `out.host` - すべての言語  |
+| `network.destination.port` | `grpc.port` - Python<br>`tcp.remote.port` - Node.js<br>`out.port` - すべての言語  |
+
+#### HTTP リクエスト
+
+| **名前**                       | **Remap from**                                                                                        |
+|--------------------------------|-------------------------------------------------------------------------------------------------------|
+| `http.route`                   | `aspnet_core.route` - .NET<br>`aspnet.route` - .NET<br>`laravel.route` - PHP<br>`symfony.route` - PHP |
+| `http.useragent`               | `user_agent` - Java                                                                                   |
+| `http.url_details.queryString` | `http.query.string` - Python                                                                          |
+
+#### データベース
+
+| **名前**                         | **Remap from**                                                                                                                                                                                                                  |
+|----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `db.system`                      | `db.type` - Java、Python、Node.js、Go<br>`active_record.db.vendor` - Ruby<br>`sequel.db.vendor` - Ruby                                                                                                                          |
+| `db.instance`                    | `mongodb.db` - Python<br> `sql.db` - Python<br> `db.name` - すべての言語                                           |
+| `db.statement`                   | `cassandra.query` - Go<br>`consul.command` - Python<br>`memcached.query` - Python<br>`mongodb.query` - Python、.NET、Go<br>`redis.command` - Python<br>`redis.raw_command` - Python<br>`sql.query` - Python、PHP、Node.js、Java |
+| `db.row_count`                   | `cassandra.row_count` - Python<br>`db.rowcount` - Python、PHP<br>`mongodb.rows` - Python<br>`sql.rows` - Python                                                                                                                 |
+| `db.cassandra.cluster`           | `cassandra.cluster` - Python、Go                                                                                                                                                                                                |
+| `db.cassandra.consistency_level` | `cassandra.consistency_level` - Python、Go                                                                                                                                                                                      |
+| `db.cassandra.table`             | `cassandra.keyspace` - Python、Go                                                                                                                                                                                               |
+| `db.redis.database_index`        | `db.redis.dbIndex` - Java<br>`out.redis_db` - Python、Ruby                                                                                                                                                                      |
+| `db.mongodb.collection`          | `mongodb.collection` - Python、.NET、Ruby、PHP                                                                                                                                                                                  |
+| `db.cosmosdb.container`          | `cosmosdb.container` - .NET                                                                                                                                                                                                     |
+
+#### メッセージキュー
+
+| **名前**                               | **Remap from**                                                                                             |
+|----------------------------------------|------------------------------------------------------------------------------------------------------------|
+| `messaging.destination`                | `amqp.destination` - Node.js<br>`amqp.queue` - .NET<br>`msmq.queue.path` - .NET<br>`aws.queue.name` - .NET |
+| `messaging.url`                        | `aws.queue.url` - .NET、Java                                                                               |
+| `messaging.message_id`                 | `server_id` - Go                                                                                           |
+| `messaging.message_payload_size`       | `message.size` - .NET、Java                                                                                |
+| `messaging.operation`                  | `amqp.command` - .NET<br>`msmq.command` - .NET                                                             |
+| `messaging.rabbitmq.routing_key`       | `amqp.routing_key` - Java<br>`amqp.routingKey` - Nodes.js                                                  |
+| `messaging.rabbitmq.delivery_mode`     | `messaging.rabbitmq.exchange` - .NET                                                                       |
+| `messaging.msmq.message.transactional` | `msmq.message.transactional` - .NET                                                                        |
+| `messaging.msmq.queue.transactional`   | `msmq.queue.transactional` - .NET                                                                          |
+| `messaging.kafka.consumer_group`       | `kafka.group` - Java                                                                                       |
+| `messaging.kafka.tombstone`            | `kafka.tombstone` - .NET<br>`tombstone` - Java                                                             |
+| `messaging.kafka.partition`            | `kafka.partition` - .NET<br>`partition` - Node.js、Go、Java                                                |
+| `messaging.kafka.offset`               | `kafka.offset` - .NET                                                                                      |
+| `messaging.msmq.message.transactional` | `msmq.message.transactional` - .NET                                                                        |
+
+
+#### リモートプロシージャコール
+
+| **名前**                       | **Remap from**                                                                                          |
+|--------------------------------|---------------------------------------------------------------------------------------------------------|
+| `rpc.service`                  | `grpc.method.service` - Python、.NET                                                                    |
+| `rpc.method`                   | `grpc.method.name` - Python、.NET、Go                                                                   |
+| `rpc.grpc.package`             | `grpc.method.package` - Python、.NET、Go                                                                |
+| `rpc.grpc.status_code`         | `grpc.code` - Go<br>`status.code` - Python、.NET、Node.js<br>`grpc.status.code` - Python、.NET、Node.js |
+| `rpc.grpc.kind`                | `grpc.method.kind` - Python、Node.js、Go、.NET                                                          |
+| `rpc.grpc.path`                | `rpc.grpc.path` - Python、Node.js、Go、.NET                                                             |
+| `rpc.grpc.request.metadata.*`  | `grpc.request.metadata.*` - Python、Node.js<br>`rpc.grpc.request.metadata` - Go                         |
+| `rpc.grpc.response.metadata.*` | `grpc.response.metadata.*` - Python、Node.js        
+
+#### エラー
+
+| **名前**                       | **Remap from**                                                                                          |
+|--------------------------------|---------------------------------------------------------------------------------------------------------|
+| `error.message`                  | `error.msg` - すべての言語                      |
 
 ### リソースに基づいて無視する
 
-**ignore resources** オプションを使用すると、トレースのグローバルルートスパンが特定の基準に一致する場合にリソースを除外することができます。「[リソースを収集から除外][3]」を参照してください。このオプションは、この特定の Datadog Agent にトレースを送信するすべてのサービスに適用されます。ignore resources により無視されたトレースは、トレースメトリクスに含まれません。
+**ignore resources** オプションを使用すると、トレースのグローバルルートスパンが特定の基準に一致する場合にリソースを除外することができます。[リソースを収集から除外][5]を参照してください。このオプションは、この特定の Datadog Agent にトレースを送信するすべてのサービスに適用されます。ignore resources により無視されたトレースは、トレースメトリクスに含まれません。
 
 無視するリソースは、Agent のコンフィギュレーションファイル、`datadog.yaml`、または `DD_APM_IGNORE_RESOURCES` 環境変数で指定します。以下の例を参照してください。
 
@@ -73,7 +159,7 @@ apm_config:
 {{< /code-block >}}
 
 **注**:
-- Trace Agent が許容する正規表現の構文は、Go の[regexp][4] によって評価されます。
+- Trace Agent が許容する正規表現の構文は、Go の [regexp][6] によって評価されます。
 - デプロイ戦略によっては、特殊文字をエスケープして正規表現を調整しなければならない場合もあります。
 - Kubernetes で専用コンテナを使用している場合は、ignore resource オプションの環境変数が **trace-agent** コンテナに適用されていることを確認してください。
 
@@ -101,6 +187,13 @@ apm_config:
   ignore_resources: Api::HealthchecksController#index$
 {{< /code-block >}}
 
+複数の値の場合
+
+{{< code-block lang="yaml" >}}
+apm_config:
+  ignore_resources: ["value1","Api::HealthchecksController#index$"]
+{{< /code-block >}}
+
 {{% /tab %}}
 {{% tab "Docker compose" %}}
 
@@ -112,6 +205,14 @@ Datadog Agent コンテナの環境変数のリストに、以下の例のよう
       - DD_APM_IGNORE_RESOURCES=Api::HealthchecksController#index$$
 {{< /code-block >}}
 
+複数の値の場合
+
+{{< code-block lang="yaml" >}}
+    environment:
+      // その他の Datadog Agent の環境変数
+      - DD_APM_IGNORE_RESOURCES="value1","Api::HealthchecksController#index$$"
+{{< /code-block >}}
+
 [1]: https://docs.docker.com/compose/compose-file/compose-file-v3/#variable-substitution
 {{% /tab %}}
 {{% tab "Docker run" %}}
@@ -121,6 +222,7 @@ Datadog Agent をスピンアップするための docker run コマンドに、
 {{< code-block lang="bash" >}}
 docker run -d --name datadog-agent \
               --cgroupns host \
+              --pid host \
               -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
@@ -129,6 +231,12 @@ docker run -d --name datadog-agent \
               -e DD_APM_ENABLED=true \
               -e DD_APM_NON_LOCAL_TRAFFIC=true \
               gcr.io/datadoghq/agent:latest
+{{< /code-block >}}
+
+複数の値の場合
+
+{{< code-block lang="yaml" >}}
+              -e DD_APM_IGNORE_RESOURCES=["value1","Api::HealthchecksController#index$"] \
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -175,6 +283,13 @@ trace-agent 専用コンテナに、環境変数 `DD_APM_IGNORE_RESOURCES` を�
           value: "Api::HealthchecksController#index$"
 {{< /code-block >}}
 
+複数の値の場合
+
+{{< code-block lang="yaml" >}}
+        - name: DD_APM_IGNORE_RESOURCES
+          value: ["value1","Api::HealthchecksController#index$"]
+{{< /code-block >}}
+
 {{% /tab %}}
 {{% tab "Kubernetes Helm" %}}
 
@@ -187,6 +302,13 @@ trace-agent 専用コンテナに、環境変数 `DD_APM_IGNORE_RESOURCES` を�
         - name: DD_APM_IGNORE_RESOURCES
           value: Api::HealthchecksController#index$
 
+{{< /code-block >}}
+
+複数の値の場合
+
+{{< code-block lang="yaml" >}}
+        - name: DD_APM_IGNORE_RESOURCES
+          value: value1, Api::HealthchecksController#index$
 {{< /code-block >}}
 
 代わりに、`helm install` コマンドで `agents.containers.traceAgent.env` を設定することもできます。　
@@ -231,14 +353,14 @@ AWS ECS を使用している場合 (EC2など) は、Datadog Agent のコンテ
 
 {{< programming-lang lang="ruby" >}}
 
-Ruby トレーサーには、特定の条件を満たすトレースを削除する後処理パイプラインがあります。詳しい情報や例は[トレースの後処理][1]を参照してください。
+Ruby トレーサーには、特定の条件を満たすトレースを除去する後処理パイプラインがあります。詳しい情報や例は[トレースの後処理][1]を参照してください。
 
-たとえば、リソース名が `Api::HealthchecksController#index` である場合、そのリソース名を含むトレースを削除するために `trace.delete_if` メソッドを使用します。このフィルターは、[スパンオブジェクト][2]で利用可能な他のメタデータを照合するためにも使用できます。
+たとえば、リソース名が `Api::HealthchecksController#index` である場合、そのリソース名を含むトレースを除去するために `Datadog::Tracing::Pipeline::SpanFilter` クラスを使用します。このフィルターは、[スパンオブジェクト][2]で利用可能な他のメタデータを照合するためにも使用できます。
 
 ```
-Datadog::Tracing.before_flush do |trace|
-  trace.delete_if { |span| span.resource =~ /Api::HealthchecksController#index/ }
-end
+Datadog::Tracing.before_flush(
+   Datadog::Tracing::Pipeline::SpanFilter.new { |span| span.resource =~ /Api::HealthchecksController#index/ }
+)
 ```
 
 [1]: /ja/tracing/trace_collection/custom_instrumentation/ruby/?tab=activespan#post-processing-traces
@@ -320,5 +442,7 @@ public class GreetingController {
 
 [1]: /ja/help/
 [2]: /ja/tracing/guide/add_span_md_and_graph_it/
-[3]: /ja/tracing/configure_data_security/?tab=mongodb#exclude-resources-from-being-collected
-[4]: https://golang.org/pkg/regexp/
+[3]: /ja/tracing/guide/metrics_namespace/
+[4]: /ja/tracing/trace_ingestion/ingestion_controls
+[5]: /ja/tracing/configure_data_security/?tab=mongodb#exclude-resources-from-being-collected
+[6]: https://golang.org/pkg/regexp/

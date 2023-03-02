@@ -1,37 +1,58 @@
 ---
+app_id: gnatsd-streaming
+app_uuid: 264e486e-d704-4851-987a-d33c11036521
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: true
+    metrics:
+      check: gnatsd.streaming.serverz.clients
+      metadata_path: metadata.csv
+      prefix: gnatsd.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Gnatsd streaming
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: dev@goldstar.com
+  support_email: dev@goldstar.com
 categories:
 - monitoring
-creates_events: true
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/gnatsd_streaming/README.md
-display_name: Gnatsd streaming
+display_on_public_website: true
 draft: false
 git_integration_title: gnatsd_streaming
-guid: 0a849512-5823-4d9b-b378-aa9d8fb06231
 integration_id: gnatsd-streaming
 integration_title: Gnatsd Streaming
 integration_version: 1.0.0
 is_public: true
 kind: インテグレーション
-maintainer: dev@goldstar.com
-manifest_version: 1.0.0
-metric_prefix: gnatsd.
-metric_to_check: gnatsd.streaming.serverz.clients
+manifest_version: 2.0.0
 name: gnatsd_streaming
+oauth: {}
 public_title: Gnatsd Streaming
 short_description: NATS サーバーストリーミング
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::モニタリング
+  configuration: README.md#Setup
+  description: NATS サーバーストリーミング
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Gnatsd Streaming
 ---
 
 

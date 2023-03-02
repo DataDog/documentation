@@ -201,8 +201,8 @@ RUM iOS SDK が自動的に取得する[デフォルトの RUM 属性][7]に加�
 
 カスタムグローバル属性を設定するには、`Global.rum.addAttribute(forKey:value:)` を使用します。
 
-* 属性を追加するには、`Global.rum.setAttribute(forKey: "some key", value: "some value")` を使用します。
-* 値を更新するには、`Global.rum.setAttribute(forKey: "some key", value: "some other value")`を使用します。
+* 属性を追加するには、`Global.rum.addAttribute(forKey: "some key", value: "some value")` を使用します。
+* 値を更新するには、`Global.rum.addAttribute(forKey: "some key", value: "some other value")` を使用します。
 * キーを削除するには、`Global.rum.removeAttribute(forKey: "some key")` を使用します。
 
 ### ユーザーセッションの追跡
@@ -252,6 +252,9 @@ Datadog.setUserInfo(id: "1234", name: "John Doe", email: "john@doe.com")
 
 `set(uploadFrequency: UploadFrequency)`
 : Datadog へのデータアップロードの希望頻度を設定します。利用できる値は `.frequent`、`.average`、`.rare` などです。
+
+`set(mobileVitalsFrequency: VitalsFrequency)`
+: モバイルバイタルを収集する好ましい頻度を設定します。設定可能な値は以下の通りです: `.frequent` (100ms 毎)、`.average` (500ms 毎)、`.rare` (1s 毎)、`.never` (バイタル監視を無効にする)
 
 ### RUM コンフィギュレーション
 

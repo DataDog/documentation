@@ -7,12 +7,12 @@ further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative
   tag: GitHub
   text: dd-sdk-reactnative ソースコード
-- link: real_user_monitoring/explorer/
-  tag: ドキュメント
-  text: RUM データの調査方法
 - link: https://www.datadoghq.com/blog/react-native-monitoring/
   tag: ブログ
   text: React Native アプリケーションの監視
+- link: real_user_monitoring/explorer/
+  tag: ドキュメント
+  text: RUM データの調査方法
 kind: documentation
 title: モバイル バイタル
 ---

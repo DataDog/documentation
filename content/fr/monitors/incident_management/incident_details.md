@@ -1,14 +1,15 @@
 ---
-title: Page de détails d'un incident
-kind: documentation
 description: Gérer le contexte et le travail liés à un incident
 further_reading:
-  - link: dashboards/querying/#incident-management-analytics
-    tag: Documentation
-    text: Données d'analyse de la gestion des incidents
+- link: dashboards/querying/#incident-management-analytics
+  tag: Documentation
+  text: Incident Management Analytics
+kind: documentation
+title: Page de détails d'un incident
 ---
+
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">La fonctionnalité de gestion des incidents n'est pas disponible pour le site {{< region-param key="dd_site_name" >}} de Datadog.</div>
+<div class="alert alert-warning">La fonctionnalité Incident Management n'est pas disponible pour le site {{< region-param key="dd_site_name" >}}.</div>
 {{< /site-region >}}
 
 Chaque incident dans Datadog dispose de sa propre page de détails où vous pouvez gérer les champs de propriété, les signaux, les tâches, les documents, les intervenants et les notifications de votre incident. Pour que la page de détails d'un incident soit disponible, vous devez [créer un incident][1]. La page de détails contient un en-tête global permettant d'accéder rapidement aux actions essentielles, tandis que le corps de la page est divisé en différentes sections sous forme d'onglets qui servent à regrouper les données connexes de l'incident. La première de ces sections est Overview.
@@ -31,15 +32,31 @@ Par défaut, tous les incidents présentent les propriétés suivantes :
 * Services
 * Teams
 * Detection Method
+* Summary
 
-Vous pouvez configurer des champs de propriété supplémentaires dans [Incident Settings][5] en utilisant les paires `<CLÉ>:<VALEUR>` transmises dans vos tags de métrique Datadog. Grâce à l'attribution de valeurs aux propriétés d'un incident, il est plus facile de rechercher des sous-ensembles d'incidents sur la [Incident Homepage][6] et de former des requêtes lors de l'utilisation des [données d'analyse de la gestion des incidents][7].
+Les propriétés sont divisées en trois sections :
 
-Si votre incident affecte les clients, indiquez les détails de l'impact dans la section Properties sous l'en-tête Impact :
+* What happened
+* Why it happened
+* Attributes
 
-1. Sélectionnez *Yes* pour `Customer Impact`.
+Vous pouvez configurer des champs de propriété supplémentaires dans [Incident Settings][5] en utilisant les paires `<KEY>:<VALUE>` transmises dans vos tags de métrique, ou en créant des champs personnalisés. En attribuant des valeurs aux propriétés d'un incident, vous pourrez plus facilement rechercher des sous-ensembles d'incidents sur la [Incident Homepage][6] et former des requêtes si vous utilisez la fonctionnalité [Incident Management Analytics][7]. Vous pouvez également réorganiser vos champs de propriété et les déplacer vers d'autres en-têtes de façon à améliorer la visibilité des propriétés les plus importantes.
+
+Si votre incident affecte des clients, indiquez les détails dans la section Impact :
+
+1. Cliquez sur **Add**.
 2. Indiquez la date et l'heure de début de l'impact.
-3. Indiquez la date et l'heure de fin de l'impact ou choisissez `Active` si l'impact est toujours en cours.
+3. Indiquez la date et l'heure de fin de l'impact, ou laissez le champ vide si l'impact est toujours en cours.
 4. Décrivez la nature de l'impact sur les clients dans `Scope of impact`.
+5. Cliquez sur **Save**.
+
+En plus de vos champs de propriété, la section Overview affiche un récapitulatif des informations via les modules suivants :
+
+1. *Condensed Timeline* : Affiche les changements d'état de l'incident ainsi que le début et la fin de l'impact afin d'offrir une vue générale du cycle de vie de l'incident.
+2. *Latest Notifications* : Affiche la dernière notification envoyée pour l'incident, avec un lien pour accéder rapidement à la liste complète des notifications dans la [section Notification][14].
+3. *Pending Tasks* : Affiche la dernière tâche non terminée, avec un lien pour accéder rapidement à la liste complète des tâches dans la [section Remediation][15].
+4. *Responders* : Affiche le responsable actuel de l'incident ainsi que les avatars des autres personnes affectées à l'incident.
+5. *Recent timeline entries* : Affiche les cinq dernières entrées dans la timeline de l'incident, avec un lien pour accéder rapidement à la [section Timeline][16] complète.
 
 ## Section Timeline
 
@@ -147,3 +164,6 @@ Découvrez un exemple de workflow dans le guide [Débuter avec la Gestion des in
 [11]: /fr/monitors/incident_management/incident_settings#rules
 [12]: /fr/monitors/incident_management/incident_settings#message-templates
 [13]: /fr/getting_started/incident_management
+[14]: #notifications-section
+[15]: #remediation-section
+[16]: #timeline-section

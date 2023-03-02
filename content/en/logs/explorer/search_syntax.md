@@ -32,14 +32,14 @@ There are two types of terms:
 
 * A **sequence** is a group of words surrounded by double quotes, such as `"hello dolly"`.
 
-To combine multiple terms into a complex query, you can use any of the following Boolean operators:
+To combine multiple terms into a complex query, you can use any of the following case sensitive Boolean operators:
 
 |              |                                                                                                        |                              |
 |--------------|--------------------------------------------------------------------------------------------------------|------------------------------|
 | **Operator** | **Description**                                                                                        | **Example**                  |
 | `AND`        | **Intersection**: both terms are in the selected events (if nothing is added, AND is taken by default) | authentication AND failure   |
 | `OR`         | **Union**: either term is contained in the selected events                                             | authentication OR password   |
-| `-`          | **Exclusion**: the following term is NOT in the event                                                  | authentication AND -password |
+| `-`          | **Exclusion**: the following term is NOT in the event (apply to each individual raw text search)                                                  | authentication AND -password |
 
 ## Autocomplete
 
@@ -68,8 +68,8 @@ For instance, if your attribute name is **url** and you want to filter on the **
 1. Facet searches are case sensitive. Use free text search to get case insensitive results. Another option is to use the lowercase filter with your Grok parser while parsing to get case insensitive results during search.
 
 2. Searching for a facet value that contains special characters requires escaping or double quotes.
-For example, for a facet `my_facet` with the value `hello:world`, search using: `@my_facet:hello\:world` or `@my_facet:"hello:world"`.
-To match a single special character or space, use the `?` wildcard. For example, for a facet `my_facet` with the value `hello world`, search using: `@my_facet:hello?world`.
+    - For example, for a facet `my_facet` with the value `hello:world`, search using: `@my_facet:hello\:world` or `@my_facet:"hello:world"`.
+    - To match a single special character or space, use the `?` wildcard. For example, for a facet `my_facet` with the value `hello world`, search using: `@my_facet:hello?world`.
 
 [1]: /logs/explorer/facets/
 
@@ -91,8 +91,8 @@ For instance, if your attribute name is **url** and you want to filter on the **
 2. Attributes searches are case sensitive. Use free text search to get case insensitive results. Another option is to use the `lowercase` filter with your Grok parser while parsing to get case insensitive results during search.
 
 3. Searching for an attribute value that contains special characters requires escaping or double quotes.
-For example, for an attribute `my_attribute` with the value `hello:world`, search using: `@my_attribute:hello\:world` or `@my_attribute:"hello:world"`.
-To match a single special character or space, use the `?` wildcard. For example, for an attribute `my_attribute` with the value `hello world`, search using: `@my_attribute:hello?world`.
+    - For example, for an attribute `my_attribute` with the value `hello:world`, search using: `@my_attribute:hello\:world` or `@my_attribute:"hello:world"`.
+    - To match a single special character or space, use the `?` wildcard. For example, for an attribute `my_attribute` with the value `hello world`, search using: `@my_attribute:hello?world`.
 {{< /site-region >}}
 
 Examples:

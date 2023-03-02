@@ -1,18 +1,17 @@
 ---
-beta: true
 dependencies:
 - https://github.com/DataDog/dd-sdk-reactnative/blob/main/README.md
 description: React Native プロジェクトから RUM データを収集します。
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative
-  tag: Github
+  tag: GitHub
   text: dd-sdk-reactnative ソースコード
-- link: real_user_monitoring/explorer/
-  tag: ドキュメント
-  text: RUM データの調査方法
 - link: https://www.datadoghq.com/blog/react-native-monitoring/
   tag: ブログ
   text: React Native アプリケーションの監視
+- link: real_user_monitoring/explorer/
+  tag: ドキュメント
+  text: RUM データの調査方法
 kind: documentation
 title: React Native のモニタリング
 ---
@@ -45,8 +44,9 @@ yarn add @datadog/mobile-react-native
 1. [Datadog アプリ][1]で、**UX Monitoring** > **RUM Applications** > **New Application** へ移動します。
 2. アプリケーションタイプとして `react-native` を選択します。
 3. アプリケーション名を入力して一意の Datadog アプリケーション ID とクライアントトークンを生成します。
+4. クライアント IP またはジオロケーションデータの自動ユーザーデータ収集を無効にするには、これらの設定のチェックボックスをオフにします。
 
-{{< img src="real_user_monitoring/react_native/image_reactnative.png" alt="Datadog ワークフローで RUM アプリケーションを作成" style="width:90%;">}}
+   {{< img src="real_user_monitoring/react_native/reactnative_setup.png" alt="Datadog で React Native の RUM アプリケーションを作成する" style="width:90%;">}}
 
 データの安全性を確保するため、クライアントトークンを使用する必要があります。`@datadog/mobile-react-native` ライブラリの構成に [Datadog API キー][3]のみを使用した場合、クライアント側で React Native アプリケーションのコード内で公開されます。
 
@@ -66,27 +66,27 @@ const config = new DdSdkReactNativeConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
     '<RUM_APPLICATION_ID>',
-    true, // ユーザーインタラクション (例: ボタンへのタップ) を追跡します。
+    true, // ユーザーインタラクション (ボタンのタップなど) を追跡します。
     true, // XHR リソースを追跡します
     true // エラーを追跡します
 );
 config.site = 'US1';
 // オプション: ネイティブクラッシュレポートを有効または無効にします
 config.nativeCrashReportEnabled = true;
-// オプション: RUM セッションのサンプル (ここでは、セッションの 80% が Datadog に送信されます。 デフォルトは 100%)
+// オプション: RUM セッションのサンプル (この例では、セッションの 80% が Datadog に送信されます。 デフォルトは 100%)
 config.sessionSamplingRate = 80;
-// オプション: アプリとバックエンド間のネットワークコールのトレースインテグレーションのサンプル (ここでは、インスツルメントされたバックエンドへのコールの 80％ が RUM ビューから APM ビューにリンクされます。デフォルトは 20%)
+// オプション: アプリとバックエンド間のネットワークコールのトレースインテグレーションのサンプル (この例では、インスツルメントされたバックエンドへのコールの 80％ が RUM ビューから APM ビューにリンクされます。デフォルトは 20%)
 // バックエンドでトレースを有効にするには、バックエンドのホストを指定する必要があります
 config.resourceTracingSamplingRate = 80;
 config.firstPartyHosts = ['example.com']; // 'example.com' と 'api.example.com' のようなサブドメインにマッチします
-// オプション: 報告されるサービス名を設定します (デフォルトでは、Android/iOS アプリのパッケージ名/bundleIdentifier をそれぞれ使用します)
+// オプション: 報告されるサービス名を設定します (デフォルトでは、Android または iOS アプリのパッケージ名または bundleIdentifier をそれぞれ使用します)
 config.serviceName = 'com.example.reactnative';
-// オプション: SDK に内部ログを出力させる (指定されたレベル以上。デフォルトは undefined (ログを出力しない))
+// オプション: SDK に指定されたレベル以上の内部ログを出力させる。デフォルトは undefined (ログを出力しない)
 config.verbosity = SdkVerbosity.WARN;
 
 await DdSdkReactNative.initialize(config);
 
-// SDK を初期化したら、RUM ダッシュボードでデータを見ることができるように、ビュー追跡を設定する必要があります。
+// Datadog React Native SDK for RUM を初期化したら、RUM ダッシュボードでデータを見ることができるように、ビュー追跡を設定する必要があります。
 ```
 
 {{< /site-region >}}
@@ -103,7 +103,7 @@ const config = new DdSdkReactNativeConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
     '<RUM_APPLICATION_ID>',
-    true, // ユーザーインタラクション (例: ボタンへのタップ) を追跡します。
+    true, // ユーザーインタラクション (ボタンのタップなど) を追跡します。
     true, // XHR リソースを追跡します
     true // エラーを追跡します
 );
@@ -119,7 +119,7 @@ config.firstPartyHosts = ['example.com']; // 'example.com' と 'api.example.com'
 
 await DdSdkReactNative.initialize(config);
 
-// SDK を初期化したら、RUM ダッシュボードでデータを見ることができるように、ビュー追跡を設定する必要があります。
+// Datadog React Native SDK for RUM を初期化したら、RUM ダッシュボードでデータを見ることができるように、ビュー追跡を設定する必要があります。
 ```
 
 {{< /site-region >}}
@@ -136,7 +136,7 @@ const config = new DdSdkReactNativeConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
     '<RUM_APPLICATION_ID>',
-    true, // ユーザーインタラクション (例: ボタンへのタップ) を追跡します。
+    true, // ユーザーインタラクション (ボタンのタップなど) を追跡します。
     true, // XHR リソースを追跡します
     true // エラーを追跡します
 );
@@ -152,7 +152,7 @@ config.firstPartyHosts = ['example.com']; // 'example.com' と 'api.example.com'
 
 await DdSdkReactNative.initialize(config);
 
-// SDK を初期化したら、RUM ダッシュボードでデータを見ることができるように、ビュー追跡を設定する必要があります。
+// Datadog React Native SDK for RUM を初期化したら、RUM ダッシュボードでデータを見ることができるように、ビュー追跡を設定する必要があります。
 ```
 
 {{< /site-region >}}
@@ -169,7 +169,7 @@ const config = new DdSdkReactNativeConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
     '<RUM_APPLICATION_ID>',
-    true, // ユーザーインタラクション (例: ボタンへのタップ) を追跡します。
+    true, // ユーザーインタラクション (ボタンのタップなど) を追跡します。
     true, // XHR リソースを追跡します
     true // エラーを追跡します
 );
@@ -185,7 +185,7 @@ config.firstPartyHosts = ['example.com']; // 'example.com' と 'api.example.com'
 
 await DdSdkReactNative.initialize(config);
 
-// SDK を初期化したら、RUM ダッシュボードでデータを見ることができるように、ビュー追跡を設定する必要があります。
+// Datadog React Native SDK for RUM を初期化したら、RUM ダッシュボードでデータを見ることができるように、ビュー追跡を設定する必要があります。
 ```
 
 {{< /site-region >}}
@@ -202,7 +202,7 @@ const config = new DdSdkReactNativeConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
     '<RUM_APPLICATION_ID>',
-    true, // ユーザーインタラクション (例: ボタンへのタップ) を追跡します。
+    true, // ユーザーインタラクション (ボタンのタップなど) を追跡します。
     true, // XHR リソースを追跡します
     true // エラーを追跡します
 );
@@ -218,14 +218,41 @@ config.firstPartyHosts = ['example.com']; // 'example.com' と 'api.example.com'
 
 await DdSdkReactNative.initialize(config);
 
-// SDK を初期化したら、RUM ダッシュボードでデータを見ることができるように、ビュー追跡を設定する必要があります。
+// Datadog React Native SDK for RUM を初期化したら、RUM ダッシュボードでデータを見ることができるように、ビュー追跡を設定する必要があります。
 ```
 
 {{< /site-region >}}
 
+### 報告されたバージョンのオーバーライド
+
+デフォルトでは、Datadog React Native SDK は `version` をアプリの商用バージョンとして報告します (例えば、"1.2.44")。
+
+Microsoft の CodePush のような OTA (Over The Air) アップデートプロバイダーを使用している場合、このバージョンをオーバーライドして、JavaScript コードの実行バージョンを表示することができます。
+
+Datadog では、`DdSdkReactNativeConfiguration` オブジェクトに `versionSuffix` を使用することを推奨しています。
+
+```js
+const config = new DdSdkReactNativeConfiguration(
+    '<CLIENT_TOKEN>',
+    '<ENVIRONMENT_NAME>',
+    '<RUM_APPLICATION_ID>',
+    true,
+    true,
+    true
+);
+
+config.versionSuffix = 'codepush.3';
+```
+
+アプリの商用バージョンが "1.2.44" の場合、Datadog では "1.2.44-codepush.3" と報告されます。バージョンとサフィックスの間にダッシュ (`-`) が自動的に追加されます。
+
+また、`version` フィールドを指定することで、バージョンを完全にオーバーライドすることもできます。ただし、ソースマップやその他のマッピングファイルのアップロード時に指定したものと一致させる必要があるため、正しく設定してください。
+
+バージョンフィールドの制限については、[タグドキュメント][15]を参照してください。
+
 ### ユーザーインタラクションの追跡
 
-上記のコード例のようにユーザーインタラクションの追跡が有効になっている場合、SDK は、タップを受け取ったコンポーネントから始まるコンポーネントの階層をトラバースし、`dd-action-name` プロパティを探します。見つかったら、報告されたアクションの名前として使用されます。
+上記のコード例のようにユーザーインタラクションの追跡が有効になっている場合、Datadog React Native SDK は、タップを受け取ったコンポーネントから始まるコンポーネントの階層をトラバースし、`dd-action-name` プロパティを探します。見つかったら、報告されたアクションの名前として使用されます。
 
 または、`accessibilityLabel` 要素プロパティを使用して、タップアクションに名前を付けることもできます。それ以外の場合は、要素タイプが報告されます。サンプルアプリで使用例を確認できます。
 
@@ -243,10 +270,10 @@ import {
     DdRum
 } from '@datadog/mobile-react-native';
 
-// 一意のビュー識別子、カスタムビューの URL、オブジェクトを使用してビューを開始し、ビューに追加の属性をアタッチします
+// 一意のビュー識別子、カスタムビュー名、オブジェクトを使用してビューを開始し、ビューに追加の属性をアタッチします
 DdRum.startView(
-    '<view-key>',
-    '/view/url',
+    '<view-key>', // <view-key> は一意でなければなりません。例えば ViewName-unique-id とすることができます
+    'View Name',
     { 'custom.foo': 'something' },
     Date.now()
 );
@@ -294,77 +321,6 @@ DdSdkReactNative.setAttributes({
 });
 ```
 
-## 手動インスツルメンテーション
-
-自動インスツルメンテーションがニーズに合わない場合は、手動で RUM イベントとログを作成できます。
-
-```js
-import {
-    DdSdkReactNative,
-    DdSdkReactNativeConfiguration,
-    DdLogs,
-    DdRum
-} from '@datadog/mobile-react-native';
-
-// SDK を初期化
-const config = new DdSdkReactNativeConfiguration(
-    '<CLIENT_TOKEN>',
-    '<ENVIRONMENT_NAME>',
-    '<RUM_APPLICATION_ID>',
-    true, // ユーザーインタラクションを追跡 (例: ボタンのタップ)
-    true, // XHR リソースを追跡
-    true // エラーを追跡
-);
-DdSdkReactNative.initialize(config);
-
-// ログを送信 (debug、info、warn、error メソッドを使用)
-DdLogs.debug('Lorem ipsum dolor sit amet...', {});
-DdLogs.info('Lorem ipsum dolor sit amet...', {});
-DdLogs.warn('Lorem ipsum dolor sit amet...', {});
-DdLogs.error('Lorem ipsum dolor sit amet...', {});
-
-// RUM Views を手動で追跡
-DdRum.startView('<view-key>', 'View Url', {}, Date.now());
-//...
-DdRum.stopView('<view-key>', { custom: 42 }, Date.now());
-
-// RUM Actions を手動で追跡
-DdRum.addAction('TAP', 'button name', {}, Date.now());
-// 継続アクションの場合
-DdRum.startAction('TAP', 'button name', {}, Date.now());
-// 上記アクションの停止
-DdRum.stopAction({}, Date.now());
-
-// カスタムタイミングを追加
-DdRum.addTiming('<timing-name>');
-
-// RUM Errors を手動で追跡
-DdRum.addError('<message>', 'source', '<stacktrace>', {}, Date.now());
-
-// RUM Resource を手動で追跡
-DdRum.startResource(
-    '<res-key>',
-    'GET',
-    'http://www.example.com/api/v1/test',
-    {},
-    Date.now()
-);
-//...
-DdRum.stopResource('<res-key>', 200, 'xhr', (size = 1337), {}, Date.now());
-
-// スパンを手動で送信
-const spanId = await DdTrace.startSpan('foo', { custom: 42 }, Date.now());
-//...
-DdTrace.finishSpan(spanId, { custom: 21 }, Date.now());
-```
-
-## リソースのタイミング
-
-リソースの追跡では、以下のタイミングを提供できます。
-
--   `First Byte`: スケジュール済みのリクエストと応答の最初のバイトの間の時間。ネイティブレベルのリクエスト準備、ネットワークレイテンシー、およびサーバーの応答準備時間が含まれます。
--   `Download`: 応答の受信にかかった時間。
-
 ## データストレージ
 
 ### Android
@@ -393,6 +349,38 @@ const config = new DdSdkReactNativeConfiguration(
 )
 ```
 
+## トラブルシューティング
+
+### `use_frameworks!` での使用
+
+もし `Podfile` で `use_frameworks!` を有効にしている場合、SDK を追加した後に `pod install` を実行すると、このようなエラーが発生する可能性があります。
+
+```shell
+The 'Pods-MyApp' target has transitive dependencies that include statically linked binaries: (DatadogSDKBridge, DatadogSDKCrashReporting)
+```
+
+このエラーを防ぐには、`use_frameworks!` を上書きして、フレームワークである必要があるものを除いて、すべてのポッドを静的にインストールすることができます。
+
+```ruby
+dynamic_frameworks = ['DatadogSDKBridge','DatadogSDKCrashReporting']
+
+# static_framework? 関数をオーバーライドして、他のすべてのフレームワークを静的フレームワークにし、true を返すようにします
+pre_install do |installer|
+  installer.pod_targets.each do |pod|
+    if !dynamic_frameworks.include?(pod.name)
+      def pod.static_framework?;
+        true
+      end
+      def pod.build_type;
+        Pod::BuildType.static_library
+      end
+    end
+  end
+end
+```
+
+**注:** この解決策は、この [StackOverflow][14] の投稿に由来しています。
+
 ## ライセンス
 
 詳細については、[Apache ライセンス、v2.0][9]を参照
@@ -414,3 +402,5 @@ const config = new DdSdkReactNativeConfiguration(
 [11]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web
 [12]: https://docs.expo.dev/
 [13]: https://docs.datadoghq.com/ja/real_user_monitoring/reactnative/expo/
+[14]: https://stackoverflow.com/questions/37388126/use-frameworks-for-only-some-pods-or-swift-pods/60914505#60914505
+[15]: https://docs.datadoghq.com/ja/getting_started/tagging/#define-tags

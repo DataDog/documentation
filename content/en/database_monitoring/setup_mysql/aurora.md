@@ -9,7 +9,7 @@ further_reading:
 
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
@@ -26,10 +26,10 @@ The Agent collects telemetry directly from the database by logging in as a read-
 ## Before you begin
 
 Supported MySQL versions
-: 5.6 or 5.7
+: 5.6, 5.7, and 8.0 or later 
 
 Supported Agent versions
-: 7.36.1+
+: 7.36.1 or later
 
 Performance impact
 : The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. <br/><br/>
@@ -50,11 +50,11 @@ Configure the following in the [DB Parameter Group][3] and then **restart the se
 {{% tab "MySQL 5.6" %}}
 | Parameter | Value | Description |
 | --- | --- | --- |
-| `performance_schema` | `ON` | Required. Enables the [Performance Schema][1]. |
-| <code style="word-break:break-all;">performance_schema_consumer_events_statements_current</code> | `ON` | Required. Enables monitoring of currently running queries. |
+| `performance_schema` | `1` | Required. Enables the [Performance Schema][1]. |
+| <code style="word-break:break-all;">performance_schema_consumer_events_statements_current</code> | `1` | Required. Enables monitoring of currently running queries. |
 | <code style="word-break:break-all;">performance-schema-consumer-events-waits-current</code> | `ON` | Required. Enables the collection of wait events. |
-| <code style="word-break:break-all;">performance_schema_consumer_events_statements_history</code> | `ON` | Optional. Enables tracking recent query history per thread. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
-| <code style="word-break:break-all;">performance_schema_consumer_events_statements_history_long</code> | `ON` | Optional. Enables tracking of a larger number of recent queries across all threads. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
+| <code style="word-break:break-all;">performance_schema_consumer_events_statements_history</code> | `1` | Optional. Enables tracking recent query history per thread. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
+| <code style="word-break:break-all;">performance_schema_consumer_events_statements_history_long</code> | `1` | Optional. Enables tracking of a larger number of recent queries across all threads. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
 
 [1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
 {{% /tab %}}
@@ -62,11 +62,11 @@ Configure the following in the [DB Parameter Group][3] and then **restart the se
 {{% tab "MySQL ≥ 5.7" %}}
 | Parameter | Value | Description |
 | --- | --- | --- |
-| `performance_schema` | `ON` | Required. Enables the [Performance Schema][1]. |
-| <code style="word-break:break-all;">performance_schema_consumer_events_statements_current</code> | `ON` | Required. Enables monitoring of currently running queries. |
+| `performance_schema` | `1` | Required. Enables the [Performance Schema][1]. |
+| <code style="word-break:break-all;">performance_schema_consumer_events_statements_current</code> | `1` | Required. Enables monitoring of currently running queries. |
 | <code style="word-break:break-all;">performance-schema-consumer-events-waits-current</code> | `ON` | Required. Enables the collection of wait events. |
-| <code style="word-break:break-all;">performance_schema_consumer_events_statements_history</code> | `ON` | Optional. Enables tracking recent query history per thread. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
-| <code style="word-break:break-all;">performance_schema_consumer_events_statements_history_long</code> | `ON` | Optional. Enables tracking of a larger number of recent queries across all threads. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
+| <code style="word-break:break-all;">performance_schema_consumer_events_statements_history</code> | `1` | Optional. Enables tracking recent query history per thread. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
+| <code style="word-break:break-all;">performance_schema_consumer_events_statements_history_long</code> | `1` | Optional. Enables tracking of a larger number of recent queries across all threads. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
 | <code style="word-break:break-all;">performance_schema_max_digest_length</code> | `4096` | Increases the size of SQL digest text in `events_statements_*` tables. If left at the default value then queries longer than `1024` characters will not be collected. |
 | <code style="word-break:break-all;">performance_schema_max_sql_text_length</code> | `4096` | Must match <code style="word-break:break-all;">performance_schema_max_digest_length</code>. |
 
@@ -82,6 +82,22 @@ The Datadog Agent requires read-only access to the database in order to collect 
 
 The following instructions grant the Agent permission to login from any host using `datadog@'%'`. You can restrict the `datadog` user to be allowed to login only from localhost by using `datadog@'localhost'`. See the [MySQL documentation][4] for more info.
 
+{{< tabs >}}
+{{% tab "MySQL ≥ 8.0" %}}
+
+Create the `datadog` user and grant basic permissions:
+
+```sql
+CREATE USER datadog@'%' IDENTIFIED WITH mysql_native_password by '<UNIQUEPASSWORD>';
+ALTER USER datadog@'%' WITH MAX_USER_CONNECTIONS 5;
+GRANT REPLICATION CLIENT ON *.* TO datadog@'%';
+GRANT PROCESS ON *.* TO datadog@'%';
+GRANT SELECT ON performance_schema.* TO datadog@'%';
+```
+
+{{% /tab %}}
+
+{{% tab "MySQL 5.6 and 5.7" %}}
 
 Create the `datadog` user and grant basic permissions:
 
@@ -91,6 +107,9 @@ GRANT REPLICATION CLIENT ON *.* TO datadog@'%' WITH MAX_USER_CONNECTIONS 5;
 GRANT PROCESS ON *.* TO datadog@'%';
 GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 Create the following schema:
 
@@ -254,7 +273,7 @@ instances:
     host: <INSTANCE_ADDRESS>
     port: 3306
     username: datadog
-    password: <UNIQUEPASSWORD" \
+    password: <UNIQUEPASSWORD>" \
   datadog/datadog
 ```
 
@@ -322,6 +341,9 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 ### Validate
 
 [Run the Agent's status subcommand][6] and look for `mysql` under the Checks section. Or visit the [Databases][7] page to get started!
+
+## Example Agent Configurations
+{{% dbm-mysql-agent-config-examples %}}
 
 ## Install the RDS Integration
 

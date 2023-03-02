@@ -42,7 +42,10 @@ Your private locations test results display identically to your managed location
 
 ## Create your private location
 
-1. Install [Docker][4] on a machine. To get started quickly, you can install Docker on a virtual machine such as [Vagrant Ubuntu 16.04][2].
+1. Install [Docker][4] on a Unix-like machine, or use another container runtime such as [Podman][10].
+
+   To get started quickly, you can install Docker on a virtual machine such as [Vagrant Ubuntu 22.04][11].
+
 2. In the Datadog site, hover over **[UX Monitoring][5]** and select **Settings** > **Private Locations**. 
 3. Click **Add Private Location**.
 4. Fill out your private location details. Only `Name` and `API key` fields are mandatory. If you are configuring a private location for Windows, select **This is a Windows Private Location**.
@@ -64,6 +67,8 @@ Your private locations test results display identically to your managed location
     ```
     
     This command starts a Docker container and prepares your private location to run tests. Datadog recommends running the container in detached mode with proper restart policy.
+
+    <div class="alert alert-info">You can use another container runtime such as Podman. For more information, see the <a href="https://docs.datadoghq.com/synthetics/private_locations/?tab=podman#install-your-private-location">Private Locations documentation</a>.</div>
     
 11. If your private location reports correctly to Datadog, an `OK` health status displays under **Private Location Status** and on the **Private Locations** list in the **Settings** page:
 
@@ -92,7 +97,7 @@ Use your new private location just like a managed location in your Synthetic tes
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /synthetics/cicd_integrations
+[1]: /continuous_testing/cicd_integrations
 [2]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/synthetics-private-location-worker?pli=1
 [3]: /getting_started/synthetics/
 [4]: https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce
@@ -101,3 +106,5 @@ Use your new private location just like a managed location in your Synthetic tes
 [7]: /synthetics/private_locations/?tab=docker#blocking-reserved-ips
 [8]: /getting_started/synthetics/api_test#create-a-multistep-api-test
 [9]: /getting_started/synthetics/browser_test
+[10]: https://podman.io/
+[11]: https://app.vagrantup.com/ubuntu/boxes/jammy64

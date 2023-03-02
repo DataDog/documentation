@@ -1,37 +1,57 @@
 ---
+app_id: oke
+app_uuid: c3361861-32be-4ed4-a138-d68b85b8d88b
 assets:
-  dashboards: {}
-  logs: {}
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Oracle Container Engine for Kubernetes - OKE
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - oracle
 - containers
 - orchestration
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/oke/README.md
-display_name: Oracle Container Engine for Kubernetes - OKE
+display_on_public_website: true
 draft: false
 git_integration_title: oke
-guid: a9d60438-8782-44cb-bd27-1ffc6c5688c1
 integration_id: oke
 integration_title: Oracle Container Engine for Kubernetes
 integration_version: ''
 is_public: true
 kind: integration
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: oke.
-metric_to_check: ''
+manifest_version: 2.0.0
 name: oke
-public_title: Oracle Container Engine for Kubernetes インテグレーション
+oauth: {}
+public_title: Oracle Container Engine for Kubernetes
 short_description: OKE は、Oracle が管理するコンテナオーケストレーションサービスです。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Oracle
+  - Category::Containers
+  - Category::Orchestration
+  configuration: README.md#Setup
+  description: OKE は、Oracle が管理するコンテナオーケストレーションサービスです。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Oracle Container Engine for Kubernetes
 ---
 
 

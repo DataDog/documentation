@@ -41,7 +41,7 @@ SNS を Datadog に接続すると、以下のことができます。
 
 ### メトリクスの収集
 
-1. [AWS インテグレーションタイル][2]のメトリクス収集で、`SNS` をオンにします。
+1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `SNS` が有効になっていることを確認します。
 
 2. Amazon SNS のメトリクスを収集するには、次のアクセス許可を [Datadog IAM ポリシー][3]に追加します。詳細については、AWS ウェブサイト上の [SNS ポリシー][4]を参照してください。
 
@@ -75,8 +75,8 @@ Datadog イベントストリームで SNS メッセージを受信するには
 
 Datadog から SNS 通知を送信するには
 
-1. AWS インテグレーションタイルで、SNS サービスと関連付けられている AWS アカウントを構成します。
-2. [SNS インテグレーションをインストール][5]します。
+1. AWS インテグレーションページで、SNS サービスと関連付けられている AWS アカウントを構成します。
+2. [SNS インテグレーション][5]をインストールします。
 3. これで、Datadog は構成された SNS トピックを検出し、@notifications (例: `@sns-topic-name`) を有効にします。
 
 ### ログの収集
@@ -115,9 +115,9 @@ Datadog では、Datadog から GovCloud または 中国のトピックへの S
 ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/sns/latest/dg/sns-using-identity-based-policies.html
-[5]: https://app.datadoghq.com/account/settings#integrations/amazon_sns
+[5]: https://app.datadoghq.com/integrations/amazon-sns
 [6]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_sns/amazon_sns_metadata.csv
 [7]: https://docs.datadoghq.com/ja/help/

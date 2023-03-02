@@ -1,24 +1,29 @@
 ---
-title: App Analytics
-kind: documentation
 aliases:
-  - /fr/tracing/visualization/search/
-  - /fr/tracing/trace_search_and_analytics/
-  - /fr/tracing/advanced_usage/
+- /fr/tracing/visualization/search/
+- /fr/tracing/trace_search_and_analytics/
+- /fr/tracing/advanced_usage/
+kind: documentation
+title: App Analytics
 ---
+
 <div class="alert alert-danger">
-Le 20 octobre 2020,  App Analytics a été remplacé par Tracing without Limits. Cette page est obsolète et contient des informations de configuration relatives à l'ancienne version, App Analytics, pouvant s'avérer utiles pour dépanner ou modifier des configurations antérieures. Utilisez désormais Tracing without Limits™ pour profiter d'un contrôle total sur votre <a href="https://docs.datadoghq.com/tracing/trace_retention_and_ingestion">ingestion de données et de votre rétention de traces</a>, et ce sans aucun échantillonnage.
-<br>
-Adoptez <a href="https://docs.datadoghq.com/tracing/trace_retention_and_ingestion">la rétention et l'ingestion des traces</a> pour utiliser les nouvelles fonctionnalités.
+Cette page décrit des fonctionnalités obsolètes, dont la configuration repose sur l'ancienne solution App Analytics, qui peuvent s'avérer utiles pour diagnostiquer des problèmes ou modifier d'anciennes configurations. Pour contrôler tous les aspects de vos traces, utilisez plutôt les <a href="/tracing/trace_ingestion">contrôles d'ingestion</a> et les <a href="/tracing/trace_retention">filtres de rétention</a>.
 </div>
 
-La fonction [App Analytics][1] sert à filtrer les spans indexées avec des tags définis par l'utilisateur, comme `customer_id`, `error_type` ou `app_name`, vous permettant ainsi de dépanner et filtrer vos requêtes. Elle peut être activée de deux façons :
+##  Adopter les nouvelles options de configuration
 
-* Configurez votre traceur d'APM de façon à ce qu'il émette les analyses pertinentes à partir de vos services. Cela peut se faire de façon [automatique](#configuration-automatique) ou [manuelle](#instrumentation-personnalisee). Ensuite, [activez App Analytics dans Datadog][1] pour commencer à transmettre ces analyses.
+Accédez à la [page de contrôle de l'ingestion][1] pour visualiser les services dont la configuration est obsolète. Ils sont identifiés par le statut `Legacy Setup`.
 
-**Remarque** : pour utiliser App Analytics, vous devez utiliser l'Agent v6.7 ou une version ultérieure.
+Pour adopter les nouvelles options de configuration, supprimez toutes les [options de configuration](#configuration-d-app-analytics) App Analytics des services avec le statut `Legacy Setup`. Implémentez ensuite l'Agent Datadog et les [mécanismes d'échantillonnage][2] des bibliothèques de tracing pour envoyer des traces.
 
-## Configuration automatique
+## Configuration d'App Analytics
+
+Les options de configuration App Analytics sont accessibles depuis les bibliothèques de tracing et l'Agent Datadog. Les spans d'analyse de vos services dans les bibliothèques sont générées [automatiquement](#configuration-automatique) ou [manuellement](#instrumentation-personnalisee).
+
+### Dans les bibliothèques de tracing
+
+#### Configuration automatique
 
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php,cpp,nginx" >}}
 {{< programming-lang lang="java" >}}
@@ -44,7 +49,7 @@ La fonction App Analytics est disponible à partir de la version 0.19.0 du clie
 Pour ce faire, définissez `DD_TRACE_ANALYTICS_ENABLED=true` dans votre environnement ou configurez ce paramètre :
 
 ```ruby
-Datadog.configure { |c| c.analytics_enabled = true }
+Datadog.configure { |c| c.tracing.analytics.enabled = true }
 ```
 
 * `true` active les analyses pour tous les frameworks Web.
@@ -63,7 +68,7 @@ La fonction App Analytics est disponible à partir de la version 1.11.0 du clie
 
 * la variable d'environnement `DD_TRACE_ANALYTICS_ENABLED=true`, à partir de la version 1.26.0.
 
-[1]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithAnalytics
+[1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithAnalytics
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
@@ -124,11 +129,9 @@ Pour activer la fonction App Analytics pour Nginx :
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-Une fois la fonction activée, l'interface App Analytics commence à afficher des résultats. Consultez la [page App Analytics][1] pour démarrer.
+#### Configurer d'autres services (facultatif)
 
-## Configurer d'autres services (facultatif)
-
-### Configuration par intégration
+##### Configuration par intégration
 
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php" >}}
 {{< programming-lang lang="java" >}}
@@ -170,7 +173,7 @@ La fonction App Analytics peut être activée pour des intégrations spécifique
 Pour ce faire, définissez `DD_<INTÉGRATION>_ANALYTICS_ENABLED=true` dans votre environnement ou configurez ce paramètre :
 
 ```ruby
-Datadog.configure { |c| c.use :integration, analytics_enabled: true }
+Datadog.configure { |c| c.tracing.instrument :integration, analytics_enabled: true }
 ```
 
 Où `intégration` est le nom de l'intégration. Consultez la [liste des intégrations disponibles][1] pour découvrir les options disponibles.
@@ -261,7 +264,7 @@ Les noms des intégrations sont disponibles sur le [tableau des intégrations][1
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-### Services de base de données
+#### Services de base de données
 
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php" >}}
 {{< programming-lang lang="java" >}}
@@ -286,7 +289,7 @@ Par défaut, le tracing de base de données n'est pas pris en charge par la fonc
 Par défaut, le tracing de base de données n'est pas pris en charge par la fonction App Analytics. Vous devez activer la collecte manuellement pour chaque intégration. Par exemple :
 
 ```ruby
-Datadog.configure { |c| c.use :mongo, analytics_enabled: true }
+Datadog.configure { |c| c.tracing.instrument :mongo, analytics_enabled: true }
 ```
 
 {{< /programming-lang >}}
@@ -343,7 +346,7 @@ Les noms des intégrations sont disponibles sur le [tableau des intégrations][1
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-### Instrumentation personnalisée
+##### Instrumentation personnalisée
 
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php,cpp" >}}
 {{< programming-lang lang="java" >}}
@@ -391,12 +394,12 @@ def my_method():
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-Les applications utilisant une instrumentation personnalisée peuvent activer App Analytics en appliquant le tag `ANALYTICS_KEY` à une span :
+Les applications dotées d'une instrumentation personnalisée peuvent activer App Analytics en définissant la balise `Analytics::TAG_ENABLED` sur une span :
 
 ```ruby
-Datadog.tracer.trace('my.task') do |span|
+Datadog::Tracing.trace('my.task') do |span|
   # Définir le taux d'échantillonnage de l'analyse sur 1.0
-  span.set_tag(Datadog::Ext::Analytics::TAG_ENABLED, true)
+  span.set_tag(Datadog::Tracing::Metadata::Ext::Analytics::TAG_ENABLED, true)
 end
 ```
 
@@ -472,4 +475,30 @@ span->SetTag(datadog::tags::analytics_event, 0.5);
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-[1]: https://app.datadoghq.com/apm/analytics
+### Dans l'Agent Datadog
+
+<div class="alert alert-danger">
+Cette section décrit des fonctionnalités obsolètes, dont la configuration repose sur l'ancienne solution App Analytics.
+</div>
+
+Pour configurer un taux de spans à analyser par service, définissez ce qui suit dans le fichier `datadog.yaml` :
+```
+apm_config:
+  analyzed_rate_by_service:
+    service_A: 1
+    service_B: 0.2
+    service_C: 0.05
+```
+
+Pour configurer un taux de spans à analyser par service et par nom d'opération, définissez ce qui suit dans le fichier `datadog.yaml` :
+
+```
+apm_config:
+  analyzed_spans:
+    service_A|operation_name_X: 1
+    service_A|operation_name_Y: 0.25
+    service_B|operation_name_Z: 0.01
+```
+
+[1]: /fr/tracing/trace_ingestion/
+[2]: /fr/tracing/trace_ingestion/mechanisms

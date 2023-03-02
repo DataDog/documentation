@@ -38,4 +38,4 @@ Datadog is an extensive platform for understanding your infrastructure. [The Dat
 For a list of available courses, see [Courses][2].
 
 [1]: https://learn.datadoghq.com
-[2]: https://learn.datadoghq.com/course/index.php
+[2]: https://learn.datadoghq.com/collections

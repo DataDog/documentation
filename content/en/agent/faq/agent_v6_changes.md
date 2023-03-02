@@ -258,7 +258,7 @@ The major changes for Agent v6 on Windows are:
 
 * The Agent v5 Windows Agent Manager GUI was replaced with a browser-based, cross-platform manager. For details, see the [Datadog Agent Manager for Windows][1].
 * The main executable file is `agent.exe` (previously `ddagent.exe`).
-* Commands should be run with the command line `"%PROGRAMFILES%\datadog\datadog agent\embedded\agent.exe" <COMMAND>` from an **Administrator** command prompt.
+* Commands should be run with the command line `"%ProgramFiles%\datadog\datadog agent\embedded\agent.exe" <COMMAND>` from an **Administrator** command prompt.
 * The Windows service is started as "Automatic-Delayed". It is started automatically on boot, but after all other services. This results in a small delay in reporting metrics after a reboot.
 * The Windows GUI and Windows system tray icon are implemented separately. See the [Datadog Agent Manager for Windows][1] for more details.
 

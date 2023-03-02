@@ -20,17 +20,17 @@ further_reading:
 - link: /tracing/guide/security/
   tag: Documentation
   text: トレースから PII を自動的にスクラブする
-- link: /tracing/guide/metrics_namespace/
+- link: /tracing/metrics/metrics_namespace/
   tag: Documentation
   text: トレースメトリクスとそのタグについて学ぶ
-- link: /tracing/visualization/
+- link: /tracing/glossary/
   tag: Documentation
   text: APM の用語と概念を学ぶ
 - link: https://www.datadoghq.com/blog/span-based-metrics/
   tag: ブログ
   text: スパンベースのメトリクスを生成し、アプリケーションパフォーマンスの過去の傾向を追跡
 kind: documentation
-title: APM & Continuous Profiler
+title: APM
 ---
 
 {{< vimeo 381554158 >}}
@@ -103,18 +103,18 @@ CPU、メモリ、または I/O を最も多く消費するコード行を特定
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/glossary/
-[2]: /ja/tracing/setup_overview/setup/java
-[3]: /ja/tracing/setup_overview/proxy_setup/
-[4]: /ja/tracing/setup_overview/serverless_functions/
-[5]: /ja/tracing/setup_overview/open_standards/
-[6]: /ja/tracing/trace_ingestion/ingestion_controls/
-[7]: /ja/tracing/trace_retention/#retention-filters
-[8]: /ja/tracing/generate_metrics/
-[9]: /ja/tracing/connect_logs_and_traces/
+[2]: /ja/tracing/trace_collection/dd_libraries/java
+[3]: /ja/tracing/trace_collection/proxy_setup/
+[4]: /ja/serverless/distributed_tracing
+[5]: /ja/tracing/trace_collection/open_standards/
+[6]: /ja/tracing/trace_pipeline/ingestion_controls/
+[7]: /ja/tracing/trace_pipeline/trace_retention/#retention-filters
+[8]: /ja/tracing/trace_pipeline/generate_metrics/
+[9]: /ja/tracing/other_telemetry/connect_logs_and_traces/
 [10]: /ja/real_user_monitoring/connect_rum_and_traces
 [11]: /ja/synthetics/apm/
 [12]: /ja/tracing/trace_explorer/#live-search-for-15-minutes
-[13]: /ja/tracing/visualization/services_map/
-[14]: /ja/tracing/visualization/service/
-[15]: /ja/tracing/deployment_tracking/
-[16]: /ja/tracing/profiler/
+[13]: /ja/tracing/services/services_map/
+[14]: /ja/tracing/services/service_page/
+[15]: /ja/tracing/services/deployment_tracking/
+[16]: /ja/profiler/

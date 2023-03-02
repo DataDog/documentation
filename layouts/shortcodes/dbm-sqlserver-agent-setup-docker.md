@@ -20,12 +20,13 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
     "driver": "FreeTDS",
     "username": "datadog",
     "password": "<PASSWORD>",
+    "include_ao_metrics": true,  # Optional: For AlwaysOn users
     "tags": [
       "service:<CUSTOM_SERVICE>"
       "env:<CUSTOM_ENV>"
     ]
   }]' \
-  datadoghq/agent:${DD_AGENT_VERSION}
+  gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
 ```
 
 Use the `service` and `env` tags to link your database telemetry to other telemetry through a common tagging scheme. See [Unified Service Tagging][3] on how these tags are used throughout Datadog.

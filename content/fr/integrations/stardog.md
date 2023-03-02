@@ -1,37 +1,61 @@
 ---
+app_id: stardog
+app_uuid: a4d874ba-7173-4c43-8cc8-09f966186be8
 assets:
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: stardog.dbms.memory.native.max
+      metadata_path: metadata.csv
+      prefix: stardog.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Stardog
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Stardog
+  sales_email: support@stardog.com
+  support_email: support@stardog.com
 categories:
-  - data store
-creates_events: false
-ddtype: check
+- data store
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/stardog/README.md
-display_name: Stardog
+- https://github.com/DataDog/integrations-extras/blob/master/stardog/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: stardog
-guid: 1b32f0d4-49ef-40fb-aec3-365e4e7cd6ee
 integration_id: stardog
 integration_title: Stardog
-integration_version: 1.0.1
+integration_version: 2.0.0
 is_public: true
 kind: integration
-maintainer: support@stardog.com
-manifest_version: 1.0.0
-metric_prefix: stardog.
-metric_to_check: stardog.dbms.mem.mapped.max
+manifest_version: 2.0.0
 name: stardog
-public_title: Intégration Datadog/Stardog
+oauth: {}
+public_title: Stardog
 short_description: Un collecteur de données Stardog pour Datadog.
-support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Data Store
+  configuration: README.md#Setup
+  description: Un collecteur de données Stardog pour Datadog.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Stardog
 ---
+
+
+
 ## Présentation
 
 Recueillez des métriques du service Stardog en temps réel pour :

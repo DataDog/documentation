@@ -1,15 +1,26 @@
 ---
-aliases:
-- /ja/integrations/elasticsearch
+app_id: elasticsearch
+app_uuid: fc23bf70-2992-4e07-96db-c65c167f25d6
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     elasticsearch: assets/dashboards/overview.json
     elasticsearch_timeboard: assets/dashboards/metrics.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: true
+    metrics:
+      check: elasticsearch.search.query.total
+      metadata_path: metadata.csv
+      prefix: elasticsearch.
+    process_signatures:
+    - java org.elasticsearch.bootstrap.Elasticsearch
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Elasticsearch
   logs:
     source: elasticsearch
-  metrics_metadata: metadata.csv
   monitors:
     '[ElasticSearch] Number of pending tasks is high': assets/monitors/elastic_pending_tasks_high.json
     '[ElasticSearch] Query load is high': assets/monitors/elastic_query_load_high.json
@@ -17,37 +28,47 @@ assets:
     '[ElasticSearch] Unsuccessful requests rate is high': assets/monitors/elastic_requests.json
   saved_views:
     elasticsearch_processes: assets/saved_views/elasticsearch_processes.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - data store
 - log collection
-- autodiscovery
-creates_events: true
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/elastic/README.md
-display_name: Elasticsearch
+display_on_public_website: true
 draft: false
 git_integration_title: elastic
-guid: d91d91bd-4a8e-4489-bfb1-b119d4cc388a
 integration_id: elasticsearch
 integration_title: ElasticSearch
-integration_version: 5.2.0
+integration_version: 5.3.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: elasticsearch.
-metric_to_check: elasticsearch.search.query.total
+manifest_version: 2.0.0
 name: elastic
-process_signatures:
-- java org.elasticsearch.bootstrap.Elasticsearch
-public_title: ElasticSearch インテグレーション
+oauth: {}
+public_title: ElasticSearch
 short_description: クラスター全体のステータスから JVM のヒープ使用量まで、すべてを監視
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::データストア
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: クラスター全体のステータスから JVM のヒープ使用量まで、すべてを監視
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: ElasticSearch
 ---
 
 
@@ -62,7 +83,7 @@ Datadog Agent の Elasticsearch チェックは、検索とインデックス化
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Elasticsearch チェックは [Datadog Agent][2] パッケージに含まれています。追加のインストールは必要ありません。
 
@@ -305,6 +326,8 @@ Agent コンテナで必要な環境変数
 
 アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]をポッドアノテーションとして設定します。他にも、[ファイル、ConfigMap、または key-value ストア][2]を使用してテンプレートを構成できます。
 
+**Annotations v1** (Datadog Agent < v7.36 向け)
+
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -324,12 +347,38 @@ spec:
     - name: elasticsearch
 ```
 
+**Annotations v2** (Datadog Agent v7.36+ 向け)
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: elasticsearch
+  annotations:
+    ad.datadoghq.com/elasticsearch.checks: |
+      {
+        "elastic": {
+          "init_config": {},
+          "instances": [
+            {
+              "url": "http://%%host%%:9200"
+            }
+          ]
+        }
+      }
+spec:
+  containers:
+    - name: elasticsearch
+```
+
 ##### ログの収集
 
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][3]を参照してください。
 
 次に、[ログのインテグレーション][4]をポッドアノテーションとして設定します。これは、[ファイル、ConfigMap、または key-value ストア][5]を使用して構成することも可能です。
+
+**Annotations v1/v2**
 
 ```yaml
 apiVersion: v1

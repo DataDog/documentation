@@ -1,48 +1,70 @@
 ---
+app_id: gunicorn
+app_uuid: 49687997-bbf2-45db-9b4f-223cf7c492ed
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     gunicorn: assets/dashboards/gunicorn_dashboard.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: gunicorn.workers
+      metadata_path: metadata.csv
+      prefix: gunicorn.
+    process_signatures:
+    - 'gunicorn: master'
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Gunicorn
   logs:
     source: gunicorn
-  metrics_metadata: metadata.csv
-  monitors: {}
   saved_views:
     4xx_errors: assets/saved_views/4xx_errors.json
     5xx_errors: assets/saved_views/5xx_errors.json
     bot_errors: assets/saved_views/bot_errors.json
     gunicorn_processes: assets/saved_views/gunicorn_processes.json
     status_code_overview: assets/saved_views/status_code_overview.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - web
 - log collection
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/gunicorn/README.md
-display_name: Gunicorn
+display_on_public_website: true
 draft: false
 git_integration_title: gunicorn
-guid: 5347bfe1-2e9b-4c92-9410-48b8659ce10f
 integration_id: gunicorn
 integration_title: Gunicorn
-integration_version: 2.3.0
+integration_version: 2.3.1
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: gunicorn.
-metric_to_check: gunicorn.workers
+manifest_version: 2.0.0
 name: gunicorn
-process_signatures:
-- 'gunicorn: master'
-public_title: Gunicorn インテグレーション
+oauth: {}
+public_title: Gunicorn
 short_description: リクエスト率、リクエスト処理時間、ログメッセージ率、ワーカープロセス数を監視。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Category::Web
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: リクエスト率、リクエスト処理時間、ログメッセージ率、ワーカープロセス数を監視。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Gunicorn
 ---
 
 

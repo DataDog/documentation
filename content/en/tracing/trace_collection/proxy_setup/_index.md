@@ -13,13 +13,13 @@ further_reading:
   text: "Envoy documentation"
 - link: "https://www.nginx.com/"
   tag: "Documentation"
-  text: "NGINX website"
+  text: "Nginx website"
 - link: "https://kubernetes.github.io/ingress-nginx/user-guide/third-party-addons/opentracing/"
   tag: "Documentation"
-  text: "NGINX Ingress Controller OpenTracing"
+  text: "Nginx Ingress Controller OpenTracing"
 - link: "https://github.com/opentracing-contrib/nginx-opentracing"
   tag: "Source Code"
-  text: "NGINX plugin for OpenTracing"
+  text: "Nginx plugin for OpenTracing"
 - link: "https://istio.io/"
   tag: "Documentation"
   text: "Istio website"
@@ -212,9 +212,9 @@ stats_config:
       - prefix: "cluster.datadog_agent."
 ```
 
-## Sampling
+## Envoy Sampling
 
-To control the volume of traces starting from Envoy that are sent to Datadog, specify a sampling rate by setting the parameter `DD_TRACE_SAMPLING_RULES` to a value between `0.0` (0%) and `1.0` (100%). If no value is specified, 100% of traces starting from Envoy are sent.
+To control the volume of Envoy traces that are sent to Datadog, specify a sampling rate by setting the parameter `DD_TRACE_SAMPLING_RULES` to a value between `0.0` (0%) and `1.0` (100%). If no value is specified, 100% of traces starting from Envoy are sent.
 
 To use the [Datadog Agent calculated sampling rates][2] (10 traces per second per Agent) and ignore the default sampling rule set to 100%, set the parameter `DD_TRACE_SAMPLING_RULES` to an empty array:
 
@@ -280,6 +280,11 @@ The available [environment variables][3] depend on the version of the C++ tracer
 
 | Envoy Version | C++ Tracer Version |
 |---------------|--------------------|
+| v1.24 | v1.2.1 |
+| v1.23 | v1.2.1 |
+| v1.22 | v1.2.1 |
+| v1.21 | v1.2.1 |
+| v1.20 | v1.2.1 |
 | v1.19 | v1.2.1 |
 | v1.18 | v1.2.1 |
 | v1.17 | v1.1.5 |
@@ -296,27 +301,95 @@ The available [environment variables][3] depend on the version of the C++ tracer
 [2]: /tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
 [3]: /tracing/setup/cpp/#environment-variables
 {{% /tab %}}
-{{% tab "NGINX" %}}
+{{% tab "Nginx" %}}
 
-Support for Datadog APM is available for NGINX using a combination of plugins and configurations.
-The instructions below use NGINX from the official [Linux repositories][1] and pre-built binaries for the plugins.
+Datadog APM supports Nginx in multiple configurations:
+- Nginx operated as a proxy with tracing provided by the new Datadog module.
+- Nginx operated as a proxy with tracing provided by the OpenTracing module.
+- Nginx as an Ingress Controller for Kubernetes.
 
-## NGINX open source
+## Nginx with Datadog module
+Datadog provides an Nginx module for distributed tracing.
+
+<div class="alert alert-warning">
+Datadog Nginx module is in beta. Send feedback to
+<a href="https://docs.datadoghq.com/help/">support</a>.
+We'd love to hear about your experience with the new module.
+</div>
+
+### Module installation
+There is one version of the Datadog Nginx module for each supported Docker
+image. Install the module by downloading the appropriate file from the
+[latest nginx-datadog GitHub release][1] and extracting it into Nginx's modules
+directory.
+
+For example, the module compatible with the Docker image
+[nginx:1.23.2-alpine][3] is included in each release as the file
+`nginx_1.23.2-alpine-ngx_http_datadog_module.so.tgz`. The module compatible with
+the Docker image [amazonlinux:2.0.20230119.1][2] is included in each release as the file
+`amazonlinux_2.0.20230119.1-ngx_http_datadog_module.so.tgz`.
+
+```bash
+get_latest_release() {
+  curl --silent "https://api.github.com/repos/$1/releases/latest" | jq --raw-output .tag_name
+}
+BASE_IMAGE=nginx:1.23.2-alpine
+BASE_IMAGE_WITHOUT_COLONS=$(echo "$BASE_IMAGE" | tr ':' '_')
+RELEASE_TAG=$(get_latest_release DataDog/nginx-datadog)
+tarball="nginx_$NGINX_IMAGE_TAG-ngx_http_datadog_module.so.tgz"
+wget "https://github.com/DataDog/nginx-datadog/releases/download/$RELEASE_TAG/$tarball"
+tar -xzf "$tarball" -C /usr/lib/nginx/modules
+rm "$tarball"
+ls -l /usr/lib/nginx/modules/ngx_http_datadog_module.so
+```
+
+### Nginx configuration with Datadog module
+In the topmost section of the Nginx configuration, load the Datadog module.
+
+```nginx
+load_module modules/ngx_http_datadog_module.so;
+```
+
+The default configuration connects to a local Datadog Agent and produces traces
+for all Nginx locations. Specify custom configuration in a `datadog` JSON block
+within the `http` section of the nginx configuration.
+
+For example, the following Nginx configuration sets the service name to
+`usage-internal-nginx` and the sampling rate to 10%.
+
+```nginx
+load_module modules/ngx_http_datadog_module.so;
+
+http {
+  datadog {
+    "service": "usage-internal-nginx",
+    "sample_rate": 0.1
+  }
+}
+```
+
+For information about fields supported by the `datadog` directive and about
+other configuration directives supported by the module, see the [API
+documentation](https://github.com/DataDog/nginx-datadog/blob/master/doc/API.md).
+
+## Nginx with OpenTracing module
+The OpenTracing project provides an Nginx module for distributed tracing. The
+module loads any OpenTracing-compatible plugin, such as the Datadog plugin.
 
 ### Plugin installation
 
 **Note**: this plugin does not work on Linux distributions that use older versions of `libstdc++`. This includes RHEL/Centos 7 and AmazonLinux 1.
-A workaround for this is to run NGINX from a Docker container. An example Dockerfile is available [here][2].
+A workaround for this is to run Nginx from a Docker container. An example Dockerfile is available [here][4].
 
 The following plugins must be installed:
 
-- NGINX plugin for OpenTracing - [linux-amd64-nginx-${NGINX_VERSION}-ot16-ngx_http_module.so.tgz][3] - installed in `/usr/lib/nginx/modules`
-- Datadog OpenTracing C++ Plugin - [linux-amd64-libdd_opentracing_plugin.so.gz][4] - installed somewhere accessible to NGINX, eg `/usr/local/lib`
+- Nginx plugin for OpenTracing - [linux-amd64-nginx-${NGINX_VERSION}-ot16-ngx_http_module.so.tgz][5] - installed in `/usr/lib/nginx/modules`
+- Datadog OpenTracing C++ Plugin - [linux-amd64-libdd_opentracing_plugin.so.gz][6] - installed somewhere accessible to Nginx, for example `/usr/local/lib`
 
 Commands to download and install these modules:
 
 ```bash
-# Gets the latest release version number from GitHub.
+# Gets the latest release version tag from GitHub.
 get_latest_release() {
   wget -qO- "https://api.github.com/repos/$1/releases/latest" |
     grep '"tag_name":' |
@@ -325,7 +398,7 @@ get_latest_release() {
 NGINX_VERSION=1.17.3
 OPENTRACING_NGINX_VERSION="$(get_latest_release opentracing-contrib/nginx-opentracing)"
 DD_OPENTRACING_CPP_VERSION="$(get_latest_release DataDog/dd-opentracing-cpp)"
-# Install NGINX plugin for OpenTracing
+# Install Nginx plugin for OpenTracing
 wget https://github.com/opentracing-contrib/nginx-opentracing/releases/download/${OPENTRACING_NGINX_VERSION}/linux-amd64-nginx-${NGINX_VERSION}-ot16-ngx_http_module.so.tgz
 tar zxf linux-amd64-nginx-${NGINX_VERSION}-ot16-ngx_http_module.so.tgz -C /usr/lib/nginx/modules
 # Install Datadog Opentracing C++ Plugin
@@ -333,9 +406,9 @@ wget https://github.com/DataDog/dd-opentracing-cpp/releases/download/${DD_OPENTR
 gunzip linux-amd64-libdd_opentracing_plugin.so.gz -c > /usr/local/lib/libdd_opentracing_plugin.so
 ```
 
-### NGINX configuration
+### Nginx configuration with OpenTracing module
 
-The NGINX configuration must load the OpenTracing module.
+The Nginx configuration must load the OpenTracing module.
 
 ```nginx
 # Load OpenTracing module
@@ -353,7 +426,7 @@ The `http` block enables the OpenTracing module and loads the Datadog tracer:
     opentracing_load_tracer /usr/local/lib/libdd_opentracing_plugin.so /etc/nginx/dd-config.json;
 ```
 
-The `log_format with_trace_id` block is for correlating logs and traces. See the [example NGINX config][5] file for the complete format. The `$opentracing_context_x_datadog_trace_id` value captures the trace ID, and `$opentracing_context_x_datadog_parent_id` captures the span ID.
+The `log_format with_trace_id` block is for correlating logs and traces. See the [example Nginx config][7] file for the complete format. The `$opentracing_context_x_datadog_trace_id` value captures the trace ID, and `$opentracing_context_x_datadog_parent_id` captures the span ID.
 
 The `location` block within the server where tracing is desired should add the following:
 
@@ -374,19 +447,26 @@ A config file for the Datadog tracing implementation is also required:
 }
 ```
 
-The `service` value can be modified to a meaningful value for your usage of NGINX.
-The `agent_host` value may need to be changed if NGINX is running in a container or orchestrated environment.
+The `service` value can be modified to a meaningful value for your usage of Nginx.
+The `agent_host` value may need to be changed if Nginx is running in a container or orchestrated environment.
 
 Complete examples:
 
-* [nginx.conf][5]
-* [dd-config.json][6]
+* [nginx.conf][7]
+* [dd-config.json][8]
 
-After completing this configuration, HTTP requests to NGINX will initiate and propagate Datadog traces, and will appear in the APM UI.
+After completing this configuration, HTTP requests to Nginx will initiate and propagate Datadog traces, and will appear in the APM UI.
 
-#### Sampling
+## Nginx Sampling
 
-To control the volume of traces starting from Nginx that are sent to Datadog, specify a sampling rate in the config file `dd-config.json` by setting the `sample_rate` parameter to a value between `0.0` (0%) and `1.0` (100%):
+To control the volume of Nginx traces that are sent to Datadog, specify a
+sampling rate in the configuration JSON by setting the `sample_rate` property
+to a value between `0.0` (0%) and `1.0` (100%).
+- If you are using the Datadog module, the JSON configuration is in the
+  [datadog][9] directive.
+- If you are using the OpenTracing module, the JSON configuration is the file
+  passed as an argument to `opentracing_load_tracer`
+  (`/etc/nginx/dd-config.json` in the example above).
 
 ```json
 {
@@ -398,7 +478,7 @@ To control the volume of traces starting from Nginx that are sent to Datadog, sp
 }
 ```
 
-If no value is specified, the [Datadog Agent calculated sampling rates][7] (10 traces per second per Agent) are applied.
+If no sample rate is specified, the [Datadog Agent calculated sampling rates][10] (10 traces per second per Agent) are applied.
 
 Set **by-service** sampling rates with the `sampling_rules` configuration parameter. Configure a rate limit by setting the parameter `sampling_limit_per_second` to a number of traces per second per service instance. If no `sampling_limit_per_second` value is set, a limit of 100 traces per second is applied.
 
@@ -415,15 +495,11 @@ For example, to send 50% of the traces for the service named `nginx`, up to `50`
 }
 ```
 
-Read more about sampling configuration options of the [dd-opentracing-cpp][8] library in the [respository documentation][9].
+Read more about sampling configuration options of the [dd-opentracing-cpp][11] library in the [respository documentation][12].
 
-#### NGINX and FastCGI
+## Nginx Ingress Controller for Kubernetes
 
-When the location is serving a FastCGI backend instead of HTTP, the `location` block should use `opentracing_fastcgi_propagate_context` instead of `opentracing_propagate_context`.
-
-## NGINX Ingress Controller for Kubernetes
-
-The [Kubernetes ingress-nginx][10] controller versions 0.23.0+ include the NGINX plugin for OpenTracing.
+The [Kubernetes ingress-nginx][13] controller versions 0.23.0+ include the Nginx plugin for OpenTracing.
 
 To enable this plugin, create or edit a ConfigMap to set `enable-opentracing: "true"` and the `datadog-collector-host` to which traces should be sent.
 The name of the ConfigMap will be cited explicitly by the nginx-ingress controller container's command line argument, defaulting to `--configmap=$(POD_NAMESPACE)/nginx-configuration`.
@@ -466,54 +542,51 @@ To set a different service name per Ingress using annotations:
 ```
 The above overrides the default `nginx-ingress-controller.ingress-nginx` service name.
 
-### Sampling
+### Ingress Controller Sampling
+The Nginx Ingress Controller for Kubernetes uses [v1.2.1][14] of the Datadog
+tracing library, `dd-opentracing-cpp`.
 
-To control the volume of traces starting from Nginx that are sent to Datadog, specify a sampling rate by setting the parameter `DD_TRACE_SAMPLING_RULES` to a value between `0.0` (0%) and `1.0` (100%). If no value is specified, 100% of traces starting from Nginx are sent. The Kubernetes Nginx ingress controller uses [v1.2.1][11] of the `dd-opentracing-cpp` library).
+To control the volume of Ingress Controller traces that are sent to Datadog,
+specify a sampling rule that matches all traces. The `sample_rate` configured
+in the rule determines the proportion of traces that are sampled. If no
+rules are specified, then sampling defaults to 100%.
 
-For example, to keep 10% of the traces starting from the `ingress-nginx` service:
+Specify sampling rules by using the `DD_TRACE_SAMPLING_RULES` environment
+variable. To define sampling rules in the Ingress Controller:
 
-```
-DD_TRACE_SAMPLING_RULES=[{"service":"ingress-nginx","sample_rate":0.1}]
-```
+1. Instruct Nginx to forward the environment variable to its worker processes by adding the following [main-snippet][14] to the `data` section of the Ingress Controller's `ConfigMap`:
+   ```yaml
+   data:
+     main-snippet: "env DD_TRACE_SAMPLING_RULES;"
+   ```
 
-To use the [Datadog Agent calculated sampling rates][7] (10 traces per second per Agent) and ignore the default sampling rule set to 100%, set the parameter `DD_TRACE_SAMPLING_RULES` to an empty array:
+2. Specify a value for the environment variable in the `env` section of the Ingress Controller's `Deployment`. For example, to keep 10% of traces originating from the Ingress Controller:
+   ```yaml
+   env:
+   - name: DD_TRACE_SAMPLING_RULES
+     value: '[{"sample_rate": 0.1}]'
+   ```
+   To use the [Datadog Agent calculated sampling rates][10] (10 traces per second per Agent by default), specify an empty array of sampling rules:
+   ```yaml
+   env:
+   - name: DD_TRACE_SAMPLING_RULES
+     value: '[]'
+   ```
 
-```
-DD_TRACE_SAMPLING_RULES=[]
-```
-
-To configure `DD_TRACE_SAMPLING_RULES`, add a `main-snippet` entry in the `data` section of the controller's ConfigMap:
-
-```
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  labels:
-	  app.kubernetes.io/name: ingress-nginx
-	  app.kubernetes.io/instance: ingress-nginx
-	  app.kubernetes.io/component: controller
-  name: ingress-nginx-controller
-  namespace: ingress-nginx
-data:
-  enable-opentracing: "true"
-  datadog-collector-host: $HOST_IP
-  http-snippet: |
-	  opentracing_trace_locations off;
-  main-snippet: |
-	  env DD_TRACE_SAMPLING_RULES=[];
-```
-
-[1]: http://nginx.org/en/linux_packages.html#stable
-[2]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/Dockerfile
-[3]: https://github.com/opentracing-contrib/nginx-opentracing/releases/latest
-[4]: https://github.com/DataDog/dd-opentracing-cpp/releases/latest
-[5]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/nginx.conf
-[6]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/dd-config.json
-[7]: /tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
-[8]: https://github.com/DataDog/dd-opentracing-cpp/
-[9]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/doc/sampling.md
-[10]: https://github.com/kubernetes/ingress-nginx
-[11]: https://github.com/DataDog/dd-opentracing-cpp/releases/tag/v1.2.1
+[1]: https://github.com/DataDog/nginx-datadog/releases/latest
+[2]: https://hub.docker.com/layers/library/amazonlinux/2.0.20230119.1/images/sha256-db0bf55c548efbbb167c60ced2eb0ca60769de293667d18b92c0c089b8038279?context=explore
+[3]: https://hub.docker.com/layers/library/nginx/1.23.2-alpine/images/sha256-0f2ab24c6aba5d96fcf6e7a736333f26dca1acf5fa8def4c276f6efc7d56251f?context=explore
+[4]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/Dockerfile
+[5]: https://github.com/opentracing-contrib/nginx-opentracing/releases/latest
+[6]: https://github.com/DataDog/dd-opentracing-cpp/releases/latest
+[7]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/nginx.conf
+[8]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/dd-config.json
+[9]: https://github.com/DataDog/nginx-datadog/blob/master/doc/API.md#datadog
+[10]: /tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
+[11]: https://github.com/DataDog/dd-opentracing-cpp/
+[12]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/doc/sampling.md
+[13]: https://github.com/kubernetes/ingress-nginx
+[14]: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#main-snippet
 {{% /tab %}}
 {{% tab "Istio" %}}
 
@@ -525,18 +598,16 @@ Datadog monitors every aspect of your Istio environment, so you can:
 
 To learn more about monitoring your Istio environment with Datadog, [see the Istio blog][3].
 
-## Configuration
-
 Datadog APM is available for Istio v1.1.3+ on Kubernetes clusters.
 
-### Datadog Agent installation
+## Datadog Agent installation
 
 1. [Install the Agent][4]
 2. [Make sure APM is enabled for your Agent][5].
 3. Uncomment the `hostPort` setting so that Istio sidecars can connect to the Agent and submit traces.
 
 
-### Istio configuration and installation
+## Istio configuration and installation
 
 To enable Datadog APM, a [custom Istio installation][6] is required to set two extra options when installing Istio.
 
@@ -571,17 +642,23 @@ template:
 For [CronJobs][8], the `app` label should be added to the job template, as the generated name comes from the `Job` instead
 of the higher-level `CronJob`.
 
-### Sampling
+## Istio Sampling
 
-To control the volume of traces starting from Istio that are sent to Datadog, specify a sampling rate by setting the parameter `DD_TRACE_SAMPLING_RULES` to a value between `0.0` (0%) and `1.0` (100%). If no value is specified, 100% of traces starting from Istio are sent.
+To control the volume of Istio traces that are sent to Datadog, configure a
+sampling rule whose `"sample_rate"` is a value between `0.0` (0%) and `1.0`
+(100%). Configure sampling rules with the `DD_TRACE_SAMPLING_RULES`
+environment variable. If `DD_TRACE_SAMPLING_RULES` is not specified, then 100%
+of Istio traces are sent to Datadog.
 
 **Note**: These environment variables apply only to the subset of traces indicated by the `values.pilot.traceSampling` setting, hence the required `--set values.pilot.traceSampling=100.0` during Istio configuration.
 
 To use the [Datadog Agent calculated sampling rates][9] (10 traces per second per Agent) and ignore the default sampling rule set to 100%, set the parameter `DD_TRACE_SAMPLING_RULES` to an empty array:
 
+```bash
+DD_TRACE_SAMPLING_RULES='[]'
 ```
-DD_TRACE_SAMPLING_RULES=[]
-```
+
+Explicitly specifying an empty array of rules is different from not specifying rules.
 
 To configure `DD_TRACE_SAMPLING_RULES`, in each deployment whose namespace is labeled `istio-injection=enabled`, set the environment variable as part of the `apm.datadoghq.com/env` annotation of the deployment spec template:
 ```
@@ -595,8 +672,12 @@ spec:
       annotations:
         apm.datadoghq.com/env: '{"DD_ENV": "prod", "DD_SERVICE": "my-service", "DD_VERSION": "v1.1", "DD_TRACE_SAMPLING_RULES": "[]"}'
 ```
+`apm.datadoghq.com/env` is a string whose content is a JSON object mapping
+environment variable names to values. The environment variable values are
+themselves strings, and in the case of `DD_TRACE_SAMPLING_RULES`, the string
+value is a JSON array of objects.
 
-### Environment variables
+## Environment variables
 
 Environment variables for Istio sidecars can be set on a per-deployment basis using the `apm.datadoghq.com/env` annotation. This is unique for deployments employing Istio sidecars and is set in addition to the [labels for unified service tagging][10].
 ```yaml
@@ -615,6 +696,9 @@ The available [environment variables][11] depend on the version of the C++ trace
 
 | Istio Version | C++ Tracer Version |
 |---------------|--------------------|
+| v1.15.x | v1.2.1 |
+| v1.14.x | v1.2.1 |
+| v1.13.x | v1.2.1 |
 | v1.12.x | v1.2.1 |
 | v1.11.x | v1.2.1 |
 | v1.10.x | v1.2.1 |
@@ -629,7 +713,7 @@ The available [environment variables][11] depend on the version of the C++ trace
 | v1.1.3 | v0.4.2 |
 
 
-### Deployment and service
+## Deployment and service
 
 If the Agents on your cluster are running as a deployment and service instead of the default DaemonSet, then an additional option is required to specify the DNS address and port of the Agent.
 For a service named `datadog-agent` in the `default` namespace, that address would be `datadog-agent.default.svc.cluster.local:8126`.
@@ -663,9 +747,6 @@ spec:
 Automatic Protocol Selection may determine that traffic between the sidecar and Agent is HTTP, and enable tracing.
 This can be disabled using [manual protocol selection][12] for this specific service. The port name in the `datadog-agent` Service can be changed to `tcp-traceport`.
 If using Kubernetes 1.18+, `appProtocol: tcp` can be added to the port specification.
-
-
-
 
 [1]: /integrations/istio/
 [2]: /network_monitoring/performance/setup/#istio

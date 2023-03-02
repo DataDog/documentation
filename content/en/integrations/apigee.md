@@ -22,9 +22,9 @@ further_reading:
 integration_id: "apigee"
 ---
 
-{{< site-region region="us3" >}}
+{{% site-region region="us3" %}}
 <div class="alert alert-warning">The Apigee integration is not supported for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
+{{% /site-region %}}
 
 ## Overview
 

@@ -1,45 +1,67 @@
 ---
+app_id: nn-sdwan
+app_uuid: 8ff5c833-1498-4e63-9ef2-8deecf444d09
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Netnology SD-WAN Overview: assets/dashboards/nn_sdwan_overview.json
-  logs: {}
-  metrics_metadata: metadata.csv
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check:
+      - nn_sdwan.device_control_status
+      - nn_sdwan.app_aware_routing.latency
+      metadata_path: metadata.csv
+      prefix: nn_sdwan.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Netnology SD-WAN
   monitors:
     High Latency Monitor: assets/monitors/high-latency-monitor.json
     Packet Loss Monitor: assets/monitors/packet-loss-monitor.json
-  saved_views: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: info@netnology.io
+  support_email: info@netnology.io
 categories:
 - モニタリング
 - ネットワーク
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/nn_sdwan/README.md
-display_name: Netnology SD-WAN
+display_on_public_website: true
 draft: false
 git_integration_title: nn_sdwan
-guid: a7c79ba9-a4b7-4fa4-b4aa-3868458e2101
 integration_id: nn-sdwan
 integration_title: Netnology Cisco SD-WAN
 integration_version: 1.0.0
 is_public: true
 kind: integration
-maintainer: info@netnology.io
-manifest_version: 1.0.0
-metric_prefix: nn_sdwan.
-metric_to_check:
-- nn_sdwan.device_control_status
-- nn_sdwan.app_aware_routing.latency
+manifest_version: 2.0.0
 name: nn_sdwan
+oauth: {}
 public_title: Netnology Cisco SD-WAN
 short_description: Netnology の Cisco SDWAN コントローラメトリクスエクスポーター
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Monitoring
+  - Category::Network
+  configuration: README.md#Setup
+  description: Netnology の Cisco SDWAN コントローラメトリクスエクスポーター
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Netnology Cisco SD-WAN
 ---
 
 

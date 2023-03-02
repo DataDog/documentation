@@ -33,6 +33,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/hybrid-app-monitoring/"
   tag: "Blog"
   text: "Monitor your hybrid mobile applications with Datadog"
+- link: "https://www.datadoghq.com/blog/how-datadogs-tech-solutions-team-rum-session-replay/"
+  tag: "Blog"
+  text: "How Datadog's Technical Solutions team uses RUM, Session Replay, and Error Tracking to resolve customer issues"
 - link: "/real_user_monitoring/browser/data_collected/"
   tag: "Documentation"
   text: "RUM Browser Data Collected"
@@ -117,7 +120,7 @@ Access triggered logs, errors, and performance information when troubleshooting 
 
 [1]: /real_user_monitoring/dashboards/
 [2]: /real_user_monitoring/explorer/visualize/
-[3]: /monitors/create/types/real_user_monitoring/
+[3]: /monitors/types/real_user_monitoring/
 [4]: /real_user_monitoring/connect_rum_and_traces/
 [5]: /real_user_monitoring/error_tracking/
 [6]: /real_user_monitoring/browser/monitoring_page_performance/#core-web-vitals

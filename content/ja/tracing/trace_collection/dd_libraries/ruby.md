@@ -6,6 +6,7 @@ aliases:
 - /ja/tracing/setup_overview/ruby/
 - /ja/agent/apm/ruby/
 - /ja/tracing/setup_overview/setup/ruby
+- /ja/tracing/trace_collection/ruby
 code_lang: ruby
 code_lang_weight: 15
 dependencies:
@@ -14,13 +15,11 @@ kind: documentation
 title: Ruby アプリケーションのトレース
 type: multi-code-lang
 ---
-***バージョン 1.0.0 はリリース済みです。詳しくは[アップグレードガイド](https://github.com/DataDog/dd-trace-rb/blob/master/docs/UpgradeGuide.md#from-0x-to-10)をご覧ください。***
-
-
-
 `ddtrace` は、Datadog の Ruby 用トレースクライアントです。ウェブサーバー、データベース、マイクロサービスを通過するリクエストを追跡するために使用されるため、開発者はボトルネックや面倒なリクエストを高度に把握できます。
 
 ## はじめに
+
+**0.x バージョンからアップグレードされる方は、[アップグレードガイド](https://github.com/DataDog/dd-trace-rb/blob/master/docs/UpgradeGuide.md#from-0x-to-10)をご確認ください。**
 
 一般的な APM ドキュメントについては、[セットアップドキュメント][セットアップドキュメント]を参照してください。
 
@@ -70,6 +69,7 @@ type: multi-code-lang
      - [Grape](#grape)
      - [GraphQL](#graphql)
      - [gRPC](#grpc)
+     - [hanami](#hanami)
      - [http.rb](#httprb)
      - [httpclient](#httpclient)
      - [httpx](#httpx)
@@ -94,6 +94,7 @@ type: multi-code-lang
      - [Sidekiq](#sidekiq)
      - [Sinatra](#sinatra)
      - [Sneakers](#sneakers)
+     - [Stripe](#stripe)
      - [Sucker Punch](#sucker-punch)
  - [追加構成](#additional-configuration)
      - [カスタムロギング](#custom-logging)
@@ -102,6 +103,7 @@ type: multi-code-lang
      - [サンプリング](#sampling)
          - [アプリケーション側サンプリング](#application-side-sampling)
          - [優先度サンプリング](#priority-sampling)
+         - [シングルスパンサンプリング](#single-span-sampling)
      - [分散型トレーシング](#distributed-tracing)
      - [HTTP リクエストのキューイング](#http-request-queuing)
      - [処理パイプライン](#processing-pipeline)
@@ -129,7 +131,7 @@ https://github.com/datadog/documentation/blob/master/content/en/tracing/setup_ov
 
 **サポートされている Ruby インタープリター**:
 
-| タイプ  | ドキュメント              | バージョン | サポートの種類                         | Gem バージョンのサポート |
+| タイプ  | Documentation              | バージョン | サポートの種類                         | Gem バージョンのサポート |
 | ----- | -------------------------- | -----   | ------------------------------------ | ------------------- |
 | MRI   | https://www.ruby-lang.org/ | 3.1     | フル                                 | 最新              |
 |       |                            | 3.0     | フル                                 | 最新              |
@@ -139,7 +141,7 @@ https://github.com/datadog/documentation/blob/master/content/en/tracing/setup_ov
 |       |                            | 2.4     | フル                                 | 最新              |
 |       |                            | 2.3     | フル                                 | 最新              |
 |       |                            | 2.2     | フル                                 | 最新              |
-|       |                            | 2.1     | フル                                 | 最新              |
+|       |                            | 2.1     | フル (プロファイリングを除く)          | 最新              |
 |       |                            | 2.0     | 2021 年 6 月 7 日以降 EOL             | < 0.50.0            |
 |       |                            | 1.9.3   | 2020 年 8 月 6 日以降 EOL           | < 0.27.0            |
 |       |                            | 1.9.1   | 2020 年 8 月 6 日以降 EOL           | < 0.27.0            |
@@ -148,7 +150,7 @@ https://github.com/datadog/documentation/blob/master/content/en/tracing/setup_ov
 
 **サポートされるウェブサーバー**:
 
-| タイプ      | ドキュメント                     | バージョン      | サポートの種類 |
+| タイプ      | Documentation                     | バージョン      | サポートの種類 |
 | --------- | --------------------------------- | ------------ | ------------ |
 | Puma      | http://puma.io/                   | 2.16+ / 3.6+ | フル         |
 | Unicorn   | https://bogomips.org/unicorn/     | 4.8+ / 5.1+  | フル         |
@@ -156,9 +158,9 @@ https://github.com/datadog/documentation/blob/master/content/en/tracing/setup_ov
 
 **サポートされるトレースフレームワーク**:
 
-| タイプ        | ドキュメント                                   | バージョン               | Gem バージョンのサポート |
+| タイプ        | Documentation                                   | バージョン               | Gem バージョンのサポート |
 | ----------- | ----------------------------------------------- | --------------------- | ------------------- |
-| OpenTracing | https://github.com/opentracing/opentracing-ruby | 0.4.1+ (w/ Ruby 2.1+) | >= 0.16.0           |
+| OpenTracing | https://github.com/opentracing/opentracing-ruby | 0.4.1+                | >= 0.16.0           |
 
 *フル*サポートは、すべてのトレーサー機能が利用可能であることを示します。
 
@@ -176,7 +178,7 @@ macOS での `ddtrace` の使用は、開発ではサポートされています
 
 Microsoft Windows での `ddtrace` の使用は現在サポートされていません。コミュニティの貢献や課題は引き続き受け付けますが、優先順位は低いと判断します。
 
-## インストール
+## APM に Datadog Agent を構成する
 
 Ruby アプリケーションにトレースを追加するには、いくつかの簡単なステップを踏むだけです。
 
@@ -230,7 +232,7 @@ Agent がトレースデータをリッスンするプロトコルやポート�
 
 ### アプリケーションをインスツルメントする
 
-#### Rails アプリケーション
+#### Rails/Hanami アプリケーション
 
 1. `ddtrace` gem を Gemfile に追加します。
 
@@ -359,7 +361,7 @@ Agent がアプリケーションと異なるホストやコンテナで動作�
 Ruby コードをトレースするには、`Datadog::Tracing.trace` メソッドを使用できます。
 
 ```ruby
-Datadog::Tracing.trace(name, options) do |span, trace|
+Datadog::Tracing.trace(name, **options) do |span, trace|
   # このブロックを、インスツルメントするコードでラップします
   # さらに、ここでスパンを変更できます。
   # 例: リソース名の変更、タグの設定など...
@@ -368,7 +370,7 @@ end
 
 ここで、`name` は、実行されている一般的な種類の操作を説明する `String` です（例: `'web.request'` または `'request.parse'`）。
 
-また、`options` はオプションの `Hash` であり、次のパラメーターを受け入れます。
+また、`options` は以下のオプションのキーワード引数です。
 
 | キー | タイプ | 説明 | デフォルト |
 | --------------- | ----------------------- | --- | --- |
@@ -420,7 +422,7 @@ def db_query(start, finish, query)
 end
 ```
 
-ブロックなしで `Datadog::Tracing.trace` を呼び出すと、関数は開始されたが終了していない `Datadog::SpanOperation` を返します。次に、このスパンを必要に応じて変更してから、`finish` で閉じます。
+ブロックなしで `Datadog::Tracing.trace` を呼び出すと、関数は開始されたが終了していない `Datadog::Tracing::SpanOperation` を返します。次に、このスパンを必要に応じて変更してから、`finish` で閉じます。
 
 *未完了のスパンを残してはいけません。*トレースが完了したときにスパンが開いたままになっていると、トレースは破棄されます。[デバッグモードをアクティブにする](#tracer-settings)ことで、これが発生していると思われる場合に警告を確認できます。
 
@@ -469,11 +471,11 @@ current_trace = Datadog::Tracing.active_trace
 ```ruby
 Datadog.configure do |c|
   # インテグレーションをアクティブ化、構成します
-  c.tracing.instrument :integration_name, options
+  c.tracing.instrument :integration_name, **options
 end
 ```
 
-`options` はインテグレーション固有のコンフィギュレーション設定の `Hash` です。
+`options` は、インテグレーション固有の構成を表すキーワード引数です。
 
 利用可能なインテグレーションとそのコンフィギュレーションオプションのリストについては、以下を参照してください。
 
@@ -504,6 +506,7 @@ https://github.com/datadog/documentation/blob/master/content/en/tracing/setup_ov
 | Grape                      | `grape`                    | `>= 1.0`                 | `>= 1.0`                  | *[リンク](#grape)*                    | *[リンク](https://github.com/ruby-grape/grape)*                                  |
 | GraphQL                    | `graphql`                  | `>= 1.7.9`               | `>= 1.7.9`                | *[リンク](#graphql)*                  | *[リンク](https://github.com/rmosolgo/graphql-ruby)*                             |
 | gRPC                       | `grpc`                     | `>= 1.7`                 | *gem の利用不可*       | *[リンク](#grpc)*                     | *[リンク](https://github.com/grpc/grpc/tree/master/src/rubyc)*                   |
+| hanami                     | `hanami`                   | `>= 1`、`< 2`            | `>= 1`、`< 2`             | *[リンク](#hanami)*                   | *[リンク](https://github.com/hanami/hanami)*                                     |
 | http.rb                    | `httprb`                   | `>= 2.0`                 | `>= 2.0`                  | *[リンク](#httprb)*                   | *[リンク](https://github.com/httprb/http)*                                       |
 | httpclient                 | `httpclient`               | `>= 2.2`                 | `>= 2.2`                  | *[リンク](#httpclient)*               | *[リンク](https://github.com/nahi/httpclient)*                                     |
 | httpx                      | `httpx`                    | `>= 0.11`                | `>= 0.11`                 | *[リンク](#httpx)*                    | *[リンク](https://gitlab.com/honeyryderchuck/httpx)*                             |
@@ -520,7 +523,7 @@ https://github.com/datadog/documentation/blob/master/content/en/tracing/setup_ov
 | Rack                       | `rack`                     | `>= 1.1`                 | `>= 1.1`                  | *[リンク](#rack)*                     | *[リンク](https://github.com/rack/rack)*                                         |
 | Rails                      | `rails`                    | `>= 3.2`                 | `>= 3.2`                  | *[リンク](#rails)*                    | *[リンク](https://github.com/rails/rails)*                                       |
 | Rake                       | `rake`                     | `>= 12.0`                | `>= 12.0`                 | *[リンク](#rake)*                     | *[リンク](https://github.com/ruby/rake)*                                         |
-| Redis                      | `redis`                    | `>= 3.2`                 | `>= 3.2`                  | *[リンク](#redis)*                    | *[リンク](https://github.com/redis/redis-rb)*                                    |
+| Redis                      | `redis`                    | `>= 3.2`                 | `>= 3.2`                 | *[リンク](#redis)*                    | *[リンク](https://github.com/redis/redis-rb)*                                    |
 | Resque                     | `resque`                   | `>= 1.0`                 | `>= 1.0`                  | *[リンク](#resque)*                   | *[リンク](https://github.com/resque/resque)*                                     |
 | Rest Client                | `rest-client`              | `>= 1.8`                 | `>= 1.8`                  | *[リンク](#rest-client)*              | *[リンク](https://github.com/rest-client/rest-client)*                           |
 | Sequel                     | `sequel`                   | `>= 3.41`                | `>= 3.41`                 | *[リンク](#sequel)*                   | *[リンク](https://github.com/jeremyevans/sequel)*                                |
@@ -528,6 +531,7 @@ https://github.com/datadog/documentation/blob/master/content/en/tracing/setup_ov
 | Sidekiq                    | `sidekiq`                  | `>= 3.5.4`               | `>= 3.5.4`                | *[リンク](#sidekiq)*                  | *[リンク](https://github.com/mperham/sidekiq)*                                   |
 | Sinatra                    | `sinatra`                  | `>= 1.4`                 | `>= 1.4`                  | *[リンク](#sinatra)*                  | *[リンク](https://github.com/sinatra/sinatra)*                                   |
 | Sneakers                   | `sneakers`                 | `>= 2.12.0`              | `>= 2.12.0`               | *[リンク](#sneakers)*                 | *[リンク](https://github.com/jondot/sneakers)*                                   |
+| Stripe                     | `stripe`                   | `>= 5.15.0`              | `>= 5.15.0`               | *[リンク](#stripe)*                   | *[リンク](https://github.com/stripe/stripe-ruby)*                                |
 | Sucker Punch               | `sucker_punch`             | `>= 2.0`                 | `>= 2.0`                  | *[リンク](#sucker-punch)*             | *[リンク](https://github.com/brandonhilkert/sucker_punch)*                       |
 
 #### CI Visibility （CI/CDの可視化）
@@ -537,11 +541,11 @@ Datadog CI Visibility では、以下の `Datadog.configure` API を使用して
 ```ruby
 Datadog.configure do |c|
   # インテグレーションをアクティブ化、構成します
-  c.ci.instrument :integration_name, options
+  c.ci.instrument :integration_name, **options
 end
 ```
 
-`options` はインテグレーション固有のコンフィギュレーション設定の `Hash` です。
+`options` は、インテグレーション固有の構成を表すキーワード引数です。
 
 以下は、利用可能な CI Visibility のインテグレーションです。
 
@@ -573,15 +577,14 @@ Action Mailer インテグレーションは、Rails 5 の ActionMailer アク�
 ```ruby
 require 'ddtrace'
 Datadog.configure do |c|
-  c.tracing.instrument :action_mailer, options
+  c.tracing.instrument :action_mailer, **options
 end
 ```
 
-ここで、`options` はオプションの `Hash` であり、次のパラメーターを受け入れます。
+`options` は以下のキーワード引数です。
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
-| `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `false` |
 | `email_data` | `action_mailer.deliver` のスパンに、追加のメールペイロードメタデータを追加するかどうか。フィールドは `['subject', 'to', 'from', 'bcc', 'cc', 'date', 'perform_deliveries']` を含みます。 | `false` |
 
 ### Action Pack
@@ -606,11 +609,11 @@ require 'actionview'
 require 'ddtrace'
 
 Datadog.configure do |c|
-  c.tracing.instrument :action_view, options
+  c.tracing.instrument :action_view, **options
 end
 ```
 
-ここで、`options` はオプションの `Hash` であり、次のパラメーターを受け入れます。
+`options` は以下のキーワード引数です。
 
 | キー | 説明 | デフォルト |
 | ---| --- | --- |
@@ -658,7 +661,7 @@ require 'active_record'
 require 'ddtrace'
 
 Datadog.configure do |c|
-  c.tracing.instrument :active_record, options
+  c.tracing.instrument :active_record, **options
 end
 
 Dir::Tmpname.create(['test', '.sqlite']) do |db|
@@ -668,7 +671,7 @@ Dir::Tmpname.create(['test', '.sqlite']) do |db|
 end
 ```
 
-ここで、`options` はオプションの `Hash` であり、次のパラメーターを受け入れます。
+`options` は以下のキーワード引数です。
 
 | キー | 説明 | デフォルト |
 | ---| --- | --- |
@@ -749,14 +752,14 @@ require 'activesupport'
 require 'ddtrace'
 
 Datadog.configure do |c|
-  c.tracing.instrument :active_support, options
+  c.tracing.instrument :active_support, **options
 end
 
 cache = ActiveSupport::Cache::MemoryStore.new
 cache.read('city')
 ```
 
-ここで、`options` はオプションの `Hash` であり、次のパラメーターを受け入れます。
+`options` は以下のキーワード引数です。
 
 | キー | 説明 | デフォルト |
 | ---| --- | --- |
@@ -771,14 +774,14 @@ require 'aws-sdk'
 require 'ddtrace'
 
 Datadog.configure do |c|
-  c.tracing.instrument :aws, options
+  c.tracing.instrument :aws, **options
 end
 
 # トレースされた呼び出しを実行します
 Aws::S3::Client.new.list_buckets
 ```
 
-ここで、`options` はオプションの `Hash` であり、次のパラメーターを受け入れます。
+`options` は以下のキーワード引数です。
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
@@ -816,7 +819,7 @@ require 'ddtrace'
 
 # デフォルトの Cucumber インテグレーションを構成
 Datadog.configure do |c|
-  c.ci.instrument :cucumber, options
+  c.ci.instrument :cucumber, **options
 end
 
 # シナリオからアクティブなスパンにタグ付けする方法の例
@@ -831,7 +834,7 @@ Around do |scenario, block|
 end
 ```
 
-ここで、`options` はオプションの `Hash` であり、次のパラメーターを受け入れます。
+`options` は以下のキーワード引数です。
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
@@ -849,15 +852,15 @@ require 'ddtrace'
 
 # デフォルトの Dalli トレース動作を構成します
 Datadog.configure do |c|
-  c.tracing.instrument :dalli, options
+  c.tracing.instrument :dalli, **options
 end
 
 # 単一クライアントの Dalli トレース動作を構成します
-client = Dalli::Client.new('localhost:11211', options)
+client = Dalli::Client.new('localhost:11211', **options)
 client.set('abc', 123)
 ```
 
-ここで、`options` はオプションの `Hash` であり、次のパラメーターを受け入れます。
+`options` は以下のキーワード引数です。
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
@@ -873,11 +876,11 @@ DelayedJob インテグレーションは、ライフサイクルフックを使
 require 'ddtrace'
 
 Datadog.configure do |c|
-  c.tracing.instrument :delayed_job, options
+  c.tracing.instrument :delayed_job, **options
 end
 ```
 
-ここで、`options` はオプションの `Hash` であり、次のパラメーターを受け入れます。
+`options` は以下のキーワード引数です。
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
@@ -892,7 +895,7 @@ require 'elasticsearch/transport'
 require 'ddtrace'
 
 Datadog.configure do |c|
-  c.tracing.instrument :elasticsearch, options
+  c.tracing.instrument :elasticsearch, **options
 end
 
 # Elasticsearch にクエリを実行します
@@ -903,7 +906,7 @@ response = client.perform_request 'GET', '_cluster/health'
 Datadog.configure_onto(client.transport, **options)
 ```
 
-ここで、`options` はオプションの `Hash` であり、次のパラメーターを受け入れます。
+`options` は以下のキーワード引数です。
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
@@ -918,7 +921,7 @@ Datadog.configure_onto(client.transport, **options)
 require 'ddtrace'
 
 Datadog.configure do |c|
-  c.tracing.instrument :ethon, options
+  c.tracing.instrument :ethon, **options
 
   # オプションで、正規表現に一致するホスト名に別のサービス名を指定します
   c.tracing.instrument :ethon, describes: /user-[^.]+\.example\.com/ do |ethon|
@@ -928,7 +931,7 @@ Datadog.configure do |c|
 end
 ```
 
-ここで、`options` はオプションの `Hash` であり、次のパラメーターを受け入れます。
+`options` は以下のキーワード引数です。
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
@@ -946,7 +949,7 @@ require 'ddtrace'
 
 # デフォルトの Excon トレース動作を構成します
 Datadog.configure do |c|
-  c.tracing.instrument :excon, options
+  c.tracing.instrument :excon, **options
 
   # オプションで、正規表現に一致するホスト名に別のサービス名を指定します
   c.tracing.instrument :excon, describes: /user-[^.]+\.example\.com/ do |excon|
@@ -959,7 +962,7 @@ connection = Excon.new('https://example.com')
 connection.get
 ```
 
-ここで、`options` はオプションの `Hash` であり、次のパラメーターを受け入れます。
+`options` は以下のキーワード引数です。
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
@@ -1003,7 +1006,7 @@ require 'ddtrace'
 
 # デフォルトの Faraday トレース動作を構成します
 Datadog.configure do |c|
-  c.tracing.instrument :faraday, options
+  c.tracing.instrument :faraday, **options
 
   # オプションで、正規表現に一致するホスト名に別のサービス名を指定します
   c.tracing.instrument :faraday, describes: /user-[^.]+\.example\.com/ do |faraday|
@@ -1014,14 +1017,14 @@ end
 
 # 特定のクライアントインスタンスのグローバルコンフィギュレーションをオーバーライドする場合
 connection = Faraday.new('https://example.com') do |builder|
-  builder.use(:ddtrace, options)
+  builder.use(:ddtrace, **options)
   builder.adapter Faraday.default_adapter
 end
 
 connection.get('/foo')
 ```
 
-ここで、`options` はオプションの `Hash` であり、次のパラメーターを受け入れます。
+`options` は以下のキーワード引数です。
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
@@ -1042,7 +1045,7 @@ require 'grape'
 require 'ddtrace'
 
 Datadog.configure do |c|
-  c.tracing.instrument :grape, options
+  c.tracing.instrument :grape, **options
 end
 
 # 次に、アプリケーションを定義します
@@ -1054,7 +1057,7 @@ class RackTestingAPI < Grape::API
 end
 ```
 
-ここで、`options` はオプションの `Hash` であり、次のパラメーターを受け入れます。
+`options` は以下のキーワード引数です。
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
@@ -1070,18 +1073,19 @@ GraphQL インテグレーションでは、GraphQL クエリのインスツル�
 ```ruby
 # Rails ニシャライザまたは同等の内部
 Datadog.configure do |c|
-  c.tracing.instrument :graphql, schemas: [YourSchema], options
+  c.tracing.instrument :graphql, schemas: [YourSchema], **options
 end
 
 # 次に、GraphQL クエリを実行します
 YourSchema.execute(query, variables: {}, context: {}, operation_name: nil)
 ```
 
-`use :graphql` メソッドは以下のパラメーターを受け入れます。追加のオプションは、`options` の代わりに使用できます。
+`instrument :graphql` メソッドは以下のパラメーターを受け入れます。追加のオプションは、`options` の代わりに使用できます。
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
 | `schemas` | 必須。トレースする `GraphQL::Schema` オブジェクトの配列。このコンフィギュレーションに指定されるオプションを使用して、リストされているすべてのスキーマにトレースが追加されます。何も指定しない場合、トレースはアクティブ化されません。 | `[]` |
+| `service_name` | graphql インスツルメンテーションに使用されるサービス名 | `'ruby-graphql'` |
 
 **GraphQL スキーマを手動で構成する**
 
@@ -1127,7 +1131,7 @@ YourSchema.define do
 end
 ```
 
-ダブルトレースを回避するために、手動で構成する場合は `Datadog.configure` で `:graphql` を*使用しない*でください。GraphQL トレースを構成するこれらの 2 つの方法は、相互に排他的であると見なされます。
+ダブルトレースを回避するために、手動で構成する場合は `Datadog.configure` で `instrument :graphql` を*使用しない*でください。GraphQL トレースを構成するこれらの 2 つの方法は、相互に排他的であると見なされます。
 
 ### gRPC
 
@@ -1140,7 +1144,7 @@ require 'grpc'
 require 'ddtrace'
 
 Datadog.configure do |c|
-  c.tracing.instrument :grpc, options
+  c.tracing.instrument :grpc, **options
 end
 
 # サーバー側
@@ -1154,7 +1158,7 @@ client = Demo.rpc_stub_class.new('localhost:50051', :this_channel_is_insecure)
 client.my_endpoint(DemoMessage.new(contents: 'hello!'))
 ```
 
-ここで、`options` はオプションの `Hash` であり、次のパラメーターを受け入れます。
+`options` は以下のキーワード引数です。
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
@@ -1180,6 +1184,29 @@ alternate_client = Demo::Echo::Service.rpc_stub_class.new(
 
 インテグレーションにより、`configured_interceptor` がそのクライアントインスタンスに固有のトレース設定を確立することが保証されます。
 
+### hanami
+
+`hanami` インテグレーションは、hanami アプリケーションのルーティング、アクション、レンダリングをインスツルメントします。`hanami` インストルメンテーションを有効にするには、
+
+```
+gem 'ddtrace', require: 'ddtrace/auto_instrument'
+```
+
+で自動インストルメンテーションを行い、`config/initializers` フォルダにイニシャライザーファイルを作成することを推奨します。
+
+```ruby
+# config/initializers/datadog.rb
+Datadog.configure do |c|
+  c.tracing.instrument :hanami, **options
+end
+```
+
+`options` は以下のキーワード引数です。
+
+| キー | 説明 | デフォルト |
+| --- | ----------- | ------- |
+| `service_name` | `hanami` インスツルメンテーションのサービス名。 | `nil` |
+
 ### http.rb
 
 http.rb インテグレーションは、Http.rb gem を使用して HTTP 呼び出しをトレースします。
@@ -1188,7 +1215,7 @@ http.rb インテグレーションは、Http.rb gem を使用して HTTP 呼び
 require 'http'
 require 'ddtrace'
 Datadog.configure do |c|
-  c.tracing.instrument :httprb, options
+  c.tracing.instrument :httprb, **options
   # オプションで、正規表現に一致するホスト名に別のサービス名を指定します
   c.tracing.instrument :httprb, describes: /user-[^.]+\.example\.com/ do |httprb|
     httprb.service_name = 'user.example.com'
@@ -1197,13 +1224,14 @@ Datadog.configure do |c|
 end
 ```
 
-ここで、`options` はオプションの `Hash` であり、次のパラメーターを受け入れます。
+`options` は以下のキーワード引数です。
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
 | `distributed_tracing` | [分散型トレーシング](#distributed-tracing)を有効にします | `true` |
 | `service_name` | `httprb` インスツルメンテーションのサービス名。 | `'httprb'` |
 | `split_by_domain` | `true` に設定されている場合、リクエストドメインをサービス名として使用します。 | `false` |
+| `error_status_codes` | エラーとして追跡されるべき HTTP ステータスコードの範囲または配列。 | `400...600` |
 
 ### httpclient
 
@@ -1213,7 +1241,7 @@ httpclient インテグレーションは、httpclient gem を使用して HTTP 
 require 'httpclient'
 require 'ddtrace'
 Datadog.configure do |c|
-  c.tracing.instrument :httpclient, options
+  c.tracing.instrument :httpclient, **options
   # オプションで、正規表現に一致するホスト名に別のサービス名を指定します
   c.tracing.instrument :httpclient, describes: /user-[^.]+\.example\.com/ do |httpclient|
     httpclient.service_name = 'user.example.com'
@@ -1222,13 +1250,14 @@ Datadog.configure do |c|
 end
 ```
 
-ここで、`options` はオプションの `Hash` であり、次のパラメーターを受け入れます。
+`options` は以下のキーワード引数です。
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
 | `distributed_tracing` | [分散型トレーシング](#distributed-tracing)を有効にします | `true` |
 | `service_name` | `httpclient` インスツルメンテーションのサービス名。 | `'httpclient'` |
 | `split_by_domain` | `true` に設定されている場合、リクエストドメインをサービス名として使用します。 | `false` |
+| `error_status_codes` | エラーとして追跡されるべき HTTP ステータスコードの範囲または配列。 | `400...600` |
 
 ### httpx
 
@@ -1274,7 +1303,7 @@ require 'mongo'
 require 'ddtrace'
 
 Datadog.configure do |c|
-  c.tracing.instrument :mongo, options
+  c.tracing.instrument :mongo, **options
 end
 
 # MongoDB クライアントを作成し、通常どおり使用します
@@ -1286,7 +1315,7 @@ collection.insert_one({ name: 'Steve' })
 Datadog.configure_onto(client, **options)
 ```
 
-ここで、`options` はオプションの `Hash` であり、次のパラメーターを受け入れます。
+`options` は以下のキーワード引数です。
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
@@ -1333,18 +1362,19 @@ require 'mysql2'
 require 'ddtrace'
 
 Datadog.configure do |c|
-  c.tracing.instrument :mysql2, options
+  c.tracing.instrument :mysql2, **options
 end
 
 client = Mysql2::Client.new(:host => "localhost", :username => "root")
 client.query("SELECT * FROM users WHERE group='x'")
 ```
 
-ここで、`options` はオプションの `Hash` であり、次のパラメーターを受け入れます。
+`options` は以下のキーワード引数です。
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
 | `service_name` | `mysql2` インスツルメンテーションに使用されるサービス名 | `'mysql2'` |
+| `comment_propagation` | データベースモニタリングのための SQL コメント伝搬モード。 <br />(例: `disabled` \| `service`\| `full`). <br /><br />**重要**: *sql コメントの伝播を有効にすると、潜在的に機密データ (サービス名) がデータベースに保存され、データベースへのアクセスを許可された他の第三者がアクセスすることが可能になりますのでご注意ください。* | `'disabled'` |
 
 ### Net/HTTP
 
@@ -1355,7 +1385,7 @@ require 'net/http'
 require 'ddtrace'
 
 Datadog.configure do |c|
-  c.tracing.instrument :http, options
+  c.tracing.instrument :http, **options
 
   # オプションで、正規表現に一致するホスト名に別のサービス名を指定します
   c.tracing.instrument :http, describes: /user-[^.]+\.example\.com/ do |http|
@@ -1372,13 +1402,14 @@ end
 content = Net::HTTP.get(URI('http://127.0.0.1/index.html'))
 ```
 
-ここで、`options` はオプションの `Hash` であり、次のパラメーターを受け入れます。
+`options` は以下のキーワード引数です。
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
 | `distributed_tracing` | [分散型トレーシング](#distributed-tracing)を有効にします | `true` |
 | `service_name` | `http` インスツルメンテーションに使用されるサービス名 | `'net/http'` |
 | `split_by_domain` | `true` に設定されている場合、リクエストドメインをサービス名として使用します。 | `false` |
+| `error_status_codes` | エラーとして追跡されるべき HTTP ステータスコードの範囲または配列。 | `400...600` |
 
 各接続オブジェクトを個別に構成する場合は、次のように `Datadog.configure_onto` を使用できます。
 
@@ -1398,15 +1429,16 @@ require 'pg'
 require 'ddtrace'
 
 Datadog.configure do |c|
-  c.tracing.instrument :pg, options
+  c.tracing.instrument :pg, **options
 end
 ```
 
-ここで、`options` はオプションの `Hash` であり、次のパラメーターを受け入れます。
+`options` は以下のキーワード引数です。
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
 | `service_name` | `pg` インスツルメンテーションに使用されるサービス名 | `'pg'` |
+| `comment_propagation` | データベースモニタリングのための SQL コメント伝搬モード。 <br />(例: `disabled` \| `service`\| `full`). <br /><br />**重要**: *sql コメントの伝播を有効にすると、潜在的に機密データ (サービス名) がデータベースに保存され、データベースへのアクセスを許可された他の第三者がアクセスすることが可能になりますのでご注意ください。* | `'disabled'` |
 
 ### Presto
 
@@ -1417,7 +1449,7 @@ require 'presto-client'
 require 'ddtrace'
 
 Datadog.configure do |c|
-  c.tracing.instrument :presto, options
+  c.tracing.instrument :presto, **options
 end
 
 client = Presto::Client.new(
@@ -1433,7 +1465,7 @@ client = Presto::Client.new(
 client.run("select * from system.nodes")
 ```
 
-ここで、`options` はオプションの `Hash` であり、次のパラメーターを受け入れます。
+`options` は以下のキーワード引数です。
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
@@ -1449,11 +1481,11 @@ Qless ジョブにトレースを追加するには
 require 'ddtrace'
 
 Datadog.configure do |c|
-  c.tracing.instrument :qless, options
+  c.tracing.instrument :qless, **options
 end
 ```
 
-ここで、`options` はオプションの `Hash` であり、次のパラメーターを受け入れます。
+`options` は以下のキーワード引数です。
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
@@ -1470,11 +1502,11 @@ Que インテグレーションは、ジョブの実行をトレースするミ�
 require 'ddtrace'
 
 Datadog.configure do |c|
-  c.tracing.instrument :que, options
+  c.tracing.instrument :que, **options
 end
 ```
 
-ここで、`options` はオプションの `Hash` であり、次のパラメーターを受け入れます。
+`options` は以下のキーワード引数です。
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
@@ -1493,11 +1525,11 @@ Racecar インテグレーションは、Racecar ジョブのトレースを提�
 require 'ddtrace'
 
 Datadog.configure do |c|
-  c.tracing.instrument :racecar, options
+  c.tracing.instrument :racecar, **options
 end
 ```
 
-ここで、`options` はオプションの `Hash` であり、次のパラメーターを受け入れます。
+`options` は以下のキーワード引数です。
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
@@ -1514,7 +1546,7 @@ Rack インテグレーションは、すべてのリクエストが基底のフ
 require 'ddtrace'
 
 Datadog.configure do |c|
-  c.tracing.instrument :rack, options
+  c.tracing.instrument :rack, **options
 end
 
 use Datadog::Tracing::Contrib::Rack::TraceMiddleware
@@ -1526,7 +1558,7 @@ end
 run app
 ```
 
-ここで、`options` はオプションの `Hash` であり、次のパラメーターを受け入れます。
+`options` は以下のキーワード引数です。
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
@@ -1535,40 +1567,68 @@ run app
 | `headers` | タグとして `rack.request` に追加する HTTP リクエストまたは応答ヘッダーのハッシュ。配列の値を持つ `request` と `response` キーを受け入れます（例: `['Last-Modified']`）。`http.request.headers.*` タグと `http.response.headers.*` タグをそれぞれ追加します。 | `{ response: ['Content-Type', 'X-Request-ID'] }` |
 | `middleware_names` | 最後に実行されたミドルウェアクラスを `rack` スパンのリソース名として使用する場合は、これを有効にします。`rails` インスツルメンテーションと一緒に有効にすると、`rails` が優先されます。該当する場合は `rack` リソース名をアクティブな `rails` コントローラーに設定します。使用するには `application` オプションが必要です。 | `false` |
 | `quantize` | 量子化のオプションを含むハッシュ。`:query` または `:fragment` を含めることができます。 | `{}` |
+| `quantize.base` | URL のベース (スキーム、ホスト、ポート) に関する振る舞いを定義します。`http.url` タグに URL ベースを保持し、`http.base_url` タグを設定しない場合は `:show` を、デフォルトで `http.url` タグから URL ベースを取り除き、パスを残して `http.base_url` を設定する場合は `nil` を指定できます。オプションは `quantize` オプションの中にネストする必要があります。 | `nil` |
 | `quantize.query` | URL 量子化のクエリ部分のオプションを含むハッシュ。`:show` または `:exclude` を含めることができます。以下のオプションを参照してください。オプションは `quantize` オプション内にネストする必要があります。 | `{}` |
-| `quantize.query.show` | 常に表示する値を定義します。デフォルトでは値を表示しません。文字列の配列、またはすべての値を表示するには `:all` を指定できます。オプションは `query` オプション内にネストする必要があります。 | `nil` |
-| `quantize.query.exclude` | 完全に削除する値を定義します。デフォルトでは何も除外しません。文字列の配列、またはクエリ文字列を完全に削除するには `:all` を指定できます。オプションは `query` オプション内にネストする必要があります。 | `nil` |
-| `quantize.fragment` | URL フラグメントの動作を定義します。デフォルトではフラグメントを削除します。URL フラグメントを表示するには `:show` を指定できます。オプションは `quantize` オプション内にネストする必要があります。 | `nil` |
+| `quantize.query.show` | 常に表示する値を定義します。文字列の配列、すべての値を表示するには `:all`、値を表示しない場合は `nil` を指定できます。オプションは `query` オプション内にネストする必要があります。 | `nil` |
+| `quantize.query.exclude` | 完全に削除する値を定義します。文字列の配列、クエリ文字列を完全に削除するには `:all`、何も除外しない場合は `nil` を指定できます。オプションは `query` オプション内にネストする必要があります。 | `nil` |
+| `quantize.query.obfuscate` | クエリ文字列をクエリする際の振る舞いを定義します。オプションのハッシュ、デフォルトの内部難読化設定を使用するには `:internal` を、難読化を無効にするには `nil` を指定することができます。難読化は文字列単位での操作で、キーバリュー単位での操作ではないことに注意してください。有効にすると、`query.show` はデフォルトで `:all` になります。オプションは `query` オプションの中にネストする必要があります。 | `nil` |
+| `quantize.query.obfuscate.with` | 難読化されたマッチを置換するための文字列を定義します。文字列を指定することができます。オプションは `query.obfuscate` オプションの中にネストする必要があります。 | `'<redacted>'` |
+| `quantize.query.obfuscate.regex` | クエリ文字列を冗長化するための正規表現を定義します。正規表現、またはデフォルトの内部正規表現を使用するには `:internal` を指定することができます。後者では、よく知られている機密データが冗長化されます。マッチした文字列は `query.obfuscate.with` に置き換えられて、完全に冗長化されます。オプションは `query.obfuscate` オプションの中にネストする必要があります。 | `:internal` |
+| `quantize.fragment` | URL フラグメントの動作を定義します。URL フラグメントを表示するには `:show` を、フラグメントを削除するには `nil` を指定できます。オプションは `quantize` オプション内にネストする必要があります。 | `nil` |
 | `request_queuing` | フロントエンドサーバーのキューで費やされた HTTP リクエスト時間を追跡します。設定の詳細については、[HTTP リクエストキュー](#http-request-queuing)をご覧ください。 有効にするには、`true` に設定します。 | `false` |
 | `web_service_name` | フロントエンドサーバーリクエストのキュースパンのサービス名。（例: `'nginx'`） | `'web-server'` |
+
+非推奨のお知らせ
+- 将来のバージョンでは、`quantize.base` のデフォルトが `:exclude` から `:show` へと変更される予定です。自発的に `:show` に移行することを推奨します。
+- 将来のバージョンでは、`quantize.query.show` のデフォルトが `:all` に変更され、`quantize.query.obfuscate` が `:internal` に変更される予定です。自発的にこれらの将来の値に移行することを推奨します。
 
 **URL 量子化動作の構成**
 
 ```ruby
 Datadog.configure do |c|
-  # デフォルトの動作: すべての値が量子化され、フラグメントが削除されます。
-  # http://example.com/path?category_id=1&sort_by=asc#featured --> http://example.com/path?category_id&sort_by
-  # http://example.com/path?categories[]=1&categories[]=2 --> http://example.com/path?categories[]
+  # デフォルトの動作: すべての値が量子化され、base は削除され、fragment は削除されます。
+  # http://example.com/path?category_id=1&sort_by=asc#featured --> /path?category_id&sort_by
+  # http://example.com:8080/path?categories[]=1&categories[]=2 --> /path?categories[]
 
-  # 'category_id' と完全に一致するクエリ文字列パラメーターの値を表示します
-  # http://example.com/path?category_id=1&sort_by=asc#featured --> http://example.com/path?category_id=1&sort_by
+  # URL のベース (スキーム、ホスト、ポート) を削除します
+  # http://example.com/path?category_id=1&sort_by=asc#featured --> /path?category_id&sort_by#featured
+  c.tracing.instrument :rack, quantize: { base: :exclude }
+
+  # URL のベースを表示します
+  # http://example.com/path?category_id=1&sort_by=asc#featured --> http://example.com/path?category_id&sort_by#featured
+  c.tracing.instrument :rack, quantize: { base: :show }
+
+  # 'category_id' に正確に一致するクエリ文字列パラメーターの値を表示します
+  # http://example.com/path?category_id=1&sort_by=asc#featured --> /path?category_id=1&sort_by
   c.tracing.instrument :rack, quantize: { query: { show: ['category_id'] } }
 
-  # すべてのクエリ文字列パラメーターのすべての値を表示します
-  # http://example.com/path?category_id=1&sort_by=asc#featured --> http://example.com/path?category_id=1&sort_by=asc
+  # すべてのクエリ文字列パラメーターの値を表示します
+  # http://example.com/path?category_id=1&sort_by=asc#featured --> /path?category_id=1&sort_by=asc
   c.tracing.instrument :rack, quantize: { query: { show: :all } }
 
-  # 'sort_by' に完全に一致するクエリ文字列パラメーターを完全に除外します
-  # http://example.com/path?category_id=1&sort_by=asc#featured --> http://example.com/path?category_id
+  # 'sort_by' に正確にマッチするクエリ文字列パラメーターを完全に除外します
+  # http://example.com/path?category_id=1&sort_by=asc#featured --> /path?category_id
   c.tracing.instrument :rack, quantize: { query: { exclude: ['sort_by'] } }
 
   # クエリ文字列を完全に削除します
-  # http://example.com/path?category_id=1&sort_by=asc#featured --> http://example.com/path
+  # http://example.com/path?category_id=1&sort_by=asc#featured --> /path
   c.tracing.instrument :rack, quantize: { query: { exclude: :all } }
 
-  # URL フラグメントを表示します
-  # http://example.com/path?category_id=1&sort_by=asc#featured --> http://example.com/path?category_id&sort_by#featured
+  # URL のフラグメントを表示します
+  # http://example.com/path?category_id=1&sort_by=asc#featured --> /path?category_id&sort_by#featured
   c.tracing.instrument :rack, quantize: { fragment: :show }
+
+  # クエリ文字列を難読化し、デフォルトですべての値を表示します
+  # http://example.com/path?password=qwerty&sort_by=asc#featured --> /path?<redacted>&sort_by=asc
+  c.tracing.instrument :rack, quantize: { query: { obfuscate: {} } }
+
+  # 与えられた正規表現を用いてクエリ文字列を難読化し、デフォルトで全ての値を表示します
+  # http://example.com/path?category_id=1&sort_by=asc#featured --> /path?<redacted>&sort_by=asc
+  c.tracing.instrument :rack, quantize: { query: { obfuscate: { regex: /category_id=\d+/ } } }
+
+  # カスタム編集文字列を使用してクエリ文字列を難読化します
+  # http://example.com/path?password=qwerty&sort_by=asc#featured --> /path?REMOVED&sort_by=asc
+  c.tracing.instrument :rack, quantize: { query: { obfuscate: { with: 'REMOVED' } } }
 end
 ```
 
@@ -1583,11 +1643,11 @@ Rails インスツルメンテーションを有効にするには、`config/ini
 require 'ddtrace'
 
 Datadog.configure do |c|
-  c.tracing.instrument :rails, options
+  c.tracing.instrument :rails, **options
 end
 ```
 
-ここで、`options` はオプションの `Hash` であり、次のパラメーターを受け入れます。
+`options` は以下のキーワード引数です。
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
@@ -1612,7 +1672,11 @@ end
 
 ### Rake
 
-`rake` インテグレーションをアクティブにすることで、Rake タスクに関するインスツルメンテーションを追加できます。各タスクとその後続のサブタスクがトレースされます。
+`rake` インテグレーションをアクティブにすることで、インスツルメンテーションが必要な Rake タスクのリストを提供すれば、Rake タスクに関するインスツルメンテーションを追加できます。
+
+**長時間稼働する Rake タスクのインスツルメンテーションは避けてください。そのようなタスクは、タスクが終了するまで決してフラッシュされない、メモリ内の大きなトレースを集計する場合があります。**
+
+長時間実行されるタスクには、繰り返し実行されるコードパスの周辺に[手動インスツルメンテーション](#manual-instrumentation)を使用します。
 
 Rake タスクのトレースをアクティブにするには、以下を `Rakefile` に追加します。
 
@@ -1622,7 +1686,7 @@ require 'rake'
 require 'ddtrace'
 
 Datadog.configure do |c|
-  c.tracing.instrument :rake, options
+  c.tracing.instrument :rake, tasks: ['my_task'], **options
 end
 
 task :my_task do
@@ -1632,13 +1696,14 @@ end
 Rake::Task['my_task'].invoke
 ```
 
-ここで、`options` はオプションの `Hash` であり、次のパラメーターを受け入れます。
+`options` は以下のキーワード引数です。
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
 | `enabled` | Rake タスクをトレースするかどうかを定義します。トレースを一時的に無効にしたい場合に役立ちます。`true` または `false` | `true` |
 | `quantize` | タスク引数の量子化のオプションを含むハッシュ。詳細と例については、以下を参照してください。 | `{}` |
 | `service_name` | `rake` インスツルメンテーションに使用されるサービス名 | `'rake'` |
+| `tasks` | インスツルメントする Rake タスクの名前 | `[]` |
 
 **タスク量子化動作の構成**
 
@@ -1683,7 +1748,7 @@ require 'redis'
 require 'ddtrace'
 
 Datadog.configure do |c|
-  c.tracing.instrument :redis, options
+  c.tracing.instrument :redis, **options
 end
 
 # Redis コマンドを実行します
@@ -1691,14 +1756,35 @@ redis = Redis.new
 redis.set 'foo', 'bar'
 ```
 
-ここで、`options` はオプションの `Hash` であり、次のパラメーターを受け入れます。
+`options` は以下のキーワード引数です。
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
 | `service_name` | `redis` インスツルメンテーションに使用されるサービス名 | `'redis'` |
 | `command_args` | コマンド引数 (例: `GET key` の `key`) をリソース名とタグとして表示します | true |
 
-次のように、*インスタンスごと*のコンフィギュレーションを設定することもできます。
+**インスタンスごとのトレース設定の構成**
+
+Redis バージョン 5 以降:
+
+```ruby
+require 'redis'
+require 'ddtrace'
+
+Datadog.configure do |c|
+  c.tracing.instrument :redis # インテグレーションインスツルメンテーションの有効化が必要です
+end
+
+customer_cache = Redis.new(custom: { datadog: { service_name: 'custom-cache' } })
+invoice_cache = Redis.new(custom: { datadog: { service_name: 'invoice-cache' } })
+
+# トレースされたコールは `customer-cache` サービスに帰属します
+customer_cache.get(...)
+# トレースされたコールは `invoice-cache` サービスに帰属します
+invoice_cache.get(...)
+```
+
+Redis バージョン 5 未満:
 
 ```ruby
 require 'redis'
@@ -1769,7 +1855,7 @@ Datadog.configure do |c|
 end
 ```
 
-ここで、`options` はオプションの `Hash` であり、次のパラメーターを受け入れます。
+`options` は以下のキーワード引数です。
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
@@ -1784,11 +1870,11 @@ require 'rest_client'
 require 'ddtrace'
 
 Datadog.configure do |c|
-  c.tracing.instrument :rest_client, options
+  c.tracing.instrument :rest_client, **options
 end
 ```
 
-ここで、`options` はオプションの `Hash` であり、次のパラメーターを受け入れます。
+`options` は以下のキーワード引数です。
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
@@ -1808,11 +1894,11 @@ require 'ddtrace'
 
 # 既定の RSpec インテグレーションを構成する
 Datadog.configure do |c|
-  c.ci.instrument :rspec, options
+  c.ci.instrument :rspec, **options
 end
 ```
 
-ここで、`options` はオプションの `Hash` であり、次のパラメーターを受け入れます。
+`options` は以下のキーワード引数です。
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
@@ -1838,7 +1924,7 @@ database.create_table :articles do
 end
 
 Datadog.configure do |c|
-  c.tracing.instrument :sequel, options
+  c.tracing.instrument :sequel, **options
 end
 
 # クエリを実行します
@@ -1846,7 +1932,7 @@ articles = database[:articles]
 articles.all
 ```
 
-ここで、`options` はオプションの `Hash` であり、次のパラメーターを受け入れます。
+`options` は以下のキーワード引数です。
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
@@ -1875,11 +1961,11 @@ Shoryuken インテグレーションは、ジョブの実行をトレースす�
 require 'ddtrace'
 
 Datadog.configure do |c|
-  c.tracing.instrument :shoryuken, options
+  c.tracing.instrument :shoryuken, **options
 end
 ```
 
-ここで、`options` はオプションの `Hash` であり、次のパラメーターを受け入れます。
+`options` は以下のキーワード引数です。
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
@@ -1896,11 +1982,11 @@ Sidekiq インテグレーションは、クライアント側とサーバー側
 require 'ddtrace'
 
 Datadog.configure do |c|
-  c.tracing.instrument :sidekiq, options
+  c.tracing.instrument :sidekiq, **options
 end
 ```
 
-ここで、`options` はオプションの `Hash` であり、次のパラメーターを受け入れます。
+`options` は以下のキーワード引数です。
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
@@ -1912,7 +1998,7 @@ end
 
 Sinatra インテグレーションは、リクエストとテンプレートのレンダリングをトレースします。
 
-トレースクライアントの使用を開始するには、`sinatra` または `sinatra/base` の後で、かつアプリケーション/ルートを定義する前に、 `ddtrace` と `use :sinatra` を必ずインポートします。
+トレースクライアントの使用を開始するには、`sinatra` または `sinatra/base` の後で、かつアプリケーション/ルートを定義する前に、 `ddtrace` と `instrument :sinatra` を必ずインポートします。
 
 #### クラシックアプリケーション
 
@@ -1921,7 +2007,7 @@ require 'sinatra'
 require 'ddtrace'
 
 Datadog.configure do |c|
-  c.tracing.instrument :sinatra, options
+  c.tracing.instrument :sinatra, **options
 end
 
 get '/' do
@@ -1936,20 +2022,16 @@ require 'sinatra/base'
 require 'ddtrace'
 
 Datadog.configure do |c|
-  c.tracing.instrument :sinatra, options
+  c.tracing.instrument :sinatra, **options
 end
 
 class NestedApp < Sinatra::Base
-  register Datadog::Tracing::Contrib::Sinatra::Tracer
-
   get '/nested' do
     'Hello from nested app!'
   end
 end
 
 class App < Sinatra::Base
-  register Datadog::Tracing::Contrib::Sinatra::Tracer
-
   use NestedApp
 
   get '/' do
@@ -1958,11 +2040,9 @@ class App < Sinatra::Base
 end
 ```
 
-ネストされたアプリケーションをマウントする前に、ミドルウェアとして `Datadog::Tracing::Contrib::Sinatra::Tracer` を確実に登録します。
-
 #### インスツルメンテーションオプション
 
-`options` はオプションの `Hash` であり、次のパラメーターを受け入れます。
+`options` は以下のキーワード引数です。
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
@@ -1980,17 +2060,37 @@ Sneakers インテグレーションは、ジョブの実行をトレースす�
 require 'ddtrace'
 
 Datadog.configure do |c|
-  c.tracing.instrument :sneakers, options
+  c.tracing.instrument :sneakers, **options
 end
 ```
 
-ここで、`options` はオプションの `Hash` であり、次のパラメーターを受け入れます。
+`options` は以下のキーワード引数です。
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
 | `enabled` | Sneakers をトレースするかどうかを定義します。トレースを一時的に無効にしたい場合に役立ちます。`true` または `false` | `true` |
 | `tag_body` | ジョブメッセージのタグ付けを有効にします。オンの場合は `true`、オフの場合は `false` です。 | `false` |
 | `error_handler` | ジョブでエラーが発生したときに呼び出されるカスタムエラーハンドラー。引数として `span` と `error` が指定されます。デフォルトでスパンにエラーを設定します。一時的なエラーを無視したい場合に役立ちます。 | `proc { |スパン、エラー| span.set_error(error) unless span.nil? }` |
+
+### Stripe
+
+Stripe インテグレーションは、Stripe API リクエストをトレースします。
+
+`Datadog.configure` で有効にできます。
+
+```ruby
+require 'ddtrace'
+
+Datadog.configure do |c|
+  c.tracing.instrument :stripe, **options
+end
+```
+
+`options` は以下のキーワード引数です。
+
+| キー | 説明 | デフォルト |
+| --- | ----------- | ------- |
+| `enabled` | Stripe をトレースするかどうかを定義します。トレースを一時的に無効にしたい場合に役立ちます。`true` または `false` | `true` |
 
 ### Sucker Punch
 
@@ -2027,8 +2127,8 @@ end
 |---------------------------------------------------------|--------------------------------|-------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Global**                                              |                                |                                                                   |                                                                                                                                                                                                                                           |
 | `agent.host`                                            | `DD_AGENT_HOST`                | `127.0.0.1`                                                       | トレースデータの送信先となる Agent のホスト名。                                                                                                                                                                                       |
-| `agent.port`                                            | `DD_TRACE_AGENT_PORT`          | `8126`                                                            | トレースデータの送信先となる Agent ホストのポート。                                                                                                                                                                                      |
-|                                                         | `DD_TRACE_AGENT_URL`           | `nil`                                                             | トレースが送信される URL のエンドポイントを設定します。`agent.host` と `agent.port` よりも優先されます。                                                                                                                                             |
+| `agent.port`                                            | `DD_TRACE_AGENT_PORT`          | `8126`                                                            | トレースデータの送信先となる Agent ホストのポートです。[Agent 構成](#configuring-trace-data-ingestion)で `receiver_port` や `DD_APM_RECEIVER_PORT` をデフォルトの `8126` 以外に設定した場合、`DD_TRACE_AGENT_PORT` や `DD_TRACE_AGENT_URL` をそれに合わせなければなりません。         |
+|                                                         | `DD_TRACE_AGENT_URL`           | `nil`                                                             | トレースが送信される URL のエンドポイントを設定します。`agent.host` と `agent.port` よりも優先されます。[Agent 構成](#configuring-trace-data-ingestion)で `receiver_port` や `DD_APM_RECEIVER_PORT` をデフォルトの `8126` 以外に設定した場合、`DD_TRACE_AGENT_PORT` や `DD_TRACE_AGENT_URL` をそれに合わせなければなりません。                |
 | `diagnostics.debug`                                     | `DD_TRACE_DEBUG`               | `false`                                                           | デバッグモードの有効/無効を設定します。詳細なログを出力します。**本番環境やその他機密性の高い環境では推奨しません。**詳細は、[デバッグと診断](#debugging-and-diagnostics)を参照してください。                                    |
 | `diagnostics.startup_logs.enabled`                      | `DD_TRACE_STARTUP_LOGS`        | `nil`                                                             | 起動時の設定や診断結果をログに出力します。アプリケーションの起動時にトレースの状態を確認するためです。詳しくは、[デバッグと診断](#debugging-and-diagnostics)を参照してください。                                                 |
 | `env`                                                   | `DD_ENV`                       | `nil`                                                             | アプリケーション環境。(例: `production`、`staging` など) この値はすべてのトレースにタグとして設定されます。                                                                                                                              |
@@ -2036,10 +2136,12 @@ end
 | `tags`                                                  | `DD_TAGS`                      | `nil`                                                             | カスタムタグを `,` で区切った値のペアで指定します (例: `layer:api,team:intake`) これらのタグは全てのトレースに対して設定されます。詳しくは [環境とタグ](#environment-and-tags)を参照してください。                                                          |
 | `time_now_provider`                                     |                                | `->{ Time.now }`                                                  | 時刻の取得方法を変更します。詳しくは、[タイムプロバイダーの設定](#Setting the time provider)を参照してください。                                                                                                                              |
 | `version`                                               | `DD_VERSION`                   | `nil`                                                             | アプリケーションのバージョン (例: `2.5`、`202003181415`、`1.3-alpha` など) この値は、すべてのトレースにタグとして設定されます。                                                                                                                        |
+| `telemetry.enabled`                                     | `DD_INSTRUMENTATION_TELEMETRY_ENABLED` | `false`                                                             | Datadog へのテレメトリーデータの送信を有効にすることができます。将来のリリースでは、[こちら](https://docs.datadoghq.com/tracing/configure_data_security/#telemetry-collection)のドキュメントにあるように、デフォルトで `true` に設定される予定です。                                                                                                                                                                                          |
 | **Tracing**                                             |                                |                                                                   |                                                                                                                                                                                                                                           |
 | `tracing.analytics.enabled`                             | `DD_TRACE_ANALYTICS_ENABLED`   | `nil`                                                             | トレース解析の有効/無効を設定します。詳しくは、[サンプリング](#sampling)を参照してください。                                                                                                                                                          |
-| `tracing.distributed_tracing.propagation_extract_style` | `DD_PROPAGATION_STYLE_EXTRACT` | `['Datadog','B3','B3 single header']`                             | 抽出する分散型トレーシングヘッダーフォーマット。詳しくは、[分散型トレーシング](#distributed-tracing)を参照してください。                                                                                                                          |
-| `tracing.distributed_tracing.propagation_inject_style`  | `DD_PROPAGATION_STYLE_INJECT`  | `['Datadog']`                                                     | 挿入する分散型トレーシングヘッダーフォーマット。詳しくは、[分散型トレーシング](#distributed-tracing)を参照してください。                                                                                                                           |
+| `tracing.distributed_tracing.propagation_extract_style` | `DD_TRACE_PROPAGATION_STYLE_EXTRACT` | `['Datadog','b3multi','b3']` | 抽出する分散型トレーシング伝播フォーマット。`DD_TRACE_PROPAGATION_STYLE` をオーバーライドします。詳しくは、[分散型トレーシング](#distributed-tracing)を参照してください。                                                                             |
+| `tracing.distributed_tracing.propagation_inject_style`  | `DD_TRACE_PROPAGATION_STYLE_INJECT`  | `['Datadog']`                                                     | 挿入する分散型トレーシング伝播フォーマット。`DD_TRACE_PROPAGATION_STYLE` をオーバーライドします。詳しくは、[分散型トレーシング](#distributed-tracing)を参照してください。                                                                              |
+| `tracing.distributed_tracing.propagation_style`         | `DD_TRACE_PROPAGATION_STYLE` | `nil` | 抽出および挿入する分散型トレーシング伝播フォーマット。詳しくは、[分散型トレーシング](#distributed-tracing)を参照してください。 |
 | `tracing.enabled`                                       | `DD_TRACE_ENABLED`             | `true`                                                            | トレースの有効/無効を設定します。`false` に設定すると、インスツルメンテーションは実行されますが、トレース Agent にトレースが送信されません。                                                                                                                 |
 | `tracing.instrument(<integration-name>, <options...>)`  |                                |                                                                   | 特定のライブラリのインスツルメンテーションを有効にします。詳細は、[インテグレーションのインスツルメンテーション](#integration-instrumentation)を参照してください。                                                                                                       |
 | `tracing.log_injection`                                 | `DD_LOGS_INJECTION`            | `true`                                                            | [トレース相関](#trace-correlation)の情報があれば、Rails のログに挿入します。デフォルトのロガー (`ActiveSupport::TaggedLogging`)、`lograge`、`semantic_logger` をサポートします。                                                   |
@@ -2048,6 +2150,7 @@ end
 | `tracing.sampler`                                       |                                | `nil`                                                             | 高度な使用方法のみ。カスタムの `Datadog::Tracing::Sampling::Sampler` インスタンスを設定します。指定された場合、トレーサーはこのサンプラーを使用してサンプリングの動作を決定します。詳しくは [アプリケーション側サンプリング](#application-side-sampling) を参照してください。 |
 | `tracing.sampling.default_rate`                         | `DD_TRACE_SAMPLE_RATE`         | `nil`                                                             | トレースのサンプリングレートを `0.0` (0%) と `1.0` (100%) の間で設定します。詳しくは [アプリケーション側サンプリング](#application-side-sampling)を参照してください。                                                                                                  |
 | `tracing.sampling.rate_limit`                           | `DD_TRACE_RATE_LIMIT`          | `100` (毎秒)                                                | サンプリングするトレースの最大数/秒を設定します。トラフィック急増時の取り込み量オーバーを回避するためのレート制限を設定します。                                                                    |
+| `tracing.sampling.span_rules`                           | `DD_SPAN_SAMPLING_RULES`、`ENV_SPAN_SAMPLING_RULES_FILE` | `nil`                                    | [シングルスパンサンプリング](#single-span-sampling)ルールを設定します。これらのルールにより、それぞれのトレースがドロップされた場合でもスパンを保持することができます。                                                                                              |
 | `tracing.report_hostname`                               | `DD_TRACE_REPORT_HOSTNAME`     | `false`                                                           | トレースにホスト名タグを追加します。                                                                                                                                                                                                              |
 | `tracing.test_mode.enabled`                             | `DD_TRACE_TEST_MODE_ENABLED`   | `false`                                                           | テストスイートでトレースを使用するための、テストモードを有効または無効にします。                                                                                                                                                                         |
 | `tracing.test_mode.trace_flush`                         |                                | `nil`                                                             | トレースフラッシュの動作を決定するオブジェクト。                                                                                                                                                                                           |
@@ -2126,26 +2229,7 @@ Datadog.configure { |c| c.diagnostics.startup_logs.enabled = true }
 
 ### サンプリング
 
-#### アプリケーション側サンプリング
-
-トレース Agent はトレースをサンプリングして帯域幅の使用量を減らしていますが、アプリケーション側サンプリングはパフォーマンスのオーバーヘッドを減らします。
-
-デフォルトのサンプリングレートは、`0.0` (0%) と `1.0` (100%) の間で設定することが可能です。Datadog に送信されるトレースの量を制御するために、レートを構成します。この構成がされていない場合、Datadog Agent は、1 秒あたり 10 トレースのデフォルトサンプリングレートを配布します。
-
-この値は `DD_TRACE_SAMPLE_RATE` または `Datadog.configure { |c| c.tracing.sampling.default_rate = <value> }` によって設定します。
-
-また、独自のサンプラーを用意することもできます。`Datadog::Tracing::Sampling::RateSampler` は、トレースの比率を指定してサンプリングします。例:
-
-```ruby
-# サンプリングレートは 0（何もサンプリングされない）から 1（すべてサンプリングされる）の間です。
-sampler = Datadog::Tracing::Sampling::RateSampler.new(0.5) #トレースの 50% をサンプリングします
-
-Datadog.configure do |c|
-  c.tracing.sampler = sampler
-end
-```
-
-これらの設定の詳細については、[追加構成](#additional-configuration)を参照してください。
+利用可能なすべてのサンプリングオプションの一覧は、[取り込みメカニズム](https://docs.datadoghq.com/tracing/trace_pipeline/ingestion_mechanisms/?tab=ruby)を参照してください。
 
 #### 優先度サンプリング
 
@@ -2191,6 +2275,33 @@ trace.reject!
 # トレースを保持します
 trace.keep!
 ```
+
+#### シングルスパンサンプリング
+
+トレースレベルのサンプリングルールによってそれぞれのトレースが削除されてもスパンを保持することができるサンプリングルールを構成することができます。
+
+[//]: # (TODO: See <Single Span Sampling documentation URL here> for the full documentation on Single Span Sampling.)
+
+#### アプリケーション側サンプリング
+
+Datadog Agent はトレースをサンプリングして帯域幅の使用量を減らしていますが、アプリケーション側サンプリングはホストアプリケーションのパフォーマンスのオーバーヘッドを減らします。
+
+**アプリケーション側のサンプリングは、できるだけ早い段階でトレースをドロップします。これにより、[Ingestion Controls](https://docs.datadoghq.com/tracing/trace_pipeline/ingestion_controls/) ページは、正確なサンプリング レートを報告するのに十分な情報を受け取れなくなります。トレースのオーバーヘッドを減らすことが最重要である場合にのみ使用してください。**
+
+この機能をご利用の方は、[GitHub で問題を開く](https://github.com/DataDog/dd-trace-rb/issues/new)ことでお知らせいただければ、お客様の使用例をよりよく理解し、サポートすることができます。
+
+以下の設定で*アプリケーション側サンプリング*を構成することができます。
+
+```ruby
+# アプリケーション側サンプリングが有効です。Ingestion Controls ページが不正確になります。
+sampler = Datadog::Tracing::Sampling::RateSampler.new(0.5) # トレースの 50% をサンプリングします
+
+Datadog.configure do |c|
+  c.tracing.sampler = sampler
+end
+```
+
+これらの設定の詳細については、[追加構成](#additional-configuration)を参照してください。
 
 ### 分散型トレーシング
 
@@ -2294,30 +2405,25 @@ Service C:
   Priority:  1
 ```
 
-**分散型ヘッダーフォーマット**
+#### 分散型ヘッダーフォーマット
 
 トレースは以下の分散型トレースフォーマットをサポートします。
 
- - `Datadog::Tracing::Configuration::Ext::Distributed::PROPAGATION_STYLE_DATADOG` (デフォルト)
- - `Datadog::Tracing::Configuration::Ext::Distributed::PROPAGATION_STYLE_B3`
- - `Datadog::Tracing::Configuration::Ext::Distributed::PROPAGATION_STYLE_B3_SINGLE_HEADER`
+ - `Datadog`: **デフォルト**
+ - `b3multi`: [B3 マルチヘッダー](https://github.com/openzipkin/b3-propagation#multiple-headers)
+ - `b3`: [B3 シングルヘッダー](https://github.com/openzipkin/b3-propagation#single-header)
+ - `tracecontext`: [W3C Trace Context](https://www.w3.org/TR/trace-context/)
+ - `none`: ノーオペレーション。
 
 これらのフォーマットの使用は `Datadog.configure` で有効/無効を切り替えることができます。
 
 ```ruby
 Datadog.configure do |c|
-  # 抽出すべきヘッダーフォーマットの一覧
-  c.tracing.distributed_tracing.propagation_extract_style = [
-    Datadog::Tracing::Configuration::Ext::Distributed::PROPAGATION_STYLE_DATADOG,
-    Datadog::Tracing::Configuration::Ext::Distributed::PROPAGATION_STYLE_B3,
-    Datadog::Tracing::Configuration::Ext::Distributed::PROPAGATION_STYLE_B3_SINGLE_HEADER
+  # 抽出すべきヘッダーフォーマットのリスト
+  c.tracing.distributed_tracing.propagation_extract_style = [ 'tracecontext', 'Datadog', 'b3' ]
 
-  ]
-
-  # 挿入すべきヘッダーフォーマットの一覧
-  c.tracing.distributed_tracing.propagation_inject_style = [
-    Datadog::Tracing::Configuration::Ext::Distributed::PROPAGATION_STYLE_DATADOG
-  ]
+  # 挿入すべきヘッダーフォーマットのリスト
+  c.tracing.distributed_tracing.propagation_inject_style = [ 'tracecontext', 'Datadog' ]
 end
 ```
 
@@ -2527,7 +2633,7 @@ end
 Datadog.configure do |c|
   c.tracing.transport_options = proc { |t|
     # ホスト名、ポート、追加オプション。:timeout は秒単位です。
-    t.adapter :net_http, '127.0.0.1', 8126, { timeout: 1 }
+    t.adapter :net_http, '127.0.0.1', 8126, timeout: 30
   }
 end
 ```

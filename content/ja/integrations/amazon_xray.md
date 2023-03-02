@@ -34,7 +34,7 @@ AWS X-Ray を使用すると、開発者は AWS 製品を使用して構築さ�
 
 ### インストール
 
-最初に、[AWS インテグレーションを有効化][3]し、以下のアクセス許可が AWS/Datadog ロールのポリシードキュメントに含まれていることを確認します。
+最初に、[AWS インテグレーションを有効化][3]し、以下のアクセス許可が Datadog インテグレーションロールのポリシードキュメントに含まれていることを確認します。
 
 ```text
 xray:BatchGetTraces,
@@ -43,7 +43,7 @@ xray:GetTraceSummaries
 
 `GetTraceSummaries` アクセス許可は、最新のトレースのリストを取得するために使用されます。`BatchGetTraces` は、実際にトレース全体を返します。
 
-次に、[Datadog 内で X-Ray インテグレーションを有効にします][4]。
+次に、Datadog 内で [X-Ray インテグレーションを有効にします][4]。
 
 [カスタマーマスターキー (CMK)][5] を使用してトレースを暗号化している場合は、X-Ray に使用される CMK がリソースとなっているポリシーに `kms:Decrypt` メソッドを追加してください。
 
@@ -52,7 +52,7 @@ xray:GetTraceSummaries
 ### 関数の AWS X-Ray を有効化する
 
 1. AWS の指示に従い、[Lambda 関数][6]と [API Gateway][7] で X-Ray トレースを有効にしてください。
-2. AWS X-Ray とのインテグレーションを最大限に活用するために、[Lambda 関数に X-Ray SDK をインストール][8]します。
+2. AWS X-Ray とのインテグレーションを最大限に活用するために、Lambda 関数に [X-Ray SDK をインストール][8]します。
 
 ### Datadog による X-Ray トレースのリッチ化
 
@@ -68,7 +68,7 @@ AWS X-Ray インテグレーションは、AWS からトレースデータを取
 [1]: http://app.datadoghq.com/functions
 [2]: https://docs.datadoghq.com/ja/serverless/
 [3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[4]: https://app.datadoghq.com/account/settings#integrations/amazon_xray
+[4]: https://app.datadoghq.com/integrations/amazon-xray
 [5]: https://docs.aws.amazon.com/whitepapers/latest/kms-best-practices/customer-master-keys.html
 [6]: https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html
 [7]: https://docs.aws.amazon.com/xray/latest/devguide/xray-services-apigateway.html

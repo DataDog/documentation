@@ -20,6 +20,9 @@ further_reading:
 - link: /agent/kubernetes/tag
   tag: ドキュメント
   text: コンテナから送信された全データにタグを割り当て
+- link: https://www.datadoghq.com/blog/monitor-vsphere-tanzu-kubernetes-grid-with-datadog/
+  tag: ブログ
+  text: vSphere 上の Tanzu Kubernetes Grid を監視する
 kind: documentation
 title: Kubernetes ディストリビューション
 ---
@@ -35,6 +38,7 @@ title: Kubernetes ディストリビューション
 * [Red Hat OpenShift](#Openshift)
 * [Rancher](#Rancher)
 * [Oracle Container Engine for Kubernetes (OKE)](#OKE)
+* [vSphere Tanzu Kubernetes Grid (TKG)](#TKG)
 
 ## AWS Elastic Kubernetes Service (EKS) {#EKS}
 
@@ -102,12 +106,7 @@ datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
   kubelet:
-    host:
-      valueFrom:
-        fieldRef:
-          fieldPath: spec.nodeName
-    hostCAPath: /etc/kubernetes/certs/kubeletserver.crt
-    tlsVerify: false # Agent 7.35 で必須となりました。注意事項参照。
+    tlsVerify: false # Agent 7.35 で必須になりました。注意事項をご覧ください。
 ```
 
 {{% /tab %}}
@@ -127,11 +126,7 @@ spec:
   agent:
     config:
       kubelet:
-        host:
-          fieldRef:
-            fieldPath: spec.nodeName
-        hostCAPath: /etc/kubernetes/certs/kubeletserver.crt
-        tlsVerify: false # Agent 7.35 で必須となりました。注意事項参照。
+        tlsVerify: false # Agent 7.35 で必須になりました。注意事項をご覧ください。
   clusterAgent:
     image:
       name: "gcr.io/datadoghq/cluster-agent:latest"
@@ -156,6 +151,14 @@ spec:
     - name: DD_KUBELET_TLS_VERIFY
       value: "false"
   ```
+- AKS 上の Admission Controller の関数では、Webhook の照合時にエラーが発生しないように、セレクターの追加を構成する必要があります。
+
+```yaml
+clusterAgent:
+  env:
+    - name: "DD_ADMISSION_CONTROLLER_ADD_AKS_SELECTORS"
+      value: "true"
+```
 
 ## Google Kubernetes Engine (GKE) {#GKE}
 
@@ -170,7 +173,9 @@ GKE は 2 つの異なる運用モードで構成することができます:
 
 Agent 7.26 以降では、GKE 向けの特殊なコンフィギュレーションは不要です (`Docker` または `containerd` をお使いの場合)。
 
-**注**: COS (Container Optimized OS) をお使いの場合、Kernel  ヘッダーがないため eBPF ベースの `OOM Kill` および `TCP Queue Length` チェックはサポートされません。
+**注**: COS (Container Optimized OS) を使用する場合、eBPF ベースの `OOM Kill` と `TCP Queue Length` チェックが Helm チャートのバージョン 3.0.1 以降でサポートされるようになりました。これらのチェックを有効にするには、以下の設定を行います。
+- `datadog.systemProbe.enableDefaultKernelHeadersPaths` を `false` にします。
+- `datadog.systemProbe.enableKernelHeaderDownload` を `true` にします。
 
 ### Autopilot
 
@@ -196,6 +201,7 @@ datadog:
   # 新しい `kubernetes_state_core` における kube-state-metrics のデプロイは不要。
   kubeStateMetricsEnabled: false
 
+agents:
   containers:
     agent:
       # Agent コンテナのリソース
@@ -481,6 +487,75 @@ spec:
 
 その他の `values.yaml` のサンプルは [Helm チャートリポジトリ][1]を、
 その他の `DatadogAgent` サンプルは [Datadog Operator リポジトリ][2]をご覧ください。
+
+## vSphere Tanzu Kubernetes Grid (TKG) {#TKG}
+
+TKG では、以下に示すような小さな構成変更が必要です。例えば、コントローラが `master` ノード上の Node Agent をスケジュールするために、許容量を設定することが必要です。
+
+
+{{< tabs >}}
+{{% tab "Helm" %}}
+
+カスタム `values.yaml`:
+
+```yaml
+datadog:
+  apiKey: <DATADOG_API_KEY>
+  appKey: <DATADOG_APP_KEY>
+  kubelet:
+    # Kubelet の証明書は自己署名なので、tlsVerify を false に設定します
+    tlsVerify: false
+  # `kube-state-metrics` 依存性チャートのインストールを無効化します。
+  kubeStateMetricsEnabled: false
+  # 新しい `kubernetes_state_core` のチェックを有効にします。
+  kubeStateMetricsCore:
+    enabled: true
+# コントロールプレーンノードで Agent をスケジュールできるように許容範囲を追加します。
+agents:
+  tolerations:
+    - key: node-role.kubernetes.io/master
+      effect: NoSchedule
+```
+
+{{% /tab %}}
+{{% tab "Operator" %}}
+
+DatadogAgent Kubernetes Resource:
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  credentials:
+    apiSecret:
+      secretName: datadog-secret
+      keyName: api-key
+    appSecret:
+      secretName: datadog-secret
+      keyName: app-key
+  features:
+    # 新しい `kubernetes_state_core` のチェックを有効にします。
+    kubeStateMetricsCore:
+      enabled: true
+  agent:
+    config:
+      kubelet:
+        # Kubelet の証明書は自己署名なので、tlsVerify を false に設定します
+        tlsVerify: false
+      # コントロールプレーンノードで Agent をスケジュールできるように許容範囲を追加します。
+      tolerations:
+        - key: node-role.kubernetes.io/master
+          effect: NoSchedule
+  clusterAgent:
+    config:
+      collectEvents: true
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

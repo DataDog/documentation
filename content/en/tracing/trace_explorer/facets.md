@@ -3,25 +3,26 @@ title: Span Facets
 kind: documentation
 description: 'Trace Facets and Facet Panel'
 further_reading:
-    - link: 'tracing/trace_explorer/'
-      tag: 'Documentation'
-      text: 'Trace Explorer'
+- link: 'tracing/trace_explorer/'
+  tag: 'Documentation'
+  text: 'Learn about the Trace Explorer'
 ---
 
 ## Overview
 
-Facets are user-defined tags and attributes from your spans. They are useful for both qualitative and quantitative data analysis. You can use facets in the Trace Explorer to:
+Facets are user-defined tags and attributes from your spans. They are useful for both [qualitative](#qualitative-facets) and [quantitative](#quantitative-facets-measures) data analysis. Facets allow you to manipulate spans in your [Trace Analytics monitors][3], and in APM queries that appear on [dashboards][4] and in [notebooks][5].
+
+The [Trace Explorer][6] includes out-of-the-box facets such as `Status` and `Service`. You can use facets in the Trace Explorer to:
 
 - [Search for and filter spans][1]
 - Perform trace analytics
+- Start troubleshooting once your spans are ingested
 
-Facets also allow you to manipulate spans in your [trace analytics monitors][3], and in APM queries that appear on [dashboards][4] and in [notebooks][5].
-
-{{< img src="tracing/trace_explorer/facets/facet_panel.png" alt="Facets panel" style="width:80%;">}}
+{{< img src="tracing/trace_explorer/facets/facet_panel.png" alt="The Facets panel in the Trace Explorer" style="width:90%;">}}
 
 {{< site-region region="us,eu,us3,us5" >}}
 
-**Note**: [Creating facets](#creating-facets) is not required to [search spans][1], to [generate metrics from spans][2], or to [index spans with retention filters][3]. In all these contexts, autocomplete capabilities do use existing facets, but also any input that matches incoming spans also works.
+[Creating facets](#creating-facets) is **not required** for [searching spans][1], [generating metrics from spans][2], or [indexing spans with retention filters][3]. In these contexts, autocomplete capabilities use existing facets, but also any input that matches incoming spans applies.
 
 [1]: /tracing/trace_explorer/search
 [2]: /tracing/trace_pipeline/generate_metrics
@@ -32,11 +33,12 @@ Facets also allow you to manipulate spans in your [trace analytics monitors][3],
 ### Qualitative facets
 
 Use qualitative facets when you need to:
+
 - **Get relative insights** for values. For example, create a facet on a `datacenter` span tag to scope down the investigation to one specific region when slow requests are detected.
 - **Count unique values**. For example, create a facet on `usr.email` to see how many distinct users experience errors while loading a specific resource.
 - Frequently **filter** your spans against particular values. For example, create a facet on an environment tag to scope troubleshooting down to development, staging, or production environments.<br>
 
-  **Note:** Although facets are not required for filtering on tags, defining facets for tags that you often use during investigations can help reduce your time to resolution.
+**Note:** Although facets are not required for filtering on tags, defining facets for tags that you often use during investigations can help reduce your time to resolution.
 
 ### Quantitative facets (measures)
 
@@ -82,38 +84,32 @@ Hiding facets is specific to your own troubleshooting context and does not impac
 
 ### Grouping facets
 
-Facets are grouped into meaningful themes, to ease navigation in the facet list. Assigning or reassigning a group for a facet (see [Managing facets](#managing-facets)) affects only the facet list, and has no impact on search and analytics.
+Facets are grouped into meaningful themes in the facet list. Assigning or reassigning a group for a facet affects only the facet list, and has no impact on search or analytics.
 
 {{< img src="tracing/trace_explorer/facets/group_facets.png" alt="Group Facets" style="width:30%;">}}
 
 ### Filtering facets
 
-Use the search facets box on the facet panel to scope the whole facet list and navigate more quickly to the one facet you need to interact with. Search facets uses both facet display name and facet field name to scope results.
+Use the search facets box on the facet panel to scope the whole facet list and navigate more quickly to the one facet you need to interact with. Search facets uses the facet display name and field name to scope results.
 
 {{< img src="tracing/trace_explorer/facets/filter_facets.png" alt="Search Facet" style="width:30%;">}}
 
-## Managing facets
+## Creating facets
 
-### Out-of-the-box facets
+Creating a facet on a span attribute/tag is not a mandatory step to search for spans. Facets are useful if you wish to add a meaningful description to a specific span attribute, or if you want the span attribute values to appear on the Facet list on the left-hand side of the span list.
 
-Most common facets such as `Status` and `Service` come out-of-the-box, so you can start troubleshooting right away once your spans are ingested.
+### Creating facets from the trace side panel
 
-### Creating facets
-
-As a matter of good practice, consider reusing an existing facet rather than creating a new one. Using a single facet for information of a similar nature fosters cross-team collaboration.
-
-#### Creating facets from the trace side panel
-
-The easiest way to create a facet is to add it from the trace side panel, so that most of the facet details (field path, underlying type) are pre-filled. Navigate in the [Trace Explorer][1] a span of interest that contains the field to create a facet on. Open the trace side-panel for this span by selecting the span from the list. Click on the desired field (either in span tags or in infrastructure tags) and create a facet from there:
+The easiest way to create a facet is to add it from the trace side panel so that most of the facet details (such as the field path and underlying type) are pre-filled. In the [Trace Explorer][1], navigate to a span of interest that contains the field to create a facet on. Open the trace side-panel for this span by selecting the span from the list. Click on the desired field (either in span tags or in infrastructure tags) and create a facet from there:
 
 - If the field has a numerical value, you can create either a facet or a measure.
 - If the field has a string value, only facet creation is available.
 
 {{< img src="tracing/trace_explorer/facets/create_facet.png" alt="Add Facet from tags" style="width:50%;">}}
 
-#### Creating facets from the facet list
+### Creating facets from the facet list
 
-If finding a span that has the desired field is not an option, create a facet directly from the facet panel by clicking _+ Add_.
+If finding a span that has the desired field is not an option, create a facet directly from the facet panel by clicking **+ Add**.
 
 Define the underlying field (key) name for this facet:
 
@@ -130,6 +126,7 @@ Autocomplete based on the content in spans of the current views helps you to def
 
 [1]: /tracing/trace_explorer/query_syntax/
 [2]: /tracing/trace_explorer/group/
-[3]: /monitors/create/types/apm/?tab=analytics
+[3]: /monitors/types/apm/?tab=analytics
 [4]: /dashboards/widgets/
 [5]: /notebooks/
+[6]: /tracing/trace_explorer/

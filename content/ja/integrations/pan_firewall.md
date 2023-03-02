@@ -1,45 +1,64 @@
 ---
+app_id: pan-firewall
+app_uuid: 1e4b89ef-f66e-4c78-8cb3-70a222a1fcb4
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Palo Alto Networks Firewall Overview: assets/dashboards/palo_alto_networks_firewall_overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    process_signatures: []
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Palo Alto Networks Firewall
   logs:
     source: pan.firewall
-  metrics_metadata: metadata.csv
-  monitors: {}
   saved_views:
     Authentication Protocol: assets/saved_views/top_ips_flagged_in_high_severity_threats.json
     High Severity Issues: assets/saved_views/all_high_severity_issues.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - ログの収集
 - security
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/pan_firewall/README.md
-display_name: Palo Alto Networks Firewall
+display_on_public_website: true
 draft: false
 git_integration_title: pan_firewall
-guid: f7f2aa4b-cb93-4406-975d-3a282fef6d0e
 integration_id: pan-firewall
 integration_title: Palo Alto Networks Firewall
 integration_version: 1.1.0
 is_public: true
 kind: integration
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: pan.firewall
-metric_to_check: ''
+manifest_version: 2.0.0
 name: pan_firewall
-process_signatures: []
-public_title: Palo Alto Networks Firewall インテグレーション
+oauth: {}
+public_title: Palo Alto Networks Firewall
 short_description: Palo Alto Networks Firewall ログイベント
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Log Collection
+  - Category::Security
+  configuration: README.md#Setup
+  description: Palo Alto Networks Firewall ログイベント
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Palo Alto Networks Firewall
 ---
 
 
@@ -60,7 +79,7 @@ Datadog の Alto Networks Firewall ログインテグレーションにより、
 
 ## セットアップ
 
-### ログの収集 
+### ログの収集
 
  1. ファイアウォールが到達可能でインターネットに接続できるマシンに [Datadog Agent をインストール][1]します。
  2. PanOS で、Device >> Server Profiles >> Syslog を選択し、サーバープロファイルの名前を追加します。Syslog ログ転送[コンフィギュレーション手順][2]に従います。以下と同じ手順です。
@@ -124,9 +143,14 @@ PANOS インテグレーションには、サービスのチェック機能は�
 - [ログの種類とフィールド][5]
 - [ログ収集のドキュメント][6]
 
+## トラブルシューティング
+
+ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://www.youtube.com/watch?v=LOPXg0oCMPs
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/?tab=agentv6v7
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [5]: https://docs.paloaltonetworks.com/pan-os/9-1/pan-os-admin/monitoring/use-syslog-for-monitoring/syslog-field-descriptions
 [6]: https://docs.datadoghq.com/ja/logs/log_collection/?tab=tailexistingfiles#getting-started-with-the-agent
+[7]: https://docs.datadoghq.com/ja/help/

@@ -1,31 +1,53 @@
 ---
+app_id: reboot-required
+app_uuid: 673a1136-68ad-46f4-ba6f-4203df10db6a
 assets:
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: 再起動が必要です。
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Reboot required
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: support@krugerheavyindustries.com
+  support_email: support@krugerheavyindustries.com
 categories:
-- os & system
-creates_events: false
+- os system
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/reboot_required/README.md
-display_name: Reboot required
+display_on_public_website: true
 draft: false
 git_integration_title: reboot_required
-guid: e7eed0e7-0acd-47c9-b684-3190828517ce
 integration_id: reboot-required
 integration_title: Reboot Required
 integration_version: 1.0.0
 is_public: true
 kind: インテグレーション
-maintainer: support@krugerheavyindustries.com
-manifest_version: 1.0.0
+manifest_version: 2.0.0
 name: reboot_required
+oauth: {}
 public_title: Reboot Required
 short_description: ソフトウェアアップデートの後に再起動が必要なシステムを監視
-support: contrib
 supported_os:
 - linux
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Category::OS システム
+  configuration: README.md#Setup
+  description: ソフトウェアアップデートの後に再起動が必要なシステムを監視
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Reboot Required
 ---
 
 

@@ -1,7 +1,7 @@
 ---
-title: Connecting NodeJS Logs and Traces
+title: Connecting Node.js Logs and Traces
 kind: documentation
-description: 'Connect your NodeJS logs and traces to correlate them in Datadog.'
+description: 'Connect your Node.js logs and traces to correlate them in Datadog.'
 code_lang: nodejs
 type: multi-code-lang
 code_lang_weight: 50
@@ -27,6 +27,7 @@ further_reading:
 Enable injection with the environment variable `DD_LOGS_INJECTION=true` or by configuring the tracer directly:
 
 ```javascript
+// This line must come before importing the logger.
 const tracer = require('dd-trace').init({
     logInjection: true
 });
@@ -34,7 +35,7 @@ const tracer = require('dd-trace').init({
 
 This enables automatic trace ID injection for `bunyan`, `paperplane`, `pino`, and `winston`.
 
-If you haven't done so already, configure the NodeJS tracer with `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`. This will provide the best
+If you haven't done so already, configure the Node.js tracer with `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`. This will provide the best
 experience for adding `env`, `service`, and `version` (see [Unified Service Tagging][1] for more details).
 
 **Note**: Automatic injection only works for logs formatted as JSON.

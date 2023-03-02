@@ -19,20 +19,24 @@ Usage Attribution は、Enterprise プランに含まれる高度な機能です
 管理者は Datadog の Plan & Usage セクションから Usage Attribution タブにアクセスできます。Usage Attribution ページでは、以下の情報と機能が確認できます。
 
 - 使用方法が分類されている既存のタグキーを一覧表示し、新しいタグキー（最大 3 つ）を変更および追加する機能を提供します。
-- ほとんどの使用タイプの日次 `.tsv` ファイル（タブ区切り値）を生成します。
+- ほとんどの使用量タイプに対応したタブ区切り値 (TSV) ファイルを毎日生成します。
 - 毎月月末に使用方法を要約します。
-- UI および `.tsv` ダウンロードとしてデータを表示します。
+- UI および TSV ダウンロードとしてデータを表示します。
 
-以下の使用タイプはこのツールではサポートされません。
+このツールでは、以下のような多くの使用タイプがサポートされていません。
 
 - Analyzed Logs (Security)
 - インシデント管理
+- Network Flows
+- CI Spans
+
+Datadog は、以下の製品の Estimated Usage Attribution 値を提供しています。
+
 - インデックス化されたログイベント
 - 収集されたログ
 - Indexed Span
 - Ingested Span
-- Network Flows
-- リアルユーザーモニタリング (RUM)
+- リアルユーザーモニタリングの総セッション数
 
 ## はじめに
 
@@ -70,20 +74,27 @@ Usage Attribution は、Enterprise プランに含まれる高度な機能です
 - マルチオーガニゼーションを有効にすると、使用方法は親アカウントの全 Datadog オーガニゼーションが要約されます。
 - 前の月のレポートには、タイムセレクターからアクセスできます。
 - 月次レポートはその月が終わるまで生成されません。月次レポートは、翌月の 2 日には閲覧できます。
-- レポートは **Download as CSV** ボタンでダウンロードできます。この `.tsv` レポートには、使用数と使用率の両方が含まれるため、割り当てとチャージバックをシンプルに行うことができます。
+- レポートは TSV フォーマットでダウンロードできます。この TSV レポートには、使用数と使用率の両方が含まれるため、割り当てとチャージバックをシンプルに行うことができます。
 
 月次データはツールのパブリック API を使いプルすることもできます。詳細は、[API エンドポイントドキュメント][1]を参照してください。
 
+
+{{< site-region region="us,eu" >}}
 ### 日次使用属性
+
+<div class="alert alert-warning">Datadog は、2023 年 2 月 1 日に日次使用量属性レポートを非推奨とすることを計画しています。代替案として、<a href="/api/latest/usage-metering/#get-hourly-usage-attribution">1 時間ごとの使用量属性 API エンドポイント</a>を使用してください。
 
 このセクションでは、日次レポートを時間の粒度で表示し時間枠を丁寧に調べます。また指定した月のすべてのレポートを連結することもできます。
 
-- 特定の期間をクリックすると、右側でビューが展開され、そこから `.tsv` 形式のレポートをダウンロードできます。
+- 特定の期間をクリックすると、右側でビューが展開され、そこから TSV ファイルのレポートをダウンロードできます。
 - データは毎日または月末にダウンロードできます。
 
 {{< img src="account_management/billing/usage_attribution/daily-usage-attribution.png" alt="日次使用量属性データ" style="width:100%;" >}}
 
 日次データはツールのパブリック API を使いプルすることもできます。詳細は、[API エンドポイントドキュメント][2]を参照してください。
+
+[2]: https://docs.datadoghq.com/ja/api/v1/usage-metering/#get-hourly-usage-attribution
+{{< /site-region >}}
 
 ### データの解釈
 
@@ -121,10 +132,9 @@ Usage Attribution は、Enterprise プランに含まれる高度な機能です
 
 {{< img src="account_management/billing/usage_attribution/histogram-graph-tag.png" alt="インフラホストグラフのピラーの内訳" style="width:100%;" >}}
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/ja/api/v1/usage-metering/#get-monthly-usage-attribution
-[2]: https://docs.datadoghq.com/ja/api/v1/usage-metering/#get-hourly-usage-attribution
 [3]: https://docs.datadoghq.com/ja/getting_started/tagging/#defining-tags

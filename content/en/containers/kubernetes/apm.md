@@ -166,11 +166,12 @@ $ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 {{< tabs >}}
 
 {{% tab "Datadog Admission Controller" %}}
-[Datadog Admission Controller][1] is able to inject environment variables and mount the necessary volumes on new application-pods in order to configure pod and agent trace communication automatically.
+The Datadog Admission Controller is a component of the Datadog Cluster Agent that simplifies your application pod configuration. Learn more by reading the [Datadog Admission Controller documentation][1].
 
-To learn more on how to automatically configure you application to submit traces to Datadog Agent read the [Datadog Admission Controller][1] documentation.
+Use the Datadog Admission Controller to inject environment variables and mount the necessary volumes on new application pods, automatically configuring pod and Agent trace communication. Learn how to automatically configure your application to submit traces to Datadog Agent by reading the [Injecting Libraries Using Admission Controller][2] documentation.
 
 [1]: /agent/cluster_agent/admission_controller/
+[2]: /tracing/trace_collection/library_injection/
 {{% /tab %}}
 
 {{% tab "UDS" %}}
@@ -196,6 +197,10 @@ kind: Deployment
             path: /var/run/datadog/
           name: apmsocketpath
 ```
+
+### Configure your application tracers to emit traces:
+After configuring your Datadog Agent to collect traces and giving your application pods the configuration on *where* to send traces, install the Datadog tracer into your applications to emit the traces. Once this is done, the tracer sends the traces to the appropriate `DD_AGENT_HOST` (for `IP:Port`) or `DD_TRACE_AGENT_URL` (for UDS) endpoint.
+
 {{% /tab %}}
 
 
@@ -218,18 +223,15 @@ kind: Deployment
 ```
 **Note:** This configuration requires the Agent to be configured to accept traces over TCP
 
-[1]: /agent/cluster_agent/admission_controller/
+### Configure your application tracers to emit traces:
+After configuring your Datadog Agent to collect traces and giving your application pods the configuration on *where* to send traces, install the Datadog tracer into your applications to emit the traces. Once this is done, the tracer automatically sends the traces to the appropriate `DD_AGENT_HOST` (for `IP:Port`) or `DD_TRACE_AGENT_URL` (for UDS) endpoint.
 
+[1]: /agent/cluster_agent/admission_controller/
 {{% /tab %}}
 
 {{< /tabs >}}
 
-### Configure your application tracers to emit traces:
-After configuring your Datadog Agent to collect traces and giving your application pods the configuration on *where* to send traces, install the Datadog Tracer into your applications to emit the traces. Once this is done, the tracer automatically sends the traces to the relative `DD_AGENT_HOST` (for `IP:Port`) or `DD_TRACE_AGENT_URL` (for UDS) endpoint.
-
 Refer to the [language-specific APM instrumentation docs][2] for more examples.
-
-**Note:** The PHP tracer does not support sending traces over Unix Domain Socket (UDS). For updates on UDS for PHP, contact support.
 
 
 ## Agent environment variables
@@ -240,7 +242,7 @@ List of all environment variables available for tracing within the Agent running
 
 | Environment variable       | Description                                                                                                                                                                                                                                                                                                                 |
 | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `DD_API_KEY`               | [Datadog API Key][2]                                                                                                                                                                                                                                                                                                        |
+| `DD_API_KEY`               | Datadog API Key                                                                                                                                                                                                                                                                                                        |
 | `DD_PROXY_HTTPS`           | Set up the URL for the proxy to use.                                                                                                                                                                                                                                                                                        |
 | `DD_APM_REPLACE_TAGS`      | [Scrub sensitive data from your span’s tags][4].                                                                                                                                                                                                                                                                            |
 | `DD_HOSTNAME`              | Manually set the hostname to use for metrics if autodetection fails, or when running the Datadog Cluster Agent.                                                                                                                                                                                                               |
@@ -275,7 +277,7 @@ List of all environment variables available for tracing within the Agent running
 [1]: /agent/kubernetes/
 [2]: /tracing/setup/
 [3]: /getting_started/tagging/unified_service_tagging
-[4]: /tracing/guide/security/#replace-rules
+[4]: /tracing/configure_data_security#scrub-sensitive-data-from-your-spans
 [5]: /tracing/guide/setting_primary_tags_to_scope/#environment
 [6]: https://github.com/DataDog/docker-dd-agent#tracing-from-the-host
 [7]: https://docs.datadoghq.com/agent/docker/?tab=standard#environment-variables

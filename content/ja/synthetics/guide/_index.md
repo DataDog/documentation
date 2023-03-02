@@ -1,7 +1,7 @@
 ---
 aliases:
 - /ja/synthetics/faq/uptime-check-internal-website/
-disable_sidebar: true
+disable_toc: true
 kind: ガイド
 private: true
 title: Synthetic モニタリングガイド
@@ -26,7 +26,8 @@ title: Synthetic モニタリングガイド
     {{< nextlink href="synthetics/guide/synthetic-tests-caching" >}}Synthetic テストにおけるキャッシュ問題の回避{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/monitor-https-redirection" >}}HTTP リクエストの HTTPS へのリダイレクトを監視する{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/reusing-browser-test-journeys/" >}}ブラウザテストジャーニーのテストスイート全体の再利用{{< /nextlink >}}
-    {{< nextlink href="synthetics/guide/email-validation" >}}ブラウザテストによる電子メールの検証{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/custom-javascript-assertion/" >}}ブラウザテストでカスタム JavaScript アサーションを使用する{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/email-validation/" >}}ブラウザテストでの電子メールの検証{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/testing-file-upload-and-download/" >}}テストファイルのアップロードとダウンロード{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/popup/" >}}ブラウザテストでのポップアップの処理{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/recording-custom-user-agent/" >}}カスタム User-Agent を使用したステップの記録{{< /nextlink >}}
@@ -41,10 +42,12 @@ title: Synthetic モニタリングガイド
 
 {{< whatsnext desc="メトリクス:" >}}
     {{< nextlink href="synthetics/guide/monitor-usage/" >}}Synthetic モニタリングでの推定使用量メトリクスの使用{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/using-synthetic-metrics/" >}}Synthetic メトリクスをモニターで使用する{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/api_test_timing_variations/" >}}API テストのタイミングを理解し、ばらつきのトラブルシューティングを行う{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="セキュリティ:" >}}
+{{< whatsnext desc="データセキュリティ:" >}}
+     {{< nextlink href="synthetics/guide/authentication-protocols/" >}}API やマルチステップ API テストでの認証の使用{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/app-that-requires-login/" >}}認証が必要なアプリケーションを監視する{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/browser-tests-totp/" >}}ブラウザテストにおける多要素認証 (MFA) のための TOTP{{< /nextlink >}}
 {{< /whatsnext >}}

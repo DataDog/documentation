@@ -8,7 +8,7 @@ title: App Analytics
 ---
 
 <div class="alert alert-danger">
-このページは、レガシー版 App Analytics に関するコンフィギュレーション情報を伴う非推奨機能について説明します。トラブルシューティングまたは古い設定の修正に利用可能です。トレース全体を完全に制御するには、<a href="/tracing/trace_ingestion">取り込みコントロール</a>および<a href="/tracing/trace_retention">保持フィルター</a>を使用してください。
+このページは、レガシー版 App Analytics に関するコンフィギュレーション情報を伴う非推奨機能について説明します。トラブルシューティングまたは古い設定の修正に利用可能です。トレース全体を完全に制御するには、<a href="/tracing/trace_pipeline">取り込みコントロールおよび保持フィルター</a>を使用してください。
 </div>
 
 ##  新しいコンフィギュレーションオプションへの移行
@@ -68,7 +68,7 @@ App Analyticsは、Go トレースクライアントのバージョン 1.11.0 �
 
 * バージョン 1.26.0 以降は、環境変数 `DD_TRACE_ANALYTICS_ENABLED=true` を使用
 
-[1]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithAnalytics
+[1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithAnalytics
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
@@ -499,5 +499,19 @@ apm_config:
     service_B|operation_name_Z: 0.01
 ```
 
-[1]: /ja/tracing/trace_ingestion/
-[2]: /ja/tracing/trace_ingestion/mechanisms
+## トラブルシューティング: 1 秒あたりの最大イベント制限
+
+Agent ログに以下のエラーメッセージが表示される場合、アプリケーションは、デフォルトで APM で許可されている毎秒 200 件を超えるトレースイベントを発行しています。
+
+```
+Max events per second reached (current=300.00/s, max=200.00/s). Some events are now being dropped (sample rate=0.54). Consider adjusting event sampling rates.
+
+```
+
+Agent の APM レート制限を増やすには、Agent のコンフィギュレーションファイル (`apm_config:` セクションの下) 内で `max_events_per_second` 属性を構成します。コンテナ化されたデプロイメント (Docker、Kubernetes など) の場合は、`DD_APM_MAX_EPS` 環境変数を使用します。
+
+**注**: APM レート制限を増やすと、App Analytics のコストが増加する可能性があります。
+
+
+[1]: /ja/tracing/trace_pipeline/ingestion_controls/
+[2]: /ja/tracing/trace_pipeline/ingestion_mechanisms/

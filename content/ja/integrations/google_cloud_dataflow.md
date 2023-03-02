@@ -7,6 +7,10 @@ dependencies: []
 description: Google Cloud Dataflow のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_dataflow/
 draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/monitor-dataflow-pipelines-with-datadog/
+  tag: ブログ
+  text: Datadog による Dataflow パイプラインの監視
 git_integration_title: google_cloud_dataflow
 has_logo: true
 integration_id: google-cloud-dataflow
@@ -15,6 +19,8 @@ integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
+monitors:
+  job-backlog-time: assets/monitors/backlog_monitor.json
 name: google_cloud_dataflow
 public_title: Datadog-Google Cloud Dataflow インテグレーション
 short_description: Google Cloud Dataflow のキーメトリクスを追跡
@@ -66,6 +72,10 @@ Google Cloud Dataflow インテグレーションには、サービスのチェ�
 ## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/ja/integrations/google_cloud_platform/
 [2]: https://docs.datadoghq.com/ja/integrations/google_cloud_platform/?tab=datadogussite#log-collection

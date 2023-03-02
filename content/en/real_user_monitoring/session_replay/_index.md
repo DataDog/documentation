@@ -2,6 +2,8 @@
 title: Session Replay
 kind: documentation
 description: Learn about how to capture and visually replay your users' web browsing experience with Session Replay.
+aliases:
+- /real_user_monitoring/guide/session-replay-getting-started/
 further_reading:
 - link: 'https://www.datadoghq.com/blog/session-replay-datadog/'
   tag: 'Blog'
@@ -22,13 +24,13 @@ The RUM Browser SDK is [open source][1] and leverages the open source [rrweb][2]
 
 ## Session Replay recorder
 
-The Session Replay recorder is part of the RUM Browser SDK. The recorder takes a snapshot of the browser's DOM and CSS by tailing and recording events happening on a web page (such as DOM modification, mouse move, clicks, and input events) along with these events' timestamps. 
+The Session Replay recorder is part of the RUM Browser SDK. The recorder takes a snapshot of the browser's DOM and CSS by tailing and recording events happening on a web page (such as DOM modification, mouse move, clicks, and input events) along with these events' timestamps.
 
-Datadog then rebuilds the web page and re-applies the recorded events at the appropriate time in the replay view. Session Replay follows the same 30 day retention policy as normal RUM sessions. 
+Datadog then rebuilds the web page and re-applies the recorded events at the appropriate time in the replay view. Session Replay follows the same 30 day retention policy as normal RUM sessions.
 
-The Session Replay recorder supports all browsers supported by the RUM Browser SDK with the exception of IE11. For more information, see the [browser support table][3]. 
+The Session Replay recorder supports all browsers supported by the RUM Browser SDK with the exception of IE11. For more information, see the [browser support table][3].
 
-To reduce Session Replay's network impact and ensure the Session Replay recorder has minimal overhead on your application's performance, Datadog compresses the data prior to sending it. Datadog also reduces the load on a browser’s UI thread by delegating most of the CPU-intensive work (such as compression) to a background service worker. The expected network bandwidth impact is less than 100kB/min. 
+To reduce Session Replay's network impact and ensure the Session Replay recorder has minimal overhead on your application's performance, Datadog compresses the data prior to sending it. Datadog also reduces the load on a browser’s UI thread by delegating most of the CPU-intensive work (such as compression) to a dedicated web worker. The expected network bandwidth impact is less than 100kB/min.
 
 ## Setup
 
@@ -40,7 +42,7 @@ Change the npm package name or CDN URL, depending on your chosen installation me
 
 ### npm
 
-Replace the `@datadog/browser-rum package` with a version >3.6.0 of [`@datadog/browser-rum`][5]. To start the recording, call `datadogRum.startSessionReplayRecording()`.
+Replace the `@datadog/browser-rum` package with a version >3.6.0 of [`@datadog/browser-rum`][5]. To start the recording, call `datadogRum.startSessionReplayRecording()`.
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -52,9 +54,11 @@ datadogRum.init({
     //  service: 'my-web-application',
     //  env: 'production',
     //  version: '1.0.0',
-    sampleRate: 100,
-    premiumSampleRate: 100,
-    trackInteractions: true
+    sessionSampleRate: 100,
+    sessionReplaySampleRate: 100,
+    trackResources: true,
+    trackLongTasks: true,
+    trackUserInteractions: true
 });
 
 datadogRum.startSessionReplayRecording();
@@ -80,7 +84,7 @@ To stop the Session Replay recording, call `stopSessionReplayRecording()`.
 
 ### Disable Session Replay
 
-To stop session recordings, remove `startSessionReplayRecording()` and set `premiumSampleRate` to `0`. This stops collecting data for RUM & Session Replay's [Browser Premium plan][7], which includes replays, resources, and long tasks.
+To stop session recordings, remove `startSessionReplayRecording()` and set `sessionReplaySampleRate` to `0`. This stops collecting data for [Browser RUM & Session Replay plan][7], which includes replays.
 
 In order to apply these configurations, upgrade the [RUM Browser SDK][5] to a version >= 3.6.
 

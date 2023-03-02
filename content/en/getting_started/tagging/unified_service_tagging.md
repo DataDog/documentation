@@ -66,7 +66,7 @@ To setup unified service tagging in a containerized environment:
 
 2. If you are using [Docker][2], make sure the Agent can access your container's [Docker socket][7]. This allows the Agent detect the environment variables and map them to the standard tags.
 
-4. Configure your environment based on either full configuration or partial configuration detailed below.
+3. Configure your environment that corresponds to your container orchestration service based on either full configuration or partial configuration as detailed below.
 
 #### Configuration
 
@@ -139,7 +139,7 @@ tags.datadoghq.com/<container-name>.version
 
 To configure [Kubernetes State Metrics][3]:
 
-1. Set `join_standard_tags` to `true` in your [configuration file][4].
+1. Set `join_standard_tags` to `true` in your configuration file. See this [example configuration file][4] for the setting location.
 
 2. Add the same standard labels to the collection of labels for the parent resource, for example: `Deployment`.
 
@@ -186,7 +186,7 @@ containers:
 [1]: /agent/cluster_agent/admission_controller/
 [2]: https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/#capabilities-of-the-downward-api
 [3]: /agent/kubernetes/data_collected/#kube-state-metrics
-[4]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example#L70
+[4]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example
 [5]: /tracing/send_traces/
 [6]: /integrations/statsd/
 {{% /tab %}}

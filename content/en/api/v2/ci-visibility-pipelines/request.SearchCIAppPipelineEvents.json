@@ -1,0 +1,14 @@
+{
+  "filter": {
+    "from": "now-15m",
+    "query": "@ci.provider.name:github AND @ci.status:error",
+    "to": "now"
+  },
+  "options": {
+    "timezone": "GMT"
+  },
+  "page": {
+    "limit": 5
+  },
+  "sort": "timestamp"
+}

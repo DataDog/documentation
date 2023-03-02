@@ -1,5 +1,5 @@
 ---
-title: Custom Metrics from Serverless Applications
+title: Custom Metrics from AWS Lambda Serverless Applications
 kind: documentation
 ---
 
@@ -60,7 +60,7 @@ Datadog recommends using the [Datadog Lambda Extension][1] to submit custom metr
 1. If you are not interested in collecting logs from your Lambda function, set the environment variable `DD_SERVERLESS_LOGS_ENABLED` to `false`.
 1. Follow the sample code or instructions below to submit your custom metric. 
 
-{{< programming-lang-wrapper langs="python,nodeJS,go,ruby,other" >}}
+{{< programming-lang-wrapper langs="python,nodeJS,go,ruby,java,dotnet,other" >}}
 {{< programming-lang lang="python" >}}
 
 ```python
@@ -131,6 +131,80 @@ end
 ```
 
 {{< /programming-lang >}}
+{{< programming-lang lang="java" >}}
+
+Install the latest version of [java-dogstatsd-client][1] and then follow the sample code below to submit your custom metrics as [**distribution**](#understanding-distribution-metrics).
+
+```java
+package com.datadog.lambda.sample.java;
+
+import com.amazonaws.services.lambda.runtime.Context;
+import com.amazonaws.services.lambda.runtime.RequestHandler;
+import com.amazonaws.services.lambda.runtime.events.APIGatewayV2ProxyRequestEvent;
+import com.amazonaws.services.lambda.runtime.events.APIGatewayV2ProxyResponseEvent;
+
+// import the statsd client builder
+import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
+import com.timgroup.statsd.StatsDClient;
+
+public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {
+
+    // instantiate the statsd client
+    private static final StatsDClient Statsd = new NonBlockingStatsDClientBuilder().hostname("localhost").build();
+
+    @Override
+    public APIGatewayV2ProxyResponseEvent handleRequest(APIGatewayV2ProxyRequestEvent request, Context context) {
+
+        // submit a distribution metric
+        Statsd.recordDistributionValue("my.custom.java.metric", 1, new String[]{"tag:value"});
+
+        APIGatewayV2ProxyResponseEvent response = new APIGatewayV2ProxyResponseEvent();
+        response.setStatusCode(200);
+        return response;
+    }
+}
+```
+
+[1]: https://github.com/DataDog/java-dogstatsd-client
+{{< /programming-lang >}}
+{{< programming-lang lang="dotnet" >}}
+
+Install the latest version of [dogstatsd-csharp-client][1] and then follow the sample code below to submit your custom metrics as [**distribution metrics**](#understanding-distribution-metrics).
+
+```csharp
+using System.IO;
+
+// import the statsd client
+using StatsdClient;
+
+namespace Example
+{            
+  public class Function
+  {
+    static Function()
+    {
+        // instantiate the statsd client 
+        var dogstatsdConfig = new StatsdConfig
+        {
+            StatsdServerName = "127.0.0.1",
+            StatsdPort = 8125,
+        };
+        if (!DogStatsd.Configure(dogstatsdConfig))
+            throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
+    }
+
+    public Stream MyHandler(Stream stream)
+    {
+        // submit a distribution metric
+        DogStatsd.Distribution("my.custom.dotnet.metric", 1, tags: new[] { "tag:value" });
+        // your function logic
+    }
+  }
+}
+```
+
+[1]: https://github.com/DataDog/dogstatsd-csharp-client
+{{< /programming-lang >}}
 {{< programming-lang lang="other" >}}
 
 1. [Install][1] the DogStatsD client for your runtime
@@ -190,9 +264,9 @@ async function myHandler(event, context) {
     sendDistributionMetricWithDate(
         'coffee_house.order_value', // Metric name
         12.45,                      // Metric value
-        'product:latte',            // First tag
-        'order:online'              // Second tag
         new Date(Date.now()),       // date
+        'product:latte',            // First tag
+        'order:online',             // Second tag
     );
 }
 ```

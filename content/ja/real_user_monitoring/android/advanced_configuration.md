@@ -3,16 +3,17 @@ dependencies:
 - https://github.com/DataDog/dd-sdk-android/blob/master/docs/configure_rum_android_sdk.md
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
-  tag: Github
+  tag: GitHub
   text: dd-sdk-android ソースコード
 - link: /real_user_monitoring
-  tag: ホームページ
+  tag: ドキュメント
   text: Datadog RUM を探索する
 kind: documentation
 title: RUM Android の高度なコンフィギュレーション
 ---
-まだ SDK をインストールしていない場合は、[アプリ内セットアップ手順][1]に従うか、[Android RUM セットアップドキュメント][2]を参照してください。
+## 概要
 
+まだ SDK をインストールしていない場合は、[アプリ内セットアップ手順][1]に従うか、[Android RUM セットアップドキュメント][2]を参照してください。
 
 ## ユーザーセッションの充実
 
@@ -20,7 +21,7 @@ Android RUM は、ユーザーアクティビティ、画面、エラー、ネ�
 
 ### カスタムビュー
 
-[ビューを自動追跡する][4]ほかに、特定のさまざまなビュー（アクティビティ、フラグメントなど）が `onResume()` ライフサイクルでインタラクティブに確認できるようになったら自動追跡することも可能です。ビューが確認できなくなったら追跡を停止します。ほとんどの場合、このメソッドは、最前面の `Activity` または `Fragment` で呼び出す必要があります。
+[ビューを自動追跡する][4]ほかに、特定のさまざまなビュー（アクティビティやフラグメントなど）が `onResume()` ライフサイクルでインタラクティブに確認できるようになったら自動追跡することも可能です。ビューが確認できなくなったら追跡を停止します。ほとんどの場合、このメソッドは、最前面の `Activity` または `Fragment` で呼び出す必要があります。
 
 
 {{< tabs >}}
@@ -68,32 +69,81 @@ RUM のデフォルト属性に加えて、`addTiming` API を使用して、ア
 {{% /tab %}}
 {{< /tabs >}}
 
-タイミングが送信されると、タイミングには `@view.custom_timings.<timing_name>` としてアクセスできるようになります (例: `@view.custom_timings.hero_image`)。RUM 分析またはダッシュボードでグラフ化する前に、[メジャーを作成](https://docs.datadoghq.com/real_user_monitoring/explorer/?tab=measures#setup-facets-and-measures)する必要があります。
+タイミングが送信されると、タイミングには `@view.custom_timings.<timing_name>` としてアクセスできます。例: `@view.custom_timings.hero_image`。RUM 分析またはダッシュボードでグラフ化する前に、[メジャーを作成](https://docs.datadoghq.com/real_user_monitoring/explorer/?tab=measures#setup-facets-and-measures)する必要があります。
 
 ### カスタムアクション
 
 [アクションを自動追跡する][5]ほかに、`RumMonitor#addUserAction` で特定のカスタムユーザーアクション（タップ、クリック、スクロールなど）を追跡することも可能です。継続的なアクションの追跡（リストをスクロールするユーザーの追跡）には、`RumMonitor#startUserAction` および `RumMonitor#stopUserAction` を使用します。
 
+アクションタイプは、"カスタム"、"クリック"、"タップ"、"スクロール"、"スワイプ"、"戻る" のいずれかを指定する必要があることに注意してください。
+
 {{< tabs >}}
 {{% tab "Kotlin" %}}
    ```kotlin
        fun onUserInteraction() { 
-            GlobalRum.get().addUserAction(resourceKey, method, url, resourceAttributes)
+            GlobalRum.get().addUserAction(actionType, name, actionAttributes)
        }
    ```
 {{% /tab %}}
 {{% tab "Java" %}}
    ```java
        public void onUserInteraction() {
-            GlobalRum.get().addUserAction(resourceKey, method, url, resourceAttributes);
+            GlobalRum.get().addUserAction(actionType, name, actionAttributes);
        }
    ```
 {{% /tab %}}
 {{< /tabs >}}
 
+### リソースの強化
+
+[リソースを自動的に追跡する][6]場合、追跡する各ネットワークリクエストにカスタム属性を追加するために、カスタムの `RumResourceAttributesProvider` インスタンスを提供します。例えば、ネットワークリクエストのヘッダを追跡したい場合は、以下のような実装を作成し、`DatadogInterceptor` のコンストラクタに渡します。
+
+{{< tabs >}}
+{{% tab "Kotlin" %}}
+```kotlin
+class CustomRumResourceAttributesProvider : RumResourceAttributesProvider {
+    override fun onProvideAttributes(
+        request: Request,
+        response: Response?,
+        throwable: Throwable?
+    ): Map<String, Any?> {
+        val headers = request.headers()
+        return headers.names().associate {
+            "headers.${it.lowercase(Locale.US)}" to headers.values(it).first()
+        }
+    }
+}
+```
+{{% /tab %}}
+{{% tab "Java" %}}
+```java
+
+public class CustomRumResourceAttributesProvider implements RumResourceAttributesProvider {
+    @NonNull
+    @Override
+    public Map<String, Object> onProvideAttributes(
+            @NonNull Request request,
+            @Nullable Response response,
+            @Nullable Throwable throwable
+    ) {
+        Map<String, Object> result = new HashMap<>();
+        Headers headers = request.headers();
+
+        for (String key : headers.names()) {
+            String attrName = "headers." + key.toLowerCase(Locale.US);
+            result.put(attrName, headers.values(key).get(0));
+        }
+
+        return result;
+    }
+}
+```
+{{% /tab %}}
+{{< /tabs >}}
+
 ### カスタムリソース
 
-[リソースを自動追跡する][6]ほかに、メソッド（`GET`、`POST` など）を使用して、`RumMonitor#startResource` でリソースを読み込みながら特定のカスタムリソース（ネットワークリクエスト、サードパーティプロバイダ API など）を追跡することも可能です。完全に読み込まれたら `RumMonitor#stopResource` で追跡を停止し、リソースの読み込み中にエラーが発生した場合は `RumMonitor#stopResourceWithError` で停止します。
+[リソースを自動追跡する][6]ほかに、メソッド（`GET` や `POST` など）を使用して、`RumMonitor#startResource` でリソースを読み込みながら特定のカスタムリソース（ネットワークリクエストやサードパーティプロバイダ API など）を追跡することも可能です。完全に読み込まれたら `RumMonitor#stopResource` で追跡を停止し、リソースの読み込み中にエラーが発生した場合は `RumMonitor#stopResourceWithError` で停止します。
 
 {{< tabs >}} 
 {{% tab "Kotlin" %}}
@@ -136,9 +186,10 @@ RUM のデフォルト属性に加えて、`addTiming` API を使用して、ア
 
 ## カスタムグローバル属性の追跡
 
-モバイル SDK により自動的に取得される[デフォルトの RUM 属性][3]に加えて、カスタム属性などのコンテキスト情報を RUM イベントに追加し、Datadog 内の可観測性を強化することも可能です。カスタム属性により、コードレベルの情報（バックエンドサービス、セッションタイムライン、エラーログ、ネットワークの状態など）を利用して、観察されたユーザー行動（カート内の金額、マーチャントティア、広告キャンペーンなど）を分類することができます。
+RUM Android SDK により自動的に取得される[デフォルトの RUM 属性][3]に加えて、カスタム属性などのコンテキスト情報を RUM イベントに追加し、Datadog 内の可観測性を強化することも可能です。カスタム属性により、コードレベルの情報（バックエンドサービス、セッションタイムライン、エラーログ、ネットワークの状態など）を利用して、観察されたユーザー行動（カート内の金額、マーチャントティア、広告キャンペーンなど）を分類することができます。
 
 ### ユーザーセッションの追跡
+
 RUM セッションにユーザー情報を追加すると、次のことが簡単になります。
 * 特定のユーザーのジャーニーをたどる
 * エラーの影響を最も受けているユーザーを把握する
@@ -186,7 +237,7 @@ Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
 : ビューの追跡に使用される戦略を定義します。ご使用のアプリケーションのアーキテクチャにより、[`ViewTrackingStrategy`][4] の実装から 1 つを選択するか、独自のものを実装します。
 
 `addPlugin(DatadogPlugin, Feature)`
-: 特定の機能 (`CRASH`、`LOG`、`TRACE`、`RUM`) についてのプラグインの実装を追加します。プラグインはこの機能の初期化に伴い登録され、機能が停止すると登録解除されます。
+: 特定の機能 (`CRASH`、`LOG`、`TRACE`、または `RUM`) についてのプラグインの実装を追加します。プラグインはこの機能の初期化に伴い登録され、機能が停止すると登録解除されます。
 
 `trackLongTasks(durationThreshold)` 
 : メインスレッドで `durationThreshold` より時間がかかっているタスクを Datadog でロングタスクとして追跡できます。
@@ -209,6 +260,9 @@ Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
 `setUploadFrequency([FREQUENT|AVERAGE|RARE])` 
 : Datadog エンドポイントに対し作成されたリクエストの頻度を定義します（リクエストがある場合）。
 
+`setVitalsUpdateFrequency([FREQUENT|AVERAGE|RARE|NEVER])` 
+: モバイルバイタルを収集するための好ましい頻度を設定します。
+
 `sampleRumSessions(<samplingRate>)` 
 : RUM セッションのサンプリングレートを設定します（0 の値は RUM イベントの送信がなかったことを示し、100 の値はすべてのセッションが維持されたことを示します）。
 
@@ -218,7 +272,7 @@ Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
 
 ### ビューの自動追跡
 
-ビュー（アクティビティ、フラグメントなど）を自動追跡するには、初期化時に追跡ストラテジーを提供する必要があります。ご使用のアプリケーションのアーキテクチャにより、以下のストラテジーから 1 つ選択します。
+ビュー（アクティビティやフラグメントなど）を自動追跡するには、初期化時に追跡ストラテジーを提供する必要があります。ご使用のアプリケーションのアーキテクチャにより、以下のストラテジーから 1 つ選択します。
 
 `ActivityViewTrackingStrategy`
 : アプリケーションの各アクティビティが個別のビューとみなされます。
@@ -253,14 +307,14 @@ Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
 {{< /tabs >}}
 
 
-**ヒント**: `ActivityViewTrackingStrategy`、`FragmentViewTrackingStrategy`、`MixedViewTrackingStrategy` のいずれかを使用する場合、コンストラクターで `ComponentPredicate` の実装を提供することで、RUM View として追跡する `Fragment` または `Activity` を絞り込むことができます。
+`ActivityViewTrackingStrategy`、`FragmentViewTrackingStrategy`、`MixedViewTrackingStrategy` のいずれかを使用する場合、コンストラクターで `ComponentPredicate` の実装を提供することで、RUM View として追跡する `Fragment` または `Activity` を絞り込むことができます。
 
-**注**: デフォルトで、ライブラリはいずれのビューも追跡しません。ビューの追跡ストラテジーを提供しないことにした場合は、自身で `startView` および `stopView` メソッドを呼び出してビューを手動で送信する必要があります。
+**注**: デフォルトで、ライブラリは `ActivityViewTrackingStrategy` を使用しています。ビューの追跡ストラテジーを提供しないことにした場合は、自身で `startView` および `stopView` メソッドを呼び出してビューを手動で送信する必要があります。
 
 
 ### ネットワークリクエストの自動追跡
 
-リソース（サードパーティプロバイダー、ネットワークリクエスト）で、最初の 1 バイトまで、またはDNS 解決などのタイミング情報を取得するには、`okHttpClient` をカスタマイズして[EventListener][8] ファクトリを追加します。
+リソース（サードパーティプロバイダー、ネットワークリクエストなど）で、最初の 1 バイトまで、またはDNS 解決などのタイミング情報を取得するには、`okHttpClient` をカスタマイズして[EventListener][8] ファクトリを追加します。
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
@@ -322,7 +376,7 @@ Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
 
 ## RUM イベントの変更または削除
 
-一括処理前に、RUM イベントの一部の属性を変更または一部のイベント全体を削除したりするには、SDK を初期化する際に `EventMapper<T>` を実装します。
+一括処理前に、RUM イベントの一部の属性を変更または一部のイベント全体を削除したりするには、RUM Android SDK を初期化する際に `EventMapper<T>` を実装します。
 
 
 {{< tabs >}}
@@ -353,34 +407,34 @@ Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
 {{% /tab %}}
 {{< /tabs >}}
 
-   `EventMapper<T>` インターフェースを実装する場合、各イベントタイプの属性は以下のように一部のみしか変更することができません。
+`EventMapper<T>` インターフェースを実装する場合、各イベントタイプの属性は一部のみしか変更することができません。
 
    | イベントタイプ    | 属性キー      | 説明                                     |
    |---------------|--------------------|-------------------------------------------------|
-   | ViewEvent     | `view.referrer`      | ページの初期ビューへのリンク URL |
-   |               | `view.url`           | ビューの URL                                 |
-   |               | `view.name`           | ビューの名前                                |
+   | ViewEvent     | `view.referrer`      | ページの初期ビューへのリンク URL。 |
+   |               | `view.url`           | ビューの URL。                                 |
+   |               | `view.name`           | ビューの名前。                                |
    | ActionEvent   |                    |                                                 |
-   |               | `action.target.name` | ターゲット名                                     |
-   |               | `view.referrer`      | ページの初期ビューへのリンク URL |
-   |               | `view.url`           | ビューの URL                                 |
-   |               | `view.name`           | ビューの名前                               |
+   |               | `action.target.name` | ターゲット名。                                     |
+   |               | `view.referrer`      | ページの初期ビューへのリンク URL。 |
+   |               | `view.url`           | ビューの URL。                                 |
+   |               | `view.name`           | ビューの名前。                               |
    | ErrorEvent    |                      |                                                 |
-   |               | `error.message`      | エラーメッセージ                                   |
-   |               | `error.stack`        | エラーのスタックトレース                         |
-   |               | `error.resource.url` | リソースの URL                             |
-   |               | `view.referrer`      | ページの初期ビューへのリンク URL |
-   |               | `view.url`           | ビューの URL                                 |
-   |               | `view.name`           | ビューの名前                                |
+   |               | `error.message`      | エラーメッセージ。                                   |
+   |               | `error.stack`        | エラーのスタックトレース。                         |
+   |               | `error.resource.url` | リソースの URL。                             |
+   |               | `view.referrer`      | ページの初期ビューへのリンク URL。 |
+   |               | `view.url`           | ビューの URL。                                 |
+   |               | `view.name`           | ビューの名前。                                |
    | ResourceEvent |                    |                                                 |
-   |               | `resource.url`       | リソースの URL                             |
-   |               | `view.referrer`      | ページの初期ビューへのリンク URL |
-   |               | `view.url`           | ビューの URL                                 |
-   |               | `view.name`           | ビューの名前                                |
+   |               | `resource.url`       | リソースの URL。                             |
+   |               | `view.referrer`      | ページの初期ビューへのリンク URL。 |
+   |               | `view.url`           | ビューの URL。                                 |
+   |               | `view.name`           | ビューの名前。                                |
    | LongTaskEvent |                    |                                                 |
-   |               | `view.referrer`       | ページの初期ビューへのリンク URL |
-   |               | `view.url`            | ビューの URL                                 |
-   |               | `view.name`           | ビューの名前                                |
+   |               | `view.referrer`       | ページの初期ビューへのリンク URL。 |
+   |               | `view.url`            | ビューの URL。                                 |
+   |               | `view.name`           | ビューの名前。                                |
 
    **注**: `EventMapper<T>` の実装から null が返された場合、イベントは削除されます。
 
@@ -396,7 +450,7 @@ val monitor = RumMonitor.Builder()
 GlobalRum.registerIfAbsent(monitor)
 ```
 
-   ## その他の参照先
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -407,5 +461,5 @@ GlobalRum.registerIfAbsent(monitor)
 [5]: https://docs.datadoghq.com/ja/real_user_monitoring/android/advanced_configuration/#initialization-parameters
 [6]: https://docs.datadoghq.com/ja/real_user_monitoring/android/advanced_configuration/#automatically-track-network-requests
 [7]: https://github.com/DataDog/dd-sdk-android/tree/master/sample/kotlin/src/main/kotlin/com/datadog/android/sample/widget
-[8]: https://square.github.io/okhttp/events/
-[9]: https://docs.datadoghq.com/ja/real_user_monitoring/android/data_collected/?tab=error#event-specific-attributes
+[8]: https://square.github.io/okhttp/features/events/
+[9]: https://docs.datadoghq.com/ja/real_user_monitoring/android/data_collected/#event-specific-attributes

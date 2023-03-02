@@ -45,12 +45,57 @@ if ((announcementBanner && window.getComputedStyle(announcementBanner).getProper
   mobileMenu.style.paddingTop = '65px';
 }
 
-/* Open mobile nav 3rd level where possible based off, desktop side nav state */
-window.addEventListener('load', () => {
-  $('.sidenav-nav-main ul li ul li a.active').each(function(i, el) {
-      const ul = $(`#mobile-nav a[href='${$(el).attr('href')}'] + ul.d-none`);
-      if(ul) {
-        $(ul).removeClass("d-none");
-      }
-  });
-});
+/* Open mobile nav (.dropdown-menu) 4th level where possible based off of desktop side nav state */
+function openMenu(menuItem) {
+    let currEl = menuItem
+    // traverse the selected menu to the top (#main-nav) in order to open
+    while(currEl.id != "mobile-nav"){
+        if(currEl.classList.contains('sub-nav')){
+            currEl.classList.remove('d-none') 
+        }else if(currEl.classList.contains('dropdown-menu') || currEl.classList.contains('dropdown')){
+            currEl.classList.add('show') 
+        }
+        currEl = currEl.parentElement
+    }
+}
+
+export function closeMobileNav(){
+    const activeDropdowns = document.querySelectorAll('#mobile-nav .dropdown-menu.show, #mobile-nav .dropdown.show')
+    const activeSubNav = document.querySelector('#mobile-nav .sub-nav:not(.d-none)')
+    const activeMobileSelection = document.querySelector('#mobile-nav a[data-path].active') || false
+    if(activeSubNav){
+        activeSubNav.classList.add('d-none')
+    }
+    activeDropdowns.forEach(dd => dd.classList.remove('show'))
+
+    if(activeMobileSelection) {
+      activeMobileSelection.classList.remove('active')
+    }
+}
+
+export function setMobileNav () {
+    const dataPath = window.location.pathname.slice(1,-1)
+    let mobileSelection = ''
+    // redirect the AGENT/aggregating agent path to observability_pipelines/integrations/... on mobile nav
+    if(dataPath.includes('observability_pipelines/production_deployment_overview/integrate_datadog_and_the_observability_pipelines_worker')){
+        const observabilityPipelineMobile = document.querySelector('#mobile-nav a[data-path$="observability_pipelines"]');
+
+        mobileSelection = observabilityPipelineMobile.nextElementSibling.querySelector(
+            'a[data-path*="observability_pipelines/production_deployment_overview/integrate_datadog_and_the_observability_pipelines_worker"]'
+        );
+    }else{
+        mobileSelection = document.querySelector(`#mobile-nav a[data-path="${dataPath}"]`) || false
+    }
+    const subMenu = document.querySelector(`#mobile-nav a[data-path="${dataPath}"] + ul.d-none`)
+
+    if (mobileSelection) {
+        const parentMenu = mobileSelection.parentElement || false
+    
+        mobileSelection.classList.add('active')
+        if(subMenu){
+            openMenu(subMenu)
+        }else if (parentMenu){
+            openMenu(parentMenu)
+        }
+    }
+}

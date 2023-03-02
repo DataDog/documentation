@@ -24,14 +24,16 @@ Les métriques d'estimation de l'utilisation sont généralement disponibles pou
 |-------------------------------|------------------------------------------|
 | Hosts d'infrastructure          | `datadog.estimated_usage.hosts`          |
 | Conteneurs                    | `datadog.estimated_usage.containers`     |
-| Métriques custom                | `datadog.estimated_usage.metrics.custom` |
-| Octets de log ingérés           | `datadog.estimated_usage.logs.ingested_bytes`          |
+| Indexed Custom Metrics        | `datadog.estimated_usage.metrics.custom`, `datadog.estimated_usage.metrics.custom.by_metric` |
+| Métriques custom ingérées       | `datadog.estimated_usage.metrics.custom.ingested`, `datadog.estimated_usage.metrics.custom.ingested.by_metric` |
+| Octets de log ingérés           | `datadog.estimated_usage.logs.ingested_bytes`    |
 | Événements de log ingérés          | `datadog.estimated_usage.logs.ingested_events`   |
 | Logs analysés (sécurité)      | `datadog.estimated_usage.security_monitoring.analyzed_bytes`   |
 | Hosts d'APM                     | `datadog.estimated_usage.apm_hosts` (n'inclut pas les hosts d'Azure App Service)      |
 | Spans indexées de l'APM             | `datadog.estimated_usage.apm.indexed_spans` |
 | Octets ingérés de l'APM            | `datadog.estimated_usage.apm.ingested_bytes` |
 | Spans ingérées de l'APM            | `datadog.estimated_usage.apm.ingested_spans` |
+| RUM Sessions                  | `datadog.estimated_usage.rum.sessions`  |
 | Fonctions Lambda sans serveur   | `datadog.estimated_usage.serverless.aws_lambda_functions` |
 | Serverless Invocations        | `datadog.estimated_usage.serverless.invocations`|
 | Exécutions de test API                 | `datadog.estimated_usage.synthetics.api_test_runs` |
@@ -45,6 +47,9 @@ Les métriques d'estimation de l'utilisation sont généralement disponibles pou
 | Hosts CWS                     | `datadog.estimated_usage.cws.hosts` |
 | Conteneurs CWS                | `datadog.estimated_usage.cws.containers` | 
 | Hosts de base de données                | `datadog.estimated_usage.dbm.hosts` |
+| Hosts ASM                     | `datadog.estimated_usage.asm.hosts` |
+| Incident Management (utilisateurs actifs)   | `datadog.estimated_usage.incident_management.active_users` |
+| CI Visibility                 | `datadog.estimated_usage.ci_visibility.pipeline.committers`, `datadog.estimated_usage.ci_visibility.test.committers` |
 
 
 {{< img src="account_management/billing/usage-metrics-02.png" alt="Noms des métriques" >}}

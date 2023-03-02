@@ -13,7 +13,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-cdn-performance-with-synthetic-testing/
   tag: ブログ
   text: Synthetic テスト内の CDN パフォーマンスの監視
-- link: https://learn.datadoghq.com/course/view.php?id=39
+- link: https://learn.datadoghq.com/courses/intro-to-synthetic-tests
   tag: ラーニングセンター
   text: Synthetic テストの紹介
 - link: /synthetics/guide/
@@ -53,25 +53,31 @@ API テストを使用すると、[シングル][4]または[チェーン][5]リ
 
 ## インテグレーションとデプロイプロセスでテストを実行する
 
-Synthetics テストを[カナリアデプロイ][16]として活用するか、[CI パイプライン][16]内で直接実行すれば、欠陥のあるコードが顧客の体験に影響を与えることを恐れずに出荷を開始できます。
+Synthetics テストを[カナリアデプロイ][16]として活用するか、[CI パイプライン][16]で直接実行すれば、欠陥のあるコードが顧客の体験に影響を与えることを恐れずに出荷を開始できます。
 
 {{< img src="synthetics/ci.png" alt="CI テスト" style="width:100%;">}}
 
+## CI でテスト結果を検証する
+
+[CI Results Explorer][17] で実行されたジョブを確認することで、CI パイプラインで実行中のブラウザテストを調べたり、失敗したテスト結果のトラブルシューティングを行ったりすることができます。
+
+{{< img src="synthetics/ci_results_explorer/ci_results_explorer_1.png" alt="CI Results Explorer" style="width:100%;">}}
+
 ## データとトレースを接続する
 
-[Synthetics テストと APM トレース間のインテグレーション][17]を利用すれば、フロントエンド、ネットワーク、バックエンドリクエスト全体の障害の根本的な原因を見つけることができます。
+[Synthetics テストと APM トレース間のインテグレーション][18]を利用すれば、フロントエンド、ネットワーク、バックエンドリクエスト全体の障害の根本的な原因を見つけることができます。
 
 {{< img src="synthetics/synthetics_traces.mp4" alt="Synthetic モニタリング" video=true style="width:100%;">}}
 
 ## すぐに使えるダッシュボードにアクセスする
 
-API テスト、マルチステップ API テスト、ブラウザテスト、プライベートロケーションのパフォーマンス情報や、Datadog のイベントを[すぐに使える Synthetic ダッシュボード][18]で分析します。
+API テスト、マルチステップ API テスト、ブラウザテスト、プライベートロケーションのパフォーマンス情報や、Datadog のイベントを[すぐに使える Synthetic ダッシュボード][19]で分析します。
 
 {{< img src="synthetics/test_summary_dashboard.png" alt="テストサマリーダッシュボード" style="width:100%;">}}
 
 ## 準備はいいですか？
 
-最初の Synthetic テストを作成して Web アプリケーションを監視する手順については、[Synthetic モニタリングの概要][19]を参照してください。次に、[プライベートロケーションの概要][20]を参照して、プライベートロケーションを作成し、プライベートロケーションで Synthetic テストを実行する手順を確認してください。
+最初の Synthetic テストを作成して Web アプリケーションを監視する手順については、[Synthetic モニタリングの概要][20]を参照してください。次に、[プライベートロケーションの概要][21]を参照して、プライベートロケーションを作成し、プライベートロケーションで Synthetic テストを実行する手順を確認してください。
 
 ## その他の参考資料
 
@@ -93,8 +99,9 @@ API テスト、マルチステップ API テスト、ブラウザテスト、�
 [13]: /ja/synthetics/api_tests/grpc_tests
 [14]: /ja/synthetics/browser_tests
 [15]: /ja/synthetics/private_locations
-[16]: /ja/synthetics/cicd_testing
-[17]: /ja/synthetics/apm/
-[18]: /ja/synthetics/dashboards/
-[19]: /ja/getting_started/synthetics
-[20]: /ja/getting_started/synthetics/private_location
+[16]: /ja/synthetics/cicd_integrations
+[17]: /ja/synthetics/ci_results_explorer/
+[18]: /ja/synthetics/apm/
+[19]: /ja/synthetics/dashboards/
+[20]: /ja/getting_started/synthetics
+[21]: /ja/getting_started/synthetics/private_location

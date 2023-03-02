@@ -1,35 +1,61 @@
 ---
+app_id: snmpwalk
+app_uuid: bc37c561-7ac5-4799-a56b-d85347bc9ff1
 assets:
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: snmpwalk.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Snmpwalk
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: help@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - monitoring
 - notification
 - network
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/snmpwalk/README.md
-display_name: Snmpwalk
+display_on_public_website: true
 draft: false
 git_integration_title: snmpwalk
-guid: a2864821-994c-4ebb-8532-b6879ea9a9ab
 integration_id: snmpwalk
 integration_title: SNMP walk
 integration_version: 1.0.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
+manifest_version: 2.0.0
 name: snmpwalk
+oauth: {}
 public_title: SNMP walk
 short_description: snmpwalk の説明
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::モニタリング
+  - Category::通知
+  - Category::ネットワーク
+  configuration: README.md#Setup
+  description: snmpwalk の説明
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: SNMP walk
 ---
 
 

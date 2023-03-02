@@ -77,6 +77,10 @@ public class BackupLedger {
     for (Transaction transaction : transactions) {
       // Use `GlobalTracer` to trace blocks of inline code
       Tracer tracer = GlobalTracer.get();
+      // Note: The scope in the try with resource block below
+      // will be automatically closed at the end of the code block.
+      // If you do not use a try with resource statement, you need
+      // to call scope.close().
       try (Scope scope = tracer.buildSpan("BackupLedger.persist").startActive(true)) {
         // Add custom metadata to the span
         scope.span().setTag("transaction.id", transaction.getId());
@@ -365,5 +369,5 @@ You've now successfully added custom spans to your codebase, making them availab
 
 [1]: https://app.datadoghq.com/apm/services
 [2]: https://bojanv91.github.io/posts/2018/06/select-n-1-problem
-[3]: https://app.datadoghq.com/apm/search/analytics
+[3]: https://app.datadoghq.com/apm/analytics
 [4]: /tracing/guide/add_span_md_and_graph_it/

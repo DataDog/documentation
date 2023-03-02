@@ -13,6 +13,9 @@ code_lang: php
 type: multi-code-lang
 code_lang_weight: 40
 further_reading:
+- link: "/tracing/guide/trace-php-cli-scripts/"
+  tags: "Guide"
+  text: "Tracing PHP CLI Scripts"
 - link: "https://www.datadoghq.com/blog/monitor-php-performance/"
   tag: "Blog"
   text: "PHP monitoring with Datadog APM and distributed tracing"
@@ -22,13 +25,12 @@ further_reading:
 - link: "/tracing/glossary/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
-- link: "/tracing/"
-  tag: "Documentation"
-  text: "Advanced Usage"
 ---
 ## Compatibility requirements
 
-For a full list of supported libraries and language versions, visit the [Compatibility Requirements][1] page.
+The latest PHP Tracer supports versions >= 5.4.x.
+
+For a full list of Datadog’s PHP version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
 
 ## Installation and getting started
 
@@ -58,11 +60,21 @@ Install and configure the Datadog Agent to receive traces from your now instrume
 {{< partial name="apm/apm-containers.html" >}}
 </br>
 
-3. After having instrumented your application, the tracing client sends traces to `localhost:8126` by default.  If this is not the correct host and port change it by setting the below env variables:
+3. After having instrumented your application, the tracing client sends traces to Unix domain socket `/var/run/datadog/apm.socket` by default. If the socket does not exist, traces are sent to `http://localhost:8126`. If this is not the correct host and port change it by setting `DD_TRACE_AGENT_URL`, for example:
 
-    `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
+   ```
+   DD_TRACE_AGENT_URL=unix:///path/to/custom.socket
+   DD_TRACE_AGENT_URL=http://localhost:9442
+   ```
 
-    See [environment variable configuration](#environment-variable-configuration) for more information on how to set these variables.
+   Similarly, where `DD_TRACE_HEALTH_METRICS_ENABLED` is set true, the trace client attempts to send stats to the `/var/run/datadog/dsd.socket` Unix domain socket. If the socket does not exist then stats are sent to `http://localhost:8125`.
+
+   If a different configuration is required, use the `DD_DOGSTATSD_URL` environment variable. Some examples:
+   ```
+   DD_DOGSTATSD_URL=http://custom-hostname:1234
+   DD_DOGSTATSD_URL=unix:///var/run/datadog/dsd.socket
+   ```
+
 {{< site-region region="us3,us5,eu,gov" >}}
 
 4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
@@ -80,14 +92,13 @@ To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] d
 {{% /tab %}}
 {{% tab "Other Environments" %}}
 
-Tracing is available for a number of other environments, such as  [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3], and [Azure App Service][4].
+Tracing is available for a number of other environments, such as  [Heroku][1], [Cloud Foundry][2], and [AWS Elastic Beanstalk][3].
 
 For other environments, please refer to the [Integrations][5] documentation for that environment and [contact support][6] if you are encountering any setup issues.
 
 [1]: /agent/basic_agent_usage/heroku/#installation
 [2]: /integrations/cloud_foundry/#trace-collection
 [3]: /integrations/amazon_elasticbeanstalk/
-[4]: /infrastructure/serverless/azure_app_services/#overview
 [5]: /integrations/
 [6]: /help/
 {{% /tab %}}
@@ -122,6 +133,8 @@ This command installs the extension to all the PHP binaries found in the host or
 
 Restart PHP (PHP-FPM or the Apache SAPI) and visit a tracing-enabled endpoint of your application. For traces, see the [APM Service List][5].
 
+When you do not specify `--enable-appsec`, the AppSec extension loads shortly at startup, and is not enabled by default. It immediately short-circuits, causing negligible performance overhead.
+
 <div class="alert alert-info">
 <strong>Note:</strong>
 It may take a few minutes before traces appear in the UI. If traces still do not appear after a few minutes, create a <a href="/tracing/troubleshooting/tracer_startup_logs?tab=php#php-info"><code>phpinfo()</code></a> page from the host machine and scroll down to the `ddtrace`. Failed diagnostic checks appear in this section to help identify any issues.
@@ -150,167 +163,9 @@ Automatic instrumentation captures:
 
 If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][6] for details.
 
-## Tracing CLI scripts
+## Tracing short- and long-running CLI scripts
 
-### Short-running CLI scripts
-
-A short-running script typically runs for a few seconds or minutes and the expected behavior is to receive one trace each time the script is executed.
-
-By default, tracing is disabled for PHP scripts that run from the command line. Opt in by setting `DD_TRACE_CLI_ENABLED` to `1`.
-
-```
-$ export DD_TRACE_CLI_ENABLED=1
-
-# Optionally, set the agent host and port if different from localhost and 8126, respectively
-$ export DD_AGENT_HOST=agent
-$ export DD_TRACE_AGENT_PORT=8126
-```
-
-For example, assume the following `script.php` runs a Curl request:
-
-```php
-<?php
-
-sleep(1);
-
-$ch = curl_init('https://httpbin.org/delay/1');
-curl_exec($ch);
-
-sleep(1);
-
-```
-
-Run the script:
-
-```
-$ php script.php
-```
-
-Once run, the trace is generated and sent to the Datadog backend when the script terminates.
-
-{{< img src="tracing/setup/php/short-running-cli.jpg" alt="Trace for a short running PHP CLI script" >}}
-
-### Long-running CLI scripts
-
-A long-running script runs for hours or days. Typically, such scripts repetitively execute a specific task, for example processing new incoming messages or new lines added to a table in a database. The expected behavior is that one trace is generated for each "unit of work", for example the processing of a message.
-
-By default, tracing is disabled for PHP scripts that run from the command line. Opt in by setting `DD_TRACE_CLI_ENABLED` to `1`.
-
-```
-$ export DD_TRACE_CLI_ENABLED=1
-# With this pair of settings, traces for each "unit of work" is sent as soon as the method execution terminates.
-$ export DD_TRACE_GENERATE_ROOT_SPAN=0
-$ export DD_TRACE_AUTO_FLUSH_ENABLED=1
-
-# Optionally, set service name, env, etc...
-$ export DD_SERVICE=my_service
-
-# Optionally, set the agent host and port if different from localhost and 8126, respectively
-$ export DD_AGENT_HOST=agent
-$ export DD_TRACE_AGENT_PORT=8126
-```
-
-For example, assume the following `long_running.php` script:
-
-```php
-<?php
-
-
-/* Datadog specific code. It can be in a separate files and required in this script */
-use function DDTrace\trace_method;
-use function DDTrace\trace_function;
-use DDTrace\SpanData;
-
-trace_function('processMessage', function(SpanData $span, $args) {
-    // Access method arguments and change resource name
-    $span->resource =  'message:' . $args[0]->id;
-    $span->meta['message.content'] = $args[0]->content;
-    $span->service = 'my_service';
-});
-
-trace_method('ProcessingStage1', 'process', function (SpanData $span, $args) {
-    $span->service = 'my_service';
-    // Resource name defaults to the fully qualified method name.
-});
-
-trace_method('ProcessingStage2', 'process', function (SpanData $span, $args) {
-    $span->service = 'my_service';
-    $span->resource = 'message:' . $args[0]->id;
-});
-/* Enf of Datadog code */
-
-/** Represents a message to be received and processed */
-class Message
-{
-    public $id;
-    public $content;
-
-    public function __construct($id, $content)
-    {
-        $this->id   = $id;
-        $this->content = $content;
-    }
-}
-
-/** One of possibly many processing stages, each of which should have a Span */
-class ProcessingStage1
-{
-    public function process(Message $message)
-    {
-        sleep(1);
-        $ch = curl_init('https://httpbin.org/delay/1');
-        curl_exec($ch);
-    }
-}
-
-/** One of possibly many processing stages, each of which should have a Span */
-class ProcessingStage2
-{
-    public function process(Message $message)
-    {
-        sleep(1);
-    }
-}
-
-/** In a real world application, this will read new messages from a source, for example a queue */
-function waitForNewMessages()
-{
-    return [
-        new Message($id = (time() + rand(1, 1000)), 'content of a message: ' . $id),
-        new Message($id = (time() + rand(1, 1000)), 'content of a message: ' . $id),
-        new Message($id = (time() + rand(1, 1000)), 'content of a message: ' . $id),
-    ];
-}
-
-/** This function is the "unit of work", each execution of it will generate one single trace */
-function processMessage(Message $m, array $processors)
-{
-    foreach ($processors as $processor) {
-        $processor->process($m);
-        usleep(100000);
-    }
-}
-
-$processors = [new ProcessingStage1(), new ProcessingStage2()];
-
-/** A loop that runs forever waiting for new messages */
-while (true) {
-    $messages = waitForNewMessages();
-    foreach ($messages as $message) {
-        processMessage($message, $processors);
-    }
-}
-```
-
-Run the script:
-
-```
-$ php long_running.php
-```
-
-Once run, one trace is generated and sent to the Datadog backend every time a new message is processed.
-
-{{< img src="tracing/setup/php/long-running-cli.jpg" alt="Trace for a long running PHP CLI script" >}}
+Additional steps are required for instrumenting CLI scripts. Read [Trace PHP CLI Scripts][7] for more information.
 
 ## Upgrading
 
@@ -399,7 +254,7 @@ debuginfo-install --enablerepo=remi-php74 -y php-fpm
 
 ##### PHP installed from the Sury Debian DPA
 
-If PHP was installed from the [Sury Debian DPA][7], debug symbols are already available from the DPA. For example, for PHP-FPM 7.2:
+If PHP was installed from the [Sury Debian DPA][8], debug symbols are already available from the DPA. For example, for PHP-FPM 7.2:
 
 ```
 apt update
@@ -408,7 +263,7 @@ apt install -y php7.2-fpm-dbgsym
 
 ##### PHP installed from a different package
 
-The Debian project maintains a wiki page with [instructions to install debug symbols][8].
+The Debian project maintains a wiki page with [instructions to install debug symbols][9].
 
 Edit the file `/etc/apt/sources.list`:
 
@@ -458,7 +313,7 @@ apt install -y php7.2-fpm-{package-name-returned-by-find-dbgsym-packages}
 
 ##### PHP installed from `ppa:ondrej/php`
 
-If PHP was installed from the [`ppa:ondrej/php`][9], edit the apt source file `/etc/apt/sources.list.d/ondrej-*.list` by adding the `main/debug` component.
+If PHP was installed from the [`ppa:ondrej/php`][10], edit the apt source file `/etc/apt/sources.list.d/ondrej-*.list` by adding the `main/debug` component.
 
 Before:
 
@@ -494,7 +349,7 @@ apt install -y php7.2-fpm-dbgsym
 apt install -y php7.2-fpm-dbg
 ```
 
-If the `-dbg` and `-dbgsym` packages cannot be found, enable the `ddebs` repositories. Detailed information about how to [install debug symbols][10] from the `ddebs` can be found in the Ubuntu documentation.
+If the `-dbg` and `-dbgsym` packages cannot be found, enable the `ddebs` repositories. Detailed information about how to [install debug symbols][11] from the `ddebs` can be found in the Ubuntu documentation.
 
 For example, for Ubuntu 18.04+, enable the `ddebs` repo:
 
@@ -504,7 +359,7 @@ echo "deb http://ddebs.ubuntu.com $(lsb_release -cs) main restricted universe mu
 echo "deb http://ddebs.ubuntu.com $(lsb_release -cs)-updates main restricted universe multiverse" | tee -a /etc/apt/sources.list.d/ddebs.list
 ```
 
-Import the signing key (make sure the [signing key is correct][11]):
+Import the signing key (make sure the [signing key is correct][12]):
 
 ```
 apt install ubuntu-dbgsym-keyring
@@ -581,7 +436,7 @@ When using Apache, run:
 (. /etc/apache2/envvars; USE_ZEND_ALLOC=0 valgrind --trace-children=yes -- apache2 -X)`
 {{< /code-block >}}
 
-The resulting Valgrind trace is printed by default to the standard error, follow the [official documentation][12] to print to a different target. The expected output is similar to the example below for a PHP-FPM process:
+The resulting Valgrind trace is printed by default to the standard error, follow the [official documentation][13] to print to a different target. The expected output is similar to the example below for a PHP-FPM process:
 
 ```
 ==322== Conditional jump or move depends on uninitialised value(s)
@@ -652,14 +507,15 @@ For Apache, run:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/compatibility_requirements/php
-[2]: https://app.datadoghq.com/apm/docs
+[2]: https://app.datadoghq.com/apm/service-setup
 [3]: /tracing/glossary/
 [4]: https://github.com/DataDog/dd-trace-php/blob/master/CONTRIBUTING.md
 [5]: https://app.datadoghq.com/apm/services
 [6]: /tracing/trace_collection/library_config/php/
-[7]: https://packages.sury.org/php/
-[8]: https://wiki.debian.org/HowToGetABacktrace
-[9]: https://launchpad.net/~ondrej/+archive/ubuntu/php
-[10]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages
-[11]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages#Getting_-dbgsym.ddeb_packages
-[12]: https://valgrind.org/docs/manual/manual-core.html#manual-core.comment
+[7]: /tracing/guide/trace-php-cli-scripts/
+[8]: https://packages.sury.org/php/
+[9]: https://wiki.debian.org/HowToGetABacktrace
+[10]: https://launchpad.net/~ondrej/+archive/ubuntu/php
+[11]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages
+[12]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages#Getting_-dbgsym.ddeb_packages
+[13]: https://valgrind.org/docs/manual/manual-core.html#manual-core.comment

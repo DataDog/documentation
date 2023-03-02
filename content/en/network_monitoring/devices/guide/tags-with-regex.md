@@ -4,9 +4,9 @@ kind: guide
 aliases:
     - /network_performance_monitoring/devices/guide/tags-with-regex/
 further_reading:
-- link: "/network_monitoring/devices/setup"
+- link: "/network_monitoring/devices/snmp_metrics"
   tag: "Documentation"
-  text: "Network Device Monitoring Setup"
+  text: "Network Device Monitoring SNMP Metrics"
 - link: "/getting_started/tagging"
   tag: "Documentation"
   text: "Getting Started with Tags"
@@ -18,7 +18,7 @@ Datadog Network Device Monitoring (NDM) supports regular expressions to create m
 
 ### Installation
 
-Follow the [setup instructions][1] to install Datadog NDM.
+Follow the [setup instructions][1] to install Datadog Network Device Monitoring, and start collecting SNMP Metrics and Traps.
 
 ### Configuration
 
@@ -57,7 +57,7 @@ metrics:
           name: ifDescr
         match: '(\w)(\w+)'
         tags:
-         - prefix: '\1' 
+         - prefix: '\1'
          - suffix: '\2'
 ```
 
@@ -66,6 +66,6 @@ metrics:
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /network_monitoring/devices/setup
+[1]: /network_monitoring/devices/snmp_metrics
 [2]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/conf.yaml.example
 [3]: https://docs.python.org/3/library/re.html
