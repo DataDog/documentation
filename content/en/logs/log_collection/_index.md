@@ -292,7 +292,7 @@ Attributes prescribe [logs facets][9], which are used for filtering and searchin
 
 When logging stack traces, there are specific attributes that have a dedicated UI display within your Datadog application such as the logger name, the current thread, the error type, and the stack trace itself.
 
-{{< img src="logs/log_collection/stack_trace.jpg" style="width:80%;" alt="Stack trace"  >}}
+{{< img src="logs/log_collection/stack_trace.png" style="width:80%;" alt="Attributes for a parsed stack trace"  >}}
 
 To enable these functionalities use the following attribute names:
 

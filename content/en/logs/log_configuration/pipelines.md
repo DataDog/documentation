@@ -165,7 +165,7 @@ Specify alternate attributes to use as the source of a log's trace ID by setting
 
 An example of a log transformed by a pipeline:
 
-{{< img src="logs/processing/pipelines/log_post_processing.jpg" alt="An example of a log transformed by a pipeline" style="width:50%;">}}
+{{< img src="logs/processing/pipelines/log_post_processing.png" alt="An example of a log transformed by a pipeline" style="width:50%;">}}
 
 ### Integration pipelines
 
