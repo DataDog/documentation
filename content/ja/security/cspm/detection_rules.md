@@ -95,7 +95,7 @@ CSPM では、以下のルールタイプを使用して、クラウドインフ
 [5]: /ja/security/default_rules/#cat-posture-management-infra
 [6]: https://docs.datadoghq.com/ja/security_monitoring/default_rules/cis-docker-1.2.0-3.22/
 [7]: /ja/security/notifications/
-[13]: https://app.datadoghq.com/security/configuration/rules/
+[13]: https://app.datadoghq.com/security/configuration/rules?product=cspm
 [14]: /ja/integrations/slack/
 [15]: /ja/integrations/jira/
 [16]: /ja/integrations/pagerduty

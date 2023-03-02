@@ -22,7 +22,7 @@ Cloud Security Posture Management is not currently available in this site.
 </div>
 {{< /site-region >}}
 
-Cloud Security Posture Management (CSPM) [out-of-the-box detection rules][1] evaluate the configuration of your cloud resources and identify potential misconfigurations so you can immediately take steps to remediate. 
+Cloud Security Posture Management (CSPM) [out-of-the-box detection rules][1] evaluate the configuration of your cloud resources and identify potential misconfigurations so you can immediately take steps to remediate.
 
 The detection rules follow the same [conditional logic][2] as all Datadog Security detection rules. For CSPM, each rule maps to controls within one or more [compliance frameworks or industry benchmarks][4].
 
@@ -75,10 +75,10 @@ Regular audits of all detection rules are performed to maintain high fidelity si
 
 The rule deprecation process is as follows:
 
-1. There is a warning with the deprecation date on the rule. In the UI, the warning is shown in the: 
-    - Signal side panel's **Rule Details > Playbook** section 
+1. There is a warning with the deprecation date on the rule. In the UI, the warning is shown in the:
+    - Signal side panel's **Rule Details > Playbook** section
     - Findings side panel
-    - [Rule editor][23] for that specific rule 
+    - [Rule editor][23] for that specific rule
 2. Once the rule is deprecated, there is a 15 month period before the rule is deleted. This is due to the signal retention period of 15 months. During this time, you can re-enable the rule by [cloning the rule][23] in the UI.
 3. Once the rule is deleted, you can no longer clone and re-enable it.
 
@@ -93,7 +93,7 @@ The rule deprecation process is as follows:
 [5]: /security/default_rules/#cat-posture-management-infra
 [6]: https://docs.datadoghq.com/security_monitoring/default_rules/cis-docker-1.2.0-3.22/
 [7]: /security/notifications/
-[13]: https://app.datadoghq.com/security/configuration/rules/
+[13]: https://app.datadoghq.com/security/configuration/rules?product=cspm
 [14]: /integrations/slack/
 [15]: /integrations/jira/
 [16]: /integrations/pagerduty

@@ -174,7 +174,7 @@ Agent 式は、ホストやコンテナ内のアクティビティに基づい�
 
 [1]: /ja/security/default_rules/#cat-workload-security
 [2]: /ja/security/cloud_workload_security/agent_expressions
-[3]: https://app.datadoghq.com/security/configuration/rules
+[3]: https://app.datadoghq.com/security/configuration/rules?product=cws
 [4]: https://app.datadoghq.com/security/configuration/agent-rules
 [5]: /ja/security/notifications/variables/
 [6]: /ja/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
