@@ -200,13 +200,13 @@ az containerapp up \
   --resource-group RESOURCE_GROUP \
   --ingress external \
   --target-port 80 \
-  --env-vars "DD_API_KEY=$DD_API_KEY" "DD_TRACE_ENABLED=true" "DD_SITE='datadoghq.com'" \
+  --env-vars "DD_API_KEY=$DD_API_KEY" "DD_TRACE_ENABLED=true" "DD_SITE=datadoghq.com" \
   --image YOUR_REGISTRY/YOUR_PROJECT
 ```
 
 ### 3. Results
 
-Once the deployment is completed, your metrics and traces are sent to Datadog. In Datadog, navigate to the [APM Trace Explorer][11] and search for your Container App by service name, or filter using the facet `origin:containerapp` to see your Azure Container App traces.
+Once the deployment is completed, your metrics and logs are sent to Datadog. In Datadog, navigate to the [APM Trace Explorer][11] and search for your Container App by service name, or filter using the facet `origin:containerapp` to see your Azure Container App traces.
 
 ## Additional configurations
 
