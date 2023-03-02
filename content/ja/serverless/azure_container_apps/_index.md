@@ -205,13 +205,13 @@ az containerapp up \
 
 ### 3. 結果
 
-デプロイが完了すると、メトリクスとトレースが Datadog に送信されます。Datadog で **Infrastructure->Serverless** に移動すると、サーバーレスメトリクスとトレースを確認できます。
+デプロイが完了すると、メトリクスとトレースが Datadog に送信されます。Datadog の [APM Trace Explorer][11] に移動し、サービス名でコンテナアプリを検索するか、ファセット `origin:containerapp` を使用してフィルターをかけると、Azure コンテナアプリのトレースが表示されます。
 
 ## 追加の構成
 
 - **高度なトレース:** Datadog Agent は、一般的なフレームワーク向けに基本的なトレース機能をすでにいくつか提供しています。さらに詳しい情報については、[高度なトレースガイド][2]に従ってください。
 
-- **ログ:** [Azure インテグレーション][1]を使用している場合は、すでにログが収集されています。また、環境変数 `DD_LOGS_ENABLED` を `true` に設定することで、サーバーレスインスツルメンテーションを通じて直接アプリケーションログをキャプチャすることも可能です。
+- **ログ:** 環境変数 `DD_LOGS_ENABLED` を `true` に設定することで、アプリケーションログをキャプチャし、サーバーレスインスツルメンテーションを通して Datadog に直接送信することができます。直接インスツルメンテーションを行わずにログを送信するには、中央の [Azure インテグレーションによるログ収集][1]を設定し、[コンテナアプリ環境の診断設定][10]を使用して、設定したログパイプラインにログを誘導するように設定します。
 
 - **カスタムメトリクス:** [DogStatsd クライアント][3]を使って、カスタムメトリクスを送信することができます。Cloud Run やその他のサーバーレスアプリケーションの監視には、[ディストリビューション][8]メトリクスを使用します。ディストリビューションは、デフォルトで `avg`、`sum`、`max`、`min`、`count` の集計データを提供します。Metric Summary ページでは、パーセンタイル集計 (p50、p75、p90、p95、p99) を有効にすることができ、タグの管理も可能です。ゲージメトリクスタイプの分布を監視するには、[時間集計と空間集計][9]の両方で `avg` を使用します。カウントメトリクスタイプの分布を監視するには、時間集計と空間集計の両方で `sum` を使用します。
 
@@ -250,3 +250,5 @@ RUN apt-get update && apt-get install -y ca-certificates
 [7]: https://learn.microsoft.com/en-us/azure/container-apps/manage-secrets
 [8]: /ja/metrics/distributions/
 [9]: /ja/metrics/#time-and-space-aggregation
+[10]: https://learn.microsoft.com/en-us/azure/container-apps/log-options#diagnostic-settings
+[11]: https://app.datadoghq.com/apm/traces
