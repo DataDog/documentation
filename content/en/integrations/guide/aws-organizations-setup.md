@@ -116,7 +116,7 @@ The StackSet does not set up log forwarding in the AWS accounts. To set up logs,
 
 ## Uninstall AWS Integration
 
-To uninstall the AWS integration from all AWS accounts and regions in an Organization, you must first delete all StackInstances and then the StackSet. Follow the steps outlined in [AWS docs][7] to delete the created StackInstances and StackSet. 
+To uninstall the AWS integration from all AWS accounts and regions in an Organization, first delete all StackInstances and then the StackSet. Follow the steps outlined in [Delete a stack set][7] to delete the created StackInstances and StackSet. 
 
 ## Further Reading
 
