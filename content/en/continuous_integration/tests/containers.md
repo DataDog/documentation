@@ -179,29 +179,26 @@ Additionally, you need to pass in the environment variables required to configur
 - `GIT_URL_1`
 - `GIT_COMMIT`
 - `GIT_BRANCH`
+- `DD_CUSTOM_TRACE_ID` (custom variable set by the [Jenkins Datadog Plugin][2])
 
 [Full list of build environment variables provided by Jenkins][1]
 
-
 [1]: https://wiki.jenkins.io/display/JENKINS/Building+a+software+project
+[2]: https://github.com/jenkinsci/datadog-plugin
 {{% /tab %}}
-
 {{% tab "TeamCity" %}}
 
 - `TEAMCITY_VERSION`
-- `BUILD_VCS_NUMBER`
-- `BUILD_VCS_URL`
-- `BUILD_ID`
-- `BUILD_NUMBER`
-- `SERVER_URL`
-- `BUILD_ID`
-- `BUILD_CHECKOUTDIR`
+- `TEAMCITY_BUILDCONF_NAME`
+- `BUILD_URL`
+- `DATADOG_BUILD_ID` (custom variable set by the [Datadog TeamCity Integration][2])
 
 [Full list of build environment variables provided by TeamCity][1]
 
-
 [1]: https://www.jetbrains.com/help/teamcity/predefined-build-parameters.html
+[2]: https://plugins.jetbrains.com/plugin/20852-datadog-ci-integration
 {{% /tab %}}
+  
 {{% tab "Travis CI" %}}
 
 - `TRAVIS`
