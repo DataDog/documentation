@@ -48,7 +48,7 @@ This guide provides an overview of the process for setting up the [AWS Integrati
 
 The Cloudformation StackSet template provided by Datadog automates the creation of the required IAM role and associated policies in every AWS account under an Organization or Organizational Unit (OU), and configures the accounts within Datadog, eliminating the need for manual setup. Once set up, the integration automatically starts collecting AWS metrics and events for you to start monitoring your infrastructure.
 
-The Datadog Cloudformation StackSet performs the following steps:
+The Datadog CloudFormation StackSet performs the following steps:
 
 1. Deploys the Datadog AWS CloudFormation Stack in every account under an AWS Organization or Organizational Unit.
 2. Automatically creates the necessary IAM role and policies in the target accounts.
