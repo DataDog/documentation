@@ -56,8 +56,7 @@ The Datadog CloudFormation StackSet performs the following steps:
 4. Optionally disables metric collection for the AWS infrastructure (can be disabled for Cloud Cost Management (CCM) or Cloud Security Posture Management (CSPM) only use cases)
 5. Optionally configures Datadog Cloud Security Posture Management to monitor resource misconfigurations in your AWS accounts.
 
-
-Please note that the StackSet does not set up log forwarding in the AWS accounts. To set up logs, follow the steps in the [Log Collection][2] guide.
+**Note**: The StackSet does not set up log forwarding in the AWS accounts. To set up logs, follow the steps in the [Log Collection][2] guide.
 
 
 ## Prerequisites
