@@ -33,7 +33,7 @@ On Debian and Ubuntu, the `datadog-agent` package has a soft dependency on the `
 
 ## Information security
 
-The Datadog Agent submits data to Datadog over a TLS-encrypted TCP connection by default. As of version 6, the Agent can be configured to enforce a minimum TLS version when connecting to Datadog. If you require the use of strong cryptography, for example, to meet PCI requirements, you should use Agent v6/7 and set the `min_tls_version: 'tlsv1.2'` setting in the Agent's configuration file.
+The Datadog Agent submits data to Datadog over a TLS-encrypted TCP connection by default. As of version 6, the Agent can be configured to enforce a minimum TLS version when connecting to Datadog. If you require the use of strong cryptography, for example, to meet PCI requirements, you should use Agent v6/7 and set the `min_tls_version: 'tlsv1.2'` setting, or `force_tls_12: true` for Agent < 6.39.0/7.39.0, in the Agent's configuration file.
 
 ## Networking and proxying
 
