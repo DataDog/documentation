@@ -61,9 +61,6 @@ The Datadog CloudFormation StackSet performs the following steps:
 
 ## Prerequisites
 
-Before getting started, ensure you have the following prerequisites:
-
-
 1. **Access to the management account**: Your AWS user needs to be able to access the AWS management account.
 2. **An account administrator has enabled Trusted Access with AWS Organizations**: Refer to [AWS Documentation][3] on how to enable trusted access between StackSets and Organizations to create & deploy stacks using service-managed permissions.
 
