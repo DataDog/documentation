@@ -37,7 +37,7 @@ User monitoring tags are applied on the root span and start with the prefix `usr
 
 **Note**: Check that you have added [necessary dependencies to your application][1].
 
-The example below shows how to obtain the root span, add the relevant user monitoring tags and enable user blocking capability:
+The example below shows how to obtain the root span, add the relevant user monitoring tags, and enable user blocking capability:
 
 ```java
 import datadog.trace.api.GlobalTracer;
@@ -104,7 +104,7 @@ For information and options, read [the .NET tracer documentation][1].
 
 The Go tracer package provides the `SetUser()` function, which allows you to monitor authenticated requests by adding user information to the trace. For more options, see [the Go tracer documentation][1].
 
-This example shows how to retrieve the current tracer span, use it to set user monitoring tags and enable user blocking capability:
+This example shows how to retrieve the current tracer span, use it to set user monitoring tags, and enable user blocking capability:
 
 ```go
 import "gopkg.in/DataDog/dd-trace-go.v1/appsec"
