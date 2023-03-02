@@ -201,10 +201,11 @@ Add all of the `ip-ranges` to your inclusion list. While only a subset are activ
 
 <div class="alert alert-warning">
 All outbound traffic is sent over SSL through TCP / UDP.
+<br><br>
+Ensure the Agent is only accessible by your applications or trusted network sources using a firewall rule or similar network restriction. Untrusted access can allow malicious actors to perform several invasive actions, including but not limited to writing traces and metrics to your Datadog account, or obtaining information about your configuration and services.
 </div>
 
 Open the following ports to benefit from all the **Agent** functionalities:
-
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
@@ -314,6 +315,9 @@ Used for Agent services communicating with each other locally within the host on
 
 5002/tcp
 : Port for the [Agent browser GUI][2]
+
+5012/tcp
+: Port for the APM [go_expvar server][1]
 
 8125/udp
 : Port for DogStatsD unless `dogstatsd_non_local_traffic` is set to true. This port is available on localhost: `127.0.0.1`, `::1`, `fe80::1`.

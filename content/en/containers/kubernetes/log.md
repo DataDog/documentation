@@ -158,6 +158,7 @@ agent:
     name: "gcr.io/datadoghq/agent:latest"
   log:
     enabled: true
+    logsConfigContainerCollectAll: true
 ```
 
 See the sample [manifest with logs and metrics collection enabled][1] for a complete example.

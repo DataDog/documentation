@@ -8,7 +8,6 @@ author:
   sales_email: contact@gofirefly.io
   support_email: contact@gofirefly.io
 categories:
-- autodiscovery
 - 自動化
 - クラウド
 - developer tools
@@ -36,7 +35,6 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Autodiscovery
   - Category::Automation
   - Category::Cloud
   - Category::Developer Tools

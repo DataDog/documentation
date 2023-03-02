@@ -64,6 +64,12 @@ Analyze performance information about your API tests, multistep API tests, brows
 
 {{< img src="synthetics/test_summary_dashboard.png" alt="Test Summary Dashboard" style="width:100%;">}}
 
+## Use the Synthetic Monitoring & Continuous Testing Explorer
+
+Create [search queries and visualizations][20] for your Synthetic test runs or batches of tests running in CI/CD pipelines. 
+
+{{< img src="continuous_testing/explorer_ci_batches.png" alt="Continuous Testing Explorer" style="width:100%;">}}
+
 ## Ready to start?
 
 See [Getting Started with Synthetic Monitoring][18] for instructions on creating your first Synthetic test and monitoring your web applications. Then, explore [Getting Started with Private Locations][19] for instructions on creating your private location and running Synthetic tests with your private location.
@@ -92,3 +98,4 @@ See [Getting Started with Synthetic Monitoring][18] for instructions on creating
 [17]: /synthetics/dashboards/
 [18]: /getting_started/synthetics
 [19]: /getting_started/synthetics/private_location
+[20]: /continuous_testing/explorer/

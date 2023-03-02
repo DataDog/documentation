@@ -22,6 +22,10 @@ kind: documentation
 title: RUM データとコンテキストの変更
 ---
 
+{{< callout url="#" btn_hidden="true" header="機能フラグ追跡のベータ版に参加しよう！">}}
+機能フラグで RUM データを補強し、パフォーマンス監視や行動の変化を可視化するには、<a href="https://docs.datadoghq.com/real_user_monitoring/guide/setup-feature-flag-data-collection/">機能フラグ追跡</a>の非公開ベータ版に参加しましょう。アクセス権をリクエストするには、Datadog サポート (support@datadoghq.com) までご連絡ください。
+{{< /callout >}}
+
 ## 概要
 
 RUM によって[収集されたデータ][1]を変更して、次のニーズをサポートするには、さまざまな方法があります。
@@ -121,7 +125,7 @@ React、Angular、Vue、またはその他のフロントエンドフレーム�
 
 ## RUM データを強化および制御する
 
-RUM ブラウザ SDK は RUM イベントをキャプチャし、それらの主な属性を設定します。`beforeSend` コールバック関数を使用すると、RUM ブラウザ SDK によって収集されたすべてのイベントにアクセスしてから Datadog に送信できます。
+RUM ブラウザ SDK は RUM イベントをキャプチャし、それらの主な属性を設定します。`beforeSend` コールバック関数を使用すると、RUM ブラウザ SDK によって収集されたイベントが Datadog に送信される前に、そのすべてのイベントにアクセスできます。
 
 RUM イベントをインターセプトすると、次のことが可能になります。
 
@@ -494,7 +498,7 @@ window.DD_RUM && window.DD_RUM.clearUser()
 
 ## サンプリング
 
-デフォルトでは、収集セッション数にサンプリングは適用されていません。収集セッション数に相対サンプリング (% 表示) を適用するには、RUM を初期化する際に `sampleRate` パラメーターを使用します。
+デフォルトでは、収集セッション数にサンプリングは適用されていません。収集セッション数に相対サンプリング (% 表示) を適用するには、RUM を初期化する際に `sessionSampleRate` パラメーターを使用します。
 
 下記の例では、RUM アプリケーションの全セッションの 90% のみを収集します。
 
@@ -507,7 +511,7 @@ datadogRum.init({
     applicationId: '<DATADOG_APPLICATION_ID>',
     clientToken: '<DATADOG_CLIENT_TOKEN>',
     site: '<DATADOG_SITE>',
-    sampleRate: 90,
+    sessionSampleRate: 90,
 });
 ```
 {{% /tab %}}
@@ -524,7 +528,7 @@ datadogRum.init({
         clientToken: '<CLIENT_TOKEN>',
         applicationId: '<APPLICATION_ID>',
         site: '<DATADOG_SITE>',
-        sampleRate: 90,
+        sessionSampleRate: 90,
     })
   })
 </script>
@@ -537,7 +541,7 @@ window.DD_RUM &&
         clientToken: '<CLIENT_TOKEN>',
         applicationId: '<APPLICATION_ID>',
         site: '<DATADOG_SITE>',
-        sampleRate: 90,
+        sessionSampleRate: 90,
     });
 ```
 {{% /tab %}}

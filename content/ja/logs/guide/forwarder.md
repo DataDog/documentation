@@ -9,18 +9,18 @@ kind: documentation
 title: Datadog Forwarder
 ---
 
-Datadog Forwarder は、ログ、カスタムメトリクス、トレースを環境から Datadog に送信する AWS Lambda 関数です。Forwarder は次のことができます。
+Datadog Forwarder は、AWS から Datadog にログを送信する AWS Lambda 関数で、具体的には次のようなものです。
 
 - CloudWatch、ELB、S3、CloudTrail、VPC、SNS、CloudFront ログを Datadog に転送する
 - S3 イベントを Datadog に転送する
 - Kinesis データストリームイベントを Datadog に転送する (CloudWatch ログのみがサポートされています)
-- CloudWatch ログを使用して AWS Lambda 関数からカスタムメトリクスを転送する
-- CloudWatch ログを使用して AWS Lambda 関数からトレースを転送する
-- AWS REPORT ログから解析された拡張 Lambda メトリクス (`aws.lambda.enhanced.*`) を生成して送信する: `duration`、`billed_duration`、`max_memory_used`、`timeouts`、`out_of_memory`、`estimated_cost`
+- AWS Lambda 関数から Datadog にメトリクス、トレース、ログを転送します。**注**: Datadog は、Lambda 関数を監視するために [Datadog Lambda 拡張機能](https://github.com/DataDog/datadog-lambda-extension)を使用することを推奨しています。
 
 Datadog Forwarder で AWS サービスログを送信する方法について、詳細は [Datadog Lambda 関数で AWS サービスのログを送信する](https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/)のガイドをお読みください。
 
-## インストール
+Forwarder を使用して AWS Lambda のログから Datadog にメトリクス、トレース、ログを転送しているサーバーレスのお客様には、Lambda の実行環境から直接テレメトリーを収集する [Datadog Lambda 拡張機能への移行](https://docs.datadoghq.com/serverless/guide/extension_motivation/)が推奨されます。Forwarder は引き続き使用可能ですが、セキュリティアップデートのみを受信します。
+
+## APM に Datadog Agent を構成する
 
 Datadog では、[CloudFormation](#cloudformation) を使用して Forwarder を自動的にインストールすることをお勧めします。[Terraform](#terraform) を使用するか、[手動](#manual)でセットアッププロセスを完了することもできます。
 
@@ -91,12 +91,13 @@ resource "aws_cloudformation_stack" "datadog_forwarder" {
   capabilities = ["CAPABILITY_IAM", "CAPABILITY_NAMED_IAM", "CAPABILITY_AUTO_EXPAND"]
   parameters   = {
     DdApiKeySecretArn  = "REPLACE ME WITH THE SECRETS ARN",
-    DdSite             = "{{< region-param key="dd_site" code="true" >}}",
+    DdSite             = "datadoghq.com",
     FunctionName       = "datadog-forwarder"
   }
   template_url = "https://datadog-cloudformation-template.s3.amazonaws.com/aws/forwarder/latest.yaml"
 }
 ```
+注: `DdSite` がサイトと一致していることを確認してください。 有効なオプションについては、https://docs.datadoghq.com/getting_started/site/#access-the-datadog-site の "サイトパラメーター" を参照してください。
 
 <!-- xxz tab xxx -->
 <!-- xxx tab "手動" xxx -->
@@ -292,7 +293,9 @@ Datadog Forwarder は Datadog によって署名されています。Forwarder �
 : Datadog Forwarder Lambda 関数のタイムアウト
 
 `ReservedConcurrency`
-: Datadog Forwarder Lambda 関数用に予約されている同時実行数。空の場合、予約されていないアカウントの同時実行数を使用します。
+: Datadog Forwarder Lambda 関数の予約済み同時実行数。空の場合、予約されていないアカウントの同時実行を使用します。
+最低でも 10 個の予約済み同時実行を使用することをお勧めしますが、このために制限を増やす必要があるかもしれないので、デフォルトは 0 です。
+予約されていないアカウントの同時実行を使用する場合、環境内の他の Lambda 関数を制限することができます。
 
 `LogRetentionInDays`
 : Datadog Forwarder Lambda 関数により生成されたログの CloudWatch ログ保存期間
@@ -363,9 +366,8 @@ Datadog Forwarder は Datadog によって署名されています。Forwarder �
 - Lambda プラットフォームログ: `"(START|END) RequestId:\s` の包含（または除外）。注: 先行する `"` は、 ログメッセージの開始（json blob 内の (`{"message": "START RequestId...."}`)）と一致する必要があります。Datadog では、`REPORT` ログを残すことを推奨しています。これは、サーバーレス関数のビューで呼び出しリストを生成するために使用されるからです。
 - CloudTrail エラーメッセージのみ含める: `errorMessage`
 - HTTP 4XX または 5XX のエラーコードを含むログのみを含める: `\b[4|5][0-9][0-9]\b`
-- `message` フィールドに特定の JSON キー/値ペアを含む CloudWatch ログのみを含める: `\\"awsRegion\\":\\"us-east-1\\"`
-  - CloudWatch ログイベントのメッセージフィールドは文字列としてエンコードされます。`{"awsRegion": "us-east-1"}` は `{\"awsRegion\":\"us-east-1\"}` のようにエンコードされます。
-    そのため提供するパターンには、`\` エスケープ文字が余分に必要です。
+- `message` フィールドに特定の JSON キー/値ペアを含む CloudWatch ログのみを含める: `\"awsRegion\":\"us-east-1\"`
+  - CloudWatch のログイベントのメッセージフィールドは、文字列としてエンコードされています。例えば、`{"awsRegion": "us-east-1"}` は `{\"awsRegion\":\"us-east-1\"}` としてエンコードされます。したがって、提供するパターンには、`\"awsRegion\":\"us-east-1\"` のように `\` エスケープ文字を含める必要があります。
 
 ログに対してさまざまなパターンをテストするには、[デバッグログ](#troubleshooting)をオンにします。
 

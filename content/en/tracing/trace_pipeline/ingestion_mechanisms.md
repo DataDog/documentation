@@ -74,7 +74,7 @@ For example, to send 20% of the traces for the service named `my-service`:
 
 ```
 # using system property
-java -Ddd.trace.sampling.rules=my-service:0.2 -javaagent:dd-java-agent.jar -jar my-app.jar
+java -Ddd.trace.sampling.rules='[{\"service\": \"my-service\", \"sample_rate\":0.2}]' -javaagent:dd-java-agent.jar -jar my-app.jar
 
 # using environment variables
 export DD_TRACE_SAMPLING_RULES=[{"service": "my-service", "sample_rate": 0.2}]
@@ -231,9 +231,19 @@ With Agent version 7.33 and forward, you can configure the error sampler in the 
 @env DD_APM_ERROR_TPS - integer - optional - default: 10
 ```
 
-**Note**: Set the parameter to `0` to disable the error sampler.
+**Notes**: 
+1. Set the parameter to `0` to disable the error sampler.
+2. The error sampler captures local traces with error spans at the Agent level. If the trace is distributed, there is no guarantee that the complete trace is sent to Datadog.
+3. By default, spans dropped by tracing library rules or custom logic such as `manual.drop` are **excluded** under the error sampler.
 
-**Note**: The error sampler captures local traces with error spans at the Agent level. If the trace is distributed, there is no way to guarantee that the complete trace will be sent to Datadog.
+#### Datadog Agent 6/7.41.0 and higher
+
+To override the default behavior so that spans dropped by the tracing library rules or custom logic such as `manual.drop` are **included** by the error sampler, enable the feature with: `DD_APM_FEATURES=error_rare_sample_tracer_drop` in the Datadog Agent (or the dedicated Trace Agent container within the Datadog Agent pod in Kubernetes).
+
+
+#### Datadog Agent 6/7.33 to 6/7.40.x
+
+Error sampling default behavior can't be changed for these Agent versions. Upgrade the Datadog Agent to Datadog Agent 6/7.41.0 and higher.
 
 
 ### Rare traces
@@ -247,7 +257,7 @@ The rare sampler sends a set of rare spans to Datadog. It catches combinations o
 
 By default, the rare sampler is **not enabled**.
 
-**Note**: When **enabled**, spans dropped by tracing library rules or custom logic such as `manual.keep` are **excluded** under this sampler.
+**Note**: When **enabled**, spans dropped by tracing library rules or custom logic such as `manual.drop` are **excluded** under this sampler.
 
 To configure the rare sampler, update the `apm_config.enable_rare_sampler` setting in the Agent main configuration file (`datadog.yaml`) or with the environment variable `DD_APM_ENABLE_RARE_SAMPLER`:
 
@@ -256,7 +266,7 @@ To configure the rare sampler, update the `apm_config.enable_rare_sampler` setti
 @env DD_APM_ENABLE_RARE_SAMPLER - boolean - optional - default: false
 ```
 
-To evaluate spans dropped by tracing library rules or custom logic such as `manual.keep`,
+To evaluate spans dropped by tracing library rules or custom logic such as `manual.drop`,
  enable the feature with: `DD_APM_FEATURES=error_rare_sample_tracer_drop` in the Trace Agent.
 
 
@@ -264,7 +274,7 @@ To evaluate spans dropped by tracing library rules or custom logic such as `manu
 
 By default, the rare sampler is enabled.
 
-**Note**: When **enabled**, spans dropped by tracing library rules or custom logic such as `manual.keep` **are excluded** under this sampler. To include these spans in this logic, upgrade to Datadog Agent 6.41.0/7.41.0 or higher.
+**Note**: When **enabled**, spans dropped by tracing library rules or custom logic such as `manual.drop` **are excluded** under this sampler. To include these spans in this logic, upgrade to Datadog Agent 6.41.0/7.41.0 or higher.
 
 To change the default rare sampler settings, update the `apm_config.disable_rare_sampler` setting in the Agent main configuration file (`datadog.yaml`) or with the environment variable `DD_APM_DISABLE_RARE_SAMPLER`:
 
@@ -572,7 +582,7 @@ For example, if you are building [metrics from spans][6] to monitor specific ser
 
 {{< tabs >}}
 {{% tab "Java" %}}
-Starting in tracing library version [version 1.3.0][1], for Java applications, set by-service and by-operation name **span** sampling rules with the `DD_SPAN_SAMPLING_RULES` environment variable.
+Starting in tracing library version [version 1.7.0][1], for Java applications, set by-service and by-operation name **span** sampling rules with the `DD_SPAN_SAMPLING_RULES` environment variable.
 
 For example, to collect 100% of the spans from the service named `my-service`, for the operation `http.request`, up to 50 spans per second:
 
@@ -582,7 +592,7 @@ For example, to collect 100% of the spans from the service named `my-service`, f
 
 Read more about sampling controls in the [Java tracing library documentation][2].
 
-[1]: https://github.com/DataDog/dd-trace-java/releases/tag/v1.3.0
+[1]: https://github.com/DataDog/dd-trace-java/releases/tag/v1.7.0
 [2]: /tracing/trace_collection/dd_libraries/java
 {{% /tab %}}
 {{% tab "Python" %}}

@@ -22,6 +22,10 @@ kind: faq
         <td>17 Jan 2023</td>
         <td>Updated <a href="/resources/sh/rpm_check.sh"><code>rpm_check</code></a> script v1.2.0, clearer identify and remedy steps</td>
     </tr>
+    <tr>
+        <td>3 Feb 2023</td>
+        <td>Clarify which Agents 5 versions are signed with the affected key</td>
+    </tr>
 </table>
 </details>
 
@@ -37,7 +41,7 @@ On January 4th, 2023, Datadog was notified by CircleCI that they were investigat
 
 The impacted RPM GPG signing key has the fingerprint `60A389A44A0C32BAE3C03F0B069B56F54172A230`, and is accessible in [our signing keys location][2]. This key was historically used to sign:
 
-* Agent 5 releases and Agent 6 releases up to and including v6.13.0 (`datadog-agent` package)
+* Agent 5 releases up to and including v5.32.8 and Agent 6 releases up to and including v6.13.0 (`datadog-agent` package)
 * Standalone DogStatsD 6 releases and Standalone DogStatsD 7 releases up to and including v7.23.1 (`datadog-dogstatsd` package)
 
 <div class="alert alert-info">
@@ -52,7 +56,7 @@ Before you start, if you have a large infrastructure, **prioritize your search**
    * Agent v5 or v6
    * Standalone DogStatsD v6 or v7.23.2 and earlier
 
-   On RPM-based Linux hosts, the following scenarios are **less likely** to be affected, but still possible:
+   On RPM-based Linux hosts, the following scenarios are **unlikely** to be affected, but still worth checking your hosts:
    * Agent v7
    * Standalone DogStatsD v7.23.2+.
 

@@ -66,7 +66,7 @@ Select **Web and Mobile Apps** from the dropdown menu. If you select **Backend S
 Triggers when the error count is `above` or `above or equal to`. An alert is triggered whenever a metric crosses a threshold.
 
 [1]: /real_user_monitoring/explorer/search/
-[2]: /monitors/create/configuration/#alert-grouping/
+[2]: /monitors/configuration/#alert-grouping/
 [3]: /tracing/trace_explorer/?tab=listview#filtering
 [4]: /logs/explorer/search/
 {{% /tab %}}
@@ -93,7 +93,7 @@ The monitor triggers when the number of errors is `above` or `above or equal to`
 [1]: /real_user_monitoring/explorer/?tab=measures#setup-facets-measures
 [2]: /real_user_monitoring/explorer/search/
 [3]: /tracing/trace_explorer/?tab=listview#filtering
-[4]: /monitors/create/configuration/#alert-grouping/
+[4]: /monitors/configuration/#alert-grouping/
 [5]: /logs/explorer/search/
 {{% /tab %}}
 {{< /tabs >}}
@@ -115,6 +115,6 @@ For more information about the **Notify your team** and **Say what’s happening
 [1]: /real_user_monitoring/
 [2]: /tracing/
 [3]: https://app.datadoghq.com/monitors/create/error-tracking
-[4]: /monitors/create/configuration/#advanced-alert-conditions
+[4]: /monitors/configuration/#advanced-alert-conditions
 [5]: /monitors/notify/
 [6]: /logs/

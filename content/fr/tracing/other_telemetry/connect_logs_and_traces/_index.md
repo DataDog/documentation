@@ -5,6 +5,7 @@ aliases:
 description: Associez vos logs à vos traces pour les mettre en corrélation dans Datadog.
 kind: documentation
 title: Associer vos logs à vos traces
+type: multi-code-lang
 ---
 
 {{< img src="tracing/connect_logs_and_traces/trace_id_injection.png" alt="Logs dans des traces"  style="width:100%;">}}

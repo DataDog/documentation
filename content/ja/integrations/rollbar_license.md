@@ -78,7 +78,7 @@ tile:
 
 ## 概要
 
-[Rollbar](https://rollbar.com) では、開発チームが数秒でエラーをピンポイントで特定できるように、AI によるグループ化で、従来のエラー監視ツールを超えることができます。リアルタイムでエラーを積極的に発見し、適切な担当者に警告し、自動的にロールバックし、修正することができます。
+[Rollbar][1] では、開発チームが数秒でエラーをピンポイントで特定できるように、AI によるグループ化で、従来のエラー監視ツールを超えることができます。リアルタイムでエラーを積極的に発見し、適切な担当者に警告し、自動的にロールバックし、修正することができます。
 
 ### オートメーショングレードのグループ化
 開発者の信頼を築くエラー監視のノイズを低減します。エラーリストから重複を排除することでトリアージが容易になり、手作業の軽減と自動化によりエラーへの対応が迅速になります。
@@ -97,6 +97,12 @@ Datadog、GitHub、GitHub Enterprise Server、Atlassian、Google Cloud、Terrafo
 
 
 ## サポート
-ご質問・お問い合わせは、[こちら](https://www.rollbar.com/support)までお気軽にどうぞ。
+
+ご質問・お問い合わせは、[こちら][4]までお気軽にどうぞ。
+
+[1]: https://rollbar.com
+[2]: https://rollbar.com
+[3]: https://docs.rollbar.com/
+[4]: https://www.rollbar.com/support
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rollbar-license" target="_blank">こちらをクリック</a>してください。

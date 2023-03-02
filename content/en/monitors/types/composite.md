@@ -222,7 +222,7 @@ Setting [new_group_delay][4] is possible in composite monitors and if set and bi
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/composite
-[2]: /monitors/create/configuration/#advanced-alert-conditions
+[2]: /monitors/configuration/#advanced-alert-conditions
 [3]: /monitors/notify/
-[4]: /monitors/create/configuration/?tab=thresholdalert#new-group-delay
+[4]: /monitors/configuration/?tab=thresholdalert#new-group-delay
 [5]: /monitors/notify/variables/?tab=is_alert#composite-monitor-variables

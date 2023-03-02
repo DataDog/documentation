@@ -25,7 +25,7 @@ Event monitors allow you to alert on events matching a search query.
 
 To create an [event monitor][1] in Datadog, navigate to **Monitors** > **New Monitor** > **Event**.
 
-<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 Event monitors per account. If you are encountering this limit, consider using <a href="/monitors/create/configuration/?tab=thresholdalert#alert-grouping">multi alerts</a>, or <a href="/help/">Contact Support</a>.</div>
+<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 Event monitors per account. If you are encountering this limit, consider using <a href="/monitors/configuration/?tab=thresholdalert#alert-grouping">multi alerts</a>, or <a href="/help/">Contact Support</a>.</div>
 
 ### Define the search query
 
@@ -85,5 +85,5 @@ The template variable is `{{event.tags.env}}`. The result of using this template
 [1]: https://app.datadoghq.com/monitors#create/event
 [2]: /events/explorer/#search-syntax
 [3]: /help/
-[4]: /monitors/create/configuration/#advanced-alert-conditions
+[4]: /monitors/configuration/#advanced-alert-conditions
 [5]: /monitors/notify/

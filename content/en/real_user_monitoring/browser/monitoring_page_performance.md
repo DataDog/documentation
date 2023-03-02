@@ -19,6 +19,10 @@ further_reading:
     text: "Learn about RUM Dashboards"
 ---
 
+{{< callout btn_hidden="true" header="Join the Feature Flag Tracking Beta!">}}
+Enrich your RUM data with feature flags to get visibility into performance monitoring. <a href="https://docs.datadoghq.com/real_user_monitoring/guide/setup-feature-flag-data-collection/">Feature Flag Tracking</a> is in private beta. To request access, contact Datadog Support at support@datadoghq.com.
+{{< /callout >}}
+
 ## Overview
 
 RUM view events collect extensive performance metrics for every page view. Monitor your application's page views and explore performance metrics in dashboards and the RUM Explorer.
@@ -40,10 +44,8 @@ You can access performance metrics for your views in:
 
 {{< img src="real_user_monitoring/browser/core-web-vitals.png" alt="Core Web Vitals summary visualization"  >}}
 
-Real User Monitoring includes these metrics as lab metrics in a RUM application's Overview page.
-
 - First Input Delay and Largest Contentful Paint are not collected for pages opened in the background (for example, in a new tab or a window without focus).
-- Metrics collected from your real users' page views may differ from those calculated for pages loaded in a fixed environment such as a [Synthetic browser test][6].
+- Metrics collected from your real users' page views may differ from those calculated for pages loaded in a fixed, controlled environment such as a [Synthetic browser test][6]. Synthetic Monitoring displays Largest Contentful Paint and Cumulative Layout Shift as lab metrics, not real metrics.  
 
 | Metric                   | Focus            | Description                                                                                           | Target value |
 |--------------------------|------------------|-------------------------------------------------------------------------------------------------------|--------------|

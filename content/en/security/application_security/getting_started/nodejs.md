@@ -25,11 +25,14 @@ You can monitor application security for Node.js apps running in Docker, Kuberne
 
 {{% appsec-getstarted %}}
 
+{{% appsec-getstarted-with-rc %}}
+
 ## Get started
 
-1. **Update your Datadog Node.js library package** to at least version 2.0.0, by running:
+1. **Update your Datadog Node.js library package** to at least version 2.23.0 (for NodeJS 12+) or 3.10.0 (for NodeJS 14+), by running one of these commands:
    ```shell
-   npm install dd-trace
+   npm install dd-trace@^2.23.0
+   npm install dd-trace@^3.10.0
    ```
    or to update from a previously installed 1.x version:
    ```shell
@@ -37,7 +40,7 @@ You can monitor application security for Node.js apps running in Docker, Kuberne
    ```
    Use this [migration guide][1] to assess any breaking changes if you upgraded your library from 1.x to 2.x.
 
-   For information about which language and framework versions are supported by the library, see [Compatibility][2].
+   Application Security Management is compatible with Express v4+ and NodeJS v12.17.0+. For additional information, see [Compatibility][2].
 
 2. **Where you import and initialize the Node.js library for APM, also enable ASM.** This might be either in your code or with environment variables. If you initialized APM in code, add `{appsec: true}` to your init statement:
       {{< tabs >}}
@@ -143,9 +146,9 @@ DD_APPSEC_ENABLED=true node app.js
 {{% /tab %}}
 {{< /tabs >}}
 
-{{% appsec-getstarted-2-canary %}}
+{{% appsec-getstarted-2-plusrisk %}}
 
-{{< img src="/security/application_security/application-security-signal.png" alt="Security Signal details page showing tags, metrics, suggested next steps, and attacker IP addresses associated with a threat." style="width:100%;" >}}
+{{< img src="/security/application_security/appsec-getstarted-threat-and-vuln.mp4" alt="Video showing Signals explorer and details, and Vulnerabilities explorer and details." video="true" >}}
 
 ## Further Reading
 

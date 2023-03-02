@@ -2,7 +2,6 @@
 title: Getting Started with RUM Deployment Tracking
 kind: guide
 beta: true
-private: true
 description: Learn how to set up RUM to capture new releases, track your deployments, and analyze the performance in Datadog
 aliases:
 - /real_user_monitoring/guide/getting-started-rum-deployment-tracking/
@@ -15,9 +14,10 @@ further_reading:
   text: "Use Version tags within Datadog APM to monitor deployments"
 ---
 
-{{< beta-callout url="#" btn_hidden="true" >}}
-RUM deployment tracking is in private beta. To request access, contact Datadog support at support@datadoghq.com.
-{{< /beta-callout >}}
+<div class="alert alert-warning">
+    RUM Deployment Tracking is currently in beta.
+</div>
+
 
 ## Overview
 As teams iterate quickly and deploy code, it can be difficult to find the exact change that caused a spike in errors or slower page load times. RUM Deployment Tracking enables you to identify when a recent deployment or release is causing performance issues within your application and help you identify the source of the problem. 

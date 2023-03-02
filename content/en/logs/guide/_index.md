@@ -14,12 +14,13 @@ cascade:
     {{< nextlink href="logs/guide/access-your-log-data-programmatically" >}}Programmatically access log data using the Logs Search API{{< /nextlink >}}
     {{< nextlink href="logs/guide/getting-started-lwl" >}}Logging Without Limits™ Guide{{< /nextlink >}}
     {{< nextlink href="logs/guide/correlate-logs-with-metrics" >}}Correlate Logs with Metrics{{< /nextlink >}}
-    {{< nextlink href="logs/guide/logs-monitors-on-volumes" >}}Monitor your log usage{{< /nextlink >}}
+    {{< nextlink href="logs/guide/best-practices-for-log-management" >}}Best Practices for Log Management{{< /nextlink >}}
 {{< /whatsnext >}}
 
 <br>
 
 {{< whatsnext desc="Log Collection" >}}
+    {{< nextlink href="/agent/logs/advanced_log_collection" >}}Advanced log collection configurations{{< /nextlink >}}
     {{< nextlink href="/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/" >}}Send AWS services logs with the Datadog Kinesis Firehose Destination{{< /nextlink >}}
     {{< nextlink href="/logs/guide/sending-events-and-logs-to-datadog-with-amazon-eventbridge-api-destinations/" >}}Sending Events and Logs to Datadog with Amazon EventBridge API Destinations{{< /nextlink >}}
     {{< nextlink href="/logs/guide/forwarder/" >}}Set up Datadog Lambda Forwarder{{< /nextlink >}}
@@ -35,6 +36,7 @@ cascade:
     {{< nextlink href="/logs/guide/container-agent-to-tail-logs-from-host" >}}Use the Container Agent to Tail Logs from the Host{{< /nextlink >}}
     {{< nextlink href="/logs/guide/mechanisms-ensure-logs-not-lost" >}}Mechanisms to Ensure Logs are Not Lost{{< /nextlink >}}
     {{< nextlink href="/logs/guide/custom-log-file-with-heightened-read-permissions" >}}Send Logs from a Custom Log File with Heightened Read Permissions{{< /nextlink >}}   
+    {{< nextlink href="/logs/guide/aws-eks-fargate-logs-with-kinesis-data-firehose" >}}Send AWS EKS Fargate Logs with Kinesis Data Firehose{{< /nextlink >}}
 {{< /whatsnext >}}
 
 <br>

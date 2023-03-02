@@ -13,6 +13,7 @@ cascade:
 {{< whatsnext desc="General guides:" >}}
     {{< nextlink href="integrations/guide/requests" tag=" documentation" >}}Request Datadog integrations{{< /nextlink >}}
     {{< nextlink href="/integrations/guide/reference-tables/" tag=" Documentation" >}}Add Custom Metadata with Reference Tables{{< /nextlink >}}   
+    {{< nextlink href="integrations/guide/source-code-integration" tag=" Documentation" >}}Datadog Source Code Integration{{< /nextlink >}}
     {{< nextlink href="integrations/guide/cloud-metric-delay" tag=" cloud" >}}Cloud metric delay{{< /nextlink >}}
     {{< nextlink href="integrations/guide/add-event-log-files-to-the-win32-ntlogevent-wmi-class" tag=" Windows" >}}Add event log files to the `Win32_NTLogEvent` WMI class{{< /nextlink >}}
     {{< nextlink href="integrations/guide/retrieving-wmi-metrics" tag=" Windows" >}}Retrieving WMI metrics{{< /nextlink >}}
@@ -22,7 +23,6 @@ cascade:
     {{< nextlink href="integrations/guide/freshservice-tickets-using-webhooks" tag=" Webhooks" >}}Freshservice tickets using Webhooks{{< /nextlink >}}
     {{< nextlink href="integrations/guide/hadoop-distributed-file-system-hdfs-integration-error" tag=" Hadoop" >}}Hadoop Distributed File System (HDFS) integration error{{< /nextlink >}}
     {{< nextlink href="integrations/guide/hcp-consul" tag=" Consul" >}}Monitoring HCP Consul with Datadog{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/source-code-integration" tag=" GitHub Apps" >}}Datadog Source Code Integration{{< /nextlink >}}
     {{< nextlink href="integrations/guide/agent-failed-to-retrieve-rmiserver-stub" tag=" kafka" >}}Agent failed to retrieve RMIServer stub{{< /nextlink >}}
     {{< nextlink href="integrations/guide/send-tcp-udp-host-metrics-to-the-datadog-api/" tag=" network" >}}Send TCP/UDP host metrics to the Datadog API{{< /nextlink >}}
     {{< nextlink href="integrations/guide/snmp-commonly-used-compatible-oids/" tag=" snmp" >}}SNMP commonly used and compatible OIDs{{< /nextlink >}} 

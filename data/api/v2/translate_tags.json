@@ -39,6 +39,10 @@
     "name": "Fastly Integration",
     "description": "Configure your Datadog Fastly integration directly through the Datadog API."
   },
+  "ip-allowlist": {
+    "name": "IP Allowlist",
+    "description": "The IP allowlist API is used to manage the IP addresses that\ncan access the Datadog API and web UI. It does not block\naccess to intake APIs or public dashboards.\n\nThis is an enterprise-only feature. Request access by\ncontacting Datadog support."
+  },
   "incident-services": {
     "name": "Incident Services",
     "description": "Create, update, delete, and retrieve services which can be associated with incidents."
@@ -75,6 +79,10 @@
     "name": "Metrics",
     "description": "The metrics endpoint allows you to:\n\n- Post metrics data so it can be graphed on Datadog’s dashboards\n- Query metrics from any time period (timeseries and scalar)\n- Modify tag configurations for metrics\n- View tags and volumes for metrics\n\n**Note**: A graph can only contain a set number of points\nand as the timeframe over which a metric is viewed increases,\naggregation between points occurs to stay below that set number.\n\nThe Post, Patch, and Delete `manage_tags` API methods can only be performed by\na user who has the `Manage Tags for Metrics` permission."
   },
+  "monitors": {
+    "name": "Monitors",
+    "description": "[Monitors](https://docs.datadoghq.com/monitors) allow you to watch a metric or check that you care about and\nnotifies your team when a defined threshold has exceeded.\n\nFor more information, see [Creating Monitors](https://docs.datadoghq.com/monitors/create/types/) and\n[Tag Policies](https://docs.datadoghq.com/monitors/settings/)."
+  },
   "opsgenie-integration": {
     "name": "Opsgenie Integration",
     "description": "Configure your [Datadog Opsgenie integration](https://docs.datadoghq.com/integrations/opsgenie/)\ndirectly through the Datadog API."
@@ -90,6 +98,10 @@
   "rum": {
     "name": "RUM",
     "description": "Search or aggregate your RUM events over HTTP."
+  },
+  "restriction-policies": {
+    "name": "Restriction Policies",
+    "description": "A restriction policy defines the access control rules for a resource, mapping a set of relations\n(such as editor and viewer) to a set of allowed principals (such as roles). The restriction policy\ndetermines who is authorized to perform what actions on the resource."
   },
   "roles": {
     "name": "Roles",
@@ -110,6 +122,10 @@
   "service-definition": {
     "name": "Service Definition",
     "description": "API to create, update, retrieve and delete service definitions."
+  },
+  "synthetics": {
+    "name": "Synthetics",
+    "description": "Datadog Synthetics uses simulated user requests and browser rendering to help you ensure uptime,\nidentify regional issues, and track your application performance. Datadog Synthetics tests come in\ntwo different flavors, [API tests](https://docs.datadoghq.com/synthetics/api_tests/)\nand [browser tests](https://docs.datadoghq.com/synthetics/browser_tests). You can use Datadog’s API to\nmanage both test types programmatically.\n\nFor more information about Synthetics, see the [Synthetics overview](https://docs.datadoghq.com/synthetics/)."
   },
   "usage-metering": {
     "name": "Usage Metering",
