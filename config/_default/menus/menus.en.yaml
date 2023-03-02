@@ -2785,7 +2785,7 @@ main:
     parent: appsec_threats
     identifier: appsec_default_rules
     weight: 502
-  - name: Tracking User Activity
+  - name: User Monitoring and Protection
     url: security/application_security/threats/add-user-info/
     parent: appsec_threats
     identifier: threats_user_info
