@@ -5,6 +5,7 @@
 
 <!-- Get RBAC scopes (represented by x-permission field in full-spec api data) -->
 {{ $rbac_scope := index $endpoint.action "x-permission" }}
+
 {{ if $rbac_scope }}
     {{ $base_url := "account_management/rbac/permissions/" | absLangURL }}
     {{ $slug := (replace $rbac_scope "OR(" "") }}
