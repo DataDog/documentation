@@ -57,7 +57,7 @@ Here’s an example of a timeseries visualization:
 
 This line graph plots latency (in milliseconds) experienced by users on the y-axis against time on the x-axis.
 
-#### Additional visualization offerings
+#### Additional visualizations
 
 Datadog offers a variety of visualization options to help users easily graph and display their metrics. Two visualization offerings that Metrics users often find useful are: 1) [Query Value Widgets][6], and 2) [Top List Widgets][7].
 
