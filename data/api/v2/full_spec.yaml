@@ -22817,7 +22817,14 @@ tags:
   name: Fastly Integration
 - description: 'The IP allowlist API is used to manage the IP addresses that
 
-    can access the Datadog API and UI.'
+    can access the Datadog API and web UI. It does not block
+
+    access to intake APIs or public dashboards.
+
+
+    This is an enterprise-only feature. Request access by
+
+    contacting Datadog support.'
   name: IP Allowlist
 - description: Create, update, delete, and retrieve services which can be associated
     with incidents.
