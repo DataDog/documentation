@@ -99,6 +99,27 @@ before_script:
       when: on_success
 
 
+build_reference:
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/docker:18.03.1
+  tags:
+    - "runner:docker"
+  except:
+    - tags
+  stage: bootstrap
+  cache: { }
+  variables:
+    GIT_STRATEGY: none
+  before_script: []
+  script:
+    - mkdir -p data/reference/
+    - docker run registry.ddbuild.io/timberio/vector:0.27.0-alpine generate-schema > data/reference/schema.json
+  artifacts:
+    paths:
+      - data/reference/schema.json
+  only:
+    - /.+?\/[a-zA-Z0-9_-]+/
+  interruptible: true
+
 # ================== preview ================== #
 # If the branch has a name of <slack-user>/<feature-name> then ci builds a preview site
 build_preview:
@@ -107,6 +128,8 @@ build_preview:
   stage: build
   cache:
     - *yarn_cache_pull_push
+  dependencies:
+    - build_reference
   environment: "preview"
   variables:
     URL: ${PREVIEW_DOMAIN}
@@ -118,6 +141,7 @@ build_preview:
     - dog --config "$HOME/.dogrc" event post "documentation build ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" --alert_type "info" --tags="${DEFAULT_TAGS}"
     - touch Makefile.config
     - make dependencies
+    - node ./assets/scripts/reference-process.js
     - make config
     - ./node_modules/.bin/jest --testPathPattern=assets/scripts/tests/
     - yarn run prebuild
@@ -240,6 +264,8 @@ build_live:
   stage: build
   cache:
     - *yarn_cache_pull_push
+  dependencies:
+    - build_reference
   environment: "live"
   retry: 1
   variables:
@@ -254,6 +280,7 @@ build_live:
     - touch Makefile.config
     - make clean-examples
     - make dependencies
+    - node ./assets/scripts/reference-process.js
     - yarn run prebuild
     - build_site
     - in-isolation deploy_site

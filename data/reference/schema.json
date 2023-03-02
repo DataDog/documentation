@@ -163,7 +163,7 @@
     },
     "vector_core::config::log_schema::LogSchema": {
       "title": "Log schema.",
-      "description": "A log schema is used by Vector not only to uniformly process the fields of an event, but also to\nspecify which fields should hold speicifc data that is also set by Vector once an event is\nflowing through a topology.",
+      "description": "A log schema is used by Vector not only to uniformly process the fields of an event, but also to\nspecify which fields should hold specific data that is also set by Vector once an event is\nflowing through a topology.",
       "default": {
         "message_key": "message",
         "timestamp_key": "timestamp",
@@ -4799,13 +4799,8 @@
       "properties": {
         "scrape_interval_secs": {
           "description": "The interval between metric gathering, in seconds.",
-          "default": 15.0,
-          "type": "number",
-          "maximum": 9007199254740991.0,
-          "minimum": -9007199254740991.0,
-          "_metadata": {
-            "docs::numeric_type": "float"
-          }
+          "default": 15,
+          "$ref": "#/definitions/serde_with::DurationSeconds"
         },
         "collectors": {
           "title": "The list of host metric collector services to use.",
@@ -4816,11 +4811,22 @@
           ],
           "items": {
             "$ref": "#/definitions/vector::sources::host_metrics::Collector"
+          },
+          "_metadata": {
+            "docs::examples": [
+              "cgroups",
+              "cpu",
+              "disk",
+              "filesystem",
+              "load",
+              "host",
+              "memory",
+              "network"
+            ]
           }
         },
         "namespace": {
-          "title": "Overrides the default namespace for the metrics emitted by the source.",
-          "description": "By default, `host` is used.",
+          "description": "Overrides the default namespace for the metrics emitted by the source.",
           "default": "host",
           "type": [
             "string",
@@ -4883,56 +4889,56 @@
       "description": "Collector types.",
       "oneOf": [
         {
-          "description": "CGroups.",
+          "description": "Metrics related to Linux control groups.",
           "const": "cgroups",
           "_metadata": {
             "logical_name": "CGroups"
           }
         },
         {
-          "description": "CPU.",
+          "description": "Metrics related to CPU utilization.",
           "const": "cpu",
           "_metadata": {
             "logical_name": "Cpu"
           }
         },
         {
-          "description": "Disk.",
+          "description": "Metrics related to disk I/O utilization.",
           "const": "disk",
           "_metadata": {
             "logical_name": "Disk"
           }
         },
         {
-          "description": "Filesystem.",
+          "description": "Metrics related to filesystem space utilization.",
           "const": "filesystem",
           "_metadata": {
             "logical_name": "Filesystem"
           }
         },
         {
-          "description": "Load average.",
+          "description": "Metrics related to the system load average.",
           "const": "load",
           "_metadata": {
             "logical_name": "Load"
           }
         },
         {
-          "description": "Host.",
+          "description": "Metrics related to the host.",
           "const": "host",
           "_metadata": {
             "logical_name": "Host"
           }
         },
         {
-          "description": "Memory.",
+          "description": "Metrics related to memory utilization.",
           "const": "memory",
           "_metadata": {
             "logical_name": "Memory"
           }
         },
         {
-          "description": "Network.",
+          "description": "Metrics related to network utilization.",
           "const": "network",
           "_metadata": {
             "logical_name": "Network"
@@ -4959,24 +4965,54 @@
         "levels": {
           "title": "The number of levels of the cgroups hierarchy for which to report metrics.",
           "description": "A value of `1` means just the root or named cgroup.",
+          "default": 100,
           "type": "integer",
           "maximum": 9007199254740991.0,
           "minimum": 0.0,
           "_metadata": {
-            "docs::numeric_type": "uint"
+            "docs::numeric_type": "uint",
+            "docs::examples": [
+              1,
+              3
+            ]
           }
         },
         "base": {
           "description": "The base cgroup name to provide metrics for.",
-          "$ref": "#/definitions/core::option::Option<std::path::PathBuf>"
+          "$ref": "#/definitions/core::option::Option<std::path::PathBuf>",
+          "_metadata": {
+            "docs::examples": [
+              "/",
+              "system.slice/snapd.service"
+            ]
+          }
         },
         "groups": {
-          "description": "Lists of group name patterns to include or exclude.",
-          "$ref": "#/definitions/vector::sources::host_metrics::FilterList"
+          "description": "Lists of cgroup name patterns to include or exclude in gathering\nusage metrics.",
+          "default": {
+            "includes": [
+              "*"
+            ],
+            "excludes": null
+          },
+          "$ref": "#/definitions/vector::sources::host_metrics::FilterList",
+          "_metadata": {
+            "docs::examples": {
+              "includes": [
+                "user.slice/*"
+              ],
+              "excludes": [
+                "*.service"
+              ]
+            }
+          }
         },
         "base_dir": {
           "description": "Base cgroup directory, for testing use only",
-          "$ref": "#/definitions/core::option::Option<std::path::PathBuf>"
+          "$ref": "#/definitions/core::option::Option<std::path::PathBuf>",
+          "_metadata": {
+            "docs::hidden": true
+          }
         }
       }
     },
@@ -4985,7 +5021,8 @@
       "type": "object",
       "properties": {
         "includes": {
-          "description": "Any patterns which should be included.",
+          "title": "Any patterns which should be included.",
+          "description": "The patterns are matched using globbing.",
           "type": [
             "array",
             "null"
@@ -4995,7 +5032,8 @@
           }
         },
         "excludes": {
-          "description": "Any patterns which should be excluded.",
+          "title": "Any patterns which should be excluded.",
+          "description": "The patterns are matched using globbing.",
           "type": [
             "array",
             "null"
@@ -5016,12 +5054,24 @@
       "type": "object",
       "properties": {
         "devices": {
-          "description": "Lists of device name patterns to include or exclude.",
+          "description": "Lists of device name patterns to include or exclude in gathering\nI/O utilization metrics.",
           "default": {
-            "includes": null,
+            "includes": [
+              "*"
+            ],
             "excludes": null
           },
-          "$ref": "#/definitions/vector::sources::host_metrics::FilterList"
+          "$ref": "#/definitions/vector::sources::host_metrics::FilterList",
+          "_metadata": {
+            "docs::examples": {
+              "includes": [
+                "sda"
+              ],
+              "excludes": [
+                "dm-*"
+              ]
+            }
+          }
         }
       }
     },
@@ -5030,28 +5080,64 @@
       "type": "object",
       "properties": {
         "devices": {
-          "description": "Lists of device name patterns to include or exclude.",
+          "description": "Lists of device name patterns to include or exclude in gathering\nusage metrics.",
           "default": {
-            "includes": null,
+            "includes": [
+              "*"
+            ],
             "excludes": null
           },
-          "$ref": "#/definitions/vector::sources::host_metrics::FilterList"
+          "$ref": "#/definitions/vector::sources::host_metrics::FilterList",
+          "_metadata": {
+            "docs::examples": {
+              "includes": [
+                "sda"
+              ],
+              "excludes": [
+                "dm-*"
+              ]
+            }
+          }
         },
         "filesystems": {
-          "description": "Lists of filesystem name patterns to include or exclude.",
+          "description": "Lists of filesystem name patterns to include or exclude in gathering\nusage metrics.",
           "default": {
-            "includes": null,
+            "includes": [
+              "*"
+            ],
             "excludes": null
           },
-          "$ref": "#/definitions/vector::sources::host_metrics::FilterList"
+          "$ref": "#/definitions/vector::sources::host_metrics::FilterList",
+          "_metadata": {
+            "docs::examples": {
+              "includes": [
+                "ntfs"
+              ],
+              "excludes": [
+                "ext*"
+              ]
+            }
+          }
         },
         "mountpoints": {
-          "description": "Lists of mount point path patterns to include or exclude.",
+          "description": "Lists of mount point path patterns to include or exclude in gathering\nusage metrics.",
           "default": {
-            "includes": null,
+            "includes": [
+              "*"
+            ],
             "excludes": null
           },
-          "$ref": "#/definitions/vector::sources::host_metrics::FilterList"
+          "$ref": "#/definitions/vector::sources::host_metrics::FilterList",
+          "_metadata": {
+            "docs::examples": {
+              "includes": [
+                "/home"
+              ],
+              "excludes": [
+                "/raid*"
+              ]
+            }
+          }
         }
       }
     },
@@ -5060,12 +5146,24 @@
       "type": "object",
       "properties": {
         "devices": {
-          "description": "Lists of device name patterns to include or exclude.",
+          "description": "Lists of device name patterns to include or exclude in gathering\nnetwork utilization metrics.",
           "default": {
-            "includes": null,
+            "includes": [
+              "*"
+            ],
             "excludes": null
           },
-          "$ref": "#/definitions/vector::sources::host_metrics::FilterList"
+          "$ref": "#/definitions/vector::sources::host_metrics::FilterList",
+          "_metadata": {
+            "docs::examples": {
+              "includes": [
+                "sda"
+              ],
+              "excludes": [
+                "dm-*"
+              ]
+            }
+          }
         }
       }
     },
@@ -5951,9 +6049,9 @@
               },
               "_metadata": {
                 "docs::examples": {
-                  "socket.send.buffer.bytes": "100",
                   "client.id": "${ENV_VAR}",
-                  "fetch.error.backoff.ms": "1000"
+                  "fetch.error.backoff.ms": "1000",
+                  "socket.send.buffer.bytes": "100"
                 },
                 "docs::additional_props_description": "A librdkafka configuration option."
               }
@@ -6201,7 +6299,7 @@
           }
         },
         "glob_minimum_cooldown_ms": {
-          "description": "This value specifies not exactly the globbing, but interval\nbetween the polling the files to watch from the `paths_provider`.\nThis is quite efficient, yet might still create some load of the\nfile system; in addition, it is currently coupled with chechsum dumping\nin the underlying file server, so setting it too low may introduce\na significant overhead.",
+          "description": "This value specifies not exactly the globbing, but interval\nbetween the polling the files to watch from the `paths_provider`.\nThis is quite efficient, yet might still create some load of the\nfile system; in addition, it is currently coupled with checksum dumping\nin the underlying file server, so setting it too low may introduce\na significant overhead.",
           "type": "integer",
           "maximum": 9007199254740991.0,
           "minimum": 0.0,
@@ -15187,8 +15285,8 @@
           },
           "_metadata": {
             "docs::examples": {
-              "{{ event_field }}": "{{ some_other_event_field }}",
               "source": "vector",
+              "{{ event_field }}": "{{ some_other_event_field }}",
               "labels": "{{ kubernetes.pod_labels }}"
             },
             "docs::additional_props_description": "A Loki label."
@@ -18316,7 +18414,7 @@
     },
     "vector_core::event::metric::MetricKind": {
       "title": "Metric kind.",
-      "description": "Metrics can be either absolute of incremental. Absolute metrics represent a sort of \"last write wins\" scenario,\nwhere the latest absolute value seen is meant to be the actual metric value.  In constrast, and perhaps intuitively,\nincremental metrics are meant to be additive, such that we don't know what total value of the metric is, but we know\nthat we'll be adding or subtracting the given value from it.\n\nGenerally speaking, most metrics storage systems deal with incremental updates. A notable exception is Prometheus,\nwhich deals with, and expects, absolute values from clients.",
+      "description": "Metrics can be either absolute of incremental. Absolute metrics represent a sort of \"last write wins\" scenario,\nwhere the latest absolute value seen is meant to be the actual metric value.  In contrast, and perhaps intuitively,\nincremental metrics are meant to be additive, such that we don't know what total value of the metric is, but we know\nthat we'll be adding or subtracting the given value from it.\n\nGenerally speaking, most metrics storage systems deal with incremental updates. A notable exception is Prometheus,\nwhich deals with, and expects, absolute values from clients.",
       "oneOf": [
         {
           "description": "Incremental metric.",
@@ -18593,6 +18691,18 @@
           "description": "The interval to check for and flush any expired events, in milliseconds.",
           "default": 1000,
           "$ref": "#/definitions/serde_with::DurationMilliSeconds"
+        },
+        "max_events": {
+          "description": "The maximum number of events to group together.",
+          "type": [
+            "integer",
+            "null"
+          ],
+          "maximum": 9007199254740991.0,
+          "minimum": 1.0,
+          "_metadata": {
+            "docs::numeric_type": "uint"
+          }
         },
         "group_by": {
           "title": "An ordered list of fields by which to group events.",
@@ -19688,7 +19798,7 @@
     },
     "vector_core::event::metric::value::Quantile": {
       "title": "A single quantile observation.",
-      "description": "Quantiles themselves are \"cut points diviing the range of a probability distribution into\ncontinuous intervals with equal probabilities\". [[1][quantiles_wikipedia]].\n\nWe use quantiles to measure the value along these probability distributions for representing\nclient-side aggregations of distributions, which represent a collection of observations over a\nspecific time window.\n\nIn general, we typically use the term \"quantile\" to represent the concept of _percentiles_,\nwhich deal with whole integers -- 0, 1, 2, .., 99, 100 -- even though quantiles are\nfloating-point numbers and can represent higher-precision cut points, such as 0.9999, or the\n99.99th percentile.\n\n[quantile_wikipedia]: https://en.wikipedia.org/wiki/Quantile",
+      "description": "Quantiles themselves are \"cut points dividing the range of a probability distribution into\ncontinuous intervals with equal probabilities\". [[1][quantiles_wikipedia]].\n\nWe use quantiles to measure the value along these probability distributions for representing\nclient-side aggregations of distributions, which represent a collection of observations over a\nspecific time window.\n\nIn general, we typically use the term \"quantile\" to represent the concept of _percentiles_,\nwhich deal with whole integers -- 0, 1, 2, .., 99, 100 -- even though quantiles are\nfloating-point numbers and can represent higher-precision cut points, such as 0.9999, or the\n99.99th percentile.\n\n[quantile_wikipedia]: https://en.wikipedia.org/wiki/Quantile",
       "type": "object",
       "required": [
         "quantile",
@@ -19742,7 +19852,7 @@
     },
     "vector_core::metrics::ddsketch::AgentDDSketch": {
       "title": "[DDSketch][ddsketch] implementation based on the [Datadog Agent][ddagent].",
-      "description": "This implementation is subtly different from the open-source implementations of `DDSketch`, as\nDatadog made some slight tweaks to configuration values and in-memory layout to optimize it for\ninsertion performance within the agent.\n\nWe've mimiced the agent version of `DDSketch` here in order to support a future where we can\ntake sketches shipped by the agent, handle them internally, merge them, and so on, without any\nloss of accuracy, eventually forwarding them to Datadog ourselves.\n\nAs such, this implementation is constrained in the same ways: the configuration parameters\ncannot be changed, the collapsing strategy is fixed, and we support a limited number of methods\nfor inserting into the sketch.\n\nImportantly, we have a special function, again taken from the agent version, to allow us to\ninterpolate histograms, specifically our own aggregated histograms, into a sketch so that we can\nemit useful default quantiles, rather than having to ship the buckets -- upper bound and count\n-- to a downstream system that might have no native way to do the same thing, basically\nproviding no value as they have no way to render useful data from them.\n\n[ddsketch]: https://www.vldb.org/pvldb/vol12/p2195-masson.pdf\n[ddagent]: https://github.com/DataDog/datadog-agent",
+      "description": "This implementation is subtly different from the open-source implementations of `DDSketch`, as\nDatadog made some slight tweaks to configuration values and in-memory layout to optimize it for\ninsertion performance within the agent.\n\nWe've mimicked the agent version of `DDSketch` here in order to support a future where we can\ntake sketches shipped by the agent, handle them internally, merge them, and so on, without any\nloss of accuracy, eventually forwarding them to Datadog ourselves.\n\nAs such, this implementation is constrained in the same ways: the configuration parameters\ncannot be changed, the collapsing strategy is fixed, and we support a limited number of methods\nfor inserting into the sketch.\n\nImportantly, we have a special function, again taken from the agent version, to allow us to\ninterpolate histograms, specifically our own aggregated histograms, into a sketch so that we can\nemit useful default quantiles, rather than having to ship the buckets -- upper bound and count\n-- to a downstream system that might have no native way to do the same thing, basically\nproviding no value as they have no way to render useful data from them.\n\n[ddsketch]: https://www.vldb.org/pvldb/vol12/p2195-masson.pdf\n[ddagent]: https://github.com/DataDog/datadog-agent",
       "type": "object",
       "required": [
         "avg",

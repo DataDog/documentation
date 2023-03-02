@@ -127,6 +127,12 @@ config:
 	envsubst '$$CI_COMMIT_REF_NAME' < "config/$(CI_ENVIRONMENT_NAME)/params.yaml" | sponge "config/$(CI_ENVIRONMENT_NAME)/params.yaml"; \
 	echo -e "\nbranch: ${CI_COMMIT_REF_NAME}" >> config/$(CI_ENVIRONMENT_NAME)/params.yaml;
 
+# build out reference schema
+data/reference/schema.json: FORCE
+	docker run --rm --pull always timberio/vector:nightly-distroless-static generate-schema > $@ && node ./assets/scripts/reference-process.js
+
+# https://www.gnu.org/software/make/manual/make.html#Force-Targets
+FORCE: ;
 #######################################################################################################################
 # API Code Examples
 #######################################################################################################################
