@@ -1,5 +1,5 @@
 ---
-title: Tracking User Activity
+title: User Monitoring and Protection
 kind: documentation
 aliases:
   - /security_platform/application_security/add-user-info
@@ -23,7 +23,7 @@ Track user logins to detect account takeovers with out-of-the-box detection rule
 
 Track additional business logic and create your own detection rules to prevent business logic abuse.
 
-## Adding authenticated user information to traces
+## Adding authenticated user information to traces and enabling user blocking capability
 
 You can [add custom tags to your root span][1], or use the instrumentation functions described below. 
 
@@ -37,10 +37,11 @@ User monitoring tags are applied on the root span and start with the prefix `usr
 
 **Note**: Check that you have added [necessary dependencies to your application][1].
 
-The example below shows how to obtain the root span and add the relevant user monitoring tags:
+The example below shows how to obtain the root span, add the relevant user monitoring tags, and enable user blocking capability:
 
 ```java
 import datadog.trace.api.GlobalTracer;
+import datadog.appsec.api.Blocking;
 
 // Get the active span
 final Span span = GlobalTracer.get().activeSpan();
@@ -55,6 +56,10 @@ if ((span instanceof MutableSpan)) {
    localRootSpan.setTag("usr.role", "admin");
    localRootSpan.setTag("usr.scope", "read:message, write:files");
 }
+
+Blocking
+    .forUser("d131dd02c56eec4")
+    .blockIfMatch();
 ```
 
 
@@ -65,7 +70,7 @@ if ((span instanceof MutableSpan)) {
 
 The .NET tracer package provides the `SetUser()` function, which allows you to monitor authenticated requests by adding user information to the trace.
 
-The example below shows how to add the relevant user monitoring tags:
+The example below shows how to add the relevant user monitoring tags and enable user blocking capability:
 
 ```csharp
 
@@ -99,13 +104,17 @@ For information and options, read [the .NET tracer documentation][1].
 
 The Go tracer package provides the `SetUser()` function, which allows you to monitor authenticated requests by adding user information to the trace. For more options, see [the Go tracer documentation][1].
 
-This example shows how to retrieve the current tracer span and use it to set user monitoring tags:
+This example shows how to retrieve the current tracer span, use it to set user monitoring tags, and enable user blocking capability:
 
 ```go
-// Retrieve the current tracer span from an HTTP request's context
-if span, ok := tracer.SpanFromContext(request.Context()); ok {
-    // Record user information in the trace the span belongs to
-    tracer.SetUser(span, usr.id, tracer.WithUserEmail(usr.email), tracer.WithUserName(usr.name))
+import "gopkg.in/DataDog/dd-trace-go.v1/appsec"
+func handler(w http.ResponseWriter, r *http.Request) {
+  if appsec.SetUser(r.Context(), "my-uid") != nil {
+    // The user must be blocked by aborting the request handler asap.
+    // The blocking response is automatically handled and sent by the appsec middleware.
+    return 
+  }
+}
 ```
 
 [1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#SetUser
@@ -215,7 +224,7 @@ $rootSpan->meta['usr.scope'] = ‘read:message, write:files’;
 
 The Node tracer package provides the `tracer.setUser(user)` function, which allows you to monitor authenticated requests by adding user information to the trace.
 
-The example below shows how to add relevant user monitoring tags:
+The example below shows how to add relevant user monitoring tags and enable user blocking capability:
 
 ```javascript
 const tracer = require('dd-trace').init()
@@ -234,6 +243,12 @@ function handle () {
     // Arbitrary fields are also accepted to attach custom data to the user (RBAC, Oauth, etc…)
     custom_tag: 'custom data'
   })
+
+// Set the currently authenticated user and check whether they are blocked
+if (tracer.appsec.isUserBlocked(user)) {  // also set the currently authenticated user
+  return tracer.appsec.blockRequest(req, res) // blocking response is sent
+  }
+
 }
 ```
 
@@ -248,25 +263,20 @@ For information and options, read [the Node.js tracer documentation][1].
 
 Monitor authenticated requests by adding user information to the trace with the `set_user` function provided by the Python tracer package.
 
-This example shows how to set user monitoring tags:
+This example shows how to set user monitoring tags and enable user blocking capability:
 
 ```python
-from ddtrace import tracer
+from ddtrace.appsec.trace_utils import is_user_blocked
+from ddtrace.appsec.trace_utils import block_request
 from ddtrace.contrib.trace_utils import set_user
-
-@app.route("/")
-def view():
-    # Record user information in the trace the span belongs to
-    set_user(
-        tracer,
-        user_id="usr.id",
-        email="usr.email",
-        name="usr.name",
-        session_id="usr.session_id",
-        role="usr.role",
-        scope="usr.scope"
-    )
-    return "OK"
+from ddtrace import tracer
+# Call set_user() to trace the currently authenticated user id
+user_id = "some_user_id"
+set_user(tracer, user_id, name="John", email="test@test.com", scope="some_scope",
+         role="manager", session_id="session_id", propagate=True)
+# Call is_user_blocked() to possibly block the authenticated user when in the denylist
+if is_user_blocked(user_id):
+    block_current_request()
 ```
 
 {{< /programming-lang >}}
