@@ -318,11 +318,13 @@ A unique mailbox is generated at each test execution to avoid conflicts between 
 
 You can run browser tests within other browser tests to reuse existing workflows up to two levels of nesting.
 
-To override variables from subtests in parent tests, ensure the variables created at the parent test level have the same names as the variables present in the subtest. The variable always uses the value that was first assigned to it.
+To use an existing browser test as a subtest, click **Add New Subtest**, select a browser test from the dropdown menu, and click **Add Subtest**.
 
-{{< img src="synthetics/browser_tests/subtest.png" alt="Browser Test Subtest" style="width:60%;" >}}
+To convert steps from your current browser test into a subtest, click **Extract From Steps**, select the recorded steps you want to extract, and click **Convert to Subtest**. By default, a subtest executes in sequence with the previous steps of the parent test. 
 
-To convert steps from your current browser test into a subtest, select your recorded steps from the **Extract From Steps** tab and click **Convert to Subtest**. By default, the subtest executes in sequence with the previous steps of the parent test. You can select to play the subtest in a **Main**, **New**, **One** (first), **Two** (second), or **Three** (third) window which can be reused in the [**advanced options**][9].
+{{< img src="synthetics/browser_tests/subtest.png" alt="Browser Test Subtest" style="width:50%;" >}}
+
+For more information about advanced options for subtests, see [Advanced Options for Browser Test Steps][9].
 
 If it does not make sense for you to run your subtest independently, you can pause it. The test continues to be called as part of your parent test, and is not executed individually. For more information, see [Reusing Browser Test Journeys Across Your Test Suite][10].
 
