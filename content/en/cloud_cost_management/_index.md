@@ -205,7 +205,7 @@ To use Azure Cloud Cost Management in Datadog, you must set up the Datadog Azure
 {{< img src="cloud_cost/exports_scope.png" alt="In Azure portal highlighting Exports option in navigation and the export scope"  >}}
 
 4. Select the following Export details:
-  - Metric: **Actual Cost (usage and purchases)**
+    - Metric: **Actual Cost (usage and purchases)**
   - Export type: **Daily export of month-to-date costs**
   - File Partitioning: `On`
   
