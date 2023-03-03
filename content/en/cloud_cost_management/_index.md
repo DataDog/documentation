@@ -243,7 +243,7 @@ This ensures complete cost accuracy by allowing periodic cost calculations again
 [1]: https://www.datadoghq.com/blog/azure-datadog-partnership/
 [2]: https://docs.datadoghq.com/integrations/azure/?tab=azurecliv20#setup
 [3]: https://portal.azure.com/#view/Microsoft_Azure_GTM/ModernBillingMenuBlade/~/Exports
-[4]: https://docs.datadoghq.com/integrations/azure/?tab=azurecliv20#setup
+[4]: https://portal.azure.com/#view/Microsoft_Azure_Billing/SubscriptionsBlade
 [5]: https://portal.azure.com/#view/Microsoft_Azure_Billing/SubscriptionsBlade
 {{% /tab %}}
 {{< /tabs >}}
