@@ -232,7 +232,7 @@ If your exports are in different storage containers, repeat steps one to seven f
 
 ### Configure Cost Management Reader access
 
-1. Navigate to your [subscriptions][5] and click your subscription's name.
+1. Navigate to your [subscriptions][4] and click your subscription's name.
 2. Select the Access Control (IAM) tab.
 3. Click **Add**.
 4. Choose **Cost Management Reader**, then click Next.
