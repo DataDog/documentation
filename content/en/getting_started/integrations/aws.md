@@ -221,7 +221,7 @@ If you encounter any issues, be sure to check out the [Troubleshooting][57] sect
 [9]: /integrations/amazon_ec2/#ec2-automuting
 [10]: /integrations/amazon_web_services/?tab=roledelegation#alarm-collection
 [11]: /events/explorer
-[12]: https://app.datadoghq.com/screen/integration/7/aws-overview
+[12]: https://app.datadoghq.com/dash/integration/7/aws-overview
 [13]: /integrations/#cat-aws
 [14]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#enable-logging-for-your-aws-service
 [15]: https://app.datadoghq.com/logs
