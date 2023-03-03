@@ -32,7 +32,7 @@ The table gives insights on ingested volumes *by service*. The Configuration col
 
 Click on services to see details about what sampling decision makers (for example Agent or tracing library, rules or sample rates) are used for each service, as well as what [ingestion sampling mechanisms][1] are leveraged for ingested spans' services. 
 
-{{< img src="/tracing/guide/ingestion_sampling_use_cases/service_ingestion_summary.png" alt="Service Ingestion Summary" style="width:90%;" >}}
+{{< img src="/tracing/guide/ingestion_sampling_use_cases/service-ingestion-summary.png" alt="Service Ingestion Summary" style="width:90%;" >}}
 
 ## Keeping certain types of traces
 
@@ -54,7 +54,7 @@ You can also override the default Agent sampling rate by configuring the samplin
 
 #### Configuring head-based sampling
 
-Default sampling rates are calculated to target 10 complete traces per service, per second, per Agent. This is a *target* number of traces and is the result of averaging traces over a period of time. It is *not* a hard limit, and traffic spikes can cause significantly more traces to be sent to Datadog for short periods of time. 
+Default sampling rates are calculated to target 10 complete traces per second, per Agent. This is a *target* number of traces and is the result of averaging traces over a period of time. It is *not* a hard limit, and traffic spikes can cause significantly more traces to be sent to Datadog for short periods of time. 
 
 You can increase or decrease this target by configuring the Datadog Agent parameter `max_traces_per_second` or the environment variable `DD_APM_MAX_TPS`. Read more about [head-based sampling ingestion mechanisms][5].
 
@@ -86,7 +86,7 @@ Read more about [sampling rules ingestion mechanisms][6].
 
 ### Keeping more error-related traces
 
-Traces with error spans are often symptoms of system failures. Keeping a higher proportion of transactions with errors ensures you can investigate individual requests.
+Traces with error spans are often symptoms of system failures. Keeping a higher proportion of transactions with errors ensures that you always have access to some relevant individual requests.
 
 #### Solution: Error sampling rate
 
@@ -106,7 +106,7 @@ You can configure the number of error chunks per second per Agent to capture by 
 
 Traced database calls can represent a large amount of ingested data while the application performance metrics (such as error counts, request hit counts, and latency) are enough to monitor database health.
 
-#### Solution: Sampling rules on database calls
+#### Solution: Sampling rules for traces with database calls
 
 To reduce the span volume created by tracing database calls, configure the sampling at the head of the trace. 
 
@@ -114,25 +114,29 @@ Database services rarely start a trace. Usually, client database spans are child
 
 To know **which services start database traces**, use the `Top Sampling Decision Makers` top list graph on the ingestion control page [Service Ingestion Summary][7]. Configuring head-based sampling for these specific services reduces the volume of ingested database spans, while making sure that no incomplete traces are ingested. The distributed traces are either kept or dropped altogether.
 
+{{< img src="/tracing/guide/ingestion_sampling_use_cases/service-ingestion-summary-database.png" alt="Top Sampling Decision Makers" style="width:90%;" >}}
+
+For instance, for the traced database calls of `web-store-mongo`, traces originate from services `web-store` and `shipping-worker` 99% of the time. As a result, to reduce the volume for `web-store-mongo`, configure sampling for `web-store` and `shipping-worker` services.
+
 #### Configure sampling to drop database spans
 
 Refer to the [sampling rule configuration section](#configuring-a-sampling-rule) for more information about sampling rules syntax.
 
-For example, if a backend service `my-service` is calling a PostgreSQL database multiple times per trace, and it's creating a lot of unwanted span volume: 
+The backend service `web-store` is calling a Mongo database multiple times per trace, and it's creating a lot of unwanted span volume: 
 
-- Configure a **trace sampling rule** for the backend service `my-service`, ensuring 10 percent of entire traces are kept, including PostgreSQL spans.
-
-  ```
-  DD_TRACE_SAMPLING_RULES=[{"service": "my-service", "sample_rate": 0.1}]
-  ```
-
-- Optionally, if you want to keep all the `my-service` spans, configure a **single span sampling rule** to keep 100 percent of the spans for the backend service `my-service`. This sampling does not ingest any database call spans outside of the 10 percent identified above. 
+- Configure a **trace sampling rule** for the backend service `web-store`, ensuring 10 percent of entire traces are kept, including Mongo spans.
 
   ```
-  DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "sample_rate": 1}]
+  DD_TRACE_SAMPLING_RULES=[{"service": "web-store", "sample_rate": 0.1}]
   ```
 
-  **Note**: [Span-based metrics][8] are not affected by sampling rules.
+- Optionally, if you want to keep all the `web-store` spans, configure a **single span sampling rule** to keep 100 percent of the spans for the backend service `web-store`. This sampling does not ingest any database call spans outside of the 10 percent identified above. 
+
+  ```
+  DD_SPAN_SAMPLING_RULES=[{"service": "web-store", "sample_rate": 1}]
+  ```
+
+  **Note**: Configuring a single span sampling rule is especially useful if you are using [span-based metrics][8], which are derived from ingested spans.
 
 {{< img src="/tracing/guide/ingestion_sampling_use_cases/drop_database_spans.png" alt="Database spans sampling" style="width:100%;" >}}
 
