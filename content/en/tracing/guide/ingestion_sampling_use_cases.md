@@ -34,6 +34,10 @@ Click on services to see details about what sampling decision makers (for exampl
 
 {{< img src="/tracing/guide/ingestion_sampling_use_cases/service-ingestion-summary.png" alt="Service Ingestion Summary" style="width:90%;" >}}
 
+In the Service Ingestion Summary example above, the **Ingestion reasons breakdown** table shows that most of the ingestion reasons for this service come from `rule` ([user defined sampling rule][6]).
+
+The Top sampling decision makers for this service show that web-store service gets sampling decisions from `web-store`, `shopist-web-ui`, `shipping-worker`, `synthetics-browser`, and `product-recommendation`. These five services all contribute in the overall sampling decisions that affect the `web-store` service spans. When determining how to fine tune the ingestion for web-store, all five services need to be considered.
+
 ## Keeping certain types of traces
 
 ### Keeping entire transaction traces
@@ -46,7 +50,7 @@ Complete traces can be ingested with [head-based sampling][4] mechanisms: the de
 
 {{< img src="/tracing/guide/ingestion_sampling_use_cases/head_based_sampling_keep.png" alt="Head-based Sampling" style="width:100%;" >}}
 
-To decide which traces to keep and drop, the Datadog Agent computes default sampling rates for each service to apply at trace creation, based on the application traffic:
+To decide which traces to keep and drop, the Datadog Agent computes [default sampling rates][5] for each service to apply at trace creation, based on the application traffic:
 - For low-traffic applications, a sampling rate of 100% is applied.
 - For high-traffic applications, a lower sampling rate is applied with a target of 10 complete traces per second per Agent.
 
