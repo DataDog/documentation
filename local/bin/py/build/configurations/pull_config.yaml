@@ -53,6 +53,8 @@
       globs:
       # https://github.com/DataDog/dd-go/blob/prod/networks/model/domain/gcp_services.go
       - networks/model/domain/gcp_services.go
+      # https://github.com/DataDog/dd-go/blob/prod/networks/model/domain/azure_services.go
+      - networks/model/domain/azure_services.go
 
   - repo_name: dogweb
 
