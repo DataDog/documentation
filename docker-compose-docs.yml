@@ -1,9 +1,14 @@
 version: '3'
 services:
-  docs:
-    image: public.ecr.aws/x2b9z2t7/webops/site-build:latest
-    command: "./startup.sh ${GITHUB_TOKEN} ${FULL_BUILD}"
+  # docs:
+  #   image: public.ecr.aws/x2b9z2t7/webops/site-build:latest
+  #   command: "./startup.sh ${GITHUB_TOKEN} ${FULL_BUILD}"
+  #   volumes:
+  #     - "${REPO_PATH}:/src:delegated"
+  #   ports:
+  #     - "1313:1313"
+  pa11y:
+    image: pa11y:local
+    command: "bash -c 'CI_PROJECT_DIR=./${OUTPUT_DIR} BASE_URL=host.docker.internal:1313 SINGLE_URL=${SINGLE_URL} node index.js'"
     volumes:
-      - "${REPO_PATH}:/src:delegated"
-    ports:
-      - "1313:1313"
+      - "./${OUTPUT_DIR}:/app/${OUTPUT_DIR}"
