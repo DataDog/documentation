@@ -16,12 +16,6 @@ This guide assumes that you have configured [Database Monitoring][1] and are usi
 
 ## Before you begin
 
-Supported tracers
-: [dd-trace-go][3] >= 1.44.0 (support for [database/sql][4] and [sqlx][5] packages)<br />
-[dd-trace-rb][6] >= 1.8.0 (support for [mysql2][7] and [pg][8] gems)<br />
-[dd-trace-js][9] >= 3.13.0 or >= 2.26.0 (support for [postgres][10], [mysql][13], and [mysql2][14] clients)<br />
-[dd-trace-py][11] >= 1.7.0 (support for [psycopg2][12])
-
 Supported databases
 : postgres, mysql
 
@@ -30,6 +24,30 @@ Supported Agent versions
 
 Data privacy
 : Enabling SQL comment propagation results in potentially confidential data (service names) being stored in the databases which can then be accessed by other third-parties that have been granted access to the database.
+
+
+**Supported tracers**
+
+| Language | Library or Framework           | Postgres    | MySQL       |
+| :----    | :----                          | :----:      |  :----:     |
+| **Go:** [dd-trace-go][3] >= 1.44.0 |      |             |             |
+|          | [database/sql][4]              | {{< X >}}   | {{< X >}}   |
+|          | [sqlx][5]                      | {{< X >}}   | {{< X >}}   |
+| **Ruby:** [dd-trace-rb][6] >= 1.8.0 |     |             |             |
+|          | [pg][8]                        | {{< X >}}   |             |
+|          | [mysql2][7]                    |             | {{< X >}}   |
+| **Node:** [dd-trace-js][9] >= 3.13.0 |    |             |             |
+|          | [postgres][10]                 | {{< X >}}   |             |
+|          | [mysql][13]                    |             | {{< X >}}   |
+|          | [mysql2][14]                   |             | {{< X >}}   |
+| **Python:** [dd-trace-py][11] >= 1.7.0 |  |             |             |
+|          | [psycopg2][12]                 | {{< X >}}   |             |
+| **Java**     |                            |             |             |
+|          | jdbc                           | Coming soon | Coming soon |
+| **.NET**     |                            |             |             |
+|          |                                | Coming soon | Coming soon |
+
+
 
 ## Setup
 
