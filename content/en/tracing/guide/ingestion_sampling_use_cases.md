@@ -28,7 +28,7 @@ To identify which ingestion mechanisms are currently used in your Datadog enviro
 
 The table gives insights on ingested volumes *by service*. The Configuration column provides a first indication of the current set up. It shows: 
 - `AUTOMATIC` if the sampling rate calculated in the Datadog Agent is applied to the traces that start from the service. Read more about the specifics of [Datadog Agent ingestion logic][5].
-- `CONFIGURED` if a custom sampling rate configured in the tracing library is applied to the traces that start from the service.
+- `CONFIGURED` if a custom trace sampling rate configured in the tracing library is applied to the traces that start from the service.
 
 Click on services to see details about what sampling decision makers (for example Agent or tracing library, rules or sample rates) are used for each service, as well as what [ingestion sampling mechanisms][1] are leveraged for ingested spans' services. 
 
