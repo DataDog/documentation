@@ -241,7 +241,7 @@ If your exports are in different storage containers, repeat steps one to seven f
 This ensures complete cost accuracy by allowing periodic cost calculations against Azure Cost Management.
 
 [1]: https://www.datadoghq.com/blog/azure-datadog-partnership/
-[2]: https://portal.azure.com/#view/Microsoft_Azure_GTM/ModernBillingMenuBlade/~/Exports
+[2]: https://docs.datadoghq.com/integrations/azure/?tab=azurecliv20#setup
 [3]: https://app.datadoghq.com/integrations/azure
 [4]: https://docs.datadoghq.com/integrations/azure/?tab=azurecliv20#setup
 [5]: https://portal.azure.com/#view/Microsoft_Azure_Billing/SubscriptionsBlade
