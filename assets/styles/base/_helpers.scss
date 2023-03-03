@@ -102,3 +102,9 @@ table {
 .mw-50 {
     max-width: 50%;
 }
+
+// No bootstrap utility exists for scroll margin top
+// https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-top 
+.scroll-margin-top-lg {
+    scroll-margin-top: 110px;
+}

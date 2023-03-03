@@ -1,0 +1,67 @@
+{{ $context := .context }}
+{{ $endpoint := .endpoint }}
+{{ $tag := .tag }}
+{{ $endpoint_auth_array := slice }}
+
+<!-- Get RBAC scopes (represented by x-permission field in full-spec api data) -->
+{{ $rbac_scope := index $endpoint.action "x-permission" }}
+
+{{ if $rbac_scope }}
+    {{ $base_url := "account_management/rbac/permissions/" | absLangURL }}
+    {{ $slug := (replace $rbac_scope "OR(" "") }}
+    {{ $slug = anchorize (replace $slug ")" "") }}
+    {{ $href := (print $base_url "#" $slug) }}
+    {{ $rbac_dict := (dict "scope_type" "RBAC" "scope_name" $rbac_scope "href" $href) }}
+    {{ $endpoint_auth_array = $endpoint_auth_array | append $rbac_dict }}
+{{ end }}
+
+<!-- Get OAuth Scopes (represented by AuthZ field in full-spec api data) -->
+{{ $authZ := slice }}
+{{ range $endpoint.action.security }}
+  {{ range $sec_key, $sec_val := . }}
+    {{ if and (eq $sec_key "AuthZ") (gt (len .) 0) }}
+      {{ $authZ = . }}
+      {{ $oauth_scope_name := delimit . ", " }}
+      {{ $slug := (replaceRE " " "-" ($tag.name | humanize | lower)) }}
+      {{ $base_url := "api/latest/scopes/" | absLangURL }}
+      {{ $href := (print $base_url "#" $slug) }}
+      {{ $oauth_dict := (dict "scope_type" "OAuth" "scope_name" $oauth_scope_name "href" $href) }}
+      {{ $endpoint_auth_array = $endpoint_auth_array | append $oauth_dict }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ if gt (len $endpoint_auth_array) 0 }}
+    <h3 class="mb-2">Authorization</h3>
+
+    <div class="schema-table row">
+        <div class="col-12">
+            <div class="row table-header">
+                <div class="col-4 column">
+                  <p class="font-semibold">{{ i18n "type" }}</p>
+                </div>
+                <div class="col-8 column">
+                  <p class="font-semibold">Required Scopes</p>
+                </div>
+            </div>
+            {{ range $endpoint_auth_array }}
+                <div class="row first-row">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-4 column">
+                                <p>{{ .scope_type }}</p>
+                            </div>
+                            <div class="col-8 column">
+                                <p>
+                                    <a href="{{ .href }}">
+                                        <code>{{ .scope_name }}</code>
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{ end }}
+        </div>
+    </div>
+{{ end }}

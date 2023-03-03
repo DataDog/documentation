@@ -156,7 +156,7 @@
                     <p>
                       {{ $translate_action.description | default $endpoint.action.description | markdownify }}
                       <!-- required scopes -->
-                      {{ partial "api/scopes.html" (dict "context" $dot "endpoint" $endpoint "securitySchemes" $adat.components.securitySchemes "tag" $tag) }}
+                      {{ partial "api/auth.html" (dict "context" $dot "endpoint" $endpoint "securitySchemes" $adat.components.securitySchemes "tag" $tag) }}
                     </p>
 
                     <!-- querystring, path params, header params -->
