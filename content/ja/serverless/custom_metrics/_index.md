@@ -1,6 +1,6 @@
 ---
 kind: ドキュメント
-title: サーバーレスアプリケーションからのカスタムメトリクス
+title: AWS Lambda サーバーレスアプリケーションからのカスタムメトリクス
 ---
 
 ## 概要
@@ -183,13 +183,14 @@ namespace Example
   {
     static Function()
     {
-        // statsd クライアントのインスタンスを作成する 
+        // statsd クライアントのインスタンスを作成する
         var dogstatsdConfig = new StatsdConfig
         {
             StatsdServerName = "127.0.0.1",
             StatsdPort = 8125,
         };
-        DogStatsd.Configure(dogstatsdConfig);
+        if (!DogStatsd.Configure(dogstatsdConfig))
+            throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
     }
 
     public Stream MyHandler(Stream stream)
@@ -259,13 +260,13 @@ async function myHandler(event, context) {
         'order:online'              // 2 番目のタグ
     );
 
-    // 過去 20 分以内のタイムスタンプでメトリクスを送信します
+    // 過去 20 分以内のタイムスタンプでメトリクスを送信します 
     sendDistributionMetricWithDate(
         'coffee_house.order_value', // メトリクス名
         12.45,                      // メトリクス値
-        'product:latte',            // 最初のタグ
-        'order:online'              // 2 番目のタグ
         new Date(Date.now()),       // 日付
+        'product:latte',            // 最初のタグ
+        'order:online',             // 2 番目のタグ
     );
 }
 ```
