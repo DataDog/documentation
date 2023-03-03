@@ -209,7 +209,7 @@ To use Azure Cloud Cost Management in Datadog, you must set up the Datadog Azure
   - Export type: **Daily export of month-to-date costs**
   - File Partitioning: `On`
   
-{{< img src="cloud_cost/new_export.png" alt="Metric: Actual, Export type: Daily, and File Partitioning: On"  >}}
+{{< img src="cloud_cost/new_export.png" alt="Export details with Metric: Actual, Export type: Daily, and File Partitioning: On"  >}}
 
 5. Choose a storage account, container, and directory for the exports.
 6. Select **Create**.
