@@ -39,12 +39,12 @@ public_title: LambdaTest
 short_description: Plateforme intelligente de testing automatisé permettant de diviser
   par 10 la durée d'exécution des tests
 supported_os:
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Category::Issue Tracking
   - Category::Automation
@@ -52,6 +52,7 @@ tile:
   - Category::Marketplace
   - Category::Cloud
   - Category::Collaboration
+  - Offering::Software License
   configuration: README.md#Setup
   description: Plateforme intelligente de testing automatisé permettant de diviser
     par 10 la durée d'exécution des tests
