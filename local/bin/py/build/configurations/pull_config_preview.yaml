@@ -65,7 +65,7 @@
         contents:
 
         - action: integrations
-          branch: prod
+          branch: tratch/ms-teams-instructions
           globs:
           - integration/*/*_metadata.csv
           - integration/*/manifest.json
