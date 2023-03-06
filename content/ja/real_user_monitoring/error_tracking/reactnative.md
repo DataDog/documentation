@@ -140,30 +140,12 @@ npm install --save-dev @datadog/datadog-ci
 #!/bin/sh
 set -e
 
-# XCode からビルドを実行する場合、yarn を使用することはできません。
-# どの Yarn の実行ファイルが適切かをまず確認します
-package_manager_test_command="bin" # `yarn bin` と `npm bin` の両方が有効なコマンドです
-test_and_set_package_manager_bin()
-{
-  $(echo $1 $package_manager_test_command) && export PACKAGE_MANAGER_BIN=$1
-}
+DATADOG_XCODE="../node_modules/.bin/datadog-ci react-native xcode"
 
-test_and_set_package_manager_bin "yarn" || # npm を使用している場合は yarn を npm で置き換えます
-test_and_set_package_manager_bin "/opt/homebrew/bin/node /opt/homebrew/bin/yarn" || # npm を使用している場合は yarn を npm で置き換えます
-echo "package manager not found"
-
-REACT_NATIVE_XCODE="node_modules/react-native/scripts/react-native-xcode.sh"
-DATADOG_XCODE="$(echo $PACKAGE_MANAGER_BIN) datadog-ci react-native xcode"
-
-/bin/sh -c "$DATADOG_XCODE $REACT_NATIVE_XCODE"
+/bin/sh -c "$DATADOG_XCODE"
 ```
 
-このスクリプトは `yarn datadog-ci react-native xcode` コマンドを実行するのに最適な方法を見つけます。
-
--   [fastlane][9] のようなツールや、[Bitrise][10] や [AppCenter][11] のようなサービスを使ってアプリを構築する場合、`yarn` を使用することができます
--   XCode から直接リリースビルドを実行する場合、Mac では `/opt/homebrew/bin/node /opt/homebrew/bin/yarn` を使用する必要があります
-
-これは、すべての正しいパラメーターでソースマップをアップロードすることを世話するこのコマンドを実行します。詳細については、[datadog-ci のドキュメント][12]を参照してください。
+このスクリプトは、すべての正しいパラメーターでソースマップをアップロードすることを担当するコマンドを実行します。詳細については、[datadog-ci のドキュメント][12]を参照してください。
 
 XCode で `.xcworkspace` を開き、プロジェクト > Build Phases > Bundle React Native code and images を選択します。スクリプトを以下のように編集します。
 
@@ -172,7 +154,7 @@ set -e
 WITH_ENVIRONMENT="../node_modules/react-native/scripts/xcode/with-environment.sh"
 # 以下の 2 行を追加します
 REACT_NATIVE_XCODE="./datadog-sourcemaps.sh"
-export SOURCEMAP_FILE=./main.jsbundle.map
+export SOURCEMAP_FILE=$DERIVED_FILE_DIR/main.jsbundle.map
 
 # 次の行を編集します
 /bin/sh -c "$WITH_ENVIRONMENT $REACT_NATIVE_XCODE"
@@ -196,28 +178,11 @@ XCode で `.xcworkspace` を開き、プロジェクト > Build Phases > Bundle 
 set -e
 
 export NODE_BINARY=node
-# XCode からビルドを実行する場合、${this.packageManager} を使用することはできません。
-# したがって、まずどの ${this.packageManager} コマンドが適切かを確認する必要があります
-package_manager_test_command="bin" # `yarn bin` と `npm bin` の両方が有効なコマンドです
-test_and_set_package_manager_bin()
-{
-  $(echo $1 $package_manager_test_command) && export PACKAGE_MANAGER_BIN=$1
-}
-
-test_and_set_package_manager_bin "yarn" || # npm を使用している場合は yarn を npm で置き換えます
-test_and_set_package_manager_bin "/opt/homebrew/bin/node /opt/homebrew/bin/yarn" || # npm を使用している場合は yarn を npm で置き換えます
-echo "package manager not found"
-
-export SOURCEMAP_FILE=./build/main.jsbundle.map
-$(echo $PACKAGE_MANAGER_BIN datadog-ci react-native xcode)
+export SOURCEMAP_FILE=$DERIVED_FILE_DIR/main.jsbundle.map
+../node_modules/.bin/datadog-ci react-native xcode
 ```
 
-このスクリプトは `yarn datadog-ci react-native xcode` コマンドを実行するのに最適な方法を見つけます。
-
--   [fastlane][9] のようなツールや、[Bitrise][10] や [AppCenter][11] のようなサービスを使ってアプリを構築する場合、`yarn` を使用することができます
--   XCode から直接リリースビルドを実行する場合、Mac では `/opt/homebrew/bin/node /opt/homebrew/bin/yarn` を使用する必要があります
-
-これは、すべての正しいパラメーターでソースマップをアップロードすることを世話するこのコマンドを実行します。詳細については、[datadog-ci のドキュメント][12]を参照してください。
+このスクリプトは、すべての正しいパラメーターでソースマップをアップロードすることを担当するコマンドを実行します。詳細については、[datadog-ci のドキュメント][12]を参照してください。
 
 アップロードを動作させるためには、Datadog API キーを指定する必要があります。コマンドラインツールや外部サービスを利用する場合は、環境変数 `DATADOG_API_KEY` として指定します。XCode からビルドを実行する場合は、API キーを含む `datadog-ci.json` ファイルをプロジェクトのルートに作成します。
 

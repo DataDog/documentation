@@ -21,7 +21,7 @@ As another example, you can create a signal by combining these two rules:
 1. Detect if an access attempt was made from an expired account
 2. Detect if there was an attempt to authenticate into a host or resource
 
-And use the `expired account ID` attribute to correlate the two rules. 
+And use the `expired account ID` attribute to correlate the two rules.
 
 You can correlate log detection rules, as well as log detection rules with Cloud Workload Security and Application Security Management rules.
 
@@ -69,4 +69,4 @@ Click **Add Case** to add additional cases.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/security/configuration/rules
+[1]: https://app.datadoghq.com/security/configuration/rules?product=siem

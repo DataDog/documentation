@@ -71,22 +71,6 @@ The **Reliability** tab contains information about the stability of your service
 
 Click the Settings icon on the right hand corner to hide columns from the service list.
 
-
-#### PagerDuty Integration
-You can add PagerDuty metadata to the Service Catalog to complete the Reliability view.
-
-- Set up the PagerDuty integration by following the instructions [on the PagerDuty integration page][3].
-- Get your [API acccess key from PagerDuty][4].
-- Link your PagerDuty service to Service Definition YAML.
-```yaml
-schema-version: v2
-dd-service: product-recommendation-lite
-team: Shopist
-integrations:
-  pagerduty: https://www.pagerduty.com/service-directory/shopping-cart
-tags: []
-```
-
 ### Performance view
 
 The **Performance** tab provides several ways to view how your services are performing and what needs the most attention. Sort the table by clicking columns to reveal services that:
@@ -108,7 +92,7 @@ The **Security tab** provides several ways to assess and improve the security po
 - Expose known security vulnerabilities, including the individual severities.
 - Are receiving the most attack attempts.
 - Are targeted by the most attackers.
-- Have the most severe threats, where the services are impacted by the attacks. 
+- Have the most severe threats, where the services are impacted by the attacks.
 - Are monitored and protected by [Application Security Management][11]
 
 To access additional details describing security vulnerabilities and signals, click on the service row to open a detailed side panel. Alternatively, click on the pop-over **View Service Details** button, which opens the service page, and in turn, its security tab.
@@ -130,52 +114,13 @@ Clicking on a service opens a side panel with details including:
 
 Click **View Related** and select a page from the dropdown menu to navigate into related pages in Datadog, such as the APM Service page and service map for this service, or related telemetry data pages, such as Distributed Tracing, Infrastructure, Network Performance, Log Management, RUM, and Continuous Profiler.
 
-## Service definitions
-
-A service is an independent, deployable unit of software. Datadog [Unified Service Tagging][6], and the `DD_SERVICE` tag, provides a standard way to manage and monitor services consistently across multiple telemetry types including infrastructure metrics, logs, and traces. To define a service using additional criteria, you can customize a service definition that fits your architectural style.
-
-Service definitions include the following elements which are all optional (except the service name):
-
-Service name
-: An identifier for the service, unique within Datadog. By default, this is the `DD_SERVICE` value from incoming data.
-
-Team
-: The name of the team responsible for developing and maintaining the service.
-
-Contacts
-: One or more ways to contact the team, such as Slack channels or email addresses.
-
-Links
-: A list of links to important resources for the service, such as runbooks.
-
-Repos
-: A list of source control repositories that contain source code and related files for maintaining, testing, and deploying the service.
-
-Docs
-: Links to documentation for the service.
-
-Tags
-: Like all Datadog tags, these help you find, filter, and group whatever they are applied to, such as service definitions.
-
-Integrations
-: Custom strings to connect integrations such as PagerDuty for identifying the service on-call.
-
-## Enriching an existing service
-
-If you already use APM to trace your applications, or have RUM or USM enabled, you can directly add metadata about those services. 
-
-Add service ownership information such as the team name, Slack channels, and source code repositories by pushing a YAML file with the POST endpoint to the [Service Definition API][7]. Read [Setting Up Service Catalog][8] for more information.
-
-## Registering a new service that has no tracing data
-You can manage your service ownership information with the Service Catalog even if those services are not emitting any Datadog telemetry (such as APM traces) with the [Service Definition API][7]. Specify the service ownership, on-call information, and custom tags in YAML files to reflect this information in the Service Catalog. Read [Setting Up Service Catalog][8] for more information.
-
 ## Role based access and permissions
 
-For general information, see [Role Based Access Control][9] and [Role Permissions][10]. 
+For general information, see [Role Based Access Control][9] and [Role Permissions][10].
 ### Read permission
 
 The Service Catalog read permission allows a user to read service catalog data, which enables the following features:
-- Service Catalog list 
+- Service Catalog list
 - Discover UI
 - Service Definition endpoint: `/api/v2/services/definition/<service_name>`
 
@@ -183,7 +128,7 @@ The permission is enabled by default in the **Datadog Read Only Role** and **Dat
 
 ### Write permission
 
-The Service Catalog write permission allows a user to modify service catalog data. The write permission is required for the following features: 
+The Service Catalog write permission allows a user to modify service catalog data. The write permission is required for the following features:
 - Inserting or Updating a Service Definition with the `POST /api/v2/services/definitions` endpoint
 - Deleting a Service Definition with the `DELETE /api/v2/services/definition/<service_name>` endpoint
 - Completing the onboarding process in the Discover Services UI
@@ -196,8 +141,6 @@ The permission is enabled by default in the **Datadog Admin Role** and **Datadog
 
 [1]: https://app.datadoghq.com/services
 [2]: /integrations/github/
-[3]: https://docs.datadoghq.com/integrations/pagerduty/
-[4]: https://support.pagerduty.com/docs/api-access-keys
 [5]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
 [6]: https://www.datadoghq.com/blog/unified-service-tagging/
 [7]: /tracing/service_catalog/service_definition_api/

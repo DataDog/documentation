@@ -3,25 +3,17 @@ title: Serverless Billing
 kind: documentation
 ---
 
-## Overview
+## Managing usage
 
-Purchase Serverless function invocations on [Datadog Pro and Enterprise plans][1]. Datadog bills based on the sum of AWS Lambda invocations across the month for your accounts. Pro and Enterprise plans include 150,000 Indexed Spans and 5 custom metrics per billed million invocations. Contact [Sales][2] or your [Customer Success Manager][3] for more information about adding Serverless to your account.
+You can track the billable and total Serverless usage in your account by checking the Datadog Usage Page. You can see both the Month-To-Date summary, as well as usage over time.
 
-**Note:** If you are using a previous billing model for Datadog's Serverless Monitoring and would like to move to invocation-based billing, contact your [Customer Success Manager][3].
+Datadog Serverless monitoring is billed based on a combination of the invocations and active Lambda functions that are tracked and monitored within Datadog. The relevant metrics based on your plan are visible in the Plan and Usage page's Serverless tab under the [Billable filter][1]. For more information about your plan and usage, contact your [Customer Success][3] Manager.
 
-## Serverless invocations
+Lambda functions can be monitored through the [Datadog AWS Integration][10] or by direct instrumentation with the [Lambda Extension][11] and [Forwarder][12] layers.
 
-Datadog charges by calculating the sum of your AWS Lambda function invocations at the end of the month.
+## Integration
 
-For Serverless pricing information, see the [Datadog pricing page][1].
-
-## Tracking usage
-
-You can track the number of billable Serverless invocations in your account by checking the [Datadog Usage Page][4]. You can see both the Month-To-Date summary, as well as usage over time.
-
-To control the functions whose invocations Datadog is monitoring, filter out particular functions by sorting by tag with the [UI](#ui) or by using the [API](#api). 
-
-**Note**: It takes some time for the excluded functions to disappear from the [Datadog serverless page][8] and [Datadog usage page][4]. Verify the filtering rules by checking the [`aws.lambda.invocations`][9] metric for the filtered functions. When Datadog stops monitoring a function, the value of `aws.lambda.invocations` falls to 0.
+To control which functions are being monitored through the integration, you can use the [Lambda integration's][13] Metric collection controls through the UI and API.
 
 ### UI
 
@@ -50,13 +42,24 @@ For example: `datadog:monitored,env:production,instance-type:c1.*,!region:us-eas
 This filter only collects EC2 instances that contain the tag
 `datadog:monitored` OR the tag `env:production` OR an instance-type tag with a `c1.*` value AND NOT a `region:us-east-1` tag.
 
+## Instrumentation
+
+Datadog provides a [Lambda Extension][14] and multiple different Lambda Layers to trace and monitor your functions based on your runtime. Active functions that are instrumented and monitored with these libraries incur billable usage, including when the AWS integration is disabled.
+
+Datadog provides multiple tools to manage the installation and configuration of these libraries. These can be used to scale and automate installing or managing Datadog's lambda libraries. For more information, see [Install Serverless Monitoring for AWS Lambda][15].
+
+## Active functions definition
+
+Datadog bills based on the average number of functions per hour across the month for your accounts. Every hour, Datadog records the number of functions that were executed one or more times and monitored by your Datadog account. At the end of the month, Datadog charges by calculating the average of the hourly number of functions recorded. Pro and Enterprise plans include five custom metrics per billable function.
+
+Billing for serverless APM is based on the sum of AWS Lambda invocations connected to APM ingested spans in a given month. You are also billed for the total number of [indexed spans][4] submitted to the Datadog APM service exceeding the bundled quantity at the end of the month. There are no billable [APM Hosts][4] when using serverless.
+
 ## Troubleshooting
 
 For technical questions, contact [Datadog support][7].
+For more information about billing or your plan and usage contact, contact your [Customer Success][3] Manager.
 
-For billing questions, contact your [Customer Success][3] Manager.
-
-[1]: https://www.datadoghq.com/pricing/?product=serverless#serverless
+[1]: https://app.datadoghq.com/billing/usage?category=serverless&data_source=billable
 [2]: mailto:sales@datadoghq.com
 [3]: mailto:success@datadoghq.com
 [4]: https://app.datadoghq.com/account/usage
@@ -65,3 +68,10 @@ For billing questions, contact your [Customer Success][3] Manager.
 [7]: /help/
 [8]: https://app.datadoghq.com/functions
 [9]: https://app.datadoghq.com/metric/explorer?exp_metric=aws.lambda.invocations&exp_group=functionname&exp_agg=sum
+[10]: /integrations/amazon_billing/
+[11]: /serverless/libraries_integrations/extension/
+[12]: /logs/guide/forwarder/
+[13]: /integrations/amazon_lambda/
+[14]: /serverless/aws_lambda
+[15]: /serverless/installation/
+

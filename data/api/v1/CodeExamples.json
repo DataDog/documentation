@@ -98,6 +98,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_3195475781",
+      "description": "Create a new dashboard with ci_test_stream list_stream widget"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_803346562",
       "description": "Create a new dashboard with distribution widget and apm stats data"
     },
@@ -238,6 +243,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_109450134",
+      "description": "Create a new dashboard with slo list widget with sort"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_173805046",
       "description": "Create a new dashboard with slo widget"
     },
@@ -280,6 +290,11 @@
       "group": "dashboards",
       "suffix": "_2921337351",
       "description": "Create a new dashboard with trace_service widget"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_2800096921",
+      "description": "Create a new timeseries widget with ci_pipelines data source"
     },
     {
       "group": "dashboards",

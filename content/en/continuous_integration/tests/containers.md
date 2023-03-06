@@ -79,6 +79,32 @@ Additionally, you need to pass in the environment variables required to configur
 
 [1]: https://support.atlassian.com/bitbucket-cloud/docs/variables-and-secrets/
 {{% /tab %}}
+{{% tab "Bitrise" %}}
+
+- `BITRISE_BUILD_SLUG`
+- `BITRISE_TRIGGERED_WORKFLOW_ID`
+- `BITRISE_BUILD_NUMBER`
+- `BITRISE_BUILD_URL`
+- `BITRISE_SOURCE_DIR`
+- `GIT_REPOSITORY_URL`
+- `BITRISE_GIT_COMMIT`
+- `GIT_CLONE_COMMIT_HASH`
+- `BITRISEIO_GIT_BRANCH_DEST`
+- `BITRISE_GIT_BRANCH`
+- `BITRISE_GIT_TAG`
+- `BITRISE_GIT_MESSAGE`
+- `GIT_CLONE_COMMIT_MESSAGE_SUBJECT`
+- `GIT_CLONE_COMMIT_MESSAGE_BODY`
+- `GIT_CLONE_COMMIT_AUTHOR_NAME`
+- `GIT_CLONE_COMMIT_AUTHOR_EMAIL`
+- `GIT_CLONE_COMMIT_COMMITER_NAME`
+- `GIT_CLONE_COMMIT_COMMITER_EMAIL`
+
+[Full list of build environment variables provided by Bitrise][1]
+
+
+[1]: https://devcenter.bitrise.io/en/references/available-environment-variables.html
+{{% /tab %}}
 {{% tab "Buildkite" %}}
 
 - `BUILDKITE`
@@ -179,28 +205,27 @@ Additionally, you need to pass in the environment variables required to configur
 - `GIT_URL_1`
 - `GIT_COMMIT`
 - `GIT_BRANCH`
+- `DD_CUSTOM_TRACE_ID` (custom variable set by the [Jenkins Datadog Plugin][2])
+- `DD_CUSTOM_PARENT_ID` (idem)
 
 [Full list of build environment variables provided by Jenkins][1]
 
 
 [1]: https://wiki.jenkins.io/display/JENKINS/Building+a+software+project
+[2]: https://github.com/jenkinsci/datadog-plugin
 {{% /tab %}}
-
 {{% tab "TeamCity" %}}
 
 - `TEAMCITY_VERSION`
-- `BUILD_VCS_NUMBER`
-- `BUILD_VCS_URL`
-- `BUILD_ID`
-- `BUILD_NUMBER`
-- `SERVER_URL`
-- `BUILD_ID`
-- `BUILD_CHECKOUTDIR`
+- `TEAMCITY_BUILDCONF_NAME`
+- `BUILD_URL`
+- `DATADOG_BUILD_ID` (custom variable set by the [Datadog TeamCity Integration][2])
 
 [Full list of build environment variables provided by TeamCity][1]
 
 
 [1]: https://www.jetbrains.com/help/teamcity/predefined-build-parameters.html
+[2]: https://plugins.jetbrains.com/plugin/20852-datadog-ci-integration
 {{% /tab %}}
 {{% tab "Travis CI" %}}
 
@@ -222,32 +247,6 @@ Additionally, you need to pass in the environment variables required to configur
 
 
 [1]: https://docs.travis-ci.com/user/environment-variables/#default-environment-variables
-{{% /tab %}}
-{{% tab "Bitrise" %}}
-
-- `BITRISE_BUILD_SLUG`
-- `BITRISE_TRIGGERED_WORKFLOW_ID`
-- `BITRISE_BUILD_NUMBER`
-- `BITRISE_BUILD_URL`
-- `BITRISE_SOURCE_DIR`
-- `GIT_REPOSITORY_URL`
-- `BITRISE_GIT_COMMIT`
-- `GIT_CLONE_COMMIT_HASH`
-- `BITRISEIO_GIT_BRANCH_DEST`
-- `BITRISE_GIT_BRANCH`
-- `BITRISE_GIT_TAG`
-- `BITRISE_GIT_MESSAGE`
-- `GIT_CLONE_COMMIT_MESSAGE_SUBJECT`
-- `GIT_CLONE_COMMIT_MESSAGE_BODY`
-- `GIT_CLONE_COMMIT_AUTHOR_NAME`
-- `GIT_CLONE_COMMIT_AUTHOR_EMAIL`
-- `GIT_CLONE_COMMIT_COMMITER_NAME`
-- `GIT_CLONE_COMMIT_COMMITER_EMAIL`
-
-[Full list of build environment variables provided by Bitrise][1]
-
-
-[1]: https://devcenter.bitrise.io/en/references/available-environment-variables.html
 {{% /tab %}}
 {{< /tabs >}}
 

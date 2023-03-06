@@ -134,8 +134,12 @@ To enable network performance monitoring with the Datadog Agent, use the followi
 
 {{< site-region region="us,us3,us5,eu" >}}
 
-6. Optionally, install the Azure integration for more visibility into Azure load balancers.
+6. Optionally, enable additional cloud integrations to allow Network Performance Monitoring to discover cloud-managed entities.
+      * Install the [Azure integration][1] for visibility into Azure load balancers.
+      * Install the [AWS Integration][2] for visibility in AWS Load Balancer. **you must enable ENI and EC2 metric collection**
 
+  [1]: /integrations/azure
+  [2]: /integrations/amazon_web_services/
 {{< /site-region >}}
 
 ### SELinux-enabled systems

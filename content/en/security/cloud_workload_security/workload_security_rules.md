@@ -20,13 +20,13 @@ further_reading:
 
 ## Overview
 
-With Cloud Workload Security (CWS) enabled, the Datadog Agent actively monitors system activity and evaluates it against a set of rules to detect suspicious behavior. 
+With Cloud Workload Security (CWS) enabled, the Datadog Agent actively monitors system activity and evaluates it against a set of rules to detect suspicious behavior.
 
 When you upgrade the Datadog Agent you receive bundled CWS Agent rules, which are used in the [default signal rules][1]. You can also write your own custom Agent rules. This guide covers Agent rules, how to create them, and how to use them to generate security signals.
 
 ### Agent rules
 
-An Agent Rule contains [Agent Expressions][2] that determine which activities the Agent collects. These captured events are then evaluated based on patterns of events described in a [rule][3]. 
+An Agent Rule contains [Agent Expressions][2] that determine which activities the Agent collects. These captured events are then evaluated based on patterns of events described in a [rule][3].
 
 A full set of rules for the Agent is called a policy. Datadog provides you with several [out-of-the-box CWS Agent rules][1] powered by the default Agent policy.
 
@@ -179,7 +179,7 @@ To finalize your setup, restart the [Datadog Agent][6].
 
 [1]: /security/default_rules/#cat-workload-security
 [2]: /security/cloud_workload_security/agent_expressions
-[3]: https://app.datadoghq.com/security/configuration/rules
+[3]: https://app.datadoghq.com/security/configuration/rules?product=cws
 [4]: https://app.datadoghq.com/security/configuration/agent-rules
 [5]: /security/notifications/variables/
 [6]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent

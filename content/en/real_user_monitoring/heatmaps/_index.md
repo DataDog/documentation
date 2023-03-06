@@ -20,16 +20,20 @@ To get started with heatmaps:
 - Enable [Session Replay][1].
 - While heatmaps are in beta, enable the feature flag by adding the following code to the [package.json][2] file in the SDK:
 
-{{< code-block lang="json" filename="block.json">}}
+```json
 datadogRum.init({
     ...
     enableExperimentalFeatures: ['clickmap']
 })
-{{< /code-block >}}
+```
 
 ### Getting started
 
-On the view list page, select your application and view. This will take you to the [heatmap page][3] for a particular view. You can switch the view being shown with the **View Name** and **Application** selectors at the top. A heatmap displays the aggregate of where all users (sessions) clicked on a single view, with the view being a single page within an application. Each session is one user's activity and includes everything they did, including all pages they viewed and all actions they clicked.
+On the view list page, select your application and view. 
+
+{{< img src="real_user_monitoring/heatmaps/heatmap-view-list.png" alt="Select a view from the Heatmap view list" style="width:100%;" >}}
+
+This will take you to the [heatmap page][3] for a particular view. You can switch the view being shown with the **View Name** and **Application** selectors at the top. A heatmap displays the aggregate of where all users (sessions) clicked on a single view, with the view being a single page within an application. Each session is one user's activity and includes everything they did, including all pages they viewed and all actions they clicked.
 
 To adjust the filters (to look at specific geography, for example), you can add a filter from the panel on the left side.
 
@@ -42,6 +46,8 @@ The right panel helps you understand the data in the heatmap:
 - The popularity of the selected page in the context of the selected application.
 - The total number of unique users viewing the page.
 - The actions on the page where a frustration signal occurred.
+
+{{< img src="real_user_monitoring/heatmaps/insights-panel.png" alt="Data showing top insights detected in the heatmap." style="width:60%;">}}
 
 You can click into any of these queries to pivot to an analytical view of these data points.
 
@@ -61,6 +67,18 @@ After understanding analytics, the next step is to understand the action in the 
 ### I am looking at a heatmap for a given view, but it’s showing me an unexpected page.
 
 Heatmaps are based on RUM view names. Depending on how your RUM application is configured, many pages can start being grouped under the same view name, or you can start having very specific view names. If you think the default view name gathering is not sufficient, you can override it manually with the [startView][6] function. 
+
+### The view that I selected is not showing the initial content.
+
+Heatmaps are generated with Session Replay data. Datadog's intelligent algorithm smartly picks a replay that is both recent and best matches the initial state of the page. In some cases, we might not be able to find the correct replay. To switch the background of your heatmap, you can use the **Choose Background** button to navigate through the different states of the page and find the one you are looking for.
+
+{{< img src="real_user_monitoring/heatmaps/heatmaps-background-selector.mp4" alt="Select a different background via the choose background button" video=true >}}
+
+### On the action list on the side of my heatmap, I see an icon showing an element that is not visibile in the heatmap.
+
+{{< img src="real_user_monitoring/heatmaps/heatmaps-hidden-elements.png" alt="Hidden elements in the action list on a heatmap." style="width:60%;">}}
+
+The tooltip on the icon says **element is not visible**. This means that the element is a common action on your page, but it's not displayed on the background in the heatmap. To see that element, you can click **Choose Background** in the bottom right corner to switch the background of your heatmap to one where that element is present. 
 
 ### After attempting to create a heatmap, I see a "No Replay Data" state appear. 
 

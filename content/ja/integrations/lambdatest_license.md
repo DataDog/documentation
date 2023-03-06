@@ -12,6 +12,7 @@ categories:
 - 問題追跡
 - 自動化
 - テスト
+- マーケットプレイス
 - クラウド
 - コラボレーション
 dependencies: []
@@ -47,6 +48,7 @@ tile:
   - Category::Issue Tracking
   - Category::Automation
   - Category::Testing
+  - Category::Marketplace
   - Category::Cloud
   - Category::Collaboration
   configuration: README.md#Setup

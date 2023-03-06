@@ -27,7 +27,7 @@ further_reading:
 
 ## Compatibility
 
-{{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
+{{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python,serverless" >}}
 
 {{< programming-lang lang="java" >}}
 
@@ -231,6 +231,51 @@ Support for query strings is not available for Flask.
 
 {{< /programming-lang >}}
 
+{{< programming-lang lang="serverless" >}}
+
+<div class="alert alert-info">ASM support for AWS Lambda is in beta. Threat detection is done by using the Datadog's lambda extension.<br><br> Don’t see your desired technology listed here? Datadog is continually adding additional support. Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send us details</a>.</div>
+
+
+### Supported cloud environments
+
+- AWS Lambda (beta)
+
+### Version dependencies
+
+- Lambda Extension version: `39`
+- Serverless plugin version: `5.20.0`
+
+### Supported languages and their requirements
+
+Node
+: If you are bundling using webpack or esbuild, [mark the Datadog libraries as external][4].
+
+Python
+: 
+
+Java
+: To fully instrument your serverless application with distributed tracing, your Java Lambda functions must use the Java 8 Corretto (`java8.al2`) or Java 11 (`java11`) runtimes with at least 1024MB of memory.
+: If you use the Datadog Lambda layers `dd-trace-java:4` (or older) and `Datadog-Extension:24` (or older), follow the instructions in [Upgrade Instrumentation for Java Lambda Functions][3].
+
+Go
+: 
+
+.NET
+: 
+
+### ASM capabilities 
+The following ASM capabilities are not supported for Lambda functions:
+ - ASM Risk Management
+ - IP, user, and suspicious request blocking
+ - 1-Click enabling ASM
+
+
+[2]: /serverless/guide/datadog_forwarder_python
+[3]: /serverless/guide/upgrade_java_instrumentation
+[4]: /serverless/guide/serverless_tracing_and_webpack/
+
+{{< /programming-lang >}}
+
 {{< /programming-lang-wrapper >}}
 
 ## Configuring a client IP header
@@ -241,19 +286,19 @@ ASM automatically attempts to resolve `http.client_ip` from several well-known h
 
 Many critical attacks are performed by authenticated users who can access your most sensitive endpoints. To identify bad actors that are generating suspicious security activity, add user information to traces by instrumenting your services with the standardized user tags. You can add custom tags to your root span, or use instrumentation functions. Read [Tracking User Activity][1] for more information.
 
-## Exclude specific values from triggering detections
+## Exclude specific parameters from triggering detections
 
 There may be a time when an ASM signal, or a suspicious request, is a false positive. For example, ASM repeatedly detects
 the same suspicious request and a signal is generated, but the signal has been reviewed and is not a threat.
 
-You can set an exclusion filter, which ignore events from a rule, to eliminate these noisy signal patterns and focus on legitimate suspicious requests.
+You can add an entry to the passlist, which ignore events from a rule, to eliminate noisy signal patterns and focus on legitimately suspicious requests.
 
-To create an exclusion filter, do one of the following:
+To add a passlist entry, do one of the following:
 
-- Click on a signal in [ASM Signals][4] and click the **Create Exclusion Filter** button in the top left corner. This method automatically generates a filter query for the targeted service.
-- Navigate to [Exclusion Filters Configuration][5] and manually configure a new exclusion filter based on your own filter query.
+- Click on a signal in [ASM Signals][4] and click the **Add Entry** link next to the **Add to passlist** suggested action. This method automatically adds an entry for the targeted service.
+- Navigate to [Passlist Configuration][5] and manually configure a new passlist entry based on your own criteria.
 
-**Note**: Requests (traces) that match an exclusion filter are not billed.
+**Note**: Requests (traces) that match a passlist entry are not billed.
 
 ## Data security considerations
 
@@ -318,5 +363,5 @@ If you need additional help, contact [Datadog support][6].
 [2]: https://github.com/google/re2/wiki/Syntax
 [3]: /tracing/configure_data_security/
 [4]: https://app.datadoghq.com/security/appsec/signals
-[5]: https://app.datadoghq.com/security/appsec/exclusions
+[5]: https://app.datadoghq.com/security/configuration/asm/passlist
 [6]: /help/
