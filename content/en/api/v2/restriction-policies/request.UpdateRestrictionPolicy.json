@@ -1,6 +1,6 @@
 {
   "data": {
-    "id": "dashboard:test-update",
+    "id": "dashboard:abc-def-ghi",
     "type": "restriction_policy",
     "attributes": {
       "bindings": [

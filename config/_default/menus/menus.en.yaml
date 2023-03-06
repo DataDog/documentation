@@ -8304,6 +8304,71 @@ api:
     url: /api/latest/incidents/
     identifier: incidents
     generated: true
+  - name: Update an incident todo
+    url: '#update-an-incident-todo'
+    identifier: incidents-update-an-incident-todo
+    parent: incidents
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateIncidentTodo
+      unstable:
+        - v2
+      order: 17
+  - name: Get incident todo details
+    url: '#get-incident-todo-details'
+    identifier: incidents-get-incident-todo-details
+    parent: incidents
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetIncidentTodo
+      unstable:
+        - v2
+      order: 16
+  - name: Delete an incident todo
+    url: '#delete-an-incident-todo'
+    identifier: incidents-delete-an-incident-todo
+    parent: incidents
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteIncidentTodo
+      unstable:
+        - v2
+      order: 18
+  - name: Create an incident todo
+    url: '#create-an-incident-todo'
+    identifier: incidents-create-an-incident-todo
+    parent: incidents
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateIncidentTodo
+      unstable:
+        - v2
+      order: 15
+  - name: Get a list of an incident's todos
+    url: '#get-a-list-of-an-incidents-todos'
+    identifier: incidents-get-a-list-of-an-incidents-todos
+    parent: incidents
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListIncidentTodos
+      unstable:
+        - v2
+      order: 14
   - name: Update an existing incident integration metadata
     url: '#update-an-existing-incident-integration-metadata'
     identifier: incidents-update-an-existing-incident-integration-metadata
