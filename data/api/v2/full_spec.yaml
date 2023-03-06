@@ -211,6 +211,13 @@ components:
         items:
           $ref: '#/components/schemas/IncidentRelatedObject'
         type: array
+    IncidentIntegrationMetadataIDPathParameter:
+      description: The UUID of the incident integration metadata.
+      in: path
+      name: integration_metadata_id
+      required: true
+      schema:
+        type: string
     IncidentSearchIncludeQueryParameter:
       description: Specifies which types of related objects should be included in
         the response.
@@ -4372,6 +4379,137 @@ components:
       - TEXTARRAY
       - METRICTAG
       - AUTOCOMPLETE
+    IncidentIntegrationMetadataAttributes:
+      description: Incident integration metadata's attributes for a create request.
+      properties:
+        incident_id:
+          description: UUID of the incident this integration metadata is connected
+            to.
+          example: 00000000-aaaa-0000-0000-000000000000
+          type: string
+        integration_type:
+          description: 'A number indicating the type of integration this metadata
+            is for. 1 indicates Slack;
+
+            8 indicates Jira.'
+          example: 1
+          format: int32
+          maximum: 9
+          type: integer
+        metadata:
+          $ref: '#/components/schemas/IncidentIntegrationMetadataMetadata'
+        status:
+          description: 'A number indicating the status of this integration metadata.
+            0 indicates unknown;
+
+            1 indicates pending; 2 indicates complete; 3 indicates manually created;
+
+            4 indicates manually updated; 5 indicates failed.'
+          format: int32
+          maximum: 5
+          type: integer
+      required:
+      - integration_type
+      - metadata
+      type: object
+    IncidentIntegrationMetadataCreateData:
+      description: Incident integration metadata data for a create request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentIntegrationMetadataAttributes'
+        type:
+          $ref: '#/components/schemas/IncidentIntegrationMetadataType'
+      required:
+      - type
+      - attributes
+      type: object
+    IncidentIntegrationMetadataCreateRequest:
+      description: Create request for an incident integration metadata.
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentIntegrationMetadataCreateData'
+      required:
+      - data
+      type: object
+    IncidentIntegrationMetadataListResponse:
+      description: Response with a list of incident integration metadata.
+      properties:
+        data:
+          description: An array of incident integration metadata.
+          items:
+            $ref: '#/components/schemas/IncidentIntegrationMetadataResponseData'
+          type: array
+        included:
+          description: Included related resources that the user requested.
+          items:
+            $ref: '#/components/schemas/IncidentIntegrationMetadataResponseIncludedItem'
+          readOnly: true
+          type: array
+        meta:
+          $ref: '#/components/schemas/IncidentResponseMeta'
+      required:
+      - data
+      type: object
+    IncidentIntegrationMetadataMetadata:
+      description: Incident integration metadata's metadata attribute.
+      oneOf:
+      - $ref: '#/components/schemas/SlackIntegrationMetadata'
+      - $ref: '#/components/schemas/JiraIntegrationMetadata'
+      type: object
+    IncidentIntegrationMetadataPatchData:
+      description: Incident integration metadata data for a patch request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentIntegrationMetadataAttributes'
+        type:
+          $ref: '#/components/schemas/IncidentIntegrationMetadataType'
+      required:
+      - type
+      - attributes
+      type: object
+    IncidentIntegrationMetadataPatchRequest:
+      description: Patch request for an incident integration metadata.
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentIntegrationMetadataPatchData'
+      required:
+      - data
+      type: object
+    IncidentIntegrationMetadataResponse:
+      description: Response with an incident integration metadata.
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentIntegrationMetadataResponseData'
+        included:
+          description: Included related resources that the user requested.
+          items:
+            $ref: '#/components/schemas/IncidentIntegrationMetadataResponseIncludedItem'
+          readOnly: true
+          type: array
+      required:
+      - data
+      type: object
+    IncidentIntegrationMetadataResponseData:
+      description: Incident integration metadata from a response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentIntegrationMetadataAttributes'
+        id:
+          description: The incident integration metadata's ID.
+          example: 00000000-0000-0000-1234-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/IncidentIntegrationMetadataType'
+      required:
+      - id
+      - type
+      type: object
+    IncidentIntegrationMetadataResponseIncludedItem:
+      description: An object related to an incident integration metadata that is included
+        in the response.
+      oneOf:
+      - $ref: '#/components/schemas/User'
+      type: object
     IncidentIntegrationMetadataType:
       default: incident_integrations
       description: Integration metadata resource type.
@@ -5226,7 +5364,7 @@ components:
         attributes:
           $ref: '#/components/schemas/IncidentUpdateAttributes'
         id:
-          description: The team's ID.
+          description: The incident's ID.
           example: 00000000-0000-0000-4567-000000000000
           type: string
         relationships:
@@ -5372,6 +5510,45 @@ components:
             description: An empty error list.
             type: string
           type: array
+      type: object
+    JiraIntegrationMetadata:
+      description: Incident integration metadata for the Jira integration.
+      properties:
+        issues:
+          description: Array of Jira issues in this integration metadata.
+          example: []
+          items:
+            $ref: '#/components/schemas/JiraIntegrationMetadataIssuesItem'
+          type: array
+      required:
+      - issues
+      type: object
+    JiraIntegrationMetadataIssuesItem:
+      description: Item in the Jira integration metadata issue array.
+      properties:
+        account:
+          description: URL of issue's Jira account.
+          example: https://example.atlassian.net
+          type: string
+        issue_key:
+          description: Jira issue's issue key.
+          example: PROJ-123
+          type: string
+        issuetype_id:
+          description: Jira issue's issue type.
+          example: '1000'
+          type: string
+        project_key:
+          description: Jira issue's project keys.
+          example: PROJ
+          type: string
+        redirect_url:
+          description: URL redirecting to the Jira issue.
+          example: https://example.atlassian.net/browse/PROJ-123
+          type: string
+      required:
+      - project_key
+      - account
       type: object
     ListApplicationKeysResponse:
       description: Response for a list of application keys.
@@ -9001,7 +9178,7 @@ components:
           type: incident_integrations
       properties:
         data:
-          description: The integration metadata relationship array
+          description: Integration metadata relationship array
           example:
           - id: 00000000-abcd-0003-0000-000000000000
             type: incident_integrations
@@ -12337,6 +12514,42 @@ components:
             $ref: '#/components/schemas/ServiceDefinitionData'
           type: array
       type: object
+    SlackIntegrationMetadata:
+      description: Incident integration metadata for the Slack integration.
+      properties:
+        channels:
+          description: Array of Slack channels in this integration metadata.
+          example: []
+          items:
+            $ref: '#/components/schemas/SlackIntegrationMetadataChannelItem'
+          type: array
+      required:
+      - channels
+      type: object
+    SlackIntegrationMetadataChannelItem:
+      description: Item in the Slack integration metadata channel array.
+      properties:
+        channel_id:
+          description: Slack channel ID.
+          example: C0123456789
+          type: string
+        channel_name:
+          description: Name of the Slack channel.
+          example: '#example-channel-name'
+          type: string
+        redirect_url:
+          description: URL redirecting to the Slack channel.
+          example: https://slack.com/app_redirect?channel=C0123456789&team=T01234567
+          type: string
+        team_id:
+          description: Slack team ID.
+          example: T01234567
+          type: string
+      required:
+      - channel_id
+      - channel_name
+      - redirect_url
+      type: object
     TagsEventAttribute:
       description: Array of tags associated with your event.
       example:
@@ -14878,6 +15091,224 @@ paths:
               \"incident_attachments\"\n    }\n  ]\n}"
           step: the "incident" has an "incident_attachment"
       x-menu-order: 8
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/incidents/{incident_id}/relationships/integrations:
+    get:
+      description: Get all integration metadata for an incident.
+      operationId: ListIncidentIntegrations
+      parameters:
+      - $ref: '#/components/parameters/IncidentIDPathParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentIntegrationMetadataListResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_read
+      summary: Get a list of an incident's integration metadata
+      tags:
+      - Incidents
+      x-menu-order: 9
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Create an incident integration metadata.
+      operationId: CreateIncidentIntegration
+      parameters:
+      - $ref: '#/components/parameters/IncidentIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IncidentIntegrationMetadataCreateRequest'
+        description: Incident integration metadata payload.
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentIntegrationMetadataResponse'
+          description: CREATED
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_write
+      summary: Create an incident integration metadata
+      tags:
+      - Incidents
+      x-codegen-request-body-name: body
+      x-given:
+        incident_integration_metadata:
+          parameters:
+          - name: incident_id
+            source: incident.data.id
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"integration_type\":
+              1,\n      \"incident_id\": \"{{ incident.data.id }}\",\n      \"status\":
+              2,\n      \"metadata\": {\n        \"channels\": [\n          {\n            \"channel_id\":
+              \"C0123456789\",\n            \"team_id\": \"T01234567\",\n            \"channel_name\":
+              \"#example-channel-name\",\n            \"redirect_url\": \"https://slack.com/app_redirect?channel=C0123456789&team=T01234567\"\n
+              \         }\n        ]\n      }\n    },\n    \"type\": \"incident_integrations\"\n
+              \ }\n}"
+          step: the "incident" has an "incident_integration_metadata"
+      x-menu-order: 10
+      x-undo:
+        operationId: DeleteIncidentIntegration
+        parameters:
+        - name: incident_id
+          source: data.attributes.incident_id
+        - name: integration_metadata_id
+          source: data.id
+        type: unsafe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id}:
+    delete:
+      description: Delete an incident integration metadata.
+      operationId: DeleteIncidentIntegration
+      parameters:
+      - $ref: '#/components/parameters/IncidentIDPathParameter'
+      - $ref: '#/components/parameters/IncidentIntegrationMetadataIDPathParameter'
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_write
+      summary: Delete an incident integration metadata
+      tags:
+      - Incidents
+      x-codegen-request-body-name: body
+      x-menu-order: 13
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Get incident integration metadata details.
+      operationId: GetIncidentIntegration
+      parameters:
+      - $ref: '#/components/parameters/IncidentIDPathParameter'
+      - $ref: '#/components/parameters/IncidentIntegrationMetadataIDPathParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentIntegrationMetadataResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_read
+      summary: Get incident integration metadata details
+      tags:
+      - Incidents
+      x-menu-order: 11
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    patch:
+      description: Update an existing incident integration metadata.
+      operationId: UpdateIncidentIntegration
+      parameters:
+      - $ref: '#/components/parameters/IncidentIDPathParameter'
+      - $ref: '#/components/parameters/IncidentIntegrationMetadataIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IncidentIntegrationMetadataPatchRequest'
+        description: Incident integration metadata payload.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentIntegrationMetadataResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_write
+      summary: Update an existing incident integration metadata
+      tags:
+      - Incidents
+      x-codegen-request-body-name: body
+      x-menu-order: 12
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
