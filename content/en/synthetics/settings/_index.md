@@ -118,7 +118,18 @@ For more information about TOTP-based MFA in a browser test, see [TOTPs For Mult
 
 Once created, global variables can be used in all Synthetic tests. To import your global variables into your test, click **+ Variables**, type `{{` in a field you want to add the variable, and select your global variable. 
 
-For more information, see the [HTTP test][8], [Multistep API test][9], [Browser test configuration][10], and [Steps documentation][16].
+To update the value of an existing global variable using [Terraform][17], create a global variable with the same name, description, and tags, but different value. 
+
+```json
+resource "datadog_synthetics_global_variable" "test_variable" {
+  name        = "EXAMPLE_VARIABLE"
+  description = "Description of the variable"
+  tags        = ["foo:bar", "env:test"]
+  value       = "NEW-VALUE"
+}
+```
+
+For more information about variables, see the [HTTP test][8], [Multistep API test][9], [Browser test configuration][10], and [Steps documentation][16].
 
 ### Permissions
 
@@ -210,3 +221,4 @@ If you are using the [custom role feature][12], add your user to any custom role
 [14]: /synthetics/guide/explore-rum-through-synthetics/
 [15]: /synthetics/apm/#prerequisites
 [16]: /synthetics/browser_tests/actions/#use-variables
+[17]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_global_variable
