@@ -2681,6 +2681,7 @@ components:
       - audit
       - events
       - ci_tests
+      - ci_pipelines
       example: logs
       type: string
       x-enum-varnames:
@@ -2693,6 +2694,7 @@ components:
       - AUDIT
       - EVENTS
       - CI_TESTS
+      - CI_PIPELINES
     FormulaAndFunctionMetricAggregation:
       description: The aggregation methods available for metrics queries.
       enum:
@@ -4298,8 +4300,10 @@ components:
       - logs_stream
       - audit_stream
       - ci_pipeline_stream
+      - ci_test_stream
       - rum_issue_stream
       - apm_issue_stream
+      - logs_issue_stream
       - logs_pattern_stream
       - logs_transaction_stream
       - event_stream
@@ -4309,8 +4313,10 @@ components:
       - LOGS_STREAM
       - AUDIT_STREAM
       - CI_PIPELINE_STREAM
+      - CI_TEST_STREAM
       - RUM_ISSUE_STREAM
       - APM_ISSUE_STREAM
+      - LOGS_ISSUE_STREAM
       - LOGS_PATTERN_STREAM
       - LOGS_TRANSACTION_STREAM
       - EVENT_STREAM

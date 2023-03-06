@@ -175,6 +175,14 @@ code {
     white-space: normal;
     /*font-family: 'Source Code Pro', monospace;*/
     font-family: $font-family-monospace;
+  &.language-shell {
+    .line {
+      &:before {
+        content: '$ ';
+        display: inline;
+      }
+    }
+  }
 }
 
 h2 code {

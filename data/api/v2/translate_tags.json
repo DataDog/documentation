@@ -41,7 +41,7 @@
   },
   "ip-allowlist": {
     "name": "IP Allowlist",
-    "description": "The IP allowlist API is used to manage the IP addresses that\ncan access the Datadog API and UI."
+    "description": "The IP allowlist API is used to manage the IP addresses that\ncan access the Datadog API and web UI. It does not block\naccess to intake APIs or public dashboards.\n\nThis is an enterprise-only feature. Request access by\ncontacting Datadog support."
   },
   "incident-services": {
     "name": "Incident Services",

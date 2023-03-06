@@ -66,10 +66,10 @@ class Build:
 
 
     def build_documentation(self):
-        # Instanciation of the integrations class since it's needed for content management below.
+        # Instantiation of the integrations class since it's needed for content management below.
         Int = Integrations(self.source_dir, self.tempdir, self.integration_mutations)
 
-        # Depending of the action attached to the content the proper function is called
+        # Depending on the action attached to the content the proper function is called
         for content in self.list_of_sourced_contents:
             try:                
                 if content["action"] == "integrations":

@@ -51,6 +51,7 @@ The data we track automatically contains primarily technical information, much o
 - [iOS][2]
 - [Android][3]
 - [Flutter][4]
+- [React Native][16]
 
 ### Transmit RUM events through a proxy server
 You can transmit all RUM events through your own [proxy server][15] so that end user devices never directly communicate with Datadog.
@@ -123,3 +124,4 @@ See [privacy options specific to Session Replay][12].
 [13]: https://www.datadoghq.com/privacy/
 [14]: /real_user_monitoring/explorer/search/
 [15]: /real_user_monitoring/guide/proxy-rum-data/?tab=npm
+[16]: /real_user_monitoring/reactnative/advanced_configuration/#modify-or-drop-rum-events

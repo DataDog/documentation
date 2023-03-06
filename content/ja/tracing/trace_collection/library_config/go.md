@@ -16,7 +16,7 @@ title: Go トレーシングライブラリの構成
 type: multi-code-lang
 ---
 
-[コードを使用してトレーシングライブラリをセットアップし、APM データを収集するように Agent を構成し、Go インテグレーションをアクティブ化][7]した後、オプションで、必要に応じてトレーシングライブラリを構成してください。
+[コードを使用してトレーシングライブラリをセットアップし、APM データを収集するように Agent を構成し、Go インテグレーションをアクティブ化][1]した後、オプションで、必要に応じてトレーシングライブラリを構成してください。
 
 Datadog では、`DD_ENV`、`DD_SERVICE`、`DD_VERSION` を使用して、サービスの `env`、`service`、`version` を設定することを推奨します。
 
@@ -62,11 +62,11 @@ Go トレーサーは、コンフィギュレーション用の追加の環境�
 
 `DD_TRACE_AGENT_PORT`
 : **デフォルト**: `8126` <br>
-Datadog トレース送信のためのデフォルトのトレース Agent ポートをオーバーライドします。
+Datadog トレース送信のためのデフォルトのトレース Agent ポートをオーバーライドします。[Agent の構成][13]で `receiver_port` や `DD_APM_RECEIVER_PORT` をデフォルトの `8126` 以外に設定した場合、ライブラリ構成の `DD_DOGSTATSD_PORT` はそれに合わせなければなりません。
 
 `DD_DOGSTATSD_PORT`
 : **デフォルト**: `8125` <br>
-DogStatsD メトリクス送信のためのデフォルトのトレース Agent ポートをオーバーライドします。
+DogStatsD メトリクス送信のためのデフォルトのトレース Agent ポートをオーバーライドします。[Agent の構成][13]で `dogstatsd_port` や `DD_DOGSTATSD_PORT` をデフォルトの `8125` 以外に設定した場合、ライブラリ構成の `DD_DOGSTATSD_PORT` はそれに合わせなければなりません。
 
 `DD_TRACE_SAMPLING_RULES`
 : **デフォルト**: `nil`<br>
@@ -78,6 +78,13 @@ DogStatsD メトリクス送信のためのデフォルトのトレース Agent 
 
 `DD_TRACE_SAMPLE_RATE`
 : インジェストレートコントロールを有効にします。
+
+`DD_SPAN_SAMPLING_RULES`
+: **デフォルト**: `nil`<br>
+オブジェクトの JSON 配列。ルールは、スパンのサンプルレートを決定するために構成された順序で適用されます。`sample_rate` の値は 0.0 から 1.0 の間でなければなりません (この値を含む)。<br>
+詳細は、[取り込みメカニズム][3]を参照してください。
+**例:**<br>
+  - サービス名 `my-service` と演算子名 `http.request` のスパンサンプリングレートを 50% に設定し、1 秒間に最大 50 トレースします: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`
 
 `DD_TRACE_RATE_LIMIT`
 : 1 秒あたり、Go プロセスごとにサンプリングするスパンの最大数。DD_TRACE_SAMPLE_RATE が設定されている場合、デフォルトは 100 です。それ以外の場合は、Datadog Agent にレート制限を委ねます。
@@ -104,23 +111,35 @@ Web フレームワークとライブラリインスツルメンテーション�
 
 `DD_INSTRUMENTATION_TELEMETRY_ENABLED`
 : **デフォルト**: `false` <br>
-Datadog は、製品の改良のため、[システムの環境・診断情報][8]を収集することがあります。false の場合、このテレメトリーデータは収集されません。
+Datadog は、製品の改良のため、[システムの環境・診断情報][6]を収集することがあります。false の場合、このテレメトリーデータは収集されません。
 
+`DD_TRACE_CLIENT_IP_ENABLED`
+: **デフォルト**: `false` <br>
+HTTP リクエストスパンの関連 IP ヘッダーからクライアント IP の収集を可能にします。
+バージョン 1.47.0 で追加されました 
 
 ## APM 環境名の構成
 
-[APM 環境名][5]は、[Agent 内][6] またはトレーサーの [WithEnv][3] スタートオプションを使用して構成できます。
+[APM 環境名][7]は、[Agent 内][8] またはトレーサーの [WithEnv][3] スタートオプションを使用して構成できます。
 
-## B3 ヘッダーの抽出と挿入
+## 分散型トレーシングのためのトレースコンテキストの伝搬
 
-Datadog APM トレーサーは、分散型トレーシングの [B3 ヘッダーの抽出][1]と挿入をサポートしています。
+Datadog APM トレーサーは、分散型トレーシングのために [B3][9] や [W3C][14] のヘッダーの抽出と挿入をサポートしています。
 
-分散したヘッダーの挿入と抽出は、挿入/抽出スタイルを構成することで制御されます。`Datadog` と `B3` の 2 つのスタイルがサポートされています。
+分散したヘッダーの挿入と抽出は、挿入/抽出スタイルを構成することで制御されます。`tracecontext`、`Datadog`、[`B3`][9]、`B3 single header` のスタイルがサポートされています。
 
-- 環境変数 `DD_PROPAGATION_STYLE_INJECT=Datadog,B3` を用いて挿入スタイルを構成する
-- 環境変数 `DD_PROPAGATION_STYLE_EXTRACT=Datadog,B3` を用いて抽出スタイルを構成する
+- 環境変数 `DD_PROPAGATION_STYLE_INJECT=tracecontext,B3` を用いて挿入スタイルを構成する
+- 環境変数 `DD_PROPAGATION_STYLE_EXTRACT=tracecontext,B3` を用いて抽出スタイルを構成する
+- 環境変数 `DD_TRACE_PROPAGATION_STYLE=tracecontext,B3` を用いて挿入スタイルと抽出スタイルの両方を構成する
 
-これらの環境変数の値は、挿入または抽出が有効になっているヘッダースタイルのコンマ区切りリストです。デフォルトでは、`Datadog` 抽出スタイルのみが有効になっています。
+これらの環境変数の値は、挿入または抽出が有効になっているヘッダースタイルのコンマ区切りリストです。デフォルトでは、`tracecontext,Datadog` スタイルが有効になっています。
+
+トレースコンテキストの伝搬を無効にするには、環境変数の値を `none` に設定します。
+- 環境変数 `DD_PROPAGATION_STYLE_INJECT=none` を用いて挿入スタイルを無効にする
+- 環境変数 `DD_PROPAGATION_STYLE_EXTRACT=none` を用いて抽出スタイルを無効にする
+- 環境変数 `DD_PROPAGATION_STYLE=none` を使って、すべてのトレースコンテキストの伝搬を無効にします (挿入と抽出の両方)。
+
+複数の環境変数が設定されている場合、 `DD_PROPAGATION_STYLE_INJECT` と `DD_PROPAGATION_STYLE_EXTRACT` は `DD_PROPAGATION_STYLE` で指定した値をオーバーライドします。
 
 複数の抽出スタイルが有効な場合、それらのスタイルが指定されている順序で抽出が試行されます。最初に正常に抽出された値が使用されます。
 
@@ -128,11 +147,14 @@ Datadog APM トレーサーは、分散型トレーシングの [B3 ヘッダー
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/openzipkin/b3-propagation
+[1]: /ja/tracing/trace_collection/dd_libraries/go
 [2]: /ja/getting_started/tagging/unified_service_tagging
 [3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartOption
-[4]: /ja/tracing/trace_pipeline/ingestion_mechanisms/?tab=go#pagetitle
-[5]: /ja/tracing/advanced/setting_primary_tags_to_scope/#environment
-[6]: /ja/getting_started/tracing/#environment-name
-[7]: /ja/tracing/trace_collection/dd_libraries/go
-[8]: /ja/tracing/configure_data_security#telemetry-collection
+[4]: /ja/tracing/trace_pipeline/ingestion_mechanisms/
+[5]: /ja/tracing/trace_pipeline/ingestion_mechanisms/?tab=go#pagetitle
+[6]: /ja/tracing/configure_data_security#telemetry-collection
+[7]: /ja/tracing/advanced/setting_primary_tags_to_scope/#environment
+[8]: /ja/getting_started/tracing/#environment-name
+[9]: https://github.com/openzipkin/b3-propagation
+[13]: /ja/agent/guide/network/#configure-ports
+[14]: https://github.com/w3c/trace-context

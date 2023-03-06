@@ -39,7 +39,7 @@ Datadog は、インスツルメンテーションライブラリのイメージ
 | JavaScript | [gcr.io/datadoghq/dd-lib-js-init][8]     | [hub.docker.com/r/datadog/dd-lib-js-init][9]     | [gallery.ecr.aws/datadog/dd-lib-js-init][10]     |
 | Python     | [gcr.io/datadoghq/dd-lib-python-init][11] | [hub.docker.com/r/datadog/dd-lib-python-init][12] | [gallery.ecr.aws/datadog/dd-lib-python-init][13] |
 
-Datadog Cluster Agent の構成にある `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_CONTAINER_REGISTRY` 環境変数は、Admission Controller が使用するレジストリを指定します。デフォルト値は、`grc.io/datadoghq` です。
+Datadog Cluster Agent の構成にある `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_CONTAINER_REGISTRY` 環境変数は、Admission Controller が使用するレジストリを指定します。デフォルト値は、`gcr.io/datadoghq` です。
 
 ローカルコンテナレジストリでイメージをホストしている場合は、`docker.io/datadog`、`public.ecr.aws/datadog`、または他の URL に変更することで、別のレジストリからトレーシングライブラリを引き出すことができます。
 
@@ -228,7 +228,7 @@ Agent とお客様のサービスの両方が、現実または仮想のホス�
 
 ## 言語とアプリをインストールする
 
-1. Java アプリケーションの場合、JDK がインストールされていることを確認します。
+1. Java アプリケーションの場合、JDK または JRE がインストールされていることを確認します。
    ```sh
    sudo apt install openjdk-17-jdk -y
    ```

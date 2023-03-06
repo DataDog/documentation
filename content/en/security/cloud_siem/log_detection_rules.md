@@ -49,7 +49,7 @@ Detect when an attribute changes to a new value. For example, if you create a tr
 ### Anomaly
 
 <div class="alert alert-warning">
-Anomaly detection is currently in <a href="https://app.datadoghq.com/security/configuration/rules/new">public beta</a>.
+Anomaly detection is currently in <a href="https://app.datadoghq.com/security/configuration/rules/new?product=siem">public beta</a>.
 </div>
 
 When configuring a specific threshold isn't an option, you can define an anomaly detection rule instead. With anomaly detection, a dynamic threshold is automatically derived from the past observations of the events.
@@ -116,7 +116,7 @@ Select the value or values to detect, the learning duration, and, optionally, de
 
 For example, create a query for successful user authentication and set **Detect new value** to `country` and group by to `user`. Set a learning duration of `7 days`. Once configured, logs coming in over the next 7 days are evaluated with the set values. If a log comes in with a new value after the learning duration, a signal is generated, and the new value is learned to prevent future signals with this value.
 
-You can also identify users and entities using multiple values in a single query. For example, if you want to detect when a user signs in from a new device and from a country that they've never signed in from before, add `device_id` and `country_name` to **Detect new value**. 
+You can also identify users and entities using multiple values in a single query. For example, if you want to detect when a user signs in from a new device and from a country that they've never signed in from before, add `device_id` and `country_name` to **Detect new value**.
 
 #### Advanced options
 
@@ -180,7 +180,7 @@ Click the **Advanced** option to add queries that will **Only trigger a signal w
 
 Enable **Create rules cases with the Then operator** if you want to trigger a signal for the example: If query A occurs and then query B occurs. The `then` operator can only be used on a single rule case.
 
-All rule cases are evaluated as case statements. Thus, the first case to match generates the signal. Click and drag your rule cases to manipulate their ordering. An example rules case is `a > 3`. 
+All rule cases are evaluated as case statements. Thus, the first case to match generates the signal. Click and drag your rule cases to manipulate their ordering. An example rules case is `a > 3`.
 
 A rule case contains logical operations (`>, >=, &&, ||`) to determine if a signal should be generated based on the event counts in the previously defined queries. The ASCII lowercase [query labels](#define-a-search-query) are referenced in this section.
 
@@ -276,9 +276,9 @@ Regular audits of all out-of-the-box detection rules are performed to maintain h
 
 The rule deprecation process is as follows:
 
-1. There is a warning with the deprecation date on the rule. In the UI, the warning is shown in the: 
-    - Signal side panel's **Rule Details > Playbook** section 
-    - [Rule editor][4] for that specific rule 
+1. There is a warning with the deprecation date on the rule. In the UI, the warning is shown in the:
+    - Signal side panel's **Rule Details > Playbook** section
+    - [Rule editor][4] for that specific rule
 2. Once the rule is deprecated, there is a 15 month period before the rule is deleted. This is due to the signal retention period of 15 months. During this time, you can re-enable the rule by [cloning the rule][4] in the UI.
 3. Once the rule is deleted, you can no longer clone and re-enable it.
 
