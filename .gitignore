@@ -10,6 +10,9 @@ integrations_data
 bin/htmltest
 tmp
 
+# Pa11y generated data
+pa11y-output/
+
 # Ignore generated examples
 /examples
 content/en/api/**/*.go
