@@ -36,7 +36,7 @@ To create a new log detection rule in Datadog, hover over **Security**, select *
 
 For Cloud SIEM (Security Information and Event Management), select **Log Detection** to analyze ingested logs in real-time.
 
-## Choose a detection method
+## Detection methods
 
 ### Threshold
 
@@ -54,6 +54,9 @@ When configuring a specific threshold isn't an option, you can define an anomaly
 
 Impossible travel detects access from different locations whose distance is greater than the distance a human can travel in the time between the two access events.
 
+### Third Party
+
+Third Party is available only for the [AWS Guardduty finding][5] rule. You can update the rule with suppression queries and who to notify when a signal is generated.
 ## Define a search query
 
 {{< tabs >}}
@@ -285,3 +288,4 @@ The rule deprecation process is as follows:
 [2]: /security/notifications/variables/#template-variables
 [3]: /security/default_rules/#cat-cloud-siem-log-detection
 [4]: /security/detection_rules/#rule-and-generated-signal-options
+[5]: https://app.datadoghq.com/security/configuration/siem/rules/view/nkq-b6q-h8c?query=type%3A%28log_detection%20OR%20signal_correlation%29%20guardduty&product=siem
