@@ -214,7 +214,7 @@ To use Azure Cloud Cost Management in Datadog, you must set up the Datadog Azure
 5. Choose a storage account, container, and directory for the exports.
 6. Select **Create**.
 
-Repeat steps one to six for Metric: **Amortized Cost (usage and purchases)**. Datadog recommends using the same storage container for both exports.
+Repeat steps one to six for Metric: **Amortized Cost (usage and purchases)**. Datadog recommends using the same storage container for both exports. For faster processing, generate the first exports manually by clicking **Run Now**.
 
 ### Provide Datadog access to your exports
 
