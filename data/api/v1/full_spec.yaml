@@ -22101,14 +22101,14 @@ paths:
         name: metric_query
         schema:
           type: string
-      - description: The POSIX timestamp of the start of the query.
+      - description: The POSIX timestamp of the start of the query in seconds.
         in: query
         name: start
         required: true
         schema:
           format: int64
           type: integer
-      - description: The POSIX timestamp of the end of the query.
+      - description: The POSIX timestamp of the end of the query in seconds.
         in: query
         name: end
         required: true
