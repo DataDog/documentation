@@ -302,6 +302,13 @@ components:
       schema:
         example: ExampleTeamName
         type: string
+    IncidentTodoIDPathParameter:
+      description: The UUID of the incident todo.
+      in: path
+      name: todo_id
+      required: true
+      schema:
+        type: string
     MetricID:
       description: The name of the log-based metric.
       in: path
@@ -5302,6 +5309,182 @@ components:
           nullable: false
           type: string
       type: object
+    IncidentTodoAnonymousAssignee:
+      description: Anonymous assignee entity.
+      properties:
+        icon:
+          description: URL for assignee's icon.
+          example: https://a.slack-edge.com/80588/img/slackbot_48.png
+          type: string
+        id:
+          description: Anonymous assignee's ID.
+          example: USLACKBOT
+          type: string
+        name:
+          description: Assignee's name.
+          example: Slackbot
+          type: string
+        source:
+          $ref: '#/components/schemas/IncidentTodoAnonymousAssigneeSource'
+      required:
+      - id
+      - icon
+      - name
+      - source
+      type: object
+    IncidentTodoAnonymousAssigneeSource:
+      default: slack
+      description: The source of the anonymous assignee.
+      enum:
+      - slack
+      - microsoft_teams
+      example: slack
+      type: string
+      x-enum-varnames:
+      - SLACK
+      - MICROSOFT_TEAMS
+    IncidentTodoAssigneeArray:
+      description: Array of todo assignees.
+      example:
+      - '@test.user@test.com'
+      - icon: https://a.slack-edge.com/80588/img/slackbot_48.png
+        id: USLACKBOT
+        name: Slackbot
+        source: slack
+      items:
+        description: Todo assignee.
+        oneOf:
+        - $ref: '#/components/schemas/IncidentTodoAssigneeHandle'
+        - $ref: '#/components/schemas/IncidentTodoAnonymousAssignee'
+      nullable: true
+      type: array
+    IncidentTodoAssigneeHandle:
+      description: Assignee's @-handle.
+      example: '@test.user@test.com'
+      type: string
+    IncidentTodoAttributes:
+      description: Incident todo's attributes.
+      properties:
+        assignees:
+          $ref: '#/components/schemas/IncidentTodoAssigneeArray'
+        completed:
+          description: Timestamp when the todo was completed.
+          example: '2023-03-06T22:00:00.000000+00:00'
+          nullable: true
+          type: string
+        content:
+          description: The follow-up task's content.
+          example: Restore lost data.
+          type: string
+        due_date:
+          description: Timestamp when the todo should be completed by.
+          example: '2023-07-10T05:00:00.000000+00:00'
+          nullable: true
+          type: string
+      required:
+      - content
+      - assignees
+      type: object
+    IncidentTodoCreateData:
+      description: Incident todo data for a create request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentTodoAttributes'
+        type:
+          $ref: '#/components/schemas/IncidentTodoType'
+      required:
+      - type
+      - attributes
+      type: object
+    IncidentTodoCreateRequest:
+      description: Create request for an incident todo.
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentTodoCreateData'
+      required:
+      - data
+      type: object
+    IncidentTodoListResponse:
+      description: Response with a list of incident todos.
+      properties:
+        data:
+          description: An array of incident todos.
+          items:
+            $ref: '#/components/schemas/IncidentTodoResponseData'
+          type: array
+        included:
+          description: Included related resources that the user requested.
+          items:
+            $ref: '#/components/schemas/IncidentTodoResponseIncludedItem'
+          readOnly: true
+          type: array
+        meta:
+          $ref: '#/components/schemas/IncidentResponseMeta'
+      required:
+      - data
+      type: object
+    IncidentTodoPatchData:
+      description: Incident todo data for a patch request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentTodoAttributes'
+        type:
+          $ref: '#/components/schemas/IncidentTodoType'
+      required:
+      - type
+      - attributes
+      type: object
+    IncidentTodoPatchRequest:
+      description: Patch request for an incident todo.
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentTodoPatchData'
+      required:
+      - data
+      type: object
+    IncidentTodoResponse:
+      description: Response with an incident todo.
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentTodoResponseData'
+        included:
+          description: Included related resources that the user requested.
+          items:
+            $ref: '#/components/schemas/IncidentTodoResponseIncludedItem'
+          readOnly: true
+          type: array
+      required:
+      - data
+      type: object
+    IncidentTodoResponseData:
+      description: Incident todo response data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentTodoAttributes'
+        id:
+          description: The incident todo's ID.
+          example: 00000000-0000-0000-1234-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/IncidentTodoType'
+      required:
+      - id
+      - type
+      type: object
+    IncidentTodoResponseIncludedItem:
+      description: An object related to an incident todo that is included in the response.
+      oneOf:
+      - $ref: '#/components/schemas/User'
+      type: object
+    IncidentTodoType:
+      default: incident_todos
+      description: Todo resource type.
+      enum:
+      - incident_todos
+      example: incident_todos
+      type: string
+      x-enum-varnames:
+      - INCIDENT_TODOS
     IncidentType:
       default: incidents
       description: Incident resource type.
@@ -15309,6 +15492,223 @@ paths:
       - Incidents
       x-codegen-request-body-name: body
       x-menu-order: 12
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/incidents/{incident_id}/relationships/todos:
+    get:
+      description: Get all todos for an incident.
+      operationId: ListIncidentTodos
+      parameters:
+      - $ref: '#/components/parameters/IncidentIDPathParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentTodoListResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_read
+      summary: Get a list of an incident's todos
+      tags:
+      - Incidents
+      x-menu-order: 14
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Create an incident todo.
+      operationId: CreateIncidentTodo
+      parameters:
+      - $ref: '#/components/parameters/IncidentIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IncidentTodoCreateRequest'
+        description: Incident todo payload.
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentTodoResponse'
+          description: CREATED
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_write
+      summary: Create an incident todo
+      tags:
+      - Incidents
+      x-codegen-request-body-name: body
+      x-given:
+        incident_todo:
+          parameters:
+          - name: incident_id
+            source: incident.data.id
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"content\": \"Follow
+              up with customer about the impact they saw.\",\n      \"assignees\":
+              [\n        \"@test.user@test.com\",\n        {\n          \"icon\":
+              \"https://a.slack-edge.com/80588/img/slackbot_48.png\",\n          \"id\":
+              \"USLACKBOT\",\n          \"name\": \"Slackbot\",\n          \"source\":
+              \"slack\"\n        }\n      ]\n    },\n    \"type\": \"incident_todos\"\n
+              \ }\n}"
+          step: the "incident" has an "incident_todo"
+      x-menu-order: 15
+      x-undo:
+        operationId: DeleteIncidentTodo
+        parameters:
+        - name: incident_id
+          source: data.attributes.incident_id
+        - name: todo_id
+          source: data.id
+        type: unsafe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/incidents/{incident_id}/relationships/todos/{todo_id}:
+    delete:
+      description: Delete an incident todo.
+      operationId: DeleteIncidentTodo
+      parameters:
+      - $ref: '#/components/parameters/IncidentIDPathParameter'
+      - $ref: '#/components/parameters/IncidentTodoIDPathParameter'
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_write
+      summary: Delete an incident todo
+      tags:
+      - Incidents
+      x-menu-order: 18
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Get incident todo details.
+      operationId: GetIncidentTodo
+      parameters:
+      - $ref: '#/components/parameters/IncidentIDPathParameter'
+      - $ref: '#/components/parameters/IncidentTodoIDPathParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentTodoResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_read
+      summary: Get incident todo details
+      tags:
+      - Incidents
+      x-menu-order: 16
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    patch:
+      description: Update an incident todo.
+      operationId: UpdateIncidentTodo
+      parameters:
+      - $ref: '#/components/parameters/IncidentIDPathParameter'
+      - $ref: '#/components/parameters/IncidentTodoIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IncidentTodoPatchRequest'
+        description: Incident todo payload.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentTodoResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_write
+      summary: Update an incident todo
+      tags:
+      - Incidents
+      x-codegen-request-body-name: body
+      x-menu-order: 17
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
