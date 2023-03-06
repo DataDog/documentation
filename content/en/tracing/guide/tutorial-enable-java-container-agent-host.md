@@ -21,7 +21,7 @@ further_reading:
 
 ## Overview
 
-This tutorial walks you through the steps for enabling tracing on a sample Java application installed in a container. In this scenario, the Datadog Agent is installed on a host. 
+This tutorial walks you through the steps for enabling tracing on a sample Java application installed in a container. In this scenario, the Datadog Agent is installed on a host.
 
 For other scenarios, including the application and Agent on a host, the application and the Agent in containers or cloud infrastructure, and applications written in different languages, see the other [Enabling Tracing tutorials][1].
 
@@ -36,11 +36,11 @@ See [Tracing Java Applications][2] for general comprehensive tracing setup docum
 
 ## Install the Agent
 
-If you haven't installed a Datadog Agent on your machine, install one now. 
+If you haven't installed a Datadog Agent on your machine, install one now.
 
 1. Go to [**Integrations > Agent**][5] and select your operating system. For example, on most Linux platforms, you can install the Agent by running the following script, replacing `<YOUR_API_KEY>` with your [Datadog API key][3]:
 
-   {{< code-block lang="bash" >}}
+   {{< code-block lang="shell" >}}
 DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
    {{< /code-block >}}
 
@@ -58,7 +58,7 @@ DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash 
    {{< img src="tracing/guide/tutorials/tutorial-python-host-agent-verify.png" alt="Event Explorer showing a message from Datadog indicating the Agent was installed on a host." style="width:70%;" >}}
 
 <div class="alert alert-info">If after a few minutes you don't see your host in Datadog (under <strong>Infrastructure > Host map</strong>), ensure you used the correct API key for your organization, available at <a href="https://app.datadoghq.com/organization-settings/api-keys"><strong>Organization Settings > API Keys</strong></a>.</div>
- 
+
 
 ## Install the sample Dockerized Java application
 
@@ -70,7 +70,7 @@ git clone https://github.com/DataDog/apm-tutorial-java-host.git
 
 The repository contains a multi-service Java application pre-configured to be run within Docker containers. The sample app is a basic notes app with a REST API to add and change data.
 
-For this tutorial, the `docker-compose` YAML files are located in the folder `apm-tutorial-java-host/docker`. The instructions that follow assume that your Agent is running on a Linux host, and so use the `service-docker-compose-linux.yaml` file. If your Agent is on a macOS or Windows host, follow the same directions but use the `service-docker-compose.yaml` file instead. The Linux file contains Linux-specific Docker settings that are described in the in-file comments. 
+For this tutorial, the `docker-compose` YAML files are located in the folder `apm-tutorial-java-host/docker`. The instructions that follow assume that your Agent is running on a Linux host, and so use the `service-docker-compose-linux.yaml` file. If your Agent is on a macOS or Windows host, follow the same directions but use the `service-docker-compose.yaml` file instead. The Linux file contains Linux-specific Docker settings that are described in the in-file comments.
 
 In each of the `notes` and `calendar` directories, there are two sets of Dockerfiles for building the applications, either with Maven or with Gradle. This tutorial uses the Maven build, but if you are more familiar with Gradle, you can use it instead with the corresponding changes to build commands.
 
@@ -148,7 +148,7 @@ Now that you have a working Java application, configure it to enable tracing.
        - DD_VERSION=0.0.1
    ```
 
-4. You can also see that Docker labels for the same Universal Service Tags `service`, `env`, and `version` values are set in the Dockerfile. This allows you also to get Docker metrics once your application is running. 
+4. You can also see that Docker labels for the same Universal Service Tags `service`, `env`, and `version` values are set in the Dockerfile. This allows you also to get Docker metrics once your application is running.
 
    ```yaml
      labels:
@@ -166,12 +166,12 @@ Now that you have a working Java application, configure it to enable tracing.
        environment:
         - DD_AGENT_HOST=host.docker.internal
    ```
-   If your Docker is older than 20.10, run the following command and use the returned IP anywhere that's configured to `host.docker.internal`: 
+   If your Docker is older than 20.10, run the following command and use the returned IP anywhere that's configured to `host.docker.internal`:
    ```sh
    docker network inspect bridge --format='{{(index .IPAM.Config 0).Gateway}}'
    ```
 
-3. **On Linux**: Observe that the YAML also specifies an `extra_hosts`, which allows communication on Docker's internal network. If your Docker is older than 20.10, remove this `extra_hosts` configuration line. 
+3. **On Linux**: Observe that the YAML also specifies an `extra_hosts`, which allows communication on Docker's internal network. If your Docker is older than 20.10, remove this `extra_hosts` configuration line.
 
 The `notes` section of your compose file should look something like this:
 
@@ -179,7 +179,7 @@ The `notes` section of your compose file should look something like this:
      notes:
        container_name: notes
        restart: always
-       build: 
+       build:
          context: ../
          dockerfile: notes/dockerfile.notes.maven
        ports:
@@ -226,13 +226,13 @@ Wait a few moments, and go to [**APM > Traces**][11] in Datadog, where you can s
 
 The `h2` is the embedded in-memory database for this tutorial, and `notes` is the Spring Boot application. The traces list shows all the spans, when they started, what resource was tracked with the span, and how long it took.
 
-If you don't see traces after several minutes, check that the Agent is running. Clear any filter in the Traces Search field (sometimes it filters on an environment variable such as `ENV` that you aren't using). 
+If you don't see traces after several minutes, check that the Agent is running. Clear any filter in the Traces Search field (sometimes it filters on an environment variable such as `ENV` that you aren't using).
 
 ### Examine a trace
 
-On the Traces page, click on a `POST /notes` trace to see a flame graph that shows how long each span took and what other spans occurred before a span completed. The bar at the top of the graph is the span you selected on the previous screen (in this case, the initial entry point into the notes application). 
+On the Traces page, click on a `POST /notes` trace to see a flame graph that shows how long each span took and what other spans occurred before a span completed. The bar at the top of the graph is the span you selected on the previous screen (in this case, the initial entry point into the notes application).
 
-The width of a bar indicates how long it took to complete. A bar at a lower depth represents a span that completes during the lifetime of a bar at a higher depth. 
+The width of a bar indicates how long it took to complete. A bar at a lower depth represents a span that completes during the lifetime of a bar at a higher depth.
 
 The flame graph for a `POST` trace looks something like this:
 
@@ -290,7 +290,7 @@ The following steps walk you through adding annotations to the code to trace som
                .withTag(DDTags.RESOURCE_NAME, "privateMethod1")
                .start();
            try (Scope scope = tracer.activateSpan(span)) {
-               // Tags can also be set after creation 
+               // Tags can also be set after creation
                span.setTag("postCreationTag", 1);
                Thread.sleep(30);
                Log.info("Hello from the custom privateMethod1");
@@ -303,7 +303,7 @@ The following steps walk you through adding annotations to the code to trace som
             span.setTag(Tags.ERROR, true);
             span.setTag(DDTags.ERROR_MSG, e.getMessage());
             span.setTag(DDTags.ERROR_TYPE, e.getClass().getName());
-            
+
             final StringWriter errorString = new StringWriter();
             e.printStackTrace(new PrintWriter(errorString));
             span.setTag(DDTags.ERROR_STACK, errorString.toString());
@@ -326,20 +326,20 @@ The following steps walk you through adding annotations to the code to trace som
 5. On the Trace Explorer, click on one of the new `GET` requests, and see a flame graph like this:
 
    {{< img src="tracing/guide/tutorials/tutorial-java-container-custom-flame.png" alt="A flame graph for a GET trace with custom instrumentation." style="width:100%;" >}}
-   
+
    Note the higher level of detail in the stack trace now that the `getAll` function has custom tracing.
 
 For more information, read [Custom Instrumentation][12].
 
 ## Add a second application to see distributed traces
 
-Tracing a single application is a great start, but the real value in tracing is seeing how requests flow through your services. This is called _distributed tracing_. 
+Tracing a single application is a great start, but the real value in tracing is seeing how requests flow through your services. This is called _distributed tracing_.
 
 The sample project includes a second application called `calendar` that returns a random date whenever it is invoked. The `POST` endpoint in the Notes application has a second query parameter named `add_date`. When it is set to `y`, Notes calls the calendar application to get a date to add to the note.
 
 1. Configure the calendar app for tracing by adding `dd-java-agent` to the startup command in the Dockerfile, like you previously did for the notes app. Open `calendar/Dockerfile.calendar.maven` and see that it is already downloading `dd-java-agent`:
    ```
-   RUN curl -Lo dd-java-agent.jar https://dtdg.co/latest-java-tracer 
+   RUN curl -Lo dd-java-agent.jar https://dtdg.co/latest-java-tracer
    ```
 
 2. Within the same `calendar/dockerfile.calendar.maven` file, comment out the `ENTRYPOINT` line for running without tracing. Then uncomment the `ENTRYPOINT` line, which runs the application with tracing enabled:
@@ -356,7 +356,7 @@ The sample project includes a second application called `calendar` that returns 
      calendar:
        container_name: calendar
        restart: always
-       build: 
+       build:
          context: ../
          dockerfile: calendar/dockerfile.calendar.maven
        ports:
