@@ -1,23 +1,20 @@
 ---
-title: Content Security Policy logs
-name: content_security_policy_logs
-kind: integration
-description: 'Detect and aggregate CSP violations with Datadog'
-short_description: 'Detect CSP violations'
-dependencies: 
-    ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/content_security_policy_logs.md']
 categories:
-    - log collection
-    - security
+- log collection
+- security
+description: 'Detect and aggregate CSP violations with Datadog'
 doc_link: /integrations/content_security_policy_logs/
-has_logo: false
+dependencies:
+    ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/content_security_policy_logs.md']
+has_logo: true
 integration_title: Content Security Policy logs
 is_public: true
 kind: integration
-name: 
-public_title: Datadog-Content Security Policy logs 
+name: content_security_policy_logs
+public_title: Datadog-Content Security Policy logs
+short_description: 'Detect CSP violations'
 version: '1.0'
-integration_id: "content_security_policy_logs"      
+integration_id: "content_security_policy_logs"
 ---
 
 ## Overview
@@ -28,9 +25,9 @@ For more information about CSPs, see [Google's web.dev post][1].
 
 ## Prerequisites
 
-Before you add a directive to your CSP header, [generate a client token in your Datadog account][2].
+Before you add a directive to a CSP header, [generate a client token in your Datadog account][2].
 
-<div class="alert alert-info">For security reasons, API keys cannot be used to configure the browser logs SDK, because they would be exposed client-side in the JavaScript code. To collect logs from web browsers, a client token must be used. <a href="https://docs.datadoghq.com/logs/log_collection/?tab=host#setup">See the client token documentation for more details</a>.</div>
+<div class="alert alert-info">API keys cannot be used to configure the browser logs SDK, because the keys would be exposed client-side. To collect logs from web browsers, use a client token. <a href="https://docs.datadoghq.com/logs/log_collection/?tab=host#setup">See the client token documentation for more details</a>.</div>
 
 ## Prepare a URL for the CSP
 
@@ -50,24 +47,25 @@ When formatting the `ddtags` values, you must:
 - Concatenate keys and values with a comma (`,`)
 - Use URL encoding
 
-For example, given the key-value pairs `{“service”: “billingService”, “env”: “production”}`, you would end up with the following URL-encoded string:
+For example, given the key-value pairs `{“service”: “billingService”, “env”: “production”}`, the URL-encoded string would look like this:
 
 ```
 service%3AbillingService%2Cenv%3Aproduction
 ```
 
-And the final URL with tags would be: 
+And the final URL with tags would be:
 
 ```
 https://csp-report.browser-intake-datadoghq.com/api/v2/logs?dd-api-key=<client -token>&dd-evp-origin=content-security-policy&ddsource=csp-report&ddtags=service%3AbillingService%2Cenv%3Aproduction
 ```
 
-## Adding the URL to the Content Security Policy
+## Adding the URL to the CSP
 
-You can either embed the URL in an HTTP header, or embed it in a `<meta>` HTML tag. We recommend using an HTTP header.
+You can either embed the URL in an HTTP header (recommended), or embed it in a `<meta>` HTML tag.
 
 ### Embed the policy in an HTTP header
-This is the recommended way to embed Content Security Policy. You can either use the `report-uri` directive or the `report-to` directive. The `report-to` directive will eventually supersede `report-uri`. Currently Chrome is the only browser that supports `report-to`.
+
+This is the recommended way to embed a Content Security Policy. You can either use the `report-uri` directive or the `report-to` directive. The `report-to` directive will eventually supersede `report-uri`, but is not yet supported by all browsers.
 
 - If you're using the `report-uri` directive:
   ```shell
