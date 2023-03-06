@@ -8304,6 +8304,71 @@ api:
     url: /api/latest/incidents/
     identifier: incidents
     generated: true
+  - name: Update an existing incident integration metadata
+    url: '#update-an-existing-incident-integration-metadata'
+    identifier: incidents-update-an-existing-incident-integration-metadata
+    parent: incidents
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateIncidentIntegration
+      unstable:
+        - v2
+      order: 12
+  - name: Get incident integration metadata details
+    url: '#get-incident-integration-metadata-details'
+    identifier: incidents-get-incident-integration-metadata-details
+    parent: incidents
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetIncidentIntegration
+      unstable:
+        - v2
+      order: 11
+  - name: Delete an incident integration metadata
+    url: '#delete-an-incident-integration-metadata'
+    identifier: incidents-delete-an-incident-integration-metadata
+    parent: incidents
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteIncidentIntegration
+      unstable:
+        - v2
+      order: 13
+  - name: Create an incident integration metadata
+    url: '#create-an-incident-integration-metadata'
+    identifier: incidents-create-an-incident-integration-metadata
+    parent: incidents
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateIncidentIntegration
+      unstable:
+        - v2
+      order: 10
+  - name: Get a list of an incident's integration metadata
+    url: '#get-a-list-of-an-incidents-integration-metadata'
+    identifier: incidents-get-a-list-of-an-incidents-integration-metadata
+    parent: incidents
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListIncidentIntegrations
+      unstable:
+        - v2
+      order: 9
   - name: 'Create, update, and delete incident attachments'
     url: '#create,-update,-and-delete-incident-attachments'
     identifier: 'incidents-create,-update,-and-delete-incident-attachments'
