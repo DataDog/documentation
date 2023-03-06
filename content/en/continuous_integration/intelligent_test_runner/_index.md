@@ -45,7 +45,7 @@ Prior to setting up Intelligent Test Runner, you must have finished setting up [
 
 To enable Intelligent Test Runner, the following environment variables need to be set:
 
-`DD_CIVISIBILITY_AGENTLESS_ENABLED`
+`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Required only if you're using `dd-trace<2.23.0` or `dd-trace<3.10`)
 : Enables or disables Agentless mode.<br/>
 **Default**: `false`<br/>
 
@@ -61,11 +61,6 @@ To enable Intelligent Test Runner, the following environment variables need to b
 : The [Datadog site][4] to upload results to.<br/>
 **Default**: `datadoghq.com`<br/>
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
-
-`DD_CIVISIBILITY_GIT_UPLOAD_ENABLED=true` (Required)
-: Flag to enable git metadata upload.<br/>
-**Default**: `false`<br/>
-**Note**: Required only during Beta
 
 `DD_CIVISIBILITY_ITR_ENABLED=true` (Required)
 : Flag to enable test skipping. <br/>

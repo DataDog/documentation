@@ -266,7 +266,6 @@ Monitor authenticated requests by adding user information to the trace with the 
 This example shows how to set user monitoring tags and enable user blocking capability:
 
 ```python
-from ddtrace.appsec.trace_utils import is_user_blocked
 from ddtrace.appsec.trace_utils import block_request
 from ddtrace.contrib.trace_utils import set_user
 from ddtrace import tracer
@@ -274,9 +273,6 @@ from ddtrace import tracer
 user_id = "some_user_id"
 set_user(tracer, user_id, name="John", email="test@test.com", scope="some_scope",
          role="manager", session_id="session_id", propagate=True)
-# Call is_user_blocked() to possibly block the authenticated user when in the denylist
-if is_user_blocked(user_id):
-    block_current_request()
 ```
 
 {{< /programming-lang >}}
@@ -363,7 +359,7 @@ public class LoginController {
         // track user signup events
         GlobalTracer
             .getEventTracker()
-            .trackCustomEvent("signup", metadata);
+            .trackCustomEvent("users.signup", metadata);
     }
 }
 
@@ -558,7 +554,7 @@ The following examples show how to track login events or custom events (using si
 {{% tab "Custom business logic" %}}
 ```php
 <?php
-\datadog\appsec\track_custom_event(‘signup’, [‘id’ => $id, 'email' => $email]);
+\datadog\appsec\track_custom_event(‘users.signup’, [‘id’ => $id, 'email' => $email]);
 ?>
 ```
 {{% /tab %}}
