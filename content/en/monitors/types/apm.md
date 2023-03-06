@@ -91,7 +91,7 @@ For detailed instructions on the advanced alert options (no data, evaluation del
 
 {{< img src="monitors/monitor_types/apm/define-the-search-query.png" alt="Define the search query" style="width:80%;" >}}
 
-**Note:** Analytics monitors can only be created based on [Indexed Spans][4].
+**Note:** Analytics monitors can only be created based on [Indexed Spans][4]. All spans indexed by custom retention filters (not spans indexed from the intelligent retention filter) are available to be monitored by a trace analytics monitor.
 
 ### Select alert conditions
 
