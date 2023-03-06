@@ -350,7 +350,6 @@
           kind: documentation
           aliases:
             - /serverless/datadog_lambda_library/extension
-            - /serverless/libraries_integrations/extension
 
   - repo_name: datadog-ci-azure-devops
     contents:

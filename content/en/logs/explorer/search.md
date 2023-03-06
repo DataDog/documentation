@@ -3,7 +3,6 @@ title: Search Logs
 kind: documentation
 description: 'Filter logs; to narrow down, broaden, or shift your focus on the subset of logs of current interest.'
 aliases:
-    - /logs/explorer/search
     - /logs/search
 further_reading:
     - link: 'logs/explorer/group'
