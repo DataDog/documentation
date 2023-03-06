@@ -11,11 +11,14 @@ further_reading:
 - link: "/cloud_siem/explorer/"
   tag: "Documentation"
   text: "Learn about the Security Signals Explorer"
+- link: "https://www.datadoghq.com/blog/visualize-cloud-activity-datadog-cloud-siem-investigator/"
+  tag: "Blog"
+  text: "Visualize activity in your cloud environment with Datadog Cloud SIEM Investigator"
 ---
 
 ## Overview
 
-<div class="alert alert-warning">Cloud SIEM Investigator currently only supports AWS CloudTrail logs.</div>
+<div class="alert alert-warning">Cloud SIEM Investigator supports AWS CloudTrail logs and Google Cloud Audit logs.</div>
 
 When a security signal alerts on suspicious activity by a user or a resource, some commonly asked questions during the investigation include:
 
@@ -31,13 +34,34 @@ The Cloud SIEM Investigator provides a graphical interface for you to pivot from
 
 ## Visualize and investigate the activity
 
-1. Navigate to **Security** > **Cloud SIEM** and click the [**Investigator** tab][1]. 
+{{< tabs >}}
+{{% tab "AWS" %}}
+
+1. Navigate to **Security** > **Cloud SIEM** and click the [**Investigator**][1] tab. 
 
 2. Select an entity type in the **In** field dropdown menu.
 
-3. Select an entity or enter a specific entity name in the **Investigate** field to see a graph of the activities associated with the entity. For the **Assumed Role** entity, select an `AccessKeyID` or enter an `AccessKeyID` in the **for** field. 
+3. Select an entity or enter a specific entity name in the **Investigate** field to see a diagram of the activities associated with the entity. 
 
-4. Click on a node and select **Show list of logs** or **View in Log Explorer** to see the related logs. If you click on a service node, click **Investigate service** to pivot to the Investigator view for that service. Use the **and filter by** dropdown menu to filter by actions.
+4. Click on a node and select **View related logs** or **View in Log Explorer** to see the related logs. Use the **and filter by** dropdown menu to filter by actions.
+
+[1]: https://app.datadoghq.com/security/investigator/aws
+
+{{% /tab %}}
+
+{{% tab "GCP" %}}
+
+1. Navigate to **Security** > **Cloud SIEM**, click the **Investigator** tab and then the [**GCP**][1] tab.
+
+2. Select an entity type in the **In** field dropdown menu.
+
+3. Select an entity or enter a specific entity name in the **Investigate** field to see a diagram of the activities associated with the entity.
+
+4. Click on a node and select **View related logs** or **View in Log Explorer** to see the related logs. Use the **and filter by** dropdown menu to filter by actions.
+
+[1]: https://app.datadoghq.com/security/investigator/gcp
+{{% /tab %}}
+{{< /tabs >}}
 
 You can also navigate to the Cloud SIEM Investigator directly from a security signal. In the security signal panel, click **Investigate user activity** (where `user` is the user identity in question) to see the Investigator view filtered to the specific user identity.
 
@@ -45,4 +69,4 @@ You can also navigate to the Cloud SIEM Investigator directly from a security si
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/security/csi/aws
+
