@@ -24,11 +24,11 @@ Sets the host where traces are sent (the host running the Agent). Can be a hostn
 `DD_TRACE_AGENT_PORT` 
 : **Version**: v0.3.6 <br>
 **Default**: `8126` <br>
-Sets the port where traces are sent (the port where the Agent is listening for connections). Ignored if `DD_TRACE_AGENT_URL` is set.
+Sets the port where traces are sent (the port where the Agent is listening for connections). Ignored if `DD_TRACE_AGENT_URL` is set. If the [Agent configuration][3] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it.
 
 `DD_TRACE_AGENT_URL` 
 : **Version**: v1.1.4 <br>
-Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. This URL supports http, https and unix address schemes.
+Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. This URL supports HTTP, HTTPS, and Unix address schemes. If the [Agent configuration][3] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it.
 
 `DD_ENV` 
 : **Version**: v1.0.0 <br>
@@ -84,3 +84,4 @@ Propagation style(s) to use when extracting tracing headers. `Datadog`, `B3`, or
 
 [1]: /getting_started/tagging/unified_service_tagging/
 [2]: /tracing/trace_pipeline/ingestion_mechanisms/
+[3]: /agent/guide/network/#configure-ports

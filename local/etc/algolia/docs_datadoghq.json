@@ -49,6 +49,7 @@
                     "real_user_monitoring",
                     "serverless",
                     "synthetics",
+                    "continuous_testing",
                     "network_monitoring/devices",
                     "developers",
                     "database_monitoring"
@@ -117,6 +118,7 @@
                     "security",
                     "security_platform",
                     "synthetics",
+                    "continuous_testing",
                     "tracing",
                     "serverless",
                     "watchdog",
@@ -124,7 +126,8 @@
                     "profiler",
                     "containers",
                     "cloud_cost_management",
-                    "universal_service_monitoring"
+                    "universal_service_monitoring",
+                    "glossary"
                 ]
             },
             "tags": ["docs"],

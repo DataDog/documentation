@@ -248,6 +248,23 @@ Datadog::Tracing.before_flush do |trace|
 end
 ```
 
+The following example implements a processor to achieve complex post-processing logic:
+
+```ruby
+Datadog::Tracing.before_flush do |trace|
+  trace.spans.each do |span|
+    originalPrice = span.get_tag('order.price'))
+    discount = span.get_tag('order.discount'))
+    
+    # Set a tag from a calculation from other tags
+    if (originalPrice != nil && discount != nil)
+      span.set_tag('order.value', originalPrice - discount)
+    end
+  end
+  trace
+end
+```
+
 For a custom processor class:
 
 ```ruby

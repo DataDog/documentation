@@ -1,6 +1,7 @@
 ---
 title: Custom Instrumentation
 kind: documentation
+type: multi-code-lang
 description: 'Customize your instrumentation and observability within your Datadog traces.'
 aliases:
     - /tracing/setup/php/manual-installation

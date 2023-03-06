@@ -1,5 +1,21 @@
 {
-	"Region selector":{
+	"Expander":{
+    "prefix": ";;expander",
+    "body": [
+      "<details>",
+      "<summary>Add summary here</summary>",
+      "Full description goes here",
+      "</details>",
+      "",
+      "<details open>",
+      "<summary>Add another summary here</summary>",
+      "Full description goes here",
+      "</details>"
+    ],
+    "description": "Expanding model"
+  },
+
+  "Region selector":{
 		"prefix": ";;region",
 		"body": [
 			"{{< site-region region=\"us,us3,us5,eu,gov\" >}}",
@@ -53,14 +69,14 @@
 		"description": "Alert box with choice of info, danger, or warning"
 	},
 
-	"Beta callout":{
-		"prefix": ";;beta",
+	"Callout":{
+		"prefix": ";;callout",
 		"body": [
-			"{{< beta-callout url=\"https://google.com\" d-toggle=\"modal\" d_target=\"#signupModal\" custom_class=\"sign-up-trigger\" btn_hidden=\"false\">}}",
+			"{{< callout url=\"https://google.com\" d_toggle=\"modal\" d_target=\"#signupModal\" custom_class=\"sign-up-trigger\" btn_hidden=\"false\" header=\"Join the Beta!\">}}",
 			"Datadog Apps is currently in beta, but you can easily request access! Use this form to submit your request today. Once approved, you can start getting creative and develop your App for you, your organization, or for publishing to the entire Datadog community alongside our other great Datadog Apps!",
-			  "{{< /beta-callout >}}"
+			  "{{< /callout >}}"
 		],
-		"description": "Beta callout with all parameters"
+		"description": "A callout with all parameters"
 	},
 
 	"Integration count":{
@@ -75,13 +91,13 @@
 		"prefix": ";;tab",
 		"body": [
 			"{{< tabs >}}",
-			"{{< tab \"${1}\" >}}",
+			"{{% tab \"${1}\" %}}",
 			"",
-			"{{< /tab >}}",
+			"{{% /tab %}}",
 			"",
-			"{{< tab \"${2}\" >}}",
+			"{{% tab \"${2}\" %}}",
 			"",
-			"{{< /tab >}}",
+			"{{% /tab %}}",
 			"{{< /tabs >}}"
 		],
 		"description": "Tabs"

@@ -25,17 +25,24 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 The Datadog Profiler requires Python 2.7+ and Agent version [7.20.2][2]+ or
 [6.20.2][3]+.
 
-The following profiling features are available depending on your Python version:
+The following profiling features are available depending on your Python version. For more details, read [Profile Types][7]:
 
 |      Feature         | Supported Python versions          |
 |----------------------|------------------------------------|
-| Wall time profiling  | Python >= 2.7                      |
-| CPU time profiling   | Python >= 2.7 on POSIX platforms   |
-| Exception profiling  | Python >= 3.7 on POSIX platforms   |
-| Lock profiling       | Python >= 2.7                      |
-| Memory profiling     | Python >= 3.5                      |
+| Wall time profiling  | Python 2.7+                      |
+| CPU time profiling   | Python 2.7+ on POSIX platforms   |
+| Exception profiling  | Python 3.7+ on POSIX platforms   |
+| Lock profiling       | Python 2.7+                      |
+| Memory profiling     | Python 3.5+                      |
 
 The installation requires pip version 18 or above.
+
+The following profiling features are available in the following minimum versions of the `dd-trace-py` library:
+
+|      Feature         | Required `dd-trace-py` version          |
+|----------------------|-----------------------------------------|
+| [Code Hotspots][12]        | 0.44.0+                       |
+| [Endpoint Profiling][13]            | 0.54.0+                       |
 
 ## Installation
 
@@ -124,3 +131,6 @@ The [Getting Started with Profiler][6] guide takes a sample service with a perfo
 [4]: https://app.datadoghq.com/profiling
 [5]: https://ddtrace.readthedocs.io/en/stable/configuration.html#configuration
 [6]: /getting_started/profiler/
+[7]: /profiler/profile_types/?code-lang=python
+[12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
+[13]: /profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints

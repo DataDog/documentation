@@ -1,5 +1,5 @@
 ---
-title: Send AWS services logs with the Datadog Kinesis Firehose Destination
+title: Send AWS Services Logs with the Datadog Kinesis Firehose Destination
 kind: documentation
 further_reading:
 - link: "/logs/explorer/"
@@ -27,29 +27,28 @@ AWS fully manages Amazon Kinesis Data Firehose, so you don't need to maintain an
 {{< tabs >}}
 {{% tab "Kinesis Firehose Delivery stream" %}}
 
-Datadog recommends using a Kinesis stream as input when using the Datadog Kinesis destination. It gives you the ability to forward your logs to multiple destinations in case Datadog is not the only consumer for those logs. If you only want to send logs to Datadog, or if you already have a Kinesis Datastream with your logs, ignore step 1.
+Datadog recommends using a Kinesis data stream as input when using the Datadog Kinesis destination. It gives you the ability to forward your logs to multiple destinations in case Datadog is not the only consumer for those logs. If Datadog is the only destination for your logs, or if you already have a Kinesis data stream with your logs, you can ignore step one.
 
-1. (Optional) Create a new Kinesis stream (see the [Kinesis documentation][1]). Name the stream something descriptive, like `DatadogLogStream`, and give it a shard count of 1 (increase the shard count for each MB/s throughput that you need).
-2. Create a [new delivery stream][2] and name it `DatadogLogsforwarder`.
-3. Set the source as "Kinesis stream" (or leave the source as `Direct PUT or other sources` if you don’t want to use a Kinesis stream) and select `DatadogLogStream` (or the existing Kinesis stream that already contains your logs).
-4. Disable the data transformation and record transformation and click `next`.
-5. Select the `Datadog` destination and select the `Datadog US` or `Datadog EU` region, depending on the Datadog Region of your account.
-  {{< img src="logs/guide/choose-destination.png" alt="Choose your destination" style="width:100%;">}}
-6. Paste your `APIKEY` into the `AccessKey` box. (You can get your API key from [your Datadog API settings page][3]).
-7. (Optional) Add custom `parameters`, which are added as custom tags to your logs.
-{{< img src="logs/guide/kinesis_logs_datadog_destination.png" alt="Datadog destination configuration" style="width:100%;">}}
-8. Choose to backup failed events to an S3 bucket.
-9. Configure the delivery stream parameters. The two important parameters are:
-    * Retry time: How long the delivery stream should retry before sending an event to the backup S3 bucket.
-    * Batch size: Datadog recommends a value between 1MB and 4MB. The logs are sent by the delivery stream if the batch size or the linger time (minimum 60 seconds) is reached. Datadog recommends reducing the batch size to be as close to real-time as possible.
-    {{< img src="logs/guide/kinesis_logs_datadog_batch.png" alt="Batch configuration" style="width:100%;" >}}
+1. Optionally, use the [Create a Data Stream][1] section of the Amazon Kinesis Data Streams developer guide in AWS to create a new Kinesis data stream. Name the stream something descriptive, like `DatadogLogStream`.
+2. Create a [new delivery stream][2].  
+   a. Set the source: 
+      - `Amazon Kinesis Data Streams` if your logs are coming from a Kinesis data stream
+      - `Direct PUT` if your logs are coming directly from a CloudWatch log group
 
-To ensure that logs that fail through the Delivery Stream are still sent to Datadog, [configure the Datadog Lambda function to trigger on this S3 bucket][4].
+   b. Set the destination as `Datadog`.  
+   c. Provide a name for the delivery stream.  
+   d. In the **Destination settings**, choose the `Datadog logs` HTTP endpoint URL that corresponds to your [Datadog site][5].  
+   e. Paste your API key into the **API key** field. You can get or create an API key from the [Datadog API Keys page][3].  
+   f. Optionally, configure the **Retry duration**, the buffer settings, or add **Parameters**, which are attached as tags to your logs.  
+   g. In the **Backup settings**, select an S3 backup bucket to receive any failed events that exceed the retry duration.  
+     **Note**: To ensure that logs that fail through the delivery stream are still sent to Datadog, set the Datadog Forwarder Lambda function to [forward logs][4] from this S3 bucket.  
+   h. Click **Create delivery stream**.
 
-[1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/app-hotspots-prepare.html#app-hotspots-create-two-streams
+[1]: https://docs.aws.amazon.com/streams/latest/dev/tutorial-stock-data-kplkcl-create-stream.html
 [2]: https://console.aws.amazon.com/firehose/
 [3]: https://app.datadoghq.com/organization-settings/api-keys
-[4]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=automaticcloudformation#collecting-logs-from-s3-buckets
+[4]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=automaticcloudformation#collecting-logs-from-s3-buckets
+[5]: /getting_started/site/
 {{% /tab %}}
 
 {{% tab "CloudFormation template" %}}
@@ -62,37 +61,53 @@ Alternatively, customize this CloudFormation template and install it from the AW
 
 ## Send AWS logs to your Kinesis stream
 
-1. Check the `Subscriptions` column on the [log groups index page][1] to see current subscriptions to your relevant log groups. Add the new Kinesis stream as a subscriber.    
-   * **Note**: Each CloudWatch Log group can only have two subscriptions. If you have more than two sources you want to subscribe to, you can subscribe to the new Kinesis stream after completing this setup.
-2. Subscribe your new Kinesis stream to the CloudWatch log groups you want to ingest into Datadog. Refer to [this CloudWatch Logs documentation section][2] (step 3 to 6) to:  
-   - Use the `aws iam create-role` command to create the IAM role that gives CloudWatch Logs permission to put logs data into the Kinesis stream.
-   - Create a permissions policy allowing the `firehose:PutRecord` `firehose:PutRecordBatch`, `kinesis:PutRecord`, and `kinesis:PutRecords` actions.
-   - Ensure that `logs.amazonaws.com` or `logs.<region>.amazonaws.com` is configured as the service principal in the role's **Trust relationships**.
-   - Attach the permissions policy to your newly created IAM role using the `aws iam put-role-policy` command.
-   - Use the `aws logs put-subscription-filter` command to subscribe your Kinesis stream to each CloudWatch log group you want to ingest into Datadog.  
+Subscribe your new Kinesis stream to the CloudWatch log groups you want to ingest into Datadog. You can check the **Subscriptions** column on the [log groups index page][1] to see current subscriptions to your log groups. Subscriptions can be created through the AWS console or API with the specifications below.  
+   **Note**: Each CloudWatch Log group can only have two subscriptions.
 
-   Example of subscription filter:
+### Create an IAM Role and Policy
+
+Create an IAM role and permissions policy to enable CloudWatch Logs to put data into your Kinesis stream. 
+   - Ensure that `logs.amazonaws.com` or `logs.<region>.amazonaws.com` is configured as the service principal in the role's **Trust relationships**.
+   - Ensure that the role's attached permissions policy allows the `firehose:PutRecord` `firehose:PutRecordBatch`, `kinesis:PutRecord`, and `kinesis:PutRecords` actions.
+
+Use the [Subscription filters with Kinesis][2] example (steps 3 to 6) for an example of setting this up with the AWS CLI.
+
+### Create a subscription filter
+
+The following example creates a subscription filter through the AWS CLI:
+
     ```
     aws logs put-subscription-filter \
-        --log-group-name "MYLOGGROUPNAME" \
-        --filter-name "MyFilterName" \
+        --log-group-name "<MYLOGGROUPNAME>" \
+        --filter-name "<MyFilterName>" \
         --filter-pattern "" \
-        --destination-arn "DESTINATIONARN (data stream or delivery stream)" \
-        --role-arn "MYROLEARN"
+        --destination-arn "<DESTINATIONARN> (data stream or delivery stream)" \
+        --role-arn "<MYROLEARN>"
     ```
-    **Important note**: The destination of the subscription filter must be in the same account as the log group, as described in the [AWS documentation][3].
 
-3. Check the `Subscriptions` column in the [log groups index page][1] to confirm that the new Kinesis stream is now subscribed to your log groups.
+You can also create a subscription filter through the AWS console. 
 
-If you want to push logs directly to the delivery stream without going through a Kinesis data stream, you can subscribe the CloudWatch log groups directly to the Kinesis Firehose Destination by adding the Kinesis Firehose ARN in the `destination-arn` parameter of the subscription filter, as shown in [the AWS Subscription Filters documentation][4] (step 12).
+1. Go to your log group in [CloudWatch][1] and click on the **Subscription filters** tab, then **Create**.
+   - If you are sending logs through a Kinesis data stream, select `Create Kinesis subscription filter`.
+   - If you are sending logs directly from your log group to your Kinesis Firehose delivery stream, select `Create Kinesis Firehose subscription filter`.
 
-## Search for AWS Kinesis logs in Datadog
+2. Select the data stream or Firehose delivery stream as applicable, as well as the [IAM role](#create-an-iam-role-and-policy) previously created.
+
+3. Provide a name for the subscription filter, and click **Start streaming**.
+
+**Important note**: The destination of the subscription filter must be in the same account as the log group, as described in the [Amazon CloudWatch Logs API Reference][3].
+
+### Validation
+
+Check the **Subscriptions** column in the log groups index page in [CloudWatch][1] to confirm that the new Kinesis stream is now subscribed to your log groups.
+
+### Search for AWS Kinesis logs in Datadog
 
 After you have set up an Amazon Kinesis delivery stream, you can analyze the logs subscribed to your delivery stream in Datadog. 
 
 To populate all logs by ARN:
 
-1. Navigate to the [Logs Explorer][5] in Datadog to see all of your subscribed logs.
+1. Go to the [Logs Explorer][5] in Datadog to see all of your subscribed logs.
 2. In the search bar, type `@aws.firehose.arn:"<ARN>"`, replace `<ARN>` with your Amazon Kinesis Data Firehose ARN, and press **Enter**.
 
 ## Further Reading

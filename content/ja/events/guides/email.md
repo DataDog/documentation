@@ -1,11 +1,12 @@
 ---
-title: メールによるイベント送信
-kind: documentation
 aliases:
-  - /ja/developers/events/email/
-  - /ja/guides/eventsemail
+- /ja/developers/events/email/
+- /ja/guides/eventsemail
+kind: documentation
+title: メールによるイベント送信
 ---
-ご利用のアプリケーションに現在の [Datadog インテグレーション][1]が含まれておらず、[カスタム Agent チェック][2]の作成を希望されない場合は、イベントをメールで送信できます。
+
+アプリケーションに既存の [Datadog インテグレーション][1]がなく、[カスタム Agent チェック][2]を作成したくない場合、メールでイベントを送信することができます。これは、Amazon SNS トピックに公開されたメッセージでも可能です。詳細は、[Amazon SNS のメールから Datadog のイベントを作成する][6]ガイドをお読みください。
 
 ## セットアップ
 
@@ -15,7 +16,7 @@ aliases:
 2. 左下の **Account** メニューで **Organization Settings** を選択します。
 3. **Events API emails** タブをクリックします。
 4. **Format** ドロップダウンからメッセージのフォーマット (`Plain text` または `JSON`) を選択します。
-5. **Create API email** ボタンをクリックします。
+5. **Create Email** ボタンをクリックします。
 
 **Events API emails** セクションに、アプリケーションで利用可能なすべてのメールと、その作成者が表示されます。
 
@@ -41,7 +42,7 @@ JSON 形式のメールでは、次のフィールドを変更できます。
 
 JSON 形式のメールでは、メールの件名はイベントに表示されません。タイトルの属性値はイベントタイトルに使用されます。イベントに表示されるすべてのデータは、メールの本文内に JSON 形式で定義される必要があります。また、本文が完全に適格な JSON 形式で定義されている必要があり、定義されていない場合、メッセージは無視されます。JSON を使用して送信されたイベントの例を以下に示します。
 
-{{< img src="developers/events/json-event.png" alt="JSON イベント"  >}}
+{{< img src="developers/events/json-event.png" alt="json イベント" >}}
 
 **注**: 標準的なメールクライアントでメールをテストすると、本文が HTML に変換されることがあります。これにより本文が完全な JSON 形式ではなくなるため、メールが無視されます。
 
@@ -73,19 +74,19 @@ Body: This is a test message showing that env:test is at 50% CPU - #test
 
 メールの件名はイベントのタイトルに、メールの本文はイベントのメッセージになります。メールの送信者はイベントの一番下に表示されます。プレーンテキストにより送信されたイベントの例を以下に示します。メッセージ本文に `#` を使用してタグを追加できます。プレーンテキストで送信されるイベントの例は以下のとおりです。
 
-{{< img src="developers/events/plain-event.png" alt="プレーンイベント"  >}}
+{{< img src="developers/events/plain-event.png" alt="プレーンイベント" >}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
 ### Markdown
 
-Datadog イベントのテキストは [Markdown][4] に対応していますが、Markdown に埋め込まれた HTML には対応していません。イベントテキスト内で Markdown を使用するには、テキストブロックを `%%% \n` で開始し、`\n %%%` で閉じます。
+Datadog イベントのテキストは [Markdown][5] に対応していますが、Markdown に埋め込まれた HTML には対応していません。イベントテキスト内で Markdown を使用するには、テキストブロックを `%%% \n` で開始し、`\n %%%` で閉じます。
 
 ```json
 {
   "title": "本日のニュースをお届けします",
-  "text": "%%% \n [サンプルリンク](http://catchpoint.com/session_id \"Title\") \n %%%",
+  "text": "%%% \n [サンプルリンク](http://example.com/session_id \"Title\") \n %%%",
   "priority": "normal",
   "tags": ["environment:test"],
   "alert_type": "info"
@@ -96,13 +97,14 @@ Markdown ブロックにリンクを埋め込む場合は、URL が正しくエ�
 
 ```text
 # エンコードされていない
-http://catchpoint.com/session_id:123456
+http://example.com/session_id:123456
 
 # エンコードされている
-http://catchpoint.com/session_id%3A123456
+http://example.com/session_id%3A123456
 ```
 
 [1]: /ja/integrations/
 [2]: /ja/agent/agent_checks/
 [3]: https://app.datadoghq.com
-[4]: http://daringfireball.net/projects/markdown/syntax#lin
+[5]: http://daringfireball.net/projects/markdown/syntax#lin
+[6]: /ja/integrations/guide/events-from-sns-emails/

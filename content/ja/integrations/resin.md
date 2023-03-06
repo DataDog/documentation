@@ -16,7 +16,7 @@ assets:
     source_type_name: Resin
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: コミュニティ
   sales_email: brent@bmontague.com
   support_email: brent@bmontague.com
 categories:

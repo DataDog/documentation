@@ -4,7 +4,7 @@ aliases:
 - /ja/integrations/observability_pipelines/guide/custom-metrics-governance-drop-metrics-missing-specific-tags/
 - /ja/observability_pipelines/guide/custom-metrics-governance-drop-metrics-missing-specific-tags
 further_reading:
-- link: /observability_pipelines/setup/
+- link: /observability_pipelines/installation/
   tag: ドキュメント
   text: 観測可能性パイプラインを設定する
 kind: ガイド
@@ -22,7 +22,7 @@ title: 観測可能性パイプラインによるカスタムメトリクスガ�
 
 ## 前提条件
 
-このガイドでは、テレメトリーデータの収集、処理、ルーティングを行うツールである観測可能性パイプラインを既にセットアップしていることを前提に説明しています。観測可能性パイプラインについてよく知らない場合は、[セットアップ][4]ドキュメントと [Vector Remap Language][5] を参照してください。
+このガイドでは、テレメトリーデータの収集、処理、ルーティングを行うツールである観測可能性パイプラインワーカーを既にセットアップしていることを前提に説明しています。観測可能性パイプラインについてよく知らない場合は、[インストール][4]ドキュメントと [Vector Remap Language][5] を参照してください。
 
 ## 特定のタグまたはメトリクスのネームスペースが欠落しているメトリックをドロップする
 
@@ -32,7 +32,7 @@ title: 観測可能性パイプラインによるカスタムメトリクスガ�
 
 ### ソリューション
 
-この問題を防ぐには、観測可能性パイプラインを使用して、自分にとって意味のあるタグが見つからないメトリクスを削除します。これは、メトリクスを取り込む前、つまり、メトリクスがアカウントのカスタムメトリクスの使用量に貢献する前に行うことができます。
+この問題を防ぐには、観測可能性パイプラインワーカーを使用して、自分にとって意味のあるタグが見つからないメトリクスを削除します。これは、メトリクスを取り込む前、つまり、メトリクスがアカウントのカスタムメトリクスの使用量に貢献する前に行うことができます。
 
 観測可能性パイプラインには、Datadog に送信する前にメトリクスデータを変換するための関数が豊富に用意されています。例えば、`filter` 変換を使用して、特定のタグキーがないメトリクスを削除します。以下のコンポーネントは、`team_tag` を持たないメトリクスをフィルタリングし、観測可能性パイプラインの構成でそれらのメトリクスを確実にドロップします。
 
@@ -209,9 +209,9 @@ transforms:
 [1]: /ja/account_management/billing/usage_metrics/#types-of-usage
 [2]: /ja/account_management/billing/usage_attribution/
 [3]: /ja/metrics/metrics-without-limits/
-[4]: /ja/observability_pipelines/setup/
+[4]: /ja/observability_pipelines/installation/
 [5]: https://vector.dev/docs/reference/vrl/
 [6]: /ja/account_management/billing/usage_attribution/
 [7]: https://vector.dev/docs/reference/vrl/
 [8]: /ja/account_management/billing/custom_metrics/?tab=countrategauge
-[9]: https://vector.dev/docs/reference/configuration/transforms/tag_cardinality_limit/
+[9]: /ja/observability_pipelines/reference/transforms/#tagcardinalitylimit

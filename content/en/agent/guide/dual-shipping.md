@@ -362,4 +362,8 @@ and add the relevant settings to `customAgentConfig`.
         is_reliable: true
 ```
 
-If you're using the [Datadog Agent operator](https://github.com/DataDog/datadog-operator) similarly you can set the `agent.customConfig.configData` key. All configurable keys are documented [here](https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.md).
+If you're using the [Datadog Agent operator][1], similarly, you can set the `agent.customConfig.configData` key. All configurable keys are documented in [v1][2] and [v2][3].
+
+[1]: https://github.com/DataDog/datadog-operator
+[2]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v1alpha1.md
+[3]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md

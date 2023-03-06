@@ -25,7 +25,7 @@ La palette de couleurs Classic prend en charge l'accessibilité visuelle.
 
 #### Consistent/Semantic
 
-La palette Consistent vous permet de toujours attribuer la même couleur à une série de données précise, ce qui facilite la corrélation des données entre les différents graphiques. Contrairement à la palette Classic, la palette Consistent ne garantit pas l'attribution de la même couleur aux séries de données adjacentes et ne prend pas en charge l'accessibilité visuelle.
+La palette Consistent vous permet de toujours attribuer la même couleur à une série de données précise, ce qui facilite la corrélation des données entre les différents graphiques. Contrairement à la palette Classic, la palette Consistent ne garantit pas que la même couleur sera attribuée aux séries de données adjacentes et ne prend pas en charge l'accessibilité visuelle.
 
 
 {{< img src="dashboards/guide/colors/4_consistent_palette.png" alt="Exemple de palette de couleurs Consistent/Semantic." style="width:70%;" >}}

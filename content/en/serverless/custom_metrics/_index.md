@@ -1,5 +1,5 @@
 ---
-title: Custom Metrics from Serverless Applications
+title: Custom Metrics from AWS Lambda Serverless Applications
 kind: documentation
 ---
 
@@ -264,9 +264,9 @@ async function myHandler(event, context) {
     sendDistributionMetricWithDate(
         'coffee_house.order_value', // Metric name
         12.45,                      // Metric value
-        'product:latte',            // First tag
-        'order:online'              // Second tag
         new Date(Date.now()),       // date
+        'product:latte',            // First tag
+        'order:online',             // Second tag
     );
 }
 ```

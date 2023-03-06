@@ -2,59 +2,48 @@
 aliases:
 - /ja/integrations/observability_pipelines/
 further_reading:
-- link: /observability_pipelines/setup/
+- link: /observability_pipelines/installation/
   tag: ドキュメント
   text: 観測可能性パイプラインを設定する
 - link: https://www.datadoghq.com/blog/datadog-observability-pipelines/
   tag: GitHub
   text: 観測可能性パイプラインでテレメトリーデータを管理する
-- link: /observability_pipelines/vector_configurations/
+- link: /observability_pipelines/configurations/
   tag: ドキュメント
-  text: Vector の構成の詳細
-- link: https://vector.dev/docs/setup/going-to-prod/
-  tag: ドキュメント
-  text: 観測可能性パイプラインのキャパシティプランニングを行い、本番に移行する
-- link: https://vector.dev/releases/
-  tag: ドキュメント
-  text: Vector の新リリースをチェックする
-- link: https://vector.dev/docs/reference/configuration/sources/datadog_agent/
-  tag: ドキュメント
-  text: Vector のソースとなる Datadog Agent
-- link: /observability_pipelines/integrations/integrate_vector_with_datadog/
-  tag: ドキュメント
-  text: Vector にデータを送信するための Datadog Agent の構成
+  text: 観測可能性パイプラインの構成の詳細
 kind: ドキュメント
 title: Observability Pipelines（観測データの制御）
 ---
 
-{{< img src="observability_pipelines/obs_pipelines_overview.png" alt="左側の異なるデータソースが、transform、reduce、route という 3 つの六角形に流れ、矢印が修正されたデータの異なる宛先を指しているグラフィック" style="width:100%;" >}}
+{{< img src="observability_pipelines/obs_pipelines.png" alt="左側の異なるデータソースが、transform、reduce、route という 3 つの六角形に流れ、矢印が修正されたデータの異なる宛先を指しているグラフィック" style="width:100%;" >}}
 
-## 可観測性パイプラインとは？
+## 観測可能性パイプラインと観測可能性パイプラインワーカーとは？
 
-観測可能性パイプラインは、テレメトリーパイプラインを大規模に監視・管理できるオープンソースツールである [Vector][1] をベースに構築された監視ソリューションです。Vector は、インフラストラクチャー内にアグリゲーターとしてデプロイされ、すべてのログ、メトリクス、トレースを収集し、変換し、任意の宛先にルーティングします。
+### 観測可能性パイプラインワーカー
 
-Vector の構成に Datadog API キーを追加して、観測可能性パイプラインに接続します。観測可能性パイプラインを使用して、Vector のパイプラインを監視し、ボトルネックやレイテンシーの特定、パフォーマンスの微調整、データ配信の監視などを行います。
-
-観測可能性パイプラインを使えば、以下のようなことも可能です。
+観測可能性パイプラインワーカーは、あらゆるソースからのログやメトリクスを収集、処理し、あらゆる宛先にルーティングするために設計されたオンプレミスのエンドツーエンド・データ・パイプライン・ソリューションです。観測可能性パイプラインは、中央処理、複数のアップストリームソースからのデータ収集、クロスホストの集計と分析を行うためのインフラストラクチャー内のアグリゲーターとしてデプロイすることができます。観測可能性パイプラインワーカーを使用すると、次のようなことも可能です。
 
 - ルーティングの前にデータ量をコントロールし、コスト管理を行うことができます。
 - データをどこにでも転送できるため、ベンダーロックインを減らし、マイグレーションを簡素化できます。
-- 居住地に関する必須条件を満たし、機密データを編集することで、よりコンプライアンスを維持することができます。
-- イベントを充実させ、構造化し、より有用なものに変換することができます。
+- フィールドやタグを追加、パース、リッチ化、削除することで、ログやメトリクスを変換する。
+- テレメトリーデータから機密データを編集する。
 
-観測可能性パイプラインを使用して、完全な可視化と簡素化された管理で、パフォーマンスと信頼性の高いデータパイプラインを構築します。
+### Observability Pipelines（観測データの制御）
 
-## はじめましょう
+観測可能性パイプラインは、観測可能性パイプラインワーカーのすべてのデプロイメントを大規模に監視、構築、管理できるコントロールプレーンです。
 
-1. [Vector のインストール][2]は、クイックスタートの方法、お好みのパッケージマネージャー、または特定のプラットフォームやオペレーティングシステムに基づいて行ってください。
-2. [Vector の構成を設定][3]し、データの収集、変換、ルーティングを行います。
-3. Vector を Datadog API で観測可能性パイプラインに接続します。
+観測可能性パイプラインの構成に Datadog API キーを追加して、ボトルネックやレイテンシーの特定、パフォーマンスの微調整、データ配信の監視など、Datadog でパイプラインを監視することができます。
+
+## 詳細はこちら
+
+1. [観測可能性パイプラインワーカー][1]をインストールします。
+2. [構成を設定][2]し、データの収集、変換、ルーティングを行います。
 
 ## 観測可能性パイプラインの確認
 
-観測可能性パイプラインに構成データを送信できるようになったので、Vector パイプラインのインサイトを取得することを開始します。
+観測可能性パイプラインの探索とインサイトの取得を開始します。
 
-### Vector パイプラインの健全性の監視
+### パイプラインの健全性の監視
 
 パイプラインのトポロジーを全体的に把握し、各フローの平均負荷、エラー率、スループットなどの主要なパフォーマンス指標を監視することができます。
 
@@ -62,7 +51,7 @@ Vector の構成に Datadog API キーを追加して、観測可能性パイプ
 
 ### ボトルネックの早期特定とパフォーマンスの最適化
 
-Vector の特定のコンポーネントに潜り込み、観測可能性データがどのようにパイプラインに流れ込んでいるかを理解し、トラブルシューティングやパフォーマンスのボトルネックの特定、パイプラインの最適化に役立てることができます。
+特定の構成コンポーネントに潜り込み、観測可能性データがどのようにパイプラインに流れ込んでいるかを理解し、トラブルシューティングやパフォーマンスのボトルネックの特定、パイプラインの最適化に役立てることができます。
 
 {{< img src="observability_pipelines/config-map-side-panel.png" alt="S3 ソース構成のサイドパネルに、1 秒あたりのイベントの出入り、エラーの割合、ロードアベレージの割合のグラフが表示される" style="width:85%;" >}}
 
@@ -72,11 +61,9 @@ Vector の特定のコンポーネントに潜り込み、観測可能性デー�
 
 {{< img src="observability_pipelines/configuration-list.png" alt="観測可能性パイプラインのページには、アクティブなパイプラインと非アクティブなパイプラインのリストが表示され、作成日、ホスト数、バージョン、イベント数、バイト数、エラー率などの列が表示される" style="width:85%;" >}}
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://vector.dev/
-[2]: /ja/observability_pipelines/setup/#install-vector
-[3]: /ja/observability_pipelines/setup/#set-up-vector-configurations
-[4]: /ja/observability_pipelines/setup/#connect-vector-to-observability-pipelines
+[1]: /ja/observability_pipelines/installation/
+[2]: /ja/observability_pipelines/configurations/

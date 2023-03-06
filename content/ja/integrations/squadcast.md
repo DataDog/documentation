@@ -15,7 +15,7 @@ assets:
     source_type_name: Squadcast
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Squadcast
   sales_email: it@squadcast.com
   support_email: it@squadcast.com
 categories:

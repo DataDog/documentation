@@ -10,9 +10,9 @@ further_reading:
     tag: "Blog"
     text: "Monitor all your CI pipelines with Datadog"
 ---
-{{< beta-callout url="https://app.datadoghq.com/ci/getting-started" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
+{{< callout url="https://app.datadoghq.com/ci/getting-started" >}}
 Intelligent Test Runner for CI Visibility is in private beta. You can request access by completing the form on the CI Visibility Getting Started page.
-{{< /beta-callout >}}
+{{< /callout >}}
 
 ## Overview
 
@@ -28,7 +28,7 @@ By only running tests on relevant code, when tests fail, it is likely a legitima
 During the beta of Intelligent Test Runner there are certain limitations:
 
 - Some of the environment variables required in the following sections are only required during the beta.
-- Intelligent Test Runner only works without the Datadog Agent. The configuration steps in this page cause the Datadog Library to send data directly to the backend without going through the Agent. If you are currently using the Agent, you will lose correlation with host metrics.
+- Intelligent Test Runner can work Agentless or using the Datadog Agent. The configuration steps in this page are for Agentless. To use ITR with the Datadog Agent, the minimum required versions are v6.40+/v7.40+.
 - There are known limitations in the current implementation of Intelligent Test Runner that can cause it to skip tests that should be run. Intelligent Test Runner is not able to detect:
   - Changes in library dependencies.
   - Changes in compiler options.
@@ -45,12 +45,11 @@ Prior to setting up Intelligent Test Runner, you must have finished setting up [
 
 To enable Intelligent Test Runner, the following environment variables need to be set:
 
-`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Required)
+`DD_CIVISIBILITY_AGENTLESS_ENABLED`
 : Enables or disables Agentless mode.<br/>
 **Default**: `false`<br/>
-**Note**: Required only during Beta
 
-`DD_API_KEY` (Required)
+`DD_API_KEY` (Required if Agentless is enabled)
 : The [Datadog API key][2] used to upload the test results.<br/>
 **Default**: `(empty)`
 
@@ -79,30 +78,33 @@ After setting these environment variables, run your tests as you normally do:
 NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app DD_CIVISIBILITY_AGENTLESS_ENABLED=true DD_API_KEY=$API_KEY DD_CIVISIBILITY_GIT_UPLOAD_ENABLED=true DD_CIVISIBILITY_ITR_ENABLED=true yarn test
 {{< /code-block >}}
 
-**Important**:  It is possible for Intelligent Test Runner to skip every test. By default, `jest` fails if there are no tests to run. To prevent `jest` from failing, pass [`--passWithNoTests`][5] to `jest`.
 
 #### UI activation
-In addition to setting the environment variables, you or a user in your organization with admin permissions must activate the Intelligent Test Runner on the [Test Service Settings][6] page.
+In addition to setting the environment variables, you or a user in your organization with admin permissions must activate the Intelligent Test Runner on the [Test Service Settings][5] page.
 
 #### Compatibility
 
 Intelligent Test Runner is only supported in the following versions and testing frameworks:
 
-* `dd-trace>=3.4.0`
 * `jest>=24.8.0`
+  * From `dd-trace>=3.4.0`
   * Only `jest-circus/runner` is supported as `testRunner`.
   * Only `jsdom` and `node` are supported as test environments.
+* `mocha>=5.2.0`
+  * From `dd-trace>=3.9.0`
+
+#### Suite skipping
+Intelligent test runner for Javascript skips entire _test suites_ (test files) rather than individual tests.
 
 ### .NET
 
-To enable Intelligent Test Runner, the version of the `dd-trace` tool must be >= 2.16.0 (execute `dd-trace --version` to get the version of the tool) and the following environment variables must be set:
+To enable Intelligent Test Runner, the version of the `dd-trace` tool must be >= 2.22.0 (execute `dd-trace --version` to get the version of the tool) and the following environment variables must be set:
 
-`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Required)
+`DD_CIVISIBILITY_AGENTLESS_ENABLED`
 : Enables or disables Agentless mode.<br/>
 **Default**: `false`<br/>
-**Note**: Required only during Beta
 
-`DD_API_KEY` (Required)
+`DD_API_KEY` (Required if Agentless is enabled)
 : The [Datadog API key][2] used to upload the test results.<br/>
 **Default**: `(empty)`
 
@@ -115,12 +117,7 @@ To enable Intelligent Test Runner, the version of the `dd-trace` tool must be >=
 **Default**: `datadoghq.com`<br/>
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
 
-`DD_CIVISIBILITY_ITR_ENABLED=true` (Required)
-: Flag to enable Intelligent Test Runner. <br/>
-**Default**: `false`<br/>
-**Note**: Required only during Beta
-
-After setting these environment variables, run your tests as you normally do by using [dotnet test][7] or [VSTest.Console.exe][8]:
+After setting these environment variables, run your tests as you normally do by using [dotnet test][6] or [VSTest.Console.exe][7]:
 
 {{< tabs >}}
 
@@ -146,11 +143,11 @@ dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- VSTest.Console.exe {te
 
 #### UI activation
 
-In addition to setting the environment variables, you or a user in your organization with admin permissions must activate the Intelligent Test Runner on the [Test Service Settings][6] page.
+In addition to setting the environment variables, you or a user in your organization with admin permissions must activate the Intelligent Test Runner on the [Test Service Settings][5] page.
 
 ### Swift
 
-To enable Intelligent Test Runner, the version of the `dd-sdk-swift` framework must be >= 2.2.0-rc.1. The `Code Coverage` option must also be enabled in the test settings of your scheme or test plan, or  `--enable-code-coverage` must be added to your `swift test` command (if using a SPM target).
+To enable Intelligent Test Runner, the version of the `dd-sdk-swift` framework must be >= 2.2.0. The `Code Coverage` option must also be enabled in the test settings of your scheme or test plan, or  `--enable-code-coverage` must be added to your `swift test` command (if using a SPM target).
 
 The following environment variables must also be set:
 
@@ -174,7 +171,7 @@ The following environment variables must also be set:
 
 #### UI activation
 
-In addition to setting the environment variables, you or a user in your organization with admin permissions must activate the Intelligent Test Runner on the [Test Service Settings][6] page.
+In addition to setting the environment variables, you or a user in your organization with admin permissions must activate the Intelligent Test Runner on the [Test Service Settings][5] page.
 
 ## Setup CI Job
 
@@ -199,7 +196,6 @@ If there are other branches you want to exclude, you can add them from the Intel
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/organization-settings/application-keys
 [4]: /getting_started/site/
-[5]: https://jestjs.io/docs/cli#--passwithnotests
-[6]: https://app.datadoghq.com/ci/settings/test-service
-[7]: https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-test
-[8]: https://docs.microsoft.com/en-us/visualstudio/test/vstest-console-options
+[5]: https://app.datadoghq.com/ci/settings/test-service
+[6]: https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-test
+[7]: https://docs.microsoft.com/en-us/visualstudio/test/vstest-console-options

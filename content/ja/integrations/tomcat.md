@@ -38,7 +38,6 @@ author:
 categories:
 - web
 - log collection
-- autodiscovery
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/tomcat/README.md
 display_on_public_website: true
@@ -66,7 +65,6 @@ tile:
   - Supported OS::Windows
   - Category::Web
   - Category::ログの収集
-  - Category::オートディスカバリー
   configuration: README.md#Setup
   description: 毎秒のリクエスト数、処理バイト数、キャッシュヒット数、サーブレットメトリクスなどを追跡。
   media: []
@@ -89,7 +87,7 @@ tile:
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Tomcat チェックは [Datadog Agent][2] パッケージに含まれています。Tomcat サーバーに追加でインストールする必要はありません。
 

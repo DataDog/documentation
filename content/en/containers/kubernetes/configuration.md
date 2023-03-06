@@ -65,9 +65,22 @@ agents:
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
 
-If you want Kubernetes events to be collected by the Datadog Cluster Agent, use the [Datadog Cluster Agent Event collection][1]
+If you want Kubernetes events to be collected by the Datadog Cluster Agent, use the following steps:
 
-Alternatively, to collect the Kubernetes events from a Node Agent, set the environment variables `DD_COLLECT_KUBERNETES_EVENTS` and `DD_LEADER_ELECTION` to true in your Agent manifest.
+1. Disable leader election in your Node Agent by setting the `leader_election` variable or `DD_LEADER_ELECTION` environment variable to `false`.
+
+2. In your Cluster Agent deployment file, set the `DD_COLLECT_KUBERNETES_EVENTS` and `DD_LEADER_ELECTION` environment variable to `true`:
+
+      ```yaml
+        - name: DD_COLLECT_KUBERNETES_EVENTS
+          value: "true"
+        - name: DD_LEADER_ELECTION
+          value: "true"
+      ```
+
+Configuring leader election, as described in the above steps, ensures that only one Cluster Agent collects the events.
+
+Alternatively, to collect the Kubernetes events from a Node Agent, set the environment variables `DD_COLLECT_KUBERNETES_EVENTS` and `DD_LEADER_ELECTION` to `true` in your Agent manifest.
 
 ```yaml
 - name: DD_COLLECT_KUBERNETES_EVENTS
@@ -76,8 +89,6 @@ Alternatively, to collect the Kubernetes events from a Node Agent, set the envir
   value: "true"
 ```
 
-
-[1]: /agent/cluster_agent/event_collection/
 {{% /tab %}}
 {{< /tabs >}}
 

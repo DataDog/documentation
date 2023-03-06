@@ -55,4 +55,4 @@ With the applied query, you can customize alert conditions and set up notificati
 [1]: /real_user_monitoring/explorer/visualize/#funnel
 [2]: https://app.datadoghq.com/rum/explorer?viz=timeseries
 [3]: https://app.datadoghq.com/monitors/create/rum
-[4]: /monitors/create/types/real_user_monitoring/
+[4]: /monitors/types/real_user_monitoring/

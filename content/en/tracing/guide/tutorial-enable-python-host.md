@@ -177,7 +177,7 @@ If you don't see traces, clear any filter in the Traces Search field (sometimes 
 
 ### Examine a trace
 
-In the Traces page, click on a `POST /notes` trace and you'll see a flame graph that shows how long each span took and what other spans occurred before a span completed. The bar at the top of the graph is the span you selected on the previous screen (in this case, the initial entry point into our notes application). 
+In the Traces page, click on a `POST /notes` trace and you'll see a flame graph that shows how long each span took and what other spans occurred before a span completed. The bar at the top of the graph is the span you selected on the previous screen (in this case, the initial entry point into the notes application). 
 
 The width of a bar indicates how long it took to complete. A bar at a lower depth represents a span that completes during the lifetime of a bar at a higher depth. 
 
@@ -192,7 +192,7 @@ A `GET /notes` trace looks something like this:
 
 ## Add custom instrumentation to the Python application
 
-While automatic instrumentation is convenient, sometimes you want more fine-grained spans. Datadog's Python DD Trace API allows you to specify spans within your code using annotations or code.
+Automatic instrumentation is convenient, but sometimes you want more fine-grained spans. Datadog's Python DD Trace API allows you to specify spans within your code using annotations or code.
 
 The following steps walk you through adding annotations to the code to trace some sample methods.
 
@@ -213,7 +213,7 @@ from ddtrace import tracer{{< /code-block >}}
     Now, the tracer automatically labels the resource with the function name it is wrapped around, in this case, `long_running_process`.
 
 4. Resend some HTTP requests, specifically some `GET` requests.
-5. On the Trace Explorer, click into one of the new `GET` requests, and see a flame graph like this:
+5. On the Trace Explorer, click on one of the new `GET` requests, and see a flame graph like this:
 
    {{< img src="tracing/guide/tutorials/tutorial-python-host-custom-flame.png" alt="A flame graph for a GET trace with custom instrumentation." style="width:100%;" >}}
    

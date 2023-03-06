@@ -19,7 +19,7 @@ assets:
     Algorithmia: assets/monitors/algorithm_duration.json
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Algorithmia
   sales_email: support@algorithmia.io
   support_email: support@algorithmia.io
 categories:

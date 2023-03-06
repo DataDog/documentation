@@ -83,6 +83,7 @@ Go into your [AWS console][1] and [create an S3 bucket][2] to send your archives
 
 - Do not make your bucket publicly readable.
 - Do not set [Object Lock][3] because the last data needs to be rewritten in some rare cases (typically a timeout).
+
 - For [US1, US3, and US5 sites][4], see [AWS Pricing][5] for inter-region data transfer fees and how cloud storage costs may be impacted. Consider creating your storage bucket in `us-east-1` to manage your inter-region data transfer fees.
 
 [1]: https://s3.console.aws.amazon.com/s3
@@ -194,11 +195,11 @@ Add the role under **Storage** called **Storage Object Admin**.
 
 ### Route your logs to a bucket
 
-Go to the [Archives page][4] in the Datadog app and select the **Add a new archive** option at the bottom.
+Add webhook IPs from the [IP ranges list][4] to the allowlist. Go to the [Archives page][5] in the Datadog app and select the **Add a new archive** option at the bottom.
 
 **Notes:** 
 * Only Datadog users with [logs_write_archive permission][3] can complete this and the following step.  
-* Archiving logs to Azure Blob Storage requires an App Registration. See instructions [on the Azure integration page][5], and set the "site" on the right-hand side of the documentation page to "US." App Registration(s) created for archiving purposes only need the "Storage Blob Data Contributor" role. If your storage bucket is in a subscription being monitored through a Datadog Resource, a warning is displayed about the App Registration being redundant. You can ignore this warning.
+* Archiving logs to Azure Blob Storage requires an App Registration. See instructions [on the Azure integration page][6], and set the "site" on the right-hand side of the documentation page to "US." App Registration(s) created for archiving purposes only need the "Storage Blob Data Contributor" role. If your storage bucket is in a subscription being monitored through a Datadog Resource, a warning is displayed about the App Registration being redundant. You can ignore this warning.
 
 {{< tabs >}}
 {{% tab "AWS S3" %}}
@@ -243,9 +244,9 @@ By default:
 
 Use this optional configuration step to assign roles on that archive and restrict who can:
 
-* Edit that archive configuration. See the [logs_write_archive][6] permission.
-* Rehydrate from that archive. See the [logs_read_archives][7] and [logs_write_historical_view][8].
-* Access rehydrated logs in case you use the legacy [read_index_data permission][9].
+* Edit that archive configuration. See the [logs_write_archive][7] permission.
+* Rehydrate from that archive. See the [logs_read_archives][8] and [logs_write_historical_view][9].
+* Access rehydrated logs in case you use the legacy [read_index_data permission][10].
 
 {{< img src="logs/archives/archive_restriction.png" alt="Restrict access to Archives and Rehydrated logs"  style="width:75%;">}}
 
@@ -254,7 +255,7 @@ Use this optional configuration step to assign roles on that archive and restric
 Use this optional configuration step to:
 
 * Include all log tags in your archives (activated by default on all new archives). **Note**: This increases the size of resulting archives.
-* Add tags on rehydrated logs according to your Restriction Queries policy. See [logs_read_data][10] permission.
+* Add tags on rehydrated logs according to your Restriction Queries policy. See [logs_read_data][11] permission.
 
 {{< img src="logs/archives/tags_in_out.png" alt="Configure Archive Tags"  style="width:75%;">}}
 
@@ -371,9 +372,11 @@ Alternatively, Datadog supports server side encryption with a CMK from [AWS KMS]
 
 3. Go to the **Properties** tab in your S3 bucket and select **Default Encryption**. Choose the "AWS-KMS" option, select your CMK ARN, and save.
 
+For any changes to existing KSM keys, reach out to [Datadog support][3] for further assistance
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/default-bucket-encryption.html
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
+[3]: /help/
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -382,11 +385,11 @@ Alternatively, Datadog supports server side encryption with a CMK from [AWS KMS]
 
 Once your archive settings are successfully configured in your Datadog account, your processing pipelines begin to enrich all logs ingested into Datadog. These logs are subsequently forwarded to your archive.
 
-However, after creating or updating your archive configurations, it can take several minutes before the next archive upload is attempted. The frequency at which archives are uploaded can vary. **Check back on your storage bucket in 15 minutes** to make sure the archives are successfully being uploaded from your Datadog account. After that, if the archive is still in a pending state, check your inclusion filters to make sure the query is valid and matches log events in [live tail][11].
+However, after creating or updating your archive configurations, it can take several minutes before the next archive upload is attempted. The frequency at which archives are uploaded can vary. **Check back on your storage bucket in 15 minutes** to make sure the archives are successfully being uploaded from your Datadog account. After that, if the archive is still in a pending state, check your inclusion filters to make sure the query is valid and matches log events in [live tail][12].
 
 When Datadog fails to upload logs to an external archive, due to unintentional changes in settings or permissions, the corresponding Log Archive is highlighted in the configuration page. Hover over the archive to view the error details and the actions to take to resolve the issue.
 
-In addition, an event is generated, visible in the [Events Explorer][12]. Build a monitor on such events to detect and remediate failures quickly.
+In addition, an event is generated, visible in the [Events Explorer][13]. Build a monitor on such events to detect and remediate failures quickly.
 
 {{< img src="logs/archives/archive_errors.png" alt="Check that your archives are properly set up."  style="width:75%;">}}
 
@@ -439,12 +442,13 @@ Within the zipped JSON file, each event’s content is formatted as follows:
 [1]: /logs/indexes/#exclusion-filters
 [2]: /logs/archives/rehydrating/
 [3]: /account_management/rbac/permissions/?tab=ui#logs_write_archives
-[4]: https://app.datadoghq.com/logs/pipelines/archives
-[5]: /integrations/azure/
-[6]: /account_management/rbac/permissions#logs_write_archives
-[7]: /account_management/rbac/permissions#logs_read_archives
-[8]: /account_management/rbac/permissions#logs_write_historical_view
-[9]: /account_management/rbac/permissions#logs_read_index_data
-[10]: /account_management/rbac/permissions#logs_read_data
-[11]: /logs/explorer/live_tail/
-[12]: /events/explorer/
+[4]: https://ip-ranges.datadoghq.com/
+[5]: https://app.datadoghq.com/logs/pipelines/archives
+[6]: /integrations/azure/
+[7]: /account_management/rbac/permissions#logs_write_archives
+[8]: /account_management/rbac/permissions#logs_read_archives
+[9]: /account_management/rbac/permissions#logs_write_historical_view
+[10]: /account_management/rbac/permissions#logs_read_index_data
+[11]: /account_management/rbac/permissions#logs_read_data
+[12]: /logs/explorer/live_tail/
+[13]: /events/explorer/

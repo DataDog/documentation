@@ -67,7 +67,7 @@ Whether to enable tracing.
 `DD_TRACE_AGENT_URL`
 : **Configuration**: `url`<br>
 **Default**: `http://localhost:8126`<br>
-The URL of the Trace Agent that the tracer submits to. Takes priority over hostname and port, if set. Supports Unix Domain Sockets in combination with the `apm_config.receiver_socket` in your `datadog.yaml` file, or the `DD_APM_RECEIVER_SOCKET` environment variable.
+The URL of the Trace Agent that the tracer submits to. Takes priority over hostname and port, if set. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it. Supports Unix Domain Sockets in combination with the `apm_config.receiver_socket` in your `datadog.yaml` file, or the `DD_APM_RECEIVER_SOCKET` environment variable.
 
 `DD_TRACE_AGENT_HOSTNAME`
 : **Configuration**: `hostname`<br>
@@ -77,12 +77,12 @@ The address of the Agent that the tracer submits to.
 `DD_TRACE_AGENT_PORT`
 : **Configuration**: `port`<br>
 **Default**: `8126`<br>
-The port of the Trace Agent that the tracer submits to.
+The port of the Trace Agent that the tracer submits to. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it.
 
 `DD_DOGSTATSD_PORT`
 : **Configuration**: `dogstatsd.port`<br>
 **Default**: `8125`<br>
-The port of the DogStatsD Agent that metrics are submitted to.
+The port of the DogStatsD Agent that metrics are submitted to. If the [Agent configuration][13] sets `dogstatsd_port` or `DD_DOGSTATSD_PORT` to something other than the default `8125`, then this tracing library `DD_DOGSTATSD_PORT` must match it.
 
 `DD_LOGS_INJECTION`
 : **Configuration**: `logInjection`<br>
@@ -224,6 +224,39 @@ A regex string to redact sensitive data by its key in attack reports.
 **Default**: N/A<br>
 A regex string to redact sensitive data by its value in attack reports.
 
+`DD_REMOTE_CONFIG_POLL_INTERVAL_SECONDS`
+: **Configuration**: `remoteConfig.pollInterval`<br>
+**Default**: 5<br>
+Remote configuration polling interval in seconds.
+
+### Headers extraction and injection
+
+The Datadog APM Tracer supports [B3][5] and [W3C (TraceParent)][6] header extraction and injection for distributed tracing.
+
+You can configure injection and extraction styles for distributed headers.
+
+The Node.js Tracer supports the following styles:
+
+- Datadog: `Datadog`
+- B3 Multi Header: `b3multi` (`B3` is deprecated)
+- W3C Trace Context: `tracecontext`
+- B3 Single Header: `B3 single header`
+
+`DD_TRACE_PROPAGATION_STYLE_INJECT`
+: **Configuration**: `tracePropagationStyle.inject`<br>
+**Default**: `Datadog,tracecontext`<br>
+A comma-separated list of header formats to include to propagate distributed traces between services.
+
+`DD_TRACE_PROPAGATION_STYLE_EXTRACT`
+: **Configuration**: `tracePropagationStyle.extract`<br>
+**Default**: `Datadog,tracecontext`<br>
+A comma-separated list of header formats from which to attempt to extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue.
+
+`DD_TRACE_PROPAGATION_STYLE`
+: **Configuration**: `tracePropagationStyle`<br>
+**Default**: `Datadog,tracecontext`<br>
+A comma-separated list of header formats from which to attempt to inject and extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue. The more specific `DD_TRACE_PROPAGATION_STYLE_INJECT` and `DD_TRACE_PROPAGATION_STYLE_EXTRACT` configurations take priority when present.
+
 
 For more examples of how to work with the library see [API documentation][2].
 
@@ -235,3 +268,6 @@ For more examples of how to work with the library see [API documentation][2].
 [2]: https://datadog.github.io/dd-trace-js/
 [3]: /tracing/trace_pipeline/ingestion_mechanisms/
 [4]: /help/
+[5]: https://github.com/openzipkin/b3-propagation
+[6]: https://www.w3.org/TR/trace-context/#trace-context-http-headers-format
+[13]: /agent/guide/network/#configure-ports

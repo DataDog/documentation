@@ -84,11 +84,13 @@ You can manually apply these configured headers, cookies, and credentials on the
 
 ### Secure your authentication data
 
-Store your credentials as [global variables][6] (for example, one global variable for username, another one for password) and  set these variables as obfuscated to hide their values from anyone else who has access to your instance of Datadog.
+Store your credentials as [global variables][6] (for example, one global variable for username, another one for password) and select **Hide and obfuscate variable value** to hide their values from test results. You can restrict permissions on a browser test for individuals who have access to your instance of Datadog.
 
 Once you create the obfuscated variables, you can then [import these global variables][7] into your browser tests and leverage them for your login steps.
 
 **Note:** Although Datadog global variables are securely stored and encrypted, it is strongly recommended that you use an account dedicated to testing with dummy credentials as a general testing best practice.
+
+For more information about account security, see [Synthetic Monitoring Data Security][8].
 
 ## Further Reading
 
@@ -101,3 +103,4 @@ Once you create the obfuscated variables, you can then [import these global vari
 [5]: /synthetics/browser_tests/actions/#test-your-ui-with-custom-javascript
 [6]: /synthetics/settings/?tab=specifyvalue#global-variables
 [7]: /synthetics/browser_tests/actions#a-global-variable
+[8]: /data_security/synthetics

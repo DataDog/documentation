@@ -28,7 +28,7 @@ assets:
 author:
   homepage: https://www.rapdev.io
   name: RapDev
-  sales_email: sales@rapdev.io
+  sales_email: ddsales@rapdev.io
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
@@ -99,6 +99,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Zoom インテグレーション
+  uninstallation: README.md#Uninstallation
 ---
 
 
@@ -107,7 +108,7 @@ tile:
 
 Zoom インテグレーションにより、ミーティング、Rooms、ユーザー、ネットワーク分析、そしてジオロケーションの概要を監視することで、世界中のあらゆる場所で勤務する従業員に最適な利用体験を提供することができます。インテグレーションには、完全カスタマイズが可能な 4 つのダッシュボードが事前構築されており、重要な情報を表面化できます。さらに、エンジニア、IT責任者、マネージャー、そして管理職レベルのすべてのユーザーに普遍的に利用価値のあるビジュアルを提供するよう設計されています。
 
-### モニター
+### アラート設定
 
 1. Zoom Room に問題があります
 2. Zoom Room のコンポーネントに問題があります

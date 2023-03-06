@@ -52,18 +52,18 @@ class Build:
     # Build the documentation by injecting content from other repository.
     def build_documentation(self, list_of_contents):
 
-        # Instanciation of the integrations class since it's needed for content management below.
+        # Instantiation of the integrations class since it's needed for content management below.
         Int = Integrations(self.options.source, self.tempdir,
                            self.integration_mutations)
 
-        # Depending of the action attached to the content the proper function is called
+        # Depending on the action attached to the content the proper function is called
         for content in list_of_contents:
             try:
                 if content["action"] == "integrations":
                     Int.process_integrations(content)
                 elif content["action"] == "marketplace-integrations":
                     Int.process_integrations(content, marketplace=True)
-                elif (content["action"] == "pull-and-push-folder"):
+                elif content["action"] == "pull-and-push-folder":
                     pull_and_push_folder(content, self.content_dir)
                 elif content["action"] == "npm-integrations":
                     Int.process_integrations(content)

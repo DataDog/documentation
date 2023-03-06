@@ -31,6 +31,8 @@ As of Agent 6.0.0, the Trace Agent is enabled by default. If it has been turned 
 
 The CLI commands on this page are for the Docker runtime. Replace `docker` with `nerdctl` for the containerd runtime, or `podman` for the Podman runtime.
 
+<div class="alert alert-info">If you are collecting traces from a containerized app (your Agent and app running in separate containers), as an alternative to the following instructions, you can automatically inject the tracing library into your application. Read <a href="/tracing/trace_collection/library_injection/?tab=agentandappinseparatecontainers">Injecting Libraries</a> for instructions.</div>
+
 ## Tracing from the host
 
 Tracing is available on port `8126/tcp` from _your host only_ by adding the option `-p 127.0.0.1:8126:8126/tcp` to the `docker run` command.

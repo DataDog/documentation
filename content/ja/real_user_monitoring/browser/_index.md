@@ -27,7 +27,7 @@ RUM ブラウザモニタリングを設定するには、RUM アプリケーシ
    - アプリケーションの名前を入力し、**Generate Client Token** をクリックします。これにより、アプリケーションの `clientToken` と `applicationId` が生成されます。
    - RUM ブラウザ SDK のインストールタイプを選択します。[npm](#npm)、またはホストバージョン ([CDN 非同期](#cdn-async)または [CDN 同期](#cdn-sync)) のいずれかを選択します。
    - [RUM とセッションリプレイ][19]の統合サービスタグ付けを使用するために、アプリケーションの環境名とサービス名を定義します。初期化スニペットで、デプロイされたアプリケーションのバージョン番号を設定します。詳しくは、[タグ付け](#tagging)を参照してください。
-   - 収集した総ユーザーセッションのサンプリングレートを設定し、スライダーで収集した総 [Browser Premium][11] セッションのパーセンテージを設定します。Browser Premium セッションには、リソースやロングタスク、リプレイ記録が含まれます。ユーザーセッションの総量から収集される Browser Premium セッションの割合の構成については、[ブラウザおよび Browser Premium サンプリングのセットアップを構成する][21]を参照してください。
+   - 収集した総ユーザーセッションのサンプリングレートを設定し、スライダーで収集した総 [Browser RUM & セッションリプレイ][11]セッションのパーセンテージを設定します。Browser RUM & セッションリプレイセッションには、リソースやロングタスク、リプレイ記録が含まれます。ユーザーセッションの総量から収集される Browser RUM & セッションリプレイセッションの割合の構成については、[ブラウザおよび Browser RUM & セッションリプレイサンプリングのセットアップを構成する][21]を参照してください。
    - **Session Replay Enabled** をクリックすると、[セッションリプレイ][17]でリプレイ録画にアクセスできます。
    - ドロップダウンメニューから、セッションリプレイの[プライバシー設定][18]を選択します。
 2. 変更をアプリケーションにデプロイします。実行が開始されると、ユーザーのブラウザから Datadog によってイベントが収集されます。
@@ -52,6 +52,52 @@ CDN 同期
 
 <details open>
   <summary>最新バージョン</summary>
+
+```javascript
+import { datadogRum } from '@datadog/browser-rum'
+
+datadogRum.init({
+  applicationId: '<DATADOG_APPLICATION_ID>',
+  clientToken: '<DATADOG_CLIENT_TOKEN>',
+  site: '<DATADOG_SITE>',
+  //  service: 'my-web-application',
+  //  env: 'production',
+  //  version: '1.0.0',
+  sessionSampleRate: 100,
+  sessionReplaySampleRate: 100, // 含まれない場合 - デフォルト 100
+  trackResources: true,
+  trackLongTasks: true,
+  trackUserInteractions: true,
+})
+```
+
+</details>
+
+<details>
+  <summary><code>v4.30.0</code> より前</summary>
+
+```javascript
+import { datadogRum } from '@datadog/browser-rum'
+
+datadogRum.init({
+  applicationId: '<DATADOG_APPLICATION_ID>',
+  clientToken: '<DATADOG_CLIENT_TOKEN>',
+  site: '<DATADOG_SITE>',
+  //  service: 'my-web-application',
+  //  env: 'production',
+  //  version: '1.0.0',
+  sampleRate: 100,
+  sessionReplaySampleRate: 100, // 含まれない場合 - デフォルト 100
+  trackResources: true,
+  trackLongTasks: true,
+  trackInteractions: true,
+})
+```
+
+</details>
+
+<details>
+  <summary><code>v4.20.0</code> より前</summary>
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum'
@@ -92,7 +138,7 @@ datadogRum.init({
 
 </details>
 
-`trackInteractions` および `trackFrustrations` パラメーターは、アプリケーション内のユーザークリックの自動収集を有効にします。ページに含まれている**機密データと非公開データ**は、やり取りされた要素を特定するために含まれる場合があります。
+`trackUserInteractions` および `trackFrustrations` パラメーターは、アプリケーション内のユーザークリックの自動収集を有効にします。ページに含まれている**機密データと非公開データ**は、やり取りされた要素を特定するために含まれる場合があります。
 
 ### CDN 非同期
 
@@ -117,6 +163,68 @@ datadogRum.init({
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100, // 含まれない場合 - デフォルト 100
+      trackResources: true,
+      trackLongTasks: true,
+      trackUserInteractions: true,
+    })
+  })
+</script>
+```
+
+</details>
+
+<details>
+  <summary><code>v4.30.0</code> より前</summary>
+
+<!-- prettier-ignore -->
+```html
+<script>
+  (function(h,o,u,n,d) {
+     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+     d=o.createElement(u);d.async=1;d.src=n
+     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-rum-v4.js','DD_RUM')
+  DD_RUM.onReady(function() {
+    DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      site: '<DATADOG_SITE>',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sampleRate: 100,
+      sessionReplaySampleRate: 100, // 含まれない場合 - デフォルト 100
+      trackResources: true,
+      trackLongTasks: true,
+      trackInteractions: true,
+    })
+  })
+</script>
+```
+
+</details>
+
+<details>
+  <summary><code>v4.20.0</code> より前</summary>
+
+<!-- prettier-ignore -->
+```html
+<script>
+  (function(h,o,u,n,d) {
+     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+     d=o.createElement(u);d.async=1;d.src=n
+     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-rum-v4.js','DD_RUM')
+  DD_RUM.onReady(function() {
+    DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      site: '<DATADOG_SITE>',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
       sampleRate: 100,
       premiumSampleRate: 100, // 含まれない場合 - デフォルト 100
       trackInteractions: true,
@@ -156,7 +264,7 @@ datadogRum.init({
 
 </details>
 
-`trackInteractions` および `trackFrustrations` パラメーターは、アプリケーション内のユーザークリックの自動収集を有効にします。ページに含まれている**機密データと非公開データ**は、やり取りされた要素を特定するために含まれる場合があります。
+`trackUserInteractions` および `trackFrustrations` パラメーターは、アプリケーション内のユーザークリックの自動収集を有効にします。ページに含まれている**機密データと非公開データ**は、やり取りされた要素を特定するために含まれる場合があります。
 
 始めの RUM API 呼び出しは `DD_RUM.onReady()` コールバックにラップされている必要があります。こうすることで、SDK が適切に読み込まれたときにのみコードが実行されるようにできます。
 
@@ -166,6 +274,56 @@ datadogRum.init({
 
 <details open>
   <summary>最新バージョン</summary>
+
+```html
+<script src="https://www.datadoghq-browser-agent.com/datadog-rum-v4.js" type="text/javascript"></script>
+<script>
+  window.DD_RUM &&
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      site: '<DATADOG_SITE>',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100, // 含まれない場合 - デフォルト 100
+      trackResources: true,
+      trackLongTasks: true,
+      trackUserInteractions: true,
+    })
+</script>
+```
+
+</details>
+
+<details>
+  <summary><code>v4.30.0</code> より前</summary>
+
+```html
+<script src="https://www.datadoghq-browser-agent.com/datadog-rum-v4.js" type="text/javascript"></script>
+<script>
+  window.DD_RUM &&
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      site: '<DATADOG_SITE>',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sampleRate: 100,
+      sessionReplaySampleRate: 100, // 含まれない場合 - デフォルト 100
+      trackResources: true,
+      trackLongTasks: true,
+      trackInteractions: true,
+    })
+</script>
+```
+
+</details>
+
+<details>
+  <summary><code>v4.20.0</code> より前</summary>
 
 ```html
 <script src="https://www.datadoghq-browser-agent.com/datadog-rum-v4.js" type="text/javascript"></script>
@@ -210,7 +368,7 @@ datadogRum.init({
 
 </details>
 
-`trackInteractions` および `trackFrustrations` パラメーターは、アプリケーション内のユーザークリックの自動収集を有効にします。ページに含まれている**機密データと非公開データ**は、やり取りされた要素を特定するために含まれる場合があります。
+`trackUserInteractions` および `trackFrustrations` パラメーターは、アプリケーション内のユーザークリックの自動収集を有効にします。ページに含まれている**機密データと非公開データ**は、やり取りされた要素を特定するために含まれる場合があります。
 
 `window.DD_RUM` チェックは、RUM ブラウザ SDK で読み込みエラーが起きた際に問題を防ぐために使用されます。
 
@@ -225,8 +383,10 @@ window.DD_RUM.init({
   applicationId: 'XXX',
   clientToken: 'XXX',
   site: 'datadoghq.com',
-  sampleRate: 100,
-  premiumSampleRate: 100,
+  sessionSampleRate: 100,
+  sessionReplaySampleRate: 100, // 含まれない場合 - デフォルト 100
+  trackResources: true,
+  trackLongTasks: true,
 })
 ```
 
@@ -234,7 +394,7 @@ window.DD_RUM.init({
 
 ### 初期化パラメーター
 
-次のパラメーターを使用できます。
+追跡を開始するために、初期化コマンドを呼び出します。以下のパラメーターが使用可能です。
 
 `applicationId`
 : 必須<br/>
@@ -274,8 +434,14 @@ RUM アプリケーションの ID。
 RUM ビューの作成を制御します。[デフォルトの RUM ビュー名をオーバーライドする][10]を参照してください。
 
 `trackInteractions`
-: 任意<br/>
-**種類**: Boolean<br/>
+: オプション - **非推奨**<br/>
+**タイプ**: ブール値<br/>
+**デフォルト**: `false` <br/>
+`trackUserInteractions` を参照してください。
+
+`trackUserInteractions`
+: オプション<br/>
+**タイプ**: ブール値<br/>
 **デフォルト**: `false` <br/>
 [ユーザーアクションの自動収集][6]を有効にします。
 
@@ -283,7 +449,19 @@ RUM ビューの作成を制御します。[デフォルトの RUM ビュー名�
 : オプション<br/>
 **タイプ**: ブール値<br/>
 **デフォルト**: `false` <br/>
-[ユーザーのフラストレーションの自動収集][20]を有効にします。`trackInteractions: true` を意味します。
+[ユーザーのフラストレーションの自動収集][20]を有効にします。`trackUserInteractions: true` を意味します。
+
+`trackResources`
+: オプション<br/>
+**タイプ**: ブール値<br/>
+**デフォルト**: `false` <br/>
+リソースイベントの収集を可能にします。
+
+`trackLongTasks`
+: オプション<br/>
+**タイプ**: ブール値<br/>
+**デフォルト**: `false` <br/>
+ロングタスクイベントの収集を可能にします。
 
 `defaultPrivacyLevel`
 : オプション<br/>
@@ -297,22 +475,34 @@ RUM ビューの作成を制御します。[デフォルトの RUM ビュー名�
  [アクションに名前を付ける][9]ために使用する独自の属性を指定できます。
 
 `sampleRate`
+: オプション - **非推奨**<br/>
+**タイプ**: 数値<br/>
+**デフォルト**: `100`<br/>
+`sessionSampleRate` を参照してください。
+
+`sessionSampleRate`
 : オプション<br/>
 **タイプ**: 数字<br/>
 **デフォルト**: `100`<br/>
-追跡するセッションの割合。`100` で全て、`0` でなし。追跡されたセッションのみが RUM イベントを送信します。`sampleRate` の詳細については、[サンプリング構成](#browser-and-browser-premium-sampling-configuration)を参照してください。
+追跡するセッションの割合。`100` で全て、`0` でなし。追跡されたセッションのみが RUM イベントを送信します。`sessionSampleRate` の詳細については、[サンプリング構成][21]を参照してください。
 
 `replaySampleRate`
 : オプション - **非推奨**<br/>
 **タイプ**: 数値<br/>
 **デフォルト**: `100`<br/>
-`premiumSampleRate` を参照してください。
+`sessionReplaySampleRate` を参照してください。
 
 `premiumSampleRate`
+: オプション - **非推奨**<br/>
+**タイプ**: 数値<br/>
+**デフォルト**: `100`<br/>
+`sessionReplaySampleRate` を参照してください。
+
+`sessionReplaySampleRate`
 : オプション<br/>
 **タイプ**: 数字<br/>
 **デフォルト**: `100`<br/>
-[Browser Premium 料金][11]の機能を持つ追跡されたセッションの割合。`100` で全て、`0` でなし。`premiumSampleRate` の詳細については、[サンプリング構成](#browser-and-browser-premium-sampling-configuration)を参照してください。
+[Browser RUM & セッションリプレイ料金][11]の機能を持つ追跡されたセッションの割合。`100` で全て、`0` でなし。`sessionReplaySampleRate` の詳細については、[サンプリング構成][21]を参照してください。
 
 `silentMultipleInit`
 : 任意<br/>
@@ -326,11 +516,22 @@ RUM ブラウザ SDK がページ上ですでに初期化されている場合�
 オプションのプロキシ URL (例: https://www.proxy.com/path)。詳細については、完全な[プロキシ設定ガイド][7]を参照してください。
 
 `allowedTracingOrigins`
-: オプション<br/>
+: オプション - **非推奨**<br/>
 **タイプ**: リスト<br/>
 トレースヘッダを注入するために使用されるリクエスト起源のリスト。詳細については、[RUM とトレースの接続][12]を参照してください。
 
+`allowedTracingUrls`
+: オプション<br/>
+**タイプ**: リスト<br/>
+トレースヘッダを注入するために使用されるリクエスト URL のリスト。詳細については、[RUM とトレースの接続][12]を参照してください。
+
 `tracingSampleRate`
+: オプション - **非推奨**<br/>
+**タイプ**: 数値<br/>
+**デフォルト**: `100`<br/>
+`traceSampleRate` を参照してください。
+
+`traceSampleRate`
 : オプション<br/>
 **タイプ**: 数値<br/>
 **デフォルト**: `100`<br/>
@@ -366,26 +567,6 @@ Logs Browser SDK を使用している場合、一致するコンフィギュレ
 **種類**: ブール値<br/>
 **デフォルト**: `false`<br/>
 安全なクロスサイトセッション Cookie を使用します。これにより、サイトが別のサイトから読み込まれたときに、RUM ブラウザ SDK を実行できます (iframe)。`useSecureSessionCookie` を意味します。
-
-初期化コマンドを呼び出し、追跡を開始します。
-
-```
-init(configuration: {
-    applicationId: string,
-    clientToken: string,
-    site?: string,
-    sampleRate?: number,
-    silentMultipleInit?: boolean,
-    trackInteractions?: boolean,
-    service?: string,
-    env?: string,
-    version?: string,
-    allowedTracingOrigins?: Array<String|Regexp>,
-    trackSessionAcrossSubdomains?: boolean,
-    useSecureSessionCookie?: boolean,
-    useCrossSiteSessionCookie?: boolean,
-})
-```
 
 ### タグ付け
 
@@ -485,4 +666,4 @@ window.DD_RUM && window.DD_RUM.getInternalContext() // { session_id: "xxxx", app
 [18]: https://docs.datadoghq.com/ja/real_user_monitoring/session_replay/privacy_options
 [19]: https://docs.datadoghq.com/ja/getting_started/tagging/using_tags
 [20]: https://docs.datadoghq.com/ja/real_user_monitoring/frustration_signals/
-[21]: https://docs.datadoghq.com/ja/real_user_monitoring/guide/sampling-browser-and-browser-premium/
+[21]: https://docs.datadoghq.com/ja/real_user_monitoring/guide/sampling-browser-plans/

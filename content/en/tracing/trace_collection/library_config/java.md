@@ -46,7 +46,7 @@ Your application version (for example, 2.5, 202003181415, 1.3-alpha). Available 
 `dd.logs.injection`
 : **Environment Variable**: `DD_LOGS_INJECTION`<br>
 **Default**: `true`<br>
-Enabled automatic MDC key injection for Datadog trace and span IDs. See [Advanced Usage][2] for details.
+Enabled automatic MDC key injection for Datadog trace and span IDs. See [Advanced Usage][15] for details.
 
 `dd.trace.config`
 : **Environment Variable**: `DD_TRACE_CONFIG`<br>
@@ -72,7 +72,7 @@ Hostname for where to send traces to. If using a containerized environment, conf
 `dd.trace.agent.port`
 : **Environment Variable**: `DD_TRACE_AGENT_PORT`<br>
 **Default**: `8126`<br>
-Port number the Agent is listening on for configured host.
+The port number the Agent is listening on for configured host. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `dd.trace.agent.port` or `dd.trace.agent.url` must match it.
 
 `dd.trace.agent.unix.domain.socket`
 : **Environment Variable**: `DD_TRACE_AGENT_UNIX_DOMAIN_SOCKET`<br>
@@ -82,7 +82,7 @@ This can be used to direct trace traffic to a proxy, to later be sent to a remot
 `dd.trace.agent.url`
 : **Environment Variable**: `DD_TRACE_AGENT_URL`<br>
 **Default**: `null`<br>
-The URL to send traces to. This can start with `http://` to connect using HTTP or with `unix://` to use a Unix Domain Socket. When set this takes precedence over `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`. Available for versions 0.65+.
+The URL to send traces to. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `dd.trace.agent.port` or `dd.trace.agent.url` must match it. The URL value can start with `http://` to connect using HTTP or with `unix://` to use a Unix Domain Socket. When set this takes precedence over `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`. Available for versions 0.65+.
 
 `dd.trace.agent.timeout`
 : **Environment Variable**: `DD_TRACE_AGENT_TIMEOUT`<br>
@@ -183,7 +183,7 @@ A range of errors can be accepted. By default 5xx status codes are reported as e
 
 `dd.http.server.tag.query-string`
 : **Environment Variable**: `DD_HTTP_SERVER_TAG_QUERY_STRING`<br>
-**Default**: `false`<br>
+**Default**: `true`<br>
 When set to `true` query string parameters and fragment get added to web server spans
 
 `dd.trace.enabled`
@@ -253,6 +253,10 @@ When `false`, informational startup logging is disabled. Available for versions 
 **Default**: `false`<br>
 When `true`, user principal is collected. Available for versions 0.61+.
 
+`dd.instrumentation.telemetry.enabled`
+: **Environment Variable**: `DD_INSTRUMENTATION_TELEMETRY_ENABLED`<br>
+**Default**: `true`<br>
+When `true`, the tracer collects [telemetry data][14]. Available for versions 0.104+. Defaults to `true` for versions 0.115+.
 
 **Note**:
 
@@ -426,3 +430,6 @@ If multiple extraction styles are enabled extraction attempt is done on the orde
 [8]: /tracing/compatibility_requirements/java#disabling-integrations
 [9]: /integrations/java/?tab=host#metric-collection
 [10]: https://github.com/openzipkin/b3-propagation
+[13]: /agent/guide/network/#configure-ports
+[14]: /tracing/configure_data_security/#telemetry-collection
+[15]: /agent/logs/advanced_log_collection

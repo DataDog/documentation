@@ -26,6 +26,33 @@ type: multi-code-lang
 自動インスツルメンテーションとセットアップの説明をまだ読んでいない場合は、<a href="/tracing/setup/php/">PHP セットアップの説明</a>から始めてください。Datadog が Web フレームワークを公式にサポートしていない場合でも、手動インスツルメンテーションを行う必要がない場合があります。詳しくは、<a href="/tracing/setup/php/#automatic-instrumentation">自動インスツルメンテーション</a>を参照してください。
 </div>
 
+## アノテーション
+
+PHP 8 を使用している場合、トレーサーの v0.84 以降では、コードに属性を追加してインスツルメンテーションを行うことができます。これは、[コードで書かれたカスタムインスツルメンテーション](#writing-custom-instrumentation)のより軽い代替方法です。例えば、Datadog のメソッドに `#[DDTrace\Trace]` 属性を追加すると、Datadog がメソッドをトレースします。 
+
+```php
+<?php
+class Server {
+    #[DDTrace\Trace(name: "spanName", resource: "resourceName", type: "Custom", service: "myService", tags: ["aTag" => "aValue"]))]
+    static function process($arg) {}
+
+    #[DDTrace\Trace]
+    function get() {
+      Foo::simple(1);
+    }
+}
+```
+
+以下の引数を指定することができます。
+
+- `$name`: スパンに割り当てる操作名。デフォルトは関数名です。
+- `$resource`: スパンに割り当てるリソース。
+- `$type`: スパンに割り当てるタイプ。
+- `$service`: スパンに割り当てるサービス。デフォルトは、デフォルトまたは継承されたサービス名です。
+- `$tags`: スパンに割り当てるタグ。
+- `$recurse`: 再帰呼び出しをトレースするかどうか。
+- `$run_if_limited`: 関数を制限モードでトレースするかどうか。(例: スパン制限超過時)
+
 ## カスタムインスツルメンテーションの記述
 
 独自のインスツルメンテーションを作成する必要がある場合、以下のサンプルアプリケーションを検討し、コーディング例を見ながら進めてください。
@@ -706,7 +733,7 @@ resources.ddtrace = true
 
 これは[推奨されませんが][7]、PHP 7.x を使用している場合、バージョン 7 より前のアプリでは、このキャッシュメカニズムを使うことができます。この場合、Datadog は Composer ファイルに `datadog/dd-trace` を追加する方法ではなく、[OpenTracing][8] API の使用を推奨します。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

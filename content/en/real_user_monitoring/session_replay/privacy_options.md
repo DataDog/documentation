@@ -36,11 +36,11 @@ datadogRum.init({
     //  service: 'my-web-application',
     //  env: 'production',
     //  version: '1.0.0',
-    sampleRate: 100,
+    sessionSampleRate: 100,
     sessionReplaySampleRate: 100,
     trackResources: true,
     trackLongTasks: true,
-    trackInteractions: true,
+    trackUserInteractions: true,
     defaultPrivacyLevel: 'mask-user-input' | 'mask' | 'allow'
 });
 
@@ -55,14 +55,14 @@ Masks most form fields such as inputs, text areas, and checkbox values while rec
 
 {{< img src="real_user_monitoring/session_replay/mask-user-input.png" alt="Mask user input mode" style="width:70%;">}}
 
-**Note:** By default, `mask-user-input` is the privacy setting when you enable Session Replay.
+**Note:** By default, `mask-user-input` is the privacy setting when you enable Session Replay, which means all input fields are automatically masked.
 
 ### Mask mode
-
-Masks all HTML text, user input, images, and links. Text on your application is replaced with `X`, rendering the page into a wireframe.
+Setting `defaultPrivacyLevel` to `mask` mode will mask all HTML text, user input, images, and links. Text on your application is replaced with `X`, rendering the page into a wireframe.
 
 {{< img src="real_user_monitoring/session_replay/mask.png" alt="Mask mode" style="width:70%;">}}
 
+**Note**: Masked data is not stored on Datadog servers.
 ### Allow mode
 
 Records everything unmasked.

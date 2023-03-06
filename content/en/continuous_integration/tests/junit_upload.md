@@ -373,7 +373,7 @@ To change `test.suite` tags from `value 1`, `value 2` to `SomeTestSuiteClass`, `
 
 {{< code-block lang="bash" >}}
 datadog-ci junit upload --service service_name \
-  --xpath-tag test.suite=/testcase/@aclassname ./junit.xml
+  --xpath-tag test.suite=/testcase/@classname ./junit.xml
 {{< /code-block >}}
 
 {{% /tab %}}
