@@ -15,7 +15,7 @@ assets:
     source_type_name: backstage
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Roadie
   sales_email: oss@roadie.io
   support_email: oss@roadie.io
 categories:

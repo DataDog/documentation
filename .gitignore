@@ -20,6 +20,8 @@ content/en/api/**/*.ts
 content/en/api/tsconfig.json
 
 # Ignoring all automated content
+temp
+
 # Developers/integrations
 content/en/developers/integrations/*.md
 content/en/developers/datadog_apps.md
