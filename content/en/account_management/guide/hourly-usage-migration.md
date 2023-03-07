@@ -35,6 +35,8 @@ The families and usage types:
     * `app_sec_host_count`
 - **audit_logs**
     * `lines_indexed`
+- **audit_trail**
+    * `enabled`
 - **serverless**
     * `func_count`
     * `invocations_sum`
