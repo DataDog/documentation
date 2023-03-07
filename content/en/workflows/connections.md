@@ -42,6 +42,10 @@ Connections support the following example use cases:
 - The permissions needed are not supported by the integration, such as write permissions on AWS.
 - You want granular access control, for example restricting user access to certain workflows.
 
+### Connection security considerations
+
+Before you create a connection, think about the permissions needed to fulfill the required task and grant the connection only the necessary permissions to fulfill that task. In addition, the connection should be restricted to only the people who need to use it.
+
 ## Work with connections
 
 ### View connections
