@@ -39,7 +39,7 @@ Datadog publishes instrumentation libraries images on gcr.io, Docker Hub, and AW
 | JavaScript | [gcr.io/datadoghq/dd-lib-js-init][8]     | [hub.docker.com/r/datadog/dd-lib-js-init][9]     | [gallery.ecr.aws/datadog/dd-lib-js-init][10]     |
 | Python     | [gcr.io/datadoghq/dd-lib-python-init][11] | [hub.docker.com/r/datadog/dd-lib-python-init][12] | [gallery.ecr.aws/datadog/dd-lib-python-init][13] |
 
-The `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_CONTAINER_REGISTRY` environment variable in the Datadog Cluster Agent configuration specifies the registry used by the Admission Controller. The default value is `grc.io/datadoghq`.
+The `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_CONTAINER_REGISTRY` environment variable in the Datadog Cluster Agent configuration specifies the registry used by the Admission Controller. The default value is `gcr.io/datadoghq`.
 
 You can pull the tracing library from a different registry by changing it to `docker.io/datadog`, `public.ecr.aws/datadog`, or another URL if you are hosting the images in a local container registry.
 
@@ -228,7 +228,7 @@ When both the Agent and your services are running on a host, real or virtual, Da
 
 ## Install the language and your app
 
-1. For Java applications, ensure you have a JDK installed, for example:
+1. For Java applications, ensure you have a JDK or JRE installed, for example:
    ```sh
    sudo apt install openjdk-17-jdk -y
    ```
@@ -614,7 +614,7 @@ Any newly started processes are intercepted and the specified instrumentation li
    enabled=1
    gpgcheck=1
    repo_gpgcheck=1
-   gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.publichttps://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.publichttps://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+   gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
    ```
    **Note**: Due to a [bug in dnf][5], on RedHat/CentOS 8.1 set `repo_gpgcheck=0` instead of `1`.
 

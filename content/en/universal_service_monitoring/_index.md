@@ -691,8 +691,17 @@ For optional HTTPS support, also add:
 ]
 ```
 
+If you are using load balancers with your services, enable additional cloud integrations to allow Universal Service Monitoring to discover cloud-managed entities.
+* Install the [AWS Integration][2] for visibility in AWS Load Balancer. You must also enable ENI and EC2 metric collection.
+
+Then, add the following tags to each load balancer:
+```shell
+ENV=<env>
+SERVICE=<service>
+```
 
 [1]: /containers/amazon_ecs/?tab=awscli#run-the-agent-as-a-daemon-service
+[2]: /integrations/amazon_web_services/
 {{% /tab %}}
 
 {{% tab "Windows" %}}
@@ -792,6 +801,6 @@ DD_SYSTEM_PROBE_NETWORK_HTTP_REPLACE_RULES=[{"pattern":"<drop regex>","repl":""}
 [1]: /getting_started/tagging/unified_service_tagging
 [2]: /tracing/services/deployment_tracking/
 [3]: /tracing/service_catalog/
-[4]: /monitors/create/types/apm/?tab=apmmetrics
+[4]: /monitors/types/apm/?tab=apmmetrics
 [5]: /dashboards/
 [6]: /monitors/service_level_objectives/metric/

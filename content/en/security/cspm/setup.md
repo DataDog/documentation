@@ -1,8 +1,9 @@
 ---
-title: Getting Started with CSPM
+title: Setting Up CSPM
 kind: documentation
 aliases:
   - /security_platform/cspm/getting_started
+  - /security/cspm/getting_started
 further_reading:
 - link: "security/default_rules"
   tag: "Documentation"
@@ -103,6 +104,8 @@ Use one of the following methods to enable CSPM for your GCP projects:
 2. Follow the [in-app instructions][3] to activate CSPM for your account.
 3. On the **Setup & Configuration** > **Cloud Providers** tab, click the **[GCP][4]** tile.
 4. Enable CSPM for your GCP projects by turning on the **CSPM Enabled** toggle.
+
+**Note**: If you do not see any data on the CSPM overview page, you may not have set up your GCP integration correctly. See the [GCP metric collection][2] instructions for more information.
 
 ### GCP integration tile
 

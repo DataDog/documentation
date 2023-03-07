@@ -6,6 +6,8 @@ kind: faq
 title: 補間とフィル修飾子
 ---
 
+{{< img src="metrics/guide/graph_fill_example.png" alt="グラフオプションの Fill() 関数" style="width:100%;" >}}
+
 ## なぜ補間なのか？
 
 補間は、メトリクス系列の任意の大きなギャップを埋めることではなく、いくつかの系列を一緒に揃え、ソース間で集計を実行できるようにすることです。

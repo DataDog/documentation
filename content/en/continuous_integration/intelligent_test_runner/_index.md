@@ -28,7 +28,7 @@ By only running tests on relevant code, when tests fail, it is likely a legitima
 During the beta of Intelligent Test Runner there are certain limitations:
 
 - Some of the environment variables required in the following sections are only required during the beta.
-- Intelligent Test Runner only works without the Datadog Agent. The configuration steps in this page cause the Datadog Library to send data directly to the backend without going through the Agent. If you are currently using the Agent, you will lose correlation with host metrics.
+- Intelligent Test Runner can work Agentless or using the Datadog Agent. The configuration steps in this page are for Agentless. To use ITR with the Datadog Agent, the minimum required versions are v6.40+/v7.40+.
 - There are known limitations in the current implementation of Intelligent Test Runner that can cause it to skip tests that should be run. Intelligent Test Runner is not able to detect:
   - Changes in library dependencies.
   - Changes in compiler options.
@@ -45,12 +45,11 @@ Prior to setting up Intelligent Test Runner, you must have finished setting up [
 
 To enable Intelligent Test Runner, the following environment variables need to be set:
 
-`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Required)
+`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Required only if you're using `dd-trace<2.23.0` or `dd-trace<3.10`)
 : Enables or disables Agentless mode.<br/>
 **Default**: `false`<br/>
-**Note**: Required only during Beta
 
-`DD_API_KEY` (Required)
+`DD_API_KEY` (Required if Agentless is enabled)
 : The [Datadog API key][2] used to upload the test results.<br/>
 **Default**: `(empty)`
 
@@ -63,11 +62,6 @@ To enable Intelligent Test Runner, the following environment variables need to b
 **Default**: `datadoghq.com`<br/>
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
 
-`DD_CIVISIBILITY_GIT_UPLOAD_ENABLED=true` (Required)
-: Flag to enable git metadata upload.<br/>
-**Default**: `false`<br/>
-**Note**: Required only during Beta
-
 `DD_CIVISIBILITY_ITR_ENABLED=true` (Required)
 : Flag to enable test skipping. <br/>
 **Default**: `false`<br/>
@@ -75,7 +69,7 @@ To enable Intelligent Test Runner, the following environment variables need to b
 
 After setting these environment variables, run your tests as you normally do:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app DD_CIVISIBILITY_AGENTLESS_ENABLED=true DD_API_KEY=$API_KEY DD_CIVISIBILITY_GIT_UPLOAD_ENABLED=true DD_CIVISIBILITY_ITR_ENABLED=true yarn test
 {{< /code-block >}}
 
@@ -101,12 +95,11 @@ Intelligent test runner for Javascript skips entire _test suites_ (test files) r
 
 To enable Intelligent Test Runner, the version of the `dd-trace` tool must be >= 2.22.0 (execute `dd-trace --version` to get the version of the tool) and the following environment variables must be set:
 
-`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Required)
+`DD_CIVISIBILITY_AGENTLESS_ENABLED`
 : Enables or disables Agentless mode.<br/>
 **Default**: `false`<br/>
-**Note**: Required only during Beta
 
-`DD_API_KEY` (Required)
+`DD_API_KEY` (Required if Agentless is enabled)
 : The [Datadog API key][2] used to upload the test results.<br/>
 **Default**: `(empty)`
 
@@ -126,7 +119,7 @@ After setting these environment variables, run your tests as you normally do by 
 {{% tab "dotnet test" %}}
 
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
 {{< /code-block >}}
 
@@ -135,7 +128,7 @@ dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
 {{% tab "VSTest.Console" %}}
 
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- VSTest.Console.exe {test_assembly}.dll
 {{< /code-block >}}
 

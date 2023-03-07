@@ -11,6 +11,7 @@ author:
 categories:
 - notification
 - 自動化
+- マーケットプレイス
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -38,16 +39,17 @@ public_title: Zebrium Root Cause as a Service
 short_description: Zebrium は、問題の根本原因をダッシュボードに直接表示します
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Category::Notification
   - Category::Automation
+  - Category::Marketplace
   - Offering::Software License
   configuration: README.md#Setup
   description: Zebrium は、問題の根本原因をダッシュボードに直接表示します

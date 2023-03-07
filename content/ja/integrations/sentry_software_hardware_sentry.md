@@ -112,22 +112,23 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Hardware Sentry
+  uninstallation: README.md#Uninstallation
 ---
 
 
 
 ## 概要
 
-**[Hardware Sentry](https://www.sentrysoftware.com/products/hardware-sentry-opentelemetry-collector.html)** は、データセンター内のサーバー、ネットワークスイッチ、ストレージシステムのハードウェアコンポーネントの監視に特化した Agent (*OpenTelemetry Collector*) で、Datadog 用のダッシュボードやモニターのコレクションとパッケージ化されています。
+**[Hardware Sentry](https://www.sentrysoftware.com/products/hardware-sentry.html)** は、データセンター内のサーバー、ネットワークスイッチ、ストレージシステムのハードウェアコンポーネントの監視に特化した Agent で、Datadog 用のダッシュボードやモニターのコレクションとパッケージ化されています。
 
 ### ハードウェアの監視
 
 **Hardware Sentry** は、サーバー、ネットワークスイッチ、ストレージシステムの物理的な健全性を報告することができる監視 Agent です。定期的にメトリクスを収集し、各プロセッサ、コントローラ、ディスク、電源の状態、温度、ファンの回転数、ネットワークカードのリンク状態や速度などを報告します。
 
 * **リモート**: SNMP、WBEM、WMI、SSH、IPMI、REST API などを通じて、1 つの Agent で数百のシステムを監視することができます。
-* **マルチプラットフォーム**: 100 以上のプラットフォームを 250 以上のコネクターでサポート済み (Cisco、Dell EMC、HP、Huawei、IBM、Lenovo、NetApp、Oracle、Pure など。[全リストを見る](https://sentrysoftware.com/docs/hws-otel-collector/latest/platform-requirements.html))
+* **マルチプラットフォーム**: 100 以上のプラットフォームを 250 以上のコネクターでサポート済み (Cisco、Dell EMC、HP、Huawei、IBM、Lenovo、NetApp、Oracle、Pure など。[全リストを見る](https://www.sentrysoftware.com/docs/hws-doc/latest/platform-requirements.html))
 * **シンプル**: システムの監視は、ホスト名または IP アドレスと認証情報を指定する最小限の構成作業で済みます。**Hardware Sentry** は、利用可能なインスツルメンテーションを自動的に検出し、すぐに監視を開始します。
-* **正規化**: 必要な情報はすべて、Datadog の標準化されたメトリクスを通じて報告されます。例えば、同じ `hw.temperature` メトリクスは、NetApp ファイラー、HP BladeSystem、Windows を実行しているDell PowerEdge、Linux を実行している Cisco UCS、またはその他のプラットフォームの温度を表すために使用されています。これらのメトリクスは、[OpenTelemetry のセマンティック規約](https://github.com/open-telemetry/opentelemetry-specification/tree/main/specification/metrics/semantic_conventions)に従っています。
+* **正規化**: 必要な情報はすべて、Datadog の標準化されたメトリクスを通じて報告されます。例えば、同じ `hw.temperature` メトリクスは、NetApp ファイラー、HP BladeSystem、Windows を実行している Dell PowerEdge、Linux を実行している Cisco UCS、またはその他のプラットフォームの温度を表すために使用されています。これらのメトリクスは、[OpenTelemetry のセマンティック規約] (https://opentelemetry.io/docs/reference/specification/metrics/semantic_conventions/hardware-metrics/) に従っています。
 
 **Hardware Sentry** は、プロセッサ、メモリモジュール、ディスク、ネットワークカード、コントローラ、電源、ファン、温度センサーなどの障害を検出・予測するための定義済みモニターを搭載しています。
 
@@ -149,7 +150,7 @@ tile:
 
 ## サポート
 
-Datadog Marketplace を通じた Hardware Sentry のサブスクリプションにより、[Sentry Desk](https://www.sentrysoftware.com/desk) が提供するすべてのサービスにアクセスすることができるようになります。
+Datadog Marketplace を通じた **Hardware Sentry** のサブスクリプションにより、[Sentry Desk] (https://www.sentrysoftware.com/desk) が提供するすべてのサービスにアクセスすることができるようになります。
 
 * [Jira Service Management](https://sentrydesk.atlassian.net/servicedesk/customer/portals) による技術サポート
 * ナレッジベース

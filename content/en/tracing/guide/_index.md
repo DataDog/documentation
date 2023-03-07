@@ -45,6 +45,13 @@ These tutorials walk you through setting up a sample multi-service application w
 {{< /whatsnext >}}
 <br>
 
+{{< whatsnext desc="Ingestion Sampling Configuration" >}}
+    {{< nextlink href="/tracing/guide/trace_ingestion_volume_control/" >}}Control span ingestion volume with Ingestion Mechanisms{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/guide/ingestion_sampling_with_opentelemetry/" >}}Ingestion Sampling with OpenTelemetry{{< /nextlink >}}
+    {{< nextlink href="/tracing/guide/ingestion_sampling_use_cases/" >}}Ingestion Sampling Use Cases{{< /nextlink >}}
+{{< /whatsnext >}}
+<br>
+
 {{< whatsnext desc="Tracing Guides" >}}
     {{< nextlink href="tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm" >}}Configure Apdex Score by Service{{< /nextlink >}}
     {{< nextlink href="tracing/guide/configuring-primary-operation" >}}Primary Operations in Services {{< /nextlink >}}
@@ -57,6 +64,4 @@ These tutorials walk you through setting up a sample multi-service application w
     {{< nextlink href="tracing/guide/setting_primary_tags_to_scope/" >}}Setting Primary Tags To Scope{{< /nextlink >}}
     {{< nextlink href="tracing/guide/serverless_enable_aws_xray/" >}}Decide When to Use Datadog APM and AWS X-Ray {{< /nextlink >}}
     {{< nextlink href="/tracing/guide/setting_up_apm_with_cpp/" >}}Setting Up APM with C++{{< /nextlink >}}
-    {{< nextlink href="/tracing/guide/trace_ingestion_volume_control/" >}}Control span ingestion volume with Ingestion Mechanisms{{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/guide/ingestion_sampling_with_opentelemetry/" >}}Ingestion Sampling with OpenTelemetry{{< /nextlink >}}
 {{< /whatsnext >}}

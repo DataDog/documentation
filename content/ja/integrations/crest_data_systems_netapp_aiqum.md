@@ -59,13 +59,13 @@ public_title: NetApp AIQUM
 short_description: NetApp AIQUM クラスターのパフォーマンスと使用量の監視
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Category::Marketplace
   - Category::Data Store

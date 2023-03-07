@@ -1,9 +1,10 @@
 ---
-title: Getting Started with Cloud Workload Security
+title: Setting up Cloud Workload Security
 kind: documentation
 description: "Follow the setup and installation instructions to get started with Cloud Workload Security."
 aliases:
   - /security_platform/cloud_workload_security/getting_started
+  - /security/cloud_workload_security/getting_started
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-runtime-security/"
   tag: "Blog"

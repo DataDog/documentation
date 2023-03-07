@@ -59,13 +59,13 @@ public_title: NetApp ESeries SANtricity
 short_description: システムのパフォーマンスと構成を監視します。
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Category::Marketplace
   - Category::Data Store

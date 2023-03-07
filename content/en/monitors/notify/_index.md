@@ -184,7 +184,7 @@ Message variables auto-populate with a randomly selected group based on the scop
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/create/configuration
+[1]: /monitors/configuration
 [2]: /monitors/notify/variables/#tag-variables
 [3]: http://daringfireball.net/projects/markdown/syntax
 [4]: /monitors/notify/variables/

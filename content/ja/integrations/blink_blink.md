@@ -21,6 +21,7 @@ categories:
 - 自動化
 - クラウド
 - セキュリティ
+- マーケットプレイス
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -58,6 +59,7 @@ tile:
   - Category::Automation
   - Category::Cloud
   - Category::Security
+  - Category::Marketplace
   - Offering::Software License
   configuration: README.md#Setup
   description: Blink は、セキュリティとインフラストラクチャーのためのノーコード自動化プラットフォームです

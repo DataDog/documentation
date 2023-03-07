@@ -41,12 +41,12 @@ Investigate security signals in the [Security Signals Explorer][8]. View detaile
 ## Get started
 
 {{< whatsnext >}}
-  {{< nextlink href="/security/cloud_workload_security/getting_started">}}Complete setup and configuration{{< /nextlink >}}
+  {{< nextlink href="/security/cloud_workload_security/setup">}}Complete setup and configuration{{< /nextlink >}}
   {{< nextlink href="/security/cloud_workload_security/workload_security_rules">}}Learn about Cloud Workload Security detection rules{{< /nextlink >}}
   {{< nextlink href="/security/default_rules/#cat-workload-security">}}Start using out-of-the-box Cloud Workload Security detection rules{{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: /security/cloud_workload_security/getting_started/?tab=kubernetes#requirements
+[1]: /security/cloud_workload_security/setup/?tab=kubernetes#requirements
 [2]: /agent/
 [3]: /security/notifications/
 [4]: /security/notifications/#notification-channels

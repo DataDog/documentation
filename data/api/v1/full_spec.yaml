@@ -2681,6 +2681,7 @@ components:
       - audit
       - events
       - ci_tests
+      - ci_pipelines
       example: logs
       type: string
       x-enum-varnames:
@@ -2693,6 +2694,7 @@ components:
       - AUDIT
       - EVENTS
       - CI_TESTS
+      - CI_PIPELINES
     FormulaAndFunctionMetricAggregation:
       description: The aggregation methods available for metrics queries.
       enum:
@@ -3828,6 +3830,7 @@ components:
       - invocations_usage
       - npm_host_usage
       - profiled_container_usage
+      - profiled_fargate_usage
       - profiled_host_usage
       - snmp_usage
       - estimated_rum_sessions_usage
@@ -3858,6 +3861,7 @@ components:
       - INVOCATIONS_USAGE
       - NPM_HOST_USAGE
       - PROFILED_CONTAINER_USAGE
+      - PROFILED_FARGATE_USAGE
       - PROFILED_HOST_USAGE
       - SNMP_USAGE
       - ESTIMATED_RUM_SESSIONS_USAGE
@@ -4295,8 +4299,11 @@ components:
       enum:
       - logs_stream
       - audit_stream
+      - ci_pipeline_stream
+      - ci_test_stream
       - rum_issue_stream
       - apm_issue_stream
+      - logs_issue_stream
       - logs_pattern_stream
       - logs_transaction_stream
       - event_stream
@@ -4305,8 +4312,11 @@ components:
       x-enum-varnames:
       - LOGS_STREAM
       - AUDIT_STREAM
+      - CI_PIPELINE_STREAM
+      - CI_TEST_STREAM
       - RUM_ISSUE_STREAM
       - APM_ISSUE_STREAM
+      - LOGS_ISSUE_STREAM
       - LOGS_PATTERN_STREAM
       - LOGS_TRANSACTION_STREAM
       - EVENT_STREAM
@@ -7301,6 +7311,8 @@ components:
       - npm_host_percentage
       - profiled_container_usage
       - profiled_container_percentage
+      - profiled_fargate_usage
+      - profiled_fargate_percentage
       - profiled_host_usage
       - profiled_host_percentage
       - snmp_usage
@@ -7360,6 +7372,8 @@ components:
       - NPM_HOST_PERCENTAGE
       - PROFILED_CONTAINER_USAGE
       - PROFILED_CONTAINER_PERCENTAGE
+      - PROFILED_FARGATE_USAGE
+      - PROFILED_FARGATE_PERCENTAGE
       - PROFILED_HOST_USAGE
       - PROFILED_HOST_PERCENTAGE
       - SNMP_USAGE
@@ -7581,6 +7595,14 @@ components:
           type: number
         profiled_container_usage:
           description: The profiled container usage by tag(s).
+          format: double
+          type: number
+        profiled_fargate_percentage:
+          description: The percentage of profiled Fargate task usage by tag(s).
+          format: double
+          type: number
+        profiled_fargate_usage:
+          description: The profiled Fargate task usage by tag(s).
           format: double
           type: number
         profiled_host_percentage:
@@ -22079,14 +22101,14 @@ paths:
         name: metric_query
         schema:
           type: string
-      - description: The POSIX timestamp of the start of the query.
+      - description: The POSIX timestamp of the start of the query in seconds.
         in: query
         name: start
         required: true
         schema:
           format: int64
           type: integer
-      - description: The POSIX timestamp of the end of the query.
+      - description: The POSIX timestamp of the end of the query in seconds.
         in: query
         name: end
         required: true
