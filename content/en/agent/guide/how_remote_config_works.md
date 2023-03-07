@@ -15,7 +15,7 @@ further_reading:
 - link: "/dynamic_instrumentation/?tab=configurationyaml#enable-remote-configuration"
   tag: "Documentation"
   text: "Dynamic Instrumentation"
-- link: "/security/cloud_workload_security/getting_started/?tab=kubernetes#overview"
+- link: "/security/cloud_workload_security/setup/?tab=kubernetes#overview"
   tag: "Documentation"
   text: "Getting Started with Cloud Workload Security"
 
