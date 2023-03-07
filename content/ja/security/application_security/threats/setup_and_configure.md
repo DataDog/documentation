@@ -27,7 +27,7 @@ title: セットアップと構成
 
 ## 互換性
 
-{{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
+{{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python,serverless" >}}
 
 {{< programming-lang lang="java" >}}
 
@@ -231,6 +231,51 @@ Flask では、クエリ文字列のサポートはありません。
 
 {{< /programming-lang >}}
 
+{{< programming-lang lang="serverless" >}}
+
+<div class="alert alert-info">AWS Lambda の ASM サポートはベータ版です。脅威検出は Datadog の Lambda 拡張機能を利用します。<br><br>ご希望の技術がここに掲載されていませんか？Datadog は継続的にサポートを追加しています。<a href="https://forms.gle/gHrxGQMEnAobukfn7">この短いフォームに必要事項を記入して、詳細を送信してください</a>。</div>
+
+
+### 対応クラウド環境
+
+- AWS Lambda (ベータ版)
+
+### バージョン依存関係
+
+- Lambda 拡張機能のバージョン: `39`
+- サーバーレスプラグインのバージョン: `5.20.0`
+
+### 対応言語とその要件
+
+ノード
+: webpack や esbuild を使ってバンドルしている場合は、[Datadog ライブラリを external としてマーク][4]してください。
+
+Python
+: 
+
+Java
+: 分散型トレーシングでサーバーレスアプリケーションを完全にインスツルメントするには、Java Lambda 関数が Java 8 Corretto (`java8.al2`) または Java 11 (`java11`) ランタイムを使用し、少なくとも 1024MB のメモリを搭載している必要があります。
+: Datadog Lambda レイヤーの `dd-trace-java:4` (またはそれ以前) と `Datadog-Extension:24` (またはそれ以前) を使用する場合、[Java Lambda 関数のインスツルメンテーションのアップグレード][3]の手順に従ってください。
+
+Go
+: 
+
+.NET
+: 
+
+### ASM の機能
+以下の ASM 機能は、Lambda 関数ではサポートされていません。
+ - ASM Risk Management
+ - IP、ユーザー、不審リクエストの遮断
+ - 1 クリックで ASM を有効にする
+
+
+[2]: /ja/serverless/guide/datadog_forwarder_python
+[3]: /ja/serverless/guide/upgrade_java_instrumentation
+[4]: /ja/serverless/guide/serverless_tracing_and_webpack/
+
+{{< /programming-lang >}}
+
 {{< /programming-lang-wrapper >}}
 
 ## クライアント IP ヘッダーの構成
@@ -241,18 +286,18 @@ ASM は自動的に、`X-Forwarded-For` のようなよく知られたヘッダ�
 
 多くの重大な攻撃は、最も機密性の高いエンドポイントにアクセスできる認証されたユーザーによって実行されます。疑わしいセキュリティアクティビティを生成している悪質なユーザーを特定するには、標準化されたユーザータグを使用してサービスをインスツルメンテーションすることにより、ユーザー情報をトレースに追加します。ルートスパンにカスタムタグを追加したり、インスツルメンテーション関数を使用したりすることができます。詳細については、[ユーザーアクティビティの追跡][1]を参照してください。
 
-## 特定の値を検出のトリガーから除外する
+## 特定のパラメーターを検出のトリガーから除外する
 
 ASM のシグナル、つまり不審なリクエストが誤検出される場合があります。例えば、ASM が同じ不審なリクエストを繰り返し検出し、シグナルが発生したが、そのシグナルは確認され、脅威ではないことがあります。
 
-ルールからイベントを無視する除外フィルターを設定することで、このようなノイズの多いシグナルパターンを排除し、正当な疑わしいリクエストに焦点を当てることができます。
+パスリストにエントリーを追加して、ルールからイベントを無視することで、ノイズの多いシグナルパターンを排除し、正当に疑わしいリクエストに焦点を当てることができます。
 
-除外フィルターを作成するには、次のいずれかを行います。
+パスリストエントリーを追加するには、次のいずれかを実行します。
 
-- [ASM Signals][4] のシグナルをクリックし、左上にある **Create Exclusion Filter** ボタンをクリックします。この方法では、対象となるサービスに対するフィルタークエリが自動的に生成されます。
-- [Exclusion Filters Configuration][5] に移動し、独自のフィルタークエリに基づいて新しい除外フィルターを手動で構成します。
+- [ASM シグナル][4]のシグナルをクリックし、**Add to passlist** という提案アクションの横にある **Add Entry** というリンクをクリックします。この方法では、対象となるサービスのエントリーが自動的に追加されます。
+- [パスリスト構成][5]に移動し、独自の基準に基づいて新しいパスリストエントリーを手動で構成します。
 
-**注**: 除外フィルターに一致するリクエスト (トレース) は請求されません。
+**注**: パスリストエントリーに一致するリクエスト (トレース) は請求されません。
 
 ## データセキュリティへの配慮
 
@@ -317,5 +362,5 @@ ASM を無効にするには、アプリケーションの構成から `DD_APPSE
 [2]: https://github.com/google/re2/wiki/Syntax
 [3]: /ja/tracing/configure_data_security/
 [4]: https://app.datadoghq.com/security/appsec/signals
-[5]: https://app.datadoghq.com/security/appsec/exclusions
+[5]: https://app.datadoghq.com/security/configuration/asm/passlist
 [6]: /ja/help/

@@ -63,13 +63,13 @@ public_title: Nutanix インテグレーション
 short_description: Nutanix リソースの使用量を監視して、お使いの環境をより良く理解しましょう。
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Category::Marketplace
   - Category::Cloud
