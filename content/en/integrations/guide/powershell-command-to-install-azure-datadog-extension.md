@@ -3,7 +3,13 @@ title: Commands to install the Azure Datadog Extension
 kind: guide
 aliases:
   - "/integrations/faq/powershell-command-to-install-azure-datadog-extension"
+further_reading:
+- link: "https://www.datadoghq.com/blog/migrate-to-azure-with-the-microsoft-cloud-adoption-framework/"
+  tag: "Blog"
+  text: "Successfully migrate to Azure with the Microsoft Cloud Adoption Framework and Datadog"
 ---
+
+## Install on Azure
 
 Datadog provides an Azure extension to assist with Agent deployment on Azure instances:
 
@@ -11,14 +17,15 @@ Datadog provides an Azure extension to assist with Agent deployment on Azure ins
 * [Azure integration documentation][2]
 
 An alternative to the GUI installation is the command line.
-To run the Datadog Agent in your Azure instances as an extension, use the following syntaxes:
+To run the Datadog Agent in your Azure instances as an extension, use the command that matches your environment. Replace `<SITE_PARAMETER>` with your Datadog account **site parameter** value in the [Datadog sites page][3], and `<DATADOG_API_KEY>` with your [Datadog API key][4]. 
 
 {{< tabs >}}
 {{% tab "Windows" %}}
 
 ```powershell
-Set-AzureVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "DatadogWindowsAgent" -TypeHandlerVersion "5.0" -Settings @{"site" = "datadoghq.com"; "agentVersion" = "latest"} -ProtectedSettings @{"api_key" = "<YOUR_DATADOG_API_KEY>"} -DisableAutoUpgradeMinorVersion
+Set-AzureVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "DatadogWindowsAgent" -TypeHandlerVersion "5.0" -Settings @{"site" = "<SITE_PARAMETER>"; "agentVersion" = "latest"} -ProtectedSettings @{"api_key" = "<DATADOG_API_KEY>"} -DisableAutoUpgradeMinorVersion
 ```
+
 More information on the syntax to set Azure instance extensions can be found in the [Azure Extension Set-AzureVMExtension documentation][1].
 
 The Azure Extension can accept both normal settings and protected settings.
@@ -47,7 +54,7 @@ The Datadog Windows Agent Azure Extension will check that the `agentConfiguratio
 The Datataog Agent configuration should be created from the `%PROGRAMDATA%\Datadog` folder.
 
 ```powershell
-Set-AzVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "DatadogWindowsAgent" -TypeHandlerVersion "6.4" -Settings @{"site" = "datadoghq.com"; "agentConfiguration" = "https://<CONFIGURATION_BLOB>.blob.core.windows.net/<FILE_PATH>.zip"; "agentConfigurationChecksum" = "<SHA256_CHECKSUM>"} -DisableAutoUpgradeMinorVersion
+Set-AzVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "DatadogWindowsAgent" -TypeHandlerVersion "6.4" -Settings @{"site" = "<SITE_PARAMETER>"; "agentConfiguration" = "https://<CONFIGURATION_BLOB>.blob.core.windows.net/<FILE_PATH>.zip"; "agentConfigurationChecksum" = "<SHA256_CHECKSUM>"} -DisableAutoUpgradeMinorVersion
 ```
 
 **Note**: Once the Datadog Agent is installed, the configuration can only be changed when upgrading to a newer version.
@@ -58,7 +65,7 @@ This example shows how to specify a version of the Agent to install. By default 
 **Note**: Downgrades are *not* supported, so it's not possible to install a *lower* version of the Datadog Agent than the one currently installed on the target machine. To install a lower version of the Datadog Agent, uninstall the previous version first by removing the Datadog Windows Agent Azure Extension on the target machine. Removing the Datadog Windows Agent Azure Extension does not remove the Datadog Agent configuration.
 
 ```powershell
-Set-AzureVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "DatadogWindowsAgent" -TypeHandlerVersion "6.4" -Settings @{"site" = "datadoghq.com"; "agentVersion" = "7.40.0"} -ProtectedSettings @{"api_key" = "<YOUR_DATADOG_API_KEY>"} -DisableAutoUpgradeMinorVersion
+Set-AzureVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "DatadogWindowsAgent" -TypeHandlerVersion "6.4" -Settings @{"site" = "<SITE_PARAMETER>"; "agentVersion" = "7.40.0"} -ProtectedSettings @{"api_key" = "<DATADOG_API_KEY>"} -DisableAutoUpgradeMinorVersion
 ```
 
 [1]: https://learn.microsoft.com/en-us/powershell/module/az.compute/set-azvmextension
@@ -66,7 +73,7 @@ Set-AzureVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "Data
 {{% tab "Linux" %}}
 
 ```bash
-az vm extension set --publisher "Datadog.Agent" --name "DatadogLinuxAgent" --version 6.0 --settings '{"site":"datadoghq.com", "agentVersion":"7.40.0"}' --protected-settings '{"api_key":"<YOUR_DATADOG_API_KEY>"}' --no-auto-upgrade-minor-version
+az vm extension set --publisher "Datadog.Agent" --name "DatadogLinuxAgent" --version 6.0 --settings '{"site":"datadoghq.com", "agentVersion":"7.40.0"}' --protected-settings '{"api_key":"<DATADOG_API_KEY>"}' --no-auto-upgrade-minor-version
 ```
 More information on the syntax to set Azure instance extensions can be found in the [Azure Extension CLI reference][1].
 
@@ -96,7 +103,7 @@ This example shows how to specify a configuration for the Datadog Agent to use.
 - The Datataog Agent configuration should be created from the `/etc/datadog-agent/` folder.
 
 ```bash
-az vm extension set --publisher "Datadog.Agent" --name "DatadogLinuxAgent" --version 6.0 --settings '{"site":"datadoghq.com", "agentVersion":"7.40.0", "agentConfiguration":"https://<CONFIGURATION_BLOB>.blob.core.windows.net/<FILE_PATH>.zip", "agentConfigurationChecksum":"<SHA256_CHECKSUM>"}' --protected-settings '{"api_key":"<YOUR_DATADOG_API_KEY>"}' --no-auto-upgrade-minor-version
+az vm extension set --publisher "Datadog.Agent" --name "DatadogLinuxAgent" --version 6.0 --settings '{"site":"datadoghq.com", "agentVersion":"7.40.0", "agentConfiguration":"https://<CONFIGURATION_BLOB>.blob.core.windows.net/<FILE_PATH>.zip", "agentConfigurationChecksum":"<SHA256_CHECKSUM>"}' --protected-settings '{"api_key":"<DATADOG_API_KEY>"}' --no-auto-upgrade-minor-version
 ```
 
 
@@ -104,5 +111,36 @@ az vm extension set --publisher "Datadog.Agent" --name "DatadogLinuxAgent" --ver
 {{% /tab %}}
 {{< /tabs >}}
 
+## Install on Azure Arc
+
+To run the Datadog Agent in your [Azure Arc][5] instances as an extension, use the command that matches your environment.
+
+{{< tabs >}}
+{{% tab "Windows" %}}
+
+```powershell
+az connectedmachine extension create --name <NAME> --machine-name <MACHINE_NAME> -g <RESOURCE_GROUP> --publisher Datadog.Agent --type DatadogWindowsAgent --location <LOCATION> --settings '{"site":"<SITE_PARAMETER>"}' --protected-settings '{"api_key":"<DATADOG_API_KEY>"}'
+```
+
+{{% /tab %}}
+{{% tab "Linux" %}}
+
+```bash
+az connectedmachine extension create --name <NAME> --machine-name <MACHINE_NAME> -g <RESOURCE_GROUP> --publisher Datadog.Agent --type DatadogLinuxAgent --location <LOCATION> --settings '{"site":"<SITE_PARAMETER>"}' --protected-settings '{"api_key":"<DATADOG_API_KEY>"}'
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+More information on the syntax to set Azure `connectedmachine` extensions can be found in the [az connectedmachine extension][6] page.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://www.datadoghq.com/blog/introducing-azure-monitoring-with-one-click-datadog-deployment
 [2]: /integrations/azure/#deploy-agents
+[3]: /getting_started/site/#access-the-datadog-site
+[4]: /account_management/api-app-keys/#api-keys
+[5]: /integrations/azure_arc/
+[6]: https://learn.microsoft.com/en-us/cli/azure/connectedmachine/extension
