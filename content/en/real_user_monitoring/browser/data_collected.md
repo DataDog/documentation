@@ -181,7 +181,7 @@ You can [enrich your RUM event data with feature flags][6] to get visibility int
 
 ### Resource timing metrics
 
-Detailed network timing data for the loading of an application’s resources are collected with the [Performance Resource Timing API][15].
+Detailed network timing data for the loading of an application's resources are collected with the [Performance Resource Timing API][15].
 
 | Metric                              | Type           | Description                                                                                                                               |
 |----------------------------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------|
