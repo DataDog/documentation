@@ -12,7 +12,7 @@ further_reading:
   tag: "Documentation"
   text: "Setting up ASM"
 - link: "https://securitylabs.datadoghq.com/"
-  tag: "Security Labs"
+  tag: "Check out Security Labs"
   text: "Security research, reports, tips, and videos from Datadog"
 ---
 
