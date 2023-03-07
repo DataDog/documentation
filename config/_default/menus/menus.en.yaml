@@ -3748,32 +3748,36 @@ main:
     url: account_management/api-app-keys/
     parent: account_management
     weight: 5
+  - name: Teams
+    url: account_management/teams/
+    parent: account_management
+    weight: 6
   - name: Audit Trail
     url: account_management/audit_trail/
     parent: account_management
     identifier: account_management_audit_trail
-    weight: 6
+    weight: 7
   - name: Events
     url: account_management/audit_trail/events/
     parent: account_management_audit_trail
     identifier: account_management_audit_trail_events
-    weight: 601
+    weight: 701
   - name: Plan and Usage
     url: account_management/plan_and_usage/
     parent: account_management
-    weight: 7
+    weight: 8
   - name: Billing
     url: account_management/billing/
     parent: account_management
-    weight: 8
+    weight: 9
   - name: Multi-org Accounts
     url: account_management/multi_organization/
     parent: account_management
-    weight: 8
+    weight: 10
   - name: Guides
     url: account_management/guide/
     parent: account_management
-    weight: 9
+    weight: 11
   - name: Data Security
     url: data_security/
     pre: security-lock
