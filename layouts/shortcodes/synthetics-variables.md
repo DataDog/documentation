@@ -19,7 +19,7 @@ To create a local variable, click **Create a Local Variable**. You can select on
 &#x7b;&#x7b; date(n unit, format) &#x7d;&#x7d;
 : Generates a date in one of Datadog's accepted formats with a value corresponding to the UTC date the test is initiated at + or - `n` units.
 
-&#x7b;&#x7b;timestamp(n, unit)&#x7d;&#x7d;
+&#x7b;&#x7b; timestamp(n, unit) &#x7d;&#x7d;
 : Generates a timestamp in one of Datadog's accepted units with a value corresponding to the UTC timestamp the test is initiated at +/- `n` units.
 
 To obfuscate local variable values in test results, select **Hide and obfuscate variable value**. Once you have defined the variable string, click **Add Variable**.
