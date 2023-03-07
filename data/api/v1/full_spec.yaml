@@ -697,7 +697,8 @@ components:
       description: Cancel downtimes according to scope.
       properties:
         scope:
-          description: 'The scope(s) to which the downtime applies. For example, `host:app2`.
+          description: 'The scope(s) to which the downtime applies and must be in
+            `key:value` format. For example, `host:app2`.
 
             Provide multiple scopes as a comma-separated list like `env:dev,env:prod`.
 
@@ -1742,7 +1743,8 @@ components:
         recurrence:
           $ref: '#/components/schemas/DowntimeRecurrence'
         scope:
-          description: 'The scope(s) to which the downtime applies. For example, `host:app2`.
+          description: 'The scope(s) to which the downtime applies and must be in
+            `key:value` format. For example, `host:app2`.
 
             Provide multiple scopes as a comma-separated list like `env:dev,env:prod`.
 
@@ -1876,7 +1878,8 @@ components:
         recurrence:
           $ref: '#/components/schemas/DowntimeRecurrence'
         scope:
-          description: 'The scope(s) to which the downtime applies. For example, `host:app2`.
+          description: 'The scope(s) to which the downtime applies and must be in
+            `key:value` format. For example, `host:app2`.
 
             Provide multiple scopes as a comma-separated list like `env:dev,env:prod`.
 
