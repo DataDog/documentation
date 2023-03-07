@@ -71,7 +71,7 @@ In your first three days with Datadog CSM:
 [14]: /security/default_rules/#cat-cloud-security-management
 [15]: /security/cspm/signals_explorer/
 [16]: /security/cspm/findings/
-[17]: /security/configuration/notification-rules
+[17]: https://app.datadoghq.com/security/configuration/notification-rules
 [18]: /security/cloud_security_management/guide/tuning-rules/
 [19]: /security/cspm/custom_rules
 [20]: /security/cloud_workload_security/agent_expressions
