@@ -75,7 +75,7 @@ Download the [Helm chart][1] for Google GKE.
 {{% /tab %}}
 {{< /tabs >}}
 
-After downloading the correct Helm chart for your provider, you should replace the `datadog.apiKey` and `datadog.configKey` values to match your pipeline. Then you can install it into your cluster with the following commands:
+In the Helm chart, replace the `datadog.apiKey` and `datadog.configKey` values to match your pipeline. Then, install it in your cluster with the following commands:
 
 ```
 $ helm repo add datadog https://helm.datadoghq.com
@@ -163,11 +163,11 @@ The Helm chart provided above have example processing steps that demonstrate Obs
 The provided logs pipeline does the following:
 
 - **Tag logs coming through the Observability Pipelines Worker.** This helps determine what traffic still needs to be shifted over to the Worker as you update your clusters. These tags also show you how logs are being routed through the load balancer, in case there are imbalances.
-- **Correct the status of logs coming through the Worker.** Due to how the Datadog Agent collects logs from containers, the provided `.status` attribute does not properly reflect the actual level of the message. We remove this to prevent issues with parsing rules in the backend, where logs are received from the Worker.
+- **Correct the status of logs coming through the Worker.** Due to how the Datadog Agent collects logs from containers, the provided `.status` attribute does not properly reflect the actual level of the message. It is removed to prevent issues with parsing rules in the backend, where logs are received from the Worker.
 
-In particular, the following steps in the pipeline are worth calling out:
-- `logs_parse_ddtags`
-- `logs_finish_ddtags`
+The following are two important components in the example configuration:
+- `logs_parse_ddtags`: Parses the tags that are stored in a string into structured data. 
+- `logs_finish_ddtags`: Re-encodes the tags so that it is in the format as how the Datadog Agent would send it.
 
 Internally, the Datadog Agent represents log tags as a CSV in a single string. To effectively manipulate these tags, they must be parsed, modified , and then re-encoded before they are sent to the ingest endpoint. These steps are written to automatically perform those actions for you. Any modifications you make to the pipeline, especially for manipulating tags, should be in between these two steps.
 
