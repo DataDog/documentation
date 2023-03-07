@@ -225,6 +225,30 @@
     "request_description": "Incident integration metadata payload.",
     "request_schema_description": "Patch request for an incident integration metadata."
   },
+  "ListIncidentTodos": {
+    "description": "Get all todos for an incident.",
+    "summary": "Get a list of an incident's todos"
+  },
+  "CreateIncidentTodo": {
+    "description": "Create an incident todo.",
+    "summary": "Create an incident todo",
+    "request_description": "Incident todo payload.",
+    "request_schema_description": "Create request for an incident todo."
+  },
+  "DeleteIncidentTodo": {
+    "description": "Delete an incident todo.",
+    "summary": "Delete an incident todo"
+  },
+  "GetIncidentTodo": {
+    "description": "Get incident todo details.",
+    "summary": "Get incident todo details"
+  },
+  "UpdateIncidentTodo": {
+    "description": "Update an incident todo.",
+    "summary": "Update an incident todo",
+    "request_description": "Incident todo payload.",
+    "request_schema_description": "Patch request for an incident todo."
+  },
   "ListOpsgenieServices": {
     "description": "Get a list of all services from the Datadog Opsgenie integration.",
     "summary": "Get all service objects"
