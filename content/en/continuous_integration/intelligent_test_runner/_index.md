@@ -69,7 +69,7 @@ To enable Intelligent Test Runner, the following environment variables need to b
 
 After setting these environment variables, run your tests as you normally do:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app DD_CIVISIBILITY_AGENTLESS_ENABLED=true DD_API_KEY=$API_KEY DD_CIVISIBILITY_GIT_UPLOAD_ENABLED=true DD_CIVISIBILITY_ITR_ENABLED=true yarn test
 {{< /code-block >}}
 
@@ -119,7 +119,7 @@ After setting these environment variables, run your tests as you normally do by 
 {{% tab "dotnet test" %}}
 
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
 {{< /code-block >}}
 
@@ -128,7 +128,7 @@ dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
 {{% tab "VSTest.Console" %}}
 
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- VSTest.Console.exe {test_assembly}.dll
 {{< /code-block >}}
 

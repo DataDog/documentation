@@ -28,7 +28,7 @@ Custom commands work with the following CI providers:
 
 Install the [`datadog-ci`][1] (>=v0.17.0) CLI globally using `npm`:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 npm install -g @datadog/datadog-ci
 {{< /code-block >}}
 
@@ -36,7 +36,7 @@ npm install -g @datadog/datadog-ci
 
 To trace a command, run:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 datadog-ci trace [--name <name>] -- <command>
 {{< /code-block >}}
 
