@@ -49,7 +49,7 @@ To find a team handle:
 
 To associate a resource with a defined team, a Team must exist in Datadog with a matching team handle. When you click on a resource associated with a defined team, a small window appears with the team handle and additional information. Defined teams provide additional functionality such as the Team filter below. 
 
-Team handles that aren’t associated with a defined team in Datadog have a tag-like experience. Convert any undefined team handles to defined teams to take advantage of Teams features. 
+Team handles that aren’t associated with a defined team in Datadog behave similarly to tags. Convert any undefined team handles to defined teams to take advantage of Teams features.
 
 ### Associate resources with team handles
 
@@ -62,15 +62,14 @@ Datadog supports associating the following resources with team handles:
 
 ## Filter
 
-The team filter tailors user experiences across Datadog to content associated with their team.
+The team filter tailors a user's experiences across Datadog to content associated with their teams.
 
 The team filter appears in two places in each list view: 
 - A list of search facets at the top left
 - A search term in the search bar
 
 
-When a user enables a team filter, they see only the resources associated with their teams or with the services owned by their teams.
-The team filter state is global and persistent. Therefore, Datadog maintains team context across a user's navigation journey across all applicable products.
+When a user enables a team filter, they see only the resources associated with their teams or with the services owned by their teams. The team filter state is global and persistent. Therefore, Datadog maintains team context across a user's navigation journey over all applicable products.
 
 The table below describes the products in which you can use the team filter:
 
