@@ -41,18 +41,18 @@ The Datadog CloudFormation StackSet performs the following steps:
 ## Prerequisites
 
 1. **Access to the management account**: Your AWS user needs to be able to access the AWS management account.
-2. **An account administrator has enabled Trusted Access with AWS Organizations**: Refer to [AWS Documentation][3] on how to enable trusted access between StackSets and Organizations to create & deploy stacks using service-managed permissions.
+2. **An account administrator has enabled Trusted Access with AWS Organizations**: Refer to [Enable trusted access with AWS Organizations][3] to enable trusted access between StackSets and Organizations, to create and deploy stacks using service-managed permissions.
 
 ## Setup
 
 To get started, go to the [AWS Integration configuration page][1] in Datadog and click on **Add AWS Account(s)** -> **Add Multiple AWS Accounts** -> **Cloudformation StackSet**.
 
-On the Datadog AWS integration configuration page, click **Launch CloudFormation StackSet**. This opens the AWS Console and loads a new CloudFormation StackSet. Keep the default choice of “Service-managed permissions” on AWS.  
+Click **Launch CloudFormation StackSet**. This opens the AWS Console and loads a new CloudFormation StackSet. Keep the default choice of `Service-managed permissions` on AWS.  
   
-Follow the steps below on the AWS console to create and deploy your stackset:
+Follow the steps below on the AWS console to create and deploy your StackSet:
 
 1. **Choose a Template**  
-Copy the Template URL from the Datadog AWS integration configuration page to use it in the `Specify Template` parameter in the StackSet.
+Copy the Template URL from the Datadog AWS integration configuration page to use in the `Specify Template` parameter in the StackSet.
 
 
 2. **Specify StackSet details**
@@ -60,34 +60,32 @@ Copy the Template URL from the Datadog AWS integration configuration page to use
     - Select your Datadog APP key on Datadog AWS integration configuration page and use it in the `DatadogAppKey` parameter in the StackSet.
 
     - *Optionally:*
-        - Enable [Cloud Security Posture Management][5] (CSPM) to scan your cloud environment, hosts, and containers for misconfigurations and security risks.
-        - Disable metric collection if you do not want to monitor your AWS infrastructure. (recommended only for [Cloud Cost Management][6] (CCM) or [Cloud Security Posture Management][5] (CSPM) only use cases)
-
+        a. Enable [Cloud Security Posture Management][5] (CSPM) to scan your cloud environment, hosts, and containers for misconfigurations and security risks.
+        b. Disable metric collection if you do not want to monitor your AWS infrastructure (recommended only for [Cloud Cost Management][6] (CCM) or [Cloud Security Posture Management][5] (CSPM) specific use cases). 
 
 3. **Configure StackSet options**  
-Keep the "Execution configuration" option as `Inactive` so the StackSet performs one operation at a time.
+Keep the **Execution configuration** option as `Inactive` so the StackSet performs one operation at a time.
 
 4. **Set deployment options**
-    - You can set your “Deployment targets” to either deploy the Datadog integration across an Organization or one or more Organizational Units.
+    - You can set your `Deployment targets` to either deploy the Datadog integration across an Organization or one or more Organizational Units.
 
 
-    - Keep “Automatic deployment” enabled in order to automatically deploy the Datadog AWS Integration in new accounts that are added to the Organization or OU.
+    - Keep `Automatic deployment` enabled in order to automatically deploy the Datadog AWS Integration in new accounts that are added to the Organization or OU.
 
-    - Under “Specify regions”, select a single region in which you’d like to deploy the integration in each AWS account.   
-      **NOTE**: The StackSet will set up global IAM resources that are not region specific. If multiple regions are selected in this step, the deploy will fail. 
+    - Under **Specify regions**, select a single region in which you’d like to deploy the integration in each AWS account.   
+      **NOTE**: The StackSet creates global IAM resources that are not region specific. If multiple regions are selected in this step, the deployment fails. 
 
-
-    - Use the default settings under “Deployment options” to be set to Sequential so StackSets operations are deployed into one region at a time.
+    - Set the default settings under **Deployment options** to be sequential so StackSets operations are deployed into one region at a time.
 
 5. **Review**  
-    Move to the Review page and Click Submit. This launches the creation process for the Datadog StackSet. This could take a while depending on how many accounts need to be integrated. Ensure that the StackSet successfully creates all resources before proceeding.
+    Go to the **Review** page and click **Submit**. This launches the creation process for the Datadog StackSet. This could take several minutes depending on how many accounts need to be integrated. Ensure that the StackSet successfully creates all resources before proceeding.
 
-    After the stacks are created, go back to the AWS integration config page in Datadog and click **Done**. Please wait for a few minutes to see metrics & events reporting from your newly integrated AWS accounts.
+    After the stacks are created, go back to the AWS integration config page in Datadog and click **Done**. It may take a few minutes to see metrics and events reporting from your newly integrated AWS accounts.
 
 
 ## Enable integrations for individual AWS services
 
-See the [Integrations page][4] for a full listing of the available sub-integrations that can be enabled on each monitored AWS account. Many of these integrations are installed by default when Datadog recognizes data coming in from your AWS account.
+See the [Integrations page][4] for a full listing of the available sub-integrations that can be enabled on each monitored AWS account. Any sub-integration sending data to Datadog is automatically installed when data is received from the integration.
 
 ## Send logs
 
@@ -101,7 +99,7 @@ To uninstall the AWS integration from all AWS accounts and regions in an Organiz
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/amazon_web_services/
+[1]: https://app.datadoghq.com/integrations/amazon-web-services/
 [2]: /integrations/amazon_web_services/#log-collection
 [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-enable-trusted-access.html
 [4]: /integrations/#cat-aws
