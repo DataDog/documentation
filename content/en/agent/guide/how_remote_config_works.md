@@ -104,7 +104,7 @@ Datadog implements the following safeguards, designed to protect the confidentia
 ### Setup
 To enable Remote Configuration: 
 
-1.  [Contact support][2] to have your organization enabled for adding the Remote Configuration capability on API keys.
+1.  Ensure your RBAC permissions include [`org_management`][9] so you can enable Remote Configuration for your organization.
 
 2. Ensure your RBAC permissions include [`api_keys_write`][3] so you can create a new API key with the Remote Configuration scope, or add the scope on an existing API key. Contact your organization's Datadog administrator to update your permissions if you don't have it. You'll use the key with this scope to authenticate and authorize your Agent to use Remote Configuration. 
 
@@ -152,6 +152,7 @@ After you perform these steps, your Agent requests its configuration from Datado
 [6]: /tracing/trace_pipeline/ingestion_controls/#managing-ingestion-for-all-services-at-the-agent-level
 [7]: /dynamic_instrumentation/?tab=configurationyaml#enable-remote-configuration
 [8]: /security/application_security/how-appsec-works/#built-in-protection
+[9]: /account_management/rbac/permissions
 
 
 {{< /site-region >}}
