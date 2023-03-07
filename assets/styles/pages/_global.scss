@@ -182,6 +182,11 @@ code {
         display: inline;
       }
     }
+    .line ~ .line {
+      &:before {
+        content: ' ';
+      }
+    }
   }
 }
 
