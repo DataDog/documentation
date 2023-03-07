@@ -40,6 +40,7 @@ The following widget types are supported:
 - [Scatter Plot][9]
 - [SLO Summary][10]
 - [SLO List][11]
+- [Sunburst][16]
 - [Table][12]
 - [Timeseries][13]
 - [Top List][14]
@@ -104,3 +105,4 @@ Users with the Admin role or **Org Management** permission can enable or disable
 [13]: /dashboards/widgets/timeseries/
 [14]: /dashboards/widgets/top_list/
 [15]: /account_management/org_settings/#public-sharing
+[16]: /dashboards/widgets/pie_chart/
