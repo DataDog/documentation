@@ -915,7 +915,7 @@ class Integrations:
                         if current_slug == single_alias.strip('/'):
                             # add the alias from the list
                             item['aliases'].remove(single_alias)
-                            print(f"\x1b[32mINFO\x1b[0m: Removed redundant alias: {single_alias}")
+                            print(f"\033[94mALIAS REMOVAL\x1b[0m: Removed redundant alias: {single_alias}")
                 fm = yaml.safe_dump(
                     item, width=float("inf"), default_style='"', default_flow_style=False, allow_unicode=True
                 ).rstrip()
