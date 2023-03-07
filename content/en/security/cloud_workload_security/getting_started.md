@@ -53,6 +53,8 @@ There are four types of monitoring that the Datadog Agent uses for Cloud Workloa
 
 To use Remote Configuration with CWS, add the Remote Configuration scope to a new or existing API key, and then update your Agent configuration. See the [setup instructions][5] for more information.
 
+*Automatic updates of Agent rules is only available for default rules.
+
 ## Installation
 
 {{< tabs >}}
