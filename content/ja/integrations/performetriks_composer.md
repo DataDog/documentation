@@ -34,13 +34,13 @@ public_title: Composer インテグレーション
 short_description: Datadog 環境のコンフィギュレーション管理
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Category::Marketplace
   - Offering::Integration

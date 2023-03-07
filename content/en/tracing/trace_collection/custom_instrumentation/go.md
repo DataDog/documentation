@@ -219,7 +219,7 @@ To disable trace context propagation, set the value of the environment variables
 - Disable all trace context propagation (both inject and extract) using the `DD_PROPAGATION_STYLE=none` environment variable.
 
 If multiple environment variables are set, `DD_PROPAGATION_STYLE_INJECT` and `DD_PROPAGATION_STYLE_EXTRACT`
-override any value provided in `DD_PROPAGATION_STYLE`.
+override any value provided in `DD_TRACE_PROPAGATION_STYLE`.
 
 If multiple extraction styles are enabled, extraction attempts are made
 in the order that those styles are specified. The first successfully

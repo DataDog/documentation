@@ -28,8 +28,7 @@ further_reading:
 
 ## Overview
 
-The [**Log Explorer**][1] is your home base for log troubleshooting and exploration. Whether you start from scratch, from a [Saved View][2], or land here from any other context like monitor notifications or dashboard widgets, the Log Explorer iteratively search and filter, group, visualize, and export.
-
+The [**Log Explorer**][1] is your home base for log troubleshooting and exploration. Whether you start from scratch, from a [Saved View][2], or land here from any other context like monitor notifications or dashboard widgets, you can search and filter, group, visualize, and export logs in the Log Explorer.
 
 ### Search and filter
 
@@ -41,7 +40,7 @@ The [**Log Explorer**][1] is your home base for log troubleshooting and explorat
 
 ### Analyze
 
-Group queried logs into higher-level entities in order to derive or consolidate information. To begin identifying patterns and aggregating logs by subsets of events, see the [Log Analytics documentation][6].
+**Group** queried logs into higher-level entities (fields, patterns, and transactions) in order to derive or consolidate information. To start identifying patterns and aggregating logs by subsets of events, see the [Log Analytics documentation][6].
 
 ### Visualize
 

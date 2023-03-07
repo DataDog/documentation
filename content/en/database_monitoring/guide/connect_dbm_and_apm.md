@@ -12,15 +12,9 @@ private: true
 The features described on this page are in beta. Contact your Customer Success Manager to learn more about them.
 </div>
 
-This guide assumes that you have configured [Datadog Monitoring][1] and are using [APM][2].
+This guide assumes that you have configured [Database Monitoring][1] and are using [APM][2].
 
 ## Before you begin
-
-Supported tracers
-: [dd-trace-go][3] >= 1.44.0 (support for [database/sql][4] and [sqlx][5] packages)<br />
-[dd-trace-rb][6] >= 1.6.0 (support for [mysql2][7] and [pg][8] gems)<br />
-[dd-trace-js][9] >= 3.13.0 or >= 2.26.0 (support for [postgres][10], [mysql][13] and [mysql2][14] clients)<br />
-[dd-trace-py][11] >= 1.7.0 (support for [psycopg2][12])
 
 Supported databases
 : postgres, mysql
@@ -30,6 +24,30 @@ Supported Agent versions
 
 Data privacy
 : Enabling SQL comment propagation results in potentially confidential data (service names) being stored in the databases which can then be accessed by other third-parties that have been granted access to the database.
+
+
+**Supported tracers**
+
+| Language | Library or Framework           | Postgres    | MySQL       |
+| :----    | :----                          | :----:      |  :----:     |
+| **Go:** [dd-trace-go][3] >= 1.44.0 |      |             |             |
+|          | [database/sql][4]              | {{< X >}}   | {{< X >}}   |
+|          | [sqlx][5]                      | {{< X >}}   | {{< X >}}   |
+| **Ruby:** [dd-trace-rb][6] >= 1.8.0 |     |             |             |
+|          | [pg][8]                        | {{< X >}}   |             |
+|          | [mysql2][7]                    |             | {{< X >}}   |
+| **Node:** [dd-trace-js][9] >= 3.13.0 |    |             |             |
+|          | [postgres][10]                 | {{< X >}}   |             |
+|          | [mysql][13]                    |             | {{< X >}}   |
+|          | [mysql2][14]                   |             | {{< X >}}   |
+| **Python:** [dd-trace-py][11] >= 1.7.0 |  |             |             |
+|          | [psycopg2][12]                 | {{< X >}}   |             |
+| **Java**     |                            |             |             |
+|          | jdbc                           | Coming soon | Coming soon |
+| **.NET**     |                            |             |             |
+|          |                                | Coming soon | Coming soon |
+
+
 
 ## Setup
 
@@ -103,11 +121,11 @@ func main() {
 
 {{% tab "Ruby" %}}
 
-In your Gemfile, install or udpate [dd-trace-rb][1] to version greater than `1.6.0`:
+In your Gemfile, install or update [dd-trace-rb][1] to version `1.8.0` or greater:
 
 ```rb
 source 'https://rubygems.org'
-gem 'ddtrace', '>= 1.6.0'
+gem 'ddtrace', '>= 1.8.0'
 
 # Depends on your usage
 gem 'mysql2'
@@ -116,13 +134,13 @@ gem 'pg'
 
 Enable the database monitoring propagation feature using one of the following methods:
 1. Env variable:
-   `DD_DBM_PROPAGATION_MODE=service`
+   `DD_DBM_PROPAGATION_MODE=full`
 
 2. Option `comment_propagation` (default: `ENV['DD_DBM_PROPAGATION_MODE']`), for [mysql2][2] or [pg][3]:
    ```rb
 	Datadog.configure do |c|
-		c.tracing.instrument :mysql2, comment_propagation: 'service'
-		c.tracing.instrument :pg, comment_propagation: 'disabled'
+		c.tracing.instrument :mysql2, comment_propagation: 'full'
+		c.tracing.instrument :pg, comment_propagation: 'full'
 	end
    ```
 
@@ -247,6 +265,26 @@ client.query('SELECT $1::text as message', ['Hello world!'], (err, result) => {
 {{% /tab %}}
 
 {{< /tabs >}}
+
+## Explore the APM Connection
+
+### Attribute active database connections to the calling APM services
+
+{{< img src="database_monitoring/dbm_apm_active_connections_breakdown.png" alt="View active connections to a database broken down by the APM Service they originate from.">}}
+
+Break down active connections for a given host by the upstream APM services making the requests. You can attribute load on a database to individual services to understand which services are most active on the database. Pivot to the most active upstream service’s service page to continue the investigation.
+
+### View the associated trace for a query sample
+
+{{< img src="database_monitoring/dbm_query_sample_trace_preview.png" alt="Preview the sampled APM trace that the query sample being inspected was generated from.">}}
+
+When viewing a Query Sample in Database Monitoring, if the associated trace has been sampled by APM, you can view the DBM Sample in the context of the APM Trace. This allows you to combine DBM telemetry, including the explain plan and historical performance of the query, alongside the lineage of the span within your infrastructure to understand if a change on the database is responsible for poor application performance.  
+
+### Identify the downstream database hosts of APM services 
+
+{{< img src="database_monitoring/dbm_apm_service_page_db_host_list.png" alt="Visualize the downstream database hosts that your APM Services depend on from the Service Page.">}}
+
+On the APM Service Page, view the direct downstream database dependencies of the service as identified by Database Monitoring. Quickly determine if any hosts have disproportionate load that may be caused by noisy neighbors.  
 
 
 [1]: /database_monitoring/#getting-started

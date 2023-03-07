@@ -12,14 +12,14 @@ title: DBM と APM の接続
 このページで説明されている機能はベータ版です。詳細については、カスタマーサクセスマネージャーにお問い合わせください。
 </div>
 
-このガイドでは、[Datadog Monitoring][1] を構成し、[APM][2] を使用していることを前提にしています。
+このガイドでは、[Database Monitoring][1] を構成し、[APM][2] を使用していることを前提にしています。
 
 ## はじめに
 
 対応トレーサー
 : [dd-trace-go][3] >= 1.44.0 ([database/sql][4] および [sqlx][5] パッケージのサポート)<br />
-[dd-trace-rb][6] >= 1.6.0 ([mysql2][7] および [pg][8] gems のサポート)<br />
-[dd-trace-js][9] >= 3.9.0 or >= 2.22.0 ([postgres クライアント][10]のサポート)<br />
+[dd-trace-rb][6] >= 1.8.0 ([mysql2][7] および [pg][8] gems のサポート)<br />
+[dd-trace-js][9] >= 3.13.0 or >= 2.26.0 ([postgres][10]、[mysql][13]、[mysql2][14] クライアントのサポート)<br />
 [dd-trace-py][11] >= 1.7.0 ([psycopg2][12] のサポート)
 
 対応データベース
@@ -103,11 +103,11 @@ func main() {
 
 {{% tab "Ruby" %}}
 
-Gemfile で [dd-trace-rb][1] を `1.6.0` 以上のバージョンにインストールまたはアップデートします。
+Gemfile で [dd-trace-rb][1] をバージョン `1.8.0` 以降にインストールまたはアップデートします。
 
 ```rb
 source 'https://rubygems.org'
-gem 'ddtrace', '>= 1.6.0'
+gem 'ddtrace', '>= 1.8.0'
 
 # 使用による
 gem 'mysql2'
@@ -116,13 +116,13 @@ gem 'pg'
 
 以下のいずれかの方法で、データベースモニタリングの伝搬機能を有効にします。
 1. 環境変数:
-   `DD_DBM_PROPAGATION_MODE=service`
+   `DD_DBM_PROPAGATION_MODE=full`
 
 2. オプション `comment_propagation` (デフォルト: `ENV['DD_DBM_PROPAGATION_MODE']`)、[mysql2][2] または [pg][3] 用:
    ```rb
     Datadog.configure do |c|
-        c.tracing.instrument :mysql2, comment_propagation: 'service'
-        c.tracing.instrument :pg, comment_propagation: 'disabled'
+        c.tracing.instrument :mysql2, comment_propagation: 'full'
+        c.tracing.instrument :pg, comment_propagation: 'full'
     end
    ```
 
@@ -248,6 +248,26 @@ client.query('SELECT $1::text as message', ['Hello world!'], (err, result) => {
 
 {{< /tabs >}}
 
+## APM 接続を探る
+
+### 呼び出した APM サービスにアクティブなデータベース接続を属性付けする
+
+{{< img src="database_monitoring/dbm_apm_active_connections_breakdown.png" alt="データベースへのアクティブな接続を、APM サービスごとに分類して表示します。">}}
+
+特定のホストのアクティブな接続を、リクエストを行うアップストリーム APM サービス別に分解します。データベースの負荷を個々のサービスに属性付けして、どのサービスがデータベース上で最もアクティブかを理解できます。最もアクティブなアップストリームサービスのサービスページにピボットして、調査を続行します。
+
+### クエリサンプルの関連付けられたトレースを表示する
+
+{{< img src="database_monitoring/dbm_query_sample_trace_preview.png" alt="検査中のクエリーサンプルが生成されたサンプル APM トレースをプレビューします。">}}
+
+Database Monitoring で Query Sample を表示するとき、関連付けられたトレースが APM によってサンプリングされている場合、DBM Sample を APM Trace のコンテキストで表示することができます。これにより、クエリの実行計画や過去のパフォーマンスを含む DBM テレメトリーと、インフラストラクチャー内のスパンの系統を組み合わせて、データベース上の変更がアプリケーションパフォーマンスの低下の原因になっているかどうかを理解することができます。
+
+### APM サービスのダウンストリームデータベースホストの特定
+
+{{< img src="database_monitoring/dbm_apm_service_page_db_host_list.png" alt="サービスページから、APM サービスが依存するダウンストリームデータベースホストを視覚化します。">}}
+
+APM サービスページで、データベースモニタリングによって特定された、サービスの直接的なダウンストリームデータベース依存を表示します。ノイズの多いネイバーが原因で負荷が不均衡になっているホストがあるかどうかを迅速に判断できます。
+
 
 [1]: /ja/database_monitoring/#getting-started
 [2]: /ja/tracing/
@@ -261,3 +281,5 @@ client.query('SELECT $1::text as message', ['Hello world!'], (err, result) => {
 [10]: https://node-postgres.com/
 [11]: https://github.com/DataDog/dd-trace-py
 [12]: https://www.psycopg.org/docs/index.html
+[13]: https://github.com/mysqljs/mysql
+[14]: https://github.com/sidorares/node-mysql2

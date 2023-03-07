@@ -16,14 +16,6 @@ further_reading:
   text: "Historical log analysis and investigation with Online Archives"
 ---
 
-{{< site-region region="us3,us5,eu,gov" >}}
-
-Online Archives is only available for AWS hosted Datadog customers (US1) site.
-
-{{< /site-region >}}
-
-{{< site-region region="us" >}}
-
 <div class="alert alert-warning">
 Online Archives is in limited availability. To request access, contact <a href="/help/">Datadog Support</a>.
 </div>
@@ -103,4 +95,3 @@ Select the index where you want to turn off Online Archives and then switch the 
 [3]: https://app.datadoghq.com/logs/pipelines/indexes
 [4]: https://app.datadoghq.com/logs
 
-{{< /site-region >}}

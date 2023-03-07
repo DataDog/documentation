@@ -6,6 +6,10 @@ aliases:
     - /tracing/livesearch/
     - /tracing/trace_search_and_analytics/
 description: "Trace Explorer"
+further_reading:
+- link: 'tracing/trace_explorer/search'
+  tag: 'Documentation'
+  text: 'Search Spans'
 ---
 
 {{< img src="tracing/apm_lifecycle/trace_explorer.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Explorer" >}}
@@ -56,7 +60,7 @@ When you use Live Search, Datadog displays spans as soon as they are sent by the
 
 {{< img src="tracing/live_search/live-search.mp4" alt="Live Search List view" video="true" >}}
 
-With the Live Search **List view** you can:
+With the **List view**, you can:
 
 - Monitor whether a new deployment went smoothly by filtering on `version_id` of all tags.
 - View outage-related information in real time by searching 100% of ingested traces for a particular `org_id` or `customer_id` that is associated with a problematic child span.
@@ -128,7 +132,7 @@ All spans indexed by custom retention filters (*not* the intelligent retention f
 From the timeseries view, export your query to a [dashboard][1], a [monitor][2] or a [notebook][3] to investigate further or to alert automatically when an aggregate number of spans crosses a specific threshold.
 
 [1]: /dashboards/widgets/timeseries/
-[2]: /monitors/create/types/apm/?tab=analytics
+[2]: /monitors/types/apm/?tab=analytics
 [3]: /notebooks
 {{% /tab %}}
 {{< /tabs >}}
@@ -137,6 +141,9 @@ From the timeseries view, export your query to a [dashboard][1], a [monitor][2] 
 
 You can customize which spans are retained and at what retention rates. By default, [the Datadog intelligent retention filter][4] is applied, which automatically retains traces with error and latency diversity as well as low-throughput resources. To learn more about the default intelligent retention filter and how to create your own additional filters, see the [retention filters documentation][3]. Go to the [Retention Filters page][12] within the Datadog app to create or modify your own filters.
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/apm/traces
 [2]: /tracing/trace_pipeline/ingestion_controls

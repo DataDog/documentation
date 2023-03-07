@@ -13,9 +13,6 @@ further_reading:
   - link: /observability_pipelines/configurations/
     tag: Documentation
     text: Learn more about Observability Pipelines configurations
-  - link: /observability_pipelines/production_deployment_overview/integrate_datadog_and_the_observability_pipelines_worker/
-    tag: Documentation
-    text: Configure Datadog Agents to send data to Observability Pipelines
 ---
 
 {{< img src="observability_pipelines/obs_pipelines.png" alt="A graphic showing different data sources on the left that flows into three hexagons named transform, reduce, and route, with arrows pointing to different destinations for the modified data" style="width:100%;" >}}
@@ -33,7 +30,7 @@ Observability Pipelines Worker is an on-premise end-to-end data pipeline solutio
 
 ### Observability Pipelines
 
-Observability Pipelines is a control plane that enables you to monitor, build, and manage all of your Observability Pipelines Worker deployments at scale.
+Using Datadog, you can monitor, build, and manage all of your Observability Pipelines Worker deployments at scale.
 
 Add your Datadog API key to your Observability Pipelines configuration to monitor your pipelines in Datadog: Identify bottlenecks and latencies, fine-tune performance, monitor data delivery, and more.
 

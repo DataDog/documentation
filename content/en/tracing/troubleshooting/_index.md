@@ -97,7 +97,7 @@ One pattern that often leads to issues with an overwhelming number of services i
 
 Datadog recommends tuning your instrumentation by renaming your services.
 
-Trace metrics are unsampled, which means your instrumented application shows all data instead of subsections of them. The [volume guidelines](#data-volume-guidelines) are also applied. 
+Trace metrics are unsampled, which means your instrumented application shows all data instead of subsections of them. The [volume guidelines](#data-volume-guidelines) are also applied.
 
 ### Use the second primary tag instead of putting metric partitions or grouping variables into service names
 
@@ -107,8 +107,8 @@ Second primary tags are additional tags that you can use to group and aggregate 
 
 Including metric partitions or grouping variables in service names instead of applying the second primary tag unnecessarily inflates the number of unique services in an account and results in potential delay or data loss.
 
- For example, instead of the service `web-store`, you might decide to name different instances of a service `web-store-us-1`, `web-store-eu-1`, and `web-store-eu2` to see performance metrics for these partitions side-by-side. Datadog recommends implementing the **region value** as a second primary tag.
- 
+ For example, instead of the service `web-store`, you might decide to name different instances of a service `web-store-us-1`, `web-store-eu-1`, and `web-store-eu-2` to see performance metrics for these partitions side-by-side. Datadog recommends implementing the **region value** (`us-1`, `eu-1`, `eu-2`) as a second primary tag.
+
 ## Troubleshooting data requested by Datadog Support
 
 When you open a [support ticket][1], our support team may ask for some combination of the following types of information:
@@ -133,7 +133,7 @@ When you open a [support ticket][1], our support team may ask for some combinati
 
     **Note**: If you are using the Datadog Agent v7.19+ and the Datadog Helm Chart with the [latest version][9], or a DaemonSet where the Datadog Agent and trace-agent are in separate containers, you will need to run the following command with `log_level: DEBUG` or `log_level: TRACE` set in your `datadog.yaml` to get a flare from the trace-agent:
 
-    {{< code-block lang="bash" filename="trace-agent.sh" >}}
+    {{< code-block lang="shell" filename="trace-agent.sh" >}}
 kubectl exec -it <agent-pod-name> -c trace-agent -- agent flare <case-id> --local
     {{< /code-block >}}
 
@@ -143,8 +143,8 @@ kubectl exec -it <agent-pod-name> -c trace-agent -- agent flare <case-id> --loca
 
 6. **Custom code written using the tracing libraries, such as tracer configuration, [custom instrumentation][14], and adding span tags**
 
-    Custom instrumentation can be a powerful tool, but also can have unintentional side effects on your trace visualizations within Datadog, so support may ask about this to rule it out as a suspect.  
-    
+    Custom instrumentation can be a powerful tool, but also can have unintentional side effects on your trace visualizations within Datadog, so support may ask about this to rule it out as a suspect.
+
     Additionally, asking for your automatic instrumentation and configuration allows Datadog to confirm if this matches what it is seeing in both tracer startup and debug logs.
 
 7. **Versions of the:**

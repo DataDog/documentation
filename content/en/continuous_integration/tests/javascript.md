@@ -37,15 +37,19 @@ Supported test frameworks:
 The instrumentation works at runtime, so any transpilers such as TypeScript, Webpack, Babel, or others are supported out of the box.
 
 ### Test suite level visibility compatibility
-[Test suite level visibility][4] is supported from `dd-trace>=3.10.0`. Jest, Mocha, and Playwright are supported.
+[Test suite level visibility][4] is fully supported from `dd-trace>=3.14.0` and `dd-trace>=2.27.0`. Jest, Mocha, Playwright, Cypress, and Cucumber are supported.
 
 * Jest >= 24.8.0
   * From `dd-trace>=3.10.0`.
   * Only [`jest-circus`][1] is supported as [`testRunner`][3].
 * Mocha >= 5.2.0
-  * From `dd-trace>=3.10.0`.
+  * From `dd-trace>=3.10.0` and `dd-trace>=2.12.0` for 2.x release line.
 * Playwright >= 1.18.0
   * From `dd-trace>=3.13.0` and `dd-trace>=2.26.0` for 2.x release line.
+* Cypress >= 6.7.0
+  * From `dd-trace>=3.14.0` and `dd-trace>=2.27.0` for 2.x release line.
+* Cucumber >= 7.0.0
+  * From `dd-trace>=3.14.0` and `dd-trace>=2.27.0` for 2.x release line.
 
 ## Configuring reporting method
 
@@ -278,7 +282,7 @@ require('dd-trace/ci/cypress/support')
 
 Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 DD_ENV=ci DD_SERVICE=my-ui-app npm test
 {{< /code-block >}}
 
@@ -410,6 +414,10 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 `DD_GIT_COMMIT_COMMITTER_DATE`
 : Commit committer date in ISO 8601 format.<br/>
 **Example**: `2021-03-12T16:00:28Z`
+
+## Git metadata upload
+
+From `dd-trace>=3.15.0` and `dd-trace>=2.28.0`, CI Visibility automatically uploads git metadata information (commit history). This metadata contains file names but no file contents. If you want to opt out of this behavior, you can do so by setting `DD_CIVISIBILITY_GIT_UPLOAD_ENABLED` to `false`. However, this is not recommended, as features like Intelligent Test Runner and others do not work without it.
 
 ## Known limitations
 

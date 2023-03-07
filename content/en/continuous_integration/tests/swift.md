@@ -59,7 +59,7 @@ There are three ways you can install the testing framework:
 1. Add `dd-sdk-swift-testing` to your package dependencies array, for example:
 
 {{< code-block lang="swift" >}}
-.package(url: "https://github.com/DataDog/dd-sdk-swift-testing.git", from: "2.1.0")
+.package(url: "https://github.com/DataDog/dd-sdk-swift-testing.git", from: "2.2.0")
 {{< /code-block >}}
 
 2. To add the testing framework to your testing targets' dependencies, add the following line to your test targets dependencies array:
@@ -102,9 +102,16 @@ end
 
 [1]: https://github.com/DataDog/dd-sdk-swift-testing/releases
 {{% /tab %}}
+{{% tab "GitHub Actions" %}}
+
+If you use GitHub, you can use the [Swift test action][1] from GitHub Marketplace to automatically configure and run your tests. By default, the rest of the configuration described on this page can be skipped (except the configuration of the action itself), but you can use the configuration environment variables for disabling or configuring additional functionality.
+
+Compared to other methods, such as Cocoapods and Framework linking, the Swift test action option may be less flexible to configure and run, but requires no code changes.
+
+[1]: https://github.com/marketplace/actions/swift-test-action-for-datadog
+{{% /tab %}}
 {{< /tabs >}}
 <div class="alert alert-warning"><strong>Note</strong>: This framework is useful only for testing and should only be linked with the application when running tests. Do not distribute the framework to your users. </div>
-
 
 ## Instrumenting your tests
 
@@ -752,6 +759,27 @@ module.end()
 {{< /code-block >}}
 
 Always call `module.end()` at the end so that all the test info is flushed to Datadog.
+
+## Best practices
+
+Follow these practices to take full advantage of the testing framework and CI Visibility.
+
+### Generate symbols file when building
+
+Build your code in Xcode using `DWARF with dSYM File` (or `-Xswiftc -debug-info-format=dwarf` if building with `swift`)
+
+The testing framework uses symbol files for some of its functionality, including: symbolicating crashes, reporting test source location, and reporting code owners. It automatically generates the symbol file when debug symbols are embedded in the binaries, but it can take some extra time to load.
+
+### Disable sandbox for UI Tests on macOS
+
+In some Xcode versions, UI Test bundles are built with a sandbox by default. The settings that come with a sandbox prevent the testing framework from being run by some system commands with `xcrun`, so you need to disable it.
+
+Disable the sandbox by adding Entitlements to the UI Test runner bundle, then adding `App Sandbox = NO` to them. You can also create an `.entitlement` file and add it to the Signing Build Settings. This file should should include the following content:
+
+{{< code-block lang="xml" >}}
+<key>com.apple.security.app-sandbox</key>
+ <false/>
+{{< /code-block >}}
 
 ## Information collected
 

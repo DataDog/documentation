@@ -36,11 +36,11 @@ datadogRum.init({
     //  service: 'my-web-application',
     //  env: 'production',
     //  version: '1.0.0',
-    sampleRate: 100,
+    sessionSampleRate: 100,
     sessionReplaySampleRate: 100,
     trackResources: true,
     trackLongTasks: true,
-    trackInteractions: true,
+    trackUserInteractions: true,
     defaultPrivacyLevel: 'mask-user-input' | 'mask' | 'allow'
 });
 
@@ -55,14 +55,14 @@ datadogRum.startSessionReplayRecording();
 
 {{< img src="real_user_monitoring/session_replay/mask-user-input.png" alt="ユーザー入力マスクモード" style="width:70%;">}}
 
-**注:** デフォルトでは、セッションリプレイを有効にすると、`mask-user-input` がプライバシー設定になります。
+**注:** デフォルトでは、セッションリプレイを有効にすると、`mask-user-input` がプライバシー設定になり、すべての入力フィールドが自動的にマスクされます。
 
 ### マスクモード
-
-すべての HTML テキスト、ユーザー入力、画像、リンクをマスクします。アプリケーション上のテキストは `X` に置き換えられ、ページがワイヤーフレームにレンダリングされます。
+`defaultPrivacyLevel` を `mask` に設定すると、すべての HTML テキスト、ユーザー入力、画像、リンクがマスクされます。アプリケーション上のテキストは `X` に置き換えられ、ページがワイヤーフレームにレンダリングされます。
 
 {{< img src="real_user_monitoring/session_replay/mask.png" alt="マスクモード" style="width:70%;">}}
 
+**注**: マスクされたデータは Datadog のサーバーには保管されません。
 ### 許可モード
 
 マスクされていないすべてが記録されます。
@@ -127,6 +127,6 @@ Datadog は、RUM とセッションリプレイにさらなるプライバシ�
 
 </div>
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

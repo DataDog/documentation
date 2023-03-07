@@ -1,0 +1,17 @@
+{
+  "data": {
+    "attributes": {
+      "assignees": [
+        "@test.user@test.com",
+        {
+          "id": "USLACKBOT",
+          "icon": "https://a.slack-edge.com/80588/img/slackbot_48.png",
+          "name": "Slackbot",
+          "source": "slack"
+        }
+      ],
+      "content": "Restore lost data."
+    },
+    "type": "incident_todos"
+  }
+}
