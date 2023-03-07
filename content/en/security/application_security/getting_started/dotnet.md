@@ -21,7 +21,7 @@ further_reading:
       text: "Troubleshooting Application Security Management"
 ---
 
-You can monitor application security for .NET apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate. 
+You can monitor application security for .NET apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate.
 
 {{% appsec-getstarted %}}
 
@@ -44,7 +44,7 @@ You can monitor application security for .NET apps running in Docker, Kubernetes
    {{< tabs >}}
 {{% tab "Windows self-hosted" %}}
 
-In a Windows console: 
+In a Windows console:
 
 ```
 rem Set environment variables
@@ -94,7 +94,7 @@ net stop was /y
 net start w3svc
 ```
 
-**Or**, to avoid editing registry keys, edit the application settings in the `web.config` file of your application: 
+**Or**, to avoid editing registry keys, edit the application settings in the `web.config` file of your application:
 ```xml
 <configuration>
   <appSettings>
@@ -103,7 +103,7 @@ net start w3svc
 </configuration>
 ```
 
-This can also be done at the IIS application pools level in the `applicationHost.config` file, usually in `C:\Windows\System32\inetsrv\config\`: 
+This can also be done at the IIS application pools level in the `applicationHost.config` file, usually in `C:\Windows\System32\inetsrv\config\`:
 ```xml
 <system.applicationHost>
 
@@ -118,17 +118,17 @@ This can also be done at the IIS application pools level in the `applicationHost
 {{% /tab %}}
 {{% tab "Linux" %}}
 
-Add the following to your application configuration: 
-```shell
+Add the following to your application configuration:
+```conf
 DD_APPSEC_ENABLED=true
 ```
 {{% /tab %}}
 {{% tab "Docker CLI" %}}
 
-Update your configuration container for APM by adding the following argument in your `docker run` command: 
+Update your configuration container for APM by adding the following argument in your `docker run` command:
 
 ```shell
-docker run [...] -e DD_APPSEC_ENABLED=true [...] 
+docker run [...] -e DD_APPSEC_ENABLED=true [...]
 ```
 
 {{% /tab %}}
@@ -136,7 +136,7 @@ docker run [...] -e DD_APPSEC_ENABLED=true [...]
 
 Add the following environment variable value to your container Dockerfile:
 
-```shell
+```Dockerfile
 ENV DD_APPSEC_ENABLED=true
 ```
 
@@ -176,7 +176,7 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 {{% tab "AWS Fargate" %}}
 
 Add the following line to your container Dockerfile:
-```shell
+```Dockerfile
 ENV DD_APPSEC_ENABLED=true
 ```
 

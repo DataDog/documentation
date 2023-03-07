@@ -145,7 +145,7 @@ In some setups, the Process Agent and Cluster Agent cannot automatically detect 
   - name: DD_CLUSTER_NAME
     value: "<YOUR_CLUSTER_NAME>"
   ```
-  
+
   [1]: /containers/cluster_agent/
   [2]: /containers/cluster_agent/setup/?tab=daemonset#pagetitle
 
@@ -233,7 +233,7 @@ Both arguments take an **image name** as value. Regular expressions are also sup
 
 For example, to exclude all Debian images except containers with a name starting with *frontend*, add these two configuration lines in your `datadog.yaml` file:
 
-```shell
+```yaml
 container_exclude: ["image:debian"]
 container_include: ["name:frontend.*"]
 ```
@@ -273,7 +273,7 @@ env:
 
 For example, because `password` is a sensitive word, the scrubber changes `<MY_PASSWORD>` in any of the following to a string of asterisks, `***********`:
 
-```shell
+```text
 password <MY_PASSWORD>
 password=<MY_PASSWORD>
 password: <MY_PASSWORD>

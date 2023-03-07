@@ -158,7 +158,7 @@ docker run [...] -e DD_APPSEC_ENABLED=true [...]
 
 Add the following environment variable value to your container Dockerfile:
 
-```shell
+```Dockerfile
 ENV DD_APPSEC_ENABLED=true
 ```
 

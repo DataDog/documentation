@@ -22,7 +22,7 @@ further_reading:
 
 ---
 
-You can monitor application security for Java apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate. 
+You can monitor application security for Java apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate.
 
 {{% appsec-getstarted %}}
 
@@ -53,7 +53,7 @@ Update your configuration container for APM by adding the following argument in 
 
 
 ```shell
-docker run [...] -e DD_APPSEC_ENABLED=true [...] 
+docker run [...] -e DD_APPSEC_ENABLED=true [...]
 ```
 
 {{% /tab %}}
@@ -61,7 +61,7 @@ docker run [...] -e DD_APPSEC_ENABLED=true [...]
 
 Add the following environment variable value to your container Dockerfile:
 
-```shell
+```Dockerfile
 ENV DD_APPSEC_ENABLED=true
 ```
 

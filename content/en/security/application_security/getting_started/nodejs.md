@@ -21,7 +21,7 @@ further_reading:
       text: "Troubleshooting Application Security Management"
 ---
 
-You can monitor application security for Node.js apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate. 
+You can monitor application security for Node.js apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate.
 
 {{% appsec-getstarted %}}
 
@@ -88,10 +88,10 @@ import `dd-trace/init`;
    {{< tabs >}}
 {{% tab "Docker CLI" %}}
 
-Update your configuration container for APM by adding the following argument in your `docker run` command: 
+Update your configuration container for APM by adding the following argument in your `docker run` command:
 
 ```shell
-docker run [...] -e DD_APPSEC_ENABLED=true [...] 
+docker run [...] -e DD_APPSEC_ENABLED=true [...]
 ```
 
 {{% /tab %}}
@@ -99,7 +99,7 @@ docker run [...] -e DD_APPSEC_ENABLED=true [...]
 
 Add the following environment variable value to your container Dockerfile:
 
-```shell
+```Dockerfile
 ENV DD_APPSEC_ENABLED=true
 ```
 
