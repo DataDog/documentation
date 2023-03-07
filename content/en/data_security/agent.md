@@ -33,7 +33,7 @@ On Debian and Ubuntu, the `datadog-agent` package has a soft dependency on the `
 
 ## Information security
 
-The Datadog Agent submits data to Datadog over a TLS-encrypted TCP connection by default. As of version 6, the Agent can be configured to enforce TLS 1.2 when connecting to Datadog. If you require the use of strong cryptography, for example, to meet PCI requirements, you should use Agent v6 and set the `force_tls_12: true` setting in the Agent's configuration file.
+The Datadog Agent submits data to Datadog over a TLS-encrypted TCP connection by default. As of version 6, the Agent can be configured to enforce a minimum TLS version when connecting to Datadog. If you require the use of strong cryptography, for example, to meet PCI requirements, you should use Agent v6/7 and set the `min_tls_version: 'tlsv1.2'` setting, or `force_tls_12: true` for Agent < 6.39.0/7.39.0, in the Agent's configuration file.
 
 ## Networking and proxying
 
@@ -45,11 +45,11 @@ The Datadog Agent generates local logs in order to support [Agent troubleshootin
 
 ## Local HTTPS server
 
-Agent v6 exposes a local HTTPS API to ease communication between a running Agent and Agent tools (for example, the `datadog-agent` commands). The API server can only be accessed from the local network interface (`localhost/127.0.0.1`), and authentication is enforced through a token that's only readable by the user that the Agent runs as. Communication to the local HTTPS API is encrypted in transport to protect from eavesdropping on `localhost`.
+Agent v6/7 exposes a local HTTPS API to ease communication between a running Agent and Agent tools (for example, the `datadog-agent` commands). The API server can only be accessed from the local network interface (`localhost/127.0.0.1`), and authentication is enforced through a token that's only readable by the user that the Agent runs as. Communication to the local HTTPS API is encrypted in transport to protect from eavesdropping on `localhost`.
 
 ## Agent GUI
 
-Agent v6 comes bundled with a Graphical User Interface (GUI) by default, which launches in your default web browser. The GUI is launched only if the user launching it has the correct user permissions, including the ability to open the Agent's configuration file. The GUI can only be accessed from the local network interface (`localhost/127.0.0.1`). Finally, the user's cookies must be enabled, as the GUI generates and saves a token used for authenticating all communications with the GUI server as well as protecting against Cross-Site Request Forgery (CSRF) attacks. The GUI can also be disabled altogether if needed.
+Agent v6/7 comes bundled with a Graphical User Interface (GUI) by default, which launches in your default web browser. The GUI is launched only if the user launching it has the correct user permissions, including the ability to open the Agent's configuration file. The GUI can only be accessed from the local network interface (`localhost/127.0.0.1`). Finally, the user's cookies must be enabled, as the GUI generates and saves a token used for authenticating all communications with the GUI server as well as protecting against Cross-Site Request Forgery (CSRF) attacks. The GUI can also be disabled altogether if needed.
 
 ## Agent security scans
 

@@ -67,7 +67,7 @@ dd-trace を有効にするかどうか。`false` に設定すると、ライブ
 `DD_TRACE_AGENT_URL`
 : **構成**: `url`<br>
 **デフォルト**: `http://localhost:8126`<br>
-トレーサーが送信するトレース Agent の URL。設定した場合、ホスト名およびポートより優先されます。`datadog.yaml` ファイルの `apm_config.receiver_socket` または 　`DD_APM_RECEIVER_SOCKET` 環境変数と組み合わせて、Unix ドメインソケットをサポートします。
+トレーサーが送信するトレース Agent の URL。設定した場合、ホスト名およびポートより優先されます。[Agent 構成][13]で `receiver_port` や `DD_APM_RECEIVER_PORT` をデフォルトの `8126` 以外に設定した場合、`DD_TRACE_AGENT_PORT` や `DD_TRACE_AGENT_URL` をそれに一致させる必要があります。`datadog.yaml` ファイルの `apm_config.receiver_socket` または 　`DD_APM_RECEIVER_SOCKET` 環境変数と組み合わせて、Unix ドメインソケットをサポートします。
 
 `DD_TRACE_AGENT_HOSTNAME`
 : **構成**: `hostname`<br>
@@ -77,12 +77,12 @@ dd-trace を有効にするかどうか。`false` に設定すると、ライブ
 `DD_TRACE_AGENT_PORT`
 : **構成**: `port`<br>
 **デフォルト**: `8126`<br>
-トレーサーが送信する Trace Agent のポート。
+トレーサーが送信する Trace Agent のポート。[Agent 構成][13]で `receiver_port` や `DD_APM_RECEIVER_PORT` をデフォルトの `8126` 以外に設定した場合、`DD_TRACE_AGENT_PORT` や `DD_TRACE_AGENT_URL` をそれに一致させる必要があります。
 
 `DD_DOGSTATSD_PORT`
 : **構成**: `dogstatsd.port`<br>
 **デフォルト**: `8125`<br>
-メトリクスの送信先となる DogStatsD Agent のポート。
+メトリクスを送信する DogStatsD Agent のポート。[Agent 構成][13]で `dogstatsd_port` や `DD_DOGSTATSD_PORT` がデフォルトの `8125` 以外に設定されている場合、このトレーシングライブラリ `DD_DOGSTATSD_PORT` はそれに合わせなければなりません。
 
 `DD_LOGS_INJECTION`
 : **構成**: `logInjection`<br>
@@ -224,6 +224,39 @@ WAF の同期実行時間 (マイクロ秒) を制限します。
 **デフォルト**: N/A<br>
 攻撃報告において、機密データをその値で冗長化するための正規表現文字列。
 
+`DD_REMOTE_CONFIG_POLL_INTERVAL_SECONDS`
+: **構成**: `remoteConfig.pollInterval`<br>
+**デフォルト**: 5<br>
+リモート構成のポーリング間隔 (秒)。
+
+### ヘッダーの抽出と挿入
+
+Datadog APM トレーサーは、分散型トレーシングのための [B3][5] と [W3C (TraceParent)][6] のヘッダー抽出と挿入をサポートしています。
+
+分散ヘッダーの挿入と抽出のスタイルを構成することができます。
+
+Node.js トレーサーは、以下のスタイルをサポートしています。
+
+- Datadog: `Datadog`
+- B3 マルチヘッダー: `b3multi` (`B3` は非推奨)
+- W3C Trace Context: `tracecontext`
+- B3 シングルヘッダー: `B3 single header`
+
+`DD_TRACE_PROPAGATION_STYLE_INJECT`
+: **構成**: `tracePropagationStyle.inject`<br>
+**デフォルト**: `Datadog,tracecontext`<br>
+サービス間で分散型トレーシングを行うために含めるべきヘッダーフォーマットのカンマ区切りリスト。
+
+`DD_TRACE_PROPAGATION_STYLE_EXTRACT`
+: **構成**: `tracePropagationStyle.extract`<br>
+**デフォルト**: `Datadog,tracecontext`<br>
+分散型トレーシングの伝搬データを抽出するためのヘッダーフォーマットのカンマ区切りリスト。完全で有効なヘッダーを持つ最初のフォーマットが、トレースを継続するための定義に使用されます。
+
+`DD_TRACE_PROPAGATION_STYLE`
+: **構成**: `tracePropagationStyle`<br>
+**デフォルト**: `Datadog,tracecontext`<br>
+分散型トレーシングの伝搬データを挿入および抽出するためのヘッダーフォーマットのカンマ区切りリスト。完全で有効なヘッダーを持つ最初のフォーマットが、トレースを継続するための定義に使用されます。より詳細な `DD_TRACE_PROPAGATION_STYLE_INJECT` と `DD_TRACE_PROPAGATION_STYLE_EXTRACT` の構成が存在する場合には、そちらが優先されます。
+
 
 ライブラリの操作例については、[API ドキュメント][2]を参照してください。
 
@@ -235,3 +268,6 @@ WAF の同期実行時間 (マイクロ秒) を制限します。
 [2]: https://datadog.github.io/dd-trace-js/
 [3]: /ja/tracing/trace_pipeline/ingestion_mechanisms/
 [4]: /ja/help/
+[5]: https://github.com/openzipkin/b3-propagation
+[6]: https://www.w3.org/TR/trace-context/#trace-context-http-headers-format
+[13]: /ja/agent/guide/network/#configure-ports

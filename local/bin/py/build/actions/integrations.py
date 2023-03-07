@@ -101,6 +101,9 @@ class Integrations:
             r"(\S*FROM_DISPLAY_NAME\s*=\s*\{)(.*?)\}",
             re.DOTALL,
         )
+        self.regex_site_region = re.compile(
+            r"\{\{< ([\/]?site-region.*) >\}\}", re.MULTILINE
+        )
         self.datafile_json = []
         self.integration_mutations = integration_mutations
         self.initial_integration_files = glob.glob(
@@ -468,7 +471,7 @@ class Integrations:
 
             new_file_name = "{}aws.json".format(self.data_npm_dir)
 
-        elif file_name.endswith("gcp_services.go"):
+        elif file_name.endswith("gcp_services.go") or file_name.endswith("azure_services.go"):
 
             with open(file_name) as fh:
 
@@ -479,7 +482,10 @@ class Integrations:
                         integration = line.split('"')[3]
                         dict_npm[integration] = {"name": integration}
 
-            new_file_name = "{}gcp.json".format(self.data_npm_dir)
+            if file_name.endswith("gcp_services.go"):
+                new_file_name = "{}gcp.json".format(self.data_npm_dir)
+            elif file_name.endswith("azure_services.go"):
+                new_file_name = "{}azure.json".format(self.data_npm_dir)
 
         if new_file_name != "":
             with open(
@@ -769,6 +775,9 @@ class Integrations:
             )
             result = re.sub(
                 self.regex_partial_close, "", result, 0
+            )
+            result = re.sub(
+                self.regex_site_region, r"{{% \1 %}}", result, 0
             )
 
         # if __init__.py exists lets grab the integration id

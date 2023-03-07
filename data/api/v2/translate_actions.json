@@ -201,6 +201,54 @@
     "request_description": "Incident Attachment Payload.",
     "request_schema_description": "The update request for an incident's attachments."
   },
+  "ListIncidentIntegrations": {
+    "description": "Get all integration metadata for an incident.",
+    "summary": "Get a list of an incident's integration metadata"
+  },
+  "CreateIncidentIntegration": {
+    "description": "Create an incident integration metadata.",
+    "summary": "Create an incident integration metadata",
+    "request_description": "Incident integration metadata payload.",
+    "request_schema_description": "Create request for an incident integration metadata."
+  },
+  "DeleteIncidentIntegration": {
+    "description": "Delete an incident integration metadata.",
+    "summary": "Delete an incident integration metadata"
+  },
+  "GetIncidentIntegration": {
+    "description": "Get incident integration metadata details.",
+    "summary": "Get incident integration metadata details"
+  },
+  "UpdateIncidentIntegration": {
+    "description": "Update an existing incident integration metadata.",
+    "summary": "Update an existing incident integration metadata",
+    "request_description": "Incident integration metadata payload.",
+    "request_schema_description": "Patch request for an incident integration metadata."
+  },
+  "ListIncidentTodos": {
+    "description": "Get all todos for an incident.",
+    "summary": "Get a list of an incident's todos"
+  },
+  "CreateIncidentTodo": {
+    "description": "Create an incident todo.",
+    "summary": "Create an incident todo",
+    "request_description": "Incident todo payload.",
+    "request_schema_description": "Create request for an incident todo."
+  },
+  "DeleteIncidentTodo": {
+    "description": "Delete an incident todo.",
+    "summary": "Delete an incident todo"
+  },
+  "GetIncidentTodo": {
+    "description": "Get incident todo details.",
+    "summary": "Get incident todo details"
+  },
+  "UpdateIncidentTodo": {
+    "description": "Update an incident todo.",
+    "summary": "Update an incident todo",
+    "request_description": "Incident todo payload.",
+    "request_schema_description": "Patch request for an incident todo."
+  },
   "ListOpsgenieServices": {
     "description": "Get a list of all services from the Datadog Opsgenie integration.",
     "summary": "Get all service objects"

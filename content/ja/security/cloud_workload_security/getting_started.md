@@ -1,60 +1,60 @@
 ---
-title: Getting Started with Cloud Workload Security
-kind: documentation
-description: "Follow the setup and installation instructions to get started with Cloud Workload Security."
 aliases:
-  - /security_platform/cloud_workload_security/getting_started
+- /ja/security_platform/cloud_workload_security/getting_started
+description: セットアップとインストールの説明に従って、クラウドワークロードセキュリティを開始します。
 further_reading:
-- link: "https://www.datadoghq.com/blog/datadog-runtime-security/"
-  tag: "Blog"
-  text: "Learn more about Datadog Cloud Runtime Security"
-- link: "https://www.datadoghq.com/blog/linux-security-threat-detection-datadog/"
-  tag: "Blog"
-  text: "How to detect security threats in your systems' Linux processes"
-- link: "https://www.datadoghq.com/blog/pwnkit-vulnerability-overview-and-remediation/"
-  tag: "Blog"
-  text: "The PwnKit vulnerability: Overview, detection, and remediation"
-- link: "https://www.datadoghq.com/blog/dirty-pipe-vulnerability-overview-and-remediation/"
-  tag: "Blog"
-  text: "The Dirty Pipe vulnerability: Overview, detection, and remediation"
-- link: "https://www.datadoghq.com/blog/engineering/dirty-pipe-container-escape-poc/"
-  tag: "Blog"
-  text: "Using the Dirty Pipe Vulnerability to Break Out from Containers"
-- link: "https://www.datadoghq.com/blog/dns-based-threat-detection/"
-  tag: "Blog"
-  text: "Catch attacks at the network layer with DNS-based threat detection"
+- link: https://www.datadoghq.com/blog/datadog-runtime-security/
+  tag: GitHub
+  text: Datadog クラウドランタイムセキュリティの詳細はこちら
+- link: https://www.datadoghq.com/blog/linux-security-threat-detection-datadog/
+  tag: GitHub
+  text: システムの Linux プロセスからセキュリティ脅威を検出する方法
+- link: https://www.datadoghq.com/blog/pwnkit-vulnerability-overview-and-remediation/
+  tag: GitHub
+  text: 'PwnKit の脆弱性: 概要、検出、対処法'
+- link: https://www.datadoghq.com/blog/dirty-pipe-vulnerability-overview-and-remediation/
+  tag: GitHub
+  text: 'Dirty Pipe の脆弱性: 概要、検出、対処法'
+- link: https://www.datadoghq.com/blog/engineering/dirty-pipe-container-escape-poc/
+  tag: GitHub
+  text: Dirty Pipe の脆弱性を利用したコンテナからの脱却
+- link: https://www.datadoghq.com/blog/dns-based-threat-detection/
+  tag: GitHub
+  text: DNS ベースの脅威検出でネットワーク層での攻撃をキャッチ
+kind: documentation
+title: クラウドワークロードセキュリティの概要
 ---
 
-## Overview
+## 概要
 
-There are four types of monitoring that the Datadog Agent uses for Cloud Workload Security:
+Datadog Agent がクラウドワークロードセキュリティに使用するモニタリングには、4 つのタイプがあります。
 
-1. **Process Execution Monitoring** to watch process executions for malicious activity on hosts or containers in real-time.
-2. **File Integrity Monitoring** to watch for changes to key files and directories on hosts or containers in real-time.
-3. **DNS Activity Monitoring** to watch network traffic for malicious activity on hosts and containers in real-time.
-4. **Kernel Activity Monitoring** to watch for Kernel-layer attacks like process hijacking, container breakouts, and more in real-time.
+1. **プロセス実行監視**により、ホストやコンテナ上の悪意のあるアクティビティのプロセス実行をリアルタイムで監視します。
+2. **ファイル整合性監視**により、ホストやコンテナ上の主要なファイルやディレクトリの変更をリアルタイムに監視します。
+3. **DNS アクティビティ監視**により、ホストやコンテナ上の悪意あるアクティビティをネットワークトラフィックでリアルタイムに監視します。
+4. **カーネルアクティビティ監視**により、プロセスのハイジャックやコンテナのブレイクアウトなど、カーネル層への攻撃をリアルタイムに監視します。
 
-## Requirements
+## 要件
 
 * Datadog Agent >= 7.27.0
-* Data collection is done using eBPF, so Datadog minimally requires platforms that have underlying Linux kernel versions of 4.15.0+ or have eBPF features backported. CWS supports the following Linux distributions:
+* データ収集は eBPF を使用して行われるため、Datadog は最低限、基底の Linux カーネルバージョン 4.15.0 以降または eBPF 機能のバックポートを備えたプラットフォームを必要とします。CWS は以下の Linux ディストリビューションをサポートしています。
   * Ubuntu 18.04+
   * Debian 10+
   * Amazon Linux 2
-  * Fedora 26+
-  * SUSE 15+
-  * CentOS/RHEL 7.6+
-  * Custom kernel builds are not supported.
-* For compatibility with a custom Kubernetes network plugin like Cilium or Calico, please see the [Troubleshooting page][3].
+  * Fedora 26 以上
+  * SUSE 15 以降
+  * CentOS/RHEL 7.6 以降
+  * カスタムカーネルビルドはサポートされていません。
+* Cilium や Calico などのカスタム Kubernetes ネットワークプラグインとの互換性については、[トラブルシューティングページ][3]をご参照ください。
 
-## Installation
+## APM に Datadog Agent を構成する
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
 
-1. If you have not already, install the [Datadog Agent][1] (version 7.27+).
+1. まだインストールしていない場合は、[Datadog Agent][1] (バージョン 7.27+) をインストールします。
 
-2. Add the following to the `datadog` section of the `values.yaml` file:
+2. `values.yaml` ファイルの `datadog` セクションに以下を追加します。
 
     ```yaml
     # values.yaml file
@@ -70,17 +70,17 @@ There are four types of monitoring that the Datadog Agent uses for Cloud Workloa
             enabled: true
     ```
 
-3. Restart the Agent.
-4. **Optional, if Cloud SIEM is checked** Follow [these instructions][2] to collect audit logs for Kubernetes.
+3. Agent を再起動します。
+4. **Cloud SIEM がチェックされている場合、オプションとなります** [こちらの手順][2]に従って、Kubernetes の監査ログを収集します。
 
 
 [1]: https://app.datadoghq.com/account/settings#agent/kubernetes
-[2]: https://docs.datadoghq.com/integrations/kubernetes_audit_logs/
-{{% /tab %}}
+[2]: https://docs.datadoghq.com/ja/integrations/kubernetes_audit_logs/
+{{< /tabs >}}
 
 {{% tab "Docker" %}}
 
-The following command can be used to start the Runtime Security Agent and `system-probe` in a Docker environment:
+Docker 環境でランタイムセキュリティ Agent と `system-probe` を起動するには、次のコマンドを使用します。
 
 {{< code-block lang="bash" filename="docker-runtime-security.sh" >}}
 
@@ -105,20 +105,20 @@ docker run -d --name dd-agent \
   -v /sys/kernel/debug:/sys/kernel/debug \
   -v /etc/os-release:/etc/os-release \
   -e DD_RUNTIME_SECURITY_CONFIG_ENABLED=true \
-  -e DD_RUNTIME_SECURITY_CONFIG_NETWORK_ENABLED=true \ # to enable the collection of CWS network events
+  -e DD_RUNTIME_SECURITY_CONFIG_NETWORK_ENABLED=true \ # CWS ネットワークイベントの収集を可能にするため
   -e HOST_ROOT=/host/root \
   -e DD_API_KEY=<API KEY> \
   gcr.io/datadoghq/agent:7
 
 {{< /code-block >}}
 
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "Debian" %}}
 
-For a package-based deployment, the Datadog package has to be deployed: run `dkpg -i datadog-agent_7….deb`
+パッケージベースのデプロイメントでは、Datadog パッケージをデプロイする必要があります。`dkpg -i datadog-agent_7....deb` を実行します。
 
-By default Runtime Security is disabled. To enable it, both the `security-agent.yaml` and the `system-probe.yaml` files need to be adapted. Run the following commands to enable these configurations:
+デフォルトでは、ランタイムセキュリティは無効になっています。有効にするには、`security-agent.yaml` と `system-probe.yaml` ファイルの両方を適合させる必要があります。これらの構成を有効にするには、以下のコマンドを実行します。
 
 {{< code-block lang="bash" filename="debian-runtime-security.sh" >}}
 
@@ -129,22 +129,22 @@ systemctl restart datadog-agent
 
 {{< /code-block >}}
 
-For [Datadog Agent][1] version 7.36 only, to enable the collection of CWS network events:
+[Datadog Agent][1] バージョン 7.36 のみ、CWS ネットワークイベントの収集を有効にするには
 
 ```shell
 echo "runtime_security_config.network.enabled: true" >> /etc/datadog-agent/system-probe.yaml
 ```
 
-Once you apply the changes, restart both the Security Agent and the system-probe.
+変更を適用したら、セキュリティ Agent と system-probe の両方を再起動します。
 
 [1]: https://app.datadoghq.com/account/settings#agent/kubernetes
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "Fedora/CentOS" %}}
 
-For a package-based deployment, the Datadog package has to be deployed: run `yum/dnf install datadog-agent_7….rpm`
+パッケージベースのデプロイメントでは、Datadog パッケージをデプロイする必要があります。`yum/dnf install datadog-agent_7....rpm` を実行します。
 
-By default Runtime Security is disabled. To enable it, both the `security-agent.yaml` and the `system-probe.yaml` files need to be adapted. Run the following commands to enable these configurations:
+デフォルトでは、ランタイムセキュリティは無効になっています。有効にするには、`security-agent.yaml` と `system-probe.yaml` ファイルの両方を適合させる必要があります。これらの構成を有効にするには、以下のコマンドを実行します。
 
 {{< code-block lang="bash" filename="fedora-centos-runtime-security.sh" >}}
 
@@ -155,20 +155,20 @@ systemctl restart datadog-agent
 
 {{< /code-block >}}
 
-For [Datadog Agent][1] version 7.36 only, to enable the collection of CWS network events:
+[Datadog Agent][1] バージョン 7.36 のみ、CWS ネットワークイベントの収集を有効にするには
 
 ```shell
 echo "runtime_security_config.network.enabled: true" >> /etc/datadog-agent/system-probe.yaml
 ```
 
 [1]: https://app.datadoghq.com/account/settings#agent/kubernetes
-{{% /tab %}}
+{{< /tabs >}}
 
-{{% tab "Host (Others)" %}}
+{{% tab "ホスト (その他)" %}}
 
-For a package-based deployment, the Datadog package has to be deployed. Install the package with your package manager.
+パッケージベースのデプロイでは、Datadog パッケージをデプロイする必要があります。パッケージマネージャーでパッケージをインストールします。
 
-By default Runtime Security is disabled. To enable it, both the `security-agent.yaml` and the `system-probe.yaml` files need to be adapted. Run the following commands to enable these configurations:
+デフォルトでは、ランタイムセキュリティは無効になっています。有効にするには、`security-agent.yaml` と `system-probe.yaml` ファイルの両方を適合させる必要があります。これらの構成を有効にするには、以下のコマンドを実行します。
 
 {{< code-block lang="bash" filename="host-runtime-security.sh" >}}
 
@@ -179,18 +179,18 @@ systemctl restart datadog-agent
 
 {{< /code-block >}}
 
-For [Datadog Agent][1] version 7.36 only, to enable the collection of CWS network events:
+[Datadog Agent][1] バージョン 7.36 のみ、CWS ネットワークイベントの収集を有効にするには
 
 ```shell
 echo "runtime_security_config.network.enabled: true" >> /etc/datadog-agent/system-probe.yaml
 ```
 
 [1]: https://app.datadoghq.com/account/settings#agent/kubernetes
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "Amazon Elastic Beanstalk" %}}
 
-The following deployment can be used to start the Runtime Security Agent and `system-probe` in an Amazon Elastic Beanstalk environment with multiple Docker containers:
+複数の Docker コンテナを持つ Amazon Elastic Beanstalk 環境で、Runtime Security Agent と `system-probe` を起動するには、次のデプロイを使用します。
 
 ```json
 {
@@ -320,7 +320,7 @@ The following deployment can be used to start the Runtime Security Agent and `sy
 {{% /tab %}}
 {{< /tabs >}}
 
-## Further Reading
+## その他の参考資料
 {{< partial name="whats-next/whats-next.html" >}}
 
-[3]: /security/cloud_security_management/troubleshooting
+[3]: /ja/security/cloud_security_management/troubleshooting

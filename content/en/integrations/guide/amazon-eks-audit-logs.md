@@ -66,7 +66,7 @@ To create a rule, navigate to the in-app [Rule Setup and Configuration][13] page
 
 1. In the Log Explorer, create a query in the search bar. For example, filter by `source:kubernetes.audit @objectRef.resource:pods @objectRef.subresource:exec @http.method:create @http.status_code:[101 TO 299]`.
 1. Click the **Export** button and select **Export to detection rule**.
-1. This feature exports your query and defines it in the second step of the Log Detection rule setup. Select a detection method. In this instance, select **New Value**. Select the `@usr.name` attribute in the Detect new value dropdown menu. This alerts you for the first time when a user execs into a pod. After the first alert, Datadog won't alert on the same user again. Alternatively, to detect when these events exceed a user-defined threshold, use **threshold rule** for the detection method. 
+1. This feature exports your query and defines it in the second step of the Log Detection rule setup. Select a detection method. In this instance, select **New Value**. Select the `@usr.name` attribute in the Detect new value dropdown menu. This alerts you for the first time when a user execs into a pod. After the first alert, Datadog won't alert on the same user again. Alternatively, to detect when these events exceed a user-defined threshold, use **threshold rule** for the detection method.
 1. Follow the [Log Detection Rules documentation][14] to learn how to complete the rest of your rule configuration.
 
 [1]: /security/cloud_siem/
@@ -81,5 +81,5 @@ To create a rule, navigate to the in-app [Rule Setup and Configuration][13] page
 [10]: https://app.datadoghq.com/security
 [11]: /security/default_rules/#cat-cloud-siem
 [12]: /security/detection_rules/#creating-and-managing-detection-rules
-[13]: https://app.datadoghq.com/security/configuration/rules/new
+[13]: https://app.datadoghq.com/security/configuration/rules/new?product=siem
 [14]: /security/cloud_siem/log_detection_rules/?tab=threshold#choose-a-detection-method

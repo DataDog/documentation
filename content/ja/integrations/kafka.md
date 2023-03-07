@@ -10,7 +10,9 @@ assets:
     events:
       creates_events: false
     metrics:
-      check: kafka.net.bytes_out.rate
+      check:
+      - kafka.net.bytes_out
+      - kafka.net.bytes_out.rate
       metadata_path: metadata.csv
       prefix: kafka.
     process_signatures:

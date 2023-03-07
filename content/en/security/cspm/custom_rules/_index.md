@@ -22,18 +22,18 @@ Cloud Security Posture Management is not available in this site.
 
 {{< callout url="#" btn_hidden="true">}}
 Creating and using custom CSPM rules is a beta feature, available for select Amazon Web Services (AWS), Microsoft Azure, and Google Cloud Platform (GCP) cloud resources. See the <a href="https://docs.datadoghq.com/security/cspm/custom_rules/schema/">cloud resources schema documentation</a> for more information. New cloud resources will be added throughout the beta period.
-{{< /callout >}} 
+{{< /callout >}}
 
 ## Overview
 
-To extend the rules being applied to your environment to evaluate your security posture, you can clone detection rules and edit the copies, and you can create your own rules from scratch. 
+To extend the rules being applied to your environment to evaluate your security posture, you can clone detection rules and edit the copies, and you can create your own rules from scratch.
 
 ## Cloning rules
 
 To clone a rule:
 
 1. Find the rule you want to copy one of the following ways:
-   - Navigate to [**Security > Posture Management** and click **Detection Rules**][1]. Select a rule you want to copy to open its details page. 
+   - Navigate to [**Security > Posture Management** and click **Detection Rules**][1]. Select a rule you want to copy to open its details page.
    - Navigate to [**Security > Posture Management** and click **Findings**][2]. Select a finding to open its details, and select **Edit Rule** from the **Rule** menu.
 2. Make any changes you want for your new rule.
 3. Scroll to the bottom of the details page and click **Clone Rule**.
@@ -62,11 +62,11 @@ To create a rule from scratch:
 
 ## Tagging findings
 
-When you create, clone, or modify CSPM detection rules, you can specify tags to apply to findings so that you can group, filter, and search findings by those tags. When you clone a rule, some tags are carried forward into the new rule, and others are not (see table below). 
+When you create, clone, or modify CSPM detection rules, you can specify tags to apply to findings so that you can group, filter, and search findings by those tags. When you clone a rule, some tags are carried forward into the new rule, and others are not (see table below).
 
 You can assign almost any key-value as a tag. The following table shows tags that are useful in common security scenarios.
 
-| Key     | Valid values    | Description | 
+| Key     | Valid values    | Description |
 | ------  | --------------- | ----------- |
 | `scored` | `true`, `false` | Indicates whether to include the rule when calculating organization's overall posture score. Automatically added to cloned rules. |
 | `security` | `compliance` | Categorizes findings on the [Security Signals page][7]. Can't be removed. |
@@ -81,7 +81,7 @@ You can assign almost any key-value as a tag. The following table shows tags tha
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/security/configuration/rules?query=type%3A%28cloud_configuration%20OR%20infrastructure_configuration%29&all=false&product=cspm&sort=rule_name
+[1]: https://app.datadoghq.com/security/configuration/rules?product=cspm&query=type%3A%28cloud_configuration%20OR%20infrastructure_configuration%29&all=false&product=cspm&sort=rule_name
 [2]: https://app.datadoghq.com/security/compliance
 [3]: https://www.openpolicyagent.org/docs/latest/
 [4]: /security/cloud_security_management/guide/writing_rego_rules/

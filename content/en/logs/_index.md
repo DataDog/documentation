@@ -12,7 +12,7 @@ further_reading:
     text: "Check out the latest Datadog Log Management releases (App login required)"
   - link: "/logs/log_collection/"
     tag: "Documentation"
-    text: "Starting collecting your logs"
+    text: "Start collecting your logs"
   - link: "https://learn.datadoghq.com/courses/intro-to-log-management"
     tag: "Learning Center"
     text: "Introduction to Log Management"
@@ -53,13 +53,13 @@ Once your logs are ingested, process and enrich all your logs with pipelines and
 Leverage the pillars of observability by connecting your logs to metrics and traces:
 
 - [Connect your logs and traces][5] to gain observability into your applications.
-- [Correlate logs and metrics][6] to gain context of an issue and map it throughout your service.
+- [Correlate your logs and metrics][6] to gain context of an issue and map it throughout your service.
 
 ## Explore
 
 Start exploring your ingested logs in the [Log Explorer][1].
 
-{{< img src="/logs/explore.jpg" alt="Explore your ingested logs" style="width:80%;">}}
+{{< img src="/logs/explore.png" alt="Explore your ingested logs" style="width:80%;">}}
 
 - [Search][7]: Search through all of your logs.
 - [Live Tail][8]: See your ingested logs in real time across all your environments.

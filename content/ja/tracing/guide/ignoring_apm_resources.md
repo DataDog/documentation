@@ -71,6 +71,78 @@ apm_config:
 | `http.useragent_details.browser.family` | User-Agent によって報告されたブラウザファミリー。    |
 | `http.useragent_details.device.family`  | User-Agent によって報告されたデバイスファミリー。     |
 
+<div class="alert alert-warning"><strong>注</strong>: 2022 年 10 月 1 日以降、Datadog バックエンドは、取り込まれたすべてのスパンについてトレーサー間で<a href="/tracing/trace_collection/tracing_naming_convention">スパンタグのセマンティクス</a>を適用するためにリマッピングを適用します。Datadog Agent レベルでタグに基づいてスパンをドロップしたい場合、<strong>Remap from</strong> 列でタグを使用します。</div>
+
+#### ネットワーク通信
+
+| **名前**                   | **Remap from**                                      |
+|----------------------------|-----------------------------------------------------|
+| `network.host.ip`          | `tcp.local.address` - Node.js                       |
+| `network.destination.ip`   | `out.host` - すべての言語  |
+| `network.destination.port` | `grpc.port` - Python<br>`tcp.remote.port` - Node.js<br>`out.port` - すべての言語  |
+
+#### HTTP リクエスト
+
+| **名前**                       | **Remap from**                                                                                        |
+|--------------------------------|-------------------------------------------------------------------------------------------------------|
+| `http.route`                   | `aspnet_core.route` - .NET<br>`aspnet.route` - .NET<br>`laravel.route` - PHP<br>`symfony.route` - PHP |
+| `http.useragent`               | `user_agent` - Java                                                                                   |
+| `http.url_details.queryString` | `http.query.string` - Python                                                                          |
+
+#### データベース
+
+| **名前**                         | **Remap from**                                                                                                                                                                                                                  |
+|----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `db.system`                      | `db.type` - Java、Python、Node.js、Go<br>`active_record.db.vendor` - Ruby<br>`sequel.db.vendor` - Ruby                                                                                                                          |
+| `db.instance`                    | `mongodb.db` - Python<br> `sql.db` - Python<br> `db.name` - すべての言語                                           |
+| `db.statement`                   | `cassandra.query` - Go<br>`consul.command` - Python<br>`memcached.query` - Python<br>`mongodb.query` - Python、.NET、Go<br>`redis.command` - Python<br>`redis.raw_command` - Python<br>`sql.query` - Python、PHP、Node.js、Java |
+| `db.row_count`                   | `cassandra.row_count` - Python<br>`db.rowcount` - Python、PHP<br>`mongodb.rows` - Python<br>`sql.rows` - Python                                                                                                                 |
+| `db.cassandra.cluster`           | `cassandra.cluster` - Python、Go                                                                                                                                                                                                |
+| `db.cassandra.consistency_level` | `cassandra.consistency_level` - Python、Go                                                                                                                                                                                      |
+| `db.cassandra.table`             | `cassandra.keyspace` - Python、Go                                                                                                                                                                                               |
+| `db.redis.database_index`        | `db.redis.dbIndex` - Java<br>`out.redis_db` - Python、Ruby                                                                                                                                                                      |
+| `db.mongodb.collection`          | `mongodb.collection` - Python、.NET、Ruby、PHP                                                                                                                                                                                  |
+| `db.cosmosdb.container`          | `cosmosdb.container` - .NET                                                                                                                                                                                                     |
+
+#### メッセージキュー
+
+| **名前**                               | **Remap from**                                                                                             |
+|----------------------------------------|------------------------------------------------------------------------------------------------------------|
+| `messaging.destination`                | `amqp.destination` - Node.js<br>`amqp.queue` - .NET<br>`msmq.queue.path` - .NET<br>`aws.queue.name` - .NET |
+| `messaging.url`                        | `aws.queue.url` - .NET、Java                                                                               |
+| `messaging.message_id`                 | `server_id` - Go                                                                                           |
+| `messaging.message_payload_size`       | `message.size` - .NET、Java                                                                                |
+| `messaging.operation`                  | `amqp.command` - .NET<br>`msmq.command` - .NET                                                             |
+| `messaging.rabbitmq.routing_key`       | `amqp.routing_key` - Java<br>`amqp.routingKey` - Nodes.js                                                  |
+| `messaging.rabbitmq.delivery_mode`     | `messaging.rabbitmq.exchange` - .NET                                                                       |
+| `messaging.msmq.message.transactional` | `msmq.message.transactional` - .NET                                                                        |
+| `messaging.msmq.queue.transactional`   | `msmq.queue.transactional` - .NET                                                                          |
+| `messaging.kafka.consumer_group`       | `kafka.group` - Java                                                                                       |
+| `messaging.kafka.tombstone`            | `kafka.tombstone` - .NET<br>`tombstone` - Java                                                             |
+| `messaging.kafka.partition`            | `kafka.partition` - .NET<br>`partition` - Node.js、Go、Java                                                |
+| `messaging.kafka.offset`               | `kafka.offset` - .NET                                                                                      |
+| `messaging.msmq.message.transactional` | `msmq.message.transactional` - .NET                                                                        |
+
+
+#### リモートプロシージャコール
+
+| **名前**                       | **Remap from**                                                                                          |
+|--------------------------------|---------------------------------------------------------------------------------------------------------|
+| `rpc.service`                  | `grpc.method.service` - Python、.NET                                                                    |
+| `rpc.method`                   | `grpc.method.name` - Python、.NET、Go                                                                   |
+| `rpc.grpc.package`             | `grpc.method.package` - Python、.NET、Go                                                                |
+| `rpc.grpc.status_code`         | `grpc.code` - Go<br>`status.code` - Python、.NET、Node.js<br>`grpc.status.code` - Python、.NET、Node.js |
+| `rpc.grpc.kind`                | `grpc.method.kind` - Python、Node.js、Go、.NET                                                          |
+| `rpc.grpc.path`                | `rpc.grpc.path` - Python、Node.js、Go、.NET                                                             |
+| `rpc.grpc.request.metadata.*`  | `grpc.request.metadata.*` - Python、Node.js<br>`rpc.grpc.request.metadata` - Go                         |
+| `rpc.grpc.response.metadata.*` | `grpc.response.metadata.*` - Python、Node.js        
+
+#### エラー
+
+| **名前**                       | **Remap from**                                                                                          |
+|--------------------------------|---------------------------------------------------------------------------------------------------------|
+| `error.message`                  | `error.msg` - すべての言語                      |
+
 ### リソースに基づいて無視する
 
 **ignore resources** オプションを使用すると、トレースのグローバルルートスパンが特定の基準に一致する場合にリソースを除外することができます。[リソースを収集から除外][5]を参照してください。このオプションは、この特定の Datadog Agent にトレースを送信するすべてのサービスに適用されます。ignore resources により無視されたトレースは、トレースメトリクスに含まれません。
