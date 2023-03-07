@@ -1,5 +1,5 @@
 ---
-title: Add Metadata to Services through the Datadog Service Definition API
+title: APIs for Service Catalog
 kind: documentation
 aliases:
 - /tracing/faq/service_definition_api/

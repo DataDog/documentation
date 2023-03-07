@@ -118,8 +118,8 @@ The outlier algorithms are set up to identify groups that are behaving different
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/outlier
-[2]: /monitors/create/types/metric/#define-the-metric
-[3]: /monitors/create/configuration/#advanced-alert-conditions
+[2]: /monitors/types/metric/#define-the-metric
+[3]: /monitors/configuration/#advanced-alert-conditions
 [4]: /monitors/notify/
 [5]: /api/v1/monitors/#create-a-monitor
 [6]: /monitors/manage/status/#settings

@@ -39,7 +39,7 @@ The Vulnerability Explorer shows a complete list of vulnerabilities detected by 
 
 {{< img src="security/application_security/appsec-vuln-explorer.png" alt="ASM Risk Management Vulnerability Explorer page." style="width:100%;" >}}
 
-Select a specific vulnerability to see its details, including which services are compromised. From here you can explore what containers and infrastructure are potentially affected by the vulnerability, so you know more about the extent of a risk. This provides valuable information for prioritizing remediation tasks.
+Select a specific vulnerability to see its details, including which services are affected. From here you can explore what containers and infrastructure are potentially affected by the vulnerability, so you know more about the extent of a risk. This provides valuable information for prioritizing remediation tasks.
 
 The explorer also offers remediation recommendations for detected vulnerabilities and shows a collection of links and references to websites or information sources that help you understand the context behind each vulnerability.
 

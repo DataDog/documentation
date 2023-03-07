@@ -312,17 +312,19 @@ If you've configured the profiler and don't see profiles in the profile search p
 
 {{% tab "Windows" %}}
 
+The default profiler log directory is `%ProgramData%\Datadog .NET Tracer\logs\`. Prior to v2.24, the default directory was `%ProgramData%\Datadog-APM\logs\DotNet`.
+
 1. Check that the Agent is installed and running and is visible in the Windows Services panel.
 
 2. Check that the profiler has been loaded from the loader log:
 
-   1. Open the `dotnet-native-loader-<Application Name>-<pid>` log file in the `%ProgramData%\Datadog-APM\logs\DotNet` folder.
+   1. Open the `dotnet-native-loader-<Application Name>-<pid>` log file from the default log folder.
 
    2. Look for `CorProfiler::Initialize: Continuous Profiler initialized successfully.` near the end. If the `initialized successfully` message is not present, enable debug logs by setting the `DD_TRACE_DEBUG` environment variable for the application.
 
    3. Restart the application.
 
-   4. Open the `dotnet-native-loader-<Application Name>-<pid>` log file in the `%ProgramData%\Datadog-APM\logs\DotNet` folder.
+   4. Open the `dotnet-native-loader-<Application Name>-<pid>` log file from the default log folder.
 
    5. Look for the `#Profiler` entry.
 
@@ -342,7 +344,7 @@ If you've configured the profiler and don't see profiles in the profile search p
 
    1. If debug logs were not enabled in step 2.2, set the `DD_TRACE_DEBUG` environment variable to `true` for the application and restart it.
 
-   2. Open the `DD-DotNet-Profiler-Native-<Application Name>-<pid>` log file in the `%ProgramData%\Datadog-APM\logs\DotNet` folder.
+   2. Open the `DD-DotNet-Profiler-Native-<Application Name>-<pid>` log file from the default log folder.
 
    3. Look for `libddprof error: Failed to send profile.` entries: This message means that it can't contact the agent. Ensure the `DD_TRACE_AGENT_URL` is set to the correct Agent URL. See [Enabling the .NET Profiler-Configuration][1] for more information.
 
@@ -389,10 +391,6 @@ Since APM tracing also relies on the CLR Profiling API, if you want to stop coll
  DD_PROFILING_ENABLED=0 
  CORECLR_ENABLE_PROFILING=1
 ```
-
-The profiler has a fixed overhead. The exact value can vary but this fixed cost means that the relative overhead of the profiler can be significant in very small containers. To avoid this situation, the profiler is disabled in containers with less than 1 core.
-You can override the 1 core threshold by setting `DD_PROFILING_MIN_CORES_THRESHOLD` environment variable to a value smaller than 1. For example, a value of `0.5` allows the profiler to run in a container with at least 0.5 cores.
-
 
 ## No CPU or Wall time because the application on Linux is hung
 

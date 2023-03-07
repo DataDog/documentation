@@ -16,6 +16,10 @@ assets:
       check: impala.daemon.jvm.gc.count
       metadata_path: metadata.csv
       prefix: impala.
+    process_signatures:
+    - impalad
+    - catalogd
+    - statestored
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_name: Impala
@@ -144,7 +148,57 @@ Impala インテグレーションには、イベントは含まれません。
 
 ### ログ管理
 
-Impala インテグレーションは、Impala のサービスからログを収集し、Datadog に転送することができます。すべてのログを収集する方法については、[コンフィギュレーションファイルの例][9]を参照してください。
+Impala インテグレーションは、Impala のサービスからログを収集し、Datadog に転送することができます。
+
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
+
+   ```yaml
+   logs_enabled: true
+   ```
+
+2. `impalad.d/conf.yaml` ファイルのログ構成ブロックのコメントを解除して編集します。ここでは、デーモンプロセスでの例を示します。
+
+   ```yaml
+   logs:
+     - type: file
+       path: /var/log/impala/impalad.INFO
+       source: impala
+       tags:
+       - service_type:daemon
+       log_processing_rules:
+       - type: multi_line
+         pattern: ^[IWEF]\d{4} (\d{2}:){2}\d{2}
+         name: new_log_start_with_log_level_and_date
+     - type: file
+       path: /var/log/impala/impalad.WARNING
+       source: impala
+       tags:
+       - service_type:daemon
+       log_processing_rules:
+       - type: multi_line
+         pattern: ^[IWEF]\d{4} (\d{2}:){2}\d{2}
+         name: new_log_start_with_log_level_and_date
+     - type: file
+       path: /var/log/impala/impalad.ERROR
+       source: impala
+       tags:
+       - service_type:daemon
+       log_processing_rules:
+       - type: multi_line
+         pattern: ^[IWEF]\d{4} (\d{2}:){2}\d{2}
+         name: new_log_start_with_log_level_and_date
+     - type: file
+       path: /var/log/impala/impalad.FATAL
+       source: impala
+       tags:
+       - service_type:daemon
+       log_processing_rules:
+       - type: multi_line
+         pattern: ^[IWEF]\d{4} (\d{2}:){2}\d{2}
+         name: new_log_start_with_log_level_and_date
+   ```
+
+すべてのログを収集する方法については、[コンフィギュレーションファイルの例][9]を参照してください。
 
 ## トラブルシューティング
 

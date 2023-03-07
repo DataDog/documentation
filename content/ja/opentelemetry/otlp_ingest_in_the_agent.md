@@ -7,6 +7,9 @@ further_reading:
 - link: https://www.datadoghq.com/about/latest-news/press-releases/datadog-announces-opentelemetry-protocol-support/
   tag: GitHub
   text: Agent における OTLP の取り込み
+- link: /metrics/open_telemetry/otlp_metric_types
+  tag: Documentation
+  text: OTLP メトリクスタイプ
 kind: documentation
 title: Datadog Agent による OTLP の取り込み
 ---
@@ -16,9 +19,9 @@ OTLP Ingest in the Agent は、[OpenTelemetry SDK][1] でインスツルメン�
 
 OTLP Ingest in the Agent では、Datadog Agent で観測可能性機能を利用することができます。アプリケーションは OpenTelemetry SDK でインスツルメントされているため、Application Security Management、Continuous Profiler、ランタイムメトリクス、取り込みルールなどの Datadog ライブラリ固有の機能は、取り込まれたデータでは利用できません。
 
-まず、OpenTelemetry SDK を使って、[アプリケーションをインスツルメントします][3]。次に、テレメトリーデータを OTLP フォーマットで Datadog Agent にエクスポートします。この構成は、以下のページで説明されているように、サービスがデプロイされているインフラストラクチャーの種類によって異なります。
+まず、OpenTelemetry SDK を使って、[アプリケーションをインスツルメンテーション][3]します。その後、テレメトリーデータを OTLP フォーマットで Datadog Agent にエクスポートします。この構成は、以下のページで説明されているように、サービスがデプロイされているインフラストラクチャーの種類によって異なります。最新の OTLP バージョンと互換性があることが目的ですが、Agent の OTLP 取り込みは、すべての OTLP バージョンと互換性があるわけではありません。[Agent changelog][4] で OTLP のバージョン互換性を確認してください。
 
-OpenTelemetry のインスツルメンテーションのドキュメントを読んで、インスツルメンテーションを Agent に向ける方法を理解してください。以下に説明する `receiver` セクションは [OpenTelemetry Collector OTLP レシーバー構成スキーマ][4]に従っています。
+OpenTelemetry のインスツルメンテーションのドキュメントを読んで、インスツルメンテーションを Agent に向ける方法を理解してください。以下に説明する `receiver` セクションは [OpenTelemetry Collector OTLP レシーバー構成スキーマ][5]に従っています。
 
 {{< img src="metrics/otel/otlp_ingestion_update.png" alt="OTel SDK/ライブラリ、Datadog トレースライブラリ、Datadog インテグレーション -> Datadog Agent -> Datadog" style="width:100%;">}}
 
@@ -109,7 +112,7 @@ otlp_config:
    ```
 
 [1]: /ja/agent/kubernetes/?tab=daemonset
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "Kubernetes (Helm) - values.yaml" %}}
 
@@ -139,7 +142,7 @@ otlp_config:
 
 
 [1]: /ja/agent/kubernetes/?tab=helm
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "Kubernetes (Helm) - set" %}}
 
@@ -162,9 +165,9 @@ otlp_config:
 {{% /tab %}}
 {{< /tabs >}}
 
-Datadog Agent でサポートされている環境変数や設定は、他にも多数あります。それらすべての概要を知るには、[構成テンプレート][5]を参照してください。
+Datadog Agent でサポートされている環境変数や設定は、他にも多数あります。それらすべての概要を知るには、[構成テンプレート][6]を参照してください。
 
-## アプリケーションから Datadog Agent に OTLP トレースを送信する
+## OpenTelemetry のトレースとメトリクスを Datadog Agent に送信する
 
 {{< tabs >}}
 {{% tab "Docker" %}}
@@ -177,7 +180,7 @@ Datadog Agent でサポートされている環境変数や設定は、他にも
 2. 両方のコンテナが同じブリッジネットワークに定義されている必要がありますが、これは Docker Compose を使用している場合に自動的に処理されます。そうでない場合は、[Docker アプリケーションのトレース][1]の Docker の例に従って、正しいポートでブリッジネットワークをセットアップしてください。
 
 [1]: /ja/agent/docker/apm/#docker-network
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "Kubernetes" %}}
 1. アプリケーションデプロイファイルで、`OTEL_EXPORTER_OTLP_ENDPOINT` 環境変数を使って、OpenTelemetry クライアントがトレースを送信するエンドポイントを構成します。
@@ -203,18 +206,28 @@ Datadog Agent でサポートされている環境変数や設定は、他にも
     - name: OTEL_EXPORTER_OTLP_ENDPOINT
       value: "http://$(HOST_IP):4318" # sends to HTTP receiver on port 4318
    ```
-{{< /tabs >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 <div class="alert alert-info">OTLP ライブラリのドキュメントを確認してください。それらのいくつかは、トレースを <code>/</code> ルートパスの代わりに <code>/v1/traces</code> に送らなければなりません。</div>
 
+## すぐに使えるダッシュボード
 
-## {{< partial name="whats-next/whats-next.html" >}}
+Datadog は、すぐに使えるダッシュボードを提供しており、コピーしてカスタマイズすることができます。Datadog のすぐに使える OpenTelemetry ダッシュボードを使用するには、**Dashboards** > **Dashboards list** に移動し、`opentelemetry` を検索してください。
+
+{{< img src="metrics/otel/dashboard.png" alt="ダッシュボードリストには、OpenTelemetry のすぐに使えるダッシュボードが 2 つ (ホストメトリクスとコレクターメトリクス) 表示されています。" style="width:80%;">}}
+
+**Host Metrics** ダッシュボードは、[ホストメトリクスレシーバー][12] から収集されたデータ用です。**Collector Metrics** ダッシュボードは、有効化する[メトリクスレシーバー][13]に応じて収集された他の種類のメトリクス用です。
+
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://opentelemetry.io/docs/instrumentation/
 [2]: /ja/metrics/open_telemetry/otlp_metric_types/
 [3]: https://opentelemetry.io/docs/concepts/instrumenting/
-[4]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/config.md
-[5]: https://github.com/DataDog/datadog-agent/blob/7.35.0/pkg/config/config_template.yaml
+[4]: https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst
+[5]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/config.md
+[6]: https://github.com/DataDog/datadog-agent/blob/7.35.0/pkg/config/config_template.yaml
+[12]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver
+[13]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver

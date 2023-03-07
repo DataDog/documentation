@@ -20,6 +20,8 @@ content/en/api/**/*.ts
 content/en/api/tsconfig.json
 
 # Ignoring all automated content
+temp
+
 # Developers/integrations
 content/en/developers/integrations/*.md
 content/en/developers/datadog_apps.md
@@ -63,6 +65,7 @@ content/en/integrations/guide/amazon_cloudformation.md
 !content/en/integrations/kubernetes_audit_logs.md
 !content/en/integrations/apigee.md
 !content/en/integrations/snyk.md
+!content/en/integrations/content_security_policy_logs.md
 
 # Ignore the marketplace images that get pulled
 static/images/marketplace

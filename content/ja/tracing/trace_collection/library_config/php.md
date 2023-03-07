@@ -302,10 +302,15 @@ URL の一部として収集するクエリパラメータのカンマ区切り�
 **デフォルト**: `*`<br>
 リソース URI の一部として収集するクエリパラメータのカンマ区切りリスト。パラメータを収集しない場合は空、すべてのパラメータを収集する場合は `*` を設定します。バージョン `0.74.0` で追加されました。
 
+`DD_TRACE_CLIENT_IP_ENABLED`
+: **INI**: `datadog.trace.client_ip_enabled`<br>
+**デフォルト**: `false`<br>
+クライアント側で IP 収集を有効にします。バージョン `0.84.0` で追加されました。
+
 `DD_TRACE_CLIENT_IP_HEADER`
 : **INI**: `datadog.trace.client_ip_header`<br>
 **デフォルト**: `null`<br>
-クライアント IP の収集に使用する IP ヘッダー。例: `x-forwarded-for`。バージョン `0.76.0` で追加されました。
+クライアント IP の収集に使用する IP ヘッダー。例: `x-forwarded-for`。バージョン `0.84.0` (ASM を使用している場合は `0.76.0`) で追加されました。
 
 `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP`
 : **INI**: `datadog.trace.obfuscation_query_string_regexp`<br>
@@ -317,19 +322,22 @@ URL の一部として収集するクエリパラメータのカンマ区切り�
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
 : **INI**: `datadog.trace.propagation_style_inject`<br>
-**デフォルト**: `Datadog`<br>
-トレースヘッダを挿入する際に使用する伝搬スタイル。複数のスタイルを使用する場合は、カンマで区切ってください。サポートされているスタイルは以下の通りです。
+**デフォルト**: `tracecontext,Datadog`<br>
+トレースヘッダーを挿入する際に使用する伝搬スタイル。複数のスタイルを使用する場合は、カンマで区切ってください。サポートされているスタイルは以下の通りです。
 
-  - [B3][7]
+
+  - [tracecontext][10]
+  - [b3multi][7]
   - [B3 シングルヘッダ][8]
   - Datadog
 
 `DD_TRACE_PROPAGATION_STYLE_EXTRACT`
 : **INI**: `datadog.trace.propagation_style_extract`<br>
-**デフォルト**: `Datadog,B3,B3 single header`<br>
-トレースヘッダを抽出する際に使用する伝搬スタイル。複数のスタイルを使用する場合は、カンマで区切ってください。サポートされているスタイルは以下の通りです。
+**デフォルト**: `tracecontext,Datadog,b3multi,B3 single header`<br>
+トレースヘッダーを抽出する際に使用する伝搬スタイル。複数のスタイルを使用する場合は、カンマで区切ってください。サポートされているスタイルは以下の通りです。
 
-  - [B3][7]
+  - [tracecontext][10]
+  - [b3multi][7]
   - [B3 シングルヘッダ][8]
   - Datadog
 
@@ -426,6 +434,28 @@ HTTP サーバーとクライアントインテグレーションでは、URL �
 [`open_basedir`][9] 設定が使用される場合、許可されるディレクトリに `/opt/datadog-php` を追加する必要があります。
 アプリケーションを Docker コンテナで実行する場合は、許可されるディレクトリにパス `/proc/self` も追加する必要があります。
 
+### ヘッダーの抽出と挿入
+
+Datadog APM トレーサーは、分散型トレーシングのための [B3][7] と [W3C][10] のヘッダー抽出と挿入をサポートしています。
+
+分散ヘッダーの挿入と抽出のスタイルを構成することができます。
+
+PHP トレーサーは、以下のスタイルをサポートしています。
+
+- Datadog: `Datadog`
+- W3C: `tracecontext`
+- B3 マルチヘッダー: `b3multi` (`B3` は非推奨)
+- B3 シングルヘッダー: `B3 single header`
+
+以下の環境変数を使用して、挿入および抽出のスタイルを構成することができます。例:
+
+- `DD_TRACE_PROPAGATION_STYLE_INJECT=Datadog,tracecontext`
+- `DD_TRACE_PROPAGATION_STYLE_EXTRACT=Datadog,tracecontext`
+
+環境変数の値は、挿入または抽出に有効なヘッダースタイルのカンマ区切りのリストです。デフォルトでは、`tracecontext` と `Datadog` の挿入スタイルのみが有効になっています。
+
+複数の抽出スタイルが有効な場合、次の順番で抽出が試みられます: `tracecontext` が最優先で、次が `Datadog`、その次が B3。
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -439,4 +469,5 @@ HTTP サーバーとクライアントインテグレーションでは、URL �
 [7]: https://github.com/openzipkin/b3-propagation
 [8]: https://github.com/openzipkin/b3-propagation#single-header
 [9]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir
+[10]: https://www.w3.org/TR/trace-context/#trace-context-http-headers-format
 [13]: /ja/agent/guide/network/#configure-ports

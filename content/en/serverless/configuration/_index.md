@@ -468,7 +468,7 @@ If you are using a runtime or custom logger that isn't supported, follow these s
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
 
-Run `datadog-ci lambda instrument` with `--source-code-integration true` to automatically send Git metadata in the current local directory and add the required tags to your Lambda functions.
+Run `datadog-ci lambda instrument` with `--source-code-integration=true` to automatically send Git metadata in the current local directory and add the required tags to your Lambda functions.
 
 **Note**: You must set environment variable `DATADOG_API_KEY` for `datadog-ci` to upload Git metadata. `DATADOG_API_KEY` is also set on your Lambda functions to send telemetry unless you also have `DATADOG_API_KEY_SECRET_ARN` defined, which takes precedence over `DATADOG_API_KEY`.
 
@@ -483,7 +483,7 @@ export DATADOG_API_KEY=<DATADOG_API_KEY>
 export DATADOG_API_KEY_SECRET_ARN=<DATADOG_API_KEY_SECRET_ARN>
 
 datadog-ci lambda instrument \
-    --source-code-integration true
+    --source-code-integration=true
     # ... other required arguments, such as function names
 ```
 {{% /tab %}}

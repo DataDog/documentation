@@ -69,12 +69,12 @@ For detailed instructions on the advanced alert options (no data, evaluation del
 [1]: /tracing/guide/setting_primary_tags_to_scope/#environment
 [2]: /tracing/services/service_page/
 [3]: /tracing/services/resource_page/
-[4]: /monitors/create/configuration/#advanced-alert-conditions
-[5]: /monitors/create/types/metric/#data-window
+[4]: /monitors/configuration/#advanced-alert-conditions
+[5]: /monitors/types/metric/#data-window
 {{% /tab %}}
 {{% tab "Trace Analytics" %}}
 
-<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 Trace Analytics monitors per account. If you are encountering this limit, consider using <a href="/monitors/create/configuration/?tab=thresholdalert#alert-grouping">multi alerts</a>, or <a href="/help/">Contact Support</a>.</div>
+<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 Trace Analytics monitors per account. If you are encountering this limit, consider using <a href="/monitors/configuration/?tab=thresholdalert#alert-grouping">multi alerts</a>, or <a href="/help/">Contact Support</a>.</div>
 
 ### Define the search query
 
@@ -91,7 +91,7 @@ For detailed instructions on the advanced alert options (no data, evaluation del
 
 {{< img src="monitors/monitor_types/apm/define-the-search-query.png" alt="Define the search query" style="width:80%;" >}}
 
-**Note:** Analytics monitors can only be created based on [Indexed Spans][4].
+**Note:** Analytics monitors can only be created based on spans retained by [custom retention filters][6] (not the intelligent retention filter).
 
 ### Select alert conditions
 
@@ -112,7 +112,8 @@ For detailed instructions on the advanced alert options (evaluation delay, etc.)
 [2]: /tracing/trace_explorer/query_syntax/#facet-search
 [3]: /tracing/trace_explorer/query_syntax/#numerical-values
 [4]: /tracing/glossary/#indexed-span
-[5]: /monitors/create/configuration/#advanced-alert-conditions
+[5]: /monitors/configuration/#advanced-alert-conditions
+[6]: /tracing/trace_pipeline/trace_retention/#create-your-own-retention-filter
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -126,7 +127,7 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/create/types/metric/
+[1]: /monitors/types/metric/
 [2]: https://app.datadoghq.com/monitors#create/apm
 [3]: /monitors/notify/
 [4]: https://app.datadoghq.com/apm/services

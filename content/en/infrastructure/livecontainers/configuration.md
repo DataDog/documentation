@@ -177,6 +177,7 @@ The following table presents the list of collected resources and the minimal Age
 | ServiceAccounts | 7.27.0 | 1.19.0 | 2.30.9 |
 | Services | 7.27.0 | 1.11.0 | 2.10.0 |
 | Statefulsets | 7.27.0 | 1.15.0 | 2.20.1 |
+| VerticalPodAutoscalers | 7.27.0 | 7.43.0 | 3.6.8 |
 
 **Note**: For Kubernetes version 1.25 and above, the minimal Cluster Agent version required is 7.40.0.
 
