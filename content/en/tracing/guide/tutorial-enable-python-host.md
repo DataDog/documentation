@@ -68,7 +68,7 @@ Setup, configure, and install Python dependencies for the sample using either Po
 
 {{< tab "Poetry" >}}
 
-```bash
+```shell
 poetry install
 ```
 
@@ -76,7 +76,7 @@ poetry install
 
 {{< tab "pip" >}}
 
-```bash
+```shell
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
@@ -125,7 +125,7 @@ Next, install the tracing library by using Poetry or pip (minimum version 18). F
 
 {{< tab "Poetry" >}}
 
-```bash
+```shell
 poetry add ddtrace
 poetry install
 
@@ -135,7 +135,7 @@ poetry install
 
 {{< tab "pip" >}}
 
-```bash
+```shell
 pip install ddtrace
 ```
 
