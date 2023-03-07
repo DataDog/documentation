@@ -1,6 +1,7 @@
 stages:
   - bootstrap
   - build
+  - build-redirects
   - post-deploy
   - cleanup
 
@@ -444,7 +445,7 @@ set_redirect_metadata_preview:
   variables:
     BUCKET: "datadog-docs-preview"
     IS_REDIRECT_JOB: "true" 
-  stage: post-deploy
+  stage: build-redirects
   cache: []
   environment: "preview"
   dependencies:
