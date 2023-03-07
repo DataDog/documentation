@@ -136,7 +136,7 @@ On the backend, Datadog creates and adds the following span tags to spans after 
 | `rpc.grpc.kind`                | `grpc.method.kind` - Python, Node.js, Go, .NET                                                          |
 | `rpc.grpc.path`                | `rpc.grpc.path` - Python, Node.js, Go, .NET                                                             |
 | `rpc.grpc.request.metadata.*`  | `grpc.request.metadata.*` - Python, Node.js<br>`rpc.grpc.request.metadata` - Go                         |
-| `rpc.grpc.response.metadata.*` | `grpc.response.metadata.*` - Python, Node.js
+| `rpc.grpc.response.metadata.*` | `grpc.response.metadata.*` - Python, Node.js        
 
 #### Errors
 
@@ -220,7 +220,7 @@ For multiple values:
 
 In your docker run command to spin up the Datadog Agent, add `DD_APM_IGNORE_RESOURCES`:
 
-{{< code-block lang="shell" >}}
+{{< code-block lang="bash" >}}
 docker run -d --name datadog-agent \
               --cgroupns host \
               --pid host \
@@ -314,7 +314,7 @@ For multiple values:
 
 Alternatively, you can set `agents.containers.traceAgent.env` in the `helm install` command:
 
-{{< code-block lang="shell" >}}
+{{< code-block lang="bash" >}}
 helm install dd-agent -f values.yaml \
   --set datadog.apiKeyExistingSecret="datadog-secret" \
   --set agents.containers.traceAgent.env[0].name=DD_APM_IGNORE_RESOURCES, \
