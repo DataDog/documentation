@@ -75,7 +75,7 @@ Framework
 ## Get started
 
 {{< whatsnext >}}
-  {{< nextlink href="/security/cspm/getting_started">}}Complete setup and configuration{{< /nextlink >}}
+  {{< nextlink href="/security/cspm/setup">}}Complete setup and configuration{{< /nextlink >}}
   {{< nextlink href="/security/default_rules/#cat-posture-management-cloud">}}Out-of-the-box Posture Management Cloud detection rules{{< /nextlink >}}
   {{< nextlink href="/security/default_rules/#cat-posture-management-infra">}}Out-of-the-box Posture Management Infrastructure detection rules{{< /nextlink >}}
   {{< nextlink href="/security/cspm/findings">}} Learn about Cloud Security Posture Management findings{{< /nextlink >}}
