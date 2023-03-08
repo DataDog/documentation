@@ -37,7 +37,7 @@ This guide describes how to search for USM metrics such as `universal.http.*` an
 
 Unlike APM metrics, errors are available under the `error:true` tag instead of as a separate metric.
 
-*Note: The `.hits` metrics have all of your infrastructure tags and are the recommended way to query request and error counts. You can also add [second primary tags][16] to all USM metrics.*
+**Note:** The `.hits` metrics have all of your infrastructure tags and are the recommended way to query request and error counts. You can also add [second primary tags][16] to all USM metrics.
 
 ### Metric syntax
 
