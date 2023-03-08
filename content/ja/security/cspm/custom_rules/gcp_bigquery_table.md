@@ -43,6 +43,10 @@ disable_edit: true
 **タイプ**: `STRING`<br>
 **プロバイダー名**: `defaultCollation`<br>
 **説明**: [出力のみ] テーブルのデフォルト照合。<br>
+## `default_rounding_mode`
+**タイプ**: `STRING`<br>
+**プロバイダー名**: `defaultRoundingMode`<br>
+**説明**: [出力のみ] テーブルのデフォルトの丸めモード。<br>
 ## `description`
 **タイプ**: `STRING`<br>
 **プロバイダー名**: `description`<br>
