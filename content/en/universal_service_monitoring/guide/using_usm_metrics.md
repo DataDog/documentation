@@ -77,7 +77,7 @@ For more information, see the [APM Monitor documentation][6].
 
 You can create an [**SLO**][10] on a per-service basis to ensure you are meeting objectives set by USM metrics and improving availability over time. Datadog recommends [creating an SLO programmatically][9] in order to cover a lot of services. 
 
-To create an SLO in the Service Catalog:
+To create an SLO from the Service Catalog:
 
 1. Navigate to the **Reliability** tab of the [Service Catalog][5].
 2. Under the **SLOs** column, hover over a service and click **+ Create Availability SLO** or **+ Create Latency SLO**.
