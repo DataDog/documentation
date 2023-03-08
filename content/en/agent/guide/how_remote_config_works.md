@@ -26,19 +26,19 @@ Remote configuration is not available on the US1-FED Datadog site.
 
 {{< /site-region >}}
 
-{{< site-region region="us,us3,us5,eu" >}}
+{{< site-region region="us,us3,us5,eu,ap1" >}}
 
 <div class="alert alert-info">Remote Configuration is in beta.</a></div>
 
 ## Overview
-Remote Configuration is a Datadog capability that allows you to remotely configure the behavior of Datadog resources (for example, Agents and tracing libraries) deployed in your infrastructure, for select product features. Using Remote Configuration makes it easier to apply Agent and tracing library configurations in your environment on demand, decreasing management costs, reducing friction between teams, and accelerating resolution times. 
+Remote Configuration is a Datadog capability that allows you to remotely configure the behavior of Datadog resources (for example, Agents and tracing libraries) deployed in your infrastructure, for select product features. Using Remote Configuration makes it easier to apply Agent and tracing library configurations in your environment on demand, decreasing management costs, reducing friction between teams, and accelerating resolution times.
 
-For Datadog security products, Application Security Management and Cloud Workload Security, Remote Configuration-enabled Agents and compatible tracing libraries provide real-time security updates and responses, enhancing security posture for your applications and cloud infrastructure. 
+For Datadog security products, Application Security Management and Cloud Workload Security, Remote Configuration-enabled Agents and compatible tracing libraries provide real-time security updates and responses, enhancing security posture for your applications and cloud infrastructure.
 
 ## How it works
 Once you enable Remote Configuration on the Datadog Agent, it periodically polls the configured [Datadog site][1], to determine whether there are configuration changes to apply to your Remote Configuration-enabled Agents or tracing libraries.
 
-After you submit configuration changes in the respective Datadog product UI for a Remote Configuration-enabled product feature, the changes are stored in Datadog. 
+After you submit configuration changes in the respective Datadog product UI for a Remote Configuration-enabled product feature, the changes are stored in Datadog.
 
 The following diagram illustrates how Remote Configuration works:
 
@@ -51,7 +51,7 @@ The following diagram illustrates how Remote Configuration works:
 **Note**: Configuration changes applied through Remote Configuration are not shown in your Agent configuration file.
 
 ## Product and feature capabilities
-The following products and features are supported with Remote Config: 
+The following products and features are supported with Remote Config:
 
 ### Application Security Management (ASM)
 <div class="alert alert-info">This feature is in beta.</div>
@@ -63,7 +63,7 @@ The following products and features are supported with Remote Config:
 ### Application Performance Monitoring (APM)
 <div class="alert alert-info">This feature is in private beta.</div>
 
-- **Remotely set Agent sampling rate**: Remotely configure the Datadog Agent to change its trace sampling rates and set rules to scale your organization's trace ingestion according to your needs, without needing to restart your Datadog Agent. 
+- **Remotely set Agent sampling rate**: Remotely configure the Datadog Agent to change its trace sampling rates and set rules to scale your organization's trace ingestion according to your needs, without needing to restart your Datadog Agent.
 
 ### Dynamic Instrumentation
 <div class="alert alert-info">This feature is in private beta.</div>
@@ -73,17 +73,17 @@ The following products and features are supported with Remote Config:
 ### Cloud Workload Security (CWS)
 <div class="alert alert-info">This feature is in private beta.</div>
 
-- **Automatic default agent rule updates**: Automatically receive and update the default Agent rules maintained by Datadog as new Agent detections and enhancements are released. 
+- **Automatic default agent rule updates**: Automatically receive and update the default Agent rules maintained by Datadog as new Agent detections and enhancements are released.
 
 ## Security Considerations
- 
+
 Datadog implements the following safeguards, designed to protect the confidentiality, integrity, and availability of configurations received and applied to your Agents and tracing libraries:
 
 * Agents deployed in your infrastructure request configurations from Datadog.
 * Datadog never sends configurations unless requested by Agents, and only sends configurations relevant to the requesting Agent.
 * Because the configuration requests are initiated from your Agents to Datadog over HTTPS (port 443), there is no need to open additional ports in your network firewall.
-* The communication between your Agents and Datadog is encrypted using HTTPS, and is authenticated and authorized using your Datadog API key. 
-* Only users with the right RBAC permissions are authorized to enable Remote Configuration scope on the API key and use the supported product features. 
+* The communication between your Agents and Datadog is encrypted using HTTPS, and is authenticated and authorized using your Datadog API key.
+* Only users with the right RBAC permissions are authorized to enable Remote Configuration scope on the API key and use the supported product features.
 * Your configuration changes submitted through the Datadog UI are signed and validated on the Agent and tracing libraries, verifying integrity of the configuration.
 
 ## Enabling Remote Configuration
@@ -91,22 +91,22 @@ Datadog implements the following safeguards, designed to protect the confidentia
 ### Prerequisites
 
 
-- Datadog Agent version `7.41.1`  (`7.42.0` for APM sampling rate) or higher installed on your hosts or containers. 
+- Datadog Agent version `7.41.1`  (`7.42.0` for APM sampling rate) or higher installed on your hosts or containers.
 - For features that use tracing libraries, the following minimum versions of Datadog tracing libraries:
 
 
-| Product feature                        | Go            | Java          | .Net          | NodeJS          
+| Product feature                        | Go            | Java          | .Net          | NodeJS
 |----------------------------------------|---------------|---------------|---------------|---------------|
 | Dynamic Instrumentation |               | 1.5.0         | 2.22.0        |               |
 | ASM Protect                | 1.45.1        | 1.4.0         | 2.16.0        | 3.11.0        |
 | ASM 1-click activation        |               | 1.4.0         | 2.17.0        | 3.9.0         |
 
 ### Setup
-To enable Remote Configuration: 
+To enable Remote Configuration:
 
 1.  [Contact support][2] to have your organization enabled for adding the Remote Configuration capability on API keys.
 
-2. Ensure your RBAC permissions include [`api_keys_write`][3] so you can create a new API key with the Remote Configuration scope, or add the scope on an existing API key. Contact your organization's Datadog administrator to update your permissions if you don't have it. You'll use the key with this scope to authenticate and authorize your Agent to use Remote Configuration. 
+2. Ensure your RBAC permissions include [`api_keys_write`][3] so you can create a new API key with the Remote Configuration scope, or add the scope on an existing API key. Contact your organization's Datadog administrator to update your permissions if you don't have it. You'll use the key with this scope to authenticate and authorize your Agent to use Remote Configuration.
 
 3. On the [Organization Settings][4] page, either select an existing API key, or create a new API key.
 
@@ -125,11 +125,11 @@ remote_configuration:
   enabled: true
 ```
 
-6. Restart your Agent for the changes to take effect.  
+6. Restart your Agent for the changes to take effect.
 
 {{% /tab %}}
 {{% tab "Environment variable" %}}
-Add the following to your Datadog Agent manifest, specifying the API key that has Remote Config scope enabled: 
+Add the following to your Datadog Agent manifest, specifying the API key that has Remote Config scope enabled:
 ```yaml
 DD_API_KEY=xxx
 DD_REMOTE_CONFIGURATION_ENABLED=true
@@ -139,7 +139,7 @@ DD_REMOTE_CONFIGURATION_ENABLED=true
 
 After you perform these steps, your Agent requests its configuration from Datadog, and the features that use remote configuration are enabled:
 - [CWS default agent rules][5] update automatically as released.
-- [APM Agent-level sampling rates][6] are applied.  
+- [APM Agent-level sampling rates][6] are applied.
 - [Dynamic Instrumentation][7] is enabled.
 - [ASM 1-Click enablement, IP blocking, and attack pattern updates][8] are enabled.
 

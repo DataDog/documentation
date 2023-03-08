@@ -102,7 +102,7 @@ For containerized, serverless, and cloud environments:
 
 For more information on how to configure these settings, see [Configuration](#configuration).
 
-{{< site-region region="us3,us5,eu,gov" >}}
+{{< site-region region="us3,us5,eu,gov,ap1" >}}
 
 4. To ensure the Agent sends data to the right Datadog location, set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}}.
 

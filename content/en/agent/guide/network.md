@@ -56,7 +56,7 @@ API test results for worker v>0.1.6 `intake.synthetics.`{{< region-param key="dd
 Browser test results for worker v>0.2.0 `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
 API test results for worker v<0.1.5 `api.`{{< region-param key="dd_site" code="true" >}}
 
-{{< site-region region="us,eu,us3,us5" >}}
+{{< site-region region="us,eu,us3,us5,ap1" >}}
 [Database Monitoring][2]
 : `dbm-metrics-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `dbquery-intake.`{{< region-param key="dd_site" code="true" >}}

@@ -10,7 +10,7 @@ further_reading:
 
 ## Overview
 
-While information from individual spans can be useful visualized as a list, sometimes valuable information can be accessed through aggregation. To access this information, search spans in the Trace Explorer and display them as timeseries, top lists, or tables. 
+While information from individual spans can be useful visualized as a list, sometimes valuable information can be accessed through aggregation. To access this information, search spans in the Trace Explorer and display them as timeseries, top lists, or tables.
 
 Trace Explorer search consists of a time range and a search query that combines `key:value` and full-text search. Choose which dimension to visualize (count of spans, count of unique values, measure of a quantitative dimension), select a time frame, and group the query by one or multiple dimensions.
 
@@ -24,7 +24,7 @@ Select a top list view, and group the query by `resource` to see which specific 
 
 {{< img src="tracing/trace_explorer/search/trace_explorer_top_list_search.png" alt="Trace Explorer list search"  style="width:100%;">}}
 
-{{< site-region region="us,eu,us3,us5" >}}
+{{< site-region region="us,eu,us3,us5,ap1" >}}
 **Note**: `key:value` queries **do not** require that you [declare a facet][1] beforehand.
 {{< /site-region >}}
 
