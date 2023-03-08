@@ -33,10 +33,10 @@ When you first open the graphing editor, you are on the **Edit** tab. Here, you 
 To configure your graph on dashboards, follow this process:
 
 1. [Select the visualization](#select-your-visualization)
-2. [Define the metric](#Define-the-metric)
+2. [Define the metric](#define-the-metric)
 3. [Filter your metric](#filter)
-4. [Configure the time aggregation](#aggregate-and-rollup)
-5. [Configure the space aggregation](#Configure-your-space-aggregation)
+4. [Configure the time aggregation](#configure-the-time-aggregation)
+5. [Configure the space aggregation](#configure-the-space-aggregation)
 6. [Apply function](#advanced-graphing)
 7. [Title the graph](#create-a-title)
 
@@ -70,7 +70,7 @@ To learn more about tags, see the [Tagging documentation][8].
 
 Aggregation method is next to the filter dropdown. This defaults to `avg by` but you can change the method to `max by`, `min by`, or `sum by`. In most cases, the metric has many values for each time interval, coming from many hosts or instances. The aggregation method chosen determines how the metrics are aggregated into a single line.
 
-#### Configure your time aggregation
+#### Configure the time aggregation
 
 Regardless of the options chosen above, there is always some aggregation of data due to the physical size constraints of the window holding the graph. If a metric is updated every second, and you are looking at 4 hours of data, you need 14,400 points to display everything. Each graph displayed has about 300 points shown at any given time. Therefore, each point displayed on the screen represents 48 data points.
 
@@ -129,11 +129,11 @@ The full JSON looks like this:
 
 For more about using the JSON view, see [Graphing with JSON][1].
 
-#### Configure your space aggregation
+#### Configure the space aggregation
 
 Next to the aggregation method dropdown, choose what constitutes a line or grouping on a graph. For example, if you choose `host`, there is a line for every `host`. Each line is made up of the selected metric on a particular `host` aggregated using the chosen method.
 
-Additionally, you can click the tags in the metric dropdown used for [defning the metric](#Define-the-metric) to group and aggregate your data. 
+Additionally, you can click the tags in the metric dropdown used for [defining the metric](#define-the-metric) to group and aggregate your data. 
 
 ### Advanced graphing
 
