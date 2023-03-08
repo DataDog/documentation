@@ -151,5 +151,5 @@ Datadog Audit Trail comes with an [out-of-the-box dashboard][12] that shows vari
 [8]: /dashboards/widgets/top_list/
 [9]: /dashboards/widgets/timeseries/
 [10]: /dashboards/widgets/list/
-[11]: /dashboards/querying/#choose-the-metric-to-graph/
+[11]: /dashboards/querying/#define-the-metric/
 [12]: https://app.datadoghq.com/dash/integration/30691/datadog-audit-trail-overview?from_ts=1652452436351&to_ts=1655130836351&live=true
