@@ -64,7 +64,7 @@ Navigate to [**APM** > **Service Catalog**][5], filter by Universal Service Moni
 You can create an [**APM Monitor**][8] to trigger an alert when a USM metric such as `universal.http.client` either crosses a threshold or deviates from an expected pattern.
 
 1. Navigate to **Monitors** > **New Monitor** and click [**APM**][13].
-2. Select **APM Metrics** and define a service or resource's `env` and `cluster-name` [primary tags][14]. Select a service or resource to monitor and define time interval for the monitor to evaluate the query over. 
+2. Select **APM Metrics** and define a service or resource's `env` and any other [primary tags][14]. Select a service or resource to monitor and define time interval for the monitor to evaluate the query over. 
 3. Select **Threshold Alert** and select a USM metric such as `Requests per Second` for the monitor to trigger on. Then, define if the value should be **above** or **below** the alert and warning thresholds. Enter a value for the alert threshold, and optionally, for the warning threshold.
 4. The notification section contains a prepopulated message for the monitor. Customize the alert name and message and define the permissions for this monitor.
 5. Click **Create**.
