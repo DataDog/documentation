@@ -111,7 +111,7 @@ To enforce a strict membership model, configure your default team settings so **
 
 [1]: https://app.datadoghq.com/organization-settings/teams
 [2]: /dashboards/#edit-details
-[3]: /TODO
+[3]: /monitors/incident_management/incident_details#overview-section
 [4]: /monitors/configuration/?tab=thresholdalert#add-metadata
 [5]: /tracing/service_catalog/setup#add-service-definition-metadata
 [6]: https://app.datadoghq.com/dashboard/lists

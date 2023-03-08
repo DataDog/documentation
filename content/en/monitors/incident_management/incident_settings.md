@@ -52,11 +52,13 @@ Property fields are key pieces of metadata you can tag your incidents with. This
 4. `Detection Method`
 5. `Summary`
 
-If you have [Datadog APM][5] configured, the `Services` property field automatically leverages your APM Service names. To edit the values of `Services` or `Teams`, upload a CSV of the values you wish to associate with each field. Your CSV file must start with your field's name in the top row, with the desired values listed immediately below it.
+If you have [Datadog APM][5] configured, the `Services` property field automatically leverages your APM Service names. To edit the values of `Services`, upload a CSV of the values you wish to associate with each field. Your CSV file must start with your field's name in the top row, with the desired values listed immediately below it.
 
-You can add more property fields to your settings by selecting one of your existing `key:value` pair [metric tags][6]. When you do this, the key of your property field is the start case of your metric tag's key (each word is capitalized and separated by spaces), and the values for the property field are equal to the values reported by the metric tag.
+The `Teams` property field automatically populates from the [teams][6] defined in your organization.
 
-Property fields are organized into three tables that correspond to where the fields will appear in the [Overview section][12] of the Incident Details page:
+You can add more property fields to your settings by selecting one of your existing `key:value` pair [metric tags][7]. When you do this, the key of your property field is the start case of your metric tag's key (each word is capitalized and separated by spaces), and the values for the property field are equal to the values reported by the metric tag.
+
+Property fields are organized into three tables that correspond to where the fields will appear in the [Overview section][8] of the Incident Details page:
 
 1. `What Happened`
 2. `Why It Happened`
@@ -77,7 +79,7 @@ In addition to the five default fields and the fields based on metric tags, you 
 3. *Text Area*: A free-form text box. Values are entered by a responder on a per-incident basis.
 4. *Number*: A text area that only accepts digits and a single period as input. Values are entered by a responder on a per-incident basis.
 
-*Single-Select*, *Multi-Select*, and *Number* custom fields are searchable facets in the [Incident Homepage][4] and [Incident Management Analytics][2] for easy filtering of incidents. *Number* fields are measures in Incident Management Analytics that can be graphed and visualized in [Dashboards][13] and [Notebooks][11].
+*Single-Select*, *Multi-Select*, and *Number* custom fields are searchable facets in the [Incident Homepage][4] and [Incident Management Analytics][2] for easy filtering of incidents. *Number* fields are measures in Incident Management Analytics that can be graphed and visualized in [Dashboards][9] and [Notebooks][10].
 
 ### Responder types
 
@@ -87,7 +89,7 @@ This feature is in open beta.
 
 {{< img src="monitors/incidents/responder_types_settings.png" alt="The settings section dedicated to creating custom responder types" style="width:80%;">}}
 
-The responder types settings provide you with the ability to create custom roles to [assign to your incident responders][16] and to specify if those roles are meant to be held by one person or multiple people per incident. These roles are unrelated to the [Role Based Access Control (RBAC)][15] system. Responder types allow your responders to understand what their responsibilities are in an incident based on the definitions of your own incident response process. By default there are two roles:
+The responder types settings provide you with the ability to create custom roles to [assign to your incident responders][11] and to specify if those roles are meant to be held by one person or multiple people per incident. These roles are unrelated to the [Role Based Access Control (RBAC)][12] system. Responder types allow your responders to understand what their responsibilities are in an incident based on the definitions of your own incident response process. By default there are two roles:
 
 1. `Incident Commander` - The individual responsible for leading the response team 
 2. `Responder` - An individual that actively contributes to investigating an incident and resolving its underlying issue
@@ -106,12 +108,12 @@ To create a custom responder type:
 
 {{< img src="monitors/incidents/integration_settings.jpeg" alt="Integration Settings" style="width:80%;">}}
 
-The integrations settings provide you with additional configurations for setting up the Incident Management features of the Datadog [Slack App][7]. There are two settings to configure:
+The integrations settings provide you with additional configurations for setting up the Incident Management features of the Datadog [Slack App][13]. There are two settings to configure:
 
 1. Enabling automatic Slack channel creation for every new incident and the name template for those channels
 2. Enabling the incident updates channel
 
-You can configure either of these settings to use any Slack workspace you have configured in your organization's [Slack integration tile][8].
+You can configure either of these settings to use any Slack workspace you have configured in your organization's [Slack integration tile][14].
 
 By default, dedicated incident channels use `incident-{public_id}` as their name template. 
 
@@ -131,7 +133,7 @@ The incident updates channel sends a message whenever an incident is declared or
 
 {{< img src="monitors/incidents/message_templates_settings.jpeg" alt="Message Template Settings" style="width:80%;">}}
 
-Message templates are dynamic, reusable messages that can be used in [manual incident notifications][9], or automated notification rules. Message templates leverage template variables, such as `{{incident.severity}}`, to dynamically inject the corresponding value from the incident that the notification is being sent for. Message templates have Markdown support so that incident notifications can include text formatting, tables, indented lists, and hyperlinks. To better organize a large number of message templates, each template requires a category during the creation process.
+Message templates are dynamic, reusable messages that can be used in [manual incident notifications][15], or automated notification rules. Message templates leverage template variables, such as `{{incident.severity}}`, to dynamically inject the corresponding value from the incident that the notification is being sent for. Message templates have Markdown support so that incident notifications can include text formatting, tables, indented lists, and hyperlinks. To better organize a large number of message templates, each template requires a category during the creation process.
 
 To create a message template:
 
@@ -156,7 +158,7 @@ To configure a new notification rule:
 
 1. Click **New Rule**.
 2. Under **For incidents matching...**, select the incident property field `key:value` pairs you want notifications to be sent for. By default, these filters are empty, and a notification rule triggers for any incident.
-3. **Notify**: Select your notification recipients. Notifications can be sent to any of Datadog's existing [notification integrations][10]. If you want to notify a recipient's mobile device, select the option for their name that includes **(Mobile Push Notification)**. The recipient must have enabled notifications in the [Datadog mobile app][14] for this option to appear.
+3. **Notify**: Select your notification recipients. Notifications can be sent to any of Datadog's existing [notification integrations][16]. If you want to notify a recipient's mobile device, select the option for their name that includes **(Mobile Push Notification)**. The recipient must have enabled notifications in the [Datadog mobile app][17] for this option to appear.
 4. **With Template**: Select the desired message template you want the notification rule to use.
 5. **Renotify on updates to**: Choose which incident properties trigger renotifications. Whenever one or more of the selected properties changes, a new notification is sent.  Note that you cannot renotify on properties that are already in your filters (see step 2, above).
 6. Click **Save**
@@ -176,7 +178,7 @@ You can perform the following operations to manage your notification rules.
 
 {{< img src="monitors/incidents/postmortem_template_settings.jpeg" alt="Postmortem Template Settings" style="width:80%;">}}
 
-Postmortem templates are dynamic, reusable templates used to create a [Datadog Notebook][11] that is automatically populated with incident information after an incident has been resolved. Postmortem templates leverage template variables, such as `{{incident.severity}}`, to dynamically inject the corresponding value from the incident that the postmortem is being created for. Postmortem templates have Markdown support so that the resulting notebook includes text formatting, tables, indented lists, and hyperlinks.
+Postmortem templates are dynamic, reusable templates used to create a [Datadog Notebook][10] that is automatically populated with incident information after an incident has been resolved. Postmortem templates leverage template variables, such as `{{incident.severity}}`, to dynamically inject the corresponding value from the incident that the postmortem is being created for. Postmortem templates have Markdown support so that the resulting notebook includes text formatting, tables, indented lists, and hyperlinks.
 
 To create a postmortem template:
 
@@ -191,14 +193,15 @@ To create a postmortem template:
 [3]: /monitors/incident_management/#from-the-incidents-page
 [4]: https://app.datadoghq.com/incidents
 [5]: /tracing/
-[6]: /getting_started/tagging/using_tags/?tab=assignment#metrics
-[7]: /integrations/slack/?tab=slackapplicationus#using-datadog-incidents
-[8]: https://app.datadoghq.com/account/settings#integrations/slack
-[9]: /monitors/incident_management/incident_details/#notifications-section
-[10]: /monitors/notifications/?tab=is_alert#notify-your-team
-[11]: /notebooks/
-[12]: /monitors/incident_management/incident_details/#overview-section
-[13]: /dashboards/
-[14]: /mobile/
-[15]: /account_management/rbac/?tab=datadogapplication#pagetitle
-[16]: /monitors/incident_management/incident_details/#response-team-section
+[6]: /account_management/teams/
+[7]: /getting_started/tagging/using_tags/?tab=assignment#metrics
+[8]: /monitors/incident_management/incident_details/#overview-section
+[9]: /dashboards/
+[10]: /notebooks/
+[11]: /monitors/incident_management/incident_details/#response-team-section
+[12]: /account_management/rbac/?tab=datadogapplication#pagetitle
+[13]: /integrations/slack/?tab=slackapplicationus#using-datadog-incidents
+[14]: https://app.datadoghq.com/account/settings#integrations/slack
+[15]: /monitors/incident_management/incident_details/#notifications-section
+[16]: /monitors/notifications/?tab=is_alert#notify-your-team
+[17]: /mobile/
