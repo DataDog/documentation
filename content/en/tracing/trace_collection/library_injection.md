@@ -353,6 +353,21 @@ The following table shows how the injection configuration values map to the corr
 
 Tracer library configuration options that aren't mentioned in the injection configuration are still available for use through properties or environment variables the usual way.
 
+### BASIC configuration settings
+
+If `BASIC` is specified as the configuration source, it is equivalent to the following YAML settings:
+
+```yaml
+---
+version: 1
+tracing_enabled: true
+log_injection_enabled: true
+health_metrics_enabled: true
+runtime_metrics_enabled: true
+tracing_sampling_rate: 1.0
+tracing_rate_limit: 1
+```
+
 ## Launch your services
 
 Launch your services, indicating the preload library configuration in the launch command:
@@ -544,6 +559,21 @@ The following table shows how the injection configuration values map to the corr
 | `tracing_log_level` | `datadog.slf4j.simpleLogger.defaultLogLevel` | `DD_TRACE_LOG_LEVEL` |   n/a    |
 
 Tracer library configuration options that aren't mentioned in the injection configuration are still available for use through properties or environment variables the usual way.
+
+### BASIC configuration settings
+
+If `BASIC` is specified as the configuration source, it is equivalent to the following YAML settings:
+
+```yaml
+---
+version: 1
+tracing_enabled: true
+log_injection_enabled: true
+health_metrics_enabled: true
+runtime_metrics_enabled: true
+tracing_sampling_rate: 1.0
+tracing_rate_limit: 1
+```
 
 ## Specifying Unified Service Tags on containers
 
@@ -750,6 +780,21 @@ The following table shows how the injection configuration values map to the corr
 
 Tracer library configuration options that aren't mentioned in the injection configuration are still available for use through properties or environment variables the usual way.
 
+### BASIC configuration settings
+
+If `BASIC` is specified as the configuration source, it is equivalent to the following YAML settings:
+
+```yaml
+---
+version: 1
+tracing_enabled: true
+log_injection_enabled: true
+health_metrics_enabled: true
+runtime_metrics_enabled: true
+tracing_sampling_rate: 1.0
+tracing_rate_limit: 1
+```
+
 ## Configure the Agent
 
 In the Docker compose file that launches your containers, use the following settings for the Agent, securely setting your own Datadog API key for `${DD_API_KEY}`:
@@ -785,6 +830,7 @@ In the Docker compose file that launches your containers, use the following sett
     security_opt:
       - apparmor:unconfined
 ```
+
 ## Specifying Unified Service Tags on containers
 
 If the environment variables `DD_ENV`, `DD_SERVICE`, or `DD_VERSION` are specified in a service container image, those values are used to tag telemetry from the container.
