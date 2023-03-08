@@ -1,6 +1,6 @@
 datadog:
-  apiKey: "REPLACE_ME"
-  configKey: "REPLACE_ME"
+  apiKey: "<datadog_api_key>"
+  configKey: "<observability_pipelines_configuration_id>"
   site: "datadoghq.com"
 
 ## Autoscaling
@@ -14,19 +14,18 @@ podDisruptionBudget:
   enabled: true
   minAvailable: 1
 
-## HPA requires at least some resource requests to function, so we
-## configure a reasonable default here. It is recommended that you
-## change this to match the actual size of instances that you'll
-## be using.
+## HorizontalPodAutoscaler (HPA) requires resource requests to function, 
+## so this example configures several default values. Datadog recommends
+## that you change the values to match the actual size of instances that
+## you are using.
 resources:
   requests:
     cpu: 1000m
     memory: 512Mi
 
 affinity:
-  ## It doesn't do much good to autoscale if a single DC can take
-  ## your whole operation down, so we default to always running
-  ## pods in different AZs.
+  ## To prevent a single datacenter from causing a complete system failure,
+  ## this example defaults to running pods in different availability zones.
   podAntiAffinity:
     preferredDuringSchedulingIgnoredDuringExecution:
       - weight: 100
@@ -41,35 +40,27 @@ affinity:
 
 
 ## Load Balancing
-## We've done our best to recommend a configuration that will
-## avoid cross-AZ costs where possible. Easy to trip over, where
-## AWS is concerned.
+## This example configuration avoids cross-availability-zone costs where possible.
 service:
   enabled: true
   type: "LoadBalancer"
   externalTrafficPolicy: "Local"
   annotations:
-    ## This does not do what you think it does- it merely marks the service as
-    ## being ignored by the in-tree AWS LB controller.
+    ## This example marks the service as ignored by the in-tree AWS LB controller.
     service.beta.kubernetes.io/aws-load-balancer-type: "external"
-    ## This is, at time of writing, the default for the AWS LB Controller but
-    ## given the sensitive nature of the data passing through this system it
-    ## it worthwhile to be explicit.
+    ## This is the default for the AWS LB Controller but it is worthwhile to be explicit.
     service.beta.kubernetes.io/aws-load-balancer-scheme: "internal"
     ## NLBs should communicate directly with the OP container instead of
-    ## passing through kube-proxy. Doing so can help avoid cross-AZ traffic
-    ## costs during normal operations since the NLB will already do its best
-    ## to keep things in-AZ, which kube-proxy might decide to futz with.
+    ## passing through kube-proxy. This avoids cross-availability-zone traffic
+    ## to keep things within the availability zone, which kube-proxy might change.
     service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: "ip"
 
 
 ## Buffering
-## This creates an EBS drive that can be utilized for buffers, which
+## This creates an EBS drive that can be used for buffers, which
 ## must then be configured in the sinks themselves.
 ##
-## We default to `io2` drives for their price/performance ratio. If
-## you need, `gp3` drives have also been used decently by other
-## customers.
+## The default drive is `io2`. Alternatively, you can also use `gp3` drives.
 persistence:
   enabled: true
   storageClassName: "io2"
@@ -78,11 +69,10 @@ persistence:
   size: 288Gi
 
 
-## OP Configuration
-## This is a sample configuration that we recommend to every user
-## getting started with OP; it will get you proxying data as
-## quickly as possible, as well as providing hooks for your own
-## processing steps.
+## Observability Pipelines (OP) Configuration
+## This is a sample configuration that Datadog recommends for
+## getting started with OP. It sets up data proxying and provides hooks
+## for your own processing steps.
 config:
   data_dir: /var/lib/observability-pipelines-worker
 
@@ -94,8 +84,8 @@ config:
 
   transforms:
     ## The Datadog Agent natively encodes its tags as a comma-separated list
-    ## values, stored in the string `.ddtags`. In order to actually work with
-    ## and filter off of these tags, it's necessary to parse that string into
+    ## of values that are stored in the string `.ddtags`. To work with
+    ## and filter off of these tags, you need to parse that string into
     ## more structured data.
     logs_parse_ddtags:
       type: remap
@@ -104,9 +94,8 @@ config:
       source: |
         .ddtags = parse_key_value!(.ddtags, key_value_delimiter: ":", field_delimiter: ",")
 
-    ## The `.status` attribute added by the Datadog Agent unfortunately does not
-    ## convey any useful meaning, and if left alone will lead to your logs
-    ## being mis-categorized when they are picked up by the intake.
+    ## The `.status` attribute added by the Datadog Agent needs to be deleted, otherwise
+    ## your logs can be miscategorized at intake.
     logs_remove_wrong_level:
       type: remap
       inputs:
@@ -115,9 +104,9 @@ config:
         del(.status)
 
     ## This is a placeholder for your own remap (or other transform)
-    ## steps, now with easier to deal-with tags. Keeping these tag assignments
-    ## is recommended, however- they will help with classifying what
-    ## traffic you have moved over to OP, and what still needs work.
+    ## steps with tags set up. Datadog recommends these tag assignments.
+    ## They show which data has been moved over to OP and what still needs
+    ## to be moved.
     LOGS_YOUR_STEPS:
       type: remap
       inputs:
@@ -126,9 +115,9 @@ config:
         .ddtags.sender = "observability_pipelines_worker"
         .ddtags.opw_aggregator = get_hostname!()
 
-    ## Before sending along to the Logs intake, we must re-encode the
-    ## tags into the format that it expects, as though the agent was
-    ## sending directly.
+    ## Before sending data to the logs intake, you must re-encode the
+    ## tags into the expected format, so that it appears as if the Agent is
+    ## sending it directly.
     logs_finish_ddtags:
       type: remap
       inputs:
@@ -149,12 +138,12 @@ config:
   ## - 240GB buffer for logs
   ## - 48GB buffer for metrics
   ##
-  ## This will suffice for the vast majority of OPW deployments and should rarely
-  ## need to be adjusted. If you do, be sure to adjust the size of the persistence:
+  ## This should work for the vast majority of OP Worker deployments and should rarely
+  ## need to be adjusted. If you do change it, be sure to update the size of the persistence
   ## block above.
   ##
-  ## The "${DD_API_KEY}" parameters are automatically filled in from the API
-  ## key you filled in the datadog: block at the top of this file.
+  ## The "${DD_API_KEY}" parameters are automatically replaced by the API
+  ## key you entered in the `datadog` section at the top of this file.
   sinks:
     datadog_logs:
       type: datadog_logs
