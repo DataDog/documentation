@@ -9,9 +9,6 @@ further_reading:
 - link: /agent/amazon_ecs/apm/
   tag: 설명서
   text: 애플리케이션 트레이스 수집
-- link: /agent/amazon_ecs/data_collected/#metrics
-  tag: 설명서
-  text: ECS 메트릭 수집
 - link: https://www.datadoghq.com/blog/amazon-ecs-anywhere-monitoring/
   tag: 블로그
   text: Amazon ECS Anywhere 지원 발표

@@ -134,7 +134,7 @@ Agent がインストールされると、[インフラストラクチャーリ�
 
 #### EC2 起動タイプの ECS
 
-[Amazon ECS のドキュメント][25]を使用して、ECS クラスターの EC2 インスタンスで [Datadog Docker Agent][26] を実行します。[Amazon ECS Data Collection のドキュメント][27]で、Datadog アカウントに報告されるメトリクスとイベントを確認します。
+[Amazon ECS のドキュメント][25]を使用して、ECS クラスターの EC2 インスタンスで [Datadog Docker Agent][26] を実行します。[Amazon ECS on EC2][27]で、Datadog アカウントに報告されるメトリクスとイベントを確認します。
 
 #### Fargate 起動タイプの ECS
 
@@ -211,7 +211,7 @@ Datadog の UI や [API][33] を利用するほか、[CloudFormation Registry][3
 [24]: https://aws.amazon.com/fargate/
 [25]: /ja/agent/amazon_ecs/?tab=awscli
 [26]: /ja/agent/docker/?tab=standard
-[27]: /ja/agent/amazon_ecs/data_collected/
+[27]: /ja/integrations/amazon_ecs
 [28]: /ja/integrations/ecs_fargate/?tab=fluentbitandfirelens
 [29]: /ja/agent/kubernetes/distributions/?tab=helm#EKS
 [30]: /ja/agent/kubernetes/?tab=helm
