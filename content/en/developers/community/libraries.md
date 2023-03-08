@@ -82,10 +82,6 @@ Scale up auto-scale groups based on the results of a Datadog query with [Dogscal
 
 This is for a [FreeSwitch ESL][30] application to export statistics to Datadog using the DogStatsD API and is written by [WiMacTel][31].
 
-### Google Analytics
-
-You can get data into Datadog from Google Analytics using the Datadog API with the [Google Analytics library][32] from [Bithaus][33].
-
 ### Heroku
 
 Heroku emits dyno metrics through logs. To convert these logs into metrics and send them to Datadog, use one of the following log drains. To send your Heroku logs to Datadog, see [Collect Heroku logs][34].
