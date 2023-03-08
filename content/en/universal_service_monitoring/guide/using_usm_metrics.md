@@ -28,10 +28,16 @@ This guide describes how to search for USM metrics such as `universal.http.*` an
 
 | Metric Name                 | Units   | Type         | Description                                       |
 |-----------------------------|---------|--------------|---------------------------------------------------|
-| universal.http.client       | Seconds | Distribution | Total number of outbound requests.                |
-| universal.http.client.apdex |         | Gauge        | Total number of outbound errors.                  |
-| universal.http.server       | Seconds | Distribution | Total number of outbound requests by HTTP status. |
-| universal.http.server.apdex |         | Gauge        | The Apdex score for each web service.             |
+| universal.http.client       | Seconds | Distribution | Outbound request latency, counts, errors, and rates.                |
+| universal.http.client.hits  | Hits    | Count        | Total number of outbound requests and errors.                |
+| universal.http.client.apdex | Score   | Gauge        | The Apdex score of outbound requests for this service.                |
+| universal.http.server       | Seconds | Distribution | Inbound request latency, counts, errors, and rates.  |
+| universal.http.server.hits  | Hits    | Count        | Total number of inbound requests and errors.                 |
+| universal.http.server.apdex | Score   | Gauge        | The Apdex score for this web service.             |
+
+Unlike APM metrics, errors are available under the `error:true` tag instead of as a separate metric.
+
+*Note: The `.hits` metrics have all of your infrastructure tags and are the recommended way to query request and error counts. You can also add [second primary tags][16] to all USM metrics.*
 
 ### Metric syntax
 
@@ -128,3 +134,4 @@ For more information, see the [Dashboards documentation][7].
 [13]: https://app.datadoghq.com/monitors/create/apm
 [14]: /metrics/advanced-filtering/
 [15]: https://app.datadoghq.com/slo/new
+[16]: /tracing/guide/setting_primary_tags_to_scope/?tab=helm#add-a-second-primary-tag-in-datadog
