@@ -18,38 +18,30 @@ further_reading:
 
 ## Overview
 
-[Datadog Cloud Security Management][1] (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure. Powered by observability data, security teams can determine the impact of a threat quickly by tracing the full attack flow and identify the resource owner where a vulnerability was triggered. Engineers are able to actively monitor their security risks by incorporating security metrics into their existing workflow.
-
-Cloud Security Management includes [Cloud Security Posture Management (CSPM)][2] and [Cloud Workload Security (CWS)][3].
+[Datadog Cloud Security Management][1] (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure. Powered by observability data, CSM includes [Cloud Security Posture Management (CSPM)][2] and [Cloud Workload Security (CWS)][3].
 
 This guide walks you through best practices for getting your team up and running with CSM.
 
 ## Phase 1: Deployment
 
-1. Configure the Datadog Agent to turn on CSM. If you have not already, install the [Datadog Agent (version 7.40 or above)][4]:
-    - [Kubernetes][5], [Docker][6], and [host-based CWS][7] configuration instructions
-    - [Kubernetes][8] and [Docker][9] CSPM configuration instructions
-2. Configure your Cloud Resources to turn on CSM
-    - [AWS][10], [Azure][11], and [GCP][12] CSPM configuration instructions
-3. Check out the [CSM homepage][13] to get an overview of your organization's risks and threats
-4. Review [500+ OOTB CWS and CSPM detection rules][14] 
-5. Explore [Security Signals][15]
-    - Review [CSPM Findings][16]
-    - Set up [notification rules][17] to alert via Slack, Jira, Email, etc when meaningful signals are generate.
+1. Install the [Datadog Agent (version 7.40 or above)][4]. 
+2. Enable CSM for for your cloud resources and infrastructure:
+    - **CWS**: [Kubernetes][5], [Docker][6], and [host-based][7] installations.
+    - **CSPM**: [AWS][10], [Azure][11], [GCP][12], [Kubernetes][8], and [Docker][9] instructions.
+3. Check out the [CSM homepage][13] to get an overview of your organization's risks and threats.
+4. Review [500+ out-of-the-box CWS and CSPM detection rules][14].
+5. Explore [security signals][15] and review [CSPM findings][16].
+6. Set up [notification rules][17] and receive alerts via Slack, Jira, email, and more.
 
-In your first three days with Datadog CSM:
-## Phase 2: Fine tuning
+## Phase 2: Customization
 
-1. Fine tune your CSM experience
-    - Set up [CWS suppression rules][18] to reduce noise.
-2. Create custom detection rules
-    - [CSPM rules][19]
-    - [CWS Agent rules][20]
+1. Set up [CWS suppression rules][18] to reduce noise.
+2. Create custom detection rules for [CSPM][19] and [CWS][20].
 
-## Phase 3: Reporting & Response
+## Phase 3: Reports and dashboards
 
 1. Assess your organization's posture by reviewing [compliance reports][21].
-2. Utilize OOTB dashboards or [create your own][22] for faster investigations, reporting, and monitoring.
+2. Utilize out-of-the-box dashboards or [create your own][22] for faster investigations, reporting, and monitoring.
 
 ## Further reading
 
