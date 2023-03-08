@@ -3,13 +3,43 @@
     background-color: #fdfcff;
     position: relative;
     border-left: 0.5px solid #ebebeb;
+    overflow-x: scroll;
 
     .table-header {
         background-color: #f3edff;
         text-transform: uppercase;
+        width: 706px;
+
+        @media (min-width: 768px) {
+            width: auto;
+        }
+
+        @media (min-width: 992px) {
+            width: 706px;
+        }
+
+        @media (min-width: 1200px) {
+            width: auto;
+        }
 
         .column {
             border: none;
+        }
+    }
+
+    .table-header + div {
+        width: 676px;
+
+        @media (min-width: 768px) {
+            width: auto;
+        }
+
+        @media (min-width: 992px) {
+            width: 676px;
+        }
+
+        @media (min-width: 1200px) {
+            width: auto;
         }
     }
 
@@ -28,8 +58,12 @@
         border-right: 0.5px solid #ebebeb;
         padding: 0 15px 0 15px;
         @media (min-width: 992px) {
-            padding: 0 15px 0 30px;
+            padding: 0 10px;
         }
+    }
+
+    .column:last-of-type p {
+        overflow-wrap: break-word;
     }
 
     .key {
@@ -62,10 +96,7 @@
         margin: 4px 0;
         font-size: 16px;
         line-height: 22px;
-        overflow-wrap: break-word;
-        @media (min-width: 768px) {
-            overflow-wrap: normal;
-        }
+        overflow-wrap: normal;
     }
 
     code {
