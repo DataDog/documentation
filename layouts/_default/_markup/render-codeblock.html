@@ -1,5 +1,9 @@
-{{/* make sure that region-param short code output is unescaped */}}
-{{- $content := replaceRE `&lt;span class=&#34;(.*)&#34; data-region-param=&#34;(.*)&#34;&gt;&lt;/span&gt;` "<span class=\"$1\" data-region-param=\"$2\"></span>" .Inner -}}
+{{/* 
+    Escape code block content for proper display (e.g. <API_KEY>) and 
+    then convert `region-param` shortcode so that it can be rendered
+*/}}
+{{- $content := .Inner | htmlEscape -}}
+{{- $content = replaceRE `&lt;span class=&#34;(.*)&#34; data-region-param=&#34;(.*)&#34;&gt;&lt;/span&gt;` "<span class=\"$1\" data-region-param=\"$2\"></span>" $content -}}
 
 {{ $class := .Attributes.class | default ""    }}
 {{ $lang  := .Attributes.lang  | default .Type }}
