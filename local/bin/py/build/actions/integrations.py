@@ -37,6 +37,11 @@ except ImportError:
 finally:
     if not CLASSIFIER_TAGS:
         print(f'\x1b[33mWARNING\x1b[0m: CLASSIFIER_TAGS empty continuing without validation')
+    else:
+        with open('layouts/shortcodes/integration_categories.md', 'w') as file:
+            for tag in CLASSIFIER_TAGS:
+                file.write(f'- {tag}\n')
+            file.write("\n")
 
 
 class Integrations:
