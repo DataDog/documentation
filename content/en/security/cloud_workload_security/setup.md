@@ -26,18 +26,11 @@ further_reading:
   text: "Catch attacks at the network layer with DNS-based threat detection"
 ---
 
-## Overview
+Cloud Workload Security (CWS) monitors file and process activity across your environment to detect real-time threats to your infrastructure. As part of the Datadog platform, you can combine the real-time threat detection of CWS with metrics, logs, traces, and other telemetry to see the full context surrounding a potential attack on your workloads.
 
-There are four types of monitoring that the Datadog Agent uses for Cloud Workload Security (CWS):
+## Prerequisites
 
-1. **Process Execution Monitoring** to watch process executions for malicious activity on hosts or containers in real-time.
-2. **File Integrity Monitoring** to watch for changes to key files and directories on hosts or containers in real-time.
-3. **DNS Activity Monitoring** to watch network traffic for malicious activity on hosts and containers in real-time.
-4. **Kernel Activity Monitoring** to watch for Kernel-layer attacks like process hijacking, container breakouts, and more in real-time.
-
-## Requirements
-
-* Datadog Agent >= 7.42
+* Datadog Agent 7.42+.
 * Data collection is done using eBPF, so Datadog minimally requires platforms that have underlying Linux kernel versions of 4.15.0+ or have eBPF features backported. CWS supports the following Linux distributions:
   * Ubuntu 18.04+
   * Debian 10+
@@ -46,22 +39,29 @@ There are four types of monitoring that the Datadog Agent uses for Cloud Workloa
   * SUSE 15+
   * CentOS/RHEL 7.6+
   * Custom kernel builds are not supported.
-* For compatibility with a custom Kubernetes network plugin like Cilium or Calico, please see the [Troubleshooting page][3].
-
-### Remote Configuration
-
-[Remote Configuration][4] is a Datadog capability that allows you to remotely configure the behavior of Datadog resources (for example, Agents and tracing libraries) deployed in your infrastructure, for select product features. For CWS, enabling Remote Configuration allows you to receive new and updated Agent rules automatically when they're released.
-
-To use Remote Configuration with CWS, add the Remote Configuration scope to a new or existing API key, and then update your Agent configuration. See the [setup instructions][5] for more information.
-
-*Automatic updates of Agent rules is only available for default rules.
+* For compatibility with a custom Kubernetes network plugin like Cilium or Calico, see the [Troubleshooting page][3].
 
 ## Installation
+
+In general, installing CWS involves the following steps:
+
+### Enable Remote Configuration
+
+[Remote Configuration][4] is a Datadog capability that allows you to remotely configure the behavior of Datadog resources deployed in your infrastructure. For CWS, enabling Remote Configuration allows you to receive new and updated Agent rules automatically when they're released.
+
+To use Remote Configuration with CWS, add the Remote Configuration scope to a new or existing API key, and then update your Datadog Agent configuration. See the [setup instructions][5] for more information.
+
+**Notes**:
+
+- Without Remote Configuration, updated Agent rules must be manually deployed to the Datadog Agent.
+- At this time, Remote Configuration is only available for default rules. New and updated custom rules must be manually deployed to the Datadog Agent.
+
+### Configure the CWS Agent
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
 
-1. If you have not already, install the [Datadog Agent][1] (version 7.27+).
+1. If you have not already, install the [Datadog Agent][1].
 
 2. Add the following to the `datadog` section of the `values.yaml` file:
 
@@ -323,6 +323,7 @@ The following deployment can be used to start the Runtime Security Agent and `sy
 {{< /tabs >}}
 
 ## Further Reading
+
 {{< partial name="whats-next/whats-next.html" >}}
 
 [3]: /security/cloud_security_management/troubleshooting
