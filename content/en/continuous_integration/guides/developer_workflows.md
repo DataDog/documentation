@@ -64,6 +64,7 @@ After detecting a failed and/or flaky test within Datadog, you have the option t
 
 Under the Error Message section in the Overview tab of a test run, click the `View Code` button to view the relevant lines of code for that test within Visual Studio Code, IntelliJ, or GitHub.
 The order of options in this dropdown changes depending on the language your test was written in:
+
 - IntelliJ is prioritized for Java-based tests
 - Visual Studio Code is prioritized for JavaScript and Python-based tests
 {{< img src="ci/IDE.png" alt="Open test in IDE" style="width:30%;">}}
