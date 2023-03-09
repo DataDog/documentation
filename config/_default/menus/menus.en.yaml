@@ -2800,8 +2800,8 @@ main:
     parent: appsec_threats
     identifier: threats_custom_rules
     weight: 504
-  - name: Event Rules
-    url: security/application_security/threats/event_rules/
+  - name: In-App WAF Rules
+    url: security/application_security/threats/inapp_waf_rules/
     parent: appsec_threats
     identifier: threats_event_rules
     weight: 505
