@@ -1,5 +1,5 @@
 ---
-title: Event Rules
+title: In-App WAF Rules
 kind: documentation
 aliases:
   - /security_platform/application_security/event_rules
@@ -16,23 +16,25 @@ further_reading:
   text: "Troubleshoot common Datadog Application Security Management issues"
 ---
 
+**(Formerly called Event Rules)**
+
 ## Overview
 
 With Application Security Management (ASM) enabled, the Datadog tracing library actively monitors all web services and API requests for suspicious security activity.
 
-An _event rule_ specifies conditions on the incoming request to define what the library considers suspicious. The Datadog tracing library includes hundreds of out-of-the-box ASM event rules, which are used to display suspicious requests in the trace explorer and in the default signal rules. 
+An _In-App WAF rule_ specifies conditions on the incoming request to define what the library considers suspicious. The Datadog tracing library includes hundreds of out-of-the-box ASM In-App WAF rules, which are used to display suspicious requests in the trace explorer and in the default signal rules. 
 
-You can add to the event rules without upgrading the tracing library. 
+You can add to the In-App WAF rules without upgrading the tracing library. 
 
-## Structure of an ASM event rule
+## Structure of an ASM In-App WAF rule
 
-An event rule is a JSON object composed of a category, a name, tags, and conditions. When a suspicious request is detected, tags from the rules are propagated onto the suspicious request, and can be used to build [detection rules][1].
+An In-App WAF rule is a JSON object composed of a category, a name, tags, and conditions. When a suspicious request is detected, tags from the rules are propagated onto the suspicious request, and can be used to build [detection rules][1].
 
 ### Conditions
 Conditions define when the rule tags an incoming request. The conditions are composed of _inputs_ and _operators_.
 
 #### Inputs
-An input represents which part of the request the operator is applied to. The following inputs are used in the event rules:
+An input represents which part of the request the operator is applied to. The following inputs are used in the In-App WAF rules:
 
 | Name | Description | Example |
 |------|-------------|---------|
@@ -53,18 +55,18 @@ An input represents which part of the request the operator is applied to. The fo
 | `is_xss` | Special operator to check for cross-site scripting (XSS) payloads |
 | `is_sqli` | Special operator to check for SQL injection (SQLI) payloads |
 
-## Configure an ASM event rule in your service
+## Configure an ASM In-App WAF rule in your service
 
-1. In Datadog, navigate to the [Event Rules page under ASM Configuration][2].
+1. In Datadog, navigate to the [In-App WAF page under ASM Configuration][2].
 
-2. Click **Download Configuration** in the top right corner to download the configuration file, `appsec-rules.json`, to your local machine.
+2. Click **Download Configuration** to download the configuration file, `appsec-rules.json`, to your local machine.
 
 3. Update the file to include the JSON definition of your new rule, following the specification above. For example:
 
    {{< code-block lang="json" collapsible="true" >}}
     {
         "id": "id-123",
-        "name": "My event rule",
+        "name": "My In-App WAF rule",
         "tags": {
             "category": "attack_attempt",
             "crs_id": "920260",
@@ -102,12 +104,12 @@ An input represents which part of the request the operator is applied to. The fo
 
 ## What to do next
 
-Next, [configure detection rules to create security signals][1] based on those suspicious requests defined by the event rules you created. You can modify the provided out-of-the-box ASM detection rules or create new ones. 
+Next, [configure detection rules to create security signals][1] based on those suspicious requests defined by the In-App WAF rules you created. You can modify the provided out-of-the-box ASM detection rules or create new ones. 
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/application_security/custom_rules/
-[2]: https://app.datadoghq.com/security/appsec/event-rules
+[2]: https://app.datadoghq.com/security/appsec/in-app-waf?group_by=NONE
 [3]: /security/application_security/getting_started/
