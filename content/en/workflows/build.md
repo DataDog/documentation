@@ -172,7 +172,7 @@ Alternatively, you can create a fallback step that branches from the main workfl
 1. [Add steps using the workflow builder](#build-a-workflow-with-the-workflow-builder). You can add as many steps as needed to the fallback tree.
 1. When you're done configuring your fallback steps, click **Save** to apply your changes.
 
-To get back to the main workflow canvas, click **Main** above the fallback tree. From the workflow canvas, a fallback icon appears next to steps with a fallback. Click the icon and select the fallback step to open the fallback tree. Alternatively, you can access the fallback tree by clicking **Edit Fallback Tree** in the **Error Handling & Retries** section of a step.
+To get back to the main workflow canvas, click **Main** above the fallback tree. From the workflow canvas, a fallback icon appears next to steps with a fallback. Click the icon and select the fallback step to open the fallback tree. Alternatively, you can access the fallback tree by clicking **Edit Fallback Tree** in the **Error Handling & Retries** section of a step. The **Edit Fallback Tree** button only appears if the fallback step is not an existing downstream step in the main workflow.
 
 {{< img src="workflows/fallback-icon.png" alt="A step with a fallback" style="width:60%;" >}}
 
