@@ -29,19 +29,19 @@ detection rule
 : A conditional logic definition that is applied to ingested data and cloud configurations. When at least one case defined in a rule is matched over a given period of time, Datadog generates a _security signal_.
 : See [Detection rules][10].
 
-exclusion filter
-: A mechanism for discarding suspicious requests flagged through the ASM library and the event rules. Exclusion filters are applied as requests are ingested into Datadog (intake). Exclusion filters help you manage false positives and intake costs.
+passlist (formerly exclusion filter)
+: A mechanism for discarding suspicious requests flagged through the ASM library and the In-App WAF rules. Passlist is applied as requests are ingested into Datadog (intake). Passlist helps manage false positives and intake costs.
 : See [Exclusion filters][11] in the app.
 
-event rules
+In-App WAF rules (formerly event rules)
 : A set of rules executed in the Datadog libraries to catch security activity. These include Web Application Firewall (WAF) patterns that monitor for attempts to exploit known vulnerabilities.
-: See [Event rules][12].
+: See [In-App WAF rules][12].
 
 interactive application security testing (IAST)
 : An application security testing method that proactively detects vulnerabilities while the app is run by an automated test, human tester, or any activity interacting with the application functionality.
 
 Remote Configuration
-: A Datadog platform mechanism that enables the Agent configuration to be updated remotely. Used by ASM to update event rules, activate the product, and block attackers.
+: A Datadog platform mechanism that enables the Agent configuration to be updated remotely. Used by ASM to update In-App WAF rules, activate the product, and block attackers.
 : See [How Remote Configuration Works][8].
 
 service
@@ -58,7 +58,7 @@ severity
 : An indicator of how quickly an attack attempt should be triaged and addressed. Based on a combination of factors, including the attack's potential impact and risk. Values are Critical, High, Medium, Low, Info.
 
 suspicious request 
-: A distributed trace for which security activity has been flagged by event rules. The underlying trace is shared with APM, allowing deeper and faster investigations. 
+: A distributed trace for which security activity has been flagged by In-App WAF rules. The underlying trace is shared with APM, allowing deeper and faster investigations. 
 
 user attribution
 : A mechanism that maps suspicious requests to known users in your systems. 
@@ -115,6 +115,6 @@ Object-Graph Navigation Language Injection (OGNLi)
 [8]: /agent/guide/how_remote_config_works/
 [10]: /security/detection_rules/
 [11]: https://app.datadoghq.com/security/appsec/exclusions
-[12]: /security/application_security/event_rules/#overview
+[12]: /security/application_security/threats/inapp_waf_rules
 [13]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Application%20Security%22&product=appsec&view=signal
 [14]: /security/application_security/threats/add-user-info/
