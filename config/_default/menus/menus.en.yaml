@@ -2262,6 +2262,11 @@ main:
     identifier: usm_parent
     parent: apm_heading
     weight: 165000
+  - name: Guides
+    url: universal_service_monitoring/guide/
+    parent: usm_parent
+    identifier: universal_service_monitoring_guides
+    weight: 1
   - name: Log Management
     url: logs/
     pre: log
