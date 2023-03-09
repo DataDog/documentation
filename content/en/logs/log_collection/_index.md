@@ -241,7 +241,7 @@ telnet intake.logs.datadoghq.com 10514
 Test it manually with telnet. You must prefix the log entry with your [Datadog API Key][1] and add a payload.
 
 ```text
-telnet agent-intake.logs.datadoghq.eu 443
+telnet tcp-intake.logs.datadoghq.eu 1883
 <DATADOG_API_KEY> Log sent directly via TCP
 ```
 

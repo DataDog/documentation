@@ -86,7 +86,7 @@ Other: See [logs endpoints][3]
 {{< site-region region="eu" >}}
 
 [Logs][1] & [HIPAA logs][2]
-: TCP: `agent-intake.logs.datadoghq.eu`<br>
+: TCP: `tcp-intake.logs.datadoghq.eu`<br>
 HTTP: `agent-http-intake.logs.datadoghq.eu`<br>
 Other: See [logs endpoints][3]
 
