@@ -3,7 +3,7 @@ aliases:
 - /ja/monitors/downtimes/
 description: ダウンタイムをスケジューリングすることで、Datadog モニターが一定期間アラートを出さないようにします。
 further_reading:
-- link: /monitors/create/
+- link: /monitors/
   tag: ドキュメント
   text: モニターの作成
 - link: /monitors/notify/
@@ -32,7 +32,7 @@ Datadog で[モニターのダウンタイム][1]のスケジューリングを�
 {{% /tab %}}
 {{% tab "モニタータグで指定" %}}
 
-一つないし複数の[モニタータグ][1]に基づくダウンタイムのスケジューリングが可能です。少なくとも 1 つのタグを選択する必要があります。タグは最大 32 個まで選択でき、各タグの長さは最大 256 文字までとなります。**選択されたすべてのタグ**に紐付くモニターのみがサイレントに設定されます。スコープを選択すれば、対象をさらに制限することもできます。
+一つないし複数の[モニタータグ][1]に基づくダウンタイムのスケジューリングが可能です。少なくとも 1 つのタグを選択します。タグは最大 32 個まで選択でき、各タグの長さは最大 256 文字までとなります。**選択されたすべてのタグ**に紐付くモニターのみがサイレントに設定されます。スコープを選択すれば、対象をさらに制限することもできます。
 
 [1]: /ja/monitors/manage/#monitor-tags
 {{% /tab %}}
@@ -42,7 +42,7 @@ Datadog で[モニターのダウンタイム][1]のスケジューリングを�
 
 #### ダウンタイムスコープ
 
-ダウンタイムを単純なアラートモニターに制限する場合、単純なアラートモニターはすべてのレポートソースを集約して単一のアラートを送信するため、`Group scope` フィールドは無視できます。
+ダウンタイムが単純なアラートモニターにスケジュールされている場合、単純なアラートモニターはすべてのレポートソースを集約して単一のアラートを送信するため、`Group scope` フィールドは無視できます。
 
 1 台のモニターから複数のアラートを送信している場合は、スコープに含まれるグループだけがサイレントに設定されます。たとえば、`host:X` がダウンタイムのスコープに含まれており、`host:X` と `host:Y` の両方に対してアラートがトリガーされる場合、Datadog は `host:Y` に対してのみモニター通知を生成します。`host:X` に対する通知は行われません。
 
@@ -58,11 +58,11 @@ Datadog で[モニターのダウンタイム][1]のスケジューリングを�
 1. 1 つのグループ (この場合は `service:web-store`) のみでダウンタイムをスケジュールするには、そのグループを `Group scope` フィールドに入力します。
 2. **Preview affected monitors** は、選択したモニターがまだスコープ内にあることを示しているため、グループ `service:web-store` のアラートはスケジュールされたダウンタイム中にミュートされます。
 
-{{< img src="monitors/downtimes/downtime_examplebyname1_downtime.jpg" alt="ダウンタイムの例"  style="width:80%;">}}
+{{< img src="monitors/downtimes/downtime_examplebyname1_downtime.jpg" alt="'By Monitor Name' のダウンタイム例 (影響を受けるモニターのプレビュー付き)" style="width:80%;">}}
 
 3. スケジュールされたダウンタイムが始まり、このモニターではグループ `service:web-store` のアラートのみがミュートされます。
 
-{{< img src="monitors/downtimes/downtime_examplebyname1_monitor.jpg" alt="ダウンタイムの例"  style="width:80%;">}}
+{{< img src="monitors/downtimes/downtime_examplebyname1_monitor.jpg" alt="グループ service:web-store のダウンタイムを示す評価グラフ" style="width:80%;">}}
 
 4. 複数のグループ (たとえば、`service:synthesizer` や `service:consul` など) でダウンタイムをスケジュールするには、グループごとに追加のダウンタイムを作成できます。
 
@@ -77,7 +77,7 @@ Datadog で[モニターのダウンタイム][1]のスケジューリングを�
 
 {{< img src="monitors/downtimes/downtime_examplebyname2_monitor.jpg" alt="グループステータスは、ダウンタイム中にミュートされた開発環境と関連サービスを示します" style="width:80%;">}}
 
-4. 1 つ以上の “group by” (例: `env:dev` AND `service:web-store`) でダウンタイムをスケジュールするには、ダウンタイムに追加スコープを追加します。
+4. 1 つ以上の "group by" (例: `env:dev` AND `service:web-store`) でダウンタイムをスケジュールするには、ダウンタイムに追加スコープを追加します。
 {{% /tab %}}
 {{% tab "モニタータグで指定" %}}
 
@@ -91,15 +91,15 @@ Datadog で[モニターのダウンタイム][1]のスケジューリングを�
 4. このダウンタイムは、グループ  `service:web-store` に制限されています。
 5. 影響を受けるモニターをプレビューすると、両方のモニターのスコープにグループ `service:web-store` が含まれていることがわかります。
 
-{{< img src="monitors/downtimes/downtime_examplebytag1_downtime.jpg" alt="ダウンタイムの例"  style="width:80%;">}}
+{{< img src="monitors/downtimes/downtime_examplebytag1_downtime.jpg" alt="'By Monitor Tags' のダウンタイム例 (影響を受けるモニターのプレビュー付き)" style="width:80%;">}}
 
 6. *モニター A* は、ダウンタイムが開始されたことを示していますが、スコープ内のグループのみです: `service:web-store`
 
-{{< img src="monitors/downtimes/downtime_examplebytag1_monitor.jpg" alt="ダウンタイムの例"  style="width:80%;">}}
+{{< img src="monitors/downtimes/downtime_examplebytag1_monitor.jpg" alt="グループ service:web-store のダウンタイムを示す評価グラフ" style="width:80%;">}}
 
 7. *モニター B* は、`service:web-store` のダウンタイムが開始されたことを示しています。すべてのモニターのグループ (`host` ごと) は `service:web-store` に属しているため、このモニターのダウンタイム中にすべてのホストがミュートされます。
 
-{{< img src="monitors/downtimes/downtime_examplebytag1_monitor2.jpg" alt="ダウンタイムの例"  style="width:80%;">}}
+{{< img src="monitors/downtimes/downtime_examplebytag1_monitor2.jpg" alt="グループ service:web-store と影響を受ける両ホストのダウンタイムを示す評価グラフ" style="width:80%;">}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -111,7 +111,7 @@ Datadog で[モニターのダウンタイム][1]のスケジューリングを�
 
 開始日時とタイムゾーンを指定して 1 回のみのダウンタイムを設定します。オプションで終了日時を設定することもできます。
 
-{{< img src="monitors/downtimes/downtime_onetime.jpg" alt="アラートのダウンタイム"  style="width:80%;">}}
+{{< img src="monitors/downtimes/downtime_onetime.jpg" alt="1 回限りのダウンタイムをスケジュールするためのフィールド" style="width:80%;">}}
 
 {{% /tab %}}
 {{% tab "定期" %}}
@@ -122,13 +122,13 @@ Datadog で[モニターのダウンタイム][1]のスケジューリングを�
 
 毎回の定期ダウンタイムが終了すると、そのダウンタイムをキャンセルし、同じ条件（開始時間と終了時間が異なる）の新しいダウンタイムを作成するというパターンが繰り返されます。**注**: このように新しく作成されたダウンタイムはすべて、元の作成者に関連付けられます。
 
-{{< img src="monitors/downtimes/downtime_recurring.jpg" alt="アラートのダウンタイム"  style="width:80%;">}}
+{{< img src="monitors/downtimes/downtime_recurring.jpg" alt="定期的なダウンタイムをスケジュールするためのフィールド" style="width:80%;">}}
 
 RRULE (つまり[繰り返しルール][1]) を使用して、ダウンタイムのスケジュールを定義します。定期的なルールを生成するためのツールとして、公式の [RRULE ジェネレーター][2]を使用してください。
 
 一般的な使用例は、RRULE を使用して月の特定の日のダウンタイムを定義することです。 たとえば、毎月第 3 月曜日に:
 
-{{< img src="monitors/downtimes/downtime_rrule.jpg" alt="アラートのダウンタイム"  style="width:80%;">}}
+{{< img src="monitors/downtimes/downtime_rrule.jpg" alt="アラートのダウンタイム" style="width:80%;">}}
 
 **注**: RRULE で期間を指定する属性はサポートされません（例: `DTSTART`、`DTEND`、`DURATION`）。
 
@@ -144,7 +144,7 @@ RRULE (つまり[繰り返しルール][1]) を使用して、ダウンタイム
 
 ### チームへの通知
 
-対象のチームメンバーを指定して通知するか、サービス[インテグレーション][3]にメッセージを送信します。
+チームメンバーを指定して通知したり、サービス[インテグレーション][3]にメッセージを送信します。Datadog は、ダウンタイムがスケジュール、開始、キャンセル、期限切れになるたびに、指定した宛先に通知を送信します。これらの監査通知により、あなたのチームはシステムのダウンタイムを認識することができます。
 
 #### 最初の回復通知を無効にする
 
@@ -152,7 +152,7 @@ RRULE (つまり[繰り返しルール][1]) を使用して、ダウンタイム
 
 {{< img src="monitors/downtimes/downtime_first_recovery.png" alt="最初の回復通知をミュートする" style="width:80%;">}}
 
-最初の回復通知を無効にするオプションは、複数のダウンタイム間で加算されます。そのため、複数のダウンタイムが重なって同じモニターをミュートする場合、**少なくとも 1 つ**のダウンタイムが無効化オプションをチェックすると、最初の回復通知がミュートされます。
+最初の回復通知を無効にするオプションは、複数のダウンタイム間で加算されます。例えば、複数のダウンタイムが重なって同じモニターをミュートする場合、**少なくとも 1 つ**のダウンタイムが無効化オプションをチェックすると、最初の回復通知がミュートされます。
 
 **注**: このオプションは、**最初の**回復通知をミュートします。ダウンタイム中にモニターがトリガーして再び回復する場合、このオプションの設定に関係なく、対応する通知は常にミュートされます。
 
@@ -171,13 +171,13 @@ Manage Downtime ページには、アクティブなダウンタイムとスケ�
 
 モニターは、`ALERT`、`WARNING`、`RESOLVED`、`NO DATA` 間でステータスが切り替わる際にイベントをトリガーします。モニターがミュートまたはダウンタイムによってサイレント状態になっている時は、`RESOLVED` から別の状態に変わっても、イベントや通知は**トリガーされません**。
 
-{{< img src="monitors/downtimes/downtime_on_alert.png" alt="ダウンタイム時のアラート"  style="width:80%;">}}
+{{< img src="monitors/downtimes/downtime_on_alert.png" alt="ダウンタイム時のアラート" style="width:80%;">}}
 
 **注**: モニターのステータスページからモニターをミュートまたはミュート解除しても、そのモニターに関してスケジュールされたダウンタイムは削除されません。ダウンタイムを編集または削除するには、[Manage Downtimes][1] ページから設定を変更するか、[API][6] を使用する必要があります。
 
 ### 有効期限
 
-ダウンタイムの期限が切れたときにモニターのステータスがアラート対象（`ALERT`、`WARNING`、`NO DATA`）の場合、モニターは新しい通知をトリガーします。これは、ダウンタイム中にモニターのステータスが（たとえば `OK` から `ALERT`、`WARNING`、または `NO DATA` に）変わったモニターや、ダウンタイムの開始時にすでにアラート対象のステータスであったモニターも同様です。ダウンタイムを手動でキャンセルした場合、モニターがアラート対象のステータスになったとしても、通知は送信されません。
+ダウンタイムの期限が切れたときにモニターのステータスがアラート対象（`ALERT`、`WARNING`、`NO DATA`）の場合、モニターは新しい通知をトリガーします。これは、ダウンタイム中にモニターのステータスが（たとえば `OK` から `ALERT`、`WARNING`、または `NO DATA` に）変わったモニターや、ダウンタイムの開始時にすでにアラート対象のステータスであったモニターも同様です。**注**: ダウンタイムを手動でキャンセルした場合、モニターがアラート対象のステータスになったとしても、通知は送信されません。
 
 **例 1:** モニターがダウンタイムの開始*前に*アラートの状態で、ダウンタイム中も*継続*した場合:
 1. ダウンタイム中、このアラートの通知は停止されます。
@@ -186,14 +186,22 @@ Manage Downtime ページには、アクティブなダウンタイムとスケ�
 4. アラート条件が依然として満たされるため、通知が送信されます。
 
 **例 2:** モニターがダウンタイムの開始*前に*アラートの状態で、ダウンタイム*中に*リカバリした場合:
-1. アラート状態から `OK` に移行します。
+1. `ALERT` 状態から `OK` に移行します。
 2. ダウンタイム中にリカバリ通知が送信されます（ダウンタイム中最初のリカバリのみ）。
 
 ### モニターレポート
 
 [週間モニターレポート][7]には、ダウンタイム時を含むすべてのアラートのステータスが含まれます。
 
-## その他の参考資料
+## オートミュート
+
+Datadog は、特定のクラウドワークロードの手動シャットダウンに関連するモニターをプロアクティブにミュートすることができます。以下のシナリオがサポートされています。
+
+- [AWS EC2 インスタンス][8]の手動シャットダウンや、CloudWatch API からのホストステータスに基づく AWS オートスケールによるインスタンス終了のためのオートミュート。
+- [Google Compute Engine (GCE)][9] インスタンスの手動シャットダウンや、GCE API からのホストステータスに基づく GCE オートスケールをトリガーとしたインスタンス終了のためのオートミュート。
+- シャットダウンが手動または Azure オートスケーリングによってトリガーされたかにかかわらず、Azure Resource Health API を通じて利用できるヘルスステータスに基づく、[Azure VM][10] のシャットダウンまたは終了のためのオートミュート。
+
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -204,3 +212,6 @@ Manage Downtime ページには、アクティブなダウンタイムとスケ�
 [5]: /ja/events/explorer
 [6]: /ja/api/v1/downtimes/#cancel-a-downtime
 [7]: /ja/account_management/#preferences
+[8]: /ja/integrations/amazon_ec2/#ec2-automuting
+[9]: /ja/integrations/google_compute_engine/#gce-automuting
+[10]: /ja/integrations/azure_vm/#automuting-monitors

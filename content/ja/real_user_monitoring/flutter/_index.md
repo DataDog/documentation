@@ -27,9 +27,11 @@ RUM は Flutter 2.8+ の Flutter Android および iOS アプリケーション�
 
 | iOS SDK | Android SDK | Browser SDK |
 | :-----: | :---------: | :---------: |
-| 1.12.0 | 1.14.0 | v4.11.2 |
+| 1.14.0 | 1.16.0 | 4.x.x |
 
 [//]: # (End SDK Table)
+
+
 
 ### iOS
 
@@ -166,6 +168,16 @@ MaterialApp(
 これは名前付きルートを使用している場合、または `PageRoute` の `settings` パラメーターに名前を指定した場合に動作します。
 
 また、`DatadogRouteAwareMixin` プロパティと `DatadogNavigationObserverProvider` プロパティを組み合わせて使用すると、RUM ビューを自動的に起動したり停止したりすることができます。`DatadogRouteAwareMixin` を使って、`initState` から `didPush` へとロジックを移動させます。
+
+デフォルトでは、`DatadogRouteAwareMixin` はウィジェットの名前をビューの名前として使用することに注意してください。しかし、これは**難読化されたコードでは動作しません**。難読化の際に Widget クラスの名前が失われてしまうからです。正しいビュー名を保持するには、`rumViewInfo` をオーバーライドしてください。
+```dart
+class _MyHomeScreenState extends State<MyHomeScreen>
+    with RouteAware, DatadogRouteAwareMixin {
+
+  @override
+  RumViewInfo get rumViewInfo => RumViewInfo(name: 'MyHomeScreen');
+}
+```
 
 ### リソースの自動追跡
 

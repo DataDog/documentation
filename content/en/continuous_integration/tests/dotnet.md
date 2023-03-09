@@ -29,6 +29,7 @@ Supported test frameworks:
 * xUnit 2.2 and above
 * NUnit 3.0 and above
 * MsTestV2 14 and above
+* [BenchmarkDotNet 0.13.2][11] and above
 
 ### Test suite level visibility compatibility
 [Test suite level visibility][1] is supported from `dd-trace-dotnet>=2.16.0`.
@@ -97,6 +98,8 @@ Install or update the `dd-trace` command using one of the following ways:
 
 ## Instrumenting tests
 
+<div class="alert alert-warning"><strong>Note</strong>: For BenchmarkDotNet follow <a href="#instrumenting-benchmarkdotnet-tests">these instructions</a>.</div>
+
 To instrument your test suite, prefix your test command with `dd-trace ci run`, providing the name of the service or library under test as the `--dd-service` parameter, and the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) as the `--dd-env` parameter. For example:
 
 {{< tabs >}}
@@ -105,7 +108,7 @@ To instrument your test suite, prefix your test command with `dd-trace ci run`, 
 
 By using <a href="https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-test">dotnet test</a>
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
 {{< /code-block >}}
 
@@ -115,7 +118,7 @@ dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
 
 By using <a href="https://docs.microsoft.com/en-us/visualstudio/test/vstest-console-options">VSTest.Console.exe</a>
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- VSTest.Console.exe {test_assembly}.dll
 {{< /code-block >}}
 
@@ -129,7 +132,7 @@ All tests are automatically instrumented.
 
 You can change the default configuration of the CLI by using command line arguments or environment variables. For a full list of configuration settings, run:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 dd-trace ci run --help
 {{< /code-block >}}
 
@@ -169,6 +172,51 @@ if (scope != null) {
 ```
 
 To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][7] section of the .NET custom instrumentation documentation.
+
+### Instrumenting BenchmarkDotNet tests
+
+To instrument your benchmark tests you need to:
+
+1. Add the [`Datadog.Trace.BenchmarkDotNet` NuGet package][12] to your project (for example, using `dotnet add package Datadog.Trace.BenchmarkDotNet`).
+2. Configure your project to use the `Datadog.Trace.BenchmarkDotNet` exporter using the `DatadogDiagnoser` attribute or the `WithDatadog()` extension method. For example:
+
+{{< tabs >}}
+
+{{% tab "Using the [DatadogDiagnoser] Attribute" %}}
+{{< code-block lang="csharp" >}}
+using BenchmarkDotNet.Attributes;
+using Datadog.Trace.BenchmarkDotNet;
+
+[DatadogDiagnoser]
+[MemoryDiagnoser]
+public class OperationBenchmark
+{
+    [Benchmark]
+    public void Operation()
+    {
+        // ...
+    }
+}
+{{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "Using the Configuration" %}}
+{{< code-block lang="csharp" >}}
+using BenchmarkDotNet.Configs;
+using BenchmarkDotNet.Running;
+using Datadog.Trace.BenchmarkDotNet;
+
+var config = DefaultConfig.Instance
+              .WithDatadog();
+
+BenchmarkRunner.Run<OperationBenchmark>(config);
+{{< /code-block >}}
+{{% /tab %}}
+
+{{< /tabs >}}
+
+3. [Configure the reporting method][13].
+4. Run the benchmark project as you normally do, all benchmark tests will be automatically instrumented.
 
 ### Collecting Git metadata
 
@@ -263,3 +311,6 @@ In addition to that, if [Intelligent Test Runner][10] is enabled, the following 
 [8]: https://www.nuget.org/packages/Datadog.Trace
 [9]: /tracing/trace_collection/custom_instrumentation/dotnet/
 [10]: /continuous_integration/intelligent_test_runner/
+[11]: /continuous_integration/tests/dotnet/#instrumenting-benchmarkdotnet-tests
+[12]: https://www.nuget.org/packages/Datadog.Trace.BenchmarkDotNet
+[13]: /continuous_integration/tests/dotnet/#configuring-reporting-method

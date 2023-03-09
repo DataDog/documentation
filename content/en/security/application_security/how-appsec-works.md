@@ -49,12 +49,11 @@ For Datadog ASM to be compatible with your Datadog configuration, you must have 
 
 ### Serverless monitoring
 
-<div class="alert alert-info">Serverless threat monitoring is in private beta. Request to join the early preview with <a href="https://docs.google.com/forms/d/e/1FAIpQLScB3uSccf9lSAh7GcA8NZ8SsmUGQ5mi09DnDgZmqXcbiYfMzA/viewform">this form</a>.</div>
+<div class="alert alert-info">ASM support for AWS Lambda is in beta. Threat detection is done by using Datadog's lambda extension.</div>
  
-Datadog ASM supports functions deployed on AWS Lambda. Detection is done by using the [Lambda extension][6]. 
+Datadog ASM for AWS Lambda provides deep visibility into attackers targeting your functions. With distributed tracing providing a context-rich picture of the attack, you can assess the impact and remediate the threat effectively. 
 
-Full threat monitoring capabilities are available for Lambda functions. You can detect attackers targeting your functions, trace their attack path with deep code-level insights, and then remediate the threat.
-
+Read [Getting Started with ASM for Serverless][24] for information on setting it up.
 
 ## Performance
 
@@ -166,3 +165,4 @@ Datadog ASM identifies Log4j Log4Shell attack payloads and provides visibility i
 [21]: /security/application_security/risk_management/
 [22]: /security/application_security/threats/
 [23]: /agent/guide/how_remote_config_works/
+[24]: /security/application_security/getting_started/serverless/

@@ -27,7 +27,7 @@ further_reading:
 
 ## Compatibility
 
-{{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
+{{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python,serverless" >}}
 
 {{< programming-lang lang="java" >}}
 
@@ -228,6 +228,51 @@ You can monitor application security for Python apps running in Docker, Kubernet
 | Flask                | 0.10                      |
 
 Support for query strings is not available for Flask.
+
+{{< /programming-lang >}}
+
+{{< programming-lang lang="serverless" >}}
+
+<div class="alert alert-info">ASM support for AWS Lambda is in beta. Threat detection is done by using the Datadog's lambda extension.<br><br> Don’t see your desired technology listed here? Datadog is continually adding additional support. Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send us details</a>.</div>
+
+
+### Supported cloud environments
+
+- AWS Lambda (beta)
+
+### Version dependencies
+
+- Lambda Extension version: `39`
+- Serverless plugin version: `5.20.0`
+
+### Supported languages and their requirements
+
+Node
+: If you are bundling using webpack or esbuild, [mark the Datadog libraries as external][4].
+
+Python
+: 
+
+Java
+: To fully instrument your serverless application with distributed tracing, your Java Lambda functions must use the Java 8 Corretto (`java8.al2`) or Java 11 (`java11`) runtimes with at least 1024MB of memory.
+: If you use the Datadog Lambda layers `dd-trace-java:4` (or older) and `Datadog-Extension:24` (or older), follow the instructions in [Upgrade Instrumentation for Java Lambda Functions][3].
+
+Go
+: 
+
+.NET
+: 
+
+### ASM capabilities 
+The following ASM capabilities are not supported for Lambda functions:
+ - ASM Risk Management
+ - IP, user, and suspicious request blocking
+ - 1-Click enabling ASM
+
+
+[2]: /serverless/guide/datadog_forwarder_python
+[3]: /serverless/guide/upgrade_java_instrumentation
+[4]: /serverless/guide/serverless_tracing_and_webpack/
 
 {{< /programming-lang >}}
 

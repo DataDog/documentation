@@ -15,7 +15,7 @@ title: RUM デプロイメント追跡の概要
 ---
 
 <div class="alert alert-warning">
-    クイックグラフは現在ベータ版です。
+    RUM デプロイ追跡は現在ベータ版です。
 </div>
 
 

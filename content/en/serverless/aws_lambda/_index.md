@@ -58,6 +58,7 @@ Easily correlate serverless code, configuration, and deployment changes with met
 
 {{< img src="serverless/serverless_deployment_tracking.jpeg" alt="Datadog Serverless Monitoring" style="width:100%;" >}}
 
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

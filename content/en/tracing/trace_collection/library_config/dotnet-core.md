@@ -33,7 +33,7 @@ further_reading:
 
 After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][4].
 
-{{< img src="tracing/dotnet/diagram_docs_net.png" alt=".NET Tracer configuration setting precedence"  >}}
+{{< img src="tracing/dotnet/dotnet_core_configuration.png" alt=".NET Core Tracer configuration setting precedence" style="width:100%" >}}
 
 You can set configuration settings in the .NET Tracer with any of the following methods:
 
@@ -58,7 +58,7 @@ To configure the tracer in application code, create a `TracerSettings` instance 
 using Datadog.Trace;
 using Datadog.Trace.Configuration;
 
-// read default configuration sources (env vars, web.config, datadog.json)
+// read default configuration sources (env vars or datadog.json)
 var settings = TracerSettings.FromDefaultSources();
 
 // change some settings
@@ -179,7 +179,7 @@ Added in version `2.19.0`.<br>
 `DD_TRACE_CLIENT_IP_HEADER`
 : The IP header to be used for client IP collection, for example: `x-forwarded-for`. <br>
 Added in version `2.19.0`.<br>
-**Default**: Datadog parses the following: `"x-forwarded-for", "x-real-ip", "client-ip", "x-forwarded", "x-cluster-client-ip", "forwarded-for", "forwarded", "via", "true-client-ip"`. If several are present, none will be reported.<br>
+**Default**: Datadog parses the following: `"x-forwarded-for", "x-real-ip", "true-client-ip", "x-client-ip", "x-forwarded", "forwarded-for", "x-cluster-client-ip", "fastly-client-ip", "cf-connecting-ip", "cf-connecting-ipv6",`. If several are present, the first from the list to parse correctly will be used.<br>
 
 
 `DD_TAGS`

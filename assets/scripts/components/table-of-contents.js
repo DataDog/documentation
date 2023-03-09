@@ -2,7 +2,7 @@ let sidenavMapping = [];
 // let apiNavMapping = [];
 
 // fixes Chrome issue where pages with hash params are not scrolling to anchor
-document.addEventListener('DOMContentLoaded', function () {
+window.addEventListener('load', function () {
     const isChrome = /Chrome/.test(navigator.userAgent);
     if (window.location.hash && isChrome) {
         setTimeout(function () {

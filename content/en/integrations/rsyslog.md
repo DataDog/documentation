@@ -116,7 +116,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
       sudo systemctl restart rsyslog
       ```
 
-{{< site-region region="us">}}
+{{% site-region region="us" %}}
 8. (Optional) Add TLS Encryption to logs sent from Rsyslog to your Datadog account.
    1. Install the `rsyslog-gnutls` and `ca-certificates` packages:
       ```shell
@@ -135,8 +135,8 @@ Configure Rsyslog to gather logs from your host, containers, and services.
       ```shell
       sudo systemctl restart rsyslog
       ```
-{{< /site-region >}}
-{{< site-region region="eu" >}}
+{{% /site-region %}}
+{{% site-region region="eu" %}}
 
 8. (Optional) Add TLS Encryption to logs sent from Rsyslog to your Datadog account.
    1. Install the `rsyslog-gnutls` and `ca-certificates` packages:
@@ -157,7 +157,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
       ```shell
       sudo systemctl restart rsyslog
       ```
-{{< /site-region >}}
+{{% /site-region %}}
 
 [1]: /agent/logs/
 {{% /tab %}}
@@ -223,7 +223,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
       sudo systemctl restart rsyslog
       ```
 
-{{< site-region region="us">}}
+{{% site-region region="us" %}}
 8. (Optional) Add TLS Encryption to logs sent from Rsyslog to your Datadog account.
    1. Install the `rsyslog-gnutls` and `ca-certificates` packages:
       ```shell
@@ -242,9 +242,9 @@ Configure Rsyslog to gather logs from your host, containers, and services.
       ```shell
       sudo systemctl restart rsyslog
       ```
-{{< /site-region >}}
+{{% /site-region %}}
 
-{{< site-region region="eu" >}}
+{{% site-region region="eu" %}}
 
 8. (Optional) Add TLS Encryption to logs sent from Rsyslog to your Datadog account:
    1. Install the `rsyslog-gnutls` and `ca-certificates` packages:
@@ -265,7 +265,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
       ```shell
       sudo systemctl restart rsyslog
       ```
-{{< /site-region >}}
+{{% /site-region %}}
 
 [1]: /agent/logs/
 {{% /tab %}}
@@ -332,7 +332,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
       sudo systemctl restart rsyslog
       ```
 
-{{< site-region region="us">}}
+{{% site-region region="us" %}}
 8. (Optional) Add TLS Encryption to logs sent from Rsyslog to your Datadog account.
    1. Install the `rsyslog-gnutls` and `ca-certificates` packages:
       ```shell
@@ -351,9 +351,9 @@ Configure Rsyslog to gather logs from your host, containers, and services.
       ```shell
       sudo systemctl restart rsyslog
       ```
-{{< /site-region >}}
+{{% /site-region %}}
 
-{{< site-region region="eu" >}}
+{{% site-region region="eu" %}}
 
 8. (Optional) Add TLS Encryption to logs sent from Rsyslog to your Datadog account.
    1. Install the `rsyslog-gnutls` and `ca-certificates` packages:
@@ -374,7 +374,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
       ```shell
       sudo systemctl restart rsyslog
       ```
-{{< /site-region >}}
+{{% /site-region %}}
 
 [1]: /agent/logs/
 {{% /tab %}}
@@ -454,7 +454,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
       sudo systemctl restart rsyslog
       ```
 
-{{< site-region region="us">}}
+{{% site-region region="us" %}}
 8. (Optional) Add TLS Encryption to logs sent from Rsyslog to your Datadog account:
 
     1. Install the `rsyslog-gnutls` and `ca-certificates` packages:
@@ -479,9 +479,9 @@ Configure Rsyslog to gather logs from your host, containers, and services.
       ```shell
       sudo systemctl restart rsyslog
       ```
-{{< /site-region >}}
+{{% /site-region %}}
 
-{{< site-region region="eu" >}}
+{{% site-region region="eu" %}}
 
 8. (Optional) Add TLS Encryption to logs sent from Rsyslog to your Datadog account.
 
@@ -508,7 +508,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
       ```shell
       sudo systemctl restart rsyslog
       ```
-{{< /site-region >}}
+{{% /site-region %}}
 
 [1]: /agent/logs/
 {{% /tab %}}
@@ -583,7 +583,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
       sudo systemctl restart rsyslog
       ```
 
-{{< site-region region="us">}}
+{{% site-region region="us" %}}
 8. (Optional) Add TLS Encryption to logs sent from Rsyslog to your Datadog account.
 
     1. Install the `rsyslog-gnutls` and `ca-certificates` packages:
@@ -608,9 +608,9 @@ Configure Rsyslog to gather logs from your host, containers, and services.
       ```shell
       sudo systemctl restart rsyslog
       ```
-{{< /site-region >}}
+{{% /site-region %}}
 
-{{< site-region region="eu" >}}
+{{% site-region region="eu" %}}
 8. (Optional) Add TLS Encryption to logs sent from Rsyslog to your Datadog account.
 
     1. Install the `rsyslog-gnutls` and `ca-certificates` packages:
@@ -636,7 +636,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
       ```shell
       sudo systemctl restart rsyslog
       ```
-{{< /site-region >}}
+{{% /site-region %}}
 
 [1]: /agent/logs/
 {{% /tab %}}
@@ -711,7 +711,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
       sudo systemctl restart rsyslog
       ```
 
-{{< site-region region="us">}}
+{{% site-region region="us" %}}
 8. (Optional) Add TLS Encryption to logs sent from Rsyslog to your Datadog account.
 
     1. Install the `rsyslog-gnutls` and `ca-certificates` packages:
@@ -736,9 +736,9 @@ Configure Rsyslog to gather logs from your host, containers, and services.
       ```shell
       sudo systemctl restart rsyslog
       ```
-{{< /site-region >}}
+{{% /site-region %}}
 
-{{< site-region region="eu" >}}
+{{% site-region region="eu" %}}
 
 8. (Optional) Add TLS Encryption to logs sent from Rsyslog to your Datadog account.
 
@@ -765,7 +765,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
       ```shell
       sudo systemctl restart rsyslog
       ```
-{{< /site-region >}}
+{{% /site-region %}}
 
 [1]: /agent/logs/
 {{% /tab %}}

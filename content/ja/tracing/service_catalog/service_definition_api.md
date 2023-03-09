@@ -12,7 +12,7 @@ further_reading:
   tag: GitHub
   text: サービス定義スキーマ
 kind: documentation
-title: Datadog Service Definition API によるサービスへのメタデータの追加
+title: サービスカタログの API
 ---
 
 ## 概要

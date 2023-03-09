@@ -36,7 +36,7 @@ draft: false
 git_integration_title: supervisord
 integration_id: supervisord
 integration_title: Supervisord
-integration_version: 2.3.0
+integration_version: 2.4.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0

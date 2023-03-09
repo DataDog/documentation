@@ -83,6 +83,7 @@ Go into your [AWS console][1] and [create an S3 bucket][2] to send your archives
 
 - Do not make your bucket publicly readable.
 - Do not set [Object Lock][3] because the last data needs to be rewritten in some rare cases (typically a timeout).
+
 - For [US1, US3, and US5 sites][4], see [AWS Pricing][5] for inter-region data transfer fees and how cloud storage costs may be impacted. Consider creating your storage bucket in `us-east-1` to manage your inter-region data transfer fees.
 
 [1]: https://s3.console.aws.amazon.com/s3
