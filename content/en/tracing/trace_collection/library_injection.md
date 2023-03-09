@@ -867,11 +867,11 @@ Exercise your application to start generating telemetry data, which you can see 
 
 The supported features and configuration options for the tracing library are the same for library injection as for other installation methods, and can be set with environment variables. Read the [Datadog Library configuration page][16] for your language for more details.
 
-For example, to turn on [Application Security Monitoring][4] or [Continuous Profiler][3], each of which may have billing impact:
+For example, you can turn on [Application Security Monitoring][4] or [Continuous Profiler][3], each of which may have billing impact:
 
-- For **Kubernetes**, set the container environment variables `DD_APPSEC_ENABLED` or `DD_PROFILING_ENABLED` to `true`.
+- For **Kubernetes**, set the `DD_APPSEC_ENABLED` or `DD_PROFILING_ENABLED` container environment variables to `true`.
 
-- For **hosts and containers**, set the container environment variables `DD_APPSEC_ENABLED` or `DD_PROFILING_ENABLED` to `true`, or in the [injection configuration](#supplying-configuration-source) specify an `additional_environment_variables` section like the following YAML example: 
+- For **hosts and containers**, set the `DD_APPSEC_ENABLED` or `DD_PROFILING_ENABLED` container environment variables to `true`, or in the [injection configuration](#supplying-configuration-source), specify an `additional_environment_variables` section like the following YAML example: 
 
   ```yaml
   additional_environment_variables:
