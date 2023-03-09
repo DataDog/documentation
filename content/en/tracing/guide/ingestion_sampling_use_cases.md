@@ -48,7 +48,7 @@ Ingesting entire transaction traces ensures visibility over the **end-to-end ser
 
 Complete traces can be ingested with [head-based sampling][4] mechanisms: the decision to keep or drop the trace is determined from the first span of the trace, the *head*, when the trace is created. This decision is propagated through the request context to downstream services.
 
-{{< img src="/tracing/guide/ingestion_sampling_use_cases/head_based_sampling_keep.png" alt="Head-based Sampling" style="width:100%;" >}}
+{{< img src="/tracing/guide/ingestion_sampling_use_cases/head-based-sampling.png" alt="Head-based Sampling" style="width:100%;" >}}
 
 To decide which traces to keep and drop, the Datadog Agent computes [default sampling rates][5] for each service to apply at trace creation, based on the application traffic:
 - For low-traffic applications, a sampling rate of 100% is applied.
@@ -96,7 +96,7 @@ Traces with error spans are often symptoms of system failures. Keeping a higher 
 
 In addition to head-based sampled traces, you can increase the error sampling rate so that each Agent keeps additional error spans even if the related traces are not kept by head-based sampling. 
 
-{{< img src="/tracing/guide/ingestion_sampling_use_cases/error_sampling.png" alt="Error Sampling" style="width:100%;" >}}
+{{< img src="/tracing/guide/ingestion_sampling_use_cases/error-spans-sampling.png" alt="Error Sampling" style="width:100%;" >}}
 
 **Note:** Distributed pieces of the trace chunks might not be ingested as the sampling happens locally at the Datadog Agent level.
 
@@ -142,7 +142,7 @@ The backend service `web-store` is calling a Mongo database multiple times per t
 
   **Note**: Configuring a single span sampling rule is especially useful if you are using [span-based metrics][8], which are derived from ingested spans.
 
-{{< img src="/tracing/guide/ingestion_sampling_use_cases/drop_database_spans.png" alt="Database spans sampling" style="width:100%;" >}}
+{{< img src="/tracing/guide/ingestion_sampling_use_cases/single-span-sampling.png" alt="Database spans sampling" style="width:100%;" >}}
 
 
 ## Further Reading
