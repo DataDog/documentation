@@ -168,10 +168,14 @@ main:
     url: getting_started/application_security/
     parent: getting_started
     weight: 19
+  - name: Observability Pipelines
+    url: getting_started/observability_pipelines/
+    parent: getting_started
+    weight: 20
   - name: Learning Center
     url: getting_started/learning_center/
     parent: getting_started
-    weight: 20
+    weight: 21
   - name: Glossary
     url: glossary/
     pre: features
