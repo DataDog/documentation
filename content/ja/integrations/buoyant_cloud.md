@@ -125,7 +125,13 @@ Buoyant Cloud がイベントを作成すると、Datadog の[イベントエク
 
 ### イベント
 
-Buoyant Cloud は Datadog に[イベント][3]を送信します。
+Buoyant Cloud は Datadog に[イベント][3]を送信します。これには以下が含まれます。
+
+- Linkerd ヘルスアラート
+- Linkerd 構成アラート
+- ワークロードトラフィックアラート
+- ワークロードロールアウト
+- 手動イベント
 
 ## トラブルシューティング
 
@@ -139,7 +145,7 @@ Buoyant Cloud は Datadog に[イベント][3]を送信します。
 [2]: https://buoyant.cloud/notifications
 [3]: https://app.datadoghq.com/event/explorer
 [4]: https://buoyant.cloud/settings
-[5]: https://app.datadoghq.com/organization-settings/api-keys
+[5]: https://app.datadoghq.com/organization-settings/api-keys?filter=Buoyant%20Cloud
 [6]: https://docs.buoyant.cloud
 [7]: https://slack.linkerd.io
 [8]: mailto:cloud@buoyant.io

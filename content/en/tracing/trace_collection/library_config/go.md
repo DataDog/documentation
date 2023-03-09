@@ -113,6 +113,10 @@ Dynamically rename services through configuration. Services can be separated by 
 : **Default**: `false` <br>
 Datadog may collect [environmental and diagnostic information about your system][6] to improve the product. When false, this telemetry data will not be collected.
 
+`DD_TRACE_CLIENT_IP_ENABLED`
+: **Default**: `false` <br>
+Enable client IP collection from relevant IP headers in HTTP request spans.
+Added in version 1.47.0 
 
 ## Configure APM environment name
 

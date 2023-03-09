@@ -54,8 +54,8 @@ Datadog provides many out-of-the-box dashboards for features and integrations. F
 
 A common way to start a dashboard is by encountering a similar dashboard already in use, and adjusting it to suit your needs. If you find a dashboard that answers many of the questions you want your dashboard to answer: 
 
-1. Clone it by opening the dashboard and selecting **Clone dashboard** from the Settings menu (the gear icon on the right-hand side). This creates an unlinked copy of the dashboard; changes you make in the new copy don't affect the source widget.
-    {{< img src="getting_started/dashboards/cloning_dashboard.mp4" alt="Cloning a dashboard" video=true >}}
+1. Clone it by opening the dashboard and selecting **Clone dashboard** from the Settings menu (the export icon on the right-hand side). This creates an unlinked copy of the dashboard; changes you make in the new copy don't affect the source widget.
+  {{< img src="/getting_started/dashboards/clone_dashboard.png" alt="Clone dashboard option in the dropdown menu" style="width:100%;" >}}
 2. Edit the clone by opening it and clicking **Edit widgets**. 
 3. Delete widgets you don't need by selecting **Delete** from the widget's Settings menu.
 4. Move things around to suit your needs. Groups and individual widgets can be dragged and dropped into new locations in the dashboard.

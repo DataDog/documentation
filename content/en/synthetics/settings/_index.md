@@ -27,7 +27,7 @@ further_reading:
 
 ## Overview
 
-On the [Synthetic Monitoring Settings page][1], you can access and control the following topics:
+On the [Synthetic Monitoring & Continuous Testing Settings page][1], you can access and control the following topics:
 
 * [Private Locations](#private-locations)
 * [Global Variables](#global-variables)
@@ -118,7 +118,8 @@ For more information about TOTP-based MFA in a browser test, see [TOTPs For Mult
 
 Once created, global variables can be used in all Synthetic tests. To import your global variables into your test, click **+ Variables**, type `{{` in a field you want to add the variable, and select your global variable. 
 
-For more information, see the [HTTP test][8], [Multistep API test][9], [Browser test configuration][10], and [Steps documentation][16].
+
+For more information about variables, see the [HTTP test][8], [Multistep API test][9], [Browser test configuration][10], and [Steps documentation][16].
 
 ### Permissions
 

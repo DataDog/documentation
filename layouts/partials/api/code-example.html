@@ -81,7 +81,7 @@
     <div class="card-header p-0">
       <h5 class="m-0">
         <button class="btn btn-link {{if gt $i 0}}collapsed{{ end}}" data-bs-toggle="collapse" data-bs-target="#{{ $operationid | lower }}-{{ $version }}-request-example-{{ $i }}" aria-expanded="true" aria-controls="collapseOne">
-          {{ $item.description }}
+          {{ $item.description }} {{ partial "icon" (dict "name" "up-carrot-normal" "size" "18px") }}
         </button>
       </h5>
     </div>

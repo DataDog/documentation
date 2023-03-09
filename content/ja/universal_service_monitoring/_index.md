@@ -27,7 +27,6 @@ title: ユニバーサル サービス モニタリング
 
 {{< img src="universal_service_monitoring/usm-demo.mp4" alt="ユニバーサルサービスモニタリングのデモ映像です。サービスマップ上のサービスをクリックし、View service overview を選択すると、サービスの概要が表示されます。" video="true" >}}
 
-
 ## セットアップ
 
 ### 対応バージョンと互換性
@@ -60,8 +59,6 @@ HTTPS (OpenSSL)
 - Datadog Agent がサービスと共にインストールされていること。トレースライブラリのインストールは必要_ありません_。
 - [統合サービスタグ付け][1]の `env` タグがデプロイメントに適用されていること。`service` と `version` タグはオプションです。
 
-
-
 ## ユニバーサルサービスモニタリングを有効にする
 
 サービスのデプロイ方法と Agent の構成に応じて、以下のいずれかの方法を使用して、Agent でユニバーサルサービスモニタリングを有効にします。
@@ -76,6 +73,14 @@ datadog:
   ...
   serviceMonitoring:
     enabled: true
+```
+
+クラスターで Google Container-Optimized OS (COS) が動作している場合は、values ファイルに以下も追加してください。
+
+```
+providers:
+  gke:
+    cos: true
 ```
 
 {{% /tab %}}
@@ -156,6 +161,8 @@ datadog:
              value: 'true'
            - name: DD_SYSPROBE_SOCKET
              value: /var/run/sysprobe/sysprobe.sock
+           - name: HOST_PROC
+             value: /host/proc
          resources: {}
          volumeMounts:
            - name: procdir
@@ -168,16 +175,100 @@ datadog:
              mountPath: /sys/kernel/debug
            - name: sysprobe-socket-dir
              mountPath: /var/run/sysprobe
+           - name: modules
+             mountPath: /lib/modules
+             readOnly: true
+           - name: src
+             mountPath: /usr/src
+             readOnly: true
+           - name: runtime-compiler-output-dir
+             mountPath: /var/tmp/datadog-agent/system-probe/build
+           - name: kernel-headers-download-dir
+             mountPath: /var/tmp/datadog-agent/system-probe/kernel-headers
+             readOnly: false
+           - name: apt-config-dir
+             mountPath: /host/etc/apt
+             readOnly: true
+           - name: yum-repos-dir
+             mountPath: /host/etc/yum.repos.d
+             readOnly: true
+           - name: opensuse-repos-dir
+             mountPath: /host/etc/zypp
+             readOnly: true
+           - name: public-key-dir
+             mountPath: /host/etc/pki
+             readOnly: true
+           - name: yum-vars-dir
+             mountPath: /host/etc/yum/vars
+             readOnly: true
+           - name: dnf-vars-dir
+             mountPath: /host/etc/dnf/vars
+             readOnly: true
+           - name: rhel-subscription-dir
+             mountPath: /host/etc/rhsm
+             readOnly: true
    ```
+
    そして、以下のボリュームをマニフェストに追加します。
    ```
    volumes:
      - name: sysprobe-socket-dir
        emptyDir: {}
+     - name: procdir
+       hostPath:
+         path: /proc
      - name: debugfs
        hostPath:
          path: /sys/kernel/debug
+     - hostPath:
+         path: /lib/modules
+       name: modules
+     - hostPath:
+         path: /usr/src
+       name: src
+     - hostPath:
+         path: /var/tmp/datadog-agent/system-probe/build
+       name: runtime-compiler-output-dir
+     - hostPath:
+         path: /var/tmp/datadog-agent/system-probe/kernel-headers
+       name: kernel-headers-download-dir
+     - hostPath:
+         path: /etc/apt
+       name: apt-config-dir
+     - hostPath:
+         path: /etc/yum.repos.d
+       name: yum-repos-dir
+     - hostPath:
+         path: /etc/zypp
+       name: opensuse-repos-dir
+     - hostPath:
+         path: /etc/pki
+       name: public-key-dir
+     - hostPath:
+         path: /etc/yum/vars
+       name: yum-vars-dir
+     - hostPath:
+         path: /etc/dnf/vars
+       name: dnf-vars-dir
+     - hostPath:
+         path: /etc/rhsm
+       name: rhel-subscription-dir
+
    ```
+
+   &nbsp;**注**: クラスターが Google Container-Optimized OS (COS) 上で動作している場合、`src` マウントを削除する必要があります。これを行うには、コンテナ定義から以下を削除します。
+   ```
+    - name: src
+      mountPath: /usr/src
+      readOnly: true
+   ```
+   また、マニフェストから以下を削除します。
+   ```
+    - hostPath:
+        path: /usr/src
+      name: src
+   ```
+
 5. オプションで HTTPS をサポートする場合は、`system-probe` コンテナに以下を追加します。
 
    ```
@@ -204,8 +295,28 @@ datadog:
 `docker run` コマンドに以下を追加します。
 
 ```
--v /sys/kernel/debug:/sys/kernel/debug \
+docker run --cgroupns host \
+--pid host \
+-e DD_API_KEY="<DATADOG_API_KEY>" \
 -e DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true \
+-v /var/run/docker.sock:/var/run/docker.sock:ro \
+-v /proc/:/host/proc/:ro \
+-v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+-v /sys/kernel/debug:/sys/kernel/debug \
+-v /lib/modules:/lib/modules:ro \
+-v /usr/src:/usr/src:ro \
+-v /var/tmp/datadog-agent/system-probe/build:/var/tmp/datadog-agent/system-probe/build \
+-v /var/tmp/datadog-agent/system-probe/kernel-headers:/var/tmp/datadog-agent/system-probe/kernel-headers \
+-v /etc/apt:/host/etc/apt:ro \
+-v /etc/yum.repos.d:/host/etc/yum.repos.d:ro \
+-v /etc/zypp:/host/etc/zypp:ro \
+-v /etc/pki:/host/etc/pki:ro \
+-v /etc/yum/vars:/host/etc/yum/vars:ro \
+-v /etc/dnf/vars:/host/etc/dnf/vars:ro \
+-v /etc/rhsm:/host/etc/rhsm:ro \
+-e DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true \
+-e HOST_PROC=/host/root/proc \
+-e HOST_ROOT=/host/root \
 --security-opt apparmor:unconfined \
 --cap-add=SYS_ADMIN \
 --cap-add=SYS_RESOURCE \
@@ -214,13 +325,8 @@ datadog:
 --cap-add=NET_BROADCAST \
 --cap-add=NET_RAW \
 --cap-add=IPC_LOCK \
---cap-add=CHOWN
-```
-
-オプションで HTTPS をサポートする場合は、以下も追加します。
-```
--e HOST_ROOT=/host/root \
--v /:/host/root:ro
+--cap-add=CHOWN \
+gcr.io/datadoghq/agent:latest
 ```
 
 {{% /tab %}}
@@ -235,8 +341,24 @@ services:
     ...
     environment:
      - DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED: 'true'
+     - HOST_PROC: '/host/proc'
     volumes:
+     - /var/run/docker.sock:/var/run/docker.sock:ro
+     - /proc/:/host/proc/:ro
+     - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
      - /sys/kernel/debug:/sys/kernel/debug
+     - /sys/kernel/debug:/sys/kernel/debug
+     - /lib/modules:/lib/modules
+     - /usr/src:/usr/src
+     - /var/tmp/datadog-agent/system-probe/build:/var/tmp/datadog-agent/system-probe/build
+     - /var/tmp/datadog-agent/system-probe/kernel-headers:/var/tmp/datadog-agent/system-probe/kernel-headers
+     - /etc/apt:/host/etc/apt
+     - /etc/yum.repos.d:/host/etc/yum.repos.d
+     - /etc/zypp:/host/etc/zypp
+     - /etc/pki:/host/etc/pki
+     - /etc/yum/vars:/host/etc/yum/vars
+     - /etc/dnf/vars:/host/etc/dnf/vars
+     - /etc/rhsm:/host/etc/rhsm
     cap_add:
      - SYS_ADMIN
      - SYS_RESOURCE
@@ -264,6 +386,15 @@ services:
 ```
 
 {{% /tab %}}
+{{% tab "Docker Swarm" %}}
+
+`Docker Swarm` はまだ `security_opt` の変更をサポートしていないので、オペレーティングシステムに `apparmor` インスタンスが動作していない必要があります。
+
+オペレーティングシステムに `apparmor` インスタンスがない場合は、`Docker-Compose` [セクション][1]にある `docker-compose.yml` ファイルを `security_opt` フィールドの横で使用することになります。
+
+[1]: /ja/universal_service_monitoring/?tab=dockercompose#enabling-universal-service-monitoring
+
+{{% /tab %}}
 {{% tab "コンフィギュレーションファイル (Linux)" %}}
 
 Helm Charts や環境変数を使用しない場合は、`system-probe.yaml` ファイルに以下を設定します。
@@ -283,6 +414,296 @@ DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true
 ```
 
 {{% /tab %}}
+{{% tab "Chef" %}}
+
+ノードに以下の属性を設定します。
+
+```rb
+node["datadog"]["system_probe"]["service_monitoring_enabled"] = true
+```
+
+{{% /tab %}}
+{{% tab "Puppet" %}}
+
+`service_monitoring_enabled` を設定します。
+
+```conf
+class { 'datadog_agent::system_probe':
+    service_monitoring_enabled => true,
+}
+```
+
+{{% /tab %}}
+{{% tab "Ansible" %}}
+
+プレイブックに以下の属性を追加します。
+
+```yaml
+service_monitoring_config:
+  enabled: true
+```
+
+{{% /tab %}}
+
+{{% tab "ECS" %}}
+
+ECS の場合、以下の JSON タスク定義で USM とシステムプローブを有効にします。タスク定義を[デーモンサービス][1]としてデプロイします。
+
+```json
+{
+  "containerDefinitions": [
+    {
+      "name": "datadog-agent",
+      "image": "public.ecr.aws/datadog/agent:7",
+      "cpu": 500,
+      "memory": 1024,
+      "essential": true,
+      "mountPoints": [
+        ...
+        {
+          "containerPath": "/sys/kernel/debug",
+          "sourceVolume": "sys_kernel_debug"
+        },
+        {
+          "containerPath": "/host/proc",
+          "sourceVolume": "proc"
+        },
+        {
+          "containerPath": "/var/run/docker.sock",
+          "sourceVolume": "var_run_docker_sock"
+        },
+        {
+          "containerPath": "/host/sys/fs/cgroup",
+          "sourceVolume": "sys_fs_cgroup"
+        },
+        {
+          "readOnly": true,
+          "containerPath": "/var/lib/docker/containers",
+          "sourceVolume": "var_lib_docker_containers"
+        },
+        {
+          "containerPath": "/lib/modules",
+          "sourceVolume": "lib_modules"
+        },
+        {
+          "containerPath": "/usr/src",
+          "sourceVolume": "usr_src"
+        },
+        {
+          "containerPath": "/var/tmp/datadog-agent/system-probe/build",
+          "sourceVolume": "var_tmp_datadog_agent_system_probe_build"
+        },
+        {
+          "containerPath": "/var/tmp/datadog-agent/system-probe/kernel-headers",
+          "sourceVolume": "var_tmp_datadog_agent_system_probe_kernel_headers"
+        },
+        {
+          "containerPath": "/host/etc/apt",
+          "sourceVolume": "etc_apt"
+        },
+        {
+          "containerPath": "/host/etc/yum.repos.d",
+          "sourceVolume": "etc_yum_repos_d"
+        },
+        {
+          "containerPath": "/host/etc/zypp",
+          "sourceVolume": "etc_zypp"
+        },
+        {
+          "containerPath": "/host/etc/pki",
+          "sourceVolume": "etc_pki"
+        },
+        {
+          "containerPath": "/host/etc/yum/vars",
+          "sourceVolume": "etc_yum_vars"
+        },
+        {
+          "containerPath": "/host/etc/dnf/vars",
+          "sourceVolume": "etc_dnf_vars"
+        },
+        {
+          "containerPath": "/host/etc/rhsm",
+          "sourceVolume": "etc_rhsm"
+        }
+      ],
+      "environment": [
+        {
+          "name": "DD_API_KEY",
+          "value": "<YOUR_DATADOG_API_KEY>"
+        },
+        ...
+        {
+          "name": "DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED",
+          "value": "true"
+        }
+      ],
+      "linuxParameters": {
+        "capabilities": {
+          "add": [
+            "SYS_ADMIN",
+            "SYS_RESOURCE",
+            "SYS_PTRACE",
+            "NET_ADMIN",
+            "NET_BROADCAST",
+            "NET_RAW",
+            "IPC_LOCK",
+            "CHOWN"
+          ]
+        }
+      }
+    }
+  ],
+  "requiresCompatibilities": [
+    "EC2"
+  ],
+  "volumes": [
+    ...
+    {
+      "host": {
+        "sourcePath": "/sys/kernel/debug"
+      },
+      "name": "sys_kernel_debug"
+    },
+    {
+      "host": {
+        "sourcePath": "/proc/"
+      },
+      "name": "proc"
+    },
+    {
+      "host": {
+        "sourcePath": "/var/run/docker.sock"
+      },
+      "name": "var_run_docker_sock"
+    },
+    {
+      "host": {
+        "sourcePath": "/sys/fs/cgroup/"
+      },
+      "name": "sys_fs_cgroup"
+    },
+    {
+      "host": {
+        "sourcePath": "/var/lib/docker/containers/"
+      },
+      "name": "var_lib_docker_containers"
+    },
+    {
+      "host": {
+        "sourcePath": "/lib/modules"
+      },
+      "name": "lib_modules"
+    },
+    {
+      "host": {
+        "sourcePath": "/usr/src"
+      },
+      "name": "usr_src"
+    },
+    {
+      "host": {
+        "sourcePath": "/var/tmp/datadog-agent/system-probe/build"
+      },
+      "name": "var_tmp_datadog_agent_system_probe_build"
+    },
+    {
+      "host": {
+        "sourcePath": "/var/tmp/datadog-agent/system-probe/kernel-headers"
+      },
+      "name": "var_tmp_datadog_agent_system_probe_kernel_headers"
+    },
+    {
+      "host": {
+        "sourcePath": "/etc/apt"
+      },
+      "name": "etc_apt"
+    },
+    {
+      "host": {
+        "sourcePath": "/etc/yum.repos.d"
+      },
+      "name": "etc_yum_repos_d"
+    },
+    {
+      "host": {
+        "sourcePath": "/etc/zypp"
+      },
+      "name": "etc_zypp"
+    },
+    {
+      "host": {
+        "sourcePath": "/etc/pki"
+      },
+      "name": "etc_pki"
+    },
+    {
+      "host": {
+        "sourcePath": "/etc/yum/vars"
+      },
+      "name": "etc_yum_vars"
+    },
+    {
+      "host": {
+        "sourcePath": "/etc/dnf/vars"
+      },
+      "name": "etc_dnf_vars"
+    },
+    {
+      "host": {
+        "sourcePath": "/etc/rhsm"
+      },
+      "name": "etc_rhsm"
+    }
+  ],
+  "family": "datadog-agent-task"
+}
+```
+
+OS のイメージが Ubuntu や Debian の場合は、`environment` の後に以下を追加してください。
+
+```yaml
+"dockerSecurityOptions": [
+  "apparmor:unconfined"
+]
+```
+
+オプションで HTTPS をサポートする場合は、以下も追加します。
+
+```yaml
+"mountPoints": [
+  ...
+  {
+    "containerPath": "/host/root",
+    "sourceVolume": "host_root"
+  },
+  ...
+]
+...
+"volumes": [
+  ...
+  {
+    "host": {
+      "sourcePath": "/"
+    },
+    "name": "host_root"
+  },
+  ...
+]
+```
+
+サービスでロードバランサーを使用している場合、ユニバーサルサービスモニタリングがクラウド管理されたエンティティを検出できるように、追加のクラウドインテグレーションを有効にします。
+* AWS ロードバランサーを可視化するには、[AWS インテグレーション][2]をインストールします。また、ENI および EC2 のメトリクス収集を有効にする必要があります。
+
+次に、各ロードバランサーに以下のタグを追加します。
+```shell
+ENV=<env>
+SERVICE=<service>
+```
+
+[1]: /ja/containers/amazon_ecs/?tab=awscli#run-the-agent-as-a-daemon-service
+[2]: /ja/integrations/amazon_web_services/
+{{% /tab %}}
+
 {{% tab "Windows" %}}
 
 **IIS 上で動作するサービスの場合:**
@@ -296,7 +717,7 @@ DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true
      enabled: true
    ```
 [1]: /ja/agent/basic_agent_usage/windows/?tab=commandline
-{{< /tabs >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
@@ -326,6 +747,53 @@ Agent を構成した後、サービスカタログにサービスが表示さ�
 - `universal.http.*` メトリクスを使用して、[モニター][4]、[ダッシュボード][5]、[SLO][6] を作成します。
 
 
+### パスの除外と置換
+
+`http_replace_rules` または `DD_SYSTEM_PROBE_NETWORK_HTTP_REPLACE_RULES` を使用して、正規表現にマッチする HTTP エンドポイントを削除したり、マッチするエンドポイントを異なる形式に変換するように Agent を構成します。
+
+{{< tabs >}}
+{{% tab "コンフィギュレーションファイル" %}}
+
+`system-probe` に以下の構成を追加します。
+
+```yaml
+network_config:
+  http_replace_rules:
+    - pattern: "<exclusion rule>"
+      repl: ""
+    - pattern: "<replacement rule>"
+      repl: "<new format>"
+```
+
+例えば、以下の構成では `/api/v1/users` のような `/api/` で始まるエンドポイントを削除します。しかし、`/api` や `/users/api` は無視されません。
+
+```yaml
+network_config:
+  http_replace_rules:
+    - pattern: "/api/.*"
+      repl: ""
+```
+
+以下の構成は、エンドポイント `/api/users` を新しいフォーマット `/api/v1/users` に合わせて置き換えたものです。
+
+```yaml
+network_config:
+  http_replace_rules:
+    - pattern: "/api/users"
+      repl: "/api/v1/users"
+```
+
+{{% /tab %}}
+{{% tab "環境変数" %}}
+次のエントリーを追加します。
+
+```shell
+DD_SYSTEM_PROBE_NETWORK_HTTP_REPLACE_RULES=[{"pattern":"<drop regex>","repl":""},{"pattern":"<replace regex>","repl":"<replace pattern>"}]
+```
+{{% /tab %}}
+
+{{< /tabs >}}
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -333,6 +801,6 @@ Agent を構成した後、サービスカタログにサービスが表示さ�
 [1]: /ja/getting_started/tagging/unified_service_tagging
 [2]: /ja/tracing/services/deployment_tracking/
 [3]: /ja/tracing/service_catalog/
-[4]: /ja/monitors/create/types/apm/?tab=apmmetrics
+[4]: /ja/monitors/types/apm/?tab=apmmetrics
 [5]: /ja/dashboards/
 [6]: /ja/monitors/service_level_objectives/metric/

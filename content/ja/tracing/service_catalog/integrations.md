@@ -48,9 +48,10 @@ OpsGenie メタデータをサービスに追加することで、サービス�
 
 1. まだの場合は、[Datadog OpsGenie インテグレーション][12]をセットアップします。
 2. OpsGenie の [API キー管理][13]ドキュメントに記載されているように、OpsGenie の API アクセスキーを取得します。この API キーは、**構成アクセス**および**読み取り**アクセス権を必要とします。
-3. [インテグレーションタイル][14]の **Accounts** セクションでアカウントを追加し、OpsGenie API アクセスキーを貼り付けて、OpsGenie アカウントのリージョンを選択します。
+3. [インテグレーションタイル][14]の下部にある **Accounts** セクションでアカウントを追加し、OpsGenie API アクセスキーを貼り付けて、OpsGenie アカウントのリージョンを選択します。
 
-   {{< img src="tracing/service_catalog/create_account.png" alt="OpsGenie インテグレーションタイルの Create New Account ワークフロー" style="width:80%;" >}}
+   {{< img src="tracing/service_catalog/create_account1.png" alt="OpsGenie インテグレーションタイルの Create New Account ワークフロー" style="width:80%;" >}}
+   {{< img src="tracing/service_catalog/create_account2.png" alt="OpsGenie インテグレーションタイルの Create New Account ワークフロー" style="width:80%;" >}}
 
 4. OpsGenie の情報を使ってサービス定義を更新し、OpsGenie サービスを Datadog サービスとリンクさせます。例えば、完全な[サービス定義][5]の中で、以下の `integrations` 構成行を渡してください。
 

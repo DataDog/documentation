@@ -11,10 +11,10 @@ title: Datadog Agent 이미지 빌드
     git clone https://github.com/DataDog/datadog-agent.git
     ```
 
-2. `datadog-agent/Dockerfile/agent/` 폴더로 이동하세요.
+2. `datadog-agent/Dockerfiles/agent/` 폴더로 이동하세요.
 
     ```shell
-    cd datadog-agent/Dockerfile/agent/
+    cd datadog-agent/Dockerfiles/agent/
     ```
 
 3. 빌드하고자 하는 Agent 버전의 브랜치로 전환합니다.

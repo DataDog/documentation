@@ -37,7 +37,6 @@ author:
 categories:
 - processing
 - log collection
-- autodiscovery
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/rabbitmq/README.md
 display_on_public_website: true
@@ -45,7 +44,7 @@ draft: false
 git_integration_title: rabbitmq
 integration_id: rabbitmq
 integration_title: RabbitMQ
-integration_version: 3.3.1
+integration_version: 4.0.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -65,7 +64,6 @@ tile:
   - Supported OS::Windows
   - Category::処理
   - Category::ログの収集
-  - Category::オートディスカバリー
   configuration: README.md#Setup
   description: キューサイズ、コンシューマーカウント、未承認メッセージなどを追跡
   media: []
@@ -90,7 +88,7 @@ tile:
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 RabbitMQ チェックは [Datadog Agent][3] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
@@ -192,7 +190,9 @@ _Agent バージョン 6.0 以降で利用可能_
 
 #### コンテナ化
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
+Datadog の [Docker コンテナオートディスカバリー][1]を活用することができます。Rabbitmq 固有の設定は、`auto_conf.yaml` の設定例を参照してください。
+
+Kubernetes などのコンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照して、次のパラメーターを適用してください。
 
 ##### メトリクスの収集
 
@@ -206,14 +206,15 @@ _Agent バージョン 6.0 以降で利用可能_
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][3]を参照してください。
 
 | パラメーター      | 値                                                                                                                                               |
 | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `<LOG_CONFIG>` | `{"source": "rabbitmq", "service": "rabbitmq", "log_processing_rules": [{"type":"multi_line","name":"logs_starts_with_equal_sign", "pattern": "="}]}` |
 
-[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
+[1]: https://docs.datadoghq.com/ja/containers/docker/integrations/?tab=dockeradv2
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[3]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
 {{% /tab %}}
 {{< /tabs >}}
 

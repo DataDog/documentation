@@ -2,13 +2,11 @@
 aliases:
 - /ja/integrations/observability_pipelines/vector_configurations/
 - /ja/observability_pipelines/vector_configurations/
+- /ja/observability_pipelines/reference/
 further_reading:
 - link: /observability_pipelines/working_with_data/
   tag: ドキュメント
   text: 観測可能性パイプラインを使ったデータの操作
-- link: /observability_pipelines/production_deployment_overview/integrate_datadog_and_the_observability_pipelines_worker/
-  tag: ドキュメント
-  text: 観測可能性パイプラインにデータを送信するための Datadog Agent の構成
 kind: ドキュメント
 title: 構成
 ---

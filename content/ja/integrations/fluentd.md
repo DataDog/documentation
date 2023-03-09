@@ -29,7 +29,6 @@ author:
   support_email: help@datadoghq.com
 categories:
 - log collection
-- autodiscovery
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/fluentd/README.md
 display_on_public_website: true
@@ -56,7 +55,6 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::ログの収集
-  - Category::オートディスカバリー
   configuration: README.md#Setup
   description: 有効化した各 FluentD プラグインのバッファキューと再試行回数を監視。
   media: []
@@ -78,7 +76,7 @@ Fluentd からメトリクスを取得して、以下のことができます。
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Fluentd チェックは [Datadog Agent][2] パッケージに含まれています。Fluentd サーバーに追加でインストールする必要はありません。
 

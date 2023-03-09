@@ -12,7 +12,7 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true" >}}
-Feature Flag data collection in RUM is in private beta. To request access, contact Support at support@datadoghq.com.
+Feature Flag analysis for RUM is in private beta. To request access, contact Support at support@datadoghq.com. In the meantime, follow the instructions below to enrich your RUM events with feature flag context.
 {{< /callout >}}
 
 ## Overview
@@ -262,7 +262,7 @@ We currently support integrations with:
              datadogRum
                  .addFeatureFlagEvaluation(
                       impressionData.impression.feature,
-                      impressionData.impression.value
+                      impressionData.impression.treatment
                  );
         },
      },
@@ -310,7 +310,7 @@ We currently support integrations with:
              datadogRum
                  .addFeatureFlagEvaluation(
                       impressionData.impression.feature,
-                      impressionData.impression.value
+                      impressionData.impression.treatment
                  );
         },
      },
@@ -353,7 +353,7 @@ We currently support integrations with:
              datadogRum
                  .addFeatureFlagEvaluation(
                       impressionData.impression.feature,
-                      impressionData.impression.value
+                      impressionData.impression.treatment
                  );
         },
      },
