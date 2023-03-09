@@ -29,7 +29,8 @@
                     "database_monitoring",
                     "profiler",
                     "cloud_cost_management",
-                    "universal_service_monitoring"
+                    "universal_service_monitoring",
+                    "workflows"
                 ]
             },
             "tags": ["faq"],
@@ -52,7 +53,8 @@
                     "continuous_testing",
                     "network_monitoring/devices",
                     "developers",
-                    "database_monitoring"
+                    "database_monitoring",
+                    "workflows"
                 ],
                 "localisation": ["", "/fr", "/ja"]
             },
@@ -127,7 +129,8 @@
                     "containers",
                     "cloud_cost_management",
                     "universal_service_monitoring",
-                    "glossary"
+                    "glossary",
+                    "workflows"
                 ]
             },
             "tags": ["docs"],

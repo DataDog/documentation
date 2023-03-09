@@ -2,16 +2,11 @@
 title: Workflows
 kind: documentation
 disable_toc: false
-is_beta: false
 further_reading:
 - link: "https://www.datadoghq.com/blog/automate-end-to-end-processes-with-datadog-workflows/"
   tag: "Blog"
   text: "Automate end-to-end processes and quickly respond to events with Datadog Workflows"
 ---
-
-{{< callout >}}
-  Workflows are now available under **Service Mgmt** in the left hand-side navigation bar. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.
-{{< /callout >}}
 
 {{< img src="workflows/hero.jpg" alt="Graphic showing three purposes of Workflows: Orchestrate, Automate, and Break down Silos"  >}}
 
@@ -32,10 +27,10 @@ Trigger your workflows from monitors, security signals, or dashboards, or trigge
 ## Examples
 
 Below are a few examples of workflows you can build:
-- Automate scaling of your AWS Auto Scaling Groups when monitors tracking critical metrics of these Auto Scaling Groups go into the alert state. 
+- Automate scaling of your AWS Auto Scaling Groups when monitors tracking critical metrics of these Auto Scaling Groups go into the alert state.
 - Automatically create investigative notebooks of malicious IPs to be detected by Security Signals, and then block these IPs in CloudFlare with the click of a button.
 - Execute workflows to roll back to stable versions of your application directly from the Dashboards you use to track the health of your systems.
-- Manage feature flags by automatically updating your feature flag config files in GitHub and automating the pull request and merge process. 
+- Manage feature flags by automatically updating your feature flag config files in GitHub and automating the pull request and merge process.
 
 Watch the video below to see a workflow configured to redeploy a Lambda function when it experiences a high error rate.
 
