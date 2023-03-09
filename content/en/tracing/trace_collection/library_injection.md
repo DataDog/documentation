@@ -353,7 +353,7 @@ The following table shows how the injection configuration values map to the corr
 
 Tracer library configuration options that aren't mentioned in the injection configuration are still available for use through properties or environment variables the usual way.
 
-### BASIC configuration settings
+### Basic configuration settings
 
 If `BASIC` is specified as the configuration source, it is equivalent to the following YAML settings:
 
@@ -560,7 +560,7 @@ The following table shows how the injection configuration values map to the corr
 
 Tracer library configuration options that aren't mentioned in the injection configuration are still available for use through properties or environment variables the usual way.
 
-### BASIC configuration settings
+### Basic configuration settings
 
 If `BASIC` is specified as the configuration source, it is equivalent to the following YAML settings:
 
@@ -780,7 +780,7 @@ The following table shows how the injection configuration values map to the corr
 
 Tracer library configuration options that aren't mentioned in the injection configuration are still available for use through properties or environment variables the usual way.
 
-### BASIC configuration settings
+### Basic configuration settings
 
 If `BASIC` is specified as the configuration source, it is equivalent to the following YAML settings:
 
