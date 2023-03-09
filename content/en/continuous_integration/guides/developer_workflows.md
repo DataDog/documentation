@@ -28,6 +28,7 @@ From Test Visibility, you can create and open pre-filled GitHub issues with rele
 ### In-app entry points
 
 You can create pre-filled GitHub issues from three areas within CI Test Visibility:
+
 1. Commit Overview (from Commits table) 
 2. Branch Overview 
 3. Test Detail View
