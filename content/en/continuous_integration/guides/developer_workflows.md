@@ -22,6 +22,8 @@ CI Test Visibility integrates with other developer-oriented Datadog products as 
 - Open tests in GitHub and your IDE
 - [Enabling Test Summaries in GitHub Pull Request Comments][1]
 
+These features are available for all Test Visibility customers, and they do not require usage of the Datadog GitHub App integration.
+
 ## Create and open GitHub issues
 From Test Visibility, you can create and open pre-filled GitHub issues with relevant context into your tests as well as deep links back to Datadog for more streamlined debugging workflows. Creating issues directly from Test Visibility can help you track and maintain accountability for test failures and flaky tests.
 
@@ -54,9 +56,6 @@ You also have the option to copy an issue description in Markdown for pasting te
 ### Sample GitHub issue
 Below is what a pre-filled GitHub issue might look like:
 {{< img src="ci/prefilled_github_issue.png" alt="Pre-filled GitHub issue" style="width:60%;">}}
-
-### Compatibility
-This is available for all Test Visibility customers. It does not require usage of the GitHub App integration.
 
 ## Open tests in GitHub and your IDE
 ### In-app entry points
