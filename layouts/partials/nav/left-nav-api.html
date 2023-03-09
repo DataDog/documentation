@@ -35,7 +35,8 @@
                 {{ range sort .Children ".Params.order" "asc"  }}
                     {{ $menuChild := . }}
                     <li class="row nav-item {{ if $currentPage.IsMenuCurrent $apiMenu . }}active{{ end }}">
-                        <a class="col nav-link d-inline-block" href="{{ if hasPrefix .URL "#" }}#{{ .Name | anchorize }}{{ else }}{{ (strings.TrimLeft "/" .URL) | absLangURL }}{{ end }}" data-bs-target="#{{.Identifier}}">
+                        {{$parent := print .Parent "-"}}
+                        <a class="col nav-link d-inline-block" href="{{ if hasPrefix .URL "#" }}#{{ replace .Identifier $parent "" 1 }}{{ else }}{{ (strings.TrimLeft "/" .URL) | absLangURL }}{{ end }}" data-bs-target="#{{.Identifier}}">
                           <span class="d-inline-block">{{ .Name }}</span>
                         </a>
                     </li>
