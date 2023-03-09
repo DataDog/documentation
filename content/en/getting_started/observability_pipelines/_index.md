@@ -16,7 +16,9 @@ further_reading:
 
 In Datadog, you can build, and manage all of your Observability Pipelines Worker deployments at scale. The Observability Pipelines Worker collects, processes, and routes logs and metrics from any source to any destination.
 
-This guide walks you through a simple deployment of Observability Pipelines to get you up and running with Datadog's recommended settings.
+This guide walks you through deploying the Worker in your common tools cluster and configuring the Datadog Agent to send logs and metrics to the Worker.
+
+{{< img src="/observability_pipelines/quickstart/dd-pipeline.png" alt="A diagram of a couple of workload clusters sending their data through the Observability Pipelines aggregator." >}}
 
 ## Assumptions
 * You are already using Datadog and want to use Observability Pipelines (OP).
@@ -49,10 +51,6 @@ There are no special requirements for Azure AKS.
 There are no special requirements for Google GKE.
 {{% /tab %}}
 {{< /tabs >}}
-
-## Preparing your Environment
-This guide walks you through setting up the following workflow, where the Observability Pipelines aggregator is deployed in the common tools cluster:
-{{< img src="/observability_pipelines/quickstart/dd-pipeline.png" alt="A diagram of a couple of workload clusters sending their data through the Observability Pipelines aggregator." >}}
 
 ## Installing the Observability Pipelines Worker
 ### Download the Helm chart
@@ -126,7 +124,7 @@ The sample configurations do not enable the "cross-zone load balancing" feature 
 service.beta.kubernetes.io/aws-load-balancer-attributes: load_balancing.cross_zone.enabled=true
 ```
 
-[See the AWS LB Controller page for more details.][2]
+See [AWS Load Balancer Controller][2] for more details.
 
 [1]: https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/
 [2]: https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/guide/service/annotations/#load-balancer-attributes
@@ -155,7 +153,7 @@ For Google GKE, Datadog recommends using the `premium-rwo` drive class, because 
 {{< /tabs >}}
 
 ## Connect the Agent and the Worker
-To send logs and metrics to the Observability Pipelines Worker, update your agent configuration with the following:
+To send Datadog Agent logs and metrics to the Observability Pipelines Worker, update your agent configuration with the following:
 
 ```yaml
 vector:
@@ -174,10 +172,10 @@ vector:
 $ kubectl get svc opw-observability-pipelines-worker
 ```
 
-At this point, your observability data should be flowing through the OP Worker, and is available for any data processing you want to do. The next section goes through what processing is included by default, as well as additional options that are available.
+At this point, your observability data should be flowing through the Worker and is available for data processing. The next section goes through what processing is included by default, as well as additional options that are available.
 
 ## Working with data
-The Helm chart provided above have example processing steps that demonstrate Observability Pipelines tools and ensure that data sent to Datadog is in the correct format. 
+The [Helm chart](#download-the-helm-chart) provided has example processing steps that demonstrate Observability Pipelines tools and ensures that data sent to Datadog is in the correct format. 
 
 ### Processing logs
 The provided logs pipeline does the following:
