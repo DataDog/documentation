@@ -2,15 +2,15 @@
 title: Workflows
 kind: documentation
 disable_toc: false
-is_beta: true
+is_beta: false
 further_reading:
 - link: "https://www.datadoghq.com/blog/automate-end-to-end-processes-with-datadog-workflows/"
   tag: "Blog"
   text: "Automate end-to-end processes and quickly respond to events with Datadog Workflows"
 ---
 
-{{< callout url="https://forms.gle/VEjerYVQ2QJhauZ57" >}}
-  Workflows are in public beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.
+{{< callout >}}
+  Workflows are now available under **Service Mgmt** in the left hand-side navigation bar. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.
 {{< /callout >}}
 
 {{< img src="workflows/hero.jpg" alt="Graphic showing three purposes of Workflows: Orchestrate, Automate, and Break down Silos"  >}}
