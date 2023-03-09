@@ -1,5 +1,5 @@
 ---
-title: Quickstart
+title: Getting Started with Observability Pipelines
 kind: Documentation
 aliases:
     - /observability_pipelines/quickstart/
