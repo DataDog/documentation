@@ -353,6 +353,21 @@ The following table shows how the injection configuration values map to the corr
 
 Tracer library configuration options that aren't mentioned in the injection configuration are still available for use through properties or environment variables the usual way.
 
+### Basic configuration settings
+
+If `BASIC` is specified as the configuration source, it is equivalent to the following YAML settings:
+
+```yaml
+---
+version: 1
+tracing_enabled: true
+log_injection_enabled: true
+health_metrics_enabled: true
+runtime_metrics_enabled: true
+tracing_sampling_rate: 1.0
+tracing_rate_limit: 1
+```
+
 ## Launch your services
 
 Launch your services, indicating the preload library configuration in the launch command:
@@ -545,6 +560,21 @@ The following table shows how the injection configuration values map to the corr
 
 Tracer library configuration options that aren't mentioned in the injection configuration are still available for use through properties or environment variables the usual way.
 
+### Basic configuration settings
+
+If `BASIC` is specified as the configuration source, it is equivalent to the following YAML settings:
+
+```yaml
+---
+version: 1
+tracing_enabled: true
+log_injection_enabled: true
+health_metrics_enabled: true
+runtime_metrics_enabled: true
+tracing_sampling_rate: 1.0
+tracing_rate_limit: 1
+```
+
 ## Specifying Unified Service Tags on containers
 
 If the environment variables `DD_ENV`, `DD_SERVICE`, or `DD_VERSION` are specified in a service container image, those values are used to tag telemetry from the container.
@@ -614,7 +644,7 @@ Any newly started processes are intercepted and the specified instrumentation li
    enabled=1
    gpgcheck=1
    repo_gpgcheck=1
-   gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.publichttps://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.publichttps://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+   gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
    ```
    **Note**: Due to a [bug in dnf][5], on RedHat/CentOS 8.1 set `repo_gpgcheck=0` instead of `1`.
 
@@ -750,6 +780,21 @@ The following table shows how the injection configuration values map to the corr
 
 Tracer library configuration options that aren't mentioned in the injection configuration are still available for use through properties or environment variables the usual way.
 
+### Basic configuration settings
+
+If `BASIC` is specified as the configuration source, it is equivalent to the following YAML settings:
+
+```yaml
+---
+version: 1
+tracing_enabled: true
+log_injection_enabled: true
+health_metrics_enabled: true
+runtime_metrics_enabled: true
+tracing_sampling_rate: 1.0
+tracing_rate_limit: 1
+```
+
 ## Configure the Agent
 
 In the Docker compose file that launches your containers, use the following settings for the Agent, securely setting your own Datadog API key for `${DD_API_KEY}`:
@@ -785,6 +830,7 @@ In the Docker compose file that launches your containers, use the following sett
     security_opt:
       - apparmor:unconfined
 ```
+
 ## Specifying Unified Service Tags on containers
 
 If the environment variables `DD_ENV`, `DD_SERVICE`, or `DD_VERSION` are specified in a service container image, those values are used to tag telemetry from the container.

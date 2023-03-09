@@ -2262,6 +2262,11 @@ main:
     identifier: usm_parent
     parent: apm_heading
     weight: 165000
+  - name: Guides
+    url: universal_service_monitoring/guide/
+    parent: usm_parent
+    identifier: universal_service_monitoring_guides
+    weight: 1
   - name: Log Management
     url: logs/
     pre: log
@@ -2629,10 +2634,10 @@ main:
     parent: csm
     identifier: cspm
     weight: 1
-  - name: Getting Started
-    url: security/cspm/getting_started
+  - name: Setup
+    url: security/cspm/setup
     parent: cspm
-    identifier: cspm_getting_started
+    identifier: cspm_setup
     weight: 101
   - name: Detection Rules
     url: security/cspm/detection_rules
@@ -2669,10 +2674,10 @@ main:
     parent: csm
     identifier: cloud_workload_security
     weight: 2
-  - name: Getting Started
-    url: security/cloud_workload_security/getting_started
+  - name: Setup
+    url: security/cloud_workload_security/setup
     parent: cloud_workload_security
-    identifier: cws_getting_started
+    identifier: cws_setup
     weight: 201
   - name: Managing Detection Rules
     url: security/cloud_workload_security/workload_security_rules
@@ -2785,7 +2790,7 @@ main:
     parent: appsec_threats
     identifier: appsec_default_rules
     weight: 502
-  - name: Tracking User Activity
+  - name: User Monitoring and Protection
     url: security/application_security/threats/add-user-info/
     parent: appsec_threats
     identifier: threats_user_info
@@ -3033,11 +3038,16 @@ main:
     parent: continuous_testing
     identifier: continuous_testing_explorer
     weight: 4
+  - name: Metrics
+    url: synthetics/metrics/
+    parent: continuous_testing
+    identifier: continuous_testing_metrics
+    weight: 5
   - name: Troubleshooting
     url: continuous_testing/troubleshooting/
     parent: continuous_testing
     identifier: continuous_testing_troubleshooting
-    weight: 5
+    weight: 6
   - name: RUM & Session Replay
     url: real_user_monitoring/
     pre: rum
@@ -3743,32 +3753,36 @@ main:
     url: account_management/api-app-keys/
     parent: account_management
     weight: 5
+  - name: Teams
+    url: account_management/teams/
+    parent: account_management
+    weight: 6
   - name: Audit Trail
     url: account_management/audit_trail/
     parent: account_management
     identifier: account_management_audit_trail
-    weight: 6
+    weight: 7
   - name: Events
     url: account_management/audit_trail/events/
     parent: account_management_audit_trail
     identifier: account_management_audit_trail_events
-    weight: 601
+    weight: 701
   - name: Plan and Usage
     url: account_management/plan_and_usage/
     parent: account_management
-    weight: 7
+    weight: 8
   - name: Billing
     url: account_management/billing/
     parent: account_management
-    weight: 8
+    weight: 9
   - name: Multi-org Accounts
     url: account_management/multi_organization/
     parent: account_management
-    weight: 8
+    weight: 10
   - name: Guides
     url: account_management/guide/
     parent: account_management
-    weight: 9
+    weight: 11
   - name: Data Security
     url: data_security/
     pre: security-lock
@@ -8299,6 +8313,71 @@ api:
     url: /api/latest/incidents/
     identifier: incidents
     generated: true
+  - name: Update an existing incident integration metadata
+    url: '#update-an-existing-incident-integration-metadata'
+    identifier: incidents-update-an-existing-incident-integration-metadata
+    parent: incidents
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateIncidentIntegration
+      unstable:
+        - v2
+      order: 12
+  - name: Get incident integration metadata details
+    url: '#get-incident-integration-metadata-details'
+    identifier: incidents-get-incident-integration-metadata-details
+    parent: incidents
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetIncidentIntegration
+      unstable:
+        - v2
+      order: 11
+  - name: Delete an incident integration metadata
+    url: '#delete-an-incident-integration-metadata'
+    identifier: incidents-delete-an-incident-integration-metadata
+    parent: incidents
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteIncidentIntegration
+      unstable:
+        - v2
+      order: 13
+  - name: Create an incident integration metadata
+    url: '#create-an-incident-integration-metadata'
+    identifier: incidents-create-an-incident-integration-metadata
+    parent: incidents
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateIncidentIntegration
+      unstable:
+        - v2
+      order: 10
+  - name: Get a list of an incident's integration metadata
+    url: '#get-a-list-of-an-incidents-integration-metadata'
+    identifier: incidents-get-a-list-of-an-incidents-integration-metadata
+    parent: incidents
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListIncidentIntegrations
+      unstable:
+        - v2
+      order: 9
   - name: 'Create, update, and delete incident attachments'
     url: '#create,-update,-and-delete-incident-attachments'
     identifier: 'incidents-create,-update,-and-delete-incident-attachments'

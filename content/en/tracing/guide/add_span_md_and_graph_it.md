@@ -286,6 +286,6 @@ Finally, you can also see all the traces relevant to your query by clicking the 
 [5]: /tracing/glossary/#services
 [6]: https://app.datadoghq.com/apm/traces
 [7]: /tracing/trace_explorer/#live-search-for-15-minutes
-[8]: https://app.datadoghq.com/apm/analytics
+[8]: https://app.datadoghq.com/apm/traces?viz=timeseries
 [9]: /tracing/trace_explorer/query_syntax/
 [10]: /tracing/guide/alert_anomalies_p99_database/

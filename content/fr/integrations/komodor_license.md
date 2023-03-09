@@ -32,18 +32,18 @@ pricing:
   short_description: Différents niveaux de tarification en fonction du volume de nœuds
   tag: node
   unit_label: Nœud surveillé
-  unit_price: 15.0
+  unit_price: 30.0
 public_title: Komodor
 short_description: Plateforme de dépannage Kubernetes
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Category::Marketplace
   - Offering::Software License

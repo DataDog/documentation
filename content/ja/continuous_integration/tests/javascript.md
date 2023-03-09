@@ -37,15 +37,19 @@ title: JavaScript と TypeScript のテスト
 インスツルメンテーションは実行時に動作するため、TypeScript、Webpack、Babel などのトランスパイラーにすぐに対応できます。
 
 ### テストスイートレベルの視覚化互換性
-[テストスイートレベルの視覚化][4]は `dd-trace>=3.10.0` からサポートされています。Jest、Mocha、Playwright がサポートされました。
+[テストスイートレベルの視覚化][4]は `dd-trace>=3.14.0` および `dd-trace>=2.27.0` から完全にサポートされています。Jest、Mocha、Playwright、Cypress、Cucumber がサポートされました。
 
 * Jest >= 24.8.0
 * `dd-trace>=3.10.0` 以降
 * [`testRunner`][3] としては、[`jest-circus`][1] のみサポートされます
 * Mocha >= 5.2.0
-* `dd-trace>=3.10.0` 以降
+* 2.x リリースラインの `dd-trace>=3.10.0` と `dd-trace>=2.12.0` 以降
 * Playwright >= 1.18.0
-* 2.x リリースラインの `dd-trace>=3.13.0` と `dd-trace>=2.26.0` 以降
+* From `dd-trace>=3.13.0` and `dd-trace>=2.26.0` for 2.x release line.
+* Cypress >= 6.7.0
+* 2.x リリースラインの `dd-trace>=3.14.0` と `dd-trace>=2.27.0` 以降
+* Cucumber >= 7.0.0
+* 2.x リリースラインの `dd-trace>=3.14.0` と `dd-trace>=2.27.0` 以降
 
 ## 報告方法の構成
 

@@ -27,8 +27,6 @@ This integration is only available for test services hosted on `github.com`.
 
 ## Install the GitHub integration
 
-<div class="alert alert-info">The integration is not available for GitHub Actions when triggered by the <code>pull_request*</code> event. </div>
-
 To install the [GitHub integration][1]:
 
 1. Navigate to the **Configuration** tab on the [GitHub integration tile][2] and click **+ Create GitHub App**.

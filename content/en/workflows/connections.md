@@ -14,7 +14,7 @@ is_beta: true
 
 ## Overview
 
-Because workflow actions connect with external software systems, you may need to authenticate your Datadog account to the corresponding integration. A workflow can run successfully only if every workflow action that requires authentication can verify the identity of your Datadog account.
+Because workflow actions connect with external software systems, you may need to authenticate your Datadog account to the corresponding integration. A workflow can run successfully only if every workflow action that requires authentication can verify the identity of your Datadog account. When granting permissions to Datadog, ensure that you're following security best practice and only granting the permissions necessary for a workflow to run.
 
 Workflow actions can be authenticated in two ways:
 - Credentials and permissions configured in the integration tile
@@ -41,6 +41,12 @@ Connections support the following example use cases:
 - You wish to authenticate a custom action. For instance, you need to use the HTTP action with your own service.
 - The permissions needed are not supported by the integration, such as write permissions on AWS.
 - You want granular access control, for example restricting user access to certain workflows.
+
+### Connection security considerations
+
+Before you create a connection, think about the permissions needed to fulfill the required task and grant the connection only the necessary permissions to fulfill that task. In addition, the connection should be restricted to only the people who need to use it.
+
+Where possible, use granular connections for different workflows. For example, if you have a workflow that writes to an AWS S3 bucket, and a workflow that terminates AWS EC2 instances, do not use the same connection for both workflows. Instead, create two respective connections, each corresponding to an IAM role with limited scope.
 
 ## Work with connections
 

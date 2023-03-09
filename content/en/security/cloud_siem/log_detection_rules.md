@@ -48,10 +48,6 @@ Detect when an attribute changes to a new value. For example, if you create a tr
 
 ### Anomaly
 
-<div class="alert alert-warning">
-Anomaly detection is currently in <a href="https://app.datadoghq.com/security/configuration/rules/new?product=siem">public beta</a>.
-</div>
-
 When configuring a specific threshold isn't an option, you can define an anomaly detection rule instead. With anomaly detection, a dynamic threshold is automatically derived from the past observations of the events.
 
 ### Impossible Travel

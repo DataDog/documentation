@@ -367,7 +367,7 @@ public class LoginController {
         // track user signup events
         GlobalTracer
             .getEventTracker()
-            .trackCustomEvent("signup", metadata);
+            .trackCustomEvent("users.signup", metadata);
     }
 }
 
@@ -562,7 +562,7 @@ The following examples show how to track login events or custom events (using si
 {{% tab "Custom business logic" %}}
 ```php
 <?php
-\datadog\appsec\track_custom_event(‘signup’, [‘id’ => $id, 'email' => $email]);
+\datadog\appsec\track_custom_event(‘users.signup’, [‘id’ => $id, 'email' => $email]);
 ?>
 ```
 {{% /tab %}}
