@@ -12,11 +12,11 @@ further_reading:
 
 ## Overview
 
-The OpenTelemetry protocol (OTLP) can send [several metric types][1] some of which can have *delta* of *cumulative* [aggregation temporality][2]. You can select which aggregation temporality to export your metrics with on your OpenTelemetry SDK. Datadog products work best with delta aggregation temporality for monotonic sums, histograms and exponential histograms, which can be configured at the SDK level or by using the [OpenTelemetry Collector `cumulativetodelta` processor][3].
+The OpenTelemetry protocol (OTLP) can send [several metric types][1] some of which can have *delta* of *cumulative* [aggregation temporality][2]. Datadog products work best with delta aggregation temporality for monotonic sums, histograms, and exponential histograms. You can select which aggregation temporality to export your metrics with on your OpenTelemetry SDK or use the [OpenTelemetry Collector `cumulativetodelta` processor][3].
 
 ## Implications of using cumulative aggregation temporality
 
-If you send OTLP monotonic sums, histograms or exponential histograms with cumulative aggregation temporality, Datadog products take the difference between consecutive points on a timeseries. This means that:
+If you send OTLP monotonic sums, histograms, or exponential histograms with cumulative aggregation temporality, Datadog products take the difference between consecutive points on a timeseries. This means that:
 
 - Your deployment is stateful, so you need to send all points on a timeseries to the same Datadog Agent or Datadog exporter. This affects how you scale your OpenTelemetry Collector deployments.
 - Datadog products may not send the first point they receive from a given timeseries if they cannot ensure this point is the 'true' start of the timeseries. This may lead to missing points upon restarts.
@@ -181,7 +181,7 @@ OTLP gRPC exporters can be configured in a similar fashion.
 
 ## Converting to delta temporality on the Collector
 
-When your metrics do not come from an OpenTelemetry language library, it may be infeasible to configure them to use delta aggregation temporality. This may be the case e.g. when producing metric with other open source libraries such as Prometheus. In this situation, you may want to use the [cumulative to delta processor][3] to map your metrics to delta aggregation temporality. If your deployment has multiple Collectors, you need to use the processor on a first layer of stateful Collectors, ensuring that all points of a metric are sent to the same Collector instance.
+When your metrics do not come from an OpenTelemetry language library, it may be infeasible to configure them to use delta aggregation temporality. This may be the case e.g. when producing metric with other open source libraries such as Prometheus. In this situation, you may want to use the [cumulative to delta processor][3] to map your metrics to delta aggregation temporality. Your deployment will still be stateful: if your deployment has multiple Collectors, you need to use the processor on a first layer of stateful Collectors, ensuring that all points of a metric are sent to the same Collector instance.
 
 To enable the cumulative to delta processor so that it applies to all your metrics, define it with an empty configuration on the `processors` section:
 
