@@ -18,7 +18,7 @@ The [Observability Pipelines Worker][1] can collect, process, and route logs and
 
 This guide walks you through deploying the Worker in your common tools cluster and configuring the Datadog Agent to send logs and metrics to the Worker.
 
-{{< img src="/observability_pipelines/quickstart/dd-pipeline.png" alt="A diagram of a couple of workload clusters sending their data through the Observability Pipelines aggregator." >}}
+{{< img src="getting_started/observability_pipelines/dd-pipeline.png" alt="A diagram of a couple of workload clusters sending their data through the Observability Pipelines aggregator." >}}
 
 ## Assumptions
 * You are already using Datadog and want to use Observability Pipelines.
