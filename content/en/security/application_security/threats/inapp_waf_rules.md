@@ -110,5 +110,5 @@ Next, [configure detection rules to create security signals][1] based on those s
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/application_security/custom_rules/
-[2]: https://app.datadoghq.com/security/configuration/asm/in-app-waf?group_by=NONE
+[2]: https://app.datadoghq.com/security/appsec/in-app-waf
 [3]: /security/application_security/getting_started/
