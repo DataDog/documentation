@@ -90,7 +90,7 @@ export default {
       us3: '443',
       us5: '443',
       eu: '443',
-      ap1: 'PLACEHOLDER',
+      ap1: '443',
       gov: '443'
     },
     http_endpoint: {
@@ -146,7 +146,7 @@ export default {
       us3: 'The US3 functions endpoint is not supported.',
       us5: 'The US5 functions endpoint is not supported.',
       eu: 'The EU functions endpoint is not supported.',
-      ap1: 'PLACEHOLDER',
+      ap1: 'The AP1 functions endpoint is not supported.',
       gov: 'The GOV functions endpoint is not supported.'
     },
     functions_port: {
@@ -154,7 +154,7 @@ export default {
       us3: 'The US3 functions endpoint port is not supported.',
       us5: 'The US5 functions endpoint port is not supported.',
       eu: 'The EU functions endpoint port is not supported.',
-      ap1: 'PLACEHOLDER',
+      ap1: 'The AP1 functions endpoint is not supported.',
       gov: 'The GOV functions endpoint port is not supported.'
     },
     browser_sdk_endpoint_domain: {
