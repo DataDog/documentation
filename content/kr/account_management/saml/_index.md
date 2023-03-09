@@ -8,9 +8,9 @@ further_reading:
 kind: 설명서
 title: SAML을 이용한 싱글 사인온
 ---
-{{< site-region region="gov" >}}
+{{% site-region region="gov" %}}
 <div class="alert alert-warning">정부 사이트용 Datadog은 오직 SAML 로그인만 지원합니다.</div>
-{{< /site-region >}}
+{{% /site-region %}}
 
 ## 개요
 

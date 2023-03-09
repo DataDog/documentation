@@ -79,7 +79,7 @@ Datadog は、以下の製品の Estimated Usage Attribution 値を提供して�
 月次データはツールのパブリック API を使いプルすることもできます。詳細は、[API エンドポイントドキュメント][1]を参照してください。
 
 
-{{< site-region region="us,eu" >}}
+{{% site-region region="us,eu" %}}
 ### 日次使用属性
 
 <div class="alert alert-warning">Datadog は、2023 年 2 月 1 日に日次使用量属性レポートを非推奨とすることを計画しています。代替案として、<a href="/api/latest/usage-metering/#get-hourly-usage-attribution">1 時間ごとの使用量属性 API エンドポイント</a>を使用してください。
@@ -94,7 +94,7 @@ Datadog は、以下の製品の Estimated Usage Attribution 値を提供して�
 日次データはツールのパブリック API を使いプルすることもできます。詳細は、[API エンドポイントドキュメント][2]を参照してください。
 
 [2]: https://docs.datadoghq.com/ja/api/v1/usage-metering/#get-hourly-usage-attribution
-{{< /site-region >}}
+{{% /site-region %}}
 
 ### データの解釈
 

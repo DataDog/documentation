@@ -8,9 +8,9 @@ further_reading:
   tag: "Documentation"
   text: "Configuring Teams & Organizations with Multiple Accounts"
 ---
-{{< site-region region="gov" >}}
+{{% site-region region="gov" %}}
 <div class="alert alert-warning">The Datadog for Government site only supports SAML login.</div>
-{{< /site-region >}}
+{{% /site-region %}}
 
 ## Overview
 

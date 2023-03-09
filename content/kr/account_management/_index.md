@@ -6,9 +6,9 @@ description: Datadog 계정과 조직을 관리하세요
 kind: 설명서
 title: 계정 관리
 ---
-{{< site-region region="gov" >}}
+{{% site-region region="gov" %}}
 <div class="alert alert-warning">정부 사이트용 Datadog는 SAML 로그인만을 지원합니다.</div>
-{{< /site-region >}}
+{{% /site-region %}}
 
 ## Personal settings
 

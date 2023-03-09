@@ -8,9 +8,9 @@ further_reading:
 kind: documentation
 title: Authentification unique avec SAML
 ---
-{{< site-region region="gov" >}}
+{{% site-region region="gov" %}}
 <div class="alert alert-warning">Le site gouvernemental Datadog prend uniquement en charge la connexion via le protocole SAML.</div>
-{{< /site-region >}}
+{{% /site-region %}}
 
 ## Présentation
 

@@ -6,9 +6,9 @@ aliases:
   - /fr/guides/billing
   - /fr/account_management/settings
 ---
-{{< site-region region="gov" >}}
+{{% site-region region="gov" %}}
 <div class="alert alert-warning">Le site gouvernemental Datadog prend uniquement en charge la connexion via le protocole SAML.</div>
-{{< /site-region >}}
+{{% /site-region %}}
 
 ## Paramètres personnels
 

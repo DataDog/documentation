@@ -8,9 +8,9 @@ further_reading:
 kind: documentation
 title: SAML を使用したシングルサインオン
 ---
-{{< site-region region="gov" >}}
+{{% site-region region="gov" %}}
 <div class="alert alert-warning">Datadog for Government site では、SAML ログインのみをサポートします。</div>
-{{< /site-region >}}
+{{% /site-region %}}
 
 ## 概要
 

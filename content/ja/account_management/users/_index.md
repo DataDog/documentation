@@ -18,9 +18,9 @@ further_reading:
     tag: ドキュメント
     text: USER API を使用してユーザーを管理する
 ---
-{{< site-region region="gov" >}}
+{{% site-region region="gov" %}}
 <div class="alert alert-warning">Datadog for Government site では、SAML ログインのみをサポートします。</div>
-{{< /site-region >}}
+{{% /site-region %}}
 
 Datadog の **Organization Settings** の **User** タブでは、ユーザーとそのユーザーに関連付けられたロールを管理できます。リストビューとグリッドビューを切り替えるには、右側の **List View** または **Grid View** をクリックします。
 
