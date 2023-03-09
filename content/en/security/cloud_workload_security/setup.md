@@ -54,9 +54,13 @@ To use Remote Configuration with CWS, add the Remote Configuration scope to a ne
 **Notes**:
 
 - Without Remote Configuration, updated Agent rules must be manually deployed to the Datadog Agent.
-- At this time, Remote Configuration is only available for default rules. New and updated custom rules must be manually deployed to the Datadog Agent.
+- At this time, Remote Configuration is only available for default rules. Custom rules must be manually deployed to the Datadog Agent.
 
 ### Configure the CWS Agent
+
+#### Follow the in-app documentation (recommended)
+
+Follow the [in-app instructions][6] in the Datadog app for the best experience, including step-by-step instructions scoped to your deployment configuration.
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
@@ -131,44 +135,35 @@ docker run -d --name dd-agent \
 
 {{% /tab %}}
 
-{{% tab "Debian" %}}
+{{% tab "Daemonset" %}}
 
-For a package-based deployment, the Datadog package has to be deployed: run `dkpg -i datadog-agent_7….deb`
+Add the following settings to the `env` section of both the `security-agent` and `system-probe` in the `daemonset.yaml` file:
 
-By default Runtime Security is disabled. To enable it, both the `security-agent.yaml` and the `system-probe.yaml` files need to be adapted. Run the following commands to enable these configurations:
+```
+  # Source: datadog/templates/daemonset.yaml
+  apiVersion:app/1
+  kind: DaemonSet
+  [...]
+  spec:
+  [...]
+  spec:
+      [...]
+        containers:
+        [...]
+          - name: agent
+            [...]
+            env:
+              - name: DD_REMOTE_CONFIGURATION_ENABLED
+                value: "true" 
+              - name: system-probe
+                [...] 
+                env:
+                  - name: DD_RUNTIME_SECURITY_CONFIG_ENABLED 
+                    value: "true"
+                  - name: DD_RUNTIME_SECURITY_CONFIG_REMOTE_CONFIGURATION_ENABLED
+                    value: "true" [...]
+```
 
-{{< code-block lang="bash" filename="debian-runtime-security.sh" >}}
-
-echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/security-agent.yaml
-echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/system-probe.yaml
-echo "remote_configuration.enabled: true" >> /etc/datadog-agent/system-probe.yaml
-
-systemctl restart datadog-agent
-
-{{< /code-block >}}
-
-Once you apply the changes, restart both the Security Agent and the system-probe.
-
-[1]: https://app.datadoghq.com/account/settings#agent/kubernetes
-{{% /tab %}}
-
-{{% tab "Fedora/CentOS" %}}
-
-For a package-based deployment, the Datadog package has to be deployed: run `yum/dnf install datadog-agent_7….rpm`
-
-By default Runtime Security is disabled. To enable it, both the `security-agent.yaml` and the `system-probe.yaml` files need to be adapted. Run the following commands to enable these configurations:
-
-{{< code-block lang="bash" filename="fedora-centos-runtime-security.sh" >}}
-
-echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/security-agent.yaml
-echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/system-probe.yaml
-echo "remote_configuration.enabled: true" >> /etc/datadog-agent/system-probe.yaml
-
-systemctl restart datadog-agent
-
-{{< /code-block >}}
-
-[1]: https://app.datadoghq.com/account/settings#agent/kubernetes
 {{% /tab %}}
 
 {{% tab "Host (Others)" %}}
@@ -329,3 +324,4 @@ The following deployment can be used to start the Runtime Security Agent and `sy
 [3]: /security/cloud_security_management/troubleshooting
 [4]: /agent/guide/how_remote_config_works
 [5]: /agent/guide/how_remote_config_works/?tab=environmentvariable#enabling-remote-configuration
+[6]: https://app.datadoghq.com/security/setup
