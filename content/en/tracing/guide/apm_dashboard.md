@@ -130,5 +130,5 @@ This guides walks you through adding trace metrics to a dashboard, correlating t
 [1]: https://app.datadoghq.com/apm/services
 [2]: /dashboards/widgets/timeseries/
 [3]: /tracing/metrics/metrics_namespace/
-[4]: https://app.datadoghq.com/apm/traces
+[4]: https://app.datadoghq.com/apm/traces?viz=timeseries
 [5]: /events/

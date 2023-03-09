@@ -369,5 +369,5 @@ You've now successfully added custom spans to your codebase, making them availab
 
 [1]: https://app.datadoghq.com/apm/services
 [2]: https://bojanv91.github.io/posts/2018/06/select-n-1-problem
-[3]: https://app.datadoghq.com/apm/traces
+[3]: https://app.datadoghq.com/apm/traces?viz=timeseries
 [4]: /tracing/guide/add_span_md_and_graph_it/
