@@ -83,7 +83,7 @@ Datadog implements the following safeguards, designed to protect the confidentia
 * Datadog never sends configurations unless requested by Agents, and only sends configurations relevant to the requesting Agent.
 * Because the configuration requests are initiated from your Agents to Datadog over HTTPS (port 443), there is no need to open additional ports in your network firewall.
 * The communication between your Agents and Datadog is encrypted using HTTPS, and is authenticated and authorized using your Datadog API key. 
-* Only users with the right RBAC permissions are authorized to enable Remote Configuration scope on the API key and use the supported product features. 
+* Only users with the right RBAC permissions are authorized to enable Remote Configuration capability on the API key and use the supported product features. 
 * Your configuration changes submitted through the Datadog UI are signed and validated on the Agent and tracing libraries, verifying integrity of the configuration.
 
 ## Enabling Remote Configuration
@@ -106,19 +106,19 @@ To enable Remote Configuration:
 
 1.  Ensure your RBAC permissions include [`org_management`][9] so you can enable Remote Configuration for your organization.
 
-2. Ensure your RBAC permissions include [`api_keys_write`][3] so you can create a new API key with the Remote Configuration scope, or add the scope on an existing API key. Contact your organization's Datadog administrator to update your permissions if you don't have it. You'll use the key with this scope to authenticate and authorize your Agent to use Remote Configuration. 
+2. Ensure your RBAC permissions include [`api_keys_write`][3] so you can create a new API key with the Remote Configuration capability, or add the capability on an existing API key. Contact your organization's Datadog administrator to update your permissions if you don't have it. You'll use the key with this capability to authenticate and authorize your Agent to use Remote Configuration. 
 
 3. On the [Organization Settings][4] page, either select an existing API key, or create a new API key.
 
-4. Enable Remote Config scope on the key:
+4. Enable Remote Config capability on the key:
 
-   {{<img src="agent/guide/RC_Key_updated.png" alt="API Key properties with Remote Config scope Enable button." width="90%" style="center">}}
+   {{<img src="agent/guide/RC_Key_updated.png" alt="API Key properties with Remote Config capability Enable button." width="90%" style="center">}}
 
 5. Update your Agent configuration:
 
 {{< tabs >}}
 {{% tab "Configuration YAML file" %}}
-Add the following to your configuration YAML file, specifying the API key that has Remote Config scope enabled:
+Add the following to your configuration YAML file, specifying the API key that has Remote Config capability enabled:
 ```yaml
 api_key: xxx
 remote_configuration:
@@ -129,7 +129,7 @@ remote_configuration:
 
 {{% /tab %}}
 {{% tab "Environment variable" %}}
-Add the following to your Datadog Agent manifest, specifying the API key that has Remote Config scope enabled: 
+Add the following to your Datadog Agent manifest, specifying the API key that has Remote Config capability enabled: 
 ```yaml
 DD_API_KEY=xxx
 DD_REMOTE_CONFIGURATION_ENABLED=true
