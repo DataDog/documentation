@@ -1005,7 +1005,6 @@ const processSpecs = (specs) => {
 
 const init = () => {
   const specs = ['./data/api/v1/full_spec.yaml', './data/api/v2/full_spec.yaml'];
-  console.info('Building Api Pages now******************')
   processSpecs(specs);
 };
 
