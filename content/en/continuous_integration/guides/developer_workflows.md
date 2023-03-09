@@ -17,7 +17,7 @@ further_reading:
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-CI Test Visibility integrates with other developer-oriented Datadog products as well as external partners such as GitHub to streamline developer workflows. Relevant features include:
+CI Test Visibility integrates with other developer-oriented Datadog products as well as external partners such as GitHub to streamline developer workflows. Relevant features include being able to:
 - Create and open GitHub issues 
 - Open tests in GitHub and your IDE
 - [Enabling Test Summaries in GitHub Pull Request Comments][1]
