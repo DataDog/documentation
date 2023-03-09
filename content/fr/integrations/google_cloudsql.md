@@ -47,13 +47,13 @@ Pour recueillir des étiquettes CloudSQL personnalisées sous forme de tags, act
 
 #### Collecte de logs
 
-{{< site-region region="us3" >}}
+{{% site-region region="us3" %}}
 
 La collecte de logs n'est plus prise en charge pour ce site.
 
-{{< /site-region >}}
+{{% /site-region %}}
 
-{{< site-region region="us,eu,gov" >}}
+{{% site-region region="us,eu,gov" %}}
 
 Les logs Google Cloud SQL sont recueillis avec Google Cloud Logging et envoyés à un Cloud Pub/Sub via un forwarder Push HTTP. Si vous ne l'avez pas déjà fait, configurez un [Cloud Pub/Sub à l'aide d'un forwarder Push HTTP][2].
 
@@ -67,7 +67,7 @@ Une fois cette opération effectuée, exportez vos logs Google Cloud SQL depui
 [2]: https://docs.datadoghq.com/fr/integrations/google_cloud_platform/#log-collection
 [3]: https://console.cloud.google.com/logs/viewer
 
-{{< /site-region >}}
+{{% /site-region %}}
 
 ## Données collectées
 

@@ -25,9 +25,9 @@ short_description: Recueillez des logs Apigee afin de surveiller les erreurs, le
 title: Apigee
 ---
 
-{{< site-region region="us3" >}}
+{{% site-region region="us3" %}}
 <div class="alert alert-warning">L'intégration Apigee n'est pas disponible pour le site Datadog que vous avez sélectionné ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
+{{% /site-region %}}
 
 ## Présentation
 

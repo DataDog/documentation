@@ -87,13 +87,13 @@ ServiceID は英数字のコードです。例: <code>5VqE6MOOy1QFJbgmCK41pY</co
 
 #### ログの収集
 
-{{< site-region region="us3" >}}
+{{% site-region region="us3" %}}
 
 ログ収集は、このサイトではサポートされていません。
 
-{{< /site-region >}}
+{{% /site-region %}}
 
-{{< site-region region="us,eu,gov" >}}
+{{% site-region region="us,eu,gov" %}}
 
 Fastly ログを Datadog に転送するように Datadog エンドポイントを構成します。`Datadog` または `Datadog (via Syslog)` エンドポイントを選択できます。Syslog 経由でログをより確実に配信するには、`Datadog` エンドポイントをお勧めします。
 
@@ -136,7 +136,7 @@ Fastly ログを Datadog に転送するように Datadog エンドポイント�
 [4]: https://docs.fastly.com/guides/streaming-logs/useful-variables-to-log
 [5]: https://app.datadoghq.com/logs
 
-{{< /site-region >}}
+{{% /site-region %}}
 
 ## 収集データ
 

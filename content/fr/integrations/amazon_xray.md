@@ -22,10 +22,10 @@ public_title: "Intégration Datadog/AWS\_X-Ray"
 short_description: Tracer les requêtes qui passent d'un service AWS à un autre
 version: '1.0'
 ---
-{{< site-region region="gov" >}}
+{{% site-region region="gov" %}}
 <div class="alert alert-warning">L'intégration Datadog/AWS Lambda X-Ray est uniquement prise en charge sur les comptes AWS commerciaux. Sans compte commercial, l'intégration Datadog/AWS Lambda X-Ray ne peut pas être utilisée sur le site gouvernemental de Datadog.</div>
 
-{{< /site-region >}}
+{{% /site-region %}}
 ## Présentation
 
 AWS X-Ray permet aux développeurs de tracer des applications distribuées qui ont été créées à l'aide de produits AWS. Cette intégration fournit des traces pour les fonctions Lambda dans la page de détails des fonctions [sans serveur][1]. Pour en savoir plus, consultez la documentation relative à la [surveillance sans serveur][2].

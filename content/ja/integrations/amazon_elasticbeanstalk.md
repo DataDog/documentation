@@ -154,9 +154,9 @@ func main() {
 
 - 多くのリソースを使用する場合は、メモリの上限を上げる必要があります。
 - すべてのホストが同じ Agent バージョンを実行するようにするには、`agent:7` を [Docker イメージ][3]の特定のマイナーバージョンに変更することをお勧めします。
-{{< site-region region="us3,eu,gov" >}}
+{{% site-region region="us3,eu,gov" %}}
 - `DD_SITE` を {{< region-param key="dd_site" code="true" >}} に設定して、Agent が正しい Datadog の場所にデータを送信するようにします。
-{{< /site-region >}}
+{{% /site-region %}}
 
 ```json
 {

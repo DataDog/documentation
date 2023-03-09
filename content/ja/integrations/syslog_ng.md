@@ -28,9 +28,9 @@ Syslog-ng を構成して、ホスト、コンテナ、サービスからログ�
 
 ### ログの収集
 
-{{< site-region region="us3" >}}
+{{% site-region region="us3" %}}
 **ログ収集は、Datadog {{< region-param key="dd_site_name" >}} サイトでサポートされていません**。
-{{< /site-region >}}
+{{% /site-region %}}
 
 1. `/etc/syslog-ng/syslog-ng.conf` 内のシステムログとログファイルを収集し、ソースが正しく定義されていることを確認してください。
 

@@ -45,13 +45,13 @@ Google Cloud SQL からメトリクスを取得して、以下のことができ
 
 #### ログの収集
 
-{{< site-region region="us3" >}}
+{{% site-region region="us3" %}}
 
 ログ収集は、このサイトではサポートされていません。
 
-{{< /site-region >}}
+{{% /site-region %}}
 
-{{< site-region region="us,eu,gov" >}}
+{{% site-region region="us,eu,gov" %}}
 
 Google Cloud SQL のログは Google Cloud Logging により収集され、HTTP プッシュフォワーダーを使用して Cloud Pub/Sub へ送信されます。[HTTP プッシュフォワーダーを使用した Cloud Pub/Sub][2] をまだセットアップしていない場合は、これをセットアップしてください。
 
@@ -65,7 +65,7 @@ Google Cloud SQL のログは Google Cloud Logging により収集され、HTTP 
 [2]: https://docs.datadoghq.com/ja/integrations/google_cloud_platform/#log-collection
 [3]: https://console.cloud.google.com/logs/viewer
 
-{{< /site-region >}}
+{{% /site-region %}}
 
 ## 収集データ
 

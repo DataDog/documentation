@@ -23,9 +23,9 @@ public_title: "Intégration Datadog/Alibaba\_Cloud"
 short_description: "Intégrez vos services Alibaba\_Cloud à Datadog."
 version: '1.0'
 ---
-{{< site-region region="gov" >}}
+{{% site-region region="gov" %}}
 <div class="alert alert-warning">L'intégration Alibaba Cloud ne prend pas en charge le site gouvernemental de Datadog.</div>
-{{< /site-region >}}
+{{% /site-region %}}
 
 ## Présentation
 

@@ -28,9 +28,9 @@ Configurez Syslog-ng pour rassembler les logs de votre host, de vos conteneurs e
 
 ### Collecte de logs
 
-{{< site-region region="us3" >}}
+{{% site-region region="us3" %}}
 **La collecte de logs n'est pas prise en charge pour le site {{< region-param key="dd_site_name" >}} Datadog**.
-{{< /site-region >}}
+{{% /site-region %}}
 
 1. Pour recueillir des logs système et des fichiers de log dans `/etc/syslog-ng/syslog-ng.conf`, assurez-vous que la source est correctement définie :
 

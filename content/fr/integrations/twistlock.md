@@ -115,9 +115,9 @@ spec:
 ##### Collecte de logs
 
 
-{{< site-region region="us3" >}}
+{{% site-region region="us3" %}}
 **La collecte de logs n'est pas prise en charge pour le site {{< region-param key="dd_site_name" >}} Datadog**.
-{{< /site-region >}}
+{{% /site-region %}}
 
 
 _Disponible à partir des versions > 6.0 de l'Agent_

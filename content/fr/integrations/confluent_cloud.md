@@ -21,9 +21,9 @@ version: '1.0'
 ---
 ## Présentation
 
-{{< site-region region="gov" >}}
+{{% site-region region="gov" %}}
 **L'intégration Confluent Cloud n'est pas prise en charge pour le site {{< region-param key="dd_site_name" >}} Datadog**.
-{{< /site-region >}}
+{{% /site-region %}}
 
 
 Associez Datadog à Confluent Cloud pour visualiser les métriques sur les clusters Kafka par rubrique ainsi que les métriques sur les connecteurs Kafka. Vous pouvez créer des monitors et des dashboards à partir de ces métriques.

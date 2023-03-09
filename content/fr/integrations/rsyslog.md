@@ -115,8 +115,8 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
       ```shell
       sudo systemctl restart rsyslog
       ```
-{{< /site-region >}}
-{{< site-region region="eu" >}}
+{{% /site-region %}}
+{{% site-region region="eu" %}}
 
 8. (Facultatif) Ajoutez le chiffrement TLS aux logs envoyés de Rsyslog vers votre compte Datadog :
    1. Installez les packages `rsyslog-gnutls` et `ca-certificates` :
@@ -137,7 +137,7 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
       ```shell
       sudo systemctl restart rsyslog
       ```
-{{< /site-region >}}
+{{% /site-region %}}
 
 [1]: /fr/agent/logs/
 {{< /tabs >}}
@@ -222,9 +222,9 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
       ```shell
       sudo systemctl restart rsyslog
       ```
-{{< /site-region >}}
+{{% /site-region %}}
 
-{{< site-region region="eu" >}}
+{{% site-region region="eu" %}}
 
 8. (Facultatif) Ajoutez le chiffrement TLS aux logs envoyés de Rsyslog vers votre compte Datadog.
    1. Installez les packages `rsyslog-gnutls` et `ca-certificates` :
@@ -245,7 +245,7 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
       ```shell
       sudo systemctl restart rsyslog
       ```
-{{< /site-region >}}
+{{% /site-region %}}
 
 [1]: /fr/agent/logs/
 {{< /tabs >}}
@@ -331,9 +331,9 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
       ```shell
       sudo systemctl restart rsyslog
       ```
-{{< /site-region >}}
+{{% /site-region %}}
 
-{{< site-region region="eu" >}}
+{{% site-region region="eu" %}}
 
 8. (Facultatif) Ajoutez le chiffrement TLS aux logs envoyés de Rsyslog vers votre compte Datadog :
    1. Installez les packages `rsyslog-gnutls` et `ca-certificates` :
@@ -354,7 +354,7 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
       ```shell
       sudo systemctl restart rsyslog
       ```
-{{< /site-region >}}
+{{% /site-region %}}
 
 [1]: /fr/agent/logs/
 {{< /tabs >}}
@@ -459,9 +459,9 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
       ```shell
       sudo systemctl restart rsyslog
       ```
-{{< /site-region >}}
+{{% /site-region %}}
 
-{{< site-region region="eu" >}}
+{{% site-region region="eu" %}}
 
 8. (Facultatif) Ajoutez le chiffrement TLS aux logs envoyés de Rsyslog vers votre compte Datadog :
 
@@ -488,7 +488,7 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
       ```shell
       sudo systemctl restart rsyslog
       ```
-{{< /site-region >}}
+{{% /site-region %}}
 
 [1]: /fr/agent/logs/
 {{< /tabs >}}
@@ -588,9 +588,9 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
       ```shell
       sudo systemctl restart rsyslog
       ```
-{{< /site-region >}}
+{{% /site-region %}}
 
-{{< site-region region="eu" >}}
+{{% site-region region="eu" %}}
 8. (Facultatif) Ajoutez le chiffrement TLS aux logs envoyés de Rsyslog vers votre compte Datadog :
 
     1. Installez les packages `rsyslog-gnutls` et `ca-certificates` :
@@ -616,7 +616,7 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
       ```shell
       sudo systemctl restart rsyslog
       ```
-{{< /site-region >}}
+{{% /site-region %}}
 
 [1]: /fr/agent/logs/
 {{< /tabs >}}
@@ -716,9 +716,9 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
       ```shell
       sudo systemctl restart rsyslog
       ```
-{{< /site-region >}}
+{{% /site-region %}}
 
-{{< site-region region="eu" >}}
+{{% site-region region="eu" %}}
 
 8. (Facultatif) Ajoutez le chiffrement TLS aux logs envoyés de Rsyslog vers votre compte Datadog :
 
@@ -745,7 +745,7 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
       ```shell
       sudo systemctl restart rsyslog
       ```
-{{< /site-region >}}
+{{% /site-region %}}
 
 [1]: /fr/agent/logs/
 {{< /tabs >}}

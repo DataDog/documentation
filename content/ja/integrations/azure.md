@@ -60,9 +60,9 @@ Datadog の Azure インテグレーションにより、Azure 環境からの�
 **US3:** Datadog US3 サイトをご利用の場合は、Azure にネイティブに組み込まれたワークフローを使用して、メトリクスと Azure Platform Logs の収集を効率化します。Datadog では、可能な限りこの方法を使用することを推奨しています。これは、Azure のサブスクリプションを Datadog の組織にリンクするために、Azure で Datadog リソースを作成することを必要とします。  
 **注:** Azure Blob Storage にログをアーカイブする場合も、App Registration が必要です。Azure Blob Storage にログをアーカイブする場合は、ドキュメントページの右側にある "site" を "US" に設定します。アーカイブ目的で作成された App Registrations は、"Storage Blob Data Contributor" ロールのみが必要です。ストレージバケットが Datadog Resource を通じて監視されているサブスクリプションにある場合、App Registration が冗長であることに関する警告が表示されます。この警告は、無視することができます。
 
-{{< site-region region="us,eu,us5,gov" >}}
+{{% site-region region="us,eu,us5,gov" %}}
 <div class="alert alert-info"><strong>このページのサイドパネルのサイト US3 を選択または<a href="?site=us3">このリンク</a>をクリックしてドキュメントの US3 バージョンを表示します。</strong></div>
-{{< /site-region >}}
+{{% /site-region %}}
 
 Microsoft Azure に接続すると、以下のことができます。
 - Datadog Agent をインストールして、またはインストールせずに、Azure VM からメトリクスを取得。
@@ -123,7 +123,7 @@ Datadog の Azure インテグレーションは、<a href="https://docs.microso
 
 ## セットアップ
 
-{{< site-region region="us,eu,gov,us5" >}}
+{{% site-region region="us,eu,gov,us5" %}}
 
 ### APM に Datadog Agent を構成する
 
@@ -599,9 +599,9 @@ Azure 関数に精通していない場合は、[Azure Portal で初めての関
 [50]: https://app.datadoghq.com/screen/integration/azure_vm
 [52]: https://docs.datadoghq.com/ja/events/
 [57]: https://docs.microsoft.com/en-us/azure/azure-monitor/platform/platform-logs-overview
-{{< /site-region >}}
+{{% /site-region %}}
 
-{{< site-region region="us3" >}}
+{{% site-region region="us3" %}}
 
 ### 前提条件
 
@@ -838,7 +838,7 @@ Datadog リソース内で Security Assertion Markup Language (SAML) シング�
 [7]: https://docs.datadoghq.com/ja/integrations/guide/azure-portal/
 [8]: https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Datadog%2Fmonitors
 [9]: https://docs.datadoghq.com/ja/integrations/guide/azure-portal/
-{{< /site-region >}}
+{{% /site-region %}}
 
 ## 収集データ
 

@@ -92,19 +92,19 @@ supported_os:
 
 #### ログの収集
 
-{{< site-region region="us3" >}}
+{{% site-region region="us3" %}}
 
 ログ収集は、このサイトではサポートされていません。
 
-{{< /site-region >}}
+{{% /site-region %}}
 
-{{< site-region region="us,eu,gov" >}}
+{{% site-region region="us,eu,gov" %}}
 
 ログの収集を有効にするには、[Kubernetes ログ収集の説明][1]に従って Agent の DaemonSet をアップデートします。
 
 [1]: https://docs.datadoghq.com/ja/integrations/ecs_fargate/#log-collection
 
-{{< /site-region >}}
+{{% /site-region %}}
 
 #### トレースの収集
 
@@ -147,19 +147,19 @@ namespace を選択して、`datadog-agent` とサービス (例: `monitoring`) 
 
 #### ログの収集
 
-{{< site-region region="us3" >}}
+{{% site-region region="us3" %}}
 
 ログ収集は、このサイトではサポートされていません。
 
-{{< /site-region >}}
+{{% /site-region %}}
 
-{{< site-region region="us,eu,gov" >}}
+{{% site-region region="us,eu,gov" %}}
 
 [ECS Fargate インテグレーションドキュメント][1]の説明に従って、ログの収集を有効化します。
 
 [1]: https://docs.datadoghq.com/ja/integrations/ecs_fargate/#log-collection
 
-{{< /site-region >}}
+{{% /site-region %}}
 
 #### トレースの収集
 
@@ -193,19 +193,19 @@ AWS App Mesh パラメーター `ENABLE_ENVOY_DATADOG_TRACING` および `DATADO
 
 #### ログの収集
 
-{{< site-region region="us3" >}}
+{{% site-region region="us3" %}}
 
 ログ収集は、このサイトではサポートされていません。
 
-{{< /site-region >}}
+{{% /site-region %}}
 
-{{< site-region region="us,eu,gov" >}}
+{{% site-region region="us,eu,gov" %}}
 
 [ECS インテグレーションドキュメント][1]の説明に従って、ログの収集を有効化します。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_ecs/#log-collection
 
-{{< /site-region >}}
+{{% /site-region %}}
 
 #### トレースの収集
 

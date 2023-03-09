@@ -23,9 +23,9 @@ short_description: Alibaba Cloud サービスを Datadog と統合
 version: '1.0'
 ---
 
-{{< site-region region="gov" >}}
+{{% site-region region="gov" %}}
 <div class="alert alert-warning">Datadog Alibaba Cloud インテグレーションは、政府関係のサイトに対する Datadog の使用をサポートしていません。</div>
-{{< /site-region >}}
+{{% /site-region %}}
 
 ## 概要
 

@@ -124,9 +124,9 @@ La integración de Amazon Web Services de Datadog está configurada para recopil
 
 ## Configuración
 
-{{< site-region region="gov" >}}
+{{% site-region region="gov" %}}
 <div class="alert alert-warning">El sitio web de Datadog for Government no admite la delegación de roles de AWS. Es obligatorio usar <a href="?tab=accesskeysgovcloudorchinaonly#setup">claves de acceso</a>.</div>
-{{< /site-region >}}
+{{% /site-region %}}
 
 Usa uno de los siguientes métodos para integrar tus cuentas de AWS en Datadog con el fin de recopilar métricas, eventos, etiquetas y logs.
 

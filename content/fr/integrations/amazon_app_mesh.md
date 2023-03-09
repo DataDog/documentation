@@ -93,19 +93,19 @@ Utilisez les instructions suivantes pour activer la collecte de métrique pour l
 
 #### Collecte de logs
 
-{{< site-region region="us3" >}}
+{{% site-region region="us3" %}}
 
 La collecte de logs n'est plus prise en charge pour ce site.
 
-{{< /site-region >}}
+{{% /site-region %}}
 
-{{< site-region region="us,eu,gov" >}}
+{{% site-region region="us,eu,gov" %}}
 
 Pour activer la collecte de logs, mettez à jour le DaemonSet de l'Agent en suivant les [instructions relatives à la collecte de logs Kubernetes][1].
 
 [1]: https://docs.datadoghq.com/fr/integrations/ecs_fargate/#log-collection
 
-{{< /site-region >}}
+{{% /site-region %}}
 
 #### Collecte de traces
 
@@ -148,19 +148,19 @@ Vous pouvez également déployer l'injecteur appmesh en suivant les instructions
 
 #### Collecte de logs
 
-{{< site-region region="us3" >}}
+{{% site-region region="us3" %}}
 
 La collecte de logs n'est plus prise en charge pour ce site.
 
-{{< /site-region >}}
+{{% /site-region %}}
 
-{{< site-region region="us,eu,gov" >}}
+{{% site-region region="us,eu,gov" %}}
 
 Activez la collecte de logs en suivant les instructions détaillées dans la documentation relative à [l'intégration ECS Fargate][1].
 
 [1]: https://docs.datadoghq.com/fr/integrations/ecs_fargate/#log-collection
 
-{{< /site-region >}}
+{{% /site-region %}}
 
 #### Collecte de traces
 
@@ -194,19 +194,19 @@ Définissez les paramètres AWS App Mesh `ENABLE_ENVOY_DATADOG_TRACING` et `DATA
 
 #### Collecte de logs
 
-{{< site-region region="us3" >}}
+{{% site-region region="us3" %}}
 
 La collecte de logs n'est plus prise en charge pour ce site.
 
-{{< /site-region >}}
+{{% /site-region %}}
 
-{{< site-region region="us,eu,gov" >}}
+{{% site-region region="us,eu,gov" %}}
 
 Activez la collecte de logs en suivant les instructions détaillées dans la documentation relative à [l'intégration ECS][1].
 
 [1]: https://docs.datadoghq.com/fr/integrations/amazon_ecs/#log-collection
 
-{{< /site-region >}}
+{{% /site-region %}}
 
 #### Collecte de traces
 

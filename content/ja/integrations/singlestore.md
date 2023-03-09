@@ -100,9 +100,9 @@ SingleStore チェックは [Datadog Agent][3] パッケージに含まれてい
 
 ##### ログの収集
 
-{{< site-region region="us3" >}}
+{{% site-region region="us3" %}}
 **ログ収集は、このサイトではサポートされていません。**
-{{< /site-region >}}
+{{% /site-region %}}
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
@@ -138,9 +138,9 @@ SingleStore チェックは [Datadog Agent][3] パッケージに含まれてい
 
 ##### ログの収集
 
-{{< site-region region="us3" >}}
+{{% site-region region="us3" %}}
 **ログ収集は、このサイトではサポートされていません。**
-{{< /site-region >}}
+{{% /site-region %}}
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][6]を参照してください。
 

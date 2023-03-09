@@ -30,11 +30,11 @@ short_description: Envoyez des alertes et des graphiques Datadog au salon Google
 version: '1.0'
 ---
 
-{{< site-region region="us3,eu,gov" >}}
+{{% site-region region="us3,eu,gov" %}}
 <div class="alert alert-warning">
   Cette intégration est uniquement disponible pour les clients Datadog utilisant le site américain.
 </div>
-{{< /site-region >}}
+{{% /site-region %}}
 
 ## Présentation
 

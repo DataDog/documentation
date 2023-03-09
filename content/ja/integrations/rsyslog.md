@@ -66,8 +66,8 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
           action(type="omfwd" protocol="tcp" target="intake.logs.datadoghq.com" port="10516" template="DatadogFormat" StreamDriver="gtls" StreamDriverMode="1" StreamDriverAuthMode="x509/name" StreamDriverPermittedPeers="*.logs.datadoghq.com" )
       }
       ```
-{{< /site-region >}}
-{{< site-region region="eu" >}}
+{{% /site-region %}}
+{{% site-region region="eu" %}}
 
 4. Rsyslog から Datadog アカウントに送信されるログに TLS Encryption を追加します。
    1. `rsyslog-gnutls` と `ca-certificates` パッケージをインストールします。
@@ -83,7 +83,7 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
           action(type="omfwd" protocol="tcp" target="tcp-intake.logs.datadoghq.eu" port="443" template="DatadogFormat" StreamDriver="gtls" StreamDriverMode="1" StreamDriverAuthMode="x509/name" StreamDriverPermittedPeers="*.logs.datadoghq.eu" )
       }
        ```
-{{< /site-region >}}
+{{% /site-region %}}
 
 5. Rsyslog を再起動します。新しいログが Datadog アカウントへ直接転送されます。
    ```shell
@@ -162,9 +162,9 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
           action(type="omfwd" protocol="tcp" target="intake.logs.datadoghq.com" port="10516" template="DatadogFormat" StreamDriver="gtls" StreamDriverMode="1" StreamDriverAuthMode="x509/name" StreamDriverPermittedPeers="*.logs.datadoghq.com" )
       }
       ```
-{{< /site-region >}}
+{{% /site-region %}}
 
-{{< site-region region="eu" >}}
+{{% site-region region="eu" %}}
 
 4. Rsyslog から Datadog アカウントに送信されるログに TLS Encryption を追加します。
    1. `rsyslog-gnutls` と `ca-certificates` パッケージをインストールします。
@@ -180,7 +180,7 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
           action(type="omfwd" protocol="tcp" target="tcp-intake.logs.datadoghq.eu" port="443" template="DatadogFormat" StreamDriver="gtls" StreamDriverMode="1" StreamDriverAuthMode="x509/name" StreamDriverPermittedPeers="*.logs.datadoghq.eu" )
       }
        ```
-{{< /site-region >}}
+{{% /site-region %}}
 
 5. Rsyslog を再起動します。新しいログが Datadog アカウントへ直接転送されます。
    ```shell
@@ -260,9 +260,9 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
           action(type="omfwd" protocol="tcp" target="intake.logs.datadoghq.com" port="10516" template="DatadogFormat" StreamDriver="gtls" StreamDriverMode="1" StreamDriverAuthMode="x509/name" StreamDriverPermittedPeers="*.logs.datadoghq.com" )
       }
       ```
-{{< /site-region >}}
+{{% /site-region %}}
 
-{{< site-region region="eu" >}}
+{{% site-region region="eu" %}}
 
 4. Rsyslog から Datadog アカウントに送信されるログに TLS Encryption を追加します。
    1. `rsyslog-gnutls` と `ca-certificates` パッケージをインストールします。
@@ -278,7 +278,7 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
           action(type="omfwd" protocol="tcp" target="tcp-intake.logs.datadoghq.eu" port="443" template="DatadogFormat" StreamDriver="gtls" StreamDriverMode="1" StreamDriverAuthMode="x509/name" StreamDriverPermittedPeers="*.logs.datadoghq.eu" )
       }
        ```
-{{< /site-region >}}
+{{% /site-region %}}
 
 5. Rsyslog を再起動します。新しいログが Datadog アカウントへ直接転送されます。
    ```shell
@@ -375,9 +375,9 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
         $ActionSendStreamDriverPermittedPeer *.logs.datadoghq.com
         *.* @@intake.logs.datadoghq.com:10516;DatadogFormat
         ```
-{{< /site-region >}}
+{{% /site-region %}}
 
-{{< site-region region="eu" >}}
+{{% site-region region="eu" %}}
 
 4. Rsyslog から Datadog アカウントに送信されるログに TLS Encryption を追加します。
 
@@ -399,7 +399,7 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
         $ActionSendStreamDriverPermittedPeer *.logs.datadoghq.eu
         *.* @@tcp-intake.logs.datadoghq.eu:443;DatadogFormat
         ```
-{{< /site-region >}}
+{{% /site-region %}}
 
 5. Rsyslog を再起動します。新しいログが Datadog アカウントへ直接転送されます。
 
@@ -494,9 +494,9 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
         $ActionSendStreamDriverPermittedPeer *.logs.datadoghq.com
         *.* @@intake.logs.datadoghq.com:10516;DatadogFormat
         ```
-{{< /site-region >}}
+{{% /site-region %}}
 
-{{< site-region region="eu" >}}
+{{% site-region region="eu" %}}
 4. Rsyslog から Datadog アカウントに送信されるログに TLS Encryption を追加します。
 
     1. `rsyslog-gnutls` と `ca-certificates` パッケージをインストールします。
@@ -517,7 +517,7 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
         $ActionSendStreamDriverPermittedPeer *.logs.datadoghq.eu
         *.* @@tcp-intake.logs.datadoghq.eu:443;DatadogFormat
         ```
-{{< /site-region >}}
+{{% /site-region %}}
 
 5. Rsyslog を再起動します。新しいログが Datadog アカウントへ直接転送されます。
 
@@ -611,9 +611,9 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
         $ActionSendStreamDriverPermittedPeer *.logs.datadoghq.com
         *.* @@intake.logs.datadoghq.com:10516;DatadogFormat
         ```
-{{< /site-region >}}
+{{% /site-region %}}
 
-{{< site-region region="eu" >}}
+{{% site-region region="eu" %}}
 
 4. Rsyslog から Datadog アカウントに送信されるログに TLS Encryption を追加します。
 
@@ -635,7 +635,7 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
         $ActionSendStreamDriverPermittedPeer *.logs.datadoghq.eu
         *.* @@tcp-intake.logs.datadoghq.eu:443;DatadogFormat
         ```
-{{< /site-region >}}
+{{% /site-region %}}
 
 5. Rsyslog を再起動します。新しいログが Datadog アカウントへ直接転送されます。
 

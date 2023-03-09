@@ -9,10 +9,10 @@ further_reading:
 kind: ガイド
 title: Kinesis Data Firehose を使用した AWS CloudWatch メトリクスストリーム
 ---
-{{< site-region region="us3,us5,gov" >}}
+{{% site-region region="us3,us5,gov" %}}
 
 **Kinesis Data Firehose を使用した AWS CloudWatch メトリクスストリームは、この Datadog サイトではサポートされていません。**
-{{< /site-region >}}
+{{% /site-region %}}
 
 Amazon CloudWatch メトリクスストリームと Amazon Kinesis Data Firehose を使用すると、CloudWatch メトリクスを 2〜3 分のレイテンシーでより速く Datadog に取り込むことができます。これは、10 分ごとに更新されたメトリクスを提供する Datadog の API ポーリングアプローチよりも大幅に高速です。
 

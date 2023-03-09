@@ -125,9 +125,9 @@ Datadog의 Amazon Web Services 통합은 <a href="https://docs.aws.amazon.com/Am
 
 ## 구성
 
-{{< site-region region="gov" >}}
+{{% site-region region="gov" %}}
 <div class="alert alert-warning">AWS 역할 위임은 Datadog for Government site에서 지원되지 않습니다. <a href="?tab=accesskeysgovcloudorchinaonly#setup">액세스 키</a>를 사용해야 합니다.</div>
-{{< /site-region >}}
+{{% /site-region %}}
 
 메트릭, 트레이스, 로그 수집을 위해 AWS 계정을 Datadog에 통합하려면 다음 방법을 활용하세요.
 

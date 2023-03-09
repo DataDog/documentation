@@ -51,9 +51,9 @@ Datadog の Amazon Web Services インテグレーションは、[90 以上の A
 
 ## セットアップ
 
-{{< site-region region="gov" >}}
+{{% site-region region="gov" %}}
 <div class="alert alert-warning">AWS のロール委任は、Datadog for Government site でサポートされていません。<a href="?tab=accesskeysgovcloudorchinaonly#setup">アクセスキー</a>を使用する必要があります。</div>
-{{< /site-region >}}
+{{% /site-region %}}
 
 以下のいずれかの方法を使用して AWS アカウントを Datadog に統合し、メトリクス、イベント、タグ、ログを収集します。
 

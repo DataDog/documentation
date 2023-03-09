@@ -29,9 +29,9 @@ supported_os:
 title: Adobe Experience Manager
 ---
 
-{{< site-region region="us3" >}}
+{{% site-region region="us3" %}}
 <div class="alert alert-warning">L'intégration Adobe Experience Manager n'est pas disponible pour le site Datadog que vous avez sélectionné ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
+{{% /site-region %}}
 
 ## Présentation
 

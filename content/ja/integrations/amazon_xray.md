@@ -22,10 +22,10 @@ short_description: AWS サービス間で交わされるリクエストをトレ
 version: '1.0'
 ---
 
-{{< site-region region="gov" >}}
+{{% site-region region="gov" %}}
 <div class="alert alert-warning">Datadog AWS Lambda X-Ray インテグレーションは、商用 AWS アカウントでのみサポートされます。商用 Lambda アカウントがない場合、Datadog AWS Lambda X-Ray インテグレーションは Datadog for Government サイトではサポートされません。</div>
 
-{{< /site-region >}}
+{{% /site-region %}}
 ## 概要
 
 AWS X-Ray を使用すると、開発者は AWS 製品を使用して構築された分散アプリケーションをトレースできます。このインテグレーションは、[サーバーレス][1]関数詳細ページで Lambda 関数のトレースを提供します。詳細については、[サーバーレス監視][2]を参照してください。

@@ -55,13 +55,13 @@ Si vous utilisez plusieurs Service ID provenant d'un compte unique, saisissez un
 
 #### Collecte de logs
 
-{{< site-region region="us3" >}}
+{{% site-region region="us3" %}}
 
 La collecte de logs n'est plus prise en charge pour ce site.
 
-{{< /site-region >}}
+{{% /site-region %}}
 
-{{< site-region region="us,eu,gov" >}}
+{{% site-region region="us,eu,gov" %}}
 
 Configurez l'endpoint Datadog de façon à transmettre les logs Fastly à Datadog. Vous pouvez choisir l'endpoint `Datadog` ou `Datadog (via Syslog)`. Il est conseillé d'utiliser l'endpoint `Datadog` pour une transmission plus fiable des logs via Syslog.
 
@@ -104,7 +104,7 @@ Configurez l'endpoint Datadog de façon à transmettre les logs Fastly à Datado
 [4]: https://docs.fastly.com/guides/streaming-logs/useful-variables-to-log
 [5]: https://app.datadoghq.com/logs
 
-{{< /site-region >}}
+{{% /site-region %}}
 
 ## Données collectées
 

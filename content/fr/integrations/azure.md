@@ -64,9 +64,9 @@ L'intégration Azure de Datadog permet de recueillir des métriques et des logs 
 **Tous les sites** : tous les sites Datadog peuvent utiliser le processus d'inscription d'application afin de mettre en place la collecte des métriques. Ils peuvent également tous configurer un Event Hub de façon à envoyer les logs de la plateforme Azure.  
 **US3 :** si votre organisation utilise le site Datadog US3, vous pouvez tirer profit de l'intégration native Azure pour simplifier la gestion et la collecte des données de votre environnement Azure. Nous vous recommandons d'utiliser dès que possible cette méthode. Il vous suffit de configurer une ressource Datadog dans Azure afin d'associer vos abonnements Azure à votre organisation Datadog. Il n'est alors pas nécessaire d'utiliser le processus d'inscription d'application pour la collecte des métriques ni de configurer un Event Hub pour l'envoi des logs.
 
-{{< site-region region="us,eu,us5,gov" >}}
+{{% site-region region="us,eu,us5,gov" %}}
 <div class="alert alert-info"><strong>Sélectionnez le site US3 dans le volet latéral de cette page ou <a href="?site=us3">modifiez le sélecteur de site</a> pour vérifier que vous consultez bien la version de cette documentation dédiée au site US3.</strong></div>
-{{< /site-region >}}
+{{% /site-region %}}
 
 Connectez-vous à Microsoft Azure pour :
 - Obtenir des métriques sur des machines virtuelles Azure sans avoir nécessairement à installer l'Agent Datadog.
@@ -128,7 +128,7 @@ L'intégration Azure de Datadog est conçue pour recueillir <a href="https://doc
 
 ## Configuration
 
-{{< site-region region="us,eu,gov,us5" >}}
+{{% site-region region="us,eu,gov,us5" %}}
 
 **Remarque** : les instructions de configuration sont différentes pour l'intégration native Azure (disponible pour les clients utilisant le site Datadog US3). Si vous utilisez l'intégration native Azure, [modifiez le sélecteur de site][60] pour afficher les instructions propres au site US3. Pour en savoir plus, consultez la rubrique [Présentation][61].
 
@@ -629,9 +629,9 @@ Si vous n'avez jamais utilisé de fonction Azure, consultez l'article [Bien dém
 [59]: /fr/monitors/notify/#notify-your-team
 [60]: https://docs.datadoghq.com/fr/integrations/azure/?site=us3
 [61]: https://docs.datadoghq.com/fr/integrations/azure/?tab=azurecliv20#overview
-{{< /site-region >}}
+{{% /site-region %}}
 
-{{< site-region region="us3" >}}
+{{% site-region region="us3" %}}
 
 ### Prérequis
 
@@ -911,7 +911,7 @@ Suivez les étapes ci-dessous pour configurer une application d'entreprise :
 [11]: https://app.datadoghq.com/monitors/recommended
 [12]: /fr/monitors/notify/#notify-your-team
 [13]: https://docs.datadoghq.com/fr/security_platform/cspm/
-{{< /site-region >}}
+{{% /site-region %}}
 
 #### Implémentation
 

@@ -66,11 +66,11 @@ https://{{< region-param key="dd_full_site" >}}/intake/webhook/azuredevops?api_k
 
 ### Utiliser les monitors Datadog en tant que portes dans Azure Pipelines
 
-{{< site-region region="eu" >}}
+{{% site-region region="eu" %}}
 <div class="alert alert-warning">
     L'extension permettant d'utiliser les monitors Datadog en tant que portes de déploiement n'est pas disponible pour le site {{< region-param key="dd_site_name" >}}.
 </div>
-{{< /site-region >}}
+{{% /site-region %}}
 
 Vous pouvez également utiliser les monitors Datadog en tant que portes pour [contrôler le déploiement des versions][5] dans Azure Pipelines. Cette option vous permet d'arrêter automatiquement les déploiements problématiques si un état anormal est détecté dans Datadog.
 

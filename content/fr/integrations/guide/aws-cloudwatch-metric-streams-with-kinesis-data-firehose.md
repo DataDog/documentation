@@ -9,10 +9,10 @@ further_reading:
 kind: guide
 title: Flux de métriques AWS CloudWatch avec Kinesis Data Firehose
 ---
-{{< site-region region="us3,us5,gov" >}}
+{{% site-region region="us3,us5,gov" %}}
 
 **Les flux de métriques AWS CloudWatch avec Kinesis Data Firehose ne sont pas pris en charge sur ce site Datadog.**
-{{< /site-region >}}
+{{% /site-region %}}
 
 Avec les flux de métriques Amazon CloudWatch et Amazon Kinesis Data Firehose, vous pouvez transmettre plus rapidement des métriques CloudWatch à Datadog, avec une latence de 2 à 3 minutes. Cette approche est bien plus rapide que le processus d'interrogation de l'API Datadog, qui met à jour les métriques toutes les 10 minutes.
 

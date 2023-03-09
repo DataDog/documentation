@@ -135,9 +135,9 @@ spec:
 ##### ログの収集
 
 
-{{< site-region region="us3" >}}
+{{% site-region region="us3" %}}
 **ログ収集は、Datadog {{< region-param key="dd_site_name" >}} サイトでサポートされていません**。
-{{< /site-region >}}
+{{% /site-region %}}
 
 
 _Agent バージョン 6.0 以降で利用可能_

@@ -402,7 +402,7 @@ Datadog の Fluent Bit アウトプットプラグインに組み込まれてい
 2. 次に、同じ Fargate タスクで、ログを送信する目的のコンテナに対して、ログ構成を定義します。このログ構成は、AWS FireLens をログドライバーとし、Fluent Bit にデータを出力するものである必要があります。下記に、ログドライバーに FireLens が使用され、Fluent Bit にデータを出力しているタスク定義の例を示します。
 
 
-{{< site-region region="us" >}}
+{{% site-region region="us" %}}
   ```json
   {
     "logConfiguration": {
@@ -421,10 +421,10 @@ Datadog の Fluent Bit アウトプットプラグインに組み込まれてい
     }
   }
   ```
-{{< /site-region >}}
+{{% /site-region %}}
 
 
-{{< site-region region="us3" >}}
+{{% site-region region="us3" %}}
   ```json
   {
     "logConfiguration": {
@@ -443,10 +443,10 @@ Datadog の Fluent Bit アウトプットプラグインに組み込まれてい
     }
   }
   ```
-{{< /site-region >}}
+{{% /site-region %}}
 
 
-{{< site-region region="us5" >}}
+{{% site-region region="us5" %}}
   ```json
   {
     "logConfiguration": {
@@ -465,10 +465,10 @@ Datadog の Fluent Bit アウトプットプラグインに組み込まれてい
     }
   }
   ```
-{{< /site-region >}}
+{{% /site-region %}}
 
 
-{{< site-region region="eu" >}}
+{{% site-region region="eu" %}}
   ```json
   {
     "logConfiguration": {
@@ -487,10 +487,10 @@ Datadog の Fluent Bit アウトプットプラグインに組み込まれてい
     }
   }
   ```
-{{< /site-region >}}
+{{% /site-region %}}
 
 
-{{< site-region region="gov" >}}
+{{% site-region region="gov" %}}
   ```json
   {
     "logConfiguration": {
@@ -509,7 +509,7 @@ Datadog の Fluent Bit アウトプットプラグインに組み込まれてい
     }
   }
   ```
-{{< /site-region >}}
+{{% /site-region %}}
 
 **注**: `apikey` と `Host` は、それぞれのサイト `http-intake.logs.{{< region-param key="dd_site" code="true" >}}` から相対的に設定します。利用可能なパラメーターの完全なリストは、[Datadog Fluent Bit ドキュメント][24]に記載されています。
 
@@ -546,7 +546,7 @@ aws ecs register-task-definition --cli-input-json file://<ファイルへのパ�
 例えば、Fluent Bit が Datadog にログを送信するように構成する場合
 
 
-{{< site-region region="us" >}}
+{{% site-region region="us" %}}
 ```yaml
 Resources:
   ECSTaskDefinition:
@@ -580,10 +580,10 @@ Resources:
               enable-ecs-log-metadata: true
           MemoryReservation: 50
 ```
-{{< /site-region >}}
+{{% /site-region %}}
 
 
-{{< site-region region="us3" >}}
+{{% site-region region="us3" %}}
 ```yaml
 Resources:
   ECSTaskDefinition:
@@ -617,10 +617,10 @@ Resources:
               enable-ecs-log-metadata: true
           MemoryReservation: 50
 ```
-{{< /site-region >}}
+{{% /site-region %}}
 
 
-{{< site-region region="us5" >}}
+{{% site-region region="us5" %}}
 ```yaml
 Resources:
   ECSTaskDefinition:
@@ -654,10 +654,10 @@ Resources:
               enable-ecs-log-metadata: true
           MemoryReservation: 50
 ```
-{{< /site-region >}}
+{{% /site-region %}}
 
 
-{{< site-region region="eu" >}}
+{{% site-region region="eu" %}}
 ```yaml
 Resources:
   ECSTaskDefinition:
@@ -691,10 +691,10 @@ Resources:
               enable-ecs-log-metadata: true
           MemoryReservation: 50
 ```
-{{< /site-region >}}
+{{% /site-region %}}
 
 
-{{< site-region region="gov" >}}
+{{% site-region region="gov" %}}
 ```yaml
 Resources:
   ECSTaskDefinition:
@@ -728,7 +728,7 @@ Resources:
               enable-ecs-log-metadata: true
           MemoryReservation: 50
 ```
-{{< /site-region >}}
+{{% /site-region %}}
 
 
 CloudFormation のテンプレートと統語法に関する詳細は、[AWS CloudFormation ドキュメント][2]をご参照ください。

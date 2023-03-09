@@ -32,9 +32,9 @@ short_description: Générez des alertes PagerDuty à partir des métriques et d
 version: '1.0'
 ---
 
-{{< site-region region="gov" >}}
+{{% site-region region="gov" %}}
 <div class="alert alert-warning">L'intégration PagerDuty ne prend pas en charge le site gouvernemental Datadog. <b>Remarque</b> : vous pouvez néanmoins envoyer des notifications de monitor à PagerDuty.</div>
-{{< /site-region >}}
+{{% /site-region %}}
 
 ## Présentation
 
@@ -48,9 +48,9 @@ Associez PagerDuty à Datadog pour :
 
 Consultez le [guide de l'intégration Datadog][1] dans la documentation PagerDuty (en anglais).
 
-{{< site-region region="us" >}}
+{{% site-region region="us" %}}
 Une fois l'intégration de PagerDuty configurée, vous pouvez consulter les [tendances des incidents Pagerduty][2] personnalisées de Datadog.
-{{< /site-region >}}
+{{% /site-region %}}
 
 ## Données collectées
 

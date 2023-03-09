@@ -30,9 +30,9 @@ short_description: Datadog のメトリクスとイベントから PagerDuty ア
 version: '1.0'
 ---
 
-{{< site-region region="gov" >}}
+{{% site-region region="gov" %}}
 <div class="alert alert-warning">Datadog PagerDuty インテグレーションは、Datadog for Government サイトをサポートしていません。<b>注</b>: PagerDuty にモニター通知を送信することは可能です。</div>
-{{< /site-region >}}
+{{% /site-region %}}
 
 ## 概要
 
@@ -46,9 +46,9 @@ PagerDuty を Datadog に接続することで、以下のことが可能にな�
 
 Pagerduty の [Datadog インテグレーションガイド][1]をご参照ください。
 
-{{< site-region region="us" >}}
+{{% site-region region="us" %}}
 Pagerduty をインテグレーションしたら、Datadog のカスタム Pagerduty Incident Trends をチェックすることができます。
-{{< /site-region >}}
+{{% /site-region %}}
 
 ## 収集したデータ
 
