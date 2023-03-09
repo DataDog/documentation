@@ -41,7 +41,7 @@ The overview page for any commit can be discovered through a particular branch o
 From the Commit Overview page, click on any row in the `Failed Tests` or `New Flaky Tests` tables and select `Open issue in GitHub`. 
 
 #### Branch Overview
-From this page, click on any row in the `Flaky Tests table` and select `Open issue in GitHub`.
+From this page, click on any row in the `Flaky Tests` table and select `Open issue in GitHub`.
 {{< img src="ci/github_issues_flaky_light.png" alt="Datadog GitHub issues flaky tests table preview" style="width:100%;">}}
 
 #### Test Detail View
@@ -49,11 +49,11 @@ From within a specific test run, click the `Actions` button at the top right and
 {{< img src="ci/github_issues_detail_light.png" alt="Datadog GitHub issues test detail view preview" style="width:100%;">}}
 
 You also have the option to copy an issue description in Markdown for pasting test details elsewhere. The Markdown description will contain information such as the test execution link, service, branch, commit, author, and error. 
-{{< img src="ci/github_issues_markdown.png" alt="Copy issue description in Markdown format for GitHub issues" style="width:30%;">}}
+{{< img src="ci/github_issues_markdown.png" alt="Copy issue description in Markdown format for GitHub issues" style="width:40%;">}}
 
 ### Sample GitHub issue
 Below is what a pre-filled GitHub issue might look like:
-{{< img src="ci/prefilled_github_issue.png" alt="Pre-filled GitHub issue" style="width:50%;">}}
+{{< img src="ci/prefilled_github_issue.png" alt="Pre-filled GitHub issue" style="width:60%;">}}
 
 ### Compatibility
 This is available for all Test Visibility customers. It does not require usage of the GitHub App integration.
