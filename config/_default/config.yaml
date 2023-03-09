@@ -112,5 +112,3 @@ outputFormats:
     isPlainText: true
     mediaType: "text/plain"
     notAlternative: true
-
-disableAliases: true
