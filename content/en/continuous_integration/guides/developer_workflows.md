@@ -36,7 +36,7 @@ You can create pre-filled GitHub issues from three areas within CI Test Visibili
 #### Commit Overview
 {{< img src="ci/github_issues_light.png" alt="Datadog GitHub issues preview" style="width:100%;">}}
 
-The overview page for any commit can be discovered via a particular branch or from within any particular test. 
+The overview page for any commit can be discovered through a particular branch or from within any particular test. 
 
 From the Commit Overview page, click on any row in the `Failed Tests` or `New Flaky Tests` tables and select `Open issue in GitHub`. 
 
