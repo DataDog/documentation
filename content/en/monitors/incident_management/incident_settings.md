@@ -58,7 +58,7 @@ The `Teams` property field automatically populates from the [teams][6] defined i
 
 You can add more property fields to your settings by selecting one of your existing `key:value` pair [metric tags][7]. When you do this, the key of your property field is the start case of your metric tag's key (each word is capitalized and separated by spaces), and the values for the property field are equal to the values reported by the metric tag.
 
-Property fields are organized into three tables that correspond to where the fields will appear in the [Overview section][8] of the Incident Details page:
+Property fields are organized into three tables that correspond to where the fields appear in the [Overview section][8] of the Incident Details page:
 
 1. `What Happened`
 2. `Why It Happened`

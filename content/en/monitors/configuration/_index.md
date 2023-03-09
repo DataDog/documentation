@@ -279,7 +279,7 @@ Customize which dimensions trigger alerts to reduce the noise and focus on the q
 
 **Note**: If your metric is only reporting by `host` with no `device` tag, it is not detected by the monitor. Metrics with both `host` and `device` tags are detected by the monitor. 
 
-If you configure tags or dimensions in your query, these values are available for every group evaluated in the multi alert to dynamically fill in notifications with useful context. See [Tag Variables][8] to learn how to reference tag values in the notification message.
+If you configure tags or dimensions in your query, these values are available for every group evaluated in the multi alert to dynamically fill in notifications with useful context. See [Attribute and tag variables][8] to learn how to reference tag values in the notification message.
 
 | Group by                       | Simple alert mode | Multi alert mode |
 |-------------------------------------|------------------------|-----------------------|
@@ -303,6 +303,6 @@ If you configure tags or dimensions in your query, these values are available fo
 [5]: /monitors/notify/variables/
 [6]: /monitors/notify/#notify-your-team
 [7]: /monitors/notify/#say-whats-happening
-[8]: /monitors/notify/variables/?tab=is_alert#tag-variables
+[8]: /monitors/notify/variables/?tab=is_alert#attribute-and-tag-variables
 [9]: /getting_started/tagging/
 [10]: /account_management/teams/

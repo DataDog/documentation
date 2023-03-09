@@ -192,7 +192,7 @@ Under the title, a byline tells you who created the dashboard.
 
 ### Suggested dashboards and active users
 
-From an individual dashboard, Datadog offers suggestions for viewing related dashboards. These dashboards are recommended based on the user activity in your organization and how often users go from this dashboard to other existing dashboards. The rightmost section of the dashboard details displays a list of the most active users of this dashboard.
+From an individual dashboard, Datadog offers suggestions for viewing related dashboards. These dashboards are recommended based on the user activity in your organization and how often users go from this dashboard to other existing dashboards. The rightmost section of the dashboard details view displays a list of the most active users of this dashboard.
 
 ### Edit details
 
