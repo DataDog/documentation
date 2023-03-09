@@ -9,12 +9,12 @@ further_reading:
     text: "Production deployment overview for the Observability Pipelines Worker"
   - link: "https://dtdg.co/d22op"
     tag: "Learning Center"
-    text: "Take a workshop on Building Observability Pipelines"
+    text: "Safe and Secure Local Processing with Observability Pipelines"
 ---
 
 ## Overview
 
-In Datadog, you can build, and manage all of your Observability Pipelines Worker deployments at scale. The Observability Pipelines Worker collects, processes, and routes logs and metrics from any source to any destination.
+The [Observability Pipelines Worker][1] can collect, process, and route logs and metrics from any source to any destination. Using Datadog, you can build and manage all of your Observability Pipelines Worker deployments at scale. 
 
 This guide walks you through deploying the Worker in your common tools cluster and configuring the Datadog Agent to send logs and metrics to the Worker.
 
@@ -23,18 +23,18 @@ This guide walks you through deploying the Worker in your common tools cluster a
 ## Assumptions
 * You are already using Datadog and want to use Observability Pipelines.
 * Your services are deployed to a Kubernetes cluster in Amazon Elastic Kubernetes Service (EKS), Azure Kubernetes Service (AKS), or Google Kubernetes Engine (GKE).
-* You have administrative access to the cluster(s) where the Observability Pipelines Worker is going to be deployed, as well as the workloads that are going to be aggregated.
+* You have administrative access to the cluster(s) where the Observability Pipelines Worker is going to be deployed, as well as to the workloads that are going to be aggregated.
 * You have a common tools or security cluster for your environment to which all other clusters are connected.
 
 # Prerequisites
 Before installing, make sure you have:
 
-* A valid [Datadog API key][1].
+* A valid [Datadog API key][2].
 * An Observability Pipelines Configuration ID.
 
-You can generate both of these in [Observability Pipelines][2].
+You can generate both of these in [Observability Pipelines][3].
 
-To run the Worker on your Kubernetes nodes, you need a minimum of two nodes with one CPU and 512MB RAM available. Datadog recommends creating a separate node pool for the workers, which is also the recommended configuration for production deployments.
+To run the Worker on your Kubernetes nodes, you need a minimum of two nodes with one CPU and 512MB RAM available. Datadog recommends creating a separate node pool for the Workers, which is also the recommended configuration for production deployments.
 
 ## Provider-specific requirements
 {{< tabs >}}
@@ -45,10 +45,10 @@ To run the Worker on your Kubernetes nodes, you need a minimum of two nodes with
 [1]: https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html
 {{% /tab %}}
 {{% tab "Azure AKS" %}}
-There are no special requirements for Azure AKS.
+There are no specific requirements for Azure AKS.
 {{% /tab %}}
 {{% tab "Google GKE" %}}
-There are no special requirements for Google GKE.
+There are no specific requirements for Google GKE.
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -111,12 +111,11 @@ so they are only accessible inside your network.
 Use the load balancer URL given to you by Helm when you configure the Datadog Agent.
 
 #### Cross-availability-zone load balancing
-The provided Helm configuration tries to simplify load balancing, but you must take into consideration the potential price implications of cross-AZ traffic. Wherever possible, the samples try to avoid creating situations where multiple cross-AZ hops can happen, preferring performance, simplicity, and cost optimizations at the potential expense of fault tolerance.
+The provided Helm configuration tries to simplify load balancing, but you must take into consideration the potential price implications of cross-AZ traffic. Wherever possible, the samples try to avoid creating situations where multiple cross-AZ hops can happen.
 
 {{< tabs >}}
 {{% tab "AWS EKS" %}}
-NLBs provisioned by the [AWS Load Balancer Controller][1] are used. It provides
-more flexibility and accuracy than the in-tree controller that AWS provides.
+NLBs provisioned by the [AWS Load Balancer Controller][1] are used.
 
 The sample configurations do not enable the "cross-zone load balancing" feature available in this controller. To enable it, add the following annotation to the `service` block:
 
@@ -130,7 +129,7 @@ See [AWS Load Balancer Controller][2] for more details.
 [2]: https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/guide/service/annotations/#load-balancer-attributes
 {{% /tab %}}
 {{% tab "Azure AKS" %}}
-No special requirements are needed for Azure AKS.
+No specific requirements are needed for Azure AKS.
 {{% /tab %}}
 {{% tab "Google GKE" %}}
 Global Access is enabled by default since that is likely required for use in a shared tools cluster.
@@ -142,13 +141,13 @@ Observability Pipelines includes multiple buffering strategies that allow you to
 
 {{< tabs >}}
 {{% tab "AWS EKS" %}}
-For AWS, Datadog recommends using the `io2` EBS drive family. Alternatively, the `gp3` drives can be used as well.
+For AWS, Datadog recommends using the `io2` EBS drive family. Alternatively, the `gp3` drives could also be used.
 {{% /tab %}}
 {{% tab "Azure AKS" %}}
 For Azure AKS, Datadog recommends using the `default` (also known as `managed-csi`) disks.
 {{% /tab %}}
 {{% tab "Google GKE" %}}
-For Google GKE, Datadog recommends using the `premium-rwo` drive class, because that is backed by SSDs. The HDD-backed class, `standard-rwo`, likely does not provide enough write performance for the buffers to be useful.
+For Google GKE, Datadog recommends using the `premium-rwo` drive class because it is backed by SSDs. The HDD-backed class, `standard-rwo`, might not provide enough write performance for the buffers to be useful.
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -172,7 +171,7 @@ vector:
 $ kubectl get svc opw-observability-pipelines-worker
 ```
 
-At this point, your observability data should be flowing through the Worker and is available for data processing. The next section goes through what processing is included by default, as well as additional options that are available.
+At this point, your observability data should be going to the Worker and is available for data processing. The next section goes through what processing is included by default and the additional options that are available.
 
 ## Working with data
 The [Helm chart](#download-the-helm-chart) provided has example processing steps that demonstrate Observability Pipelines tools and ensures that data sent to Datadog is in the correct format. 
@@ -187,16 +186,17 @@ The following are two important components in the example configuration:
 - `logs_parse_ddtags`: Parses the tags that are stored in a string into structured data. 
 - `logs_finish_ddtags`: Re-encodes the tags so that it is in the format as how the Datadog Agent would send it.
 
-Internally, the Datadog Agent represents log tags as a CSV in a single string. To effectively manipulate these tags, they must be parsed, modified , and then re-encoded before they are sent to the ingest endpoint. These steps are written to automatically perform those actions for you. Any modifications you make to the pipeline, especially for manipulating tags, should be in between these two steps.
+Internally, the Datadog Agent represents log tags as a CSV in a single string. To effectively manipulate these tags, they must be parsed, modified, and then re-encoded before they are sent to the ingest endpoint. These steps are written to automatically perform those actions for you. Any modifications you make to the pipeline, especially for manipulating tags, should be in between these two steps.
 
 ### Processing metrics
 The provided metrics pipeline does not require additional parsing and re-encoding steps. Similar to the logs pipeline, it tags incoming metrics for traffic accounting purposes. Due to the additional cardinality, this may have cost implications for custom metrics.
 
-At this point, your environment is configured for Observability Pipelines with data flowing through it. Further configuration is likely required for your specific use case(s), but the tools provided give you a starting point for it.
+At this point, your environment is configured for Observability Pipelines with data flowing through it. Further configuration is likely required for your specific use case(s), but the tools provided gives you a starting point.
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /account_management/api-app-keys/#api-keys
-[2]: https://app.datadoghq.com/observability-pipelines/create
+[1]: /observability_pipelines/#what-is-observability-pipelines-and-the-observability-pipelines-worker
+[2]: /account_management/api-app-keys/#api-keys
+[3]: https://app.datadoghq.com/observability-pipelines/create
