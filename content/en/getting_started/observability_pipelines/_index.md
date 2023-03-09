@@ -21,7 +21,7 @@ This guide walks you through deploying the Worker in your common tools cluster a
 {{< img src="/observability_pipelines/quickstart/dd-pipeline.png" alt="A diagram of a couple of workload clusters sending their data through the Observability Pipelines aggregator." >}}
 
 ## Assumptions
-* You are already using Datadog and want to use Observability Pipelines (OP).
+* You are already using Datadog and want to use Observability Pipelines.
 * Your services are deployed to a Kubernetes cluster in Amazon Elastic Kubernetes Service (EKS), Azure Kubernetes Service (AKS), or Google Kubernetes Engine (GKE).
 * You have administrative access to the cluster(s) where the Observability Pipelines Worker is going to be deployed, as well as the workloads that are going to be aggregated.
 * You have a common tools or security cluster for your environment to which all other clusters are connected.
