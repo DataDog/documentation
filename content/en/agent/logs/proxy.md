@@ -206,7 +206,7 @@ backend datadog-logs
     balance roundrobin
     mode tcp
     option tcplog
-    server datadog agent-intake.logs.datadoghq.eu:443 ssl verify required ca-file /etc/ssl/certs/ca-bundle.crt check port 443
+    server datadog tcp-intake.logs.datadoghq.eu:1883 ssl verify required ca-file /etc/ssl/certs/ca-bundle.crt check port 443
 ```
 
 Download the certificate with the following command: 
@@ -277,7 +277,7 @@ stream {
     server {
         listen 10514; #listen for logs
         proxy_ssl on;
-        proxy_pass agent-intake.logs.datadoghq.eu:443;
+        proxy_pass tcp-intake.logs.datadoghq.eu:1883;
     }
 }
 ```
