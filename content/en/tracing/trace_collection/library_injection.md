@@ -89,13 +89,14 @@ To select your pods for library injection, annotate them with the following, cor
 | JavaScript | `admission.datadoghq.com/js-lib.version: "<lib-version>"`     |
 | Python     | `admission.datadoghq.com/python-lib.version: "<lib-version>"` |
 
-The available library versions are listed in each container registry.
+The available library versions are listed in each container registry:
+
 
 **Note**: If you already have an application instrumented using version X of the library, and then use library injection to instrument using version Y of the same tracer library, the tracer does not break. Rather, the library version loaded first is used. Because library injection happens at the admission controller level prior to runtime, it takes precedent over manually configured libraries.
 
 <div class="alert alert-warning"><strong>Note</strong>: Using the <code>latest</code> tag is supported, but use it with caution because major library releases can introduce breaking changes.</div>
 
-For example:
+For example, to inject a Java library:
 
 ```yaml
 apiVersion: apps/v1
@@ -109,10 +110,16 @@ template:
     labels:
         admission.datadoghq.com/enabled: "true" # Enable Admission Controller to mutate new pods in this deployment
     annotations:
-        admission.datadoghq.com/java-lib.version: "v{{< tracer-version >}}" # Enable Java instrumentation (version {{< tracer-version >}}) injection
+        admission.datadoghq.com/java-lib.version: "<TRACER VERSION>"
   containers:
   -  ...
 ```
+
+To find a list of tracer versions for each language, check the releases page in the tracer source repositories:
+
+- [Java][17]
+- [Javascript][18]
+- [Python][19]
 
 ### Step 3 - Tag your pods with Unified Service Tags
 
@@ -150,7 +157,7 @@ template:
         tags.datadoghq.com/version: "1.1" # Unified service tag - Pod Version tag
         admission.datadoghq.com/enabled: "true" # Enable Admission Controller to mutate new pods part of this deployment
     annotations:
-        admission.datadoghq.com/java-lib.version: "{{< tracer-version >}}" # Enable Java instrumentation (version {{< tracer-version >}}) injection
+        admission.datadoghq.com/java-lib.version: "<TRACER VERSION>"
   containers:
   -  ...
 ```
@@ -172,8 +179,6 @@ Or run `kubectl describe pod <my-pod>` to see the `datadog-lib-init` init contai
 
 The instrumentation also starts sending telemetry to Datadog (for example, traces to [APM][15]).
 
-
-
 [1]: /containers/cluster_agent/admission_controller/
 [2]: /tracing/trace_collection/
 [3]: https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/
@@ -190,6 +195,9 @@ The instrumentation also starts sending telemetry to Datadog (for example, trace
 [14]: /getting_started/tagging/unified_service_tagging/
 [15]: https://app.datadoghq.com/apm/traces
 [16]: /tracing/trace_collection/library_config/
+[17]: https://github.com/DataDog/dd-trace-java/releases
+[18]: https://github.com/DataDog/dd-trace-js/releases
+[19]: https://github.com/DataDog/dd-trace-py/releases
 
 {{% /tab %}}
 
