@@ -115,7 +115,10 @@ placeholders:
 
 # create the virtual environment
 hugpython: local/etc/requirements3.txt
-	@${PY3} -m venv --clear $@ && . $@/bin/activate && $@/bin/pip install --upgrade pip wheel && $@/bin/pip install -r $<
+	@${PY3} -m venv --clear $@ && . $@/bin/activate && $@/bin/pip install --upgrade pip wheel && $@/bin/pip install -r $<;\
+	if [[ "$(CI_COMMIT_REF_NAME)" != "" ]]; then \
+		$@/bin/pip install https://binaries.ddbuild.io/dd-source/python/assetlib-0.0.13488267-py2.py3-none-any.whl; \
+	fi
 
 update_pre_build:
 	@. hugpython/bin/activate && GITHUB_TOKEN=$(GITHUB_TOKEN) CONFIGURATION_FILE=$(CONFIGURATION_FILE) ./local/bin/py/build/update_pre_build.py
