@@ -196,8 +196,11 @@ From an individual dashboard, Datadog offers suggestions for viewing related das
 
 ### Edit details
 
-Click **Edit** to update Markdown-supported dashboard descriptions or associate [teams][17] with this dashboard:
+Update Markdown-supported dashboard descriptions or associate [teams][17] with a dashboard:
 
+1. Open the dashboard you wish to edit.
+1. Click the caret icon next to the dashboard title. A drop-down panel opens.
+1. Click **Edit**. The panel changes to edit mode.
 1. Select up to 5 teams from the **Teams** dropdown.
 1. Enter a description in the text box. Format your text in Markdown.
 1. Click **Save**.
