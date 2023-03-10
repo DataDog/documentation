@@ -85,7 +85,7 @@ To create an SLO from the Service Catalog:
 {{< img src="universal_service_monitoring/guide/service_catalog_slo_setup.png" alt="Setting up a Universal Service Monitoring SLO for BITSBOUTIQUE" style="width:100%;" >}}
 
 Optionally, to create an SLO manually using USM metrics:
-
+ 
 1. Navigate to **Service Management** > **SLOs** and click [**New SLO**][15].
 2. Select **Metric Based** and create two queries in the **Good events (numerator)** section:
    
