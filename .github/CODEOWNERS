@@ -12,8 +12,10 @@ package.json              @DataDog/corpweb @DataDog/documentation
 .github/workflows/bump_versions.yml   @DataDog/integrations-tools-and-libraries @DataDog/documentation
 /data/sdk_versions.json               @DataDog/integrations-tools-and-libraries @DataDog/documentation
 
-# Serverless
+# APM
+/content/en/tracing/                                    @Datadog/apm-tees @Datadog/documentation
 
+# Serverless
 /content/en/serverless/                                 @DataDog/serverless-product @DataDog/documentation
 /layouts/shortcodes/latest-lambda-layer-version.html    @DataDog/documentation
 
