@@ -16,7 +16,7 @@ further_reading:
   text: "Learn how to generate metrics from ingested logs"
 ---
 
-{{< img src="logs/guide/log_ingestion_and_processing.png" alt="Logging without Limits™" >}}
+{{< img src="logs/guide/log_management_marchitecture.jpg" alt="Logging without Limits™" >}}
 
 ## Overview
 
