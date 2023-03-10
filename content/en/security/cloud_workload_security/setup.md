@@ -170,17 +170,36 @@ Add the following settings to the `env` section of both the `security-agent` and
 
 For a package-based deployment, the Datadog package has to be deployed. Install the package with your package manager.
 
-By default Runtime Security is disabled. To enable it, both the `security-agent.yaml` and the `system-probe.yaml` files need to be adapted. Run the following commands to enable these configurations:
+```text
+# /etc/datadog-agent/datadog.yaml file 
+remote_configuration:
+  ## @param enabled - boolean - optional - default: false
+  ## Set to true to enable remote configuration.
+  enabled: true
+```
 
-{{< code-block lang="bash" filename="host-runtime-security.sh" >}}
+```text
+# /etc/datadog-agent/security-agent.yaml file 
+runtime_security_config:
+  ## @param enabled - boolean - optional - default: false 
+  ## Set to true to enable full Cloud Workload Security. 
+  enabled: true
+```
 
-echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/security-agent.yaml
-echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/system-probe.yaml
-echo "remote_configuration.enabled: true" >> /etc/datadog-agent/system-probe.yaml
+By default, Runtime Security is disabled. To enable it, both the `security-agent.yaml` and the `system-probe.yaml` files need to be updated. Run the following commands to enable these configurations:
 
-systemctl restart datadog-agent
+```text
+# /etc/datadog-agent/system-probe.yaml file 
+runtime_security_config:
+  ## @param enabled - boolean - optional - default: false 
+  ## Set to true to enable full Cloud Workload Security. 
+  enabled: true
 
-{{< /code-block >}}
+  remote_configuration:
+    ## @param enabled - boolean - optional - default: false
+    ## For [Datadog Agent] version 7.42 only, to enable remote configuration
+    enabled: true
+```
 
 [1]: https://app.datadoghq.com/account/settings#agent/kubernetes
 {{% /tab %}}
