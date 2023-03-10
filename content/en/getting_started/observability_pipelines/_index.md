@@ -23,10 +23,10 @@ This guide walks you through deploying the Worker in your common tools cluster a
 ## Assumptions
 * You are already using Datadog and want to use Observability Pipelines.
 * Your services are deployed to a Kubernetes cluster in Amazon Elastic Kubernetes Service (EKS), Azure Kubernetes Service (AKS), or Google Kubernetes Engine (GKE).
-* You have administrative access to the cluster(s) where the Observability Pipelines Worker is going to be deployed, as well as to the workloads that are going to be aggregated.
+* You have administrative access to the clusters where the Observability Pipelines Worker is going to be deployed, as well as to the workloads that are going to be aggregated.
 * You have a common tools or security cluster for your environment to which all other clusters are connected.
 
-# Prerequisites
+## Prerequisites
 Before installing, make sure you have:
 
 * A valid [Datadog API key][2].
@@ -36,7 +36,7 @@ You can generate both of these in [Observability Pipelines][3].
 
 To run the Worker on your Kubernetes nodes, you need a minimum of two nodes with one CPU and 512MB RAM available. Datadog recommends creating a separate node pool for the Workers, which is also the recommended configuration for production deployments.
 
-## Provider-specific requirements
+### Provider-specific requirements
 {{< tabs >}}
 {{% tab "AWS EKS" %}}
 * The [AWS Load Balancer controller][1] is required. If you created your Amazon EKS cluster through the UI, then it is probably already installed.
@@ -117,7 +117,7 @@ The provided Helm configuration tries to simplify load balancing, but you must t
 {{% tab "AWS EKS" %}}
 NLBs provisioned by the [AWS Load Balancer Controller][1] are used.
 
-The sample configurations do not enable the "cross-zone load balancing" feature available in this controller. To enable it, add the following annotation to the `service` block:
+The sample configurations do not enable the cross-zone load balancing feature available in this controller. To enable it, add the following annotation to the `service` block:
 
 ```
 service.beta.kubernetes.io/aws-load-balancer-attributes: load_balancing.cross_zone.enabled=true
@@ -191,7 +191,7 @@ Internally, the Datadog Agent represents log tags as a CSV in a single string. T
 ### Processing metrics
 The provided metrics pipeline does not require additional parsing and re-encoding steps. Similar to the logs pipeline, it tags incoming metrics for traffic accounting purposes. Due to the additional cardinality, this may have cost implications for custom metrics.
 
-At this point, your environment is configured for Observability Pipelines with data flowing through it. Further configuration is likely required for your specific use case(s), but the tools provided gives you a starting point.
+At this point, your environment is configured for Observability Pipelines with data flowing through it. Further configuration is likely required for your specific use cases, but the tools provided gives you a starting point.
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
