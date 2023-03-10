@@ -86,21 +86,19 @@ To create an SLO from the Service Catalog:
 
 Optionally, to create an SLO manually using USM metrics:
 
-1. Navigate to **Monitors** > **SLOs** and click [**New SLO**][15].
+1. Navigate to **Service Management** > **SLOs** and click [**New SLO**][15].
 2. Select **Metric Based** and create two queries in the **Good events (numerator)** section:
    
-   * Query A: Enter a USM metric such as `universal.http.server`, an `env` primary tag in the `from` field, and select `service` from the `all values` dropdown menu. 
-   * Query B: Enter a USM metric such as `universal.http.server`, an `env` primary tag and an `error:true` tag in the `from` field, and select `service` from the `all values` dropdown menu. 
+   * Query A: Enter a USM metric such as `universal.http.server`, an `env` primary tag in the `from` field, and select `service` to the right of `all values` to scope the SLO to an individual service. 
+   * Query B: Enter a USM metric such as `universal.http.server`, an `env` primary tag and an `error:true` tag in the `from` field, and select `service` to the right of `all values` to scope the SLO to an individual service. 
 
 3. Click **+ Add Formula** and enter `a-b`.
 4. In the **Total events (denominator)** section, enter a USM metric such as `universal.http.server`, an `env` primary tag in the `from` field, and select `service` from the `all values` dropdown menu.
-5. Click **+ New Target** to create three target thresholds with the following settings:
+5. Click **+ New Target** to create a target threshold with the following settings:
 
-   * The time window is `7 Days`, the target threshold is `95%`, and the warning threshold is `97%`.
-   * The time window is `30 Days`, the target threshold is `97%`, and the warning threshold is `99%`.
-   * The time window is `90 Days`, the target threshold is `99%`, and the warning threshold is `99.5%`.
+   * The time window is `90 Days`, the target threshold is `95%`, and the warning threshold is `99.5%`. Datadog recommends setting the same target threshold across all time windows.
 
-6. Enter a name and description for this SLO and add the `env` primary tag.
+6. Enter a name and description for this SLO. Set the `env` primary tag and a `team` tag.
 7. Click **Save and Set Alert**.
 
 {{< img src="universal_service_monitoring/guide/usm_slo_setup.png" alt="Setting up a Universal Service Monitoring SLO for BITSBOUTIQUE" style="width:100%;" >}}
