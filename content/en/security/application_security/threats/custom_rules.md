@@ -190,4 +190,4 @@ Use the Tag Resulting Signals dropdown to tag your signals with different tags. 
 [4]: /monitors/notify/?tab=is_alert#integrations
 [5]: /security/notifications/variables/
 [6]: /security/notifications/variables/#template-variables
-[7]: /security/application_security/threats/add-user-info/?tab=set_user#adding-user-events-login-success-login-failure-any-business-logic-to-traces
+[7]: /security/application_security/threats/add-user-info/?tab=set_user#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
