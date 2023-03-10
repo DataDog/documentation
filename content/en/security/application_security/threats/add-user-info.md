@@ -501,6 +501,8 @@ Starting in dd-trace-rb v1.9.0, you can use the Ruby tracer's API to track user 
 
 The following examples show how to track login events or custom events (using signup as an example).
 
+Traces containing login success/failure events can be queried using the following query `@appsec.security_activity:business_logic.users.login.success` or `@appsec.security_activity:business_logic.users.login.failure`.
+
 {{< tabs >}}
 {{% tab "Login success" %}}
 ```ruby

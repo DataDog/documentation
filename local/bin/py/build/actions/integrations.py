@@ -903,6 +903,19 @@ class Integrations:
                 item["draft"] = not item.get("is_public", False)
                 item["integration_id"] = item.get("integration_id", integration_id)
                 item["integration_version"] = item.get("integration_version", integration_version)
+                # remove aliases that point to the page they're located on
+                # get the current slug from the doc_link
+                if item.get('name'):
+                    current_slug = 'integrations/{}'.format(item.get('name'))
+                # If there are aliases and the current slug value, check to see if they match and if they do, remove it
+                if (item.get('aliases')) and current_slug:
+                    # loop over the aliases
+                    for single_alias in item['aliases']:
+                        # strip any tailing and leading / and see if the alias matches the page slug
+                        if current_slug == single_alias.strip('/'):
+                            # add the alias from the list
+                            item['aliases'].remove(single_alias)
+                            print(f"\033[94mALIAS REMOVAL\x1b[0m: Removed redundant alias: {single_alias}")
                 fm = yaml.safe_dump(
                     item, width=float("inf"), default_style='"', default_flow_style=False, allow_unicode=True
                 ).rstrip()
