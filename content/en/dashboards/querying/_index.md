@@ -210,7 +210,7 @@ If your level of detail is resource or span, some widget types also require you 
 
 ### Event overlays
 
-View event correlations by using the **Event Overlays** section in the graphing editor for [Timeseries][15] and [Heat Map][16] visualizations. In the search field, enter any text or structured search query. For details on searching, see the Datadog [Event Query Language][14].
+View event correlations by using the **Event Overlays** section in the graphing editor for the [Timeseries][15] visualization. In the search field, enter any text or structured search query. For details on searching, see the Datadog [Event Query Language][14].
 
 The event overlay supports all data sources. This allows for easier correlation between business events and data from any Datadog product. 
 
@@ -219,6 +219,8 @@ With the event overlay, you can quickly see how actions within the organization 
 - Correlating CPU usage with events related to provisioning extra servers
 - Correlating egress traffic with suspicious login activity
 - Correlating any timeseries data with monitor alerts to ensure that Datadog has been configured with the appropriate alerts
+
+{{< img src="/dashboards/querying/event_overlay_example.png" alt="Timeseries widgets showing RUM error rates with deployment events overlaid" style="width:100%;" >}}
 
 ## Further Reading
 

@@ -68,7 +68,15 @@ Each query or formula, along with any [filtering tags][6], can be aliased. The a
 
 ### Event overlay
 
-You can add events from related systems to add more context to your graph, such as GitHub commits, Jenkins deploys, and Docker creation events. Click **Add Event Overlay** in the **Event Overlays** section and enter a query to display those events. 
+You can add events from related systems to add more context to your graph, such as GitHub commits, Jenkins deploys, and Docker creation events. Click **Add Event Overlay** in the **Event Overlays** section and enter a query to display those events. The event overlay supports all data sources. This allows for easier correlation between business events and data from any Datadog product.
+
+With the event overlay, you can quickly see how actions within the organization impact application and infrastructure performance. Here are some example use cases:
+- RUM error rates with deployment events overlaid
+- Correlating CPU usage with events related to provisioning extra servers
+- Correlating egress traffic with suspicious login activity
+- Correlating any timeseries data with monitor alerts to ensure that Datadog has been configured with the appropriate alerts
+
+{{< img src="/dashboards/querying/event_overlay_example.png" alt="Timeseries widgets showing RUM error rates with deployment events overlaid" style="width:100%;" >}}
 
 Use the same query format as for the [Event Explorer][7], for example:
 
@@ -77,10 +85,6 @@ Use the same query format as for the [Event Explorer][7], for example:
 | `sources:jenkins`           | Shows all events from the Jenkins source.                  |
 | `tag:role:web`              | Shows all events with the `role:web` tag.                  |
 | `tags:$<TEMPLATE_VARIABLE>` | Shows all events from the selected [template variable][8]. |
-
-Once enabled, events are overlaid on your graphs with red bars:
-
-{{< img src="dashboards/widgets/timeseries/event_overlay.png" alt="Event overlay bar on a timeseries graph" style="width:100%;" >}}
 
 ### Markers
 
