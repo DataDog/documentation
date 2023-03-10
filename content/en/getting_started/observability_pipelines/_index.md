@@ -61,10 +61,14 @@ Download the [Helm chart][1] for AWS EKS.
 
 In the Helm chart, replace the `datadog.apiKey` and `datadog.configKey` values to match your pipeline. Then, install it in your cluster with the following commands:
 
+```shell
+helm repo add datadog https://helm.datadoghq.com
 ```
-$ helm repo add datadog https://helm.datadoghq.com
-$ helm repo update
-$ helm update --install \
+```shell
+helm repo update
+```
+```shell
+helm update --install \
     opw datadog/observability-pipelines-worker \
     -f aws_eks.yaml
 ```
@@ -76,12 +80,16 @@ Download the [Helm chart][1] for Azure AKS.
 
 In the Helm chart, replace the `datadog.apiKey` and `datadog.configKey` values to match your pipeline. Then, install it in your cluster with the following commands:
 
+```shell
+helm repo add datadog https://helm.datadoghq.com
 ```
-$ helm repo add datadog https://helm.datadoghq.com
-$ helm repo update
-$ helm update --install \
-    opw datadog/observability-pipelines-worker \
-    -f azure_aks.yaml
+```shell
+helm repo update
+```
+```shell
+helm update --install \
+  opw datadog/observability-pipelines-worker \
+  -f azure_aks.yaml
 ```
 
 [1]: /resources/yaml/observability_pipelines/quickstart/azure_aks.yaml
@@ -91,12 +99,16 @@ Download the [Helm chart][1] for Google GKE.
 
 In the Helm chart, replace the `datadog.apiKey` and `datadog.configKey` values to match your pipeline. Then, install it in your cluster with the following commands:
 
+```shell
+helm repo add datadog https://helm.datadoghq.com
 ```
-$ helm repo add datadog https://helm.datadoghq.com
-$ helm repo update
-$ helm update --install \
-    opw datadog/observability-pipelines-worker \
-    -f google_gke.yaml
+```shell
+helm repo update
+```
+```shell
+helm update --install \
+  opw datadog/observability-pipelines-worker \
+  -f google_gke.yaml
 ```
 
 [1]: /resources/yaml/observability_pipelines/quickstart/google_gke.yaml
@@ -167,8 +179,8 @@ vector:
 
 `OPW_HOST` is the `EXTERNAL-IP` of the load balancer you set up earlier. You can retrieve it by running the following command:
 
-```
-$ kubectl get svc opw-observability-pipelines-worker
+```shell
+kubectl get svc opw-observability-pipelines-worker
 ```
 
 At this point, your observability data should be going to the Worker and is available for data processing. The next section goes through what processing is included by default and the additional options that are available.
