@@ -1,5 +1,5 @@
 ---
-title: Producing delta temporality metrics with OpenTelemetry
+title: Producing Delta Temporality Metrics with OpenTelemetry
 kind: guide
 further_reading:
 - link: "/metrics/open_telemetry/otlp_metric_types"
@@ -12,20 +12,22 @@ further_reading:
 
 ## Overview
 
-The OpenTelemetry protocol (OTLP) can send [several metric types][1] some of which can have *delta* of *cumulative* [aggregation temporality][2]. Datadog products work best with delta aggregation temporality for monotonic sums, histograms, and exponential histograms. You can select which aggregation temporality to export your metrics with on your OpenTelemetry SDK or use the [OpenTelemetry Collector `cumulativetodelta` processor][3].
+The OpenTelemetry protocol (OTLP) sends [several metric types][1], some of which can have either *delta* or *cumulative* [aggregation temporality][2]. Datadog works best with delta aggregation temporality for monotonic sums, histograms, and exponential histograms. 
+
+This guide describes the implications of using cumulative aggregation temporality instead, and how to select which aggregation temporality to export your metrics with, either in the OpenTelemetry SDK or by using the [OpenTelemetry Collector `cumulativetodelta` processor][3].
 
 ## Implications of using cumulative aggregation temporality
 
-If you send OTLP monotonic sums, histograms, or exponential histograms with cumulative aggregation temporality, Datadog products take the difference between consecutive points on a timeseries. This means that:
+If you send OTLP monotonic sums, histograms, or exponential histograms with cumulative aggregation temporality, Datadog takes the difference between consecutive points on a timeseries. This means that:
 
 - Your deployment is stateful, so you need to send all points on a timeseries to the same Datadog Agent or Datadog exporter. This affects how you scale your OpenTelemetry Collector deployments.
-- Datadog products may not send the first point they receive from a given timeseries if they cannot ensure this point is the 'true' start of the timeseries. This may lead to missing points upon restarts.
+- Datadog might not send the first point it receives from a given timeseries if it cannot ensure this point is the true start of the timeseries. This may lead to missing points upon restarts.
 
 ## Configuring your OpenTelemetry SDK
 
-If you are producing OTLP metrics from an OpenTelemetry SDK, you can configure your OTLP exporter to produce these metric types with delta aggregation temporality. In some languages you can use the recommended configuration by setting the `OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE` environment variable with the (case-insensitive) `Delta` value. The list of languages with support for this environment variable can be found on the [specification compliance matrix][4].
+If you produce OTLP metrics from an OpenTelemetry SDK, you can configure your OTLP exporter to produce these metric types with delta aggregation temporality. In some languages you can use the recommended configuration by setting the `OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE` environment variable to `Delta` (case-insensitive). For a list of languages with support for this environment variable, read [the specification compliance matrix][4].
 
-If your SDK does not support this environment variable you can configure this in code. The following example configures an OTLP HTTP exporter and adds 1 to a counter every 2 seconds for a total of 5 minutes:
+If your SDK does not support this environment variable you can configure delta temporality in code. The following example configures an OTLP HTTP exporter and adds `1` to a counter every two seconds for a total of five minutes:
 
 {{< programming-lang-wrapper langs="python,go,java" >}}
 
@@ -177,13 +179,13 @@ public final class Main {
 
 {{< /programming-lang-wrapper >}}
 
-OTLP gRPC exporters can be configured in a similar fashion.
+You can configure OTLP gRPC exporters in a similar fashion.
 
 ## Converting to delta temporality on the Collector
 
-When your metrics do not come from an OpenTelemetry language library, it may be infeasible to configure them to use delta aggregation temporality. This may be the case e.g. when producing metric with other open source libraries such as Prometheus. In this situation, you may want to use the [cumulative to delta processor][3] to map your metrics to delta aggregation temporality. Your deployment will still be stateful: if your deployment has multiple Collectors, you need to use the processor on a first layer of stateful Collectors, ensuring that all points of a metric are sent to the same Collector instance.
+When your metrics do not come from an OpenTelemetry language library, it may be infeasible to configure them to use delta aggregation temporality. This may be the case, for example, when producing metrics with other open source libraries such as Prometheus. In this situation, you can use the [cumulative to delta processor][3] to map your metrics to delta aggregation temporality. Your deployment is still stateful, so if your deployment has multiple Collectors, you need to use the processor on a first layer of stateful Collectors to ensure that all points of a metric are sent to the same Collector instance.
 
-To enable the cumulative to delta processor so that it applies to all your metrics, define it with an empty configuration on the `processors` section:
+To enable the cumulative-to-delta processor so that it applies to all your metrics, define it with an empty configuration on the `processors` section:
 
 ```yaml
 processors:
@@ -192,7 +194,7 @@ processors:
 
 Finally, add it to the `processors` list on your metrics pipelines.
 
-Note that the cumulative to delta processor does not support exponential histograms, and that some fields such as the minimum and maximum can't be recovered with this approach. Prefer using the OpenTelemetry SDK approach whenever possible.
+**Note**: The cumulative-to-delta processor does not support exponential histograms. Also, some fields, such as the minimum and maximum, can't be recovered with this approach. Instead, use the OpenTelemetry SDK approach whenever possible.
 
 [1]: /metrics/open_telemetry/otlp_metric_types
 [2]: https://opentelemetry.io/docs/reference/specification/metrics/data-model/#sums
