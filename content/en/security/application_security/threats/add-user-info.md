@@ -287,7 +287,7 @@ block_request_if_user_blocked(tracer, user_id)
 
 {{< /programming-lang-wrapper >}}
 
-## Adding user events (login success, login failure, any business logic) to traces
+## Adding business logic information (login success, login failure, any business logic) to traces
 
 {{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
 {{< programming-lang lang="java" >}}
