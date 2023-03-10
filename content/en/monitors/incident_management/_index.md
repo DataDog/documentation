@@ -171,7 +171,7 @@ Assessment fields are the metadata and context that you can define per incident.
     * Datadog overrides APM service names in favor of the manually uploaded list.
     * Note that if the service is an APM service and no metrics are posted in the past seven days, it does not appear in the search results.
     * Further integrate with Datadog products and accurately assess service impact. The Services property field is automatically populated with APM services for customers using Datadog APM.
-* **Teams**: Choose from the [teams][11] defined in your organization. Before the availability of teams, users defined teams through the UI or by uploading a CSV file. 
+* **Teams**: Choose from the [teams][11] defined in your organization. It is not necessary to upload a list of teams from a CSV file. 
 
 ## Data collected
 
