@@ -18,7 +18,7 @@ This guide describes the implications of using cumulative aggregation temporalit
 
 ## Implications of using cumulative aggregation temporality
 
-If you send OTLP monotonic sums, histograms, or exponential histograms with cumulative aggregation temporality, Datadog takes the difference between consecutive points on a timeseries. This means that:
+If you opt to send OTLP monotonic sums, histograms, or exponential histograms with cumulative aggregation temporality, Datadog takes the difference between consecutive points on a timeseries. This means that:
 
 - Your deployment is stateful, so you need to send all points on a timeseries to the same Datadog Agent or Datadog exporter. This affects how you scale your OpenTelemetry Collector deployments.
 - Datadog might not send the first point it receives from a given timeseries if it cannot ensure this point is the true start of the timeseries. This may lead to missing points upon restarts.
@@ -195,6 +195,10 @@ processors:
 Finally, add it to the `processors` list on your metrics pipelines.
 
 **Note**: The cumulative-to-delta processor does not support exponential histograms. Also, some fields, such as the minimum and maximum, can't be recovered with this approach. Instead, use the OpenTelemetry SDK approach whenever possible.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /metrics/open_telemetry/otlp_metric_types
 [2]: https://opentelemetry.io/docs/reference/specification/metrics/data-model/#sums
