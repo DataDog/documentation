@@ -1,7 +1,7 @@
 ---
-title: Enabling Test Summaries in GitHub Pull Request Comments
+title: Enabling Test Summaries in GitHub Pull Requests
 kind: guide
-description: Learn how to use the GitHub integration with CI Visibility.
+description: Learn how to automatically generate test results summaries in GitHub Pull Requests.
 further_reading:
   - link: "https://www.datadoghq.com/blog/datadog-github-actions-ci-visibility/"
     tag: "Blog"
@@ -17,24 +17,28 @@ further_reading:
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-Datadog integrates with GitHub to show test result summaries and error messages for failed tests in pull request comments.
+If you're using the Test Visibility product, Datadog can integrate with GitHub to show test results summaries directly
+in your pull requests. The summaries contain an overview of the tests executions, flakiness information and
+error messages for failed tests.
+With this report, the developers get instant feedback about the results of their tests and are able to
+debug any failed/flaky tests without leaving the pull requests view.
 
 {{< img src="ci/github_comments_light.png" alt="Datadog GitHub pull request comment preview" style="width:100%;">}}
 
 ### Compatibility
 
-This integration is only available for test services hosted on `github.com`.
+This integration works with any CI provider but requires the source code to be hosted on `github.com`.
 
-## Install the GitHub integration
+## Enable test summaries
 
-To install the [GitHub integration][1]:
+Enabling test summaries is very quick and can be done in two simple steps.
+
+The first step is to install the [GitHub integration][1]:
 
 1. Navigate to the **Configuration** tab on the [GitHub integration tile][2] and click **+ Create GitHub App**.
 2. Give the application read and write permissions for pull requests.
 
-## Enable pull request comments
-
-You can enable GitHub comments from the Test Service Settings page or the commit or branch page.
+The second step is to enable test summaries for a test service from the Test Service Settings page or from the commit/branch page.
 
 ### Test Service Settings page
 
