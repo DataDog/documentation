@@ -12,7 +12,7 @@ further_reading:
   tag: "Blog"
   text: "Automate end-to-end processes with Datadog Workflows"
 - link: "https://securitylabs.datadoghq.com/"
-  tag: "Check out Security Labs"
+  tag: "Security Labs"
   text: "Security research, reports, tips, and videos from Datadog"
 ---
 
@@ -31,7 +31,7 @@ This guide walks you through best practices for getting your team up and running
 3. Check out the [CSM homepage][13] to get an overview of your organization's risks and threats.
 4. Review [500+ out-of-the-box CWS and CSPM detection rules][14].
 5. Explore [security signals][15] and review [CSPM findings][16].
-6. Set up [notification rules][17] and receive alerts via Slack, Jira, email, and more.
+6. Set up [notification rules][17] and receive alerts using Slack, Jira, email, and more.
 
 ## Phase 2: Customization
 
@@ -41,7 +41,7 @@ This guide walks you through best practices for getting your team up and running
 ## Phase 3: Reports and dashboards
 
 1. Assess your organization's posture by reviewing [compliance reports][21].
-2. Utilize out-of-the-box dashboards or [create your own][22] for faster investigations, reporting, and monitoring.
+2. Use out-of-the-box dashboards or [create your own][22] for faster investigations, reporting, and monitoring.
 
 ## Further reading
 
