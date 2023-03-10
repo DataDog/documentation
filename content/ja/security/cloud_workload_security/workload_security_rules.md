@@ -2,7 +2,7 @@
 aliases:
 - /ja/security_platform/cloud_workload_security/workload_security_rules
 further_reading:
-- link: /security/cloud_workload_security/getting_started
+- link: /security/cloud_workload_security/setup
   tag: ドキュメント
   text: クラウドワークロードセキュリティの概要
 - link: /security/cloud_workload_security/agent_expressions
@@ -81,6 +81,9 @@ Agent 式は、ホストやコンテナ内のアクティビティに基づい�
 例えば、1 つのルールを除いて、open イベントの評価に明示的なファイル名 (例えば `open.file.path == "/etc/shadow”`) を使用し、その 1 つのイベントでワイルドカード (例えば `open.file.path == "/etc/*”`) を使用すると、open イベントは承認者を生成しませんが、実行中に廃棄者を生成するかもしれません。
 
 一般的に、承認者はより強力で好まれます。承認者を使うことで、Agent は何をフィルターにかけるかを動的に学習するのではなく、見る必要のあるものだけを処理することができます。
+
+## {{% /tab %}}
+
 ### デフォルトのポリシーファイルを作成する
 
 まず、以下の手順で Agent に読み込ませるデフォルトポリシーファイルを作成します。
@@ -134,7 +137,9 @@ Agent 式は、ホストやコンテナ内のアクティビティに基づい�
 `default.policy` ファイルをターゲットホストの `{$DD_AGENT}/runtime-security.d` フォルダーにコピーします。このファイルには、ホスト上の `dd-agent` ユーザーの `read` と `write` のアクセス権が最低限与えられていることを確認してください。
 
 **注:** SCP や FTP などのユーティリティを使用する必要がある場合があります。
-{{% /tab %}}
+
+{{< /tabs >}}
+
 {{% tab "Helm" %}}
 
 1. `default.policy` を含む ConfigMap を作成します。例えば、`kubectl create configmap jdefaultpol --from-file=default.policy` とします。
