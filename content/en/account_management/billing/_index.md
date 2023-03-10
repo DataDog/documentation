@@ -61,7 +61,7 @@ Through **Edit Details**, you can add, edit or remove your billing address. You 
 
 The [Subscription Details][8] section includes the quantity, contract price and on-demand price for all committed products.
 
-<!-- [Add image] -->
+{{< img src="/account_management/billing/subscription_details.png" alt="Account Plan & Usage page highlighting Subscription Details section" style="width:90%;" >}}
 
 **Note**: If your billing is managed directly through a Datadog Partner, Subscription Details are not supported.
 
