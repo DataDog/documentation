@@ -78,15 +78,27 @@ You can prevent a step screenshot from being captured at test execution. This is
 
 ## Subtests
 
-[Subtests][4] advanced options also allow you to choose where you want your subtest to be played:
+The advanced options for [subtests][4] allow you to choose where you want your subtest to be played and set the behavior of your browser test if the subtest fails.
+
+{{< img src="synthetics/browser_tests/advanced_options/subtest_advanced.png" alt="Advanced options for subtests in browser tests" style="width:60%">}}
+
+### Set the subtest window
 
 * **Main (default)**: Subtest is played in your main window, in sequence with other steps.
 * **New**: Subtest is played in a new window, which is closed at the end of the subtest. This means the window cannot be reused.
 * **Specific window**: Subtest is played in a numbered window, which can be reused by other subtests.
 
-{{< img src="synthetics/browser_tests/advanced_options/subtest.png" alt="Subtests" style="width:60%">}}
-
 Opening your subtest in the main window means that your subtest is the continuation of your main test as it uses the URL from the previous step. Opening your subtest in a new window, or in a specific window, means that the test starts running from the subtest start URL.
+
+### Set failure behavior
+
+Click **Continue with test if this step fails** and **Consider entire test as failed if this step fails** to ensure your browser test continues if the subtest fails, or fails entirely if the subtest fails.
+
+### Override variables in subtests
+
+To override a variable value in a browser test subtest, name the variable in the subtest and use the same variable name in the parent test, and the browser test overrides the subtest value.
+
+For more information, see [Browser Test Steps][4].
 
 ## Further Reading
 

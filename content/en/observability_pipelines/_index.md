@@ -30,7 +30,7 @@ Observability Pipelines Worker is an on-premise end-to-end data pipeline solutio
 
 ### Observability Pipelines
 
-Observability Pipelines is a control plane that enables you to monitor, build, and manage all of your Observability Pipelines Worker deployments at scale.
+Using Datadog, you can monitor, build, and manage all of your Observability Pipelines Worker deployments at scale.
 
 Add your Datadog API key to your Observability Pipelines configuration to monitor your pipelines in Datadog: Identify bottlenecks and latencies, fine-tune performance, monitor data delivery, and more.
 

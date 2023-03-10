@@ -353,6 +353,21 @@ The following table shows how the injection configuration values map to the corr
 
 Tracer library configuration options that aren't mentioned in the injection configuration are still available for use through properties or environment variables the usual way.
 
+### Basic configuration settings
+
+If `BASIC` is specified as the configuration source, it is equivalent to the following YAML settings:
+
+```yaml
+---
+version: 1
+tracing_enabled: true
+log_injection_enabled: true
+health_metrics_enabled: true
+runtime_metrics_enabled: true
+tracing_sampling_rate: 1.0
+tracing_rate_limit: 1
+```
+
 ## Launch your services
 
 Launch your services, indicating the preload library configuration in the launch command:
@@ -544,6 +559,21 @@ The following table shows how the injection configuration values map to the corr
 | `tracing_log_level` | `datadog.slf4j.simpleLogger.defaultLogLevel` | `DD_TRACE_LOG_LEVEL` |   n/a    |
 
 Tracer library configuration options that aren't mentioned in the injection configuration are still available for use through properties or environment variables the usual way.
+
+### Basic configuration settings
+
+If `BASIC` is specified as the configuration source, it is equivalent to the following YAML settings:
+
+```yaml
+---
+version: 1
+tracing_enabled: true
+log_injection_enabled: true
+health_metrics_enabled: true
+runtime_metrics_enabled: true
+tracing_sampling_rate: 1.0
+tracing_rate_limit: 1
+```
 
 ## Specifying Unified Service Tags on containers
 
@@ -750,6 +780,21 @@ The following table shows how the injection configuration values map to the corr
 
 Tracer library configuration options that aren't mentioned in the injection configuration are still available for use through properties or environment variables the usual way.
 
+### Basic configuration settings
+
+If `BASIC` is specified as the configuration source, it is equivalent to the following YAML settings:
+
+```yaml
+---
+version: 1
+tracing_enabled: true
+log_injection_enabled: true
+health_metrics_enabled: true
+runtime_metrics_enabled: true
+tracing_sampling_rate: 1.0
+tracing_rate_limit: 1
+```
+
 ## Configure the Agent
 
 In the Docker compose file that launches your containers, use the following settings for the Agent, securely setting your own Datadog API key for `${DD_API_KEY}`:
@@ -785,6 +830,7 @@ In the Docker compose file that launches your containers, use the following sett
     security_opt:
       - apparmor:unconfined
 ```
+
 ## Specifying Unified Service Tags on containers
 
 If the environment variables `DD_ENV`, `DD_SERVICE`, or `DD_VERSION` are specified in a service container image, those values are used to tag telemetry from the container.
@@ -821,6 +867,24 @@ Exercise your application to start generating telemetry data, which you can see 
 
 The supported features and configuration options for the tracing library are the same for library injection as for other installation methods, and can be set with environment variables. Read the [Datadog Library configuration page][16] for your language for more details.
 
+For example, you can turn on [Application Security Monitoring][4] or [Continuous Profiler][3], each of which may have billing impact:
+
+- For **Kubernetes**, set the `DD_APPSEC_ENABLED` or `DD_PROFILING_ENABLED` container environment variables to `true`.
+
+- For **hosts and containers**, set the `DD_APPSEC_ENABLED` or `DD_PROFILING_ENABLED` container environment variables to `true`, or in the [injection configuration](#supplying-configuration-source), specify an `additional_environment_variables` section like the following YAML example: 
+
+  ```yaml
+  additional_environment_variables:
+  - key: DD_PROFILING_ENABLED
+    value: true
+  - key: DD_APPSEC_ENABLED
+    value: true 
+  ```
+
+  Only configuration keys that start with `DD_` can be set in the injection config source `additional_environment_variables` section.
+
 
 [2]: /tracing/trace_collection/
+[3]: /profiler/enabling/java/?tab=environmentvariables#installation
+[4]: /security/application_security/getting_started/java/?tab=kubernetes#get-started
 [16]: /tracing/trace_collection/library_config/

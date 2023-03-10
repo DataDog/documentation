@@ -141,7 +141,7 @@ You can [enrich your RUM event data with feature flags][6] to get visibility int
 | Attribute name                 | Type   | Description                                                                                                    |
 |--------------------------------|--------|----------------------------------------------------------------------------------------------------------------|
 | `session.id`                      | string | Randomly generated ID for each session.                                                                      |
-| `session.ip`                      | string | Client IP address. If you want to stop collecting this attribute, [contact Support][7].                                                                       |
+| `session.ip`                      | string | Client IP address. If you want to stop collecting this attribute, change the setting in your [application details][7].                                                                       |
 | `session.is_active`                      | boolean | Indicates if the session is currently active. The session ends after 4 hours of activity or 15 minutes of inactivity.                                                                     |
 | `session.type`                     | string | The type of session: `user` or `synthetics`. Sessions from [Synthetic Monitoring Browser Tests][8] are excluded from billing. |
 | `session.referrer`                | string | The URL of the previous web page from which a link to the currently requested page was followed. |
@@ -181,7 +181,7 @@ You can [enrich your RUM event data with feature flags][6] to get visibility int
 
 ### Resource timing metrics
 
-Detailed network timing data for the loading of an application’s resources are collected with the [Performance Resource Timing API][15].
+Detailed network timing data for the loading of an application's resources are collected with the [Performance Resource Timing API][15].
 
 | Metric                              | Type           | Description                                                                                                                               |
 |----------------------------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------|
@@ -276,7 +276,7 @@ Source errors include code-level information about the error. For more informati
 [4]: /data_security/real_user_monitoring/#ip-address
 [5]: /real_user_monitoring/browser/modifying_data_and_context/#identify-user-sessions
 [6]: /real_user_monitoring/guide/setup-feature-flag-data-collection
-[7]: /help/
+[7]: /data_security/real_user_monitoring/#ip-address
 [8]: /synthetics/browser_tests/
 [9]: /real_user_monitoring/browser/monitoring_page_performance/#how-loading-time-is-calculated
 [10]: https://www.w3.org/TR/paint-timing/#sec-terminology

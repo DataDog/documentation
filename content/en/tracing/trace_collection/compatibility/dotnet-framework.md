@@ -69,7 +69,7 @@ The [latest version of the .NET Tracer][5] can automatically instrument the foll
 | Elasticsearch                   | `Elasticsearch.Net` 5.3.0+                                                                | `ElasticsearchNet`   |
 | GraphQL .NET                    | `GraphQL` 2.3.0+                                                                          | `GraphQL`            |
 | gRPC                            | `Grpc.Core` 2.3.0+                                                                        | `Grpc`               |
-| HotChocolate                    | `HotChocolate` 12.0.0+                                                                    | `HotChocolate`       |
+| HotChocolate                    | `HotChocolate` 11.0.0+                                                                    | `HotChocolate`       |
 | HttpClient / HttpMessageHandler | built-in                                                                                  | `HttpMessageHandler` |
 | Kafka                           | `Confluent.Kafka` 1.4+                                                                    | `Kafka`              |
 | MongoDB                         | `MongoDB.Driver.Core` 2.1.0+                                                              | `MongoDb`            |
