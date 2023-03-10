@@ -115,8 +115,7 @@ template:
   -  ...
 ```
 
-To find a list of tracer versions for each language, check the releases page in the tracer source repositories:
-
+To find a list of tracer versions for each language, check the releases in the source repositories:
 - [Java][17]
 - [Javascript][18]
 - [Python][19]
