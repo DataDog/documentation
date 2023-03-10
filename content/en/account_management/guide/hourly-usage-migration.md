@@ -33,8 +33,6 @@ The families and usage types:
     * `analyzed_logs`
 - **application_security**
     * `app_sec_host_count`
-- **audit_logs**
-    * `lines_indexed`
 - **audit_trail**
     * `enabled`
 - **serverless**
