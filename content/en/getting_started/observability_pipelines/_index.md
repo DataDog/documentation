@@ -39,7 +39,11 @@ To run the Worker on your Kubernetes nodes, you need a minimum of two nodes with
 ### Provider-specific requirements
 {{< tabs >}}
 {{% tab "AWS EKS" %}}
-* The [AWS Load Balancer controller][1] is required. If you created your Amazon EKS cluster through the UI, then it is probably already installed.
+* The [AWS Load Balancer controller][1] is required. To see if it is installed, run the following command and look for `aws-load-balancer-controller` in the list:
+
+  ```shell
+  helm list -A
+  ```
 * Datadog recommends using Amazon EKS >= 1.16.
 
 [1]: https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html
