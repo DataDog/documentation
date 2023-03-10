@@ -35,14 +35,6 @@ For more information about IoT billing, see the [Datadog Pricing page][7].
 
 ## Plan details
 
-### View your subscription details
-
-The [Subscription Details][8] section includes the quantity, contract price and on-demand price for all committed products.
-
-<!-- [Add image] -->
-
-**Note**: If your billing is managed directly through a Datadog Partner, Subscription Details are not supported.
-
 ### Managing your payment method
 
 The [**Payment Method**][8] section contains details on your payment options. 
@@ -64,6 +56,14 @@ Through **Edit Details**, you can add, edit or remove your billing address. You 
 {{< img src="account_management/billing/BillingContactDetailsEdit.png" alt="Editing billing contact details on the Plan page" style="width:90%;" >}}
 
 **Note**: The email address does not need to be a team member within Datadog. For example, you could use `invoices@yourcompany.com`.
+
+### View your subscription details
+
+The [Subscription Details][8] section includes the quantity, contract price and on-demand price for all committed products.
+
+<!-- [Add image] -->
+
+**Note**: If your billing is managed directly through a Datadog Partner, Subscription Details are not supported.
 
 ## Payment
 
