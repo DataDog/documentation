@@ -43,7 +43,7 @@ See [Tracing Go Applications][2] for general comprehensive tracing setup documen
 
 The code sample for this tutorial is on GitHub, at [github.com/DataDog/apm-tutorial-golang.git][9]. To get started, clone the git repository:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 git clone https://github.com/DataDog/apm-tutorial-golang.git
 {{< /code-block >}}
 
@@ -54,18 +54,18 @@ This tutorial uses the `all-docker-compose.yaml` file, which builds containers f
 ### Starting and exercising the sample application
 
 1. Build the application containers by running:
-   {{< code-block lang="sh" >}}
+   {{< code-block lang="shell" >}}
    docker-compose -f all-docker-compose.yaml build
    {{< /code-block >}}
 
 1. Start the containers:
 
-   {{< code-block lang="sh" >}}
+   {{< code-block lang="shell" >}}
    docker-compose -f all-docker-compose.yaml up -d
    {{< /code-block >}}
 
 1. Verify that the containers are running with the `docker ps` command. You should see something like this:
-   {{< code-block lang="sh" disable_copy="true" >}}
+   {{< code-block lang="shell" disable_copy="true" >}}
    CONTAINER ID   IMAGE                           COMMAND                  CREATED              STATUS                          PORTS                    NAMES
    0a4704ebed09   docker-notes                    "./cmd/notes/notes"      About a minute ago   Up About a minute               0.0.0.0:8080->8080/tcp   notes
    9c428d7f7ad1   docker-calendar                 "./cmd/calendar/cale…"   About a minute ago   Up About a minute               0.0.0.0:9090->9090/tcp   calendar
@@ -92,12 +92,12 @@ This tutorial uses the `all-docker-compose.yaml` file, which builds containers f
 Run more API calls to see the application in action. When you're done, shut down and remove the containers:
 
 1. Stop the containers:
-   {{< code-block lang="sh" >}}
+   {{< code-block lang="shell" >}}
    docker-compose -f all-docker-compose.yaml down
    {{< /code-block >}}
 
 1. Make sure all of the containers have been removed:
-   {{< code-block lang="sh" >}}
+   {{< code-block lang="shell" >}}
    docker-compose -f all-docker-compose.yaml rm
    {{< /code-block >}}
 
@@ -195,7 +195,7 @@ Add the Datadog Agent in the services section of your `all-docker-compose.yaml` 
 
 Now that the Tracing Library is installed, spin up your application containers and start receiving traces. Run the following commands:
 
-{{< code-block lang="sh" >}}
+{{< code-block lang="shell" >}}
 docker-compose -f all-docker-compose.yaml build
 docker-compose -f all-docker-compose.yaml up -d
 {{< /code-block >}}
@@ -418,12 +418,12 @@ To enable tracing in the calendar application:
    {{< /code-block >}}
 
 1. Stop all running containers:
-   {{< code-block lang="sh" >}}
+   {{< code-block lang="shell" >}}
    docker-compose -f all-docker-compose.yaml down
    {{< /code-block >}}
 
 1. Spin up your application containers:
-   {{< code-block lang="sh" >}}
+   {{< code-block lang="shell" >}}
    docker-compose -f all-docker-compose.yaml build
    docker-compose -f all-docker-compose.yaml up -d
    {{< /code-block >}}

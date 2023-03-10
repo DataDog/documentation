@@ -46,7 +46,7 @@ See [Tracing Go Applications][2] for general comprehensive tracing setup documen
 
 Next, install a sample application to trace. The code sample for this tutorial can be found at [github.com/DataDog/apm-tutorial-golang.git][5]. Clone the git repository by running:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 git clone https://github.com/DataDog/apm-tutorial-golang.git
 {{< /code-block >}}
 
@@ -111,7 +111,7 @@ To start, use a Terraform script to deploy to AWS ECS:
 
 1. From the `terraform/EC2/deployment` directory, run the following commands:
 
-   ```sh
+   ```shell
    terraform init
    terraform apply
    terraform state show 'aws_alb.application_load_balancer'
@@ -324,7 +324,7 @@ To enable tracing support:
 
 Rebuild the image with tracing enabled using the [same steps as before](#build-and-upload-the-application-images):
 
-{{< code-block lang="sh" >}}
+{{< code-block lang="shell" >}}
 aws ecr get-login-password --region us-east-1 | docker login --username <YOUR_AWS_USER> --password-stdin <USER_CREDENTIALS>
 DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose -f service-docker-compose-ECS.yaml build
 docker tag docker_notes:latest <ECR_REGISTRY_URL>:notes
@@ -356,14 +356,14 @@ Next, deploy the Datadog Agent to collect the trace data from your instrumented 
 
 2. Register the Agent task definition, replacing the profile and region with your information. From the `terraform/EC2` folder, run:
 
-   {{< code-block lang="sh" >}}
+   {{< code-block lang="shell" >}}
    aws ecs register-task-definition --cli-input-json file://dd_agent_task_definition.json --profile <AWS_PROFILE> --region <AWS_REGION>{{< /code-block >}}
 
    From the output, take note of the `taskDefinitionArn` value, which is used in the next step.
 
 3. Create the Agent service on the cluster by running this command, supplying the task definition ARN from the previous step, your AWS profile, and AWS region:
 
-   {{< code-block lang="sh" >}}
+   {{< code-block lang="shell" >}}
    aws ecs create-service --cluster apm-tutorial-ec2-go --task-definition <TASK_DEFINITION_ARN> --launch-type EC2 --scheduling-strategy DAEMON --service-name datadog-agent --profile <PROFILE> --region <AWS_REGION>{{< /code-block >}}
 
 ## Launch the app to see traces
@@ -372,7 +372,7 @@ Redeploy the application and exercise the API:
 
 1. Redeploy the application to AWS ECS using the [same terraform commands as before](#deploy-the-application), but with the instrumented version of the configuration files. From the `terraform/EC2/deployment` directory, run the following commands:
 
-   ```sh
+   ```shell
    terraform init
    terraform apply
    terraform state show 'aws_alb.application_load_balancer'
@@ -440,7 +440,7 @@ This flame graph combines interactions from multiple applications:
 
 When you're done exploring, clean up all resources and delete the deployments:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 terraform destroy
 {{< /code-block >}}
 

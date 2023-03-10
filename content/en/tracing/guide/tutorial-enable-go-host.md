@@ -43,7 +43,7 @@ See [Tracing Go Applications][2] for general comprehensive tracing setup documen
 
 If you haven't installed a Datadog Agent on your machine, go to [**Integrations > Agent**][5] and select your operating system. For example, on most Linux platforms, you can install the Agent by running the following script, replacing `<YOUR_API_KEY>` with your [Datadog API key][3]:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"{{< /code-block >}}
 
 To send data to a Datadog site other than `datadoghq.com`, replace the `DD_SITE` environment variable with [your Datadog site][6].
@@ -58,13 +58,13 @@ Verify that the Agent is running and sending data to Datadog by going to [**Even
 
 Next, install a sample application to trace. The code sample for this tutorial can be found at [github.com/DataDog/apm-tutorial-golang.git][9]. Clone the git repository by running:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 git clone https://github.com/DataDog/apm-tutorial-golang.git
 {{< /code-block >}}
 
 Build the sample application using the following command. The command might take a while the first time you run it:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 make runNotes
 {{< /code-block >}}
 
@@ -87,7 +87,7 @@ The sample `notes` application is a basic REST API that stores data in an in-mem
 
 Run more API calls to see the application in action. When you're done, run the following command to exit the application:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 make exitNotes
 {{< /code-block >}}
 
@@ -95,7 +95,7 @@ make exitNotes
 
 Next, install the Go tracer. From your `apm-tutorial-golang` directory, run:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 go get gopkg.in/DataDog/dd-trace-go.v1/ddtrace
 {{< /code-block >}}
 

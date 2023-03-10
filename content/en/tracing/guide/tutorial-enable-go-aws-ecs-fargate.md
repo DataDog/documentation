@@ -46,7 +46,7 @@ See [Tracing Go Applications][2] for general comprehensive tracing setup documen
 
 Next, install a sample application to trace. The code sample for this tutorial can be found at [github.com/DataDog/apm-tutorial-golang.git][5]. Clone the git repository by running:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 git clone https://github.com/DataDog/apm-tutorial-golang.git
 {{< /code-block >}}
 
@@ -86,20 +86,20 @@ If you're not familiar with Amazon ECR, a registry for container images, it migh
 In the sample project's `/docker` directory, run the following commands:
 
 1. Authenticate with ECR by supplying your username and password in this command:
-   {{< code-block lang="sh" >}}
+   {{< code-block lang="shell" >}}
 aws ecr get-login-password --region us-east-1 | docker login --username <YOUR_AWS_USER> --password-stdin <USER_CREDENTIALS>{{< /code-block >}}
 
 2. Build a Docker image for the sample apps, adjusting the platform setting to match yours:
-   {{< code-block lang="sh" >}}
+   {{< code-block lang="shell" >}}
 DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose -f service-docker-compose-ECS.yaml build{{< /code-block >}}
 
 3. Tag the containers with the ECR destination:
-   {{< code-block lang="sh" >}}
+   {{< code-block lang="shell" >}}
 docker tag docker_notes:latest <ECR_REGISTRY_URL>:notes
 docker tag docker_calendar:latest <ECR_REGISTRY_URL>:calendar{{< /code-block >}}
 
 4. Upload the container to the ECR registry:
-   {{< code-block lang="sh" >}}
+   {{< code-block lang="shell" >}}
 docker push <ECR_REGISTRY_URL>:notes
 docker push <ECR_REGISTRY_URL>:calendar{{< /code-block >}}
 
@@ -113,7 +113,7 @@ To start, use a Terraform script to deploy to AWS ECS:
 
 1. From the `terraform/Fargate/deployment` directory, run the following commands:
 
-   ```sh
+   ```shell
    terraform init
    terraform apply
    terraform state show 'aws_alb.application_load_balancer'
@@ -149,7 +149,7 @@ To start, use a Terraform script to deploy to AWS ECS:
       This command calls both the `notes` and `calendar` services.
 
 4. After you've seen the application running, run the following command to stop it and clean up the AWS resources so that you can enable tracing:
-   {{< code-block lang="sh" >}}
+   {{< code-block lang="shell" >}}
 terraform destroy{{< /code-block >}}
 
 
@@ -330,7 +330,7 @@ To enable tracing support:
 
 Rebuild the image with tracing enabled using the [same steps as before](#build-and-upload-the-application-images):
 
-{{< code-block lang="sh" >}}
+{{< code-block lang="shell" >}}
 aws ecr get-login-password --region us-east-1 | docker login --username <YOUR_AWS_USER> --password-stdin <USER_CREDENTIALS>
 DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose -f service-docker-compose-ECS.yaml build
 docker tag docker_notes:latest <ECR_REGISTRY_URL>:notes
@@ -346,7 +346,7 @@ Redeploy the application and exercise the API:
 
 1. Redeploy the application to AWS ECS using the [same terraform commands as before](#deploy-the-application), but with the instrumented version of the configuration files. From the `terraform/Fargate/deployment` directory, run the following commands:
 
-   ```sh
+   ```shell
    terraform init
    terraform apply
    terraform state show 'aws_alb.application_load_balancer'
@@ -414,7 +414,7 @@ This flame graph combines interactions from multiple applications:
 
 When you're done exploring, clean up all resources and delete the deployments:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 terraform destroy
 {{< /code-block >}}
 
