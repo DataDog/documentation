@@ -53,7 +53,7 @@ To use Remote Configuration with CWS, add the Remote Configuration scope to a ne
 
 **Notes**:
 
-- Without Remote Configuration, updated Agent rules must be manually deployed to the Datadog Agent.
+- Without Remote Configuration, new and updated Agent rules must be manually deployed to the Datadog Agent.
 - At this time, Remote Configuration is only available for default rules. Custom rules must be manually deployed to the Datadog Agent.
 
 ### Configure the CWS Agent
@@ -137,9 +137,9 @@ docker run -d --name dd-agent \
 
 {{% tab "Daemonset" %}}
 
-Add the following settings to the `env` section of both the `security-agent` and `system-probe` in the `daemonset.yaml` file:
+Add the following settings to the `env` section of `security-agent` and `system-probe` in the `daemonset.yaml` file:
 
-```
+```bash
   # Source: datadog/templates/daemonset.yaml
   apiVersion:app/1
   kind: DaemonSet
@@ -168,9 +168,11 @@ Add the following settings to the `env` section of both the `security-agent` and
 
 {{% tab "Host (Others)" %}}
 
-For a package-based deployment, the Datadog package has to be deployed. Install the package with your package manager.
+For a package-based deployment, the Datadog package has to be deployed. Install the package with your package manager, and then update the `datadog.yaml`, `security-agent.yaml`, and `system-probe.yaml` files.
 
-```text
+**Note**: By default, Runtime Security is disabled. To enable it, both the `security-agent.yaml` and the `system-probe.yaml` files need to be updated.
+
+```bash
 # /etc/datadog-agent/datadog.yaml file 
 remote_configuration:
   ## @param enabled - boolean - optional - default: false
@@ -178,7 +180,7 @@ remote_configuration:
   enabled: true
 ```
 
-```text
+```bash
 # /etc/datadog-agent/security-agent.yaml file 
 runtime_security_config:
   ## @param enabled - boolean - optional - default: false 
@@ -186,9 +188,7 @@ runtime_security_config:
   enabled: true
 ```
 
-By default, Runtime Security is disabled. To enable it, both the `security-agent.yaml` and the `system-probe.yaml` files need to be updated. Run the following commands to enable these configurations:
-
-```text
+```bash
 # /etc/datadog-agent/system-probe.yaml file 
 runtime_security_config:
   ## @param enabled - boolean - optional - default: false 
