@@ -89,8 +89,10 @@ To select your pods for library injection, annotate them with the following, cor
 | JavaScript | `admission.datadoghq.com/js-lib.version: "<lib-version>"`     |
 | Python     | `admission.datadoghq.com/python-lib.version: "<lib-version>"` |
 
-The available library versions are listed in each container registry:
-
+The available library versions are listed in each container registry, as well as in the tracer source repositories for each language:
+- [Java][17]
+- [Javascript][18]
+- [Python][19]
 
 **Note**: If you already have an application instrumented using version X of the library, and then use library injection to instrument using version Y of the same tracer library, the tracer does not break. Rather, the library version loaded first is used. Because library injection happens at the admission controller level prior to runtime, it takes precedent over manually configured libraries.
 
@@ -114,11 +116,6 @@ template:
   containers:
   -  ...
 ```
-
-To find a list of tracer versions for each language, check the releases in the source repositories:
-- [Java][17]
-- [Javascript][18]
-- [Python][19]
 
 ### Step 3 - Tag your pods with Unified Service Tags
 
