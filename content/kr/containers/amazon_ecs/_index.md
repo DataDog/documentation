@@ -85,7 +85,7 @@ EC2 컨테이너 서비스 클러스터가 설정되어 있지 않은 경우 [EC
 작업 정의 파일이 생성되면 다음 명령을 실행하여 AWS에 등록할 수 있습니다.
 
 ```bash
-aws ecs register-task-definition --cli-input-json <path to datadog-agent-ecs.json>
+aws ecs register-task-definition --cli-input-json file://<path to datadog-agent-ecs.json>
 ```
 {{% /tab %}}
 {{% tab "Web UI" %}}

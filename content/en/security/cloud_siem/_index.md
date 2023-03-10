@@ -25,7 +25,7 @@ Threats are surfaced in Datadog as Security Signals and can be correlated and tr
 ## Get started
 
 {{< whatsnext >}}
-  {{< nextlink href="/security/cloud_siem/getting_started">}}Complete setup and configuration{{< /nextlink >}}
+  {{< nextlink href="/getting_started/cloud_siem/">}}Complete setup and configuration{{< /nextlink >}}
   {{< nextlink href="/security/cloud_siem/guide/aws-config-guide-for-cloud-siem/">}}Set up the AWS integration for Cloud SIEM{{< /nextlink >}}
   {{< nextlink href="/security/default_rules#cat-cloud-siem-log-detection">}}Start using out-of-the-box Cloud SIEM detection rules{{< /nextlink >}}
   {{< nextlink href="/security/detection_rules">}}Create your own custom detection rules{{< /nextlink >}}

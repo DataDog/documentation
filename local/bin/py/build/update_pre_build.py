@@ -2,16 +2,17 @@
 
 import sys
 import yaml
+import shutil
+import os
 
 from actions.pull_and_push_file import pull_and_push_file
 from actions.pull_and_push_folder import pull_and_push_folder
-from content_manager import prepare_content
+from content_manager import prepare_content, download_cached_content_into_repo
 from actions.integrations import Integrations
 from actions.security_rules import security_rules
 from actions.workflows import workflows
 
 from collections import OrderedDict
-from optparse import OptionParser
 from os import sep, getenv
 from os.path import (
     curdir,
@@ -22,48 +23,60 @@ from os.path import (
 
 
 class Build:
-    def __init__(self, opts, tempdir):
+    def __init__(self, tempdir):
         super().__init__()
-        self.options = opts
-        self.list_of_contents = []
+        self.github_token = getenv('GITHUB_TOKEN')
+        self.source_dir = curdir
+        self.list_of_sourced_contents = []
+        self.list_of_cached_contents = []
+        self.build_configuration = []
+        self.integration_mutations = OrderedDict()
+        self.cache_enabled = False
         self.tempdir = tempdir
+        self.relative_en_content_path = 'content/en'
         self.content_dir = "{0}{1}{2}".format(
-            abspath(normpath(options.source)),
+            abspath(normpath(self.source_dir)),
             sep,
             "content" + sep + "en" + sep,
         )
         self.extract_dir = "{0}".format(
             join(self.tempdir, "extracted") + sep
         )
-        self.build_configuration = []
+        
 
-    # Loads the configurations in the configuration/ folder and attaches it to the Build Class
-    def load_config(self, build_configuration_file_path, integration_merge_configuration_file_path):
+    def load_config(self, build_configuration_file_path, integration_merge_configuration_file_path, disable_cache_on_retry=False):
+        """
+        Loads configurations for external content to pull from source or cache, and attaches it to the Build Class
+        """
         self.build_configuration = yaml.safe_load(open(build_configuration_file_path))
 
-        self.integration_mutations = OrderedDict(yaml.safe_load(open(integration_merge_configuration_file_path)))
+        if disable_cache_on_retry:
+            self.cache_enabled = False
+        else:
+            self.cache_enabled = self.build_configuration[0].get('config', {}).get('cache_enabled', False)
+
+        if not self.cache_enabled:
+            self.integration_mutations = OrderedDict(yaml.safe_load(open(integration_merge_configuration_file_path)))
+
 
     # Get the list of content to work with after it gets updated with the local globs or the
     # downloaded globs from Github.
     def get_list_of_content(self, configuration):
-        self.list_of_contents = prepare_content(
-            configuration, self.options.token, self.extract_dir)
+        prepare_content(self, configuration, self.github_token, self.extract_dir)
 
-    # Build the documentation by injecting content from other repository.
-    def build_documentation(self, list_of_contents):
 
-        # Instanciation of the integrations class since it's needed for content management below.
-        Int = Integrations(self.options.source, self.tempdir,
-                           self.integration_mutations)
+    def build_documentation(self):
+        # Instantiation of the integrations class since it's needed for content management below.
+        Int = Integrations(self.source_dir, self.tempdir, self.integration_mutations)
 
-        # Depending of the action attached to the content the proper function is called
-        for content in list_of_contents:
-            try:
+        # Depending on the action attached to the content the proper function is called
+        for content in self.list_of_sourced_contents:
+            try:                
                 if content["action"] == "integrations":
                     Int.process_integrations(content)
                 elif content["action"] == "marketplace-integrations":
                     Int.process_integrations(content, marketplace=True)
-                elif (content["action"] == "pull-and-push-folder"):
+                elif content["action"] == "pull-and-push-folder":
                     pull_and_push_folder(content, self.content_dir)
                 elif content["action"] == "npm-integrations":
                     Int.process_integrations(content)
@@ -81,6 +94,7 @@ class Build:
                     print(
                         "\x1b[31mERROR\x1b[0m: Action {} unknown for {}".format(content["action"], content))
                     raise ValueError
+
             except Exception as e:
                 print(e)
                 if not getenv("CI_COMMIT_REF_NAME"):
@@ -93,43 +107,36 @@ class Build:
 
         # Once all the content is processed integrations are merged according to the integration_merge.yaml
         # configuration file. This needs to happen after all content is processed to avoid flacky integration merge
-        try:
-            Int.merge_integrations()
-        except Exception as e:
-            print(e)
-            if not getenv("CI_COMMIT_REF_NAME"):
-                print(
-                    "\x1b[33mWARNING\x1b[0m: Integration merge failed, documentation is now in degraded mode.")
-            else:
-                print(
-                    "\x1b[31mERROR\x1b[0m: Integration merge failed, stopping build.")
-                sys.exit(1)
+        # If the integrations are being pulled from cache we can skip this step.
+        if not self.cache_enabled:
+            try:
+                Int.merge_integrations()
+            except Exception as e:
+                print(e)
+                if not getenv("CI_COMMIT_REF_NAME"):
+                    print(
+                        "\x1b[33mWARNING\x1b[0m: Integration merge failed, documentation is now in degraded mode.")
+                else:
+                    print(
+                        "\x1b[31mERROR\x1b[0m: Integration merge failed, stopping build.")
+                    sys.exit(1)
+
+        if len(self.list_of_cached_contents) > 0:
+            try:
+                download_cached_content_into_repo(self)
+            except Exception as err:
+                print(err)
+
+                if os.path.isdir('temp'): shutil.rmtree('temp')
+
+                if not getenv("CI_COMMIT_REF_NAME"):
+                    print('Downloading cached content failed, documentation is now in degraded mode.')
+                else:
+                    print('Download cached content failed, retrying with full build from external sources.')
+                    main(True)
 
 
-if __name__ == "__main__":
-    parser = OptionParser(
-        usage="usage: %prog [options] link_type"
-    )
-    parser.add_option(
-        "-t",
-        "--token",
-        help="github access token",
-        default=None,
-    )
-    parser.add_option(
-        "-s",
-        "--source",
-        help="location of src files",
-        default=curdir,
-    )
-
-    options, args = parser.parse_args()
-    options.token = (
-        getenv("GITHUB_TOKEN", options.token)
-        if not options.token
-        else options.token
-    )
-
+def main(disable_cache_on_retry=False):
     # Those hard-written variables should be set in the Makefile config later down the road.
     build_configuration_file_path = getenv("CONFIGURATION_FILE")
     integration_merge_configuration_file_path = "./local/bin/py/build/configurations/integration_merge.yaml"
@@ -140,11 +147,11 @@ if __name__ == "__main__":
     # 2. Load all configuration needed to build the doc
     # 3. Retrieve the list of content to work with and updates it based of the configuration specification
     # 4. Actually build the documentation with the udpated list of content.
-    build = Build(options, temp_directory)
-
-    build.load_config(build_configuration_file_path,
-                      integration_merge_configuration_file_path)
-
+    build = Build(temp_directory)
+    build.load_config(build_configuration_file_path, integration_merge_configuration_file_path, disable_cache_on_retry)
     build.get_list_of_content(build.build_configuration)
+    build.build_documentation()
 
-    build.build_documentation(build.list_of_contents)
+
+if __name__ == "__main__":
+    main()

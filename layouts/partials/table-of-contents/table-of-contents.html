@@ -14,7 +14,16 @@
                 <nav id="TableOfContents">
                   <ul>
                     {{ range $data := $iterable_data }}
-                      <li><a href="#{{ $data.metadata.logical_name | anchorize }}">{{ $data.description1 }}</a></li>
+                      <li><a href="#{{ $data.metadata.logical_name | anchorize }}">{{ index $data.metadata "docs::label" }}</a></li>
+                    {{ end }}
+                  </ul>
+                </nav>
+              {{else if eq .Page.Type "schema"}}
+              {{ $schema_data := .Page.Params.list_section }}
+                <nav id="TableOfContents">
+                  <ul>
+                    {{ range $key, $value := $schema_data}}
+                      <li><a href="#{{ $key | anchorize }}">{{ $key | upper }}</a></li>
                     {{ end }}
                   </ul>
                 </nav>

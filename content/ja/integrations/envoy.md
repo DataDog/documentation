@@ -13,6 +13,8 @@ assets:
       check: envoy.server.uptime
       metadata_path: metadata.csv
       prefix: envoy.
+    process_signatures:
+    - envoy
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_name: Envoy
@@ -27,7 +29,6 @@ categories:
 - cloud
 - web
 - log collection
-- autodiscovery
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/envoy/README.md
 display_on_public_website: true
@@ -35,7 +36,7 @@ draft: false
 git_integration_title: envoy
 integration_id: envoy
 integration_title: Envoy
-integration_version: 2.4.0
+integration_version: 2.5.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -56,7 +57,6 @@ tile:
   - Category::クラウド
   - Category::Web
   - Category::ログの収集
-  - Category::オートディスカバリー
   configuration: README.md#Setup
   description: Envoy はオープンソースのエッジ/サービスプロキシを提供
   media: []
@@ -73,7 +73,7 @@ tile:
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Envoy チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 

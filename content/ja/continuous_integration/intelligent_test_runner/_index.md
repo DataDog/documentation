@@ -87,14 +87,19 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app DD_CIV
 
 Intelligent Test Runner は、以下のバージョンとテストフレームワークでのみサポートされています。
 
-* `dd-trace>=3.4.0`
 * `jest>=24.8.0`
+  * `dd-trace>=3.4.0` 以降
   * `testRunner` としてサポートされているのは `jest-circus/runner` のみです。
   * テスト環境としてサポートされているのは `jsdom` と `node` のみです。
+* `mocha>=5.2.0`
+  * `dd-trace>=3.9.0` 以降
+
+#### スイートスキップ
+Intelligent test runner for Javascript は、個々のテストではなく、_テストスイート_ (テストファイル) 全体をスキップします。
 
 ### .NET
 
-Intelligent Test Runner を有効にするには、`dd-trace` ツールのバージョンが >= 2.16.0 であること (ツールのバージョンを取得するには `dd-trace --version` を実行します)、および以下の環境変数が設定されている必要があります。
+Intelligent Test Runner を有効にするには、`dd-trace` ツールのバージョンが >= 2.22.0 であること (ツールのバージョンを取得するには `dd-trace --version` を実行します)、および以下の環境変数が設定されている必要があります。
 
 `DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (必須)
 : Agentless モードを有効または無効にします。<br/>
@@ -113,11 +118,6 @@ Intelligent Test Runner を有効にするには、`dd-trace` ツールのバー
 : 結果をアップロードする [Datadog サイト][4]。<br/>
 **デフォルト**: `datadoghq.com`<br/>
 **選択したサイト**: {{< region-param key="dd_site" code="true" >}}
-
-`DD_CIVISIBILITY_ITR_ENABLED=true` (必須)
-: Intelligent Test Runner を有効にするためのフラグ。 <br/>
-**デフォルト**: `false`<br/>
-**注**: ベータ版のみ必要
 
 これらの環境変数の設定後、通常通り [dotnet テスト][6]や [VSTest.Console.exe][7] を使ってテストを実行します。
 

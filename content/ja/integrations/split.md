@@ -56,6 +56,11 @@ tile:
 
 
 
+{{< callout url="#" btn_hidden="true" header="機能フラグ追跡のベータ版に参加しよう！">}}
+Split 機能フラグで RUM データを補強し、パフォーマンス監視や行動の変化を可視化するには、<a href="https://docs.datadoghq.com/real_user_monitoring/guide/setup-feature-flag-data-collection/">機能フラグ追跡</a>の非公開ベータ版に参加しましょう。アクセス権をリクエストするには、Datadog サポート (support@datadoghq.com) までご連絡ください。
+
+{{< /callout >}}
+
 ## 概要
 
 [Split][1] は、[ロールアウトを制御して行う][2]ためのプラットフォームです。目的の機能を簡単かつ安全な方法で顧客に提供でき、ビジネスの規模に関係なく、極めて優れたユーザーエクスペリエンスを実現すると共にリスクを軽減します。
@@ -65,6 +70,7 @@ Split を Datadog と統合すると、以下のことができます。
 - イベントストリームに Split の changelog を追加することで、機能の変更の前後関係を確認できます。
 - 機能の影響をアプリケーションのパフォーマンスと関連付けることができます。
 - 重要な問題が発生する前にそれを回避できます。Datadog のメトリクスとアラートに基づいて、機能を事前に無効にできます。
+- RUM データを Split 機能フラグで強化し、パフォーマンス監視や動作変化の可視化を実現
 
 ## セットアップ
 
@@ -80,6 +86,35 @@ Split を Datadog と統合すると、以下のことができます。
 
 Split のデータが Datadog に届きます。
 
+### 機能フラグ追跡インテグレーション
+Split の機能フラグ追跡インテグレーションは、RUM データを機能フラグで強化し、パフォーマンスの監視と行動の変化を可視化します。どのユーザーにユーザーエクスペリエンスが表示され、それがユーザーのパフォーマンスに悪影響を及ぼしているかどうかを判断します。
+
+機能フラグ追跡は、RUM ブラウザ SDK で利用可能です。詳細なセットアップ方法は、[RUM での機能フラグデータの概要][5]ガイドをご覧ください。
+
+1. ブラウザ RUM SDK バージョンを 4.25.0 以上に更新します。
+2. RUM SDK を初期化し、`["feature_flags"]` で `enableExperimentalFeatures` 初期化パラメーターを構成します。
+3. Split の SDK を初期化し、次のコードのスニペットを使用して Datadog に機能フラグの評価を報告するインプレッションリスナーを作成します
+
+```javascript
+const factory = SplitFactory({
+    core: {
+      authorizationKey: "<APP_KEY>",
+      key: "<USER_ID>",
+    },
+    impressionListener: {
+      logImpression(impressionData) {              
+          datadogRum
+              .addFeatureFlagEvaluation(
+                   impressionData.impression.feature,
+                   impressionData.impression.treatment
+              );
+     },
+  },
+});
+
+const client = factory.client();
+```
+
 ## 収集データ
 
 ### メトリクス
@@ -88,7 +123,7 @@ Split チェックには、メトリクスは含まれません。
 
 ### イベント
 
-Split リスト/リスト除外イベントを [Datadog のイベントストリーム][5]にプッシュします。
+Split リスト/リスト除外イベントを [Datadog のイベントストリーム][6]にプッシュします。
 
 ### サービスのチェック
 
@@ -96,11 +131,12 @@ Split チェックには、サービスのチェック機能は含まれませ�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
 
 [1]: http://www.split.io
 [2]: http://www.split.io/articles/controlled-rollout
 [3]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/split/images/in-split.png
 [4]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/split/images/integrations-datadog.png
-[5]: https://docs.datadoghq.com/ja/events/
-[6]: https://docs.datadoghq.com/ja/help/
+[5]: https://docs.datadoghq.com/ja/real_user_monitoring/guide/setup-feature-flag-data-collection/
+[6]: https://docs.datadoghq.com/ja/events/
+[7]: https://docs.datadoghq.com/ja/help/

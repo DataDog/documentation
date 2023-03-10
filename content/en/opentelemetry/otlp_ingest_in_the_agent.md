@@ -9,6 +9,9 @@ further_reading:
 - link: "https://www.datadoghq.com/about/latest-news/press-releases/datadog-announces-opentelemetry-protocol-support/"
   tag: "Blog"
   text: "OTLP ingestion in the Agent"
+- link: "/metrics/open_telemetry/otlp_metric_types"
+  tag: "Documentation"
+  text: "OTLP Metrics Types"
 ---
 
 
@@ -164,7 +167,7 @@ This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` 
 
 There are many other environment variables and settings supported in the Datadog Agent. To get an overview of them all, see [the configuration template][6].
 
-## Sending OTLP traces from the application to Datadog Agent
+## Sending OpenTelemetry traces and metrics to Datadog Agent
 
 {{< tabs >}}
 {{% tab "Docker" %}}
@@ -208,6 +211,13 @@ There are many other environment variables and settings supported in the Datadog
 
 <div class="alert alert-info">Check the documentation of your OTLP Library. Some of them must send traces to <code>/v1/traces</code> instead of the <code>/</code> root path.</div>
 
+## Out-of-the-box dashboards
+
+Datadog provides out-of-the-box dashboards that you can copy and customize. To use Datadog's out-of-the-box OpenTelemetry dashboards, go to **Dashboards** > **Dashboards list** and search for `opentelemetry`:
+
+{{< img src="metrics/otel/dashboard.png" alt="The Dashboards list, showing two OpenTelemetry out-of-the-box dashboards: Host Metrics and Collector Metrics." style="width:80%;">}}
+
+The **Host Metrics** dashboard is for data collected from the [host metrics receiver][12]. The **Collector Metrics** dashboard is for any other types of metrics collected, depending on which [metrics receiver][13] you choose to enable.
 
 ## Further Reading
 
@@ -219,3 +229,5 @@ There are many other environment variables and settings supported in the Datadog
 [4]: https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst
 [5]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/config.md
 [6]: https://github.com/DataDog/datadog-agent/blob/7.35.0/pkg/config/config_template.yaml
+[12]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver
+[13]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver

@@ -117,6 +117,33 @@ At any moment, from the default view entry in the Views panel:
 * **Update** your default view with the current parameters.
 * **Reset** your default view to Datadog's defaults for a fresh restart.
 
+### Notable Events
+
+Notable events are a subset of audit events that show potential critical configuration changes that could impact billing or have security implications as identified by Datadog. This allows org admins to hone in on the most important events out of the many events generated, and without having to learn about all available events and their properties.
+
+{{< img src="account_management/audit_logs/notable_events.png" alt="The audit event facet panel showing notable events checked" style="width:30%;">}}
+
+Events that match the following queries are marked as notable.
+
+| Description of audit event                                          | Query in audit explorer                           |
+| ------------------------------------------------------------------- | --------------------------------------------------|
+| Changes to log-based metrics | `@evt.name:"Log Management" @asset.type:"custom_metrics"` |
+| Changes to Log Management index exclusion filters | `@evt.name:"Log Management" @asset.type:"exclusion_filter"` |
+| Changes to Log Management indexes | `@evt.name:"Log Management" @asset.type:index` |
+| Changes to APM retention filters | `@evt.name:APM @asset.type:retention_filter` |
+| Changes to APM custom metrics | `@evt.name:APM @asset.type:custom_metrics` |
+| Changes to metrics tags | `@evt.name:Metrics @asset.type:metric @action:(created OR modified)` |
+| Creations and deletion of RUM applications | `@evt.name:"Real User Monitoring" @asset.type:real_user_monitoring_application @action:(created OR deleted)` |
+| Changes to Sensitive Data Scanner scanning groups | `@evt.name:"Sensitive Data Scanner" @asset.type:sensitive_data_scanner_scanning_group` |
+| Creation or deletion of Synthetic tests | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_test @action:(created OR deleted)` |
+
+### Inspect Changes (Diff)
+
+The Inspect Changes (Diff) tab in the audit event details panel compares the configuration changes that were made to what was previously set. It shows the changes made to dashboard, notebook, and monitor configurations, which are represented as JSON objects.
+
+{{< img src="account_management/audit_logs/inspect_changes.png" alt="The audit event side panel showing the changes to a composite monitor configuration, where the text highlighted in green is what was changed and the text highlighted in red is what was removed." style="width:70%;">}}
+
+
 ## Create a monitor
 
 To create a monitor on a type of audit trail event or by specificTrail attributes, see the [Audit Trail Monitor documentation][6]. For example, set a monitor that triggers when a specific user logs in, or set a monitor for anytime a dashboard is deleted.
@@ -146,10 +173,10 @@ Datadog Audit Trail comes with an [out-of-the-box dashboard][12] that shows vari
 [3]: https://app.datadoghq.com/event/explorer
 [4]: /logs/explorer/
 [5]: https://docs.datadoghq.com/account_management/rbac/permissions/?tab=ui#general-permissions
-[6]: /monitors/create/types/audit_trail/
+[6]: /monitors/types/audit_trail/
 [7]: /dashboards/
 [8]: /dashboards/widgets/top_list/
 [9]: /dashboards/widgets/timeseries/
 [10]: /dashboards/widgets/list/
-[11]: /dashboards/querying/#choose-the-metric-to-graph/
+[11]: /dashboards/querying/#define-the-metric/
 [12]: https://app.datadoghq.com/dash/integration/30691/datadog-audit-trail-overview?from_ts=1652452436351&to_ts=1655130836351&live=true

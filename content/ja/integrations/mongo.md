@@ -43,7 +43,7 @@ draft: false
 git_integration_title: mongo
 integration_id: mongodb
 integration_title: MongoDB
-integration_version: 4.3.0
+integration_version: 5.0.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0

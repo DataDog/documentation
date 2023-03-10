@@ -95,6 +95,6 @@ In the **full side panel** view, you can see:
 [2]: /logs/search-syntax
 [3]: /dashboards/guide/custom_time_frames
 [4]: /logs/explorer/facets/
-[5]: /logs/explorer/analytics/#patterns
+[5]: /logs/explorer/analytics/patterns
 [6]: https://app.datadoghq.com/watchdog
 [7]: /monitors/types/watchdog/

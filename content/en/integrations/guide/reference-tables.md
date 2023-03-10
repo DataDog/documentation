@@ -45,7 +45,7 @@ Reference Table names and column headers are validated using the following namin
 
 Click **New Reference Table +**, then upload a CSV file, name the appropriate columns, and define the primary key for lookups.
 
-{{< img src="integrations/guide/reference-tables/configure-enrichment-table.png" alt="The Define the Schema section showing a table with org_id marked as the primary key and columns with data for org id, org name, parent org, account owner, and csm " style="width:100%;">}}
+{{< img src="integrations/guide/reference-tables/enrichment-table-setup.png" alt="The Define the Schema section showing a table with org_id marked as the primary key and columns with data for org id, org name, parent org, account owner, and csm " style="width:100%;">}}
 
 **Note**: The manual CSV upload method supports files up to 4MB.
 
@@ -166,4 +166,4 @@ You can create monitors from the **Monitors** tab, or click on the Settings icon
 [1]: /logs/log_configuration/processors/#lookup-processor
 [2]: /account_management/audit_trail/
 [3]: /events/
-[4]: /monitors/create/types/event/
+[4]: /monitors/types/event/

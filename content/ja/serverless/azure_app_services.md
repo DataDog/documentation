@@ -130,19 +130,16 @@ Azure App Service でカスタムメトリクスおよびチェックを書き�
 メトリクスを送信するには、以下のコードを使用します。
 
 ```csharp
-try
-{
 // DogStatsd クライアントと、任意のタグを構成します
-DogStatsd.Configure(new StatsdConfig() { ConstantTags = new[] { "app:sample.mvc.aspnetcore" } });
-}
-catch (Exception ex)
+if (!DogStatsd.Configure(new StatsdConfig() { ConstantTags = new[] { "app:sample.mvc.aspnetcore" } }))
 {
-// 必要な環境変数が存在しない場合、Configure 呼び出しにより例外がスローされます。
-// 以下の環境変数は Azure App Service に存在しますが、
-// カスタムメトリクスをテストするために設定される必要があります: DD_API_KEY:{api_key}, DD_AGENT_HOST:localhost
-// 使用環境に合わせて例外を無視またはログに記録します
-Console.WriteLine(ex);
+    // 必要な環境変数がない場合、`Configure` は false を返します.
+    // 以下の環境変数は Azure App Service に存在しますが、
+    // カスタムメトリクスをテストするために設定される必要があります: DD_API_KEY:{api_key}, DD_AGENT_HOST:localhost
+    // 使用環境に合わせてエラーを無視またはログに記録します
+    Console.WriteLine("Cannot initialize DogstatsD.");
 }
+
 // メトリクスを送信します
 DogStatsd.Increment("sample.startup");
 ```
@@ -341,6 +338,9 @@ Azure App Service UI は、拡張機能の特定のバージョンをインス�
 
 多くの組織では、[Azure Resource Management (ARM) テンプレート][8]を使用して infrastructure-as-code の実践を実施しています。これらのテンプレートに App Service Extension を構築するには、デプロイメントに [Datadog の App Service Extension ARM テンプレート][9]を組み込み、App Service リソースと一緒に拡張機能を追加して構成します。
 
+[Azure Microsoft.Datadog モニタードキュメント][10]では、ARM テンプレートを Platform as Code として使用して、Liftr Datadog Resource を作成することが示されています。
+マーケットプレイスを利用することで、Datadog Resource をインストールし、ARM テンプレートとしてダウンロードすることで、自分専用のパラメーター (`enterpriseAppId`、`linkingAuthCode`、`linkingClientId` など) を確認することができます。
+
 [1]: https://docs.microsoft.com/en-us/cli/azure/install-azure-cli
 [2]: https://docs.microsoft.com/en-us/azure/cloud-shell/overview
 [3]: https://docs.microsoft.com/en-us/azure/app-service/deploy-configure-credentials
@@ -350,6 +350,7 @@ Azure App Service UI は、拡張機能の特定のバージョンをインス�
 [7]: /ja/getting_started/site/
 [8]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/overview
 [9]: https://github.com/DataDog/datadog-aas-extension/tree/master/ARM
+[10]: https://learn.microsoft.com/en-us/azure/templates/microsoft.datadog/monitors?pivots=deployment-language-arm-template
 {{% /tab %}}
 {{% tab "Java" %}}
 

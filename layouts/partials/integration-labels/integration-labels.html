@@ -19,7 +19,7 @@
                             {{ partial "img.html" (dict "root" $dot "src" "os-linux.png" "class" "static" "alt" "Linux" "width" "24") }}
                         </span>
                     {{ end }}
-                    {{ if (or (eq . "mac_os") (eq . "mac os")) }}
+                    {{ if (or (eq . "mac_os") (eq . "mac os") (eq . "macos")) }}
                         <span>
                             {{ partial "img.html" (dict "root" $dot "src" "os-macos.png" "class" "static" "alt" "Mac OS" "width" "24") }}
                         </span>

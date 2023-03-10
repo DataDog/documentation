@@ -240,6 +240,8 @@ jobs:
         - domain: <DNS_NAME (e.g. datadog-cluster-agent)>
 ```
 
+`<TOKEN>` を [Cluster Agent トークン][34]に置き換えてください。
+
 **注**: これは、Datadog Cluster Agent サービスの DNS エイリアスを作成し、静的なエイリアスを介してアドレスを取得できるようにします。BOSH DNS エイリアスに関する詳細は、BOSH ドキュメントの[サービスに対するエイリアス](https://bosh.io/docs/dns/#aliases-to-services)を参照してください。
 
 この DNS エイリアスは、以下のテンプレート例に示すように、Datadog Agent ランタイム構成の [`cluster_agent.address`](https://bosh.io/jobs/dd-agent?source=github.com/DataDog/datadog-agent-boshrelease&amp;version=4.0.0#p%3dcluster_agent.address) ジョブプロパティで指定されます。
@@ -499,3 +501,4 @@ Firehose Nozzle のアプリメトリクスで、アプリケーションメタ�
 [30]: /ja/profiler/enabling/
 [32]: /ja/integrations/faq/pivotal_architecture
 [33]: https://github.com/DataDog/datadog-cluster-agent-boshrelease/blob/master/jobs/datadog-cluster-agent/spec
+[34]: https://docs.datadoghq.com/ja/containers/cluster_agent/setup/?tab=daemonset#secure-cluster-agent-to-agent-communication

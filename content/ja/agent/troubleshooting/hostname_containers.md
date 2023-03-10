@@ -215,21 +215,27 @@ AWS、GCP、または Azure で実行する場合、Agent はホスト名を取�
 この問題に遭遇することは、通常、メタデータエンドポイントへのアクセスが制限されていることを意味します。
 例えば AWS の場合、[ホップ制限の設定][5]が原因である可能性があります。
 
-## CI 環境とサイドカーセットアップでのホスト名エラー
+## CI 環境、サイドカーセットアップ、およびコンテナランタイムにアクセスできない環境でのホスト名エラー
 
-Agent を **CI 環境** (つまり Agent はエフェメラル) またはホスト情報にアクセスできないサイドカーとして実行する場合、`DD_HOSTNAME` を以下の値に設定します。
+Agent を **CI 環境** (つまり Agent はエフェメラル) またはホスト情報にアクセスできないサイドカーとして実行する場合、2 つのオプションがあります。
+
+- `DD_HOSTNAME` (`datadog.yaml` の `hostname`) を明示的にホスト名に設定する。
 
 ```
 -e DD_HOSTNAME=$(hostname)
 ```
 
-または
+- `DD_HOSTNAME_TRUST_UTS_NAMESPACE` (`datadog.yaml` の `hostname_trust_uts_namespace`) を設定する。
+
+このオプションは、Datadog Agent **7.42.0** から利用可能です。
 
 ```
--e DD_HOSTNAME=<my_hardcoded_hostname>
+-e DD_HOSTNAME_TRUST_UTS_NAMESPACE=true
 ```
 
-**注:** Fargate のようなサーバーレスソリューションには適用されません。
+これを設定すると、Agent はコンテナ内のホスト名 (通常はコンテナ名またはポッド名) を使用します。
+
+**注**: Fargate のようなサーバーレスソリューションには適用されません。
 
 上記の解決策で Agent の設定がうまくいかない場合は、[Datadog サポートチーム][6]までご連絡ください。
 
