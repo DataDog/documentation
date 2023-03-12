@@ -36,7 +36,7 @@ Use template variables and Markdown to [customize notification messages][5]. Edi
 
 ## Investigate and remediate security signals
 
-Investigate security signals in the [Security Signals Explorer][8]. View detailed information about the impacted files or processes, related signals and logs, and remediation steps.
+Investigate and triage security signals in the [Security Signals Explorer][8]. View detailed information about the impacted files or processes, related signals and logs, and remediation steps.
 
 ## Get started
 
