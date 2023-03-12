@@ -25,7 +25,7 @@ further_reading:
 
 This guide provides an overview of the process for setting up the [AWS Integration][8] with multiple accounts within an AWS Organization.
 
-The Cloudformation StackSet template provided by Datadog automates the creation of the required IAM role and associated policies in every AWS account under an Organization or Organizational Unit (OU), and configures the accounts within Datadog, eliminating the need for manual setup. Once set up, the integration automatically starts collecting AWS metrics and events for you to start monitoring your infrastructure.
+The CloudFormation StackSet template provided by Datadog automates the creation of the required IAM role and associated policies in every AWS account under an Organization or Organizational Unit (OU), and configures the accounts within Datadog, eliminating the need for manual setup. Once set up, the integration automatically starts collecting AWS metrics and events for you to start monitoring your infrastructure.
 
 The Datadog CloudFormation StackSet performs the following steps:
 
@@ -45,7 +45,7 @@ The Datadog CloudFormation StackSet performs the following steps:
 
 ## Setup
 
-To get started, go to the [AWS Integration configuration page][1] in Datadog and click on **Add AWS Account(s)** -> **Add Multiple AWS Accounts** -> **Cloudformation StackSet**.
+To get started, go to the [AWS Integration configuration page][1] in Datadog and click on **Add AWS Account(s)** -> **Add Multiple AWS Accounts** -> **CloudFormation StackSet**.
 
 Click **Launch CloudFormation StackSet**. This opens the AWS Console and loads a new CloudFormation StackSet. Keep the default choice of `Service-managed permissions` on AWS.  
   
@@ -59,9 +59,9 @@ Copy the Template URL from the Datadog AWS integration configuration page to use
     - Select your Datadog API key on Datadog AWS integration configuration page and use it in the `DatadogApiKey` parameter in the StackSet.
     - Select your Datadog APP key on Datadog AWS integration configuration page and use it in the `DatadogAppKey` parameter in the StackSet.
 
-    - *Optionally:*
-        a. Enable [Cloud Security Posture Management][5] (CSPM) to scan your cloud environment, hosts, and containers for misconfigurations and security risks.
-        b. Disable metric collection if you do not want to monitor your AWS infrastructure (recommended only for [Cloud Cost Management][6] (CCM) or [Cloud Security Posture Management][5] (CSPM) specific use cases). 
+    - *Optionally:*  
+        a. Enable [Cloud Security Posture Management][5] (CSPM) to scan your cloud environment, hosts, and containers for misconfigurations and security risks.  
+        b. Disable metric collection if you do not want to monitor your AWS infrastructure. This is recommended only for [Cloud Cost Management][6] (CCM) or [Cloud Security Posture Management][5] (CSPM) specific use cases.
 
 3. **Configure StackSet options**  
 Keep the **Execution configuration** option as `Inactive` so the StackSet performs one operation at a time.
