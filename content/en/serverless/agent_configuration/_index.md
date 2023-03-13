@@ -9,7 +9,7 @@ The Agent's [main configuration file][1] is `datadog.yaml`. For the serverless A
 
 ### Basic configuration
 
-| Env Variable                   | Description                                                                                                                                                                                                        |
+| Environment Variable                   | Description                                                                                                                                                                                                        |
 |--------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DD_API_KEY`                   | The environment variable with your Datadog API key, plaintext (**one of the key env is required**). [More details][7]                                                                                              |
 | `DD_KMS_API_KEY`               | The environment variable with your Datadog API key, using KMS (**one of the key env is required**). [More details][7]                                                                                              |
