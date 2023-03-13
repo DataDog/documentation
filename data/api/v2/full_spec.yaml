@@ -16003,8 +16003,8 @@ paths:
           parameters:
           - name: body
             value: "{\n  \"data\": {\n    \"type\": \"fastly-accounts\",\n    \"attributes\":
-              {\n      \"api_key\": \"{{ unique_alnum }}\",\n      \"name\": \"test-name\",\n
-              \     \"services\": []\n    }\n  }\n}"
+              {\n      \"api_key\": \"{{ unique_alnum }}\",\n      \"name\": \"{{
+              unique }}\",\n      \"services\": []\n    }\n  }\n}"
           step: there is a valid "fastly_account" in the system
       x-menu-order: 2
       x-undo:
