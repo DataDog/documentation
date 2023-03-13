@@ -156,28 +156,28 @@ In some setups, the Process Agent and Cluster Agent cannot automatically detect 
 
 The following table presents the list of collected resources and the minimal Agent, Cluster Agent, and Helm chart versions for each.
 
-| Resource | Minimal Agent version | Minimal Cluster Agent version* | Minimal Helm chart version |
-|---|---|---|---|
-| ClusterRoleBindings | 7.27.0 | 1.19.0 | 2.30.9 |
-| ClusterRoles | 7.27.0 | 1.19.0 | 2.30.9 |
-| Clusters | 7.27.0 | 1.12.0 | 2.10.0 |
-| CronJobs | 7.27.0 | 1.13.1 | 2.15.5 |
-| DaemonSets | 7.27.0 | 1.14.0 | 2.16.3 |
-| Deployments | 7.27.0 | 1.11.0 | 2.10.0 |
-| Ingresses | 7.27.0 | 1.22.0 | 2.30.7 |
-| Jobs | 7.27.0 | 1.13.1 | 2.15.5 |
-| Namespaces | 7.27.0 | 7.41.0 | 2.30.9 |
-| Nodes | 7.27.0 | 1.11.0 | 2.10.0 |
-| PersistentVolumes | 7.27.0 | 1.18.0 | 2.30.4 |
-| PersistentVolumeClaims | 7.27.0 | 1.18.0 | 2.30.4 |
-| Pods | 7.27.0 | 1.11.0 | 2.10.0 |
-| ReplicaSets | 7.27.0 | 1.11.0 | 2.10.0 |
-| RoleBindings | 7.27.0 | 1.19.0 | 2.30.9 |
-| Roles | 7.27.0 | 1.19.0 | 2.30.9 |
-| ServiceAccounts | 7.27.0 | 1.19.0 | 2.30.9 |
-| Services | 7.27.0 | 1.11.0 | 2.10.0 |
-| Statefulsets | 7.27.0 | 1.15.0 | 2.20.1 |
-| VerticalPodAutoscalers | 7.27.0 | 7.43.0 | 3.6.8 |
+| Resource | Minimal Agent version | Minimal Cluster Agent version* | Minimal Helm chart version | Minimal Kubernetes version |
+|---|---|---|---|---|
+| ClusterRoleBindings | 7.27.0 | 1.19.0 | 2.30.9 | 1.14.0 |
+| ClusterRoles | 7.27.0 | 1.19.0 | 2.30.9 | 1.14.0 |
+| Clusters | 7.27.0 | 1.12.0 | 2.10.0 | 1.17.0 |
+| CronJobs | 7.27.0 | 1.13.1 | 2.15.5 | 1.16.0 |
+| DaemonSets | 7.27.0 | 1.14.0 | 2.16.3 | 1.16.0 |
+| Deployments | 7.27.0 | 1.11.0 | 2.10.0 | 1.16.0 |
+| Ingresses | 7.27.0 | 1.22.0 | 2.30.7 | 1.21.0 |
+| Jobs | 7.27.0 | 1.13.1 | 2.15.5 | 1.16.0 |
+| Namespaces | 7.27.0 | 7.41.0 | 2.30.9 | 1.17.0 |
+| Nodes | 7.27.0 | 1.11.0 | 2.10.0 | 1.17.0 |
+| PersistentVolumes | 7.27.0 | 1.18.0 | 2.30.4 | 1.17.0 |
+| PersistentVolumeClaims | 7.27.0 | 1.18.0 | 2.30.4 | 1.17.0 |
+| Pods | 7.27.0 | 1.11.0 | 2.10.0 | 1.17.0 |
+| ReplicaSets | 7.27.0 | 1.11.0 | 2.10.0 | 1.16.0 |
+| RoleBindings | 7.27.0 | 1.19.0 | 2.30.9 | 1.14.0 |
+| Roles | 7.27.0 | 1.19.0 | 2.30.9 | 1.14.0 |
+| ServiceAccounts | 7.27.0 | 1.19.0 | 2.30.9 | 1.17.0 |
+| Services | 7.27.0 | 1.11.0 | 2.10.0 | 1.17.0 |
+| Statefulsets | 7.27.0 | 1.15.0 | 2.20.1 | 1.16.0 |
+| VerticalPodAutoscalers | 7.27.0 | 7.43.0 | 3.6.8 | 1.25.0 |
 
 **Note**: For Kubernetes version 1.25 and above, the minimal Cluster Agent version required is 7.40.0.
 
