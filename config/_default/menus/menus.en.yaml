@@ -2724,48 +2724,48 @@ main:
     parent: application_security
     identifier: appsec_terms
     weight: 1
-  - name: Getting Started
-    url: security/application_security/getting_started/
+  - name: Enabling ASM
+    url: security/application_security/enabling/
     parent: application_security
     identifier: appsec_getting_started
     weight: 2
   - name: Java
-    url: security/application_security/getting_started/java/
+    url: security/application_security/enabling/java/
     parent: appsec_getting_started
     identifier: appsec_java
     weight: 201
   - name: .NET
-    url: security/application_security/getting_started/dotnet/
+    url: security/application_security/enabling/dotnet/
     parent: appsec_getting_started
     identifier: appsec_dotnet
     weight: 202
   - name: Go
-    url: security/application_security/getting_started/go/
+    url: security/application_security/enabling/go/
     parent: appsec_getting_started
     identifier: appsec_go
     weight: 203
   - name: Ruby
-    url: security/application_security/getting_started/ruby/
+    url: security/application_security/enabling/ruby/
     parent: appsec_getting_started
     identifier: appsec_ruby
     weight: 204
   - name: PHP
-    url: security/application_security/getting_started/php/
+    url: security/application_security/enabling/php/
     parent: appsec_getting_started
     identifier: appsec_php
     weight: 205
   - name: NodeJS
-    url: security/application_security/getting_started/nodejs/
+    url: security/application_security/enabling/nodejs/
     parent: appsec_getting_started
     identifier: appsec_nodejs
     weight: 206
   - name: Python
-    url: security/application_security/getting_started/python/
+    url: security/application_security/enabling/python/
     parent: appsec_getting_started
     identifier: appsec_python
     weight: 207
   - name: Serverless
-    url: security/application_security/getting_started/serverless/
+    url: security/application_security/enabling/serverless/
     parent: appsec_getting_started
     identifier: appsec_serverless
     weight: 208

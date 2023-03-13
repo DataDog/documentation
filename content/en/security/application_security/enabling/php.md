@@ -1,11 +1,12 @@
 ---
-title: PHP Getting Started with ASM
+title: Enabling ASM for PHP
 kind: documentation
 code_lang: php
 type: multi-code-lang
 code_lang_weight: 40
 aliases:
   - /security_platform/application_security/getting_started/php
+  - /security/application_security/getting_started/php
 further_reading:
     - link: "/security/application_security/add-user-info/"
       tag: "Documentation"

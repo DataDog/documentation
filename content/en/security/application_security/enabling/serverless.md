@@ -1,10 +1,12 @@
 ---
-title: AWS Lambda Getting Started with ASM
+title: Enabling ASM for AWS Lambda
 kind: documentation
 is_beta: true
 code_lang: serverless
 type: multi-code-lang
 code_lang_weight: 90
+aliases:
+  - /security/application_security/getting_started/serverless
 further_reading:
     - link: "/security/application_security/how-appsec-works/"
       tag: "Documentation"
