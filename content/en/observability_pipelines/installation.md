@@ -189,7 +189,6 @@ Before installing, make sure you have:
 
 See [this table][5] for the the list of values.
 
-
 [1]: https://helm.sh/
 [2]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
 [3]: /account_management/api-app-keys/#api-keys
