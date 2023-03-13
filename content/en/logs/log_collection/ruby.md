@@ -62,7 +62,7 @@ To the following JSON format of the log, which provides more structure:
 {{< tabs >}}
 {{% tab "Lograge" %}}
 
-1. Add the Lograge gem in your project:
+1. Add the `lograge` gem to your project:
     ```ruby
     gem 'lograge'
     ```
