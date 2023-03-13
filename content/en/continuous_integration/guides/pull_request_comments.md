@@ -18,9 +18,9 @@ further_reading:
 {{< /site-region >}}
 
 If you're using the Test Visibility product, Datadog can integrate with GitHub to show test results summaries directly
-in your pull requests. The summaries contain an overview of the tests executions, flakiness information and
+in your pull requests. The summary contains an overview of the tests executions, flakiness information and
 error messages for failed tests.
-With this report, the developers get instant feedback about the results of their tests and are able to
+With this report, the developers get instant feedback about the results of their tests, and they are able to
 debug any failed/flaky tests without leaving the pull requests view.
 
 {{< img src="ci/github_comments_light.png" alt="Datadog GitHub pull request comment preview" style="width:100%;">}}
