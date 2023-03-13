@@ -18,7 +18,7 @@ With historical views, teams rehydrate archived log events precisely by timefram
 To create a historical view:
 
 1. Navigate to the [Configuration page][2] of your Datadog account.
-2. Select the **[Rehydrate From Archives**][3] tab.
+2. Select the [**Rehydrate From Archives**][3] tab.
 3. Click **New Historical View**.
 
 Index exclusion filters do not apply to historical views, so there is no need to modify exclusion filters when you rehydrate from archives.
