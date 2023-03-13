@@ -16,15 +16,16 @@ further_reading:
 
 The heat map visualization shows metrics aggregated across many tags, such as *hosts*. The more hosts that have a particular value, the darker that square is.
 
-This visualization displays only a single metric query; additional queries are disregarded.
+The heat map visualization supports distribution metrics, high resolution data display, and pre-binned OpenTelemetry histograms.
 
-**Note**: Outlier detection cannot be performed for this visualization.
-
-{{< img src="dashboards/widgets/heat_map/heat_map.png" alt="Heat Map" >}}
+The advantages of visualizing individual points in the heat map:
+- Readily identify patterns and outliers both within and across different groups of data. 
+- The higher resolution (90,000 bins) means that it is a more readable alternative to the timeseries chart when plotting multiple series (~10). 
+- Visualize OpenTelemetry histograms out of the box, such as OpenTelemetry explicit bucket histograms.
 
 ## Setup
 
-{{< img src="dashboards/widgets/heat_map/heat_map_setup.png" alt="Heat Map setup" style="width:80%;">}}
+{{< img src="dashboards/widgets/heat_map/heat_map_setup2.png" alt="Heat Map setup" style="width:100%;">}}
 
 ### Configuration
 
@@ -33,16 +34,6 @@ Configure your metric query as usual. **Note**: This visualization type is usefu
 Make a selection in the "`avg`/`max`/`min`/`sum by`/etc." control to see your data across the associated tags.
 
 ### Options
-
-#### Event overlays
-
-Add events from related systems to add more context to your graph. For example, you can add GitHub commits, events in the staging environment, or events from containers that match a prefix. Expand the **Event Overlays** section and enter a query to display those events. Use the same query format as for the [Event Explorer][1]. See the examples in the table below:
-
-| Query                     | Description                                                      |
-|---------------------------|------------------------------------------------------------------|
-| `source:(github OR chef)` | Show events from GitHub or Chef.                                 |
-| `env:staging`             | Show events with the tag `env:staging`.                          |
-| `container_id:foo*`       | Show events from all containers with an ID beginning with `foo`. |
 
 #### Y-axis controls
 
