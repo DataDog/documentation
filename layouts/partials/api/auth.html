@@ -6,11 +6,10 @@
 <!-- Get RBAC scopes (represented by x-permission field in full-spec api data) -->
 {{ $rbac_scope := index $endpoint.action "x-permission" }}
 
-{{ if $rbac_scope }}
+{{ if and ($rbac_scope) (eq (printf "%T" $rbac_scope) "string") }}
     {{ $base_url := "account_management/rbac/permissions/" | absLangURL }}
-    {{ $slug := (replace $rbac_scope "OR(" "") }}
-    {{ $slug = anchorize (replace $slug ")" "") }}
-    {{ $href := (print $base_url "#" $slug) }}
+    {{ $slug := cond (hasPrefix $rbac_scope "OR(") (substr $rbac_scope 2) $rbac_scope }}
+    {{ $href := (print $base_url "#" (anchorize $slug)) }}
     {{ $rbac_dict := (dict "scope_type" "RBAC" "scope_name" $rbac_scope "href" $href) }}
     {{ $endpoint_auth_array = $endpoint_auth_array | append $rbac_dict }}
 {{ end }}
