@@ -1,5 +1,5 @@
 ---
-title: Heat Map Widget
+title: Heatmap Widget
 kind: documentation
 description: "Build temporal heat map over a given metric."
 widget_type: "heatmap"
@@ -14,18 +14,18 @@ further_reading:
   text: "Visualize user behavior with Datadog Heatmaps"
 ---
 
-The heat map visualization shows metrics aggregated across many tags, such as *hosts*. The more hosts that have a particular value, the darker that square is.
+The heatmap visualization shows metrics aggregated across many tags, such as *hosts*. The more hosts that have a particular value, the darker that square is.
 
-The heat map visualization supports distribution metrics, high resolution data display, and pre-binned OpenTelemetry histograms.
+The heatmap visualization supports distribution metrics, high resolution data display, and pre-binned OpenTelemetry histograms.
 
-The advantages of visualizing individual points in the heat map:
+The advantages of visualizing individual points in the heatmap:
 - Readily identify patterns and outliers both within and across different groups of data. 
 - The higher resolution (90,000 bins) means that it is a more readable alternative to the timeseries chart when plotting multiple series (~10). 
 - Visualize OpenTelemetry histograms out of the box, such as OpenTelemetry explicit bucket histograms.
 
 ## Setup
 
-{{< img src="dashboards/widgets/heat_map/heat_map_setup2.png" alt="Heat Map setup" style="width:100%;">}}
+{{< img src="dashboards/widgets/heat_map/heat_map_setup2.png" alt="Heatmap setup" style="width:100%;">}}
 
 ### Configuration
 
@@ -61,7 +61,7 @@ The following configuration options are available:
 
 This widget can be used with the **Dashboards API**. See the [Dashboards API][2] for details.
 
-See the table below for the [widget JSON schema definition][3] for the heat map widget:
+See the table below for the [widget JSON schema definition][3] for the heatmap widget:
 
 {{< dashboards-widgets-api >}}
 

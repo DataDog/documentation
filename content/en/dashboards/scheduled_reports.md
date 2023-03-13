@@ -33,7 +33,7 @@ The following widget types are supported:
 - [Distribution][2]
 - [Geomap][3]
 - [Group][4]
-- [Heat Map][5]
+- [Heatmap][5]
 - [Monitor Summary][6]
 - [Notes and Links][7]
 - [Pie Chart][16]

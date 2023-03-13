@@ -10,7 +10,7 @@ further_reading:
   text: "Building Dashboards using JSON"
 ---
 
-The Distribution visualization shows data aggregated across one or several tags, such as *hosts*. Unlike the [heat map][1], a distribution graph's x-axis is quantity rather than time.
+The Distribution visualization shows data aggregated across one or several tags, such as *hosts*. Unlike the [heatmap][1], a distribution graph's x-axis is quantity rather than time.
 
 This visualization displays only a single query; additional queries are disregarded.
 

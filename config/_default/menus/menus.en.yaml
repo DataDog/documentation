@@ -703,7 +703,7 @@ main:
     url: dashboards/widgets/group/
     parent: dashboards_widgets
     weight: 20
-  - name: Heat Map
+  - name: Heatmap
     url: dashboards/widgets/heat_map/
     parent: dashboards_widgets
     weight: 21
