@@ -94,7 +94,7 @@ An input represents which part of the request the operator is applied to. The fo
 
 4. Using a utility such as SCP or FTP, copy the `appsec-rules.json` file to your application server, for example, `/home/asm/appsec-rules.json`.
 
-5. Following the instructions in [the ASM Getting Started][3] for adding application variables in your environment, add the `DD_APPSEC_RULES` environment variable to your service with the full path to the file: 
+5. Following the instructions in [Enabling ASM][3] for adding application variables in your environment, add the `DD_APPSEC_RULES` environment variable to your service with the full path to the file: 
    ```
    DD_APPSEC_RULES=/home/asm/appsec-rules.json
    ```
@@ -111,4 +111,4 @@ Next, [configure detection rules to create security signals][1] based on those s
 
 [1]: /security/application_security/custom_rules/
 [2]: https://app.datadoghq.com/security/appsec/in-app-waf?group_by=NONE
-[3]: /security/application_security/getting_started/
+[3]: /security/application_security/enabling/
