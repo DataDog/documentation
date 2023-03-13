@@ -3,18 +3,13 @@ title: Installation
 kind: Documentation
 aliases:
     - /observability_pipelines/setup/
-    - /agent/vector_aggregation/
-    - /integrations/observability_pipelines/integrate_vector_with_datadog/
-    - /observability_pipelines/integrate_vector_with_datadog/
-    - /observability_pipelines/integrations/integrate_vector_with_datadog/
-    - /observability_pipelines/production_deployment_overview/integrate_datadog_and_the_observability_pipelines_worker/
 further_reading:
-  - link: /observability_pipelines/production_deployment_overview/
-    tag: Documentation
-    text: Taking the Worker to production environments
-  - link: /getting_started/observability_pipelines
-    tag: Documentation
-    text: Get started with the Observability Pipelines Worker and Datadog Agent
+    - link: /getting_started/observability_pipelines/
+      tag: Documentation
+      text: Get started with Observability Pipelines and Datadog
+    - link: /observability_pipelines/production_deployment_overview/
+      tag: Documentation
+      text: Taking the Worker to production environments
 ---
 
 {{< tabs >}}
@@ -30,7 +25,7 @@ Before installing, make sure you:
 
 1. Are using one of the supported Linux architectures: x86_64 or AMD64
 2. Have a valid [Datadog API key][5].
-3. Have an [Observability Pipelines Configuration][7].
+3. Have an [Observability Pipelines Configuration][6].
 
 ## Installation
 
@@ -75,7 +70,7 @@ $ DD_API_KEY=<DD_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.
     echo "<DD_OP_CONFIG>" > /var/lib/observability-pipelines-worker/observability-pipelines-worker.yaml
     ```
 
-    Where `DD_OP_CONFIG` is the content of your Observability Pipeline configuration that you created in the [Observability Pipelines UI][7].
+    Where `DD_OP_CONFIG` is the content of your Observability Pipeline configuration that you created in the [Observability Pipelines UI][6].
 
 
 5. Start the Worker:
@@ -103,17 +98,18 @@ $ DD_API_KEY=<DD_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.
 ## Configuration
 
 - The configuration file for the Worker is located at `/etc/observability-pipelines-worker/observability-pipelines-worker.yaml`.
-- See Configuration Reference for all configuration options.
-- See [Working with Data][6] and Configuration Reference for configuration examples.
+- See [Configuration Reference][7] for all configuration options.
+- See [Working with Data][8] and Configuration Reference for configuration examples.
+
 
 [1]: https://en.wikipedia.org/wiki/APT_%28software%29
 [2]: https://debian.org/
 [3]: https://ubuntu.com/
 [4]: https://linux.org/
 [5]: /account_management/api-app-keys/#api-keys
-[6]: /observability_pipelines/working_with_data/
-[7]: https://app.datadoghq.com/observability-pipelines
-
+[6]: https://app.datadoghq.com/observability-pipelines
+[7]: /observability_pipelines/configurations/
+[8]: /observability_pipelines/working_with_data/
 {{% /tab %}}
 {{% tab "Helm" %}}
 
@@ -194,12 +190,12 @@ Before installing, make sure you have:
 
 See [this table][5] for the the list of values.
 
-[1]: https://helm.sh/ 
+
+[1]: https://helm.sh/
 [2]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
 [3]: /account_management/api-app-keys/#api-keys
 [4]: https://artifacthub.io/packages/helm/datadog/observability-pipelines-worker
 [5]: https://github.com/DataDog/helm-charts/tree/main/charts/observability-pipelines-worker#values
-
 {{% /tab %}}
 {{< /tabs >}}
 

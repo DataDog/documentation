@@ -4,6 +4,9 @@ kind: Documentation
 aliases:
   - /integrations/observability_pipelines/working_with_data/
 further_reading:
+  - link: /observability_pipelines/installation/
+    tag: Documentation
+    text: Get started with Observability Pipelines and Datadog
   - link: /observability_pipelines/reference/transforms/#awsec2metadata
     tag: Documentation
     text: Parsing metadata emitted by AWS EC2 instance

@@ -64,7 +64,8 @@ Datadog Agent release numbering follows <a href="https://semver.org/">SemVer</a>
   {{< nextlink href="/agent/versions/">}}<u>Versions</u>: Agent 7 is the latest major version of the Datadog Agent. Learn about changes between major Agent versions and how to upgrade.{{< /nextlink >}}
   {{< nextlink href="/agent/troubleshooting">}}<u>Troubleshooting</u>: Find troubleshooting information for the Datadog Agent.{{< /nextlink >}}
   {{< nextlink href="/agent/guide">}}<u>Guides</u>: These are in-depth, step-by-step tutorials for using the Agent.{{< /nextlink >}}
-  {{< nextlink href="/agent/security">}}<u>Security</u>: Information on the main security capabilities and features available to customers to ensure their environment is secure.{{< /nextlink >}}
+  {{< nextlink href="/agent/security">}}<u></u>: Information on the main security capabilities and features available to customers to ensure their environment is secure.{{< /nextlink >}}
+  {{< nextlink href="/getting_started/observability_pipelines">}}<u>Configure Observability Pipelines and Datadog</u>: Deploy the Observability Pipelines Worker as an aggregator to collect, transform, and route all of your logs and metrics to any destination.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further Reading
