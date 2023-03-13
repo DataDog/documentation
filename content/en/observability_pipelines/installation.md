@@ -12,6 +12,9 @@ further_reading:
   - link: /observability_pipelines/production_deployment_overview/
     tag: Documentation
     text: Taking the Worker to production environments
+  - link: /getting_started/observability_pipelines
+    tag: Documentation
+    text: Get started with the Observability Pipelines Worker and Datadog Agent
 ---
 
 {{< tabs >}}

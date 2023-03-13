@@ -2,8 +2,6 @@
 title: Synthetic APM
 kind: documentation
 description: APM and Distributed Tracing with Synthetic Monitoring
-aliases:
-  - "/synthetics/apm"
 further_reading:
   - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
     tag: "Blog"
