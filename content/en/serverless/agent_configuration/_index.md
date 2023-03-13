@@ -5,7 +5,7 @@ kind: documentation
 
 ## Overview
 
-The Agent's [main configuration file][1] is `datadog.yaml`. For the Serverless Agent, `datadog.yaml` configuration options are passed in with environment variables. The environment variables are usually named as their config options, but in capital SNAKE_CASE
+The Agent's [main configuration file][1] is `datadog.yaml`. For the serverless Agent, `datadog.yaml` configuration options are passed in with environment variables. The environment variables are usually named as their config options in capital snake case. For example, set your Datadog API key as `DD_API_KEY`.
 
 ### Basic Configuration
 
