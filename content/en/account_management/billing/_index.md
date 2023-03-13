@@ -51,15 +51,15 @@ You can view your billing contact details on the [**Billing Contact Details**][8
 
 {{< img src="account_management/billing/BillingContactDetailsOverview.png" alt="Billing contact details on the Plan page" style="width:90%;" >}}
 
-Through **Edit Details**, you can add, edit or remove your billing address. You can also set specific email addresses to receive invoices.
+**Edit Details** to add, edit, or remove your billing address. You can also specify the email addresses where invoices should be sent.
 
 {{< img src="account_management/billing/BillingContactDetailsEdit.png" alt="Editing billing contact details on the Plan page" style="width:90%;" >}}
 
-**Note**: The email address does not need to be a team member within Datadog. For example, you could use `invoices@yourcompany.com`.
+**Note**: The email address does not need to be a team member within Datadog. For example, you could use `invoices@example.com`.
 
 ### View your subscription details
 
-The [Subscription Details][8] section includes the quantity, contract price and on-demand price for all committed products.
+The [Subscription Details][8] section includes the quantity, contract price, and on-demand price for all committed products.
 
 {{< img src="/account_management/billing/subscription_details.png" alt="Account Plan & Usage page highlighting Subscription Details section" style="width:90%;" >}}
 
@@ -79,7 +79,7 @@ See [Credit Card Billing][12] for more details.
 
 ### Invoicing
 
-If you pay by check, ACH, or wire, invoices are emailed to the billing email addresses near the 10th business day of each month. If you need an additional copy, email [Datadog billing][11]. Details on where to remit payment can be found on the invoice.
+If you pay by check, ACH, or wire, invoices are emailed to the billing email addresses near the 10th business day of each month. To request an additional copy, email [Datadog billing][11]. Details on where to remit payment can be found on the invoice.
 
 ## Contact
 
