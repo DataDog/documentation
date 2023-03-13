@@ -101,7 +101,6 @@ $ DD_API_KEY=<DD_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.
 - See [Configuration Reference][7] for all configuration options.
 - See [Working with Data][8] and Configuration Reference for configuration examples.
 
-
 [1]: https://en.wikipedia.org/wiki/APT_%28software%29
 [2]: https://debian.org/
 [3]: https://ubuntu.com/
