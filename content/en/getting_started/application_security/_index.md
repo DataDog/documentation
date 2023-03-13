@@ -10,7 +10,7 @@ further_reading:
   text: "How Application Security Management works"
 - link: "/security/application_security/getting_started"
   tag: "Documentation"
-  text: "Setting up ASM"
+  text: "Enabling ASM"
 - link: "https://securitylabs.datadoghq.com/"
   tag: "Security Labs"
   text: "Security research, reports, tips, and videos from Datadog"
@@ -34,7 +34,7 @@ In your first three days with Datadog ASM:
 
 2. **Enable ASM on the most exposed services.** Click `Enable ASM` in the ASM Status column to see the instructions or share them with the service's owner. 
 
-   Because ASM relies on the same library as APM, configuring a single environment variable is all that is needed to get ASM enabled on a service that is already sending traces. Read more in the [ASM setup documentation][2].
+   Because ASM relies on the same library as APM, configuring a single environment variable is all that is needed to get ASM enabled on a service that is already sending traces. Read more in the [Enabling ASM documentation][2].
 
 3. **Explore your first suspicious requests.** Go to **[Security --> Application Security][7]** to see suspicious requests listed in ASM.
 
