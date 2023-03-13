@@ -27,13 +27,11 @@ debug any failed/flaky tests without leaving the pull requests view.
 
 ### Compatibility
 
-This integration works with any CI provider but requires the source code to be hosted on `github.com`.
+This integration is only available for test services hosted on `github.com`.
 
 ## Enable test summaries
 
-Enabling test summaries is very quick and can be done in two simple steps.
-
-The first step is to install the [GitHub integration][1]:
+Enabling test summaries is very quick and can be done in two simple steps. The first step is to install the [GitHub integration][1]:
 
 1. Navigate to the **Configuration** tab on the [GitHub integration tile][2] and click **+ Create GitHub App**.
 2. Give the application read and write permissions for pull requests.
