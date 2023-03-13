@@ -8275,6 +8275,71 @@ api:
     url: /api/latest/incidents/
     identifier: incidents
     generated: true
+  - name: Update an existing incident integration metadata
+    url: '#update-an-existing-incident-integration-metadata'
+    identifier: incidents-update-an-existing-incident-integration-metadata
+    parent: incidents
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateIncidentIntegration
+      unstable:
+        - v2
+      order: 12
+  - name: Get incident integration metadata details
+    url: '#get-incident-integration-metadata-details'
+    identifier: incidents-get-incident-integration-metadata-details
+    parent: incidents
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetIncidentIntegration
+      unstable:
+        - v2
+      order: 11
+  - name: Delete an incident integration metadata
+    url: '#delete-an-incident-integration-metadata'
+    identifier: incidents-delete-an-incident-integration-metadata
+    parent: incidents
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteIncidentIntegration
+      unstable:
+        - v2
+      order: 13
+  - name: Create an incident integration metadata
+    url: '#create-an-incident-integration-metadata'
+    identifier: incidents-create-an-incident-integration-metadata
+    parent: incidents
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateIncidentIntegration
+      unstable:
+        - v2
+      order: 10
+  - name: Get a list of an incident's integration metadata
+    url: '#get-a-list-of-an-incidents-integration-metadata'
+    identifier: incidents-get-a-list-of-an-incidents-integration-metadata
+    parent: incidents
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListIncidentIntegrations
+      unstable:
+        - v2
+      order: 9
   - name: 'Create, update, and delete incident attachments'
     url: '#create,-update,-and-delete-incident-attachments'
     identifier: 'incidents-create,-update,-and-delete-incident-attachments'
@@ -9319,5 +9384,201 @@ api:
         - v2
       operationids:
         - ListServiceDefinitions
+      unstable: []
+      order: 1
+  - name: Team
+    url: /api/latest/team/
+    identifier: team
+    generated: true
+  - name: Update Team Permission Setting
+    url: '#update-team-permission-setting'
+    identifier: team-update-team-permission-setting
+    parent: team
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateTeamPermissionSetting
+      unstable: []
+      order: 16
+  - name: Get Team Permission Settings
+    url: '#get-team-permission-settings'
+    identifier: team-get-team-permission-settings
+    parent: team
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetTeamPermissionSettings
+      unstable: []
+      order: 15
+  - name: Update Team Membership
+    url: '#update-team-membership'
+    identifier: team-update-team-membership
+    parent: team
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateTeamMembership
+      unstable: []
+      order: 9
+  - name: Remove Team Membership
+    url: '#remove-team-membership'
+    identifier: team-remove-team-membership
+    parent: team
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - RemoveTeamMembership
+      unstable: []
+      order: 8
+  - name: Create Team Membership
+    url: '#create-team-membership'
+    identifier: team-create-team-membership
+    parent: team
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateTeamMembership
+      unstable: []
+      order: 7
+  - name: Get Team Memberships
+    url: '#get-team-memberships'
+    identifier: team-get-team-memberships
+    parent: team
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetTeamMemberships
+      unstable: []
+      order: 6
+  - name: Update a Team Link
+    url: '#update-a-team-link'
+    identifier: team-update-a-team-link
+    parent: team
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateTeamLink
+      unstable: []
+      order: 13
+  - name: Get a Team Link
+    url: '#get-a-team-link'
+    identifier: team-get-a-team-link
+    parent: team
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetTeamLink
+      unstable: []
+      order: 12
+  - name: Remove a Team Link
+    url: '#remove-a-team-link'
+    identifier: team-remove-a-team-link
+    parent: team
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - RemoveTeamLink
+      unstable: []
+      order: 14
+  - name: Create a Team Link
+    url: '#create-a-team-link'
+    identifier: team-create-a-team-link
+    parent: team
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateTeamLink
+      unstable: []
+      order: 11
+  - name: Get Team Links
+    url: '#get-team-links'
+    identifier: team-get-team-links
+    parent: team
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetTeamLinks
+      unstable: []
+      order: 10
+  - name: Update Team
+    url: '#update-team'
+    identifier: team-update-team
+    parent: team
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateTeam
+      unstable: []
+      order: 4
+  - name: Get Team
+    url: '#get-team'
+    identifier: team-get-team
+    parent: team
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetTeam
+      unstable: []
+      order: 3
+  - name: Remove Team
+    url: '#remove-team'
+    identifier: team-remove-team
+    parent: team
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - RemoveTeam
+      unstable: []
+      order: 5
+  - name: Create New Team
+    url: '#create-new-team'
+    identifier: team-create-new-team
+    parent: team
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateTeam
+      unstable: []
+      order: 2
+  - name: Get Teams
+    url: '#get-teams'
+    identifier: team-get-teams
+    parent: team
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetAllTeams
       unstable: []
       order: 1

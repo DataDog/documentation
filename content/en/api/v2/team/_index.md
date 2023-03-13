@@ -1,0 +1,4 @@
+---
+title: Team
+headless: true
+---
