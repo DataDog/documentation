@@ -57,16 +57,17 @@ To the following JSON format of the log, which provides more structure:
 }
 ```
 
-## Install and configure Lograge
+## Install and configure your logger
+
+{{< tabs >}}
+{{% tab "Lograge" %}}
 
 1. Add the Lograge gem in your project:
-
     ```ruby
     gem 'lograge'
     ```
 
 2. In your configuration file, set the following to configure Lograge:
-
     ```ruby
     # Lograge config
     config.lograge.enabled = true
@@ -88,15 +89,66 @@ To the following JSON format of the log, which provides more structure:
     end
     ```
 
-    **Note**: Lograge can also add contextual information to your logs. See the [Lograge documentation][4] for more details.
+    **Note**: Lograge can also add contextual information to your logs. See the [Lograge documentation][1] for more details.
 
-For a more in-depth example of this setup, see [How to collect, customize, and manage Rails application logs][3].
+For a more in-depth example of this setup, see [How to collect, customize, and manage Rails application logs][2].
 
+### RocketPants
+
+To configure Lograge for `rocket_pants` controllers, in the `config/initializers/lograge_rocketpants.rb` file (the location can vary depending on your project):
+
+```ruby
+# Come from here:
+#   https://github.com/Sutto/rocket_pants/issues/111
+app = Rails.application
+if app.config.lograge.enabled
+  ActiveSupport::LogSubscriber.log_subscribers.each do |subscriber|
+    case subscriber
+      when ActionController::LogSubscriber
+        Lograge.unsubscribe(:rocket_pants, subscriber)
+    end
+  end
+  Lograge::RequestLogSubscriber.attach_to :rocket_pants
+end
+```
+
+[1]: https://github.com/roidrage/lograge#installation
+[2]: https://www.datadoghq.com/blog/managing-rails-application-logs
+{{% /tab %}}
+{{% tab "Grape" %}}
+
+1. Add the `grape_logging` gem to your project:
+
+    ```ruby
+    gem 'grape_logging'
+    ```
+
+2. Add the additional configuration to Grape:
+
+    ```ruby
+    use GrapeLogging::Middleware::RequestLogger,
+          instrumentation_key: 'grape',
+          include: [ GrapeLogging::Loggers::Response.new,
+                    GrapeLogging::Loggers::FilterParameters.new ]
+    ```
+
+3. Create the `config/initializers/instrumentation.rb` file and add the following configuration:
+
+    ```ruby
+    # Subscribe to grape request and log with a logger dedicated to Grape
+    grape_logger = Logging.logger['Grape']
+    ActiveSupport::Notifications.subscribe('grape') do |name, starts, ends, notification_id, payload|
+        grape_logger.info payload
+    end
+    ```
+
+{{% /tab %}}
+{{< /tabs >}}
 ## Configure the Datadog Agent
 
-Once [log collection is enabled][8], do the following to set up [custom log collection][9] to tail your log files and send them to Datadog.
+Once [log collection is enabled][3], do the following to set up [custom log collection][4] to tail your log files and send them to Datadog.
 
-1. Create a `ruby.d/` folder in the `conf.d/` [Agent configuration directory][10]. 
+1. Create a `ruby.d/` folder in the `conf.d/` [Agent configuration directory][5]. 
 
 2. Create a `conf.yaml` file in `ruby.d/` with the following content:
 
@@ -146,66 +198,14 @@ The hash is converted into JSON and you can carry out analytics for `user` and `
   }
 }
 ```
-{{< tabs >}}
-{{% tab "RocketPants" %}}
-
-To configure Lograge for `rocket_pants` controllers, in the `config/initializers/lograge_rocketpants.rb` file (the location can vary depending on your project):
-
-```ruby
-# Come from here:
-#   https://github.com/Sutto/rocket_pants/issues/111
-app = Rails.application
-if app.config.lograge.enabled
-  ActiveSupport::LogSubscriber.log_subscribers.each do |subscriber|
-    case subscriber
-      when ActionController::LogSubscriber
-        Lograge.unsubscribe(:rocket_pants, subscriber)
-    end
-  end
-  Lograge::RequestLogSubscriber.attach_to :rocket_pants
-end
-```
-{{% /tab %}}
-{{% tab "Grape" %}}
-
-To log using Grape, add the `grape_logging` gem:
-
-```ruby
-gem 'grape_logging'
-```
-
-Pass the additional configuration to Grape:
-
-```ruby
-use GrapeLogging::Middleware::RequestLogger,
-      instrumentation_key: 'grape',
-      include: [ GrapeLogging::Loggers::Response.new,
-                 GrapeLogging::Loggers::FilterParameters.new ]
-```
-
-Create the `config/initializers/instrumentation.rb` file and add the following configuration:
-
-```ruby
-# Subscribe to grape request and log with a logger dedicated to Grape
-grape_logger = Logging.logger['Grape']
-ActiveSupport::Notifications.subscribe('grape') do |name, starts, ends, notification_id, payload|
-    grape_logger.info payload
-end
-```
-{{% /tab %}}
-{{< /tabs >}}
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/roidrage/lograge
 [2]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
-[3]: https://www.datadoghq.com/blog/managing-rails-application-logs
-[4]: https://github.com/roidrage/lograge#installation
-[5]: /agent/logs/
+[3]: /agent/logs/?tab=tailfiles#activate-log-collection
+[4]: /agent/logs/?tab=tailfiles#custom-log-collection
+[5]: /agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
 [6]: /agent/guide/agent-commands/#restart-the-agent
 [7]: /tracing/other_telemetry/connect_logs_and_traces/ruby/
-[8]: /agent/logs/?tab=tailfiles#activate-log-collection
-[9]: /agent/logs/?tab=tailfiles#custom-log-collection
-[10]: /agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
