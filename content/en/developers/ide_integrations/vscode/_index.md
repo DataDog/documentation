@@ -25,9 +25,11 @@ The Datadog extension for Visual Studio Code helps you improve your code reliabi
 In addition to running Synthetic tests on your local environments, you can use the Datadog extension to:
 
 - Set custom parameters without altering the original test definition.
-- See test results locally in VSCode and in Datadog to access additional information.
+- See test results locally in Visual Studio Code and in Datadog to access additional information.
 - Test only what matters by executing relevant tests at the same time.
 - Create a list of most frequently used Synthetic tests by adding them to **Favorites**. 
+
+// image of settings page
 
 ## Requirements
 
@@ -40,12 +42,14 @@ You can install the extension from the [VSCode Extensions Marketplace][6].
 
 // Magic VSCode download button
 
-## Run Synthetic tests
+## Run Synthetic tests locally
 
 1. After installing the Datadog extension, log in to Datadog.
 2. Select a Synthetic test to execute. You can search for specific tests by clicking the **Search** icon.
-3. Update a Synthetic test's configuration by setting the test's start URL to `localhost`.
+3. To run a test in a local environment, update a Synthetic test's configuration by changing the test's start URL to `localhost`.
 4. Execute the test.
+
+// image of test configuration panel with start URL modified to localhost
 
 ## Permissions
 
