@@ -68,7 +68,7 @@ Each query or formula, along with any [filtering tags][6], can be aliased. The a
 
 ### Event overlay
 
-You can add events from related systems to add more context to your graph, such as GitHub commits, Jenkins deploys, and Docker creation events. Click **Add Event Overlay** in the **Event Overlays** section and enter a query to display those events. The event overlay supports all data sources. This allows for easier correlation between business events and data from any Datadog product.
+The event overlay supports all data sources. This allows for easier correlation between business events and data from any Datadog service.
 
 With the event overlay, you can quickly see how actions within the organization impact application and infrastructure performance. Here are some example use cases:
 - RUM error rates with deployment events overlaid
@@ -77,6 +77,8 @@ With the event overlay, you can quickly see how actions within the organization 
 - Correlating any timeseries data with monitor alerts to ensure that Datadog has been configured with the appropriate alerts
 
 {{< img src="/dashboards/querying/event_overlay_example.png" alt="Timeseries widgets showing RUM error rates with deployment events overlaid" style="width:100%;" >}}
+
+You can add events from related systems to add more context to your graph, such as GitHub commits, Jenkins deploys, and Docker creation events. Click **Add Event Overlay** in the **Event Overlays** section and enter a query to display those events. 
 
 Use the same query format as for the [Event Explorer][7], for example:
 
