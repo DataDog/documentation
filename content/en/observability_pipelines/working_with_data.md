@@ -4,7 +4,7 @@ kind: Documentation
 aliases:
   - /integrations/observability_pipelines/working_with_data/
 further_reading:
-  - link: /observability_pipelines/installation/
+  - link: /getting_started/observability_pipelines/
     tag: Documentation
     text: Get started with Observability Pipelines and Datadog
   - link: /observability_pipelines/reference/transforms/#awsec2metadata
