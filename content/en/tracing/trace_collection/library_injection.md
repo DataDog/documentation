@@ -890,5 +890,5 @@ For example, you can turn on [Application Security Monitoring][4] or [Continuous
 
 [2]: /tracing/trace_collection/
 [3]: /profiler/enabling/java/?tab=environmentvariables#installation
-[4]: /security/application_security/getting_started/java/?tab=kubernetes#get-started
+[4]: /security/application_security/enabling/java/?tab=kubernetes#get-started
 [16]: /tracing/trace_collection/library_config/

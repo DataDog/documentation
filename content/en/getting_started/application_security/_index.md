@@ -83,7 +83,7 @@ Over the next few days:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/services?env=prod&hostGroup=%2A&lens=Security
-[2]: /security/application_security/getting_started/
+[2]: /security/application_security/enabling/
 [3]: /security/application_security/threats/setup_and_configure/#configuring-a-client-ip-header
 [4]: /security/application_security/how-appsec-works/
 [5]: /security/application_security/threats/add-user-info/
