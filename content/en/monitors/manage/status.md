@@ -45,7 +45,7 @@ Manually resolving a monitor is appropriate for cases where data is reported int
 **Typical use case**: A monitor based on error metrics that are not generated when there are no errors (`aws.elb.httpcode_elb_5xx`, or any DogStatsD counter in your code reporting an error _only when there is an error_).
 
 ### Create an incident
-Create an incident from a monitor by selecting **Declare incident**. Configure the *Declare Incident* popup modal with the severity level, notifications, and additional notes. For more information, see the [Incident Management][3] documentation.
+Create an incident from a monitor by selecting **Declare incident**. Configure the *Declare Incident* pop-up modal with the severity level, notifications, and additional notes. For more information, see the [Incident Management][3] documentation.
 
 ### Settings
 

@@ -70,7 +70,7 @@ Your saved view appears in the dropdown menu. Click on the view to retrieve your
 
 #### Delete
 
-To delete a view, click on the saved views dropdown and choose **Manage views...**. From there, a popup with your saved views is displayed with a trash bin icon next to each view. Click the appropriate trash bin icon to delete a view.
+To delete a view, click on the saved views dropdown and choose **Manage views...**. From there, a pop-up with your saved views is displayed with a trash bin icon next to each view. Click the appropriate trash bin icon to delete a view.
 
 #### Modify
 

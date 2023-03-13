@@ -146,7 +146,7 @@ At the top of the dashboard, click on settings and select *Permissions*.
 
 {{< img src="dashboards/dashboard-menu-permissions.png" alt="The dashboard settings menu" style="width:50%;">}}
 
-Use the pop up to restrict access to you, everyone in your organization with your role, or to specific roles in your organization.
+Use the pop-up to restrict access to you, everyone in your organization with your role, or to specific roles in your organization.
 
 {{< img src="dashboards/access_popup.png" alt="Dialog box with drop-down menu allowing users to choose a role to access the dashboard." style="width:70%;">}}
 
