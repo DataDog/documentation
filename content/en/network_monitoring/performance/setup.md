@@ -388,7 +388,7 @@ spec:
 To enable Network Performance Monitoring in Docker, use the following configuration when starting the container Agent:
 
 ```shell
-$ docker run --cgroupns host \
+docker run --cgroupns host \
 --pid host \
 -e DD_API_KEY="<DATADOG_API_KEY>" \
 -e DD_SYSTEM_PROBE_NETWORK_ENABLED=true \

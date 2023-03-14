@@ -3,13 +3,35 @@
     background-color: #fdfcff;
     position: relative;
     border-left: 0.5px solid #ebebeb;
+    overflow-x: scroll;
 
     .table-header {
         background-color: #f3edff;
         text-transform: uppercase;
+        width: 880px;
+
+        @include media-breakpoint-up(lg) {
+            width: 706px;
+        }
+
+        @include media-breakpoint-up(xl) {
+            width: 880px;
+        }
 
         .column {
             border: none;
+        }
+    }
+
+    .table-header + div {
+        width: 850px;
+
+        @include media-breakpoint-up(lg) {
+            width: 676px;
+        }
+
+        @include media-breakpoint-up(xl) {
+            width: 850px;
         }
     }
 
@@ -28,13 +50,17 @@
         border-right: 0.5px solid #ebebeb;
         padding: 0 15px 0 15px;
         @media (min-width: 992px) {
-            padding: 0 15px 0 30px;
+            padding: 0 10px;
         }
+    }
+
+    .column:last-of-type p {
+        overflow-wrap: break-word;
     }
 
     .key {
         position: relative;
-        word-break: break-all;
+        word-break: normal;
         .toggle-arrow {
             font-size: 18px;
             position: absolute;
@@ -52,20 +78,13 @@
                 left: -20px;
             }
         }
-
-        @media (min-width: 768px) {
-            word-break: normal;
-        }
     }
 
     p {
         margin: 4px 0;
         font-size: 16px;
         line-height: 22px;
-        overflow-wrap: break-word;
-        @media (min-width: 768px) {
-            overflow-wrap: normal;
-        }
+        overflow-wrap: normal;
     }
 
     code {

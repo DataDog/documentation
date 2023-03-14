@@ -40,7 +40,7 @@ Data privacy
 |          | [postgres][10]                 | {{< X >}}   |             |
 |          | [mysql][13]                    |             | {{< X >}}   |
 |          | [mysql2][14]                   |             | {{< X >}}   |
-| **Python:** [dd-trace-py][11] >= 1.7.0 |  |             |             |
+| **Python:** [dd-trace-py][11] >= 1.9.0 |  |             |             |
 |          | [psycopg2][12]                 | {{< X >}}   |             |
 | **Java**     |                            |             |             |
 |          | jdbc                           | Coming soon | Coming soon |

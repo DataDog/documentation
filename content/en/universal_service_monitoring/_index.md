@@ -695,7 +695,7 @@ If you are using load balancers with your services, enable additional cloud inte
 * Install the [AWS Integration][2] for visibility in AWS Load Balancer. You must also enable ENI and EC2 metric collection.
 
 Then, add the following tags to each load balancer:
-```shell
+```conf
 ENV=<env>
 SERVICE=<service>
 ```
@@ -787,7 +787,7 @@ network_config:
 {{% tab "Environment Variable" %}}
 Add the following entry:
 
-```shell
+```conf
 DD_SYSTEM_PROBE_NETWORK_HTTP_REPLACE_RULES=[{"pattern":"<drop regex>","repl":""},{"pattern":"<replace regex>","repl":"<replace pattern>"}]
 ```
 {{% /tab %}}

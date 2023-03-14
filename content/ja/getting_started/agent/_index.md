@@ -1,6 +1,4 @@
 ---
-aliases:
-- /ja/getting_started/agent
 further_reading:
 - link: /agent/basic_agent_usage/
   tag: ドキュメント
@@ -97,14 +95,14 @@ Agent は 15 秒ごとにホストデータを収集し、環境全体で何が�
 
 **注**: このチュートリアルでは、Ubuntu オペレーティングシステムを使用しています。サポートされているプラットフォームの全リストは、[基本的なエージェントの利用方法][17]ページを参照してください。
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Datadog UI で、**Integrations &gt; Agent** に移動し、Ubuntu を選択して、Ubuntu 用の Agent インストールページに移動します。Datadog Agent をホストにインストールするには、そのページにある 1 行のインストールコマンド (以下に示す例) を使用し、[Datadog API キー][16]で更新します。
 
 Ubuntu の 1 行インストールコマンドの例:
 
 ```shell
-DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
+DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
 ```
 
 最新のインストール方法については、お使いの OS のアプリ内 [Agent インストールページ][18]をご覧ください。
@@ -304,7 +302,7 @@ Agent のトラブルシューティングに関するヘルプ
 [25]: /ja/logs/
 [26]: /ja/tracing/
 [27]: /ja/infrastructure/process/?tab=linuxwindows#introduction
-[28]: /ja/tracing/trace_collection/open_standards/otlp_ingest_in_the_agent/?tab=host
+[28]: /ja/opentelemetry/otlp_ingest_in_the_agent/?tab=host
 [29]: /ja/agent/logs/advanced_log_collection/
 [30]: /ja/developers/dogstatsd/?tab=hostagent
 [31]: /ja/agent/guide/agent-commands/

@@ -1,11 +1,12 @@
 ---
-title: Node.js Getting Started with ASM
+title: Enabling ASM for NodeJs
 kind: documentation
 code_lang: nodejs
 type: multi-code-lang
 code_lang_weight: 50
 aliases:
   - /security_platform/application_security/getting_started/nodejs
+  - /security/application_security/getting_started/nodejs
 further_reading:
     - link: "/security/application_security/add-user-info/"
       tag: "Documentation"
@@ -21,7 +22,7 @@ further_reading:
       text: "Troubleshooting Application Security Management"
 ---
 
-You can monitor application security for Node.js apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate. 
+You can monitor application security for Node.js apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate.
 
 {{% appsec-getstarted %}}
 
@@ -88,10 +89,10 @@ import `dd-trace/init`;
    {{< tabs >}}
 {{% tab "Docker CLI" %}}
 
-Update your configuration container for APM by adding the following argument in your `docker run` command: 
+Update your configuration container for APM by adding the following argument in your `docker run` command:
 
 ```shell
-docker run [...] -e DD_APPSEC_ENABLED=true [...] 
+docker run [...] -e DD_APPSEC_ENABLED=true [...]
 ```
 
 {{% /tab %}}
@@ -99,7 +100,7 @@ docker run [...] -e DD_APPSEC_ENABLED=true [...]
 
 Add the following environment variable value to your container Dockerfile:
 
-```shell
+```Dockerfile
 ENV DD_APPSEC_ENABLED=true
 ```
 

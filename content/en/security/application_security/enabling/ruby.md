@@ -1,11 +1,12 @@
 ---
-title: Ruby Getting Started with ASM
+title: Enabling ASM for Ruby
 kind: documentation
 code_lang: ruby
 type: multi-code-lang
 code_lang_weight: 30
 aliases:
   - /security_platform/application_security/getting_started/ruby
+  - /security/application_security/getting_started/ruby
 further_reading:
     - link: "/security/application_security/add-user-info/"
       tag: "Documentation"
@@ -158,7 +159,7 @@ docker run [...] -e DD_APPSEC_ENABLED=true [...]
 
 Add the following environment variable value to your container Dockerfile:
 
-```shell
+```Dockerfile
 ENV DD_APPSEC_ENABLED=true
 ```
 

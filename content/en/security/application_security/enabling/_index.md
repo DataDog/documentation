@@ -1,9 +1,10 @@
 ---
-title: Getting Started
+title: Enabling ASM
 kind: documentation
 type: multi-code-lang
 aliases:
   - /security_platform/application_security/getting_started/
+  - /security/application_security/getting_started/
 further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"
@@ -28,7 +29,7 @@ further_reading:
   text: "Secure serverless applications with Datadog ASM"
 ---
 
-Set up your application to [detect and protect against threats][1] targeting your production systems, and to [manage risks][2] in your code and its open source dependencies, using the Datadog library for your application language. You can detect vulnerabilities and threats for apps hosted on a server, Docker, Kubernetes, AWS ECS, and (for supported languages) AWS Fargate.
+Enable your application to [detect and protect against threats][1] targeting your production systems, and to [manage risks][2] in your code and its open source dependencies, using the Datadog library for your application language. You can detect vulnerabilities and threats for apps hosted on a server, Docker, Kubernetes, AWS ECS, and (for supported languages) AWS Fargate.
 
 {{% appsec-getstarted %}}
 

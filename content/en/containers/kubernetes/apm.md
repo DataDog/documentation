@@ -35,7 +35,7 @@ You can configure the Agent to intake traces by using TCP (`IP:Port`), Unix Doma
 
 - If you haven't already, [install][1] the Helm chart.
 
-The default configuration creates a directory on the host and mounts it within the Agent. The Agent then creates and listens on a socket file `/var/run/datadog/apm.socket`. The application pods can then similarly mount this volume and write to this same socket. You can modify the path and socket with the `datadog.apm.hostSocketPath` and `datadog.apm.socketPath` configuration values. 
+The default configuration creates a directory on the host and mounts it within the Agent. The Agent then creates and listens on a socket file `/var/run/datadog/apm.socket`. The application pods can then similarly mount this volume and write to this same socket. You can modify the path and socket with the `datadog.apm.hostSocketPath` and `datadog.apm.socketPath` configuration values.
 
 This feature can be disabled with `datadog.apm.socketEnabled`.
 
@@ -150,7 +150,7 @@ See the sample [manifest with APM and metrics collection enabled][1] for a compl
 Then apply the new configuration:
 
 ```shell
-$ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
+kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 ```
 
 **Warning**: The `hostPort` parameter opens a port on your host. Make sure your firewall only allows access from your applications or trusted sources. If your network plugin doesn’t support `hostPorts`, add `hostNetwork: true` in your Agent pod specifications. This shares the network namespace of your host with the Datadog Agent. This also means that all ports opened on the container are opened on the host. If a port is used both on the host and in your container, they conflict (since they share the same network namespace) and the pod does not start. Some Kubernetes installations do not allow this.

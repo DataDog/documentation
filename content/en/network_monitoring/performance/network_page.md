@@ -149,7 +149,7 @@ To correctly classify traffic destinations, NPM uses the concept of a network ID
 
 In AWS and GCP, the network ID is automatically set to the VPC ID. For other environments, the network ID may be set manually, either in `datadog.yaml` as shown below, or by adding the `DD_NETWORK_ID` to the process and core Agent containers.
 
-  ```shell
+  ```yaml
   network:
      Id: <your-network-id>
   ```

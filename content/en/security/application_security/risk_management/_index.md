@@ -5,9 +5,9 @@ further_reading:
 - link: "/security/application_security/how-appsec-works/"
   tag: "Documentation"
   text: "How Application Security Works in Datadog"
-- link: "/security/application_security/getting_started/"
+- link: "/security/application_security/enabling/"
   tag: "Documentation"
-  text: "Get started by enabling Application Security on your services"
+  text: "Enabling Application Security on your services"
 ---
 
 <div class="alert alert-info">Application Security Risk Management is in beta.</a></div>
