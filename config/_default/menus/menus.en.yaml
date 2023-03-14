@@ -2104,6 +2104,21 @@ main:
     parent: ci
     identifier: intelligent_test_runner
     weight: 3
+  - name: .NET
+    url: continuous_integration/intelligent_test_runner/dotnet/
+    parent: intelligent_test_runner
+    identifier: ci_itr_dotnet
+    weight: 301
+  - name: JavaScript and TypeScript
+    url: continuous_integration/intelligent_test_runner/javascript/
+    parent: intelligent_test_runner
+    identifier: ci_itr_javascript
+    weight: 303
+  - name: Swift
+    url: continuous_integration/intelligent_test_runner/swift/
+    parent: intelligent_test_runner
+    identifier: ci_itr_swift
+    weight: 306
   - name: Guides
     url: continuous_integration/guides/
     parent: ci
