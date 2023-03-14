@@ -42,7 +42,7 @@ Si lo prefieres, puedes encontrar enlaces para descargar las últimas versiones 
 
 El instalador puede ejecutarse de la siguiente manera (como usuario root):
 
-{{< code-block lang="bash" wrap="true" >}}
+{{< code-block lang="shell" wrap="true" >}}
 installp -aXYgd ./datadog-unix-agent-<VERSION>.bff -e dd-aix-install.log datadog-unix-agent
 {{< /code-block >}}
 
@@ -52,7 +52,7 @@ El Agent se instalará en `/opt/datadog-agent`.
 
 Puedes encontrar el log de la instalación del Agent en el archivo `dd-aix-install.log`. Para desactivar este log, elimina el parámetro `-e dd-aix-install.log` en el comando de instalación.
 
-## Commandos
+## Comandos
 
 | Descripción                     | Comando (como root)           |
 |---------------------------------|-----------------------------|
@@ -125,13 +125,13 @@ También existen opciones para ejecutar el Agent con el conocido supervisor Pyth
 
 Para eliminar un Agent ya instalado, ejecuta el siguiente comando `installp`:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 installp -e dd-aix-uninstall.log -uv datadog-unix-agent
 {{< /code-block >}}
 
 Nota: Los logs de desinstalación del Agent se pueden encontrar en el archivo `dd-aix-install.log`. Para desactivar este log, elimina el parámetro `-e` en el comando de desinstalación.
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## Leer más
 
 {{< partial name="whats-next/whats-next.html" >}}
 
