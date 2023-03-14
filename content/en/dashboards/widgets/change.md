@@ -17,7 +17,7 @@ further_reading:
 ---
 The Change graph shows you the change in a metric over a period of time:
 
-{{< img src="/dashboards/widgets/change/change_widget.png" alt="Your image description" style="width:100%;" >}}
+{{< img src="/dashboards/widgets/change/change_widget.png" alt="Example of a change widget for jvm.heap_memory metric" style="width:100%;" >}}
 
 ## Setup
 
