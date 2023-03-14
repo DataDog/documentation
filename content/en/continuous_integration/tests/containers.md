@@ -148,6 +148,20 @@ Additionally, you need to pass in the environment variables required to configur
 
 [1]: https://circleci.com/docs/2.0/env-vars/#built-in-environment-variables
 {{% /tab %}}
+{{% tab "Codefresh" %}}
+
+- `CF_BUILD_ID`
+- `CF_PIPELINE_NAME`
+- `CF_BUILD_URL`
+- `CF_STEP_NAME`
+- `CF_BRANCH`
+- `CF_REVISION`
+
+[Full list of build environment variables provided by CircleCI][1]
+
+
+[1]: https://circleci.com/docs/2.0/env-vars/#built-in-environment-variables
+{{% /tab %}}
 {{% tab "GitHub Actions" %}}
 
 - `GITHUB_ACTION`
