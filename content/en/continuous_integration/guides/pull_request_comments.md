@@ -38,7 +38,7 @@ You can enable test summaries in pull requests with the following steps:
    2. Give the application read and write permissions for pull requests.
 2. Enable test summaries for a test service. It can be done from the Test Service Settings page or from the commit/branch page.
 
-### Test Service Settings page
+### Test service settings page
 
 1. Navigate to the [Test Service Settings page][3] and search for the repository or test service.
 2. Click on the toggle under the **GitHub Comments** column for the desired service.
