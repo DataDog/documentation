@@ -160,10 +160,14 @@ main:
     url: getting_started/database_monitoring/
     parent: getting_started
     weight: 17
+  - name: Cloud Security Management
+    url: getting_started/cloud_security_management/
+    parent: getting_started
+    weight: 18
   - name: Cloud SIEM
     url: getting_started/cloud_siem/
     parent: getting_started
-    weight: 18
+    weight: 19
   - name: Application Security Management
     url: getting_started/application_security/
     parent: getting_started
