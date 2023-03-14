@@ -24,7 +24,7 @@ further_reading:
 You may need to monitor user journeys located behind a login. There are two ways to ensure that your Datadog browser tests can go through the login steps of your application to perform validation on post-login pages:
 
 - [Include the login steps in your browser test recording](#include-the-login-steps-in-your-recording)
-- [Leverage advanced options in your browser tests](#leverage-test-configuration-options)
+- [Leverage advanced options in your browser tests](#leverage-browser-test-configuration-options)
 
 To ensure your credentials are securely stored and obfuscated across the application, use [obfuscated global variables](#account-security).
 
