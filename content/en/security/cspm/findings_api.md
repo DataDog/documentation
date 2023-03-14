@@ -30,40 +30,36 @@ Get a list of CSPM findings.
 
 #### Query parameters
 
-| Parameter                       | Type             | Description                                                                                               |
-|---------------------------------|------------------|-----------------------------------------------------------------------------------------------------------|
-| `filter[evaluation]`            | string           | See findings which pass or fail.                                                                          |
-| `filter[evaluation_changed_at]` | integer          | See findings that have changed evaluation on a date (in unix ms) with optional comparison operator.       |
-| `filter[muted]`                 | boolean          | See findings that are muted or not muted.                                                                 |
-| `filter[discovery_timestamp]`   | string           | See findings for resources that were discovered on a date (in unix ms) with optional comparison operator. |
-| `filter[resource_type]`         | string           | See findings for a specific resource type.                                                                |
-| `filter[rule_id]`               | string           |  See findings for a rule with a specific rule ID                                                                                                         |
-| `filter[rule_name]`             | string           | See findings for a rule with a specific name.                                                             |
-| `filter[status]`                | string           | See findings with a specified status                                                                      |
-| `filter[tags]`                  | array of strings | See the next page of findings pointed to by the cursor (repeatable).                                      |
-| `limit`                         | integer          | Limit the number of findings returned. The default value is `100`. Maximum value is `1000`.               |
-| `page[cursor]`                  | string           | See the next page of findings pointed to by the cursor.                                                   |
-| `snapshot_timestamp`            | integer          | Return findings for a given snapshot time (unix ms).                                                      |
+| Parameter                       | Type             | Description                                                                                                                                 |
+|---------------------------------|------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| `filter[evaluation]`            | string           | Set to `pass` to return only pass findings. Set to `fail` to return failed findings.                                                        |
+| `filter[evaluation_changed_at]` | integer          | Return findings that have changed from pass to fail or vice versa on a specified date (unix ms) or date range (using comparison operators). |
+| `filter[muted]`                 | boolean          | Set to `true` to return findings that are muted. Set to `false` to return unmuted findings.                                                 |
+| `filter[discovery_timestamp]`   | string           | Return findings that were found on a specified date (unix ms) or date range (using comparison operators).                                   |
+| `filter[resource_type]`         | string           | Specifies which resource types should be included in the response.                                                                          |
+| `filter[rule_id]`               | string           | Returns findings for the specified rule ID.                                                                                                 |
+| `filter[rule_name]`             | string           | Return findings for the specified rule.                                                                                                     |
+| `filter[status]`                | string           | Return only findings with the specified status. Allowed enum values: `critical`, `high`, `medium`, `low`, `info`                            |
+| `filter[tags]`                  | array of strings | Return the next page of findings pointed to by the cursor (repeatable).                                                                     |
+| `limit`                         | integer          | Limit the number of findings returned. The default value is `100`. Maximum value is `1000`.                                                 |
+| `page[cursor]`                  | string           | Return the next page of findings pointed to by the cursor.                                                                                  |
+| `snapshot_timestamp`            | integer          | Return findings for a given snapshot of time (unix ms).                                                                                     |
 
 ### Pagination
 
-The list endpoint returns 100 items per page by default. The limit can be increased to a maximum of 1000, by passing a limit query parameter. For example: `?limit=500`.
+The endpoint returns 100 items per page by default. This limit can be increased to a maximum of 1000, by passing a limit query parameter. For example: `?limit=500`.
 
-The API is using cursor based pagination. To go to the next page, fetch meta.page.cursor and pass it as a query parameter: `?cursor=eyJh…`.
+The API uses cursor-based pagination. To go to the next page, fetch `meta.page.cursor` and pass it as a query parameter: `?cursor=eyJh...`.
 
 ### Filtering
 
-Filters can be applied in the list endpoint using query parameters against all response attributes. They are applied as URL query parameters, using the following pattern: 
+Filters can be applied by appending query parameters to the URL.
 
 - Using a single filter: `?filter[attribute_key]=attribute_value`
-- Chaining filters: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value …`
+- Chaining filters: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`
 - Filtering on tags: `?filter[tags]=tag_key:tag_value`
 
-#### Do more with filters
-
-- Filters against integers support comparison operators (>, <=...). This is particularly useful when filtering by date (evaluation_changed_at, resource_discovery_timestamp) 
-- Filters support negation, to exclude findings matching a specific attribute.
-    - E.g. ?filter[resource_type]=-aws_s3_bucket
+Query parameters of type `integer` support comparison operators (`>`, `=`, `-`, `<=`). This is particularly useful when filtering by `evaluation_changed_at` or `resource_discovery_timestamp`. For example: `?filter[resource_type]=-aws_s3_bucket`.
 
 ### Request
 
@@ -81,10 +77,10 @@ The response includes an array of finding objects, pagination metadata, and a co
 
 Each finding object contains the following:
 
-- The finding ID that can be used to fetch the full finding details
-- Core attributes, like status, evaluation, high level resource details, muted state, rule details
-- Timestamps like evaluation_changed_at and resource_discovery_date
-- An array of all associated tags
+- The finding ID that can be used to retrieve the full finding details.
+- Core attributes, including status, evaluation, high-level resource details, muted state, and rule details.
+- `evaluation_changed_at` and `resource_discovery_date` time stamps.
+- An array of associated tags.
 
 #### Sample response 200 OK
 
@@ -163,12 +159,11 @@ Get the full details for a finding.
 
 The response includes a finding object that contains the following:
 
-- The finding ID that can be used to fetch the full finding details
-- Core attributes, like status, evaluation, high level resource details, muted state, rule details
-- Timestamps like evaluation_changed_at and resource_discovery_date
-- An array of all associated tags
-
-When fetching an individual finding, you will get the above, along with the rule message (description, remediation guidelines) along with the full resource configuration.
+- Core attributes, including status, evaluation, high-level resource details, muted state, and rule details.
+- `evaluation_changed_at` and `resource_discovery_date` time stamps.
+- An array of associated tags.
+- Rule message details (description and remediation guidelines).
+- The full resource configuration.
 
 #### Sample response 200 OK
 
