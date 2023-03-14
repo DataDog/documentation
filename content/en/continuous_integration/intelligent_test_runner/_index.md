@@ -11,7 +11,7 @@ further_reading:
     text: "Monitor all your CI pipelines with Datadog"
 ---
 
-<div class="alert alert-warning">Intelligent Test runner is currently a beta product.</div>
+<div class="alert alert-warning">Intelligent Test runner is a beta product.</div>
 
 Intelligent Test Runner is Datadog's test impact analysis solution. It automatically selects and runs only the relevant tests needed to validate any given commit, enabling you to reduce testing downtime while maintaining test coverage.
 
@@ -56,13 +56,13 @@ You can explore the time savings you are getting from Intelligent Test Runner by
 
 {{< img src="continuous_integration/itr_commit.png" alt="Test commit page with intelligent test runner" style="width:80%;">}}
 
-{{< img src="continuous_integration/itr_savings.png" alt="Intelligent test runner enabled in a test session showing its time savings."  style="width:80%;">}}
+{{< img src="continuous_integration/itr_savings.png" alt="Intelligent test runner enabled in a test session showing its time savings." style="width:80%;">}}
 
 When Intelligent Test Runner is active and skipping tests, you can see a purple text which displays the amount of time you saved on each test session or on each commit. The duration bar also changes color to purple so you can quickly identify which test sessions were using Intelligent Test Runner in the [Test Runs][3] page.
 
 ## Explore adoption and global savings
 
-You can also track you organization's savings and adoption of Intelligent Test Runner through our out-of-the-box [Intelligent Test Runner dashboard][4], which includes widgets to track your overall savings as well as a per-repository, per-committer and per-service view of the data so you can understand where and who is getting the most out of Intelligent Test Runner.
+You can also track you organization's savings and adoption of Intelligent Test Runner through the out-of-the-box [Intelligent Test Runner dashboard][4], which includes widgets to track your overall savings as well as a per-repository, per-committer and per-service view of the data so you can understand where and who is getting the most out of Intelligent Test Runner.
 
 {{< img src="continuous_integration/itr_dashboard1.png" alt="Intelligent Test Runner dashboard" style="width:80%;">}}
 
