@@ -30,7 +30,7 @@ You can monitor the security of your Python apps running in Docker, Kubernetes, 
 
 1. **Update your Datadog Python library package** to at least version 1.2.2 (at least version 1.5.0 for Risk Management vulnerability detection features). Run the following:
    ```shell
-    pip install --upgrade ddtrace
+   pip install --upgrade ddtrace
    ```
 
    For information about which language and framework versions are supported by the library, see the [Compatibility][1] section of the ASM Setup and Configure documentation.
@@ -56,7 +56,7 @@ You can monitor the security of your Python apps running in Docker, Kubernetes, 
 
    Add the following environment variable value to your container Dockerfile:
 
-   ```shell
+   ```Dockerfile
    ENV DD_APPSEC_ENABLED=true
    ```
 

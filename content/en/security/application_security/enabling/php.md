@@ -39,10 +39,10 @@ You can monitor application security for PHP apps running in host-based or conta
    {{< tabs >}}
 {{% tab "Docker CLI" %}}
 
-Update your configuration container for APM by adding the following argument in your `docker run` command: 
+Update your configuration container for APM by adding the following argument in your `docker run` command:
 
 ```shell
-docker run [...] -e DD_APPSEC_ENABLED=true [...] 
+docker run [...] -e DD_APPSEC_ENABLED=true [...]
 ```
 
 {{% /tab %}}
@@ -50,7 +50,7 @@ docker run [...] -e DD_APPSEC_ENABLED=true [...]
 
 Add the following environment variable value to your container Dockerfile:
 
-```shell
+```Dockerfile
 ENV DD_APPSEC_ENABLED=true
 ```
 
@@ -94,7 +94,7 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 
 {{< img src="/security/application_security/application-security-signal.png" alt="Security Signal details page showing tags, metrics, suggested next steps, and attacker IP addresses associated with a threat." style="width:100%;" >}}
 
-## Further Reading 
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

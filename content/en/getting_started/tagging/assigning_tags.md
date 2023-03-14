@@ -174,7 +174,7 @@ Datadog automatically collects common tags from [Docker, Kubernetes, ECS, Swarm,
 
 **Examples:**
 
-```shell
+```bash
 DD_KUBERNETES_POD_LABELS_AS_TAGS='{"app":"kube_app","release":"helm_release"}'
 DD_CONTAINER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
 ```

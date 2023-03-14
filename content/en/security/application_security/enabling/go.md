@@ -22,7 +22,7 @@ further_reading:
       text: "Troubleshooting Application Security Management"
 ---
 
-You can monitor application security for Go apps running in Docker, Kubernetes, and AWS ECS. 
+You can monitor application security for Go apps running in Docker, Kubernetes, and AWS ECS.
 
 {{% appsec-getstarted %}}
 - One of the [supported APM tracing integrations][1].
@@ -62,7 +62,7 @@ $ docker run -e DD_APPSEC_ENABLED=true [...]
 
 Add the following environment variable value to your application container's Dockerfile:
 
-```shell
+```Dockerfile
 ENV DD_APPSEC_ENABLED=true
 ```
 
