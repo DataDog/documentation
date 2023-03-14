@@ -8,18 +8,14 @@
     .table-header {
         background-color: #f3edff;
         text-transform: uppercase;
-        width: 706px;
+        width: 880px;
 
-        @media (min-width: 768px) {
-            width: auto;
-        }
-
-        @media (min-width: 992px) {
+        @include media-breakpoint-up(lg) {
             width: 706px;
         }
 
-        @media (min-width: 1200px) {
-            width: auto;
+        @include media-breakpoint-up(xl) {
+            width: 880px;
         }
 
         .column {
@@ -28,18 +24,14 @@
     }
 
     .table-header + div {
-        width: 676px;
+        width: 850px;
 
-        @media (min-width: 768px) {
-            width: auto;
-        }
-
-        @media (min-width: 992px) {
+        @include media-breakpoint-up(lg) {
             width: 676px;
         }
 
-        @media (min-width: 1200px) {
-            width: auto;
+        @include media-breakpoint-up(xl) {
+            width: 850px;
         }
     }
 
@@ -68,7 +60,7 @@
 
     .key {
         position: relative;
-        word-break: break-all;
+        word-break: normal;
         .toggle-arrow {
             font-size: 18px;
             position: absolute;
@@ -85,10 +77,6 @@
             @media (min-width: 992px) {
                 left: -20px;
             }
-        }
-
-        @media (min-width: 768px) {
-            word-break: normal;
         }
     }
 
