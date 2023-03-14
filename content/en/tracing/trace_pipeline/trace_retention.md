@@ -69,7 +69,7 @@ The Datadog intelligent retention filter is always active for your services, and
 
 It scans through the **service entry spans** and retains for 30 days:
 
-- At least one span (and the associated trace) for each combination of environment, service, operation and resource every X minutes/hours to ensure to always find example traces in [service][9] and [resource][10] pages, even for low traffic endpoint.
+- At least one span (and the associated trace) for each combination of environment, service, operation and resource every 15 minutes at most to ensure to always find example traces in [service][9] and [resource][10] pages, even for low traffic endpoint.
 - High latency spans for the `p75`, `p90`, and `p95` percentile spans (and the associated trace) for each combination of environment, service, operation and resource.
 - A representative selection of errors, ensuring error diversity (for example, response status code 400s, 500s).
 
