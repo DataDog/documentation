@@ -89,13 +89,16 @@ To select your pods for library injection, annotate them with the following, cor
 | JavaScript | `admission.datadoghq.com/js-lib.version: "<lib-version>"`     |
 | Python     | `admission.datadoghq.com/python-lib.version: "<lib-version>"` |
 
-The available library versions are listed in each container registry.
+The available library versions are listed in each container registry, as well as in the tracer source repositories for each language:
+- [Java][17]
+- [Javascript][18]
+- [Python][19]
 
 **Note**: If you already have an application instrumented using version X of the library, and then use library injection to instrument using version Y of the same tracer library, the tracer does not break. Rather, the library version loaded first is used. Because library injection happens at the admission controller level prior to runtime, it takes precedent over manually configured libraries.
 
 <div class="alert alert-warning"><strong>Note</strong>: Using the <code>latest</code> tag is supported, but use it with caution because major library releases can introduce breaking changes.</div>
 
-For example:
+For example, to inject a Java library:
 
 ```yaml
 apiVersion: apps/v1
@@ -109,7 +112,7 @@ template:
     labels:
         admission.datadoghq.com/enabled: "true" # Enable Admission Controller to mutate new pods in this deployment
     annotations:
-        admission.datadoghq.com/java-lib.version: "v0.114.0" # Enable Java instrumentation (version 0.114.0) injection
+        admission.datadoghq.com/java-lib.version: "<TRACER VERSION>"
   containers:
   -  ...
 ```
@@ -150,7 +153,7 @@ template:
         tags.datadoghq.com/version: "1.1" # Unified service tag - Pod Version tag
         admission.datadoghq.com/enabled: "true" # Enable Admission Controller to mutate new pods part of this deployment
     annotations:
-        admission.datadoghq.com/java-lib.version: "v0.114.0" # Enable Java instrumentation (version 0.114.0) injection
+        admission.datadoghq.com/java-lib.version: "<TRACER VERSION>"
   containers:
   -  ...
 ```
@@ -172,8 +175,6 @@ Or run `kubectl describe pod <my-pod>` to see the `datadog-lib-init` init contai
 
 The instrumentation also starts sending telemetry to Datadog (for example, traces to [APM][15]).
 
-
-
 [1]: /containers/cluster_agent/admission_controller/
 [2]: /tracing/trace_collection/
 [3]: https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/
@@ -190,6 +191,9 @@ The instrumentation also starts sending telemetry to Datadog (for example, trace
 [14]: /getting_started/tagging/unified_service_tagging/
 [15]: https://app.datadoghq.com/apm/traces
 [16]: /tracing/trace_collection/library_config/
+[17]: https://github.com/DataDog/dd-trace-java/releases
+[18]: https://github.com/DataDog/dd-trace-js/releases
+[19]: https://github.com/DataDog/dd-trace-py/releases
 
 {{% /tab %}}
 
@@ -268,7 +272,7 @@ For more information about configuring `BLOB` or `LOCAL` settings, see [Supplyin
 
 <a id="supplying-configuration-source-host"></a>
 
-### Supplying configuration source 
+### Supplying configuration source
 
 If you specify `BLOB` or `LOCAL` configuration source, create a JSON or YAML file at `etc/<APP_NAME>/config.json` or `.yaml`, and provide the configuration either as JSON:
 
@@ -309,8 +313,8 @@ health_metrics_enabled: true
 runtime_metrics_enabled: true
 tracing_sampling_rate: 1.0
 tracing_rate_limit: 1
-tracing_tags: 
-- a=b 
+tracing_tags:
+- a=b
 - foo
 tracing_service_mapping:
 - from_key: mysql
@@ -352,6 +356,21 @@ The following table shows how the injection configuration values map to the corr
 | `tracing_log_level` | `datadog.slf4j.simpleLogger.defaultLogLevel` | `DD_TRACE_LOG_LEVEL` |   n/a    |
 
 Tracer library configuration options that aren't mentioned in the injection configuration are still available for use through properties or environment variables the usual way.
+
+### Basic configuration settings
+
+If `BASIC` is specified as the configuration source, it is equivalent to the following YAML settings:
+
+```yaml
+---
+version: 1
+tracing_enabled: true
+log_injection_enabled: true
+health_metrics_enabled: true
+runtime_metrics_enabled: true
+tracing_sampling_rate: 1.0
+tracing_rate_limit: 1
+```
 
 ## Launch your services
 
@@ -397,7 +416,7 @@ Any newly started processes are intercepted and the specified instrumentation li
 
 ## Requirements
 
-- A recent [Datadog Agent v7][1] installation 
+- A recent [Datadog Agent v7][1] installation
 - [Docker Engine][2]
 
 **Note**: Injection on arm64, and injection with `musl` on Alpine Linux container images are not supported.
@@ -444,7 +463,7 @@ output_paths:
 For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-hc).
 
 `library_inject`
-: Set to `false` to disable library injection altogether.<br> 
+: Set to `false` to disable library injection altogether.<br>
 **Default**: `true`
 
 `log_level`
@@ -501,8 +520,8 @@ health_metrics_enabled: true
 runtime_metrics_enabled: true
 tracing_sampling_rate: 1.0
 tracing_rate_limit: 1
-tracing_tags: 
-- a=b 
+tracing_tags:
+- a=b
 - foo
 tracing_service_mapping:
 - from_key: mysql
@@ -544,6 +563,21 @@ The following table shows how the injection configuration values map to the corr
 | `tracing_log_level` | `datadog.slf4j.simpleLogger.defaultLogLevel` | `DD_TRACE_LOG_LEVEL` |   n/a    |
 
 Tracer library configuration options that aren't mentioned in the injection configuration are still available for use through properties or environment variables the usual way.
+
+### Basic configuration settings
+
+If `BASIC` is specified as the configuration source, it is equivalent to the following YAML settings:
+
+```yaml
+---
+version: 1
+tracing_enabled: true
+log_injection_enabled: true
+health_metrics_enabled: true
+runtime_metrics_enabled: true
+tracing_sampling_rate: 1.0
+tracing_rate_limit: 1
+```
 
 ## Specifying Unified Service Tags on containers
 
@@ -649,7 +683,7 @@ config_sources: BASIC
 For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-c).
 
 `library_inject`
-: Set to `false` to disable library injection altogether.<br> 
+: Set to `false` to disable library injection altogether.<br>
 **Default**: `true`
 
 `log_level`
@@ -665,7 +699,7 @@ Optional: `env`
 
 <a id="supplying-configuration-source-c"></a>
 
-### Supplying configuration source 
+### Supplying configuration source
 
 If you specify `BLOB` or `LOCAL` configuration source, create a JSON or YAML file there, and provide the configuration either as JSON:
 
@@ -706,8 +740,8 @@ health_metrics_enabled: true
 runtime_metrics_enabled: true
 tracing_sampling_rate: 1.0
 tracing_rate_limit: 1
-tracing_tags: 
-- a=b 
+tracing_tags:
+- a=b
 - foo
 tracing_service_mapping:
 - from_key: mysql
@@ -750,6 +784,21 @@ The following table shows how the injection configuration values map to the corr
 
 Tracer library configuration options that aren't mentioned in the injection configuration are still available for use through properties or environment variables the usual way.
 
+### Basic configuration settings
+
+If `BASIC` is specified as the configuration source, it is equivalent to the following YAML settings:
+
+```yaml
+---
+version: 1
+tracing_enabled: true
+log_injection_enabled: true
+health_metrics_enabled: true
+runtime_metrics_enabled: true
+tracing_sampling_rate: 1.0
+tracing_rate_limit: 1
+```
+
 ## Configure the Agent
 
 In the Docker compose file that launches your containers, use the following settings for the Agent, securely setting your own Datadog API key for `${DD_API_KEY}`:
@@ -785,6 +834,7 @@ In the Docker compose file that launches your containers, use the following sett
     security_opt:
       - apparmor:unconfined
 ```
+
 ## Specifying Unified Service Tags on containers
 
 If the environment variables `DD_ENV`, `DD_SERVICE`, or `DD_VERSION` are specified in a service container image, those values are used to tag telemetry from the container.
@@ -821,6 +871,24 @@ Exercise your application to start generating telemetry data, which you can see 
 
 The supported features and configuration options for the tracing library are the same for library injection as for other installation methods, and can be set with environment variables. Read the [Datadog Library configuration page][16] for your language for more details.
 
+For example, you can turn on [Application Security Monitoring][4] or [Continuous Profiler][3], each of which may have billing impact:
+
+- For **Kubernetes**, set the `DD_APPSEC_ENABLED` or `DD_PROFILING_ENABLED` container environment variables to `true`.
+
+- For **hosts and containers**, set the `DD_APPSEC_ENABLED` or `DD_PROFILING_ENABLED` container environment variables to `true`, or in the [injection configuration](#supplying-configuration-source), specify an `additional_environment_variables` section like the following YAML example: 
+
+  ```yaml
+  additional_environment_variables:
+  - key: DD_PROFILING_ENABLED
+    value: true
+  - key: DD_APPSEC_ENABLED
+    value: true 
+  ```
+
+  Only configuration keys that start with `DD_` can be set in the injection config source `additional_environment_variables` section.
+
 
 [2]: /tracing/trace_collection/
+[3]: /profiler/enabling/java/?tab=environmentvariables#installation
+[4]: /security/application_security/enabling/java/?tab=kubernetes#get-started
 [16]: /tracing/trace_collection/library_config/

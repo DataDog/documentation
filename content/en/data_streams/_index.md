@@ -60,6 +60,10 @@ High lag on a consuming service, increased resource use on a Kafka broker and in
 
 Click on the **Throughput** tab on any service or queue in Data Streams Monitoring to quickly detect changes in throughput, and which upstream or downstream service these changes originate from. Once the [Service Catalog][2] is configured, you can immediately pivot to the corresponding team's Slack channel or on-call engineer.
 
+By filtering to a single Kafka or RabbitMQ cluster, you can detect changes in incoming or outgoing traffic for all detected topics or queues running on that cluster:
+
+{{< img src="data_streams/data_streams_cluster_throughput.png" alt="Datadog Data Streams Monitoring" style="width:100%;" >}}
+
 ### Pivot from pipeline health to slowest individual messages
 
 Delays in your pipeline can also be due to increased processing latency for messages within a consuming service. A faulty deploy or an unexpected change in message format can cause end-to-end latency to spike.

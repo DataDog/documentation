@@ -267,7 +267,7 @@ Configure the [Maven Surefire Plugin][1] or the [Maven Failsafe Plugin][2] (or b
 
 Run your tests as you normally do, specifying the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 DD_ENV=ci mvn clean verify -Pdd-civisibility
 {{< /code-block >}}
 
@@ -289,7 +289,7 @@ test {
 
 Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 DD_ENV=ci ./gradlew cleanTest test -Pdd-civisibility --rerun-tasks
 {{< /code-block >}}
 
@@ -408,7 +408,7 @@ If the tests are not appearing in Datadog, ensure that you are using version 0.9
 The `-Ddd.civisibility.enabled=true` configuration property is only available since that version.
 
 If you need to use a previous version of the tracer, you can configure CI Visibility by using the following system properties:
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 -Ddd.prioritization.type=ENSURE_TRACE -Ddd.jmxfetch.enabled=false -Ddd.integrations.enabled=false -Ddd.integration.junit.enabled=true -Ddd.integration.testng.enabled=true
 {{< /code-block >}}
 

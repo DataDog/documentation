@@ -31,6 +31,8 @@ The default sampling mechanism is called _head-based sampling_. The decision of 
 
 Because the decision is made at the beginning of the trace and then conveyed to all parts of the trace, the trace is guaranteed to be kept or dropped as a whole.
 
+{{< img src="/tracing/guide/ingestion_sampling_use_cases/head-based-sampling.png" alt="Head-based Sampling" style="width:100%;" >}}
+
 You can set sampling rates for head-based sampling in two places:
 - At the **[Agent](#in-the-agent)** level (default)
 - At the **[Tracing Library](#in-tracing-libraries-user-defined-rules)** level: any tracing library mechanism overrides the Agent setup.
@@ -230,6 +232,8 @@ With Agent version 7.33 and forward, you can configure the error sampler in the 
 @param errors_per_second - integer - optional - default: 10
 @env DD_APM_ERROR_TPS - integer - optional - default: 10
 ```
+
+{{< img src="/tracing/guide/ingestion_sampling_use_cases/error-spans-sampling.png" alt="Error Sampling" style="width:100%;" >}}
 
 **Notes**: 
 1. Set the parameter to `0` to disable the error sampler.
