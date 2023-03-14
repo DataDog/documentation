@@ -177,7 +177,11 @@ Monitors trigger events when they change between possible states: `ALERT`, `WARN
 
 ### Expiration
 
-If a monitor is in an alert-worthy state (`ALERT`, `WARNING`, or `NO DATA`) when a downtime expires, the monitor triggers a new notification. This applies to monitors that change state during downtime (such as from `OK` to `ALERT`, `WARNING`, or `NO DATA`), and to monitors that already have an alert-worthy state when downtime begins. **Note**: If a downtime is manually canceled, notifications are not sent, even if the monitor has entered an alert-worthy state.
+By default, if a monitor is in an alert-worthy state (`ALERT`, `WARNING`, or `NO DATA`) when a downtime expires, the monitor triggers a new notification. This applies to monitors that change state during downtime (such as from `OK` to `ALERT`, `WARNING`, or `NO DATA`), and to monitors that already have an alert-worthy state when downtime begins.
+
+To override the default behavior, specify which notifications should be sent at the end of downtimes with the options in the "Notify Your Team" section.
+
+{{< img src="monitors/downtimes/downtime_cancel_expire_notification.png" alt="Configure Notify your team section of a monitor with specific downtime conditions" style="width:100%;">}}
 
 **Example 1:** If a monitor is in an alert state *before* downtime starts and *continues* for the duration of downtime:
 1. During downtime, notifications for this alert are suppressed.

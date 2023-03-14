@@ -51,7 +51,7 @@ TCP connection issues are common when there is a setup misconfiguration with the
 
 For example, the following error is because the TCP connection failed:
 
-```shell
+```bash
 TCP-connection(ERROR: getaddrinfo failed). Exception: unable to connect: could not open database requested by login
 ```
 

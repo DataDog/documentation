@@ -36,21 +36,24 @@ Threat Monitoring and Protection の仕組みについての詳細は、[ASM の
 {{< img src="security/application_security/appsec-threat-overview.mp4" alt="シグナルエクスプローラーでの脅威の調査の概要" video="true" >}}
 
 
-## 攻撃パターンを特定するためのイベントルールの作成
+## 攻撃パターンを特定するための In-App WAF ルールの作成
 
-ASM に付属するデフォルトのルールを拡張して、アプリケーションの疑わしい動作を定義する[イベントルールを作成][5]することができます。そして、これらのイベントからセキュリティシグナルを生成するために[カスタムルールを指定][6]し、調査のために Threat Monitoring ビューでそれらを表示することができます。
+ASM に付属するデフォルトのルールを拡張して、アプリケーションの疑わしい動作を定義する [In-App WAF ルールを作成][5]することができます。そして、これらのルールからトリガーされた攻撃試行からセキュリティシグナルを生成するために[カスタムルールを指定][6]し、調査のために Threat Monitoring ビューでそれらを表示することができます。
 
-## 攻撃を鈍化させる
+## ASM Protect で攻撃と攻撃者の速度を落とす
 
-<div class="alert alert-info">ワンクリック IP ブロッキングはベータ版です。</div>
+<div class="alert alert-info"><strong>ベータ版: IP およびユーザーのブロッキング</strong><br>
+サービスが<a href="/agent/guide/how_remote_config_works/#enabling-remote-configuration">リモート構成を有効にした Agent とそれをサポートするトレーシングライブラリのバージョン</a>を実行している場合、Agent やトレーシングライブラリの追加構成なしで Datadog UI から攻撃をブロックすることができます。</div>
 
 Datadog ASM は、攻撃や攻撃者を減速させるための保護機能を内蔵しています。
 
-IP ブロッキングアクションは、[トレーシングライブラリ][7]を介して実装され、スタックに新たな依存性を導入することはありません。IP ブロックは Datadog プラットフォームに保存され、[Datadog Agent][8] によって自動的かつ安全にフェッチされ、インフラストラクチャーにデプロイされ、アプリケーションに適用されます。
+IP とユーザーのブロッキングアクションは、[トレーシングライブラリ][7]を介して実装され、スタックに新たな依存性を導入することはありません。ブロックは Datadog プラットフォームに保存され、[Datadog Agent][8] によって自動的かつ安全にフェッチされ、インフラストラクチャーにデプロイされ、アプリケーションに適用されます。
 
-ASM セキュリティシグナルにフラグが立った攻撃者の IP を、Datadog UI で一時的または恒久的にブロックすることができます。そこから、ASM によってすでに保護されているすべてのサービスは、指定された期間、ブロックされた IP によって実行される着信リクエストをブロックします。ブロックされたすべてのトレースには `security_response.block_ip` というタグが付けられ、[トレースエクスプローラー][9]に表示されます。ASM が無効になっているサービスは保護されません。
+ASM セキュリティシグナルでフラグが立てられた攻撃者を一時的または恒久的にブロックすることができます。シグナルエクスプローラでシグナルをクリックすると、そのシグナルを生成しているユーザーと IP アドレスが表示され、オプションでそれらをブロックすることができます。
 
-{{< img src="/security/application_security/asm-blocking-ui.png" alt="Datadog ASM のセキュリティシグナルパネルで、攻撃者の IP をブロックすることができます" width="75%">}}
+{{< img src="/security/application_security/appsec-block-user-ip.png" alt="Datadog ASM のセキュリティシグナルパネルで、攻撃者の IP をブロックすることができます" width="75%">}}
+
+そこから、ASM によってすでに保護されているすべてのサービスは、指定された期間、ブロックされた IP またはユーザーによって実行される着信リクエストをブロックします。ブロックされたすべてのトレースには `security_response.block_ip` というタグが付けられ、[トレースエクスプローラー][9]に表示されます。ASM が無効になっているサービスは保護されません。
 
 {{% asm-protection-page-configuration %}}
 
@@ -64,7 +67,7 @@ ASM セキュリティシグナルにフラグが立った攻撃者の IP を、
 [1]: https://app.datadoghq.com/services?lens=Security
 [2]: /ja/security/explorer
 [4]: /ja/security/application_security/how-appsec-works/
-[5]: /ja/security/application_security/threats/event_rules/
+[5]: /ja/security/application_security/threats/inapp_waf_rules/
 [6]: /ja/security/application_security/threats/custom_rules/
 [7]: /ja/tracing/trace_collection/dd_libraries/
 [8]: /ja/agent/guide/how_remote_config_works/

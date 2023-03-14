@@ -282,7 +282,7 @@ require('dd-trace/ci/cypress/support')
 
 Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 DD_ENV=ci DD_SERVICE=my-ui-app npm test
 {{< /code-block >}}
 
