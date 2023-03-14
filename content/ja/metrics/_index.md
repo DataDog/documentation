@@ -15,7 +15,7 @@ title: メトリクス
     {{< nextlink href="/metrics/advanced-filtering" >}}<u>高度なフィルタリング</u> - データをフィルタリングして、返されるメトリクスのスコープを絞り込みます。{{< /nextlink >}}
     {{< nextlink href="/metrics/summary" >}}<u>メトリクスの概要</u> - Datadog にレポートされるすべてのメトリクスをリストします。{{< /nextlink >}}
     {{< nextlink href="metrics/distributions/" >}}<u>ディストリビューションメトリクス</u> - データセット全体のグローバルパーセンタイルを計算します。{{< /nextlink >}}
-    {{< nextlink href="metrics/metrics-without-limits/" >}}<u>Metrics without LimitsTM</u> - Metrics without LimitsTM を使って、タグや集計構成によりカスタムメトリクスのボリュームを制御する方法をご紹介します。{{< /nextlink >}}
+    {{< nextlink href="metrics/metrics-without-limits/" >}}<u>Metrics without Limits™</u> - Metrics without Limits™ を使って、タグや集計構成によりカスタムメトリクスのボリュームを制御する方法をご紹介します。{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### メトリクスとは？
