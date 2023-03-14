@@ -46,7 +46,7 @@ Notebook authors receive email notifications for new comments on their notebooks
 
 ### View mode
 
-{{< img src="notebooks/read_mode.png" alt="View mode drop down menu" style="width:100%;">}}
+{{< img src="notebooks/read_mode.png" alt="View mode dropdown menu" style="width:100%;">}}
 
 You can switch between modes from within the Notebook by selecting the dropdown at the top right of your notebook.
 
@@ -176,7 +176,7 @@ Use granular access controls to limit the [roles][16] that may edit a particular
 1. Select **Permissions**.
 1. Click **Restrict Access**.
 1. The dialog box updates to show that members of your organization have **Viewer** access by default.
-1. Use the drop-down to select one or more roles that may edit the notebook.
+1. Use the dropdown to select one or more roles that may edit the notebook.
 1. Click **Add**.
 1. The dialog box updates to show that the role you selected has the **Editor** permission.
 1. Click **Save**

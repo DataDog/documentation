@@ -29,7 +29,7 @@ The [team directory page][1] lists all teams within your organization. Use the *
 1. Choose a **Team Name**.
 1. The **Handle** populates based on your team name.
 1. Provide an optional **Description**.
-1. Use the drop-down to select team members.
+1. Use the dropdown menu to select team members.
 1. Click **Create**.
 
 ### Modify team

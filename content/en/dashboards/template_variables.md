@@ -39,7 +39,7 @@ A template variable is defined by:
     * Attribute: Use a [facet or measure as the template variable](#logs-apm-and-rum-queries).
 * **Name**: A unique name for the template variable that appears in queries on the dashboard. Template variables are automatically named after the selected tag or attribute.
 * **Default Value**: The tag or attribute value that appears automatically when the dashboard is loaded. Defaults to `*`.
-* **Available Values**: The tag or attribute values available for selection in the dropdown. Defaults to `(all)`. The list of available values always includes `*`, which queries all values of the tag or attribute.
+* **Available Values**: The tag or attribute values available for selection in the dropdown menu. Defaults to `(all)`. The list of available values always includes `*`, which queries all values of the tag or attribute.
 
 After creating a template variable, Datadog displays the number of sources using the variable. In the example below, the template variable `team` is used in two graphs on the dashboard:
 
@@ -127,7 +127,7 @@ For example, searching for `region:$region.value` with a value of `us-east1` for
 
 Use commas to search using multiple template variables, for example: `role:$role.value,env:$env.value`
 
-**Note**: Once you press *enter* to search, `$region.value` updates to the value in the template variable drop-down.
+**Note**: Once you press *enter* to search, `$region.value` updates to the value in the template variable dropdown menu.
 
 #### Widgets
 
@@ -137,7 +137,7 @@ From your widgets, overlay the timing of the events using template variables wit
 $<TEMPLATE_VARIABLE_NAME>
 ```
 
-For example, enter `$region` in the event overlays search box. This searches for events with the value in the `region` template variable drop-down.
+For example, enter `$region` in the event overlays search box. This searches for events with the value in the `region` template variable dropdown menu.
 
 ## Further Reading
 
