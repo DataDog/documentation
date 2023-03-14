@@ -12,7 +12,7 @@ Cloud Security Posture Management is not currently available in this site.
 </div>
 {{< /site-region >}}
 
-Query and filter all findings like you would in the explorer, or get the full details for a specific finding via API.
+Retrieve a list of CSPM findings or get the full details for a specific finding.
 
 ## Rate Limits
 
@@ -24,36 +24,50 @@ Query and filter all findings like you would in the explorer, or get the full de
 
 ### Overview
 
-List all the findings for your organization.
+Get a list of CSPM findings.
 
 ### Arguments
 
-| Parameter                              | Type             | Description |
-|----------------------------------------|------------------|-------------|
-| `filter[evaluation]`                   | string           |             |
-| `filter[evaluation_changed_at]`        | integer          |             |
-| `filter[muted]`                        | boolean          |             |
-| `filter[resource]`                     |                  |             |
-| `filter[resource_discovery_timestamp]` |                  |             |
-| `filter[resource_type]`                | string           |             |
-| `filter[rule_id]`                      | string           |             |
-| `filter[rule_name]`                    | string           |             |
-| `filter[status]`                       | string           |             |
-| `filter[tags]`                         | array of strings |             |
-| `limit`                                | integer          |             |
-| `page[cursor]`                         | string           |             |
-| `snapshot_timestamp`                   | integer          |             |
+#### Query parameters
 
-#### Path parameters
+| Parameter                       | Type             | Description                                                                                               |
+|---------------------------------|------------------|-----------------------------------------------------------------------------------------------------------|
+| `filter[evaluation]`            | string           | See findings which pass or fail.                                                                          |
+| `filter[evaluation_changed_at]` | integer          | See findings that have changed evaluation on a date (in unix ms) with optional comparison operator.       |
+| `filter[muted]`                 | boolean          | See findings that are muted or not muted.                                                                 |
+| `filter[discovery_timestamp]`   | string           | See findings for resources that were discovered on a date (in unix ms) with optional comparison operator. |
+| `filter[resource_type]`         | string           | See findings for a specific resource type.                                                                |
+| `filter[rule_id]`               | string           |  See findings for a rule with a specific rule ID                                                                                                         |
+| `filter[rule_name]`             | string           | See findings for a rule with a specific name.                                                             |
+| `filter[status]`                | string           | See findings with a specified status                                                                      |
+| `filter[tags]`                  | array of strings | See the next page of findings pointed to by the cursor (repeatable).                                      |
+| `limit`                         | integer          | Limit the number of findings returned. The default value is `100`. Maximum value is `1000`.               |
+| `page[cursor]`                  | string           | See the next page of findings pointed to by the cursor.                                                   |
+| `snapshot_timestamp`            | integer          | Return findings for a given snapshot time (unix ms).                                                      |
 
-#### Pagination
+### Pagination
 
 The list endpoint returns 100 items per page by default. The limit can be increased to a maximum of 1000, by passing a limit query parameter. For example: `?limit=500`.
 
 The API is using cursor based pagination. To go to the next page, fetch meta.page.cursor and pass it as a query parameter: `?cursor=eyJh…`.
 
-#### Filtering
-##### Example
+### Filtering
+
+Filters can be applied in the list endpoint using query parameters against all response attributes. They are applied as URL query parameters, using the following pattern: 
+
+- Using a single filter: `?filter[attribute_key]=attribute_value`
+- Chaining filters: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value …`
+- Filtering on tags: `?filter[tags]=tag_key:tag_value`
+
+#### Do more with filters
+
+- Filters against integers support comparison operators (>, <=...). This is particularly useful when filtering by date (evaluation_changed_at, resource_discovery_timestamp) 
+- Filters support negation, to exclude findings matching a specific attribute.
+    - E.g. ?filter[resource_type]=-aws_s3_bucket
+
+### Request
+
+##### Sample request
 
 ```bash
 curl --location -g --request GET 'https://app.datadoghq.com/api/unstable/posture_management/findings?filter[evaluation_changed_at]>=1667403346000&filter[evaluation]=fail&filter[status]=critical&filter[tag]=cloud_provider:aws' \
@@ -71,8 +85,6 @@ Each finding object contains the following:
 - Core attributes, like status, evaluation, high level resource details, muted state, rule details
 - Timestamps like evaluation_changed_at and resource_discovery_date
 - An array of all associated tags
-
-When fetching an individual finding, you will get the above, along with the rule message (description, remediation guidelines) along with the full resource configuration.
 
 #### Sample response 200 OK
 
@@ -133,13 +145,30 @@ When fetching an individual finding, you will get the above, along with the rule
 ```
 ## Get a finding's details
 
-`GET https://app.datadoghq.com/api/unstable/posture_management/findings/{id}`
+`GET https://app.datadoghq.com/api/unstable/posture_management/findings/{finding_id}`
 
 ### Overview
 
-Get the full details for a specific finding.
+Get the full details for a finding.
+
+### Arguments
+
+#### Path parameters
+
+| Name         | Type   | Description            |
+|--------------|--------|------------------------|
+| `finding_id` | string | The ID of the finding. |
 
 ### Response
+
+The response includes a finding object that contains the following:
+
+- The finding ID that can be used to fetch the full finding details
+- Core attributes, like status, evaluation, high level resource details, muted state, rule details
+- Timestamps like evaluation_changed_at and resource_discovery_date
+- An array of all associated tags
+
+When fetching an individual finding, you will get the above, along with the rule message (description, remediation guidelines) along with the full resource configuration.
 
 #### Sample response 200 OK
 
