@@ -31,7 +31,7 @@ Remote configuration is not available on the US1-FED Datadog site.
 <div class="alert alert-info">Remote Configuration is in beta.</a></div>
 
 ## Overview
-Remote Configuration is a Datadog capability that allows you to remotely configure the behavior of Datadog resources (for example, Agents and tracing libraries) deployed in your infrastructure, for select product features. Using Remote Configuration makes it easier to apply Agent and tracing library configurations in your environment on demand, decreasing management costs, reducing friction between teams, and accelerating resolution times. 
+Remote Configuration is a Datadog capability that allows you to remotely configure the behavior of Datadog resources (for example, Agents, tracing libraries, and Observability Pipelines Worker) deployed in your infrastructure, for select product features. Using Remote Configuration makes it easier to apply configurations to Datadog resources in your environment on demand, decreasing management costs, reducing friction between teams, and accelerating issue resolution times. 
 
 For Datadog security products, Application Security Management and Cloud Workload Security, Remote Configuration-enabled Agents and compatible tracing libraries provide real-time security updates and responses, enhancing security posture for your applications and cloud infrastructure. 
 
@@ -74,6 +74,11 @@ The following products and features are supported with Remote Config:
 <div class="alert alert-info">This feature is in private beta.</div>
 
 - **Automatic default agent rule updates**: Automatically receive and update the default Agent rules maintained by Datadog as new Agent detections and enhancements are released. 
+
+### Observability Pipelines (OP)
+<div class="alert alert-info">This feature is in private beta.</div>
+
+- **Remotely update and deploy [Observability Pipelines Worker (OPW)][10]**: Build and update pipelines in the UI, remotely rolling out the new configuration to OPW running in your environment.
 
 ## Security Considerations
  
@@ -153,6 +158,7 @@ After you perform these steps, your Agent requests its configuration from Datado
 [7]: /dynamic_instrumentation/?tab=configurationyaml#enable-remote-configuration
 [8]: /security/application_security/how-appsec-works/#built-in-protection
 [9]: /account_management/rbac/permissions
+[10]: /observability_pipelines/#observability-pipelines-worker
 
 
 {{< /site-region >}}
