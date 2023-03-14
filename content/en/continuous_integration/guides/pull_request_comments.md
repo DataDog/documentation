@@ -21,7 +21,7 @@ If you're using the Test Visibility product, Datadog can integrate with GitHub t
 in your pull requests. The summary contains an overview of the tests executions, flakiness information and
 error messages for failed tests.
 With this report, the developers get instant feedback about the results of their tests, and they are able to
-debug any failed/flaky tests without leaving the pull requests view.
+debug any failed/flaky tests without leaving the pull request view.
 
 {{< img src="ci/github_comments_light.png" alt="Datadog GitHub pull request comment preview" style="width:100%;">}}
 
@@ -31,12 +31,12 @@ This integration is only available for test services hosted on `github.com`.
 
 ## Enable test summaries
 
-Enabling test summaries is very quick and can be done in two simple steps. The first step is to install the [GitHub integration][1]:
+You can enable test summaries in pull requests with the following steps:
 
-1. Navigate to the **Configuration** tab on the [GitHub integration tile][2] and click **+ Create GitHub App**.
-2. Give the application read and write permissions for pull requests.
-
-The second step is to enable test summaries for a test service from the Test Service Settings page or from the commit/branch page.
+1. Install the [GitHub integration][1]:
+   1. Navigate to the **Configuration** tab on the [GitHub integration tile][2] and click **+ Create GitHub App**.
+   2. Give the application read and write permissions for pull requests.
+2. Enable test summaries for a test service. It can be done from the Test Service Settings page or from the commit/branch page.
 
 ### Test Service Settings page
 
