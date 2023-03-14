@@ -35,11 +35,21 @@ RBAC restrict access to global variables is in beta. To request access, contact 
 ## Use FIDO2 keys in your Synthetic tests
 You can use the FIDO2 key stored in a global variable across all your Synthetic tests. When creating a [browser test][2], complete your application's FIDO2 challenges using the FIDO2 key stored in the global variable.
 
-To use FIDO2 keys in your [browser tests][2]:
+To test a registering flow using FIDO2 keys in your [browser tests][2]:
 
 1. Import your global variable.
-2. When recording your test, Datadog will automatically complete any FIDO2 challenge with the FIDO2 key stored in the imported global variable.
-3. After recording your test steps, click **Save & Launch Test**.
+2. Navigate to the page to register with FIDO2.
+3. When recording your test, Datadog will automatically complete any FIDO2 challenge with the FIDO2 key stored in the imported global variable.
+4. After recording your test steps, click **Save & Launch Test**.
+
+To test a login flow using FIDO2 keys in your [browser tests][2]:
+
+0. You will need to have you Datadog FIDO2 key registered first. It needs to be done only once per key.
+You can do it by completing the registering form from within the recorder without recording the registering steps, or by having a test that embeds both the recording and the login
+1. Import your global variable.
+2. Navigate to the page to login with FIDO2.
+3. When recording your test, Datadog will automatically complete any FIDO2 challenge with the FIDO2 key stored in the imported global variable.
+4. After recording your test steps, click **Save & Launch Test**.
 
 ## Further Reading
 
