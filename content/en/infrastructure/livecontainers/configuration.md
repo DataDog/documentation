@@ -161,7 +161,7 @@ The following table presents the list of collected resources and the minimal Age
 | ClusterRoleBindings | 7.27.0 | 1.19.0 | 2.30.9 | 1.14.0 |
 | ClusterRoles | 7.27.0 | 1.19.0 | 2.30.9 | 1.14.0 |
 | Clusters | 7.27.0 | 1.12.0 | 2.10.0 | 1.17.0 |
-| CronJobs | 7.27.0 | 1.13.1 | 2.15.5 | 1.16.0 |
+| CronJobs | 7.27.0 | 7.40.0 | 2.15.5 | 1.16.0 |
 | DaemonSets | 7.27.0 | 1.14.0 | 2.16.3 | 1.16.0 |
 | Deployments | 7.27.0 | 1.11.0 | 2.10.0 | 1.16.0 |
 | Ingresses | 7.27.0 | 1.22.0 | 2.30.7 | 1.21.0 |
@@ -177,9 +177,8 @@ The following table presents the list of collected resources and the minimal Age
 | ServiceAccounts | 7.27.0 | 1.19.0 | 2.30.9 | 1.17.0 |
 | Services | 7.27.0 | 1.11.0 | 2.10.0 | 1.17.0 |
 | Statefulsets | 7.27.0 | 1.15.0 | 2.20.1 | 1.16.0 |
-| VerticalPodAutoscalers | 7.27.0 | 7.43.0 | 3.6.8 | 1.25.0 |
 
-**Note**: For Kubernetes version 1.25 and above, the minimal Cluster Agent version required is 7.40.0.
+**Note**: After version 1.22, cluster agent versioning follows agent releases starting with version 7.39.0.
 
 ### Add custom tags to resources
 
