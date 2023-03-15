@@ -7,10 +7,10 @@ aliases:
 further_reading:
 - link: "/events/explorer/"
   tag: "Documentation"
+  text: "Events Explorer"
 - link: "/dashboards/widgets/event_stream/"
   tag: "Documentation"
   text: "Event Stream Widget"
-  text: "Events Explorer"
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboards using JSON"
