@@ -109,17 +109,17 @@ Datadog implements the following safeguards, designed to protect the confidentia
 ### Setup
 To activate Remote Configuration: 
 
-1.  Ensure your RBAC permissions include [`org_management`][9] so you can enable Remote Configuration for your organization.
+1. Ensure your RBAC permissions include [`org_management`][9] so you can enable Remote Configuration for your organization.
 
 2. Ensure your RBAC permissions include [`api_keys_write`][3] so you can create a new API key with the Remote Configuration capability, or add the capability on an existing API key. Contact your organization's Datadog administrator to update your permissions if you don't have it. You'll use the key with this capability to authenticate and authorize your Agent to use Remote Configuration. 
 
-3. On the [Organization Settings][4] page, either select an existing API key, or create a new API key.
+3. On the [Remote Configuration][4] page, enable Remote Configuration. This enables Datadog resources across your organization to receive configurations from Datadog. 
 
-4. Enable Remote Config capability on the key:
+4. Select an existing API key or create a new API key, and enable Remote Config capability on the key:
 
    {{<img src="agent/guide/RC_Key_updated.png" alt="API Key properties with Remote Config capability Enable button." width="90%" style="center">}}
 
-5. Update your Agent configuration:
+5. Update your Agent configuration file:
 
 {{< tabs >}}
 {{% tab "Configuration YAML file" %}}
@@ -152,7 +152,7 @@ After you perform these steps, your Agent requests its configuration from Datado
 [1]: /getting_started/site/
 [2]: /help/
 [3]: /account_management/api-app-keys/
-[4]: https://app.datadoghq.com/organization-settings/api-keys
+[4]: https://app.datadoghq.com/organization-settings/remote-config
 [5]: /security/default_rules/#cat-workload-security
 [6]: /tracing/trace_pipeline/ingestion_controls/#managing-ingestion-for-all-services-at-the-agent-level
 [7]: /dynamic_instrumentation/?tab=configurationyaml#enable-remote-configuration
