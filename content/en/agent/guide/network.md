@@ -56,15 +56,15 @@ API test results for worker v>0.1.6 `intake.synthetics.`{{< region-param key="dd
 Browser test results for worker v>0.2.0 `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
 API test results for worker v<0.1.5 `api.`{{< region-param key="dd_site" code="true" >}}
 
-{{< site-region region="us,eu,us3,us5" >}}
+{{% site-region region="us,eu,us3,us5" %}}
 [Database Monitoring][2]
 : `dbm-metrics-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `dbquery-intake.`{{< region-param key="dd_site" code="true" >}}
 
 [2]: /database_monitoring/
-{{< /site-region >}}
+{{% /site-region %}}
 
-{{< site-region region="us" >}}
+{{% site-region region="us" %}}
 
 [Logs][1] & [HIPAA logs][2]
 : TCP: `agent-intake.logs.datadoghq.com`<br>
@@ -81,9 +81,9 @@ Other: See [logs endpoints][3]
 [2]: /data_security/logs/#hipaa-enabled-customers
 [3]: /logs/log_collection/#logging-endpoints
 
-{{< /site-region >}}
+{{% /site-region %}}
 
-{{< site-region region="eu" >}}
+{{% site-region region="eu" %}}
 
 [Logs][1] & [HIPAA logs][2]
 : TCP: `agent-intake.logs.datadoghq.eu`<br>
@@ -100,9 +100,9 @@ Other: See [logs endpoints][3]
 [2]: /data_security/logs/#hipaa-enabled-customers
 [3]: /logs/log_collection/#logging-endpoints
 
-{{< /site-region >}}
+{{% /site-region %}}
 
-{{< site-region region="us3" >}}
+{{% site-region region="us3" %}}
 
 [Logs][1] & [HIPAA logs][2]
 : HTTP: `agent-http-intake.logs.us3.datadoghq.com`<br>
@@ -117,9 +117,9 @@ Other: See [logs endpoints][3]
 [2]: /data_security/logs/#hipaa-enabled-customers
 [3]: /logs/log_collection/#logging-endpoints
 
-{{< /site-region >}}
+{{% /site-region %}}
 
-{{< site-region region="us5" >}}
+{{% site-region region="us5" %}}
 
 [Logs][1] & [HIPAA logs][2]
 : HTTP: `agent-http-intake.logs.us5.datadoghq.com`<br>
@@ -134,9 +134,9 @@ Other: See [logs endpoints][3]
 [2]: /data_security/logs/#hipaa-enabled-customers
 [3]: /logs/log_collection/#logging-endpoints
 
-{{< /site-region >}}
+{{% /site-region %}}
 
-{{< site-region region="gov" >}}
+{{% site-region region="gov" %}}
 
 [Logs][1] & [HIPAA logs][2]
 : HTTP: `agent-http-intake.logs.ddog-gov.com`<br>
@@ -151,7 +151,7 @@ Other: See [logs endpoints][3]
 [2]: /data_security/logs/#hipaa-enabled-customers
 [3]: /logs/log_collection/#logging-endpoints
 
-{{< /site-region >}}
+{{% /site-region %}}
 
 All other Agent data
 : `<VERSION>-app.agent.`{{< region-param key="dd_site" code="true" >}}<br>
@@ -211,7 +211,7 @@ Open the following ports to benefit from all the **Agent** functionalities:
 
 #### Outbound
 
-{{< site-region region="us" >}}
+{{% site-region region="us" %}}
 
 443/tcp
 : Port for most Agent data (Metrics, APM, Live Processes/Containers)
@@ -235,9 +235,9 @@ See [logs endpoints][3] for other connection types.
 [3]: /logs/log_collection/#logging-endpoints
 [4]: /agent/basic_agent_usage/kubernetes/
 
-{{< /site-region >}}
+{{% /site-region %}}
 
-{{< site-region region="eu" >}}
+{{% site-region region="eu" %}}
 
 443/tcp
 : Port for most Agent data (Metrics, APM, Live Processes/Containers)
@@ -261,9 +261,9 @@ See [logs endpoints][3] for other connection types.
 [3]: /logs/log_collection/#logging-endpoints
 [4]: /agent/basic_agent_usage/kubernetes/
 
-{{< /site-region >}}
+{{% /site-region %}}
 
-{{< site-region region="us3,us5,gov" >}}
+{{% site-region region="us3,us5,gov" %}}
 
 443/tcp
 : Port for most Agent data (Metrics, APM, Live Processes/Containers)
@@ -283,7 +283,7 @@ See [default NTP targets][2].
 [3]: /logs/log_collection/#logging-endpoints
 [4]: /agent/basic_agent_usage/kubernetes/
 
-{{< /site-region >}}
+{{% /site-region %}}
 
 #### Inbound
 

@@ -20,13 +20,13 @@ further_reading:
   text: "Getting Started with Cloud Workload Security"
 
 ---
-{{< site-region region="gov" >}}
+{{% site-region region="gov" %}}
 
 Remote configuration is not available on the US1-FED Datadog site.
 
-{{< /site-region >}}
+{{% /site-region %}}
 
-{{< site-region region="us,us3,us5,eu" >}}
+{{% site-region region="us,us3,us5,eu" %}}
 
 <div class="alert alert-info">Remote Configuration is in beta.</a></div>
 
@@ -144,6 +144,13 @@ After you perform these steps, your Agent requests its configuration from Datado
 - [ASM 1-Click enablement, IP blocking, and attack pattern updates][8] are enabled.
 
 
+
+
+{{% /site-region %}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 [1]: /getting_started/site/
 [2]: /help/
 [3]: /account_management/api-app-keys/
@@ -152,10 +159,3 @@ After you perform these steps, your Agent requests its configuration from Datado
 [6]: /tracing/trace_pipeline/ingestion_controls/#managing-ingestion-for-all-services-at-the-agent-level
 [7]: /dynamic_instrumentation/?tab=configurationyaml#enable-remote-configuration
 [8]: /security/application_security/how-appsec-works/#built-in-protection
-
-
-{{< /site-region >}}
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}

@@ -6,11 +6,11 @@
 {{ end }}
 
 {{ $region := .Get "region" }}
-{{ $listOfPages := slice "account_management" "integrations" }}
+{{ $listOfPages := slice "account_management" "integrations" "agent" }}
 {{ if in $listOfPages .Page.Type}}
-  <div class="d-none site-region-container" data-region="{{ $region }}">
-    {{.Inner}}
-  </div>
+<div class="d-none site-region-container" data-region="{{ $region }}">
+{{.Inner}}
+</div>
 {{ else }}
-  <div class="d-none site-region-container" data-region="{{ $region }}"><p>{{- .Inner | markdownify -}}</p></div>
+<div class="d-none site-region-container" data-region="{{ $region }}"><p>{{- .Inner | markdownify -}}</p></div>
 {{ end }}

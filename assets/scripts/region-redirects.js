@@ -88,7 +88,7 @@ function regionOnChangeHandler(region) {
  */
 function hideNonRegionSpecificTOC(regionSelected=false) {
     const allTOCItems = document.querySelectorAll('#TableOfContents li')
-    const hiddenHeaders = document.querySelectorAll('.site-region-container.d-none > h3')
+    const hiddenHeaders = document.querySelectorAll('.site-region-container.d-none > h3, .site-region-container.d-none > h2')
     const hiddenHeaderIDs = [...hiddenHeaders].map(el => `#${el.id}`)
 
     allTOCItems.forEach(item => {
