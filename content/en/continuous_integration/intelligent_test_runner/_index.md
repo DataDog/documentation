@@ -13,7 +13,7 @@ further_reading:
 
 <div class="alert alert-warning">Intelligent Test Runner is a beta product.</div>
 
-Intelligent Test Runner is Datadog's test impact analysis solution. It automatically and intelligently selects and runs only the relevant tests for a given commit based on the code being changed. Significantly reduce time spent testing and overall CI costs, while maintaining test coverage.
+Intelligent Test Runner is Datadog's test impact analysis solution. It automatically selects and runs only the relevant tests for a given commit based on the code being changed. Significantly reduce time spent testing and overall CI costs, while maintaining test coverage.
 
 
 {{< img src="continuous_integration/itr_savings.png" alt="Intelligent test runner enabled in a test session showing its time savings.">}}
@@ -44,7 +44,7 @@ Once you have setup your Datadog Library for Intelligent Test Runner, you can co
 
 {{< img src="continuous_integration/itr_overview.png" alt="Intelligent test runner enabled in test service settings in the CI section of Datadog." style="width:80%;">}}
 
-Due to the limitations described above, the default branch of your repository is automatically excluded from having Intelligent Test Runner enabled. This is the recommended configuration by Datadog to ensure that all of your tests are run in the default branch.
+Due to the limitations described above, the default branch of your repository is automatically excluded from having Intelligent Test Runner enabled. This is the recommended configuration by Datadog which ensures that all of your tests are run prior to reaching production.
 
 If there are other branches you want to exclude, you can add them from the Intelligent Test Runner settings page. The query bar supports the wildcard character `*` to exclude any branches that match.
 
