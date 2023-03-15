@@ -227,7 +227,7 @@ Enables or disables all automatic instrumentation. Setting the environment varia
 **Default**: `true`
 
 `DD_DBM_PROPAGATION_MODE`
-: Enables DBM to APM link when set to `'service'` or `'full'`. The `'service'` option enables the connection between DBM and APM services. The `'full'` option enables connection between database spans with database query events. Available for Postgres and MySql.<br>
+: Enables linking between data sent from APM and the Database Monitoring product when set to `'service'` or `'full'`. The `'service'` option enables the connection between DBM and APM services. The `'full'` option enables connection between database spans with database query events. Available for Postgres and MySQL.<br>
 **Default**: `'disabled'`
 
 `DD_HTTP_CLIENT_ERROR_STATUSES`

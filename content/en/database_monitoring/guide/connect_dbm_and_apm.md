@@ -42,12 +42,12 @@ Data privacy
 |          | [mysql2][14]                   |             | {{< X >}}   |
 | **Python:** [dd-trace-py][11] >= 1.9.0 |  |             |             |
 |          | [psycopg2][12]                 | {{< X >}}   |             |
-| **Java**     |                            |             |             |
-|          | jdbc                           | Coming soon | Coming soon |
 | **.NET** [dd-trace-dotnet][15] >= 2.26.0 ||             |             |
 |          | [Npgsql][16]                   | {{< X >}}   |             |
 |          | [MySql.Data][17]               |             | {{< X >}}   |
 |          | [MySqlConnector][18]           |             | {{< X >}}   |
+| **Java**     |                            |             |             |
+|          | jdbc                           | Coming soon | Coming soon |
 
 
 
