@@ -157,7 +157,7 @@ Additionally, you need to pass in the environment variables required to configur
 - `CF_BRANCH`
 - `CF_REVISION`
 
-[Full list of build environment variables provided by CircleCI][1]
+[Full list of build environment variables provided by Codefresh][1]
 
 
 [1]: https://circleci.com/docs/2.0/env-vars/#built-in-environment-variables
