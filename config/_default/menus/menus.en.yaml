@@ -3407,11 +3407,6 @@ main:
     parent: rum_error_tracking
     identifier: rum_error_tracking_flutter
     weight: 1407
-  - name: Custom Grouping
-    url: real_user_monitoring/error_tracking/custom_grouping
-    parent: rum_error_tracking
-    identifier: rum_error_tracking_custom_grouping
-    weight: 1408
   - name: Guides
     url: real_user_monitoring/guide/
     parent: rum
