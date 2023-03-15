@@ -77,7 +77,7 @@ The **Audit Trail Settings** tab allows you to set the retention period of audit
 
 #### OAuth Apps
 
-The [**OAuth Apps**][10] page allows you to view or manage OAuth applications in your organization. 
+The [**OAuth Apps**][10] page allows you to view or manage OAuth applications in your organization.
 
 ### General
 
@@ -96,8 +96,13 @@ When enabled, users with `Modify Index` permission can choose any of the 3-, 7-,
 
 **Note**: Using out-of-contract retention periods incur on-demand charges. If an out-of-contract retention period is often used, Datadog recommends that customers contact their account manager to have it added to their contract.
 
+#### Monitors Time Zone Preference
 
+Users with the `Org Management` permission can customize the time zone used in alert graph snapshots within Monitor alert notifications.
 
+{{< img src="account_management/monitors-time-zone-preference.png" alt="Monitors Time Zone Preferences" style="width:70%;" >}}
+
+The setting applies to **all** Monitor alert notifications, as it's an org-wide setting.
 
 ## Further reading
 

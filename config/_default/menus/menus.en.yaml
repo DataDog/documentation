@@ -160,10 +160,14 @@ main:
     url: getting_started/database_monitoring/
     parent: getting_started
     weight: 17
+  - name: Cloud Security Management
+    url: getting_started/cloud_security_management/
+    parent: getting_started
+    weight: 18
   - name: Cloud SIEM
     url: getting_started/cloud_siem/
     parent: getting_started
-    weight: 18
+    weight: 19
   - name: Application Security Management
     url: getting_started/application_security/
     parent: getting_started
@@ -2724,48 +2728,48 @@ main:
     parent: application_security
     identifier: appsec_terms
     weight: 1
-  - name: Getting Started
-    url: security/application_security/getting_started/
+  - name: Enabling ASM
+    url: security/application_security/enabling/
     parent: application_security
     identifier: appsec_getting_started
     weight: 2
   - name: Java
-    url: security/application_security/getting_started/java/
+    url: security/application_security/enabling/java/
     parent: appsec_getting_started
     identifier: appsec_java
     weight: 201
   - name: .NET
-    url: security/application_security/getting_started/dotnet/
+    url: security/application_security/enabling/dotnet/
     parent: appsec_getting_started
     identifier: appsec_dotnet
     weight: 202
   - name: Go
-    url: security/application_security/getting_started/go/
+    url: security/application_security/enabling/go/
     parent: appsec_getting_started
     identifier: appsec_go
     weight: 203
   - name: Ruby
-    url: security/application_security/getting_started/ruby/
+    url: security/application_security/enabling/ruby/
     parent: appsec_getting_started
     identifier: appsec_ruby
     weight: 204
   - name: PHP
-    url: security/application_security/getting_started/php/
+    url: security/application_security/enabling/php/
     parent: appsec_getting_started
     identifier: appsec_php
     weight: 205
   - name: NodeJS
-    url: security/application_security/getting_started/nodejs/
+    url: security/application_security/enabling/nodejs/
     parent: appsec_getting_started
     identifier: appsec_nodejs
     weight: 206
   - name: Python
-    url: security/application_security/getting_started/python/
+    url: security/application_security/enabling/python/
     parent: appsec_getting_started
     identifier: appsec_python
     weight: 207
   - name: Serverless
-    url: security/application_security/getting_started/serverless/
+    url: security/application_security/enabling/serverless/
     parent: appsec_getting_started
     identifier: appsec_serverless
     weight: 208
@@ -3403,11 +3407,6 @@ main:
     parent: rum_error_tracking
     identifier: rum_error_tracking_flutter
     weight: 1407
-  - name: Custom Grouping
-    url: real_user_monitoring/error_tracking/custom_grouping
-    parent: rum_error_tracking
-    identifier: rum_error_tracking_custom_grouping
-    weight: 1408
   - name: Guides
     url: real_user_monitoring/guide/
     parent: rum
@@ -8317,6 +8316,71 @@ api:
     url: /api/latest/incidents/
     identifier: incidents
     generated: true
+  - name: Update an incident todo
+    url: '#update-an-incident-todo'
+    identifier: incidents-update-an-incident-todo
+    parent: incidents
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateIncidentTodo
+      unstable:
+        - v2
+      order: 17
+  - name: Get incident todo details
+    url: '#get-incident-todo-details'
+    identifier: incidents-get-incident-todo-details
+    parent: incidents
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetIncidentTodo
+      unstable:
+        - v2
+      order: 16
+  - name: Delete an incident todo
+    url: '#delete-an-incident-todo'
+    identifier: incidents-delete-an-incident-todo
+    parent: incidents
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteIncidentTodo
+      unstable:
+        - v2
+      order: 18
+  - name: Create an incident todo
+    url: '#create-an-incident-todo'
+    identifier: incidents-create-an-incident-todo
+    parent: incidents
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateIncidentTodo
+      unstable:
+        - v2
+      order: 15
+  - name: Get a list of an incident's todos
+    url: '#get-a-list-of-an-incidents-todos'
+    identifier: incidents-get-a-list-of-an-incidents-todos
+    parent: incidents
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListIncidentTodos
+      unstable:
+        - v2
+      order: 14
   - name: Update an existing incident integration metadata
     url: '#update-an-existing-incident-integration-metadata'
     identifier: incidents-update-an-existing-incident-integration-metadata

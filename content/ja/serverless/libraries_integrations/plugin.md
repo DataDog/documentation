@@ -53,6 +53,7 @@ Datadog は、サーバーレスフレームワークを使用してサーバー
 | `uploadGitMetadata`           | ソースコードインテグレーションの一部として、関数の Git メタデータアップロードを有効にします。Datadog Github インテグレーションをインストールしている場合は、これを false に設定すると、Git メタデータのアップロードが不要になります。デフォルトは `true` です。 |
 | `subscribeToAccessLogs`       | Datadog Forwarder の API Gateway アクセスロググループへの自動サブスクリプションを有効化します。`forwarderArn` の設定が必要です。デフォルトは `true` です。 |
 | `subscribeToExecutionLogs`    | Datadog Forwarder の HTTP API と Websocket ロググループへの自動サブスクリプションを有効化します。`forwarderArn` の設定が必要です。デフォルトは `true` です。 |
+| `subscribeToStepFunctionLogs`    | Datadog Forwarder の Step Function ロググループへの自動サブスクリプションを有効にします。Step Function のロググループが構成されていない場合は、自動的に作成されます。`forwarderArn` の設定が必要です。デフォルトは `false` です。 |
 | `forwarderArn`                | Lambda または API Gateway のロググループにサブスクライブされる Datadog Forwarder の ARN。 |
 | `addLayers`                   | Datadog Lambda ライブラリをレイヤーとしてインストールするかどうか。デフォルトは `true` です。特定のバージョンの Datadog Lambda ライブラリ ([Python][8] または [Node.js][9]) をインストールできるように Datadog Lambda ライブラリを関数のデプロイパッケージに独自にパッケージ化する場合は、`false` に設定します。 |
 | `addExtension`                | Datadog Lambda 拡張機能をレイヤーとしてインストールするかどうか。デフォルトは `true` です。有効にすると、`apiKey` と `site` を設定する必要があります。 |

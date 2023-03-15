@@ -40,7 +40,7 @@ Data privacy
 |          | [postgres][10]                 | {{< X >}}   |             |
 |          | [mysql][13]                    |             | {{< X >}}   |
 |          | [mysql2][14]                   |             | {{< X >}}   |
-| **Python:** [dd-trace-py][11] >= 1.7.0 |  |             |             |
+| **Python:** [dd-trace-py][11] >= 1.9.0 |  |             |             |
 |          | [psycopg2][12]                 | {{< X >}}   |             |
 | **Java**     |                            |             |             |
 |          | jdbc                           | Coming soon | Coming soon |
@@ -180,7 +180,7 @@ pip install psycopg2
 ```
 
 Enable the database monitoring propagation feature by setting the following environment variable:
-   - `DD_TRACE_SQL_COMMENT_INJECTION_MODE=full`
+   - `DD_DBM_PROPAGATION_MODE=full`
 
 For the best user experience ensure the following environment variables are set in your application:
    - `DD_SERVICE=(application name)`

@@ -106,7 +106,7 @@ To add detailed C function call information to CPU profiles, you may opt to use 
 1. Download the package:
 
     ```shell
-   go get github.com/ianlancetaylor/cgosymbolizer@latest
+    go get github.com/ianlancetaylor/cgosymbolizer@latest
     ```
 
 2. Add the following import anywhere in your program:
