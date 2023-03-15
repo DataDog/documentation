@@ -1,0 +1,9 @@
+{{ $destination := .Destination }}
+{{ $text := .Text }}
+{{ $url_struct := urls.Parse $destination }}
+
+{{ if or (eq $url_struct.Scheme "") (eq $url_struct.Host "") }}
+    {{ $destination = print "https://app.datadoghq.com" $destination }}
+{{ end }}
+
+<a href="{{ $destination }}" alt="{{ $text }}">{{ $text }}</a>
