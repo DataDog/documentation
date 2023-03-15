@@ -40,7 +40,7 @@ Prior to setting up Intelligent Test Runner, you must have finished setting up [
 
 ## Configuration
 
-Once you have setup your Datadog Library for Intelligent Test Runner, you can control how to configure it from the [Test Service Settings][2] page.
+Once you have setup your Datadog Library for Intelligent Test Runner, you can configure it from the [Test Service Settings][2] page.
 
 {{< img src="continuous_integration/itr_overview.png" alt="Intelligent test runner enabled in test service settings in the CI section of Datadog." style="width:80%;">}}
 
