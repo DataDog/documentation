@@ -52,8 +52,6 @@ Use the search bar's autocomplete feature to complete your query using:
 
 Clear error states inform the user of which part of the query contains syntax errors and how to remediate it. For example, when a user inputs the query "service:" with no value, we display the message “Missing value in key:value pair” on hover.
 
-{{< img src="logs/explorer/search/search_bar_autocomplete_error.jpg" alt="search bar autocomplete " style="width:80%;">}}
-
 ## Escaping of special characters
 
 The following characters are considered special: `+` `-` `=` `&&` `||` `>` `<` `!` `(` `)` `{` `}` `[` `]` `^` `"` `“` `”` `~` `*` `?` `:` `\`, and `/` require escaping with the `\` character. You can’t search for special characters in a log message. However, you can search for special characters when they’re inside of an attribute. To search for special characters, parse them into an attribute with the [grok parser][1], and then search for logs that contain the attribute.
