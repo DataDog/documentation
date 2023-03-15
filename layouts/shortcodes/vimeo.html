@@ -1,3 +1,13 @@
-<div class="video-container position-relative"><video poster="https://imgix.datadoghq.com/img/ProductVideoDashboard_HD.jpg?ch=Width,DPR,Save-Data&amp;auto=format,compress&amp;fit=clip&amp;w=1200" class="shadow-card-nohover w-100 video-controls" controls="">
-  <source type="video/mp4" src="https://player.vimeo.com/video/267485720"></video>
+{{ $posterImg := "" }}
+
+{{- if .Get "poster" -}}
+  {{ $posterImg = (print (.Site.Params.img_url) (.Get "poster")  "?ch=Width,DPR,Save-Data&auto=format,compress&fit=clip&w=1200") | safeURL }}
+{{ else }}
+  {{ $posterImg = "/images/tracing.png" }}
+{{ end }}
+
+<div class="video-container position-relative"><video poster="{{ $posterImg }}" class="shadow-card-nohover w-100 video-controls" controls="">
+  <source type="video/mp4" src="{{ .Get "url" }}"></video>
 </div>
+
+
