@@ -18,7 +18,9 @@ Intelligent Test Runner is only supported on `dd-sdk-swift>= 2.2.0`.
 
 ## Setup
 
-Prior to setting up Intelligent Test Runner, you must have finished setting up [Test Visibility for Swift][1]. If you are reporting data through the Datadog Agent you need to use v6.40+/v7.40+.
+Prior to setting up Intelligent Test Runner, you must have finished setting up [Test Visibility for Swift][1]. The Code Coverage option must also be enabled in the test settings of your scheme or test plan, or --enable-code-coverage must be added to your swift test command (if using a SPM target).
+
+If you are reporting data through the Datadog Agent you need to use v6.40+/v7.40+.
 
 To enable Intelligent Test Runner, the following environment variables need to be set:
 
