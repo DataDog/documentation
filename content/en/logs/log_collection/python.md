@@ -66,7 +66,7 @@ Once [log collection][7] is enabled, set up [custom log collection][8] to tail y
         #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
     ```
 3. [Restart the Agent][5].
-4. Run the Agent's status subcommand and look for `python` under the `Checks` section to confirm that logs are successfully submitted to Datadog.
+4. Run the [Agent's status subcommand][9] and look for `python` under the `Checks` section to confirm that logs are successfully submitted to Datadog.
 
 If logs are in JSON format, Datadog automatically [parses the log messages][10] to extract log attributes. Use the [Log Explorer][11] to view and troubleshoot your logs.
 
