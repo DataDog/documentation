@@ -15,6 +15,15 @@ further_reading:
 
 ## Overview
 
+The [Observability Pipelines Worker][] can ingest logs from many different sources. If you have an AWS S3 bucket that is receiving logs from an external system, such as AWS CloudTrail or Cloudwatch, you can configure the Worker to ingest those logs.  The setup uses Vector's AWS S3 source, which requires configuring an Amazon SQS queue to receive event notifications from the S3 bucket. The event notification then informs the Worker to collect the new log events in the S3 bucket. 
+
+This guide walks you through the following steps:
+
+1. Create an Amazon SQS Topic to receive S3 event notifications.
+2. Enable event notifications on the S3 bucket.
+3. Create an IAM role to provide the Worker only the necessary permissions.
+4. Configure the Worker to receive notifications from the SQS queue and to collect logs from the S3 bucket.
+5. Configure the Worker to separate out batched S3 log events.
 
 ## Prerequisites
 - You have [installed and configured the Observability Pipelines Worker][1] to collect data from your sources and route it to your destinations.
