@@ -24,7 +24,7 @@ By minimizing the number of tests run per commit, Intelligent Test Runner reduce
 
 ### Limitations during beta
 
-There are known limitations in the current implementation of Intelligent Test Runner that can cause it to skip tests that should be run under certain conditions. Intelligent Test Runner is not able to detect changes in library dependencies, compiler options, external services or changes to data files in data-driven tests.
+There are known limitations in the current implementation of Intelligent Test Runner that can cause it to skip tests that should be run under certain conditions. Specifically, Intelligent Test Runner is not able to detect changes in library dependencies, compiler options, external services or changes to data files in data-driven tests.
 
 To override Intelligent Test Runner and run all tests, add `ITR:NoSkip` (case insensitive) anywhere in your Git commit message.
 
@@ -40,7 +40,7 @@ Prior to setting up Intelligent Test Runner, you must have finished setting up [
 
 ## Configuration
 
-Once you have setup your Datadog Library for Intelligent Test Runner, you can control how to configure it from the [Test Service Settings][2] page.
+Once you have setup your Datadog Library for Intelligent Test Runner, you can configure it from the [Test Service Settings][2] page.
 
 {{< img src="continuous_integration/itr_overview.png" alt="Intelligent test runner enabled in test service settings in the CI section of Datadog." style="width:80%;">}}
 
@@ -58,7 +58,7 @@ You can explore the time savings you are getting from Intelligent Test Runner by
 
 {{< img src="continuous_integration/itr_savings.png" alt="Intelligent test runner enabled in a test session showing its time savings." style="width:80%;">}}
 
-When Intelligent Test Runner is active and skipping tests, you can see a purple text which displays the amount of time you saved on each test session or on each commit. The duration bar also changes color to purple so you can quickly identify which test sessions were using Intelligent Test Runner in the [Test Runs][3] page.
+When Intelligent Test Runner is active and skipping tests, you can see a purple text which displays the amount of time saved on each test session or on each commit. The duration bar also changes color to purple so you can quickly identify which test sessions are using Intelligent Test Runner in the [Test Runs][3] page.
 
 ## Explore adoption and global savings
 
