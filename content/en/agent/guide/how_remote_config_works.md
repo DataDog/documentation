@@ -107,7 +107,7 @@ Datadog implements the following safeguards, designed to protect the confidentia
 | ASM 1-click activation        |               | 1.4.0         | 2.17.0        | 3.9.0         |
 
 ### Setup
-To enable Remote Configuration: 
+To activate Remote Configuration: 
 
 1.  Ensure your RBAC permissions include [`org_management`][9] so you can enable Remote Configuration for your organization.
 
