@@ -5,7 +5,7 @@ description: "Graph a metric distribution aggregated across one or several tags.
 aliases:
     - /graphing/widgets/distribution/
 further_reading:
-- link: "https://docs.datadoghq.com/metrics/distributions/"
+- link: "/metrics/distributions/"
   tag: "Documentation"
   text: "Distributions"
 - link: "/dashboards/graphing_json/"
