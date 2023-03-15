@@ -2,7 +2,7 @@
 title: Intelligent Test Runner for Swift
 kind: documentation
 aliases:
-  - /continuous_integration/intelligent_test_runner/dotnet
+  - /continuous_integration/intelligent_test_runner/swift
 further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
