@@ -46,7 +46,7 @@ Once you have setup your Datadog Library for Intelligent Test Runner, you can co
 
 Due to the limitations described above, the default branch of your repository is automatically excluded from having Intelligent Test Runner enabled. This is the recommended configuration by Datadog which ensures that all of your tests are run prior to reaching production.
 
-If there are other branches you want to exclude, you can add them from the Intelligent Test Runner settings page. The query bar supports the wildcard character `*` to exclude any branches that match.
+If there are other branches you want to exclude, you can add them from the Intelligent Test Runner settings page. The query bar supports the wildcard character `*` to exclude any branches that match, such as `release_*`
 
 {{< img src="continuous_integration/itr_configuration.png" alt="Select branches to exclude from intelligent test runner" style="width:80%;">}}
 
