@@ -316,6 +316,12 @@ To create filters or `group by` fields for these tags, you must first create fac
 
 If the browser application being tested is instrumented using [RUM][6], your Cypress test results and their generated RUM browser sessions and session replays are automatically linked. Learn more in the [RUM integration][7] guide.
 
+
+### Cypress interactive mode
+
+Cypress interactive mode (that is, when cypress is run via `cypress open`) is not supported by CI Visibility, because some events CI Visibility relies on are not fired by default, such as [`before:run`][8]. If you want to try it anyway, we suggest that you pass `experimentalInteractiveRunEvents: true` to the [cypress configuration file][9].
+
+
 [1]: https://docs.cypress.io/api/plugins/writing-a-plugin#Plugins-API
 [2]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Plugins-file
 [3]: https://docs.cypress.io/guides/references/configuration#cypress-json
@@ -323,6 +329,8 @@ If the browser application being tested is instrumented using [RUM][6], your Cyp
 [5]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
 [6]: /real_user_monitoring/browser/#setup
 [7]: /continuous_integration/guides/rum_integration/
+[8]: https://docs.cypress.io/api/plugins/before-run-api
+[9]: https://docs.cypress.io/guides/references/configuration#Configuration-File
 {{% /tab %}}
 
 {{< /tabs >}}
