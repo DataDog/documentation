@@ -11,16 +11,16 @@ further_reading:
     text: "Monitor all your CI pipelines with Datadog"
 ---
 
-<div class="alert alert-warning">Intelligent Test runner is a beta product.</div>
+<div class="alert alert-warning">Intelligent Test Runner is a beta product.</div>
 
-Intelligent Test Runner is Datadog's test impact analysis solution. It automatically selects and runs only the relevant tests needed to validate any given commit, enabling you to reduce testing downtime while maintaining test coverage.
+Intelligent Test Runner is Datadog's test impact analysis solution. It automatically and intelligently selects and runs only the relevant tests for a given commit based on the code being changed. Significantly reduce time spent testing and overall CI costs, while maintaining test coverage.
 
 
 {{< img src="continuous_integration/itr_savings.png" alt="Intelligent test runner enabled in a test session showing its time savings.">}}
 
 It does this by analyzing your test suite to determine the code each test covers, and then cross-referencing that coverage with the files impacted by a new code change. Datadog uses this information to run a selection of relevant, impacted tests, omitting the ones unaffected by the code change and reducing the overall testing duration.
 
-By minimizing the number of tests run per commit, Intelligent Test Runner can help reduce the frequency of flaky tests disrupting your pipelines. Flaky tests are tests that may pass or fail at random given the same commit. This can be particularly frustrating when the test flaking is unrelated to the code change being tested. After enabling Intelligent Test Runner for your test services, you can limit each commit to its relevant tests to ensure that flaky tests unrelated to your code change don’t end up arbitrarily breaking your build.
+By minimizing the number of tests run per commit, Intelligent Test Runner reduces the frequency of flaky tests disrupting your pipelines. Flaky tests are tests that may pass or fail at random given the same commit. This can be particularly frustrating when the test flaking is unrelated to the code change being tested. After enabling Intelligent Test Runner for your test services, you can limit each commit to its relevant tests to ensure that flaky tests unrelated to your code change don’t end up arbitrarily breaking your build.
 
 ### Limitations during beta
 
@@ -62,7 +62,7 @@ When Intelligent Test Runner is active and skipping tests, you can see a purple 
 
 ## Explore adoption and global savings
 
-You can also track you organization's savings and adoption of Intelligent Test Runner through the out-of-the-box [Intelligent Test Runner dashboard][4], which includes widgets to track your overall savings as well as a per-repository, per-committer and per-service view of the data so you can understand where and who is getting the most out of Intelligent Test Runner.
+You can also track you organization's savings and adoption of Intelligent Test Runner through the out-of-the-box [Intelligent Test Runner dashboard][4]. The dashboard includes widgets to track your overall savings as well as a per-repository, per-committer and per-service view of the data so you can understand what parts of your organization are using and getting the most out of Intelligent Test Runner.
 
 {{< img src="continuous_integration/itr_dashboard1.png" alt="Intelligent Test Runner dashboard" style="width:80%;">}}
 
