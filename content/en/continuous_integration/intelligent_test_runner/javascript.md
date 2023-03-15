@@ -17,7 +17,7 @@ further_reading:
 Intelligent Test Runner is only supported in the following versions and testing frameworks:
 
 * `jest>=24.8.0`
-  * From `dd-trace>=3.10.0` or `dd-trace>=2.23.0`
+  * From `dd-trace>=3.11.0` or `dd-trace>=2.24.0`
   * Only `jest-circus/runner` is supported as `testRunner`.
   * Only `jsdom` and `node` are supported as test environments.
 * `mocha>=5.2.0`
