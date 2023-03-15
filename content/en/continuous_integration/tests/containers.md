@@ -160,7 +160,7 @@ Additionally, you need to pass in the environment variables required to configur
 [Full list of build environment variables provided by Codefresh][1]
 
 
-[1]: https://circleci.com/docs/2.0/env-vars/#built-in-environment-variables
+[1]: https://codefresh.io/docs/docs/pipelines/variables/
 {{% /tab %}}
 {{% tab "GitHub Actions" %}}
 
