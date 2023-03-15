@@ -10,7 +10,13 @@ import re
 
 '''
 Find the source repo for a given integration.
+
+TODO:
+- Remove from make. Add to dedicated CLI
+- Make repo + branch finder a separate module
+- Make branch updater a separate module / command
 '''
+
 def filter_out_dots(array):
     for dir in array:
         if dir[0] == '.':
@@ -51,16 +57,15 @@ def update_repos(integrations_repos):
 
 # Find the given integration in the integrations repos
 def find_integration(integrations_repos, integration_name):
-    integration_dict = {}
     found = []
     for repo in integrations_repos:
         for k in repo:
             integration_list = []
             location = os.path.join('..', k)
+            url = f'- https://github.com/DataDog/{k}/blob/{repo[k]}/{integration_name}/README.md'
             if k == 'dogweb':
                 location = location + '/integration/'
                 url = f'- https://github.com/DataDog/{k}/blob/{repo[k]}/integration/{integration_name}/README.md'
-            url = f'- https://github.com/DataDog/{k}/blob/{repo[k]}/{integration_name}/README.md'
             integration_list = [f.name for f in os.scandir(location) if f.is_dir()]
             integration_list = filter_out_dots(integration_list)
             if integration_name in integration_list:
