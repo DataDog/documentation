@@ -16,8 +16,8 @@ If you stop reporting data to Datadog, after a certain period of time metrics, t
 |--------------------------------------|----------|
 | Hosts                                | 2 hours  |
 | Metrics                              | 24 hours |
-| Tags in template variable drop-downs | 48 hours |
-| Tags in other drop-downs             | 12 hours |
+| Tags in template variable dropdown panels | 48 hours |
+| Tags in other dropdown panels             | 12 hours |
 | APM `env` tags                       | 60 days  |
 
 Even though the data is not listed, you can still query the data with the [JSON editor][1]. A simple solution is to query for the host name or tags.
@@ -32,11 +32,11 @@ There is no way to delete a metric or tag immediately. The list above shows how 
 
 For monitors, the metric stream is no longer considered after the age-out period.
 
-For dashboards, the metric or tag appears in the visualization following the age-out period but is not available in the drop-downs for graphing with the UI editor. The corresponding metric or tag remains available for graphing by using the [JSON][1] method.
+For dashboards, the metric or tag appears in the visualization following the age-out period but is not available in the dropdown panels for graphing with the UI editor. The corresponding metric or tag remains available for graphing by using the [JSON][1] method.
 
 ### Hosts
 
-If you're running the Agent, and you've intentionally [stopped][4] or [removed][5] your host, all hosts that have not seen new data in 2 hours disappear from the UI. You can still query against them. However, they do not appear in drop-downs, the infrastructure list, or host map.
+If you're running the Agent, and you've intentionally [stopped][4] or [removed][5] your host, all hosts that have not seen new data in 2 hours disappear from the UI. You can still query against them. However, they do not appear in dropdowns, the infrastructure list, or host map.
 
 [1]: /dashboards/graphing_json/
 [2]: /agent/

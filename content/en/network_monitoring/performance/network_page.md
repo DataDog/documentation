@@ -25,15 +25,15 @@ To refine your search to traffic between particular endpoints, aggregate and fil
 
 The following screenshot shows the default view, which aggregates the _source_ and _destination_ by the `service` tag. Accordingly, each row in the table represents service-to-service aggregate connections when aggregated over a one hour time period.
 
-{{< img src="network_performance_monitoring/network_page/context_npm.png" alt="context"  style="width:80%;">}}
+{{< img src="network_performance_monitoring/network_page/context_npm.png" alt="context" style="width:80%;">}}
 
 The next example shows all aggregate connections from IP addresses representing services in region `us-east-1` to availability zones:
 
-{{< img src="network_performance_monitoring/network_page/flow_table_region_az.png" alt="Aggregate connection table filtered"  style="width:80%;">}}
+{{< img src="network_performance_monitoring/network_page/flow_table_region_az.png" alt="Aggregate connection table filtered" style="width:80%;">}}
 
 You can set the timeframe over which traffic is aggregated using the time selector at the top right of the page:
 
-{{< img src="network_performance_monitoring/network_page/npm_timeframe.png" alt="Time frame NPM"  style="width:30%;">}}
+{{< img src="network_performance_monitoring/network_page/npm_timeframe.png" alt="Time frame NPM" style="width:30%;">}}
 
 Tags from Datadog integrations or Unified Service Tagging can be used for aggregating and filtering automatically. See [custom facets](#custom-facets), below, for other tags. You can also select "Popular Tags" to aggregate on, using a combination of `service`, `kube_service`, `short_image`, `container_name`, and other common tags.
 
@@ -41,13 +41,13 @@ Tags from Datadog integrations or Unified Service Tagging can be used for aggreg
 
 Facet panels mirror the tags in your search bar query. Switch between the facet panels with the _Source_ and _Destination_ tabs on top:
 
-{{< img src="network_performance_monitoring/network_page/destination_panel.png" alt="Destination panel"  style="width:20%;">}}
+{{< img src="network_performance_monitoring/network_page/destination_panel.png" alt="Destination panel" style="width:20%;">}}
 
 #### Custom facets
 
 Aggregate and filter your traffic data by any tags in Datadog network page. An include list of tags is provided by default, which you can find in the search bar dropdown menu:
 
-{{< img src="network_performance_monitoring/network_page/drop_down_npm.png" alt="Drop down menu"  style="width:90%;">}}
+{{< img src="network_performance_monitoring/network_page/drop_down_npm.png" alt="Dropdown menu" style="width:90%;">}}
 
 Include listed tags are `service`, `availability zone`, `env`, `environment`, `pod`, `host`, `ip`, and `port`, among others. If you want to aggregate or filter traffic by a tag that is not already in the menu, add it as a custom Facet:
 
