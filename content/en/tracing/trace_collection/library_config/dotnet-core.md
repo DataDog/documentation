@@ -210,6 +210,10 @@ The following configuration variables are available **only** when using automati
 Enables or disables all automatic instrumentation. Setting the environment variable to `false` completely disables the CLR profiler. For other configuration methods, the CLR profiler is still loaded, but traces will not be generated. Valid values are: `true` or `false`.<br>
 **Default**: `true`
 
+`DD_DBM_PROPAGATION_MODE`
+: Enables DBM to APM link when set to `'service'` or `'full'`. The `'service'` option enables the connection between DBM and APM services. The `'full'` option enables connection between database spans with database query events. Available for Postgres and MySql.<br>
+**Default**: `'disabled'`
+
 `DD_HTTP_CLIENT_ERROR_STATUSES`
 : Sets status code ranges that will cause HTTP client spans to be marked as errors. <br>
 **Default**: `400-499`
