@@ -65,14 +65,23 @@
 <span class="o">-H</span> <span class="s1">"Content-Type: {{ default "application/json" .contentType }}"</span>
 {{- with $parameters.headerParams -}}
 {{- range . -}}
-{{- $def := "" -}}
-{{- range $enumVal := .schema.enum -}}
-{{- if in $title $enumVal -}}{{- $def = $enumVal -}}{{- end -}}
-{{- end -}}
-{{- if or (isset .schema "example") (gt (len $def) 0) -}}
-{{- $contentEncoding = (.example | default (.schema.example | default $def)) -}}
+{{- if eq .name "Content-Encoding" -}}
+  {{- $def := "" -}}
+  {{- range $enumVal := .schema.enum -}}
+    {{- if in $title $enumVal -}}{{- $def = $enumVal -}}{{- end -}}
+  {{- end -}}
+  {{- if gt (len $def) 0 -}}
+    {{- $contentEncoding = $def -}}
+  {{- else if (or (and (isset .schema "example") (.required | default false)) (in $title "compression") ) -}}
+    {{- $contentEncoding = (.example | default .schema.example) -}}
+  {{- end -}}
+  {{- if $contentEncoding -}}
 &nbsp;\
-<span class="o">-H</span> <span class="s1">"{{ .name }}: {{ .example | default (.schema.example | default $def ) }}"</span>
+<span class="o">-H</span> <span class="s1">"{{ .name }}: {{ $contentEncoding }}"</span>
+  {{- end -}}
+{{- else -}}
+&nbsp;\
+<span class="o">-H</span> <span class="s1">"{{ .name }}: {{ .example | default .schema.example }}"</span>
 {{- end -}}
 {{- end -}}
 {{- end -}}
