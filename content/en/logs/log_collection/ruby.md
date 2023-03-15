@@ -66,7 +66,6 @@ To the following JSON format of the log, which provides more structure:
     ```ruby
     gem 'lograge'
     ```
-
 2. In your configuration file, set the following to configure Lograge:
     ```ruby
     # Lograge config
@@ -88,7 +87,6 @@ To the following JSON format of the log, which provides more structure:
         }
     end
     ```
-
     **Note**: Lograge can also add contextual information to your logs. See the [Lograge documentation][1] for more details.
 
 For a more in-depth example of this setup, see [How to collect, customize, and manage Rails application logs][2].
@@ -122,7 +120,6 @@ end
     ```ruby
     gem 'grape_logging'
     ```
-
 2. Add the additional configuration to Grape:
 
     ```ruby
@@ -131,7 +128,6 @@ end
           include: [ GrapeLogging::Loggers::Response.new,
                     GrapeLogging::Loggers::FilterParameters.new ]
     ```
-
 3. Create the `config/initializers/instrumentation.rb` file and add the following configuration:
 
     ```ruby
@@ -149,9 +145,7 @@ end
 Once [log collection is enabled][3], do the following to set up [custom log collection][4] to tail your log files and send them to Datadog.
 
 1. Create a `ruby.d/` folder in the `conf.d/` [Agent configuration directory][5]. 
-
 2. Create a `conf.yaml` file in `ruby.d/` with the following content:
-
     ```yaml
       logs:
         - type: file
@@ -166,8 +160,10 @@ Once [log collection is enabled][3], do the following to set up [custom log coll
           #    name: new_log_start_with_date
           #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
     ```
-
 4. [Restart the Agent][6].
+5. Run the [Agent's status subcommand][8] and look for `ruby` under the `Checks` section to confirm that logs are successfully submitted to Datadog.
+
+If logs are in JSON format, Datadog automatically [parses the log messages][9] to extract log attributes. Use the [Log Explorer][10] to view and troubleshoot your logs.
 
 ## Connect logs and traces
 
@@ -209,3 +205,6 @@ The hash is converted into JSON and you can carry out analytics for `user` and `
 [5]: /agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
 [6]: /agent/guide/agent-commands/#restart-the-agent
 [7]: /tracing/other_telemetry/connect_logs_and_traces/ruby/
+[8]: /agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
+[9]: /logs/log_configuration/parsing
+[10]: /logs/explorer/
