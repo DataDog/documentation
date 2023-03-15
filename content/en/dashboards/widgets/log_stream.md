@@ -23,7 +23,7 @@ The Log Stream displays a log flow matching the defined query.
 ### Configuration
 
 1. Enter a [search query][1] to filter the log stream.
-1. You can group Logs into event subsets of [Log Analytics][2], which include `Patterns` and `Transactions`.
+1. You can group logs into event subsets of [Log Analytics][2], which include `Patterns` and `Transactions`.
 1. Update the columns to display the values of your [facets][3] and [measures][3].
 1. Give your graph a title or leave the box blank for the suggested title.
 
