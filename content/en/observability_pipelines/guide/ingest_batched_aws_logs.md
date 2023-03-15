@@ -1,9 +1,6 @@
 ---
 title: Ingest AWS S3 Logs with the Observability Pipelines Worker
 kind: guide
-aliases:
-  - /integrations/observability_pipelines/guide/ingest_cloudtrail_logs/
-  - /integrations/observability_pipelines/guide/ingest_vpc_flow_logs/
 further_reading:
   - link: "/observability_pipelines/working_with_data/"
     tag: "Documentation"
