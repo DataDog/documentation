@@ -109,22 +109,26 @@ From there, all ASM-protected services block incoming requests performed by the 
 For more information, read [Threat Monitoring and Protection][22].
 
 
+## Attack Attempt Qualification
+
+Leveraging distributed tracing information, attacks attempts are qualified as safe, unknown, or harmful. 
+* Attack attempts qualified as safe cannot breach your application, for example, when a PHP injection attack targets a service written in Java. 
+* An unknown qualification is decided when there is not enough information to come to make a definitive opinion about the attack’s probability of success.
+* A harmful qualification is highlighted when there is evidence that a code level vulnerability has been found by the attacker.
+
+
+
 ## Threat monitoring coverage
 
-Datadog ASM categorizes attack attempts into different threat types:
 
-* **Unqualified attacks** match inbound HTTP requests with known attack patterns. For example, no correlation with the service's business-logic is found after correlating with the execution context provided by the trace.
-* **Contextualized attacks** correlate the attack attempts performed on the service with a matching business-logic. For example, SQL injection patterns on a service performing SQL statements.
-* A **Vulnerability is triggered** when an attack attempt gives evidence that a vulnerability has been successfully exploited, after matching known attack patterns.
-
-Datadog ASM includes over 100 attack patterns that help protect against [many different kinds of attacks][15], including the following vulnerabilities:
+Datadog ASM includes over 100 attack signatures that help protect against [many different kinds of attacks][15], including, but not limited to the following categories:
 
 * SQL injections
 * Code injections
 * Shell injections
 * NoSQL injections
 * Cross-Site Scripting (XSS)
-* Sever-side Request Forgery (SSRF)
+* Server-side Request Forgery (SSRF)
 
 ## Built-in vulnerability detection
 
