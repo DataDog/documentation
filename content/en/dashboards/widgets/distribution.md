@@ -29,7 +29,7 @@ This visualization displays only a single query; additional queries are disregar
 
 **Note**: Outlier detection cannot be performed for this visualization.
 
-{{< img src="dashboards/widgets/distribution/distribution.png" alt="Distribution graph">}}
+{{< img src="/dashboards/widgets/distribution/distribution_fullscreen.png" alt="Distribution graph for JVM heap average by host">}}
 
 ## Setup
 
@@ -59,7 +59,6 @@ They allow you to:
 * Change the y-axis scale from linear to log.
 
 {{< img src="dashboards/widgets/options/distribution_axis_controls.jpg" alt="Distribution axis control preferences" style="width:80%;">}}
-
 
 ### Full screen
 
