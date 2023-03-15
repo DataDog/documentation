@@ -36,8 +36,8 @@ Get a list of CSPM findings.
 | `filter[evaluation_changed_at]` | integer          | Return findings that have changed from pass to fail or vice versa on a specified date (unix ms) or date range (using comparison operators). |
 | `filter[muted]`                 | boolean          | Set to `true` to return findings that are muted. Set to `false` to return unmuted findings.                                                 |
 | `filter[discovery_timestamp]`   | string           | Return findings that were found on a specified date (unix ms) or date range (using comparison operators).                                   |
-| `filter[resource_type]`         | string           | Specifies which resource types should be included in the response.                                                                          |
-| `filter[rule_id]`               | string           | Returns findings for the specified rule ID.                                                                                                 |
+| `filter[resource_type]`         | string           | Return only findings for the specified resource types.                                                                          |
+| `filter[rule_id]`               | string           | Return findings for the specified rule ID.                                                                                                 |
 | `filter[rule_name]`             | string           | Return findings for the specified rule.                                                                                                     |
 | `filter[status]`                | string           | Return only findings with the specified status. Allowed enum values: `critical`, `high`, `medium`, `low`, `info`                            |
 | `filter[tags]`                  | array of strings | Return the next page of findings pointed to by the cursor (repeatable).                                                                     |
