@@ -24,7 +24,7 @@ To track or monitor your volume of ingested and indexed data, see the [Usage Met
 
 ## Retention filters
 
-After spans have been ingested, some are kept for 15 to 30 days according to the retention filters that have been set on your account.
+After spans have been ingested, some are kept for 15 days according to the retention filters that have been set on your account.
 
 The following retention filters are enabled by default to ensure that you keep visibility over all of your services and endpoints, as well as errors and high-latency traces: 
 - The [Intelligent Retention Filter](#datadog-intelligent-retention-filter) retains spans for every environment, service, operation, and resource for different latency distributions.
