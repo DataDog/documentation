@@ -14,7 +14,7 @@
                 <nav id="TableOfContents">
                   <ul>
                     {{ range $data := $iterable_data }}
-                      <li><a href="#{{ $data.metadata.logical_name | anchorize }}">{{ $data.description1 }}</a></li>
+                      <li><a href="#{{ $data.metadata.logical_name | anchorize }}">{{ index $data.metadata "docs::label" }}</a></li>
                     {{ end }}
                   </ul>
                 </nav>

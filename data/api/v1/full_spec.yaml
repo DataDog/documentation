@@ -697,7 +697,8 @@ components:
       description: Cancel downtimes according to scope.
       properties:
         scope:
-          description: 'The scope(s) to which the downtime applies. For example, `host:app2`.
+          description: 'The scope(s) to which the downtime applies and must be in
+            `key:value` format. For example, `host:app2`.
 
             Provide multiple scopes as a comma-separated list like `env:dev,env:prod`.
 
@@ -1742,7 +1743,8 @@ components:
         recurrence:
           $ref: '#/components/schemas/DowntimeRecurrence'
         scope:
-          description: 'The scope(s) to which the downtime applies. For example, `host:app2`.
+          description: 'The scope(s) to which the downtime applies and must be in
+            `key:value` format. For example, `host:app2`.
 
             Provide multiple scopes as a comma-separated list like `env:dev,env:prod`.
 
@@ -1876,7 +1878,8 @@ components:
         recurrence:
           $ref: '#/components/schemas/DowntimeRecurrence'
         scope:
-          description: 'The scope(s) to which the downtime applies. For example, `host:app2`.
+          description: 'The scope(s) to which the downtime applies and must be in
+            `key:value` format. For example, `host:app2`.
 
             Provide multiple scopes as a comma-separated list like `env:dev,env:prod`.
 
@@ -17279,6 +17282,11 @@ components:
             the current date for all organizations.
           format: int64
           type: integer
+        audit_trail_enabled_hwm:
+          description: Shows the number of organizations that had Audit Trail enabled
+            in the current date.
+          format: int64
+          type: integer
         avg_profiled_fargate_tasks:
           description: The average profiled task count for Fargate Profiling.
           format: int64
@@ -17663,6 +17671,11 @@ components:
         audit_logs_lines_indexed_sum:
           description: Shows the sum of all audit logs lines indexed over all hours
             in the current date for the given org.
+          format: int64
+          type: integer
+        audit_trail_enabled_hwm:
+          description: Shows whether Audit Trail is enabled for the current date for
+            the given org.
           format: int64
           type: integer
         avg_profiled_fargate_tasks:
@@ -18052,6 +18065,11 @@ components:
         audit_logs_lines_indexed_agg_sum:
           description: Shows the sum of all audit logs lines indexed over all hours
             in the current months for all organizations.
+          format: int64
+          type: integer
+        audit_trail_enabled_hwm_sum:
+          description: Shows the total number of organizations that had Audit Trail
+            enabled over a specific number of months.
           format: int64
           type: integer
         avg_profiled_fargate_tasks_sum:
