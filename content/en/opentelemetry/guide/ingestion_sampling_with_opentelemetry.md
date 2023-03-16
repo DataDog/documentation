@@ -109,4 +109,4 @@ You can leverage the [APM Estimated Usage dashboard][13] and the estimated usage
 [11]: https://github.com/DataDog/datadog-agent/blob/fd550c6/pkg/config/config_template.yaml#L3533-L3545
 [12]: https://docs.datadoghq.com/tracing/trace_pipeline/ingestion_mechanisms/?tab=java#error-traces
 [13]: https://docs.datadoghq.com/tracing/trace_pipeline/ingestion_mechanisms/?tab=java#rare-traces
-[14]: https://app.datadoghq.com/dash/integration/apm_estimated_usage
+[13]: https://app.datadoghq.com/dash/integration/apm_estimated_usage
