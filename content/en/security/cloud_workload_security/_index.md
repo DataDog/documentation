@@ -5,7 +5,7 @@ aliases:
   - /security_platform/cloud_workload_security/
 ---
 
-Datadog Cloud Workload Security (CWS) monitors file and process activity across your environment to detect real-time threats to your infrastructure. As part of the Datadog platform, you can combine the real-time threat detection of CWS with metrics, logs, traces, and other telemetry to see the full context surrounding a potential attack on your workloads.
+Datadog Cloud Workload Security (CWS) monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure. As part of the Datadog platform, you can combine the real-time threat detection of CWS with metrics, logs, traces, and other telemetry to see the full context surrounding a potential attack on your workloads.
 
 ## Detects threats to your production workloads in real-time
 
@@ -22,11 +22,15 @@ CWS uses the Datadog Agent to monitor your environment. If you don't already hav
 
 ## Manage out-of-the-box and custom detection rules
 
-CWS comes with more than 50+ out-of-the-box detection rules that are maintained by a team of security experts. The rules surface the most important risks so that you can immediately take steps to remediate. 
+CWS comes with more than 50+ out-of-the-box detection rules that are maintained by a team of security experts. The rules surface the most important risks so that you can immediately take steps to remediate. Agent expression rules define the workload activities to be collected for analysis while backend detection rules analyze the activities and identify attacker techniques and other risky patterns of behavior.
 
-Use [Remote Configuration][7] to automatically deploy new and updated rules to the Agent. [Customize the rules][5] by defining how each rule monitors process and file activity, [create custom rules][6], and [set up real-time notifications](#set-up-real-time-notifications) for new signals.
+Use [Remote Configuration][7] to automatically deploy new and updated rules to the Agent. [Customize the rules][5] by defining how each rule monitors process, network, and file activity, [create custom rules][6], and [set up real-time notifications](#set-up-real-time-notifications) for new signals.
 
 {{< img src="security/cws/cws_detection_rules.png" alt="Cloud Workload Security detection rules in the Datadog app" width="100%">}}
+
+## Model expected workload behavior
+
+Create a baseline of expected workload behavior with Workload Security Profiles. Using a behavior learning model, Security Profiles helps identify suspicious activity indicative of a threat or misconfiguration, as well as generate suppression suggestions for any known, acceptable workload behavior. Use the insight gained from Security Profiles when investigating security alerts and when identifying previously unseen, anomalous behavior.
 
 ## Set up real-time notifications
 
