@@ -37,7 +37,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
             "required": [
                 "cmd"
             ],
-            "description": "BPFEventSerializer が BPF イベントを JSON にシリアライズする"
+            "description": "BPFEventSerializer は BPF イベントを JSON にシリアライズする"
         },
         "BPFMap": {
             "properties": {
@@ -52,13 +52,13 @@ CWS のログは、以下の JSON スキーマを持ちます。
             },
             "additionalProperties": false,
             "type": "object",
-            "description": "BPFMapSerializer が BPF マップを JSON にシリアライズする"
+            "description": "BPFMapSerializer は BPF マップを JSON にシリアライズする"
         },
         "BPFProgram": {
             "properties": {
                 "name": {
                     "type": "string",
-                    "description": "BPF プログラムの名前"
+                    "description": "BPF プログラム名"
                 },
                 "tag": {
                     "type": "string",
@@ -66,29 +66,29 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 },
                 "program_type": {
                     "type": "string",
-                    "description": "BPF プログラムのタイプ"
+                    "description": "BPF プログラムの種類"
                 },
                 "attach_type": {
                     "type": "string",
-                    "description": "BPF プログラムのアタッチタイプ"
+                    "description": "BPF プログラムのアタッチ型"
                 },
                 "helpers": {
                     "items": {
                         "type": "string"
                     },
                     "type": "array",
-                    "description": "BPF プログラムが使用するヘルパーのリスト"
+                    "description": "BPF プログラムで使用するヘルパー一覧"
                 }
             },
             "additionalProperties": false,
             "type": "object",
-            "description": "BPFProgramSerializer が BPF マップを JSON にシリアライズする"
+            "description": "BPFProgramSerializer は BPF マップを JSON にシリアライズする"
         },
         "BindEvent": {
             "properties": {
                 "addr": {
                     "$ref": "#/$defs/IPPortFamily",
-                    "description": "バインドされたアドレス (もしあれば)"
+                    "description": "バウンドアドレス (ある場合)"
                 }
             },
             "additionalProperties": false,
@@ -96,43 +96,48 @@ CWS のログは、以下の JSON スキーマを持ちます。
             "required": [
                 "addr"
             ],
-            "description": "BindEventSerializer がバインドイベントを JSON にシリアライズする"
+            "description": "BindEventSerializer はバインドイベントを JSON にシリアライズする"
         },
         "ContainerContext": {
             "properties": {
                 "id": {
                     "type": "string",
                     "description": "コンテナ ID"
+                },
+                "created_at": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "コンテナの作成時間"
                 }
             },
             "additionalProperties": false,
             "type": "object",
-            "description": "ContainerContextSerializer がコンテナコンテキストを JSON にシリアライズする"
+            "description": "ContainerContextSerializer はコンテナコンテキストを JSON にシリアライズする"
         },
         "DDContext": {
             "properties": {
                 "span_id": {
                     "type": "integer",
-                    "description": "APM の相関に使用されるスパン ID"
+                    "description": "APM の相関に使用するスパン ID"
                 },
                 "trace_id": {
                     "type": "integer",
-                    "description": "APM の相関に使用されるトレース ID"
+                    "description": "APM の相関に使用するトレース ID"
                 }
             },
             "additionalProperties": false,
             "type": "object",
-            "description": "DDContextSerializer が JSON にスパンコンテキストをシリアライズする"
+            "description": "DDContextSerializer はスパンコンテキストを JSON にシリアライズする"
         },
         "DNSEvent": {
             "properties": {
                 "id": {
                     "type": "integer",
-                    "description": "Id は DNS リクエストの一意な識別子である"
+                    "description": "id は DNS リクエストの一意な識別子である"
                 },
                 "question": {
                     "$ref": "#/$defs/DNSQuestion",
-                    "description": "question は DNS リクエストの DNS 質問である"
+                    "description": "question は DNS リクエストに対しての DNS の質問である"
                 }
             },
             "additionalProperties": false,
@@ -140,29 +145,29 @@ CWS のログは、以下の JSON スキーマを持ちます。
             "required": [
                 "id"
             ],
-            "description": "DNSEventSerializer が DNS イベントを JSON にシリアライズする"
+            "description": "DNSEventSerializer は DNS イベントを JSON にシリアライズする"
         },
         "DNSQuestion": {
             "properties": {
                 "class": {
                     "type": "string",
-                    "description": "class は DNS 質問によって検索されたクラスである"
+                    "description": "class は DNS の質問で調べたクラスである"
                 },
                 "type": {
                     "type": "string",
-                    "description": "type は DNS 質問のタイプを指定する 2 オクテットコードである"
+                    "description": "type は DNS の質問タイプを指定する 2 オクテットのコードである"
                 },
                 "name": {
                     "type": "string",
-                    "description": "name は質問されたドメイン名である"
+                    "description": "name はクエリしたドメイン名である"
                 },
                 "size": {
                     "type": "integer",
-                    "description": "size はバイト単位で表した DNS リクエストの合計サイズである"
+                    "description": "size は DNS リクエストの合計サイズ (バイト) である"
                 },
                 "count": {
                     "type": "integer",
-                    "description": "count は DNS リクエストの質問の総数である"
+                    "description": "count は DNS リクエストの質問数の合計である"
                 }
             },
             "additionalProperties": false,
@@ -174,7 +179,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 "size",
                 "count"
             ],
-            "description": "DNSQuestionSerializer が DNS 質問を JSON にシリアライズする"
+            "description": "DNSQuestionSerializer は DNS の質問を JSON にシリアライズする"
         },
         "EventContext": {
             "properties": {
@@ -188,26 +193,26 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 },
                 "outcome": {
                     "type": "string",
-                    "description": "イベントの結果"
+                    "description": "イベント結果"
                 },
                 "async": {
                     "type": "boolean",
-                    "description": "イベントが非同期であった場合、True"
+                    "description": "イベントが非同期であった場合 True"
                 }
             },
             "additionalProperties": false,
             "type": "object",
-            "description": "EventContextSerializer がイベントコンテキストを JSON にシリアライズする"
+            "description": "EventContextSerializer はイベントコンテキストを JSON にシリアライズする"
         },
         "ExitEvent": {
             "properties": {
                 "cause": {
                     "type": "string",
-                    "description": "プロセス終了の原因 (EXITED、SIGNALED、COREDUMPED のうちの 1 つ)"
+                    "description": "プロセス終了の原因 (EXITEDSIGNALEDCOREDUMPED のうちいずれか 1 つ)"
                 },
                 "code": {
                     "type": "integer",
-                    "description": "プロセスの終了コード、またはプロセスを終了させる原因となったシグナルの番号"
+                    "description": "プロセスの終了コードまたはプロセスを終了させる原因となったシグナルの番号"
                 }
             },
             "additionalProperties": false,
@@ -216,7 +221,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 "cause",
                 "code"
             ],
-            "description": "ExitEventSerializer が終了イベントを JSON にシリアライズする"
+            "description": "ExitEventSerializer は終了イベントを JSON にシリアライズする"
         },
         "File": {
             "properties": {
@@ -230,7 +235,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 },
                 "path_resolution_error": {
                     "type": "string",
-                    "description": "パス解決時のエラーメッセージ"
+                    "description": "パス解決によるエラーメッセージ"
                 },
                 "inode": {
                     "type": "integer",
@@ -246,96 +251,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 },
                 "mount_id": {
                     "type": "integer",
-                    "description": "ファイルのマウント ID"
-                },
-                "filesystem": {
-                    "type": "string",
-                    "description": "ファイルファイルシステム名"
-                },
-                "uid": {
-                    "type": "integer",
-                    "description": "ファイルユーザー ID"
-                },
-                "gid": {
-                    "type": "integer",
-                    "description": "ファイルグループ ID"
-                },
-                "user": {
-                    "type": "string",
-                    "description": "ファイルユーザー"
-                },
-                "group": {
-                    "type": "string",
-                    "description": "ファイルグループ"
-                },
-                "attribute_name": {
-                    "type": "string",
-                    "description": "ファイル拡張属性名"
-                },
-                "attribute_namespace": {
-                    "type": "string",
-                    "description": "ファイル拡張属性ネームスペース"
-                },
-                "flags": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array",
-                    "description": "ファイルフラグ"
-                },
-                "access_time": {
-                    "type": "string",
-                    "format": "date-time",
-                    "description": "ファイルアクセス時刻"
-                },
-                "modification_time": {
-                    "type": "string",
-                    "format": "date-time",
-                    "description": "ファイル修正時刻"
-                },
-                "change_time": {
-                    "type": "string",
-                    "format": "date-time",
-                    "description": "ファイル変更時刻"
-                }
-            },
-            "additionalProperties": false,
-            "type": "object",
-            "required": [
-                "uid",
-                "gid"
-            ],
-            "description": "FileSerializer がファイルを JSON にシリアライズする"
-        },
-        "FileEvent": {
-            "properties": {
-                "path": {
-                    "type": "string",
-                    "description": "ファイルパス"
-                },
-                "name": {
-                    "type": "string",
-                    "description": "ファイルのベースネーム"
-                },
-                "path_resolution_error": {
-                    "type": "string",
-                    "description": "パス解決時のエラーメッセージ"
-                },
-                "inode": {
-                    "type": "integer",
-                    "description": "ファイルの inode 番号"
-                },
-                "mode": {
-                    "type": "integer",
-                    "description": "ファイルモード"
-                },
-                "in_upper_layer": {
-                    "type": "boolean",
-                    "description": "ファイル OverlayFS レイヤーのインジケーター"
-                },
-                "mount_id": {
-                    "type": "integer",
-                    "description": "ファイルのマウント ID"
+                    "description": "ファイルマウント ID"
                 },
                 "filesystem": {
                     "type": "string",
@@ -375,21 +291,126 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 "access_time": {
                     "type": "string",
                     "format": "date-time",
-                    "description": "ファイルアクセス時刻"
+                    "description": "ファイルアクセス時間"
                 },
                 "modification_time": {
                     "type": "string",
                     "format": "date-time",
-                    "description": "ファイル修正時刻"
+                    "description": "ファイル更新時間"
                 },
                 "change_time": {
                     "type": "string",
                     "format": "date-time",
-                    "description": "ファイル変更時刻"
+                    "description": "ファイル変更時間"
+                },
+                "package_name": {
+                    "type": "string",
+                    "description": "システムパッケージ名"
+                },
+                "package_version": {
+                    "type": "string",
+                    "description": "システムパッケージバージョン"
+                }
+            },
+            "additionalProperties": false,
+            "type": "object",
+            "required": [
+                "uid",
+                "gid"
+            ],
+            "description": "FileSerializer はファイルを JSON にシリアライズする"
+        },
+        "FileEvent": {
+            "properties": {
+                "path": {
+                    "type": "string",
+                    "description": "ファイルパス"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "ファイルのベースネーム"
+                },
+                "path_resolution_error": {
+                    "type": "string",
+                    "description": "パス解決によるエラーメッセージ"
+                },
+                "inode": {
+                    "type": "integer",
+                    "description": "ファイルの inode 番号"
+                },
+                "mode": {
+                    "type": "integer",
+                    "description": "ファイルモード"
+                },
+                "in_upper_layer": {
+                    "type": "boolean",
+                    "description": "ファイル OverlayFS レイヤーのインジケーター"
+                },
+                "mount_id": {
+                    "type": "integer",
+                    "description": "ファイルマウント ID"
+                },
+                "filesystem": {
+                    "type": "string",
+                    "description": "ファイルのファイルシステム名"
+                },
+                "uid": {
+                    "type": "integer",
+                    "description": "ファイルユーザー ID"
+                },
+                "gid": {
+                    "type": "integer",
+                    "description": "ファイルグループ ID"
+                },
+                "user": {
+                    "type": "string",
+                    "description": "ファイルユーザー"
+                },
+                "group": {
+                    "type": "string",
+                    "description": "ファイルグループ"
+                },
+                "attribute_name": {
+                    "type": "string",
+                    "description": "ファイル拡張属性名"
+                },
+                "attribute_namespace": {
+                    "type": "string",
+                    "description": "ファイル拡張属性ネームスペース"
+                },
+                "flags": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "description": "ファイルフラグ"
+                },
+                "access_time": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "ファイルアクセス時間"
+                },
+                "modification_time": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "ファイル更新時間"
+                },
+                "change_time": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "ファイル変更時間"
+                },
+                "package_name": {
+                    "type": "string",
+                    "description": "システムパッケージ名"
+                },
+                "package_version": {
+                    "type": "string",
+                    "description": "システムパッケージバージョン"
                 },
                 "destination": {
                     "$ref": "#/$defs/File",
-                    "description": "対象ファイル情報"
+                    "description": "ターゲットファイル情報"
                 },
                 "new_mount_id": {
                     "type": "integer",
@@ -414,7 +435,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 "uid",
                 "gid"
             ],
-            "description": "FileEventSerializer がファイルイベントを JSON にシリアライズする"
+            "description": "FileEventSerializer はファイルイベントを JSON にシリアライズする"
         },
         "IPPort": {
             "properties": {
@@ -433,7 +454,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 "ip",
                 "port"
             ],
-            "description": "IPPortSerializer は IP と Port のコンテキストを JSON にシリアライズするために使用される"
+            "description": "IPPortSerializer は IP と Port のコンテキストを JSON にシリアライズするために使用する"
         },
         "IPPortFamily": {
             "properties": {
@@ -457,13 +478,13 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 "ip",
                 "port"
             ],
-            "description": "IPPortFamilySerializer は IP、ポート、およびアドレスファミリーのコンテキストを JSON にシリアライズするために使用される"
+            "description": "IPPortFamilySerializer は IP ポートアドレスファミリーのコンテキストを JSON にシリアライズするために使用する"
         },
         "MMapEvent": {
             "properties": {
                 "address": {
                     "type": "string",
-                    "description": "メモリセグメントのアドレス"
+                    "description": "メモリセグメントアドレス"
                 },
                 "offset": {
                     "type": "integer",
@@ -471,15 +492,15 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 },
                 "length": {
                     "type": "integer",
-                    "description": "メモリセグメントの長さ"
+                    "description": "メモリセグメント長"
                 },
                 "protection": {
                     "type": "string",
-                    "description": "メモリセグメントの保護"
+                    "description": "メモリセグメント保護"
                 },
                 "flags": {
                     "type": "string",
-                    "description": "メモリセグメントのフラグ"
+                    "description": "メモリセグメントフラグ"
                 }
             },
             "additionalProperties": false,
@@ -491,17 +512,17 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 "protection",
                 "flags"
             ],
-            "description": "MMapEventSerializer が mmap イベントを JSON にシリアライズする"
+            "description": "MMapEventSerializer は mmap イベントを JSON にシリアライズする"
         },
         "MProtectEvent": {
             "properties": {
                 "vm_start": {
                     "type": "string",
-                    "description": "メモリセグメントの開始アドレス"
+                    "description": "メモリセグメント開始アドレス"
                 },
                 "vm_end": {
                     "type": "string",
-                    "description": "メモリセグメントの終了アドレス"
+                    "description": "メモリセグメント終了アドレス"
                 },
                 "vm_protection": {
                     "type": "string",
@@ -509,7 +530,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 },
                 "req_protection": {
                     "type": "string",
-                    "description": "新しいメモリセグメント保護"
+                    "description": "新規メモリセグメント保護"
                 }
             },
             "additionalProperties": false,
@@ -520,7 +541,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 "vm_protection",
                 "req_protection"
             ],
-            "description": "MProtectEventSerializer が mmap イベントを JSON にシリアライズする"
+            "description": "MProtectEventSerializer は mmap イベントを JSON にシリアライズする"
         },
         "ModuleEvent": {
             "properties": {
@@ -530,7 +551,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 },
                 "loaded_from_memory": {
                     "type": "boolean",
-                    "description": "モジュールがファイルではなく、メモリからロードされたかどうかを示す"
+                    "description": "モジュールがファイルではなくメモリからロードされたかどうかを示す"
                 }
             },
             "additionalProperties": false,
@@ -538,7 +559,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
             "required": [
                 "name"
             ],
-            "description": "ModuleEventSerializer がモジュールイベントを JSON にシリアライズする"
+            "description": "ModuleEventSerializer はモジュールイベントを JSON にシリアライズする"
         },
         "MountEvent": {
             "properties": {
@@ -588,7 +609,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 "bind_src_mount_id",
                 "device"
             ],
-            "description": "MountEventSerializer がマウントイベントを JSON にシリアライズする"
+            "description": "MountEventSerializer はマウントイベントを JSON にシリアライズする"
         },
         "NetworkContext": {
             "properties": {
@@ -598,15 +619,15 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 },
                 "l3_protocol": {
                     "type": "string",
-                    "description": "l3_protocol はレイヤー 3 プロトコルの名前である"
+                    "description": "l3_protocol はレイヤー 3 プロトコル名である"
                 },
                 "l4_protocol": {
                     "type": "string",
-                    "description": "l4_protocol はレイヤー 4 プロトコルの名前である"
+                    "description": "l4_protocol はレイヤー 4 プロトコル名である"
                 },
                 "source": {
                     "$ref": "#/$defs/IPPort",
-                    "description": "source はネットワークイベントの発信側である"
+                    "description": "source はネットワークイベントのエミッターである"
                 },
                 "destination": {
                     "$ref": "#/$defs/IPPort",
@@ -614,7 +635,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 },
                 "size": {
                     "type": "integer",
-                    "description": "size はネットワークイベントのサイズ (バイト) である"
+                    "description": "size はネットワークイベントのバイト数である"
                 }
             },
             "additionalProperties": false,
@@ -626,13 +647,13 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 "destination",
                 "size"
             ],
-            "description": "NetworkContextSerializer がネットワークコンテキストを JSON にシリアライズする"
+            "description": "NetworkContextSerializer はネットワークコンテキストを JSON にシリアライズする"
         },
         "NetworkDevice": {
             "properties": {
                 "netns": {
                     "type": "integer",
-                    "description": "netns はインターフェイス ifindex である"
+                    "description": "netns はインターフェイスの ifindex である"
                 },
                 "ifindex": {
                     "type": "integer",
@@ -640,7 +661,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 },
                 "ifname": {
                     "type": "string",
-                    "description": "ifname はネットワークインターフェイスの名前である"
+                    "description": "ifname はネットワークインターフェイス名である"
                 }
             },
             "additionalProperties": false,
@@ -650,7 +671,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 "ifindex",
                 "ifname"
             ],
-            "description": "NetworkDeviceSerializer がネットワークデバイスコンテキストを JSON にシリアライズする"
+            "description": "NetworkDeviceSerializer はネットワークデバイスのコンテキストを JSON にシリアライズする"
         },
         "PTraceEvent": {
             "properties": {
@@ -664,7 +685,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 },
                 "tracee": {
                     "$ref": "#/$defs/ProcessContext",
-                    "description": "トレース先のプロセスコンテキスト"
+                    "description": "tracee のプロセスコンテキスト"
                 }
             },
             "additionalProperties": false,
@@ -673,7 +694,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 "request",
                 "address"
             ],
-            "description": "PTraceEventSerializer が mmap イベントを JSON にシリアライズする"
+            "description": "PTraceEventSerializer は mmap イベントを JSON にシリアライズする"
         },
         "Process": {
             "properties": {
@@ -707,7 +728,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 },
                 "path_resolution_error": {
                     "type": "string",
-                    "description": "パス解決時のエラーの説明"
+                    "description": "パス解決にエラーが発生した場合の説明"
                 },
                 "comm": {
                     "type": "string",
@@ -730,7 +751,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 "exit_time": {
                     "type": "string",
                     "format": "date-time",
-                    "description": "プロセスの終了時刻"
+                    "description": "プロセスの終了時間"
                 },
                 "credentials": {
                     "$ref": "#/$defs/ProcessCredentials",
@@ -742,7 +763,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 },
                 "interpreter": {
                     "$ref": "#/$defs/File",
-                    "description": "インタプリターのファイル情報"
+                    "description": "インタープリターのファイル情報"
                 },
                 "container": {
                     "$ref": "#/$defs/ContainerContext",
@@ -750,7 +771,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 },
                 "argv0": {
                     "type": "string",
-                    "description": "最初のコマンドライン引数"
+                    "description": "コマンドライン第一引数"
                 },
                 "args": {
                     "items": {
@@ -761,7 +782,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 },
                 "args_truncated": {
                     "type": "boolean",
-                    "description": "引数の切り捨てを示すインジケーター"
+                    "description": "引数の切り捨てを示す指標"
                 },
                 "envs": {
                     "items": {
@@ -772,7 +793,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 },
                 "envs_truncated": {
                     "type": "boolean",
-                    "description": "環境変数の切り捨てのインジケーター"
+                    "description": "環境変数の切り捨てを示す指標"
                 },
                 "is_thread": {
                     "type": "boolean",
@@ -789,7 +810,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 "uid",
                 "gid"
             ],
-            "description": "ProcessSerializer が プロセスを JSON にシリアライズする"
+            "description": "ProcessSerializer はプロセスを JSON にシリアライズする"
         },
         "ProcessContext": {
             "properties": {
@@ -823,7 +844,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 },
                 "path_resolution_error": {
                     "type": "string",
-                    "description": "パス解決時のエラーの説明"
+                    "description": "パス解決にエラーが発生した場合の説明"
                 },
                 "comm": {
                     "type": "string",
@@ -846,7 +867,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 "exit_time": {
                     "type": "string",
                     "format": "date-time",
-                    "description": "プロセスの終了時刻"
+                    "description": "プロセスの終了時間"
                 },
                 "credentials": {
                     "$ref": "#/$defs/ProcessCredentials",
@@ -858,7 +879,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 },
                 "interpreter": {
                     "$ref": "#/$defs/File",
-                    "description": "インタプリターのファイル情報"
+                    "description": "インタープリターのファイル情報"
                 },
                 "container": {
                     "$ref": "#/$defs/ContainerContext",
@@ -866,7 +887,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 },
                 "argv0": {
                     "type": "string",
-                    "description": "最初のコマンドライン引数"
+                    "description": "コマンドライン第一引数"
                 },
                 "args": {
                     "items": {
@@ -877,7 +898,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 },
                 "args_truncated": {
                     "type": "boolean",
-                    "description": "引数の切り捨てを示すインジケーター"
+                    "description": "引数の切り捨てを示す指標"
                 },
                 "envs": {
                     "items": {
@@ -888,7 +909,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 },
                 "envs_truncated": {
                     "type": "boolean",
-                    "description": "環境変数の切り捨てのインジケーター"
+                    "description": "環境変数の切り捨てを示す指標"
                 },
                 "is_thread": {
                     "type": "boolean",
@@ -907,7 +928,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
                         "$ref": "#/$defs/Process"
                     },
                     "type": "array",
-                    "description": "先祖のプロセス"
+                    "description": "祖先のプロセス"
                 }
             },
             "additionalProperties": false,
@@ -916,7 +937,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 "uid",
                 "gid"
             ],
-            "description": "ProcessContextSerializer がプロセスコンテキストを JSON にシリアライズする"
+            "description": "ProcessContextSerializer はプロセスコンテキストを JSON にシリアライズする"
         },
         "ProcessCredentials": {
             "properties": {
@@ -998,44 +1019,44 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 "cap_effective",
                 "cap_permitted"
             ],
-            "description": "ProcessCredentialsSerializer がプロセスの資格情報を JSON にシリアライズする"
+            "description": "ProcessCredentialsSerializer はプロセス資格情報を JSON にシリアライズする"
         },
         "SELinuxBoolChange": {
             "properties": {
                 "name": {
                     "type": "string",
-                    "description": "SELinux ブール値の名前"
+                    "description": "SELinux ブール値名"
                 },
                 "state": {
                     "type": "string",
-                    "description": "SELinux ブール値の状態 (‘on’ または 'off')"
+                    "description": "SELinux ブール値状態 ('on' または 'off')"
                 }
             },
             "additionalProperties": false,
             "type": "object",
-            "description": "SELinuxBoolChangeSerializer が SELinuxのブール値の変更を JSON にシリアライズする"
+            "description": "SELinuxBoolChangeSerializer は SELinux ブール値変更を JSON にシリアライズする"
         },
         "SELinuxBoolCommit": {
             "properties": {
                 "state": {
                     "type": "boolean",
-                    "description": "SELinux ブール値のコミット操作"
+                    "description": "SELinux ブール値コミット操作"
                 }
             },
             "additionalProperties": false,
             "type": "object",
-            "description": "SELinuxBoolCommitSerializer が SELinux のブール値のコミットを JSON にシリアライズする"
+            "description": "SELinuxBoolCommitSerializer は SELinux ブール値コミットを JSON にシリアライズする"
         },
         "SELinuxEnforceStatus": {
             "properties": {
                 "status": {
                     "type": "string",
-                    "description": "SELinux の強制ステータス (‘enforcing'、'permissive'、'disabled' のいずれか 1 つ)"
+                    "description": "SELinux の強制ステータス ('enforcing' 'permissive' 'disabled' のいずれか)"
                 }
             },
             "additionalProperties": false,
             "type": "object",
-            "description": "SELinuxEnforceStatusSerializer が SELinux の強制ステータスの変化を JSON にシリアライズする"
+            "description": "SELinuxEnforceStatusSerializer は SELinux の強制ステータスの変更を JSON にシリアライズする"
         },
         "SELinuxEvent": {
             "properties": {
@@ -1045,7 +1066,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 },
                 "enforce": {
                     "$ref": "#/$defs/SELinuxEnforceStatus",
-                    "description": "SELinux の強制変更"
+                    "description": "SELinux の強制の変更"
                 },
                 "bool_commit": {
                     "$ref": "#/$defs/SELinuxBoolCommit",
@@ -1054,13 +1075,13 @@ CWS のログは、以下の JSON スキーマを持ちます。
             },
             "additionalProperties": false,
             "type": "object",
-            "description": "SELinuxEventSerializer が SELinux のコンテキストを JSON にシリアライズする"
+            "description": "SELinuxEventSerializer は SELinux コンテキストを JSON にシリアライズする"
         },
         "SignalEvent": {
             "properties": {
                 "type": {
                     "type": "string",
-                    "description": "シグナルの種類"
+                    "description": "シグナルタイプ"
                 },
                 "pid": {
                     "type": "integer",
@@ -1068,7 +1089,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 },
                 "target": {
                     "$ref": "#/$defs/ProcessContext",
-                    "description": "シグナル対象のプロセスコンテキスト"
+                    "description": "シグナルターゲットのプロセスコンテキスト"
                 }
             },
             "additionalProperties": false,
@@ -1077,13 +1098,13 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 "type",
                 "pid"
             ],
-            "description": "SignalEventSerializer がシグナルイベントを JSON にシリアライズする"
+            "description": "SignalEventSerializer はシグナルイベントを JSON にシリアライズする"
         },
         "SpliceEvent": {
             "properties": {
                 "pipe_entry_flag": {
                     "type": "string",
-                    "description": "スプライスシステムコールに渡された fd_out パイプのエントリフラグ"
+                    "description": "スプライスシステムコールに渡された fd_out パイプのエントリーフラグ"
                 },
                 "pipe_exit_flag": {
                     "type": "string",
@@ -1096,7 +1117,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 "pipe_entry_flag",
                 "pipe_exit_flag"
             ],
-            "description": "SpliceEventSerializer がスプライスイベントを JSON にシリアライズする"
+            "description": "SpliceEventSerializer はスプライスイベントを JSON にシリアライズする"
         },
         "UserContext": {
             "properties": {
@@ -1111,7 +1132,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
             },
             "additionalProperties": false,
             "type": "object",
-            "description": "UserContextSerializer がユーザーコンテキストを JSON にシリアライズする"
+            "description": "UserContextSerializer はユーザーコンテキストを JSON にシリアライズする"
         }
     },
     "properties": {
@@ -1179,7 +1200,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
     },
     "additionalProperties": false,
     "type": "object",
-    "description": "EventSerializer がイベントを JSON にシリアライズする"
+    "description": "EventSerializer はイベントを JSON にシリアライズする"
 }
 
 {{< /code-block >}}
@@ -1358,12 +1379,17 @@ CWS のログは、以下の JSON スキーマを持ちます。
     "properties": {
         "id": {
             "type": "string",
-            "description": "Container ID"
+            "description": "コンテナ ID"
+        },
+        "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "コンテナの作成時間"
         }
     },
     "additionalProperties": false,
     "type": "object",
-    "description": "ContainerContextSerializer serializes a container context to JSON"
+    "description": "ContainerContextSerializer はコンテナコンテキストを JSON にシリアライズする"
 }
 
 {{< /code-block >}}
@@ -1371,6 +1397,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
 | フィールド | 説明 |
 | ----- | ----------- |
 | `id` | コンテナ ID |
+| `created_at` | コンテナの作成時間 |
 
 
 ## `DDContext`
@@ -1563,81 +1590,89 @@ CWS のログは、以下の JSON スキーマを持ちます。
     "properties": {
         "path": {
             "type": "string",
-            "description": "File path"
+            "description": "ファイルパス"
         },
         "name": {
             "type": "string",
-            "description": "File basename"
+            "description": "ファイルのベースネーム"
         },
         "path_resolution_error": {
             "type": "string",
-            "description": "Error message from path resolution"
+            "description": "パス解決によるエラーメッセージ"
         },
         "inode": {
             "type": "integer",
-            "description": "File inode number"
+            "description": "ファイルの inode 番号"
         },
         "mode": {
             "type": "integer",
-            "description": "File mode"
+            "description": "ファイルモード"
         },
         "in_upper_layer": {
             "type": "boolean",
-            "description": "Indicator of file OverlayFS layer"
+            "description": "ファイル OverlayFS レイヤーのインジケーター"
         },
         "mount_id": {
             "type": "integer",
-            "description": "File mount ID"
+            "description": "ファイルマウント ID"
         },
         "filesystem": {
             "type": "string",
-            "description": "File filesystem name"
+            "description": "ファイルのファイルシステム名"
         },
         "uid": {
             "type": "integer",
-            "description": "File User ID"
+            "description": "ファイルユーザー ID"
         },
         "gid": {
             "type": "integer",
-            "description": "File Group ID"
+            "description": "ファイルグループ ID"
         },
         "user": {
             "type": "string",
-            "description": "File user"
+            "description": "ファイルユーザー"
         },
         "group": {
             "type": "string",
-            "description": "File group"
+            "description": "ファイルグループ"
         },
         "attribute_name": {
             "type": "string",
-            "description": "File extended attribute name"
+            "description": "ファイル拡張属性名"
         },
         "attribute_namespace": {
             "type": "string",
-            "description": "File extended attribute namespace"
+            "description": "ファイル拡張属性ネームスペース"
         },
         "flags": {
             "items": {
                 "type": "string"
             },
             "type": "array",
-            "description": "File flags"
+            "description": "ファイルフラグ"
         },
         "access_time": {
             "type": "string",
             "format": "date-time",
-            "description": "File access time"
+            "description": "ファイルアクセス時間"
         },
         "modification_time": {
             "type": "string",
             "format": "date-time",
-            "description": "File modified time"
+            "description": "ファイル更新時間"
         },
         "change_time": {
             "type": "string",
             "format": "date-time",
-            "description": "File change time"
+            "description": "ファイル変更時間"
+        },
+        "package_name": {
+            "type": "string",
+            "description": "システムパッケージ名"
+        },
+        "package_version": {
+            "type": "string",
+            "description": "システムパッケージバージョン"
         }
     },
     "additionalProperties": false,
@@ -1646,7 +1681,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
         "uid",
         "gid"
     ],
-    "description": "FileSerializer serializes a file to JSON"
+    "description": "FileSerializer はファイルを JSON にシリアライズする"
 }
 
 {{< /code-block >}}
@@ -1671,6 +1706,8 @@ CWS のログは、以下の JSON スキーマを持ちます。
 | `access_time` | ファイルアクセス時間 |
 | `modification_time` | ファイル更新時間 |
 | `change_time` | ファイル変更時間 |
+| `package_name` | システムパッケージ名 |
+| `package_version` | システムパッケージバージョン |
 
 
 ## `FileEvent`
@@ -1681,101 +1718,109 @@ CWS のログは、以下の JSON スキーマを持ちます。
     "properties": {
         "path": {
             "type": "string",
-            "description": "File path"
+            "description": "ファイルパス"
         },
         "name": {
             "type": "string",
-            "description": "File basename"
+            "description": "ファイルのベースネーム"
         },
         "path_resolution_error": {
             "type": "string",
-            "description": "Error message from path resolution"
+            "description": "パス解決によるエラーメッセージ"
         },
         "inode": {
             "type": "integer",
-            "description": "File inode number"
+            "description": "ファイルの inode 番号"
         },
         "mode": {
             "type": "integer",
-            "description": "File mode"
+            "description": "ファイルモード"
         },
         "in_upper_layer": {
             "type": "boolean",
-            "description": "Indicator of file OverlayFS layer"
+            "description": "ファイル OverlayFS レイヤーのインジケーター"
         },
         "mount_id": {
             "type": "integer",
-            "description": "File mount ID"
+            "description": "ファイルマウント ID"
         },
         "filesystem": {
             "type": "string",
-            "description": "File filesystem name"
+            "description": "ファイルのファイルシステム名"
         },
         "uid": {
             "type": "integer",
-            "description": "File User ID"
+            "description": "ファイルユーザー ID"
         },
         "gid": {
             "type": "integer",
-            "description": "File Group ID"
+            "description": "ファイルグループ ID"
         },
         "user": {
             "type": "string",
-            "description": "File user"
+            "description": "ファイルユーザー"
         },
         "group": {
             "type": "string",
-            "description": "File group"
+            "description": "ファイルグループ"
         },
         "attribute_name": {
             "type": "string",
-            "description": "File extended attribute name"
+            "description": "ファイル拡張属性名"
         },
         "attribute_namespace": {
             "type": "string",
-            "description": "File extended attribute namespace"
+            "description": "ファイル拡張属性ネームスペース"
         },
         "flags": {
             "items": {
                 "type": "string"
             },
             "type": "array",
-            "description": "File flags"
+            "description": "ファイルフラグ"
         },
         "access_time": {
             "type": "string",
             "format": "date-time",
-            "description": "File access time"
+            "description": "ファイルアクセス時間"
         },
         "modification_time": {
             "type": "string",
             "format": "date-time",
-            "description": "File modified time"
+            "description": "ファイル更新時間"
         },
         "change_time": {
             "type": "string",
             "format": "date-time",
-            "description": "File change time"
+            "description": "ファイル変更時間"
+        },
+        "package_name": {
+            "type": "string",
+            "description": "システムパッケージ名"
+        },
+        "package_version": {
+            "type": "string",
+            "description": "システムパッケージバージョン"
         },
         "destination": {
             "$ref": "#/$defs/File",
-            "description": "Target file information"
+            "description": "ターゲットファイル情報"
         },
         "new_mount_id": {
             "type": "integer",
-            "description": "New Mount ID"
+            "description": "新規マウント ID"
         },
         "group_id": {
             "type": "integer",
-            "description": "Group ID"
+            "description": "グループ ID"
         },
         "device": {
             "type": "integer",
-            "description": "Device associated with the file"
+            "description": "ファイルに関連するデバイス"
         },
         "fstype": {
             "type": "string",
-            "description": "Filesystem type"
+            "description": "ファイルシステムタイプ"
         }
     },
     "additionalProperties": false,
@@ -1784,7 +1829,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
         "uid",
         "gid"
     ],
-    "description": "FileEventSerializer serializes a file event to JSON"
+    "description": "FileEventSerializer はファイルイベントを JSON にシリアライズする"
 }
 
 {{< /code-block >}}
@@ -1809,6 +1854,8 @@ CWS のログは、以下の JSON スキーマを持ちます。
 | `access_time` | ファイルアクセス時間 |
 | `modification_time` | ファイル更新時間 |
 | `change_time` | ファイル変更時間 |
+| `package_name` | システムパッケージ名 |
+| `package_version` | システムパッケージバージョン |
 | `destination` | ターゲットファイル情報 |
 | `new_mount_id` | 新規マウント ID |
 | `group_id` | グループ ID |
