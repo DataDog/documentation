@@ -26,14 +26,14 @@ To track or monitor your volume of ingested and indexed data, see the [Usage Met
 
 After spans have been ingested, some are kept for 15 to 30 days according to the retention filters that have been set on your account.
 
-Some retention filters are enabled by default, in order to ensure that you keep visibility over all of your services and endpoints, as well as errors and high-latency traces: 
-- The [Intelligent Retention Filter](#datadog-intelligent-retention-filter) retains spans for every environment, service, operation and resource for different latency distributions.
-- The `Error Default` retention filter indexes error spans with `status:error`. The retention rate and the query are configurable. For instance, to capture production errors, set the query to `status:error, env:production`. Disable the retention filter if you do not want to capture the errors by default.
+The following retention filters are enabled by default to ensure that you keep visibility over all of your services and endpoints, as well as errors and high-latency traces: 
+- The [Intelligent Retention Filter](#datadog-intelligent-retention-filter) retains spans for every environment, service, operation, and resource for different latency distributions.
+- The `Error Default` retention filter indexes error spans with `status:error`. The retention rate and the query are configurable. For example, to capture production errors, set the query to `status:error, env:production`. Disable the retention filter if you do not want to capture the errors by default.
 - The `Application Security` retention filter is enabled if you are using Application Security Management. It ensures the retention of all spans in traces that have been identified as having an application security impact (an attack attempt).
 
-On top of these, you can create any number of additional [custom tag-based retention filters](#create-your-own-retention-filter) for your services, to capture the data that matters the most to your business.
+In addition to these, you can create any number of additional [custom tag-based retention filters](#create-your-own-retention-filter) for your services, to capture the data that matters the most to your business.
 
-**Note**: The permission `apm_retention_filter_write` is required to create, modify, or disable retention filters.
+**Note**: The permission `apm_retention_filter_write` is required to create, delete, modify, enable, or disable retention filters.
 
 {{< img src="tracing/trace_indexing_and_ingestion/retention_filters/retention_filters.png" style="width:100%;" alt="Retention Filters Page" >}}
 
@@ -46,7 +46,7 @@ Filter Query
 : The tag-based query for each filter.
 
 Retention Rate
-: A percentage from 0 to 100% of how many matching spans are indexed. The retained spans are uniformly picked amongst spans matching the filter query.
+: A percentage from 0 to 100% of how many matching spans are indexed. The retained spans are uniformly chosen from among spans that match the filter query.
 
 Spans Indexed
 : The number of spans indexed by the filter over the selected time period.
@@ -69,13 +69,13 @@ The Datadog intelligent retention filter is always active for your services, and
 
 It scans through the **service entry spans** and retains for 30 days:
 
-- At least one span (and the associated trace) for each combination of environment, service, operation and resource every 15 minutes at most to ensure to always find example traces in [service][9] and [resource][10] pages, even for low traffic endpoint.
-- High latency spans for the `p75`, `p90`, and `p95` percentile spans (and the associated trace) for each combination of environment, service, operation and resource.
+- At least one span (and the associated trace) for each combination of environment, service, operation, and resource every 15 minutes at most, to ensure that you can always find example traces in [service][9] and [resource][10] pages, even for low traffic endpoints.
+- High latency spans for the `p75`, `p90`, and `p95` percentile spans (and the associated trace) for each combination of environment, service, operation, and resource.
 - A representative selection of errors, ensuring error diversity (for example, response status code 400s, 500s).
 
-**Note**: Spans indexed by the intelligent retention filter are **not counted towards the usage** of indexed spans, and hence **do not impact your bill**.
+**Note**: Spans indexed by the intelligent retention filter are **not counted towards the usage** of indexed spans, and so **do not impact your bill**.
 
-If there are specific tags, or attributes for which you want to index more spans than what diversity sampling retains, then [create your own retention filter](#create-your-own-retention-filter).
+If there are specific tags or attributes for which you want to index more spans than what diversity sampling retains, then [create your own retention filter](#create-your-own-retention-filter).
 
 ### Create your own retention filter
 
@@ -104,19 +104,19 @@ For example, you can create filters to keep all traces for:
 
 ### In the Trace Explorer
 
-By default, spans indexed by custom retention filters **and** the intelligent retention filter are included in the Trace Explorer [aggregated views][6] (timeseries, toplist, table)
+By default, spans indexed by custom retention filters **and** the intelligent retention filter are included in the Trace Explorer [aggregated views][6] (timeseries, toplist, table).
 
-However, because the diversity sampled set of data which is **not uniformly sampled** (i.e. not proportionnally representative of the full traffic) and biased towards errors and high latency traces, you can choose to exclude these from these views by adding `-retained_by:diversity_sampling` query parameter to the query.
+However, because the diversity-sampled set of data is **not uniformly sampled** (that is, not proportionally representative of the full traffic) and is biased towards errors and high latency traces, you can choose to exclude these spans from these views by adding `-retained_by:diversity_sampling` query parameter to the query.
 
 The `retained_by` attribute is present on all retained spans. Its value is: 
-- `retained_by:diversity_sampling` if the span was captured by diversity sampling (i.e. the [Intelligent retention filter](#datadog-intelligent-retention-filter))
-- `retained_by:retention_filter` if the span was captured by any [tag-based retention filter](#create-your-own-retention-filter) (including the `Error Default` and `Application Security Default` retention filters)
+- `retained_by:diversity_sampling` if the span was captured by diversity sampling (that is, the [Intelligent retention filter](#datadog-intelligent-retention-filter)).
+- `retained_by:retention_filter` if the span was captured by any [tag-based retention filter](#create-your-own-retention-filter), including the `Error Default` and `Application Security Default` retention filters.
 
 {{< img src="tracing/trace_indexing_and_ingestion/retention_filters/trace_analytics.png" style="width:100%;" alt="Retained By facet" >}}
 
-### In dashboards, notebooks and monitors
+### In dashboards, notebooks, and monitors
 
-For the reasons explained above, spans indexed by the intelligent retention filter **are excluded** in dashboards and notebooks APM queries as well as trace analytics monitors' evaluations.
+For the reasons explained above, spans indexed by the intelligent retention filter are **excluded** from APM queries that appear in dashboards and notebooks, and also **excluded** from trace analytics monitor evaluation.
 
 ## Further Reading
 
