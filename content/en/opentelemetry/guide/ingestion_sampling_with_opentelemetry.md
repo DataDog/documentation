@@ -69,7 +69,7 @@ See the [ingestion volume control guide][7] for information about the implicatio
 
 ### Sampling with the Datadog Agent
 
-When using the OTLP Ingest in the Datadog Agent, a probabilistic sampler [is available][11] starting with the Datadog Agent version 7.44.0. It can be configured by using the DD_OTLP_CONFIG_TRACES_PROBABILISTIC_SAMPLER_SAMPLING_PERCENTAGE environment variable, or by using the following YAML in your agent's configuration file:
+When using the Datadog Agent [OTLP Ingest][2], a [probabilistic sampler][11] is available starting from the version 7.44.0 of the Datadog Agent version. Use the `DD_OTLP_CONFIG_TRACES_PROBABILISTIC_SAMPLER_SAMPLING_PERCENTAGE` environment variable to configure it, or set the following YAML in your agent's configuration file:
 
 ```yaml
 otlp_config:
@@ -77,11 +77,14 @@ otlp_config:
   traces:
     probabilistic_sampler:
       sampling_percentage: 50
-```
+\```
 
-The above example will sample only 50% of traces.
+In the above example, 50% of traces will be captured.
 
-If the user sets any sampling priorities, the probabilistic sampler will follow those choices. Additionally, errors may be sampled by the agent's [error sampler][12] depending on its configuration. The [rare sampler][13] may also be used in conjunction with the probabilistic sampler if desired.
+**Note**: Probabilistic sampler properties ensure that only complete traces are ingested if you use the same sampling percentage across all agents.
+
+The probabilistic sampler will ignore spans for which the sampling priority was already set at the SDK level.
+Additionally, spans not caught by the probabilistic sampler might still be captured by the Datadog Agent's [error and rare samplers][12], in order to ensure a higher representation of errors and rare endpoint traces in the ingested dataset. 
 
 ## Monitor ingested volumes from Datadog UI
 
