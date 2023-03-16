@@ -1,6 +1,5 @@
 ---
-aliases:
-- /ja/integrations/amazon_vpc/
+aliases: []
 categories:
 - cloud
 - aws

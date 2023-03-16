@@ -7,6 +7,9 @@ further_reading:
 - link: "/agent/cluster_agent/troubleshooting/"
   tag: "Documentation"
   text: "Troubleshooting the Datadog Cluster Agent"
+- link: "https://www.datadoghq.com/blog/auto-instrument-kubernetes-tracing-with-datadog/"
+  tag: "Blog"
+  text: "Use library injection to auto-instrument tracing for Kubernetes applications with Datadog APM"
 ---
 
 ## Overview
@@ -184,7 +187,7 @@ Possible options:
 - The Admission Controller needs to be deployed and configured before the creation of new application Pods. It cannot update Pods that already exist.
 - To disable the Admission Controller injection feature, use the Cluster Agent configuration: `DD_ADMISSION_CONTROLLER_INJECT_CONFIG_ENABLED=false`
 - By using the Datadog Admission Controller, users can skip configuring the application Pods using downward API ([step 2 in Kubernetes Trace Collection setup][3]).
-- In a Google Kubernetes Engine (GKE) Private Cluster, you need to [add a Firewall Rule for the control plane][4]. The webhook handling incoming connections receives the request on port `443` and directs it to a service implemented on port `8000`. By default, in the Network for the cluster there should be a Firewall Rule named like `gke-<CLUSTER_NAME>-master`. The "Source filters" of the rule match the "Control plane address range" of the cluster. Edit this Firewall Rule to allow ingress to the TCP port `8000`.
+- In a private cluster, you need to [add a Firewall Rule for the control plane][4]. The webhook handling incoming connections receives the request on port `443` and directs it to a service implemented on port `8000`. By default, in the Network for the cluster there should be a Firewall Rule named like `gke-<CLUSTER_NAME>-master`. The "Source filters" of the rule match the "Control plane address range" of the cluster. Edit this Firewall Rule to allow ingress to the TCP port `8000`.
 
 
 ## Further Reading
@@ -192,6 +195,6 @@ Possible options:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://kubernetes.io/blog/2019/03/21/a-guide-to-kubernetes-admission-controllers/
-[2]: /tracing/trace_collection/admission_controller/
+[2]: /tracing/trace_collection/library_injection/
 [3]: https://docs.datadoghq.com/agent/kubernetes/apm/?tab=helm#setup
 [4]: https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters#add_firewall_rules

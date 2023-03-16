@@ -53,6 +53,10 @@ body {
     @media (max-width: 991px) {
         padding-top: 65px;
     }
+    // Restores previous positioning setting for bootstrap columns from bootstrap 4
+    div[class*='col-'] {
+        position: relative;
+    }
 }
 
 .greyside {
@@ -171,6 +175,19 @@ code {
     white-space: normal;
     /*font-family: 'Source Code Pro', monospace;*/
     font-family: $font-family-monospace;
+  &.language-shell {
+    .line {
+      &:before {
+        content: '$ ';
+        display: inline;
+      }
+    }
+    .line ~ .line {
+      &:before {
+        content: '  ';
+      }
+    }
+  }
 }
 
 h2 code {
@@ -358,7 +375,6 @@ h2 {
     line-height: 36px;
 }
 h4 {
-    text-transform: uppercase;
     margin-top: 14px;
 }
 

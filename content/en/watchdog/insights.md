@@ -70,6 +70,8 @@ You can find Watchdog Insights in four product areas: [Infrastructure][1], [APM]
 
 ### Infrastructure
 
+#### Live Containers
+
 Watchdog Insights appear in the Kubernetes Explorer tab in [Live Containers][5].
 
 1. In the left navigation, hover over **Infrastructure**.
@@ -77,6 +79,18 @@ Watchdog Insights appear in the Kubernetes Explorer tab in [Live Containers][5].
 3. Select the **Explorer** tab at the top of the page.
 4. Choose one of the Kubernetes resource types in the **Select Resources** box.
 5. A list of your Kubernetes resources appears, with the Watchdog Insights panel at the top.
+
+#### Serverless
+
+For serverless infrastructures, Watchdog surfaces the following insights:
+
+- `Cold Start Ratio Up/Down`
+- `Error Invocation Ratio Up/Down`
+- `Memory Usage Up/Down`
+- `OOM Ratio Up/Down`
+- `Estimated Cost Up/Down`
+- `Init Duration Up/Down`
+- `Runtime Duration Up/Down`
 
 ### APM
 
@@ -101,7 +115,7 @@ For more information, see [Watchdog Insights for Logs][10].
 To locate Watchdog Insights in the RUM UI, take the following steps:
 1. In the left navigation, hover over **UX Monitoring**.
 2. Click **Sessions & Replays**.
-3. At the top of the page, the **In** drop-down shows that you are in the **Sessions** level. Change the drop-down to **Views**.
+3. At the top of the page, the **In** dropdown shows that you are in the **Sessions** level. Change the dropdown option to **Views**.
 
 The pink Watchdog Insights banner appears in the middle of your screen, above your views.
 

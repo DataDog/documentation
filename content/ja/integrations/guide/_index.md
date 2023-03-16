@@ -8,6 +8,7 @@ title: インテグレーションガイド
 {{< whatsnext desc="一般ガイド:" >}}
     {{< nextlink href="integrations/guide/requests" tag="documentation" >}}Datadog インテグレーションをリクエストする{{< /nextlink >}}
     {{< nextlink href="/integrations/guide/reference-tables/" tag=" Documentation" >}}リファレンステーブルでカスタムメタデータを追加する{{< /nextlink >}} 
+    {{< nextlink href="integrations/guide/source-code-integration" tag=" Documentation" >}}Datadog のソースコードインテグレーション{{< /nextlink >}}
     {{< nextlink href="integrations/guide/cloud-metric-delay" tag="cloud" >}}クラウドメトリクスの遅延{{< /nextlink >}}
     {{< nextlink href="integrations/guide/add-event-log-files-to-the-win32-ntlogevent-wmi-class" tag="Windows" >}}WMI クラス `Win32_NTLogEvent` にイベントログファイルを追加する{{< /nextlink >}}
     {{< nextlink href="integrations/guide/retrieving-wmi-metrics" tag="Windows" >}}WMI メトリクスの取得{{< /nextlink >}}
@@ -17,7 +18,6 @@ title: インテグレーションガイド
     {{< nextlink href="integrations/guide/freshservice-tickets-using-webhooks" tag="Webhooks" >}}Webhooks を利用した Freshservice のチケット{{< /nextlink >}}
     {{< nextlink href="integrations/guide/hadoop-distributed-file-system-hdfs-integration-error" tag="Hadoop" >}}Hadoop Distributed File System (HDFS) インテグレーションエラー{{< /nextlink >}}
     {{< nextlink href="integrations/guide/hcp-consul" tag="Consul" >}}Datadog を使用した HCP Consul の監視{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/source-code-integration" tag="GitHub Apps" >}}Datadog のソースコードインテグレーション{{< /nextlink >}}
     {{< nextlink href="integrations/guide/agent-failed-to-retrieve-rmiserver-stub" tag="kafka" >}}Agent  が RMIServer スタブの取得に失敗した{{< /nextlink >}}
     {{< nextlink href="integrations/guide/send-tcp-udp-host-metrics-to-the-datadog-api/" tag="network" >}}TCP/UDP のホストメトリクスを Datadog API に送信する{{< /nextlink >}}
     {{< nextlink href="integrations/guide/snmp-commonly-used-compatible-oids/" tag="snmp" >}}よく使われる SNMP と互換性のある OID{{< /nextlink >}} 
@@ -43,7 +43,8 @@ title: インテグレーションガイド
     {{< nextlink href="integrations/guide/azure-portal" tag=" Azure" >}}Azure ネイティブインテグレーションの管理{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-troubleshooting" tag="Azure" >}}Azure のトラブルシューティング{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-vms-appear-in-app-without-metrics" tag="Azure" >}}Azure VM がメトリクスなしでアプリに表示される{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/powered-down-azure-vm-on-infrastructure-list" tag="Azure" >}}インフラストラクチャーリストのパワーダウンした Azure VM{{< /nextlink >}}  
+    {{< nextlink href="integrations/guide/powered-down-azure-vm-on-infrastructure-list" tag="Azure" >}}インフラストラクチャーリストのパワーダウンした Azure VM{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/powershell-command-to-install-azure-datadog-extension" tag=" Azure" >}}Azure Datadog 拡張機能をインストールするコマンド{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="JMX ガイド" >}}

@@ -4,6 +4,16 @@ kind: documentation
 description: Describes the monitor creation page.
 aliases:
   - /monitors/create/configuration
+further_reading:
+- link: "/monitors/notify/"
+  tag: "Documentation"
+  text: "Monitor Notifications"
+- link: "/monitors/manage/"
+  tag: "Documentation"
+  text: "Manage monitors"
+- link: "/monitors/manage/status/"
+  tag: "Documentation"
+  text: "Monitor Status"
 ---
 
 ## Overview
@@ -20,24 +30,6 @@ To start configuring the monitor, complete the following:
 To learn how to construct the search query, see the individual [monitor types][1] pages. As you define the search query, the preview graph above the search fields updates.
 
 {{< img src="/monitors/create/preview_graph_monitor.mp4" alt="Preview Graph" video=true style="width:90%;">}}
-
-### Alert grouping
-
-Alerts are grouped automatically based on your selection of the `group by` step when defining your query. Grouping defaults to `Simple Alert`. If the query is grouped by any dimension, grouping changes to `Multi Alert`.
-
-#### Simple alert
-`Simple Alert` mode aggregates over all reporting sources. You receive **one alert** when the aggregated value meets the set conditions.
-
-#### Multi alert
-`Multi Alert` mode applies the alert to each source according to your group parameters. You receive an alert for **each group** that meets the set conditions. For example, you could group a query looking at a capacity metric by `host` and `device` to receive a separate alert for each host device that is running out of space.  
-**Note**: If your metric is only reporting by `host` with no `device` tag, it is not detected by the monitor. Metrics with both `host` and `device` tags are detected by the monitor. 
-
-If you configure tags or dimensions, these values are available for every group evaluated in the multi alert to dynamically fill in notifications with useful context. See [Tag Variables][2] to learn how to reference tag values in the notification message.
-
-| Group by                       | Simple alert mode | Multi alert mode |
-|-------------------------------------|------------------------|-----------------------|
-| _(everything)_                      | One single group triggering one notification | N/A |
-| 1&nbsp;or&nbsp;more&nbsp;dimensions | One notification if one or more groups meet the alert conditions | One notification per group meeting the alert conditions |
 
 ## Set alert conditions
 
@@ -57,9 +49,11 @@ The query returns a series of points, but a single value is needed to compare to
 | Option                  | Description                                            |
 |-------------------------|--------------------------------------------------------|
 | average         | The series is averaged to produce a single value that is checked against the threshold. It adds the `avg()` function to your monitor query. |
-| max | If any single value in the generated series crosses the threshold, then an alert is triggered. It adds the `max()` function to your monitor query. |
-| min  | If all points in the evaluation window for your query cross the threshold, then an alert is triggered. It adds the `min()` function to your monitor query. |
+| max | If any single value in the generated series crosses the threshold, then an alert is triggered. It adds the `max()` function to your monitor query.* |
+| min  | If all points in the evaluation window for your query cross the threshold, then an alert is triggered. It adds the `min()` function to your monitor query.* |
 | sum | If the summation of every point in the series crosses the threshold, then an alert is triggered. It adds the `sum()` function to your monitor query. |
+
+\* These descriptions of max and min assume that the monitor alerts when the metric goes _above_ the threshold. For monitors that alert when _below_ the threshold, the max and min behavior is reversed.
 
 **Note**: There are different behaviors when utilizing `as_count()`. See [as_count() in Monitor Evaluations][1] for details.
 
@@ -142,9 +136,9 @@ See the documentation for [process check][1], [integration check][2], and [custo
 
 
 
-[1]: /monitors/create/types/process_check/
-[2]: /monitors/create/types/integration/?tab=checkalert#integration-status
-[3]: /monitors/create/types/custom_check/
+[1]: /monitors/types/process_check/
+[2]: /monitors/types/integration/?tab=checkalert#integration-status
+[3]: /monitors/types/custom_check/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -218,7 +212,7 @@ The `Evaluate as zero` and `Show last known status` options are displayed based 
 
 `[Never]`, `After 1 hour`, `After 2 hours`, etc. automatically resolve this event from a triggered state.
 
-Auto-resolve works when data is no longer being submitted. Monitors do not auto-resolve from an ALERT or WARN state if data is still reporting. If data is still being submitted, the [renotify][3] feature can be utilized to let your team know when an issue is not resolved.
+Auto-resolve works when data is no longer being submitted. Monitors do not auto-resolve from an ALERT or WARN state if data is still reporting. If data is still being submitted, the [renotify][2] feature can be utilized to let your team know when an issue is not resolved.
 
 For some metrics that report periodically, it may make sense for triggered alerts to auto-resolve after a certain time period. For example, if you have a counter that reports only when an error is logged, the alert never resolves because the metric never reports `0` as the number of errors. In this case, set your alert to resolve after a certain time of inactivity on the metric. **Note**: If a monitor auto-resolves and the value of the query does not meet the recovery threshold at the next evaluation, the monitor triggers an alert again.
 
@@ -230,14 +224,14 @@ You can drop the group from the monitor status after `N` hours of missing data. 
 
 {{< img src="/monitors/create/group_retention_time.png" alt="Group Retention Time Option" style="width:70%;">}}
 
-Similar to the [Auto-resolve option][4], the group retention works when data is no longer being submitted. This option controls how long the group is kept in the monitor's status once data stops reporting. By default, a group keeps the status for 24 hours before it is dropped. The start time of the group retention and the Auto-resolve option are **identical** as soon as the monitor query returns no data.
+Similar to the [Auto-resolve option][3], the group retention works when data is no longer being submitted. This option controls how long the group is kept in the monitor's status once data stops reporting. By default, a group keeps the status for 24 hours before it is dropped. The start time of the group retention and the Auto-resolve option are **identical** as soon as the monitor query returns no data.
 
 Some use cases to define a group retention time include:
 
 - When you would like to drop the group immediately or shortly after data stops reporting
 - When you would like to keep the group in the status for as long as you usually take for troubleshooting
 
-**Note**: The group retention time option requires a multi alert monitor that supports the [`On missing data`][5] option. These monitor types are APM Trace Analytics, Audit Logs, CI Pipelines, Error Tracking, Events, Logs, and RUM monitors.
+**Note**: The group retention time option requires a multi alert monitor that supports the [`On missing data`][4] option. These monitor types are APM Trace Analytics, Audit Logs, CI Pipelines, Error Tracking, Events, Logs, and RUM monitors.
 
 #### New group delay
 
@@ -257,9 +251,58 @@ The time (in seconds) to delay evaluation. This should be a non-negative integer
 
 **Note**: A 15 minute delay is recommended for cloud metrics which are backfilled by service providers. Additionally, when using a division formula, a 60 second delay is helpful to ensure your monitor evaluates on complete values.
 
+## Notify your team
+
+Configure your notification messages to include the information you are most interested in. Specify which teams to send these alerts to as well as which attributes to trigger alerts for.
+
+### Message
+
+Use this section to configure notifications to your team and configure how to send these alerts:
+  - [Configure your notification with Template Variables][5]
+  - [Send notifications to your team through email, Slack, PagerDuty, etc.][6]
+
+  For more information on the configuration options for the notification message, see [Alerting Notifications][7].
+
+### Alert grouping
+
+Alerts are grouped automatically based on your selection of the `group by` step when defining your query. If the query has no grouping, it defaults to `Simple Alert`. If the query is grouped by any dimension, grouping changes to `Multi Alert`.
+
+#### Simple alert
+
+`Simple Alert` mode aggregates over all reporting sources. You receive **one alert** when the aggregated value meets the set conditions.
+
+#### Multi alert
+
+`Multi Alert` mode applies the alert to each source according to your group parameters. You receive an alert for **each group** that meets the set conditions. For example, you could group a query looking at a capacity metric by `host` and `device` to receive a separate alert for each host device that is running out of space.  
+
+Customize which dimensions trigger alerts to reduce the noise and focus on the queries that matter most to you. If you group your query by `host` and `device` but only want alerts to be sent when the `host` attribute meets the threshold, remove the `device` attribute from your multi alert options and reduce the number of notifications that are sent.
+
+**Note**: If your metric is only reporting by `host` with no `device` tag, it is not detected by the monitor. Metrics with both `host` and `device` tags are detected by the monitor. 
+
+If you configure tags or dimensions in your query, these values are available for every group evaluated in the multi alert to dynamically fill in notifications with useful context. See [Attribute and tag variables][8] to learn how to reference tag values in the notification message.
+
+| Group by                       | Simple alert mode | Multi alert mode |
+|-------------------------------------|------------------------|-----------------------|
+| _(everything)_                      | One single group triggering one notification | N/A |
+| 1&nbsp;or&nbsp;more&nbsp;dimensions | One notification if one or more groups meet the alert conditions | One notification per group meeting the alert conditions |
+
+## Add metadata
+
+1. Use the **Tags** dropdown to associate [tags][9] with your monitor.
+1. Use the **Teams** dropdown to associate [teams][10] with your monitor.
+1. Choose a **Priority**.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /monitors/types
-[2]: /monitors/notify/variables/?tab=is_alert#tag-variables
-[3]: /monitors/notify/#renotify
-[4]: /monitors/create/configuration#auto-resolve
-[5]: /monitors/create/configuration/?tabs=othermonitortypes#no-data
+[2]: /monitors/notify/#renotify
+[3]: /monitors/configuration/?tab=thresholdalert#auto-resolve
+[4]: /monitors/configuration/?tabs=othermonitortypes#no-data
+[5]: /monitors/notify/variables/
+[6]: /monitors/notify/#notify-your-team
+[7]: /monitors/notify/#say-whats-happening
+[8]: /monitors/notify/variables/?tab=is_alert#attribute-and-tag-variables
+[9]: /getting_started/tagging/
+[10]: /account_management/teams/

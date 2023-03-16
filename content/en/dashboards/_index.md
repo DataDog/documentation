@@ -146,11 +146,11 @@ At the top of the dashboard, click on settings and select *Permissions*.
 
 {{< img src="dashboards/dashboard-menu-permissions.png" alt="The dashboard settings menu" style="width:50%;">}}
 
-Use the pop up to restrict access to you, everyone in your organization with your role, or to specific roles in your organization.
+Use the pop-up to restrict access to you, everyone in your organization with your role, or to specific roles in your organization.
 
-{{< img src="dashboards/access_popup.png" alt="Dialog box with drop-down menu allowing users to choose a role to access the dashboard." style="width:70%;">}}
+{{< img src="dashboards/access_popup.png" alt="Dialog box with dropdown menu allowing users to choose a role to access the dashboard." style="width:70%;">}}
 
-Creators are always able to edit the dashboard, but other users who are allowed to edit the dashboard can add or remove any role from the access control list (ACL) as long as the final ACL includes one of their roles. For more information about roles, see the [RBAC documentation][14].
+Any user setting access control rules has to include one or more roles they are a part of to prevent locking an organization out. For more information about roles, see the [RBAC documentation][14].
 
 If the dashboard was created with the deprecated "read only" setting, the access control list pre-populates with a list of roles that have the Access Management (`user_access_manage`) permission.
 
@@ -182,15 +182,43 @@ From an individual dashboard, copy, import, or export a dashboard's JSON using t
 
 Use this option to permanently delete your dashboard. You are prompted to confirm deletion.
 
-## Suggested dashboards and active users
+## Dashboard details
 
-From an individual dashboard, Datadog offers suggestions for viewing related dashboards. To view suggested dashboards and active users, click on the caret icon next to the dashboard title. These dashboards are recommended based on the user activity in your organization and how often users go from this dashboard to other existing dashboards. You can also add or update Markdown-supported dashboard descriptions in this view by clicking `edit`.
+From an individual dashboard, click the caret icon next to the dashboard title to view and edit dashboard details. A dropdown panel opens.
 
 {{< img src="dashboards/suggested_dashboards.png" alt="Suggested dashboards" >}}
+
+Under the title, a byline tells you who created the dashboard.
+
+### Suggested dashboards and active users
+
+From an individual dashboard, Datadog offers suggestions for viewing related dashboards. These dashboards are recommended based on the user activity in your organization and how often users go from this dashboard to other existing dashboards. The rightmost section of the dashboard details view displays a list of the most active users of this dashboard.
+
+### Edit details
+
+Update Markdown-supported dashboard descriptions or associate [teams][17] with a dashboard:
+
+1. Open the dashboard you wish to edit.
+1. Click the caret icon next to the dashboard title. A dropdown panel opens.
+1. Click **Edit**. The panel changes to edit mode.
+1. Select up to 5 teams from the **Teams** dropdown.
+1. Enter a description in the text box. Format your text in Markdown.
+1. Click **Save**.
+
 
 ## Dashboard list
 
 Search, view, or create dashboards and lists on the [Dashboard List][4] page.
+
+### Teams
+
+Use the **My Teams** toggle to switch between viewing all dashboards and only dashboards owned by your [teams][17].
+
+To edit the teams associated with one or more dashboards, take the following steps:
+1. Select the checkbox next to each dashboard you wish to modify.
+1. Open the **Edit Teams** dropdown in the upper right.
+1. Use the checkboxes to select the appropriate teams for the dashboards.
+1. Click **Apply Changes**.
 
 ### New list
 
@@ -257,7 +285,7 @@ An organization's most popular dashboard displays five popularity bars. All othe
 
 The [Datadog Mobile App][1], available on the [Apple App Store][2] and [Google Play Store][3], enables you to view your dashboards in a mobile-friendly format.
 
-On the Dashboards page, you can view and search all of your dashboards, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][17]. Click on an individual dashboard to view it.
+On the Dashboards page, you can view and search all of your dashboards, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][18]. Click on an individual dashboard to view it.
 
 **Note**: To set up or edit a dashboard, you must log in to the Datadog browser UI.
 
@@ -291,4 +319,5 @@ You can add SLOs, Monitors, and Open Incidents widgets to your mobile home scree
 [14]: /account_management/rbac/
 [15]: /dashboards/guide/how-to-use-terraform-to-restrict-dashboard-edit/
 [16]: /help/
-[17]: /dashboards/template_variables/#saved-views
+[17]: /account_management/teams/
+[18]: /dashboards/template_variables/#saved-views

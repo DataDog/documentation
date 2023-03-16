@@ -1,6 +1,5 @@
 ---
-aliases:
-- /ja/integrations/azure_arc
+aliases: []
 categories:
 - クラウド
 - azure
@@ -30,7 +29,7 @@ Datadog Azure インテグレーションを使用して、Azure Arc からメ�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 

@@ -68,6 +68,8 @@ Datadog can automatically configure triggers on the Datadog Forwarder Lambda fun
 | Redshift Logs                   | S3             |
 | S3 Access Logs                  | S3             |
 
+**Note**: `SubscriptionFilter` is not created automatically.
+
 1. If you haven't already, set up the [Datadog log collection AWS Lambda function][1].
 2. Ensure the policy of the IAM role used for [Datadog-AWS integration][40] has the following permissions. Information on how these permissions are used can be found in the descriptions below:
 
@@ -130,7 +132,7 @@ If you are collecting logs from a CloudWatch log group, configure the trigger to
 1. In the AWS console, go to **Lambda**. 
 2. Click **Functions** and select the Datadog Forwarder.
 3. Click **Add trigger** and select **CloudWatch Logs**.
-4. Select the log group from the drop-down menu.
+4. Select the log group from the dropdown menu.
 5. Enter a name for your filter, and optionally specify a filter pattern.
 6. Click **Add**.
 7. Go to the [Datadog Log section][1] to explore any new log events sent to your log group.

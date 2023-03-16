@@ -218,12 +218,6 @@ Ouvrez les ports suivants pour profiter de toutes les fonctionnalités de l'**Ag
 : Port utilisé pour le NTP ([en savoir plus sur l'importance du NTP][1])<br>
 Voir les [cibles NTP par défaut][2]
 
-6062/tcp
-: Port utilisé pour les endpoints de debugging de l'Agent de processus
-
-6162/tcp
-: Port utilisé pour la configuration des paramètres de runtime de l'Agent de processus
-
 10516/tcp
 : Port utilisé pour la collecte de logs via TCP<br>
 Consultez les [endpoints pour les logs][3] pour découvrir d'autres types de connexions.
@@ -254,12 +248,6 @@ Voir les [cibles NTP par défaut][2]
 : Port utilisé pour la collecte de logs via TCP<br>
 Consultez les [endpoints pour les logs][3] pour découvrir d'autres types de connexions.
 
-6062/tcp
-: Port utilisé pour les endpoints de debugging de l'Agent de processus
-
-6162/tcp
-: Port utilisé pour la configuration des paramètres de runtime de l'Agent de processus
-
 10255/tcp
 : Port utilisé pour le [kubelet HTTP Kubernetes][4]
 
@@ -281,12 +269,6 @@ Consultez les [endpoints pour les logs][3] pour découvrir d'autres types de con
 123/udp
 : Port utilisé pour le NTP ([en savoir plus sur l'importance du NTP][1])<br>
 Voir les [cibles NTP par défaut][2]
-
-6062/tcp
-: Port utilisé pour les endpoints de debugging de l'Agent de processus
-
-6162/tcp
-: Port utilisé pour la configuration des paramètres de runtime de l'Agent de processus
 
 10255/tcp
 : Port utilisé pour le [kubelet HTTP Kubernetes][4]
@@ -314,6 +296,12 @@ Ports utilisés pour les services de l'Agent qui communiquent entre eux en local
 5002/tcp
 : Port utilisé pour [accéder à l'interface graphique de l'Agent depuis le navigateur][2]
 
+6062/tcp
+: Port utilisé pour les endpoints de debugging de l'Agent de processus
+
+6162/tcp
+: Port utilisé pour la configuration des paramètres de runtime de l'Agent de processus
+
 8125/udp
 : Port utilisé pour DogStatsD, sauf si `dogstatsd_non_local_traffic` est défini sur true. Ce port est disponible sur localhost : `127.0.0.1`, `::1`, `fe80::1`.
 
@@ -335,13 +323,13 @@ Ports utilisés pour les services de l'Agent qui communiquent entre eux en local
 : Port utilisé pour le NTP ([en savoir plus sur l'importance du NTP][1]).<br>
 Voir les [cibles NTP par défaut][2].
 
+#### Trafic entrant
+
 6062/tcp
 : Port utilisé pour les endpoints de debugging de l'Agent de processus
 
 6162/tcp
 : Port utilisé pour la configuration des paramètres de runtime de l'Agent de processus
-
-#### Trafic entrant
 
 8125/udp
 : Port utilisé pour DogStatsD, sauf si `dogstatsd_non_local_traffic` est défini sur true. Ce port est disponible sur localhost : `127.0.0.1`, `::1`, `fe80::1`.

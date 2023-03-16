@@ -24,7 +24,7 @@ further_reading:
 You may need to monitor user journeys located behind a login. There are two ways to ensure that your Datadog browser tests can go through the login steps of your application to perform validation on post-login pages:
 
 - [Include the login steps in your browser test recording](#include-the-login-steps-in-your-recording)
-- [Leverage advanced options in your browser tests](#leverage-test-configuration-options)
+- [Leverage advanced options in your browser tests](#leverage-browser-test-configuration-options)
 
 To ensure your credentials are securely stored and obfuscated across the application, use [obfuscated global variables](#account-security).
 
@@ -35,13 +35,13 @@ At test execution, the browser test systematically executes the first login step
 
 {{< img src="synthetics/guide/app_that_requires_login/login_test.mp4" video="true" alt="Demo of recording a login">}}
 
-By default, the iframe/pop up of the recorder uses your own browser. If you start the recording already logged into your application, the iframe/pop up might directly display a post-login page, which prevents you from recording your login steps without logging out first.
+By default, the iframe/pop-up of the recorder uses your own browser. If you start the recording already logged into your application, the iframe/pop-up might directly display a post-login page, which prevents you from recording your login steps without logging out first.
 
 To record your steps without logging out of your application, use the recorder's incognito mode.
 
 {{< img src="synthetics/guide/app_that_requires_login/incognito.mp4" video="true" alt="Demo of recording a login in incognito">}}
 
-Opening a pop up in incognito mode allows you to start your test's recording from the start URL set in your test configuration with a session completely isolated from your own browser's main session and user data. The freshly opened incognito pop up ignores all your previous browser history including cookies and local data. You are automatically logged out from your account and can start recording your login steps as if you were visiting your website for the first time.
+Opening a pop-up in incognito mode allows you to start your test's recording from the start URL set in your test configuration with a session completely isolated from your own browser's main session and user data. The freshly opened incognito pop-up ignores all your previous browser history including cookies and local data. You are automatically logged out from your account and can start recording your login steps as if you were visiting your website for the first time.
 
 **Note:** Use [the subtest feature][2] to group your login steps into a single subtest that you can then reuse across any other browser tests that require a login.
 
@@ -84,11 +84,13 @@ You can manually apply these configured headers, cookies, and credentials on the
 
 ### Secure your authentication data
 
-Store your credentials as [global variables][6] (for example, one global variable for username, another one for password) and  set these variables as obfuscated to hide their values from anyone else who has access to your instance of Datadog.
+Store your credentials as [global variables][6] (for example, one global variable for username, another one for password) and select **Hide and obfuscate variable value** to hide their values from test results. You can restrict permissions on a browser test for individuals who have access to your instance of Datadog.
 
 Once you create the obfuscated variables, you can then [import these global variables][7] into your browser tests and leverage them for your login steps.
 
 **Note:** Although Datadog global variables are securely stored and encrypted, it is strongly recommended that you use an account dedicated to testing with dummy credentials as a general testing best practice.
+
+For more information about account security, see [Synthetic Monitoring Data Security][8].
 
 ## Further Reading
 
@@ -101,3 +103,4 @@ Once you create the obfuscated variables, you can then [import these global vari
 [5]: /synthetics/browser_tests/actions/#test-your-ui-with-custom-javascript
 [6]: /synthetics/settings/?tab=specifyvalue#global-variables
 [7]: /synthetics/browser_tests/actions#a-global-variable
+[8]: /data_security/synthetics

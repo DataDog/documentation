@@ -46,8 +46,11 @@ hugo defaults to environment development with hugo server
 {{/* inline datadog rum & logs libs, then load config after as config changes every builds due to version */}}
 {{ $dd_rum := resources.Get "node_modules/datadog-rum.js" }}
 {{ $dd_logs := resources.Get "node_modules/datadog-logs.js" }}
-{{ $dd_libs_js := slice $dd_rum $dd_logs | resources.Concat "js/dd-libs.js" }}
-<script>{{ $dd_libs_js.Content | safeJS }}</script>
+{{ $dd_libs_js := slice $dd_rum $dd_logs | resources.Concat "static/dd-libs.js" }}
+{{ if $isProd }}
+  {{ $dd_libs_js = $dd_libs_js | fingerprint "sha512" }}
+{{ end }}
+<script type="text/javascript" src="{{ $dd_libs_js.Permalink }}" {{ if $isProd }} integrity="{{ $dd_libs_js.Data.Integrity }}" {{ end }}></script>
 
 
 {{ $opts := dict "targetPath" "static/dd-browser-logs-rum.js" "defines" $defines "sourceMap" $sourcemap "minify" $isProd }}

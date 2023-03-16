@@ -56,7 +56,7 @@ API test results for worker v>0.1.6 `intake.synthetics.`{{< region-param key="dd
 Browser test results for worker v>0.2.0 `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
 API test results for worker v<0.1.5 `api.`{{< region-param key="dd_site" code="true" >}}
 
-{{< site-region region="us,eu,us3" >}}
+{{< site-region region="us,eu,us3,us5" >}}
 [Database Monitoring][2]
 : `dbm-metrics-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `dbquery-intake.`{{< region-param key="dd_site" code="true" >}}
@@ -201,10 +201,11 @@ Add all of the `ip-ranges` to your inclusion list. While only a subset are activ
 
 <div class="alert alert-warning">
 All outbound traffic is sent over SSL through TCP / UDP.
+<br><br>
+Ensure the Agent is only accessible by your applications or trusted network sources using a firewall rule or similar network restriction. Untrusted access can allow malicious actors to perform several invasive actions, including but not limited to writing traces and metrics to your Datadog account, or obtaining information about your configuration and services.
 </div>
 
 Open the following ports to benefit from all the **Agent** functionalities:
-
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
@@ -218,12 +219,6 @@ Open the following ports to benefit from all the **Agent** functionalities:
 123/udp
 : Port for NTP ([more details on the importance of NTP][1]).<br>
 See [default NTP targets][2].
-
-6062/tcp
-: Port for the debug endpoints for the Process Agent.
-
-6162/tcp
-: Port for configuring runtime settings for the Process Agent.
 
 10516/tcp
 : Port for log collection over TCP.<br>
@@ -255,12 +250,6 @@ See [default NTP targets][2].
 : Port for log collection over TCP.<br>
 See [logs endpoints][3] for other connection types.
 
-6062/tcp
-: Port for the debug endpoints for the Process Agent.
-
-6162/tcp
-: Port for configuring runtime settings for the Process Agent.
-
 10255/tcp
 : Port for the [Kubernetes HTTP Kubelet][4]
 
@@ -282,12 +271,6 @@ See [logs endpoints][3] for other connection types.
 123/udp
 : Port for NTP ([more details on the importance of NTP][1]).<br>
 See [default NTP targets][2].
-
-6062/tcp
-: Port for the debug endpoints for the Process Agent.
-
-6162/tcp
-: Port for configuring runtime settings for the Process Agent.
 
 10255/tcp
 : Port for the [Kubernetes HTTP Kubelet][4]
@@ -315,6 +298,15 @@ Used for Agent services communicating with each other locally within the host on
 5002/tcp
 : Port for the [Agent browser GUI][2]
 
+5012/tcp
+: Port for the APM [go_expvar server][1]
+
+6062/tcp
+: Port for the debug endpoints for the Process Agent.
+
+6162/tcp
+: Port for configuring runtime settings for the Process Agent.
+
 8125/udp
 : Port for DogStatsD unless `dogstatsd_non_local_traffic` is set to true. This port is available on localhost: `127.0.0.1`, `::1`, `fe80::1`.
 
@@ -336,13 +328,13 @@ Used for Agent services communicating with each other locally within the host on
 : Port for NTP ([more details on the importance of NTP][1]).<br>
 See [default NTP targets][2].
 
+#### Inbound
+
 6062/tcp
 : Port for the debug endpoints for the Process Agent.
 
 6162/tcp
 : Port for configuring runtime settings for the Process Agent.
-
-#### Inbound
 
 8125/udp
 : Port for DogStatsD unless `dogstatsd_non_local_traffic` is set to true. This port is available on localhost: `127.0.0.1`, `::1`, `fe80::1`.

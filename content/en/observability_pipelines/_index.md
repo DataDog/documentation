@@ -4,57 +4,49 @@ kind: Documentation
 aliases:
   - /integrations/observability_pipelines/
 further_reading:
-  - link: /observability_pipelines/setup/
+  - link: /getting_started/observability_pipelines/
     tag: Documentation
-    text: Set up Observability Pipelines 
+    text: Install the Observability Pipelines Worker
+  - link: /getting_started/observability_pipelines/
+    tag: Documentation
+    text: Get started with Observability Pipelines and Datadog
   - link: https://www.datadoghq.com/blog/datadog-observability-pipelines/
     tag: Blog
     text: Take control of your telemetry data with Observability Pipelines
-  - link: /observability_pipelines/vector_configurations/
+  - link: /observability_pipelines/configurations/
     tag: Documentation
-    text: Learn more about Vector configurations
-  - link: https://vector.dev/docs/setup/going-to-prod/
-    tag: Documentation
-    text: Take Observability Pipelines to production with capacity planning
-  - link: https://vector.dev/releases/ 
-    tag: Documentation
-    text: Check out the new release for Vector
-  - link: https://vector.dev/docs/reference/configuration/sources/datadog_agent/
-    tag: Documentation
-    text: Datadog Agent as a source for Vector
-  - link: /observability_pipelines/integrations/integrate_vector_with_datadog/ 
-    tag: Documentation
-    text: Configure Datadog Agents to send data to Vector
+    text: Learn more about Observability Pipelines configurations
 ---
 
-{{< img src="observability_pipelines/obs_pipelines_overview.png" alt="A graphic showing different data sources on the left that flows into three hexagons named transform, reduce, and route, with arrows pointing to different destinations for the modified data" style="width:100%;" >}}
+{{< img src="observability_pipelines/obs_pipelines.png" alt="A graphic showing different data sources on the left that flows into three hexagons named transform, reduce, and route, with arrows pointing to different destinations for the modified data" style="width:100%;" >}}
 
-## What is Observability Pipelines?
+## What is Observability Pipelines and the Observability Pipelines Worker?
 
-Observability Pipelines is a monitoring solution built on [Vector][1], an open source tool that enables you to monitor and manage all of your telemetry pipelines at scale. Vector is deployed as an aggregator within your infrastructure to collect, transform, and route all of your logs, metrics, and traces to any destination.
+### Observability Pipelines Worker
 
-Add your Datadog API key to your Vector configuration to connect it to Observability Pipelines. Use Observability Pipelines to monitor your Vector pipelines and identify bottlenecks and latencies, fine-tune performance, monitor data delivery, and more. 
-
-With Observability Pipelines, you can also:
+Observability Pipelines Worker is an on-premise end-to-end data pipeline solution designed to collect, process, and route logs and metrics from any source to any destination. You can deploy Observability Pipelines as an aggregator within your infrastructure for central processing, collecting data from multiple upstream sources, and performing cross-host aggregation and analysis. With the Observability Pipelines Worker, you can also:
 
 - Control your data volume before routing to manage costs.
 - Route data anywhere to reduce vendor lock-in and simplify migrations.
-- Meet residency requirements and redact sensitive data to stay more compliant.
-- Enrich, structure, and transform your events to make them more useful.
+- Transform logs and metrics by adding, parsing, enriching, and removing fields and tags.
+- Redact sensitive data from your telemetry data.
 
-Build performant and reliable data pipelines with complete visibility and simplified management using Observability Pipelines. 
+### Observability Pipelines
+
+Using Datadog, you can monitor, build, and manage all of your Observability Pipelines Worker deployments at scale.
+
+Add your Datadog API key to your Observability Pipelines configuration to monitor your pipelines in Datadog: Identify bottlenecks and latencies, fine-tune performance, monitor data delivery, and more.
 
 ## Get started
 
-1. [Install Vector][2] using the quick start method, your preferred package manager, or based on your specific platform or operating system.
-2. [Set up Vector configurations][3] to collect, transform and route your data.
-3. [Connect Vector to Observability Pipelines][4] with your Datadog API.
+1. [Install the Observability Pipelines Worker][1].
+2. [Set up configurations][2] to collect, transform and route your data.
 
 ## Explore Observability Pipelines
 
-Now that you are sending configuration data to Observability Pipelines, start getting insights into your Vector pipelines:
+Start exploring and getting insights into your Observability Pipelines:
 
-### Monitor the health of your Vector pipelines
+### Monitor the health of your pipelines
 
 Get a holistic view of all of your pipelines' topologies and monitor key performance indicators, such as average load, error rate, and throughput for each of your flows. 
 
@@ -62,7 +54,7 @@ Get a holistic view of all of your pipelines' topologies and monitor key perform
 
 ### Quickly identify bottlenecks and optimize performance
 
-Dive into specific Vector components to understand how observability data is flowing into your pipeline to troubleshoot and pinpoint performance bottlenecks and to optimize your pipeline. 
+Dive into specific configuration components to understand how observability data is flowing into your pipeline to troubleshoot and pinpoint performance bottlenecks and to optimize your pipeline. 
 
 {{< img src="observability_pipelines/config-map-side-panel.png" alt="The S3 source configuration side panel showing graphs for events in and out per second, percentage of errors, and load average percentage" style="width:85%;" >}}
 
@@ -76,7 +68,5 @@ Find out if data is reaching its destination and get full visibility into any la
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://vector.dev/
-[2]: /observability_pipelines/setup/#install-vector
-[3]: /observability_pipelines/setup/#set-up-vector-configurations
-[4]: /observability_pipelines/setup/#connect-vector-to-observability-pipelines
+[1]: /observability_pipelines/installation/
+[2]: /observability_pipelines/configurations/

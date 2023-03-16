@@ -62,6 +62,10 @@ Color overrides allow you to assign a single color of your choice to each query.
 
 {{< img src="dashboards/guide/colors/11_overrides.png" alt="The panel that allows a user to configure color overrides." style="width:80%;" >}}
 
+**Note**: If your query aggregates by a tag (for instance, using 'sum by' or 'avg by'), you can only select a palette override. This prevents different series from using the same color, preserving readability.
+
+{{< img src="dashboards/guide/colors/12_palette_and_color_override_comparison.png" alt="A side-by-side comparison of the color override and palette override dropdown panels." style="width:80%;" >}}
+
 ## Accessibility settings
 
 Datadog offers accessible color modes for graphs to cater to visual needs, including color vision deficiency, low visual acuity, and contrast sensitivity. Selecting an accessible color mode renders all graphs with the Classic palette in a set of accessible colors catered to a specific vision need. You can set an accessible color mode from the [User Preferences page][1].

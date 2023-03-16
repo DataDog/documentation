@@ -89,6 +89,7 @@ code_language_ids:
     linux: Linux
     opentelemetry: OpenTelemetry
     ddprof: "Rust/C/C++"
+    serverless: "Serverless"
 
 branch: ""
 
@@ -101,7 +102,6 @@ header_scripts:
   - marketo: false
 
 footer_scripts:
-  - snowplow: false
 
 # Docs allowed regions for redirecting
 allowedRegions:

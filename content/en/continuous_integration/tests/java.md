@@ -125,6 +125,107 @@ dependencies {
 {{% /tab %}}
 {{< /tabs >}}
 
+### Installing the Java compiler plugin
+
+The Java compiler plugin works in combination with the tracer, providing it with additional source code information.
+Installing the plugin is an optional step that improves performance and accuracy of certain CI visibility features.
+
+The plugin works with the standard `javac` compiler (Eclipse JDT compiler is not supported).
+
+If the configuration is successful, you should see the line `DatadogCompilerPlugin initialized` in your compiler's output.
+
+{{< tabs >}}
+{{% tab "Maven" %}}
+
+Include the snippets below in the relevant sections of the same Maven profile that you have added to your root `pom.xml` for the tracer config.
+Replace `$VERSION` with the latest version of the artifacts accessible from the [Maven Repository][1] (without the preceding `v`): ![Maven Central][2]
+
+{{< code-block lang="xml" filename="pom.xml" >}}
+<dependency>
+    <groupId>com.datadoghq</groupId>
+    <artifactId>dd-javac-plugin-client</artifactId>
+    <version>$VERSION</version>
+</dependency>
+{{< /code-block >}}
+
+{{< code-block lang="xml" filename="pom.xml" >}}
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.5</version>
+            <configuration>
+                <annotationProcessorPaths>
+                    <annotationProcessorPath>
+                        <groupId>com.datadoghq</groupId>
+                        <artifactId>dd-javac-plugin</artifactId>
+                        <version>$VERSION</version>
+                    </annotationProcessorPath>
+                </annotationProcessorPaths>
+                <compilerArgs>
+                    <arg>-Xplugin:DatadogCompilerPlugin</arg>
+                </compilerArgs>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
+{{< /code-block >}}
+
+Maven compiler plugin supports [annotationProcessorPaths][3] property starting with version 3.5. If you absolutely must use an older version, declare Datadog compiler plugin as a regular dependency in your project.
+
+Additionally, if you are using JDK 16 or newer, add the following lines to the [.mvn/jvm.config][4] file in your project base directory:
+
+{{< code-block lang="properties" filename=".mvn/jvm.config" >}}
+--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED
+--add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED
+--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED
+--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED
+{{< /code-block >}}
+
+[1]: https://mvnrepository.com/artifact/com.datadoghq/dd-javac-plugin
+[2]: https://img.shields.io/maven-central/v/com.datadoghq/dd-javac-plugin?style=flat-square
+[3]: https://maven.apache.org/plugins/maven-compiler-plugin/compile-mojo.html#annotationProcessorPaths
+[4]: https://maven.apache.org/configure.html#mvn-jvm-config-file
+
+{{% /tab %}}
+{{% tab "Gradle" %}}
+
+Add plugin-client JAR to the project's classpath, add plugin JAR to the compiler's annotation processor path, and pass the plugin argument to the tasks that compile Java classes.
+
+Replace `$VERSION` with the latest version of the artifacts accessible from the [Maven Repository][1] (without the preceding `v`): ![Maven Central][2]
+
+{{< code-block lang="groovy" filename="build.gradle" >}}
+if (project.hasProperty("dd-civisibility")) {
+    dependencies {
+        implementation 'com.datadoghq:dd-javac-plugin-client:$VERSION'
+        annotationProcessor 'com.datadoghq:dd-javac-plugin:$VERSION'
+        testAnnotationProcessor 'com.datadoghq:dd-javac-plugin:$VERSION'
+    }
+
+    tasks.withType(JavaCompile).configureEach {
+        options.compilerArgs.add('-Xplugin:DatadogCompilerPlugin')
+    }
+}
+{{< /code-block >}}
+
+Additionally, if you are using JDK 16 or newer, add the following lines to your [gradle.properties][3] file:
+
+{{< code-block lang="properties" filename="gradle.properties" >}}
+org.gradle.jvmargs=\
+--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED  \
+--add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED \
+--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED \
+--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED
+{{< /code-block >}}
+
+[1]: https://mvnrepository.com/artifact/com.datadoghq/dd-javac-plugin
+[2]: https://img.shields.io/maven-central/v/com.datadoghq/dd-javac-plugin?style=flat-square
+[3]: https://docs.gradle.org/current/userguide/build_environment.html#sec:gradle_configuration_properties
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Instrumenting your tests
 
 {{< tabs >}}
@@ -166,7 +267,7 @@ Configure the [Maven Surefire Plugin][1] or the [Maven Failsafe Plugin][2] (or b
 
 Run your tests as you normally do, specifying the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 DD_ENV=ci mvn clean verify -Pdd-civisibility
 {{< /code-block >}}
 
@@ -188,7 +289,7 @@ test {
 
 Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 DD_ENV=ci ./gradlew cleanTest test -Pdd-civisibility --rerun-tasks
 {{< /code-block >}}
 
@@ -307,7 +408,7 @@ If the tests are not appearing in Datadog, ensure that you are using version 0.9
 The `-Ddd.civisibility.enabled=true` configuration property is only available since that version.
 
 If you need to use a previous version of the tracer, you can configure CI Visibility by using the following system properties:
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 -Ddd.prioritization.type=ENSURE_TRACE -Ddd.jmxfetch.enabled=false -Ddd.integrations.enabled=false -Ddd.integration.junit.enabled=true -Ddd.integration.testng.enabled=true
 {{< /code-block >}}
 

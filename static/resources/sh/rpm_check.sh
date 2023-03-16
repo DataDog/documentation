@@ -4,6 +4,10 @@
 # Licensed under Apache-2.0 License.
 # Checks the system for packages signed with the 069b56f54172a230 GPG key,
 # and verifies the hash of all Datadog packages installed on the system.
+# Changelog:
+# * 1.0.0: initial version
+# * 1.1.0: reduce false positives by adding trusted datadog-dogstatsd packages
+# * 1.2.0: fix false positives when grep defaults to color output
 
 script_version=1.2.0
 

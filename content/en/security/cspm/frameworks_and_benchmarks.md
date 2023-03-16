@@ -1,9 +1,12 @@
 ---
-title: Findings Reports
+title: Compliance Reports
 kind: documentation
 aliases:
   - /security_platform/cspm/frameworks_and_benchmarks
 further_reading:
+- link: "security/cspm/setup"
+  tag: "Documentation"
+  text: "Getting started with CSPM"
 - link: "security/default_rules"
   tag: "Documentation"
   text: "Explore default Posture Management cloud configuration detection rules"
@@ -18,14 +21,11 @@ Cloud Security Posture Management is not currently available in this site.
 </div>
 {{< /site-region >}}
 
-{{< img src="security/cspm/frameworks_and_benchmarks/report.png" alt="Set a findings time window using the dropdown" style="width:80%;">}}
-
-## Overview
-
-Each [OOTB rule][1] maps to one or more controls within a compliance standard or industry benchmark. Datadog OOTB rules currently map to controls and requirements for the following frameworks and benchmarks:
+Cloud Security Posture Management (CSPM) comes with more than 400 out-of-the-box detection rules that evaluate the configuration of your cloud resources and identify potential misconfigurations. Each [detection rule][1] maps to one or more controls within the following compliance standards and industry benchmarks:
 
 - [CIS AWS Foundations Benchmark v1.3.0*][2]
 - [CIS Azure Foundations Benchmark v1.3.0][3]
+- [CIS GCP Foundations Benchmark v1.3.0][22]
 - [CIS Docker Benchmark v1.2.0][4]
 - [CIS Kubernetes Benchmark v1.5.1**][5]
 - [PCI DSS v3.2.1][6]
@@ -38,31 +38,33 @@ Each [OOTB rule][1] maps to one or more controls within a compliance standard or
 
 **Some [CIS Kubernetes Benchmark][5] detection rules only apply to self-hosted Kubernetes clusters.
 
-**Note**: Datadog CSPM provides you with visibility into whether your resources are configured in accordance with certain detection rules. Datadog's OOTB detection rules address various regulatory frameworks, benchmarks, and standards (“Security Posture Frameworks”). Datadog CSPM does not provide an assessment of your actual compliance with any Security Posture Framework, and the OOTB rules may not address all configuration settings that are relevant to the Security Posture Frameworks. To be clear, just because your resources pass the OOTB Rules does not mean that you are meeting all the requirements under any particular Security Posture Framework. Datadog is not providing legal or compliance advice or guidance, and it is recommended that you use Datadog CSPM in consultation with your legal counsel or compliance experts.
+Datadog also provides Essential Cloud Security Controls, a set of recommendations developed by Datadog internal security experts. Based on common cloud security risks we have observed at Datadog, this ruleset aims to help users new to cloud security easily remediate high-impact misconfigurations across their cloud environments.
 
-## Customize how your environment is scanned by each rule
+**Note**: CSPM provides visibility into whether your resources are configured in accordance with certain detection rules. These rules address various regulatory frameworks, benchmarks, and standards ("Security Posture Frameworks"). CSPM does not provide an assessment of your actual compliance with any Security Posture Framework, and the detection rules may not address all configuration settings that are relevant to a given framework. Datadog recommends that you use CSPM in consultation with your legal counsel or compliance experts.
 
-On the [Rules][13] page, hover over a rule and click on the pencil icon to edit the rule. Under **Define search queries**, click the **Advanced** drop down menu to set filtering logic for how the rule scans your environment.
+## View your compliance posture
 
-For example, you can remove all resources tagged with `env:staging` using the **This rule will not generate a finding if there is a match with any of the following suppression queries** function. Or, limit the scope for a certain rule to resources tagged with `compliance:pci` using the **Only generate a finding if there is a match with any of the following queries** function.
+View a high-level overview of your compliance posture for each framework on the CSPM [Overview][20] page.
 
-{{< img src="security/cspm/frameworks_and_benchmarks/never-trigger-a-finding.png" alt="In the Datadog app, select Advanced to populate Never trigger a finding when, and add a query." >}}
+- **Framework Overview**: A [detailed report](#explore-compliance-framework-reports) that gives you insight into how you score against a framework's requirements and rules.
+- **Explore Resources**: A filtered view of the **Findings** page that shows resources with findings for the selected framework.
+- **Configure Rules**: Customize how your environment is scanned and set notification targets by modifying the detection rules for each framework.
 
-## Set notification targets for detection rules
+{{< img src="security/cspm/frameworks_and_benchmarks/compliance-reports-overview.png" alt="The compliance reports section of the CSPM overview page provides a high-level overview of your compliance posture" style="width:100%;">}}
 
-From the [Rules][13] page, you can add notification targets. The complete list of notification options are:
+## Explore compliance framework reports
 
-- [Slack][14]
-- [Jira][15]
-- [PagerDuty][16]
-- [ServiceNow][17]
-- [Microsoft Teams][18]
-- [Webhooks][19]
-- Email
+Compliance framework reports show which rules are failing in your environment, along with details about the misconfigured resources.
 
-In the “Notify” section, configure zero or more notification targets for each rule case. You cannot edit the preset severity.
+The summary at the top of the report shows the number of rules with Pass/Fail findings, the top three high-severity rule failures, and a detailed breakdown of the rules based on severity. You can also explore your past posture with the time selector, and download a PDF copy of the report.
 
-{{< img src="security/cspm/frameworks_and_benchmarks/notification.png" alt="Select a severity and notification target" >}}
+Below the summary is a complete listing of all rules associated with the framework, organized by requirements and controls, along with the number of resources checked by the rule, and the percentage of failures.
+
+{{< img src="security/cspm/frameworks_and_benchmarks/report-2.png" alt="The CIS AWS compliance framework report provides details on critical rule failures" style="width:100%;">}}
+
+Select a rule to view details about the misconfigured resources, the rule description, its framework or industry benchmark mapping, and suggested remediation steps.
+
+{{< img src="security/cspm/frameworks_and_benchmarks/failed-finding.png" alt="The detection rule side panel includes information about the rule and resources with failed findings" style="width:75%;">}}
 
 ## Further reading
 
@@ -80,10 +82,13 @@ In the “Notify” section, configure zero or more notification targets for eac
 [10]: https://gdpr.eu/
 [11]: /security/cloud_siem/
 [12]: /integrations/amazon_cloudtrail/
-[13]: https://app.datadoghq.com/security/configuration/rules/
+[13]: https://app.datadoghq.com/security/configuration/rules?product=cspm
 [14]: /integrations/slack/
 [15]: /integrations/jira/
 [16]: /integrations/pagerduty
 [17]: /integrations/servicenow/
 [18]: /integrations/microsoft_teams/
 [19]: /integrations/webhooks/
+[20]: https://app.datadoghq.com/security/compliance/homepage
+[21]: /security/cspm/detection_rules
+[22]: https://www.cisecurity.org/benchmark/google_cloud_computing_platform

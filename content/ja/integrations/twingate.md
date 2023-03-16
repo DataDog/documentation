@@ -4,6 +4,13 @@ app_uuid: c88bd253-18da-4224-af14-7854ce8ae6ed
 assets:
   dashboards:
     Twingate Dashboard: assets/dashboards/twingate_overview.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: true
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Twingate
 author:
   homepage: https://www.twingate.com/?utm_source=datadog&utm_medium=partner&utm_campaign=integrations
   name: Twingate
@@ -86,7 +93,7 @@ tile:
         include_units:
           - twingate-connector.service
         service: Twingate Connection
-        source: Twingate Connection
+        source: Twingate
         log_processing_rules:
         - type: include_at_match
           name: analytics
@@ -100,14 +107,17 @@ tile:
 4. `service datadog-agent restart` を実行して、Datadog Agent を再起動します。
 5. [ログエクスプローラー][5]に Twingate Analytic のログが表示されることを確認します。
 
-
+### Twingate Analytics ダッシュボード
+1. Datadog の[ダッシュボードリスト][6]に移動します。
+2. Twingate Analytics ダッシュボードを検索します。
 
 ## トラブルシューティング
-ご不明な点は、[Twingate のサポートチーム][6]までお問い合わせください。
+ご不明な点は、[Twingate のサポートチーム][7]までお問い合わせください。
 
 [1]: https://www.twingate.com/
 [2]: https://docs.datadoghq.com/ja/getting_started/agent/
 [3]: https://docs.twingate.com/docs/connector-real-time-logs
 [4]: https://docs.datadoghq.com/ja/agent/logs/?tab=journald
 [5]: https://app.datadoghq.com/logs
-[6]: https://help.twingate.com/hc/en-us
+[6]: https://app.datadoghq.com/dashboard/lists
+[7]: https://help.twingate.com/hc/en-us

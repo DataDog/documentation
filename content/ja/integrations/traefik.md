@@ -21,6 +21,7 @@ author:
 categories:
 - web
 - ログの収集
+- トレーシング
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/traefik/README.md
 display_on_public_website: true
@@ -48,6 +49,7 @@ tile:
   - Supported OS::Windows
   - Category::Web
   - Category::Log Collection
+  - Category::Tracing
   configuration: README.md#Setup
   description: traefik のメトリクスを収集
   media: []
@@ -66,7 +68,7 @@ tile:
 
 Traefik チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Traefik チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 

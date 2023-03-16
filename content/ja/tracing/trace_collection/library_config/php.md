@@ -113,6 +113,11 @@ Datadog プロファイラーを有効にします。バージョン `0.69.0` �
 **デフォルト**: `1`<br>
 プロファイルでエンドポイントデータの収集を有効にするかどうか。バージョン `0.79.0` で追加されました。
 
+`DD_PROFILING_EXPERIMENTAL_ALLOCATION_ENABLED`
+: **INI**: `datadog.profiling.experimental_allocation_enabled` INI は `0.84.0`から利用可能です。<br>
+**デフォルト**: `0`<br>
+実験的な割り当てサイズと割り当てバイトのプロファイルの種類を有効にします。バージョン `0.84.0` で追加されました。
+
 `DD_PROFILING_EXPERIMENTAL_CPU_TIME_ENABLED`
 : **INI**: `datadog.profiling.experimental_cpu_time_enabled`。INI は `0.82.0` から利用可能です。<br>
 **デフォルト**: `1`<br>
@@ -156,7 +161,7 @@ IPC ベースの構成可能なサーキットブレーカーの連続エラー�
 `DD_TRACE_AGENT_PORT`
 : **INI**: `datadog.trace.agent_port`<br>
 **デフォルト**: `8126`<br>
-Agent ポート番号。
+Agent のポート番号。[Agent 構成][13]で `receiver_port` や `DD_APM_RECEIVER_PORT` をデフォルトの `8126` 以外に設定した場合、`DD_TRACE_AGENT_PORT` や `DD_TRACE_AGENT_URL` をそれに一致させる必要があります。
 
 `DD_TRACE_AGENT_TIMEOUT`
 : **INI**: `datadog.trace.agent_timeout`<br>
@@ -166,7 +171,7 @@ Agent リクエスト転送のタイムアウト (ミリ秒)。
 `DD_TRACE_AGENT_URL`
 : **INI**: `datadog.trace.agent_url`<br>
 **デフォルト**: `null`<br>
-Agent の URL で、`DD_AGENT_HOST` および `DD_TRACE_AGENT_PORT` よりも優先されます。例: `https://localhost:8126`。バージョン `0.47.1` に追加されています
+Agent の URL。`DD_AGENT_HOST` と `DD_TRACE_AGENT_PORT` よりも優先されます。例: `https://localhost:8126` [Agent 構成][13]で `receiver_port` や `DD_APM_RECEIVER_PORT` をデフォルトの `8126` 以外に設定した場合、`DD_TRACE_AGENT_PORT` や `DD_TRACE_AGENT_URL` をそれに一致させる必要があります。バージョン `0.47.1` で追加されました。
 
 `DD_TRACE_AUTO_FLUSH_ENABLED`
 : **INI**: `datadog.trace.auto_flush_enabled`<br>
@@ -182,6 +187,11 @@ CLI から送られた PHP スクリプトのトレーシングを有効にし�
 : **INI**: `datadog.trace.debug`<br>
 **デフォルト**: `0`<br>
 デバッグモードを有効にします。`1` の場合、ログメッセージは INI 設定の `error_log` で設定されたデバイスまたはファイルに送信されます。実際の `error_log` の値は PHP-FPM/Apache のコンフィギュレーションファイルで上書きされる可能性があるため、`php -i` の出力とは異なる場合があります。
+
+`DD_TRACE_FORKED_PROCESS`
+: **INI**: `datadog.trace.forked_process`<br>
+**デフォルト**: `1`<br>
+フォークされたプロセスをトレースするかどうかを示します。`1` に設定するとフォークされたプロセスをトレースし、`0` に設定するとフォークされたプロセスのトレースを無効にします。`0` に設定した場合でも、コード内で `ini_set("datadog.trace.enabled", "1");` を使って手動でプロセスのトレースを再有効化することができますが、新しいトレースとして表示されることになります。フォークされたプロセスのトレースは、`DD_TRACE_FORKED_PROCESS` と `DD_DISTRIBUTED_TRACING` の両方が `1` (オン) に構成されている場合にのみ、全体の分散型トレースとして表示されるようになりました。
 
 `DD_TRACE_ENABLED`
 : **INI**: `datadog.trace.enabled`<br>
@@ -292,10 +302,15 @@ URL の一部として収集するクエリパラメータのカンマ区切り�
 **デフォルト**: `*`<br>
 リソース URI の一部として収集するクエリパラメータのカンマ区切りリスト。パラメータを収集しない場合は空、すべてのパラメータを収集する場合は `*` を設定します。バージョン `0.74.0` で追加されました。
 
+`DD_TRACE_CLIENT_IP_ENABLED`
+: **INI**: `datadog.trace.client_ip_enabled`<br>
+**デフォルト**: `false`<br>
+クライアント側で IP 収集を有効にします。バージョン `0.84.0` で追加されました。
+
 `DD_TRACE_CLIENT_IP_HEADER`
 : **INI**: `datadog.trace.client_ip_header`<br>
 **デフォルト**: `null`<br>
-クライアント IP の収集に使用する IP ヘッダー。例: `x-forwarded-for`。バージョン `0.76.0` で追加されました。
+クライアント IP の収集に使用する IP ヘッダー。例: `x-forwarded-for`。バージョン `0.84.0` (ASM を使用している場合は `0.76.0`) で追加されました。
 
 `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP`
 : **INI**: `datadog.trace.obfuscation_query_string_regexp`<br>
@@ -307,19 +322,22 @@ URL の一部として収集するクエリパラメータのカンマ区切り�
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
 : **INI**: `datadog.trace.propagation_style_inject`<br>
-**デフォルト**: `Datadog`<br>
-トレースヘッダを挿入する際に使用する伝搬スタイル。複数のスタイルを使用する場合は、カンマで区切ってください。サポートされているスタイルは以下の通りです。
+**デフォルト**: `tracecontext,Datadog`<br>
+トレースヘッダーを挿入する際に使用する伝搬スタイル。複数のスタイルを使用する場合は、カンマで区切ってください。サポートされているスタイルは以下の通りです。
 
-  - [B3][7]
+
+  - [tracecontext][10]
+  - [b3multi][7]
   - [B3 シングルヘッダ][8]
   - Datadog
 
 `DD_TRACE_PROPAGATION_STYLE_EXTRACT`
 : **INI**: `datadog.trace.propagation_style_extract`<br>
-**デフォルト**: `Datadog,B3,B3 single header`<br>
-トレースヘッダを抽出する際に使用する伝搬スタイル。複数のスタイルを使用する場合は、カンマで区切ってください。サポートされているスタイルは以下の通りです。
+**デフォルト**: `tracecontext,Datadog,b3multi,B3 single header`<br>
+トレースヘッダーを抽出する際に使用する伝搬スタイル。複数のスタイルを使用する場合は、カンマで区切ってください。サポートされているスタイルは以下の通りです。
 
-  - [B3][7]
+  - [tracecontext][10]
+  - [b3multi][7]
   - [B3 シングルヘッダ][8]
   - Datadog
 
@@ -416,7 +434,29 @@ HTTP サーバーとクライアントインテグレーションでは、URL �
 [`open_basedir`][9] 設定が使用される場合、許可されるディレクトリに `/opt/datadog-php` を追加する必要があります。
 アプリケーションを Docker コンテナで実行する場合は、許可されるディレクトリにパス `/proc/self` も追加する必要があります。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+### ヘッダーの抽出と挿入
+
+Datadog APM トレーサーは、分散型トレーシングのための [B3][7] と [W3C][10] のヘッダー抽出と挿入をサポートしています。
+
+分散ヘッダーの挿入と抽出のスタイルを構成することができます。
+
+PHP トレーサーは、以下のスタイルをサポートしています。
+
+- Datadog: `Datadog`
+- W3C: `tracecontext`
+- B3 マルチヘッダー: `b3multi` (`B3` は非推奨)
+- B3 シングルヘッダー: `B3 single header`
+
+以下の環境変数を使用して、挿入および抽出のスタイルを構成することができます。例:
+
+- `DD_TRACE_PROPAGATION_STYLE_INJECT=Datadog,tracecontext`
+- `DD_TRACE_PROPAGATION_STYLE_EXTRACT=Datadog,tracecontext`
+
+環境変数の値は、挿入または抽出に有効なヘッダースタイルのカンマ区切りのリストです。デフォルトでは、`tracecontext` と `Datadog` の挿入スタイルのみが有効になっています。
+
+複数の抽出スタイルが有効な場合、次の順番で抽出が試みられます: `tracecontext` が最優先で、次が `Datadog`、その次が B3。
+
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -429,3 +469,5 @@ HTTP サーバーとクライアントインテグレーションでは、URL �
 [7]: https://github.com/openzipkin/b3-propagation
 [8]: https://github.com/openzipkin/b3-propagation#single-header
 [9]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir
+[10]: https://www.w3.org/TR/trace-context/#trace-context-http-headers-format
+[13]: /ja/agent/guide/network/#configure-ports

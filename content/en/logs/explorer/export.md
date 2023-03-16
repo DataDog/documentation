@@ -3,7 +3,6 @@ title: Export Logs
 kind: documentation
 description: 'Export your Log Explorer view to reuse it later or in different contexts.'
 aliases:
-    - /logs/explorer/export
     - /logs/export
 further_reading:
     - link: 'logs/explorer/search'
@@ -37,7 +36,7 @@ To retrieve a log list longer than the maximum 1000 logs limit returned by the L
 
 [1]: /logs/explorer/saved_views/
 [2]: /dashboards/
-[3]: /monitors/create/types/log/
+[3]: /monitors/types/log/
 [4]: /logs/logs_to_metrics
 [5]: /api/latest/logs/
 [6]: /integrations/#cat-notification

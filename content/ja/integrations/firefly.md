@@ -8,7 +8,6 @@ author:
   sales_email: contact@gofirefly.io
   support_email: contact@gofirefly.io
 categories:
-- autodiscovery
 - 自動化
 - クラウド
 - developer tools
@@ -31,12 +30,11 @@ public_title: Firefly
 short_description: クラウドを規約に準拠させる
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Autodiscovery
   - Category::Automation
   - Category::Cloud
   - Category::Developer Tools
@@ -44,7 +42,7 @@ tile:
   - Category::AWS
   - Offering::Integration
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   configuration: README.md#Setup
   description: クラウドを規約に準拠させる

@@ -147,7 +147,7 @@ Hidden facets are still visible in the facet search (see the [Filter Facet](#fil
 
 {{< img src="logs/explorer/facet/unhide_facet.png" style="width:50%;" alt="Unhide Facet" style="width:30%;">}}
 
-Hidden facets are also hidden from auto-complete in the search bar, and drop down (such as measure, group-by) in analytics for the Log Explorer. However, hidden facets are still valid for search queries (in case you copy-paste a log-explorer link for instance).
+Hidden facets are also hidden from auto-complete in the search bar, and dropdowns (such as measure, group-by) in analytics for the Log Explorer. However, hidden facets are still valid for search queries (in case you copy-paste a log-explorer link for instance).
 
 Hidden facets have no impact aside from the log explorer (for instance: live tail, monitors, or widget definitions in dashboards).
 
@@ -270,7 +270,7 @@ To delete a facet, follow these steps:
 [1]: /logs/search_syntax/
 [2]: /logs/explorer/patterns/
 [3]: /logs/explorer/analytics/
-[4]: /monitors/create/types/log/
+[4]: /monitors/types/log/
 [5]: /dashboards/widgets/
 [6]: /notebooks/
 [15]: /logs/log_configuration/rehydrating

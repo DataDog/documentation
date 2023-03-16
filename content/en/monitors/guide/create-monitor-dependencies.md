@@ -42,7 +42,7 @@ And the webhook content for both:
 ```
 
 Then, create "Alert A" - for example- a no-data alert for a grouped percentage of hosts for each Availability zone.
-{{< img src="monitors/guide/alert_example.png" alt="alert_example"  >}}
+{{< img src="monitors/guide/alert_exammple.png" alt="alert_example"  >}}
 
 Then, in the alert message, you'll want to use the @notify webhook to mute all subsequent hosts in that Availability Zone when it triggers, and unmute when the alert resolves:
 {{< img src="monitors/guide/mute_demo_msg.png" alt="mute_demo_msg"  >}}
@@ -64,7 +64,7 @@ That's alot of missing data - check first to see if there is an AWS outage?
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/create/types/composite/
+[1]: /monitors/types/composite/
 [2]: /api/v1/downtimes/
 [3]: /api/v1/downtimes/#cancel-downtimes-by-scope
 [4]: https://app.datadoghq.com/account/settings#integrations/webhooks

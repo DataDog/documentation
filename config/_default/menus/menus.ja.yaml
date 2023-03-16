@@ -1324,8 +1324,8 @@ api:
   name: メトリクス
   url: /api/latest/metrics/
 - generated: true
-  identifier: metrics-timeseries-cross-product-query
-  name: Timeseries cross product query
+  identifier: metrics-query-timeseries-data-across-multiple-products
+  name: 複数の製品にまたがる時系列データのクエリ
   params:
     operationids:
     - QueryTimeseriesData
@@ -1335,10 +1335,10 @@ api:
     versions:
     - v2
   parent: metrics
-  url: '#timeseries-cross-product-query'
+  url: '#query-timeseries-data-across-multiple-products'
 - generated: true
-  identifier: metrics-scalar-cross-product-query
-  name: Scalar cross product query
+  identifier: metrics-query-scalar-data-across-multiple-products
+  name: 複数の製品にまたがるスカラーデータのクエリ
   params:
     operationids:
     - QueryScalarData
@@ -1348,7 +1348,7 @@ api:
     versions:
     - v2
   parent: metrics
-  url: '#scalar-cross-product-query'
+  url: '#query-scalar-data-across-multiple-products'
 - generated: true
   identifier: metrics-list-distinct-metric-volumes-by-metric-name
   name: メトリクス名で個別のメトリクスボリュームを一覧表示する
@@ -1559,6 +1559,66 @@ api:
   identifier: モニター
   name: アラート設定
   url: /api/latest/monitors/
+- generated: true
+  identifier: monitors-edit-a-monitor-configuration-policy
+  name: モニター構成ポリシーを編集する
+  params:
+    operationids:
+    - UpdateMonitorConfigPolicy
+    order: 12
+    unstable: []
+    versions:
+    - v2
+  parent: モニター
+  url: '#edit-a-monitor-configuration-policy'
+- generated: true
+  identifier: monitors-get-a-monitor-configuration-policy
+  name: モニター構成ポリシーを取得する
+  params:
+    operationids:
+    - GetMonitorConfigPolicy
+    order: 9
+    unstable: []
+    versions:
+    - v2
+  parent: モニター
+  url: '#get-a-monitor-configuration-policy'
+- generated: true
+  identifier: monitors-delete-a-monitor-configuration-policy
+  name: モニター構成ポリシーを削除する
+  params:
+    operationids:
+    - DeleteMonitorConfigPolicy
+    order: 13
+    unstable: []
+    versions:
+    - v2
+  parent: モニター
+  url: '#delete-a-monitor-configuration-policy'
+- generated: true
+  identifier: monitors-create-a-monitor-configuration-policy
+  name: モニター構成ポリシーを作成する
+  params:
+    operationids:
+    - CreateMonitorConfigPolicy
+    order: 11
+    unstable: []
+    versions:
+    - v2
+  parent: モニター
+  url: '#create-a-monitor-configuration-policy'
+- generated: true
+  identifier: monitors-get-all-monitor-configuration-policies
+  name: すべてのモニター構成ポリシーを取得する
+  params:
+    operationids:
+    - ListMonitorConfigPolicies
+    order: 10
+    unstable: []
+    versions:
+    - v2
+  parent: モニター
+  url: '#get-all-monitor-configuration-policies'
 - generated: true
   identifier: monitors-unmute-all-monitors
   name: 全モニターのミュートを解除
@@ -2316,8 +2376,7 @@ api:
     operationids:
     - SearchSLO
     order: 1
-    unstable:
-    - v1
+    unstable: []
     versions:
     - v1
   parent: service-level-objectives
@@ -2503,6 +2562,30 @@ api:
   name: Synthetics
   url: /api/latest/synthetics/
 - generated: true
+  identifier: synthetics-save-new-value-for-on-demand-concurrency-cap
+  name: オンデマンド同時実行の上限の新しい値を保存する
+  params:
+    operationids:
+    - SetOnDemandConcurrencyCap
+    order: 11
+    unstable: []
+    versions:
+    - v2
+  parent: 外形監視
+  url: '#save-new-value-for-on-demand-concurrency-cap'
+- generated: true
+  identifier: synthetics-get-the-on-demand-concurrency-cap
+  name: オンデマンド同時実行の上限を取得する
+  params:
+    operationids:
+    - GetOnDemandConcurrencyCap
+    order: 10
+    unstable: []
+    versions:
+    - v2
+  parent: 外形監視
+  url: '#get-the-on-demand-concurrency-cap'
+- generated: true
   identifier: synthetics-edit-a-global-variable
   name: グローバル変数を編集する
   params:
@@ -2512,7 +2595,7 @@ api:
     unstable: []
     versions:
     - v1
-  parent: synthetics
+  parent: 外形監視
   url: '#edit-a-global-variable'
 - generated: true
   identifier: synthetics-get-a-global-variable
@@ -3515,18 +3598,6 @@ api:
   parent: ユーザー
   url: '#send-invitation-emails'
 - generated: true
-  identifier: users-create-a-service-account
-  name: サービスアカウントを作成する
-  params:
-    operationids:
-    - CreateServiceAccount
-    order: 1
-    unstable: []
-    versions:
-    - v2
-  parent: ユーザー
-  url: '#create-a-service-account'
-- generated: true
   identifier: users-update-a-user
   name: ユーザーを更新する
   params:
@@ -3940,6 +4011,70 @@ api:
   parent: cloud-workload-security
   url: '#get-the-latest-cloud-workload-security-policy'
 - generated: true
+  identifier: cloudflare-integration
+  name: Cloudflare インテグレーション
+  url: /api/latest/cloudflare-integration/
+- generated: true
+  identifier: cloudflare-integration-update-cloudflare-account
+  name: Cloudflare アカウントを更新する
+  params:
+    operationids:
+    - UpdateCloudflareAccount
+    order: 4
+    unstable: []
+    versions:
+    - v2
+  parent: cloudflare-integration
+  url: '#update-cloudflare-account'
+- generated: true
+  identifier: cloudflare-integration-get-cloudflare-account
+  name: Cloudflare アカウントを取得する
+  params:
+    operationids:
+    - GetCloudflareAccount
+    order: 3
+    unstable: []
+    versions:
+    - v2
+  parent: cloudflare-integration
+  url: '#get-cloudflare-account'
+- generated: true
+  identifier: cloudflare-integration-delete-cloudflare-account
+  name: Cloudflare アカウントを削除する
+  params:
+    operationids:
+    - DeleteCloudflareAccount
+    order: 5
+    unstable: []
+    versions:
+    - v2
+  parent: cloudflare-integration
+  url: '#delete-cloudflare-account'
+- generated: true
+  identifier: cloudflare-integration-add-cloudflare-account
+  name: Cloudflare アカウントを追加する
+  params:
+    operationids:
+    - CreateCloudflareAccount
+    order: 2
+    unstable: []
+    versions:
+    - v2
+  parent: cloudflare-integration
+  url: '#add-cloudflare-account'
+- generated: true
+  identifier: cloudflare-integration-list-cloudflare-accounts
+  name: Cloudflare アカウントを一覧表示する
+  params:
+    operationids:
+    - ListCloudflareAccounts
+    order: 1
+    unstable: []
+    versions:
+    - v2
+  parent: cloudflare-integration
+  url: '#list-cloudflare-accounts'
+- generated: true
   identifier: confluent-cloud
   name: Confluent Cloud
   url: /api/latest/confluent-cloud/
@@ -4063,6 +4198,158 @@ api:
     - v2
   parent: confluent-cloud
   url: '#list-confluent-accounts'
+- generated: true
+  identifier: fastly-integration
+  name: Fastly インテグレーション
+  url: /api/latest/fastly-integration/
+- generated: true
+  identifier: fastly-integration-update-fastly-service
+  name: Fastly サービスを更新する
+  params:
+    operationids:
+    - UpdateFastlyService
+    order: 9
+    unstable: []
+    versions:
+    - v2
+  parent: fastly-integration
+  url: '#update-fastly-service'
+- generated: true
+  identifier: fastly-integration-get-fastly-service
+  name: Fastly サービスを取得する
+  params:
+    operationids:
+    - GetFastlyService
+    order: 8
+    unstable: []
+    versions:
+    - v2
+  parent: fastly-integration
+  url: '#get-fastly-service'
+- generated: true
+  identifier: fastly-integration-delete-fastly-service
+  name: Fastly サービスを削除する
+  params:
+    operationids:
+    - DeleteFastlyService
+    order: 10
+    unstable: []
+    versions:
+    - v2
+  parent: fastly-integration
+  url: '#delete-fastly-service'
+- generated: true
+  identifier: fastly-integration-add-fastly-service
+  name: Fastly サービスを追加する
+  params:
+    operationids:
+    - CreateFastlyService
+    order: 7
+    unstable: []
+    versions:
+    - v2
+  parent: fastly-integration
+  url: '#add-fastly-service'
+- generated: true
+  identifier: fastly-integration-list-fastly-services
+  name: Fastly サービスを一覧表示する
+  params:
+    operationids:
+    - ListFastlyServices
+    order: 6
+    unstable: []
+    versions:
+    - v2
+  parent: fastly-integration
+  url: '#list-fastly-services'
+- generated: true
+  identifier: fastly-integration-update-fastly-account
+  name: Fastly アカウントを更新する
+  params:
+    operationids:
+    - UpdateFastlyAccount
+    order: 4
+    unstable: []
+    versions:
+    - v2
+  parent: fastly-integration
+  url: '#update-fastly-account'
+- generated: true
+  identifier: fastly-integration-get-fastly-account
+  name: Fastly アカウントを取得する
+  params:
+    operationids:
+    - GetFastlyAccount
+    order: 3
+    unstable: []
+    versions:
+    - v2
+  parent: fastly-integration
+  url: '#get-fastly-account'
+- generated: true
+  identifier: fastly-integration-delete-fastly-account
+  name: Fastly アカウントを削除する
+  params:
+    operationids:
+    - DeleteFastlyAccount
+    order: 5
+    unstable: []
+    versions:
+    - v2
+  parent: fastly-integration
+  url: '#delete-fastly-account'
+- generated: true
+  identifier: fastly-integration-add-fastly-account
+  name: Fastly アカウントを追加する
+  params:
+    operationids:
+    - CreateFastlyAccount
+    order: 2
+    unstable: []
+    versions:
+    - v2
+  parent: fastly-integration
+  url: '#add-fastly-account'
+- generated: true
+  identifier: fastly-integration-list-fastly-accounts
+  name: Fastly アカウントを一覧表示する
+  params:
+    operationids:
+    - ListFastlyAccounts
+    order: 1
+    unstable: []
+    versions:
+    - v2
+  parent: fastly-integration
+  url: '#list-fastly-accounts'
+- generated: true
+  identifier: ip-allowlist
+  name: IP 許可リスト
+  url: /api/latest/ip-allowlist/
+- generated: true
+  identifier: ip-allowlist-update-ip-allowlist
+  name: IP 許可リストを更新する
+  params:
+    operationids:
+    - UpdateIPAllowlist
+    order: 2
+    unstable: []
+    versions:
+    - v2
+  parent: ip-allowlist
+  url: '#update-ip-allowlist'
+- generated: true
+  identifier: ip-allowlist-get-ip-allowlist
+  name: IP 許可リストを取得する
+  params:
+    operationids:
+    - GetIPAllowlist
+    order: 1
+    unstable: []
+    versions:
+    - v2
+  parent: ip-allowlist
+  url: '#get-ip-allowlist'
 - generated: true
   identifier: incident-services
   name: インシデントサービス
@@ -4205,6 +4492,71 @@ api:
   identifier: インシデント
   name: インシデント
   url: /api/latest/incidents/
+- generated: true
+  identifier: incidents-update-an-existing-incident-integration-metadata
+  name: 既存のインシデントインテグレーションメタデータを更新する
+  params:
+    operationids:
+    - UpdateIncidentIntegration
+    order: 12
+    unstable:
+    - v2
+    versions:
+    - v2
+  parent: インシデント
+  url: '#update-an-existing-incident-integration-metadata'
+- generated: true
+  identifier: incidents-get-incident-integration-metadata-details
+  name: インシデントインテグレーションメタデータの詳細を取得する
+  params:
+    operationids:
+    - GetIncidentIntegration
+    order: 11
+    unstable:
+    - v2
+    versions:
+    - v2
+  parent: インシデント
+  url: '#get-incident-integration-metadata-details'
+- generated: true
+  identifier: incidents-delete-an-incident-integration-metadata
+  name: インシデントインテグレーションメタデータを削除する
+  params:
+    operationids:
+    - DeleteIncidentIntegration
+    order: 13
+    unstable:
+    - v2
+    versions:
+    - v2
+  parent: インシデント
+  url: '#delete-an-incident-integration-metadata'
+- generated: true
+  identifier: incidents-create-an-incident-integration-metadata
+  name: インシデントインテグレーションメタデータを作成する
+  params:
+    operationids:
+    - CreateIncidentIntegration
+    order: 10
+    unstable:
+    - v2
+    versions:
+    - v2
+  parent: インシデント
+  url: '#create-an-incident-integration-metadata'
+- generated: true
+  identifier: incidents-get-a-list-of-an-incidents-integration-metadata
+  name: インシデントのインテグレーションメタデータのリストを取得する
+  params:
+    operationids:
+    - ListIncidentIntegrations
+    order: 9
+    unstable:
+    - v2
+    versions:
+    - v2
+  parent: インシデント
+  url: '#get-a-list-of-an-incidents-integration-metadata'
 - generated: true
   identifier: incidents-create,-update,-and-delete-incident-attachments
   name: インシデントの添付ファイルの作成、更新、削除
@@ -4812,6 +5164,46 @@ api:
   parent: rum
   url: '#aggregate-rum-events'
 - generated: true
+  identifier: restriction-policies
+  name: 制限ポリシー
+  url: /api/latest/restriction-policies/
+- generated: true
+  identifier: restriction-policies-update-a-restriction-policy
+  name: 制限ポリシーを更新する
+  params:
+    operationids:
+    - UpdateRestrictionPolicy
+    order: 1
+    unstable: []
+    versions:
+    - v2
+  parent: restriction-policies
+  url: '#update-a-restriction-policy'
+- generated: true
+  identifier: restriction-policies-get-a-restriction-policy
+  name: 制限ポリシーを取得する
+  params:
+    operationids:
+    - GetRestrictionPolicy
+    order: 2
+    unstable: []
+    versions:
+    - v2
+  parent: restriction-policies
+  url: '#get-a-restriction-policy'
+- generated: true
+  identifier: restriction-policies-delete-a-restriction-policy
+  name: 制限ポリシーを削除する
+  params:
+    operationids:
+    - DeleteRestrictionPolicy
+    order: 3
+    unstable: []
+    versions:
+    - v2
+  parent: restriction-policies
+  url: '#delete-a-restriction-policy'
+- generated: true
   identifier: ロール
   name: ロール
   url: /api/latest/roles/
@@ -5148,6 +5540,18 @@ api:
   parent: service-accounts
   url: '#list-application-keys-for-this-service-account'
 - generated: true
+  identifier: service-accounts-create-a-service-account
+  name: サービスアカウントを作成する
+  params:
+    operationids:
+    - CreateServiceAccount
+    order: 1
+    unstable: []
+    versions:
+    - v2
+  parent: service-accounts
+  url: '#create-a-service-account'
+- generated: true
   identifier: service-definition
   name: サービス定義
   url: /api/latest/service-definition/
@@ -5361,10 +5765,24 @@ main:
   parent: getting_started
   url: getting_started/database_monitoring/
   weight: 17
+- name: Cloud SIEM
+  parent: getting_started
+  url: getting_started/cloud_siem/
+  weight: 18
+- name: Application Security Management
+  parent: getting_started
+  url: getting_started/application_security/
+  weight: 19
 - name: ラーニングセンター
   parent: getting_started
   url: getting_started/learning_center/
-  weight: 18
+  weight: 20
+- identifier: 用語集
+  name: 用語集
+  parent: essentials_heading
+  pre: features
+  url: glossary/
+  weight: 15000
 - identifier: agent
   name: エージェント
   parent: essentials_heading
@@ -5466,7 +5884,7 @@ main:
   parent: agent
   url: agent/logs/
   weight: 8
-- name: 高度なログの収集
+- name: 高度なコンフィギュレーション
   parent: agent_logs
   url: agent/logs/advanced_log_collection
   weight: 801
@@ -5549,6 +5967,10 @@ main:
   parent: agent_troubleshooting
   url: agent/troubleshooting/config
   weight: 1111
+- name: CPU やメモリの消費量が多い
+  parent: agent_troubleshooting
+  url: agent/troubleshooting/high_memory_usage/
+  weight: 1112
 - identifier: agent_guides
   name: ガイド
   parent: agent
@@ -6127,16 +6549,21 @@ main:
   parent: serverless_aws_lambda
   url: serverless/deployment_tracking
   weight: 106
+- identifier: serverless_aws_lambda_securing_functions
+  name: 関数のセキュリティ確保
+  parent: serverless_aws_lambda
+  url: /serverless/securing_functions
+  weight: 107
 - identifier: serverless_aws_lambda_troubleshooting
   name: トラブルシューティング
   parent: serverless_aws_lambda
   url: serverless/troubleshooting
-  weight: 107
+  weight: 108
 - identifier: libraries_integrations
   name: ライブラリとインテグレーション
   parent: serverless_aws_lambda
   url: serverless/libraries_integrations
-  weight: 108
+  weight: 109
 - identifier: serverless_app_services
   name: Azure App Service
   parent: サーバーレス
@@ -6255,6 +6682,11 @@ main:
   pre: ノートブック
   url: notebooks/
   weight: 120000
+- identifier: notebooks_guide
+  name: ガイド
+  parent: ノートブック
+  url: notebooks/guide
+  weight: 1
 - identifier: アラート設定
   name: アラート設定
   parent: platform_heading
@@ -6482,10 +6914,10 @@ main:
   parent: ワークフロー
   url: workflows/build/
   weight: 1
-- identifier: workflows_setup
+- identifier: workflows_access
   name: Authentication
   parent: ワークフロー
-  url: workflows/setup/
+  url: workflows/access/
   weight: 2
 - identifier: workflows_trigger
   name: ワークフローをトリガーする
@@ -6502,10 +6934,10 @@ main:
   parent: workflows_actions_catalog
   url: workflows/actions_catalog/generic_actions/
   weight: 101
-- identifier: workflows_service_accounts
-  name: サービスアカウント
+- identifier: workflows_connections
+  name: 接続
   parent: ワークフロー
-  url: workflows/service_accounts/
+  url: workflows/connections/
   weight: 5
 - identifier: トレーシング
   name: APM
@@ -6526,7 +6958,7 @@ main:
 - identifier: tracing_dd_libraries
   name: Datadog トレーシングライブラリによるインスツルメンテーション
   parent: tracing_trace_collection
-  url: tracing/trace_collection/dd_libraries/java/
+  url: tracing/trace_collection/dd_libraries/
   weight: 101
 - identifier: tracing_ddlib_java
   name: Java
@@ -6573,11 +7005,16 @@ main:
   parent: tracing_dd_libraries
   url: tracing/trace_collection/dd_libraries/dotnet-framework/
   weight: 109
+- identifier: tracing_library_injection
+  name: ライブラリの挿入
+  parent: tracing_trace_collection
+  url: tracing/trace_collection/library_injection/
+  weight: 102
 - identifier: tracing_compatibility
   name: ライブラリの互換性
   parent: tracing_trace_collection
-  url: tracing/trace_collection/compatibility/java/
-  weight: 102
+  url: tracing/trace_collection/compatibility/
+  weight: 103
 - identifier: tracing_compatibility_java
   name: Java
   parent: tracing_compatibility
@@ -6626,8 +7063,8 @@ main:
 - identifier: tracing_library_config
   name: ライブラリ構成
   parent: tracing_trace_collection
-  url: tracing/trace_collection/library_config/java/
-  weight: 103
+  url: tracing/trace_collection/library_config/
+  weight: 104
 - identifier: tracing_library_config_java
   name: Java
   parent: tracing_library_config
@@ -6677,7 +7114,7 @@ main:
   name: カスタムインスツルメンテーション
   parent: tracing_trace_collection
   url: tracing/trace_collection/custom_instrumentation/
-  weight: 104
+  weight: 105
 - identifier: tracing_custom_inst_java
   name: Java
   parent: tracing_custom_inst
@@ -6719,10 +7156,10 @@ main:
   url: tracing/trace_collection/custom_instrumentation/dotnet/
   weight: 108
 - identifier: tracing_open_standards
-  name: OpenStandards によるインスツルメンテーション
+  name: OpenTelemetry によるインスツルメンテーション
   parent: tracing_trace_collection
   url: opentelemetry/otel_tracing/
-  weight: 105
+  weight: 106
 - identifier: tracing_open_standards_java
   name: Java
   parent: tracing_open_standards
@@ -6762,11 +7199,6 @@ main:
   name: サーバーレスアプリケーションのトレース
   parent: tracing_trace_collection
   url: serverless/distributed_tracing/
-  weight: 106
-- identifier: tracing_admission_controller
-  name: Admission Controller の挿入
-  parent: tracing_trace_collection
-  url: tracing/trace_collection/admission_controller/
   weight: 107
 - identifier: tracing_proxies
   name: プロキシのトレース
@@ -7021,6 +7453,11 @@ main:
   parent: tracing_error_tracking
   url: tracing/error_tracking/explorer/
   weight: 801
+- identifier: tracing_error_tracking_custom_grouping
+  name: カスタムグループ化
+  parent: tracing_error_tracking
+  url: tracing/error_tracking/custom_grouping
+  weight: 1208
 - identifier: tracing_data_security
   name: データセキュリティ
   parent: トレーシング
@@ -7248,6 +7685,11 @@ main:
   parent: pipeline_visibility
   url: continuous_integration/pipelines/jenkins/
   weight: 206
+- identifier: ci_teamcity
+  name: TeamCity
+  parent: pipeline_visibility
+  url: continuous_integration/pipelines/teamcity/
+  weight: 207
 - identifier: ci_custom_commands
   name: カスタムコマンド
   parent: pipeline_visibility
@@ -7544,6 +7986,10 @@ main:
   parent: log_configuration
   url: logs/log_configuration/rehydrating
   weight: 209
+- name: 転送
+  parent: log_configuration
+  url: logs/log_configuration/forwarding_custom_destinations/
+  weight: 210
 - identifier: logs_traces_connection
   name: ログとトレースの接続
   parent: log_management
@@ -7570,30 +8016,38 @@ main:
   parent: log_explorer
   url: logs/explorer/facets/
   weight: 504
-- name: グループ
+- name: 分析
   parent: log_explorer
-  url: logs/explorer/group/
+  url: logs/explorer/analytics/
   weight: 505
+- name: パターン
+  parent: log_explorer
+  url: logs/explorer/analytics/patterns/
+  weight: 506
+- name: トランザクション
+  parent: log_explorer
+  url: logs/explorer/analytics/transactions/
+  weight: 507
 - name: 視覚化
   parent: log_explorer
   url: logs/explorer/visualize/
-  weight: 506
+  weight: 508
 - name: ログサイドパネル
   parent: log_explorer
   url: logs/explorer/side_panel/
-  weight: 507
+  weight: 509
 - name: エクスポート
   parent: log_explorer
   url: logs/explorer/export/
-  weight: 508
+  weight: 510
 - name: ログ用 Watchdog Insights
   parent: log_explorer
   url: logs/explorer/watchdog_insights/
-  weight: 509
+  weight: 511
 - name: 保存ビュー
   parent: log_explorer
   url: logs/explorer/saved_views/
-  weight: 509
+  weight: 512
 - identifier: log_management_error_tracking
   name: エラー トラッキング
   parent: log_management
@@ -7611,6 +8065,11 @@ main:
   parent: log_management_error_tracking
   url: logs/error_tracking/backend
   weight: 603
+- identifier: log_management_error_tracking_custom_grouping
+  name: カスタムグループ化
+  parent: log_management_error_tracking
+  url: logs/error_tracking/custom_grouping
+  weight: 604
 - identifier: log_guides
   name: ガイド
   parent: log_management
@@ -7632,31 +8091,56 @@ main:
   pre: パイプライン
   url: observability_pipelines/
   weight: 175000
-- identifier: observability_pipelines_setup
-  name: セットアップ
+- identifier: observability_pipelines_installation
+  name: APM に Datadog Agent を構成する
   parent: observability_pipelines
-  url: observability_pipelines/setup/
+  url: observability_pipelines/installation/
   weight: 1
-- identifier: observability_pipelines_vector_configuration
-  name: Vector の構成
+- identifier: observability_pipelines_production_deployment_overview
+  name: 本番環境のデプロイの概要
   parent: observability_pipelines
-  url: observability_pipelines/vector_configurations/
+  url: observability_pipelines/production_deployment_overview/
   weight: 2
+- identifier: observability_pipelines_architecture_design_and_principles
+  name: アーキテクチャの設計と原理
+  parent: observability_pipelines_production_deployment_overview
+  url: observability_pipelines/production_deployment_overview/architecture_design_and_principles/
+  weight: 201
+- identifier: observability_pipelines_aggregator_architecture
+  name: アグリゲーターアーキテクチャ
+  parent: observability_pipelines_production_deployment_overview
+  url: observability_pipelines/production_deployment_overview/aggregator_architecture/
+  weight: 202
 - identifier: observability_pipelines_working_with_data
   name: データを活用する
   parent: observability_pipelines
   url: observability_pipelines/working_with_data/
   weight: 3
-- identifier: observability_pipelines_integrations
-  name: インテグレーション
+- identifier: observability_pipelines_reference
+  name: リファレンス
   parent: observability_pipelines
-  url: observability_pipelines/integrations/
+  url: observability_pipelines/reference/
   weight: 4
-- identifier: observability_pipelines_integrate_vector_with_datadog
-  name: Vector と Datadog のインテグレーション
-  parent: observability_pipelines_integrations
-  url: observability_pipelines/integrations/integrate_vector_with_datadog/
-  weight: 302
+- identifier: observability_pipelines_vector_configuration
+  name: 構成
+  parent: observability_pipelines_reference
+  url: observability_pipelines/configurations/
+  weight: 2
+- identifier: observability_pipelines_reference_sources
+  name: ソース
+  parent: observability_pipelines_vector_configuration
+  url: observability_pipelines/reference/sources/
+  weight: 401
+- identifier: observability_pipelines_reference_transforms
+  name: 変換
+  parent: observability_pipelines_vector_configuration
+  url: observability_pipelines/reference/transforms/
+  weight: 402
+- identifier: observability_pipelines_reference_sinks
+  name: シンク
+  parent: observability_pipelines_vector_configuration
+  url: observability_pipelines/reference/sinks/
+  weight: 403
 - identifier: observability_pipelines_guides
   name: ガイド
   parent: observability_pipelines
@@ -7709,41 +8193,36 @@ main:
   pre: siem
   url: security/cloud_siem/
   weight: 181000
-- identifier: cloud_siem_getting_started
-  name: はじめに
-  parent: cloud_siem
-  url: security/cloud_siem/getting_started
-  weight: 1
 - identifier: cloud_siem_log_detection_rules
   name: ログ検出ルール
   parent: cloud_siem
   url: security/cloud_siem/log_detection_rules
-  weight: 2
+  weight: 1
 - identifier: cloud_siem_signal_correlation_rules
   name: シグナル相関ルール
   parent: cloud_siem
   url: security/cloud_siem/signal_correlation_rules
-  weight: 3
+  weight: 2
 - identifier: cloud_siem_default_rules
   name: OOTB ルール
   parent: cloud_siem
-  url: /security/default_rules#cat-cloud-siem
-  weight: 4
+  url: /security/default_rules/#cat-cloud-siem-log-detection
+  weight: 3
 - identifier: cloud_siem_signals_explorer
   name: シグナルエクスプローラー
   parent: cloud_siem
   url: /security/explorer
-  weight: 5
+  weight: 4
 - identifier: cloud_siem_investigator
   name: Investigator
   parent: cloud_siem
   url: security/cloud_siem/investigator
-  weight: 6
+  weight: 5
 - identifier: siem_guides
   name: ガイド
   parent: cloud_siem
   url: security/cloud_siem/guide/
-  weight: 7
+  weight: 6
 - identifier: csm
   name: クラウド セキュリティ マネジメント
   parent: security_platform_heading
@@ -7755,44 +8234,50 @@ main:
   parent: csm
   url: security/cspm/
   weight: 1
-- identifier: cspm_getting_started
-  name: はじめに
+- identifier: cspm_setup
+  name: セットアップ
   parent: cspm
-  url: security/cspm/getting_started
+  url: security/cspm/setup
   weight: 101
+- identifier: cspm_detection_rules
+  name: 検出ルール
+  parent: cspm
+  url: security/cspm/detection_rules
+  weight: 102
 - identifier: custom_rules
   name: カスタムルール
   parent: cspm
   url: security/cspm/custom_rules
-  weight: 102
+  weight: 103
 - identifier: cspm_schema_gcp_test
   name: Cloud Resources Schema
   parent: cspm
   url: security/cspm/custom_rules/schema/
-  weight: 103
-- name: ファインディングレポート
+  weight: 104
+- identifier: cspm_frameworks_benchmarks
+  name: コンプライアンスレポート
   parent: cspm
   url: security/cspm/frameworks_and_benchmarks
-  weight: 104
+  weight: 106
 - identifier: cspm_findings_explorer
   name: Security Findings Explorer
   parent: cspm
   url: /security/cspm/findings
-  weight: 105
+  weight: 107
 - identifier: シグナル
   name: シグナルエクスプローラー
   parent: cspm
   url: /security/cspm/signals_explorer/
-  weight: 106
+  weight: 108
 - identifier: cloud_workload_security
   name: クラウドワークロードセキュリティ
   parent: csm
   url: security/cloud_workload_security/
   weight: 2
-- identifier: cws_getting_started
-  name: はじめに
+- identifier: cws_setup
+  name: セットアップ
   parent: cloud_workload_security
-  url: security/cloud_workload_security/getting_started
+  url: security/cloud_workload_security/setup
   weight: 201
 - identifier: cws_workload_security_rules
   name: 検出ルールの管理
@@ -7830,81 +8315,106 @@ main:
   pre: app-sec
   url: security/application_security/
   weight: 184000
+- identifier: appsec_terms
+  name: 用語と概念
+  parent: application_security
+  url: security/application_security/terms/
+  weight: 1
 - identifier: appsec_getting_started
   name: はじめに
   parent: application_security
   url: security/application_security/getting_started/
-  weight: 1
+  weight: 2
 - identifier: appsec_java
   name: Java
   parent: appsec_getting_started
   url: security/application_security/getting_started/java/
-  weight: 101
+  weight: 201
 - identifier: appsec_dotnet
   name: .NET
   parent: appsec_getting_started
   url: security/application_security/getting_started/dotnet/
-  weight: 102
+  weight: 202
 - identifier: appsec_go
   name: Go
   parent: appsec_getting_started
   url: security/application_security/getting_started/go/
-  weight: 103
+  weight: 203
 - identifier: appsec_ruby
   name: Ruby
   parent: appsec_getting_started
   url: security/application_security/getting_started/ruby/
-  weight: 104
+  weight: 204
 - identifier: appsec_php
   name: PHP
   parent: appsec_getting_started
   url: security/application_security/getting_started/php/
-  weight: 105
+  weight: 205
 - identifier: appsec_nodejs
   name: NodeJS
   parent: appsec_getting_started
   url: security/application_security/getting_started/nodejs/
-  weight: 106
+  weight: 206
 - identifier: appsec_python
   name: Python
   parent: appsec_getting_started
   url: security/application_security/getting_started/python/
-  weight: 107
+  weight: 207
+- identifier: appsec_serverless
+  name: サーバーレス
+  parent: appsec_getting_started
+  url: security/application_security/getting_started/serverless/
+  weight: 208
 - identifier: appsec_howitworks
   name: オートディスカバリーの動作
   parent: application_security
   url: security/application_security/how-appsec-works/
-  weight: 2
+  weight: 3
+- identifier: application_risk_management
+  name: リスク管理
+  parent: application_security
+  url: security/application_security/risk_management/
+  weight: 4
+- identifier: appsec_threats
+  name: Threat Monitoring and Protection
+  parent: application_security
+  url: security/application_security/threats/
+  weight: 5
+- identifier: threats_configuration
+  name: セットアップと構成
+  parent: appsec_threats
+  url: security/application_security/threats/setup_and_configure/
+  weight: 501
 - identifier: appsec_default_rules
   name: OOTB ルール
-  parent: application_security
+  parent: appsec_threats
   url: security/default_rules/#cat-application-security
-  weight: 3
-- identifier: appsec_user_info
-  name: ユーザーアクティビティの追跡
-  parent: application_security
-  url: security/application_security/add-user-info/
-  weight: 4
-- identifier: appsec_configuration
-  name: セットアップと構成
-  parent: application_security
-  url: security/application_security/setup_and_configure/
-  weight: 5
-- identifier: appsec_custom_rules
+  weight: 502
+- identifier: threats_user_info
+  name: ユーザーモニタリングと保護
+  parent: appsec_threats
+  url: security/application_security/threats/add-user-info/
+  weight: 503
+- identifier: threats_custom_rules
   name: カスタム検出ルール
-  parent: application_security
-  url: security/application_security/custom_rules/
-  weight: 6
-- identifier: appsec_event_rules
+  parent: appsec_threats
+  url: security/application_security/threats/custom_rules/
+  weight: 504
+- identifier: threats_event_rules
   name: イベントルール
+  parent: appsec_threats
+  url: security/application_security/threats/event_rules/
+  weight: 505
+- identifier: appsec_guides
+  name: ガイド
   parent: application_security
-  url: security/application_security/event_rules/
-  weight: 7
+  url: security/application_security/guide/
+  weight: 6
 - identifier: appsec_troubleshooting
   name: トラブルシューティング
   parent: application_security
-  url: security/application_security/troubleshooting
-  weight: 8
+  url: security/application_security/troubleshooting/
+  weight: 7
 - identifier: 外形監視
   name: Synthetic モニタリング
   parent: ux_monitoring_heading
@@ -7962,7 +8472,7 @@ main:
   parent: synthetics_browser_tests
   url: synthetics/browser_tests/actions
   weight: 301
-- name: テスト結果とパフォーマンス
+- name: テスト結果
   parent: synthetics_browser_tests
   url: synthetics/browser_tests/test_results
   weight: 302
@@ -7990,62 +8500,88 @@ main:
   parent: synthetics_private_location
   url: synthetics/private_locations/monitoring
   weight: 403
-- name: 検索と管理
+- identifier: synthetics_search
+  name: 検索と管理
   parent: 外形監視
   url: synthetics/search/
   weight: 5
+- identifier: synthetics_search_saved_views
+  name: 保存ビュー
+  parent: synthetics_search
+  url: synthetics/search/saved_views
+  weight: 501
+- identifier: synthetics_explorer
+  name: エクスプローラー
+  parent: 外形監視
+  url: continuous_testing/explorer/
+  weight: 6
+- identifier: continuous_testing_explorer_search
+  name: テストバッチを検索する
+  parent: synthetics_explorer
+  url: continuous_testing/explorer/search/
+  weight: 601
+- identifier: continuous_testing_explorer_search_runs
+  name: テスト実行の検索
+  parent: synthetics_explorer
+  url: continuous_testing/explorer/search_runs/
+  weight: 602
+- identifier: continuous_testing_explorer_search_syntax
+  name: 検索構文
+  parent: synthetics_explorer
+  url: continuous_testing/explorer/search_syntax/
+  weight: 603
 - identifier: synthetics_test_coverage
   name: テストカバレッジ
   parent: 外形監視
   url: synthetics/test_coverage
-  weight: 6
+  weight: 7
 - identifier: synthetics_dashboards
   name: 'ダッシュボード  '
   parent: 外形監視
   url: synthetics/dashboards
-  weight: 7
+  weight: 8
 - identifier: synthetics_dashboards_api_test
   name: API テスト
   parent: synthetics_dashboards
   url: synthetics/dashboards/api_test
-  weight: 701
+  weight: 801
 - identifier: synthetics_dashboards_browser_test
   name: ブラウザテスト
   parent: synthetics_dashboards
   url: synthetics/dashboards/browser_test
-  weight: 702
+  weight: 802
 - identifier: synthetics_dashboards_test_summary
   name: テスト概要
   parent: synthetics_dashboards
   url: synthetics/dashboards/test_summary
-  weight: 703
+  weight: 803
 - identifier: synthetics_apm
   name: APM インテグレーション
   parent: 外形監視
   url: synthetics/apm/
-  weight: 8
+  weight: 9
 - name: 設定
   parent: 外形監視
   url: synthetics/settings/
-  weight: 9
+  weight: 10
 - name: メトリクス
   parent: 外形監視
   url: synthetics/metrics/
-  weight: 10
+  weight: 11
 - name: データセキュリティ
   parent: 外形監視
   url: data_security/synthetics/
-  weight: 11
+  weight: 12
 - identifier: synthetics_guides
   name: ガイド
   parent: 外形監視
   url: synthetics/guide/
-  weight: 12
+  weight: 13
 - identifier: synthetics_troubleshooting
   name: トラブルシューティング
   parent: 外形監視
   url: synthetics/troubleshooting/
-  weight: 13
+  weight: 14
 - identifier: continuous_testing
   name: Continuous Testing
   parent: ux_monitoring_heading
@@ -8102,21 +8638,16 @@ main:
   parent: continuous_testing
   url: continuous_testing/explorer/
   weight: 4
-- identifier: continuous_testing_explorer_search
-  name: テストバッチを検索する
-  parent: continuous_testing_explorer
-  url: continuous_testing/explorer/search/
-  weight: 401
-- identifier: continuous_testing_explorer_search_syntax
-  name: 検索構文
-  parent: continuous_testing_explorer
-  url: continuous_testing/explorer/search_syntax/
-  weight: 402
+- identifier: continuous_testing_metrics
+  name: メトリクス
+  parent: continuous_testing
+  url: synthetics/metrics/
+  weight: 5
 - identifier: continuous_testing_troubleshooting
   name: トラブルシューティング
   parent: continuous_testing
   url: continuous_testing/troubleshooting/
-  weight: 5
+  weight: 6
 - identifier: rum
   name: RUM & セッションリプレイ
   parent: ux_monitoring_heading
@@ -8283,11 +8814,16 @@ main:
   parent: rum_flutter
   url: real_user_monitoring/flutter/mobile_vitals/
   weight: 504
+- identifier: rum_flutter_otel_support
+  name: OpenTelemetry のサポート
+  parent: rum_flutter
+  url: real_user_monitoring/flutter/otel_support/
+  weight: 505
 - identifier: rum_flutter_troubleshooting
   name: トラブルシューティング
   parent: rum_flutter
   url: real_user_monitoring/flutter/troubleshooting/
-  weight: 505
+  weight: 506
 - identifier: rum_session_replay
   name: セッション リプレイ
   parent: rum
@@ -8308,156 +8844,175 @@ main:
   parent: rum_session_replay
   url: real_user_monitoring/session_replay/troubleshooting
   weight: 603
+- identifier: rum_heatmaps
+  name: ヒートマップ
+  parent: rum
+  url: real_user_monitoring/heatmaps
+  weight: 7
 - identifier: rum_frustration_signals
   name: フラストレーションシグナル
   parent: rum
   url: real_user_monitoring/frustration_signals/
-  weight: 7
+  weight: 8
 - identifier: rum_dashboards
   name: 'ダッシュボード  '
   parent: rum
   url: real_user_monitoring/dashboards/
-  weight: 8
+  weight: 9
 - identifier: rum_dashboards_performance
   name: パフォーマンス概要
   parent: rum_dashboards
   url: real_user_monitoring/dashboards/performance_overview_dashboard
-  weight: 801
+  weight: 901
 - identifier: rum_dashboards_frustration_signals
   name: フラストレーションシグナル
   parent: rum_dashboards
   url: real_user_monitoring/dashboards/frustration_signals_dashboard
-  weight: 802
+  weight: 902
 - identifier: rum_dashboards_sessions
   name: ユーザーセッション
   parent: rum_dashboards
   url: real_user_monitoring/dashboards/user_sessions_dashboard
-  weight: 803
+  weight: 903
 - identifier: rum_dashboards_errors
   name: エラー
   parent: rum_dashboards
   url: real_user_monitoring/dashboards/errors_dashboard
-  weight: 804
+  weight: 904
 - identifier: rum_dashboards_testing_coverage
   name: テストカバレッジ
   parent: rum_dashboards
   url: real_user_monitoring/dashboards/testing_coverage
-  weight: 805
+  weight: 905
 - identifier: rum_dashboards_resources
   name: リソース
   parent: rum_dashboards
   url: real_user_monitoring/dashboards/resources_dashboard
-  weight: 806
+  weight: 906
 - identifier: rum_dashboards_mobile
   name: Mobile
   parent: rum_dashboards
   url: real_user_monitoring/dashboards/mobile_dashboard
-  weight: 807
+  weight: 907
 - identifier: rum_explorer
   name: エクスプローラー
   parent: rum
   url: real_user_monitoring/explorer/
-  weight: 9
+  weight: 10
 - identifier: rum_explorer_search
   name: RUM イベントの検索
   parent: rum_explorer
   url: real_user_monitoring/explorer/search/
-  weight: 901
+  weight: 1001
 - identifier: rum_explorer_search_syntax
   name: 検索構文
   parent: rum_explorer
   url: real_user_monitoring/explorer/search_syntax/
-  weight: 902
+  weight: 1002
 - identifier: rum_explorer_group
   name: グループ
   parent: rum_explorer
   url: real_user_monitoring/explorer/group/
-  weight: 903
+  weight: 1003
 - identifier: rum_explorer_visualize
   name: 視覚化
   parent: rum_explorer
   url: real_user_monitoring/explorer/visualize/
-  weight: 904
+  weight: 1004
 - identifier: rum_explorer_events
   name: イベント
   parent: rum_explorer
   url: real_user_monitoring/explorer/events/
-  weight: 905
+  weight: 1005
 - identifier: rum_explorer_export
   name: エクスポート
   parent: rum_explorer
   url: real_user_monitoring/explorer/export/
-  weight: 906
+  weight: 1006
 - identifier: rum_explorer_saved_views
   name: 保存ビュー
   parent: rum_explorer
   url: real_user_monitoring/explorer/saved_views/
-  weight: 907
+  weight: 1007
 - identifier: rum_explorer_watchdog_insights
   name: RUMのWatchdog Insights
   parent: rum_explorer
   url: real_user_monitoring/explorer/watchdog_insights/
-  weight: 908
+  weight: 1008
 - identifier: rum_funnel_analysis
   name: ファネル分析
   parent: rum
   url: real_user_monitoring/funnel_analysis
-  weight: 10
+  weight: 11
+- identifier: rum_feature_flag_tracking
+  name: 機能フラグ追跡
+  parent: rum
+  url: real_user_monitoring/feature_flag_tracking
+  weight: 12
 - identifier: rum_generate_metrics
   name: メトリクスの生成
   parent: rum
   url: real_user_monitoring/generate_metrics
-  weight: 11
+  weight: 12
 - identifier: rum_connect_rum_and_traces
   name: RUM とトレースの接続
   parent: rum
   url: real_user_monitoring/connect_rum_and_traces
-  weight: 12
+  weight: 13
 - identifier: rum_error_tracking
   name: エラー トラッキング
   parent: rum
   url: real_user_monitoring/error_tracking/
-  weight: 13
+  weight: 14
 - identifier: rum_error_tracking_explorer
   name: エクスプローラー
   parent: rum_error_tracking
   url: real_user_monitoring/error_tracking/explorer/
-  weight: 1201
+  weight: 1401
 - identifier: rum_error_tracking_browser
   name: ブラウザエラーの追跡
   parent: rum_error_tracking
   url: real_user_monitoring/error_tracking/browser/
-  weight: 1202
+  weight: 1402
 - identifier: rum_error_tracking_android
   name: Android エラーの追跡
   parent: rum_error_tracking
   url: real_user_monitoring/error_tracking/android/
-  weight: 1203
+  weight: 1403
 - identifier: rum_error_tracking_ios
   name: iOS エラーの追跡
   parent: rum_error_tracking
   url: real_user_monitoring/error_tracking/ios/
-  weight: 1204
+  weight: 1404
 - identifier: rum_error_tracking_expo
   name: Expo エラーの追跡
   parent: rum_error_tracking
   url: real_user_monitoring/error_tracking/expo/
-  weight: 1205
+  weight: 1405
 - identifier: rum_error_tracking_reactnative
   name: React Native エラーの追跡
   parent: rum_error_tracking
   url: real_user_monitoring/error_tracking/reactnative/
-  weight: 1206
+  weight: 1406
 - identifier: rum_error_tracking_flutter
   name: Flutter エラーを追跡する
   parent: rum_error_tracking
   url: real_user_monitoring/error_tracking/flutter/
-  weight: 1207
+  weight: 1407
+- identifier: rum_error_tracking_custom_grouping
+  name: カスタムグループ化
+  parent: rum_error_tracking
+  url: real_user_monitoring/error_tracking/custom_grouping
+  weight: 1408
 - identifier: rum_guides
   name: ガイド
   parent: rum
   url: real_user_monitoring/guide/
-  weight: 14
+  weight: 15
+- name: データセキュリティ
+  parent: rum
+  url: data_security/real_user_monitoring/
+  weight: 16
 - identifier: nm_parent
   name: ネットワークモニタリング
   parent: infrastructure_heading
@@ -8618,7 +9173,7 @@ main:
   parent: dev_tools_integrations
   url: developers/integrations/oauth_for_integrations
   weight: 405
-- name: Python
+- name: Agent Integration Developer Tool をインストールする
   parent: dev_tools_integrations
   url: developers/integrations/python/
   weight: 406
@@ -8798,32 +9353,36 @@ main:
   parent: account_management
   url: account_management/api-app-keys/
   weight: 5
+- name: チーム
+  parent: account_management
+  url: account_management/teams/
+  weight: 6
 - identifier: account_management_audit_trail
   name: Audit Trail
   parent: account_management
   url: account_management/audit_trail/
-  weight: 6
+  weight: 7
 - identifier: account_management_audit_trail_events
   name: イベント
   parent: account_management_audit_trail
   url: account_management/audit_trail/events/
-  weight: 601
+  weight: 701
 - name: 計画と使用
   parent: account_management
   url: account_management/plan_and_usage/
-  weight: 7
+  weight: 8
 - name: 課金
   parent: account_management
   url: account_management/billing/
-  weight: 8
+  weight: 9
 - name: マルチオーガニゼーションのアカウント
   parent: account_management
   url: account_management/multi_organization/
-  weight: 8
+  weight: 10
 - name: ガイド
   parent: account_management
   url: account_management/guide/
-  weight: 9
+  weight: 11
 - identifier: data_security
   name: データセキュリティ
   parent: administration_heading
@@ -8846,18 +9405,17 @@ main:
   parent: data_security
   url: data_security/synthetics/
   weight: 4
+- name: リアルユーザーモニタリング (RUM)
+  parent: data_security
+  url: data_security/real_user_monitoring/
+  weight: 5
 - name: ガイド
   parent: data_security
   url: data_security/guide/
-  weight: 5
+  weight: 6
 - identifier: help_top_level
   name: ヘルプ
   parent: administration_heading
   pre: info-fill
   url: help/
   weight: 240000
-- identifier: vector_aggregation
-  name: Agent の集約
-  parent: agent
-  url: observability_pipelines/integrations/integrate_vector_with_datadog/
-  weight: 13

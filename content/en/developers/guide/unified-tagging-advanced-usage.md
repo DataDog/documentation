@@ -1,8 +1,6 @@
 ---
 title: Unified Tagging Advanced Usage Guide
 kind: guide
-aliases:
-  - /developers/guide/unified-tagging-advanced-usage
 ---
 
 ## Overview
