@@ -124,6 +124,6 @@ Si vous mettez à niveau l'Agent depuis la v5 alors que `gce_updated_hostname` n
 {{< /tabs >}}
 
 [1]: /fr/agent/guide/agent-commands/#agent-status-and-information
-[2]: /content/fr/agent/guide/agent-configuration-files
+[2]: /content/fr/agent/guide/agent-configuration-files.md
 [3]: /fr/api/v1/hosts/
 [4]: https://app.datadoghq.com/infrastructure
