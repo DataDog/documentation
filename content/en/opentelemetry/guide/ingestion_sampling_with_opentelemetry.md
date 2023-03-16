@@ -69,7 +69,7 @@ See the [ingestion volume control guide][8] for information about the implicatio
 
 ### Sampling with the Datadog Agent
 
-When using the Datadog Agent [OTLP Ingest][3], a [probabilistic sampler][10] is available starting from the version 7.44.0 of the Datadog Agent version. Use the `DD_OTLP_CONFIG_TRACES_PROBABILISTIC_SAMPLER_SAMPLING_PERCENTAGE` environment variable to configure it, or set the following YAML in your agent's configuration file:
+When using [Datadog Agent OTLP Ingest][3], a [probabilistic sampler][10] is available starting from Agent version 7.44.0. Configure it using `DD_OTLP_CONFIG_TRACES_PROBABILISTIC_SAMPLER_SAMPLING_PERCENTAGE` environment variable, or set the following YAML in your Agent's configuration file:
 
 ```yaml
 otlp_config:
@@ -79,12 +79,11 @@ otlp_config:
       sampling_percentage: 50
 ```
 
-In the above example, 50% of traces will be captured.
+In the above example, 50% of traces are captured.
 
-**Note**: Probabilistic sampler properties ensure that only complete traces are ingested if you use the same sampling percentage across all agents.
+**Note**: Probabilistic sampler properties ensure that only complete traces are ingested, assuming you use the same sampling percentage across all Agents.
 
-The probabilistic sampler will ignore spans for which the sampling priority was already set at the SDK level.
-Additionally, spans not caught by the probabilistic sampler might still be captured by the Datadog Agent's [error and rare samplers][13], in order to ensure a higher representation of errors and rare endpoint traces in the ingested dataset. 
+The probabilistic sampler ignores spans for which the sampling priority is already set at the SDK level. Additionally, spans not caught by the probabilistic sampler might still be captured by the Datadog Agent's [error and rare samplers][13], ensuring a higher representation of errors and rare endpoint traces in the ingested dataset. 
 
 ## Monitor ingested volumes from Datadog UI
 
@@ -106,6 +105,5 @@ You can leverage the [APM Estimated Usage dashboard][14] and the estimated usage
 [9]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/tailsamplingprocessor/README.md
 [10]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/probabilisticsamplerprocessor/README.md
 [11]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/datadogprocessor
-[12]: https://github.com/DataDog/datadog-agent/blob/fd550c6/pkg/config/config_template.yaml#L3533-L3545
 [13]: /tracing/trace_pipeline/ingestion_mechanisms/#error-and-rare-traces
 [14]: https://app.datadoghq.com/dash/integration/apm_estimated_usage
