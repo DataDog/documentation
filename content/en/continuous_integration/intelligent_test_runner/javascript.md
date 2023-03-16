@@ -25,9 +25,9 @@ Intelligent Test Runner is only supported in the following versions and testing 
 
 ## Setup
 
-Prior to setting up Intelligent Test Runner, you must have finished setting up [Test Visibility for Javascript and Typescript][1]. If you are reporting data through the Datadog Agent you need to use v6.40+/v7.40+.
+Prior to setting up Intelligent Test Runner, set up [Test Visibility for Javascript and Typescript][1]. If you are reporting data through the Agent, use v6.40+/v7.40+.
 
-To enable Intelligent Test Runner, the following environment variables need to be set:
+To enable Intelligent Test Runner, set the following environment variables:
 
 `DD_APPLICATION_KEY` (Required)
 : The [Datadog Application key][2] used to query the tests to be skipped.<br/>
