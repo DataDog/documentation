@@ -77,7 +77,7 @@ otlp_config:
   traces:
     probabilistic_sampler:
       sampling_percentage: 50
-\```
+```
 
 In the above example, 50% of traces will be captured.
 
