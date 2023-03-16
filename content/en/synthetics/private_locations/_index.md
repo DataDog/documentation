@@ -449,7 +449,7 @@ Because Datadog already integrates with Kubernetes and AWS, it is ready-made to 
 
 Add a liveness or readiness probe so your orchestrator can ensure the workers are running correctly.
 
-For readiness probes, you need to enable private location status probes on port `8080` in your private location deployment. For more information, see [Advanced configuration][15].
+For readiness probes, you need to enable private location status probes on port `8080` in your private location deployment. For more information, see [Private Locations Configuration][5].
 
 {{< tabs >}}
 
