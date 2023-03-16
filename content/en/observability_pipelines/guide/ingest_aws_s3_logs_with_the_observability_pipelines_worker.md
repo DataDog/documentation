@@ -34,7 +34,7 @@ In the AWS SQS Console, provision a new queue specific to this configuration. Th
 2. Click **Create queue** to provision a new queue specific to this configuration.
 3. Enter a name for the queue.
 4. In the **Access policy** section, click the **Advanced** button.
-5. Copy and paste the below example JSON object into the advanced access policy section. Replace `${REGION}`, `${AWS_ACCOUNT_ID}`, `${QUEUE_NAME`}, and `${BUCKET_NAME}` with the relevant AWS account information, the bucket name, and the queue name you just entered. This is the Advanced policy for configuring the queue and allows the S3 bucket to send Event Notifications.
+5. Copy and paste the below example JSON object into the advanced access policy section. It configures the queue and allows the S3 bucket to send event notifications. Replace `${REGION}`, `${AWS_ACCOUNT_ID}`, `${QUEUE_NAME`}, and `${BUCKET_NAME}` with the relevant AWS account information, the bucket name, and the queue name you just entered.
     ```json
     {
     "Version": "2008-10-17",
@@ -65,7 +65,7 @@ In the AWS SQS Console, provision a new queue specific to this configuration. Th
 ## Enable event notifications on the S3 bucket
 
 1. In the [AWS S3 console][5], go to the S3 bucket that is collecting the logs that you want the Worker to ingest.
-2. Click on the **Properties** tag.
+2. Click the **Properties** tab.
 3. Go to the **Event notifications** section, and click **Create event notification**.
 4. Enter a name for the event.
 5. In the **Event types** section, click **All object create events**. The Worker only responds to object creation events, so those are the only events to which you need to subscribe.
@@ -76,7 +76,7 @@ The SQS queue should now be receiving messages for the Worker to process.
 
 If you encounter the "Unable to validate the following destination configurations" error, check that the SQS access policy was set up correctly.
 
-## Create an IAM Role for the Worker
+## Create an IAM role for the Worker
 
 Create a separate IAM role for the Worker so that only the necessary permissions are provided.
 
@@ -134,7 +134,7 @@ Apply the role to the running Observability Pipelines process. This might be by 
 
 See [AWS S3 source documentation][7] for more options.
 
-With the source set up, you can add [transforms][8] to manipulate the data and add [sinks][9] to output the logs to destinations based on your use case. See [Configurations][3] for more information on sources, transforms, and sinks. 
+With the AWS S3 source set up, you can now add [transforms][8] to manipulate the data and [sinks][9] to output the logs to destinations based on your use case. See [Configurations][3] for more information on sources, transforms, and sinks. 
 
 ## Configure the Worker to separate out batched AWS S3 log events
 
@@ -157,7 +157,7 @@ Most services (for example, CloudTrail) send logs to S3 in batches, which means 
 }
 ```
 
-Add the following remap transforms that use VRL to separate the batched log events into individual events for correct processing  for sinks:
+Add the following `explode` and `map` transforms to separate the batched log events into individual events for correct processing for sinks:
 
 ```json
 transforms:
@@ -178,7 +178,7 @@ transforms:
      del(.message)
 ```
 
-In this transform example, the `parse_json` function parses the string into JSON.
+In this example, the `parse_json` function parses the string into JSON.
 
 The `unnest` function separates out the batched log events into an array of individual log events.
 
