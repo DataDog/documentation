@@ -280,7 +280,7 @@ Ensure that you are using a supported client library (e.g. `Npgsql`).
 Enable the database monitoring propagation feature by setting the following environment variable:
    - `DD_DBM_PROPAGATION_MODE=full`
 
-For the best user experience ensure the following environment variables are set in your application:
+For the best user experience, ensure the following environment variables are set in your application:
    - `DD_SERVICE=(application name)`
    - `DD_ENV=(application environment)`
    - `DD_VERSION=(application version)`
