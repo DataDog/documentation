@@ -2,9 +2,6 @@
 title: Cloud Cost Monitor
 kind: documentation
 description: "Monitor costs associated with cloud platforms."
-aliases :
-    - /monitors/monitor_types/custom_check
-    - /monitors/create/types/custom_check/
 further_reading:
 - link: "https://docs.datadoghq.com/cloud_cost_management/?tab=aws#overview"
   tag: "Documentation"
@@ -21,7 +18,7 @@ further_reading:
 ---
 
 ## Overview
-Get proactive monitor notifications on cost changes and mitigate unnecessary spending. Cloud Cost Monitors help you to identify cost changes as early as possible so you can understand cost changes and communicate this with engineers and finance teams. Configure your alerts to catch unexpected cost changes. 
+Get proactive notifications on cost changes to help mitigate unexpected cloud spend. Cloud Cost Monitors help you identify cost changes quickly so you can investigate why costs changed. Configure your alerts to catch unexpected cost changes.
 
 In order to configure Cloud Cost monitors, you need to have [Cloud Cost Management][1] set up. After this data is sent to Datadog, you can configure monitors to alert when costs rise.
 
@@ -58,11 +55,11 @@ If the cost monitor type is **Compare Costs Over Time**, you can trigger an aler
 
 ## Notify your team
 
-For detailed instructions on the  **Notify your team** section, see the [Notifications][4] page.
+For detailed instructions on the  **Notify your team** section, see the [Notifications][2] page.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/cloud_cost_management/
-[4]: /monitors/notify/
+[2]: /monitors/notify/
