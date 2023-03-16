@@ -59,7 +59,9 @@ Filters can be applied by appending query parameters to the URL.
 - Chaining filters: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`
 - Filtering on tags: `?filter[tags]=tag_key:tag_value`
 
-Query parameters of type `integer` support comparison operators (`>`, `=`, `-`, `<=`). This is particularly useful when filtering by `evaluation_changed_at` or `resource_discovery_timestamp`. For example: `?filter[resource_type]=-aws_s3_bucket`.
+Query parameters of type `integer` support comparison operators (`>`, `=`, `<=`). This is particularly useful when filtering by `evaluation_changed_at` or `resource_discovery_timestamp`. For example: `?filter[evaluation_changed_at]=>20123123121`.
+
+You can also use the negation operator on strings. For example, use `filter[resource_type]=-aws*` to filter for any non-aws resources.
 
 ### Request
 
