@@ -123,7 +123,7 @@
         contents:
 
         - action: marketplace-integrations
-          branch: master
+          branch: alai97/marketplace-further-reading-batch-add
           globs:
           - "*/metadata.csv"
           - "*/manifest.json"
