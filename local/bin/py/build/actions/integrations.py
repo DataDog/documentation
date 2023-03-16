@@ -28,7 +28,7 @@ from os.path import (
 from actions.format_link import format_link_file
 
 try:
-    from assetlib.constants import CLASSIFIER_TAGS
+    from assetlib.constants import CLASSIFIER_TAGS, get_public_classifiers
 except ImportError:
     CLASSIFIER_TAGS = []
     if getenv("CI_COMMIT_REF_NAME"):
@@ -39,7 +39,7 @@ finally:
         print(f'\x1b[33mWARNING\x1b[0m: CLASSIFIER_TAGS empty continuing without validation')
     else:
         with open('layouts/shortcodes/integration_categories.md', 'w') as file:
-            for tag in CLASSIFIER_TAGS:
+            for tag in get_public_classifiers():
                 file.write(f'- {tag}\n')
             file.write("\n")
 
