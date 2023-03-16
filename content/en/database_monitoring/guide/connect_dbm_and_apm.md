@@ -42,10 +42,13 @@ Data privacy
 |          | [mysql2][14]                   |             | {{< X >}}   |
 | **Python:** [dd-trace-py][11] >= 1.9.0 |  |             |             |
 |          | [psycopg2][12]                 | {{< X >}}   |             |
+| **.NET** [dd-trace-dotnet][15] >= 2.26.0 ||             |             |
+|          | [Npgsql][16]                   | {{< X >}}   |             |
+|          | [MySql.Data][17]               |             | {{< X >}}   |
+|          | [MySqlConnector][18]           |             | {{< X >}}   |
 | **Java**     |                            |             |             |
 |          | jdbc                           | Coming soon | Coming soon |
-| **.NET**     |                            |             |             |
-|          |                                | Coming soon | Coming soon |
+
 
 
 
@@ -264,6 +267,29 @@ client.query('SELECT $1::text as message', ['Hello world!'], (err, result) => {
 
 {{% /tab %}}
 
+{{% tab ".NET" %}}
+
+<div class="alert alert-warning">
+This features requires automatic instrumentation to be enabled for your .NET service.
+</div>
+
+Follow the [.NET Framework tracing instructions][1] or the [.NET Core tracing instructions][2] to install the automatic instrumentation package and enable tracing for your service.
+
+Ensure that you are using a supported client library (e.g. `Npgsql`).
+
+Enable the database monitoring propagation feature by setting the following environment variable:
+   - `DD_DBM_PROPAGATION_MODE=full`
+
+For the best user experience, ensure the following environment variables are set in your application:
+   - `DD_SERVICE=(application name)`
+   - `DD_ENV=(application environment)`
+   - `DD_VERSION=(application version)`
+
+[1]: /tracing/trace_collection/dd_libraries/dotnet-framework
+[2]: /tracing/trace_collection/dd_libraries/dotnet-core
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Explore the APM Connection
@@ -278,13 +304,13 @@ Break down active connections for a given host by the upstream APM services maki
 
 {{< img src="database_monitoring/dbm_query_sample_trace_preview.png" alt="Preview the sampled APM trace that the query sample being inspected was generated from.">}}
 
-When viewing a Query Sample in Database Monitoring, if the associated trace has been sampled by APM, you can view the DBM Sample in the context of the APM Trace. This allows you to combine DBM telemetry, including the explain plan and historical performance of the query, alongside the lineage of the span within your infrastructure to understand if a change on the database is responsible for poor application performance.  
+When viewing a Query Sample in Database Monitoring, if the associated trace has been sampled by APM, you can view the DBM Sample in the context of the APM Trace. This allows you to combine DBM telemetry, including the explain plan and historical performance of the query, alongside the lineage of the span within your infrastructure to understand if a change on the database is responsible for poor application performance.
 
-### Identify the downstream database hosts of APM services 
+### Identify the downstream database hosts of APM services
 
 {{< img src="database_monitoring/dbm_apm_service_page_db_host_list.png" alt="Visualize the downstream database hosts that your APM Services depend on from the Service Page.">}}
 
-On the APM Service Page, view the direct downstream database dependencies of the service as identified by Database Monitoring. Quickly determine if any hosts have disproportionate load that may be caused by noisy neighbors.  
+On the APM Service Page, view the direct downstream database dependencies of the service as identified by Database Monitoring. Quickly determine if any hosts have disproportionate load that may be caused by noisy neighbors.
 
 
 [1]: /database_monitoring/#getting-started
@@ -301,3 +327,7 @@ On the APM Service Page, view the direct downstream database dependencies of the
 [12]: https://www.psycopg.org/docs/index.html
 [13]: https://github.com/mysqljs/mysql
 [14]: https://github.com/sidorares/node-mysql2
+[15]: https://github.com/DataDog/dd-trace-dotnet
+[16]: https://www.nuget.org/packages/npgsql
+[17]: https://www.nuget.org/packages/MySql.Data
+[18]: https://www.nuget.org/packages/MySqlConnector
