@@ -48,7 +48,7 @@ Use the search bar's autocomplete feature to complete your query using:
     - Recent searches per user
     - Saved views
 
-{{< img src="logs/explorer/search/search_bar_autocomplete.jpg" alt="search bar autocomplete " style="width:80%;">}}
+{{< img src="logs/explorer/search/log_search_bar_autocomplete.png" alt="search bar autocomplete " style="width:80%;">}}
 
 Clear error states inform the user of which part of the query contains syntax errors and how to remediate it. For example, when a user inputs the query "service:" with no value, we display the message “Missing value in key:value pair” on hover.
 
