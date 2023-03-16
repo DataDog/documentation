@@ -432,7 +432,7 @@ If you want visibility into the browser process, consider using [RUM & Session R
 
 ### Cypress interactive mode
 
-Cypress interactive mode (cypress is run through `cypress open`) is not supported by CI Visibility, because some cypress events are not fired, such as [`before:run`][12]. If you want to try it anyway, pass `experimentalInteractiveRunEvents: true` to the [cypress configuration file][13].
+Cypress interactive mode (which you can enter by running `cypress open`) is not supported by CI Visibility because some cypress events, such as [`before:run`][12], are not fired. If you want to try it anyway, pass `experimentalInteractiveRunEvents: true` to the [cypress configuration file][13].
 
 
 ## Best practices
