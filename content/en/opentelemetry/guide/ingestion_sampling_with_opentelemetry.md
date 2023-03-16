@@ -69,7 +69,7 @@ See the [ingestion volume control guide][8] for information about the implicatio
 
 ### Sampling with the Datadog Agent
 
-When using [Datadog Agent OTLP Ingest][3], a [probabilistic sampler][10] is available starting from Agent version 7.44.0. Configure it using `DD_OTLP_CONFIG_TRACES_PROBABILISTIC_SAMPLER_SAMPLING_PERCENTAGE` environment variable, or set the following YAML in your Agent's configuration file:
+When using [Datadog Agent OTLP Ingest][3], a [probabilistic sampler][10] is available starting from Agent version 7.44.0. Configure it using the `DD_OTLP_CONFIG_TRACES_PROBABILISTIC_SAMPLER_SAMPLING_PERCENTAGE` environment variable, or set the following YAML in your Agent's configuration file:
 
 ```yaml
 otlp_config:
