@@ -23,9 +23,9 @@ const getIndexName = () => {
 const updateSettings = (index) => {
     const settings = {
         searchableAttributes: [
+            'unordered(tags)',
             'unordered(content)',
             'unordered(title)',
-            'unordered(tags)',
             'unordered(section_header)'
         ],
         ranking: ['words', 'filters', 'typo', 'attribute', 'proximity', 'exact', 'custom'],
