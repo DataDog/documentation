@@ -8,5 +8,5 @@ disable_toc: true
 {{< whatsnext desc="General guides:" >}}
     {{< nextlink href="/observability_pipelines/guide/custom-metrics-governance" >}}Custom Metrics Governance{{< /nextlink >}}
     {{< nextlink href="/observability_pipelines/guide/control_log_volume_and_size" >}}Control Log Volume and Size{{< /nextlink >}}
-    {{< nextlink href="/observability_pipelines/guide/ingest_batched_aws_logs" >}}Ingest Logs from AWS{{< /nextlink >}}
+    {{< nextlink href="/observability_pipelines/guide/ingest_aws_s3_logs_with_the_observability_pipelines_worker" >}}Ingest AWS S3 Logs with the Observability Pipelines Worker{{< /nextlink >}}
 {{< /whatsnext >}}
