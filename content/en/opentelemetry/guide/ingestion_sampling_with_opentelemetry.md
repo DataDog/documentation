@@ -88,7 +88,7 @@ Additionally, spans not caught by the probabilistic sampler might still be captu
 
 ## Monitor ingested volumes from Datadog UI
 
-You can leverage the [APM Estimated Usage dashboard][14] and the estimated usage metric `datadog.estimated_usage.apm.ingested_bytes` to get visibility into your ingested volumes for a specific time period. Filter the dashboard to specific environments and services to see which services are responsible for the largest shares of the ingested volume.
+You can leverage the [APM Estimated Usage dashboard][13] and the estimated usage metric `datadog.estimated_usage.apm.ingested_bytes` to get visibility into your ingested volumes for a specific time period. Filter the dashboard to specific environments and services to see which services are responsible for the largest shares of the ingested volume.
 
 
 ## Further Reading
