@@ -124,6 +124,6 @@ Agent v5 で `gce_updated_hostname` が未設定または false に設定され�
 {{< /tabs >}}
 
 [1]: /ja/agent/guide/agent-commands/#agent-status-and-information
-[2]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
+[2]: /content/ja/agent/guide/agent-configuration-files.md
 [3]: /ja/api/v1/hosts/
 [4]: https://app.datadoghq.com/infrastructure
