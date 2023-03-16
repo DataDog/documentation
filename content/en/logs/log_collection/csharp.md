@@ -544,10 +544,9 @@ using (var log = new LoggerConfiguration()
 
 {{< /site-region >}}
 
-
-You can also override the default behavior and forward logs in TCP by manually specifying the following required properties: `url`, `port`, `useSSL`, and `useTCP`. Optionally, [specify the `source`, `service`, `host`, and custom tags.][20]
-
 {{< site-region region="us" >}}
+
+You can also override the default behavior and forward logs in TCP by manually specifying the following required properties: `url`, `port`, `useSSL`, and `useTCP`. Optionally, [specify the `source`, `service`, `host`, and custom tags.][1]
 
 For instance to forward logs to the Datadog US region in TCP you would use the following sink configuration:
 
@@ -568,8 +567,12 @@ using (var log = new LoggerConfiguration()
 }
 ```
 
+[1]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
+
 {{< /site-region >}}
 {{< site-region region="eu" >}}
+
+You can also override the default behavior and forward logs in TCP by manually specifying the following required properties: `url`, `port`, `useSSL`, and `useTCP`. Optionally, [specify the `source`, `service`, `host`, and custom tags.][1]
 
 For instance to forward logs to the Datadog EU region in TCP you would use the following sink configuration:
 
@@ -589,6 +592,7 @@ using (var log = new LoggerConfiguration()
     // Some code
 }
 ```
+[1]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
 
 {{< /site-region >}}
 
@@ -644,4 +648,3 @@ In the `Serilog.WriteTo` array, add an entry for `DatadogLogs`. An example is sh
 [17]: /logs/log_configuration/pipelines/?tab=source
 [18]: /api/latest/logs/#send-logs
 [19]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs
-[20]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes

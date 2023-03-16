@@ -266,13 +266,21 @@ Monitor authenticated requests by adding user information to the trace with the 
 This example shows how to set user monitoring tags and enable user blocking capability:
 
 ```python
+from ddtrace.appsec.trace_utils import should_block_user
 from ddtrace.appsec.trace_utils import block_request
+from ddtrace.appsec.trace_utils import block_request_if_user_blocked
 from ddtrace.contrib.trace_utils import set_user
 from ddtrace import tracer
 # Call set_user() to trace the currently authenticated user id
 user_id = "some_user_id"
 set_user(tracer, user_id, name="John", email="test@test.com", scope="some_scope",
          role="manager", session_id="session_id", propagate=True)
+# Call is_user_blocked() to possibly block the authenticated user when in the denylist
+if should_block_user(user_id):
+    block_request()
+# Also the utility function that checks and blocks if needed:
+block_request_if_user_blocked(tracer, user_id)
+    block_request()
 ```
 
 {{< /programming-lang >}}
@@ -492,6 +500,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
 Starting in dd-trace-rb v1.9.0, you can use the Ruby tracer's API to track user events.
 
 The following examples show how to track login events or custom events (using signup as an example).
+
+Traces containing login success/failure events can be queried using the following query `@appsec.security_activity:business_logic.users.login.success` or `@appsec.security_activity:business_logic.users.login.failure`.
 
 {{< tabs >}}
 {{% tab "Login success" %}}

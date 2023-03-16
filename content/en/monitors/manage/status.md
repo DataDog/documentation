@@ -45,7 +45,7 @@ Manually resolving a monitor is appropriate for cases where data is reported int
 **Typical use case**: A monitor based on error metrics that are not generated when there are no errors (`aws.elb.httpcode_elb_5xx`, or any DogStatsD counter in your code reporting an error _only when there is an error_).
 
 ### Create an incident
-Create an incident from a monitor by selecting **Declare incident**. Configure the *Declare Incident* popup modal with the severity level, notifications, and additional notes. For more information, see the [Incident Management][3] documentation.
+Create an incident from a monitor by selecting **Declare incident**. Configure the *Declare Incident* pop-up modal with the severity level, notifications, and additional notes. For more information, see the [Incident Management][3] documentation.
 
 ### Settings
 
@@ -122,7 +122,7 @@ If you made changes to a monitor, you can see examples with the following event 
 https://app.datadoghq.com/event/stream?per_page=30&query=tags%3Aaudit%20status%3Aall%20priority%3Aall%20monitor%20modified
 ```
 
-Datadog also provides a notification option for changes to monitors you create. At the bottom of the monitor editor, under **Define permissions and audit notifications**, select **Notify** in the drop-down next to: *If this monitor is modified, notify monitor creator and alert recipients.*.
+Datadog also provides a notification option for changes to monitors you create. At the bottom of the monitor editor, under **Define permissions and audit notifications**, select **Notify** in the dropdown next to: *If this monitor is modified, notify monitor creator and alert recipients.*.
 
 The notify setting sends an email with the monitor audit event to all people who are alerted in the specific monitor as well as to the monitor creator. The monitor audit event also appears in the [Events Explorer][10].
 

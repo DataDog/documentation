@@ -20,7 +20,7 @@ further_reading:
   text: "Proactively monitor service performance with SLO alerts"
 ---
 
-{{< vimeo 382481078 >}}
+{{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/382481078/rendition/1080p/file.mp4?loc=external&signature=f5a81ca1c44d9c1c2cfcbd23c2b6b4f89914027ff344fb0a9f8dc6b9a1d141aa" poster="/images/poster/slo.png" >}}
 
 {{< jqmath-vanilla >}}
 

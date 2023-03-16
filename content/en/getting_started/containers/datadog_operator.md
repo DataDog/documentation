@@ -8,7 +8,7 @@ further_reading:
   - link: 'https://github.com/DataDog/datadog-operator/blob/main/docs/installation.md'
     tag: 'GitHub'
     text: 'Datadog Operator: Advanced Installation'
-  - link: 'https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md'
+  - link: 'https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v1alpha1.md'
     tag: 'GitHub'
     text: 'Datadog Operator: Configuration'
 ---

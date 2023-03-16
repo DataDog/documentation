@@ -11,9 +11,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-application-security/"
   tag: "Blog"
   text: "Introducing Datadog Application Security"
-- link: "/security/application_security/getting_started/"
+- link: "/security/application_security/enabling/"
   tag: "Documentation"
-  text: "Get started with Application Security Management"
+  text: "Enable Application Security Management"
 ---
 
 ## Overview
@@ -35,7 +35,7 @@ Because APM collects a sample of your application traffic, enabling ASM in the t
 Datadog Threat Monitoring and Detection identifies bad actors by collecting client IP addresses and manually-added user tags on all requests.
 
 <div class="alert alert-info"><strong>Beta: 1-Click Enablement</strong><br>
-If your service is running with <a href="/agent/guide/how_remote_config_works/#enabling-remote-configuration">an Agent with Remote Configuration enabled and a tracing library version that supports it</a>, you can <a href="/security/application_security/getting_started/">enable ASM</a> from the Datadog UI without additional configuration of the Agent or tracing libraries.</div>
+If your service is running with <a href="/agent/guide/how_remote_config_works/#enabling-remote-configuration">an Agent with Remote Configuration enabled and a tracing library version that supports it</a>, you can <a href="/security/application_security/enabling/">enable ASM</a> from the Datadog UI without additional configuration of the Agent or tracing libraries.</div>
 
 ### Identify vulnerable services
 
@@ -53,7 +53,7 @@ For Datadog ASM to be compatible with your Datadog configuration, you must have 
  
 Datadog ASM for AWS Lambda provides deep visibility into attackers targeting your functions. With distributed tracing providing a context-rich picture of the attack, you can assess the impact and remediate the threat effectively. 
 
-Read [Getting Started with ASM for Serverless][24] for information on setting it up.
+Read [Enabling ASM for Serverless][24] for information on setting it up.
 
 ## Performance
 
@@ -146,7 +146,7 @@ Datadog ASM identifies Log4j Log4Shell attack payloads and provides visibility i
 [2]: /tracing/services/service_page/#security
 [3]: /tracing/trace_explorer/trace_view/?tab=security#more-information
 [4]: /tracing/trace_collection/
-[5]: /security/application_security/getting_started/#prerequisites
+[5]: /security/application_security/enabling/#prerequisites
 [6]: /serverless/installation/java/?tab=serverlessframework
 [7]: /tracing/trace_pipeline/trace_retention/
 [8]: /tracing/configure_data_security/?tab=http
@@ -165,4 +165,4 @@ Datadog ASM identifies Log4j Log4Shell attack payloads and provides visibility i
 [21]: /security/application_security/risk_management/
 [22]: /security/application_security/threats/
 [23]: /agent/guide/how_remote_config_works/
-[24]: /security/application_security/getting_started/serverless/
+[24]: /security/application_security/enabling/serverless/

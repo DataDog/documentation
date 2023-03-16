@@ -36,13 +36,13 @@ public_title: AlertNow
 short_description: Datadog のアラートと AlertNow のアラートを同期させる
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   configuration: README.md#Setup
   description: Datadog のアラートと AlertNow のアラートを同期させる
