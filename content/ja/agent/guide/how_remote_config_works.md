@@ -11,7 +11,7 @@ further_reading:
 - link: /dynamic_instrumentation/?tab=configurationyaml#enable-remote-configuration
   tag: ドキュメント
   text: ダイナミックインスツルメンテーション
-- link: /security/cloud_workload_security/getting_started/?tab=kubernetes#overview
+- link: /security/cloud_workload_security/setup/?tab=kubernetes#overview
   tag: ドキュメント
   text: クラウドワークロードセキュリティの概要
 is_beta: true
