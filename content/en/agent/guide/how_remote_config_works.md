@@ -144,13 +144,12 @@ After you perform these steps, your Agent requests its configuration from Datado
 - [ASM 1-Click enablement, IP blocking, and attack pattern updates][8] are enabled.
 
 
-
-
 {{% /site-region %}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /getting_started/site/
 [2]: /help/
 [3]: /account_management/api-app-keys/
