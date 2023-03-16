@@ -124,11 +124,11 @@ Apply the role to the running Observability Pipelines process. This might be by 
       c. Emit the logs to the console.
     ```yaml
         sources:
-        cloudtrail:
-          type: aws_s3
-          region: ${REGION}
-          sqs:
-            queue_url: ${SQS_URL}
+          cloudtrail:
+            type: aws_s3
+            region: ${REGION}
+            sqs:
+              queue_url: ${SQS_URL}
       ```
 2. Replace `${REGION}` with the AWS account region. Replace `${SQS_URL}` with the HTTP URL provided in the SQS queue's **Details** section in the console.
 
