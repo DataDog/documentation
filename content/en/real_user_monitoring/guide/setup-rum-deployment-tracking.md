@@ -12,6 +12,9 @@ further_reading:
 - link: "/tracing/version_tracking"
   tag: "Documentation"
   text: "Use Version tags within Datadog APM to monitor deployments"
+- link: "https://www.datadoghq.com/blog/datadog-rum-deployment-tracking"
+  tag: "Blog"
+  text: "Troubleshoot faulty frontend deployments with Deployment Tracking in RUM"
 ---
 
 <div class="alert alert-warning">
