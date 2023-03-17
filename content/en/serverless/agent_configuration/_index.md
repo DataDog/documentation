@@ -45,7 +45,7 @@ The Agent's [main configuration file][1] is `datadog.yaml`. For the serverless A
 
 ### APM configuration
 
-| Env Variable              | Description                                                                                                                                                                                                                           |
+| Environment Variable              | Description                                                                                                                                                                                                                           |
 |---------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DD_APM_ENABLED`          | Set to true to enable the APM Agent. Default true.                                                                                                                                                                                    |
 | `DD_APM_ENV`              | The environment tag that Traces should be tagged with. If not set the value will be inherited, in order, from the top level "env" config option if set and then from the 'env:' tag if present in the 'tags' top level config option. |
