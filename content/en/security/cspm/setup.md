@@ -14,6 +14,9 @@ further_reading:
 - link: "security/cspm/frameworks_and_benchmarks"
   tag: "Documentation"
   text: "Learn about frameworks and industry benchmarks"
+- link: "/getting_started/cloud_security_management"
+  tag: "Documentation"
+  text: "Getting Started with Cloud Security Management"
 ---
 
 {{< site-region region="gov" >}}

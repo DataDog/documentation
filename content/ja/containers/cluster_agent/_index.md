@@ -2,7 +2,6 @@
 aliases:
 - /ja/agent/kubernetes/host_setup
 - /ja/agent/cluster_agent/
-- /ja/containers/cluster_agent/
 - /ja/containers/cluster_agent/event_collection
 - /ja/containers/cluster_agent/metadata_provider
 further_reading:

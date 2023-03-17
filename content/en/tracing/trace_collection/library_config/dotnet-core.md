@@ -179,7 +179,7 @@ Added in version `2.19.0`.<br>
 `DD_TRACE_CLIENT_IP_HEADER`
 : The IP header to be used for client IP collection, for example: `x-forwarded-for`. <br>
 Added in version `2.19.0`.<br>
-**Default**: Datadog parses the following: `"x-forwarded-for", "x-real-ip", "client-ip", "x-forwarded", "x-cluster-client-ip", "forwarded-for", "forwarded", "via", "true-client-ip"`. If several are present, none will be reported.<br>
+**Default**: Datadog parses the following: `"x-forwarded-for", "x-real-ip", "true-client-ip", "x-client-ip", "x-forwarded", "forwarded-for", "x-cluster-client-ip", "fastly-client-ip", "cf-connecting-ip", "cf-connecting-ipv6",`. If several are present, the first from the list to parse correctly will be used.<br>
 
 
 `DD_TAGS`
@@ -209,6 +209,10 @@ The following configuration variables are available **only** when using automati
 : **TracerSettings property**: `TraceEnabled`<br>
 Enables or disables all automatic instrumentation. Setting the environment variable to `false` completely disables the CLR profiler. For other configuration methods, the CLR profiler is still loaded, but traces will not be generated. Valid values are: `true` or `false`.<br>
 **Default**: `true`
+
+`DD_DBM_PROPAGATION_MODE`
+: Enables linking between data sent from APM and the Database Monitoring product when set to `'service'` or `'full'`. The `'service'` option enables the connection between DBM and APM services. The `'full'` option enables connection between database spans with database query events. Available for Postgres and MySQL.<br>
+**Default**: `'disabled'`
 
 `DD_HTTP_CLIENT_ERROR_STATUSES`
 : Sets status code ranges that will cause HTTP client spans to be marked as errors. <br>

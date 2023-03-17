@@ -17,7 +17,7 @@ further_reading:
 ---
 The Change graph shows you the change in a metric over a period of time:
 
-{{< img src="dashboards/widgets/change/change.png" alt="Change graph" >}}
+{{< img src="/dashboards/widgets/change/change_widget.png" alt="Example of a change widget for jvm.heap_memory metric" style="width:100%;" >}}
 
 ## Setup
 
@@ -41,19 +41,17 @@ The Change graph shows you the change in a metric over a period of time:
 8. Choose `ascending` or `descending` ordering.
 9. Choose whether to display the current value in the graph.
 
-### Display preference
+### Options
 
-Choose whether your widget uses a custom time frame or the dashboard's global time frame.
+#### Context links
 
-### Title
-
-Choose a custom title for your widget, or leave the form blank to use a generated title.
+[Context links][1] are enabled by default, and can be toggled on or off. Context links bridge dashboard widgets with other pages (in Datadog, or third-party).
 
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][1] for additional reference.
+This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][2] for additional reference.
 
-The dedicated [widget JSON schema definition][2] for the change widget is:
+The dedicated [widget JSON schema definition][3] for the change widget is:
 
 {{< dashboards-widgets-api >}}
 
@@ -61,5 +59,6 @@ The dedicated [widget JSON schema definition][2] for the change widget is:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /api/v1/dashboards/
-[2]: /dashboards/graphing_json/widget_json/
+[1]: /dashboards/guide/context-links/
+[2]: /api/latest/dashboards/
+[3]: /dashboards/graphing_json/widget_json/

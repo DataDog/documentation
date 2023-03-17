@@ -30,7 +30,7 @@ public_title: Firefly
 short_description: クラウドを規約に準拠させる
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
@@ -42,7 +42,7 @@ tile:
   - Category::AWS
   - Offering::Integration
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   configuration: README.md#Setup
   description: クラウドを規約に準拠させる
