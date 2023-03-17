@@ -43,7 +43,6 @@ The dedicated [widget JSON schema definition][3] for the scatter plot widget is:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /dashboards/guide/context-links/
 [2]: /api/v1/dashboards/
 [3]: /dashboards/graphing_json/widget_json/
