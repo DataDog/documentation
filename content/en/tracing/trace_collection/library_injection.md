@@ -10,7 +10,7 @@ aliases:
 
 There are two ways to instrument your application:
 * Injecting the instrumentation library, as described on this page; or
-* [Manually adding the instrumentation library in the application][2].
+* [Manually adding the instrumentation library in the application][1].
 
 How to inject the library, without touching the application code at all, varies depending on where and how your Agent and application are installed. Select the scenario that represents your environment:
 
@@ -21,12 +21,12 @@ With the [Admission Controller][1] approach, the Agent uses the Kubernetes Admis
 
 <div class="alert alert-warning">Library injection is applied on new pods only and does not have any impact on running pods.</div>
 
-To learn more about Kubernetes Admission Controller, read [Kubernetes Admission Controllers Reference][3].
+To learn more about Kubernetes Admission Controller, read [Kubernetes Admission Controllers Reference][2].
 
 ## Requirements
 
 * Kubernetes v1.14+
-* Datadog [Cluster Agent v7.40+][4] with Datadog Admission Controller enabled. **Note**: In Helm chart v2.35.0 and later, Datadog Admission Controller is activated by default in the Cluster Agent.
+* Datadog [Cluster Agent v7.40+][3] with Datadog Admission Controller enabled. **Note**: In Helm chart v2.35.0 and later, Datadog Admission Controller is activated by default in the Cluster Agent.
 * Applications in Java, JavaScript, or Python deployed on Linux with a supported architecture. Check the [corresponding container registry](#container-registries) for the complete list of supported architectures by language.
 
 
@@ -35,9 +35,9 @@ To learn more about Kubernetes Admission Controller, read [Kubernetes Admission 
 Datadog publishes instrumentation libraries images on gcr.io, Docker Hub, and AWS ECR:
 | Language   | gcr.io                              | hub.docker.com                              | gallery.ecr.aws                            |
 |------------|-------------------------------------|---------------------------------------------|-------------------------------------------|
-| Java       | [gcr.io/datadoghq/dd-lib-java-init][5]   | [hub.docker.com/r/datadog/dd-lib-java-init][6]   | [gallery.ecr.aws/datadog/dd-lib-java-init][7]   |
-| JavaScript | [gcr.io/datadoghq/dd-lib-js-init][8]     | [hub.docker.com/r/datadog/dd-lib-js-init][9]     | [gallery.ecr.aws/datadog/dd-lib-js-init][10]     |
-| Python     | [gcr.io/datadoghq/dd-lib-python-init][11] | [hub.docker.com/r/datadog/dd-lib-python-init][12] | [gallery.ecr.aws/datadog/dd-lib-python-init][13] |
+| Java       | [gcr.io/datadoghq/dd-lib-java-init][4]   | [hub.docker.com/r/datadog/dd-lib-java-init][5]   | [gallery.ecr.aws/datadog/dd-lib-java-init][6]   |
+| JavaScript | [gcr.io/datadoghq/dd-lib-js-init][7]     | [hub.docker.com/r/datadog/dd-lib-js-init][8]     | [gallery.ecr.aws/datadog/dd-lib-js-init][9]     |
+| Python     | [gcr.io/datadoghq/dd-lib-python-init][10] | [hub.docker.com/r/datadog/dd-lib-python-init][11] | [gallery.ecr.aws/datadog/dd-lib-python-init][12] |
 
 The `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_CONTAINER_REGISTRY` environment variable in the Datadog Cluster Agent configuration specifies the registry used by the Admission Controller. The default value is `gcr.io/datadoghq`.
 
@@ -90,9 +90,9 @@ To select your pods for library injection, annotate them with the following, cor
 | Python     | `admission.datadoghq.com/python-lib.version: "<lib-version>"` |
 
 The available library versions are listed in each container registry, as well as in the tracer source repositories for each language:
-- [Java][17]
-- [Javascript][18]
-- [Python][19]
+- [Java][13]
+- [Javascript][14]
+- [Python][15]
 
 **Note**: If you already have an application instrumented using version X of the library, and then use library injection to instrument using version Y of the same tracer library, the tracer does not break. Rather, the library version loaded first is used. Because library injection happens at the admission controller level prior to runtime, it takes precedent over manually configured libraries.
 
@@ -119,7 +119,7 @@ template:
 
 ### Step 3 - Tag your pods with Unified Service Tags
 
-With [Unified Service Tags][14], you can tie Datadog telemetry together and navigate seamlessly across traces, metrics, and logs with consistent tags. Set the Unified Service Tagging on both the deployment object and the pod template specs.
+With [Unified Service Tags][16], you can tie Datadog telemetry together and navigate seamlessly across traces, metrics, and logs with consistent tags. Set the Unified Service Tagging on both the deployment object and the pod template specs.
 Set Unified Service tags by using the following labels:
 
 ```yaml
@@ -173,28 +173,26 @@ If the injection was successful you can see an `init` container called `datadog-
 
 Or run `kubectl describe pod <my-pod>` to see the `datadog-lib-init` init container listed.
 
-The instrumentation also starts sending telemetry to Datadog (for example, traces to [APM][15]).
+The instrumentation also starts sending telemetry to Datadog (for example, traces to [APM][17]).
+
 
 [1]: /containers/cluster_agent/admission_controller/
-[2]: /tracing/trace_collection/
-[3]: https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/
-[4]: /containers/kubernetes/installation/?tab=helm
-[5]: http://gcr.io/datadoghq/dd-lib-java-init
-[6]: http://hub.docker.com/r/datadog/dd-lib-java-init
-[7]: http://gallery.ecr.aws/datadog/dd-lib-java-init
-[8]: http://gcr.io/datadoghq/dd-lib-js-init
-[9]: http://hub.docker.com/r/datadog/dd-lib-js-init
-[10]: http://gallery.ecr.aws/datadog/dd-lib-js-init
-[11]: http://gcr.io/datadoghq/dd-lib-python-init
-[12]: http://hub.docker.com/r/datadog/dd-lib-python-init
-[13]: http://gallery.ecr.aws/datadog/dd-lib-python-init
-[14]: /getting_started/tagging/unified_service_tagging/
-[15]: https://app.datadoghq.com/apm/traces
-[16]: /tracing/trace_collection/library_config/
-[17]: https://github.com/DataDog/dd-trace-java/releases
-[18]: https://github.com/DataDog/dd-trace-js/releases
-[19]: https://github.com/DataDog/dd-trace-py/releases
-
+[2]: https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/
+[3]: /containers/kubernetes/installation/?tab=helm
+[4]: http://gcr.io/datadoghq/dd-lib-java-init
+[5]: http://hub.docker.com/r/datadog/dd-lib-java-init
+[6]: http://gallery.ecr.aws/datadog/dd-lib-java-init
+[7]: http://gcr.io/datadoghq/dd-lib-js-init
+[8]: http://hub.docker.com/r/datadog/dd-lib-js-init
+[9]: http://gallery.ecr.aws/datadog/dd-lib-js-init
+[10]: http://gcr.io/datadoghq/dd-lib-python-init
+[11]: http://hub.docker.com/r/datadog/dd-lib-python-init
+[12]: http://gallery.ecr.aws/datadog/dd-lib-python-init
+[13]: https://github.com/DataDog/dd-trace-java/releases
+[14]: https://github.com/DataDog/dd-trace-js/releases
+[15]: https://github.com/DataDog/dd-trace-py/releases
+[16]: /getting_started/tagging/unified_service_tagging/
+[17]: https://app.datadoghq.com/apm/traces
 {{% /tab %}}
 
 {{% tab "Host" %}}
@@ -210,7 +208,7 @@ When both the Agent and your services are running on a host, real or virtual, Da
 **Note**: Injection on arm64, and injection with `musl` on Alpine Linux container images are not supported.
 ## Install the preload library
 
-1. Ensure your [Agent is running][6].
+1. Ensure your [Agent is running][2].
 
 2. Install the library with one of the following sets of commands, where `<LANG>` is one of `java`, `js`, `dotnet`, or `all`:
 
@@ -337,7 +335,7 @@ Set `service_language` to one of the following values:
 
 In this configuration file, the value of `version` is always `1`. This refers to the configuration schema version in use, not the version of the content.
 
-The following table shows how the injection configuration values map to the corresponding [tracing library configuration options][2]:
+The following table shows how the injection configuration values map to the corresponding [tracing library configuration options][4]:
 
 | Injection | Java tracer | NodeJS tracer | .NET tracer |
 | --------- | ----------- | ------------- | ----------- |
@@ -394,15 +392,14 @@ DD_CONFIG_SOURCES=BASIC dotnet <SERVICE_1>.dll &
 DD_CONFIG_SOURCES=LOCAL:/etc/<SERVICE_2>/config.yaml;BASIC dotnet <SERVICE_2>.dll &
 ```
 
-Exercise your application to start generating telemetry data, which you can see as [traces in APM][4].
+Exercise your application to start generating telemetry data, which you can see as [traces in APM][5].
+
 
 [1]: https://app.datadoghq.com/account/settings#agent/overview
-[2]: /tracing/trace_collection/library_config/
+[2]: /agent/guide/agent-commands/?tab=agentv6v7#start-the-agent
 [3]: https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu
-[4]: https://app.datadoghq.com/apm/traces
-[5]: https://bugzilla.redhat.com/show_bug.cgi?id=1792506
-[6]: /agent/guide/agent-commands/?tab=agentv6v7#start-the-agent
-
+[4]: /tracing/trace_collection/library_config/
+[5]: https://app.datadoghq.com/apm/traces
 {{% /tab %}}
 
 {{% tab "Agent on host, app in containers" %}}
@@ -423,7 +420,7 @@ Any newly started processes are intercepted and the specified instrumentation li
 
 ## Install the preload library
 
-1. Ensure your [Agent is running][6].
+1. Ensure your [Agent is running][3].
 
 2. Install the library with one of the following sets of commands, where `<LANG>` is one of `java`, `js`, `dotnet`, or `all`:
 
@@ -544,7 +541,7 @@ Set `service_language` to one of the following values:
 
 In this configuration file, the value of `version` is always `1`. This refers to the configuration schema version in use, not the version of the content.
 
-The following table shows how the injection configuration values map to the corresponding [tracing library configuration options][3]:
+The following table shows how the injection configuration values map to the corresponding [tracing library configuration options][4]:
 
 | Injection | Java tracer | NodeJS tracer | .NET tracer |
 | --------- | ----------- | ------------- | ----------- |
@@ -589,16 +586,15 @@ If they are not specified, `DD_ENV` uses the `env` value set in the `/etc/datado
 
 Start your Agent and launch your containerized services as usual.
 
-Exercise your application to start generating telemetry data, which you can see as [traces in APM][4].
+Exercise your application to start generating telemetry data, which you can see as [traces in APM][5].
+
 
 
 [1]: https://app.datadoghq.com/account/settings#agent/overview
 [2]: https://docs.docker.com/engine/install/ubuntu/
-[3]: /tracing/trace_collection/library_config/
-[4]: https://app.datadoghq.com/apm/traces
-[5]: https://bugzilla.redhat.com/show_bug.cgi?id=1792506
-[6]: /agent/guide/agent-commands/?tab=agentv6v7#start-the-agent
-
+[3]: /agent/guide/agent-commands/?tab=agentv6v7#start-the-agent
+[4]: /tracing/trace_collection/library_config/
+[5]: https://app.datadoghq.com/apm/traces
 {{% /tab %}}
 
 {{% tab "Agent and app in separate containers" %}}
@@ -611,7 +607,7 @@ Any newly started processes are intercepted and the specified instrumentation li
 
 ## Requirements
 
-- [Docker Engine][2]
+- [Docker Engine][1]
 
 **Note**: Injection on arm64, and injection with `musl` on Alpine Linux container images are not supported.
 
@@ -650,7 +646,7 @@ Any newly started processes are intercepted and the specified instrumentation li
    repo_gpgcheck=1
    gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
    ```
-   **Note**: Due to a [bug in dnf][5], on RedHat/CentOS 8.1 set `repo_gpgcheck=0` instead of `1`.
+   **Note**: Due to a [bug in dnf][2], on RedHat/CentOS 8.1 set `repo_gpgcheck=0` instead of `1`.
 
 2. Update the yum cache and install the library:
    ```sh
@@ -856,11 +852,11 @@ Launch your containerized services as usual.
 Exercise your application to start generating telemetry data, which you can see as [traces in APM][4].
 
 
-[2]: https://docs.docker.com/engine/install/ubuntu/
+
+[1]: https://docs.docker.com/engine/install/ubuntu/
+[2]: https://bugzilla.redhat.com/show_bug.cgi?id=1792506
 [3]: /tracing/trace_collection/library_config/
 [4]: https://app.datadoghq.com/apm/traces
-[5]: https://bugzilla.redhat.com/show_bug.cgi?id=1792506
-
 {{% /tab %}}
 
 
@@ -869,9 +865,9 @@ Exercise your application to start generating telemetry data, which you can see 
 
 ## Configuring the library
 
-The supported features and configuration options for the tracing library are the same for library injection as for other installation methods, and can be set with environment variables. Read the [Datadog Library configuration page][16] for your language for more details.
+The supported features and configuration options for the tracing library are the same for library injection as for other installation methods, and can be set with environment variables. Read the [Datadog library configuration page][2] for your language for more details.
 
-For example, you can turn on [Application Security Monitoring][4] or [Continuous Profiler][3], each of which may have billing impact:
+For example, you can turn on [Application Security Monitoring][3] or [Continuous Profiler][4], each of which may have billing impact:
 
 - For **Kubernetes**, set the `DD_APPSEC_ENABLED` or `DD_PROFILING_ENABLED` container environment variables to `true`.
 
@@ -888,7 +884,7 @@ For example, you can turn on [Application Security Monitoring][4] or [Continuous
   Only configuration keys that start with `DD_` can be set in the injection config source `additional_environment_variables` section.
 
 
-[2]: /tracing/trace_collection/
-[3]: /profiler/enabling/java/?tab=environmentvariables#installation
-[4]: /security/application_security/enabling/java/?tab=kubernetes#get-started
-[16]: /tracing/trace_collection/library_config/
+[1]: /tracing/trace_collection/
+[2]: /tracing/trace_collection/library_config/
+[3]: /security/application_security/enabling/java/?tab=kubernetes#get-started
+[4]: /profiler/enabling/java/?tab=environmentvariables#installation
