@@ -87,26 +87,7 @@ Security Signals are automatically created when Datadog detects meaningful attac
 
 ## Built-in protection
 
-<div class="alert alert-info"><strong>Beta: IP and user blocking</strong><br>
-If your service is running with <a href="/agent/guide/how_remote_config_works/#enabling-remote-configuration">an Agent with Remote Configuration enabled and a tracing library version that supports it</a>, you can block attackers from the Datadog UI without additional configuration of the Agent or tracing libraries.</div>
-
-Datadog ASM offers built-in protection capabilities to slow down attacks and attackers. 
-
-IP and user blocking actions are implemented through the [tracing libraries][11], not introducing any new dependencies in your stack.
-Blocks are saved in the Datadog platform, automatically and securely fetched by the [Datadog Agent][14], deployed in your infrastructure, and applied to your application. For details, read [How Remote Configuration Works][14].
-
-You can block attackers that are flagged in ASM Security Signals temporarily or permanently. In the Signals Explorer, click into a signal to see what users and IP addresses are generating the signal, and optionally block them.
-
-{{< img src="/security/application_security/appsec-block-user-ip.png" alt="A security signal panel in Datadog ASM, allowing to block the attackers' IPs" width="75%">}}
-
-
-From there, all ASM-protected services block incoming requests performed by the blocked IP or user, for the specified duration. All blocked traces are tagged with `security_response.block_ip` and displayed in the [Trace Explorer][15]. Services where ASM is disabled aren't protected.
-
-{{% asm-protection-page-configuration %}}
-
-{{< img src="/security/application_security/asm-blocking-page-html.png" alt="The page displayed as ASM blocks requests originating from blocked IPs" width="75%" >}}
-
-For more information, read [Threat Monitoring and Protection][1].
+{{% asm-protect %}}
 
 
 ## Threat monitoring coverage
@@ -117,7 +98,7 @@ Datadog ASM categorizes attack attempts into different threat types:
 * **Contextualized attacks** correlate the attack attempts performed on the service with a matching business-logic. For example, SQL injection patterns on a service performing SQL statements.
 * A **Vulnerability is triggered** when an attack attempt gives evidence that a vulnerability has been successfully exploited, after matching known attack patterns.
 
-Datadog ASM includes over 100 attack patterns that help protect against [many different kinds of attacks][16], including the following vulnerabilities:
+Datadog ASM includes over 100 attack patterns that help protect against [many different kinds of attacks][14], including the following vulnerabilities:
 
 * SQL injections
 * Code injections
@@ -130,13 +111,13 @@ Datadog ASM includes over 100 attack patterns that help protect against [many di
 
 <div class="alert alert-info">Risk Management through vulnerability detection is in beta.</a></div>
 
-Datadog ASM offers built-in detection capabilities that warn you about the vulnerabilities detected in your open source dependencies. Details of that information are shown in the [Vulnerability Explorer][17], identifying the severity, affected services, potentially vulnerable infrastructure, and remediation instructions to solve the surfaced risks.
+Datadog ASM offers built-in detection capabilities that warn you about the vulnerabilities detected in your open source dependencies. Details of that information are shown in the [Vulnerability Explorer][15], identifying the severity, affected services, potentially vulnerable infrastructure, and remediation instructions to solve the surfaced risks.
 
 For more information, read [Risk Management][5].
 
 ## How Datadog ASM protects against Log4Shell
 
-Datadog ASM identifies Log4j Log4Shell attack payloads and provides visibility into vulnerable apps that attempt to remotely load malicious code. When used in tandem with the rest of [Datadog's Cloud SIEM][18], you can investigate to identify common post-exploitation activity, and proactively remediate potentially vulnerable Java web services acting as an attack vector.
+Datadog ASM identifies Log4j Log4Shell attack payloads and provides visibility into vulnerable apps that attempt to remotely load malicious code. When used in tandem with the rest of [Datadog's Cloud SIEM][16], you can investigate to identify common post-exploitation activity, and proactively remediate potentially vulnerable Java web services acting as an attack vector.
 
 ## Further Reading
 
@@ -155,8 +136,6 @@ Datadog ASM identifies Log4j Log4Shell attack payloads and provides visibility i
 [11]: /security/application_security/threats/setup_and_configure/#exclude-specific-parameters-from-triggering-detections
 [12]: https://owasp.org/www-project-modsecurity-core-rule-set/
 [13]: /security/default_rules/#cat-application-security
-[14]: /agent/guide/how_remote_config_works/
-[15]: https://app.datadoghq.com/security/appsec/traces?query=%40appsec.blocked%3Atrue
-[16]: https://app.datadoghq.com/security/appsec/event-rules
-[17]: https://app.datadoghq.com/security/appsec/vm
-[18]: /security/cloud_siem/
+[14]: https://app.datadoghq.com/security/appsec/event-rules
+[15]: https://app.datadoghq.com/security/appsec/vm
+[16]: /security/cloud_siem/
