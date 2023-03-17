@@ -1,8 +1,6 @@
 ---
 title: Intelligent Test Runner for .NET
 kind: documentation
-aliases:
-  - /continuous_integration/intelligent_test_runner/dotnet
 further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
