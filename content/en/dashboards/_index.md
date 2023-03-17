@@ -170,7 +170,7 @@ Use this option to copy the entire dashboard to a new dashboard. You are prompte
 
 #### Copy, import, or export dashboard JSON
 
-From an individual dashboard, copy, import, or export a dashboard's JSON using the settings cog (upper right) with the following options:
+From an individual dashboard, copy, import, or export a dashboard's JSON using the export icon (upper right) with the following options:
 
 | Option                          | Description                                                                                                                                                                |
 |---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
