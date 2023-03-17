@@ -187,7 +187,6 @@ If you've written a Datadog library and would like to add it to this page, send 
 [29]: https://github.com/cvent/dogscaler
 [30]: https://github.com/wimactel/FreeSwitch-DataDog-Metrics
 [31]: https://github.com/wimactel
-[32]: https://github.com/bithauschile/datadog-ga
 [34]: /logs/guide/collect-heroku-logs/
 [35]: https://github.com/ozinc/heroku-datadog-drain
 [36]: https://web.oz.com/
