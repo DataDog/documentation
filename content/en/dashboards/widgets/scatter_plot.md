@@ -30,7 +30,8 @@ The scatter plot visualization allows you to graph a chosen scope over two diffe
 
 #### Context links
 
-[Context links][1] are enabled by default, and can be toggled on or off. Context links bridge dashboard widgets with other pages in Datadog, or third-party applications.
+[Context links][1] are enabled by default, and can be toggled on or off. Context links bridge dashboard widgets with other pages in Datadog, or third party applications.
+
 ## API
 
 This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][2] for additional reference.
