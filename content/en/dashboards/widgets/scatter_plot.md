@@ -20,7 +20,7 @@ The scatter plot visualization allows you to graph a chosen scope over two diffe
 ### Configuration
 
 1. Select a metric and an aggregation for the X and Y axis.
-1. Define the scope for each point of the scatter plot, such as `host`, `service`, `app`, `region`, etc.
+1. Define the scope for each point of the scatter plot, such as `host`, `service`, `app`, or `region`.
 1. Optional: enable a color-by tag.
 1. Optional: set X and Y axis controls.
 1. Choose whether your widget has a custom timeframe or the dashboard's global timeframe.
@@ -30,7 +30,7 @@ The scatter plot visualization allows you to graph a chosen scope over two diffe
 
 #### Context links
 
-[Context links][1] are enabled by default, and can be toggled on or off. Context links bridge dashboard widgets with other pages (in Datadog, or third-party).
+[Context links][1] are enabled by default, and can be toggled on or off. Context links bridge dashboard widgets with other pages in Datadog, or third-party applications.
 ## API
 
 This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][2] for additional reference.
