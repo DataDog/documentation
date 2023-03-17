@@ -60,7 +60,7 @@ The Agent's [main configuration file][1] is `datadog.yaml`. For the serverless A
 
 | Environment Variable             | Description                                                                                                                                                                                                                                                                              |
 |--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `DD_SKIP_SSL_VALIDATION` | Setting this option to "true" tells the Agent to skip validation of SSL/TLS certificates. Defaults: false                                                                                                                                                                                |
+| `DD_SKIP_SSL_VALIDATION` | Set this option to `true` to tell the Agent to skip validation of SSL/TLS certificates. Defaults to `false`.                                                                                                                                                                                |
 | `DD_MIN_TLS_VERSION`     | This option defines the minimum TLS version that will be used when submitting data to the Datadog intake specified in "site" or "dd_url". This parameter defaults to "tlsv1.2". Possible values are: tlsv1.0, tlsv1.1, tlsv1.2, tlsv1.3; values are case-insensitive. Default: "tlsv1.2" |
 
 ### Proxy settings
