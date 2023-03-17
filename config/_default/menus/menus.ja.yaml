@@ -6129,6 +6129,11 @@ main:
   parent: containers_amazon_ecs
   url: containers/amazon_ecs/tags/
   weight: 503
+- identifier: containers_amazon_ecs_data_collected
+  name: 収集データ
+  parent: containers_amazon_ecs
+  url: containers/amazon_ecs/data_collected/
+  weight: 504
 - identifier: ecs_fargate
   name: AWS Fargate
   parent: コンテナ

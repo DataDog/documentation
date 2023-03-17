@@ -139,7 +139,7 @@ Agent가 설치되면 [Infrastructure List][18]에 뼈다귀 아이콘 그래픽
 
 #### EC2 시작 유형의 ECS
 
-[Amazon ECS 설명서][25]를 활용해 ECS 클러스터 내 EC2 인스턴스에서 [Datadog Docker Agent][26]를 실행하세요. Datadog 계정으로 리포트하는 메트릭과 이벤트를 알아보려면 [Amazon ECS on EC2][27]를 참조하시기 바랍니다.
+[Amazon ECS 설명서][25]를 활용해 ECS 클러스터 내 EC2 인스턴스에서 [Datadog Docker Agent][26]를 실행하세요. Datadog 계정으로 리포트하는 메트릭과 이벤트를 알아보려면 [Amazon ECS Data Collection 설명서][27]를 참조하시기 바랍니다.
 
 #### Fargate 시작 유형의 ECS
 
@@ -216,7 +216,7 @@ Datadog 서버리스 애플리케이션을 실행하는 AWS Lambda 함수에서 
 [24]: https://aws.amazon.com/fargate/
 [25]: /kr/agent/amazon_ecs/?tab=awscli
 [26]: /kr/agent/docker/?tab=standard
-[27]: /kr/integrations/amazon_ecs
+[27]: /kr/agent/amazon_ecs/data_collected/
 [28]: /kr/integrations/ecs_fargate/?tab=fluentbitandfirelens
 [29]: /kr/agent/kubernetes/distributions/?tab=helm#EKS
 [30]: /kr/agent/kubernetes/?tab=helm

@@ -9,6 +9,9 @@ further_reading:
 - link: /agent/amazon_ecs/apm/
   tag: Documentation
   text: Recueillir les traces de vos applications
+- link: /agent/amazon_ecs/data_collected/#metriques
+  tag: Documentation
+  text: Recueillir des métriques ECS
 - link: https://www.datadoghq.com/blog/amazon-ecs-anywhere-monitoring/
   tag: Blog
   text: Ajout de la prise en charge d'Amazon ECS Anywhere
