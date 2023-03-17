@@ -69,13 +69,22 @@ Data for suspicious requests is kept for 90 days. The underlying trace data is k
 
 ## Data privacy
 
-There are multiple methods used to avoid your sensitive information being indexed. To take further action, you can set up [custom and static scrubbers][8], and use the [passlist][9].
+By default, ASM collects information from suspicious requests to help you understand why the request was flagged as suspicious. Before sending the data, ASM scans it for patterns and keywords that indicate that the data is sensitive. If the data is deemed sensitive, it is replaced with a <redacted> flag, so you observe that although the request was suspicious, the request data could not be collected because of data security concerns.
 
+The following are examples of data that are flagged as sensitive by default:
+* `pwd`, `password`, `ipassword`, `pass_phrase`
+* `secret`
+* `key`, `api_key`, `private_key`, `public_key`
+* `token`
+* `consumer_id`, `consumer_key`, `consumer_secret`
+* `sign`, `signed`, `signature`
+* `bearer`
+* `authorization`
+* `BEGIN PRIVATE KEY`
+* `ssh-rsa`
 
-**Note:** Datadog ASM does not automatically obfuscate sensitive information or PII. To keep this sensitive data from being sent to Datadog, [configure the Datadog Agent or Tracer for data security][8].
-
-Contact Support to delete sensitive data that may have been indexed.
-
+To configure the information redacted by ASM, refer to the [data security configuration][25]
+  
 ## Threat detection methods
 
 Datadog uses multiple pattern sources, including the [OWASP ModSecurity Core Rule Set][10] to detect known threats and vulnerabilities in HTTP requests. When an HTTP request matches one of [the OOTB detection rules][11], a security signal is generated in Datadog.
@@ -166,3 +175,4 @@ Datadog ASM identifies Log4j Log4Shell attack payloads and provides visibility i
 [22]: /security/application_security/threats/
 [23]: /agent/guide/how_remote_config_works/
 [24]: /security/application_security/enabling/serverless/
+[25]: /security/application_security/threats/setup_and_configure/#data-security-considerations
