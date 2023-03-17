@@ -109,7 +109,7 @@ From there, all ASM-protected services block incoming requests performed by the 
 For more information, read [Threat Monitoring and Protection][22].
 
 
-## Attack Attempt Qualification
+## Attack attempt qualification
 
 Leveraging distributed tracing information, attacks attempts are qualified as safe, unknown, or harmful. 
 * Attack attempts qualified as safe cannot breach your application, for example, when a PHP injection attack targets a service written in Java. 
