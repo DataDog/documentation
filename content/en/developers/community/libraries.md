@@ -188,7 +188,6 @@ If you've written a Datadog library and would like to add it to this page, send 
 [30]: https://github.com/wimactel/FreeSwitch-DataDog-Metrics
 [31]: https://github.com/wimactel
 [32]: https://github.com/bithauschile/datadog-ga
-[33]: https://blog.bithaus.cl/2016/04/20/realtime-google-analytics-metrics-in-datadog
 [34]: /logs/guide/collect-heroku-logs/
 [35]: https://github.com/ozinc/heroku-datadog-drain
 [36]: https://web.oz.com/
