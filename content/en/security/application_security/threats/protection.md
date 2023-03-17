@@ -13,16 +13,16 @@ If your service is running <a href="/agent/guide/how_remote_config_works/#enabli
 
 ## Overview
 
-Application Security Management (ASM) Protect enables you to take blocking action to slow down attacks and attackers. Suspicious requests are blocked in real-time by the Datadog tracing libraries. Blocks are saved in the Datadog platform, automatically and securely fetched by the Datadog Agent, deployed in your infrastructure, and applied to your services.
+Application Security Management (ASM) Protect enables you to slow down attacks and attackers by _blocking_ them. Suspicious requests are blocked in real-time by the Datadog tracing libraries. Blocks are saved in the Datadog platform, automatically and securely fetched by the Datadog Agent, deployed in your infrastructure, and applied to your services.
 
 
 ## Prerequisites 
 
 To leveraging protection capabilities for your service:
 
+- [Update your Datadog Agent][3] to at least version 7.41.1.
 - [Enable ASM][1].
 - [Enable Remote Configuration][2].
-- [Update your Datadog Agent][3] to at least version 7.41.1.
 - Update your tracing library to the appropriate minimum version needed to turn on protection and the supported capabilities:
 
   |                        | Java      | .NET      | NodeJS    | Go        | Python    |
@@ -53,7 +53,7 @@ You can use the _Passlist_ to permanently allow an IP address, or range of addre
 
 ## Blocking suspicious requests with In-App WAF
 
-ASM In-App WAF combines the detection techniques of perimeter-based WAFs (web application firewalls) with the rich context provided by the Datadog, helping your teams protect their systems with confidence.
+ASM In-App WAF (web application firewall) combines the detection techniques of perimeter-based WAFs with the rich context provided by Datadog, helping your teams protect their systems with confidence.
 
 Because ASM is aware of an application's routes, protection can be applied granularly to specific services, and not necessarily across all applications and traffic. This contextual efficiency reduces your inspection effort, and it reduces the false positive rate compared to a perimeter WAF. There is no learning period, because most web frameworks provide a structured map of routes. ASM can help your team roll out protections against zero-day vulnerabilities automatically soon after the vulnerability is disclosed, while targeting vulnerable applications, limiting the risk of false positives.
 
