@@ -36,6 +36,7 @@ We currently support integrations with:
 
 {{< partial name="rum/rum-feature-flag-tracking.html" >}}
 
+</br>
 
 Feature flags will show up in the context of events where they are evaluated, meaning they should show up on the views that the feature flag code logic is run on.
 
