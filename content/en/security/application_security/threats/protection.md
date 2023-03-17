@@ -93,7 +93,7 @@ View blocked suspicious requests in the [Trace Explorer][11] by filtering on the
 [5]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Application%20Security%22&column=time&order=desc&product=appsec&view=signal
 [6]: https://app.datadoghq.com/security/appsec/traces?query=%40appsec.blocked%3Atrue
 [7]: https://app.datadoghq.com/security/appsec/denylist
-[8]: https://app.datadoghq.com/security/configuration/asm/passlist
-[9]: https://app.datadoghq.com/security/configuration/asm/in-app-waf
+[8]: https://app.datadoghq.com/security/appsec/passlist
+[9]: https://app.datadoghq.com/security/appsec/in-app-waf
 [10]: /security/application_security/threats/inapp_waf_rules/
 [11]: https://app.datadoghq.com/security/appsec/traces
