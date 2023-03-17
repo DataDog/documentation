@@ -12,7 +12,7 @@ Para cambiar el Datadog Agent a una versión principal anterior, sigue las instr
 **Notas**:
 
 * Estas instrucciones solo son válidas para el Datadog Agent 6.x y versiones posteriores.
-* Las instrucciones que aparecen a continuación para las herramientas de gestión de configuración solo funcionan con la versión principal más reciente de estas: v4.x para la guía paso a paso de Chef, v3.x para el módulo de Puppet y v4.x para el rol de Ansible. Si utilizas una versión anterior, consulta la documentación de esa versión en los repositorios de herramientas: [Guía paso a paso de Chef v3.x][2], [Módulo de  Puppet v2.x][3] o [Rol de Ansible v3.x] [4].
+* Las instrucciones que aparecen a continuación para las herramientas de gestión de configuración solo funcionan con la versión principal más reciente de estas: v4.x para la guía paso a paso de Chef, v3.x para el módulo de Puppet y v4.x para el rol de Ansible. Si utilizas una versión anterior, consulta la documentación de esa versión en los repositorios de herramientas: [Guía paso a paso de Chef v3.x][2], [Módulo de Puppet v2.x][3] o [Rol de Ansible v3.x][4].
 
 ## Debian/Ubuntu
 
