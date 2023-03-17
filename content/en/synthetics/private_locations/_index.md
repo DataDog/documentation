@@ -176,7 +176,9 @@ docker run --rm -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetic
 
 This command starts a Docker container and makes your private location ready to run tests. **Datadog recommends running the container in detached mode with proper restart policy.**
 
-<div class="alert alert-info">You can upload custom root certificates to your private locations to have your API and browser tests perform SSL handshake using your own `.pem` files with the <a href="https://hub.docker.com/r/datadog/synthetics-private-location-worker">Synthetics Private Location Worker</a> version 1.5.3 or later.</div>
+#### Root certificates
+
+You can upload custom root certificates to your private locations to have your API and browser tests perform the SSL handshake using your own `.pem` files.
 
 When spinning up your private location containers, mount the relevant certificate `.pem` files to `/etc/datadog/certs` in the same way you mount your private location configuration file. These certificates are considered trusted CA and are used at test runtime.
 
@@ -204,7 +206,9 @@ When spinning up your private location containers, mount the relevant certificat
     docker-compose -f docker-compose.yml up
     ```
 
-<div class="alert alert-info">You can upload custom root certificates to your private locations to have your API and browser tests perform SSL handshake using your own `.pem` files with the <a href="https://hub.docker.com/r/datadog/synthetics-private-location-worker">Synthetics Private Location Worker</a> version 1.5.3 or later.</div>
+#### Root certificates
+
+You can upload custom root certificates to your private locations to have your API and browser tests perform the SSL handshake using your own `.pem` files.
 
 When spinning up your private location containers, mount the relevant certificate `.pem` files to `/etc/datadog/certs` in the same way you mount your private location configuration file. These certificates are considered trusted CA and are used at test runtime.
 
