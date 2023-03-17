@@ -159,7 +159,7 @@ Il existe deux façons de détecter des données manquantes :
 {{< tabs >}}
 {{% tab "Monitors basés sur une métrique" %}}
 
-Utilisez l'option `Do not notify` pour ne pas être notifié en cas d'absence de données ou `Notify` pour être  notifié en cas d'absence de données pendant plus de `N` minutes.
+Utilisez l'option `Do not notify` pour ne pas être notifié en cas d'absence de données ou `Notify` pour être notifié en cas d'absence de données pendant plus de `N` minutes.
 
 Vous recevez une notification si des données manquantes ou si aucune donnée n'est manquante. La notification est envoyée si aucune donnée n'a été reçue au cours de l'intervalle configuré.
 
