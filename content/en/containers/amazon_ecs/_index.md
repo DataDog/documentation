@@ -4,6 +4,7 @@ kind: documentation
 aliases:
   - /integrations/amazon_ecs/
   - /agent/amazon_ecs/
+  - /containers/amazon_ecs/data_collected
 further_reading:
 - link: "/agent/amazon_ecs/logs/"
   tag: "Documentation"
