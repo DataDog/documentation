@@ -148,7 +148,7 @@ openssl s_client -connect intake.logs.datadoghq.com:10516
 For GnuTLS, run the following command:
 
 ```shell
-gnutls-cli intake.logs.datadoghq.com 10516
+gnutls-cli intake.logs.datadoghq.com:10516
 ```
 
 And then by sending a log like the following:

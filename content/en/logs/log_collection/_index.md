@@ -221,13 +221,13 @@ You can send logs to Datadog platform over HTTP. Refer to the [Datadog Log HTTP 
 You can manually test your connection using OpenSSL, GnuTLS, or another SSL/TLS client. For GnuTLS, run the following command:
 
 ```shell
-gnutls-cli intake.logs.datadoghq.com 10514
+gnutls-cli intake.logs.datadoghq.com:10516
 ```
 
 For OpenSSL, run the following command:
 
 ```shell
-openssl s_client -connect intake.logs.datadoghq.com 10514
+openssl s_client -connect intake.logs.datadoghq.com:10516
 ```
 
 You must prefix the log entry with your [Datadog API Key][1] and add a payload.
@@ -250,13 +250,13 @@ Your payload, or `Log sent directly using TLS` as written in the example, can be
 You can manually test your connection using OpenSSL, GnuTLS, or another SSL/TLS client. For GnuTLS, run the following command:
 
 ```shell
-gnutls-cli tcp-intake.logs.datadoghq.eu 443
+gnutls-cli tcp-intake.logs.datadoghq.eu:443
 ```
 
 For OpenSSL, run the following command:
 
 ```shell
-openssl s_client -connect tcp-intake.logs.datadoghq.eu 443
+openssl s_client -connect tcp-intake.logs.datadoghq.eu:443
 ```
 
 You must prefix the log entry with your [Datadog API Key][1] and add a payload.
