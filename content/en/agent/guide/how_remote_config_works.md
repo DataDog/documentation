@@ -157,7 +157,7 @@ After you perform these steps, your Agent requests its configuration from Datado
 [6]: /tracing/trace_pipeline/ingestion_controls/#managing-ingestion-for-all-services-at-the-agent-level
 [7]: /dynamic_instrumentation/?tab=configurationyaml#enable-remote-configuration
 [8]: /security/application_security/how-appsec-works/#built-in-protection
-[9]: /account_management/rbac/permissions
+[9]: /account_management/rbac/permissions#access-management
 [10]: /observability_pipelines/#observability-pipelines-worker
 
 
