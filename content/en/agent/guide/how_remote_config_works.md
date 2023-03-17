@@ -78,7 +78,7 @@ The following products and features are supported with Remote Config:
 ### Observability Pipelines (OP)
 <div class="alert alert-info">This feature is in private beta.</div>
 
-- **Remotely deploy and update [Observability Pipelines Workers (OPW)][10]**: Build and edit pipelines in the Datadog UI,  rolling out your configuration changes to OPW instances running in your environment.
+- **Remotely deploy and update [Observability Pipelines Workers][10] (OPW)**: Build and edit pipelines in the Datadog UI,  rolling out your configuration changes to OPW instances running in your environment.
 
 ## Security Considerations
  
