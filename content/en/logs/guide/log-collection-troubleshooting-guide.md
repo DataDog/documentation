@@ -26,12 +26,19 @@ Changes in the configuration of the `datadog-agent` won't be taken into account 
 
 ## Outbound traffic on port 10516 is blocked
 
-The Datadog Agent sends its logs to Datadog over tcp via port 10516. If that connection is not available, logs fail to be sent and an error is recorded in the `agent.log` file to that effect.
+The Datadog Agent sends its logs to Datadog over TCP using port 10516. If that connection is not available, logs fail to be sent and an error is recorded in the `agent.log` file to that effect.
 
-Test manually your connection by running a telnet or openssl command like so (port 10514 would work too, but is less secure):
+You can manually test your connection using OpenSSL, GnuTLS, or another SSL/TLS client. For OpenSSL, run the following command:
 
-* `openssl s_client -connect intake.logs.datadoghq.com:10516`
-* `telnet intake.logs.datadoghq.com 10514`
+```shell
+openssl s_client -connect intake.logs.datadoghq.com:10516
+```
+
+For GnuTLS, run the following command:
+
+```shell
+gnutls-cli intake.logs.datadoghq.com 10516
+```
 
 And then by sending a log like the following:
 
