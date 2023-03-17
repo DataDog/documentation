@@ -35,7 +35,7 @@ Get a list of CSPM findings.
 
 #### Query parameters
 
-| Parameter                       | Type             | Description                                                                                                                                 |
+| Field                       | Type             | Description                                                                                                                                 |
 |---------------------------------|------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
 | `filter[evaluation]`            | string           | Set to `pass` to return only pass findings. Set to `fail` to return failed findings.                                                        |
 | `filter[evaluation_changed_at]` | integer          | Return findings that have changed from pass to fail or vice versa on a specified date (unix ms) or date range (using comparison operators). |
@@ -158,7 +158,7 @@ Get the full details for a finding.
 
 #### Path parameters
 
-| Name         | Type   | Description            |
+| Field         | Type   | Description            |
 |--------------|--------|------------------------|
 | `finding_id` | string | The ID of the finding. |
 
