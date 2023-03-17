@@ -8,9 +8,8 @@ further_reading:
   text: "Application Security Management with Datadog"
 ---
 
-{{< callout btn_hidden="true" >}}
-  ASM Protect capabilities&mdash;IP blocking, user blocking, and suspicious request blocking (In-App WAF)&mdash;are in beta. If your service is running <a href="/agent/guide/how_remote_config_works/#enabling-remote-configuration">an Agent with Remote Configuration enabled and a tracing library version that supports it</a>, you can block attacks and attackers from the Datadog UI without additional configuration of the Agent or tracing libraries.
-{{< /callout >}} 
+<div class="alert alert-info"><strong>Beta: IP blocking, user blocking, and suspicious request blocking (In-App WAF)</strong><br>
+If your service is running <a href="/agent/guide/how_remote_config_works/#enabling-remote-configuration">an Agent with Remote Configuration enabled and a tracing library version that supports it</a>, you can block attacks and attackers from the Datadog UI without additional configuration of the Agent or tracing libraries.</div>
 
 ## Overview
 
