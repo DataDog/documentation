@@ -23,7 +23,7 @@ The Agent's [main configuration file][1] is `datadog.yaml`. For the serverless A
 | `DD_URL`                       | Alias for `DD_DD_URL`. Ignored if `DD_DD_URL` is already set.                                                                                                                                                      |
 | `DD_TRACE_ENABLED`             | Enables trace collection. Defaults to `true`. Fore more information about additional trace collection environment variables.                                                                                       |
 | `DD_TAGS`                      | List of tags. Attached in-app to every metric, event, log, trace, and service check emitted by this Agent.                                                                                                         |
-| `DD_TAG_VALUE_SPLIT_SEPARATOR` | Split tag values according to a given separator. Only applies to host tags, and tags coming from container integrations. It does not apply to tags on dogstatsd metrics, and tags collected by other integrations. |
+| `DD_TAG_VALUE_SPLIT_SEPARATOR` | Split tag values according to a given separator. Only applies to host tags, and tags coming from container integrations. It does not apply to tags on DogStatsD metrics, or tags collected by other integrations. |
 |
 
 ### Log collection configuration
