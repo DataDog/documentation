@@ -18,7 +18,7 @@ further_reading:
 
 [Universal Service Monitoring][1] discovers services using popular container tags (such as `app`, `short_image`, and `kube_deployment`) and generates entries in the [Service Catalog][2] for those services. 
 
-You can access request, error, and duration metrics in Datadog for both inbound and outbound traffic on all services discovered with Universal Service Monitoring. These service health metrics that are useful for creating alerts, [tracking deployments][11], and getting started with [service level objectives (SLOs)][3] so you can get broad visibility into all services running on your infrastructure. 
+You can access request, error, and duration metrics in Datadog for both inbound and outbound traffic on all services discovered with Universal Service Monitoring. These service health metrics are useful for creating alerts, [tracking deployments][11], and getting started with [service level objectives (SLOs)][3] so you can get broad visibility into all services running on your infrastructure. 
 
 {{< img src="universal_service_monitoring/guide/usm_slo.png" alt="Universal Service Monitoring SLOs for BITSBOUTIQUE" style="width:100%;" >}}
 
