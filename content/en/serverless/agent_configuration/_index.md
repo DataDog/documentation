@@ -28,7 +28,7 @@ The Agent's [main configuration file][1] is `datadog.yaml`. For the serverless A
 
 ### Log collection configuration
 
-| Env Variable                                  | Description                                                                                                                                                                                                                          |
+| Environment Variable                                  | Description                                                                                                                                                                                                                          |
 |-----------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DD_LOGS_ENABLED`                             | Enable Datadog Agent log collection by setting logs_enabled to true.                                                                                                                                                                 |
 | `DD_LOGS_CONFIG_DD_URL`                       | Define the endpoint and port to hit when using a proxy for logs. Because logs are forwarded in TCP, the proxy must be able to handle TCP connections. String in the format `<ENDPOINT>:<PORT>`.                                  |
