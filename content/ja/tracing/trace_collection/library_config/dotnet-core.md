@@ -1,6 +1,6 @@
 ---
-code_lang: dotnet-framework
-code_lang_weight: 70
+code_lang: dotnet-core
+code_lang_weight: 60
 further_reading:
 - link: /tracing/other_telemetry/connect_logs_and_traces/dotnet/
   tag: ドキュメント
@@ -17,28 +17,23 @@ further_reading:
 - link: https://www.datadoghq.com/blog/net-monitoring-apm/
   tag: ブログ
   text: Datadog APM と分散型トレーシングを使用した .NET のモニタリング
-- link: https://www.datadoghq.com/blog/asp-dotnet-core-monitoring/
-  tag: GitHub
-  text: コンテナ化された ASP.NET コアアプリケーションを監視する
-- link: https://www.datadoghq.com/blog/deploy-dotnet-core-aws-fargate/
-  tag: GitHub
-  text: AWS Fargate でコンテナ化された ASP.NET コアアプリケーションを監視する
 - link: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples
   tag: GitHub
   text: カスタムインスツルメンテーションの例
 - link: https://github.com/DataDog/dd-trace-dotnet
   tag: GitHub
   text: ソースコード
+- link: https://www.datadoghq.com/blog/deploy-dotnet-core-azure-app-service/
+  tag: GitHub
+  text: ASP.NET Core アプリケーションを Azure App Service にデプロイする
 kind: documentation
-title: .NET Framework トレーシングライブラリの構成
+title: .NET Core トレーシングライブラリの構成
 type: multi-code-lang
 ---
 
 コードを使用してトレーシングライブラリをセットアップし、APM データを収集するように Agent を構成した後、オプションで[統合サービスタグ付け][4]のセットアップなど、必要に応じてトレーシングライブラリを構成してください。
 
-
-{{< img src="tracing/dotnet/diagram_docs_net.png" alt=".NET トレーサーコンフィギュレーション設定の優先度"  >}}
-
+{{< img src="tracing/dotnet/dotnet_core_configuration.png" alt=".NET Coreトレーサーの構成設定の優先度" style="width:100%" >}}
 
 .NET Tracer のコンフィギュレーション設定は、以下のいずれかの方法で行うことができます。
 
@@ -48,8 +43,7 @@ type: multi-code-lang
 
 アプリケーションコードでトレーサーを構成するには、デフォルトの構成ソースから `TracerSettings` インスタンスを作成します。`Tracer.Configure()` を呼び出す前に、この `TracerSettings` インスタンスにプロパティを設定します。例:
 
-[1]: /ja/tracing/trace_collection/dd_libraries/dotnet-framework/#configuring-process-environment-variables
-
+[1]: /ja/tracing/trace_collection/dd_libraries/dotnet-core/#configuring-process-environment-variables
 {{< /tabs >}}
 
 {{% tab "コード" %}}
@@ -64,7 +58,7 @@ type: multi-code-lang
 using Datadog.Trace;
 using Datadog.Trace.Configuration;
 
-// デフォルトの構成ソースを読み取る (env vars、web.config、datadog.json)
+// デフォルトの構成ソースを読み取る (env vars または datadog.json)
 var settings = TracerSettings.FromDefaultSources();
 
 // 一部の設定を変更
@@ -75,23 +69,6 @@ settings.Exporter.AgentUri = new Uri("http://localhost:8126/");
 
 // Tracer のグローバル設定を構成
 Tracer.Configure(settings);
-```
-
-{{< /tabs >}}
-
-{{% tab "web.config" %}}
-
-`app.config` または `web.config` ファイルを使ってトレーサーを構成するには、`<appSettings>` セクションを使います。例:
-
-```xml
-<configuration>
-  <appSettings>
-    <add key="DD_TRACE_AGENT_URL" value="http://localhost:8126"/>
-    <add key="DD_ENV" value="prod"/>
-    <add key="DD_SERVICE" value="MyService"/>
-    <add key="DD_VERSION" value="abc123"/>
-  </appSettings>
-</configuration>
 ```
 
 {{< /tabs >}}
@@ -114,6 +91,10 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 {{< /tabs >}}
 
 ### コンフィギュレーション設定
+
+<div class="alert alert-warning">
+  <strong>注:</strong> Linux では、環境変数の名前では大文字と小文字が区別されます。
+</div>
 
 上記の方法を使用して、次の変数を使用してトレースコンフィギュレーションをカスタマイズします。環境変数またはコンフィギュレーションファイルを設定するときは、環境変数の名前 (たとえば、`DD_TRACE_AGENT_URL`) を使用します。コードの設定を変更するときには、TracerSettings プロパティの名前 (たとえば、`Exporter.AgentUri`) を使用します。
 
@@ -139,28 +120,29 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 
 `DD_TRACE_AGENT_URL`
 : **TracerSettings プロパティ**: `Exporter.AgentUri`<br>
-<br>トレースが送信される URL エンドポイントを設定します。設定された場合、`DD_AGENT_HOST` と `DD_TRACE_AGENT_PORT` をオーバーライドします。
-**デフォルト**: 設定されている場合は `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>` または `http://localhost:8126`。
+トレースが送信される URL のエンドポイントを設定します。設定されている場合は `DD_AGENT_HOST` と `DD_TRACE_AGENT_PORT` をオーバーライドします。[Agent 構成][13]で `receiver_port` または `DD_APM_RECEIVER_PORT` をデフォルトの `8126` 以外に設定した場合、`DD_TRACE_AGENT_PORT` または `DD_TRACE_AGENT_URL` はそれにマッチしなければなりません。<br>
+`unix://` をプレフィックスとして、ソケットへの Unix パスを含めることができます。<br>
+**デフォルト**: 設定されている場合は `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>`、ファイルが存在する場合は `unix:///var/run/datadog/apm.socket`、または `http://localhost:8126`。
 
 `DD_AGENT_HOST`
 : Agent が接続をリッスンするホストを設定します。ホスト名または IP アドレスを指定します。このパラメーターより優先される `DD_TRACE_AGENT_URL` を使用します。 <br>
 **デフォルト**: `localhost`
 
 `DD_TRACE_AGENT_PORT`
-: Agent が接続をリッスンする TCP ポートを設定します。このパラメーターより優先される `DD_TRACE_AGENT_URL` を使用します。 <br>
+: Agent が接続を待機している TCP ポートを設定します。このパラメーターより優先される `DD_TRACE_AGENT_URL` を使用します。[Agent 構成][13]で `receiver_port` または `DD_APM_RECEIVER_PORT` をデフォルトの `8126` 以外に設定した場合、`DD_TRACE_AGENT_PORT` または `DD_TRACE_AGENT_URL` はそれにマッチしなければなりません。<br>
 **デフォルト**: `8126`
 
 `DD_TRACE_SAMPLE_RATE`
 : **TracerSettings プロパティ**: `GlobalSamplingRate` <br>
 **デフォルト**: デフォルトは、Datadog Agent から返される率です<br>
 取り込み率コントロールを有効にします。このパラメーターは、サンプリングするスパンのパーセンテージを表す浮動小数点数です。有効な値は `0.0` から `1.0` までです。
-詳しくは、[取り込みメカニズム][6]を参照してください。
+詳しくは、[取り込みメカニズム][11]を参照してください。
 
 `DD_TRACE_SAMPLING_RULES`
 : **TracerSettings プロパティ**: `CustomSamplingRules`<br>
 **デフォルト**: `null`<br>
 オブジェクトの JSON 配列。各オブジェクトは `"sample_rate"` を持たなければなりません。`"name"` と `"service"` フィールドは省略可能です。`"sample_rate"` の値は `0.0` と `1.0` の間でなければなりません (この値を含む)。ルールは、トレースのサンプルレートを決定するために設定された順序で適用されます。
-詳しくは、[取り込みメカニズム][6]を参照してください。<br>
+詳しくは、[取り込みメカニズム][11]を参照してください。<br>
 **例:**<br>
   - サンプルレートを 20% に設定: `'[{"sample_rate": 0.2}]'`
   - 'a' で始まるサービスとスパン名 'b' のサービスのサンプルレートを 10% に、それ以外のサービスのサンプルレートを 20% に設定: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'`
@@ -168,13 +150,16 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 `DD_TRACE_RATE_LIMIT`
 : **TracerSettings プロパティ**: `MaxTracesSubmittedPerSecond` <br>
 1 秒間に送信できるトレースの数 (`DD_MAX_TRACES_PER_SECOND` は非推奨)。 <br>
-**デフォルト**: `DD_TRACE_SAMPLE_RATE` が設定されている場合、`100`。それ以外の場合は、Datadog Agent にレート制限を委ねます。 <br>
+**デフォルト**: `DD_TRACE_SAMPLE_RATE` が設定されている場合、`100`。それ以外の場合は、Datadog Agent にレート制限を委ねます。
+
+`DD_SPAN_SAMPLING_RULES`
+: **デフォルト**: `null`<br>
+<br>オブジェクトの JSON 配列。ルールは、スパンのサンプルレートを決定するために構成された順序で適用されます。`sample_rate` の値は、0.0 から 1.0 までの間でなければなりません (この値を含む)。詳しくは、[取り込みメカニズム][1]を参照してください。
+**例**: サービス名 `my-service` と操作名 `http.request` のスパンのサンプルレートを 50% に設定し、最大で 1 秒間に 50 個のトレースにします: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`
 
 `DD_TRACE_GLOBAL_TAGS`
 : **TracerSettings プロパティ**: `GlobalTags`<br>
-指定された場合、指定されたすべてのタグを生成されたすべてのスパンに追加します。
-**例**: `layer:api, team:intake` <br>
-デリミタはコンマとスペース: `, ` であることに注意してください。
+指定した場合、指定したすべてのタグを、生成されたすべてのスパンに追加します。
 
 自動インスツルメンテーションオプションコンフィギュレーション
 
@@ -184,23 +169,35 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 **例**: `CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name`<br>
 バージョン 1.18.3 で追加されました。レスポンスヘッダーのサポートとタグ名なしのエントリはバージョン 1.26.0 で追加されました。
 
+`DD_TRACE_CLIENT_IP_ENABLED`
+: 関連する IP ヘッダーからクライアント IP を収集できるようにします。<br>
+バージョン `2.19.0` で追加されました。<br>
+**デフォルト**: `false`<br>
+
+`DD_TRACE_CLIENT_IP_HEADER`
+: クライアント IP の収集に使用する IP ヘッダー、例: `x-forwarded-for` <br>
+バージョン `2.19.0` で追加されました。<br>
+**デフォルト**: Datadog は以下をパースします: `"x-forwarded-for", "x-real-ip", "true-client-ip", "x-client-ip", "x-forwarded", "forwarded-for", "x-cluster-client-ip", "fastly-client-ip", "cf-connecting-ip", "cf-connecting-ipv6",` 複数存在する場合は、リストの中から正しくパースされた最初のものが使用されます。<br>
+
+
 `DD_TAGS`
 : **TracerSettings プロパティ**: `GlobalTags`<br>
 指定した場合、指定したすべてのタグを、生成されたすべてのスパンに追加します。<br>
-**例**: `layer:api,team:intake` <br>
-バージョン 1.17.0 で追加されました。<br>
+**例**: `layer:api, team:intake` <br>
+バージョン 1.17.0 で追加されました。
+デリミタはコンマとスペース: `, ` であることに注意してください。
 
 `DD_TRACE_LOG_DIRECTORY`
 : .NET Tracer ログのディレクトリを設定します。<br>
-**デフォルト**: `%ProgramData%\Datadog .NET Tracer\logs\`
+**デフォルト**: Windows は `%ProgramData%\Datadog .NET Tracer\logs\`、Linux は `/var/log/datadog/dotnet`
 
 `DD_TRACE_LOGGING_RATE`
 : ログメッセージへのレート制限を設定します。設定した場合、`x` 秒ごとに一意のログ行が記述されます。たとえば、任意のメッセージを 60 秒ごとに一回ログに残したい場合は `60` を設定します。ログのレート制限を無効化したい場合は `0` を設定します。バージョン 1.24.0 で追加されました。デフォルトでは無効です。
 
 `DD_TRACE_SERVICE_MAPPING`
-: コンフィギュレーションを使用してサービスの名前を変更します。名前を変更するサービス名のキーと、代わりに使う名前のペアをカンマ区切りで `[from-key]:[to-name]` の形式で受け入れます。<br>
+: コンフィギュレーションを使用してサービスの名前を変更します。名前を変更するサービス名（キー）と、代わりに使う名前（値）のペアを `[from-key]:[to-name]` の形式で指定したカンマ区切りのリストを受け入れます。<br>
 **例**: `mysql:main-mysql-db, mongodb:offsite-mongodb-service`<br>
-`from-key` はインテグレーションタイプに固有で、アプリケーション名のプレフィックスを除外する必要があります。たとえば、`my-application-sql-server` の名前を `main-db` に変更するには、`sql-server:main-db` を使用します。バージョン 1.23.0 で追加されました。
+`from-key` はインテグレーションタイプに固有で、アプリケーション名のプレフィックスは取り除く必要があります。たとえば、`my-application-sql-server` の名前を `main-db` に変更するには、`sql-server:main-db` を使用します。バージョン 1.23.0 で追加されました。
 
 #### 自動インスツルメンテーションオプションコンフィギュレーション
 
@@ -210,6 +207,10 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 : **TracerSettings プロパティ**: `TraceEnabled`<br>
 <br>すべての自動インスツルメンテーションを有効または無効にします。環境変数を `false` に設定すると、CLR プロファイラーが完全に無効になります。他の構成メソッドの場合は、CLR プロファイラーはロードされ続けますが、トレースは生成されません。有効な値は `true` または `false`。
 **デフォルト**: `true`
+
+`DD_DBM_PROPAGATION_MODE`
+: `'service'` または `'full'` に設定すると、APM から送信されるデータとデータベースモニタリング製品との連携が可能になります。`'service'` オプションは、DBM と APM のサービス間の接続を有効にします。`'full'` オプションは、データベースクエリイベントを持つデータベーススパン間の接続を有効にします。Postgres と MySQL で利用可能です。<br>
+**デフォルト**: `'disabled'`
 
 `DD_HTTP_CLIENT_ERROR_STATUSES`
 : HTTP クライアントスパンがエラーとしてマークされる原因となるステータスコード範囲を設定します。 <br>
@@ -232,7 +233,7 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 : ASP.NET/ASP.NET Core 用アプリケーションのすべてのルートパラメーター (ID パラメーターを除く) を拡張します<br>
 これは、フォームの値を区別するためにパラメーター名を使用している場合や、GraphQL のようなスラッグを使用している場合に便利です。
 **デフォルト**: `false`
-バージョン 2.5.2 で追加されました
+バージョン 2.5.1 で追加されました。
 
 `DD_TRACE_METHODS`
 : トレースするメソッドのリスト。セミコロン (`;`) で区切られたリストで、各エントリーが `TypeName[MethodNames]` という形式であることを指定します (`MethodNames` はカンマ (`,`) 区切りのメソッド名のリストまたは `*` ワイルドカードのいずれかです)。汎用型の場合は、角括弧と型パラメーターの名前をバックスティック(`` ``)に置き換え、その後に汎用型パラメーターの数を記述します。例えば、`Dictionary<TKey, TValue>` は `` Dictionary`2 `` と記述しなければなりません。汎用メソッドの場合は、指定する必要があるのはメソッド名のみです。 <br>
@@ -245,7 +246,7 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 : Kafka コンシューマースパンの動作を変更します<br>
 **デフォルト**: `true`<br>
 `true` に設定すると、メッセージが消費されたときにコンシューマースパンが作成され、次のメッセージを消費する前に閉じられます。このスパンの長さは、あるメッセージの消費と次のメッセージの消費との間の計算を代表するものです。この設定は、メッセージの消費がループで実行される場合に使用します。<br>
-`false` に設定すると、メッセージが消費されたときにコンシューマスパンが作成され、すぐに閉じられます。この設定は、メッセージが完全に処理されないまま次のメッセージを消費する場合や、複数のメッセージを一度に消費する場合に使用します。
+`false` に設定すると、メッセージが消費されたときにコンシューマスパンが作成され、すぐに閉じられます。この設定は、メッセージが完全に処理されないまま次のメッセージを消費する場合や、複数のメッセージを一度に消費する場合に使用します。このパラメーターを `false` に設定すると、コンシューマースパンはすぐに閉じられます。トレースする子スパンがある場合は、コンテキストを手動で抽出する必要があります。詳しくは、[ヘッダーの抽出と挿入][12]をお読みください。
 
 #### 自動インスツルメンテーションインテグレーションコンフィギュレーション
 
@@ -253,11 +254,11 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 
 `DD_DISABLED_INTEGRATIONS`
 : **TracerSettings プロパティ**: `DisabledIntegrationNames` <br>
-無効にするインテグレーションのリストを設定します。他のインテグレーションはすべて有効のままになります。設定しなかった場合、すべてのインテグレーションが有効になります。セミコロンで区切ることで複数の値がサポートされます。有効な値は、[インテグレーション][7]セクションでリストされているインテグレーション名です。
+無効にするインテグレーションのリストを設定します。他のインテグレーションはすべて有効のままになります。設定しなかった場合、すべてのインテグレーションが有効になります。セミコロンで区切ることで複数の値がサポートされます。有効な値は、[インテグレーション][6]セクションでリストされているインテグレーション名です。
 
 `DD_TRACE_<INTEGRATION_NAME>_ENABLED`
 : **TracerSettings プロパティ**: `Integrations[<INTEGRATION_NAME>].Enabled` <br>
-<br>特定のインテグレーションを有効または無効にします。有効な値は、`true` (デフォルト) または `false` です。インテグレーション名は、[インテグレーション][7]セクションにリストされています。
+<br>特定のインテグレーションを有効または無効にします。有効な値は、`true` (デフォルト) または `false` です。インテグレーション名は、[インテグレーション][6]セクションにリストされています。
 **デフォルト**: `true`
 
 #### 試験機能
@@ -286,28 +287,31 @@ Datadog APM トレーサーは、分散型トレーシングのための [B3][9]
 .NET トレーサーは、以下のスタイルをサポートしています。
 
 - Datadog: `Datadog`
-- B3: `B3`
-- W3C: `W3C`
-- B3 Single Header: `B3SingleHeader` または `B3 single header`
+- B3 マルチヘッダー: `b3multi` (`B3` は非推奨)
+- W3C: `tracecontext` (`W3C` は非推奨)
+- B3 シングルヘッダー: `B3 single header` (`B3SingleHeader` は非推奨)
 
 以下の環境変数を使用して、挿入および抽出のスタイルを構成することができます。
 
-- `DD_PROPAGATION_STYLE_INJECT=Datadog, B3, W3C`
-- `DD_PROPAGATION_STYLE_EXTRACT=Datadog, B3, W3C`
+- `DD_TRACE_PROPAGATION_STYLE_INJECT=Datadog, b3multi, tracecontext`
+- `DD_TRACE_PROPAGATION_STYLE_EXTRACT=Datadog, b3multi, tracecontext`
 
 環境変数の値は、挿入または抽出に有効なヘッダースタイルのカンマ区切りのリストです。デフォルトでは、`Datadog` 挿入スタイルのみが有効になっています。
 
 複数の抽出スタイルが有効な場合、抽出の試みは構成されたスタイルの順に完了し、最初に成功した抽出値を使用します。
 
-
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: /ja/tracing/trace_pipeline/ingestion_mechanisms/
 [4]: /ja/getting_started/tagging/unified_service_tagging/
 [5]: /ja/tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel#trace_id-option
-[6]: /ja/tracing/trace_pipeline/ingestion_mechanisms//?tab=environmentvariables#head-based-sampling
-[7]: /ja/tracing/trace_collection/compatibility/dotnet-framework/#integrations
-[8]: /ja/tracing/trace_collection/custom_instrumentation/dotnet/
+[6]: /ja/tracing/trace_collection/compatibility/dotnet-core#integrations
+[7]: /ja/tracing/trace_collection/custom_instrumentation/dotnet/
+[8]: https://www.freedesktop.org/software/systemd/man/systemctl.html#set-environment%20VARIABLE=VALUE%E2%80%A6
 [9]: https://github.com/openzipkin/b3-propagation
 [10]: https://www.w3.org/TR/trace-context/#traceparent-header
+[11]: /ja/tracing/trace_pipeline/ingestion_mechanisms/?tab=net#pagetitle
+[12]: /ja/tracing/trace_collection/custom_instrumentation/dotnet/#headers-extraction-and-injection
+[13]: /ja/agent/guide/network/#configure-ports
