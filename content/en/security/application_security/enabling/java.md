@@ -13,7 +13,7 @@ further_reading:
   text: "Adding user information to traces"
 - link: 'https://github.com/DataDog/dd-trace-java'
   tag: 'GitHub'
-  text: 'Java Datadog Library source code'
+  text: 'Java Datadog library source code'
 - link: "/security/default_rules/#cat-application-security"
   tag: "Documentation"
   text: "OOTB Application Security Management Rules"
