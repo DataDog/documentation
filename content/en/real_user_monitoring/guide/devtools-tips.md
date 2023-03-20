@@ -24,7 +24,7 @@ In the picture above, the `console.error` function is instrumented. Notice that 
 
 ### Adding scripts to your browser ignore list to display the correct file and line number
 
-Most browsers allow developers to select scripts and add them to an ignore list. To display the correct file and line number, you can add the following scripts to your browser's ignore list: `datadog-rum-v*.js` and `datadog-logs-v*.js`.
+Most browsers allow developers to select scripts and add them to an ignore list. To display the correct file and line number, you can add the following scripts to your browser's ignore list: `datadog-rum-v*.js`, `datadog-logs-v*.js`, `datadog-rum.js` and `datadog-logs.js`.
 
 Below is an example of where to find this feature in Google Chrome.
 {{< img src="real_user_monitoring/guide/devtools-tips/script_ignore_list.png" alt="How to add script to the ignore list in Google Chrome.">}}

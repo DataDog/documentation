@@ -66,7 +66,7 @@ datadogRum.startSessionReplayRecording();
 
 ### CDN
 
-Replace the RUM Browser SDK URL `https://www.datadoghq-browser-agent.com/datadog-rum.js` with `https://www.datadoghq-browser-agent.com/datadog-rum-v4.js`. When `DD_RUM.init()` is called, the Session Replay recording does not start until `DD_RUM.startSessionReplayRecording()` is also called.
+For {{<region-param key="dd_site_name">}} site, use `{{<region-param key="browser_sdk_rum_cdn_file">}}`. When `DD_RUM.init()` is called, the Session Replay recording does not start until `DD_RUM.startSessionReplayRecording()` is also called.
 
 ## Configuration
 
