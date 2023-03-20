@@ -43,9 +43,15 @@ Click into a specific pipeline to see the _Pipeline Details_ page which provides
 
 {{< img src="ci/ci-single-pipeline.png" alt="Details for a single pipeline" style="width:100%;">}}
 
-Get insights on the selected pipeline such as total and failed executions over time, build duration percentiles, and total time spent breakdown by stage. There are also summary tables for stages and jobs so you can quickly sort them in terms of duration, percentage of overall execution time, or failure rate. Each stage and job summary table contains a _Duration Change_ graph that visualizes the absolute and relative change in duration of stages and jobs, along with a graph of _Errored Executions_.
+Get insights on the selected pipeline such as total and failed executions over time, build duration percentiles, and total time spent breakdown by stage. There are also summary tables for stages and jobs so you can quickly sort them in terms of duration, percentage of overall execution time, or failure rate.
+
+When viewing the _default_ branch for a pipeline, each stage and job summary table on the page contains a _Duration Change_ graph that visualizes the absolute and relative change in duration of stages and jobs, along with a graph of _Errored Executions_.
 
 {{< img src="ci/pipeline_job_summary_duration_change.png" alt="Job summary table" style="width:80%;">}}
+
+When viewing a feature branch for a pipeline, there are two graphs for _Errored Executions_: one for failed executions in this feature branch, and another for comparing failures in this branch to other failures. You have the option to toggle between `Other Branches` and `Specific Branch`, so you can compare failed executions in this feature branch with aggregated failures across all other branches, or directly compare failed executions in this feature branch with failed executions in another branch of your choice.
+
+{{< img src="ci/pipeline_stage_summary_feature_branch.png" alt="Stage summary table" style="width:80%;">}}
 
 The pipeline execution list at the bottom shows all the times that pipeline (or its stages or jobs) ran during the selected time frame, for the selected branch. Use the facets on the left side to filter the list to exactly the pipelines, stages, or jobs you want to see.
 
