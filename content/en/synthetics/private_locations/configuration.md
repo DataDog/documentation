@@ -20,7 +20,7 @@ docker run --rm datadog/synthetics-private-location-worker --help
 ```
 
 ## Customize your private location
-
+A subset of available parameters are listed below.
 These configuration options for private locations can be passed as **parameters to your JSON configuration file** or as **arguments in the launch command**, for example:
 
 ```shell
