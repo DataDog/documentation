@@ -1,8 +1,6 @@
 ---
 title: Intelligent Test Runner for JavaScript and TypeScript
 kind: documentation
-aliases:
-  - /continuous_integration/intelligent_test_runner/javascript
 further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
