@@ -31,6 +31,6 @@ The resulting number of custom metrics from this proposed configuration is as fo
 
 {{< img src="metrics/faq/mwl-diagram.jpg" alt="Custom Metric Breakdown of MWL Configuration">}}
 
-Therefore, it is possible for a proposed configuration to result in an indexed custom metrics volume (6 custom metrics) that is larger than the original ingested volume (4 custom metrics). **In these cases, it is better to leave this metric unconfigured with the “All Tags” toggle option for the most cost-optimized configuration of this metric.**
+Therefore, it is possible for a proposed configuration to result in an indexed custom metrics volume (6 custom metrics) that is larger than the original ingested volume (4 custom metrics). **In these cases, it is better to leave this metric unconfigured with the "All Tags" toggle option for the most cost-optimized configuration of this metric.**
 
 [1]: /metrics/metrics-without-limits/
