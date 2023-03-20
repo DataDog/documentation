@@ -214,5 +214,13 @@
 			"{{< img src=\"path/to/your/image-name-here.png\" alt=\"Your image description\" video=true >}}"
 		],
 		"description": "Video short-code"
+	},
+
+  "Vimeo": {
+		"prefix": ";;vimeo",
+		"body": [
+			"{{< vimeo url=\"VIMEO_URL\" poster=\"THUMBNAIL_URL\" >}}"
+		],
+		"description": "Vimeo short-code"
 	}
 }
