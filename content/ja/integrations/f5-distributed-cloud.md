@@ -30,14 +30,14 @@ public_title: F5 Distributed Cloud Services
 short_description: F5 Distributed Cloud Services のイベントログをストリーミングし、視覚化します。
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Offering::Integration
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Category::Notification
   configuration: README.md#Setup

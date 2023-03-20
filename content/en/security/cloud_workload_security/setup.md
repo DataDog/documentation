@@ -6,6 +6,9 @@ aliases:
   - /security_platform/cloud_workload_security/getting_started
   - /security/cloud_workload_security/getting_started
 further_reading:
+- link: "/getting_started/cloud_security_management"
+  tag: "Documentation"
+  text: "Getting Started with Cloud Security Management"
 - link: "https://www.datadoghq.com/blog/datadog-runtime-security/"
   tag: "Blog"
   text: "Learn more about Datadog Cloud Runtime Security"
@@ -102,7 +105,7 @@ Follow the [in-app instructions][6] in the Datadog app for the best experience, 
 
 The following command can be used to start the Runtime Security Agent and `system-probe` in a Docker environment:
 
-{{< code-block lang="bash" filename="docker-runtime-security.sh" >}}
+{{< code-block lang="shell" filename="docker-runtime-security.sh" >}}
 
 docker run -d --name dd-agent \
   --cgroupns host \

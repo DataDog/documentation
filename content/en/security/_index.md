@@ -47,7 +47,8 @@ Bring speed and scale to your production security operations. Datadog Security d
 
 Datadog Security includes [Application Security Management](#application-security-management), [Cloud SIEM](#cloud-siem), [Cloud Security Posture Management (CSPM)](#cloud-security-posture-management), and [Cloud Workload Security (CWS)](#cloud-workload-security).
 
-{{< vimeo 669874306 >}}
+{{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/669874306/rendition/1080p/file.mp4?loc=external&signature=9cdb7724c414862115c85af15edb1bb8eb0cd6f7b5d38d89f6f99e65376cfc0c" poster="/images/poster/security.png" >}}
+
 </br>
 
 ## Application Security Management

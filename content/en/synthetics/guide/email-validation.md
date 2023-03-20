@@ -52,7 +52,7 @@ To have your browser test navigate through links inside sent emails:
 
 1. Click **Navigation** and select **Go to email and click link**. Click **Next**.
 2. The email containing the links you want to test appears in the inbox. Click **Next**.  
-3. Select the link you want your browser test to navigate to. The iframe’s or pop up’s URL immediately updates to the specified link. Click **Save Navigation Step**.
+3. Select the link you want your browser test to navigate to. The iframe's or pop-up's URL immediately updates to the specified link. Click **Save Navigation Step**.
 4. The iframe redirects to the associated page URL. Continue recording your steps.
 
 In this example, the browser test looks into the `Welcome to Shopist` email, clicks the `Verify your email by clicking here` link, and confirms the user registration mechanism is working as expected. 

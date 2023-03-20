@@ -89,13 +89,16 @@ template:
 | JavaScript | `admission.datadoghq.com/js-lib.version: "<lib-version>"`     |
 | Python     | `admission.datadoghq.com/python-lib.version: "<lib-version>"` |
 
-利用可能なライブラリのバージョンは、各コンテナレジストリに記載されています。
+利用可能なライブラリのバージョンは、各コンテナレジストリ、および各言語のトレーサーソースレジストリに記載されています。
+- [Java][17]
+- [Javascript][18]
+- [Python][19]
 
 **注**: ライブラリのバージョン X を使用してインストルメンテーションを行ったアプリケーションで、ライブラリ挿入を使用して同じトレーサーライブラリのバージョン Y を使用してインストルメンテーションを行う場合、トレーサーは中断されません。むしろ、最初にロードされたライブラリのバージョンが使用されます。ライブラリ挿入は実行前にアドミッションコントローラレベルで行われるため、手動で構成されたライブラリよりも優先されます。
 
 <div class="alert alert-warning"><strong>注</strong>: <code>最新の</code>タグを使用することはサポートされていますが、主要なライブラリのリリースでは、壊れるような変更が導入されることがあるので、注意して使用してください。</div>
 
-例:
+例えば、Java ライブラリを挿入するには
 
 ```yaml
 apiVersion: apps/v1
@@ -109,7 +112,7 @@ template:
     labels:
         admission.datadoghq.com/enabled: "true" # Admission Controller を有効にしてこのデプロイメントに含まれる新しいポッドを変異させます
     annotations:
-        admission.datadoghq.com/java-lib.version: "v0.114.0" # Java インスツルメンテーション (バージョン0.114.0) 挿入を有効にします
+        admission.datadoghq.com/java-lib.version: "<TRACER VERSION>"
   containers:
   -  ...
 ```
@@ -150,7 +153,7 @@ template:
         tags.datadoghq.com/version: "1.1" # 統合サービスタグ - ポッドバージョンタグ
         admission.datadoghq.com/enabled: "true" # Admission Controller を有効にしてこのデプロイメントに含まれる新しいポッドを変異させます
     annotations:
-        admission.datadoghq.com/java-lib.version: "v0.114.0" # Java インスツルメンテーション (バージョン0.114.0) 挿入を有効にします
+        admission.datadoghq.com/java-lib.version: "<TRACER VERSION>"
   containers:
   -  ...
 ```
@@ -172,8 +175,6 @@ template:
 
 インスツルメンテーションは、Datadog へのテレメトリーの送信も開始します (例えば、[APM][15] へのトレースなど)。
 
-
-
 [1]: /ja/containers/cluster_agent/admission_controller/
 [2]: /ja/tracing/trace_collection/
 [3]: https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/
@@ -190,6 +191,9 @@ template:
 [14]: /ja/getting_started/tagging/unified_service_tagging/
 [15]: https://app.datadoghq.com/apm/traces
 [16]: /ja/tracing/trace_collection/library_config/
+[17]: https://github.com/DataDog/dd-trace-java/releases
+[18]: https://github.com/DataDog/dd-trace-js/releases
+[19]: https://github.com/DataDog/dd-trace-py/releases
 
 {{% /tab %}}
 
@@ -309,8 +313,8 @@ health_metrics_enabled: true
 runtime_metrics_enabled: true
 tracing_sampling_rate: 1.0
 tracing_rate_limit: 1
-tracing_tags: 
-- a=b 
+tracing_tags:
+- a=b
 - foo
 tracing_service_mapping:
 - from_key: mysql
@@ -352,6 +356,21 @@ tracing_log_level: debug
 | `tracing_log_level` | `datadog.slf4j.simpleLogger.defaultLogLevel` | `DD_TRACE_LOG_LEVEL` |   非該当    |
 
 挿入構成に記載されていないトレーサーライブラリの構成オプションは、プロパティや環境変数を通して、通常の方法で使用することができます。
+
+### 基本構成設定
+
+構成ソースに `BASIC` を指定した場合、以下の YAML 設定と同等となります。
+
+```yaml
+---
+version: 1
+tracing_enabled: true
+log_injection_enabled: true
+health_metrics_enabled: true
+runtime_metrics_enabled: true
+tracing_sampling_rate: 1.0
+tracing_rate_limit: 1
+```
 
 ## サービスの起動
 
@@ -444,7 +463,7 @@ output_paths:
 `BLOB` または `LOCAL` の設定について詳しくは、[構成ソースの供給](#supplying-configuration-source-hc)を参照してください。
 
 `library_inject`
-: `false` に設定すると、ライブラリの挿入を完全に無効にすることができます。<br> 
+: `false` に設定すると、ライブラリの挿入を完全に無効にすることができます。<br>
 **デフォルト**: `true`
 
 `log_level`
@@ -501,8 +520,8 @@ health_metrics_enabled: true
 runtime_metrics_enabled: true
 tracing_sampling_rate: 1.0
 tracing_rate_limit: 1
-tracing_tags: 
-- a=b 
+tracing_tags:
+- a=b
 - foo
 tracing_service_mapping:
 - from_key: mysql
@@ -545,13 +564,28 @@ tracing_log_level: debug
 
 挿入構成に記載されていないトレーサーライブラリの構成オプションは、プロパティや環境変数を通して、通常の方法で使用することができます。
 
+### 基本構成設定
+
+構成ソースに `BASIC` を指定した場合、以下の YAML 設定と同等となります。
+
+```yaml
+---
+version: 1
+tracing_enabled: true
+log_injection_enabled: true
+health_metrics_enabled: true
+runtime_metrics_enabled: true
+tracing_sampling_rate: 1.0
+tracing_rate_limit: 1
+```
+
 ## コンテナへの統合サービスタグ付けの指定
 
 環境変数 `DD_ENV`、`DD_SERVICE`、`DD_VERSION` がサービスコンテナイメージで指定されている場合、それらの値はコンテナからのテレメトリーにタグ付けするために使用されます。
 
 指定がない場合は、`DD_ENV` は `/etc/datadog-agent/inject/docker_config.yaml` コンフィギュレーションファイルに設定されている `env` 値を使用します (もしある場合)。`DD_SERVICE` と `DD_VERSION` は、Docker イメージの名前から取得します。`my-service:1.0` という名前のイメージは、`DD_SERVICE` が `my-service` で、 `DD_VERSION` が `1.0` でタグ付けされています。
 
-## サービスの開始
+## サービスの起動
 
 Agent を起動し、通常通りコンテナ化されたサービスを起動します。
 
@@ -614,7 +648,7 @@ Agent とサービスが同じホストの別々の Datadog コンテナで実�
    enabled=1
    gpgcheck=1
    repo_gpgcheck=1
-   gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.publichttps://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.publichttps://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+   gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
    ```
    **注**: [dnf のバグ][5]により、RedHat/CentOS 8.1 では `1` の代わりに `repo_gpgcheck=0` を設定してください。
 
@@ -649,7 +683,7 @@ config_sources: BASIC
 `BLOB` または `LOCAL` の設定について詳しくは、[構成ソースの供給](#supplying-configuration-source-c)を参照してください。
 
 `library_inject`
-: `false` に設定すると、ライブラリの挿入を完全に無効にすることができます。<br> 
+: `false` に設定すると、ライブラリの挿入を完全に無効にすることができます。<br>
 **デフォルト**: `true`
 
 `log_level`
@@ -706,8 +740,8 @@ health_metrics_enabled: true
 runtime_metrics_enabled: true
 tracing_sampling_rate: 1.0
 tracing_rate_limit: 1
-tracing_tags: 
-- a=b 
+tracing_tags:
+- a=b
 - foo
 tracing_service_mapping:
 - from_key: mysql
@@ -750,6 +784,21 @@ tracing_log_level: debug
 
 挿入構成に記載されていないトレーサーライブラリの構成オプションは、プロパティや環境変数を通して、通常の方法で使用することができます。
 
+### 基本構成設定
+
+構成ソースに `BASIC` を指定した場合、以下の YAML 設定と同等となります。
+
+```yaml
+---
+version: 1
+tracing_enabled: true
+log_injection_enabled: true
+health_metrics_enabled: true
+runtime_metrics_enabled: true
+tracing_sampling_rate: 1.0
+tracing_rate_limit: 1
+```
+
 ## Agent の構成
 
 コンテナを起動する Docker コンポーズファイルでは、Agent に以下の設定を使用し、`${DD_API_KEY}` に自分の Datadog API キーをしっかり設定します。
@@ -785,6 +834,7 @@ tracing_log_level: debug
     security_opt:
       - apparmor:unconfined
 ```
+
 ## コンテナへの統合サービスタグ付けの指定
 
 環境変数 `DD_ENV`、`DD_SERVICE`、`DD_VERSION` がサービスコンテナイメージで指定されている場合、それらの値はコンテナからのテレメトリーにタグ付けするために使用されます。
@@ -799,7 +849,7 @@ tracing_log_level: debug
 docker-compose up -d dd-agent
 ```
 
-## サービスの開始
+## サービスの起動
 
 通常通り、コンテナ化されたサービスを起動します。
 
@@ -821,6 +871,24 @@ docker-compose up -d dd-agent
 
 トレーシングライブラリのサポートされる機能や構成オプションは、他のインストール方法と同様に、ライブラリ挿入でも環境変数で設定することが可能です。詳しくは、お使いの言語の [Datadog ライブラリの構成ページ][16]をお読みください。
 
+例えば、[Application Security Monitoring][4] や [Continuous Profiler][3] をオンにすることができ、それぞれ請求の影響が出る可能性があります。
+
+- **Kubernetes** の場合は、`DD_APPSEC_ENABLED` または `DD_PROFILING_ENABLED` コンテナ環境変数に `true` を設定します。
+
+- **ホストとコンテナ**の場合は、`DD_APPSEC_ENABLED` または `DD_PROFILING_ENABLED` コンテナ環境変数を `true` に設定するか、[挿入構成](#supplying-configuration-source)で次の YAML 例のように `additional_environment_variables` セクションを指定します。
+
+  ```yaml
+  additional_environment_variables:
+  - key: DD_PROFILING_ENABLED
+    value: true
+  - key: DD_APPSEC_ENABLED
+    value: true 
+  ```
+
+  挿入構成ソースの `additional_environment_variables` セクションに設定できるのは、`DD_` で始まる構成キーのみです。
+
 
 [2]: /ja/tracing/trace_collection/
+[3]: /ja/profiler/enabling/java/?tab=environmentvariables#installation
+[4]: /ja/security/application_security/enabling/java/?tab=kubernetes#get-started
 [16]: /ja/tracing/trace_collection/library_config/

@@ -39,7 +39,7 @@ Python の一般的なトレース設定ドキュメントについては、[Pyt
 
 Datadog Agent をマシンにインストールしていない場合は、[**Integrations > Agent**][5] にアクセスし、お使いの OS を選択してください。例えば、ほとんどの Linux プラットフォームでは、`<YOUR_API_KEY>` を [Datadog API キー][3]に置き換えて、以下のスクリプトを実行することで Agent をインストールすることができます。
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
 {{< /code-block >}}
 
@@ -58,7 +58,7 @@ DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash 
 
 次に、トレースするためのサンプルアプリケーションをインストールします。このチュートリアルのコードサンプルは [github.com/Datadog/apm-tutorial-python][9] で見ることができます。以下を実行することで git リポジトリの複製を行います。
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 git clone https://github.com/DataDog/apm-tutorial-python.git
 {{< /code-block >}}
 
@@ -68,7 +68,7 @@ Poetry または pip のいずれかを使用して、サンプルに必要な P
 
 {{< tab "Poetry" >}}
 
-```bash
+```shell
 poetry install
 ```
 
@@ -76,7 +76,7 @@ poetry install
 
 {{< tab "pip" >}}
 
-```bash
+```shell
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
@@ -88,7 +88,7 @@ pip install -r requirements.txt
 
 以下を実行することでアプリケーションを起動します。
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 python -m notes_app.app
 {{< /code-block >}}
 
@@ -125,7 +125,7 @@ python -m notes_app.app
 
 {{< tab "Poetry" >}}
 
-```bash
+```shell
 poetry add ddtrace
 poetry install
 
@@ -135,7 +135,7 @@ poetry install
 
 {{< tab "pip" >}}
 
-```bash
+```shell
 pip install ddtrace
 ```
 
@@ -147,7 +147,7 @@ pip install ddtrace
 
 トレースの生成と収集を開始するには、前回とは少し異なる方法でサンプルアプリケーションを再起動します。以下を実行します。
 
-{{< code-block lang="bash" >}}DD_SERVICE=notes DD_ENV=dev DD_VERSION=0.1.0 \
+{{< code-block lang="shell" >}}DD_SERVICE=notes DD_ENV=dev DD_VERSION=0.1.0 \
  ddtrace-run python -m notes_app.app{{< /code-block >}}
 
 このコマンドは、`DD_SERVICE`、`DD_VERSION`、`DD_ENV` 環境変数を設定して[統合サービスタグ付け][10]を有効にし、Datadog 全体のデータ相関を可能にするものです。
@@ -229,9 +229,9 @@ from ddtrace import tracer{{< /code-block >}}
 
 1. 以下を実行することでカレンダーアプリケーションを起動します。
 
-   {{< code-block lang="bash" >}}
-DD_SERVICE=calendar DD_ENV=dev DD_VERSION=0.1.0 \
-ddtrace-run python -m calendar_app.app
+   {{< code-block lang="shell" >}}
+   DD_SERVICE=calendar DD_ENV=dev DD_VERSION=0.1.0 \
+   ddtrace-run python -m calendar_app.app
    {{< /code-block >}}
 
 2. `add_date` パラメーターを指定して、POST リクエストを送信します。
