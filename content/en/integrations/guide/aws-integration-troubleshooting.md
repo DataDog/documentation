@@ -79,7 +79,7 @@ You can use the AWS integration to collect data from CloudWatch, or install a Da
 
 If you removed the AWS integration, but continue to run a Datadog Agent on your EC2 instances, the hosts in your Datadog account continues to have the old host-tags associated with it that were collected from AWS. This is intended behavior, and it does not indicate that the AWS integration or AWS EC2 integration is still enabled.
 
-You can verify the integration is enabled by checking the “Apps Running” for that host from the infrastructure list or by checking the metrics summary and creating a notebook scoped to that host.
+You can verify the integration is enabled by checking the "Apps Running" for that host from the infrastructure list or by checking the metrics summary and creating a notebook scoped to that host.
 
 If you want to permanently remove AWS host tags from a host, you can do this by using the [Remove host tags API endpoint][11].
 

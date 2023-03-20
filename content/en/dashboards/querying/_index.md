@@ -33,17 +33,18 @@ When you first open the graphing editor, you are on the **Edit** tab. Here, you 
 To configure your graph on dashboards, follow this process:
 
 1. [Select the visualization](#select-your-visualization)
-2. [Choose the metric to graph](#choose-the-metric-to-graph)
-3. [Filter](#filter)
-4. [Aggregate and rollup](#aggregate-and-rollup)
-5. [Apply additional functions](#advanced-graphing)
-6. [Title the graph](#create-a-title)
+2. [Define the metric](#define-the-metric)
+3. [Filter your metric](#filter)
+4. [Configure the time aggregation](#configure-the-time-aggregation)
+5. [Configure the space aggregation](#configure-the-space-aggregation)
+6. [Apply function](#advanced-graphing)
+7. [Title the graph](#create-a-title)
 
 ### Select your visualization
 
 Select your visualization from the available [widgets][3].
 
-### Choose the metric to graph
+### Define the metric
 
 Choose the metric to graph by searching or selecting it from the dropdown next to **Metric**. If you don't know which metric to use, the metric dropdown provides additional information, including the `unit`, `type`, `interval`, `description`, `tags`, and number of `tag values`. 
 
@@ -69,13 +70,7 @@ To learn more about tags, see the [Tagging documentation][8].
 
 Aggregation method is next to the filter dropdown. This defaults to `avg by` but you can change the method to `max by`, `min by`, or `sum by`. In most cases, the metric has many values for each time interval, coming from many hosts or instances. The aggregation method chosen determines how the metrics are aggregated into a single line.
 
-#### Aggregation groups
-
-Next to the aggregation method dropdown, choose what constitutes a line or grouping on a graph. For example, if you choose `host`, there is a line for every `host`. Each line is made up of the selected metric on a particular `host` aggregated using the chosen method.
-
-Additionally, you can click the tags in the metric dropdown used for [choosing the metric](#choose-the-metric-to-graph) to group and aggregate your data.
-
-#### Rollup to aggregate over time
+#### Configure the time aggregation
 
 Regardless of the options chosen above, there is always some aggregation of data due to the physical size constraints of the window holding the graph. If a metric is updated every second, and you are looking at 4 hours of data, you need 14,400 points to display everything. Each graph displayed has about 300 points shown at any given time. Therefore, each point displayed on the screen represents 48 data points.
 
@@ -133,6 +128,12 @@ The full JSON looks like this:
 ```
 
 For more about using the JSON view, see [Graphing with JSON][1].
+
+#### Configure the space aggregation
+
+Next to the aggregation method dropdown, choose what constitutes a line or grouping on a graph. For example, if you choose `host`, there is a line for every `host`. Each line is made up of the selected metric on a particular `host` aggregated using the chosen method.
+
+Additionally, you can click the tags in the metric dropdown used for [defining the metric](#define-the-metric) to group and aggregate your data. 
 
 ### Advanced graphing
 
@@ -209,7 +210,17 @@ If your level of detail is resource or span, some widget types also require you 
 
 ### Event overlays
 
-View event correlations by using the **Event Overlays** section in the graphing editor. In the search field, enter any text or structured search query. For details on searching, see the Datadog [Event Query Language][14].
+View event correlations by using the **Event Overlays** section in the graphing editor for the [Timeseries][15] visualization. In the search field, enter any text or structured search query. Events search uses the [logs search syntax][14].
+
+The event overlay supports all data sources. This allows for easier correlation between business events and data from any Datadog service. 
+
+With the event overlay, you can quickly see how actions within the organization impact application and infrastructure performance. Here are some example use cases:
+- RUM error rates with deployment events overlaid
+- Correlating CPU usage with events related to provisioning extra servers
+- Correlating egress traffic with suspicious login activity
+- Correlating any timeseries data with monitor alerts to ensure that Datadog has been configured with the appropriate alerts
+
+{{< img src="/dashboards/querying/event_overlay_example.png" alt="Timeseries widgets showing RUM error rates with deployment events overlaid" style="width:100%;" >}}
 
 ## Further Reading
 
@@ -228,4 +239,6 @@ View event correlations by using the **Event Overlays** section in the graphing 
 [11]: /dashboards/functions/rollup/
 [12]: /dashboards/functions/#apply-functions-optional
 [13]: /metrics/advanced-filtering/#boolean-filtered-queries
-[14]: /events/#event-query-language
+[14]: /logs/explorer/search_syntax/
+[15]: /dashboards/widgets/timeseries/#event-overlay
+[16]: /dashboards/widgets/heat_map/#event-overlays

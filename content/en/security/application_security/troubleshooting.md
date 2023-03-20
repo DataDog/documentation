@@ -7,9 +7,9 @@ further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"
   text: "Monitoring Threats with Datadog Application Security Management"
-- link: "/security/application_security/getting_started/"
+- link: "/security/application_security/enabling/"
   tag: "Documentation"
-  text: "Get Started Using Application Security Management to Detect Threats"
+  text: "Enable Application Security Management to Start Detecting Threats"
 - link: "/security/application_security/setup_and_configure/#compatibility"
   tag: "Documentation"
   text: "Programming Language and Framework Compatibility"
@@ -408,7 +408,7 @@ If you don’t see ASM threat information in the [Trace and Signals Explorer][2]
 [1]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
 [2]: https://app.datadoghq.com/security/appsec/
 [3]: /tracing/troubleshooting/tracer_startup_logs/
-[4]: /security/application_security/getting_started/nodejs/?tab=dockercli
+[4]: /security/application_security/enabling/nodejs/?tab=dockercli
 [5]: /tracing/troubleshooting/
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
@@ -559,7 +559,7 @@ ASM data is sent with APM traces. See [APM troubleshooting][4] to [confirm APM s
 
 ### Confirm tracer versions are updated
 
-See the Application Security [Getting Started][11] to validate you you are using the right version of the tracer. These minimum versions are required to start sending telemetry data that includes library information.
+See the Application Security [set up documentation][11] to validate you you are using the right version of the tracer. These minimum versions are required to start sending telemetry data that includes library information.
 
 ### Ensure the communication of telemetry data
 
@@ -586,4 +586,4 @@ If you continue to have issues with ASM, contact [Datadog support][1] with the f
 [8]: /tracing/troubleshooting/tracer_startup_logs/
 [9]: /tracing/glossary/#spans
 [10]: /tracing/troubleshooting/#tracer-debug-logs
-[11]: /security/application_security/getting_started/
+[11]: /security/application_security/enabling/

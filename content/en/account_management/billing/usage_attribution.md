@@ -74,7 +74,7 @@ Once the reports start to be generated, they are updated daily and aggregated mo
 - If multi-org is enabled, usage is summarized across all Datadog organizations at the parent account.
 - Previous months' reports are accessible through the time selector.
 - Monthly reports are not generated until the month is over. Each monthly report should appear by the second day of the following month.
-- Reports are downloadable in TSV format. These TSV reports include both usage numbers and percentages, allowing for simplified allocations and chargebacks.
+- Reports are downloadable in TSV format. These TSV reports include both usage numbers and percentages, allowing for simplified allocations and chargebacks. Percentages are calculated on a per-organization basis.
 
 Monthly data can also be pulled using the tool's public API. For more information, see the [API endpoint documentation][1].
 

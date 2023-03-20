@@ -3,7 +3,6 @@ title: Log Visualizations
 kind: documentation
 description: 'Visualize the outcome of filters and aggregations to put your logs into the right perspective and bubble up decisive information.'
 aliases:
-    - /logs/explorer/visualize
     - /logs/visualize
 further_reading:
     - link: 'logs/explorer/search'

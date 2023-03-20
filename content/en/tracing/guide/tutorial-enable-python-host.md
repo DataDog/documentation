@@ -21,7 +21,7 @@ further_reading:
 
 ## Overview
 
-This tutorial walks you through the steps for enabling tracing on a sample Python application installed on a host. In this scenario, you install a Datadog Agent on the same host as the application. 
+This tutorial walks you through the steps for enabling tracing on a sample Python application installed on a host. In this scenario, you install a Datadog Agent on the same host as the application.
 
 {{< img src="tracing/guide/tutorials/tutorial-python-host-overview.png" alt="Diagram showing installation scenario for this tutorial" style="width:100%;" >}}
 
@@ -39,7 +39,7 @@ See [Tracing Python Applications][2] for general comprehensive tracing setup doc
 
 If you haven't installed a Datadog Agent on your machine, go to [**Integrations > Agent**][5] and select your operating system. For example, on most Linux platforms, you can install the Agent by running the following script, replacing `<YOUR_API_KEY>` with your [Datadog API key][3]:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
 {{< /code-block >}}
 
@@ -52,13 +52,13 @@ Verify that the Agent is running and sending data to Datadog by going to [**Even
 {{< img src="tracing/guide/tutorials/tutorial-python-host-agent-verify.png" alt="Event Explorer showing a message from Datadog indicating the Agent was installed on a host." style="width:70%;" >}}
 
 <div class="alert alert-info">If after a few minutes you don't see your host in Datadog (under <strong>Infrastructure > Host map</strong>), ensure you used the correct API key for your organization, available at <a href="https://app.datadoghq.com/organization-settings/api-keys"><strong>Organization Settings > API Keys</strong></a>.</div>
- 
+
 
 ## Install and run a sample Python application
 
 Next, install a sample application to trace. The code sample for this tutorial can be found at [github.com/Datadog/apm-tutorial-python][9]. Clone the git repository by running:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 git clone https://github.com/DataDog/apm-tutorial-python.git
 {{< /code-block >}}
 
@@ -68,7 +68,7 @@ Setup, configure, and install Python dependencies for the sample using either Po
 
 {{< tab "Poetry" >}}
 
-```bash
+```shell
 poetry install
 ```
 
@@ -76,7 +76,7 @@ poetry install
 
 {{< tab "pip" >}}
 
-```bash
+```shell
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
@@ -88,7 +88,7 @@ pip install -r requirements.txt
 
 Start the application by running:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 python -m notes_app.app
 {{< /code-block >}}
 
@@ -125,7 +125,7 @@ Next, install the tracing library by using Poetry or pip (minimum version 18). F
 
 {{< tab "Poetry" >}}
 
-```bash
+```shell
 poetry add ddtrace
 poetry install
 
@@ -135,7 +135,7 @@ poetry install
 
 {{< tab "pip" >}}
 
-```bash
+```shell
 pip install ddtrace
 ```
 
@@ -147,7 +147,7 @@ pip install ddtrace
 
 To start generating and collecting traces, restart the sample application in a slightly different way than previously. Run:
 
-{{< code-block lang="bash" >}}DD_SERVICE=notes DD_ENV=dev DD_VERSION=0.1.0 \
+{{< code-block lang="shell" >}}DD_SERVICE=notes DD_ENV=dev DD_VERSION=0.1.0 \
  ddtrace-run python -m notes_app.app{{< /code-block >}}
 
 That command sets the `DD_SERVICE`, `DD_VERSION`, and `DD_ENV` environment variables to enable [Unified Service Tagging][10], enabling data correlation across Datadog.
@@ -177,9 +177,9 @@ If you don't see traces, clear any filter in the Traces Search field (sometimes 
 
 ### Examine a trace
 
-In the Traces page, click on a `POST /notes` trace and you'll see a flame graph that shows how long each span took and what other spans occurred before a span completed. The bar at the top of the graph is the span you selected on the previous screen (in this case, the initial entry point into the notes application). 
+In the Traces page, click on a `POST /notes` trace and you'll see a flame graph that shows how long each span took and what other spans occurred before a span completed. The bar at the top of the graph is the span you selected on the previous screen (in this case, the initial entry point into the notes application).
 
-The width of a bar indicates how long it took to complete. A bar at a lower depth represents a span that completes during the lifetime of a bar at a higher depth. 
+The width of a bar indicates how long it took to complete. A bar at a lower depth represents a span that completes during the lifetime of a bar at a higher depth.
 
 The flame graph for a `POST` trace looks something like this:
 
@@ -216,22 +216,22 @@ from ddtrace import tracer{{< /code-block >}}
 5. On the Trace Explorer, click on one of the new `GET` requests, and see a flame graph like this:
 
    {{< img src="tracing/guide/tutorials/tutorial-python-host-custom-flame.png" alt="A flame graph for a GET trace with custom instrumentation." style="width:100%;" >}}
-   
+
    Note the higher level of detail in the stack trace now that the `get_notes` function has custom tracing.
 
 For more information, read [Custom Instrumentation][12].
 
 ## Add a second application to see distributed traces
 
-Tracing a single application is a great start, but the real value in tracing is seeing how requests flow through your services. This is called _distributed tracing_. 
+Tracing a single application is a great start, but the real value in tracing is seeing how requests flow through your services. This is called _distributed tracing_.
 
 The sample project includes a second application called `calendar_app` that returns a random date whenever it is invoked. The `POST` endpoint in the Notes application has a second query parameter named `add_date`. When it is set to `y`, Notes calls the calendar application to get a date to add to the note.
 
 1. Start the calendar application by running:
 
-   {{< code-block lang="bash" >}}
-DD_SERVICE=calendar DD_ENV=dev DD_VERSION=0.1.0 \
-ddtrace-run python -m calendar_app.app
+   {{< code-block lang="shell" >}}
+   DD_SERVICE=calendar DD_ENV=dev DD_VERSION=0.1.0 \
+   ddtrace-run python -m calendar_app.app
    {{< /code-block >}}
 
 2. Send a POST request with the `add_date` parameter:
@@ -248,7 +248,7 @@ ddtrace-run python -m calendar_app.app
 
 You can add custom instrumentation by using code. Suppose you want to further instrument the calendar service to better see the trace:
 
-1. Open `notes_app/notes_logic.py`. 
+1. Open `notes_app/notes_logic.py`.
 2. Add the following import
 
    ```python
