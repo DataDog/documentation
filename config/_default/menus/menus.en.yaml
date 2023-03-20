@@ -2966,7 +2966,7 @@ main:
     parent: continuous_testing
     identifier: continuous_testing_troubleshooting
     weight: 6
-  - name: RUM & Session Replay
+  - name: Real User Monitoring
     url: real_user_monitoring/
     pre: rum
     identifier: rum
