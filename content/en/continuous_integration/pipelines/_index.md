@@ -45,6 +45,8 @@ Click into a specific pipeline to see the _Pipeline Details_ page which provides
 
 Get insights on the selected pipeline such as total and failed executions over time, build duration percentiles, and total time spent breakdown by stage. There are also summary tables for stages and jobs so you can quickly sort them in terms of duration, percentage of overall execution time, or failure rate. Each stage and job summary table contains a _Duration Change_ graph that visualizes the absolute and relative change in duration of stages and jobs, along with a graph of _Errored Executions_.
 
+{{< img src="ci/pipeline_job_summary_duration_change.png" alt="Job summary table" style="width:80%;">}}
+
 The pipeline execution list at the bottom shows all the times that pipeline (or its stages or jobs) ran during the selected time frame, for the selected branch. Use the facets on the left side to filter the list to exactly the pipelines, stages, or jobs you want to see.
 
 ### Explore connections to services, resources, and network events
@@ -69,6 +71,8 @@ If job log collection is supported and enabled for the CI provider, related log 
 On the [Pipeline Executions][5] page, you can see aggregated data about pipeline executions over the selected time frame. Use the search field and facets to scope the list down to the executions you want to investigate. Change the list to show pipelines, stages, or jobs using the buttons at the top.
 
 Below are three graphs that visualize the durations of your most active pipelines, your failed pipelines over time, and the executions of your pipelines with an option to toggle to accumulated duration, respectively. These graphs are scoped to the level chosen at the top left (`Pipeline`, `Stage`, `Job`, etc.)
+
+{{< img src="ci/pipeline_explorer_trends.png" alt="Explorer view trend graphs" style="width:80%;">}}
 
 Each pipeline execution is reported as a trace, which includes stage and job information. Access individual pipeline, stage, and job execution traces by clicking on an execution in the list (similar to clicking into a pipeline execution from the Pipeline Details page).
 
