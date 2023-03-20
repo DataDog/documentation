@@ -731,7 +731,7 @@ As seen, the Heroku router logs get parsed automatically. With the Heroku integr
 
 You can generate a latency metric based on those parsed parameters.
 
-Navigate to Logs -> Generate Metrics and click on the “+ New Metric” button:
+Navigate to Logs -> Generate Metrics and click on the "+ New Metric" button:
 
 {{< img src="agent/guide/heroku_ruby/new_custom_metric.png" alt="New log based metric" >}}
 
@@ -741,7 +741,7 @@ Finally, add a name for your metric and click **Create Metric**:
 
 {{< img src="agent/guide/heroku_ruby/custom_metric.png" alt="Creation of a new log based metric" >}}
 
-Once the rule has been created, wait for a few minutes to gather the new metrics. Then, click on “See in Metric Explorer” to have a look to your new metric:
+Once the rule has been created, wait for a few minutes to gather the new metrics. Then, click on "See in Metric Explorer" to have a look to your new metric:
 
 {{< img src="agent/guide/heroku_ruby/generated_metric.png" alt="Log based available metrics" >}}
 {{< img src="agent/guide/heroku_ruby/metrics_explorer.png" alt="Metrics Explorer view" >}}
