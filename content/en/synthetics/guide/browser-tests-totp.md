@@ -30,8 +30,6 @@ Create a global variable where you enter a secret key or upload a QR code from y
 5. Enter the **Secret Key** to your variable or upload a QR code image.
 6. Click **+ Generate** to create a TOTP. You can copy the generated TOTP with the **Copy** icon.
 7. In **Permissions settings**, restrict access to your variable based on roles in your org. For more information about roles, see the [RBAC documentation][1].
-<div class="alert alert-warning">
-RBAC restrict access to global variables is in beta. To request access, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.</div>  
 
 {{< img src="synthetics/guide/browser-tests-totp/new-variable-totp.png" alt="Create a MFA token" style="width:100%;" >}}
 
