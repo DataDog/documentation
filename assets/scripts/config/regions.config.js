@@ -143,5 +143,19 @@ export default {
       us5: 'browser-intake-us5-datadoghq.com',
       eu: 'browser-intake-datadoghq.eu',
       gov: 'browser-intake-ddog-gov.com'
-    }
+    },
+    browser_sdk_rum_cdn_file: {
+      us: 'https://www.datadoghq-browser-agent.com/us1/v4/datadog-rum.js',
+      us3: 'https://www.datadoghq-browser-agent.com/us3/v4/datadog-rum.js',
+      us5: 'https://www.datadoghq-browser-agent.com/us5/v4/datadog-rum.js',
+      eu: 'https://www.datadoghq-browser-agent.com/eu1/v4/datadog-rum.js',
+      gov: 'https://www.datadoghq-browser-agent.com/datadog-rum-v4.js'
+    },
+    browser_sdk_logs_cdn_file: {
+      us: 'https://www.datadoghq-browser-agent.com/us1/v4/datadog-logs.js',
+      us3: 'https://www.datadoghq-browser-agent.com/us3/v4/datadog-logs.js',
+      us5: 'https://www.datadoghq-browser-agent.com/us5/v4/datadog-logs.js',
+      eu: 'https://www.datadoghq-browser-agent.com/eu1/v4/datadog-logs.js',
+      gov: 'https://www.datadoghq-browser-agent.com/datadog-log-v4.js'
+    },
 };
