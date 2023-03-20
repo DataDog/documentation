@@ -32,6 +32,8 @@ The Docker Agent produces the following events:
 
 {{< get-service-checks-from-git "docker" >}}
 
+**Note**: To use `docker.exit`, add `collect_exit_codes: true` in your Docker `conf.yaml` file and restart the Agent.
+
 ## Container integration
 
 ### Metrics

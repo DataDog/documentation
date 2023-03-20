@@ -14,14 +14,14 @@ further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
-- link: "https://learn.datadoghq.com/course/view.php?id=10"
+- link: "https://learn.datadoghq.com/courses/going-deeper-with-logs-processing"
   tag: "Learning Center"
-  text: "Going Deeper with Logs: Parsing"
+  text: "Going Deeper with Logs Processing"
 ---
 
 ## Overview
 
-Datadog automatically [parses][1] JSON-formatted logs. When logs are not JSON-formatted, you can add value to your raw logs by sending them through a processing pipeline. Pipelines take logs from a wide variety of formats and translate them into a common format in Datadog. Implementing a log pipelines and processing strategy is beneficial as it introduces an [attribute naming convention][2] for your organization.
+Datadog automatically [parses][1] JSON-formatted logs. You can then add value to all your logs (raw and JSON) by sending them through a processing pipeline. Pipelines take logs from a wide variety of formats and translate them into a common format in Datadog. Implementing a log pipelines and processing strategy is beneficial as it introduces an [attribute naming convention][2] for your organization.
 
 With pipelines, logs are parsed and enriched by chaining them sequentially through [processors][3]. This extracts meaningful information or attributes from semi-structured text to reuse as [facets][4]. Each log that comes through the pipelines is tested against every pipeline filter. If it matches a filter, then all the processors are applied sequentially before moving to the next pipeline.
 
@@ -115,7 +115,7 @@ Each log entry may specify a status level which is made available for faceted se
 * `level`
 * `syslog.severity`
 
-To remap a status existing in the `status` attribute, use the [log status remapper][1].
+Specify alternate attributes to use as the source of a log's status by setting a [log status remapper processor][1].
 
 [1]: /logs/log_configuration/processors/#log-status-remapper
 {{% /tab %}}
@@ -160,8 +160,8 @@ Specify alternate attributes to use as the source of a log's trace ID by setting
 
 4. Name your pipeline.
 5. (Optional) Grant editing access to processors in the pipeline.
-6. (Optional) Add tags and a description to the pipeline. The description can be used to state the pipeline's purpose and which team owns it.
-7. Press **Save**.
+6. (Optional) Add tags and a description to the pipeline. The description and tags can be used to state the pipeline's purpose and which team owns it.
+7. Press **Create**.
 
 An example of a log transformed by a pipeline:
 

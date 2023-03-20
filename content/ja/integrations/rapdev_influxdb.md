@@ -22,7 +22,7 @@ assets:
 author:
   homepage: https://www.rapdev.io
   name: RapDev
-  sales_email: sales@rapdev.io
+  sales_email: ddsales@rapdev.io
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
@@ -56,13 +56,13 @@ public_title: InfluxDB
 short_description: InfluxDB インスタンスの健全性とアクティビティを監視する
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Category::Data Store
   - Category::Marketplace
@@ -83,13 +83,14 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: InfluxDB
+  uninstallation: README.md#Uninstallation
 ---
 
 
 
 ## 概要
 
-このインテグレーションは、[InfluxDB][1] の健全性と運用に関するメトリクスを報告します。
+このインテグレーションは、[InfluxDB][1] v2.0+ の健全性と運用に関するメトリクスを報告します。
 
 ### ダッシュボード  
 

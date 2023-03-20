@@ -15,7 +15,7 @@ assets:
     source_type_name: Statsig
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Statsig
   sales_email: support@statsig.com
   support_email: support@statsig.com
 categories: []

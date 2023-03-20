@@ -19,6 +19,9 @@ further_reading:
 - link: 'https://www.datadoghq.com/blog/release-confidently-with-datadog-continuous-testing/'
   tag: 'blog'
   text: 'Use Datadog Continuous Testing to release with confidence'
+- link: 'https://www.datadoghq.com/blog/best-practices-datadog-continuous-testing/'
+  tag: 'blog'
+  text: 'Best practices for continuous testing with Datadog'
 ---
 
 <div class="alert alert-info">This page is about running Continuous Testing tests in your CI/CD pipelines. If you want to view CI/CD metrics and dashboards, see the <a href="/continuous_integration/" target="_blank">CI Visibility documentation.</a></div>
@@ -50,11 +53,15 @@ You can use the [Datadog Terraform provider][10] to control test creation and st
 
 ## Accelerate troubleshooting
 
-Performing tests in a unified monitoring platform helps you to quickly find the root cause of failed test runs and reduce MTTR. You can obtain the full context for troubleshooting—without switching between tools— through correlated metrics, traces, and logs surfaced by the Datadog [APM integration][12]. 
+Performing tests in a unified monitoring platform helps you quickly find the root cause of failed test runs and reduce MTTR. You can obtain the full context for troubleshooting—without switching between tools—through correlated metrics, traces, and logs surfaced by the Datadog [APM integration][12] by looking at executed jobs the [Continuous Testing Explorer][11]. 
 
 {{< img src="continuous_testing/open_sidepanel.png" alt="CI batches in the Continuous Testing Explorer" style="width:100%;">}}
 
-Explore browser tests running in a CI pipeline and troubleshoot failing test results by looking at executed jobs in the [Continuous Testing Explorer][13].
+## Use the Synthetic Monitoring & Continuous Testing Explorer
+
+Create [search queries and visualizations][11] for your Synthetic test runs or batches of tests running in CI/CD pipelines. 
+
+{{< img src="continuous_testing/explorer_ci_batches.png" alt="Continuous Testing Explorer" style="width:100%;">}}
 
 ## Ready to start?
 

@@ -33,7 +33,39 @@ Datadog は、IoT デバイスの数を毎時間測定します。IoT デバイ�
 
 IoT のご請求に関する詳細については、[Datadog 料金ページ][7]をご参照ください。
 
-## 請求書
+## プランの詳細
+
+### 支払い方法の管理
+
+[**Payment Method**][8] セクションには、支払い方法の詳細が記載されています。
+
+{{< img src="account_management/billing/PaymentMethodOverview.png" alt="プランページの支払い方法" style="width:90%;" >}}
+
+**Edit Payment** は、支払い方法を管理するためのオプションを提供します。カードの編集や削除、カードから請求書、またはその逆への支払い方法の変更を依頼することができます。
+
+{{< img src="account_management/billing/PaymentSettingsDetails.png" alt="プランページの支払い設定" style="width:90%;" >}}
+
+### 請求先情報の管理
+
+請求先情報は、[**Billing Contact Details**][8] セクションで確認することができます。
+
+{{< img src="account_management/billing/BillingContactDetailsOverview.png" alt="プランページの請求先情報" style="width:90%;" >}}
+
+請求先住所の追加、編集、削除は、**Edit Details** から行います。また、請求書を送付するメールアドレスを指定することができます。
+
+{{< img src="account_management/billing/BillingContactDetailsEdit.png" alt="プランページでの請求先情報の編集" style="width:90%;" >}}
+
+**注**: このメールアドレスは、Datadog 内のチームメンバーでなくてもかまいません。たとえば、`invoices@example.com` を使用できます。
+
+### サブスクリプションの詳細を表示する
+
+[Subscription Details][8] セクションには、コミットされたすべての製品の数量、契約価格、オンデマンド価格が記載されています。
+
+{{< img src="/account_management/billing/subscription_details.png" alt="Account Plan & Usage ページで Subscription Details セクションをハイライトしています" style="width:90%;" >}}
+
+**注**: 請求が Datadog パートナーを通じて直接管理されている場合、Subscription Details はサポートされていません。
+
+## 支払い
 
 お支払い方法には 2 つの選択肢があります。
 - クレジットカード
@@ -41,35 +73,13 @@ IoT のご請求に関する詳細については、[Datadog 料金ページ][7]
 
 ### クレジットカード
 
-クレジットカード払いの場合は、[管理者][8]に [Billing History][9] で前月の領収書が発行されます。請求書のコピーについては、[Datadog の請求担当][10]にメールでお問い合わせください。
+クレジットカード払いの場合は、[管理者][9]に [Billing History][10] で前月の領収書が発行されます。請求書のコピーについては、[Datadog の請求担当][11]にメールでお問い合わせください。
 
-詳細については、[クレジットカード請求][11]を参照してください。
+詳細については、[クレジットカード請求][12]を参照してください。
 
 ### 請求
 
-小切手、ACH、または電信送金でお支払いの場合、請求書は毎月 10 営業日近くに請求先のメールアドレスにメールで送信されます。追加のコピーが必要な場合は、[Datadog の請求担当][10]にメールを送信してください。支払い先の詳細は請求書に記載されています。
-
-### 支払い方法の管理
-
-[**Payment Method**][12] セクションには、支払い方法の詳細が記載されています。
-
-{{< img src="account_management/billing/PaymentMethodOverview.png" alt="プランページの支払い方法" style="width:80%;" >}}
-
-**Edit Payment** は、支払い方法を管理するためのオプションを提供します。カードの編集や削除、カードから請求書、またはその逆への支払い方法の変更を依頼することができます。
-
-{{< img src="account_management/billing/PaymentSettingsDetails.png" alt="プランページの支払い設定" style="width:80%;" >}}
-
-### 請求先情報の管理
-
-請求先情報は、[**Billing Contact Details**][12] セクションで確認することができます。
-
-{{< img src="account_management/billing/BillingContactDetailsOverview.png" alt="プランページの請求先情報" style="width:80%;" >}}
-
-**Edit Details** を通じて、請求先住所の追加、編集、削除を行うことができます。また、請求書を受け取るための特定のメールアドレスを設定することもできます。
-
-{{< img src="account_management/billing/BillingContactDetailsEdit.png" alt="プランページでの請求先情報の編集" style="width:80%;" >}}
-
-**注**: このメールアドレスは、Datadog 内のチームメンバーでなくてもかまいません。たとえば、`invoices@yourcompany.com` を使用できます。
+小切手、ACH、または電信送金でお支払いの場合、請求書は毎月 10 営業日近くに請求先のメールアドレスにメールで送信されます。追加のコピーをリクエストするには、[Datadog の請求担当][11]にメールを送信してください。支払い先の詳細は請求書に記載されています。
 
 ## お問い合わせ
 
@@ -105,12 +115,12 @@ IoT のご請求に関する詳細については、[Datadog 料金ページ][7]
 [1]: https://app.datadoghq.com/account/usage/hourly
 [2]: /ja/infrastructure/
 [3]: /ja/agent/
-[4]: https://docs.datadoghq.com/ja/account_management/billing/pricing/#apm
-[5]: https://docs.datadoghq.com/ja/account_management/billing/serverless
+[4]: /ja/account_management/billing/pricing/#apm
+[5]: /ja/account_management/billing/serverless
 [6]: https://www.datadoghq.com/pricing/?product=serverless#serverless
 [7]: https://www.datadoghq.com/pricing/
-[8]: /ja/account_management/rbac/#datadog-default-roles
-[9]: https://app.datadoghq.com/account/billing_history
-[10]: mailto:billing@datadoghq.com
-[11]: /ja/account_management/billing/credit_card/
-[12]: https://app.datadoghq.com/billing/plan
+[8]: https://app.datadoghq.com/billing/plan
+[9]: /ja/account_management/rbac/#datadog-default-roles
+[10]: https://app.datadoghq.com/account/billing_history
+[11]: mailto:billing@datadoghq.com
+[12]: /ja/account_management/billing/credit_card/

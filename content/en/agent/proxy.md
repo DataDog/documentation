@@ -212,7 +212,7 @@ proxy:
 
 After saving these changes, [restart the Agent][1].
 
-Verify that Datadog is able to receive the data from your Agent(s) by checking your [Infrastructure Overview][6].
+Verify that Datadog is able to receive the data from your Agent(s) by checking your [Infrastructure Overview][3].
 
 **Agent v5**
 
@@ -225,17 +225,17 @@ proxy_port: 3128
 
 After saving these changes, [restart the Agent][1].
 
-Verify that Datadog is able to receive the data from your Agent(s) by checking your [Infrastructure Overview][6].
+Verify that Datadog is able to receive the data from your Agent(s) by checking your [Infrastructure Overview][3].
 
 ## HAProxy
 
-[HAProxy][3] is a free, fast, and reliable solution offering proxying for TCP and HTTP applications. While HAProxy is usually used as a load balancer to distribute incoming requests to pool servers, you can also use it to proxy Agent traffic to Datadog from hosts that have no outside connectivity:
+[HAProxy][4] is a free, fast, and reliable solution offering proxying for TCP and HTTP applications. While HAProxy is usually used as a load balancer to distribute incoming requests to pool servers, you can also use it to proxy Agent traffic to Datadog from hosts that have no outside connectivity:
 
 `agent ---> haproxy ---> Datadog`
 
 This is another good option if you do not have a web proxy readily available in your network and you wish to proxy a large number of Agents. In some cases, a single HAProxy instance is sufficient to handle local Agent traffic in your network, because each proxy can accommodate upwards of 1000 Agents.
 
-**Note**: This figure is a conservative estimate based on the performance of `m3.xl` instances specifically. Numerous network-related and host-related variables can influence throughput of HAProxy, so you should keep an eye on your proxy deployment both before and after putting it into service. See the [HAProxy documentation][3] for additional information.
+**Note**: This figure is a conservative estimate based on the performance of `m3.xl` instances specifically. Numerous network-related and host-related variables can influence throughput of HAProxy, so you should keep an eye on your proxy deployment both before and after putting it into service. See the [HAProxy documentation][4] for additional information.
 
 The communication between HAProxy and Datadog is always encrypted with TLS. The communication between the Agent host and the HAProxy host is not encrypted by default, because the proxy and the Agent are assumed to be on the same host. However, it is recommended that you secure this communication with TLS encryption if the HAproxy host and Agent host are not located on the same isolated local network.
 To encrypt data between the Agent and HAProxy, you need to create an x509 certificate with the Subject Alternative Name (SAN) extension for the HAProxy host. This certificate bundle (*.pem) should contain both the public certificate and private key. See this [HAProxy blog post][5] for more information.
@@ -778,7 +778,7 @@ To send traces, profiles, processes, and logs through the proxy, setup the follo
 ```yaml
 apm_config:
     apm_dd_url: <SCHEME>://haproxy.example.com:3835
-    profiling_dd_url: <SCHEME>://haproxy.example.com:3836
+    profiling_dd_url: <SCHEME>://haproxy.example.com:3836/api/v2/profile
     telemetry:
         dd_url: <SCHEME>://haproxy.example.com:3843
 
@@ -831,7 +831,7 @@ skip_ssl_validation: true
 
 Finally [restart the Agent][1].
 
-To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3833` as well as the [Infrastructure Overview][6].
+To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3833` as well as the [Infrastructure Overview][3].
 
 **Agent v5**
 
@@ -872,11 +872,11 @@ skip_ssl_validation: yes
 
 Finally [restart the Agent][1].
 
-To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3833` as well as the [Infrastructure Overview][6].
+To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3833` as well as the [Infrastructure Overview][3].
 
 ## NGINX
 
-[NGINX][7] is a web server which can also be used as a reverse proxy, load balancer, mail proxy, and HTTP cache. You can also use NGINX as a proxy for your Datadog Agents:
+[NGINX][6] is a web server which can also be used as a reverse proxy, load balancer, mail proxy, and HTTP cache. You can also use NGINX as a proxy for your Datadog Agents:
 
 `agent ---> nginx ---> Datadog`
 
@@ -1129,7 +1129,7 @@ To send traces, profiles, processes, and logs through the proxy, setup the follo
 ```yaml
 apm_config:
     apm_dd_url: <SCHEME>://nginx.example.com:3835
-    profiling_dd_url: <SCHEME>://nginx.example.com:3836
+    profiling_dd_url: <SCHEME>://nginx.example.com:3836/api/v2/profile
     telemetry:
         dd_url: <SCHEME>://nginx.example.com:3843
 
@@ -1181,7 +1181,7 @@ With this option set to `true`, the Agent skips the certificate validation step 
 skip_ssl_validation: true
 ```
 
-When sending logs over TCP, see [TCP Proxy for Logs][8].
+When sending logs over TCP, see [TCP Proxy for Logs][7].
 
 ## Datadog Agent
 
@@ -1231,9 +1231,8 @@ It is recommended to use an actual proxy (a web proxy or HAProxy) to forward you
 
 [1]: /agent/guide/agent-commands/
 [2]: http://www.squid-cache.org/
-[3]: http://haproxy.1wt.eu
-[4]: http://www.haproxy.org/#perf
+[3]: https://app.datadoghq.com/infrastructure
+[4]: http://haproxy.1wt.eu
 [5]: https://www.haproxy.com/blog/haproxy-ssl-termination/
-[6]: https://app.datadoghq.com/infrastructure
-[7]: https://www.nginx.com
-[8]: /agent/logs/proxy
+[6]: https://www.nginx.com
+[7]: /agent/logs/proxy

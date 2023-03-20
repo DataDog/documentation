@@ -7,10 +7,10 @@ further_reading:
   - link: "https://app.datadoghq.com/release-notes?category=Security%20%26%20Compliance"
     tag: "Release Notes"
     text: "See What's New in Datadog Security Compliance"
-  - link: "/security/cspm/getting_started"
+  - link: "/security/cspm/setup"
     tag: "Documentation"
     text: "Start tracking misconfigurations with Cloud Security Posture Management"
-  - link: "/security/cloud_workload_security/getting_started"
+  - link: "/security/cloud_workload_security/setup"
     tag: "Documentation"
     text: "Uncover kernel-level threats with Cloud Workload Security"
   - link: "https://www.datadoghq.com/blog/cyber-attack-simulation-with-stratus-red-team/"
@@ -25,6 +25,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/security-labs-ruleset-launch/"
     tag: "Blog"
     text: "Fix common cloud security risks with the Datadog Security Labs Ruleset"
+  - link: "https://www.datadoghq.com/blog/securing-cloud-native-applications/"
+    tag: "Blog"
+    text: "Best practices for application security in cloud-native environments"
 ---
 
 ## Overview

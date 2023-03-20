@@ -19,7 +19,7 @@ assets:
     '[php_apcu] Detected High Cache Usage': assets/monitors/php-apcu_high_usage.json
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: コミュニティ
   sales_email: noname@withgod.jp
   support_email: noname@withgod.jp
 categories: []

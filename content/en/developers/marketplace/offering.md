@@ -68,7 +68,7 @@ Integrations send the following types of data to Datadog:
 - [Incidents][10]
 - [Security Events][11]
 
-For more information about Datadog Agent-based integrations, see: 
+For more information about Datadog Agent-based integrations, see:
 
 - [Introduction to Agent-based Integrations][12]
 - [Creating your own solution][13]
@@ -101,7 +101,7 @@ You can explore examples of existing API integrations in the `integrations-extra
 
 ### SaaS license or professional service offerings
 
-To list a SaaS license or professional service offering in the Marketplace, you only need to create an informational tile-only listing.  
+To list a SaaS license or professional service offering in the Marketplace, you only need to create an informational tile-only listing.
 
 ## Set up a directory and clone the Marketplace repository
 
@@ -114,44 +114,27 @@ Once you've decided on an offering, set up a directory:
    The Datadog Development Toolkit command expects you to be working in the `$HOME/dd/` directory. This is not mandatory, but working in a different directory requires additional configuration steps.
 3. Once you have been granted access to the Marketplace repository, create the `dd` directory and clone the `marketplace` repo:
    {{< code-block lang="shell" >}}git clone git@github.com:DataDog/marketplace.git{{< /code-block >}}
+4. Create a feature branch to work in.
 
 ## Install and configure the Datadog development toolkit
 
-The Datadog Development Toolkit command (`ddev`) allows you to create scaffolding when you are developing an integration by generating a skeleton of your integration tile's assets and metadata.
+The Agent Integration Developer Tool allows you to create scaffolding when you are developing an integration by generating a skeleton of your integration tile's assets and metadata. For instructions on installing the tool, see [Install the Datadog Agent Integration Developer Tool][25].
 
-Before you begin, make sure you meet the following prerequisites:
+After you install the Developer tool, configure it for the `marketplace` repo:
 
-- [Python v3.8 or later][20]
-- Docker is required if you're building an Agent-based integration
-- A Python virtual environment is recommended to avoid potential environment conflicts. The instructions below use `venv`, which comes packaged with Python v3.3 and later on most operating systems.
+Set `marketplace` as the default working repository:
 
-Install and configure the development toolkit:
+{{< code-block lang="shell" >}}
+ddev config set marketplace $HOME/dd/marketplace
+ddev config set repo marketplace
+{{< /code-block >}}
 
-1. Make sure you're inside the `marketplace` directory:
-   {{< code-block lang="shell" >}}cd $HOME/dd/marketplace{{< /code-block >}}
+If you used a directory other than `$HOME/dd` to clone the marketplace directory, use the following command to set your working repository:
 
-2. Set up a Python virtual environment:
-   {{< code-block lang="shell" >}}
-   python3 -m venv venv
-   . venv/bin/activate{{< /code-block >}}
-
-   You can exit the virtual environment at any time by running `deactivate`.
-
-3. Install the [Developer Toolkit][21]:
-   {{< code-block lang="shell" >}}pip3 install "datadog-checks-dev[cli]"{{< /code-block >}}
-
-   If you are using the Z Shell, you may need to use escaped characters by running `pip3 install datadog-checks-dev\[cli\]`.
-
-4. Set `marketplace` as the default working repository:
-   {{< code-block lang="shell" >}}
-   ddev config set marketplace $HOME/dd/marketplace
-   ddev config set repo marketplace{{< /code-block >}}
-
-   If you used a directory other than `$HOME/dd` to clone the marketplace directory, use the following command to set your working repository:
-
-   {{< code-block lang="shell" >}}
-   ddev config set marketplace <PATH/TO/MARKETPLACE>
-   ddev config set repo marketplace{{< /code-block >}}
+{{< code-block lang="shell" >}}
+ddev config set marketplace <PATH/TO/MARKETPLACE>
+ddev config set repo marketplace
+{{< /code-block >}}
 
 ## Populate the integration tile scaffolding
 
@@ -165,7 +148,7 @@ To create the informational tile-only listing's scaffolding:
 
 1. Make sure you're inside the `marketplace` directory:
    {{< code-block lang="shell" >}}cd $HOME/dd/marketplace{{< /code-block >}}
-2. Run the `ddev` command with the `-t tile` option
+2. Run the `ddev` command with the `-t tile` option:
    {{< code-block lang="shell" >}}ddev create -t tile "<Offering Name>"{{< /code-block >}}
 
 ### Create a full Agent-based integration
@@ -173,7 +156,7 @@ To create the informational tile-only listing's scaffolding:
 To generate the scaffolding for an Agent-based integration:
 1. Make sure you're inside the `marketplace` directory:
    {{< code-block lang="shell" >}}cd $HOME/dd/marketplace{{< /code-block >}}
-2. Run the `ddev` command with the `-t tile` option
+2. Run the `ddev` command:
    {{< code-block lang="shell" >}}ddev create "<Offering Name>"{{< /code-block >}}
 
 ## Complete the necessary integration asset files
@@ -247,7 +230,7 @@ For more information, see [Integrations Assets Reference][22].
 
 ## Open a pull request
 
-Open a pull request that contains your integration tile's asset files (including images) in the [`marketplace` repository][18]. Automatic tests run checks in Azure DevOps pipelines to verify that your pull request is in good shape and contains all the required content to be updated.
+Push up your feature branch and open a pull request that contains your integration tile's asset files (including images) in the [`marketplace` repository][18]. The Marketplace repository does not allow forks. For instructions on creating a clone of the repo, see the [Set up section](#set-up-a-directory-and-clone-the-marketplace-repository). After you've created your pull request, automatic checks run in Azure DevOps pipelines to verify that your pull request is in good shape and contains all the required content to be updated.
 
 To request access to the Azure DevOps pipeline, leave a comment in the pull request requesting access.
 
@@ -293,3 +276,4 @@ Once a Marketplace tile is live, Technology Partners can meet with Datadog's Par
 [22]: /developers/integrations/check_references/#manifest-file
 [23]: https://datadoghq.com/blog/
 [24]: https://github.com/DataDog/integrations-extras/tree/master/vantage
+[25]: /developers/integrations/python

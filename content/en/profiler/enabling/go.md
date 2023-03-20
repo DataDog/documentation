@@ -24,6 +24,8 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 
 The Datadog Profiler requires Go 1.12+.
 
+For [Code Hotspots][12] and [Endpoint Profiling][13], use Go version 1.18+ and `dd-trace-go` version 1.37.0+.
+
 Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
 
 ## Installation
@@ -104,7 +106,7 @@ To add detailed C function call information to CPU profiles, you may opt to use 
 1. Download the package:
 
     ```shell
-   go get github.com/ianlancetaylor/cgosymbolizer@latest
+    go get github.com/ianlancetaylor/cgosymbolizer@latest
     ```
 
 2. Add the following import anywhere in your program:
@@ -126,10 +128,12 @@ The [Getting Started with Profiler][9] guide takes a sample service with a perfo
 [1]: /tracing/trace_collection/
 [2]: https://app.datadoghq.com/account/settings#agent/overview
 [3]: https://app.datadoghq.com/account/settings?agent_version=6#agent
-[4]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/profiler#pkg-constants
+[4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#pkg-constants
 [5]: https://app.datadoghq.com/profiling
 [6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#WithProfileTypes
 [7]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#ProfileType
 [8]: /getting_started/tagging/unified_service_tagging
 [9]: /getting_started/profiler/
 [10]: https://pkg.go.dev/github.com/ianlancetaylor/cgosymbolizer#pkg-overview
+[12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
+[13]: /profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints

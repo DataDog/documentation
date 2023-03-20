@@ -1,0 +1,27 @@
+{
+  "meta": {},
+  "data": {
+    "type": "sensitive_data_scanner_group",
+    "attributes": {
+      "name": "Example-Create_Scanning_Group_returns_OK_response",
+      "is_enabled": false,
+      "product_list": [
+        "logs"
+      ],
+      "filter": {
+        "query": "*"
+      }
+    },
+    "relationships": {
+      "configuration": {
+        "data": {
+          "type": "sensitive_data_scanner_configuration",
+          "id": "string"
+        }
+      },
+      "rules": {
+        "data": []
+      }
+    }
+  }
+}

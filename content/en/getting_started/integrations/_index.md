@@ -1,18 +1,18 @@
 ---
 title: Introduction to Integrations
 kind: documentation
-aliases:
-    - '/getting_started/integrations'
 further_reading:
-    - link: 'https://learn.datadoghq.com/'
-      tag: 'Learning Center'
-      text: 'Introduction to Datadog'
-    - link: '/integrations/'
-      tag: 'Integrations'
-      text: "Datadog's full list of integrations"
+  - link: 'https://learn.datadoghq.com/courses/intro-to-integrations'
+    tag: 'Learning Center'
+    text: 'Introduction to Integrations'
+  - link: '/integrations/'
+    tag: 'Documentation'
+    text: 'See a list of Datadog integrations'
 ---
 
-This is a guide for using integrations, if you are looking for information about building a new integration, see the [Create a new integration][1] page.
+## Overview
+
+This is a guide for using integrations. If you are looking for information about building a new integration, see the [Create a new integration][1] page.
 
 An integration, at the highest level, is when you assemble a unified system from units that are usually considered separately. At Datadog, you can use integrations to bring together all of the metrics and logs from your infrastructure and gain insight into the unified system as a whole—you can see pieces individually and also how individual pieces are impacting the whole.
 
@@ -70,7 +70,7 @@ logs:
       sourcecategory: http_web_access
 ```
 
-To create multiple instances in the same Agent check to monitor two Apache services, create a new instance with a `-` in the `instances` section:
+To monitor multiple Apache instances in the same Agent check, add additional instances to the `instances` section:
 
 ```yaml
 init_config:
@@ -170,7 +170,7 @@ logging
 : The file that lists and stores the metrics collected by each integration.
 
 metrics
-: The list of what is collected from your system by each integration. You can find the metrics for each integration in that integrations `metadata.csv` file. For more information about metrics, see the [Metrics][42] developer page. You can also set up [custom metrics][43], so if the integration doesn't offer a metric out of the box, you can usually add it.
+: The list of what is collected from your system by each integration. You can find the metrics for each integration in that integration's `metadata.csv` file. For more information about metrics, see the [Metrics][42] developer page. You can also set up [custom metrics][43], so if the integration doesn't offer a metric out of the box, you can usually add it.
 
 parameters
 : Use the parameters in the `conf.yaml` file to control accesses between your integration data source and the Agent. The individual integrations `conf.yaml.example` file has all of the required and not required parameters listed.
@@ -213,7 +213,7 @@ tagging
 [27]: /getting_started/tagging/unified_service_tagging/
 [28]: /agent/guide/agent-commands/#agent-status-and-information
 [29]: /infrastructure/process/
-[30]: /security/
+[30]: /data_security/
 [31]: /metrics/explorer/
 [32]: /dashboards/
 [33]: /monitors/

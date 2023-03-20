@@ -33,6 +33,14 @@ RUM SDK は、メトリクスと属性が関連付けられたイベントを生
 
 {{< img src="real_user_monitoring/data_collected/event-hierarchy.png" alt="RUM イベント階層" style="width:50%;border:none" >}}
 
+## アプリケーションの起動
+
+初期化中に、RUM iOS SDK は "ApplicationLaunch" と呼ばれるビューを作成します。このビューの開始時刻は iOS のプロセスの開始時刻と一致しており、アプリケーションの起動時刻を追跡するために使用することができます。
+
+ApplicationLaunch ビューには、最初に `startView` を呼び出す前に作成されたすべてのログ、アクション、リソースが含まれます。このビューの継続時間を使用して、最初に表示するまでの時間を決定します。このビューには `application_start` というアクションがあり、継続時間はプロセス開始から `applicationDidBecomeActive` を呼び出すまでの時間に等しくなります。
+
+iOS が[アプリケーションのプリウォーム][4]を決定した場合、代わりに ApplicationLaunch ビューが RUM iOS SDK の初期化時に開始され、`application_start` イベントには継続時間がありません。
+
 ## デフォルト属性
 
 RUM は、すべてのイベントに共通の属性および以下に挙げたイベントに特定の属性をデフォルトで収集します。また、[追加のイベント][1]でユーザーセッションデータを強化し、アプリケーションの監視やビジネス分析のニーズに合わせてイベントをデフォルトに設定することも可能です。
@@ -76,7 +84,9 @@ RUM は、すべてのイベントに共通の属性および以下に挙げた�
 
 ### 地理的位置
 
-次の属性は、IP アドレスの地理的位置に関連しています。
+以下の属性は、IP アドレスの地理的位置に関連しています。
+
+**注:** 地理的位置の属性収集を停止したい場合は、[アプリケーションの詳細][6]で設定を変更してください。
 
 | 完全名                           | タイプ   | 説明                                                                                                                               |
 |------------------------------------|--------|-------------------------------------------------------------------------------------------------------------------------------------------|
@@ -124,7 +134,7 @@ RUM は、すべてのイベントに共通の属性および以下に挙げた�
 | `session.initial_view.name` | 文字列 | セッションの初期ビューの名前。                                    |
 | `session.last_view.url`      | 文字列 | セッションの最後のビューの URL。                                        |
 | `session.last_view.name`     | 文字列 | セッションの最後のビューの名前。                                       |
-| `session.ip`                 | 文字列 | インテークの TCP 接続から抽出されたセッションの IP アドレス。 |
+| `session.ip`                 | 文字列 | インテークの TCP 接続から抽出されたセッションの IP アドレス。この属性の収集を停止したい場合は、[アプリケーションの詳細][5]で設定を変更してください。 |
 | `session.useragent`          | 文字列 | デバイスの情報を解釈するためのシステムユーザーエージェントの情報。                            |
 
 
@@ -225,10 +235,13 @@ RUM アクション、エラー、リソース、ロングタスクのイベン�
 
 データは Datadog にアップロードされる前に、[アプリケーションサンドボックス][3]のキャッシュディレクトリ (`Library/Caches`) に平文で保存され、デバイスにインストールされた他のアプリからは読み取ることができません。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/ja/real_user_monitoring/ios/advanced_configuration/#enrich-user-sessions
 [2]: https://docs.datadoghq.com/ja/real_user_monitoring/ios/advanced_configuration/#track-user-sessions
 [3]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web
+[4]: https://developer.apple.com/documentation/uikit/app_and_environment/responding_to_the_launch_of_your_app/about_the_app_launch_sequence
+[5]: https://docs.datadoghq.com/ja/data_security/real_user_monitoring/#ip-address
+[6]: https://docs.datadoghq.com/ja/data_security/real_user_monitoring/#geolocation

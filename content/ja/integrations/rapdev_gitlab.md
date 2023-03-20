@@ -19,7 +19,7 @@ assets:
 author:
   homepage: https://www.rapdev.io
   name: RapDev
-  sales_email: sales@rapdev.io
+  sales_email: ddsales@rapdev.io
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
@@ -53,13 +53,13 @@ public_title: GitLab インテグレーション
 short_description: GitLab のプロジェクト、アプリケーション、インスタンスを監視します。
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Category::Marketplace
   - Category::Cloud
@@ -80,6 +80,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: GitLab インテグレーション
+  uninstallation: README.md#Uninstallation
 ---
 
 
@@ -108,5 +109,6 @@ GitLab は、ソフトウェアの開発、セキュリティ、運用の機能�
 
 [1]: https://docs.datadoghq.com/ja/getting_started/agent/
 [2]: mailto:support@rapdev.io
+
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-gitlab" target="_blank">こちらをクリック</a>してください。

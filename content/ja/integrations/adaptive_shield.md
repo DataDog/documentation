@@ -36,13 +36,13 @@ public_title: Adaptive Shield
 short_description: SaaS のポスチャアラートの追跡
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Category::Alerting
   - Category::Cloud
@@ -60,6 +60,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Adaptive Shield
+  uninstallation: README.md#Uninstallation
 ---
 
 ## 概要
@@ -75,7 +76,7 @@ Adaptive Shield とのインテグレーションにより、構成ドリフト�
 4. 認可するには **OAuth** をクリックします。
 
 
-### アンインストール
+## アンインストール
 
 このインテグレーションをアンインストールすると、それまでの認可はすべて取り消されます。
 
@@ -86,5 +87,5 @@ Adaptive Shield とのインテグレーションにより、構成ドリフト�
 ご不明な点は、[Adaptive Shield のサポートチーム][3]までお問い合わせください。
 
 [1]: https://dashboard.adaptive-shield.com/settings/alerts/add/63230b73c9624b93dadf38d4
-[2]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: https://app.datadoghq.com/organization-settings/api-keys?filter=Adaptive%20Shield
 [3]: mailto:support@adaptive-shield.com

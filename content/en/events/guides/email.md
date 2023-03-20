@@ -6,7 +6,7 @@ aliases:
     - /guides/eventsemail
 ---
 
-If your application does not have an existing [Datadog integration][1], and you don't want to create a [custom Agent check][2], you can send events with email.
+If your application does not have an existing [Datadog integration][1], and you don't want to create a [custom Agent check][2], you can send events with email. This can also be done with messages published to an Amazon SNS topic; read the [Create Datadog Events from Amazon SNS Emails][6] guide for more information.
 
 ## Setup
 
@@ -16,8 +16,7 @@ Before you can send events with email, you need a dedicated email address from D
 2. From the **Account** menu at the bottom left, select **Organization Settings**.
 3. Click the **Events API emails** tab.
 4. Choose the format for your messages from the **Format** dropdown (`Plain text` or `JSON`).
-5. Click the **Create API email** button.
-6. See the [APIs page][4] for your results.
+5. Click the **Create Email** button.
 
 The **Events API emails** section displays all the emails available for your applications and who created them.
 
@@ -107,5 +106,5 @@ http://example.com/session_id%3A123456
 [1]: /integrations/
 [2]: /agent/agent_checks/
 [3]: https://app.datadoghq.com
-[4]: https://app.datadoghq.com/account/settings#api
 [5]: http://daringfireball.net/projects/markdown/syntax#lin
+[6]: /integrations/guide/events-from-sns-emails/

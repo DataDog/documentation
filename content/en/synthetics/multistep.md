@@ -199,7 +199,7 @@ Location uptime is computed on a per-evaluation basis (whether the last test res
 
 A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what to message your team.
 
-1. [Similar to monitors][10], select **users and/or services** that should receive notifications either by adding an `@notification` to the message or by searching for team members and connected integrations with the drop-down box.
+1. [Similar to monitors][10], select **users and/or services** that should receive notifications either by adding an `@notification` to the message or by searching for team members and connected integrations with the dropdown box.
 
 2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][11] and supports the following [conditional variables][12]:
 
@@ -233,6 +233,9 @@ To create a local variable, click **Create a Local Variable** at the top right h
 
 `{{ alphanumeric(n) }}`
 : Generates an alphanumeric string with `n` characters.
+
+`{{ uuid }}`
+: Generates a version 4 universally unique identifier (UUID).
 
 `{{ date(n unit, format) }}`
 : Generates a date in one of Datadog's accepted formats with a value corresponding to the UTC date the test is initiated at + or - `n` units.

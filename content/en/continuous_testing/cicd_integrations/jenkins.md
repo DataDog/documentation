@@ -36,11 +36,11 @@ Install and run the Node.js and npm packages within your Jenkins environment wit
 
 For more information about the existing Datadog-Jenkins integration, see [Set up Tracing on a Jenkins Pipeline][5].
 
-### Add a NodeJS installation
+### Add a Node.js installation
 
 Navigate to the global Jenkins Configuration panel and add a Node.js installation.
 
-{{< img src="synthetics/cicd_integrations/jenkins/nodejs-installation.png" alt="NodeJS Installations in Jenkins" style="width:80%;">}}
+{{< img src="synthetics/cicd_integrations/jenkins/nodejs-installation.png" alt="Node.js Installations in Jenkins" style="width:80%;">}}
 
 Install `@datadog/datadog-ci` globally for all relevant Node.js installations.
 

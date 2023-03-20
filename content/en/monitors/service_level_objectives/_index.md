@@ -9,9 +9,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/slo-monitoring-tracking/"
   tag: "Blog"
   text: "Track the status and error budget of your SLOs with Datadog"
-- link: "https://learn.datadoghq.com/course/view.php?id=34"
+- link: "https://learn.datadoghq.com/courses/intro-to-slo"
   tag: "Learning Center"
-  text: "Introduction to Service Level Objectives (SLOs)"
+  text: "Introduction to Service Level Objectives"
 - link: "https://www.datadoghq.com/blog/service-page/"
   tag: "Blog"
   text: "Service Telemetry, Error Tracking, SLOs and more"
@@ -20,7 +20,9 @@ further_reading:
   text: "Proactively monitor service performance with SLO alerts"
 ---
 
-{{< vimeo 382481078 >}}
+{{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/382481078/rendition/1080p/file.mp4?loc=external&signature=f5a81ca1c44d9c1c2cfcbd23c2b6b4f89914027ff344fb0a9f8dc6b9a1d141aa" poster="/images/poster/slo.png" >}}
+
+{{< jqmath-vanilla >}}
 
 <br />
 
@@ -59,7 +61,8 @@ After you set up the SLO, select it from the [Service Level Objectives list view
 **Example:** If you create a monitor-based SLO to track latency per availability-zone, the status percentages and remaining error budget for the overall SLO and for each individual availability-zone that the SLO is tracking are displayed.
 
 **Note:** The remaining error budget is displayed as a percentage and is calculated using the following formula:
-{{< img src="monitors/service_level_objectives/error_budget_remaining.jpeg" alt="Remaining error budget formula" >}}
+
+$$\text"error budget remaining" = 100 * {\text"current status" - \text" target"} / { 100 - \text"target"}$$
 
 ### Setting SLO targets
 
@@ -229,7 +232,7 @@ To view, edit, and delete existing status corrections, click on the **Correction
 [2]: /dashboards/widgets/slo/
 [3]: /monitors/service_level_objectives/metric/
 [4]: /monitors/service_level_objectives/monitor/
-[5]: /monitors/create/types/metric/?tab=threshold#alert-grouping
+[5]: /monitors/types/metric/?tab=threshold#alert-grouping
 [6]: /monitors/service_level_objectives/metric/#define-queries
 [7]: /monitors/service_level_objectives/monitor/#set-your-slo-targets
 [8]: /monitors/service_level_objectives/metric/#set-your-slo-targets
@@ -238,7 +241,7 @@ To view, edit, and delete existing status corrections, click on the **Correction
 [11]: https://play.google.com/store/apps/details?id=com.datadog.app
 [12]: /monitors/service_level_objectives/#saved-views
 [13]: /api/v1/events/#query-the-event-stream
-[14]: /monitors/create/types/event/
+[14]: /monitors/types/event/
 [15]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
 [16]: /api/latest/service-level-objective-corrections/
 [17]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/slo_correction

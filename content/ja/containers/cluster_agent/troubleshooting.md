@@ -24,15 +24,35 @@ kind: documentation
 title: Cluster Agent のトラブルシューティング
 ---
 
+このドキュメントには、次のコンポーネントのトラブルシューティング情報が記載されています。
+
+- [Datadog Cluster Agent](#datadog-cluster-agent)
+- [Node Agent](#node-agent)
+- [カスタムメトリクスサーバー](#custom-metrics-server)
+  - [Cluster Agent のステータスとフレア](#cluster-agent-status-and-flare)
+  - [HPA マニフェストの記述](#describing-the-hpa-manifest)
+  - [Datadog と Kubernetes の価値の違い](#differences-of-value-between-datadog-and-kubernetes)
+- [クラスターチェック](#cluster-checks)
+  - [Kubernetes: リーダー Cluster Agent を探す](#kubernetes-find-the-leader-cluster-agent)
+  - [Cluster Agent のオートディスカバリー](#autodiscovery-in-the-cluster-agent)
+  - [Cluster Agent のディスパッチロジック](#dispatching-logic-in-the-cluster-agent)
+  - [ノードベース Agent のオートディスカバリー](#autodiscovery-in-the-node-based-agent)
+  - [Agent ステータス](#agent-status)
+- [エンドポイントチェック](#endpoint-checks)
+  - [Node Agent のオートディスカバリー](#autodiscovery-in-the-node-agent)
+  - [Agent ステータス](#agent-status-1)
+  - [Cluster Agent のオートディスカバリー](#autodiscovery-in-the-cluster-agent-1)
+- [参考文献](#further-reading)
+
+## Datadog Cluster Agent
+
 Cluster Agent のトラブルシューティングコマンドを実行するには、最初に Cluster Agent またはノードベースの Agent のポッド内にいる必要があります。これには、次を使用します。
 
 ```text
 kubectl exec -it <DATADOG_CLUSTER_AGENT_ポッド名> bash
 ```
 
-## Datadog Cluster Agent
-
-Datadog Cluster Agent が提供するクラスターレベルのメタデータを確認するには、ポッドに `exec` して次を実行します。
+Datadog Cluster Agent が提供するクラスターレベルのメタデータを確認するには、次を実行します。
 
 ```text
 datadog-cluster-agent metamap
@@ -82,12 +102,7 @@ root@datadog-cluster-agent-8568545574-x9tc9:/# tail -f /var/log/datadog/cluster-
 2018-06-11 09:37:20 UTC | DEBUG | (metadata.go:40 in GetPodMetadataNames) | CacheKey: agent/KubernetesMetadataMapping/ip-192-168-226-77.ec2.internal, with 1 services
 ```
 
-イベントを適切に収集していない場合は、これらの環境変数が `true` に設定されていることを確認します。
-
-- リーダー選出: `DD_LEADER_ELECTION`
-- イベント収集: `DD_COLLECT_KUBERNETES_EVENTS`
-
-また、RBAC にリストされている適切な動詞（特に、`watch events`）。
+イベントを正しく収集できない場合は、`DD_LEADER_ELECTION` と `DD_COLLECT_KUBERNETES_EVENTS` を `true` に設定し、RBAC に記載されている適切な動詞 (特に、`watch events`) も設定するようにしてください。
 
 これらを有効にしている場合は、リーダー選出ステータスと `kube_apiserver` チェックを次のコマンドで確認します。
 
@@ -121,7 +136,7 @@ root@datadog-cluster-agent-8568545574-x9tc9:/# datadog-cluster-agent status
 
 ## Node Agent
 
-Agent のステータスコマンドの実行中に、Datadog Cluster Agent のステータスを確認できます。
+Agent ステータスコマンドを実行することで、Datadog Cluster Agent のステータスを確認できます。
 `datadog-agent status`
 
 Datadog Cluster Agent が有効になっており、正しく構成されている場合、以下が表示されます。
@@ -162,7 +177,7 @@ root@datadog-agent-9d5bl:/# cat /var/log/datadog/agent.log | grep "metadata-coll
 
 または、次のようなエラーログを探します。
 
-```shell
+```text
 2018-06-10 08:03:02 UTC | ERROR | Could not initialize the communication with the Datadog Cluster Agent, falling back to local service mapping: [...]
 ```
 
@@ -175,13 +190,13 @@ root@datadog-agent-9d5bl:/# cat /var/log/datadog/agent.log | grep "metadata-coll
 * 集計レイヤーと証明書が設定されていることを確認します。
 * 自動スケーリングするメトリクスが利用可能であることを確認します。HPA を作成すると、Datadog Cluster Agent はマニフェストを解析し、Datadog にクエリしてメトリクスの取得を試みます。メトリクス名に表記上の問題がある場合、またはメトリクスが Datadog アプリケーション内に存在しない場合、次のエラーが発生します。
 
-    ```shell
+    ```text
     2018-07-03 13:47:56 UTC | ERROR | (datadogexternal.go:45 in queryDatadogExternal) | Returned series slice empty
     ```
 
 `datadog-cluster-agent status` コマンドを実行して、External Metrics Provider プロセスのステータスを確認します。
 
-```shell
+```text
   Custom Metrics Provider
   =======================
   External Metrics
@@ -194,7 +209,7 @@ root@datadog-agent-9d5bl:/# cat /var/log/datadog/agent.log | grep "metadata-coll
 
 この flare コマンドは、`custom-metrics-provider.log` を含む zip ファイルを生成します。このファイルには、次のような出力が表示されます。
 
-```
+```text
   Custom Metrics Provider
   =======================
   External Metrics
@@ -286,6 +301,214 @@ default     nginxext   Deployment/nginx   824/9 (avg)   1         3         3   
 そしてもちろん、`824 * 3 replicas = 2472` です。
 
 *免責事項*: Datadog Cluster Agent は、異なる HPA マニフェストに設定されたメトリクスを処理し、デフォルトで 30 秒ごとに Datadog に照会して値を取得します。Kubernetes は、デフォルトで 30 秒ごとに Datadog Cluster Agent に照会します。このプロセスは非同期で行われるため、特にメトリクスが異なる場合、上記のルールが常に検証されることを期待するべきではありませんが、問題を軽減するために両者の頻度は構成可能です。
+
+## クラスターチェック
+
+### Kubernetes: リーダー Cluster Agent の検索
+
+リーダー選択が可能な場合、リーダーだけがクラスターチェック構成をノードベースの Agent に送ります。Cluster Agent ポッドのレプリカが 1 つだけ稼働している場合、そのレプリカがリーダーとなります。それ以外の場合は、`datadog-leader-election` ConfigMap でリーダーの名前を確認することができます。
+
+```yaml
+# kubectl get cm datadog-leader-election -o yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  annotations:
+    control-plane.alpha.kubernetes.io/leader: '{"holderIdentity":"cluster-agent-rhttz", ... }'
+```
+
+この例では、リーダーポッドは `cluster-agent-rhttz` です。ポッドが削除されている、あるいは応答がない場合は、別のポッドが自動的に引き継ぎます。
+
+### Cluster Agent 内のオートディスカバリー
+
+Cluster Agent に構成 (静的またはオートディスカバリー) が分かるよう、Cluster Agent のリーダーの `configcheck` コマンドを使用します。
+
+```text
+# kubectl exec <CLUSTER_AGENT_POD_NAME> agent configcheck
+...
+=== http_check cluster check ===
+Source: kubernetes-services
+Instance ID: http_check:My service:6e5f4b16b4b433cc
+name: My service
+tags:
+- kube_namespace:default
+- kube_service:my-nginx
+timeout: 1
+url: http://10.15.246.109
+~
+Init Config:
+{}
+Auto-discovery IDs:
+* kube_service://751adfe4-1280-11e9-a26b-42010a9c00c8
+===
+```
+
+### Cluster Agent のディスパッチロジック
+
+`clusterchecks` コマンドにより、以下を含むディスパッチロジックの状態をチェックできます。
+
+- どのノードベースの Agent が Cluster Agent にアクティブに報告しているか
+- 各ノードにどのチェックがディスパッチされているか
+
+```text
+# kubectl exec <CLUSTER_AGENT_POD_NAME> agent clusterchecks
+
+=== 3 node-agents reporting ===
+Name                                            Running checks
+default-pool-bce5cd34-7g24.c.sandbox.internal   0
+default-pool-bce5cd34-slx3.c.sandbox.internal   2
+default-pool-bce5cd34-ttw6.c.sandbox.internal   1
+...
+
+===== Checks on default-pool-bce5cd34-ttw6.c.sandbox.internal =====
+
+=== http_check check ===
+Source: kubernetes-services
+Instance ID: http_check:My service:5b948dee172af830
+empty_default_hostname: true
+name: My service
+tags:
+- kube_namespace:default
+- kube_service:my-nginx
+- cluster_name:example
+timeout: 1
+url: http://10.15.246.109
+~
+Init Config:
+{}
+===
+```
+
+**注**: `configcheck` コマンドとはインスタンス ID が異なりますが、インスタンスが変更されてタグとオプションが追加されるためです。
+
+この場合、この構成は `default-pool-bce5cd34-ttw6` ノードへディスパッチされます。トラブルシューティングは、その対応するノード上の Agent ポッドに関して続行されます。
+
+### ノードベースの Agent 内のオートディスカバリー
+
+Agent の `configcheck` コマンドは、`cluster-checks` ソース付きのインスタンスを表示します。
+
+```text
+# kubectl exec <NODE_AGENT_POD_NAME> agent configcheck
+...
+=== http_check check ===
+Source: cluster-checks
+Instance ID: http_check:My service:5b948dee172af830
+empty_default_hostname: true
+name: My service
+tags:
+- kube_namespace:default
+- kube_service:my-nginx
+- cluster_name:example
+timeout: 1
+url: http://10.15.246.109
+~
+Init Config:
+{}
+===
+```
+
+インスタンス ID は初期のものと一致します。
+
+### Agent のステータス
+
+Agent の `status` コマンドは、正しく実行されて報告を行っているチェックインスタンスを表示します。
+
+```text
+# kubectl exec <NODE_AGENT_POD_NAME> agent status
+...
+    http_check (3.1.1)
+    ------------------
+      Instance ID: http_check:My service:5b948dee172af830 [OK]
+      Total Runs: 234
+      Metric Samples: Last Run: 3, Total: 702
+      Events: Last Run: 0, Total: 0
+      Service Checks: Last Run: 1, Total: 234
+      Average Execution Time : 90ms
+```
+
+## エンドポイントチェック
+
+エンドポイントチェックのトラブルシューティングは、[クラスターチェックのトラブルシューティング](#cluster-checks)と似ています。Node Agent では、スケジュールされたエンドポイントチェックがクラスターチェックと一緒に表示されるという違いが生じます。
+
+**注**: エンドポイントチェックは、監視されるサービスのエンドポイントをホストするポッドと同じノードで動作している Agent によってスケジューリングされます。エンドポイントがポッドをホストしない場合は、クラスター Agent がエンドポイントチェックをクラスター チェックに変換します。このクラスターチェックは、どの Node Agent でも実行できます。
+
+### Node Agent 内のオートディスカバリー
+
+Agent の `configcheck` コマンドは、`endpoints-checks` ソースを付けてインスタンスを表示します。
+
+```shell
+# kubectl exec <NODE_AGENT_POD_NAME> agent configcheck
+...
+=== nginx check ===
+Configuration provider: endpoints-checks
+Configuration source: kube_endpoints:kube_endpoint_uid://default/nginx/
+Instance ID: nginx:956741d8796d940c
+nginx_status_url: http://10.0.0.75/nginx_status/
+tags:
+- pod_phase:running
+- kube_deployment:nginx
+- kube_service:nginx
+- kube_namespace:default
+- kube_endpoint_ip:10.0.0.75
+- cluster_name:cluster
+~
+Init Config:
+{}
+Auto-discovery IDs:
+* kube_endpoint_uid://default/nginx/10.0.0.75
+* kubernetes_pod://4e733448-f57e-11e9-8123-42010af001ed
+State: dispatched to gke-cluster-default-pool-4658d5d4-qfnt
+===
+```
+
+### Agent のステータス
+
+Agent の `status` コマンドは、正しく実行されて報告を行っているチェックインスタンスを表示します。
+
+```shell
+# kubectl exec <NODE_AGENT_POD_NAME> agent status
+...
+    nginx (4.0.0)
+    -------------
+      Instance ID: nginx:956741d8796d940c [OK]
+      Configuration Source: kube_endpoints:kube_endpoint_uid://default/nginx/
+      Total Runs: 443
+      Metric Samples: Last Run: 7, Total: 3,101
+      Events: Last Run: 0, Total: 0
+      Service Checks: Last Run: 1, Total: 443
+      Average Execution Time : 5ms
+```
+
+### Cluster Agent 内のオートディスカバリー
+
+Cluster Agent の `clusterchecks` コマンドは、`kubernetes-endpoints` ソースを付けてインスタンスを表示します。
+
+```shell
+# kubectl exec <クラスター AGENT のポッド名> agent clusterchecks
+...
+===== 3 Pod-backed Endpoints-Checks scheduled =====
+
+=== nginx check ===
+Configuration provider: kubernetes-endpoints
+Configuration source: kube_endpoints:kube_endpoint_uid://default/nginx/
+Instance ID: nginx:My Nginx Service Endpoints:f139adc46c81828e
+name: My Nginx Endpoints
+nginx_status_url: http://10.0.0.75/nginx_status/
+tags:
+- kube_service:nginx
+- kube_namespace:default
+- kube_endpoint_ip:10.0.0.75
+- cluster_name:cluster
+~
+Init Config:
+{}
+Auto-discovery IDs:
+* kube_endpoint_uid://default/nginx/10.0.0.75
+* kubernetes_pod://4e733448-f57e-11e9-8123-42010af001ed
+State: dispatched to gke-cluster-default-pool-4658d5d4-qfnt
+===
+...
+```
 
 ## その他の参考資料
 

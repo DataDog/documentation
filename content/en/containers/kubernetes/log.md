@@ -158,6 +158,7 @@ agent:
     name: "gcr.io/datadoghq/agent:latest"
   log:
     enabled: true
+    logsConfigContainerCollectAll: true
 ```
 
 See the sample [manifest with logs and metrics collection enabled][1] for a complete example.
@@ -165,7 +166,7 @@ See the sample [manifest with logs and metrics collection enabled][1] for a comp
 Then apply the new configuration:
 
 ```shell
-$ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
+kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 ```
 
 ## Unprivileged

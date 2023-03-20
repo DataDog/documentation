@@ -15,17 +15,6 @@ categories:
 - metrics
 - alerting
 - issue tracking
-classifier_tags:
-- Supported OS::Linux
-- Supported OS::Mac OS
-- Supported OS::Windows
-- Category::Monitoring
-- Category::Network
-- Category::Exceptions
-- Category::Metrics
-- Category::Alerting
-- Category::Issue Tracking
-- Offering::UI Extension
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/embrace_mobile/README.md
 display_on_public_website: true
@@ -43,10 +32,21 @@ public_title: Embrace Mobile
 short_description: Visibilité mobile pour iOS, Android, React Native et Unity
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Monitoring
+  - Category::Network
+  - Category::Exceptions
+  - Category::Metrics
+  - Category::Alerting
+  - Category::Issue Tracking
+  - Offering::UI Extension
   configuration: README.md#Setup
   description: Visibilité mobile pour iOS, Android, React Native et Unity
   media:

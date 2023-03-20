@@ -25,7 +25,7 @@ assets:
 author:
   homepage: https://www.rapdev.io
   name: RapDev
-  sales_email: sales@rapdev.io
+  sales_email: ddsales@rapdev.io
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
@@ -54,13 +54,13 @@ public_title: Tag Validator
 short_description: モニタータグを検証し、DD 環境での Agent コンプライアンスを確保します
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Category::Marketplace
   - Offering::Integration
@@ -73,6 +73,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Tag Validator
+  uninstallation: README.md#Uninstallation
 ---
 
 
@@ -83,7 +84,7 @@ RapDev Validator は、Datadog 環境でのタグモニタリングと Agent の
 ### ダッシュボード  
 1. RapDev Validator ダッシュボード
 
-### モニター
+### アラート設定
 1. ホストに必要なタグキーが割り当てられていない
 2. ホストのタグキーに非準拠の値が割り当てられている
 

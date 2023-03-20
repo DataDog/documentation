@@ -41,12 +41,12 @@ If you are using Agent 5, follow this [specific installation process][1]. If you
 {{< tabs >}}
 {{% tab "Linux/Windows" %}}
 
-Once the Datadog Agent is installed, enable Live Processes collection by editing the [Agent main configuration file][1] by setting the following parameter to `true`:
+Once the Datadog Agent is installed, enable Live Processes collection by editing the [Agent main configuration file][1] by setting the following parameter to `"true"`:
 
 ```yaml
 process_config:
   process_collection:
-    enabled: true
+    enabled: "true"
 ```
 
 The `enabled` value is a string with the following options:
@@ -368,7 +368,7 @@ While actively working with the Live Processes, metrics are collected at 2s reso
 [3]: /getting_started/tagging/
 [4]: /getting_started/tagging/unified_service_tagging
 [5]: https://app.datadoghq.com/process
-[6]: /monitors/create/types/process/
+[6]: /monitors/types/process/
 [7]: https://app.datadoghq.com/monitors#create/live_process
 [8]: /dashboards/widgets/timeseries/#pagetitle
 [9]: /infrastructure/livecontainers/

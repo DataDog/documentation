@@ -60,11 +60,21 @@ Install and configure the Datadog Agent to receive traces from your now instrume
 {{< partial name="apm/apm-containers.html" >}}
 </br>
 
-3. After having instrumented your application, the tracing client sends traces to `localhost:8126` by default.  If this is not the correct host and port change it by setting the below env variables:
+3. After having instrumented your application, the tracing client sends traces to Unix domain socket `/var/run/datadog/apm.socket` by default. If the socket does not exist, traces are sent to `http://localhost:8126`. If this is not the correct host and port change it by setting `DD_TRACE_AGENT_URL`, for example:
 
-    `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
+   ```
+   DD_TRACE_AGENT_URL=unix:///path/to/custom.socket
+   DD_TRACE_AGENT_URL=http://localhost:9442
+   ```
 
-    See [environment variable configuration](#environment-variable-configuration) for more information on how to set these variables.
+   Similarly, where `DD_TRACE_HEALTH_METRICS_ENABLED` is set true, the trace client attempts to send stats to the `/var/run/datadog/dsd.socket` Unix domain socket. If the socket does not exist then stats are sent to `http://localhost:8125`.
+
+   If a different configuration is required, use the `DD_DOGSTATSD_URL` environment variable. Some examples:
+   ```
+   DD_DOGSTATSD_URL=http://custom-hostname:1234
+   DD_DOGSTATSD_URL=unix:///var/run/datadog/dsd.socket
+   ```
+
 {{< site-region region="us3,us5,eu,gov" >}}
 
 4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
@@ -82,14 +92,13 @@ To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] d
 {{% /tab %}}
 {{% tab "Other Environments" %}}
 
-Tracing is available for a number of other environments, such as  [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3], and [Azure App Service][4].
+Tracing is available for a number of other environments, such as  [Heroku][1], [Cloud Foundry][2], and [AWS Elastic Beanstalk][3].
 
 For other environments, please refer to the [Integrations][5] documentation for that environment and [contact support][6] if you are encountering any setup issues.
 
 [1]: /agent/basic_agent_usage/heroku/#installation
 [2]: /integrations/cloud_foundry/#trace-collection
 [3]: /integrations/amazon_elasticbeanstalk/
-[4]: /infrastructure/serverless/azure_app_services/#overview
 [5]: /integrations/
 [6]: /help/
 {{% /tab %}}

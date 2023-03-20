@@ -31,7 +31,7 @@ draft: false
 git_integration_title: ibm_ace
 integration_id: ibm-ace
 integration_title: IBM ACE
-integration_version: 1.0.3
+integration_version: 1.0.4
 is_public: true
 kind: integration
 manifest_version: 2.0.0

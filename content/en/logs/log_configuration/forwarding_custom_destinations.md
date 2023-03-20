@@ -1,7 +1,6 @@
 ---
 title: Forwarding Logs to Custom Destinations
 kind: documentation
-is_beta: true
 further_reading:
 - link: "https://www.datadoghq.com/blog/route-logs-with-datadog-log-forwarding/"
   tag: "Blog"
@@ -14,9 +13,9 @@ further_reading:
   text: "Learn about log pipelines"
 ---
 
-{{< beta-callout url="https://www.datadoghq.com/log-forwarding-limited-availability/" >}}
-  Log Forwarding is currently in beta. Fill out this form to request access.
-{{< /beta-callout >}}
+<div class="alert alert-warning">
+Log forwarding is in limited availability. Fill out this <a href="https://www.datadoghq.com/log-forwarding-limited-availability/">form</a> to request access.
+</div>
 
 ## Overview
 
@@ -24,15 +23,21 @@ Log Forwarding allows you to send logs from Datadog to custom destinations like 
 
 {{< img src="logs/log_configuration/forwarding/forwarding_page.png" alt="The Log Forwarding page, showing custom destinations highlighted. The list of destinations includes Splunk (filtered by service:logs-processing), HTTP Endpoint (filtered by source:okta OR source:paloalto), and Elasticsearch (filtered by team:acme env:prod)." >}}
 
+The following metrics report on logs that have been forwarded successfully, including logs that were sent successfully after retries, as well as logs that were dropped.
+
+- datadog.forwarding.logs.bytes
+- datadog.forwarding.logs.count
+
 **Note**: Only Datadog users with the [`logs_write_forwarding_rules`][2] permission can create, edit, or delete custom destinations for forwarding logs.
 
 ## Set up log forwarding to custom destinations
 
-1. Navigate to [Log Forwarding][3]. Alternatively, go to **Logs** > **Configuration** and click the **Log Forwarding** tab.
-2. Select **Custom Destinations**.
-3. Click **New Destination**.
-4. Enter the query to filter your logs for forwarding. See [Search Syntax][4] for more information.
-5. Select the **Destination Type**.
+1. Add webhook IPs from the [IP ranges list][3] to the allowlist.
+2. Navigate to [Log Forwarding][4]. Alternatively, go to **Logs** > **Configuration** and click the **Log Forwarding** tab.
+3. Select **Custom Destinations**.
+4. Click **New Destination**.
+5. Enter the query to filter your logs for forwarding. See [Search Syntax][5] for more information.
+6. Select the **Destination Type**.
 
 {{< img src="logs/log_configuration/forwarding/configuration.png" alt="The destination configuration page, showing the steps to set up a new destination." style="width:70%;">}}
 
@@ -55,11 +60,14 @@ Log Forwarding allows you to send logs from Datadog to custom destinations like 
 {{% tab "Splunk" %}}
 
 6. Enter a name for the destination.
-7. In the **Configure Destination** section, enter the endpoint to which you want to send the logs. The endpoint must start with `https://`. For example, `https://<your_account>.splunkcloud.com:8088/services/collector`.
+7. In the **Configure Destination** section, enter the endpoint to which you want to send the logs. The endpoint must start with `https://`. For example, `https://<your_account>.splunkcloud.com:8088`.
 8. In the **Configure Authentication** section, enter the Splunk HEC token. See [Set up and use HTTP Event Collector][1] for more information about the Splunk HEC token.
 9. Click **Save**.
 
+**Note**: The [indexer acknowledgment][2] needs to be disabled.
+
 [1]: https://docs.splunk.com/Documentation/Splunk/9.0.1/Data/UsetheHTTPEventCollector
+[2]: https://docs.splunk.com/Documentation/Splunk/9.0.3/Data/AboutHECIDXAck
 {{% /tab %}}
 
 {{% tab "Elasticsearch" %}}
@@ -75,17 +83,17 @@ Log Forwarding allows you to send logs from Datadog to custom destinations like 
 {{% /tab %}}
 {{< /tabs >}}
 
-On the [Log Forwarding][3] page, hover over the status for a destination to see the percentage of logs that matched the filter criteria and have been forwarded in the past hour.
+On the [Log Forwarding][4] page, hover over the status for a destination to see the percentage of logs that matched the filter criteria and have been forwarded in the past hour.
 
 ## Edit a destination
-1. Navigate to [Log Forwarding][3].
+1. Navigate to [Log Forwarding][4].
 2. Select **Custom Destinations** to view a list of all existing destinations.
 3. Click the **Edit** button for the destination you want to edit. 
 4. Make the changes on the configuration page.
 5. Click **Save**.
 
 ## Delete a destination
-1. Navigate to [Log Forwarding][3].
+1. Navigate to [Log Forwarding][4].
 2. Select **Custom Destinations** to view a list of all existing destinations.
 3. Click the **Delete** button for the destination that you want to delete, and click **Confirm**. This removes the destination from the configured list of destinations and logs are no longer forwarded to it.
 
@@ -95,5 +103,6 @@ On the [Log Forwarding][3] page, hover over the status for a destination to see 
 
 [1]: /logs/log_configuration/pipelines/
 [2]: /account_management/rbac/permissions/?tab=ui#log-management
-[3]: https://app.datadoghq.com/logs/pipelines/log-forwarding/custom-destinations
-[4]: /logs/explorer/search_syntax/
+[3]: https://ip-ranges.datadoghq.com/
+[4]: https://app.datadoghq.com/logs/pipelines/log-forwarding/custom-destinations
+[5]: /logs/explorer/search_syntax/

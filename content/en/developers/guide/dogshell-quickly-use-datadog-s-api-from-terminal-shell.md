@@ -66,6 +66,7 @@ For reference, [find the code for Dogshell][4]. But once you have Dogshell insta
 * `dog downtime`
 * `dog timeboard`
 * `dog screenboard`
+* `dog dashboard`
 * `dog host`
 * `dog tag`
 * `dog search`

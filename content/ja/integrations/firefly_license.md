@@ -9,7 +9,6 @@ author:
   support_email: contact@gofirefly.io
   vendor_id: firefly
 categories:
-- autodiscovery
 - 自動化
 - クラウド
 - google cloud
@@ -39,12 +38,11 @@ public_title: Firefly
 short_description: クラウドを規約に準拠させる
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Autodiscovery
   - Category::Automation
   - Category::Cloud
   - Category::Google Cloud
@@ -52,7 +50,7 @@ tile:
   - Category::Marketplace
   - Offering::Software License
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   configuration: README.md#Setup
   description: クラウドを規約に準拠させる
@@ -75,6 +73,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Firefly
+  uninstallation: README.md#Uninstallation
 ---
 
 

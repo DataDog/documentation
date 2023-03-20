@@ -4,19 +4,17 @@ kind: guide
 beta: true
 private: true
 ---
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
+{{< /site-region >}}
 
 <div class="alert alert-warning">
 The features described on this page are in beta. Contact your Customer Success Manager to learn more about them.
 </div>
 
-This guide assumes that you have configured [Datadog Monitoring][1] and are using [APM][2].
+This guide assumes that you have configured [Database Monitoring][1] and are using [APM][2]. Connecting APM and DBM injects APM trace identifiers into DBM data collection, which allows for correlation of these two data sources. This enables product features showing database information in the APM product, and APM data in the DBM product.
 
 ## Before you begin
-
-Supported tracers
-: [dd-trace-go][3] >= 1.44.0 (support for [database/sql][4] and [sqlx][5] packages)<br />
-[dd-trace-rb][6] >= 1.6.0 (support for [mysql2][7] and [pg][8] gems)<br />
-[dd-trace-js][9] >= 3.9.0 or >= 2.22.0 (support for [postgres client][10])
 
 Supported databases
 : postgres, mysql
@@ -27,7 +25,41 @@ Supported Agent versions
 Data privacy
 : Enabling SQL comment propagation results in potentially confidential data (service names) being stored in the databases which can then be accessed by other third-parties that have been granted access to the database.
 
+
+**Supported tracers**
+
+| Language | Library or Framework           | Postgres    | MySQL       |
+| :----    | :----                          | :----:      |  :----:     |
+| **Go:** [dd-trace-go][3] >= 1.44.0 |      |             |             |
+|          | [database/sql][4]              | {{< X >}}   | {{< X >}}   |
+|          | [sqlx][5]                      | {{< X >}}   | {{< X >}}   |
+| **Ruby:** [dd-trace-rb][6] >= 1.8.0 |     |             |             |
+|          | [pg][8]                        | {{< X >}}   |             |
+|          | [mysql2][7]                    |             | {{< X >}}   |
+| **Node:** [dd-trace-js][9] >= 3.13.0 |    |             |             |
+|          | [postgres][10]                 | {{< X >}}   |             |
+|          | [mysql][13]                    |             | {{< X >}}   |
+|          | [mysql2][14]                   |             | {{< X >}}   |
+| **Python:** [dd-trace-py][11] >= 1.9.0 |  |             |             |
+|          | [psycopg2][12]                 | {{< X >}}   |             |
+| **.NET** [dd-trace-dotnet][15] >= 2.26.0 ||             |             |
+|          | [Npgsql][16]                   | {{< X >}}   |             |
+|          | [MySql.Data][17]               |             | {{< X >}}   |
+|          | [MySqlConnector][18]           |             | {{< X >}}   |
+| **Java**     |                            |             |             |
+|          | jdbc                           | Coming soon | Coming soon |
+
+
+
+
 ## Setup
+For the best user experience, ensure the following environment variables are set in your application:
+
+```
+DD_SERVICE=(application name)
+DD_ENV=(application environment)
+DD_VERSION=(application version)
+```
 
 {{< tabs >}}
 {{% tab "Go" %}}
@@ -99,11 +131,11 @@ func main() {
 
 {{% tab "Ruby" %}}
 
-In your Gemfile, install or udpate [dd-trace-rb][1] to version greater than `1.6.0`:
+In your Gemfile, install or update [dd-trace-rb][1] to version `1.8.0` or greater:
 
 ```rb
 source 'https://rubygems.org'
-gem 'ddtrace', '>= 1.6.0'
+gem 'ddtrace', '>= 1.8.0'
 
 # Depends on your usage
 gem 'mysql2'
@@ -112,13 +144,13 @@ gem 'pg'
 
 Enable the database monitoring propagation feature using one of the following methods:
 1. Env variable:
-   `DD_DBM_PROPAGATION_MODE=service`
+   `DD_DBM_PROPAGATION_MODE=full`
 
 2. Option `comment_propagation` (default: `ENV['DD_DBM_PROPAGATION_MODE']`), for [mysql2][2] or [pg][3]:
    ```rb
 	Datadog.configure do |c|
-		c.tracing.instrument :mysql2, comment_propagation: 'service'
-		c.tracing.instrument :pg, comment_propagation: 'disabled'
+		c.tracing.instrument :mysql2, comment_propagation: 'full'
+		c.tracing.instrument :pg, comment_propagation: 'full'
 	end
    ```
 
@@ -145,7 +177,49 @@ client.query("SELECT 1;")
 
 {{% /tab %}}
 
-{{% tab "NodeJS" %}}
+{{% tab "Python" %}}
+
+Update your app dependencies to include [dd-trace-py>=1.7.0][1]:
+```
+pip install "ddtrace>=1.7.0"
+```
+
+Install [psycopg2][2] (**Note**: Connecting DBM and APM is not supported for MySQL clients):
+```
+pip install psycopg2
+```
+
+Enable the database monitoring propagation feature by setting the following environment variable:
+   - `DD_DBM_PROPAGATION_MODE=full`
+
+Full example:
+```python
+
+import psycopg2
+
+#TODO: update postgres configurations
+POSTGRES_CONFIG = {
+    "host": "127.0.0.1",
+    "port": 5432,
+    "user": "postgres_user",
+    "password": "postgres_password",
+    "dbname": "postgres_db_name",
+}
+
+# connect to postgres db
+conn = psycopg2.connect(**POSTGRES_CONFIG)
+cursor = conn.cursor()
+# execute sql queries
+cursor.execute("select 'blah'")
+cursor.executemany("select %s", (("foo",), ("bar",)))
+```
+
+[1]: https://ddtrace.readthedocs.io/en/stable/release_notes.html
+[2]: https://ddtrace.readthedocs.io/en/stable/integrations.html#module-ddtrace.contrib.psycopg
+
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
 
 Install or udpate [dd-trace-js][1] to version greater than `3.9.0` (or `2.22.0` if using end-of-life Node.js version 12):
 
@@ -195,7 +269,45 @@ client.query('SELECT $1::text as message', ['Hello world!'], (err, result) => {
 
 {{% /tab %}}
 
+{{% tab ".NET" %}}
+
+<div class="alert alert-warning">
+This features requires automatic instrumentation to be enabled for your .NET service.
+</div>
+
+Follow the [.NET Framework tracing instructions][1] or the [.NET Core tracing instructions][2] to install the automatic instrumentation package and enable tracing for your service.
+
+Ensure that you are using a supported client library (e.g. `Npgsql`).
+
+Enable the database monitoring propagation feature by setting the following environment variable:
+   - `DD_DBM_PROPAGATION_MODE=full`
+
+[1]: /tracing/trace_collection/dd_libraries/dotnet-framework
+[2]: /tracing/trace_collection/dd_libraries/dotnet-core
+
+{{% /tab %}}
+
 {{< /tabs >}}
+
+## Explore the APM Connection
+
+### Attribute active database connections to the calling APM services
+
+{{< img src="database_monitoring/dbm_apm_active_connections_breakdown.png" alt="View active connections to a database broken down by the APM Service they originate from.">}}
+
+Break down active connections for a given host by the upstream APM services making the requests. You can attribute load on a database to individual services to understand which services are most active on the database. Pivot to the most active upstream service’s service page to continue the investigation.
+
+### View the associated trace for a query sample
+
+{{< img src="database_monitoring/dbm_query_sample_trace_preview.png" alt="Preview the sampled APM trace that the query sample being inspected was generated from.">}}
+
+When viewing a Query Sample in Database Monitoring, if the associated trace has been sampled by APM, you can view the DBM Sample in the context of the APM Trace. This allows you to combine DBM telemetry, including the explain plan and historical performance of the query, alongside the lineage of the span within your infrastructure to understand if a change on the database is responsible for poor application performance.
+
+### Identify the downstream database hosts of APM services
+
+{{< img src="database_monitoring/dbm_apm_service_page_db_host_list.png" alt="Visualize the downstream database hosts that your APM Services depend on from the Service Page.">}}
+
+On the APM Service Page, view the direct downstream database dependencies of the service as identified by Database Monitoring. Quickly determine if any hosts have disproportionate load that may be caused by noisy neighbors.
 
 
 [1]: /database_monitoring/#getting-started
@@ -208,3 +320,11 @@ client.query('SELECT $1::text as message', ['Hello world!'], (err, result) => {
 [8]: https://github.com/ged/ruby-pg
 [9]: https://github.com/DataDog/dd-trace-js
 [10]: https://node-postgres.com/
+[11]: https://github.com/DataDog/dd-trace-py
+[12]: https://www.psycopg.org/docs/index.html
+[13]: https://github.com/mysqljs/mysql
+[14]: https://github.com/sidorares/node-mysql2
+[15]: https://github.com/DataDog/dd-trace-dotnet
+[16]: https://www.nuget.org/packages/npgsql
+[17]: https://www.nuget.org/packages/MySql.Data
+[18]: https://www.nuget.org/packages/MySqlConnector

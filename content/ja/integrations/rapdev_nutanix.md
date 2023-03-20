@@ -29,7 +29,7 @@ assets:
 author:
   homepage: https://www.rapdev.io
   name: RapDev
-  sales_email: sales@rapdev.io
+  sales_email: ddsales@rapdev.io
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
@@ -63,13 +63,13 @@ public_title: Nutanix インテグレーション
 short_description: Nutanix リソースの使用量を監視して、お使いの環境をより良く理解しましょう。
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Category::Marketplace
   - Category::Cloud
@@ -93,6 +93,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Nutanix インテグレーション
+  uninstallation: README.md#Uninstallation
 ---
 
 

@@ -55,7 +55,7 @@ When there are multiple primary operations defined for a service, the highest re
 
 ## Viewing stats for additional span names
 
-To ensure that all traces are being sent to Datadog correctly outside of any instrumentation, you can view your resources by additional span names that are considered a secondary operation with a drop-down menu. However, these are not used to calculate service-level statistics.
+To ensure that all traces are being sent to Datadog correctly outside of any instrumentation, you can view your resources by additional span names that are considered a secondary operation with a dropdown menu. However, these are not used to calculate service-level statistics.
 
 {{< img src="tracing/guide/primary_operation/dropdown.mp4" alt="APM save" video=true >}}
 
@@ -148,7 +148,7 @@ span.setTag('span.type', 'web')
 span.finish();
 ```
 
-For more information, see [Setting up NodeJS and OpenTracing][1].
+For more information, see [Setting up Node.js and OpenTracing][1].
 
 
 [1]: /tracing/trace_collection/open_standards/nodejs/#opentracing

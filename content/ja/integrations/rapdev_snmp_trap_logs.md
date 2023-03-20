@@ -6,8 +6,8 @@ assets:
     RapDev SNMP Trap Logs: assets/dashboards/rapdev_snmp_trap_logs_dashboard.json
 author:
   homepage: https://www.rapdev.io
-  name: RapDev.io
-  sales_email: sales@rapdev.io
+  name: RapDev
+  sales_email: ddsales@rapdev.io
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
@@ -61,6 +61,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: SNMP Trap Logs インテグレーション
+  uninstallation: README.md#Uninstallation
 ---
 
 ## 概要

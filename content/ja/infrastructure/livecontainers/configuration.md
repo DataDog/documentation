@@ -100,6 +100,25 @@ Datadog Agent と Cluster Agent は、[ライブコンテナ][1]の Kubernetes �
         - get
         - watch
       - apiGroups:
+        - ""
+        resources:
+        - serviceaccounts
+        verbs:
+        - list
+        - get
+        - watch
+      - apiGroups:
+        - rbac.authorization.k8s.io
+        resources:
+        - roles
+        - rolebindings
+        - clusterroles
+        - clusterrolebindings
+        verbs:
+        - list
+        - get
+        - watch
+      - apiGroups:
        - networking.k8s.io
        resources:
        - ingresses
@@ -127,6 +146,9 @@ Datadog Agent と Cluster Agent は、[ライブコンテナ][1]の Kubernetes �
     value: "<YOUR_CLUSTER_NAME>"
   ```
 
+  [1]: /containers/cluster_agent/
+  [2]: /containers/cluster_agent/setup/?tab=daemonset#pagetitle
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -134,28 +156,29 @@ Datadog Agent と Cluster Agent は、[ライブコンテナ][1]の Kubernetes �
 
 次の表は、収集されたリソースと、それぞれに対する最低限の Agent、Cluster Agent、Helm チャートのバージョンをリストで示したものです。
 
-| Resource | 最低限必要な Agent のバージョン | 最低限必要な Cluster Agent のバージョン* | 最低限必要な Helm チャートのバージョン |
-|---|---|---|---|
-| ClusterRoleBindings | 7.27.0 | 1.19.0 | 2.30.9 |
-| ClusterRoles | 7.27.0 | 1.19.0 | 2.30.9 |
-| クラスター | 7.27.0 | 1.12.0 | 2.10.0 |
-| CronJobs | 7.27.0 | 1.13.1 | 2.15.5 |
-| DaemonSets | 7.27.0 | 1.14.0 | 2.16.3 |
-| デプロイ | 7.27.0 | 1.11.0 | 2.10.0 |
-| Ingresses | 7.27.0 | 1.22.0 | 2.30.7 |
-| ジョブ | 7.27.0 | 1.13.1 | 2.15.5 |
-| ノード | 7.27.0 | 1.11.0 | 2.10.0 |
-| PersistentVolumes | 7.27.0 | 1.18.0 | 2.30.4 |
-| PersistentVolumeClaims | 7.27.0 | 1.18.0 | 2.30.4 |
-| ポッド | 7.27.0 | 1.11.0 | 2.10.0 |
-| ReplicaSet | 7.27.0 | 1.11.0 | 2.10.0 |
-| RoleBindings | 7.27.0 | 1.19.0 | 2.30.9 |
-| ロール | 7.27.0 | 1.19.0 | 2.30.9 |
-| ServiceAccounts | 7.27.0 | 1.19.0 | 2.30.9 |
-| サービス | 7.27.0 | 1.11.0 | 2.10.0 |
-| Statefulsets | 7.27.0 | 1.15.0 | 2.20.1 |
+| Resource | 最低限必要な Agent のバージョン | 最低限必要な Cluster Agent のバージョン* | 最低限必要な Helm チャートのバージョン | Kubernetes の最小バージョン |
+|---|---|---|---|---|
+| ClusterRoleBindings | 7.27.0 | 1.19.0 | 2.30.9 | 1.14.0 |
+| ClusterRoles | 7.27.0 | 1.19.0 | 2.30.9 | 1.14.0 |
+| クラスター | 7.27.0 | 1.12.0 | 2.10.0 | 1.17.0 |
+| CronJobs | 7.27.0 | 7.40.0 | 2.15.5 | 1.16.0 |
+| DaemonSets | 7.27.0 | 1.14.0 | 2.16.3 | 1.16.0 |
+| デプロイ | 7.27.0 | 1.11.0 | 2.10.0 | 1.16.0 |
+| Ingresses | 7.27.0 | 1.22.0 | 2.30.7 | 1.21.0 |
+| ジョブ | 7.27.0 | 1.13.1 | 2.15.5 | 1.16.0 |
+| ネームスペース | 7.27.0 | 7.41.0 | 2.30.9 | 1.17.0 |
+| ノード | 7.27.0 | 1.11.0 | 2.10.0 | 1.17.0 |
+| PersistentVolumes | 7.27.0 | 1.18.0 | 2.30.4 | 1.17.0 |
+| PersistentVolumeClaims | 7.27.0 | 1.18.0 | 2.30.4 | 1.17.0 |
+| ポッド | 7.27.0 | 1.11.0 | 2.10.0 | 1.17.0 |
+| ReplicaSet | 7.27.0 | 1.11.0 | 2.10.0 | 1.16.0 |
+| RoleBindings | 7.27.0 | 1.19.0 | 2.30.9 | 1.14.0 |
+| ロール | 7.27.0 | 1.19.0 | 2.30.9 | 1.14.0 |
+| ServiceAccounts | 7.27.0 | 1.19.0 | 2.30.9 | 1.17.0 |
+| サービス | 7.27.0 | 1.11.0 | 2.10.0 | 1.17.0 |
+| Statefulsets | 7.27.0 | 1.15.0 | 2.20.1 | 1.16.0 |
 
-**注**: Kubernetes バージョン 1.25 以上の場合、必要な最小限の Cluster Agent のバージョンは 7.40.0 です。
+**注**: バージョン 1.22 以降、Cluster Agent のバージョン番号は、バージョン 7.39.0 以降、Agent のリリース番号に従います。
 
 ### カスタムタグをリソースに追加
 
@@ -209,7 +232,7 @@ Process Agent と Cluster Agent の両コンテナに環境変数を設定しま
 
 たとえば、名前が frontend で始まるコンテナ以外のすべての Debian イメージを除外するには、`datadog.yaml` ファイルに次の 2 つの構成行を追加します。
 
-```shell
+```yaml
 container_exclude: ["image:debian"]
 container_include: ["name:frontend.*"]
 ```
@@ -249,7 +272,7 @@ env:
 
 例えば、`password` はセンシティブワードなので、スクラバーは以下のいずれかの `<MY_PASSWORD>` をアスタリスクの文字列、`***********` に変更します。
 
-```shell
+```text
 password <MY_PASSWORD>
 password=<MY_PASSWORD>
 password: <MY_PASSWORD>
@@ -262,4 +285,5 @@ password::::== <MY_PASSWORD>
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: /ja/infrastructure/livecontainers/#overview
 [4]: /ja/infrastructure/livecontainers/legacy

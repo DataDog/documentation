@@ -38,6 +38,7 @@ When the Agent runs as a container, it tries by default to Autodiscover other co
 | [Kyototycoon][31]              | [auto_conf.yaml][32]    |
 | [MemCached][33]                | [auto_conf.yaml][34]    |
 | [Presto][35]                   | [auto_conf.yaml][36]    |
+| [RabbitMQ][47]                 | [auto_conf.yaml][48]    |
 | [Redis][37]                    | [auto_conf.yaml][38]    |
 | [Riak][39]                     | [auto_conf.yaml][40]    |
 | [Tomcat][41]                   | [auto_conf.yaml][42]    |
@@ -123,7 +124,9 @@ DD_IGNORE_AUTOCONF="redisdb istio"
 [40]: https://github.com/DataDog/integrations-core/blob/master/riak/datadog_checks/riak/data/auto_conf.yaml
 [41]: /integrations/tomcat/
 [42]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/auto_conf.yaml
-[43]: /agent/faq/template_variables/
+[43]: /agent/guide/template_variables/
 [44]: /agent/kubernetes/integrations/?tab=keyvaluestore#configuration
 [45]: /agent/kubernetes/integrations/?tab=kubernetes#configuration
 [46]: /agent/docker/integrations/#configuration
+[47]: /integrations/rabbitmq/
+[48]: https://github.com/DataDog/integrations-core/blob/master/rabbitmq/datadog_checks/rabbitmq/data/auto_conf.yaml

@@ -125,8 +125,8 @@ def security_rules(content, content_dir):
                 "type": "security_rules",
                 "disable_edit": True,
                 "aliases": [
-                    f"{data.get('defaultRuleId', '').strip()}",
-                    f"/security_monitoring/default_rules/{data.get('defaultRuleId', '').strip()}",
+                    # f"{data.get('defaultRuleId', '').strip()}",
+                    # f"/security_monitoring/default_rules/{data.get('defaultRuleId', '').strip()}",
                     f"/security_monitoring/default_rules/{p.stem}"
                 ],
                 "rule_category": [],

@@ -8,6 +8,7 @@ aliases:
   - /cloud_siem/guide/how-to-setup-security-filters-using-security-monitoring-api/
   - /security_platform/guide/how-to-setup-security-filters-using-cloud-siem-api/
   - /security_platform/cloud_siem/guide/how-to-setup-security-filters-using-cloud-siem-api/
+  - /security/guide/how-to-setup-security-filters-using-security-monitoring-api/
 ---
 
 ## Overview

@@ -35,7 +35,7 @@ For example, the Rollup function changes the time aggregation of a query before 
 
 Functions can be applied to your queries by clicking the Add Function `Σ` icon in the graphing editor. Most of the functions are applied after [time][1] and [space aggregation][2].
 
-{{< img src="dashboards/functions/sigmaaddingfunctions.png" alt="Capital Sigma symbol for Add Function" style="width:75%;" >}}
+{{< img src="dashboards/functions/sigmaaddingfunctions.png" alt="Capital Sigma symbol for Add Function" style="width:100%;" >}}
 
 ## Function types
 

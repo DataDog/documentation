@@ -17,7 +17,7 @@ assets:
     source_type_name: PerimeterX
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: PerimeterX
   sales_email: support@perimeterx.com
   support_email: support@perimeterx.com
 categories:

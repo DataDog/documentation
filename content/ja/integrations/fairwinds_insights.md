@@ -53,13 +53,13 @@ public_title: Fairwinds Insights
 short_description: 業務の遂行に不可欠な Kubernetes アプリケーションを保護、最適化します
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Category::Marketplace
   - Category::Containers
@@ -102,6 +102,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Fairwinds Insights
+  uninstallation: README.md#Uninstallation
 ---
 
 

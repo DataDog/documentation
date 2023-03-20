@@ -27,7 +27,7 @@ To schedule a [monitor downtime][1] in Datadog use the main navigation: _Monitor
 {{< tabs >}}
 {{% tab "By Monitor Name" %}}
 
-Search or use the drop-down to choose monitors to silence. If the field is left empty, all monitors are silenced by default. You can also select a scope to constrain your downtime to a specific host, device, or arbitrary tag. Only monitors that have **ALL selected scopes** are silenced.
+Search or use the dropdown to choose monitors to silence. If the field is left empty, all monitors are silenced by default. You can also select a scope to constrain your downtime to a specific host, device, or arbitrary tag. Only monitors that have **ALL selected scopes** are silenced.
 
 {{% /tab %}}
 {{% tab "By Monitor Tags" %}}
@@ -144,7 +144,7 @@ Enter a message to notify your team about this downtime. The message field allow
 
 ### Notify your team
 
-Notify your team by specifying team members or send the message to a service [integration][3].
+Notify your team by specifying team members or send the message to a service [integration][3]. Datadog sends notifications to the specified destinations whenever the downtime is scheduled, started, cancelled, and expired. These audit notifications allows your team to be aware of the Downtimes in your system.
 
 #### Disable first recovery notification
 
@@ -177,7 +177,11 @@ Monitors trigger events when they change between possible states: `ALERT`, `WARN
 
 ### Expiration
 
-If a monitor is in an alert-worthy state (`ALERT`, `WARNING`, or `NO DATA`) when a downtime expires, the monitor triggers a new notification. This applies to monitors that change state during downtime (such as from `OK` to `ALERT`, `WARNING`, or `NO DATA`), and to monitors that already have an alert-worthy state when downtime begins. **Note**: If a downtime is manually canceled, notifications are not sent, even if the monitor has entered an alert-worthy state.
+By default, if a monitor is in an alert-worthy state (`ALERT`, `WARNING`, or `NO DATA`) when a downtime expires, the monitor triggers a new notification. This applies to monitors that change state during downtime (such as from `OK` to `ALERT`, `WARNING`, or `NO DATA`), and to monitors that already have an alert-worthy state when downtime begins.
+
+To override the default behavior, specify which notifications should be sent at the end of downtimes with the options in the "Notify Your Team" section.
+
+{{< img src="monitors/downtimes/downtime_cancel_expire_notification.png" alt="Configure Notify your team section of a monitor with specific downtime conditions" style="width:100%;">}}
 
 **Example 1:** If a monitor is in an alert state *before* downtime starts and *continues* for the duration of downtime:
 1. During downtime, notifications for this alert are suppressed.

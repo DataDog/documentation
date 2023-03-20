@@ -23,7 +23,7 @@ assets:
 author:
   homepage: https://www.rapdev.io
   name: RapDev
-  sales_email: sales@rapdev.io
+  sales_email: ddsales@rapdev.io
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
@@ -55,13 +55,13 @@ public_title: Sophos インテグレーション
 short_description: Sophos が管理するエンドポイントの健全性を監視
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Category::Marketplace
   - Offering::Integration
@@ -74,6 +74,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Sophos インテグレーション
+  uninstallation: README.md#Uninstallation
 ---
 
 
@@ -82,7 +83,7 @@ tile:
 
 Sophos インテグレーションは、Sophos が管理するエンドポイント全体の健全性を監視し、管理対象デバイスが健全な状態にあることを確認します。このインテグレーションには、デバイスの健全性を監視するために使用できる複数のメトリクスの概要を提供する 1 つのダッシュボードがあらかじめ組み込まれています。また、Sophos インテグレーションには 2 つのモニターが付属しており、デバイスの健全性が悪くなった場合や、デバイス上の Sophos サービスの 1 つが停止した場合に、アラートを出すことができます。
 
-### モニター
+### アラート設定
 1. 管理対象エンドポイントの健全性が変化した
 2. 管理対象エンドポイントの Sophos サービスが停止している
 

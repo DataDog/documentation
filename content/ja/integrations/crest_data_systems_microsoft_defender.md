@@ -62,13 +62,13 @@ public_title: Microsoft 365 Defender for Endpoint インテグレーション
 short_description: エンドポイント、脆弱性、アラート、インシデントの詳細を提供します
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Category::Marketplace
   - Category::Monitoring
@@ -103,6 +103,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Microsoft 365 Defender for Endpoint インテグレーション
+  uninstallation: README.md#Uninstallation
 ---
 
 

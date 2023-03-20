@@ -112,10 +112,8 @@ This guide assumes you upgraded to the Agent v6 using the [upgrade guide][1]. If
 7. Restart the agent
 
     ```shell
-    # Systemd
-    sudo systemctl restart datadog-agent
-    # Upstart
-    sudo /etc/init.d/datadog-agent restart
+    sudo systemctl restart datadog-agent # Systemd
+    sudo /etc/init.d/datadog-agent restart # Upstart
     ```
 
 8. Clean out `/etc/datadog-agent` (optional):
@@ -130,7 +128,7 @@ This guide assumes you upgraded to the Agent v6 using the [upgrade guide][1]. If
 
     ```shell
     rm /etc/yum.repos.d/datadog-beta.repo
-    [ ! -f /etc/yum.repos.d/datadog.repo ] && echo -e '[datadog]\nname = Datadog, Inc.\nbaseurl = https://yum.datadoghq.com/rpm/x86_64/   \nenabled=1\ngpgcheck=1\nrepo_gpgcheck=1\npriority=1\ngpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public\n       https://keys.datadoghq.com/DATADOG_RPM_KEY.public\n       https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public\n       https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public' | sudo tee /etc/yum.repos.d/datadog.repo
+    [ ! -f /etc/yum.repos.d/datadog.repo ] && echo -e '[datadog]\nname = Datadog, Inc.\nbaseurl = https://yum.datadoghq.com/rpm/x86_64/   \nenabled=1\ngpgcheck=1\nrepo_gpgcheck=1\npriority=1\ngpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public\n       https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public\n       https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public' | sudo tee /etc/yum.repos.d/datadog.repo
     ```
 
     **Note**: due to a [bug in dnf][1], use `repo_gpgcheck=0` instead of `repo_gpgcheck=1` on RHEL/CentOS 8.1.
@@ -161,10 +159,8 @@ This guide assumes you upgraded to the Agent v6 using the [upgrade guide][1]. If
 5. Restart the agent
 
     ```shell
-    # Systemd
-    sudo systemctl restart datadog-agent
-    # Upstart
-    sudo /etc/init.d/datadog-agent restart
+    sudo systemctl restart datadog-agent # Systemd
+    sudo /etc/init.d/datadog-agent restart # Upstart
     ```
 
 6. Clean out `/etc/datadog-agent` (optional):

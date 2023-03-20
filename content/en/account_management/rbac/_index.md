@@ -50,10 +50,10 @@ The custom roles feature gives your organization the ability to create new roles
 
 1. Navigate to [Organization Settings][8]. 
 2. On the left side of the page, select **Roles**.
-3. Click the gear in the upper right corner. The Custom Roles popup appears.
-4. In the Custom Roles popup, click **Enable**.
+3. Click the gear in the upper right corner. The Custom Roles pop-up appears.
+4. In the Custom Roles pop-up, click **Enable**.
 
-{{< img src="account_management/rbac/enable_custom_roles.png" alt="Custom Roles popup with Enable button" style="width:90%;">}}
+{{< img src="account_management/rbac/enable_custom_roles.png" alt="Custom Roles pop-up with Enable button" style="width:90%;">}}
 
 Alternatively, making a POST call to the [Create Role API endpoint][9] automatically enables custom roles for your organization.
 
@@ -186,6 +186,7 @@ Once you have RBAC roles set up, you can restrict access to individual resources
 The following resources allow granular access control:
 - [Dashboards][10]
 - [Monitors][11]
+- [Notebooks][5]
 - [Security rules][12]
 - [Synthetic tests][13]
 
@@ -197,7 +198,7 @@ The following resources allow granular access control:
 [2]: /dashboards/
 [3]: /monitors/
 [4]: /events/
-[5]: /notebooks/
+[5]: /notebooks/#limit-edit-access
 [6]: /api/v2/roles/
 [7]: /account_management/rbac/permissions/
 [8]: https://app.datadoghq.com/organization-settings/

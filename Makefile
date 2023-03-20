@@ -84,6 +84,11 @@ start-docker: clean  ## Build and run docs including external content via docker
 stop-docker: ## Stop the running docker container.
 	@docker-compose -f ./docker-compose-docs.yml down
 
+find-int: hugpython ## Find the source for an integration (downloads/updates integrations repos first)
+	@. hugpython/bin/activate && \
+	export GITHUB_TOKEN=$(GITHUB_TOKEN) && \
+	./local/bin/py/integration-finder.py $(int)
+
 # install the root level node modules
 node_modules: package.json yarn.lock
 	@yarn install --immutable
@@ -101,7 +106,7 @@ data/workflows/:
 derefs: $(DEREFS)
 
 .SECONDEXPANSION:
-$(DEREFS): %.json : integrations_data/extracted/dd-source/domains/workflow/actionplatform/runner/bundles/$$(basename $$(notdir $$@))/manifest.json | data/workflows/
+$(DEREFS): %.json : integrations_data/extracted/dd-source/domains/workflow/actionplatform/apps/wf-actions-worker/src/runner/bundles/$$(basename $$(notdir $$@))/manifest.json | data/workflows/
 	@node ./assets/scripts/workflow-process.js $< $@
 
 # builds permissions json from rbac
@@ -115,7 +120,10 @@ placeholders:
 
 # create the virtual environment
 hugpython: local/etc/requirements3.txt
-	@${PY3} -m venv --clear $@ && . $@/bin/activate && $@/bin/pip install -r $<
+	@${PY3} -m venv --clear $@ && . $@/bin/activate && $@/bin/pip install --upgrade pip wheel && $@/bin/pip install -r $<;\
+	if [[ "$(CI_COMMIT_REF_NAME)" != "" ]]; then \
+		$@/bin/pip install https://binaries.ddbuild.io/dd-source/python/assetlib-0.0.13488267-py2.py3-none-any.whl; \
+	fi
 
 update_pre_build:
 	@. hugpython/bin/activate && GITHUB_TOKEN=$(GITHUB_TOKEN) CONFIGURATION_FILE=$(CONFIGURATION_FILE) ./local/bin/py/build/update_pre_build.py

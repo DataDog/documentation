@@ -1,19 +1,24 @@
 ---
-title: Contrôler les données de logs sensibles
-kind: guide
 aliases:
-  - /fr/logs/guide/restrict-access-to-sensitive-data-with-rbac
+- /fr/logs/guide/restrict-access-to-sensitive-data-with-rbac
 further_reading:
-  - link: /logs/guide/logs-rbac/
-    tag: Documentation
-    text: Configurer le RBAC (contrôle d'accès basé sur les rôles) pour Log Management
-  - link: /agent/logs/advanced_log_collection
-    tag: Documentation
-    text: Filtrer et remplacer le contenu des logs avec la collecte de logs avancée
-  - link: /agent/guide/autodiscovery-management/
-    tag: Documentation
-    text: Exclure des conteneurs de la collecte de logs avec Autodiscovery
+- link: /logs/guide/logs-rbac/
+  tag: Documentation
+  text: Configurer le RBAC (contrôle d'accès basé sur les rôles) pour Log Management
+- link: /agent/logs/advanced_log_collection
+  tag: Documentation
+  text: Filtrer et remplacer le contenu des logs avec la collecte de logs avancée
+- link: /agent/guide/autodiscovery-management/
+  tag: Documentation
+  text: Exclure des conteneurs de la collecte de logs avec Autodiscovery
+- link: https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/
+  tag: Blog
+  text: Concevoir une stratégie de conformité, gouvernance et transparence pour toutes
+    vos équipes avec les journaux d'audit Datadog
+kind: guide
+title: Contrôler les données de logs sensibles
 ---
+
 ## Présentation
 
 Étant donné que vos logs peuvent contenir des données sensibles, ils doivent être traités avec le plus grand soin. Si vous ingérez des données sensibles dans Datadog, gardez à l'esprit les deux points suivants :
@@ -125,8 +130,8 @@ Si vous avez des questions concernant la conformité des logs ou si vous avez be
 [7]: /fr/logs/indexes#exclusion-filters
 [8]: /fr/logs/archives
 [9]: /fr/logs/logs_to_metrics/
-[10]: /fr/monitors/create/types/log/
-[11]: /fr/monitors/create/types/log/#notifications
+[10]: /fr/monitors/types/log/
+[11]: /fr/monitors/types/log/#notifications
 [12]: /fr/logs/explorer/live_tail/
 [13]: /fr/agent/
 [14]: /fr/agent/logs/advanced_log_collection/?tab=configurationfile#scrub-sensitive-data-from-your-logs

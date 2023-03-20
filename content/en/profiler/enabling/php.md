@@ -45,6 +45,13 @@ Version 3.13 or newer of Alpine Linux is required because the profiler is built 
 {{% /tab %}}
 {{< /tabs >}}
 
+The following profiling features are available in the following minimum versions of the `dd-trace-php` library:
+
+|      Feature         | Required `dd-trace-php` version          |
+|----------------------|-----------------------------------------|
+| [Code Hotspots][12]        | 0.71+                       |
+| [Endpoint Profiling][13]            | 0.79.0+                       |
+
 Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
 
 ## Installation
@@ -56,8 +63,6 @@ To begin profiling applications:
 2. Download the `datadog-setup.php` script from the [GitHub release page][3]. Version 0.69.0 is the first tracer release to include this installer.
 
 3. Run the installer to install both the tracer and profiler, for example `php datadog-setup.php --enable-profiling`. This script is interactive and asks which of the detected PHP locations it should install to. At the end of the script, it outputs the non-interactive version of the command arguments for future use.
-
-4. Configure the profiler with environment variables. Unlike the tracer the profiler does not support INI settings.
 
    {{< tabs >}}
 {{% tab "CLI" %}}
@@ -108,7 +113,7 @@ SetEnv DD_VERSION 1.3.2
 
    See the [configuration docs][4] for more environment variables.
 
-5. A minute or two after receiving a request, profiles appear on the [APM > Profiler page][5].
+4. A minute or two after receiving a request, profiles appear on the [APM > Profiler page][5].
 
 ## Not sure what to do next?
 
@@ -124,3 +129,5 @@ The [Getting Started with Profiler][6] guide takes a sample service with a perfo
 [4]: /tracing/trace_collection/library_config/php/#environment-variable-configuration
 [5]: https://app.datadoghq.com/profiling
 [6]: /getting_started/profiler/
+[12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
+[13]: /profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints

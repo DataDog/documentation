@@ -32,20 +32,25 @@ There are two types of terms:
 
 * A **sequence** is a group of words surrounded by double quotes, such as `"hello dolly"`.
 
-To combine multiple terms into a complex query, you can use any of the following Boolean operators:
+To combine multiple terms into a complex query, you can use any of the following case sensitive Boolean operators:
 
 |              |                                                                                                        |                              |
 |--------------|--------------------------------------------------------------------------------------------------------|------------------------------|
 | **Operator** | **Description**                                                                                        | **Example**                  |
 | `AND`        | **Intersection**: both terms are in the selected events (if nothing is added, AND is taken by default) | authentication AND failure   |
 | `OR`         | **Union**: either term is contained in the selected events                                             | authentication OR password   |
-| `-`          | **Exclusion**: the following term is NOT in the event                                                  | authentication AND -password |
+| `-`          | **Exclusion**: the following term is NOT in the event (apply to each individual raw text search)                                                  | authentication AND -password |
 
 ## Autocomplete
 
-Use the search bar's autocomplete feature to complete your query using existing values:
+Use the search bar's autocomplete feature to complete your query using:
+    - Existing keys and values in your logs
+    - Recent searches per user
+    - Saved views
 
-{{< img src="logs/explorer/search/search_bar_autocomplete.jpg" alt="search bar autocomplete " style="width:80%;">}}
+{{< img src="logs/explorer/search/log_search_bar_autocomplete.png" alt="The logs search bar showing service: as the query and emailer, balancer-checker, ad-server, and vpc as autocomplete options" style="width:80%;">}}
+
+Clear error states inform you which part of the query contains syntax errors and how to remediate them. For example, if you input the query `service:` with no value, the message "Missing value in key:value pair" is displayed when you hover over the query.
 
 ## Escaping of special characters
 
@@ -68,8 +73,8 @@ For instance, if your attribute name is **url** and you want to filter on the **
 1. Facet searches are case sensitive. Use free text search to get case insensitive results. Another option is to use the lowercase filter with your Grok parser while parsing to get case insensitive results during search.
 
 2. Searching for a facet value that contains special characters requires escaping or double quotes.
-For example, for a facet `my_facet` with the value `hello:world`, search using: `@my_facet:hello\:world` or `@my_facet:"hello:world"`.
-To match a single special character or space, use the `?` wildcard. For example, for a facet `my_facet` with the value `hello world`, search using: `@my_facet:hello?world`.
+    - For example, for a facet `my_facet` with the value `hello:world`, search using: `@my_facet:hello\:world` or `@my_facet:"hello:world"`.
+    - To match a single special character or space, use the `?` wildcard. For example, for a facet `my_facet` with the value `hello world`, search using: `@my_facet:hello?world`.
 
 [1]: /logs/explorer/facets/
 
@@ -91,8 +96,8 @@ For instance, if your attribute name is **url** and you want to filter on the **
 2. Attributes searches are case sensitive. Use free text search to get case insensitive results. Another option is to use the `lowercase` filter with your Grok parser while parsing to get case insensitive results during search.
 
 3. Searching for an attribute value that contains special characters requires escaping or double quotes.
-For example, for an attribute `my_attribute` with the value `hello:world`, search using: `@my_attribute:hello\:world` or `@my_attribute:"hello:world"`.
-To match a single special character or space, use the `?` wildcard. For example, for an attribute `my_attribute` with the value `hello world`, search using: `@my_attribute:hello?world`.
+    - For example, for an attribute `my_attribute` with the value `hello:world`, search using: `@my_attribute:hello\:world` or `@my_attribute:"hello:world"`.
+    - To match a single special character or space, use the `?` wildcard. For example, for an attribute `my_attribute` with the value `hello world`, search using: `@my_attribute:hello?world`.
 {{< /site-region >}}
 
 Examples:

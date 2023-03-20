@@ -54,13 +54,13 @@ The following environment variables are supported:
 : Enables cluster level metadata mapping. Defaults to `true`.
 
 `DD_COLLECT_KUBERNETES_EVENTS`                
-: Configures the Agent to collect Kubernetes events. Defaults to `false`. See the [Cluster Agent Event Collection documentation][2] for more details.
+: Configures the Agent to collect Kubernetes events. Defaults to `false`.
 
 `DD_LEADER_ELECTION`                          
 : Activates leader election. Set `DD_COLLECT_KUBERNETES_EVENTS` to `true` to activate this feature. Defaults to `false`.
 
 `DD_LEADER_LEASE_DURATION`                    
-: Used only if leader election is activated. See the details about leader election [in the Cluster Agent Event Collection documentation][2]. Value in seconds, 60 by default.
+: Used only if leader election is activated. Value in seconds, 60 by default.
 
 `DD_CLUSTER_AGENT_AUTH_TOKEN`                 
 : 32 characters long token that needs to be shared between the node Agent and the Datadog Cluster Agent.
@@ -78,7 +78,7 @@ The following environment variables are supported:
 : Timeout (in seconds) of the client communicating with the API server. Defaults to `60` seconds.
 
 `DD_EXPVAR_PORT`                              
-: Port for fetching [expvar][3] public variables from the Datadog Cluster Agent. Defaults to port `5000`.
+: Port for fetching [expvar][2] public variables from the Datadog Cluster Agent. Defaults to port `5000`.
 
 `DD_EXTERNAL_METRICS_PROVIDER_BATCH_WINDOW`   
 : Time waited (in seconds) to process a batch of metrics from multiple autoscalers. Defaults to `10` seconds.
@@ -124,5 +124,4 @@ The following environment variables are supported:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: /agent/cluster_agent/event_collection/
-[3]: https://golang.org/pkg/expvar
+[2]: https://golang.org/pkg/expvar

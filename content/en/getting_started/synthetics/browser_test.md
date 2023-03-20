@@ -104,8 +104,8 @@ The example below demonstrates how to map a user journey from adding an item to 
 
 1. Navigate to one of the furniture sections on the example website such as **Chairs** and select **Add to cart**.
 2. Click on **Cart** and **Checkout**.
-3. Under **Add New**, select **Assertion** and click **“Test that some text is present on the active page”**.
-4. To confirm that the words “Thank you!” appear after checking out, enter `Thank you!` in the **Value** field. 
+3. Under **Add New**, select **Assertion** and click **"Test that some text is present on the active page"**.
+4. To confirm that the words "Thank you!" appear after checking out, enter `Thank you!` in the **Value** field. 
 5. Press **Save & Quit**.
 
 It is important to finish your browser test with an **Assertion** to ensure your application resulted in the expected state after the defined user journey.

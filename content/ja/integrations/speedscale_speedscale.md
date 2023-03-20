@@ -37,13 +37,13 @@ public_title: Speedscale
 short_description: Kubernetes の負荷テスト用トラフィックリプレイプラットフォーム
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Category::Marketplace
   - Category::Automation
@@ -65,6 +65,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Speedscale
+  uninstallation: README.md#Uninstallation
 ---
 
 
@@ -77,8 +78,7 @@ Speedscale のトラフィックリプレイ結果を Datadog に公開するに
 ## サポート
 Speedscale は、お客様が成功するために必要なツールや情報を提供することに全力を注いでいます。必要なときに必要な支援を得るための複数の方法を提供し、すべての[製品ドキュメント][3]はオンラインで一般公開されています。また、私たちの [Community Slack][4] に参加するか、[support@speedscale.com][5] に直接メールを送ることもできます。
 
-[1]: https://app.datadoghq.com/integrations/speedscale
-[2]: https://app.datadoghq.com/account/settings#integrations/speedscale
+[1]: /ja/integrations/speedscale
 [3]: https://docs.speedscale.com/
 [4]: https://slack.speedscale.com/
 [5]: mailto:support@speedscale.com

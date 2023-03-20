@@ -20,7 +20,7 @@ assets:
 author:
   homepage: https://www.rapdev.io
   name: RapDev
-  sales_email: sales@rapdev.io
+  sales_email: ddsales@rapdev.io
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
@@ -49,13 +49,13 @@ public_title: Terraform インテグレーション
 short_description: terraform アカウントと失敗した実行を監視する
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Category::Marketplace
   - Offering::Integration
@@ -68,6 +68,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Terraform インテグレーション
+  uninstallation: README.md#Uninstallation
 ---
 
 

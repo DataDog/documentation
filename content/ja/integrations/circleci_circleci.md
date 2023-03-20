@@ -41,13 +41,13 @@ public_title: CircleCI
 short_description: CircleCI を使用して、コードのビルド、テスト、およびデプロイを行う
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Offering::Software License
   - Category::Automation
@@ -77,6 +77,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: CircleCI
+  uninstallation: README.md#Uninstallation
 ---
 
 

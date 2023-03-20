@@ -54,7 +54,7 @@ The Datadog extension for Azure App Service provides additional monitoring capab
     - Azure App Service Web Apps
     - Function Apps hosted on Basic, Standard, and Premium plans.
 
-    <div class="alert alert-warning">Function Apps on consumption plans and out-of-process (isolated) functions are not supported. Interested in support for other App Service resource types or runtimes? <a href="https://forms.gle/n4nQcxEyLqDBMCDA7">Sign up</a> to be notified when a beta becomes available.</div>
+    <div class="alert alert-warning">Function Apps on consumption plans are not supported. Interested in support for other App Service resource types or runtimes? <a href="https://forms.gle/n4nQcxEyLqDBMCDA7">Sign up</a> to be notified when a beta becomes available.</div>
 
 3. The Datadog .NET APM extension supports the following .NET runtimes in both x64 and x86 architectures when running on Windows OS (AAS does not yet support extensions on Linux). For more details about automatically instrumented libraries, see the [Tracer documentation][2].
 
@@ -339,6 +339,9 @@ Replace `<EXTENSION_VERSION>` with the version of the extension you wish to inst
 
 Many organizations use [Azure Resource Management (ARM) templates][8] to implement the practice of infrastructure-as-code. To build the App Service Extension into these templates, incorporate [Datadog's App Service Extension ARM template][9] into your deployments to add the extension and configure it alongside your App Service resources.
 
+See the [Azure Microsoft.Datadog monitors documentation][10], which shows using ARM templates as Platform as Code to create the Liftr Datadog Resource.
+You can use the marketplace to install the Datadog Resource and download it as an ARM template to see those parameters (such as `enterpriseAppId`, `linkingAuthCode`, and `linkingClientId`) that are specific to you.
+
 [1]: https://docs.microsoft.com/en-us/cli/azure/install-azure-cli
 [2]: https://docs.microsoft.com/en-us/azure/cloud-shell/overview
 [3]: https://docs.microsoft.com/en-us/azure/app-service/deploy-configure-credentials
@@ -348,6 +351,7 @@ Many organizations use [Azure Resource Management (ARM) templates][8] to impleme
 [7]: /getting_started/site/
 [8]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/overview
 [9]: https://github.com/DataDog/datadog-aas-extension/tree/master/ARM
+[10]: https://learn.microsoft.com/en-us/azure/templates/microsoft.datadog/monitors?pivots=deployment-language-arm-template
 {{% /tab %}}
 {{% tab "Java" %}}
 
