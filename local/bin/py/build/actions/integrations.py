@@ -29,7 +29,7 @@ from actions.format_link import format_link_file
 
 try:
     from assetlib import classifiers
-    classifier_tags = classifiers.get_non_deprecated_classifier_names()
+    classifier_tags = classifiers.get_non_deprecated_classifiers()
 except ImportError:
     classifier_tags = []
     if getenv("CI_COMMIT_REF_NAME"):
