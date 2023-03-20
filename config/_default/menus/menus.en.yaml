@@ -532,11 +532,6 @@ main:
     parent: containers_amazon_ecs
     identifier: containers_amazon_ecs_tags
     weight: 503
-  - name: Data collected
-    url: containers/amazon_ecs/data_collected/
-    parent: containers_amazon_ecs
-    identifier: containers_amazon_ecs_data_collected
-    weight: 504
   - name: AWS Fargate
     url: integrations/ecs_fargate/
     parent: containers
@@ -2108,6 +2103,21 @@ main:
     parent: ci
     identifier: intelligent_test_runner
     weight: 3
+  - name: .NET
+    url: continuous_integration/intelligent_test_runner/dotnet/
+    parent: intelligent_test_runner
+    identifier: ci_itr_dotnet
+    weight: 301
+  - name: JavaScript and TypeScript
+    url: continuous_integration/intelligent_test_runner/javascript/
+    parent: intelligent_test_runner
+    identifier: ci_itr_javascript
+    weight: 303
+  - name: Swift
+    url: continuous_integration/intelligent_test_runner/swift/
+    parent: intelligent_test_runner
+    identifier: ci_itr_swift
+    weight: 306
   - name: Guides
     url: continuous_integration/guides/
     parent: ci
@@ -2808,11 +2818,16 @@ main:
     parent: appsec_threats
     identifier: threats_custom_rules
     weight: 504
+  - name: Protection
+    url: security/application_security/threats/protection/
+    parent: appsec_threats
+    identifier: threats_protection
+    weight: 505
   - name: In-App WAF Rules
     url: security/application_security/threats/inapp_waf_rules/
     parent: appsec_threats
     identifier: threats_event_rules
-    weight: 505
+    weight: 506
   - name: Guides
     url: security/application_security/guide/
     parent: application_security

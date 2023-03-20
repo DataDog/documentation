@@ -10,6 +10,9 @@ further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
       text: "Explore Test Results and Performance"
+    - link: "/continuous_integration/intelligent_test_runner/javascript"
+      tag: "Documentation"
+      text: "Speed up your test jobs with Intelligent Test Runner"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
       text: "Troubleshooting CI"
@@ -316,6 +319,7 @@ To create filters or `group by` fields for these tags, you must first create fac
 
 If the browser application being tested is instrumented using [RUM][6], your Cypress test results and their generated RUM browser sessions and session replays are automatically linked. Learn more in the [RUM integration][7] guide.
 
+
 [1]: https://docs.cypress.io/api/plugins/writing-a-plugin#Plugins-API
 [2]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Plugins-file
 [3]: https://docs.cypress.io/guides/references/configuration#cypress-json
@@ -429,6 +433,9 @@ Browser tests executed with `mocha`, `jest`, `cucumber`, `cypress`, and `playwri
 
 If you want visibility into the browser process, consider using [RUM & Session Replay][10]. When using Cypress, test results and their generated RUM browser sessions and session replays are automatically linked. Learn more in the [RUM integration][11] guide.
 
+### Cypress interactive mode
+
+Cypress interactive mode (which you can enter by running `cypress open`) is not supported by CI Visibility because some cypress events, such as [`before:run`][12], are not fired. If you want to try it anyway, pass `experimentalInteractiveRunEvents: true` to the [cypress configuration file][13].
 
 
 ## Best practices
@@ -448,14 +455,14 @@ Avoid this:
 })
 {{< /code-block >}}
 
-And use [`test.each`][12] instead:
+And use [`test.each`][14] instead:
 {{< code-block lang="javascript" >}}
 test.each([[1,2,3], [3,4,7]])('sums correctly %i and %i', (a,b,expected) => {
   expect(a+b).toEqual(expected)
 })
 {{< /code-block >}}
 
-For `mocha`, use [`mocha-each`][13]:
+For `mocha`, use [`mocha-each`][15]:
 {{< code-block lang="javascript" >}}
 const forEach = require('mocha-each');
 forEach([
@@ -478,13 +485,14 @@ When CI Visibility is enabled, the following data is collected from your project
 * Git commit history including the hash, message, author information, and files changed (without file contents).
 * Information from the CODEOWNERS file.
 
-In addition to that, if [Intelligent Test Runner][14] is enabled, the following data is collected from your project:
+In addition to that, if [Intelligent Test Runner][16] is enabled, the following data is collected from your project:
 
 * Code coverage information, including file names and line numbers covered by each test.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 
 
 [1]: https://github.com/facebook/jest/tree/main/packages/jest-circus
@@ -498,6 +506,8 @@ In addition to that, if [Intelligent Test Runner][14] is enabled, the following 
 [9]: https://nodejs.org/api/packages.html#packages_determining_module_system
 [10]: /real_user_monitoring/browser/
 [11]: /continuous_integration/guides/rum_integration/
-[12]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
-[13]: https://www.npmjs.com/package/mocha-each
-[14]: /continuous_integration/intelligent_test_runner/
+[12]: https://docs.cypress.io/api/plugins/before-run-api
+[13]: https://docs.cypress.io/guides/references/configuration#Configuration-File
+[14]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
+[15]: https://www.npmjs.com/package/mocha-each
+[16]: /continuous_integration/intelligent_test_runner/
