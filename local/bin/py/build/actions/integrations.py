@@ -28,20 +28,22 @@ from os.path import (
 from actions.format_link import format_link_file
 
 try:
-    from assetlib.constants import CLASSIFIER_TAGS
+    from assetlib import classifiers
+    classifier_tags = classifiers.get_non_deprecated_classifiers()
 except ImportError:
-    CLASSIFIER_TAGS = []
+    classifier_tags = []
     if getenv("CI_COMMIT_REF_NAME"):
-        print('\x1b[31mERROR\x1b[0m: CLASSIFIER_TAGS validation unavailable, Aborting')
+        print('\x1b[31mERROR\x1b[0m: classifier_tags validation unavailable, Aborting')
         sys.exit(1)
 finally:
-    if not CLASSIFIER_TAGS:
-        print(f'\x1b[33mWARNING\x1b[0m: CLASSIFIER_TAGS empty continuing without validation')
+    if not classifier_tags:
+        print(f'\x1b[33mWARNING\x1b[0m: classifier_tags empty - continuing without validation')
     else:
+        file_content = ['| Name | Description |\n| --- | --- |\n']
         with open('layouts/shortcodes/integration_categories.md', 'w') as file:
-            for tag in CLASSIFIER_TAGS:
-                file.write(f'- {tag}\n')
-            file.write("\n")
+            for tag in classifier_tags:
+                file_content.append(f'| {tag["name"]} | {tag["description"]}|\n')
+            file.write(file_content + "\n")
 
 
 class Integrations:
