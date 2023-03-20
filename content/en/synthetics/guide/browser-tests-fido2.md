@@ -31,7 +31,7 @@ Create a global variable storing your FIDO2 key. In the **Global Variables** tab
 5. Datadog generates and store an obfuscated FIDO2 secret key. 
 6. In **Permissions settings**, restrict access to your variable based on roles in your org. For more information about roles, see the [RBAC documentation][1].
 
-{{< img src="synthetics/guide/browser-tests-totp/new-variable-totp.png" alt="Create a MFA token" style="width:100%;" >}}
+{{< img src="synthetics/guide/browser-tests-totp/new-variable-fido2.png" alt="Create a FIDO2 key" style="width:100%;" >}}
 
 ## Use FIDO2 keys in your Synthetic tests
 You can use the FIDO2 key stored in a global variable across all your Synthetic tests. When creating a [browser test][2], complete your application's FIDO2 challenges using the FIDO2 key stored in the global variable.
