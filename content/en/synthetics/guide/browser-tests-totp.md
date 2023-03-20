@@ -2,15 +2,15 @@
 title: TOTPs For Multi-Factor Authentication (MFA) In Browser Tests
 kind: guide
 further_reading:
-   - link: 'https://www.datadoghq.com/blog/mfa-synthetic-testing-datadog/'
-     tag: 'Blog'
-     text: 'Introducing multi-factor authentication in Datadog Synthetic tests'
-   - link: 'synthetics/settings/?tab=specifyvalue#global-variables'
-     tag: 'Documentation'
-     text: 'Learn more about global variables'
-   - link: 'synthetics/browser_tests/actions/'
-     tag: 'Documentation'
-     text: 'Learn more about browser test steps'
+  - link: 'https://www.datadoghq.com/blog/mfa-synthetic-testing-datadog/'
+    tag: 'Blog'
+    text: 'Introducing multi-factor authentication in Datadog Synthetic tests'
+  - link: '/synthetics/guide/browser-tests-fido2'
+    tag: 'Documentation'
+    text: 'Passkeys in browser tests'
+  - link: 'synthetics/settings/?tab=specifyvalue#global-variables'
+    tag: 'Documentation'
+    text: 'Learn more about global variables'
  
 ---
 

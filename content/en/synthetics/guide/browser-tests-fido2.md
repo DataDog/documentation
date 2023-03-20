@@ -2,12 +2,15 @@
 title: Passkeys (FIDO2) In Browser Tests
 kind: guide
 further_reading:
-   - link: '/synthetics/guide/app-that-requires-login/'
-     tag: 'Documentation'
-     text: 'Learn more about authentication in browser test'
-   - link: 'synthetics/settings/?tab=specifyvalue#global-variables'
-     tag: 'Documentation'
-     text: 'Learn more about global variables'
+  - link: '/synthetics/guide/app-that-requires-login/'
+   tag: 'Documentation'
+    text: 'Learn more about authentication in browser test'
+  - link: '/synthetics/guide/browser-tests-totp'
+    tag: 'Documentation'
+    text: 'TOTPs for Multi-Factor Authentication (MFA) in browser tests'
+  - link: 'synthetics/settings/?tab=specifyvalue#global-variables'
+    tag: 'Documentation'
+    text: 'Learn more about global variables'
  
 ---
 
