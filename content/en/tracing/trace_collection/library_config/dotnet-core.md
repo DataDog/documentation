@@ -299,9 +299,9 @@ You can use the following environment variables to configure injection and extra
 - `DD_TRACE_PROPAGATION_STYLE_INJECT=Datadog, b3multi, tracecontext`
 - `DD_TRACE_PROPAGATION_STYLE_EXTRACT=Datadog, b3multi, tracecontext`
 
-The environment variable values are comma-separated lists of header styles enabled for injection or extraction. If multiple extraction styles are enabled, the extraction attempt is completed in order of configured styles, and uses the first successful extracted value.
+The environment variable values are comma-separated lists of header styles enabled for injection or extraction. If multiple extraction styles are enabled, the extraction attempt is completed in the order of configured styles, and uses the first successful extracted value.
 
-From verion 2.22.0, the default injection style is `tracecontext, Datadog`, so the W3C context is used preferentially, followed by the Datadog headers. Prior to version 2.22.0, only the `Datadog` injection style is enabled.
+Starting from version 2.22.0, the default injection style is `tracecontext, Datadog`, so the W3C context is used, followed by the Datadog headers. Prior to version 2.22.0, only the `Datadog` injection style is enabled.
 
 ## Further reading
 
