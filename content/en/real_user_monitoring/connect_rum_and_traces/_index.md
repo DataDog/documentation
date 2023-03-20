@@ -178,7 +178,7 @@ Use frontend data from RUM, as well as backend, infrastructure, and log informat
 
 1. Set up [RUM Flutter Monitoring][1]. 
 
-2. Follow the instructions under [Automatic Resource Tracking][2] to include the Datadog Tracking HTTP Client package and enable HTTP tracking. This will include the following changes to your initialization to add a list of internal, first-party origins called by your Flutter application
+2. Follow the instructions under [Automatic Resource Tracking][2] to include the Datadog Tracking HTTP Client package and enable HTTP tracking. This includes the following changes to your initialization to add a list of internal, first-party origins called by your Flutter application:
     ```dart
     final configuration = DdSdkConfiguration(
       // ...
