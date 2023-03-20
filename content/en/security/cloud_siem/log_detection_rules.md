@@ -56,7 +56,7 @@ Impossible travel detects access from different locations whose distance is grea
 
 ### Third Party
 
-Third Party is available only for the [AWS Guardduty finding][5] rule. You can update the rule with suppression queries and who to notify when a signal is generated.
+Third Party allows you to forward alerts from an outside vendor or application. It is available only for the [AWS Guardduty finding][5] rule. You can update the rule with suppression queries and who to notify when a signal is generated.
 ## Define a search query
 
 {{< tabs >}}
