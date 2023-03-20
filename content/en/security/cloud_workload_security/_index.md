@@ -18,7 +18,7 @@ CWS uses the Datadog Agent to monitor your environment. If you don't already hav
 3. **DNS Activity Monitoring** to watch network traffic for malicious activity on hosts and containers in real-time.
 4. **Kernel Activity Monitoring** to watch for Kernel-layer attacks like process hijacking, container breakouts, and more in real-time.
 
-{{< img src="security/cws/cws_signals.png" alt="Cloud Workload Security signals in the Datadog app" width="100%">}}
+{{< img src="security/cws/cws_overview.png" alt="Cloud Workload Security overview page" width="100%">}}
 
 ## Manage out-of-the-box and custom detection rules
 
@@ -41,6 +41,8 @@ Use template variables and Markdown to [customize notification messages][5]. Edi
 ## Investigate and remediate security signals
 
 Investigate and triage security signals in the [Security Signals Explorer][8]. View detailed information about the impacted files or processes, related signals and logs, and remediation steps.
+
+{{< img src="security/cws/cws_signals2.png" alt="Cloud Workload Security signals in the Datadog app" width="100%">}}
 
 ## Get started
 
