@@ -43,14 +43,14 @@ export default {
         us: '10514',
         us5: 'The US5 TCP endpoint port is not supported.',
         eu: '1883',
-        ap1: 'PLACEHOLDER',
+        ap1: '443',
         gov: 'The GOV TCP endpoint port is not supported.'
     },
     tcp_endpoint_port_ssl: {
         us: '10516',
         us5: 'The US5 TCP endpoint port is not supported.',
         eu: '443',
-        ap1: 'PLACEHOLDER',
+        ap1: '443',
         gov: 'The GOV TCP endpoint port is not supported.'
     },
     web_integrations_endpoint: {
@@ -66,7 +66,7 @@ export default {
         us3: '10516',
         us5: '10516',
         eu: '443',
-        ap1: 'PLACEHOLDER',
+        ap1: '443',
         gov: 'The GOV web integrations endpoint port is not supported.'
     },
     web_integrations_unencrypted_port: {
@@ -74,7 +74,7 @@ export default {
       us3: '10514',
       us5: '10514',
       eu: '1883',
-      ap1: 'PLACEHOLDER',
+      ap1: '10514',
       gov: 'The GOV web integrations endpoint port is not supported.'
     },
     agent_http_endpoint: {
