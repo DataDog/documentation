@@ -274,5 +274,5 @@ To install a GitHub App for your organization, you need to be an organization ow
 [6]: /tracing/
 [7]: https://app.datadoghq.com/source-code/setup/apm
 [8]: /tracing/error_tracking/
-[9]: /trace_collection/dd_libraries/
+[9]: /tracing/trace_collection/dd_libraries/
 [10]: /integrations/guide/source-code-integration/?tab=dockerruntime#inline-source-code
