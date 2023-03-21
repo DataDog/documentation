@@ -54,7 +54,7 @@ The Cloud SIEM Investigator provides a graphical interface for you to pivot from
 
 {{% tab "GCP" %}}
 
-1. Navigate to **Security** > **Cloud SIEM**, click the **Investigator** tab and then the [**GCP**][1] tab.
+1. Navigate to **Security** > **Cloud SIEM** and click the **Investigator** tab, and then the [**GCP**][1] tab.
 
 2. Select an entity type in the **In** field dropdown menu.
 
