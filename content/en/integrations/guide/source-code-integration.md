@@ -1,7 +1,7 @@
 ---
 title: Datadog Source Code Integration
 kind: guide
-description: "Set up the source code integration that integrates with APM to link your telemetry with your repositories and use the GitHub integration to generate inline code snippets."
+description: "Set up the source code integration that integrates with APM to link your telemetry with your repositories, embed git information into artifacts in your CI pipeline, and use the GitHub integration to generate inline code snippets."
 further_reading:
 - link: "https://docs.datadoghq.com/integrations/github/"
   tag: "Documentation"
@@ -79,6 +79,109 @@ export DD_TAGS="git.commit.sha:<FULL_GIT_COMMIT_SHA>,git.repository_url:git-prov
 {{< /tabs >}}
 
 Datadog only captures the repository URL, the commit SHA of the current branch, and a list of tracked file paths—Datadog does not ingest or store any user code.
+
+## Embed git information in your artifacts on CI
+
+You can tag your telemetry with git information, such as the repository URL and commit hash, for artifacts built in a CI pipeline by running the following git commands and using the following environment variables. The [Datadog Tracing Libraries][9] uses this information to tag your telemetry and [display source code snippets in your stack traces][10].
+
+To extract the metadata, run `git rev-parse HEAD` for `git.commit.sha`, and `git config --get remote.origin.url` for `git.repository_url`. 
+
+You can use `DD_GIT_REPOSITORY_URL` AND `DD_GIT_COMMIT_SHA` environment variables for each language-specific tracer.
+
+For example:
+
+<details open>
+  <summary>Default</summary>
+
+```shell
+export DD_GIT_COMMIT_SHA=<FULL_GIT_COMMIT_SHA>
+export DD_GIT_REPOSITORY_URL="git-provider.example/me/my-repo"
+./my-application start
+```
+
+</details>
+
+<details>
+  <summary>With <code>DD_TAGS</code></summary>
+
+```shell
+export DD_TAGS="git.commit.sha:<FULL_GIT_COMMIT_SHA> 
+git.repository_url:git-provider.example/me/my-repo"
+./my-application start
+```
+
+</details>
+
+{{< tabs >}}
+{{% tab "Java" %}}
+
+If you are building Java applications with [Maven][1] or [Gradle][2], install and set up the Maven [`git-commit-id-maven-plugin`][3] or Gradle [`gradle-git-properties`][4] plugin to embed metadata to the Maven [`git.properties` file][5] or Gradle [`git.properties` file][6] in the root of the JAR archive.
+
+For example, you can ship git information into a `git.properties` property file: 
+
+```shell
+git.commit.id=<commit_hash>
+git.remote.origin.url=<repository_URL>
+```
+
+Use the embedding samples for [Maven][7] and [Gradle][8] to generate properties in the `git.properties` file.
+
+[1]: https://maven.apache.org/index.html
+[2]: https://docs.gradle.org/current/samples/sample_building_java_applications.html
+[3]: https://github.com/git-commit-id/git-commit-id-maven-plugin
+[4]: https://github.com/n0mer/gradle-git-properties
+[5]: https://github.com/sashacmc/dd-git-metadata-poc/blob/main/java/maven/out_sample/git.properties
+[6]: https://github.com/sashacmc/dd-git-metadata-poc/blob/main/java/gradle/out_sample/git.properties
+[7]: https://github.com/sashacmc/dd-git-metadata-poc/blob/main/java/maven/gitmetadatapoc/pom.xml#L50
+[8]: https://github.com/sashacmc/dd-git-metadata-poc/blob/main/java/gradle/app/build.gradle#L13
+{{% /tab %}}
+{{% tab "Python" %}}
+
+For a standard library: 
+
+1. Install the `ddgitmetadata` package.
+2. Add `import ddgitmetadata` as the first import to the `setup.py` file.
+3. Add the main Python package name to the tracer's `DD_MAIN_PACKAGE` environment variable.
+
+For a unified Python project settings file:
+
+1. Install the [`hatch-datadog-build-metadata` plugin][1].
+2. Configure the plugin to embed git metadata. If the project already has URLs, reconfigure them as dynamic and move them into another configuration section.
+3. Add the main Python package name to the tracer's `DD_MAIN_PACKAGE` environment variable.
+
+[1]: https://github.com/DataDog/hatch-datadog-build-metadata
+{{% /tab %}}
+{{% tab "Go" %}}
+
+You can use Go [versions 1.18 or later][1] to embed git metadata. Build an application as a module using `go.mod`, and ensure that the module directive points to a public path such as `github.com` or `gopkg.in`, not a short module name.
+
+[1]: https://tip.golang.org/doc/go1.18
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
+Run your Ruby application from a valid git repository folder.
+
+{{% /tab %}}
+{{% tab "NodeJS" %}}
+
+For unbundled code:
+
+1. Install a tool (link TBD).
+2. Add the tool to the build pipeline.
+3. Ship the application along to the generated `git.properties` file.
+
+* For [Rollup][1], install and set up the [`rollup-plugin-inject-process-env` plugin][2].
+* For [Webpack][3], install and set up the [`EnvironmentPlugin` plugin][4].
+* For [Esbuild][5], install and set up the [`esbuild-envfile-plugin` plugin][6].
+
+[1]: https://rollupjs.org/guide/en/
+[2]: https://www.npmjs.com/package/rollup-plugin-inject-process-env
+[3]: https://webpack.js.org/concepts/
+[4]: https://webpack.js.org/plugins/environment-plugin/
+[5]: https://esbuild.github.io/
+[6]: https://www.npmjs.com/package/esbuild-envfile-plugin
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Configure your repositories
 
@@ -171,3 +274,5 @@ To install a GitHub App for your organization, you need to be an organization ow
 [6]: /tracing/
 [7]: https://app.datadoghq.com/source-code/setup/apm
 [8]: /tracing/error_tracking/
+[9]: /trace_collection/dd_libraries/
+[10]: /integrations/guide/source-code-integration/?tab=dockerruntime#inline-source-code
