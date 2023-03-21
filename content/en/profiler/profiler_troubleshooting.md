@@ -233,6 +233,25 @@ Datadog.configure do |c|
 end
 ```
 
+## Unexpected run-time failures and errors from Ruby gems that use native extensions in `dd-trace-rb` 1.11.0+
+
+Starting from `dd-trace-rb` 1.11.0, the "CPU Profiling 2.0" profiler now gathers profiling data by sending `SIGPROF` unix signals to Ruby applications, enabling finer-grained data gathering.
+
+Sending `SIGPROF` unix signals is a common profiling approach, and it may cause system calls performed by native extensions/libraries to be interrupted [with a system `EINTR` error code](https://man7.org/linux/man-pages/man7/signal.7.html#:~:text=Interruption%20of%20system%20calls%20and%20library%20functions%20by%20signal%20handlers).
+Rarely, native extensions or libraries called by them may be have missing or incorrect error handling for the `EINTR` error code.
+
+One known instance of this issue is when using the `mysql2` gem together with versions of libmysqlclient [older than 8.0.0](https://bugs.mysql.com/bug.php?id=83109). The affected libmysqlclient version is known to be present on Ubuntu 18.04, but not 20.04 and later releases. Note that for this specific case, the profiler auto-detects when the `mysql2` gem is in use and auto-applies the solution described below.
+
+If you run into run-time failures and/or errors from Ruby gems that use native extensions when the profiler is enabled, you can fall back to the legacy profiler, which does not use `SIGPROF` signals to work. You can do this by setting the `DD_PROFILING_FORCE_ENABLE_LEGACY` environment variable to `true`, or via code:
+
+```ruby
+Datadog.configure do |c|
+  c.profiling.advanced.force_enable_legacy_profiler = true
+end
+```
+
+Please [open a support ticket][2] if you find any such incompatibilities: We will add those to the auto-detection list, and will work with the gem authors to fix the issue.
+
 [1]: /tracing/troubleshooting/#tracer-debug-logs
 [2]: /help/
 [3]: https://github.com/DataDog/dd-trace-rb/releases/tag/v0.54.0
