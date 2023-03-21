@@ -18,7 +18,7 @@ further_reading:
 
 [Universal Service Monitoring][1] discovers services using popular container tags (such as `app`, `short_image`, and `kube_deployment`) and generates entries in the [Service Catalog][2] for those services. 
 
-You can access request, error, and duration metrics in Datadog for both inbound and outbound traffic on all services discovered with Universal Service Monitoring. These service health metrics that are useful for creating alerts, [tracking deployments][11], and getting started with [service level objectives (SLOs)][3] so you can get broad visibility into all services running on your infrastructure. 
+You can access request, error, and duration metrics in Datadog for both inbound and outbound traffic on all services discovered with Universal Service Monitoring. These service health metrics are useful for creating alerts, [tracking deployments][11], and getting started with [service level objectives (SLOs)][3] so you can get broad visibility into all services running on your infrastructure. 
 
 {{< img src="universal_service_monitoring/guide/usm_slo.png" alt="Universal Service Monitoring SLOs for BITSBOUTIQUE" style="width:100%;" >}}
 
@@ -85,22 +85,20 @@ To create an SLO from the Service Catalog:
 {{< img src="universal_service_monitoring/guide/service_catalog_slo_setup.png" alt="Setting up a Universal Service Monitoring SLO for BITSBOUTIQUE" style="width:100%;" >}}
 
 Optionally, to create an SLO manually using USM metrics:
-
-1. Navigate to **Monitors** > **SLOs** and click [**New SLO**][15].
+ 
+1. Navigate to **Service Management** > **SLOs** and click [**New SLO**][15].
 2. Select **Metric Based** and create two queries in the **Good events (numerator)** section:
    
-   * Query A: Enter a USM metric such as `universal.http.server`, an `env` primary tag in the `from` field, and select `service` from the `all values` dropdown menu. 
-   * Query B: Enter a USM metric such as `universal.http.server`, an `env` primary tag and an `error:true` tag in the `from` field, and select `service` from the `all values` dropdown menu. 
+   * Query A: Enter a USM metric such as `universal.http.server`, filter to a specific service by adding primary `service` and `env` tags in the `from` field, and select `count` in the `as` field. 
+   * Query B: Enter a USM metric such as `universal.http.server`, filter to a specific service by adding primary `service` and `env` tags, in addition to an `error:true` tag in the `from` field, and select `count` in the `as` field. 
 
 3. Click **+ Add Formula** and enter `a-b`.
-4. In the **Total events (denominator)** section, enter a USM metric such as `universal.http.server`, an `env` primary tag in the `from` field, and select `service` from the `all values` dropdown menu.
-5. Click **+ New Target** to create three target thresholds with the following settings:
+4. In the **Total events (denominator)** section, enter a USM metric such as `universal.http.server`, filter to a specific service by adding primary `service` and `env` tags in the `from` field, and select `count` in the `as` field.
+5. Click **+ New Target** to create a target threshold with the following settings:
 
-   * The time window is `7 Days`, the target threshold is `95%`, and the warning threshold is `97%`.
-   * The time window is `30 Days`, the target threshold is `97%`, and the warning threshold is `99%`.
-   * The time window is `90 Days`, the target threshold is `99%`, and the warning threshold is `99.5%`.
+   * The time window is `7 Days`, the target threshold is `95%`, and the warning threshold is `99.5%`. Datadog recommends setting the same target threshold across all time windows.
 
-6. Enter a name and description for this SLO and add the `env` primary tag.
+6. Enter a name and description for this SLO. Set primary `env` and `service` tags, in addition to the `team` tag.
 7. Click **Save and Set Alert**.
 
 {{< img src="universal_service_monitoring/guide/usm_slo_setup.png" alt="Setting up a Universal Service Monitoring SLO for BITSBOUTIQUE" style="width:100%;" >}}

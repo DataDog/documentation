@@ -20,7 +20,7 @@ further_reading:
   text: "Proactively monitor service performance with SLO alerts"
 ---
 
-{{< vimeo 382481078 >}}
+{{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/382481078/rendition/1080p/file.mp4?loc=external&signature=f5a81ca1c44d9c1c2cfcbd23c2b6b4f89914027ff344fb0a9f8dc6b9a1d141aa" poster="/images/poster/slo.png" >}}
 
 {{< jqmath-vanilla >}}
 
@@ -84,8 +84,6 @@ To edit an SLO, hover over the SLO's row in the list view and click the edit pen
 
 The [Service Level Objectives status page][1] lets you run an advanced search of all SLOs so you can find, view, edit, clone or delete SLOs from the search results.
 
-{{< img src="monitors/service_level_objectives/slo_status_page.png" alt="SLO status page showing faceted search and calendar Weekly view" style="width:100%;" >}}
-
 Advanced search lets you query SLOs by any combination of SLO attributes:
 
 * `name` and `description` - text search
@@ -95,8 +93,6 @@ Advanced search lets you query SLOs by any combination of SLO attributes:
 * `tags` - datacenter, env, service, team, etc.
 
 To run a search, use the facet checkboxes on the left and the search bar at the top. When you check the boxes, the search bar updates with the equivalent query. Likewise, when you modify the search bar query (or write one from scratch), the checkboxes update to reflect the change. Query results update in real-time as you edit the query; there's no 'Search' button to click.
-
-Switch between the **Primary**, **Weekly**, and **Monthly** options to view SLO statuses by calendar weeks and months over 13 months.
 
 To edit an individual SLO, hover over it and use the buttons that appear at the right of its row: **Edit**, **Clone**, **Delete**. To see more details on an SLO, click its table row to open its details side panel.
 

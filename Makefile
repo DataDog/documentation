@@ -84,6 +84,11 @@ start-docker: clean  ## Build and run docs including external content via docker
 stop-docker: ## Stop the running docker container.
 	@docker-compose -f ./docker-compose-docs.yml down
 
+find-int: hugpython ## Find the source for an integration (downloads/updates integrations repos first)
+	@. hugpython/bin/activate && \
+	export GITHUB_TOKEN=$(GITHUB_TOKEN) && \
+	./local/bin/py/integration-finder.py $(int)
+
 # install the root level node modules
 node_modules: package.json yarn.lock
 	@yarn install --immutable

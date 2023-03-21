@@ -112,10 +112,8 @@ This guide assumes you upgraded to the Agent v6 using the [upgrade guide][1]. If
 7. Restart the agent
 
     ```shell
-    # Systemd
-    sudo systemctl restart datadog-agent
-    # Upstart
-    sudo /etc/init.d/datadog-agent restart
+    sudo systemctl restart datadog-agent # Systemd
+    sudo /etc/init.d/datadog-agent restart # Upstart
     ```
 
 8. Clean out `/etc/datadog-agent` (optional):
@@ -161,10 +159,8 @@ This guide assumes you upgraded to the Agent v6 using the [upgrade guide][1]. If
 5. Restart the agent
 
     ```shell
-    # Systemd
-    sudo systemctl restart datadog-agent
-    # Upstart
-    sudo /etc/init.d/datadog-agent restart
+    sudo systemctl restart datadog-agent # Systemd
+    sudo /etc/init.d/datadog-agent restart # Upstart
     ```
 
 6. Clean out `/etc/datadog-agent` (optional):

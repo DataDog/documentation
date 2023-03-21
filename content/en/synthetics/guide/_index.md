@@ -29,7 +29,7 @@ disable_toc: true
     {{< nextlink href="synthetics/guide/custom-javascript-assertion/" >}}Using custom JavaScript assertions in browser tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/email-validation/" >}}Email validation in browser tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/testing-file-upload-and-download/" >}}Test file upload and download{{< /nextlink >}}
-    {{< nextlink href="synthetics/guide/popup/" >}}Handling popups in browser tests{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/popup/" >}}Handling pop-ups in browser tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/recording-custom-user-agent/" >}}Record steps with a custom User-Agent{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/manually-adding-chrome-extension/" >}}Manually adding the browser test Chrome extension{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/browser-tests-using-shadow-dom/" >}}Using a shadow DOM in browser tests{{< /nextlink >}}

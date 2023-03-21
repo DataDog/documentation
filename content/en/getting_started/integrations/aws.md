@@ -159,7 +159,7 @@ For containerized environments, you can use the Datadog Agent, whether you're ma
 
 #### ECS with EC2 launch type
 
-Use the [Amazon ECS documentation][25] to run the [Datadog Docker Agent][26] on the EC2 instances in your ECS cluster. Review the [Amazon ECS Data Collection documentation][27] to see the metrics and events reported to your Datadog account.
+Use the [Amazon ECS documentation][25] to run the [Datadog Docker Agent][26] on the EC2 instances in your ECS cluster. Review the [Amazon ECS on EC2][27] to see the metrics and events reported to your Datadog account.
 
 #### ECS with Fargate launch type
 
@@ -236,7 +236,7 @@ If you encounter any issues, be sure to check out the [Troubleshooting][57] sect
 [24]: https://aws.amazon.com/fargate/
 [25]: /agent/amazon_ecs/?tab=awscli
 [26]: /agent/docker/?tab=standard
-[27]: /agent/amazon_ecs/data_collected/
+[27]: /integrations/amazon_ecs
 [28]: /integrations/ecs_fargate/?tab=fluentbitandfirelens
 [29]: /agent/kubernetes/distributions/?tab=helm#EKS
 [30]: /agent/kubernetes/?tab=helm

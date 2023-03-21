@@ -160,18 +160,26 @@ main:
     url: getting_started/database_monitoring/
     parent: getting_started
     weight: 17
+  - name: Cloud Security Management
+    url: getting_started/cloud_security_management/
+    parent: getting_started
+    weight: 18
   - name: Cloud SIEM
     url: getting_started/cloud_siem/
     parent: getting_started
-    weight: 18
+    weight: 19
   - name: Application Security Management
     url: getting_started/application_security/
     parent: getting_started
     weight: 19
+  - name: Observability Pipelines
+    url: getting_started/observability_pipelines/
+    parent: getting_started
+    weight: 20
   - name: Learning Center
     url: getting_started/learning_center/
     parent: getting_started
-    weight: 20
+    weight: 21
   - name: Glossary
     url: glossary/
     pre: features
@@ -524,11 +532,6 @@ main:
     parent: containers_amazon_ecs
     identifier: containers_amazon_ecs_tags
     weight: 503
-  - name: Data collected
-    url: containers/amazon_ecs/data_collected/
-    parent: containers_amazon_ecs
-    identifier: containers_amazon_ecs_data_collected
-    weight: 504
   - name: AWS Fargate
     url: integrations/ecs_fargate/
     parent: containers
@@ -658,205 +661,100 @@ main:
     url: dashboards/widgets/
     parent: dashboards
     identifier: dashboards_widgets
-    weight: 4
-  - name: Alert Graph
-    url: dashboards/widgets/alert_graph/
-    parent: dashboards_widgets
-    weight: 10
-  - name: Alert Value
-    url: dashboards/widgets/alert_value/
-    parent: dashboards_widgets
-    weight: 11
-  - name: Change
-    url: dashboards/widgets/change/
-    parent: dashboards_widgets
-    weight: 12
-  - name: Check Status
-    url: dashboards/widgets/check_status/
-    parent: dashboards_widgets
-    weight: 13
-  - name: Distribution
-    url: dashboards/widgets/distribution/
-    parent: dashboards_widgets
-    weight: 14
-  - name: Event Stream
-    url: dashboards/widgets/event_stream/
-    parent: dashboards_widgets
-    weight: 15
-  - name: Event Timeline
-    url: dashboards/widgets/event_timeline/
-    parent: dashboards_widgets
-    weight: 16
-  - name: Free Text
-    url: dashboards/widgets/free_text/
-    parent: dashboards_widgets
-    weight: 17
-  - name: Funnel
-    url: dashboards/widgets/funnel/
-    parent: dashboards_widgets
-    weight: 18
-  - name: Geomap
-    url: dashboards/widgets/geomap/
-    parent: dashboards_widgets
-    weight: 19
-  - name: Group
-    url: dashboards/widgets/group/
-    parent: dashboards_widgets
-    weight: 20
-  - name: Heatmap
-    url: dashboards/widgets/heat_map/
-    parent: dashboards_widgets
-    weight: 21
-  - name: Host Map
-    url: dashboards/widgets/hostmap/
-    parent: dashboards_widgets
-    weight: 22
-    identifier: widgets_host_map
-  - name: Iframe
-    url: dashboards/widgets/iframe/
-    parent: dashboards_widgets
-    weight: 23
-  - name: Image
-    url: dashboards/widgets/image/
-    parent: dashboards_widgets
-    weight: 24
-  - name: Log Stream
-    url: dashboards/widgets/log_stream/
-    parent: dashboards_widgets
-    weight: 25
-  - name: Monitor Summary
-    url: dashboards/widgets/monitor_summary/
-    parent: dashboards_widgets
-    weight: 26
-  - name: Notes and Links
-    url: dashboards/widgets/note/
-    parent: dashboards_widgets
-    weight: 27
-  - name: Query Value
-    url: dashboards/widgets/query_value/
-    parent: dashboards_widgets
-    weight: 28
-  - name: Scatter Plot
-    url: dashboards/widgets/scatter_plot/
-    parent: dashboards_widgets
-    weight: 29
-  - name: SLO Summary
-    url: dashboards/widgets/slo/
-    parent: dashboards_widgets
-    weight: 30
-  - name: Service Summary
-    url: dashboards/widgets/service_summary/
-    parent: dashboards_widgets
-    weight: 31
-  - name: Table
-    url: dashboards/widgets/table/
-    parent: dashboards_widgets
-    weight: 32
-  - name: Timeseries
-    url: dashboards/widgets/timeseries/
-    parent: dashboards_widgets
-    weight: 33
-  - name: Top List
-    url: dashboards/widgets/top_list/
-    parent: dashboards_widgets
-    weight: 34
-  - name: Topology Map
-    url: dashboards/widgets/topology_map/
-    parent: dashboards_widgets
-    weight: 35
+    weight: 1
   - name: Querying
     url: dashboards/querying/
     parent: dashboards
-    weight: 5
+    weight: 2
   - name: Functions
     url: dashboards/functions/
     parent: dashboards
     identifier: dashboards_functions
-    weight: 6
+    weight: 3
   - name: Algorithms
     url: dashboards/functions/algorithms/
     parent: dashboards_functions
-    weight: 601
+    weight: 301
   - name: Arithmetic
     url: dashboards/functions/arithmetic/
     parent: dashboards_functions
-    weight: 602
+    weight: 302
   - name: Count
     url: dashboards/functions/count/
     parent: dashboards_functions
-    weight: 603
+    weight: 303
   - name: Exclusion
     url: dashboards/functions/exclusion/
     parent: dashboards_functions
-    weight: 603
+    weight: 303
   - name: Interpolation
     url: dashboards/functions/interpolation/
     parent: dashboards_functions
-    weight: 604
+    weight: 304
   - name: Rank
     url: dashboards/functions/rank/
     parent: dashboards_functions
-    weight: 605
+    weight: 305
   - name: Rate
     url: dashboards/functions/rate/
     parent: dashboards_functions
-    weight: 606
+    weight: 306
   - name: Regression
     url: dashboards/functions/regression/
     parent: dashboards_functions
-    weight: 607
+    weight: 307
   - name: Rollup
     url: dashboards/functions/rollup/
     parent: dashboards_functions
-    weight: 608
+    weight: 308
   - name: Smoothing
     url: dashboards/functions/smoothing/
     parent: dashboards_functions
-    weight: 609
+    weight: 309
   - name: Timeshift
     url: dashboards/functions/timeshift/
     parent: dashboards_functions
-    weight: 610
+    weight: 310
   - name: Beta
     url: dashboards/functions/beta/
     parent: dashboards_functions
-    weight: 611
+    weight: 311
   - name: Correlations
     url: dashboards/correlations/
     parent: dashboards
-    weight: 7
+    weight: 4
   - name: Scheduled Reports
     url: dashboards/scheduled_reports/
     parent: dashboards
-    weight: 8
+    weight: 5
     identifier: dashboards_reporting
   - name: Template Variables
     url: dashboards/template_variables/
     parent: dashboards
-    weight: 9
+    weight: 6
     identifier: dashboards_temp_variables
   - name: Sharing
     url: dashboards/sharing/
     parent: dashboards
-    weight: 10
+    weight: 7
   - name: Graphing with JSON
     url: dashboards/graphing_json/
     parent: dashboards
     identifier: graphing_json
-    weight: 11
+    weight: 8
   - name: Widget JSON schema
     url: dashboards/graphing_json/widget_json/
     parent: graphing_json
-    weight: 1001
+    weight: 801
   - name: Request JSON schema
     url: dashboards/graphing_json/request_json/
     parent: graphing_json
-    weight: 1002
+    weight: 802
   - name: Guides
     url: dashboards/guide/
     parent: dashboards
     identifier: guides
-    weight: 12
+    weight: 9
   - name: Mobile Application
     url: mobile/
     identifier: mobile
@@ -2100,6 +1998,21 @@ main:
     parent: ci
     identifier: intelligent_test_runner
     weight: 3
+  - name: .NET
+    url: continuous_integration/intelligent_test_runner/dotnet/
+    parent: intelligent_test_runner
+    identifier: ci_itr_dotnet
+    weight: 301
+  - name: JavaScript and TypeScript
+    url: continuous_integration/intelligent_test_runner/javascript/
+    parent: intelligent_test_runner
+    identifier: ci_itr_javascript
+    weight: 303
+  - name: Swift
+    url: continuous_integration/intelligent_test_runner/swift/
+    parent: intelligent_test_runner
+    identifier: ci_itr_swift
+    weight: 306
   - name: Guides
     url: continuous_integration/guides/
     parent: ci
@@ -2545,7 +2458,7 @@ main:
     url: observability_pipelines/guide/
     parent: observability_pipelines
     identifier: observability_pipelines_guides
-    weight: 5
+    weight: 6
   - name: Security Overview
     url: security/
     pre: security-platform
@@ -2720,48 +2633,48 @@ main:
     parent: application_security
     identifier: appsec_terms
     weight: 1
-  - name: Getting Started
-    url: security/application_security/getting_started/
+  - name: Enabling ASM
+    url: security/application_security/enabling/
     parent: application_security
     identifier: appsec_getting_started
     weight: 2
   - name: Java
-    url: security/application_security/getting_started/java/
+    url: security/application_security/enabling/java/
     parent: appsec_getting_started
     identifier: appsec_java
     weight: 201
   - name: .NET
-    url: security/application_security/getting_started/dotnet/
+    url: security/application_security/enabling/dotnet/
     parent: appsec_getting_started
     identifier: appsec_dotnet
     weight: 202
   - name: Go
-    url: security/application_security/getting_started/go/
+    url: security/application_security/enabling/go/
     parent: appsec_getting_started
     identifier: appsec_go
     weight: 203
   - name: Ruby
-    url: security/application_security/getting_started/ruby/
+    url: security/application_security/enabling/ruby/
     parent: appsec_getting_started
     identifier: appsec_ruby
     weight: 204
   - name: PHP
-    url: security/application_security/getting_started/php/
+    url: security/application_security/enabling/php/
     parent: appsec_getting_started
     identifier: appsec_php
     weight: 205
   - name: NodeJS
-    url: security/application_security/getting_started/nodejs/
+    url: security/application_security/enabling/nodejs/
     parent: appsec_getting_started
     identifier: appsec_nodejs
     weight: 206
   - name: Python
-    url: security/application_security/getting_started/python/
+    url: security/application_security/enabling/python/
     parent: appsec_getting_started
     identifier: appsec_python
     weight: 207
   - name: Serverless
-    url: security/application_security/getting_started/serverless/
+    url: security/application_security/enabling/serverless/
     parent: appsec_getting_started
     identifier: appsec_serverless
     weight: 208
@@ -2800,11 +2713,16 @@ main:
     parent: appsec_threats
     identifier: threats_custom_rules
     weight: 504
+  - name: Protection
+    url: security/application_security/threats/protection/
+    parent: appsec_threats
+    identifier: threats_protection
+    weight: 505
   - name: In-App WAF Rules
     url: security/application_security/threats/inapp_waf_rules/
     parent: appsec_threats
     identifier: threats_event_rules
-    weight: 505
+    weight: 506
   - name: Guides
     url: security/application_security/guide/
     parent: application_security
@@ -3048,7 +2966,7 @@ main:
     parent: continuous_testing
     identifier: continuous_testing_troubleshooting
     weight: 6
-  - name: RUM & Session Replay
+  - name: Real User Monitoring
     url: real_user_monitoring/
     pre: rum
     identifier: rum
@@ -3399,11 +3317,6 @@ main:
     parent: rum_error_tracking
     identifier: rum_error_tracking_flutter
     weight: 1407
-  - name: Custom Grouping
-    url: real_user_monitoring/error_tracking/custom_grouping
-    parent: rum_error_tracking
-    identifier: rum_error_tracking_custom_grouping
-    weight: 1408
   - name: Guides
     url: real_user_monitoring/guide/
     parent: rum
@@ -8313,6 +8226,71 @@ api:
     url: /api/latest/incidents/
     identifier: incidents
     generated: true
+  - name: Update an incident todo
+    url: '#update-an-incident-todo'
+    identifier: incidents-update-an-incident-todo
+    parent: incidents
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateIncidentTodo
+      unstable:
+        - v2
+      order: 17
+  - name: Get incident todo details
+    url: '#get-incident-todo-details'
+    identifier: incidents-get-incident-todo-details
+    parent: incidents
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetIncidentTodo
+      unstable:
+        - v2
+      order: 16
+  - name: Delete an incident todo
+    url: '#delete-an-incident-todo'
+    identifier: incidents-delete-an-incident-todo
+    parent: incidents
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteIncidentTodo
+      unstable:
+        - v2
+      order: 18
+  - name: Create an incident todo
+    url: '#create-an-incident-todo'
+    identifier: incidents-create-an-incident-todo
+    parent: incidents
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateIncidentTodo
+      unstable:
+        - v2
+      order: 15
+  - name: Get a list of an incident's todos
+    url: '#get-a-list-of-an-incidents-todos'
+    identifier: incidents-get-a-list-of-an-incidents-todos
+    parent: incidents
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListIncidentTodos
+      unstable:
+        - v2
+      order: 14
   - name: Update an existing incident integration metadata
     url: '#update-an-existing-incident-integration-metadata'
     identifier: incidents-update-an-existing-incident-integration-metadata

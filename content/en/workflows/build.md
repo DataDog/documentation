@@ -164,10 +164,10 @@ To configure error handling for a step:
 
 ### Add a fallback
 
-To handle a step failure, you can add a downstream workflow step as a fallback by selecting it from the **Fallback** drop-down menu.
+To handle a step failure, you can add a downstream workflow step as a fallback by selecting it from the **Fallback** dropdown menu.
 
 Alternatively, you can create a fallback step that branches from the main workflow tree:
-1. From the **Fallback** drop-down menu, select **Add a new fallback**. The workflow canvas is replaced with a fallback tree.
+1. From the **Fallback** dropdown menu, select **Add a new fallback**. The workflow canvas is replaced with a fallback tree.
 1. Click the **+** icon on the fallback tree to add a step.
 1. [Add steps using the workflow builder](#build-a-workflow-with-the-workflow-builder). You can add as many steps as needed to the fallback tree.
 1. When you're done configuring your fallback steps, click **Save** to apply your changes.

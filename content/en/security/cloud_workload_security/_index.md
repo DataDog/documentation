@@ -19,6 +19,7 @@ Workload Security uses the Datadog Agent, so if you’re already using Datadog t
   {{< nextlink href="/security/cloud_workload_security/setup">}}Complete setup and configuration{{< /nextlink >}}
   {{< nextlink href="/security/cloud_workload_security/workload_security_rules">}}Learn about Cloud Workload Security detection rules{{< /nextlink >}}
   {{< nextlink href="/security/default_rules/#cat-workload-security">}}Start using out-of-the-box Cloud Workload Security detection rules{{< /nextlink >}}
+  {{< nextlink href="/getting_started/cloud_security_management">}}Getting Started with Cloud Security Management{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: /security/cloud_workload_security/setup/?tab=kubernetes#requirements

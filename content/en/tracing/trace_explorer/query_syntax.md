@@ -121,11 +121,11 @@ Don't lose time building the same views everyday. Saved searches contain your se
 
 {{< img src="tracing/app_analytics/search/saved_search.png" alt="Saved Search"  style="width:80%;">}}
 
-To delete a saved search, click on the bin icon under the Trace search drop-down.
+To delete a saved search, click on the bin icon under the Trace search dropdown menu.
 
 ## Time range
 
-The time range allows you to display traces within a given time period. Quickly change the time range by selecting a preset range from the dropdown (or [entering a custom time frame][3]):
+The time range allows you to display traces within a given time period. Quickly change the time range by selecting a preset range from the dropdown menu (or [entering a custom time frame][3]):
 
 {{< img src="tracing/app_analytics/search/time_frame2.png" style="width:50%;" alt="Select time frame" >}}
 
