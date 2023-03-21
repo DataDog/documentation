@@ -360,7 +360,7 @@ Propagation styles to use when extracting tracing headers. If using multiple sty
 : **INI**: `datadog.dbm_propagation_mode`<br>
 **Default**: `'disabled'`<br>
 : Enables linking between data sent from APM and the Database Monitoring product when set to `'service'` or `'full'`.<br>
-The `'service'` option enables the connection between DBM and APM services. Available for Postgres, MySQLand SQLServer.<br>
+The `'service'` option enables the connection between DBM and APM services. Available for Postgres, MySQL and SQLServer.<br>
 The `'full'` option enables connection between database spans with database query events. Available for Postgres and MySQL.<br>
 
 
