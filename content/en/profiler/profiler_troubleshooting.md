@@ -243,7 +243,7 @@ Rarely, native extensions or libraries called by them may be have missing or inc
 One known instance of this issue is when using the `mysql2` gem together with versions of libmysqlclient [older than 8.0.0](https://bugs.mysql.com/bug.php?id=83109). The affected libmysqlclient version is known to be present on Ubuntu 18.04, but not 20.04 and later releases.
 **Note**: For this case, the profiler auto-detects when the `mysql2` gem is in use and auto-applies the solution described below.
 
-If you run into run-time failures and/or errors from Ruby gems that use native extensions, we suggest reverting back to the legacy profiler.
+If you run into run-time failures and/or errors from Ruby gems that use native extensions, you can revert back to the legacy profiler.
 The legacy profiler does not use `SIGPROF` signals.
 You can do this by setting the `DD_PROFILING_FORCE_ENABLE_LEGACY` environment variable to `true`, or in code:
 
@@ -253,7 +253,7 @@ Datadog.configure do |c|
 end
 ```
 
-[Let us know via a support ticket][2] if you find (or suspect) any such incompatibilities.
+Let our team know if you find (or suspect) any such incompatibilities [by opening a support ticket][2].
 Doing this enables Datadog to add them to the auto-detection list, and to work with the gem/library authors to fix the issue.
 
 [1]: /tracing/troubleshooting/#tracer-debug-logs
