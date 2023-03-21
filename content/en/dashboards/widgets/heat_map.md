@@ -14,22 +14,15 @@ further_reading:
   text: "Visualize user behavior with Datadog Heatmaps"
 ---
 
-The heatmap visualization shows metrics aggregated across many tags, such as *hosts*. The more hosts that have a particular value, the darker that square is.
-
-The heatmap visualization supports distribution metrics, high resolution data display, and pre-binned OpenTelemetry histograms.
-
-The advantages of visualizing individual points in the heatmap:
-- Readily identify patterns and outliers both within and across different groups of data. 
-- The higher resolution (90,000 bins) means that it is a more readable alternative to the timeseries chart when plotting multiple series (~10). 
-- Visualize OpenTelemetry histograms out of the box, such as OpenTelemetry explicit bucket histograms.
+The heatmap visualization shows metrics aggregated across multiple tags. The heatmap supports distribution metrics, high resolution and data display. You can visualize OpenTelemetry histograms as heatmaps out of the box by using the 'counters' histogram mode.
 
 ## Setup
 
-{{< img src="dashboards/widgets/heat_map/heat_map_setup2.png" alt="Heatmap setup" style="width:100%;">}}
+{{< img src="dashboards/widgets/heat_map/heatmap_config.png" alt="Example heatmap setup for kubernetes.memory.usage_pct metric grouped by host, cluster-location, and kube_service tags with purple color scheme" style="width:100%;">}}
 
 ### Configuration
 
-Configure your metric query as usual. **Note**: This visualization type is useful only when metrics are aggregated across tag keys, such as for each `host`.
+Configure your metric query as usual. 
 
 Make a selection in the "`avg`/`max`/`min`/`sum by`/etc." control to see your data across the associated tags.
 
@@ -70,5 +63,5 @@ See the table below for the [widget JSON schema definition][3] for the heatmap w
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /events/explorer/#search-syntax
-[2]: /api/v1/dashboards/
+[2]: /api/latest/dashboards/
 [3]: /dashboards/graphing_json/widget_json/
