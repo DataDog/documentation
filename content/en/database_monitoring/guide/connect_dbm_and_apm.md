@@ -293,7 +293,7 @@ Enable the database monitoring propagation feature by setting the following envi
 {{% tab "PHP" %}}
 
 <div class="alert alert-warning">
-This features requires automatic instrumentation to be enabled for your PHP service.
+This features requires the tracer extension to be enabled for your PHP service.
 </div>
 
 Follow the [PHP tracing instructions][1] to install the automatic instrumentation package and enable tracing for your service.
