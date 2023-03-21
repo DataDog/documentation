@@ -7,7 +7,7 @@ further_reading:
     text: 'Introducing multi-factor authentication in Datadog Synthetic tests'
   - link: '/synthetics/guide/browser-tests-fido2'
     tag: 'Documentation'
-    text: 'Passkeys in browser tests'
+    text: 'Learn about passkeys in browser tests'
   - link: 'synthetics/settings/?tab=specifyvalue#global-variables'
     tag: 'Documentation'
     text: 'Learn more about global variables'

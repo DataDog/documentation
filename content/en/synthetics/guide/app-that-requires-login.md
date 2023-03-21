@@ -11,7 +11,7 @@ further_reading:
     text: 'TOTPs for Multi-Factor Authentication (MFA) in browser tests'
   - link: '/synthetics/guide/browser-tests-fido2'
     tag: 'Documentation'
-    text: 'Passkeys in browser tests'
+    text: 'Learn about passkeys in browser tests'
   - link: '/synthetics/browser_tests/actions'
     tag: 'Documentation'
     text: 'Learn about browser test steps'

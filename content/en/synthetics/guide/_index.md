@@ -48,7 +48,7 @@ disable_toc: true
 
 {{< whatsnext desc="Data Security:" >}}
     {{< nextlink href="synthetics/guide/authentication-protocols/" >}}Using authentication in API and multistep API tests{{< /nextlink >}}
-    {{< nextlink href="synthetics/guide/app-that-requires-login/" >}}Monitor an application that requires authentication{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/app-that-requires-login/" >}}Monitor an application that requires authentication in browser tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/browser-tests-totp/" >}}TOTPs for multi-factor authentication (MFA) in browser tests{{< /nextlink >}}
-    {{< nextlink href="synthetics/guide/browser-tests-fido2/" >}}Passkeys (FIDO2) in browser tests{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/browser-tests-fido2/" >}}Using passkeys (FIDO2) in browser tests{{< /nextlink >}}
 {{< /whatsnext >}}

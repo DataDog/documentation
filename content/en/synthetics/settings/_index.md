@@ -41,7 +41,9 @@ For more information, see [Run Synthetic Tests from Private Locations][3].
 
 ## Global variables
 
-Global variables are variables that are accessible from all your Synthetic tests. They can be used in all [single][4] and [multistep API tests][5] as well as [browser tests][6] of your test suite. To create a global variable, go to the [Global Variables][7] tab in the **Settings** page, and click **New Global Variable** on the upper right corner.
+Global variables are variables that are accessible from all your Synthetic tests. They can be used in all [single][4] and [multistep API tests][5] as well as [browser tests][6] of your test suite. 
+
+To create a global variable, navigate to the **Global Variables** tab on the [**Synthetic Monitoring & Continuous Testing** > **Settings** page][7] and click **+ New Global Variable**.
 
 Choose the type of variable you want to create:
 
@@ -49,10 +51,9 @@ Choose the type of variable you want to create:
 {{% tab "Specify Value" %}}
 
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores. This name should be unique across your global variables.
-2. Enter a **Description** for your variable (optional).
-3. Select **Tags** to associate with your variable (optional).
-4. Enter the **Value** you want to assign to your variable.
-5. Enable obfuscation of your variable to hide its value on test results (optional).
+2. Optionally, enter a **Description** and select **Tags** to associate with your variable. 
+3. Enter the **Value** you want to assign to your variable.
+4. Enable obfuscation of your variable to hide its value on test results (optional).
 
 {{< img src="synthetics/settings/variable_value_2.png" alt="Global Variable Specify Value" style="width:100%;">}}
 
@@ -65,11 +66,10 @@ You can create variables from your existing [HTTP tests][1] by parsing their ass
 {{< img src="synthetics/settings/global_variable.png" alt="Available variables that you can extract from a multistep API test" style="width:100%;" >}}
 
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores.
-2. Enter a **Description** for your variable (optional).
-3. Select **Tags** to associate with your variable (optional).
-4. Enable obfuscation of your variable to hide its value on test results (optional).
-5. Select the **test** you want to extract a variable from.
-6. If you are using a multistep API test, extract your local variable from the test. If you are using an HTTP test, choose to extract your variable from the response header or the response body.
+2. Optionally, enter a **Description** and select **Tags** to associate with your variable. 
+3. Enable obfuscation of your variable to hide its value on test results (optional).
+4. Select the **test** you want to extract a variable from.
+5. If you are using a multistep API test, extract your local variable from the test. If you are using an HTTP test, choose to extract your variable from the response header or the response body.
 
     * Extract the value from **Response Header**: Use the full response header for your variable or parse it with a [`regex`][3].
     * Extract the value from **Response Body**: Parse the response body of the request with a [`regex`][3], a [`jsonpath`][4], an [`xpath`][5], or use the full response body.
@@ -102,10 +102,9 @@ To generate and use a TOTP in your tests, create a global variable where you ent
 
 1. In **Choose variable type**, select **MFA Token**.
 2. In **Define Variable**, enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores.
-3. Enter a **Description** for your variable (optional).
-4. Select **Tags** to associate with your variable (optional).
-5. Enter the **Secret Key** to your variable or upload a QR code image.
-6. Click **+ Generate** to create an OTP. You can copy the generated OTP with the **Copy** icon.
+3. Optionally, enter a **Description** and select **Tags** to associate with your variable. 
+4. Enter the **Secret Key** to your variable or upload a QR code image.
+5. Click **+ Generate** to create an OTP. You can copy the generated OTP with the **Copy** icon.
 
 {{< img src="synthetics/guide/browser-tests-totp/new-variable-totp.png" alt="Create a MFA token" style="width:100%;" >}}
 
@@ -113,7 +112,22 @@ For more information about TOTP-based MFA in a browser test, see [TOTPs For Mult
 
 [1]: /synthetics/guide/browser-tests-totp
 {{% /tab %}}
+{{% tab "FIDO2 Key" %}}
 
+To complete a FIDO2-enabled user journey in your tests, create a global variable that contains a passkey (FIDO2) that you can use in all your Synthetic tests. For more information, see [Using Passkeys In Browser Tests][1].
+
+1. Navigate to the **Global Variables** tab in [**Synthetic Monitoring & Continuous Testing** > **Settings**][1] and click **+ New Global Variable**.
+
+1. In the **Choose variable type** section, select **FIDO2 Key**.
+2. In the **Specify variable details** section, enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores.
+3. Optionally, enter a **Description** and select **Tags** to associate with your variable. Datadog then generates and store an obfuscated FIDO2 secret key. 
+4. In the **Permissions settings** section, restrict access to your variable based on roles in your organization. For more information about roles, see the [RBAC documentation][2].
+
+{{< img src="synthetics/guide/browser-tests-fido2/new-variable-fido2.png" alt="Create a FIDO2 key" style="width:80%;" >}}
+
+[1]: /synthetics/guide/browser-tests-fido2
+[2]: /account_management/rbac/?tab=datadogapplication#custom-roles
+{{% /tab %}}
 {{< /tabs >}}
 
 Once created, global variables can be used in all Synthetic tests. To import your global variables into your test, click **+ Variables**, type `{{` in a field you want to add the variable, and select your global variable. 

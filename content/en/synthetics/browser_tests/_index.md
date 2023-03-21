@@ -139,11 +139,11 @@ You can use the [global variables defined in **Settings**][3] in the **Starting 
 
 {{< img src="synthetics/browser_tests/recording_global_variable.mp4" alt="Defining a local variable from global variables" video="true" width="90%" >}}
 
-Define the variables you want to incorporate into the user journey before you start recording.
+Define the variables you want to incorporate into the user journey before you start recording. For more information about using passkeys (FIDO2) in global variables, see [Using Passkeys (FIDO2) In Browser Tests][16].
 
 {{< img src="synthetics/browser_tests/recording_inject_variable.mp4" alt="Injecting a local variable into a field during a browser recording" video="true" width="90%" >}}
 
-You can inject the variables available to you while recording. For more information about using variables in your browser test recording, see [Browser Test Steps][4].
+You can inject the variables available to you while recording. For more information about using variables in your browser test recording, see [Browser Test Steps][4]. 
 
 ### Define alert conditions
 
@@ -230,3 +230,4 @@ You can restrict access to a browser test based on the roles in your organizatio
 [13]: /account_management/rbac#custom-roles
 [14]: /account_management/rbac/#create-a-custom-role
 [15]: /continuous_testing/testing_tunnel
+[16]: /synthetics/guide/browser-tests-fido2
