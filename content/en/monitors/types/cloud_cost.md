@@ -18,9 +18,9 @@ further_reading:
 ---
 
 ## Overview
-Get proactive notifications on cost changes to help mitigate unexpected cloud spend. Cloud Cost Monitors help you identify cost changes quickly so you can investigate why costs changed. Configure your alerts to catch unexpected cost changes.
+Get proactive notifications on cost changes to help mitigate unexpected cloud spend. Cloud Cost Monitors help you identify cost changes quickly so you can investigate the cause. You can configure your alerts to catch unexpected changes.
 
-In order to configure Cloud Cost monitors, you need to have [Cloud Cost Management][1] set up. After this data is sent to Datadog, you can configure monitors to alert when costs rise.
+In order to configure Cloud Cost monitors, you need to have [Cloud Cost Management][1] set up. After it's set up, you can configure monitors to alert when costs increase or decrease.
 
 ## Monitor creation
 
@@ -32,7 +32,7 @@ Choose between a **Compare Costs Over Time** or a **Set Daily Cost Threshold** m
 
 | Cost Type | Description | Usage Examples |
 | ---  | ----------- | ----------- |
-| Compare Costs Over Time  | Compare costs on a weekly, monthly or custom time basis  | Alert when the difference between weekly costs during Oct 1 and Oct 14 is over 5% |
+| Compare Costs Over Time  | Compare costs on a daily, weekly or monthly basis | Alert when the difference between today's cost and the week before is over 5% |
 | Set Daily Cost Threshold | Set alerts on total costs exceeding a threshold in a day | Set alerts when today's total cost exceeds $10,000 |
 
 ## Specify which costs to track
@@ -42,7 +42,7 @@ Any cost type reporting to Datadog is available for monitors. For more informati
 
 | Step                              | Required | Default              | Example             |
 |-----------------------------------|----------|----------------------|---------------------|
-| Select cloud cost                 | Yes      | `aws.cost.amortized` | `azure.cost.actual` |
+| Select the cost metric                 | Yes      | `aws.cost.amortized` | `azure.cost.actual` |
 | Define the `filter by`            | No       | Everything           | `aws_product:s3`    |
 | Group by                          | No       | Everything           | `aws_availability_zone` |
 
@@ -50,8 +50,10 @@ Any cost type reporting to Datadog is available for monitors. For more informati
 
 If the cost monitor type is **Set Daily Cost Threshold**, you can trigger an alert when the cloud cost is `above`, `below`, `above or equal`, or `below or equal to` a threshold.  
 
-
 If the cost monitor type is **Compare Costs Over Time**, you can trigger an alert when the cost `increases` or `decreases` more than the defined threshold. The threshold can be set to either a **Percentage Change** or set to **Dollar Amount**.
+
+**Note**: For the **Percentage Change**, you can also filter out changes that are below a certain dollar threshold.
+Example: alert when there is a cost change above 5% for any change that is above 500$
 
 ## Notify your team
 
