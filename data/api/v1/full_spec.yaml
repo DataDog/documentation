@@ -16013,7 +16013,7 @@ components:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         application_security_host_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
-        application_security_host_top99:
+        application_security_host_top99p:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         ci_pipeline_indexed_spans_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
