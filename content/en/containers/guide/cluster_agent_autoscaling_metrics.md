@@ -29,7 +29,7 @@ Horizontal Pod Autoscaling, introduced in [Kubernetes v1.2][1], allows autoscali
 
 Custom metrics are user defined and are collected from within the cluster. As of Kubernetes v1.10, support for external metrics was introduced to autoscale off any metric from outside the cluster, such as those collected by Datadog.
 
-A user must register the Cluster Agent as the External Metrics Provider. Then adapt their HPAs to rely on the Cluster Agent's provided metrics.
+You must first register the Cluster Agent as the External Metrics Provider. Next, adapt your HPAs to rely on the Cluster Agent's provided metrics.
 
 As of v1.0.0, the Custom Metrics Server in the Datadog Cluster Agent implements the External Metrics Provider interface for external metrics. This page explains how to set it up and how to autoscale your Kubernetes workload based on your Datadog metrics.
 
@@ -127,11 +127,11 @@ Once the Datadog Cluster Agent is up and running, apply some additional RBAC pol
 {{% /tab %}}
 {{< /tabs >}}
 
-Once enabled the Cluster Agent is ready to fetch metrics for the HPA. There are two options:
+Once enabled, the Cluster Agent is ready to fetch metrics for the HPA. There are two options:
 - [Autoscaling with DatadogMetric Queries](#autoscaling-with-datadogmetric-queries)
 - [Autoscaling without DatadogMetric Queries](#autoscaling-without-datadogmetric-queries)
 
-Datadog recommends utilizing the `DatadogMetric` option. While this does require an additional step of deploying the `DatadogMetric` CustomResourceDefinition (CRD), this provides a lot more flexibility in the queries performed. Alternatively without the `DatadogMetric` queries your HPAs use the native Kubernetes external metrics format, which the Cluster Agent translates into a Datadog metric query.
+Datadog recommends using the `DatadogMetric` option. While this does require an additional step of deploying the `DatadogMetric` CustomResourceDefinition (CRD), this provides a lot more flexibility in the queries performed.  If you do not use `DatadogMetric` queries, your HPAs use the native Kubernetes external metrics format, which the Cluster Agent translates into a Datadog metric query.
 
 ## Autoscaling with DatadogMetric queries
 
@@ -303,7 +303,7 @@ Once the `DatadogMetric` is linked to an HPA, the Datadog Cluster Agent marks it
 ## Autoscaling without DatadogMetric queries
 If you do not want to autoscale with the `DatadogMetric` you can still create your HPAs with the native Kubernetes format. The Cluster Agent converts the HPA format into a Datadog metric query.
 
-Once you have the Datadog Cluster Agent running and the service registered, create an [HPA][4] manifest and specify `type: External` for your metrics in order to notify the HPA to pull the metrics from the Datadog Cluster Agent's service:
+Once you have the Datadog Cluster Agent running and the service registered, create an [HPA][4] manifest and specify `type: External` for your metrics. This notifies the HPA to pull the metrics from the Datadog Cluster Agent's service:
 
 ```yaml
 spec:
@@ -368,7 +368,7 @@ In these manifests:
 
 - The HPA is configured to autoscale the deployment called `nginx`.
 - The maximum number of replicas created is `3`, and the minimum is `1`.
-- The metric used is `nginx.net.request_per_s`, and the scope is `kube_container_name: nginx`. This metric format corresponds to the Datadog one.
+- The metric used is `nginx.net.request_per_s`, and the scope is `kube_container_name: nginx`. This format corresponds to Datadog's metrics format.
 
 Every 30 seconds, Kubernetes queries the Datadog Cluster Agent to get the value of this metric and autoscales proportionally if necessary. For advanced use cases, it is possible to have several metrics in the same HPA. As noted in [Kubernetes horizontal pod autoscaling][5], the largest of the proposed values is the one chosen.
 
@@ -383,13 +383,13 @@ The Datadog Cluster Agent automatically creates `DatadogMetric` resources in its
 If you choose to migrate an HPA later on to reference a `DatadogMetric`, the automatically generated resource is cleaned up by the Datadog Cluster Agent after a few hours.
 
 ## Cluster Agent querying
-The Cluster Agent performs the queries for the `DatadogMetric` objects every 30 seconds. The Cluster Agent also batches the metric queries performed into groups of 35. So 35 `DatadogMetric` queries are included in a single request to the Datadog metrics API.
+The Cluster Agent performs the queries for the `DatadogMetric` objects every 30 seconds. The Cluster Agent also batches the metric queries performed into groups of 35. Therefore, 35 `DatadogMetric` queries are included in a single request to the Datadog metrics API.
 
-By batching these queries the Cluster Agent can perform them more efficiently and avoid being rate-limited.
+By batching these queries, the Cluster Agent can perform them more efficiently and avoid being rate-limited.
 
 This means that the Cluster Agent performs roughly 120 API requests per hour per 35 `DatadogMetric` objects. As you add more `DatadogMetric` objects or add the autoscaling functionality to additional Kubernetes clusters, this increases the number of calls to fetch metrics within the same org.
 
-The Cluster Agent also queries for the past 5 minutes of data by default for each of these metric queries. This is to ensure the Cluster Agent is scaling off of *recent* data. However, if your metric queries are relying on data from one of the cloud integrations (AWS, Azure, GCP, etc.), these are [fetched at a slight delay](/integrations/guide/cloud-metric-delay) and would not be covered within that 5 minute interval. In these cases provide the environment variables to the Cluster Agent to increase the date range and data age allowed for the metric queries.
+The Cluster Agent also queries for the past five minutes of data by default for each of these metric queries. This is to ensure the Cluster Agent is scaling off *recent* data. However, if your metric queries are relying on data from one of the cloud integrations (AWS, Azure, GCP, etc.), these are [fetched at a slight delay](/integrations/guide/cloud-metric-delay) and are not be covered within the five minute interval. In these cases, provide the environment variables to the Cluster Agent to increase the date range and data age allowed for the metric queries.
 
 ```yaml
 - name: DD_EXTERNAL_METRICS_PROVIDER_BUCKET_SIZE
@@ -443,9 +443,9 @@ The four conditions give you insights on the current state of your `DatadogMetri
 The `currentValue` is the value gathered from Datadog and returned to the HPAs.
 
 ### Value vs AverageValue for the target metric
-The HPAs in these example use the target type of `Value` instead of `AverageValue`. Either option is supported, however, you adjust your Datadog metric queries accordingly.
+The HPAs in these example use the target type of `Value` instead of `AverageValue`. Both options are supported. Adjust your Datadog metric queries accordingly.
 
-When using `Value` the metric value returned by the Datadog metric query is provided exactly as is to the HPA for its scaling decision. When using `AverageValue` the metric value returned is divided by the current number of pods. Set your `<Metric Value>` accordingly to how you want your HPA to scale based on your query and returned value.
+When using `Value`, the metric value returned by the Datadog metric query is provided exactly as-is to the HPA for its scaling decision. When using `AverageValue`, the metric value returned is divided by the current number of pods. Set your `<Metric Value>` accordingly to how you want your HPA to scale based on your query and returned value.
 
 Using `apiVersion: autoscaling/v2`, the target metric configuration for `Value` looks like:
 ```yaml
@@ -459,7 +459,7 @@ Using `apiVersion: autoscaling/v2`, the target metric configuration for `Value` 
         value: <METRIC_VALUE>
 ```
 
-whereas `AverageValue` looks like:
+Whereas `AverageValue` looks like:
 ```yaml
   metrics:
   - type: External
