@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-The [Observability Pipelines Worker][1] can ingest logs from many different sources. If you have an AWS S3 bucket that is receiving logs from an external system, such as AWS CloudTrail or Cloudwatch, you can configure the Worker to ingest those logs. The setup uses Observability Pipelines Worker's AWS S3 source, which requires configuring an Amazon SQS queue to receive event notifications from the S3 bucket. The event notification then informs the Worker to collect the new log events in the S3 bucket. 
+The [Observability Pipelines Worker][1] can ingest logs from many different sources. If you have an AWS S3 bucket that is receiving logs from an external system, such as AWS CloudTrail or CloudWatch, you can configure the Worker to ingest those logs. The setup uses Observability Pipelines Worker's AWS S3 source, which requires configuring an Amazon SQS queue to receive event notifications from the S3 bucket. The event notification then informs the Worker to collect the new log events in the S3 bucket. 
 
 This guide walks you through the following steps:
 
@@ -28,13 +28,13 @@ This guide walks you through the following steps:
 
 ## Create an Amazon SQS topic to receive S3 notifications
 
-In the AWS SQS Console, provision a new queue specific to this configuration. This keeps any changes you make to it separate from other log analysis tools that you are using, if any.
+In the AWS SQS console, provision a new queue specific to this configuration. This keeps any changes you make to it separate from any other log analysis tools that you are using.
 
 1. Go to the [Amazon SQS console][4].
 2. Click **Create queue** to provision a new queue specific to this configuration.
 3. Enter a name for the queue.
 4. In the **Access policy** section, click the **Advanced** button.
-5. Copy and paste the below example JSON object into the advanced access policy section. It configures the queue and allows the S3 bucket to send event notifications. Replace `${REGION}`, `${AWS_ACCOUNT_ID}`, `${QUEUE_NAME`}, and `${BUCKET_NAME}` with the relevant AWS account information, the bucket name, and the queue name you just entered.
+5. Copy and paste the below example JSON object into the advanced access policy section. It configures the queue and allows the S3 bucket to send event notifications. Replace `${REGION}`, `${AWS_ACCOUNT_ID}`, `${QUEUE_NAME}`, and `${BUCKET_NAME}` with the relevant AWS account information, the queue name, and the bucket name you just entered.
     ```json
     {
     "Version": "2008-10-17",
@@ -74,7 +74,7 @@ In the AWS SQS Console, provision a new queue specific to this configuration. Th
 
 The SQS queue should now be receiving messages for the Worker to process.
 
-If you encounter the "Unable to validate the following destination configurations" error, check that the SQS access policy was set up correctly.
+If you encounter the "Unable to validate the following destination configurations" error, check that the SQS access policy is set up correctly.
 
 ## Create an IAM role for the Worker
 
@@ -114,7 +114,7 @@ Create a separate IAM role for the Worker so that only the necessary permissions
 11. Enter a name for the policy.
 12. Click **Create policy**.
 
-Apply the role to the running Observability Pipelines process. This might be by attaching the role to an EC2 instance or assuming a role from a given user profile.
+Apply the role to the running Observability Pipelines process. You can do this by attaching the role to an EC2 instance or assuming a role from a given user profile.
 
 ## Configure the Worker to receive notifications from the SQS queue
 
@@ -136,10 +136,10 @@ See [AWS S3 source documentation][7] for more options.
 
 With the AWS S3 source set up, you can now add [transforms][8] to manipulate the data and [sinks][9] to output the logs to destinations based on your use case. See [Configurations][3] for more information on sources, transforms, and sinks. 
 
-## Configure the Worker to separate out batched AWS S3 log events
+## Configure the Worker to separate batched AWS S3 log events
 
 
-Most services (for example, CloudTrail) send logs to S3 in batches, which means that each event that the Worker receives is composed of multiple logs. In the below example, `Records` is an array of three log events that have been batched together.
+Most services (for example, CloudTrail) send logs to S3 in batches, which means that each event that the Worker receives is composed of multiple logs. In the below example, `Records` is an array of three log events that are batched together.
 
 ```json
 {
@@ -180,7 +180,7 @@ transforms:
 
 In this example, the `parse_json` function parses the string into JSON.
 
-The `unnest` function separates out the batched log events into an array of individual log events.
+The `unnest` function separates the batched log events into an array of individual log events.
 
 ```
 [
