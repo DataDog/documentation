@@ -36,7 +36,37 @@
     {{- end -}}
 {{- end -}}
 
-<span class="c1"># Curl command</span>
+{{/* Determine contentencoding */}}
+{{- with $parameters.headerParams -}}
+  {{- range . -}}
+    {{- if eq .name "Content-Encoding" -}}
+      {{- $def := "" -}}
+      {{- range $enumVal := .schema.enum -}}
+        {{- if in $title $enumVal -}}{{- $def = $enumVal -}}{{- end -}}
+      {{- end -}}
+      {{- if gt (len $def) 0 -}}
+        {{- $contentEncoding = $def -}}
+      {{- else if (or (and (isset .schema "example") (.required | default false)) (in $title "compression") ) -}}
+        {{- $contentEncoding = (.example | default .schema.example) -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+<span class="c1"># Curl command</span><br/>
+{{- if gt (len $contentEncoding) 0 -}}
+{{- if eq $contentEncoding "gzip" -}}
+<span class="o">echo $(cat <<</span> <span class="n">EOF</span>
+<span class="s1">{{ $body | default .exampleValue | default (.dollarScratch.Get "jsonRequestBody") }}</span>
+<span class="n">EOF</span>
+<span class="n">) | gzip | </span>
+{{- else if eq $contentEncoding "deflate" -}}
+<span class="o">echo $(cat <<</span> <span class="n">EOF</span>
+<span class="s1">{{ $body | default .exampleValue | default (.dollarScratch.Get "jsonRequestBody") }}</span>
+<span class="n">EOF</span>
+<span class="n">) | gzip --no-name | tail --bytes=+11 | head --bytes=-8 | </span>
+{{- end -}}
+{{- end -}}
 <span class="n">curl</span> <span class="o">-X</span> <span class="s1">{{ $endpoint.actionType | upper }}</span> {{ range $region, $url := $endpoint.regions }}{{ if ne $region "local" }}<span class="kn d-none" data-region="{{ $region }}">"{{ $url }}</span>{{ else }}<span class="kn">"{{ $url }}</span>{{ end }}{{ end }}<span class="kn">{{ replace $endpoint.pathKey "{" "${" }}</span>
 {{- range $qi, $q := where $parameters.queryStrings ".required" true -}}
       <span class="kn">{{ cond (gt $qi 0) "&" "?" }}</span><span class="kn">{{ $q.name }}</span><span class="kn">=</span><span class="kn">${ {{- $q.name -}} }</span>
@@ -66,15 +96,6 @@
 {{- with $parameters.headerParams -}}
 {{- range . -}}
 {{- if eq .name "Content-Encoding" -}}
-  {{- $def := "" -}}
-  {{- range $enumVal := .schema.enum -}}
-    {{- if in $title $enumVal -}}{{- $def = $enumVal -}}{{- end -}}
-  {{- end -}}
-  {{- if gt (len $def) 0 -}}
-    {{- $contentEncoding = $def -}}
-  {{- else if (or (and (isset .schema "example") (.required | default false)) (in $title "compression") ) -}}
-    {{- $contentEncoding = (.example | default .schema.example) -}}
-  {{- end -}}
   {{- if $contentEncoding -}}
 &nbsp;\
 <span class="o">-H</span> <span class="s1">"{{ .name }}: {{ $contentEncoding }}"</span>
@@ -111,16 +132,10 @@
 {{- if gt (len $contentEncoding) 0 -}}
 {{- if eq $contentEncoding "gzip" -}}
 &nbsp;\
-<span class="o">--data-binary</span> <span class="n">@<</span><span class="o">(gzip <<</span> <span class="n">EOF</span>
-<span class="s1">{{ $body | default .exampleValue | default (.dollarScratch.Get "jsonRequestBody") }}</span>
-<span class="n">EOF</span>
-<span class="n">)</span>
+<span class="o">--data-binary</span> <span class="n">@-</span>
 {{- else if eq $contentEncoding "deflate" -}}
 &nbsp;\
-<span class="o">--data-binary</span> <span class="n">@<</span><span class="o">(echo $(cat <<</span> <span class="n">EOF</span>
-<span class="s1">{{ $body | default .exampleValue | default (.dollarScratch.Get "jsonRequestBody") }}</span>
-<span class="n">EOF</span>
-<span class="n">) | gzip --no-name | tail --bytes=+11 | head --bytes=-8)</span>
+<span class="o">--data-binary</span> <span class="n">@-</span>
 {{- end -}}
 {{ else if (or ($body) ($endpoint.action.requestBody)) }}
 {{- /* Render requestBody example JSON "-d @- << EOF ... EOF" */ -}}
