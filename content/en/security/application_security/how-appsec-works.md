@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-Datadog Application Security Management (ASM) provides observability into application-level attacks that aim to exploit code-level vulnerabilities, abuse the business logic of your application, and into any bad actors targeting your systems.
+Datadog Application Security Management (ASM) provides observability into application-level attacks that aim to exploit code-level vulnerabilities or abuse the business logic of your application, and into any bad actors targeting your systems.
 
 In addition, ASM detects the risks built into your applications, for example through vulnerable libraries and dependencies the application uses at runtime.
 

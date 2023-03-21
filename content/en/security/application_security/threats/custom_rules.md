@@ -33,9 +33,9 @@ Another example is customizing a rule to exclude an internal security scanner. A
 In these situations, a custom detection rule can be created to exclude such events. This guide shows you how to create a custom detection rule for ASM.
 
 ## Business logic abuse detection rule
-ASM offers out of the box rules to detect business logic abuse (Reset password brute forcing for example). Those rules require [adding business logic information to traces][7].
+ASM offers out of the box rules to detect business logic abuse (for example, resetting a password through brute force). Those rules require [adding business logic information to traces][7].
 
-You can filter the rules, and identify which business logic to start tracking. Additionally, these rules can be used as a blueprint to create your own rules based on your own business logic. 
+You can filter the rules, and identify which business logic to start tracking. Additionally, you can use these rules as a blueprint to create custom rules based on your own business logic. 
 
 See the section below to see how to configure your rules.
 
@@ -47,7 +47,7 @@ To customize an OOTB detection rule, you must first clone an existing rule. Navi
 
 Construct an ASM query using the [same query syntax as in the ASM Trace Explorer][3]. For example, create a query to monitor login successes from outside of the United States: `@appsec.security_activity:business_logic.users.login.success -@actor.ip_details.country.iso_code:US`.
 
-Optionally, define a unique count and signal grouping. Count the number of unique values observed for an attribute in a given timeframe. The defined group-by generates a signal for each group-by value. Typically, the group-by is an entity (like user, IP, and/or service). The group-by is also used to [join the queries together](#joining-queries).
+Optionally, define a unique count and signal grouping. Count the number of unique values observed for an attribute in a given timeframe. The defined group-by generates a signal for each group-by value. Typically, the group-by is an entity (like user, IP, or service). The group-by is also used to [join the queries together](#joining-queries).
 
 Use the preview section to see which ASM traces match the search query. You can also add additional queries with the Add Query button.
 
