@@ -695,7 +695,7 @@ If you are using load balancers with your services, enable additional cloud inte
 * Install the [AWS Integration][2] for visibility in AWS Load Balancer. You must also enable ENI and EC2 metric collection.
 
 Then, add the following tags to each load balancer:
-```shell
+```conf
 ENV=<env>
 SERVICE=<service>
 ```
@@ -735,7 +735,7 @@ After you configure the Agent, wait about five minutes for your service to appea
 
 The `universal.http.server` operation name captures health metrics for inbound traffic to your service. The corresponding `universal.http.client` operation name represents outbound traffic to other destinations.
 
-{{< img src="universal_service_monitoring/select_service_operation.png" alt="The operation drop-down menu on the Services tab shows the available operation names" style="width:100%;" >}}
+{{< img src="universal_service_monitoring/select_service_operation.png" alt="The operation dropdown menu on the Services tab shows the available operation names" style="width:100%;" >}}
 
 After enabling Universal Service Monitoring, you can:
 
@@ -787,7 +787,7 @@ network_config:
 {{% tab "Environment Variable" %}}
 Add the following entry:
 
-```shell
+```conf
 DD_SYSTEM_PROBE_NETWORK_HTTP_REPLACE_RULES=[{"pattern":"<drop regex>","repl":""},{"pattern":"<replace regex>","repl":"<replace pattern>"}]
 ```
 {{% /tab %}}

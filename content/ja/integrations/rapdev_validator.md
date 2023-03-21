@@ -54,13 +54,13 @@ public_title: Tag Validator
 short_description: モニタータグを検証し、DD 環境での Agent コンプライアンスを確保します
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Category::Marketplace
   - Offering::Integration

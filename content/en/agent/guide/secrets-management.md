@@ -54,7 +54,7 @@ In the above example, the secret’s handle is the string `{"env": "prod", "chec
 There is no need to escape inner `[` and `]`. For instance:
 
 ```text
-“ENC[user_array[1234]]”
+"ENC[user_array[1234]]"
 ```
 
 In the above example, the secret’s handle is the string `user_array[1234]`.

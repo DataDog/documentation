@@ -64,7 +64,7 @@ Color overrides allow you to assign a single color of your choice to each query.
 
 **Note**: If your query aggregates by a tag (for instance, using 'sum by' or 'avg by'), you can only select a palette override. This prevents different series from using the same color, preserving readability.
 
-{{< img src="dashboards/guide/colors/12_palette_and_color_override_comparison.png" alt="A side-by-side comparison of the color override and palette override drop-downs." style="width:80%;" >}}
+{{< img src="dashboards/guide/colors/12_palette_and_color_override_comparison.png" alt="A side-by-side comparison of the color override and palette override dropdown panels." style="width:80%;" >}}
 
 ## Accessibility settings
 

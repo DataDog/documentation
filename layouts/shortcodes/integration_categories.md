@@ -1,0 +1,71 @@
+- Category::Alerting
+- Category::Automation
+- Category::AWS
+- Category::Azure
+- Category::Caching
+- Category::Cloud
+- Category::Collaboration
+- Category::Compliance
+- Category::Configuration & Deployment
+- Category::Containers
+- Category::Cost Management
+- Category::Data Store
+- Category::Developer Tools
+- Category::Event Management
+- Category::Exceptions
+- Category::Google Cloud
+- Category::Incidents
+- Category::IOT
+- Category::ISP
+- Category::Issue Tracking
+- Category::Kubernetes
+- Category::Languages
+- Category::Log Collection
+- Category::Mainframe
+- Category::Marketplace
+- Category::Messaging
+- Category::Metrics
+- Category::Mobile
+- Category::Monitoring
+- Category::Network
+- Category::Notification
+- Category::Oracle
+- Category::Orchestration
+- Category::OS & System
+- Category::Processing
+- Category::Profiling
+- Category::Provisioning
+- Category::SAP
+- Category::Security
+- Category::SNMP
+- Category::Source Control
+- Category::Testing
+- Category::Tracing
+- Category::Web
+- Offering::Integration
+- Offering::Professional Service
+- Offering::Software License
+- Offering::UI Extension
+- Queried Data Type::Metrics
+- Queried Data Type::Logs
+- Queried Data Type::Traces
+- Queried Data Type::Events
+- Queried Data Type::Incidents
+- Submitted Data Type::Metrics
+- Submitted Data Type::Logs
+- Submitted Data Type::Traces
+- Submitted Data Type::Events
+- Submitted Data Type::Incidents
+- Supported OS::Android
+- Supported OS::Any
+- Supported OS::HP-UX
+- Supported OS::IBM i/OS
+- Supported OS::IBM z/OS
+- Supported OS::iOS
+- Supported OS::Linux
+- Supported OS::macOS
+- Supported OS::Solaris
+- Supported OS::Windows
+- Supported OS::Mac OS
+- Category::OS System
+

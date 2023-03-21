@@ -10,192 +10,71 @@ further_reading:
     tag: "Blog"
     text: "Monitor all your CI pipelines with Datadog"
 ---
-{{< callout url="https://app.datadoghq.com/ci/getting-started" >}}
-Intelligent Test Runner for CI Visibility is in private beta. You can request access by completing the form on the CI Visibility Getting Started page.
-{{< /callout >}}
 
-## Overview
+<div class="alert alert-warning">Intelligent Test Runner is a beta product.</div>
 
-Intelligent Test Runner is Datadog's test impact analysis solution. It allows you to only run the impacted tests for a given commit and skip any that are irrelevant.
+Intelligent Test Runner is Datadog's test impact analysis solution. It automatically selects and runs only the relevant tests for a given commit based on the code being changed. Significantly reduce time spent testing and overall CI costs, while maintaining test coverage.
 
 
-{{< img src="continuous_integration/itr_overview.png" alt="Intelligent test runner enabled in test service settings in the CI section of Datadog.">}}
+{{< img src="continuous_integration/itr_savings.png" alt="Intelligent test runner enabled in a test session showing its time savings.">}}
 
-By only running tests on relevant code, when tests fail, it is likely a legitimate failure that pertains to the modified code.
+Intelligent Test Runner works by analyzing your test suite to determine the code each test covers, and then cross-referencing that coverage with the files impacted by a new code change. Datadog uses this information to run a selection of relevant, impacted tests, omitting the ones unaffected by the code change and reducing the overall testing duration.
 
-## Limitations during beta
+By minimizing the number of tests run per commit, Intelligent Test Runner reduces the frequency of flaky tests disrupting your pipelines. Flaky tests are tests that may pass or fail at random given the same commit. This can be particularly frustrating when the test flaking is unrelated to the code change being tested. After enabling Intelligent Test Runner for your test services, you can limit each commit to its relevant tests to ensure that flaky tests unrelated to your code change don’t end up arbitrarily breaking your build.
 
-During the beta of Intelligent Test Runner there are certain limitations:
+### Limitations during beta
 
-- Some of the environment variables required in the following sections are only required during the beta.
-- Intelligent Test Runner can work Agentless or using the Datadog Agent. The configuration steps in this page are for Agentless. To use ITR with the Datadog Agent, the minimum required versions are v6.40+/v7.40+.
-- There are known limitations in the current implementation of Intelligent Test Runner that can cause it to skip tests that should be run. Intelligent Test Runner is not able to detect:
-  - Changes in library dependencies.
-  - Changes in compiler options.
-  - Changes in external services.
-  - Changes to data files in data-driven tests.
+There are known limitations in the current implementation of Intelligent Test Runner that can cause it to skip tests that should be run under certain conditions. Specifically, Intelligent Test Runner is not able to detect changes in library dependencies, compiler options, external services or changes to data files in data-driven tests.
 
 To override Intelligent Test Runner and run all tests, add `ITR:NoSkip` (case insensitive) anywhere in your Git commit message.
 
-## Setup Datadog Library
+## Set up Datadog library
 
-Prior to setting up Intelligent Test Runner, you must have finished setting up [Test Visibility][1] for your particular language.
+Prior to setting up Intelligent Test Runner, you must set up [Test Visibility][1] for your particular language. If you are reporting data through the Agent, use v6.40+/v7.40+.
 
-### JavaScript
-
-To enable Intelligent Test Runner, the following environment variables need to be set:
-
-`DD_CIVISIBILITY_AGENTLESS_ENABLED`
-: Enables or disables Agentless mode.<br/>
-**Default**: `false`<br/>
-
-`DD_API_KEY` (Required if Agentless is enabled)
-: The [Datadog API key][2] used to upload the test results.<br/>
-**Default**: `(empty)`
-
-`DD_APPLICATION_KEY` (Required)
-: The [Datadog Application key][3] used to query the tests to be skipped.<br/>
-**Default**: `(empty)`
-
-`DD_SITE` (Required)
-: The [Datadog site][4] to upload results to.<br/>
-**Default**: `datadoghq.com`<br/>
-**Selected site**: {{< region-param key="dd_site" code="true" >}}
-
-`DD_CIVISIBILITY_GIT_UPLOAD_ENABLED=true` (Required)
-: Flag to enable git metadata upload.<br/>
-**Default**: `false`<br/>
-**Note**: Required only during Beta
-
-`DD_CIVISIBILITY_ITR_ENABLED=true` (Required)
-: Flag to enable test skipping. <br/>
-**Default**: `false`<br/>
-**Note**: Required only during Beta
-
-After setting these environment variables, run your tests as you normally do:
-
-{{< code-block lang="bash" >}}
-NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app DD_CIVISIBILITY_AGENTLESS_ENABLED=true DD_API_KEY=$API_KEY DD_CIVISIBILITY_GIT_UPLOAD_ENABLED=true DD_CIVISIBILITY_ITR_ENABLED=true yarn test
-{{< /code-block >}}
-
-
-#### UI activation
-In addition to setting the environment variables, you or a user in your organization with admin permissions must activate the Intelligent Test Runner on the [Test Service Settings][5] page.
-
-#### Compatibility
-
-Intelligent Test Runner is only supported in the following versions and testing frameworks:
-
-* `jest>=24.8.0`
-  * From `dd-trace>=3.4.0`
-  * Only `jest-circus/runner` is supported as `testRunner`.
-  * Only `jsdom` and `node` are supported as test environments.
-* `mocha>=5.2.0`
-  * From `dd-trace>=3.9.0`
-
-#### Suite skipping
-Intelligent test runner for Javascript skips entire _test suites_ (test files) rather than individual tests.
-
-### .NET
-
-To enable Intelligent Test Runner, the version of the `dd-trace` tool must be >= 2.22.0 (execute `dd-trace --version` to get the version of the tool) and the following environment variables must be set:
-
-`DD_CIVISIBILITY_AGENTLESS_ENABLED`
-: Enables or disables Agentless mode.<br/>
-**Default**: `false`<br/>
-
-`DD_API_KEY` (Required if Agentless is enabled)
-: The [Datadog API key][2] used to upload the test results.<br/>
-**Default**: `(empty)`
-
-`DD_APPLICATION_KEY` (Required)
-: The [Datadog Application key][3] used to query the tests to be skipped.<br/>
-**Default**: `(empty)`
-
-`DD_SITE` (Required)
-: The [Datadog site][4] to upload results to.<br/>
-**Default**: `datadoghq.com`<br/>
-**Selected site**: {{< region-param key="dd_site" code="true" >}}
-
-After setting these environment variables, run your tests as you normally do by using [dotnet test][6] or [VSTest.Console.exe][7]:
-
-{{< tabs >}}
-
-{{% tab "dotnet test" %}}
-
-
-{{< code-block lang="bash" >}}
-dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
-{{< /code-block >}}
-
-{{% /tab %}}
-
-{{% tab "VSTest.Console" %}}
-
-
-{{< code-block lang="bash" >}}
-dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- VSTest.Console.exe {test_assembly}.dll
-{{< /code-block >}}
-
-{{% /tab %}}
-
-{{< /tabs >}}
-
-#### UI activation
-
-In addition to setting the environment variables, you or a user in your organization with admin permissions must activate the Intelligent Test Runner on the [Test Service Settings][5] page.
-
-### Swift
-
-To enable Intelligent Test Runner, the version of the `dd-sdk-swift` framework must be >= 2.2.0. The `Code Coverage` option must also be enabled in the test settings of your scheme or test plan, or  `--enable-code-coverage` must be added to your `swift test` command (if using a SPM target).
-
-The following environment variables must also be set:
-
-`DD_TEST_RUNNER`
-: Enables or disables the instrumentation of tests. Set this value to `$(DD_TEST_RUNNER)` so you can enable and disable test instrumentation with a environment variable defined outside of the test process (for example, in the CI build).<br/>
-**Default**: `false`<br/>
-**Recommended**: `$(DD_TEST_RUNNER)`
-
-`DD_API_KEY` (Required)
-: The [Datadog API key][2] used to upload the test results.<br/>
-**Default**: `(empty)`
-
-`DD_APPLICATION_KEY` (Required)
-: The [Datadog Application key][3] used to query the tests to be skipped.<br/>
-**Default**: `(empty)`
-
-`DD_SITE` (Required)
-: The [Datadog site][4] to upload results to.<br/>
-**Default**: `datadoghq.com`<br/>
-**Selected site**: {{< region-param key="dd_site" code="true" >}}
-
-#### UI activation
-
-In addition to setting the environment variables, you or a user in your organization with admin permissions must activate the Intelligent Test Runner on the [Test Service Settings][5] page.
-
-## Setup CI Job
-
-Intelligent Test Runner uses git metadata information (commit history) to work. However, some CI providers use a git shallow clone (`git clone --depth=0`) which only downloads the target commit without downloading any historical commit information. This setup does not contain enough information for Intelligent Test Runner to work. If your CI is using shallow clones, it must be changed.
-
-An efficient alternative to shallow clones are partial clones (supported in Git v2.27+), which will clone the current commit plus the necessary git metadata without retrieving all past versions of all files: `git clone --filter=blob:none`.
+{{< whatsnext desc="Choose a language to set up Intelligent Test Runner in Datadog:" >}}
+    {{< nextlink href="continuous_integration/intelligent_test_runner/dotnet" >}}.NET{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/intelligent_test_runner/javascript" >}}JavaScript{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/intelligent_test_runner/swift" >}}Swift{{< /nextlink >}}
+{{< /whatsnext >}}
 
 ## Configuration
 
-The default branch of your repository is automatically excluded from having Intelligent Test Runner enabled. Due to the limitations described above, the Intelligent Test Runner might skip some of the tests that should be run, therefore Datadog recommends to continue running all tests in your default branch (or the branch you release from).
+Once you have set up your Datadog library for Intelligent Test Runner, configure it from the [Test Service Settings][2] page.
 
-If there are other branches you want to exclude, you can add them from the Intelligent Test Runner settings page. The query bar supports the wildcard character `*` to exclude any branches that match.
+{{< img src="continuous_integration/itr_overview.png" alt="Intelligent test runner enabled in test service settings in the CI section of Datadog." style="width:80%;">}}
+
+Due to the limitations described above, the default branch of your repository is automatically excluded from having Intelligent Test Runner enabled. Datadog recommends this configuration to ensure that all of your tests run prior to reaching production.
+
+If there are other branches you want to exclude, add them from the Intelligent Test Runner settings page. The query bar supports using the wildcard character `*` to exclude any branches that match, such as `release_*`
 
 {{< img src="continuous_integration/itr_configuration.png" alt="Select branches to exclude from intelligent test runner" style="width:80%;">}}
 
+## Explore test sessions
+
+You can explore the time savings you get from Intelligent Test Runner by looking at the test commit page and test sessions panel.
+
+{{< img src="continuous_integration/itr_commit.png" alt="Test commit page with intelligent test runner" style="width:80%;">}}
+
+{{< img src="continuous_integration/itr_savings.png" alt="Intelligent test runner enabled in a test session showing its time savings." style="width:80%;">}}
+
+When Intelligent Test Runner is active and skipping tests, purple text displays the amount of time saved on each test session or on each commit. The duration bar also changes color to purple so you can quickly identify which test sessions are using Intelligent Test Runner in the [Test Runs][3] page.
+
+## Explore adoption and global savings
+
+Track you organization's savings and adoption of Intelligent Test Runner through the out-of-the-box [Intelligent Test Runner dashboard][4]. The dashboard includes widgets to track your overall savings as well as a per-repository, per-committer, and per-service view of the data. View the dashboard to understand which parts of your organization are using and getting the most out of Intelligent Test Runner.
+
+{{< img src="continuous_integration/itr_dashboard1.png" alt="Intelligent Test Runner dashboard" style="width:80%;">}}
+
+The dashboard also tracks adoption of Intelligent Test Runner throughout your organization.
+
+{{< img src="continuous_integration/itr_dashboard2.png" alt="Intelligent Test Runner dashboard" style="width:80%;">}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /continuous_integration/tests/
-[2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: https://app.datadoghq.com/organization-settings/application-keys
-[4]: /getting_started/site/
-[5]: https://app.datadoghq.com/ci/settings/test-service
-[6]: https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-test
-[7]: https://docs.microsoft.com/en-us/visualstudio/test/vstest-console-options
+[2]: https://app.datadoghq.com/ci/settings/test-service
+[3]: https://app.datadoghq.com//ci/test-runs
+[4]: https://app.datadoghq.com/dash/integration/30941/ci-visibility-intelligent-test-runner-beta

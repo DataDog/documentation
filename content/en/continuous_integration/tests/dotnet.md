@@ -10,6 +10,9 @@ further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
       text: "Explore Test Results and Performance"
+    - link: "/continuous_integration/intelligent_test_runner/dotnet"
+      tag: "Documentation"
+      text: "Speed up your test jobs with Intelligent Test Runner"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
       text: "Troubleshooting CI"
@@ -108,7 +111,7 @@ To instrument your test suite, prefix your test command with `dd-trace ci run`, 
 
 By using <a href="https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-test">dotnet test</a>
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
 {{< /code-block >}}
 
@@ -118,7 +121,7 @@ dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
 
 By using <a href="https://docs.microsoft.com/en-us/visualstudio/test/vstest-console-options">VSTest.Console.exe</a>
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- VSTest.Console.exe {test_assembly}.dll
 {{< /code-block >}}
 
@@ -132,7 +135,7 @@ All tests are automatically instrumented.
 
 You can change the default configuration of the CLI by using command line arguments or environment variables. For a full list of configuration settings, run:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 dd-trace ci run --help
 {{< /code-block >}}
 

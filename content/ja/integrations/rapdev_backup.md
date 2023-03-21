@@ -48,13 +48,13 @@ public_title: Backup Automator
 short_description: Datadog ダッシュボード、Synthetic、モニター、ノートブックをバックアップします
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Category::Marketplace
   - Category::Cloud

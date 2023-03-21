@@ -64,13 +64,13 @@ public_title: Microsoft Teams インテグレーション
 short_description: ユーザーとデバイスの Microsoft Teams 通話品質を監視する
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Category::Marketplace
   - Category::Monitoring
