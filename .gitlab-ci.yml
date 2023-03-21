@@ -91,7 +91,7 @@ before_script:
       when: on_success
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:webops-site-build-devin.ford_docs-function-redirects
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:webops-site-build-14093754
   tags:
     - "arch:amd64"
   rules:
@@ -449,8 +449,9 @@ set_redirect_metadata_preview:
   dependencies:
     - build_preview
   script:
-    - in-isolation-parallel update_redirect_metadata
+    - in-isolation update_redirect_metadata
   interruptible: true
+  allow_failure: true
 
 set_redirect_metadata_live:
   <<: *base_template
