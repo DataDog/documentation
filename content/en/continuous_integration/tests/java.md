@@ -26,30 +26,22 @@ Supported test frameworks:
   * Also includes any test framework based on JUnit, such as Spock Framework and Cucumber-Junit. **Note**: Only Cucumber v1, which uses JUnit 4, is supported.
 * TestNG >= 6.4
 
+Supported build systems:
+* Gradle >= 2.0
+* Maven >= 3.2.1
+
 ## Configuring reporting method
 
 To report test results to Datadog, you need to configure the Datadog Java library:
 
 {{< tabs >}}
 
-{{% tab "On-Premises CI provider (Datadog Agent)" %}}
+{{% tab "Agentless" %}}
 
-If you are running tests on an on-premises CI provider, such as Jenkins or self-managed GitLab CI, install the Datadog Agent on each worker node by following the [Agent installation instructions][1]. This is the recommended option as test results are then automatically linked to the underlying host metrics.
+Agentless mode is the recommended way of running CI Visibility.
+Certain features (Test Session Level Visibility, for instance) are not available unless agentless mode is used.
 
-If the CI provider is using a container-based executor, set the `DD_AGENT_HOST` environment variable on all builds (which defaults to `http://localhost:8126`) to an endpoint that is accessible from within build containers, as using `localhost` inside the build references the container itself and not the underlying worker node where the Datadog Agent is running.
-
-If you are using a Kubernetes executor, Datadog recommends using the [Datadog Admission Controller][2], which automatically sets the `DD_AGENT_HOST` environment variable in the build pods to communicate with the local Datadog Agent.
-
-
-[1]: /agent/
-[2]: https://docs.datadoghq.com/agent/cluster_agent/admission_controller/
-{{% /tab %}}
-
-{{% tab "Cloud CI provider (Agentless)" %}}
-
-<div class="alert alert-info">Agentless mode is available in Datadog Java library versions >= 0.101.0</div>
-
-If you are using a cloud CI provider without access to the underlying worker nodes, such as GitHub Actions or CircleCI, configure the library to use the Agentless mode. For this, set the following environment variables:
+In order to use agentless mode, set the following environment variables:
 
 `DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Required)
 : Enables or disables Agentless mode.<br/>
@@ -71,16 +63,33 @@ Additionally, configure which [Datadog site][2] to which you want to send data.
 [2]: /getting_started/site/
 {{% /tab %}}
 
+{{% tab "Datadog Agent (on-premises CI provider only)" %}}
+
+If you are running tests on an on-premises CI provider, such as Jenkins or self-managed GitLab CI, you can install the Datadog Agent on each worker node by following the [Agent installation instructions][1].
+
+Bear in mind, however, that the recommended way of setting up CI Visibility is to use <strong>agentless mode</strong>.
+
+If the CI provider is using a container-based executor, set the `DD_AGENT_HOST` environment variable on all builds (which defaults to `http://localhost:8126`) to an endpoint that is accessible from within build containers, as using `localhost` inside the build references the container itself and not the underlying worker node where the Datadog Agent is running.
+
+If you are using a Kubernetes executor, Datadog recommends using the [Datadog Admission Controller][2], which automatically sets the `DD_AGENT_HOST` environment variable in the build pods to communicate with the local Datadog Agent.
+
+
+[1]: /agent/
+[2]: https://docs.datadoghq.com/agent/cluster_agent/admission_controller/
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Installing the Java tracer
 
-Install and enable the Java tracer v0.101.0 or newer.
+Install and enable the Java tracer <strong>v0.101.0 or newer</strong>.
 
 {{< tabs >}}
 {{% tab "Maven" %}}
 
-Add a new Maven profile in your root `pom.xml` configuring the Datadog Java tracer dependency and the `javaagent` arg property, replacing `$VERSION` with the latest version of the tracer accessible from the [Maven Repository][1] (without the preceding `v`): ![Maven Central][2]
+Add a new Maven profile in your root `pom.xml` configuring the Datadog Java tracer dependency and the `javaagent` arg property,
+replacing `$VERSION` with the latest version of the tracer accessible from the [Maven Repository][1] (without the preceding `v`: ![Maven Central][2])
+and specifying the name of the service or library under test with the `-Ddd.service` property:
 
 {{< code-block lang="xml" filename="pom.xml" >}}
 <profile>
@@ -231,7 +240,7 @@ org.gradle.jvmargs=\
 {{< tabs >}}
 {{% tab "Maven" %}}
 
-Configure the [Maven Surefire Plugin][1] or the [Maven Failsafe Plugin][2] (or both if you use both) to use Datadog Java agent, specifying the name of the service or library under test with the `-Ddd.service` property:
+Configure the [Maven Surefire Plugin][1] or the [Maven Failsafe Plugin][2] (or both if you use both) to use Datadog Java agent:
 
 * If using the [Maven Surefire Plugin][1]:
 
@@ -265,13 +274,6 @@ Configure the [Maven Surefire Plugin][1] or the [Maven Failsafe Plugin][2] (or b
 </plugin>
 {{< /code-block >}}
 
-Run your tests as you normally do, specifying the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
-
-{{< code-block lang="shell" >}}
-DD_ENV=ci mvn clean verify -Pdd-civisibility
-{{< /code-block >}}
-
-
 [1]: https://maven.apache.org/surefire/maven-surefire-plugin/
 [2]: https://maven.apache.org/surefire/maven-failsafe-plugin/
 {{% /tab %}}
@@ -287,10 +289,45 @@ test {
 }
 {{< /code-block >}}
 
-Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
+{{% /tab %}}
+{{< /tabs >}}
 
+## Running your tests
+
+{{< tabs >}}
+{{% tab "Maven" %}}
+
+Run your tests using `MAVEN_OPTS` environment variable to specify path to Datadog Java Tracer JAR.
+In the tracer arguments specify the following:
+* that CI Visibility should be enabled - setting `dd.civisibility.enabled` property to `true`
+* the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `dd.env` property
+* the name of the service or library under test in the `dd.service` property
+
+For example:
 {{< code-block lang="shell" >}}
-DD_ENV=ci ./gradlew cleanTest test -Pdd-civisibility --rerun-tasks
+MAVEN_OPTS=-javaagent:$HOME/.m2/repository/com/datadoghq/dd-java-agent/${VERSION}/dd-java-agent-${VERSION}.jar=\
+dd.civisibility.enabled=true,\
+dd.env=ci,\
+dd.service=my-java-app \
+mvn clean verify -Pdd-civisibility
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Gradle" %}}
+
+Run your tests using `org.gradle.jvmargs` system property to specify path to Datadog Java Tracer JAR.
+In the tracer arguments specify the following:
+* that CI Visibility should be enabled - setting `dd.civisibility.enabled` property to `true`
+* the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `dd.env` property
+* the name of the service or library under test in the `dd.service` property
+
+For example:
+{{< code-block lang="shell" >}}
+./gradlew cleanTest test -Pdd-civisibility --rerun-tasks -Dorg.gradle.jvmargs=\
+-javaagent:$HOME/.m2/repository/com/datadoghq/dd-java-agent/${VERSION}/dd-java-agent-${VERSION}.jar=\
+dd.civisibility.enabled=true,\
+dd.env=ci,\
+dd.service=my-java-app
 {{< /code-block >}}
 
 **Note:** As Gradle builds can be customizable programmatically, you may need to adapt these steps to your specific build configuration.
