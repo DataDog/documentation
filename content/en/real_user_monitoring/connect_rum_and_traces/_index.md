@@ -174,6 +174,33 @@ Use frontend data from RUM, as well as backend, infrastructure, and log informat
 
 [1]: /real_user_monitoring/ios/
 {{% /tab %}}
+{{% tab "React Native RUM" %}}
+
+1.  Set up [RUM React Native Monitoring][1].
+
+2.  Set the `firstPartyHosts` initialization parameter to define the list of internal, first-party origins called by your React Native application:
+    ```javascript
+    const config = new DatadogProviderConfiguration(
+        // ...
+    );
+    config.firstPartyHosts = ["example.com", "api.yourdomain.com"];
+    ```
+
+   By default, all subdomains of listed hosts are traced. For instance, if you add `example.com`, you also enable tracing for `api.example.com` and `foo.example.com`.
+
+3. _(Optional)_ Set the `resourceTracingSamplingRate` initialization parameter to keep a defined percentage of the backend traces. If not set, 20% of the traces coming from application requests are sent to Datadog.
+
+     To keep 100% of backend traces:
+    ```javascript
+    const config = new DatadogProviderConfiguration(
+        // ...
+    );
+    config.resourceTracingSamplingRate = 100;
+    ```
+**Note**: `resourceTracingSamplingRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
+
+[1]: /real_user_monitoring/reactnative/
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Supported libraries
@@ -268,6 +295,28 @@ RUM supports several propagator types to connect resources with backends that ar
       - `.TRACECONTEXT`: [W3C Trace Context](https://www.w3.org/TR/trace-context/) (`traceparent`)
       - `.B3`: [B3 single header](https://github.com/openzipkin/b3-propagation#single-header) (`b3`)
       - `.B3MULTI`: [B3 multiple headers](https://github.com/openzipkin/b3-propagation#multiple-headers) (`X-B3-*`)
+    
+{{% /tab %}}
+
+{{% tab "React Native RUM" %}}
+1. Set up RUM to connect with APM as described above.
+
+2. Configure RUM SDK with the list of internal, first-party origins and the tracing header type to use as follows:
+    ```javascript
+    const config = new DatadogProviderConfiguration(
+        // ...
+    );
+    config.firstPartyHosts = [
+        {match: "example.com", propagatorTypes: PropagatorType.TRACECONTEXT},
+        {match: "example.com", propagatorTypes: PropagatorType.DATADOG}
+    ];
+    ```
+    
+    `PropagatorType` is an enum representing the following tracing header types:
+      - `PropagatorType.DATADOG`: Datadog's propagator (`x-datadog-*`)
+      - `PropagatorType.TRACECONTEXT`: [W3C Trace Context](https://www.w3.org/TR/trace-context/) (`traceparent`)
+      - `PropagatorType.B3`: [B3 single header](https://github.com/openzipkin/b3-propagation#single-header) (`b3`)
+      - `PropagatorType.B3MULTI`: [B3 multiple headers](https://github.com/openzipkin/b3-propagation#multiple-headers) (`X-B3-*`)
     
 {{% /tab %}} {{< /tabs >}}
 
