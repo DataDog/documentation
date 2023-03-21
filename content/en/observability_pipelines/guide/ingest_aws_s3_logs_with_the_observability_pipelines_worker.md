@@ -108,7 +108,7 @@ Create a separate IAM role for the Worker so that only the necessary permissions
       ]
     }
     ```
-8. Replace `${REGION`}, `${AWS_ACCOUNT_ID}`, `${QUEUE_NAME}`, and `${BUCKET_NAME}`  with the relevant AWS account information and the bucket and queue names that you are using. You need to further modify the role permissions if you want the role to be attachable to EC2 instances, assumable by users, and so on.
+8. Replace `${REGION`}, `${AWS_ACCOUNT_ID}`, `${QUEUE_NAME}`, and `${BUCKET_NAME}`  with the relevant AWS account information and the queue and bucket names that you are using. You need to further modify the role permissions if you want the role to be attachable to EC2 instances, assumable by users, etc.
 9. Click **Next: Tags**. Optionally, add tags.
 10. Click **Next: Review**.
 11. Enter a name for the policy.
