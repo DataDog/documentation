@@ -47,11 +47,11 @@ Get insights on the selected pipeline such as total and failed executions over t
 
 When viewing the _default_ branch for a pipeline, each stage and job summary table on the page contains a _Duration Change_ graph that visualizes the absolute and relative change in duration of stages and jobs, along with a graph of _Errored Executions_.
 
-{{< img src="ci/pipeline_job_summary_duration_change.png" alt="Job summary table" style="width:80%;">}}
+{{< img src="ci/pipeline_job_summary_duration_change.png" alt="Job summary table" style="width:100%;">}}
 
 When viewing a feature branch for a pipeline, there are two graphs for _Errored Executions_: one for failed executions in this feature branch, and another for comparing failures in this branch to other failures. You have the option to toggle between `Other Branches` and `Specific Branch`, so you can compare failed executions in this feature branch with aggregated failures across all other branches, or directly compare failed executions in this feature branch with failed executions in another branch of your choice.
 
-{{< img src="ci/pipeline_stage_summary_feature_branch.png" alt="Stage summary table" style="width:80%;">}}
+{{< img src="ci/pipeline_stage_summary_feature_branch.png" alt="Stage summary table" style="width:100%;">}}
 
 The pipeline execution list at the bottom shows all the times that pipeline (or its stages or jobs) ran during the selected time frame, for the selected branch. Use the facets on the left side to filter the list to exactly the pipelines, stages, or jobs you want to see.
 
@@ -78,7 +78,7 @@ On the [Pipeline Executions][5] page, you can see aggregated data about pipeline
 
 Below are three graphs that visualize the durations of your most active pipelines, your failed pipelines over time, and the executions of your pipelines with an option to toggle to accumulated duration, respectively. These graphs are scoped to the level chosen at the top left (`Pipeline`, `Stage`, `Job`, etc.)
 
-{{< img src="ci/pipeline_explorer_trends.png" alt="Explorer view trend graphs" style="width:80%;">}}
+{{< img src="ci/pipeline_explorer_trends.png" alt="Explorer view trend graphs" style="width:100%;">}}
 
 Each pipeline execution is reported as a trace, which includes stage and job information. Access individual pipeline, stage, and job execution traces by clicking on an execution in the list (similar to clicking into a pipeline execution from the Pipeline Details page).
 
