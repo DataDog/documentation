@@ -31,6 +31,7 @@ To create a global variable storing your FIDO2 key, see the [**Global Variables*
 You can use the FIDO2 key stored in a global variable across all your Synthetic tests. 
 
 When [creating a browser test][3], complete your application's FIDO2 challenges using the FIDO2 key stored in a global variable.
+**Note:** Today Passkeys are only supported in Chrome and Edge Synthetics browser tests
 
 ### Test a registration flow
 
@@ -44,7 +45,7 @@ To test a registration flow using FIDO2 keys in your [browser tests][3]:
 
 To test a login flow using FIDO2 keys in your [browser tests][3], you need to have your Datadog FIDO2 key registered on the web application. This is required once per key and application.
 
-**Note**:
+**Note:**
 This can be done either by completing the registration form from within the recorder without recording the registration steps, or by creating a test that embeds both the recording and the login.
 
 1. Import your global variable.
