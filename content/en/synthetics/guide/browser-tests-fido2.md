@@ -42,12 +42,14 @@ To test a registration flow using FIDO2 keys in your [browser tests][3]:
 
 ### Test a login flow
 
-To test a login flow using FIDO2 keys in your [browser tests][3], you need to have your Datadog FIDO2 key registered on the web application. This is required once per key.
+To test a login flow using FIDO2 keys in your [browser tests][3], you need to have your Datadog FIDO2 key registered on the web application. This is required once per key and application.
+
+**Note**:
+This can be done either by completing the registration form from within the recorder without recording the registration steps, or by creating a test that embeds both the recording and the login.
 
 1. Import your global variable.
-2. Complete the registration form from within the recorder without recording the registration steps, or create a test that embeds both the recording and the login.
-3. Navigate to the page to login with FIDO2. When recording your test, Datadog automatically completes any FIDO2 challenges with the FIDO2 key stored in the imported global variable.
-5. After recording your test steps, click **Save & Launch Test**.
+2. Navigate to the page to login with FIDO2. When recording your test, Datadog automatically completes any FIDO2 challenges with the FIDO2 key stored in the imported global variable.
+3. After recording your test steps, click **Save & Launch Test**.
 
 ## Further Reading
 
