@@ -449,7 +449,7 @@ set_redirect_metadata_preview:
   dependencies:
     - build_preview
   script:
-    - in-isolation parallel update_redirect_metadata
+    - in-isolation-parallel update_redirect_metadata
   interruptible: true
 
 set_redirect_metadata_live:
