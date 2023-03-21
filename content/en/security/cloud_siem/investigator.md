@@ -8,6 +8,9 @@ aliases:
   - /security/cloud_siem/cloud_security_investigator/
   - /security/cloud_siem/cloud_siem_investigator/
 further_reading:
+- link: "/cloud_siem/guide/aws-config-guide-for-cloud-siem/"
+  tag: "Documentation"
+  text: "Configure AWS for Cloud SIEM"
 - link: "/cloud_siem/explorer/"
   tag: "Documentation"
   text: "Learn about the Security Signals Explorer"
