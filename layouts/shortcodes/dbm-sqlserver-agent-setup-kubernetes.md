@@ -13,7 +13,7 @@ helm repo update
 helm install <RELEASE_NAME> \
   --set 'datadog.apiKey=<DATADOG_API_KEY>' \
   --set 'clusterAgent.enabled=true' \
-  --set "clusterAgent.confd.sqlserver\.yaml=cluster_check: true
+  --set "clusterAgent.confd.sqlserver\\.yaml=cluster_check: true
 init_config:
 instances:
   - dbm: true
@@ -26,8 +26,8 @@ instances:
     include_ao_metrics: true  # Optional: For AlwaysOn users
     tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
-      - 'env:<CUSTOM_ENV>'\
-  datadog/datadog"
+      - 'env:<CUSTOM_ENV>'"\
+  datadog/datadog
 ```
 
 ### Configure with mounted files
