@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-Passkeys (FIDO2) offer stronger security than the standard username and password tuple, and rely on cryptographic login credentials that are unique across every website. These passkeys never leave your user's devices and are never stored on a server. This security model eliminates the risks of phishing, all forms of password theft, and replay attacks.
+Passkeys (FIDO2) offer stronger security than the standard username and password tuple, and rely on cryptographic login credentials that are unique across every website. These passkeys never leave your user's devices and are never stored on a web application server. This security model eliminates the risks of phishing, all forms of password theft, and replay attacks.
 
 You can use passkeys as a replacement for a username and password or as a second factor authentication. Synthetic FIDO2 Key global variables allow you to test your application’s FIDO2-based authentication modules and critical user journeys without disabling critical security measures. You do not need to create or maintain dedicated environments to test FIDO2-enabled user journeys.
 
@@ -38,7 +38,7 @@ To test a registration flow using FIDO2 keys in your [browser tests][3]:
 
 1. Import your global variable.
 2. Navigate to the page to register with FIDO2. When recording your test, Datadog automatically completes any FIDO2 challenges with the FIDO2 key stored in the imported global variable.
-4. After recording your test steps, click **Save & Launch Test**.
+3. After recording your test steps, click **Save & Launch Test**.
 
 ### Test a login flow
 
