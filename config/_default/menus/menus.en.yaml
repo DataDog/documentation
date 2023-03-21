@@ -2182,7 +2182,7 @@ main:
     weight: 1
   - name: Data Streams Monitoring
     url: data_streams/
-    pre: datastreams
+    pre: datastreams-monitoring
     identifier: data_streams
     parent: apm_heading
     weight: 170000
