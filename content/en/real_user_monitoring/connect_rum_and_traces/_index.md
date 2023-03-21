@@ -186,7 +186,7 @@ Use frontend data from RUM, as well as backend, infrastructure, and log informat
     config.firstPartyHosts = ["example.com", "api.yourdomain.com"];
     ```
 
-   By default, all subdomains of listed hosts are traced. For instance, if you add `example.com`, you also enable tracing for `api.example.com` and `foo.example.com`.
+    By default, all subdomains of listed hosts are traced. For instance, if you add `example.com`, you also enable tracing for `api.example.com` and `foo.example.com`.
 
 3. _(Optional)_ Set the `resourceTracingSamplingRate` initialization parameter to keep a defined percentage of the backend traces. If not set, 20% of the traces coming from application requests are sent to Datadog.
 
@@ -197,7 +197,8 @@ Use frontend data from RUM, as well as backend, infrastructure, and log informat
     );
     config.resourceTracingSamplingRate = 100;
     ```
-**Note**: `resourceTracingSamplingRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
+
+    **Note**: `resourceTracingSamplingRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
 
 [1]: /real_user_monitoring/reactnative/
 {{% /tab %}}
@@ -299,9 +300,9 @@ RUM supports several propagator types to connect resources with backends that ar
 {{% /tab %}}
 
 {{% tab "React Native RUM" %}}
-1. Set up RUM to connect with APM as described above.
+1. Set up RUM to [connect with APM](#setup-rum).
 
-2. Configure RUM SDK with the list of internal, first-party origins and the tracing header type to use as follows:
+2. Configure the RUM SDK with the list of internal, first-party origins and the tracing header type to use as follows:
     ```javascript
     const config = new DatadogProviderConfiguration(
         // ...
