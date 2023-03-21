@@ -436,24 +436,9 @@ post_failure_event_to_dd_live:
     - if: $CI_COMMIT_REF_NAME == "master"
       when: on_failure
 
-check_redirects_preview:
-  <<: *base_template
-  <<: *preview_rules
-  variables:
-    BUCKET: "datadog-docs-preview"
-    IS_REDIRECT_JOB: "true" 
-  stage: post-deploy
-  cache: []
-  environment: "preview"
-  dependencies:
-    - build_preview
-  script:
-    - in-isolation update_redirect_metadata
-  interruptible: true
-
 set_redirect_metadata_preview:
   <<: *base_template
-  <<: *preview_manual_rules
+  <<: *preview_rules
   variables:
     BUCKET: "datadog-docs-preview"
     IS_REDIRECT_JOB: "true"
@@ -464,7 +449,7 @@ set_redirect_metadata_preview:
   dependencies:
     - build_preview
   script:
-    - in-isolation update_redirect_metadata
+    - in-isolation parallel update_redirect_metadata
   interruptible: true
 
 set_redirect_metadata_live:
