@@ -69,9 +69,9 @@ Data for suspicious requests is kept for 90 days. The underlying trace data is k
 
 ## Data privacy
 
-By default, ASM collects information from suspicious requests to help you understand why the request was flagged as suspicious. Before sending the data, ASM scans it for patterns and keywords that indicate that the data is sensitive. If the data is deemed sensitive, it is replaced with a <redacted> flag, so you observe that although the request was suspicious, the request data could not be collected because of data security concerns.
+By default, ASM collects information from suspicious requests to help you understand why the request was flagged as suspicious. Before sending the data, ASM scans it for patterns and keywords that indicate that the data is sensitive. If the data is deemed sensitive, it is replaced with a `<redacted>` flag. This indicates that the request was suspicious, but that the request data could not be collected because of data security concerns.
 
-The following are examples of data that are flagged as sensitive by default:
+Here are some examples of data that is flagged as sensitive by default:
 * `pwd`, `password`, `ipassword`, `pass_phrase`
 * `secret`
 * `key`, `api_key`, `private_key`, `public_key`
