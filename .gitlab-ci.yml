@@ -441,7 +441,6 @@ set_redirect_metadata_preview:
   <<: *preview_rules
   variables:
     BUCKET: "datadog-docs-preview"
-    IS_REDIRECT_JOB: "true"
     SET_REDIRECTS_PREVIEW: "true"
   stage: post-deploy
   cache: []
@@ -449,7 +448,7 @@ set_redirect_metadata_preview:
   dependencies:
     - build_preview
   script:
-    - run-in-parallel update_redirect_metadata
+    - run_update_redirect_metadata
   interruptible: true
   allow_failure: true
 
@@ -458,12 +457,11 @@ set_redirect_metadata_live:
   <<: *live_rules
   variables:
     BUCKET: "datadog-docs-live-hugo"
-    IS_REDIRECT_JOB: "true" 
   stage: post-deploy
   cache: []
   environment: "live"
   dependencies:
     - build_live
   script:
-    - in-isolation update_redirect_metadata
+    - run_update_redirect_metadata
   interruptible: true
