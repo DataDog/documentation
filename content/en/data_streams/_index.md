@@ -10,6 +10,10 @@ further_reading:
       text: 'Service Catalog'
 ---
 
+<div class="alert alert-warning">
+The features discussed on this page are in private beta. Contact your Customer Success Manager to learn more about it.
+</div>
+
 {{< img src="data_streams/data_streams_hero.png" alt="Datadog Data Streams Monitoring" style="width:100%;" >}}
 
 Data Streams Monitoring provides a standardized method for teams to understand and manage pipelines at scale by making it easy to:

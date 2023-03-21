@@ -2180,6 +2180,12 @@ main:
     parent: usm_parent
     identifier: universal_service_monitoring_guides
     weight: 1
+  - name: Data Streams Monitoring
+    url: data_streams/
+    pre: datastreams
+    identifier: data_streams
+    parent: apm_heading
+    weight: 170000
   - name: Log Management
     url: logs/
     pre: log
