@@ -75,7 +75,7 @@ Keep the **Execution configuration** option as `Inactive` so the StackSet perfor
     - Under **Specify regions**, select a single region in which you’d like to deploy the integration in each AWS account.   
       **NOTE**: The StackSet creates global IAM resources that are not region specific. If multiple regions are selected in this step, the deployment fails. 
 
-    - Set the default settings under **Deployment options** to be sequential so StackSets operations are deployed into one region at a time.
+    - Set the default settings under **Deployment options** to be sequential, so StackSets operations are deployed into one region at a time.
 
 5. **Review**  
     Go to the **Review** page and click **Submit**. This launches the creation process for the Datadog StackSet. This could take several minutes depending on how many accounts need to be integrated. Ensure that the StackSet successfully creates all resources before proceeding.
