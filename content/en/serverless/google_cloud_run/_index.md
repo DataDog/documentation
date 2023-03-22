@@ -26,7 +26,7 @@ Make sure you have a [Datadog API Key][6] and are using a programming language [
 {{< programming-lang-wrapper langs="go,python,nodejs,java,dotnet,ruby" >}}
 {{< programming-lang lang="go" >}}
 
-#### Install Agent via Dockerfile
+#### Install Agent with Dockerfile
 
 You can instrument your application with a Datadog Agent by adding the following lines to your Dockerfile. You may need to adjust these examples depending on your existing Dockerfile setup.
 
@@ -46,8 +46,8 @@ ENV DD_VERSION=1
 CMD ["/path/to/your-go-binary"]
 ```
 
-#### Install Tracing Library
-Follow [these instructions][2] to install and configure the GO tracing library in your application to capture and submit traces. 
+#### Install tracing library
+Follow [these instructions][2] to install and configure the Go tracing library in your application to capture and submit traces. 
 
 
 [Sample code for a simple Go application][1].
@@ -59,7 +59,7 @@ Follow [these instructions][2] to install and configure the GO tracing library i
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-#### Install Agent via Dockerfile
+#### Install Agent with Dockerfile
 
 Instrument your application with the Datadog Agent by adding the following lines to your Dockerfile. You may need to adjust these examples depending on your existing Dockerfile setup.
 
@@ -81,7 +81,7 @@ ENTRYPOINT ["/app/datadog-init"]
 # execute your binary application wrapped in the entrypoint, launched by the Datadog trace library. Adapt this line to your needs
 CMD ["ddtrace-run", "python", "app.py"]
 ```
-#### Install Tracing Library
+#### Install tracing library
 Follow [these instructions][2] to install and configure the Python tracing library in your application to capture and submit traces. 
 
 [Sample code for a simple Python application][1].
@@ -92,7 +92,7 @@ Follow [these instructions][2] to install and configure the Python tracing libra
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
-#### Install Agent via Dockerfile
+#### Install Agent with Dockerfile
 
 Instrument your application with the Datadog Agent by adding the following lines to your Dockerfile. You may need to adjust these examples depending on your existing Dockerfile setup.
 
@@ -119,7 +119,7 @@ ENTRYPOINT ["/app/datadog-init"]
 CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
 
 ```
-#### Install Tracing Library
+#### Install tracing library
 Follow [these instructions][2] to install and configure the Node tracing library in your application to capture and submit traces. 
 
 [Sample code for a simple Node.js application][1].
@@ -130,7 +130,7 @@ Follow [these instructions][2] to install and configure the Node tracing library
 {{< /programming-lang >}}
 {{< programming-lang lang="java" >}}
 
-#### Install Agent via Dockerfile
+#### Install Agent with Dockerfile
 
 Instrument your application with the Datadog Agent by adding the following lines to your Dockerfile. You may need to adjust these examples depending on your existing Dockerfile setup.
 
@@ -151,7 +151,7 @@ CMD ["./mvnw", "spring-boot:run"]
 
 ```
 
-#### Install Tracing Library
+#### Install tracing library
 Follow [these instructions][2] to install and configure the Java tracing library in your application to capture and submit traces. 
 
 [Sample code for a simple Java application][1].
@@ -162,7 +162,7 @@ Follow [these instructions][2] to install and configure the Java tracing library
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 
-#### Install Agent via Dockerfile
+#### Install Agent with Dockerfile
 
 Instrument your application with the Datadog Agent by adding the following lines to your Dockerfile. You may need to adjust these examples depending on your existing Dockerfile setup.
 
@@ -183,16 +183,16 @@ CMD ["dotnet", "helloworld.dll"]
 
 ```
 
-#### Install Tracing Library
-Follow these instructions to install and configure the [.NET Core tracing library][1] and the .NET Framework tracing library[2]. 
+#### Install tracing library
+Follow the instructions to install and configure the [.NET Core tracing library][1] and the [.NET Framework tracing library][2]. 
 
 [1]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/dotnet-core?tab=containers#custom-instrumentation
-[2]: tracing/trace_collection/dd_libraries/dotnet-framework/?tab=containers#custom-instrumentation
+[2]: /tracing/trace_collection/dd_libraries/dotnet-framework/?tab=containers#custom-instrumentation
 
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-#### Install Agent via Dockerfile
+#### Install Agent with Dockerfile
 
 Instrument your application with the Datadog Agent by adding the following lines to your Dockerfile. You may need to adjust these examples depending on your existing Dockerfile setup.
 
@@ -213,7 +213,7 @@ CMD ["rails", "server", "-b", "0.0.0.0"] (adapt this line to your needs)
 
 ```
 
-#### Install Tracing Library
+#### Install tracing library
 
 Follow [these instructions][2] to install and configure the Ruby tracing library in your application to capture and submit traces. 
 
