@@ -19,6 +19,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/apm-security-view/"
   tag: "Blog"
   text: "Gain visibility into risks, vulnerabilities, and attacks with APM Security View"
+- link: "https://www.datadoghq.com/blog/service-catalog-setup/"
+  tag: "Blog"
+  text: "Easily add tags and metadata to your services using the simplified Service Catalog setup"
 ---
 
 

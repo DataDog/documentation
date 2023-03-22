@@ -15,7 +15,7 @@ further_reading:
   tag: Documentation
   text: ログの調査方法
 - link: /logs/faq/log-collection-troubleshooting-guide/
-  tag: FAQ
+  tag: Documentation
   text: ログ収集のトラブルシューティングガイド
 kind: documentation
 title: Python ログ収集
@@ -23,21 +23,52 @@ title: Python ログ収集
 
 ## 概要
 
-任意の Python ロガーを使用して、ホスト上のファイルにログを記録します。次に、Datadog Agent でファイルを監視して、ログを Datadog に送信します。
+Python のログを Datadog に送信するには、Python ロガーを構成してホスト上のファイルにログを記録し、Datadog Agent でそのファイルを追跡します。
 
 ## ロガーの構成
 
-Python ログの処理はかなり複雑ですが、その主な原因はトレースバックです。トレースバックが複数行に分割されるため、元のログイベントとの関連付けが難しくなります。
-この問題に対応するには、ログの収集時に JSON フォーマッタを使用して次の処理を行うことを強くお勧めします。
+Python のログは、トレースバックのために扱いが複雑になることがあります。トレースバックは、ログを複数行に分割する原因となり、元のログイベントとの関連付けが困難になります。この問題に対処するため、Datadog はロギング時に JSON フォーマッターを使用することを強く推奨しています。
 
-* 各 stack_trace を正しいログに適切にラップします。
-* ログイベントのすべての属性 (重大度、ロガー名、スレッド名など) を正しく抽出します。
+* 各スタックトレースが正しいログにラップされていることを確認します。
+* ログイベントのすべての属性が正しく抽出されていることを確認します (重大度、ロガー名、スレッド名など)。
 
-以下は、ログライブラリごとのセットアップ例です。
+以下のロギングライブラリの設定例をご参照ください。
 
 * [JSON-log-formatter][1]
 * [Python-json-logger][2]
-* [django-datadog-logger][3]
+* [django-datadog-logger][3]*
+
+*[Python ロガー][6]には、カスタム属性を追加するための `extra` パラメーターがあります。`DJANGO_DATADOG_LOGGER_EXTRA_INCLUDE` を使って、`extra` パラメーターを追加したいロガーの名前にマッチする正規表現を指定します。
+
+## Datadog Agent の構成
+
+[ログ収集][7]を有効にしたら、[カスタムログ収集][8]を設定して、以下のようにログファイルを追跡して Datadog に送信します。
+
+1. `python.d/` フォルダーを `conf.d/` Agent 構成ディレクトリに作成します。
+2. `conf.d/python.d/` ディレクトリに、以下の内容の `conf.yaml` ファイルを作成します。
+    ```yaml
+    init_config:
+
+    instances:
+
+    ##Log section
+    logs:
+
+      - type: file
+        path: "<PATH_TO_PYTHON_LOG>.log"
+        service: "<YOUR_APPLICATION>"
+        source: python
+        sourcecategory: sourcecode
+        # For multiline logs, if they start by the date with the format yyyy-mm-dd uncomment the following processing rule
+        #log_processing_rules:
+        #  - type: multi_line
+        #    name: new_log_start_with_date
+        #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
+    ```
+3. [Agent を再起動します][5]。
+4. [Agent の status サブコマンド][9]を実行し、`Checks` セクションで `python` を探し、ログが Datadog に正常に送信されることを確認します。
+
+ログが JSON 形式の場合、Datadog は自動的にログメッセージを[パース][10]し、ログ属性を抽出します。[ログエクスプローラー][11]を使用して、ログを表示し、トラブルシューティングを行うことができます。
 
 ## ログとトレースにおけるサービスを接続
 
@@ -51,111 +82,18 @@ APM が有効になっているアプリケーションの場合は、[APM Pytho
 2019-01-07 15:20:15,972 DEBUG [flask.app] [app.py:100] [dd.trace_id=5688176451479556031 dd.span_id=4663104081780224235] - this is an example
 ```
 
-次に、ファイルから Python ログを収集するように、[Datadog Agent を構成します](#configure-the-datadog-agent)。
-
-### ファイルへのログの記録
-
-{{< tabs >}}
-{{% tab "JSON-log-formatter" %}}
-
-[JSON-log-formatter][1] の使用例
-
-```python
-import logging
-
-import json_log_formatter
-
-formatter = json_log_formatter.JSONFormatter()
-
-json_handler = logging.FileHandler(filename='/var/log/my-log.json')
-json_handler.setFormatter(formatter)
-
-logger = logging.getLogger('my_json')
-logger.addHandler(json_handler)
-logger.setLevel(logging.INFO)
-
-logger.info('Sign up', extra={'referral_code': '52d6ce'})
-```
-
-ログファイルには次のログレコード (インライン) が含まれます。
-
-```json
-{
-  "message": "Sign up",
-  "time": "2015-09-01T06:06:26.524448",
-  "referral_code": "52d6ce"
-}
-```
-
-[1]: https://pypi.python.org/pypi/JSON-log-formatter/0.1.0
-{{% /tab %}}
-{{% tab "Python-json-logger" %}}
-
-[Python-json-logger][1] の使用例
-
-```python
-import logging
-from pythonjsonlogger import jsonlogger
-
-logger = logging.getLogger()
-
-logHandler = logging.FileHandler(filename='/var/log/my-log.json')
-formatter = jsonlogger.JsonFormatter()
-logHandler.setFormatter(formatter)
-logger.addHandler(logHandler)
-logger.setLevel(logging.INFO)
-
-logger.info('Sign up', extra={'referral_code': '52d6ce'})
-```
-
-ログファイルには次のログレコード (インライン) が含まれます。
-
-```json
-{
-  "message": "Sign up",
-  "referral_code": "52d6ce"
-}
-```
-
-ハンドラーの構成については、[Python-json-logger][2] のドキュメントを参照してください。
-
-[1]: https://github.com/madzak/python-json-logger
-[2]: https://github.com/madzak/python-json-logger#customizing-fields
-{{% /tab %}}
-{{< /tabs >}}
-
-### Datadog Agent の構成
-
-Agent の `conf.d/python.d/` ディレクトリに、以下の内容の `conf.yaml` ファイルを作成します。
-
-```yaml
-init_config:
-
-instances:
-
-##ログセクション
-logs:
-
-  - type: file
-    path: "<Python_ログへのパス>.log"
-    service: "<アプリケーション>"
-    source: python
-    sourcecategory: sourcecode
-    # 複数行ログで、ログが yyyy-mm-dd 形式の日付で始まる場合は、以下の処理ルールのコメントを解除します。
-    #log_processing_rules:
-    #  - type: multi_line
-    #    name: new_log_start_with_date
-    #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
-```
-
-[Agent を再起動][5]して、コンフィギュレーションへの変更を適用します。
-
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://pypi.python.org/pypi/JSON-log-formatter/0.1.0
+[1]: https://pypi.python.org/pypi/JSON-log-formatter/
 [2]: https://github.com/madzak/python-json-logger
 [3]: https://pypi.org/project/django-datadog-logger/
-[4]: /ja/tracing/connect_logs_and_traces/python
+[4]: /ja/tracing/other_telemetry/connect_logs_and_traces/python
 [5]: /ja/agent/guide/agent-commands/
+[6]: https://docs.python.org/3/library/logging.html#logging
+[7]: /ja/agent/logs/?tab=tailfiles#activate-log-collection
+[8]: /ja/agent/logs/?tab=tailfiles#custom-log-collection
+[9]: /ja/agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
+[10]: /ja/logs/log_configuration/parsing/
+[11]: /ja/logs/explorer/#overview

@@ -8,7 +8,7 @@ further_reading:
   text: Application Security Management の仕組み
 - link: /security/application_security/getting_started
   tag: Documentation
-  text: ASM のセットアップ
+  text: ASM の有効化
 - link: https://securitylabs.datadoghq.com/
   tag: Security Labs
   text: Datadog のセキュリティリサーチ、レポート、ヒント、ビデオ
@@ -34,7 +34,7 @@ Datadog ASM を使い始めてからの 3 日間:
 
 2. **最も露出度の高いサービスの ASM を有効にします。**ASM Status 列の `Enable ASM` をクリックして、手順を確認するか、サービスの所有者と共有します。
 
-   ASM は APM と同じライブラリに依存しているため、すでにトレーシングライブラリを送信しているサービスで ASM を有効にするには、たった 1 つの環境変数を構成するだけでよいのです。詳しくは、[ASM セットアップドキュメント][2]を参照してください。
+   ASM は APM と同じライブラリに依存しているため、すでにトレーシングライブラリを送信しているサービスで ASM を有効にするには、たった 1 つの環境変数を構成するだけでよいのです。詳しくは、[ASM の有効化のドキュメント][2]を参照してください。
 
 3. **最初の疑わしいリクエストを探索します。**[Security --&gt; Application Security][7]** にアクセスし、ASM にリストされた疑わしいリクエストを確認します。
 
@@ -83,7 +83,7 @@ done{{< /code-block >}}
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/services?env=prod&hostGroup=%2A&lens=Security
-[2]: /ja/security/application_security/getting_started/
+[2]: /ja/security/application_security/enabling/
 [3]: /ja/security/application_security/threats/setup_and_configure/#configuring-a-client-ip-header
 [4]: /ja/security/application_security/how-appsec-works/
 [5]: /ja/security/application_security/threats/add-user-info/

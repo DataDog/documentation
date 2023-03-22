@@ -140,15 +140,13 @@ Fill out your private location details:
 
 Configure your private location by customizing the generated configuration file. When you add initial configuration parameters such as [proxies](#proxy-configuration) and [blocked reserved IPs](#blocking-reserved-ips) in **Step 3**, your generated configuration file updates automatically in **Step 4**.
 
-Depending on your internal network setup, you may want to configure your private location with [advanced options](#advanced-configuration).
+You can access advanced options to adjust the configuration based on your internal network setup. For more information about the `help` command, see [Configuration][5].
 
 #### Proxy configuration
 
 If the traffic between your private location and Datadog has to go through a proxy, specify your proxy URL as `http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>` to add the associated `proxyDatadog` parameter to your generated configuration file.
 
 {{<img src="synthetics/private_locations/pl_proxy_1.png" alt="Add a proxy to your private location configuration file" style="width:90%;">}}
-
-[Advanced proxy configuration options][5] are available.
 
 #### Blocking reserved IPs
 
@@ -157,16 +155,6 @@ By default, Synthetic users can create Synthetic tests on endpoints using any IP
 If some of the endpoints you are willing to test are located within one or several of the blocked reserved IP ranges, you can add their IPs and/or CIDRs to the allowed lists to add the associated `allowedIPRanges` parameters to your generated configuration file.
 
 {{< img src="synthetics/private_locations/pl_reserved_ips_1.png" alt="Configure reserved IPs" style="width:90%;">}}
-
-[Advanced reserved IPs configuration options][8] are available.
-
-#### Advanced configuration
-
-[Advanced configuration options][9] are available and can be found by running the below `help` command:
-
-```shell
-docker run --rm datadog/synthetics-private-location-worker --help
-```
 
 ### View your configuration file
 
@@ -198,7 +186,16 @@ docker run --rm -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetic
 
 This command starts a Docker container and makes your private location ready to run tests. **Datadog recommends running the container in detached mode with proper restart policy.**
 
+#### Root certificates
+
+You can upload custom root certificates to your private locations to have your API and browser tests perform the SSL handshake using your own `.pem` files.
+
+When spinning up your private location containers, mount the relevant certificate `.pem` files to `/etc/datadog/certs` in the same way you mount your private location configuration file. These certificates are considered trusted CA and are used at test runtime.
+
+For more information about private locations parameters for admins, see [Configuration][2].
+
 [1]: https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities
+[2]: https://docs.datadoghq.com/synthetics/private_locations/configuration/#private-locations-admin
 
 {{% /tab %}}
 
@@ -222,7 +219,16 @@ This command starts a Docker container and makes your private location ready to 
     docker-compose -f docker-compose.yml up
     ```
 
+#### Root certificates
+
+You can upload custom root certificates to your private locations to have your API and browser tests perform the SSL handshake using your own `.pem` files.
+
+When spinning up your private location containers, mount the relevant certificate `.pem` files to `/etc/datadog/certs` in the same way you mount your private location configuration file. These certificates are considered trusted CA and are used at test runtime.
+
+For more information about private locations parameters for admins, see [Configuration][2].
+
 [1]: https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities
+[2]: https://docs.datadoghq.com/synthetics/private_locations/configuration/#private-locations-admin
 
 {{% /tab %}}
 
@@ -463,7 +469,7 @@ Because Datadog already integrates with Kubernetes and AWS, it is ready-made to 
 
 Add a liveness or readiness probe so your orchestrator can ensure the workers are running correctly.
 
-For readiness probes, you need to enable private location status probes on port `8080` in your private location deployment. For more information, see [Advanced configuration][15].
+For readiness probes, you need to enable private location status probes on port `8080` in your private location deployment. For more information, see [Private Locations Configuration][5].
 
 {{< tabs >}}
 
@@ -745,17 +751,14 @@ If you are using the [custom role feature][21], add your user to a custom role t
 [2]: /synthetics/
 [3]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/synthetics-private-location-worker?pli=1
 [4]: https://docs.docker.com/engine/install/
-[5]: /synthetics/private_locations/configuration/#proxy-configuration
+[5]: /synthetics/private_locations/configuration/
 [6]: https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml
 [7]: https://www.iana.org/assignments/iana-ipv6-special-registry/iana-ipv6-special-registry.xhtml
-[8]: /synthetics/private_locations/configuration/#reserved-ips-configuration
-[9]: /synthetics/private_locations/configuration/
 [10]: https://docs.docker.com/engine/reference/builder/#healthcheck
 [11]: /synthetics/metrics
 [12]: /synthetics/api_tests/
 [13]: /synthetics/multistep?tab=requestoptions
 [14]: /synthetics/browser_tests/?tab=requestoptions
-[15]: /synthetics/private_locations/configuration#advanced-configuration
 [16]: /agent/
 [17]: /synthetics/metrics/
 [18]: /synthetics/private_locations/dimensioning
