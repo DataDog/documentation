@@ -16,8 +16,7 @@ Datadog provides an Azure extension to assist with Agent deployment on Azure ins
 * [Introducing Azure monitoring with one-click Datadog deployment][1]
 * [Azure integration documentation][2]
 
-You can install the extension through the CLI or Terraform
-To run the Datadog Agent in your Azure instances as an extension, use the command that matches your environment:
+You can install the extension through the CLI or Terraform. To run the Datadog Agent in your Azure instances as an extension, use the command that matches your environment:
 
 ### CLI
 
