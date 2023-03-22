@@ -61,7 +61,7 @@ Copy the Template URL from the Datadog AWS integration configuration page to use
 
     - *Optionally:*  
         a. Enable [Cloud Security Posture Management][5] (CSPM) to scan your cloud environment, hosts, and containers for misconfigurations and security risks.  
-        b. Disable metric collection if you do not want to monitor your AWS infrastructure. This is recommended only for [Cloud Cost Management][6] (CCM) or [Cloud Security Posture Management][5] (CSPM) specific use cases.
+        b. Disable metric collection if you do not want to monitor your AWS infrastructure. This is recommended only for [Cloud Cost Management][6] (CCM) or [CSPM][5] specific use cases.
 
 3. **Configure StackSet options**  
 Keep the **Execution configuration** option as `Inactive` so the StackSet performs one operation at a time.
