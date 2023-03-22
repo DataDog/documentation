@@ -174,23 +174,6 @@ Use frontend data from RUM, as well as backend, infrastructure, and log informat
 
 [1]: /real_user_monitoring/ios/
 {{% /tab %}}
-{{% tab "Flutter RUM" %}}
-
-1. Set up [RUM Flutter Monitoring][1]. 
-
-2. Follow the instructions under [Automatic Resource Tracking][2] to include the Datadog Tracking HTTP Client package and enable HTTP tracking. This includes the following changes to your initialization to add a list of internal, first-party origins called by your Flutter application:
-    ```dart
-    final configuration = DdSdkConfiguration(
-      // ...
-      // added configuration
-      firstPartyHosts: ['example.com', 'api.yourdomain.com'],
-    )..enableHttpTracking()
-    ```
-
-[1]: /real_user_monitoring/flutter/
-[2]: /real_user_monitoring/flutter/#automatic-resource-tracking
-
-{{% /tab %}}
 {{% tab "React Native RUM" %}}
 
 1.  Set up [RUM React Native Monitoring][1].
@@ -218,6 +201,23 @@ Use frontend data from RUM, as well as backend, infrastructure, and log informat
     **Note**: `resourceTracingSamplingRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
 
 [1]: /real_user_monitoring/reactnative/
+{{% /tab %}}
+{{% tab "Flutter RUM" %}}
+
+1. Set up [RUM Flutter Monitoring][1]. 
+
+2. Follow the instructions under [Automatic Resource Tracking][2] to include the Datadog Tracking HTTP Client package and enable HTTP tracking. This includes the following changes to your initialization to add a list of internal, first-party origins called by your Flutter application:
+    ```dart
+    final configuration = DdSdkConfiguration(
+      // ...
+      // added configuration
+      firstPartyHosts: ['example.com', 'api.yourdomain.com'],
+    )..enableHttpTracking()
+    ```
+
+[1]: /real_user_monitoring/flutter/
+[2]: /real_user_monitoring/flutter/#automatic-resource-tracking
+
 {{% /tab %}}
 {{< /tabs >}}
 
