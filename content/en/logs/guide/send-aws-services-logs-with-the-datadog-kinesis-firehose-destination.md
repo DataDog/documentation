@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-AWS service logs are usually stored in S3 buckets or CloudWatch Log groups. It is possible to subscribe to these logs and forward them to an Amazon Kinesis stream to then forward them to one or multiple destinations. Datadog is one of the default destinations for Amazon Kinesis Delivery streams. 
+It is possible to subscribe to AWS service logs stored in CloudWatch Log groups and forward them to an Amazon Kinesis stream to then forward them to one or multiple destinations. Datadog is one of the default destinations for Amazon Kinesis Delivery streams. 
 
 AWS fully manages Amazon Kinesis Data Firehose, so you don't need to maintain any additional infrastructure or forwarding configurations for streaming logs. You can set up a Kinesis Firehose Delivery Stream in the AWS Firehose console, or automatically set up the destination using a CloudFormation template.
 
