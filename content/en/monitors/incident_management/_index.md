@@ -130,7 +130,7 @@ When you create an incident, an incident modal comes up. This modal has several 
 
 **Additional notifications**: Notify other teams or people.
 
-Click on “Declare Incident” to finish creating your incident.
+Click on **Declare Incident** to finish creating your incident.
 
 ### Updating the incident and the incident timeline
 

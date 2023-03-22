@@ -11,7 +11,7 @@ Datadog meters the count of hosts and custom metrics hourly. The billable count 
 
 ### Hosts
 
-A host is any physical or virtual OS instance that you monitor with Datadog. It could be a server, VM, node (in the case of Kubernetes), or App Service Plan instance (in the case of Azure App Service). Hosts can be instances with the Datadog Agent installed plus any AWS EC2s, GCP, Azure, or vSphere VMs monitored with Datadog integrations. Any EC2s or VMs with the Agent installed count as a single instance (no double-billing).
+A host is any physical or virtual OS instance that you monitor with Datadog. It could be a server, VM, node (in the case of Kubernetes), App Service Plan instance (in the case of Azure App Service), or Heroku dyno (in the case of the Heroku platform). Hosts can be instances with the Datadog Agent installed plus any AWS EC2s, GCP, Azure, or vSphere VMs monitored with Datadog integrations. Any EC2s or VMs with the Agent installed count as a single instance (no double-billing).
 
 Non-reporting hosts (status `???` in your [Infrastructure list][2]) do not count towards billing. It could take up to 2 hours for these hosts to drop out of the [Infrastructure List][2]. Datadog retains the historical data for these hosts (paid accounts). Metrics can be graphed on a dashboard by knowing the specific host name or tags.
 
@@ -102,7 +102,7 @@ If you pay by check, ACH, or wire, invoices are emailed to the billing email add
     {{< nextlink href="account_management/billing/log_management/" >}}Log management{{< /nextlink >}}
     {{< nextlink href="account_management/billing/apm_tracing_profiler/" >}}APM (Distributed Tracing & Continuous Profiler){{< /nextlink >}}
     {{< nextlink href="account_management/billing/serverless/" >}}Serverless{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/rum/" >}}RUM & Session Replay{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/rum/" >}}Real User Monitoring{{< /nextlink >}}
     {{< nextlink href="account_management/billing/aws/" >}}AWS integration{{< /nextlink >}}
     {{< nextlink href="account_management/billing/azure/" >}}Azure integration{{< /nextlink >}}
     {{< nextlink href="account_management/billing/alibaba/" >}}Alibaba integration{{< /nextlink >}}

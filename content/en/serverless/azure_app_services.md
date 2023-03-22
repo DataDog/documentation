@@ -224,7 +224,7 @@ To send metrics use this code:
 ```java
 // Configure your DogStatsd client and configure any tags
 StatsDClient client = new NonBlockingStatsDClientBuilder()
-                            .constantTags(“app:sample.service”)
+                            .constantTags("app:sample.service")
                             .build();
 // Send a metric
 client.Increment("sample.startup");

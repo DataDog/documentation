@@ -17,6 +17,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/apm-security-view/
   tag: ブログ
   text: APM セキュリティビューでリスク、脆弱性、攻撃を視覚化する
+- link: https://www.datadoghq.com/blog/service-catalog-setup/
+  tag: ブログ
+  text: サービスカタログの設定を簡素化することで、サービスにタグやメタデータを簡単に追加できます
 kind: documentation
 title: Datadog サービスカタログ
 ---

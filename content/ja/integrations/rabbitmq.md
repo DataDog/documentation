@@ -44,7 +44,7 @@ draft: false
 git_integration_title: rabbitmq
 integration_id: rabbitmq
 integration_title: RabbitMQ
-integration_version: 4.0.0
+integration_version: 4.0.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -94,15 +94,15 @@ RabbitMQ チェックは [Datadog Agent][3] パッケージに含まれていま
 
 ### コンフィギュレーション
 
-Rabbitmq は、[RabbitMQ Management Plugin][4] と [Rabbitmq Prometheus Plugin][5] という 2 つの方法でメトリクスを公開します。RabbitMQ インテグレーションは、この 2 つのプラグインをサポートしています。
+RabbitMQ は、[RabbitMQ Management Plugin][4] と [Rabbitmq Prometheus Plugin][5] の 2 つの方法でメトリクスを公開します。Datadog インテグレーションは、両方のバージョンをサポートしています。このファイルの中で、使用するバージョンに関連する構成説明に従ってください。Prometheus プラグイン版のインテグレーションでアクセスできるメトリクスは、`metadata.csv` の記述に [OpenMetricsV2] と表示されています。また、Datadog インテグレーションには、すぐに使えるダッシュボードとモニターが各バージョンに付属しており、ダッシュボードとモニターのタイトルで表示されます。
 
 #### RabbitMQ の準備
 
 ##### [RabbitMQ Prometheus Plugin][5]。
 
-_注: Prometheus Plugin の収集メソッドは Python 3 が必要です。_
+*RabbitMQ v3.8 から、[RabbitMQ Prometheus Plugin][5] がデフォルトで有効になり、インテグレーションは OpenMetricsV2 を使って HTTP API で通信を行います。*
 
-_RabbitMQ v3.8 から、[Rabbitmq Prometheus Plugin][5] がデフォルトで有効になり、インテグレーションは OpenMetricsV2 を使って HTTP API で通信を行います。_
+*RabbitMQ の Prometheus プラグインバージョンは、Datadog Agent による Python 3 のサポートが必要なため、Agent V6 以降でのみサポート可能です。Prometheus プラグインバージョンのインテグレーションを構成する前に、Agent がアップデートされていることを確認してください。*
 
 インスタンス構成で `prometheus_plugin` セクションを設定します。`prometheus_plugin` オプションを使用する場合、Management Plugin に関連する設定は無視されます。
 
@@ -112,7 +112,8 @@ _RabbitMQ v3.8 から、[Rabbitmq Prometheus Plugin][5] がデフォルトで有
        url: http://<HOST>:15692
  ```
 
-&nbsp;これにより、1 つの rabbitmq ノードで [`/metrics` エンドポイント][6]のスクレイピングが可能になります。
+これにより、1 つの RabbitMQ ノードで [`/metrics` エンドポイント][6]のスクレイピングが可能になります。また、[`/metrics/detailed` エンドポイント][7]からもデータを収集することができます。
+
 
 ##### [RabbitMQ Management Plugin][4]。
 
@@ -132,7 +133,7 @@ rabbitmqctl set_permissions  -p / datadog "^aliveness-test$" "^amq\.default$" ".
 rabbitmqctl set_user_tags datadog monitoring
 ```
 
-ここで、`/` はデフォルトのホストを表します。これを、指定した仮想ホスト名に設定してください。詳細については、[RabbitMQ のドキュメント][7]を参照してください。
+ここで、`/` はデフォルトのホストを表します。これを、指定した仮想ホスト名に設定してください。詳細については、[RabbitMQ のドキュメント][8]を参照してください。
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -220,7 +221,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 ### 検証
 
-[Agent の status サブコマンドを実行][8]し、Checks セクションで `rabbitmq` を探します。
+[Agent の status サブコマンドを実行][9]し、Checks セクションで `rabbitmq` を探します。
 
 ## 収集データ
 
@@ -236,15 +237,15 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
 ## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 
-- [RabbitMQ 監視のキーメトリクス][10]
-- [RabbitMQ 監視ツールでメトリクスを収集][11]
-- [Datadog を使用した RabbitMQ パフォーマンスの監視][12]
+- [RabbitMQ 監視のキーメトリクス][11]
+- [RabbitMQ 監視ツールでメトリクスを収集][12]
+- [Datadog を使用した RabbitMQ パフォーマンスの監視][13]
 
 ### Prometheus Plugin 移行ガイド
 
@@ -334,7 +335,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 ### よくあるご質問
 
-- [タグファミリーに基づいて RabbitMQ キューをタグ付け][13]
+- [タグファミリーに基づいて RabbitMQ キューをタグ付け][14]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/rabbitmq/images/rabbitmq_dashboard.png
@@ -343,10 +344,11 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 [4]: https://www.rabbitmq.com/management.html
 [5]: https://www.rabbitmq.com/prometheus.html
 [6]: https://www.rabbitmq.com/prometheus.html#default-endpoint
-[7]: https://www.rabbitmq.com/rabbitmqctl.8.html#set_permissions
-[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[9]: https://docs.datadoghq.com/ja/help/
-[10]: https://www.datadoghq.com/blog/rabbitmq-monitoring
-[11]: https://www.datadoghq.com/blog/rabbitmq-monitoring-tools
-[12]: https://www.datadoghq.com/blog/monitoring-rabbitmq-performance-with-datadog
-[13]: https://docs.datadoghq.com/ja/integrations/faq/tagging-rabbitmq-queues-by-tag-family/
+[7]: https://www.rabbitmq.com/prometheus.html#detailed-endpoint
+[8]: https://www.rabbitmq.com/rabbitmqctl.8.html#set_permissions
+[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[10]: https://docs.datadoghq.com/ja/help/
+[11]: https://www.datadoghq.com/blog/rabbitmq-monitoring
+[12]: https://www.datadoghq.com/blog/rabbitmq-monitoring-tools
+[13]: https://www.datadoghq.com/blog/monitoring-rabbitmq-performance-with-datadog
+[14]: https://docs.datadoghq.com/ja/integrations/faq/tagging-rabbitmq-queues-by-tag-family/
