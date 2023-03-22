@@ -12,7 +12,8 @@ To create a new support ticket, go to [https://help.datadoghq.com][1], and click
 
 [1]: https://help.datadoghq.com
 {{% /site-region %}}
-{{% region="gov" %}}
+
+{{% site-region region="gov" %}}
 To create a new support ticket, go to [https://help.dd-gov.com][1], and click **Submit a request** to fill out a ticket form.
 
 [1]: https://help.ddog-gov.com
