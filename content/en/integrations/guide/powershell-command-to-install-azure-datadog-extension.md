@@ -172,6 +172,8 @@ You can use Terraform to create and manage the Datadog Agent extension. Follow t
 {{% /tab %}}
 {{< /tabs >}}
 
+See the [Virtual Machine Extension resource][5] in the Terraform registry for additional information about the available arguments.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -180,3 +182,4 @@ You can use Terraform to create and manage the Datadog Agent extension. Follow t
 [2]: /integrations/azure/#deploy-agents
 [3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/?tab=agentv6v7
+[5]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_machine_extension
