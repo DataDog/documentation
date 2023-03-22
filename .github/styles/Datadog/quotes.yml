@@ -1,11 +1,9 @@
-extends: substitution
-message: "Use '%s' instead of '%s'."
-link: "https://github.com/DataDog/documentation/blob/master/CONTRIBUTING.md#words-and-phrases"
-ignorecase: true
-level: warning
+extends: existence
+message: Use straight quotes instead of smart quotes.
+level: error
 nonword: true
 action:
-  name: replace
-swap:
-  # bad: good
-  '\“': '\"'
+tokens:
+  - “
+  - ”
+  - ‘
