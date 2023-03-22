@@ -50,7 +50,9 @@ Agent のメインコンフィギュレーションファイル (`datadog.yaml`)
 @env DD_APM_MAX_TPS - 整数 - オプション - デフォルト: 10
 ```
 
-**注**: Agent で設定した traces-per-second サンプリングレートは、Datadog トレースライブラリにのみ適用されます。OpenTelemetry SDK など他のトレースライブラリには影響を与えません。
+**注**: 
+- PHP アプリケーションの場合は、代わりにトレーシングライブラリのユーザー定義ルールを使用してください。
+- Agent で設定した traces-per-second サンプリングレートは、PHP 以外の Datadog トレースライブラリにのみ適用されます。OpenTelemetry SDK など他のトレースライブラリには影響を与えません。
 
 Datadog Agent の[自動計算されたサンプリングレート](#in-the-agent)を使ってサンプリングされたトレースの全てのスパンには、取り込み理由 `auto` のタグが付けられています。 `ingestion_reason` タグは、[使用量メトリクス][2]にも設定されています。Datadog Agent のデフォルトのメカニズムを使用するサービスは、[Ingestion Control Page][5] の Configuration の列で `Automatic` とラベル付けされます。
 

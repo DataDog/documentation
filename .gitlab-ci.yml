@@ -450,3 +450,19 @@ set_redirect_metadata_preview:
   script:
     - in-isolation update_redirect_metadata
   interruptible: true
+  allow_failure: true
+
+set_redirect_metadata_live:
+  <<: *base_template
+  <<: *live_rules
+  variables:
+    BUCKET: "datadog-docs-live-hugo"
+    IS_REDIRECT_JOB: "true" 
+  stage: post-deploy
+  cache: []
+  environment: "live"
+  dependencies:
+    - build_live
+  script:
+    - in-isolation update_redirect_metadata
+  interruptible: true

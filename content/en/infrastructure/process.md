@@ -41,12 +41,12 @@ If you are using Agent 5, follow this [specific installation process][1]. If you
 {{< tabs >}}
 {{% tab "Linux/Windows" %}}
 
-Once the Datadog Agent is installed, enable Live Processes collection by editing the [Agent main configuration file][1] by setting the following parameter to `true`:
+Once the Datadog Agent is installed, enable Live Processes collection by editing the [Agent main configuration file][1] by setting the following parameter to `"true"`:
 
 ```yaml
 process_config:
   process_collection:
-    enabled: true
+    enabled: "true"
 ```
 
 The `enabled` value is a string with the following options:
