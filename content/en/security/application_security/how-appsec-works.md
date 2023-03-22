@@ -50,8 +50,8 @@ For Datadog ASM to be compatible with your Datadog configuration, you must have 
 ### Serverless monitoring
 
 <div class="alert alert-info">ASM support for AWS Lambda is in beta. Threat detection is done by using Datadog's lambda extension.</div>
- 
-Datadog ASM for AWS Lambda provides deep visibility into attackers targeting your functions. With distributed tracing providing a context-rich picture of the attack, you can assess the impact and remediate the threat effectively. 
+
+Datadog ASM for AWS Lambda provides deep visibility into attackers targeting your functions. With distributed tracing providing a context-rich picture of the attack, you can assess the impact and remediate the threat effectively.
 
 Read [Enabling ASM for Serverless][8] for information on setting it up.
 
@@ -83,8 +83,8 @@ Here are some examples of data that is flagged as sensitive by default:
 * `BEGIN PRIVATE KEY`
 * `ssh-rsa`
 
-To configure the information redacted by ASM, refer to the [data security configuration][25]
-  
+To configure the information redacted by ASM, refer to the [data security configuration][17]
+
 ## Threat detection methods
 
 Datadog uses multiple pattern sources, including the [OWASP ModSecurity Core Rule Set][12] to detect known threats and vulnerabilities in HTTP requests. When an HTTP request matches one of [the OOTB detection rules][13], a security signal is generated in Datadog.
