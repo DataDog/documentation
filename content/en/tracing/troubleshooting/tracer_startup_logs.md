@@ -8,13 +8,13 @@ further_reading:
 ---
 ## Startup logs
 
-Tracer startup logs capture all obtainable information at startup and log it as `DATADOG TRACER CONFIGURATION`, `DATADOG TRACER DIAGNOSTICS`, or `DATADOG CONFIGURATION` to simplify searching within your logs. 
+Tracer startup logs capture all obtainable information at startup and log it as `DATADOG TRACER CONFIGURATION`, `DATADOG TRACER DIAGNOSTICS`, or `DATADOG CONFIGURATION` to simplify searching within your logs.
 
-Some languages log to a separate file depending on language conventions and the safety of accessing `Stdout` or equivalent. In those cases, the location of logs are noted in the language tab below. Some languages don't log diagnostics entries, also noted below. 
+Some languages log to a separate file depending on language conventions and the safety of accessing `Stdout` or equivalent. In those cases, the location of logs are noted in the language tab below. Some languages don't log diagnostics entries, also noted below.
 
 `CONFIGURATION` logs are a JSON formatted representation of settings applied to your tracer. In languages where an Agent connectivity check is performed, the configuration JSON will also include an `agent_error` key, which indicates whether the Agent is reachable.
 
-`DIAGNOSTICS` log entries, in the languages that produce them, happen when the tracer encounters an error during application startup. If you see `DIAGNOSTICS` log lines, confirm from the indicated log that settings and configurations are applied correctly. 
+`DIAGNOSTICS` log entries, in the languages that produce them, happen when the tracer encounters an error during application startup. If you see `DIAGNOSTICS` log lines, confirm from the indicated log that settings and configurations are applied correctly.
 
 If you do not see logs at all, ensure that your application logs are not silenced and that your log level is at least `INFO` where applicable.
 
@@ -40,10 +40,12 @@ The Java tracer does not output Diagnostics logs.  For this check, run the trace
 
 Log files are saved in the following directories by default. Use the `DD_TRACE_LOG_DIRECTORY` setting to change these paths.
 
-| Platform | Path                                      |
-|----------|-------------------------------------------|
-| Windows  | `%ProgramData%\Datadog .NET Tracer\logs\` |
-| Linux    | `/var/log/datadog/dotnet/`                |
+| Platform                                             | Path                                             |
+|------------------------------------------------------|--------------------------------------------------|
+| Windows                                              | `%ProgramData%\Datadog .NET Tracer\logs\`        |
+| Linux                                                | `/var/log/datadog/dotnet/`                       |
+| Linux (when using [Kubernetes library injection][1]) | `/datadog-lib/logs`                              |
+| Azure App Service                                    | `%AzureAppServiceHomeDirectory%\LogFiles\datadog`|
 
 **Note:** On Linux, you must create the logs directory before you enable debug mode.
 
@@ -81,6 +83,7 @@ DATADOG TRACER DIAGNOSTICS - Failed to attach profiler: unable to set event mask
 DATADOG TRACER DIAGNOSTICS - Error fetching configuration {exception}
 ```
 
+[1]: /tracing/trace_collection/library_injection/?tab=kubernetes
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
@@ -198,7 +201,7 @@ DATADOG TRACER DIAGNOSTIC - Agent Error: Network error trying to reach the agent
 
 The Python tracer logs configuration information as INFO-level. It logs diagnostics information, if found, as ERROR.
 
-If there is no logging configuration, only Diagnostics will be output to `Stderr`. 
+If there is no logging configuration, only Diagnostics will be output to `Stderr`.
 
 To see tracer startup logs, either add a logger, or set `DD_TRACE_DEBUG=true` in your configuration and run your application with `ddtrace-run`. This adds a logger, and exposes both debug and startup tracer logs.
 
