@@ -6,11 +6,13 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-    - name: Checkout
-      uses: actions/checkout@master
+    - uses: actions/checkout@v3
     - name: Vale
-      uses: errata-ai/vale-action@v1.4.0
+      uses: errata-ai/vale-action@reviewdog
       with:
         onlyAnnotateModifiedLines: true
+        reporter: github-pr-check
+        fail_on_error: true
+        filter_mode: file
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
