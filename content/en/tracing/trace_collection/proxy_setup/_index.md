@@ -761,6 +761,7 @@ If using Kubernetes 1.18+, `appProtocol: tcp` can be added to the port specifica
 [10]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#configuration-1
 [11]: /tracing/setup/cpp/#environment-variables
 [12]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/#manual-protocol-selection
+[13]: https://istio.io/latest/docs/releases/supported-releases/#support-status-of-istio-releases
 {{% /tab %}}
 {{< /tabs >}}
 
