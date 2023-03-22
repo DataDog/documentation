@@ -587,7 +587,6 @@ variable. To define sampling rules in the Ingress Controller:
 [12]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/doc/sampling.md
 [13]: https://github.com/kubernetes/ingress-nginx
 [14]: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#main-snippet
-[15]: https://istio.io/latest/docs/releases/supported-releases/#support-status-of-istio-releases
 {{% /tab %}}
 {{% tab "Istio" %}}
 
