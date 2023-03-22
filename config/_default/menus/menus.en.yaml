@@ -2638,46 +2638,51 @@ main:
     parent: application_security
     identifier: appsec_getting_started
     weight: 2
+  - name: Library Compatibility
+    url: security/application_security/enabling/compatibility/
+    parent: appsec_getting_started
+    identifier: appsec_compat
+    weight: 201
   - name: Java
     url: security/application_security/enabling/java/
     parent: appsec_getting_started
     identifier: appsec_java
-    weight: 201
+    weight: 202
   - name: .NET
     url: security/application_security/enabling/dotnet/
     parent: appsec_getting_started
     identifier: appsec_dotnet
-    weight: 202
+    weight: 203
   - name: Go
     url: security/application_security/enabling/go/
     parent: appsec_getting_started
     identifier: appsec_go
-    weight: 203
+    weight: 204
   - name: Ruby
     url: security/application_security/enabling/ruby/
     parent: appsec_getting_started
     identifier: appsec_ruby
-    weight: 204
+    weight: 205
   - name: PHP
     url: security/application_security/enabling/php/
     parent: appsec_getting_started
     identifier: appsec_php
-    weight: 205
+    weight: 206
   - name: NodeJS
     url: security/application_security/enabling/nodejs/
     parent: appsec_getting_started
     identifier: appsec_nodejs
-    weight: 206
+    weight: 207
   - name: Python
     url: security/application_security/enabling/python/
     parent: appsec_getting_started
     identifier: appsec_python
-    weight: 207
+    weight: 208
   - name: Serverless
     url: security/application_security/enabling/serverless/
     parent: appsec_getting_started
     identifier: appsec_serverless
-    weight: 208
+    weight: 209
   - name: How It Works
     url: security/application_security/how-appsec-works/
     parent: application_security
