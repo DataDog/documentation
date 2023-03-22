@@ -26,9 +26,8 @@ Feature flag tracking is available in the RUM Browser SDK. To start, set up [RUM
 You can start collecting feature flag data for [custom feature flag management solutions](#custom-feature-flag-management), or using one of our integration partners. 
 
 We currently support integrations with:
-- [LaunchDarkly](#launchdarkly-integration)
-- [Split](#split-integration)
-- [Flagsmith](#flagsmith-integration)
+
+{{< partial name="rum/rum-feature-flag-tracking.html" >}}
 
 ### Custom feature flag management
 
