@@ -43,7 +43,7 @@ ENV DD_VERSION=1
 CMD ["/path/to/your-go-binary"]
 ```
 
-#### Install Tracing Library
+#### Install tracing library
 Follow [these instructions][2] to install and configure the Go tracing library in your application to capture and submit traces. 
 
 
@@ -78,7 +78,7 @@ ENTRYPOINT ["/app/datadog-init"]
 # execute your binary application wrapped in the entrypoint, launched by the Datadog trace library. Adapt this line to your needs
 CMD ["ddtrace-run", "python", "app.py"]
 ```
-#### Install Tracing Library
+#### Install tracing library
 Follow [these instructions][2] to install and configure the Python tracing library in your application to capture and submit traces. 
 
 [Sample code for a simple Python application][1].
@@ -116,7 +116,7 @@ ENTRYPOINT ["/app/datadog-init"]
 CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
 
 ```
-#### Install Tracing Library
+#### Install tracing library
 Follow [these instructions][2] to install and configure the Node tracing library in your application to capture and submit traces. 
 
 [Sample code for a simple Node.js application][1].
@@ -148,7 +148,7 @@ CMD ["./mvnw", "spring-boot:run"]
 
 ```
 
-#### Install Tracing Library
+#### Install tracing library
 Follow [these instructions][2] to install and configure the Java tracing library in your application to capture and submit traces. 
 
 [Sample code for a simple Java application][1].
@@ -180,7 +180,7 @@ CMD ["dotnet", "helloworld.dll"]
 
 ```
 
-#### Install Tracing Library
+#### Install tracing library
 Follow the instructions to install and configure the [.NET Core tracing library][1] and the [.NET Framework tracing library][2]. 
 
 [1]: /tracing/trace_collection/dd_libraries/dotnet-core?tab=containers#custom-instrumentation
@@ -210,7 +210,7 @@ CMD ["rails", "server", "-b", "0.0.0.0"] (adapt this line to your needs)
 
 ```
 
-#### Install Tracing Library
+#### Install tracing library
 
 Follow [these instructions][2] to install and configure the Ruby tracing library in your application to capture and submit traces. 
 
