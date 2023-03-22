@@ -207,14 +207,14 @@ The example below shows how to obtain the root span and add the relevant user mo
 $rootSpan = \DDTrace\root_span();
 
  // Required unique identifier of the user.
-$rootSpan->meta['usr.id'] = ‘123456789’;
+$rootSpan->meta['usr.id'] = '123456789';
 
 // All other fields are optional.
-$rootSpan->meta['usr.name'] = ‘Jean Example’;
-$rootSpan->meta['usr.email'] = ‘jean.example@example.com’;
-$rootSpan->meta['usr.session_id'] = ‘987654321’;
-$rootSpan->meta['usr.role'] = ‘admin’;
-$rootSpan->meta['usr.scope'] = ‘read:message, write:files’;
+$rootSpan->meta['usr.name'] = 'Jean Example';
+$rootSpan->meta['usr.email'] = 'jean.example@example.com';
+$rootSpan->meta['usr.session_id'] = '987654321';
+$rootSpan->meta['usr.role'] = 'admin';
+$rootSpan->meta['usr.scope'] = 'read:message, write:files';
 ?>
 ```
 
@@ -564,7 +564,7 @@ The following examples show how to track login events or custom events (using si
 {{% tab "Custom business logic" %}}
 ```php
 <?php
-\datadog\appsec\track_custom_event(‘users.signup’, [‘id’ => $id, 'email' => $email]);
+\datadog\appsec\track_custom_event('users.signup', ['id' => $id, 'email' => $email]);
 ?>
 ```
 {{% /tab %}}

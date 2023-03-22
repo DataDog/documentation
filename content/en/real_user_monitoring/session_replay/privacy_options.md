@@ -105,7 +105,7 @@ In order to protect end-user privacy, regardless of your privacy configuration, 
 
 `hidden` is an advanced privacy setting that completely hides specific elements instead of obscuring the text.
 
-If you are concerned about the number of visible elements in sensitive fields, enable ‘hidden’ for your specific elements. These HTML elements are replaced with a gray block at the time of recording.
+If you are concerned about the number of visible elements in sensitive fields, enable `hidden` for your specific elements. These HTML elements are replaced with a gray block at the time of recording.
 
 In this example replay session, the username in the Datadog navigation is obfuscated.
 
