@@ -24,14 +24,14 @@ The Log Stream displays a log flow matching the defined query.
 
 1. Enter a [search query][1] to filter the log stream.
 1. You can group logs into event subsets of [Log Analytics][2], which include `Patterns` and `Transactions`.
-1. Update the columns to display the values of your [facets][3] and [measures][3].
+1. Update the columns to display the values of your [facets][3] and [measures][4].
 1. Give your graph a title or leave the box blank for the suggested title.
 
 ## API
 
-This widget can be used with the **Dashboards API**. See [Dashboards API][4] for more details.
+This widget can be used with the **Dashboards API**. See [Dashboards API][5] for more details.
 
-The [widget JSON schema definition][5] for the log stream widget is:
+The [widget JSON schema definition][6] for the log stream widget is:
 
 {{< dashboards-widgets-api >}}
 
@@ -42,5 +42,6 @@ The [widget JSON schema definition][5] for the log stream widget is:
 [1]: /logs/explorer/search/
 [2]: /logs/explorer/analytics/
 [3]: /logs/explorer/facets/
-[4]: /api/latest/dashboards/
-[5]: /dashboards/graphing_json/widget_json/
+[4]: /logs/explorer/facets/#measures
+[5]: /api/latest/dashboards/
+[6]: /dashboards/graphing_json/widget_json/

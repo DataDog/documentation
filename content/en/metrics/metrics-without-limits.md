@@ -23,7 +23,7 @@ This page identifies key components of Metrics without Limits™ that can help y
 
 ### Configuration of tags
 
-Click on any metric name to open its details sidepanel. Then click **Manage Tags** -> **“Include Tags...”** to configure the tags you’d like to remain as queryable on dashboards and monitors. The tag configuration modal pre-populates by default with an allowlist of tags that have been actively queried on dashboards, notebooks, monitors, and through API in the past 30 days (colored in blue with an icon). You can also include your own additional tags. Before selecting **Save**, an estimated new volume of indexed custom metrics that results from this potential tag configuration is displayed.
+Click on any metric name to open its details sidepanel. Then click **Manage Tags** -> **"Include Tags..."** to configure the tags you’d like to remain as queryable on dashboards and monitors. The tag configuration modal pre-populates by default with an allowlist of tags that have been actively queried on dashboards, notebooks, monitors, and through API in the past 30 days (colored in blue with an icon). You can also include your own additional tags. Before selecting **Save**, an estimated new volume of indexed custom metrics that results from this potential tag configuration is displayed.
 
 {{< img src="metrics/mwl_tag_config.mp4" alt="Configuration of Tags" video=true >}}
 
@@ -84,7 +84,7 @@ Learn more about [Custom Metrics Billing][8].
 
 - [Role based access control][11] for Metrics without Limits™ is also available to control which users have permissions to use this feature that has billing implications.
 
-- Audit events allow you to track any tag configurations or percentile aggregations that have been made that may correlate with custom metrics spikes. Search for "tags:audit" and “queryable tag configuration” or “percentile aggregations” on your [Events Stream][12]
+- Audit events allow you to track any tag configurations or percentile aggregations that have been made that may correlate with custom metrics spikes. Search for "tags:audit" and "queryable tag configuration" or "percentile aggregations" on your [Events Stream][12]
 
 \*Metrics without Limits is a trademark of Datadog, Inc.
 

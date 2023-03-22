@@ -10,16 +10,16 @@ further_reading:
   tag: Guía
   text: Comandos del Agent
 kind: guía
-title: Página de estado de la v6 del Agent
+title: Página de estado del Agent v6
 ---
 
-La página de estado de la v6 del Agent muestra información sobre el Agent en ejecución. Consulta [Comandos del Agent][1] para encontrar el comando de estado para tu entorno. En las siguientes secciones encontrarás detalles sobre el contenido de la página de estado.
+La página de estado del Agent v6 muestra información sobre el Agent en ejecución. Consulta la página [Comandos del Agent][1] para encontrar el comando de estado adecuado para tu entorno. En las siguientes secciones, encontrarás más detalles sobre el contenido de la página de estado.
 
 **Nota**: La página de estado puede variar ligeramente entre las distintas versiones del Agent.
 
 ## Versión del Agent
 
-Se muestra información general del Agent debajo de la versión del Agent, por ejemplo:
+La información general del Agent se muestra debajo de la versión del Agent. Ejemplo:
 ```text
   Status date: 2019-08-29 18:16:41.526203 UTC
   Agent start: 2019-08-29 18:04:18.060507 UTC
@@ -32,7 +32,7 @@ Se muestra información general del Agent debajo de la versión del Agent, por e
 
 ### Rutas
 
-En esta sección se indican las rutas al archivo de configuración de Datadog, al directorio `conf.d` y al directorio `checks.d`, por ejemplo:
+En esta sección, se indican las rutas al archivo de configuración de Datadog, al directorio `conf.d` y al directorio `checks.d`. Ejemplo:
 ```text
     Config File: /etc/datadog-agent/datadog.yaml
     conf.d: /etc/datadog-agent/conf.d
@@ -41,15 +41,15 @@ En esta sección se indican las rutas al archivo de configuración de Datadog, a
 
 ### Relojes
 
-Esta sección muestra la [diferencia horaria con NTP][2] y la hora UTC del sistema, por ejemplo:
+Esta sección muestra la [diferencia horaria con NTP][2] y la hora UTC del sistema. Ejemplo:
 ```text
     NTP offset: 2.095ms
     System UTC time: 2019-08-29 18:16:41.526203 UTC
 ```
 
-### Información de host
+### Información sobre el host
 
-En esta sección se muestra información sobre el host en el que se está ejecutando el Agent, por ejemplo:
+En esta sección, se muestra información del host en el que se está ejecutando el Agent. Ejemplo:
 ```text
     bootTime: 2019-08-29 18:01:27.000000 UTC
     kernelVersion: 4.4.0-109-generic
@@ -65,7 +65,7 @@ En esta sección se muestra información sobre el host en el que se está ejecut
 
 ### Nombres de host
 
-En esta sección se muestran los nombres de host que ha encontrado el Agent (consulta los siguientes ejemplos). El `hostname` es el último nombre de host notificado al backend. Para obtener más información, consulta [¿Cómo determina Datadog el nombre de host del Agent?][3].
+En esta sección, se muestran los nombres de host que ha encontrado el Agent (consulta los siguientes ejemplos). El `hostname` es el último nombre de host notificado al backend. Para obtener más información, consulta [¿Cómo determina Datadog el nombre de host del Agent?][3].
 
 ```text
     hostname: ubuntu-xenial
@@ -78,11 +78,11 @@ En esta sección se muestran los nombres de host que ha encontrado el Agent (con
       gce: unable to retrieve hostname from GCE: Get http://169.254.169.254/computeMetadata/v1/instance/hostname: net/http: request canceled while waiting for connection (Client.Timeout exceeded while awaiting headers)
 ```
 
-## Recopilador
+## Collector
 
 ### Checks en ejecución
 
-En esta sección se muestra una lista de instancias de checks en ejecución, por ejemplo:
+En esta sección, se muestra una lista de instancias de checks en ejecución. Ejemplo:
 
 ```text
     load
@@ -103,16 +103,16 @@ Términos y descripciones:
 | Instance ID (ID de instancia)            | El ID de instancia y el estado del check.                     |
 | Total Runs (Total de ejecuciones)             | Número total de veces que se ha ejecutado la instancia.                  |
 | Metric Samples (Muestras de métricas)         | El número de métricas obtenidas.                                   |
-| Eventos                 | El número de eventos activados.                                  |
-| Checks de los servicios         | El número de checks de servicio notificados.                           |
+| Events (Eventos)                 | El número de eventos activados.                                  |
+| Service Checks (Checks de servicio)         | El número de checks de servicio notificados.                           |
 | Histogram Buckets (Buckets de histograma)      | El número de buckets de histograma enviados.                            |
 | Average Execution Time (Tiempo medio de ejecución) | El tiempo medio transcurrido para ejecutar la instancia.                      |
-| Last Run (Última ejecución)               | El número durante la última ejecución de un check.                            |
-| Total                  | El número total desde el inicio o reinicio más reciente del Agent. |
+| Last Run (Última ejecución)               | El número de elementos durante la última ejecución de un check.                            |
+| Total                  | El número total de elementos desde el inicio o reinicio más reciente del Agent. |
 
 ### Errores de configuración
 
-En esta sección solo se indica si hay checks con errores de configuración, por ejemplo:
+En esta sección, solo se indica si hay checks con errores de configuración. Ejemplo:
 
 ```text
     test
@@ -122,7 +122,7 @@ En esta sección solo se indica si hay checks con errores de configuración, por
 
 ### Errores de carga
 
-En esta sección solo se indica si hay checks con errores de carga, por ejemplo:
+En esta sección, solo se indica si hay checks con errores de carga. Ejemplo:
 
 ```text
     test
@@ -139,7 +139,7 @@ En esta sección solo se indica si hay checks con errores de carga, por ejemplo:
 
 ## JMXFetch
 
-En esta sección se muestra una lista de checks de JMX inicializados y fallidos, incluso si no hay checks, por ejemplo:
+En esta sección, se muestra una lista con los checks de JMX inicializados y otra con los fallidos, incluso si no hay checks. Ejemplo:
 
 ```text
   Initialized checks
@@ -153,13 +153,13 @@ En esta sección se muestra una lista de checks de JMX inicializados y fallidos,
 
 ## Forwarder
 
-El forwarder utiliza varios workers para enviar cargas útiles a Datadog.
+El Forwarder utiliza varios workers para enviar cargas útiles a Datadog.
 
-Si aparece la advertencia `the forwarder dropped transactions, there is probably an issue with your network`, significa que todos los workers están  ocupados. Deberías revisar tu rendimiento de red y ajustar las opciones`forwarder_num_workers` y `forwarder_timeout`.
+Si aparece la advertencia `the forwarder dropped transactions, there is probably an issue with your network`, significa que todos los workers están ocupados. Deberías revisar el rendimiento de tu red y ajustar las opciones`forwarder_num_workers` y `forwarder_timeout`.
 
 ### Transacciones
 
-En esta sección se muestran las transacciones realizadas por el forwarder, por ejemplo:
+En esta sección, se muestran las transacciones realizadas por el Forwarder. Ejemplo:
 
 ```text
     CheckRunsV1: 2
@@ -186,14 +186,14 @@ Términos y descripciones:
 |----------------|------------------------------------------------------------------------------|
 | Success (Correctas)        | El número de transacciones enviadas correctamente.                                |
 | Errors (Errores)         | El número de veces que falló el envío de una transacción y que esta se reintentó.         |
-| RetryQueueSize (Tamaño de cola de reintento) | El número actual de transacciones que se encuentran en espera de obtención.                    |
-| Retried (Reintentadas)        | El número de veces que se reintentó una transacción.                               |
+| RetryQueueSize (Tamaño de cola de reintento) | El número actual de transacciones que se encuentran en espera de reintentarse.                    |
+| Retried (Reintentos)        | El número de veces que se reintentó realizar una transacción.                               |
 | DroppedOnInput (Entradas abandonadas) | El número de transacciones que se abandonaron porque todos los workers estaban ocupados.  |
-| Dropped (Abandonadas)        | El número de transacciones que se abandonaron porque se reintentaron demasiadas veces. |
+| Dropped (Abandonos)        | El número de transacciones que se abandonaron porque se reintentaron demasiadas veces. |
 
-### Estado de claves de API
+### Estado de las claves de API
 
-En esta sección se indica el estado de la clave de API configurada, por ejemplo:
+En esta sección, se indica el estado de la clave de API configurada. Ejemplo:
 
 ```text
     API key ending with ab123: API Key valid
@@ -201,7 +201,7 @@ En esta sección se indica el estado de la clave de API configurada, por ejemplo
 
 ## Endpoints
 
-En esta sección se indica la lista de endpoints que está utilizando el Datadog Agent, por ejemplo:
+En esta sección, se indica la lista de endpoints que está utilizando el Datadog Agent. Ejemplo:
 
 ```text
   https://app.datadoghq.com - API Key ending with:
@@ -210,7 +210,7 @@ En esta sección se indica la lista de endpoints que está utilizando el Datadog
 
 ## Logs Agent
 
-Si está activado el Logs Agent, en esta sección se muestra información sobre los logs procesados y enviados, por ejemplo:
+Cuando está activado el Logs Agent, esta sección muestra información sobre los logs procesados y enviados. Ejemplo:
 
 ```text
     LogsProcessed: 10
@@ -219,7 +219,7 @@ Si está activado el Logs Agent, en esta sección se muestra información sobre 
 
 ## Aggregator
 
-En esta sección se muestra información sobre el aggregator del Agent, por ejemplo:
+En esta sección, se muestra información sobre la herramienta Aggregator del Agent. Ejemplo:
 
 ```text
   Checks Metric Sample: 399
@@ -238,17 +238,17 @@ Términos y descripciones:
 
 | Término                                         | Descripción                                                                                           |
 |----------------------------------------------|-------------------------------------------------------------------------------------------------------|
-| Checks Metric Sample (Muestra de métricas de checks)                         | El número total de métricas enviadas de los checks al aggregator.                                   |
-| Dogstatsd Metric Sample (Muestra de métricas de Dogstatsd)                      | El número total de métricas enviadas del servidor DogStatsD al aggregator.                         |
-| Event (Evento)                                        | El número total de eventos enviados al aggregator.                                                    |
-| Service Check (Check de servicios)                                | El número total de checks de servicios enviados al aggregator.                                            |
-| Flush (Vaciado)                                        | El número de veces que se vaciaron métricas agregadas al forwarder para el envío a Datadog.              |
-| Sketches Flushed (Sketchs vaciados)                             | El número de veces que se vaciaron métricas de distribución agregadas al forwarder para el envío a Datadog. |
-| Checks Histogram Bucket Metric Sample (Muestra de métricas de bucket de histograma de checks)        | El número de métricas de bucket de histograma enviadas de los checks al aggregator.                        |
+| Checks Metric Sample (Muestra de métricas de checks)                         | El número total de métricas enviadas de los checks al Aggregator.                                   |
+| Dogstatsd Metric Sample (Muestra de métricas de DogStatsD)                      | El número total de métricas enviadas del servidor DogStatsD al Aggregator.                         |
+| Event (Evento)                                        | El número total de eventos enviados al Aggregator.                                                    |
+| Service Check (Check de servicio)                                | El número total de checks de servicio enviados al Aggregator.                                            |
+| Flush (Vaciado)                                        | El número de veces que se vaciaron las métricas agregadas al Forwarder para enviarlas a Datadog.              |
+| Sketches Flushed (Bocetos vaciados)                             | El número de veces que se vaciaron métricas de distribución agregadas al Forwarder para enviarlas a Datadog. |
+| Checks Histogram Bucket Metric Sample (Muestra de métricas del bucket del histograma de checks)        | El número de métricas del bucket del histograma enviadas de los checks al Aggregator.                        |
 
 ## DogStatsD
 
-En esta sección se indica el número de paquetes recibidos por el servidor DogStatsD para cada tipo de datos y errores asociados, por ejemplo:
+En esta sección, se indica el número de paquetes recibidos por el servidor de DogStatsD para cada tipo de datos y errores asociados. Ejemplo:
 
 ```text
   Event Packets: 0
