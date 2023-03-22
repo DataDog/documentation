@@ -302,6 +302,13 @@ components:
       schema:
         example: ExampleTeamName
         type: string
+    IncidentTodoIDPathParameter:
+      description: The UUID of the incident todo.
+      in: path
+      name: todo_id
+      required: true
+      schema:
+        type: string
     MetricID:
       description: The name of the log-based metric.
       in: path
@@ -3706,7 +3713,7 @@ components:
           type: array
       type: object
     GetAllTeamsInclude:
-      description: Included related resources optionally requested
+      description: Included related resources optionally requested.
       enum:
       - team_links
       - user_team_permissions
@@ -5345,6 +5352,182 @@ components:
           nullable: false
           type: string
       type: object
+    IncidentTodoAnonymousAssignee:
+      description: Anonymous assignee entity.
+      properties:
+        icon:
+          description: URL for assignee's icon.
+          example: https://a.slack-edge.com/80588/img/slackbot_48.png
+          type: string
+        id:
+          description: Anonymous assignee's ID.
+          example: USLACKBOT
+          type: string
+        name:
+          description: Assignee's name.
+          example: Slackbot
+          type: string
+        source:
+          $ref: '#/components/schemas/IncidentTodoAnonymousAssigneeSource'
+      required:
+      - id
+      - icon
+      - name
+      - source
+      type: object
+    IncidentTodoAnonymousAssigneeSource:
+      default: slack
+      description: The source of the anonymous assignee.
+      enum:
+      - slack
+      - microsoft_teams
+      example: slack
+      type: string
+      x-enum-varnames:
+      - SLACK
+      - MICROSOFT_TEAMS
+    IncidentTodoAssignee:
+      description: A todo assignee.
+      example: '@test.user@test.com'
+      oneOf:
+      - $ref: '#/components/schemas/IncidentTodoAssigneeHandle'
+      - $ref: '#/components/schemas/IncidentTodoAnonymousAssignee'
+    IncidentTodoAssigneeArray:
+      description: Array of todo assignees.
+      items:
+        $ref: '#/components/schemas/IncidentTodoAssignee'
+      type: array
+    IncidentTodoAssigneeHandle:
+      description: Assignee's @-handle.
+      example: '@test.user@test.com'
+      type: string
+    IncidentTodoAttributes:
+      description: Incident todo's attributes.
+      properties:
+        assignees:
+          $ref: '#/components/schemas/IncidentTodoAssigneeArray'
+        completed:
+          description: Timestamp when the todo was completed.
+          example: '2023-03-06T22:00:00.000000+00:00'
+          nullable: true
+          type: string
+        content:
+          description: The follow-up task's content.
+          example: Restore lost data.
+          type: string
+        due_date:
+          description: Timestamp when the todo should be completed by.
+          example: '2023-07-10T05:00:00.000000+00:00'
+          nullable: true
+          type: string
+        incident_id:
+          description: UUID of the incident this todo is connected to.
+          example: 00000000-aaaa-0000-0000-000000000000
+          type: string
+      required:
+      - content
+      - assignees
+      type: object
+    IncidentTodoCreateData:
+      description: Incident todo data for a create request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentTodoAttributes'
+        type:
+          $ref: '#/components/schemas/IncidentTodoType'
+      required:
+      - type
+      - attributes
+      type: object
+    IncidentTodoCreateRequest:
+      description: Create request for an incident todo.
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentTodoCreateData'
+      required:
+      - data
+      type: object
+    IncidentTodoListResponse:
+      description: Response with a list of incident todos.
+      properties:
+        data:
+          description: An array of incident todos.
+          items:
+            $ref: '#/components/schemas/IncidentTodoResponseData'
+          type: array
+        included:
+          description: Included related resources that the user requested.
+          items:
+            $ref: '#/components/schemas/IncidentTodoResponseIncludedItem'
+          readOnly: true
+          type: array
+        meta:
+          $ref: '#/components/schemas/IncidentResponseMeta'
+      required:
+      - data
+      type: object
+    IncidentTodoPatchData:
+      description: Incident todo data for a patch request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentTodoAttributes'
+        type:
+          $ref: '#/components/schemas/IncidentTodoType'
+      required:
+      - type
+      - attributes
+      type: object
+    IncidentTodoPatchRequest:
+      description: Patch request for an incident todo.
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentTodoPatchData'
+      required:
+      - data
+      type: object
+    IncidentTodoResponse:
+      description: Response with an incident todo.
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentTodoResponseData'
+        included:
+          description: Included related resources that the user requested.
+          items:
+            $ref: '#/components/schemas/IncidentTodoResponseIncludedItem'
+          readOnly: true
+          type: array
+      required:
+      - data
+      type: object
+    IncidentTodoResponseData:
+      description: Incident todo response data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentTodoAttributes'
+        id:
+          description: The incident todo's ID.
+          example: 00000000-0000-0000-1234-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/IncidentTodoType'
+      required:
+      - id
+      - type
+      type: object
+    IncidentTodoResponseIncludedItem:
+      description: An object related to an incident todo that is included in the response.
+      oneOf:
+      - $ref: '#/components/schemas/User'
+      type: object
+    IncidentTodoType:
+      default: incident_todos
+      description: Todo resource type.
+      enum:
+      - incident_todos
+      example: incident_todos
+      type: string
+      x-enum-varnames:
+      - INCIDENT_TODOS
     IncidentType:
       default: incidents
       description: Incident resource type.
@@ -12698,7 +12881,7 @@ components:
           format: date-time
           type: string
         description:
-          description: Free-form markdown description/content for the Team's homepage
+          description: Free-form markdown description/content for the team's homepage
           type: string
         handle:
           description: The team's identifier
@@ -12721,7 +12904,7 @@ components:
           maxLength: 64
           type: string
         summary:
-          description: A brief summary of the team
+          description: A brief summary of the team, derived from the `description`
           maxLength: 120
           type: string
         user_count:
@@ -12751,7 +12934,7 @@ components:
       description: Team creation attributes
       properties:
         description:
-          description: Free-form markdown description/content for the Team's homepage
+          description: Free-form markdown description/content for the team's homepage
           type: string
         handle:
           description: The team's identifier
@@ -12831,7 +13014,6 @@ components:
         url:
           description: The URL for the link
           example: https://example.com
-          format: url
           type: string
       required:
       - label
@@ -12981,12 +13163,7 @@ components:
     TeamPermissionSettingValues:
       description: Possible values for action
       items:
-        description: Team permission setting value
-        enum:
-          $ref: '#/components/schemas/TeamPermissionSettingValue/enum'
-        type: string
-        x-enum-varnames:
-          $ref: '#/components/schemas/TeamPermissionSettingValue/x-enum-varnames'
+        $ref: '#/components/schemas/TeamPermissionSettingValue'
       readOnly: true
       type: array
     TeamPermissionSettingsResponse:
@@ -13046,7 +13223,7 @@ components:
           minimum: 0
           type: integer
         description:
-          description: Free-form markdown description/content for the Team's homepage
+          description: Free-form markdown description/content for the team's homepage
           type: string
         handle:
           description: The team's identifier
@@ -13063,10 +13240,6 @@ components:
           description: The name of the team
           example: Example Team
           maxLength: 64
-          type: string
-        summary:
-          description: A brief summary of the team
-          maxLength: 120
           type: string
       required:
       - handle
@@ -13611,7 +13784,7 @@ components:
       - type
       type: object
     UserTeamAttributes:
-      description: User team attributes
+      description: Team membership attributes
       properties:
         role:
           $ref: '#/components/schemas/UserTeamSerializerRole'
@@ -13686,6 +13859,25 @@ components:
       type: string
       x-enum-varnames:
       - TEAM_MEMBERSHIPS
+    UserTeamUpdate:
+      description: A user's relationship with a team
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UserTeamAttributes'
+        type:
+          $ref: '#/components/schemas/UserTeamType'
+      required:
+      - id
+      - type
+      type: object
+    UserTeamUpdateRequest:
+      description: Team membership request
+      properties:
+        data:
+          $ref: '#/components/schemas/UserTeamUpdate'
+      required:
+      - data
+      type: object
     UserTeamUserType:
       default: users
       description: User team user type
@@ -15962,6 +16154,223 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/incidents/{incident_id}/relationships/todos:
+    get:
+      description: Get all todos for an incident.
+      operationId: ListIncidentTodos
+      parameters:
+      - $ref: '#/components/parameters/IncidentIDPathParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentTodoListResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_read
+      summary: Get a list of an incident's todos
+      tags:
+      - Incidents
+      x-menu-order: 14
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Create an incident todo.
+      operationId: CreateIncidentTodo
+      parameters:
+      - $ref: '#/components/parameters/IncidentIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IncidentTodoCreateRequest'
+        description: Incident todo payload.
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentTodoResponse'
+          description: CREATED
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_write
+      summary: Create an incident todo
+      tags:
+      - Incidents
+      x-codegen-request-body-name: body
+      x-given:
+        incident_todo:
+          parameters:
+          - name: incident_id
+            source: incident.data.id
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"content\": \"Follow
+              up with customer about the impact they saw.\",\n      \"assignees\":
+              [\n        \"@test.user@test.com\",\n        {\n          \"icon\":
+              \"https://a.slack-edge.com/80588/img/slackbot_48.png\",\n          \"id\":
+              \"USLACKBOT\",\n          \"name\": \"Slackbot\",\n          \"source\":
+              \"slack\"\n        }\n      ]\n    },\n    \"type\": \"incident_todos\"\n
+              \ }\n}"
+          step: the "incident" has an "incident_todo"
+      x-menu-order: 15
+      x-undo:
+        operationId: DeleteIncidentTodo
+        parameters:
+        - name: incident_id
+          source: data.attributes.incident_id
+        - name: todo_id
+          source: data.id
+        type: unsafe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/incidents/{incident_id}/relationships/todos/{todo_id}:
+    delete:
+      description: Delete an incident todo.
+      operationId: DeleteIncidentTodo
+      parameters:
+      - $ref: '#/components/parameters/IncidentIDPathParameter'
+      - $ref: '#/components/parameters/IncidentTodoIDPathParameter'
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_write
+      summary: Delete an incident todo
+      tags:
+      - Incidents
+      x-menu-order: 18
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Get incident todo details.
+      operationId: GetIncidentTodo
+      parameters:
+      - $ref: '#/components/parameters/IncidentIDPathParameter'
+      - $ref: '#/components/parameters/IncidentTodoIDPathParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentTodoResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_read
+      summary: Get incident todo details
+      tags:
+      - Incidents
+      x-menu-order: 16
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    patch:
+      description: Update an incident todo.
+      operationId: UpdateIncidentTodo
+      parameters:
+      - $ref: '#/components/parameters/IncidentIDPathParameter'
+      - $ref: '#/components/parameters/IncidentTodoIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IncidentTodoPatchRequest'
+        description: Incident todo payload.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentTodoResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_write
+      summary: Update an incident todo
+      tags:
+      - Incidents
+      x-codegen-request-body-name: body
+      x-menu-order: 17
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/integration/opsgenie/services:
     get:
       description: Get a list of all services from the Datadog Opsgenie integration.
@@ -16651,8 +17060,8 @@ paths:
           parameters:
           - name: body
             value: "{\n  \"data\": {\n    \"type\": \"fastly-accounts\",\n    \"attributes\":
-              {\n      \"api_key\": \"{{ unique_alnum }}\",\n      \"name\": \"test-name\",\n
-              \     \"services\": []\n    }\n  }\n}"
+              {\n      \"api_key\": \"{{ unique_alnum }}\",\n      \"name\": \"{{
+              unique }}\",\n      \"services\": []\n    }\n  }\n}"
           step: there is a valid "fastly_account" in the system
       x-menu-order: 2
       x-undo:
@@ -19643,7 +20052,24 @@ paths:
 
         - Security Rules: `security-rule`
 
-        - Service Level Objectives: `slo`'
+        - Service Level Objectives: `slo`
+
+
+        #### Supported relations for resources
+
+        Resource Type            | Supported Relations
+
+        -------------------------|--------------------------
+
+        Connections              | `viewer`, `editor`, `resolver`
+
+        Dashboards               | `viewer`, `editor`
+
+        Notebooks                | `viewer`, `editor`
+
+        Security Rules           | `viewer`, `editor`
+
+        Service Level Objectives | `viewer`, `editor`'
       operationId: UpdateRestrictionPolicy
       parameters:
       - $ref: '#/components/parameters/ResourceID'
@@ -22638,7 +23064,10 @@ paths:
         type: safe
   /api/v2/team:
     get:
-      description: Get all teams
+      description: 'Get all teams.
+
+        Can be used to search for teams using the `filter[keyword]` and `filter[me]`
+        query parameters.'
       operationId: GetAllTeams
       parameters:
       - $ref: '#/components/parameters/PageNumber'
@@ -22648,7 +23077,8 @@ paths:
         name: sort
         schema:
           $ref: '#/components/schemas/GetAllTeamsSort'
-      - description: Included related resources optionally requested
+      - description: 'Included related resources optionally requested. Allowed enum
+          values: `team_links, user_team_permissions`'
         in: query
         name: include
         schema:
@@ -22661,7 +23091,7 @@ paths:
         name: filter[keyword]
         schema:
           type: string
-      - description: when true, only returns teams the current user belongs to
+      - description: When true, only returns teams the current user belongs to
         in: query
         name: filter[me]
         schema:
@@ -22678,14 +23108,19 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      summary: Get Teams
+      - AuthZ:
+        - teams_read
+      summary: Get all teams
       tags:
-      - Team
+      - Teams
       x-menu-order: 1
       x-undo:
         type: safe
     post:
-      description: Create a new team
+      description: 'Create a new team.
+
+        User IDs passed through the `users` relationship field will be added to the
+        team.'
       operationId: CreateTeam
       requestBody:
         content:
@@ -22694,12 +23129,12 @@ paths:
               $ref: '#/components/schemas/TeamCreateRequest'
         required: true
       responses:
-        '200':
+        '201':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/TeamResponse'
-          description: OK
+          description: CREATED
         '409':
           content:
             application/json:
@@ -22711,11 +23146,20 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
-      summary: Create New Team
+      - AuthZ:
+        - teams_read
+      summary: Create a team
       tags:
-      - Team
+      - Teams
       x-codegen-request-body-name: body
+      x-given:
+        dd_team:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"handle\": \"{{timestamp('now')}}\",\n
+              \     \"name\": \"{{timestamp('now')}}\"\n    },\n    \"type\": \"team\"\n
+              \ }\n}"
+          step: there is a valid "dd_team" in the system
       x-menu-order: 2
       x-undo:
         operationId: RemoveTeam
@@ -22725,7 +23169,7 @@ paths:
         type: unsafe
   /api/v2/team/{team_id}:
     delete:
-      description: Remove a team
+      description: Remove a team using the team's `id`.
       operationId: RemoveTeam
       parameters:
       - description: None
@@ -22748,15 +23192,16 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
-      summary: Remove Team
+      - AuthZ:
+        - teams_read
+      summary: Remove a team
       tags:
-      - Team
+      - Teams
       x-menu-order: 5
       x-undo:
         type: idempotent
     get:
-      description: Get a single team
+      description: Get a single team using the team's `id`.
       operationId: GetTeam
       parameters:
       - description: None
@@ -22783,14 +23228,20 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      summary: Get Team
+      - AuthZ:
+        - teams_read
+      summary: Get a team
       tags:
-      - Team
+      - Teams
       x-menu-order: 3
       x-undo:
         type: safe
     patch:
-      description: Update a team
+      description: 'Update a team using the team''s `id`.
+
+        If the `team_links` relationship is present, the associated links are updated
+        to be in the order they appear in the array, and any existing team links not
+        present are removed.'
       operationId: UpdateTeam
       parameters:
       - description: None
@@ -22835,16 +23286,18 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      summary: Update Team
+      - AuthZ:
+        - teams_read
+      summary: Update a team
       tags:
-      - Team
+      - Teams
       x-codegen-request-body-name: body
       x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v2/team/{team_id}/links:
     get:
-      description: Get all links for a given team
+      description: Get all links for a given team.
       operationId: GetTeamLinks
       parameters:
       - description: None
@@ -22871,14 +23324,16 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      summary: Get Team Links
+      - AuthZ:
+        - teams_read
+      summary: Get links for a team
       tags:
-      - Team
-      x-menu-order: 10
+      - Team links
+      x-menu-order: 1
       x-undo:
         type: safe
     post:
-      description: Add a new link to a team
+      description: Add a new link to a team.
       operationId: CreateTeamLink
       parameters:
       - description: None
@@ -22917,11 +23372,23 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      summary: Create a Team Link
+      - AuthZ:
+        - teams_read
+      summary: Create a team link
       tags:
-      - Team
+      - Team links
       x-codegen-request-body-name: body
-      x-menu-order: 11
+      x-given:
+        team_link:
+          parameters:
+          - name: team_id
+            source: dd_team.data.id
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"label\": \"{{unique}}\",\n
+              \     \"url\": \"https://example.com\",\n      \"position\": 0\n    },\n
+              \   \"type\": \"team_links\"\n  }\n}"
+          step: there is a valid "team_link" in the system
+      x-menu-order: 2
       x-undo:
         operationId: RemoveTeamLink
         parameters:
@@ -22932,7 +23399,7 @@ paths:
         type: unsafe
   /api/v2/team/{team_id}/links/{link_id}:
     delete:
-      description: Remove a link from a team
+      description: Remove a link from a team.
       operationId: RemoveTeamLink
       parameters:
       - description: None
@@ -22961,14 +23428,16 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      summary: Remove a Team Link
+      - AuthZ:
+        - teams_read
+      summary: Remove a team link
       tags:
-      - Team
-      x-menu-order: 14
+      - Team links
+      x-menu-order: 5
       x-undo:
         type: idempotent
     get:
-      description: Get a single link for a team
+      description: Get a single link for a team.
       operationId: GetTeamLink
       parameters:
       - description: None
@@ -23001,14 +23470,16 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      summary: Get a Team Link
+      - AuthZ:
+        - teams_read
+      summary: Get a team link
       tags:
-      - Team
-      x-menu-order: 12
+      - Team links
+      x-menu-order: 3
       x-undo:
         type: safe
     patch:
-      description: Update a team link
+      description: Update a team link.
       operationId: UpdateTeamLink
       parameters:
       - description: None
@@ -23047,11 +23518,13 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      summary: Update a Team Link
+      - AuthZ:
+        - teams_read
+      summary: Update a team link
       tags:
-      - Team
+      - Team links
       x-codegen-request-body-name: body
-      x-menu-order: 13
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v2/team/{team_id}/memberships:
@@ -23095,14 +23568,16 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      summary: Get Team Memberships
+      - AuthZ:
+        - teams_read
+      summary: Get team memberships
       tags:
-      - Team
-      x-menu-order: 6
+      - Team memberships
+      x-menu-order: 1
       x-undo:
         type: safe
     post:
-      description: Add a user to a team
+      description: Add a user to a team.
       operationId: CreateTeamMembership
       parameters:
       - description: None
@@ -23141,22 +23616,33 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      summary: Create Team Membership
+      - AuthZ:
+        - teams_read
+      summary: Add a user to a team
       tags:
-      - Team
+      - Team memberships
       x-codegen-request-body-name: body
-      x-menu-order: 7
+      x-given:
+        team_membership:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"role\": \"admin\"\n
+              \   },\n    \"relationships\": {\n      \"user\": {\n        \"data\":
+              {\n          \"id\": \"{{user.data.id}}\",\n          \"type\": \"users\"\n
+              \       }\n      }\n    },\n    \"type\": \"team_memberships\"\n  }\n}"
+          step: there is a valid "team_membership" in the system
+      x-menu-order: 2
       x-undo:
         operationId: RemoveTeamMembership
         parameters:
         - name: team_id
-          source: TODO
+          template: '{{team.data.id}}'
         - name: user_id
-          source: TODO
+          source: data.relationships.user.data.id
         type: unsafe
   /api/v2/team/{team_id}/memberships/{user_id}:
     delete:
-      description: Remove a user from a team
+      description: Remove a user from a team.
       operationId: RemoveTeamMembership
       parameters:
       - description: None
@@ -23185,14 +23671,16 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      summary: Remove Team Membership
+      - AuthZ:
+        - teams_read
+      summary: Remove a user from a team
       tags:
-      - Team
-      x-menu-order: 8
+      - Team memberships
+      x-menu-order: 3
       x-undo:
         type: idempotent
     patch:
-      description: Update a user's membership to a team
+      description: Update a user's role on a team.
       operationId: UpdateTeamMembership
       parameters:
       - description: None
@@ -23211,7 +23699,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UserTeamRequest'
+              $ref: '#/components/schemas/UserTeamUpdateRequest'
         required: true
       responses:
         '200':
@@ -23231,16 +23719,18 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      summary: Update Team Membership
+      - AuthZ:
+        - teams_read
+      summary: Update a user's role on a team
       tags:
-      - Team
+      - Team memberships
       x-codegen-request-body-name: body
-      x-menu-order: 9
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v2/team/{team_id}/permission-settings:
     get:
-      description: Get all team permission settings for a given team
+      description: Get all permission settings for a given team.
       operationId: GetTeamPermissionSettings
       parameters:
       - description: None
@@ -23267,15 +23757,17 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      summary: Get Team Permission Settings
+      - AuthZ:
+        - teams_read
+      summary: Get permission settings for a team
       tags:
-      - Team
-      x-menu-order: 15
+      - Team permission settings
+      x-menu-order: 1
       x-undo:
         type: safe
   /api/v2/team/{team_id}/permission-settings/{action}:
     put:
-      description: Update a team permission setting for a given team
+      description: Update a team permission setting for a given team.
       operationId: UpdateTeamPermissionSetting
       parameters:
       - description: None
@@ -23314,11 +23806,13 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      summary: Update Team Permission Setting
+      - AuthZ:
+        - teams_read
+      summary: Update permission setting for team
       tags:
-      - Team
+      - Team permission settings
       x-codegen-request-body-name: body
-      x-menu-order: 16
+      x-menu-order: 2
       x-undo:
         type: idempotent
   /api/v2/teams:
@@ -23846,7 +24340,9 @@ paths:
       - description: 'Comma separated list of product families to retrieve. Available
           families are `all`, `analyzed_logs`,
 
-          `application_security`, `audit_logs`, `serverless`, `ci_app`, `cloud_cost_management`,
+          `application_security`, `audit_logs`, `audit_trail`, `serverless`, `ci_app`,
+          `cloud_cost_management`,
+
           `cspm`, `custom_events`, `cws`, `dbm`, `fargate`,
 
           `infra_hosts`, `incident_management`, `indexed_logs`, `indexed_spans`, `ingested_spans`,
@@ -24733,8 +25229,14 @@ tags:
     use Datadog\u2019s API to\nmanage both test types programmatically.\n\nFor more
     information about Synthetics, see the [Synthetics overview](https://docs.datadoghq.com/synthetics/)."
   name: Synthetics
+- description: Manage a team's links.
+  name: Team links
+- description: Retrieve and update users' memberships to a team.
+  name: Team memberships
+- description: Retrieve and manage permission settings for teams.
+  name: Team permission settings
 - description: View and manage teams within Datadog.
-  name: Team
+  name: Teams
 - description: 'The usage metering API allows you to get hourly, daily, and
 
     monthly usage across multiple facets of Datadog.

@@ -221,11 +221,25 @@
       "description": "Create an incident attachment returns \"OK\" response"
     }
   ],
+  "CreateIncidentIntegration": [
+    {
+      "group": "incidents",
+      "suffix": "",
+      "description": "Create an incident integration metadata returns \"CREATED\" response"
+    }
+  ],
   "CreateIncident": [
     {
       "group": "incidents",
       "suffix": "",
       "description": "Create an incident returns \"CREATED\" response"
+    }
+  ],
+  "UpdateIncidentIntegration": [
+    {
+      "group": "incidents",
+      "suffix": "",
+      "description": "Update an existing incident integration metadata returns \"OK\" response"
     }
   ],
   "CreateAPIKey": [
@@ -665,6 +679,13 @@
       "group": "synthetics",
       "suffix": "_2850884405",
       "description": "Save on demand concurrency cap"
+    }
+  ],
+  "UpdateTeamMembership": [
+    {
+      "group": "team_memberships",
+      "suffix": "",
+      "description": "Update a user's role on a team returns \"Represents a user's association to a team\" response"
     }
   ],
   "CreateUser": [

@@ -225,6 +225,30 @@
     "request_description": "Incident integration metadata payload.",
     "request_schema_description": "Patch request for an incident integration metadata."
   },
+  "ListIncidentTodos": {
+    "description": "Get all todos for an incident.",
+    "summary": "Get a list of an incident's todos"
+  },
+  "CreateIncidentTodo": {
+    "description": "Create an incident todo.",
+    "summary": "Create an incident todo",
+    "request_description": "Incident todo payload.",
+    "request_schema_description": "Create request for an incident todo."
+  },
+  "DeleteIncidentTodo": {
+    "description": "Delete an incident todo.",
+    "summary": "Delete an incident todo"
+  },
+  "GetIncidentTodo": {
+    "description": "Get incident todo details.",
+    "summary": "Get incident todo details"
+  },
+  "UpdateIncidentTodo": {
+    "description": "Update an incident todo.",
+    "summary": "Update an incident todo",
+    "request_description": "Incident todo payload.",
+    "request_schema_description": "Patch request for an incident todo."
+  },
   "ListOpsgenieServices": {
     "description": "Get a list of all services from the Datadog Opsgenie integration.",
     "summary": "Get all service objects"
@@ -628,7 +652,7 @@
     "summary": "Get a restriction policy"
   },
   "UpdateRestrictionPolicy": {
-    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Connections: `connection`\n- Dashboards: `dashboard`\n- Notebooks: `notebook`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`",
+    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Connections: `connection`\n- Dashboards: `dashboard`\n- Notebooks: `notebook`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n\n#### Supported relations for resources\nResource Type            | Supported Relations\n-------------------------|--------------------------\nConnections              | `viewer`, `editor`, `resolver`\nDashboards               | `viewer`, `editor`\nNotebooks                | `viewer`, `editor`\nSecurity Rules           | `viewer`, `editor`\nService Level Objectives | `viewer`, `editor`",
     "summary": "Update a restriction policy",
     "request_description": "Restriction policy payload",
     "request_schema_description": "Update request for a restriction policy."
@@ -987,80 +1011,80 @@
     "request_schema_description": "On-demand concurrency cap attributes."
   },
   "GetAllTeams": {
-    "description": "Get all teams",
-    "summary": "Get Teams"
+    "description": "Get all teams.\nCan be used to search for teams using the `filter[keyword]` and `filter[me]` query parameters.",
+    "summary": "Get all teams"
   },
   "CreateTeam": {
-    "description": "Create a new team",
-    "summary": "Create New Team",
+    "description": "Create a new team.\nUser IDs passed through the `users` relationship field will be added to the team.",
+    "summary": "Create a team",
     "request_description": "",
     "request_schema_description": "Request to create a team"
   },
   "RemoveTeam": {
-    "description": "Remove a team",
-    "summary": "Remove Team"
+    "description": "Remove a team using the team's `id`.",
+    "summary": "Remove a team"
   },
   "GetTeam": {
-    "description": "Get a single team",
-    "summary": "Get Team"
+    "description": "Get a single team using the team's `id`.",
+    "summary": "Get a team"
   },
   "UpdateTeam": {
-    "description": "Update a team",
-    "summary": "Update Team",
+    "description": "Update a team using the team's `id`.\nIf the `team_links` relationship is present, the associated links are updated to be in the order they appear in the array, and any existing team links not present are removed.",
+    "summary": "Update a team",
     "request_description": "",
     "request_schema_description": "Team update request"
   },
   "GetTeamLinks": {
-    "description": "Get all links for a given team",
-    "summary": "Get Team Links"
+    "description": "Get all links for a given team.",
+    "summary": "Get links for a team"
   },
   "CreateTeamLink": {
-    "description": "Add a new link to a team",
-    "summary": "Create a Team Link",
+    "description": "Add a new link to a team.",
+    "summary": "Create a team link",
     "request_description": "",
     "request_schema_description": "Team link create request"
   },
   "RemoveTeamLink": {
-    "description": "Remove a link from a team",
-    "summary": "Remove a Team Link"
+    "description": "Remove a link from a team.",
+    "summary": "Remove a team link"
   },
   "GetTeamLink": {
-    "description": "Get a single link for a team",
-    "summary": "Get a Team Link"
+    "description": "Get a single link for a team.",
+    "summary": "Get a team link"
   },
   "UpdateTeamLink": {
-    "description": "Update a team link",
-    "summary": "Update a Team Link",
+    "description": "Update a team link.",
+    "summary": "Update a team link",
     "request_description": "",
     "request_schema_description": "Team link create request"
   },
   "GetTeamMemberships": {
     "description": "Get a paginated list of members for a team",
-    "summary": "Get Team Memberships"
+    "summary": "Get team memberships"
   },
   "CreateTeamMembership": {
-    "description": "Add a user to a team",
-    "summary": "Create Team Membership",
+    "description": "Add a user to a team.",
+    "summary": "Add a user to a team",
     "request_description": "",
     "request_schema_description": "Team membership request"
   },
   "RemoveTeamMembership": {
-    "description": "Remove a user from a team",
-    "summary": "Remove Team Membership"
+    "description": "Remove a user from a team.",
+    "summary": "Remove a user from a team"
   },
   "UpdateTeamMembership": {
-    "description": "Update a user's membership to a team",
-    "summary": "Update Team Membership",
+    "description": "Update a user's role on a team.",
+    "summary": "Update a user's role on a team",
     "request_description": "",
     "request_schema_description": "Team membership request"
   },
   "GetTeamPermissionSettings": {
-    "description": "Get all team permission settings for a given team",
-    "summary": "Get Team Permission Settings"
+    "description": "Get all permission settings for a given team.",
+    "summary": "Get permission settings for a team"
   },
   "UpdateTeamPermissionSetting": {
-    "description": "Update a team permission setting for a given team",
-    "summary": "Update Team Permission Setting",
+    "description": "Update a team permission setting for a given team.",
+    "summary": "Update permission setting for team",
     "request_description": "",
     "request_schema_description": "Team permission setting update request"
   },
