@@ -159,9 +159,9 @@ Next, configure the Go application to enable tracing.
 
 To enable tracing support:
 
-1. Uncomment the following imports in `apm-tutorial-golang/cmd/calendar/main.go`:
+1. Uncomment the following imports in `apm-tutorial-golang/cmd/notes/main.go`:
 
-   {{< code-block lang="go" >}}
+   {{< code-block lang="go" filename="cmd/notes/main.go">}}
      sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
      chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
      httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
@@ -170,24 +170,24 @@ To enable tracing support:
 
 1. In the `main()` function, uncomment the following lines:
 
-   {{< code-block lang="go" >}}
+   {{< code-block lang="go" filename="cmd/notes/main.go" >}}
    tracer.Start()
    defer tracer.Stop(){{< /code-block >}}
 
-   {{< code-block lang="go" >}}
+   {{< code-block lang="go" filename="cmd/notes/main.go" >}}
    client = httptrace.WrapClient(client, httptrace.RTWithResourceNamer(func(req *http.Request) string {
       return fmt.Sprintf("%s %s", req.Method, req.URL.Path)
-	})){{< /code-block >}}
+   })){{< /code-block >}}
 
-   {{< code-block lang="go" >}}
+   {{< code-block lang="go" filename="cmd/notes/main.go" >}}
    r.Use(chitrace.Middleware(chitrace.WithServiceName("notes"))){{< /code-block >}}
 
 1. In `setupDB()`, uncomment the following lines:
-   {{< code-block lang="go" >}}
+   {{< code-block lang="go" filename="cmd/notes/main.go" >}}
    sqltrace.Register("sqlite3", &sqlite3.SQLiteDriver{}, sqltrace.WithServiceName("db"))
    db, err := sqltrace.Open("sqlite3", "file::memory:?cache=shared"){{< /code-block >}}
 
-   {{< code-block lang="go" >}}
+   {{< code-block lang="go" filename="cmd/notes/main.go" >}}
    db, err := sql.Open("sqlite3", "file::memory:?cache=shared"){{< /code-block >}}
 
 1. The steps above enabled automatic tracing with fully supported libraries. In cases where code doesn't fall under a supported library, you can create spans manually.
@@ -196,23 +196,23 @@ To enable tracing support:
 
 1. The `makeSpanMiddleware` function in `notes/notesController.go` generates middleware that wraps a request in a span with the supplied name. Uncomment the following lines:
 
-   {{< code-block lang="go" disable_copy="true" collapsible="true" >}}
-     r.Get("/notes", nr.GetAllNotes)                // GET /notes
-     r.Post("/notes", nr.CreateNote)                // POST /notes
-     r.Get("/notes/{noteID}", nr.GetNoteByID)       // GET /notes/123
-     r.Put("/notes/{noteID}", nr.UpdateNoteByID)    // PUT /notes/123
-     r.Delete("/notes/{noteID}", nr.DeleteNoteByID) // DELETE /notes/123{{< /code-block >}}
+   {{< code-block lang="go" disable_copy="true" filename="notes/notesController.go" collapsible="true" >}}
+   r.Get("/notes", nr.GetAllNotes)                // GET /notes
+   r.Post("/notes", nr.CreateNote)                // POST /notes
+   r.Get("/notes/{noteID}", nr.GetNoteByID)       // GET /notes/123
+   r.Put("/notes/{noteID}", nr.UpdateNoteByID)    // PUT /notes/123
+   r.Delete("/notes/{noteID}", nr.DeleteNoteByID) // DELETE /notes/123{{< /code-block >}}
 
-   {{< code-block lang="go" disable_copy="true" collapsible="true" >}}
-     r.Get("/notes", makeSpanMiddleware("GetAllNotes", nr.GetAllNotes))               // GET /notes
-	  r.Post("/notes", makeSpanMiddleware("CreateNote", nr.CreateNote))                // POST /notes
-	  r.Get("/notes/{noteID}", makeSpanMiddleware("GetNote", nr.GetNoteByID))          // GET /notes/123
-	  r.Put("/notes/{noteID}", makeSpanMiddleware("UpdateNote", nr.UpdateNoteByID))    // PUT /notes/123
-	  r.Delete("/notes/{noteID}", makeSpanMiddleware("DeleteNote", nr.DeleteNoteByID)) // DELETE /notes/123{{< /code-block >}}
+   {{< code-block lang="go" disable_copy="true" filename="notes/notesController.go" collapsible="true" >}}
+   r.Get("/notes", makeSpanMiddleware("GetAllNotes", nr.GetAllNotes))               // GET /notes
+   r.Post("/notes", makeSpanMiddleware("CreateNote", nr.CreateNote))                // POST /notes
+   r.Get("/notes/{noteID}", makeSpanMiddleware("GetNote", nr.GetNoteByID))          // GET /notes/123
+   r.Put("/notes/{noteID}", makeSpanMiddleware("UpdateNote", nr.UpdateNoteByID))    // PUT /notes/123
+   r.Delete("/notes/{noteID}", makeSpanMiddleware("DeleteNote", nr.DeleteNoteByID)) // DELETE /notes/123{{< /code-block >}}
 
    Also remove the comment around the following import:
 
-   {{< code-block lang="go" disable_copy="true" collapsible="true" >}}
+   {{< code-block lang="go" disable_copy="true" filename="notes/notesController.go" collapsible="true" >}}
    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"{{< /code-block >}}
 
 1. The `doLongRunningProcess` function creates child spans from a parent context. Remove the comments to enable it:
@@ -230,17 +230,18 @@ To enable tracing support:
 1. The `privateMethod1` function demonstates creating a completely separate service from a context. Remove the comments to enable it:
 
    {{< code-block lang="go" filename="notes/notesHelper.go" disable_copy="true" collapsible="true" >}}
-   func privateMethod1(ctx context.Context) {
-	   childSpan, _ := tracer.StartSpanFromContext(ctx, "manualSpan1",
-		   tracer.SpanType("web"),
-		   tracer.ServiceName("noteshelper"),
-     )
-	   childSpan.SetTag(ext.ResourceName, "privateMethod1")
-	   defer childSpan.Finish()
+func privateMethod1(ctx context.Context) {
+   childSpan, _ := tracer.StartSpanFromContext(ctx, "manualSpan1",
+      tracer.SpanType("web"),
+      tracer.ServiceName("noteshelper"),
+   )
+   childSpan.SetTag(ext.ResourceName, "privateMethod1")
+   defer childSpan.Finish()
 
-     time.Sleep(30 * time.Millisecond)
-     log.Println("Hello from the custom privateMethod1 in Notes")
-   }{{< /code-block >}}
+   time.Sleep(30 * time.Millisecond)
+   log.Println("Hello from the custom privateMethod1 in Notes")
+}
+{{< /code-block >}}
 
    For more information on custom tracing, see [Go Custom Instrumentation][7].
 

@@ -84,20 +84,20 @@ If you're not familiar with Amazon ECR, a registry for container images, it migh
 In the sample project's `/docker` directory, run the following commands:
 
 1. Authenticate with ECR by supplying your username and password in this command:
-   {{< code-block lang="sh" >}}
+   {{< code-block lang="shell" >}}
 aws ecr get-login-password --region us-east-1 | docker login --username <YOUR_AWS_USER> --password-stdin <USER_CREDENTIALS>{{< /code-block >}}
 
 2. Build a Docker image for the sample apps, adjusting the platform setting to match yours:
-   {{< code-block lang="sh" >}}
+   {{< code-block lang="shell" >}}
 DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose -f service-docker-compose-ECS.yaml build{{< /code-block >}}
 
 3. Tag the containers with the ECR destination:
-   {{< code-block lang="sh" >}}
+   {{< code-block lang="shell" >}}
 docker tag docker_notes:latest <ECR_REGISTRY_URL>:notes
 docker tag docker_calendar:latest <ECR_REGISTRY_URL>:calendar{{< /code-block >}}
 
 4. Upload the container to the ECR registry:
-   {{< code-block lang="sh" >}}
+   {{< code-block lang="shell" >}}
 docker push <ECR_REGISTRY_URL>:notes
 docker push <ECR_REGISTRY_URL>:calendar{{< /code-block >}}
 
@@ -147,7 +147,7 @@ To start, use a Terraform script to deploy to AWS ECS:
       This command calls both the `notes` and `calendar` services.
 
 4. After you've seen the application running, run the following command to stop it and clean up the AWS resources so that you can enable tracing:
-   {{< code-block lang="sh" >}}
+   {{< code-block lang="shell" >}}
 terraform destroy{{< /code-block >}}
 
 
@@ -157,9 +157,9 @@ Next, configure the Go application to enable tracing.
 
 To enable tracing support:
 
-1. Tp enable automatic tracing, uncomment the following imports in `apm-tutorial-golang/cmd/calendar/main.go`:
+1. Tp enable automatic tracing, uncomment the following imports in `apm-tutorial-golang/cmd/notes/main.go`:
 
-   {{< code-block lang="go" >}}
+   {{< code-block lang="go" filename="cmd/notes/main.go">}}
      sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
      chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
      httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
@@ -168,24 +168,25 @@ To enable tracing support:
 
 1. In the `main()` function, uncomment the following lines:
 
-   {{< code-block lang="go" >}}
+   {{< code-block lang="go" filename="cmd/notes/main.go">}}
    tracer.Start()
    defer tracer.Stop(){{< /code-block >}}
 
    {{< code-block lang="go" >}}
    client = httptrace.WrapClient(client, httptrace.RTWithResourceNamer(func(req *http.Request) string {
       return fmt.Sprintf("%s %s", req.Method, req.URL.Path)
-	})){{< /code-block >}}
+   }))
+   {{< /code-block >}}
 
-   {{< code-block lang="go" >}}
+   {{< code-block lang="go" filename="cmd/notes/main.go">}}
    r.Use(chitrace.Middleware(chitrace.WithServiceName("notes"))){{< /code-block >}}
 
 1. In `setupDB()`, uncomment the following lines:
-   {{< code-block lang="go" >}}
+   {{< code-block lang="go" filename="cmd/notes/main.go">}}
    sqltrace.Register("sqlite3", &sqlite3.SQLiteDriver{}, sqltrace.WithServiceName("db"))
    db, err := sqltrace.Open("sqlite3", "file::memory:?cache=shared"){{< /code-block >}}
 
-   {{< code-block lang="go" >}}
+   {{< code-block lang="go" filename="cmd/notes/main.go">}}
    db, err := sql.Open("sqlite3", "file::memory:?cache=shared"){{< /code-block >}}
 
 1. The steps above enabled automatic tracing with fully supported libraries. In cases where code doesn't fall under a supported library, you can create spans manually.
@@ -194,23 +195,24 @@ To enable tracing support:
 
 1. The `makeSpanMiddleware` function in `notes/notesController.go` generates middleware that wraps a request in a span with the supplied name. Uncomment the following lines:
 
-   {{< code-block lang="go" disable_copy="true" collapsible="true" >}}
+   {{< code-block lang="go" disable_copy="true" filename="notes/notesController.go" collapsible="true" >}}
      r.Get("/notes", nr.GetAllNotes)                // GET /notes
      r.Post("/notes", nr.CreateNote)                // POST /notes
      r.Get("/notes/{noteID}", nr.GetNoteByID)       // GET /notes/123
      r.Put("/notes/{noteID}", nr.UpdateNoteByID)    // PUT /notes/123
      r.Delete("/notes/{noteID}", nr.DeleteNoteByID) // DELETE /notes/123{{< /code-block >}}
 
-   {{< code-block lang="go" disable_copy="true" collapsible="true" >}}
+   {{< code-block lang="go" disable_copy="true" filename="notes/notesController.go" collapsible="true" >}}
      r.Get("/notes", makeSpanMiddleware("GetAllNotes", nr.GetAllNotes))               // GET /notes
-	  r.Post("/notes", makeSpanMiddleware("CreateNote", nr.CreateNote))                // POST /notes
-	  r.Get("/notes/{noteID}", makeSpanMiddleware("GetNote", nr.GetNoteByID))          // GET /notes/123
-	  r.Put("/notes/{noteID}", makeSpanMiddleware("UpdateNote", nr.UpdateNoteByID))    // PUT /notes/123
-	  r.Delete("/notes/{noteID}", makeSpanMiddleware("DeleteNote", nr.DeleteNoteByID)) // DELETE /notes/123{{< /code-block >}}
+     r.Post("/notes", makeSpanMiddleware("CreateNote", nr.CreateNote))                // POST /notes
+     r.Get("/notes/{noteID}", makeSpanMiddleware("GetNote", nr.GetNoteByID))          // GET /notes/123
+     r.Put("/notes/{noteID}", makeSpanMiddleware("UpdateNote", nr.UpdateNoteByID))    // PUT /notes/123
+     r.Delete("/notes/{noteID}", makeSpanMiddleware("DeleteNote", nr.DeleteNoteByID)) // DELETE /notes/123
+   {{< /code-block >}}
 
    Also remove the comment around the following import:
 
-   {{< code-block lang="go" disable_copy="true" collapsible="true" >}}
+   {{< code-block lang="go" disable_copy="true" filename="notes/notesController.go" collapsible="true" >}}
    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"{{< /code-block >}}
 
 1. The `doLongRunningProcess` function creates child spans from a parent context. Remove the comments to enable it:
@@ -229,15 +231,15 @@ To enable tracing support:
 
    {{< code-block lang="go" filename="notes/notesHelper.go" disable_copy="true" collapsible="true" >}}
    func privateMethod1(ctx context.Context) {
-	   childSpan, _ := tracer.StartSpanFromContext(ctx, "manualSpan1",
-		   tracer.SpanType("web"),
-		   tracer.ServiceName("noteshelper"),
-     )
-	   childSpan.SetTag(ext.ResourceName, "privateMethod1")
-	   defer childSpan.Finish()
+    childSpan, _ := tracer.StartSpanFromContext(ctx, "manualSpan1",
+      tracer.SpanType("web"),
+      tracer.ServiceName("noteshelper"),
+    )
+    childSpan.SetTag(ext.ResourceName, "privateMethod1")
+    defer childSpan.Finish()
 
-     time.Sleep(30 * time.Millisecond)
-     log.Println("Hello from the custom privateMethod1 in Notes")
+    time.Sleep(30 * time.Millisecond)
+    log.Println("Hello from the custom privateMethod1 in Notes")
    }{{< /code-block >}}
 
    For more information on custom tracing, see [Go Custom Instrumentation][7].

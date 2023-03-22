@@ -55,14 +55,12 @@ This tutorial uses the `all-docker-compose.yaml` file, which builds containers f
 
 1. Build the application containers by running:
    {{< code-block lang="shell" >}}
-   docker-compose -f all-docker-compose.yaml build
-   {{< /code-block >}}
+   docker-compose -f all-docker-compose.yaml build{{< /code-block >}}
 
 1. Start the containers:
 
    {{< code-block lang="shell" >}}
-   docker-compose -f all-docker-compose.yaml up -d
-   {{< /code-block >}}
+   docker-compose -f all-docker-compose.yaml up -d{{< /code-block >}}
 
 1. Verify that the containers are running with the `docker ps` command. You should see something like this:
    {{< code-block lang="shell" disable_copy="true" >}}
@@ -74,72 +72,65 @@ This tutorial uses the `all-docker-compose.yaml` file, which builds containers f
 
 1. The sample `notes` application is a basic REST API that stores data in an in-memory database. Use `curl` to send a few API requests:
 
-`curl localhost:8080/notes`
-: Returns `[]` because there is nothing in the database yet
+   `curl localhost:8080/notes`
+   : Returns `[]` because there is nothing in the database yet
 
-`curl -X POST 'localhost:8080/notes?desc=hello'`
-: Adds a note with the description `hello` and an ID value of `1`. Returns `{"id":1,"description":"hello"}`.
+   `curl -X POST 'localhost:8080/notes?desc=hello'`
+   : Adds a note with the description `hello` and an ID value of `1`. Returns `{"id":1,"description":"hello"}`
 
-`curl localhost:8080/notes/1`
-: Returns the note with `id` value of `1`: `{"id":1,"description":"hello"}`
+   `curl localhost:8080/notes/1`
+   : Returns the note with `id` value of `1`: `{"id":1,"description":"hello"}`
 
-`curl -X POST 'localhost:8080/notes?desc=otherNote'`
-: Adds a note with the description `otherNote` and an ID value of `2`. Returns `{"id":2,"description":"otherNote"}`
+   `curl -X POST 'localhost:8080/notes?desc=otherNote'`
+   : Adds a note with the description `otherNote` and an ID value of `2`. Returns `{"id":2,"description":"otherNote"}`
 
-`curl localhost:8080/notes`
-: Returns the contents of the database: `[{"id":1,"description":"hello"},{"id";2,"description":"otherNote"}]`
+   `curl localhost:8080/notes`
+   : Returns the contents of the database: `[{"id":1,"description":"hello"},{"id";2,"description":"otherNote"}]`
 
-Run more API calls to see the application in action. When you're done, shut down and remove the containers:
-
-1. Stop the containers:
+1. Run more API calls to see the application in action. When you're done, shut down and remove the containers and make sure they've been removed:
    {{< code-block lang="shell" >}}
    docker-compose -f all-docker-compose.yaml down
-   {{< /code-block >}}
-
-1. Make sure all of the containers have been removed:
-   {{< code-block lang="shell" >}}
-   docker-compose -f all-docker-compose.yaml rm
-   {{< /code-block >}}
+   docker-compose -f all-docker-compose.yaml rm{{< /code-block >}}
 
 ## Enable tracing
 
 Next, configure the Go application to enable tracing. Because the Agent runs in a container, there's no need to install anything.
 
-To enable tracing support, uncomment the following imports in `apm-tutorial-golang/cmd/calendar/main.go`:
+To enable tracing support, uncomment the following imports in `apm-tutorial-golang/cmd/notes/main.go`:
 
-{{< code-block lang="go" >}}
-	sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
-	chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
-	httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
-	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+{{< code-block lang="go" filename="cmd/notes/main.go" >}}
+sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
+chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
+httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
+"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 {{< /code-block >}}
 
 In the `main()` function, uncomment the following lines:
 
-{{< code-block lang="go" >}}
+{{< code-block lang="go" filename="cmd/notes/main.go" >}}
 tracer.Start()
 defer tracer.Stop()
 {{< /code-block >}}
 
-{{< code-block lang="go" >}}
+{{< code-block lang="go" filename="cmd/notes/main.go" >}}
 client = httptrace.WrapClient(client, httptrace.RTWithResourceNamer(func(req *http.Request) string {
-		return fmt.Sprintf("%s %s", req.Method, req.URL.Path)
-	}))
+   return fmt.Sprintf("%s %s", req.Method, req.URL.Path)
+}))
 {{< /code-block >}}
 
-{{< code-block lang="go" >}}
+{{< code-block lang="go" filename="cmd/notes/main.go" >}}
 r.Use(chitrace.Middleware(chitrace.WithServiceName("notes")))
 {{< /code-block >}}
 
 In `setupDB()`, uncomment the following lines:
 
-{{< code-block lang="go" >}}
+{{< code-block lang="go" filename="cmd/notes/main.go" >}}
 sqltrace.Register("sqlite3", &sqlite3.SQLiteDriver{}, sqltrace.WithServiceName("db"))
 db, err := sqltrace.Open("sqlite3", "file::memory:?cache=shared")
 {{< /code-block >}}
 
 Uncomment the following line:
-{{< code-block lang="go" >}}
+{{< code-block lang="go" filename="cmd/notes/main.go" >}}
 db, err := sql.Open("sqlite3", "file::memory:?cache=shared")
 {{< /code-block >}}
 
@@ -148,7 +139,7 @@ db, err := sql.Open("sqlite3", "file::memory:?cache=shared")
 Add the Datadog Agent in the services section of your `all-docker-compose.yaml` file to add the Agent to your build:
 
 1. Uncomment the Agent configuration, and specify your own [Datadog API key][3]:
-   {{< code-block lang="yaml" >}}
+   {{< code-block lang="yaml" filename="docker/all-docker-compose.yaml">}}
      datadog-agent:
      container_name: datadog-agent
      image: "gcr.io/datadoghq/agent:latest"
@@ -166,7 +157,7 @@ Add the Datadog Agent in the services section of your `all-docker-compose.yaml` 
 1. Uncomment the `depends_on` fields for `datadog-agent` in the `notes` container.
 
 1. Observe that in the `notes` service section, the `DD_AGENT_HOST` environment variable is set to the hostname of the Agent container. Your `notes` container section should look like this:
-   {{< code-block lang="yaml" >}}
+   {{< code-block lang="yaml" filename="docker/all-docker-compose.yaml">}}
    notes:
     container_name: notes
     restart: always
@@ -197,8 +188,7 @@ Now that the Tracing Library is installed, spin up your application containers a
 
 {{< code-block lang="shell" >}}
 docker-compose -f all-docker-compose.yaml build
-docker-compose -f all-docker-compose.yaml up -d
-{{< /code-block >}}
+docker-compose -f all-docker-compose.yaml up -d{{< /code-block >}}
 
 To start generating and collecting traces, launch the application again with `make run`.
 
@@ -246,7 +236,7 @@ A `GET /notes` trace looks something like this:
 
 The tracing library enables the use of tags to help compile and display data accurately in the Datadog dashboard. This is done by enabling a few environment variables when running the application. The project Compose file that you set up earlier includes the environment variables `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`, which are set to enable [Unified Service Tagging][17]:
 
-{{< code-block lang="go" filename="all-docker-compose.yaml" disable_copy="true" >}}
+{{< code-block lang="go" filename="docker/all-docker-compose.yaml" disable_copy="true" >}}
 environment:
   - DD_API_KEY=<DD_API_KEY_HERE>
   - DD_APM_ENABLED=true
@@ -259,7 +249,7 @@ For more information on available configuration options, see [Configuring the Go
 
 Datadog has several fully supported libraries for Go that allow for automatic tracing when implemented in the code. In the `cmd/notes/main.go` file, you can see the `go-chi`, `sql`, and `http` libraries being aliased to the corresponding Datadog libraries: `chitrace`, `sqltrace`, and `httptrace` respectively:
 
-{{< code-block lang="go" filename="main.go" disable_copy="true" collapsible="true" >}}
+{{< code-block lang="go" filename="cmd/notes/main.go" disable_copy="true" collapsible="true" >}}
 import (
   ...
 
@@ -272,7 +262,7 @@ import (
 
 In `cmd/notes/main.go`, the Datadog libraries are initialized with the `WithServiceName` option. For example, the `chitrace` library is initialized as follows:
 
-{{< code-block lang="go" filename="main.go" disable_copy="true" collapsible="true" >}}
+{{< code-block lang="go" filename="cmd/notes/main.go" disable_copy="true" collapsible="true" >}}
 r := chi.NewRouter()
 r.Use(middleware.Logger)
 r.Use(chitrace.Middleware(chitrace.WithServiceName("notes")))
@@ -289,27 +279,27 @@ In cases where code doesn't fall under a supported library, you can create spans
 
 Remove the comments around the `makeSpanMiddleware` function in `notes/notesController.go`. It generates middleware that wraps a request in a span with the supplied name. To use this function, comment out the following lines:
 
-{{< code-block lang="go" disable_copy="true" collapsible="true" >}}
-  r.Get("/notes", nr.GetAllNotes)                // GET /notes
-	r.Post("/notes", nr.CreateNote)                // POST /notes
-	r.Get("/notes/{noteID}", nr.GetNoteByID)       // GET /notes/123
-	r.Put("/notes/{noteID}", nr.UpdateNoteByID)    // PUT /notes/123
-	r.Delete("/notes/{noteID}", nr.DeleteNoteByID) // DELETE /notes/123
+{{< code-block lang="go" filename="notes/notesController.go" disable_copy="true" collapsible="true" >}}
+r.Get("/notes", nr.GetAllNotes)                // GET /notes
+r.Post("/notes", nr.CreateNote)                // POST /notes
+r.Get("/notes/{noteID}", nr.GetNoteByID)       // GET /notes/123
+r.Put("/notes/{noteID}", nr.UpdateNoteByID)    // PUT /notes/123
+r.Delete("/notes/{noteID}", nr.DeleteNoteByID) // DELETE /notes/123
 {{< /code-block >}}
 
 Remove the comments around the following lines:
 
-{{< code-block lang="go" disable_copy="true" collapsible="true" >}}
-  r.Get("/notes", makeSpanMiddleware("GetAllNotes", nr.GetAllNotes))               // GET /notes
-	r.Post("/notes", makeSpanMiddleware("CreateNote", nr.CreateNote))                // POST /notes
-	r.Get("/notes/{noteID}", makeSpanMiddleware("GetNote", nr.GetNoteByID))          // GET /notes/123
-	r.Put("/notes/{noteID}", makeSpanMiddleware("UpdateNote", nr.UpdateNoteByID))    // PUT /notes/123
-	r.Delete("/notes/{noteID}", makeSpanMiddleware("DeleteNote", nr.DeleteNoteByID)) // DELETE /notes/123
+{{< code-block lang="go" disable_copy="true" filename="notes/notesController.go" collapsible="true" >}}
+r.Get("/notes", makeSpanMiddleware("GetAllNotes", nr.GetAllNotes))               // GET /notes
+r.Post("/notes", makeSpanMiddleware("CreateNote", nr.CreateNote))                // POST /notes
+r.Get("/notes/{noteID}", makeSpanMiddleware("GetNote", nr.GetNoteByID))          // GET /notes/123
+r.Put("/notes/{noteID}", makeSpanMiddleware("UpdateNote", nr.UpdateNoteByID))    // PUT /notes/123
+r.Delete("/notes/{noteID}", makeSpanMiddleware("DeleteNote", nr.DeleteNoteByID)) // DELETE /notes/123
 {{< /code-block >}}
 
 Also remove the comment around the following import:
 
-{{< code-block lang="go" disable_copy="true" collapsible="true" >}}
+{{< code-block lang="go" filename="notes/notesController.go" disable_copy="true" collapsible="true" >}}
 "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 {{< /code-block >}}
 
@@ -355,19 +345,19 @@ The sample project includes a second application called `calendar` that returns 
 
 To enable tracing in the calendar application:
 
-1. Uncomment the following lines in cmd/calendar/main.go:
-   {{< code-block lang="go" filename="notes/notesHelper.go" disable_copy="true" collapsible="true" >}}
+1. Uncomment the following lines in `cmd/calendar/main.go`:
+   {{< code-block lang="go" filename="cmd/calendar/main.go" disable_copy="true" collapsible="true" >}}
    chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
-     "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
    {{< /code-block >}}
 
-   {{< code-block lang="go" filename="notes/notesHelper.go" disable_copy="true" collapsible="true" >}}
+   {{< code-block lang="go" filename="cmd/calendar/main.go" disable_copy="true" collapsible="true" >}}
    tracer.Start()
-      defer tracer.Stop()
+   defer tracer.Stop()
    {{< /code-block >}}
 
-   {{< code-block lang="go" filename="notes/notesHelper.go" disable_copy="true" collapsible="true" >}}
-      r.Use(chitrace.Middleware(chitrace.WithServiceName("calendar")))
+   {{< code-block lang="go" filename="cmd/calendar/main.go" disable_copy="true" collapsible="true" >}}
+   r.Use(chitrace.Middleware(chitrace.WithServiceName("calendar")))
    {{< /code-block >}}
 
 1. Open `docker/all-docker-compose.yaml` and uncomment the `calendar` service to set up the Agent host and Unified Service Tags for the app and for Docker:
@@ -419,14 +409,12 @@ To enable tracing in the calendar application:
 
 1. Stop all running containers:
    {{< code-block lang="shell" >}}
-   docker-compose -f all-docker-compose.yaml down
-   {{< /code-block >}}
+   docker-compose -f all-docker-compose.yaml down{{< /code-block >}}
 
 1. Spin up your application containers:
    {{< code-block lang="shell" >}}
    docker-compose -f all-docker-compose.yaml build
-   docker-compose -f all-docker-compose.yaml up -d
-   {{< /code-block >}}
+   docker-compose -f all-docker-compose.yaml up -d{{< /code-block >}}
 
 1. Send a POST request with the `add_date` parameter:
    {{< code-block lang="go">}}curl -X POST 'localhost:8080/notes?desc=hello_again&add_date=y'{{< /code-block >}}

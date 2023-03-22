@@ -101,51 +101,63 @@ go get gopkg.in/DataDog/dd-trace-go.v1/ddtrace
 
 Now that the tracing library has been added to `go.mod`, enable tracing support.
 
-Uncomment the following imports in `apm-tutorial-golang/cmd/calendar/main.go`:
+Uncomment the following imports in `apm-tutorial-golang/cmd/notes/main.go`:
+{{< code-block lang="go" filename="cmd/notes/main.go" >}}
+  sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
+  chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
+  httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
+  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+  "fmt"
+{{< /code-block >}}
+
+Change the import:
+
 {{< code-block lang="go" >}}
-	sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
-	chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
-	httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
-	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+_ "github.com/mattn/go-sqlite3"
+{{< /code-block >}}
+
+to:
+{{< code-block lang="go" >}}
+"github.com/mattn/go-sqlite3"
 {{< /code-block >}}
 
 In the `main()` function, uncomment the following lines:
 
-{{< code-block lang="go" >}}
+{{< code-block lang="go" filename="cmd/notes/main.go">}}
 tracer.Start()
 defer tracer.Stop()
 {{< /code-block >}}
 
-{{< code-block lang="go" >}}
+{{< code-block lang="go" filename="cmd/notes/main.go">}}
 client = httptrace.WrapClient(client, httptrace.RTWithResourceNamer(func(req *http.Request) string {
 		return fmt.Sprintf("%s %s", req.Method, req.URL.Path)
 	}))
 {{< /code-block >}}
 
-{{< code-block lang="go" >}}
+{{< code-block lang="go" filename="cmd/notes/main.go">}}
 r.Use(chitrace.Middleware(chitrace.WithServiceName("notes")))
 {{< /code-block >}}
 
 In `setupDB()`, uncomment the following lines:
 
-{{< code-block lang="go" >}}
+{{< code-block lang="go" filename="cmd/notes/main.go">}}
 sqltrace.Register("sqlite3", &sqlite3.SQLiteDriver{}, sqltrace.WithServiceName("db"))
 db, err := sqltrace.Open("sqlite3", "file::memory:?cache=shared")
 {{< /code-block >}}
 
 Comment out the following line:
-{{< code-block lang="go" >}}
+{{< code-block lang="go" filename="cmd/notes/main.go">}}
 db, err := sql.Open("sqlite3", "file::memory:?cache=shared")
 {{< /code-block >}}
 
 Once you've made these changes, run:
-{{< code-block lang="go" >}}
+{{< code-block lang="shell" >}}
 go mod tidy
 {{< /code-block >}}
 
 ## Launch the Go application and explore automatic instrumentation
 
-To start generating and collecting traces, launch the application again with `make run`.
+To start generating and collecting traces, launch the application again with `make runNotes`.
 
 Use `curl` to again send requests to the application:
 
@@ -230,27 +242,27 @@ In cases where code doesn't fall under a supported library, you can create spans
 
 Remove the comments around the `makeSpanMiddleware` function in `notes/notesController.go`. It generates middleware that wraps a request in a span with the supplied name. To use this function, comment out the following lines:
 
-{{< code-block lang="go" disable_copy="true" collapsible="true" >}}
+{{< code-block lang="go" filename="notes/notesController.go" disable_copy="true" collapsible="true" >}}
   r.Get("/notes", nr.GetAllNotes)                // GET /notes
-	r.Post("/notes", nr.CreateNote)                // POST /notes
-	r.Get("/notes/{noteID}", nr.GetNoteByID)       // GET /notes/123
-	r.Put("/notes/{noteID}", nr.UpdateNoteByID)    // PUT /notes/123
-	r.Delete("/notes/{noteID}", nr.DeleteNoteByID) // DELETE /notes/123
+  r.Post("/notes", nr.CreateNote)                // POST /notes
+  r.Get("/notes/{noteID}", nr.GetNoteByID)       // GET /notes/123
+  r.Put("/notes/{noteID}", nr.UpdateNoteByID)    // PUT /notes/123
+  r.Delete("/notes/{noteID}", nr.DeleteNoteByID) // DELETE /notes/123
 {{< /code-block >}}
 
 Remove the comments around the following lines:
 
-{{< code-block lang="go" disable_copy="true" collapsible="true" >}}
+{{< code-block lang="go" filename="notes/notesController.go" disable_copy="true" collapsible="true" >}}
   r.Get("/notes", makeSpanMiddleware("GetAllNotes", nr.GetAllNotes))               // GET /notes
-	r.Post("/notes", makeSpanMiddleware("CreateNote", nr.CreateNote))                // POST /notes
-	r.Get("/notes/{noteID}", makeSpanMiddleware("GetNote", nr.GetNoteByID))          // GET /notes/123
-	r.Put("/notes/{noteID}", makeSpanMiddleware("UpdateNote", nr.UpdateNoteByID))    // PUT /notes/123
-	r.Delete("/notes/{noteID}", makeSpanMiddleware("DeleteNote", nr.DeleteNoteByID)) // DELETE /notes/123
+  r.Post("/notes", makeSpanMiddleware("CreateNote", nr.CreateNote))                // POST /notes
+  r.Get("/notes/{noteID}", makeSpanMiddleware("GetNote", nr.GetNoteByID))          // GET /notes/123
+  r.Put("/notes/{noteID}", makeSpanMiddleware("UpdateNote", nr.UpdateNoteByID))    // PUT /notes/123
+  r.Delete("/notes/{noteID}", makeSpanMiddleware("DeleteNote", nr.DeleteNoteByID)) // DELETE /notes/123
 {{< /code-block >}}
 
 Also remove the comment around the following import:
 
-{{< code-block lang="go" disable_copy="true" collapsible="true" >}}
+{{< code-block lang="go" filename="notes/notesController.go" disable_copy="true" collapsible="true" >}}
 "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 {{< /code-block >}}
 
@@ -286,6 +298,13 @@ func privateMethod1(ctx context.Context) {
 }
 {{< /code-block >}}
 
+Uncomment the following imports:
+
+{{< code-block lang="go" filename="notes/notesHelper.go" disable_copy="true" collapsible="true" >}}
+  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext"
+  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+{{< /code-block >}}
+
 For more information on custom tracing, see [Go Custom Instrumentation][12].
 
 ## Examine distributed traces
@@ -294,26 +313,26 @@ Tracing a single application is a great start, but the real value in tracing is 
 
 The sample project includes a second application called `calendar` that returns a random date whenever it is invoked. The `POST` endpoint in the notes application has a second query parameter named `add_date`. When it is set to `y`, the notes application calls the calendar application to get a date to add to the note.
 
-To enable tracing in the calendar application, uncomment the following lines in cmd/calendar/main.go:
+To enable tracing in the calendar application, uncomment the following lines in `cmd/calendar/main.go`:
 
-{{< code-block lang="go" filename="notes/notesHelper.go" disable_copy="true" collapsible="true" >}}
-chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
-	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+{{< code-block lang="go" filename="cmd/calendar/main.go" disable_copy="true" collapsible="true" >}}
+  chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
+  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 {{< /code-block >}}
 
-{{< code-block lang="go" filename="notes/notesHelper.go" disable_copy="true" collapsible="true" >}}
-tracer.Start()
-	defer tracer.Stop()
+{{< code-block lang="go" filename="cmd/calendar/main.go" disable_copy="true" collapsible="true" >}}
+  tracer.Start()
+  defer tracer.Stop()
 {{< /code-block >}}
 
-{{< code-block lang="go" filename="notes/notesHelper.go" disable_copy="true" collapsible="true" >}}
-	r.Use(chitrace.Middleware(chitrace.WithServiceName("calendar")))
+{{< code-block lang="go" filename="cmd/calendar/main.go" disable_copy="true" collapsible="true" >}}
+  r.Use(chitrace.Middleware(chitrace.WithServiceName("calendar")))
 {{< /code-block >}}
 
 1. If the notes application is still running, use make exitNotes to stop it.
 1. Run `make run` to start the sample application.
 1. Send a POST request with the `add_date` parameter:
-   {{< code-block lang="go">}}curl -X POST 'localhost:8080/notes?desc=hello_again&add_date=y'{{< /code-block >}}
+   {{< code-block lang="shell">}}curl -X POST 'localhost:8080/notes?desc=hello_again&add_date=y'{{< /code-block >}}
 
 1. In the Trace Explorer, click this latest `notes` trace to see a distributed trace between the two services:
    {{< img src="tracing/guide/tutorials/tutorial-go-host-distributed.png" alt="A flame graph for a distributed trace." style="width:100%;" >}}
