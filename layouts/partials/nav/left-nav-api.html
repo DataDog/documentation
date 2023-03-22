@@ -23,6 +23,17 @@
     {{ $currentEnURL = (print "/" (strings.TrimLeft (print "/" .Lang "/") $currentPage.RelPermalink)) }}
 {{ end }}
 
+{{$engMenu := (index .Sites.First.Menus $apiMenu) }}
+{{$dot.Scratch.Set "engMenuPad" slice}}
+{{ range $engMenu }}
+    {{ if and (.HasChildren) (ne $currentPage.CurrentSection.RelPermalink "/api/") }}
+        {{ range .Children }}
+            {{$dot.Scratch.Add "engMenuPad" .}}
+        {{ end }}
+    {{ end }}
+{{ end }}
+{{$engMenuPad := $dot.Scratch.Get "engMenuPad"}}
+
 <ul class="list-unstyled">
 {{ range $menu }}
     <!-- check if on /api/ top level section page, don't generate sub anchors if true -->
@@ -35,8 +46,17 @@
                 {{ range sort .Children ".Params.order" "asc"  }}
                     {{ $menuChild := . }}
                     <li class="row nav-item {{ if $currentPage.IsMenuCurrent $apiMenu . }}active{{ end }}">
-                        {{$parent := print .Parent "-"}}
-                        <a class="col nav-link d-inline-block" href="{{ if hasPrefix .URL "#" }}#{{ replace .Identifier $parent "" 1 }}{{ else }}{{ (strings.TrimLeft "/" .URL) | absLangURL }}{{ end }}" data-bs-target="#{{.Identifier}}">
+                        {{$identifier := .Identifier}}
+                        {{$dot.Scratch.Set "name" ""}}
+
+                        {{ range $engMenuItem := $engMenuPad  }}
+                            {{ if eq $engMenuItem.Identifier $identifier }}
+                            {{$dot.Scratch.Set "name" $engMenuItem.Name}}
+                            {{ end }}
+                        {{ end }}
+
+                        {{$engName := $dot.Scratch.Get "name"}}
+                        <a class="col nav-link d-inline-block" href='{{ if hasPrefix .URL "#" }}#{{ $engName | anchorize }}{{ else }}{{ (strings.TrimLeft "/" .URL) | absLangURL }}{{ end }}' data-bs-target="#{{.Identifier}}">
                           <span class="d-inline-block">{{ .Name }}</span>
                         </a>
                     </li>
