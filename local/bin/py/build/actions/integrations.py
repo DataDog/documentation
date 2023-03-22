@@ -28,7 +28,8 @@ from os.path import (
 from actions.format_link import format_link_file
 
 try:
-    from assetlib.constants import CLASSIFIER_TAGS, get_public_classifiers
+    from assetlib.classifiers import get_all_classifier_names, get_non_deprecated_classifier_names
+    CLASSIFIER_TAGS = get_all_classifier_names()
 except ImportError:
     CLASSIFIER_TAGS = []
     if getenv("CI_COMMIT_REF_NAME"):
@@ -39,7 +40,7 @@ finally:
         print(f'\x1b[33mWARNING\x1b[0m: CLASSIFIER_TAGS empty continuing without validation')
     else:
         with open('layouts/shortcodes/integration_categories.md', 'w') as file:
-            for tag in get_public_classifiers():
+            for tag in get_non_deprecated_classifier_names():
                 file.write(f'- {tag}\n')
             file.write("\n")
 
