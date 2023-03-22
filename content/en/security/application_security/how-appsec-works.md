@@ -102,7 +102,7 @@ Leveraging distributed tracing information, attacks attempts are qualified as sa
 ## Threat monitoring coverage
 
 
-Datadog ASM includes over 100 attack signatures that help protect against [many different kinds of attacks][15], including, but not limited to, the following categories:
+Datadog ASM includes over 100 attack signatures that help protect against [many different kinds of attacks][14], including, but not limited to, the following categories:
 
 * SQL injections
 * Code injections
