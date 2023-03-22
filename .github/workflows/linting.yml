@@ -10,7 +10,6 @@ jobs:
     - name: Vale
       uses: errata-ai/vale-action@reviewdog
       with:
-        onlyAnnotateModifiedLines: true
         reporter: github-pr-check
         fail_on_error: true
         filter_mode: file
