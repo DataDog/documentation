@@ -13,7 +13,7 @@ Cloud Security Posture Management is not currently available in this site.
 {{< /site-region >}}
 
 {{< callout url="#" btn_hidden="true" >}}
-  The CSPM Findings API is currently in private beta. To request access, contact <a href="/help/">Support</a>.
+  The CSPM Findings API is currently in private beta. To request access or provide feedback, contact <a href="/help/">Support</a>.
 {{< /callout >}} 
 
 
