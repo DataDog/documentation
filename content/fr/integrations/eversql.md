@@ -29,13 +29,13 @@ short_description: Optimisation automatique des requêtes SQL et des bases de do
   pour MySQL, PostgreSQL, Aurora
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Category::Monitoring
   - Category::Automation
@@ -81,10 +81,10 @@ MySQL, PostgreSQL, AWS Aurora, Google Cloud SQL, Azure DB, Percona et MariaDB.
 ### Configuration
 Pour accélérer les requêtes SQL lentes identifiées par Datadog :
 1. Accédez au dashboard [Database Monitoring de Datadog][4] et repérez la table des requêtes SQL lentes.
-2. Ajoutez un filtre correspondant à la base de données qui vous intéresse, puis triez les données en fonction d'une métrique de performances pertinente, telle que la latence moyenne.
+2. Filtrez les données en fonction de la base de données qui vous intéresse, puis triez-les en fonction d'une métrique de performances pertinente, telle que la latence moyenne.
 3. Après avoir identifié la requête SQL que vous souhaitez accélérer, copiez-la depuis Datadog.
 4. Accédez à [EverSQL][2] et collez la requête SQL dans le processus d'optimisation de requête.
-5. À partir du rapport d'optimisation, copiez et créez les index optimaux dans votre base de données.
+5. À partir du rapport d'optimisation, copiez et créez les index optimisés dans votre base de données.
 6. Copiez la nouvelle requête optimisée dans le code de votre application.
 
 ## Données collectées

@@ -72,7 +72,7 @@ You can either embed the URL in an HTTP header (recommended), or embed it in a `
 Datadog recommends embedding the Content Security Policy in an HTTP header. You can either use the `report-uri` directive or the `report-to` directive. The `report-to` directive will eventually supersede `report-uri`, but is not yet supported by all browsers.
 
 - If you're using the `report-uri` directive:
-  ```shell
+  ```bash
   Content-Security-Policy: ...; report-uri https://csp-report.browser-intake-datadoghq.com/api/v2/logs?dd-api-key=<client -token>&dd-evp-origin=content-security-policy&ddsource=csp-report
   ```
 

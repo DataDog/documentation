@@ -49,7 +49,7 @@ public_title: Agora Analytics
 short_description: Datadog で Agora Analytics Collector のメトリクスを表示する
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
@@ -58,7 +58,7 @@ tile:
   - Category::Collaboration
   - Offering::Integration
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Submitted Data Type::Metrics
   configuration: README.md#Setup

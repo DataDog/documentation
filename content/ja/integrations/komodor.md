@@ -27,13 +27,13 @@ public_title: Komodor Automation
 short_description: K8s のランドスケープとスタック全体の変更点を追跡する
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Offering::Integration
   configuration: README.md#Setup
