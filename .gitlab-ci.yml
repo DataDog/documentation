@@ -91,7 +91,7 @@ before_script:
       when: on_success
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:webops-site-build-13890255
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:webops-site-build-14254610
   tags:
     - "arch:amd64"
   rules:
@@ -441,14 +441,14 @@ set_redirect_metadata_preview:
   <<: *preview_rules
   variables:
     BUCKET: "datadog-docs-preview"
-    IS_REDIRECT_JOB: "true" 
+    SET_REDIRECTS_PREVIEW: "true"
   stage: post-deploy
   cache: []
   environment: "preview"
   dependencies:
     - build_preview
   script:
-    - in-isolation update_redirect_metadata
+    - run_update_redirect_metadata
   interruptible: true
   allow_failure: true
 
@@ -457,12 +457,11 @@ set_redirect_metadata_live:
   <<: *live_rules
   variables:
     BUCKET: "datadog-docs-live-hugo"
-    IS_REDIRECT_JOB: "true" 
   stage: post-deploy
   cache: []
   environment: "live"
   dependencies:
     - build_live
   script:
-    - in-isolation update_redirect_metadata
+    - run_update_redirect_metadata
   interruptible: true
