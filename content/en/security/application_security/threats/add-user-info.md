@@ -17,25 +17,15 @@ further_reading:
 
 Instrument your services and track user activity to detect and block bad actors.
 
-[Add authenticated user information on traces][2] to identify and block bad actors targeting your authenticated attack surface. To do this, set the user ID tag on the running APM trace, providing the necessary instrumentation for ASM to block authenticated attackers. This allows ASM to associate attacks and business logic events to users.
+Add authenticated user information on traces to identify and block bad actors targeting your authenticated attack surface. To do this, set the user ID tag on the running APM trace, providing the necessary instrumentation for ASM to block authenticated attackers. This allows ASM to associate attacks and business logic events to users.
 
-[Track user logins and activity][3] to detect account takeovers and business logic abuse with out-of-the-box detection rules, and to ultimately block attackers.
+Track user logins to detect account takeovers with out-of-the-box detection rules, and to ultimately block attackers.
 
-The custom user activity for which out-of-the-box detection rules are available are as follow:
-
-| Built-in event names   | Required metadata                                    | Related rules                                                                                                                                                                                                       |
-|------------------------|------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `activity.sensitive`   | `{ "name": "coupon_use", "required_role": "user" }`  | [Rate limited activity from IP](https://docs.datadoghq.com/security/default_rules/bl-rate-limiting/)<br>[Unauthorized activity detected](https://docs.datadoghq.com/security/default_rules/bl-privilege-violation/) |
-| `users.login.success`  | User ID is mandatory, optional metadata can be added | [Credential Stuffing attack](https://docs.datadoghq.com/security/default_rules/appsec-ato-groupby-ip/)                                                                                                              |
-| `users.login.failure`  | User ID is mandatory, optional metadata can be added | [Credential Stuffing attack](https://docs.datadoghq.com/security/default_rules/appsec-ato-groupby-ip/)                                                                                                              |
-| `users.signup`         | `{ "usr.id": "12345" }`                              | [Excessive account creations from an IP](https://docs.datadoghq.com/security/default_rules/bl-signup-ratelimit/)                                                                                                    |
-| `users.delete`         | `{ "usr.id": "12345" }`                              | [Excessive account deletion from an IP](https://docs.datadoghq.com/security/default_rules/bl-account-deletion-ratelimit/)                                                                                           |
-| `users.password_reset` | `{ "usr.id": "12345", "exists": true }`              | [Password reset brute force attempts](https://docs.datadoghq.com/security/default_rules/bl-password-reset/)                                                                                                         |
-| `payment.attempt`      | `{ "status": "failed" }`                             | [Excessive payment failures from IP](https://docs.datadoghq.com/security/default_rules/bl-payment-failures/)                                                                                                        |
+Track additional business logic and create your own detection rules to prevent business logic abuse.
 
 ## Adding authenticated user information to traces and enabling user blocking capability
 
-You can [add custom tags to your root span][3], or use the instrumentation functions described below. 
+You can [add custom tags to your root span][1], or use the instrumentation functions described below. 
 
 {{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
 
@@ -71,6 +61,7 @@ Blocking
     .forUser("d131dd02c56eec4")
     .blockIfMatch();
 ```
+
 
 [1]: /tracing/trace_collection/compatibility/java/#setup
 {{< /programming-lang >}}
@@ -667,7 +658,6 @@ track_user_login_failure_event(tracer, "userid", exists, metadata)
 {{% /tab %}}
 
 {{% tab "Custom business logic" %}}
-
 ```python
 from ddtrace.appsec.trace_utils import track_custom_event
 from ddtrace import tracer
@@ -688,6 +678,3 @@ track_custom_event(tracer, event_name, metadata)
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/trace_collection/custom_instrumentation/
-[2]: /security/application_security/threats/add-user-info/#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability
-[3]: /security/application_security/threats/add-user-info/#adding-user-events-login-success-login-failure-any-business-logic-to-traces
-
