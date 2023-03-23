@@ -151,7 +151,7 @@ After you perform these steps, your Agent requests its configuration from Datado
 
 [1]: /getting_started/site/
 [2]: /help/
-[3]: /account_management/api-app-keys/
+[3]: /account_management/rbac/permissions#api-and-application-keys
 [4]: https://app.datadoghq.com/organization-settings/remote-config
 [5]: /security/default_rules/#cat-workload-security
 [6]: /tracing/trace_pipeline/ingestion_controls/#managing-ingestion-for-all-services-at-the-agent-level
