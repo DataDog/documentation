@@ -1,20 +1,15 @@
 ---
-title: アラートグラフウィジェット
-kind: documentation
-description: システムで定義されているモニターの現在のステータスをグラフ化する
 aliases:
-  - /ja/graphing/widgets/alert_graph/
+- /ja/graphing/widgets/alert_graph/
+description: システムで定義されているモニターの現在のステータスをグラフ化する
 further_reading:
-  - link: /dashboards/screenboards/
-    tag: ドキュメント
-    text: スクリーンボード
-  - link: /dashboards/timeboards/
-    tag: ドキュメント
-    text: Timeboards
-  - link: /dashboards/graphing_json/
-    tag: ドキュメント
-    text: JSON を使用したダッシュボードの構築
+- link: /ja/dashboards/graphing_json/
+  tag: ドキュメント
+  text: JSON を使用したダッシュボードの構築
+kind: documentation
+title: アラートグラフウィジェット
 ---
+
 アラートグラフは、システムで定義されているほとんどのモニターの現在のステータスを表示する時系列グラフです。
 
 {{< img src="dashboards/widgets/alert_graph/alert_graph.png" alt="アラートグラフ" >}}
@@ -23,8 +18,6 @@ further_reading:
 
 ## セットアップ
 
-{{< img src="dashboards/widgets/alert_graph/alert_graph_setup.png" alt="アラートグラフのセットアップ"  style="width:80%;">}}
-
 ### コンフィギュレーション
 
 1. これまでに作成したモニターから、グラフ化するモニターを選択します。
@@ -32,28 +25,6 @@ further_reading:
 3. 次のいずれかの可視化方法を選択します。
     * Timeseries
     * Toplist
-
-### オプション
-
-#### 表示設定
-
-{{< img src="dashboards/widgets/options/display_preferences.png" alt="表示設定"  style="width:80%;">}}
-
-##### グローバルタイム
-
-スクリーンボードの場合にのみ、ウィジェットがカスタムタイムフレームを持つか、スクリーンボードのグローバルタイムフレームを持つかを選択します。
-
-##### 凡例
-
-Show legend on graph を使用して、ウィジェットの凡例の表示/非表示を切り替えます。オプションで、表示するエントリ数を選択できます。
-
-#### タイトル
-
-`Show a Title` チェックボックスをオンにして、ウィジェットのカスタムタイトルを表示します。
-
-{{< img src="dashboards/widgets/options/title.png" alt="ウィジェットのタイトル"  style="width:80%;">}}
-
-オプションで、サイズと配置を定義できます。
 
 ## API
 
@@ -67,5 +38,5 @@ Show legend on graph を使用して、ウィジェットの凡例の表示/非�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/api/v1/dashboards/
+[1]: /ja/api/latest/dashboards/
 [2]: /ja/dashboards/graphing_json/widget_json/
