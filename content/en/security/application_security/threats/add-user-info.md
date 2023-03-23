@@ -25,13 +25,13 @@ The custom user activity for which out-of-the-box detection rules are available 
 
 | Built-in event names   | Required metadata                                    | Related rules                                                                                                                                                                                                       |
 |------------------------|------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `activity.sensitive`   | `{ "name": "coupon_use", "required_role": "user" }`  | [Rate limited activity from IP](https://docs.datadoghq.com/security/default_rules/bl-rate-limiting/)<br>[Unauthorized activity detected](https://docs.datadoghq.com/security/default_rules/bl-privilege-violation/) |
-| `users.login.success`  | User ID is mandatory, optional metadata can be added | [Credential Stuffing attack](https://docs.datadoghq.com/security/default_rules/appsec-ato-groupby-ip/)                                                                                                              |
-| `users.login.failure`  | User ID is mandatory, optional metadata can be added | [Credential Stuffing attack](https://docs.datadoghq.com/security/default_rules/appsec-ato-groupby-ip/)                                                                                                              |
-| `users.signup`         | `{ "usr.id": "12345" }`                              | [Excessive account creations from an IP](https://docs.datadoghq.com/security/default_rules/bl-signup-ratelimit/)                                                                                                    |
-| `users.delete`         | `{ "usr.id": "12345" }`                              | [Excessive account deletion from an IP](https://docs.datadoghq.com/security/default_rules/bl-account-deletion-ratelimit/)                                                                                           |
-| `users.password_reset` | `{ "usr.id": "12345", "exists": true }`              | [Password reset brute force attempts](https://docs.datadoghq.com/security/default_rules/bl-password-reset/)                                                                                                         |
-| `payment.attempt`      | `{ "status": "failed" }`                             | [Excessive payment failures from IP](https://docs.datadoghq.com/security/default_rules/bl-payment-failures/)                                                                                                        |
+| `activity.sensitive`   | `{ "name": "coupon_use", "required_role": "user" }`  | [Rate limited activity from IP][4]<br>[Unauthorized activity detected][5] |
+| `users.login.success`  | User ID is mandatory, optional metadata can be added | [Credential Stuffing attack][6]                                                                                                              |
+| `users.login.failure`  | User ID is mandatory, optional metadata can be added | [Credential Stuffing attack][6]                                                                                                              |
+| `users.signup`         | `{ "usr.id": "12345" }`                              | [Excessive account creations from an IP][7]                                                                                                    |
+| `users.delete`         | `{ "usr.id": "12345" }`                              | [Excessive account deletion from an IP][8]                                                                                           |
+| `users.password_reset` | `{ "usr.id": "12345", "exists": true }`              | [Password reset brute force attempts][9]                                                                                                         |
+| `payment.attempt`      | `{ "status": "failed" }`                             | [Excessive payment failures from IP][10]                                                                                                        |
 
 ## Adding authenticated user information to traces and enabling user blocking capability
 
@@ -43,7 +43,7 @@ You can [add custom tags to your root span][3], or use the instrumentation funct
 
 Use the Java tracer's API for adding custom tags to a root span and add user information so that you can monitor authenticated requests in the application.
 
-User monitoring tags are applied on the root span and start with the prefix `usr` followed by the name of the field. For example, `usr.name` is a user monitoring tag that tracks the user’s name.
+User monitoring tags are applied on the root span and start with the prefix `usr` followed by the name of the field. For example, `usr.name` is a user monitoring tag that tracks the user's name.
 
 **Note**: Check that you have added [necessary dependencies to your application][1].
 
@@ -171,7 +171,7 @@ Datadog::Kit::Identity.set_user(
 
 If `Datadog::Kit::Identity.set_user` does not meet your needs, you can use `set_tag` instead.
 
-User monitoring tags are applied on the trace and start with the prefix `usr.` followed by the name of the field. For example, `usr.name` is a user monitoring tag that tracks the user’s name.
+User monitoring tags are applied on the trace and start with the prefix `usr.` followed by the name of the field. For example, `usr.name` is a user monitoring tag that tracks the user's name.
 
 The example below shows how to obtain the active trace and add relevant user monitoring tags:
 
@@ -207,7 +207,7 @@ trace.set_tag('usr.another_tag', 'another_value')
 
 Use the PHP tracer's API for adding custom tags to a root span, and add user information so that you can monitor authenticated requests in the application.
 
-User monitoring tags are applied to the `meta` section of the root span and start with the prefix `usr` followed by the name of the field. For example, `usr.name` is a user monitoring tag that tracks the user’s name.
+User monitoring tags are applied to the `meta` section of the root span and start with the prefix `usr` followed by the name of the field. For example, `usr.name` is a user monitoring tag that tracks the user's name.
 
 The example below shows how to obtain the root span and add the relevant user monitoring tags:
 
@@ -342,7 +342,7 @@ public class LoginController {
         // this is where you get User based on userId/password credentials
         User user = checkLogin(userId, password);
 
-        // if function returns null - user doesn’t exist
+        // if function returns null - user doesn't exist
         boolean userExists = (user != null);
         Map<String, String> metadata = new HashMap<>();
         if (userExists != null) {
@@ -530,7 +530,7 @@ trace = Datadog::Tracing.active_trace
 # if the user id exists
 Datadog::Kit::AppSec::Events.track_login_failure(trace, user_id: 'my_user_id', user_exists: true)
 
-# if the user id doesn’t exist
+# if the user id doesn't exist
 Datadog::Kit::AppSec::Events.track_login_failure(trace, user_id: 'my_user_id', user_exists: false)
 ```
 {{% /tab %}}
@@ -690,4 +690,10 @@ track_custom_event(tracer, event_name, metadata)
 [1]: /tracing/trace_collection/custom_instrumentation/
 [2]: /security/application_security/threats/add-user-info/#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability
 [3]: /security/application_security/threats/add-user-info/#adding-user-events-login-success-login-failure-any-business-logic-to-traces
-
+[4]: /security/default_rules/bl-rate-limiting/
+[5]: /security/default_rules/bl-privilege-violation/
+[6]: /security/default_rules/appsec-ato-groupby-ip/
+[7]: /security/default_rules/bl-signup-ratelimit/
+[8]: /security/default_rules/bl-account-deletion-ratelimit/
+[9]: /security/default_rules/bl-password-reset/
+[10]: /security/default_rules/bl-payment-failures/
