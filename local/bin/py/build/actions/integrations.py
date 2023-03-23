@@ -28,23 +28,22 @@ from os.path import (
 from actions.format_link import format_link_file
 
 try:
-    from assetlib.classifiers import get_all_classifier_names, get_non_deprecated_classifier_names
+    from assetlib.classifiers import get_all_classifier_names, get_non_deprecated_classifiers
     CLASSIFIER_TAGS = get_all_classifier_names()
 except ImportError:
-    classifier_tags = []
+    CLASSIFIER_TAGS = []
     if getenv("CI_COMMIT_REF_NAME"):
-        print('\x1b[31mERROR\x1b[0m: classifier_tags validation unavailable, Aborting')
+        print('\x1b[31mERROR\x1b[0m: CLASSIFIER_TAGS validation unavailable, Aborting')
         sys.exit(1)
 finally:
-    if not classifier_tags:
-        print(f'\x1b[33mWARNING\x1b[0m: classifier_tags empty - continuing without validation')
+    if not CLASSIFIER_TAGS:
+        print(f'\x1b[33mWARNING\x1b[0m: CLASSIFIER_TAGS empty - continuing without validation')
     else:
         file_content = ['| Name | Description |\n| --- | --- |\n']
         with open('layouts/shortcodes/integration_categories.md', 'w') as file:
-            for tag in get_non_deprecated_classifier_names():
-                file.write(f'- {tag}\n')
-            file.write("\n")
-
+            for tag in get_non_deprecated_classifiers():
+                file_content.append(f'| {tag["name"]} | {tag["description"]} |\n')
+            file.write(''.join(file_content))
 
 class Integrations:
     def __init__(self, source_file, temp_directory, integration_mutations):
