@@ -75,7 +75,7 @@ The following products and features are supported with Remote Config:
 
 - **Automatic default agent rule updates**: Automatically receive and update the default Agent rules maintained by Datadog as new Agent detections and enhancements are released. 
 
-### Observability Pipelines (OP)
+### Observability Pipelines
 <div class="alert alert-info">This feature is in private beta.</div>
 
 - **Remotely deploy and update [Observability Pipelines Workers][10] (OPW)**: Build and edit pipelines in the Datadog UI,  rolling out your configuration changes to OPW instances running in your environment.
