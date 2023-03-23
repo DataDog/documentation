@@ -21,7 +21,7 @@ Your individual Datadog alerts with groups [have notification][1] rollups on by 
 * Reframe the query using Functions- rates, moving averages, or time-shift differentials
     * This means, you can compare the difference between a metric stream's values with the values from a week ago and set alert conditions based off the difference
     * A time-shift differential allows you to combine functions and can give a historical view as well. For example:
- abs(system.cpu.system{*} - week_before(system.cpu.system{*}))
+ `abs(system.cpu.system{*} - week_before(system.cpu.system{*}))`
     * If your metric frequently spikes, and those spikes are not inherently indicative of issues, applying a rate or average to it will allow you to set a more meaningful threshold.
 
 * Consider the states of other monitors using Composite alerts
