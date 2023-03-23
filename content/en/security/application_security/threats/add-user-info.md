@@ -17,11 +17,21 @@ further_reading:
 
 Instrument your services and track user activity to detect and block bad actors.
 
-Add authenticated user information on traces to identify and block bad actors targeting your authenticated attack surface. To do this, set the user ID tag on the running APM trace, providing the necessary instrumentation for ASM to block authenticated attackers. This allows ASM to associate attacks and business logic events to users.
+[Add authenticated user information on traces](https://docs-staging.datadoghq.com/emilehugo.spir/asm-business-logic/security/application_security/threats/add-user-info/#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability) to identify and block bad actors targeting your authenticated attack surface. To do this, set the user ID tag on the running APM trace, providing the necessary instrumentation for ASM to block authenticated attackers. This allows ASM to associate attacks and business logic events to users.
 
-Track user logins to detect account takeovers with out-of-the-box detection rules, and to ultimately block attackers.
+[Track user logins and activity](https://docs-staging.datadoghq.com/emilehugo.spir/asm-business-logic/security/application_security/threats/add-user-info/#adding-user-events-login-success-login-failure-any-business-logic-to-traces) to detect account takeovers and business logic abuse with out-of-the-box detection rules, and to ultimately block attackers.
 
-Track additional business logic and create your own detection rules to prevent business logic abuse.
+The custom user activity for which out-of-the-box detection rules are available are as follow:
+
+| Built-in event names   | Required metadata                                    | Related rules                                                                                                                                                                                                       |
+|------------------------|------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `activity.sensitive`   | `{ "name": "coupon_use", "required_role": "user" }`  | [Rate limited activity from IP](https://docs.datadoghq.com/security/default_rules/bl-rate-limiting/)<br>[Unauthorized activity detected](https://docs.datadoghq.com/security/default_rules/bl-privilege-violation/) |
+| `users.login.success`  | User ID is mandatory, optional metadata can be added | [Credential Stuffing attack](https://docs.datadoghq.com/security/default_rules/appsec-ato-groupby-ip/)                                                                                                              |
+| `users.login.failure`  | User ID is mandatory, optional metadata can be added | [Credential Stuffing attack](https://docs.datadoghq.com/security/default_rules/appsec-ato-groupby-ip/)                                                                                                              |
+| `users.signup`         | `{ "usr.id": "12345" }`                              | [Excessive account creations from an IP](https://docs.datadoghq.com/security/default_rules/bl-signup-ratelimit/)                                                                                                    |
+| `users.delete`         | `{ "usr.id": "12345" }`                              | [Excessive account deletion from an IP](https://docs.datadoghq.com/security/default_rules/bl-account-deletion-ratelimit/)                                                                                           |
+| `users.password_reset` | `{ "usr.id": "12345", "exists": true }`              | [Password reset brute force attempts](https://docs.datadoghq.com/security/default_rules/bl-password-reset/)                                                                                                         |
+| `payment.attempt`      | `{ "status": "failed" }`                             | [Excessive payment failures from IP](https://docs.datadoghq.com/security/default_rules/bl-payment-failures/)                                                                                                        |
 
 ## Adding authenticated user information to traces and enabling user blocking capability
 
@@ -350,18 +360,6 @@ public class LoginController {
 {{% /tab %}}
 
 {{% tab "Custom business logic" %}}
-Some OOTB rules rely on custom events. You can make them work by implementing the following events.
-
-| Built-in event names   | Required metadata                                   | Related rules                                                                                                                                                                                                       |
-|------------------------|-----------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `activity.sensitive`   | `{ "name": "coupon_use", "required_role": "user" }` | [Rate limited activity from IP](https://docs.datadoghq.com/security/default_rules/bl-rate-limiting/)<br>[Unauthorized activity detected](https://docs.datadoghq.com/security/default_rules/bl-privilege-violation/) |
-| `users.signup`         | `{ "usr.id": "12345" }`                             | [Excessive account creations from an IP](https://docs.datadoghq.com/security/default_rules/bl-signup-ratelimit/)                                                                                                    |
-| `users.delete`         | `{ "usr.id": "12345" }`                             | [Excessive account deletion from an IP](https://docs.datadoghq.com/security/default_rules/bl-account-deletion-ratelimit/)                                                                                           |
-| `users.password_reset` | `{ "usr.id": "12345", "exists": true }`             | [Password reset brute force attempts](https://docs.datadoghq.com/security/default_rules/bl-password-reset/)                                                                                                         |
-| `payment.attempt`      | `{ "status": "failed" }`                            | [Excessive payment failures from IP](https://docs.datadoghq.com/security/default_rules/bl-payment-failures/)                                                                                                        |
-
-To send a custom event, you can use the following snippet.
-
 ```java
 import datadog.trace.api.EventTracker;
 import datadog.trace.api.GlobalTracer;
@@ -435,18 +433,6 @@ void OnLogonFailure(string userId, bool userExists, ...)
 {{% /tab %}}
 
 {{% tab "Custom business logic" %}}
-Some OOTB rules rely on custom events. You can make them work by implementing the following events.
-
-| Built-in event names   | Required metadata                                   | Related rules                                                                                                                                                                                                       |
-|------------------------|-----------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `activity.sensitive`   | `{ "name": "coupon_use", "required_role": "user" }` | [Rate limited activity from IP](https://docs.datadoghq.com/security/default_rules/bl-rate-limiting/)<br>[Unauthorized activity detected](https://docs.datadoghq.com/security/default_rules/bl-privilege-violation/) |
-| `users.signup`         | `{ "usr.id": "12345" }`                             | [Excessive account creations from an IP](https://docs.datadoghq.com/security/default_rules/bl-signup-ratelimit/)                                                                                                    |
-| `users.delete`         | `{ "usr.id": "12345" }`                             | [Excessive account deletion from an IP](https://docs.datadoghq.com/security/default_rules/bl-account-deletion-ratelimit/)                                                                                           |
-| `users.password_reset` | `{ "usr.id": "12345", "exists": true }`             | [Password reset brute force attempts](https://docs.datadoghq.com/security/default_rules/bl-password-reset/)                                                                                                         |
-| `payment.attempt`      | `{ "status": "failed" }`                            | [Excessive payment failures from IP](https://docs.datadoghq.com/security/default_rules/bl-payment-failures/)                                                                                                        |
-
-To send a custom event, you can use the following snippet.
-
 ```csharp
 void OnUserSignupComplete(string userId, ...)
 {
@@ -504,18 +490,6 @@ func handler(w http.ResponseWriter, r *http.Request) {
 {{% /tab %}}
 
 {{% tab "Custom business logic" %}}
-Some OOTB rules rely on custom events. You can make them work by implementing the following events.
-
-| Built-in event names   | Required metadata                                   | Related rules                                                                                                                                                                                                       |
-|------------------------|-----------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `activity.sensitive`   | `{ "name": "coupon_use", "required_role": "user" }` | [Rate limited activity from IP](https://docs.datadoghq.com/security/default_rules/bl-rate-limiting/)<br>[Unauthorized activity detected](https://docs.datadoghq.com/security/default_rules/bl-privilege-violation/) |
-| `users.signup`         | `{ "usr.id": "12345" }`                             | [Excessive account creations from an IP](https://docs.datadoghq.com/security/default_rules/bl-signup-ratelimit/)                                                                                                    |
-| `users.delete`         | `{ "usr.id": "12345" }`                             | [Excessive account deletion from an IP](https://docs.datadoghq.com/security/default_rules/bl-account-deletion-ratelimit/)                                                                                           |
-| `users.password_reset` | `{ "usr.id": "12345", "exists": true }`             | [Password reset brute force attempts](https://docs.datadoghq.com/security/default_rules/bl-password-reset/)                                                                                                         |
-| `payment.attempt`      | `{ "status": "failed" }`                            | [Excessive payment failures from IP](https://docs.datadoghq.com/security/default_rules/bl-payment-failures/)                                                                                                        |
-
-To send a custom event, you can use the following snippet.
-
 ```go
 import "gopkg.in/DataDog/dd-trace-go.v1/appsec"
 
@@ -563,18 +537,6 @@ Datadog::Kit::AppSec::Events.track_login_failure(trace, user_id: 'my_user_id', u
 {{% /tab %}}
 
 {{% tab "Custom business logic" %}}
-Some OOTB rules rely on custom events. You can make them work by implementing the following events.
-
-| Built-in event names   | Required metadata                                   | Related rules                                                                                                                                                                                                       |
-|------------------------|-----------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `activity.sensitive`   | `{ "name": "coupon_use", "required_role": "user" }` | [Rate limited activity from IP](https://docs.datadoghq.com/security/default_rules/bl-rate-limiting/)<br>[Unauthorized activity detected](https://docs.datadoghq.com/security/default_rules/bl-privilege-violation/) |
-| `users.signup`         | `{ "usr.id": "12345" }`                             | [Excessive account creations from an IP](https://docs.datadoghq.com/security/default_rules/bl-signup-ratelimit/)                                                                                                    |
-| `users.delete`         | `{ "usr.id": "12345" }`                             | [Excessive account deletion from an IP](https://docs.datadoghq.com/security/default_rules/bl-account-deletion-ratelimit/)                                                                                           |
-| `users.password_reset` | `{ "usr.id": "12345", "exists": true }`             | [Password reset brute force attempts](https://docs.datadoghq.com/security/default_rules/bl-password-reset/)                                                                                                         |
-| `payment.attempt`      | `{ "status": "failed" }`                            | [Excessive payment failures from IP](https://docs.datadoghq.com/security/default_rules/bl-payment-failures/)                                                                                                        |
-
-To send a custom event, you can use the following snippet.
-
 ```ruby
 require 'datadog/kit/appsec/events'
 trace = Datadog::Tracing.active_trace
@@ -610,18 +572,6 @@ The following examples show how to track login events or custom events (using si
 {{% /tab %}}
 
 {{% tab "Custom business logic" %}}
-Some OOTB rules rely on custom events. You can make them work by implementing the following events.
-
-| Built-in event names   | Required metadata                                   | Related rules                                                                                                                                                                                                       |
-|------------------------|-----------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `activity.sensitive`   | `{ "name": "coupon_use", "required_role": "user" }` | [Rate limited activity from IP](https://docs.datadoghq.com/security/default_rules/bl-rate-limiting/)<br>[Unauthorized activity detected](https://docs.datadoghq.com/security/default_rules/bl-privilege-violation/) |
-| `users.signup`         | `{ "usr.id": "12345" }`                             | [Excessive account creations from an IP](https://docs.datadoghq.com/security/default_rules/bl-signup-ratelimit/)                                                                                                    |
-| `users.delete`         | `{ "usr.id": "12345" }`                             | [Excessive account deletion from an IP](https://docs.datadoghq.com/security/default_rules/bl-account-deletion-ratelimit/)                                                                                           |
-| `users.password_reset` | `{ "usr.id": "12345", "exists": true }`             | [Password reset brute force attempts](https://docs.datadoghq.com/security/default_rules/bl-password-reset/)                                                                                                         |
-| `payment.attempt`      | `{ "status": "failed" }`                            | [Excessive payment failures from IP](https://docs.datadoghq.com/security/default_rules/bl-payment-failures/)                                                                                                        |
-
-To send a custom event, you can use the following snippet.
-
 ```php
 <?php
 \datadog\appsec\track_custom_event(‘users.signup’, [‘id’ => $id, 'email' => $email]);
@@ -670,18 +620,6 @@ tracer.appsec.trackUserLoginFailureEvent(userId, userExists, metadata)
 {{% /tab %}}
 
 {{% tab "Custom business logic" %}}
-Some OOTB rules rely on custom events. You can make them work by implementing the following events.
-
-| Built-in event names   | Required metadata                                   | Related rules                                                                                                                                                                                                       |
-|------------------------|-----------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `activity.sensitive`   | `{ "name": "coupon_use", "required_role": "user" }` | [Rate limited activity from IP](https://docs.datadoghq.com/security/default_rules/bl-rate-limiting/)<br>[Unauthorized activity detected](https://docs.datadoghq.com/security/default_rules/bl-privilege-violation/) |
-| `users.signup`         | `{ "usr.id": "12345" }`                             | [Excessive account creations from an IP](https://docs.datadoghq.com/security/default_rules/bl-signup-ratelimit/)                                                                                                    |
-| `users.delete`         | `{ "usr.id": "12345" }`                             | [Excessive account deletion from an IP](https://docs.datadoghq.com/security/default_rules/bl-account-deletion-ratelimit/)                                                                                           |
-| `users.password_reset` | `{ "usr.id": "12345", "exists": true }`             | [Password reset brute force attempts](https://docs.datadoghq.com/security/default_rules/bl-password-reset/)                                                                                                         |
-| `payment.attempt`      | `{ "status": "failed" }`                            | [Excessive payment failures from IP](https://docs.datadoghq.com/security/default_rules/bl-payment-failures/)                                                                                                        |
-
-To send a custom event, you can use the following snippet.
-
 ```javascript
 const tracer = require('dd-trace')
 
@@ -730,18 +668,6 @@ track_user_login_failure_event(tracer, "userid", exists, metadata)
 {{% /tab %}}
 
 {{% tab "Custom business logic" %}}
-
-Some OOTB rules rely on custom events. You can make them work by implementing the following events.
-
-| Built-in event names   | Required metadata                                   | Related rules                                                                                                                                                                                                       |
-|------------------------|-----------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `activity.sensitive`   | `{ "name": "coupon_use", "required_role": "user" }` | [Rate limited activity from IP](https://docs.datadoghq.com/security/default_rules/bl-rate-limiting/)<br>[Unauthorized activity detected](https://docs.datadoghq.com/security/default_rules/bl-privilege-violation/) |
-| `users.signup`         | `{ "usr.id": "12345" }`                             | [Excessive account creations from an IP](https://docs.datadoghq.com/security/default_rules/bl-signup-ratelimit/)                                                                                                    |
-| `users.delete`         | `{ "usr.id": "12345" }`                             | [Excessive account deletion from an IP](https://docs.datadoghq.com/security/default_rules/bl-account-deletion-ratelimit/)                                                                                           |
-| `users.password_reset` | `{ "usr.id": "12345", "exists": true }`             | [Password reset brute force attempts](https://docs.datadoghq.com/security/default_rules/bl-password-reset/)                                                                                                         |
-| `payment.attempt`      | `{ "status": "failed" }`                            | [Excessive payment failures from IP](https://docs.datadoghq.com/security/default_rules/bl-payment-failures/)                                                                                                        |
-
-To send a custom event, you can use the following snippet.
 
 ```python
 from ddtrace.appsec.trace_utils import track_custom_event
