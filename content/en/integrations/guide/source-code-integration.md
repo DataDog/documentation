@@ -113,28 +113,6 @@ git.repository_url:git-provider.example/me/my-repo"
 </details>
 
 {{< tabs >}}
-{{% tab "Java" %}}
-
-If you are building Java applications with [Maven][1] or [Gradle][2], install and set up the Maven [`git-commit-id-maven-plugin`][3] or Gradle [`gradle-git-properties`][4] plugin to embed metadata to the Maven [`git.properties` file][5] or Gradle [`git.properties` file][6] in the root of the JAR archive.
-
-For example, you can ship git information into a `git.properties` property file: 
-
-```shell
-git.commit.id=<commit_hash>
-git.remote.origin.url=<repository_URL>
-```
-
-Use the embedding samples for [Maven][7] and [Gradle][8] to generate properties in the `git.properties` file.
-
-[1]: https://maven.apache.org/index.html
-[2]: https://docs.gradle.org/current/samples/sample_building_java_applications.html
-[3]: https://github.com/git-commit-id/git-commit-id-maven-plugin
-[4]: https://github.com/n0mer/gradle-git-properties
-[5]: https://github.com/sashacmc/dd-git-metadata-poc/blob/main/java/maven/out_sample/git.properties
-[6]: https://github.com/sashacmc/dd-git-metadata-poc/blob/main/java/gradle/out_sample/git.properties
-[7]: https://github.com/sashacmc/dd-git-metadata-poc/blob/main/java/maven/gitmetadatapoc/pom.xml#L50
-[8]: https://github.com/sashacmc/dd-git-metadata-poc/blob/main/java/gradle/app/build.gradle#L13
-{{% /tab %}}
 {{% tab "Python" %}}
 
 For a standard library: 
@@ -156,30 +134,6 @@ For a unified Python project settings file:
 You can use Go [versions 1.18 or later][1] to embed git metadata. Build an application as a module using `go.mod`, and ensure that the module directive points to a public path such as `github.com` or `gopkg.in`, not a short module name.
 
 [1]: https://tip.golang.org/doc/go1.18
-{{% /tab %}}
-{{% tab "Ruby" %}}
-
-Run your Ruby application from a valid git repository folder.
-
-{{% /tab %}}
-{{% tab "NodeJS" %}}
-
-For unbundled code:
-
-1. Install a tool (link TBD).
-2. Add the tool to the build pipeline.
-3. Ship the application along to the generated `git.properties` file.
-
-* For [Rollup][1], install and set up the [`rollup-plugin-inject-process-env` plugin][2].
-* For [Webpack][3], install and set up the [`EnvironmentPlugin` plugin][4].
-* For [Esbuild][5], install and set up the [`esbuild-envfile-plugin` plugin][6].
-
-[1]: https://rollupjs.org/guide/en/
-[2]: https://www.npmjs.com/package/rollup-plugin-inject-process-env
-[3]: https://webpack.js.org/concepts/
-[4]: https://webpack.js.org/plugins/environment-plugin/
-[5]: https://esbuild.github.io/
-[6]: https://www.npmjs.com/package/esbuild-envfile-plugin
 {{% /tab %}}
 {{< /tabs >}}
 
