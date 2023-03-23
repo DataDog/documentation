@@ -188,7 +188,8 @@ The following resources allow granular access control:
 - [Monitors][11]
 - [Notebooks][5]
 - [Security rules][12]
-- [Synthetic tests][13]
+- [Service Level Objectives][13]
+- [Synthetic tests][14]
 
 ## Further Reading
 
@@ -206,4 +207,5 @@ The following resources allow granular access control:
 [10]: /dashboards/#permissions
 [11]: /monitors/notify/#permissions
 [12]: /security_platform/detection_rules/#limit-edit-access
-[13]: /synthetics/browser_tests/#permissions
+[13]: /monitors/service_level_objectives/#permissions
+[14]: /synthetics/browser_tests/#permissions
