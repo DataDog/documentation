@@ -49,6 +49,14 @@ A dashboard is Datadog's tool for visually tracking, analyzing, and displaying k
 
 **Note**: View Dashboards with the [Datadog Mobile App][1], available on the [Apple App Store][2] and [Google Play Store][3].
 
+{{< whatsnext desc="Dashboard features:">}}
+    {{< nextlink href="/dashboards/widgets" >}}Widgets: Learn the configuration for different visualizations{{< /nextlink >}}
+    {{< nextlink href="/dashboards/querying" >}}Querying: See the formatting options for graph queries{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions" >}}Functions: Modify metric queries and resulting graphs{{< /nextlink >}}
+    {{< nextlink href="/dashboards/template_variables" >}}Template Variable: Dynamically filter widgets in a dashboard{{< /nextlink >}}
+    {{< nextlink href="/api/latest/dashboards" >}}API: Manage dashboards programmatically{{< /nextlink >}}
+{{< /whatsnext >}}
+
 ## New dashboard
 
 To create a dashboard, click **+New Dashboard** on the [Dashboard List][4] page or **New Dashboard** from the navigation menu. Enter a dashboard name and choose a layout option.
@@ -146,9 +154,9 @@ At the top of the dashboard, click on settings and select *Permissions*.
 
 {{< img src="dashboards/dashboard-menu-permissions.png" alt="The dashboard settings menu" style="width:50%;">}}
 
-Use the pop up to restrict access to you, everyone in your organization with your role, or to specific roles in your organization.
+Use the pop-up to restrict access to you, everyone in your organization with your role, or to specific roles in your organization.
 
-{{< img src="dashboards/access_popup.png" alt="Dialog box with drop-down menu allowing users to choose a role to access the dashboard." style="width:70%;">}}
+{{< img src="dashboards/access_popup.png" alt="Dialog box with dropdown menu allowing users to choose a role to access the dashboard." style="width:70%;">}}
 
 Any user setting access control rules has to include one or more roles they are a part of to prevent locking an organization out. For more information about roles, see the [RBAC documentation][14].
 
@@ -170,7 +178,7 @@ Use this option to copy the entire dashboard to a new dashboard. You are prompte
 
 #### Copy, import, or export dashboard JSON
 
-From an individual dashboard, copy, import, or export a dashboard's JSON using the settings cog (upper right) with the following options:
+From an individual dashboard, copy, import, or export a dashboard's JSON using the export icon (upper right) with the following options:
 
 | Option                          | Description                                                                                                                                                                |
 |---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -184,7 +192,7 @@ Use this option to permanently delete your dashboard. You are prompted to confir
 
 ## Dashboard details
 
-From an individual dashboard, click the caret icon next to the dashboard title to view and edit dashboard details. A drop-down panel opens.
+From an individual dashboard, click the caret icon next to the dashboard title to view and edit dashboard details. A dropdown panel opens.
 
 {{< img src="dashboards/suggested_dashboards.png" alt="Suggested dashboards" >}}
 
@@ -199,7 +207,7 @@ From an individual dashboard, Datadog offers suggestions for viewing related das
 Update Markdown-supported dashboard descriptions or associate [teams][17] with a dashboard:
 
 1. Open the dashboard you wish to edit.
-1. Click the caret icon next to the dashboard title. A drop-down panel opens.
+1. Click the caret icon next to the dashboard title. A dropdown panel opens.
 1. Click **Edit**. The panel changes to edit mode.
 1. Select up to 5 teams from the **Teams** dropdown.
 1. Enter a description in the text box. Format your text in Markdown.

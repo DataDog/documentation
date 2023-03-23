@@ -3,6 +3,8 @@ title: Teams
 kind: documentation
 ---
 
+<div class="alert alert-warning">The Teams feature is in beta and is not yet generally available.</div>
+
 ## Overview
 Datadog Teams allow groups of users to organize their team assets within Datadog and automatically filter their Datadog-wide experience to prioritize these assets.
 
@@ -29,7 +31,7 @@ The [team directory page][1] lists all teams within your organization. Use the *
 1. Choose a **Team Name**.
 1. The **Handle** populates based on your team name.
 1. Provide an optional **Description**.
-1. Use the drop-down to select team members.
+1. Use the dropdown menu to select team members.
 1. Click **Create**.
 
 ### Modify team

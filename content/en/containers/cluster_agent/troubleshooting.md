@@ -29,8 +29,20 @@ This document contains troubleshooting information for the following components:
 - [Datadog Cluster Agent](#datadog-cluster-agent)
 - [Node Agent](#node-agent)
 - [Custom Metrics Server](#custom-metrics-server)
+  - [Cluster Agent status and flare](#cluster-agent-status-and-flare)
+  - [Describing the HPA manifest](#describing-the-hpa-manifest)
+  - [Differences of value between Datadog and Kubernetes](#differences-of-value-between-datadog-and-kubernetes)
 - [Cluster Checks](#cluster-checks)
+  - [Kubernetes: find the leader Cluster Agent](#kubernetes-find-the-leader-cluster-agent)
+  - [Autodiscovery in the Cluster Agent](#autodiscovery-in-the-cluster-agent)
+  - [Dispatching logic in the Cluster Agent](#dispatching-logic-in-the-cluster-agent)
+  - [Autodiscovery in the node-based Agent](#autodiscovery-in-the-node-based-agent)
+  - [Agent status](#agent-status)
 - [Endpoint Checks](#endpoint-checks)
+  - [Autodiscovery in the Node Agent](#autodiscovery-in-the-node-agent)
+  - [Agent status](#agent-status-1)
+  - [Autodiscovery in the Cluster Agent](#autodiscovery-in-the-cluster-agent-1)
+- [Further Reading](#further-reading)
 
 ## Datadog Cluster Agent
 
@@ -165,7 +177,7 @@ root@datadog-agent-9d5bl:/# cat /var/log/datadog/agent.log | grep "metadata-coll
 
 Or look for error logs, such as:
 
-```shell
+```text
 2018-06-10 08:03:02 UTC | ERROR | Could not initialize the communication with the Datadog Cluster Agent, falling back to local service mapping: [...]
 ```
 
@@ -178,13 +190,13 @@ If you are having issues with the Custom Metrics Server:
 * Make sure you have the aggregation layer and the certificates set up.
 * Make sure the metrics you want to autoscale on are available. As you create the HPA, the Datadog Cluster Agent parses the manifest and queries Datadog to try to fetch the metric. If there is a typographic issue with your metric name, or if the metric does not exist within your Datadog application, the following error is raised:
 
-    ```shell
+    ```text
     2018-07-03 13:47:56 UTC | ERROR | (datadogexternal.go:45 in queryDatadogExternal) | Returned series slice empty
     ```
 
 Run the `datadog-cluster-agent status` command to see the status of the External Metrics Provider process:
 
-```shell
+```text
   Custom Metrics Provider
   =======================
   External Metrics
@@ -197,7 +209,7 @@ Errors with the External Metrics Provider process are displayed with this comman
 
 The flare command generates a zip file containing the `custom-metrics-provider.log` where you can see output as follows:
 
-```
+```text
   Custom Metrics Provider
   =======================
   External Metrics

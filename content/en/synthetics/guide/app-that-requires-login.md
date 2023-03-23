@@ -35,13 +35,13 @@ At test execution, the browser test systematically executes the first login step
 
 {{< img src="synthetics/guide/app_that_requires_login/login_test.mp4" video="true" alt="Demo of recording a login">}}
 
-By default, the iframe/pop up of the recorder uses your own browser. If you start the recording already logged into your application, the iframe/pop up might directly display a post-login page, which prevents you from recording your login steps without logging out first.
+By default, the iframe/pop-up of the recorder uses your own browser. If you start the recording already logged into your application, the iframe/pop-up might directly display a post-login page, which prevents you from recording your login steps without logging out first.
 
 To record your steps without logging out of your application, use the recorder's incognito mode.
 
 {{< img src="synthetics/guide/app_that_requires_login/incognito.mp4" video="true" alt="Demo of recording a login in incognito">}}
 
-Opening a pop up in incognito mode allows you to start your test's recording from the start URL set in your test configuration with a session completely isolated from your own browser's main session and user data. The freshly opened incognito pop up ignores all your previous browser history including cookies and local data. You are automatically logged out from your account and can start recording your login steps as if you were visiting your website for the first time.
+Opening a pop-up in incognito mode allows you to start your test's recording from the start URL set in your test configuration with a session completely isolated from your own browser's main session and user data. The freshly opened incognito pop-up ignores all your previous browser history including cookies and local data. You are automatically logged out from your account and can start recording your login steps as if you were visiting your website for the first time.
 
 **Note:** Use [the subtest feature][2] to group your login steps into a single subtest that you can then reuse across any other browser tests that require a login.
 

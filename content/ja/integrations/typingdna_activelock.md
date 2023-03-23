@@ -4,9 +4,16 @@ app_uuid: e4eb4314-400c-4c30-8842-60d74e7f455a
 assets:
   dashboards:
     TypingDNA ActiveLock: assets/dashboards/TypingDNAActiveLock.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: true
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: TypingDNA ActiveLock
 author:
   homepage: https://www.typingdna.com/contact
-  name: Raul Popa
+  name: TypingDNA
   sales_email: datadog.support@typingdna.com
   support_email: datadog.support@typingdna.com
 categories:

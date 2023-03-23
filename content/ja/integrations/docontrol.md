@@ -29,13 +29,13 @@ public_title: DoControl
 short_description: SaaS データセキュリティ - DLP と CASB の最新化による SaaS データの安全性確保
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Category::Security
   - Category::Incidents

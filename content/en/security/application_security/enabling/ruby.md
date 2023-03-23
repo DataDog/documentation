@@ -13,7 +13,7 @@ further_reading:
       text: "Adding user information to traces"
     - link: 'https://github.com/DataDog/dd-trace-rb'
       tag: 'GitHub'
-      text: 'Ruby Datadog Library source code'
+      text: 'Ruby Datadog library source code'
     - link: "/security/default_rules/#cat-application-security"
       tag: "Documentation"
       text: "OOTB Application Security Management Rules"
@@ -159,7 +159,7 @@ docker run [...] -e DD_APPSEC_ENABLED=true [...]
 
 Add the following environment variable value to your container Dockerfile:
 
-```shell
+```Dockerfile
 ENV DD_APPSEC_ENABLED=true
 ```
 

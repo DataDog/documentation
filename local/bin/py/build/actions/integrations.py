@@ -28,8 +28,8 @@ from os.path import (
 from actions.format_link import format_link_file
 
 try:
-    from assetlib import classifiers
-    classifier_tags = classifiers.get_non_deprecated_classifiers()
+    from assetlib.classifiers import get_all_classifier_names, get_non_deprecated_classifier_names
+    CLASSIFIER_TAGS = get_all_classifier_names()
 except ImportError:
     classifier_tags = []
     if getenv("CI_COMMIT_REF_NAME"):
@@ -41,9 +41,9 @@ finally:
     else:
         file_content = ['| Name | Description |\n| --- | --- |\n']
         with open('layouts/shortcodes/integration_categories.md', 'w') as file:
-            for tag in classifier_tags:
-                file_content.append(f'| {tag["name"]} | {tag["description"]}|\n')
-            file.write(file_content + "\n")
+            for tag in get_non_deprecated_classifier_names():
+                file.write(f'- {tag}\n')
+            file.write("\n")
 
 
 class Integrations:
@@ -797,9 +797,9 @@ class Integrations:
             result = re.sub(
                 self.regex_partial_close, "", result, 0
             )
-            result = re.sub(
-                self.regex_site_region, r"{{% \1 %}}", result, 0
-            )
+            # result = re.sub(
+            #     self.regex_site_region, r"{{% \1 %}}", result, 0
+            # )
 
         # if __init__.py exists lets grab the integration id
         integration_id = manifest_json.get("integration_id", "") or ""

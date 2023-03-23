@@ -659,7 +659,7 @@ const fieldColumn = (key, value, toggleMarkup, requiredMarkup, parentKey = '') =
     field = (key || '');
   }
   return `
-    <div class="col-4 column">
+    <div class="col-3 column">
       <p class="key">${toggleMarkup}${field}</p>
     </div>
   `.trim();
@@ -698,10 +698,10 @@ const typeColumn = (key, value, readOnlyMarkup, level = 0) => {
     style = 'word-break: break-all'
   }
   if(value.type === 'array') {
-    return `<div class="col-1-5 column" style="${style}"><p>[${(value.items === '[Circular]') ? 'object' : (value.items.type || '')}${oneOfLabel}]${readOnlyMarkup}</p></div>`;
+    return `<div class="col-2 column" style="${style}"><p>[${(value.items === '[Circular]') ? 'object' : (value.items.type || '')}${oneOfLabel}]${readOnlyMarkup}</p></div>`;
   } else {
     // return `<div class="col-2"><p>${validKeys.includes(key) ? value : (value.enum ? 'enum' : (value.format || value.type || ''))}${readOnlyMarkup}</p></div>`;
-    return `<div class="col-1-5 column" style="${style}"><p>${typeVal}${oneOfLabel}${readOnlyMarkup}</p></div>`.trim().replace(",",",&ZeroWidthSpace;");
+    return `<div class="col-2 column" style="${style}"><p>${typeVal}${oneOfLabel}${readOnlyMarkup}</p></div>`.trim().replace(",",",&ZeroWidthSpace;");
   }
 };
 
@@ -739,7 +739,7 @@ const descColumn = (key, value, defaultMarkup) => {
 };
 
 const requiredColumn = (requiredField) => {
-  return `<div class="col-1-5 column"><p>${requiredField ? "required" : "optional"}</p></div>`.trim();
+  return `<div class="col-2 column"><p>${requiredField ? "required" : "optional"}</p></div>`.trim();
 }
 
 const defaultColumn = (key, value, parentDefaults) => {

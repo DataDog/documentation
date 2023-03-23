@@ -56,10 +56,6 @@ While the SLO remains above the target percentage, the SLO's status will be disp
 
 **Note:** Up to three decimal places are allowed for metric-based SLO targets. The precision shown in the details UI of the SLO will be up to `num_target_decimal_places + 1 = 4 decimal places`. The exact precision shown will be dependent on the magnitude of the values in your denominator query. The higher the magnitude of the denominator, the higher the precision that can be shown up to the four decimal place limit.
 
-### Identify this indicator
-
-Here you can add contextual information about the purpose of the SLO, including any related information or resources in the description and tags you would like to associate with the SLO.
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
