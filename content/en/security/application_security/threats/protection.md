@@ -25,12 +25,12 @@ To leveraging protection capabilities for your service:
 - [Enable Remote Configuration][2].
 - Update your tracing library to the appropriate minimum version needed to turn on protection and the supported capabilities:
 
-  |                        | Java      | .NET      | NodeJS    | Go        | Python    |
-  | ---------------------- | --------- | --------- | --------- | --------- | --------- |
-  | Minumum tracer version | 1.9.0     | 2.23.0    | 3.11.0    | 1.48.0    | 1.9.0     |
-  | IP blocking support    | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-  | User blocking support  | {{< X >}} | {{< X >}} |           | {{< X >}} |           |
-  | Suspicious requests blocking (in-app WAF) |  {{< X >}} |       |       |   |       |
+  |                        | Java      | .NET      | NodeJS    | Go        | Python    | PHP       |
+  | ---------------------- | --------- | --------- | --------- | --------- | --------- | --------- |
+  | Minumum tracer version | 1.9.0     | 2.26.0    | 3.15.0    | 1.48.0    | 1.10.0     | 0.86.0    |
+  | IP blocking support    | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+  | User blocking support  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+  | Suspicious requests blocking (in-app WAF) |  {{< X >}} |  {{< X >}} |       |       | {{< X >}} | {{< X >}} |
 
 - If you plan to use authenticated user blocking, [add user information to traces][4].
 
