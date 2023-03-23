@@ -62,3 +62,4 @@
 | Supported OS::macOS | An integration that can run on and query/submit data from macOS.  |
 | Supported OS::Solaris | An integration that can run on and query/submit data from Solaris.  |
 | Supported OS::Windows | An integration that can run on and query/submit data from Windows.  |
+

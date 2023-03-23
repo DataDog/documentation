@@ -43,7 +43,7 @@ finally:
         with open('layouts/shortcodes/integration_categories.md', 'w') as file:
             for tag in get_non_deprecated_classifiers():
                 file_content.append(f'| {tag["name"]} | {tag["description"]} |\n')
-            file.write(''.join(file_content))
+            file.write(''.join(file_content) + '\n')
 
 class Integrations:
     def __init__(self, source_file, temp_directory, integration_mutations):
