@@ -115,7 +115,7 @@ To activate Remote Configuration:
 
 3. On the [Remote Configuration][4] page, enable Remote Configuration. This enables Datadog resources across your organization to receive configurations from Datadog. 
 
-4. Select an existing API key or create a new API key, and enable Remote Config capability on the key:
+4. Select an existing API key or create a new API key, and enable the Remote Config capability on the key:
 
    {{<img src="agent/guide/RC_Key_updated.png" alt="API Key properties with Remote Config capability Enable button." width="90%" style="center">}}
 
