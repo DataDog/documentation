@@ -150,7 +150,7 @@ This JSON object is an example of event attributes which may be associated with 
 }
 ```
 
-For this attribute, use the following in the “say what’s happening” section:
+For this attribute, use the following in the **Say what's happening** section:
 
 ```
 Real routes targeted for {{@service}}.

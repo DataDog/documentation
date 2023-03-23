@@ -42,23 +42,7 @@ You can [create In-App WAF rules][5] that define what suspicious behavior looks 
 
 ## Slow down attacks and attackers with ASM Protect
 
-<div class="alert alert-info"><strong>Beta: IP and user blocking</strong><br>
-If your service is running <a href="/agent/guide/how_remote_config_works/#enabling-remote-configuration">an Agent with Remote Configuration enabled and a tracing library version that supports it</a>, you can block attackers from the Datadog UI without additional configuration of the Agent or tracing libraries.</div>
-
-Datadog ASM offers built-in protection capabilities to slow down attacks and attackers. 
-
-IP and user blocking actions are implemented through the [tracing libraries][7], and do not introduce any new dependencies in your stack. Blocks are saved in the Datadog platform automatically, and securely fetched by the [Datadog Agent][8], deployed in your infrastructure, and applied to your application.
-
-You can block attackers that are flagged in ASM Security Signals temporarily or permanently. In the Signals Explorer, click into a signal to see what users and IP addresses are generating the signal, and optionally block them.
-
-{{< img src="/security/application_security/appsec-block-user-ip.png" alt="A security signal panel in Datadog ASM, allowing to block the attackers' IPs" width="75%">}}
-
-From there, all services already protected by ASM block incoming requests performed by the blocked IP or user, for the specified duration. All blocked traces are tagged with `security_response.block_ip` and displayed in the [Trace Explorer][9]. Services where ASM is disabled aren't protected.
-
-{{% asm-protection-page-configuration %}}
-
-{{< img src="/security/application_security/asm-blocking-page-html.png" alt="The page displayed as ASM blocks requests originating from blocked IPs" width="75%" >}}
-
+{{% asm-protect %}}
 
 ## Further reading
 
@@ -69,6 +53,3 @@ From there, all services already protected by ASM block incoming requests perfor
 [4]: /security/application_security/how-appsec-works/
 [5]: /security/application_security/threats/inapp_waf_rules/
 [6]: /security/application_security/threats/custom_rules/
-[7]: /tracing/trace_collection/dd_libraries/
-[8]: /agent/guide/how_remote_config_works/
-[9]: /tracing/trace_explorer/

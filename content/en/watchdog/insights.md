@@ -115,7 +115,7 @@ For more information, see [Watchdog Insights for Logs][10].
 To locate Watchdog Insights in the RUM UI, take the following steps:
 1. In the left navigation, hover over **UX Monitoring**.
 2. Click **Sessions & Replays**.
-3. At the top of the page, the **In** drop-down shows that you are in the **Sessions** level. Change the drop-down to **Views**.
+3. At the top of the page, the **In** dropdown shows that you are in the **Sessions** level. Change the dropdown option to **Views**.
 
 The pink Watchdog Insights banner appears in the middle of your screen, above your views.
 

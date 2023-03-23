@@ -32,7 +32,7 @@ To use the Datadog Operator, deploy it in your Kubernetes cluster. Then create a
   ```
   helm install my-datadog-operator datadog/datadog-operator
   ```
-  
+
 ## Deploy the Datadog Agents with the Operator
 
 After deploying the Datadog Operator, create the `DatadogAgent` resource that triggers the Datadog Agent's deployment in your Kubernetes cluster. By creating this resource in the `Datadog-Operator` namespace, the Agent is deployed as a `DaemonSet` on every `Node` of your cluster.
@@ -57,6 +57,7 @@ You can check the state of the `DatadogAgent` resource with:
 
 ```shell
 kubectl get -n $DD_NAMESPACE dd datadog
+
 NAME            ACTIVE   AGENT             CLUSTER-AGENT   CLUSTER-CHECKS-RUNNER   AGE
 datadog-agent   True     Running (2/2/2)                                           110m
 ```

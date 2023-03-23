@@ -4,7 +4,6 @@ kind: documentation
 aliases:
 - /agent/kubernetes/cluster/
 - /agent/cluster_agent/
-- /containers/cluster_agent/
 - /containers/cluster_agent/event_collection
 - /containers/cluster_agent/metadata_provider
 further_reading:
