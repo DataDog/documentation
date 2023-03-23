@@ -36,21 +36,21 @@ export default {
         us: 'agent-intake.logs.datadoghq.com',
         us5: 'The US5 TCP endpoint is not supported.',
         eu: 'agent-intake.logs.datadoghq.eu',
-        ap1: 'agent-intake.logs.ap1.datadoghq.com',
+        ap1: 'The AP1 endpoint is not supported.',
         gov: 'The GOV TCP endpoint is not supported.'
     },
     tcp_endpoint_port: {
         us: '10514',
         us5: 'The US5 TCP endpoint port is not supported.',
         eu: '1883',
-        ap1: '443',
+        ap1: 'The AP1 endpoint is not supported.',
         gov: 'The GOV TCP endpoint port is not supported.'
     },
     tcp_endpoint_port_ssl: {
         us: '10516',
         us5: 'The US5 TCP endpoint port is not supported.',
         eu: '443',
-        ap1: '443',
+        ap1: 'The AP1 endpoint is not supported.',
         gov: 'The GOV TCP endpoint port is not supported.'
     },
     web_integrations_endpoint: {
