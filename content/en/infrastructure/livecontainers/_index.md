@@ -17,6 +17,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-kubernetes-anomalies/"
   tag: "Blog"
   text: "Expedite infrastructure investigations with Kubernetes Anomalies"
+- link: "https://www.datadoghq.com/blog/rightsize-kubernetes-workloads/"
+  tag: "Blog"
+  text: "Practical tips for rightsizing your Kubernetes workloads"
 ---
 
 ## Overview
