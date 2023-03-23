@@ -17,9 +17,9 @@ further_reading:
 
 Instrument your services and track user activity to detect and block bad actors.
 
-[Add authenticated user information on traces](https://docs-staging.datadoghq.com/emilehugo.spir/asm-business-logic/security/application_security/threats/add-user-info/#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability) to identify and block bad actors targeting your authenticated attack surface. To do this, set the user ID tag on the running APM trace, providing the necessary instrumentation for ASM to block authenticated attackers. This allows ASM to associate attacks and business logic events to users.
+[Add authenticated user information on traces][2] to identify and block bad actors targeting your authenticated attack surface. To do this, set the user ID tag on the running APM trace, providing the necessary instrumentation for ASM to block authenticated attackers. This allows ASM to associate attacks and business logic events to users.
 
-[Track user logins and activity](https://docs-staging.datadoghq.com/emilehugo.spir/asm-business-logic/security/application_security/threats/add-user-info/#adding-user-events-login-success-login-failure-any-business-logic-to-traces) to detect account takeovers and business logic abuse with out-of-the-box detection rules, and to ultimately block attackers.
+[Track user logins and activity][3] to detect account takeovers and business logic abuse with out-of-the-box detection rules, and to ultimately block attackers.
 
 The custom user activity for which out-of-the-box detection rules are available are as follow:
 
@@ -35,7 +35,7 @@ The custom user activity for which out-of-the-box detection rules are available 
 
 ## Adding authenticated user information to traces and enabling user blocking capability
 
-You can [add custom tags to your root span][1], or use the instrumentation functions described below. 
+You can [add custom tags to your root span][3], or use the instrumentation functions described below. 
 
 {{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
 
@@ -71,7 +71,6 @@ Blocking
     .forUser("d131dd02c56eec4")
     .blockIfMatch();
 ```
-
 
 [1]: /tracing/trace_collection/compatibility/java/#setup
 {{< /programming-lang >}}
@@ -689,3 +688,6 @@ track_custom_event(tracer, event_name, metadata)
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/trace_collection/custom_instrumentation/
+[2]: /security/application_security/threats/add-user-info/#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability
+[3]: /security/application_security/threats/add-user-info/#adding-user-events-login-success-login-failure-any-business-logic-to-traces
+
