@@ -91,6 +91,12 @@ Transform:
 |
 | `logLevel`              | ログのレベルを設定します。拡張ロギングの場合 `DEBUG` に設定します。                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | `captureLambdaPayload`  | 関数の実行スパンにリクエストと応答のペイロードを自動的にタグ付けして、APM アプリケーションに表示できるようにします。                                                                                                                                                                                                                                                                                                                                                                 |
+| `enableColdStartTracing`      | コールドスタートトレースを無効にするには、`false` に設定します。NodeJS と Python で使用されます。デフォルトは `true` です。 |
+| `coldStartTraceMinDuration`   | コールドスタートトレースでトレースするモジュールロードイベントの最小継続時間 (ミリ秒) を設定します。数値。デフォルトは `3` です。 |
+| `coldStartTraceSkipLibs`      | オプションで、カンマで区切られたライブラリのリストに対してコールドスタートスパンの作成をスキップすることができます。深さを制限したり、既知のライブラリをスキップするのに便利です。デフォルトはランタイムに依存します。 |
+| `enableProfiling`             | Datadog Continuous Profiler を `true` で有効にします。NodeJS と Python のベータ版でサポートされています。デフォルトは `false` です。 |
+| `encodeAuthorizerContext`     | Lambda オーサライザーで `true` に設定すると、トレースコンテキストがレスポンスにエンコードされて伝搬されます。NodeJS と Python でサポートされています。デフォルトは `true` です。 |
+| `decodeAuthorizerContext`     | Lambda オーサライザーで認可された Lambda に対して `true` を設定すると、エンコードされたトレースコンテキストをパースして使用します (見つかった場合)。NodeJS と Python でサポートされています。デフォルトは `true` です。                         |
 
 ## UDS の仕組み
 
