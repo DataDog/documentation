@@ -33,7 +33,7 @@ To extend the rules being applied to your environment to evaluate your security 
 To clone a rule:
 
 1. Find the rule you want to copy one of the following ways:
-   - Navigate to [**Security > Posture Management** and click **Detection Rules**][1]. Select a rule you want to copy to open its details page.
+   - Navigate to [**Security > Posture Management** and click **Compliance Rules**][1]. Select a rule you want to copy to open its details page.
    - Navigate to [**Security > Posture Management** and click **Findings**][2]. Select a finding to open its details, and select **Edit Rule** from the **Rule** menu.
 2. Make any changes you want for your new rule.
 3. Scroll to the bottom of the details page and click **Clone Rule**.
@@ -42,7 +42,7 @@ To clone a rule:
 
 To create a rule from scratch:
 
-1. In Datadog, navigate to [**Security > Posture Management** and click **Detection Rules**][1].
+1. In Datadog, navigate to [**Security > Posture Management** and click **Compliance Rules**][1].
 2. Click **New Rule** in the upper-right.
 3. Select **Cloud Configuration** as the rule type.
 4. Specify the cloud resource types you are writing the rule for.

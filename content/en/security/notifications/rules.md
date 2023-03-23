@@ -28,7 +28,7 @@ View and search through all created Notification Rules on the **Notification Rul
 
 To create a new notification rule, follow the instructions below.
 
-1. In Datadog, navigate to the [Notification Rules tab][1] in **Security** > **Setup & Configuration**.
+1. In Datadog, navigate to the [Notification Rules][1] tab.
 2. Click on the **+ New Notification Rule** button in the top right corner of the page.
 3. Input a name for your notification rule in the **Name** field.
 4. Define the logic for when this notification rule is triggered by conditions matching to security detection rule and/or security signal.
