@@ -111,7 +111,7 @@ To activate Remote Configuration:
 
 1. Ensure your RBAC permissions include [`org_management`][9], so you can enable Remote Configuration for your organization.
 
-2. Ensure your RBAC permissions include [`api_keys_write`][3] so you can create a new API key with the Remote Configuration capability, or add the capability on an existing API key. Contact your organization's Datadog administrator to update your permissions if you don't have it. You'll use the key with this capability to authenticate and authorize your Agent to use Remote Configuration. 
+2. Ensure your RBAC permissions include [`api_keys_write`][3], so you can create a new API key with the Remote Configuration capability, or add the capability to an existing API key. Contact your organization's Datadog administrator to update your permissions if you don't have it. A key with this capability allows you to authenticate and authorize your Agent to use Remote Configuration. 
 
 3. On the [Remote Configuration][4] page, enable Remote Configuration. This enables Datadog resources across your organization to receive configurations from Datadog. 
 
