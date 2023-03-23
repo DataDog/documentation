@@ -45,6 +45,13 @@ title: トレースガイド
 {{< /whatsnext >}}
 <br>
 
+{{< whatsnext desc="取り込みサンプリングの構成" >}}
+    {{< nextlink href="/tracing/guide/trace_ingestion_volume_control/" >}}取り込みメカニズムによるスパン取り込み量の制御{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/guide/ingestion_sampling_with_opentelemetry/" >}}OpenTelemetry による取り込みサンプリング{{< /nextlink >}}
+    {{< nextlink href="/tracing/guide/ingestion_sampling_use_cases/" >}}取り込みサンプリングのユースケース{{< /nextlink >}}
+{{< /whatsnext >}}
+<br>
+
 {{< whatsnext desc="トレーシングガイド" >}}
     {{< nextlink href="tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm" >}}サービスごとに Apdex スコアを構成する{{< /nextlink >}}
     {{< nextlink href="tracing/guide/configuring-primary-operation" >}}サービスのプライマリオペレーション {{< /nextlink >}}
@@ -57,6 +64,4 @@ title: トレースガイド
     {{< nextlink href="tracing/guide/setting_primary_tags_to_scope/" >}}スコープへのプライマリタグの設定{{< /nextlink >}}
     {{< nextlink href="tracing/guide/serverless_enable_aws_xray/" >}}Datadog APM と AWS X-Ray をいつ使用するかの決定{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/setting_up_apm_with_cpp/" >}}C++ による APM の設定{{< /nextlink >}}
-     {{< nextlink href="/tracing/guide/trace_ingestion_volume_control/" >}}取り込みメカニズムによる取り込み量の制御{{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/guide/ingestion_sampling_with_opentelemetry/" >}}OpenTelemetry による取り込みサンプリング{{< /nextlink >}}
 {{< /whatsnext >}}
