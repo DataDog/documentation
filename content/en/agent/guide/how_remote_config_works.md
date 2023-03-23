@@ -31,7 +31,7 @@ Remote configuration is not available on the US1-FED Datadog site.
 <div class="alert alert-info">Remote Configuration is in beta.</a></div>
 
 ## Overview
-Remote Configuration is a Datadog capability that allows you to remotely configure the behavior of Datadog resources (for example, Agents, tracing libraries, and Observability Pipelines Worker) deployed in your infrastructure, for select product features. Using Remote Configuration makes it easier to apply configurations to Datadog resources in your environment on demand, decreasing management costs, reducing friction between teams, and accelerating issue resolution times. 
+Remote Configuration is a Datadog capability that allows you to remotely configure the behavior of Datadog resources (for example, Agents, tracing libraries, and Observability Pipelines Worker) deployed in your infrastructure, for select product features. Use Remote Configuration to apply configurations to Datadog resources in your environment on demand, decreasing management costs, reducing friction between teams, and accelerating issue resolution times.
 
 For Datadog security products, Application Security Management and Cloud Workload Security, Remote Configuration-enabled Agents and compatible tracing libraries provide real-time security updates and responses, enhancing security posture for your applications and cloud infrastructure. 
 
