@@ -47,12 +47,17 @@ The following ASM capabilities are not supported for Lambda functions:
 
 ## ASM capabilities support
 
-The following ASM capabilities are supported for Serverless, for the specified version:
+<div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities in the following table, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send us details</a>.</div>
 
-| ASM capability                   | Minimum Serverless version |
+The following ASM capabilities are supported for Serverless, for the specified Datadog lambda extension version:
+
+| ASM capability                   | Minimum extension version |
 | -------------------------------- | ----------------------------|
 | Threat Detection <br/> --> Business logic API  | x.x <br/>x.x   |
-| Risk Management <br/> --> IAST | x.x <br/>x.x |
+| Threat Protection <br/> --> IP blocking <br/> --> Suspicious request blocking <br> --> User blocking   | not supported<br/><br/><br/>     |
+| Risk Management <br/> --> Third-party vulnerability detection <br/> --> Custom code vulnerability detection | x.x <br/>not supported<br/>x.x |
+
+The minimum Datadog lambda extension version to get all supported ASM capabilities for Serverless is y.y.
 
 
 ## Supported trigger types

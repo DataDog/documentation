@@ -34,11 +34,17 @@ You can monitor application security for Ruby apps running in Docker, Kubernetes
 
 ## ASM capabilities support
 
+<div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities in the following table, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send us details</a>.</div>
+
 The following ASM capabilities are supported in the Ruby library, for the specified tracer version:
 
 | ASM capability                   | Minimum Ruby tracer version |
 | -------------------------------- | ----------------------------|
 | Threat Detection <br/> --> Business logic API  | x.x <br/>x.x   |
+| Threat Protection <br/> --> IP blocking <br/> --> Suspicious request blocking <br> --> User blocking   | not supported<br/><br/><br/>     |
+| Risk Management <br/> --> Third-party vulnerability detection <br/> --> Custom code vulnerability detection | not supported<br/><br/> |
+
+The minimum tracer version to get all supported ASM capabilities for Ruby is y.y.
 
 
 [1]: /tracing/trace_collection/compatibility/ruby/

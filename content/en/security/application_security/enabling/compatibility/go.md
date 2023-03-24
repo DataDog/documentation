@@ -53,13 +53,17 @@ To install the above requirements:
 
 ## ASM capabilities support
 
+<div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities in the following table, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send us details</a>.</div>
+
 The following ASM capabilities are supported in the Go library, for the specified tracer version:
 
 | ASM capability                   | Minimum Go tracer version |
 | -------------------------------- | ----------------------------|
 | Threat Detection <br/> --> Business logic API  | x.x <br/>x.x   |
-| Threat Protection <br/> --> IP blocking <br/> --> User blocking   | x.x<br/>x.x<br/>x.x     |
+| Threat Protection <br/> --> IP blocking <br/> --> Suspicious request blocking <br> --> User blocking   | x.x<br/>x.x<br/>not supported<br/>x.x     |
+| Risk Management <br/> --> Third-party vulnerability detection <br/> --> Custom code vulnerability detection | not supported<br/><br/> |
 
+The minimum tracer version to get all supported ASM capabilities for Go is y.y.
 
 [1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib
 [2]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc#example-package-Server

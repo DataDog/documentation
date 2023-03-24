@@ -47,7 +47,9 @@ The following ASM capabilities are supported in the .NET library, for the specif
 | -------------------------------- | ----------------------------|
 | Threat Detection <br/> --> Business logic API  | x.x <br/>x.x   |
 | Threat Protection <br/> --> IP blocking <br/> --> Suspicious request blocking <br> --> User blocking   | x.x<br/>x.x<br/>x.x<br/>x.x     |
-| Risk Management <br/> --> SCA <br/> --> IAST | 2.16.0 <br/>x.x<br/>x.x |
+| Risk Management <br/> --> Third-party vulnerability detection <br/> --> Custom code vulnerability detection | 2.16.0 <br/>x.x<br/>x.x |
+
+The minimum tracer version to get all supported ASM capabilities for .NET is y.y.
 
 [1]: /tracing/trace_collection/compatibility/dotnet-core/
 [2]: /tracing/trace_collection/compatibility/dotnet-framework/
