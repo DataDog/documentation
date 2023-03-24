@@ -42,6 +42,6 @@ The following ASM capabilities are supported in the NodeJS library, for the spec
 | Threat Protection <br/> --> IP blocking <br/> --> User blocking   | x.x<br/>x.x<br/>x.x     |
 | SCA   | x.x      |
 | IAST    | x.x    |
-
+| Risk Management | 2.23.0 for NodeJS 12+, or 3.10.0 for NodeJS 14+ |
 
 [1]: /tracing/trace_collection/compatibility/nodejs/

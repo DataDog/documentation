@@ -49,7 +49,7 @@ The following ASM capabilities are supported in the .NET library, for the specif
 | Threat Protection <br/> --> IP blocking <br/> --> Suspicious request blocking <br> --> User blocking   | x.x<br/>x.x<br/>x.x<br/>x.x     |
 | SCA   | x.x      |
 | IAST    | x.x    |
-
+| Risk Management | 2.16.0 |
 
 [1]: /tracing/trace_collection/compatibility/dotnet-core/
 [2]: /tracing/trace_collection/compatibility/dotnet-framework/
