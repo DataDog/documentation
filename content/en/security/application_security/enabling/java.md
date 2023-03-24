@@ -36,7 +36,7 @@ You can monitor application security for Java apps running in Docker, Kubernetes
    wget -O dd-java-agent.jar 'https://github.com/DataDog/dd-trace-java/releases/latest/download/dd-java-agent.jar'
    ```
 
-   For information about which language and framework versions are supported by the library, see [Compatibility][2].
+   To check that your service's language and framework versions are supported for ASM capabilities, see [Compatibility][2].
 
 2. **Run your Java application with ASM enabled.** From the command line:
    ```shell

@@ -34,7 +34,7 @@ You can monitor application security for Ruby apps running in Docker, Kubernetes
    gem 'ddtrace', '~> 1.1'
    ```
 
-   For information about which language and framework versions are supported by the library, see [Compatibility][1].
+   To check that your service's language and framework versions are supported for ASM capabilities, see [Compatibility][1].
 
    For more information about upgrading from a `dd-trace` 0.x version, see [the Ruby tracer upgrade guide][2].
 

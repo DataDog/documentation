@@ -33,7 +33,7 @@ You can monitor application security for PHP apps running in host-based or conta
    wget https://github.com/DataDog/dd-trace-php/releases/latest/download/datadog-setup.php -O datadog-setup.php
    php datadog-setup.php --php-bin all --enable-appsec
    ```
-   For information about which language and framework versions are supported by the library, see [Compatibility][1].
+   To check that your service's language and framework versions are supported for ASM capabilities, see [Compatibility][1].
 
 2. **Enable the library in your code** by restarting PHP-FPM or Apache. In a containerized environment, if you previously installed the library without enabling ASM, you can optionally enable it after by setting the following environment variable:
    {{< tabs >}}

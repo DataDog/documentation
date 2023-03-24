@@ -35,7 +35,7 @@ You can monitor application security for Go apps running in Docker, Kubernetes, 
    ```console
    $ go get -v -u gopkg.in/DataDog/dd-trace-go.v1
    ```
-   For information about which language and framework versions are supported by the library, see [Compatibility][4].
+   To check that your service's language and framework versions are supported for ASM capabilities, see [Compatibility][4].
 
 2. **Recompile your program** and enable ASM and CGO:
    ```console

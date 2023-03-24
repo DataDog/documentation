@@ -33,7 +33,7 @@ You can monitor the security of your Python apps running in Docker, Kubernetes, 
    pip install --upgrade ddtrace
    ```
 
-   For information about which language and framework versions are supported by the library, see the [Compatibility][1] section of the ASM Setup and Configure documentation.
+   To check that your service's language and framework versions are supported for ASM capabilities, see [Compatibility][1].
 
 2. **Enable ASM when starting the Python application**.
 
