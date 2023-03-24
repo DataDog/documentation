@@ -40,9 +40,6 @@ The following ASM capabilities are supported in the Java library, for the specif
 | -------------------------------- | ----------------------------|
 | Threat Detection <br/> --> Business logic API  | x.x <br/>x.x   |
 | Threat Protection <br/> --> IP blocking <br/> --> Suspicious request blocking <br> --> User blocking   | x.x<br/>x.x<br/>x.x<br/>x.x     |
-| SCA   | x.x      |
-| IAST    | x.x    |
-| Risk Management | 1.1.4 |
-
+| Risk Management <br/> --> SCA <br/> --> IAST | 1.1.4 <br/>x.x<br/>x.x |
 
 [1]: /tracing/trace_collection/compatibility/java/

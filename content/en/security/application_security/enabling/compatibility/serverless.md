@@ -52,7 +52,8 @@ The following ASM capabilities are supported for Serverless, for the specified v
 | ASM capability                   | Minimum Serverless version |
 | -------------------------------- | ----------------------------|
 | Threat Detection <br/> --> Business logic API  | x.x <br/>x.x   |
-| IAST    | x.x    |
+| Risk Management <br/> --> IAST | x.x <br/>x.x |
+
 
 ## Supported trigger types
 

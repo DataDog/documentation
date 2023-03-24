@@ -43,9 +43,7 @@ The following ASM capabilities are supported in the Python library, for the spec
 | -------------------------------- | ----------------------------|
 | Threat Detection <br/> --> Business logic API  | x.x <br/>x.x   |
 | Threat Protection <br/> --> IP blocking   | x.x<br/>x.x     |
-| SCA   | x.x      |
-| IAST    | x.x    |
-| Risk Management | 1.5.0 |
+| Risk Management <br/> --> SCA <br/> --> IAST | 1.5.0 <br/>x.x<br/>x.x |
 
 
 [1]: /tracing/trace_collection/compatibility/python/
