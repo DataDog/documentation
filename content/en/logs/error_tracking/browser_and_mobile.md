@@ -47,8 +47,11 @@ If you have not setup the Datadog Browser SDK yet, follow the [in-app setup inst
 4. To log a caught exception yourself, you may optionally use:
 
    ```javascript
-   const err = new Error('an exception occurred');
-   datadogLogs.logger.error("an error occured", {usr: {id: 123}}, err);
+   try {
+     throw new Error('wrong behavior');
+   } catch(err) {
+     datadogLogs.logger.error("an error occurred", {usr: {id: 123}}, err);
+   }
    ```
 
 [1]: https://app.datadoghq.com/logs/onboarding/client
