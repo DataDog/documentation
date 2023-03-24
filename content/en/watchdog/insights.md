@@ -80,6 +80,15 @@ Watchdog Insights appear in the Kubernetes Explorer tab in [Live Containers][5].
 4. Choose one of the Kubernetes resource types in the **Select Resources** box.
 5. A list of your Kubernetes resources appears, with the Watchdog Insights panel at the top.
 
+#### Live Processes
+
+Watchdog Insights appear in the [Live Processes][12].
+
+1. In the left navigation, hover over **Infrastructure**.
+2. Click **Processes**.
+
+A list of your Processes and associated data appears, with the Watchdog Insights panel at the top. 
+
 #### Serverless
 
 For serverless infrastructures, Watchdog surfaces the following insights:
@@ -136,3 +145,4 @@ For more information, see [Watchdog Insights for RUM][11].
 [9]: /tracing/services/resource_page/
 [10]: /logs/explorer/watchdog_insights/
 [11]: /real_user_monitoring/explorer/watchdog_insights/
+[12]: /infrastructure/process
