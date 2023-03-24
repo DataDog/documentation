@@ -2644,6 +2644,46 @@ main:
     identifier: appsec_compat
     weight: 201
   - name: Java
+    url: security/application_security/enabling/compatibility/java/
+    parent: appsec_compat
+    identifier: appsec_compat_java
+    weight: 101
+  - name: .NET
+    url: security/application_security/enabling/compatibility/dotnet/
+    parent: appsec_compat
+    identifier: appsec_compat_dotnet
+    weight: 102
+  - name: Go
+    url: security/application_security/enabling/compatibility/go/
+    parent: appsec_compat
+    identifier: appsec_compat_go
+    weight: 103
+  - name: Ruby
+    url: security/application_security/enabling/compatibility/ruby/
+    parent: appsec_compat
+    identifier: appsec_compat_ruby
+    weight: 104
+  - name: PHP
+    url: security/application_security/enabling/compatibility/php/
+    parent: appsec_compat
+    identifier: appsec_compat_php
+    weight: 105
+  - name: NodeJS
+    url: security/application_security/enabling/compatibility/nodejs/
+    parent: appsec_compat
+    identifier: appsec_compat_nodejs
+    weight: 106
+  - name: Python
+    url: security/application_security/enabling/compatibility/python/
+    parent: appsec_compat
+    identifier: appsec_compat_python
+    weight: 107
+  - name: Serverless
+    url: security/application_security/enabling/compatibility/serverless/
+    parent: appsec_compat
+    identifier: appsec_compat_serverless
+    weight: 108
+  - name: Java
     url: security/application_security/enabling/java/
     parent: appsec_getting_started
     identifier: appsec_java
