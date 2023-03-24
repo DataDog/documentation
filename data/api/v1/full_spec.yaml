@@ -21424,6 +21424,12 @@ paths:
         required: false
         schema:
           type: boolean
+      - description: Return creator information.
+        in: query
+        name: with_creator
+        required: false
+        schema:
+          type: boolean
       responses:
         '200':
           content:
