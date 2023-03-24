@@ -16,9 +16,7 @@ The following ASM capabilities are supported for Serverless, for the specified v
 
 | ASM capability                   | Minimum Serverless version |
 | -------------------------------- | ----------------------------|
-| Threat Detection <br/> --> User event tracking API  | x.x <br/>x.x   |
-| Threat Protection <br/> --> IP blocking <br/> --> Suspicious request blocking <br> --> User blocking   | x.x<br/>x.x<br/>x.x<br/>x.x     |
-| SCA   | x.x      |
+| Threat Detection <br/> --> Business logic API  | x.x <br/>x.x   |
 | IAST    | x.x    |
 
 ## Supported Trigger Types
