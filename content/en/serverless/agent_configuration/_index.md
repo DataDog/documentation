@@ -1,6 +1,9 @@
 ---
 title: Serverless Agent configuration
 kind: documentation
+aliases:
+ - /serverless/aws_lambda/configuration
+ - /serverless/configuration
 ---
 
 ## Overview
