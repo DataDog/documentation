@@ -123,6 +123,8 @@ Additionally, you need to pass in the environment variables required to configur
 - `BUILDKITE_BUILD_AUTHOR_EMAIL`
 - `BUILDKITE_BUILD_CREATOR`
 - `BUILDKITE_BUILD_CREATOR_EMAIL`
+- `BUILDKITE_AGENT_ID`
+- `BUILDKITE_AGENT_META_DATA_*`
 
 [Full list of build environment variables provided by Buildkite][1]
 
