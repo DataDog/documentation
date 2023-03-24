@@ -5,7 +5,7 @@ further_reading:
 - link: "/security/application_security/threats/add-user-info/"
   tag: "Documentation"
   text: "Tracking User Activity"
-- link: "/security/application_security/threats/setup_and_configure/"
+- link: "/security/application_security/threats/library_configuration/"
   tag: "Documentation"
   text: "Configuring your ASM setup"
 - link: "/security/application_security/risk_management/"

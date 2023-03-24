@@ -111,4 +111,4 @@ You can monitor the security of your Python apps running in Docker, Kubernetes, 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/setup_and_configure/?code-lang=python#compatibility
+[1]: /security/application_security/enabling/compatibility/python

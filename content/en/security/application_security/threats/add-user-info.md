@@ -8,7 +8,7 @@ further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"
   text: "Protect against threats with Datadog Application Security Management"
-- link: "/security/application_security/setup_and_configure/"
+- link: "/security/application_security/library_configuration/"
   tag: "Documentation"
   text: "Other setup considerations and configuration options"
 ---

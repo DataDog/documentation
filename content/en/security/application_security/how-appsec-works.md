@@ -5,7 +5,7 @@ aliases:
   - /security_platform/guide/how-appsec-works/
   - /security_platform/application_security/how-appsec-works/
 further_reading:
-- link: "/security/application_security/setup_and_configure/#compatibility"
+- link: "/security/application_security/enabling/compatibility"
   tag: "Documentation"
   text: "Learn more about language and framework compatibility"
 - link: "https://www.datadoghq.com/blog/datadog-application-security/"
@@ -146,10 +146,10 @@ Datadog ASM identifies Log4j Log4Shell attack payloads and provides visibility i
 [8]: /security/application_security/enabling/serverless/
 [9]: /tracing/trace_pipeline/trace_retention/
 [10]: /tracing/configure_data_security/?tab=http
-[11]: /security/application_security/threats/setup_and_configure/#exclude-specific-parameters-from-triggering-detections
+[11]: /security/application_security/threats/library_configuration/#exclude-specific-parameters-from-triggering-detections
 [12]: https://owasp.org/www-project-modsecurity-core-rule-set/
 [13]: /security/default_rules/#cat-application-security
 [14]: https://app.datadoghq.com/security/appsec/event-rules
 [15]: https://app.datadoghq.com/security/appsec/vm
 [16]: /security/cloud_siem/
-[17]: /security/application_security/threats/setup_and_configure/#data-security-considerations
+[17]: /security/application_security/threats/library_configuration/#data-security-considerations

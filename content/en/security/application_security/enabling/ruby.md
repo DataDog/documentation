@@ -215,6 +215,6 @@ env DD_APPSEC_ENABLED=true rails server
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/setup_and_configure/?code-lang=ruby#compatibility
+[1]: /security/application_security/enabling/compatibility/ruby
 [2]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/UpgradeGuide.md#from-0x-to-10
 [3]: /tracing/trace_collection/dd_libraries/ruby/

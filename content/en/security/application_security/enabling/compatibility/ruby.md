@@ -6,11 +6,33 @@ type: multi-code-lang
 code_lang_weight: 30
 ---
 
-## Language and Framework Compatibility
+## Language and framework compatibility
 
 ASM follows the same language and framework support as APM. See the [APM Ruby Compatibility][1] page more details. 
 
-## ASM Capabilities Support
+### Supported Ruby versions
+
+The Datadog Ruby library supports the latest gem for the following Ruby interpreters:
+
+- [MRI][2] versions 2.1 to 3.1
+
+These are supported on the following architectures:
+- Linux (GNU) x86-64, aarch64
+- Alpine Linux (musl) x86-64, aarch64
+- macOS (Darwin) x86-64, arm64
+
+You can monitor application security for Ruby apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate.
+
+### Supported frameworks
+
+| Framework Web Server    | Minimum Framework Version   |
+| ----------------------- | --------------------------- |
+| Rack                    | 1.1                         |
+| Rails                   | 3.2 (also depends on Ruby version) |
+| Sinatra                 | 1.4                         |
+
+
+## ASM capabilities support
 
 The following ASM capabilities are supported in the Ruby library, for the specified tracer version:
 
@@ -20,3 +42,4 @@ The following ASM capabilities are supported in the Ruby library, for the specif
 
 
 [1]: /tracing/trace_collection/compatibility/ruby/
+[2]: https://www.ruby-lang.org/

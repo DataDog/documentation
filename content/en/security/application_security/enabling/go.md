@@ -110,7 +110,7 @@ Update your application's ECS task definition JSON file, by adding this in the e
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/setup_and_configure/?code-lang=go#supported-frameworks
+[1]: /security/application_security/enabling/compatibility/go#supported-frameworks
 [2]: https://github.com/golang/go/wiki/cgo
-[3]: /security/application_security/setup_and_configure/?code-lang=go#enabling-cgo
-[4]: /security/application_security/setup_and_configure/?code-lang=go#compatibility
+[3]: /security/application_security/enabling/compatibility/go#enabling-cgo
+[4]: /security/application_security/enabling/compatibility/go#compatibility

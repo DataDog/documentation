@@ -6,11 +6,40 @@ type: multi-code-lang
 code_lang_weight: 10
 ---
 
-## Language and Framework Compatibility
+## Language and framework compatibility
 
 ASM follows the same language and framework support as APM. See the [APM .NET Core Compatibility][1] or [APM .NET Framework Compatibiltiy][2] page more details. 
 
-## ASM Capabilities Support
+### Supported .NET versions
+
+The following .NET versions are supported:
+- .NET Core 6
+- .NET Core 5
+- .NET Framework 4.8
+- .NET Framework 4.7.2
+- .NET Framework 4.7
+- .NET Framework 4.6.2
+- .NET Framework 4.6.1
+
+These are supported on the following architectures:
+- Linux (GNU) x86, x86-64
+- Alpine Linux (musl) x86, x86-64
+- macOS (Darwin) x86, x86-64
+- Windows (msvc) x86, x86-64
+
+You can monitor application security for .NET apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate.
+
+### Supported frameworks
+
+The .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual Basic).
+
+| Framework Web Server    | Minimum Framework Version   |
+| ----------------------- | --------------------------- |
+| ASP.NET                 | 4.6                         |
+| ASP.NET Core            | 2.1                         |
+
+
+## ASM capabilities support
 
 The following ASM capabilities are supported in the .NET library, for the specified tracer version:
 

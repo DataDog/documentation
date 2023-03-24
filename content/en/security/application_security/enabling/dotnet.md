@@ -196,4 +196,4 @@ ENV DD_APPSEC_ENABLED=true
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases/latest
-[2]: /security/application_security/setup_and_configure/?code-lang=dotnet#compatibility
+[2]: /security/application_security/enabling/compatibility/dotnet
