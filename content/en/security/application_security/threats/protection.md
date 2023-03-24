@@ -23,15 +23,7 @@ To leveraging protection capabilities for your service:
 - [Update your Datadog Agent][3] to at least version 7.41.1.
 - [Enable ASM][1].
 - [Enable Remote Configuration][2].
-- Update your tracing library to the appropriate minimum version needed to turn on protection and the supported capabilities:
-
-  |                        | Java      | .NET      | NodeJS    | Go        | Python    |
-  | ---------------------- | --------- | --------- | --------- | --------- | --------- |
-  | Minumum tracer version | 1.9.0     | 2.23.0    | 3.11.0    | 1.48.0    | 1.9.0     |
-  | IP blocking support    | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-  | User blocking support  | {{< X >}} | {{< X >}} |           | {{< X >}} |           |
-  | Suspicious requests blocking (in-app WAF) |  {{< X >}} |       |       |   |       |
-
+- Update your tracing library to at least the minimum version needed to turn on protection. For details, see the ASM capabilities support section of[Compatibility][12] for your service's language.
 - If you plan to use authenticated user blocking, [add user information to traces][4].
 
 ## Blocking IPs and users

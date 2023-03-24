@@ -60,7 +60,7 @@ The following ASM capabilities are supported in the Go library, for the specifie
 | ASM capability                   | Minimum Go tracer version |
 | -------------------------------- | ----------------------------|
 | Threat Detection <br/> --> Business logic API  | x.x <br/>x.x   |
-| Threat Protection <br/> --> IP blocking <br/> --> Suspicious request blocking <br> --> User blocking   | x.x<br/>x.x<br/>not supported<br/>x.x     |
+| Threat Protection <br/> --> IP blocking <br/> --> Suspicious request blocking <br> --> User blocking   | 1.48.0<br/>x.x<br/>not supported<br/>x.x     |
 | Risk Management <br/> --> Third-party vulnerability detection <br/> --> Custom code vulnerability detection | not supported<br/><br/> |
 
 The minimum tracer version to get all supported ASM capabilities for Go is y.y.
