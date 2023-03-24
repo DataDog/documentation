@@ -47,7 +47,10 @@ Docker、Kubernetes、AWS ECS、AWS Fargate で動作する Node.js アプリの
       {{< tabs >}}
 {{% tab "JavaScript のコード内" %}}
 
-{{< tabs >}}
+```js
+// この行は、インスツルメントされたいずれのモジュールのインポートより前である必要があります。
+const tracer = require('dd-trace').init()
+```
 
 {{% /tab %}}
 {{% tab "TypeScript のコード内" %}}
