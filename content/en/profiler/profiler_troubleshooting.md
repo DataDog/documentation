@@ -237,10 +237,10 @@ end
 
 Starting from `dd-trace-rb` 1.11.0, the "CPU Profiling 2.0" profiler gathers data by sending `SIGPROF` unix signals to Ruby applications, enabling finer-grained data gathering.
 
-Sending `SIGPROF` is a common profiling approach, and may cause system calls from native extensions/libraries to be interrupted with a system [`EINTR` error code][4].
+Sending `SIGPROF` is a common profiling approach, and may cause system calls from native extensions/libraries to be interrupted with a system [`EINTR` error code][8].
 Rarely, native extensions or libraries called by them may be have missing or incorrect error handling for the `EINTR` error code.
 
-One known instance of this issue is when using the `mysql2` gem together with versions of libmysqlclient [older than 8.0.0][5]. The affected libmysqlclient version is known to be present on Ubuntu 18.04, but not 20.04 and later releases.
+One known instance of this issue is when using the `mysql2` gem together with versions of libmysqlclient [older than 8.0.0][9]. The affected libmysqlclient version is known to be present on Ubuntu 18.04, but not 20.04 and later releases.
 **Note**: For this case, the profiler auto-detects when the `mysql2` gem is in use and auto-applies the solution described below.
 
 If you encounter run-time failures or errors from Ruby gems that use native extensions, you can revert back to the legacy profiler which does not use `SIGPROF` signals. To revert to the legacy profiler, set the `DD_PROFILING_FORCE_ENABLE_LEGACY` environment variable to `true`, or in code:
@@ -257,12 +257,12 @@ Doing this enables Datadog to add them to the auto-detection list, and to work w
 [1]: /tracing/troubleshooting/#tracer-debug-logs
 [2]: /help/
 [3]: https://github.com/DataDog/dd-trace-rb/releases/tag/v0.54.0
-[4]: https://man7.org/linux/man-pages/man7/signal.7.html#:~:text=Interruption%20of%20system%20calls%20and%20library%20functions%20by%20signal%20handlers
-[5]: https://bugs.mysql.com/bug.php?id=83109
 [4]: https://github.com/resque/resque
 [5]: https://github.com/resque/resque/blob/v2.0.0/docs/HOOKS.md#worker-hooks
 [6]: https://bugs.ruby-lang.org/issues/18073
 [7]: https://github.com/DataDog/dd-trace-rb/issues/1799
+[8]: https://man7.org/linux/man-pages/man7/signal.7.html#:~:text=Interruption%20of%20system%20calls%20and%20library%20functions%20by%20signal%20handlers
+[9]: https://bugs.mysql.com/bug.php?id=83109
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 
