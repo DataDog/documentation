@@ -17,7 +17,7 @@ further_reading:
 
 ## Unable to login
 
-If you experience an error logging in while trying to install the Azure integration, contact [Datadog support][3]. When possible, attach a screenshot.
+If you experience an error logging in while trying to install the Azure integration, contact [Datadog support][2]. When possible, attach a screenshot.
 
 ## Missing metrics
 
@@ -25,7 +25,7 @@ Ensure you completed the installation process, which includes giving read permis
 
 For ARM deployed virtual machines, you must also turn on Diagnostics and select the VM metrics you would like to collect. See **Enable Diagnostics** below for instructions.
 
-For other missing metrics, contact [Datadog support][3] with the following information about the metric:
+For other missing metrics, contact [Datadog support][2] with the following information about the metric:
 - dimensions
 - resource group
 - resource name
@@ -60,13 +60,13 @@ For example, use the -EventhubName flag to change the default name of the Eventh
 
 {{< /code-block >}}
 
-**Note:** Navigate to the [Optional Parameters][4] section to find the list of configurable parameters. 
+**Note:** Navigate to the [Optional Parameters][3] section to find the list of configurable parameters. 
 
 **Note:** If you are re-running the script due to this failure, it is also advised that you remove the entire resource group to create a fresh execution. 
 
 ### Unregistered resource provider
 
-If your script execution is failing due to the error **The subscription is not registered to use namespace ‘Microsoft.EventHub’**:
+If your script execution is failing due to the error **The subscription is not registered to use namespace 'Microsoft.EventHub'**:
 
 Azure has resource providers for each of its services, for example: `Microsoft.EventHub` for the Azure EventHub. If your Azure subscription is not registered to a required resource provider the script fails. You can fix this issue by registering with the resource provider. Run this command in CloudShell. 
 
@@ -80,7 +80,7 @@ az provider register --namespace Microsoft.EventHub
 
 Did you install the script successfully, but you are still not seeing activity/platform logs within the Logs Explorer? 
 
-Ensure that you have not exceeded your [daily quota][5] for log retention.
+Ensure that you have not exceeded your [daily quota][4] for log retention.
 
 **Note:** It is advised that you take at least five minutes after the execution of the script to start looking for logs in the Logs Explorer.
 
@@ -89,7 +89,6 @@ Ensure that you have not exceeded your [daily quota][5] for log retention.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://portal.azure.com
-[2]: https://manage.windowsazure.com
-[3]: /help/
-[4]: /integrations/azure/?tab=azurecliv20#optional-parameters
-[5]: /logs/indexes/#set-daily-quota
+[2]: /help/
+[3]: /integrations/azure/?tab=azurecliv20#optional-parameters
+[4]: /logs/indexes/#set-daily-quota

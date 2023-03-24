@@ -324,9 +324,9 @@ image. Install the module by downloading the appropriate file from the
 directory.
 
 For example, the module compatible with the Docker image
-[nginx:1.23.2-alpine][3] is included in each release as the file
+[nginx:1.23.2-alpine][2] is included in each release as the file
 `nginx_1.23.2-alpine-ngx_http_datadog_module.so.tgz`. The module compatible with
-the Docker image [amazonlinux:2.0.20230119.1][2] is included in each release as the file
+the Docker image [amazonlinux:2.0.20230119.1][3] is included in each release as the file
 `amazonlinux_2.0.20230119.1-ngx_http_datadog_module.so.tgz`.
 
 ```bash
@@ -574,8 +574,8 @@ variable. To define sampling rules in the Ingress Controller:
    ```
 
 [1]: https://github.com/DataDog/nginx-datadog/releases/latest
-[2]: https://hub.docker.com/layers/library/amazonlinux/2.0.20230119.1/images/sha256-db0bf55c548efbbb167c60ced2eb0ca60769de293667d18b92c0c089b8038279?context=explore
-[3]: https://hub.docker.com/layers/library/nginx/1.23.2-alpine/images/sha256-0f2ab24c6aba5d96fcf6e7a736333f26dca1acf5fa8def4c276f6efc7d56251f?context=explore
+[2]: https://hub.docker.com/layers/library/nginx/1.23.2-alpine/images/sha256-0f2ab24c6aba5d96fcf6e7a736333f26dca1acf5fa8def4c276f6efc7d56251f?context=explore
+[3]: https://hub.docker.com/layers/library/amazonlinux/2.0.20230119.1/images/sha256-db0bf55c548efbbb167c60ced2eb0ca60769de293667d18b92c0c089b8038279?context=explore
 [4]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/Dockerfile
 [5]: https://github.com/opentracing-contrib/nginx-opentracing/releases/latest
 [6]: https://github.com/DataDog/dd-opentracing-cpp/releases/latest
@@ -598,18 +598,18 @@ Datadog monitors every aspect of your Istio environment, so you can:
 
 To learn more about monitoring your Istio environment with Datadog, [see the Istio blog][3].
 
-Datadog APM is available for Istio v1.1.3+ on Kubernetes clusters.
+Datadog APM is available for [supported Istio releases][4].
 
 ## Datadog Agent installation
 
-1. [Install the Agent][4]
-2. [Make sure APM is enabled for your Agent][5].
+1. [Install the Agent][5]
+2. [Make sure APM is enabled for your Agent][6].
 3. Uncomment the `hostPort` setting so that Istio sidecars can connect to the Agent and submit traces.
 
 
 ## Istio configuration and installation
 
-To enable Datadog APM, a [custom Istio installation][6] is required to set two extra options when installing Istio.
+To enable Datadog APM, a [custom Istio installation][7] is required to set two extra options when installing Istio.
 
 - `--set values.global.proxy.tracer=datadog`
 - `--set values.pilot.traceSampling=100.0`
@@ -627,7 +627,7 @@ kubectl label namespace example-ns istio-injection=enabled
 
 Traces are generated when Istio is able to determine the traffic is using an HTTP-based protocol.
 By default, Istio tries to automatically detect this. It can be manually configured by naming the ports in your
-application's deployment and service. More information can be found in Istio's documentation for [Protocol Selection][7]
+application's deployment and service. More information can be found in Istio's documentation for [Protocol Selection][8]
 
 By default, the service name used when creating traces is generated from the deployment name and namespace. This can be
 set manually by adding an `app` label to the deployment's pod template:
@@ -639,7 +639,7 @@ template:
       app: <SERVICE_NAME>
 ```
 
-For [CronJobs][8], the `app` label should be added to the job template, as the generated name comes from the `Job` instead
+For [CronJobs][9], the `app` label should be added to the job template, as the generated name comes from the `Job` instead
 of the higher-level `CronJob`.
 
 ## Istio Sampling
@@ -652,7 +652,7 @@ of Istio traces are sent to Datadog.
 
 **Note**: These environment variables apply only to the subset of traces indicated by the `values.pilot.traceSampling` setting, hence the required `--set values.pilot.traceSampling=100.0` during Istio configuration.
 
-To use the [Datadog Agent calculated sampling rates][9] (10 traces per second per Agent) and ignore the default sampling rule set to 100%, set the parameter `DD_TRACE_SAMPLING_RULES` to an empty array:
+To use the [Datadog Agent calculated sampling rates][10] (10 traces per second per Agent) and ignore the default sampling rule set to 100%, set the parameter `DD_TRACE_SAMPLING_RULES` to an empty array:
 
 ```bash
 DD_TRACE_SAMPLING_RULES='[]'
@@ -679,7 +679,7 @@ value is a JSON array of objects.
 
 ## Environment variables
 
-Environment variables for Istio sidecars can be set on a per-deployment basis using the `apm.datadoghq.com/env` annotation. This is unique for deployments employing Istio sidecars and is set in addition to the [labels for unified service tagging][10].
+Environment variables for Istio sidecars can be set on a per-deployment basis using the `apm.datadoghq.com/env` annotation. This is unique for deployments employing Istio sidecars and is set in addition to the [labels for unified service tagging][11].
 ```yaml
 apiVersion: apps/v1
 ...
@@ -692,7 +692,7 @@ spec:
         apm.datadoghq.com/env: '{ "DD_ENV": "prod", "DD_SERVICE": "my-service", "DD_VERSION": "v1.1"}'
 ```
 
-The available [environment variables][11] depend on the version of the C++ tracer embedded in the Istio sidecar's proxy.
+The available [environment variables][12] depend on the version of the C++ tracer embedded in the Istio sidecar's proxy.
 
 | Istio Version | C++ Tracer Version |
 |---------------|--------------------|
@@ -745,21 +745,22 @@ spec:
 ```
 
 Automatic Protocol Selection may determine that traffic between the sidecar and Agent is HTTP, and enable tracing.
-This can be disabled using [manual protocol selection][12] for this specific service. The port name in the `datadog-agent` Service can be changed to `tcp-traceport`.
+This can be disabled using [manual protocol selection][13] for this specific service. The port name in the `datadog-agent` Service can be changed to `tcp-traceport`.
 If using Kubernetes 1.18+, `appProtocol: tcp` can be added to the port specification.
 
 [1]: /integrations/istio/
 [2]: /network_monitoring/performance/setup/#istio
 [3]: https://www.datadoghq.com/blog/istio-datadog/
-[4]: /agent/kubernetes/
-[5]: /agent/kubernetes/apm/
-[6]: https://istio.io/docs/setup/install/istioctl/
-[7]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/
-[8]: https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/
-[9]: /tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
-[10]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#configuration-1
-[11]: /tracing/setup/cpp/#environment-variables
-[12]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/#manual-protocol-selection
+[4]: https://istio.io/latest/docs/releases/supported-releases/#support-status-of-istio-releases
+[5]: /agent/kubernetes/
+[6]: /agent/kubernetes/apm/
+[7]: https://istio.io/docs/setup/install/istioctl/
+[8]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/
+[9]: https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/
+[10]: /tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
+[11]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#configuration-1
+[12]: /tracing/setup/cpp/#environment-variables
+[13]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/#manual-protocol-selection
 {{% /tab %}}
 {{< /tabs >}}
 

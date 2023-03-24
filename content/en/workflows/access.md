@@ -58,12 +58,12 @@ When you run a workflow, the service account user resolves the connections defin
 #### View service account details
 
 1. Click the cog (**Settings**) icon.
-1. Select your service account from the drop-down menu.
+1. Select your service account from the dropdown menu.
 
 #### Remove a service account associated with workflow
 
 1. Click the cog (**Settings**) icon.
-1. Select your service account from the drop-down menu.
+1. Select your service account from the dropdown menu.
 1. Click **Remove service account**.
 
 ## Action credentials
@@ -74,11 +74,11 @@ Workflow actions can be authenticated in two ways:
 - Credentials and permissions configured in the integration tile
 - Connection credentials
 
-For more information on configuring credentials, see [Connections][7].
+For more information on configuring credentials, see [Connections][6].
 
 ## Workflow permissions
 
-Use [role-based access control (RBAC)][3] to control access to your workflows and connections. To see the list of permissions that apply to workflows and connections, see [Datadog Role Permissions][10].
+Use [role-based access control (RBAC)][3] to control access to your workflows and connections. To see the list of permissions that apply to workflows and connections, see [Datadog Role Permissions][7].
 
 ### Restrict connection use
 
@@ -97,13 +97,13 @@ Resolving a connection includes getting the connection object assigned to a step
 
 Follow the steps below to modify the permissions on a specific connection:
 
-1. Navigate to the [Workflows list][9].
+1. Navigate to the [Workflows list][8].
 1. Click **Connections** in the upper right. A list of connections appears.
 1. Hover over the connection on which you would like to set granular permissions. **Edit**, **Permissions**, and **Delete** icons appear on the right.
 1. Click the padlock (**Permissions**) icon.
 1. Select **Restrict Access**.
-1. Select a role from the dropdown. Click **Add**. The role you selected populates into the bottom of the dialog box.
-1. Next to the role name, select your desired permission from the dropdown.
+1. Select a role from the dropdown menu. Click **Add**. The role you selected populates into the bottom of the dialog box.
+1. Next to the role name, select your desired permission from the dropdown menu.
 1. If you would like to remove access from a role, click the trash can icon to the right of the role name.
 1. Click **Save**.
 
@@ -116,8 +116,6 @@ Follow the steps below to modify the permissions on a specific connection:
 [3]: /account_management/rbac/
 [4]: /workflows/trigger/
 [5]: /workflows/actions_catalog/
-[6]: /integrations/
-[7]: /workflows/connections/
-[8]: /workflows/actions_catalog/generic_actions/
-[9]: https://app.datadoghq.com/workflow
-[10]: /account_management/rbac/permissions/#workflows
+[6]: /workflows/connections/
+[7]: /account_management/rbac/permissions/#workflows
+[8]: https://app.datadoghq.com/workflow

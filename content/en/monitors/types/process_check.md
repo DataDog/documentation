@@ -27,11 +27,11 @@ To create a [process check monitor][2] in Datadog, use the main navigation: *Mon
 
 ### Pick a process
 
-From the drop-down list, select a process to monitor. Filter the list by entering your search criteria.
+From the dropdown list, select a process to monitor. Filter the list by entering your search criteria.
 
 ### Pick monitor scope
 
-Select the hosts to monitor by choosing host names, tags, or choose `All Monitored Hosts`.  Only hosts or tags reporting a status for the selected process are displayed. If you need to exclude certain hosts, use the second field to list names or tags.
+Select the hosts to monitor by choosing host names, tags, or choose `All Monitored Hosts`. Only hosts or tags reporting a status for the selected process are displayed. If you need to exclude certain hosts, use the second field to list names or tags.
 
 * The include field uses `AND` logic. All listed host names and tags must be present on a host for it to be included.
 * The exclude field uses `OR` logic. Any host with a listed name or tag is excluded.

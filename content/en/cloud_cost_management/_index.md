@@ -35,9 +35,9 @@ Select the following Delivery options:
 
 ### Configure the AWS integration
 
-Navigate to [Setup & Configuration](https://app.datadoghq.com/cost/setup) and select your AWS management account from the dropdown menu, allowing Datadog to display tags associated with this account. If you have multiple similarly-named management accounts, view the tags associated with a selected account to ensure you have selected the specific account you want.
+Navigate to [Setup & Configuration][2] and select your AWS management account from the dropdown menu, allowing Datadog to display tags associated with this account. If you have multiple similarly-named management accounts, view the tags associated with a selected account to ensure you have selected the specific account you want.
 
-**Note**: Datadog recommends sending a Cost and Usage Report from an [AWS **management account**][2] for cost visibility into related **member accounts**. If you send a Cost and Usage report from an AWS **member account**, ensure that you have selected the following options in your **management account's** [preferences][3]:
+**Note**: Datadog recommends sending a Cost and Usage Report from an [AWS **management account**][3] for cost visibility into related **member accounts**. If you send a Cost and Usage report from an AWS **member account**, ensure that you have selected the following options in your **management account's** [preferences][4]:
 
 * **Linked Account Access**
 * **Linked Account Refunds and Credits**
@@ -47,7 +47,7 @@ This ensures complete cost accuracy by allowing periodic cost calculations again
 
 ### Locate the Cost and Usage Report
 
-If you have navigated away from the report that you created in the setup prerequisites section, follow AWS documentation to find and [view your Cost and Usage Reports details][4].
+If you have navigated away from the report that you created in the setup prerequisites section, follow AWS documentation to find and [view your Cost and Usage Reports details][5].
 
 To enable Datadog to locate the Cost and Usage Report, complete the fields with their corresponding details:
 
@@ -58,7 +58,7 @@ To enable Datadog to locate the Cost and Usage Report, complete the fields with 
 
 ### Configure access to the Cost and Usage Report
 
-Configure AWS to ensure Datadog has permissions to access the CUR and the s3 bucket it is stored in by [creating a policy][5] using the following JSON:
+Configure AWS to ensure Datadog has permissions to access the CUR and the s3 bucket it is stored in by [creating a policy][6] using the following JSON:
 
 {{< code-block lang="yaml" collapsible="true" >}}
 {
@@ -135,7 +135,7 @@ You can visualize your ingested data using the following cost types:
 
 ### Tag enrichment
 
-Datadog adds out-of-the-box tags to the ingested cost data to help you further break down and allocate your costs. These tags are derived from your [Cost and Usage Report (CUR)][6].
+Datadog adds out-of-the-box tags to the ingested cost data to help you further break down and allocate your costs. These tags are derived from your [Cost and Usage Report (CUR)][7].
 
 The following out-of-the-box tags are also available for filtering and grouping data:
 
@@ -182,11 +182,12 @@ There are two types of rules supported: **Create new tag**, and **Alias existing
 The rule stops executing for each resource, once a first match is found. For example, if a resource already has a `web-app` tag, then the rule no longer attempts to identify an `apps` or `service` tag. 
 
 [1]: https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html
-[2]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/consolidated-billing.html
-[3]: https://us-east-1.console.aws.amazon.com/cost-management/home?region=us-east-1#/settings
-[4]: https://docs.aws.amazon.com/cur/latest/userguide/view-cur.html
-[5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
-[6]: https://docs.aws.amazon.com/cur/latest/userguide/data-dictionary.html
+[2]: https://app.datadoghq.com/cost/setup
+[3]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/consolidated-billing.html
+[4]: https://us-east-1.console.aws.amazon.com/cost-management/home?region=us-east-1#/settings
+[5]: https://docs.aws.amazon.com/cur/latest/userguide/view-cur.html
+[6]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
+[7]: https://docs.aws.amazon.com/cur/latest/userguide/data-dictionary.html
 {{% /tab %}}
 
 {{% tab "Azure" %}}
@@ -194,11 +195,11 @@ The rule stops executing for each resource, once a first match is found. For exa
 
 To use Azure Cloud Cost Management in Datadog, you must set up the Datadog Azure integration and set up **amortized** and **actual** exports. Additionally, Datadog must have permissions to read the exports from the container.
 
-**Note**: If you are a US3 customer, you likely used the recommended [Datadog Resource method][1] through the Azure portal to set up the integration with Datadog. To support Cloud Cost Management, you need to [create an App Registration][4]. 
+**Note**: If you are a US3 customer, you likely used the recommended [Datadog Resource method][1] through the Azure portal to set up the integration with Datadog. To support Cloud Cost Management, you need to [create an App Registration][2]. 
 
 ### Generate cost exports
 
-1. Navigate to [Exports][2] under Azure portal's *Cost Management + Billing*.
+1. Navigate to [Exports][3] under Azure portal's *Cost Management + Billing*.
 2. Select the export scope. **Note:** The scope must be *subscription* or *resource group*.
 3. Once the scope is selected, click **Add**.
 
@@ -211,7 +212,7 @@ To use Azure Cloud Cost Management in Datadog, you must set up the Datadog Azure
   
 {{< img src="cloud_cost/new_export.png" alt="Export details with Metric: Actual, Export type: Daily, and File Partitioning: On"  >}}
 
-5. Choose a storage account, container, and directory for the exports.
+5. Choose a storage account, container, and directory for the exports. The billing exports must be stored in the subscription the export is for.
 6. Select **Create**.
 
 Repeat steps one to six for Metric: **Amortized Cost (usage and purchases)**. Datadog recommends using the same storage container for both exports.
@@ -232,7 +233,7 @@ If your exports are in different storage containers, repeat steps one to seven f
 
 ### Configure Cost Management Reader access
 
-1. Navigate to your [subscriptions][4] and click your subscription's name.
+1. Navigate to your [subscriptions][2] and click your subscription's name.
 2. Select the Access Control (IAM) tab.
 3. Click **Add**.
 4. Choose **Cost Management Reader**, then click Next.
@@ -241,9 +242,8 @@ If your exports are in different storage containers, repeat steps one to seven f
 This ensures complete cost accuracy by allowing periodic cost calculations against Azure Cost Management.
 
 [1]: https://www.datadoghq.com/blog/azure-datadog-partnership/
-[2]: https://docs.datadoghq.com/integrations/azure/?tab=azurecliv20#setup
-[3]: https://portal.azure.com/#view/Microsoft_Azure_GTM/ModernBillingMenuBlade/~/Exports
-[4]: https://portal.azure.com/#view/Microsoft_Azure_Billing/SubscriptionsBlade
+[2]: https://portal.azure.com/#view/Microsoft_Azure_Billing/SubscriptionsBlade
+[3]: https://docs.datadoghq.com/integrations/azure/?tab=azurecliv20#setup
 {{% /tab %}}
 {{< /tabs >}}
 

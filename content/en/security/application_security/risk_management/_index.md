@@ -5,16 +5,16 @@ further_reading:
 - link: "/security/application_security/how-appsec-works/"
   tag: "Documentation"
   text: "How Application Security Works in Datadog"
-- link: "/security/application_security/getting_started/"
+- link: "/security/application_security/enabling/"
   tag: "Documentation"
-  text: "Get started by enabling Application Security on your services"
+  text: "Enabling Application Security on your services"
 ---
 
 <div class="alert alert-info">Application Security Risk Management is in beta.</a></div>
 
 ## Overview
 
-ASM Risk Management offers built-in detection capabilities that warn you about the vulnerabilities detected in your services' open source dependencies. Details of that information are shown in the [Vulnerability Explorer][3], identifying the severity, affected services, potentially vulnerable infrastructure, and remediation instructions to solve the surfaced risks.
+ASM Risk Management offers built-in detection capabilities that warn you about the vulnerabilities detected in your services' open source dependencies. Details of that information are shown in the [Vulnerability Explorer][1], identifying the severity, affected services, potentially vulnerable infrastructure, and remediation instructions to solve the surfaced risks.
 
 ## Compatibility
 
@@ -29,7 +29,7 @@ Risk Management is available with the following APM tracing libraries:
 
 ## Get Started
 
-**Join the beta!** If you already use Application security, enroll from the [Application Security home page][4]. If you're new to Application Security, visit the [Application Security landing page][5] for an overview and to get started.
+**Join the beta!** If you already use Application security, enroll from the [Application Security home page][2]. If you're new to Application Security, visit the [Application Security landing page][3] for an overview and to get started.
 
 Alternatively, when you view a service details page in APM, the Security tab also provides an **Enable ASM** link where you can join the Risk Management beta.
 
@@ -67,7 +67,7 @@ The custom code vulnerabilities it can find include:
 
 ## Risk information in APM views
 
-Risk Management uses the information APM is already collecting, and flags libraries that match with current vulnerability advisories. Potentially vulnerable services are highlighted directly in the security views embedded in the [APM Service Catalog][2].
+Risk Management uses the information APM is already collecting, and flags libraries that match with current vulnerability advisories. Potentially vulnerable services are highlighted directly in the security views embedded in the [APM Service Catalog][4].
 
 {{< img src="security/application_security/vulns-in-service-catalog.png" alt="Vulnerability information shown in the APM Service Catalog" style="width:100%;" >}}
 
@@ -75,8 +75,7 @@ Risk Management uses the information APM is already collecting, and flags librar
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help/
-[2]: https://app.datadoghq.com/services?lens=Security
-[3]: https://app.datadoghq.com/security/appsec/vm
-[4]: https://app.datadoghq.com/security/appsec
-[5]: https://app.datadoghq.com/security/appsec/landing
+[1]: https://app.datadoghq.com/security/appsec/vm
+[2]: https://app.datadoghq.com/security/appsec
+[3]: https://app.datadoghq.com/security/appsec/landing
+[4]: https://app.datadoghq.com/services?lens=Security

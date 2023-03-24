@@ -38,22 +38,23 @@ When the Agent runs as a container, it tries by default to Autodiscover other co
 | [Kyototycoon][31]              | [auto_conf.yaml][32]    |
 | [MemCached][33]                | [auto_conf.yaml][34]    |
 | [Presto][35]                   | [auto_conf.yaml][36]    |
-| [Redis][37]                    | [auto_conf.yaml][38]    |
-| [Riak][39]                     | [auto_conf.yaml][40]    |
-| [Tomcat][41]                   | [auto_conf.yaml][42]    |
+| [RabbitMQ][37]                 | [auto_conf.yaml][38]    |
+| [Redis][39]                    | [auto_conf.yaml][40]    |
+| [Riak][41]                     | [auto_conf.yaml][42]    |
+| [Tomcat][43]                   | [auto_conf.yaml][44]    |
 
-The `auto_conf.yaml` configuration files cover all required parameters to set up a specific integration, with their corresponding [Autodiscovery Templates Variables][43] in place to take into account the containerized environment.
+The `auto_conf.yaml` configuration files cover all required parameters to set up a specific integration, with their corresponding [Autodiscovery Templates Variables][45] in place to take into account the containerized environment.
 
 ## Customizing configuration
 The auto configuration logic only supports the default configuration for any integration above. If you want to customize your Datadog integration configuration, see the Integrations Templates documentation to learn how to configure your Agent Autodiscovery. Any configuration discovered through Kubernetes Annotations or Docker Labels for a given container takes precedence over the `auto_conf.yaml` file.
 
-* [Using Key-Value Store][44]
-* [Using Kubernetes Annotations][45]
-* [Using Docker Labels][46]
+* [Using Key-Value Store][46]
+* [Using Kubernetes Annotations][47]
+* [Using Docker Labels][48]
 
 ## Disabling auto-configuration
 
-To disable the Agent from using the `auto_conf.yaml` configuration, you can add the `DD_IGNORE_AUTOCONF` environment variable for the desired integration(s) to disable. The following examples would have the Agent ignore the [`redisdb.d/auto_conf.yaml`][38] and [`istio.d/auto_conf.yaml`][22] file and avoid automatically setting up these integrations.
+To disable the Agent from using the `auto_conf.yaml` configuration, you can add the `DD_IGNORE_AUTOCONF` environment variable for the desired integration(s) to disable. The following examples would have the Agent ignore the [`redisdb.d/auto_conf.yaml`][40] and [`istio.d/auto_conf.yaml`][22] file and avoid automatically setting up these integrations.
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -117,13 +118,15 @@ DD_IGNORE_AUTOCONF="redisdb istio"
 [34]: https://github.com/DataDog/integrations-core/blob/master/mcache/datadog_checks/mcache/data/auto_conf.yaml
 [35]: /integrations/presto/
 [36]: https://github.com/DataDog/integrations-core/blob/master/presto/datadog_checks/presto/data/auto_conf.yaml
-[37]: /integrations/redisdb/
-[38]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/auto_conf.yaml
-[39]: /integrations/riak/
-[40]: https://github.com/DataDog/integrations-core/blob/master/riak/datadog_checks/riak/data/auto_conf.yaml
-[41]: /integrations/tomcat/
-[42]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/auto_conf.yaml
-[43]: /agent/faq/template_variables/
-[44]: /agent/kubernetes/integrations/?tab=keyvaluestore#configuration
-[45]: /agent/kubernetes/integrations/?tab=kubernetes#configuration
-[46]: /agent/docker/integrations/#configuration
+[37]: /integrations/rabbitmq/
+[38]: https://github.com/DataDog/integrations-core/blob/master/rabbitmq/datadog_checks/rabbitmq/data/auto_conf.yaml
+[39]: /integrations/redisdb/
+[40]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/auto_conf.yaml
+[41]: /integrations/riak/
+[42]: https://github.com/DataDog/integrations-core/blob/master/riak/datadog_checks/riak/data/auto_conf.yaml
+[43]: /integrations/tomcat/
+[44]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/auto_conf.yaml
+[45]: /agent/guide/template_variables/
+[46]: /agent/kubernetes/integrations/?tab=keyvaluestore#configuration
+[47]: /agent/kubernetes/integrations/?tab=kubernetes#configuration
+[48]: /agent/docker/integrations/#configuration

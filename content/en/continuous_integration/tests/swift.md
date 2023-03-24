@@ -7,6 +7,9 @@ further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
       text: "Explore Test Results and Performance"
+    - link: "/continuous_integration/intelligent_test_runner/swift"
+      tag: "Documentation"
+      text: "Speed up your test jobs with Intelligent Test Runner"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
       text: "Troubleshooting CI"
@@ -154,7 +157,7 @@ Set all these variables in your test target:
 **Default**: `(empty)`
 
 `DD_APPLICATION_KEY`
-: The [Datadog Application key][5] used to upload the test results.<br/>
+: The [Datadog Application key][3] used to upload the test results.<br/>
 **Default**: `(empty)`
 
 `DD_SERVICE`
@@ -177,7 +180,7 @@ Set all these variables in your test target:
 Additionally, configure the Datadog site to use the selected one ({{< region-param key="dd_site_name" >}}):
 
 `DD_SITE` (Required)
-: The [Datadog site][3] to upload results to.<br/>
+: The [Datadog site][4] to upload results to.<br/>
 **Default**: `datadoghq.com`<br/>
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
 
@@ -253,7 +256,7 @@ For UITests, both the test target and the application running from the UITests m
 
 ### RUM Integration
 
-If the application being tested is instrumented using RUM, your UI tests results and their generated RUM sessions are automatically linked. Learn more about RUM in the [RUM iOS Integration][4] guide. An iOS RUM version >= 1.10 is needed.
+If the application being tested is instrumented using RUM, your UI tests results and their generated RUM sessions are automatically linked. Learn more about RUM in the [RUM iOS Integration][5] guide. An iOS RUM version >= 1.10 is needed.
 
 
 ## Additional optional configuration
@@ -800,8 +803,8 @@ In addition to that, if [Intelligent Test Runner][7] is enabled, the following d
 
 [1]: /continuous_integration/tests/#test-suite-level-visibility
 [2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: /getting_started/site/
-[4]: /continuous_integration/guides/rum_swift_integration
-[5]: https://app.datadoghq.com/organization-settings/application-keys
+[3]: https://app.datadoghq.com/organization-settings/application-keys
+[4]: /getting_started/site/
+[5]: /continuous_integration/guides/rum_swift_integration
 [6]: https://opentelemetry.io/
 [7]: /continuous_integration/intelligent_test_runner/

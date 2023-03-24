@@ -21,7 +21,7 @@ further_reading:
 <div class="alert alert-info">This page is about the security of data sent to Datadog. If you're looking for cloud and application security products and features, see the <a href="/security/" target="_blank">Security</a> section.</div>
 
 ## Overview
-Real User Monitoring (RUM) provides controls for implementing privacy requirements and ensuring organizations of any scale do not expose sensitive or personal information. Data is stored on Datadog-managed cloud instances and encrypted at rest. The default behaviors and configurable options described on this page are designed to protect end user privacy and prevent sensitive organizational information from being collected. Learn more about [Privacy at Datadog][13].
+Real User Monitoring (RUM) provides controls for implementing privacy requirements and ensuring organizations of any scale do not expose sensitive or personal information. Data is stored on Datadog-managed cloud instances and encrypted at rest. The default behaviors and configurable options described on this page are designed to protect end user privacy and prevent sensitive organizational information from being collected. Learn more about [Privacy at Datadog][1].
 ## Compliance frameworks
 RUM can be configured for compliance with many standards and regulatory frameworks, including, but not limited to:
 
@@ -43,21 +43,21 @@ Mobile RUM tracking is only run upon user consent. If the end user accepts the R
 You have several options and tools when it comes to collecting and redacting data captured by RUM.
 
 ### Event tracking
-An [event][14] is a user interaction with specific elements of your site or app. Events can be automatically captured via the SDK or sent via custom actions. You can turn off automatic tracking of user interactions and page views to only capture the interaction of your choice. By default, RUM uses target content to generate action names from actions automatically collected by the SDK. You can [explicitly override][5] this behavior with any given name.
+An [event][2] is a user interaction with specific elements of your site or app. Events can be automatically captured via the SDK or sent via custom actions. You can turn off automatic tracking of user interactions and page views to only capture the interaction of your choice. By default, RUM uses target content to generate action names from actions automatically collected by the SDK. You can [explicitly override][3] this behavior with any given name.
 
 The data we track automatically contains primarily technical information, much of which doesn't include personal identifying information. Data that is captured by RUM can be further redacted before it is sent and stored in Datadog through advanced configuration options for the following methods:
 
-- [beforeSend API][1]
-- [iOS][2]
-- [Android][3]
-- [Flutter][4]
-- [React Native][16]
+- [beforeSend API][4]
+- [iOS][5]
+- [Android][6]
+- [Flutter][7]
+- [React Native][8]
 
 ### Transmit RUM events through a proxy server
-You can transmit all RUM events through your own [proxy server][15] so that end user devices never directly communicate with Datadog.
+You can transmit all RUM events through your own [proxy server][9] so that end user devices never directly communicate with Datadog.
 
 ### User identity tracking
-By default, there is **no tracking of users' identity**. Each session has a unique `session.id` tied to it, which anonymizes the data, but allows you to understand trends. You have the option of writing code to capture [user data][6] such as name and email address, then using that data to [enrich and modify][7] RUM sessions, but this is not required.
+By default, there is **no tracking of users' identity**. Each session has a unique `session.id` tied to it, which anonymizes the data, but allows you to understand trends. You have the option of writing code to capture [user data][10] such as name and email address, then using that data to [enrich and modify][10] RUM sessions, but this is not required.
 
 ### Data retention
 After you have configured the event capture, events are stored in Datadog. You can decide how long your captured events and properties stay in Datadog.
@@ -67,13 +67,13 @@ By default, data retention for production environments is:
 - 30 days for sessions, views, actions, errors, and session recordings.
 - 15 days for resources and long tasks.
 
-Any of this retained data can be extended to a maximum of 90 days at no additional cost by [opening a support ticket][8].
+Any of this retained data can be extended to a maximum of 90 days at no additional cost by [opening a support ticket][11].
 
 #### Role-based access control
-Datadog provides role-based access control (RBAC) for managing who sees captured RUM data. Default settings for data access depend on the role a user gets added to. There are three types of Datadog roles available: Administrator, Standard, and Read Only roles. More granular RUM-specific permissions are defined in [Datadog role permissions][10]. For example, you can grant or revoke access to view Session Replays.
+Datadog provides role-based access control (RBAC) for managing who sees captured RUM data. Default settings for data access depend on the role a user gets added to. There are three types of Datadog roles available: Administrator, Standard, and Read Only roles. More granular RUM-specific permissions are defined in [Datadog role permissions][12]. For example, you can grant or revoke access to view Session Replays.
 
 ### Data deletion
-If you need to delete data stored by Datadog, for example, if potentially sensitive data has been leaked into RUM events, you can hard-delete data from within a given timeframe. With a hard delete, **all** data is deleted; it cannot be targeted to a specific application. If you need any data deleted, reach out to the [Datadog support team][9].
+If you need to delete data stored by Datadog, for example, if potentially sensitive data has been leaked into RUM events, you can hard-delete data from within a given timeframe. With a hard delete, **all** data is deleted; it cannot be targeted to a specific application. If you need any data deleted, reach out to the [Datadog support team][11].
 
 ### Personal and sensitive data removal
 You have some options available for removing Personally Identifiable Information (PII), and sensitive data, including IP addresses and geolocation. Some scenarios where PII could appear in RUM:
@@ -97,31 +97,29 @@ When setting up a RUM application, you can choose whether or not you want to inc
 Once you disable collection of IP data, the change will be applied immediately. Any events collected prior to disabling will not have their IP data removed. It is performed on the backend, which means the Browser SDK will still be sending data, but IP addresses will be omitted by Datadog backend pipelines and dropped at processing time.
 
 #### Geolocation
-In addition to removing client IPs, you can also choose to disable the collection of geolocation (country, city, county), or GeoIP, from all future collected data. If you uncheck the “Collect geolocation data” box, the change will be applied immediately. Any events collected prior to disabling will not have their geolocation data removed. Data omission is done at the backend level, which means the Browser SDK will still be sending data, but geolocation data will be omitted by our backend pipelines and dropped at processing time.
+In addition to removing client IPs, you can also choose to disable the collection of geolocation (country, city, county), or GeoIP, from all future collected data. If you uncheck the **Collect geolocation data** box, the change will be applied immediately. Any events collected prior to disabling will not have their geolocation data removed. Data omission is done at the backend level, which means the Browser SDK will still be sending data, but geolocation data will be omitted by our backend pipelines and dropped at processing time.
 
 ### Proactively search for sensitive data with Sensitive Data Scanner
-[Sensitive Data Scanner][11] allows you to proactively search and scrub sensitive data upon ingestion by Datadog. RUM events are scanned on the stream before any data is stored within Datadog. The tool has the power to scrub, hash, or partially redact PII data before it is stored. It works by applying out-of-the-box or customer-developed pattern matching rules.
+[Sensitive Data Scanner][13] allows you to proactively search and scrub sensitive data upon ingestion by Datadog. RUM events are scanned on the stream before any data is stored within Datadog. The tool has the power to scrub, hash, or partially redact PII data before it is stored. It works by applying out-of-the-box or customer-developed pattern matching rules.
 
 ## Session Replay-specific privacy options
-See [privacy options specific to Session Replay][12].
+See [privacy options specific to Session Replay][14].
 
 ### Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/guide/enrich-and-control-rum-data/?tab=event#event-and-context-structure
-[2]: /real_user_monitoring/ios/advanced_configuration/?tab=swift#modify-or-drop-rum-events
-[3]: /real_user_monitoring/android/advanced_configuration/?tab=kotlin#modify-or-drop-rum-events
-[4]: /real_user_monitoring/flutter/advanced_configuration/#modify-or-drop-rum-events
-[5]: /real_user_monitoring/browser/tracking_user_actions/#declare-a-name-for-click-actions
-[6]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#user-session
-[7]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#user-session
-[8]: /help/
-[9]: /help/
-[10]: /account_management/rbac/permissions/#real-user-monitoring
-[11]: /account_management/org_settings/sensitive_data_detection
-[12]: /real_user_monitoring/session_replay/privacy_options
-[13]: https://www.datadoghq.com/privacy/
-[14]: /real_user_monitoring/explorer/search/
-[15]: /real_user_monitoring/guide/proxy-rum-data/?tab=npm
-[16]: /real_user_monitoring/reactnative/advanced_configuration/#modify-or-drop-rum-events
+[1]: https://www.datadoghq.com/privacy/
+[2]: /real_user_monitoring/explorer/search/
+[3]: /real_user_monitoring/browser/tracking_user_actions/#declare-a-name-for-click-actions
+[4]: /real_user_monitoring/guide/enrich-and-control-rum-data/?tab=event#event-and-context-structure
+[5]: /real_user_monitoring/ios/advanced_configuration/?tab=swift#modify-or-drop-rum-events
+[6]: /real_user_monitoring/android/advanced_configuration/?tab=kotlin#modify-or-drop-rum-events
+[7]: /real_user_monitoring/flutter/advanced_configuration/#modify-or-drop-rum-events
+[8]: /real_user_monitoring/reactnative/advanced_configuration/#modify-or-drop-rum-events
+[9]: /real_user_monitoring/guide/proxy-rum-data/?tab=npm
+[10]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#user-session
+[11]: /help/
+[12]: /account_management/rbac/permissions/#real-user-monitoring
+[13]: /account_management/org_settings/sensitive_data_detection
+[14]: /real_user_monitoring/session_replay/privacy_options

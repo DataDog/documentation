@@ -27,14 +27,14 @@ To identify which ingestion mechanisms are currently used in your Datadog enviro
 {{< img src="/tracing/guide/ingestion_sampling_use_cases/ingestion_control_page.png" alt="Ingestion Control Page" style="width:90%;" >}}
 
 The table gives insights on ingested volumes *by service*. The Configuration column provides a first indication of the current set up. It shows: 
-- `AUTOMATIC` if the sampling rate calculated in the Datadog Agent is applied to the traces that start from the service. Read more about the specifics of [Datadog Agent ingestion logic][5].
+- `AUTOMATIC` if the sampling rate calculated in the Datadog Agent is applied to the traces that start from the service. Read more about the specifics of [Datadog Agent ingestion logic][4].
 - `CONFIGURED` if a custom trace sampling rate configured in the tracing library is applied to the traces that start from the service.
 
 Click on services to see details about what sampling decision makers (for example Agent or tracing library, rules or sample rates) are used for each service, as well as what [ingestion sampling mechanisms][1] are leveraged for ingested spans' services. 
 
 {{< img src="/tracing/guide/ingestion_sampling_use_cases/service-ingestion-summary.png" alt="Service Ingestion Summary" style="width:90%;" >}}
 
-In the Service Ingestion Summary example above, the **Ingestion reasons breakdown** table shows that most of the ingestion reasons for this service come from `rule` ([user defined sampling rule][6]).
+In the Service Ingestion Summary example above, the **Ingestion reasons breakdown** table shows that most of the ingestion reasons for this service come from `rule` ([user defined sampling rule][5]).
 
 The Top sampling decision makers for this service show that `web-store` service gets sampling decisions from `web-store`, `shopist-web-ui`, `shipping-worker`, `synthetics-browser`, and `product-recommendation`. These five services all contribute in the overall sampling decisions that affect the `web-store` service spans. When determining how to fine tune the ingestion for web-store, all five services need to be considered.
 
@@ -46,11 +46,11 @@ Ingesting entire transaction traces ensures visibility over the **end-to-end ser
 
 #### Solution: Head-based sampling
 
-Complete traces can be ingested with [head-based sampling][4] mechanisms: the decision to keep or drop the trace is determined from the first span of the trace, the *head*, when the trace is created. This decision is propagated through the request context to downstream services.
+Complete traces can be ingested with [head-based sampling][6] mechanisms: the decision to keep or drop the trace is determined from the first span of the trace, the *head*, when the trace is created. This decision is propagated through the request context to downstream services.
 
-{{< img src="/tracing/guide/ingestion_sampling_use_cases/head_based_sampling_keep.png" alt="Head-based Sampling" style="width:100%;" >}}
+{{< img src="/tracing/guide/ingestion_sampling_use_cases/head-based-sampling.png" alt="Head-based Sampling" style="width:100%;" >}}
 
-To decide which traces to keep and drop, the Datadog Agent computes [default sampling rates][5] for each service to apply at trace creation, based on the application traffic:
+To decide which traces to keep and drop, the Datadog Agent computes [default sampling rates][4] for each service to apply at trace creation, based on the application traffic:
 - For low-traffic applications, a sampling rate of 100% is applied.
 - For high-traffic applications, a lower sampling rate is applied with a target of 10 complete traces per second per Agent.
 
@@ -60,7 +60,7 @@ You can also override the default Agent sampling rate by configuring the samplin
 
 Default sampling rates are calculated to target 10 complete traces per second, per Agent. This is a *target* number of traces and is the result of averaging traces over a period of time. It is *not* a hard limit, and traffic spikes can cause significantly more traces to be sent to Datadog for short periods of time. 
 
-You can increase or decrease this target by configuring the Datadog Agent parameter `max_traces_per_second` or the environment variable `DD_APM_MAX_TPS`. Read more about [head-based sampling ingestion mechanisms][5].
+You can increase or decrease this target by configuring the Datadog Agent parameter `max_traces_per_second` or the environment variable `DD_APM_MAX_TPS`. Read more about [head-based sampling ingestion mechanisms][4].
 
 **Note:** Changing an Agent configuration impacts the percentage sampling rates for *all services* reporting traces to this Datadog Agent.
 
@@ -72,7 +72,7 @@ If some services and requests are critical to your business, you want higher vis
 
 #### Solution: Sampling rules
 
-By default, sampling rates are calculated to target 10 traces per second per Datadog Agent. You can override the default calculated sampling rate by configuring [sampling rules][6] in the tracing library. 
+By default, sampling rates are calculated to target 10 traces per second per Datadog Agent. You can override the default calculated sampling rate by configuring [sampling rules][5] in the tracing library. 
 
 You can configure sampling rules by service. For traces that start from the rule's specified service, the defined percentage sampling rate is applied instead of the Agent's default sampling rate.
 
@@ -86,7 +86,7 @@ For example, to send 20 percent of the traces for the service named `my-service`
 DD_TRACE_SAMPLING_RULES=[{"service": "my-service", "sample_rate": 0.2}]
 ```
 
-Read more about [sampling rules ingestion mechanisms][6].
+Read more about [sampling rules ingestion mechanisms][5].
 
 ### Keeping more error-related traces
 
@@ -96,7 +96,7 @@ Traces with error spans are often symptoms of system failures. Keeping a higher 
 
 In addition to head-based sampled traces, you can increase the error sampling rate so that each Agent keeps additional error spans even if the related traces are not kept by head-based sampling. 
 
-{{< img src="/tracing/guide/ingestion_sampling_use_cases/error_sampling.png" alt="Error Sampling" style="width:100%;" >}}
+{{< img src="/tracing/guide/ingestion_sampling_use_cases/error-spans-sampling.png" alt="Error Sampling" style="width:100%;" >}}
 
 **Note:** Distributed pieces of the trace chunks might not be ingested as the sampling happens locally at the Datadog Agent level.
 
@@ -142,7 +142,7 @@ The backend service `web-store` is calling a Mongo database multiple times per t
 
   **Note**: Configuring a single span sampling rule is especially useful if you are using [span-based metrics][8], which are derived from ingested spans.
 
-{{< img src="/tracing/guide/ingestion_sampling_use_cases/drop_database_spans.png" alt="Database spans sampling" style="width:100%;" >}}
+{{< img src="/tracing/guide/ingestion_sampling_use_cases/single-span-sampling.png" alt="Database spans sampling" style="width:100%;" >}}
 
 
 ## Further Reading
@@ -152,8 +152,8 @@ The backend service `web-store` is calling a Mongo database multiple times per t
 [1]: /tracing/trace_pipeline/ingestion_mechanisms/
 [2]: /opentelemetry/guide/ingestion_sampling_with_opentelemetry/
 [3]: https://app.datadoghq.com/apm/traces/ingestion-control
-[4]: /tracing/trace_pipeline/ingestion_mechanisms/#head-based-sampling
-[5]: /tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
-[6]: /tracing/trace_pipeline/ingestion_mechanisms/#in-tracing-libraries-user-defined-rules
+[4]: /tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
+[5]: /tracing/trace_pipeline/ingestion_mechanisms/#in-tracing-libraries-user-defined-rules
+[6]: /tracing/trace_pipeline/ingestion_mechanisms/#head-based-sampling
 [7]: /tracing/trace_pipeline/ingestion_controls/#service-ingestion-summary
 [8]: /tracing/trace_pipeline/generate_metrics/

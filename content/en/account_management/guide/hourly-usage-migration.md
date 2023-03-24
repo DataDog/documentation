@@ -33,8 +33,8 @@ The families and usage types:
     * `analyzed_logs`
 - **application_security**
     * `app_sec_host_count`
-- **audit_logs**
-    * `lines_indexed`
+- **audit_trail**
+    * `enabled`
 - **serverless**
     * `func_count`
     * `invocations_sum`
@@ -473,6 +473,6 @@ parameter `filter[include_descendants]` to request data for child organizations.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+
 [1]: https://jsonapi.org/format/
 [2]: /api/latest/usage-metering/#get-hourly-usage-for-hosts-and-containers
-

@@ -6,6 +6,5 @@ scope: link
 level: warning
 tokens:
   - here
-  - documentation
   - this
   - ^page$

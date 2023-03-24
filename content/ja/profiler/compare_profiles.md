@@ -1,6 +1,4 @@
 ---
-aliases:
-- /ja/profiler/compare_profiles/
 further_reading:
 - link: profiler/enabling
   tag: ドキュメント

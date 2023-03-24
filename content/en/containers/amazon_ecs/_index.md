@@ -2,8 +2,8 @@
 title: Amazon ECS
 kind: documentation
 aliases:
-  - /integrations/amazon_ecs/
   - /agent/amazon_ecs/
+  - /containers/amazon_ecs/data_collected
 further_reading:
 - link: "/agent/amazon_ecs/logs/"
   tag: "Documentation"
@@ -11,9 +11,6 @@ further_reading:
 - link: "/agent/amazon_ecs/apm/"
   tag: "Documentation"
   text: "Collect your application traces"
-- link: "/agent/amazon_ecs/data_collected/#metrics"
-  tag: "Documentation"
-  text: "Collect ECS metrics"
 - link: "https://www.datadoghq.com/blog/amazon-ecs-anywhere-monitoring/"
   tag: "Blog"
   text: "Announcing support for Amazon ECS Anywhere"
@@ -44,23 +41,23 @@ If you don't have a working EC2 Container Service cluster configured, review the
 
 ### Create an ECS task
 
-The Task Definition launches the Datadog Agent container with the necessary configurations. When you need to modify the Agent configuration, update this Task Definition and redeploy the Daemon Service as needed. You can configure the Task Definition using either the [AWS CLI tools][9] or using the Amazon Web Console. 
+The Task Definition launches the Datadog Agent container with the necessary configurations. When you need to modify the Agent configuration, update this Task Definition and redeploy the Daemon Service as needed. You can configure the Task Definition using either the [AWS CLI tools][6] or using the Amazon Web Console. 
 
 The following sample is a minimal configuration for core infrastructure monitoring. However, additional Task Definition samples with various features enabled are provided in the [Setup additional Agent features](#setup-additional-agent-features) section if you want to use those instead.
 
 #### Managing the task definition file
 
-1. For Linux containers, download [datadog-agent-ecs.json][20]
-    1. If you are using an original Amazon Linux 1 AMI use [datadog-agent-ecs1.json][21]
-    2. If you are using Windows use [datadog-agent-ecs-win.json][22] 
+1. For Linux containers, download [datadog-agent-ecs.json][7]
+    1. If you are using an original Amazon Linux 1 AMI use [datadog-agent-ecs1.json][8]
+    2. If you are using Windows use [datadog-agent-ecs-win.json][9] 
 
 2. Edit your base Task Definition file
-    1. Set `<YOUR_DATADOG_API_KEY>` with the [Datadog API key][14] for your account.
+    1. Set `<YOUR_DATADOG_API_KEY>` with the [Datadog API key][10] for your account.
     2. Set the `DD_SITE` environment variable to {{< region-param key="dd_site" code="true" >}} 
 
-        **Note**: If the `DD_SITE` environment variable is not explicitly set, it defaults to the `US` site `datadoghq.com`. If you are using one of the other sites (`EU`, `US3`, or `US1-FED`) and do not set this, it results in an invalid API key message. Use the [documentation site selector][13] to see documentation appropriate for the site you're using.
+        **Note**: If the `DD_SITE` environment variable is not explicitly set, it defaults to the `US` site `datadoghq.com`. If you are using one of the other sites (`EU`, `US3`, or `US1-FED`) and do not set this, it results in an invalid API key message. Use the [documentation site selector][11] to see documentation appropriate for the site you're using.
 
-3. Optionally - Add the following to your ECS task definition to deploy on an [ECS Anywhere cluster][15].
+3. Optionally - Add the following to your ECS task definition to deploy on an [ECS Anywhere cluster][12].
     ```json
     "requiresCompatibilities": ["EXTERNAL"]
     ```
@@ -76,7 +73,7 @@ The following sample is a minimal configuration for core infrastructure monitori
     }
     ```
 
-For all of these examples the `DD_API_KEY` environment variable can alternatively be populated by referencing the [ARN of a "Plaintext" secret stored in AWS Secret Manager][16]. Any additional tags can be added by the environment variable `DD_TAGS`.
+For all of these examples the `DD_API_KEY` environment variable can alternatively be populated by referencing the [ARN of a "Plaintext" secret stored in AWS Secret Manager][13]. Any additional tags can be added by the environment variable `DD_TAGS`.
 
 #### Registering the task definition
 
@@ -104,7 +101,7 @@ Once you have your Task Definition file created you can login to your AWS consol
 
 ### Run the Agent as a daemon service
 
-Ideally, you want one running Datadog Agent container on each EC2 instance. The easiest way to achieve this is to run the Datadog Agent Task Definition as a [Daemon Service][10].
+Ideally, you want one running Datadog Agent container on each EC2 instance. The easiest way to achieve this is to run the Datadog Agent Task Definition as a [Daemon Service][14].
 
 #### Schedule a daemon service in AWS using Datadog's ECS task
 
@@ -117,15 +114,15 @@ Ideally, you want one running Datadog Agent container on each EC2 instance. The 
 
 ### Setup Additional Agent Features
 
-The initial Task Definition provided above is a fairly minimal one. This Task Definition deploys an Agent container with a base configuration to collect core metrics about the containers in your ECS cluster. This Agent can also run Agent Integrations based on [Docker Autodiscovery Labels][12] discovered on your corresponding containers.
+The initial Task Definition provided above is a fairly minimal one. This Task Definition deploys an Agent container with a base configuration to collect core metrics about the containers in your ECS cluster. This Agent can also run Agent Integrations based on [Docker Autodiscovery Labels][15] discovered on your corresponding containers.
 
 If you're using:
-- APM: Consult the [APM setup documentation][6] and the sample [datadog-agent-ecs-apm.json][23]
-- Log Management: Consult the [Log collection documentation][7] and the sample [datadog-agent-ecs-logs.json][24]
+- APM: Consult the [APM setup documentation][16] and the sample [datadog-agent-ecs-apm.json][17]
+- Log Management: Consult the [Log collection documentation][18] and the sample [datadog-agent-ecs-logs.json][19]
 
 #### DogStatsD
 
-If you're using [DogStatsD][8], add in a Host Port mapping for 8125/udp to your Datadog Agent's container definition:
+If you're using [DogStatsD][20], add in a Host Port mapping for 8125/udp to your Datadog Agent's container definition:
 ```json
 "portMappings": [
   {
@@ -138,7 +135,7 @@ If you're using [DogStatsD][8], add in a Host Port mapping for 8125/udp to your 
 
 In addition to this port mapping, set the environment variable `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` to `true`.
 
-This setup allows the DogStatsD traffic to be routed from the application containers, through the host and host port, to the Datadog Agent container. However, the application container must use the host's private IP address for this traffic. This can be enabled by setting the environment variable `DD_AGENT_HOST` to the private IP address of the EC2 instance, which can be retrieved from the Instance Metadata Service (IMDS). Alternatively, this can be set in the code during initialization. The implementation for DogStatsD is the same as for APM, see [configure the Trace Agent endpoint][17] for examples of setting the Agent endpoint.
+This setup allows the DogStatsD traffic to be routed from the application containers, through the host and host port, to the Datadog Agent container. However, the application container must use the host's private IP address for this traffic. This can be enabled by setting the environment variable `DD_AGENT_HOST` to the private IP address of the EC2 instance, which can be retrieved from the Instance Metadata Service (IMDS). Alternatively, this can be set in the code during initialization. The implementation for DogStatsD is the same as for APM, see [configure the Trace Agent endpoint][21] for examples of setting the Agent endpoint.
 
 Ensure that the security group settings on your EC2 instances do not publicly expose the ports for APM and DogStatsD.
 
@@ -158,8 +155,8 @@ Live Container data is automatically collected by the Datadog Agent container. T
 **This feature is available for Linux only**
 
 1. Follow the [above instructions](#create-an-ecs-task) to install the Datadog Agent.
-   - If you are installing for the first time you can use the [datadog-agent-sysprobe-ecs.json][25] file ([datadog-agent-sysprobe-ecs1.json][26] if you are using an original Amazon Linux AMI), for use with the [above instructions](#managing-the-task-definition-file). **Note**: Initial NPM setup requires the CLI, as you cannot add `linuxParameters` in the AWS UI.
-2. If you already have a task definition, update your [datadog-agent-ecs.json][20] file ([datadog-agent-ecs1.json][21] if you are using an original Amazon Linux AMI) with the following configuration:
+   - If you are installing for the first time you can use the [datadog-agent-sysprobe-ecs.json][22] file ([datadog-agent-sysprobe-ecs1.json][23] if you are using an original Amazon Linux AMI), for use with the [above instructions](#managing-the-task-definition-file). **Note**: Initial NPM setup requires the CLI, as you cannot add `linuxParameters` in the AWS UI.
+2. If you already have a task definition, update your [datadog-agent-ecs.json][7] file ([datadog-agent-ecs1.json][8] if you are using an original Amazon Linux AMI) with the following configuration:
 
  ```json
  {
@@ -218,11 +215,11 @@ For Agent v6.10+, `awsvpc` mode is supported for applicative containers, provide
 
 While it's possible to run the Agent in `awsvpc` mode, it's not the recommended setup, because it may be difficult to retrieve the ENI IP to reach the Agent for Dogstatsd metrics and APM traces.
 
-Instead, run the Agent in bridge mode with port mapping to allow easier retrieval of [host IP through the metadata server][6].
+Instead, run the Agent in bridge mode with port mapping to allow easier retrieval of [host IP through the metadata server][16].
 
 ## Troubleshooting
 
-Need help? Contact [Datadog support][11].
+Need help? Contact [Datadog support][24].
 
 ## Further reading
 
@@ -233,22 +230,22 @@ Need help? Contact [Datadog support][11].
 [3]: https://docs.datadoghq.com/integrations/ecs_fargate/
 [4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_GetStarted_EC2.html
 [5]: https://docs.datadoghq.com/agent/autodiscovery/
-[6]: /containers/amazon_ecs/apm/
-[7]: /containers/amazon_ecs/logs/
-[8]: /developers/dogstatsd/?tab=containeragent
-[9]: https://aws.amazon.com/cli
-[10]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html#service_scheduler_daemon
-[11]: https://docs.datadoghq.com/help/
-[12]: https://docs.datadoghq.com/containers/docker/integrations/?tab=docker
-[13]: /getting_started/site/
-[14]: https://app.datadoghq.com/organization-settings/api-keys
-[15]: https://www.datadoghq.com/blog/amazon-ecs-anywhere-monitoring/
-[16]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data-tutorial.html
-[17]: /containers/amazon_ecs/apm/?tab=ec2metadataendpoint#configure-the-trace-agent-endpoint
-[20]: /resources/json/datadog-agent-ecs.json
-[21]: /resources/json/datadog-agent-ecs1.json
-[22]: /resources/json/datadog-agent-ecs-win.json
-[23]: /resources/json/datadog-agent-ecs-apm.json
-[24]: /resources/json/datadog-agent-ecs-logs.json
-[25]: /resources/json/datadog-agent-sysprobe-ecs.json
-[26]: /resources/json/datadog-agent-sysprobe-ecs1.json
+[6]: https://aws.amazon.com/cli
+[7]: /resources/json/datadog-agent-ecs.json
+[8]: /resources/json/datadog-agent-ecs1.json
+[9]: /resources/json/datadog-agent-ecs-win.json
+[10]: https://app.datadoghq.com/organization-settings/api-keys
+[11]: /getting_started/site/
+[12]: https://www.datadoghq.com/blog/amazon-ecs-anywhere-monitoring/
+[13]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data-tutorial.html
+[14]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html#service_scheduler_daemon
+[15]: https://docs.datadoghq.com/containers/docker/integrations/?tab=docker
+[16]: /containers/amazon_ecs/apm/
+[17]: /resources/json/datadog-agent-ecs-apm.json
+[18]: /containers/amazon_ecs/logs/
+[19]: /resources/json/datadog-agent-ecs-logs.json
+[20]: /developers/dogstatsd/?tab=containeragent
+[21]: /containers/amazon_ecs/apm/?tab=ec2metadataendpoint#configure-the-trace-agent-endpoint
+[22]: /resources/json/datadog-agent-sysprobe-ecs.json
+[23]: /resources/json/datadog-agent-sysprobe-ecs1.json
+[24]: https://docs.datadoghq.com/help/

@@ -148,6 +148,20 @@ Additionally, you need to pass in the environment variables required to configur
 
 [1]: https://circleci.com/docs/2.0/env-vars/#built-in-environment-variables
 {{% /tab %}}
+{{% tab "Codefresh" %}}
+
+- `CF_BUILD_ID`
+- `CF_PIPELINE_NAME`
+- `CF_BUILD_URL`
+- `CF_STEP_NAME`
+- `CF_BRANCH`
+- `CF_REVISION`
+
+[Full list of build environment variables provided by Codefresh][1]
+
+
+[1]: https://codefresh.io/docs/docs/pipelines/variables/
+{{% /tab %}}
 {{% tab "GitHub Actions" %}}
 
 - `GITHUB_ACTION`
@@ -205,27 +219,27 @@ Additionally, you need to pass in the environment variables required to configur
 - `GIT_URL_1`
 - `GIT_COMMIT`
 - `GIT_BRANCH`
-- `DD_CUSTOM_TRACE_ID` (custom variable set by the [Jenkins Datadog Plugin][2])
+- `DD_CUSTOM_TRACE_ID` (custom variable set by the [Jenkins Datadog Plugin][1])
 - `DD_CUSTOM_PARENT_ID` (idem)
 
-[Full list of build environment variables provided by Jenkins][1]
+[Full list of build environment variables provided by Jenkins][2]
 
 
-[1]: https://wiki.jenkins.io/display/JENKINS/Building+a+software+project
-[2]: https://github.com/jenkinsci/datadog-plugin
+[1]: https://github.com/jenkinsci/datadog-plugin
+[2]: https://wiki.jenkins.io/display/JENKINS/Building+a+software+project
 {{% /tab %}}
 {{% tab "TeamCity" %}}
 
 - `TEAMCITY_VERSION`
 - `TEAMCITY_BUILDCONF_NAME`
 - `BUILD_URL`
-- `DATADOG_BUILD_ID` (custom variable set by the [Datadog TeamCity Integration][2])
+- `DATADOG_BUILD_ID` (custom variable set by the [Datadog TeamCity Integration][1])
 
-[Full list of build environment variables provided by TeamCity][1]
+[Full list of build environment variables provided by TeamCity][2]
 
 
-[1]: https://www.jetbrains.com/help/teamcity/predefined-build-parameters.html
-[2]: https://plugins.jetbrains.com/plugin/20852-datadog-ci-integration
+[1]: https://plugins.jetbrains.com/plugin/20852-datadog-ci-integration
+[2]: https://www.jetbrains.com/help/teamcity/predefined-build-parameters.html
 {{% /tab %}}
 {{% tab "Travis CI" %}}
 

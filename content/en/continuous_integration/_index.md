@@ -21,7 +21,7 @@ further_reading:
     text: "Configure pipeline alerts with Datadog CI monitors"
 ---
 
-{{< vimeo 664357090 >}}
+{{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/664357090/rendition/1080p/file.mp4?loc=external&signature=5ef9bc02bd8fb18c07a4a41ea3ac08b72bd0ab0b5d914429da049120d1e9e9b7" poster="/images/poster/ci.png" >}}
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
@@ -68,7 +68,7 @@ Test execution data is also available in [Dashboards][1] and [Notebooks][2].
 
 ## Ready to start?
 
-See [Setup Pipelines][3] and [Setup Tests][4] for instructions on setting up Datadog with your CI providers, information about CI product compatibility, and steps for instrumenting and configuring for CI data collection. Then start exploring Datadog CI Visibility views of the data with [Exploring Pipelines][5] and [Exploring Tests][6].
+See [Setup Pipelines][3] and [Setup Tests][4] for instructions on setting up Datadog with your CI providers, information about CI product compatibility, and steps for instrumenting and configuring for CI data collection. Then start exploring Datadog CI Visibility views of the data with [Exploring Pipelines][3] and [Exploring Tests][4].
 
 ## Further reading
 
@@ -78,5 +78,3 @@ See [Setup Pipelines][3] and [Setup Tests][4] for instructions on setting up Dat
 [2]: https://app.datadoghq.com/notebook/list
 [3]: /continuous_integration/pipelines/
 [4]: /continuous_integration/tests/
-[5]: /continuous_integration/pipelines/
-[6]: /continuous_integration/tests/

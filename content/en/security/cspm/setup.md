@@ -14,6 +14,9 @@ further_reading:
 - link: "security/cspm/frameworks_and_benchmarks"
   tag: "Documentation"
   text: "Learn about frameworks and industry benchmarks"
+- link: "/getting_started/cloud_security_management"
+  tag: "Documentation"
+  text: "Getting Started with Cloud Security Management"
 ---
 
 {{< site-region region="gov" >}}
@@ -52,11 +55,11 @@ Use one of the following methods to enable CSPM for your AWS accounts:
 2. Select **Cloud Security Posture Management Collection** to enable resource collection for CSPM.
 3. Click **Save**.
 
+
 [1]: https://docs.datadoghq.com/integrations/amazon_web_services/
 [2]: /integrations/amazon_web_services/?tab=roledelegation#cloud-security-posture-management
 [3]: https://app.datadoghq.com/security/configuration
 [4]: https://app.datadoghq.com/security/configuration?sectionId=secureCloudEnvironment&secure-cloud-environment=amazon-web-services
-
 {{% /tab %}}
 
 {{% tab "Azure" %}}
@@ -82,10 +85,10 @@ Use one of the following methods to enable CSPM for your Azure subscriptions:
 2. Under **Resource Collection**, select the **Enable resource collection for Cloud Security Posture Management** checkbox.
 3. Click **Update Configuration**.
 
+
 [1]: https://docs.datadoghq.com/integrations/azure
 [2]: https://app.datadoghq.com/security/configuration
 [3]: https://app.datadoghq.com/security/configuration?sectionId=secureCloudEnvironment&secure-cloud-environment=azure
-
 {{% /tab %}}
 
 {{% tab "GCP" %}}
@@ -113,11 +116,11 @@ Use one of the following methods to enable CSPM for your GCP projects:
 2. Under **Enable resource collection for Cloud Security Posture Management**, select the **Resource collection** checkbox.
 3. Click **Update Configuration**.
 
+
 [1]: https://docs.datadoghq.com/integrations/google_cloud_platform
 [2]: https://docs.datadoghq.com/integrations/google_cloud_platform/#metric-collection
 [3]: https://app.datadoghq.com/security/configuration
 [4]: https://app.datadoghq.com/security/configuration?sectionId=secureCloudEnvironment&secure-cloud-environment=google-cloud-platform
-
 {{% /tab %}}
 
 {{% tab "Docker" %}}
@@ -130,9 +133,9 @@ Use one of the following methods to enable CSPM for your GCP projects:
 4. Click **Select API key** to choose the API key you want to use with CSPM.
 5. Copy the automatically generated command and run it in your Docker environment to enable CSPM.
 
+
 [1]: https://app.datadoghq.com/security/configuration
 [2]: https://app.datadoghq.com/security/configuration?sectionId=secureHostsAndContainers&secure-cloud-environment=google-cloud-platform&secure-hosts-and-containers=docker
-
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
@@ -157,10 +160,9 @@ Use one of the following methods to enable CSPM for your GCP projects:
 
 5. Restart the Agent.
 
+
 [1]: https://app.datadoghq.com/account/settings#agent/kubernetes
 [2]: https://app.datadoghq.com/security/configuration
-[3]: https://app.datadoghq.com/security/configuration?sectionId=secureHostsAndContainers&secure-cloud-environment=google-cloud-platform&secure-hosts-and-containers=kubernetes
-
 {{% /tab %}}
 {{< /tabs >}}
 

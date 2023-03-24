@@ -5,7 +5,6 @@ categories:
 - log collection
 - web
 creates_events: false
-ddtype: check
 dependencies: []
 description: AWS App Mesh est un proxy de périmètre et de service open source.
 display_name: AWS App Mesh

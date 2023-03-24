@@ -36,20 +36,20 @@ The table visualization displays columns of aggregated data grouped by tag key. 
 * Rename column headers by setting aliases, click the **as...** button.
 * Customize the visualization of cell values for each column with Visual Formatting Rules.
 * Configure whether or not the search bar displays. **Auto** is the default and shows the search bar depending on the size of the widget, this means if your screen gets too small, it prioritizes displaying the data on the widget and hides the search bar, but is still available in full-screen mode.
-* Customize context links to specify the pages users are directed to. See the [Context Links][10] Guide.
-* Apply mathematic functions to your queries. See the [Dashboard Graphing documentation][11].
+* Customize context links to specify the pages users are directed to. See the [Context Links][8] Guide.
+* Apply mathematic functions to your queries. See the [Dashboard Graphing documentation][9].
 
 ## N/A values
 
 Columns in the table widget are queried independently from one another. Overlapping groups with matching names are joined realtime to form the rows of the table. As a result of that process, there might be situations with no total overlap, showing N/A cells. To mitigate this:
   * Extend the limit of queries to higher numbers, to maximize overlap between columns
-  * Sort tables according to the one column that you could consider as “driving” the insight
+  * Sort tables according to the one column that you could consider as "driving" the insight
 
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][8] for additional reference.
+This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][10] for additional reference.
 
-The dedicated [widget JSON schema definition][9] for the table widget is:
+The dedicated [widget JSON schema definition][11] for the table widget is:
 
 {{< dashboards-widgets-api >}}
 
@@ -64,7 +64,7 @@ The dedicated [widget JSON schema definition][9] for the table widget is:
 [5]: /profiler/search_profiles
 [6]: /security_monitoring/explorer/
 [7]: /dashboards/querying/#configuring-an-apm-stats-graph
-[8]: /api/v1/dashboards/
-[9]: /dashboards/graphing_json/widget_json/
-[10]: /dashboards/guide/context-links/
-[11]: /dashboards/querying/#advanced-graphing
+[8]: /dashboards/guide/context-links/
+[9]: /dashboards/querying/#advanced-graphing
+[10]: /api/v1/dashboards/
+[11]: /dashboards/graphing_json/widget_json/

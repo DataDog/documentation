@@ -19,6 +19,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/apm-security-view/"
   tag: "Blog"
   text: "Gain visibility into risks, vulnerabilities, and attacks with APM Security View"
+- link: "https://www.datadoghq.com/blog/service-catalog-setup/"
+  tag: "Blog"
+  text: "Easily add tags and metadata to your services using the simplified Service Catalog setup"
 ---
 
 
@@ -81,7 +84,7 @@ The **Performance** tab provides several ways to view how your services are perf
 - Have the highest error numbers or rates
 - Are running on the most pods, hosts, or serverless environments
 - Have related dashboards where you can see more performance data breakdowns, and identify which ones need to have dashboards added to their service definition
-- Have the highest or lowest [Apdex scores][5]
+- Have the highest or lowest [Apdex scores][3]
 - Have monitors that are triggered
 
 Click the Settings icon on the right hand corner to hide metric columns from the service list.
@@ -93,7 +96,7 @@ The **Security tab** provides several ways to assess and improve the security po
 - Are receiving the most attack attempts.
 - Are targeted by the most attackers.
 - Have the most severe threats, where the services are impacted by the attacks.
-- Are monitored and protected by [Application Security Management][11]
+- Are monitored and protected by [Application Security Management][4]
 
 To access additional details describing security vulnerabilities and signals, click on the service row to open a detailed side panel. Alternatively, click on the pop-over **View Service Details** button, which opens the service page, and in turn, its security tab.
 
@@ -116,7 +119,7 @@ Click **View Related** and select a page from the dropdown menu to navigate into
 
 ## Role based access and permissions
 
-For general information, see [Role Based Access Control][9] and [Role Permissions][10].
+For general information, see [Role Based Access Control][5] and [Role Permissions][6].
 ### Read permission
 
 The Service Catalog read permission allows a user to read service catalog data, which enables the following features:
@@ -141,10 +144,7 @@ The permission is enabled by default in the **Datadog Admin Role** and **Datadog
 
 [1]: https://app.datadoghq.com/services
 [2]: /integrations/github/
-[5]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
-[6]: https://www.datadoghq.com/blog/unified-service-tagging/
-[7]: /tracing/service_catalog/service_definition_api/
-[8]: /tracing/service_catalog/setup/
-[9]: /account_management/rbac/
-[10]: /account_management/rbac/permissions/
-[11]: /security/application_security/how-appsec-works/
+[3]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
+[4]: /security/application_security/how-appsec-works/
+[5]: /account_management/rbac/
+[6]: /account_management/rbac/permissions/

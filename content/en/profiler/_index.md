@@ -35,7 +35,7 @@ further_reading:
 
 ---
 
-{{< vimeo 441865141 >}}
+{{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/441865141/rendition/1080p/file.mp4?loc=external&signature=ebc774b892f062e45922dcae82f4ebff0a906c8ec30f34b9d77494b0051748ad" poster="/images/poster/profiler.png" >}}
 
 </br>
 
@@ -65,13 +65,13 @@ By default, profiles are retained for seven days, and metrics generated from pro
 
 ### Profile types
 
-See [Profile Types][6] for descriptions of the kinds of profile data collected for each supported language.
+See [Profile Types][2] for descriptions of the kinds of profile data collected for each supported language.
 
 {{< img src="profiler/profile-types.png" alt="The list of profile types collected for Java applications" style="width:100%;" >}}
 
 ### Search profiles by tags
 
-[Use tags to search profiles][2] across any dimension—whether it’s a specific host, service, version, or any combination.
+[Use tags to search profiles][3] across any dimension—whether it’s a specific host, service, version, or any combination.
 
 {{< img src="profiler/search_profiles.mp4" alt="Search profiles by tags" video=true >}}
 
@@ -83,21 +83,21 @@ Obtain key profiling metrics from services such as top CPU usage by method, top 
 
 ### Connect traces to profiling data
 
-Application processes that have both [APM distributed tracing][3] and continuous profiler enabled are automatically linked, so you can move directly from span information to profiling data on the [Code Hotspots tab][4] to find specific lines of code related to performance issues.
+Application processes that have both [APM distributed tracing][4] and continuous profiler enabled are automatically linked, so you can move directly from span information to profiling data on the [Code Hotspots tab][5] to find specific lines of code related to performance issues.
 
 {{< img src="profiler/code_hotspots_tab.mp4" alt="Code Hotspots tab shows profiling information for a APM trace span" video=true >}}
 
 ### Find changes in performance by comparing profiles
 
-Comparing similar profiles from different times, environments, or deployments can help you understand the possible causes of and solutions to performance problems. The Datadog profiler offers [comparison visualizations][5] to make sense of why profiles are different based on time frames or tags that you scope by. 
+Comparing similar profiles from different times, environments, or deployments can help you understand the possible causes of and solutions to performance problems. The Datadog profiler offers [comparison visualizations][6] to make sense of why profiles are different based on time frames or tags that you scope by. 
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /getting_started/profiler/
-[2]: /profiler/search_profiles
-[3]: /tracing/
-[4]: /profiler/connect_traces_and_profiles/
-[5]: /profiler/compare_profiles/
-[6]: /profiler/profile_types/
+[2]: /profiler/profile_types/
+[3]: /profiler/search_profiles
+[4]: /tracing/
+[5]: /profiler/connect_traces_and_profiles/
+[6]: /profiler/compare_profiles/

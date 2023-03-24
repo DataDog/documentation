@@ -8,9 +8,9 @@ further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"
   text: "Protect against Threats with Datadog Application Security Management"
-- link: "/security/application_security/getting_started/"
+- link: "/security/application_security/enabling/"
   tag: "Documentation"
-  text: "Getting Started Enabling ASM for Your Services"
+  text: "Enabling ASM for Your Services"
 - link: "/security/default_rules/#cat-application-security"
   tag: "Documentation"
   text: "Out-of-the-Box Application Security Management Rules"
@@ -248,14 +248,14 @@ Support for query strings is not available for Flask.
 ### Supported languages and their requirements
 
 Node
-: If you are bundling using webpack or esbuild, [mark the Datadog libraries as external][4].
+: If you are bundling using webpack or esbuild, [mark the Datadog libraries as external][1].
 
 Python
 : 
 
 Java
 : To fully instrument your serverless application with distributed tracing, your Java Lambda functions must use the Java 8 Corretto (`java8.al2`) or Java 11 (`java11`) runtimes with at least 1024MB of memory.
-: If you use the Datadog Lambda layers `dd-trace-java:4` (or older) and `Datadog-Extension:24` (or older), follow the instructions in [Upgrade Instrumentation for Java Lambda Functions][3].
+: If you use the Datadog Lambda layers `dd-trace-java:4` (or older) and `Datadog-Extension:24` (or older), follow the instructions in [Upgrade Instrumentation for Java Lambda Functions][2].
 
 Go
 : 
@@ -270,10 +270,9 @@ The following ASM capabilities are not supported for Lambda functions:
  - 1-Click enabling ASM
 
 
-[2]: /serverless/guide/datadog_forwarder_python
-[3]: /serverless/guide/upgrade_java_instrumentation
-[4]: /serverless/guide/serverless_tracing_and_webpack/
 
+[1]: /serverless/guide/serverless_tracing_and_webpack/
+[2]: /serverless/guide/upgrade_java_instrumentation
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}
@@ -295,8 +294,8 @@ You can add an entry to the passlist, which ignore events from a rule, to elimin
 
 To add a passlist entry, do one of the following:
 
-- Click on a signal in [ASM Signals][4] and click the **Add Entry** link next to the **Add to passlist** suggested action. This method automatically adds an entry for the targeted service.
-- Navigate to [Passlist Configuration][5] and manually configure a new passlist entry based on your own criteria.
+- Click on a signal in [ASM Signals][2] and click the **Add Entry** link next to the **Add to passlist** suggested action. This method automatically adds an entry for the targeted service.
+- Navigate to [Passlist Configuration][3] and manually configure a new passlist entry based on your own criteria.
 
 **Note**: Requests (traces) that match a passlist entry are not billed.
 
@@ -306,7 +305,7 @@ The data that you collect with Datadog can contain sensitive information that yo
 
 By default, ASM collects information from suspicious requests to help you understand why the request was flagged as suspicious. Before sending the data, ASM scans it for patterns and keywords that indicate that the data is sensitive. If the data is deemed sensitive, it is replaced with a `<redacted>` flag, so you observe that although the request was suspicious, the request data could not be collected because of data security concerns.
 
-To protect users' data, sensitive data scanning is activated by default in ASM. You can customize the configuration by using the following environment variables. The scanning is based on the [RE2 syntax][2], so to customize scanning, set the value of these environment variables to a valid RE2 pattern:
+To protect users' data, sensitive data scanning is activated by default in ASM. You can customize the configuration by using the following environment variables. The scanning is based on the [RE2 syntax][4], so to customize scanning, set the value of these environment variables to a valid RE2 pattern:
 
 * `DD_APPSEC_OBFUSCATION_PARAMETER_KEY_REGEXP` - Pattern for scanning for keys whose values commonly contain sensitive data. If found, the values and any child nodes associated with the key are redacted.
 * `DD_APPSEC_OBFUSCATION_PARAMETER_VALUE_REGEXP` - Pattern for scanning for values that could indicate sensitive data. If found, the value and all its child nodes are redacted.
@@ -341,7 +340,7 @@ The following are examples of data that are flagged as sensitive by default:
 * `BEGIN PRIVATE KEY`
 * `ssh-rsa`
 
-See [APM Data Security][3] for information about other mechanisms in the Datadog Agent and libraries that can also be used to remove sensitive data.
+See [APM Data Security][5] for information about other mechanisms in the Datadog Agent and libraries that can also be used to remove sensitive data.
 
 ## Disabling Application Security Management
 
@@ -360,8 +359,8 @@ If you need additional help, contact [Datadog support][6].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/application_security/add-user-info/
-[2]: https://github.com/google/re2/wiki/Syntax
-[3]: /tracing/configure_data_security/
-[4]: https://app.datadoghq.com/security/appsec/signals
-[5]: https://app.datadoghq.com/security/configuration/asm/passlist
+[2]: https://app.datadoghq.com/security/appsec/signals
+[3]: https://app.datadoghq.com/security/configuration/asm/passlist
+[4]: https://github.com/google/re2/wiki/Syntax
+[5]: /tracing/configure_data_security/
 [6]: /help/

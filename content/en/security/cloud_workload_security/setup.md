@@ -6,6 +6,9 @@ aliases:
   - /security_platform/cloud_workload_security/getting_started
   - /security/cloud_workload_security/getting_started
 further_reading:
+- link: "/getting_started/cloud_security_management"
+  tag: "Documentation"
+  text: "Getting Started with Cloud Security Management"
 - link: "https://www.datadoghq.com/blog/datadog-runtime-security/"
   tag: "Blog"
   text: "Learn more about Datadog Cloud Runtime Security"
@@ -46,7 +49,7 @@ There are four types of monitoring that the Datadog Agent uses for Cloud Workloa
   * SUSE 15+
   * CentOS/RHEL 7.6+
   * Custom kernel builds are not supported.
-* For compatibility with a custom Kubernetes network plugin like Cilium or Calico, please see the [Troubleshooting page][3].
+* For compatibility with a custom Kubernetes network plugin like Cilium or Calico, please see the [Troubleshooting page][1].
 
 ## Installation
 
@@ -318,4 +321,4 @@ The following deployment can be used to start the Runtime Security Agent and `sy
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[3]: /security/cloud_security_management/troubleshooting
+[1]: /security/cloud_security_management/troubleshooting

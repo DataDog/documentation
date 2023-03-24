@@ -96,7 +96,7 @@ For example, you can set different priorities for `alert` and `warning` notifica
 
 ## Notify your team
 
-Use this section to send notifications to your team through email, Slack, PagerDuty, etc. You can search for team members and connected integrations with the drop-down box. When an `@notification` is added to this section, the notification is automatically added to the [message](#message) field.
+Use this section to send notifications to your team through email, Slack, PagerDuty, etc. You can search for team members and connected integrations with the dropdown box. When an `@notification` is added to this section, the notification is automatically added to the [message](#message) field.
 
 **Note**: An `@notification` must have a space between it and the last line character, for example:
 

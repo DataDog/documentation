@@ -12,6 +12,9 @@ further_reading:
 - link: "/tracing/version_tracking"
   tag: "Documentation"
   text: "Use Version tags within Datadog APM to monitor deployments"
+- link: "https://www.datadoghq.com/blog/datadog-rum-deployment-tracking"
+  tag: "Blog"
+  text: "Troubleshoot faulty frontend deployments with Deployment Tracking in RUM"
 ---
 
 <div class="alert alert-warning">
@@ -133,7 +136,7 @@ The **Issues** tab lists differences in errors detected for each of the two vers
 {{< img src="real_user_monitoring/guide/setup-rum-deployment-tracking/browser-deployment-tracking-comparison-error.png" alt="Browser Deployment Tracking Comparison Errors" style="width:75%;">}}
 
 ### Explore the RUM deployment tracking powerpacks
-You can add deployment tracking for your RUM services to dashboards using the powerpacks menu on a dashboard and searching for the “Deployment Version Tracking” powerpack. You can then iterate and add any other widgets to your dashboards to help your teams release new features safely.
+You can add deployment tracking for your RUM services to dashboards using the powerpacks menu on a dashboard and searching for the "Deployment Version Tracking" powerpack. You can then iterate and add any other widgets to your dashboards to help your teams release new features safely.
 
 {{< img src="real_user_monitoring/guide/setup-rum-deployment-tracking/browser-deployment-tracking-powerpack.png" alt="Browser Deployment Tracking Powerpack" style="width:75%;">}}
 
@@ -180,7 +183,7 @@ The **Issues** tab lists differences in errors detected for each of the two vers
 {{< img src="real_user_monitoring/guide/setup-rum-deployment-tracking/mobile-deployment-tracking-comparison-error.png" alt="Mobile Deployment Tracking Comparison Errors" style="width:75%;">}}
 
 ### Explore the RUM Deployment Tracking Powerpacks
-You can add deployment tracking for your RUM services to dashboards using the powerpacks menu on a dashboard and searching for the “Deployment Version Tracking” powerpack. You can then iterate and add any other widgets to your dashboards to help your teams release new features safely.
+You can add deployment tracking for your RUM services to dashboards using the powerpacks menu on a dashboard and searching for the "Deployment Version Tracking" powerpack. You can then iterate and add any other widgets to your dashboards to help your teams release new features safely.
 
 {{< img src="real_user_monitoring/guide/setup-rum-deployment-tracking/mobile-deployment-tracking-powerpack.png" alt="Browser Deployment Tracking Powerpack" style="width:75%;">}}
 

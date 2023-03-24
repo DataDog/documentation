@@ -8,6 +8,9 @@ further_reading:
     - link: 'tracing/trace_collection/open_standards/'
       tag: 'Documentation'
       text: 'Learn more about OpenTelemetry'
+    - link: '/opentelemetry/guide/otlp_delta_temporality/'
+      tag: 'Guide'
+      text: 'Producing delta temporality metrics with OpenTelemetry'
 aliases:
   - /metrics/otlp
 ---
@@ -32,7 +35,7 @@ A single OTLP metric may be mapped to several Datadog metrics with a suffix indi
 
 **Note**: OpenTelemetry provides metric API instruments (`Gauge`, `Counter`, `UpDownCounter`, `Histogram`, and so on), whose measurements can be exported as OTLP metrics (Sum, Gauge, Histogram). Other sources for OTLP metrics are possible. Applications and libraries may provide customization into the OTLP metrics they produce. Read the documentation of your OpenTelemetry SDK or OTLP-producing application to understand the OTLP metrics produced and how to customize them.
 
-**Note**: OpenTelemetry protocol supports two ways of representing metrics in time: [Cumulative and Delta temporality][2], affecting the metrics described below. Set the temporality preference of the OTel implementation to **DELTA**, because setting it to CUMULATIVE may discard some data points during application (or collector) startup.  
+**Note**: OpenTelemetry protocol supports two ways of representing metrics in time: [Cumulative and Delta temporality][1], affecting the metrics described below. Set the temporality preference of the OTel implementation to **DELTA**, because setting it to CUMULATIVE may discard some data points during application (or collector) startup. For more information, read [Producing Delta Temporality Metrics with OpenTelemetry][2].
 
 ## Metric types
 
@@ -133,7 +136,7 @@ OpenTelemetry defines certain semantic conventions related to host names. If an 
 1. `host.name`, the system hostname
 
 If none are present, Datadog assigns a system-level hostname to payloads.
-If sending data from a remote host, add the ['resource detection' processor][1] to your pipelines for accurate hostname resolution.
+If sending data from a remote host, add the ['resource detection' processor][3] to your pipelines for accurate hostname resolution.
 
 ### Example
 
@@ -215,5 +218,6 @@ Suppose you are submitting a legacy OTLP Summary metric, `request.response_time.
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor#resource-detection-processor
-[2]: https://opentelemetry.io/docs/reference/specification/metrics/data-model/#temporality
+[1]: https://opentelemetry.io/docs/reference/specification/metrics/data-model/#temporality
+[2]: /opentelemetry/guide/otlp_delta_temporality/
+[3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor#resource-detection-processor

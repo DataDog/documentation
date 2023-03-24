@@ -39,13 +39,13 @@ At a high level, this involves creating an IAM role and associated policy to ena
 
 After the initial connection is established, you can enable individual AWS service integrations relevant to your AWS environment. With a single click, Datadog provisions the necessary resources in your AWS account and begins querying metrics and events for the services you use. For popular AWS services you are using, Datadog provisions out-of-the-box dashboards, providing immediate and customizable visibility. This guide demonstrates setting up the integration and installing the Datadog Agent on an Amazon Linux EC2 instance, as well as providing a broad overview of the integration's capabilities. See the [Enable integrations for individual AWS service](#enable-integrations-for-individual-aws-service) section for a list of the available sub-integrations.
 
-This process can be repeated for as many AWS accounts as necessary, or you can also use the [API][3], [AWS CLI][4], or [Terraform][5] to set up multiple accounts at once. For more information, read the [Datadog-Amazon CloudFormation guide][6].
+This process can be repeated for as many AWS accounts as necessary, or you can also use the [API][2], [AWS CLI][3], or [Terraform][4] to set up multiple accounts at once. For more information, read the [Datadog-Amazon CloudFormation guide][5].
 
 ## Prerequisites
 
 Before getting started, ensure you have the following prerequisites:
 
-1. An [AWS][7] account. Your AWS user needs the following IAM permissions to successfully run the CloudFormation template:
+1. An [AWS][6] account. Your AWS user needs the following IAM permissions to successfully run the CloudFormation template:
 
     * cloudformation:CreateStack
     * cloudformation:CreateUploadBucket
@@ -103,13 +103,13 @@ Before getting started, ensure you have the following prerequisites:
 
 ## Setup
 
-2. Go to the [AWS integration configuration page][8] in Datadog and click **Add AWS Account**.
+2. Go to the [AWS integration configuration page][7] in Datadog and click **Add AWS Account**.
 
 3. Configure the integration's settings under the **Automatically using CloudFormation** option.  
     a. Select the AWS regions to integrate with.  
-    b. Add your Datadog [API key][58].  
+    b. Add your Datadog [API key][8].  
     c. Optionally, send logs and other data to Datadog with the [Datadog Forwarder Lambda][1].  
-    d. Optionally, enable [Cloud Security Posture Management][54] (CSPM) to scan your cloud environment, hosts, and containers for misconfigurations and security risks.
+    d. Optionally, enable [Cloud Security Posture Management][9] (CSPM) to scan your cloud environment, hosts, and containers for misconfigurations and security risks.
 
 5. Click **Launch CloudFormation Template**. This opens the AWS Console and loads the CloudFormation stack. All the parameters are filled in based on your selections in the prior Datadog form, so you do not need to edit those unless desired.  
 **Note:** The `DatadogAppKey` parameter enables the CloudFormation stack to make API calls to Datadog to add and edit the Datadog configuration for this AWS account. The key is automatically generated and tied to your Datadog account.
@@ -118,19 +118,19 @@ Before getting started, ensure you have the following prerequisites:
 
 7. After the stack is created, go back to the AWS integration tile in Datadog and click **Ready!**
 
-8. Wait up to 10 minutes for data to start being collected, and then view the out-of-the-box [AWS overview dashboard][12] to see metrics sent by your AWS services and infrastructure:
+8. Wait up to 10 minutes for data to start being collected, and then view the out-of-the-box [AWS overview dashboard][10] to see metrics sent by your AWS services and infrastructure:
 {{< img src="getting_started/integrations/aws-dashboard.png" alt="The AWS overview dashboard in the Datadog account. On the left is the AWS logo and an AWS events graph showing 'No matching entries found'. In the center are graphs related to EBS volumes with numerical data displayed and a heat map showing consistent data. Along the right are graphs related to ELBs showing numerical data as well as a timeseries graph showing spiky data from three sources.">}}
 
 ## Enable integrations for individual AWS services
 
-See the [Integrations page][13] for a full listing of the available sub-integrations. Many of these integrations are installed by default when Datadog recognizes data coming in from your AWS account.
+See the [Integrations page][11] for a full listing of the available sub-integrations. Many of these integrations are installed by default when Datadog recognizes data coming in from your AWS account.
 
 ## Send logs
 
 There are two ways of sending AWS service logs to Datadog:
 
-- [Kinesis Firehose destination][63]: Use the Datadog destination in your Kinesis Firehose delivery stream to forward logs to Datadog. It is recommended to use this approach when sending logs from CloudWatch in a very high volume.
-- [Forwarder Lambda function][64]: Deploy the Datadog Forwarder Lambda function, which subscribes to S3 buckets or your CloudWatch log groups and forwards logs to Datadog. You **must** use this approach to send traces, enhanced metrics, or custom metrics from Lambda functions asynchronously through logs. Datadog also recommends you use this approach to sending logs from S3 or other resources that cannot directly stream data to Kinesis.
+- [Kinesis Firehose destination][12]: Use the Datadog destination in your Kinesis Firehose delivery stream to forward logs to Datadog. It is recommended to use this approach when sending logs from CloudWatch in a very high volume.
+- [Forwarder Lambda function][13]: Deploy the Datadog Forwarder Lambda function, which subscribes to S3 buckets or your CloudWatch log groups and forwards logs to Datadog. You **must** use this approach to send traces, enhanced metrics, or custom metrics from Lambda functions asynchronously through logs. Datadog also recommends you use this approach to sending logs from S3 or other resources that cannot directly stream data to Kinesis.
 
 Read the [Enable logging for your AWS service][14] section to get logs flowing for the most-used AWS services.
 
@@ -159,7 +159,7 @@ For containerized environments, you can use the Datadog Agent, whether you're ma
 
 #### ECS with EC2 launch type
 
-Use the [Amazon ECS documentation][25] to run the [Datadog Docker Agent][26] on the EC2 instances in your ECS cluster. Review the [Amazon ECS Data Collection documentation][27] to see the metrics and events reported to your Datadog account.
+Use the [Amazon ECS documentation][25] to run the [Datadog Docker Agent][26] on the EC2 instances in your ECS cluster. Review the [Amazon ECS on EC2][27] to see the metrics and events reported to your Datadog account.
 
 #### ECS with Fargate launch type
 
@@ -201,28 +201,28 @@ Review [Getting Started with Cloud SIEM][50] to evaluate your logs against the o
 
 #### CSPM
 
-Use the [Getting Started with CSPM][54] guide to learn about detecting and assessing misconfigurations in your cloud environment. Resource configuration data is evaluated against the out-of-the-box Posture Management [Cloud][55] and [Infrastructure][56] Detection Rules to flag attacker techniques and potential misconfigurations, allowing for fast response and remediation.
+Use the [Getting Started with CSPM][9] guide to learn about detecting and assessing misconfigurations in your cloud environment. Resource configuration data is evaluated against the out-of-the-box Posture Management [Cloud][54] and [Infrastructure][55] Detection Rules to flag attacker techniques and potential misconfigurations, allowing for fast response and remediation.
 
 ### Troubleshooting
-If you encounter any issues, be sure to check out the [Troubleshooting][57] section.
+If you encounter any issues, be sure to check out the [Troubleshooting][56] section.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/guide/forwarder/
-[2]: https://aws.amazon.com/cloudtrail/
-[3]: /api/latest/aws-integration/#create-an-aws-integration
-[4]: https://awscli.amazonaws.com/v2/documentation/api/latest/reference/cloudformation/index.html
-[5]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_aws
-[6]: /integrations/guide/amazon_cloudformation/
-[7]: https://aws.amazon.com/getting-started/?nc1=f_cc
-[8]: https://app.datadoghq.com/integrations/amazon-web-services
-[9]: /integrations/amazon_ec2/#ec2-automuting
-[10]: /integrations/amazon_web_services/?tab=roledelegation#alarm-collection
-[11]: /events/explorer
-[12]: https://app.datadoghq.com/dash/integration/7/aws-overview
-[13]: /integrations/#cat-aws
+[2]: /api/latest/aws-integration/#create-an-aws-integration
+[3]: https://awscli.amazonaws.com/v2/documentation/api/latest/reference/cloudformation/index.html
+[4]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_aws
+[5]: /integrations/guide/amazon_cloudformation/
+[6]: https://aws.amazon.com/getting-started/?nc1=f_cc
+[7]: https://app.datadoghq.com/integrations/amazon-web-services
+[8]: https://app.datadoghq.com/organization-settings/api-keys
+[9]: /security/cspm/setup/
+[10]: https://app.datadoghq.com/dash/integration/7/aws-overview
+[11]: /integrations/#cat-aws
+[12]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/
+[13]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
 [14]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#enable-logging-for-your-aws-service
 [15]: https://app.datadoghq.com/logs
 [16]: /getting_started/agent/
@@ -236,7 +236,7 @@ If you encounter any issues, be sure to check out the [Troubleshooting][57] sect
 [24]: https://aws.amazon.com/fargate/
 [25]: /agent/amazon_ecs/?tab=awscli
 [26]: /agent/docker/?tab=standard
-[27]: /agent/amazon_ecs/data_collected/
+[27]: /integrations/amazon_ecs
 [28]: /integrations/ecs_fargate/?tab=fluentbitandfirelens
 [29]: /agent/kubernetes/distributions/?tab=helm#EKS
 [30]: /agent/kubernetes/?tab=helm
@@ -263,14 +263,6 @@ If you encounter any issues, be sure to check out the [Troubleshooting][57] sect
 [51]: /security/default_rules/#cat-log-detection
 [52]: /security/explorer/
 [53]: /security/notifications/rules/
-[54]: /security/cspm/setup/
-[55]: /security/default_rules/#cat-posture-management-cloud
-[56]: /security/default_rules/#cat-posture-management-infra
-[57]: /integrations/amazon_web_services/?tab=roledelegation#troubleshooting
-[58]: https://app.datadoghq.com/organization-settings/api-keys
-[59]: /integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/??tab=cloudformation
-[60]: /logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/?tab=kinesisfirehosedeliverystream
-[61]: /integrations/amazon_xray/
-[62]: /getting_started/tagging/using_tags?tab=aws#integrations
-[63]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/
-[64]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
+[54]: /security/default_rules/#cat-posture-management-cloud
+[55]: /security/default_rules/#cat-posture-management-infra
+[56]: /integrations/amazon_web_services/?tab=roledelegation#troubleshooting

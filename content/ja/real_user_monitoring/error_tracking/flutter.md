@@ -72,6 +72,24 @@ datadog-ci flutter-symbols upload --service-name <your_service_name> --dart-symb
 
 オプションの完全なリストは、`datadog-ci` [Flutter Symbols のドキュメント][6]を参照してください。
 
+## 高度な構成 - フレーバーとビルド番号
+
+Datadog は、`service-name`、`version`、`flavor` の組み合わせで難読化のための正しいシンボルを探すので、`datadog-ci` コマンドに送るパラメーターと [DdSdkConfiguration][7] で設定するパラメーター
+
+Flutter でアプリの[フレーバー][8]を使用している場合、フレーバーを自動検出できないため、[DdSdkConfiguration.flavor][9] でフレーバーの名前を設定する必要があります。そして、これを `datadog-ci` コマンドの `--flavor` パラメーターに渡すことができます。
+
+```sh
+datadog-ci flutter-symbols upload --service-name <your_service_name> --dart-symbols-location <location_of_dart_symbols> --android-mapping --ios-dsyms --flavor my_flavor
+```
+
+Datadog SDK は、`pubspec.yaml` で指定したアプリケーションのバージョン番号から、ビルド番号までを自動的に検出します (ビルド番号は含まれません)。もし、アプリケーションのバージョンの一部としてビルド番号を使用していて、ビルドごとにシンボルをアップロードする必要がある場合は、バージョンを [DdSdkConfiguration.version][10] に追加する必要があります。そして、これを `datadog-ci` コマンドの `--version` パラメーターに渡すことができます。
+
+```sh
+datadog-ci flutter-symbols upload --service-name <your_service_name> --dart-symbols-location <location_of_dart_symbols> --android-mapping --ios-dsyms --version 1.2.3+22
+```
+
+Datadog は `+` を許さないバージョンのタグを使用することに注意してください。すべてのツールは、バージョンタグが Datadog で検索できるように、自動的に `+` を `-` に置き換えます。
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -81,3 +99,7 @@ datadog-ci flutter-symbols upload --service-name <your_service_name> --dart-symb
 [3]: https://docs.datadoghq.com/ja/real_user_monitoring/flutter/#setup
 [4]: https://www.npmjs.com/package/@datadog/datadog-ci
 [6]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/flutter-symbols
+[7]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DdSdkConfiguration-class.html
+[8]: https://docs.flutter.dev/deployment/flavors
+[9]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DdSdkConfiguration/flavor.html
+[10]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DdSdkConfiguration/version.html
