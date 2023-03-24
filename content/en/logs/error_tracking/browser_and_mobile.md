@@ -43,7 +43,7 @@ If you have not setup the Datadog Browser SDK yet, follow the [in-app setup inst
    })
    ```
 
-4. To log a caught exception yourself, you may optionally use:
+3. To log a caught exception yourself, you may use [the optional error parameter][4]:
 
    ```javascript
    try {
@@ -56,6 +56,7 @@ If you have not setup the Datadog Browser SDK yet, follow the [in-app setup inst
 [1]: https://app.datadoghq.com/logs/onboarding/client
 [2]: /logs/log_collection/javascript/#setup
 [3]: /logs/log_collection/javascript/#choose-the-right-installation-method
+[4]: /logs/log_collection/javascript/?tab=npm#error-tracking
 
 {{% /tab %}}
 {{% tab "Android" %}}
