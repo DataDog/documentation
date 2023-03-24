@@ -39,7 +39,7 @@ A visual representation of the behavior model, including process nodes and file 
 
 #### Model status
 
-While initial snapshots are being captured and merged into the workload security profile, the profile will be listed in a learning state. Once a threshold has been reached in terms of the number of activity snapshots merged or amount of time elapsed since the first snapshot, the workload security profile status will transition to a **stable** state. These status changes for workload security profiles and evolving details of the workload security profile are described in more detail in the next section regarding the behavior learning model.
+While initial snapshots are being captured and merged into the Workload Security Profile, the profile will be shown with a status of **learning**. After a threshold has been reached in terms of the number of activity snapshots merged or amount of time elapsed since the first snapshot, the security profile status will transition to a **stable** state.
 
 ## Explore security profiles
 
