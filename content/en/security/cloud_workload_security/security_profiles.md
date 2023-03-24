@@ -4,7 +4,7 @@ kind: documentation
 further_reading:
   - link: "/security/cloud_workload_security/getting_started"
     tag: "Documentation"
-    text: "Getting Started with CWS"
+    text: "Setting Up CWS"
 ---
 
 Workload Security Profiles provide a baseline of expected workload activity via a behavioral learning model that helps identify potential threats or misconfigurations. This insight can be used when investigating security alerts, including [generating suppression suggestions](#suppress-signals-based-on-suggestions) for known, acceptable workload behavior, as well as identifying previously unseen, anomalous behavior.
