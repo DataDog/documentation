@@ -238,10 +238,9 @@ end
 Starting from `dd-trace-rb` 1.11.0, the "CPU Profiling 2.0" profiler gathers data by sending `SIGPROF` unix signals to Ruby applications, enabling finer-grained data gathering.
 
 Sending `SIGPROF` is a common profiling approach, and may cause system calls from native extensions/libraries to be interrupted with a system [`EINTR` error code][8].
-Rarely, native extensions or libraries called by them may be have missing or incorrect error handling for the `EINTR` error code.
+Rarely, native extensions or libraries called by them may have missing or incorrect error handling for the `EINTR` error code.
 
-One known instance of this issue is when using the `mysql2` gem together with versions of libmysqlclient [older than 8.0.0][9]. The affected libmysqlclient version is known to be present on Ubuntu 18.04, but not 20.04 and later releases.
-**Note**: For this case, the profiler auto-detects when the `mysql2` gem is in use and auto-applies the solution described below.
+One known instance of this issue is when using the `mysql2` gem together with versions of libmysqlclient [older than 8.0.0][9]. The affected libmysqlclient version is known to be present on Ubuntu 18.04, but not 20.04 and later releases. For this case, the profiler auto-detects when the `mysql2` gem is in use and auto-applies the solution described below.
 
 If you encounter run-time failures or errors from Ruby gems that use native extensions, you can revert back to the legacy profiler which does not use `SIGPROF` signals. To revert to the legacy profiler, set the `DD_PROFILING_FORCE_ENABLE_LEGACY` environment variable to `true`, or in code:
 
