@@ -7,53 +7,43 @@ further_reading:
     text: "Getting Started with CWS"
 ---
 
-Workload Security profiles provide a baseline of expected workload activity via a behavioral learning model that helps identify potential threats or misconfigurations. This insight can be used when investigating security alerts, including generating suppression suggestions for any known, acceptable workload behavior, as well as identifying previously unseen, anomalous behavior.
+Workload Security Profiles provide a baseline of expected workload activity via a behavioral learning model that helps identify potential threats or misconfigurations. This insight can be used when investigating security alerts, including [generating suppression suggestions](#suppress-signals-based-on-suggestions) for known, acceptable workload behavior, as well as identifying previously unseen, anomalous behavior.
 
 ## Compatibility
 
-For Workload Security Profiles to be compatible with your Datadog configuration, you must have [CWS enabled][1], and be using Datadog Agent 7.44 or later. Workload Security Profiles are enabled by default and support containerized workloads only.
+For Workload Security Profiles to be compatible with your Datadog configuration, you must have [CWS enabled][1], use Datadog Agent 7.44 or later, and have activity dumps enabled. Workload Security Profiles are enabled by default and support containerized workloads only.
 
-Workload Security Profiles capture kernel-level activity on a per container basis for all running containers on the CWS monitored host systems.
+## How Workload Security Profiles are generated
 
-## How Workload Security Profiles work
+Workload Security Profiles are generated when [activity snapshots](#activity-snapshots) from containers sharing a common image name and image tag (version) are merged together to form a security profile. A different security profile is generated for each version of a container image. As a result, one profile is generated per `{ image-name, image-version}` tag combination.
 
-Workload Security Profiles are generated when [activity snapshots](#activity-snapshots) from containers sharing a common image name and image tag (version) are merged together to form a security profile.
+Each security profile acts as a [behavior model](#behavior-learning-model) for a given workload image to identify known, acceptable behavior that is expected to be consistent across all containers versus previously unseen, anomalous behavior that may be unique to a single container or small number of containers.
 
-Each security profile acts as a behavior model for a given workload image to identify known, acceptable behavior that is expected to be consistent across all containers versus previously unseen, anomalous behavior that may be unique to a single container or small number of containers.
-
-A different security profile is generated for each version of a container image. As a result, one profile is generated per `{ image-name, image-version}` tag combination.
-
-The following diagram shows a high-level representation of how activity snapshots from multiple containers are merged into a single Workload Security Profile with a commonality percentage calculated.
+The following diagram shows a high-level representation of how activity snapshots from multiple containers are merged into a single Workload Security Profile. The commonality score represents how likely a given process or file activity is normal, known behavior.
 
 **PLACEHOLDER FOR DIAGRAM**
 
 ### Activity snapshots
 
-Activity snapshots are the building blocks of Workload Security Profiles. Each snapshot captures kernel-level activity on a container, including process, network, and file access details. This information is collected by the Agent in 30 minute intervals and sent to the Datadog backend.
+Activity snapshots are the building blocks of Workload Security Profiles. They provide a reasonably accurate representation of expected workload behavior. Each snapshot captures kernel-level activity on a container, including process, network, and file access details. This information is collected by the Agent in 30 minute intervals and sent to the Datadog backend.
 
-Each Agent profiles multiple containers on the host system simultaneously. To minimize performance overhead, no more than five containers are profiled at any given time.
+When you configure the Agent and enable activity dumps, it automatically starts capturing snapshots for any running cgroups, including those already running when you start the Agent. It also captures snapshots for any new containers in your cloud native environments that use the Linux kernel control groups or cgroups. 
 
-Snapshots provide a reasonably accurate representation of expected workload behavior. This representation results in a more precise behavior model for a specific workload as more containers are profiled. The results are then merged together into a single security profile based on common image attributes.
+Each Agent can profile multiple containers on the host system simultaneously. To minimize performance overhead, no more than five containers are profiled at any given time.
 
 ### Behavior learning model
 
+A Workload Security Profile is a behavior model for a specific workload image. Capturing and comparing activity snapshots from individual containers enables each security profile to provide a model of the aggregate workload behavior of similar containers. This representation results in a more precise behavior model for a specific workload as more containers are profiled. Since containerized workloads are expected to be immutable, there should be few variations between workloads that share common image name and image version tags.
 
----
+A visual representation of the behavior model, including process nodes and file and network activity relationships is shown on the security profile details page. The [profile visualization](#explore-security-profiles) displays how consistent or common these relationships are across the various containers that have been profiled.
+
+#### Model status
 
 While initial snapshots are being captured and merged into the workload security profile, the profile will be listed in a learning state. Once a threshold has been reached in terms of the number of activity snapshots merged or amount of time elapsed since the first snapshot, the workload security profile status will transition to a **stable** state. These status changes for workload security profiles and evolving details of the workload security profile are described in more detail in the next section regarding the behavior learning model.
 
-A workload security profile is a behavior model for a specific workload. By capturing and then comparing kernel-level activity from individual containers, the workload security profile represents a model of the aggregate workload behavior of similar containers. Since containerized workloads are expected to be immutable, there should be few variations between workloads that share common image name and image versions. A workload security profile presents this behavior model in a visual representation of the process nodes along with the file and network activity relationships. The [profile visualization](#explore-security-profiles) displays how consistent or common these relationships are across the various containers that have been profiled.
-
-The benefits of the behavior modeling is to be able to quickly identify normal workload behavior that can be ignored or suppressed in security alerts vs. abnormal or anomalous behavior that is more likely to be indicative of a threat, specifically an attack or misconfiguration that could lead to an attack.  
-
-For the behavior modeling and related threat assessment to be effective, new containers must be quickly and automatically identified as they are being spun up continuously in many cloud native environments.  Once the Datadog agent is configured for CWS, it will automatically start to learn the behavior of any new containers using the Linux kernel control groups or cgroups that 
-
-Once your agent is configured with activity dump enabled, it will automatically start to learn any
-running cgroups (even those already running when you start the agent).
-
 ## Explore security profiles
 
-Security profiles generated by CWS are displayed on the [Security Profiles][2] page, grouped by image name. Click an image name to see the full list of security profiles associated with the image. Details shown for each security profile include the number of activity dumps that were merged to create the profile, the status of the machine learning model, and the date on which the profile was last updated.
+Security profiles generated by CWS are displayed on the [Security Profiles][2] page, grouped by image name. Click an image name to see the full list of security profiles associated with the image. Details shown for each security profile include the number of activity dumps that were merged to create the profile, the status of the behavior learning model, and the date on which the profile was last updated.
 
 {{< img src="security/cws/security_profiles/security-profiles-overview.png" alt="CWS Security Profiles page with auto-generated security profiles" width="100%">}}
 
