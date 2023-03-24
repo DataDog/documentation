@@ -127,7 +127,7 @@ DD_APPSEC_ENABLED=true
 {{% /tab %}}
 {{% tab "Docker CLI" %}}
 
-{{< tabs >}}
+APM 用の構成コンテナを更新するには、`docker run` コマンドに以下の引数を追加します。
 
 ```shell
 docker run [...] -e DD_APPSEC_ENABLED=true [...]
