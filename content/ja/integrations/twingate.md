@@ -4,6 +4,13 @@ app_uuid: c88bd253-18da-4224-af14-7854ce8ae6ed
 assets:
   dashboards:
     Twingate Dashboard: assets/dashboards/twingate_overview.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: true
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Twingate
 author:
   homepage: https://www.twingate.com/?utm_source=datadog&utm_medium=partner&utm_campaign=integrations
   name: Twingate

@@ -16,6 +16,10 @@ has_logo: true
 integration_title: Kubernetes State Metrics Core
 is_public: true
 public_title: Datadog-Kubernetes State Metrics Core Integration
+supported_os:
+    - linux
+    - mac_os
+    - windows
 # forcing integration_id to kube-state-metrics so it loads kubernetes svg
 integration_id: "kube-state-metrics"
 further_reading:

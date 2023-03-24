@@ -35,7 +35,7 @@ further_reading:
 
 ---
 
-{{< vimeo 441865141 >}}
+{{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/441865141/rendition/1080p/file.mp4?loc=external&signature=ebc774b892f062e45922dcae82f4ebff0a906c8ec30f34b9d77494b0051748ad" poster="/images/poster/profiler.png" >}}
 
 </br>
 

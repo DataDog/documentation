@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ja/agent/tagging
-- /ja/getting_started/tagging/assigning_tags
 - /ja/tagging/assigning_tags/
 description: Datadog でタグを割り当てる方法について説明します。
 further_reading:
@@ -189,8 +188,8 @@ DD_CONTAINER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
 
 Docker Swarm `docker-compose.yaml` ファイル内で `DD_CONTAINER_LABELS_AS_TAGS` 変数を使用する場合は、次の例のように、アポストロフィーを削除します。
 
-```shell
-DD_CONTAINER_LABELS_AS_TAGS={"com.docker.compose.service":"service_name"}
+```yaml
+- DD_CONTAINER_LABELS_AS_TAGS={"com.docker.compose.service":"service_name"}
 ```
 
 Docker コンテナにラベルを追加する際は、`docker-compose.yaml` ファイル内で `labels:` キーワードをどこに配置するかが重要となります。スムーズに設定が進むよう、[Docker の統合サービスタグ付け][2]に関するドキュメントを参照してください。

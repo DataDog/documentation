@@ -21,11 +21,11 @@ This relationship is represented by the following formula:
 
 $${\text"length of SLO target" \text" (7, 30 or 90 days)"} / \text"burn rate" = \text"time until error budget is fully consumed"\$$
 
-A burn rate alert will use the recent “error rate” in its calculation to measure the observed burn rate. Note that “error rate” means the ratio of bad behavior over total behavior during a *given period*:
+A burn rate alert will use the recent "error rate" in its calculation to measure the observed burn rate. Note that "error rate" means the ratio of bad behavior over total behavior during a *given period*:
 
 $$\text"error rate" = 1 - {\text"good behavior during time period" / \text"total behavior during time period"}$$
 
-The units of “behavior” will differ depending on the type of SLO. Metric-based SLOs track the number of occurrences of something (like number of successful or failed requests), while monitor-based SLOs track amounts of time (like downtime and uptime of monitors).
+The units of "behavior" will differ depending on the type of SLO. Metric-based SLOs track the number of occurrences of something (like number of successful or failed requests), while monitor-based SLOs track amounts of time (like downtime and uptime of monitors).
 
 When you set a target for your SLO (like 99.9%), your error budget is the amount of unreliability you’re allowed to have:
 
@@ -38,7 +38,7 @@ $$(10)(0.001) = 0.01$$
 
 Ideally, you should always try to maintain a burn rate of 1 over the course of your SLO’s target (as you invest in evolving your application with new features). However, in practice, your burn rate will fluctuate as issues or incidents cause your burn rate to increase rapidly until the issue is resolved. Therefore, alerting on burn rates allows you to be proactively notified when an issue is consuming your error budget at an elevated rate that could potentially cause you to miss your SLO target.
 
-When you configure a burn rate alert, you specify the burn rate threshold alongside a “long alerting window” and “short alerting window” over which the observed burn rate will be measured. The long alerting window is specified in hours and ensures the monitor measures the burn rate over a period long enough to correspond to a significant issue. This prevents the monitor from triggering flaky alerts due to minor issues. The short alerting window is specified in minutes. It ensures the monitor recovers quickly after the actual issue is over by checking if the recent burn rate is still above the threshold. Google recommends the short window to be 1/12 of the long window. However, you will be able to customize the short window programmatically in Datadog through the API or with Terraform. Here is the full formula for how the burn rate alert evaluates:
+When you configure a burn rate alert, you specify the burn rate threshold alongside a "long alerting window" and "short alerting window" over which the observed burn rate will be measured. The long alerting window is specified in hours and ensures the monitor measures the burn rate over a period long enough to correspond to a significant issue. This prevents the monitor from triggering flaky alerts due to minor issues. The short alerting window is specified in minutes. It ensures the monitor recovers quickly after the actual issue is over by checking if the recent burn rate is still above the threshold. Google recommends the short window to be 1/12 of the long window. However, you will be able to customize the short window programmatically in Datadog through the API or with Terraform. Here is the full formula for how the burn rate alert evaluates:
 
 $$(\text"long window error rate" / {1 - \text"SLO target"} ≥ \text"burn rate threshold") ∧ (\text"short window error rate" / {1 - \text"SLO target"} ≥ \text"burn rate threshold") = \text"ALERT"$$
 
