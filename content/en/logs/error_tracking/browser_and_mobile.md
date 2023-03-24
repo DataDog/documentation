@@ -27,7 +27,7 @@ Your crash reports appear in [**Error Tracking**][2].
 
 If you have not setup the Datadog Browser SDK yet, follow the [in-app setup instructions][1] or see the [Browser Logs setup documentation][2].
 
-1. Download the latest version of the [Logs Browser SDK][3].
+1. Download the latest version of the [Logs Browser SDK][3] (Error Tracking requires at least `v4.36.0`).
 2. Configure your application's `version`, `env`, and `service` when [initializing the SDK][4].
 3. Initialize your SDK, for example, with NPM:
 
@@ -44,20 +44,11 @@ If you have not setup the Datadog Browser SDK yet, follow the [in-app setup inst
    })
    ```
 
-4. You must add the following snippet near initialization to catch and submit all uncaught exceptions to Datadog:
+4. To log a caught exception yourself, you may optionally use:
 
    ```javascript
-   window.onerror = function (message, source, lineno, colno, error) {
-       datadogLogs.logger.error(error?.message || '', {
-           error: { stack: error?.stack },
-       });
-   };
-   ```
-5. To log a caught exception yourself, you may optionally use:
-
-   ```javascript
-   const e = new Error('an exception occurred');
-   datadogLogs.logger.error(e.message, {'error': {'stack': e.stack}});
+   const err = new Error('an exception occurred');
+   datadogLogs.logger.error("an error occured", {usr: {id: 123}}, err);
    ```
 
 [1]: https://app.datadoghq.com/logs/onboarding/client
