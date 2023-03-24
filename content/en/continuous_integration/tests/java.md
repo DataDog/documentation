@@ -35,19 +35,6 @@ Supported build systems:
 To report test results to Datadog, you need to configure the Datadog Java library:
 
 {{< tabs >}}
-{{% tab "On-Premises CI provider (Datadog Agent)" %}}
-
-If you are running tests on an on-premises CI provider such as Jenkins or self-managed GitLab CI, you can install the Datadog Agent on each worker node by following the [Agent installation instructions][1]. Datadog recommends running CI Visibility with Agentless mode.
-
-If the CI provider is using a container-based executor, set the `DD_AGENT_HOST` environment variable on all builds (which defaults to `http://localhost:8126`) to an endpoint that is accessible from within build containers, because `localhost` inside the build references the container itself, not the underlying worker node where the Datadog Agent is running.
-
-If you are using a Kubernetes executor, Datadog recommends using the [Datadog Admission Controller][2], which automatically sets the `DD_AGENT_HOST` environment variable in the build pods to communicate with the local Datadog Agent.
-
-
-[1]: /agent/
-[2]: https://docs.datadoghq.com/agent/cluster_agent/admission_controller/
-
-{{% /tab %}}
 {{% tab "Cloud CI provider (Agentless)" %}}
 
 Datadog recommends configuring the library to use the Agentless mode so certain features such as Test Session Level Visibility are available. For this, set the following environment variables:
@@ -70,6 +57,19 @@ Additionally, configure which [Datadog site][2] to which you want to send data.
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /getting_started/site/
+
+{{% /tab %}}
+{{% tab "On-Premises CI provider (Datadog Agent)" %}}
+
+If you are running tests on an on-premises CI provider such as Jenkins or self-managed GitLab CI, you can install the Datadog Agent on each worker node by following the [Agent installation instructions][1]. Datadog recommends running CI Visibility with Agentless mode.
+
+If the CI provider is using a container-based executor, set the `DD_AGENT_HOST` environment variable on all builds (which defaults to `http://localhost:8126`) to an endpoint that is accessible from within build containers, because `localhost` inside the build references the container itself, not the underlying worker node where the Datadog Agent is running.
+
+If you are using a Kubernetes executor, Datadog recommends using the [Datadog Admission Controller][2], which automatically sets the `DD_AGENT_HOST` environment variable in the build pods to communicate with the local Datadog Agent.
+
+
+[1]: /agent/
+[2]: https://docs.datadoghq.com/agent/cluster_agent/admission_controller/
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -109,7 +109,7 @@ Add a Maven profile in your root `pom.xml` configuring the Datadog Java tracer d
 {{% /tab %}}
 {{% tab "Gradle" %}}
 
-Add the `ddTracerAgent` entry to the `configurations` task block, and add the Datadog Java tracer dependency, replacing `$VERSION` with the latest version of the tracer available in the [Maven Repository][1] (without the preceding `v`): ![Maven Central][2]
+Add the `ddTracerAgent` entry to the `configurations` task block, and add the Datadog Java tracer dependency, replacing `$VERSION` with the latest version of the tracer available in the [Maven Repository][1] (without the preceding `v`: ![Maven Central][2]):
 
 {{< code-block lang="groovy" filename="build.gradle" >}}
 configurations {
@@ -128,18 +128,17 @@ dependencies {
 
 ### Installing the Java compiler plugin
 
-The Java compiler plugin works in combination with the tracer, providing it with additional source code information.
-Installing the plugin is an optional step that improves performance and accuracy of certain CI visibility features.
+The Java compiler plugin works in combination with the Java tracer, and provides it with additional source code information. Installing the plugin is an optional step that improves performance and accuracy of certain CI visibility features.
 
-The plugin works with the standard `javac` compiler (Eclipse JDT compiler is not supported).
+The plugin works with the standard `javac` compiler. Eclipse JDT compiler is not supported.
 
 If the configuration is successful, you should see the line `DatadogCompilerPlugin initialized` in your compiler's output.
 
 {{< tabs >}}
 {{% tab "Maven" %}}
 
-Include the snippets below in the relevant sections of the same Maven profile that you have added to your root `pom.xml` for the tracer config.
-Replace `$VERSION` with the latest version of the artifacts accessible from the [Maven Repository][1] (without the preceding `v`): ![Maven Central][2]
+Include the snippets below in the relevant sections of the same Maven profile that you have added to your root `pom.xml` for the tracer configuration.
+Replace `$VERSION` with the latest version of the artifacts accessible from the [Maven Repository][1] (without the preceding `v`: ![Maven Central][2]):
 
 {{< code-block lang="xml" filename="pom.xml" >}}
 <dependency>
@@ -173,9 +172,9 @@ Replace `$VERSION` with the latest version of the artifacts accessible from the 
 </build>
 {{< /code-block >}}
 
-Maven compiler plugin supports [annotationProcessorPaths][3] property starting with version 3.5. If you absolutely must use an older version, declare Datadog compiler plugin as a regular dependency in your project.
+The Maven compiler plugin supports the [`annotationProcessorPaths`][3] property starting with version 3.5. If you have to use an older version, declare the Datadog compiler plugin as a regular dependency in your project.
 
-Additionally, if you are using JDK 16 or newer, add the following lines to the [.mvn/jvm.config][4] file in your project base directory:
+Additionally, if you are using JDK 16 or later, add the following lines to the [`.mvn/jvm.config`][4] file in your project's base directory:
 
 {{< code-block lang="properties" filename=".mvn/jvm.config" >}}
 --add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED
@@ -192,9 +191,9 @@ Additionally, if you are using JDK 16 or newer, add the following lines to the [
 {{% /tab %}}
 {{% tab "Gradle" %}}
 
-Add plugin-client JAR to the project's classpath, add plugin JAR to the compiler's annotation processor path, and pass the plugin argument to the tasks that compile Java classes.
+Add the plugin-client JAR to the project's classpath, add the plugin JAR to the compiler's annotation processor path, and pass the plugin argument to the tasks that compile Java classes.
 
-Replace `$VERSION` with the latest version of the artifacts accessible from the [Maven Repository][1] (without the preceding `v`): ![Maven Central][2]
+Replace `$VERSION` with the latest version of the artifacts accessible from the [Maven Repository][1] (without the preceding `v`: ![Maven Central][2]):
 
 {{< code-block lang="groovy" filename="build.gradle" >}}
 if (project.hasProperty("dd-civisibility")) {
@@ -210,7 +209,7 @@ if (project.hasProperty("dd-civisibility")) {
 }
 {{< /code-block >}}
 
-Additionally, if you are using JDK 16 or newer, add the following lines to your [gradle.properties][3] file:
+Additionally, if you are using JDK 16 or later, add the following lines to your [gradle.properties][3] file:
 
 {{< code-block lang="properties" filename="gradle.properties" >}}
 org.gradle.jvmargs=\
