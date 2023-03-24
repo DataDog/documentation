@@ -5,6 +5,8 @@ aliases:
     - /account_management/faq/how-do-i-reset-my-application-keys/
     - /agent/faq/how-do-i-reset-my-datadog-api-keys/
     - /account_management/faq/api-app-key-management/
+algolia:
+  tags: ['api key']
 ---
 
 ## API keys

@@ -25,6 +25,8 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-consul-with-datadog-npm/"
   tag: "Blog"
   text: "Datadog NPM now supports Consul networking"
+algolia:
+  tags: ['npm', 'network performance monitoring']
 ---
 
 ## Overview

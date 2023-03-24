@@ -539,6 +539,9 @@
             - link: '/logs/log_collection/javascript/'
               tag: 'Documentation'
               text: 'Learn about the Datadog Browser SDK for Logs'
+          algolia:
+            tags:
+              - 'browser logs'
     - action: pull-and-push-file
       branch: main
       globs:

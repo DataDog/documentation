@@ -1,5 +1,4 @@
 ---
-
 title: APM
 kind: documentation
 description: Instrument your code to improve performance
@@ -35,6 +34,8 @@ aliases:
   - /tracing/advanced/
   - /tracing/api
   - /tracing/faq/distributed-tracing/
+algolia:
+  tags: ['apm', 'application performance monitoring', 'distributed tracing']
 ---
 
 {{< vimeo 381554158 >}}

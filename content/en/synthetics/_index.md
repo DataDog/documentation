@@ -21,7 +21,8 @@ further_reading:
 - link: "/synthetics/guide/"
   tag: "Documentation"
   text: "Synthetic Monitoring Guides"
-
+algolia:
+  tags: ['synthetics']
 ---
 
 {{< vimeo 447241955 >}}
