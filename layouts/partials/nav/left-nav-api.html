@@ -57,8 +57,8 @@
                         
                         <!-- 
                             non-english pages only:
-                            lookup english equivalent of non-english menu item identifier attr.  
-                            pull the name attr and plug into anchor href.
+                            lookup english equivalent of non-english menu item .identifier attr.  
+                            pull the .name attr and plug into anchor href.
                         -->
                         {{ if ne $currentPage.Lang "en" }}
                             {{ range $engMenuItem := $engMenuChildren  }}
