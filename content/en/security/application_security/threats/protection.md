@@ -89,3 +89,4 @@ View blocked suspicious requests in the [Trace Explorer][11] by filtering on the
 [9]: https://app.datadoghq.com/security/appsec/in-app-waf
 [10]: /security/application_security/threats/inapp_waf_rules/
 [11]: https://app.datadoghq.com/security/appsec/traces
+[12]: /security/application_security/enabling/compatibility/
