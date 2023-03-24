@@ -298,7 +298,7 @@ This features requires the tracer extension to be enabled for your PHP service.
 
 Follow the [PHP tracing instructions][1] to install the automatic instrumentation package and enable tracing for your service.
 
-Ensure that you are using a supported client library (e.g. `PDO`).
+Ensure that you are using a supported client library. For example, `PDO`.
 
 Enable the database monitoring propagation feature by setting the following environment variable:
    - `DD_DBM_PROPAGATION_MODE=full`
