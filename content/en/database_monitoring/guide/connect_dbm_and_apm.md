@@ -28,16 +28,16 @@ Data privacy
 
 **Supported tracers**
 
-| Language | Library or Framework           | Postgres    | MySQL       |
-| :----    | :----                          | :----:      |  :----:     |
+| Language | Library or Framework           |  Postgres   |    MySQL    |
+| :----    | :----                          |:-----------:|:-----------:|
 | **Go:** [dd-trace-go][3] >= 1.44.0 |      |             |             |
-|          | [database/sql][4]              | {{< X >}}   | {{< X >}}   |
-|          | [sqlx][5]                      | {{< X >}}   | {{< X >}}   |
+|          | [database/sql][4]              |  {{< X >}}  |  {{< X >}}  |
+|          | [sqlx][5]                      |  {{< X >}}  |  {{< X >}}  |
 | **Ruby:** [dd-trace-rb][6] >= 1.8.0 |     |             |             |
 |          | [pg][8]                        | {{< X >}}   |             |
 |          | [mysql2][7]                    |             | {{< X >}}   |
 | **Python:** [dd-trace-py][11] >= 1.9.0 |  |             |             |
-|          | [psycopg2][12]                 | {{< X >}}   |             |
+|          | [psycopg2][12]                 |  {{< X >}}  |             |
 | **.NET** [dd-trace-dotnet][15] >= 2.26.0 ||             |             |
 |          | [Npgsql][16]                   | {{< X >}}   |             |
 |          | [MySql.Data][17]               |             | {{< X >}}   |
@@ -49,6 +49,8 @@ Data privacy
 |          | [postgres][10]                 | Alpha |             |
 |          | [mysql][13]                    |             | Alpha |
 |          | [mysql2][14]                   |             | Alpha |
+| **Java**     |                            |             |             |
+|          | jdbc                           |  {{< X >}}  |  {{< X >}}  |
 
 
 
@@ -198,7 +200,6 @@ Full example:
 
 import psycopg2
 
-#TODO: update postgres configurations
 POSTGRES_CONFIG = {
     "host": "127.0.0.1",
     "port": 5432,
@@ -223,7 +224,7 @@ cursor.executemany("select %s", (("foo",), ("bar",)))
 {{% tab "Node.js" %}}
 
 <div class="alert alert-warning">
-Node is in alpha release and may be unstable. 
+Node is in alpha release and may be unstable.
 </div>
 
 Install or udpate [dd-trace-js][1] to version greater than `3.9.0` (or `2.22.0` if using end-of-life Node.js version 12):
@@ -289,6 +290,22 @@ Enable the database monitoring propagation feature by setting the following envi
 
 [1]: /tracing/trace_collection/dd_libraries/dotnet-framework
 [2]: /tracing/trace_collection/dd_libraries/dotnet-core
+
+{{% /tab %}}
+
+{{% tab "Java" %}}
+
+// TODO: add required java-tracer version
+
+Follow the [java tracing][1] instrumentation instructions in order to enable tracing in your java application.
+
+Enable the database monitoring propagation feature using one of the following methods:
+
+1. Set the system property `dd.dbm.propagation.mode=full`
+
+2. Set the environment variable `DD_DBM_PROPAGATION_MODE=full`
+
+[1]: /tracing/trace_collection/dd_libraries/java/
 
 {{% /tab %}}
 
