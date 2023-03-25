@@ -33,6 +33,8 @@ Data privacy
 | **Go:** [dd-trace-go][3] >= 1.44.0 |      |             |             |
 |          | [database/sql][4]              |  {{< X >}}  |  {{< X >}}  |
 |          | [sqlx][5]                      |  {{< X >}}  |  {{< X >}}  |
+| **Java**     |                            |             |             |
+|          | jdbc                           |  {{< X >}}  |  {{< X >}}  |
 | **Ruby:** [dd-trace-rb][6] >= 1.8.0 |     |             |             |
 |          | [pg][8]                        | {{< X >}}   |             |
 |          | [mysql2][7]                    |             | {{< X >}}   |
@@ -49,8 +51,6 @@ Data privacy
 |          | [postgres][10]                 | Alpha |             |
 |          | [mysql][13]                    |             | Alpha |
 |          | [mysql2][14]                   |             | Alpha |
-| **Java**     |                            |             |             |
-|          | jdbc                           |  {{< X >}}  |  {{< X >}}  |
 
 
 
