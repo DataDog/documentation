@@ -132,6 +132,22 @@ func main() {
 
 {{% /tab %}}
 
+{{% tab "Java" %}}
+
+// TODO: add required java-tracer version
+
+Follow the [java tracing][1] instrumentation instructions in order to enable tracing in your java application.
+
+Enable the database monitoring propagation feature using one of the following methods:
+
+1. Set the system property `dd.dbm.propagation.mode=full`
+
+2. Set the environment variable `DD_DBM_PROPAGATION_MODE=full`
+
+[1]: /tracing/trace_collection/dd_libraries/java/
+
+{{% /tab %}}
+
 {{% tab "Ruby" %}}
 
 In your Gemfile, install or update [dd-trace-rb][1] to version `1.8.0` or greater:
@@ -290,22 +306,6 @@ Enable the database monitoring propagation feature by setting the following envi
 
 [1]: /tracing/trace_collection/dd_libraries/dotnet-framework
 [2]: /tracing/trace_collection/dd_libraries/dotnet-core
-
-{{% /tab %}}
-
-{{% tab "Java" %}}
-
-// TODO: add required java-tracer version
-
-Follow the [java tracing][1] instrumentation instructions in order to enable tracing in your java application.
-
-Enable the database monitoring propagation feature using one of the following methods:
-
-1. Set the system property `dd.dbm.propagation.mode=full`
-
-2. Set the environment variable `DD_DBM_PROPAGATION_MODE=full`
-
-[1]: /tracing/trace_collection/dd_libraries/java/
 
 {{% /tab %}}
 
