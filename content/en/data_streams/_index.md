@@ -10,6 +10,10 @@ further_reading:
       text: 'Service Catalog'
 ---
 
+{{< site-region region="ap1" >}}
+<div class="alert alert-info">Data Streams Monitoring is not supported in the AP1 region.</a></div>
+{{< /site-region >}}
+
 {{< img src="data_streams/data_streams_hero.png" alt="Datadog Data Streams Monitoring" style="width:100%;" >}}
 
 Data Streams Monitoring provides a standardized method for teams to understand and manage pipelines at scale by making it easy to:
