@@ -5,6 +5,7 @@ import { configure, searchBox } from 'instantsearch.js/es/widgets';
 import { searchbarHits } from './algolia/searchbarHits';
 import { searchpageHits } from './algolia/searchpageHits';
 import { customPagination } from './algolia/customPagination';
+import { closeMobileNav } from '../components/mobile-nav';
 
 function getConfig(environment) {
     if (environment === 'live') {
@@ -38,6 +39,7 @@ function loadInstantSearch(asyncLoad) {
     const hitsContainerContainer = document.querySelector('.hits-container');
     const hitsContainer = document.querySelector('#hits');
     const filtersDocs = `language: ${pageLanguage}`;
+    const homepage = document.querySelector('.kind-home');
     let searchResultsPage = document.querySelector('.search_results_page');
     let basePathName = '/';
     let numHits = 5;
@@ -165,6 +167,37 @@ function loadInstantSearch(asyncLoad) {
             document.querySelector('.ais-SearchBox-input').addEventListener('keydown', handleSearchbarKeydown);
             document.querySelector('.ais-SearchBox-submit').addEventListener('click', handleSearchbarSubmitClick);
             document.addEventListener('click', handleOutsideSearchbarClick);
+        }
+
+        // Pages that aren't homepage or search page need to move the searchbar on mobile
+        if (!homepage && !searchResultsPage) {
+            const handleResize = () => {
+                const searchBoxWrapper = document.querySelector('.nav-search-wrapper');
+                const searchBoxWrapperMobile = document.querySelector('.mobile-nav-search-wrapper');
+
+                if (window.innerWidth <= 991) {
+                    searchBoxWrapperMobile.appendChild(searchBoxContainerContainer);
+                    closeMobileNav();
+                } else {
+                    searchBoxWrapper.appendChild(searchBoxContainerContainer);
+                }
+            };
+
+            const debounce = (cb, delay) => {
+                let timeout;
+                return () => {
+                    clearTimeout(timeout);
+                    timeout = setTimeout(() => {
+                        cb();
+                    }, delay);
+                };
+            };
+
+            const handleResizeDebounced = debounce(handleResize, 500);
+
+            window.addEventListener('resize', handleResizeDebounced);
+
+            handleResizeDebounced();
         }
     }
 }
