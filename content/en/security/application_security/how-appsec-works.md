@@ -50,8 +50,8 @@ For Datadog ASM to be compatible with your Datadog configuration, you must have 
 ### Serverless monitoring
 
 <div class="alert alert-info">ASM support for AWS Lambda is in beta. Threat detection is done by using Datadog's lambda extension.</div>
- 
-Datadog ASM for AWS Lambda provides deep visibility into attackers targeting your functions. With distributed tracing providing a context-rich picture of the attack, you can assess the impact and remediate the threat effectively. 
+
+Datadog ASM for AWS Lambda provides deep visibility into attackers targeting your functions. With distributed tracing providing a context-rich picture of the attack, you can assess the impact and remediate the threat effectively.
 
 Read [Enabling ASM for Serverless][8] for information on setting it up.
 
@@ -69,12 +69,21 @@ Data for suspicious requests is kept for 90 days. The underlying trace data is k
 
 ## Data privacy
 
-There are multiple methods used to avoid your sensitive information being indexed. To take further action, you can set up [custom and static scrubbers][10], and use the [passlist][11].
+By default, ASM collects information from suspicious requests to help you understand why the request was flagged as suspicious. Before sending the data, ASM scans it for patterns and keywords that indicate that the data is sensitive. If the data is deemed sensitive, it is replaced with a `<redacted>` flag. This indicates that the request was suspicious, but that the request data could not be collected because of data security concerns.
 
+Here are some examples of data that is flagged as sensitive by default:
+* `pwd`, `password`, `ipassword`, `pass_phrase`
+* `secret`
+* `key`, `api_key`, `private_key`, `public_key`
+* `token`
+* `consumer_id`, `consumer_key`, `consumer_secret`
+* `sign`, `signed`, `signature`
+* `bearer`
+* `authorization`
+* `BEGIN PRIVATE KEY`
+* `ssh-rsa`
 
-**Note:** Datadog ASM does not automatically obfuscate sensitive information or PII. To keep this sensitive data from being sent to Datadog, [configure the Datadog Agent or Tracer for data security][10].
-
-Contact Support to delete sensitive data that may have been indexed.
+To configure the information redacted by ASM, refer to the [data security configuration][17]
 
 ## Threat detection methods
 
@@ -90,22 +99,26 @@ Security Signals are automatically created when Datadog detects meaningful attac
 {{% asm-protect %}}
 
 
+## Attack attempt qualification
+
+Leveraging distributed tracing information, attacks attempts are qualified as safe, unknown, or harmful. 
+* Attack attempts qualified as safe cannot breach your application, for example, when a PHP injection attack targets a service written in Java. 
+* An unknown qualification is decided when there is not enough information to make a definitive judgement about the attack’s probability of success.
+* A harmful qualification is highlighted when there is evidence that a code level vulnerability has been found by the attacker.
+
+
+
 ## Threat monitoring coverage
 
-Datadog ASM categorizes attack attempts into different threat types:
 
-* **Unqualified attacks** match inbound HTTP requests with known attack patterns. For example, no correlation with the service's business-logic is found after correlating with the execution context provided by the trace.
-* **Contextualized attacks** correlate the attack attempts performed on the service with a matching business-logic. For example, SQL injection patterns on a service performing SQL statements.
-* A **Vulnerability is triggered** when an attack attempt gives evidence that a vulnerability has been successfully exploited, after matching known attack patterns.
-
-Datadog ASM includes over 100 attack patterns that help protect against [many different kinds of attacks][14], including the following vulnerabilities:
+Datadog ASM includes over 100 attack signatures that help protect against [many different kinds of attacks][14], including, but not limited to, the following categories:
 
 * SQL injections
 * Code injections
 * Shell injections
 * NoSQL injections
 * Cross-Site Scripting (XSS)
-* Sever-side Request Forgery (SSRF)
+* Server-side Request Forgery (SSRF)
 
 ## Built-in vulnerability detection
 
@@ -139,3 +152,4 @@ Datadog ASM identifies Log4j Log4Shell attack payloads and provides visibility i
 [14]: https://app.datadoghq.com/security/appsec/event-rules
 [15]: https://app.datadoghq.com/security/appsec/vm
 [16]: /security/cloud_siem/
+[17]: /security/application_security/threats/setup_and_configure/#data-security-considerations

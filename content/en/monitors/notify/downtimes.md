@@ -81,9 +81,9 @@ The examples below show how `Group scope` may be applied to multi alert monitors
 {{% /tab %}}
 {{% tab "By Monitor Tags" %}}
 
-If a scheduled downtime is based on a common monitor tag and the monitors in scope are multi alert monitors with one “group by” scope, the `Group scope` field can be used to silence a group that the monitors in scope have in common.
+If a scheduled downtime is based on a common monitor tag and the monitors in scope are multi alert monitors with one "group by" scope, the `Group scope` field can be used to silence a group that the monitors in scope have in common.
 
-**Example 1: Two multi alert monitors, each with one “group by” scope, have the `downtime:true` monitor tag in common.**
+**Example 1: Two multi alert monitors, each with one "group by" scope, have the `downtime:true` monitor tag in common.**
 
 1. *Monitor A* is a multi alert monitor for hosts reporting a metric averaged across multiple `service` groups.
 2. *Monitor B* is a multi alert monitor for hosts reporting the same metric for `service:web-store`.

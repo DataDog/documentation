@@ -51,7 +51,7 @@ When formatting the `ddtags` values, you must:
 - Concatenate keys and values with a comma (`,`)
 - Use URL encoding
 
-For example, given the key-value pairs `{“service”: “billingService”, “env”: “production”}`, the URL-encoded string would look like this:
+For example, given the key-value pairs `{"service": "billingService", "env": "production"}`, the URL-encoded string would look like this:
 
 ```
 service%3AbillingService%2Cenv%3Aproduction
