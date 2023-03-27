@@ -32,24 +32,58 @@ First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, t
 - [Connect logs and traces](#connect-logs-and-traces)
 
 ### APM
+- [Connect telemetry using tags](#connect-telemetry-using-tags)
+- [Collect the request and response payloads](#collect-the-request-and-response-payloads)
+- [Collect metrics from non-Lambda resources](#collect-metrics-from-non-lambda-resources)
+- [Collect logs from non-Lambda resources](#collect-logs-from-non-lambda-resources)
+- [Collect traces from non-Lambda resources](#collect-traces-from-non-lambda-resources)
+- [Filter or scrub information from logs](#filter-or-scrub-information-from-logs)
+- [Disable logs collection](#disable-logs-collection)
+- [Parse and transform logs](#parse-and-transform-logs)
 - [Configure the Datadog tracer](#configure-the-datadog-tracer)
-- [Choose APM tracing sampling rates](#select-sampling-rates-for-ingesting-apm-spans)
+- [Select sampling rates for ingesting APM spans](#select-sampling-rates-for-ingesting-apm-spans)
 - [Filter or scrub sensitive information from traces](#filter-or-scrub-sensitive-information-from-traces)
 - [Disable trace collection](#disable-trace-collection)
-- [Collect the request and response payloads](#collect-the-request-and-response-payloads)
-- [Collect traces from non-Lambda resources](#collect-traces-from-non-lambda-resources)
+- [Connect logs and traces](#connect-logs-and-traces)
+- [Link errors to your source code](#link-errors-to-your-source-code)
+- [Submit custom metrics](#submit-custom-metrics)
+- [Send telemetry over PrivateLink or proxy](#send-telemetry-over-privatelink-or-proxy)
+- [Send telemetry to multiple Datadog organizations](#send-telemetry-to-multiple-datadog-organizations)
 - [Propagate trace context over AWS resources](#propagate-trace-context-over-aws-resources)
 - [Merge X-Ray and Datadog traces](#merge-x-ray-and-datadog-traces)
-- [Link errors to your source code](#link-errors-to-your-source-code)
+- [Enable AWS Lambda code signing](#enable-aws-lambda-code-signing)
+- [Migrate to the Datadog Lambda extension](#migrate-to-the-datadog-lambda-extension)
+- [Migrating between x86 to arm64 with the Datadog Lambda Extension](#migrating-between-x86-to-arm64-with-the-datadog-lambda-extension)
+- [Configure the Datadog Lambda extension for local testing](#configure-the-datadog-lambda-extension-for-local-testing)
+- [Troubleshoot](#troubleshoot)
+- [Further Reading](#further-reading)
 
 ### Others
 - [Connect telemetry using tags](#connect-telemetry-using-tags)
-- [Send telemetry over AWS PrivateLink or a proxy](#send-telemetry-over-privatelink-or-proxy)
+- [Collect the request and response payloads](#collect-the-request-and-response-payloads)
+- [Collect metrics from non-Lambda resources](#collect-metrics-from-non-lambda-resources)
+- [Collect logs from non-Lambda resources](#collect-logs-from-non-lambda-resources)
+- [Collect traces from non-Lambda resources](#collect-traces-from-non-lambda-resources)
+- [Filter or scrub information from logs](#filter-or-scrub-information-from-logs)
+- [Disable logs collection](#disable-logs-collection)
+- [Parse and transform logs](#parse-and-transform-logs)
+- [Configure the Datadog tracer](#configure-the-datadog-tracer)
+- [Select sampling rates for ingesting APM spans](#select-sampling-rates-for-ingesting-apm-spans)
+- [Filter or scrub sensitive information from traces](#filter-or-scrub-sensitive-information-from-traces)
+- [Disable trace collection](#disable-trace-collection)
+- [Connect logs and traces](#connect-logs-and-traces)
+- [Link errors to your source code](#link-errors-to-your-source-code)
+- [Submit custom metrics](#submit-custom-metrics)
+- [Send telemetry over PrivateLink or proxy](#send-telemetry-over-privatelink-or-proxy)
 - [Send telemetry to multiple Datadog organizations](#send-telemetry-to-multiple-datadog-organizations)
-- [Migrate to the Datadog Lambda extension](#migrate-to-the-datadog-lambda-extension)
+- [Propagate trace context over AWS resources](#propagate-trace-context-over-aws-resources)
+- [Merge X-Ray and Datadog traces](#merge-x-ray-and-datadog-traces)
 - [Enable AWS Lambda code signing](#enable-aws-lambda-code-signing)
+- [Migrate to the Datadog Lambda extension](#migrate-to-the-datadog-lambda-extension)
+- [Migrating between x86 to arm64 with the Datadog Lambda Extension](#migrating-between-x86-to-arm64-with-the-datadog-lambda-extension)
 - [Configure the Datadog Lambda extension for local testing](#configure-the-datadog-lambda-extension-for-local-testing)
 - [Troubleshoot](#troubleshoot)
+- [Further Reading](#further-reading)
 
 ## Connect telemetry using tags
 
@@ -623,9 +657,18 @@ If your Lambda functions are configured to use code signing, you must add Datado
 
 Datadog's Signing Profile ARN:
 
+{{< site-region region="us,us3,us5,eu,gov" >}}
 ```
 arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc
 ```
+{{< /site-region >}}
+
+{{< site-region region="ap1" >}}
+```
+arn:aws:signer:us-east-1:417141415827:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc
+```
+{{< /site-region >}}
+
 
 ## Migrate to the Datadog Lambda extension
 

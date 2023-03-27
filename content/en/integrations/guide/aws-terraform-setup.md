@@ -72,6 +72,7 @@ Using [Terraform][1], you can create the Datadog IAM role, policy document, and 
    }
    ```
    {{< /site-region >}}
+
    {{< site-region region="ap1" >}}
    ```hcl
    data "aws_iam_policy_document" "datadog_aws_integration_assume_role" {
