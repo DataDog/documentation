@@ -143,6 +143,11 @@ Datadog プロファイラーを有効にします。バージョン `0.69.0` �
 **デフォルト**: `null`<br>
 APM インテグレーションのデフォルト名を変更します。1 つ以上のインテグレーションの名前変更を同時に行うことができます。例: `DD_SERVICE_MAPPING=pdo:payments-db,mysqli:orders-db` ([インテグレーション名](#integration-names)を参照してください)
 
+`DD_TRACE_HEALTH_METRICS_ENABLED`
+: **INI**: `datadog.trace_health_metrics_enabled`<br>
+**デフォルト**: `false`<br>
+有効な場合、トレーサーは DogStatsD に統計情報を送信します。また、ビルド時に `sigaction` が利用可能な場合、トレーサーはセグメンテーションの際にキャッチされない例外のメトリクスを送信します。
+
 `DD_TRACE_AGENT_ATTEMPT_RETRY_TIME_MSEC`
 : **INI**: `datadog.trace.agent_attempt_retry_time_msec`<br>
 **デフォルト**: `5000`<br>
@@ -172,6 +177,16 @@ Agent リクエスト転送のタイムアウト (ミリ秒)。
 : **INI**: `datadog.trace.agent_url`<br>
 **デフォルト**: `null`<br>
 Agent の URL。`DD_AGENT_HOST` と `DD_TRACE_AGENT_PORT` よりも優先されます。例: `https://localhost:8126` [Agent 構成][13]で `receiver_port` や `DD_APM_RECEIVER_PORT` をデフォルトの `8126` 以外に設定した場合、`DD_TRACE_AGENT_PORT` や `DD_TRACE_AGENT_URL` をそれに一致させる必要があります。バージョン `0.47.1` で追加されました。
+
+`DD_DOGSTATSD_URL`
+: **INI**: `datadog.dogstatsd_url`<br>
+**デフォルト**: `null`<br>
+DogStatsD への接続をネゴシエートするために使用する URL。この設定は `DD_AGENT_HOST` と `DD_DOGSTATSD_PORT` よりも優先されます。`udp://` または `unix://` スキーマのみをサポートします。
+
+`DD_DOGSTATSD_PORT`
+: **INI**: `datadog.dogstatsd_port`<br>
+**デフォルト**: `8125`<br>
+`DD_TRACE_HEALTH_METRICS_ENABLED` が有効な場合に、DogStatsD への接続をネゴシエートするために `DD_AGENT_HOST` と組み合わせて使用されるポート。
 
 `DD_TRACE_AUTO_FLUSH_ENABLED`
 : **INI**: `datadog.trace.auto_flush_enabled`<br>
@@ -324,7 +339,6 @@ URL の一部として収集するクエリパラメータのカンマ区切り�
 : **INI**: `datadog.trace.propagation_style_inject`<br>
 **デフォルト**: `tracecontext,Datadog`<br>
 トレースヘッダーを挿入する際に使用する伝搬スタイル。複数のスタイルを使用する場合は、カンマで区切ってください。サポートされているスタイルは以下の通りです。
-
 
   - [tracecontext][10]
   - [b3multi][7]

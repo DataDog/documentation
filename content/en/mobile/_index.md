@@ -29,7 +29,7 @@ You can log in using standard authentication, Google authentication, or [SAML][3
 
 SAML login requires you to set up and authenticate your SAML provider with Datadog. For SAML IdP-initiated login, refer to the end of this section. To authenticate SAML:
 
-1. Press the “Using Single Sign-On (SAML)?” button.
+1. Press the "Using Single Sign-On (SAML)?" button.
 2. Enter your company email and send the email.
 3. While on your mobile device, open the email and click on the indicated link.
 4. Enter your org’s SAML credentials, which upon success will reroute to an authenticated session of the Datadog mobile app.
@@ -44,8 +44,8 @@ Optionally, you may also authenticate through a QR Code or manual entry, outline
 
 ##### Manual entry
 
-1. To manually enter the SAML ID, open the Datadog Mobile app and press the “Using Single Sign-On (SAML)?” button.
-2. Press the “Use another method to login” button, and enter the SAML ID manually.
+1. To manually enter the SAML ID, open the Datadog Mobile app and press the "Using Single Sign-On (SAML)?" button.
+2. Press the "Use another method to login" button, and enter the SAML ID manually.
 
 By clicking **Authorize** when logging in, you link the mobile device you're using to your account. For security purposes, you will have to go through this flow once per month.
 
@@ -80,7 +80,7 @@ On the Incidents page, you can view, search and filter all incidents that you ha
 ### Create an incident
 
 1. Navigate to the incident list by clicking on the Incidents Tab in the bottom bar.
-2. Click the “+” button in the top right corner.
+2. Click the "+" button in the top right corner.
 3. Give your incident a title, severity, and commander.
 
 ### Receive push notifications for incidents
@@ -230,7 +230,7 @@ You can also specify a dashboard that opens by default when you tap on an SLOs w
 {{% tab "iOS" %}}
 
 - Long press on your home screen.
-- Tap the “+” button on the top left corner of the screen.
+- Tap the "+" button on the top left corner of the screen.
 - Search for "Datadog" widgets.
 - Select your prefered size (small shows one SLO and medium shows one SLO along with a visualized timeframe of its health).
 - Drag the widget to your desired, on-screen location.
@@ -329,7 +329,7 @@ View your [monitors][16] from your home screen with Datadog widgets. Tap any cel
 {{% tab "iOS" %}}
 
 - Long press on the home screen.
-- Tap the “+” button on the top left corner of the screen.
+- Tap the "+" button on the top left corner of the screen.
 - Search for "Datadog" widgets.
 - Select your prefered size (small shows two monitor saved views, medium allows up to three monitor saved views, and large up to six monitor saved views).
 - Drag the widget to your desired, on-screen location.
@@ -423,18 +423,18 @@ Long-press the app icon to display a quick-action sheet of your top five [Freque
 
 {{< img src="mobile/iphone_search_doc.png" alt="Home Screen Search" style="width:40%;">}}
 
-**iOS only**: Within iPhone Search, filter and search for the name of any desired dashboard. Press on a result to open the dashboard view directly on the mobile app, or press the “Search in App” button to open the search query in the in-app Dashboard List page.
+**iOS only**: Within iPhone Search, filter and search for the name of any desired dashboard. Press on a result to open the dashboard view directly on the mobile app, or press the "Search in App" button to open the search query in the in-app Dashboard List page.
 
 ## Shortcuts and Siri suggestions
 
 **Android**: Create shortcut icons for your dashboards by touching and holding the Datadog app icon, then lift your finger. If the app has shorcuts, it displays a list. Touch and hold the desired shortcut, then drag and drop it to another location on your screen to create a unique shortcut icon.
 
-**iOS**: Create Siri Shortcuts for Datadog dashboards and monitors through the Shortcuts App. For a shortcut to be available for creation, you must execute the desired action at least once in the app. For example, to create an “Open AWS Overview Dashboard” shortcut, open the AWS Overview Dashboard in your mobile app at least once.
+**iOS**: Create Siri Shortcuts for Datadog dashboards and monitors through the Shortcuts App. For a shortcut to be available for creation, you must execute the desired action at least once in the app. For example, to create an "Open AWS Overview Dashboard" shortcut, open the AWS Overview Dashboard in your mobile app at least once.
 
 With the shortcut, you can access your dashboards and monitors through three key actions:
 
 - Pin the shortcut as an icon in your home screen. To do so, access the Shortcuts app, and open the edit menu for your dashboard shortcut.
-- Siri Voice: say your shortcut name, such as “Open AWS Overview”, and Siri opens your dashboard in-app.
+- Siri Voice: say your shortcut name, such as "Open AWS Overview", and Siri opens your dashboard in-app.
 - Siri suggestions: Siri learns your routine, and suggests dashboard shortcuts when you most need them, through a home or lock-screen banner, iPhone search, or iOS 14 Siri Suggestions widgets.
 
 {{< img src="mobile/siri_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Shortcuts">}}

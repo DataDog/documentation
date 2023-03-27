@@ -61,7 +61,7 @@ return true
 For example, to set the number of milliseconds elapsed since January 1, 1970, 00:00:00 UTC to "mytime":
 
 {{< code-block lang="javascript" >}}
-localStorage.setItem(“mytime”, Date.now());
+localStorage.setItem("mytime", Date.now());
 return true
 {{< /code-block >}}
 

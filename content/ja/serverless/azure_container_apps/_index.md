@@ -18,12 +18,14 @@ Azure Container Apps は、コンテナベースのアプリケーションを�
 
 [Datadog API キー][6]を取得済みであることと、[Datadog トレーシングライブラリがサポートする][2]プログラミング言語を使用していることを確認してください。
 
-### 1. Dockerfile を使用したインスツルメンテーション
-
-Dockerfile に次の記述を追加することで、アプリケーションをインスツルメントすることができます。以下の例は、既存の Dockerfile のセットアップに応じて調整が必要になる場合があります。
+### 1. アプリケーションのインスツルメンテーション
 
 {{< programming-lang-wrapper langs="go,python,nodejs,java,dotnet,ruby" >}}
 {{< programming-lang lang="go" >}}
+
+#### Dockerfile で Agent をインストールする
+
+Dockerfile に次の記述を追加することで、Datadog Agent を使用してアプリケーションをインスツルメントすることができます。以下の例は、既存の Dockerfile のセットアップに応じて調整が必要になる場合があります。
 
 ```
 # Datadog `serverless-init` を Docker イメージにコピーします
@@ -41,14 +43,22 @@ ENV DD_VERSION=1
 CMD ["/path/to/your-go-binary"]
 ```
 
-[シンプルな Go アプリケーション用のサンプルコード][1]。
-[Go トレーシングライブラリ][2]に関する詳細。
+#### トレーシングライブラリをインストールする
+[以下の手順][2]に従って、アプリケーションに Go トレーシングライブラリをインストールし、構成して、トレースをキャプチャして送信します。
+
+
+[シンプルな Go アプリケーションのサンプルコード][1]。
+
 
 [1]: https://github.com/DataDog/crpb/tree/main/go
-[2]: /ja/serverless/installation/go/?tab=serverlessframework#install-the-datadog-lambda-library
+[2]: /ja/tracing/trace_collection/dd_libraries/ruby#instrument-your-application
 
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
+
+#### Dockerfile で Agent をインストールする
+
+Dockerfile に次の記述を追加することで、Datadog Agent を使用してアプリケーションをインスツルメントします。以下の例は、既存の Dockerfile のセットアップに応じて調整が必要になる場合があります。
 
 ```
 # Datadog `serverless-init` を Docker イメージにコピーします
@@ -68,15 +78,20 @@ ENTRYPOINT ["/app/datadog-init"]
 # Datadog トレースライブラリによって起動されるエントリポイントにラップされたバイナリアプリケーションを実行します。必要に応じて内容を変更してください。
 CMD ["ddtrace-run", "python", "app.py"]
 ```
+#### トレーシングライブラリをインストールする
+[以下の手順][2]に従って、アプリケーションに Python トレーシングライブラリをインストールし、構成して、トレースをキャプチャして送信します。
 
-[シンプルな Python アプリケーション用のサンプルコード][1]。
-[Python レーシングライブラリ][2]に関する詳細。
+[シンプルな Python アプリケーションのサンプルコード][1]。
 
 [1]: https://github.com/DataDog/crpb/tree/main/python
 [2]: /ja/tracing/trace_collection/dd_libraries/python/?tab=containers#instrument-your-application
 
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
+
+#### Dockerfile で Agent をインストールする
+
+Dockerfile に次の記述を追加することで、Datadog Agent を使用してアプリケーションをインスツルメントします。以下の例は、既存の Dockerfile のセットアップに応じて調整が必要になる場合があります。
 
 ```
 # Datadog `serverless-init` を Docker イメージにコピーします
@@ -101,15 +116,20 @@ ENTRYPOINT ["/app/datadog-init"]
 CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
 
 ```
+#### トレーシングライブラリをインストールする
+[以下の手順][2]に従って、アプリケーションに Node トレーシングライブラリをインストールし、構成して、トレースをキャプチャして送信します。
 
-[シンプルな Node.js アプリケーション用のサンプルコード][1]。
-[Node.js トレーシングライブラリ][2]に関する詳細。
+[シンプルな Node.js アプリケーションのサンプルコード][1]。
 
 [1]: https://github.com/DataDog/crpb/tree/main/js
 [2]: /ja/tracing/trace_collection/dd_libraries/nodejs/?tab=containers#instrument-your-application
 
 {{< /programming-lang >}}
 {{< programming-lang lang="java" >}}
+
+#### Dockerfile で Agent をインストールする
+
+Dockerfile に次の記述を追加することで、Datadog Agent を使用してアプリケーションをインスツルメントします。以下の例は、既存の Dockerfile のセットアップに応じて調整が必要になる場合があります。
 
 ```
 # Datadog `serverless-init`  を Docker イメージにコピーします
@@ -128,14 +148,20 @@ CMD ["./mvnw", "spring-boot:run"]
 
 ```
 
-[シンプルな Java アプリケーション用のサンプルコード][1]。
-[Java トレーシングライブラリ][2]に関する詳細。
+#### トレーシングライブラリをインストールする
+[以下の手順][2]に従って、アプリケーションに Java トレーシングライブラリをインストールし、構成して、トレースをキャプチャして送信します。
+
+[シンプルな Java アプリケーションのサンプルコード][1]。
 
 [1]: https://github.com/DataDog/crpb/tree/main/java
 [2]: /ja/tracing/trace_collection/dd_libraries/java/?tab=containers#instrument-your-application
 
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
+
+#### Dockerfile で Agent をインストールする
+
+Dockerfile に次の記述を追加することで、Datadog Agent を使用してアプリケーションをインスツルメントします。以下の例は、既存の Dockerfile のセットアップに応じて調整が必要になる場合があります。
 
 ```
 # Datadog `serverless-init`  を Docker イメージにコピーします
@@ -154,8 +180,18 @@ CMD ["dotnet", "helloworld.dll"]
 
 ```
 
+#### トレーシングライブラリをインストールする
+指示に従って、[.NET Core トレーシングライブラリ][1]と [.NET Framework トレーシングライブラリ][2]のインストールと構成を行います。
+
+[1]: /ja/tracing/trace_collection/dd_libraries/dotnet-core?tab=containers#custom-instrumentation
+[2]: /ja/tracing/trace_collection/dd_libraries/dotnet-framework/?tab=containers#custom-instrumentation
+
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
+
+#### Dockerfile で Agent をインストールする
+
+Dockerfile に次の記述を追加することで、Datadog Agent を使用してアプリケーションをインスツルメントします。以下の例は、既存の Dockerfile のセットアップに応じて調整が必要になる場合があります。
 
 ```
 # Datadog `serverless-init`  を Docker イメージにコピーします
@@ -173,8 +209,11 @@ ENTRYPOINT ["/app/datadog-init"]
 CMD ["rails", "server", "-b", "0.0.0.0"] (必要に応じて内容を変更してください)
 ```
 
-[シンプルな Ruby アプリケーション用のサンプルコード][1]。
-[Ruby トレーシングライブラリ][2]に関する詳細。
+#### トレーシングライブラリをインストールする
+
+[以下の手順][2]に従って、アプリケーションに Ruby トレーシングライブラリをインストールし、構成して、トレースをキャプチャして送信します。
+
+[シンプルな Ruby アプリケーションのサンプルコード][1]。
 
 [1]: https://github.com/DataDog/crpb/tree/main/ruby-on-rails
 [2]: /ja/tracing/trace_collection/dd_libraries/ruby/?tab=containers#instrument-your-application
@@ -205,13 +244,13 @@ az containerapp up \
 
 ### 3. 結果
 
-デプロイが完了すると、メトリクスとトレースが Datadog に送信されます。Datadog の [APM Trace Explorer][11] に移動し、サービス名でコンテナアプリを検索するか、ファセット `origin:containerapp` を使用してフィルターをかけると、Azure コンテナアプリのトレースが表示されます。
+デプロイが完了すると、メトリクスとトレースが Datadog に送信されます。Datadog で **Infrastructure->Serverless** に移動すると、サーバーレスメトリクスとトレースを確認できます。
 
 ## 追加の構成
 
 - **高度なトレース:** Datadog Agent は、一般的なフレームワーク向けに基本的なトレース機能をすでにいくつか提供しています。さらに詳しい情報については、[高度なトレースガイド][2]に従ってください。
 
-- **ログ:** 環境変数 `DD_LOGS_ENABLED` を `true` に設定することで、アプリケーションログをキャプチャし、サーバーレスインスツルメンテーションを通して Datadog に直接送信することができます。直接インスツルメンテーションを行わずにログを送信するには、中央の [Azure インテグレーションによるログ収集][1]を設定し、[コンテナアプリ環境の診断設定][10]を使用して、設定したログパイプラインにログを誘導するように設定します。
+- **ログ:** [Azure インテグレーション][1]を使用している場合は、すでにログが収集されています。また、環境変数 `DD_LOGS_ENABLED` を `true` に設定することで、サーバーレスインスツルメンテーションを通じて直接アプリケーションログをキャプチャすることも可能です。
 
 - **カスタムメトリクス:** [DogStatsd クライアント][3]を使って、カスタムメトリクスを送信することができます。Cloud Run やその他のサーバーレスアプリケーションの監視には、[ディストリビューション][8]メトリクスを使用します。ディストリビューションは、デフォルトで `avg`、`sum`、`max`、`min`、`count` の集計データを提供します。Metric Summary ページでは、パーセンタイル集計 (p50、p75、p90、p95、p99) を有効にすることができ、タグの管理も可能です。ゲージメトリクスタイプの分布を監視するには、[時間集計と空間集計][9]の両方で `avg` を使用します。カウントメトリクスタイプの分布を監視するには、時間集計と空間集計の両方で `sum` を使用します。
 
@@ -250,5 +289,3 @@ RUN apt-get update && apt-get install -y ca-certificates
 [7]: https://learn.microsoft.com/en-us/azure/container-apps/manage-secrets
 [8]: /ja/metrics/distributions/
 [9]: /ja/metrics/#time-and-space-aggregation
-[10]: https://learn.microsoft.com/en-us/azure/container-apps/log-options#diagnostic-settings
-[11]: https://app.datadoghq.com/apm/traces

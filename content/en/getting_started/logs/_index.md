@@ -79,7 +79,7 @@ To begin collecting logs from a cloud service, follow the [in-app instructions][
 
 Datadog permits log collection from clients through SDKs or libraries. For example, use the `datadog-logs` SDK to send logs to Datadog from JavaScript clients.
 
-To begin collecting logs from a cloud service, follow the [in-app instructions][14].
+To begin collecting logs from a client, follow the [in-app instructions][14].
 
 ### Other
 
