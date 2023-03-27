@@ -39,7 +39,7 @@ Datadog provides solutions for monitoring [AWS Lambda](#aws-lambda), [Azure App 
 
 [Enhanced Lambda metrics][3], which appear in Datadog with the prefix `aws.lambda.enhanced`, are available at second granularity and in near real time. You can use enhanced Lambda metrics for alerts or SLOs on cold starts, estimated AWS costs, timeouts, out-of-memory errors, and memory usage across all of your Lambda functions.
 
-Send [Custom metrics][4] from a Lambda function through several methods such as generating metrics from logs and traces, the Datadog Lambda Extension, and the Datadog Forward Lambda.
+You can send [custom metrics][4] from a Lambda function by generating metrics from logs and traces, using the Datadog Lambda Extension, or using the Datadog Forwarder Lambda.
 
 With [Distributed Tracing][5], you can connect your serverless traces to metrics for a context-rich picture of your application's performance. The Datadog Python, Node.js, Ruby, Go, Java, and .NET tracing libraries support distributed tracing for AWS Lambda.
 
