@@ -82,7 +82,7 @@ Watchdog Insights appear in the Kubernetes Explorer tab in [Live Containers][5].
 
 #### Live Processes
 
-Watchdog Insights appear in the [Live Processes][12].
+Watchdog Insights appear in [Live Processes][12].
 
 1. In the left navigation, hover over **Infrastructure**.
 2. Click **Processes**.
