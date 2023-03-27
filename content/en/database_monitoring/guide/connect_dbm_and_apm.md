@@ -36,21 +36,19 @@ Data privacy
 | **Ruby:** [dd-trace-rb][6] >= 1.8.0 |     |             |             |
 |          | [pg][8]                        | {{< X >}}   |             |
 |          | [mysql2][7]                    |             | {{< X >}}   |
-| **Node:** [dd-trace-js][9] >= 3.13.0 |    |             |             |
-|          | [postgres][10]                 | {{< X >}}   |             |
-|          | [mysql][13]                    |             | {{< X >}}   |
-|          | [mysql2][14]                   |             | {{< X >}}   |
 | **Python:** [dd-trace-py][11] >= 1.9.0 |  |             |             |
 |          | [psycopg2][12]                 | {{< X >}}   |             |
 | **.NET** [dd-trace-dotnet][15] >= 2.26.0 ||             |             |
 |          | [Npgsql][16]                   | {{< X >}}   |             |
 |          | [MySql.Data][17]               |             | {{< X >}}   |
 |          | [MySqlConnector][18]           |             | {{< X >}}   |
-| **PHP**  [dd-trace-php][19] >= 0.86.0 ||             |             |
-|          | [pdo][20]                       | {{< X >}}  | {{< X >}}   |
+| **PHP**  [dd-trace-php][19] >= 0.86.0     |             |             |
+|          | [pdo][20]                      | {{< X >}}   | {{< X >}}   |
 |          | [MySQLi][21]                   |             | {{< X >}}   |
-| **Java**     |                            |             |             |
-|          | jdbc                           | Coming soon | Coming soon |
+| **Node:** [dd-trace-js][9] >= 3.13.0 |    |             |             |
+|          | [postgres][10]                 | Alpha |             |
+|          | [mysql][13]                    |             | Alpha |
+|          | [mysql2][14]                   |             | Alpha |
 
 
 
@@ -223,6 +221,10 @@ cursor.executemany("select %s", (("foo",), ("bar",)))
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
+
+<div class="alert alert-warning">
+Node is in alpha release and may be unstable. 
+</div>
 
 Install or udpate [dd-trace-js][1] to version greater than `3.9.0` (or `2.22.0` if using end-of-life Node.js version 12):
 
