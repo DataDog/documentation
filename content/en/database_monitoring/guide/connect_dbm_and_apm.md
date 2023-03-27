@@ -134,9 +134,9 @@ func main() {
 
 {{% tab "Java" %}}
 
-// TODO: add required java-tracer version
+Follow the [java tracing][1] instrumentation instructions and install the `1.11.0` version, or greater, of the agent.
 
-Follow the [java tracing][1] instrumentation instructions in order to enable tracing in your java application.
+In addition to this, it is required to enable the `jdbc-datastore` [instrumentation][2].
 
 Enable the database monitoring propagation feature using one of the following methods:
 
@@ -144,7 +144,33 @@ Enable the database monitoring propagation feature using one of the following me
 
 2. Set the environment variable `DD_DBM_PROPAGATION_MODE=full`
 
+Full example:
+```shell
+# start the java agent with the required system properties
+java -javaagent:/path/to/dd-java-agent.jar -Ddd.dbm.propagation.mode=full -Ddd.integration.jdbc-datasource.enabled=true -Ddd.service=my-app -Ddd.env=staging -Ddd.version=1.0 -jar path/to/your/app.jar
+```
+
+Test the feature in your application:
+```java
+public class Application {
+    public static void main(String[] args) {
+        try {
+            Connection connection = DriverManager
+                    .getConnection("jdbc:postgresql://127.0.0.1/foobar?preferQueryMode=simple", "user", "password");
+            Statement stmt = connection.createStatement();
+            String sql = "SELECT * FROM foo";
+            stmt.execute(sql);
+            stmt.close();
+            connection.close();
+        } catch (SQLException exception) {
+            //  exception logic
+        }
+    }
+}
+```
+
 [1]: /tracing/trace_collection/dd_libraries/java/
+[2]: /tracing/trace_collection/compatibility/java/#data-store-compatibility
 
 {{% /tab %}}
 
