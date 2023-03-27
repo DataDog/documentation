@@ -123,7 +123,46 @@ NPM automatically maps
 - network calls to S3 (which can broken down by `s3_bucket`), RDS (which can be broken down by `rds_instance_type`), Kinesis, ELB, Elasticache, and other [AWS services][3].
 - API calls to AppEngine, Google DNS, Gmail, and other [GCP services][4].
 
-To monitor other endpoints where an Agent cannot be installed (such as public APIs), group the destination in the Network Overview by the [`domain` tag](#domain-resolution).
+To monitor other endpoints where an Agent cannot be installed (such as public APIs), group the destination in the Network Overview by the [`domain` tag](#domain-resolution). Or, see the section below for cloud service resolution.
+
+### Cloud service enhanced resolution
+If you have [setup][1] enhanced resolution for AWS or Azure, you will be able to filter and group network traffic with resources collected from these cloud providers. Depending on the cloud provider and resource, you have different sets of tags available to query with. These are explored below.
+
+ #### Amazon Web Services
+ {{< tabs >}}
+ {{% tab "Loadbalancers" %}}
+ - name
+ - loadbalancer
+ - custom (user-defined) tags
+ - load_balancer_arn
+ - scheme
+ - dns_name (format loadbalancer/dns:)
+ - region
+ - account_id
+ {{% /tab %}}
+
+ {{% tab "NAT Gateways" %}}
+ - gateway_id
+ - aws_internet_gateway_id
+ - aws_nat_gateway_public_ip
+ - aws_account
+ - availability-zone
+ - region
+ - custom (user) tags applied to AWS Nat Gateways
+ {{% /tab %}}
+
+ {{< /tabs >}}
+
+ #### Azure
+ {{< tabs >}}
+ {{% tab "Loadbalancers" %}}
+ - Custom (user) tags applied to Azure Loadbalancers
+ {{% /tab %}}
+ {{< /tabs >}}
+ This is a test to see what happens
+
+
+ [1]: /network_monitoring/performance/setup/#enhanced-resolution
 
 ### Domain resolution
 
