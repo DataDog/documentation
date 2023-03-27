@@ -1062,3 +1062,13 @@
             bundle_excludes:
               - "com.datadoghq.test"
               - "com.datadoghq.sample"
+      - repo_name: web-ui
+        contents:
+          - action: pull-and-push-file
+            branch: cameron.yick/color-documentation-for-docs-team
+            globs:
+              - "javascript/datadog/dataviz/lib/shared/get-consistent-color/_get-semantic-color/semantic-color-documentation.md"
+            options:
+              base_path: ""
+              dest_path: "/layouts/shortcodes/"
+              file_name: "semantic-color.md"
