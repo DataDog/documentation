@@ -51,7 +51,7 @@ When viewing the _default_ branch for a pipeline, each stage and job summary tab
 
 When viewing a feature branch for a pipeline, there are two graphs for _Errored Executions_: one for failed executions in this feature branch, and another for comparing failures in this branch to other failures. You have the option to toggle between `Other Branches` and `Specific Branch`. Selecting `Other Branches` compares failed executions in this feature branch with aggregated failures across all other branches to help you distinguish between introduced (local) execution failures and inherited (global) execution failures. Toggling to `Specific Branch` directly compares failed executions in this feature branch with failed executions in another branch of your choice to help you specifically track changes in pipeline performance.
 
-or directly compare failed executions in this feature branch with failed executions in another branch of your choice.
+Optionally, you can directly compare failed executions in this feature branch with failed executions in another branch of your choice.
 
 {{< img src="ci/pipeline_stage_summary_feature_branch.png" alt="Stage summary table" style="width:100%;">}}
 
