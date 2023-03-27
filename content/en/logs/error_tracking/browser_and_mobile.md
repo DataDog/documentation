@@ -27,9 +27,8 @@ Your crash reports appear in [**Error Tracking**][2].
 
 If you have not setup the Datadog Browser SDK yet, follow the [in-app setup instructions][1] or see the [Browser Logs setup documentation][2].
 
-1. Download the latest version of the [Logs Browser SDK][3].
-2. Configure your application's `version`, `env`, and `service` when [initializing the SDK][4].
-3. Initialize your SDK, for example, with NPM:
+1. Download the latest version of the Logs Browser SDK. Error Tracking requires at least `v4.36.0`.
+2. Configure your application's `version`, `env`, and `service` when [initializing the SDK][3]. For example, with NPM:
 
    ```javascript
    import { datadogLogs } from '@datadog/browser-logs'
@@ -44,26 +43,22 @@ If you have not setup the Datadog Browser SDK yet, follow the [in-app setup inst
    })
    ```
 
-4. You must add the following snippet near initialization to catch and submit all uncaught exceptions to Datadog:
+3. To log a caught exception yourself, you may use [the optional error parameter][4]:
 
    ```javascript
-   window.onerror = function (message, source, lineno, colno, error) {
-       datadogLogs.logger.error(error?.message || '', {
-           error: { stack: error?.stack },
-       });
-   };
+   try {
+     throw new Error('wrong behavior');
+   } catch(err) {
+     datadogLogs.logger.error("an error occurred", {usr: {id: 123}}, err);
+   }
    ```
-5. To log a caught exception yourself, you may optionally use:
 
-   ```javascript
-   const e = new Error('an exception occurred');
-   datadogLogs.logger.error(e.message, {'error': {'stack': e.stack}});
-   ```
+**Note**: Error Tracking only considers errors that are instances of `Error`.
 
 [1]: https://app.datadoghq.com/logs/onboarding/client
 [2]: /logs/log_collection/javascript/#setup
-[3]: https://github.com/DataDog/browser-sdk/tree/main/packages/logs
-[4]: /logs/log_collection/javascript/#choose-the-right-installation-method
+[3]: /logs/log_collection/javascript/#choose-the-right-installation-method
+[4]: /logs/log_collection/javascript/#error-tracking
 
 {{% /tab %}}
 {{% tab "Android" %}}
